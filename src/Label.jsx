@@ -1,5 +1,6 @@
 import React from "react";
 import util from "./util";
+import TrackBorder from "./TrackBorder";
 
 const Hex = ({ width, x, y }) => {
   let data = util.hexData(width, true, x, y);
