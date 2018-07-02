@@ -1,23 +1,23 @@
-import * as R from 'ramda';
+import * as R from "ramda";
 
 const HEX_RATIO = 0.57735;
 
 const hexPointsVertical = (width, edge, x, y) => [
-  [x - width * 0.5, y - edge * 0.5],
   [x, y - edge],
   [x + width * 0.5, y - edge * 0.5],
   [x + width * 0.5, y + edge * 0.5],
   [x, y + edge],
-  [x - width * 0.5, y + edge * 0.5]
+  [x - width * 0.5, y + edge * 0.5],
+  [x - width * 0.5, y - edge * 0.5]
 ];
 
 const hexPointsHorizontal = (width, edge, x, y) => [
+  [x - edge * 0.5, y + width * 0.5],
+  [x - edge, y],
   [x - edge * 0.5, y - width * 0.5],
   [x + edge * 0.5, y - width * 0.5],
   [x + edge, y],
-  [x + edge * 0.5, y + width * 0.5],
-  [x - edge * 0.5, y + width * 0.5],
-  [x - edge, y]
+  [x + edge * 0.5, y + width * 0.5]
 ];
 
 const hexData = (width, vertical = true, x, y) => {
@@ -41,7 +41,9 @@ const hexData = (width, vertical = true, x, y) => {
     points
   )[1];
 
-  return { x, y, width, edge, points, sides };
+  let middle = [x, y];
+
+  return { x, y, width, edge, middle, points, sides };
 };
 
 const linear = R.curry((percent, p1, p2) => [
@@ -51,6 +53,43 @@ const linear = R.curry((percent, p1, p2) => [
 
 const midpoint = linear(0.5);
 
-const pointsToString = R.compose(R.join(" "), R.map(R.join(",")));
+const pointsToString = R.compose(
+  R.join(" "),
+  R.map(R.join(","))
+);
 
-export default { HEX_RATIO, hexData, linear, midpoint, pointsToString };
+const trackType = track => {
+  if (track.end === undefined) {
+    return "city";
+  } else {
+    let diff = Math.abs(track.start - track.end);
+    if (diff > 3) {
+      diff = Math.abs(6 - diff);
+    }
+
+    switch (diff) {
+      case 1:
+        return "sharp";
+      case 2:
+        return "gentle";
+      case 3:
+        return "straight";
+      default:
+        return "city";
+    }
+  }
+};
+
+const fillArray = R.curry((getNumber, array) => {
+  return R.chain(a => Array(getNumber(a)).fill(a), array);
+});
+
+export default {
+  HEX_RATIO,
+  hexData,
+  linear,
+  midpoint,
+  pointsToString,
+  trackType,
+  fillArray
+};

@@ -1,5 +1,305 @@
+@import url('https://fonts.googleapis.com/css?family=Bitter:700');
+
+@page {
+  size: letter;
+  margin: 0.25in 0.25in 0.5in 0.25in;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  -webkit-print-color-adjust: exact;
+  width: 8in;
+}
+
+svg {
+  overflow: visible;
+}
+
+.cards {
+  position: relative;
+  overflow: auto;
+}
+
+.charters {
+  position: relative;
+  overflow: auto;
+}
+
+.card {
+  page-break-inside: avoid;
+  font-family: "Bitter", serif;
+  height: 43.5mm;
+  width: 67.5mm;
+  box-sizing: border-box;
+  position: relative;
+  background-color: white;
+  border: 1px dashed #eee;
+  float: left;
+}
+
+.phase__notes {
+  text-align: left;
+}
+
+.charter {
+  page-break-inside: avoid;
+  font-family: "Bitter", serif;
+  margin: 0.0625in;
+  height: 5in;
+  width: 8in;
+  position: relative;
+  display: inline-block;
+  background-color: white;
+  border: 1px dashed #eee;
+}
+
+.charter__trains {
+  position: absolute;
+  height: calc(3.7in - 2mm);
+  bottom: 0;
+  left: 0;
+  width: 4in;
+  margin: .2in 0;
+  padding: 0 3mm;
+  box-sizing: border-box;
+  border-width: 0 1px 0 0;
+  border-color: #666;
+  border-style: dashed;
+}
+
+.charter__treasury {
+  position: absolute;
+  height: calc(3.7in - 2mm);
+  bottom: 0;
+  right: 0;
+  width: 4in;
+  margin: .2in 0;
+  padding: 0 3mm;
+  box-sizing: border-box;
+}
+
+.charter__phase {
+  position: absolute;
+  bottom: 0;
+  width: calc(100% - 6mm);
+}
+
+.charter__phase table {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: 0.7em;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+.charter__phase th {
+  padding: 0 0.05in;
+}
+
+.charter__phase td {
+  padding: 0.03in 0.1in;
+  border: 1px solid black;
+}
+
+.train svg {
+  position: absolute;
+  width: 40mm;
+  height: 100%;
+  right: 3mm;
+  opacity: 0.25;
+}
+
+.train__image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.25;
+  mask-image: url('/train.svg');
+  mask-repeat: no-repeat;
+  mask-position: right 3mm center;
+  mask-size: 60%;
+  background-color: black;
+}
+
+.train__notes {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  padding: 3mm;
+}
+
+.train__info {
+  height: 6mm;
+  line-height: 6mm;
+  padding: 0 3mm;
+  border-radius: 1mm;
+  border: solid 1px black;
+}
+
+.share__hr {
+  height: 2mm;
+  position: absolute;
+  bottom: 10mm;
+  width: 100%;
+}
+
+.private__hr {
+  height: 2mm;
+  position: absolute;
+  bottom: 10mm;
+  width: 100%;
+  background-color: black;
+}
+
+.charter__hr {
+  height: 2mm;
+  position: absolute;
+  top: 0.9in;
+  width: 100%;
+}
+
+.charter__name {
+  position: absolute;
+  top: 3mm;
+  font-size: 0.3in;
+  box-sizing: border-box;
+  padding: 0 3mm;
+  width: 100%;
+  text-align: left;
+}
+
+.share__name {
+  position: absolute;
+  top: 3mm;
+  font-size: 6mm;
+  box-sizing: border-box;
+  padding: 0 3mm;
+  width: 100%;
+  text-align: center;
+}
+
+.share__label {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  position: absolute;
+  bottom: 14mm;
+  width: 100%;
+}
+.share__label__text {
+  height: 6mm;
+  line-height: 6mm;
+  padding: 0 3mm;
+  border-radius: 1mm;
+  border: solid 1px black;
+  display: inline-block;
+}
+
+.train__name {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  padding: 4mm;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  font-size: 15mm;
+  font-weight: bold;
+  line-height: 37mm;
+  vertical-align: middle;
+  text-align: left;
+  -webkit-text-stroke: 1px black;
+}
+
+.charter__tokens {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 3mm;
+}
+
+.charter__tokens svg {
+  width: 0.5in;
+  height: 0.7in;
+  padding: 0 0 0 0.15in;
+}
+
+.train__price {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 6mm;
+  line-height: 6mm;
+  font-size: 6mm;
+  margin: 3mm;
+}
+
+.share__percent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 5mm;
+  line-height: 5mm;
+  font-size: 5mm;
+  margin: 3mm;
+}
+
+.share__shares {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 5mm;
+  line-height: 5mm;
+  font-size: 5mm;
+  margin: 3mm;
+}
+
+.private__name {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4mm;
+  line-height: 3.5mm;
+  font-size: 3.5mm;
+  margin: 3mm;
+  text-align: left;
+}
+
+.private__price {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 5mm;
+  line-height: 5mm;
+  font-size: 5mm;
+  margin: 3mm;
+}
+
+.private__revenue {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 5mm;
+  line-height: 5mm;
+  font-size: 5mm;
+  margin: 3mm;
+}
+
+.private__description {
+  position: absolute;
+  top: 5mm;
+  text-align: left;
+  left: 0;
+  line-height: 2.5mm;
+  font-size: 2.15mm;
+  margin: 3mm;
+  font-family: "Helvetica", "Arial", sans-serif;
 }
