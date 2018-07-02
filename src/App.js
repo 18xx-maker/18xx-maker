@@ -5,6 +5,8 @@ import "./App.css";
 import SVG from "./Svg";
 
 import Charters from "./Charters";
+import Game from "./Game";
+import Games from "./Games";
 import Privates from "./Privates";
 import Shares from "./Shares";
 import Trains from "./Trains";
@@ -17,7 +19,9 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Route exact path="/" component={SVG} />
+          <Route exact path="/" component={Games} />
+          <Route exact path="/:game" component={Game} />
+          <Route path="/:game/tiles" component={SVG} />
           <Route path="/:game/trains" component={Trains} />
           <Route path="/:game/tokens" component={Tokens} />
           <Route path="/:game/shares" component={Shares} />
