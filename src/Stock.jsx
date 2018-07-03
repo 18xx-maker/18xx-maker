@@ -1,8 +1,9 @@
 import React from "react";
 import Market from "./Market";
 import Par from "./Par";
-import Rounds from "./Rounds";
+import BankPool from "./BankPool";
 import Revenue from "./Revenue";
+import Rounds from "./Rounds";
 import games from "./data/games";
 
 const Stock = ({ match }) => {
@@ -19,7 +20,8 @@ const Stock = ({ match }) => {
           type={stock.type}
         />
         <Par par={stock.par} />
-        <Rounds rounds={stock.rounds} />
+        <Rounds rounds={game.rounds} />
+        <BankPool />
       </div>
       <Revenue />
     </div>

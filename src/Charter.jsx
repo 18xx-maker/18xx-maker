@@ -30,6 +30,10 @@ const Charter = ({ name, abbrev, color, tokens, phases }) => {
       </div>
       <div class="charter__treasury">Treasury</div>
       <div class="charter__hr" style={{ backgroundColor: color }} />
+      <div class="cutting-line cutting-line__left" />
+      <div class="cutting-line cutting-line__right" />
+      <div class="cutting-line cutting-line__top" />
+      <div class="cutting-line cutting-line__bottom" />
     </div>
   );
 };

@@ -1,15 +1,17 @@
 import React from "react";
-import { colors, textColor } from "./data";
+import { colors } from "./data";
 import * as R from "ramda";
 
-const Token = ({ label, color, inverse, width }) => {
-  let circleColor = inverse ? colors["border"] : color;
-  let textColor = inverse ? color : colors["border"];
+const Token = ({ label, color, labelColor, inverse, width }) => {
+  labelColor = labelColor || colors["white"];
+  let circleColor = inverse ? labelColor : color;
+  let textColor = inverse ? color : labelColor;
+  let strokeColor = inverse ? color : "none";
   width = width || 30
 
   return (
     <g>
-      <circle cx="0" cy="0" r={width} fill={circleColor} stroke={textColor} />
+      <circle cx="0" cy="0" r={width} fill={circleColor} stroke={strokeColor} />
       <text
         textAnchor="middle"
         alignmentBaseline="middle"
