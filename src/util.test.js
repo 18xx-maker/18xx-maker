@@ -29,3 +29,26 @@ describe("trackType", () => {
     expect(util.trackType({start: 3, end: 6})).toEqual("straight");
   });
 });
+
+describe("marketColor", () => {
+  it("should handle empty lists", () => {
+    expect(util.marketColor([], 20)).toEqual("plain");
+  });
+
+  it("should handle multiple limits", () => {
+    let limits = [{
+      color: "yellow",
+      value: 60
+    },{
+      color: "orange",
+      value: 45
+    },{
+      color: "brown",
+      value: 30
+    }]
+    expect(util.marketColor(limits, 80)).toEqual("plain");
+    expect(util.marketColor(limits, 60)).toEqual("yellow");
+    expect(util.marketColor(limits, 40)).toEqual("orange");
+    expect(util.marketColor(limits, 29)).toEqual("brown");
+  });
+});
