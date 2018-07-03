@@ -6,128 +6,152 @@ const game = {
       abbrev: "PRR",
       tokens: ["Free", "$40", "$100", "$100", "$100"],
       color: "rgb(50,118,63)",
-      shares: [{
-        quantity: 1,
-        label: "President Share",
-        percent: 20,
-        shares: 2
-      },{
-        quantity: 8,
-        percent: 10,
-        shares: 1
-      }]
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
     },
     {
       name: "New York Central",
       abbrev: "NYC",
       tokens: ["Free", "$40", "$100", "$100", "$100"],
       color: "rgb(0,0,0)",
-      shares: [{
-        quantity: 1,
-        label: "President Share",
-        percent: 20,
-        shares: 2
-      },{
-        quantity: 8,
-        percent: 10,
-        shares: 1
-      }]
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
     },
     {
       name: "Canadian Pacific",
       abbrev: "CPR",
       tokens: ["Free", "$40", "$100", "$100", "$100"],
       color: "rgb(209,35,42)",
-      shares: [{
-        quantity: 1,
-        label: "President Share",
-        percent: 20,
-        shares: 2
-      },{
-        quantity: 8,
-        percent: 10,
-        shares: 1
-      }]
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
     },
     {
       name: "Baltimore & Ohio",
       abbrev: "B&O",
       tokens: ["Free", "$40", "$100", "$100"],
       color: "rgb(2,90,170)",
-      shares: [{
-        quantity: 1,
-        label: "President Share",
-        percent: 20,
-        shares: 2
-      },{
-        quantity: 8,
-        percent: 10,
-        shares: 1
-      }]
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
     },
     {
       name: "Chesapeake & Ohio",
       abbrev: "C&O",
       tokens: ["Free", "$40", "$100", "$100"],
       color: "rgb(141,215,248)",
-      shares: [{
-        quantity: 1,
-        label: "President Share",
-        percent: 20,
-        shares: 2
-      },{
-        quantity: 8,
-        percent: 10,
-        shares: 1
-      }]
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
     },
     {
       name: "Erie",
       abbrev: "Erie",
       tokens: ["Free", "$40", "$100", "$100"],
       color: "rgb(255,230,0)",
-      shares: [{
-        quantity: 1,
-        label: "President Share",
-        percent: 20,
-        shares: 2
-      },{
-        quantity: 8,
-        percent: 10,
-        shares: 1
-      }]
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
     },
     {
       name: "New York, New Haven & Hartford",
       abbrev: "NYNH",
       tokens: ["Free", "$40", "$100"],
       color: "rgb(245,129,33)",
-      shares: [{
-        quantity: 1,
-        label: "President Share",
-        percent: 20,
-        shares: 2
-      },{
-        quantity: 8,
-        percent: 10,
-        shares: 1
-      }]
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
     },
     {
       name: "Boston & Maine",
       abbrev: "B&M",
       tokens: ["Free", "$40", "$100"],
       color: "rgb(96,23,44)",
-      shares: [{
-        quantity: 1,
-        label: "President Share",
-        percent: 20,
-        shares: 2
-      },{
-        quantity: 8,
-        percent: 10,
-        shares: 1
-      }]
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
     }
   ],
 
@@ -137,60 +161,72 @@ const game = {
       quantity: 6,
       price: "$80",
       color: "yellow",
-      info: [{
-        color: "green",
-        note: "Rusted by 4"
-      }]
+      info: [
+        {
+          color: "green",
+          note: "Rusted by 4"
+        }
+      ]
     },
     {
       name: "3",
       quantity: 5,
       price: "$180",
       color: "green",
-      info: [{
-        color: "brown",
-        note: "Rusted by 6"
-      }]
+      info: [
+        {
+          color: "brown",
+          note: "Rusted by 6"
+        }
+      ]
     },
     {
       name: "4",
       quantity: 4,
       price: "$300",
       color: "green",
-      info: [{
-        color: "brown",
-        note: "Rusted by D"
-      }]
+      info: [
+        {
+          color: "brown",
+          note: "Rusted by D"
+        }
+      ]
     },
     {
       name: "5",
       quantity: 3,
       price: "$450",
       color: "brown",
-      info: [{
-        color: "yellow",
-        note: "Permanent"
-      }]
+      info: [
+        {
+          color: "yellow",
+          note: "Permanent"
+        }
+      ]
     },
     {
       name: "6",
       quantity: 2,
       price: "$630",
       color: "brown",
-      info: [{
-        color: "yellow",
-        note: "Permanent"
-      }]
+      info: [
+        {
+          color: "yellow",
+          note: "Permanent"
+        }
+      ]
     },
     {
       name: "D",
       quantity: 6,
       price: "$800 / $1000",
       color: "brown",
-      info: [{
-        color: "yellow",
-        note: "Permanent"
-      }]
+      info: [
+        {
+          color: "yellow",
+          note: "Permanent"
+        }
+      ]
     }
   ],
 
@@ -238,43 +274,142 @@ const game = {
     }
   ],
 
-  phases: [{
-    name: "2",
-    limit: "4",
-    number: "6",
-    tiles: "yellow"
-  },{
-    name: "3",
-    limit: "4",
-    number: "5",
-    tiles: "green",
-    notes: "Private companies can be bought"
-  },{
-    name: "4",
-    rust: "2",
-    limit: "3",
-    number: "4",
-    tiles: "green"
-  },{
-    name: "5",
-    limit: "2",
-    number: "3",
-    tiles: "brown",
-    notes: "Private companies close"
-  },{
-    name: "6",
-    limit: "2",
-    number: "2",
-    rust: "3",
-    tiles: "brown",
-    notes: "D Trains available for purchase"
-  },{
-    name: "D",
-    limit: "2",
-    number: "6",
-    rust: "4",
-    tiles: "brown"
-  }],
+  phases: [
+    {
+      name: "2",
+      limit: "4",
+      number: "6",
+      tiles: "yellow"
+    },
+    {
+      name: "3",
+      limit: "4",
+      number: "5",
+      tiles: "green",
+      notes: "Private companies can be bought"
+    },
+    {
+      name: "4",
+      rust: "2",
+      limit: "3",
+      number: "4",
+      tiles: "green"
+    },
+    {
+      name: "5",
+      limit: "2",
+      number: "3",
+      tiles: "brown",
+      notes: "Private companies close"
+    },
+    {
+      name: "6",
+      limit: "2",
+      number: "2",
+      rust: "3",
+      tiles: "brown",
+      notes: "D Trains available for purchase"
+    },
+    {
+      name: "D",
+      limit: "2",
+      number: "6",
+      rust: "4",
+      tiles: "brown"
+    }
+  ],
+
+  stock: {
+    rounds: [
+      {
+        name: "OR3",
+        color: "brown"
+      },
+      {
+        name: "OR2",
+        color: "green"
+      },
+      {
+        name: "OR1",
+        color: "yellow"
+      },
+      {
+        name: "SR",
+        color: "gray"
+      }
+    ],
+    type: "2D",
+    par: {
+      values: [100, 90, 82, 76, 71, 67],
+      cells: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6]]
+    },
+    market: [
+      [
+        60,
+        67,
+        71,
+        76,
+        82,
+        90,
+        100,
+        112,
+        126,
+        142,
+        160,
+        180,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350
+      ],
+      [
+        53,
+        60,
+        66,
+        70,
+        76,
+        82,
+        90,
+        100,
+        112,
+        142,
+        160,
+        180,
+        200,
+        220,
+        240,
+        260,
+        280,
+        300
+      ],
+      [46, 55, 60, 65, 70, 76, 82, 90, 100, 111, 125, 140, 155, 170, 185, 200],
+      [39, 48, 54, 60, 66, 71, 76, 82, 90, 100, 110, 120, 130],
+      [32, 41, 48, 55, 62, 67, 71, 76, 82, 90, 100],
+      [25, 34, 42, 50, 58, 65, 67, 71, 75, 80],
+      [18, 27, 36, 45, 54, 63, 67, 69, 70],
+      [10, 12, 30, 40, 50, 60, 67, 68],
+      [null, 10, 20, 30, 40, 50, 60],
+      [null, null, 10, 20, 30, 40, 50],
+      [null, null, null, 10, 20, 30, 40]
+    ],
+    limits: [
+      {
+        color: "yellow",
+        value: 60
+      },
+      {
+        color: "orange",
+        value: 45
+      },
+      {
+        color: "brown",
+        value: 30
+      }
+    ]
+  },
 
   tiles: {
     "1": 1,

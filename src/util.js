@@ -84,6 +84,10 @@ const fillArray = R.curry((getNumber, array) => {
   return R.chain(a => Array(getNumber(a)).fill(a), array);
 });
 
+const marketColor = R.curry((limits, value) => {
+  return R.propOr("plain", "color", R.find(limit => R.lte(value, limit.value), R.reverse(limits)));
+});
+
 export default {
   HEX_RATIO,
   hexData,
@@ -91,5 +95,6 @@ export default {
   midpoint,
   pointsToString,
   trackType,
-  fillArray
+  fillArray,
+  marketColor
 };

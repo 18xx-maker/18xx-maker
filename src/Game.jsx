@@ -19,6 +19,9 @@ const Game = ({ match }) => {
             <Link to={`/${game}/shares`}>Shares</Link>
           </li>
           <li>
+            <Link to={`/${game}/stock`}>Stock</Link>
+          </li>
+          <li>
             <Link to={`/${game}/tokens`}>Tokens</Link>
           </li>
           <li>

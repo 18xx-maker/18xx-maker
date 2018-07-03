@@ -9,13 +9,19 @@ body {
   margin: 0;
   padding: 0;
   -webkit-print-color-adjust: exact;
-  width: 8in;
+  width: 10.5in;
   font-family: "Bitter", serif;
 }
 
 h1 {
   text-align: left;
   margin-left: 1em;
+}
+
+h2 {
+  font-size: 5mm;
+  text-align: left;
+  margin: 0 0 0.05in 0;
 }
 
 .game {
@@ -326,4 +332,105 @@ svg {
   font-size: 2.15mm;
   margin: 3mm;
   font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.stock {
+  position: relative;
+  overflow: auto;
+}
+
+.prices {
+  position: relative;
+  overflow: auto;
+  margin-bottom: 0.7in;
+  page-break-inside: avoid;
+}
+
+.revenue {
+  page-break-inside: avoid;
+}
+
+.stock table {
+  border-collapse: collapse;
+}
+
+.stock td {
+  height: 0.65in;
+  width: 0.6in;
+  border: 1px solid black;
+  padding: 0.05in;
+  vertical-align: top;
+  text-align: left;
+  position: relative;
+}
+
+.stock .par td {
+  width: 2in;
+}
+.stock .market td.end:after {
+  position: absolute;
+  content: '⤴';
+  bottom: 0;
+  right: 1mm;
+  font-weight: bold;
+  color: black;
+}
+
+.stock .market td.start:after {
+  position: absolute;
+  content: '↓';
+  bottom: 1mm;
+  left: 1mm;
+  font-weight: bold;
+  color: black;
+}
+
+.stock td.empty {
+  border: none;
+}
+
+.rounds {
+  position: absolute;
+  bottom: 0;
+  height: 1in;
+  width: 4in;
+  left: 4in;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.rounds h2 {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.rounds svg {
+  height: 0.6in;
+  width: 0.6in;
+  top: 0.3in;
+  left: 0.3in;
+  position: relative;
+}
+
+.rounds svg:after {
+  content: '→';
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: black;
+  font-weight: bold;
+  text-align: right;
+  line-height: 0.6in;
+  height: 0.6in;
+  width: 0.7in;
+  display: block;
+}
+
+.par {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

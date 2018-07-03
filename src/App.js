@@ -9,6 +9,7 @@ import Game from "./Game";
 import Games from "./Games";
 import Privates from "./Privates";
 import Shares from "./Shares";
+import Stock from "./Stock";
 import Trains from "./Trains";
 import Tokens from "./Tokens";
 
@@ -27,6 +28,7 @@ class App extends Component {
           <Route path="/:game/shares" component={Shares} />
           <Route path="/:game/charters" component={Charters} />
           <Route path="/:game/privates" component={Privates} />
+          <Route path="/:game/stock" component={Stock} />
         </div>
       </Router>
     );
