@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Bitter:700");
 
 @page {
-  size: letter;
   margin: 0.25in 0.25in 0.5in 0.25in;
 }
 
@@ -9,7 +8,6 @@ body {
   margin: 0;
   padding: 0;
   -webkit-print-color-adjust: exact;
-  width: 10.5in;
   font-family: "Bitter", serif;
 }
 
@@ -76,21 +74,19 @@ svg {
 .charter {
   page-break-inside: avoid;
   font-family: "Bitter", serif;
-  margin: 0.0625in;
-  height: 5in;
-  width: 8in;
+  height: 4.5in;
+  width: 7.25in;
   position: relative;
-  display: inline-block;
   background-color: white;
-  border: 1px dashed #eee;
+  float: left;
 }
 
 .charter__trains {
   position: absolute;
-  height: calc(3.7in - 2mm);
+  height: calc(3.2in - 2mm);
   bottom: 0;
   left: 0;
-  width: 4in;
+  width: 3.625in;
   margin: 0.2in 0;
   padding: 0 3mm;
   box-sizing: border-box;
@@ -101,10 +97,10 @@ svg {
 
 .charter__treasury {
   position: absolute;
-  height: calc(3.7in - 2mm);
+  height: calc(3.2in - 2mm);
   bottom: 0;
   right: 0;
-  width: 4in;
+  width: 3.625in;
   margin: 0.2in 0;
   padding: 0 3mm;
   box-sizing: border-box;
@@ -355,17 +351,18 @@ svg {
 }
 
 .stock td {
-  height: 0.65in;
+  height: 0.67in;
   width: 0.6in;
   border: 1px solid black;
   padding: 0.05in;
+  box-sizing: border-box;
   vertical-align: top;
   text-align: left;
   position: relative;
 }
 
 .stock .par td {
-  width: 2in;
+  width: 1in;
 }
 .stock .market td.end:after {
   position: absolute;
@@ -392,19 +389,34 @@ svg {
 .rounds {
   position: absolute;
   bottom: 0;
-  height: 1in;
-  width: 4in;
-  left: 4in;
+  height: 2.75in;
+  width: 1in;
+  right: 4.5in;
+}
+
+.rounds .tokens {
+  position: absolute;
+  bottom: 0;
+  right: 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-end;
+  flex-direction: column-reverse;
+}
+
+.par h2 {
+  text-align: right;
+}
+
+.bankpool h2 {
+  text-align: right;
 }
 
 .rounds h2 {
   position: absolute;
   top: 0;
   width: 100%;
-  text-align: center;
+  text-align: right;
 }
 
 .rounds svg {
@@ -432,5 +444,54 @@ svg {
 .par {
   position: absolute;
   bottom: 0;
+  right: 3.25in;
+}
+
+.bankpool {
+  position: absolute;
+  bottom: 0;
   right: 0;
+}
+
+.bankpool__shares {
+  width: 3in;
+  height: calc(4.55in - 3px);
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
+.cutting-line {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  box-sizing: border-box;
+}
+
+.cutting-line__top {
+  height: 0.25in;
+  top: -0.375in;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.cutting-line__bottom {
+  height: 0.25in;
+  bottom: -0.375in;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.cutting-line__left {
+  width: 0.25in;
+  left: -0.375in;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.cutting-line__right {
+  width: 0.25in;
+  right: -0.375in;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }

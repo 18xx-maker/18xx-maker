@@ -9,7 +9,9 @@ const colors = {
   track: "rgb(0,0,0)",
   border: "rgb(255,255,255)",
   city: "rgb(255,255,255)",
-  text: "rgb(0,0,0)"
+  text: "rgb(0,0,0)",
+  black: "rgb(0,0,0)",
+  white: "rgb(255,255,255)"
 };
 
 const textColor = color => {

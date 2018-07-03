@@ -11,10 +11,19 @@ const Tokens = ({ match }) => {
   let tokens = R.addIndex(R.chain)((company, index) => {
     let y = 60 * index + 30;
     let companyTokens = Array(company.tokens.length + 3).fill(
-      <Token label={company.abbrev} color={company.color} />
+      <Token
+        label={company.abbrev}
+        color={company.color}
+        labelColor={company.textColor}
+      />
     );
     companyTokens.push(
-      <Token label={company.abbrev} color={company.color} inverse={true} />
+      <Token
+        label={company.abbrev}
+        color={company.color}
+        labelColor={company.textColor}
+        inverse={true}
+      />
     );
     let groups = R.addIndex(R.map)(
       (token, index) => (
@@ -35,14 +44,10 @@ const Tokens = ({ match }) => {
   }, game.tokens);
 
   let y = 60 * companies.length + 30;
-  tokens.push(
-    <g transform={`translate(0 ${y})`}>
-      {extras}
-    </g>
-  );
+  tokens.push(<g transform={`translate(0 ${y})`}>{extras}</g>);
 
   return (
-    <svg width="800" height="1050">
+    <svg width="800" height="1000">
       <defs>
         <style>
           @import url('https://fonts.googleapis.com/css?family=Bitter:700');

@@ -82,6 +82,7 @@ const game = {
       abbrev: "C&O",
       tokens: ["Free", "$40", "$100", "$100"],
       color: "rgb(141,215,248)",
+      textColor: "rgb(0,0,0)",
       shares: [
         {
           quantity: 1,
@@ -101,6 +102,7 @@ const game = {
       abbrev: "Erie",
       tokens: ["Free", "$40", "$100", "$100"],
       color: "rgb(255,230,0)",
+      textColor: "rgb(0,0,0)",
       shares: [
         {
           quantity: 1,
@@ -242,35 +244,35 @@ const game = {
       price: "$40",
       revenue: "$10",
       description:
-        "A Corporation owning the Champlain & St. Lawrence may lay a tile on the C&SL’s hexagon even if this hexagon is not connected to the Corporation’s Railhead. This free tile placement is in addition to the Corporation’s normal tile placement – for this turn only the Corporation may play two tiles. The tile played on the C&SL hexagon does not have to connect to any existing adjacent track."
+        "A corporation owning the C&StL may lay a tile on the C&StL's hex even if this hex is not connected to the corporations's railhead. This free tile placement is in addition to the corporation's normal tile placement - for this turn only the corporation may play two tiles. The tile played on the C&StL hex does not have to connect to any existing adjacent track."
     },
     {
       name: "Delaware & Hudson",
       price: "$70",
       revenue: "$15",
       description:
-        "A Corporation owning the Delaware & Hudson may establish a Railhead on the D&H’s hexagon by laying a station tile and a token. The station does NOT have to be connected to the remainder of the Corporation’s route. The tile layed is the owning Railroad’s one tile placement per turn. Placing the token is not required, but if placed in a future turn, it must be paid for. Removal of the mountain costs $120 as usual but there is no charge for laying the token. (Other Corporations may lay a tile here subject to the ordinary rules.)"
+        "A corporation owning the Delaware & Hudson may establish a railhead on the D&H hex by laying a station tile and a token. The station does not have to be connected to the remainder of the corporation's route. The tile laid is the owning corporation's one tile placement for the turn. Removal of the mountain costs $120 as usual but there is no charge for laying the token. Placing the token is not required, but if placed in a future turn, it must be paid for. Other corporations may place a tile here subject to the ordinary rules."
     },
     {
       name: "Mohawk & Hudson",
       price: "$110",
       revenue: "$20",
       description:
-        "A player owning the Mohawk & Hudson may exchange it for a 10% share of NYC provided he does not already hold 60% of the NYC stock and there is NYC stock available in the Bank or the Pool. The exchange may be made during the player’s turn of a Stock Round or between the turns of other players or Railroads in either Stock or Operating Rounds. This action closes the M&H."
+        "A player owning the M&H may exhange it for a 10% share of the NYC provided he does not already hold 60% of the NYC stock and there is NYC stock available in the Bank or the Pool. The exchange may be made during the player's turn of a stock round or between the turns of other players or corporations in either stock or operating rounds. This action closes the M&H."
     },
     {
       name: "Camden & Amboy",
       price: "$160",
       revenue: "$25",
       description:
-        "The initial purchaser of the Camden and Amboy immediately receives a 10% share of PRR stock without further payment. This action does NOT close the Camden & Amboy. The PRR Corporation will not be running at this point, but the stock may be retained or sold subject to the ordinary rules of the game (see 8.1, last paragraph)."
+        "The initial purchaser of the C&A immediately receives a 10% share of PRR stock without further payment. This action does not close the C&A. The PRR corporation will not be running at this point, but the stock may be retained or sold subject to the ordinary rules of the game."
     },
     {
       name: "Baltimore & Ohio",
       price: "$220",
       revenue: "$30",
       description:
-        "The owner of the Baltimore & Ohio Private Company immediately receives the President’s Certificate of the B&O Railroad without further payment (see 8.1). The B&O Private Company may NOT be sold to any Corporation, and does not change hands if the owning player loses the Presidency of the B&O. When the B&O Corporation purchases its first train the Private Company is closed down."
+        "The owner of the B&O private company immediately receives the President's certificate of the B&O corporation without further payment. The B&O private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the B&O corporation. When the B&O corporation purchases its first train the private company is closed down."
     }
   ],
 
@@ -319,25 +321,37 @@ const game = {
     }
   ],
 
+  rounds: [
+    {
+      name: "OR3",
+      color: "brown"
+    },
+    {
+      name: "OR2",
+      color: "green"
+    },
+    {
+      name: "OR1",
+      color: "yellow"
+    },
+    {
+      name: "SR",
+      color: "gray"
+    }
+  ],
+
+  turn: {
+    stock: ["Buy one and/or sell any number of certificates"],
+    operating: [
+      "Lay Track",
+      "Purchase Token",
+      "Run Trains",
+      "Collect Revenue",
+      "Purchase trains"
+    ]
+  },
+
   stock: {
-    rounds: [
-      {
-        name: "OR3",
-        color: "brown"
-      },
-      {
-        name: "OR2",
-        color: "green"
-      },
-      {
-        name: "OR1",
-        color: "yellow"
-      },
-      {
-        name: "SR",
-        color: "gray"
-      }
-    ],
     type: "2D",
     par: {
       values: [100, 90, 82, 76, 71, 67],

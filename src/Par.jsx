@@ -13,7 +13,7 @@ const Par = ({ par }) => {
   );
   return (
     <div class="par">
-      <h2>Par Values</h2>
+      <h2>Par</h2>
       <table>{rows}</table>
     </div>
   );
