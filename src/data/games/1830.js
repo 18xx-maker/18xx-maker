@@ -321,6 +321,48 @@ const game = {
     }
   ],
 
+  pools: [
+    {
+      name: "Market",
+      notes: [
+        {
+          color: "orange",
+          note: "No more than 50% of a company may be in the market"
+        },
+        {
+          color: "orange",
+          note: "No stock sales during first stock round"
+        }
+      ]
+    },
+    {
+      name: "IPO",
+      notes: [
+        {
+          color: "green",
+          note: "Companies float once 60% sold"
+        }
+      ]
+    },
+    {
+      name: "Trains",
+      notes: [
+        {
+          color: "yellow",
+          textColor: "black",
+          note:
+            "D trains available after first 6 is bought"
+        },
+        {
+          color: "yellow",
+          textColor: "black",
+          note:
+            "4, 5, and 6 can be exchanged for a D train"
+        }
+      ]
+    }
+  ],
+
   rounds: [
     {
       name: "OR3",
@@ -412,14 +454,19 @@ const game = {
     limits: [
       {
         color: "yellow",
+        textColor: "black",
+        description:
+          "Certificates no longer count towards the share limit",
         value: 60
       },
       {
         color: "orange",
+        description: "Players may own more than 60% of the company",
         value: 45
       },
       {
         color: "brown",
+        description: "Multiple certificates may be bought in the same turn",
         value: 30
       }
     ]
