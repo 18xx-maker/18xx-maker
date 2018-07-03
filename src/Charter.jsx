@@ -18,22 +18,20 @@ const Charter = ({ name, abbrev, color, tokens, phases }) => {
     );
   }, tokens);
   return (
-    <div class="charter">
-      <div class="charter__name">{name}</div>
-      <div class="charter__tokens">{tokenSpots}</div>
-      <div class="charter__hr" style={{ backgroundColor: color }} />
-      <div class="charter__trains">
-        Trains
-        <div class="charter__phase">
-          <Phase phases={phases} />
+    <div class="cutlines">
+      <div class="charter">
+        <div class="charter__name">{name}</div>
+        <div class="charter__tokens">{tokenSpots}</div>
+        <div class="charter__hr" style={{ backgroundColor: color }} />
+        <div class="charter__trains">
+          Trains
+          <div class="charter__phase">
+            <Phase phases={phases} />
+          </div>
         </div>
+        <div class="charter__treasury">Treasury</div>
+        <div class="charter__hr" style={{ backgroundColor: color }} />
       </div>
-      <div class="charter__treasury">Treasury</div>
-      <div class="charter__hr" style={{ backgroundColor: color }} />
-      <div class="cutting-line cutting-line__left" />
-      <div class="cutting-line cutting-line__right" />
-      <div class="cutting-line cutting-line__top" />
-      <div class="cutting-line cutting-line__bottom" />
     </div>
   );
 };

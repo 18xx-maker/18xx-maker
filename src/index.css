@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Bitter:700");
 
 @page {
-  margin: 0.25in 0.25in 0.5in 0.25in;
+  margin: 0.25in;
 }
 
 body {
@@ -18,8 +18,10 @@ h1 {
 
 h2 {
   font-size: 5mm;
+  line-height: 0.5in;
+  height: 0.5in;
   text-align: left;
-  margin: 0 0 0.05in 0;
+  margin: 0;
 }
 
 .game {
@@ -338,12 +340,8 @@ svg {
 .prices {
   position: relative;
   overflow: hidden;
-  margin-bottom: 0.7in;
   page-break-inside: avoid;
-}
-
-.revenue {
-  page-break-inside: avoid;
+  height: 8in;
 }
 
 .stock table {
@@ -351,6 +349,8 @@ svg {
 }
 
 .stock td {
+  line-height: 0.15in;
+  font-size: 0.15in;
   height: 0.67in;
   width: 0.6in;
   border: 1px solid black;
@@ -362,21 +362,26 @@ svg {
 }
 
 .stock .par td {
-  width: 1in;
+  width: 2in;
 }
-.stock .market td.end:after {
+
+.stock .market {
+  position: relative;
+}
+
+.stock .market td.up:after {
   position: absolute;
-  content: '⤴';
-  bottom: 0;
+  content: '↑';
+  bottom: 2mm;
   right: 1mm;
   font-weight: bold;
   color: black;
 }
 
-.stock .market td.start:after {
+.stock .market td.down:after {
   position: absolute;
   content: '↓';
-  bottom: 1mm;
+  bottom: 2mm;
   left: 1mm;
   font-weight: bold;
   color: black;
@@ -391,7 +396,7 @@ svg {
   bottom: 0;
   height: 2.75in;
   width: 1in;
-  right: 4.5in;
+  right: 2.25in;
 }
 
 .rounds .tokens {
@@ -402,21 +407,6 @@ svg {
   justify-content: flex-start;
   align-items: flex-end;
   flex-direction: column-reverse;
-}
-
-.par h2 {
-  text-align: right;
-}
-
-.bankpool h2 {
-  text-align: right;
-}
-
-.rounds h2 {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  text-align: right;
 }
 
 .rounds svg {
@@ -444,20 +434,107 @@ svg {
 .par {
   position: absolute;
   bottom: 0;
-  right: 3.25in;
-}
-
-.bankpool {
-  position: absolute;
-  bottom: 0;
   right: 0;
 }
 
-.bankpool__shares {
+.legend {
+  position: absolute;
+  bottom: -0.125in;
+  right: 3.1in;
   width: 3in;
-  height: calc(4.55in - 3px);
+}
+
+.revenue {
+  page-break-inside: avoid;
+  height: 4in;
+}
+
+.revenue table {
+  margin-bottom: 0.25in;
+}
+
+.pools {
+  page-break-inside: avoid;
+  display: grid;
+  grid-column-gap: 0.25in;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  justify-items: stretch;
+  align-items: stretch;
+  justify-content: stretch;
+  align-content: stretch;
+  height: 4in;
   box-sizing: border-box;
+}
+
+.pool {
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+
+.pool:last-child {
+  padding: 0;
+}
+
+.pool__box {
+  box-sizing: border-box;
+  height: calc(100% - 0.5in);
   border: 1px solid black;
+}
+
+ul.notes {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+ul.notes li {
+  margin-bottom: 0.125in;
+  margin-left: 0.4in;
+  margin-right: 0.25in;
+  text-align: left;
+  position: relative;
+  font-size: 0.15in;
+  line-height: 0.19in;
+}
+
+ul.notes li span {
+  display: block;
+  padding: 0;
+  font-size: 0.13in;
+  line-height: 0.17in;
+  height: 0.17in;
+  width: 0.17in;
+  font-weight: bold;
+  border: 1px solid black;
+  border-radius: 0.085in;
+  left: -0.29in;
+  top: 0;
+  position: absolute;
+  text-align: center;
+}
+
+.cutlines {
+  position: relative;
+  overflow: auto;
+  float: left;
+  padding: 0.25in;
+}
+
+.cutlines:before {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  box-sizing: border-box;
+  width: 0.25in;
+  left: -0.375in;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 .cutting-line {

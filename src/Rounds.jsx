@@ -12,7 +12,7 @@ const Rounds = ({ rounds }) => {
     ),
     rounds
   );
-  return <div class="rounds"><h2>Rounds</h2><div class="tokens">{items}</div></div>;
+  return <div class="rounds"><div class="tokens">{items}</div></div>;
 };
 
 export default Rounds;
