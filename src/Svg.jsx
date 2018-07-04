@@ -13,37 +13,22 @@ const getX = index => {
 const getY = index => {
   let div = Math.floor(index / 7);
   let odd = (index % 7) % 2 === 0;
-  return (173 * div) + 100 + (odd ? 0 : 87);
+  return 173 * div + 100 + (odd ? 0 : 87);
 };
 
 const Svg = () => {
   let ids = R.chain(k => Array(game.tiles[k]).fill(k), R.keys(game.tiles));
 
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      version="1.1"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-    >
-      <defs>
-        <style>
-          @import url('https://fonts.googleapis.com/css?family=Limelight');
-        </style>
-      </defs>
-
-      {R.addIndex(R.map)(
-        (id, index) => (
-          <Tile
-            id={id}
-            width={150}
-            x={getX(index)}
-            y={getY(index)}
-          />
-        ),
-        ids
-      )}
-    </svg>
+  let tiles = R.addIndex(R.map)(
+    (id, index) => (
+      <svg width="174" height="150" viewBox="-87 -75 174 150" transform="rotate(-90)">
+        <Tile id={id} />
+      </svg>
+    ),
+    ids
   );
+
+  return <div className="tileSheet">{tiles}</div>;
 };
 
 export default Svg;

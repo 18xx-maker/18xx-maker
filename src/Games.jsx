@@ -4,10 +4,10 @@ import games from "./data/games";
 import * as R from "ramda";
 
 const Games = () => {
-  return R.map(game => {
+  let gameNodes = R.map(game => {
     return (
       <div class="game" id={`game-${game}`}>
-        <h1>{game}</h1>
+        <h2>{game}</h2>
         <ul>
           <li>
             <Link to={`/${game}/charters`}>Charters</Link>
@@ -32,8 +32,15 @@ const Games = () => {
           </li>
         </ul>
       </div>
-  );
+    );
   }, R.keys(games));
+
+  return (
+    <div className="games">
+      <h1>Games</h1>
+      {gameNodes}
+    </div>
+  );
 };
 
 export default Games;

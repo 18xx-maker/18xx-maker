@@ -59,8 +59,12 @@ const pointsToString = R.compose(
 );
 
 const trackType = track => {
-  if (track.end === undefined) {
+  if (track.end === undefined && track.start === undefined) {
+    return null;
+  } else if (track.end === undefined) {
     return "city";
+  } else if (track.start === undefined) {
+    return "stop";
   } else {
     let diff = Math.abs(track.start - track.end);
     if (diff > 3) {

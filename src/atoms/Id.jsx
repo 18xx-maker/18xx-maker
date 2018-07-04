@@ -1,10 +1,7 @@
 import React from "react";
-import util from "./util";
-import { colors } from "./data";
+import { colors } from "../data";
 
 const Id = ({ id, width, x, y }) => {
-  let data = util.hexData(width, true, x, y);
-
   // Set size based on length of id
   let size = 14;
   if(id.length > 1) {
@@ -25,8 +22,8 @@ const Id = ({ id, width, x, y }) => {
       alignmentBaseline="middle"
       textAnchor="middle"
       fontSize={size}
-      x={util.linear(0.14, data.middle, data.points[4])[0]}
-      y={util.linear(0.14, data.middle, data.points[4])[1]}
+      x="0"
+      y="0"
     >
       {id}
     </text>

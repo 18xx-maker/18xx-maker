@@ -1,0 +1,21 @@
+.atoms dl {
+  margin: 0;
+}
+
+.atoms dl::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.atoms dt {
+  text-align: left;
+  clear: both;
+  margin: 0.125in 0 0.0625in 0;
+}
+
+.atoms dd {
+  float: left;
+  margin: 0 0.25in 0.25in 0;
+  background-color: #999;
+}

@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Bitter:700");
 
+@import url('https://fonts.googleapis.com/css?family=Limelight');
+
 @page {
   margin: 0.25in;
 }
@@ -24,17 +26,21 @@ h2 {
   margin: 0;
 }
 
-.game {
+.tileSheet svg {
+  float: left;
+}
+
+.home {
   overflow: auto;
   text-align: left;
 }
 
-.game ul {
+.home ul {
   overflow: auto;
   list-style: none;
 }
 
-.game li {
+.home li {
   display: inline-block;
   margin-right: 2em;
 }
