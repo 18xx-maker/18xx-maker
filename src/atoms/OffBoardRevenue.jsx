@@ -2,7 +2,7 @@ import React from "react";
 import { colors } from "../data";
 import * as R from "ramda";
 
-const OffBoard = ({ revenues }) => {
+const OffBoardRevenue = ({ revenues }) => {
   let count = revenues.length;
   let width = 25;
   let totalWidth = count * width;
@@ -50,4 +50,4 @@ const OffBoard = ({ revenues }) => {
   );
 };
 
-export default OffBoard;
+export default OffBoardRevenue;

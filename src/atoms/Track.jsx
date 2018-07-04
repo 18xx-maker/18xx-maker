@@ -20,6 +20,9 @@ const Track = ({ type, gauge, border }) => {
     case "sharp":
       path = `m -75 0 A 43.30125 43.30125 0 0 0 -37.5 -64.951875`;
       break;
+    case "bent":
+      path = "m -75 0 C -30 0, -30 40, 0 40 C 30 40, 30 0, 75 0";
+      break;
     default:
       return null;
   }
@@ -33,6 +36,21 @@ const Track = ({ type, gauge, border }) => {
     strokeDashArray = `${width},${width}`;
   }
 
+  // Double Guage
+  let double = null;
+  if (!border && gauge === "double") {
+    double = (
+      <path
+        d={path}
+        fill="none"
+        stroke={colors["border"]}
+        strokeLinecap="butt"
+        strokeLinejoin="bevel"
+        strokeWidth={width - 4}
+        strokeDasharray={strokeDashArray}
+      />
+    );
+  }
 
   // Track
   return (
@@ -46,6 +64,7 @@ const Track = ({ type, gauge, border }) => {
         strokeWidth={width}
         strokeDasharray={strokeDashArray}
       />
+      {double}
     </g>
   );
 };
