@@ -40,6 +40,8 @@ const Water = ({ size, cost }) => {
         fontSize="14"
         alignmentBaseline="central"
         textAnchor="middle"
+        textLength={25}
+        lengthAdjust="spacingAndGlyphs"
         x="0"
         y="16"
       >
