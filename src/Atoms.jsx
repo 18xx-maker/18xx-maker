@@ -12,7 +12,8 @@ import Track from "./atoms/Track";
 import Hex from "./atoms/Hex";
 import Mountain from "./atoms/Mountain";
 import Water from "./atoms/Water";
-import OffBoard from "./atoms/OffBoard";
+import OffBoardRevenue from "./atoms/OffBoardRevenue";
+import OffBoardTrack from "./atoms/OffBoardTrack";
 
 const Atoms = () => {
   let atoms = [
@@ -59,19 +60,28 @@ const Atoms = () => {
       examples: [
         <Track type="city" />,
         <Track type="city" gauge="narrow" />,
+        <Track type="city" gauge="double" />,
         <Track type="city" border={true} />,
         <Track type="stop" />,
         <Track type="stop" gauge="narrow" />,
+        <Track type="stop" gauge="double" />,
         <Track type="stop" border={true} />,
         <Track type="straight" />,
         <Track type="straight" gauge="narrow" />,
+        <Track type="straight" gauge="double" />,
         <Track type="straight" border={true} />,
         <Track type="gentle" />,
         <Track type="gentle" gauge="narrow" />,
+        <Track type="gentle" gauge="double" />,
         <Track type="gentle" border={true} />,
         <Track type="sharp" />,
         <Track type="sharp" gauge="narrow" />,
-        <Track type="sharp" border={true} />
+        <Track type="sharp" gauge="double" />,
+        <Track type="sharp" border={true} />,
+        <Track type="bent" />,
+        <Track type="bent" gauge="narrow" />,
+        <Track type="bent" gauge="double" />,
+        <Track type="bent" border={true} />
       ]
     },
     {
@@ -104,15 +114,15 @@ const Atoms = () => {
       ]
     },
     {
-      name: "OffBoard",
+      name: "OffBoard Revenue",
       examples: [
-        <OffBoard
+        <OffBoardRevenue
           revenues={[
             { cost: "20", color: "yellow" },
             { cost: "40", color: "brown" }
           ]}
         />,
-        <OffBoard
+        <OffBoardRevenue
           revenues={[
             { cost: "20", color: "yellow" },
             { cost: "30", color: "green" },
@@ -121,6 +131,10 @@ const Atoms = () => {
           ]}
         />
       ]
+    },
+    {
+      name: "OffBoard Track",
+      examples: [<OffBoardTrack />, <OffBoardTrack border={true} />]
     }
   ];
 
