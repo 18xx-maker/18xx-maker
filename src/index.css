@@ -60,12 +60,11 @@ svg {
 .card {
   page-break-inside: avoid;
   font-family: "Bitter", serif;
-  height: 43.5mm;
-  width: 67.5mm;
+  height: calc(43.5mm + 0.25in);
+  width: calc(67.5mm + 0.25in);
   box-sizing: border-box;
   position: relative;
   background-color: white;
-  border: 1px dashed #eee;
   float: left;
 }
 
@@ -198,88 +197,82 @@ svg {
   position: absolute;
   width: 40mm;
   height: 100%;
-  right: 3mm;
+  right: 0.25in;
   opacity: 0.25;
-}
-
-.train__image {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0.25;
-  mask-image: url("/train.svg");
-  mask-repeat: no-repeat;
-  mask-position: right 3mm center;
-  mask-size: 60%;
-  background-color: black;
 }
 
 .train__notes {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: calc(100% - 0.25in);
+  padding: 0.125in;
+  margin: 0.125in;
   box-sizing: border-box;
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
-  padding: 3mm;
 }
 
 .train__info {
-  height: 6mm;
-  line-height: 6mm;
-  padding: 0 3mm;
-  border-radius: 1mm;
+  height: 0.25in;
+  line-height: 0.25in;
+  padding: 0 0.1in;
+  border-radius: 0.06in;
   border: solid 1px black;
 }
 
 .share__hr {
-  height: 2mm;
+  height: 0.0625in;
   position: absolute;
-  bottom: 10mm;
+  bottom: 0.5in;
   width: 100%;
-}
-
-.private__hr {
-  height: 2mm;
-  position: absolute;
-  bottom: 10mm;
-  width: 100%;
-  background-color: black;
 }
 
 .share__name {
   position: absolute;
-  top: 3mm;
-  font-size: 6mm;
-  box-sizing: border-box;
-  padding: 0 3mm;
-  width: 100%;
+  top: 0;
+  left: 0;
+  width: calc(100% - 0.5in);
+  padding: 0.125in;
+  line-height: 0.21in;
+  font-size: 0.21in;
+  margin: 0.125in;
   text-align: center;
+}
+
+.share__token {
+  width: 50%;
+  height: 75%;
+  position: absolute;
+  top: 0.5in;
+  right: 0;
 }
 
 .share__label {
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
+  justify-content: center;
   position: absolute;
-  bottom: 14mm;
+  bottom: 0.625in;
   width: 100%;
+  height: 0.5in;
 }
 .share__label__text {
-  height: 6mm;
-  line-height: 6mm;
-  padding: 0 3mm;
-  border-radius: 1mm;
+  height: 0.25in;
+  line-height: 0.25in;
+  padding: 0 0.1in;
+  border-radius: 0.06in;
   border: solid 1px black;
   display: inline-block;
 }
 
 .train__name {
   box-sizing: border-box;
-  height: 100%;
-  width: 100%;
-  padding: 4mm;
+  height: calc(100% - 0.25in);
+  width: calc(100% - 0.25in);
+  margin: 0.125in;
+  padding: 0.125in;
 
   position: absolute;
   top: 0;
@@ -313,41 +306,44 @@ svg {
   position: absolute;
   top: 0;
   right: 0;
-  height: 6mm;
-  line-height: 6mm;
-  font-size: 6mm;
-  margin: 3mm;
+  margin: 0.125in;
+  padding: 0.125in;
+  height: 0.25in;
+  line-height: 0.25in;
+  font-size: 0.25in;
 }
 
 .share__percent {
   position: absolute;
   bottom: 0;
-  left: 0;
-  height: 5mm;
-  line-height: 5mm;
-  font-size: 5mm;
-  margin: 3mm;
+  right: 0;
+  margin: 0.125in;
+  padding: 0.125in;
+  height: 0.25in;
+  line-height: 0.25in;
+  font-size: 0.18in;
 }
 
 .share__shares {
   position: absolute;
   bottom: 0;
-  right: 0;
-  height: 5mm;
-  line-height: 5mm;
-  font-size: 5mm;
-  margin: 3mm;
+  left: 0;
+  margin: 0.125in;
+  padding: 0.125in;
+  height: 0.25in;
+  line-height: 0.25in;
+  font-size: 0.18in;
 }
 
 .private__name {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 4mm;
-  line-height: 3.5mm;
-  font-size: 3.5mm;
-  margin: 3mm;
+  width: calc(100% - 0.5in);
+  padding: 0.125in;
+  line-height: 0.18in;
+  font-size: 0.18in;
+  margin: 0.125in;
   text-align: left;
 }
 
@@ -355,30 +351,34 @@ svg {
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 5mm;
-  line-height: 5mm;
-  font-size: 5mm;
-  margin: 3mm;
+  margin: 0.125in;
+  padding: 0.125in;
+  height: 0.25in;
+  line-height: 0.25in;
+  font-size: 0.18in;
 }
 
 .private__revenue {
   position: absolute;
   bottom: 0;
   right: 0;
-  height: 5mm;
-  line-height: 5mm;
-  font-size: 5mm;
-  margin: 3mm;
+  margin: 0.125in;
+  padding: 0.125in;
+  line-height: 0.25in;
+  height: 0.25in;
+  font-size: 0.18in;
 }
 
 .private__description {
   position: absolute;
-  top: 5mm;
+  top: 0.46875in;
+  width: calc(100% - 0.5in);
+  padding: 0 0.125in;
+  margin: 0 0.125in;
   text-align: left;
   left: 0;
-  line-height: 2.5mm;
-  font-size: 2.15mm;
-  margin: 3mm;
+  line-height: 0.105in;
+  font-size: 0.085in;
   font-family: "Helvetica", "Arial", sans-serif;
 }
 

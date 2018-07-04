@@ -21,15 +21,17 @@ const Train = ({ train }) => {
   );
 
   return (
-    <div class="card train">
-      <div class="train__name" style={{ color: colors[color] }}>
-        {name}
+    <div class="cutlines">
+      <div class="card train">
+        <div class="train__name" style={{ color: colors[color] }}>
+          {name}
+        </div>
+        <div class="train__price">{price}</div>
+        <div class="train__notes">{notes}</div>
+        <svg viewBox="0 0 60mm auto">
+          <use href="#train-image" fill={colors["track"]} />
+        </svg>
       </div>
-      <div class="train__price">{price}</div>
-      <div class="train__notes">{notes}</div>
-      <svg viewBox="0 0 60mm auto">
-        <use href="#train-image" fill={ colors["track"] } />
-      </svg>
     </div>
   );
 };
