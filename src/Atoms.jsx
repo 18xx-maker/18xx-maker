@@ -12,6 +12,7 @@ import Track from "./atoms/Track";
 import Hex from "./atoms/Hex";
 import Mountain from "./atoms/Mountain";
 import Water from "./atoms/Water";
+import OffBoard from "./atoms/OffBoard";
 
 const Atoms = () => {
   let atoms = [
@@ -91,7 +92,7 @@ const Atoms = () => {
       examples: [
         <Mountain size="small" cost="$40" />,
         <Mountain size="medium" cost="$80" />,
-        <Mountain size="large" cost="$120" />,
+        <Mountain size="large" cost="$120" />
       ]
     },
     {
@@ -99,7 +100,26 @@ const Atoms = () => {
       examples: [
         <Water size="small" cost="$40" />,
         <Water size="medium" cost="$80" />,
-        <Water size="large" cost="$120" />,
+        <Water size="large" cost="$120" />
+      ]
+    },
+    {
+      name: "OffBoard",
+      examples: [
+        <OffBoard
+          revenues={[
+            { cost: "20", color: "yellow" },
+            { cost: "40", color: "brown" }
+          ]}
+        />,
+        <OffBoard
+          revenues={[
+            { cost: "20", color: "yellow" },
+            { cost: "30", color: "green" },
+            { cost: "40", color: "brown" },
+            { cost: "60", color: "gray" }
+          ]}
+        />
       ]
     }
   ];
