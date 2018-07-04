@@ -4,6 +4,7 @@ const colors = {
   green: "rgb(92,174,115)",
   brown: "rgb(179,123,84)",
   gray: "rgb(165,170,170)",
+  mountain: "rgb(179,123,84)",
   water: "rgb(101,161,184)",
   offboard: "rgb(216,34,42)",
   blue: "rgb(101,161,184)",
