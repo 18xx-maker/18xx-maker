@@ -10,6 +10,8 @@ import CenterTown from "./atoms/CenterTown";
 import Label from "./atoms/Label";
 import Track from "./atoms/Track";
 import Hex from "./atoms/Hex";
+import Mountain from "./atoms/Mountain";
+import Water from "./atoms/Water";
 
 const Atoms = () => {
   let atoms = [
@@ -82,6 +84,22 @@ const Atoms = () => {
         <Hex color="gray" />,
         <Hex color="water" />,
         <Hex color="offboard" />
+      ]
+    },
+    {
+      name: "Mountain",
+      examples: [
+        <Mountain size="small" cost="$40" />,
+        <Mountain size="medium" cost="$80" />,
+        <Mountain size="large" cost="$120" />,
+      ]
+    },
+    {
+      name: "Water",
+      examples: [
+        <Water size="small" cost="$40" />,
+        <Water size="medium" cost="$80" />,
+        <Water size="large" cost="$120" />,
       ]
     }
   ];
