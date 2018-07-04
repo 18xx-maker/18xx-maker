@@ -24,7 +24,7 @@ const Phase = ({ phases }) => {
           <th>Limit</th>
           <th>Tiles</th>
           <th>Rust</th>
-          <th>Notes</th>
+          <th class="phase__notes">Notes</th>
         </tr>
       </thead>
       <tbody>

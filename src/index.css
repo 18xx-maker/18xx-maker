@@ -69,28 +69,47 @@ svg {
   float: left;
 }
 
-.phase__notes {
-  text-align: left;
-}
-
 .charter {
   page-break-inside: avoid;
   font-family: "Bitter", serif;
-  height: 4.5in;
-  width: 7.25in;
+  height: 4.75in;
+  width: 7.5in;
   position: relative;
   background-color: white;
   float: left;
 }
 
-.charter__trains {
+.charter__hr {
+  height: 0.0625in;
   position: absolute;
-  height: calc(3.2in - 2mm);
+  top: 1.125in;
+  width: 100%;
+}
+
+.charter__name {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0.125in 0.125in 0 0.125in;
+  padding-left: 0.125in;
+  height: 1in;
+  line-height: 1in;
+  font-size: 0.25in;
+  box-sizing: border-box;
+  width: calc(100% - 0.25in);
+  text-align: left;
+}
+
+
+.charter__trains {
+  text-align: left;
+  position: absolute;
+  height: 3.4375in;
   bottom: 0;
   left: 0;
+  margin: 0.125in 0 0 0.125in;
   width: 3.625in;
-  margin: 0.2in 0;
-  padding: 0 3mm;
+  padding: 0 0.125in 0.25in 0.125in;
   box-sizing: border-box;
   border-width: 0 1px 0 0;
   border-color: #666;
@@ -98,36 +117,81 @@ svg {
 }
 
 .charter__treasury {
+  text-align: left;
   position: absolute;
-  height: calc(3.2in - 2mm);
+  height: 3.4375in;
   bottom: 0;
   right: 0;
+  margin: 0.125in 0.125in 0 0;
   width: 3.625in;
-  margin: 0.2in 0;
-  padding: 0 3mm;
+  padding: 0 0.125in 0.25in 0.125in;
   box-sizing: border-box;
 }
 
 .charter__phase {
   position: absolute;
   bottom: 0;
-  width: calc(100% - 6mm);
+  padding: 0 0.125in 0.25in 0;
+  width: calc(100% - 0.25in);
 }
 
 .charter__phase table {
   font-family: "Helvetica", "Arial", sans-serif;
-  font-size: 0.7em;
-  margin: auto;
+  font-size: 0.09in;
   border-collapse: collapse;
+  width: 100%;
 }
 
 .charter__phase th {
   padding: 0 0.05in;
+  font-family: "Bitter", serif;
+  text-align: center;
+}
+
+.charter__phase th.phase__notes {
+  text-align: left;
 }
 
 .charter__phase td {
   padding: 0.03in 0.1in;
   border: 1px solid black;
+  text-align: center;
+  vertical-align: top;
+}
+
+.charter__phase td.phase__notes {
+  text-align: left;
+}
+
+.charter dl {
+  position: absolute;
+  bottom: 0;
+  margin: 0 0 0.125in 0;
+  width: calc(100% - 0.25in);
+}
+
+.charter dt {
+  font-size: 0.13in;
+}
+
+.charter dd {
+  margin: 0 0 0.125in 0;
+  font-size: 0.12in;
+  font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.charter ul {
+  list-style-type: lower-latin;
+  list-style-position: inside;
+  padding: 0;
+  margin: 0;
+}
+
+.charter ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+  padding: 0;
+  margin: 0;
 }
 
 .train svg {
@@ -184,23 +248,6 @@ svg {
   background-color: black;
 }
 
-.charter__hr {
-  height: 2mm;
-  position: absolute;
-  top: 0.9in;
-  width: 100%;
-}
-
-.charter__name {
-  position: absolute;
-  top: 3mm;
-  font-size: 0.3in;
-  box-sizing: border-box;
-  padding: 0 3mm;
-  width: 100%;
-  text-align: left;
-}
-
 .share__name {
   position: absolute;
   top: 3mm;
@@ -250,7 +297,10 @@ svg {
   position: absolute;
   top: 0;
   right: 0;
-  margin: 3mm;
+  padding: 0.26in 0.125in 0.125in 0.125in;
+  margin: 0.125in 0.125in 0 0;
+  height: 1in;
+  box-sizing: border-box;
 }
 
 .charter__tokens svg {
@@ -523,52 +573,57 @@ ul.notes li span {
   overflow: auto;
   float: left;
   padding: 0.25in;
+  page-break-inside: avoid;
 }
 
 .cutlines:before {
-  height: 100%;
-  width: 100%;
+  content: '';
+  width: 0.25in;
+  height: calc(100% - 0.75in);
   position: absolute;
   z-index: -1;
   box-sizing: border-box;
-  width: 0.25in;
-  left: -0.375in;
+  left: 0;
+  top: 0.375in;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
 }
 
-.cutting-line {
-  height: 100%;
-  width: 100%;
+.cutlines:after {
+  content: '';
+  width: 0.25in;
+  height: calc(100% - 0.75in);
   position: absolute;
   z-index: -1;
   box-sizing: border-box;
+  right: 0;
+  top: 0.375in;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
-.cutting-line__top {
+.cutlines > div:before {
+  content: '';
+  width: calc(100% - 0.25in);
   height: 0.25in;
-  top: -0.375in;
+  position: absolute;
+  z-index: -1;
+  box-sizing: border-box;
+  top: -0.25in;
+  left: 0.125in;
   border-left: 1px solid black;
   border-right: 1px solid black;
 }
 
-.cutting-line__bottom {
+.cutlines > div:after {
+  content: '';
+  width: calc(100% - 0.25in);
   height: 0.25in;
-  bottom: -0.375in;
+  position: absolute;
+  z-index: -1;
+  box-sizing: border-box;
+  bottom: -0.25in;
+  left: 0.125in;
   border-left: 1px solid black;
   border-right: 1px solid black;
-}
-
-.cutting-line__left {
-  width: 0.25in;
-  left: -0.375in;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-}
-
-.cutting-line__right {
-  width: 0.25in;
-  right: -0.375in;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
 }

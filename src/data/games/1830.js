@@ -350,14 +350,12 @@ const game = {
         {
           color: "yellow",
           textColor: "black",
-          note:
-            "D trains available after first 6 is bought"
+          note: "D trains available after first 6 is bought"
         },
         {
           color: "yellow",
           textColor: "black",
-          note:
-            "4, 5, and 6 can be exchanged for a D train"
+          note: "4, 5, and 6 can be exchanged for a D train"
         }
       ]
     }
@@ -382,16 +380,24 @@ const game = {
     }
   ],
 
-  turn: {
-    stock: ["Buy one and/or sell any number of certificates"],
-    operating: [
-      "Lay Track",
-      "Purchase Token",
-      "Run Trains",
-      "Collect Revenue",
-      "Purchase trains"
-    ]
-  },
+  turns: [
+    {
+      name: "Stock Round",
+      steps: ["Buy one certificate", "Sell any number of certificates"],
+      ordered: false
+    },
+    {
+      name: "Operating Round",
+      steps: [
+        "Lay Track",
+        "Purchase Token",
+        "Run Trains",
+        "Collect Revenue",
+        "Purchase trains"
+      ],
+      ordered: true
+    }
+  ],
 
   stock: {
     type: "2D",
@@ -455,8 +461,7 @@ const game = {
       {
         color: "yellow",
         textColor: "black",
-        description:
-          "Certificates no longer count towards the share limit",
+        description: "Certificates no longer count towards the share limit",
         value: 60
       },
       {
