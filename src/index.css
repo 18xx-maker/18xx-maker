@@ -15,7 +15,6 @@ body {
 
 h1 {
   text-align: left;
-  margin-left: 1em;
 }
 
 h2 {
@@ -24,6 +23,12 @@ h2 {
   height: 0.5in;
   text-align: left;
   margin: 0;
+}
+
+.home ul,
+.home h1,
+.home h2 {
+  padding-left: 40px;
 }
 
 .tileSheet svg {
