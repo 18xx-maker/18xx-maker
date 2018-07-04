@@ -18,6 +18,7 @@ const Charters = ({ match }) => {
             color={company.color}
             tokens={company.tokens}
             phases={game.phases}
+            turns={game.turns}
           />
         );
       }, companies)}
