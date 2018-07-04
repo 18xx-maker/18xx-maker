@@ -175,7 +175,7 @@ const game = {
       quantity: 5,
       price: "$180",
       color: "green",
-      info: [
+      Info: [
         {
           color: "brown",
           note: "Rusted by 6"
@@ -524,6 +524,134 @@ const game = {
     "67": 1,
     "68": 1,
     "70": 1
+  },
+
+  map: {
+    hexWidth: 150,
+    hexes: [
+      {
+        color: "offboard",
+        offBoardTrack: [{
+          side: 4
+        }],
+        hexes: [[1,9]]
+      },
+      {
+        color: "gray",
+        cities: [{}],
+        values: [{
+          x: -40,
+          y: -30,
+          value: 20,
+          rotate: 0
+        }],
+        track: [{
+          start: 4
+        },{
+          start: 5
+        }],
+        hexes: [[2,4]]
+      },
+      {
+        color: "offboard",
+        label: {
+          label: "Chicago",
+          x: -25,
+          rotate: 0
+        },
+        offBoardRevenue: {
+          x: -25,
+          y: 30,
+          revenues: [{
+            color: "yellow",
+            cost: "40"
+          },{
+            color: "brown",
+            cost: "70"
+          }]
+        },
+        offBoardTrack: [{
+          side: 3
+        },{
+          side: 4
+        },{
+          side: 5
+        }],
+        hexes: [[2,6]]
+      },
+      {
+        color: "offboard",
+        label: {
+          label: "Gulf",
+          x: -25,
+          rotate: 0
+        },
+        offBoardRevenue: {
+          x: -25,
+          y: 30,
+          revenues: [{
+            color: "yellow",
+            cost: "30"
+          },{
+            color: "brown",
+            cost: "60"
+          }]
+        },
+        offBoardTrack: [{
+          side: 3
+        },{
+          side: 4
+        }],
+        hexes: [[2,10]]
+      },
+      {
+        color: "plain",
+        centerTowns: [{}],
+        hexes: [[4,4]]
+      },
+      {
+        color: "plain",
+        cities: [{}],
+        hexes: [[4,8],[10,2],[10,8],[16,8]]
+      },
+      {
+        color: "plain",
+        hexes: [
+          [2, 8],
+          [3, 5],
+          [3, 7],
+          [3, 9],
+          [4, 10],
+          [5, 7],
+          [5, 9],
+          [6, 8],
+          [6, 10],
+          [7, 3],
+          [7, 9],
+          [8, 4],
+          [8, 8],
+          [8, 10],
+          [9, 3],
+          [9, 7],
+          [9, 9],
+          [11, 3],
+          [11, 7],
+          [12, 2],
+          [12, 6],
+          [13, 5],
+          [13, 9],
+          [14, 2],
+          [14, 6],
+          [14, 8],
+          [15, 5],
+          [16, 4],
+          [18, 6],
+          [20, 4],
+          [22, 2],
+          [23, 3]
+        ]
+      }
+    ]
   }
 };
 

@@ -92,6 +92,14 @@ const marketColor = R.curry((limits, value) => {
   return R.propOr("plain", "color", R.find(limit => R.lte(value, limit.value), R.reverse(limits)));
 });
 
+const maxMapX = R.compose(R.reduce(R.max, 1),
+                          R.map(R.nth(0)),
+                          R.chain(R.prop("hexes")))
+
+const maxMapY = R.compose(R.reduce(R.max, 1),
+                          R.map(R.nth(1)),
+                          R.chain(R.prop("hexes")))
+
 export default {
   HEX_RATIO,
   hexData,
@@ -100,5 +108,7 @@ export default {
   pointsToString,
   trackType,
   fillArray,
-  marketColor
+  marketColor,
+  maxMapX,
+  maxMapY
 };

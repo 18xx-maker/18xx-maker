@@ -13,6 +13,9 @@ const Games = () => {
             <Link to={`/${game}/charters`}>Charters</Link>
           </li>
           <li>
+            <Link to={`/${game}/map`}>Map</Link>
+          </li>
+          <li>
             <Link to={`/${game}/privates`}>Privates</Link>
           </li>
           <li>
