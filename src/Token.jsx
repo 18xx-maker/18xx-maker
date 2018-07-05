@@ -3,10 +3,8 @@ import { colors, companies } from "./data";
 import * as R from "ramda";
 
 const Token = ({ label, color, labelColor, inverse, width }) => {
-  labelColor = companies[labelColor] || colors["white"];
-  let circleColor = inverse ? colors["white"] : companies[color];
-  let textColor = inverse ? colors["black"] : labelColor;
-  let strokeColor = color;
+  let circleColor = inverse ? colors["white"] : color;
+  let textColor = inverse ? colors["black"] : labelColor || colors["white"];
   width = width || 30;
 
   return (
@@ -16,7 +14,7 @@ const Token = ({ label, color, labelColor, inverse, width }) => {
         cy="0"
         r={width}
         fill={circleColor}
-        stroke={companies[color]}
+        stroke={color}
       />
       <text
         textAnchor="middle"

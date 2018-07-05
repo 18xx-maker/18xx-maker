@@ -38,6 +38,7 @@ const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const textColor = color => {
   switch (color) {
     case "yellow":
+    case "cyan":
       return "rgb(0,0,0)";
     default:
       return "rgb(255,255,255)";
