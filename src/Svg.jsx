@@ -21,7 +21,7 @@ const Svg = () => {
 
   let tiles = R.addIndex(R.map)(
     (id, index) => (
-      <svg width="174" height="150" viewBox="-87 -75 174 150" transform="rotate(-90)">
+      <svg width="168.2" height="145" viewBox="-87 -75 174 150" transform="rotate(-90)">
         <Tile id={id} />
       </svg>
     ),
