@@ -32,8 +32,9 @@ body {
 .background span {
   display: block;
   float: left;
-  color: #fff;
   margin: 0 0.0625in 0 0;
+  color: #fff;
+  opacity: 0.20;
 }
 
 .map {
