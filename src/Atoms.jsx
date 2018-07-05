@@ -98,14 +98,15 @@ const Atoms = () => {
         <Hex color="offboard" />
       ]
     },
-        {
-          name: "Border",
-          examples: [
-              <Border color="black" />,
-              <Border color="water" />,
-            <Border color="mountain" />
-            ]
-            },
+    {
+      name: "Border",
+      examples: [
+        <Border color="black" />,
+        <Border color="water" />,
+        <Border color="mountain" />,
+        <Border border={true} />
+      ]
+    },
     {
       name: "Mountain",
       examples: [
