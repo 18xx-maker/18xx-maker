@@ -10,6 +10,7 @@ import CenterTown from "./atoms/CenterTown";
 import Label from "./atoms/Label";
 import Track from "./atoms/Track";
 import Hex from "./atoms/Hex";
+import Border from "./atoms/Border";
 import Mountain from "./atoms/Mountain";
 import Water from "./atoms/Water";
 import OffBoardRevenue from "./atoms/OffBoardRevenue";
@@ -97,6 +98,14 @@ const Atoms = () => {
         <Hex color="offboard" />
       ]
     },
+        {
+          name: "Border",
+          examples: [
+              <Border color="black" />,
+              <Border color="water" />,
+            <Border color="mountain" />
+            ]
+            },
     {
       name: "Mountain",
       examples: [

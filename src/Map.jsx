@@ -1,5 +1,5 @@
 import React from "react";
-import { color } from "./data";
+import { colors } from "./data";
 import games from "./data/games";
 import * as R from "ramda";
 import util from "./util";
@@ -17,7 +17,7 @@ const Map = ({ match }) => {
   let maxX = util.maxMapX(map.hexes);
   let maxY = util.maxMapY(map.hexes);
   let totalWidth = halfHexWidth * (maxX + 1);
-  let totalHeight = 1.5 * (maxY-1) * edge + 2 * edge;
+  let totalHeight = 1.5 * (maxY - 1) * edge + 2 * edge;
 
   console.log({
     hexWidth,
@@ -42,16 +42,48 @@ const Map = ({ match }) => {
     return R.map(([x, y]) => {
       return (
         <g transform={`translate(${hexX(x, y)} ${hexY(x, y)})`}>
-          <Hex hex={hex} border={true} />
+          <Hex hex={hex} id={`${util.toAlpha(y)}${x}`} border={true} />
         </g>
       );
     }, hex.hexes || []);
   }, map.hexes);
 
   return (
-    <svg width={totalWidth} height={totalHeight}>
-      {hexes}
-    </svg>
+    <div className="map">
+      <svg
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        width={totalWidth}
+        height={totalHeight}
+      >
+        <defs>
+          <style>
+            @import url("https://fonts.googleapis.com/css?family=Bitter:700");
+          </style>
+          <clipPath id="hexClip">
+            <polygon
+              points="0,-86.6025 75,-43.30125 75,43.30125 0,86.6025 -75,43.30125 -75,-43.30125"
+              fill="black"
+              stroke="none"
+            />
+          </clipPath>
+        </defs>
+        {hexes}
+        <text
+          fill={colors["track"]}
+          fontFamily="Bitter"
+          fontWeight="bold"
+          fontSize={game.title.size || 200}
+          alignmentBaseline="central"
+          textAnchor="middle"
+          lengthAdjust="spacingAndGlyphs"
+          x={game.title.x}
+          y={game.title.y}
+        >
+          {game.title.title}
+        </text>
+      </svg>
+    </div>
   );
 };
 

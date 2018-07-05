@@ -13,6 +13,10 @@ body {
   font-family: "Bitter", serif;
 }
 
+.map svg {
+  margin: 0.5in;
+}
+
 h1 {
   text-align: left;
 }
