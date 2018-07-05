@@ -29,23 +29,56 @@ const Atoms = () => {
     {
       name: "City",
       examples: [
-        <City size={1} />,
-        <City size={1} border={true} />,
-        <City size={2} />,
-        <City size={2} border={true} />,
-        <City size={3} />,
-        <City size={3} border={true} />,
-        <City size={4} />,
-        <City size={4} border={true} />
+        [<City size={1} border={true} />, <City size={1} />],
+        [
+          <City size={1} border={true} />,
+          <City size={1} companies={[{ color: "orange", label: "GT" }]} />
+        ],
+        [<City size={2} border={true} />, <City size={2} />],
+        [
+          <City size={2} border={true} />,
+          <City
+            size={2}
+            companies={[
+              { color: "blue", label: "B&O" },
+              { color: "red", label: "PRR" }
+            ]}
+          />
+        ],
+        [<City size={3} border={true} />, <City size={3} />],
+        [
+          <City size={3} border={true} />,
+          <City
+            size={3}
+            companies={[
+              { color: "maroon", label: "B&M" },
+              { color: "black", label: "NYC" },
+              { color: "green", label: "ILC" }
+            ]}
+          />
+        ],
+        [<City size={4} border={true} />, <City size={4} />],
+        [
+          <City size={4} border={true} />,
+          <City
+            size={4}
+            companies={[
+              { color: "maroon", label: "B&M" },
+              { color: "black", label: "NYC" },
+              { color: "cyan", textColor: "black", label: "C&O" },
+              { color: "yellow", textColor: "black", label: "Erie" }
+            ]}
+          />
+        ]
       ]
     },
     {
       name: "Town",
-      examples: [<Town />, <Town border={true} />]
+      examples: [[<Town border={true} />, <Town />]]
     },
     {
       name: "Center Town",
-      examples: [<CenterTown />, <CenterTown border={true} />]
+      examples: [[<CenterTown border={true} />, <CenterTown />]]
     },
     {
       name: "Label",
@@ -59,52 +92,80 @@ const Atoms = () => {
     {
       name: "Track",
       examples: [
-        <Track type="city" />,
-        <Track type="city" gauge="narrow" />,
-        <Track type="city" gauge="double" />,
-        <Track type="city" border={true} />,
-        <Track type="stop" />,
-        <Track type="stop" gauge="narrow" />,
-        <Track type="stop" gauge="double" />,
-        <Track type="stop" border={true} />,
-        <Track type="straight" />,
-        <Track type="straight" gauge="narrow" />,
-        <Track type="straight" gauge="double" />,
-        <Track type="straight" border={true} />,
-        <Track type="gentle" />,
-        <Track type="gentle" gauge="narrow" />,
-        <Track type="gentle" gauge="double" />,
-        <Track type="gentle" border={true} />,
-        <Track type="sharp" />,
-        <Track type="sharp" gauge="narrow" />,
-        <Track type="sharp" gauge="double" />,
-        <Track type="sharp" border={true} />,
-        <Track type="bent" />,
-        <Track type="bent" gauge="narrow" />,
-        <Track type="bent" gauge="double" />,
-        <Track type="bent" border={true} />
+        [<Track type="city" border={true} />, <Track type="city" />],
+        [
+          <Track type="city" border={true} />,
+          <Track type="city" gauge="narrow" />
+        ],
+        [
+          <Track type="city" border={true} />,
+          <Track type="city" gauge="double" />
+        ],
+        [<Track type="stop" border={true} />, <Track type="stop" />],
+        [
+          <Track type="stop" border={true} />,
+          <Track type="stop" gauge="narrow" />
+        ],
+        [
+          <Track type="stop" border={true} />,
+          <Track type="stop" gauge="double" />
+        ],
+        [<Track type="straight" border={true} />, <Track type="straight" />],
+        [
+          <Track type="straight" border={true} />,
+          <Track type="straight" gauge="narrow" />
+        ],
+        [
+          <Track type="straight" border={true} />,
+          <Track type="straight" gauge="double" />
+        ],
+        [<Track type="gentle" border={true} />, <Track type="gentle" />],
+        [
+          <Track type="gentle" border={true} />,
+          <Track type="gentle" gauge="narrow" />
+        ],
+        [
+          <Track type="gentle" border={true} />,
+          <Track type="gentle" gauge="double" />
+        ],
+        [<Track type="sharp" border={true} />, <Track type="sharp" />],
+        [
+          <Track type="sharp" border={true} />,
+          <Track type="sharp" gauge="narrow" />
+        ],
+        [
+          <Track type="sharp" border={true} />,
+          <Track type="sharp" gauge="double" />
+        ],
+        [<Track type="bent" border={true} />, <Track type="bent" />],
+        [
+          <Track type="bent" border={true} />,
+          <Track type="bent" gauge="narrow" />
+        ],
+        [
+          <Track type="bent" border={true} />,
+          <Track type="bent" gauge="double" />
+        ]
       ]
     },
     {
       name: "Hex",
       examples: [
-        <Hex border={true} />,
-        <Hex color="plain" />,
-        <Hex color="yellow" />,
-        <Hex color="green" />,
-        <Hex color="brown" />,
-        <Hex color="gray" />,
-        <Hex color="water" />,
-        <Hex color="offboard" />
+        [<Hex color="plain" />, <Hex border={true} />],
+        [<Hex color="yellow" />, <Hex border={true} />],
+        [<Hex color="green" />, <Hex border={true} />],
+        [<Hex color="brown" />, <Hex border={true} />],
+        [<Hex color="gray" />, <Hex border={true} />],
+        [<Hex color="water" />, <Hex border={true} />],
+        [<Hex color="offboard" />, <Hex border={true} />]
       ]
     },
     {
       name: "Border",
       examples: [
-        <Border color="black" />,
-        <Border color="water" />,
-        <Border color="mountain" />,
-        <Border border={true} />
+        [<Border border={true} />, <Border color="black" />],
+        [<Border border={true} />, <Border color="water" />],
+        [<Border border={true} />, <Border color="mountain" />]
       ]
     },
     {
@@ -144,7 +205,7 @@ const Atoms = () => {
     },
     {
       name: "OffBoard Track",
-      examples: [<OffBoardTrack />, <OffBoardTrack border={true} />]
+      examples: [[<OffBoardTrack border={true} />, <OffBoardTrack />]]
     }
   ];
 
@@ -153,6 +214,19 @@ const Atoms = () => {
       example => (
         <dd>
           <svg width="200" height="200" viewBox="-100 -100 200 200">
+            <defs>
+              <style>
+                @import
+                url("https://fonts.googleapis.com/css?family=Bitter:700");
+              </style>
+              <clipPath id="hexClip">
+                <polygon
+                  points="0,-86.6025 75,-43.30125 75,43.30125 0,86.6025 -75,43.30125 -75,-43.30125"
+                  fill="black"
+                  stroke="none"
+                />
+              </clipPath>
+            </defs>
             {example}
           </svg>
         </dd>

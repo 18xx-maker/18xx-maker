@@ -19,16 +19,6 @@ const Map = ({ match }) => {
   let totalWidth = halfHexWidth * (maxX + 1);
   let totalHeight = 1.5 * (maxY - 1) * edge + 2 * edge;
 
-  console.log({
-    hexWidth,
-    edge,
-    halfHexWidth,
-    maxX,
-    maxY,
-    totalWidth,
-    totalHeight
-  });
-
   let hexX = (x, y) => {
     return x * halfHexWidth;
   };

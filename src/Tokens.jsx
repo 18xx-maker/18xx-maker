@@ -38,7 +38,7 @@ const Tokens = ({ match }) => {
   let extras = R.addIndex(R.map)((label, index) => {
     return (
       <g transform={`translate(${60 * index + 30} 0)`}>
-        <Token label={label} color={colors["track"]} inverse={true} />
+        <Token label={label} color={"black"} inverse={true} />
       </g>
     );
   }, game.tokens);

@@ -19,7 +19,7 @@ const Value = ({value}) => {
         fontWeight="bold"
         fontSize={size}
         fill={colors["track"]}
-        alignmentBaseline="middle"
+        alignmentBaseline="central"
         textAnchor="middle"
         x="0"
         y="0">{value}</text>
