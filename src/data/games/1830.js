@@ -92,7 +92,6 @@ const game = {
       abbrev: "C&O",
       tokens: ["Free", "$40", "$100", "$100"],
       color: "cyan",
-      textColor: "black",
       shares: [
         {
           quantity: 1,
@@ -112,7 +111,6 @@ const game = {
       abbrev: "Erie",
       tokens: ["Free", "$40", "$100", "$100"],
       color: "yellow",
-      textColor: "black",
       shares: [
         {
           quantity: 1,
@@ -696,8 +694,7 @@ const game = {
             companies: [
               {
                 label: "C&O",
-                color: "cyan",
-                textColor: "black"
+                color: "cyan"
               }
             ]
           }
@@ -838,8 +835,7 @@ const game = {
             companies: [
               {
                 label: "Erie",
-                color: "yellow",
-                textColor: "black"
+                color: "yellow"
               }
             ]
           },
@@ -850,8 +846,7 @@ const game = {
             companies: [
               {
                 label: "Erie",
-                color: "yellow",
-                textColor: "black"
+                color: "yellow"
               }
             ]
           }
