@@ -358,12 +358,10 @@ const game = {
       notes: [
         {
           color: "yellow",
-          textColor: "black",
           note: "D trains available after first 6 is bought"
         },
         {
           color: "yellow",
-          textColor: "black",
           note: "4, 5, and 6 can be exchanged for a D train"
         }
       ]
@@ -469,7 +467,6 @@ const game = {
     limits: [
       {
         color: "yellow",
-        textColor: "black",
         description: "Certificates no longer count towards the share limit",
         value: 60
       },

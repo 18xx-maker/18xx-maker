@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "./data";
+import { colors, textColor } from "./data";
 
 const Pool = ({ label, notes }) => {
   let notesNode = null;
@@ -9,7 +9,7 @@ const Pool = ({ label, notes }) => {
       <ul class="notes">
         {notes.map(n => {
           let backgroundColor = colors[n.color || "orange"];
-          let color = colors[n.textColor || "white"];
+          let color = textColor(n.color || "orange");
 
           return (
             <li>
