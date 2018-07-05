@@ -617,7 +617,7 @@ ul.notes li span {
 
 .cutlines {
   position: relative;
-  overflow: auto;
+  overflow: hidden;
   float: left;
   padding: 0.25in;
   page-break-inside: avoid;
