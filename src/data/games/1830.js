@@ -9,6 +9,9 @@ const game = {
     x: 5,
     y: 190
   },
+  background: {
+    color: "green"
+  },
   tokens: ["Round"],
   companies: [
     {

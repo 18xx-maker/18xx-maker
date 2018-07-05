@@ -7,6 +7,7 @@ import SVG from "./Svg";
 import Tiles from "./Tiles";
 import Atoms from "./Atoms";
 
+import Background from "./Background";
 import Charters from "./Charters";
 import Map from "./Map";
 import Home from "./Home";
@@ -30,6 +31,7 @@ class App extends Component {
             <Route path="/tiles/atoms" component={Atoms} />
             <Route exact path="/:game" component={Game} />
             <Route path="/:game/map" component={Map} />
+            <Route path="/:game/background" component={Background} />
             <Route path="/:game/tiles" component={SVG} />
             <Route path="/:game/trains" component={Trains} />
             <Route path="/:game/tokens" component={Tokens} />
