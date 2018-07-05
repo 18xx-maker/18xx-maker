@@ -78,7 +78,7 @@ const HexTile = ({ hex, id, border }) => {
   let offBoardTracks = R.map(makeOffBoardTrack, hex.offBoardTrack || []);
 
   let cities = R.map(city => {
-    let rotate = city.rotate === undefined ? 0 : city.rotate;
+    let rotate = city.rotate === undefined ? 90 : city.rotate;
     let translate = `${city.x || 0} ${city.y || 0}`;
     let home = null;
     if (city.home) {

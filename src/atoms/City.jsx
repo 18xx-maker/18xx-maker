@@ -63,7 +63,7 @@ const City = ({ size, border }) => {
     if (border) {
       return (
         <polygon
-          points="0,-22 25,22 -25,22"
+          points="0,-29 25,15 -25,15"
           fill={colors["border"]}
           stroke={colors["border"]}
           strokeWidth="56"
@@ -75,7 +75,7 @@ const City = ({ size, border }) => {
       return (
         <g>
           <polygon
-            points="-21,-35, 21,-35 45,6 25,47 -25,47 -45,6"
+            points="-21,-42, 21,-42 45,-1 25,40 -25,40 -45,-1"
             fill={colors["border"]}
             stroke={colors["track"]}
             strokeWidth="2"
@@ -85,7 +85,7 @@ const City = ({ size, border }) => {
             stroke={colors["track"]}
             strokeWidth="2"
             cx="0"
-            cy="-22"
+            cy="-29"
             r="25"
           />
           <circle
@@ -93,7 +93,7 @@ const City = ({ size, border }) => {
             stroke={colors["track"]}
             strokeWidth="2"
             cx="-25"
-            cy="22"
+            cy="15"
             r="25"
           />
           <circle
@@ -101,7 +101,7 @@ const City = ({ size, border }) => {
             stroke={colors["track"]}
             strokeWidth="2"
             cx="25"
-            cy="22"
+            cy="15"
             r="25"
           />
         </g>
