@@ -1,9 +1,9 @@
 import React from "react";
-import { colors, companies } from "./data";
+import { colors, companies, textColor } from "./data";
 import * as R from "ramda";
 import Token from "./Token";
 
-const Share = ({ shares, percent, label, name, abbrev, color, textColor }) => {
+const Share = ({ shares, percent, label, name, abbrev, color }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
   return (
@@ -13,7 +13,7 @@ const Share = ({ shares, percent, label, name, abbrev, color, textColor }) => {
         <div class="share__percent">{percent}%</div>
         <div class="share__token">
           <svg>
-            <Token label={abbrev} color={companies[color]} labelColor={companies[textColor]} width={25} />
+            <Token label={abbrev} color={companies[color]} labelColor={textColor(color)} width={25} />
           </svg>
         </div>
         <div class="share__hr" style={{ backgroundColor: companies[color] }} />
