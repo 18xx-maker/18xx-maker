@@ -1,4 +1,5 @@
 import * as R from "ramda";
+import { alpha } from "./data";
 
 const HEX_RATIO = 0.57735;
 
@@ -100,6 +101,18 @@ const maxMapY = R.compose(R.reduce(R.max, 1),
                           R.map(R.nth(1)),
                           R.chain(R.prop("hexes")))
 
+const toAlpha = num => {
+  if(num <= 0) {
+    return "";
+  } else if(num <= 26) {
+    return R.nth(num - 1, alpha);
+  } else {
+    let remainder = num % 26;
+    let quotient = Math.floor(num / 26);
+    return `${toAlpha(quotient)}${R.nth(remainder - 1, alpha)}`;
+  }
+}
+
 export default {
   HEX_RATIO,
   hexData,
@@ -110,5 +123,6 @@ export default {
   fillArray,
   marketColor,
   maxMapX,
-  maxMapY
+  maxMapY,
+  toAlpha
 };

@@ -104,3 +104,24 @@ describe("maxMapY", () => {
     ).toEqual(7);
   });
 });
+
+describe("toAlpha", () => {
+  it("should handle negatives", () => {
+    expect(util.toAlpha(-1)).toEqual("");
+    expect(util.toAlpha(-27)).toEqual("");
+  });
+
+  it("should handle zero", () => {
+    expect(util.toAlpha(0)).toEqual("");
+  });
+
+  it("should handle low numbers", () => {
+    expect(util.toAlpha(1)).toEqual("A");
+    expect(util.toAlpha(4)).toEqual("D");
+  });
+
+  it("should handle slightly larger numbers", () => {
+    expect(util.toAlpha(27)).toEqual("AA");
+    expect(util.toAlpha(30)).toEqual("AD");
+  });
+});

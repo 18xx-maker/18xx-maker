@@ -17,6 +17,8 @@ const colors = {
   white: "rgb(255,255,255)"
 };
 
+const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
 const textColor = color => {
   switch (color) {
     case "yellow":
@@ -26,4 +28,4 @@ const textColor = color => {
   }
 };
 
-export { colors, textColor };
+export { alpha, colors, textColor };

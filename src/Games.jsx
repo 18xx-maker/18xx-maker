@@ -6,7 +6,7 @@ import * as R from "ramda";
 const Games = () => {
   let gameNodes = R.map(game => {
     return (
-      <div class="game" id={`game-${game}`}>
+      <div className="game" key={`game-${game}`} id={`game-${game}`}>
         <h2>{game}</h2>
         <ul>
           <li>
