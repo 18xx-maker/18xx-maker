@@ -22,7 +22,6 @@ const Shares = ({ match }) => {
                 abbrev={company.abbrev}
                 label={share.label}
                 color={company.color}
-                textColor={company.textColor}
               />
             ),
             shares

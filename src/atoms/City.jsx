@@ -1,5 +1,5 @@
 import React from "react";
-import { colors, companies as companyColors } from "../data";
+import { colors, textColor, companies as companyColors } from "../data";
 
 const City = ({ size, companies, border }) => {
   let companyColor = num =>
@@ -12,8 +12,8 @@ const City = ({ size, companies, border }) => {
   let companyTextColor = num =>
     (companies &&
       companies[num] &&
-      companies[num].textColor &&
-      colors[companies[num].textColor]) ||
+      companies[num].color &&
+     textColor(companies[num].color)) ||
     colors["white"];
 
   let companyLabel = num =>
