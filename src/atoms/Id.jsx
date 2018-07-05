@@ -19,8 +19,8 @@ const Id = ({ id, width, x, y }) => {
       stroke="none"
       strokeLinecap="round"
       strokeLinejoin="bevel"
-      alignmentBaseline="middle"
-      textAnchor="middle"
+      alignmentBaseline="baseline"
+      textAnchor="start"
       fontSize={size}
       x="0"
       y="0"

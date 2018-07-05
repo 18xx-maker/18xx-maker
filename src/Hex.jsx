@@ -218,7 +218,7 @@ const HexTile = ({ hex, id, border }) => {
       <Hex color={hex.color} />
 
       {id && (
-        <g transform="translate(-64 -35) rotate(90)">
+        <g transform="translate(-70 -40) rotate(90)">
           <Id id={id} />
         </g>
       )}
