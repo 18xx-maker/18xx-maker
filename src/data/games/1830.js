@@ -179,7 +179,7 @@ const game = {
       ]
     },
     {
-      name: "3",
+      name: "3/5",
       quantity: 5,
       price: "$180",
       color: "green",
@@ -191,7 +191,7 @@ const game = {
       ]
     },
     {
-      name: "4",
+      name: "4+2",
       quantity: 4,
       price: "$300",
       color: "green",
@@ -203,7 +203,7 @@ const game = {
       ]
     },
     {
-      name: "5",
+      name: "5E",
       quantity: 3,
       price: "$450",
       color: "brown",
