@@ -1,5 +1,5 @@
 import React from "react";
-import { colors, companies } from "./data";
+import { colors, textColor, companies } from "./data";
 import * as R from "ramda";
 import Token from "./Token";
 import Phase from "./Phase";
@@ -9,7 +9,7 @@ const Charter = ({ name, abbrev, color, tokens, phases, turns }) => {
     return (
       <svg>
         <g transform={`translate(25 25)`}>
-          <Token label={abbrev} color={companies[color]} width={25} inverse={true} />
+          <Token label={abbrev} color={companies[color]} labelColor={textColor(color)} width={25} />
           <g transform={`translate(0 39)`}>
             <text fontSize="10" textAnchor="middle">{token}</text>
           </g>
