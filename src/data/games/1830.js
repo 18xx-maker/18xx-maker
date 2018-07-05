@@ -1,8 +1,13 @@
 const game = {
   title: {
     title: "1830",
-    x: 320,
-    y: 130
+    x: 0,
+    y: 0
+  },
+  designer: {
+    designer: "Francis Tresham",
+    x: 5,
+    y: 190
   },
   tokens: ["Round"],
   companies: [
@@ -536,26 +541,33 @@ const game = {
     hexes: [
       {
         color: "offboard",
-        offBoardTrack: [{
-          side: 4
-        }],
-        hexes: [[1,9]]
+        offBoardTrack: [
+          {
+            side: 4
+          }
+        ],
+        hexes: [[1, 9]]
       },
       {
         color: "gray",
         cities: [{}],
-        values: [{
-          x: -30,
-          y: -40,
-          value: 20,
-          rotate: 0
-        }],
-        track: [{
-          start: 4
-        },{
-          start: 5
-        }],
-        hexes: [[2,4]]
+        values: [
+          {
+            x: -30,
+            y: -40,
+            value: 20,
+            rotate: 0
+          }
+        ],
+        track: [
+          {
+            start: 4
+          },
+          {
+            start: 5
+          }
+        ],
+        hexes: [[2, 4]]
       },
       {
         color: "offboard",
@@ -567,22 +579,29 @@ const game = {
         offBoardRevenue: {
           x: -25,
           y: 30,
-          revenues: [{
-            color: "yellow",
-            cost: "40"
-          },{
-            color: "brown",
-            cost: "70"
-          }]
+          revenues: [
+            {
+              color: "yellow",
+              cost: "40"
+            },
+            {
+              color: "brown",
+              cost: "70"
+            }
+          ]
         },
-        offBoardTrack: [{
-          side: 3
-        },{
-          side: 4
-        },{
-          side: 5
-        }],
-        hexes: [[2,6]]
+        offBoardTrack: [
+          {
+            side: 3
+          },
+          {
+            side: 4
+          },
+          {
+            side: 5
+          }
+        ],
+        hexes: [[2, 6]]
       },
       {
         color: "offboard",
@@ -594,114 +613,142 @@ const game = {
         offBoardRevenue: {
           x: -25,
           y: 30,
-          revenues: [{
-            color: "yellow",
-            cost: "30"
-          },{
-            color: "brown",
-            cost: "60"
-          }]
+          revenues: [
+            {
+              color: "yellow",
+              cost: "30"
+            },
+            {
+              color: "brown",
+              cost: "60"
+            }
+          ]
         },
-        offBoardTrack: [{
-          side: 3
-        },{
-          side: 4
-        }],
-        hexes: [[2,10]]
+        offBoardTrack: [
+          {
+            side: 3
+          },
+          {
+            side: 4
+          }
+        ],
+        hexes: [[2, 10]]
       },
       {
         color: "plain",
-        cities: [{
-          x: -20,
-          y: -30
-        }],
+        cities: [
+          {
+            x: -15,
+            y: -25
+          }
+        ],
         water: {
-          x: 20,
-          y: 30,
+          x: 15,
+          y: 25,
           cost: "$80",
-          size: "medium"
+          size: "small"
         },
-        hexes: [[4,6],[14,10],[22,6]]
+        hexes: [[4, 6], [14, 10], [22, 6]]
       },
       {
         color: "yellow",
         water: {
           y: -30,
           cost: "$80",
-          size: "medium"
+          size: "small"
         },
         label: {
           label: "OO",
           y: 50,
           rotate: 0
         },
-        cities: [{
-          x: -45,
-          y: 20
-        },{
-          x: 45,
-          y: 20
-        }],
-        hexes: [[5,5],[10,4]]
+        cities: [
+          {
+            x: -45,
+            y: 20
+          },
+          {
+            x: 45,
+            y: 20
+          }
+        ],
+        hexes: [[5, 5], [10, 4]]
       },
       {
         color: "gray",
-        track: [{
-          start: 5,
-          end: 6
-        }],
-        values: [{
-          value: 30,
-          y: -20,
-          rotate: 0
-        }],
-        cities: [{
-          y: 40,
-          rotate: 0,
-          home: "C&O"
-        }],
-        hexes: [[6,6]]
+        track: [
+          {
+            start: 5,
+            end: 6
+          }
+        ],
+        values: [
+          {
+            value: 30,
+            y: -20,
+            rotate: 0
+          }
+        ],
+        cities: [
+          {
+            y: 40,
+            rotate: 0,
+            home: "C&O"
+          }
+        ],
+        hexes: [[6, 6]]
       },
       {
         color: "plain",
         centerTowns: [{}],
-        borders: [{
-          side: 5,
-          color: "water"
-        }],
-        hexes: [[7,5]]
+        borders: [
+          {
+            side: 5,
+            color: "water"
+          }
+        ],
+        hexes: [[7, 5]]
       },
       {
         color: "plain",
-        borders: [{
-          side: 2,
-          color: "water"
-        }],
-        hexes: [[8,6]]
+        borders: [
+          {
+            side: 2,
+            color: "water"
+          }
+        ],
+        hexes: [[8, 6]]
       },
       {
         color: "offboard",
-        offBoardTrack: [{
-          side: 5
-        }],
+        offBoardTrack: [
+          {
+            side: 5
+          }
+        ],
         offBoardRevenue: {
-          revenues: [{
-            color: "yellow",
-            cost: "30"
-          },{
-            color: "brown",
-            cost: "50"
-          }]
+          revenues: [
+            {
+              color: "yellow",
+              cost: "30"
+            },
+            {
+              color: "brown",
+              cost: "50"
+            }
+          ]
         },
-        hexes: [[9,1]]
+        hexes: [[9, 1]]
       },
       {
         color: "gray",
-        track: [{
-          start: 2,
-          end: 3
-        }],
-        hexes: [[9,5]]
+        track: [
+          {
+            start: 2,
+            end: 3
+          }
+        ],
+        hexes: [[9, 5]]
       },
       {
         color: "offboard",
@@ -709,28 +756,35 @@ const game = {
           label: "Canadian West",
           rotate: 0
         },
-        offBoardTrack: [{
-          side: 5
-        },{
-          side: 6
-        }],
-        hexes: [[11,1]]
+        offBoardTrack: [
+          {
+            side: 5
+          },
+          {
+            side: 6
+          }
+        ],
+        hexes: [[11, 1]]
       },
       {
         color: "plain",
-        borders: [{
-          side: 5,
-          color: "water"
-        }],
-        hexes: [[11,3]]
+        borders: [
+          {
+            side: 5,
+            color: "water"
+          }
+        ],
+        hexes: [[11, 3]]
       },
       {
         color: "plain",
-        borders: [{
-          side: 6,
-          color: "water"
-        }],
-        hexes: [[13,3]]
+        borders: [
+          {
+            side: 6,
+            color: "water"
+          }
+        ],
+        hexes: [[13, 3]]
       },
       {
         color: "offboard",
@@ -740,100 +794,153 @@ const game = {
           rotate: 0
         },
         offBoardRevenue: {
-          revenues: [{
-            color: "yellow",
-            cost: "30"
-          },{
-            color: "brown",
-            cost: "40"
-          }]
+          revenues: [
+            {
+              color: "yellow",
+              cost: "30"
+            },
+            {
+              color: "brown",
+              cost: "40"
+            }
+          ]
         },
-        offBoardTrack: [{
-          side: 2
-        },{
-          side: 3
-        }],
-        hexes: [[13,11]]
+        offBoardTrack: [
+          {
+            side: 2
+          },
+          {
+            side: 3
+          }
+        ],
+        hexes: [[13, 11]]
       },
       {
         color: "yellow",
-        label: {
-          label: "Erie",
-          rotate: 0,
-          y: -30
-        },
-        cities: [{
-          x: -40,
-          y: 10
-        },{
-          x: 40,
-          y: 10
-        }],
-        hexes: [[11,5]]
+        labels: [
+          {
+            label: "Erie",
+            rotate: 0,
+            y: -30
+          },
+          {
+            label: "OO",
+            y: 50,
+            rotate: 0
+          }
+        ],
+        cities: [
+          {
+            x: -40,
+            y: 10
+          },
+          {
+            x: 40,
+            y: 10
+          }
+        ],
+        hexes: [[11, 5]]
       },
       {
         color: "plain",
-        borders: [{
-          color: "water",
-          side: 2
-        },{
-          color: "water",
-          side: 3
-        }],
-        hexes: [[12,4]]
+        borders: [
+          {
+            color: "water",
+            side: 2
+          },
+          {
+            color: "water",
+            side: 3
+          }
+        ],
+        hexes: [[12, 4]]
       },
       {
         color: "gray",
-        cities: [{
-          rotate: 0,
-          home: "PRR"
-        }],
-        track: [{
-          type: "straight",
-          side: 1
-        },{
-          type: "bent",
-          side: 1
-        }],
-        hexes: [[12,8]]
+        values: [
+          {
+            value: 10,
+            rotate: 0,
+            y: -50
+          }
+        ],
+        cities: [
+          {
+            rotate: 0,
+            home: "PRR"
+          }
+        ],
+        track: [
+          {
+            type: "straight",
+            side: 1
+          },
+          {
+            type: "bent",
+            side: 1
+          }
+        ],
+        hexes: [[12, 8]]
+      },
+      {
+        color: "plain",
+        labels: [
+          {
+            label: "B&O",
+            rotate: 0
+          }
+        ],
+        hexes: [[13, 9]]
       },
       {
         color: "gray",
         cities: [{}],
-        values: [{
-          value: 20,
-          y: -50,
-          rotate: 0
-        }],
-        track: [{
-          type: "city",
-          side: 1
-        },{
-          type: "city",
-          side: 4
-        },{
-          type: "city",
-          side: 6
-        }],
-        hexes: [[14,4]]
+        values: [
+          {
+            value: 20,
+            y: -50,
+            rotate: 0
+          }
+        ],
+        track: [
+          {
+            type: "city",
+            side: 1
+          },
+          {
+            type: "city",
+            side: 4
+          },
+          {
+            type: "city",
+            side: 6
+          }
+        ],
+        hexes: [[14, 4]]
       },
       {
         color: "gray",
-        values: [{
-          value: 10,
-          x: 20,
-          rotate: 0
-        }],
-        towns: [{
-          x: -8,
-          y: -19,
-          rotate: 60
-        }],
-        track: [{
-          type: "gentle",
-          side: 1
-        }],
-        hexes: [[15,3]]
+        values: [
+          {
+            value: 10,
+            x: 20,
+            rotate: 0
+          }
+        ],
+        towns: [
+          {
+            x: -8,
+            y: -19,
+            rotate: 60
+          }
+        ],
+        track: [
+          {
+            type: "gentle",
+            side: 1
+          }
+        ],
+        hexes: [[15, 3]]
       },
       {
         color: "plain",
@@ -847,50 +954,71 @@ const game = {
           rotate: 0,
           y: -30
         },
-        hexes: [[15,7]]
+        hexes: [[15, 7]]
       },
       {
         color: "yellow",
-        cities: [{
-          rotate: 0,
-          home: "B&O"
-        }],
-        values: [{
-          value: 30,
-          rotate: 0,
-          y: -50
-        }],
-        track: [{
-          type: "city",
-          side: 4
-        },{
-          type: "city",
-          side: 6
-        }],
-        hexes: [[15,9]]
+        labels: [
+          {
+            label: "B",
+            rotate: 0,
+            y: -45,
+            x: -25
+          }
+        ],
+        values: [
+          {
+            value: 30,
+            rotate: 0,
+            x: -50
+          }
+        ],
+        cities: [
+          {
+            rotate: 0,
+            home: "B&O"
+          }
+        ],
+        track: [
+          {
+            type: "city",
+            side: 4
+          },
+          {
+            type: "city",
+            side: 6
+          }
+        ],
+        hexes: [[15, 9]]
       },
       {
         color: "gray",
         cities: [{}],
-        values: [{
-          value: 20,
-          rotate: 0,
-          x: 50
-        }],
-        track: [{
-          type: "city",
-          side: 2
-        }],
-        hexes: [[15,11]]
+        values: [
+          {
+            value: 20,
+            rotate: 0,
+            x: 50
+          }
+        ],
+        track: [
+          {
+            type: "city",
+            side: 2
+          }
+        ],
+        hexes: [[15, 11]]
       },
       {
         color: "plain",
         cities: [{}],
-        borders: [{
-          side: 5,
-          color: "water"
-        }],
-        hexes: [[16,2]]
+        borders: [
+          {
+            side: 5,
+            color: "water"
+          }
+        ],
+        hexes: [[16, 2]]
       },
       {
         color: "plain",
@@ -899,25 +1027,29 @@ const game = {
           size: "medium",
           y: -25
         },
-        cities: [{
-          y: 25,
-          x: 30
-        }],
+        cities: [
+          {
+            y: 25,
+            x: 30
+          }
+        ],
         label: {
           label: "D&H",
           rotate: 0,
           y: 30,
           x: -30
         },
-        hexes: [[16,6]]
+        hexes: [[16, 6]]
       },
       {
         color: "gray",
-        track: [{
-          type: "sharp",
-          side: 5
-        }],
-        hexes: [[17,1]]
+        track: [
+          {
+            type: "sharp",
+            side: 5
+          }
+        ],
+        hexes: [[17, 1]]
       },
       {
         color: "plain",
@@ -925,11 +1057,13 @@ const game = {
           cost: "$120",
           size: "medium"
         },
-        borders: [{
-          side: 2,
-          color: "water"
-        }],
-        hexes: [[17,3]]
+        borders: [
+          {
+            side: 2,
+            color: "water"
+          }
+        ],
+        hexes: [[17, 3]]
       },
       {
         color: "plain",
@@ -937,98 +1071,142 @@ const game = {
           rotate: 0,
           label: "M&H"
         },
-        hexes: [[18,4]]
+        hexes: [[18, 4]]
       },
       {
         color: "yellow",
-        label: {
-          label: "C&A",
-          rotate: 0,
-          y: -30
-        },
-        cities: [{
-          x: -40,
-          y: 10
-        },{
-          x: 40,
-          y: 10
-        }],
-        hexes: [[18,8]]
+        labels: [
+          {
+            label: "C&A",
+            rotate: 0,
+            y: -30
+          },
+          {
+            label: "OO",
+            y: 50,
+            rotate: 0
+          }
+        ],
+        cities: [
+          {
+            x: -40,
+            y: 10
+          },
+          {
+            x: 40,
+            y: 10
+          }
+        ],
+        hexes: [[18, 8]]
       },
       {
         color: "gray",
-        track: [{
-          start: 5,
-          end: 6
-        }],
-        values: [{
-          value: 40,
-          y: -20,
-          rotate: 0
-        }],
-        cities: [{
-          y: 40,
-          rotate: 0,
-          home: "CPR"
-        }],
-        hexes: [[19,1]]
+        track: [
+          {
+            start: 5,
+            end: 6
+          }
+        ],
+        values: [
+          {
+            value: 40,
+            y: -20,
+            rotate: 0
+          }
+        ],
+        cities: [
+          {
+            y: 40,
+            rotate: 0,
+            home: "CPR"
+          }
+        ],
+        hexes: [[19, 1]]
       },
       {
         color: "plain",
-        cities: [{
-          rotate: 0,
-          home: "NYC"
-        }],
-        hexes: [[19,5]]
+        cities: [
+          {
+            rotate: 0,
+            home: "NYC"
+          }
+        ],
+        hexes: [[19, 5]]
       },
       {
         color: "yellow",
-        values: [{
-          x: -30,
-          y: -30,
-          rotate: 0,
-          value: 40
-        }],
-        cities: [{
-          x: 30,
-          y: -30,
-          rotate: 0,
-          home: "NYNH"
-        },{
-          x: -30,
-          y: 30,
-        }],
+        values: [
+          {
+            y: -63,
+            rotate: 0,
+            value: 40
+          },
+          {
+            y: 63,
+            rotate: 0,
+            value: 40
+          }
+        ],
+        cities: [
+          {
+            x: 30,
+            y: -30,
+            rotate: 0,
+            home: "NYNH"
+          },
+          {
+            x: -30,
+            y: 30
+          }
+        ],
+        labels: [
+          {
+            label: "NY",
+            rotate: 0,
+            y: -20,
+            x: -25
+          }
+        ],
         water: {
           x: 35,
           y: 25,
           cost: "$80",
-          size: "medium"
+          size: "small"
         },
-        track: [{
-          type: "stop",
-          side: 3
-        },{
-          type: "stop",
-          side: 6
-        }],
-        hexes: [[19,7]]
+        track: [
+          {
+            type: "stop",
+            side: 3
+          },
+          {
+            type: "stop",
+            side: 6
+          }
+        ],
+        hexes: [[19, 7]]
       },
       {
         color: "gray",
-        track: [{
-          type: "sharp",
-          side: 1
-        }],
-        values: [{
-          value: 10,
-          rotate: 0
-        }],
-        towns: [{
-          x: -38,
-          y: -20,
-          rotate: 33
-        }],
-        hexes: [[19,9],[24,6]]
+        track: [
+          {
+            type: "sharp",
+            side: 1
+          }
+        ],
+        values: [
+          {
+            value: 10,
+            rotate: 0
+          }
+        ],
+        towns: [
+          {
+            x: -38,
+            y: -20,
+            rotate: 33
+          }
+        ],
+        hexes: [[19, 9], [24, 6]]
       },
       {
         color: "plain",
@@ -1038,27 +1216,42 @@ const game = {
           rotate: 0
         },
         centerTowns: [{}],
-        hexes: [[20,2]]
+        hexes: [[20, 2]]
       },
       {
         color: "yellow",
-        cities: [{
-          rotate: 0,
-          home: "B&M"
-        }],
-        values: [{
-          value: 30,
-          rotate: 0,
-          x: -50
-        }],
-        track: [{
-          type: "city",
-          side: 3
-        },{
-          type: "city",
-          side: 5
-        }],
-        hexes: [[23,5]]
+        labels: [
+          {
+            label: "B",
+            rotate: 0,
+            y: -45,
+            x: -25
+          }
+        ],
+        cities: [
+          {
+            rotate: 0,
+            home: "B&M"
+          }
+        ],
+        values: [
+          {
+            value: 30,
+            rotate: 0,
+            x: -50
+          }
+        ],
+        track: [
+          {
+            type: "city",
+            side: 3
+          },
+          {
+            type: "city",
+            side: 5
+          }
+        ],
+        hexes: [[23, 5]]
       },
       {
         color: "offboard",
@@ -1070,36 +1263,44 @@ const game = {
         },
         offBoardRevenue: {
           y: 10,
-          revenues: [{
-            cost: "20",
-            color: "yellow"
-          },{
-            cost: "30",
-            color: "brown"
-          }]
+          revenues: [
+            {
+              cost: "20",
+              color: "yellow"
+            },
+            {
+              cost: "30",
+              color: "brown"
+            }
+          ]
         },
-        offBoardTrack: [{
-          side: 1
-        },{
-          side: 6
-        }],
-        hexes: [[24,2]]
+        offBoardTrack: [
+          {
+            side: 1
+          },
+          {
+            side: 6
+          }
+        ],
+        hexes: [[24, 2]]
       },
       {
         color: "gray",
-        track: [{
-          type: "sharp",
-          side: 6
-        }],
-        hexes: [[24,4]]
+        track: [
+          {
+            type: "sharp",
+            side: 6
+          }
+        ],
+        hexes: [[24, 4]]
       },
       {
         color: "plain",
         water: {
           cost: "$80",
-          size: "medium"
+          size: "small"
         },
-        hexes: [[6,4],[17,9],[18,2],[19,3]]
+        hexes: [[6, 4], [17, 9], [18, 2], [19, 3]]
       },
       {
         color: "plain",
@@ -1107,22 +1308,31 @@ const game = {
           cost: "$120",
           size: "medium"
         },
-        hexes: [[10,10],[11,9],[12,10],[13,7],[17,5],[21,3],[21,5],[22,4]]
+        hexes: [
+          [10, 10],
+          [11, 9],
+          [12, 10],
+          [13, 7],
+          [17, 5],
+          [21, 3],
+          [21, 5],
+          [22, 4]
+        ]
       },
       {
         color: "plain",
         centerTowns: [{}],
-        hexes: [[4,4],[10,6]]
+        hexes: [[4, 4], [10, 6]]
       },
       {
         color: "plain",
-        centerTowns: [{x:-30},{x:30}],
-        hexes: [[7,7],[17,7],[20,6]]
+        centerTowns: [{ x: -30 }, { x: 30 }],
+        hexes: [[7, 7], [17, 7], [20, 6]]
       },
       {
         color: "plain",
         cities: [{}],
-        hexes: [[4,8],[10,2],[10,8],[16,8]]
+        hexes: [[4, 8], [10, 2], [10, 8], [16, 8]]
       },
       {
         color: "plain",
@@ -1148,7 +1358,6 @@ const game = {
           [12, 2],
           [12, 6],
           [13, 5],
-          [13, 9],
           [14, 2],
           [14, 6],
           [14, 8],

@@ -13,6 +13,11 @@ body {
   font-family: "Bitter", serif;
 }
 
+.map {
+  position: relative;
+  padding: 0.125in;
+}
+
 .map svg {
   margin: 0.5in;
 }

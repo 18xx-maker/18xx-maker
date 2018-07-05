@@ -140,6 +140,16 @@ const HexTile = ({ hex, id, border }) => {
     );
   }
 
+  let labels = R.map(label => {
+    let translate = `${label.x || 0} ${label.y || 0}`;
+    let rotate = label.rotate === undefined ? 90 : label.rotate;
+    return (
+      <g transform={`translate(${translate}) rotate(${rotate})`}>
+        <Label label={label.label} />
+      </g>
+    );
+  }, hex.labels || []);
+
   let water = null;
   if (hex.water) {
     let translate = `${hex.water.x || 0} ${hex.water.y || 0}`;
@@ -222,6 +232,7 @@ const HexTile = ({ hex, id, border }) => {
       {towns}
       {centerTowns}
       {label}
+      {labels}
       {offBoardRevenue}
       {water}
       {mountain}
