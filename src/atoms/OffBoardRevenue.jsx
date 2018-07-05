@@ -16,7 +16,7 @@ const OffBoardRevenue = ({ revenues }) => {
         width="25"
         height="20"
         x={rx}
-        y="-9"
+        y="-10"
         stroke="none"
         fill={colors[revenue.color]}
       />,
@@ -28,7 +28,7 @@ const OffBoardRevenue = ({ revenues }) => {
         textLength={20}
         lengthAdjust="spacingAndGlyphs"
         x={x}
-        y="0"
+        y="-1"
       >
         {revenue.cost}
       </text>
@@ -41,7 +41,7 @@ const OffBoardRevenue = ({ revenues }) => {
       <rect
         width={totalWidth}
         height="20"
-        y="-9"
+        y="-10"
         x={bx}
         fill="none"
         stroke={colors["black"]}

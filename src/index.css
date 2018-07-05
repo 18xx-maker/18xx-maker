@@ -297,7 +297,6 @@ svg {
   line-height: 0.25in;
   padding: 0 0.1in;
   border-radius: 0.06in;
-  border: solid 1px black;
 }
 
 .share__hr {
@@ -342,7 +341,6 @@ svg {
   line-height: 0.25in;
   padding: 0 0.1in;
   border-radius: 0.06in;
-  border: solid 1px black;
   display: inline-block;
 }
 
