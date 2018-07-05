@@ -179,7 +179,7 @@ const game = {
       ]
     },
     {
-      name: "3/5",
+      name: "3",
       quantity: 5,
       price: "$180",
       color: "green",
@@ -191,7 +191,7 @@ const game = {
       ]
     },
     {
-      name: "4+2",
+      name: "4",
       quantity: 4,
       price: "$300",
       color: "green",
@@ -203,7 +203,7 @@ const game = {
       ]
     },
     {
-      name: "5E",
+      name: "5",
       quantity: 3,
       price: "$450",
       color: "brown",
@@ -229,8 +229,9 @@ const game = {
     {
       name: "D",
       quantity: 6,
-      price: "$800 / $1000",
+      price: "$1100",
       color: "brown",
+      description: "Cost $800 when exchanging a 4, 5, or 6 train",
       info: [
         {
           color: "yellow",
