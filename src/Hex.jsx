@@ -212,12 +212,6 @@ const HexTile = ({ hex, id, border }) => {
     <g>
       <Hex color={hex.color} />
 
-      {id && (
-        <g transform="translate(-70 -40) rotate(90)">
-          <Id id={id} />
-        </g>
-      )}
-
       {cityBorders}
       {townBorders}
       {tracks}
@@ -233,6 +227,12 @@ const HexTile = ({ hex, id, border }) => {
       {mountain}
       {borderBorders}
       {borders}
+
+      {id && (
+        <g transform="translate(-70 -40) rotate(90)">
+          <Id id={id} />
+        </g>
+      )}
 
       {border && <Hex border={true} />}
     </g>
