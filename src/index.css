@@ -214,41 +214,44 @@ svg {
   margin: 0;
 }
 
-.train svg {
-  position: absolute;
-  width: 40mm;
-  height: 100%;
-  right: 0.25in;
-  opacity: 0.25;
-}
-
 .train__name {
   color: #000;
-  transform-origin: 0 0;
-  transform: rotate(-90deg);
 
   box-sizing: border-box;
-  width: calc(43.5mm + 0.25in);
-  height: 0.75in;
-  padding: 0.25in 0.25in 0 0.25in;
-  line-height: 0.5in;
+  width: 100%;
+  height: 0.875in;
+  padding: 0.25in 0.25in 0.125in 0.25in;
+  line-height: 0.4in;
   font-size: 0.4in;
-  text-align: right;
+  text-align: left;
 
   position: absolute;
-  bottom: -0.75in;
+  top: 0;
   left: 0;
 
   font-weight: bold;
-  vertical-align: bottom;
+}
+
+.train__tracks {
+  position: absolute;
+  width: 100%;
+  height: 0.5in;
+  bottom: -0.0625in;
+  left: 0;
+  opacity: 0.25;
+}
+
+.train__tracks svg {
+  height: 100%;
+  width: 100%;
 }
 
 .train__hr {
   position: absolute;
-  top: 0;
-  left: 0.75in;
-  height: 100%;
-  width: 0.0625in;
+  left: 0;
+  top: 0.75in;
+  width: 100%;
+  height: 0.0625in;
 }
 
 .train__price {
@@ -257,14 +260,28 @@ svg {
   right: 0;
   margin: 0.125in;
   padding: 0.125in;
-  height: 0.25in;
-  line-height: 0.25in;
+  height: 0.5in;
+  line-height: 0.5in;
   font-size: 0.25in;
+}
+
+.train__description {
+  position: absolute;
+  height: 0.4375in;
+  width: calc(100% - 1.25in);
+  bottom: 0.625in;
+  margin: 0 0.125in;
+  padding: 0 0.125in 0 0.875in;
+  right: 0;
+  text-align: right;
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: 0.12in;
+  line-height: 0.16in;
 }
 
 .train__notes {
   position: absolute;
-  top: 0.375in;
+  bottom: 0;
   width: calc(100% - 0.25in);
   padding: 0.125in;
   margin: 0.125in;
