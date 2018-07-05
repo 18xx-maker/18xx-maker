@@ -185,7 +185,7 @@ const game = {
       quantity: 5,
       price: "$180",
       color: "green",
-      Info: [
+      info: [
         {
           color: "brown",
           note: "Rusted by 6"
