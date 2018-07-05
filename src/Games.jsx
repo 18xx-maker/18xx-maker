@@ -10,6 +10,9 @@ const Games = () => {
         <h2>{game}</h2>
         <ul>
           <li>
+            <Link to={`/${game}/background`}>Background</Link>
+          </li>
+          <li>
             <Link to={`/${game}/charters`}>Charters</Link>
           </li>
           <li>

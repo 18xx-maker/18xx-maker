@@ -13,6 +13,29 @@ body {
   font-family: "Bitter", serif;
 }
 
+.background {
+  height: 10.25in;
+  width: 8in;
+  overflow: hidden;
+  position: relative;
+}
+
+.background .text {
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -5.25in;
+  left: -4in;
+  transform: rotate(-30deg);
+}
+
+.background span {
+  display: block;
+  float: left;
+  color: #fff;
+  margin: 0 0.0625in 0 0;
+}
+
 .map {
   position: relative;
   padding: 0.125in;
