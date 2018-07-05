@@ -20,25 +20,17 @@ const Train = ({ train }) => {
     info
   );
 
+  let tracks = R.map(i => {
+    return <rect x={i * 18} y="5" width="10" height="40" fill="black" />;
+  }, Array.from(Array(16).keys()));
+
   return (
     <div class="cutlines">
       <div class="card train">
         <div class="train__price">{price}</div>
         <div class="train__tracks">
           <svg>
-            <defs>
-              <pattern
-                id="Tracks"
-                x="0"
-                y="0"
-                width="7.10%"
-                height="100%"
-                viewBox="0,0,20,50"
-              >
-                <rect x="5" y="5" width="10" height="40" fill="black" />
-              </pattern>
-            </defs>
-            <rect fill="url(#Tracks)" width="280" height="50" />
+            {tracks}
             <rect
               fill="black"
               stroke="white"
