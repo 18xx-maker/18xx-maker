@@ -1,7 +1,7 @@
 import React from "react";
 import Token from "./Token";
 import games from "./data/games";
-import { colors, textColor } from "./data";
+import { colors, companies as companyColors, textColor } from "./data";
 import * as R from "ramda";
 
 const Tokens = ({ match }) => {
@@ -13,15 +13,15 @@ const Tokens = ({ match }) => {
     let companyTokens = Array(company.tokens.length + 3).fill(
       <Token
         label={company.abbrev}
-        color={company.color}
-        labelColor={company.textColor}
+        color={companyColors[company.color]}
+        labelColor={textColor(company.color)}
       />
     );
     companyTokens.push(
       <Token
         label={company.abbrev}
-        color={company.color}
-        labelColor={company.textColor}
+        color={companyColors[company.color]}
+        labelColor={textColor(company.color)}
         inverse={true}
       />
     );
