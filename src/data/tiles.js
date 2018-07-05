@@ -1109,6 +1109,480 @@ const tiles = {
         end: 4
       }
     ]
+  },
+
+  // 1846 Tiles
+  "5": {
+    color: "yellow",
+    track: [
+      {
+        type: "city",
+        side: 1
+      },{
+        type: "city",
+        side: 2
+      }
+    ],
+    values: [
+      {
+        x: 50,
+        y: 28,
+        value: 20
+      }
+    ],
+    cities: [{ size: 1 }]
+  },
+  "6": {
+    color: "yellow",
+    track: [
+      {
+        type: "city",
+        side: 1
+      },{
+        type: "city",
+        side: 3
+      }
+    ],
+    values: [
+      {
+        x: 50,
+        y: 28,
+        value: 20
+      }
+    ],
+    cities: [{ size: 1 }]
+  },
+  "17": {
+    color: "green",
+    track: [
+      {
+        type: "gentle",
+        side: 1
+      },
+      {
+        type: "gentle",
+        side: 4
+      }
+    ]
+  },
+  "21": {
+    color: "green",
+    track: [
+      {
+        type: "gentle",
+        side: 1
+      },
+      {
+        type: "sharp",
+        side: 4
+      }
+    ]
+  },
+  "22": {
+    color: "green",
+    track: [
+      {
+        type: "gentle",
+        side: 5
+      },
+      {
+        type: "sharp",
+        side: 3
+      }
+    ]
+  },
+  "30": {
+    color: "green",
+    track: [
+      {
+        type: "gentle",
+        side: 5
+      },
+      {
+        type: "sharp",
+        side: 1
+      }
+    ]
+  },
+  "31": {
+    color: "green",
+    track: [
+      {
+        type: "gentle",
+        side: 1
+      },
+      {
+        type: "sharp",
+        side: 6
+      }
+    ]
+  },
+  "51": {
+    color: "gray",
+    cities: [{
+      size: 2
+    }],
+    values: [
+      {
+        x: 50,
+        y: 28,
+        value: 50
+      }
+    ],
+    track: [
+      {
+        type: "city",
+        side: 1
+      },
+      {
+        type: "city",
+        side: 2
+      },
+      {
+        type: "city",
+        side: 3
+      },
+      {
+        type: "city",
+        side: 5
+      },
+      {
+        type: "city",
+        side: 6
+      }
+    ]
+  },
+  "290": {
+    color: "gray",
+    cities: [{
+      size: 3,
+      rotate: 150
+    }],
+    values: [
+      {
+        x: 58,
+        y: 28,
+        value: 70
+      }
+    ],
+    label: {
+      label: "Z",
+      x: 60,
+      y: -28
+    },
+    track: [
+      {
+        type: "city",
+        side: 1
+      },
+      {
+        type: "city",
+        side: 2
+      },
+      {
+        type: "city",
+        side: 3
+      },
+      {
+        type: "city",
+        side: 4
+      },
+      {
+        type: "city",
+        side: 5
+      }
+    ]
+  },
+  "291": {
+    color: "yellow",
+    cities: [{
+      size: 1
+    }],
+    label: {
+      x: 50,
+      y: -28,
+      label: "Z"
+    },
+    values: [
+      {
+        x: 50,
+        y: 28,
+        value: 40
+      }
+    ],
+    track: [
+      {
+        type: "city",
+        side: 1
+      },
+      {
+        type: "city",
+        side: 2
+      }
+    ]
+  },
+  "292": {
+    color: "yellow",
+    cities: [{
+      size: 1
+    }],
+    label: {
+      x: 50,
+      y: -28,
+      label: "Z"
+    },
+    values: [
+      {
+        x: 50,
+        y: 28,
+        value: 40
+      }
+    ],
+    track: [
+      {
+        type: "city",
+        side: 1
+      },
+      {
+        type: "city",
+        side: 3
+      }
+    ]
+  },
+  "293": {
+    color: "yellow",
+    cities: [{
+      size: 1
+    }],
+    label: {
+      x: 50,
+      y: -28,
+      label: "Z"
+    },
+    values: [
+      {
+        x: 50,
+        y: 28,
+        value: 40
+      }
+    ],
+    track: [
+      {
+        type: "city",
+        side: 1
+      },
+      {
+        type: "city",
+        side: 4
+      }
+    ]
+  },
+  "294": {
+    color: "green",
+    values: [
+      {
+        x: 50,
+        y: 28,
+        value: 50
+      }
+    ],
+    label: {
+      x: 50,
+      y: -28,
+      label: "Z"
+    },
+    cities: [{ size: 2 }],
+    track: [
+      {
+        start: 1
+      },
+      {
+        start: 2
+      },
+      {
+        start: 4
+      },
+      {
+        start: 5
+      }
+    ]
+  },
+  "295": {
+    color: "green",
+    values: [
+      {
+        x: 50,
+        y: 28,
+        value: 50
+      }
+    ],
+    label: {
+      x: 50,
+      y: -28,
+      label: "Z"
+    },
+    cities: [{ size: 2 }],
+    track: [
+      {
+        start: 1
+      },
+      {
+        start: 2
+      },
+      {
+        start: 3
+      },
+      {
+        start: 4
+      }
+    ]
+  },
+  "296": {
+    color: "green",
+    values: [
+      {
+        x: 50,
+        y: 28,
+        value: 50
+      }
+    ],
+    label: {
+      x: 50,
+      y: -28,
+      label: "Z"
+    },
+    cities: [{ size: 2 }],
+    track: [
+      {
+        start: 1
+      },
+      {
+        start: 3
+      },
+      {
+        start: 4
+      },
+      {
+        start: 5
+      }
+    ]
+  },
+  "297": {
+    color: "brown",
+    values: [
+      {
+        x: 58,
+        y: 28,
+        value: 60
+      }
+    ],
+    label: {
+      label: "Z",
+      x: 60,
+      y: -28
+    },
+    cities: [{ size: 3, rotate: 150 }],
+    track: [
+      {
+        start: 1
+      },
+      {
+        start: 2
+      },
+      {
+        start: 3
+      },
+      {
+        start: 4
+      },
+      {
+        start: 5
+      }
+    ]
+  },
+  "298": {
+    color: "green",
+    label: {
+      label: "Chi",
+      y: -35,
+      x: -40
+    },
+    values: [{
+      y: -50,
+      x: -10,
+      value: 40
+    }],
+    cities: [{
+    },{
+    },{
+    },{
+    }],
+    track: [{
+      type: "gentle",
+      side: 1
+    },{
+      type: "straight",
+      side: 3
+    },{
+      type: "sharp",
+      side: 3
+    },{
+      type: "gentle",
+      side: 3
+    }]
+  },
+  "611": {
+    color: "brown",
+    values: [
+      {
+        x: 50,
+        y: 28,
+        value: 40
+      }
+    ],
+    cities: [{ size: 2 }],
+    track: [
+      {
+        start: 1
+      },
+      {
+        start: 2
+      },
+      {
+        start: 3
+      },
+      {
+        start: 4
+      },
+      {
+        start: 5
+      }
+    ]
+  },
+  "619": {
+    color: "green",
+    values: [
+      {
+        x: 50,
+        y: 28,
+        value: 30
+      }
+    ],
+    cities: [{ size: 2 }],
+    track: [
+      {
+        start: 1
+      },
+      {
+        start: 3
+      },
+      {
+        start: 4
+      },
+      {
+        start: 5
+      }
+    ]
   }
 };
 

@@ -657,6 +657,7 @@ const game = {
         }],
         cities: [{
           y: 40,
+          rotate: 0,
           home: "C&O"
         }],
         hexes: [[6,6]]
@@ -784,6 +785,7 @@ const game = {
       {
         color: "gray",
         cities: [{
+          rotate: 0,
           home: "PRR"
         }],
         track: [{
@@ -850,6 +852,7 @@ const game = {
       {
         color: "yellow",
         cities: [{
+          rotate: 0,
           home: "B&O"
         }],
         values: [{
@@ -965,6 +968,7 @@ const game = {
         }],
         cities: [{
           y: 40,
+          rotate: 0,
           home: "CPR"
         }],
         hexes: [[19,1]]
@@ -972,6 +976,7 @@ const game = {
       {
         color: "plain",
         cities: [{
+          rotate: 0,
           home: "NYC"
         }],
         hexes: [[19,5]]
@@ -987,6 +992,7 @@ const game = {
         cities: [{
           x: 30,
           y: -30,
+          rotate: 0,
           home: "NYNH"
         },{
           x: -30,
@@ -1037,6 +1043,7 @@ const game = {
       {
         color: "yellow",
         cities: [{
+          rotate: 0,
           home: "B&M"
         }],
         values: [{
