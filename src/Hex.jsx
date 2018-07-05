@@ -80,14 +80,9 @@ const HexTile = ({ hex, id, border }) => {
   let cities = R.map(city => {
     let rotate = city.rotate === undefined ? 90 : city.rotate;
     let translate = `${city.x || 0} ${city.y || 0}`;
-    let home = null;
-    if (city.home) {
-      home = <Label length={40} label={city.home} />;
-    }
     return (
       <g transform={`translate(${translate}) rotate(${rotate})`}>
-        <City size={city.size || 1} />
-        {home}
+        <City size={city.size || 1} companies={city.companies} />
       </g>
     );
   }, hex.cities || []);

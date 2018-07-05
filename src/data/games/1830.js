@@ -15,7 +15,7 @@ const game = {
       name: "Pennsylvania",
       abbrev: "PRR",
       tokens: ["Free", "$40", "$100", "$100", "$100"],
-      color: "rgb(50,118,63)",
+      color: "green",
       shares: [
         {
           quantity: 1,
@@ -34,7 +34,7 @@ const game = {
       name: "New York Central",
       abbrev: "NYC",
       tokens: ["Free", "$40", "$100", "$100", "$100"],
-      color: "rgb(0,0,0)",
+      color: "black",
       shares: [
         {
           quantity: 1,
@@ -53,7 +53,7 @@ const game = {
       name: "Canadian Pacific",
       abbrev: "CPR",
       tokens: ["Free", "$40", "$100", "$100", "$100"],
-      color: "rgb(209,35,42)",
+      color: "red",
       shares: [
         {
           quantity: 1,
@@ -72,7 +72,7 @@ const game = {
       name: "Baltimore & Ohio",
       abbrev: "B&O",
       tokens: ["Free", "$40", "$100", "$100"],
-      color: "rgb(2,90,170)",
+      color: "blue",
       shares: [
         {
           quantity: 1,
@@ -91,8 +91,8 @@ const game = {
       name: "Chesapeake & Ohio",
       abbrev: "C&O",
       tokens: ["Free", "$40", "$100", "$100"],
-      color: "rgb(141,215,248)",
-      textColor: "rgb(0,0,0)",
+      color: "cyan",
+      textColor: "black",
       shares: [
         {
           quantity: 1,
@@ -111,8 +111,8 @@ const game = {
       name: "Erie",
       abbrev: "Erie",
       tokens: ["Free", "$40", "$100", "$100"],
-      color: "rgb(255,230,0)",
-      textColor: "rgb(0,0,0)",
+      color: "yellow",
+      textColor: "black",
       shares: [
         {
           quantity: 1,
@@ -131,7 +131,7 @@ const game = {
       name: "New York, New Haven & Hartford",
       abbrev: "NYNH",
       tokens: ["Free", "$40", "$100"],
-      color: "rgb(245,129,33)",
+      color: "orange",
       shares: [
         {
           quantity: 1,
@@ -150,7 +150,7 @@ const game = {
       name: "Boston & Maine",
       abbrev: "B&M",
       tokens: ["Free", "$40", "$100"],
-      color: "rgb(96,23,44)",
+      color: "maroon",
       shares: [
         {
           quantity: 1,
@@ -693,7 +693,13 @@ const game = {
           {
             y: 40,
             rotate: 0,
-            home: "C&O"
+            companies: [
+              {
+                label: "C&O",
+                color: "cyan",
+                textColor: "black"
+              }
+            ]
           }
         ],
         hexes: [[6, 6]]
@@ -819,11 +825,6 @@ const game = {
         color: "yellow",
         labels: [
           {
-            label: "Erie",
-            rotate: 0,
-            y: -30
-          },
-          {
             label: "OO",
             y: 50,
             rotate: 0
@@ -832,11 +833,27 @@ const game = {
         cities: [
           {
             x: -40,
-            y: 10
+            y: 10,
+            rotate: 0,
+            companies: [
+              {
+                label: "Erie",
+                color: "yellow",
+                textColor: "black"
+              }
+            ]
           },
           {
             x: 40,
-            y: 10
+            y: 10,
+            rotate: 0,
+            companies: [
+              {
+                label: "Erie",
+                color: "yellow",
+                textColor: "black"
+              }
+            ]
           }
         ],
         hexes: [[11, 5]]
@@ -867,7 +884,12 @@ const game = {
         cities: [
           {
             rotate: 0,
-            home: "PRR"
+            companies: [
+              {
+                label: "PRR",
+                color: "green"
+              }
+            ]
           }
         ],
         track: [
@@ -964,6 +986,12 @@ const game = {
             rotate: 0,
             y: -45,
             x: -25
+          },
+          {
+            label: "B&O",
+            rotate: 0,
+            y: -45,
+            x: 25
           }
         ],
         values: [
@@ -976,7 +1004,12 @@ const game = {
         cities: [
           {
             rotate: 0,
-            home: "B&O"
+            companies: [
+              {
+                label: "B&O",
+                color: "blue"
+              }
+            ]
           }
         ],
         track: [
@@ -1118,7 +1151,12 @@ const game = {
           {
             y: 40,
             rotate: 0,
-            home: "CPR"
+            companies: [
+              {
+                label: "CPR",
+                color: "red"
+              }
+            ]
           }
         ],
         hexes: [[19, 1]]
@@ -1128,7 +1166,12 @@ const game = {
         cities: [
           {
             rotate: 0,
-            home: "NYC"
+            companies: [
+              {
+                label: "NYC",
+                color: "black"
+              }
+            ]
           }
         ],
         hexes: [[19, 5]]
@@ -1152,7 +1195,12 @@ const game = {
             x: 30,
             y: -30,
             rotate: 0,
-            home: "NYNH"
+            companies: [
+              {
+                label: "NYNH",
+                color: "orange"
+              }
+            ]
           },
           {
             x: -30,
@@ -1231,7 +1279,12 @@ const game = {
         cities: [
           {
             rotate: 0,
-            home: "B&M"
+            companies: [
+              {
+                label: "B&M",
+                color: "maroon"
+              }
+            ]
           }
         ],
         values: [
