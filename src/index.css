@@ -222,9 +222,49 @@ svg {
   opacity: 0.25;
 }
 
+.train__name {
+  color: #000;
+  transform-origin: 0 0;
+  transform: rotate(-90deg);
+
+  box-sizing: border-box;
+  width: calc(43.5mm + 0.25in);
+  height: 0.75in;
+  padding: 0.25in 0.25in 0 0.25in;
+  line-height: 0.5in;
+  font-size: 0.4in;
+  text-align: right;
+
+  position: absolute;
+  bottom: -0.75in;
+  left: 0;
+
+  font-weight: bold;
+  vertical-align: bottom;
+}
+
+.train__hr {
+  position: absolute;
+  top: 0;
+  left: 0.75in;
+  height: 100%;
+  width: 0.0625in;
+}
+
+.train__price {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0.125in;
+  padding: 0.125in;
+  height: 0.25in;
+  line-height: 0.25in;
+  font-size: 0.25in;
+}
+
 .train__notes {
   position: absolute;
-  bottom: 0;
+  top: 0.375in;
   width: calc(100% - 0.25in);
   padding: 0.125in;
   margin: 0.125in;
@@ -253,7 +293,7 @@ svg {
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(100% - 0.5in);
+  height: calc(100% - 0.5in);
   padding: 0.125in;
   line-height: 0.21in;
   font-size: 0.21in;
@@ -288,25 +328,6 @@ svg {
   display: inline-block;
 }
 
-.train__name {
-  box-sizing: border-box;
-  height: calc(100% - 0.25in);
-  width: calc(100% - 0.25in);
-  margin: 0.125in;
-  padding: 0.125in;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  font-size: 15mm;
-  font-weight: bold;
-  line-height: 37mm;
-  vertical-align: middle;
-  text-align: left;
-  -webkit-text-stroke: 1px black;
-}
-
 .charter__tokens {
   position: absolute;
   top: 0;
@@ -321,17 +342,6 @@ svg {
   width: 0.5in;
   height: 0.7in;
   padding: 0 0 0 0.15in;
-}
-
-.train__price {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0.125in;
-  padding: 0.125in;
-  height: 0.25in;
-  line-height: 0.25in;
-  font-size: 0.25in;
 }
 
 .share__percent {
