@@ -7,7 +7,7 @@ const Label = ({ label, length }) => {
     size = 18;
   }
   if (label.length > 16) {
-    size = 14;
+    size = 12;
   }
 
   return (

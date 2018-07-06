@@ -540,6 +540,25 @@ const game = {
     hexes: [
       {
         color: "offboard",
+        label: {
+          label: "Gulf",
+          x: -20,
+          rotate: 0
+        },
+        offBoardRevenue: {
+          x: -20,
+          y: 30,
+          revenues: [
+            {
+              color: "yellow",
+              cost: "30"
+            },
+            {
+              color: "brown",
+              cost: "60"
+            }
+          ]
+        },
         offBoardTrack: [
           {
             side: 4
@@ -610,32 +629,10 @@ const game = {
         hexes: ["F2"]
       },
       {
-        color: "offboard",
-        label: {
-          label: "Gulf",
-          x: -25,
-          rotate: 0
-        },
-        offBoardRevenue: {
-          x: -25,
-          y: 30,
-          revenues: [
-            {
-              color: "yellow",
-              cost: "30"
-            },
-            {
-              color: "brown",
-              cost: "60"
-            }
-          ]
-        },
+        copy: "I1",
         offBoardTrack: [
           {
             side: 3
-          },
-          {
-            side: 4
           }
         ],
         hexes: ["J2"]
@@ -662,45 +659,25 @@ const game = {
         hexes: ["F4"]
       },
       {
-        color: "plain",
+        copy: "F4",
         cities: [
           {
-            x: -15,
-            y: -25,
-            rotate: 0,
             name: {
-              name: "Washington",
-              rotation: 30
+              name: "Washington"
             }
           }
         ],
-        water: {
-          x: 15,
-          y: 25,
-          cost: "$80",
-          size: "small"
-        },
         hexes: ["J14"]
       },
       {
-        color: "plain",
+        copy: "F4",
         cities: [
           {
-            x: -15,
-            y: -25,
-            rotate: 0,
             name: {
-              name: "Providence",
-              rotation: 30
+              name: "Providence"
             }
           }
         ],
-        water: {
-          x: 15,
-          y: 25,
-          cost: "$80",
-          size: "small"
-        },
         hexes: ["F22"]
       },
       {
@@ -736,30 +713,14 @@ const game = {
         hexes: ["E5"]
       },
       {
-        color: "yellow",
-        water: {
-          y: -50,
-          cost: "$80",
-          size: "small"
-        },
-        label: {
-          label: "OO",
-          y: 50,
-          rotate: 0
-        },
+        copy: "E5",
         cities: [
           {
-            x: -45,
-            y: 20,
-            rotate: 0,
             name: {
               name: "Hamilton"
             }
           },
           {
-            x: 45,
-            y: 20,
-            rotate: 0,
             name: {
               name: "Toronto"
             }
@@ -829,12 +790,12 @@ const game = {
       },
       {
         color: "offboard",
-        offBoardTrack: [
-          {
-            side: 5
-          }
-        ],
+        label: {
+          label: "Canadian West",
+          rotate: 0
+        },
         offBoardRevenue: {
+          y: -30,
           revenues: [
             {
               color: "yellow",
@@ -846,6 +807,11 @@ const game = {
             }
           ]
         },
+        offBoardTrack: [
+          {
+            side: 5
+          }
+        ],
         hexes: ["A9"]
       },
       {
@@ -859,15 +825,8 @@ const game = {
         hexes: ["E9"]
       },
       {
-        color: "offboard",
-        label: {
-          label: "Canadian West",
-          rotate: 0
-        },
+        copy: "A9",
         offBoardTrack: [
-          {
-            side: 5
-          },
           {
             side: 6
           }
@@ -1293,24 +1252,14 @@ const game = {
         hexes: ["H18"]
       },
       {
-        color: "gray",
-        track: [
-          {
-            start: 5,
-            end: 6
-          }
-        ],
+        copy: "F6",
         values: [
           {
             value: 40,
-            y: -30,
-            rotate: 0
           }
         ],
         cities: [
           {
-            y: 40,
-            rotate: 0,
             name: {
               name: "Montreal"
             },
@@ -1438,31 +1387,12 @@ const game = {
         hexes: ["I19"]
       },
       {
-        color: "gray",
+        copy: "I19",
         centerTowns: [
           {
-            rotate: 0,
             name: {
-              name: "Fall River",
-              reverse: true
+              name: "Fall River"
             }
-          }
-        ],
-        track: [
-          {
-            type: "city",
-            side: 1
-          },
-          {
-            type: "city",
-            side: 2
-          }
-        ],
-        values: [
-          {
-            x: 50,
-            value: 10,
-            rotate: 0
           }
         ],
         hexes: ["F24"]
@@ -1532,13 +1462,13 @@ const game = {
       {
         color: "offboard",
         label: {
-          label: "Maritime Provines",
+          label: "Maritime Provinces",
           rotate: 0,
-          y: -15,
+          y: -25,
           x: 5
         },
         offBoardRevenue: {
-          y: 10,
+          y: 0,
           revenues: [
             {
               cost: "20",
@@ -1569,22 +1499,6 @@ const game = {
           }
         ],
         hexes: ["D24"]
-      },
-      {
-        color: "plain",
-        water: {
-          cost: "$80",
-          size: "small"
-        },
-        hexes: ["D6", "I17", "B18", "C19"]
-      },
-      {
-        color: "plain",
-        mountain: {
-          cost: "$120",
-          size: "medium"
-        },
-        hexes: ["C21", "D22", "E17", "E21", "G13", "I11", "J10", "J12"]
       },
       {
         color: "plain",
@@ -1619,18 +1533,18 @@ const game = {
         hexes: ["G7"]
       },
       {
-        color: "plain",
+        copy: "G7",
         centerTowns: [
-          { x: -30, rotate: 0, name: { name: "Reading", reverse: true } },
-          { x: 30, rotate: 0, name: { name: "Allentown" } }
+          { name: { name: "Reading" } },
+          { name: { name: "Allentown" } }
         ],
         hexes: ["G17"]
       },
       {
-        color: "plain",
+        copy: "G7",
         centerTowns: [
-          { x: -30, rotate: 0, name: { name: "New Haven", reverse: true } },
-          { x: 30, rotate: 0, name: { name: "Hartford" } }
+          { name: { name: "New Haven" } },
+          { name: { name: "Hartford" } }
         ],
         hexes: ["F20"]
       },
@@ -1647,10 +1561,9 @@ const game = {
         hexes: ["H4"]
       },
       {
-        color: "plain",
+        copy: "H4",
         cities: [
           {
-            rotate: 0,
             name: {
               name: "Barrie"
             }
@@ -1659,10 +1572,9 @@ const game = {
         hexes: ["B10"]
       },
       {
-        color: "plain",
+        copy: "H4",
         cities: [
           {
-            rotate: 0,
             name: {
               name: "Pittsburgh"
             }
@@ -1671,16 +1583,31 @@ const game = {
         hexes: ["H10"]
       },
       {
-        color: "plain",
+        copy: "H4",
         cities: [
           {
-            rotate: 0,
             name: {
               name: "Lancaster"
             }
           }
         ],
         hexes: ["H16"]
+      },
+      {
+        color: "plain",
+        water: {
+          cost: "$80",
+          size: "small"
+        },
+        hexes: ["D6", "I17", "B18", "C19"]
+      },
+      {
+        color: "plain",
+        mountain: {
+          cost: "$120",
+          size: "medium"
+        },
+        hexes: ["C21", "D22", "E17", "E21", "G13", "I11", "J10", "J12"]
       },
       {
         color: "plain",
