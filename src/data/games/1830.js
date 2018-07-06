@@ -8,19 +8,6 @@ const game = {
     width: 150,
     rotatation: 90
   },
-  title: {
-    title: "1830",
-    x: 0,
-    y: 0
-  },
-  designer: {
-    designer: "Francis Tresham",
-    x: 5,
-    y: 190
-  },
-  background: {
-    color: "green"
-  },
 
   // Extra Tokens
   tokens: ["Round"],
