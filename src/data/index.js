@@ -1,3 +1,5 @@
+import * as tinycolor from "tinycolor2";
+
 const colors = {
   // Tiles
   yellow: "rgb(255,231,16)",
@@ -52,11 +54,11 @@ const textColor = color => {
 const strokeColor = color => {
   switch (color) {
     case "yellow":
-      return "rgb(179,161,0)";
     case "cyan":
-    return "rgb(15,171,240)";
     default:
-      return "none";
+      return tinycolor(colors[color])
+        .darken(20)
+        .toString();
   }
 };
 
