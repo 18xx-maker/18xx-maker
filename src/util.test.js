@@ -125,3 +125,15 @@ describe("toAlpha", () => {
     expect(util.toAlpha(30)).toEqual("AD");
   });
 });
+
+describe("toCoords", () => {
+  it("should handle simple coords", () => {
+    expect(util.toCoords("D4")).toEqual([4, 4]);
+    expect(util.toCoords("E17")).toEqual([17, 5]);
+  });
+
+  it("should handle simple coords", () => {
+    expect(util.toCoords("AA4")).toEqual([4, 27]);
+    expect(util.toCoords("AD17")).toEqual([17, 30]);
+  });
+});

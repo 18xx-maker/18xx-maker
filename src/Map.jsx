@@ -12,7 +12,7 @@ const Map = ({ match }) => {
   let game = games[match.params.game];
   let map = game.map;
 
-  if(!map) {
+  if (!map) {
     return null;
   }
 
@@ -33,13 +33,14 @@ const Map = ({ match }) => {
   };
 
   let hexes = R.chain(hex => {
-    return R.map(([x, y]) => {
-      return (
+    return R.map(
+      ([x, y]) => (
         <g transform={`translate(${hexX(x, y)} ${hexY(x, y)})`}>
           <Hex hex={hex} id={`${util.toAlpha(y)}${x}`} border={true} />
         </g>
-      );
-    }, hex.hexes || []);
+      ),
+      R.map(util.toCoords, hex.hexes || [])
+    );
   }, map.hexes);
 
   return (
