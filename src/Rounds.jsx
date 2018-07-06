@@ -1,7 +1,6 @@
 import React from "react";
 import Token from "./Token";
 import * as R from "ramda";
-import { colors } from "./data";
 
 const Rounds = ({ rounds }) => {
   let items = R.map(

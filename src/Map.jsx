@@ -1,5 +1,4 @@
 import React from "react";
-import { colors } from "./data";
 import games from "./data/games";
 import * as R from "ramda";
 import util from "./util";
@@ -34,7 +33,6 @@ const Map = ({ match }) => {
   };
 
   let hexes = R.chain(hex => {
-    let color = hex.color;
     return R.map(([x, y]) => {
       return (
         <g transform={`translate(${hexX(x, y)} ${hexY(x, y)})`}>

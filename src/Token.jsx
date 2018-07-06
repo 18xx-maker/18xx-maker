@@ -1,6 +1,5 @@
 import React from "react";
 import { colors, textColor, strokeColor } from "./data";
-import * as R from "ramda";
 
 const Token = ({ label, color, labelColor, inverse, width }) => {
   let tokenColor = inverse ? colors["white"] : colors[color];

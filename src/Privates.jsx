@@ -1,7 +1,6 @@
 import React from "react";
 import Private from "./Private";
 import games from "./data/games";
-import util from "./util";
 import * as R from "ramda";
 
 const Privates = ({ match }) => {

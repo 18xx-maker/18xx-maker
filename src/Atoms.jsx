@@ -4,6 +4,7 @@ import css from "./atoms.css";
 
 import Id from "./atoms/Id";
 import Value from "./atoms/Value";
+import Icon from "./atoms/Icon";
 import City from "./atoms/City";
 import Town from "./atoms/Town";
 import CenterTown from "./atoms/CenterTown";
@@ -25,6 +26,10 @@ const Atoms = () => {
     {
       name: "Value",
       examples: [<Value value={20} />, <Value value={100} />]
+    },
+    {
+      name: "Icon",
+      examples: [<Icon type="meat" />, <Icon type="steam" />]
     },
     {
       name: "City",
