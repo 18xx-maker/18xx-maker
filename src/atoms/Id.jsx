@@ -2,16 +2,6 @@ import React from "react";
 import { colors } from "../data";
 
 const Id = ({ id, width, x, y }) => {
-  // Set size based on length of id
-  let size = 14;
-  if(id.length > 1) {
-    size = 12;
-  }
-  if(id.length > 2) {
-    size = 10;
-  }
-
-  // Label Text
   return (
     <text
       fontFamily="Helvetica, Arial, sans-serif"
@@ -21,7 +11,7 @@ const Id = ({ id, width, x, y }) => {
       strokeLinejoin="bevel"
       alignmentBaseline="baseline"
       textAnchor="start"
-      fontSize={size}
+      fontSize="12"
       x="0"
       y="0"
     >
