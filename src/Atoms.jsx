@@ -2,6 +2,8 @@ import React from "react";
 import * as R from "ramda";
 import css from "./atoms.css";
 
+import Svg from "./Svg";
+
 import Id from "./atoms/Id";
 import Value from "./atoms/Value";
 import Icon from "./atoms/Icon";
@@ -34,10 +36,11 @@ const Atoms = () => {
     {
       name: "City",
       examples: [
-        [<City size={1} border={true} />, <City size={1} />],
+        [<City size={1} border={true} />, <City size={1} name="Boston" />],
+        [<City size={1} border={true} />, <City size={1} name="New York" nameRotation="90" />],
         [
           <City size={1} border={true} />,
-          <City size={1} companies={[{ color: "orange", label: "GT" }]} />
+          <City size={1} companies={[{ color: "orange", label: "GT" }]} name="Toronto" nameReverse={true} />
         ],
         [<City size={2} border={true} />, <City size={2} />],
         [
@@ -90,8 +93,7 @@ const Atoms = () => {
       examples: [
         <Label label="B" />,
         <Label label="NY" />,
-        <Label label="OO" />,
-        <Label label="New York" />
+        <Label label="OO" />
       ]
     },
     {
@@ -218,22 +220,9 @@ const Atoms = () => {
     let exampleNodes = R.map(
       example => (
         <dd>
-          <svg width="200" height="200" viewBox="-100 -100 200 200">
-            <defs>
-              <style>
-                @import
-                url("https://fonts.googleapis.com/css?family=Bitter:700");
-              </style>
-              <clipPath id="hexClip">
-                <polygon
-                  points="0,-86.6025 75,-43.30125 75,43.30125 0,86.6025 -75,43.30125 -75,-43.30125"
-                  fill="black"
-                  stroke="none"
-                />
-              </clipPath>
-            </defs>
+          <Svg width="200" height="200" viewBox="-100 -100 200 200">
             {example}
-          </svg>
+          </Svg>
         </dd>
       ),
       atom.examples

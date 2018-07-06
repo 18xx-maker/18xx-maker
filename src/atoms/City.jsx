@@ -1,7 +1,7 @@
 import React from "react";
 import { colors, textColor } from "../data";
 
-const City = ({ size, companies, border }) => {
+const City = ({ size, companies, border, name, nameRotation, nameReverse }) => {
   let companyColor = num =>
     (companies &&
       companies[num] &&
@@ -42,6 +42,22 @@ const City = ({ size, companies, border }) => {
         <circle fill={colors["border"]} stroke="none" cx="0" cy="0" r="28" />
       );
     } else {
+      let nameNode = null;
+
+      if (name) {
+        nameNode = (
+          <text
+            dy={nameReverse ? 7 : 0}
+            transform={`rotate(${nameRotation || 0})`}
+            fontFamily="Helvetica, Arial, sans-serif"
+            font-size="10"
+            font-weight="bold"
+          >
+            <textPath href={`#${nameReverse ? "revCityPath" : "cityPath"}`}>{name}</textPath>
+          </text>
+        );
+      }
+
       return (
         <g>
           <circle
@@ -53,6 +69,7 @@ const City = ({ size, companies, border }) => {
             r="25"
           />
           {companyLabel(0)}
+          {nameNode}
         </g>
       );
     }
