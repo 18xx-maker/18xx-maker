@@ -1,27 +1,31 @@
 import React from "react";
 import Token from "./Token";
 import games from "./data/games";
-import { colors, companies as companyColors, textColor } from "./data";
+import { colors, textColor } from "./data";
 import * as R from "ramda";
 
 const Tokens = ({ match }) => {
   let game = games[match.params.game];
   let companies = game.companies;
 
+  if(!companies) {
+    return null;
+  }
+
   let tokens = R.addIndex(R.chain)((company, index) => {
     let y = 60 * index + 30;
     let companyTokens = Array(company.tokens.length + 3).fill(
       <Token
         label={company.abbrev}
-        color={companyColors[company.color]}
-        labelColor={textColor(company.color)}
+        color={company.color}
+        width="30"
       />
     );
     companyTokens.push(
       <Token
         label={company.abbrev}
-        color={companyColors[company.color]}
-        labelColor={textColor(company.color)}
+        color={company.color}
+        width="30"
         inverse={true}
       />
     );
@@ -38,7 +42,7 @@ const Tokens = ({ match }) => {
   let extras = R.addIndex(R.map)((label, index) => {
     return (
       <g transform={`translate(${60 * index + 30} 0)`}>
-        <Token label={label} color={"black"} inverse={true} />
+        <Token width="30" label={label} color={"black"} inverse={true} />
       </g>
     );
   }, game.tokens);

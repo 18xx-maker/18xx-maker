@@ -1531,6 +1531,68 @@ const tiles = {
       side: 3
     }]
   },
+  "299": {
+    color: "brown",
+    label: {
+      label: "Chi",
+      y: -35,
+      x: -40
+    },
+    values: [{
+      y: -50,
+      x: -10,
+      value: 70
+    }],
+    cities: [{
+    },{
+    },{
+    },{
+    }],
+    track: [{
+      type: "gentle",
+      side: 1
+    },{
+      type: "straight",
+      side: 3
+    },{
+      type: "sharp",
+      side: 3
+    },{
+      type: "gentle",
+      side: 3
+    }]
+  },
+  "300": {
+    color: "gray",
+    label: {
+      label: "Chi",
+      y: -35,
+      x: -40
+    },
+    values: [{
+      y: -50,
+      x: -10,
+      value: 90
+    }],
+    cities: [{
+    },{
+    },{
+    },{
+    }],
+    track: [{
+      type: "gentle",
+      side: 1
+    },{
+      type: "straight",
+      side: 3
+    },{
+      type: "sharp",
+      side: 3
+    },{
+      type: "gentle",
+      side: 3
+    }]
+  },
   "611": {
     color: "brown",
     values: [

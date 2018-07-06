@@ -1,11 +1,13 @@
 import React from "react";
-import { colors, companies } from "./data";
+import { colors, textColor, strokeColor } from "./data";
 import * as R from "ramda";
 
 const Token = ({ label, color, labelColor, inverse, width }) => {
-  let circleColor = inverse ? colors["white"] : color;
-  let textColor = inverse ? colors["black"] : labelColor || colors["white"];
-  width = width || 30;
+  let tokenColor = inverse ? colors["white"] : colors[color];
+  let tokenLabelColor = inverse ? colors[color] : colors[labelColor] || textColor(color);
+  let tokenLabelStroke = inverse ? strokeColor(color) : "none";
+
+  width = width || 25;
 
   return (
     <g>
@@ -13,20 +15,20 @@ const Token = ({ label, color, labelColor, inverse, width }) => {
         cx="0"
         cy="0"
         r={width}
-        fill={circleColor}
-        stroke={color}
+        fill={tokenColor}
+        stroke={colors[color]}
       />
       <text
+        font-family="Bitter"
         textAnchor="middle"
         alignmentBaseline="central"
-        x="0"
-        y="0"
-        strokeWidth="none"
-        stroke="none"
-        font-family="Bitter"
+        stroke-width="0.5"
+        stroke={tokenLabelStroke}
+        fill={tokenLabelColor}
         textLength={40}
         lengthAdjust="spacingAndGlyphs"
-        fill={textColor}
+        x="0"
+        y="0"
       >
         {label}
       </text>

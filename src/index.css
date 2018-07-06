@@ -331,7 +331,7 @@ svg {
   margin: 0.125in;
   box-sizing: border-box;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   align-items: flex-end;
 }
 
@@ -339,6 +339,7 @@ svg {
   height: 0.25in;
   line-height: 0.25in;
   padding: 0 0.1in;
+  margin-top: 0.05in;
   border-radius: 0.06in;
 }
 

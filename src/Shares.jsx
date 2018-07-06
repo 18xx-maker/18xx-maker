@@ -7,7 +7,10 @@ import * as R from "ramda";
 const Shares = ({ match }) => {
   let game = games[match.params.game];
   let companies = game.companies;
-  let trains = util.fillArray(R.prop("quantity"), game.trains);
+
+  if(!companies) {
+    return null;
+  }
 
   return (
       <div class="cards">

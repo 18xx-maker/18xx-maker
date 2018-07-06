@@ -8,6 +8,10 @@ const Charters = ({ match }) => {
   let game = games[match.params.game];
   let companies = game.companies;
 
+  if(!companies) {
+    return null;
+  }
+
   return (
     <div class="charters">
       {R.addIndex(R.chain)((company, index) => {

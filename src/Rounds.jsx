@@ -7,7 +7,7 @@ const Rounds = ({ rounds }) => {
   let items = R.map(
     round => (
       <svg>
-        <Token width={25} label={round.name} color={colors[round.color]} labelColor={colors["black"]} />
+        <Token label={round.name} color={round.color} labelColor="black" />
       </svg>
     ),
     rounds
