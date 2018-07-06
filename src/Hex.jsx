@@ -81,7 +81,7 @@ const HexTile = ({ hex, id, border }) => {
     let translate = `${city.x || 0} ${city.y || 0}`;
     return (
       <g transform={`translate(${translate}) rotate(${rotate})`}>
-        <City size={city.size || 1} companies={city.companies} />
+        <City size={city.size || 1} companies={city.companies} name={city.name} />
       </g>
     );
   }, hex.cities || []);
@@ -118,7 +118,7 @@ const HexTile = ({ hex, id, border }) => {
     return (
       <g transform={`translate(${town.x || 0} ${town.y || 0})`}>
         <CenterTown border={true} />
-        <CenterTown />
+        <CenterTown name={town.name} />
       </g>
     );
   }, hex.centerTowns || []);
