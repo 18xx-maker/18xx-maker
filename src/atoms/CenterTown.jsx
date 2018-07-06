@@ -1,13 +1,31 @@
 import React from "react";
 import { colors } from "../data";
 
-const CenterTown = ({ border }) => {
+import Name from "./Name";
+
+const CenterTown = ({ border, name }) => {
   if (border) {
     return (
       <circle fill={colors["border"]} stroke="none" cx="0" cy="0" r="12" />
     );
   } else {
-    return <circle fill={colors["track"]} stroke="none" cx="0" cy="0" r="10" />;
+    let nameNode = null;
+
+    if (name) {
+      nameNode = (
+        <Name
+          name={name.name}
+          reverse={name.reverse}
+          rotation={name.rotation}
+        />
+      );
+    }
+    return (
+      <g>
+        <circle fill={colors["track"]} stroke="none" cx="0" cy="0" r="10" />
+        {nameNode}
+      </g>
+    );
   }
 };
 

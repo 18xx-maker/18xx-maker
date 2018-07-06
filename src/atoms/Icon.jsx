@@ -28,6 +28,7 @@ const Value = ({ type }) => {
       );
       break;
     case "steam":
+    case "port":
       icon = (
         <g>
           <path

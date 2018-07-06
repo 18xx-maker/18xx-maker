@@ -36,11 +36,21 @@ const Atoms = () => {
     {
       name: "City",
       examples: [
-        [<City size={1} border={true} />, <City size={1} name="Boston" />],
-        [<City size={1} border={true} />, <City size={1} name="New York" nameRotation="90" />],
         [
           <City size={1} border={true} />,
-          <City size={1} companies={[{ color: "orange", label: "GT" }]} name="Toronto" nameReverse={true} />
+          <City size={1} name={{ name: "Boston" }} />
+        ],
+        [
+          <City size={1} border={true} />,
+          <City size={1} name={{ name: "New York", rotation: 90 }} />
+        ],
+        [
+          <City size={1} border={true} />,
+          <City
+            size={1}
+            companies={[{ color: "orange", label: "GT" }]}
+            name={{ name: "Toronto", reverse: true }}
+          />
         ],
         [<City size={2} border={true} />, <City size={2} />],
         [
@@ -86,7 +96,10 @@ const Atoms = () => {
     },
     {
       name: "Center Town",
-      examples: [[<CenterTown border={true} />, <CenterTown />]]
+      examples: [
+        [<CenterTown border={true} />, <CenterTown />],
+        [<CenterTown border={true} />, <CenterTown name={{name:"Austin",reverse:true}}/>]
+      ]
     },
     {
       name: "Label",
