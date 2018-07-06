@@ -146,6 +146,20 @@ const maxMapY = R.compose(
   R.chain(R.prop("hexes"))
 );
 
+const resolveHex = (hex, hexes) => {
+  if (hex.copy) {
+    // Find copy
+    let copyHex = R.find(h => R.indexOf(hex.copy, h.hexes) > -1, hexes);
+
+    if (copyHex) {
+      return mergeHex(hex, resolveHex(copyHex, hexes));
+    }
+  }
+
+  // Nothing to copy
+  return hex;
+}
+
 const mergeHex = (a, b) => {
   // First check if we need to merge deep!
   return R.mergeDeepWithKey((key, da, db) => {
@@ -177,5 +191,6 @@ export default {
   maxMapY,
   toAlpha,
   toCoords,
-  mergeHex
+  mergeHex,
+  resolveHex
 };

@@ -175,7 +175,7 @@ describe("mergeHex", () => {
         {
           side: 4
         }
-        ]
+      ]
     });
   });
 
