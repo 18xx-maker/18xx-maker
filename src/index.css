@@ -18,6 +18,12 @@ body {
   background-color: rgb(252,241,222);
 }
 
+.tokens {
+  position: relative;
+  float: left;
+  margin: 0.25in;
+}
+
 .background {
   height: 10.25in;
   width: 8in;
