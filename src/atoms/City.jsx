@@ -1,7 +1,9 @@
 import React from "react";
 import { colors, textColor } from "../data";
 
-const City = ({ size, companies, border, name, nameRotation, nameReverse }) => {
+import Name from "./Name";
+
+const City = ({ size, companies, border, name }) => {
   let companyColor = num =>
     (companies &&
       companies[num] &&
@@ -46,15 +48,11 @@ const City = ({ size, companies, border, name, nameRotation, nameReverse }) => {
 
       if (name) {
         nameNode = (
-          <text
-            dy={nameReverse ? 7 : 0}
-            transform={`rotate(${nameRotation || 0})`}
-            fontFamily="Helvetica, Arial, sans-serif"
-            font-size="10"
-            font-weight="bold"
-          >
-            <textPath href={`#${nameReverse ? "revCityPath" : "cityPath"}`}>{name}</textPath>
-          </text>
+          <Name
+            name={name.name}
+            reverse={name.reverse}
+            rotation={name.rotation}
+          />
         );
       }
 

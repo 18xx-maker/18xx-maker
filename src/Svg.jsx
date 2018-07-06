@@ -22,11 +22,11 @@ const Svg = ({ width, height, viewBox, defs, children }) => {
         </clipPath>
         <path
           id="cityPath"
-          d="M -30 0 A 30 30 0 0 1 30 0 A 30 30 0 0 1 -30 0"
+          d="M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30"
         />
         <path
           id="revCityPath"
-          d="M -30 0 A 30 30 0 0 0 30 0 A 30 30 0 0 0 -30 0"
+          d="M 0 -30 A 30 30 0 0 0 0 30 A 30 30 0 0 0 0 -30"
         />
         {defs}
       </defs>
