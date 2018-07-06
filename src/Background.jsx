@@ -6,8 +6,8 @@ import * as R from "ramda";
 const Background = ({ match }) => {
   let game = games[match.params.game];
 
-  let color = colors[game.background.color];
-  let title = game.title.title;
+  let color = colors[game.info.background];
+  let title = game.info.title;
 
   let text = R.map(word => <span>{word}</span>, Array(3000).fill(title));
 
