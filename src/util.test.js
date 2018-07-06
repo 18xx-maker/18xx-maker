@@ -137,3 +137,71 @@ describe("toCoords", () => {
     expect(util.toCoords("AD17")).toEqual([17, 30]);
   });
 });
+
+describe("mergeHex", () => {
+  it("should handle simple stuff", () => {
+    let hex = { copy: "A5" };
+    let copyHex = { color: "yellow" };
+    expect(util.mergeHex(hex, copyHex)).toEqual({
+      copy: "A5",
+      color: "yellow"
+    });
+  });
+
+  it("should handle cities", () => {
+    let hex = {
+      copy: "A5",
+      cities: [
+        {
+          name: {
+            name: "Original1"
+          }
+        },
+        {
+          name: {
+            name: "Original2"
+          }
+        }
+      ]
+    };
+    let copyHex = {
+      color: "yellow",
+      cities: [
+        {
+          x: 5,
+          y: 10,
+          name: {
+            name: "Copy1"
+          }
+        },
+        {
+          x: 6,
+          y: 11,
+          name: {
+            name: "Copy2"
+          }
+        }
+      ]
+    };
+    expect(util.mergeHex(hex, copyHex)).toEqual({
+      copy: "A5",
+      color: "yellow",
+      cities: [
+        {
+          x: 5,
+          y: 10,
+          name: {
+            name: "Original1"
+          }
+        },
+        {
+          x: 6,
+          y: 11,
+          name: {
+            name: "Original2"
+          }
+        }
+      ]
+    });
+  });
+});

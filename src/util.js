@@ -146,6 +146,24 @@ const maxMapY = R.compose(
   R.chain(R.prop("hexes"))
 );
 
+const mergeHex = (a, b) => {
+  // First check if we need to merge deep!
+  return R.mergeDeepWithKey((key, da, db) => {
+    if (Array.isArray(da)) {
+      if(key === "track" || key === "offBoardTrack") {
+        // Concat tracks
+        return R.concat(da, db);
+      } else {
+        return R.zipWith(mergeHex, da, db);
+      }
+    } else if (da instanceof Object) {
+      return mergeHex(da, db);
+    } else {
+      return da;
+    }
+  }, a, b);
+};
+
 export default {
   HEX_RATIO,
   hexData,
@@ -158,5 +176,6 @@ export default {
   maxMapX,
   maxMapY,
   toAlpha,
-  toCoords
+  toCoords,
+  mergeHex
 };

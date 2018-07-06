@@ -33,14 +33,21 @@ const Map = ({ match }) => {
   };
 
   let hexes = R.chain(hex => {
-    return R.map(
-      ([x, y]) => (
+    return R.map(([x, y]) => {
+      if (hex.copy) {
+        // Find copy
+        let copyHex = R.find(h => R.indexOf(hex.copy, h.hexes) > -1, map.hexes);
+        if (copyHex) {
+          hex = util.mergeHex(hex, copyHex);
+        }
+      }
+
+      return (
         <g transform={`translate(${hexX(x, y)} ${hexY(x, y)})`}>
           <Hex hex={hex} id={`${util.toAlpha(y)}${x}`} border={true} />
         </g>
-      ),
-      R.map(util.toCoords, hex.hexes || [])
-    );
+      );
+    }, R.map(util.toCoords, hex.hexes || []));
   }, map.hexes);
 
   return (
