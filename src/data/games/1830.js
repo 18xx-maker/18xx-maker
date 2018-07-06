@@ -1073,8 +1073,7 @@ const game = {
             rotate: 0,
             name: {
               name: "Kingston",
-              reverse: true,
-              rotation: -30
+              reverse: true
             }
           }
         ],
@@ -1415,8 +1414,7 @@ const game = {
             rotate: 0,
             name: {
               name: "Atlantic City",
-              reverse: true,
-              rotation: -60
+              reverse: true
             }
           }
         ],
@@ -1446,8 +1444,7 @@ const game = {
             rotate: 0,
             name: {
               name: "Fall River",
-              reverse: true,
-              rotation: -60
+              reverse: true
             }
           }
         ],
@@ -1616,24 +1613,24 @@ const game = {
       {
         color: "plain",
         centerTowns: [
-          { x: -30, rotate: 0, name: { name: "Akron" } },
-          { x: 30, rotate: 0, name: { name: "Canton", reverse: true } }
+          { x: -30, rotate: 0, name: { name: "Akron", reverse: true } },
+          { x: 30, rotate: 0, name: { name: "Canton" } }
         ],
         hexes: ["G7"]
       },
       {
         color: "plain",
         centerTowns: [
-          { x: -30, rotate: 0, name: { name: "Reading" } },
-          { x: 30, rotate: 0, name: { name: "Allentown", reverse: true } }
+          { x: -30, rotate: 0, name: { name: "Reading", reverse: true } },
+          { x: 30, rotate: 0, name: { name: "Allentown" } }
         ],
         hexes: ["G17"]
       },
       {
         color: "plain",
         centerTowns: [
-          { x: -30, rotate: 0, name: { name: "New Haven" } },
-          { x: 30, rotate: 0, name: { name: "Hartford", reverse: true } }
+          { x: -30, rotate: 0, name: { name: "New Haven", reverse: true } },
+          { x: 30, rotate: 0, name: { name: "Hartford" } }
         ],
         hexes: ["F20"]
       },
