@@ -13,6 +13,11 @@ body {
   font-family: "Bitter", serif;
 }
 
+.home,
+.tiles {
+  background-color: rgb(252,241,222);
+}
+
 .background {
   height: 10.25in;
   width: 8in;
@@ -64,9 +69,23 @@ h2 {
   padding-left: 40px;
 }
 
+.tileSheet div {
+  float: left;
+  clear: left;
+  page-break-inside: avoid;
+  margin: auto;
+}
+
+.tileSheet div:nth-child(even) {
+  padding: 0 0 0 0.866025in;
+}
+
+.tileSheet div:nth-child(odd) {
+  padding: 0 0.866025in 0 0;
+}
+
 .tileSheet svg {
   float: left;
-  margin: 0 0.125in 0.125in 0;
 }
 
 .home {
