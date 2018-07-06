@@ -61,30 +61,43 @@ const Map = ({ match }) => {
           </defs>
           {hexes}
           <text
-            fill={colors["track"]}
+            fill={colors["black"]}
             fontFamily="Bitter"
             fontWeight="bold"
-            fontSize={game.title.size || 200}
+            fontSize="200"
             alignmentBaseline="hanging"
             textAnchor="start"
             lengthAdjust="spacingAndGlyphs"
-            x={game.title.x}
-            y={game.title.y}
+            x="0"
+            y="0"
           >
-            {game.title.title}
+            {game.info.title}
           </text>
           <text
-            fill={colors["track"]}
+            fill={colors["black"]}
             fontFamily="Bitter"
             fontWeight="bold"
-            fontSize={game.designer.size || 40}
+            fontSize="30"
             alignmentBaseline="hanging"
             textAnchor="start"
             lengthAdjust="spacingAndGlyphs"
-            x={game.designer.x}
-            y={game.designer.y}
+            x="0"
+            y="200"
           >
-            {game.designer.designer}
+            {game.info.subtitle}
+          </text>
+          <text
+            fill={colors["black"]}
+            fontFamily="Bitter"
+            fontWeight="bold"
+            fontSize="20"
+            alignmentBaseline="hanging"
+            textAnchor="start"
+            lengthAdjust="spacingAndGlyphs"
+            x="0"
+            y="240"
+          >
+            by {game.info.designer}
           </text>
         </svg>
       </div>
