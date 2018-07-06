@@ -2,8 +2,6 @@ import React, { Component } from "react";
 
 import "./App.css";
 
-import SVG from "./Svg";
-
 import Tiles from "./Tiles";
 import Atoms from "./Atoms";
 
@@ -17,6 +15,7 @@ import Shares from "./Shares";
 import Stock from "./Stock";
 import Trains from "./Trains";
 import Tokens from "./Tokens";
+import TileSheet from "./TileSheet";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -32,7 +31,7 @@ class App extends Component {
             <Route exact path="/:game" component={Game} />
             <Route path="/:game/map" component={Map} />
             <Route path="/:game/background" component={Background} />
-            <Route path="/:game/tiles" component={SVG} />
+            <Route path="/:game/tiles" component={TileSheet} />
             <Route path="/:game/trains" component={Trains} />
             <Route path="/:game/tokens" component={Tokens} />
             <Route path="/:game/shares" component={Shares} />

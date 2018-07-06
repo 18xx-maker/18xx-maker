@@ -1,4 +1,13 @@
 const game = {
+  // Generic Game Info
+  info: {
+    title: "1830",
+    subtitle: "Railways & Robber Barons",
+    designer: "Francis Tresham",
+    background: "green",
+    width: 150,
+    rotatation: 90
+  },
   title: {
     title: "1830",
     x: 0,
@@ -12,7 +21,11 @@ const game = {
   background: {
     color: "green"
   },
+
+  // Extra Tokens
   tokens: ["Round"],
+
+  // Railway Companies
   companies: [
     {
       name: "Pennsylvania",

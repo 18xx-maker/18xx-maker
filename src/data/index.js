@@ -22,6 +22,12 @@ const colors = {
   text: "rgb(0,0,0)"
 };
 
+// Height and width of paper in SVG units without print margins
+const paper = {
+  width: 800,
+  height: 1025
+};
+
 const companies = {
   green: "rgb(50,118,63)",
   black: "rgb(0,0,0)",
@@ -45,4 +51,4 @@ const textColor = color => {
   }
 };
 
-export { alpha, colors, companies, textColor };
+export { alpha, colors, companies, paper, textColor };
