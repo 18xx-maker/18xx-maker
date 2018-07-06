@@ -90,28 +90,61 @@ const fillArray = R.curry((getNumber, array) => {
 });
 
 const marketColor = R.curry((limits, value) => {
-  return R.propOr("plain", "color", R.find(limit => R.lte(value, limit.value), R.reverse(limits)));
+  return R.propOr(
+    "plain",
+    "color",
+    R.find(limit => R.lte(value, limit.value), R.reverse(limits))
+  );
 });
 
-const maxMapX = R.compose(R.reduce(R.max, 1),
-                          R.map(R.nth(0)),
-                          R.chain(R.prop("hexes")))
-
-const maxMapY = R.compose(R.reduce(R.max, 1),
-                          R.map(R.nth(1)),
-                          R.chain(R.prop("hexes")))
-
 const toAlpha = num => {
-  if(num <= 0) {
+  if (num <= 0) {
     return "";
-  } else if(num <= 26) {
+  } else if (num <= 26) {
     return R.nth(num - 1, alpha);
   } else {
     let remainder = num % 26;
     let quotient = Math.floor(num / 26);
     return `${toAlpha(quotient)}${R.nth(remainder - 1, alpha)}`;
   }
-}
+};
+
+const alphaToInt = R.compose(
+  R.reduce((total, c) => {
+    return total * 26 + (R.indexOf(c, alpha) + 1);
+  }, 0),
+  R.splitEvery(1)
+);
+
+const coordsRegExp = /([a-z]+)([0-9]+)/i;
+const toCoords = str => {
+  if(Array.isArray(str)) {
+    return str;
+  }
+
+  let match = coordsRegExp.exec(str);
+  if (match) {
+    let y = alphaToInt(match[1]);
+    let x = parseInt(match[2]);
+    return [x, y];
+  } else {
+    return null;
+  }
+};
+
+const maxMapX = R.compose(
+  R.reduce(R.max, 1),
+  R.map(R.nth(0)),
+  R.map(toCoords),
+  R.chain(R.prop("hexes"))
+);
+
+const maxMapY = R.compose(
+  R.reduce(R.max, 1),
+  R.map(R.nth(1)),
+  R.map(toCoords),
+  R.chain(R.prop("hexes"))
+);
 
 export default {
   HEX_RATIO,
@@ -124,5 +157,6 @@ export default {
   marketColor,
   maxMapX,
   maxMapY,
-  toAlpha
+  toAlpha,
+  toCoords
 };
