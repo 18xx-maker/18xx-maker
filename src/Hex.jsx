@@ -1,6 +1,5 @@
 import React from "react";
 import util from "./util";
-import { colors } from "./data";
 import * as R from "ramda";
 
 import Hex from "./atoms/Hex";

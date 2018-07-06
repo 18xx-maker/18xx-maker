@@ -1,7 +1,4 @@
 import React from "react";
-import { colors, textColor } from "./data";
-import * as R from "ramda";
-import Token from "./Token";
 
 const Private = ({ name, price, revenue, description }) => {
   return (

@@ -30,7 +30,7 @@ const colors = {
   maroon: "rgb(96,23,44)",
   orange: "rgb(245,129,33)",
   red: "rgb(209,35,42)",
-  yellow: "rgb(255,231,16)"
+  // yellow: Same as tile yellow
 };
 
 // Height and width of paper in SVG units without print margins

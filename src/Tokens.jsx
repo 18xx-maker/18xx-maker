@@ -1,7 +1,6 @@
 import React from "react";
 import Token from "./Token";
 import games from "./data/games";
-import { colors, textColor } from "./data";
 import * as R from "ramda";
 
 const Tokens = ({ match }) => {

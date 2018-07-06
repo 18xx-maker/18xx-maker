@@ -1,6 +1,5 @@
 import React from "react";
 import { colors } from "./data";
-import * as R from "ramda";
 import Token from "./Token";
 
 const Share = ({ shares, percent, label, name, abbrev, color }) => {
