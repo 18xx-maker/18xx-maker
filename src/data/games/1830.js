@@ -883,7 +883,7 @@ const game = {
             companies: [
               {
                 label: "PRR",
-                color: "green"
+                color: "darkGreen"
               }
             ]
           }
