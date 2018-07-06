@@ -2,7 +2,13 @@ import React from "react";
 
 const Svg = ({ width, height, viewBox, defs, children }) => {
   return (
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox={viewBox}>
+    <svg
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      width={width}
+      height={height}
+      viewBox={viewBox}
+    >
       <defs>
         <style>
           @import url("https://fonts.googleapis.com/css?family=Bitter:700");
@@ -14,6 +20,14 @@ const Svg = ({ width, height, viewBox, defs, children }) => {
             stroke="none"
           />
         </clipPath>
+        <path
+          id="cityPath"
+          d="M -30 0 A 30 30 0 0 1 30 0 A 30 30 0 0 1 -30 0"
+        />
+        <path
+          id="revCityPath"
+          d="M -30 0 A 30 30 0 0 0 30 0 A 30 30 0 0 0 -30 0"
+        />
         {defs}
       </defs>
       {children}
