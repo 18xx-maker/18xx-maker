@@ -148,6 +148,37 @@ describe("mergeHex", () => {
     });
   });
 
+  it("should merge track", () => {
+    let hex = {
+      copy: "A5",
+      track: [
+        {
+          side: 3
+        }
+      ]
+    };
+    let copyHex = {
+      color: "yellow",
+      track: [
+        {
+          side: 4
+        }
+      ]
+    };
+    expect(util.mergeHex(hex, copyHex)).toEqual({
+      copy: "A5",
+      color: "yellow",
+      track: [
+        {
+          side: 3
+        },
+        {
+          side: 4
+        }
+        ]
+    });
+  });
+
   it("should handle cities", () => {
     let hex = {
       copy: "A5",
