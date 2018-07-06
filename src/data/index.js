@@ -55,10 +55,11 @@ const strokeColor = color => {
   switch (color) {
     case "yellow":
     case "cyan":
-    default:
       return tinycolor(colors[color])
         .darken(20)
         .toString();
+    default:
+      return "none";
   }
 };
 
