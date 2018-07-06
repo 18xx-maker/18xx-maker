@@ -13,7 +13,11 @@ const Map = ({ match }) => {
   let game = games[match.params.game];
   let map = game.map;
 
-  let hexWidth = map.hexWidth;
+  if(!map) {
+    return null;
+  }
+
+  let hexWidth = game.info.width;
   let edge = hexWidth * HEX_RATIO;
   let halfHexWidth = 0.5 * hexWidth;
   let maxX = util.maxMapX(map.hexes);

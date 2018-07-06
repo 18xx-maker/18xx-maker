@@ -8,6 +8,10 @@ const Stock = ({ match }) => {
   let game = games[match.params.game];
   let stock = game.stock;
 
+  if(!stock) {
+    return null;
+  }
+
   return (
     <div class="stock">
       <div class="prices">

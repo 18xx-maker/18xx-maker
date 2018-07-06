@@ -8,6 +8,10 @@ const Privates = ({ match }) => {
   let game = games[match.params.game];
   let privates = game.privates;
 
+  if(!privates) {
+    return null;
+  }
+
   return (
     <div class="cards">
       {R.map(

@@ -6,6 +6,11 @@ import * as R from "ramda";
 
 const Trains = ({ match }) => {
   let game = games[match.params.game];
+
+  if(!game.trains) {
+    return null;
+  }
+
   let trains = util.fillArray(R.prop("quantity"), game.trains);
 
   return (

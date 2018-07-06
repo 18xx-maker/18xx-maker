@@ -4,7 +4,7 @@ const game = {
     title: "1830",
     subtitle: "Railways & Robber Barons",
     designer: "Francis Tresham",
-    background: "green",
+    background: "gray",
     width: 150,
     rotatation: 90
   },
@@ -18,7 +18,7 @@ const game = {
       name: "Pennsylvania",
       abbrev: "PRR",
       tokens: ["Free", "$40", "$100", "$100", "$100"],
-      color: "green",
+      color: "darkGreen",
       shares: [
         {
           quantity: 1,
