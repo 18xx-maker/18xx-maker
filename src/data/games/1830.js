@@ -412,10 +412,10 @@ const game = {
     {
       name: "Operating Round",
       steps: [
-        "Lay Track",
-        "Purchase Token",
-        "Run Trains",
-        "Collect Revenue",
+        "Lay track",
+        "Purchase token",
+        "Run trains",
+        "Collect revenue",
         "Purchase trains"
       ],
       ordered: true
