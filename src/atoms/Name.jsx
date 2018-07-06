@@ -7,7 +7,7 @@ const Name = ({ name, reverse, rotation, town }) => {
   }
   return (
     <text
-      dy={reverse ? (town ? 10 : 7) : 0}
+      dy={reverse ? (town ? 8 : 7) : 0}
       transform={`rotate(${(rotation || 0) + 360})`}
       fontFamily="Helvetica, Arial, sans-serif"
       font-size="10"
