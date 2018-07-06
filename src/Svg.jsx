@@ -21,11 +21,19 @@ const Svg = ({ width, height, viewBox, defs, children }) => {
           />
         </clipPath>
         <path
+          id="townPath"
+          d="M 0 15 A 15 15 0 0 1 0 -15 A 15 15 0 0 1 0 15"
+        />
+        <path
+          id="townPathReverse"
+          d="M 0 -15 A 15 15 0 0 0 0 15 A 15 15 0 0 0 0 -15"
+        />
+        <path
           id="cityPath"
           d="M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30"
         />
         <path
-          id="revCityPath"
+          id="cityPathReverse"
           d="M 0 -30 A 30 30 0 0 0 0 30 A 30 30 0 0 0 0 -30"
         />
         {defs}

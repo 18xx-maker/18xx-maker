@@ -17,6 +17,7 @@ const CenterTown = ({ border, name }) => {
           name={name.name}
           reverse={name.reverse}
           rotation={name.rotation}
+          town={true}
         />
       );
     }
