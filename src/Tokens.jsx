@@ -3,6 +3,8 @@ import Token from "./Token";
 import games from "./data/games";
 import * as R from "ramda";
 
+import Svg from "./Svg";
+
 const Tokens = ({ match }) => {
   let game = games[match.params.game];
   let companies = game.companies;
@@ -35,11 +37,19 @@ const Tokens = ({ match }) => {
   }, companies);
 
   let extras = R.addIndex(R.map)((label, index) => {
-    return (
-      <g transform={`translate(${60 * index + 30} 0)`}>
-        <Token width="30" label={label} color={"black"} inverse={true} />
-      </g>
-    );
+    if (label.match(/^#/)) {
+      return (
+        <g transform={`translate(${60 * index + 30} 0)`}>
+          <Token icon={label} width="30" color={"white"} outline={"black"} />
+        </g>
+      );
+    } else {
+      return (
+        <g transform={`translate(${60 * index + 30} 0)`}>
+          <Token label={label} width="30" color={"white"} outline={"black"} />
+        </g>
+      );
+    }
   }, game.tokens);
 
   let y = 60 * companies.length + 30;
@@ -51,14 +61,9 @@ const Tokens = ({ match }) => {
 
   return (
     <div className="tokens">
-      <svg width={width} height={height}>
-        <defs>
-          <style>
-            @import url('https://fonts.googleapis.com/css?family=Bitter:700');
-          </style>
-        </defs>
+      <Svg width={width} height={height}>
         {tokens}
-      </svg>
+      </Svg>
     </div>
   );
 };
