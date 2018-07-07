@@ -2,6 +2,10 @@ import React from "react";
 import util from "./util";
 import * as R from "ramda";
 
+import Position from "./Position";
+
+import HexContext from "./context/HexContext";
+
 import Hex from "./atoms/Hex";
 import Track from "./atoms/Track";
 import Id from "./atoms/Id";
@@ -76,125 +80,49 @@ const HexTile = ({ hex, id, border }) => {
 
   let offBoardTracks = R.map(makeOffBoardTrack, hex.offBoardTrack || []);
 
-  let cities = R.map(city => {
-    let rotate = city.rotate === undefined ? 90 : city.rotate;
-    let translate = `${city.x || 0} ${city.y || 0}`;
-    return (
-      <g transform={`translate(${translate}) rotate(${rotate})`}>
-        <City size={city.size || 1} companies={city.companies} name={city.name} />
-      </g>
-    );
-  }, hex.cities || []);
+  let cities = <Position data={hex.cities}>{c => <City {...c} />}</Position>;
 
-  let cityBorders = R.map(city => {
-    let rotate = city.rotate || 90;
-    let translate = `${city.x || 0} ${city.y || 0}`;
-    return (
-      <g transform={`translate(${translate}) rotate(${rotate})`}>
-        <City size={city.size || 1} border={true} />
-      </g>
-    );
-  }, hex.cities || []);
+  let cityBorders = (
+    <Position data={hex.cities}>{c => <City {...c} border={true} />}</Position>
+  );
 
-  let towns = R.map(town => {
-    let rotate = town.rotate === undefined ? 90 : town.rotate;
-    return (
-      <g transform={`translate(${town.x} ${town.y}) rotate(${rotate})`}>
-        <Town />
-      </g>
-    );
-  }, hex.towns || []);
+  let towns = <Position data={hex.towns}>{t => <Town />}</Position>;
 
-  let townBorders = R.map(town => {
-    let rotate = town.rotate === undefined ? 90 : town.rotate;
-    return (
-      <g transform={`translate(${town.x} ${town.y}) rotate(${rotate})`}>
-        <Town border={true} />
-      </g>
-    );
-  }, hex.towns || []);
+  let townBorders = (
+    <Position data={hex.towns}>{t => <Town border={true} />}</Position>
+  );
 
-  let centerTowns = R.map(town => {
-    return (
-      <g transform={`translate(${town.x || 0} ${town.y || 0})`}>
-        <CenterTown border={true} />
-        <CenterTown name={town.name} />
-      </g>
-    );
-  }, hex.centerTowns || []);
+  let centerTowns = (
+    <Position data={hex.centerTowns}>
+      {t => [<CenterTown border={true} />, <CenterTown {...t} />]}
+    </Position>
+  );
 
-  let labels = R.map(label => {
-    let translate = `${label.x || 0} ${label.y || 0}`;
-    let rotate = label.rotate === undefined ? 90 : label.rotate;
-    return (
-      <g transform={`translate(${translate}) rotate(${rotate})`}>
-        <Label label={label.label} />
-      </g>
-    );
-  }, hex.labels || []);
+  let labels = <Position data={hex.labels}>{l => <Label {...l} />}</Position>;
 
-  let water = null;
-  if (hex.water) {
-    let translate = `${hex.water.x || 0} ${hex.water.y || 0}`;
-    let rotate = hex.water.rotate === undefined ? 0 : hex.water.rotate;
-    water = (
-      <g transform={`translate(${translate}) rotate(${rotate})`}>
-        <Water cost={hex.water.cost} size={hex.water.size} />
-      </g>
-    );
-  }
+  let water = <Position data={hex.water}>{w => <Water {...w} />}</Position>;
 
-  let mountain = null;
-  if (hex.mountain) {
-    let translate = `${hex.mountain.x || 0} ${hex.mountain.y || 0}`;
-    let rotate = hex.mountain.rotate === undefined ? 0 : hex.mountain.rotate;
-    mountain = (
-      <g transform={`translate(${translate}) rotate(${rotate})`}>
-        <Mountain cost={hex.mountain.cost} size={hex.mountain.size} />
-      </g>
-    );
-  }
+  let mountain = (
+    <Position data={hex.mountain}>{m => <Mountain {...m} />}</Position>
+  );
 
-  let offBoardRevenue = null;
-  if (hex.offBoardRevenue && hex.offBoardRevenue.revenues) {
-    let translate = `${hex.offBoardRevenue.x || 0} ${hex.offBoardRevenue.y ||
-      0}`;
-    let rotate =
-      hex.offBoardRevenue.rotate === undefined ? 0 : hex.offBoardRevenue.rotate;
-    offBoardRevenue = (
-      <g transform={`translate(${translate}) rotate(${rotate})`}>
-        <OffBoardRevenue revenues={hex.offBoardRevenue.revenues} />
-      </g>
-    );
-  }
+  let offBoardRevenue = (
+    <Position data={hex.offBoardRevenue}>
+      {r => <OffBoardRevenue {...r} />}
+    </Position>
+  );
 
-  let borders = R.map(border => {
-    let rotation = (border.side - 1) * 60;
-    return (
-      <g transform={`rotate(${rotation})`}>
-        <Border color={border.color} />
-      </g>
-    );
-  }, hex.borders || []);
+  let borders = (
+    <Position data={hex.borders}>{b => <Border {...b} />}</Position>
+  );
 
-  let borderBorders = R.map(border => {
-    let rotation = (border.side - 1) * 60;
-    return (
-      <g transform={`rotate(${rotation})`}>
-        <Border border={true} color={border.color} />
-      </g>
-    );
-  }, hex.borders || []);
+  let borderBorders = (
+    <Position data={hex.borders}>
+      {b => <Border {...b} border={true} />}
+    </Position>
+  );
 
-  let values = R.map(value => {
-    let translate = `${value.x || 0} ${value.y || 0}`;
-    let rotate = value.rotate === undefined ? 90 : value.rotate;
-    return (
-      <g transform={`translate(${translate}) rotate(${rotate})`}>
-        <Value value={value.value} />
-      </g>
-    );
-  }, hex.values || []);
+  let values = <Position data={hex.values}>{v => <Value {...v} />}</Position>;
 
   return (
     <g>
@@ -208,7 +136,6 @@ const HexTile = ({ hex, id, border }) => {
       {cities}
       {towns}
       {centerTowns}
-      {label}
       {labels}
       {offBoardRevenue}
       {water}
@@ -217,9 +144,13 @@ const HexTile = ({ hex, id, border }) => {
       {borders}
 
       {id && (
-        <g transform="translate(-70 -40) rotate(90)">
-          <Id id={id} />
-        </g>
+        <HexContext.Consumer>
+          {hc => (
+            <g transform={`translate(-70 -40) rotate(${hc.rotation})`}>
+              <Id id={id} />
+            </g>
+          )}
+        </HexContext.Consumer>
       )}
 
       {border && <Hex border={true} />}

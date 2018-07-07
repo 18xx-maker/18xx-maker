@@ -125,7 +125,7 @@ const toCoords = str => {
   let match = coordsRegExp.exec(str);
   if (match) {
     let y = alphaToInt(match[1]);
-    let x = parseInt(match[2]);
+    let x = parseInt(match[2], 10);
     return [x, y];
   } else {
     return null;

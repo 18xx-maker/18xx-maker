@@ -4,6 +4,10 @@ import { colors, textColor } from "../data";
 import Name from "./Name";
 
 const City = ({ size, companies, border, name }) => {
+  if(size === undefined) {
+    size = 1;
+  }
+
   let companyColor = num =>
     (companies &&
       companies[num] &&
