@@ -7,7 +7,7 @@ const Tunnel = ({ cost }) => {
       <path
         d="M -28 19 L 0 -22 L 28 19 Z"
         fill={colors["mountain"]}
-        stroke={colors["white"]}
+        stroke={colors["black"]}
         strokeWidth="2"
         strokeLinecap="round"
         x="0"
