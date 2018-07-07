@@ -3,6 +3,7 @@ import * as R from "ramda";
 import { paper } from "./data";
 
 import Tile from "./Tile";
+import Svg from "./Svg";
 
 import games from "./data/games";
 
@@ -19,24 +20,28 @@ const TileSheet = ({ match }) => {
   let game = games[match.params.game];
   let width = game.info.width;
   let height = width * HEX_RATIO * 2;
-  let tileHeight = width * RATIO;
-  let tileWidth = 2 * width * HEX_RATIO * RATIO;
-  let perRow = Math.floor((paper.width - 0.5 * tileWidth) / tileWidth);
+  let tileHeight = height * RATIO;
+  let tileWidth = width * RATIO;
+  let perRow = Math.floor(paper.width / (tileWidth + 12.5));
   let ids = R.chain(k => Array(game.tiles[k]).fill(k), R.keys(game.tiles));
 
   let tiles = R.map(
     row => (
-      <div className="row">
+      <div
+        className="row"
+        style={{ width: `${(perRow * (tileWidth + 12.5) - 12.5) * 0.01}in` }}
+      >
         {R.map(
           id => (
-            <svg
-              width={tileWidth}
-              height={tileHeight}
-              viewBox={`${height * -0.5} ${width * -0.5} ${height} ${width}`}
-              transform="rotate(-90)"
+            <Svg
+              style={{
+                width: `${tileWidth * 0.01}in`,
+                height: `${tileHeight * 0.01}in`
+              }}
+              viewBox={`-75 -86.6025 150 173.205`}
             >
               <Tile id={id} />
-            </svg>
+            </Svg>
           ),
           row
         )}

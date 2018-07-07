@@ -1,6 +1,6 @@
 import React from "react";
 
-const Svg = ({ width, height, viewBox, defs, children }) => {
+const Svg = ({ width, height, viewBox, style, defs, children }) => {
   return (
     <svg
       version="1.1"
@@ -8,6 +8,7 @@ const Svg = ({ width, height, viewBox, defs, children }) => {
       width={width}
       height={height}
       viewBox={viewBox}
+      style={style}
     >
       <defs>
         <style>
