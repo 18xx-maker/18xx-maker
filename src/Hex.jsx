@@ -123,17 +123,6 @@ const HexTile = ({ hex, id, border }) => {
     );
   }, hex.centerTowns || []);
 
-  let label = null;
-  if (hex.label && hex.label.label) {
-    let translate = `${hex.label.x || 0} ${hex.label.y || 0}`;
-    let rotate = hex.label.rotate === undefined ? 90 : hex.label.rotate;
-    label = (
-      <g transform={`translate(${translate}) rotate(${rotate})`}>
-        <Label label={hex.label.label} />
-      </g>
-    );
-  }
-
   let labels = R.map(label => {
     let translate = `${label.x || 0} ${label.y || 0}`;
     let rotate = label.rotate === undefined ? 90 : label.rotate;

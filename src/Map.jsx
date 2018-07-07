@@ -6,6 +6,8 @@ import Hex from "./Hex";
 import Title from "./Title";
 import Svg from "./Svg";
 
+import HexContext from "./context/HexContext";
+
 const HEX_RATIO = 0.57735;
 
 const Map = ({ match }) => {
@@ -45,14 +47,18 @@ const Map = ({ match }) => {
   }, map.hexes);
 
   return (
-    <div className="cutlines">
-      <div className="map">
-        <Svg width={totalWidth} height={totalHeight}>
-          <Title game={game} />
-          {hexes}
-        </Svg>
+    <HexContext.Provider
+      value={{ width: game.info.width, rotation: game.info.rotation }}
+    >
+      <div className="cutlines">
+        <div className="map">
+          <Svg width={totalWidth} height={totalHeight}>
+            <Title game={game} />
+            {hexes}
+          </Svg>
+        </div>
       </div>
-    </div>
+    </HexContext.Provider>
   );
 };
 

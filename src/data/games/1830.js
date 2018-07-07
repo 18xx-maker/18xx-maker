@@ -540,11 +540,11 @@ const game = {
     hexes: [
       {
         color: "offboard",
-        label: {
+        labels: [{
           label: "Gulf",
           x: -20,
           rotate: 0
-        },
+        }],
         offBoardRevenue: {
           x: -20,
           y: 30,
@@ -596,11 +596,11 @@ const game = {
       },
       {
         color: "offboard",
-        label: {
+        labels: [{
           label: "Chicago",
           x: -25,
           rotate: 0
-        },
+        }],
         offBoardRevenue: {
           x: -25,
           y: 30,
@@ -687,11 +687,11 @@ const game = {
           cost: "$80",
           size: "small"
         },
-        label: {
+        labels: [{
           label: "OO",
           y: 50,
           rotate: 0
-        },
+        }],
         cities: [
           {
             x: -45,
@@ -784,10 +784,10 @@ const game = {
       },
       {
         color: "offboard",
-        label: {
+        labels: [{
           label: "Canadian West",
           rotate: 0
-        },
+        }],
         offBoardRevenue: {
           y: -30,
           revenues: [
@@ -849,11 +849,11 @@ const game = {
       },
       {
         color: "offboard",
-        label: {
+        labels: [{
           label: "Deep South",
           y: 30,
           rotate: 0
-        },
+        }],
         offBoardRevenue: {
           revenues: [
             {
@@ -1049,11 +1049,11 @@ const game = {
           cost: "$120",
           y: 30
         },
-        label: {
+        labels: [{
           label: "SVR",
           rotate: 0,
           y: -30
-        },
+        }],
         hexes: ["G15"]
       },
       {
@@ -1169,12 +1169,12 @@ const game = {
             }
           }
         ],
-        label: {
+        labels: [{
           label: "D&H",
           rotate: 0,
           y: 30,
           x: -30
-        },
+        }],
         hexes: ["F16"]
       },
       {
@@ -1203,10 +1203,10 @@ const game = {
       },
       {
         color: "plain",
-        label: {
+        labels: [{
           rotate: 0,
           label: "M&H"
-        },
+        }],
         hexes: ["D18"]
       },
       {
@@ -1393,11 +1393,11 @@ const game = {
       },
       {
         color: "plain",
-        label: {
+        labels: [{
           label: "C&St L",
           y: 30,
           rotate: 0
-        },
+        }],
         centerTowns: [
           {
             rotate: 0,
@@ -1455,12 +1455,12 @@ const game = {
       },
       {
         color: "offboard",
-        label: {
+        labels: [{
           label: "Maritime Provinces",
           rotate: 0,
           y: -25,
           x: 5
-        },
+        }],
         offBoardRevenue: {
           y: 0,
           revenues: [
