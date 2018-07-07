@@ -12,12 +12,14 @@ import Town from "./atoms/Town";
 import CenterTown from "./atoms/CenterTown";
 import Label from "./atoms/Label";
 import Track from "./atoms/Track";
+import OffBoardTrack from "./atoms/OffBoardTrack";
+import OffBoardRevenue from "./atoms/OffBoardRevenue";
 import Hex from "./atoms/Hex";
 import Border from "./atoms/Border";
 import Mountain from "./atoms/Mountain";
+import Tunnel from "./atoms/Tunnel";
 import Water from "./atoms/Water";
-import OffBoardRevenue from "./atoms/OffBoardRevenue";
-import OffBoardTrack from "./atoms/OffBoardTrack";
+import Bridge from "./atoms/Bridge";
 
 const Atoms = () => {
   let atoms = [
@@ -98,7 +100,10 @@ const Atoms = () => {
       name: "Center Town",
       examples: [
         [<CenterTown border={true} />, <CenterTown />],
-        [<CenterTown border={true} />, <CenterTown name={{name:"Austin",reverse:true}}/>]
+        [
+          <CenterTown border={true} />,
+          <CenterTown name={{ name: "Austin", reverse: true }} />
+        ]
       ]
     },
     {
@@ -169,6 +174,29 @@ const Atoms = () => {
       ]
     },
     {
+      name: "OffBoard Track",
+      examples: [[<OffBoardTrack border={true} />, <OffBoardTrack />]]
+    },
+    {
+      name: "OffBoard Revenue",
+      examples: [
+        <OffBoardRevenue
+          revenues={[
+            { cost: "20", color: "yellow" },
+            { cost: "40", color: "brown" }
+          ]}
+        />,
+        <OffBoardRevenue
+          revenues={[
+            { cost: "20", color: "yellow" },
+            { cost: "30", color: "green" },
+            { cost: "40", color: "brown" },
+            { cost: "60", color: "gray" }
+          ]}
+        />
+      ]
+    },
+    {
       name: "Hex",
       examples: [
         [<Hex color="plain" />, <Hex border={true} />],
@@ -197,6 +225,10 @@ const Atoms = () => {
       ]
     },
     {
+      name: "Tunnel",
+      examples: [<Tunnel cost="$40" />]
+    },
+    {
       name: "Water",
       examples: [
         <Water size="small" cost="$40" />,
@@ -205,27 +237,8 @@ const Atoms = () => {
       ]
     },
     {
-      name: "OffBoard Revenue",
-      examples: [
-        <OffBoardRevenue
-          revenues={[
-            { cost: "20", color: "yellow" },
-            { cost: "40", color: "brown" }
-          ]}
-        />,
-        <OffBoardRevenue
-          revenues={[
-            { cost: "20", color: "yellow" },
-            { cost: "30", color: "green" },
-            { cost: "40", color: "brown" },
-            { cost: "60", color: "gray" }
-          ]}
-        />
-      ]
-    },
-    {
-      name: "OffBoard Track",
-      examples: [[<OffBoardTrack border={true} />, <OffBoardTrack />]]
+      name: "Bridge",
+      examples: [<Bridge cost="$40" />]
     }
   ];
 
