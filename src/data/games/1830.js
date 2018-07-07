@@ -729,13 +729,7 @@ const game = {
         hexes: ["D10"]
       },
       {
-        color: "gray",
-        track: [
-          {
-            start: 5,
-            end: 6
-          }
-        ],
+        copy: "A17",
         values: [
           {
             value: 30,
