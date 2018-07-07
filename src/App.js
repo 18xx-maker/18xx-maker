@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import "./App.css";
 
 import Tiles from "./Tiles";
-import Atoms from "./Atoms";
+import Atoms from "./atoms";
 
 import Background from "./Background";
 import Charters from "./Charters";
