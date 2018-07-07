@@ -29,7 +29,7 @@ const colors = {
   darkGreen: "rgb(50,118,63)",
   maroon: "rgb(96,23,44)",
   orange: "rgb(245,129,33)",
-  red: "rgb(209,35,42)",
+  red: "rgb(209,35,42)"
   // yellow: Same as tile yellow
 };
 
@@ -45,22 +45,16 @@ const textColor = color => {
   switch (color) {
     case "yellow":
     case "cyan":
+  case "white":
       return "rgb(0,0,0)";
     default:
       return "rgb(255,255,255)";
   }
 };
 
-const strokeColor = color => {
-  switch (color) {
-    case "yellow":
-    case "cyan":
-      return tinycolor(colors[color])
-        .darken(20)
-        .toString();
-    default:
-      return "none";
-  }
-};
+const strokeColor = color =>
+  tinycolor(colors[color])
+    .darken(10)
+    .toString();
 
 export { alpha, colors, paper, textColor, strokeColor };
