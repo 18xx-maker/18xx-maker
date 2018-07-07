@@ -7,7 +7,7 @@ const Bridge = ({ cost }) => {
       <path
         d="M -28 -5 L 0 36 L 28 -5 Z"
         fill={colors["water"]}
-        stroke={colors["white"]}
+        stroke={colors["black"]}
         strokeWidth="2"
         strokeLinecap="round"
         x="0"
