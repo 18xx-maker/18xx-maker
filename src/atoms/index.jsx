@@ -2,24 +2,24 @@ import React from "react";
 import * as R from "ramda";
 import css from "./atoms.css";
 
-import Svg from "./Svg";
+import Svg from "../Svg";
 
-import Id from "./atoms/Id";
-import Value from "./atoms/Value";
-import Icon from "./atoms/Icon";
-import City from "./atoms/City";
-import Town from "./atoms/Town";
-import CenterTown from "./atoms/CenterTown";
-import Label from "./atoms/Label";
-import Track from "./atoms/Track";
-import OffBoardTrack from "./atoms/OffBoardTrack";
-import OffBoardRevenue from "./atoms/OffBoardRevenue";
-import Hex from "./atoms/Hex";
-import Border from "./atoms/Border";
-import Mountain from "./atoms/Mountain";
-import Tunnel from "./atoms/Tunnel";
-import Water from "./atoms/Water";
-import Bridge from "./atoms/Bridge";
+import Id from "./Id";
+import Value from "./Value";
+import Icon from "./Icon";
+import City from "./City";
+import Town from "./Town";
+import CenterTown from "./CenterTown";
+import Label from "./Label";
+import Track from "./Track";
+import OffBoardTrack from "./OffBoardTrack";
+import OffBoardRevenue from "./OffBoardRevenue";
+import Hex from "./Hex";
+import Border from "./Border";
+import Mountain from "./Mountain";
+import Tunnel from "./Tunnel";
+import Water from "./Water";
+import Bridge from "./Bridge";
 
 const Atoms = () => {
   let atoms = [
