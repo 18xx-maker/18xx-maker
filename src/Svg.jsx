@@ -87,6 +87,14 @@ const Svg = ({ width, height, viewBox, style, defs, children }) => {
           id="cityPathReverse"
           d="M 0 -30 A 30 30 0 0 0 0 30 A 30 30 0 0 0 0 -30"
         />
+        <path
+          id="city2Path"
+          d="M 0 30 L -25 30 A 30 30 0 0 1 -25 -30 L 25 -30 A 30 30 0 0 1 25 30 L 0 30"
+        />
+        <path
+          id="city2PathReverse"
+          d="M 0 -30 L -25 -30 A 30 30 0 0 0 -25 30 L 25 30 A 30 30 0 0 0 25 -30 L 0 -30"
+        />
         {defs}
       </defs>
       {children}

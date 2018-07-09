@@ -4,7 +4,7 @@ import { colors, textColor } from "../data";
 import Name from "./Name";
 
 const City = ({ size, companies, border, name }) => {
-  if(size === undefined) {
+  if (size === undefined) {
     size = 1;
   }
 
@@ -42,24 +42,23 @@ const City = ({ size, companies, border, name }) => {
       )) ||
     null;
 
+  let nameNode = null;
+
+  if (name) {
+    nameNode = (
+      <Name
+        {...name}
+        size={size}
+      />
+    );
+  }
+
   if (size === 1) {
     if (border) {
       return (
         <circle fill={colors["border"]} stroke="none" cx="0" cy="0" r="28" />
       );
     } else {
-      let nameNode = null;
-
-      if (name) {
-        nameNode = (
-          <Name
-            name={name.name}
-            reverse={name.reverse}
-            rotation={name.rotation}
-          />
-        );
-      }
-
       return (
         <g>
           <circle
@@ -115,6 +114,7 @@ const City = ({ size, companies, border, name }) => {
             />
             {companyLabel(1)}
           </g>
+          {nameNode}
         </g>
       );
     }
