@@ -14,6 +14,9 @@ const Home = () => {
           <li>
             <Link to={`/tiles/atoms`}>Atoms</Link>
           </li>
+          <li>
+            <Link to={`/tiles/positioning`}>Positioning</Link>
+          </li>
         </ul>
       </div>
       <Games />

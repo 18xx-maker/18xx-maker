@@ -541,13 +541,10 @@ const game = {
       {
         color: "offboard",
         labels: [{
-          label: "Gulf",
-          x: -20,
-          rotate: 0
+          label: "Gulf"
         }],
         offBoardRevenue: {
-          x: -20,
-          y: 30,
+          percent: 0.333,
           revenues: [
             {
               color: "yellow",
@@ -570,7 +567,6 @@ const game = {
         color: "gray",
         cities: [
           {
-            rotate: 0,
             name: {
               name: "Lansing"
             }
@@ -578,10 +574,9 @@ const game = {
         ],
         values: [
           {
-            x: -50,
-            y: 0,
-            value: 20,
-            rotate: 0
+            angle: 90,
+            percent: 0.667,
+            value: 20
           }
         ],
         track: [
@@ -598,12 +593,11 @@ const game = {
         color: "offboard",
         labels: [{
           label: "Chicago",
-          x: -25,
-          rotate: 0
+          x: -25
         }],
         offBoardRevenue: {
+          percent: 0.333,
           x: -25,
-          y: 30,
           revenues: [
             {
               color: "yellow",
@@ -641,9 +635,8 @@ const game = {
         color: "plain",
         cities: [
           {
-            x: -15,
-            y: -25,
-            rotate: 0,
+            angle: 120,
+            percent: 0.4,
             name: {
               name: "Toledo",
               rotation: 30
@@ -651,8 +644,8 @@ const game = {
           }
         ],
         water: {
-          x: 15,
-          y: 25,
+          angle: 300,
+          percent: 0.4,
           cost: "$80",
           size: "small"
         },
@@ -683,28 +676,26 @@ const game = {
       {
         color: "yellow",
         water: {
-          y: -50,
+          angle: 180,
+          percent: 0.667,
           cost: "$80",
           size: "small"
         },
         labels: [{
           label: "OO",
-          y: 50,
-          rotate: 0
+          percent: 0.667
         }],
         cities: [
           {
-            x: -45,
-            y: 20,
-            rotate: 0,
+            angle: 65,
+            percent: 0.6,
             name: {
               name: "Detroit"
             }
           },
           {
-            x: 45,
-            y: 20,
-            rotate: 0,
+            angle: 295,
+            percent: 0.6,
             name: {
               name: "Windsor"
             }
@@ -732,15 +723,14 @@ const game = {
         copy: "A17",
         values: [
           {
-            value: 30,
-            y: -30,
-            rotate: 0
+            angle: 180,
+            percent: 0.333,
+            value: 30
           }
         ],
         cities: [
           {
-            y: 40,
-            rotate: 0,
+            percent: 0.5,
             name: {
               name: "Cleveland"
             },
@@ -758,7 +748,6 @@ const game = {
         color: "plain",
         centerTowns: [
           {
-            rotate: 0,
             name: {
               name: "London"
             }
@@ -785,11 +774,11 @@ const game = {
       {
         color: "offboard",
         labels: [{
-          label: "Canadian West",
-          rotate: 0
+          label: "Canadian West"
         }],
         offBoardRevenue: {
-          y: -30,
+          angle: 180,
+          percent: 0.333,
           revenues: [
             {
               color: "yellow",
@@ -850,11 +839,10 @@ const game = {
       {
         color: "offboard",
         labels: [{
-          label: "Deep South",
-          y: 30,
-          rotate: 0
+          label: "Deep South"
         }],
         offBoardRevenue: {
+          percent: 0.333,
           revenues: [
             {
               color: "yellow",
@@ -881,15 +869,13 @@ const game = {
         labels: [
           {
             label: "OO",
-            y: 50,
-            rotate: 0
+            percent: 0.667
           }
         ],
         cities: [
           {
-            x: -40,
-            y: 10,
-            rotate: 0,
+            angle: 75,
+            percent: 0.55,
             name: {
               name: "Dunkirk",
               rotation: 30
@@ -902,9 +888,8 @@ const game = {
             ]
           },
           {
-            x: 40,
-            y: 10,
-            rotate: 0,
+            angle: 285,
+            percent: 0.55,
             name: {
               name: "Buffalo",
               rotation: -30
@@ -938,13 +923,12 @@ const game = {
         values: [
           {
             value: 10,
-            rotate: 0,
-            y: -60
+            percent: 0.8,
+            angle: 180
           }
         ],
         cities: [
           {
-            rotate: 0,
             name: {
               name: "Altoona"
             },
@@ -972,8 +956,7 @@ const game = {
         color: "plain",
         labels: [
           {
-            label: "B&O",
-            rotate: 0
+            label: "B&O"
           }
         ],
         hexes: ["I13"]
@@ -982,7 +965,6 @@ const game = {
         color: "gray",
         cities: [
           {
-            rotate: 0,
             name: {
               name: "Rochester"
             }
@@ -991,21 +973,17 @@ const game = {
         values: [
           {
             value: 20,
-            y: -60,
-            rotate: 0
+            y: -60
           }
         ],
         track: [
           {
-            type: "city",
             side: 1
           },
           {
-            type: "city",
             side: 4
           },
           {
-            type: "city",
             side: 6
           }
         ],
@@ -1016,28 +994,24 @@ const game = {
         values: [
           {
             value: 10,
-            x: -20,
-            y: -40,
-            rotate: 0
+            angle: -30,
+            percent: 0.5
           }
         ],
-        centerTowns: [
-          {
-            rotate: 0,
+        towns: [{
+          rotation: 60,
+          angle: 150,
+          percent: 0.26,
             name: {
               name: "Kingston",
-              reverse: true
+              reverse: true,
+              rotation: -90
             }
-          }
-        ],
+        }],
         track: [
           {
-            type: "city",
+            type: "gentle",
             side: 1
-          },
-          {
-            type: "city",
-            side: 3
           }
         ],
         hexes: ["C15"]
@@ -1047,12 +1021,12 @@ const game = {
         mountain: {
           size: "medium",
           cost: "$120",
-          y: 30
+          percent: 0.333
         },
         labels: [{
           label: "SVR",
-          rotate: 0,
-          y: -30
+          angle: 180,
+          percent: 0.333
         }],
         hexes: ["G15"]
       },
@@ -1061,27 +1035,24 @@ const game = {
         labels: [
           {
             label: "B",
-            rotate: 0,
-            y: -45,
-            x: -25
+            angle: 150,
+            percent: 0.70
           },
           {
             label: "B&O",
-            rotate: 0,
-            y: -45,
-            x: 25
+            angle: 210,
+            percent: 0.70
           }
         ],
         values: [
           {
             value: 30,
-            rotate: 0,
-            x: -50
+            angle: 90,
+            percent: 0.667
           }
         ],
         cities: [
           {
-            rotate: 0,
             name: {
               name: "Baltimore",
               reverse: true,
@@ -1097,11 +1068,9 @@ const game = {
         ],
         track: [
           {
-            type: "city",
             side: 4
           },
           {
-            type: "city",
             side: 6
           }
         ],
@@ -1111,7 +1080,6 @@ const game = {
         color: "gray",
         cities: [
           {
-            rotate: 0,
             name: {
               name: "Richmond",
               reverse: true
@@ -1121,13 +1089,12 @@ const game = {
         values: [
           {
             value: 20,
-            rotate: 0,
-            x: 50
+            angle: 270,
+            percent: 0.66
           }
         ],
         track: [
           {
-            type: "city",
             side: 2
           }
         ],
@@ -1137,7 +1104,6 @@ const game = {
         color: "plain",
         cities: [
           {
-            rotate: 0,
             name: {
               name: "Ottowa"
             }
@@ -1160,9 +1126,8 @@ const game = {
         },
         cities: [
           {
-            y: 25,
-            x: 30,
-            rotate: 0,
+            angle: -45,
+            percent: 0.5,
             name: {
               name: "Scranton",
               rotation: 45
@@ -1171,9 +1136,8 @@ const game = {
         ],
         labels: [{
           label: "D&H",
-          rotate: 0,
-          y: 30,
-          x: -30
+          angle: 45,
+          percent: 0.5
         }],
         hexes: ["F16"]
       },
@@ -1204,7 +1168,6 @@ const game = {
       {
         color: "plain",
         labels: [{
-          rotate: 0,
           label: "M&H"
         }],
         hexes: ["D18"]
@@ -1214,20 +1177,17 @@ const game = {
         labels: [
           {
             label: "C&A",
-            rotate: 0,
             y: -30
           },
           {
             label: "OO",
-            y: 57,
-            rotate: 0
+            y: 57
           }
         ],
         cities: [
           {
             x: -40,
             y: 10,
-            rotate: 0,
             name: {
               name: "Philidelphia",
               reverse: true
@@ -1236,7 +1196,6 @@ const game = {
           {
             x: 40,
             y: 10,
-            rotate: 0,
             name: {
               name: "Trenton",
               reverse: true
@@ -1271,7 +1230,6 @@ const game = {
         color: "plain",
         cities: [
           {
-            rotate: 0,
             name: {
               name: "Albany"
             },
@@ -1289,21 +1247,19 @@ const game = {
         color: "yellow",
         values: [
           {
-            y: -63,
-            rotate: 0,
+            angle: 180,
+            percent: 0.84,
             value: 40
           },
           {
-            y: 63,
-            rotate: 0,
+            percent: 0.84,
             value: 40
           }
         ],
         cities: [
           {
-            x: 30,
-            y: -30,
-            rotate: 0,
+            angle: 230,
+            percent: 0.6,
             name: {
               name: "New York",
               reverse: true
@@ -1316,9 +1272,8 @@ const game = {
             ]
           },
           {
-            x: -30,
-            y: 30,
-            rotate: 0,
+            angle: 50,
+            percent: 0.6,
             name: {
               name: "Newark"
             }
@@ -1327,14 +1282,13 @@ const game = {
         labels: [
           {
             label: "NY",
-            rotate: 0,
-            y: -28,
-            x: -25
+            angle: 140,
+            percent: 0.5
           }
         ],
         water: {
-          x: 35,
-          y: 25,
+          angle: 310,
+          percent: 0.5,
           cost: "$80",
           size: "small"
         },
@@ -1352,37 +1306,34 @@ const game = {
       },
       {
         color: "gray",
-        centerTowns: [
-          {
-            rotate: 0,
-            name: {
-              name: "Atlantic City",
-              reverse: true
-            }
+        towns: [{
+          angle: 120,
+          percent: 0.57735,
+          rotation: 30,
+          name: {
+            name: "Atlantic City",
+            reverse: true,
+            rotation: -90,
           }
-        ],
+        }],
         track: [
           {
-            type: "city",
+            type: "sharp",
             side: 1
-          },
-          {
-            type: "city",
-            side: 2
           }
         ],
         values: [
           {
-            x: 50,
             value: 10,
-            rotate: 0
+            angle: 300,
+            percent: 0.2
           }
         ],
         hexes: ["I19"]
       },
       {
         copy: "I19",
-        centerTowns: [
+        towns: [
           {
             name: {
               name: "Fall River"
@@ -1395,12 +1346,10 @@ const game = {
         color: "plain",
         labels: [{
           label: "C&St L",
-          y: 30,
-          rotate: 0
+          percent: 0.4
         }],
         centerTowns: [
           {
-            rotate: 0,
             name: {
               name: "Burlington"
             }
@@ -1412,15 +1361,13 @@ const game = {
         color: "yellow",
         labels: [
           {
-            label: "B",
-            rotate: 0,
-            y: -45,
-            x: -25
+            angle: 150,
+            percent: 0.70,
+            label: "B"
           }
         ],
         cities: [
           {
-            rotate: 0,
             name: {
               name: "Boston",
               reverse: true,
@@ -1437,17 +1384,15 @@ const game = {
         values: [
           {
             value: 30,
-            rotate: 0,
-            x: -50
+            angle: 90,
+            percent: 0.67
           }
         ],
         track: [
           {
-            type: "city",
             side: 3
           },
           {
-            type: "city",
             side: 5
           }
         ],
@@ -1457,8 +1402,8 @@ const game = {
         color: "offboard",
         labels: [{
           label: "Maritime Provinces",
-          rotate: 0,
-          y: -25,
+          angle: 180,
+          percent: 0.333,
           x: 5
         }],
         offBoardRevenue: {
@@ -1498,7 +1443,6 @@ const game = {
         color: "plain",
         centerTowns: [
           {
-            rotate: 0,
             name: {
               name: "Flint"
             }
@@ -1510,7 +1454,6 @@ const game = {
         color: "plain",
         centerTowns: [
           {
-            rotate: 0,
             name: {
               name: "Erie"
             }
@@ -1521,8 +1464,8 @@ const game = {
       {
         color: "plain",
         centerTowns: [
-          { x: -30, rotate: 0, name: { name: "Akron", reverse: true } },
-          { x: 30, rotate: 0, name: { name: "Canton" } }
+          { x: -30, name: { name: "Akron", reverse: true } },
+          { x: 30, name: { name: "Canton" } }
         ],
         hexes: ["G7"]
       },
@@ -1546,7 +1489,6 @@ const game = {
         color: "plain",
         cities: [
           {
-            rotate: 0,
             name: {
               name: "Columbus"
             }
