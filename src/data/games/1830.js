@@ -536,7 +536,6 @@ const game = {
   },
 
   map: {
-    hexWidth: 150,
     hexes: [
       {
         color: "offboard",

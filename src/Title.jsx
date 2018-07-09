@@ -3,7 +3,7 @@ import { colors } from "./data";
 
 const Title = ({ game }) => {
   return (
-    <g>
+    <g transform={`translate(${game.info.titleX || 0} ${game.info.titleY || 0})`}>
       <text
         fill={colors["black"]}
         fontFamily="Bitter"

@@ -146,6 +146,9 @@ const HexTile = ({ hex, id, border }) => {
         {hx => (
           <g clip-path="url(#hexClip)" transform={`rotate(${hx.rotation})`}>
             <g transform={`rotate(-${hx.rotation})`}>
+              {icons}
+              {water}
+              {mountain}
               {cityBorders}
               {townBorders}
               {tracks}
@@ -155,10 +158,7 @@ const HexTile = ({ hex, id, border }) => {
               {towns}
               {centerTowns}
               {labels}
-              {icons}
               {offBoardRevenue}
-              {water}
-              {mountain}
               {borderBorders}
               {borders}
             </g>

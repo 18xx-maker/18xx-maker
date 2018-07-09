@@ -274,17 +274,16 @@ const game = {
   turns: [
     {
       name: "Stock Round",
-      steps: ["Buy one certificate", "Sell any number of certificates"],
-      ordered: false
+      steps: ["Sell any number of certificates", "Buy one certificate"],
+      ordered: true
     },
     {
       name: "Operating Round",
       steps: [
         "Issue or redeem shares",
-        "Lay track",
-        "Purchase token",
-        "Run trains",
-        "Collect revenue",
+        "Lay track and/or place token",
+        "Run routes",
+        "Pay full, pay half, or retain revenue",
         "Purchase trains"
       ],
       ordered: true
@@ -358,7 +357,6 @@ const game = {
   },
 
   map: {
-    hexWidth: 150,
     hexes: [
       {
         color: "plain",

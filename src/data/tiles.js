@@ -1678,7 +1678,7 @@ const tiles = {
     values: [
       {
         angle: 210,
-        percent: 0.75,
+        percent: 0.8,
         value: 40
       }
     ],
@@ -1706,7 +1706,7 @@ const tiles = {
     values: [
       {
         angle: 210,
-        percent: 0.75,
+        percent: 0.8,
         value: 30
       }
     ],
@@ -1724,6 +1724,263 @@ const tiles = {
       {
         side: 5
       }
+    ]
+  },
+
+  // 1889
+  "437": {
+    color: "yellow",
+    icons: [
+      {
+        type: "port",
+        angle: 60,
+        percent: 0.7
+      }
+    ],
+    values: [
+      {
+        angle: -120,
+        percent: 0.2,
+        value: 30
+      }
+    ],
+    towns: [
+      {
+        angle: 60,
+        percent: 0.288675,
+        rotate: -30
+      }
+    ],
+    track: [
+      {
+        type: "gentle",
+        side: 1
+      }
+    ]
+  },
+  "438": {
+    color: "yellow",
+    values: [
+      {
+        value: 40
+      }
+    ],
+    cities: [
+      {
+        name: {
+          name: "Kotohira",
+          rotation: 60
+        }
+      }
+    ],
+    mountain: {
+      angle: 165,
+      percent: 0.75,
+      cost: "80",
+      border: true
+    },
+    track: [{ side: 1 }, { side: 3 }]
+  },
+  "12": {
+    color: "green",
+    values: [
+      {
+        angle: 180,
+        percent: 0.667,
+        value: 30
+      }
+    ],
+    cities: [{}],
+    track: [{ side: 1 }, { side: 2 }, { side: 6 }]
+  },
+  "13": {
+    color: "green",
+    values: [
+      {
+        angle: 180,
+        percent: 0.667,
+        value: 30
+      }
+    ],
+    cities: [{}],
+    track: [{ side: 1 }, { side: 3 }, { side: 5 }]
+  },
+  "205": {
+    color: "green",
+    values: [
+      {
+        angle: 210,
+        percent: 0.75,
+        value: 30
+      }
+    ],
+    cities: [{}],
+    track: [{ side: 1 }, { side: 2 }, { side: 4 }]
+  },
+  "206": {
+    color: "green",
+    values: [
+      {
+        angle: 210,
+        percent: 0.75,
+        value: 30
+      }
+    ],
+    cities: [{}],
+    track: [{ side: 1 }, { side: 6 }, { side: 4 }]
+  },
+  "439": {
+    color: "green",
+    values: [
+      {
+        angle: 200,
+        percent: 0.75,
+        value: 60
+      }
+    ],
+    mountain: {
+      angle: 160,
+      percent: 0.8,
+      cost: "80",
+      border: true
+    },
+    cities: [
+      {
+        size: 2,
+        name: {
+          name: "Kotohira",
+          reverse: true,
+          offset: 62
+        }
+      }
+    ],
+    track: [{ side: 1 }, { side: 3 }, { side: 5 }]
+  },
+  "440": {
+    color: "green",
+    values: [
+      {
+        angle: 180,
+        percent: 0.75,
+        value: 40
+      }
+    ],
+    cities: [
+      {
+        size: 2,
+        name: {
+          name: "Takamatsu"
+        },
+        companies: [
+          {
+            label: "TKER",
+            color: "red"
+          }
+        ]
+      }
+    ],
+    track: [{ side: 1 }, { side: 2 }, { side: 6 }]
+  },
+  "448": {
+    color: "brown",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 40
+      }
+    ],
+    cities: [
+      {
+        size: 2
+      }
+    ],
+    track: [{ side: 1 }, { side: 4 }, { side: 2 }, { side: 3 }]
+  },
+  "465": {
+    color: "brown",
+    values: [
+      {
+        angle: 210,
+        percent: 0.9,
+        value: 60
+      }
+    ],
+    cities: [
+      {
+        size: 3,
+        rotation: 180,
+        name: {
+          name: "Kochi",
+          offset: 95,
+          y: -3
+        },
+        companies: [
+          {},
+          {},
+          {
+            label: "TER",
+            color: "cyan"
+          }
+        ]
+      }
+    ],
+    track: [{ side: 1 }, { side: 2 }, { side: 3 }, { side: 6 }]
+  },
+  "466": {
+    color: "brown",
+    values: [
+      {
+        angle: 180,
+        percent: 0.75,
+        value: 60
+      }
+    ],
+    cities: [
+      {
+        size: 2,
+        name: {
+          name: "Takamatsu"
+        },
+        companies: [
+          {
+            label: "TKER",
+            color: "red"
+          }
+        ]
+      }
+    ],
+    track: [{ side: 1 }, { side: 2 }, { side: 6 }]
+  },
+  "492": {
+    color: "brown",
+    values: [
+      {
+        angle: 210,
+        percent: 0.9,
+        value: 80
+      }
+    ],
+    cities: [
+      {
+        size: 3,
+        rotation: 180,
+        name: {
+          name: "Kotohira",
+          reverse: true,
+          offset: 75,
+          y: 12,
+          textLength: "20%"
+        }
+      }
+    ],
+    track: [
+      { side: 1 },
+      { side: 2 },
+      { side: 3 },
+      { side: 4 },
+      { side: 5 },
+      { side: 6 }
     ]
   }
 };

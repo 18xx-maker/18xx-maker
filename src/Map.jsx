@@ -23,8 +23,15 @@ const Map = ({ match }) => {
   let halfHexWidth = 0.5 * hexWidth;
   let maxX = util.maxMapX(map.hexes);
   let maxY = util.maxMapY(map.hexes);
+
   let totalWidth = halfHexWidth * (maxX + 1);
   let totalHeight = 1.5 * (maxY - 1) * edge + 2 * edge;
+
+  if(game.info.orientation === "horizontal") {
+    let tmp = totalWidth;
+    totalWidth = totalHeight;
+    totalHeight = tmp;
+  }
 
   let hexX = (x, y) => {
     return x * halfHexWidth;
@@ -38,8 +45,9 @@ const Map = ({ match }) => {
     let resolvedHex = util.resolveHex(hex, map.hexes);
 
     return R.map(([x, y]) => {
+      let translate = game.info.orientation === "horizontal" ?  `translate(${hexY(x, y)} ${hexX(x, y)})` : `translate(${hexX(x, y)} ${hexY(x, y)})`;
       return (
-        <g transform={`translate(${hexX(x, y)} ${hexY(x, y)})`}>
+        <g transform={`${translate}`}>
           <Hex hex={resolvedHex} id={`${util.toAlpha(y)}${x}`} border={true} />
         </g>
       );
@@ -48,7 +56,7 @@ const Map = ({ match }) => {
 
   return (
     <HexContext.Provider
-      value={{ width: game.info.width, rotation: game.info.rotation }}
+      value={{ width: game.info.width, rotation: game.info.orientation === "horizontal" ? 0 : 90 }}
     >
       <div className="cutlines">
         <div className="map">

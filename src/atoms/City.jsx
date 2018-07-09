@@ -166,6 +166,7 @@ const City = ({ size, companies, border, name }) => {
             />
             {companyLabel(2)}
           </g>
+          {nameNode}
         </g>
       );
     }
