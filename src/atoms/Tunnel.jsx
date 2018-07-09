@@ -5,7 +5,7 @@ const Tunnel = ({ cost }) => {
   return (
     <g>
       <path
-        d="M -28 19 L 0 -22 L 28 19 Z"
+        d="M -22 13 L 0 -24 L 22 13 Z"
         fill={colors["mountain"]}
         stroke={colors["black"]}
         strokeWidth="2"
@@ -15,11 +15,11 @@ const Tunnel = ({ cost }) => {
       />
       <text
         fill={colors["white"]}
-        fontSize="14"
+        fontSize="10"
         alignmentBaseline="hanging"
         textAnchor="middle"
         x="0"
-        y="0"
+        y="-5"
       >
         {cost}
       </text>

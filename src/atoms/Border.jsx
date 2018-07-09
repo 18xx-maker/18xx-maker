@@ -6,7 +6,6 @@ import HexContext from "../context/HexContext";
 const edge = 150 * 0.57735;
 
 const Border = ({ color, border }) => {
-  let node;
   if (border) {
     return (
       <HexContext.Consumer>
