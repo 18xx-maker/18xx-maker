@@ -5,7 +5,7 @@ const Bridge = ({ cost }) => {
   return (
     <g>
       <path
-        d="M -28 -5 L 0 36 L 28 -5 Z"
+        d="M -22 -12 L 0 25 L 22 -12 Z"
         fill={colors["water"]}
         stroke={colors["black"]}
         strokeWidth="2"
@@ -15,11 +15,11 @@ const Bridge = ({ cost }) => {
       />
       <text
         fill={colors["white"]}
-        fontSize="14"
+        fontSize="10"
         alignmentBaseline="hanging"
         textAnchor="middle"
         x="0"
-        y="0"
+        y="-5"
       >
         {cost}
       </text>
