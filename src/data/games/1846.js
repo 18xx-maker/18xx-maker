@@ -237,11 +237,11 @@ const game = {
       notes: [
         {
           color: "orange",
-          note: "No more than 50% of a company may be in the market"
+          note: "Corporations issue/redeem stock at one value lower/higher"
         },
         {
           color: "orange",
-          note: "No stock sales during first stock round"
+          note: "Corporations may not issue more stock than the amount held by players, less the number already in the Stock Market"
         }
       ]
     },
@@ -250,11 +250,7 @@ const game = {
       notes: [
         {
           color: "yellow",
-          note: "D trains available after first 6 is bought"
-        },
-        {
-          color: "yellow",
-          note: "4, 5, and 6 can be exchanged for a D train"
+          note: "Gray trains are unlimited"
         }
       ]
     }
@@ -297,63 +293,13 @@ const game = {
 
   stock: {
     type: "1D",
-    par: {
-      values: [100, 90, 82, 76, 71, 67],
-      cells: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6]]
-    },
-    market: [
-      [
-        60,
-        67,
-        71,
-        76,
-        82,
-        90,
-        100,
-        112,
-        126,
-        142,
-        160,
-        180,
-        200,
-        225,
-        250,
-        275,
-        300,
-        325,
-        350
-      ],
-      [
-        53,
-        60,
-        66,
-        70,
-        76,
-        82,
-        90,
-        100,
-        112,
-        142,
-        160,
-        180,
-        200,
-        220,
-        240,
-        260,
-        280,
-        300
-      ],
-      [46, 55, 60, 65, 70, 76, 82, 90, 100, 111, 125, 140, 155, 170, 185, 200],
-      [39, 48, 54, 60, 66, 71, 76, 82, 90, 100, 110, 120, 130],
-      [32, 41, 48, 55, 62, 67, 71, 76, 82, 90, 100],
-      [25, 34, 42, 50, 58, 65, 67, 71, 75, 80],
-      [18, 27, 36, 45, 54, 63, 67, 69, 70],
-      [10, 12, 30, 40, 50, 60, 67, 68],
-      [null, 10, 20, 30, 40, 50, 60],
-      [null, null, 10, 20, 30, 40, 50],
-      [null, null, null, 10, 20, 30, 40]
-    ],
-    limits: []
+    market: [0,10,20,30,40,50,60,70,80,90,100,112,124,137,150,165,180,195,212,230,250,270,295,320,345,375,405,440,475,510,550],
+    limits: [{
+      color: "orange",
+      description: "Allowed par values",
+      min: 40,
+      max: 150
+    }]
   },
 
   tiles: {
@@ -637,7 +583,9 @@ const game = {
           {
             size: 2,
             name: {
-              name: "Detroit"
+              name: "Detroit",
+              reverse: true,
+              offset: 63
             },
             companies: [
               {
@@ -814,7 +762,9 @@ const game = {
               }
             ],
             name: {
-              name: "Erie"
+              name: "Erie",
+              reverse: true,
+              offset: 63
             }
           }
         ],
@@ -1363,7 +1313,9 @@ const game = {
         cities: [{
           size: 2,
           name: {
-            name: "Centralia"
+            name: "Centralia",
+            reverse: true,
+            offset: 63
           },
           companies: [{
             label: "IC",
