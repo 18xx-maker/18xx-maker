@@ -15,7 +15,7 @@ const Tokens = ({ match }) => {
 
   let tokens = R.addIndex(R.chain)((company, index) => {
     let y = 60 * index + 30;
-    let companyTokens = Array(company.tokens.length + 3).fill(
+    let companyTokens = Array(company.tokens.length + (game.info.extraTokens || 3)).fill(
       <Token label={company.abbrev} color={company.color} width="30" />
     );
     companyTokens.push(
