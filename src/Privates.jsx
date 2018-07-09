@@ -16,10 +16,7 @@ const Privates = ({ match }) => {
       {R.map(
         p => (
           <Private
-            name={p.name}
-            price={p.price}
-            revenue={p.revenue}
-            description={p.description}
+            {...p}
           />
         ),
         privates

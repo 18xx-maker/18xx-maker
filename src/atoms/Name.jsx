@@ -1,6 +1,6 @@
 import React from "react";
 
-const Name = ({ name, reverse, rotation, town, size, offset, y }) => {
+const Name = ({ name, reverse, rotation, town, size, offset, y, textLength }) => {
   let path = town ? "townPath" : `city${size > 1 ? size : ""}Path`;
   if (reverse) {
     path = path + "Reverse";
@@ -12,6 +12,7 @@ const Name = ({ name, reverse, rotation, town, size, offset, y }) => {
       fontFamily="Helvetica, Arial, sans-serif"
       font-size="10"
       font-weight="bold"
+      textLength={textLength}
       textAnchor="middle"
     >
       <textPath transform="scale(1.8)" startOffset={`${offset || 50}%`} href={`#${path}`}>

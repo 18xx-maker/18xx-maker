@@ -1,7 +1,7 @@
 import React from "react";
 import { colors } from "../data";
 
-const Water = ({ size, cost }) => {
+const Water = ({ size, cost, border }) => {
   let path;
   let width = 2;
   switch (size) {
@@ -25,6 +25,16 @@ const Water = ({ size, cost }) => {
 
   return (
     <g>
+      {border && (
+        <circle
+          cx="0"
+          cy="5"
+          r="26"
+          fill="white"
+          stroke="black"
+          strokeWidth="2"
+        />
+      )}
       <path
         d={path}
         fill="none"
