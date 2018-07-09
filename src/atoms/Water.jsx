@@ -24,7 +24,7 @@ const Water = ({ size, cost, border }) => {
   }
 
   return (
-    <g>
+    <g transform={`scale(${border ? 0.6 : 1.0})`}>
       {border && (
         <circle
           cx="0"
@@ -32,7 +32,7 @@ const Water = ({ size, cost, border }) => {
           r="26"
           fill="white"
           stroke="black"
-          strokeWidth="2"
+          strokeWidth="3.333333333"
         />
       )}
       <path

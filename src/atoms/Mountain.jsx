@@ -21,7 +21,7 @@ const Mountain = ({ size, cost, border }) => {
   }
 
   return (
-    <g>
+    <g transform={`scale(${border ? 0.7 : 1.0})`}>
       {border && (
         <circle
           cx="0"
@@ -29,7 +29,7 @@ const Mountain = ({ size, cost, border }) => {
           r="22"
           fill="white"
           stroke="black"
-          strokeWidth="2"
+          strokeWidth="2.857142857"
         />
       )}
       <path

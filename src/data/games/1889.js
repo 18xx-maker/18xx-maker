@@ -938,8 +938,8 @@ const game = {
       {
         color: "green",
         water: {
-          angle: 60,
-          percent: 0.73,
+          angle: 30,
+          percent: 0.6,
           cost: 80,
           border: true
         },

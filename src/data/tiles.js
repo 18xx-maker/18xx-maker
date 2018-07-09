@@ -1762,6 +1762,8 @@ const tiles = {
     color: "yellow",
     values: [
       {
+        angle: 200,
+        percent: 0.75,
         value: 40
       }
     ],
@@ -1769,13 +1771,13 @@ const tiles = {
       {
         name: {
           name: "Kotohira",
-          rotation: 60
+          rotation: 90
         }
       }
     ],
     mountain: {
-      angle: 165,
-      percent: 0.75,
+      angle: 160,
+      percent: 0.8,
       cost: "80",
       border: true
     },
