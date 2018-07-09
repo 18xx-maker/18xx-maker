@@ -21,7 +21,7 @@ const Token = ({ icon, label, color, labelColor, inverse, outline, width }) => {
       stroke-width="0.5"
       stroke={tokenLabelStroke}
       fill={tokenLabelColor}
-      textLength={40}
+      textLength={label.length > 2 ? 40 : 26}
       lengthAdjust="spacingAndGlyphs"
       x="0"
       y="0"

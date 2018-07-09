@@ -30,7 +30,7 @@ const City = ({ size, companies, border, name }) => {
           fill={companyTextColor(num)}
           fontFamily="Bitter"
           fontWeight="bold"
-          textLength={40}
+          textLength={companies[num].label.length > 2 ? 40 : 26}
           lengthAdjust="spacingAndGlyphs"
           textAnchor="middle"
           alignmentBaseline="central"
