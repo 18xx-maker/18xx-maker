@@ -5,6 +5,7 @@ const game = {
     subtitle: "The Race for the Midwest",
     designer: "Thomas Lehmann",
     background: "brown",
+    extraTokens: 4,
     width: 150,
     rotation: 90
   },
