@@ -18,8 +18,8 @@ const RATIO = 0.966666667;
 
 const TileSheet = ({ match }) => {
   let game = games[match.params.game];
-  let width = game.info.width;
-  let height = width * HEX_RATIO * 2;
+  let height = game.info.width;
+  let width = height * HEX_RATIO * 2;
   let tileHeight = height * RATIO;
   let tileWidth = width * RATIO;
   let perRow = Math.floor(paper.width / (tileWidth + 12.5));
@@ -38,7 +38,7 @@ const TileSheet = ({ match }) => {
                 width: `${tileWidth * 0.01}in`,
                 height: `${tileHeight * 0.01}in`
               }}
-              viewBox={`-75 -86.6025 150 173.205`}
+              viewBox={`-86.6025 -75 173.205 150`}
             >
               <Tile id={id} />
             </Svg>
