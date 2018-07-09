@@ -4,6 +4,7 @@ import "./App.css";
 
 import Tiles from "./Tiles";
 import Atoms from "./atoms";
+import Positioning from "./Positioning";
 
 import Background from "./Background";
 import Charters from "./Charters";
@@ -28,6 +29,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/tiles" component={Tiles} />
             <Route path="/tiles/atoms" component={Atoms} />
+            <Route path="/tiles/positioning" component={Positioning} />
             <Route exact path="/:game" component={Game} />
             <Route path="/:game/map" component={Map} />
             <Route path="/:game/background" component={Background} />

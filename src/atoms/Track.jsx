@@ -1,30 +1,30 @@
 import React from "react";
 import { colors } from "../data";
 
+import HexContext from "../context/HexContext";
+
 const Track = ({ type, gauge, border }) => {
   let path;
 
   switch (type) {
     case "stop":
-      path = "m -75 0 L -37.5 0";
-      break;
-    case "city":
-      path = "m -75 0 L 0 0";
+      path = "m 0 75 L 0 37.5";
       break;
     case "straight":
-      path = "m -75 0 L 75 0";
+      path = "m 0 75 L 0 -75";
       break;
     case "gentle":
-      path = `m -75 0 A 129.90375 129.90375 0 0 0 37.5 -64.951875`;
+      path = `m 0 75 A 129.90375 129.90375 0 0 0 -64.951875 -37.5`;
       break;
     case "sharp":
-      path = `m -75 0 A 43.30125 43.30125 0 0 0 -37.5 -64.951875`;
+      path = `m 0 75 A 43.30125 43.30125 0 0 0 -64.951875 37.5`;
       break;
     case "bent":
-      path = "m -75 0 C -30 0, -40 40, 0 40 C 40 40, 30 0, 75 0";
+      path = "m 0 75 C 0 30, 40 40, 40 0 C 40 -40, 0 -30, 0 -75";
       break;
     default:
-      return null;
+      path = "m 0 75 L 0 0";
+      break;
   }
 
   let width = border ? 14 : 10;
@@ -54,18 +54,22 @@ const Track = ({ type, gauge, border }) => {
 
   // Track
   return (
-    <g>
-      <path
-        d={path}
-        fill="none"
-        stroke={color}
-        strokeLinecap="butt"
-        strokeLinejoin="bevel"
-        strokeWidth={width}
-        strokeDasharray={strokeDashArray}
-      />
-      {double}
-    </g>
+    <HexContext.Consumer>
+      {hx => (
+        <g transform={`rotate(${hx.rotation})`}>
+          <path
+            d={path}
+            fill="none"
+            stroke={color}
+            strokeLinecap="butt"
+            strokeLinejoin="bevel"
+            strokeWidth={width}
+            strokeDasharray={strokeDashArray}
+          />
+          {double}
+        </g>
+      )}
+    </HexContext.Consumer>
   );
 };
 

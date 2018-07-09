@@ -1,6 +1,8 @@
 import React from "react";
 import { colors } from "../data";
 
+import HexContext from "../context/HexContext";
+
 const OffBoardTrack = ({ border }) => {
   let path;
 
@@ -10,14 +12,18 @@ const OffBoardTrack = ({ border }) => {
 
   // Track
   return (
-    <g>
-      <polygon
-        points={`-75,${width} -75,-${width} -${end},0`}
-        d={path}
-        fill={color}
-        stroke="none"
-      />
-    </g>
+    <HexContext.Consumer>
+      {hx => (
+        <g transform={`rotate(${hx.rotation})`}>
+          <polygon
+            points={`${width},75 -${width},75 0,${end}`}
+            d={path}
+            fill={color}
+            stroke="none"
+          />
+        </g>
+      )}
+    </HexContext.Consumer>
   );
 };
 

@@ -17,9 +17,10 @@ const Svg = ({ width, height, viewBox, style, defs, children }) => {
         </style>
         <clipPath id="hexClip">
           <polygon
-            points="0,-86.6025 75,-43.30125 75,43.30125 0,86.6025 -75,43.30125 -75,-43.30125"
+            points="-86.6025,0 -43.30125,-75 43.30125,-75 86.6025,0 43.30125,75 -43.30125,75"
             fill="black"
-            stroke="none"
+            stroke="black"
+            strokeWidth="2"
           />
         </clipPath>
         <g id="meat" transform="translate(0 2)">

@@ -17,7 +17,9 @@ import Value from "./atoms/Value";
 import OffBoardRevenue from "./atoms/OffBoardRevenue";
 import OffBoardTrack from "./atoms/OffBoardTrack";
 import Water from "./atoms/Water";
+import Bridge from "./atoms/Bridge";
 import Mountain from "./atoms/Mountain";
+import Tunnel from "./atoms/Tunnel";
 import Border from "./atoms/Border";
 
 const concat = R.unapply(R.reduce(R.concat, []));
@@ -86,10 +88,10 @@ const HexTile = ({ hex, id, border }) => {
     <Position data={hex.cities}>{c => <City {...c} border={true} />}</Position>
   );
 
-  let towns = <Position data={hex.towns}>{t => <Town />}</Position>;
+  let towns = <Position data={hex.towns}>{t => <Town {...t} />}</Position>;
 
   let townBorders = (
-    <Position data={hex.towns}>{t => <Town border={true} />}</Position>
+    <Position data={hex.towns}>{t => <Town {...t} border={true} />}</Position>
   );
 
   let centerTowns = (
@@ -104,6 +106,14 @@ const HexTile = ({ hex, id, border }) => {
 
   let mountain = (
     <Position data={hex.mountain}>{m => <Mountain {...m} />}</Position>
+  );
+
+  let bridges = (
+    <Position data={hex.bridges}>{b => <Bridge {...b} />}</Position>
+  );
+
+  let tunnels = (
+    <Position data={hex.tunnels}>{t => <Tunnel {...t} />}</Position>
   );
 
   let offBoardRevenue = (
@@ -128,30 +138,33 @@ const HexTile = ({ hex, id, border }) => {
     <g>
       <Hex color={hex.color} />
 
-      {cityBorders}
-      {townBorders}
-      {tracks}
-      {offBoardTracks}
-      {values}
-      {cities}
-      {towns}
-      {centerTowns}
-      {labels}
-      {offBoardRevenue}
-      {water}
-      {mountain}
-      {borderBorders}
-      {borders}
+      {id && <Id id={id} />}
 
-      {id && (
-        <HexContext.Consumer>
-          {hc => (
-            <g transform={`translate(-70 -40) rotate(${hc.rotation})`}>
-              <Id id={id} />
+      <HexContext.Consumer>
+        {hx => (
+          <g clip-path="url(#hexClip)" transform={`rotate(${hx.rotation})`}>
+            <g transform={`rotate(-${hx.rotation})`}>
+              {cityBorders}
+              {townBorders}
+              {tracks}
+              {offBoardTracks}
+              {values}
+              {cities}
+              {towns}
+              {centerTowns}
+              {labels}
+              {offBoardRevenue}
+              {water}
+              {mountain}
+              {borderBorders}
+              {borders}
             </g>
-          )}
-        </HexContext.Consumer>
-      )}
+          </g>
+        )}
+      </HexContext.Consumer>
+
+      {tunnels}
+      {bridges}
 
       {border && <Hex border={true} />}
     </g>
