@@ -21,7 +21,7 @@ const OffBoardRevenue = ({ revenues }) => {
         fill={colors[revenue.color]}
       />,
       <text
-        fill={textColor(revenue.color)}
+        fill={colors["black"]}
         fontSize="14"
         alignmentBaseline="central"
         textAnchor="middle"

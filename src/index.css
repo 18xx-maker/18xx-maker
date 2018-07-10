@@ -531,6 +531,13 @@ svg {
   position: relative;
 }
 
+.stock .market .arrow {
+  position: absolute;
+  bottom: 2mm;
+  right: 1mm;
+  font-weight: bold;
+}
+
 .stock .market td.up:after {
   position: absolute;
   content: '↑';

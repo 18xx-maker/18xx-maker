@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "./data";
+import { colors, textColor } from "./data";
 import util from "./util";
 import * as R from "ramda";
 
@@ -10,7 +10,8 @@ const Market2D = ({ market, limits, par, rounds }) => {
   let rows = R.addIndex(R.map)((marketRow, row) => {
     let cells = R.addIndex(R.map)((value, col) => {
       let color = value ? colors[util.marketColor(limits, value)] : null;
-      if (R.find(cell => cell[0] === row && cell[1] === col, par.cells)) {
+
+      if (R.find(cell => cell[0] === row && cell[1] === col, ((par && par.cells) || []))) {
         color = colors["gray"];
       }
       let classes = [];
@@ -23,9 +24,17 @@ const Market2D = ({ market, limits, par, rounds }) => {
       if (col === 0 && market[row + 1] && market[row + 1][0]) {
         classes.push("down");
       }
+
+      let labelColor = "#000";
+      if(value && value.color) {
+        color = colors[value.color];
+        labelColor = textColor(value.color);
+      }
+
       return (
-        <td style={{ backgroundColor: color }} class={classes.join(" ")}>
-          {value}
+        <td style={{ backgroundColor: color, color: labelColor }} class={classes.join(" ")}>
+          {value && value.label || value}
+          {value && value.arrow && <span style={{color: (value.arrowColor ? colors[value.arrowColor] : colors["black"])}} className="arrow">{value.arrow === "up" ? "↑" : "↓"}</span>}
         </td>
       );
     }, marketRow);
@@ -43,7 +52,7 @@ const Market2D = ({ market, limits, par, rounds }) => {
     <div class="market">
       <h2>Stock Market</h2>
       <table>{rows}</table>
-      <Par par={par} />
+      {par && <Par par={par} />}
       <Rounds rounds={rounds} />
       <div class="legend">
         <ul class="notes">{legend}</ul>

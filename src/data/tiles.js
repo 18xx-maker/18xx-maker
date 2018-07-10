@@ -1984,6 +1984,536 @@ const tiles = {
       { side: 5 },
       { side: 6 }
     ]
+  },
+
+  // 1849
+  "73": {
+    color: "yellow",
+    values: [
+      {
+        angle: -120,
+        percent: 0.2,
+        value: 10
+      }
+    ],
+    towns: [
+      {
+        angle: 60,
+        percent: 0.288675,
+        rotate: -30
+      }
+    ],
+    track: [
+      {
+        type: "gentle",
+        side: 1,
+        gauge: "narrow"
+      }
+    ]
+  },
+  "74": {
+    color: "yellow",
+    values: [
+      {
+        angle: -90,
+        percent: 0.45,
+        value: 10
+      }
+    ],
+    towns: [{}],
+    track: [
+      {
+        type: "straight",
+        side: 1,
+        gauge: "narrow"
+      }
+    ]
+  },
+  "77": {
+    color: "yellow",
+    track: [{ type: "sharp", side: 1, gauge: "narrow" }]
+  },
+  "78": {
+    color: "yellow",
+    track: [{ type: "gentle", side: 1, gauge: "narrow" }]
+  },
+  "79": {
+    color: "yellow",
+    track: [{ type: "straight", side: 1, gauge: "narrow" }]
+  },
+  "644": {
+    color: "yellow",
+    track: [
+      {
+        side: 1,
+        gauge: "narrow"
+      },
+      {
+        side: 2
+      }
+    ],
+    values: [
+      {
+        angle: 210,
+        percent: 0.7,
+        value: 20
+      }
+    ],
+    cities: [{}]
+  },
+  "645": {
+    color: "yellow",
+    track: [
+      {
+        side: 1,
+        gauge: "narrow"
+      },
+      {
+        side: 3
+      }
+    ],
+    values: [
+      {
+        angle: 210,
+        percent: 0.7,
+        value: 20
+      }
+    ],
+    cities: [{}]
+  },
+  "657": {
+    color: "yellow",
+    values: [
+      {
+        angle: 210,
+        percent: 0.75,
+        value: 20
+      }
+    ],
+    cities: [{}],
+    track: [
+      {
+        side: 1,
+        gauge: "narrow"
+      },
+      { side: 4 }
+    ]
+  },
+  "658": {
+    color: "yellow",
+    track: [
+      {
+        side: 1
+      },
+      {
+        side: 3,
+        gauge: "narrow"
+      }
+    ],
+    values: [
+      {
+        angle: 210,
+        percent: 0.7,
+        value: 20
+      }
+    ],
+    cities: [{}]
+  },
+  "659": {
+    color: "yellow",
+    track: [
+      {
+        side: 1
+      },
+      {
+        side: 2,
+        gauge: "narrow"
+      }
+    ],
+    values: [
+      {
+        angle: 210,
+        percent: 0.7,
+        value: 20
+      }
+    ],
+    cities: [{}]
+  },
+  "679": {
+    color: "yellow",
+    values: [
+      {
+        value: 10
+      }
+    ],
+    towns: [
+      {
+        angle: 30,
+        percent: 0.57735,
+        rotation: -60
+      }
+    ],
+    track: [
+      {
+        type: "sharp",
+        side: 1,
+        gauge: "narrow"
+      }
+    ]
+  },
+  "624": {
+    color: "green",
+    track: [{ type: "sharp", side: 1 }, { type: "sharp", side: 2 }]
+  },
+  "650": {
+    color: "green",
+    track: [
+      { type: "sharp", side: 1, gauge: "narrow" },
+      { type: "sharp", side: 2, gauge: "narrow" }
+    ]
+  },
+  "677": {
+    color: "green",
+    track: [
+      {
+        type: "straight",
+        side: 1,
+        gauge: "narrow"
+      },
+      {
+        type: "gentle",
+        side: 5,
+        gauge: "narrow"
+      }
+    ]
+  },
+  "678": {
+    color: "green",
+    track: [
+      {
+        type: "straight",
+        side: 1,
+        gauge: "narrow"
+      },
+      {
+        type: "gentle",
+        side: 1,
+        gauge: "narrow"
+      }
+    ]
+  },
+  "699": {
+    color: "green",
+    track: [
+      {
+        type: "gentle",
+        side: 1,
+        gauge: "narrow"
+      },
+      {
+        type: "gentle",
+        side: 5,
+        gauge: "narrow"
+      }
+    ]
+  },
+  "660": {
+    color: "green",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 30
+      }
+    ],
+    cities: [{ size: 2 }],
+    track: [
+      {
+        type: "city",
+        side: 1
+      },
+      {
+        type: "city",
+        side: 2,
+        gauge: "narrow"
+      },
+      {
+        type: "city",
+        side: 4
+      },
+      {
+        type: "city",
+        side: 5,
+        gauge: "narrow"
+      }
+    ]
+  },
+  "661": {
+    color: "green",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 30
+      }
+    ],
+    cities: [{ size: 2 }],
+    track: [
+      {
+        type: "city",
+        side: 1,
+        gauge: "narrow"
+      },
+      {
+        type: "city",
+        side: 2
+      },
+      {
+        type: "city",
+        side: 4,
+        gauge: "narrow"
+      },
+      {
+        type: "city",
+        side: 5
+      }
+    ]
+  },
+  "662": {
+    color: "green",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 30
+      }
+    ],
+    cities: [{ size: 2 }],
+    track: [
+      {
+        type: "city",
+        side: 1,
+        gauge: "narrow"
+      },
+      {
+        type: "city",
+        side: 2,
+        gauge: "narrow"
+      },
+      {
+        type: "city",
+        side: 4
+      },
+      {
+        type: "city",
+        side: 5
+      }
+    ]
+  },
+  "663": {
+    color: "green",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 30
+      }
+    ],
+    cities: [{ size: 2 }],
+    track: [
+      {
+        type: "city",
+        side: 1,
+        gauge: "narrow"
+      },
+      {
+        type: "city",
+        side: 2
+      },
+      {
+        type: "city",
+        side: 4
+      },
+      {
+        type: "city",
+        side: 5,
+        gauge: "narrow"
+      }
+    ]
+  },
+  "672": {
+    color: "brown",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 40
+      }
+    ],
+    cities: [{ size: 2 }],
+    track: [
+      {
+        side: 1,
+        gauge: "double"
+      },
+      {
+        side: 2,
+        gauge: "double"
+      },
+      {
+        side: 4,
+        gauge: "double"
+      },
+      {
+        side: 5,
+        gauge: "double"
+      }
+    ]
+  },
+  "673": {
+    color: "brown",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 40
+      }
+    ],
+    cities: [{ size: 2 }],
+    track: [
+      {
+        side: 1,
+        gauge: "double"
+      },
+      {
+        side: 2,
+        gauge: "double"
+      },
+      {
+        side: 3,
+        gauge: "double"
+      },
+      {
+        side: 4,
+        gauge: "double"
+      }
+    ]
+  },
+  "674": {
+    color: "brown",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 40
+      }
+    ],
+    cities: [{ size: 2 }],
+    track: [
+      {
+        side: 1,
+        gauge: "double"
+      },
+      {
+        side: 3,
+        gauge: "double"
+      },
+      {
+        side: 4,
+        gauge: "double"
+      },
+      {
+        side: 5,
+        gauge: "double"
+      }
+    ]
+  },
+  "696": {
+    color: "brown",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 20
+      }
+    ],
+    centerTowns: [{}],
+    track: [
+      {
+        side: 1,
+        gauge: "double"
+      },
+      {
+        side: 2,
+        gauge: "double"
+      },
+      {
+        side: 4,
+        gauge: "double"
+      },
+      {
+        side: 5,
+        gauge: "double"
+      }
+    ]
+  },
+  "697": {
+    color: "brown",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 20
+      }
+    ],
+    centerTowns: [{}],
+    track: [
+      {
+        side: 1,
+        gauge: "double"
+      },
+      {
+        side: 2,
+        gauge: "double"
+      },
+      {
+        side: 3,
+        gauge: "double"
+      },
+      {
+        side: 4,
+        gauge: "double"
+      }
+    ]
+  },
+  "698": {
+    color: "brown",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 20
+      }
+    ],
+    centerTowns: [{}],
+    track: [
+      {
+        side: 1,
+        gauge: "double"
+      },
+      {
+        side: 3,
+        gauge: "double"
+      },
+      {
+        side: 4,
+        gauge: "double"
+      },
+      {
+        side: 5,
+        gauge: "double"
+      }
+    ]
   }
 };
 
