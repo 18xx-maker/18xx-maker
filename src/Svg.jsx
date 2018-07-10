@@ -80,8 +80,8 @@ const Svg = ({ width, height, viewBox, style, defs, children }) => {
             strokeLinejoin="round"
           />
         </g>
-        <path id="townPath" d="M -30 -15 L 30 -15" />
-        <path id="townPathReverse" d="M -30 15 L 30 15" />
+        <path id="townPath" d="M -60 -15 L 60 -15" />
+        <path id="townPathReverse" d="M -60 15 L 60 15" />
         <path id="cityPath" d="M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30" />
         <path
           id="cityPathReverse"

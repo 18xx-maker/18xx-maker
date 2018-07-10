@@ -14,9 +14,7 @@ const CenterTown = ({ border, name }) => {
     if (name) {
       nameNode = (
         <Name
-          name={name.name}
-          reverse={name.reverse}
-          rotation={name.rotation}
+          {...name}
           town={true}
         />
       );
