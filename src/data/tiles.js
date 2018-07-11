@@ -138,7 +138,7 @@ const tiles = {
     color: "yellow",
     track: [
       {
-        type: "sharp",
+        type: "straight",
         side: 1
       }
     ]
