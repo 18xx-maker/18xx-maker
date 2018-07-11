@@ -7,8 +7,14 @@ const Track = ({ type, gauge, border }) => {
   let path;
 
   switch (type) {
+    case "1860-C":
+      path = "m 0 75 C 0 50, 30 50, 45 25";
+      break;
     case "stop":
       path = "m 0 75 L 0 37.5";
+      break;
+    case "mid":
+      path = "m 0 0 L 0 37.5";
       break;
     case "straight":
       path = "m 0 75 L 0 -75";

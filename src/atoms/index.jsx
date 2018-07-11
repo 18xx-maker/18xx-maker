@@ -135,6 +135,24 @@ const Atoms = () => {
           <Track type="stop" border={true} />,
           <Track type="stop" gauge="double" />
         ],
+        [<Track type="mid" border={true} />, <Track type="mid" />],
+        [
+          <Track type="mid" border={true} />,
+          <Track type="mid" gauge="narrow" />
+        ],
+        [
+          <Track type="mid" border={true} />,
+          <Track type="mid" gauge="double" />
+        ],
+        [<Track type="1860-C" border={true} />, <Track type="1860-C" />],
+        [
+          <Track type="1860-C" border={true} />,
+          <Track type="1860-C" gauge="narrow" />
+        ],
+        [
+          <Track type="1860-C" border={true} />,
+          <Track type="1860-C" gauge="double" />
+        ],
         [<Track type="straight" border={true} />, <Track type="straight" />],
         [
           <Track type="straight" border={true} />,

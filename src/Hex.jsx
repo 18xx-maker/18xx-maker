@@ -27,7 +27,7 @@ const concat = R.unapply(R.reduce(R.concat, []));
 
 const makeOffBoardTrack = track => {
   let side = track.side;
-  let rotation = (side - 1) * 60;
+  let rotation = (track.rotation || 0) + ((side - 1) * 60);
   let transform = `rotate(${rotation})`;
   return (
     <g transform={transform}>
@@ -39,7 +39,7 @@ const makeOffBoardTrack = track => {
 
 const makeTrack = track => {
   let point = track.start || track.end || track.side;
-  let rotation = (point - 1) * 60;
+  let rotation = (track.rotation || 0) + ((point - 1) * 60);
   let transform = `rotate(${rotation})`;
   return (
     <g transform={transform}>
@@ -50,7 +50,7 @@ const makeTrack = track => {
 
 const makeBorder = track => {
   let point = track.start || track.end || track.side;
-  let rotation = (point - 1) * 60;
+  let rotation = (track.rotation || 0) + ((point - 1) * 60);
   let transform = `rotate(${rotation})`;
   return (
     <g transform={transform}>
