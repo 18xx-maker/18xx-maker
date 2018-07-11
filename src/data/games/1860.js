@@ -773,6 +773,8 @@ const game = {
         }],
         cities: [
           {
+            angle: 180,
+            percent: 0.5,
             companies: [
               {
                 label: "C&N",
@@ -783,7 +785,7 @@ const game = {
         ],
         centerTowns: [
           {
-            percent: 0.5
+            percent: 0.25
           },
           {
             percent: 0.75
