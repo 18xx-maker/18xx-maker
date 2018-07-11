@@ -3,7 +3,7 @@ import { colors } from "../data";
 
 import Name from "./Name";
 
-const CenterTown = ({ border, name }) => {
+const CenterTown = ({ border, name, color }) => {
   if (border) {
     return (
       <circle fill={colors["border"]} stroke="none" cx="0" cy="0" r="12" />
@@ -21,7 +21,7 @@ const CenterTown = ({ border, name }) => {
     }
     return (
       <g>
-        <circle fill={colors["track"]} stroke="none" cx="0" cy="0" r="10" />
+        <circle fill={colors[color] || colors["track"]} stroke="none" cx="0" cy="0" r="10" />
         {nameNode}
       </g>
     );
