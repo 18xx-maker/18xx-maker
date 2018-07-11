@@ -3,7 +3,7 @@ import { colors } from "../data";
 
 import Name from "./Name";
 
-const Town = ({ border, name }) => {
+const Town = ({ border, name, color }) => {
   if (border) {
     return (
       <rect width="24" height="14" x="-12" y="-7" fill={colors["border"]} />
@@ -23,7 +23,7 @@ const Town = ({ border, name }) => {
     }
     return (
       <g>
-        <rect width="20" height="10" x="-10" y="-5" fill={colors["track"]} />
+        <rect width="20" height="10" x="-10" y="-5" fill={colors[color] || colors["track"]} />
         {nameNode}
       </g>
     );
