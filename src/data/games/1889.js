@@ -865,6 +865,7 @@ const game = {
             },
             {
               color: "black",
+              textColor: "white",
               cost: "D100"
             }
           ]
@@ -892,6 +893,7 @@ const game = {
             },
             {
               color: "black",
+              textColor: "white",
               cost: "D80"
             }
           ]
@@ -929,6 +931,7 @@ const game = {
             },
             {
               color: "black",
+              textColor: "white",
               cost: "D80"
             }
           ]
