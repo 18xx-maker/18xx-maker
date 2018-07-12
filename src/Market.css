@@ -1,0 +1,105 @@
+.market__1Diag {
+  overflow: auto;
+}
+
+.market__1Diag .market__row {
+  border-style: solid;
+  border-color: black;
+  display: grid;
+  place-content: start;
+  place-items: stretch;
+  grid-template-rows: 1in 1in;
+  grid-auto-columns: 0.3in;
+  grid-auto-flow: column dense;
+  position: relative;
+  float: left;
+  box-sizing: border-box;
+  margin-bottom: 0.5in;
+}
+
+.market__1Diag .market__row:last-child {
+  margin-bottom: 0;
+}
+
+.market__1Diag .market__row:nth-child(odd) {
+  border-width: 1px 0 0 1px;
+}
+
+.market__1Diag .market__row:nth-child(even) {
+  border-width: 0 1px 1px 0;
+}
+
+.market__1Diag .market__cell {
+  border-style: solid;
+  border-color: black;
+  grid-column: auto / span 2;
+  grid-row: auto / auto;
+  position: relative;
+  text-align: left;
+  padding: 0.05in;
+  font-size: 0.15in;
+  line-height: 0.15in;
+  box-sizing: border-box;
+}
+
+.market__1Diag .market__row:nth-child(odd) .market__cell {
+  border-width: 0 1px 1px 0;
+}
+
+.market__1Diag .market__row:nth-child(even) .market__cell {
+  border-width: 1px 0 0 1px;
+}
+
+.market__1Diag .market__cell.market__start,
+.market__1Diag .market__cell.market__end {
+  grid-column: auto / span 3;
+}
+
+.market__1Diag .market__cell.end span {
+  transform: rotate(90deg);
+  transform-origin: top left 0;
+  top: 0;
+  left: 0.625in;
+}
+
+.market__1Diag .market__end_pad div,
+.market__1Diag .market__start_pad div {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+}
+
+.market__1Diag .market__start_pad div {
+  top: -2px;
+}
+
+.market__1Diag .market__end_pad div {
+  bottom: -2px;
+}
+
+.market__type__1Diag .rounds {
+  top: 0.5in;
+  right: 0;
+}
+
+.market__type__1Diag .par {
+  position: relative;
+}
+
+.market__type__1Diag .par table {
+  height: 3in;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.market__type__1Diag .par table td {
+  width: auto;
+  height: auto;
+}
+
+.market__type__1Diag .par table td div {
+  margin-top: 0.05in;
+  height: 0.15in;
+}

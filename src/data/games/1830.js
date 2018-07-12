@@ -339,6 +339,10 @@ const game = {
       notes: [
         {
           color: "orange",
+          note: "Shares in the market pay dividends to the company"
+        },
+        {
+          color: "orange",
           note: "No more than 50% of a company may be in the market"
         },
         {
@@ -399,10 +403,10 @@ const game = {
     {
       name: "Operating Round",
       steps: [
-        "Lay track",
-        "Purchase token",
+        "Lay or upgrade track",
+        "Purchase a station",
         "Run trains",
-        "Collect revenue",
+        "Pay dividends or withhold revenue",
         "Purchase trains"
       ],
       ordered: true
@@ -539,9 +543,11 @@ const game = {
     hexes: [
       {
         color: "offboard",
-        labels: [{
-          label: "Gulf"
-        }],
+        labels: [
+          {
+            label: "Gulf"
+          }
+        ],
         offBoardRevenue: {
           percent: 0.333,
           revenues: [
@@ -590,10 +596,12 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [{
-          label: "Chicago",
-          x: -25
-        }],
+        labels: [
+          {
+            label: "Chicago",
+            x: -25
+          }
+        ],
         offBoardRevenue: {
           percent: 0.333,
           x: -25,
@@ -680,10 +688,12 @@ const game = {
           cost: "$80",
           size: "small"
         },
-        labels: [{
-          label: "OO",
-          percent: 0.667
-        }],
+        labels: [
+          {
+            label: "OO",
+            percent: 0.667
+          }
+        ],
         cities: [
           {
             angle: 65,
@@ -772,9 +782,11 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [{
-          label: "Canadian West"
-        }],
+        labels: [
+          {
+            label: "Canadian West"
+          }
+        ],
         offBoardRevenue: {
           angle: 180,
           percent: 0.333,
@@ -837,9 +849,11 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [{
-          label: "Deep South"
-        }],
+        labels: [
+          {
+            label: "Deep South"
+          }
+        ],
         offBoardRevenue: {
           percent: 0.333,
           revenues: [
@@ -997,16 +1011,18 @@ const game = {
             percent: 0.5
           }
         ],
-        towns: [{
-          rotation: 60,
-          angle: 150,
-          percent: 0.26,
+        towns: [
+          {
+            rotation: 60,
+            angle: 150,
+            percent: 0.26,
             name: {
               name: "Kingston",
               reverse: true,
               rotation: -90
             }
-        }],
+          }
+        ],
         track: [
           {
             type: "gentle",
@@ -1022,11 +1038,13 @@ const game = {
           cost: "$120",
           percent: 0.333
         },
-        labels: [{
-          label: "SVR",
-          angle: 180,
-          percent: 0.333
-        }],
+        labels: [
+          {
+            label: "SVR",
+            angle: 180,
+            percent: 0.333
+          }
+        ],
         hexes: ["G15"]
       },
       {
@@ -1035,12 +1053,12 @@ const game = {
           {
             label: "B",
             angle: 150,
-            percent: 0.70
+            percent: 0.7
           },
           {
             label: "B&O",
             angle: 210,
-            percent: 0.70
+            percent: 0.7
           }
         ],
         values: [
@@ -1133,11 +1151,13 @@ const game = {
             }
           }
         ],
-        labels: [{
-          label: "D&H",
-          angle: 45,
-          percent: 0.5
-        }],
+        labels: [
+          {
+            label: "D&H",
+            angle: 45,
+            percent: 0.5
+          }
+        ],
         hexes: ["F16"]
       },
       {
@@ -1166,9 +1186,11 @@ const game = {
       },
       {
         color: "plain",
-        labels: [{
-          label: "M&H"
-        }],
+        labels: [
+          {
+            label: "M&H"
+          }
+        ],
         hexes: ["D18"]
       },
       {
@@ -1207,7 +1229,7 @@ const game = {
         copy: "F6",
         values: [
           {
-            value: 40,
+            value: 40
           }
         ],
         cities: [
@@ -1305,16 +1327,18 @@ const game = {
       },
       {
         color: "gray",
-        towns: [{
-          angle: 120,
-          percent: 0.57735,
-          rotation: 30,
-          name: {
-            name: "Atlantic City",
-            reverse: true,
-            rotation: -90,
+        towns: [
+          {
+            angle: 120,
+            percent: 0.57735,
+            rotation: 30,
+            name: {
+              name: "Atlantic City",
+              reverse: true,
+              rotation: -90
+            }
           }
-        }],
+        ],
         track: [
           {
             type: "sharp",
@@ -1343,10 +1367,12 @@ const game = {
       },
       {
         color: "plain",
-        labels: [{
-          label: "C&St L",
-          percent: 0.4
-        }],
+        labels: [
+          {
+            label: "C&St L",
+            percent: 0.4
+          }
+        ],
         centerTowns: [
           {
             name: {
@@ -1361,7 +1387,7 @@ const game = {
         labels: [
           {
             angle: 150,
-            percent: 0.70,
+            percent: 0.7,
             label: "B"
           }
         ],
@@ -1399,12 +1425,14 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [{
-          label: "Maritime Provinces",
-          angle: 180,
-          percent: 0.333,
-          x: 5
-        }],
+        labels: [
+          {
+            label: "Maritime Provinces",
+            angle: 180,
+            percent: 0.333,
+            x: 5
+          }
+        ],
         offBoardRevenue: {
           y: 0,
           revenues: [

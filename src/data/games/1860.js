@@ -469,11 +469,114 @@ const game = {
   stock: {
     type: "1Diag",
     par: {
-      values: [100, 90, 82, 76, 71, 67],
-      cells: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6]]
+      type: "table",
+      values: [
+        [
+          { label: 50, color: "gray" },
+          {
+            label: 54,
+            color: "plain",
+            rowspan: 3,
+            labels: [
+              { color: "cyan", label: "S&C" },
+              { color: "maroon", label: "VYSC" }
+            ]
+          },
+          {
+            label: 58,
+            color: "plain",
+            rowspan: 3,
+            labels: [
+              { color: "yellow", label: "NGStL" },
+              { color: "pink", label: "BHI&R" },
+              { color: "cyan", label: "S&C" },
+              { color: "maroon", label: "VYSC" }
+            ]
+          },
+          {
+            label: 62,
+            color: "plain",
+            rowspan: 3,
+            labels: [
+              { color: "darkGreen", label: "FYN" },
+              { color: "black", label: "IWNJ" },
+              { color: "yellow", label: "NGStL" },
+              { color: "pink", label: "BHI&R" },
+              { color: "cyan", label: "S&C" },
+              { color: "maroon", label: "VYSC" }
+            ]
+          },
+          {
+            label: 68,
+            color: "plain",
+            rowspan: 3,
+            labels: [
+              { color: "darkGreen", label: "FYN" },
+              { color: "black", label: "IWNJ" },
+              { color: "yellow", label: "NGStL" },
+              { color: "pink", label: "BHI&R" }
+            ]
+          },
+          {
+            label: 74,
+            color: "plain",
+            rowspan: 3,
+            labels: [
+              { color: "red", label: "IOW" },
+              { color: "blue", label: "C&N" },
+              { color: "darkGreen", label: "FYN" },
+              { color: "black", label: "IWNJ" }
+            ]
+          },
+          {
+            label: 82,
+            color: "plain",
+            rowspan: 3,
+            labels: [
+              { color: "red", label: "IOW" },
+              { color: "blue", label: "C&N" },
+              { color: "darkGreen", label: "FYN" },
+              { color: "black", label: "IWNJ" }
+            ]
+          },
+          {
+            label: 90,
+            color: "plain",
+            rowspan: 3,
+            labels: [
+              { color: "red", label: "IOW" },
+              { color: "blue", label: "C&N" }
+            ]
+          },
+          {
+            label: 100,
+            color: "plain",
+            rowspan: 3,
+            labels: [
+              { color: "red", label: "IOW" },
+              { color: "blue", label: "C&N" }
+            ]
+          }
+        ],
+        [{ label: 47, color: "gray" }],
+        [{ label: 44, color: "gray" }],
+        [
+          { label: 40, color: "gray" },
+          { label: 52, color: "gray" },
+          { label: 56, color: "gray" },
+          { label: 60, color: "gray" },
+          { label: 65, color: "gray" },
+          { label: 71, color: "gray" },
+          { label: 78, color: "gray" },
+          { label: 86, color: "gray" },
+          { label: 95, color: "gray" }
+        ]
+      ]
     },
+    splice: 27,
     market: [
       {
+        start: true,
         color: "pink",
         label: "Bankrupt"
       },
@@ -667,7 +770,8 @@ const game = {
       },
       {
         color: "orange",
-        label: "340 - End of Game"
+        label: "340",
+        end: true
       }
     ],
     limits: [
@@ -756,21 +860,26 @@ const game = {
       {
         color: "plain",
         centerTowns: [{}],
-        borders: [{
-          side: 2,
-          color: "mountain"
-        }],
+        borders: [
+          {
+            side: 2,
+            color: "mountain"
+          }
+        ],
         hexes: ["G1"]
       },
       {
         color: "plain",
-        borders: [{
-          side: 5,
-          color: "mountain"
-        },{
-          side: 6,
-          color: "mountain"
-        }],
+        borders: [
+          {
+            side: 5,
+            color: "mountain"
+          },
+          {
+            side: 6,
+            color: "mountain"
+          }
+        ],
         cities: [
           {
             angle: 180,
@@ -803,20 +912,26 @@ const game = {
       {
         color: "water",
         offBoardRevenue: {
-          revenues: [{
-            color: "yellow",
-            cost: "0"
-          },{
-            color: "green",
-            cost: "20"
-          },{
-            color: "brown",
-            cost: "40"
-          }]
+          revenues: [
+            {
+              color: "yellow",
+              cost: "0"
+            },
+            {
+              color: "green",
+              cost: "20"
+            },
+            {
+              color: "brown",
+              cost: "40"
+            }
+          ]
         },
-        offBoardTrack: [{
-          side: 2
-        }],
+        offBoardTrack: [
+          {
+            side: 2
+          }
+        ],
         hexes: ["J2"]
       },
       {
@@ -826,50 +941,69 @@ const game = {
       {
         color: "plain",
         centerTowns: [{}],
-        borders: [{
-          side: 2,
-          color: "mountain"
-        },{
-          side: 3,
-          color: "mountain"
-        }],
+        borders: [
+          {
+            side: 2,
+            color: "mountain"
+          },
+          {
+            side: 3,
+            color: "mountain"
+          }
+        ],
         hexes: ["G3"]
       },
       {
         color: "yellow",
-        cities: [{
-          companies: [{
-            label: "IOW",
-            color: "red"
-          }]
-        }],
-        values: [{
-          value: 30,
-          angle: 90,
-          percent: 0.667
-        }],
-        labels: [{
-          label: "R",
-          angle: 180,
-          percent: 0.667
-        }],
-        track: [{
-          side: 6
-        }],
+        cities: [
+          {
+            companies: [
+              {
+                label: "IOW",
+                color: "red"
+              }
+            ]
+          }
+        ],
+        values: [
+          {
+            value: 30,
+            angle: 90,
+            percent: 0.667
+          }
+        ],
+        labels: [
+          {
+            label: "R",
+            angle: 180,
+            percent: 0.667
+          }
+        ],
+        track: [
+          {
+            side: 6
+          }
+        ],
         hexes: ["I3"]
       },
       {
         color: "plain",
-        cities: [{
-          companies: [{
-            label: "FYN",
-            color: "darkGreen"
-          }]
-        }],
-        borders: [{
-          side: 2,
-          color: "mountain"
-        }],
+        cities: [
+          {
+            companies: [
+              {
+                label: "FYN",
+                color: "darkGreen"
+              }
+            ]
+          }
+        ],
+        borders: [
+          {
+            side: 2,
+            color: "mountain"
+          }
+        ],
         hexes: ["B4"]
       },
       {
@@ -882,21 +1016,26 @@ const game = {
       {
         color: "plain",
         centerTowns: [{}],
-        borders: [{
-          side: 5,
-          color: "mountain"
-        }],
+        borders: [
+          {
+            side: 5,
+            color: "mountain"
+          }
+        ],
         hexes: ["F4"]
       },
       {
         color: "plain",
-        centerTowns: [{
-          angle: 90,
-          percent: 0.5
-        },{
-          angle: 270,
-          percent: 0.5
-        }],
+        centerTowns: [
+          {
+            angle: 90,
+            percent: 0.5
+          },
+          {
+            angle: 270,
+            percent: 0.5
+          }
+        ],
         hexes: ["H4"]
       },
       {
@@ -907,216 +1046,284 @@ const game = {
       {
         color: "plain",
         centerTowns: [{}],
-        borders: [{
-          side: 5,
-          color: "mountain"
-        }],
+        borders: [
+          {
+            side: 5,
+            color: "mountain"
+          }
+        ],
         hexes: ["A5"]
       },
       {
         color: "plain",
         centerTowns: [{}],
-        hexes: ["C5","E5","D6","F6","H8","F10","G11"]
+        hexes: ["C5", "E5", "D6", "F6", "H8", "F10", "G11"]
       },
       {
         color: "yellow",
-        values: [{
-          value: 30,
-          percent: 0.667
-        }],
-        labels: [{
-          angle: 270,
-          percent: 0.667,
-          label: "N"
-        }],
+        values: [
+          {
+            value: 30,
+            percent: 0.667
+          }
+        ],
+        labels: [
+          {
+            angle: 270,
+            percent: 0.667,
+            label: "N"
+          }
+        ],
         cities: [{}],
-        track: [{
-          side: 3
-        },{
-          side: 4
-        }],
+        track: [
+          {
+            side: 3
+          },
+          {
+            side: 4
+          }
+        ],
         hexes: ["G5"]
       },
       {
         color: "plain",
-        borders: [{
-          side: 1,
-          color: "mountain"
-        }],
+        borders: [
+          {
+            side: 1,
+            color: "mountain"
+          }
+        ],
         centerTowns: [{}],
         hexes: ["I5"]
       },
       {
         color: "plain",
-        centerTowns: [{
-          angle: 90,
-          percent: 0.5
-        }],
-        water: [{
-          angle: 270,
-          percent: 0.5,
-          cost: "TBD"
-        }],
+        centerTowns: [
+          {
+            angle: 90,
+            percent: 0.5
+          }
+        ],
+        water: [
+          {
+            angle: 270,
+            percent: 0.5,
+            cost: "TBD"
+          }
+        ],
         hexes: ["K5"]
       },
       {
         color: "plain",
         cities: [{}],
-        hexes: ["B6","A7","J8"]
+        hexes: ["B6", "A7", "J8"]
       },
       {
         color: "plain",
         mountain: {
           cost: "TBD"
         },
-        hexes: ["H6","E7","F8","G13"]
+        hexes: ["H6", "E7", "F8", "G13"]
       },
       {
         color: "plain",
         cities: [{}],
-        labels: [{
-          angle: 180,
-          percent: 0.667,
-          label: "B"
-        }],
+        labels: [
+          {
+            angle: 180,
+            percent: 0.667,
+            label: "B"
+          }
+        ],
         hexes: ["J6"]
       },
       {
         color: "plain",
-        cities: [{
-          companies: [{
-            label: "BHI&R",
-            color: "pink"
-          }]
-        }],
+        cities: [
+          {
+            companies: [
+              {
+                label: "BHI&R",
+                color: "pink"
+              }
+            ]
+          }
+        ],
         hexes: ["L6"]
       },
       {
         color: "plain",
-        centerTowns: [{
-          angle: 90,
-          percent: 0.5
-        }],
-        mountain: [{
-          angle: 270,
-          percent: 0.5,
-          cost: "TBD"
-        }],
-        hexes: ["C7","H10","H12"]
+        centerTowns: [
+          {
+            angle: 90,
+            percent: 0.5
+          }
+        ],
+        mountain: [
+          {
+            angle: 270,
+            percent: 0.5,
+            cost: "TBD"
+          }
+        ],
+        hexes: ["C7", "H10", "H12"]
       },
       {
         color: "yellow",
-        values: [{
-          angle: 30,
-          value: 10,
-          percent: 0.5
-        }],
-        labels: [{
-          angle: 210,
-          percent: 0.667,
-          label: "M"
-        }],
-        centerTowns: [{
-          angle: 150,
-          percent: 0.667
-        }],
-        cities: [{
-          angle: -60,
-          percent: 0.5,
-          companies: [{
-            label: "IWNJ",
-            color: "black"
-          }]
-        }],
-        track: [{
-          type: "stop",
-          side: 6
-        }],
+        values: [
+          {
+            angle: 30,
+            value: 10,
+            percent: 0.5
+          }
+        ],
+        labels: [
+          {
+            angle: 210,
+            percent: 0.667,
+            label: "M"
+          }
+        ],
+        centerTowns: [
+          {
+            angle: 150,
+            percent: 0.667
+          }
+        ],
+        cities: [
+          {
+            angle: -60,
+            percent: 0.5,
+            companies: [
+              {
+                label: "IWNJ",
+                color: "black"
+              }
+            ]
+          }
+        ],
+        track: [
+          {
+            type: "stop",
+            side: 6
+          }
+        ],
         hexes: ["G7"]
       },
       {
         color: "plain",
-        centerTowns: [{
-          angle: 90,
-          percent: 0.5
-        },{
-          angle: 270,
-          percent: 0.5
-        }],
-        borders: [{
-          side: 4,
-          color: "mountain"
-        }],
+        centerTowns: [
+          {
+            angle: 90,
+            percent: 0.5
+          },
+          {
+            angle: 270,
+            percent: 0.5
+          }
+        ],
+        borders: [
+          {
+            side: 4,
+            color: "mountain"
+          }
+        ],
         hexes: ["I7"]
       },
       {
         color: "plain",
-        labels: [{
-          label: "B",
-          angle: 180,
-          percent: 0.667
-        }],
-        cities: [{
-          companies: [{
-            label: "VYSC",
-            color: "cyan"
-          }]
-        }],
+        labels: [
+          {
+            label: "B",
+            angle: 180,
+            percent: 0.667
+          }
+        ],
+        cities: [
+          {
+            companies: [
+              {
+                label: "VYSC",
+                color: "cyan"
+              }
+            ]
+          }
+        ],
         hexes: ["E9"]
       },
       {
         color: "plain",
-        labels: [{
-          label: "B",
-          angle: 180,
-          percent: 0.667
-        }],
-        cities: [{
-          companies: [{
-            label: "NGStL",
-            color: "yellow"
-          }]
-        }],
+        labels: [
+          {
+            label: "B",
+            angle: 180,
+            percent: 0.667
+          }
+        ],
+        cities: [
+          {
+            companies: [
+              {
+                label: "NGStL",
+                color: "yellow"
+              }
+            ]
+          }
+        ],
         hexes: ["G9"]
       },
       {
         color: "plain",
         cities: [{}],
-        borders: [{
-          side: 1,
-          color: "mountain"
-        }],
+        borders: [
+          {
+            side: 1,
+            color: "mountain"
+          }
+        ],
         hexes: ["I9"]
       },
       {
         color: "yellow",
         cities: [{}],
-        labels: [{
-          label: "V",
-          percent: 0.667
-        }],
-        values: [{
-          value: 30,
-          angle: 270,
-          percent: 0.667
-        }],
-        track: [{
-          side: 3
-        }],
-        borders: [{
-          side: 4,
-          color: "mountain"
-        }],
+        labels: [
+          {
+            label: "V",
+            percent: 0.667
+          }
+        ],
+        values: [
+          {
+            value: 30,
+            angle: 270,
+            percent: 0.667
+          }
+        ],
+        track: [
+          {
+            side: 3
+          }
+        ],
+        borders: [
+          {
+            side: 4,
+            color: "mountain"
+          }
+        ],
         hexes: ["I11"]
       },
       {
         color: "plain",
-        cities: [{
-          companies: [{
-            label: "S&C",
-            color: "maroon"
-          }]
-        }],
+        cities: [
+          {
+            companies: [
+              {
+                label: "S&C",
+                color: "maroon"
+              }
+            ]
+          }
+        ],
         hexes: ["F12"]
       }
     ]
