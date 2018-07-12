@@ -478,6 +478,12 @@ const game = {
             color: "plain",
             rowspan: 3,
             labels: [
+              {},
+              {},
+              {},
+              {},
+              {},
+              {},
               { color: "cyan", label: "S&C" },
               { color: "maroon", label: "VYSC" }
             ]
@@ -487,6 +493,10 @@ const game = {
             color: "plain",
             rowspan: 3,
             labels: [
+              {},
+              {},
+              {},
+              {},
               { color: "yellow", label: "NGStL" },
               { color: "pink", label: "BHI&R" },
               { color: "cyan", label: "S&C" },
@@ -498,6 +508,8 @@ const game = {
             color: "plain",
             rowspan: 3,
             labels: [
+              {},
+              {},
               { color: "darkGreen", label: "FYN" },
               { color: "black", label: "IWNJ" },
               { color: "yellow", label: "NGStL" },
@@ -511,6 +523,8 @@ const game = {
             color: "plain",
             rowspan: 3,
             labels: [
+              {},
+              {},
               { color: "darkGreen", label: "FYN" },
               { color: "black", label: "IWNJ" },
               { color: "yellow", label: "NGStL" },

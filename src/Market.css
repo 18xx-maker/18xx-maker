@@ -1,5 +1,6 @@
 .market__1Diag {
   overflow: auto;
+  height: calc(4in + 2px);
 }
 
 .market__1Diag .market__row {
@@ -14,11 +15,11 @@
   position: relative;
   float: left;
   box-sizing: border-box;
-  margin-bottom: 0.5in;
 }
 
 .market__1Diag .market__row:last-child {
   margin-bottom: 0;
+  top: -1px;
 }
 
 .market__1Diag .market__row:nth-child(odd) {
@@ -71,6 +72,11 @@
   position: absolute;
 }
 
+.market__type__1Diag h2 {
+  height: calc(0.5in - 2px);
+  line-height: calc(0.5in - 2px);
+}
+
 .market__type__1Diag .rounds {
   top: 0.5in;
   right: 0;
@@ -88,7 +94,7 @@
 
 .market__type__1Diag .par table td {
   width: auto;
-  height: auto;
+  height: 0.75in;
 }
 
 .market__type__1Diag .par table td div {
