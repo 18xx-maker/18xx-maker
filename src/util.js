@@ -1,6 +1,13 @@
 import * as R from "ramda";
 import { alpha } from "./data";
 
+const groupsOf = R.curry(function group(n, list) {
+  return R.isEmpty(list)
+    ? []
+    : R.prepend(R.take(n, list), group(n, R.drop(n, list)));
+});
+
+
 const HEX_RATIO = 0.57735;
 
 const hexPointsVertical = (width, edge, x, y) => [
@@ -179,6 +186,7 @@ const mergeHex = (a, b) => {
 };
 
 export default {
+  groupsOf,
   HEX_RATIO,
   hexData,
   linear,

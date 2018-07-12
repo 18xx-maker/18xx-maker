@@ -560,6 +560,31 @@ svg {
   border: none;
 }
 
+.stock table.diag td.double {
+  width: 1in;
+}
+
+.stock table.diag td.start {
+  border-width: 1px 0 1px 1px;
+  width: 1in;
+}
+
+.stock table.diag td.start-half {
+  border-width: 1px 1px 1px 0;
+  width: 0.5in;
+}
+
+.stock table.diag td.end {
+  border-width: 1px 1px 1px 0;
+  width: 1in;
+}
+
+.stock table.diag td.end-half {
+  border-width: 1px 0 1px 1px;
+  width: 0.5in;
+}
+
+
 .rounds {
   position: absolute;
   bottom: 0;

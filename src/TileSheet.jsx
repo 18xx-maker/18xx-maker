@@ -2,16 +2,11 @@ import React from "react";
 import * as R from "ramda";
 import { paper } from "./data";
 
+import util from "./util";
 import Tile from "./Tile";
 import Svg from "./Svg";
 
 import games from "./data/games";
-
-const groupsOf = R.curry(function group(n, list) {
-  return R.isEmpty(list)
-    ? []
-    : R.prepend(R.take(n, list), group(n, R.drop(n, list)));
-});
 
 const HEX_RATIO = 0.57735;
 const RATIO = 0.966666667;
@@ -47,7 +42,7 @@ const TileSheet = ({ match }) => {
         )}
       </div>
     ),
-    groupsOf(perRow, ids)
+    util.groupsOf(perRow, ids)
   );
 
   return <div className="tileSheet">{tiles}</div>;

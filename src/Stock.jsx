@@ -16,10 +16,7 @@ const Stock = ({ match }) => {
     <div class="stock">
       <div class="prices">
         <Market
-          market={stock.market}
-          limits={stock.limits}
-          par={stock.par}
-          type={stock.type}
+          {...stock}
           rounds={game.rounds}
         />
       </div>
