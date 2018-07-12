@@ -397,8 +397,12 @@ const game = {
   turns: [
     {
       name: "Stock Round",
-      steps: ["Buy one certificate", "Sell any number of certificates"],
-      ordered: false
+      steps: [
+        "Sell any number of shares",
+        "Buy one share",
+        "Sell any number of shares"
+      ],
+      ordered: true
     },
     {
       name: "Operating Round",
