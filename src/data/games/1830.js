@@ -300,7 +300,7 @@ const game = {
       limit: "4",
       number: "5",
       tiles: "green",
-      notes: "Private companies can be bought"
+      notes: "Private companies may be purchased"
     },
     {
       name: "4",
@@ -314,7 +314,7 @@ const game = {
       limit: "2",
       number: "3",
       tiles: "brown",
-      notes: "Private companies close"
+      notes: "Private companies are closed"
     },
     {
       name: "6",
@@ -322,7 +322,7 @@ const game = {
       number: "2",
       rust: "3",
       tiles: "brown",
-      notes: "D Trains available for purchase"
+      notes: "D Trains may be purchased"
     },
     {
       name: "D",
