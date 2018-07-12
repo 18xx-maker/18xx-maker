@@ -59,6 +59,11 @@ const makeCell = ({ label, color, textColor, start, end }, index) => {
     );
   } else if (index === 0) {
     nodes.push(<div className="market__pad" />);
+    nodes.push(
+      <div className={className} style={{ backgroundColor, color: fontColor }}>
+        {label}
+      </div>
+    );
   } else {
     nodes.push(
       <div className={className} style={{ backgroundColor, color: fontColor }}>
@@ -79,7 +84,6 @@ const makeRow = market => {
 };
 
 const makeMarket1Diag = (market, splice) => {
-  console.log({ splice });
   return [
     makeRow(market.slice(0, splice)),
     makeRow(market.slice(splice, market.length))
@@ -92,7 +96,10 @@ const Par1Diag = ({ type, values }) => {
       <tr>
         {R.map(
           value => (
-            <td rowspan={value.rowspan || 1} style={{ backgroundColor: colors[value.color] }}>
+            <td
+              rowspan={value.rowspan || 1}
+              style={{ backgroundColor: colors[value.color] }}
+            >
               {value.label}
               {R.map(
                 note => (

@@ -64,19 +64,11 @@
 
 .market__1Diag .market__end_pad div,
 .market__1Diag .market__start_pad div {
-  top: 0;
+  top: -2px;
   bottom: 0;
   left: 0;
   right: 0;
   position: absolute;
-}
-
-.market__1Diag .market__start_pad div {
-  top: -2px;
-}
-
-.market__1Diag .market__end_pad div {
-  bottom: -2px;
 }
 
 .market__type__1Diag .rounds {
