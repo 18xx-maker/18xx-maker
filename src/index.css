@@ -322,10 +322,11 @@ svg {
 .train__description {
   position: absolute;
   height: 0.4375in;
-  width: calc(100% - 1.25in);
+  width: calc(100% - 0.25in);
   bottom: 0.625in;
   margin: 0 0.125in;
-  padding: 0 0.125in 0 0.875in;
+  padding: 0 0.125in 0 0.125in;
+  box-sizing: border-box;
   right: 0;
   text-align: right;
   font-family: "Helvetica", "Arial", sans-serif;
