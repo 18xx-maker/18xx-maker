@@ -47,7 +47,7 @@ const Map = ({ match }) => {
     return R.map(([x, y]) => {
       let translate = game.info.orientation === "horizontal" ?  `translate(${hexY(x, y)} ${hexX(x, y)})` : `translate(${hexX(x, y)} ${hexY(x, y)})`;
       return (
-        <g transform={`${translate}`}>
+        <g transform={`${translate}`} key={`hex-${util.toAlpha(y)}${x}`}>
           <Hex hex={resolvedHex} id={`${util.toAlpha(y)}${x}`} border={true} />
         </g>
       );

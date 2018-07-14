@@ -639,44 +639,6 @@ svg {
   width: 3in;
 }
 
-.revenue {
-  page-break-inside: avoid;
-  height: 4in;
-}
-
-.revenue table {
-  margin-bottom: 0.25in;
-}
-
-.pools {
-  page-break-inside: avoid;
-  display: grid;
-  grid-column-gap: 0.25in;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-  justify-items: stretch;
-  align-items: stretch;
-  justify-content: stretch;
-  align-content: stretch;
-  height: 4in;
-  box-sizing: border-box;
-}
-
-.pool {
-  flex-grow: 1;
-  box-sizing: border-box;
-}
-
-.pool:last-child {
-  padding: 0;
-}
-
-.pool__box {
-  box-sizing: border-box;
-  height: calc(100% - 0.5in);
-  border: 1px solid black;
-}
-
 ul.notes {
   display: flex;
   height: 100%;

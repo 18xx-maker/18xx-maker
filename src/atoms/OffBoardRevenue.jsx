@@ -1,5 +1,5 @@
 import React from "react";
-import { colors, textColor } from "../data";
+import { colors } from "../data";
 import * as R from "ramda";
 
 const OffBoardRevenue = ({ revenues }) => {
@@ -22,6 +22,7 @@ const OffBoardRevenue = ({ revenues }) => {
         y="-10"
         stroke="none"
         fill={colors[revenue.color]}
+        key={`rect-${revenue.cost}`}
       />,
       <text
         fill={colors[revenue.textColor] || colors["black"]}
@@ -32,6 +33,7 @@ const OffBoardRevenue = ({ revenues }) => {
         lengthAdjust="spacingAndGlyphs"
         x={currentX + 0.5 * width}
         y="-1"
+        key={`text-${revenue.cost}`}
       >
         {revenue.cost}
       </text>

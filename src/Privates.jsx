@@ -12,10 +12,11 @@ const Privates = ({ match }) => {
   }
 
   return (
-    <div class="cards">
+    <div className="cards">
       {R.map(
         p => (
           <Private
+            key={p.name}
             {...p}
           />
         ),

@@ -1,10 +1,6 @@
 import React from "react";
 import * as R from "ramda";
 
-const width = 75;
-const bigWidth = 86.6025;
-const vary = bigWidth - width;
-
 const Position = ({ data, children }) => {
   if (!data) {
     data = [];
@@ -29,6 +25,7 @@ const Position = ({ data, children }) => {
 
     return (
       <g
+        key={`position-${angle}-${rotate}-${translate}-${x}-${y}`}
         transform={`rotate(${angle} ${x} ${y}) translate(0 ${translate}) rotate(${rotate} ${x} ${y}) translate(${x} ${y})`}
       >
         {children(d)}

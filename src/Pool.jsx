@@ -6,7 +6,7 @@ const Pool = ({ label, notes }) => {
 
   if (notes && notes.length > 0) {
     notesNode = (
-      <ul class="notes">
+      <ul className="notes">
         {notes.map(n => {
           let backgroundColor = colors[n.color || "orange"];
           let color = textColor(n.color || "orange");
@@ -23,9 +23,9 @@ const Pool = ({ label, notes }) => {
   }
 
   return (
-    <div class="pool">
+    <div className="pool">
       <h2>{label}</h2>
-      <div class="pool__box">{notesNode}</div>
+      <div className="pool__box">{notesNode}</div>
     </div>
   );
 };

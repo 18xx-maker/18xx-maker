@@ -5,16 +5,18 @@ import { colors } from "./data";
 const Par = ({ par }) => {
   let rows = R.map(
     value => (
-      <tr>
+      <tr key={`par-${value}`}>
         <td style={{ backgroundColor: colors["gray"] }}>{value}</td>
       </tr>
     ),
     par.values
   );
   return (
-    <div class="par">
+    <div className="par">
       <h2>Par</h2>
-      <table>{rows}</table>
+      <table>
+        <tbody>{rows}</tbody>
+      </table>
     </div>
   );
 };

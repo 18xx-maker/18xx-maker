@@ -10,6 +10,7 @@ const Value = ({ type }) => {
       break;
     case "port":
     case "steam":
+    default:
       icon = <use href="#port" />;
       break;
   }

@@ -15,11 +15,19 @@ const Games = () => {
           <li>
             <Link to={`/${game}/charters`}>Charters</Link>
           </li>
+          {games[game].ipo && (
+            <li>
+              <Link to={`/${game}/ipo`}>IPO</Link>
+            </li>
+          )}
           <li>
             <Link to={`/${game}/map`}>Map</Link>
           </li>
           <li>
             <Link to={`/${game}/privates`}>Privates</Link>
+          </li>
+          <li>
+            <Link to={`/${game}/revenue`}>Revenue</Link>
           </li>
           <li>
             <Link to={`/${game}/shares`}>Shares</Link>

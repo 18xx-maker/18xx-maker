@@ -28,24 +28,24 @@ const Tokens = ({ match }) => {
     );
     let groups = R.addIndex(R.map)(
       (token, index) => (
-        <g transform={`translate(${60 * index + 30} 0)`}>{token}</g>
+        <g key={index} transform={`translate(${60 * index + 30} 0)`}>{token}</g>
       ),
       companyTokens
     );
 
-    return <g transform={`translate(0 ${y})`}>{groups}</g>;
+    return <g key={index} transform={`translate(0 ${y})`}>{groups}</g>;
   }, companies);
 
   let extras = R.addIndex(R.map)((label, index) => {
     if (label.match(/^#/)) {
       return (
-        <g transform={`translate(${60 * index + 30} 0)`}>
+        <g key={index} transform={`translate(${60 * index + 30} 0)`}>
           <Token icon={label} width="30" color={"white"} outline={"black"} />
         </g>
       );
     } else {
       return (
-        <g transform={`translate(${60 * index + 30} 0)`}>
+        <g key={index} transform={`translate(${60 * index + 30} 0)`}>
           <Token label={label} width="30" color={"white"} outline={"black"} />
         </g>
       );
@@ -53,7 +53,7 @@ const Tokens = ({ match }) => {
   }, game.tokens);
 
   let y = 60 * companies.length + 30;
-  tokens.push(<g transform={`translate(0 ${y})`}>{extras}</g>);
+  tokens.push(<g key="extras" transform={`translate(0 ${y})`}>{extras}</g>);
 
   let width =
     R.reduce(R.max, 1, R.map(c => c.tokens.length + 4, companies)) * 60;

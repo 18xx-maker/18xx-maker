@@ -5,13 +5,13 @@ import * as R from "ramda";
 const Rounds = ({ rounds }) => {
   let items = R.map(
     round => (
-      <svg>
+      <svg key={round.name}>
         <Token label={round.name} color={round.color} labelColor="black" />
       </svg>
     ),
     rounds
   );
-  return <div class="rounds"><div class="tokens">{items}</div></div>;
+  return <div className="rounds"><div className="tokens">{items}</div></div>;
 };
 
 export default Rounds;

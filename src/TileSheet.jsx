@@ -20,15 +20,17 @@ const TileSheet = ({ match }) => {
   let perRow = Math.floor(paper.width / (tileWidth + 12.5));
   let ids = R.chain(k => Array(game.tiles[k]).fill(k), R.keys(game.tiles));
 
-  let tiles = R.map(
-    row => (
+  let tiles = R.addIndex(R.map)(
+    (row, i) => (
       <div
+        key={i}
         className="row"
         style={{ width: `${(perRow * (tileWidth + 12.5) - 12.5) * 0.01}in` }}
       >
-        {R.map(
-          id => (
+        {R.addIndex(R.map)(
+          (id, i) => (
             <Svg
+              key={`${id}-${i}`}
               style={{
                 width: `${tileWidth * 0.01}in`,
                 height: `${tileHeight * 0.01}in`

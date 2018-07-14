@@ -27,7 +27,7 @@ const City = ({ size, companies, border, name, rotation }) => {
       companies[num] &&
       companies[num].label && (
         <text
-          transform={`rotate(${-rotation})`}
+          transform={`rotate(${-rotation || 0})`}
           fill={companyTextColor(num)}
           fontFamily="Bitter"
           fontWeight="bold"
@@ -69,7 +69,7 @@ const City = ({ size, companies, border, name, rotation }) => {
             cx="0"
             cy="0"
             r="25"
-            clip-path="url(#hexClip)"
+            clipPath="url(#hexClip)"
           />
           {companyLabel(0)}
           {nameNode}
