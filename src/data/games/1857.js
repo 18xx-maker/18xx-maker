@@ -625,11 +625,11 @@ const game = {
         centerTowns: [
           {
             angle: 90,
-            percent: 0.5
+            percent: 0.4
           },
           {
             angle: 270,
-            percent: 0.5
+            percent: 0.4
           }
         ],
         hexes: ["D13", "G16"]
