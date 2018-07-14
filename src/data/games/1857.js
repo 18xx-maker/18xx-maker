@@ -613,7 +613,7 @@ const game = {
       {
         color: "plain",
         cities: [{}],
-        hexes: ["D3", "D7", "D11", "G4", "E16", "F17"]
+        hexes: ["D3", "D7", "D11", "G4", "E16", "E20", "F17"]
       },
       {
         color: "plain",
@@ -817,7 +817,7 @@ const game = {
           angle: -60,
           percent: 0.5
         }],
-        hexes: ["C16","E20","G8"]
+        hexes: ["C16","G8"]
       },
       {
         color: "yellow",
