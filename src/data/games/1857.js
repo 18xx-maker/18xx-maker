@@ -18,10 +18,6 @@ const game = {
 
   players: [
     {
-      number: 2,
-      certLimit: 28
-    },
-    {
       number: 3,
       certLimit: 20,
       capital: "$800"
@@ -637,13 +633,18 @@ const game = {
       {
         color: "offboard",
         offBoardTrack: [{side:6}],
+        labels: [{
+          label: "Salta",
+          angle: 180,
+          percent: 0.333
+        }],
         offBoardRevenue: {
           revenues: [{
             color: "yellow",
-            cost: "TBD"
+            cost: "20"
           },{
             color: "brown",
-            cost: "TBD"
+            cost: "60"
           }]
         },
         hexes: ["B1"]
@@ -661,20 +662,39 @@ const game = {
       {
         color: "plain",
         mountain: {
-          cost: "TBD"
+          cost: "$120"
         },
-        hexes: ["B11", "B15", "C8", "C10", "C12"]
+        hexes: ["B11"]
+      },
+      {
+        color: "plain",
+        mountain: {
+          cost: "$80"
+        },
+        hexes: ["C12"]
+      },
+      {
+        color: "plain",
+        mountain: {
+          cost: "$40"
+        },
+        hexes: ["B15", "C8", "C10"]
       },
       {
         color: "offboard",
         offBoardTrack: [{side:6}],
+        labels: [{
+          label: "Chile",
+          angle: 180,
+          percent: 0.333
+        }],
         offBoardRevenue: {
           revenues: [{
             color: "yellow",
             cost: "0"
           },{
             color: "brown",
-            cost: "60"
+            cost: "70"
           }]
         },
         hexes: ["A12"]
@@ -682,13 +702,17 @@ const game = {
       {
         color: "offboard",
         offBoardTrack: [{side:5}],
+        labels: [{
+          label: "Chile",
+          percent: 0.333
+        }],
         offBoardRevenue: {
           revenues: [{
             color: "yellow",
             cost: "0"
           },{
             color: "brown",
-            cost: "60"
+            cost: "70"
           }]
         },
         hexes: ["A14"]
@@ -706,13 +730,17 @@ const game = {
       {
         color: "offboard",
         offBoardTrack: [{side:4},{side:5}],
+        labels: [{
+          label: "Patagonia",
+          percent: 0.333
+        }],
         offBoardRevenue: {
           revenues: [{
             color: "yellow",
-            cost: "TBD"
+            cost: "10"
           },{
             color: "brown",
-            cost: "TBD"
+            cost: "40"
           }]
         },
         hexes: ["D21"]
@@ -720,13 +748,17 @@ const game = {
       {
         color: "water",
         offBoardTrack: [{side:4}],
+        icons: [{
+          type: "port",
+          percent: 0.5
+        }],
         offBoardRevenue: {
           revenues: [{
             color: "yellow",
-            cost: "TBD"
+            cost: "20"
           },{
             color: "brown",
-            cost: "TBD"
+            cost: "30"
           }]
         },
         hexes: ["E22"]
@@ -749,6 +781,10 @@ const game = {
             percent: 0.1
           }
         ],
+        values: [{
+          value: 20,
+          percent: 0.6
+        }],
         track: [
           {
             type: "gentle",
