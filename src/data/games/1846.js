@@ -225,7 +225,7 @@ const game = {
       phase: "3/5, 4",
       rust: "2",
       limit: "2",
-      number: "8",
+      number: "∞",
       tiles: "gray",
       notes: "Private tokens removed, Phase out 3/5 and 4 trains"
     }
@@ -274,16 +274,16 @@ const game = {
   turns: [
     {
       name: "Stock Round",
-      steps: ["Sell any number of certificates", "Buy one certificate"],
+      steps: ["Sell any number of shares", "Buy one share"],
       ordered: true
     },
     {
       name: "Operating Round",
       steps: [
         "Issue or redeem shares",
-        "Lay track and/or place token",
-        "Run routes",
-        "Pay full, pay half, or retain revenue",
+        "Lay or upgrade track and/or purchase a station",
+        "Run trains",
+        "Pay dividends, half dividends or retain revenue",
         "Purchase trains"
       ],
       ordered: true

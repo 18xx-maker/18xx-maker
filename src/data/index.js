@@ -46,6 +46,7 @@ const textColor = color => {
   switch (color) {
     case "yellow":
     case "cyan":
+  case "plain":
     case "white":
       return "rgb(0,0,0)";
     default:

@@ -15,10 +15,10 @@ const Token = ({ icon, label, color, labelColor, inverse, outline, width }) => {
     <use href={icon} transform="scale(1.66666 1.66666)"/>
   ) : (
     <text
-      font-family="Bitter"
+      fontFamily="Bitter"
       textAnchor="middle"
       alignmentBaseline="central"
-      stroke-width="0.5"
+      strokeWidth="0.5"
       stroke={tokenLabelStroke}
       fill={tokenLabelColor}
       textLength={label.length > 2 ? 40 : 26}

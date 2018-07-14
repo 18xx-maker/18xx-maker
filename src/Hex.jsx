@@ -7,6 +7,7 @@ import Position from "./Position";
 import HexContext from "./context/HexContext";
 
 import Hex from "./atoms/Hex";
+import Divide from "./atoms/Divide";
 import Track from "./atoms/Track";
 import Id from "./atoms/Id";
 import City from "./atoms/City";
@@ -27,10 +28,10 @@ const concat = R.unapply(R.reduce(R.concat, []));
 
 const makeOffBoardTrack = track => {
   let side = track.side;
-  let rotation = (track.rotation || 0) + ((side - 1) * 60);
-  let transform = `rotate(${rotation})`;
+  let rotation = (track.rotation || 0) + (side - 1) * 60;
+  let transform = `rotate(${rotation || 0})`;
   return (
-    <g transform={transform}>
+    <g transform={transform} key={`offboard-${side}`}>
       <OffBoardTrack border={true} />
       <OffBoardTrack />
     </g>
@@ -39,27 +40,33 @@ const makeOffBoardTrack = track => {
 
 const makeTrack = track => {
   let point = track.start || track.end || track.side;
-  let rotation = (track.rotation || 0) + ((point - 1) * 60);
-  let transform = `rotate(${rotation})`;
+  let rotation = (track.rotation || 0) + (point - 1) * 60;
+  let transform = `rotate(${rotation || 0})`;
+  let type = track.type || util.trackType(track);
   return (
-    <g transform={transform}>
-      <Track type={track.type || util.trackType(track)} gauge={track.gauge} />
+    <g transform={transform} key={`track-${type}-${point}`}>
+      <Track type={type} gauge={track.gauge} />
     </g>
   );
 };
 
 const makeBorder = track => {
   let point = track.start || track.end || track.side;
-  let rotation = (track.rotation || 0) + ((point - 1) * 60);
-  let transform = `rotate(${rotation})`;
+  let rotation = (track.rotation || 0) + (point - 1) * 60;
+  let transform = `rotate(${rotation || 0})`;
+  let type = track.type || util.trackType(track);
   return (
-    <g transform={transform}>
+    <g transform={transform} key={`track-board-${type}-${point}`}>
       <Track type={track.type || util.trackType(track)} border={true} />
     </g>
   );
 };
 
 const HexTile = ({ hex, id, border }) => {
+  if (hex === undefined || hex === null) {
+    return null;
+  }
+
   let getTracks = R.converge(concat, [
     R.compose(
       R.map(makeBorder),
@@ -97,7 +104,12 @@ const HexTile = ({ hex, id, border }) => {
 
   let centerTowns = (
     <Position data={hex.centerTowns}>
-      {t => [<CenterTown border={true} />, <CenterTown {...t} />]}
+      {t => (
+        <React.Fragment>
+          <CenterTown border={true} />
+          <CenterTown {...t} />
+        </React.Fragment>
+      )}
     </Position>
   );
 
@@ -117,6 +129,8 @@ const HexTile = ({ hex, id, border }) => {
   let tunnels = (
     <Position data={hex.tunnels}>{t => <Tunnel {...t} />}</Position>
   );
+
+  let divides = <Position data={hex.divides}>{t => <Divide />}</Position>;
 
   let offBoardRevenue = (
     <Position data={hex.offBoardRevenue}>
@@ -144,7 +158,7 @@ const HexTile = ({ hex, id, border }) => {
 
       <HexContext.Consumer>
         {hx => (
-          <g clip-path="url(#hexClip)" transform={`rotate(${hx.rotation})`}>
+          <g clipPath="url(#hexClip)" transform={`rotate(${hx.rotation || 0})`}>
             <g transform={`rotate(-${hx.rotation})`}>
               {icons}
               {water}
@@ -160,6 +174,7 @@ const HexTile = ({ hex, id, border }) => {
               {labels}
               {offBoardRevenue}
               {borderBorders}
+              {divides}
               {borders}
             </g>
           </g>

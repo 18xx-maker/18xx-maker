@@ -10,8 +10,8 @@ const Name = ({ name, reverse, rotation, town, size, offset, y, textLength }) =>
       dy={y || (reverse ? (town ? 8 : 7) : 0)}
       transform={`rotate(${(rotation || 0) + 360})`}
       fontFamily="Helvetica, Arial, sans-serif"
-      font-size="10"
-      font-weight="bold"
+      fontSize="10"
+      fontWeight="bold"
       textLength={textLength}
       textAnchor="middle"
     >

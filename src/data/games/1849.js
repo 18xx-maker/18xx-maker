@@ -72,6 +72,68 @@ const game = {
     "659": 2,
     "679": 2,
     // Green
+    "23": 3,
+    "24": 3,
+    "25": 2,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "30": 1,
+    "31": 1,
+    "624": 1,
+    "650": 1,
+    "651": 1,
+    "653": 1,
+    "655": 1,
+    "660": 1,
+    "661": 1,
+    "662": 1,
+    "663": 1,
+    "664": 1,
+    "665": 1,
+    "666": 1,
+    "667": 1,
+    "668": 1,
+    "669": 1,
+    "670": 1,
+    "671": 1,
+    "675": 1,
+    "677": 3,
+    "678": 3,
+    "680": 1,
+    "681": 1,
+    "682": 1,
+    "683": 1,
+    "684": 1,
+    "685": 1,
+    "686": 1,
+    "687": 1,
+    "688": 1,
+    "689": 1,
+    "690": 1,
+    "691": 1,
+    "692": 1,
+    "693": 1,
+    "694": 1,
+    "695": 1,
+    "699": 2,
+    "700": 1,
+    "701": 1,
+    "702": 1,
+    "703": 1,
+    "704": 1,
+    "705": 1,
+    "706": 1,
+    "707": 1,
+    "708": 1,
+    "709": 1,
+    "710": 1,
+    "711": 1,
+    "712": 1,
+    "713": 1,
+    "714": 1,
+    "715": 1,
     // Brown
     "39": 1,
     "40": 1,
@@ -573,6 +635,7 @@ const game = {
       },
       {
         color: "gray",
+        divides: [{}],
         track: [{ type: "sharp", gauge: "double", side: 1 }],
         hexes: ["O2"]
       },
@@ -746,7 +809,33 @@ const game = {
       },
       {
         color: "gray",
-        track: [{ type: "straight", side: 1, gauge: "double" }],
+        centerTowns: [
+          {
+            name: {
+              name: "Calabria",
+              reverse: true
+            }
+          }
+        ],
+        offBoardRevenue: {
+          angle: 180,
+          percent: 0.65,
+          revenues: [
+            {
+              color: "white",
+              cost: "10"
+            },
+            {
+              color: "white",
+              cost: "30"
+            },
+            {
+              color: "white",
+              cost: "90"
+            }
+          ]
+        },
+        track: [{ side: 4, gauge: "double" }],
         hexes: ["O4"]
       },
       {
@@ -948,37 +1037,6 @@ const game = {
         ],
         track: [{ side: 3, gauge: "narrow" }, { side: 5 }, { side: 1 }],
         hexes: ["M6"]
-      },
-      {
-        color: "gray",
-        centerTowns: [
-          {
-            name: {
-              name: "Calabria",
-              reverse: true
-            }
-          }
-        ],
-        offBoardRevenue: {
-          angle: 180,
-          percent: 0.65,
-          revenues: [
-            {
-              color: "white",
-              cost: "10"
-            },
-            {
-              color: "white",
-              cost: "30"
-            },
-            {
-              color: "white",
-              cost: "90"
-            }
-          ]
-        },
-        track: [{ side: 4, gauge: "double" }],
-        hexes: ["O6"]
       },
       {
         color: "plain",

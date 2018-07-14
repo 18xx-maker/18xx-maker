@@ -13,12 +13,13 @@ const Shares = ({ match }) => {
   }
 
   return (
-      <div class="cards">
+      <div className="cards">
         {R.addIndex(R.chain)((company, index) => {
           let shares = util.fillArray(R.prop("quantity"), company.shares);
-          return R.map(
-            share => (
+          return R.addIndex(R.map)(
+            (share, i) => (
               <Share
+                key={`${company.abbrev}-${i}`}
                 shares={share.shares}
                 percent={share.percent}
                 name={company.name}

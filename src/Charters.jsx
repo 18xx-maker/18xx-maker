@@ -12,10 +12,11 @@ const Charters = ({ match }) => {
   }
 
   return (
-    <div class="charters">
+    <div className="charters">
       {R.addIndex(R.chain)((company, index) => {
         return (
           <Charter
+            key={company.abbrev}
             name={company.name}
             abbrev={company.abbrev}
             color={company.color}

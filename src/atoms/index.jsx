@@ -1,6 +1,5 @@
 import React from "react";
 import * as R from "ramda";
-import css from "./atoms.css";
 
 import Svg from "../Svg";
 
@@ -15,11 +14,14 @@ import Track from "./Track";
 import OffBoardTrack from "./OffBoardTrack";
 import OffBoardRevenue from "./OffBoardRevenue";
 import Hex from "./Hex";
+import Divide from "./Divide";
 import Border from "./Border";
 import Mountain from "./Mountain";
 import Tunnel from "./Tunnel";
 import Water from "./Water";
 import Bridge from "./Bridge";
+
+require('./atoms.css');
 
 const Atoms = () => {
   let atoms = [
@@ -225,6 +227,12 @@ const Atoms = () => {
         [<Hex color="water" />, <Hex border={true} />],
         [<Hex color="offboard" />, <Hex border={true} />]
       ]
+    },
+    {
+      name: "Divide",
+      examples: [
+        [<Divide />]
+      ],
     },
     {
       name: "Border",

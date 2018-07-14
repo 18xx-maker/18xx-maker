@@ -4,7 +4,6 @@ import util from "./util";
 import * as R from "ramda";
 
 import Par from "./Par";
-import Rounds from "./Rounds";
 
 require("./Market.css");
 
@@ -77,7 +76,7 @@ const makeCell = ({ label, color, textColor, start, end }, index) => {
 
 const makeRow = market => {
   return (
-    <div class="market__row">
+    <div className="market__row">
       {R.addIndex(R.map)(makeCell, R.map(wrapCell, market))}
     </div>
   );
@@ -119,23 +118,24 @@ const Par1Diag = ({ type, values }) => {
   return (
     <div className="par">
       <h2>Par</h2>
-      <table>{nodes}</table>
+      <table>
+        <tbody>{nodes}</tbody>
+      </table>
     </div>
   );
 };
 
-const Market1Diag = ({ market, limits, par, rounds, splice }) => {
+const Market1Diag = ({ market, limits, par, splice }) => {
   return (
     <div className="market market__type__1Diag">
       <h2>Stock Market</h2>
       <div className="market__1Diag">{makeMarket1Diag(market, splice)}</div>
-      <Rounds rounds={rounds} />
       {par && <Par1Diag {...par} />}
     </div>
   );
 };
 
-const Market2D = ({ market, limits, par, rounds }) => {
+const Market2D = ({ market, limits, par }) => {
   let rows = R.addIndex(R.map)((marketRow, row) => {
     let cells = R.addIndex(R.map)((value, col) => {
       let color = value ? colors[util.marketColor(limits, value)] : null;
@@ -166,9 +166,9 @@ const Market2D = ({ market, limits, par, rounds }) => {
       }
 
       return (
-        <td
+        <td key={`${row}-${col}`}
           style={{ backgroundColor: color, color: labelColor }}
-          class={classes.join(" ")}
+          className={classes.join(" ")}
         >
           {(value && value.label) || value}
           {value &&
@@ -187,7 +187,7 @@ const Market2D = ({ market, limits, par, rounds }) => {
         </td>
       );
     }, marketRow);
-    return <tr>{cells}</tr>;
+    return <tr key={row}>{cells}</tr>;
   }, market);
 
   let legend = R.map(limit => {
@@ -195,7 +195,7 @@ const Market2D = ({ market, limits, par, rounds }) => {
     let color = colors[limit.textColor || "white"];
 
     return (
-      <li>
+      <li key={limit.description}>
         <span style={{ backgroundColor, color }}>&nbsp;</span>{" "}
         {limit.description}
       </li>
@@ -203,13 +203,13 @@ const Market2D = ({ market, limits, par, rounds }) => {
   }, limits);
 
   return (
-    <div class="market">
+    <div className="market">
       <h2>Stock Market</h2>
-      <table>{rows}</table>
-      {par && <Par par={par} />}
-      <Rounds rounds={rounds} />
-      <div class="legend">
-        <ul class="notes">{legend}</ul>
+      <table>
+        <tbody>{rows}</tbody>
+      </table>
+      <div className="legend">
+        <ul className="notes">{legend}</ul>
       </div>
     </div>
   );

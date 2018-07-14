@@ -12,6 +12,30 @@ const game = {
   // Extra Tokens
   tokens: ["Round"],
 
+  // Need an IPO sheet
+  ipo: true,
+
+  players: [{
+    number: 2,
+    certLimit: 28
+  },{
+    number: 3,
+    certLimit: 20,
+    capital: "$800"
+  },{
+    number: 4,
+    certLimit: 16,
+    capital: "$600"
+  },{
+    number: 5,
+    certLimit: 13,
+    capital: "$480"
+  },{
+    number: 6,
+    certLimit: 11,
+    capital: "$400"
+  }],
+
   // Railway Companies
   companies: [
     {
@@ -111,7 +135,7 @@ const game = {
     },
     {
       name: "Erie",
-      abbrev: "Erie",
+      abbrev: "ERIE",
       tokens: ["Free", "$40", "$100", "$100"],
       color: "yellow",
       shares: [
@@ -899,7 +923,7 @@ const game = {
             },
             companies: [
               {
-                label: "Erie",
+                label: "ERIE",
                 color: "yellow"
               }
             ]
@@ -913,7 +937,7 @@ const game = {
             },
             companies: [
               {
-                label: "Erie",
+                label: "ERIE",
                 color: "yellow"
               }
             ]

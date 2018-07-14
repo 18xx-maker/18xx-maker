@@ -9,7 +9,7 @@ const Background = ({ match }) => {
   let color = colors[game.info.background];
   let title = game.info.title;
 
-  let text = R.map(word => <span>{word}</span>, Array(2300).fill(title));
+  let text = R.addIndex(R.map)((word, i) => <span key={i}>{word}</span>, Array(2300).fill(title));
 
   return (
     <div className="background" style={{ backgroundColor: color }}>

@@ -14,7 +14,7 @@ const Trains = ({ match }) => {
   let trains = util.fillArray(R.prop("quantity"), game.trains);
 
   return (
-    <div class="cards trains">
+    <div className="cards trains">
       {R.addIndex(R.map)(
         (train, index) => (
           <Train train={train} key={`train-${train.name}-${index}`} />

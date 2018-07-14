@@ -4,13 +4,13 @@ import {colors} from "./data";
 const Phase = ({ phases }) => {
   let phaseRows = phases.map(phase => {
     return (
-      <tr>
+      <tr key={phase.name}>
         <td>{phase.name}</td>
         <td>{phase.number}</td>
         <td>{phase.limit}</td>
         <td style={{backgroundColor: colors[phase.tiles]}}>&nbsp;</td>
         <td>{phase.rust}</td>
-        <td class="phase__notes">{phase.notes}</td>
+        <td className="phase__notes">{phase.notes}</td>
       </tr>
     );
   });
@@ -24,7 +24,7 @@ const Phase = ({ phases }) => {
           <th>Limit</th>
           <th>Tiles</th>
           <th>Rust</th>
-          <th class="phase__notes">Notes</th>
+          <th className="phase__notes">Notes</th>
         </tr>
       </thead>
       <tbody>

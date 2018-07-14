@@ -1,3 +1,22 @@
+.stock {
+  height: 100vh;
+}
+
+.market {
+  height: 100%;
+}
+
+.market table {
+  width: 100%;
+  height: calc(100% - 0.5in - 1px);
+  table-layout: fixed;
+}
+
+.market table td {
+  width: auto;
+  height: auto;
+}
+
 .market__1Diag {
   overflow: auto;
   height: calc(4in + 2px);
