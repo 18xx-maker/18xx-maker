@@ -636,6 +636,16 @@ const game = {
       },
       {
         color: "offboard",
+        offBoardTrack: [{side:6}],
+        offBoardRevenue: {
+          revenues: [{
+            color: "yellow",
+            cost: "TBD"
+          },{
+            color: "brown",
+            cost: "TBD"
+          }]
+        },
         hexes: ["B1"]
       },
       {
@@ -657,7 +667,31 @@ const game = {
       },
       {
         color: "offboard",
-        hexes: ["A12", "A14"]
+        offBoardTrack: [{side:6}],
+        offBoardRevenue: {
+          revenues: [{
+            color: "yellow",
+            cost: "0"
+          },{
+            color: "brown",
+            cost: "60"
+          }]
+        },
+        hexes: ["A12"]
+      },
+      {
+        color: "offboard",
+        offBoardTrack: [{side:5}],
+        offBoardRevenue: {
+          revenues: [{
+            color: "yellow",
+            cost: "0"
+          },{
+            color: "brown",
+            cost: "60"
+          }]
+        },
+        hexes: ["A14"]
       },
       {
         color: "gray",
@@ -671,10 +705,30 @@ const game = {
       },
       {
         color: "offboard",
+        offBoardTrack: [{side:4},{side:5}],
+        offBoardRevenue: {
+          revenues: [{
+            color: "yellow",
+            cost: "TBD"
+          },{
+            color: "brown",
+            cost: "TBD"
+          }]
+        },
         hexes: ["D21"]
       },
       {
         color: "water",
+        offBoardTrack: [{side:4}],
+        offBoardRevenue: {
+          revenues: [{
+            color: "yellow",
+            cost: "TBD"
+          },{
+            color: "brown",
+            cost: "TBD"
+          }]
+        },
         hexes: ["E22"]
       },
       {
