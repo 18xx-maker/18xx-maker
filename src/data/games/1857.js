@@ -988,6 +988,9 @@ const game = {
           {
             angle: -60,
             percent: 0.5,
+            name: {
+              name: "Santa Fe"
+            },
             companies: [
               {
                 label: "SF",
