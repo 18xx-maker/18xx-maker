@@ -254,10 +254,16 @@ svg {
 }
 
 .charter ul {
-  list-style-type: lower-latin;
+  list-style-type: circle;
   list-style-position: inside;
   padding: 0;
+  padding-left: 3px;
   margin: 0;
+}
+
+.charter ul li span {
+  position: relative;
+  left: -6px;
 }
 
 .charter ol {
