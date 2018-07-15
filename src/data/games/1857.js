@@ -42,103 +42,8 @@ const game = {
   // Railway Companies
   companies: [
     {
-      name: "Pennsylvania",
-      abbrev: "PRR",
-      tokens: ["Free", "$40", "$100", "$100", "$100"],
-      color: "darkGreen",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "New York Central",
-      abbrev: "NYC",
-      tokens: ["Free", "$40", "$100", "$100", "$100"],
-      color: "black",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Canadian Pacific",
-      abbrev: "CPR",
-      tokens: ["Free", "$40", "$100", "$100", "$100"],
-      color: "red",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Baltimore & Ohio",
-      abbrev: "B&O",
-      tokens: ["Free", "$40", "$100", "$100"],
-      color: "blue",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Chesapeake & Ohio",
-      abbrev: "C&O",
-      tokens: ["Free", "$40", "$100", "$100"],
-      color: "cyan",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Erie",
-      abbrev: "ERIE",
+      name: "AGW",
+      abbrev: "AGW",
       tokens: ["Free", "$40", "$100", "$100"],
       color: "yellow",
       shares: [
@@ -156,9 +61,47 @@ const game = {
       ]
     },
     {
-      name: "New York, New Haven & Hartford",
-      abbrev: "NYNH",
-      tokens: ["Free", "$40", "$100"],
+      name: "CA",
+      abbrev: "CA",
+      tokens: ["Free", "$40", "$100", "$100"],
+      color: "pink",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "CC",
+      abbrev: "CC",
+      tokens: ["Free", "$40", "$100", "$100"],
+      color: "maroon",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "BBN",
+      abbrev: "BBN",
+      tokens: ["Free", "$40", "$100", "$100"],
       color: "orange",
       shares: [
         {
@@ -175,10 +118,67 @@ const game = {
       ]
     },
     {
-      name: "Boston & Maine",
-      abbrev: "B&M",
-      tokens: ["Free", "$40", "$100"],
-      color: "maroon",
+      name: "NCA",
+      abbrev: "NCA",
+      tokens: ["Free", "$40", "$100", "$100"],
+      color: "black",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "SF",
+      abbrev: "SF",
+      tokens: ["Free", "$40", "$100", "$100"],
+      color: "red",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "BAS",
+      abbrev: "BAS",
+      tokens: ["Free", "$40", "$100", "$100"],
+      color: "darkGreen",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "BAC",
+      abbrev: "BAC",
+      tokens: ["Free", "$40", "$100", "$100"],
+      color: "blue",
       shares: [
         {
           quantity: 1,
@@ -198,7 +198,7 @@ const game = {
   trains: [
     {
       name: "2",
-      quantity: 6,
+      quantity: 5,
       price: "$80",
       color: "yellow",
       info: [
@@ -210,7 +210,7 @@ const game = {
     },
     {
       name: "3",
-      quantity: 5,
+      quantity: 4,
       price: "$180",
       color: "green",
       info: [
@@ -222,7 +222,7 @@ const game = {
     },
     {
       name: "4",
-      quantity: 4,
+      quantity: 3,
       price: "$300",
       color: "green",
       info: [
@@ -234,7 +234,7 @@ const game = {
     },
     {
       name: "5",
-      quantity: 3,
+      quantity: 2,
       price: "$450",
       color: "brown",
       info: [
@@ -258,7 +258,7 @@ const game = {
     },
     {
       name: "D",
-      quantity: 6,
+      quantity: 12,
       price: "$1100",
       color: "brown",
       description: "Cost $800 when trading in a 4T, 5T or 6T",
@@ -609,7 +609,49 @@ const game = {
       {
         color: "plain",
         cities: [{}],
-        hexes: ["D3", "D7", "D11", "G4", "E16", "E20", "F17"]
+        hexes: ["D3", "G4", "E16", "F17"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            companies: [
+              {
+                label: "BBN",
+                color: "orange"
+              }
+            ]
+          }
+        ],
+        hexes: ["E20"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            companies: [
+              {
+                label: "NCA",
+                color: "black"
+              }
+            ]
+          }
+        ],
+        hexes: ["D7"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            companies: [
+              {
+                label: "CC",
+                color: "maroon"
+              }
+            ]
+          }
+        ],
+        hexes: ["D11"]
       },
       {
         color: "plain",
@@ -632,20 +674,25 @@ const game = {
       },
       {
         color: "offboard",
-        offBoardTrack: [{side:6}],
-        labels: [{
-          label: "Salta",
-          angle: 180,
-          percent: 0.333
-        }],
+        offBoardTrack: [{ side: 6 }],
+        labels: [
+          {
+            label: "Salta",
+            angle: 180,
+            percent: 0.333
+          }
+        ],
         offBoardRevenue: {
-          revenues: [{
-            color: "yellow",
-            cost: "20"
-          },{
-            color: "brown",
-            cost: "60"
-          }]
+          revenues: [
+            {
+              color: "yellow",
+              cost: "20"
+            },
+            {
+              color: "brown",
+              cost: "60"
+            }
+          ]
         },
         hexes: ["B1"]
       },
@@ -682,38 +729,48 @@ const game = {
       },
       {
         color: "offboard",
-        offBoardTrack: [{side:6}],
-        labels: [{
-          label: "Chile",
-          angle: 180,
-          percent: 0.333
-        }],
+        offBoardTrack: [{ side: 6 }],
+        labels: [
+          {
+            label: "Chile",
+            angle: 180,
+            percent: 0.333
+          }
+        ],
         offBoardRevenue: {
-          revenues: [{
-            color: "yellow",
-            cost: "0"
-          },{
-            color: "brown",
-            cost: "70"
-          }]
+          revenues: [
+            {
+              color: "yellow",
+              cost: "0"
+            },
+            {
+              color: "brown",
+              cost: "70"
+            }
+          ]
         },
         hexes: ["A12"]
       },
       {
         color: "offboard",
-        offBoardTrack: [{side:5}],
-        labels: [{
-          label: "Chile",
-          percent: 0.333
-        }],
+        offBoardTrack: [{ side: 5 }],
+        labels: [
+          {
+            label: "Chile",
+            percent: 0.333
+          }
+        ],
         offBoardRevenue: {
-          revenues: [{
-            color: "yellow",
-            cost: "0"
-          },{
-            color: "brown",
-            cost: "70"
-          }]
+          revenues: [
+            {
+              color: "yellow",
+              cost: "0"
+            },
+            {
+              color: "brown",
+              cost: "70"
+            }
+          ]
         },
         hexes: ["A14"]
       },
@@ -729,37 +786,47 @@ const game = {
       },
       {
         color: "offboard",
-        offBoardTrack: [{side:4},{side:5}],
-        labels: [{
-          label: "Patagonia",
-          percent: 0.333
-        }],
+        offBoardTrack: [{ side: 4 }, { side: 5 }],
+        labels: [
+          {
+            label: "Patagonia",
+            percent: 0.333
+          }
+        ],
         offBoardRevenue: {
-          revenues: [{
-            color: "yellow",
-            cost: "10"
-          },{
-            color: "brown",
-            cost: "40"
-          }]
+          revenues: [
+            {
+              color: "yellow",
+              cost: "10"
+            },
+            {
+              color: "brown",
+              cost: "40"
+            }
+          ]
         },
         hexes: ["D21"]
       },
       {
         color: "water",
-        offBoardTrack: [{side:4}],
-        icons: [{
-          type: "port",
-          percent: 0.5
-        }],
+        offBoardTrack: [{ side: 4 }],
+        icons: [
+          {
+            type: "port",
+            percent: 0.5
+          }
+        ],
         offBoardRevenue: {
-          revenues: [{
-            color: "yellow",
-            cost: "20"
-          },{
-            color: "brown",
-            cost: "30"
-          }]
+          revenues: [
+            {
+              color: "yellow",
+              cost: "20"
+            },
+            {
+              color: "brown",
+              cost: "30"
+            }
+          ]
         },
         hexes: ["E22"]
       },
@@ -781,10 +848,12 @@ const game = {
             percent: 0.1
           }
         ],
-        values: [{
-          value: 20,
-          percent: 0.6
-        }],
+        values: [
+          {
+            value: 20,
+            percent: 0.6
+          }
+        ],
         track: [
           {
             type: "gentle",
@@ -803,77 +872,153 @@ const game = {
       },
       {
         color: "yellow",
-        labels: [{
-          label: "B",
-          angle: 150,
-          percent: 0.75
-        }],
-        values: [{
-          value: 30,
-          angle: 210,
-          percent: 0.75
-        }],
-        cities: [{}],
-        track: [{side:2},{side:4},{side:6}],
+        labels: [
+          {
+            label: "B",
+            angle: 150,
+            percent: 0.75
+          }
+        ],
+        values: [
+          {
+            value: 30,
+            angle: 210,
+            percent: 0.75
+          }
+        ],
+        cities: [
+          {
+            companies: [
+              {
+                label: "CA",
+                color: "pink"
+              }
+            ]
+          }
+        ],
+        track: [{ side: 2 }, { side: 4 }, { side: 6 }],
         hexes: ["G12"]
       },
       {
         color: "yellow",
-        labels: [{
-          label: "NY",
-          angle: 270,
-          percent: 0.667
-        }],
-        values: [{
-          value: 40,
-          angle: 105,
-          percent: 0.667
-        }],
-        cities: [{angle: 180, percent: 0.5},{angle:30,percent: 0.5}],
-        track: [{
-          type: "stop",
-          side: 4
-        },{
-          type: "sharp",
-          side: 1
-        }],
+        labels: [
+          {
+            label: "NY",
+            angle: 270,
+            percent: 0.667
+          }
+        ],
+        values: [
+          {
+            value: 40,
+            angle: 105,
+            percent: 0.667
+          }
+        ],
+        cities: [
+          {
+            angle: 180,
+            percent: 0.5,
+            companies: [{ label: "BAC", color: "blue" }]
+          },
+          {
+            angle: 30,
+            percent: 0.5,
+            companies: [{ label: "BAS", color: "darkGreen" }]
+          }
+        ],
+        track: [
+          {
+            type: "stop",
+            side: 4
+          },
+          {
+            type: "sharp",
+            side: 1
+          }
+        ],
         hexes: ["H17"]
       },
       {
         color: "yellow",
-        labels: [{
-          label: "OO",
-          angle: 210,
-          percent: 0.667
-        }],
-        cities: [{
-          angle: 120,
-          percent: 0.5
-        },{
-          angle: -60,
-          percent: 0.5
-        }],
-        hexes: ["C16","G8"]
+        labels: [
+          {
+            label: "OO",
+            angle: 210,
+            percent: 0.667
+          }
+        ],
+        cities: [
+          {
+            angle: 120,
+            percent: 0.5
+          },
+          {
+            angle: -60,
+            percent: 0.5
+          }
+        ],
+        hexes: ["C16"]
       },
       {
         color: "yellow",
-        labels: [{
-          label: "OO",
-          angle: 210,
-          percent: 0.667
-        }],
-        values: [{
-          value: 20,
-          angle: 30,
-          percent: 0.5
-        }],
-        cities: [{
-          angle: 120,
-          percent: 0.5
-        },{
-          angle: -60,
-          percent: 0.5
-        }],
+        labels: [
+          {
+            label: "OO",
+            angle: 210,
+            percent: 0.667
+          }
+        ],
+        cities: [
+          {
+            angle: 120,
+            percent: 0.5
+          },
+          {
+            angle: -60,
+            percent: 0.5,
+            companies: [
+              {
+                label: "SF",
+                color: "red"
+              }
+            ]
+          }
+        ],
+        hexes: ["G8"]
+      },
+      {
+        color: "yellow",
+        labels: [
+          {
+            label: "OO",
+            angle: 210,
+            percent: 0.667
+          }
+        ],
+        values: [
+          {
+            value: 20,
+            angle: 30,
+            percent: 0.5
+          }
+        ],
+        cities: [
+          {
+            angle: 120,
+            percent: 0.5
+          },
+          {
+            angle: -60,
+            percent: 0.5,
+            companies: [
+              {
+                label: "AGW",
+                color: "yellow"
+              }
+            ]
+          }
+        ],
         track: [{ type: "stop", side: 6 }],
         hexes: ["B13"]
       }
