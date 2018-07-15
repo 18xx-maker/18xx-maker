@@ -606,7 +606,25 @@ const game = {
       {
         color: "plain",
         cities: [{}],
-        hexes: ["D3", "G4", "E16", "F17"]
+        hexes: ["D3", "G4"]
+      },
+      {
+        color: "plain",
+        cities: [{
+          name: {
+            name: "Olivarria"
+          }
+        }],
+        hexes: ["E16"]
+      },
+      {
+        color: "plain",
+        cities: [{
+          name: {
+            name: "Tandil"
+          }
+        }],
+        hexes: ["F17"]
       },
       {
         color: "plain",
@@ -673,7 +691,26 @@ const game = {
             percent: 0.4
           }
         ],
-        hexes: ["D13", "G16"]
+        hexes: ["D13"]
+      },
+      {
+        color: "plain",
+        labels: [{
+          label: "CdH",
+          angle: 180,
+          percent: 0.5
+        }],
+        centerTowns: [
+          {
+            angle: 90,
+            percent: 0.4
+          },
+          {
+            angle: 270,
+            percent: 0.4
+          }
+        ],
+        hexes: ["G16"]
       },
       {
         color: "offboard",
@@ -848,13 +885,17 @@ const game = {
         cities: [
           {
             angle: 180,
-            percent: 0.1
+            percent: 0.1,
+            name: {
+              name: "Mar del Plata",
+              reverse: true
+            }
           }
         ],
         values: [
           {
             value: 20,
-            percent: 0.6
+            percent: 0.667
           }
         ],
         track: [
@@ -918,7 +959,7 @@ const game = {
         values: [
           {
             value: 40,
-            angle: 105,
+            angle: 115,
             percent: 0.667
           }
         ],
@@ -931,6 +972,10 @@ const game = {
           {
             angle: 30,
             percent: 0.5,
+            name: {
+              name: "Buenos Aires",
+              rotation: 30
+            },
             companies: [{ label: "BAS", color: "darkGreen" }]
           }
         ],
