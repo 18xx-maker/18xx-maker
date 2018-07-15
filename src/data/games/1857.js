@@ -12,7 +12,7 @@ const game = {
   },
 
   // Extra Tokens
-  tokens: ["Round"],
+  tokens: ["Round", "+$10", "+$10", "x2", "x2"],
 
   // Need an IPO sheet
   ipo: true,
