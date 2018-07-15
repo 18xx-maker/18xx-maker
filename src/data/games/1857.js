@@ -629,6 +629,9 @@ const game = {
         color: "plain",
         cities: [
           {
+            name: {
+              name: "Santiago del Estero"
+            },
             companies: [
               {
                 label: "NCA",
@@ -643,6 +646,9 @@ const game = {
         color: "plain",
         cities: [
           {
+            name: {
+              name: "Cordoba"
+            },
             companies: [
               {
                 label: "CC",
@@ -888,6 +894,10 @@ const game = {
         ],
         cities: [
           {
+            name: {
+              name: "Rosario",
+              reverse: true
+            },
             companies: [
               {
                 label: "CA",
@@ -951,7 +961,11 @@ const game = {
         cities: [
           {
             angle: 120,
-            percent: 0.5
+            percent: 0.5,
+            name: {
+              name: "San Juan",
+              reverse: true
+            }
           },
           {
             angle: -60,
@@ -1011,6 +1025,9 @@ const game = {
           {
             angle: -60,
             percent: 0.5,
+            name: {
+              name: "Mendoza"
+            },
             companies: [
               {
                 label: "AGW",
