@@ -22,7 +22,7 @@ const Charter = ({ name, abbrev, color, tokens, phases, turns }) => {
 
   let turnNodes = R.chain(turn => {
     let steps = R.addIndex(R.map)((step, i) => {
-      return <li key={i}>{step}</li>;
+      return <li key={i}><span>{step}</span></li>;
     }, turn.steps);
 
     let stepsList = turn.ordered ? <ol>{steps}</ol> : <ul>{steps}</ul>;
