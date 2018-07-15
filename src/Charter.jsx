@@ -29,7 +29,7 @@ const Charter = ({ name, abbrev, color, tokens, phases, turns }) => {
 
     return (
       <React.Fragment>
-        <dt>{turn.name}</dt>,
+        <dt>{turn.name}</dt>
         <dd>{stepsList}</dd>
       </React.Fragment>
     );
