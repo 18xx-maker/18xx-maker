@@ -7,7 +7,8 @@ const game = {
     width: 150,
     orientation: "horizontal",
     titleY: 675,
-    titleRotate: -90
+    titleRotate: -90,
+    extraTokens: 4
   },
 
   // Extra Tokens
@@ -42,9 +43,9 @@ const game = {
   // Railway Companies
   companies: [
     {
-      name: "AGW",
+      name: "Argentine Great Western Railway",
       abbrev: "AGW",
-      tokens: ["Free", "$40", "$100", "$100"],
+      tokens: ["$40", "$100", "$100"],
       color: "yellow",
       shares: [
         {
@@ -61,9 +62,9 @@ const game = {
       ]
     },
     {
-      name: "CA",
+      name: "Central Argentine Railway",
       abbrev: "CA",
-      tokens: ["Free", "$40", "$100", "$100"],
+      tokens: ["$40", "$100", "$100"],
       color: "pink",
       shares: [
         {
@@ -80,9 +81,9 @@ const game = {
       ]
     },
     {
-      name: "CC",
+      name: "Central Cordoba Railway",
       abbrev: "CC",
-      tokens: ["Free", "$40", "$100", "$100"],
+      tokens: ["$40", "$100", "$100"],
       color: "maroon",
       shares: [
         {
@@ -99,9 +100,9 @@ const game = {
       ]
     },
     {
-      name: "BBN",
+      name: "Bahia Blanca & Northwest Railway",
       abbrev: "BBN",
-      tokens: ["Free", "$40", "$100", "$100"],
+      tokens: ["$40", "$100", "$100"],
       color: "orange",
       shares: [
         {
@@ -118,9 +119,9 @@ const game = {
       ]
     },
     {
-      name: "NCA",
+      name: "North Central Argentine Railway",
       abbrev: "NCA",
-      tokens: ["Free", "$40", "$100", "$100"],
+      tokens: ["$40", "$100", "$100"],
       color: "black",
       shares: [
         {
@@ -137,9 +138,9 @@ const game = {
       ]
     },
     {
-      name: "SF",
+      name: "Santa Fe Railway",
       abbrev: "SF",
-      tokens: ["Free", "$40", "$100", "$100"],
+      tokens: ["$40", "$100", "$100"],
       color: "red",
       shares: [
         {
@@ -156,9 +157,9 @@ const game = {
       ]
     },
     {
-      name: "BAS",
+      name: "Buenos Aires Great Southern Railway",
       abbrev: "BAS",
-      tokens: ["Free", "$40", "$100", "$100"],
+      tokens: ["$40", "$100", "$100"],
       color: "darkGreen",
       shares: [
         {
@@ -175,9 +176,9 @@ const game = {
       ]
     },
     {
-      name: "BAC",
+      name: "Buenos Aires Central Railway",
       abbrev: "BAC",
-      tokens: ["Free", "$40", "$100", "$100"],
+      tokens: ["$40", "$100", "$100"],
       color: "blue",
       shares: [
         {
@@ -444,12 +445,10 @@ const game = {
     type: "2D",
     par: {
       values: [100, 90, 82, 76, 71, 67],
-      cells: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6]]
+      cells: [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4]]
     },
     market: [
       [
-        60,
-        67,
         71,
         76,
         82,
@@ -469,8 +468,6 @@ const game = {
         350
       ],
       [
-        53,
-        60,
         66,
         70,
         76,
@@ -478,6 +475,7 @@ const game = {
         90,
         100,
         112,
+        126,
         142,
         160,
         180,
@@ -488,15 +486,14 @@ const game = {
         280,
         300
       ],
-      [46, 55, 60, 65, 70, 76, 82, 90, 100, 111, 125, 140, 155, 170, 185, 200],
-      [39, 48, 54, 60, 66, 71, 76, 82, 90, 100, 110, 120, 130],
-      [32, 41, 48, 55, 62, 67, 71, 76, 82, 90, 100],
-      [25, 34, 42, 50, 58, 65, 67, 71, 75, 80],
-      [18, 27, 36, 45, 54, 63, 67, 69, 70],
-      [10, 12, 30, 40, 50, 60, 67, 68],
-      [null, 10, 20, 30, 40, 50, 60],
-      [null, null, 10, 20, 30, 40, 50],
-      [null, null, null, 10, 20, 30, 40]
+      [60, 65, 70, 76, 82, 90, 100, 111, 125, 140, 155, 170, 185, 200],
+      [54, 60, 66, 71, 76, 82, 90, 100, 110, 120, 130],
+      [48, 55, 62, 67, 71, 76, 82, 90, 100],
+      [42, 50, 58, 65, 67, 71, 75, 80],
+      [36, 45, 54, 63, 67, 69, 70],
+      [30, 40, 50, 60, 67, 68],
+      [20, 30, 40, 50, 60],
+      [10, 20, 30, 40, 50]
     ],
     limits: [
       {
