@@ -254,7 +254,7 @@ svg {
 }
 
 .charter ul {
-  list-style-type: circle;
+  list-style-type: disc;
   list-style-position: inside;
   padding: 0;
   padding-left: 3px;
