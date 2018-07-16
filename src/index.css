@@ -444,16 +444,29 @@ svg {
 }
 
 .private__name {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: calc(100% - 0.5in);
-  padding: 0.125in;
+  padding: 0.125in 0.125in 0.0625in 0.125in;
   line-height: 0.18in;
   font-size: 0.18in;
-  margin: 0.125in;
+  margin: 0.125in 0.125in 0 0.125in;
   text-align: left;
 }
+
+.private__description {
+  position: relative;
+  width: calc(100% - 0.5in);
+  padding: 0 0.125in;
+  margin: 0 0.125in;
+  text-align: left;
+  left: 0;
+  line-height: 0.105in;
+  font-size: 0.085in;
+  font-family: "Helvetica", "Arial", sans-serif;
+}
+
 
 .private__price {
   position: absolute;
@@ -486,19 +499,6 @@ svg {
   line-height: 0.25in;
   height: 0.25in;
   font-size: 0.18in;
-}
-
-.private__description {
-  position: absolute;
-  top: 0.46875in;
-  width: calc(100% - 0.5in);
-  padding: 0 0.125in;
-  margin: 0 0.125in;
-  text-align: left;
-  left: 0;
-  line-height: 0.105in;
-  font-size: 0.085in;
-  font-family: "Helvetica", "Arial", sans-serif;
 }
 
 .stock {
