@@ -608,6 +608,7 @@ svg {
   justify-content: flex-start;
   align-items: flex-end;
   flex-direction: column-reverse;
+  margin: 0;
 }
 
 .rounds svg {
