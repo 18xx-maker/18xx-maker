@@ -302,7 +302,7 @@ const game = {
         "The owning corporation doubles their revenue for Cordoba (D11) once per run. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
-      name: "Saint Zolla Land Company",
+      name: "Saint Zolius Land Company",
       price: "$40",
       revenue: "$10",
       description:
