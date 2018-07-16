@@ -274,45 +274,46 @@ const game = {
 
   privates: [
     {
-      name: "Schuylkill Valley",
-      price: "$20",
-      revenue: "$5",
-      description: ""
-    },
-    {
-      name: "Champlain & St.Lawrence",
+      name: "Camino de Hierro de Buenos Aires al Oeste",
       price: "$40",
       revenue: "$10",
       description:
-        "A corporation owning the C&StL may lay a tile on the C&StL's hex even if this hex is not connected to the corporations's railhead. This free tile placement is in addition to the corporation's normal tile placement - for this turn only the corporation may play two tiles. The tile played on the C&StL hex does not have to connect to any existing adjacent track."
+        "Reserves the Camino de Hierro de Buenos Aires al Oeste hex (G16) until owned by a corporation. The owning corporation is the only one permitted to lay this track. This can be purchased during the yellow phase. Closes when the first 5 Train is purchased."
     },
     {
-      name: "Delaware & Hudson",
-      price: "$70",
-      revenue: "$15",
+      name: "Santa Sebastian Trading Company",
+      price: "$40",
+      revenue: "$10",
       description:
-        "A corporation owning the Delaware & Hudson may establish a railhead on the D&H hex by laying a station tile and a token. The station does not have to be connected to the remainder of the corporation's route. The tile laid is the owning corporation's one tile placement for the turn. Removal of the mountain costs $120 as usual but there is no charge for laying the token. Placing the token is not required, but if placed in a future turn, it must be paid for. Other corporations may place a tile here subject to the ordinary rules."
+        "Trade for one share at any time, this action closes the company. This trade cannot allow you to own more than 60%. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if owned by a corporation."
     },
     {
-      name: "Mohawk & Hudson",
-      price: "$110",
-      revenue: "$20",
+      name: "Santa Pedro Shipping Company",
+      price: "$40",
+      revenue: "$10",
       description:
-        "A player owning the M&H may exhange it for a 10% share of the NYC provided he does not already hold 60% of the NYC stock and there is NYC stock available in the Bank or the Pool. The exchange may be made during the player's turn of a stock round or between the turns of other players or corporations in either stock or operating rounds. This action closes the M&H."
+        "The owning corporation increases their revenue at Bahia Blanco (E20) by $10 for all runs. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
-      name: "Camden & Amboy",
-      price: "$160",
-      revenue: "$25",
+      name: "Santa Barbara Mining Company",
+      price: "$40",
+      revenue: "$10",
       description:
-        "The initial purchaser of the C&A immediately receives a 10% share of PRR stock without further payment. This action does not close the C&A. The PRR corporation will not be running at this point, but the stock may be retained or sold subject to the ordinary rules of the game."
+        "The owning corporation doubles their revenue for Cordoba (D11) once per run. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
-      name: "Baltimore & Ohio",
-      price: "$220",
-      revenue: "$30",
+      name: "Santa Zolla Land Company",
+      price: "$40",
+      revenue: "$10",
       description:
-        "The owner of the B&O private company immediately receives the President's certificate of the B&O corporation without further payment. The B&O private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the B&O corporation. When the B&O corporation purchases its first train the private company is closed down."
+        "The owning corporation may place one token at no cost, this action closes the company. This must follow normal placement rules. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
+    },
+    {
+      name: "Santo Dominic Construction Company",
+      price: "$40",
+      revenue: "$10",
+      description:
+        "The owning corporation may lay or upgrade one tile in addition to their normal tile action, this action closes the company. Closes when the first 5 Train is purchased."
     }
   ],
 
@@ -605,31 +606,55 @@ const game = {
       },
       {
         color: "plain",
-        cities: [{}],
-        hexes: ["D3", "G4"]
+        cities: [
+          {
+            name: {
+              name: "Tucuman"
+            }
+          }
+        ],
+        hexes: ["D3"]
       },
       {
         color: "plain",
-        cities: [{
-          name: {
-            name: "Olivarria"
+        cities: [
+          {
+            name: {
+              name: "Resistencia & Carrientes"
+            }
           }
-        }],
+        ],
+        hexes: ["G4"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: {
+              name: "Oliviarria"
+            }
+          }
+        ],
         hexes: ["E16"]
       },
       {
         color: "plain",
-        cities: [{
-          name: {
-            name: "Tandil"
+        cities: [
+          {
+            name: {
+              name: "Tandil"
+            }
           }
-        }],
+        ],
         hexes: ["F17"]
       },
       {
         color: "plain",
         cities: [
           {
+            name: {
+              name: "Bahia Blanca"
+            },
             companies: [
               {
                 label: "BBN",
@@ -695,11 +720,13 @@ const game = {
       },
       {
         color: "plain",
-        labels: [{
-          label: "CdH",
-          angle: 180,
-          percent: 0.5
-        }],
+        labels: [
+          {
+            label: "CdH",
+            angle: 180,
+            percent: 0.5
+          }
+        ],
         centerTowns: [
           {
             angle: 90,
@@ -1028,7 +1055,11 @@ const game = {
         cities: [
           {
             angle: 120,
-            percent: 0.5
+            percent: 0.5,
+            name: {
+              name: "Parana",
+              reverse: true
+            }
           },
           {
             angle: -60,
