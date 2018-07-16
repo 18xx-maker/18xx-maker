@@ -278,38 +278,38 @@ const game = {
       price: "$40",
       revenue: "$10",
       description:
-        "Reserves the Camino de Hierro de Buenos Aires al Oeste hex (G16) until owned by a corporation. The owning corporation is the only one permitted to lay this track. This can be purchased during the yellow phase. Closes when the first 5 Train is purchased."
+        "Reserves the Camino de Hierro de Buenos Aires al Oeste hex (G16). The owning corporation is the only one permitted to lay this tile. This can be purchased during the yellow phase. Closes when the first 5 Train is purchased."
     },
     {
-      name: "Santa Sebastian Trading Company",
+      name: "Saint Sebastian Trading Company",
       price: "$40",
       revenue: "$10",
       description:
-        "Trade for one share at any time, this action closes the company. This trade cannot allow you to own more than 60%. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if owned by a corporation."
+        "Trade for one share at any time, this action closes the company. This trade cannot allow you to own more than 60% of a corporation. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if owned by a corporation."
     },
     {
-      name: "Santa Pedro Shipping Company",
+      name: "Saint Pedro Shipping Company",
       price: "$40",
       revenue: "$10",
       description:
         "The owning corporation increases their revenue at Bahia Blanco (E20) by $10 for all runs. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
-      name: "Santa Barbara Mining Company",
+      name: "Saint Barbara Mining Company",
       price: "$40",
       revenue: "$10",
       description:
         "The owning corporation doubles their revenue for Cordoba (D11) once per run. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
-      name: "Santa Zolla Land Company",
+      name: "Saint Zolla Land Company",
       price: "$40",
       revenue: "$10",
       description:
         "The owning corporation may place one token at no cost, this action closes the company. This must follow normal placement rules. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
-      name: "Santo Dominic Construction Company",
+      name: "Saint Dominic Construction Company",
       price: "$40",
       revenue: "$10",
       description:
