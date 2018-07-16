@@ -135,7 +135,7 @@ const Market1Diag = ({ market, limits, par, splice }) => {
   );
 };
 
-const Market2D = ({ market, limits, par }) => {
+const Market2D = ({ market, limits, par, title }) => {
   let rows = R.addIndex(R.map)((marketRow, row) => {
     let cells = R.addIndex(R.map)((value, col) => {
       let color = value ? colors[util.marketColor(limits, value)] : null;
@@ -204,7 +204,7 @@ const Market2D = ({ market, limits, par }) => {
 
   return (
     <div className="market">
-      <h2>Stock Market</h2>
+      <h2>{title} Stock Market</h2>
       <table>
         <tbody>{rows}</tbody>
       </table>

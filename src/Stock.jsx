@@ -15,7 +15,7 @@ const Stock = ({ match }) => {
 
   return (
     <div className="stock">
-      <Market {...stock} />
+      <Market {...stock} title={game.info.title} />
       <Rounds rounds={game.rounds} />
       {stock.par && <Par par={stock.par} />}
     </div>
