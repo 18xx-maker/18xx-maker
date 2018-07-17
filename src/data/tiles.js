@@ -1920,7 +1920,7 @@ const tiles = {
         name: {
           name: "Kotohira",
           reverse: true,
-          offset: 62
+          offset: 60
         }
       }
     ],
@@ -1982,8 +1982,9 @@ const tiles = {
         rotation: 180,
         name: {
           name: "Kouchi",
-          offset: 20,
-          y: -3
+          reverse: true,
+          offset: 76,
+          y: 12
         },
         companies: [
           {},
