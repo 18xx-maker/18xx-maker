@@ -376,52 +376,50 @@ const game = {
   },
 
   tiles: {
-    "1": 1,
-    "2": 1,
-    "3": 2,
+    // Yellow
+    "3": 1,
     "4": 2,
-    "7": 4,
-    "8": 8,
-    "9": 7,
-    "55": 1,
-    "56": 1,
-    "57": 4,
+    "5": 2,
+    "6": 2,
+    "7": 1,
+    "8": 2,
+    "9": 2,
     "58": 2,
-    "69": 1,
-    "14": 3,
-    "15": 2,
+    // Green
+    "12": 2,
     "16": 1,
     "18": 1,
     "19": 1,
-    "20": 1,
-    "23": 3,
-    "24": 3,
+    "23": 1,
+    "24": 1,
     "25": 1,
     "26": 1,
     "27": 1,
     "28": 1,
     "29": 1,
-    "53": 2,
-    "54": 1,
-    "59": 2,
+    "59": 1,
+    // Brown
     "39": 1,
     "40": 1,
-    "41": 2,
-    "42": 2,
-    "43": 2,
-    "44": 1,
-    "45": 2,
-    "46": 2,
-    "47": 1,
-    "61": 2,
-    "62": 1,
-    "63": 3,
+    "41": 1,
+    "42": 1,
+    "43": 1,
+    "45": 1,
+    "46": 1,
     "64": 1,
     "65": 1,
-    "66": 1,
     "67": 1,
     "68": 1,
-    "70": 1
+    "70": 1,
+    "800": 1,
+    "802": 1,
+    "803": 1,
+    "804": 2,
+    // Gray
+    "805": 1,
+    "806": 1,
+    "807": 1,
+    "808": 1
   },
 
   map: {
@@ -434,18 +432,15 @@ const game = {
           percent: 0.667,
           revenues: [
             {
-              color: "black",
-              textColor: "white",
+              color: "yellow",
               cost: "10"
             },
             {
-              color: "black",
-              textColor: "white",
+              color: "green",
               cost: "40"
             },
             {
-              color: "black",
-              textColor: "white",
+              color: "brown",
               cost: "70"
             }
           ]
@@ -576,18 +571,15 @@ const game = {
         offBoardRevenue: {
           revenues: [
             {
-              color: "black",
-              textColor: "white",
+              color: "yellow",
               cost: "10"
             },
             {
-              color: "black",
-              textColor: "white",
+              color: "green",
               cost: "20"
             },
             {
-              color: "black",
-              textColor: "white",
+              color: "brown",
               cost: "30"
             }
           ]
@@ -604,18 +596,15 @@ const game = {
         offBoardRevenue: {
           revenues: [
             {
-              color: "black",
-              textColor: "white",
+              color: "yellow",
               cost: "20"
             },
             {
-              color: "black",
-              textColor: "white",
+              color: "green",
               cost: "30"
             },
             {
-              color: "black",
-              textColor: "white",
+              color: "brown",
               cost: "40"
             }
           ]

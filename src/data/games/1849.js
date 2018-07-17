@@ -8,7 +8,7 @@ const game = {
     width: 150,
     orientation: "horizontal",
     titleY: 900,
-    titleX: 150,
+    titleX: 50,
     extraTokens: 2
   },
 
