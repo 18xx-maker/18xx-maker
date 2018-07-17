@@ -1943,8 +1943,8 @@ const tiles = {
         },
         companies: [
           {
-            label: "TKER",
-            color: "red"
+            label: "KO",
+            color: "pink"
           }
         ]
       }
@@ -1971,8 +1971,8 @@ const tiles = {
     color: "brown",
     values: [
       {
-        angle: 210,
-        percent: 0.9,
+        angle: 180,
+        percent: 0.78,
         value: 60
       }
     ],
@@ -1981,16 +1981,16 @@ const tiles = {
         size: 3,
         rotation: 180,
         name: {
-          name: "Kochi",
-          offset: 95,
+          name: "Kouchi",
+          offset: 20,
           y: -3
         },
         companies: [
           {},
           {},
           {
-            label: "TER",
-            color: "cyan"
+            label: "TR",
+            color: "darkGreen"
           }
         ]
       }
@@ -2014,8 +2014,8 @@ const tiles = {
         },
         companies: [
           {
-            label: "TKER",
-            color: "red"
+            label: "KO",
+            color: "pink"
           }
         ]
       }

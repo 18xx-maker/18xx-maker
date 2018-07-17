@@ -455,6 +455,14 @@ svg {
   text-align: left;
 }
 
+.private__icon {
+  float: right;
+  line-height: 0.22in;
+  font-size: 0.18in;
+  margin: 0.125in 0.125in 0 0;
+  padding: 0.125in;
+}
+
 .private__description {
   position: relative;
   width: calc(100% - 0.5in);
