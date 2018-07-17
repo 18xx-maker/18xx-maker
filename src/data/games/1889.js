@@ -13,6 +13,8 @@ const game = {
 
   tokens: ["Round"],
 
+  ipo: true,
+
   rounds: [
     {
       name: "OR3",

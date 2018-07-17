@@ -20,6 +20,7 @@ const Value = ({ value }) => {
       <text
         fontWeight="bold"
         fontSize={size}
+        fontFamily="Helvetica, Arial, sans-serif"
         fill={colors["track"]}
         alignmentBaseline="central"
         textAnchor="middle"

@@ -41,7 +41,7 @@ const game = {
     {
       name: "Pennsylvania",
       abbrev: "PRR",
-      tokens: ["Free", "$40", "$100", "$100", "$100"],
+      tokens: ["Free", "$40", "$100", "$100"],
       color: "darkGreen",
       shares: [
         {
@@ -60,7 +60,7 @@ const game = {
     {
       name: "New York Central",
       abbrev: "NYC",
-      tokens: ["Free", "$40", "$100", "$100", "$100"],
+      tokens: ["Free", "$40", "$100", "$100"],
       color: "black",
       shares: [
         {
@@ -79,7 +79,7 @@ const game = {
     {
       name: "Canadian Pacific",
       abbrev: "CPR",
-      tokens: ["Free", "$40", "$100", "$100", "$100"],
+      tokens: ["Free", "$40", "$100", "$100"],
       color: "red",
       shares: [
         {
@@ -98,7 +98,7 @@ const game = {
     {
       name: "Baltimore & Ohio",
       abbrev: "B&O",
-      tokens: ["Free", "$40", "$100", "$100"],
+      tokens: ["Free", "$40", "$100"],
       color: "blue",
       shares: [
         {
@@ -117,7 +117,7 @@ const game = {
     {
       name: "Chesapeake & Ohio",
       abbrev: "C&O",
-      tokens: ["Free", "$40", "$100", "$100"],
+      tokens: ["Free", "$40", "$100"],
       color: "cyan",
       shares: [
         {
@@ -136,7 +136,7 @@ const game = {
     {
       name: "Erie",
       abbrev: "ERIE",
-      tokens: ["Free", "$40", "$100", "$100"],
+      tokens: ["Free", "$40", "$100"],
       color: "yellow",
       shares: [
         {
@@ -155,7 +155,7 @@ const game = {
     {
       name: "New York, New Haven & Hartford",
       abbrev: "NYNH",
-      tokens: ["Free", "$40", "$100"],
+      tokens: ["Free", "$40"],
       color: "orange",
       shares: [
         {
@@ -174,7 +174,7 @@ const game = {
     {
       name: "Boston & Maine",
       abbrev: "B&M",
-      tokens: ["Free", "$40", "$100"],
+      tokens: ["Free", "$40"],
       color: "maroon",
       shares: [
         {
