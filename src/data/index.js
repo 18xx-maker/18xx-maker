@@ -30,7 +30,8 @@ const colors = {
   maroon: "rgb(96,23,44)",
   orange: "rgb(245,129,33)",
   red: "rgb(209,35,42)",
-  pink: "rgb(193,60,125)"
+  pink: "rgb(193,60,125)",
+  purple: "rgb(95,35,132)"
   // yellow: Same as tile yellow
 };
 
@@ -46,7 +47,7 @@ const textColor = color => {
   switch (color) {
     case "yellow":
     case "cyan":
-  case "plain":
+    case "plain":
     case "white":
       return "rgb(0,0,0)";
     default:
