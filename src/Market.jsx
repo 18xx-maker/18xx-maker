@@ -162,7 +162,7 @@ const Market2D = ({ market, limits, par, title }) => {
       let labelColor = "#000";
       if (value && value.color) {
         color = colors[value.color];
-        labelColor = textColor(value.color);
+        labelColor = colors[value.textColor] || colors["black"];
       }
 
       return (

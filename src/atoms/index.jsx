@@ -123,7 +123,7 @@ const Atoms = () => {
           return R.map(
             gauge => {
               return [
-                  <Track type={type} gauge={gauge} border={true} />,
+                <Track type={type} gauge={gauge} border={true} />,
                 <Track type={type} gauge={gauge} />
               ];
             },
