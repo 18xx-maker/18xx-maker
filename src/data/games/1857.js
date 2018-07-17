@@ -64,7 +64,7 @@ const game = {
     {
       name: "Central Argentine Railway",
       abbrev: "CA",
-      tokens: ["$40", "$100", "$100"],
+      tokens: ["$40", "$100"],
       color: "purple",
       shares: [
         {
@@ -102,7 +102,7 @@ const game = {
     {
       name: "Bahia Blanca & Northwest Railway",
       abbrev: "BBN",
-      tokens: ["$40", "$100", "$100"],
+      tokens: ["$40"],
       color: "orange",
       shares: [
         {
@@ -121,7 +121,7 @@ const game = {
     {
       name: "North Central Argentine Railway",
       abbrev: "NCA",
-      tokens: ["$40", "$100", "$100"],
+      tokens: ["$40", "$100"],
       color: "black",
       shares: [
         {
@@ -140,7 +140,7 @@ const game = {
     {
       name: "Santa Fe Railway",
       abbrev: "SF",
-      tokens: ["$40", "$100", "$100"],
+      tokens: ["$40"],
       color: "red",
       shares: [
         {
@@ -178,7 +178,7 @@ const game = {
     {
       name: "Buenos Aires Central Railway",
       abbrev: "BAC",
-      tokens: ["$40", "$100", "$100"],
+      tokens: ["$40", "$100"],
       color: "blue",
       shares: [
         {
@@ -278,7 +278,7 @@ const game = {
       price: "$40",
       revenue: "$10",
       description:
-        "Reserves the Camino de Hierro de Buenos Aires al Oeste hex (G16). The owning corporation is the only one permitted to lay this tile. This can be purchased during the yellow phase. Closes when the first 5 Train is purchased."
+        "Reserves the Camino de Hierro de Buenos Aires al Oeste hex (G16). Only the owning corporation is permitted to lay this track. This can be purchased by a corporation during the yellow phase. Closes when the first 5 Train is purchased."
     },
     {
       name: "Saint Sebastian Trading Company",
@@ -299,7 +299,7 @@ const game = {
       price: "$40",
       revenue: "$10",
       description:
-        "The owning corporation doubles their revenue for Cordoba (D11) once per run. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
+        "The owning corporation doubles their revenue at Cordoba (D11) once per run. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
       name: "Saint Zolius Land Company",
@@ -309,11 +309,11 @@ const game = {
         "The owning corporation may place one token at no cost, this action closes the company. This must follow normal placement rules. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
-      name: "Saint Dominic Construction Company",
+      name: "Saint Dominic Road Company",
       price: "$40",
       revenue: "$10",
       description:
-        "The owning corporation may lay or upgrade one tile in addition to their normal tile action, this action closes the company. Closes when the first 5 Train is purchased."
+        "The owning corporation may lay or upgrade one track in addition to their normal track action, this action closes the company. Closes when the first 5 Train is purchased."
     }
   ],
 
@@ -385,7 +385,7 @@ const game = {
       notes: [
         {
           color: "green",
-          note: "Companies float once 60% sold"
+          note: "Companies float once 50% sold"
         }
       ]
     },

@@ -15,6 +15,30 @@ const game = {
 
   ipo: true,
 
+  bank: "¥7,000",
+
+  players: [{
+    number: 2,
+    certLimit: 25,
+    capital: "¥420"
+  },{
+    number: 3,
+    certLimit: 19,
+    capital: "¥420"
+  },{
+    number: 4,
+    certLimit: 14,
+    capital: "¥420"
+  },{
+    number: 5,
+    certLimit: 12,
+    capital: "¥390"
+  },{
+    number: 6,
+    certLimit: 11,
+    capital: "¥390"
+  }],
+
   rounds: [
     {
       name: "OR3",
@@ -43,10 +67,10 @@ const game = {
     {
       name: "Operating Round",
       steps: [
-        "Lay track",
-        "Purchase token",
+        "Lay or upgrade track",
+        "Purchase a station",
         "Run trains",
-        "Collect revenue",
+        "Pay dividends or withhold revenue",
         "Purchase trains"
       ],
       ordered: true
@@ -57,7 +81,7 @@ const game = {
     type: "2D",
     par: {
       values: [100, 90, 80, 75, 70, 65],
-      cells: [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4]]
+      cells: [[0, 3], [1, 3], [2, 3], [3, 3], [4, 3], [5, 3]]
     },
     market: [
       [75,80,90,100,110,125,140,155,175,200,225,255,285,315,350],
@@ -78,7 +102,7 @@ const game = {
         value: 50
       },
       {
-        color: "brown",
+        color: "orange",
         description: "Players may own more than 60% of the company",
         value: 30
       }
@@ -165,7 +189,7 @@ const game = {
     {
       name: "Awa Railroad",
       abbrev: "AR",
-      color: "black",
+      color: "red",
       tokens: ["Free", "¥40"],
       shares: [
         {
@@ -182,7 +206,7 @@ const game = {
       ]
     },
     {
-      name: "Iyo Railroad",
+      name: "Iyo Railway",
       abbrev: "IR",
       color: "orange",
       tokens: ["Free", "¥40"],
@@ -201,9 +225,9 @@ const game = {
       ]
     },
     {
-      name: "Sanuki Railways",
+      name: "Sanuki Railway",
       abbrev: "SR",
-      color: "green",
+      color: "blue",
       tokens: ["Free", "¥40"],
       shares: [
         {
@@ -220,9 +244,9 @@ const game = {
       ]
     },
     {
-      name: "Takamatsu-Kotohira Electric Rail",
-      abbrev: "TKER",
-      color: "red",
+      name: "Takamatsu & Kotohira Electric Railway",
+      abbrev: "KO",
+      color: "pink",
       tokens: ["Free", "¥40"],
       shares: [
         {
@@ -239,9 +263,9 @@ const game = {
       ]
     },
     {
-      name: "Tosa Electric Rail",
-      abbrev: "TER",
-      color: "cyan",
+      name: "Tosa Electric Railway",
+      abbrev: "TR",
+      color: "darkGreen",
       tokens: ["Free", "¥40", "¥40"],
       shares: [
         {
@@ -258,9 +282,9 @@ const game = {
       ]
     },
     {
-      name: "Tosa Kuroshio Railroad",
-      abbrev: "TKR",
-      color: "blue",
+      name: "Tosa Kuroshio Railway",
+      abbrev: "KU",
+      color: "purple",
       tokens: ["Free"],
       shares: [
         {
@@ -277,7 +301,7 @@ const game = {
       ]
     },
     {
-      name: "Uwajima Railroad",
+      name: "Uwajima Railway",
       abbrev: "UR",
       color: "maroon",
       tokens: ["Free", "¥40", "¥40"],
@@ -336,7 +360,7 @@ const game = {
     {
       name: "D",
       limit: "2",
-      number: "9",
+      number: "∞",
       rust: "4",
       tiles: "brown"
     }
@@ -344,40 +368,47 @@ const game = {
 
   privates: [
     {
-      name: "Takamatsu Eletric Track",
+      name: "Takamatsu E-Railroad",
       price: "¥20",
       revenue: "¥5",
-      desription: "Only the owner of this private company can lay a tile in Takamatsu."
+      icon: "A",
+      desription: "Blocks Takamatsu (K4)."
     },{
       name: "Mitsubishi Ferry",
-      private: "¥30",
+      price: "¥30",
       revenue: "¥5",
-      players: "3+",
-      description: "Player owner may place the port tile on a coastal town without a tile on it already, outside of the operating rounds of a company controller by another player. This does not close the company."
+      icon: "B",
+      description: "Player owner may place the port tile on a coastal town (B11, G10, I12, or J9) without a tile on it already, outside of the operating rounds of a company controller by another player. The player need not control a company or have connectivity to the placed tile from one of their companies. This does not close the company."
     },{
       name: "Ehime Railroad",
       price: "¥40",
       revenue: "¥10",
-      players: "4+",
-      description: "When this company is sold to a corporation, the selling player may immediately place a green tile on Ozu, in addition to any tile which it may lay during the same operating round. This does not close the company."
+      icon: "C",
+      description: "When this company is sold to a corporation, the selling player may immediately place a green tile on Ohzu (C4), in addition to any tile which it may lay during the same operating round. This does not close the company."
     },{
-      name: "Sumitomo Besshi Mine RR",
+      name: "Sumitomo Mines Railway",
       price: "¥50",
       revenue: "¥15",
+      icon: "D",
       description: "Owning corporation may ignore building cost for mountain hexes which do not also contain rivers. This does not close the company."
     },{
-      name: "Dogo Railway",
+      name: "Dougo Railway",
       price: "¥60",
       revenue: "¥15",
+      icon: "E",
       description: "Owning player may exchange this private company for a 10% share of Iyo Railway from the initial offering."
     },{
       name: "South Iyo Railway",
       price: "¥80",
-      revenue: "¥20"
+      revenue: "¥20",
+      icon: "F",
+      players: "3+"
     },{
       name: "Uno-Takamatsu Ferry",
       price: "¥150",
       revenue: "¥30 / ¥50",
+      players: "4+",
+      icon: "G",
       description: "Does not close while owned by a player. If owned by a player when the first 5-train is purchased it may no longer be sold to a public company and the revenue is increased to 50."
     }
   ],
@@ -449,7 +480,7 @@ const game = {
         cities: [
           {
             name: {
-              name: "Nihama"
+              name: "Niihama"
             }
           }
         ],
@@ -526,7 +557,7 @@ const game = {
             companies: [
               {
                 label: "SR",
-                color: "green"
+                color: "blue"
               }
             ]
           }
@@ -543,7 +574,7 @@ const game = {
             companies: [
               {
                 label: "AR",
-                color: "black"
+                color: "red"
               }
             ]
           }
@@ -559,8 +590,8 @@ const game = {
             },
             companies: [
               {
-                label: "TKR",
-                color: "blue"
+                label: "KU",
+                color: "purple"
               }
             ]
           }
@@ -572,7 +603,7 @@ const game = {
         centerTowns: [
           {
             name: {
-              name: "Ritsurin Koen"
+              name: "Ritsurin Kouen"
             }
           }
         ],
@@ -589,7 +620,7 @@ const game = {
         centerTowns: [
           {
             name: {
-              name: "Nankoku"
+              name: "Nangoku"
             }
           }
         ],
@@ -623,7 +654,7 @@ const game = {
         centerTowns: [
           {
             name: {
-              name: "Mugi"
+              name: "Muki"
             }
           }
         ],
@@ -718,18 +749,16 @@ const game = {
         cities: [
           {
             name: {
-              name: "Ozu",
+              name: "Ohzu",
               reverse: true
             }
           }
         ],
-        labels: [
-          {
-            angle: 270,
-            percent: 0.667,
-            label: "ER"
-          }
-        ],
+        labels: [{
+          label: "C",
+          angle: 270,
+          percent: 0.667
+        }],
         track: [
           {
             side: 3
@@ -748,8 +777,8 @@ const game = {
             },
             companies: [
               {
-                label: "TKER",
-                color: "red"
+                label: "KO",
+                color: "pink"
               }
             ]
           }
@@ -760,12 +789,11 @@ const game = {
             angle: 165
           }
         ],
-        labels: [
-          {
-            angle: 300,
-            label: "TET"
-          }
-        ],
+        labels: [{
+          label: "A",
+          angle: 270,
+          percent: 0.75
+        }],
         track: [
           {
             side: 1
@@ -975,8 +1003,8 @@ const game = {
       {
         color: "green",
         water: {
-          angle: 30,
-          percent: 0.6,
+          angle: 60,
+          percent: 0.7,
           cost: 80,
           border: true
         },
@@ -992,14 +1020,14 @@ const game = {
             size: 2,
             rotation: 30,
             name: {
-              name: "Kochi",
+              name: "Kouchi",
               reverse: true,
-              offset: 62
+              offset: 54
             },
             companies: [
               {
-                label: "TER",
-                color: "cyan"
+                label: "TR",
+                color: "darkGreen"
               }
             ]
           }
