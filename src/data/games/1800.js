@@ -54,7 +54,7 @@ const game = {
       name: "Colorado & Southern Railroad",
       abbrev: "C&S",
       tokens: ["Free", "$40", "$100"],
-      color: "cyan",
+      color: "blue",
       shares: [
         {
           quantity: 1,
@@ -533,7 +533,7 @@ const game = {
             companies: [
               {
                 label: "C&S",
-                color: "cyan"
+                color: "blue"
               }
             ]
           }
