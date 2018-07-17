@@ -65,7 +65,7 @@ const game = {
       name: "Central Argentine Railway",
       abbrev: "CA",
       tokens: ["$40", "$100", "$100"],
-      color: "pink",
+      color: "purple",
       shares: [
         {
           quantity: 1,
@@ -966,7 +966,7 @@ const game = {
             companies: [
               {
                 label: "CA",
-                color: "pink"
+                color: "purple"
               }
             ]
           }
