@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./App.css";
 
 import Tiles from "./Tiles";
+import SingleTile from "./SingleTile";
 import Atoms from "./atoms";
 import Positioning from "./Positioning";
 
@@ -32,6 +33,7 @@ class App extends Component {
             <Route exact path="/tiles" component={Tiles} />
             <Route path="/tiles/atoms" component={Atoms} />
             <Route path="/tiles/positioning" component={Positioning} />
+            <Route path="/tiles/:id" component={SingleTile} />
             <Route exact path="/:game" component={Game} />
             <Route path="/:game/background" component={Background} />
             <Route path="/:game/charters" component={Charters} />

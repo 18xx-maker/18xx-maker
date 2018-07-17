@@ -42,7 +42,12 @@ const Track = ({ type, gauge, border }) => {
     strokeDashArray = `${width},${width}`;
   }
 
-  // Double Guage
+  // Line Gauge
+  if (gauge === "line") {
+    width = border ? 6 : 2;
+  }
+
+  // Double Gauge
   let double = null;
   if (!border && gauge === "double") {
     double = (

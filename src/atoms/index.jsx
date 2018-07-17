@@ -21,7 +21,7 @@ import Tunnel from "./Tunnel";
 import Water from "./Water";
 import Bridge from "./Bridge";
 
-require('./atoms.css');
+require("./atoms.css");
 
 const Atoms = () => {
   let atoms = [
@@ -118,80 +118,20 @@ const Atoms = () => {
     },
     {
       name: "Track",
-      examples: [
-        [<Track type="city" border={true} />, <Track type="city" />],
-        [
-          <Track type="city" border={true} />,
-          <Track type="city" gauge="narrow" />
-        ],
-        [
-          <Track type="city" border={true} />,
-          <Track type="city" gauge="double" />
-        ],
-        [<Track type="stop" border={true} />, <Track type="stop" />],
-        [
-          <Track type="stop" border={true} />,
-          <Track type="stop" gauge="narrow" />
-        ],
-        [
-          <Track type="stop" border={true} />,
-          <Track type="stop" gauge="double" />
-        ],
-        [<Track type="mid" border={true} />, <Track type="mid" />],
-        [
-          <Track type="mid" border={true} />,
-          <Track type="mid" gauge="narrow" />
-        ],
-        [
-          <Track type="mid" border={true} />,
-          <Track type="mid" gauge="double" />
-        ],
-        [<Track type="1860-C" border={true} />, <Track type="1860-C" />],
-        [
-          <Track type="1860-C" border={true} />,
-          <Track type="1860-C" gauge="narrow" />
-        ],
-        [
-          <Track type="1860-C" border={true} />,
-          <Track type="1860-C" gauge="double" />
-        ],
-        [<Track type="straight" border={true} />, <Track type="straight" />],
-        [
-          <Track type="straight" border={true} />,
-          <Track type="straight" gauge="narrow" />
-        ],
-        [
-          <Track type="straight" border={true} />,
-          <Track type="straight" gauge="double" />
-        ],
-        [<Track type="gentle" border={true} />, <Track type="gentle" />],
-        [
-          <Track type="gentle" border={true} />,
-          <Track type="gentle" gauge="narrow" />
-        ],
-        [
-          <Track type="gentle" border={true} />,
-          <Track type="gentle" gauge="double" />
-        ],
-        [<Track type="sharp" border={true} />, <Track type="sharp" />],
-        [
-          <Track type="sharp" border={true} />,
-          <Track type="sharp" gauge="narrow" />
-        ],
-        [
-          <Track type="sharp" border={true} />,
-          <Track type="sharp" gauge="double" />
-        ],
-        [<Track type="bent" border={true} />, <Track type="bent" />],
-        [
-          <Track type="bent" border={true} />,
-          <Track type="bent" gauge="narrow" />
-        ],
-        [
-          <Track type="bent" border={true} />,
-          <Track type="bent" gauge="double" />
-        ]
-      ]
+      examples: R.chain(
+        type => {
+          return R.map(
+            gauge => {
+              return [
+                  <Track type={type} gauge={gauge} border={true} />,
+                <Track type={type} gauge={gauge} />
+              ];
+            },
+            ["standard", "narrow", "double", "line"]
+          );
+        },
+        ["city", "stop", "mid", "sharp", "gentle", "straight", "bent", "1860-C"]
+      )
     },
     {
       name: "OffBoard Track",
@@ -230,9 +170,7 @@ const Atoms = () => {
     },
     {
       name: "Divide",
-      examples: [
-        [<Divide />]
-      ],
+      examples: [[<Divide />]]
     },
     {
       name: "Border",
