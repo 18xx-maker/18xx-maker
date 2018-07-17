@@ -24,10 +24,11 @@ const Map = ({ match }) => {
   let maxX = util.maxMapX(map.hexes);
   let maxY = util.maxMapY(map.hexes);
 
-  let totalWidth = halfHexWidth * (maxX + 1);
-  let totalHeight = 1.5 * (maxY - 1) * edge + 2 * edge;
+  let totalWidth = (game.info.extraTotalWidth || 0) + halfHexWidth * (maxX + 1);
+  let totalHeight =
+    (game.info.extraTotalHeight || 0) + (1.5 * (maxY - 1) * edge + 2 * edge);
 
-  if(game.info.orientation === "horizontal") {
+  if (game.info.orientation === "horizontal") {
     let tmp = totalWidth;
     totalWidth = totalHeight;
     totalHeight = tmp;
@@ -45,7 +46,10 @@ const Map = ({ match }) => {
     let resolvedHex = util.resolveHex(hex, map.hexes);
 
     return R.map(([x, y]) => {
-      let translate = game.info.orientation === "horizontal" ?  `translate(${hexY(x, y)} ${hexX(x, y)})` : `translate(${hexX(x, y)} ${hexY(x, y)})`;
+      let translate =
+        game.info.orientation === "horizontal"
+          ? `translate(${hexY(x, y)} ${hexX(x, y)})`
+          : `translate(${hexX(x, y)} ${hexY(x, y)})`;
       return (
         <g transform={`${translate}`} key={`hex-${util.toAlpha(y)}${x}`}>
           <Hex hex={resolvedHex} id={`${util.toAlpha(y)}${x}`} border={true} />
@@ -56,7 +60,10 @@ const Map = ({ match }) => {
 
   return (
     <HexContext.Provider
-      value={{ width: game.info.width, rotation: game.info.orientation === "horizontal" ? 0 : 90 }}
+      value={{
+        width: game.info.width,
+        rotation: game.info.orientation === "horizontal" ? 0 : 90
+      }}
     >
       <div className="cutlines">
         <div className="map">
