@@ -1,4 +1,4 @@
-.revenue table {
+.revenue__table {
   width: 100%;
   height: 3.5in;
   table-layout: fixed;
@@ -6,7 +6,7 @@
   border-collapse: collapse;
 }
 
-.revenue table td {
+.revenue__table td {
   border: 1px solid black;
   vertical-align: top;
   text-align: left;
@@ -41,27 +41,38 @@
   width: 4.25;
 }
 
-.players table {
+.players__table {
   width: 100%;
   height: auto;
   table-layout: auto;
+  box-sizing: border-box;
+  border-collapse: collapse;
 }
 
-.players table th {
-  padding: 0.05in 0.1in;
+.players__table--static {
+  margin-bottom: 0.25in;
+}
+
+.players__table th {
+  padding: 0.1in 0.1in;
   text-align: center;
   border-width: 0;
 }
 
-.players table td {
-  padding: 0.1in;
-  text-align: center;
-  border-color: gray;
-  border-width: 0 1px 0 0;
-  border-top: 1px dashed gray;
+.players__table--static th,
+.players__table--static td {
   border-bottom: 1px dashed gray;
 }
 
-.players table td:last-child {
-  border-width: 1px 0 1px 0;
+.players__table--static th,
+.players__table td {
+  padding: 0.1in;
+  text-align: center;
+  border-color: gray;
+  border-right: 1px solid gray;
+  border-top: 1px dashed gray;
+}
+
+.players__table td:last-child {
+  border-right: none;
 }

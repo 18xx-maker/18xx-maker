@@ -48,7 +48,7 @@ const Revenue = ({ match }) => {
     <div className="revenue">
       <div className="revenue__tracker">
         <h2>Revenue</h2>
-        <table>
+        <table className="revenue__table">
           <tbody>{items}</tbody>
         </table>
       </div>
