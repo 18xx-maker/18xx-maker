@@ -1,7 +1,7 @@
 import React from "react";
 import { colors, textColor } from "./data";
 
-const Pool = ({ label, notes }) => {
+const Pool = ({ name, notes }) => {
   let notesNode = null;
 
   if (notes && notes.length > 0) {
@@ -24,7 +24,7 @@ const Pool = ({ label, notes }) => {
 
   return (
     <div className="pool">
-      <h2>{label}</h2>
+      <h2>{name}</h2>
       <div className="pool__box">{notesNode}</div>
     </div>
   );
