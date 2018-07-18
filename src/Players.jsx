@@ -30,12 +30,21 @@ const Players = ({ players, bank, capital }) => {
             <th>
               <i className="fas fa-user-friends" />
             </th>
-            <th>
-              <i className="fas fa-certificate" />
-            </th>
-            <th>
-              <i className="fas fa-coins" />
-            </th>
+            {players[0].certLimit && (
+              <th>
+                <i className="fas fa-certificate" />
+              </th>
+            )}
+            {players[0].capital && (
+              <th>
+                <i className="fas fa-coins" />
+              </th>
+            )}
+            {players[0].bank && (
+              <th>
+                <i className="fas fa-university" />
+              </th>
+            )}
           </tr>
         </thead>
         <tbody>
@@ -43,8 +52,9 @@ const Players = ({ players, bank, capital }) => {
             p => (
               <tr key={p.number}>
                 <td>{p.number}</td>
-                <td>{p.certLimit}</td>
-                <td>{p.capital}</td>
+                {p.certLimit && <td>{p.certLimit}</td>}
+                {p.capital && <td>{p.capital}</td>}
+                {p.bank && <td>{p.bank}</td>}
               </tr>
             ),
             players
