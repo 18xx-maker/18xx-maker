@@ -7,7 +7,8 @@ const game = {
     background: "water",
     width: 150,
     orientation: "horizontal",
-    titleY: -30
+    titleY: -30,
+    color_10: "orange"
   },
 
   // Extra Tokens
@@ -408,7 +409,7 @@ const game = {
       name: "Bank Pool",
       notes: [
         {
-          color: "orange",
+          color: "yellow",
           note:
             "If a company does not have a train, shares in that company are sold at HALF the current market price (round fractions down)"
         },
@@ -417,28 +418,9 @@ const game = {
           note: "Director's certificate may be sold"
         },
         {
-          color: "orange",
+          color: "brown",
           note:
             "There may be any number of certificates in the bank pool for any one company"
-        }
-      ]
-    },
-    {
-      name: "IPO",
-      notes: [
-        {
-          color: "green",
-          note: "Companies float once 50% sold"
-        }
-      ]
-    },
-    {
-      name: "Trains",
-      notes: [
-        {
-          color: "yellow",
-          note:
-            "Buying a train from another company is not allowed if the buying company already has a train, and the selling company has only one train"
         }
       ]
     }

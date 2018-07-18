@@ -3,12 +3,13 @@ const game = {
   info: {
     title: "1857",
     designer: "Eddie Robbins",
-    background: "gray",
+    background: "purple",
     width: 150,
     orientation: "horizontal",
     titleY: 675,
     titleRotate: -90,
-    extraTokens: 4
+    extraTokens: 4,
+    color_10: "orange"
   },
 
   // Extra Tokens
@@ -369,7 +370,7 @@ const game = {
       name: "Market",
       notes: [
         {
-          color: "orange",
+          color: "yellow",
           note: "Shares in the market pay dividends to the company"
         },
         {
@@ -377,30 +378,8 @@ const game = {
           note: "No more than 50% of a company may be in the market"
         },
         {
-          color: "orange",
+          color: "brown",
           note: "No stock sales during first stock round"
-        }
-      ]
-    },
-    {
-      name: "IPO",
-      notes: [
-        {
-          color: "green",
-          note: "Companies float once 50% sold"
-        }
-      ]
-    },
-    {
-      name: "Trains",
-      notes: [
-        {
-          color: "yellow",
-          note: "D trains available after first 6 is bought"
-        },
-        {
-          color: "yellow",
-          note: "4, 5, and 6 can be exchanged for a D train"
         }
       ]
     }

@@ -9,7 +9,8 @@ const game = {
     orientation: "horizontal",
     titleY: 900,
     titleX: 50,
-    extraTokens: 2
+    extraTokens: 2,
+    color_5: "water"
   },
 
   tokens: ["Round", "+L.20", "+L.20", "#port", "#port"],
@@ -273,17 +274,14 @@ const game = {
       name: "Bank Pool",
       notes: [
         {
-          color: "orange",
+          color: "water",
           note: "Shares in the Bank Pool pay dividens to the Bank"
         },
         {
-          color: "orange",
+          color: "green",
           note: "Unoperated companies may not be sold"
         }
       ]
-    },
-    {
-      name: "Trains"
     }
   ],
 

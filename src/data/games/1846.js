@@ -7,7 +7,9 @@ const game = {
     background: "brown",
     extraTokens: 4,
     width: 150,
-    rotation: 90
+    rotation: 90,
+    color_5: "orange",
+    color_10: "brown"
   },
 
   // Extra Tokens
@@ -256,17 +258,8 @@ const game = {
           note: "Corporations issue/redeem stock at one value lower/higher"
         },
         {
-          color: "orange",
+          color: "brown",
           note: "Corporations may not issue more stock than the amount held by players, less the number already in the Stock Market"
-        }
-      ]
-    },
-    {
-      name: "Trains",
-      notes: [
-        {
-          color: "yellow",
-          note: "Gray trains are unlimited"
         }
       ]
     }

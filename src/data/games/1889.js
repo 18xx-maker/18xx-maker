@@ -41,6 +41,26 @@ const game = {
     capital: "¥390"
   }],
 
+  pools: [
+    {
+      name: "Bank Pool",
+      notes: [
+        {
+          color: "cyan",
+          note: "Shares in the market pay dividends to the company"
+        },
+        {
+          color: "blue",
+          note: "No more than 50% of a company may be in the market"
+        },
+        {
+          color: "purple",
+          note: "No stock sales during first stock round"
+        }
+      ]
+    }
+  ],
+
   rounds: [
     {
       name: "OR3",
