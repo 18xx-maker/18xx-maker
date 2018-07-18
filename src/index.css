@@ -448,7 +448,7 @@ svg {
   top: 0;
   left: 0;
   width: calc(100% - 0.5in);
-  padding: 0.125in 0.125in 0.0625in 0.125in;
+  padding: 0.125in 0.125in 0.03125in 0.125in;
   line-height: 0.22in;
   font-size: 0.18in;
   margin: 0.125in 0.125in 0 0.125in;
