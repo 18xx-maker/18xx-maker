@@ -14,6 +14,22 @@ const game = {
 
   tokens: ["Round", "+L.20", "+L.20", "#port", "#port"],
 
+  bank: "L.7,760",
+
+  players: [{
+    number: 3,
+    certLimit: 12,
+    capital: "L.500"
+  },{
+    number: 4,
+    certLimit: "9/11",
+    capital: "L.375"
+  },{
+    number: 5,
+    certLimit: 9,
+    capital: "L.300"
+  }],
+
   privates: [
     {
       name: "Società Corriere Etnee",
@@ -402,46 +418,46 @@ const game = {
 
   phases: [
     {
-      name: "4H",
+      name: "4",
       limit: "4",
       number: "4",
       tiles: "yellow"
     },
     {
-      name: "6H",
+      name: "6",
       limit: "4",
-      number: "4",
+      number: "3/4",
       tiles: "green",
       notes: "Private companies can be bought"
     },
     {
-      name: "8H",
+      name: "8",
       rust: "4H",
       limit: "3",
-      number: "3",
+      number: "2/3",
       tiles: "green"
     },
     {
-      name: "10H",
+      name: "10",
       rust: "6H",
       limit: "2",
       number: "2",
       tiles: "brown"
     },
     {
-      name: "12H",
+      name: "12",
       limit: "2",
       number: "1",
       tiles: "brown",
       notes: "Private companies close, Messina Earthquake"
     },
     {
-      name: "16H / R6H",
+      name: "16",
       limit: "2",
-      number: "5 / 2",
+      number: "4/5",
       rust: "8H",
       tiles: "brown",
-      notes: "Stock market tokens can advance in the blue zone"
+      notes: "2 R6H trains are also available. Stock market tokens can advance in the blue zone"
     }
   ],
   companies: [

@@ -15,10 +15,9 @@ const game = {
   // Need an IPO sheet
   ipo: true,
 
+  bank: "$12,000",
+
   players: [{
-    number: 2,
-    certLimit: 28
-  },{
     number: 3,
     certLimit: 20,
     capital: "$800"

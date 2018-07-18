@@ -13,6 +13,22 @@ const game = {
   // Extra Tokens
   tokens: ["Round"],
 
+  bank: "$10,000",
+
+  players: [{
+    number: 2,
+    certLimit: 32,
+    capital: "£1000"
+  },{
+    number: 3,
+    certLimit: 21,
+    capital: "£670"
+  },{
+    number: 4,
+    certLimit: 16,
+    capital: "£500"
+  }],
+
   // Railway Companies
   companies: [
     {

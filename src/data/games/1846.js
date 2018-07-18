@@ -13,6 +13,22 @@ const game = {
   // Extra Tokens
   tokens: ["Round", "#port", "#port", "#meat", "#meat", "Big 4", "MS"],
 
+  capital: "$400",
+
+  players: [{
+    number: 3,
+    certLimit: 14,
+    bank: "$6,500"
+  },{
+    number: 4,
+    certLimit: 12,
+    bank: "$7,500"
+  },{
+    number: 5,
+    certLimit: 11,
+    bank: "$9,000"
+  }],
+
   // Railway Companies
   companies: [
     {

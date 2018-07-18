@@ -8,7 +8,9 @@ const game = {
     width: 150,
     orientation: "horizontal",
     titleX: 280,
-    titleY: 860
+    titleY: 860,
+    color_5: "cyan",
+    color_10: "blue"
   },
 
   tokens: ["Round"],

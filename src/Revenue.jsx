@@ -8,17 +8,17 @@ import Players from "./Players";
 
 require("./Revenue.css");
 
-const generateCells = (rows, cols) => {
+const generateCells = (rows, cols, color_5, color_10) => {
   let length = cols.length;
   let items = R.map(row => {
     let cells = R.map(col => {
       let color = "plain";
       let value = length * row + col + 1;
       if (value % 5 === 0) {
-        color = "yellow";
+        color = color_5 || "yellow";
       }
       if (value % 10 === 0) {
-        color = "green";
+        color = color_10 || "green";
       }
       return (
         <td
@@ -42,7 +42,7 @@ const Revenue = ({ match }) => {
   let rows = Array.from(Array(5).keys());
   let cols = Array.from(Array(20).keys());
 
-  let items = generateCells(rows, cols);
+  let items = generateCells(rows, cols, game.info.color_5, game.info.color_10);
 
   return (
     <div className="revenue">
@@ -52,8 +52,10 @@ const Revenue = ({ match }) => {
           <tbody>{items}</tbody>
         </table>
       </div>
-      <Pool label="Bank Pool" />
-      <Players players={game.players} />
+      <div className="pool-wrapper">
+        <Pool label="Bank Pool" />
+        <Players players={game.players} bank={game.bank} capital={game.capital} />
+      </div>
     </div>
   );
 };
