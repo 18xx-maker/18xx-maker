@@ -5,7 +5,7 @@ const Players = ({ players, bank, capital }) => {
   return (
     <div className="players">
       {(bank || capital) && (
-        <table>
+        <table className="players__table players__table--static">
           {bank && (
             <tr>
               <th>
@@ -24,7 +24,7 @@ const Players = ({ players, bank, capital }) => {
           )}
         </table>
       )}
-      <table>
+      <table className="players__table players__table--variable">
         <thead>
           <tr>
             <th>
