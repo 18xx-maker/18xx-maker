@@ -18,23 +18,28 @@ const game = {
 
   bank: "$12,000",
 
-  players: [{
-    number: 3,
-    certLimit: 20,
-    capital: "$800"
-  },{
-    number: 4,
-    certLimit: 16,
-    capital: "$600"
-  },{
-    number: 5,
-    certLimit: 13,
-    capital: "$480"
-  },{
-    number: 6,
-    certLimit: 11,
-    capital: "$400"
-  }],
+  players: [
+    {
+      number: 3,
+      certLimit: 20,
+      capital: "$800"
+    },
+    {
+      number: 4,
+      certLimit: 16,
+      capital: "$600"
+    },
+    {
+      number: 5,
+      certLimit: 13,
+      capital: "$480"
+    },
+    {
+      number: 6,
+      certLimit: 11,
+      capital: "$400"
+    }
+  ],
 
   // Railway Companies
   companies: [
@@ -362,15 +367,17 @@ const game = {
       name: "Market",
       notes: [
         {
-          color: "yellow",
+          color: "orange",
           note: "Shares in the market pay dividends to the company"
         },
         {
-          color: "orange",
+          color: "brown",
+          icon: "exclamation",
           note: "No more than 50% of a company may be in the market"
         },
         {
-          color: "brown",
+          color: "red",
+          icon: "times",
           note: "No stock sales during first stock round"
         }
       ]

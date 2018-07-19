@@ -13,7 +13,7 @@ const Pool = ({ name, notes }) => {
 
           return (
             <li>
-              <span style={{ backgroundColor, color }}>!</span>
+              <i className={`fas fa-${n.icon || "info"}`} style={{ backgroundColor, color: colors["white"] }} />
               {n.note}
             </li>
           );

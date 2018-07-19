@@ -46,15 +46,17 @@ const game = {
       name: "Bank Pool",
       notes: [
         {
-          color: "cyan",
+          color: "blue",
           note: "Shares in the market pay dividends to the company"
         },
         {
-          color: "blue",
+          color: "purple",
+          icon: "exclamation",
           note: "No more than 50% of a company may be in the market"
         },
         {
-          color: "purple",
+          color: "red",
+          icon: "times",
           note: "No stock sales during first stock round"
         }
       ]

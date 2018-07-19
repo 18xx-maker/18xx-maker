@@ -259,6 +259,7 @@ const game = {
         },
         {
           color: "brown",
+          icon: "exclamation",
           note: "Corporations may not issue more stock than the amount held by players, less the number already in the Stock Market"
         }
       ]

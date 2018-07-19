@@ -279,6 +279,7 @@ const game = {
         },
         {
           color: "green",
+          icon: "times",
           note: "Unoperated companies may not be sold"
         }
       ]

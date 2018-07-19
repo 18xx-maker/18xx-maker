@@ -409,18 +409,19 @@ const game = {
       name: "Bank Pool",
       notes: [
         {
-          color: "yellow",
+          color: "orange",
           note:
             "If a company does not have a train, shares in that company are sold at HALF the current market price (round fractions down)"
-        },
-        {
-          color: "orange",
-          note: "Director's certificate may be sold"
         },
         {
           color: "brown",
           note:
             "There may be any number of certificates in the bank pool for any one company"
+        },
+        {
+          color: "red",
+          icon: "times",
+          note: "Director's certificate may be sold"
         }
       ]
     }

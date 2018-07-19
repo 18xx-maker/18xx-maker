@@ -370,15 +370,17 @@ const game = {
       name: "Market",
       notes: [
         {
-          color: "yellow",
+          color: "orange",
           note: "Shares in the market pay dividends to the company"
         },
         {
-          color: "orange",
+          color: "brown",
+          icon: "exclamation",
           note: "No more than 50% of a company may be in the market"
         },
         {
-          color: "brown",
+          color: "red",
+          icon: "times",
           note: "No stock sales during first stock round"
         }
       ]
