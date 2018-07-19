@@ -666,18 +666,29 @@ ul.notes {
 
 ul.notes li {
   margin-bottom: 0.125in;
-  margin-left: 0.4in;
+  margin-left: 0.125in;
   text-align: left;
   position: relative;
   font-size: 0.15in;
-  line-height: 0.19in;
+  line-height: 0.2in;
+}
+
+ul.notes li i {
+  font-size: 0.15in;
+  line-height: 0.25in;
+  height: 0.25in;
+  width: 0.25in;
+  display: inline-block;
+  margin-right: 0.1in;
+  text-align: center;
+  border-radius: 0.125in;
 }
 
 ul.notes li span {
   display: block;
   padding: 0;
   font-size: 0.13in;
-  line-height: 0.17in;
+  line-height: 0.2in;
   height: 0.17in;
   width: 0.17in;
   font-weight: bold;
