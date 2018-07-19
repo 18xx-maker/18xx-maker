@@ -75,10 +75,6 @@ h2 {
   padding-left: 40px;
 }
 
-.tileSheet {
-  margin: 0.5in 0 0 0;
-}
-
 .tileSheet div.row {
   clear: left;
   page-break-inside: avoid;

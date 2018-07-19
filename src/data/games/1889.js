@@ -199,7 +199,7 @@ const game = {
       quantity: 9,
       price: "¥1100",
       color: "brown",
-      description: "Cost ¥800 when exchanging a 4, 5, or 6 train",
+      description: "Cost ¥800 when trading in a 4T, 5T or 6T",
       info: [
         {
           color: "yellow",
