@@ -275,10 +275,10 @@ const game = {
       notes: [
         {
           color: "water",
-          note: "Shares in the Bank Pool pay dividens to the Bank"
+          note: "Shares in the bank pool pay dividends to the bank"
         },
         {
-          color: "green",
+          color: "red",
           icon: "times",
           note: "Unoperated companies may not be sold"
         }

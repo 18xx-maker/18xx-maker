@@ -251,7 +251,7 @@ const game = {
 
   pools: [
     {
-      name: "Market",
+      name: "Stock Market",
       notes: [
         {
           color: "orange",
@@ -260,7 +260,7 @@ const game = {
         {
           color: "brown",
           icon: "exclamation",
-          note: "Corporations may not issue more stock than the amount held by players, less the number already in the Stock Market"
+          note: "Corporations may not issue more stock than the amount held by players, less the number already in the stock market"
         }
       ]
     }
