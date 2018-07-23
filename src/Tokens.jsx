@@ -13,11 +13,13 @@ const Tokens = ({ match }) => {
     return null;
   }
 
+  let extraNormals = (game.info.extraTokens || 3) + (game.info.extraHomeTokens || 0);
   let tokens = R.addIndex(R.chain)((company, index) => {
     let y = 60 * index + 30;
-    let companyTokens = Array(company.tokens.length + (game.info.extraTokens || 3)).fill(
+    let companyTokens = Array(company.tokens.length + extraNormals).fill(
       <Token label={company.abbrev} color={company.color} width="30" />
     );
+    R.times(() => {
     companyTokens.push(
       <Token
         label={company.abbrev}
@@ -26,6 +28,8 @@ const Tokens = ({ match }) => {
         inverse={true}
       />
     );
+    }, game.info.extraTokens || 3);
+
     let groups = R.addIndex(R.map)(
       (token, index) => (
         <g key={index} transform={`translate(${60 * index + 30} 0)`}>{token}</g>
