@@ -957,9 +957,10 @@ const game = {
       {
         color: "yellow",
         mountain: {
-          cost: "50M",
+          cost: "50",
           angle: 180,
-          percent: 0.75
+          border: true,
+          percent: 0.7
         },
         cities: [
           {
@@ -1229,14 +1230,15 @@ const game = {
           {
             value: 30,
             angle: 60,
-            percent: 0.667
+            percent: 0.7
           }
         ],
         mountain: {
-          cost: "50M",
+          cost: "50",
           size: "small",
+          border: true,
           angle: 300,
-          percent: 0.6
+          percent: 0.667
         },
         cities: [
           {
@@ -1581,9 +1583,10 @@ const game = {
         ],
         mountain: {
           angle: 5,
-          percent: 0.5,
+          percent: 0.6,
+          border: true,
           size: "small",
-          cost: "50M"
+          cost: "50"
         },
         cities: [
           {
@@ -1640,9 +1643,10 @@ const game = {
         ],
         mountain: {
           angle: -30,
-          percent: 0.5,
+          percent: 0.6,
           size: "small",
-          cost: "50M"
+          border: true,
+          cost: "50"
         },
         borders: [
           {
@@ -1758,8 +1762,9 @@ const game = {
         mountain: {
           angle: 180,
           percent: 0.75,
-          cost: "50M",
-          size: "small"
+          cost: "50",
+          size: "small",
+          border: true
         },
         hexes: ["F11"]
       },
@@ -2401,10 +2406,11 @@ const game = {
           }
         ],
         mountain: {
-          cost: "50M",
+          cost: "50",
           size: "small",
           angle: 240,
-          percent: 0.7
+          percent: 0.7,
+          border: true
         },
         values: [
           {
@@ -2472,10 +2478,11 @@ const game = {
           }
         ],
         mountain: {
-          cost: "100M",
+          cost: "100",
           size: "small",
+          border: true,
           angle: 230,
-          percent: 0.8
+          percent: 0.75
         },
         values: [
           {
