@@ -35,7 +35,6 @@ class App extends Component {
             <Route path="/tiles/atoms" component={Atoms} />
             <Route path="/tiles/positioning" component={Positioning} />
             <Route path="/tiles/:id" component={SingleTile} />
-            <Route exact path="/:game" component={Game} />
             <Route path="/:game/background" component={Background} />
             <Route path="/:game/charters" component={Charters} />
             <Route path="/:game/ipo" component={IPO} />
@@ -49,6 +48,7 @@ class App extends Component {
             <Route path="/:game/tokens" component={Tokens} />
             <Route path="/:game/trains" component={Trains} />
           </Switch>
+        <Route path="/:game([0-9_-]+)/" strict component={Game} />
         </div>
       </Router>
     );
