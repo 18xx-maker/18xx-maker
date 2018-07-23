@@ -1298,6 +1298,7 @@ const game = {
         mountain: {
           angle: 90,
           percent: 0.5,
+          border: true,
           cost: "L.160",
           size: "small"
         },
@@ -1430,6 +1431,7 @@ const game = {
         mountain: {
           size: "small",
           cost: "L.40",
+          border: true,
           angle: -30,
           percent: 0.6
         },
