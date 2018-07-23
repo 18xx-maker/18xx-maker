@@ -30,6 +30,32 @@ describe("trackType", () => {
   });
 });
 
+describe("pages", () => {
+  it("handle < single pages", () => {
+    expect(util.pages(90, 100)).toEqual([90]);
+  });
+
+  it("handle single pages", () => {
+    expect(util.pages(100, 100)).toEqual([100]);
+  });
+
+  it("handle < double pages", () => {
+    expect(util.pages(190, 100)).toEqual([95,95]);
+  });
+
+  it("handle double pages", () => {
+    expect(util.pages(200, 100)).toEqual([100,100]);
+  });
+
+  it("handle > double pages", () => {
+    expect(util.pages(210, 100)).toEqual([55,100,55]);
+  });
+
+  it("handle triple pages", () => {
+    expect(util.pages(300, 100)).toEqual([100,100,100]);
+  });
+});
+
 describe("marketColor", () => {
   it("should handle empty lists", () => {
     expect(util.marketColor([], 20)).toEqual("plain");

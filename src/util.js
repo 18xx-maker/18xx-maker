@@ -185,6 +185,21 @@ const mergeHex = (a, b) => {
   }, a, b);
 };
 
+const pages = (total, page) => {
+  let helper = (total, page, result) => {
+    if(total <= page) {
+      return R.append(total, result);
+    } else if(total <= (2 * page)) {
+      let width = total * 0.5;
+      return R.prepend(width, R.append(width, result));
+    } else {
+      return helper(total - page, page, R.append(page, result));
+    }
+  };
+
+  return helper(total, page, []);
+};
+
 export default {
   groupsOf,
   HEX_RATIO,
@@ -200,5 +215,6 @@ export default {
   toAlpha,
   toCoords,
   mergeHex,
-  resolveHex
+  resolveHex,
+  pages
 };
