@@ -20,24 +20,34 @@ const game = {
 
   players: [
     {
+      number: 2,
+      certLimit: 26,
+      capital: "$1260"
+    },
+    {
       number: 3,
-      certLimit: 20,
-      capital: "$800"
+      certLimit: 18,
+      capital: "$840"
     },
     {
       number: 4,
-      certLimit: 16,
-      capital: "$600"
+      certLimit: 15,
+      capital: "$630"
     },
     {
       number: 5,
       certLimit: 13,
-      capital: "$480"
+      capital: "$504"
     },
     {
       number: 6,
       certLimit: 11,
-      capital: "$400"
+      capital: "$420"
+    },
+    {
+      number: 7,
+      certLimit: 7,
+      capital: "$360"
     }
   ],
 

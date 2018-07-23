@@ -9,7 +9,7 @@ import Svg from "./Svg";
 import games from "./data/games";
 
 const HEX_RATIO = 0.57735;
-const RATIO = 0.966666667;
+const RATIO = 1.0;
 
 const TileSheet = ({ match }) => {
   let game = games[match.params.game];
