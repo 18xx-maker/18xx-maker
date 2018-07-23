@@ -6,7 +6,7 @@ const game = {
     subtitle: "Mining and Railways in the Harz Mountains",
     designer: "Klaus Kiermeier",
     background: "brown",
-    titleSize: 125,
+    titleSize: 108,
     subTitleSize: 28,
     width: 150
   },
@@ -513,6 +513,7 @@ const game = {
   },
 
   map: {
+    print: "landscape",
     hexes: [
       {
         color: "plain",
