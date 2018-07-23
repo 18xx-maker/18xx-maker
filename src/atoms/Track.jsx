@@ -38,7 +38,7 @@ const Track = ({ type, gauge, border }) => {
 
   // Gauge
   let strokeDashArray = "none";
-  if (gauge === "narrow") {
+  if (!border && gauge === "narrow") {
     strokeDashArray = `${width},${width}`;
   }
 
