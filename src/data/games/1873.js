@@ -6,6 +6,8 @@ const game = {
     subtitle: "Mining and Railways in the Harz Mountains",
     designer: "Klaus Kiermeier",
     background: "brown",
+    titleSize: 125,
+    subTitleSize: 28,
     width: 150
   },
 
@@ -866,10 +868,12 @@ const game = {
             }
           }
         ],
-        borders: [{
-          side: 6,
-          color: "red"
-        }],
+        borders: [
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
         track: [
           {
             gauge: "narrow",
@@ -908,10 +912,12 @@ const game = {
             percent: 0.5
           }
         ],
-        borders: [{
-          side: 6,
-          color: "mountain"
-        }],
+        borders: [
+          {
+            side: 6,
+            color: "mountain"
+          }
+        ],
         mountain: {
           size: "medium",
           cost: "150M",
@@ -1072,62 +1078,83 @@ const game = {
       },
       {
         color: "yellow",
-        values: [{
-          value: 40,
-          percent: 0.75
-        }],
-        labels: [{
-          label: "B",
-          angle: 180,
-          percent: 0.667
-        }],
-        track: [{
-          side: 1,
-          gauge: "narrow"
-        },{
-          side: 2,
-          gauge: "line"
-        },{
-          side: 3,
-          gauge: "narrow"
-        },{
-          side: 5,
-          gauge: "narrow"
-        }],
-        cities: [{
-          size: 2,
-          companies: [{
-            color: "gray",
-            label: "WBE"
-          },{
-            color: "red",
-            label: "HBE"
-          }],
-          name: {
-            name: "Blankenburg",
-            reverse: true,
-            offset: 40
+        values: [
+          {
+            value: 40,
+            percent: 0.75
           }
-        }],
-        borders: [{
-          side: 1,
-          color: "red"
-        },{
-          side: 2,
-          color: "red"
-        },{
-          side: 3,
-          color: "red"
-        },{
-          side: 4,
-          color: "red"
-        },{
-          side: 5,
-          color: "red"
-        },{
-          side: 6,
-          color: "red"
-        }],
+        ],
+        labels: [
+          {
+            label: "B",
+            angle: 180,
+            percent: 0.667
+          }
+        ],
+        track: [
+          {
+            side: 1,
+            gauge: "narrow"
+          },
+          {
+            side: 2,
+            gauge: "line"
+          },
+          {
+            side: 3,
+            gauge: "narrow"
+          },
+          {
+            side: 5,
+            gauge: "narrow"
+          }
+        ],
+        cities: [
+          {
+            size: 2,
+            companies: [
+              {
+                color: "gray",
+                label: "WBE"
+              },
+              {
+                color: "red",
+                label: "HBE"
+              }
+            ],
+            name: {
+              name: "Blankenburg",
+              reverse: true,
+              offset: 40
+            }
+          }
+        ],
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          },
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
         hexes: ["D15"]
       },
       {
@@ -1139,18 +1166,22 @@ const game = {
             }
           }
         ],
-        borders: [{
-          side: 1,
-          color: "red"
-        }],
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          }
+        ],
         hexes: ["D17"]
       },
       {
         color: "plain",
-        borders: [{
-          side: 5,
-          color: "red"
-        }],
+        borders: [
+          {
+            side: 5,
+            color: "red"
+          }
+        ],
         hexes: ["D19"]
       },
       {
@@ -1161,57 +1192,74 @@ const game = {
             side: 6
           }
         ],
-        borders: [{
-          side: 6,
-          color: "red"
-        }],
+        borders: [
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
         hexes: ["D21"]
       },
       {
         color: "yellow",
-        borders: [{
-          side: 3,
-          color: "mountain"
-        },{
-          side: 1,
-          color: "red"
-        },{
-          side: 2,
-          color: "red"
-        },{
-          side: 4,
-          color: "red"
-        },{
-          side: 5,
-          color: "red"
-        },{
-          side: 6,
-          color: "red"
-        }],
-        values: [{
-          value: 30,
-          angle: 60,
-          percent: 0.667
-        }],
+        borders: [
+          {
+            side: 3,
+            color: "mountain"
+          },
+          {
+            side: 1,
+            color: "red"
+          },
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
+        values: [
+          {
+            value: 30,
+            angle: 60,
+            percent: 0.667
+          }
+        ],
         mountain: {
           cost: "50M",
           size: "small",
           angle: 300,
           percent: 0.6
         },
-        cities: [{
-          name: {
-            name: "Braunlage / Wurmberg"
-          },
-          companies: [{
-            label: "SHE",
-            color: "yellow"
-          }]
-        }],
-        track: [{
-          side: 6,
-          gauge: "narrow"
-        }],
+        cities: [
+          {
+            name: {
+              name: "Braunlage / Wurmberg"
+            },
+            companies: [
+              {
+                label: "SHE",
+                color: "yellow"
+              }
+            ]
+          }
+        ],
+        track: [
+          {
+            side: 6,
+            gauge: "narrow"
+          }
+        ],
         hexes: ["E4"]
       },
       {
@@ -1257,13 +1305,16 @@ const game = {
             percent: 0.5
           }
         ],
-        borders: [{
-          side: 3,
-          color: "red"
-        },{
-          side: 4,
-          color: "mountain"
-        }],
+        borders: [
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "mountain"
+          }
+        ],
         mountain: {
           size: "medium",
           cost: "100M",
@@ -1284,19 +1335,24 @@ const game = {
             percent: 0.5
           }
         ],
-        borders: [{
-          side: 2,
-          color: "red"
-        },{
-          side: 5,
-          color: "red"
-        },{
-          side: 1,
-          color: "mountain"
-        },{
-          side: 4,
-          color: "mountain"
-        }],
+        borders: [
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 1,
+            color: "mountain"
+          },
+          {
+            side: 4,
+            color: "mountain"
+          }
+        ],
         mountain: {
           size: "medium",
           cost: "100M",
@@ -1307,13 +1363,16 @@ const game = {
       },
       {
         color: "plain",
-        borders: [{
-          side: 6,
-          color: "red"
-        },{
-          side: 1,
-          color: "mountain"
-        }],
+        borders: [
+          {
+            side: 6,
+            color: "red"
+          },
+          {
+            side: 1,
+            color: "mountain"
+          }
+        ],
         mountain: {
           size: "medium",
           cost: "100M"
@@ -1322,13 +1381,16 @@ const game = {
       },
       {
         color: "plain",
-        borders: [{
-          side: 3,
-          color: "red"
-        },{
-          side: 5,
-          color: "red"
-        }],
+        borders: [
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          }
+        ],
         mountain: {
           size: "medium",
           cost: "150M"
@@ -1347,13 +1409,16 @@ const game = {
             percent: 0.5
           }
         ],
-        borders: [{
-          side: 2,
-          color: "red"
-        },{
-          side: 6,
-          color: "red"
-        }],
+        borders: [
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
         mountain: {
           size: "small",
           cost: "50M",
@@ -1364,84 +1429,113 @@ const game = {
       },
       {
         color: "gray",
-        cities: [{
-          size: 2,
-          name: {
-            name: "Weddersleben",
-            reverse: true
+        cities: [
+          {
+            size: 2,
+            name: {
+              name: "Weddersleben",
+              reverse: true
+            }
           }
-        }],
-        values: [{
-          value: 30,
-          angle: 210,
-          percent: 0.725
-        }],
-        borders: [{
-          side: 4,
-          color: "red"
-        }],
-        track: [{
-          side: 1,
-          gauge: "narrow"
-        },{
-          side: 2,
-          gauge: "narrow"
-        },{
-          side: 4,
-          gauge: "narrow"
-        }],
+        ],
+        values: [
+          {
+            value: 30,
+            angle: 210,
+            percent: 0.725
+          }
+        ],
+        borders: [
+          {
+            side: 4,
+            color: "red"
+          }
+        ],
+        track: [
+          {
+            side: 1,
+            gauge: "narrow"
+          },
+          {
+            side: 2,
+            gauge: "narrow"
+          },
+          {
+            side: 4,
+            gauge: "narrow"
+          }
+        ],
         hexes: ["E18"]
       },
       {
         color: "green",
-        values: [{
-          value: 60,
-          angle: 300,
-          percent: 0.75
-        }],
-        borders: [{
-          side: 1,
-          color: "red"
-        },{
-          side: 2,
-          color: "red"
-        },{
-          side: 3,
-          color: "red"
-        },{
-          side: 4,
-          color: "red"
-        },{
-          side: 5,
-          color: "red"
-        },{
-          side: 6,
-          color: "red"
-        }],
-        labels: [{
-          label: "HQG",
-          angle: 150,
-          percent: 0.65
-        }],
-        cities: [{
-          companies: [{
-            label: "QLB",
-            color: "orange"
-          }],
-          name: {
-            name: "Quedlinburg",
-            reverse: true,
-            offset: 66.67
+        values: [
+          {
+            value: 60,
+            angle: 300,
+            percent: 0.75
           }
-        }],
-        track: [{
-          side: 3
-        },{
-          side: 6
-        },{
-          side: 1,
-          gauge: "narrow"
-        }],
+        ],
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          },
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
+        labels: [
+          {
+            label: "HQG",
+            angle: 150,
+            percent: 0.65
+          }
+        ],
+        cities: [
+          {
+            companies: [
+              {
+                label: "QLB",
+                color: "orange"
+              }
+            ],
+            name: {
+              name: "Quedlinburg",
+              reverse: true,
+              offset: 66.67
+            }
+          }
+        ],
+        track: [
+          {
+            side: 3
+          },
+          {
+            side: 6
+          },
+          {
+            side: 1,
+            gauge: "narrow"
+          }
+        ],
         hexes: ["E20"]
       },
       {
@@ -1481,89 +1575,111 @@ const game = {
       },
       {
         color: "green",
-        values: [{
-          value: 20,
-          angle: 150,
-          percent: 0.667
-        }],
+        values: [
+          {
+            value: 20,
+            angle: 150,
+            percent: 0.667
+          }
+        ],
         mountain: {
           angle: 5,
           percent: 0.5,
           size: "small",
           cost: "50M"
         },
-        cities: [{
-          angle: 90,
-          percent: 0.5,
-          name: {
-            name: "Sorge",
-            reverse: true
+        cities: [
+          {
+            angle: 90,
+            percent: 0.5,
+            name: {
+              name: "Sorge",
+              reverse: true
+            }
+          },
+          {
+            angle: 210,
+            percent: 0.6
           }
-        },{
-          angle: 210,
-          percent: 0.6
-        }],
-        borders: [{
-          side: 2,
-          color: "red"
-        },{
-          side: 5,
-          color: "red"
-        },{
-          side: 6,
-          color: "mountain"
-        }],
-        track: [{
-          side: 1,
-          type: "straight",
-          gauge: "narrow",
-          cross: "over"
-        },{
-          side: 3,
-          type: "gentle",
-          gauge: "narrow",
-          cross: "under"
-        }],
+        ],
+        borders: [
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "mountain"
+          }
+        ],
+        track: [
+          {
+            side: 1,
+            type: "straight",
+            gauge: "narrow",
+            cross: "over"
+          },
+          {
+            side: 3,
+            type: "gentle",
+            gauge: "narrow",
+            cross: "under"
+          }
+        ],
         hexes: ["F5"]
       },
       {
         color: "green",
-        values: [{
-          value: 20,
-          angle: -30,
-          percent: 0.1
-        }],
+        values: [
+          {
+            value: 20,
+            angle: -30,
+            percent: 0.1
+          }
+        ],
         mountain: {
           angle: -30,
           percent: 0.5,
           size: "small",
           cost: "50M"
         },
-        borders: [{
-          side: 6,
-          color: "red"
-        }],
-        cities: [{
-          angle: 90,
-          percent: 0.6
-        },{
-          angle: 210,
-          percent: 0.6,
-          name: {
-            name: "Tanne",
-            reverse: true,
-            offset: 60
+        borders: [
+          {
+            side: 6,
+            color: "red"
           }
-        }],
-        track: [{
-          type: "stop",
-          gauge: "narrow",
-          side: 1
-        },{
-          type: "stop",
-          gauge: "narrow",
-          side: 3
-        }],
+        ],
+        cities: [
+          {
+            angle: 90,
+            percent: 0.6
+          },
+          {
+            angle: 210,
+            percent: 0.6,
+            name: {
+              name: "Tanne",
+              reverse: true,
+              offset: 60
+            }
+          }
+        ],
+        track: [
+          {
+            type: "stop",
+            gauge: "narrow",
+            side: 1
+          },
+          {
+            type: "stop",
+            gauge: "narrow",
+            side: 3
+          }
+        ],
         hexes: ["F7"]
       },
       {
@@ -1578,10 +1694,12 @@ const game = {
             percent: 0.5
           }
         ],
-        borders: [{
-          side: 4,
-          color: "red"
-        }],
+        borders: [
+          {
+            side: 4,
+            color: "red"
+          }
+        ],
         mountain: {
           size: "medium",
           cost: "100M",
@@ -1592,41 +1710,54 @@ const game = {
       },
       {
         color: "yellow",
-        cities: [{
-          name: {
-            name: "Hasselfeld",
-            reverse: true,
-            offset: 33.33
+        cities: [
+          {
+            name: {
+              name: "Hasselfeld",
+              reverse: true,
+              offset: 33.33
+            }
           }
-        }],
-        track: [{
-          side: 5,
-          gauge: "narrow"
-        }],
-        borders: [{
-          side: 1,
-          color: "red"
-        },{
-          side: 2,
-          color: "red"
-        },{
-          side: 3,
-          color: "red"
-        },{
-          side: 4,
-          color: "red"
-        },{
-          side: 5,
-          color: "red"
-        },{
-          side: 6,
-          color: "red"
-        }],
-        values: [{
-          value: 30,
-          angle: 270,
-          percent: 0.625
-        }],
+        ],
+        track: [
+          {
+            side: 5,
+            gauge: "narrow"
+          }
+        ],
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          },
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
+        values: [
+          {
+            value: 30,
+            angle: 270,
+            percent: 0.625
+          }
+        ],
         mountain: {
           angle: 180,
           percent: 0.75,
@@ -1637,92 +1768,1195 @@ const game = {
       },
       {
         color: "gray",
-        borders: [{
-          side: 1,
-          color: "red"
-        },{
-          side: 4,
-          color: "red"
-        }],
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "red"
+          }
+        ],
         hexes: ["F13"]
       },
       {
         color: "gray",
-        cities: [{
-          name: {
-            name: "Thale",
-            offset: 40
+        cities: [
+          {
+            name: {
+              name: "Thale",
+              offset: 40
+            }
           }
-        }],
-        track: [{
-          side: 3,
-          gauge: "narrow"
-        },{
-          side: 4
-        }],
-        borders: [{
-          side: 1,
-          color: "red"
-        },{
-          side: 2,
-          color: "red"
-        },{
-          side: 3,
-          color: "red"
-        },{
-          side: 4,
-          color: "red"
-        },{
-          side: 5,
-          color: "red"
-        },{
-          side: 6,
-          color: "red"
-        }],
+        ],
+        track: [
+          {
+            side: 3,
+            gauge: "narrow"
+          },
+          {
+            side: 4
+          }
+        ],
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          },
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
         offBoardRevenue: {
           percent: 0.5,
-          revenues: [{
-            color: "yellow",
-            cost: "30"
-          },{
-            color: "green",
-            cost: "40"
-          },{
-            color: "brown",
-            cost: "60"
-          },{
-            color: "gray",
-            cost: "70"
-          }]
+          revenues: [
+            {
+              color: "yellow",
+              cost: "30"
+            },
+            {
+              color: "green",
+              cost: "40"
+            },
+            {
+              color: "brown",
+              cost: "60"
+            },
+            {
+              color: "gray",
+              cost: "70"
+            }
+          ]
         },
         hexes: ["F15"]
       },
       {
         color: "gray",
-        borders: [{
-          side: 1,
-          color: "red"
-        }],
-        track: [{
-          side: 1,
-          type: "straight"
-        }],
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          }
+        ],
+        track: [
+          {
+            side: 1,
+            type: "straight"
+          }
+        ],
         hexes: ["F17"]
       },
       {
         color: "gray",
-        borders: [{
-          side: 3,
-          color: "red"
-        }],
-        track: [{
-          side: 1,
-          type: "gentle"
-        },{
-          side: 3,
-          type: "gentle"
-        }],
+        borders: [
+          {
+            side: 3,
+            color: "red"
+          }
+        ],
+        track: [
+          {
+            side: 1,
+            type: "gentle"
+          },
+          {
+            side: 3,
+            type: "gentle"
+          }
+        ],
         hexes: ["F19"]
+      },
+      {
+        color: "plain",
+        centerTowns: [
+          {
+            name: {
+              name: "Wieda",
+              rotation: -60
+            }
+          }
+        ],
+        track: [
+          {
+            side: 3,
+            type: "straight",
+            gauge: "line"
+          }
+        ],
+        mountain: {
+          size: "medium",
+          cost: "150M",
+          angle: 300,
+          percent: 0.5
+        },
+        borders: [
+          {
+            side: 4,
+            color: "mountain"
+          },
+          {
+            side: 5,
+            color: "mountain"
+          }
+        ],
+        hexes: ["G2"]
+      },
+      {
+        color: "yellow",
+        cities: [
+          {
+            name: {
+              name: "Zorge"
+            },
+            companies: [
+              {
+                label: "KEZ",
+                color: "maroon"
+              }
+            ]
+          }
+        ],
+        values: [
+          {
+            value: 30,
+            angle: 90,
+            percent: 0.667
+          }
+        ],
+        mountain: {
+          cost: "50M",
+          size: "small",
+          angle: 300,
+          percent: 0.6
+        },
+        track: [
+          {
+            side: 6,
+            gauge: "narrow"
+          }
+        ],
+        borders: [
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          },
+          {
+            side: 1,
+            color: "mountain"
+          },
+          {
+            side: 3,
+            color: "mountain"
+          }
+        ],
+        hexes: ["G4"]
+      },
+      {
+        color: "green",
+        values: [
+          {
+            value: 40,
+            angle: 60,
+            percent: 0.667
+          }
+        ],
+        track: [
+          {
+            side: 2,
+            gauge: "narrow"
+          },
+          {
+            side: 5,
+            gauge: "narrow"
+          }
+        ],
+        cities: [
+          {
+            companies: [
+              {
+                label: "NWE",
+                color: "darkGreen"
+              }
+            ],
+            name: {
+              name: "Benneckenstein",
+              offset: 66.67
+            }
+          }
+        ],
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          },
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
+        hexes: ["G6"]
+      },
+      {
+        color: "plain",
+        mountain: {
+          cost: "100M",
+          size: "medium"
+        },
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          }
+        ],
+        hexes: ["G8"]
+      },
+      {
+        color: "plain",
+        mountain: {
+          cost: "150M",
+          size: "medium"
+        },
+        borders: [
+          {
+            side: 3,
+            color: "red"
+          }
+        ],
+        hexes: ["G10"]
+      },
+      {
+        color: "plain",
+        centerTowns: [
+          {
+            name: {
+              name: "Stiege",
+              reverse: true
+            },
+            angle: 150,
+            percent: 0.5
+          }
+        ],
+        borders: [
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          }
+        ],
+        mountain: {
+          size: "size",
+          cost: "50M",
+          angle: 300,
+          percent: 0.5
+        },
+        hexes: ["G12"]
+      },
+      {
+        color: "plain",
+        centerTowns: [
+          {
+            name: {
+              name: "Allrode",
+              reverse: true
+            },
+            angle: 150,
+            percent: 0.5
+          }
+        ],
+        borders: [
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
+        mountain: {
+          size: "size",
+          cost: "50M",
+          angle: 300,
+          percent: 0.5
+        },
+        hexes: ["G14"]
+      },
+      {
+        color: "plain",
+        centerTowns: [
+          {
+            name: {
+              name: "Friedrichsbrunn",
+              reverse: true
+            },
+            angle: 150,
+            percent: 0.5
+          }
+        ],
+        borders: [
+          {
+            side: 2,
+            color: "red"
+          }
+        ],
+        mountain: {
+          size: "medium",
+          cost: "100M",
+          angle: 300,
+          percent: 0.5
+        },
+        hexes: ["G16"]
+      },
+      {
+        color: "plain",
+        borders: [
+          {
+            side: 4,
+            color: "red"
+          }
+        ],
+        mountain: {
+          size: "medium",
+          cost: "150M"
+        },
+        hexes: ["G18"]
+      },
+      {
+        color: "green",
+        values: [
+          {
+            value: 60,
+            angle: 90,
+            percent: 0.625
+          }
+        ],
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          },
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
+        labels: [
+          {
+            label: "HQG",
+            angle: 195,
+            percent: 0.7
+          }
+        ],
+        cities: [
+          {
+            companies: [
+              {
+                label: "GHE",
+                color: "blue"
+              }
+            ],
+            name: {
+              name: "Gernrode",
+              offset: 66.67
+            }
+          }
+        ],
+        track: [
+          {
+            side: 2
+          },
+          {
+            side: 5
+          },
+          {
+            side: 6,
+            gauge: "narrow"
+          }
+        ],
+        hexes: ["G20"]
+      },
+      {
+        color: "gray",
+        track: [
+          {
+            type: "gentle",
+            side: 3,
+            gauge: "narrow"
+          }
+        ],
+        hexes: ["H1"]
+      },
+      {
+        color: "plain",
+        borders: [
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          },
+          {
+            side: 2,
+            color: "mountain"
+          }
+        ],
+        mountain: {
+          size: "medium",
+          cost: "100M",
+          angle: 90,
+          percent: 0.3333
+        },
+        track: [
+          {
+            type: "gentle",
+            side: 3,
+            gauge: "line"
+          }
+        ],
+        hexes: ["H3"]
+      },
+      {
+        color: "plain",
+        mountain: {
+          size: "medium",
+          cost: "150M"
+        },
+        borders: [
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
+        hexes: ["H5"]
+      },
+      {
+        color: "plain",
+        borders: [
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "mountain"
+          }
+        ],
+        mountain: {
+          size: "medium",
+          cost: "100M",
+          angle: 60,
+          percent: 0.3333
+        },
+        track: [
+          {
+            type: "gentle",
+            side: 2,
+            gauge: "line"
+          }
+        ],
+        hexes: ["H7"]
+      },
+      {
+        color: "gray",
+        values: [
+          {
+            value: 30,
+            angle: -30,
+            percent: 0.725
+          }
+        ],
+        cities: [
+          {
+            size: 2,
+            name: {
+              name: "Eisfelder Talmühle"
+            }
+          }
+        ],
+        track: [
+          {
+            side: 1,
+            gauge: "narrow"
+          },
+          {
+            side: 4,
+            gauge: "narrow"
+          },
+          {
+            side: 6,
+            gauge: "narrow"
+          }
+        ],
+        hexes: ["H9"]
+      },
+      {
+        color: "plain",
+        mountain: {
+          size: "medium",
+          cost: "100M"
+        },
+        borders: [
+          {
+            side: 4,
+            color: "red"
+          }
+        ],
+        hexes: ["H11"]
+      },
+      {
+        color: "green",
+        track: [
+          {
+            side: 2,
+            gauge: "narrow"
+          },
+          {
+            side: 5,
+            gauge: "narrow"
+          }
+        ],
+        cities: [
+          {
+            name: {
+              name: "Güntersberge",
+              reverse: true,
+              offset: 33.33
+            }
+          }
+        ],
+        mountain: {
+          cost: "50M",
+          size: "small",
+          angle: 240,
+          percent: 0.7
+        },
+        values: [
+          {
+            value: 40,
+            angle: 60,
+            percent: 0.775
+          }
+        ],
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          },
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
+        hexes: ["H13"]
+      },
+      {
+        color: "plain",
+        mountain: {
+          size: "medium",
+          cost: "150M"
+        },
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          }
+        ],
+        hexes: ["H15"]
+      },
+      {
+        color: "green",
+        cities: [
+          {
+            name: {
+              name: "Alexisbad",
+              offset: 40
+            }
+          }
+        ],
+        borders: [
+          {
+            side: 5,
+            color: "red"
+          }
+        ],
+        mountain: {
+          cost: "100M",
+          size: "small",
+          angle: 230,
+          percent: 0.8
+        },
+        values: [
+          {
+            value: 40,
+            angle: -60,
+            percent: 0.775
+          }
+        ],
+        track: [
+          {
+            side: 4,
+            gauge: "narrow"
+          },
+          {
+            side: 5,
+            gauge: "narrow"
+          },
+          {
+            side: 6,
+            gauge: "narrow"
+          }
+        ],
+        hexes: ["H17"]
+      },
+      {
+        color: "plain",
+        mountain: {
+          angle: -30,
+          percent: 0.3333,
+          size: "medium",
+          cost: "150M"
+        },
+        borders: [
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
+        track: [
+          {
+            type: "gentle",
+            side: 1,
+            gauge: "line"
+          }
+        ],
+        hexes: ["H19"]
+      },
+      {
+        color: "gray",
+        track: [
+          {
+            side: 2,
+            gauge: "narrow"
+          },
+          {
+            side: 1
+          },
+          {
+            side: 4
+          }
+        ],
+        offBoardRevenue: {
+          angle: 180,
+          percent: 0.5,
+          revenues: [
+            {
+              color: "yellow",
+              cost: "40"
+            },
+            {
+              color: "green",
+              cost: "50"
+            },
+            {
+              color: "brown",
+              cost: "80"
+            },
+            {
+              color: "gray",
+              cost: "120"
+            }
+          ]
+        },
+        cities: [
+          {
+            name: {
+              name: "Walkenried",
+              reverse: true
+            },
+            companies: [
+              {
+                label: "SHE",
+                color: "yellow"
+              }
+            ]
+          }
+        ],
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          },
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
+        hexes: ["I2"]
+      },
+      {
+        color: "gray",
+        track: [
+          {
+            side: 2,
+            gauge: "narrow"
+          },
+          {
+            side: 1
+          },
+          {
+            side: 5
+          }
+        ],
+        offBoardRevenue: {
+          angle: 180,
+          percent: 0.5,
+          revenues: [
+            {
+              color: "yellow",
+              cost: "40"
+            },
+            {
+              color: "green",
+              cost: "50"
+            },
+            {
+              color: "brown",
+              cost: "80"
+            },
+            {
+              color: "gray",
+              cost: "120"
+            }
+          ]
+        },
+        cities: [
+          {
+            name: {
+              name: "Ellrich",
+              reverse: true,
+              offset: 42.5
+            },
+            companies: [
+              {
+                label: "KEZ",
+                color: "maroon"
+              }
+            ]
+          }
+        ],
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          },
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
+        hexes: ["I4"]
+      },
+      {
+        color: "plain",
+        borders: [
+          {
+            side: 6,
+            color: "red"
+          },
+          {
+            side: 2,
+            color: "mountain"
+          }
+        ],
+        centerTowns: [
+          {
+            name: {
+              name: "Netzkater",
+              rotation: -60
+            }
+          }
+        ],
+        track: [
+          {
+            side: 3,
+            type: "straight",
+            gauge: "line"
+          }
+        ],
+        mountain: {
+          size: "medium",
+          cost: "150M",
+          angle: 300,
+          percent: 0.5
+        },
+        hexes: ["I8"]
+      },
+      {
+        color: "plain",
+        mountain: {
+          cost: "150M",
+          size: "medium"
+        },
+        borders: [
+          {
+            side: 3,
+            color: "red"
+          }
+        ],
+        hexes: ["I12"]
+      },
+      {
+        color: "plain",
+        centerTowns: [
+          {
+            name: {
+              name: "Lindenberg",
+              reverse: true
+            },
+            angle: 150,
+            percent: 0.5
+          }
+        ],
+        mountain: {
+          size: "small",
+          cost: "50M",
+          angle: 300,
+          percent: 0.5
+        },
+        borders: [
+          {
+            side: 2,
+            color: "red"
+          }
+        ],
+        hexes: ["I14"]
+      },
+      {
+        color: "plain",
+        centerTowns: [
+          {
+            name: {
+              name: "Silberhütte",
+              reverse: true
+            },
+            angle: 150,
+            percent: 0.5
+          }
+        ],
+        mountain: {
+          size: "medium",
+          cost: "100M",
+          angle: 300,
+          percent: 0.5
+        },
+        borders: [
+          {
+            side: 4,
+            color: "red"
+          }
+        ],
+        hexes: ["I16"]
+      },
+      {
+        color: "gray",
+        track: [
+          {
+            side: 2,
+            gauge: "narrow"
+          }
+        ],
+        offBoardRevenue: {
+          angle: 180,
+          percent: 0.5,
+          revenues: [
+            {
+              color: "yellow",
+              cost: "30"
+            },
+            {
+              color: "green",
+              cost: "40"
+            },
+            {
+              color: "brown",
+              cost: "60"
+            },
+            {
+              color: "gray",
+              cost: "70"
+            }
+          ]
+        },
+        cities: [
+          {
+            name: {
+              name: "Harzgerode",
+              reverse: true
+            },
+            companies: [
+              {
+                label: "GHE",
+                color: "blue"
+              }
+            ]
+          }
+        ],
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          },
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
+        hexes: ["I18"]
+      },
+      {
+        color: "gray",
+        borders: [
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "red"
+          }
+        ],
+        track: [
+          {
+            side: 2,
+            type: "gentle"
+          }
+        ],
+        hexes: ["J5"]
+      },
+      {
+        color: "gray",
+        track: [
+          {
+            side: 3,
+            gauge: "narrow"
+          },
+          {
+            side: 1
+          },
+          {
+            side: 4
+          }
+        ],
+        offBoardRevenue: {
+          angle: 180,
+          percent: 0.5,
+          revenues: [
+            {
+              color: "yellow",
+              cost: "60"
+            },
+            {
+              color: "green",
+              cost: "80"
+            },
+            {
+              color: "brown",
+              cost: "120"
+            },
+            {
+              color: "gray",
+              cost: "180"
+            }
+          ]
+        },
+        cities: [
+          {
+            name: {
+              name: "Nordhaussen",
+              reverse: true
+            },
+            companies: [
+              {
+                label: "NWE",
+                color: "darkGreen"
+              }
+            ]
+          }
+        ],
+        borders: [
+          {
+            side: 1,
+            color: "red"
+          },
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 3,
+            color: "red"
+          },
+          {
+            side: 4,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
+          },
+          {
+            side: 6,
+            color: "red"
+          }
+        ],
+        hexes: ["J7"]
       }
     ]
   }

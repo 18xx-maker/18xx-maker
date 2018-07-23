@@ -3,6 +3,8 @@ import { colors } from "./data";
 
 const Title = ({ game }) => {
   let size = game.info.titleSize || 200;
+  let subSize = game.info.subTitleSize || 30;
+  let designerSize = game.info.designerSize || 20;
   return (
     <g
       transform={`translate(${game.info.titleX || 0} ${game.info.titleY ||
@@ -26,7 +28,7 @@ const Title = ({ game }) => {
           fill={colors["black"]}
           fontFamily="Bitter"
           fontWeight="bold"
-          fontSize="30"
+          fontSize={subSize}
           alignmentBaseline="hanging"
           textAnchor="start"
           lengthAdjust="spacingAndGlyphs"
@@ -40,7 +42,7 @@ const Title = ({ game }) => {
         fill={colors["black"]}
         fontFamily="Bitter"
         fontWeight="bold"
-        fontSize="20"
+        fontSize={designerSize}
         alignmentBaseline="hanging"
         textAnchor="start"
         lengthAdjust="spacingAndGlyphs"
