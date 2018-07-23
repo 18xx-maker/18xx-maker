@@ -6,6 +6,9 @@ import Title from "./Title";
 import HexContext from "./context/HexContext";
 import util from "./util";
 import * as data from "./data";
+import * as R from "ramda";
+
+import "./MapPaginated.css";
 
 const MapPaginated = ({ match }) => {
   let game = games[match.params.game];
@@ -26,6 +29,35 @@ const MapPaginated = ({ match }) => {
     totalHeight = tmp;
   }
 
+  let pageWidth = data.paper.width - 75;
+  let pageHeight = data.paper.height - 75;
+
+  let y = -25; // Start with room for margins
+  let mapPages = R.map(height => {
+    let x = -25; // Start with room for margins
+    let pages = R.map(width => {
+      let page = (
+        <div className="cutlines">
+          <div className="MapPage">
+            <svg
+              width={width + 25}
+              height={height + 25}
+              viewBox={`${x - 12.5} ${y - 12.5} ${width + 25} ${height + 25}`}
+            >
+              <use href={`#${game.info.title}_map`} />
+            </svg>
+          </div>
+        </div>
+      );
+
+      x = x + width;
+      return page;
+    }, util.pages(totalWidth + 50, pageWidth));
+
+    y = y + height;
+    return pages;
+  }, util.pages(totalHeight + 50, pageHeight));
+
   return (
     <HexContext.Provider
       value={{
@@ -41,20 +73,7 @@ const MapPaginated = ({ match }) => {
           </g>
         </defs>
       </Svg>
-      <div className="cutlines">
-        <div className="map">
-          <svg width={data.paper.width - 150} height={data.paper.height - 150} viewBox={`0 0 ${data.paper.width - 150} ${data.paper.height - 150}`} >
-            <use href={`#${game.info.title}_map`} />
-          </svg>
-        </div>
-      </div>
-      <div className="cutlines">
-        <div className="map">
-          <svg width={data.paper.width - 150} height={data.paper.height - 150} viewBox={`650 0 ${data.paper.width - 150} ${data.paper.height - 150}`} >
-            <use href={`#${game.info.title}_map`} />
-          </svg>
-        </div>
-      </div>
+      {mapPages}
     </HexContext.Provider>
   );
 };
