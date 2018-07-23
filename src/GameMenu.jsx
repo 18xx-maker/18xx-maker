@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./Game.css";
+import "./GameMenu.css";
 
-const Game = ({ match }) => {
+const GameMenu = ({ match }) => {
   let game = match.params.game;
 
   return (
@@ -56,4 +56,4 @@ const Game = ({ match }) => {
   );
 };
 
-export default Game;
+export default GameMenu;
