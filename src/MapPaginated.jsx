@@ -54,7 +54,7 @@ const MapPaginated = ({ match }) => {
               }}
               viewBox={`${x - 12.5} ${y - 12.5} ${width + 25} ${height + 25}`}
             >
-              <use href={`#${game.info.title}_map`} />
+              <use href={`#${game.info.abbrev || game.info.title}_map`} />
             </svg>
           </div>
         </div>
@@ -69,7 +69,7 @@ const MapPaginated = ({ match }) => {
   }, util.pages(totalHeight + 50, pageHeight));
 
   let defs = (
-    <g id={`${game.info.title}_map`}>
+    <g id={`${game.info.abbrev || game.info.title}_map`}>
       <Title game={game} />
       <Map game={game} />
     </g>

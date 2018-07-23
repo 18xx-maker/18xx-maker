@@ -57,7 +57,7 @@ const makeBorder = track => {
   let type = track.type || util.trackType(track);
   return (
     <g transform={transform} key={`track-board-${type}-${point}`}>
-      <Track type={track.type || util.trackType(track)} border={true} />
+      <Track type={track.type || util.trackType(track)} gauge={track.gauge} border={true} />
     </g>
   );
 };
@@ -154,8 +154,6 @@ const HexTile = ({ hex, id, border }) => {
     <g>
       <Hex color={hex.color} />
 
-      {id && <Id id={id} />}
-
       <HexContext.Consumer>
         {hx => (
           <g clipPath="url(#hexClip)" transform={`rotate(${hx.rotation || 0})`}>
@@ -182,6 +180,8 @@ const HexTile = ({ hex, id, border }) => {
       </HexContext.Consumer>
 
       {border && <Hex border={true} />}
+
+      {id && <Id id={id} />}
 
       {tunnels}
       {bridges}

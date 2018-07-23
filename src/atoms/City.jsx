@@ -69,7 +69,6 @@ const City = ({ size, companies, border, name, rotation }) => {
             cx="0"
             cy="0"
             r="25"
-            clipPath="url(#hexClip)"
           />
           {companyLabel(0)}
           {nameNode}

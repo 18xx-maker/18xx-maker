@@ -14,7 +14,7 @@ const Border = ({ color, border }) => {
             d={`m ${0.5 * edge} 75 L ${-0.5 * edge} 75`}
             fill="none"
             stroke={colors["border"]}
-            strokeWidth="22"
+            strokeWidth="12"
             strokeLinecap="round"
             strokeLinejoin="round"
             transform={`rotate(${hx.rotation})`}
@@ -30,7 +30,7 @@ const Border = ({ color, border }) => {
             d={`m ${0.5 * edge} 75 L ${-0.5 * edge} 75`}
             fill="none"
             stroke={colors[color]}
-            strokeWidth="18"
+            strokeWidth="8"
             strokeLinecap="round"
             strokeLinejoin="round"
             transform={`rotate(${hx.rotation})`}
