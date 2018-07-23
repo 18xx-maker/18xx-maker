@@ -43,11 +43,11 @@ const Mountain = ({ size, cost, border }) => {
       />
       <text
         fill={colors["black"]}
-        fontSize="14"
+        fontSize={cost.length > 3 ? 12 : 14}
         alignmentBaseline="hanging"
         textAnchor="middle"
         x="0"
-        y="10"
+        y={border ? 5 : 10}
       >
         {cost}
       </text>
