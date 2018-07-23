@@ -9,7 +9,8 @@ import Positioning from "./Positioning";
 
 import Background from "./Background";
 import Charters from "./Charters";
-import Map from "./Map";
+import MapPaginated from "./MapPaginated";
+import MapSingle from "./MapSingle";
 import Home from "./Home";
 import Game from "./Game";
 import IPO from "./IPO";
@@ -38,7 +39,8 @@ class App extends Component {
             <Route path="/:game/background" component={Background} />
             <Route path="/:game/charters" component={Charters} />
             <Route path="/:game/ipo" component={IPO} />
-            <Route path="/:game/map" component={Map} />
+            <Route exact path="/:game/map" component={MapSingle} />
+            <Route path="/:game/map-paginated" component={MapPaginated} />
             <Route path="/:game/privates" component={Privates} />
             <Route path="/:game/revenue" component={Revenue} />
             <Route path="/:game/shares" component={Shares} />

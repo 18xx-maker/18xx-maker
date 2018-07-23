@@ -37,8 +37,8 @@ const colors = {
 
 // Height and width of paper in SVG units without print margins
 const paper = {
-  width: 800,
-  height: 1025
+  width: 800, // 0.25in side margins
+  height: 1025 // 0.25in top and 0.50in bottom margins
 };
 
 const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
