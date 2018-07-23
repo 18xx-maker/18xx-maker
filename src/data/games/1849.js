@@ -8,7 +8,6 @@ const game = {
     width: 150,
     orientation: "horizontal",
     titleY: 900,
-    titleX: 50,
     extraTokens: 2,
     color_5: "water"
   },
@@ -613,6 +612,7 @@ const game = {
   ],
 
   map: {
+    print: "landscape",
     hexes: [
       {
         color: "water",

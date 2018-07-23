@@ -32,6 +32,14 @@ const MapPaginated = ({ match }) => {
   let pageWidth = data.paper.width - 75;
   let pageHeight = data.paper.height - 75;
 
+  if (game.map.print === "landscape") {
+    let tmp = pageWidth;
+    pageWidth = pageHeight;
+    pageHeight = tmp;
+  }
+
+  console.log({ totalWidth, totalHeight, pageWidth, pageHeight });
+
   let y = -25; // Start with room for margins
   let mapPages = R.map(height => {
     let x = -25; // Start with room for margins
@@ -40,8 +48,10 @@ const MapPaginated = ({ match }) => {
         <div className="cutlines">
           <div className="MapPage">
             <svg
-              width={width + 25}
-              height={height + 25}
+              style={{
+                width: `${(width + 25) / 100}in`,
+                height: `${(height + 25) / 100}in`
+              }}
               viewBox={`${x - 12.5} ${y - 12.5} ${width + 25} ${height + 25}`}
             >
               <use href={`#${game.info.title}_map`} />
@@ -58,6 +68,13 @@ const MapPaginated = ({ match }) => {
     return pages;
   }, util.pages(totalHeight + 50, pageHeight));
 
+  let defs = (
+    <g id={`${game.info.title}_map`}>
+      <Title game={game} />
+      <Map game={game} />
+    </g>
+  );
+
   return (
     <HexContext.Provider
       value={{
@@ -65,14 +82,11 @@ const MapPaginated = ({ match }) => {
         rotation: game.info.orientation === "horizontal" ? 0 : 90
       }}
     >
-      <Svg>
-        <defs>
-          <g id={`${game.info.title}_map`}>
-            <Title game={game} />
-            <Map game={game} />
-          </g>
-        </defs>
-      </Svg>
+      <Svg className="FullMap" defs={defs} />
+      <div className="PrintNotes">
+        This map is meant to be printed in{" "}
+        <span>{game.map.print || "portrait"}</span> mode
+      </div>
       {mapPages}
     </HexContext.Provider>
   );

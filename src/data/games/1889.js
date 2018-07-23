@@ -483,6 +483,7 @@ const game = {
   },
 
   map: {
+    print: "landscape",
     hexes: [
       {
         color: "plain",
