@@ -957,7 +957,7 @@ const game = {
       {
         color: "yellow",
         mountain: {
-          cost: "50",
+          cost: "50M",
           angle: 180,
           border: true,
           percent: 0.7
@@ -1234,7 +1234,7 @@ const game = {
           }
         ],
         mountain: {
-          cost: "50",
+          cost: "50M",
           size: "small",
           border: true,
           angle: 300,
@@ -1586,7 +1586,7 @@ const game = {
           percent: 0.6,
           border: true,
           size: "small",
-          cost: "50"
+          cost: "50M"
         },
         cities: [
           {
@@ -1646,7 +1646,7 @@ const game = {
           percent: 0.6,
           size: "small",
           border: true,
-          cost: "50"
+          cost: "50M"
         },
         borders: [
           {
@@ -1762,7 +1762,7 @@ const game = {
         mountain: {
           angle: 180,
           percent: 0.75,
-          cost: "50",
+          cost: "50M",
           size: "small",
           border: true
         },
@@ -2406,7 +2406,7 @@ const game = {
           }
         ],
         mountain: {
-          cost: "50",
+          cost: "50M",
           size: "small",
           angle: 240,
           percent: 0.7,
@@ -2478,7 +2478,7 @@ const game = {
           }
         ],
         mountain: {
-          cost: "100",
+          cost: "100M",
           size: "small",
           border: true,
           angle: 230,
