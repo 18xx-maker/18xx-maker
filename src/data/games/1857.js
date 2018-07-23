@@ -8,7 +8,8 @@ const game = {
     orientation: "horizontal",
     titleY: 675,
     titleRotate: -90,
-    extraTokens: 4,
+    extraTokens: 3,
+    extraHomeTokens: 1,
     color_10: "orange"
   },
 
