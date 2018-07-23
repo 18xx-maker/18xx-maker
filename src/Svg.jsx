@@ -1,7 +1,7 @@
 import React from "react";
 import { colors } from "./data";
 
-const Svg = ({ width, height, viewBox, style, defs, children }) => {
+const Svg = ({ className, width, height, viewBox, style, defs, children }) => {
   return (
     <svg
       version="1.1"
@@ -10,6 +10,7 @@ const Svg = ({ width, height, viewBox, style, defs, children }) => {
       height={height}
       viewBox={viewBox}
       style={style}
+      className={className}
     >
       <defs>
         <style>

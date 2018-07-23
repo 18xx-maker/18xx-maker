@@ -21,7 +21,8 @@ const Games = () => {
             </li>
           )}
           <li>
-            <Link to={`/${game}/map`}>Map</Link>
+            <Link to={`/${game}/map`}>Map</Link>&nbsp;/&nbsp;
+            <Link to={`/${game}/map-paginated`}>Paginated</Link>
           </li>
           <li>
             <Link to={`/${game}/privates`}>Privates</Link>

@@ -1,4 +1,35 @@
 .MapPage {
-  overflow: hidden;
   position: relative;
+}
+
+.MapPage svg {
+  overflow: hidden;
+  display: block;
+}
+
+.FullMap {
+  display: none;
+}
+
+.PrintNotes {
+  position: fixed;
+  z-index: 10;
+  background: #ccc;
+  border: 2px solid black;
+  border-width: 0 2px 2px 0;
+  border-bottom-right-radius: 5px;
+  padding: 2px 8px;
+  margin: auto auto;
+  font-weight: normal;
+  font-family: sans-serif;
+}
+
+.PrintNotes span {
+  font-weight: bold;
+}
+
+@media print {
+  .PrintNotes {
+    display: none;
+  }
 }
