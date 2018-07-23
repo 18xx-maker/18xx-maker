@@ -12,7 +12,6 @@ import Charters from "./Charters";
 import MapPaginated from "./MapPaginated";
 import MapSingle from "./MapSingle";
 import Home from "./Home";
-import Game from "./Game";
 import IPO from "./IPO";
 import Privates from "./Privates";
 import Revenue from "./Revenue";
@@ -21,6 +20,9 @@ import Stock from "./Stock";
 import Trains from "./Trains";
 import Tokens from "./Tokens";
 import TileSheet from "./TileSheet";
+
+import GameMenu from "./GameMenu";
+import TilesMenu from "./TilesMenu";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -48,7 +50,8 @@ class App extends Component {
             <Route path="/:game/tokens" component={Tokens} />
             <Route path="/:game/trains" component={Trains} />
           </Switch>
-        <Route path="/:game([0-9_-]+)/" strict component={Game} />
+          <Route path="/:game([0-9_-]+)/" strict component={GameMenu} />
+          <Route path="/tiles/" component={TilesMenu} />
         </div>
       </Router>
     );
