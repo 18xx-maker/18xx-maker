@@ -770,11 +770,16 @@ ul.notes li span {
 
 @media screen {
   .App {
+    padding-right: 0.25in;
     padding-left: 0.25in;
-    padding-bottom: 1in;
+    padding-bottom: 0.5in;
   }
 
   .Footer {
     left: 0;
+  }
+
+  .PrintNotes {
+    right: 0;
   }
 }
