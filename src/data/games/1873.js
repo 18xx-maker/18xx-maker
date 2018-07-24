@@ -553,7 +553,8 @@ const game = {
           }
         ],
         offBoardRevenue: {
-          percent: 0.5,
+          angle: 180,
+          percent: 0.8,
           revenues: [
             {
               color: "yellow",
@@ -579,7 +580,6 @@ const game = {
         color: "gray",
         industries: [
           {
-            angle: 180,
             percent: 0.8,
             top: "ZW",
             bottom: "+70"
@@ -604,7 +604,8 @@ const game = {
           }
         ],
         offBoardRevenue: {
-          percent: 0.55,
+          angle: 180,
+          percent: 0.8,
           revenues: [
             {
               color: "yellow",
@@ -717,7 +718,7 @@ const game = {
         ],
         offBoardRevenue: {
           angle: 180,
-          percent: 0.5,
+          percent: 0.8,
           revenues: [
             {
               color: "yellow",
@@ -1989,7 +1990,7 @@ const game = {
           }
         ],
         offBoardRevenue: {
-          percent: 0.55,
+          percent: 0.6,
           revenues: [
             {
               color: "yellow",
@@ -2770,8 +2771,7 @@ const game = {
           }
         ],
         offBoardRevenue: {
-          angle: 180,
-          percent: 0.5,
+          percent: 0.8,
           revenues: [
             {
               color: "yellow",
@@ -2848,8 +2848,8 @@ const game = {
           }
         ],
         offBoardRevenue: {
-          angle: 180,
-          percent: 0.5,
+          angle: 270,
+          percent: 1.2,
           revenues: [
             {
               color: "yellow",
@@ -3063,8 +3063,7 @@ const game = {
           }
         ],
         offBoardRevenue: {
-          angle: 180,
-          percent: 0.5,
+          percent: 0.8,
           revenues: [
             {
               color: "yellow",
@@ -3162,8 +3161,7 @@ const game = {
           }
         ],
         offBoardRevenue: {
-          angle: 180,
-          percent: 0.5,
+          percent: 0.8,
           revenues: [
             {
               color: "yellow",

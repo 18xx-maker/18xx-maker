@@ -3,7 +3,7 @@ import { colors } from "../data";
 import * as R from "ramda";
 
 const OffBoardRevenue = ({ revenues }) => {
-  let letter = 8;
+  let letter = 10;
   let totalWidth = R.sum(
     R.map(r => 5 + letter * R.max(r.cost.length, 2), revenues)
   );

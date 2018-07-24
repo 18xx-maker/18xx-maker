@@ -60,7 +60,11 @@ const makeBorder = track => {
   let type = track.type || util.trackType(track);
   return (
     <g transform={transform} key={`track-board-${type}-${point}`}>
-      <Track type={track.type || util.trackType(track)} gauge={track.gauge} border={true} />
+      <Track
+        type={track.type || util.trackType(track)}
+        gauge={track.gauge}
+        border={true}
+      />
     </g>
   );
 };
@@ -147,7 +151,9 @@ const HexTile = ({ hex, id, border }) => {
 
   let values = <Position data={hex.values}>{v => <Value {...v} />}</Position>;
 
-  let industries = <Position data={hex.industries}>{i => <Industry {...i} />}</Position>;
+  let industries = (
+    <Position data={hex.industries}>{i => <Industry {...i} />}</Position>
+  );
 
   let tokens = <Position data={hex.tokens}>{t => <Token {...t} />}</Position>;
 
@@ -184,6 +190,8 @@ const HexTile = ({ hex, id, border }) => {
       {border && <Hex border={true} />}
 
       {id && <Id id={id} />}
+
+      {offBoardRevenue}
 
       {tunnels}
       {bridges}
