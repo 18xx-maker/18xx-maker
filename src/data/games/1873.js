@@ -8,6 +8,7 @@ const game = {
     background: "brown",
     titleSize: 108,
     subTitleSize: 28,
+    extraTokens: 2,
     width: 150
   },
 
@@ -642,6 +643,13 @@ const game = {
             gauge: "line"
           }
         ],
+        tokens: [{
+          label: "HBE",
+          width: 15,
+          color: "red",
+          angle: 60,
+          percent: 0.75
+        }],
         hexes: ["B17"]
       },
       {
@@ -776,6 +784,13 @@ const game = {
             gauge: "line"
           }
         ],
+        tokens: [{
+          label: "NWE",
+          width: 15,
+          color: "darkGreen",
+          angle: 240,
+          percent: 0.75
+        }],
         borders: [
           {
             side: 5,
@@ -803,6 +818,13 @@ const game = {
             color: "mountain"
           }
         ],
+        tokens: [{
+          label: "WBE",
+          width: 15,
+          color: "black",
+          angle: 300,
+          percent: 0.7
+        }],
         hexes: ["C10"]
       },
       {
@@ -830,6 +852,13 @@ const game = {
             color: "mountain"
           }
         ],
+        tokens: [{
+          label: "WBE",
+          width: 15,
+          color: "black",
+          angle: 300,
+          percent: 0.7
+        }],
         hexes: ["C12"]
       },
       {
@@ -861,6 +890,13 @@ const game = {
             color: "mountain"
           }
         ],
+        tokens: [{
+          label: "WBE",
+          width: 15,
+          color: "black",
+          angle: 300,
+          percent: 0.7
+        }],
         hexes: ["C14"]
       },
       {
@@ -968,6 +1004,13 @@ const game = {
             color: "red"
           }
         ],
+        tokens: [{
+          label: "NWE",
+          width: 15,
+          color: "darkGreen",
+          angle: 240,
+          percent: 0.75
+        }],
         hexes: ["D7"]
       },
       {
@@ -1346,6 +1389,13 @@ const game = {
             color: "red"
           }
         ],
+        tokens: [{
+          label: "NWE",
+          width: 15,
+          color: "darkGreen",
+          angle: 240,
+          percent: 0.75
+        }],
         hexes: ["E6"]
       },
       {
@@ -1649,6 +1699,13 @@ const game = {
             color: "red"
           }
         ],
+        tokens: [{
+          label: "SHE",
+          width: 15,
+          color: "yellow",
+          angle: 240,
+          percent: 0.75
+        }],
         hexes: ["F3"]
       },
       {
@@ -1864,20 +1921,6 @@ const game = {
       },
       {
         color: "gray",
-        borders: [
-          {
-            side: 1,
-            color: "red"
-          },
-          {
-            side: 4,
-            color: "red"
-          }
-        ],
-        hexes: ["F13"]
-      },
-      {
-        color: "gray",
         industries: [
           {
             top: "15",
@@ -2029,6 +2072,13 @@ const game = {
             color: "mountain"
           }
         ],
+        tokens: [{
+          label: "SHE",
+          width: 15,
+          color: "yellow",
+          angle: 240,
+          percent: 0.75
+        }],
         hexes: ["G2"]
       },
       {
@@ -2405,6 +2455,12 @@ const game = {
             gauge: "line"
           }
         ],
+        tokens: [{
+          label: "KEZ",
+          width: 15,
+          color: "maroon",
+          percent: 0.7
+        }],
         hexes: ["H3"]
       },
       {
@@ -2454,6 +2510,13 @@ const game = {
             gauge: "line"
           }
         ],
+        tokens: [{
+          label: "NWE",
+          width: 15,
+          color: "darkGreen",
+          angle: 240,
+          percent: 0.75
+        }],
         hexes: ["H7"]
       },
       {
@@ -2659,6 +2722,13 @@ const game = {
             gauge: "line"
           }
         ],
+        tokens: [{
+          label: "GHE",
+          width: 15,
+          color: "blue",
+          angle: 240,
+          percent: 0.75
+        }],
         hexes: ["H19"]
       },
       {
@@ -2859,6 +2929,13 @@ const game = {
           angle: 300,
           percent: 0.5
         },
+        tokens: [{
+          label: "NWE",
+          width: 15,
+          color: "darkGreen",
+          angle: 240,
+          percent: 0.75
+        }],
         hexes: ["I8"]
       },
       {

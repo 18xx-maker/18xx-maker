@@ -25,6 +25,8 @@ import Mountain from "./atoms/Mountain";
 import Tunnel from "./atoms/Tunnel";
 import Border from "./atoms/Border";
 
+import Token from "./Token";
+
 const concat = R.unapply(R.reduce(R.concat, []));
 
 const makeOffBoardTrack = track => {
@@ -151,7 +153,9 @@ const HexTile = ({ hex, id, border }) => {
 
   let values = <Position data={hex.values}>{v => <Value {...v} />}</Position>;
 
-  let industries = <Position data={hex.industries}>{v => <Industry {...v} />}</Position>;
+  let industries = <Position data={hex.industries}>{i => <Industry {...i} />}</Position>;
+
+  let tokens = <Position data={hex.tokens}>{t => <Token {...t} />}</Position>;
 
   return (
     <g>
@@ -174,6 +178,7 @@ const HexTile = ({ hex, id, border }) => {
               {towns}
               {centerTowns}
               {labels}
+              {tokens}
               {offBoardRevenue}
               {borderBorders}
               {divides}

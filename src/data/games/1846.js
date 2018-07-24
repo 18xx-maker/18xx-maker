@@ -111,7 +111,7 @@ const game = {
     },
     {
       name: "Erie",
-      abbrev: "Erie",
+      abbrev: "ERIE",
       tokens: ["Free", "$80", "$80", "$80 / $40"],
       color: "yellow",
       shares: [

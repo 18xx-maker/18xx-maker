@@ -12,7 +12,7 @@ const Token = ({ icon, label, color, labelColor, inverse, outline, width }) => {
   width = width || 25;
 
   let content = icon ? (
-    <use href={icon} transform="scale(1.66666 1.66666)"/>
+    <use href={icon} transform="scale(1.66666 1.66666)" />
   ) : (
     <text
       fontFamily="Bitter"
@@ -21,7 +21,7 @@ const Token = ({ icon, label, color, labelColor, inverse, outline, width }) => {
       strokeWidth="0.5"
       stroke={tokenLabelStroke}
       fill={tokenLabelColor}
-      textLength={label.length > 2 ? 40 : 26}
+      textLength={label.length > 2 ? width * 2 - width * 0.3333 : width}
       lengthAdjust="spacingAndGlyphs"
       x="0"
       y="0"
