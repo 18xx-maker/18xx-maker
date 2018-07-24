@@ -7,7 +7,8 @@ const game = {
     background: "water",
     width: 150,
     orientation: "horizontal",
-    titleY: -30,
+    titleY: 720,
+    titleX: 12,
     color_10: "orange"
   },
 
