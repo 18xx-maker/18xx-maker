@@ -13,6 +13,19 @@
   align-content: flex-end;
 }
 
+.Token {
+  position: relative;
+}
+
+.Token i {
+  position: absolute;
+  bottom: -0.20in;
+  display: block;
+  height: 0.20in;
+  width: 0.6in;
+  font-size: 0.16in;
+}
+
 .Arrow {
   position: absolute;
   bottom: 2mm;
