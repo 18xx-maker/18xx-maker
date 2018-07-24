@@ -1,13 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import games from "./data/games";
+import * as R from "ramda";
 
 import "./GameMenu.css";
 
-const GameMenu = ({ match }) => {
+const GameMenu = ({ match, location }) => {
   let game = match.params.game;
+
+  let gameList = R.map(
+    title => (
+      <li>
+        <Link to={location.pathname.replace(game, title)}>{title}</Link>
+      </li>
+    ),
+    R.keys(games)
+  );
 
   return (
     <div className="GameMenu">
+      <h1>Games</h1>
+      <nav>
+        <ul>{gameList}</ul>
+      </nav>
       <h1>{game}</h1>
       <nav>
         <ul>
@@ -39,7 +54,7 @@ const GameMenu = ({ match }) => {
             <Link to="shares">Shares</Link>
           </li>
           <li>
-            <Link to="stock">Stock</Link>
+            <Link to="stock">Stock Market</Link>
           </li>
           <li>
             <Link to="tiles">Tiles</Link>

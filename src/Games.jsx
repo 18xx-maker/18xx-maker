@@ -34,7 +34,7 @@ const Games = () => {
             <Link to={`/${game}/shares`}>Shares</Link>
           </li>
           <li>
-            <Link to={`/${game}/stock`}>Stock</Link>
+            <Link to={`/${game}/stock`}>Stock Market</Link>
           </li>
           <li>
             <Link to={`/${game}/tiles`}>Tiles</Link>

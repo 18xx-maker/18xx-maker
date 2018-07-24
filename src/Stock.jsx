@@ -15,6 +15,9 @@ const Stock = ({ match }) => {
 
   return (
     <div className="stock">
+      <div className="PrintNotes">
+        Stock Market is meant to be printed in <b>landscape</b> mode
+      </div>
       <Market {...stock} title={game.info.title} />
       <Rounds rounds={game.rounds} />
       {stock.par && <Par par={stock.par} />}

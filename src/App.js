@@ -24,6 +24,8 @@ import TileSheet from "./TileSheet";
 import GameMenu from "./GameMenu";
 import TilesMenu from "./TilesMenu";
 
+import Footer from "./Footer";
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
@@ -52,6 +54,7 @@ class App extends Component {
           </Switch>
           <Route path="/:game([0-9_-]+)/" strict component={GameMenu} />
           <Route path="/tiles/" component={TilesMenu} />
+          <Footer/>
         </div>
       </Router>
     );

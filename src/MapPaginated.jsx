@@ -84,8 +84,8 @@ const MapPaginated = ({ match }) => {
     >
       <Svg className="FullMap" defs={defs} />
       <div className="PrintNotes">
-        This map is meant to be printed in{" "}
-        <span>{game.map.print || "portrait"}</span> mode
+        This map is meant to be printed in <b>{game.map.print || "portrait"}</b>{" "}
+        mode
       </div>
       {mapPages}
     </HexContext.Provider>
