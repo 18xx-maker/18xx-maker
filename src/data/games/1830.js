@@ -590,15 +590,18 @@ const game = {
     legend: [
       {
         color: "yellow",
-        description: "Certificates no longer count towards the share limit"
+        description: "Certificates no longer count towards the share limit",
+        icon: "certificate"
       },
       {
         color: "orange",
-        description: "Players may own more than 60% of the company"
+        description: "Players may own more than 60% of the company",
+        icon: "percentage"
       },
       {
         color: "brown",
-        description: "Multiple certificates may be bought in the same turn"
+        description: "Multiple certificates may be bought in the same turn",
+        icon: "money-bill-wave"
       }
     ]
   },

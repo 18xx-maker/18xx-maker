@@ -35,11 +35,19 @@
 
 .Legend li {
   margin: 0.05in 0 0 0 !important;
+  padding-left: 0.35in !important;
 
   font-size: 0.13in !important;
 
   padding: 0.01in 0.1in;
   border-radius: 0.1in;
+  position: relative;
+}
+
+.Legend li i {
+  position: absolute;
+  display: inline-block !important;
+  left: 0 !important;
 }
 
 .Movement {
