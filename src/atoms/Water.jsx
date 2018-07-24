@@ -67,7 +67,7 @@ const Water = ({ size, cost, border }) => {
         alignmentBaseline="hanging"
         textAnchor="middle"
         x="0"
-        y={-5 + fontSize * 0.5}
+        y={-6 + fontSize * 0.8}
       >
         {cost}
       </text>
