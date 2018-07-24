@@ -19,11 +19,11 @@
 
 .Token i {
   position: absolute;
-  bottom: -0.20in;
+  bottom: -0.15in;
   display: block;
-  height: 0.20in;
-  width: 0.6in;
-  font-size: 0.16in;
+  height: 0.15in;
+  width: 0.5in;
+  font-size: 0.12in;
 }
 
 .Arrow {
@@ -40,6 +40,7 @@
 
 .Legend {
   width: 3in;
+  margin-right: 0.125in;
 }
 
 .Legend ul {
@@ -47,7 +48,7 @@
 }
 
 .Legend li {
-  margin: 0.05in 0 0 0 !important;
+  margin: 0 0 0.05in 0 !important;
   padding-left: 0.35in !important;
 
   font-size: 0.13in !important;
@@ -64,7 +65,7 @@
 }
 
 .Movement {
-  width: 3in;
+  width: 100%;
 
   display: grid;
   grid-template-rows: 1fr 0.8in 1fr;
@@ -72,24 +73,51 @@
   grid-template-areas: "up up up" "left center right" "down down down";
 
   font-size: 0.15in;
-  margin-bottom: 0.20in;
+  margin-top: 0.10in;
+
+  border: 1px solid black;
+  background-color: rgb(252,241,222);
+
+  box-sizing: border-box;
 }
 
 .Movement--item {
   padding: 0.1in;
+  font-size: 0.12in;
 }
 
 .Movement__center {
-  font-size: 0.5in;
+  font-size: 0.3in;
   grid-area: center;
+  position: relative;
 }
 
 .Movement__center i {
   display: block;
   text-align: center;
-  height: 0.6in;
-  line-height: 0.6in;
-  padding: 0.1in;
+  position: absolute;
+}
+
+.Movement__center i.fa-long-arrow-up {
+  top: 0;
+  width: 100%;
+}
+
+.Movement__center i.fa-long-arrow-down {
+  bottom: 0;
+  width: 100%;
+}
+
+.Movement__center i.fa-long-arrow-left {
+  left: 0;
+  height: 100%;
+  line-height: 0.8in;
+}
+
+.Movement__center i.fa-long-arrow-right {
+  right: 0;
+  height: 100%;
+  line-height: 0.8in;
 }
 
 .Movement__up {
@@ -114,7 +142,6 @@
   flex-direction: row-reverse;
   justify-content: end;
   align-items: center;
-  text-align: right;
 }
 
 .Movement__right {
@@ -123,5 +150,4 @@
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  text-align: left;
 }

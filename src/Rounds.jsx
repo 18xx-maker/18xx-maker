@@ -14,7 +14,7 @@ const Rounds = ({ rounds }) => {
             labelColor="black"
           />
         </svg>
-        {index > 0 && <i className="fas fa-arrow-up" />}
+        {index > 0 && <i className="fal fa-arrow-up" />}
       </div>
     ),
     rounds
