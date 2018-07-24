@@ -698,7 +698,7 @@ const game = {
         color: "yellow",
         water: {
           angle: 180,
-          percent: 0.667,
+          percent: 0.6,
           cost: "$80",
           size: "small"
         },
@@ -1153,7 +1153,8 @@ const game = {
         mountain: {
           cost: "$120",
           size: "medium",
-          y: -25
+          percent: 0.5,
+          angle: 180
         },
         cities: [
           {
