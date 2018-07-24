@@ -1928,8 +1928,8 @@ const tiles = {
     color: "yellow",
     values: [
       {
-        angle: 200,
-        percent: 0.75,
+        angle: 210,
+        percent: 0.8,
         value: 40
       }
     ],
@@ -1942,9 +1942,10 @@ const tiles = {
       }
     ],
     mountain: {
-      angle: 160,
+      angle: 150,
       percent: 0.8,
       cost: "80",
+      size: "tiny",
       border: true
     },
     track: [{ side: 1 }, { side: 3 }]
@@ -1977,15 +1978,16 @@ const tiles = {
     color: "green",
     values: [
       {
-        angle: 200,
-        percent: 0.75,
+        angle: 210,
+        percent: 0.8,
         value: 60
       }
     ],
     mountain: {
-      angle: 160,
+      angle: 150,
       percent: 0.8,
       cost: "80",
+      size: "tiny",
       border: true
     },
     cities: [

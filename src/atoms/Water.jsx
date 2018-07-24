@@ -3,36 +3,54 @@ import { colors } from "../data";
 
 const Water = ({ size, cost, border }) => {
   let path;
-  let width = 2;
+  let radius;
+  let fontSize;
+  let width;
   switch (size) {
     case "large":
       path =
-        "M -52.5 -10   C -52.5   5,  -22.5   5,  -22.5 -10   C -22.5   5,    7.5   5,    7.5 -10   C  7.5   5,   37.5   5,   37.5 -10 " +
-        "M -37.5 -32.5 C -37.5 -17.5, -7.5 -17.5, -7.5 -32.5 C  -7.5 -17.5, 22.5 -17.5, 22.5 -32.5 C 22.5 -17.5, 52.5 -17.5, 52.5 -32.5 ";
+        "M -35 -10 a 10 10 0 0 0 20 0 a 10 10 0 0 0 20 0 a 10 10 0 0 0 20 0" +
+        "M -25 -30 a 10 10 0 0 0 20 0 a 10 10 0 0 0 20 0 a 10 10 0 0 0 20 0";
+      radius = 52;
+      fontSize = 22;
       width = 4;
       break;
     case "medium":
       path =
-        "M -35  -5 C -35   5, -15   5, -15  -5 C -15   5,  5   5,  5  -5 C  5   5, 25   5, 25  -5 " +
-        "M -25 -20 C -25 -10,  -5 -10,  -5 -20 C  -5 -10, 15 -10, 15 -20 C 15 -10, 35 -10, 35 -20 ";
+        "M -26.25  -7.5 a 7.5 7.5 0 0 0 15 0 a 7.5 7.5 0 0 0 15 0 a 7.5 7.5 0 0 0 15 0" +
+        "M -18.75 -22.5 a 7.5 7.5 0 0 0 15 0 a 7.5 7.5 0 0 0 15 0 a 7.5 7.5 0 0 0 15 0";
+      radius = 40;
+      fontSize = 18;
       width = 3;
       break;
+    case "small":
     default:
+      radius = 28;
+      fontSize = 14;
+      width = 2;
       path =
-        "M -17.5  0   C -17.5  5,   -7.5  5,   -7.5  0   C -7.5  5,   2.5  5,   2.5  0   C 2.5   5,  12.5  5,   12.5  0 " +
-        "M -12.5 -7.5 C -12.5 -2.5, -2.5 -2.5, -2.5 -7.5 C -2.5 -2.5, 7.5 -2.5, 7.5 -7.5 C 7.5 -2.5, 17.5 -2.5, 17.5 -7.5 ";
+        "M -17.5  -5 a 5 5 0 0 0 10 0 a 5 5 0 0 0 10 0 a 5 5 0 0 0 10 0" +
+        "M -12.5 -15 a 5 5 0 0 0 10 0 a 5 5 0 0 0 10 0 a 5 5 0 0 0 10 0";
+      break;
+    case "tiny":
+      radius = 15;
+      fontSize = 9;
+      width = 1;
+      path =
+        "M -8.75  -5 a 2.5 2.5 0 0 0 5 0 a 2.5 2.5 0 0 0 5 0 a 2.5 2.5 0 0 0 5 0" +
+        "M -6.25 -10 a 2.5 2.5 0 0 0 5 0 a 2.5 2.5 0 0 0 5 0 a 2.5 2.5 0 0 0 5 0";
   }
 
   return (
-    <g transform={`scale(${border ? 0.6 : 1.0})`}>
+    <g>
       {border && (
         <circle
           cx="0"
-          cy="5"
-          r="26"
+          cy="0"
+          r={radius}
           fill="white"
           stroke="black"
-          strokeWidth="3.333333333"
+          strokeWidth="2"
         />
       )}
       <path
@@ -42,16 +60,14 @@ const Water = ({ size, cost, border }) => {
         strokeWidth={width}
         strokeLinecap="round"
         strokeLinejoin="round"
-        x="0"
-        y="0"
       />
       <text
         fill={colors["black"]}
-        fontSize="14"
+        fontSize={fontSize}
         alignmentBaseline="hanging"
         textAnchor="middle"
         x="0"
-        y="10"
+        y={-5 + fontSize * 0.5}
       >
         {cost}
       </text>
