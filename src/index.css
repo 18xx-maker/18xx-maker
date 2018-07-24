@@ -579,7 +579,7 @@ svg {
 
 .rounds .tokens {
   position: absolute;
-  bottom: 0;
+  bottom: 0.01in;
   right: 0;
   display: flex;
   justify-content: flex-start;
@@ -770,5 +770,11 @@ ul.notes li span {
   .Footer,
   .PrintNotes {
     display: none;
+  }
+}
+
+@media screen {
+  .App {
+    padding-bottom: 1in;
   }
 }
