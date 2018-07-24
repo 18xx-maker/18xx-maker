@@ -712,12 +712,12 @@ const game = {
       {
         color: "plain",
         water: {
-          angle: 180,
-          percent: 0.3
+          percent: 0.4
         },
         mountain: {
-          cost: "80",
-          percent: 0.2
+          angle: 180,
+          percent: 0.1,
+          cost: "80"
         },
         hexes: ["H5", "I6"]
       },
@@ -1029,14 +1029,15 @@ const game = {
         color: "green",
         water: {
           angle: 60,
-          percent: 0.7,
+          percent: 0.725,
           cost: 80,
+          size: "tiny",
           border: true
         },
         values: [
           {
             angle: 210,
-            percent: 0.75,
+            percent: 0.725,
             value: 30
           }
         ],

@@ -760,6 +760,7 @@ const game = {
       {
         color: "plain",
         mountain: {
+          size: "large",
           cost: "$120"
         },
         hexes: ["B11"]
@@ -767,6 +768,7 @@ const game = {
       {
         color: "plain",
         mountain: {
+          size: "medium",
           cost: "$80"
         },
         hexes: ["C12"]

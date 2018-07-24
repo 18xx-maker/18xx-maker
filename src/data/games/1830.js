@@ -666,7 +666,7 @@ const game = {
         ],
         water: {
           angle: 300,
-          percent: 0.4,
+          percent: 0.5,
           cost: "$80",
           size: "small"
         },
@@ -1323,7 +1323,7 @@ const game = {
         ],
         water: {
           angle: 310,
-          percent: 0.5,
+          percent: 0.7,
           cost: "$80",
           size: "small"
         },

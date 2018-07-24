@@ -621,7 +621,9 @@ const game = {
         water: [
           {
             cost: "$40",
-            percent: 0.6
+            size: "tiny",
+            border: true,
+            percent: 0.7
           }
         ],
         hexes: ["C15"]

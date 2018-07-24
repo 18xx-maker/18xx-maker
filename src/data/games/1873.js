@@ -39,47 +39,9 @@ const game = {
   // Railway Companies
   companies: [
     {
-      name: "Pennsylvania",
-      abbrev: "PRR",
-      tokens: ["Free", "$40", "$100", "$100"],
-      color: "darkGreen",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "New York Central",
-      abbrev: "NYC",
-      tokens: ["Free", "$40", "$100", "$100"],
-      color: "black",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Canadian Pacific",
-      abbrev: "CPR",
-      tokens: ["Free", "$40", "$100", "$100"],
+      name: "Halberstadt-Blankenburger Eisenbahn",
+      abbrev: "HBE",
+      tokens: ["Free"],
       color: "red",
       shares: [
         {
@@ -96,9 +58,9 @@ const game = {
       ]
     },
     {
-      name: "Baltimore & Ohio",
-      abbrev: "B&O",
-      tokens: ["Free", "$40", "$100"],
+      name: "Gernrode-Harzgeroder Eisenbahn",
+      abbrev: "GHE",
+      tokens: ["Free"],
       color: "blue",
       shares: [
         {
@@ -115,10 +77,10 @@ const game = {
       ]
     },
     {
-      name: "Chesapeake & Ohio",
-      abbrev: "C&O",
-      tokens: ["Free", "$40", "$100"],
-      color: "cyan",
+      name: "Nordhausen-Wernigeroder Eisenbahn",
+      abbrev: "NWE",
+      tokens: ["Free"],
+      color: "darkGreen",
       shares: [
         {
           quantity: 1,
@@ -134,9 +96,9 @@ const game = {
       ]
     },
     {
-      name: "Erie",
-      abbrev: "ERIE",
-      tokens: ["Free", "$40", "$100"],
+      name: "Südharzeisenbahn",
+      abbrev: "SHE",
+      tokens: ["Free"],
       color: "yellow",
       shares: [
         {
@@ -153,9 +115,47 @@ const game = {
       ]
     },
     {
-      name: "New York, New Haven & Hartford",
-      abbrev: "NYNH",
-      tokens: ["Free", "$40"],
+      name: "Kleinbahn Ellrich-Zorge",
+      abbrev: "KEZ",
+      tokens: ["Free"],
+      color: "maroon",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "Wernigerode-Blankenburger Eisenbahn",
+      abbrev: "WBE",
+      tokens: ["Free"],
+      color: "black",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "Quedlinburger Lokalbahn",
+      abbrev: "QLB",
+      tokens: ["Free"],
       color: "orange",
       shares: [
         {
@@ -172,10 +172,10 @@ const game = {
       ]
     },
     {
-      name: "Boston & Maine",
-      abbrev: "B&M",
-      tokens: ["Free", "$40"],
-      color: "maroon",
+      name: "Madgeburger-Halberstädter Eisenbahn",
+      abbrev: "MHE",
+      tokens: ["Free"],
+      color: "purple",
       shares: [
         {
           quantity: 1,
@@ -527,7 +527,7 @@ const game = {
               },
               {
                 label: "WBE",
-                color: "gray"
+                color: "black"
               }
             ],
             name: {
@@ -576,6 +576,14 @@ const game = {
       },
       {
         color: "gray",
+        industries: [
+          {
+            angle: 180,
+            percent: 0.8,
+            top: "ZW",
+            bottom: "+70"
+          }
+        ],
         cities: [
           {
             size: 2,
@@ -595,7 +603,7 @@ const game = {
           }
         ],
         offBoardRevenue: {
-          percent: 0.5,
+          percent: 0.55,
           revenues: [
             {
               color: "yellow",
@@ -723,6 +731,14 @@ const game = {
       },
       {
         color: "gray",
+        industries: [
+          {
+            angle: 180,
+            percent: 0.667,
+            top: "SB",
+            bottom: "+60"
+          }
+        ],
         values: [
           {
             value: 0,
@@ -956,11 +972,20 @@ const game = {
       },
       {
         color: "yellow",
+        industries: [
+          {
+            angle: 180,
+            percent: 0.667,
+            top: "10",
+            bottom: "30"
+          }
+        ],
         mountain: {
           cost: "50M",
-          angle: 180,
+          angle: 60,
+          size: "tiny",
           border: true,
-          percent: 0.7
+          percent: 0.775
         },
         cities: [
           {
@@ -1014,6 +1039,14 @@ const game = {
       },
       {
         color: "plain",
+        industries: [
+          {
+            top: "4",
+            bottom: "20",
+            angle: 60,
+            percent: 0.5
+          }
+        ],
         centerTowns: [
           {
             name: {
@@ -1048,6 +1081,12 @@ const game = {
       },
       {
         copy: "D11",
+        industries: [
+          {
+            top: "5",
+            bottom: "10"
+          }
+        ],
         centerTowns: [
           {
             name: {
@@ -1056,6 +1095,7 @@ const game = {
           }
         ],
         mountain: {
+          size: "medium",
           cost: "150M"
         },
         borders: [
@@ -1082,11 +1122,19 @@ const game = {
             percent: 0.75
           }
         ],
+        industries: [
+          {
+            top: "12",
+            bottom: "20",
+            angle: 180,
+            percent: 0.75
+          }
+        ],
         labels: [
           {
             label: "B",
-            angle: 180,
-            percent: 0.667
+            angle: 240,
+            percent: 0.875
           }
         ],
         track: [
@@ -1112,7 +1160,7 @@ const game = {
             size: 2,
             companies: [
               {
-                color: "gray",
+                color: "black",
                 label: "WBE"
               },
               {
@@ -1226,6 +1274,14 @@ const game = {
             color: "red"
           }
         ],
+        industries: [
+          {
+            top: "2",
+            bottom: "20",
+            angle: 300,
+            percent: 0.75
+          }
+        ],
         values: [
           {
             value: 30,
@@ -1235,10 +1291,10 @@ const game = {
         ],
         mountain: {
           cost: "50M",
-          size: "small",
+          size: "tiny",
           border: true,
-          angle: 300,
-          percent: 0.667
+          angle: 180,
+          percent: 0.75
         },
         cities: [
           {
@@ -1294,6 +1350,14 @@ const game = {
       },
       {
         color: "plain",
+        industries: [
+          {
+            top: "1",
+            bottom: "10",
+            angle: 60,
+            percent: 0.5
+          }
+        ],
         centerTowns: [
           {
             name: {
@@ -1324,6 +1388,14 @@ const game = {
       },
       {
         color: "plain",
+        industries: [
+          {
+            top: "6",
+            bottom: "20",
+            angle: 60,
+            percent: 0.5
+          }
+        ],
         centerTowns: [
           {
             name: {
@@ -1428,6 +1500,13 @@ const game = {
       },
       {
         color: "gray",
+        industries: [
+          {
+            top: "PM",
+            bottom: "+40",
+            percent: 0.8
+          }
+        ],
         cities: [
           {
             size: 2,
@@ -1582,10 +1661,9 @@ const game = {
           }
         ],
         mountain: {
-          angle: 5,
-          percent: 0.6,
+          percent: 0.7,
           border: true,
-          size: "small",
+          size: "tiny",
           cost: "50M"
         },
         cities: [
@@ -1642,9 +1720,9 @@ const game = {
           }
         ],
         mountain: {
-          angle: -30,
-          percent: 0.6,
-          size: "small",
+          angle: 150,
+          percent: 0.7,
+          size: "tiny",
           border: true,
           cost: "50M"
         },
@@ -1652,6 +1730,14 @@ const game = {
           {
             side: 6,
             color: "red"
+          }
+        ],
+        industries: [
+          {
+            top: "11",
+            bottom: "20",
+            angle: -30,
+            percent: 0.667
           }
         ],
         cities: [
@@ -1711,6 +1797,14 @@ const game = {
       },
       {
         color: "yellow",
+        industries: [
+          {
+            top: "SM",
+            bottom: "+50",
+            angle: 180,
+            percent: 0.7
+          }
+        ],
         cities: [
           {
             name: {
@@ -1760,11 +1854,11 @@ const game = {
           }
         ],
         mountain: {
-          angle: 180,
-          percent: 0.75,
+          angle: 60,
+          percent: 0.775,
           cost: "50M",
-          size: "small",
-          border: true
+          border: true,
+          size: "tiny",
         },
         hexes: ["F11"]
       },
@@ -1784,11 +1878,19 @@ const game = {
       },
       {
         color: "gray",
+        industries: [
+          {
+            top: "15",
+            bottom: "30",
+            angle: 165,
+            percent: 0.65
+          }
+        ],
         cities: [
           {
             name: {
               name: "Thale",
-              offset: 40
+              offset: 25
             }
           }
         ],
@@ -1828,7 +1930,7 @@ const game = {
           }
         ],
         offBoardRevenue: {
-          percent: 0.5,
+          percent: 0.55,
           revenues: [
             {
               color: "yellow",
@@ -1888,6 +1990,14 @@ const game = {
       },
       {
         color: "plain",
+        industries: [
+          {
+            top: "9",
+            bottom: "30",
+            angle: 150,
+            percent: 0.667
+          }
+        ],
         centerTowns: [
           {
             name: {
@@ -1923,6 +2033,14 @@ const game = {
       },
       {
         color: "yellow",
+        industries: [
+          {
+            top: "14",
+            bottom: "20",
+            angle: 240,
+            percent: 0.667
+          }
+        ],
         cities: [
           {
             name: {
@@ -1945,9 +2063,10 @@ const game = {
         ],
         mountain: {
           cost: "50M",
-          size: "small",
+          size: "tiny",
+          border: true,
           angle: 300,
-          percent: 0.6
+          percent: 0.7
         },
         track: [
           {
@@ -2346,6 +2465,14 @@ const game = {
             percent: 0.725
           }
         ],
+        industries: [
+          {
+            top: "SB",
+            bottom: "+50",
+            angle: 180,
+            percent: 0.8
+          }
+        ],
         cities: [
           {
             size: 2,
@@ -2407,7 +2534,7 @@ const game = {
         ],
         mountain: {
           cost: "50M",
-          size: "small",
+          size: "tiny",
           angle: 240,
           percent: 0.7,
           border: true
@@ -2479,10 +2606,10 @@ const game = {
         ],
         mountain: {
           cost: "100M",
-          size: "small",
+          size: "tiny",
           border: true,
-          angle: 230,
-          percent: 0.75
+          angle: 240,
+          percent: 0.775
         },
         values: [
           {
@@ -2703,6 +2830,14 @@ const game = {
             color: "mountain"
           }
         ],
+        industries: [
+          {
+            top: "8",
+            bottom: "20",
+            angle: 150,
+            percent: 0.667
+          }
+        ],
         centerTowns: [
           {
             name: {
@@ -2742,6 +2877,14 @@ const game = {
       },
       {
         color: "plain",
+        industries: [
+          {
+            top: "7",
+            bottom: "30",
+            angle: 60,
+            percent: 0.5
+          }
+        ],
         centerTowns: [
           {
             name: {
@@ -2768,6 +2911,14 @@ const game = {
       },
       {
         color: "plain",
+        industries: [
+          {
+            top: "3",
+            bottom: "20",
+            angle: 60,
+            percent: 0.5
+          }
+        ],
         centerTowns: [
           {
             name: {
@@ -2794,6 +2945,14 @@ const game = {
       },
       {
         color: "gray",
+        industries: [
+          {
+            top: "13",
+            bottom: "30",
+            angle: 60,
+            percent: 0.7
+          }
+        ],
         track: [
           {
             side: 2,
@@ -2826,7 +2985,8 @@ const game = {
           {
             name: {
               name: "Harzgerode",
-              reverse: true
+              reverse: true,
+              offset: 66.67
             },
             companies: [
               {

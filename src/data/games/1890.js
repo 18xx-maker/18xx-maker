@@ -1,10 +1,9 @@
 const game = {
   // Generic Game Info
   info: {
-    title: "1830",
-    subtitle: "Railways & Robber Barons",
-    designer: "Francis Tresham",
-    background: "gray",
+    title: "1890",
+    designer: "Shin-ichi Takasaki",
+    background: "water",
     width: 150,
     rotation: 90,
     color_10: "orange"

@@ -5,6 +5,7 @@ import Svg from "../Svg";
 
 import Id from "./Id";
 import Value from "./Value";
+import Industry from "./Industry";
 import Icon from "./Icon";
 import City from "./City";
 import Town from "./Town";
@@ -32,6 +33,13 @@ const Atoms = () => {
     {
       name: "Value",
       examples: [<Value value={20} />, <Value value={100} />]
+    },
+    {
+      name: "Industry",
+      examples: [
+        <Industry top={1} bottom={20} />,
+        <Industry top="ZH" bottom={10} />
+      ]
     },
     {
       name: "Icon",
@@ -183,9 +191,14 @@ const Atoms = () => {
     {
       name: "Mountain",
       examples: [
+        <Mountain size="tiny" cost="$20" />,
         <Mountain size="small" cost="$40" />,
         <Mountain size="medium" cost="$80" />,
-        <Mountain size="large" cost="$120" />
+        <Mountain size="large" cost="$120" />,
+        <Mountain border={true} size="tiny" cost="$20" />,
+        <Mountain border={true} size="small" cost="$40" />,
+        <Mountain border={true} size="medium" cost="$80" />,
+        <Mountain border={true} size="large" cost="$120" />
       ]
     },
     {
@@ -195,9 +208,14 @@ const Atoms = () => {
     {
       name: "Water",
       examples: [
+        <Water size="tiny" cost="$20" />,
         <Water size="small" cost="$40" />,
         <Water size="medium" cost="$80" />,
-        <Water size="large" cost="$120" />
+        <Water size="large" cost="$120" />,
+        <Water border={true} size="tiny" cost="$20" />,
+        <Water border={true} size="small" cost="$40" />,
+        <Water border={true} size="medium" cost="$80" />,
+        <Water border={true} size="large" cost="$120" />
       ]
     },
     {

@@ -3,8 +3,9 @@ import { colors } from "../data";
 import * as R from "ramda";
 
 const OffBoardRevenue = ({ revenues }) => {
+  let letter = 8;
   let totalWidth = R.sum(
-    R.map(r => 5 + 10 * R.max(r.cost.length, 2), revenues)
+    R.map(r => 5 + letter * R.max(r.cost.length, 2), revenues)
   );
   let bx = -0.5 * totalWidth; // Starting x for border box
 
@@ -12,8 +13,8 @@ const OffBoardRevenue = ({ revenues }) => {
   let currentX = bx;
 
   R.addIndex(R.map)((revenue, index) => {
-    let length = 10 * revenue.cost.length;
-    let width = R.max(revenue.cost.length, 2) * 10 + 5;
+    let length = letter * revenue.cost.length;
+    let width = R.max(revenue.cost.length, 2) * letter + 5;
     nodes.push([
       <rect
         width={width}

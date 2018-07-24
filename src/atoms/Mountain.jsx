@@ -3,33 +3,51 @@ import { colors } from "../data";
 
 const Mountain = ({ size, cost, border }) => {
   let path;
+  let radius;
+  let fontSize;
   let width = 2;
+
   switch (size) {
     case "large":
       path =
-        "M -45 0 L -30 -15 L -15 0 M 15 0 L 30 -15 L 45 0 M -22.5 -7.5 L 0 -30 L 22.5 -7.5";
-      width = 4;
+        "M -30 -5 L -20 -15 L -10 -5 M 10 -5 L 20 -15 L 30 -5 M -15 -10 L 0 -25 L 15 -10";
+      radius = 40;
+      fontSize = 22;
       break;
     case "medium":
       path =
-        "M -30 0 L -20 -10 L -10 0 M 10 0 L 20 -10 L 30 0 M -15 -5 L 0 -20 L 15 -5";
-      width = 3;
+        "M -22.5 -5 L -15 -12.5 L -7.5 -5 M 7.5 -5 L 15 -12.5 L 22.5 -5 M -11.25 -8.75 L 0 -20 L 11.25 -8.75";
+      radius = 30;
+      fontSize = 18;
       break;
+    case "small":
     default:
+      radius = 22;
+      fontSize = 14;
       path =
-        "M -15 0 L -10 -5 L -5 0 M 5 0 L 10 -5 L 15 0 M -7.5 -2.5 L 0 -10 L 7.5 -2.5";
+        "M -15 -5 L -10 -10 L -5 -5 M 5 -5 L 10 -10 L 15 -5 M -7.5 -7.5 L 0 -15 L 7.5 -7.5";
+      break;
+    case "tiny":
+      radius = 15;
+      fontSize = 9;
+      path =
+        "M -7.5 -5 L -5 -7.5 L -2.5 -5 M 2.5 -5 L 5 -7.5 L 7.5 -5 M -3.75 -6.25 L 0 -10 L 3.75 -6.25";
+  }
+
+  if (cost && cost.length > 4) {
+    fontSize = fontSize * 0.85;
   }
 
   return (
-    <g transform={`scale(${border ? 0.7 : 1.0})`}>
+    <g>
       {border && (
         <circle
           cx="0"
-          cy="5"
-          r="22"
+          cy="0"
+          r={radius}
           fill="white"
           stroke="black"
-          strokeWidth="2.857142857"
+          strokeWidth="2"
         />
       )}
       <path
@@ -38,16 +56,14 @@ const Mountain = ({ size, cost, border }) => {
         stroke={colors["mountain"]}
         strokeWidth={width}
         strokeLinecap="round"
-        x="0"
-        y="0"
       />
       <text
         fill={colors["black"]}
-        fontSize={cost && cost.length > 3 ? 12 : 14}
+        fontSize={fontSize}
         alignmentBaseline="hanging"
         textAnchor="middle"
         x="0"
-        y={border ? 5 : 10}
+        y={-5 + fontSize * 0.5}
       >
         {cost}
       </text>

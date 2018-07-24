@@ -1300,7 +1300,7 @@ const game = {
           percent: 0.5,
           border: true,
           cost: "L.160",
-          size: "small"
+          size: "tiny"
         },
         track: [{ type: "straight", side: 1, gauge: "narrow" }],
         hexes: ["I12"]
@@ -1429,11 +1429,11 @@ const game = {
         ],
         values: [{ value: 20, angle: 90, percent: 0.75 }],
         mountain: {
-          size: "small",
-          cost: "L.40",
+          size: "tiny",
           border: true,
+          cost: "L.40",
           angle: -30,
-          percent: 0.6
+          percent: 0.7
         },
         hexes: ["K14"]
       },

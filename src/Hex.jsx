@@ -16,6 +16,7 @@ import CenterTown from "./atoms/CenterTown";
 import Label from "./atoms/Label";
 import Icon from "./atoms/Icon";
 import Value from "./atoms/Value";
+import Industry from "./atoms/Industry";
 import OffBoardRevenue from "./atoms/OffBoardRevenue";
 import OffBoardTrack from "./atoms/OffBoardTrack";
 import Water from "./atoms/Water";
@@ -150,6 +151,8 @@ const HexTile = ({ hex, id, border }) => {
 
   let values = <Position data={hex.values}>{v => <Value {...v} />}</Position>;
 
+  let industries = <Position data={hex.industries}>{v => <Industry {...v} />}</Position>;
+
   return (
     <g>
       <Hex color={hex.color} />
@@ -166,6 +169,7 @@ const HexTile = ({ hex, id, border }) => {
               {tracks}
               {offBoardTracks}
               {values}
+              {industries}
               {cities}
               {towns}
               {centerTowns}

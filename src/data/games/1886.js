@@ -3,7 +3,7 @@ const game = {
   info: {
     title: "1886",
     designer: "Michael Bear Cub",
-    background: "gray",
+    background: "water",
     width: 150,
     titleX: 975,
     titleY: 2125,
