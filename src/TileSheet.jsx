@@ -47,7 +47,14 @@ const TileSheet = ({ match }) => {
     util.groupsOf(perRow, ids)
   );
 
-  return <div className="tileSheet">{tiles}</div>;
+  return (
+    <div className="tileSheet">
+      <div className="PrintNotes">
+        Tiles are meant to be printed in <b>portait</b> mode
+      </div>
+      {tiles}
+    </div>
+  );
 };
 
 export default TileSheet;

@@ -752,3 +752,53 @@ ul.notes li span {
   border-left: 1px solid black;
   border-right: 1px solid black;
 }
+
+.Footer {
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+  background: #ccc;
+  border: 2px solid black;
+  border-width: 2px 2px 0 0;
+  border-top-right-radius: 5px;
+  padding: 4px 8px;
+  margin: auto auto;
+  font-weight: normal;
+  font-family: sans-serif;
+  font-size: 0.8em;
+}
+
+.Footer a {
+  font-weight: bold;
+  text-decoration: underline;
+  color: black;
+}
+
+.Footer a:hover {
+  color: rgb(95,35,132);
+}
+
+.PrintNotes {
+  position: fixed;
+  right: 0;
+  z-index: 10;
+  background: #ccc;
+  border: 2px solid black;
+  border-width: 0 0 2px 2px;
+  border-bottom-left-radius: 5px;
+  padding: 2px 8px;
+  margin: auto auto;
+  font-weight: normal;
+  font-family: sans-serif;
+}
+
+.PrintNotes b {
+  font-weight: bold;
+}
+
+@media print {
+  .Footer,
+  .PrintNotes {
+    display: none;
+  }
+}

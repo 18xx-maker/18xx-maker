@@ -26,6 +26,9 @@ const Charters = ({ match }) => {
           />
         );
       }, companies)}
+      <div className="PrintNotes">
+        Charters are meant to be printed in <b>portait</b> mode
+      </div>
     </div>
   );
 };

@@ -14,6 +14,9 @@ const Background = ({ match }) => {
   return (
     <div className="background" style={{ backgroundColor: color }}>
       <div className="text">{text}</div>
+      <div className="PrintNotes">
+        Background is meant to be printed in <b>portait</b> mode
+      </div>
     </div>
   );
 };
