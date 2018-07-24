@@ -429,18 +429,23 @@ const game = {
   stock: {
     type: "2D",
     par: {
-      values: [100, 90, 82, 76, 71, 67],
-      cells: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6]]
+      values: [100, 90, 82, 76, 71, 67]
+    },
+    movement: {
+      "up": ["Sold Out"],
+      "down": ["Every Share Sold"],
+      "left": ["Withheld Revenue"],
+      "right": ["Paid Dividends"]
     },
     market: [
       [
-        60,
+        { label: 60, color: "yellow", arrow: "down" },
         67,
         71,
         76,
         82,
         90,
-        100,
+        { label: 100, color: "gray" },
         112,
         126,
         142,
@@ -455,13 +460,13 @@ const game = {
         350
       ],
       [
-        53,
-        60,
+        { label: 53, color: "yellow", arrow: "down" },
+        { label: 60, color: "yellow" },
         66,
         70,
         76,
         82,
-        90,
+        { label: 90, color: "gray" },
         100,
         112,
         126,
@@ -473,33 +478,127 @@ const game = {
         240,
         260,
         280,
-        300
+        { label: 300, arrow: "up" }
       ],
-      [46, 55, 60, 65, 70, 76, 82, 90, 100, 111, 125, 140, 155, 170, 185, 200],
-      [39, 48, 54, 60, 66, 71, 76, 82, 90, 100, 110, 120, 130],
-      [32, 41, 48, 55, 62, 67, 71, 76, 82, 90, 100],
-      [25, 34, 42, 50, 58, 65, 67, 71, 75, 80],
-      [18, 27, 36, 45, 54, 63, 67, 69, 70],
-      [10, 12, 30, 40, 50, 60, 67, 68],
-      [null, 10, 20, 30, 40, 50, 60],
-      [null, null, 10, 20, 30, 40, 50],
-      [null, null, null, 10, 20, 30, 40]
+      [
+        { label: 46, color: "yellow", arrow: "down" },
+        { label: 55, color: "yellow" },
+        { label: 60, color: "yellow" },
+        65,
+        70,
+        76,
+        { label: 82, color: "gray" },
+        90,
+        100,
+        111,
+        125,
+        140,
+        155,
+        170,
+        185,
+        { label: 200, arrow: "up" }
+      ],
+      [
+        { label: 39, color: "orange", arrow: "down" },
+        { label: 48, color: "yellow" },
+        { label: 54, color: "yellow" },
+        { label: 60, color: "yellow" },
+        66,
+        71,
+        { label: 76, color: "gray" },
+        82,
+        90,
+        100,
+        110,
+        120,
+        { label: 130, arrow: "up" }
+      ],
+      [
+        { label: 32, color: "orange", arrow: "down" },
+        { label: 41, color: "orange" },
+        { label: 48, color: "yellow" },
+        { label: 55, color: "yellow" },
+        62,
+        67,
+        { label: 71, color: "gray" },
+        76,
+        82,
+        90,
+        { label: 100, arrow: "up" }
+      ],
+      [
+        { label: 25, color: "brown", arrow: "down" },
+        { label: 34, color: "orange" },
+        { label: 42, color: "orange" },
+        { label: 50, color: "yellow" },
+        { label: 58, color: "yellow" },
+        65,
+        { label: 67, color: "gray" },
+        71,
+        75,
+        { label: 80, arrow: "up" }
+      ],
+      [
+        { label: 18, color: "brown", arrow: "down" },
+        { label: 27, color: "brown" },
+        { label: 36, color: "orange" },
+        { label: 45, color: "orange" },
+        { label: 54, color: "yellow" },
+        63,
+        67,
+        69,
+        { label: 70, arrow: "up" }
+      ],
+      [
+        { label: 10, color: "brown" },
+        { label: 12, color: "brown" },
+        { label: 30, color: "brown" },
+        { label: 40, color: "orange" },
+        { label: 50, color: "yellow" },
+        { label: 60, color: "yellow" },
+        67,
+        { label: 68, arrow: "up" }
+      ],
+      [
+        null,
+        { label: 10, color: "brown" },
+        { label: 20, color: "brown" },
+        { label: 30, color: "brown" },
+        { label: 40, color: "orange" },
+        { label: 50, color: "yellow" },
+        { label: 60, color: "yellow", arrow: "up" }
+      ],
+      [
+        null,
+        null,
+        { label: 10, color: "brown" },
+        { label: 20, color: "brown" },
+        { label: 30, color: "brown" },
+        { label: 40, color: "orange" },
+        { label: 50, color: "yellow", arrow: "up" }
+      ],
+      [
+        null,
+        null,
+        null,
+        { label: 10, color: "brown" },
+        { label: 20, color: "brown" },
+        { label: 30, color: "brown" },
+        { label: 40, color: "orange", arrow: "up" }
+      ]
     ],
-    limits: [
+    legend: [
       {
         color: "yellow",
-        description: "Certificates no longer count towards the share limit",
-        value: 60
+        description: "Certificates no longer count towards the share limit"
       },
       {
         color: "orange",
-        description: "Players may own more than 60% of the company",
-        value: 45
+        description: "Players may own more than 60% of the company"
       },
       {
         color: "brown",
-        description: "Multiple certificates may be bought in the same turn",
-        value: 30
+        description: "Multiple certificates may be bought in the same turn"
       }
     ]
   },

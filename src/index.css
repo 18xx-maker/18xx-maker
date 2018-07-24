@@ -542,31 +542,6 @@ svg {
   position: relative;
 }
 
-.stock .market .arrow {
-  position: absolute;
-  bottom: 2mm;
-  right: 1mm;
-  font-weight: bold;
-}
-
-.stock .market td.up:after {
-  position: absolute;
-  content: '↑';
-  bottom: 2mm;
-  right: 1mm;
-  font-weight: bold;
-  color: black;
-}
-
-.stock .market td.down:after {
-  position: absolute;
-  content: '↓';
-  bottom: 2mm;
-  left: 1mm;
-  font-weight: bold;
-  color: black;
-}
-
 .stock td.empty {
   border: none;
 }
@@ -597,11 +572,9 @@ svg {
 
 
 .rounds {
-  position: absolute;
-  bottom: 0;
+  position: relative;
   height: 2.75in;
   width: 1in;
-  right: 2.25in;
 }
 
 .rounds .tokens {
@@ -610,16 +583,18 @@ svg {
   right: 0;
   display: flex;
   justify-content: flex-start;
-  align-items: flex-end;
+  align-items: center;
   flex-direction: column-reverse;
+  width: 1in;
   margin: 0;
 }
 
 .rounds svg {
   height: 0.6in;
   width: 0.6in;
-  top: 0.3in;
-  left: 0.3in;
+  top: 0;
+  left: 0;
+  padding-top: 0.2in;
   position: relative;
 }
 
@@ -635,12 +610,6 @@ svg {
   height: 0.6in;
   width: 0.7in;
   display: block;
-}
-
-.par {
-  position: absolute;
-  bottom: 0;
-  right: 0;
 }
 
 .legend {
@@ -683,14 +652,15 @@ ul.notes li i {
 
 ul.notes li span {
   display: inline-block;
-  font-size: 0.15in;
-  line-height: 0.25in;
-  height: 0.25in;
-  width: 0.25in;
-  border-radius: 0.125in;
+  font-size: 0.10in;
+  line-height: 0.24in;
+  height: 0.15in;
+  width: 0.15in;
+  border-radius: 0.075in;
   text-align: center;
   position: absolute;
-  left: -0.35in;
+  left: -0.2in;
+  top: 0.01in;
 }
 
 .cutlines {
