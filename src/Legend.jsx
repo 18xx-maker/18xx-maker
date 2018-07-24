@@ -10,7 +10,8 @@ const Legend = ({ legend, movement }) => {
     let color = colors[item.textColor || "white"];
 
     return (
-      <li style={{ backgroundColor }} key={item.description}>
+      <li key={item.description}>
+        <i className={`${item.iconStyle || "fas"} fa-${item.icon || "info"}`} style={{ backgroundColor }} />
         {item.description}
       </li>
     );
