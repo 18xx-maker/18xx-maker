@@ -183,9 +183,10 @@ const Atoms = () => {
     {
       name: "Border",
       examples: [
-        [<Border border={true} />, <Border color="black" />],
-        [<Border border={true} />, <Border color="water" />],
-        [<Border border={true} />, <Border color="mountain" />]
+        <Border color="black" />,
+        <Border color="water" />,
+        <Border color="mountain" />,
+        <Border color="red" />
       ]
     },
     {
