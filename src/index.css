@@ -13,11 +13,6 @@ body {
   font-family: "Bitter", serif;
 }
 
-.home,
-.tiles {
-  background-color: rgb(252,241,222);
-}
-
 .tokens {
   position: relative;
   float: left;
