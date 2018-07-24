@@ -242,6 +242,7 @@ const Atoms = () => {
 
   return (
     <div className="atoms">
+      <h1>Atoms</h1>
       <dl>{nodes}</dl>
     </div>
   );
