@@ -145,12 +145,6 @@ const HexTile = ({ hex, id, border }) => {
     <Position data={hex.borders}>{b => <Border {...b} />}</Position>
   );
 
-  let borderBorders = (
-    <Position data={hex.borders}>
-      {b => <Border {...b} border={true} />}
-    </Position>
-  );
-
   let values = <Position data={hex.values}>{v => <Value {...v} />}</Position>;
 
   let industries = <Position data={hex.industries}>{i => <Industry {...i} />}</Position>;
@@ -180,7 +174,6 @@ const HexTile = ({ hex, id, border }) => {
               {labels}
               {tokens}
               {offBoardRevenue}
-              {borderBorders}
               {divides}
               {borders}
             </g>
