@@ -21,7 +21,10 @@ const Movement = ({ movement }) => {
         {R.map(i => <div className="Movement--item">{i}</div>, movement.right)}
       </div>
       <div className="Movement__center">
-        <i className="fal fa-arrows"/>
+        <i className="fal fa-long-arrow-up"/>
+        <i className="fal fa-long-arrow-down"/>
+        <i className="fal fa-long-arrow-right"/>
+        <i className="fal fa-long-arrow-left"/>
       </div>
     </div>
   );

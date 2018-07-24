@@ -569,7 +569,7 @@ svg {
 .rounds {
   position: relative;
   height: 2.75in;
-  width: 1in;
+  width: 0.75in;
 }
 
 .rounds .tokens {
@@ -580,31 +580,17 @@ svg {
   justify-content: flex-start;
   align-items: center;
   flex-direction: column-reverse;
-  width: 1in;
+  width: 100%;
   margin: 0;
 }
 
 .rounds svg {
-  height: 0.6in;
-  width: 0.6in;
+  height: 0.5in;
+  width: 0.5in;
   top: 0;
   left: 0;
-  padding-top: 0.2in;
+  padding-top: 0.15in;
   position: relative;
-}
-
-.rounds svg:after {
-  content: '→';
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: black;
-  font-weight: bold;
-  text-align: right;
-  line-height: 0.6in;
-  height: 0.6in;
-  width: 0.7in;
-  display: block;
 }
 
 .legend {
