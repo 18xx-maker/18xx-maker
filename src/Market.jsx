@@ -125,7 +125,7 @@ const Par1Diag = ({ type, values }) => {
   );
 };
 
-const Market1Diag = ({ market, limits, par, splice }) => {
+const Market1Diag = ({ market, par, splice }) => {
   return (
     <div className="market market__type__1Diag">
       <h2>Stock Market</h2>
@@ -135,28 +135,16 @@ const Market1Diag = ({ market, limits, par, splice }) => {
   );
 };
 
-const Market2D = ({ market, limits, par, title }) => {
+const Market2D = ({ market, par, title }) => {
   let rows = R.addIndex(R.map)((marketRow, row) => {
     let cells = R.addIndex(R.map)((value, col) => {
-      let color = value ? colors[util.marketColor(limits, value)] : null;
+      let color = null;
 
-      if (
-        R.find(
-          cell => cell[0] === row && cell[1] === col,
-          (par && par.cells) || []
-        )
-      ) {
-        color = colors["gray"];
-      }
       let classes = [];
       if (!value) {
         classes.push("empty");
-      }
-      if (row > 0 && col === marketRow.length - 1) {
-        classes.push("up");
-      }
-      if (col === 0 && market[row + 1] && market[row + 1][0]) {
-        classes.push("down");
+      } else {
+        color = colors["plain"];
       }
 
       let labelColor = "#000";
@@ -179,7 +167,7 @@ const Market2D = ({ market, limits, par, title }) => {
                     ? colors[value.arrowColor]
                     : colors["black"]
                 }}
-                className="arrow"
+                className={`Arrow Arrow--${value.arrow}`}
               >
                 {value.arrow === "up" ? "↑" : "↓"}
               </span>
@@ -190,27 +178,12 @@ const Market2D = ({ market, limits, par, title }) => {
     return <tr key={row}>{cells}</tr>;
   }, market);
 
-  let legend = R.map(limit => {
-    let backgroundColor = colors[limit.color || "orange"];
-    let color = colors[limit.textColor || "white"];
-
-    return (
-      <li key={limit.description}>
-        <span style={{ backgroundColor, color }}>&nbsp;</span>{" "}
-        {limit.description}
-      </li>
-    );
-  }, limits);
-
   return (
     <div className="market">
       <h2>{title} Stock Market</h2>
       <table>
         <tbody>{rows}</tbody>
       </table>
-      <div className="legend">
-        <ul className="notes">{legend}</ul>
-      </div>
     </div>
   );
 };

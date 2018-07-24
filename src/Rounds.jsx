@@ -5,8 +5,8 @@ import * as R from "ramda";
 const Rounds = ({ rounds }) => {
   let items = R.map(
     round => (
-      <svg key={round.name}>
-        <Token label={round.name} color={round.color} labelColor="black" />
+      <svg viewBox="-25 -25 50 50" key={round.name}>
+        <Token width="25" label={round.name} color={round.color} labelColor="black" />
       </svg>
     ),
     rounds

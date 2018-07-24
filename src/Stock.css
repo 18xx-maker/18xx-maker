@@ -1,0 +1,106 @@
+.StockHelpers {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  justify-content: end;
+  align-items: flex-end;
+  align-content: flex-end;
+}
+
+.Arrow {
+  position: absolute;
+  bottom: 2mm;
+  right: 1mm;
+  font-weight: bold;
+  color: black;
+}
+
+.Arrow--down {
+  left: 1mm;
+}
+
+.Legend {
+  width: 3in;
+}
+
+.Legend ul {
+  padding: 0;
+}
+
+.Legend li {
+  margin: 0.05in 0 0 0 !important;
+
+  font-size: 0.13in !important;
+
+  padding: 0.01in 0.1in;
+  border-radius: 0.1in;
+}
+
+.Movement {
+  width: 3in;
+
+  display: grid;
+  grid-template-rows: 1fr 0.8in 1fr;
+  grid-template-columns: 1fr 0.8in 1fr;
+  grid-template-areas: "up up up" "left center right" "down down down";
+
+  font-size: 0.15in;
+  margin-bottom: 0.20in;
+}
+
+.Movement--item {
+  padding: 0.1in;
+}
+
+.Movement__center {
+  font-size: 0.5in;
+  grid-area: center;
+}
+
+.Movement__center i {
+  display: block;
+  text-align: center;
+  height: 0.6in;
+  line-height: 0.6in;
+  padding: 0.1in;
+}
+
+.Movement__up {
+  grid-area: up;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: end;
+  align-items: center;
+}
+
+.Movement__down {
+  grid-area: down;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+.Movement__left {
+  grid-area: left;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: end;
+  align-items: center;
+  text-align: right;
+}
+
+.Movement__right {
+  grid-area: right;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  text-align: left;
+}

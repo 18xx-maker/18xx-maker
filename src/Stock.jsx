@@ -4,6 +4,10 @@ import games from "./data/games";
 
 import Rounds from "./Rounds";
 import Par from "./Par";
+import Legend from "./Legend";
+import Movement from "./Movement";
+
+import "./Stock.css";
 
 const Stock = ({ match }) => {
   let game = games[match.params.game];
@@ -19,8 +23,11 @@ const Stock = ({ match }) => {
         Stock Market is meant to be printed in <b>landscape</b> mode
       </div>
       <Market {...stock} title={game.info.title} />
-      <Rounds rounds={game.rounds} />
-      {stock.par && <Par par={stock.par} />}
+      <div className="StockHelpers">
+        {stock.par && <Par par={stock.par} />}
+        <Rounds rounds={game.rounds} />
+        <Legend legend={game.stock.legend || []} movement={game.stock.movement} />
+      </div>
     </div>
   );
 };
