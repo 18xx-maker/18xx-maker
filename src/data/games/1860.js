@@ -346,32 +346,37 @@ const game = {
 
   phases: [
     {
-      name: "2+1",
+      phase: "2",
+      train: "2+1",
       limit: "4",
       number: "5",
       tiles: "yellow"
     },
     {
-      name: "3+2",
+      phase: "3",
+      train: "3+2",
       limit: "4",
       number: "4",
       tiles: "green"
     },
     {
-      name: "4+2",
+      phase: "4",
+      train: "4+2",
       rust: "2+1",
       limit: "3",
       number: "3",
       tiles: "green"
     },
     {
-      name: "5+3",
+      phase: "5",
+      train: "5+3",
       limit: "3",
       number: "2",
       tiles: "brown"
     },
     {
-      name: "6+3",
+      phase: "6",
+      train: "6+3",
       limit: "2",
       number: "2",
       rust: "3+2",
@@ -380,14 +385,16 @@ const game = {
         "Fishbourne private available; Purchase of Fishbourne closes shipping companies."
     },
     {
-      name: "7+4",
+      phase: "7",
+      train: "7+4",
       limit: "2",
       number: "1",
       rust: "4+2",
       tiles: "brown"
     },
     {
-      name: "8+4",
+      phase: "8",
+      train: "8+4",
       limit: "2",
       number: "1",
       rust: "5+3",
@@ -396,7 +403,8 @@ const game = {
         "Selling doesn’t reduce share price; no limit on certificates per player."
     },
     {
-      name: "9+5",
+      phase: "9",
+      train: "9+5",
       limit: "2",
       number: "6+",
       tiles: "brown",

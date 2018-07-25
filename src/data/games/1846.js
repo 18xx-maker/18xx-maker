@@ -219,28 +219,30 @@ const game = {
 
   phases: [
     {
-      name: "2",
+      phase: "Yellow",
+      train: "2",
       limit: "4",
-      number: "6",
+      number: "5/6/7",
       tiles: "yellow"
     },
     {
-      name: "3/5, 4",
+      phase: "Green",
+      train: "3/5 or 4",
       limit: "4",
-      number: "5",
+      number: "4/5/6",
       tiles: "green"
     },
     {
-      name: "4/6, 5",
-      phase: "2",
+      phase: "Brown",
+      train: "4/6 or 5",
       limit: "3",
-      number: "5",
+      number: "3/4/5",
       tiles: "brown",
       notes: "Private companies close, Phase out 2 trains"
     },
     {
-      name: "6/7, 8",
-      phase: "3/5, 4",
+      phase: "Gray",
+      train: "6/7 or 8",
       rust: "2",
       limit: "2",
       number: "∞",
