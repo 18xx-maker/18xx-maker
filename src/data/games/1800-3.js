@@ -2,7 +2,7 @@ const game = {
   // Generic Game Info
   info: {
     title: "1800",
-    subtitle: "3 Players",
+    subtitle: "Railroading in Colorado",
     designer: "Antonio Leal",
     background: "brown",
     width: 150,
@@ -52,7 +52,13 @@ const game = {
           shares: 4
         },
         {
-          quantity: 6,
+          quantity: 5,
+          percent: 10,
+          shares: 1
+        },
+        {
+          quantity: 1,
+          label: "RGS Share",
           percent: 10,
           shares: 1
         },
@@ -208,8 +214,7 @@ const game = {
       name: "Midland Terminal",
       price: "$25",
       players: "3+",
-      revenue: "$5",
-      description: "May be sold to a corporation for $10 to $50."
+      revenue: "$5"
     },
     {
       name: "Denver and Salt Lake",
@@ -227,10 +232,6 @@ const game = {
   ],
 
   phases: [
-    {
-      phase: "1",
-      tiles: "yellow"
-    },
     {
       phase: "2",
       train: "2",
@@ -277,13 +278,8 @@ const game = {
       name: "Market",
       notes: [
         {
-          color: "orange",
-          note: "Shares in the market pay dividends to the bank"
-        },
-        {
           color: "brown",
-          icon: "exclamation",
-          note: "No more than 50% of a corporation's shares may be in the market at any time"
+          note: "Shares in the market pay dividends to the bank"
         },
         {
           color: "red",
@@ -459,6 +455,7 @@ const game = {
     "59": 1,
     "800": 1,
     "802": 1,
+    "802-3": 1,
     // Brown
     "39": 1,
     "40": 1,

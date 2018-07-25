@@ -2,7 +2,7 @@ const game = {
   // Generic Game Info
   info: {
     title: "1800",
-    subtitle: "2 Players",
+    subtitle: "Railroading in Colorado",
     designer: "Antonio Leal",
     background: "brown",
     width: 150,
@@ -52,7 +52,13 @@ const game = {
           shares: 4
         },
         {
-          quantity: 6,
+          quantity: 5,
+          percent: 10,
+          shares: 1
+        },
+        {
+          quantity: 1,
+          label: "RGS Share",
           percent: 10,
           shares: 1
         },
@@ -200,10 +206,6 @@ const game = {
 
   phases: [
     {
-      phase: "1",
-      tiles: "yellow"
-    },
-    {
       phase: "2",
       train: "2",
       limit: "2",
@@ -249,13 +251,8 @@ const game = {
       name: "Market",
       notes: [
         {
-          color: "orange",
-          note: "Shares in the market pay dividends to the bank"
-        },
-        {
           color: "brown",
-          icon: "exclamation",
-          note: "No more than 50% of a corporation's shares may be in the market at any time"
+          note: "Shares in the market pay dividends to the bank"
         },
         {
           color: "red",

@@ -5201,6 +5201,49 @@ const tiles = {
       }
     ]
   },
+  "802-3": {
+    color: "green",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 40
+      }
+    ],
+    labels: [{
+      label: "D",
+      angle: 150,
+      percent: 0.8
+    }],
+    cities: [
+      {
+        size: 2,
+        companies: [{},{
+          label: "C&W",
+          color: "blue"
+        }],
+        name: {
+          name: "Denver",
+          reverse: true,
+          offset: 66.67
+        }
+      }
+    ],
+    track: [
+      {
+        side: 1
+      },
+      {
+        side: 3
+      },
+      {
+        side: 4
+      },
+      {
+        side: 5
+      }
+    ]
+  },
   "804": {
     color: "brown",
     values: [
