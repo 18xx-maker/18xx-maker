@@ -285,7 +285,7 @@ const game = {
       name: "Stock Round",
       steps: [
         "Sell any number of shares",
-        "Buy one share or if president buy company bond"
+        "Buy one share or if the president buy the corporation’s bond"
       ],
       ordered: false
     },
