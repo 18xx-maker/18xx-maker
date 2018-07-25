@@ -264,12 +264,11 @@ const game = {
     },
     {
       phase: "6",
-      train: "2E, 3E, 2x2E",
+      train: ["2E","3E","2x2E"],
       limit: "3",
-      number: "3, 2, 1",
+      number: ["3", "2", "1"],
       rust: "3",
-      tiles: "gray",
-      notes: "All E Trains may be purchased"
+      tiles: "gray"
     }
   ],
 
