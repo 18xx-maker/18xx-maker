@@ -2,6 +2,14 @@ import React from "react";
 import { colors } from "./data";
 import * as R from "ramda";
 
+const formatCell = value => {
+  if(Array.isArray(value)) {
+    return R.chain(v => [v,<br/>], value);
+  } else {
+    return value;
+  }
+}
+
 const Phase = ({ phases }) => {
   let includeTrain = !R.all(
     R.compose(
@@ -15,8 +23,8 @@ const Phase = ({ phases }) => {
     return (
       <tr key={phase.phase || phase.name}>
         <td>{phase.phase || phase.name}</td>
-        {includeTrain && <td>{phase.train}</td>}
-        <td>{phase.number}</td>
+        {includeTrain && <td>{formatCell(phase.train)}</td>}
+        <td>{formatCell(phase.number)}</td>
         <td>{phase.limit}</td>
         <td style={{ backgroundColor: colors[phase.tiles] }}>&nbsp;</td>
         <td>{phase.rust}</td>
