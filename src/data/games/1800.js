@@ -247,11 +247,6 @@ const game = {
           note: "Shares in the market pay dividends to the bank"
         },
         {
-          color: "brown",
-          icon: "exclamation",
-          note: "The president share may not be sold"
-        },
-        {
           color: "red",
           icon: "times",
           note: "No stock sales during first stock round"
@@ -283,7 +278,7 @@ const game = {
     {
       name: "Stock Round",
       steps: [
-        "Sell any number of non-president shares",
+        "Sell any number of shares",
         "Buy one share or corporate bond (president only)"
       ],
       ordered: false
@@ -392,12 +387,12 @@ const game = {
     legend: [
       {
         color: "yellow",
-        description: "Certificates no longer count towards the share limit",
+        description: "Shares of this corporation do not count toward the certificate limit",
         icon: "certificate"
       },
       {
         color: "orange",
-        description: "Players may own more than 70% of the company",
+        description: "Players may own more than 70% of this corporation",
         icon: "percentage"
       }
     ]
