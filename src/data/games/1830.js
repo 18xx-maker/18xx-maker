@@ -422,7 +422,10 @@ const game = {
         "Pay dividends or withhold revenue",
         "Purchase trains"
       ],
-      ordered: true
+      ordered: true,
+      optional: [
+        "Purchase private company"
+      ]
     }
   ],
 
@@ -600,7 +603,7 @@ const game = {
       },
       {
         color: "brown",
-        description: "Players may purchase more than one share of this corporation in one action",
+        description: "Players may purchase any number of shares of this corporation in one stock action",
         icon: "money-bill-wave"
       }
     ]

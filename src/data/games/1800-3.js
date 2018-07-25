@@ -11,7 +11,8 @@ const game = {
     titleY: 750,
     titleX: 170,
     extraTotalWidth: 200,
-    titleSize: 150
+    titleSize: 150,
+    extraTokens: 2
   },
 
   // Extra Tokens
@@ -321,7 +322,7 @@ const game = {
       ],
       ordered: true,
       optional: [
-        "Purchase or sell company shares",
+        "Issue or redeem shares",
         "Collect bond dividends",
         "Purchase private company"
       ]
@@ -330,16 +331,12 @@ const game = {
 
   stock: {
     type: "2D",
-    par: {
-      values: [100, 90, 80, 70, 60]
-    },
     movement: {
       up: ["Sold out"],
       down: ["Once per sale"],
       left: ["Paid no dividends"],
       right: ["Paid dividends ≥ current share price"]
     },
-    width: "calc(100% - 2in)",
     market: [
       [
         { label: 80, arrow: "down" },

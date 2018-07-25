@@ -159,7 +159,7 @@ const Market2D = ({ legend, market, par, title, width, height }) => {
         color = colors[legend[value.legend].color];
         labelColor = colors[value.textColor] || colors["black"];
       } else if (value && value.par) {
-        color = colors[par.color || "gray"];
+        color = colors[par && par.color || "gray"];
         labelColor = colors[value.textColor] || colors["black"];
       }
 
