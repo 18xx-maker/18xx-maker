@@ -34,7 +34,8 @@ const GameNav = ({ game, ipo }) => {
           <Link to={`/${game}/stock`}>Stock Market</Link>
         </li>
         <li>
-          <Link to={`/${game}/tiles`}>Tiles</Link>
+          <Link to={`/${game}/tiles`}>Tiles</Link>&nbsp;/&nbsp;
+          <Link to={`/${game}/manifest`}>Manifest</Link>
         </li>
         <li>
           <Link to={`/${game}/tokens`}>Tokens</Link>
