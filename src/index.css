@@ -216,15 +216,21 @@ svg {
   text-align: left;
 }
 
+.charter__phase tr:nth-child(even) td {
+  background: #eee;
+}
+
 .charter__phase td {
-  padding: 0.03in 0.1in;
+  padding: 0.03in 0.05in;
   border: 1px solid black;
   text-align: center;
   vertical-align: top;
+  white-space: nowrap;
 }
 
 .charter__phase td.phase__notes {
   text-align: left;
+  white-space: normal;
 }
 
 .charter dl {

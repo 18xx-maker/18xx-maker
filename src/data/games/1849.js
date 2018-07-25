@@ -416,46 +416,52 @@ const game = {
 
   phases: [
     {
-      name: "4",
+      phase: "4",
+      train: "4H",
       limit: "4",
       number: "4",
       tiles: "yellow"
     },
     {
-      name: "6",
+      phase: "6",
+      train: "6H",
       limit: "4",
       number: "3/4",
       tiles: "green",
       notes: "Private companies can be bought"
     },
     {
-      name: "8",
+      phase: "8",
+      train: "8H",
       rust: "4H",
       limit: "3",
       number: "2/3",
       tiles: "green"
     },
     {
-      name: "10",
+      phase: "10",
+      train: "10H",
       rust: "6H",
       limit: "2",
       number: "2",
       tiles: "brown"
     },
     {
-      name: "12",
+      phase: "12",
+      train: "12H",
       limit: "2",
       number: "1",
       tiles: "brown",
       notes: "Private companies close, Messina Earthquake"
     },
     {
-      name: "16",
+      phase: "16",
+      train: "16H, R6H",
       limit: "2",
-      number: "4/5",
+      number: "4/5, 2",
       rust: "8H",
       tiles: "brown",
-      notes: "2 R6H trains are also available. Stock market tokens can advance in the blue zone"
+      notes: "Stock market tokens can advance in the blue zone"
     }
   ],
   companies: [

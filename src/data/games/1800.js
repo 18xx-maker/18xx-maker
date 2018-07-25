@@ -199,40 +199,45 @@ const game = {
 
   phases: [
     {
-      name: "1",
+      phase: "1",
       tiles: "yellow"
     },
     {
-      name: "2",
+      phase: "2",
+      train: "2",
       limit: "2",
       number: "2",
       tiles: "yellow"
     },
     {
-      name: "3",
+      phase: "3",
+      train: "3",
       limit: "2",
       number: "1",
       tiles: "green",
       notes: "Private companies may be purchased"
     },
     {
-      name: "4",
+      phase: "4",
+      train: "4",
       rust: "2",
       limit: "2",
       number: "1",
       tiles: "green"
     },
     {
-      name: "5",
+      phase: "5",
+      train: "5",
       limit: "2",
       number: "1",
       tiles: "brown",
       notes: "Private companies are closed"
     },
     {
-      name: "6",
+      phase: "6",
+      train: "2E, 3E, 2x2E",
       limit: "3",
-      number: "4",
+      number: "2, 1, 1",
       rust: "3",
       tiles: "gray",
       notes: "All E Trains may be purchased"
