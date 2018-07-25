@@ -2,7 +2,7 @@ import React from "react";
 import { colors } from "../data";
 import * as R from "ramda";
 
-const OffBoardRevenue = ({ revenues }) => {
+const OffBoardRevenue = ({ revenues, phaseReversed }) => {
   let letter = 10;
   let totalWidth = R.sum(
     R.map(r => 5 + letter * R.max(r.cost.length, 2), revenues)
@@ -14,6 +14,7 @@ const OffBoardRevenue = ({ revenues }) => {
 
   R.addIndex(R.map)((revenue, index) => {
     let length = letter * revenue.cost.length;
+    let phaseLength = letter * `${revenue.phase}`.length;
     let width = R.max(revenue.cost.length, 2) * letter + 5;
     nodes.push([
       <rect
@@ -39,6 +40,24 @@ const OffBoardRevenue = ({ revenues }) => {
         {revenue.cost}
       </text>
     ]);
+
+    if (revenue.phase) {
+      nodes.push([
+        <text
+          fill={colors[revenue.phaseColor] || colors["white"]}
+          fontSize="14"
+          alignmentBaseline="central"
+          textAnchor="middle"
+          textLength={phaseLength}
+          lengthAdjust="spacingAndGlyphs"
+          x={currentX + 0.5 * width}
+          y={phaseReversed ? -21 : 21}
+          key={`phase-${revenue.phase}`}
+        >
+          {revenue.phase}
+        </text>
+      ]);
+    }
 
     currentX = currentX + width;
   }, revenues);

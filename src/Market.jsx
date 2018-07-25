@@ -135,7 +135,7 @@ const Market1Diag = ({ market, par, splice }) => {
   );
 };
 
-const Market2D = ({ market, par, title }) => {
+const Market2D = ({ legend, market, par, title, width, height }) => {
   let rows = R.addIndex(R.map)((marketRow, row) => {
     let cells = R.addIndex(R.map)((value, col) => {
       let color = null;
@@ -151,10 +151,21 @@ const Market2D = ({ market, par, title }) => {
       if (value && value.color) {
         color = colors[value.color];
         labelColor = colors[value.textColor] || colors["black"];
+      } else if (
+        value &&
+        Number.isInteger(value.legend) &&
+        value.legend < legend.length
+      ) {
+        color = colors[legend[value.legend].color];
+        labelColor = colors[value.textColor] || colors["black"];
+      } else if (value && value.par) {
+        color = colors[par.color || "gray"];
+        labelColor = colors[value.textColor] || colors["black"];
       }
 
       return (
-        <td key={`${row}-${col}`}
+        <td
+          key={`${row}-${col}`}
           style={{ backgroundColor: color, color: labelColor }}
           className={classes.join(" ")}
         >
@@ -181,7 +192,7 @@ const Market2D = ({ market, par, title }) => {
   return (
     <div className="market">
       <h2>{title} Stock Market</h2>
-      <table>
+      <table style={{ width, height }}>
         <tbody>{rows}</tbody>
       </table>
     </div>

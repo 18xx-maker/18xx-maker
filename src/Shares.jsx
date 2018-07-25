@@ -20,12 +20,10 @@ const Shares = ({ match }) => {
             (share, i) => (
               <Share
                 key={`${company.abbrev}-${i}`}
-                shares={share.shares}
-                percent={share.percent}
                 name={company.name}
                 abbrev={company.abbrev}
-                label={share.label}
                 color={company.color}
+                {...share}
               />
             ),
             shares

@@ -6,7 +6,7 @@ const Par = ({ par }) => {
   let rows = R.map(
     value => (
       <tr key={`par-${value}`}>
-        <td style={{ backgroundColor: colors["gray"] }}>{value}</td>
+        <td style={{ backgroundColor: colors[par.color || "gray"] }}>{value}</td>
       </tr>
     ),
     par.values
