@@ -313,7 +313,7 @@ const game = {
     },
     movement: {
       up: ["Sold out"],
-      down: ["Each share block sold"],
+      down: ["Once per sale"],
       left: ["No dividends"],
       right: ["Dividends >= current price"]
     },
