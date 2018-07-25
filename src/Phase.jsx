@@ -19,7 +19,7 @@ const Phase = ({ phases }) => {
     <table>
       <thead>
         <tr>
-          <th>Train</th>
+          <th>Phase</th>
           <th>#</th>
           <th>Limit</th>
           <th>Tiles</th>
