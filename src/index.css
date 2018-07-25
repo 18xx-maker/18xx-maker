@@ -216,10 +216,6 @@ svg {
   text-align: left;
 }
 
-.charter__phase tr:nth-child(even) td {
-  background: #eee;
-}
-
 .charter__phase td {
   padding: 0.03in 0.05in;
   border: 1px solid black;
