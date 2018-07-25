@@ -193,7 +193,7 @@ const game = {
       name: "Rio Grande Southern",
       price: "$150",
       revenue: "$20",
-      description: "Comes with a 10% share of the Denver and Rio Grande Western. The D&RGW must be given payment for this 10% share by the bank when the company price is set."
+      description: "Obtain a 10% share of D&RGW. The bank will compensate D&RGW for this share when it's par value has been established."
     }
   ],
 
