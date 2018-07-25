@@ -341,8 +341,8 @@ const game = {
     movement: {
       up: ["Sold out"],
       down: ["Once per sale"],
-      left: ["No dividends"],
-      right: ["Dividends >= current price"]
+      left: ["Paid no dividends"],
+      right: ["Paid dividends >= current share price"]
     },
     width: "calc(100% - 2in)",
     market: [
