@@ -324,7 +324,7 @@ const game = {
       optional: [
         "Issue or redeem shares",
         "Collect bond dividends",
-        "Purchase private company"
+        "Purchase private companies"
       ]
     }
   ],

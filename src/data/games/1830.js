@@ -424,7 +424,7 @@ const game = {
       ],
       ordered: true,
       optional: [
-        "Purchase private company"
+        "Purchase private companies"
       ]
     }
   ],
