@@ -200,7 +200,7 @@ const game = {
       name: "Rio Grande Southern",
       price: "$150",
       revenue: "$20",
-      description: "Obtain a 10% share of D&RGW. The bank will compensate D&RGW for this share when it's par value has been established."
+      description: "Obtain a 10% share of D&RGW. The bank will compensate D&RGW for this share after its par value has been set."
     }
   ],
 

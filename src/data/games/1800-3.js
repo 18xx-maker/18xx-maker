@@ -221,13 +221,13 @@ const game = {
       price: "$70",
       revenue: "$10",
       players: "3+",
-      description: "Trade for any share in the bank pool at any time, this action closes the company. Closes when the first 5 Train is purchased."
+      description: "Trade for any share in the market at any time, this action closes the company. Closes when the first 5 Train is purchased."
     },
     {
       name: "Rio Grande Southern",
       price: "$150",
       revenue: "$20",
-      description: "Obtain a 10% share of D&RGW. The bank will compensate D&RGW for this share when it's par value has been established."
+      description: "Obtain a 10% share of D&RGW. The bank will compensate D&RGW for this share after its par value has been set."
     }
   ],
 

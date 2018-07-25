@@ -1,0 +1,37 @@
+.TileManifest {
+  display: grid;
+  grid-template-columns: 1.7in 1.7in 1.7in 1.7in;
+  grid-template-rows: 0.5in;
+  grid-auto-rows: 0.5in;
+  grid-auto-flow: row dense;
+  gap: 0.05in 0.4in;
+  grid-template-areas: "title title title title";
+  text-align: left;
+}
+
+.TileManifest--Title {
+  grid-area: title;
+  border-bottom: 1px solid black;
+  line-height: 0.5in;
+  font-size: 0.25in;
+  text-align: center;
+}
+
+.TileManifest--Tile {
+  display: flex;
+  justify-content: center;
+  line-height: 0.5in;
+}
+
+.TileManifest--Image {
+  height: 0.5in;
+  width: 0.57735in;
+  padding: 0.05in 0;
+  box-sizing: border-box;
+}
+
+.TileManifest--Id,
+.TileManifest--Quantity {
+  width: 0.5in;
+  font-size: 0.16in;
+}

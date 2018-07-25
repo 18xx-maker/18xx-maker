@@ -20,6 +20,7 @@ import Stock from "./Stock";
 import Trains from "./Trains";
 import Tokens from "./Tokens";
 import TileSheet from "./TileSheet";
+import TileManifest from "./TileManifest";
 
 import GameMenu from "./GameMenu";
 import TilesMenu from "./TilesMenu";
@@ -49,6 +50,7 @@ class App extends Component {
             <Route path="/:game/shares" component={Shares} />
             <Route path="/:game/stock" component={Stock} />
             <Route path="/:game/tiles" component={TileSheet} />
+            <Route path="/:game/manifest" component={TileManifest} />
             <Route path="/:game/tokens" component={Tokens} />
             <Route path="/:game/trains" component={Trains} />
           </Switch>
