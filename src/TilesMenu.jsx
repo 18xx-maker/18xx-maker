@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import TileNav from "./TileNav";
+
 import "./GameMenu.css";
 
 const TilesMenu = ({ match }) => {
@@ -8,23 +10,10 @@ const TilesMenu = ({ match }) => {
 
   return (
     <div className="GameMenu">
-      <h1>Tiles</h1>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/tiles">All</Link>
-          </li>
-          <li>
-            <Link to="/tiles/atoms">Atoms</Link>
-          </li>
-          <li>
-            <Link to="/tiles/positioning">Positioning</Link>
-          </li>
-        </ul>
-      </nav>
+      <h2>
+        <Link to="/">Home</Link>
+      </h2>
+      <TileNav />
     </div>
   );
 };
