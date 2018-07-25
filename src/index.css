@@ -248,22 +248,22 @@ svg {
 
 .charter ul {
   list-style-type: disc;
-  list-style-position: inside;
+  list-style-position: outside;
   padding: 0;
   padding-left: 3px;
-  margin: 0;
+  margin: 0 0 0 0.15in;
 }
 
 .charter ul li span {
   position: relative;
-  left: -6px;
+  left: -3px;
 }
 
 .charter ol {
   list-style-type: decimal;
-  list-style-position: inside;
+  list-style-position: outside;
   padding: 0;
-  margin: 0;
+  margin: 0 0 0 0.15in;
 }
 
 .train__name {
