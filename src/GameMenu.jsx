@@ -19,6 +19,13 @@ const GameMenu = ({ match, location }) => {
 
   return (
     <div className="GameMenu">
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+        </ul>
+      </nav>
       <h1>Games</h1>
       <nav>
         <ul>{gameList}</ul>
@@ -26,9 +33,6 @@ const GameMenu = ({ match, location }) => {
       <h1>{game}</h1>
       <nav>
         <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
           <li>
             <Link to="background">Background</Link>
           </li>

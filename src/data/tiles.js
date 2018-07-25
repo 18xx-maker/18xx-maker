@@ -5126,6 +5126,246 @@ const tiles = {
     ],
     track: [{ side: 1 }, { type: "1860-C", side: 2 }]
   },
+  "800": {
+    color: "green",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 30
+      }
+    ],
+    labels: [
+      {
+        label: "D&SL",
+        angle: 270,
+        percent: 0.575
+      }
+    ],
+    centerTowns: [{}],
+    track: [
+      {
+        type: "city",
+        side: 1
+      },
+      {
+        type: "city",
+        side: 2
+      },
+      {
+        type: "city",
+        side: 3
+      },
+      {
+        type: "city",
+        side: 4
+      }
+    ]
+  },
+  "802": {
+    color: "green",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 40
+      }
+    ],
+    labels: [{
+      label: "D",
+      angle: 150,
+      percent: 0.8
+    }],
+    cities: [
+      {
+        size: 2,
+        name: {
+          name: "Denver",
+          reverse: true,
+          offset: 66.67
+        }
+      }
+    ],
+    track: [
+      {
+        side: 1
+      },
+      {
+        side: 3
+      },
+      {
+        side: 4
+      },
+      {
+        side: 5
+      }
+    ]
+  },
+  "804": {
+    color: "brown",
+    values: [
+      {
+        angle: 180,
+        percent: 0.667,
+        value: 40
+      }
+    ],
+    cities: [{}],
+    track: [{ side: 1 }, { side: 2 }, { side: 6 }]
+  },
+  "803": {
+    color: "brown",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 60
+      }
+    ],
+    labels: [{
+      label: "D",
+      angle: 150,
+      percent: 0.8
+    }],
+    cities: [
+      {
+        size: 2,
+        name: {
+          name: "Denver",
+          reverse: true,
+          offset: 66.67
+        }
+      }
+    ],
+    track: [
+      {
+        side: 1
+      },
+      {
+        side: 3
+      },
+      {
+        side: 4
+      },
+      {
+        side: 5
+      }
+    ]
+  },
+  "805": {
+    color: "gray",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 60
+      }
+    ],
+    labels: [{
+      label: "D",
+      angle: 150,
+      percent: 0.8
+    }],
+    cities: [
+      {
+        size: 2,
+        name: {
+          name: "Denver",
+          reverse: true,
+          offset: 66.67
+        }
+      }
+    ],
+    track: [
+      {
+        side: 1
+      },
+      {
+        side: 3
+      },
+      {
+        side: 4
+      },
+      {
+        side: 5
+      }
+    ]
+  },
+  "806": {
+    color: "gray",
+    values: [
+      {
+        angle: 210,
+        percent: 0.75,
+        value: 10
+      }
+    ],
+    centerTowns: [{}],
+    track: [
+      {
+        type: "city",
+        side: 1
+      },
+      {
+        type: "city",
+        side: 6
+      },
+      {
+        type: "city",
+        side: 4
+      }
+    ]
+  },
+  "807": {
+    color: "gray",
+    values: [
+      {
+        angle: 210,
+        percent: 0.75,
+        value: 10
+      }
+    ],
+    centerTowns: [{}],
+    track: [
+      {
+        type: "city",
+        side: 1
+      },
+      {
+        type: "city",
+        side: 2
+      },
+      {
+        type: "city",
+        side: 4
+      }
+    ]
+  },
+  "808": {
+    color: "gray",
+    values: [
+      {
+        angle: 180,
+        percent: 0.667,
+        value: 10
+      }
+    ],
+    centerTowns: [{}],
+    track: [
+      {
+        type: "city",
+        side: 1
+      },
+      {
+        type: "city",
+        side: 2
+      },
+      {
+        type: "city",
+        side: 6
+      }
+    ]
+  },
   "956": {
     color: "yellow",
     values: [
@@ -5503,25 +5743,32 @@ const tiles = {
         value: 40
       }
     ],
-    borders: [{
-      side: 1,
-      color: "red"
-    },{
-      side: 2,
-      color: "red"
-    },{
-      side: 3,
-      color: "red"
-    },{
-      side: 4,
-      color: "red"
-    },{
-      side: 5,
-      color: "red"
-    },{
-      side: 6,
-      color: "red"
-    }],
+    borders: [
+      {
+        side: 1,
+        color: "red"
+      },
+      {
+        side: 2,
+        color: "red"
+      },
+      {
+        side: 3,
+        color: "red"
+      },
+      {
+        side: 4,
+        color: "red"
+      },
+      {
+        side: 5,
+        color: "red"
+      },
+      {
+        side: 6,
+        color: "red"
+      }
+    ],
     cities: [{}],
     track: [
       {
@@ -5543,25 +5790,32 @@ const tiles = {
         value: 40
       }
     ],
-    borders: [{
-      side: 1,
-      color: "red"
-    },{
-      side: 2,
-      color: "red"
-    },{
-      side: 3,
-      color: "red"
-    },{
-      side: 4,
-      color: "red"
-    },{
-      side: 5,
-      color: "red"
-    },{
-      side: 6,
-      color: "red"
-    }],
+    borders: [
+      {
+        side: 1,
+        color: "red"
+      },
+      {
+        side: 2,
+        color: "red"
+      },
+      {
+        side: 3,
+        color: "red"
+      },
+      {
+        side: 4,
+        color: "red"
+      },
+      {
+        side: 5,
+        color: "red"
+      },
+      {
+        side: 6,
+        color: "red"
+      }
+    ],
     cities: [{}],
     track: [
       {
@@ -5583,25 +5837,32 @@ const tiles = {
         value: 40
       }
     ],
-    borders: [{
-      side: 1,
-      color: "red"
-    },{
-      side: 2,
-      color: "red"
-    },{
-      side: 3,
-      color: "red"
-    },{
-      side: 4,
-      color: "red"
-    },{
-      side: 5,
-      color: "red"
-    },{
-      side: 6,
-      color: "red"
-    }],
+    borders: [
+      {
+        side: 1,
+        color: "red"
+      },
+      {
+        side: 2,
+        color: "red"
+      },
+      {
+        side: 3,
+        color: "red"
+      },
+      {
+        side: 4,
+        color: "red"
+      },
+      {
+        side: 5,
+        color: "red"
+      },
+      {
+        side: 6,
+        color: "red"
+      }
+    ],
     cities: [{}],
     track: [
       {
@@ -5631,25 +5892,32 @@ const tiles = {
       }
     ],
     cities: [{ size: 2 }],
-    borders: [{
-      side: 1,
-      color: "red"
-    },{
-      side: 2,
-      color: "red"
-    },{
-      side: 3,
-      color: "red"
-    },{
-      side: 4,
-      color: "red"
-    },{
-      side: 5,
-      color: "red"
-    },{
-      side: 6,
-      color: "red"
-    }],
+    borders: [
+      {
+        side: 1,
+        color: "red"
+      },
+      {
+        side: 2,
+        color: "red"
+      },
+      {
+        side: 3,
+        color: "red"
+      },
+      {
+        side: 4,
+        color: "red"
+      },
+      {
+        side: 5,
+        color: "red"
+      },
+      {
+        side: 6,
+        color: "red"
+      }
+    ],
     track: [
       {
         side: 1,
@@ -5766,25 +6034,32 @@ const tiles = {
       }
     ],
     cities: [{ size: 2 }],
-    borders: [{
-      side: 1,
-      color: "red"
-    },{
-      side: 2,
-      color: "red"
-    },{
-      side: 3,
-      color: "red"
-    },{
-      side: 4,
-      color: "red"
-    },{
-      side: 5,
-      color: "red"
-    },{
-      side: 6,
-      color: "red"
-    }],
+    borders: [
+      {
+        side: 1,
+        color: "red"
+      },
+      {
+        side: 2,
+        color: "red"
+      },
+      {
+        side: 3,
+        color: "red"
+      },
+      {
+        side: 4,
+        color: "red"
+      },
+      {
+        side: 5,
+        color: "red"
+      },
+      {
+        side: 6,
+        color: "red"
+      }
+    ],
     track: [
       {
         side: 1,
@@ -5810,25 +6085,32 @@ const tiles = {
       }
     ],
     cities: [{ size: 2 }],
-    borders: [{
-      side: 1,
-      color: "red"
-    },{
-      side: 2,
-      color: "red"
-    },{
-      side: 3,
-      color: "red"
-    },{
-      side: 4,
-      color: "red"
-    },{
-      side: 5,
-      color: "red"
-    },{
-      side: 6,
-      color: "red"
-    }],
+    borders: [
+      {
+        side: 1,
+        color: "red"
+      },
+      {
+        side: 2,
+        color: "red"
+      },
+      {
+        side: 3,
+        color: "red"
+      },
+      {
+        side: 4,
+        color: "red"
+      },
+      {
+        side: 5,
+        color: "red"
+      },
+      {
+        side: 6,
+        color: "red"
+      }
+    ],
     track: [
       {
         side: 1,
@@ -5854,25 +6136,32 @@ const tiles = {
       }
     ],
     cities: [{ size: 2 }],
-    borders: [{
-      side: 1,
-      color: "red"
-    },{
-      side: 2,
-      color: "red"
-    },{
-      side: 3,
-      color: "red"
-    },{
-      side: 4,
-      color: "red"
-    },{
-      side: 5,
-      color: "red"
-    },{
-      side: 6,
-      color: "red"
-    }],
+    borders: [
+      {
+        side: 1,
+        color: "red"
+      },
+      {
+        side: 2,
+        color: "red"
+      },
+      {
+        side: 3,
+        color: "red"
+      },
+      {
+        side: 4,
+        color: "red"
+      },
+      {
+        side: 5,
+        color: "red"
+      },
+      {
+        side: 6,
+        color: "red"
+      }
+    ],
     track: [
       {
         side: 1,
@@ -5898,25 +6187,32 @@ const tiles = {
       }
     ],
     cities: [{ size: 2 }],
-    borders: [{
-      side: 1,
-      color: "red"
-    },{
-      side: 2,
-      color: "red"
-    },{
-      side: 3,
-      color: "red"
-    },{
-      side: 4,
-      color: "red"
-    },{
-      side: 5,
-      color: "red"
-    },{
-      side: 6,
-      color: "red"
-    }],
+    borders: [
+      {
+        side: 1,
+        color: "red"
+      },
+      {
+        side: 2,
+        color: "red"
+      },
+      {
+        side: 3,
+        color: "red"
+      },
+      {
+        side: 4,
+        color: "red"
+      },
+      {
+        side: 5,
+        color: "red"
+      },
+      {
+        side: 6,
+        color: "red"
+      }
+    ],
     track: [
       {
         side: 1,
@@ -5949,25 +6245,32 @@ const tiles = {
       }
     ],
     cities: [{ size: 2 }],
-    borders: [{
-      side: 1,
-      color: "red"
-    },{
-      side: 2,
-      color: "red"
-    },{
-      side: 3,
-      color: "red"
-    },{
-      side: 4,
-      color: "red"
-    },{
-      side: 5,
-      color: "red"
-    },{
-      side: 6,
-      color: "red"
-    }],
+    borders: [
+      {
+        side: 1,
+        color: "red"
+      },
+      {
+        side: 2,
+        color: "red"
+      },
+      {
+        side: 3,
+        color: "red"
+      },
+      {
+        side: 4,
+        color: "red"
+      },
+      {
+        side: 5,
+        color: "red"
+      },
+      {
+        side: 6,
+        color: "red"
+      }
+    ],
     track: [
       {
         side: 1,
@@ -5993,11 +6296,13 @@ const tiles = {
   },
   "987": {
     color: "brown",
-    labels: [{
-      label: "HQG",
-      angle: -40,
-      percent: 0.667
-    }],
+    labels: [
+      {
+        label: "HQG",
+        angle: -40,
+        percent: 0.667
+      }
+    ],
     values: [
       {
         angle: 210,
@@ -6006,25 +6311,32 @@ const tiles = {
       }
     ],
     cities: [{ size: 2 }],
-    borders: [{
-      side: 1,
-      color: "red"
-    },{
-      side: 2,
-      color: "red"
-    },{
-      side: 3,
-      color: "red"
-    },{
-      side: 4,
-      color: "red"
-    },{
-      side: 5,
-      color: "red"
-    },{
-      side: 6,
-      color: "red"
-    }],
+    borders: [
+      {
+        side: 1,
+        color: "red"
+      },
+      {
+        side: 2,
+        color: "red"
+      },
+      {
+        side: 3,
+        color: "red"
+      },
+      {
+        side: 4,
+        color: "red"
+      },
+      {
+        side: 5,
+        color: "red"
+      },
+      {
+        side: 6,
+        color: "red"
+      }
+    ],
     track: [
       {
         side: 1
@@ -6085,25 +6397,32 @@ const tiles = {
       }
     ],
     cities: [{ size: 3 }],
-    borders: [{
-      side: 1,
-      color: "red"
-    },{
-      side: 2,
-      color: "red"
-    },{
-      side: 3,
-      color: "red"
-    },{
-      side: 4,
-      color: "red"
-    },{
-      side: 5,
-      color: "red"
-    },{
-      side: 6,
-      color: "red"
-    }],
+    borders: [
+      {
+        side: 1,
+        color: "red"
+      },
+      {
+        side: 2,
+        color: "red"
+      },
+      {
+        side: 3,
+        color: "red"
+      },
+      {
+        side: 4,
+        color: "red"
+      },
+      {
+        side: 5,
+        color: "red"
+      },
+      {
+        side: 6,
+        color: "red"
+      }
+    ],
     track: [
       {
         gauge: "narrow",
@@ -6144,25 +6463,32 @@ const tiles = {
       }
     ],
     cities: [{ size: 3 }],
-    borders: [{
-      side: 1,
-      color: "red"
-    },{
-      side: 2,
-      color: "red"
-    },{
-      side: 3,
-      color: "red"
-    },{
-      side: 4,
-      color: "red"
-    },{
-      side: 5,
-      color: "red"
-    },{
-      side: 6,
-      color: "red"
-    }],
+    borders: [
+      {
+        side: 1,
+        color: "red"
+      },
+      {
+        side: 2,
+        color: "red"
+      },
+      {
+        side: 3,
+        color: "red"
+      },
+      {
+        side: 4,
+        color: "red"
+      },
+      {
+        side: 5,
+        color: "red"
+      },
+      {
+        side: 6,
+        color: "red"
+      }
+    ],
     track: [
       {
         gauge: "narrow",

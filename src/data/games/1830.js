@@ -432,10 +432,10 @@ const game = {
       values: [100, 90, 82, 76, 71, 67]
     },
     movement: {
-      "up": ["Sold Out"],
-      "down": ["Every Share Sold"],
-      "left": ["Withheld Revenue"],
-      "right": ["Paid Dividends"]
+      "up": ["Sold out"],
+      "down": ["Every share sold"],
+      "left": ["Withheld revenue"],
+      "right": ["Paid dividends"]
     },
     market: [
       [

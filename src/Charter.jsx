@@ -27,10 +27,16 @@ const Charter = ({ name, abbrev, color, tokens, phases, turns }) => {
 
     let stepsList = turn.ordered ? <ol>{steps}</ol> : <ul>{steps}</ul>;
 
+    let optionals = R.addIndex(R.map)((step, i) => {
+      return <li key={i}><span>{step}</span></li>;
+    }, turn.optional || []);
+    let optionalList = <ul>{optionals}</ul>
+
     return (
       <React.Fragment>
         <dt>{turn.name}</dt>
         <dd>{stepsList}</dd>
+        {turn.optional && <dd>{optionalList}</dd>}
       </React.Fragment>
     );
   }, turns);

@@ -7,6 +7,7 @@ const game = {
     background: "green",
     width: 150,
     orientation: "horizontal",
+    color_10: "orange",
     titleY: 750,
     titleX: 170,
     extraTotalWidth: 200,
@@ -26,13 +27,18 @@ const game = {
       number: 2,
       capital: "$520",
       certLimit: 7
+    },
+    {
+      number: 3,
+      capital: "$520",
+      certLimit: 7
     }
   ],
 
   // Railway Companies
   companies: [
     {
-      name: "Denver & Rio Grande Western Railroad",
+      name: "Denver & Rio Grande Western",
       abbrev: "D&RGW",
       tokens: ["Free", "$40", "$100"],
       color: "orange",
@@ -47,14 +53,20 @@ const game = {
           quantity: 6,
           percent: 10,
           shares: 1
+        },
+        {
+          quantity: 1,
+          label: "Bond",
+          cost: "$300",
+          revenue: "$50"
         }
       ]
     },
     {
-      name: "Colorado & Southern Railroad",
+      name: "Colorado & Southern",
       abbrev: "C&S",
       tokens: ["Free", "$40", "$100"],
-      color: "blue",
+      color: "purple",
       shares: [
         {
           quantity: 1,
@@ -66,6 +78,12 @@ const game = {
           quantity: 6,
           percent: 10,
           shares: 1
+        },
+        {
+          quantity: 1,
+          label: "Bond",
+          cost: "$300",
+          revenue: "$50"
         }
       ]
     }
@@ -167,67 +185,56 @@ const game = {
     {
       name: "Denver and Salt Lake",
       price: "$70",
-      revenue: "$10"
+      revenue: "$10",
+      description: "This private company comes with the special green D&SL tile. The corporation that owns the D&SL can use this tile to upgrade a yellow tile on its reserved small town hex as its single tile lay for that operating round. This action closes the private company. If a corporation owns the D&SL when it closes in phase 5, the tile may be kept."
     },
     {
       name: "Rio Grande Southern",
       price: "$150",
-      revenue: "$20"
-    },
-    {
-      name: "Denver & Rio Grande Western Railroad Bond",
-      price: "$300",
-      revenue: "$50"
-    },
-    {
-      name: "Colorado & Southern Railroad Bond",
-      price: "$300",
-      revenue: "$50"
+      revenue: "$20",
+      description: "Comes with a 10% share of the Denver and Rio Grande Western. The D&RGW must be given payment for this 10% share by the bank when the company price is set."
     }
   ],
 
   phases: [
     {
+      name: "1",
+      tiles: "yellow"
+    },
+    {
       name: "2",
-      limit: "4",
-      number: "6",
+      limit: "2",
+      number: "2",
       tiles: "yellow"
     },
     {
       name: "3",
-      limit: "4",
-      number: "5",
+      limit: "2",
+      number: "1",
       tiles: "green",
       notes: "Private companies may be purchased"
     },
     {
       name: "4",
       rust: "2",
-      limit: "3",
-      number: "4",
+      limit: "2",
+      number: "1",
       tiles: "green"
     },
     {
       name: "5",
       limit: "2",
-      number: "3",
+      number: "1",
       tiles: "brown",
       notes: "Private companies are closed"
     },
     {
       name: "6",
-      limit: "2",
-      number: "2",
+      limit: "3",
+      number: "4",
       rust: "3",
-      tiles: "brown",
-      notes: "D Trains may be purchased"
-    },
-    {
-      name: "D",
-      limit: "2",
-      number: "6",
-      rust: "4",
-      tiles: "brown"
+      tiles: "gray",
+      notes: "All E Trains may be purchased"
     }
   ],
 
@@ -237,37 +244,17 @@ const game = {
       notes: [
         {
           color: "orange",
-          note: "Shares in the market pay dividends to the company"
+          note: "Shares in the market pay dividends to the bank"
         },
         {
-          color: "orange",
-          note: "No more than 50% of a company may be in the market"
+          color: "brown",
+          icon: "exclamation",
+          note: "The president share may not be sold"
         },
         {
-          color: "orange",
+          color: "red",
+          icon: "times",
           note: "No stock sales during first stock round"
-        }
-      ]
-    },
-    {
-      name: "IPO",
-      notes: [
-        {
-          color: "green",
-          note: "Companies float once 60% sold"
-        }
-      ]
-    },
-    {
-      name: "Trains",
-      notes: [
-        {
-          color: "yellow",
-          note: "D trains available after first 6 is bought"
-        },
-        {
-          color: "yellow",
-          note: "4, 5, and 6 can be exchanged for a D train"
         }
       ]
     }
@@ -296,11 +283,10 @@ const game = {
     {
       name: "Stock Round",
       steps: [
-        "Sell any number of shares",
-        "Buy one share",
-        "Sell any number of shares"
+        "Sell any number of non-president shares",
+        "Buy one share or corporate bond (president only)"
       ],
-      ordered: true
+      ordered: false
     },
     {
       name: "Operating Round",
@@ -311,66 +297,108 @@ const game = {
         "Pay dividends or withhold revenue",
         "Purchase trains"
       ],
-      ordered: true
+      ordered: true,
+      optional: [
+        "Purchase or sell company shares",
+        "Collect bond dividends",
+        "Purchase private company"
+      ]
     }
   ],
 
   stock: {
     type: "2D",
     par: {
-      values: [100, 90, 80, 70, 60],
-      cells: [[1, 3], [2, 3], [3, 3], [4, 3], [5, 3]]
+      values: [100, 90, 80, 70, 60]
     },
+    movement: {
+      up: ["Sold out"],
+      down: ["Each share block sold"],
+      left: ["No dividends"],
+      right: ["Dividends >= current price"]
+    },
+    width: "calc(100% - 2in)",
     market: [
-      [80, 90, 100, 110, 120, 140, 160, 180, 200, 225],
-      [70, 80, 90, 100, 110, 120, 140, 160, 180],
-      [60, 70, 80, 90, 100, 110, 120],
       [
-        { label: 50, color: "yellow" },
-        { label: 60, color: "yellow" },
-        70,
-        80,
+        { label: 80, arrow: "down" },
         90,
         100,
-        110
+        110,
+        120,
+        140,
+        160,
+        180,
+        200,
+        225
       ],
       [
-        { label: 40, color: "orange" },
-        { label: 50, color: "yellow" },
-        60,
+        { label: 70, arrow: "down" },
+        80,
+        90,
+        { label: 100, par: true },
+        110,
+        120,
+        140,
+        160,
+        { label: 180, arrow: "up" }
+      ],
+      [
+        { label: 60, arrow: "down" },
         70,
         80,
-        90
+        { label: 90, par: true },
+        100,
+        110,
+        { label: 120, arrow: "up" }
       ],
       [
-        { label: 30, color: "orange" },
-        { label: 40, color: "yellow" },
-        { label: 50, color: "yellow" },
+        { label: 50, legend: 0, arrow: "down" },
+        { label: 60, legend: 0 },
+        70,
+        { label: 80, par: true },
+        90,
+        100,
+        { label: 110, arrow: "up" }
+      ],
+      [
+        { label: 40, legend: 1, arrow: "down" },
+        { label: 50, legend: 0 },
         60,
-        70
+        { label: 70, par: true },
+        80,
+        { label: 90, arrow: "up" }
       ],
       [
-        { label: 20, color: "orange" },
-        { label: 30, color: "orange" },
-        { label: 40, color: "yellow" },
+        { label: 30, legend: 1, arrow: "down" },
+        { label: 40, legend: 0 },
+        { label: 50, legend: 0 },
+        { label: 60, par: true },
+        { label: 70, arrow: "up" }
+      ],
+      [
+        { label: 20, legend: 1, arrow: "down" },
+        { label: 30, legend: 1 },
+        { label: 40, legend: 0 },
         50,
-        60
+        { label: 60, arrow: "up" }
       ],
       [
-        { label: 10, color: "orange" },
-        { label: 20, color: "orange" },
-        { label: 30, color: "yellow" },
-        40
+        { label: 10, legend: 1 },
+        { label: 20, legend: 1 },
+        { label: 30, legend: 0 },
+        { label: 40, arrow: "up" }
       ]
     ],
-    limits: [
+    legend: [
       {
         color: "yellow",
-        description: "Certificates no longer count towards the share limit"
+        description: "Certificates no longer count towards the share limit",
+        icon: "certificate"
       },
       {
         color: "orange",
-        description: "Players may own more than 70% of the company"
+        description: "Players may own more than 70% of the company",
+        icon: "percentage"
       }
     ]
   },
@@ -398,6 +426,8 @@ const game = {
     "28": 1,
     "29": 1,
     "59": 1,
+    "800": 1,
+    "802": 1,
     // Brown
     "39": 1,
     "40": 1,
@@ -411,8 +441,6 @@ const game = {
     "67": 1,
     "68": 1,
     "70": 1,
-    "800": 1,
-    "802": 1,
     "803": 1,
     "804": 2,
     // Gray
@@ -426,22 +454,32 @@ const game = {
     hexes: [
       {
         color: "offboard",
-        cities: [{}],
+        cities: [{
+          percent: 0.3333,
+          name: {
+            name: "Cheyenne"
+          }
+        }],
         offBoardRevenue: {
           angle: 180,
-          percent: 0.667,
+          percent: 0.475,
+          phaseReversed: true,
           revenues: [
             {
-              color: "yellow",
-              cost: "10"
+              color: "white",
+              cost: "10",
+              phase: 2
             },
             {
-              color: "green",
-              cost: "40"
+              color: "black",
+              textColor: "white",
+              cost: "40",
+              phase: 4
             },
             {
-              color: "brown",
-              cost: "70"
+              color: "white",
+              cost: "70",
+              phase: 5
             }
           ]
         },
@@ -528,7 +566,7 @@ const game = {
             companies: [
               {
                 label: "C&S",
-                color: "blue"
+                color: "purple"
               }
             ]
           }
@@ -545,6 +583,11 @@ const game = {
       },
       {
         color: "plain",
+        labels: [{
+          label: "D",
+          angle: 210,
+          percent: 0.6
+        }],
         cities: [
           {
             percent: 0.4,
@@ -554,8 +597,8 @@ const game = {
           }
         ],
         water: {
-          angle: 180,
-          percent: 0.5,
+          angle: 150,
+          percent: 0.6,
           cost: "$40",
           size: "small"
         },
@@ -569,18 +612,24 @@ const game = {
           }
         ],
         offBoardRevenue: {
+          angle: 180,
+          percent: 0.12,
           revenues: [
             {
-              color: "yellow",
-              cost: "10"
+              color: "white",
+              cost: "10",
+              phase: 2
             },
             {
-              color: "green",
-              cost: "20"
+              color: "black",
+              textColor: "white",
+              cost: "20",
+              phase: 4
             },
             {
-              color: "brown",
-              cost: "30"
+              color: "white",
+              cost: "30",
+              phase: 5
             }
           ]
         },
@@ -594,18 +643,24 @@ const game = {
           }
         ],
         offBoardRevenue: {
+          angle: 180,
+          percent: 0.12,
           revenues: [
             {
-              color: "yellow",
-              cost: "20"
+              color: "white",
+              cost: "20",
+              phase: 2
             },
             {
-              color: "green",
-              cost: "30"
+              color: "black",
+              textColor: "white",
+              cost: "30",
+              phase: 4
             },
             {
-              color: "brown",
-              cost: "40"
+              color: "white",
+              cost: "40",
+              phase: 5
             }
           ]
         },
