@@ -187,7 +187,7 @@ const game = {
       name: "Denver and Salt Lake",
       price: "$70",
       revenue: "$10",
-      description: "This private company comes with the special green D&SL tile. The corporation that owns the D&SL can use this tile to upgrade a yellow tile on its reserved small town hex as its single tile lay for that operating round. This action closes the private company. If a corporation owns the D&SL when it closes in phase 5, the tile may be kept."
+      description: "The owning corporation may lay the D&SL tile on their reserved hex (B4 or D4) instead of their normal track action, this action closes the company. Closes when the first 5 Train is purchased, however, the tile may still be laid by the corporation."
     },
     {
       name: "Rio Grande Southern",
@@ -248,9 +248,14 @@ const game = {
           note: "Shares in the market pay dividends to the bank"
         },
         {
+          color: "brown",
+          icon: "exclamation",
+          note: "No more than 50% of a corporation's shares may be in the market at any time"
+        },
+        {
           color: "red",
           icon: "times",
-          note: "No stock sales during first stock round"
+          note: "Shares cannot be sold during the first stock round"
         }
       ]
     }

@@ -207,20 +207,21 @@ const game = {
       name: "Midland Terminal",
       price: "$25",
       players: "3+",
-      revenue: "$5"
+      revenue: "$5",
+      description: "May be sold to a corporation for $10 to $50."
     },
     {
       name: "Denver and Salt Lake",
       price: "$70",
       revenue: "$10",
       players: "3+",
-      description: "A player owning this private company may exchange it for any share in the bank pool. This closes the private company."
+      description: "Trade for any share in the bank pool at any time, this action closes the company. Closes when the first 5 Train is purchased."
     },
     {
       name: "Rio Grande Southern",
       price: "$150",
       revenue: "$20",
-      description: "Comes with a 10% share of the Denver and Rio Grande Western. The D&RGW must be given payment for this 10% share by the bank when the company price is set."
+      description: "Obtain a 10% share of D&RGW. The bank will compensate D&RGW for this share when it's par value has been established."
     }
   ],
 
@@ -275,9 +276,14 @@ const game = {
           note: "Shares in the market pay dividends to the bank"
         },
         {
+          color: "brown",
+          icon: "exclamation",
+          note: "No more than 50% of a corporation's shares may be in the market at any time"
+        },
+        {
           color: "red",
           icon: "times",
-          note: "No stock sales during first stock round"
+          note: "Shares cannot be sold during the first stock round"
         }
       ]
     }

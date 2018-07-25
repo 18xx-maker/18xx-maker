@@ -52,12 +52,12 @@ const game = {
         {
           color: "purple",
           icon: "exclamation",
-          note: "No more than 50% of a company may be in the market"
+          note: "No more than 50% of a corporation's shares may be in the market at any time"
         },
         {
           color: "red",
           icon: "times",
-          note: "No stock sales during first stock round"
+          note: "Shares cannot be sold during the first stock round"
         }
       ]
     }
