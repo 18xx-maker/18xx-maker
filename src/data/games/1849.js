@@ -456,9 +456,9 @@ const game = {
     },
     {
       phase: "16",
-      train: "16H, R6H",
+      train: ["16H", "R6H"],
       limit: "2",
-      number: "4/5, 2",
+      number: ["4/5", "2"],
       rust: "8H",
       tiles: "brown",
       notes: "Stock market tokens can advance in the blue zone"
