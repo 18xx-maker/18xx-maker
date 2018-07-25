@@ -569,7 +569,7 @@ svg {
 .rounds {
   position: relative;
   height: 2.75in;
-  width: 0.75in;
+  width: 1in;
 }
 
 .rounds .tokens {
