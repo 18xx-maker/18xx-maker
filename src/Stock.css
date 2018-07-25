@@ -40,7 +40,6 @@
 
 .Legend {
   width: 3in;
-  margin-right: 0.125in;
 }
 
 .Legend ul {
@@ -48,7 +47,7 @@
 }
 
 .Legend li {
-  margin: 0 0 0.05in 0 !important;
+  margin: 0.05in 0 0 0 !important;
   padding-left: 0.35in !important;
 
   font-size: 0.13in !important;
@@ -73,10 +72,7 @@
   grid-template-areas: "up up up" "left center right" "down down down";
 
   font-size: 0.15in;
-  margin-top: 0.10in;
-
-  border: 1px solid black;
-  background-color: rgb(252,241,222);
+  margin-bottom: 0.10in;
 
   box-sizing: border-box;
 }

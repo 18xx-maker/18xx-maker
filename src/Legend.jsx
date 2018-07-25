@@ -19,8 +19,8 @@ const Legend = ({ legend, movement }) => {
 
   return (
     <div className="Legend">
-      <ul className="notes">{items}</ul>
       <Movement movement={movement} />
+      <ul className="notes">{items}</ul>
     </div>
   );
 };
