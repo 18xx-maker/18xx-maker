@@ -1,6 +1,8 @@
 import React from "react";
 import * as R from "ramda";
 
+import { colors } from "../data";
+
 import Svg from "../Svg";
 
 import Id from "./Id";
@@ -222,6 +224,19 @@ const Atoms = () => {
     {
       name: "Bridge",
       examples: [<Bridge cost="$40" />]
+    },
+    {
+      name: "Clip Paths",
+      examples: [
+        <use href="#townPath" fill="none" stroke={colors["purple"]} />,
+        <use href="#townPathReverse" fill="none" stroke={colors["purple"]} />,
+        <use href="#cityPath" fill="none" stroke={colors["purple"]} />,
+        <use href="#cityPathReverse" fill="none" stroke={colors["purple"]} />,
+        <use href="#city2Path" fill="none" stroke={colors["purple"]} />,
+        <use href="#city2PathReverse" fill="none" stroke={colors["purple"]} />,
+        <use href="#city3Path" fill="none" stroke={colors["purple"]} />,
+        <use href="#city3PathReverse" fill="none" stroke={colors["purple"]} />
+      ]
     }
   ];
 

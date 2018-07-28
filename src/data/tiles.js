@@ -5262,7 +5262,7 @@ const tiles = {
       {
         angle: 210,
         percent: 0.8,
-        value: 60
+        value: 50
       }
     ],
     labels: [{

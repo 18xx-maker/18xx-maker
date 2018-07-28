@@ -47,7 +47,7 @@ const game = {
       notes: [
         {
           color: "blue",
-          note: "Shares in the market pay dividends to the company"
+          note: "Shares in the market pay dividends to the corporation"
         },
         {
           color: "purple",

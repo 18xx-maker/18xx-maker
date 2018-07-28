@@ -368,7 +368,7 @@ const game = {
       notes: [
         {
           color: "orange",
-          note: "Shares in the market pay dividends to the company"
+          note: "Shares in the market pay dividends to the corporation"
         },
         {
           color: "brown",
@@ -598,7 +598,7 @@ const game = {
       },
       {
         color: "orange",
-        description: "Players may own more than 70% of this corporation",
+        description: "Players may own more than 60% of this corporation",
         icon: "percentage"
       },
       {
