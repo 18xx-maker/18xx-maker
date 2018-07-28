@@ -21,7 +21,6 @@ const Tokens = ({ match }) => {
       <Token
         label={company.abbrev}
         color={company.color}
-        width={25}
         bleed={true}
       />
     );
@@ -30,7 +29,6 @@ const Tokens = ({ match }) => {
         <Token
           label={company.abbrev}
           color={company.color}
-          width={25}
           bleed={true}
           inverse={true}
         />
@@ -59,7 +57,6 @@ const Tokens = ({ match }) => {
         <g key={index} transform={`translate(${60 * index + 30} 0)`}>
           <Token
             icon={label}
-            width={25}
             bleed={true}
             color="white"
             outline="black"
@@ -71,7 +68,6 @@ const Tokens = ({ match }) => {
         <g key={index} transform={`translate(${60 * index + 30} 0)`}>
           <Token
             label={label}
-            width={25}
             bleed={true}
             color="white"
             outline="black"
