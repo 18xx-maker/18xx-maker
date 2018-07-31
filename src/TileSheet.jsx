@@ -18,7 +18,13 @@ const TileSheet = ({ match }) => {
   let tileHeight = height * RATIO;
   let tileWidth = width * RATIO;
   let perRow = Math.floor(paper.width / (tileWidth + 12.5));
-  let ids = R.chain(k => Array(game.tiles[k]).fill(k), R.keys(game.tiles));
+  let ids = R.sortWith(
+    [
+      R.ascend(id => Number(id.split("|")[0] || 0)),
+      R.ascend(id => Number(id.split("|")[1] || 0))
+    ],
+    R.chain(k => Array(game.tiles[k]).fill(k), R.keys(game.tiles))
+  );
 
   let tiles = R.addIndex(R.map)(
     (row, i) => (

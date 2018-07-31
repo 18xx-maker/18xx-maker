@@ -30,8 +30,12 @@
   box-sizing: border-box;
 }
 
-.TileManifest--Id,
+.TileManifest--Id {
+  width: 0.75in;
+  font-size: 0.16in;
+}
+
 .TileManifest--Quantity {
-  width: 0.5in;
+  width: 0.25in;
   font-size: 0.16in;
 }

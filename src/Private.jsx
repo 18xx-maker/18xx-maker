@@ -8,7 +8,7 @@ const Private = ({ name, price, revenue, icon, players, description }) => {
         <div className="private__name">{name}</div>
         <div className="private__description">{description}</div>
         <div className="private__price">{price}</div>
-        {players && <div className="private__players">Players: {players}</div>}
+        {players && <div className="private__players">{players}</div>}
         <div className="private__revenue">Revenue: {revenue}</div>
       </div>
     </div>

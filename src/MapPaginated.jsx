@@ -56,7 +56,15 @@ const MapPaginated = ({ match }) => {
     let x = -25; // Start with room for margins
     let pages = R.map(width => {
       let page = (
-        <div className="cutlines">
+        <div
+          className="cutlines"
+          style={{
+            width: `${(width + 25) / 100}in`,
+            height: `${(height + 25) / 100}in`,
+            float: "none",
+            margin: "auto auto"
+          }}
+        >
           <div className="MapPage">
             <svg
               style={{
