@@ -8,19 +8,19 @@ import Atoms from "./atoms";
 import Positioning from "./Positioning";
 
 import Background from "./Background";
+import Cards from "./Cards";
 import Charters from "./Charters";
-import MapPaginated from "./MapPaginated";
-import MapSingle from "./MapSingle";
 import Home from "./Home";
 import IPO from "./IPO";
-import Privates from "./Privates";
 import Revenue from "./Revenue";
-import Shares from "./Shares";
 import Stock from "./Stock";
-import Trains from "./Trains";
 import Tokens from "./Tokens";
+
 import TileSheet from "./TileSheet";
 import TileManifest from "./TileManifest";
+
+import MapPaginated from "./MapPaginated";
+import MapSingle from "./MapSingle";
 
 import GameMenu from "./GameMenu";
 import TilesMenu from "./TilesMenu";
@@ -41,20 +41,18 @@ class App extends Component {
             <Route path="/tiles/positioning" component={Positioning} />
             <Route path="/tiles/:id" component={SingleTile} />
             <Route path="/:game/background" component={Background} />
+            <Route path="/:game/cards" component={Cards} />
             <Route path="/:game/charters" component={Charters} />
             <Route path="/:game/ipo" component={IPO} />
             <Route exact path="/:game/map" component={MapSingle} />
             <Route path="/:game/map/:variation" component={MapSingle} />
             <Route exact path="/:game/map-paginated" component={MapPaginated} />
             <Route path="/:game/map-paginated/:variation" component={MapPaginated} />
-            <Route path="/:game/privates" component={Privates} />
             <Route path="/:game/revenue" component={Revenue} />
-            <Route path="/:game/shares" component={Shares} />
             <Route path="/:game/stock" component={Stock} />
             <Route path="/:game/tiles" component={TileSheet} />
             <Route path="/:game/manifest" component={TileManifest} />
             <Route path="/:game/tokens" component={Tokens} />
-            <Route path="/:game/trains" component={Trains} />
           </Switch>
           <Route path="/:game([0-9_-]+)/" strict component={GameMenu} />
           <Route path="/tiles/" component={TilesMenu} />
