@@ -373,7 +373,8 @@ const game = {
         {
           color: "brown",
           icon: "exclamation",
-          note: "No more than 50% of a corporation's shares may be in the market at any time"
+          note:
+            "No more than 50% of a corporation's shares may be in the market at any time"
         },
         {
           color: "red",
@@ -423,9 +424,7 @@ const game = {
         "Purchase trains"
       ],
       ordered: true,
-      optional: [
-        "Purchase private companies"
-      ]
+      optional: ["Purchase private companies"]
     }
   ],
 
@@ -435,20 +434,20 @@ const game = {
       values: [100, 90, 82, 76, 71, 67]
     },
     movement: {
-      "up": ["Sold out"],
-      "down": ["Every share sold"],
-      "left": ["Withheld revenue"],
-      "right": ["Paid dividends"]
+      up: ["Sold out"],
+      down: ["Every share sold"],
+      left: ["Withheld revenue"],
+      right: ["Paid dividends"]
     },
     market: [
       [
-        { label: 60, color: "yellow", arrow: "down" },
+        { label: 60, legend: 0, arrow: "down" },
         67,
         71,
         76,
         82,
         90,
-        { label: 100, color: "gray" },
+        { label: 100, par: true },
         112,
         126,
         142,
@@ -463,13 +462,13 @@ const game = {
         350
       ],
       [
-        { label: 53, color: "yellow", arrow: "down" },
-        { label: 60, color: "yellow" },
+        { label: 53, legend: 0, arrow: "down" },
+        { label: 60, legend: 0 },
         66,
         70,
         76,
         82,
-        { label: 90, color: "gray" },
+        { label: 90, par: true },
         100,
         112,
         126,
@@ -484,13 +483,13 @@ const game = {
         { label: 300, arrow: "up" }
       ],
       [
-        { label: 46, color: "yellow", arrow: "down" },
-        { label: 55, color: "yellow" },
-        { label: 60, color: "yellow" },
+        { label: 46, legend: 0, arrow: "down" },
+        { label: 55, legend: 0 },
+        { label: 60, legend: 0 },
         65,
         70,
         76,
-        { label: 82, color: "gray" },
+        { label: 82, par: true },
         90,
         100,
         111,
@@ -502,13 +501,13 @@ const game = {
         { label: 200, arrow: "up" }
       ],
       [
-        { label: 39, color: "orange", arrow: "down" },
-        { label: 48, color: "yellow" },
-        { label: 54, color: "yellow" },
-        { label: 60, color: "yellow" },
+        { label: 39, legend: 1, arrow: "down" },
+        { label: 48, legend: 0 },
+        { label: 54, legend: 0 },
+        { label: 60, legend: 0 },
         66,
         71,
-        { label: 76, color: "gray" },
+        { label: 76, par: true },
         82,
         90,
         100,
@@ -517,83 +516,84 @@ const game = {
         { label: 130, arrow: "up" }
       ],
       [
-        { label: 32, color: "orange", arrow: "down" },
-        { label: 41, color: "orange" },
-        { label: 48, color: "yellow" },
-        { label: 55, color: "yellow" },
+        { label: 32, legend: 1, arrow: "down" },
+        { label: 41, legend: 1 },
+        { label: 48, legend: 0 },
+        { label: 55, legend: 0 },
         62,
         67,
-        { label: 71, color: "gray" },
+        { label: 71, par: true },
         76,
         82,
         90,
         { label: 100, arrow: "up" }
       ],
       [
-        { label: 25, color: "brown", arrow: "down" },
-        { label: 34, color: "orange" },
-        { label: 42, color: "orange" },
-        { label: 50, color: "yellow" },
-        { label: 58, color: "yellow" },
+        { label: 25, legend: 2, arrow: "down" },
+        { label: 34, legend: 1 },
+        { label: 42, legend: 1 },
+        { label: 50, legend: 0 },
+        { label: 58, legend: 0 },
         65,
-        { label: 67, color: "gray" },
+        { label: 67, par: true },
         71,
         75,
         { label: 80, arrow: "up" }
       ],
       [
-        { label: 18, color: "brown", arrow: "down" },
-        { label: 27, color: "brown" },
-        { label: 36, color: "orange" },
-        { label: 45, color: "orange" },
-        { label: 54, color: "yellow" },
+        { label: 18, legend: 2, arrow: "down" },
+        { label: 27, legend: 2 },
+        { label: 36, legend: 1 },
+        { label: 45, legend: 1 },
+        { label: 54, legend: 0 },
         63,
         67,
         69,
         { label: 70, arrow: "up" }
       ],
       [
-        { label: 10, color: "brown" },
-        { label: 12, color: "brown" },
-        { label: 30, color: "brown" },
-        { label: 40, color: "orange" },
-        { label: 50, color: "yellow" },
-        { label: 60, color: "yellow" },
+        { label: 10, legend: 2 },
+        { label: 12, legend: 2 },
+        { label: 30, legend: 2 },
+        { label: 40, legend: 1 },
+        { label: 50, legend: 0 },
+        { label: 60, legend: 0 },
         67,
         { label: 68, arrow: "up" }
       ],
       [
         null,
-        { label: 10, color: "brown" },
-        { label: 20, color: "brown" },
-        { label: 30, color: "brown" },
-        { label: 40, color: "orange" },
-        { label: 50, color: "yellow" },
-        { label: 60, color: "yellow", arrow: "up" }
+        { label: 10, legend: 2 },
+        { label: 20, legend: 2 },
+        { label: 30, legend: 2 },
+        { label: 40, legend: 1 },
+        { label: 50, legend: 0 },
+        { label: 60, legend: 0, arrow: "up" }
       ],
       [
         null,
         null,
-        { label: 10, color: "brown" },
-        { label: 20, color: "brown" },
-        { label: 30, color: "brown" },
-        { label: 40, color: "orange" },
-        { label: 50, color: "yellow", arrow: "up" }
+        { label: 10, legend: 2 },
+        { label: 20, legend: 2 },
+        { label: 30, legend: 2 },
+        { label: 40, legend: 1 },
+        { label: 50, legend: 0, arrow: "up" }
       ],
       [
         null,
         null,
         null,
-        { label: 10, color: "brown" },
-        { label: 20, color: "brown" },
-        { label: 30, color: "brown" },
-        { label: 40, color: "orange", arrow: "up" }
+        { label: 10, legend: 2 },
+        { label: 20, legend: 2 },
+        { label: 30, legend: 2 },
+        { label: 40, legend: 1, arrow: "up" }
       ]
     ],
     legend: [
       {
         color: "yellow",
-        description: "Shares of this corporation do not count toward the certificate limit",
+        description:
+          "Shares of this corporation do not count toward the certificate limit",
         icon: "certificate"
       },
       {
@@ -603,7 +603,8 @@ const game = {
       },
       {
         color: "brown",
-        description: "Players may purchase any number of shares of this corporation in one stock action",
+        description:
+          "Players may purchase any number of shares of this corporation in one stock action",
         icon: "money-bill-wave"
       }
     ]

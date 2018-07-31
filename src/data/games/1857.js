@@ -377,7 +377,8 @@ const game = {
         {
           color: "brown",
           icon: "exclamation",
-          note: "No more than 50% of a corporation's shares may be in the market at any time"
+          note:
+            "No more than 50% of a corporation's shares may be in the market at any time"
         },
         {
           color: "red",
@@ -422,23 +423,29 @@ const game = {
         "Pay dividends or withhold revenue",
         "Purchase trains"
       ],
-      ordered: true
+      ordered: true,
+      optional: ["Purchase private companies"]
     }
   ],
 
   stock: {
     type: "2D",
     par: {
-      values: [100, 90, 82, 76, 71, 67],
-      cells: [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4]]
+      values: [100, 90, 82, 76, 71, 67]
+    },
+    movement: {
+      up: ["Sold out"],
+      down: ["Every share sold"],
+      left: ["Withheld revenue"],
+      right: ["Paid dividends"]
     },
     market: [
       [
-        71,
+        { label: "71", arrow: "down" },
         76,
         82,
         90,
-        100,
+        { label: "100", par: true },
         112,
         126,
         142,
@@ -453,11 +460,11 @@ const game = {
         350
       ],
       [
-        66,
+        { label: "66", arrow: "down" },
         70,
         76,
         82,
-        90,
+        { label: "90", par: true },
         100,
         112,
         126,
@@ -469,32 +476,107 @@ const game = {
         240,
         260,
         280,
-        300
+        { label: "300", arrow: "up" }
       ],
-      [60, 65, 70, 76, 82, 90, 100, 111, 125, 140, 155, 170, 185, 200],
-      [54, 60, 66, 71, 76, 82, 90, 100, 110, 120, 130],
-      [48, 55, 62, 67, 71, 76, 82, 90, 100],
-      [42, 50, 58, 65, 67, 71, 75, 80],
-      [36, 45, 54, 63, 67, 69, 70],
-      [30, 40, 50, 60, 67, 68],
-      [20, 30, 40, 50, 60],
-      [10, 20, 30, 40, 50]
+      [
+        { label: "60", legend: 0, arrow: "down" },
+        65,
+        70,
+        76,
+        { label: "82", par: true },
+        90,
+        100,
+        111,
+        125,
+        140,
+        155,
+        170,
+        185,
+        { label: "200", arrow: "up" }
+      ],
+      [
+        { label: "54", legend: 0, arrow: "down" },
+        { label: "60", legend: 0 },
+        66,
+        71,
+        { label: "76", par: true },
+        82,
+        90,
+        100,
+        110,
+        120,
+        { label: "130", arrow: "up" }
+      ],
+      [
+        { label: "48", legend: 0, arrow: "down" },
+        { label: "55", legend: 0 },
+        62,
+        67,
+        { label: "71", par: true },
+        76,
+        82,
+        90,
+        { label: "100", arrow: "up" }
+      ],
+      [
+        { label: "42", legend: 1, arrow: "down" },
+        { label: "50", legend: 0 },
+        { label: "58", legend: 0 },
+        65,
+        { label: "67", par: true },
+        71,
+        75,
+        { label: "80", arrow: "up" }
+      ],
+      [
+        { label: "36", legend: 1, arrow: "down" },
+        { label: "45", legend: 1 },
+        { label: "54", legend: 0 },
+        63,
+        67,
+        69,
+        { label: "70", arrow: "up" }
+      ],
+      [
+        { label: "30", legend: 2, arrow: "down" },
+        { label: "40", legend: 1 },
+        { label: "50", legend: 0 },
+        { label: "60", legend: 0 },
+        67,
+        { label: "68", arrow: "up" }
+      ],
+      [
+        { label: "20", legend: 2, arrow: "down" },
+        { label: "30", legend: 2 },
+        { label: "40", legend: 1 },
+        { label: "50", legend: 0 },
+        { label: "60", legend: 0, arrow: "up" }
+      ],
+      [
+        { label: "10", legend: 2 },
+        { label: "20", legend: 2 },
+        { label: "30", legend: 2 },
+        { label: "40", legend: 1 },
+        { label: "50", legend: 0, arrow: "up" }
+      ]
     ],
-    limits: [
+    legend: [
       {
         color: "yellow",
-        description: "Certificates no longer count towards the share limit",
-        value: 60
+        description:
+          "Shares of this corporation do not count toward the certificate limit",
+        icon: "certificate"
       },
       {
         color: "orange",
-        description: "Players may own more than 60% of the company",
-        value: 45
+        description: "Players may own more than 60% of this corporation",
+        icon: "percentage"
       },
       {
         color: "brown",
-        description: "Multiple certificates may be bought in the same turn",
-        value: 30
+        description:
+          "Players may purchase any number of shares of this corporation in one stock action",
+        icon: "money-bill-wave"
       }
     ]
   },
