@@ -767,6 +767,10 @@ ul.notes li span {
   margin-bottom: 0;
 }
 
+.PrintNotes li a {
+  color: black;
+}
+
 .PrintNotes li a.active {
   font-weight: bold;
 }
