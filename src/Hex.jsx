@@ -74,6 +74,8 @@ const HexTile = ({ hex, id, border }) => {
     return null;
   }
 
+  let [idBase, idExtra] = id.split("|");
+
   let getTracks = R.converge(concat, [
     R.compose(
       R.map(makeBorder),
@@ -189,7 +191,7 @@ const HexTile = ({ hex, id, border }) => {
 
       {border && <Hex border={true} />}
 
-      {id && <Id id={id} />}
+      {id && <Id id={idBase} extra={idExtra} />}
 
       {offBoardRevenue}
 

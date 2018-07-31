@@ -140,7 +140,7 @@ const game = {
       quantity: 1,
       price: "$180",
       color: "yellow",
-      players: "3+",
+      players: "3 Player",
       info: [
         {
           color: "green",
@@ -165,7 +165,7 @@ const game = {
       quantity: 1,
       price: "$300",
       color: "green",
-      players: "3+",
+      players: "3 Player",
       info: [
         {
           color: "brown",
@@ -202,7 +202,7 @@ const game = {
       quantity: 1,
       price: "$450",
       color: "brown",
-      players: "3+",
+      players: "3 Player",
       info: [
         {
           color: "yellow",
@@ -227,7 +227,7 @@ const game = {
       quantity: 1,
       price: "$250",
       color: "black",
-      players: "3+",
+      players: "3 Player",
       info: [
         {
           color: "yellow",
@@ -252,7 +252,7 @@ const game = {
       quantity: 1,
       price: "$350",
       color: "black",
-      players: "3+",
+      players: "3 Player",
       info: [
         {
           color: "yellow",
@@ -278,18 +278,20 @@ const game = {
     {
       name: "Midland Terminal",
       price: "$20",
+      players: "2 Player",
       revenue: "$5"
     },
     {
       name: "Midland Terminal",
       price: "$25",
-      players: "3+",
+      players: "3 Player",
       revenue: "$5"
     },
     {
       name: "Denver and Salt Lake",
       price: "$70",
       revenue: "$10",
+      players: "2 Player",
       description:
         "The owning corporation may lay the D&SL tile on their reserved hex (B4 or D4) instead of their normal track action, this action closes the company. Closes when the first 5 Train is purchased, however, the tile may still be laid by the corporation."
     },
@@ -297,7 +299,7 @@ const game = {
       name: "Denver and Salt Lake",
       price: "$70",
       revenue: "$10",
-      players: "3+",
+      players: "3 Player",
       description:
         "Trade for any share in the market at any time, this action closes the company. Closes when the first 5 Train is purchased."
     },
@@ -513,15 +515,18 @@ const game = {
     // Yellow
     "3": 1,
     "4": 2,
-    "5": 3,
-    "6": 3,
+    "5": 2,
+    "5|3": 1,
+    "6": 2,
+    "6|3": 1,
     "7": 1,
     "8": 2,
     "9": 2,
     "58": 2,
     // Green
-    "12": 3,
-    "15": 1,
+    "12": 2,
+    "12|3": 1,
+    "15|3": 1,
     "16": 1,
     "18": 1,
     "19": 1,
@@ -534,8 +539,8 @@ const game = {
     "29": 1,
     "59": 1,
     "800": 1,
-    "802": 1,
-    "802-3": 1,
+    "802|2": 1,
+    "802|3": 1,
     // Brown
     "39": 1,
     "40": 1,
@@ -550,7 +555,8 @@ const game = {
     "68": 1,
     "70": 1,
     "803": 1,
-    "804": 3,
+    "804": 2,
+    "804|3": 1,
     // Gray
     "805": 1,
     "806": 1,

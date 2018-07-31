@@ -13,6 +13,12 @@ const HEX_RATIO = 0.57735;
 
 const getCol = id => {
   let tile = tiles[id];
+
+  if (!tile) {
+    let [idBase] = id.split("|");
+    tile = tiles[idBase];
+  }
+
   switch (tile.color) {
     case "yellow":
       return 1;
@@ -27,10 +33,18 @@ const getCol = id => {
 
 const TileManifest = ({ match }) => {
   let game = games[match.params.game];
-  let ids = R.sort(R.ascend(id => id.padStart(3, "0")), R.keys(game.tiles));
 
-  let tiles = R.addIndex(R.map)(
-    (id, i) => (
+  let ids = R.sortWith(
+    [
+      R.ascend(id => Number(id.split("|")[0] || 0)),
+      R.ascend(id => Number(id.split("|")[1] || 0))
+    ],
+    R.keys(game.tiles)
+  );
+
+  let tiles = R.addIndex(R.map)((id, i) => {
+    let [idBase, idExtra] = id.split("|");
+    return (
       <div
         key={i}
         className="TileManifest--Tile"
@@ -48,12 +62,11 @@ const TileManifest = ({ match }) => {
             <Tile id={id} />
           </Svg>
         </div>
-        <div className="TileManifest--Id">{id}</div>
+        <div className="TileManifest--Id">{idBase}{idExtra && ` (${idExtra})`}</div>
         <div className="TileManifest--Quantity">{game.tiles[id]}x</div>
       </div>
-    ),
-    ids
-  );
+    );
+  }, ids);
 
   return (
     <div className="TileManifest">

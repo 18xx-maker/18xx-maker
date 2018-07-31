@@ -14,6 +14,9 @@ const Shares = ({ match }) => {
 
   return (
       <div className="cards">
+        <div className="PrintNotes">
+          Shares are meant to be printed in <b>landscape</b> mode
+        </div>
         {R.addIndex(R.chain)((company, index) => {
           let shares = util.fillArray(R.prop("quantity"), company.shares);
           return R.addIndex(R.map)(

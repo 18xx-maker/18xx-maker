@@ -550,13 +550,13 @@ const game = {
       price: "¥80",
       revenue: "¥20",
       icon: "F",
-      players: "3+"
+      players: "Players: 3+"
     },
     {
       name: "Uno-Takamatsu Ferry",
       price: "¥150",
       revenue: "¥30 / ¥50",
-      players: "4+",
+      players: "Players: 4+",
       icon: "G",
       description:
         "Does not close while owned by a player. If owned by a player when the first 5-train is purchased it may no longer be sold to a public company and the revenue is increased to 50."

@@ -7,7 +7,7 @@ import * as R from "ramda";
 const Trains = ({ match }) => {
   let game = games[match.params.game];
 
-  if(!game.trains) {
+  if (!game.trains) {
     return null;
   }
 
@@ -15,6 +15,9 @@ const Trains = ({ match }) => {
 
   return (
     <div className="cards trains">
+      <div className="PrintNotes">
+        Trains are meant to be printed in <b>landscape</b> mode
+      </div>
       {R.addIndex(R.map)(
         (train, index) => (
           <Train train={train} key={`train-${train.name}-${index}`} />

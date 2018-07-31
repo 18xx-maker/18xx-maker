@@ -7,7 +7,8 @@ const Train = ({ train }) => {
 
   let notes = R.addIndex(R.map)(
     (i, index) => (
-      <span key={index}
+      <span
+        key={index}
         className="train__info"
         style={{
           backgroundColor: colors[i.color],
@@ -20,9 +21,13 @@ const Train = ({ train }) => {
     info
   );
 
-  if(players) {
-    notes.unshift(<span key="players" className="train__players">Players: {players}</span>);
-  };
+  if (players) {
+    notes.unshift(
+      <span key="players" className="train__players">
+        {players}
+      </span>
+    );
+  }
 
   return (
     <div className="cutlines">

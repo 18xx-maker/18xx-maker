@@ -5201,7 +5201,7 @@ const tiles = {
       }
     ]
   },
-  "802-3": {
+  "802|3": {
     color: "green",
     values: [
       {
