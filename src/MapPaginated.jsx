@@ -27,8 +27,12 @@ const MapPaginated = ({ match }) => {
   let halfHexWidth = 0.5 * hexWidth;
 
   let map = Array.isArray(game.map) ? game.map[variation] : game.map;
-  let maxX = util.maxMapX(map.hexes);
-  let maxY = util.maxMapY(map.hexes);
+  let hexes = map.hexes;
+  if (map.copy !== undefined) {
+    hexes = R.concat(game.map[map.copy].hexes, hexes);
+  }
+  let maxX = util.maxMapX(hexes);
+  let maxY = util.maxMapY(hexes);
 
   let totalWidth = (game.info.extraTotalWidth || 0) + halfHexWidth * (maxX + 1);
   let totalHeight =
@@ -49,14 +53,13 @@ const MapPaginated = ({ match }) => {
     pageHeight = tmp;
   }
 
-  console.log({ totalWidth, totalHeight, pageWidth, pageHeight });
-
   let y = -25; // Start with room for margins
   let mapPages = R.map(height => {
     let x = -25; // Start with room for margins
     let pages = R.map(width => {
       let page = (
         <div
+          key={`page-${x}-${y}`}
           className="cutlines"
           style={{
             width: `${(width + 25) / 100}in`,

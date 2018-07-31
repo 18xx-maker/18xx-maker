@@ -36,10 +36,12 @@ class App extends Component {
         <div className="App">
           <Switch>
             <Route exact path="/" component={Home} />
+
             <Route exact path="/tiles" component={Tiles} />
             <Route path="/tiles/atoms" component={Atoms} />
             <Route path="/tiles/positioning" component={Positioning} />
             <Route path="/tiles/:id" component={SingleTile} />
+
             <Route path="/:game/background" component={Background} />
             <Route path="/:game/cards" component={Cards} />
             <Route path="/:game/charters" component={Charters} />

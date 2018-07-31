@@ -5,6 +5,7 @@ import Svg from "./Svg";
 import Title from "./Title";
 import HexContext from "./context/HexContext";
 import util from "./util";
+import * as R from "ramda";
 import { NavLink, Redirect } from "react-router-dom";
 
 const MapSingle = ({ match }) => {
@@ -18,14 +19,17 @@ const MapSingle = ({ match }) => {
 
   let variation = Number(match.params.variation) || 0;
 
-  console.log(match, variation);
   let hexWidth = game.info.width;
   let edge = hexWidth * util.HEX_RATIO;
   let halfHexWidth = 0.5 * hexWidth;
 
   let map = Array.isArray(game.map) ? game.map[variation] : game.map;
-  let maxX = util.maxMapX(map.hexes);
-  let maxY = util.maxMapY(map.hexes);
+  let hexes = map.hexes;
+  if (map.copy !== undefined) {
+    hexes = R.concat(game.map[map.copy].hexes, hexes);
+  }
+  let maxX = util.maxMapX(hexes);
+  let maxY = util.maxMapY(hexes);
 
   let totalWidth = (game.info.extraTotalWidth || 0) + halfHexWidth * (maxX + 1);
   let totalHeight =

@@ -5,7 +5,7 @@ import * as R from "ramda";
 const Rounds = ({ rounds }) => {
   let items = R.addIndex(R.map)(
     (round, index) => (
-      <div className="Token">
+      <div key={`token-${index}`} className="Token">
         <svg viewBox="-25 -25 50 50" key={round.name}>
           <Token
             label={round.name}

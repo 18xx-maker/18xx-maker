@@ -33,7 +33,7 @@ const Charter = ({ name, abbrev, color, tokens, phases, turns }) => {
     let optionalList = <ul>{optionals}</ul>
 
     return (
-      <React.Fragment>
+      <React.Fragment key={`turn-${turn.name}`}>
         <dt>{turn.name}</dt>
         <dd>{stepsList}</dd>
         {turn.optional && <dd>{optionalList}</dd>}

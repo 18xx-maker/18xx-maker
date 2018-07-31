@@ -43,7 +43,7 @@ const Revenue = ({ match }) => {
   let cols = Array.from(Array(20).keys());
 
   let items = generateCells(rows, cols, game.info.color_5, game.info.color_10);
-  let pools = R.map(p => <Pool {...p}/>, game.pools);
+  let pools = R.map(p => <Pool key={`pool-${p.name}`} {...p}/>, game.pools);
 
   return (
     <div className="revenue">

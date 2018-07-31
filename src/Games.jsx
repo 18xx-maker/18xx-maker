@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import games from "./data/games";
 import GameNav from "./GameNav";
 import * as R from "ramda";

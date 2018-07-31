@@ -11,7 +11,7 @@ const GameMenu = ({ match, location }) => {
 
   let gameList = R.map(
     title => (
-      <li>
+      <li key={`game-link-${title}`}>
         <NavLink to={location.pathname.replace(game, title)}>{title}</NavLink>
       </li>
     ),

@@ -1,9 +1,6 @@
 import React from "react";
 import { colors, textColor } from "./data";
-import util from "./util";
 import * as R from "ramda";
-
-import Par from "./Par";
 
 require("./Market.css");
 
@@ -150,17 +147,20 @@ const Market2D = ({ legend, market, par, title, width, height }) => {
       let labelColor = textColor("plain");
       if (value && value.color) {
         color = colors[value.color];
-        labelColor = colors[value.textColor] || textColor(value.color || "white");
+        labelColor =
+          colors[value.textColor] || textColor(value.color || "white");
       } else if (
         value &&
         Number.isInteger(value.legend) &&
         value.legend < legend.length
       ) {
         color = colors[legend[value.legend].color];
-        labelColor = colors[value.textColor] || textColor(legend[value.legend].color);
+        labelColor =
+          colors[value.textColor] || textColor(legend[value.legend].color);
       } else if (value && value.par) {
-        color = colors[par && par.color || "gray"];
-        labelColor = colors[value.textColor] || textColor((par && par.color) || "gray");
+        color = colors[(par && par.color) || "gray"];
+        labelColor =
+          colors[value.textColor] || textColor((par && par.color) || "gray");
       }
 
       return (

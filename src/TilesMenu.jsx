@@ -5,9 +5,7 @@ import TileNav from "./TileNav";
 
 import "./GameMenu.css";
 
-const TilesMenu = ({ match }) => {
-  let game = match.params.game;
-
+const TilesMenu = () => {
   return (
     <div className="GameMenu">
       <h2>

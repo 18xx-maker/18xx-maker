@@ -23,7 +23,15 @@ const Map = ({ game, variation }) => {
     return (y - 1) * 1.5 * edge + edge;
   };
 
-  let hexes = R.chain(hex => {
+  let hexes = R.map(R.assoc("variation", variation), map.hexes);
+  if (map.copy !== undefined) {
+    hexes = R.concat(
+      R.map(R.assoc("variation", map.copy), game.map[map.copy].hexes),
+      hexes
+    );
+  }
+
+  return R.chain(hex => {
     let resolvedHex = util.resolveHex(hex, map.hexes);
 
     return R.map(([x, y]) => {
@@ -32,14 +40,15 @@ const Map = ({ game, variation }) => {
           ? `translate(${hexY(x, y)} ${hexX(x, y)})`
           : `translate(${hexX(x, y)} ${hexY(x, y)})`;
       return (
-        <g transform={`${translate}`} key={`hex-${util.toAlpha(y)}${x}`}>
+        <g
+          transform={`${translate}`}
+          key={`hex-${resolvedHex.variation}-${util.toAlpha(y)}${x}`}
+        >
           <Hex hex={resolvedHex} id={`${util.toAlpha(y)}${x}`} border={true} />
         </g>
       );
     }, R.map(util.toCoords, hex.hexes || []));
-  }, map.hexes);
-
-  return hexes;
+  }, hexes);
 };
 
 export default Map;

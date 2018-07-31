@@ -1,6 +1,5 @@
 import React from "react";
 import Games from "./Games";
-import { Link } from "react-router-dom";
 
 import TileNav from "./TileNav";
 
