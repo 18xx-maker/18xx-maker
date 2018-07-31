@@ -10,6 +10,9 @@ const GameNav = ({ game, ipo }) => {
           <NavLink to={`/${game}/background`}>Background</NavLink>
         </li>
         <li>
+          <NavLink to={`/${game}/cards`}>Cards</NavLink>
+        </li>
+        <li>
           <NavLink to={`/${game}/charters`}>Charters</NavLink>
         </li>
         {ipo && (
@@ -22,13 +25,7 @@ const GameNav = ({ game, ipo }) => {
           <NavLink to={`/${game}/map-paginated`}>Paginated</NavLink>
         </li>
         <li>
-          <NavLink to={`/${game}/privates`}>Privates</NavLink>
-        </li>
-        <li>
           <NavLink to={`/${game}/revenue`}>Revenue</NavLink>
-        </li>
-        <li>
-          <NavLink to={`/${game}/shares`}>Shares</NavLink>
         </li>
         <li>
           <NavLink to={`/${game}/stock`}>Stock Market</NavLink>
@@ -39,9 +36,6 @@ const GameNav = ({ game, ipo }) => {
         </li>
         <li>
           <NavLink to={`/${game}/tokens`}>Tokens</NavLink>
-        </li>
-        <li>
-          <NavLink to={`/${game}/trains`}>Trains</NavLink>
         </li>
       </ul>
     </React.Fragment>
