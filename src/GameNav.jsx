@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const GameNav = ({ game, ipo }) => {
   return (
@@ -7,41 +7,41 @@ const GameNav = ({ game, ipo }) => {
       <h2>{game}</h2>
       <ul>
         <li>
-          <Link to={`/${game}/background`}>Background</Link>
+          <NavLink to={`/${game}/background`}>Background</NavLink>
         </li>
         <li>
-          <Link to={`/${game}/charters`}>Charters</Link>
+          <NavLink to={`/${game}/charters`}>Charters</NavLink>
         </li>
         {ipo && (
           <li>
-            <Link to={`/${game}/ipo`}>IPO</Link>
+            <NavLink to={`/${game}/ipo`}>IPO</NavLink>
           </li>
         )}
         <li>
-          <Link to={`/${game}/map`}>Map</Link>&nbsp;/&nbsp;
-          <Link to={`/${game}/map-paginated`}>Paginated</Link>
+          <NavLink to={`/${game}/map`}>Map</NavLink>&nbsp;/&nbsp;
+          <NavLink to={`/${game}/map-paginated`}>Paginated</NavLink>
         </li>
         <li>
-          <Link to={`/${game}/privates`}>Privates</Link>
+          <NavLink to={`/${game}/privates`}>Privates</NavLink>
         </li>
         <li>
-          <Link to={`/${game}/revenue`}>Revenue</Link>
+          <NavLink to={`/${game}/revenue`}>Revenue</NavLink>
         </li>
         <li>
-          <Link to={`/${game}/shares`}>Shares</Link>
+          <NavLink to={`/${game}/shares`}>Shares</NavLink>
         </li>
         <li>
-          <Link to={`/${game}/stock`}>Stock Market</Link>
+          <NavLink to={`/${game}/stock`}>Stock Market</NavLink>
         </li>
         <li>
-          <Link to={`/${game}/tiles`}>Tiles</Link>&nbsp;/&nbsp;
-          <Link to={`/${game}/manifest`}>Manifest</Link>
+          <NavLink to={`/${game}/tiles`}>Tiles</NavLink>&nbsp;/&nbsp;
+          <NavLink to={`/${game}/manifest`}>Manifest</NavLink>
         </li>
         <li>
-          <Link to={`/${game}/tokens`}>Tokens</Link>
+          <NavLink to={`/${game}/tokens`}>Tokens</NavLink>
         </li>
         <li>
-          <Link to={`/${game}/trains`}>Trains</Link>
+          <NavLink to={`/${game}/trains`}>Trains</NavLink>
         </li>
       </ul>
     </React.Fragment>

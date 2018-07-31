@@ -10,6 +10,8 @@
   transition-duration: 0.33s;
   padding: 0 10px 0 20px;
   box-sizing: border-box;
+
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 .GameMenu:hover {
@@ -24,6 +26,15 @@
 
 .GameMenu li {
   text-align: left;
+  font-weight: normal;
+}
+
+.GameMenu a.active {
+  font-weight: bold;
+}
+
+.GameMenu a {
+  color: black;
 }
 
 @media print {

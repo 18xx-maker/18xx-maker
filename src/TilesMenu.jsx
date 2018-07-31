@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import TileNav from "./TileNav";
 
@@ -11,7 +11,7 @@ const TilesMenu = ({ match }) => {
   return (
     <div className="GameMenu">
       <h2>
-        <Link to="/">Home</Link>
+        <NavLink to="/">Home</NavLink>
       </h2>
       <TileNav />
     </div>

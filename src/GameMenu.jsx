@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import games from "./data/games";
 import * as R from "ramda";
 import GameNav from "./GameNav";
@@ -12,7 +12,7 @@ const GameMenu = ({ match, location }) => {
   let gameList = R.map(
     title => (
       <li>
-        <Link to={location.pathname.replace(game, title)}>{title}</Link>
+        <NavLink to={location.pathname.replace(game, title)}>{title}</NavLink>
       </li>
     ),
     R.sort(R.ascend(R.identity), R.keys(games))
@@ -21,7 +21,7 @@ const GameMenu = ({ match, location }) => {
   return (
     <div className="GameMenu">
       <h2>
-        <Link to="/">Home</Link>
+        <NavLink to="/">Home</NavLink>
       </h2>
       <h2>Games</h2>
       <nav>
