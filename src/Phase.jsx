@@ -4,7 +4,7 @@ import * as R from "ramda";
 
 const formatCell = value => {
   if(Array.isArray(value)) {
-    return R.chain(v => [v,<br/>], value);
+    return R.addIndex(R.chain)((v,i) => [v,<br key={`br-${i}`}/>], value);
   } else {
     return value;
   }

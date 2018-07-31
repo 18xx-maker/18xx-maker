@@ -1,4 +1,5 @@
 import React from "react";
+import * as R from "ramda";
 import { colors, textColor } from "./data";
 
 const Pool = ({ name, notes }) => {
@@ -7,17 +8,17 @@ const Pool = ({ name, notes }) => {
   if (notes && notes.length > 0) {
     notesNode = (
       <ul className="notes">
-        {notes.map(n => {
+        {R.addIndex(R.map)((n,i) => {
           let backgroundColor = colors[n.color || "orange"];
           let color = textColor(n.color || "orange");
 
           return (
-            <li>
-              <i className={`fas fa-${n.icon || "info"}`} style={{ backgroundColor, color: colors["white"] }} />
+            <li key={`pool-${name}-note-${i}`}>
+              <i className={`fas fa-${n.icon || "info"}`} style={{ backgroundColor, color }} />
               {n.note}
             </li>
           );
-        })}
+        }, notes)}
       </ul>
     );
   }

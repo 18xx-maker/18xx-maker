@@ -6,22 +6,24 @@ const Players = ({ players, bank, capital }) => {
     <div className="players">
       {(bank || capital) && (
         <table className="players__table players__table--static">
-          {bank && (
-            <tr>
-              <th>
-                <i className="fas fa-university" />
-              </th>
-              <td>{bank}</td>
-            </tr>
-          )}
-          {capital && (
-            <tr>
-              <th>
-                <i className="fas fa-coins" />
-              </th>
-              <td>{capital}</td>
-            </tr>
-          )}
+          <thead>
+            {bank && (
+              <tr>
+                <th>
+                  <i className="fas fa-university" />
+                </th>
+                <td>{bank}</td>
+              </tr>
+            )}
+            {capital && (
+              <tr>
+                <th>
+                  <i className="fas fa-coins" />
+                </th>
+                <td>{capital}</td>
+              </tr>
+            )}
+          </thead>
         </table>
       )}
       <table className="players__table players__table--variable">

@@ -2,29 +2,41 @@ import React from "react";
 import * as R from "ramda";
 
 const Movement = ({ movement }) => {
-  if(!movement) {
+  if (!movement) {
     return null;
   }
 
   return (
     <div className="Movement">
       <div className="Movement__up">
-        {R.map(i => <div className="Movement--item">{i}</div>, movement.up)}
+        {R.addIndex(R.map)(
+          (i, index) => <div key={`movement-up-${index}`} className="Movement--item">{i}</div>,
+          movement.up
+        )}
       </div>
       <div className="Movement__down">
-        {R.map(i => <div className="Movement--item">{i}</div>, movement.down)}
+        {R.addIndex(R.map)(
+          (i, index) => <div key={`movement-down-${index}`} className="Movement--item">{i}</div>,
+          movement.down
+        )}
       </div>
       <div className="Movement__left">
-        {R.map(i => <div className="Movement--item">{i}</div>, movement.left)}
+        {R.addIndex(R.map)(
+          (i, index) => <div key={`movement-left-${index}`} className="Movement--item">{i}</div>,
+          movement.left
+        )}
       </div>
       <div className="Movement__right">
-        {R.map(i => <div className="Movement--item">{i}</div>, movement.right)}
+        {R.addIndex(R.map)(
+          (i, index) => <div key={`movement-right-${index}`} className="Movement--item">{i}</div>,
+          movement.right
+        )}
       </div>
       <div className="Movement__center">
-        <i className="fal fa-long-arrow-up"/>
-        <i className="fal fa-long-arrow-down"/>
-        <i className="fal fa-long-arrow-right"/>
-        <i className="fal fa-long-arrow-left"/>
+        <i className="fal fa-long-arrow-up" />
+        <i className="fal fa-long-arrow-down" />
+        <i className="fal fa-long-arrow-right" />
+        <i className="fal fa-long-arrow-left" />
       </div>
     </div>
   );

@@ -5,7 +5,6 @@ import games from "./data/games";
 import Rounds from "./Rounds";
 import Par from "./Par";
 import Legend from "./Legend";
-import Movement from "./Movement";
 
 import "./Stock.css";
 

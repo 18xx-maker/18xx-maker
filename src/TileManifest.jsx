@@ -9,8 +9,6 @@ import games from "./data/games";
 
 import "./TileManifest.css";
 
-const HEX_RATIO = 0.57735;
-
 const getCol = id => {
   let tile = tiles[id];
 
@@ -62,7 +60,10 @@ const TileManifest = ({ match }) => {
             <Tile id={id} />
           </Svg>
         </div>
-        <div className="TileManifest--Id">{idBase}{idExtra && ` (${idExtra})`}</div>
+        <div className="TileManifest--Id">
+          {idBase}
+          {idExtra && ` (${idExtra})`}
+        </div>
         <div className="TileManifest--Quantity">{game.tiles[id]}x</div>
       </div>
     );
