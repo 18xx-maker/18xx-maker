@@ -94,6 +94,31 @@ const game = {
           revenue: "$50"
         }
       ]
+    },
+    {
+      name: "Colorado & Western",
+      abbrev: "C&W",
+      tokens: ["Free", "$40", "$100"],
+      color: "blue",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 40,
+          shares: 4
+        },
+        {
+          quantity: 6,
+          percent: 10,
+          shares: 1
+        },
+        {
+          quantity: 1,
+          label: "Bond",
+          cost: "$300",
+          revenue: "$50"
+        }
+      ]
     }
   ],
 
@@ -111,10 +136,36 @@ const game = {
       ]
     },
     {
+      name: "2",
+      quantity: 1,
+      price: "$180",
+      color: "yellow",
+      players: "3+",
+      info: [
+        {
+          color: "green",
+          note: "Rusted by 4"
+        }
+      ]
+    },
+    {
       name: "3",
       quantity: 1,
       price: "$300",
       color: "green",
+      info: [
+        {
+          color: "brown",
+          note: "Rusted by E"
+        }
+      ]
+    },
+    {
+      name: "3",
+      quantity: 1,
+      price: "$300",
+      color: "green",
+      players: "3+",
       info: [
         {
           color: "brown",
@@ -147,9 +198,47 @@ const game = {
       ]
     },
     {
+      name: "5",
+      quantity: 1,
+      price: "$450",
+      color: "brown",
+      players: "3+",
+      info: [
+        {
+          color: "yellow",
+          note: "Permanent"
+        }
+      ]
+    },
+    {
       name: "2E",
       quantity: 2,
       price: "$250",
+      color: "black",
+      info: [
+        {
+          color: "yellow",
+          note: "Permanent"
+        }
+      ]
+    },
+    {
+      name: "2E",
+      quantity: 1,
+      price: "$250",
+      color: "black",
+      players: "3+",
+      info: [
+        {
+          color: "yellow",
+          note: "Permanent"
+        }
+      ]
+    },
+    {
+      name: "3E",
+      quantity: 1,
+      price: "$350",
       color: "black",
       info: [
         {
@@ -163,6 +252,7 @@ const game = {
       quantity: 1,
       price: "$350",
       color: "black",
+      players: "3+",
       info: [
         {
           color: "yellow",
@@ -191,16 +281,32 @@ const game = {
       revenue: "$5"
     },
     {
+      name: "Midland Terminal",
+      price: "$25",
+      players: "3+",
+      revenue: "$5"
+    },
+    {
       name: "Denver and Salt Lake",
       price: "$70",
       revenue: "$10",
-      description: "The owning corporation may lay the D&SL tile on their reserved hex (B4 or D4) instead of their normal track action, this action closes the company. Closes when the first 5 Train is purchased, however, the tile may still be laid by the corporation."
+      description:
+        "The owning corporation may lay the D&SL tile on their reserved hex (B4 or D4) instead of their normal track action, this action closes the company. Closes when the first 5 Train is purchased, however, the tile may still be laid by the corporation."
+    },
+    {
+      name: "Denver and Salt Lake",
+      price: "$70",
+      revenue: "$10",
+      players: "3+",
+      description:
+        "Trade for any share in the market at any time, this action closes the company. Closes when the first 5 Train is purchased."
     },
     {
       name: "Rio Grande Southern",
       price: "$150",
       revenue: "$20",
-      description: "Obtain a 10% share of D&RGW. The bank will compensate D&RGW for this share after its par value has been set."
+      description:
+        "Obtain a 10% share of D&RGW. The bank will compensate D&RGW for this share after its par value has been set."
     }
   ],
 
@@ -209,14 +315,14 @@ const game = {
       phase: "2",
       train: "2",
       limit: "2",
-      number: "2",
+      number: "2, 3",
       tiles: "yellow"
     },
     {
       phase: "3",
       train: "3",
       limit: "2",
-      number: "1",
+      number: "1, 2",
       tiles: "green",
       notes: "Private companies may be purchased"
     },
@@ -232,15 +338,15 @@ const game = {
       phase: "5",
       train: "5",
       limit: "2",
-      number: "1",
+      number: "1, 2",
       tiles: "brown",
       notes: "Private companies are closed"
     },
     {
       phase: "6",
-      train: ["2E","3E","2x2E"],
+      train: ["2E", "3E", "2x2E"],
       limit: "3",
-      number: ["2", "1", "1"],
+      number: ["2, 3", "1, 2", "1"],
       rust: "3",
       tiles: "gray"
     }
@@ -391,7 +497,8 @@ const game = {
     legend: [
       {
         color: "yellow",
-        description: "Shares of this corporation do not count toward the certificate limit",
+        description:
+          "Shares of this corporation do not count toward the certificate limit",
         icon: "certificate"
       },
       {
@@ -406,14 +513,15 @@ const game = {
     // Yellow
     "3": 1,
     "4": 2,
-    "5": 2,
-    "6": 2,
+    "5": 3,
+    "6": 3,
     "7": 1,
     "8": 2,
     "9": 2,
     "58": 2,
     // Green
-    "12": 2,
+    "12": 3,
+    "15": 1,
     "16": 1,
     "18": 1,
     "19": 1,
@@ -427,6 +535,7 @@ const game = {
     "59": 1,
     "800": 1,
     "802": 1,
+    "802-3": 1,
     // Brown
     "39": 1,
     "40": 1,
@@ -441,7 +550,7 @@ const game = {
     "68": 1,
     "70": 1,
     "803": 1,
-    "804": 2,
+    "804": 3,
     // Gray
     "805": 1,
     "806": 1,
@@ -449,224 +558,486 @@ const game = {
     "808": 1
   },
 
-  map: {
-    hexes: [
-      {
-        color: "offboard",
-        cities: [{
-          percent: 0.3333,
-          name: {
-            name: "Cheyenne"
-          }
-        }],
-        offBoardRevenue: {
-          angle: 180,
-          percent: 0.475,
-          phaseReversed: true,
-          revenues: [
+  map: [
+    {
+      name: "2 Player",
+      hexes: [
+        {
+          color: "offboard",
+          cities: [
             {
-              color: "white",
-              cost: "10",
-              phase: 2
-            },
-            {
-              color: "black",
-              textColor: "white",
-              cost: "40",
-              phase: 4
-            },
-            {
-              color: "white",
-              cost: "70",
-              phase: 5
+              percent: 0.3333,
+              name: {
+                name: "Cheyenne"
+              }
             }
-          ]
-        },
-        offBoardTrack: [
-          {
-            side: 1
-          }
-        ],
-        hexes: ["C1"]
-      },
-      {
-        color: "plain",
-        mountain: {
-          size: "medium",
-          cost: "$50"
-        },
-        hexes: ["C3"]
-      },
-      {
-        color: "plain",
-        centerTowns: [{}],
-        labels: [
-          {
+          ],
+          offBoardRevenue: {
             angle: 180,
-            percent: 0.5,
-            label: "D&RGW"
-          }
-        ],
-        hexes: ["B4"]
-      },
-      {
-        color: "plain",
-        centerTowns: [{}],
-        labels: [
-          {
-            angle: 180,
-            percent: 0.5,
-            label: "C&S"
-          }
-        ],
-        hexes: ["D4"]
-      },
-      {
-        color: "plain",
-        cities: [
-          {
-            companies: [
+            percent: 0.475,
+            phaseReversed: true,
+            revenues: [
               {
-                label: "D&RGW",
-                color: "orange"
+                color: "white",
+                cost: "10",
+                phase: 2
+              },
+              {
+                color: "black",
+                textColor: "white",
+                cost: "40",
+                phase: 4
+              },
+              {
+                color: "white",
+                cost: "70",
+                phase: 5
               }
             ]
-          }
-        ],
-        hexes: ["A5"]
-      },
-      {
-        color: "yellow",
-        cities: [
-          {
-            angle: 90,
-            percent: 0.5,
-            name: {
-              name: "Fort",
-              rotation: 60
-            }
           },
-          {
-            angle: 270,
-            percent: 0.5,
-            name: {
-              name: "Collins",
-              reverse: true,
-              rotation: 60
+          offBoardTrack: [
+            {
+              side: 1
             }
-          }
-        ],
-        hexes: ["C5"]
-      },
-      {
-        color: "plain",
-        cities: [
-          {
-            companies: [
+          ],
+          hexes: ["C1"]
+        },
+        {
+          color: "plain",
+          mountain: {
+            size: "medium",
+            cost: "$50"
+          },
+          hexes: ["C3"]
+        },
+        {
+          color: "plain",
+          centerTowns: [{}],
+          labels: [
+            {
+              angle: 180,
+              percent: 0.5,
+              label: "D&RGW"
+            }
+          ],
+          hexes: ["B4"]
+        },
+        {
+          color: "plain",
+          centerTowns: [{}],
+          labels: [
+            {
+              angle: 180,
+              percent: 0.5,
+              label: "C&S"
+            }
+          ],
+          hexes: ["D4"]
+        },
+        {
+          color: "plain",
+          cities: [
+            {
+              companies: [
+                {
+                  label: "D&RGW",
+                  color: "orange"
+                }
+              ]
+            }
+          ],
+          hexes: ["A5"]
+        },
+        {
+          color: "yellow",
+          cities: [
+            {
+              angle: 90,
+              percent: 0.5,
+              name: {
+                name: "Fort",
+                rotation: 60
+              }
+            },
+            {
+              angle: 270,
+              percent: 0.5,
+              name: {
+                name: "Collins",
+                reverse: true,
+                rotation: 60
+              }
+            }
+          ],
+          hexes: ["C5"]
+        },
+        {
+          color: "plain",
+          cities: [
+            {
+              companies: [
+                {
+                  label: "C&S",
+                  color: "purple"
+                }
+              ]
+            }
+          ],
+          hexes: ["E5"]
+        },
+        {
+          color: "plain",
+          water: {
+            cost: "$40",
+            size: "small"
+          },
+          hexes: ["B6", "D6"]
+        },
+        {
+          color: "plain",
+          labels: [
+            {
+              label: "D",
+              angle: 210,
+              percent: 0.6
+            }
+          ],
+          cities: [
+            {
+              percent: 0.4,
+              name: {
+                name: "Denver"
+              }
+            }
+          ],
+          water: {
+            angle: 150,
+            percent: 0.6,
+            cost: "$40",
+            size: "small"
+          },
+          hexes: ["C7"]
+        },
+        {
+          color: "offboard",
+          offBoardTrack: [
+            {
+              side: 4
+            }
+          ],
+          offBoardRevenue: {
+            angle: 180,
+            percent: 0.12,
+            revenues: [
               {
-                label: "C&S",
-                color: "purple"
+                color: "white",
+                cost: "10",
+                phase: 2
+              },
+              {
+                color: "black",
+                textColor: "white",
+                cost: "20",
+                phase: 4
+              },
+              {
+                color: "white",
+                cost: "30",
+                phase: 5
               }
             ]
-          }
-        ],
-        hexes: ["E5"]
-      },
-      {
-        color: "plain",
-        water: {
-          cost: "$40",
-          size: "small"
+          },
+          hexes: ["A7", "E7"]
         },
-        hexes: ["B6", "D6"]
-      },
-      {
-        color: "plain",
-        labels: [{
-          label: "D",
-          angle: 210,
-          percent: 0.6
-        }],
-        cities: [
-          {
-            percent: 0.4,
-            name: {
-              name: "Denver"
+        {
+          color: "offboard",
+          offBoardTrack: [
+            {
+              side: 4
             }
-          }
-        ],
-        water: {
-          angle: 150,
-          percent: 0.6,
-          cost: "$40",
-          size: "small"
-        },
-        hexes: ["C7"]
-      },
-      {
-        color: "offboard",
-        offBoardTrack: [
-          {
-            side: 4
-          }
-        ],
-        offBoardRevenue: {
-          angle: 180,
-          percent: 0.12,
-          revenues: [
+          ],
+          offBoardRevenue: {
+            angle: 180,
+            percent: 0.12,
+            revenues: [
+              {
+                color: "white",
+                cost: "20",
+                phase: 2
+              },
+              {
+                color: "black",
+                textColor: "white",
+                cost: "30",
+                phase: 4
+              },
+              {
+                color: "white",
+                cost: "40",
+                phase: 5
+              }
+            ]
+          },
+          hexes: ["C9"]
+        }
+      ]
+    },
+    {
+      name: "3 Player",
+      hexes: [
+        {
+          color: "offboard",
+          cities: [
             {
-              color: "white",
-              cost: "10",
-              phase: 2
-            },
-            {
-              color: "black",
-              textColor: "white",
-              cost: "20",
-              phase: 4
-            },
-            {
-              color: "white",
-              cost: "30",
-              phase: 5
+              percent: 0.3333,
+              name: {
+                name: "Cheyenne"
+              }
             }
-          ]
-        },
-        hexes: ["A7", "E7"]
-      },
-      {
-        color: "offboard",
-        offBoardTrack: [
-          {
-            side: 4
-          }
-        ],
-        offBoardRevenue: {
-          angle: 180,
-          percent: 0.12,
-          revenues: [
+          ],
+          offBoardRevenue: {
+            angle: 180,
+            percent: 0.475,
+            phaseReversed: true,
+            revenues: [
+              {
+                color: "white",
+                cost: "10",
+                phase: 2
+              },
+              {
+                color: "black",
+                textColor: "white",
+                cost: "40",
+                phase: 4
+              },
+              {
+                color: "white",
+                cost: "70",
+                phase: 5
+              }
+            ]
+          },
+          offBoardTrack: [
             {
-              color: "white",
-              cost: "20",
-              phase: 2
-            },
-            {
-              color: "black",
-              textColor: "white",
-              cost: "30",
-              phase: 4
-            },
-            {
-              color: "white",
-              cost: "40",
-              phase: 5
+              side: 1
             }
-          ]
+          ],
+          hexes: ["C1"]
         },
-        hexes: ["C9"]
-      }
-    ]
-  }
+        {
+          color: "plain",
+          mountain: {
+            size: "medium",
+            cost: "$50"
+          },
+          hexes: ["C3"]
+        },
+        {
+          color: "plain",
+          centerTowns: [{}],
+          hexes: ["B4"]
+        },
+        {
+          color: "plain",
+          centerTowns: [{}],
+          hexes: ["D4"]
+        },
+        {
+          color: "plain",
+          cities: [
+            {
+              companies: [
+                {
+                  label: "D&RGW",
+                  color: "orange"
+                }
+              ]
+            }
+          ],
+          hexes: ["A5"]
+        },
+        {
+          color: "yellow",
+          cities: [
+            {
+              angle: 90,
+              percent: 0.5,
+              name: {
+                name: "Fort",
+                rotation: 60
+              }
+            },
+            {
+              angle: 270,
+              percent: 0.5,
+              name: {
+                name: "Collins",
+                reverse: true,
+                rotation: 60
+              }
+            }
+          ],
+          hexes: ["C5"]
+        },
+        {
+          color: "plain",
+          cities: [
+            {
+              companies: [
+                {
+                  label: "C&S",
+                  color: "purple"
+                }
+              ]
+            }
+          ],
+          hexes: ["E5"]
+        },
+        {
+          color: "plain",
+          water: {
+            cost: "$40",
+            size: "small"
+          },
+          hexes: ["B6", "D6"]
+        },
+        {
+          color: "plain",
+          labels: [
+            {
+              label: "D",
+              angle: 210,
+              percent: 0.6
+            }
+          ],
+          cities: [
+            {
+              percent: 0.4,
+              name: {
+                name: "Denver"
+              }
+            }
+          ],
+          water: {
+            angle: 150,
+            percent: 0.6,
+            cost: "$40",
+            size: "small"
+          },
+          hexes: ["C7"]
+        },
+        {
+          color: "offboard",
+          offBoardTrack: [
+            {
+              side: 4
+            }
+          ],
+          offBoardRevenue: {
+            angle: 180,
+            percent: 0.12,
+            revenues: [
+              {
+                color: "white",
+                cost: "10",
+                phase: 2
+              },
+              {
+                color: "black",
+                textColor: "white",
+                cost: "20",
+                phase: 4
+              },
+              {
+                color: "white",
+                cost: "30",
+                phase: 5
+              }
+            ]
+          },
+          hexes: ["A7", "E7"]
+        },
+        {
+          color: "offboard",
+          offBoardTrack: [
+            {
+              side: 6
+            }
+          ],
+          offBoardRevenue: {
+            phaseReversed: true,
+            revenues: [
+              {
+                color: "white",
+                cost: "10",
+                phase: 2
+              },
+              {
+                color: "black",
+                textColor: "white",
+                cost: "20",
+                phase: 4
+              },
+              {
+                color: "white",
+                cost: "30",
+                phase: 5
+              }
+            ]
+          },
+          hexes: ["B8"]
+        },
+        {
+          color: "offboard",
+          offBoardTrack: [
+            {
+              side: 2
+            }
+          ],
+          offBoardRevenue: {
+            phaseReversed: true,
+            revenues: [
+              {
+                color: "white",
+                cost: "10",
+                phase: 2
+              },
+              {
+                color: "black",
+                textColor: "white",
+                cost: "20",
+                phase: 4
+              },
+              {
+                color: "white",
+                cost: "30",
+                phase: 5
+              }
+            ]
+          },
+          hexes: ["D8"]
+        },
+        {
+          color: "plain",
+          cities: [
+            {
+              name: {
+                name: "Colorado Springs"
+              },
+              companies: [
+                {
+                  label: "C&W",
+                  color: "blue"
+                }
+              ]
+            }
+          ],
+          hexes: ["C9"]
+        }
+      ]
+    }
+  ]
 };
 
 export default game;

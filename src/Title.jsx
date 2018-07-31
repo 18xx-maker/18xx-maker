@@ -1,10 +1,17 @@
 import React from "react";
 import { colors } from "./data";
 
-const Title = ({ game }) => {
+const Title = ({ game, variation }) => {
   let size = game.info.titleSize || 200;
   let subSize = game.info.subTitleSize || 30;
   let designerSize = game.info.designerSize || 20;
+
+  let mapName = null;
+  variation = variation || 0;
+  if (Array.isArray(game.map)) {
+    mapName = game.map[variation].name;
+  }
+
   return (
     <g
       transform={`translate(${game.info.titleX || 0} ${game.info.titleY ||
@@ -47,9 +54,10 @@ const Title = ({ game }) => {
         textAnchor="start"
         lengthAdjust="spacingAndGlyphs"
         x="0"
-        y={game.info.subtitle ? size + 40 : size}
+        y={size + (game.info.subtitle ? 40 : 0)}
       >
         by {game.info.designer}
+        {mapName && ` ⋯ ${mapName}`}
       </text>
     </g>
   );

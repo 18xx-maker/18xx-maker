@@ -3,7 +3,7 @@ import { colors, textColor } from "./data";
 import * as R from "ramda";
 
 const Train = ({ train }) => {
-  let { name, price, color, info, description } = train;
+  let { name, price, color, info, description, players } = train;
 
   let notes = R.addIndex(R.map)(
     (i, index) => (
@@ -19,6 +19,10 @@ const Train = ({ train }) => {
     ),
     info
   );
+
+  if(players) {
+    notes.unshift(<span key="players" className="train__players">Players: {players}</span>);
+  };
 
   return (
     <div className="cutlines">

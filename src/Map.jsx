@@ -3,8 +3,9 @@ import * as R from "ramda";
 import util from "./util";
 import Hex from "./Hex";
 
-const Map = ({ game }) => {
-  let map = game.map;
+const Map = ({ game, variation }) => {
+  variation = variation || 0;
+  let map = Array.isArray(game.map) ? game.map[variation] : game.map;
 
   if (!map) {
     return null;

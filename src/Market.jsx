@@ -147,20 +147,20 @@ const Market2D = ({ legend, market, par, title, width, height }) => {
         color = colors["plain"];
       }
 
-      let labelColor = "#000";
+      let labelColor = textColor("plain");
       if (value && value.color) {
         color = colors[value.color];
-        labelColor = colors[value.textColor] || colors["black"];
+        labelColor = colors[value.textColor] || textColor(value.color || "white");
       } else if (
         value &&
         Number.isInteger(value.legend) &&
         value.legend < legend.length
       ) {
         color = colors[legend[value.legend].color];
-        labelColor = colors[value.textColor] || colors["black"];
+        labelColor = colors[value.textColor] || textColor(legend[value.legend].color);
       } else if (value && value.par) {
         color = colors[par && par.color || "gray"];
-        labelColor = colors[value.textColor] || colors["black"];
+        labelColor = colors[value.textColor] || textColor((par && par.color) || "gray");
       }
 
       return (

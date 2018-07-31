@@ -19,27 +19,33 @@ const game = {
 
   bank: "¥7,000",
 
-  players: [{
-    number: 2,
-    certLimit: 25,
-    capital: "¥420"
-  },{
-    number: 3,
-    certLimit: 19,
-    capital: "¥420"
-  },{
-    number: 4,
-    certLimit: 14,
-    capital: "¥420"
-  },{
-    number: 5,
-    certLimit: 12,
-    capital: "¥390"
-  },{
-    number: 6,
-    certLimit: 11,
-    capital: "¥390"
-  }],
+  players: [
+    {
+      number: 2,
+      certLimit: 25,
+      capital: "¥420"
+    },
+    {
+      number: 3,
+      certLimit: 19,
+      capital: "¥420"
+    },
+    {
+      number: 4,
+      certLimit: 14,
+      capital: "¥420"
+    },
+    {
+      number: 5,
+      certLimit: 12,
+      capital: "¥390"
+    },
+    {
+      number: 6,
+      certLimit: 11,
+      capital: "¥390"
+    }
+  ],
 
   pools: [
     {
@@ -52,7 +58,8 @@ const game = {
         {
           color: "purple",
           icon: "exclamation",
-          note: "No more than 50% of a corporation's shares may be in the market at any time"
+          note:
+            "No more than 50% of a corporation's shares may be in the market at any time"
         },
         {
           color: "red",
@@ -104,31 +111,139 @@ const game = {
   stock: {
     type: "2D",
     par: {
-      values: [100, 90, 80, 75, 70, 65],
-      cells: [[0, 3], [1, 3], [2, 3], [3, 3], [4, 3], [5, 3]]
+      values: [100, 90, 80, 75, 70, 65]
+    },
+    movement: {
+      up: ["Sold out"],
+      down: ["Every share sold"],
+      left: ["Withheld revenue"],
+      right: ["Paid dividends"]
     },
     market: [
-      [75,80,90,100,110,125,140,155,175,200,225,255,285,315,350],
-      [70,75,80,90,100,110,125,140,155,175,200,225,255,285,315],
-      [65,70,75,80,90,100,110,125,140,155,175,200],
-      [60,65,70,75,80,90,100,110,125,140],
-      [55,60,65,70,75,80,90,100],
-      [50,55,60,65,70,75,80],
-      [45,50,55,60,65,70],
-      [40,45,50,55,60],
-      [30,40,45,50],
-      [20,30,40,45],
-      [10,20,30,40]],
-    limits: [
+      [
+        { label: "75", arrow: "down" },
+        80,
+        90,
+        { label: "100", par: true },
+        110,
+        125,
+        140,
+        155,
+        175,
+        200,
+        225,
+        255,
+        285,
+        315,
+        350
+      ],
+      [
+        { label: "70", arrow: "down" },
+        75,
+        80,
+        { label: "90", par: true },
+        100,
+        110,
+        125,
+        140,
+        155,
+        175,
+        200,
+        225,
+        255,
+        285,
+        { label: "315", arrow: "up" }
+      ],
+      [
+        { label: "65", arrow: "down" },
+        70,
+        75,
+        { label: "80", par: true },
+        90,
+        100,
+        110,
+        125,
+        140,
+        155,
+        175,
+        { label: "200", arrow: "up" }
+      ],
+      [
+        { label: "60", arrow: "down" },
+        65,
+        70,
+        { label: "75", par: true },
+        80,
+        90,
+        100,
+        110,
+        125,
+        { label: "140", arrow: "up" }
+      ],
+      [
+        { label: "55", arrow: "down" },
+        60,
+        65,
+        { label: "70", par: true },
+        75,
+        80,
+        90,
+        { label: "100", arrow: "up" }
+      ],
+      [
+        { label: "50", legend: 0, arrow: "down" },
+        55,
+        60,
+        { label: "65", par: true },
+        70,
+        75,
+        { label: "80", arrow: "up" }
+      ],
+      [
+        { label: "45", legend: 0, arrow: "down" },
+        { label: "50", legend: 0 },
+        55,
+        60,
+        65,
+        { label: "70", arrow: "up" }
+      ],
+      [
+        { label: "40", legend: 0, arrow: "down" },
+        { label: "45", legend: 0 },
+        { label: "50", legend: 0 },
+        55,
+        { label: "60", arrow: "up" }
+      ],
+      [
+        { label: "30", legend: 1, arrow: "down" },
+        { label: "40", legend: 0 },
+        { label: "45", legend: 0 },
+        { label: "50", legend: 0, arrow: "up" }
+      ],
+      [
+        { label: "20", legend: 1, arrow: "down" },
+        { label: "30", legend: 1 },
+        { label: "40", legend: 0 },
+        { label: "45", legend: 0, arrow: "up" }
+      ],
+      [
+        { label: "10", legend: 1 },
+        { label: "20", legend: 1 },
+        { label: "30", legend: 1 },
+        { label: "40", legend: 0, arrow: "up" }
+      ]
+    ],
+    legend: [
       {
-        color: "yellow",
-        description: "Certificates no longer count towards the share limit",
-        value: 50
+        color: "cyan",
+        description:
+          "Shares of this corporation do not count toward the certificate limit",
+        icon: "certificate"
       },
       {
-        color: "orange",
-        description: "Players may own more than 60% of the company",
-        value: 30
+        color: "blue",
+        description: "Players may own more than 60% of this corporation",
+        icon: "percentage"
       }
     ]
   },
@@ -342,7 +457,7 @@ const game = {
           shares: 1
         }
       ]
-    },
+    }
   ],
 
   phases: [
@@ -397,43 +512,54 @@ const game = {
       revenue: "¥5",
       icon: "A",
       desription: "Blocks Takamatsu (K4)."
-    },{
+    },
+    {
       name: "Mitsubishi Ferry",
       price: "¥30",
       revenue: "¥5",
       icon: "B",
-      description: "Player owner may place the port tile on a coastal town (B11, G10, I12, or J9) without a tile on it already, outside of the operating rounds of a company controller by another player. The player need not control a company or have connectivity to the placed tile from one of their companies. This does not close the company."
-    },{
+      description:
+        "Player owner may place the port tile on a coastal town (B11, G10, I12, or J9) without a tile on it already, outside of the operating rounds of a company controller by another player. The player need not control a company or have connectivity to the placed tile from one of their companies. This does not close the company."
+    },
+    {
       name: "Ehime Railroad",
       price: "¥40",
       revenue: "¥10",
       icon: "C",
-      description: "When this company is sold to a corporation, the selling player may immediately place a green tile on Ohzu (C4), in addition to any tile which it may lay during the same operating round. This does not close the company."
-    },{
+      description:
+        "When this company is sold to a corporation, the selling player may immediately place a green tile on Ohzu (C4), in addition to any tile which it may lay during the same operating round. This does not close the company."
+    },
+    {
       name: "Sumitomo Mines Railway",
       price: "¥50",
       revenue: "¥15",
       icon: "D",
-      description: "Owning corporation may ignore building cost for mountain hexes which do not also contain rivers. This does not close the company."
-    },{
+      description:
+        "Owning corporation may ignore building cost for mountain hexes which do not also contain rivers. This does not close the company."
+    },
+    {
       name: "Dougo Railway",
       price: "¥60",
       revenue: "¥15",
       icon: "E",
-      description: "Owning player may exchange this private company for a 10% share of Iyo Railway from the initial offering."
-    },{
+      description:
+        "Owning player may exchange this private company for a 10% share of Iyo Railway from the initial offering."
+    },
+    {
       name: "South Iyo Railway",
       price: "¥80",
       revenue: "¥20",
       icon: "F",
       players: "3+"
-    },{
+    },
+    {
       name: "Uno-Takamatsu Ferry",
       price: "¥150",
       revenue: "¥30 / ¥50",
       players: "4+",
       icon: "G",
-      description: "Does not close while owned by a player. If owned by a player when the first 5-train is purchased it may no longer be sold to a public company and the revenue is increased to 50."
+      description:
+        "Does not close while owned by a player. If owned by a player when the first 5-train is purchased it may no longer be sold to a public company and the revenue is increased to 50."
     }
   ],
 
@@ -779,11 +905,13 @@ const game = {
             }
           }
         ],
-        labels: [{
-          label: "C",
-          angle: 270,
-          percent: 0.667
-        }],
+        labels: [
+          {
+            label: "C",
+            angle: 270,
+            percent: 0.667
+          }
+        ],
         track: [
           {
             side: 3
@@ -814,11 +942,13 @@ const game = {
             angle: 165
           }
         ],
-        labels: [{
-          label: "A",
-          angle: 270,
-          percent: 0.75
-        }],
+        labels: [
+          {
+            label: "A",
+            angle: 270,
+            percent: 0.75
+          }
+        ],
         track: [
           {
             side: 1
