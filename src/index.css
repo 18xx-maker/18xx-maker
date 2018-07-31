@@ -355,6 +355,13 @@ svg {
   border-radius: 0.06in;
 }
 
+.train__players {
+  line-height: 0.25in;
+  height: 0.25in;
+  font-size: 0.14in;
+  margin-top: 0.05in;
+}
+
 .share__hr {
   height: 0.0625in;
   position: absolute;
@@ -735,19 +742,32 @@ ul.notes li span {
 
 .PrintNotes {
   position: fixed;
+  top: 0;
   right: 0;
   z-index: 10;
   background: #ccc;
   border: 2px solid black;
   border-width: 0 0 2px 2px;
   border-bottom-left-radius: 5px;
-  padding: 2px 8px;
+  padding: 2px 8px 4px 8px;
   margin: auto auto;
   font-weight: normal;
   font-family: sans-serif;
 }
 
 .PrintNotes b {
+  font-weight: bold;
+}
+
+.PrintNotes ul {
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.PrintNotes li a.active {
   font-weight: bold;
 }
 

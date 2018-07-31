@@ -49,6 +49,7 @@ const textColor = color => {
     case "cyan":
     case "plain":
     case "white":
+    case "gray":
       return "rgb(0,0,0)";
     default:
       return "rgb(255,255,255)";

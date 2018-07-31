@@ -44,7 +44,9 @@ class App extends Component {
             <Route path="/:game/charters" component={Charters} />
             <Route path="/:game/ipo" component={IPO} />
             <Route exact path="/:game/map" component={MapSingle} />
-            <Route path="/:game/map-paginated" component={MapPaginated} />
+            <Route path="/:game/map/:variation" component={MapSingle} />
+            <Route exact path="/:game/map-paginated" component={MapPaginated} />
+            <Route path="/:game/map-paginated/:variation" component={MapPaginated} />
             <Route path="/:game/privates" component={Privates} />
             <Route path="/:game/revenue" component={Revenue} />
             <Route path="/:game/shares" component={Shares} />
