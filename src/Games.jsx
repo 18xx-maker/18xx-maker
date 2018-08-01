@@ -7,7 +7,11 @@ const Games = () => {
   let gameNodes = R.map(game => {
     return (
       <div className="game" key={`game-${game}`} id={`game-${game}`}>
-        <GameNav game={game} ipo={games[game].ipo} />
+        <GameNav
+          game={game}
+          ipo={games[game].ipo}
+          paginated={!(games[game].info.paginated === false)}
+        />
       </div>
     );
   }, R.sort(R.ascend(R.identity), R.keys(games)));
