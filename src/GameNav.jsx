@@ -1,7 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import games from "./data/games";
 
-const GameNav = ({ game, ipo }) => {
+const GameNav = ({ game, ipo, paginated }) => {
   return (
     <React.Fragment>
       <h2>{game}</h2>
@@ -21,8 +22,13 @@ const GameNav = ({ game, ipo }) => {
           </li>
         )}
         <li>
-          <NavLink to={`/${game}/map`}>Map</NavLink>&nbsp;/&nbsp;
-          <NavLink to={`/${game}/map-paginated`}>Paginated</NavLink>
+          <NavLink to={`/${game}/map`}>Map</NavLink>
+          {paginated && (
+            <React.Fragment>
+              &nbsp;/&nbsp;
+              <NavLink to={`/${game}/map-paginated`}>Paginated</NavLink>
+            </React.Fragment>
+          )}
         </li>
         <li>
           <NavLink to={`/${game}/revenue`}>Revenue</NavLink>

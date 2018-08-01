@@ -27,7 +27,11 @@ const GameMenu = ({ match, location }) => {
       <nav>
         <ul>{gameList}</ul>
       </nav>
-      <GameNav game={match.params.game} ipo={game.ipo} />
+      <GameNav
+        game={match.params.game}
+        ipo={game.ipo}
+        paginated={!(games[match.params.game].info.paginated === false)}
+      />
     </div>
   );
 };
