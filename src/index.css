@@ -45,11 +45,7 @@ body {
 
 .map {
   position: relative;
-  padding: 0.125in;
-}
-
-.map svg {
-  margin: 0.5in;
+  padding: 0.0625in;
 }
 
 h1 {
@@ -789,6 +785,7 @@ ul.notes li span {
 
 @media screen {
   .App {
+    padding-top: 0.25in;
     padding-right: 0.25in;
     padding-left: 0.25in;
     padding-bottom: 0.5in;

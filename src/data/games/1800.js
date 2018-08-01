@@ -11,7 +11,7 @@ const game = {
     color_10: "brown",
     titleY: 750,
     titleX: 170,
-    extraTotalWidth: 200,
+    extraTotalWidth: 210,
     titleSize: 150,
     extraTokens: 2
   },

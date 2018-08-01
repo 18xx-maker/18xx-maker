@@ -48,28 +48,24 @@ const MapSingle = ({ match }) => {
         rotation: game.info.orientation === "horizontal" ? 0 : 90
       }}
     >
-      <div className="cutlines">
-        <div className="map">
-          <Svg width={totalWidth} height={totalHeight}>
-            <Title game={game} variation={variation} />
-            <Map game={game} variation={variation} />
-          </Svg>
+      <div className="map">
+        <Svg width={totalWidth} height={totalHeight}>
+          <Title game={game} variation={variation} />
+          <Map game={game} variation={variation} />
+        </Svg>
+        {Array.isArray(game.map) && (
           <div className="PrintNotes">
-            This map is meant to be printed in{" "}
-            <b>{game.map.print || "portrait"}</b> mode
-            {Array.isArray(game.map) && (
-              <ul>
-                {game.map.map((m, i) => (
-                  <li key={`${match.params.game}-${i}`}>
-                    <NavLink to={`/${match.params.game}/map/${i}`}>
-                      {m.name}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <ul>
+              {game.map.map((m, i) => (
+                <li key={`${match.params.game}-${i}`}>
+                  <NavLink to={`/${match.params.game}/map/${i}`}>
+                    {m.name}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
+        )}
       </div>
     </HexContext.Provider>
   );
