@@ -14,7 +14,11 @@ import "./MapPaginated.css";
 const MapPaginated = ({ match }) => {
   let game = games[match.params.game];
 
-  if (match.params.variation && !Array.isArray(game.map)) {
+  if(game.info.paginated === false && match.params.variation) {
+    return <Redirect to={`/${match.params.game}/map/${match.params.variation}`} />;
+  } else if (game.info.paginated === false) {
+    return <Redirect to={`/${match.params.game}/map`} />;
+  } else if (match.params.variation && !Array.isArray(game.map)) {
     return <Redirect to={`/${match.params.game}/map-paginated`} />;
   } else if (!match.params.variation && Array.isArray(game.map)) {
     return <Redirect to={`/${match.params.game}/map-paginated/0`} />;

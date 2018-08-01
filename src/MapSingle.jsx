@@ -53,8 +53,10 @@ const MapSingle = ({ match }) => {
           <Title game={game} variation={variation} />
           <Map game={game} variation={variation} />
         </Svg>
-        {Array.isArray(game.map) && (
-          <div className="PrintNotes">
+        <div className="PrintNotes">
+          This map is meant to be printed in{" "}
+          <b>{game.map.print || "portrait"}</b> mode
+          {Array.isArray(game.map) && (
             <ul>
               {game.map.map((m, i) => (
                 <li key={`${match.params.game}-${i}`}>
@@ -64,8 +66,8 @@ const MapSingle = ({ match }) => {
                 </li>
               ))}
             </ul>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </HexContext.Provider>
   );

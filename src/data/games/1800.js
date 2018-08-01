@@ -13,7 +13,8 @@ const game = {
     titleX: 170,
     extraTotalWidth: 210,
     titleSize: 150,
-    extraTokens: 2
+    extraTokens: 2,
+    paginated: false
   },
 
   // Extra Tokens
