@@ -55,7 +55,7 @@ const MapSingle = ({ match }) => {
         </Svg>
         <div className="PrintNotes">
           This map is meant to be printed in{" "}
-          <b>{game.map.print || "portrait"}</b> mode
+          <b>{map.print || "portrait"}</b> mode
           {Array.isArray(game.map) && (
             <ul>
               {game.map.map((m, i) => (
