@@ -183,8 +183,6 @@ const HexTile = ({ hex, id, border }) => {
               {tracks}
               {offBoardTracks}
               {values}
-              {industries}
-              {companies}
               {cities}
               {towns}
               {centerTowns}
@@ -204,6 +202,8 @@ const HexTile = ({ hex, id, border }) => {
       {id && <Id id={idBase} extra={idExtra} />}
 
       {offBoardRevenue}
+              {industries}
+              {companies}
 
       {tunnels}
       {bridges}
