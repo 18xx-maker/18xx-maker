@@ -21,7 +21,7 @@ const Company = ({ label, bottom }) => {
         strokeWidth="1"
         cx={x}
         cy={y}
-        r="3"
+        r="4"
       />
       <circle
         fill={colors["border"]}
@@ -29,7 +29,7 @@ const Company = ({ label, bottom }) => {
         strokeWidth="1"
         cx={-x}
         cy={y}
-        r="3"
+        r="4"
       />
       <text
         fontWeight="bold"
