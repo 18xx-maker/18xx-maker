@@ -8,6 +8,7 @@ import Svg from "../Svg";
 import Id from "./Id";
 import Value from "./Value";
 import Industry from "./Industry";
+import Company from "./Company";
 import Icon from "./Icon";
 import City from "./City";
 import Town from "./Town";
@@ -42,6 +43,15 @@ const Atoms = () => {
       examples: [
         <Industry top={1} bottom={20} />,
         <Industry top="ZH" bottom={10} />
+      ]
+    },
+    {
+      name: "Company",
+      examples: [
+        <Company label="A" />,
+        <Company label="CdH" />,
+        <Company label="C" bottom={true} />,
+        <Company label="ERR" bottom={true} />
       ]
     },
     {
@@ -227,7 +237,7 @@ const Atoms = () => {
       examples: [<Bridge cost="$40" />]
     },
     {
-      name: "RouteBonus",
+      name: "Route Bonus",
       examples: [
         <RouteBonus value="$4" />,
         <RouteBonus value="+30" />,

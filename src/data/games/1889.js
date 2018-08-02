@@ -905,9 +905,10 @@ const game = {
             }
           }
         ],
-        labels: [
+        companies: [
           {
             label: "C",
+            bottom: true,
             angle: 270,
             percent: 0.667
           }
@@ -942,10 +943,9 @@ const game = {
             angle: 165
           }
         ],
-        labels: [
+        companies: [
           {
             label: "A",
-            angle: 270,
             percent: 0.75
           }
         ],

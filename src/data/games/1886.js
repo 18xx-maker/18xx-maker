@@ -664,126 +664,727 @@ const game = {
       },
       {
         color: "water",
-        hexes: ["K8", "L7", "M6", "N7", "N11", "O8", "O12", "O14", "O16", "P9", "P11"]
+        hexes: [
+          "K8",
+          "L7",
+          "M6",
+          "N7",
+          "N11",
+          "O8",
+          "O12",
+          "O14",
+          "O16",
+          "P9",
+          "P11"
+        ]
       },
       {
         color: "offboard",
-        offBoardTrack: [{
-          side: 6
-        }],
+        offBoardTrack: [
+          {
+            side: 6
+          }
+        ],
         offBoardRevenue: {
           angle: 180,
           percent: 0.4,
-          revenues: [{
-            color: "black",
-            textColor: "white",
-            cost: "20"
-          },{
-            color: "black",
-            textColor: "white",
-            cost: "40"
-          },{
-            color: "black",
-            textColor: "white",
-            cost: "50"
-          }]
+          revenues: [
+            {
+              color: "black",
+              textColor: "white",
+              cost: "20"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "40"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "50"
+            }
+          ]
         },
-        labels: [{
-          label: "Tarumi"
-        }],
+        labels: [
+          {
+            label: "Tarumi"
+          }
+        ],
         hexes: ["A6"]
       },
       {
         copy: "A6",
         offBoardRevenue: {
-          revenues: [{
-          },{
-            cost: "30"
-          },{
-            cost: "40"
-          }]
+          revenues: [
+            {},
+            {
+              cost: "30"
+            },
+            {
+              cost: "40"
+            }
+          ]
         },
-        labels: [{
-          label: "Minoh"
-        }],
+        labels: [
+          {
+            label: "Minoh"
+          }
+        ],
         hexes: ["A10"]
       },
       {
-        color: "plain",
-        cities: [{
-          companies: [{
-            label: "MER",
-            color: "red"
-          }],
-          name: {
-            name: "Seki"
+        color: "offboard",
+        offBoardTrack: [{ side: 6 }],
+        cities: [
+          {
+            name: {
+              name: "Gero",
+              reverse: true,
+              offset: 66.67
+            },
+            companies: [
+              {
+                color: "black",
+                label: "GRR"
+              }
+            ]
           }
-        }],
+        ],
+        labels: [
+          {
+            label: "TL",
+            angle: 75,
+            percent: 0.667
+          }
+        ],
+        offBoardRevenue: {
+          angle: 180,
+          percent: 0.6,
+          revenues: [
+            {
+              color: "black",
+              textColor: "white",
+              cost: "20"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "30"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "50"
+            }
+          ]
+        },
+        hexes: ["A16"]
+      },
+      {
+        color: "offboard",
+        offBoardTrack: [{ side: 3 }, { side: 4 }],
+        offBoardRevenue: {
+          percent: 0.333,
+          revenues: [
+            {
+              color: "black",
+              textColor: "white",
+              cost: "30"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "30"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "30"
+            }
+          ]
+        },
+        labels: [
+          {
+            label: "Taniguchiyama Kegonji",
+            angle: 180,
+            percent: 0.22
+          }
+        ],
+        hexes: ["B1"]
+      },
+      {
+        color: "offboard",
+        offBoardTrack: [{ side: 4 }, { side: 6 }],
+        offBoardRevenue: {
+          angle: 180,
+          percent: 0.333,
+          revenues: [
+            {
+              color: "black",
+              textColor: "white",
+              cost: "20"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "30"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "40"
+            }
+          ]
+        },
+        labels: [
+          {
+            label: "Ibi",
+            percent: 0.075
+          }
+        ],
+        hexes: ["C2"]
+      },
+      {
+        color: "plain",
+        labels: [
+          {
+            label: "GLR",
+            angle: 180,
+            percent: 0.667
+          }
+        ],
+        cities: [
+          {
+            name: {
+              name: "Kurono",
+              reverse: true
+            }
+          }
+        ],
+        hexes: ["C4"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            companies: [
+              {
+                label: "MER",
+                color: "red"
+              }
+            ],
+            name: {
+              name: "Seki"
+            }
+          }
+        ],
         hexes: ["B9"]
       },
       {
         color: "plain",
+        cities: [
+          {
+            angle: 180,
+            percent: 0.3,
+            name: {
+              name: "Minoh Ohta"
+            }
+          }
+        ],
+        mountain: {
+          percent: 0.5,
+          cost: "¥40",
+          size: "small"
+        },
+        hexes: ["C14"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: {
+              name: "Yanagase"
+            }
+          }
+        ],
+        hexes: ["D7"]
+      },
+      {
+        color: "yellow",
+        cities: [
+          {
+            angle: 90,
+            percent: 0.5,
+            name: {
+              name: "Inuyama",
+              offset: 75
+            }
+          },
+          {
+            angle: 270,
+            percent: 0.5
+          }
+        ],
+        labels: [
+          {
+            label: "KR",
+            angle: 180,
+            percent: 0.667
+          },
+          {
+            label: "OO",
+            percent: 0.667
+          }
+        ],
+        hexes: ["D11"]
+      },
+      {
+        color: "plain",
+        centerTowns: [
+          {
+            angle: 180,
+            percent: 0.3,
+            name: {
+              name: "Kaminogoh"
+            }
+          }
+        ],
+        mountain: {
+          percent: 0.5,
+          cost: "¥40",
+          size: "small"
+        },
+        hexes: ["D17"]
+      },
+      {
+        color: "yellow",
+        cities: [
+          {
+            name: {
+              name: "Gifu",
+              offset: 42
+            }
+          }
+        ],
+        values: [
+          {
+            value: "30",
+            angle: 210,
+            percent: 0.667
+          }
+        ],
+        labels: [
+          {
+            label: "B",
+            angle: 30,
+            percent: 0.6
+          }
+        ],
+        track: [
+          {
+            side: 1
+          },
+          {
+            side: 5
+          }
+        ],
+        hexes: ["E6"]
+      },
+      {
+        color: "offboard",
+        offBoardTrack: [{ side: 4 }],
+        offBoardRevenue: {
+          angle: 180,
+          percent: 0.333,
+          revenues: [
+            {
+              color: "black",
+              textColor: "white",
+              cost: "30"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "50"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "60"
+            }
+          ]
+        },
+        labels: [
+          {
+            label: "Maibara",
+            percent: 0.25
+          }
+        ],
+        hexes: ["F1"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: {
+              name: "Ohgaki",
+              reverse: true
+            }
+          }
+        ],
+        labels: [
+          {
+            label: "L",
+            angle: 180,
+            percent: 0.667
+          }
+        ],
+        hexes: ["F3"]
+      },
+      {
+        color: "yellow",
+        cities: [
+          {
+            angle: 90,
+            percent: 0.5,
+            name: {
+              name: "Komaki",
+              offset: 75
+            }
+          },
+          {
+            angle: 270,
+            percent: 0.5
+          }
+        ],
+        labels: [
+          {
+            label: "OO",
+            percent: 0.667
+          }
+        ],
+        hexes: ["F11"]
+      },
+      {
+        color: "plain",
         cities: [{
-          companies: [{
-            label: "TRR",
-            color: "cyan"
-          }],
           name: {
-            name: "Kani"
+            name: "Tajimi"
           }
         }],
+        hexes: ["F17"]
+      },
+      {
+        color: "offboard",
+        offBoardTrack: [{ side: 6 }],
+        cities: [
+          {
+            name: {
+              name: "Nakatsugawa",
+              reverse: true,
+              offset: 66.67
+            },
+            companies: [
+              {
+                color: "black",
+                label: "GRR"
+              }
+            ]
+          }
+        ],
+        labels: [
+          {
+            label: "CL",
+            angle: 75,
+            percent: 0.667
+          }
+        ],
+        offBoardRevenue: {
+          angle: 180,
+          percent: 0.6,
+          revenues: [
+            {
+              color: "black",
+              textColor: "white",
+              cost: "30"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "40"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "60"
+            }
+          ]
+        },
+        hexes: ["E20"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            companies: [
+              {
+                label: "TRR",
+                color: "cyan"
+              }
+            ],
+            name: {
+              name: "Kani"
+            }
+          }
+        ],
         hexes: ["D15"]
       },
       {
         color: "plain",
-        cities: [{
-          companies: [{
-            label: "KR",
-            color: "darkGreen"
-          }],
+        centerTowns: [{
+          angle: 90,
+          percent: 0.5,
           name: {
-            name: "Yokkaichi"
+            name: "Hashima",
+            reverse: true
+          }
+        },{
+          angle: 270,
+          percent: 0.5,
+          name: {
+            name: "Inazawa"
           }
         }],
+        hexes: ["G6"]
+      },
+      {
+        color: "yellow",
+        mountain: {
+          cost: "¥40",
+          size: "tiny",
+          border: true,
+          percent: 0.75
+        },
+        values: [{
+          value: "30",
+          angle: 180,
+          percent: 0.75
+        }],
+        labels: [{
+          label: "B",
+          angle: 90,
+          percent: 0.667
+        }],
+        cities: [{
+          name: {
+            name: "Ichinomiya",
+            offset: 75
+          }
+        }],
+        track: [{
+          side: 2
+        },{
+          side: 6
+        }],
+        hexes: ["G8"]
+      },
+      {
+        color: "plain",
+        cities: [{
+          name: {
+            name: "Iwakura"
+          }
+        }],
+        hexes: ["G10"]
+      },
+      {
+        color: "plain",
+        cities: [{
+          name: {
+            name: "Kasugai"
+          }
+        }],
+        hexes: ["G12"]
+      },
+      {
+        color: "plain",
+        cities: [{
+          name: {
+            name: "Yohroh"
+          }
+        }],
+        hexes: ["H1"]
+      },
+      {
+        color: "plain",
+        centerTowns: [
+          {
+            angle: 180,
+            percent: 0.3,
+            name: {
+              name: "Owariasahi"
+            }
+          }
+        ],
+        mountain: {
+          percent: 0.5,
+          cost: "¥40",
+          size: "small"
+        },
+        hexes: ["H13"]
+      },
+      {
+        color: "yellow",
+        values: [{
+          value: "30",
+          angle: 180,
+          percent: 0.667
+        }],
+        mountain: {
+          percent: 0.667,
+          size: "tiny",
+          cost: "¥120",
+          border: true
+        },
+        cities: [{
+          companies: [{
+            color: "gray",
+            label: "SER"
+          }],
+          name: {
+            name: "Seto",
+            offset: 75
+          }
+        }],
+        track: [{side:1}],
+        hexes:["H15"]
+      },
+      {
+        color: "plain",
+        labels: [{
+          label: "BR",
+          angle: 180,
+          percent: 0.667
+        }],
+        cities: [{
+          name: {
+            name: "Tsushima",
+            reverse: true
+          }
+        }],
+        hexes: ["I6"]
+      },
+      {
+        color: "plain",
+        labels: [{
+          label: "AH",
+          angle: 180,
+          percent: 0.667
+        }],
+        cities: [{
+          companies: [{
+            color: "red",
+            label: "NER"
+          }],
+          name: {
+            name: "Nishibiwajima",
+            reverse: true
+          }
+        }],
+        hexes: ["I8"]
+      },
+      {
+        color: "plain",
+        labels: [
+          {
+            label: "L",
+            angle: 180,
+            percent: 0.667
+          }
+        ],
+        centerTowns: [{
+          angle: 90,
+          percent: 0.5,
+          name: {
+            name: "Ohzone",
+            reverse: true
+          }
+        },{
+          angle: 270,
+          percent: 0.5,
+          name: {
+            name: "Chikusa"
+          }
+        }],
+        hexes: ["I10"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            companies: [
+              {
+                label: "KR",
+                color: "darkGreen"
+              }
+            ],
+            name: {
+              name: "Yokkaichi"
+            }
+          }
+        ],
         hexes: ["M4"]
       },
       {
         color: "plain",
-        cities: [{
-          companies: [{
-            label: "MRR",
-            color: "blue"
-          }],
-          name: {
-            name: "Hekinan"
+        cities: [
+          {
+            companies: [
+              {
+                label: "MRR",
+                color: "blue"
+              }
+            ],
+            name: {
+              name: "Hekinan"
+            }
           }
-        }],
+        ],
         hexes: ["M12"]
       },
       {
         color: "plain",
-        cities: [{
-          companies: [{
-            label: "IER",
-            color: "purple"
-          }],
-          name: {
-            name: "Tsu"
+        cities: [
+          {
+            companies: [
+              {
+                label: "IER",
+                color: "purple"
+              }
+            ],
+            name: {
+              name: "Tsu"
+            }
           }
-        }],
+        ],
         hexes: ["O6"]
       },
       {
         color: "plain",
-        cities: [{
-          companies: [{
-            label: "ARR",
-            color: "orange"
-          }],
-          name: {
-            name: "Takashi"
+        cities: [
+          {
+            companies: [
+              {
+                label: "ARR",
+                color: "orange"
+              }
+            ],
+            name: {
+              name: "Takashi"
+            }
           }
-        }],
+        ],
         hexes: ["P17"]
       }
     ]

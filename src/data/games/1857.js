@@ -786,7 +786,7 @@ const game = {
       },
       {
         color: "plain",
-        labels: [
+        companies: [
           {
             label: "CdH",
             angle: 180,
