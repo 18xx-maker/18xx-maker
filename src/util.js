@@ -155,6 +155,7 @@ const maxMapY = R.compose(
 
 const resolveHex = (hex, hexes) => {
   if (hex.copy) {
+    console.log({hex,hexes});
     // Find copy
     let copyHex = R.find(h => R.indexOf(hex.copy, h.hexes) > -1, hexes);
 
