@@ -25,6 +25,12 @@ const Track = ({ type, gauge, border }) => {
     case "sharp":
       path = `m 0 75 A 43.30125 43.30125 0 0 0 -64.951875 37.5`;
       break;
+    case "sharpStop":
+      path = `m 0 75 A 43.30125 43.30125 0 0 0 -21.650625 37.5`;
+      break;
+    case "sharpStopRev":
+      path = `m 0 75 A 43.30125 43.30125 0 0 1 21.650625 37.5`;
+      break;
     case "bent":
       path = "m 0 75 C 0 30, 40 40, 40 0 C 40 -40, 0 -30, 0 -75";
       break;

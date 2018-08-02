@@ -4337,7 +4337,7 @@ const tiles = {
         percent: 0.5
       }
     ],
-    track: [{ type: "stop", side: 2 }, { type: "stop", side: 3 }]
+    track: [{ type: "sharpStopRev", side: 2 }, { type: "sharpStop", side: 3 }]
   },
   "761": {
     color: "green",
@@ -4696,7 +4696,7 @@ const tiles = {
         percent: 0.5
       }
     ],
-    track: [{ type: "stop", side: 2 }, { type: "stop", side: 3 }]
+    track: [{ type: "sharpStopRev", side: 2 }, { type: "sharpStop", side: 3 }]
   },
   "775": {
     color: "brown",
