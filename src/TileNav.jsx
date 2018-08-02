@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const TileNav = () => {
   return (
@@ -7,13 +7,13 @@ const TileNav = () => {
       <h2>Tiles</h2>
       <ul>
         <li>
-          <Link to={`/tiles`}>All</Link>
+          <NavLink exact to={`/tiles`}>All</NavLink>
         </li>
         <li>
-          <Link to={`/tiles/atoms`}>Atoms</Link>
+          <NavLink to={`/tiles/atoms`}>Atoms</NavLink>
         </li>
         <li>
-          <Link to={`/tiles/positioning`}>Positioning</Link>
+          <NavLink to={`/tiles/positioning`}>Positioning</NavLink>
         </li>
       </ul>
     </React.Fragment>

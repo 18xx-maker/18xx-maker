@@ -23,7 +23,6 @@ import MapPaginated from "./MapPaginated";
 import MapSingle from "./MapSingle";
 
 import GameMenu from "./GameMenu";
-import TilesMenu from "./TilesMenu";
 
 import Footer from "./Footer";
 
@@ -56,8 +55,11 @@ class App extends Component {
             <Route path="/:game/manifest" component={TileManifest} />
             <Route path="/:game/tokens" component={Tokens} />
           </Switch>
-          <Route path="/:game([0-9_-]+)/" strict component={GameMenu} />
-          <Route path="/tiles/" component={TilesMenu} />
+
+          <Switch>
+            <Route path="/tiles" component={GameMenu} />
+            <Route path="/:game/" component={GameMenu} />
+          </Switch>
           <Footer/>
         </div>
       </Router>
