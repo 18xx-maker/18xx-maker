@@ -17,6 +17,7 @@ import Label from "./atoms/Label";
 import Icon from "./atoms/Icon";
 import Value from "./atoms/Value";
 import Industry from "./atoms/Industry";
+import Company from "./atoms/Company";
 import OffBoardRevenue from "./atoms/OffBoardRevenue";
 import OffBoardTrack from "./atoms/OffBoardTrack";
 import Water from "./atoms/Water";
@@ -158,6 +159,10 @@ const HexTile = ({ hex, id, border }) => {
     <Position data={hex.industries}>{i => <Industry {...i} />}</Position>
   );
 
+  let companies = (
+    <Position data={hex.companies}>{c => <Company {...c} />}</Position>
+  );
+
   let tokens = <Position data={hex.tokens}>{t => <Token {...t} />}</Position>;
 
   let bonus = <Position data={hex.routeBonus}>{b => <RouteBonus {...b} />}</Position>;
@@ -179,6 +184,7 @@ const HexTile = ({ hex, id, border }) => {
               {offBoardTracks}
               {values}
               {industries}
+              {companies}
               {cities}
               {towns}
               {centerTowns}
