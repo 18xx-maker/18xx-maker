@@ -32,7 +32,7 @@ const Company = ({ label, bottom }) => {
         r="3"
       />
       <text
-        fontWeight="normal"
+        fontWeight="bold"
         fontSize={size}
         fontFamily="Helvetica, Arial, sans-serif"
         fill={colors["track"]}
