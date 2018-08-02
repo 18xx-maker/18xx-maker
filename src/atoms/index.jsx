@@ -23,6 +23,7 @@ import Mountain from "./Mountain";
 import Tunnel from "./Tunnel";
 import Water from "./Water";
 import Bridge from "./Bridge";
+import RouteBonus from "./RouteBonus";
 
 require("./atoms.css");
 
@@ -224,6 +225,14 @@ const Atoms = () => {
     {
       name: "Bridge",
       examples: [<Bridge cost="$40" />]
+    },
+    {
+      name: "RouteBonus",
+      examples: [
+        <RouteBonus value="$4" />,
+        <RouteBonus value="+30" />,
+        <RouteBonus value="+$400" />
+      ]
     },
     {
       name: "Clip Paths",
