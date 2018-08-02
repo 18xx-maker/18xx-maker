@@ -15,21 +15,25 @@ const game = {
   // Extra Tokens
   tokens: ["Round"],
 
-  bank: "$10,000",
+  bank: "£10,000",
 
-  players: [{
-    number: 2,
-    certLimit: 32,
-    capital: "£1000"
-  },{
-    number: 3,
-    certLimit: 21,
-    capital: "£670"
-  },{
-    number: 4,
-    certLimit: 16,
-    capital: "£500"
-  }],
+  players: [
+    {
+      number: 2,
+      certLimit: 32,
+      capital: "£1000"
+    },
+    {
+      number: 3,
+      certLimit: 21,
+      capital: "£670"
+    },
+    {
+      number: 4,
+      certLimit: 16,
+      capital: "£500"
+    }
+  ],
 
   // Railway Companies
   companies: [
@@ -882,7 +886,7 @@ const game = {
     hexes: [
       {
         color: "plain",
-        centerTowns: [{}],
+        centerTowns: [{ name: { name: "East Cowes" } }],
         borders: [
           {
             side: 2,
@@ -906,7 +910,10 @@ const game = {
         cities: [
           {
             angle: 180,
-            percent: 0.5,
+            percent: 0.45,
+            name: {
+              name: "Cowes"
+            },
             companies: [
               {
                 label: "C&N",
@@ -917,10 +924,16 @@ const game = {
         ],
         centerTowns: [
           {
-            percent: 0.25
+            name: {
+              name: "Mill Hill"
+            },
+            percent: 0.3
           },
           {
-            percent: 0.75
+            name: {
+              name: "Medina Wharf"
+            },
+            percent: 0.8
           }
         ],
         hexes: ["F2"]
@@ -928,7 +941,7 @@ const game = {
       {
         color: "plain",
         water: {
-          cost: "TBD"
+          cost: "£60"
         },
         hexes: ["H2"]
       },
@@ -955,6 +968,11 @@ const game = {
             side: 2
           }
         ],
+        labels: [{
+          label: "Ryde Pier",
+          angle: 180,
+          percent: 0.35
+        }],
         hexes: ["J2"]
       },
       {
@@ -963,7 +981,7 @@ const game = {
       },
       {
         color: "plain",
-        centerTowns: [{}],
+        centerTowns: [{ name: { name: "Whippingham" } }],
         borders: [
           {
             side: 2,
@@ -980,6 +998,10 @@ const game = {
         color: "yellow",
         cities: [
           {
+            name: {
+              name: "Ryde",
+              reverse: true
+            },
             companies: [
               {
                 label: "IOW",
@@ -1013,6 +1035,9 @@ const game = {
         color: "plain",
         cities: [
           {
+            name: {
+              name: "Yarmouth"
+            },
             companies: [
               {
                 label: "FYN",
@@ -1032,13 +1057,13 @@ const game = {
       {
         color: "plain",
         water: {
-          cost: "TBD"
+          cost: "£60"
         },
         hexes: ["D4"]
       },
       {
         color: "plain",
-        centerTowns: [{}],
+        centerTowns: [{ name: { name: "Cement Mills" } }],
         borders: [
           {
             side: 5,
@@ -1051,10 +1076,12 @@ const game = {
         color: "plain",
         centerTowns: [
           {
+            name: { name: "Wooton" },
             angle: 90,
             percent: 0.5
           },
           {
+            name: { name: "Havenstreet", reverse: true },
             angle: 270,
             percent: 0.5
           }
@@ -1063,12 +1090,18 @@ const game = {
       },
       {
         color: "plain",
-        cities: [{}],
+        cities: [{ name: { name: "Ryde" } }],
         hexes: ["J4"]
       },
       {
         color: "plain",
-        centerTowns: [{}],
+        centerTowns: [
+          {
+            name: {
+              name: "Norton Green"
+            }
+          }
+        ],
         borders: [
           {
             side: 5,
@@ -1079,14 +1112,45 @@ const game = {
       },
       {
         color: "plain",
-        centerTowns: [{}],
-        hexes: ["C5", "E5", "D6", "F6", "H8", "F10", "G11"]
+        centerTowns: [{ name: { name: "Horringford" } }],
+        hexes: ["H8"]
+      },
+      {
+        color: "plain",
+        centerTowns: [{ name: { name: "Whitwell" } }],
+        hexes: ["G11"]
+      },
+      {
+        color: "plain",
+        centerTowns: [{ name: { name: "Carisbrooke" } }],
+        hexes: ["F6"]
+      },
+      {
+        color: "plain",
+        centerTowns: [{ name: { name: "Calbourne" } }],
+        hexes: ["D6"]
+      },
+      {
+        color: "plain",
+        centerTowns: [{ name: { name: "Watchingwell" } }],
+        hexes: ["E5"]
+      },
+      {
+        color: "plain",
+        centerTowns: [{ name: { name: "Ningwood" } }],
+        hexes: ["C5"]
+      },
+      {
+        color: "plain",
+        centerTowns: [{ name: { name: "Chale Green" } }],
+        hexes: ["F10"]
       },
       {
         color: "yellow",
         values: [
           {
             value: 30,
+            angle: 60,
             percent: 0.667
           }
         ],
@@ -1097,7 +1161,7 @@ const game = {
             label: "N"
           }
         ],
-        cities: [{}],
+        cities: [{ name: { name: "Newport", offset: 55, reverse: true } }],
         track: [
           {
             side: 3
@@ -1116,13 +1180,16 @@ const game = {
             color: "mountain"
           }
         ],
-        centerTowns: [{}],
+        centerTowns: [{ name: { name: "Ashey" } }],
         hexes: ["I5"]
       },
       {
         color: "plain",
         centerTowns: [
           {
+            name: {
+              name: "St. Helens"
+            },
             angle: 90,
             percent: 0.5
           }
@@ -1131,26 +1198,61 @@ const game = {
           {
             angle: 270,
             percent: 0.5,
-            cost: "TBD"
+            cost: "£60"
           }
         ],
         hexes: ["K5"]
       },
       {
         color: "plain",
-        cities: [{}],
-        hexes: ["B6", "A7", "J8"]
+        cities: [
+          {
+            name: {
+              name: "Freshwater"
+            }
+          }
+        ],
+        hexes: ["B6"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: {
+              name: "Totland"
+            }
+          }
+        ],
+        hexes: ["A7"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: {
+              name: "Sandown"
+            }
+          }
+        ],
+        hexes: ["J8"]
       },
       {
         color: "plain",
         mountain: {
-          cost: "TBD"
+          cost: "£60"
         },
         hexes: ["H6", "E7", "F8", "G13"]
       },
       {
         color: "plain",
-        cities: [{}],
+        cities: [
+          {
+            name: {
+              name: "Brading",
+              reverse: true
+            }
+          }
+        ],
         labels: [
           {
             angle: 180,
@@ -1164,6 +1266,9 @@ const game = {
         color: "plain",
         cities: [
           {
+            name: {
+              name: "Bembridge"
+            },
             companies: [
               {
                 label: "BHI&R",
@@ -1178,6 +1283,9 @@ const game = {
         color: "plain",
         centerTowns: [
           {
+            name: {
+              name: "Shalcombe"
+            },
             angle: 90,
             percent: 0.5
           }
@@ -1186,10 +1294,20 @@ const game = {
           {
             angle: 270,
             percent: 0.5,
-            cost: "TBD"
+            cost: "£60"
           }
         ],
-        hexes: ["C7", "H10", "H12"]
+        hexes: ["C7"]
+      },
+      {
+        copy: "C7",
+        centerTowns: [{ name: { name: "Wroxall" } }],
+        hexes: ["H10"]
+      },
+      {
+        copy: "C7",
+        centerTowns: [{ name: { name: "St. Lawrence" } }],
+        hexes: ["H12"]
       },
       {
         color: "yellow",
@@ -1210,13 +1328,20 @@ const game = {
         centerTowns: [
           {
             angle: 150,
-            percent: 0.667
+            percent: 0.667,
+            name: {
+              name: "Blackwater",
+              reverse: true
+            }
           }
         ],
         cities: [
           {
             angle: -60,
             percent: 0.5,
+            name: {
+              name: "Merstone"
+            },
             companies: [
               {
                 label: "IWNJ",
@@ -1237,10 +1362,12 @@ const game = {
         color: "plain",
         centerTowns: [
           {
+            name: { name: "Newchurch" },
             angle: 90,
             percent: 0.5
           },
           {
+            name: { name: "Alverstone", reverse: true },
             angle: 270,
             percent: 0.5
           }
@@ -1264,6 +1391,10 @@ const game = {
         ],
         cities: [
           {
+            name: {
+              name: "Shorwell",
+              reverse: true
+            },
             companies: [
               {
                 label: "VYSC",
@@ -1285,6 +1416,10 @@ const game = {
         ],
         cities: [
           {
+            name: {
+              name: "Godshill",
+              reverse: true
+            },
             companies: [
               {
                 label: "NGStL",
@@ -1297,7 +1432,7 @@ const game = {
       },
       {
         color: "plain",
-        cities: [{}],
+        cities: [{ name: { name: "Shanklin" } }],
         borders: [
           {
             side: 1,
@@ -1308,7 +1443,13 @@ const game = {
       },
       {
         color: "yellow",
-        cities: [{}],
+        cities: [
+          {
+            name: {
+              name: "Ventnor"
+            }
+          }
+        ],
         labels: [
           {
             label: "V",
@@ -1339,6 +1480,9 @@ const game = {
         color: "plain",
         cities: [
           {
+            name: {
+              name: "Chale"
+            },
             companies: [
               {
                 label: "S&C",
