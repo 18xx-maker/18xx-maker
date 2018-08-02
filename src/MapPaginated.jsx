@@ -51,7 +51,7 @@ const MapPaginated = ({ match }) => {
   let pageWidth = data.paper.width - 75;
   let pageHeight = data.paper.height - 75;
 
-  if (game.map.print === "landscape") {
+  if (map.print === "landscape") {
     let tmp = pageWidth;
     pageWidth = pageHeight;
     pageHeight = tmp;
@@ -110,7 +110,7 @@ const MapPaginated = ({ match }) => {
     >
       <Svg className="FullMap" defs={defs} />
       <div className="PrintNotes">
-        This map is meant to be printed in <b>{game.map.print || "portrait"}</b>{" "}
+        This map is meant to be printed in <b>{map.print || "portrait"}</b>{" "}
         mode
         {Array.isArray(game.map) && (
           <ul>
