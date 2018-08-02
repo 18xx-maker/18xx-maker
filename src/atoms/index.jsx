@@ -151,7 +151,18 @@ const Atoms = () => {
             ["standard", "narrow", "double", "line"]
           );
         },
-        ["city", "stop", "mid", "sharp", "gentle", "straight", "bent", "1860-C"]
+        [
+          "city",
+          "stop",
+          "mid",
+          "sharp",
+          "sharpStop",
+          "sharpStopRev",
+          "gentle",
+          "straight",
+          "bent",
+          "1860-C"
+        ]
       )
     },
     {
