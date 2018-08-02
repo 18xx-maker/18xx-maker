@@ -32,7 +32,7 @@ const Map = ({ game, variation }) => {
   }
 
   return R.chain(hex => {
-    let resolvedHex = util.resolveHex(hex, map.hexes);
+    let resolvedHex = util.resolveHex(hex, hexes);
 
     return R.map(([x, y]) => {
       let translate =
