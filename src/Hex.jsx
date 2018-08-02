@@ -23,6 +23,7 @@ import Water from "./atoms/Water";
 import Bridge from "./atoms/Bridge";
 import Mountain from "./atoms/Mountain";
 import Tunnel from "./atoms/Tunnel";
+import RouteBonus from "./atoms/RouteBonus";
 import Border from "./atoms/Border";
 
 import Token from "./Token";
@@ -159,6 +160,8 @@ const HexTile = ({ hex, id, border }) => {
 
   let tokens = <Position data={hex.tokens}>{t => <Token {...t} />}</Position>;
 
+  let bonus = <Position data={hex.routeBonus}>{b => <RouteBonus {...b} />}</Position>;
+
   return (
     <g>
       <Hex color={hex.color} />
@@ -181,6 +184,7 @@ const HexTile = ({ hex, id, border }) => {
               {centerTowns}
               {labels}
               {tokens}
+              {bonus}
               {offBoardRevenue}
               {divides}
               {borders}

@@ -17,19 +17,23 @@ const game = {
 
   capital: "$400",
 
-  players: [{
-    number: 3,
-    certLimit: 14,
-    bank: "$6,500"
-  },{
-    number: 4,
-    certLimit: 12,
-    bank: "$7,500"
-  },{
-    number: 5,
-    certLimit: 11,
-    bank: "$9,000"
-  }],
+  players: [
+    {
+      number: 3,
+      certLimit: 14,
+      bank: "$6,500"
+    },
+    {
+      number: 4,
+      certLimit: 12,
+      bank: "$7,500"
+    },
+    {
+      number: 5,
+      certLimit: 11,
+      bank: "$9,000"
+    }
+  ],
 
   // Railway Companies
   companies: [
@@ -262,7 +266,8 @@ const game = {
         {
           color: "brown",
           icon: "exclamation",
-          note: "Corporations may not issue more stock than the amount held by players, less the number already in the stock market"
+          note:
+            "Corporations may not issue more stock than the amount held by players, less the number already in the stock market"
         }
       ]
     }
@@ -304,13 +309,47 @@ const game = {
 
   stock: {
     type: "1D",
-    market: [0,10,20,30,40,50,60,70,80,90,100,112,124,137,150,165,180,195,212,230,250,270,295,320,345,375,405,440,475,510,550],
-    limits: [{
-      color: "orange",
-      description: "Allowed par values",
-      min: 40,
-      max: 150
-    }]
+    market: [
+      0,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      112,
+      124,
+      137,
+      150,
+      165,
+      180,
+      195,
+      212,
+      230,
+      250,
+      270,
+      295,
+      320,
+      345,
+      375,
+      405,
+      440,
+      475,
+      510,
+      550
+    ],
+    limits: [
+      {
+        color: "orange",
+        description: "Allowed par values",
+        min: 40,
+        max: 150
+      }
+    ]
   },
 
   tiles: {
@@ -488,6 +527,12 @@ const game = {
       },
       {
         color: "offboard",
+        routeBonus: {
+          value: "+20",
+          angle: 180,
+          percent: 0.333,
+          x: 15
+        },
         labels: [
           {
             label: "Sarnia",
@@ -495,7 +540,7 @@ const game = {
           },
           {
             angle: 180,
-            percent: 0.667,
+            percent: 0.75,
             label: "E"
           }
         ],
@@ -534,11 +579,18 @@ const game = {
             side: 5
           }
         ],
-        icons: [{
-          type: "port",
-          angle: 300,
-          percent: 0.75
-        }],
+        icons: [
+          {
+            type: "port",
+            angle: 300,
+            percent: 0.75
+          }
+        ],
+        routeBonus: {
+          value: "+50",
+          angle: 180,
+          percent: 0.333
+        },
         labels: [
           {
             label: "Chicago Connections"
@@ -546,7 +598,7 @@ const game = {
           {
             label: "W",
             angle: 180,
-            percent: 0.667
+            percent: 0.75
           }
         ],
         offBoardRevenue: {
@@ -632,6 +684,12 @@ const game = {
       },
       {
         color: "offboard",
+        routeBonus: {
+          value: "+30",
+          angle: 180,
+          percent: 0.333,
+          x: 15
+        },
         labels: [
           {
             label: "Windsor",
@@ -639,7 +697,7 @@ const game = {
           },
           {
             angle: 180,
-            percent: 0.667,
+            percent: 0.75,
             label: "E"
           }
         ],
@@ -795,6 +853,12 @@ const game = {
       },
       {
         color: "offboard",
+        routeBonus: {
+          value: "+30",
+          angle: 180,
+          percent: 0.333,
+          x: 15
+        },
         labels: [
           {
             label: "Buffalo",
@@ -802,7 +866,7 @@ const game = {
           },
           {
             angle: 180,
-            percent: 0.667,
+            percent: 0.75,
             label: "E"
           }
         ],
@@ -829,6 +893,12 @@ const game = {
       },
       {
         color: "offboard",
+        routeBonus: {
+          value: "+30",
+          angle: 180,
+          percent: 0.333,
+          x: 15
+        },
         labels: [
           {
             label: "Buffalo",
@@ -836,7 +906,7 @@ const game = {
           },
           {
             angle: 180,
-            percent: 0.667,
+            percent: 0.75,
             label: "E"
           }
         ],
@@ -940,6 +1010,11 @@ const game = {
       },
       {
         color: "offboard",
+        routeBonus: {
+          value: "+30",
+          angle: 180,
+          percent: 0.333
+        },
         labels: [
           {
             label: "Binghamton",
@@ -947,7 +1022,7 @@ const game = {
           },
           {
             angle: 180,
-            percent: 0.667,
+            percent: 0.75,
             label: "E"
           }
         ],
@@ -1037,6 +1112,11 @@ const game = {
       },
       {
         color: "offboard",
+        routeBonus: {
+          value: "+20",
+          angle: 180,
+          percent: 0.333
+        },
         labels: [
           {
             label: "Pittsburgh",
@@ -1044,7 +1124,7 @@ const game = {
           },
           {
             angle: 180,
-            percent: 0.667,
+            percent: 0.75,
             label: "E"
           }
         ],
@@ -1185,6 +1265,11 @@ const game = {
       },
       {
         color: "offboard",
+        routeBonus: {
+          value: "+20",
+          angle: 180,
+          percent: 0.333
+        },
         labels: [
           {
             label: "Pittsburgh",
@@ -1192,7 +1277,7 @@ const game = {
           },
           {
             angle: 180,
-            percent: 0.667,
+            percent: 0.75,
             label: "E"
           }
         ],
@@ -1252,6 +1337,11 @@ const game = {
       },
       {
         color: "offboard",
+        routeBonus: {
+          value: "+20",
+          angle: 180,
+          percent: 0.333
+        },
         labels: [
           {
             label: "Cumberland",
@@ -1259,7 +1349,7 @@ const game = {
           },
           {
             angle: 180,
-            percent: 0.667,
+            percent: 0.75,
             label: "E"
           }
         ],
@@ -1284,15 +1374,23 @@ const game = {
       },
       {
         color: "offboard",
-        icons: [{
-          type: "port",
-          angle: 20,
-          percent: 0.75
-        },{
-          type: "meat",
-          angle: -20,
-          percent: 0.75
-        }],
+        icons: [
+          {
+            type: "port",
+            angle: 20,
+            percent: 0.75
+          },
+          {
+            type: "meat",
+            angle: -20,
+            percent: 0.75
+          }
+        ],
+        routeBonus: {
+          value: "+30",
+          angle: 180,
+          percent: 0.333
+        },
         labels: [
           {
             label: "St. Louis",
@@ -1300,7 +1398,7 @@ const game = {
           },
           {
             angle: 180,
-            percent: 0.667,
+            percent: 0.75,
             label: "W"
           }
         ],
@@ -1322,68 +1420,98 @@ const game = {
             percent: 0.667
           }
         ],
-        cities: [{
-          size: 2,
-          name: {
-            name: "Centralia",
-            reverse: true,
-            offset: 63
+        cities: [
+          {
+            size: 2,
+            name: {
+              name: "Centralia",
+              reverse: true,
+              offset: 63
+            },
+            companies: [
+              {
+                label: "IC",
+                color: "gray"
+              }
+            ]
+          }
+        ],
+        track: [
+          {
+            side: 1
           },
-          companies: [{
-            label: "IC",
-            color: "gray"
-          }]
-        }],
-        track: [{
-          side: 1
-        },{
-          side: 3
-        },{
-          side: 4
-        },{
-          side: 6
-        }],
+          {
+            side: 3
+          },
+          {
+            side: 4
+          },
+          {
+            side: 6
+          }
+        ],
         hexes: ["I5"]
-      },{
+      },
+      {
         color: "plain",
-        bridges: [{
-          cost: "$40",
-          angle: 210,
-          percent: 1
-        }],
+        bridges: [
+          {
+            cost: "$40",
+            angle: 210,
+            percent: 1
+          }
+        ],
         hexes: ["I11"]
       },
       {
         color: "gray",
-        values: [{
-          value: 20,
-          angle: -54,
-          percent: 0.7
-        }],
-        cities: [{
-          name: {
-            name: "Huntington",
-            reverse: true,
-            rotation: 30
+        values: [
+          {
+            value: 20,
+            angle: -54,
+            percent: 0.7
+          }
+        ],
+        cities: [
+          {
+            name: {
+              name: "Huntington",
+              reverse: true,
+              rotation: 30
+            },
+            companies: [
+              {
+                label: "C&O",
+                color: "cyan"
+              }
+            ]
+          }
+        ],
+        track: [
+          {
+            side: 2
           },
-          companies: [{
-            label: "C&O",
-            color: "cyan"
-          }]
-        }],
-        track: [{
-          side: 2
-        },{
-          side: 3
-        },{
-          side: 4
-        }],
+          {
+            side: 3
+          },
+          {
+            side: 4
+          }
+        ],
         hexes: ["I15"]
-      },{
+      },
+      {
         color: "offboard",
-        offBoardTrack: [{
-          side: 1
-        }],
+        offBoardTrack: [
+          {
+            side: 1
+          }
+        ],
+        routeBonus: {
+          value: "+20",
+          angle: 180,
+          percent: 0.333
+        },
         labels: [
           {
             label: "Charleston",
@@ -1391,7 +1519,7 @@ const game = {
           },
           {
             angle: 180,
-            percent: 0.667,
+            percent: 0.75,
             label: "E"
           }
         ],
@@ -1411,19 +1539,25 @@ const game = {
       },
       {
         color: "plain",
-        bridges: [{
-          cost: "$40",
-          angle: 90,
-          percent: 1
-        }],
+        bridges: [
+          {
+            cost: "$40",
+            angle: 90,
+            percent: 1
+          }
+        ],
         hexes: ["J6"]
-      },{
+      },
+      {
         color: "offboard",
-        offBoardTrack: [{
-          side: 2
-        },{
-          side: 3
-        }],
+        offBoardTrack: [
+          {
+            side: 2
+          },
+          {
+            side: 3
+          }
+        ],
         labels: [
           {
             label: "Louisville",
@@ -1453,20 +1587,26 @@ const game = {
             percent: 0.667
           }
         ],
-        cities: [{
-          name: {
-            name: "Caire",
-            reverse: true,
-            rotation: 30
-          },
-          companies: [{
-            label: "IC",
-            color: "darkGreen"
-          }]
-        }],
-        track: [{
-          side: 3
-        }],
+        cities: [
+          {
+            name: {
+              name: "Caire",
+              reverse: true,
+              rotation: 30
+            },
+            companies: [
+              {
+                label: "IC",
+                color: "darkGreen"
+              }
+            ]
+          }
+        ],
+        track: [
+          {
+            side: 3
+          }
+        ],
         hexes: ["K3"]
       }
     ]
