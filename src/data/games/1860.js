@@ -881,620 +881,653 @@ const game = {
     "789": 1
   },
 
-  map: {
-    print: "landscape",
-    hexes: [
-      {
-        color: "plain",
-        centerTowns: [{ name: { name: "East Cowes" } }],
-        borders: [
-          {
-            side: 2,
-            color: "mountain"
-          }
-        ],
-        hexes: ["G1"]
-      },
-      {
-        color: "plain",
-        borders: [
-          {
-            side: 5,
-            color: "mountain"
-          },
-          {
-            side: 6,
-            color: "mountain"
-          }
-        ],
-        cities: [
-          {
-            angle: 180,
-            percent: 0.45,
-            name: {
-              name: "Cowes"
-            },
-            companies: [
-              {
-                label: "C&N",
-                color: "blue"
-              }
-            ]
-          }
-        ],
-        centerTowns: [
-          {
-            name: {
-              name: "Mill Hill"
-            },
-            percent: 0.3
-          },
-          {
-            name: {
-              name: "Medina Wharf"
-            },
-            percent: 0.8
-          }
-        ],
-        hexes: ["F2"]
-      },
-      {
-        color: "plain",
-        water: {
-          cost: "£60"
-        },
-        hexes: ["H2"]
-      },
-      {
-        color: "water",
-        offBoardRevenue: {
-          revenues: [
+  map: [
+    {
+      name: "2 Player",
+      print: "landscape",
+      hexes: [
+        {
+          color: "plain",
+          centerTowns: [{ name: { name: "East Cowes" } }],
+          borders: [
             {
-              color: "yellow",
-              cost: "0"
-            },
-            {
-              color: "green",
-              cost: "20"
-            },
-            {
-              color: "brown",
-              cost: "40"
+              side: 2,
+              color: "mountain"
             }
-          ]
+          ],
+          hexes: ["G1"]
         },
-        offBoardTrack: [
-          {
-            side: 2
-          }
-        ],
-        labels: [{
-          label: "Ryde Pier",
-          angle: 180,
-          percent: 0.35
-        }],
-        hexes: ["J2"]
-      },
-      {
-        color: "plain",
-        hexes: ["E3", "K7", "D8", "E11"]
-      },
-      {
-        color: "plain",
-        centerTowns: [{ name: { name: "Whippingham" } }],
-        borders: [
-          {
-            side: 2,
-            color: "mountain"
-          },
-          {
-            side: 3,
-            color: "mountain"
-          }
-        ],
-        hexes: ["G3"]
-      },
-      {
-        color: "yellow",
-        cities: [
-          {
-            name: {
-              name: "Ryde",
-              reverse: true
+        {
+          color: "plain",
+          borders: [
+            {
+              side: 5,
+              color: "mountain"
             },
-            companies: [
-              {
-                label: "IOW",
-                color: "red"
-              }
-            ]
-          }
-        ],
-        values: [
-          {
-            value: 30,
-            angle: 90,
-            percent: 0.667
-          }
-        ],
-        labels: [
-          {
-            label: "R",
-            angle: 180,
-            percent: 0.667
-          }
-        ],
-        track: [
-          {
-            side: 6
-          }
-        ],
-        hexes: ["I3"]
-      },
-      {
-        color: "plain",
-        cities: [
-          {
-            name: {
-              name: "Yarmouth"
-            },
-            companies: [
-              {
-                label: "FYN",
-                color: "darkGreen"
-              }
-            ]
-          }
-        ],
-        borders: [
-          {
-            side: 2,
-            color: "mountain"
-          }
-        ],
-        hexes: ["B4"]
-      },
-      {
-        color: "plain",
-        water: {
-          cost: "£60"
-        },
-        hexes: ["D4"]
-      },
-      {
-        color: "plain",
-        centerTowns: [{ name: { name: "Cement Mills" } }],
-        borders: [
-          {
-            side: 5,
-            color: "mountain"
-          }
-        ],
-        hexes: ["F4"]
-      },
-      {
-        color: "plain",
-        centerTowns: [
-          {
-            name: { name: "Wooton" },
-            angle: 90,
-            percent: 0.5
-          },
-          {
-            name: { name: "Havenstreet", reverse: true },
-            angle: 270,
-            percent: 0.5
-          }
-        ],
-        hexes: ["H4"]
-      },
-      {
-        color: "plain",
-        cities: [{ name: { name: "Ryde" } }],
-        hexes: ["J4"]
-      },
-      {
-        color: "plain",
-        centerTowns: [
-          {
-            name: {
-              name: "Norton Green"
+            {
+              side: 6,
+              color: "mountain"
             }
-          }
-        ],
-        borders: [
-          {
-            side: 5,
-            color: "mountain"
-          }
-        ],
-        hexes: ["A5"]
-      },
-      {
-        color: "plain",
-        centerTowns: [{ name: { name: "Horringford" } }],
-        hexes: ["H8"]
-      },
-      {
-        color: "plain",
-        centerTowns: [{ name: { name: "Whitwell" } }],
-        hexes: ["G11"]
-      },
-      {
-        color: "plain",
-        centerTowns: [{ name: { name: "Carisbrooke" } }],
-        hexes: ["F6"]
-      },
-      {
-        color: "plain",
-        centerTowns: [{ name: { name: "Calbourne" } }],
-        hexes: ["D6"]
-      },
-      {
-        color: "plain",
-        centerTowns: [{ name: { name: "Watchingwell" } }],
-        hexes: ["E5"]
-      },
-      {
-        color: "plain",
-        centerTowns: [{ name: { name: "Ningwood" } }],
-        hexes: ["C5"]
-      },
-      {
-        color: "plain",
-        centerTowns: [{ name: { name: "Chale Green" } }],
-        hexes: ["F10"]
-      },
-      {
-        color: "yellow",
-        values: [
-          {
-            value: 30,
-            angle: 60,
-            percent: 0.667
-          }
-        ],
-        labels: [
-          {
-            angle: 270,
-            percent: 0.667,
-            label: "N"
-          }
-        ],
-        cities: [{ name: { name: "Newport", offset: 55, reverse: true } }],
-        track: [
-          {
-            side: 3
-          },
-          {
-            side: 4
-          }
-        ],
-        hexes: ["G5"]
-      },
-      {
-        color: "plain",
-        borders: [
-          {
-            side: 1,
-            color: "mountain"
-          }
-        ],
-        centerTowns: [{ name: { name: "Ashey" } }],
-        hexes: ["I5"]
-      },
-      {
-        color: "plain",
-        centerTowns: [
-          {
-            name: {
-              name: "St. Helens"
+          ],
+          cities: [
+            {
+              angle: 180,
+              percent: 0.45,
+              name: {
+                name: "Cowes"
+              },
+              companies: [
+                {
+                  label: "C&N",
+                  color: "blue"
+                }
+              ]
+            }
+          ],
+          centerTowns: [
+            {
+              name: {
+                name: "Mill Hill"
+              },
+              percent: 0.3
             },
-            angle: 90,
-            percent: 0.5
-          }
-        ],
-        water: [
-          {
-            angle: 270,
-            percent: 0.5,
+            {
+              name: {
+                name: "Medina Wharf"
+              },
+              percent: 0.8
+            }
+          ],
+          hexes: ["F2"]
+        },
+        {
+          color: "plain",
+          water: {
             cost: "£60"
-          }
-        ],
-        hexes: ["K5"]
-      },
-      {
-        color: "plain",
-        cities: [
-          {
-            name: {
-              name: "Freshwater"
-            }
-          }
-        ],
-        hexes: ["B6"]
-      },
-      {
-        color: "plain",
-        cities: [
-          {
-            name: {
-              name: "Totland"
-            }
-          }
-        ],
-        hexes: ["A7"]
-      },
-      {
-        color: "plain",
-        cities: [
-          {
-            name: {
-              name: "Sandown"
-            }
-          }
-        ],
-        hexes: ["J8"]
-      },
-      {
-        color: "plain",
-        mountain: {
-          cost: "£60"
-        },
-        hexes: ["H6", "E7", "F8", "G13"]
-      },
-      {
-        color: "plain",
-        cities: [
-          {
-            name: {
-              name: "Brading",
-              reverse: true
-            }
-          }
-        ],
-        labels: [
-          {
-            angle: 180,
-            percent: 0.667,
-            label: "B"
-          }
-        ],
-        hexes: ["J6"]
-      },
-      {
-        color: "plain",
-        cities: [
-          {
-            name: {
-              name: "Bembridge"
-            },
-            companies: [
-              {
-                label: "BHI&R",
-                color: "pink"
-              }
-            ]
-          }
-        ],
-        hexes: ["L6"]
-      },
-      {
-        color: "plain",
-        centerTowns: [
-          {
-            name: {
-              name: "Shalcombe"
-            },
-            angle: 90,
-            percent: 0.5
-          }
-        ],
-        mountain: [
-          {
-            angle: 270,
-            percent: 0.5,
-            cost: "£60"
-          }
-        ],
-        hexes: ["C7"]
-      },
-      {
-        copy: "C7",
-        centerTowns: [{ name: { name: "Wroxall" } }],
-        hexes: ["H10"]
-      },
-      {
-        copy: "C7",
-        centerTowns: [{ name: { name: "St. Lawrence" } }],
-        hexes: ["H12"]
-      },
-      {
-        color: "yellow",
-        values: [
-          {
-            angle: 30,
-            value: 10,
-            percent: 0.5
-          }
-        ],
-        labels: [
-          {
-            angle: 210,
-            percent: 0.667,
-            label: "M"
-          }
-        ],
-        centerTowns: [
-          {
-            angle: 150,
-            percent: 0.667,
-            name: {
-              name: "Blackwater",
-              reverse: true
-            }
-          }
-        ],
-        cities: [
-          {
-            angle: -60,
-            percent: 0.5,
-            name: {
-              name: "Merstone"
-            },
-            companies: [
-              {
-                label: "IWNJ",
-                color: "black"
-              }
-            ]
-          }
-        ],
-        track: [
-          {
-            type: "stop",
-            side: 6
-          }
-        ],
-        hexes: ["G7"]
-      },
-      {
-        color: "plain",
-        centerTowns: [
-          {
-            name: { name: "Newchurch" },
-            angle: 90,
-            percent: 0.5
           },
-          {
-            name: { name: "Alverstone", reverse: true },
-            angle: 270,
-            percent: 0.5
-          }
-        ],
-        borders: [
-          {
-            side: 4,
-            color: "mountain"
-          }
-        ],
-        hexes: ["I7"]
-      },
-      {
-        color: "plain",
-        labels: [
-          {
-            label: "B",
-            angle: 180,
-            percent: 0.667
-          }
-        ],
-        cities: [
-          {
-            name: {
-              name: "Shorwell",
-              reverse: true
-            },
-            companies: [
+          hexes: ["H2"]
+        },
+        {
+          color: "water",
+          offBoardRevenue: {
+            revenues: [
               {
-                label: "VYSC",
-                color: "cyan"
+                color: "yellow",
+                cost: "0"
+              },
+              {
+                color: "green",
+                cost: "20"
+              },
+              {
+                color: "brown",
+                cost: "40"
               }
             ]
-          }
-        ],
-        hexes: ["E9"]
-      },
-      {
-        color: "plain",
-        labels: [
-          {
-            label: "B",
-            angle: 180,
-            percent: 0.667
-          }
-        ],
-        cities: [
-          {
-            name: {
-              name: "Godshill",
-              reverse: true
-            },
-            companies: [
-              {
-                label: "NGStL",
-                color: "yellow"
-              }
-            ]
-          }
-        ],
-        hexes: ["G9"]
-      },
-      {
-        color: "plain",
-        cities: [{ name: { name: "Shanklin" } }],
-        borders: [
-          {
-            side: 1,
-            color: "mountain"
-          }
-        ],
-        hexes: ["I9"]
-      },
-      {
-        color: "yellow",
-        cities: [
-          {
-            name: {
-              name: "Ventnor"
+          },
+          offBoardTrack: [
+            {
+              side: 2
             }
-          }
-        ],
-        labels: [
-          {
-            label: "V",
-            percent: 0.667
-          }
-        ],
-        values: [
-          {
-            value: 30,
-            angle: 270,
-            percent: 0.667
-          }
-        ],
-        track: [
-          {
-            side: 3
-          }
-        ],
-        borders: [
-          {
-            side: 4,
-            color: "mountain"
-          }
-        ],
-        hexes: ["I11"]
-      },
-      {
-        color: "plain",
-        cities: [
-          {
-            name: {
-              name: "Chale"
+          ],
+          labels: [
+            {
+              label: "Ryde Pier",
+              angle: 180,
+              percent: 0.35
+            }
+          ],
+          hexes: ["J2"]
+        },
+        {
+          color: "plain",
+          hexes: ["E3", "K7", "D8"]
+        },
+        {
+          color: "plain",
+          centerTowns: [{ name: { name: "Whippingham" } }],
+          borders: [
+            {
+              side: 2,
+              color: "mountain"
             },
-            companies: [
-              {
-                label: "S&C",
-                color: "maroon"
+            {
+              side: 3,
+              color: "mountain"
+            }
+          ],
+          hexes: ["G3"]
+        },
+        {
+          color: "yellow",
+          cities: [
+            {
+              name: {
+                name: "Ryde",
+                reverse: true
+              },
+              companies: [
+                {
+                  label: "IOW",
+                  color: "red"
+                }
+              ]
+            }
+          ],
+          values: [
+            {
+              value: 30,
+              angle: 90,
+              percent: 0.667
+            }
+          ],
+          labels: [
+            {
+              label: "R",
+              angle: 180,
+              percent: 0.667
+            }
+          ],
+          track: [
+            {
+              side: 6
+            }
+          ],
+          hexes: ["I3"]
+        },
+        {
+          color: "plain",
+          cities: [
+            {
+              name: {
+                name: "Yarmouth"
+              },
+              companies: [
+                {
+                  label: "FYN",
+                  color: "darkGreen"
+                }
+              ]
+            }
+          ],
+          hexes: ["B4"]
+        },
+        {
+          color: "plain",
+          water: {
+            cost: "£60"
+          },
+          hexes: ["D4"]
+        },
+        {
+          color: "plain",
+          centerTowns: [{ name: { name: "Cement Mills" } }],
+          borders: [
+            {
+              side: 5,
+              color: "mountain"
+            }
+          ],
+          hexes: ["F4"]
+        },
+        {
+          color: "plain",
+          centerTowns: [
+            {
+              name: { name: "Wooton" },
+              angle: 90,
+              percent: 0.5
+            },
+            {
+              name: { name: "Havenstreet", reverse: true },
+              angle: 270,
+              percent: 0.5
+            }
+          ],
+          hexes: ["H4"]
+        },
+        {
+          color: "plain",
+          cities: [{ name: { name: "Ryde" } }],
+          hexes: ["J4"]
+        },
+        {
+          color: "plain",
+          centerTowns: [{ name: { name: "Horringford" } }],
+          hexes: ["H8"]
+        },
+        {
+          color: "plain",
+          centerTowns: [{ name: { name: "Whitwell" } }],
+          hexes: ["G11"]
+        },
+        {
+          color: "plain",
+          centerTowns: [{ name: { name: "Carisbrooke" } }],
+          hexes: ["F6"]
+        },
+        {
+          color: "plain",
+          centerTowns: [{ name: { name: "Calbourne" } }],
+          hexes: ["D6"]
+        },
+        {
+          color: "plain",
+          centerTowns: [{ name: { name: "Watchingwell" } }],
+          hexes: ["E5"]
+        },
+        {
+          color: "plain",
+          centerTowns: [{ name: { name: "Ningwood" } }],
+          hexes: ["C5"]
+        },
+        {
+          color: "plain",
+          centerTowns: [{ name: { name: "Chale Green" } }],
+          hexes: ["F10"]
+        },
+        {
+          color: "yellow",
+          values: [
+            {
+              value: 30,
+              angle: 60,
+              percent: 0.667
+            }
+          ],
+          labels: [
+            {
+              angle: 270,
+              percent: 0.667,
+              label: "N"
+            }
+          ],
+          cities: [{ name: { name: "Newport", offset: 55, reverse: true } }],
+          track: [
+            {
+              side: 3
+            },
+            {
+              side: 4
+            }
+          ],
+          hexes: ["G5"]
+        },
+        {
+          color: "plain",
+          borders: [
+            {
+              side: 1,
+              color: "mountain"
+            }
+          ],
+          centerTowns: [{ name: { name: "Ashey" } }],
+          hexes: ["I5"]
+        },
+        {
+          color: "plain",
+          centerTowns: [
+            {
+              name: {
+                name: "St. Helens"
+              },
+              angle: 90,
+              percent: 0.5
+            }
+          ],
+          water: [
+            {
+              angle: 270,
+              percent: 0.5,
+              cost: "£60"
+            }
+          ],
+          hexes: ["K5"]
+        },
+        {
+          color: "plain",
+          cities: [
+            {
+              name: {
+                name: "Freshwater"
               }
-            ]
-          }
-        ],
-        hexes: ["F12"]
-      }
-    ]
-  }
+            }
+          ],
+          hexes: ["B6"]
+        },
+        {
+          color: "plain",
+          cities: [
+            {
+              name: {
+                name: "Sandown"
+              }
+            }
+          ],
+          hexes: ["J8"]
+        },
+        {
+          color: "plain",
+          mountain: {
+            cost: "£60"
+          },
+          hexes: ["H6", "E7", "F8", "G13"]
+        },
+        {
+          color: "plain",
+          cities: [
+            {
+              name: {
+                name: "Brading",
+                reverse: true
+              }
+            }
+          ],
+          labels: [
+            {
+              angle: 180,
+              percent: 0.667,
+              label: "B"
+            }
+          ],
+          hexes: ["J6"]
+        },
+        {
+          color: "plain",
+          cities: [
+            {
+              name: {
+                name: "Bembridge"
+              },
+              companies: [
+                {
+                  label: "BHI&R",
+                  color: "pink"
+                }
+              ]
+            }
+          ],
+          hexes: ["L6"]
+        },
+        {
+          color: "plain",
+          centerTowns: [
+            {
+              name: {
+                name: "Shalcombe"
+              },
+              angle: 90,
+              percent: 0.5
+            }
+          ],
+          mountain: [
+            {
+              angle: 270,
+              percent: 0.5,
+              cost: "£60"
+            }
+          ],
+          hexes: ["C7"]
+        },
+        {
+          copy: "C7",
+          centerTowns: [{ name: { name: "Wroxall" } }],
+          hexes: ["H10"]
+        },
+        {
+          copy: "C7",
+          centerTowns: [{ name: { name: "St. Lawrence" } }],
+          hexes: ["H12"]
+        },
+        {
+          color: "yellow",
+          values: [
+            {
+              angle: 30,
+              value: 10,
+              percent: 0.5
+            }
+          ],
+          labels: [
+            {
+              angle: 210,
+              percent: 0.667,
+              label: "M"
+            }
+          ],
+          centerTowns: [
+            {
+              angle: 150,
+              percent: 0.667,
+              name: {
+                name: "Blackwater",
+                reverse: true
+              }
+            }
+          ],
+          cities: [
+            {
+              angle: -60,
+              percent: 0.5,
+              name: {
+                name: "Merstone"
+              },
+              companies: [
+                {
+                  label: "IWNJ",
+                  color: "black"
+                }
+              ]
+            }
+          ],
+          track: [
+            {
+              type: "stop",
+              side: 6
+            }
+          ],
+          hexes: ["G7"]
+        },
+        {
+          color: "plain",
+          centerTowns: [
+            {
+              name: { name: "Newchurch" },
+              angle: 90,
+              percent: 0.5
+            },
+            {
+              name: { name: "Alverstone", reverse: true },
+              angle: 270,
+              percent: 0.5
+            }
+          ],
+          borders: [
+            {
+              side: 4,
+              color: "mountain"
+            }
+          ],
+          hexes: ["I7"]
+        },
+        {
+          color: "plain",
+          labels: [
+            {
+              label: "B",
+              angle: 180,
+              percent: 0.667
+            }
+          ],
+          cities: [
+            {
+              name: {
+                name: "Shorwell",
+                reverse: true
+              },
+              companies: [
+                {
+                  label: "VYSC",
+                  color: "cyan"
+                }
+              ]
+            }
+          ],
+          hexes: ["E9"]
+        },
+        {
+          color: "plain",
+          labels: [
+            {
+              label: "B",
+              angle: 180,
+              percent: 0.667
+            }
+          ],
+          cities: [
+            {
+              name: {
+                name: "Godshill",
+                reverse: true
+              },
+              companies: [
+                {
+                  label: "NGStL",
+                  color: "yellow"
+                }
+              ]
+            }
+          ],
+          hexes: ["G9"]
+        },
+        {
+          color: "plain",
+          cities: [{ name: { name: "Shanklin" } }],
+          borders: [
+            {
+              side: 1,
+              color: "mountain"
+            }
+          ],
+          hexes: ["I9"]
+        },
+        {
+          color: "yellow",
+          cities: [
+            {
+              name: {
+                name: "Ventnor"
+              }
+            }
+          ],
+          labels: [
+            {
+              label: "V",
+              percent: 0.667
+            }
+          ],
+          values: [
+            {
+              value: 30,
+              angle: 270,
+              percent: 0.667
+            }
+          ],
+          track: [
+            {
+              side: 3
+            }
+          ],
+          borders: [
+            {
+              side: 4,
+              color: "mountain"
+            }
+          ],
+          hexes: ["I11"]
+        },
+        {
+          color: "plain",
+          cities: [
+            {
+              name: {
+                name: "Chale"
+              },
+              companies: [
+                {
+                  label: "S&C",
+                  color: "maroon"
+                }
+              ]
+            }
+          ],
+          hexes: ["F12"]
+        }
+      ]
+    },
+    {
+      name: "3-4 Player",
+      print: "landscape",
+      copy: 0,
+      hexes: [
+        {
+          color: "plain",
+          centerTowns: [
+            {
+              name: {
+                name: "Norton Green"
+              }
+            }
+          ],
+          borders: [
+            {
+              side: 5,
+              color: "mountain"
+            }
+          ],
+          hexes: ["A5"]
+        },
+        {
+          color: "plain",
+          cities: [
+            {
+              name: {
+                name: "Totland"
+              }
+            }
+          ],
+          hexes: ["A7"]
+        },
+        {
+          color: "plain",
+          cities: [
+            {
+              name: {
+                name: "Yarmouth"
+              },
+              companies: [
+                {
+                  label: "FYN",
+                  color: "darkGreen"
+                }
+              ]
+            }
+          ],
+          borders: [
+            {
+              side: 2,
+              color: "mountain"
+            }
+          ],
+          hexes: ["B4"]
+        },
+        {
+          color: "plain",
+          hexes: ["E11"]
+        },
+      ]
+    }
+  ]
 };
 
 export default game;
