@@ -1173,8 +1173,8 @@ const game = {
       {
         color: "green",
         water: {
-          angle: 210,
-          percent: 0.725,
+          angle: 90,
+          percent: 0.82,
           cost: 80,
           size: "tiny",
           border: true
@@ -1182,7 +1182,7 @@ const game = {
         values: [
           {
             angle: 150,
-            percent: 0.875,
+            percent: 0.82,
             value: 30
           }
         ],
@@ -1190,17 +1190,17 @@ const game = {
           {
             label: "K",
             angle: 270,
-            percent: 0.85
+            percent: 0.82
           }
         ],
         cities: [
           {
             size: 2,
-            rotation: 30,
+            rotation: 120,
             name: {
               name: "Kouchi",
               reverse: true,
-              offset: 54
+              offset: 90
             },
             companies: [
               {
