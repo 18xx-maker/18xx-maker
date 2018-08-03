@@ -411,7 +411,7 @@ const game = {
     hexes: [
       {
         color: "plain",
-        labels: [
+        companies: [
           {
             label: "IC"
           }
@@ -501,7 +501,7 @@ const game = {
       },
       {
         color: "plain",
-        labels: [
+        companies: [
           {
             label: "MC"
           }
@@ -789,7 +789,7 @@ const game = {
             }
           }
         ],
-        labels: [
+        companies: [
           {
             angle: 270,
             percent: 0.667,
@@ -958,12 +958,14 @@ const game = {
             }
           }
         ],
-        labels: [
+        companies: [
           {
             angle: 150,
-            percent: 0.667,
+            percent: 0.6,
             label: "LSL"
-          },
+          }
+        ],
+        labels: [
           {
             label: "Z",
             angle: 270,
@@ -1047,7 +1049,7 @@ const game = {
       },
       {
         color: "plain",
-        labels: [
+        companies: [
           {
             label: "O&I"
           }

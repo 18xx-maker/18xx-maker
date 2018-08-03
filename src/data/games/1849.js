@@ -1096,9 +1096,6 @@ const game = {
       },
       {
         color: "gray",
-        mountain: {
-          size: "large"
-        },
         hexes: ["L7"]
       },
       {
@@ -1142,16 +1139,17 @@ const game = {
         color: "plain",
         centerTowns: [
           {
+            percent: 0.3333,
             name: {
               name: "Acireale"
             }
           }
         ],
-        labels: [
+        companies: [
           {
             label: "SCE",
             angle: 180,
-            percent: 0.667
+            percent: 0.3333
           }
         ],
         hexes: ["M8"]

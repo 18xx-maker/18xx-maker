@@ -620,7 +620,7 @@ const game = {
         {
           color: "plain",
           centerTowns: [{}],
-          labels: [
+          companies: [
             {
               angle: 180,
               percent: 0.5,
@@ -632,7 +632,7 @@ const game = {
         {
           color: "plain",
           centerTowns: [{}],
-          labels: [
+          companies: [
             {
               angle: 180,
               percent: 0.5,
