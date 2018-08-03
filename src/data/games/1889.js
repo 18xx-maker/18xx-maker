@@ -510,14 +510,12 @@ const game = {
       name: "Takamatsu E-Railroad",
       price: "¥20",
       revenue: "¥5",
-      icon: "A",
       desription: "Blocks Takamatsu (K4)."
     },
     {
       name: "Mitsubishi Ferry",
       price: "¥30",
       revenue: "¥5",
-      icon: "B",
       description:
         "Player owner may place the port tile on a coastal town (B11, G10, I12, or J9) without a tile on it already, outside of the operating rounds of a company controller by another player. The player need not control a company or have connectivity to the placed tile from one of their companies. This does not close the company."
     },
@@ -525,7 +523,6 @@ const game = {
       name: "Ehime Railroad",
       price: "¥40",
       revenue: "¥10",
-      icon: "C",
       description:
         "When this company is sold to a corporation, the selling player may immediately place a green tile on Ohzu (C4), in addition to any tile which it may lay during the same operating round. This does not close the company."
     },
@@ -533,7 +530,6 @@ const game = {
       name: "Sumitomo Mines Railway",
       price: "¥50",
       revenue: "¥15",
-      icon: "D",
       description:
         "Owning corporation may ignore building cost for mountain hexes which do not also contain rivers. This does not close the company."
     },
@@ -541,7 +537,6 @@ const game = {
       name: "Dougo Railway",
       price: "¥60",
       revenue: "¥15",
-      icon: "E",
       description:
         "Owning player may exchange this private company for a 10% share of Iyo Railway from the initial offering."
     },
@@ -549,7 +544,6 @@ const game = {
       name: "South Iyo Railway",
       price: "¥80",
       revenue: "¥20",
-      icon: "F",
       players: "Players: 3+"
     },
     {
@@ -557,7 +551,6 @@ const game = {
       price: "¥150",
       revenue: "¥30 / ¥50",
       players: "Players: 4+",
-      icon: "G",
       description:
         "Does not close while owned by a player. If owned by a player when the first 5-train is purchased it may no longer be sold to a public company and the revenue is increased to 50."
     }
@@ -914,7 +907,7 @@ const game = {
         ],
         companies: [
           {
-            label: "C",
+            label: "ER",
             bottom: true,
             angle: 270,
             percent: 0.667
@@ -960,7 +953,7 @@ const game = {
         ],
         companies: [
           {
-            label: "A",
+            label: "TR",
             percent: 0.75
           }
         ],
