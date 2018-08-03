@@ -888,10 +888,9 @@ const game = {
         },
         labels: [
           {
-            label: "KH",
-            size: 24,
+            label: "H",
             angle: 330,
-            percent: 0.667
+            percent: 0.8
           }
         ],
         hexes: ["I4"]

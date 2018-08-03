@@ -1935,8 +1935,7 @@ const tiles = {
     ],
     labels: [
       {
-        label: "KH",
-        size: 24,
+        label: "H",
         angle: 330,
         percent: 0.75
       }
@@ -1993,8 +1992,7 @@ const tiles = {
     },
     labels: [
       {
-        label: "KH",
-        size: 24,
+        label: "H",
         angle: 330,
         percent: 0.75
       }
@@ -2118,8 +2116,7 @@ const tiles = {
     ],
     labels: [
       {
-        label: "KH",
-        size: 24,
+        label: "H",
         angle: 335,
         percent: 0.82
       }
