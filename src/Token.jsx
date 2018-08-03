@@ -20,6 +20,7 @@ const Token = ({
 
   width = width || 25;
 
+  console.log(width);
   let content = icon ? (
     <use href={icon} transform="scale(1.66666 1.66666)" />
   ) : (
@@ -31,7 +32,13 @@ const Token = ({
       strokeWidth="0.5"
       stroke={tokenLabelStroke}
       fill={tokenLabelColor}
-      textLength={label.length > 2 ? width * 2 - width * 0.4 : width}
+      textLength={
+        label.length > 2
+          ? width * 2 - width * 0.4
+          : label.length === 1
+            ? width * 0.5
+            : width
+      }
       lengthAdjust="spacingAndGlyphs"
       x="0"
       y="0"

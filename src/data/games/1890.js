@@ -6,7 +6,9 @@ const game = {
     background: "water",
     width: 150,
     rotation: 90,
-    color_10: "orange"
+    color_10: "orange",
+    titleY: 830,
+    titleX: 142
   },
 
   // Extra Tokens
@@ -563,6 +565,7 @@ const game = {
   },
 
   map: {
+    print: "landscape",
     hexes: [
       {
         color: "plain",
@@ -574,7 +577,7 @@ const game = {
           size: "medium",
           cost: "¥120"
         },
-        hexes: ["B9", "B11", "B13", "C4", "C6", "C10", "C12", "C14"]
+        hexes: ["B9", "B11", "B13", "C4", "C6", "C10", "C12", "C14", "E4", "E6"]
       },
       {
         color: "plain",
@@ -582,7 +585,7 @@ const game = {
           size: "small",
           cost: "¥80"
         },
-        hexes: ["C8", "A16", "B15"]
+        hexes: ["C8", "A16", "B15", "F19"]
       },
       {
         color: "offboard",
@@ -861,6 +864,26 @@ const game = {
         hexes: ["D17"]
       },
       {
+        color: "gray",
+        borders: [{ side: 1, color: "water" }],
+        values: [
+          {
+            value: 20,
+            angle: 195,
+            percent: 0.667
+          }
+        ],
+        track: [{ side: 6, type: "gentle" }],
+        cities: [
+          {
+            angle: 270,
+            percent: 0.5,
+            name: { name: "Uji", reverse: true }
+          }
+        ],
+        hexes: ["D19"]
+      },
+      {
         color: "offboard",
         offBoardRevenue: {
           revenues: [
@@ -889,6 +912,110 @@ const game = {
           }
         ],
         hexes: ["F1"]
+      },
+      {
+        color: "plain",
+        mountain: {
+          size: "medium",
+          cost: "¥120"
+        },
+        borders: [{ side: 4, color: "water" }],
+        hexes: ["E8"]
+      },
+      {
+        color: "plain",
+        borders: [{ side: 1, color: "water" }],
+        cities: [
+          {
+            name: { name: "Itami" }
+          }
+        ],
+        hexes: ["E10"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            companies: [
+              {
+                color: "maroon",
+                label: "T"
+              }
+            ],
+            name: { name: "Toyonaka" }
+          }
+        ],
+        hexes: ["E12"]
+      },
+      {
+        color: "yellow",
+        cities: [
+          {
+            angle: 90,
+            percent: 0.5,
+            name: {
+              name: "Ibaraki",
+              offset: 60
+            }
+          },
+          {
+            angle: 270,
+            percent: 0.5,
+            name: {
+              name: "Settsu",
+              reverse: true,
+              offset: 40
+            }
+          }
+        ],
+        labels: [
+          {
+            label: "OO",
+            percent: 0.667
+          }
+        ],
+        borders: [{ side: 4, color: "water" }, { side: 5, color: "water" }],
+        hexes: ["E14"]
+      },
+      {
+        color: "yellow",
+        borders: [
+          { side: 1, color: "water" },
+          { side: 2, color: "water" },
+          { side: 4, color: "water" }
+        ],
+        track: [{ side: 3, type: "straight" }],
+        cities: [
+          {
+            name: {
+              name: "Hirakata",
+              offset: 33.33
+            },
+            companies: [
+              {
+                label: "H",
+                color: "blue"
+              }
+            ]
+          }
+        ],
+        values: [
+          {
+            value: 20,
+            angle: 300,
+            percent: 0.667
+          }
+        ],
+        hexes: ["E16"]
+      },
+      {
+        color: "plain",
+        water: {
+          size: "small",
+          cost: "¥80"
+        },
+        borders: [{ side: 1, color: "water" }, { side: 6, color: "water" }],
+        hexes: ["E18"]
       }
     ]
   }
