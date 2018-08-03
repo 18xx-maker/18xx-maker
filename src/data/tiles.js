@@ -2066,7 +2066,6 @@ const tiles = {
         size: 3,
         rotation: 30,
         companies: [
-          {},
           {
             label: "TR",
             color: "darkGreen"
