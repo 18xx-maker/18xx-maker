@@ -1933,14 +1933,15 @@ const tiles = {
         value: 40
       }
     ],
-    cities: [
+    labels: [
       {
-        name: {
-          name: "Kotohira",
-          rotation: 90
-        }
+        label: "KH",
+        size: 24,
+        angle: 330,
+        percent: 0.75
       }
     ],
+    cities: [{}],
     mountain: {
       angle: 150,
       percent: 0.8,
@@ -1990,33 +1991,36 @@ const tiles = {
       size: "tiny",
       border: true
     },
-    cities: [
+    labels: [
       {
-        size: 2,
-        name: {
-          name: "Kotohira",
-          reverse: true,
-          offset: 60
-        }
+        label: "KH",
+        size: 24,
+        angle: 330,
+        percent: 0.75
       }
     ],
+    cities: [{ size: 2 }],
     track: [{ side: 1 }, { side: 3 }, { side: 5 }]
   },
   "440": {
     color: "green",
     values: [
       {
-        angle: 180,
-        percent: 0.75,
+        angle: 150,
+        percent: 0.8,
         value: 40
+      }
+    ],
+    labels: [
+      {
+        label: "T",
+        angle: 330,
+        percent: 0.8
       }
     ],
     cities: [
       {
         size: 2,
-        name: {
-          name: "Takamatsu"
-        },
         companies: [
           {
             label: "KO",
@@ -2025,7 +2029,7 @@ const tiles = {
         ]
       }
     ],
-    track: [{ side: 1 }, { side: 2 }, { side: 6 }]
+    track: [{ side: 1 }, { side: 2 }, { side: 3 }]
   },
   "448": {
     color: "brown",
@@ -2047,23 +2051,23 @@ const tiles = {
     color: "brown",
     values: [
       {
-        angle: 180,
-        percent: 0.78,
+        angle: 150,
+        percent: 0.82,
         value: 60
+      }
+    ],
+    labels: [
+      {
+        label: "K",
+        angle: 270,
+        percent: 0.82
       }
     ],
     cities: [
       {
         size: 3,
-        rotation: 180,
-        name: {
-          name: "Kouchi",
-          reverse: true,
-          offset: 76,
-          y: 12
-        },
+        rotation: 30,
         companies: [
-          {},
           {},
           {
             label: "TR",
@@ -2072,23 +2076,27 @@ const tiles = {
         ]
       }
     ],
-    track: [{ side: 1 }, { side: 2 }, { side: 3 }, { side: 6 }]
+    track: [{ side: 4 }, { side: 5 }, { side: 3 }, { side: 6 }]
   },
   "466": {
     color: "brown",
     values: [
       {
-        angle: 180,
-        percent: 0.75,
+        angle: 150,
+        percent: 0.8,
         value: 60
+      }
+    ],
+    labels: [
+      {
+        label: "T",
+        angle: 330,
+        percent: 0.8
       }
     ],
     cities: [
       {
         size: 2,
-        name: {
-          name: "Takamatsu"
-        },
         companies: [
           {
             label: "KO",
@@ -2097,7 +2105,7 @@ const tiles = {
         ]
       }
     ],
-    track: [{ side: 1 }, { side: 2 }, { side: 6 }]
+    track: [{ side: 1 }, { side: 2 }, { side: 3 }]
   },
   "492": {
     color: "brown",
@@ -2108,17 +2116,17 @@ const tiles = {
         value: 80
       }
     ],
+    labels: [
+      {
+        label: "KH",
+        size: 24,
+        angle: 335,
+        percent: 0.82
+      }
+    ],
     cities: [
       {
-        size: 3,
-        rotation: 180,
-        name: {
-          name: "Kotohira",
-          reverse: true,
-          offset: 75,
-          y: 12,
-          textLength: "20%"
-        }
+        size: 3
       }
     ],
     track: [
@@ -5171,11 +5179,13 @@ const tiles = {
         value: 40
       }
     ],
-    labels: [{
-      label: "D",
-      angle: 150,
-      percent: 0.8
-    }],
+    labels: [
+      {
+        label: "D",
+        angle: 150,
+        percent: 0.8
+      }
+    ],
     cities: [
       {
         size: 2,
@@ -5210,18 +5220,23 @@ const tiles = {
         value: 40
       }
     ],
-    labels: [{
-      label: "D",
-      angle: 150,
-      percent: 0.8
-    }],
+    labels: [
+      {
+        label: "D",
+        angle: 150,
+        percent: 0.8
+      }
+    ],
     cities: [
       {
         size: 2,
-        companies: [{},{
-          label: "C&W",
-          color: "blue"
-        }],
+        companies: [
+          {},
+          {
+            label: "C&W",
+            color: "blue"
+          }
+        ],
         name: {
           name: "Denver",
           reverse: true,
@@ -5265,11 +5280,13 @@ const tiles = {
         value: 50
       }
     ],
-    labels: [{
-      label: "D",
-      angle: 150,
-      percent: 0.8
-    }],
+    labels: [
+      {
+        label: "D",
+        angle: 150,
+        percent: 0.8
+      }
+    ],
     cities: [
       {
         size: 2,
@@ -5304,11 +5321,13 @@ const tiles = {
         value: 60
       }
     ],
-    labels: [{
-      label: "D",
-      angle: 150,
-      percent: 0.8
-    }],
+    labels: [
+      {
+        label: "D",
+        angle: 150,
+        percent: 0.8
+      }
+    ],
     cities: [
       {
         size: 2,

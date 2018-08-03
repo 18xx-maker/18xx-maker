@@ -882,10 +882,18 @@ const game = {
           }
         ],
         mountain: {
-          angle: 300,
-          percent: 0.4,
+          angle: 270,
+          percent: 0.5,
           cost: "80"
         },
+        labels: [
+          {
+            label: "KH",
+            size: 24,
+            angle: 330,
+            percent: 0.667
+          }
+        ],
         hexes: ["I4"]
       },
       {
@@ -922,6 +930,13 @@ const game = {
       },
       {
         copy: "C4",
+        labels: [
+          {
+            label: "T",
+            angle: 330,
+            percent: 0.8
+          }
+        ],
         cities: [
           {
             name: {
@@ -940,7 +955,8 @@ const game = {
         values: [
           {
             value: 30,
-            angle: 165
+            angle: 150,
+            percent: 0.8
           }
         ],
         companies: [
@@ -1158,7 +1174,7 @@ const game = {
       {
         color: "green",
         water: {
-          angle: 60,
+          angle: 210,
           percent: 0.725,
           cost: 80,
           size: "tiny",
@@ -1166,9 +1182,16 @@ const game = {
         },
         values: [
           {
-            angle: 210,
-            percent: 0.725,
+            angle: 150,
+            percent: 0.875,
             value: 30
+          }
+        ],
+        labels: [
+          {
+            label: "K",
+            angle: 270,
+            percent: 0.85
           }
         ],
         cities: [
