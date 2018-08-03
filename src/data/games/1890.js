@@ -55,10 +55,10 @@ const game = {
   // Railway Companies
   companies: [
     {
-      name: "Pennsylvania",
-      abbrev: "PRR",
-      tokens: ["Free", "$40", "$100", "$100"],
-      color: "darkGreen",
+      name: "Japan Railways",
+      abbrev: "JR",
+      tokens: ["Ôsaka Kita", "Kyôto", "Kôbe", "Nara", "¥40", "¥100"],
+      color: "purple",
       shares: [
         {
           quantity: 1,
@@ -74,104 +74,9 @@ const game = {
       ]
     },
     {
-      name: "New York Central",
-      abbrev: "NYC",
-      tokens: ["Free", "$40", "$100", "$100"],
-      color: "black",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Canadian Pacific",
-      abbrev: "CPR",
-      tokens: ["Free", "$40", "$100", "$100"],
-      color: "red",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Baltimore & Ohio",
-      abbrev: "B&O",
-      tokens: ["Free", "$40", "$100"],
-      color: "blue",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Chesapeake & Ohio",
-      abbrev: "C&O",
-      tokens: ["Free", "$40", "$100"],
-      color: "cyan",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Erie",
-      abbrev: "ERIE",
-      tokens: ["Free", "$40", "$100"],
-      color: "yellow",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "New York, New Haven & Hartford",
-      abbrev: "NYNH",
-      tokens: ["Free", "$40"],
+      name: "Ôsaka Municipal Subway",
+      abbrev: "ÔM",
+      tokens: ["Ôsaka Nishi"],
       color: "orange",
       shares: [
         {
@@ -188,10 +93,105 @@ const game = {
       ]
     },
     {
-      name: "Boston & Maine",
-      abbrev: "B&M",
-      tokens: ["Free", "$40"],
+      name: "Nankai Electric Railway",
+      abbrev: "NE",
+      tokens: ["Ôsaka Minami", "¥40", "¥100"],
+      color: "cyan",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "Sanyô Electric Railway",
+      abbrev: "SE",
+      tokens: ["Akashi", "¥40"],
+      color: "red",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "Kinki Nippon Railways",
+      abbrev: "KN",
+      tokens: ["Ôsaka Higashi", "Kyôto", "Nara", "Kashiwara", "¥40", "¥100"],
+      color: "pink",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "Keihan Electric Railways",
+      abbrev: "KE",
+      tokens: ["Hirakata", "¥40", "¥100"],
+      color: "blue",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "Hankyû Railways",
+      abbrev: "H",
+      tokens: ["Toyonaka", "¥40", "¥100", "¥100"],
       color: "maroon",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "Hanshin Electric Railroad",
+      abbrev: "HE",
+      tokens: ["Nishinomiya", "¥40", "¥100"],
+      color: "darkGreen",
       shares: [
         {
           quantity: 1,
@@ -712,10 +712,10 @@ const game = {
         color: "yellow",
         companies: [
           {
-            angle: 60,
-            percent: 0.9,
-            x: -17,
-            label: "K R"
+            angle: 72,
+            percent: 1.22,
+            label: "KR",
+            right: 22
           }
         ],
         track: [{ side: 6, type: "sharp" }],
@@ -958,7 +958,7 @@ const game = {
             companies: [
               {
                 color: "maroon",
-                label: "T"
+                label: "H"
               }
             ],
             name: { name: "Toyonaka" }
@@ -1012,7 +1012,7 @@ const game = {
             },
             companies: [
               {
-                label: "H",
+                label: "KE",
                 color: "blue"
               }
             ]
@@ -1076,7 +1076,7 @@ const game = {
             companies: [
               {
                 color: "red",
-                label: "A"
+                label: "SE"
               }
             ]
           }
@@ -1097,7 +1097,7 @@ const game = {
             name: { name: "Kôbe", reverse: true },
             companies: [
               {
-                label: "K",
+                label: "JR",
                 color: "purple"
               }
             ]
@@ -1130,7 +1130,7 @@ const game = {
             percent: 0.3,
             companies: [
               {
-                label: "N",
+                label: "HE",
                 color: "darkGreen"
               }
             ],
@@ -1195,7 +1195,7 @@ const game = {
             size: 2,
             companies: [
               {
-                label: "K",
+                label: "JR",
                 color: "purple"
               }
             ],
@@ -1287,7 +1287,7 @@ const game = {
             companies: [
               {
                 color: "orange",
-                label: "O"
+                label: "ÔM"
               }
             ]
           }
@@ -1312,13 +1312,7 @@ const game = {
           {
             angle: 300,
             percent: 0.5,
-            name: { name: "Ôsaka Higashi", reverse: true, offset: 40 },
-            companies: [
-              {
-                color: "black",
-                label: "O"
-              }
-            ]
+            name: { name: "Ôsaka Higashi", reverse: true, offset: 40 }
           }
         ],
         values: [
