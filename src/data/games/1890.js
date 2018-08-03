@@ -8,47 +8,47 @@ const game = {
     rotation: 90,
     color_10: "orange",
     titleY: 830,
-    titleX: 142
+    titleX: 148
   },
 
-  // Extra Tokens
+  // Tokens
   tokens: ["Round"],
 
   // Need an IPO sheet
   ipo: true,
 
-  bank: "$12,000",
+  bank: "¥12,000",
 
   players: [
     {
       number: 2,
       certLimit: 26,
-      capital: "$1260"
+      capital: "¥1260"
     },
     {
       number: 3,
       certLimit: 18,
-      capital: "$840"
+      capital: "¥840"
     },
     {
       number: 4,
       certLimit: 15,
-      capital: "$630"
+      capital: "¥630"
     },
     {
       number: 5,
       certLimit: 13,
-      capital: "$504"
+      capital: "¥504"
     },
     {
       number: 6,
       certLimit: 11,
-      capital: "$420"
+      capital: "¥420"
     },
     {
       number: 7,
-      certLimit: 7,
-      capital: "$360"
+      certLimit: 10,
+      capital: "¥360"
     }
   ],
 
@@ -211,7 +211,19 @@ const game = {
   trains: [
     {
       name: "2",
-      quantity: 6,
+      quantity: 9,
+      price: "$80",
+      color: "yellow",
+      info: [
+        {
+          color: "green",
+          note: "Rusted by 4"
+        }
+      ]
+    },
+    {
+      name: "2-2",
+      quantity: 3,
       price: "$80",
       color: "yellow",
       info: [
@@ -224,6 +236,18 @@ const game = {
     {
       name: "3",
       quantity: 5,
+      price: "$180",
+      color: "green",
+      info: [
+        {
+          color: "brown",
+          note: "Rusted by 6"
+        }
+      ]
+    },
+    {
+      name: "3-3",
+      quantity: 2,
       price: "$180",
       color: "green",
       info: [
@@ -286,45 +310,40 @@ const game = {
 
   privates: [
     {
-      name: "Schuylkill Valley",
-      price: "$20",
-      revenue: "$5",
+      name: "Arima Railway",
+      price: "¥20",
+      revenue: "¥5",
       description: ""
     },
     {
-      name: "Champlain & St.Lawrence",
-      price: "$40",
-      revenue: "$10",
-      description:
-        "A corporation owning the C&StL may lay a tile on the C&StL's hex even if this hex is not connected to the corporations's railhead. This free tile placement is in addition to the corporation's normal tile placement - for this turn only the corporation may play two tiles. The tile played on the C&StL hex does not have to connect to any existing adjacent track."
+      name: "Kobe Tramway",
+      price: "¥40",
+      revenue: "¥10",
+      description: ""
     },
     {
-      name: "Delaware & Hudson",
-      price: "$70",
-      revenue: "$15",
-      description:
-        "A corporation owning the Delaware & Hudson may establish a railhead on the D&H hex by laying a station tile and a token. The station does not have to be connected to the remainder of the corporation's route. The tile laid is the owning corporation's one tile placement for the turn. Removal of the mountain costs $120 as usual but there is no charge for laying the token. Placing the token is not required, but if placed in a future turn, it must be paid for. Other corporations may place a tile here subject to the ordinary rules."
+      name: "Hankai Tramway",
+      price: "¥70",
+      revenue: "¥15",
+      description: ""
     },
     {
-      name: "Mohawk & Hudson",
-      price: "$110",
-      revenue: "$20",
-      description:
-        "A player owning the M&H may exhange it for a 10% share of the NYC provided he does not already hold 60% of the NYC stock and there is NYC stock available in the Bank or the Pool. The exchange may be made during the player's turn of a stock round or between the turns of other players or corporations in either stock or operating rounds. This action closes the M&H."
+      name: "Hanshin Tramway",
+      price: "¥110",
+      revenue: "¥20",
+      description: ""
     },
     {
-      name: "Camden & Amboy",
-      price: "$160",
-      revenue: "$25",
-      description:
-        "The initial purchaser of the C&A immediately receives a 10% share of PRR stock without further payment. This action does not close the C&A. The PRR corporation will not be running at this point, but the stock may be retained or sold subject to the ordinary rules of the game."
+      name: "Kaishin Railway",
+      price: "¥160",
+      revenue: "¥25",
+      description: ""
     },
     {
-      name: "Baltimore & Ohio",
-      price: "$220",
-      revenue: "$30",
-      description:
-        "The owner of the B&O private company immediately receives the President's certificate of the B&O corporation without further payment. The B&O private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the B&O corporation. When the B&O corporation purchases its first train the private company is closed down."
+      name: "Osaka Municipal Eletric Railway",
+      price: "¥220",
+      revenue: "¥40",
+      description: ""
     }
   ],
 
@@ -569,7 +588,18 @@ const game = {
     hexes: [
       {
         color: "plain",
-        hexes: ["E2", "D11", "D13"]
+        hexes: [
+          "E2",
+          "D11",
+          "D13",
+          "I14",
+          "J13",
+          "K12",
+          "K14",
+          "L11",
+          "L13",
+          "L17"
+        ]
       },
       {
         color: "plain",
@@ -577,7 +607,26 @@ const game = {
           size: "medium",
           cost: "¥120"
         },
-        hexes: ["B9", "B11", "B13", "C4", "C6", "C10", "C12", "C14", "E4", "E6"]
+        hexes: [
+          "B9",
+          "B11",
+          "B13",
+          "C4",
+          "C6",
+          "C10",
+          "C12",
+          "C14",
+          "E4",
+          "E6",
+          "G18",
+          "H17",
+          "I16",
+          "J17",
+          "K16",
+          "L15",
+          "M10",
+          "M12"
+        ]
       },
       {
         color: "plain",
@@ -884,36 +933,6 @@ const game = {
         hexes: ["D19"]
       },
       {
-        color: "offboard",
-        offBoardRevenue: {
-          revenues: [
-            {
-              color: "yellow",
-              cost: "40"
-            },
-            {
-              color: "brown",
-              textColor: "white",
-              cost: "50"
-            },
-            {
-              color: "black",
-              textColor: "white",
-              cost: "70"
-            }
-          ]
-        },
-        offBoardTrack: [
-          {
-            side: 3
-          },
-          {
-            side: 4
-          }
-        ],
-        hexes: ["F1"]
-      },
-      {
         color: "plain",
         mountain: {
           size: "medium",
@@ -1016,6 +1035,581 @@ const game = {
         },
         borders: [{ side: 1, color: "water" }, { side: 6, color: "water" }],
         hexes: ["E18"]
+      },
+      {
+        color: "offboard",
+        offBoardRevenue: {
+          revenues: [
+            {
+              color: "yellow",
+              cost: "40"
+            },
+            {
+              color: "brown",
+              textColor: "white",
+              cost: "50"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "70"
+            }
+          ]
+        },
+        offBoardTrack: [
+          {
+            side: 3
+          },
+          {
+            side: 4
+          }
+        ],
+        hexes: ["F1"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: {
+              name: "Akashi"
+            },
+            companies: [
+              {
+                color: "red",
+                label: "A"
+              }
+            ]
+          }
+        ],
+        hexes: ["F3"]
+      },
+      {
+        color: "yellow",
+        values: [
+          {
+            value: 30,
+            angle: 210,
+            percent: 0.667
+          }
+        ],
+        cities: [
+          {
+            name: { name: "Kôbe", reverse: true },
+            companies: [
+              {
+                label: "K",
+                color: "purple"
+              }
+            ]
+          }
+        ],
+        track: [{ side: 1 }, { side: 2 }, { side: 4 }],
+        companies: [
+          {
+            label: "KT",
+            angle: 60,
+            percent: 0.75
+          }
+        ],
+        hexes: ["F5"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: { name: "Ashiya" }
+          }
+        ],
+        hexes: ["F7"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            angle: 180,
+            percent: 0.3,
+            companies: [
+              {
+                label: "N",
+                color: "darkGreen"
+              }
+            ],
+            name: { name: "Nishinomiya" }
+          }
+        ],
+        water: {
+          percent: 0.5,
+          cost: "¥80",
+          size: "small"
+        },
+        hexes: ["F9"]
+      },
+      {
+        color: "plain",
+        labels: [
+          {
+            label: "Y",
+            percent: 0.667
+          }
+        ],
+        cities: [
+          {
+            name: { name: "Amagasaki" }
+          }
+        ],
+        hexes: ["F11"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: { name: "Suita" }
+          }
+        ],
+        borders: [{ side: 4, color: "water" }, { side: 5, color: "water" }],
+        hexes: ["F13"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: { name: "Neyagawa" }
+          }
+        ],
+        borders: [{ side: 1, color: "water" }, { side: 2, color: "water" }],
+        hexes: ["F15"]
+      },
+      {
+        color: "plain",
+        mountain: {
+          size: "medium",
+          cost: "¥120"
+        },
+        borders: [{ side: 3, color: "water" }],
+        hexes: ["F17"]
+      },
+      {
+        color: "yellow",
+        cities: [
+          {
+            size: 2,
+            companies: [
+              {
+                label: "K",
+                color: "purple"
+              }
+            ],
+            name: { reverse: true, name: "Ôsaka Kita" }
+          }
+        ],
+        track: [{ side: 2 }, { side: 3 }],
+        values: [
+          {
+            value: 40,
+            angle: 180,
+            percent: 0.75
+          }
+        ],
+        water: [
+          {
+            size: "tiny",
+            border: true,
+            cost: "¥80",
+            angle: 60,
+            percent: 0.85
+          }
+        ],
+        hexes: ["G12"]
+      },
+      {
+        color: "yellow",
+        borders: [{ side: 2, color: "water" }],
+        cities: [
+          {
+            angle: 90,
+            percent: 0.5,
+            name: { name: "Moriguchi", reverse: true }
+          },
+          { angle: 270, percent: 0.5, name: { name: "Kadoma" } }
+        ],
+        labels: [
+          {
+            label: "OO",
+            percent: 0.667
+          }
+        ],
+        hexes: ["G14"]
+      },
+      {
+        color: "plain",
+        mountain: {
+          size: "medium",
+          cost: "¥80",
+          angle: 180,
+          percent: 0.667
+        },
+        centerTowns: [
+          {
+            angle: 90,
+            percent: 0.5,
+            name: {
+              name: "Daitô",
+              reverse: true
+            }
+          },
+          {
+            angle: 270,
+            percent: 0.5,
+            name: {
+              name: "Shijonawate"
+            }
+          }
+        ],
+        hexes: ["G16"]
+      },
+      {
+        color: "gray",
+        track: [{ type: "gentle", side: 6 }],
+        hexes: ["G20"]
+      },
+      {
+        color: "yellow",
+        values: [
+          {
+            value: 30,
+            angle: 180,
+            percent: 0.75
+          }
+        ],
+        cities: [
+          {
+            name: { name: "Ôsaka Nishi", reverse: true },
+            companies: [
+              {
+                color: "orange",
+                label: "O"
+              }
+            ]
+          }
+        ],
+        track: [{ side: 3 }, { side: 4 }],
+        water: {
+          size: "tiny",
+          border: true,
+          cost: "¥80",
+          angle: 60,
+          percent: 0.85
+        },
+        hexes: ["H11"]
+      },
+      {
+        color: "yellow",
+        cities: [
+          {
+            angle: 180,
+            percent: 0.5
+          },
+          {
+            angle: 300,
+            percent: 0.5,
+            name: { name: "Ôsaka Higashi", reverse: true, offset: 40 },
+            companies: [
+              {
+                color: "black",
+                label: "O"
+              }
+            ]
+          }
+        ],
+        values: [
+          {
+            angle: 90,
+            percent: 0.4,
+            value: 40
+          }
+        ],
+        track: [
+          { type: "sharpStopRev", side: 3 },
+          { type: "sharpStop", side: 4 }
+        ],
+        water: {
+          size: "tiny",
+          border: true,
+          cost: "¥80",
+          angle: 60,
+          percent: 0.85
+        },
+        companies: [
+          {
+            label: "OR",
+            left: 50,
+            angle: 130,
+            percent: 0.8
+          }
+        ],
+        hexes: ["H13"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: { name: "Higashi Ôsaka" }
+          }
+        ],
+        hexes: ["H15"]
+      },
+      {
+        color: "yellow",
+        track: [{ side: 1, type: "gentle" }, { type: "stop", side: 6 }],
+        values: [
+          {
+            value: 40,
+            angle: 150,
+            percent: 0.7
+          }
+        ],
+        water: {
+          size: "tiny",
+          cost: "¥80",
+          border: "true",
+          angle: 300,
+          percent: 0.8
+        },
+        cities: [
+          {
+            angle: 210,
+            percent: 0.5,
+            companies: [
+              {
+                color: "cyan",
+                label: "N"
+              }
+            ]
+          },
+          {
+            angle: 30,
+            percent: 0.5,
+            name: { name: "Nara", offset: 66.67 },
+            companies: [
+              {
+                color: "purple",
+                label: "K"
+              }
+            ]
+          }
+        ],
+        hexes: ["H19"]
+      },
+      {
+        color: "yellow",
+        values: [
+          {
+            value: 40,
+            angle: 180,
+            percent: 0.75
+          }
+        ],
+        cities: [
+          {
+            name: { name: "Ôsaka Minami" },
+            companies: [
+              {
+                label: "Ô",
+                color: "green"
+              }
+            ]
+          }
+        ],
+        track: [{ side: 5 }, { side: 6 }],
+        labels: [
+          {
+            label: "Y",
+            angle: 300,
+            percent: 0.8
+          }
+        ],
+        water: {
+          cost: "¥80",
+          size: "tiny",
+          border: true,
+          angle: 60,
+          percent: 0.85
+        },
+        hexes: ["I12"]
+      },
+      {
+        color: "plain",
+        centerTowns: [
+          {
+            name: { name: "Kôriyama" }
+          }
+        ],
+        hexes: ["I18"]
+      },
+      {
+        color: "yellow",
+        companies: [{
+          label: "HR",
+          angle: 180,
+          percent: 0.75,
+          right: 60
+        }],
+        cities: [
+          {
+            angle: 90,
+            percent: 0.5,
+            name: { name: "Sakai", reverse: true }
+          },
+          { angle: 270, percent: 0.5 }
+        ],
+        labels: [
+          {
+            label: "OO",
+            percent: 0.667
+          }
+        ],
+        hexes: ["J11"]
+      },
+      {
+        color: "yellow",
+        values: [{
+          value: 20,
+          percent: 0.667
+        }],
+        cities: [{
+          name: {name: "Kashiwara"},
+          companies: [{
+            color: "black",
+            label: "K"
+          }]
+        }],
+        track: [{side:1},{side:4}],
+        hexes: ["J15"]
+      },
+      {
+        color: "plain",
+        centerTowns: [
+          {
+            name: { name: "Tenri" }
+          }
+        ],
+        hexes: ["J19"]
+      },
+      {
+        color: "plain",
+        centerTowns: [
+          {
+            name: { name: "Izumiôtsu" }
+          }
+        ],
+        hexes: ["K10"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: { name: "Sakurai" }
+          }
+        ],
+        hexes: ["K18"]
+      },
+      {
+        color: "offboard",
+        offBoardTrack: [{
+          side: 1
+        },{
+          side:2
+        }],
+        offBoardRevenue: {
+          revenues: [{
+            color: "yellow",
+            cost: "20"
+          },{
+            color: "brown",
+            textColor: "white",
+            cost: "30"
+          },{
+            color: "black",
+            textColor: "white",
+            cost: "40"
+          }]
+        },
+        hexes: ["K20"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: { name: "Kishiwada" }
+          }
+        ],
+        hexes: ["L9"]
+      },
+      {
+        color: "offboard",
+        offBoardTrack: [{side:4}],
+        offBoardRevenue: {
+          revenues: [{
+            color: "yellow",
+            cost: "0"
+          },{
+            color: "brown",
+            textColor: "white",
+            cost: "0"
+          },{
+            color: "black",
+            textColor: "white",
+            cost: "50"
+          }]
+        },
+        hexes: ["M6"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: { name: "Izumisano" }
+          }
+        ],
+        hexes: ["M8"]
+      },
+      {
+        color: "offboard",
+        offBoardTrack: [{side:1},{side:2}],
+        offBoardRevenue: {
+          revenues: [{
+            color: "yellow",
+            cost: "20"
+          },{
+            color: "brown",
+            textColor: "white",
+            cost: "20"
+          },{
+            color: "black",
+            textColor: "white",
+            cost: "30"
+          }]
+        },
+        hexes: ["M14"]
+      },
+      {
+        color: "offboard",
+        offBoardTrack: [{side:3}],
+        offBoardRevenue: {
+          revenues: [{
+            color: "yellow",
+            cost: "20"
+          },{
+            color: "brown",
+            textColor: "white",
+            cost: "30"
+          },{
+            color: "black",
+            textColor: "white",
+            cost: "40"
+          }]
+        },
+        hexes: ["N7"]
       }
     ]
   }
