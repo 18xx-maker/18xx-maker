@@ -1087,9 +1087,11 @@ const game = {
       },
       {
         color: "plain",
-        labels: [
+        companies: [
           {
-            label: "B&O"
+            label: "B&O",
+            angle: 305,
+            percent: 0.75
           }
         ],
         hexes: ["I13"]
@@ -1158,7 +1160,7 @@ const game = {
           cost: "$120",
           percent: 0.333
         },
-        labels: [
+        companies: [
           {
             label: "SVR",
             angle: 180,
@@ -1174,17 +1176,19 @@ const game = {
             label: "B",
             angle: 150,
             percent: 0.7
-          },
+          }
+        ],
+        companies: [
           {
             label: "B&O",
-            angle: 210,
-            percent: 0.7
+            angle: 55,
+            percent: 0.75
           }
         ],
         values: [
           {
             value: 30,
-            angle: 90,
+            angle: 210,
             percent: 0.667
           }
         ],
@@ -1272,11 +1276,11 @@ const game = {
             }
           }
         ],
-        labels: [
+        companies: [
           {
             label: "D&H",
-            angle: 45,
-            percent: 0.5
+            angle: 60,
+            percent: 0.57
           }
         ],
         hexes: ["F16"]
@@ -1307,7 +1311,7 @@ const game = {
       },
       {
         color: "plain",
-        labels: [
+        companies: [
           {
             label: "M&H"
           }
@@ -1316,11 +1320,13 @@ const game = {
       },
       {
         color: "yellow",
-        labels: [
+        companies: [
           {
             label: "C&A",
             y: -30
-          },
+          }
+        ],
+        labels: [
           {
             label: "OO",
             y: 57
@@ -1488,10 +1494,10 @@ const game = {
       },
       {
         color: "plain",
-        labels: [
+        companies: [
           {
-            label: "C&St L",
-            percent: 0.4
+            label: "C&StL",
+            percent: 0.5
           }
         ],
         centerTowns: [
