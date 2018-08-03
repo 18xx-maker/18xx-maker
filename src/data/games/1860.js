@@ -909,6 +909,11 @@ const game = {
               color: "mountain"
             }
           ],
+          labels: [{
+            label: "C",
+            angle: 110,
+            percent: 0.70
+          }],
           cities: [
             {
               angle: 180,
