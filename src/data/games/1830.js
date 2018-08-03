@@ -1090,8 +1090,8 @@ const game = {
         companies: [
           {
             label: "B&O",
-            angle: 305,
-            percent: 0.75
+            angle: 280,
+            percent: 0.667
           }
         ],
         hexes: ["I13"]
@@ -1181,8 +1181,8 @@ const game = {
         companies: [
           {
             label: "B&O",
-            angle: 55,
-            percent: 0.75
+            angle: 80,
+            percent: 0.667
           }
         ],
         values: [
