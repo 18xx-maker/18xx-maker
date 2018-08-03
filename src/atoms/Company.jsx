@@ -5,7 +5,7 @@ const Company = ({ label, bottom }) => {
   let size = 13;
   let y = bottom ? 12 : -12;
 
-  let x = label.length * 5 + 5;
+  let x = label.length * 3 + 5;
 
   return (
     <g>
