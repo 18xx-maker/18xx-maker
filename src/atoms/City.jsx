@@ -31,7 +31,13 @@ const City = ({ size, companies, border, name, rotation }) => {
           fill={companyTextColor(num)}
           fontFamily="Bitter"
           fontWeight="bold"
-          textLength={companies[num].label.length > 2 ? 40 : 26}
+          textLength={
+            companies[num].label.length > 2
+              ? 40
+              : companies[num].label.length === 1
+                ? 12.5
+                : 25
+          }
           lengthAdjust="spacingAndGlyphs"
           textAnchor="middle"
           alignmentBaseline="central"
@@ -46,12 +52,7 @@ const City = ({ size, companies, border, name, rotation }) => {
   let nameNode = null;
 
   if (name) {
-    nameNode = (
-      <Name
-        {...name}
-        size={size}
-      />
-    );
+    nameNode = <Name {...name} size={size} />;
   }
 
   if (size === 1) {
