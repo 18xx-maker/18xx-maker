@@ -922,7 +922,7 @@ const game = {
             percent: 0.667
           }
         ],
-        track: [{ side: 6, type: "gentle" }],
+        track: [{ side: 2, type: "gentleStop" }, { side: 6, type: "gentle" }],
         cities: [
           {
             angle: 270,
@@ -1442,12 +1442,14 @@ const game = {
       },
       {
         color: "yellow",
-        companies: [{
-          label: "HR",
-          angle: 180,
-          percent: 0.75,
-          right: 60
-        }],
+        companies: [
+          {
+            label: "HR",
+            angle: 180,
+            percent: 0.75,
+            right: 60
+          }
+        ],
         cities: [
           {
             angle: 90,
@@ -1466,18 +1468,24 @@ const game = {
       },
       {
         color: "yellow",
-        values: [{
-          value: 20,
-          percent: 0.667
-        }],
-        cities: [{
-          name: {name: "Kashiwara"},
-          companies: [{
-            color: "black",
-            label: "K"
-          }]
-        }],
-        track: [{side:1},{side:4}],
+        values: [
+          {
+            value: 20,
+            percent: 0.667
+          }
+        ],
+        cities: [
+          {
+            name: { name: "Kashiwara" },
+            companies: [
+              {
+                color: "black",
+                label: "K"
+              }
+            ]
+          }
+        ],
+        track: [{ side: 1 }, { side: 4 }],
         hexes: ["J15"]
       },
       {
@@ -1509,24 +1517,31 @@ const game = {
       },
       {
         color: "offboard",
-        offBoardTrack: [{
-          side: 1
-        },{
-          side:2
-        }],
+        offBoardTrack: [
+          {
+            side: 1
+          },
+          {
+            side: 2
+          }
+        ],
         offBoardRevenue: {
-          revenues: [{
-            color: "yellow",
-            cost: "20"
-          },{
-            color: "brown",
-            textColor: "white",
-            cost: "30"
-          },{
-            color: "black",
-            textColor: "white",
-            cost: "40"
-          }]
+          revenues: [
+            {
+              color: "yellow",
+              cost: "20"
+            },
+            {
+              color: "brown",
+              textColor: "white",
+              cost: "30"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "40"
+            }
+          ]
         },
         hexes: ["K20"]
       },
@@ -1541,20 +1556,24 @@ const game = {
       },
       {
         color: "offboard",
-        offBoardTrack: [{side:4}],
+        offBoardTrack: [{ side: 4 }],
         offBoardRevenue: {
-          revenues: [{
-            color: "yellow",
-            cost: "0"
-          },{
-            color: "brown",
-            textColor: "white",
-            cost: "0"
-          },{
-            color: "black",
-            textColor: "white",
-            cost: "50"
-          }]
+          revenues: [
+            {
+              color: "yellow",
+              cost: "0"
+            },
+            {
+              color: "brown",
+              textColor: "white",
+              cost: "0"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "50"
+            }
+          ]
         },
         hexes: ["M6"]
       },
@@ -1569,39 +1588,47 @@ const game = {
       },
       {
         color: "offboard",
-        offBoardTrack: [{side:1},{side:2}],
+        offBoardTrack: [{ side: 1 }, { side: 2 }],
         offBoardRevenue: {
-          revenues: [{
-            color: "yellow",
-            cost: "20"
-          },{
-            color: "brown",
-            textColor: "white",
-            cost: "20"
-          },{
-            color: "black",
-            textColor: "white",
-            cost: "30"
-          }]
+          revenues: [
+            {
+              color: "yellow",
+              cost: "20"
+            },
+            {
+              color: "brown",
+              textColor: "white",
+              cost: "20"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "30"
+            }
+          ]
         },
         hexes: ["M14"]
       },
       {
         color: "offboard",
-        offBoardTrack: [{side:3}],
+        offBoardTrack: [{ side: 3 }],
         offBoardRevenue: {
-          revenues: [{
-            color: "yellow",
-            cost: "20"
-          },{
-            color: "brown",
-            textColor: "white",
-            cost: "30"
-          },{
-            color: "black",
-            textColor: "white",
-            cost: "40"
-          }]
+          revenues: [
+            {
+              color: "yellow",
+              cost: "20"
+            },
+            {
+              color: "brown",
+              textColor: "white",
+              cost: "30"
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "40"
+            }
+          ]
         },
         hexes: ["N7"]
       }

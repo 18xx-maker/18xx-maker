@@ -159,7 +159,10 @@ const Atoms = () => {
           "sharpStop",
           "sharpStopRev",
           "gentle",
+          "gentleStop",
+          "gentleStopRev",
           "straight",
+          "straightStop",
           "bent",
           "1860-C"
         ]
