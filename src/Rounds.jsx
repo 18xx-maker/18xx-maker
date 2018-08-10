@@ -2,7 +2,14 @@ import React from "react";
 import Token from "./Token";
 import * as R from "ramda";
 
-const Rounds = ({ rounds }) => {
+const Rounds = ({ rounds, horizontal }) => {
+  let classes = "rounds";
+  if(horizontal) {
+    classes = `${classes} rounds--horizontal`;
+  }
+
+  let arrow = horizontal ? "right" : "up";
+
   let items = R.addIndex(R.map)(
     (round, index) => (
       <div key={`token-${index}`} className="Token">
@@ -13,13 +20,13 @@ const Rounds = ({ rounds }) => {
             labelColor="black"
           />
         </svg>
-        {index > 0 && <i className="fal fa-arrow-up" />}
+        {index > 0 && <i className={`fal fa-arrow-${arrow}`} />}
       </div>
     ),
     rounds
   );
   return (
-    <div className="rounds">
+    <div className={classes}>
       <div className="tokens">{items}</div>
     </div>
   );

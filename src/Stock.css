@@ -19,11 +19,19 @@
 
 .Token i {
   position: absolute;
-  bottom: -0.15in;
   display: block;
+  font-size: 0.12in;
+  bottom: -0.15in;
   height: 0.15in;
   width: 0.5in;
-  font-size: 0.12in;
+}
+
+.rounds--horizontal .Token i {
+  top: 0;
+  left: 0in;
+  width: 0.15in;
+  height: 0.5in;
+  line-height: 0.5in;
 }
 
 .Arrow {

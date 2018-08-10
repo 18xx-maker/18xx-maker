@@ -2,7 +2,11 @@ import React from "react";
 import * as R from "ramda";
 import { colors, textColor } from "./data";
 
-const Par = ({ par }) => {
+const ParTable = ({ par }) => {
+  return null;
+};
+
+const ParRow = ({ par }) => {
   let rows = R.map(
     value => (
       <tr key={`par-${value}`}>
@@ -19,6 +23,15 @@ const Par = ({ par }) => {
       </table>
     </div>
   );
+};
+
+const Par = (props) => {
+  switch (props.par.type) {
+  case "table":
+    return <ParTable {...props} />;
+  default:
+    return <ParRow {...props} />;
+  }
 };
 
 export default Par;
