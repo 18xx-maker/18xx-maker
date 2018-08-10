@@ -313,7 +313,7 @@ const game = {
       color: "orange"
     },
     movement: {
-      left: ["President sell action", "Withheld revenue"],
+      left: ["President sold shares", "Withheld revenue"],
       right: ["Sold Out", "Paid dividends"]
     },
     market: [
