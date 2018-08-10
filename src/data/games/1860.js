@@ -41,7 +41,7 @@ const game = {
       name: "Cowes & Newport",
       abbrev: "C&N",
       tokens: ["Home", "£40", "£100", "£100"],
-      color: "blue",
+      color: "cyan",
       shares: [
         {
           quantity: 1,
@@ -179,7 +179,7 @@ const game = {
       name: "Shanklin & Chale",
       abbrev: "S&C",
       tokens: ["Home", "£40"],
-      color: "maroon",
+      color: "purple",
       shares: [
         {
           quantity: 1,
@@ -196,9 +196,9 @@ const game = {
     },
     {
       name: "Ventor, Yarmouth & South Coast",
-      abbrev: "VY&SC",
+      abbrev: "VYSC",
       tokens: ["Home", "£40"],
-      color: "cyan",
+      color: "lightGreen",
       shares: [
         {
           quantity: 1,
@@ -599,115 +599,269 @@ const game = {
         ]
       ]
     },
-    splice: 27,
     market: [
       {
-        start: true,
-        color: "pink",
-        label: "Bankrupt"
+        label: "0",
+        subLabel: "Bankrupt"
       },
       {
-        color: "green",
+        legend: 1,
         label: "7"
       },
       {
-        color: "green",
+        legend: 1,
         label: "14"
       },
       {
-        color: "green",
+        legend: 1,
         label: "20"
       },
       {
-        color: "green",
+        legend: 1,
         label: "26"
       },
       {
-        color: "green",
+        legend: 1,
         label: "31"
       },
       {
-        color: "green",
+        legend: 1,
         label: "36"
       },
       {
-        color: "gray",
+        par: true,
         label: "40"
       },
       {
-        color: "gray",
+        par: true,
         label: "44"
       },
       {
-        color: "gray",
+        par: true,
         label: "47"
       },
       {
-        color: "gray",
+        par: true,
         label: "50"
       },
       {
-        color: "gray",
+        par: true,
         label: "52"
       },
       {
-        color: "yellow",
+        legend: 0,
+        companies: [
+          {
+            label: "S&C",
+            color: "purple",
+            row: 7
+          },
+          {
+            label: "VYSC",
+            color: "lightGreen",
+            row: 8
+          }
+        ],
         label: "54"
       },
       {
-        color: "gray",
+        par: true,
         label: "56"
       },
       {
-        color: "yellow",
+        legend: 0,
+        companies: [
+          {
+            label: "NGStL",
+            color: "yellow",
+            row: 5
+          },
+          {
+            label: "BHI&R",
+            color: "pink",
+            row: 6
+          },
+          {
+            label: "S&C",
+            color: "purple",
+            row: 7
+          },
+          {
+            label: "VYSC",
+            color: "lightGreen",
+            row: 8
+          }
+        ],
         label: "58"
       },
       {
-        color: "gray",
+        par: true,
         label: "60"
       },
       {
-        color: "yellow",
+        legend: 0,
+        companies: [
+          {
+            label: "IWNJ",
+            color: "black",
+            row: 3
+          },
+          {
+            label: "FYN",
+            color: "darkGreen",
+            row: 4
+          },
+          {
+            label: "NGStL",
+            color: "yellow",
+            row: 5
+          },
+          {
+            label: "BHI&R",
+            color: "pink",
+            row: 6
+          },
+          {
+            label: "S&C",
+            color: "purple",
+            row: 7
+          },
+          {
+            label: "VYSC",
+            color: "lightGreen",
+            row: 8
+          }
+        ],
         label: "62"
       },
       {
-        color: "gray",
+        par: true,
         label: "65"
       },
       {
-        color: "yellow",
+        legend: 0,
+        companies: [
+          {
+            label: "IWNJ",
+            color: "black",
+            row: 3
+          },
+          {
+            label: "FYN",
+            color: "darkGreen",
+            row: 4
+          },
+          {
+            label: "NGStL",
+            color: "yellow",
+            row: 5
+          },
+          {
+            label: "BHI&R",
+            color: "pink",
+            row: 6
+          }
+        ],
         label: "68"
       },
       {
-        color: "gray",
+        par: true,
         label: "71"
       },
       {
-        color: "yellow",
+        legend: 0,
+        companies: [
+          {
+            label: "C&N",
+            color: "cyan",
+            row: 1
+          },
+          {
+            label: "IOW",
+            color: "red",
+            row: 2
+          },
+          {
+            label: "IWNJ",
+            color: "black",
+            row: 3
+          },
+          {
+            label: "FYN",
+            color: "darkGreen",
+            row: 4
+          }
+        ],
         label: "74"
       },
       {
-        color: "gray",
+        par: true,
         label: "78"
       },
       {
-        color: "yellow",
+        legend: 0,
+        companies: [
+          {
+            label: "C&N",
+            color: "cyan",
+            row: 1
+          },
+          {
+            label: "IOW",
+            color: "red",
+            row: 2
+          },
+          {
+            label: "IWNJ",
+            color: "black",
+            row: 3
+          },
+          {
+            label: "FYN",
+            color: "darkGreen",
+            row: 4
+          }
+        ],
         label: "82"
       },
       {
-        color: "gray",
+        par: true,
         label: "86"
       },
       {
-        color: "yellow",
+        legend: 0,
+        companies: [
+          {
+            label: "C&N",
+            color: "cyan",
+            row: 1
+          },
+          {
+            label: "IOW",
+            color: "red",
+            row: 2
+          }
+        ],
         label: "90"
       },
       {
-        color: "gray",
+        par: true,
         label: "95"
       },
       {
-        color: "yellow",
+        legend: 0,
+        companies: [
+          {
+            label: "C&N",
+            color: "cyan",
+            row: 1
+          },
+          {
+            label: "IOW",
+            color: "red",
+            row: 2
+          }
+        ],
         label: "100"
       },
       "105",
@@ -719,91 +873,96 @@ const game = {
       "142",
       "150",
       {
-        color: "green",
+        legend: 1,
         label: "158"
       },
       {
-        color: "green",
+        legend: 1,
         label: "166"
       },
       {
-        color: "green",
+        legend: 1,
         label: "174"
       },
       {
-        color: "green",
+        legend: 1,
         label: "182"
       },
       {
-        color: "green",
+        legend: 1,
         label: "191"
       },
       {
-        color: "green",
+        legend: 1,
         label: "200"
       },
       {
-        color: "green",
+        legend: 1,
         label: "210"
       },
       {
-        color: "green",
+        legend: 1,
         label: "220"
       },
       {
-        color: "green",
+        legend: 1,
         label: "230"
       },
       {
-        color: "green",
+        legend: 1,
         label: "240"
       },
       {
-        color: "green",
+        legend: 1,
         label: "250"
       },
       {
-        color: "green",
+        legend: 1,
         label: "260"
       },
       {
-        color: "green",
+        legend: 1,
         label: "270"
       },
       {
-        color: "green",
+        legend: 1,
         label: "280"
       },
       {
-        color: "green",
+        legend: 1,
         label: "290"
       },
       {
-        color: "green",
+        legend: 1,
         label: "300"
       },
       {
-        color: "green",
+        legend: 1,
         label: "310"
       },
       {
-        color: "green",
+        legend: 1,
         label: "320"
       },
       {
-        color: "green",
+        legend: 1,
         label: "330"
       },
       {
-        color: "orange",
         label: "340",
-        end: true
+        subLabel: "End of Game"
       }
     ],
-    limits: [
+    legend: [
       {
-        color: "green",
-        description: "Ignore first share sold when moving share price"
+        color: "blue",
+        description: "Company initial par values",
+        icon: "money-bill-wave"
+      },
+      {
+        color: "water",
+        description: "Ignore first share sold when moving share price",
+        icon: "certificate"
       }
     ]
   },
@@ -909,11 +1068,13 @@ const game = {
               color: "mountain"
             }
           ],
-          labels: [{
-            label: "C",
-            angle: 110,
-            percent: 0.70
-          }],
+          labels: [
+            {
+              label: "C",
+              angle: 110,
+              percent: 0.7
+            }
+          ],
           cities: [
             {
               angle: 180,
@@ -924,7 +1085,7 @@ const game = {
               companies: [
                 {
                   label: "C&N",
-                  color: "blue"
+                  color: "cyan"
                 }
               ]
             }
@@ -1373,7 +1534,7 @@ const game = {
               companies: [
                 {
                   label: "VYSC",
-                  color: "cyan"
+                  color: "lightGreen"
                 }
               ]
             }
@@ -1461,7 +1622,7 @@ const game = {
               companies: [
                 {
                   label: "S&C",
-                  color: "maroon"
+                  color: "purple"
                 }
               ]
             }
@@ -1529,7 +1690,7 @@ const game = {
         {
           color: "plain",
           hexes: ["E11"]
-        },
+        }
       ]
     }
   ]

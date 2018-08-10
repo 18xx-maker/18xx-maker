@@ -309,22 +309,29 @@ const game = {
 
   stock: {
     type: "1D",
+    par: {
+      color: "orange"
+    },
+    movement: {
+      left: ["President sell action", "Withheld revenue"],
+      right: ["Sold Out", "Paid dividends"]
+    },
     market: [
-      0,
+      { label: "Closed", color: "black", textColor: "white" },
       10,
       20,
       30,
-      40,
-      50,
-      60,
-      70,
-      80,
-      90,
-      100,
-      112,
-      124,
-      137,
-      150,
+      { label: "40", par: true },
+      { label: "50", par: true },
+      { label: "60", par: true },
+      { label: "70", par: true },
+      { label: "80", par: true },
+      { label: "90", par: true },
+      { label: "100", par: true },
+      { label: "112", par: true },
+      { label: "124", par: true },
+      { label: "137", par: true },
+      { label: "150", par: true },
       165,
       180,
       195,

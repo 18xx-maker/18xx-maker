@@ -579,6 +579,11 @@ svg {
   width: 1in;
 }
 
+.rounds--horizontal {
+  height: 1in;
+  width: 2.75in;
+}
+
 .rounds .tokens {
   position: absolute;
   bottom: 0.01in;
@@ -591,6 +596,11 @@ svg {
   margin: 0;
 }
 
+.rounds--horizontal .tokens {
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
 .rounds svg {
   height: 0.5in;
   width: 0.5in;
@@ -598,6 +608,11 @@ svg {
   left: 0;
   padding-top: 0.15in;
   position: relative;
+}
+
+.rounds--horizontal .tokens svg {
+  padding-top: 0;
+  padding-left: 0.15in;
 }
 
 .legend {

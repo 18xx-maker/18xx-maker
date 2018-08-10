@@ -27,6 +27,7 @@ const colors = {
   blue: "rgb(2,90,170)",
   cyan: "rgb(141,215,248)",
   darkGreen: "rgb(50,118,63)",
+  lightGreen: "rgb(110,192,55)",
   maroon: "rgb(96,23,44)",
   orange: "rgb(245,129,33)",
   red: "rgb(209,35,42)",

@@ -2,197 +2,95 @@ import React from "react";
 import { colors, textColor } from "./data";
 import * as R from "ramda";
 
+import MarketCell from "./MarketCell";
+
 require("./Market.css");
 
-const wrapCell = cell => {
-  if (cell === Object(cell)) {
-    return cell;
-  } else {
-    return {
-      label: cell
-    };
-  }
-};
-
-const makeCell = ({ label, color, textColor, start, end }, index) => {
-  let backgroundColor = colors[color] || colors["plain"];
-  let fontColor = colors[textColor] || colors["black"];
-
-  let className = "market__cell";
-  if (start === true) {
-    className = className + " start";
-  }
-  if (end === true) {
-    className = className + " end";
-  }
-
-  let nodes = [];
-
-  if (start === true) {
-    nodes.push(
-      <div className="market__cell market__start" style={{ backgroundColor }}>
-        {label}
-      </div>
-    );
-    nodes.push(
-      <div
-        className="market__cell market__start_pad"
-        style={{ backgroundColor }}
-      >
-        <div style={{ backgroundColor }} />
-      </div>
-    );
-  } else if (end === true) {
-    nodes.push(
-      <div className="market__cell market__end" style={{ backgroundColor }}>
-        {label}
-      </div>
-    );
-    nodes.push(
-      <div className="market__cell market__end_pad" style={{ backgroundColor }}>
-        <div style={{ backgroundColor }} />
-      </div>
-    );
-  } else if (index === 0) {
-    nodes.push(<div className="market__pad" />);
-    nodes.push(
-      <div className={className} style={{ backgroundColor, color: fontColor }}>
-        {label}
-      </div>
-    );
-  } else {
-    nodes.push(
-      <div className={className} style={{ backgroundColor, color: fontColor }}>
-        {label}
-      </div>
-    );
-  }
-
-  return nodes;
-};
-
-const makeRow = market => {
-  return (
-    <div className="market__row">
-      {R.addIndex(R.map)(makeCell, R.map(wrapCell, market))}
-    </div>
-  );
-};
-
-const makeMarket1Diag = (market, splice) => {
+const divideArray = (market, pad) => {
+  let pivot = Math.ceil(market.length / 2);
   return [
-    makeRow(market.slice(0, splice)),
-    makeRow(market.slice(splice, market.length))
+    R.slice(0, pivot, market),
+    R.concat(
+      pad && market.length % 2 !== 0 ? [null] : [],
+      R.slice(pivot, Infinity, market)
+    )
   ];
 };
 
-const Par1Diag = ({ type, values }) => {
-  let nodes = R.map(
-    row => (
-      <tr>
-        {R.map(
-          value => (
-            <td
-              rowspan={value.rowspan || 1}
-              style={{ backgroundColor: colors[value.color] }}
-            >
-              {value.label}
-              {R.map(
-                note => (
-                  <div style={{ color: colors[note.color] }}>{note.label}</div>
-                ),
-                value.labels || []
-              )}
-            </td>
-          ),
-          row
-        )}
-      </tr>
-    ),
-    values
-  );
+const splitArray = market => {
+  return [
+    R.concat(R.addIndex(R.filter)((_, i) => i % 2 !== 1, market), [null]),
+    R.concat([null], R.addIndex(R.filter)((_, i) => i % 2 === 1, market))
+  ];
+};
 
-  return (
-    <div className="par">
-      <h2>Par</h2>
-      <table>
-        <tbody>{nodes}</tbody>
+const Market1D = ({ legend, market, par, title }) => {
+  let tables = R.addIndex(R.map)((table, i) => {
+    let cells = R.addIndex(R.map)((value, col) => {
+      return <MarketCell {...{ value, legend, par }} key={`cell-0-${col}`} />;
+    }, table);
+    return (
+      <table key={`table-${i}`}>
+        <tbody>
+          <tr key="row-0">{cells}</tr>
+        </tbody>
       </table>
-    </div>
-  );
-};
+    );
+  }, divideArray(market, true));
 
-const Market1Diag = ({ market, par, splice }) => {
   return (
-    <div className="market market__type__1Diag">
-      <h2>Stock Market</h2>
-      <div className="market__1Diag">{makeMarket1Diag(market, splice)}</div>
-      {par && <Par1Diag {...par} />}
+    <div className="Market Market__1Diag">
+      <h2>{title} Stock Market</h2>
+      {tables}
     </div>
   );
 };
 
-const Market2D = ({ legend, market, par, title, width, height }) => {
+const Market1Diag = ({ legend, market, par, title }) => {
+  let tables = R.addIndex(R.map)((table, i) => {
+    let rows = R.addIndex(R.map)((marketRow, row) => {
+      let cells = R.addIndex(R.map)((value, col) => {
+        let colSpan = value ? 2 : 1;
+        return (
+          <MarketCell
+            {...{ value, legend, par, colSpan }}
+            key={`cell-${row}-${col}`}
+          />
+        );
+      }, marketRow);
+
+      return <tr key={`row-${row}`}>{cells}</tr>;
+    }, splitArray(table));
+
+    return (
+      <table key={`table-${i}`}>
+        <tbody>{rows}</tbody>
+      </table>
+    );
+  }, divideArray(market));
+
+  return (
+    <div className="Market Market__1D">
+      <h2>{title} Stock Market</h2>
+      {tables}
+    </div>
+  );
+};
+
+const Market2D = ({ legend, market, par, title }) => {
   let rows = R.addIndex(R.map)((marketRow, row) => {
     let cells = R.addIndex(R.map)((value, col) => {
-      let color = null;
-
-      let classes = [];
-      if (!value) {
-        classes.push("empty");
-      } else {
-        color = colors["plain"];
-      }
-
-      let labelColor = textColor("plain");
-      if (value && value.color) {
-        color = colors[value.color];
-        labelColor =
-          colors[value.textColor] || textColor(value.color || "white");
-      } else if (
-        value &&
-        Number.isInteger(value.legend) &&
-        value.legend < legend.length
-      ) {
-        color = colors[legend[value.legend].color];
-        labelColor =
-          colors[value.textColor] || textColor(legend[value.legend].color);
-      } else if (value && value.par) {
-        color = colors[(par && par.color) || "gray"];
-        labelColor =
-          colors[value.textColor] || textColor((par && par.color) || "gray");
-      }
-
       return (
-        <td
-          key={`${row}-${col}`}
-          style={{ backgroundColor: color, color: labelColor }}
-          className={classes.join(" ")}
-        >
-          {(value && value.label) || value}
-          {value &&
-            value.arrow && (
-              <span
-                style={{
-                  color: value.arrowColor
-                    ? colors[value.arrowColor]
-                    : colors["black"]
-                }}
-                className={`Arrow Arrow--${value.arrow}`}
-              >
-                {value.arrow === "up" ? "↑" : "↓"}
-              </span>
-            )}
-        </td>
+        <MarketCell {...{ value, legend, par }} key={`cell-${row}-${col}`} />
       );
     }, marketRow);
     return <tr key={row}>{cells}</tr>;
   }, market);
 
   return (
-    <div className="market">
+    <div className="Market">
       <h2>{title} Stock Market</h2>
-      <table style={{ width, height }}>
+      <table>
         <tbody>{rows}</tbody>
       </table>
     </div>
@@ -201,10 +99,12 @@ const Market2D = ({ legend, market, par, title, width, height }) => {
 
 const Market = stock => {
   switch (stock.type) {
-    case "2D":
-      return <Market2D {...stock} />;
+    case "1D":
+      return <Market1D {...stock} />;
     case "1Diag":
       return <Market1Diag {...stock} />;
+    case "2D":
+      return <Market2D {...stock} />;
     default:
       return null;
   }
