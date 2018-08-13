@@ -8,6 +8,7 @@ import game_1873 from "./1873";
 import game_1886 from "./1886";
 import game_1889 from "./1889";
 import game_1890 from "./1890";
+import game_18AL from "./18AL";
 
 export default {
   "1800": game_1800,
@@ -19,5 +20,6 @@ export default {
   "1873": game_1873,
   "1886": game_1886,
   "1889": game_1889,
-  "1890": game_1890
+  "1890": game_1890,
+  "18AL": game_18AL
 };

@@ -4,7 +4,7 @@ import { colors, textColor } from "./data";
 
 import Movement from "./Movement";
 
-const Legend = ({ legend, movement }) => {
+const Legend = ({ legend, movement, horizontal }) => {
   let items = R.map(item => {
     let backgroundColor = colors[item.color || "orange"];
     let color = item.textColor ? colors[item.textColor] : textColor(item.color || "orange");
@@ -18,7 +18,7 @@ const Legend = ({ legend, movement }) => {
   }, legend);
 
   return (
-    <div className="Legend">
+    <div className={`Legend${horizontal ? " Legend--Horizontal" : "" }`}>
       <Movement movement={movement} />
       <ul className="notes">{items}</ul>
     </div>

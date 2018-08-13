@@ -19,19 +19,22 @@
 
 .Market__1Diag table,
 .Market__1D table {
-  height: calc(3in - 1px);
+  height: calc(3.25in - 1px);
 }
 
 .Market__1Diag table + table,
 .Market__1D table + table {
-  margin-top: 0.5in;
+  margin-top: 0.25in;
 }
 
 .MarketCell--SubLabel {
   position: absolute;
   bottom: 0.05in;
-  left: 0.05in;
+  left: 0.18in;
   font-size: 0.8em;
+  transform: rotate(-90deg);
+  transform-origin: bottom left;
+  width: 200%;
 }
 
 .MarketCell--Companies {

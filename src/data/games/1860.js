@@ -481,122 +481,28 @@ const game = {
   stock: {
     type: "1Diag",
     par: {
-      type: "table",
+      type: "double",
       values: [
-        [
-          { label: 50, color: "gray" },
-          {
-            label: 54,
-            color: "plain",
-            rowspan: 3,
-            labels: [
-              {},
-              {},
-              {},
-              {},
-              {},
-              {},
-              { color: "cyan", label: "S&C" },
-              { color: "maroon", label: "VYSC" }
-            ]
-          },
-          {
-            label: 58,
-            color: "plain",
-            rowspan: 3,
-            labels: [
-              {},
-              {},
-              {},
-              {},
-              { color: "yellow", label: "NGStL" },
-              { color: "pink", label: "BHI&R" },
-              { color: "cyan", label: "S&C" },
-              { color: "maroon", label: "VYSC" }
-            ]
-          },
-          {
-            label: 62,
-            color: "plain",
-            rowspan: 3,
-            labels: [
-              {},
-              {},
-              { color: "darkGreen", label: "FYN" },
-              { color: "black", label: "IWNJ" },
-              { color: "yellow", label: "NGStL" },
-              { color: "pink", label: "BHI&R" },
-              { color: "cyan", label: "S&C" },
-              { color: "maroon", label: "VYSC" }
-            ]
-          },
-          {
-            label: 68,
-            color: "plain",
-            rowspan: 3,
-            labels: [
-              {},
-              {},
-              { color: "darkGreen", label: "FYN" },
-              { color: "black", label: "IWNJ" },
-              { color: "yellow", label: "NGStL" },
-              { color: "pink", label: "BHI&R" }
-            ]
-          },
-          {
-            label: 74,
-            color: "plain",
-            rowspan: 3,
-            labels: [
-              { color: "red", label: "IOW" },
-              { color: "blue", label: "C&N" },
-              { color: "darkGreen", label: "FYN" },
-              { color: "black", label: "IWNJ" }
-            ]
-          },
-          {
-            label: 82,
-            color: "plain",
-            rowspan: 3,
-            labels: [
-              { color: "red", label: "IOW" },
-              { color: "blue", label: "C&N" },
-              { color: "darkGreen", label: "FYN" },
-              { color: "black", label: "IWNJ" }
-            ]
-          },
-          {
-            label: 90,
-            color: "plain",
-            rowspan: 3,
-            labels: [
-              { color: "red", label: "IOW" },
-              { color: "blue", label: "C&N" }
-            ]
-          },
-          {
-            label: 100,
-            color: "plain",
-            rowspan: 3,
-            labels: [
-              { color: "red", label: "IOW" },
-              { color: "blue", label: "C&N" }
-            ]
-          }
-        ],
-        [{ label: 47, color: "gray" }],
-        [{ label: 44, color: "gray" }],
-        [
-          { label: 40, color: "gray" },
-          { label: 52, color: "gray" },
-          { label: 56, color: "gray" },
-          { label: 60, color: "gray" },
-          { label: 65, color: "gray" },
-          { label: 71, color: "gray" },
-          { label: 78, color: "gray" },
-          { label: 86, color: "gray" },
-          { label: 95, color: "gray" }
-        ]
+        { label: 100, legend: 0 },
+        95,
+        { label: 90, legend: 0 },
+        86,
+        { label: 82, legend: 0 },
+        78,
+        { label: 74, legend: 0 },
+        71,
+        { label: 68, legend: 0 },
+        65,
+        { label: 62, legend: 0 },
+        60,
+        { label: 58, legend: 0 },
+        56,
+        { label: 54, legend: 0 },
+        52,
+        50,
+        47,
+        44,
+        40
       ]
     },
     market: [

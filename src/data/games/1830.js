@@ -6,7 +6,6 @@ const game = {
     designer: "Francis Tresham",
     background: "gray",
     width: 150,
-    rotation: 90,
     color_10: "orange"
   },
 
