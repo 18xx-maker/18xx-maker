@@ -70,7 +70,10 @@ const Market1Diag = ({ legend, market, par, title }) => {
   }, divideArray(market));
 
   return (
-    <div className="Market Market__1D">
+    <div
+      style={{ width: par && par.values ? "calc(100% - 2.25in)" : "100%" }}
+      className="Market Market__1D"
+    >
       <h2>{title} Stock Market</h2>
       {tables}
     </div>

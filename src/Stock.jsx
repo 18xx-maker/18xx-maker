@@ -23,9 +23,9 @@ const Stock = ({ match }) => {
       </div>
       <Market {...stock} title={game.info.title} />
       <div className="StockHelpers">
-        {stock.par && stock.par.values && <Par par={stock.par} />}
-        <Rounds rounds={game.rounds} horizontal={game.stock.type === "2D" ? false: true} />
-        <Legend legend={game.stock.legend || []} movement={game.stock.movement} />
+        {stock.par && stock.par.values && <Par par={stock.par} legend={stock.legend || []} />}
+        <Rounds rounds={game.rounds} horizontal={game.stock.type === "2D" ? false : true} />
+        <Legend legend={game.stock.legend || []} movement={game.stock.movement} horizontal={game.stock.type === "2D" ? false : true} />
       </div>
     </div>
   );

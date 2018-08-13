@@ -1443,6 +1443,36 @@ const tiles = {
       }
     ]
   },
+  "142": {
+    color: "green",
+    centerTowns: [{}],
+    values: [{
+      value: 10,
+      angle: 240,
+      percent: 0.5
+    }],
+    track: [{side: 1},{side:3},{side:4}]
+  },
+  "143": {
+    color: "green",
+    centerTowns: [{}],
+    values: [{
+      value: 10,
+      angle: 240,
+      percent: 0.5
+    }],
+    track: [{side: 1},{side:2},{side:3}]
+  },
+  "144": {
+    color: "green",
+    centerTowns: [{}],
+    values: [{
+      value: 10,
+      angle: 180,
+      percent: 0.5
+    }],
+    track: [{side: 1},{side:3},{side:5}]
+  },
   "290": {
     color: "gray",
     cities: [
@@ -2028,6 +2058,177 @@ const tiles = {
       }
     ],
     track: [{ side: 1 }, { side: 2 }, { side: 3 }]
+  },
+  "441": {
+    color: "yellow",
+    values: [
+      {
+        angle: 210,
+        percent: 0.75,
+        value: 10
+      }
+    ],
+    labels: [
+      {
+        label: "B",
+        angle: 150,
+        percent: 0.75
+      }
+    ],
+    cities: [{ size: 1 }],
+    track: [
+      {
+        side: 1
+      }
+    ]
+  },
+  "442": {
+    color: "green",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 30
+      }
+    ],
+    cities: [{ size: 2 }],
+    labels: [{
+      angle: 150,
+      percent: 0.8,
+      label: "B"
+    }],
+    track: [
+      {
+        side: 2
+      },
+      {
+        side: 4
+      },
+      {
+        side: 5
+      },
+      {
+        side: 6
+      }
+    ]
+  },
+  "443": {
+    color: "green",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 40
+      }
+    ],
+    cities: [{ size: 2 }],
+    labels: [{
+      angle: 150,
+      percent: 0.8,
+      label: "M"
+    }],
+    track: [
+      {
+        side: 2
+      },
+      {
+        side: 3
+      },
+      {
+        side: 4
+      },
+      {
+        side: 5
+      },
+      {
+        side: 6
+      }
+    ]
+  },
+  "444": {
+    color: "brown",
+    values: [
+      {
+        angle: 210,
+        percent: 0.8,
+        value: 50
+      }
+    ],
+    cities: [{ size: 2 }],
+    labels: [{
+      percent: 0.55,
+      label: "B·M"
+    }],
+    track: [
+      {
+        side: 2
+      },
+      {
+        side: 3
+      },
+      {
+        side: 4
+      },
+      {
+        side: 5
+      },
+      {
+        side: 6
+      }
+    ]
+  },
+  "445": {
+    color: "yellow",
+    values: [
+      {
+        angle: -120,
+        percent: 0.2,
+        value: 20
+      }
+    ],
+    towns: [
+      {
+        angle: 60,
+        percent: 0.288675,
+        rotate: -30
+      }
+    ],
+    track: [
+      {
+        type: "gentle",
+        side: 1
+      }
+    ]
+  },
+  "446": {
+    color: "gray",
+    values: [
+      {
+        angle: 210,
+        percent: 0.9,
+        value: 70
+      }
+    ],
+    labels: [
+      {
+        label: "B",
+        angle: 335,
+        percent: 0.82
+      }
+    ],
+    cities: [
+      {
+        size: 3
+      }
+    ],
+    track: [
+      { side: 1 },
+      { side: 2 },
+      { side: 3 },
+      { side: 4 },
+      { side: 5 },
+      { side: 6 }
+    ]
   },
   "448": {
     color: "brown",
