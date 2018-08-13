@@ -454,7 +454,7 @@ const game = {
         { label: 170, arrow: "up" }
       ],
       [
-        { label: 45, legend: 0 },
+        { label: 45, legend: 0, arrow: "down" },
         { label: 50, legend: 0 },
         55,
         60,
@@ -467,7 +467,7 @@ const game = {
         { label: 120, arrow: "up" }
       ],
       [
-        { label: 40, legend: 0 },
+        { label: 40, legend: 0, arrow: "down" },
         { label: 45, legend: 0 },
         { label: 50, legend: 0 },
         55,
