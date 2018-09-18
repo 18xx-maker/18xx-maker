@@ -20,7 +20,6 @@ const Token = ({
 
   width = width || 25;
 
-  console.log(width);
   let content = icon ? (
     <use href={icon} transform="scale(1.66666 1.66666)" />
   ) : (

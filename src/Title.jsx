@@ -12,10 +12,13 @@ const Title = ({ game, variation }) => {
     mapName = game.map[variation].name;
   }
 
+  let x = (game.info.titleX || 0) + 50;
+  let y = (game.info.titleY || 0) + 50;
+  let rotate = (game.info.titleRotate || 0);
+
   return (
     <g
-      transform={`translate(${game.info.titleX || 0} ${game.info.titleY ||
-        0}) rotate(${game.info.titleRotate || 0})`}
+      transform={`translate(${x} ${y}) rotate(${rotate})`}
     >
       <text
         fill={colors["black"]}

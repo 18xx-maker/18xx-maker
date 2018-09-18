@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import games from "./data/games";
 
 const GameNav = ({ game, ipo, paginated }) => {
   return (

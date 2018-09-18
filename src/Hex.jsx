@@ -76,7 +76,7 @@ const HexTile = ({ hex, id, border }) => {
     return null;
   }
 
-  let [idBase, idExtra] = id.split("|");
+  let [idBase, idExtra] = (id || "").split("|");
 
   let getTracks = R.converge(concat, [
     R.compose(
