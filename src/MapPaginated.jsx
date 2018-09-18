@@ -38,9 +38,9 @@ const MapPaginated = ({ match }) => {
   let maxX = util.maxMapX(hexes);
   let maxY = util.maxMapY(hexes);
 
-  let totalWidth = (game.info.extraTotalWidth || 0) + halfHexWidth * (maxX + 1);
+  let totalWidth = (game.info.extraTotalWidth || 0) + 100 + halfHexWidth * (maxX + 1);
   let totalHeight =
-    (game.info.extraTotalHeight || 0) + (1.5 * (maxY - 1) * edge + 2 * edge);
+    (game.info.extraTotalHeight || 0) + 100 + (1.5 * (maxY - 1) * edge + 2 * edge);
 
   if (game.info.orientation === "horizontal") {
     let tmp = totalWidth;

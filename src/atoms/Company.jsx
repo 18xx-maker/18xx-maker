@@ -7,7 +7,6 @@ const Company = ({ label, bottom, left, right }) => {
 
   let x = label.length * 3 + 5;
   let r = (x + (right || 0) + (x + (left || 0))) * 2;
-  console.log({ x, y, r });
 
   return (
     <g>

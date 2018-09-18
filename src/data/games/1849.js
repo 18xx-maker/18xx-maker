@@ -8,6 +8,7 @@ const game = {
     width: 150,
     orientation: "horizontal",
     titleY: 900,
+    titleX: 25,
     extraTokens: 2,
     color_5: "water"
   },

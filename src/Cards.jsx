@@ -1,6 +1,7 @@
 import React from "react";
 import * as R from "ramda";
 
+import Number from "./Number";
 import Private from "./Private";
 import Share from "./Share";
 import Train from "./Train";
@@ -8,13 +9,19 @@ import Train from "./Train";
 import games from "./data/games";
 import util from "./util";
 
+export const maxPlayers = R.compose(
+  R.reduce(R.max, 0),
+  R.map(R.prop("number"))
+);
+
 class Cards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       displayPrivates: true,
       displayShares: true,
-      displayTrains: true
+      displayTrains: true,
+      displayNumbers: true
     };
 
     this.handleDisplay = this.handleDisplay.bind(this);
@@ -40,6 +47,9 @@ class Cards extends React.Component {
       R.prop("quantity"),
       this.state.displayTrains ? game.trains || [] : []
     );
+    let numbers = this.state.displayNumbers
+      ? R.range(1, maxPlayers(game.players) + 1)
+      : [];
 
     return (
       <div className="cards">
@@ -74,6 +84,15 @@ class Cards extends React.Component {
             />
             Trains
           </label>
+          <label>
+            <input
+              name="displayNumbers"
+              type="checkbox"
+              checked={this.state.displayNumbers}
+              onChange={this.handleDisplay}
+            />
+            Numbers
+          </label>
         </div>
         {R.addIndex(R.map)(
           (p, i) => (
@@ -101,6 +120,10 @@ class Cards extends React.Component {
             <Train train={train} key={`train-${train.name}-${index}`} />
           ),
           trains
+        )}
+        {R.map(
+          n => <Number number={n} background={game.info.background} key={`number=${n}`} />,
+          numbers
         )}
       </div>
     );

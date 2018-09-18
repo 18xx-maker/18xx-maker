@@ -6,7 +6,9 @@ const game = {
     designer: "Francis Tresham",
     background: "gray",
     width: 150,
-    color_10: "orange"
+    color_10: "orange",
+    titleX: 50,
+    hexCoords: true
   },
 
   // Extra Tokens

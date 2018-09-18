@@ -1,5 +1,4 @@
 import React from "react";
-import { colors, textColor } from "./data";
 import * as R from "ramda";
 
 import MarketCell from "./MarketCell";
