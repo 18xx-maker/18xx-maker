@@ -31,9 +31,12 @@ const MapSingle = ({ match }) => {
   let maxX = util.maxMapX(hexes);
   let maxY = util.maxMapY(hexes);
 
-  let totalWidth = (game.info.extraTotalWidth || 0) + halfHexWidth * (maxX + 1);
+  let totalWidth =
+    100 + (game.info.extraTotalWidth || 0) + halfHexWidth * (maxX + 1);
   let totalHeight =
-    (game.info.extraTotalHeight || 0) + (1.5 * (maxY - 1) * edge + 2 * edge);
+    100 +
+    (game.info.extraTotalHeight || 0) +
+    (1.5 * (maxY - 1) * edge + 2 * edge);
 
   if (game.info.orientation === "horizontal") {
     let tmp = totalWidth;
@@ -54,8 +57,8 @@ const MapSingle = ({ match }) => {
           <Map game={game} variation={variation} />
         </Svg>
         <div className="PrintNotes">
-          This map is meant to be printed in{" "}
-          <b>{map.print || "portrait"}</b> mode
+          This map is meant to be printed in <b>{map.print || "portrait"}</b>{" "}
+          mode
           {Array.isArray(game.map) && (
             <ul>
               {game.map.map((m, i) => (
