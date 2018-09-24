@@ -6,7 +6,7 @@ import HexContext from "../context/HexContext";
 const OffBoardTrack = ({ border }) => {
   let path;
 
-  let width = border ? 7 : 5;
+  let width = border ? 8 : 6;
   let color = border ? colors["border"] : colors["track"];
   let end = border ? 30 : 40;
 
