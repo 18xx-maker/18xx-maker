@@ -101,10 +101,27 @@ const HexTile = ({ hex, id, border }) => {
 
   let offBoardTracks = R.map(makeOffBoardTrack, hex.offBoardTrack || []);
 
-  let cities = <Position data={hex.cities}>{c => <City {...c} />}</Position>;
+  let outsideCities = (
+    <Position data={R.filter(c => c.outside === true, hex.cities || [])}>
+      {c => <City {...c} />}
+    </Position>
+  );
+  console.log(outsideCities);
+  let cities = (
+    <Position data={R.filter(c => c.outside !== true, hex.cities || [])}>
+      {c => <City {...c} />}
+    </Position>
+  );
 
+  let outsideCityBorders = (
+    <Position data={R.filter(c => c.coutside === true, hex.cities || [])}>
+      {c => <City {...c} border={true} />}
+    </Position>
+  );
   let cityBorders = (
-    <Position data={hex.cities}>{c => <City {...c} border={true} />}</Position>
+    <Position data={R.filter(c => c.coutside !== true, hex.cities || [])}>
+      {c => <City {...c} border={true} />}
+    </Position>
   );
 
   let towns = <Position data={hex.towns}>{t => <Town {...t} />}</Position>;
@@ -165,7 +182,9 @@ const HexTile = ({ hex, id, border }) => {
 
   let tokens = <Position data={hex.tokens}>{t => <Token {...t} />}</Position>;
 
-  let bonus = <Position data={hex.routeBonus}>{b => <RouteBonus {...b} />}</Position>;
+  let bonus = (
+    <Position data={hex.routeBonus}>{b => <RouteBonus {...b} />}</Position>
+  );
 
   return (
     <g>
@@ -197,13 +216,15 @@ const HexTile = ({ hex, id, border }) => {
         )}
       </HexContext.Consumer>
 
+      {outsideCityBorders}
       {border && <Hex border={true} />}
 
       {id && <Id id={idBase} extra={idExtra} />}
 
+      {outsideCities}
       {offBoardRevenue}
-              {industries}
-              {companies}
+      {industries}
+      {companies}
 
       {tunnels}
       {bridges}
