@@ -48,7 +48,7 @@ const Track = ({ type, gauge, border }) => {
       break;
   }
 
-  let width = border ? 14 : 10;
+  let width = border ? 16 : 12;
   let color = border ? colors["border"] : colors["track"];
 
   // Gauge
