@@ -6,7 +6,7 @@ import Name from "./Name";
 const Town = ({ border, name, color }) => {
   if (border) {
     return (
-      <rect width="24" height="14" x="-12" y="-7" fill={colors["border"]} />
+      <rect width="26" height="16" x="-13" y="-8" fill={colors["border"]} />
     );
   } else {
     let nameNode = null;
@@ -23,7 +23,7 @@ const Town = ({ border, name, color }) => {
     }
     return (
       <g>
-        <rect width="20" height="10" x="-10" y="-5" fill={colors[color] || colors["track"]} />
+        <rect width="22" height="12" x="-11" y="-6" fill={colors[color] || colors["track"]} />
         {nameNode}
       </g>
     );
