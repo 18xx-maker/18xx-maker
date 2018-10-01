@@ -1307,7 +1307,7 @@ const game = {
           cost: "L.160",
           size: "tiny"
         },
-        track: [{ type: "straight", side: 1, gauge: "narrow" }],
+        track: [{ type: "straight", side: 1, gauge: "narrow", offset: 12 }],
         hexes: ["I12"]
       },
       {
@@ -1393,7 +1393,7 @@ const game = {
         track: [
           { side: 2, gauge: "double" },
           { side: 3 },
-          { side: 4, gauge: "narrow" },
+          { side: 4, gauge: "narrow", offset: 2 },
           { side: 5, gauge: "narrow" },
           { side: 6 }
         ],

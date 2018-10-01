@@ -50,7 +50,7 @@ const makeTrack = track => {
   let type = track.type || util.trackType(track);
   return (
     <g transform={transform} key={`track-${type}-${point}`}>
-      <Track type={type} gauge={track.gauge} />
+      <Track type={type} gauge={track.gauge} offset={track.offset} />
     </g>
   );
 };
