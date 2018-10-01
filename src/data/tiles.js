@@ -5,12 +5,12 @@ const tiles = {
     values: [
       {
         angle: 150,
-        percent: 0.7,
+        percent: 0.8,
         value: 10
       },
       {
         angle: -30,
-        percent: 0.7,
+        percent: 0.8,
         value: 10
       }
     ],
@@ -20,14 +20,14 @@ const tiles = {
         y: 75,
         rotate: -45,
         angle: 225,
-        percent: 1.7216875
+        percent: 1.73
       },
       {
         x: 129.90375,
         y: -75,
         rotate: -45,
         angle: 45,
-        percent: 1.7216875
+        percent: 1.73
       }
     ],
     track: [
@@ -50,8 +50,8 @@ const tiles = {
         value: 10
       },
       {
-        angle: 33,
-        percent: 0.6,
+        angle: 30,
+        percent: 0.667,
         value: 10
       }
     ],
@@ -872,14 +872,14 @@ const tiles = {
     values: [
       {
         angle: -120,
-        percent: 0.2,
+        percent: 0.15,
         value: 10
       }
     ],
     towns: [
       {
         angle: 60,
-        percent: 0.288675,
+        percent: 0.28,
         rotate: -30
       }
     ],
@@ -1304,14 +1304,14 @@ const tiles = {
     values: [
       {
         angle: -120,
-        percent: 0.2,
+        percent: 0.15,
         value: 10
       }
     ],
     towns: [
       {
         angle: 60,
-        percent: 0.288675,
+        percent: 0.28,
         rotate: -30
       }
     ],
@@ -1319,7 +1319,8 @@ const tiles = {
       {
         type: "gentle",
         side: 1,
-        gauge: "narrow"
+        gauge: "narrow",
+        offset: 10
       }
     ]
   },
@@ -1337,7 +1338,8 @@ const tiles = {
       {
         type: "straight",
         side: 1,
-        gauge: "narrow"
+        gauge: "narrow",
+        offset: 3
       }
     ]
   },
@@ -1930,20 +1932,20 @@ const tiles = {
       {
         type: "port",
         angle: 60,
-        percent: 0.7
+        percent: 0.73
       }
     ],
     values: [
       {
         angle: -120,
-        percent: 0.2,
+        percent: 0.15,
         value: 30
       }
     ],
     towns: [
       {
         angle: 60,
-        percent: 0.288675,
+        percent: 0.28,
         rotate: -30
       }
     ],
@@ -2182,14 +2184,14 @@ const tiles = {
     values: [
       {
         angle: -120,
-        percent: 0.2,
+        percent: 0.15,
         value: 20
       }
     ],
     towns: [
       {
         angle: 60,
-        percent: 0.288675,
+        percent: 0.28,
         rotate: -30
       }
     ],
@@ -4137,7 +4139,7 @@ const tiles = {
     towns: [
       {
         angle: 60,
-        percent: 0.288675,
+        percent: 0.28,
         rotate: -30,
         color: "gray"
       }
@@ -4287,14 +4289,14 @@ const tiles = {
     values: [
       {
         angle: -120,
-        percent: 0.2,
+        percent: 0.15,
         value: 10
       }
     ],
     towns: [
       {
         angle: 60,
-        percent: 0.288675,
+        percent: 0.28,
         rotate: -30
       }
     ],
@@ -4685,14 +4687,14 @@ const tiles = {
     values: [
       {
         angle: -120,
-        percent: 0.2,
+        percent: 0.15,
         value: 20
       }
     ],
     towns: [
       {
         angle: 60,
-        percent: 0.288675,
+        percent: 0.28,
         rotate: -30
       }
     ],

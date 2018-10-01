@@ -3,7 +3,7 @@ import { colors } from "../data";
 
 import HexContext from "../context/HexContext";
 
-const Track = ({ type, gauge, border }) => {
+const Track = ({ type, gauge, border, offset }) => {
   let path;
 
   switch (type) {
@@ -53,8 +53,12 @@ const Track = ({ type, gauge, border }) => {
 
   // Gauge
   let strokeDashArray = "none";
+  let strokeDashOffset = "none";
   if (!border && gauge === "narrow") {
-    strokeDashArray = `${width},${width}`;
+    strokeDashArray = `${width}`;
+    if (offset) {
+      strokeDashOffset = `${offset}`;
+    }
   }
 
   // Line Gauge
@@ -74,6 +78,7 @@ const Track = ({ type, gauge, border }) => {
         strokeLinejoin="bevel"
         strokeWidth={width - 4}
         strokeDasharray={strokeDashArray}
+        strokeDashoffset={strokeDashOffset}
       />
     );
   }
@@ -91,6 +96,7 @@ const Track = ({ type, gauge, border }) => {
             strokeLinejoin="bevel"
             strokeWidth={width}
             strokeDasharray={strokeDashArray}
+            strokeDashoffset={strokeDashOffset}
           />
           {double}
         </g>
