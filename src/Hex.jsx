@@ -106,7 +106,6 @@ const HexTile = ({ hex, id, border }) => {
       {c => <City {...c} />}
     </Position>
   );
-  console.log(outsideCities);
   let cities = (
     <Position data={R.filter(c => c.outside !== true, hex.cities || [])}>
       {c => <City {...c} />}
@@ -114,7 +113,7 @@ const HexTile = ({ hex, id, border }) => {
   );
 
   let outsideCityBorders = (
-    <Position data={R.filter(c => c.coutside === true, hex.cities || [])}>
+    <Position data={R.filter(c => c.outside === true, hex.cities || [])}>
       {c => <City {...c} border={true} />}
     </Position>
   );
@@ -216,8 +215,8 @@ const HexTile = ({ hex, id, border }) => {
         )}
       </HexContext.Consumer>
 
-      {outsideCityBorders}
       {border && <Hex border={true} />}
+      {outsideCityBorders}
 
       {id && <Id id={idBase} extra={idExtra} />}
 
