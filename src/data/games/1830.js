@@ -1482,7 +1482,7 @@ const game = {
         towns: [
           {
             name: {
-              name: "Fall River"
+              name: "Mansfield"
             }
           }
         ],
