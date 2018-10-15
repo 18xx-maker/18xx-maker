@@ -25,7 +25,7 @@ npm run start
 ### Adding a game
 
 1. Copy one of the game files you feel should be closest to the game you're
-   entering from the [data/games](data/games) folder. Rename it and edit it as
+   entering from the [src/data/games](src/data/games) folder. Rename it and edit it as
    much as needed.
 
 2. In order for this new game to show up in the UI, please add it to the
