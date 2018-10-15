@@ -3,6 +3,8 @@
 This is a small pet project to help layout and print
 [18xx](https://en.wikipedia.org/wiki/18XX) games.
 
+My current version is always running at [https://18xx.kelsin.net].
+
 This project was bootstrapped with [Create React
 App](https://github.com/facebookincubator/create-react-app).
 
