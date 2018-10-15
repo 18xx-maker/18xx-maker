@@ -3,7 +3,8 @@
 This is a small pet project to help layout and print
 [18xx](https://en.wikipedia.org/wiki/18XX) games.
 
-My current version is always running at [https://18xx.kelsin.net].
+My current version is always running at
+[https://18xx.kelsin.net](https://18xx.kelsin.net).
 
 This project was bootstrapped with [Create React
 App](https://github.com/facebookincubator/create-react-app).
@@ -27,13 +28,12 @@ npm run start
    entering from the `data/games` folder, rename it and edit it.
 
 2. In order for this new game to show up in the UI, please add it to the
-   exported object in
-   [https://github.com/kelsin/18xx/blob/master/src/data/games/index.js].
+   exported object in the [src/data/games/index.js](src/data/games/index.js)
+   file.
 
 ### Adding tiles
 
-1. Edit [https://github.com/kelsin/18xx/blob/master/src/data/tiles.js] and add
-   your tile.
+1. Edit [src/data/tiles.js](src/data/tiles.js) and add your tile.
 
 2. If your tile is a variant you can include a `|` in the name. Everything
    before the `|` will be shown on the tile, but anything after won't.
@@ -41,4 +41,4 @@ npm run start
 ### Editing simple options
 
 Until more things get added to the UI, simple options can be edited in the
-[https://github.com/kelsin/18xx/blob/master/src/data/index.js] file.
+[src/data/index.js](src/data/index.js) file.
