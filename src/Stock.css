@@ -24,6 +24,10 @@
   align-content: flex-end;
 }
 
+.StockPageWrapper .StockHelpers {
+  padding: 0.375in 0.125in;
+}
+
 .Token {
   position: relative;
 }

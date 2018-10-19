@@ -1,5 +1,7 @@
 import React from "react";
 import * as R from "ramda";
+import * as util from "./market-utils";
+import * as tinycolor from "tinycolor2";
 
 import MarketCell from "./MarketCell";
 
@@ -79,11 +81,26 @@ const Market1Diag = ({ legend, market, par, title }) => {
   );
 };
 
-const Market2D = ({ legend, market, par, title }) => {
+const Market2D = ({ legend, market, par, title, displayMode, paginated, cell }) => {
+  market = util.normalize(market);
   let rows = R.addIndex(R.map)((marketRow, row) => {
     let cells = R.addIndex(R.map)((value, col) => {
+      if (displayMode === "delta") {
+        if (value) {
+          if (!R.is(Object, value)) {
+            value = { label: value, value: value };
+          } else {
+          value = R.clone(value);
+        }
+          let delta = util.delta(col, row, market);
+          value.subLabel = delta;
+          // value.rawColor = tinycolor.fromRatio({h:(delta * 0.00667 * 4.0), s:0.85, v:0.85}).toHexString();
+          value.rawColor = tinycolor.fromRatio({h:0.0, l:(R.min((25 - delta) * 0.04, 1.0)), s:0.5}).toHexString();
+        }
+      }
+
       return (
-        <MarketCell {...{ value, legend, par }} key={`cell-${row}-${col}`} />
+        <MarketCell {...{ value, legend, par, ...(paginated ? cell : {}) }} key={`cell-${row}-${col}`} />
       );
     }, marketRow);
     return <tr key={row}>{cells}</tr>;

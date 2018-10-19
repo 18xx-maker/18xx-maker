@@ -11,6 +11,7 @@ const Games = () => {
           game={game}
           ipo={games[game].ipo}
           paginated={!(games[game].info.paginated === false)}
+          paginatedMarket={games[game].stock.paginated}
         />
       </div>
     );
