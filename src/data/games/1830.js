@@ -442,13 +442,13 @@ const game = {
     },
     market: [
       [
-        { label: 60, legend: 0, arrow: "down" },
+        { value: 60, label: 60, legend: 0, arrow: "down" },
         67,
         71,
         76,
         82,
         90,
-        { label: 100, par: true },
+        { value: 100, label: 100, par: true },
         112,
         126,
         142,
@@ -463,13 +463,13 @@ const game = {
         350
       ],
       [
-        { label: 53, legend: 0, arrow: "down" },
-        { label: 60, legend: 0 },
+        { value: 53, label: 53, legend: 0, arrow: "down" },
+        { value: 60, label: 60, legend: 0 },
         66,
         70,
         76,
         82,
-        { label: 90, par: true },
+        { value: 90, label: 90, par: true },
         100,
         112,
         126,
@@ -481,16 +481,16 @@ const game = {
         240,
         260,
         280,
-        { label: 300, arrow: "up" }
+        { value: 300, label: 300, arrow: "up" }
       ],
       [
-        { label: 46, legend: 0, arrow: "down" },
-        { label: 55, legend: 0 },
-        { label: 60, legend: 0 },
+        { value: 46, label: 46, legend: 0, arrow: "down" },
+        { value: 55, label: 55, legend: 0 },
+        { value: 60, label: 60, legend: 0 },
         65,
         70,
         76,
-        { label: 82, par: true },
+        { value: 82, label: 82, par: true },
         90,
         100,
         111,
@@ -499,95 +499,95 @@ const game = {
         155,
         170,
         185,
-        { label: 200, arrow: "up" }
+        { value: 200, label: 200, arrow: "up" }
       ],
       [
-        { label: 39, legend: 1, arrow: "down" },
-        { label: 48, legend: 0 },
-        { label: 54, legend: 0 },
-        { label: 60, legend: 0 },
+        { value: 39, label: 39, legend: 1, arrow: "down" },
+        { value: 48, label: 48, legend: 0 },
+        { value: 54, label: 54, legend: 0 },
+        { value: 60, label: 60, legend: 0 },
         66,
         71,
-        { label: 76, par: true },
+        { value: 76, label: 76, par: true },
         82,
         90,
         100,
         110,
         120,
-        { label: 130, arrow: "up" }
+        { value: 130, label: 130, arrow: "up" }
       ],
       [
-        { label: 32, legend: 1, arrow: "down" },
-        { label: 41, legend: 1 },
-        { label: 48, legend: 0 },
-        { label: 55, legend: 0 },
+        { value: 32, label: 32, legend: 1, arrow: "down" },
+        { value: 41, label: 41, legend: 1 },
+        { value: 48, label: 48, legend: 0 },
+        { value: 55, label: 55, legend: 0 },
         62,
         67,
-        { label: 71, par: true },
+        { value: 71, label: 71, par: true },
         76,
         82,
         90,
-        { label: 100, arrow: "up" }
+        { value: 100, label: 100, arrow: "up" }
       ],
       [
-        { label: 25, legend: 2, arrow: "down" },
-        { label: 34, legend: 1 },
-        { label: 42, legend: 1 },
-        { label: 50, legend: 0 },
-        { label: 58, legend: 0 },
+        { value: 25, label: 25, legend: 2, arrow: "down" },
+        { value: 34, label: 34, legend: 1 },
+        { value: 42, label: 42, legend: 1 },
+        { value: 50, label: 50, legend: 0 },
+        { value: 58, label: 58, legend: 0 },
         65,
-        { label: 67, par: true },
+        { value: 67, label: 67, par: true },
         71,
         75,
-        { label: 80, arrow: "up" }
+        { value: 80, label: 80, arrow: "up" }
       ],
       [
-        { label: 18, legend: 2, arrow: "down" },
-        { label: 27, legend: 2 },
-        { label: 36, legend: 1 },
-        { label: 45, legend: 1 },
-        { label: 54, legend: 0 },
+        { value: 18, label: 18, legend: 2, arrow: "down" },
+        { value: 27, label: 27, legend: 2 },
+        { value: 36, label: 36, legend: 1 },
+        { value: 45, label: 45, legend: 1 },
+        { value: 54, label: 54, legend: 0 },
         63,
         67,
         69,
-        { label: 70, arrow: "up" }
+        { value: 70, label: 70, arrow: "up" }
       ],
       [
-        { label: 10, legend: 2 },
-        { label: 12, legend: 2 },
-        { label: 30, legend: 2 },
-        { label: 40, legend: 1 },
-        { label: 50, legend: 0 },
-        { label: 60, legend: 0 },
+        { value: 10, label: 10, legend: 2 },
+        { value: 12, label: 12, legend: 2 },
+        { value: 30, label: 30, legend: 2 },
+        { value: 40, label: 40, legend: 1 },
+        { value: 50, label: 50, legend: 0 },
+        { value: 60, label: 60, legend: 0 },
         67,
-        { label: 68, arrow: "up" }
+        { value: 68, label: 68, arrow: "up" }
       ],
       [
         null,
-        { label: 10, legend: 2 },
-        { label: 20, legend: 2 },
-        { label: 30, legend: 2 },
-        { label: 40, legend: 1 },
-        { label: 50, legend: 0 },
-        { label: 60, legend: 0, arrow: "up" }
-      ],
-      [
-        null,
-        null,
-        { label: 10, legend: 2 },
-        { label: 20, legend: 2 },
-        { label: 30, legend: 2 },
-        { label: 40, legend: 1 },
-        { label: 50, legend: 0, arrow: "up" }
+        { value: 10, label: 10, legend: 2 },
+        { value: 20, label: 20, legend: 2 },
+        { value: 30, label: 30, legend: 2 },
+        { value: 40, label: 40, legend: 1 },
+        { value: 50, label: 50, legend: 0 },
+        { value: 60, label: 60, legend: 0, arrow: "up" }
       ],
       [
         null,
         null,
+        { value: 10, label: 10, legend: 2 },
+        { value: 20, label: 20, legend: 2 },
+        { value: 30, label: 30, legend: 2 },
+        { value: 40, label: 40, legend: 1 },
+        { value: 50, label: 50, legend: 0, arrow: "up" }
+      ],
+      [
         null,
-        { label: 10, legend: 2 },
-        { label: 20, legend: 2 },
-        { label: 30, legend: 2 },
-        { label: 40, legend: 1, arrow: "up" }
+        null,
+        null,
+        { value: 10, label: 10, legend: 2 },
+        { value: 20, label: 20, legend: 2 },
+        { value: 30, label: 30, legend: 2 },
+        { value: 40, label: 40, legend: 1, arrow: "up" }
       ]
     ],
     legend: [

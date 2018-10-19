@@ -13,7 +13,6 @@ import Charters from "./Charters";
 import Home from "./Home";
 import IPO from "./IPO";
 import Revenue from "./Revenue";
-import Stock from "./Stock";
 import Tokens from "./Tokens";
 
 import TileSheet from "./TileSheet";
@@ -21,6 +20,9 @@ import TileManifest from "./TileManifest";
 
 import MapPaginated from "./MapPaginated";
 import MapSingle from "./MapSingle";
+
+import Stock from "./Stock";
+import StockPaginated from "./StockPaginated";
 
 import GameMenu from "./GameMenu";
 
@@ -46,11 +48,12 @@ class App extends Component {
             <Route path="/:game/charters" component={Charters} />
             <Route path="/:game/ipo" component={IPO} />
             <Route exact path="/:game/map" component={MapSingle} />
-            <Route path="/:game/map/:variation" component={MapSingle} />
             <Route exact path="/:game/map-paginated" component={MapPaginated} />
+            <Route path="/:game/map/:variation" component={MapSingle} />
             <Route path="/:game/map-paginated/:variation" component={MapPaginated} />
             <Route path="/:game/revenue" component={Revenue} />
-            <Route path="/:game/stock" component={Stock} />
+            <Route exact path="/:game/stock" component={Stock} />
+            <Route path="/:game/stock-paginated" component={StockPaginated} />
             <Route path="/:game/tiles" component={TileSheet} />
             <Route path="/:game/manifest" component={TileManifest} />
             <Route path="/:game/tokens" component={Tokens} />

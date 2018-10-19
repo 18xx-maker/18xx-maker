@@ -1,8 +1,9 @@
 import React from "react";
 import * as R from "ramda";
-import { colors, textColor } from "./data";
+import { colors, textColor, stock } from "./data";
+import * as tinycolor from "tinycolor2";
 
-const MarketCell = ({ value, legend, par, colSpan }) => {
+const MarketCell = ({ value, legend, par, colSpan, width, height }) => {
   let color = null;
   let companies = null;
 
@@ -14,7 +15,11 @@ const MarketCell = ({ value, legend, par, colSpan }) => {
   }
 
   let labelColor = textColor("plain");
-  if (value && value.color) {
+  if (value && value.rawColor) {
+    let tc = tinycolor(value.rawColor);
+    color = tc.toHexString();
+    labelColor = tinycolor.mostReadable(tc, ["#000000", "#ffffff"]).toHexString();
+  } else if (value && value.color) {
     color = colors[value.color];
     labelColor = colors[value.textColor] || textColor(value.color || "white");
   } else if (
@@ -57,13 +62,18 @@ const MarketCell = ({ value, legend, par, colSpan }) => {
 
   return (
     <td
-      style={{ backgroundColor: color, color: labelColor }}
+      style={{
+        backgroundColor: color,
+        color: labelColor,
+        width: width ? `${width}in` : "auto",
+        height: height ? `${height}in` : "auto"
+      }}
       className={classes.join(" ")}
       colSpan={colSpan}
     >
       {(value && value.label) || value}
       {value &&
-        value.subLabel && (
+        R.has("subLabel") && (
           <span className="MarketCell--SubLabel">{value.subLabel}</span>
         )}
       {companies}

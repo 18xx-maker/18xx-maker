@@ -678,6 +678,10 @@ ul.notes li span {
   page-break-inside: avoid;
 }
 
+.cutlines-inner {
+  position: relative;
+}
+
 .cutlines:before {
   content: '';
   width: 0.25in;

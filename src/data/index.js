@@ -45,16 +45,8 @@ const paper = {
 const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 const textColor = color => {
-  switch (color) {
-    case "yellow":
-    case "cyan":
-    case "plain":
-    case "white":
-    case "gray":
-      return "rgb(0,0,0)";
-    default:
-      return "rgb(255,255,255)";
-  }
+  let tc = tinycolor(colors[color]);
+  return tinycolor.mostReadable(tc, ["white", "black"]).toRgbString();
 };
 
 const strokeColor = color =>

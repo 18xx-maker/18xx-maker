@@ -13,7 +13,7 @@ const GameMenu = ({ match, location }) => {
 
   let gameList = R.map(title => {
     let to = `/${title}/map`;
-    if(game) {
+    if (game) {
       to = location.pathname.replace(game, title);
     }
 
@@ -39,6 +39,7 @@ const GameMenu = ({ match, location }) => {
           game={match.params.game}
           ipo={game.ipo}
           paginated={!(games[match.params.game].info.paginated === false)}
+          paginatedMarket={games[match.params.game].stock.paginated}
         />
       )}
     </div>
