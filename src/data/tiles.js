@@ -4257,7 +4257,7 @@ const tiles = {
         angle: 30,
         percent: 0.57735,
         rotation: -60,
-        color: "gray"
+        color: "halt"
       }
     ],
     track: [{ type: "sharp", side: 1 }]
@@ -4277,7 +4277,7 @@ const tiles = {
         angle: 60,
         percent: 0.28,
         rotate: -30,
-        color: "gray"
+        color: "halt"
       }
     ],
     track: [
@@ -4299,7 +4299,7 @@ const tiles = {
     ],
     towns: [
       {
-        color: "gray"
+        color: "halt"
       }
     ],
     track: [{ type: "straight", side: 1 }]
@@ -4325,12 +4325,12 @@ const tiles = {
     towns: [
       {
         percent: 0.333,
-        color: "gray"
+        color: "halt"
       },
       {
         angle: 180,
         percent: 0.333,
-        color: "gray"
+        color: "halt"
       }
     ],
     track: [{ type: "straight", side: 1 }]
@@ -4358,7 +4358,7 @@ const tiles = {
         angle: 225,
         percent: 1.73,
         rotate: -45,
-        color: "gray"
+        color: "halt"
       },
       {
         x: -129.88125,
@@ -4366,7 +4366,7 @@ const tiles = {
         angle: 255,
         percent: 1.73,
         rotate: -15,
-        color: "gray"
+        color: "halt"
       }
     ],
     track: [
@@ -4471,7 +4471,7 @@ const tiles = {
         size: 15
       }
     ],
-    centerTowns: [{ color: "gray" }],
+    centerTowns: [{ color: "halt" }],
     track: [{ side: 1 }, { side: 2 }, { side: 6 }]
   },
   "751": {
@@ -4484,7 +4484,7 @@ const tiles = {
         size: 15
       }
     ],
-    centerTowns: [{ color: "gray" }],
+    centerTowns: [{ color: "halt" }],
     track: [{ side: 1 }, { side: 4 }, { side: 6 }]
   },
   "752": {
@@ -4497,7 +4497,7 @@ const tiles = {
         size: 15
       }
     ],
-    centerTowns: [{ color: "gray" }],
+    centerTowns: [{ color: "halt" }],
     track: [{ side: 1 }, { side: 4 }, { side: 2 }]
   },
   "753": {
@@ -4510,7 +4510,7 @@ const tiles = {
         size: 15
       }
     ],
-    centerTowns: [{ color: "gray" }],
+    centerTowns: [{ color: "halt" }],
     track: [{ side: 1 }, { side: 3 }, { side: 5 }]
   },
   "754": {
@@ -4533,7 +4533,7 @@ const tiles = {
     ],
     towns: [
       {
-        color: "gray",
+        color: "halt",
         angle: 180,
         percent: 0.5
       }
@@ -4561,7 +4561,7 @@ const tiles = {
     ],
     towns: [
       {
-        color: "gray",
+        color: "halt",
         angle: 180,
         percent: 0.5
       }
@@ -4707,7 +4707,7 @@ const tiles = {
     ],
     towns: [
       {
-        color: "gray",
+        color: "halt",
         percent: 0.667
       }
     ],
@@ -5212,7 +5212,7 @@ const tiles = {
     ],
     towns: [
       {
-        color: "gray",
+        color: "halt",
         angle: 180,
         percent: 0.667
       }
@@ -5240,7 +5240,7 @@ const tiles = {
     ],
     towns: [
       {
-        color: "gray",
+        color: "halt",
         angle: 180,
         percent: 0.667
       }
@@ -5268,7 +5268,7 @@ const tiles = {
     ],
     towns: [
       {
-        color: "gray",
+        color: "halt",
         angle: 180,
         percent: 0.667
       }
@@ -5296,7 +5296,7 @@ const tiles = {
     ],
     towns: [
       {
-        color: "gray",
+        color: "halt",
         angle: 180,
         percent: 0.667
       }
@@ -5369,7 +5369,7 @@ const tiles = {
         percent: 0.25
       },
       {
-        color: "gray",
+        color: "halt",
         percent: 0.667
       }
     ],
@@ -5416,7 +5416,7 @@ const tiles = {
     ],
     centerTowns: [
       {
-        color: "gray",
+        color: "halt",
         percent: 0.667
       }
     ],
@@ -5463,7 +5463,7 @@ const tiles = {
     ],
     centerTowns: [
       {
-        color: "gray",
+        color: "halt",
         percent: 0.667
       }
     ],

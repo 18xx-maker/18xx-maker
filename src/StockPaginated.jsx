@@ -1,12 +1,11 @@
 import React from "react";
 import games from "./data/games";
-import Title from "./Title";
 import util from "./util";
 import Market from "./Market";
 import * as mutil from "./market-utils";
 import * as data from "./data";
 import * as R from "ramda";
-import { NavLink, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import Rounds from "./Rounds";
 import Par from "./Par";

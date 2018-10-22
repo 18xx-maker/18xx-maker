@@ -1,6 +1,6 @@
 import React from "react";
 import * as R from "ramda";
-import { colors, textColor } from "./data";
+import { colors, textColor, market } from "./data";
 
 const groupValues = values => {
   return R.reduce(
@@ -33,7 +33,11 @@ const ParCell = ({ value, par, legend, colSpan }) => {
     <td
       style={{
         backgroundColor: colors[color],
-        color: textColor(color)
+        color: textColor(color),
+        fontFamily: market.par.fontFamily,
+        fontWeight: market.par.fontWeight,
+        fontSize: market.par.fontSize,
+        lineHeight: market.par.fontSize
       }}
       colSpan={colSpan || 2}
     >
