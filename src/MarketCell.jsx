@@ -1,6 +1,6 @@
 import React from "react";
 import * as R from "ramda";
-import { colors, textColor, stock } from "./data";
+import { colors, textColor, market } from "./data";
 import * as tinycolor from "tinycolor2";
 
 const MarketCell = ({ value, legend, par, colSpan, width, height }) => {
@@ -18,7 +18,9 @@ const MarketCell = ({ value, legend, par, colSpan, width, height }) => {
   if (value && value.rawColor) {
     let tc = tinycolor(value.rawColor);
     color = tc.toHexString();
-    labelColor = tinycolor.mostReadable(tc, ["#000000", "#ffffff"]).toHexString();
+    labelColor = tinycolor
+      .mostReadable(tc, ["#000000", "#ffffff"])
+      .toHexString();
   } else if (value && value.color) {
     color = colors[value.color];
     labelColor = colors[value.textColor] || textColor(value.color || "white");
@@ -66,7 +68,11 @@ const MarketCell = ({ value, legend, par, colSpan, width, height }) => {
         backgroundColor: color,
         color: labelColor,
         width: width ? `${width}in` : "auto",
-        height: height ? `${height}in` : "auto"
+        height: height ? `${height}in` : "auto",
+        fontFamily: market.fontFamily,
+        fontWeight: market.fontWeight,
+        fontSize: market.fontSize,
+        lineHeight: market.fontSize
       }}
       className={classes.join(" ")}
       colSpan={colSpan}
@@ -83,7 +89,11 @@ const MarketCell = ({ value, legend, par, colSpan, width, height }) => {
             style={{
               color: value.arrowColor
                 ? colors[value.arrowColor]
-                : colors["black"]
+                : colors["black"],
+              fontFamily: market.arrow.fontFamily,
+              fontWeight: market.arrow.fontWeight,
+              fontSize: market.arrow.fontSize,
+              lineHeight: market.arrow.fontSize
             }}
             className={`Arrow Arrow--${value.arrow}`}
           >

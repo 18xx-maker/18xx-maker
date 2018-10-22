@@ -2,6 +2,9 @@ import React, { Component } from "react";
 
 import "./App.css";
 
+import * as R from "ramda";
+import { fonts } from "./data";
+
 import Tiles from "./Tiles";
 import SingleTile from "./SingleTile";
 import Atoms from "./atoms";
@@ -33,9 +36,20 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
   render() {
+    let fontLinks = R.map(
+      font => (
+        <link
+          key={font}
+          href={`https://fonts.googleapis.com/css?family=${font}`}
+          rel="stylesheet"
+        />
+      ),
+      fonts
+    );
     return (
       <Router>
         <div className="App">
+          {fontLinks}
           <Switch>
             <Route exact path="/" component={Home} />
 
@@ -52,7 +66,10 @@ class App extends Component {
             <Route exact path="/:game/map" component={MapSingle} />
             <Route exact path="/:game/map-paginated" component={MapPaginated} />
             <Route path="/:game/map/:variation" component={MapSingle} />
-            <Route path="/:game/map-paginated/:variation" component={MapPaginated} />
+            <Route
+              path="/:game/map-paginated/:variation"
+              component={MapPaginated}
+            />
             <Route path="/:game/revenue" component={Revenue} />
             <Route exact path="/:game/stock" component={Stock} />
             <Route path="/:game/stock-paginated" component={StockPaginated} />
@@ -65,7 +82,7 @@ class App extends Component {
             <Route path="/tiles" component={GameMenu} />
             <Route path="/:game/" component={GameMenu} />
           </Switch>
-          <Footer/>
+          <Footer />
         </div>
       </Router>
     );
