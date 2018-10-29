@@ -13,194 +13,99 @@ const game = {
   },
 
   // Extra Tokens
-  tokens: ["Round", "60", "60"],
+  tokens: ["Round", "#mountain60", "#mountain60", "#mountain60", "#mountain60", "#mountain60", "#mountain60", "#mountain60", "#mountain60",
+          "#mountain120", "#mountain120", "#mountain120", "#mountain120", "#mountain120", "#mountain120", "#mountain120", "#mountain120"],
 
   // Need an IPO sheet
   ipo: false,
 
-  bank: "$12,000",
+  bank: "£12,000",
 
   players: [
     {
       number: 2,
       certLimit: 28,
-      capital: "$750"
+      capital: "£750"
     },
     {
       number: 3,
       certLimit: 20,
-      capital: "$450"
+      capital: "£450"
     },
     {
       number: 4,
       certLimit: 16,
-      capital: "$350"
+      capital: "£350"
     },
     {
       number: 5,
       certLimit: 13,
-      capital: "$300"
+      capital: "£300"
     },
     {
       number: 6,
       certLimit: 11,
-      capital: "$250"
+      capital: "£250"
     }
   ],
 
   // Railway Companies
   companies: [
     {
-      name: "Pennsylvania",
-      abbrev: "PRR",
-      tokens: ["Free", "$40", "$100", "$100"],
-      color: "darkGreen",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
+      name: "Belgian National Railways",
+      abbrev: "BNR",
+      tokens: ["Free", "Free", "Free", "Free"],
+      color: "darkYellow",
+      shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
     },
     {
-      name: "New York Central",
-      abbrev: "NYC",
-      tokens: ["Free", "$40", "$100", "$100"],
-      color: "black",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Canadian Pacific",
-      abbrev: "CPR",
-      tokens: ["Free", "$40", "$100", "$100"],
-      color: "red",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Baltimore & Ohio",
-      abbrev: "B&O",
-      tokens: ["Free", "$40", "$100"],
-      color: "blue",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Chesapeake & Ohio",
-      abbrev: "C&O",
-      tokens: ["Free", "$40", "$100"],
-      color: "cyan",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Erie",
-      abbrev: "ERIE",
-      tokens: ["Free", "$40", "$100"],
+      name: "Dutch Railways",
+      abbrev: "DR",
+      tokens: ["Free", "Free", "Free", "Free"],
       color: "yellow",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
+      shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
     },
     {
-      name: "New York, New Haven & Hartford",
-      abbrev: "NYNH",
-      tokens: ["Free", "$40"],
-      color: "orange",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
+      name: "Italian State Railways",
+      abbrev: "FS",
+      tokens: ["Free", "Free", "Free", "Free"],
+      color: "green",
+      shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
     },
     {
-      name: "Boston & Maine",
-      abbrev: "B&M",
-      tokens: ["Free", "$40"],
-      color: "maroon",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
+      name: "Royal Bavarian State Railroad",
+      abbrev: "RBSR",
+      tokens: ["Free", "Free", "Free", "Free"],
+      color: "lightBlue",
+      shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
+    },
+    {
+      name: "Royal Prussian Railway",
+      abbrev: "RPR",
+      tokens: ["Free", "Free", "Free", "Free"],
+      color: "cyan",
+      shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
+    },
+    {
+      name: "Austrial Imperial Royal State",
+      abbrev: "AIRS",
+      tokens: ["Free", "Free", "Free", "Free"],
+      color: "yellow",
+      shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
+    },
+    {
+      name: "SNCF",
+      abbrev: "SNCF",
+      tokens: ["Free", "Free", "Free", "Free"],
+      color: "red",
+      shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
+    },
+    {
+      name: "German State Railways",
+      abbrev: "GSR",
+      tokens: ["Free", "Free", "Free", "Free"],
+      color: "Black",
+      shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
     }
   ],
 
@@ -208,7 +113,7 @@ const game = {
     {
       name: "2",
       quantity: 15,
-      price: "$0",
+      price: "£0",
       color: "yellow",
       info: [
         {
@@ -230,9 +135,21 @@ const game = {
       ]
     },
     {
+      name: "P",
+      quantity: 5,
+      price: "£100",
+      color: "gray",
+      info: [
+        {
+          color: "yellow",
+          note: "Permanent"
+        }
+      ]
+    },
+    {
       name: "4",
       quantity: 4,
-      price: "$300",
+      price: "£300",
       color: "green",
       info: [
         {
@@ -244,7 +161,7 @@ const game = {
     {
       name: "5",
       quantity: 3,
-      price: "$500",
+      price: "£500",
       color: "brown",
       info: [
         {
@@ -256,7 +173,7 @@ const game = {
     {
       name: "6",
       quantity: 2,
-      price: "$600",
+      price: "£600",
       color: "brown",
       info: [
         {
@@ -268,7 +185,7 @@ const game = {
     {
       name: "8",
       quantity: 8,
-      price: "$800",
+      price: "£800",
       color: "brown",
       info: [
         {
@@ -282,20 +199,21 @@ const game = {
   phases: [
     {
       name: "2",
-      limit: "4",
-      number: "6",
-      tiles: "yellow"
+      limit: "4/2",
+      number: "15",
+      tiles: "yellow",
     },
     {
       name: "3",
       limit: "4",
       number: "5",
       tiles: "green",
+      notes: "Pullman's are available after first 3T is puchased. Red to Red £10 bonus per station."
     },
     {
       name: "4",
       rust: "2",
-      limit: "3",
+      limit: "3/1",
       number: "4",
       tiles: "green"
     },
@@ -304,7 +222,7 @@ const game = {
       limit: "2",
       number: "3",
       tiles: "brown",
-      notes: "Final Exchange Round after ORs finish"
+      notes: "Final Exchange Round after ORs finish. Red to Red £20 bonus per station."
     },
     {
       name: "6",
@@ -316,9 +234,10 @@ const game = {
     {
       name: "8",
       limit: "2",
-      number: "6",
+      number: "U",
       rust: "4",
-      tiles: "brown"
+      tiles: "gray",
+      notes: "Red to Red £30 bonus per station."
     }
   ],
 
@@ -337,10 +256,15 @@ const game = {
             "No more than 50% of a corporation's shares may be in the market at any time"
         },
         {
+          color: "yellow",
+          icon: "exclamation",
+          note: "As long as a company has not operated a Minor can be merged into it for 1 share."
+        },
+        {
           color: "red",
           icon: "times",
           note: "Shares in a company cannot be sold until that company has operated"
-        }
+        },
       ]
     }
   ],
@@ -700,7 +624,7 @@ const game = {
       {
         color: "yellow",
         track: [{ side: 2, type: "gentle" }],
-        mountain: { size: "medium", cost: "$60", angle: 300, percent: 0.5 },
+        mountain: { size: "medium", cost: "£60", angle: 300, percent: 0.5 },
         labels: [ { label: "Semmering", percent: .7, size: "medium" } ],
         hexes: ["K16"]
       },
@@ -808,47 +732,47 @@ const game = {
       {
         color: "plain",
         centerTowns: [ { name: { name: "Nice" }, y: -10 } ],
-        mountain: { cost: "$60", size: "medium", y: 40 },
+        mountain: { cost: "£60", size: "medium", y: 40 },
         hexes: ["C20"]
       },
       {
         color: "plain",
         centerTowns: [ { name: { name: "Zurich" }, y: -10 } ],
-        mountain: { cost: "$60", size: "medium", y: 40 },
+        mountain: { cost: "£60", size: "medium", y: 40 },
         hexes: ["E14"]
       },
       {
         color: "plain",
         centerTowns: [ { name: { name: "Innsbruck" }, y: -10 } ],
-        mountain: { cost: "$60", size: "medium", y: 40 },
+        mountain: { cost: "£60", size: "medium", y: 40 },
         hexes: ["H15"]
       },
       {
         color: "plain",
         centerTowns: [ { name: { name: "Salzburg" }, y: -10 } ],
-        mountain: { cost: "$60", size: "medium", y: 40 },
+        mountain: { cost: "£60", size: "medium", y: 40 },
         hexes: ["I14"]
       },
       {
         color: "plain",
         centerTowns: [ { name: { name: "Pressburg" }, y: -10 } ],
-        mountain: { cost: "$60", size: "medium", y: 40 },
+        mountain: { cost: "£60", size: "medium", y: 40 },
         hexes: ["L15"]
       },
       {
         color: "plain",
         centerTowns: [ { name: { name: "Krakau" }, y: -10 } ],
-        mountain: { cost: "$60", size: "medium", y: 40 },
+        mountain: { cost: "£60", size: "medium", y: 40 },
         hexes: ["M10"]
       },
       {
         color: "plain",
-        mountain: { cost: "$60", size: "medium" },
+        mountain: { cost: "£60", size: "medium" },
         hexes: ["A14", "A16", "C10", "D9", "D11", "F15", "G16", "I10", "I12", "J9", "J13", "K8", "L9"]
       },
       {
         color: "plain",
-        mountain: { cost: "$120", size: "large" },
+        mountain: { cost: "£120", size: "large" },
         hexes: ["C18", "D17", "E16", "F17", "G18", "H17", "I16", "J15"]
       },
       {

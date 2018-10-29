@@ -8,6 +8,9 @@ const Value = ({ type }) => {
     case "meat":
       icon = <use href="#meat" />;
       break;
+    case "mountain":
+      icon = <use href="#mountain" />;
+      break;
     case "port":
     case "steam":
     default:
