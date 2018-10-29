@@ -213,7 +213,8 @@ const Atoms = () => {
         <Border color="black" />,
         <Border color="water" />,
         <Border color="mountain" />,
-        <Border color="red" />
+        <Border color="red" />,
+        <Border color="gray" dashed="true" />,
       ]
     },
     {
