@@ -156,6 +156,7 @@ const Atoms = () => {
           "city",
           "mid",
           "straightStop",
+          "straightLawson",
           "straight",
           "gentleStop",
           "gentleStopRev",
