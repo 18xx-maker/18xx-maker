@@ -713,6 +713,12 @@ const game = {
         color: "plain",
         labels: [ { label: "Y", angle: 270, percent: .75 } ],
         cities: [ { name: { name: "Brussels" }, companies: [ { label: "2", color: "white"} ]} ],
+        borders: [ { side: 1, dashed: "true", color: "gray" },
+					{ side: 2, dashed: "true", color: "gray" },
+					{ side: 3, dashed: "true", color: "gray" },
+					{ side: 4, dashed: "true", color: "gray" },
+					{ side: 5, dashed: "true", color: "gray" },
+					{ side: 6, dashed: "true", color: "gray" } ],
         hexes: ["C8"]
       },
       {
@@ -852,6 +858,12 @@ const game = {
       {
         color: "plain",
         centerTowns: [ { name: { name: "Florence" } } ],
+        borders: [ { side: 1, dashed: "true", color: "gray" },
+					{ side: 2, dashed: "true", color: "gray" },
+					{ side: 3, dashed: "true", color: "gray" },
+					{ side: 4, dashed: "true", color: "gray" },
+					{ side: 5, dashed: "true", color: "gray" },
+					{ side: 6, dashed: "true", color: "gray" } ],
         hexes: ["F21"]
       },
       {
@@ -948,7 +960,6 @@ const game = {
           "A18",
           "A20",
           "B9",
-          "B11",
           "B15",
           "C12",
           "C14",
@@ -959,7 +970,6 @@ const game = {
           "F5",
           "F7",
           "F13",
-          "F19",
           "G4",
           "G8",
           "G14",
@@ -970,7 +980,6 @@ const game = {
           "H13",
           "H21",
           "I4",
-          "I6",
           "J3",
           "J17",
           "J19",
@@ -986,6 +995,20 @@ const game = {
           "M12",
           "M14",
         ]
+      },
+      {
+        color: "plain",
+        hexes: [
+          "B11",
+					"F19",
+					"I6",
+        ],
+        borders: [ { side: 1, dashed: "true", color: "gray" },
+					{ side: 2, dashed: "true", color: "gray" },
+					{ side: 3, dashed: "true", color: "gray" },
+					{ side: 4, dashed: "true", color: "gray" },
+					{ side: 5, dashed: "true", color: "gray" },
+					{ side: 6, dashed: "true", color: "gray" } ],
       },
       {
         color: "green",
