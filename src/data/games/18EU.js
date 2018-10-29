@@ -348,7 +348,7 @@ const game = {
   rounds: [
     {
       name: "OR2",
-      color: "green"
+      color: "yellow"
     },
     {
       name: "OR1",
@@ -357,7 +357,7 @@ const game = {
     {
       name: "SR",
       color: "gray"
-    }
+    },
   ],
 
   turns: [
@@ -385,184 +385,93 @@ const game = {
 
   stock: {
     type: "2D",
-    par: {
-      values: [100, 90, 82, 76, 71, 67]
-    },
     movement: {
       up: ["Sold out"],
       down: ["Every share sold"],
       left: ["Withheld revenue"],
-      right: ["Paid dividends"]
+      right: ["Paid dividends at least share value"]
     },
     market: [
       [
-        { value: 60, label: 60, legend: 0, arrow: "down" },
-        67,
-        71,
-        76,
-        82,
+        { value: 82, label: 82, arrow: "down" },
         90,
-        { value: 100, label: 100, par: true },
-        112,
-        126,
-        142,
-        160,
+        100,
+        110,
+        122,
+        135,
+        150,
+        165,
         180,
         200,
         225,
-        250,
-        275,
+        245,
+        270,
         300,
-        325,
-        350
+        330,
+        360,
+        400
       ],
       [
-        { value: 53, label: 53, legend: 0, arrow: "down" },
-        { value: 60, label: 60, legend: 0 },
-        66,
-        70,
-        76,
-        82,
-        { value: 90, label: 90, par: true },
-        100,
-        112,
-        126,
-        142,
-        160,
-        180,
-        200,
-        220,
-        240,
-        260,
-        280,
-        { value: 300, label: 300, arrow: "up" }
-      ],
-      [
-        { value: 46, label: 46, legend: 0, arrow: "down" },
-        { value: 55, label: 55, legend: 0 },
-        { value: 60, label: 60, legend: 0 },
-        65,
-        70,
-        76,
-        { value: 82, label: 82, par: true },
-        90,
-        100,
-        111,
-        125,
-        140,
-        155,
-        170,
-        185,
-        { value: 200, label: 200, arrow: "up" }
-      ],
-      [
-        { value: 39, label: 39, legend: 1, arrow: "down" },
-        { value: 48, label: 48, legend: 0 },
-        { value: 54, label: 54, legend: 0 },
-        { value: 60, label: 60, legend: 0 },
-        66,
-        71,
-        { value: 76, label: 76, par: true },
+        { value: 75, label: 75, arrow: "down" },
         82,
         90,
         100,
         110,
-        120,
-        { value: 130, label: 130, arrow: "up" }
+        122,
+        135,
+        150,
+        165,
+        180,
+        200,
+        225,
+        245,
+        { value: 270, label: 270, arrow: "up" }
       ],
       [
-        { value: 32, label: 32, legend: 1, arrow: "down" },
-        { value: 41, label: 41, legend: 1 },
-        { value: 48, label: 48, legend: 0 },
-        { value: 55, label: 55, legend: 0 },
-        62,
-        67,
-        { value: 71, label: 71, par: true },
-        76,
+        { value: 70, label: 70, arrow: "down" },
+        75,
         82,
         90,
-        { value: 100, label: 100, arrow: "up" }
+        { value: 100, label: 100, par: true },
+        110,
+        122,
+        135,
+        150,
+        165,
+        { value: 180, label: 180, arrow: "up" }
       ],
       [
-        { value: 25, label: 25, legend: 2, arrow: "down" },
-        { value: 34, label: 34, legend: 1 },
-        { value: 42, label: 42, legend: 1 },
-        { value: 50, label: 50, legend: 0 },
-        { value: 58, label: 58, legend: 0 },
-        65,
-        { value: 67, label: 67, par: true },
-        71,
+        { value: 65, label: 65, arrow: "down" },
+        70,
         75,
-        { value: 80, label: 80, arrow: "up" }
+        { value: 82, label: 82, par: true },
+        { value: 90, label: 90, par: true },
+        100,
+        110,
+        { value: 122, label: 122, arrow: "up" }
       ],
       [
-        { value: 18, label: 18, legend: 2, arrow: "down" },
-        { value: 27, label: 27, legend: 2 },
-        { value: 36, label: 36, legend: 1 },
-        { value: 45, label: 45, legend: 1 },
-        { value: 54, label: 54, legend: 0 },
-        63,
-        67,
-        69,
-        { value: 70, label: 70, arrow: "up" }
+        { value: 60, label: 60, arrow: "down" },
+        65,
+        { value: 70, label: 70, par: true },
+        { value: 75, label: 75, par: true },
+        82,
+        { value: 90, label: 90, arrow: "up" }
       ],
       [
-        { value: 10, label: 10, legend: 2 },
-        { value: 12, label: 12, legend: 2 },
-        { value: 30, label: 30, legend: 2 },
-        { value: 40, label: 40, legend: 1 },
-        { value: 50, label: 50, legend: 0 },
-        { value: 60, label: 60, legend: 0 },
-        67,
-        { value: 68, label: 68, arrow: "up" }
+        { value: 50, label: 50, arrow: "down" },
+        60,
+        65,
+        70,
+        { value: 75, label: 75, arrow: "up" }
       ],
       [
-        null,
-        { value: 10, label: 10, legend: 2 },
-        { value: 20, label: 20, legend: 2 },
-        { value: 30, label: 30, legend: 2 },
-        { value: 40, label: 40, legend: 1 },
-        { value: 50, label: 50, legend: 0 },
-        { value: 60, label: 60, legend: 0, arrow: "up" }
+        40,
+        50,
+        60,
+        { value: 65, label: 65, arrow: "up" }
       ],
-      [
-        null,
-        null,
-        { value: 10, label: 10, legend: 2 },
-        { value: 20, label: 20, legend: 2 },
-        { value: 30, label: 30, legend: 2 },
-        { value: 40, label: 40, legend: 1 },
-        { value: 50, label: 50, legend: 0, arrow: "up" }
-      ],
-      [
-        null,
-        null,
-        null,
-        { value: 10, label: 10, legend: 2 },
-        { value: 20, label: 20, legend: 2 },
-        { value: 30, label: 30, legend: 2 },
-        { value: 40, label: 40, legend: 1, arrow: "up" }
-      ]
     ],
-    legend: [
-      {
-        color: "yellow",
-        description:
-          "Shares of this corporation do not count toward the certificate limit",
-        icon: "certificate"
-      },
-      {
-        color: "orange",
-        description: "Players may own more than 60% of this corporation",
-        icon: "percentage"
-      },
-      {
-        color: "brown",
-        description:
-          "Players may purchase any number of shares of this corporation in one stock action",
-        icon: "money-bill-wave"
-      }
-    ]
   },
 
   tiles: {
