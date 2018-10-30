@@ -56,7 +56,7 @@ const Atoms = () => {
     },
     {
       name: "Icon",
-      examples: [<Icon type="meat" />, <Icon type="steam" />, <Icon type="mountain" />]
+      examples: [<Icon type="meat" />, <Icon type="steam" />, <Icon type="mountain60" />, <Icon type="mountain120" />]
     },
     {
       name: "City",

@@ -13,14 +13,14 @@ const Minors = ({ match }) => {
 
   return (
     <div className="charters">
-      {R.addIndex(R.chain)((company, index) => {
+      {R.addIndex(R.chain)((minor, index) => {
         return (
           <Minor
-            key={company.abbrev}
-            name={company.name}
-            abbrev={company.abbrev}
-            color={company.color}
-            tokens={company.tokens}
+            key={minor.abbrev}
+            name={minor.name}
+            abbrev={minor.abbrev}
+            color={minor.color}
+            tokens={minor.tokens}
             minorPhases={game.minorPhases}
             turns={game.turns}
           />
