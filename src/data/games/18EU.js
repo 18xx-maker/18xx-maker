@@ -8,8 +8,11 @@ const game = {
     width: 150,
     orientation: "horizontal",
     color_10: "orange",
-    titleX: 50,
-    extraMinors: 2,
+    titleX: 1442,
+    titleY: 1500,
+    titleSize: 165,
+    subTitleSize: 17,
+    extraMinors: 0,
     hexCoords: true
   },
 
@@ -118,13 +121,13 @@ const game = {
       color: "white",
     },
     {
-      name: "Etat Belge",
+      name: "État Belge",
       abbrev: "2",
       tokens: [""],
       color: "white",
     },
     {
-      name: "Paris-Lyon-Mediterranee",
+      name: "Paris-Lyon-Méditerranée",
       abbrev: "3",
       tokens: [""],
       color: "white",
@@ -172,7 +175,7 @@ const game = {
       color: "white",
     },
     {
-      name: "Sudbahn",
+      name: "Südbahn",
       abbrev: "11",
       tokens: [""],
       color: "white",
@@ -190,7 +193,7 @@ const game = {
       color: "white",
     },
     {
-      name: "Ligne Strasbourg-Bale",
+      name: "Ligne Strasbourg-Bâle",
       abbrev: "14",
       tokens: [""],
       color: "white",
@@ -857,7 +860,7 @@ const game = {
       },
       {
         color: "plain",
-        centerTowns: [ { name: { name: "Zurich" }, y: -10 } ],
+        centerTowns: [ { name: { name: "Zürich" }, y: -10 } ],
         mountain: { cost: "£60", size: "medium", y: 40 },
         hexes: ["E14"]
       },
@@ -887,13 +890,56 @@ const game = {
       },
       {
         color: "plain",
-        mountain: { cost: "£60", size: "medium" },
+        mountain: { cost: "£60", size: "medium",  } ,
         hexes: ["A14", "A16", "C10", "D9", "D11", "F15", "G16", "I10", "I12", "J9", "J13", "K8", "L9"]
       },
       {
         color: "plain",
-        mountain: { cost: "£120", size: "large" },
-        hexes: ["C18", "D17", "E16", "F17", "G18", "H17", "I16", "J15"]
+        mountain: { cost: "£120", size: "large",  },
+        labels: { label: "Fréjus", percent: .7, size: "medium" },
+        hexes: ["C18"]
+      },
+      {
+        color: "plain",
+        mountain: { cost: "£120", size: "large",  },
+        labels: { label: "Lötschberg", percent: .7, size: "medium" },
+        hexes: ["D17"]
+      },
+      {
+        color: "plain",
+        mountain: { cost: "£120", size: "large",  },
+        labels: { label: "Simplon", percent: .7, size: "medium" },
+        hexes: ["E16"]
+      },
+      {
+        color: "plain",
+        mountain: { cost: "£120", size: "large",  },
+        labels: { label: "Gotthard", percent: .7, size: "medium" },
+        hexes: ["F17"]
+      },
+      {
+        color: "plain",
+        mountain: { cost: "£120", size: "large",  },
+        labels: { label: "Albula", percent: .7, size: "medium" },
+        hexes: ["G18"]
+      },
+      {
+        color: "plain",
+        mountain: { cost: "£120", size: "large",  },
+        labels: { label: "Brenner", percent: .7, size: "medium" },
+        hexes: ["H17"]
+      },
+      {
+        color: "plain",
+        mountain: { cost: "£120", size: "large",  },
+        labels: { label: "Arlberg", percent: .7, size: "medium" },
+        hexes: ["I16"]
+      },
+      {
+        color: "plain",
+        mountain: { cost: "£120", size: "large",  },
+        labels: { label: "Tauern", percent: .7, size: "medium" },
+        hexes: ["J15"]
       },
       {
         color: "plain",
