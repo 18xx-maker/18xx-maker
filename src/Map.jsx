@@ -142,7 +142,7 @@ const Map = ({ game, variation }) => {
           transform={`${translate}`}
           key={`hex-${resolvedHex.variation}-${util.toAlpha(y)}${x}`}
         >
-          <Hex hex={resolvedHex} border={true} />
+          <Hex hex={resolvedHex} border={true} transparent={game.info.transparent} />
         </g>
       );
     }, R.map(util.toCoords, hex.hexes || []));

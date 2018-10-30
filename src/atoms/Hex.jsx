@@ -1,10 +1,11 @@
 import React from "react";
 import { colors } from "../data";
+import * as R from "ramda";
 
 import HexContext from "../context/HexContext";
 
-const Hex = ({ color, border }) => {
-  let fill = border ? "transparent" : colors[color];
+const Hex = ({ color, border, transparent }) => {
+  let fill = (border || transparent ? "transparent" : (R.isNil(colors[color]) ? color : colors[color]));
   let stroke = border ? colors["black"] : "none";
 
   return (
