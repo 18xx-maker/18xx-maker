@@ -19,6 +19,22 @@ const Phase = ({ phases }) => {
     phases
   );
 
+  let excludeRust = R.all(
+    R.compose(
+      R.isNil,
+      R.prop("rust")
+    ),
+    phases
+  );
+
+  let excludeTiles = R.all(
+    R.compose(
+      R.isNil,
+      R.prop("tiles")
+    ),
+    phases
+  );
+
   let phaseRows = phases.map(phase => {
     return (
       <tr key={phase.phase || phase.name}>
@@ -26,8 +42,8 @@ const Phase = ({ phases }) => {
         {includeTrain && <td>{formatCell(phase.train)}</td>}
         <td>{formatCell(phase.number)}</td>
         <td>{phase.limit}</td>
-        <td style={{ backgroundColor: colors[phase.tiles] }}>&nbsp;</td>
-        <td>{phase.rust}</td>
+        {!excludeTiles && <td style={{ backgroundColor: colors[phase.tiles] }}>&nbsp;</td>}
+        {!excludeRust && <td>{phase.rust}</td>}
         <td className="phase__notes">{phase.notes}</td>
       </tr>
     );
@@ -41,8 +57,8 @@ const Phase = ({ phases }) => {
           {includeTrain && <th>Train</th>}
           <th>#</th>
           <th>Limit</th>
-          <th>Tiles</th>
-          <th>Rust</th>
+          {!excludeTiles && <th>Tiles</th>}
+          {!excludeRust && <th>Rust</th>}
           <th className="phase__notes">Notes</th>
         </tr>
       </thead>

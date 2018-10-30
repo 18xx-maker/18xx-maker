@@ -9,6 +9,7 @@ const game = {
     orientation: "horizontal",
     color_10: "orange",
     titleX: 50,
+    extraMinors: 2,
     hexCoords: true
   },
 
@@ -55,7 +56,7 @@ const game = {
       name: "Belgian National Railways",
       abbrev: "BNR",
       tokens: ["Free", "Free", "Free", "Free"],
-      color: "darkYellow",
+      color: "goldenrod",
       shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
     },
     {
@@ -76,21 +77,21 @@ const game = {
       name: "Royal Bavarian State Railroad",
       abbrev: "RBSR",
       tokens: ["Free", "Free", "Free", "Free"],
-      color: "lightBlue",
+      color: "cyan",
       shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
     },
     {
       name: "Royal Prussian Railway",
       abbrev: "RPR",
       tokens: ["Free", "Free", "Free", "Free"],
-      color: "cyan",
+      color: "blue",
       shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
     },
     {
       name: "Austrial Imperial Royal State",
       abbrev: "AIRS",
       tokens: ["Free", "Free", "Free", "Free"],
-      color: "yellow",
+      color: "lightYellow",
       shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
     },
     {
@@ -107,6 +108,99 @@ const game = {
       color: "Black",
       shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
     }
+  ],
+
+  minorCompanies: [
+    {
+      name: "Chemin de Fer du Nord",
+      abbrev: "1",
+      tokens: [""],
+      color: "white",
+    },
+    {
+      name: "Etat Belge",
+      abbrev: "2",
+      tokens: [""],
+      color: "white",
+    },
+    {
+      name: "Paris-Lyon-Mediterranee",
+      abbrev: "3",
+      tokens: [""],
+      color: "white",
+    },
+    {
+      name: "Leipzig-Dresdner-Bahn",
+      abbrev: "4",
+      tokens: [""],
+      color: "white",
+    },
+    {
+      name: "Ferrovia Adriatica",
+      abbrev: "5",
+      tokens: [""],
+      color: "white",
+    },
+    {
+      name: "Kaiser-Ferdinand-Nordbahn",
+      abbrev: "6",
+      tokens: [""],
+      color: "white",
+    },
+    {
+      name: "Berlin-Potsdamer-Bahn",
+      abbrev: "7",
+      tokens: [""],
+      color: "white",
+    },
+    {
+      name: "Ungarische Staatsbahn",
+      abbrev: "8",
+      tokens: [""],
+      color: "white",
+    },
+    {
+      name: "Berlin-Stettiner-Bahn",
+      abbrev: "9",
+      tokens: [""],
+      color: "white",
+    },
+    {
+      name: "Strade Ferrate Alta Italia",
+      abbrev: "10",
+      tokens: [""],
+      color: "white",
+    },
+    {
+      name: "Sudbahn",
+      abbrev: "11",
+      tokens: [""],
+      color: "white",
+    },
+    {
+      name: "Hollandsche Maatschappij",
+      abbrev: "12",
+      tokens: [""],
+      color: "white",
+    },
+    {
+      name: "Ludwigsbahn",
+      abbrev: "13",
+      tokens: [""],
+      color: "white",
+    },
+    {
+      name: "Ligne Strasbourg-Bale",
+      abbrev: "14",
+      tokens: [""],
+      color: "white",
+    },
+    {
+      name: "Grand Central",
+      abbrev: "15",
+      tokens: [""],
+      color: "white",
+    },
   ],
 
   trains: [
@@ -240,6 +334,32 @@ const game = {
       notes: "Red to Red £30 bonus per station."
     }
   ],
+  minorPhases: [
+    {
+      name: "2",
+      limit: "2",
+      number: "15",
+      notes: "Two yellow lays first OR, one after"
+    },
+    {
+      name: "3",
+      limit: "2",
+      number: "5",
+      notes: "One yellow lay per OR"
+    },
+    {
+      name: "4",
+      limit: "1",
+      number: "4",
+      notes: "One yellow lay per OR"
+    },
+    {
+      name: "5",
+      limit: "1",
+      number: "3",
+      notes: "Final Exchange Round after ORs finish"
+    },
+  ],
 
   pools: [
     {
@@ -289,7 +409,7 @@ const game = {
       name: "Stock Round",
       steps: [
         "Sell any number of shares",
-        "Buy one share",
+        "Buy one share OR Merge minor into un-operated Major for 1 share",
       ],
       ordered: true
     },
