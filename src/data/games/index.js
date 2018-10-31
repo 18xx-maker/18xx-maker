@@ -1,5 +1,6 @@
 import game_1800 from "./1800";
 import game_1830 from "./1830";
+import game_1834 from "./1834";
 import game_1846 from "./1846";
 import game_1849 from "./1849";
 import game_1857 from "./1857";
@@ -13,6 +14,7 @@ import game_18AL from "./18AL";
 export default {
   "1800": game_1800,
   "1830": game_1830,
+  "1834": game_1834,
   "1846": game_1846,
   "1849": game_1849,
   "1857": game_1857,
