@@ -71,7 +71,7 @@ const makeBorder = track => {
   );
 };
 
-const HexTile = ({ hex, id, border }) => {
+const HexTile = ({ hex, id, border, transparent }) => {
   if (hex === undefined || hex === null) {
     return null;
   }
@@ -187,7 +187,7 @@ const HexTile = ({ hex, id, border }) => {
 
   return (
     <g>
-      <Hex color={hex.color} />
+      <Hex color={hex.color} transparent={transparent} />
 
       <HexContext.Consumer>
         {hx => (
