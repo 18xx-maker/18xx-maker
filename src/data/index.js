@@ -32,7 +32,9 @@ const colors = {
   orange: "rgb(245,129,33)",
   red: "rgb(209,35,42)",
   pink: "rgb(193,60,125)",
-  purple: "rgb(95,35,132)"
+  purple: "rgb(95,35,132)",
+  goldenrod: "rgb(218, 165, 32)",
+  lightYellow: "rgb(255, 255, 224)",
   // yellow: Same as tile yellow
 };
 
