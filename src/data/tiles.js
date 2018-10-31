@@ -6776,7 +6776,35 @@ const tiles = {
         side: 6
       }
     ]
-  }
+  },
+  "18340": {
+    color: "yellow",
+    labels: [ { label: "B", angle: 150, percent: 0.85 } ],
+    values: [ { angle: 335, percent: 0.825, value: 30 } ],
+    cities: [ { size: 1 }, { name: { name: "Luxembourg" }, } ],
+    track: [ { side: 1 } ]
+  },
+  "18341": {
+    color: "green",
+    labels: [ { label: "Antwerp", angle: 250, x: 20, y: -20, percent: 0.5, rotation: 60 } ],
+    values: [ { angle: 335, percent: 0.825, value: 40 } ],
+    cities: [ { size: 2 },  ],
+    track: [ { side: 2 }, {side: 3} ]
+  },
+  "18342": {
+    color: "brown",
+    labels: [ { label: "Antwerp", angle: 250, x: 20, y: -20, percent: 0.5, rotation: 60 } ],
+    values: [ { angle: 335, percent: 0.825, value: 60 } ],
+    cities: [ { size: 3 },  ],
+    track: [ { side: 2 }, {side: 3}, {side: 4} ]
+  },
+  "18343": {
+    color: "gray",
+    labels: [ { label: "Antwerp", angle: 300, x: 30, y: -20, percent: 0.5, rotation: 90, size: 16 } ],
+    values: [ { angle: 335, percent: 0.85, value: 80 } ],
+    cities: [ { size: 4 },  ],
+    track: [ { side: 2 }, {side: 3}, {side: 4}, {size: 5} ]
+  },
 };
 
 export default tiles;
