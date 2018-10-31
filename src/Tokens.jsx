@@ -9,6 +9,7 @@ const Tokens = ({ match }) => {
   let game = games[match.params.game];
   let companies = game.companies;
   let minorCompanies = game.minorCompanies || [];
+  let tokensWidth = 13;
 
   if (!companies) {
     return null;
@@ -52,7 +53,7 @@ const Tokens = ({ match }) => {
 
     let groups = R.addIndex(R.map)(
       (token, tokenIndex) => (
-        <g key={tokenIndex} transform={`translate(${(60 * (tokenIndex + tokenCount[index]) + 30)%(60 * 17)} ${60 * Math.floor(((tokenIndex + tokenCount[index]))/17)})`}>
+        <g key={tokenIndex} transform={`translate(${(60 * (tokenIndex + tokenCount[index]) + 30)%(60 * tokensWidth)} ${60 * Math.floor(((tokenIndex + tokenCount[index]))/tokensWidth)})`}>
           {token}
         </g>
       ),
@@ -87,7 +88,7 @@ const Tokens = ({ match }) => {
 
     let groups = R.addIndex(R.map)(
       (token, tokenIndex) => (
-        <g key={tokenIndex} transform={`translate(${(60 * (tokenIndex + minorTokenCount[index] + totalTokenCount) + 30)%(60 * 17)} ${60 * Math.floor(((tokenIndex + minorTokenCount[index] + totalTokenCount))/17)})`}>
+        <g key={tokenIndex} transform={`translate(${(60 * (tokenIndex + minorTokenCount[index] + totalTokenCount) + 30)%(60 * tokensWidth)} ${60 * Math.floor(((tokenIndex + minorTokenCount[index] + totalTokenCount))/tokensWidth)})`}>
           {token}
         </g>
       ),
@@ -110,7 +111,7 @@ const Tokens = ({ match }) => {
   let extras = R.addIndex(R.map)((label, index) => {
     if (label.match(/^#/)) {
       return (
-        <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * 17)} ${60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/17)})`}>
+        <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * tokensWidth)} ${60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/tokensWidth)})`}>
           <Token
             icon={label}
             bleed={true}
@@ -121,7 +122,7 @@ const Tokens = ({ match }) => {
       );
     } else {
       return (
-        <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * 17)} ${60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/17)})`}>
+        <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * tokensWidth)} ${60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/tokensWidth)})`}>
           <Token
             label={label}
             bleed={true}
@@ -140,8 +141,8 @@ const Tokens = ({ match }) => {
   );
 
 
-  let width = 60 * 17;
-  let height = 60 * Math.ceil(((gameTokenCount + totalMinorTokenCount + totalTokenCount))/17);
+  let width = 60 * tokensWidth;
+  let height = 60 * Math.ceil(((gameTokenCount + totalMinorTokenCount + totalTokenCount))/tokensWidth);
 
   return (
     <div className="tokens">
