@@ -56,7 +56,7 @@ const Atoms = () => {
     },
     {
       name: "Icon",
-      examples: [<Icon type="meat" />, <Icon type="steam" />]
+      examples: [<Icon type="meat" />, <Icon type="steam" />, <Icon type="mountain60" />, <Icon type="mountain120" />]
     },
     {
       name: "City",
@@ -156,6 +156,7 @@ const Atoms = () => {
           "city",
           "mid",
           "straightStop",
+          "straightLawson",
           "straight",
           "gentleStop",
           "gentleStopRev",
@@ -213,7 +214,8 @@ const Atoms = () => {
         <Border color="black" />,
         <Border color="water" />,
         <Border color="mountain" />,
-        <Border color="red" />
+        <Border color="red" />,
+        <Border color="gray" dashed="true" />,
       ]
     },
     {

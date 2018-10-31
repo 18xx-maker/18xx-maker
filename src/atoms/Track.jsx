@@ -19,6 +19,9 @@ const Track = ({ type, gauge, border, offset }) => {
     case "straight":
       path = "m 0 75 L 0 -75";
       break;
+    case "straightLawson":
+      path = "m 0 75 L 0 -4";
+      break;
     case "straightStop":
       path = "m 0 75 L 0 -37.5";
       break;

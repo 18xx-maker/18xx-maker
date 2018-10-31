@@ -81,6 +81,44 @@ const Svg = ({ className, width, height, viewBox, style, defs, children }) => {
             strokeLinejoin="round"
           />
         </g>
+        <g id="mountain60">
+          <path
+            d="M -15 -5 L -10 -10 L -5 -5 M 5 -5 L 10 -10 L 15 -5 M -7.5 -7.5 L 0 -15 L 7.5 -7.5"
+            fill="none"
+            stroke={colors["mountain"]}
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <text
+            fill={colors["black"]}
+            fontSize="10"
+            alignmentBaseline="hanging"
+            textAnchor="middle"
+            x="0"
+            y="0"
+          >
+            £60
+          </text>
+        </g>
+        <g id="mountain120">
+          <path
+            d="M -15 -5 L -10 -10 L -5 -5 M 5 -5 L 10 -10 L 15 -5 M -7.5 -7.5 L 0 -15 L 7.5 -7.5"
+            fill="none"
+            stroke={colors["mountain"]}
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <text
+            fill={colors["black"]}
+            fontSize="14"
+            alignmentBaseline="hanging"
+            textAnchor="middle"
+            x="0"
+            y="-5"
+          >
+            £120
+          </text>
+        </g>
         <path id="townPath" d="M -60 -15 L 60 -15" />
         <path id="townPathReverse" d="M -60 15 L 60 15" />
         <path id="cityPath" d="M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30" />

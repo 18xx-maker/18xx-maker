@@ -8,6 +8,7 @@ import Svg from "./Svg";
 const Tokens = ({ match }) => {
   let game = games[match.params.game];
   let companies = game.companies;
+  let minorCompanies = game.minorCompanies || [];
 
   if (!companies) {
     return null;
@@ -15,8 +16,22 @@ const Tokens = ({ match }) => {
 
   let extraNormals =
     (game.info.extraTokens || 3) + (game.info.extraHomeTokens || 0);
+  let extraMinors = (game.info.extraMinors || 0);
+  let tokenCount = R.scan(R.add, 0, R.addIndex(R.chain)((company, index) => {
+    return(company.tokens.length + extraNormals + (game.info.extraTokens || 3))
+  }, companies));
+  let totalTokenCount = R.reduce(R.add, 0, R.addIndex(R.chain)((company, index) => {
+    return(company.tokens.length + extraNormals + (game.info.extraTokens || 3))
+  }, companies));
+  let minorTokenCount = R.scan(R.add, 0, R.addIndex(R.chain)((minors, index) => {
+    return(minors.tokens.length + extraMinors)
+  }, minorCompanies));
+  let totalMinorTokenCount = R.reduce(R.add, 0, R.addIndex(R.chain)((minor, index) => {
+    return(minor.tokens.length + extraMinors)
+  }, minorCompanies));
+  let gameTokenCount = game.tokens.length
+
   let tokens = R.addIndex(R.chain)((company, index) => {
-    let y = 60 * index + 30;
     let companyTokens = Array(company.tokens.length + extraNormals).fill(
       <Token
         label={company.abbrev}
@@ -36,25 +51,66 @@ const Tokens = ({ match }) => {
     }, game.info.extraTokens || 3);
 
     let groups = R.addIndex(R.map)(
-      (token, index) => (
-        <g key={index} transform={`translate(${60 * index + 30} 0)`}>
+      (token, tokenIndex) => (
+        <g key={tokenIndex} transform={`translate(${(60 * (tokenIndex + tokenCount[index]) + 30)%(60 * 17)} ${60 * Math.floor(((tokenIndex + tokenCount[index]))/17)})`}>
           {token}
         </g>
       ),
       companyTokens
     );
-
     return (
-      <g key={index} transform={`translate(0 ${y})`}>
+      <g key={index} >
         {groups}
       </g>
     );
   }, companies);
 
+  let minorTokens = R.addIndex(R.chain)((minorCompany, index) => {
+    let minorCompanyTokens = Array(minorCompany.tokens.length + extraMinors).fill(
+      <Token
+        label={minorCompany.abbrev}
+        color={minorCompany.color}
+        bleed={true}
+        outline="black"
+      />
+    );
+    R.times(() => {
+      minorCompanyTokens.push(
+        <Token
+          label={minorCompany.abbrev}
+          color={minorCompany.color}
+          bleed={true}
+          outline="black"
+        />
+      );
+    }, extraMinors);
+
+    let groups = R.addIndex(R.map)(
+      (token, tokenIndex) => (
+        <g key={tokenIndex} transform={`translate(${(60 * (tokenIndex + minorTokenCount[index] + totalTokenCount) + 30)%(60 * 17)} ${60 * Math.floor(((tokenIndex + minorTokenCount[index] + totalTokenCount))/17)})`}>
+          {token}
+        </g>
+      ),
+      minorCompanyTokens
+    );
+
+    return (
+      <g key={index}>
+        {groups}
+      </g>
+    );
+  }, minorCompanies);
+
+  tokens.push(
+    <g key="minorTokens">
+      {minorTokens}
+    </g>
+  );
+
   let extras = R.addIndex(R.map)((label, index) => {
     if (label.match(/^#/)) {
       return (
-        <g key={index} transform={`translate(${60 * index + 30} 0)`}>
+        <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * 17)} ${60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/17)})`}>
           <Token
             icon={label}
             bleed={true}
@@ -65,7 +121,7 @@ const Tokens = ({ match }) => {
       );
     } else {
       return (
-        <g key={index} transform={`translate(${60 * index + 30} 0)`}>
+        <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * 17)} ${60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/17)})`}>
           <Token
             label={label}
             bleed={true}
@@ -77,16 +133,15 @@ const Tokens = ({ match }) => {
     }
   }, game.tokens);
 
-  let y = 60 * companies.length + 30;
   tokens.push(
-    <g key="extras" transform={`translate(0 ${y})`}>
+    <g key="extras">
       {extras}
     </g>
   );
 
-  let width =
-    R.reduce(R.max, 1, R.map(c => c.tokens.length + 4, companies)) * 60;
-  let height = (companies.length + 1) * 60;
+
+  let width = 60 * 17;
+  let height = 60 * Math.ceil(((gameTokenCount + totalMinorTokenCount + totalTokenCount))/17);
 
   return (
     <div className="tokens">

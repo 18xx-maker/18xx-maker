@@ -1397,6 +1397,22 @@ const tiles = {
     color: "yellow",
     track: [{ type: "straight", side: 1, gauge: "narrow" }]
   },
+  "80": {
+    color: "green",
+    track: [{side: 1, type: "straightLawson" }, {side: 2, type: "straightLawson" }, {side: 6, type: "straightLawson" } ]
+  },
+  "81": {
+    color: "green",
+    track: [{side: 2}, {side: 4}, {side: 6} ]
+  },
+  "82": {
+    color: "green",
+    track: [{side: 2}, {side: 5}, {side: 6} ]
+  },
+  "83": {
+    color: "green",
+    track: [{ ide: 1}, {side: 2}, {side: 5} ]
+  },
   "100": {
     color: "green",
     values: [
@@ -1445,6 +1461,12 @@ const tiles = {
       }
     ]
   },
+  "141": {
+    color: "green",
+    centerTowns: [{}],
+    values: [{ value: 10, angle: 115, percent: 0.5 }],
+    track: [{side: 1},{side:4},{side:5}]
+  },
   "142": {
     color: "green",
     centerTowns: [{}],
@@ -1474,6 +1496,38 @@ const tiles = {
       percent: 0.5
     }],
     track: [{side: 1},{side:3},{side:5}]
+  },
+  "145": {
+    color: "brown",
+    values: [ { angle: 210, percent: 0.8, value: 20 } ],
+    centerTowns: [{}],
+    track: [ { side: 1, }, { side: 2, }, { side: 4, }, { side: 5, } ]
+  },
+  "146": {
+    color: "brown",
+    values: [ { angle: 210, percent: 0.8, value: 20 } ],
+    centerTowns: [{}],
+    track: [ { side: 1, }, { side: 4, }, { side: 5, }, { side: 6, } ]
+  },
+  "147": {
+    color: "brown",
+    values: [ { angle: 210, percent: 0.8, value: 20 } ],
+    centerTowns: [{}],
+    track: [ { side: 1, }, { side: 3, }, { side: 4, }, { side: 5, } ]
+  },
+  "201": {
+    color: "yellow",
+    values: [ { angle: 210, percent: 0.75, value: 30 } ],
+    labels: { label: "Y", angle: 155, percent: 0.75 },
+    cities: [ { size: 1 }, ],
+    track: [ { side: 1 }, { side: 6 }, ]
+  },
+  "202": {
+    color: "yellow",
+    values: [ { angle: 210, percent: 0.75, value: 30 } ],
+    labels: { label: "Y", angle: 155, percent: 0.75 },
+    cities: [ { size: 1 }, ],
+    track: [ { side: 1 }, { side: 5 }, ]
   },
   "290": {
     color: "gray",
@@ -2336,6 +2390,88 @@ const tiles = {
       { side: 5 },
       { side: 6 }
     ]
+  },
+
+  "513": {
+    color: "gray",
+    cities: [ { size: 3, rotate: 180 } ],
+    values: [ { angle: 270, percent: 0.9, value: 60 } ],
+    track: [ { side: 1 }, { side: 2 }, { side: 3 }, { side: 4 }, { side: 5 }, { side: 6 } ]
+  },
+  "544": {
+    color: "brown",
+    track: [ { side: 1, }, { side: 2, }, { side: 4, }, { side: 5, } ]
+  },
+  "545": {
+    color: "brown",
+    track: [ { side: 1, }, { side: 2, }, { side: 3, }, { side: 4, } ]
+  },
+  "546": {
+    color: "brown",
+    track: [ { side: 1, }, { side: 3, }, { side: 4, }, { side: 5, } ]
+  },
+  "576": {
+    color: "green",
+    values: [ { angle: 210, percent: 0.75, value: 40 } ],
+    labels: { label: "Y", angle: 155, percent: 0.75 },
+    cities: [ { size: 1 }, ],
+    track: [ { side: 1 }, { side: 4 }, { side: 5 }, ]
+  },
+  "577": {
+    color: "green",
+    values: [ { angle: 210, percent: 0.75, value: 40 } ],
+    labels: { label: "Y", angle: 155, percent: 0.75 },
+    cities: [ { size: 1 }, ],
+    track: [ { side: 1 }, { side: 3 }, { side: 4 }, ]
+  },
+  "578": {
+    color: "green",
+    values: [ { angle: 210, percent: 0.75, value: 40 } ],
+    labels: { label: "Y", angle: 155, percent: 0.75 },
+    cities: [ { size: 1 }, ],
+    track: [ { side: 1 }, { side: 2 }, { side: 3 }, ]
+  },
+  "579": {
+    color: "green",
+    values: [ { angle: 210, percent: 0.75, value: 40 } ],
+    labels: { label: "Y", angle: 155, percent: 0.75 },
+    cities: [ { size: 1 }, ],
+    track: [ { side: 1 }, { side: 3 }, { side: 5 }, ]
+  },
+  "580": {
+    color: "green",
+    values: [ { angle: 135, percent: 0.7, value: 60 }, { angle: 45, percent: 0.7, value: 60 } ],
+    labels: { label: "P", angle: 90, percent: 0.5 },
+    cities: [ { angle: 210, percent: 0.5 }, { angle: -30, percent: 0.5 } ],
+    track: [ { type: "sharp", side: 4 }, { type: "sharp", side: 6 } ]
+  },
+  "581": {
+    color: "green",
+    values: [ { angle: 210, percent: 0.7, value: 50 } ],
+    labels: { label: "B-V", angle: 90, percent: 0.75 },
+    cities: [ { angle: 270, percent: 0.5 }, { angle: 30, percent: 0.5 }, { angle: 150, percent: 0.5 } ],
+    track: [ { type: "sharp", side: 1 }, { type: "sharp", side: 3 }, { type: "sharp", side: 5 } ]
+  },
+  "582": {
+    color: "brown",
+    values: [ { angle: 210, percent: 0.75, value: 50 } ],
+    labels: { label: "Y", angle: 155, percent: 0.75 },
+    cities: [ { size: 2 }, ],
+    track: [ { side: 1 }, { side: 3 }, { side: 4 }, { side: 5 }, ]
+  },
+  "583": {
+    color: "brown",
+    values: [ { angle: 90, percent: 0.8, value: 80 }, { angle: 270, percent: 0.8, value: 80 } ],
+    labels: { label: "P", angle: 0, percent: 0, size: "medium" },
+    cities: [ { angle: 180, percent: 0.5, size: 2 }, { angle: 0, percent: 0.5, size: 2 } ],
+    track: [ { type: "sharp", side: 4 }, { type: "sharp", side: 6 } ]
+  },
+  "584": {
+    color: "brown",
+    cities: [ { size: 3, rotate: 180 } ],
+    labels: { label: "B-V", angle: 155, percent: 0.85 },
+    values: [ { angle: 270, percent: 0.9, value: 60 } ],
+    track: [ { side: 1 }, { side: 2 }, { side: 3 }, { side: 4 }, { side: 5 }, { side: 6 } ]
   },
 
   // 1849
