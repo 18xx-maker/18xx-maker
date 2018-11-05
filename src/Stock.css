@@ -1,14 +1,3 @@
-.Par--DoubleRow {
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: calc(7.25in - 3px);
-}
-
-.Par--DoubleRow table {
-  height: calc(100% - 0.5in);
-}
-
 .StockHelpers {
   height: 100%;
   width: 100%;
