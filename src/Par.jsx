@@ -2,6 +2,8 @@ import React from "react";
 import * as R from "ramda";
 import { colors, textColor, market } from "./data";
 
+import "./Par.css";
+
 const groupValues = values => {
   return R.reduce(
     (result, value) => {
@@ -17,7 +19,7 @@ const groupValues = values => {
   );
 };
 
-const ParCell = ({ value, par, legend, colSpan }) => {
+const ParCell = ({ value, par, legend }) => {
   let color = "gray";
   if (par.color) {
     color = par.color;
@@ -28,10 +30,15 @@ const ParCell = ({ value, par, legend, colSpan }) => {
   if (value.color) {
     color = value.color;
   }
+  let width = value.width || par.width || market.par.width;
+  let height = value.height || par.height || market.par.height;
 
   return (
-    <td
+    <div
+      className="Par__Cell"
       style={{
+        width: width,
+        height: height,
         backgroundColor: colors[color],
         color: textColor(color),
         fontFamily: market.par.fontFamily,
@@ -39,28 +46,29 @@ const ParCell = ({ value, par, legend, colSpan }) => {
         fontSize: market.par.fontSize,
         lineHeight: market.par.fontSize
       }}
-      colSpan={colSpan || 2}
     >
       {(value && value.label) || value}
-    </td>
+    </div>
   );
 };
 
 const ParDoubleRow = ({ par, legend }) => {
   let rows = R.addIndex(R.map)((value, index) => {
     return (
-      <tr key={`par-${index}`}>
-        <ParCell {...{ value: value[0], par, legend, colSpan: value[1] ? 1 : 2 }} />
-        {value[1] && <ParCell {...{ value: value[1], par, legend, colSpan: 1 }} />}
-      </tr>
+      <div key={`par-${index}`} className="Par__Row">
+        <ParCell
+          {...{ value: value[0], par, legend }}
+        />
+        {value[1] && (
+          <ParCell {...{ value: value[1], par, legend }} />
+        )}
+      </div>
     );
   }, groupValues(par.values));
   return (
     <div className="par Par--DoubleRow">
       <h2>Par</h2>
-      <table>
-        <tbody>{rows}</tbody>
-      </table>
+      <div className="Par__Container">{rows}</div>
     </div>
   );
 };
@@ -68,17 +76,15 @@ const ParDoubleRow = ({ par, legend }) => {
 const ParRow = ({ par, legend }) => {
   let rows = R.map(value => {
     return (
-      <tr key={`par-${value}`}>
+      <div key={`par-${value}`} className="Par__Row">
         <ParCell {...{ value, par, legend }} />
-      </tr>
+      </div>
     );
   }, par.values);
   return (
     <div className="par">
       <h2>Par</h2>
-      <table>
-        <tbody>{rows}</tbody>
-      </table>
+      <div className="Par__Container">{rows}</div>
     </div>
   );
 };

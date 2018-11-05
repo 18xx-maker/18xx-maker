@@ -683,14 +683,6 @@ svg {
   position: relative;
 }
 
-.stock .par td {
-  width: 2in;
-}
-
-.stock .par td[colspan="1"] {
-  width: 1in;
-}
-
 .stock .market {
   position: relative;
 }

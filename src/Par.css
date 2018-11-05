@@ -1,0 +1,56 @@
+.Par--DoubleRow {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: calc(7.25in - 3px);
+}
+
+.Par--DoubleRow table {
+  height: calc(100% - 0.5in);
+}
+
+.stock .par td {
+  width: 2in;
+}
+
+.stock .par td[colspan="1"] {
+  width: 1in;
+}
+
+.Par__Container {
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: flex-end;
+}
+
+.Par__Cell {
+  border-width: 0 1px 1px 0;
+  border-style: solid;
+  border-color: #000;
+  box-sizing: border-box;
+  vertical-align: top;
+  text-align: left;
+  position: relative;
+  padding: 0.05in;
+  flex-grow: 1;
+  display: inline-block;
+}
+
+.Par__Cell:first-child {
+  border-left: 1px solid #000;
+}
+
+.Par__Row {
+  text-align: right;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: flex-end;
+  position: relative;
+  overflow: auto;
+}
+
+.Par__Row:first-child .Par__Cell {
+  border-top: 1px solid #000;
+}

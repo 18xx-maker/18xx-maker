@@ -96,7 +96,9 @@ const market = {
   par: {
     fontSize: "0.15in",
     fontWeight: "bold",
-    fontFamily: "Bitter, serif"
+    fontFamily: "Bitter, serif",
+    width: "2in",
+    height: "0.67in"
   }
 };
 
