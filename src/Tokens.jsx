@@ -9,7 +9,7 @@ const Tokens = ({ match }) => {
   let game = games[match.params.game];
   let companies = game.companies;
   let minorCompanies = game.minorCompanies || [];
-  let tokensWidth = 13;
+  let tokensWidth = 12;
 
   if (!companies) {
     return null;
