@@ -5,7 +5,7 @@ import * as R from "ramda";
 import HexContext from "../context/HexContext";
 
 const Hex = ({ color, border, transparent }) => {
-  let fill = (border || transparent ? "transparent" : (R.isNil(colors[color]) ? color : colors[color]));
+  let fill = (border ? "transparent" : (R.isNil(colors[color]) ? color : colors[color]));
   let stroke = border ? colors["black"] : "none";
 
   return (
@@ -15,6 +15,7 @@ const Hex = ({ color, border, transparent }) => {
           <polygon
             points="-86.6025,0 -43.30125,-75 43.30125,-75 86.6025,0 43.30125,75 -43.30125,75"
             fill={fill}
+            opacity={transparent || 1}
             strokeLinecap="round"
             strokeLinejoin="bevel"
             strokeWidth="2"

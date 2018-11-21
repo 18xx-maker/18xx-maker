@@ -51,7 +51,7 @@ const MapSingle = ({ match }) => {
         rotation: game.info.orientation === "horizontal" ? 0 : 90
       }}
     >
-      <div className="map">
+      <div className="map" style={game.map.style} >
         <Svg width={totalWidth} height={totalHeight}>
           <Title game={game} variation={variation} />
           <Map game={game} variation={variation} />
