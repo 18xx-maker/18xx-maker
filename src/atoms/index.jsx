@@ -49,9 +49,9 @@ const Atoms = () => {
       name: "Company",
       examples: [
         <Company label="A" />,
-        <Company label="CdH" />,
-        <Company label="C" bottom={true} />,
-        <Company label="ERR" bottom={true} />
+        <Company label="CdH" radius="7" color="purple" />,
+        <Company label="C" left="30" bottom={true} />,
+        <Company label="ERR" color="orange" bottom={true} />
       ]
     },
     {
