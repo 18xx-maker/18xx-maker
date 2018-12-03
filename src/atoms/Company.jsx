@@ -1,12 +1,15 @@
 import React from "react";
 import { colors } from "../data";
 
-const Company = ({ label, bottom, left, right }) => {
+const Company = ({ label, bottom, left, right, radius, color }) => {
   let size = 13;
-  let y = bottom ? 8 : -8;
+  radius = radius || 4;
+
+  let y = bottom ? (2 * radius) : -(2 * radius);
 
   let x = label.length * 3 + 5;
   let r = (x + (right || 0) + (x + (left || 0))) * 2;
+
 
   return (
     <g>
@@ -18,20 +21,20 @@ const Company = ({ label, bottom, left, right }) => {
         fill="none"
       />
       <circle
-        fill={colors["border"]}
+        fill={colors[color || "border"]}
         stroke={colors["track"]}
         strokeWidth="1"
         cx={x + (right || 0)}
         cy={y}
-        r="4"
+        r={radius}
       />
       <circle
-        fill={colors["border"]}
+        fill={colors[color || "border"]}
         stroke={colors["track"]}
         strokeWidth="1"
         cx={-x - (left || 0)}
         cy={y}
-        r="4"
+        r={radius}
       />
       <text
         fontWeight="bold"

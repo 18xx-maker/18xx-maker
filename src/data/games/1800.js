@@ -624,7 +624,9 @@ const game = {
             {
               angle: 180,
               percent: 0.5,
-              label: "D&RGW"
+              label: "D&RGW",
+              radius: 6,
+              color: "orange"
             }
           ],
           hexes: ["B4"]
@@ -636,7 +638,9 @@ const game = {
             {
               angle: 180,
               percent: 0.5,
-              label: "C&S"
+              label: "C&S",
+              color: "purple",
+              radius: 6
             }
           ],
           hexes: ["D4"]
