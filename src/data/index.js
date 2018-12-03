@@ -74,6 +74,15 @@ const colors = {
   goldenrod: "rgb(218, 165, 32)",
   lightYellow: "rgb(255, 255, 224)",
   // yellow: Same as tile yellow
+
+  // Trains
+  train_yellow: "rgb(241, 231, 141)",
+  train_green: "rgb(165,211,167)",
+  train_blue: "rgb(148, 205, 235)",
+  train_brown: "rgb(204, 170, 144)",
+  train_red: "rgb(231, 103, 113)",
+  train_gray: "rgb(180, 180, 180)",
+  train_purple: "rgb(202, 161, 221)"
 };
 
 // Height and width of paper in SVG units without print margins
