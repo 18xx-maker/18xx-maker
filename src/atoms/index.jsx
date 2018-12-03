@@ -126,6 +126,10 @@ const Atoms = () => {
         [
           <CenterTown border={true} />,
           <CenterTown name={{ name: "Austin", reverse: true }} />
+        ],
+        [
+          <CenterTown border={true} />,
+          <CenterTown name={{ name: "Boston" }} color="white" />
         ]
       ]
     },
