@@ -1599,7 +1599,7 @@ const game = {
         cities: [
           {
             name: {
-              name: "Caire",
+              name: "Cairo",
               reverse: true,
               rotation: 30
             },
