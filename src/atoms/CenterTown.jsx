@@ -19,12 +19,16 @@ const CenterTown = ({ border, name, color }) => {
         />
       );
     }
-    return (
+    return ([
       <g>
-        <circle fill={colors[color] || colors["track"]} stroke="none" cx="0" cy="0" r="12" />
+        <circle fill={colors["track"]} stroke="none" cx="0" cy="0" r="12" />
+        {nameNode}
+      </g>,
+      <g>
+        <circle fill={colors[color] || colors["track"]} stroke="none" cx="0" cy="0" r="10" />
         {nameNode}
       </g>
-    );
+    ]);
   }
 };
 
