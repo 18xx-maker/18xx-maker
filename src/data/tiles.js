@@ -1515,6 +1515,25 @@ const tiles = {
     centerTowns: [{}],
     track: [ { side: 1, }, { side: 3, }, { side: 4, }, { side: 5, } ]
   },
+  "170": {
+    color: "brown",
+    cities: [ { size: 2 } ],
+    labels: { label: "P", angle: 150, percent: 0.8 },
+    values: [ { angle: 210, percent: 0.8, value: 50 } ],
+    track: [ { side: 1 }, { side: 2 }, { side: 3 }, { side: 4 }, { side: 5 } ]
+  },
+  "171": {
+    color: "gray",
+    cities: [ { size: 3, rotate: 180 } ],
+    values: [ { angle: 270, percent: 0.88, value: 60 } ],
+    track: [ { side: 1 }, { side: 2 }, { side: 3 }, { side: 4 }, { side: 5 }, { side: 6 } ]
+  },
+  "172": {
+    color: "gray",
+    cities: [ { size: 2 } ],
+    values: [ { angle: 210, percent: 0.8, value: 60 } ],
+    track: [ { side: 1 }, { side: 2 }, { side: 3 }, { side: 4 }, { side: 5 }, { side: 6 } ]
+  },
   "201": {
     color: "yellow",
     values: [ { angle: 210, percent: 0.75, value: 30 } ],
@@ -1539,15 +1558,15 @@ const tiles = {
     ],
     values: [
       {
-        angle: 210,
-        percent: 0.9,
+        angle: 270,
+        percent: 0.88,
         value: 70
       }
     ],
     labels: {
       label: "Z",
-      angle: 150,
-      percent: 0.9
+      angle: 330,
+      percent: 0.88
     },
     track: [
       {

@@ -2,21 +2,17 @@ import React from "react";
 import tiles from "./data/tiles";
 
 import Hex from "./Hex";
+import Id from "./atoms/Id";
 
 const Tile = ({ id, border }) => {
-  let hex = tiles[id];
+  let [idBase, idExtra] = id.split("|");
+  let hex = tiles[idBase];
 
-  // If the full id doesn't exist check for only the base
-  if (!hex) {
-    let [idBase] = id.split("|");
-    hex = tiles[idBase];
+  if(hex) {
+    return <Hex hex={hex} id={id} border={border} />;
+  } else {
+    return <Id id={idBase} extra={idExtra} />;
   }
-
-  if(!hex) {
-    return null;
-  }
-
-  return <Hex hex={hex} id={id} border={border} />;
 };
 
 export default Tile;
