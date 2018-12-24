@@ -16,10 +16,20 @@ following:
 
 ```sh
 # Install the dependencies
+yarn
+
+# Run the app
+yarn start
+```
+
+or if you don't want to use [yarn](https://yarnpkg.com/en/):
+
+```sh
+# Install the dependencies
 npm install
 
 # Run the app
-npm run start
+npm start
 ```
 
 ### Adding a game
