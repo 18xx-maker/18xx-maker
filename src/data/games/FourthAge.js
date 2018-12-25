@@ -55,8 +55,8 @@ const game = {
     {
       name: "Bree and Points South",
       abbrev: "BPS",
-      tokens: ["Free", "$40", "$100", "Minas Tirith"],
-      color: "yellow",
+      tokens: ["Free", "40g", "100g", "100g"],
+      color: "orange",
       shares: [
         {
           quantity: 1,
@@ -74,8 +74,8 @@ const game = {
     {
       name: "Shire and Westlands",
       abbrev: "SWR",
-      tokens: ["Free", "$40", "Rivendell"],
-      color: "purple",
+      tokens: ["Free", "$40"],
+      color: "goldenrod",
       shares: [
         {
           quantity: 1,
@@ -93,8 +93,8 @@ const game = {
     {
       name: "Rivendell and Grey Havens",
       abbrev: "RGH",
-      tokens: ["Free", "$40", "Bonus", "Grey Havens"],
-      color: "darkGreen",
+      tokens: ["Free", "$40", "Bonus"],
+      color: "purple",
       shares: [
         {
           quantity: 1,
@@ -112,7 +112,7 @@ const game = {
     {
       name: "Dwarvish Mountain Express",
       abbrev: "DMH",
-      tokens: ["Free", "$40", "$100", "Iron Hills"],
+      tokens: ["Free", "$40", "$100"],
       color: "mountain",
       shares: [
         {
@@ -131,8 +131,8 @@ const game = {
     {
       name: "Elvish",
       abbrev: "E",
-      tokens: ["Free", "$40", "$100", "Grey Havens / Dol Amroth"],
-      color: "lightGreen",
+      tokens: ["Free", "$40", "$100"],
+      color: "pink",
       shares: [
         {
           quantity: 1,
@@ -150,7 +150,7 @@ const game = {
     {
       name: "Laketown and Lonely Mountain",
       abbrev: "LLM",
-      tokens: ["Free", "$40", "$100", "Lorien"],
+      tokens: ["Free", "$40", "$100"],
       color: "black",
       shares: [
         {
@@ -169,8 +169,8 @@ const game = {
     {
       name: "Minas Tirith Railway",
       abbrev: "MTR",
-      tokens: ["Free", "$40", "$100", "Bonus", "Edoras"],
-      color: "orange",
+      tokens: ["Free", "$40", "$100", "Bonus"],
+      color: "blue",
       shares: [
         {
           quantity: 1,
@@ -189,7 +189,7 @@ const game = {
       name: "Orcish",
       abbrev: "O",
       tokens: ["Free", "$40", "$100"],
-      color: "maroon",
+      color: "darkGreen",
       shares: [
         {
           quantity: 1,
@@ -207,8 +207,8 @@ const game = {
     {
       name: "Southern Excursion Railway",
       abbrev: "SER",
-      tokens: ["Free", "$40", "Southlands"],
-      color: "blue",
+      tokens: ["Free", "$40"],
+      color: "maroon",
       shares: [
         {
           quantity: 1,
@@ -226,7 +226,7 @@ const game = {
     {
       name: "Far Harad Railway",
       abbrev: "FHR",
-      tokens: ["Free", "$40", "Bonus", "Southlands"],
+      tokens: ["Free", "$40", "Southlands"],
       color: "red",
       shares: [
         {
@@ -838,6 +838,19 @@ const game = {
             name: "Grey Havens"
           }
         }],
+        tokens: [{
+          label: "RGH",
+          width: 15,
+          color: "purple",
+          angle: 30,
+          percent: 0.75
+        },{
+          label: "E",
+          width: 15,
+          color: "pink",
+          angle: 330,
+          percent: 0.75
+        }],
         hexes:["C3"]
       },
       {
@@ -868,7 +881,7 @@ const game = {
         cities: [{
           companies: [{
             label: "SWR",
-            color: "black"
+            color: "goldenrod"
           }],
           name: {
             name: "Hobbitown",
@@ -898,7 +911,7 @@ const game = {
         cities: [{
           companies: [{
             label: "BPS",
-            color: "black"
+            color: "orange"
           }],
           name: {
             name: "Bree",
@@ -985,12 +998,31 @@ const game = {
             }
           ]
         },
+        tokens: [{
+          label: "SER",
+          width: 15,
+          color: "maroon",
+          angle: 150,
+          percent: 0.7
+        },{
+          label: "FHR",
+          width: 15,
+          color: "red",
+          angle: 210,
+          percent: 0.7
+        }],
         hexes: ["G25"]
       },
       {
         color: "plain",
         water: {percent: 0.67,cost:"80g"},
         labels: [{percent: 0.67,angle:180,label:"P"}],
+        token: [{
+          label: "E",
+          width: 15,
+          color: "pink",
+          percent: 0.75
+        }],
         cities: [{
           name: {
             offset: 25,
@@ -1009,11 +1041,17 @@ const game = {
         cities: [{
           companies: [{
             label: "RGH",
-            color: "darkGreen"
+            color: "purple"
           }],
           name: {
             name: "Rivendell"
           }
+        }],
+        tokens: [{
+          label: "SWR",
+          width: 15,
+          color: "goldenrod",
+          percent: 0.65
         }],
         hexes:["I5"]
       },
@@ -1043,7 +1081,7 @@ const game = {
         water: [{percent: 0.67,cost:"120g"}],
         cities: [{
           companies: [{
-            label: "DME",
+            label: "DMH",
             color: "mountain"
           }],
           name: {
@@ -1059,7 +1097,7 @@ const game = {
         cities: [{
           companies: [{
             label: "SER",
-            color: "black"
+            color: "maroon"
           }],
           name: {
             name: "Harondor"
@@ -1069,28 +1107,46 @@ const game = {
       },
       {
         color: "plain",
-        water: {percent: 0.67,cost:"60g"},
+        water: {percent: 0.7,angle: 30,cost:"60g"},
         cities: [{
+          companies: [{
+            label: "E",
+            color: "pink"
+          }],
           name: {
             name: "Lorien"
           }
+        }],
+        tokens: [{
+          label: "LLM",
+          width: 15,
+          color: "black",
+          angle: 330,
+          percent: 0.7
         }],
         hexes:["K9"]
       },
       {
         color: "plain",
         labels: [{percent: 0.67,angle:180,label:"P"}],
-        water: [{percent: 0.67,cost:"80g"}],
+        water: [{percent: 0.7,angle:30,cost:"80g"}],
         cities: [{
           companies: [{
             label: "MTR",
-            color: "mountain"
+            color: "blue"
           }],
           name: {
             name: "Minas Tirith",
             offset: 75,
             reverse: true
           }
+        }],
+        tokens: [{
+          label: "BPS",
+          width: 15,
+          color: "orange",
+          angle: 330,
+          percent: 0.75
         }],
         hexes:["K15"]
       },
@@ -1106,7 +1162,7 @@ const game = {
         cities: [{
           companies: [{
             label: "FHR",
-            color: "black"
+            color: "red"
           }],
           name: {
             name: "Harad"
@@ -1120,6 +1176,12 @@ const game = {
           name: {
             name: "Edoras"
           }
+        }],
+        tokens: [{
+          label: "MTR",
+          width: 15,
+          color: "blue",
+          percent: 0.65
         }],
         hexes:["N4"]
       },
@@ -1168,7 +1230,7 @@ const game = {
         cities: [{
           companies: [{
             label: "O",
-            color: "purple"
+            color: "darkGreen"
           }],
           name: {
             name: "Barad-Dur"
@@ -1223,6 +1285,13 @@ const game = {
             }
           ]
         },
+        tokens: [{
+          label: "DMH",
+          width: 15,
+          color: "mountain",
+          angle: 90,
+          percent: 0.75
+        }],
         hexes:["Q3"]
       },
       {

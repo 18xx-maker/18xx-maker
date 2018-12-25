@@ -55,7 +55,7 @@ const game = {
       name: "Atchison, Topeka & Santa Fe",
       abbrev: "ATSF",
       tokens: ["Free", "$40", "$100", "Southwest"],
-      color: "darkGreen",
+      color: "cyan",
       shares: [
         {
           quantity: 1,
@@ -74,7 +74,7 @@ const game = {
       name: "Fort Worth & Denver City Railway",
       abbrev: "FW",
       tokens: ["Free", "$40", "Denver"],
-      color: "black",
+      color: "purple",
       shares: [
         {
           quantity: 1,
@@ -93,7 +93,7 @@ const game = {
       name: "Gulf, Mobile & Ohio Railroad",
       abbrev: "GMO",
       tokens: ["Free", "$40", "St. Louis"],
-      color: "red",
+      color: "pink",
       shares: [
         {
           quantity: 1,
@@ -112,7 +112,7 @@ const game = {
       name: "Illinois Central Railroad",
       abbrev: "IC",
       tokens: ["Free", "$40", "Chicago"],
-      color: "darkGreen",
+      color: "yellow",
       shares: [
         {
           quantity: 1,
@@ -131,7 +131,7 @@ const game = {
       name: "Missouri Pacific Railroad",
       abbrev: "MP",
       tokens: ["Free", "$40", "$100", "Dallas"],
-      color: "cyan",
+      color: "maroon",
       shares: [
         {
           quantity: 1,
@@ -150,7 +150,7 @@ const game = {
       name: "Missouri Kansas Texas Railroad",
       abbrev: "MKT",
       tokens: ["Free", "$40", "$100", "Southwest"],
-      color: "yellow",
+      color: "darkGreen",
       shares: [
         {
           quantity: 1,
@@ -188,7 +188,7 @@ const game = {
       name: "St. Louis Southwestern Railway",
       abbrev: "SSW",
       tokens: ["Free", "$40", "Fort Worth"],
-      color: "maroon",
+      color: "blue",
       shares: [
         {
           quantity: 1,
@@ -207,7 +207,7 @@ const game = {
       name: "St. Louis-San Francisco Railway",
       abbrev: "SLSF",
       tokens: ["Free", "$40", "$100", "Southeast"],
-      color: "maroon",
+      color: "red",
       shares: [
         {
           quantity: 1,
@@ -757,6 +757,12 @@ const game = {
           ]
         },
         offBoardTrack: [{side: 4},{side: 5}],
+        tokens: [{
+          label: "FW",
+          width: 15,
+          color: "purple",
+          percent: 0.75
+        }],
         hexes: ["A2"]
       },
       {
@@ -764,6 +770,12 @@ const game = {
         labels: [
           {label: "Chicago", angle: 203, percent: 0.6}
         ],
+        tokens: [{
+          label: "IC",
+          width: 15,
+          color: "yellow",
+          percent: 0.75
+        }],
         offBoardRevenue: {
           angle: 270,
           percent: 0.25,
@@ -792,12 +804,33 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {label: "Southwest", angle: 157, percent: 0.6}
-        ],
+        cities: [{
+          companies: [{
+            label: "SP",
+            color: "orange"
+          }],
+          name: {
+            name: "Southwest",
+            offset: 35
+          }
+        }],
+        tokens: [{
+          label: "ATSF",
+          width: 15,
+          color: "cyan",
+          angle: 120,
+          percent: 0.8
+        },{
+          label: "MKT",
+          width: 15,
+          color: "darkGreen",
+          angle: 180,
+          percent: 0.8
+
+        }],
         offBoardRevenue: {
-          angle: 90,
-          percent: 0.25,
+          angle: 30,
+          percent: 0.9,
           phaseReversed: true,
           revenues: [
             {
@@ -850,6 +883,12 @@ const game = {
           ]
         },
         offBoardTrack: [{side: 1},{side: 2},{side: 6}],
+        tokens: [{
+          label: "SLSF",
+          width: 15,
+          color: "red",
+          percent: 0.75
+        }],
         hexes: ["M22"]
       },
       {
@@ -870,8 +909,8 @@ const game = {
         color: "plain",
         cities: [{
           companies: [{
-            label: "AT",
-            color: "maroon"
+            label: "ATSF",
+            color: "cyan"
           }]
         }],
         hexes: ["B9"]
@@ -882,8 +921,8 @@ const game = {
         labels: [{percent: 0.67,angle:180,label:"P"}],
         cities: [{
           companies: [{
-            label: "MK",
-            color: "maroon"
+            label: "MKT",
+            color: "darkGreen"
           }]
         }],
         hexes: ["B11"]
@@ -893,8 +932,8 @@ const game = {
         mountain: {size:"small",cost:"$60",percent:0.67},
         cities: [{
           companies: [{
-            label: "SL",
-            color: "maroon"
+            label: "SLSF",
+            color: "red"
           }]
         }],
         hexes: ["E12"]
@@ -904,21 +943,28 @@ const game = {
         water: {size:"small",cost:"$60",percent:0.67},
         cities: [{
           companies: [{
-            label: "SS",
-            color: "maroon"
+            label: "SSW",
+            color: "blue"
           }]
         }],
         hexes: ["H17"]
       },
       {
         color: "plain",
-        water: {size:"small",cost:"$40",percent:0.67},
+        water: {size:"small",cost:"$40",angle:60,percent:0.7},
         labels: [{percent: 0.67,angle:180,label:"P"}],
         cities: [{
           companies: [{
             label: "MP",
             color: "maroon"
           }]
+        }],
+        tokens: [{
+          label: "GMO",
+          width: 15,
+          color: "pink",
+          angle: 300,
+          percent: 0.7
         }],
         hexes: ["C18"]
       },
@@ -928,8 +974,14 @@ const game = {
         cities: [{
           companies: [{
             label: "FW",
-            color: "maroon"
+            color: "purple"
           }]
+        }],
+        tokens: [{
+          label: "SSW",
+          width: 15,
+          color: "blue",
+          percent: 0.7
         }],
         hexes: ["J3"]
       },
@@ -942,6 +994,12 @@ const game = {
             color: "black"
           }]
         }],
+        tokens: [{
+          label: "MP",
+          width: 15,
+          color: "maroon",
+          percent: 0.7
+        }],
         hexes: ["J5"]
       },
       {
@@ -949,7 +1007,7 @@ const game = {
         cities: [{
           companies: [{
             label: "IC",
-            color: "darkGreen"
+            color: "yellow"
           }]
         }],
         hexes: ["K16"]
@@ -959,7 +1017,7 @@ const game = {
         cities: [{
           companies: [{
             label: "GMO",
-            color: "red"
+            color: "pink"
           }]
         }],
         hexes: ["M20"]
@@ -987,7 +1045,25 @@ const game = {
         borders: [{color:"water",side:4}],
         water: {size:"small",cost:"$80",percent: 0.67},
         labels: [{percent: 0.67,angle:180,label:"P"}],
-        cities: [{}],
+        cities: [{
+          name: {
+            name: "New Orleans",
+            offset: 70
+          }
+        }],
+        tokens: [{
+          label: "SP",
+          width: 15,
+          color: "orange",
+          angle: 60,
+          percent: 0.7
+        },{
+          label: "TP",
+          width: 15,
+          color: "black",
+          angle: 120,
+          percent: 0.7
+        }],
         hexes: ["N17"]
       },
       {
