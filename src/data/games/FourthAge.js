@@ -1057,7 +1057,7 @@ const game = {
       },
       {
         color: "plain",
-        mountain: {cost: "120", size: "small", angle: 270, percent: 0.4},
+        mountain: {cost: "120g", size: "small", angle: 270, percent: 0.4},
         centerTowns: [{ angle: 90, percent: 0.4 }],
         hexes: ["I11","K3","M13"]
       },
