@@ -819,17 +819,17 @@ const game = {
       { // 60g Water
         color: "plain",
         water: {cost:"60g"},
-        hexes:["B4", "C7", "D2","E11", "F10","H22","I21","J22"]
+        hexes:["B4", "C7", "D2","E11", "F10","H22","I21","J22","K7","P10"]
       },
       {
         color: "plain",
         water: {cost:"120g"},
         hexes:["B8"]
       },
-      {
+      { // 80g Water
         color: "plain",
         water: {cost:"80g"},
-        hexes:["C1","C9","D10","E15"]
+        hexes:["C1","C9","D10","E15","K11","K13"]
       },
       {
         color: "plain",
@@ -844,12 +844,12 @@ const game = {
         color: "plain",
         centerTowns: [{ angle: 90, percent: 0.5 },
                       { angle: 270, percent: 0.5 }],
-        hexes:["D4"]
+        hexes:["D4","L16"]
       },
       { // 40g Water
         color: "plain",
         water: {cost:"40g"},
-        hexes:["D6","E7","F14","G9","H8"]
+        hexes:["D6","E7","F14","G9","H8","K21","L20","P8"]
       },
       {
         color: "plain",
@@ -930,7 +930,7 @@ const game = {
       { // Center Town
         color: "plain",
         centerTowns: [{}],
-        hexes:["G13","I17","J12"]
+        hexes:["G13","I17","J12","L8"]
       },
       {
         color: "plain",
@@ -965,13 +965,35 @@ const game = {
       {
         color: "offboard",
         offBoardTrack: [{ side: 4 }],
+        offBoardRevenue: {
+          revenues: [
+            {
+              color: "white",
+              cost: "30",
+              phase: 2
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "40",
+              phase: 5
+            },
+            {
+              color: "white",
+              cost: "60",
+              phase: 8
+            }
+          ]
+        },
         hexes: ["G25"]
       },
       {
         color: "plain",
         water: {percent: 0.67,cost:"80g"},
+        labels: [{percent: 0.67,angle:180,label:"P"}],
         cities: [{
           name: {
+            offset: 25,
             name: "Dol Amoroth"
           }
         }],
@@ -1047,11 +1069,204 @@ const game = {
       },
       {
         color: "plain",
+        water: {percent: 0.67,cost:"60g"},
+        cities: [{
+          name: {
+            name: "Lorien"
+          }
+        }],
+        hexes:["K9"]
+      },
+      {
+        color: "plain",
+        labels: [{percent: 0.67,angle:180,label:"P"}],
+        water: [{percent: 0.67,cost:"80g"}],
+        cities: [{
+          companies: [{
+            label: "MTR",
+            color: "mountain"
+          }],
+          name: {
+            name: "Minas Tirith",
+            offset: 75,
+            reverse: true
+          }
+        }],
+        hexes:["K15"]
+      },
+      {
+        color: "plain",
+        water: {size:"small",cost:"$80",percent:0.5},
+        centerTowns: [{ angle: 120, percent: 0.5 },
+                      { angle: 240, percent: 0.5 }],
+        hexes: ["K17"]
+      },
+      {
+        color: "plain",
+        cities: [{
+          companies: [{
+            label: "FHR",
+            color: "black"
+          }],
+          name: {
+            name: "Harad"
+          }
+        }],
+        hexes:["M23"]
+      },
+      {
+        color: "plain",
+        cities: [{
+          name: {
+            name: "Edoras"
+          }
+        }],
+        hexes:["N4"]
+      },
+      {
+        color: "plain",
+        labels: [{percent: 0.67,angle:180,label:"P"}],
+        cities: [{
+          companies: [{
+            label: "LLM",
+            color: "black"
+          }],
+          name: {
+            name: "Laketown",
+            reverse: true
+          }
+        }],
+        hexes:["N6"]
+      },
+      {
+        color: "offboard",
+        offBoardTrack: [{side: 3},{side: 4},{side: 5}],
+        offBoardRevenue: {
+          revenues: [
+            {
+              color: "white",
+              cost: "20",
+              phase: 2
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "30",
+              phase: 5
+            },
+            {
+              color: "white",
+              cost: "50",
+              phase: 8
+            }
+          ]
+        },
+        hexes:["N24"]
+      },
+      {
+        color: "plain",
+        cities: [{
+          companies: [{
+            label: "O",
+            color: "purple"
+          }],
+          name: {
+            name: "Barad-Dur"
+          }
+        }],
+        hexes:["O15"]
+      },
+      {
+        color: "plain",
+        centerTowns: [{}],
+        borders: [{side:1,color:"water"}],
+        hexes:["O17"]
+      },
+      {
+        color: "plain",
+        mountain: {cost:"120g"},
+        borders: [{side:4,color:"water"}],
+        hexes:["O19"]
+      },
+      {
+        color: "plain",
+        cities: [{
+          name: {
+            name: "Khand"
+          }
+        }],
+        hexes:["P20"]
+      },
+      {
+        color: "offboard",
+        offBoardTrack: [{side: 1},{side: 2}],
+        offBoardRevenue: {
+          angle: 270,
+          percent: 0.25,
+          phaseReversed: true,
+          revenues: [
+            {
+              color: "white",
+              cost: "30",
+              phase: 2
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "40",
+              phase: 5
+            },
+            {
+              color: "white",
+              cost: "60",
+              phase: 8
+            }
+          ]
+        },
+        hexes:["Q3"]
+      },
+      {
+        color: "offboard",
+        offBoardTrack: [{side: 1},{side: 2},{side: 3}],
+        offBoardRevenue: {
+          angle: 270,
+          percent: 0.25,
+          phaseReversed: true,
+          revenues: [
+            {
+              color: "white",
+              cost: "20",
+              phase: 2
+            },
+            {
+              color: "black",
+              textColor: "white",
+              cost: "30",
+              phase: 5
+            },
+            {
+              color: "white",
+              cost: "40",
+              phase: 8
+            }
+          ]
+        },
+        hexes:["Q11"]
+      },
+      {
+        color: "plain",
         hexes: ["C5","D8","E3","E9","F4","F8","F12","F16",
                 "G1","G3","G5","G7","G15",
                 "H2","H4","H6","H10","H12","H14","H16","H20",
                 "I7","I9","I15","I23",
-                "J2","J14","J16"]
+                "J2","J14","J16",
+                "K5","K19","K23",
+                "L2","L4","L6","L10","L12","L14","L18","L22",
+                "M5","M7","M9","M11","M19","M21",
+                "N8","N10","N12","N16","N20","N22",
+                "O5","O7","O9","O11","O21","O23",
+                "P4","P6","P12","P16","P22",
+                "Q5","Q7","Q13","Q15","Q17","Q19","Q21"]
       }
     ]
   }
