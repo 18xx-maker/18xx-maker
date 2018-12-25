@@ -10,6 +10,7 @@ const Games = () => {
         <GameNav
           game={game}
           ipo={games[game].ipo}
+          minors={games[game].minorCompanies}
           paginated={!(games[game].info.paginated === false)}
           paginatedMarket={games[game].stock.paginated}
         />

@@ -100,7 +100,7 @@ const Market2D = ({ legend, market, par, title, displayMode, paginated, cell }) 
       }
 
       return (
-        <MarketCell {...{ value, legend, par, ...(paginated ? cell : {}) }} key={`cell-${row}-${col}`} />
+        <MarketCell {...{ ...cell, value, legend, par }} key={`cell-${row}-${col}`} />
       );
     }, marketRow);
     return <tr key={row}>{cells}</tr>;

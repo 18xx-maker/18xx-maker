@@ -3,7 +3,9 @@ import * as R from "ramda";
 import { colors, textColor, market } from "./data";
 import * as tinycolor from "tinycolor2";
 
-const MarketCell = ({ value, legend, par, colSpan, width, height }) => {
+const cap = str => str.charAt(0).toUpperCase() + str.slice(1);
+
+const MarketCell = ({ borders, value, legend, par, colSpan, width, height }) => {
   let color = null;
   let companies = null;
 
@@ -62,22 +64,29 @@ const MarketCell = ({ value, legend, par, colSpan, width, height }) => {
     );
   }
 
+  let style = {
+    backgroundColor: color,
+    color: labelColor,
+    width: width ? `${width}in` : "auto",
+    height: height ? `${height}in` : "auto",
+    fontFamily: market.fontFamily,
+    fontWeight: market.fontWeight,
+    fontSize: market.fontSize,
+    verticalAlign: (value && value.verticalAlign) || "top",
+    lineHeight: market.fontSize
+  };
+
+  R.forEach(border => {
+    style[`border${cap(border.side)}`] = `3px solid ${colors[border.color]}`;
+  }, (value && value.borders) || []);
+
   return (
     <td
-      style={{
-        backgroundColor: color,
-        color: labelColor,
-        width: width ? `${width}in` : "auto",
-        height: height ? `${height}in` : "auto",
-        fontFamily: market.fontFamily,
-        fontWeight: market.fontWeight,
-        fontSize: market.fontSize,
-        lineHeight: market.fontSize
-      }}
+      style={style}
       className={classes.join(" ")}
       colSpan={colSpan}
     >
-      {(value && value.label) || value}
+      {R.is(Object, value) ? (value.label || "") : value}
       {value &&
         R.has("subLabel") && (
           <span className="MarketCell--SubLabel">{value.subLabel}</span>
