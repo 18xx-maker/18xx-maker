@@ -1,20 +1,21 @@
 const game = {
   // Generic Game Info
   info: {
-    title: "1870",
-    subtitle: "Railroading across the Trans Mississippi from 1870",
-    designer: "Bill Dixon",
-    background: "green",
+    title: "Fourth Age",
+    subtitle: "Railroading in Middle Earth",
+    designer: "Rick Dutton",
+    background: "purple",
     width: 150,
     color_10: "orange",
-    titleX: 75,
-    titleY: 2000,
-    extraTotalHeight: 300,
+    titleX: 54,
+    titleY: 1440,
+    titleSize: 120,
+    orientation: "horizontal",
     hexCoords: true
   },
 
   // Extra Tokens
-  tokens: ["Round", "#port", "#port", "#meat", "#meat"],
+  tokens: ["Round", "+20", "+20"],
 
   // Need an IPO sheet
   ipo: true,
@@ -52,104 +53,9 @@ const game = {
   // Railway Companies
   companies: [
     {
-      name: "Atchison, Topeka & Santa Fe",
-      abbrev: "ATSF",
-      tokens: ["Free", "$40", "$100", "Southwest"],
-      color: "darkGreen",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Fort Worth & Denver City Railway",
-      abbrev: "FW",
-      tokens: ["Free", "$40", "Denver"],
-      color: "black",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Gulf, Mobile & Ohio Railroad",
-      abbrev: "GMO",
-      tokens: ["Free", "$40", "St. Louis"],
-      color: "red",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Illinois Central Railroad",
-      abbrev: "IC",
-      tokens: ["Free", "$40", "Chicago"],
-      color: "darkGreen",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Missouri Pacific Railroad",
-      abbrev: "MP",
-      tokens: ["Free", "$40", "$100", "Dallas"],
-      color: "cyan",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Missouri Kansas Texas Railroad",
-      abbrev: "MKT",
-      tokens: ["Free", "$40", "$100", "Southwest"],
+      name: "Bree and Points South",
+      abbrev: "BPS",
+      tokens: ["Free", "$40", "$100", "Minas Tirith"],
       color: "yellow",
       shares: [
         {
@@ -166,9 +72,104 @@ const game = {
       ]
     },
     {
-      name: "Southern Pacific Railroad",
-      abbrev: "SP",
-      tokens: ["Free", "$40", "$100", "New Orleans"],
+      name: "Shire and Westlands",
+      abbrev: "SWR",
+      tokens: ["Free", "$40", "Rivendell"],
+      color: "purple",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "Rivendell and Grey Havens",
+      abbrev: "RGH",
+      tokens: ["Free", "$40", "Bonus", "Grey Havens"],
+      color: "darkGreen",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "Dwarvish Mountain Express",
+      abbrev: "DMH",
+      tokens: ["Free", "$40", "$100", "Iron Hills"],
+      color: "mountain",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "Elvish",
+      abbrev: "E",
+      tokens: ["Free", "$40", "$100", "Grey Havens / Dol Amroth"],
+      color: "lightGreen",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "Laketown and Lonely Mountain",
+      abbrev: "LLM",
+      tokens: ["Free", "$40", "$100", "Lorien"],
+      color: "black",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "Minas Tirith Railway",
+      abbrev: "MTR",
+      tokens: ["Free", "$40", "$100", "Bonus", "Edoras"],
       color: "orange",
       shares: [
         {
@@ -185,9 +186,9 @@ const game = {
       ]
     },
     {
-      name: "St. Louis Southwestern Railway",
-      abbrev: "SSW",
-      tokens: ["Free", "$40", "Fort Worth"],
+      name: "Orcish",
+      abbrev: "O",
+      tokens: ["Free", "$40", "$100"],
       color: "maroon",
       shares: [
         {
@@ -204,10 +205,10 @@ const game = {
       ]
     },
     {
-      name: "St. Louis-San Francisco Railway",
-      abbrev: "SLSF",
-      tokens: ["Free", "$40", "$100", "Southeast"],
-      color: "maroon",
+      name: "Southern Excursion Railway",
+      abbrev: "SER",
+      tokens: ["Free", "$40", "Southlands"],
+      color: "blue",
       shares: [
         {
           quantity: 1,
@@ -223,10 +224,10 @@ const game = {
       ]
     },
     {
-      name: "Texas & Pacific Railway",
-      abbrev: "TP",
-      tokens: ["Free", "$40", "New Orleans"],
-      color: "black",
+      name: "Far Harad Railway",
+      abbrev: "FHR",
+      tokens: ["Free", "$40", "Bonus", "Southlands"],
+      color: "red",
       shares: [
         {
           quantity: 1,
@@ -246,8 +247,8 @@ const game = {
   trains: [
     {
       name: "2",
-      quantity: 7,
-      price: "$80",
+      quantity: 4,
+      price: "$100",
       color: "yellow",
       info: [
         {
@@ -257,9 +258,21 @@ const game = {
       ]
     },
     {
+      name: "2+2",
+      quantity: 2,
+      price: "$125",
+      color: "yellow",
+      info: [
+        {
+          color: "green",
+          note: "Rusted by 4+4"
+        }
+      ]
+    },
+    {
       name: "3",
-      quantity: 6,
-      price: "$180",
+      quantity: 3,
+      price: "$200",
       color: "green",
       info: [
         {
@@ -269,8 +282,20 @@ const game = {
       ]
     },
     {
+      name: "3+3",
+      quantity: 3,
+      price: "$250",
+      color: "green",
+      info: [
+        {
+          color: "gray",
+          note: "Rusted by 7"
+        }
+      ]
+    },
+    {
       name: "4",
-      quantity: 5,
+      quantity: 3,
       price: "$300",
       color: "green",
       info: [
@@ -281,21 +306,45 @@ const game = {
       ]
     },
     {
-      name: "5",
-      quantity: 4,
-      price: "$450",
-      color: "brown",
+      name: "4+4",
+      quantity: 2,
+      price: "$400",
+      color: "green",
       info: [
         {
           color: "gray",
-          note: "Rusted by 12"
+          note: "Rusted by D"
+        }
+      ]
+    },
+    {
+      name: "5",
+      quantity: 2,
+      price: "$550",
+      color: "brown",
+      info: [
+        {
+          color: "yellow",
+          note: "Permanent"
+        }
+      ]
+    },
+    {
+      name: "5+5",
+      quantity: 2,
+      price: "$650",
+      color: "brown",
+      info: [
+        {
+          color: "yellow",
+          note: "Permanent"
         }
       ]
     },
     {
       name: "6",
-      quantity: 3,
-      price: "$630",
+      quantity: 1,
+      price: "$750",
       color: "gray",
       info: [
         {
@@ -305,8 +354,8 @@ const game = {
       ]
     },
     {
-      name: "8",
-      quantity: 3,
+      name: "7",
+      quantity: 1,
       price: "$800",
       color: "gray",
       info: [
@@ -317,9 +366,9 @@ const game = {
       ]
     },
     {
-      name: "10",
-      quantity: 2,
-      price: "$950",
+      name: "8",
+      quantity: 1,
+      price: "$900",
       color: "gray",
       info: [
         {
@@ -329,9 +378,21 @@ const game = {
       ]
     },
     {
-      name: "12",
+      name: "9",
+      quantity: 1,
+      price: "$1000",
+      color: "gray",
+      info: [
+        {
+          color: "yellow",
+          note: "Permanent"
+        }
+      ]
+    },
+    {
+      name: "D",
       quantity: 6,
-      price: "$1100",
+      price: "$1200",
       color: "gray",
       info: [
         {
@@ -344,101 +405,111 @@ const game = {
 
   privates: [
     {
-      name: "Great River Shipping Company",
+      name: "The Hobbiton Teakettle",
       price: "$20",
       revenue: "$5",
       description: ""
     },
     {
-      name: "Mississippi River Bridge Company",
-      price: "$40",
-      revenue: "$10",
-      description:
-      ""
-    },
-    {
-      name: "The Southern Cattle Company",
+      name: "The Great River Bridge Company",
       price: "$50",
       revenue: "$10",
-      description:
-      "This company has a token that may be placed on any city west of the Mississippi River. Cities located in the same hex as any portion of the Mississippi are not eligible for this placement. This increases the value of that city by $10 for that company only. Placing the token does not close the company."
+      description: "Owning railroad pays nothing for one tile lay across the Anduin; may be bought in during Phase 2 for up to face value."
     },
     {
-      name: "The Gulf Shipping Company",
+      name: "Mountain Guides, Inc",
       price: "$80",
       revenue: "$15",
-      description:
-      ""
+      description: "Owning railroad pays nothing for one tile lay in a mountain hex; may be bought in during Phase 2 for up to face value."
     },
     {
-      name: "St. Louis-San Francisco Railway",
-      price: "$140",
-      description:
-      "This is the President's certificate of the St.Louis-San Francisco Railway. The purchaser sets the par value of the railway. Unlike other companies, this company may operate with just 20% sold. It may not be purchased by another public company."
-    },
-    {
-      name: "Missouri-Kansas-Texas Railroad",
-      price: "$160",
+      name: "Trollheim",
+      price: "$120",
       revenue: "$20",
-      description:
-      "Comes with a 10% share of the Missouri-Kansas-Texas Railroad."
+      description: "Owning railroad may play a permanent +20 marker in any city or town. Bonus applies only to the owning railroad."
+    },
+    {
+      name: "Moria Mining Company",
+      price: "$140",
+      description: "This is the President's certificate of the Moria Mining Company. The purchaser sets the par value of the railway. Unlike other companies, this company may operate with just 20% sold. It may not be purchased by another public company."
+    },
+    {
+      name: "Lorien Border Railway",
+      price: "$170",
+      revenue: "$25",
+      description: "Comes with a 10% share of the Elvish."
     }
   ],
 
   phases: [
     {
-      name: "2",
+      phase: "2",
+      train: "2 / 2+2",
       limit: "4",
-      number: "7",
-      tiles: "yellow"
+      number: "4 / 2",
+      tiles: "yellow",
+      notes: "Bridge and Mountain private companies may be purchased"
     },
     {
-      name: "3",
+      phase: "3",
+      train: "3 / 3+3",
       limit: "4",
-      number: "6",
+      number: "3 / 3",
       tiles: "green",
-      notes: "Private companies may be purchased"
+      notes: "Other private companies may be purchased"
     },
     {
-      name: "4",
+      phase: "4",
       rust: "2",
+      train: "4 / 4+4",
       limit: "3",
-      number: "5",
+      number: "3 / 2",
       tiles: "green"
     },
     {
-      name: "5",
+      phase: "5",
+      train: "5 / 5+5",
       limit: "2",
-      number: "4",
-      tiles: "brown",
-      notes: "Private companies are closed"
+      number: "2 / 2",
+      tiles: "brown"
     },
     {
-      name: "6",
+      phase: "6",
+      train: "6",
       limit: "2",
-      number: "3",
+      number: "1",
       rust: "3",
-      tiles: "gray",
-      notes: "Remove port & cattle tokens"
+      tiles: "gray"
     },
     {
-      name: "8",
+      phase: "7",
+      train: "7",
       limit: "2",
-      number: "3",
+      number: "1",
+      rust: "3+3",
+      tiles: "gray"
+    },
+    {
+      phase: "8",
+      train: "8",
+      limit: "2",
+      number: "1",
       rust: "4",
       tiles: "gray"
     },
     {
-      name: "10",
+      phase: "9",
+      train: "9",
       limit: "2",
       number: "2",
       tiles: "gray"
     },
     {
-      name: "12",
+      phase: "D",
+      train: "D",
       limit: "2",
       number: "∞",
-      rust: "5",
+      rust: "4+4",
       tiles: "gray"
     }
   ],
@@ -729,345 +800,258 @@ const game = {
     print: "landscape",
     hexes: [
       {
-        color: "offboard",
-        labels: [
-          {label: "Denver", angle: 157, percent: 0.6}
-        ],
-        offBoardRevenue: {
-          angle: 90,
-          percent: 0.25,
-          phaseReversed: true,
-          revenues: [
-            {
-              color: "white",
-              cost: "30",
-              phase: 2
-            },
-            {
-              color: "black",
-              textColor: "white",
-              cost: "40",
-              phase: 5
-            },
-            {
-              color: "white",
-              cost: "50",
-              phase: 8
-            }
-          ]
-        },
-        offBoardTrack: [{side: 4},{side: 5}],
-        hexes: ["A2"]
-      },
-      {
-        color: "offboard",
-        labels: [
-          {label: "Chicago", angle: 203, percent: 0.6}
-        ],
-        offBoardRevenue: {
-          angle: 270,
-          percent: 0.25,
-          phaseReversed: true,
-          revenues: [
-            {
-              color: "white",
-              cost: "40",
-              phase: 2
-            },
-            {
-              color: "black",
-              textColor: "white",
-              cost: "50",
-              phase: 5
-            },
-            {
-              color: "white",
-              cost: "60",
-              phase: 8
-            }
-          ]
-        },
-        offBoardTrack: [{side: 1},{side: 6}],
-        hexes: ["A22"]
-      },
-      {
-        color: "offboard",
-        labels: [
-          {label: "Southwest", angle: 157, percent: 0.6}
-        ],
-        offBoardRevenue: {
-          angle: 90,
-          percent: 0.25,
-          phaseReversed: true,
-          revenues: [
-            {
-              color: "white",
-              cost: "20",
-              phase: 2
-            },
-            {
-              color: "black",
-              textColor: "white",
-              cost: "40",
-              phase: 5
-            },
-            {
-              color: "white",
-              cost: "50",
-              phase: 8
-            }
-          ]
-        },
-        offBoardTrack: [{side: 3},{side: 4},{side: 5}],
-        hexes: ["N1"]
-      },
-      {
-        color: "offboard",
-        labels: [
-          {label: "Southeast", angle: 203, percent: 0.6}
-        ],
-        offBoardRevenue: {
-          angle: 270,
-          percent: 0.25,
-          phaseReversed: true,
-          revenues: [
-            {
-              color: "white",
-              cost: "20",
-              phase: 2
-            },
-            {
-              color: "black",
-              textColor: "white",
-              cost: "30",
-              phase: 5
-            },
-            {
-              color: "white",
-              cost: "50",
-              phase: 8
-            }
-          ]
-        },
-        offBoardTrack: [{side: 1},{side: 2},{side: 6}],
-        hexes: ["M22"]
+        color: "plain",
+        water: {cost:"100g"},
+        borders: {side:1,color:"water"},
+        hexes:["A3"]
       },
       {
         color: "plain",
-        water: {size:"small",cost:"$40",percent:0.5},
-        centerTowns: [{ angle: 120, percent: 0.5 },
-                      { angle: 240, percent: 0.5 }],
-        hexes: ["A16"]
+        water: {cost:"100g"},
+        borders: {side:4,color:"water"},
+        hexes:["A5"]
+      },
+      { // 120g Mountain
+        color: "plain",
+        mountain: {cost:"120g"},
+        hexes:["B2","B6","I3","J4","J6","J10","M3","M15","M17","N2","N14","N18","O3","O13","P14","P18"]
+      },
+      { // 60g Water
+        color: "plain",
+        water: {cost:"60g"},
+        hexes:["B4", "C7", "D2","E11", "F10","H22","I21","J22"]
       },
       {
         color: "plain",
-        water: {size:"small",cost:"$60",percent:0.5},
-        centerTowns: [{ angle: 120, percent: 0.5 },
-                      { angle: 240, percent: 0.5 }],
-        hexes: ["E20","I10"]
+        water: {cost:"120g"},
+        hexes:["B8"]
+      },
+      {
+        color: "plain",
+        water: {cost:"80g"},
+        hexes:["C1","C9","D10","E15"]
       },
       {
         color: "plain",
         cities: [{
-          companies: [{
-            label: "AT",
-            color: "maroon"
-          }]
+          name: {
+            name: "Grey Havens"
+          }
         }],
-        hexes: ["B9"]
+        hexes:["C3"]
       },
       {
         color: "plain",
-        water: {size:"small",cost:"$40",percent:0.67},
-        labels: [{percent: 0.67,angle:180,label:"P"}],
-        cities: [{
-          companies: [{
-            label: "MK",
-            color: "maroon"
-          }]
-        }],
-        hexes: ["B11"]
+        centerTowns: [{ angle: 90, percent: 0.5 },
+                      { angle: 270, percent: 0.5 }],
+        hexes:["D4"]
+      },
+      { // 40g Water
+        color: "plain",
+        water: {cost:"40g"},
+        hexes:["D6","E7","F14","G9","H8"]
       },
       {
         color: "plain",
-        mountain: {size:"small",cost:"$60",percent:0.67},
-        cities: [{
-          companies: [{
-            label: "SL",
-            color: "maroon"
-          }]
-        }],
-        hexes: ["E12"]
+        water: {cost:"100g"},
+        borders: [{side:6,color:"water"}],
+        hexes:["D12"]
+      },
+      { // 100g Water
+        color: "plain",
+        water: {cost:"100g"},
+        hexes:["D18","E17","F22","J18"]
       },
       {
         color: "plain",
-        water: {size:"small",cost:"$60",percent:0.67},
+        companies: [{label:"THT",angle: 180,percent: 0.6}],
         cities: [{
           companies: [{
-            label: "SS",
-            color: "maroon"
-          }]
-        }],
-        hexes: ["H17"]
-      },
-      {
-        color: "plain",
-        water: {size:"small",cost:"$40",percent:0.67},
-        labels: [{percent: 0.67,angle:180,label:"P"}],
-        cities: [{
-          companies: [{
-            label: "MP",
-            color: "maroon"
-          }]
-        }],
-        hexes: ["C18"]
-      },
-      {
-        color: "plain",
-        labels: [{percent: 0.67,angle:180,label:"P"}],
-        cities: [{
-          companies: [{
-            label: "FW",
-            color: "maroon"
-          }]
-        }],
-        hexes: ["J3"]
-      },
-      {
-        color: "plain",
-        labels: [{percent: 0.67,angle:180,label:"P"}],
-        cities: [{
-          companies: [{
-            label: "TP",
+            label: "SWR",
             color: "black"
-          }]
+          }],
+          name: {
+            name: "Hobbitown",
+            reverse: true
+          }
         }],
-        hexes: ["J5"]
+        hexes:["E5"]
+      },
+      {
+        color: "plain",
+        water: {cost:"80g"},
+        borders: [{side:3,color:"water"}],
+        hexes:["E13"]
       },
       {
         color: "plain",
         cities: [{
-          companies: [{
-            label: "IC",
-            color: "darkGreen"
-          }]
+          name: {
+            name: "Fornost"
+          }
         }],
-        hexes: ["K16"]
+        hexes:["F2"]
       },
       {
         color: "plain",
-        cities: [{
-          companies: [{
-            label: "GMO",
-            color: "red"
-          }]
-        }],
-        hexes: ["M20"]
-      },
-      {
-        color: "plain",
-        water: {size:"small",cost:"$60",percent: 0.67},
-        cities: [{}],
-        hexes: ["L11"]
-      },
-      {
-        color: "plain",
-        water: {size:"small",cost:"$80",percent: 0.67},
-        cities: [{}],
-        hexes: ["M14"]
-      },
-      {
-        color: "plain",
-        water: {size:"small",cost:"$80",percent: 0.67},
-        cities: [{}],
-        hexes: ["N7"]
-      },
-      {
-        color: "plain",
-        borders: [{color:"water",side:4}],
-        water: {size:"small",cost:"$80",percent: 0.67},
         labels: [{percent: 0.67,angle:180,label:"P"}],
-        cities: [{}],
-        hexes: ["N17"]
+        cities: [{
+          companies: [{
+            label: "BPS",
+            color: "black"
+          }],
+          name: {
+            name: "Bree",
+            reverse: true
+          }
+        }],
+        hexes:["F6"]
       },
       {
         color: "plain",
-        borders: [{color: "water", side: 1},
-                  {color: "water", side: 6}],
-        water: {cost: "$80", size: "small"},
-        hexes: ["N19"]
+        borders: [{side:6,color:"water"}],
+        water: {cost:"100g"},
+        hexes:["F18"]
       },
       {
-        color: "plain",
-        borders: [{color: "water", side: 3}],
-        water: {cost: "$100", size: "small"},
-        hexes: ["O18"]
-      },
-      {
-        color: "plain",
-        water: {cost: "$80", size: "small", angle: 270, percent: 0.4},
-        centerTowns: [{ angle: 90, percent: 0.4 }],
-        hexes: ["N21"]
-      },
-      {
-        color: "plain",
-        water: {cost: "$40", size: "small", angle: 270, percent: 0.4},
-        centerTowns: [{ angle: 90, percent: 0.4 }],
-        hexes: ["A10", "B13", "D17", "H3", "K14"]
-      },
-      {
-        color: "plain",
-        mountain: {cost: "$60", size: "small"},
-        hexes: ["D13", "D15", "E14", "E16", "F11", "F13", "F15"]
-      },
-      {
-        color: "plain",
-        water: {cost: "$40", size: "small"},
-        hexes: ["B17","C14","C16","G2","H5"]
-      },
-      {
-        color: "plain",
-        water: {cost: "$60", size: "small"},
-        hexes: ["E18","F19","G18","H7","I8","I16","J11","J15","K10","O2"]
-      },
-      {
-        color: "plain",
-        water: {cost: "$80", size: "small"},
-        hexes: ["L13","O4","O6","N9","N11","N13","N15"]
-      },
-      {
-        color: "plain",
-        water: {cost: "$100", size: "small"},
-        hexes: ["O14","O16"]
+        color: "offboard",
+        offBoardTrack: [{ side: 5 }],
+        hexes: ["F24"]
       },
       {
         color: "plain",
         cities: [{
-          size: 1
+          name: {
+            name: "Tharbad"
+          }
         }],
-        hexes: ["B19","D5","F5","H13","M2","M6"]
+        hexes:["G11"]
       },
-      {
+      { // Center Town
         color: "plain",
         centerTowns: [{}],
-        hexes: ["B7", "D9", "D21", "E8", "F9", "G10", "G20", "H21", "I14", "J9", "K4", "K20", "M8", "M10"]
+        hexes:["G13","I17","J12"]
       },
       {
         color: "plain",
-        hexes: ["A4","A6","A8","A12","A14","A18","A20",
-                "B3","B5","B15","B21",
-                "C2","C4","C6","C8","C10","C12","C20",
-                "D1","D3","D7","D11","D19",
-                "E2","E4","E6","E10",
-                "F1","F3","F7","F17","F21",
-                "G4","G6","G8","G12","G14","G16",
-                "H1","H9","H11","H15","H19",
-                "I2","I4","I6","I12","I18","I20",
-                "J1","J7","J13","J17","J19","J21",
-                "K2","K6","K8","K12","K18",
-                "L1","L3","L5","L7","L9","L15","L17","L19","L21",
-                "M4","M12","M16","M18",
-                "N3","N5"]
+        water: {cost: "80g", size: "small", angle: 270, percent: 0.4},
+        centerTowns: [{ angle: 90, percent: 0.4 }],
+        hexes: ["G17"]
+      },
+      {
+        color: "plain",
+        borders: [{side:1,color:"water"},
+                  {side:3,color:"water"}],
+        water: {cost:"100g"},
+        hexes:["G19"]
+      },
+      {
+        color: "plain",
+        borders: [{side:4,color:"water"}],
+        water: {cost:"100g"},
+        hexes:["G21"]
+      },
+      {
+        color: "plain",
+        labels: [{percent: 0.67,angle:180,label:"P"}],
+        cities: [{
+          name: {
+            name: "Umbar",
+            reverse: true
+          }
+        }],
+        hexes:["G23"]
+      },
+      {
+        color: "offboard",
+        offBoardTrack: [{ side: 4 }],
+        hexes: ["G25"]
+      },
+      {
+        color: "plain",
+        water: {percent: 0.67,cost:"80g"},
+        cities: [{
+          name: {
+            name: "Dol Amoroth"
+          }
+        }],
+        hexes:["H18"]
+      },
+      {
+        color: "offboard",
+        offBoardTrack: [{side: 3},{side: 4},{side: 5}],
+        hexes: ["H24"]
+      },
+      {
+        color: "plain",
+        cities: [{
+          companies: [{
+            label: "RGH",
+            color: "darkGreen"
+          }],
+          name: {
+            name: "Rivendell"
+          }
+        }],
+        hexes:["I5"]
+      },
+      {
+        color: "plain",
+        mountain: {cost: "120", size: "small", angle: 270, percent: 0.4},
+        centerTowns: [{ angle: 90, percent: 0.4 }],
+        hexes: ["I11","K3","M13"]
+      },
+      {
+        color: "plain",
+        cities: [{
+          name: {
+            name: "Edoras"
+          }
+        }],
+        hexes:["I13"]
+      },
+      { // 120g Water
+        color: "plain",
+        water: {cost:"120g"},
+        hexes:["I19"]
+      },
+      {
+        color: "plain",
+        labels: [{percent: 0.67,angle:180,label:"P"}],
+        water: [{percent: 0.67,cost:"120g"}],
+        cities: [{
+          companies: [{
+            label: "DME",
+            color: "mountain"
+          }],
+          name: {
+            name: "Moria",
+            offset: 75,
+            reverse: true
+          }
+        }],
+        hexes:["J8"]
+      },
+      {
+        color: "plain",
+        cities: [{
+          companies: [{
+            label: "SER",
+            color: "black"
+          }],
+          name: {
+            name: "Harondor"
+          }
+        }],
+        hexes:["J20"]
+      },
+      {
+        color: "plain",
+        hexes: ["C5","D8","E3","E9","F4","F8","F12","F16",
+                "G1","G3","G5","G7","G15",
+                "H2","H4","H6","H10","H12","H14","H16","H20",
+                "I7","I9","I15","I23",
+                "J2","J14","J16"]
       }
     ]
   }

@@ -3,7 +3,7 @@ import { colors } from "../data";
 
 const Company = ({ label, bottom, left, right, radius, color }) => {
   let size = 13;
-  radius = radius || 4;
+  radius = radius || 6;
 
   let y = bottom ? (2 * radius) : -(2 * radius);
 

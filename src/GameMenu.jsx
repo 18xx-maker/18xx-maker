@@ -36,8 +36,9 @@ const GameMenu = ({ match, location }) => {
       </nav>
       {game && (
         <GameNav
-          game={match.params.game}
-          ipo={game.ipo}
+          game={game}
+          ipo={games[game].ipo}
+          minors={games[game].minorCompanies}
           paginated={!(games[match.params.game].info.paginated === false)}
           paginatedMarket={games[match.params.game].stock.paginated}
         />
