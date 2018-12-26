@@ -52,7 +52,13 @@ const City = ({ size, companies, border, name, rotation }) => {
   let nameNode = null;
 
   if (name) {
-    nameNode = <Name {...name} size={size} />;
+    let path = `city${size > 1 ? size : ""}Path`;
+    if(name.reverse) {
+      path = path + "Reverse";
+    }
+    nameNode = <Name {...name}
+                     y={name.y || (name.reverse ? 7 : 0)}
+                     path={path} />;
   }
 
   if (size === 1) {

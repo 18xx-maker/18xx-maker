@@ -15,7 +15,7 @@ const CenterTown = ({ border, name, color }) => {
       nameNode = (
         <Name
           {...name}
-          town={true}
+          y={name.y || (name.reverse ? 18 : -18)}
         />
       );
     }
