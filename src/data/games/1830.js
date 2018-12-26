@@ -689,13 +689,10 @@ const game = {
     hexes: [
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Gulf"
-          }
-        ],
         offBoardRevenue: {
-          percent: 0.333,
+          name: {
+            name: "Gulf"
+          },
           revenues: [
             {
               color: "yellow",
@@ -742,15 +739,10 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Chicago",
-            x: -25
-          }
-        ],
         offBoardRevenue: {
-          percent: 0.333,
-          x: -25,
+          name: {
+            name: "Chicago"
+          },
           revenues: [
             {
               color: "yellow",
@@ -799,8 +791,7 @@ const game = {
         water: {
           angle: 300,
           percent: 0.5,
-          cost: "$80",
-          size: "small"
+          cost: "$80"
         },
         hexes: ["F4"]
       },
@@ -831,8 +822,7 @@ const game = {
         water: {
           angle: 180,
           percent: 0.6,
-          cost: "$80",
-          size: "small"
+          cost: "$80"
         },
         labels: [
           {
@@ -928,14 +918,10 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Canadian West"
-          }
-        ],
         offBoardRevenue: {
-          angle: 180,
-          percent: 0.333,
+          name: {
+            name: "Canadian West"
+          },
           revenues: [
             {
               color: "yellow",
@@ -995,13 +981,11 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Deep South"
-          }
-        ],
         offBoardRevenue: {
-          percent: 0.333,
+          reverse: true,
+          name: {
+            name: "Deep South"
+          },
           revenues: [
             {
               color: "yellow",
@@ -1175,7 +1159,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "medium",
           cost: "$120",
           percent: 0.333
         },
@@ -1283,7 +1266,6 @@ const game = {
         color: "plain",
         mountain: {
           cost: "$120",
-          size: "medium",
           percent: 0.5,
           angle: 180
         },
@@ -1319,8 +1301,7 @@ const game = {
       {
         color: "plain",
         mountain: {
-          cost: "$120",
-          size: "medium"
+          cost: "$120"
         },
         borders: [
           {
@@ -1458,8 +1439,7 @@ const game = {
         water: {
           angle: 310,
           percent: 0.7,
-          cost: "$80",
-          size: "small"
+          cost: "$80"
         },
         track: [
           {
@@ -1573,16 +1553,10 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Maritime Provinces",
-            angle: 180,
-            percent: 0.333,
-            x: 5
-          }
-        ],
         offBoardRevenue: {
-          y: 0,
+          name: {
+            name: "Maritime Provinces"
+          },
           revenues: [
             {
               cost: "20",
@@ -1706,17 +1680,13 @@ const game = {
       },
       {
         color: "plain",
-        water: {
-          cost: "$80",
-          size: "small"
-        },
+        water: {cost: "$80"},
         hexes: ["D6", "I17", "B18", "C19"]
       },
       {
         color: "plain",
         mountain: {
-          cost: "$120",
-          size: "medium"
+          cost: "$120"
         },
         hexes: ["C21", "D22", "E17", "E21", "G13", "I11", "J10", "J12"]
       },

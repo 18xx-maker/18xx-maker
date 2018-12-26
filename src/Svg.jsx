@@ -119,8 +119,6 @@ const Svg = ({ className, width, height, viewBox, style, defs, children }) => {
             £120
           </text>
         </g>
-        <path id="townPath" d="M -75 -15 L 75 -15" />
-        <path id="townPathReverse" d="M -75 15 L 75 15" />
         <path id="cityPath" d="M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30" />
         <path
           id="cityPathReverse"

@@ -18,7 +18,7 @@ const game = {
 
   // Extra Tokens
   tokens: ["Round", "#mountain60", "#mountain60", "#mountain60", "#mountain60", "#mountain60", "#mountain60", "#mountain60", "#mountain60",
-          "#mountain120", "#mountain120", "#mountain120", "#mountain120", "#mountain120", "#mountain120", "#mountain120", "#mountain120"],
+           "#mountain120", "#mountain120", "#mountain120", "#mountain120", "#mountain120", "#mountain120", "#mountain120", "#mountain120"],
 
   // Need an IPO sheet
   ipo: false,
@@ -376,7 +376,7 @@ const game = {
           color: "brown",
           icon: "exclamation",
           note:
-            "No more than 50% of a corporation's shares may be in the market at any time"
+          "No more than 50% of a corporation's shares may be in the market at any time"
         },
         {
           color: "yellow",
@@ -564,36 +564,36 @@ const game = {
     hexes: [
       {
         color: "offboard",
-        labels: [ { label: "Bucharest" } ],
-        offBoardRevenue: { percent: 0.333, revenues: [ { color: "yellow", cost: "30" }, { color: "brown", cost: "50" } ] },
+        offBoardRevenue: { name: {name: "Bucharest"}, reverse: true,
+                           revenues: [ { color: "yellow", cost: "30" }, { color: "brown", cost: "50" } ] },
         offBoardTrack: [ { side: 3 } ],
         hexes: ["N17"]
       },
       {
         color: "offboard",
-        labels: [ { label: "Warsaw" } ],
-        offBoardRevenue: { percent: 0.333, revenues: [ { color: "yellow", cost: "20" }, { color: "brown", cost: "30" } ] },
+        offBoardRevenue: { name: {name: "Warsaw"},
+                           revenues: [ { color: "yellow", cost: "20" }, { color: "brown", cost: "30" } ] },
         offBoardTrack: [ { side: 2 } ],
         hexes: ["N5"]
       },
       {
         color: "offboard",
-        labels: [ { label: "London" } ],
-        offBoardRevenue: { percent: 0.333, revenues: [ { color: "yellow", cost: "40" }, { color: "brown", cost: "70" } ] },
+        offBoardRevenue: { name: {name: "London" },revenues: [ { color: "yellow", cost: "40" }, { color: "brown", cost: "70" } ] },
         offBoardTrack: [ { side: 1 }, { side: 6 } ],
         hexes: ["A6"]
       },
       {
         color: "offboard",
-        labels: [ { label: "Hamburg", y: -35} ],
-        offBoardRevenue: { percent: 0.333, y: -35, revenues: [ { color: "yellow", cost: "30" }, { color: "brown", cost: "50" } ] },
+        offBoardRevenue: { name: {name: "Hamburg"},
+                           percent: 0.333, y: -35, revenues: [ { color: "yellow", cost: "30" }, { color: "brown", cost: "50" } ] },
         track: [{ type: "gentle", side: 6 }, {type: "sharp", side: 6}, {type: "sharp", side: 1}],
         hexes: ["G2"]
       },
       {
         color: "offboard",
-        labels: [ { label: "Rome", y: -35} ],
-        offBoardRevenue: { percent: 0.333, y: -35, revenues: [ { color: "yellow", cost: "30" }, { color: "brown", cost: "50" } ] },
+        offBoardRevenue: { name: {name: "Rome"},
+                           reverse: true,
+                           revenues: [ { color: "yellow", cost: "30" }, { color: "brown", cost: "50" } ] },
         offBoardTrack: [ { side: 3 }, { side: 4 }, { side: 5 } ],
         hexes: ["G22"]
       },
@@ -660,11 +660,11 @@ const game = {
         labels: [ { label: "Y", angle: 270, percent: .75 } ],
         cities: [ { name: { name: "Brussels" }, companies: [ { label: "2", color: "white"} ]} ],
         borders: [ { side: 1, dashed: "true", color: "gray" },
-          { side: 2, dashed: "true", color: "gray" },
-          { side: 3, dashed: "true", color: "gray" },
-          { side: 4, dashed: "true", color: "gray" },
-          { side: 5, dashed: "true", color: "gray" },
-          { side: 6, dashed: "true", color: "gray" } ],
+                   { side: 2, dashed: "true", color: "gray" },
+                   { side: 3, dashed: "true", color: "gray" },
+                   { side: 4, dashed: "true", color: "gray" },
+                   { side: 5, dashed: "true", color: "gray" },
+                   { side: 6, dashed: "true", color: "gray" } ],
         hexes: ["C8"]
       },
       {
@@ -747,7 +747,7 @@ const game = {
       {
         color: "yellow",
         track: [{ side: 2, type: "gentle" }],
-        mountain: { size: "medium", cost: "£60", angle: 300, percent: 0.5 },
+        mountain: { cost: "£60", angle: 300, percent: 0.5 },
         labels: [ { label: "Semmering", percent: .7, size: "medium" } ],
         hexes: ["K16"]
       },
@@ -805,11 +805,11 @@ const game = {
         color: "plain",
         centerTowns: [ { name: { name: "Florence" } } ],
         borders: [ { side: 1, dashed: "true", color: "gray" },
-          { side: 2, dashed: "true", color: "gray" },
-          { side: 3, dashed: "true", color: "gray" },
-          { side: 4, dashed: "true", color: "gray" },
-          { side: 5, dashed: "true", color: "gray" },
-          { side: 6, dashed: "true", color: "gray" } ],
+                   { side: 2, dashed: "true", color: "gray" },
+                   { side: 3, dashed: "true", color: "gray" },
+                   { side: 4, dashed: "true", color: "gray" },
+                   { side: 5, dashed: "true", color: "gray" },
+                   { side: 6, dashed: "true", color: "gray" } ],
         hexes: ["F21"]
       },
       {
@@ -855,89 +855,89 @@ const game = {
       {
         color: "plain",
         centerTowns: [ { name: { name: "Nice" }, y: -10 } ],
-        mountain: { cost: "£60", size: "medium", y: 40 },
+        mountain: { cost: "£60", y: 40 },
         hexes: ["C20"]
       },
       {
         color: "plain",
         centerTowns: [ { name: { name: "Zürich" }, y: -10 } ],
-        mountain: { cost: "£60", size: "medium", y: 40 },
+        mountain: { cost: "£60", y: 40 },
         hexes: ["E14"]
       },
       {
         color: "plain",
         centerTowns: [ { name: { name: "Innsbruck" }, y: -10 } ],
-        mountain: { cost: "£60", size: "medium", y: 40 },
+        mountain: { cost: "£60", y: 40 },
         hexes: ["H15"]
       },
       {
         color: "plain",
         centerTowns: [ { name: { name: "Salzburg" }, y: -10 } ],
-        mountain: { cost: "£60", size: "medium", y: 40 },
+        mountain: { cost: "£60", y: 40 },
         hexes: ["I14"]
       },
       {
         color: "plain",
         centerTowns: [ { name: { name: "Pressburg" }, y: -10 } ],
-        mountain: { cost: "£60", size: "medium", y: 40 },
+        mountain: { cost: "£60", y: 40 },
         hexes: ["L15"]
       },
       {
         color: "plain",
         centerTowns: [ { name: { name: "Krakau" }, y: -10 } ],
-        mountain: { cost: "£60", size: "medium", y: 40 },
+        mountain: { cost: "£60", y: 40 },
         hexes: ["M10"]
       },
       {
         color: "plain",
-        mountain: { cost: "£60", size: "medium",  } ,
+        mountain: { cost: "£60" } ,
         hexes: ["A14", "A16", "C10", "D9", "D11", "F15", "G16", "I10", "I12", "J9", "J13", "K8", "L9"]
       },
       {
         color: "plain",
-        mountain: { cost: "£120", size: "large",  },
-        labels: { label: "Fréjus", percent: .7, size: "medium" },
+        mountain: { cost: "£120" },
+        labels: { label: "Fréjus", percent: 0.7, size: "medium" },
         hexes: ["C18"]
       },
       {
         color: "plain",
-        mountain: { cost: "£120", size: "large",  },
-        labels: { label: "Lötschberg", percent: .7, size: "medium" },
+        mountain: { cost: "£120" },
+        labels: { label: "Lötschberg", percent: 0.7, size: "medium" },
         hexes: ["D17"]
       },
       {
         color: "plain",
-        mountain: { cost: "£120", size: "large",  },
-        labels: { label: "Simplon", percent: .7, size: "medium" },
+        mountain: { cost: "£120" },
+        labels: { label: "Simplon", percent: 0.7, size: "medium" },
         hexes: ["E16"]
       },
       {
         color: "plain",
-        mountain: { cost: "£120", size: "large",  },
-        labels: { label: "Gotthard", percent: .7, size: "medium" },
+        mountain: { cost: "£120" },
+        labels: { label: "Gotthard", percent: 0.7, size: "medium" },
         hexes: ["F17"]
       },
       {
         color: "plain",
-        mountain: { cost: "£120", size: "large",  },
+        mountain: { cost: "£120" },
         labels: { label: "Albula", percent: .7, size: "medium" },
         hexes: ["G18"]
       },
       {
         color: "plain",
-        mountain: { cost: "£120", size: "large",  },
+        mountain: { cost: "£120" },
         labels: { label: "Brenner", percent: .7, size: "medium" },
         hexes: ["H17"]
       },
       {
         color: "plain",
-        mountain: { cost: "£120", size: "large",  },
+        mountain: { cost: "£120" },
         labels: { label: "Arlberg", percent: .7, size: "medium" },
         hexes: ["I16"]
       },
       {
         color: "plain",
-        mountain: { cost: "£120", size: "large",  },
+        mountain: { cost: "£120" },
         labels: { label: "Tauern", percent: .7, size: "medium" },
         hexes: ["J15"]
       },
@@ -993,11 +993,11 @@ const game = {
           "I6",
         ],
         borders: [ { side: 1, dashed: "true", color: "gray" },
-          { side: 2, dashed: "true", color: "gray" },
-          { side: 3, dashed: "true", color: "gray" },
-          { side: 4, dashed: "true", color: "gray" },
-          { side: 5, dashed: "true", color: "gray" },
-          { side: 6, dashed: "true", color: "gray" } ],
+                   { side: 2, dashed: "true", color: "gray" },
+                   { side: 3, dashed: "true", color: "gray" },
+                   { side: 4, dashed: "true", color: "gray" },
+                   { side: 5, dashed: "true", color: "gray" },
+                   { side: 6, dashed: "true", color: "gray" } ],
       },
       {
         color: "green",
@@ -1016,7 +1016,7 @@ const game = {
         ]
       },
       {
-        color: "cyan",
+        color: "water",
         hexes: [
           "J21",
           "I22",

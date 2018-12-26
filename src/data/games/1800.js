@@ -571,18 +571,14 @@ const game = {
       hexes: [
         {
           color: "offboard",
-          cities: [
-            {
-              percent: 0.3333,
-              name: {
-                name: "Cheyenne"
-              }
-            }
-          ],
+          cities: [{percent: 0.3333}],
           offBoardRevenue: {
             angle: 180,
             percent: 0.475,
-            phaseReversed: true,
+            reverse: true,
+            name: {
+              name: "Cheyenne"
+            },
             revenues: [
               {
                 color: "white",
@@ -611,10 +607,7 @@ const game = {
         },
         {
           color: "plain",
-          mountain: {
-            size: "medium",
-            cost: "$50"
-          },
+          mountain: {cost: "$50"},
           hexes: ["C3"]
         },
         {
@@ -625,7 +618,6 @@ const game = {
               angle: 180,
               percent: 0.5,
               label: "D&RGW",
-              radius: 6,
               color: "orange"
             }
           ],
@@ -639,8 +631,7 @@ const game = {
               angle: 180,
               percent: 0.5,
               label: "C&S",
-              color: "purple",
-              radius: 6
+              color: "purple"
             }
           ],
           hexes: ["D4"]
@@ -698,10 +689,7 @@ const game = {
         },
         {
           color: "plain",
-          water: {
-            cost: "$40",
-            size: "small"
-          },
+          water: {cost: "$40"},
           hexes: ["B6", "D6"]
         },
         {
@@ -724,8 +712,7 @@ const game = {
           water: {
             angle: 150,
             percent: 0.6,
-            cost: "$40",
-            size: "small"
+            cost: "$40"
           },
           hexes: ["C7"]
         },
@@ -737,8 +724,6 @@ const game = {
             }
           ],
           offBoardRevenue: {
-            angle: 180,
-            percent: 0.12,
             revenues: [
               {
                 color: "white",
@@ -768,8 +753,6 @@ const game = {
             }
           ],
           offBoardRevenue: {
-            angle: 180,
-            percent: 0.12,
             revenues: [
               {
                 color: "white",
@@ -815,7 +798,7 @@ const game = {
             }
           ],
           offBoardRevenue: {
-            phaseReversed: true,
+            reverse: true,
             revenues: [
               {
                 color: "white",
@@ -845,7 +828,7 @@ const game = {
             }
           ],
           offBoardRevenue: {
-            phaseReversed: true,
+            reverse: true,
             revenues: [
               {
                 color: "white",

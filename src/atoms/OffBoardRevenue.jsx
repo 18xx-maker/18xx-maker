@@ -2,7 +2,9 @@ import React from "react";
 import { colors } from "../data";
 import * as R from "ramda";
 
-const OffBoardRevenue = ({ revenues, phaseReversed }) => {
+import Name from "./Name";
+
+const OffBoardRevenue = ({ name, revenues, reverse }) => {
   let letter = 10;
   let totalWidth = R.sum(
     R.map(r => 5 + letter * R.max(r.cost.length, 2), revenues)
@@ -11,6 +13,14 @@ const OffBoardRevenue = ({ revenues, phaseReversed }) => {
 
   let nodes = [];
   let currentX = bx;
+
+  let nameNode = null;
+  if (name) {
+    nameNode = <Name {...name}
+                     y={name.y || (reverse ? 16 : -16)}
+                     reverse={reverse}
+                     bgColor={name.bgColor || "offboard"} />;
+  }
 
   R.addIndex(R.map)((revenue, index) => {
     let length = letter * revenue.cost.length;
@@ -51,7 +61,7 @@ const OffBoardRevenue = ({ revenues, phaseReversed }) => {
           textLength={phaseLength}
           lengthAdjust="spacingAndGlyphs"
           x={currentX + 0.5 * width}
-          y={phaseReversed ? -21 : 21}
+          y={reverse ? -21 : 21}
           key={`phase-${revenue.phase}`}
         >
           {revenue.phase}
@@ -73,6 +83,7 @@ const OffBoardRevenue = ({ revenues, phaseReversed }) => {
         fill="none"
         stroke={colors["black"]}
       />
+      {nameNode}
     </g>
   );
 };

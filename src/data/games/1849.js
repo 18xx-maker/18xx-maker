@@ -863,7 +863,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "large",
           cost: "L.160"
         },
         hexes: ["B5", "L5", "B7", "D7", "E8", "K8", "H11", "L13"]
@@ -959,7 +958,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "medium",
           cost: "L.80"
         },
         hexes: ["C6", "F7", "G8", "E10"]
@@ -967,7 +965,6 @@ const game = {
       {
         copy: "D5",
         mountain: {
-          size: "large",
           cost: "L.160"
         },
         centerTowns: [
@@ -999,7 +996,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "large",
           cost: "L.160"
         },
         borders: [
@@ -1053,7 +1049,7 @@ const game = {
               name: "Taormina",
               reverse: true,
               rotation: -60,
-              y: 20
+              y: 24
             }
           }
         ],
@@ -1063,8 +1059,7 @@ const game = {
       {
         color: "plain",
         mountain: {
-          cost: "L.160",
-          size: "large"
+          cost: "L.160"
         },
         borders: [
           {
@@ -1090,8 +1085,7 @@ const game = {
           }
         ],
         mountain: {
-          cost: "L.160",
-          size: "large"
+          cost: "L.160"
         },
         hexes: ["J7"]
       },
@@ -1124,7 +1118,6 @@ const game = {
       {
         copy: "D5",
         mountain: {
-          size: "medium",
           cost: "L.80"
         },
         centerTowns: [
@@ -1158,7 +1151,6 @@ const game = {
       {
         copy: "D5",
         mountain: {
-          size: "medium",
           cost: "L.80"
         },
         centerTowns: [
@@ -1173,7 +1165,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "small",
           cost: "L.40"
         },
         hexes: ["F9", "J9"]
@@ -1182,7 +1173,6 @@ const game = {
         color: "plain",
         mountain: {
           percent: 0.45,
-          size: "medium",
           cost: "L.80"
         },
         cities: [
@@ -1234,8 +1224,7 @@ const game = {
           }
         ],
         mountain: {
-          cost: "L.40",
-          size: "small"
+          cost: "L.40"
         },
         hexes: ["G10"]
       },
@@ -1258,7 +1247,6 @@ const game = {
       {
         copy: "H9",
         mountain: {
-          size: "small",
           cost: "L.40"
         },
         cities: [
@@ -1313,7 +1301,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "small",
           cost: "L.40"
         },
         borders: [
@@ -1361,7 +1348,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "large",
           cost: "L.160"
         },
         borders: [

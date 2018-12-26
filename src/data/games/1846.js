@@ -210,14 +210,14 @@ const game = {
       price: "$80",
       revenue: "$0",
       description:
-        "Never closes once purchased by a corporation. Adds $10 per location visited by any one train of the owning corporation."
+      "Never closes once purchased by a corporation. Adds $10 per location visited by any one train of the owning corporation."
     },
     {
       name: "Chicago and Western Indiana",
       price: "$80",
       revenue: "$10",
       description:
-        "Reserves a token slot in Chicago (D6), in which the owning corporation may place an extra token at no cost."
+      "Reserves a token slot in Chicago (D6), in which the owning corporation may place an extra token at no cost."
     }
   ],
 
@@ -267,7 +267,7 @@ const game = {
           color: "brown",
           icon: "exclamation",
           note:
-            "Corporations may not issue more stock than the amount held by players, less the number already in the stock market"
+          "Corporations may not issue more stock than the amount held by players, less the number already in the stock market"
         }
       ]
     }
@@ -418,11 +418,7 @@ const game = {
     hexes: [
       {
         color: "plain",
-        companies: [
-          {
-            label: "IC"
-          }
-        ],
+        tokens: [{label: "IC", color: "darkGreen", width: 15}],
         hexes: ["E5", "F6", "G5", "H6", "J4"]
       },
       {
@@ -467,27 +463,22 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Holland",
-            x: -20
-          }
-        ],
         icons: [
           {
             type: "port",
-            angle: 150,
+            angle: 30,
             percent: 0.5
           },
           {
             type: "port",
-            angle: 210,
+            angle: 330,
             percent: 0.5
           }
         ],
         offBoardRevenue: {
-          percent: 0.333,
-          x: -20,
+          name: {
+            name: "Holland"
+          },
           revenues: [
             {
               color: "yellow",
@@ -540,17 +531,11 @@ const game = {
           percent: 0.333,
           x: 15
         },
-        labels: [
-          {
-            label: "Sarnia",
-            x: 20
-          },
-          {
-            angle: 180,
-            percent: 0.75,
-            label: "E"
-          }
-        ],
+        labels: [{
+          angle: 180,
+          percent: 0.75,
+          label: "E"
+        }],
         tunnels: [
           {
             cost: "$40",
@@ -558,12 +543,9 @@ const game = {
             percent: 1
           }
         ],
-        offBoardTrack: [
-          {
-            side: 1
-          }
-        ],
+        offBoardTrack: [{side: 1}],
         offBoardRevenue: {
+          name: { name: "Sarnia" },
           percent: 0.333,
           x: 20,
           revenues: [
@@ -600,17 +582,17 @@ const game = {
         },
         labels: [
           {
-            label: "Chicago Connections"
-          },
-          {
             label: "W",
             angle: 180,
             percent: 0.75
           }
         ],
         offBoardRevenue: {
-          percent: 0.333,
-          x: -20,
+          percent: 0.4,
+          angle: 40,
+          name: {
+            name: "Chicago Connections"
+          },
           revenues: [
             {
               color: "yellow",
@@ -699,10 +681,6 @@ const game = {
         },
         labels: [
           {
-            label: "Windsor",
-            x: 20
-          },
-          {
             angle: 180,
             percent: 0.75,
             label: "E"
@@ -715,12 +693,9 @@ const game = {
             percent: 1
           }
         ],
-        offBoardTrack: [
-          {
-            side: 1
-          }
-        ],
+        offBoardTrack: [{side: 1}],
         offBoardRevenue: {
+          name: { name: "Windsor" },
           percent: 0.333,
           x: 20,
           revenues: [
@@ -866,23 +841,14 @@ const game = {
           percent: 0.333,
           x: 15
         },
-        labels: [
-          {
-            label: "Buffalo",
-            x: 20
-          },
-          {
-            angle: 180,
-            percent: 0.75,
-            label: "E"
-          }
-        ],
-        offBoardTrack: [
-          {
-            side: 6
-          }
-        ],
+        labels: [{
+          angle: 180,
+          percent: 0.75,
+          label: "E"
+        }],
+        offBoardTrack: [{side: 6}],
         offBoardRevenue: {
+          name: { name: "Buffalo" },
           percent: 0.333,
           x: 20,
           revenues: [
@@ -906,23 +872,14 @@ const game = {
           percent: 0.333,
           x: 15
         },
-        labels: [
-          {
-            label: "Buffalo",
-            x: 20
-          },
-          {
-            angle: 180,
-            percent: 0.75,
-            label: "E"
-          }
-        ],
-        offBoardTrack: [
-          {
-            side: 1
-          }
-        ],
+        labels: [{
+          angle: 180,
+          percent: 0.75,
+          label: "E"
+        }],
+        offBoardTrack: [{side: 1}],
         offBoardRevenue: {
+          name: { name: "Buffalo" },
           percent: 0.333,
           x: 20,
           revenues: [
@@ -1024,23 +981,15 @@ const game = {
           angle: 180,
           percent: 0.333
         },
-        labels: [
-          {
-            label: "Binghamton",
-            percent: 0.333
-          },
-          {
-            angle: 180,
-            percent: 0.75,
-            label: "E"
-          }
-        ],
-        offBoardTrack: [
-          {
-            side: 1
-          }
-        ],
+        labels: [{
+          angle: 180,
+          percent: 0.75,
+          label: "E"
+        }],
+        offBoardTrack: [{side: 1}],
         offBoardRevenue: {
+          name: { name: "Binghamton" },
+          reverse: true,
           revenues: [
             {
               color: "yellow",
@@ -1126,23 +1075,15 @@ const game = {
           angle: 180,
           percent: 0.333
         },
-        labels: [
-          {
-            label: "Pittsburgh",
-            percent: 0.333
-          },
-          {
-            angle: 180,
-            percent: 0.75,
-            label: "E"
-          }
-        ],
-        offBoardTrack: [
-          {
-            side: 1
-          }
-        ],
+        labels: [{
+          angle: 180,
+          percent: 0.75,
+          label: "E"
+        }],
+        offBoardTrack: [{side: 1}],
         offBoardRevenue: {
+          name: { name: "Pittsburgh" },
+          reverse: true,
           revenues: [
             {
               color: "yellow",
@@ -1279,33 +1220,20 @@ const game = {
           angle: 180,
           percent: 0.333
         },
-        labels: [
-          {
-            label: "Pittsburgh",
-            percent: 0.333
-          },
-          {
-            angle: 180,
-            percent: 0.75,
-            label: "E"
-          }
-        ],
-        tunnels: [
-          {
-            cost: "$20",
-            angle: 90,
-            percent: 1
-          }
-        ],
-        offBoardTrack: [
-          {
-            side: 1
-          },
-          {
-            side: 2
-          }
-        ],
+        labels: [{
+          angle: 180,
+          percent: 0.75,
+          label: "E"
+        }],
+        tunnels: [{
+          cost: "$20",
+          angle: 90,
+          percent: 1
+        }],
+        offBoardTrack: [{side: 1}, {side: 2}],
         offBoardRevenue: {
+          name: { name: "Pittsburgh" },
+          reverse: true,
           revenues: [
             {
               color: "yellow",
@@ -1353,10 +1281,6 @@ const game = {
         },
         labels: [
           {
-            label: "Cumberland",
-            percent: 0.333
-          },
-          {
             angle: 180,
             percent: 0.75,
             label: "E"
@@ -1368,6 +1292,10 @@ const game = {
           }
         ],
         offBoardRevenue: {
+          reverse: true,
+          name: {
+            name: "Cumberland"
+          },
           revenues: [
             {
               color: "yellow",
@@ -1383,36 +1311,31 @@ const game = {
       },
       {
         color: "offboard",
-        icons: [
-          {
-            type: "port",
-            angle: 20,
-            percent: 0.75
-          },
-          {
-            type: "meat",
-            angle: -20,
-            percent: 0.75
-          }
-        ],
+        icons: [{
+          type: "port",
+          angle: 20,
+          percent: 0.7
+        },{
+          type: "meat",
+          angle: -20,
+          percent: 0.7
+        }],
         routeBonus: {
           value: "+30",
           angle: 180,
           percent: 0.333
         },
-        labels: [
-          {
-            label: "St. Louis",
-            percent: 0.333
-          },
-          {
-            angle: 180,
-            percent: 0.75,
-            label: "W"
-          }
-        ],
+        labels: [{
+          angle: 180,
+          percent: 0.75,
+          label: "W"
+        }],
         offBoardTrack: [{ side: 3 }, { side: 4 }],
         offBoardRevenue: {
+          name: {
+            name: "St. Louis"
+          },
+          reverse: true,
           revenues: [
             { color: "yellow", cost: "50" },
             { color: "brown", cost: "70" }
@@ -1523,16 +1446,16 @@ const game = {
         },
         labels: [
           {
-            label: "Charleston",
-            percent: 0.333
-          },
-          {
             angle: 180,
             percent: 0.75,
             label: "E"
           }
         ],
         offBoardRevenue: {
+          name: {
+            name: "Charleston"
+          },
+          reverse: true,
           revenues: [
             {
               color: "yellow",
@@ -1567,13 +1490,11 @@ const game = {
             side: 3
           }
         ],
-        labels: [
-          {
-            label: "Louisville",
-            percent: 0.333
-          }
-        ],
         offBoardRevenue: {
+          name: {
+            name: "Louisville"
+          },
+          reverse: true,
           revenues: [
             {
               color: "yellow",

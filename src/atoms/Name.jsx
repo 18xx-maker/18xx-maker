@@ -1,23 +1,28 @@
 import React from "react";
+import { colors, textColor } from "../data";
 
-const Name = ({ name, reverse, rotation, town, size, offset, y, textLength, fontSize }) => {
-  let path = town ? "townPath" : `city${size > 1 ? size : ""}Path`;
-  if (reverse) {
-    path = path + "Reverse";
-  }
+const Name = ({ name, color, bgColor, path, rotation, reverse, offset, y, textLength, fontSize }) => {
+  let fillColor = color || textColor(bgColor || "white");
+
+  let nameNode = path ? (
+    <textPath transform="scale(1.8)" startOffset={`${offset || 50}%`} href={`#${path}`}>
+      {name}
+    </textPath>
+  ) : name;
+
   return (
     <text
-      dy={y || (reverse ? (town ? 12 : 7) : (town ? -4 : 0))}
+      dy={y || 0}
       transform={`rotate(${(rotation || 0) + 360})`}
+      fill={fillColor}
       fontFamily="Helvetica, Arial, sans-serif"
       fontSize={fontSize || 10}
       fontWeight="bold"
       textLength={textLength}
+      alignmentBaseline={reverse ? "hanging" : "baseline"}
       textAnchor="middle"
     >
-      <textPath transform="scale(1.8)" startOffset={`${offset || 50}%`} href={`#${path}`}>
-        {name}
-      </textPath>
+      {nameNode}
     </text>
   );
 };

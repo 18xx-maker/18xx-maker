@@ -795,17 +795,12 @@ const game = {
         hexes: ["I6", "N9"]
       },
       {
-        color: "blue",
-        labels: [
-          {
-            label: "Port",
-            angle: 180,
-            percent: 0.333,
-            x: 5
-          }
-        ],
+        color: "water",
         offBoardRevenue: {
-          y: 0,
+          name: {
+            name: "Port",
+            bgColor: "water"
+          },
           revenues: [
             {
               cost: "10",
@@ -822,20 +817,17 @@ const game = {
             side: 6
           }
         ],
+        icons: [{ type: "port", percent: 0.5 }],
         hexes: ["A8"]
       },
       {
-        color: "blue",
-        labels: [
-          {
-            label: "Port",
-            angle: 180,
-            percent: 0.333,
-            x: 5
-          }
-        ],
+        color: "water",
+        icons: [{ type: "port", percent: 0.5 }],
         offBoardRevenue: {
-          y: 0,
+          name: {
+            name: "Port",
+            bgColor: "water"
+          },
           revenues: [
             {
               cost: "10",
@@ -856,16 +848,11 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Lille",
-            angle: 180,
-            percent: 0.333,
-            x: 5
-          }
-        ],
         offBoardRevenue: {
-          y: 0,
+          name: {
+            name: "Lille"
+          },
+          reverse: true,
           revenues: [
             {
               cost: "40",
@@ -882,16 +869,10 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Tilburg",
-            angle: 180,
-            percent: 0.333,
-            x: 5
-          }
-        ],
         offBoardRevenue: {
-          y: 0,
+          name: {
+            name: "Tilburg"
+          },
           revenues: [
             {
               cost: "10",
@@ -908,11 +889,14 @@ const game = {
       },
       {
         color: "offboard",
-        divides: [{ side: 3.35 }],
-        labels: [ { label: "Valenciennes", size: "10", angle: 230, percent: -0.5, x: -7 } ],
+        divides: [{ side: 3.25 }],
         offBoardRevenue: {
           x: -30,
-          y: 0,
+          y: 10,
+          name: {
+            name: "Valenciennes"
+          },
+          reverse: true,
           revenues: [ { cost: "20", color: "yellow" }, { cost: "30", color: "brown" } ]
         },
         track: [
@@ -926,16 +910,10 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Maastricht",
-            angle: 180,
-            percent: 0.333,
-            x: 5
-          }
-        ],
         offBoardRevenue: {
-          y: 0,
+          name: {
+            name: "Maastricht"
+          },
           revenues: [
             {
               cost: "30",
@@ -952,16 +930,10 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Aachen",
-            angle: 180,
-            percent: 0.333,
-            x: 5
-          }
-        ],
         offBoardRevenue: {
-          y: 0,
+          name: {
+            name: "Aachen"
+          },
           revenues: [
             {
               cost: "20",
@@ -978,16 +950,10 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Aachen",
-            angle: 180,
-            percent: 0.333,
-            x: 5
-          }
-        ],
         offBoardRevenue: {
-          y: 0,
+          name: {
+            name: "Aachen"
+          },
           revenues: [
             {
               cost: "20",
@@ -1004,16 +970,11 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Metz",
-            angle: 180,
-            percent: 0.333,
-            x: 5
-          }
-        ],
         offBoardRevenue: {
-          y: 0,
+          name: {
+            name: "Metz"
+          },
+          reverse: true,
           revenues: [
             {
               cost: "10",
@@ -1030,16 +991,10 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Koln",
-            angle: 180,
-            percent: 0.333,
-            x: 5
-          }
-        ],
         offBoardRevenue: {
-          y: 0,
+          name: {
+            name: "Koln"
+          },
           revenues: [
             {
               cost: "30",
@@ -1126,26 +1081,17 @@ const game = {
       },
       {
         color: "plain",
-        mountain: {
-          cost: "$120",
-          size: "medium"
-        },
+        mountain: {cost: "$120"},
         hexes: ["M8"]
       },
       {
         color: "plain",
-        mountain: {
-          cost: "$100",
-          size: "medium"
-        },
+        mountain: {cost: "$100"},
         hexes: ["L9"]
       },
       {
         color: "plain",
-        mountain: {
-          size: "medium",
-          cost: "$80"
-        },
+        mountain: {cost: "$80"},
         hexes: ["L7"]
       },
       {

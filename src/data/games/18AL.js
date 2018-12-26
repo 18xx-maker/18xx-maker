@@ -337,7 +337,7 @@ const game = {
           color: "brown",
           icon: "exclamation",
           note:
-            "No more than 50% of a corporation's shares may be in the market at any time"
+          "No more than 50% of a corporation's shares may be in the market at any time"
         },
         {
           color: "red",
@@ -495,7 +495,7 @@ const game = {
       {
         color: "yellow",
         description:
-          "Shares of this corporation do not count toward the certificate limit",
+        "Shares of this corporation do not count toward the certificate limit",
         icon: "certificate"
       }
     ]
@@ -594,7 +594,8 @@ const game = {
               }
             ],
             name: {
-              name: "Nashville"
+              name: "Nashville",
+              bgColor: "offboard"
             }
           }
         ],
@@ -666,7 +667,6 @@ const game = {
           }
         ],
         water: {
-          size: "small",
           percent: 0.333,
           cost: "$20"
         },
@@ -684,7 +684,6 @@ const game = {
           }
         ],
         water: {
-          size: "small",
           percent: 0.5,
           cost: "$20"
         },
@@ -702,7 +701,6 @@ const game = {
           }
         ],
         water: {
-          size: "small",
           percent: 0.333,
           cost: "$20"
         },
@@ -737,12 +735,11 @@ const game = {
       {
         color: "plain",
         water: {
-          percent: 0.45
+          percent: 0.4
         },
         mountain: {
           angle: 180,
-          percent: 0.2,
-          size: "medium",
+          percent: 0.13,
           cost: "$60"
         },
         hexes: ["E4"]
@@ -824,7 +821,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "medium",
           cost: "$60"
         },
         hexes: ["G6"]
@@ -832,7 +828,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "medium",
           cost: "$60",
           angle: -30,
           percent: 0.5
@@ -1033,9 +1028,8 @@ const game = {
         color: "offboard",
         offBoardTrack: [{ side: 3 }, { side: 4 }],
         offBoardRevenue: {
-          name: {
-            name: "Gulf of Mexico"
-          },
+          reverse: true,
+          name: {name: "Gulf of Mexico"},
           revenues: [
             {
               color: "yellow",
@@ -1062,13 +1056,13 @@ const game = {
             ],
             name: {
               name: "Mobile",
+              bgColor: "offboard",
               reverse: true
             }
           }
         ],
         offBoardRevenue: {
-          angle: 180,
-          percent: 0.7,
+          percent: 0.75,
           revenues: [
             {
               color: "yellow",
