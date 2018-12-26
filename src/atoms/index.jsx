@@ -267,8 +267,6 @@ const Atoms = () => {
     {
       name: "Clip Paths",
       examples: [
-        <use href="#townPath" fill="none" stroke={colors["purple"]} />,
-        <use href="#townPathReverse" fill="none" stroke={colors["purple"]} />,
         <use href="#cityPath" fill="none" stroke={colors["purple"]} />,
         <use href="#cityPathReverse" fill="none" stroke={colors["purple"]} />,
         <use href="#city2Path" fill="none" stroke={colors["purple"]} />,
