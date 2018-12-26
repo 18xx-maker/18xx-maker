@@ -1063,22 +1063,9 @@ const game = {
       },
       {
         color: "offboard",
-        offBoardTrack: [
-          {
-            side: 1
-          },
-          {
-            side: 2
-          }
-        ],
-        labels: [
-          {
-            label: "Imabari"
-          }
-        ],
+        offBoardTrack: [{side: 1}, {side: 2}],
         offBoardRevenue: {
-          angle: 180,
-          percent: 0.333,
+          name: {name: "Imabari"},
           revenues: [
             {
               color: "yellow",
@@ -1099,14 +1086,8 @@ const game = {
       },
       {
         copy: "F1",
-        labels: [
-          {
-            label: "Sakaide & Okayama"
-          }
-        ],
         offBoardRevenue: {
-          angle: 180,
-          percent: 0.333,
+          name: {name: "Sakaide & Okayama"},
           revenues: [
             {
               color: "yellow",
@@ -1127,23 +1108,9 @@ const game = {
       },
       {
         color: "offboard",
-        offBoardTrack: [
-          {
-            side: 2
-          },
-          {
-            side: 3
-          }
-        ],
-        labels: [
-          {
-            label: "Naruto & Awaji",
-            x: 10
-          }
-        ],
+        offBoardTrack: [{side: 2}, {side: 3}],
         offBoardRevenue: {
-          angle: 180,
-          percent: 0.333,
+          name: {name: "Naruto & Awaji"},
           x: 20,
           revenues: [
             {

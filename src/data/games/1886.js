@@ -687,8 +687,7 @@ const game = {
           }
         ],
         offBoardRevenue: {
-          angle: 180,
-          percent: 0.4,
+          name: {name: "Tarumi"},
           revenues: [
             {
               color: "black",
@@ -707,31 +706,18 @@ const game = {
             }
           ]
         },
-        labels: [
-          {
-            label: "Tarumi"
-          }
-        ],
         hexes: ["A6"]
       },
       {
         copy: "A6",
         offBoardRevenue: {
+          name: {name: "Minoh"},
           revenues: [
             {},
-            {
-              cost: "30"
-            },
-            {
-              cost: "40"
-            }
+            {cost: "30"},
+            {cost: "40"}
           ]
         },
-        labels: [
-          {
-            label: "Minoh"
-          }
-        ],
         hexes: ["A10"]
       },
       {
@@ -741,6 +727,7 @@ const game = {
           {
             name: {
               name: "Gero",
+              bgColor: "offboard",
               reverse: true,
               offset: 66.67
             },
@@ -786,7 +773,8 @@ const game = {
         color: "offboard",
         offBoardTrack: [{ side: 3 }, { side: 4 }],
         offBoardRevenue: {
-          percent: 0.333,
+          name: {name: "Taniguchiyama Kegonji"},
+          reverse: true,
           revenues: [
             {
               color: "black",
@@ -805,21 +793,13 @@ const game = {
             }
           ]
         },
-        labels: [
-          {
-            label: "Taniguchiyama Kegonji",
-            angle: 180,
-            percent: 0.22
-          }
-        ],
         hexes: ["B1"]
       },
       {
         color: "offboard",
         offBoardTrack: [{ side: 4 }, { side: 6 }],
         offBoardRevenue: {
-          angle: 180,
-          percent: 0.333,
+          name: {name: "Ibi"},
           revenues: [
             {
               color: "black",
@@ -838,12 +818,6 @@ const game = {
             }
           ]
         },
-        labels: [
-          {
-            label: "Ibi",
-            percent: 0.075
-          }
-        ],
         hexes: ["C2"]
       },
       {
@@ -998,8 +972,8 @@ const game = {
         color: "offboard",
         offBoardTrack: [{ side: 4 }],
         offBoardRevenue: {
-          angle: 180,
-          percent: 0.333,
+          name: {name: "Maibara"},
+          reverse: true,
           revenues: [
             {
               color: "black",
@@ -1018,12 +992,6 @@ const game = {
             }
           ]
         },
-        labels: [
-          {
-            label: "Maibara",
-            percent: 0.25
-          }
-        ],
         hexes: ["F1"]
       },
       {
@@ -1087,6 +1055,7 @@ const game = {
           {
             name: {
               name: "Nakatsugawa",
+              bgColor: "offboard",
               reverse: true,
               offset: 66.67
             },
@@ -1514,13 +1483,9 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Iida",
-            percent: 0.3333
-          }
-        ],
         offBoardRevenue: {
+          name: {name: "Iida"},
+          reverse: true,
           revenues: [
             {
               color: "black",
@@ -1551,13 +1516,9 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Inabe",
-            percent: 0.3333
-          }
-        ],
         offBoardRevenue: {
+          name: {name: "Inabe"},
+          reverse: true,
           revenues: [
             {
               color: "black",
@@ -1838,13 +1799,9 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {
-            label: "Yunoyama Onsen",
-            percent: 0.3333
-          }
-        ],
         offBoardRevenue: {
+          name: {name: "Yunoyama Onsen"},
+          reverse: true,
           revenues: [
             {
               color: "black",
@@ -2012,11 +1969,9 @@ const game = {
       {
         color: "offboard",
         offBoardTrack: [{ side: 2 }],
-        labels: [{
-          label: "Kohwa",
-          percent: 0.4
-        }],
         offBoardRevenue: {
+          name: {name: "Kohwa"},
+          reverse: true,
           revenues: [
             {
               color: "black",
@@ -2044,6 +1999,7 @@ const game = {
           {
             name: {
               name: "Hamamatsu",
+              bgColor: "offboard",
               reverse: true,
               offset: 66.67
             },
@@ -2171,7 +2127,8 @@ const game = {
         color: "offboard",
         offBoardTrack: [{ side: 3 }, { side: 4 }],
         offBoardRevenue: {
-          percent: 0.333,
+          reverse: true,
+          name: {name: "Owashi"},
           revenues: [
             {
               color: "black",
@@ -2190,13 +2147,6 @@ const game = {
             }
           ]
         },
-        labels: [
-          {
-            label: "Owashi",
-            angle: 180,
-            percent: 0.22
-          }
-        ],
         hexes: ["Q4"]
       },
       {

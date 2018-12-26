@@ -730,13 +730,11 @@ const game = {
     hexes: [
       {
         color: "offboard",
-        labels: [
-          {label: "Denver", angle: 157, percent: 0.6}
-        ],
         offBoardRevenue: {
           angle: 90,
           percent: 0.25,
-          phaseReversed: true,
+          reverse: true,
+          name: {name: "Denver"},
           revenues: [
             {
               color: "white",
@@ -767,9 +765,6 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {label: "Chicago", angle: 203, percent: 0.6}
-        ],
         tokens: [{
           label: "IC",
           width: 15,
@@ -777,9 +772,10 @@ const game = {
           percent: 0.75
         }],
         offBoardRevenue: {
+          name: {name: "Chicago"},
           angle: 270,
           percent: 0.25,
-          phaseReversed: true,
+          reverse: true,
           revenues: [
             {
               color: "white",
@@ -811,6 +807,7 @@ const game = {
           }],
           name: {
             name: "Southwest",
+            color: "white",
             offset: 35
           }
         }],
@@ -818,20 +815,20 @@ const game = {
           label: "ATSF",
           width: 15,
           color: "cyan",
-          angle: 120,
+          angle: 240,
           percent: 0.8
         },{
           label: "MKT",
           width: 15,
           color: "darkGreen",
-          angle: 180,
+          angle: 300,
           percent: 0.8
 
         }],
         offBoardRevenue: {
-          angle: 30,
-          percent: 0.9,
-          phaseReversed: true,
+          angle: 25,
+          percent: 0.85,
+          reverse: true,
           revenues: [
             {
               color: "white",
@@ -856,13 +853,11 @@ const game = {
       },
       {
         color: "offboard",
-        labels: [
-          {label: "Southeast", angle: 203, percent: 0.6}
-        ],
         offBoardRevenue: {
+          name: {name: "Southeast"},
           angle: 270,
-          percent: 0.25,
-          phaseReversed: true,
+          percent: 0.3,
+          reverse: true,
           revenues: [
             {
               color: "white",

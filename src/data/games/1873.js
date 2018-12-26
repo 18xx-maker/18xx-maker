@@ -630,7 +630,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "small",
           cost: "50M"
         },
         hexes: ["B15"]
@@ -775,7 +774,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "medium",
           cost: "150M",
           angle: 300,
           percent: 0.5
@@ -979,7 +977,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "150M",
           angle: 300,
           percent: 0.5
@@ -1004,7 +1001,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "150M",
           angle: 300,
           percent: 0.5
@@ -1114,7 +1110,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "100M",
           angle: 300,
           percent: 0.5
@@ -1151,7 +1146,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "150M"
         },
         borders: [
@@ -1391,7 +1385,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "small",
           cost: "50M",
           angle: 300,
           percent: 0.5
@@ -1444,7 +1437,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "100M",
           angle: 300,
           percent: 0.5
@@ -1490,7 +1482,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "100M",
           angle: 300,
           percent: 0.5
@@ -1510,7 +1501,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "100M"
         },
         hexes: ["E12"]
@@ -1528,7 +1518,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "150M"
         },
         hexes: ["E14"]
@@ -1556,7 +1545,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "small",
           cost: "50M",
           angle: 300,
           percent: 0.5
@@ -1699,7 +1687,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "150M",
           angle: 300,
           percent: 0.5
@@ -1862,7 +1849,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "100M",
           angle: 300,
           percent: 0.5
@@ -2074,7 +2060,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "150M",
           angle: 300,
           percent: 0.5
@@ -2235,8 +2220,7 @@ const game = {
       {
         color: "plain",
         mountain: {
-          cost: "100M",
-          size: "medium"
+          cost: "100M"
         },
         borders: [
           {
@@ -2248,10 +2232,7 @@ const game = {
       },
       {
         color: "plain",
-        mountain: {
-          cost: "150M",
-          size: "medium"
-        },
+        mountain: {cost: "150M"},
         borders: [
           {
             side: 3,
@@ -2283,7 +2264,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "size",
           cost: "50M",
           angle: 300,
           percent: 0.5
@@ -2313,7 +2293,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "size",
           cost: "50M",
           angle: 300,
           percent: 0.5
@@ -2339,7 +2318,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "100M",
           angle: 300,
           percent: 0.5
@@ -2355,7 +2333,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "150M"
         },
         hexes: ["G18"]
@@ -2462,7 +2439,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "100M",
           angle: 90,
           percent: 0.3333
@@ -2487,7 +2463,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "medium",
           cost: "150M"
         },
         borders: [
@@ -2519,7 +2494,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "100M",
           angle: 60,
           percent: 0.3333
@@ -2586,7 +2560,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "medium",
           cost: "100M"
         },
         borders: [
@@ -2663,7 +2636,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "medium",
           cost: "150M"
         },
         borders: [
@@ -2725,7 +2697,6 @@ const game = {
         mountain: {
           angle: -30,
           percent: 0.3333,
-          size: "medium",
           cost: "150M"
         },
         borders: [
@@ -2948,7 +2919,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "150M",
           angle: 300,
           percent: 0.5
@@ -2966,10 +2936,7 @@ const game = {
       },
       {
         color: "plain",
-        mountain: {
-          cost: "150M",
-          size: "medium"
-        },
+        mountain: {cost: "150M"},
         borders: [
           {
             side: 3,
@@ -2999,7 +2966,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "small",
           cost: "50M",
           angle: 300,
           percent: 0.5
@@ -3033,7 +2999,6 @@ const game = {
           }
         ],
         mountain: {
-          size: "medium",
           cost: "100M",
           angle: 300,
           percent: 0.5

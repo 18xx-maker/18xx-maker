@@ -999,13 +999,13 @@ const game = {
           centerTowns: [
             {
               name: {
-                name: "Mill Hill"
+                name: "Mill Hill", y: -15
               },
-              percent: 0.3
+              percent: 0.27
             },
             {
               name: {
-                name: "Medina Wharf"
+                name: "Medina Wharf", y: -15
               },
               percent: 0.8
             }
@@ -1022,6 +1022,7 @@ const game = {
         {
           color: "water",
           offBoardRevenue: {
+            name: {name: "Ryde Pier", bgColor: "water"},
             revenues: [
               {
                 color: "yellow",
@@ -1037,18 +1038,7 @@ const game = {
               }
             ]
           },
-          offBoardTrack: [
-            {
-              side: 2
-            }
-          ],
-          labels: [
-            {
-              label: "Ryde Pier",
-              angle: 180,
-              percent: 0.35
-            }
-          ],
+          offBoardTrack: [{side: 2}],
           hexes: ["J2"]
         },
         {

@@ -808,14 +808,8 @@ const game = {
       {
         color: "offboard",
         offBoardTrack: [{ side: 6 }],
-        labels: [
-          {
-            label: "Salta",
-            angle: 180,
-            percent: 0.333
-          }
-        ],
         offBoardRevenue: {
+          name: {name: "Salta"},
           revenues: [
             {
               color: "yellow",
@@ -842,7 +836,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "large",
           cost: "$120"
         },
         hexes: ["B11"]
@@ -850,7 +843,6 @@ const game = {
       {
         color: "plain",
         mountain: {
-          size: "medium",
           cost: "$80"
         },
         hexes: ["C12"]
@@ -865,14 +857,8 @@ const game = {
       {
         color: "offboard",
         offBoardTrack: [{ side: 6 }],
-        labels: [
-          {
-            label: "Chile",
-            angle: 180,
-            percent: 0.333
-          }
-        ],
         offBoardRevenue: {
+          name: {name: "Chile"},
           revenues: [
             {
               color: "yellow",
@@ -889,13 +875,9 @@ const game = {
       {
         color: "offboard",
         offBoardTrack: [{ side: 5 }],
-        labels: [
-          {
-            label: "Chile",
-            percent: 0.333
-          }
-        ],
         offBoardRevenue: {
+          name: {name: "Chile"},
+          reverse: true,
           revenues: [
             {
               color: "yellow",
@@ -922,13 +904,9 @@ const game = {
       {
         color: "offboard",
         offBoardTrack: [{ side: 4 }, { side: 5 }],
-        labels: [
-          {
-            label: "Patagonia",
-            percent: 0.333
-          }
-        ],
         offBoardRevenue: {
+          name: {name: "Patagonia"},
+          reverse: true,
           revenues: [
             {
               color: "yellow",

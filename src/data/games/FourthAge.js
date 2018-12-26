@@ -979,6 +979,7 @@ const game = {
         color: "offboard",
         offBoardTrack: [{ side: 4 }],
         offBoardRevenue: {
+          name: {name: "Southlands"},
           revenues: [
             {
               color: "white",
@@ -1204,6 +1205,7 @@ const game = {
         color: "offboard",
         offBoardTrack: [{side: 3},{side: 4},{side: 5}],
         offBoardRevenue: {
+          name: {name: "Far Harad"},
           revenues: [
             {
               color: "white",
@@ -1263,9 +1265,10 @@ const game = {
         color: "offboard",
         offBoardTrack: [{side: 1},{side: 2}],
         offBoardRevenue: {
+          name: {name: "Iron Hills"},
           angle: 270,
           percent: 0.25,
-          phaseReversed: true,
+          reverse: true,
           revenues: [
             {
               color: "white",
@@ -1298,9 +1301,10 @@ const game = {
         color: "offboard",
         offBoardTrack: [{side: 1},{side: 2},{side: 3}],
         offBoardRevenue: {
+          name: {name: "East Lands"},
           angle: 270,
           percent: 0.25,
-          phaseReversed: true,
+          reverse: true,
           revenues: [
             {
               color: "white",
