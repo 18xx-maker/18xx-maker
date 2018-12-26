@@ -104,7 +104,7 @@ const tiles = {
     values: [
       {
         angle: -90,
-        percent: 0.45,
+        percent: 0.50,
         value: 10
       }
     ],
@@ -872,7 +872,7 @@ const tiles = {
     values: [
       {
         angle: -120,
-        percent: 0.15,
+        percent: 0.20,
         value: 10
       }
     ],
@@ -1304,7 +1304,7 @@ const tiles = {
     values: [
       {
         angle: -120,
-        percent: 0.15,
+        percent: 0.20,
         value: 10
       }
     ],
@@ -1329,7 +1329,7 @@ const tiles = {
     values: [
       {
         angle: -90,
-        percent: 0.45,
+        percent: 0.5,
         value: 10
       }
     ],
@@ -2011,7 +2011,7 @@ const tiles = {
     values: [
       {
         angle: -120,
-        percent: 0.15,
+        percent: 0.20,
         value: 30
       }
     ],
@@ -2257,7 +2257,7 @@ const tiles = {
     values: [
       {
         angle: -120,
-        percent: 0.15,
+        percent: 0.20,
         value: 20
       }
     ],
@@ -2893,6 +2893,7 @@ const tiles = {
       {
         type: "sharp",
         side: 1,
+        offset: -3,
         gauge: "narrow"
       }
     ]
@@ -4468,7 +4469,7 @@ const tiles = {
     values: [
       {
         angle: -90,
-        percent: 0.45,
+        percent: 0.50,
         value: 10
       }
     ],
@@ -4790,7 +4791,7 @@ const tiles = {
         percent: 0.8
       }
     ],
-    cities: [{ angle: 90, percent: 0.25 }, { angle: -60, percent: 0.6 }],
+    cities: [{ angle: 90, percent: 0.20 }, { angle: -60, percent: 0.6 }],
     track: [
       { side: 1 },
       { side: 2 },
@@ -4825,7 +4826,7 @@ const tiles = {
     values: [
       {
         angle: -90,
-        percent: 0.45,
+        percent: 0.50,
         value: 20
       }
     ],
@@ -4842,7 +4843,7 @@ const tiles = {
     values: [
       {
         angle: -120,
-        percent: 0.15,
+        percent: 0.20,
         value: 20
       }
     ],

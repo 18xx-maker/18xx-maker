@@ -16,7 +16,7 @@ const Token = ({
     ? colors[color]
     : colors[labelColor] || textColor(color);
   let tokenLabelStroke = inverse ? strokeColor(color) : "none";
-  let tokenStroke = inverse ? colors[color] : colors[outline] || colors["white"];
+  let tokenStroke = inverse ? colors[color] : colors[outline] || colors["black"];
 
   width = width || 25;
 
