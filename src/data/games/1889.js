@@ -59,7 +59,7 @@ const game = {
           color: "purple",
           icon: "exclamation",
           note:
-            "No more than 50% of a corporation's shares may be in the market at any time"
+          "No more than 50% of a corporation's shares may be in the market at any time"
         },
         {
           color: "red",
@@ -237,7 +237,7 @@ const game = {
       {
         color: "cyan",
         description:
-          "Shares of this corporation do not count toward the certificate limit",
+        "Shares of this corporation do not count toward the certificate limit",
         icon: "certificate"
       },
       {
@@ -517,28 +517,28 @@ const game = {
       price: "¥30",
       revenue: "¥5",
       description:
-        "Player owner may place the port tile on a coastal town (B11, G10, I12, or J9) without a tile on it already, outside of the operating rounds of a company controller by another player. The player need not control a company or have connectivity to the placed tile from one of their companies. This does not close the company."
+      "Player owner may place the port tile on a coastal town (B11, G10, I12, or J9) without a tile on it already, outside of the operating rounds of a company controller by another player. The player need not control a company or have connectivity to the placed tile from one of their companies. This does not close the company."
     },
     {
       name: "Ehime Railroad",
       price: "¥40",
       revenue: "¥10",
       description:
-        "When this company is sold to a corporation, the selling player may immediately place a green tile on Ohzu (C4), in addition to any tile which it may lay during the same operating round. This does not close the company."
+      "When this company is sold to a corporation, the selling player may immediately place a green tile on Ohzu (C4), in addition to any tile which it may lay during the same operating round. This does not close the company."
     },
     {
       name: "Sumitomo Mines Railway",
       price: "¥50",
       revenue: "¥15",
       description:
-        "Owning corporation may ignore building cost for mountain hexes which do not also contain rivers. This does not close the company."
+      "Owning corporation may ignore building cost for mountain hexes which do not also contain rivers. This does not close the company."
     },
     {
       name: "Dougo Railway",
       price: "¥60",
       revenue: "¥15",
       description:
-        "Owning player may exchange this private company for a 10% share of Iyo Railway from the initial offering."
+      "Owning player may exchange this private company for a 10% share of Iyo Railway from the initial offering."
     },
     {
       name: "South Iyo Railway",
@@ -552,7 +552,7 @@ const game = {
       revenue: "¥30 / ¥50",
       players: "Players: 4+",
       description:
-        "Does not close while owned by a player. If owned by a player when the first 5-train is purchased it may no longer be sold to a public company and the revenue is increased to 50."
+      "Does not close while owned by a player. If owned by a player when the first 5-train is purchased it may no longer be sold to a public company and the revenue is increased to 50."
     }
   ],
 
@@ -830,9 +830,7 @@ const game = {
       },
       {
         color: "plain",
-        water: {
-          percent: 0.4
-        },
+        water: {percent: 0.38},
         mountain: {
           angle: 180,
           percent: 0.1,
@@ -1132,27 +1130,17 @@ const game = {
       },
       {
         color: "green",
-        water: {
-          angle: 90,
+        water: {cost: 80, angle: 90, percent: 0.8},
+        values: [{
+          angle: 150,
           percent: 0.82,
-          cost: 80,
-          size: "tiny",
-          border: true
-        },
-        values: [
-          {
-            angle: 150,
-            percent: 0.82,
-            value: 30
-          }
-        ],
-        labels: [
-          {
-            label: "K",
-            angle: 270,
-            percent: 0.82
-          }
-        ],
+          value: 30
+        }],
+        labels: [{
+          label: "K",
+          angle: 270,
+          percent: 0.82
+        }],
         cities: [
           {
             size: 2,

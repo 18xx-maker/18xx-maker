@@ -286,35 +286,35 @@ const game = {
       price: "$40",
       revenue: "$10",
       description:
-        "A corporation owning the C&StL may lay a tile on the C&StL's hex even if this hex is not connected to the corporations's railhead. This free tile placement is in addition to the corporation's normal tile placement - for this turn only the corporation may play two tiles. The tile played on the C&StL hex does not have to connect to any existing adjacent track."
+      "A corporation owning the C&StL may lay a tile on the C&StL's hex even if this hex is not connected to the corporations's railhead. This free tile placement is in addition to the corporation's normal tile placement - for this turn only the corporation may play two tiles. The tile played on the C&StL hex does not have to connect to any existing adjacent track."
     },
     {
       name: "Delaware & Hudson",
       price: "$70",
       revenue: "$15",
       description:
-        "A corporation owning the Delaware & Hudson may establish a railhead on the D&H hex by laying a station tile and a token. The station does not have to be connected to the remainder of the corporation's route. The tile laid is the owning corporation's one tile placement for the turn. Removal of the mountain costs $120 as usual but there is no charge for laying the token. Placing the token is not required, but if placed in a future turn, it must be paid for. Other corporations may place a tile here subject to the ordinary rules."
+      "A corporation owning the Delaware & Hudson may establish a railhead on the D&H hex by laying a station tile and a token. The station does not have to be connected to the remainder of the corporation's route. The tile laid is the owning corporation's one tile placement for the turn. Removal of the mountain costs $120 as usual but there is no charge for laying the token. Placing the token is not required, but if placed in a future turn, it must be paid for. Other corporations may place a tile here subject to the ordinary rules."
     },
     {
       name: "Mohawk & Hudson",
       price: "$110",
       revenue: "$20",
       description:
-        "A player owning the M&H may exhange it for a 10% share of the NYC provided he does not already hold 60% of the NYC stock and there is NYC stock available in the Bank or the Pool. The exchange may be made during the player's turn of a stock round or between the turns of other players or corporations in either stock or operating rounds. This action closes the M&H."
+      "A player owning the M&H may exhange it for a 10% share of the NYC provided he does not already hold 60% of the NYC stock and there is NYC stock available in the Bank or the Pool. The exchange may be made during the player's turn of a stock round or between the turns of other players or corporations in either stock or operating rounds. This action closes the M&H."
     },
     {
       name: "Camden & Amboy",
       price: "$160",
       revenue: "$25",
       description:
-        "The initial purchaser of the C&A immediately receives a 10% share of PRR stock without further payment. This action does not close the C&A. The PRR corporation will not be running at this point, but the stock may be retained or sold subject to the ordinary rules of the game."
+      "The initial purchaser of the C&A immediately receives a 10% share of PRR stock without further payment. This action does not close the C&A. The PRR corporation will not be running at this point, but the stock may be retained or sold subject to the ordinary rules of the game."
     },
     {
       name: "Baltimore & Ohio",
       price: "$220",
       revenue: "$30",
       description:
-        "The owner of the B&O private company immediately receives the President's certificate of the B&O corporation without further payment. The B&O private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the B&O corporation. When the B&O corporation purchases its first train the private company is closed down."
+      "The owner of the B&O private company immediately receives the President's certificate of the B&O corporation without further payment. The B&O private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the B&O corporation. When the B&O corporation purchases its first train the private company is closed down."
     }
   ],
 
@@ -375,7 +375,7 @@ const game = {
           color: "brown",
           icon: "exclamation",
           note:
-            "No more than 50% of a corporation's shares may be in the market at any time"
+          "No more than 50% of a corporation's shares may be in the market at any time"
         },
         {
           color: "red",
@@ -619,7 +619,7 @@ const game = {
       {
         color: "yellow",
         description:
-          "Shares of this corporation do not count toward the certificate limit",
+        "Shares of this corporation do not count toward the certificate limit",
         icon: "certificate"
       },
       {
@@ -630,7 +630,7 @@ const game = {
       {
         color: "brown",
         description:
-          "Players may purchase any number of shares of this corporation in one stock action",
+        "Players may purchase any number of shares of this corporation in one stock action",
         icon: "money-bill-wave"
       }
     ]
@@ -1019,30 +1019,20 @@ const game = {
           {
             angle: 75,
             percent: 0.55,
-            name: {
-              name: "Dunkirk",
-              rotation: 30
-            },
-            companies: [
-              {
-                label: "ERIE",
-                color: "yellow"
-              }
-            ]
+            name: {name: "Dunkirk"},
+            companies: [{
+              label: "ERIE",
+              color: "yellow"
+            }]
           },
           {
             angle: 285,
             percent: 0.55,
-            name: {
-              name: "Buffalo",
-              rotation: -30
-            },
-            companies: [
-              {
-                label: "ERIE",
-                color: "yellow"
-              }
-            ]
+            name: {name: "Buffalo"},
+            companies: [{
+              label: "ERIE",
+              color: "yellow"
+            }]
           }
         ],
         hexes: ["E11"]
@@ -1601,13 +1591,9 @@ const game = {
       },
       {
         color: "plain",
-        centerTowns: [
-          {
-            name: {
-              name: "Erie"
-            }
-          }
-        ],
+        centerTowns: [{
+          name: {name: "Erie"}
+        }],
         hexes: ["F10"]
       },
       {

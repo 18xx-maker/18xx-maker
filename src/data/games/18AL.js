@@ -735,7 +735,7 @@ const game = {
       {
         color: "plain",
         water: {
-          percent: 0.4
+          percent: 0.38
         },
         mountain: {
           angle: 180,

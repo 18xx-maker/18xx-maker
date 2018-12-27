@@ -903,6 +903,9 @@ const game = {
       {
         color: "plain",
         cities: [{
+          name: {
+            name: "Topeka"
+          },
           companies: [{
             label: "ATSF",
             color: "cyan"
@@ -915,6 +918,7 @@ const game = {
         water: {size:"small",cost:"$40",percent:0.67},
         labels: [{percent: 0.67,angle:180,label:"P"}],
         cities: [{
+          name: {name: "Kansas City", offset: 71},
           companies: [{
             label: "MKT",
             color: "darkGreen"
@@ -926,6 +930,7 @@ const game = {
         color: "plain",
         mountain: {size:"small",cost:"$60",percent:0.67},
         cities: [{
+          name: {name: "Springfield"},
           companies: [{
             label: "SLSF",
             color: "red"
@@ -937,6 +942,7 @@ const game = {
         color: "plain",
         water: {size:"small",cost:"$60",percent:0.67},
         cities: [{
+          name: {name: "Memphis"},
           companies: [{
             label: "SSW",
             color: "blue"
@@ -949,6 +955,7 @@ const game = {
         water: {size:"small",cost:"$40",angle:60,percent:0.7},
         labels: [{percent: 0.67,angle:180,label:"P"}],
         cities: [{
+          name: {name: "St. Louis", offset: 66},
           companies: [{
             label: "MP",
             color: "maroon"
@@ -967,6 +974,7 @@ const game = {
         color: "plain",
         labels: [{percent: 0.67,angle:180,label:"P"}],
         cities: [{
+          name: {name: "Fort Worth", offset: 25},
           companies: [{
             label: "FW",
             color: "purple"
@@ -984,6 +992,7 @@ const game = {
         color: "plain",
         labels: [{percent: 0.67,angle:180,label:"P"}],
         cities: [{
+          name: {name: "Dallas", offset: 75},
           companies: [{
             label: "TP",
             color: "black"
@@ -1000,6 +1009,7 @@ const game = {
       {
         color: "plain",
         cities: [{
+          name: {name: "Jackson"},
           companies: [{
             label: "IC",
             color: "yellow"
@@ -1010,6 +1020,7 @@ const game = {
       {
         color: "plain",
         cities: [{
+          name: {name: "Mobile"},
           companies: [{
             label: "GMO",
             color: "pink"
@@ -1043,7 +1054,7 @@ const game = {
         cities: [{
           name: {
             name: "New Orleans",
-            offset: 70
+            offset: 72
           }
         }],
         tokens: [{

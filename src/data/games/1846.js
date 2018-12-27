@@ -466,19 +466,17 @@ const game = {
         icons: [
           {
             type: "port",
-            angle: 30,
-            percent: 0.5
+            angle: 240,
+            percent: 0.75
           },
           {
             type: "port",
-            angle: 330,
-            percent: 0.5
+            angle: 300,
+            percent: 0.75
           }
         ],
         offBoardRevenue: {
-          name: {
-            name: "Holland"
-          },
+          name: {name: "Holland"},
           revenues: [
             {
               color: "yellow",
@@ -527,13 +525,11 @@ const game = {
         color: "offboard",
         routeBonus: {
           value: "+20",
-          angle: 180,
-          percent: 0.333,
-          x: 15
+          percent: 0.5
         },
         labels: [{
           angle: 180,
-          percent: 0.75,
+          percent: 0.7,
           label: "E"
         }],
         tunnels: [
@@ -546,8 +542,6 @@ const game = {
         offBoardTrack: [{side: 1}],
         offBoardRevenue: {
           name: { name: "Sarnia" },
-          percent: 0.333,
-          x: 20,
           revenues: [
             {
               color: "yellow",
@@ -577,22 +571,17 @@ const game = {
         ],
         routeBonus: {
           value: "+50",
-          angle: 180,
-          percent: 0.333
+          percent: 0.5
         },
         labels: [
           {
             label: "W",
             angle: 180,
-            percent: 0.75
+            percent: 0.7
           }
         ],
         offBoardRevenue: {
-          percent: 0.4,
-          angle: 40,
-          name: {
-            name: "Chicago Connections"
-          },
+          name: {name: "Chicago Connections"},
           revenues: [
             {
               color: "yellow",
@@ -630,26 +619,21 @@ const game = {
             percent: 0.85
           }
         ],
-        cities: [
-          {
-            size: 2,
-            name: {
-              name: "Detroit",
-              reverse: true,
-              offset: 63
-            },
-            companies: [
-              {
-                label: "MS",
-                color: "white"
-              }
-            ]
-          }
-        ],
+        cities: [{
+          size: 2,
+          name: {
+            name: "Detroit",
+            offset: 37
+          },
+          companies: [{
+            label: "MS",
+            color: "white"
+          }]
+        }],
         values: [
           {
             angle: 180,
-            percent: 0.667,
+            percent: 0.75,
             value: 40
           }
         ],
@@ -675,14 +659,12 @@ const game = {
         color: "offboard",
         routeBonus: {
           value: "+30",
-          angle: 180,
-          percent: 0.333,
-          x: 15
+          percent: 0.5
         },
         labels: [
           {
             angle: 180,
-            percent: 0.75,
+            percent: 0.7,
             label: "E"
           }
         ],
@@ -696,8 +678,6 @@ const game = {
         offBoardTrack: [{side: 1}],
         offBoardRevenue: {
           name: { name: "Windsor" },
-          percent: 0.333,
-          x: 20,
           revenues: [
             {
               color: "yellow",
@@ -725,66 +705,43 @@ const game = {
           {
             angle: 330,
             percent: 0.75,
-            companies: [
-              {
-                label: "C&WI",
-                color: "white"
-              }
-            ]
+            companies: [{
+              label: "C&WI",
+              color: "white"
+            }]
           },
           {
+            name: {name: "Chicago", offset: 42},
             angle: 30,
             percent: 0.75
           }
         ],
-        labels: [
-          {
-            label: "Chicago",
-            angle: 90,
-            percent: 0.333,
-            y: 10
-          }
-        ],
-        icons: [
-          {
-            type: "meat",
-            angle: 135,
-            percent: 0.7
-          }
-        ],
-        values: [
-          {
-            value: 10,
-            angle: 165,
-            percent: 0.25
-          }
-        ],
+        icons: [{
+          type: "meat",
+          angle: 120,
+          percent: 0.75
+        }],
+        values: [{value: 10}],
         hexes: ["D6"]
       },
       {
         copy: "C9",
-        cities: [
-          {
-            name: {
-              name: "Toledo",
-              reverse: true
-            }
+        cities: [{
+          name: {
+            name: "Toledo",
+            reverse: true
           }
-        ],
-        companies: [
-          {
-            angle: 270,
-            percent: 0.667,
-            label: "LSL"
-          }
-        ],
-        icons: [
-          {
-            type: "port",
-            angle: 135,
-            percent: 0.7
-          }
-        ],
+        }],
+        companies: [{
+          angle: 90,
+          percent: 0.65,
+          label: "LSL"
+        }],
+        icons: [{
+          type: "port",
+          angle: 180,
+          percent: 0.75
+        }],
         hexes: ["D14"]
       },
       {
@@ -796,8 +753,8 @@ const game = {
         values: [
           {
             value: 10,
-            angle: 165,
-            percent: 0.667
+            angle: 180,
+            percent: 0.75
           }
         ],
         cities: [
@@ -837,20 +794,16 @@ const game = {
         color: "offboard",
         routeBonus: {
           value: "+30",
-          angle: 180,
-          percent: 0.333,
-          x: 15
+          percent: 0.5
         },
         labels: [{
           angle: 180,
-          percent: 0.75,
+          percent: 0.7,
           label: "E"
         }],
         offBoardTrack: [{side: 6}],
         offBoardRevenue: {
           name: { name: "Buffalo" },
-          percent: 0.333,
-          x: 20,
           revenues: [
             {
               color: "yellow",
@@ -868,20 +821,16 @@ const game = {
         color: "offboard",
         routeBonus: {
           value: "+30",
-          angle: 180,
-          percent: 0.333,
-          x: 15
+          percent: 0.5
         },
         labels: [{
           angle: 180,
-          percent: 0.75,
+          percent: 0.7,
           label: "E"
         }],
         offBoardTrack: [{side: 1}],
         offBoardRevenue: {
           name: { name: "Buffalo" },
-          percent: 0.333,
-          x: 20,
           revenues: [
             {
               color: "yellow",
@@ -924,8 +873,8 @@ const game = {
         ],
         companies: [
           {
-            angle: 150,
-            percent: 0.6,
+            angle: 90,
+            percent: 0.65,
             label: "LSL"
           }
         ],
@@ -943,18 +892,16 @@ const game = {
         values: [
           {
             value: 10,
-            angle: 195,
-            percent: 0.667
+            angle: 180,
+            percent: 0.75
           }
         ],
         cities: [
           {
-            companies: [
-              {
-                label: "Erie",
-                color: "yellow"
-              }
-            ],
+            companies: [{
+              label: "Erie",
+              color: "yellow"
+            }],
             name: {
               name: "Salamanca",
               reverse: true
@@ -978,18 +925,16 @@ const game = {
         color: "offboard",
         routeBonus: {
           value: "+30",
-          angle: 180,
-          percent: 0.333
+          percent: 0.5
         },
         labels: [{
           angle: 180,
-          percent: 0.75,
+          percent: 0.7,
           label: "E"
         }],
         offBoardTrack: [{side: 1}],
         offBoardRevenue: {
           name: { name: "Binghamton" },
-          reverse: true,
           revenues: [
             {
               color: "yellow",
@@ -1072,18 +1017,16 @@ const game = {
         color: "offboard",
         routeBonus: {
           value: "+20",
-          angle: 180,
-          percent: 0.333
+          percent: 0.5
         },
         labels: [{
           angle: 180,
-          percent: 0.75,
+          percent: 0.7,
           label: "E"
         }],
         offBoardTrack: [{side: 1}],
         offBoardRevenue: {
           name: { name: "Pittsburgh" },
-          reverse: true,
           revenues: [
             {
               color: "yellow",
@@ -1160,69 +1103,53 @@ const game = {
       },
       {
         color: "yellow",
-        values: [
-          {
-            value: 10,
-            angle: 30,
-            percent: 0.75
-          }
-        ],
-        icons: [
-          {
-            angle: 190,
-            percent: 0.667,
-            type: "port"
-          },
-          {
-            angle: 230,
-            percent: 0.667,
-            type: "port"
-          }
-        ],
-        bridges: [
-          {
-            cost: "$40",
-            angle: 150,
-            percent: 1
-          },
-          {
-            cost: "$20",
-            angle: 90,
-            percent: 1
-          }
-        ],
+        values: [{
+          value: 10,
+          angle: 30,
+          percent: 0.667
+        }],
+        icons: [{
+          angle: 180,
+          percent: 0.75,
+          type: "port"
+        },{
+          angle: 240,
+          percent: 0.75,
+          type: "port"
+        }],
+        bridges: [{
+          cost: "$40",
+          angle: 150,
+          percent: 1
+        },{
+          cost: "$20",
+          angle: 90,
+          percent: 1
+        }],
         cities: [
           {
             name: {
               name: "Wheeling",
-              reverse: true,
-              rotation: 30
+              offset: 30
             },
-            companies: [
-              {
-                label: "B&O",
-                color: "blue"
-              }
-            ]
+            companies: [{
+              label: "B&O",
+              color: "blue"
+            }]
           }
         ],
-        track: [
-          {
-            side: 5
-          }
-        ],
+        track: [{side: 5}],
         hexes: ["G19"]
       },
       {
         color: "offboard",
         routeBonus: {
           value: "+20",
-          angle: 180,
-          percent: 0.333
+          percent: 0.5
         },
         labels: [{
           angle: 180,
-          percent: 0.75,
+          percent: 0.7,
           label: "E"
         }],
         tunnels: [{
@@ -1233,7 +1160,6 @@ const game = {
         offBoardTrack: [{side: 1}, {side: 2}],
         offBoardRevenue: {
           name: { name: "Pittsburgh" },
-          reverse: true,
           revenues: [
             {
               color: "yellow",
@@ -1251,16 +1177,11 @@ const game = {
         copy: "C9",
         cities: [
           {
-            name: {
-              name: "Cincinnati",
-              reverse: true
-            },
-            companies: [
-              {
-                label: "B&O",
-                color: "gray"
-              }
-            ]
+            name: {name: "Cincinnati"},
+            companies: [{
+              label: "B&O",
+              color: "gray"
+            }]
           }
         ],
         labels: [
@@ -1276,13 +1197,12 @@ const game = {
         color: "offboard",
         routeBonus: {
           value: "+20",
-          angle: 180,
-          percent: 0.333
+          percent: 0.5
         },
         labels: [
           {
             angle: 180,
-            percent: 0.75,
+            percent: 0.7,
             label: "E"
           }
         ],
@@ -1292,7 +1212,6 @@ const game = {
           }
         ],
         offBoardRevenue: {
-          reverse: true,
           name: {
             name: "Cumberland"
           },
@@ -1313,29 +1232,25 @@ const game = {
         color: "offboard",
         icons: [{
           type: "port",
-          angle: 20,
-          percent: 0.7
+          angle: 300,
+          percent: 0.75
         },{
           type: "meat",
-          angle: -20,
-          percent: 0.7
+          angle: 240,
+          percent: 0.75
         }],
         routeBonus: {
           value: "+30",
-          angle: 180,
-          percent: 0.333
+          percent: 0.5
         },
         labels: [{
           angle: 180,
-          percent: 0.75,
+          percent: 0.7,
           label: "W"
         }],
         offBoardTrack: [{ side: 3 }, { side: 4 }],
         offBoardRevenue: {
-          name: {
-            name: "St. Louis"
-          },
-          reverse: true,
+          name: {name: "St. Louis"},
           revenues: [
             { color: "yellow", cost: "50" },
             { color: "brown", cost: "70" }
@@ -1345,13 +1260,11 @@ const game = {
       },
       {
         color: "gray",
-        values: [
-          {
-            value: 10,
-            angle: 165,
-            percent: 0.667
-          }
-        ],
+        values: [{
+          value: 10,
+          angle: 180,
+          percent: 0.75
+        }],
         cities: [
           {
             size: 2,
@@ -1441,13 +1354,12 @@ const game = {
         ],
         routeBonus: {
           value: "+20",
-          angle: 180,
-          percent: 0.333
+          percent: 0.5
         },
         labels: [
           {
             angle: 180,
-            percent: 0.75,
+            percent: 0.7,
             label: "E"
           }
         ],
@@ -1455,7 +1367,6 @@ const game = {
           name: {
             name: "Charleston"
           },
-          reverse: true,
           revenues: [
             {
               color: "yellow",
@@ -1510,13 +1421,11 @@ const game = {
       },
       {
         color: "gray",
-        values: [
-          {
-            value: 20,
-            angle: 165,
-            percent: 0.667
-          }
-        ],
+        values: [{
+          value: 20,
+          angle: 180,
+          percent: 0.75
+        }],
         cities: [
           {
             name: {
