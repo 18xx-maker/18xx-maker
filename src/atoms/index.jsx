@@ -223,38 +223,18 @@ const Atoms = () => {
       ]
     },
     {
-      name: "Mountain",
+      name: "Mountain and Water",
       examples: [
-        <Mountain size="tiny" cost="$20" />,
-        <Mountain size="small" cost="$40" />,
-        <Mountain size="medium" cost="$80" />,
-        <Mountain size="large" cost="$120" />,
-        <Mountain border={true} size="tiny" cost="$20" />,
-        <Mountain border={true} size="small" cost="$40" />,
-        <Mountain border={true} size="medium" cost="$80" />,
-        <Mountain border={true} size="large" cost="$120" />
+        <Mountain cost="$40" />,
+        <Mountain cost="$120" />,
+        <Water cost="$40" />,
+        <Water cost="$120" />
       ]
     },
     {
-      name: "Tunnel",
-      examples: [<Tunnel cost="$40" />]
-    },
-    {
-      name: "Water",
-      examples: [
-        <Water size="tiny" cost="$20" />,
-        <Water size="small" cost="$40" />,
-        <Water size="medium" cost="$80" />,
-        <Water size="large" cost="$120" />,
-        <Water border={true} size="tiny" cost="$20" />,
-        <Water border={true} size="small" cost="$40" />,
-        <Water border={true} size="medium" cost="$80" />,
-        <Water border={true} size="large" cost="$120" />
-      ]
-    },
-    {
-      name: "Bridge",
-      examples: [<Bridge cost="$40" />]
+      name: "Tunnel and Bridge",
+      examples: [<Tunnel cost="$40" />,
+                 <Bridge cost="$40" />]
     },
     {
       name: "Route Bonus",

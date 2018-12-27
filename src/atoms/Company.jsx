@@ -5,7 +5,8 @@ const Company = ({ label, bottom, left, right, radius, color }) => {
   let size = 13;
   radius = radius || 6;
 
-  let y = bottom ? (2 * radius) : -(2 * radius);
+  let y = bottom ? radius : -radius;
+  let ty = -y;
 
   let x = label.length * 3 + 5;
   let r = (x + (right || 0) + (x + (left || 0))) * 2;
@@ -44,7 +45,7 @@ const Company = ({ label, bottom, left, right, radius, color }) => {
         alignmentBaseline={bottom ? "baseline" : "hanging"}
         textAnchor="middle"
         x="0"
-        y="0"
+        y={ty}
       >
         {label}
       </text>
