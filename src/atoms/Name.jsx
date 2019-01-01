@@ -1,5 +1,5 @@
 import React from "react";
-import { colors, textColor } from "../data";
+import { textColor } from "../data";
 
 const Name = ({ name, color, bgColor, path, rotation, reverse, offset, y, textLength, fontSize }) => {
   let fillColor = color || textColor(bgColor || "white");
