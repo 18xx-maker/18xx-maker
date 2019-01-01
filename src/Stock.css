@@ -8,7 +8,7 @@
 
   display: flex;
   flex-flow: row-reverse nowrap;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: flex-end;
   align-content: flex-end;
 }
@@ -154,7 +154,7 @@
   grid-area: up;
   display: flex;
   flex-direction: column-reverse;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -162,7 +162,7 @@
   grid-area: down;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -170,7 +170,7 @@
   grid-area: left;
   display: flex;
   flex-direction: row-reverse;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -178,6 +178,6 @@
   grid-area: right;
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 }

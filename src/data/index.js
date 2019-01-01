@@ -1,5 +1,8 @@
 import * as tinycolor from "tinycolor2";
 
+/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "DTG_colors" }]*/
+// This variable isn't used yet, but is to define colors that we might use in
+// the future
 const DTG_colors = {
   // Tiles
   yellow: "rgb(100% 100% 0%)",
