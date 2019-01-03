@@ -6,7 +6,11 @@ import Id from "./atoms/Id";
 
 const Tile = ({ id, border }) => {
   let [idBase, idExtra] = id.split("|");
-  let hex = tiles[idBase];
+  let hex = tiles[id];
+
+  if(!hex) {
+    hex = tiles[idBase];
+  }
 
   if(hex) {
     return <Hex hex={hex} id={id} border={border} />;

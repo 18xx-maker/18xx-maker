@@ -22,6 +22,8 @@ let games = {
   "1834": game_1834,
   "1846": game_1846,
   "1849": game_1849,
+  "1857": game_1857,
+  "1860": game_1860,
   "1870": game_1870,
   "1873": game_1873,
   "1886": game_1886,
@@ -35,8 +37,6 @@ if(process.env.REACT_APP_ALL_GAMES) {
   games = {
     ...games,
     "1828": game_1828,
-    "1857": game_1857,
-    "1860": game_1860,
     "1899": game_1899,
     "FourthAge": game_FourthAge
   };
