@@ -175,6 +175,10 @@ describe("toAlpha", () => {
   it("should handle slightly larger numbers", () => {
     expect(util.toAlpha(27)).toEqual("AA");
     expect(util.toAlpha(30)).toEqual("AD");
+    expect(util.toAlpha(51)).toEqual("AY");
+    expect(util.toAlpha(52)).toEqual("AZ");
+    expect(util.toAlpha(53)).toEqual("BA");
+    expect(util.toAlpha(54)).toEqual("BB");
   });
 });
 
@@ -184,9 +188,13 @@ describe("toCoords", () => {
     expect(util.toCoords("E17")).toEqual([17, 5]);
   });
 
-  it("should handle simple coords", () => {
+  it("should handle large coords", () => {
     expect(util.toCoords("AA4")).toEqual([4, 27]);
     expect(util.toCoords("AD17")).toEqual([17, 30]);
+    expect(util.toCoords("AY1")).toEqual([1, 51]);
+    expect(util.toCoords("AZ1")).toEqual([1, 52]);
+    expect(util.toCoords("BA1")).toEqual([1, 53]);
+    expect(util.toCoords("BB1")).toEqual([1, 54]);
   });
 });
 

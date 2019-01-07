@@ -111,8 +111,11 @@ const toAlpha = num => {
     return R.nth(num - 1, alpha);
   } else {
     let remainder = num % 26;
-    let quotient = Math.floor(num / 26);
-    return `${toAlpha(quotient)}${R.nth(remainder - 1, alpha)}`;
+    if(remainder === 0) {
+      remainder = 26;
+    }
+    let quotient = Math.floor((num - 1) / 26);
+    return `${toAlpha(quotient)}${toAlpha(remainder)}`;
   }
 };
 
