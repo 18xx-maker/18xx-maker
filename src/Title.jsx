@@ -8,7 +8,7 @@ const Title = ({ game, variation }) => {
 
   let mapName = null;
   variation = variation || 0;
-  if (Array.isArray(game.map)) {
+  if (variation != 0 && Array.isArray(game.map)) {
     mapName = game.map[variation].name;
   }
 

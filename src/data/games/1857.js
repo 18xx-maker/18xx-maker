@@ -630,7 +630,8 @@ const game = {
     "70": 1
   },
 
-  map: {
+  map: [{
+    name: "Original Companies",
     hexes: [
       {
         color: "plain",
@@ -1162,7 +1163,212 @@ const game = {
         hexes: ["B13"]
       }
     ]
-  }
+  },{
+    name: "1830 Companies",
+    copy: 0,
+    hexes: [
+      {
+        color: "yellow",
+        labels: [
+          {
+            label: "OO",
+            angle: 210,
+            percent: 0.667
+          }
+        ],
+        cities: [
+          {
+            angle: 120,
+            percent: 0.5,
+            name: {
+              name: "Parana",
+              reverse: true
+            }
+          },
+          {
+            angle: -60,
+            percent: 0.5,
+            name: {
+              name: "Santa Fe"
+            },
+            companies: [
+              {
+                label: "B&M",
+                color: "maroon"
+              }
+            ]
+          }
+        ],
+        hexes: ["G8"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: {
+              name: "Bahia Blanca"
+            },
+            companies: [
+              {
+                label: "NYNH",
+                color: "orange"
+              }
+            ]
+          }
+        ],
+        hexes: ["E20"]
+      },
+      {
+        color: "yellow",
+        labels: [
+          {
+            label: "NY",
+            angle: 270,
+            percent: 0.667
+          }
+        ],
+        values: [
+          {
+            value: 40,
+            angle: 115,
+            percent: 0.667
+          }
+        ],
+        cities: [
+          {
+            angle: 180,
+            percent: 0.5,
+            companies: [{ label: "B&O", color: "blue" }]
+          },
+          {
+            angle: 30,
+            percent: 0.5,
+            name: {
+              name: "Buenos Aires",
+              rotation: 30
+            },
+            companies: [{ label: "PRR", color: "darkGreen" }]
+          }
+        ],
+        track: [
+          {
+            type: "stop",
+            side: 4
+          },
+          {
+            type: "sharp",
+            side: 1
+          }
+        ],
+        hexes: ["H17"]
+      },
+      {
+        color: "yellow",
+        labels: [
+          {
+            label: "OO",
+            angle: 210,
+            percent: 0.667
+          }
+        ],
+        values: [
+          {
+            value: 20,
+            angle: 30,
+            percent: 0.5
+          }
+        ],
+        cities: [
+          {
+            angle: 120,
+            percent: 0.5
+          },
+          {
+            angle: -60,
+            percent: 0.5,
+            name: {
+              name: "Mendoza"
+            },
+            companies: [
+              {
+                label: "NYC",
+                color: "black"
+              }
+            ]
+          }
+        ],
+        track: [{ type: "stop", side: 6 }],
+        hexes: ["B13"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: {
+              name: "Cordoba"
+            },
+            companies: [
+              {
+                label: "CPR",
+                color: "red"
+              }
+            ]
+          }
+        ],
+        hexes: ["D11"]
+      },
+      {
+        color: "yellow",
+        labels: [
+          {
+            label: "B",
+            angle: 150,
+            percent: 0.75
+          }
+        ],
+        values: [
+          {
+            value: 30,
+            angle: 210,
+            percent: 0.75
+          }
+        ],
+        cities: [
+          {
+            name: {
+              name: "Rosario",
+              reverse: true
+            },
+            companies: [
+              {
+                label: "ERIE",
+                color: "yellow"
+              }
+            ]
+          }
+        ],
+        track: [{ side: 2 }, { side: 4 }, { side: 6 }],
+        hexes: ["G12"]
+      },
+      {
+        color: "plain",
+        cities: [
+          {
+            name: {
+              name: "Santiago del Estero"
+            },
+            companies: [
+              {
+                label: "C&O",
+                color: "cyan"
+              }
+            ]
+          }
+        ],
+        hexes: ["D7"]
+      }
+    ]
+  }]
 };
 
 export default game;
