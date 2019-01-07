@@ -17,6 +17,7 @@ import Icon from "./atoms/Icon";
 import Id from "./atoms/Id";
 import Industry from "./atoms/Industry";
 import Label from "./atoms/Label";
+import Name from "./atoms/Name";
 import OffBoardRevenue from "./atoms/OffBoardRevenue";
 import OffBoardTrack from "./atoms/OffBoardTrack";
 import RouteBonus from "./atoms/RouteBonus";
@@ -141,6 +142,7 @@ const HexTile = ({ hex, id, border, transparent }) => {
 
   let labels = <Position data={hex.labels}>{l => <Label {...l} />}</Position>;
   let icons = <Position data={hex.icons}>{i => <Icon {...i} />}</Position>;
+  let names = <Position data={hex.names}>{n => <Name {...n} />}</Position>;
 
   // Deprecating stuff... let's convert old mountain and water to new format
   hex.terrain = hex.terrain || [];
@@ -206,6 +208,7 @@ const HexTile = ({ hex, id, border, transparent }) => {
               {towns}
               {centerTowns}
               {labels}
+              {names}
               {tokens}
               {bonus}
               {offBoardRevenue}
