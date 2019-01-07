@@ -2601,8 +2601,8 @@ const tiles = {
     color: "green",
     values: [{value: 10, angle: 256, percent: 0.7}],
     terrain: [{type: "mountain", cost: "$40", angle: 180, percent: 0.6}],
-    towns: [{rotation: -60, angle: 300, percent: 0.5,
-             name: {reverse: true, name: "Puebla", rotation: 90}}],
+    towns: [{rotation: 120, angle: 300, percent: 0.5,
+             name: {reverse: true, name: "Puebla"}}],
     track: [{side:3,type: "straight"}]
   },
   "480": {
@@ -2705,15 +2705,15 @@ const tiles = {
               name: {name: "Mexico City"},
               companies: [{color: "darkGreen", label: "NRM"}]}],
     towns: [{angle: 120, percent: 0.65, rotation: -60,
-             name: {name: "Toluca", rotation: 90}}],
+             name: {name: "Toluca"}}],
     track: [{side:1},{side:2},{side:3},{side:4},{side:6}]
   },
   "485b": {
     color: "brown",
     values: [{value: 10, angle: 270, percent: 0.85}],
     cities: [{size:2,angle:120,percent:1,rotation:30}],
-    towns: [{rotation: -60, angle: 300, percent: 0.5,
-             name: {reverse: true, name: "Puebla", rotation: 90}}],
+    towns: [{rotation: 120, angle: 300, percent: 0.5,
+             name: {reverse: true, name: "Puebla"}}],
     track: [{side:3,type:"gentle"},{side:3,type: "straight"}]
   },
   "486a": {
@@ -2724,15 +2724,15 @@ const tiles = {
               name: {name: "Mexico City"},
               companies: [{color: "darkGreen", label: "NRM"}]}],
     towns: [{angle: 120, percent: 0.65, rotation: -60,
-             name: {name: "Toluca", rotation: 90}}],
+             name: {name: "Toluca"}}],
     track: [{side:1},{side:2},{side:3},{side:4},{side:6}]
   },
   "486b": {
     color: "brown",
     values: [{value: 10, angle: 265, percent: 0.82}],
     cities: [{angle:120,percent:0.333,size:2,rotation:30,extend:"left"}],
-    towns: [{rotation: -60, angle: 300, percent: 0.6,
-             name: {reverse: true, name: "Puebla", rotation: 90}}],
+    towns: [{rotation: 120, angle: 300, percent: 0.6,
+             name: {reverse: true, name: "Puebla"}}],
     track: [{side:3,type:"gentle"},{side:3,type: "straight"}]
   },
   "513": {
@@ -4769,7 +4769,7 @@ const tiles = {
     values: [
       {
         angle: -120,
-        percent: 0.15,
+        percent: 0.2,
         value: 10
       }
     ],

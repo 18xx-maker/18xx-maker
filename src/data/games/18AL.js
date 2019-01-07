@@ -753,8 +753,7 @@ const game = {
             angle: 30,
             percent: 0.57735,
             name: {
-              name: "Rome",
-              rotation: 90
+              name: "Rome"
             }
           }
         ],
@@ -999,8 +998,7 @@ const game = {
             angle: 90,
             percent: 0.57735,
             name: {
-              name: "Phenix City",
-              rotation: 90
+              name: "Phenix City"
             }
           }
         ],

@@ -1002,7 +1002,7 @@ const game = {
           angle: 210,
           percent: 0.7
         }],
-        towns: [{name:{name: "Puebla", rotation: 90}, rotate: -60}],
+        towns: [{name:{name: "Puebla"}, rotate: -60}],
         borders: [
           {color: "red", dashed: true, side: 1},
           {color: "red", dashed: true, side: 2},

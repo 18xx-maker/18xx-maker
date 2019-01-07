@@ -1000,8 +1000,7 @@ const game = {
             percent: 0.57735,
             rotation: 60,
             name: {
-              name: "Yawatahama",
-              rotation: -90
+              name: "Yawatahama"
             }
           }
         ],
@@ -1026,11 +1025,10 @@ const game = {
           {
             angle: -150,
             percent: 0.57735,
-            rotation: -60,
+            rotation: 120,
             name: {
               name: "Muroto",
-              reverse: true,
-              rotation: 90
+              reverse: true
             }
           }
         ],

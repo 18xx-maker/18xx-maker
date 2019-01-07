@@ -1129,8 +1129,7 @@ const game = {
             percent: 0.26,
             name: {
               name: "Kingston",
-              reverse: true,
-              rotation: -90
+              reverse: true
             }
           }
         ],
@@ -1429,8 +1428,7 @@ const game = {
             rotation: 30,
             name: {
               name: "Atlantic City",
-              reverse: true,
-              rotation: -90
+              reverse: true
             }
           }
         ],

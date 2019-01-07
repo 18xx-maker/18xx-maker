@@ -125,7 +125,9 @@ const Atoms = () => {
     },
     {
       name: "Town",
-      examples: [[<Town border={true} />, <Town />]]
+      examples: [[<Town border={true} />, <Town />],
+                 [<Town border={true} />, <Town name={{name: "Austin"}} />],
+                 [<Town border={true} />, <Town name={{name: "Boston", reverse: true}} />]]
     },
     {
       name: "Center Town",
