@@ -10,6 +10,9 @@ const Track = ({ type, gauge, border, offset }) => {
     case "1860-C":
       path = "m 0 75 C 0 50, 30 50, 45 25";
       break;
+    case "stub":
+      path = "m 0 75 L 0 56.25";
+      break;
     case "stop":
       path = "m 0 75 L 0 37.5";
       break;
