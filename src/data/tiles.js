@@ -2349,6 +2349,7 @@ const tiles = {
         rotation: 30,
         companies: [
           {
+            rotate: true,
             label: "TR",
             color: "darkGreen"
           }
