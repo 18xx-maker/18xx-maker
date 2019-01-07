@@ -5,7 +5,8 @@ const game = {
     designer: "Mark Derrick",
     background: "brown",
     width: 150,
-    color_10: "orange",
+    color_5: "orange",
+    color_10: "brown",
     orientation: "horizontal",
     titleRotate: -90,
     titleX: 175,
@@ -82,7 +83,7 @@ const game = {
     {
       name: "Mexican Central Railway",
       abbrev: "MCR",
-      tokens: ["Free", "$40", "$100", "$100"],
+      tokens: ["Free", "$40"],
       color: "black",
       shares: [
         {
@@ -101,7 +102,7 @@ const game = {
     {
       name: "Pacific Railroad",
       abbrev: "Pac",
-      tokens: ["Free", "$40", "$100"],
+      tokens: ["Free", "$40", "$100", "$100"],
       color: "yellow",
       shares: [
         {
@@ -120,7 +121,7 @@ const game = {
     {
       name: "Texas-Mexican Railway",
       abbrev: "TM",
-      tokens: ["Free", "$40", "$100"],
+      tokens: ["Free", "$40"],
       color: "orange",
       shares: [
         {
@@ -158,7 +159,7 @@ const game = {
     {
       name: "Southern Pacific Railroad of Mexico",
       abbrev: "SoPac",
-      tokens: ["Free", "$40"],
+      tokens: ["Free", "$40", "$100"],
       color: "blue",
       shares: [
         {
