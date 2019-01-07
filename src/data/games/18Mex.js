@@ -1062,7 +1062,7 @@ const game = {
           name: {name: "Veracruz"}
         }],
         centerTowns: [{ angle: 300, percent: 0.667}],
-        swamp: { cost: "$40", percent: 0.65 },
+        terrain: [{ type: "swamp", cost: "$40", percent: 0.65 }],
         borders: [{color: "red", dashed: true, side: 3}],
         hexes: ["M16"]
       },
