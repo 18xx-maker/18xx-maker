@@ -16,17 +16,14 @@ import Icon from "./Icon";
 import Id from "./Id";
 import Industry from "./Industry";
 import Label from "./Label";
-import Mountain from "./Mountain";
 import OffBoardRevenue from "./OffBoardRevenue";
 import OffBoardTrack from "./OffBoardTrack";
 import RouteBonus from "./RouteBonus";
-import Swamp from "./Swamp";
 import Terrain from "./Terrain";
 import Town from "./Town";
 import Track from "./Track";
 import Tunnel from "./Tunnel";
 import Value from "./Value";
-import Water from "./Water";
 
 require("./atoms.css");
 
