@@ -1031,13 +1031,13 @@ const game = {
       },
       {
         color: "yellow",
-        terrain: [{ type: "mountain", cost: "$60", angle: 210, percent: 0.6}],
+        terrain: [{ type: "mountain", cost: "$60", angle: 30, percent: 0.6}],
         values: [{
           value: 10,
-          angle: 30,
-          percent: 0.6
+          angle: 210,
+          percent: 0.7
         }],
-        towns: [{name:{name: "Puebla", rotate: 90}, rotate: -60}],
+        towns: [{name:{name: "Puebla", rotation: 90}, rotate: -60}],
         borders: [
           {color: "red", dashed: true, side: 1},
           {color: "red", dashed: true, side: 2},
