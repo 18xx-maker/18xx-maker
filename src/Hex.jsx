@@ -12,6 +12,7 @@ import CenterTown from "./atoms/CenterTown";
 import City from "./atoms/City";
 import Company from "./atoms/Company";
 import Divide from "./atoms/Divide";
+import Good from "./atoms/Good";
 import Hex from "./atoms/Hex";
 import Icon from "./atoms/Icon";
 import Id from "./atoms/Id";
@@ -176,9 +177,8 @@ const HexTile = ({ hex, id, border, transparent }) => {
 
   let values = <Position data={hex.values}>{v => <Value {...v} />}</Position>;
 
-  let industries = (
-    <Position data={hex.industries}>{i => <Industry {...i} />}</Position>
-  );
+  let industries = <Position data={hex.industries}>{i => <Industry {...i} />}</Position>;
+  let goods = <Position data={hex.goods}>{g => <Good {...g} />}</Position>;
 
   let companies = (
     <Position data={hex.companies}>{c => <Company {...c} />}</Position>
@@ -228,6 +228,7 @@ const HexTile = ({ hex, id, border, transparent }) => {
       {outsideCities}
       {offBoardRevenue}
       {industries}
+      {goods}
       {companies}
 
       {tunnels}
