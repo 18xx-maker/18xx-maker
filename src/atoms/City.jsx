@@ -27,7 +27,7 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
       companies[num] &&
       companies[num].label && (
         <text
-          transform={`rotate(${-rotation || 0})`}
+          transform={`rotate(${companies[num].rotate ?  0 : -rotation || 0})`}
           fill={companyTextColor(num)}
           fontFamily="Bitter"
           fontWeight="bold"
