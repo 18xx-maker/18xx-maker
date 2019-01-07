@@ -2587,7 +2587,7 @@ const tiles = {
     towns: [{ percent: 0.58 }],
     track: [{side:1,type:"mid"},{side:3},{side:5}]
   },
-  "479|a": {
+  "479a": {
     color: "green",
     values: [{value: 40, angle: 210, percent: 0.75}],
     cities: [{angle:300,percent:0.33,size:2,rotation:30,
@@ -2597,7 +2597,7 @@ const tiles = {
                    name: {name: "Toluca", rotation: 30}}],
     track: [{side:4},{side:6}]
   },
-  "479|b": {
+  "479b": {
     color: "green",
     values: [{value: 10, angle: 256, percent: 0.7}],
     terrain: [{type: "mountain", cost: "$40", angle: 180, percent: 0.6}],
@@ -2697,7 +2697,7 @@ const tiles = {
     towns: [{ percent: 0.58 }],
     track: [{side:1,type:"mid"},{side:3},{side:4},{side:5}]
   },
-  "485|a": {
+  "485a": {
     color: "brown",
     values: [{value: 60, angle: 210, percent: 0.8}],
     cities: [{angle:300,percent:0.333,size:2,rotation:30,
@@ -2708,7 +2708,7 @@ const tiles = {
              name: {name: "Toluca", rotation: 90}}],
     track: [{side:1},{side:2},{side:3},{side:4},{side:6}]
   },
-  "485|b": {
+  "485b": {
     color: "brown",
     values: [{value: 10, angle: 270, percent: 0.85}],
     cities: [{size:2,angle:120,percent:1,rotation:30}],
@@ -2716,7 +2716,7 @@ const tiles = {
              name: {reverse: true, name: "Puebla", rotation: 90}}],
     track: [{side:3,type:"gentle"},{side:3,type: "straight"}]
   },
-  "486|a": {
+  "486a": {
     color: "brown",
     values: [{value: 50, angle: 210, percent: 0.8}],
     cities: [{angle:300,percent:0.333,size:2,rotation:30,
@@ -2727,7 +2727,7 @@ const tiles = {
              name: {name: "Toluca", rotation: 90}}],
     track: [{side:1},{side:2},{side:3},{side:4},{side:6}]
   },
-  "486|b": {
+  "486b": {
     color: "brown",
     values: [{value: 10, angle: 265, percent: 0.82}],
     cities: [{angle:120,percent:0.333,size:2,rotation:30,extend:"left"}],
