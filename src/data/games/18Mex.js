@@ -42,45 +42,7 @@ const game = {
   // Railway Companies
   companies: [
     {
-      name: "Pennsylvania",
-      abbrev: "PRR",
-      tokens: ["Free", "$40", "$100", "$100"],
-      color: "darkGreen",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "New York Central",
-      abbrev: "NYC",
-      tokens: ["Free", "$40", "$100", "$100"],
-      color: "black",
-      shares: [
-        {
-          quantity: 1,
-          label: "President Share",
-          percent: 20,
-          shares: 2
-        },
-        {
-          quantity: 8,
-          percent: 10,
-          shares: 1
-        }
-      ]
-    },
-    {
-      name: "Canadian Pacific",
+      name: "Chihuahua Pacific Railway",
       abbrev: "CPR",
       tokens: ["Free", "$40", "$100", "$100"],
       color: "red",
@@ -99,10 +61,10 @@ const game = {
       ]
     },
     {
-      name: "Baltimore & Ohio",
-      abbrev: "B&O",
-      tokens: ["Free", "$40", "$100"],
-      color: "blue",
+      name: "National Railways of Mexicon",
+      abbrev: "NRM",
+      tokens: ["Free", "$40", "$100", "$100"],
+      color: "darkGreen",
       shares: [
         {
           quantity: 1,
@@ -118,10 +80,10 @@ const game = {
       ]
     },
     {
-      name: "Chesapeake & Ohio",
-      abbrev: "C&O",
-      tokens: ["Free", "$40", "$100"],
-      color: "cyan",
+      name: "Mexican Central Railway",
+      abbrev: "MCR",
+      tokens: ["Free", "$40", "$100", "$100"],
+      color: "black",
       shares: [
         {
           quantity: 1,
@@ -137,8 +99,8 @@ const game = {
       ]
     },
     {
-      name: "Erie",
-      abbrev: "ERIE",
+      name: "Pacific Railroad",
+      abbrev: "Pac",
       tokens: ["Free", "$40", "$100"],
       color: "yellow",
       shares: [
@@ -156,9 +118,9 @@ const game = {
       ]
     },
     {
-      name: "New York, New Haven & Hartford",
-      abbrev: "NYNH",
-      tokens: ["Free", "$40"],
+      name: "Texas-Mexican Railway",
+      abbrev: "TM",
+      tokens: ["Free", "$40", "$100"],
       color: "orange",
       shares: [
         {
@@ -175,10 +137,48 @@ const game = {
       ]
     },
     {
-      name: "Boston & Maine",
-      abbrev: "B&M",
+      name: "Mexican Railway",
+      abbrev: "Mex",
+      tokens: ["Free", "$40", "$100"],
+      color: "gray",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "Southern Pacific Railroad of Mexico",
+      abbrev: "SoPac",
       tokens: ["Free", "$40"],
-      color: "maroon",
+      color: "blue",
+      shares: [
+        {
+          quantity: 1,
+          label: "President Share",
+          percent: 20,
+          shares: 2
+        },
+        {
+          quantity: 8,
+          percent: 10,
+          shares: 1
+        }
+      ]
+    },
+    {
+      name: "United Railways of Yucatan",
+      abbrev: "URY",
+      tokens: ["Free", "$40"],
+      color: "purple",
       shares: [
         {
           quantity: 1,
@@ -461,152 +461,96 @@ const game = {
     },
     market: [
       [
-        { value: 60, label: 60, legend: 0, arrow: "down" },
-        67,
-        71,
-        76,
-        82,
-        90,
-        { value: 100, label: 100, par: true },
-        112,
-        126,
-        142,
-        160,
-        180,
-        200,
-        225,
-        250,
-        275,
-        300,
-        325,
-        350
-      ],
-      [
-        { value: 53, label: 53, legend: 0, arrow: "down" },
-        { value: 60, label: 60, legend: 0 },
-        66,
-        70,
-        76,
-        82,
-        { value: 90, label: 90, par: true },
-        100,
-        112,
-        126,
-        142,
-        160,
-        180,
-        200,
-        220,
-        240,
-        260,
-        280,
-        { value: 300, label: 300, arrow: "up" }
-      ],
-      [
-        { value: 46, label: 46, legend: 0, arrow: "down" },
-        { value: 55, label: 55, legend: 0 },
-        { value: 60, label: 60, legend: 0 },
+        { value: 60, label: 60, arrow: "down" },
         65,
         70,
-        76,
-        { value: 82, label: 82, par: true },
-        90,
+        75,
+        { value: 80, label: 80, par: true },
+        { value: 90, label: 90, par: true },
         100,
-        111,
-        125,
+        110,
+        120,
+        130,
         140,
-        155,
-        170,
-        185,
-        { value: 200, label: 200, arrow: "up" }
+        150,
+        165,
+        180,
+        200
       ],
       [
-        { value: 39, label: 39, legend: 1, arrow: "down" },
-        { value: 48, label: 48, legend: 0 },
-        { value: 54, label: 54, legend: 0 },
-        { value: 60, label: 60, legend: 0 },
-        66,
-        71,
-        { value: 76, label: 76, par: true },
-        82,
+        { value: 55, label: 53, arrow: "down" },
+        60,
+        65,
+        { value: 70, label: 70, par: true },
+        { value: 75, label: 75, par: true },
+        80,
         90,
         100,
         110,
         120,
-        { value: 130, label: 130, arrow: "up" }
+        130,
+        140,
+        150,
+        165,
+        { value: 180, label: 180, arrow: "up" }
       ],
       [
-        { value: 32, label: 32, legend: 1, arrow: "down" },
-        { value: 41, label: 41, legend: 1 },
-        { value: 48, label: 48, legend: 0 },
-        { value: 55, label: 55, legend: 0 },
-        62,
-        67,
-        { value: 71, label: 71, par: true },
-        76,
-        82,
-        90,
-        { value: 100, label: 100, arrow: "up" }
-      ],
-      [
-        { value: 25, label: 25, legend: 2, arrow: "down" },
-        { value: 34, label: 34, legend: 1 },
-        { value: 42, label: 42, legend: 1 },
-        { value: 50, label: 50, legend: 0 },
-        { value: 58, label: 58, legend: 0 },
+        { value: 50, label: 53, arrow: "down" },
+        55,
+        { value: 60, label: 60, par: true },
         65,
-        { value: 67, label: 67, par: true },
-        71,
+        70,
+        75,
+        80,
+        90,
+        100,
+        110,
+        120,
+        130,
+        140,
+        { value: 150, label: 150, arrow: "up" }
+      ],
+      [
+        { value: 45, label: 45, arrow: "down" },
+        50,
+        55,
+        60,
+        65,
+        70,
+        75,
+        80,
+        90,
+        100,
+        110,
+        { value: 120, label: 120, arrow: "up" }
+      ],
+      [
+        { value: 40, label: 40, legend: 0, arrow: "down" },
+        45,
+        50,
+        55,
+        60,
+        65,
+        70,
         75,
         { value: 80, label: 80, arrow: "up" }
       ],
       [
-        { value: 18, label: 18, legend: 2, arrow: "down" },
-        { value: 27, label: 27, legend: 2 },
-        { value: 36, label: 36, legend: 1 },
-        { value: 45, label: 45, legend: 1 },
-        { value: 54, label: 54, legend: 0 },
-        63,
-        67,
-        69,
-        { value: 70, label: 70, arrow: "up" }
-      ],
-      [
-        { value: 10, label: 10, legend: 2 },
-        { value: 12, label: 12, legend: 2 },
-        { value: 30, label: 30, legend: 2 },
-        { value: 40, label: 40, legend: 1 },
+        { value: 30, label: 30, legend: 0, arrow: "down" },
+        { value: 40, label: 40, legend: 0 },
+        { value: 45, label: 45, legend: 0 },
         { value: 50, label: 50, legend: 0 },
-        { value: 60, label: 60, legend: 0 },
-        67,
-        { value: 68, label: 68, arrow: "up" }
+        { value: 55, label: 55, legend: 0, arrow: "up" },
       ],
       [
-        null,
-        { value: 10, label: 10, legend: 2 },
-        { value: 20, label: 20, legend: 2 },
-        { value: 30, label: 30, legend: 2 },
-        { value: 40, label: 40, legend: 1 },
-        { value: 50, label: 50, legend: 0 },
-        { value: 60, label: 60, legend: 0, arrow: "up" }
+        { value: 20, label: 30, legend: 0, arrow: "down" },
+        { value: 30, label: 30, legend: 0 },
+        { value: 40, label: 40, legend: 0 },
+        { value: 45, label: 45, legend: 0 },
+        { value: 50, label: 50, legend: 0, arrow: "up" },
       ],
       [
-        null,
-        null,
-        { value: 10, label: 10, legend: 2 },
-        { value: 20, label: 20, legend: 2 },
-        { value: 30, label: 30, legend: 2 },
-        { value: 40, label: 40, legend: 1 },
-        { value: 50, label: 50, legend: 0, arrow: "up" }
-      ],
-      [
-        null,
-        null,
-        null,
-        { value: 10, label: 10, legend: 2 },
-        { value: 20, label: 20, legend: 2 },
-        { value: 30, label: 30, legend: 2 },
-        { value: 40, label: 40, legend: 1, arrow: "up" }
+        { value: 10, label: 10, legend: 0, arrow: "up" }
       ]
     ],
     legend: [
@@ -615,17 +559,6 @@ const game = {
         description:
         "Shares of this corporation do not count toward the certificate limit",
         icon: "certificate"
-      },
-      {
-        color: "orange",
-        description: "Players may own more than 60% of this corporation",
-        icon: "percentage"
-      },
-      {
-        color: "brown",
-        description:
-        "Players may purchase any number of shares of this corporation in one stock action",
-        icon: "money-bill-wave"
       }
     ]
   },
@@ -724,7 +657,7 @@ const game = {
         cities: [{
           companies: [{
             label: "Pac",
-            color: "gray"
+            color: "yellow"
           }]
         }],
         offBoardRevenue: {
@@ -780,8 +713,8 @@ const game = {
         }],
         cities: [{
           companies: [{
-            label: "Chi",
-            color: "gray"
+            label: "CPR",
+            color: "red"
           }],
           name: {offset: 75, name: "Chihuahua"}
         }],
@@ -860,8 +793,8 @@ const game = {
         cities: [{
           name: {name: "Torreón"},
           companies: [{
-            label: "MC",
-            color: "gray"
+            label: "MCR",
+            color: "black"
           }]
         }],
         hexes: ["H9"]
@@ -880,7 +813,7 @@ const game = {
           name: {offset: 75, name: "Matamoros"},
           companies: [{
             label: "TM",
-            color: "gray"
+            color: "orange"
           }]
         }],
         offBoardRevenue: {
@@ -982,7 +915,11 @@ const game = {
       {
         color: "plain",
         cities: [{
-          name: {name: "Guadalajara", reverse: true}
+          name: {name: "Guadalajara", reverse: true},
+          companies: [{
+            label: "SoPac",
+            color: "blue"
+          }]
         }],
         terrain: [{
           type: "river",
@@ -1007,8 +944,8 @@ const game = {
         cities: [{
           name: {offset: 40, name: "Mexico City", reverse: true},
           companies: [{
-            label: "NdM",
-            color: "gray"
+            label: "NRM",
+            color: "darkGreen"
           }]
         }],
         values: [{
@@ -1088,8 +1025,8 @@ const game = {
         },
         cities: [{
           companies: [{
-            color: "gray",
-            label: "UdY"
+            color: "purple",
+            label: "URY"
           }]
         }],
         offBoardTrack: [{side: 2},{side:3}],
