@@ -5,26 +5,28 @@ import { colors } from "../data";
 
 import Svg from "../Svg";
 
-import Id from "./Id";
-import Value from "./Value";
-import Industry from "./Industry";
-import Company from "./Company";
-import Icon from "./Icon";
-import City from "./City";
-import Town from "./Town";
-import CenterTown from "./CenterTown";
-import Label from "./Label";
-import Track from "./Track";
-import OffBoardTrack from "./OffBoardTrack";
-import OffBoardRevenue from "./OffBoardRevenue";
-import Hex from "./Hex";
-import Divide from "./Divide";
 import Border from "./Border";
-import Mountain from "./Mountain";
-import Tunnel from "./Tunnel";
-import Water from "./Water";
 import Bridge from "./Bridge";
+import CenterTown from "./CenterTown";
+import City from "./City";
+import Company from "./Company";
+import Divide from "./Divide";
+import Hex from "./Hex";
+import Icon from "./Icon";
+import Id from "./Id";
+import Industry from "./Industry";
+import Label from "./Label";
+import Mountain from "./Mountain";
+import OffBoardRevenue from "./OffBoardRevenue";
+import OffBoardTrack from "./OffBoardTrack";
 import RouteBonus from "./RouteBonus";
+import Swamp from "./Swamp";
+import Terrain from "./Terrain";
+import Town from "./Town";
+import Track from "./Track";
+import Tunnel from "./Tunnel";
+import Value from "./Value";
+import Water from "./Water";
 
 require("./atoms.css");
 
@@ -223,12 +225,28 @@ const Atoms = () => {
       ]
     },
     {
-      name: "Mountain and Water",
+      name: "Terrain",
       examples: [
-        <Mountain cost="$40" />,
-        <Mountain cost="$120" />,
-        <Water cost="$40" />,
-        <Water cost="$120" />
+        <Terrain type="cactus" cost="$20" size="tiny" />,
+        <Terrain type="cactus" cost="$40" />,
+        <Terrain type="cactus" cost="$80" size="medium" />,
+        <Terrain type="cactus" cost="$120" size="large" />,
+        <Terrain type="mountain" cost="$20" size="tiny" />,
+        <Terrain type="mountain" cost="$40" />,
+        <Terrain type="mountain" cost="$80" size="medium" />,
+        <Terrain type="mountain" cost="$120" size="large" />,
+        <Terrain type="stream" cost="$20" size="tiny" />,
+        <Terrain type="stream" cost="$40" />,
+        <Terrain type="stream" cost="$80" size="medium" />,
+        <Terrain type="stream" cost="$120" size="large" />,
+        <Terrain type="swamp" cost="$20" size="tiny" />,
+        <Terrain type="swamp" cost="$40" />,
+        <Terrain type="swamp" cost="$80" size="medium" />,
+        <Terrain type="swamp" cost="$120" size="large" />,
+        <Terrain type="water" cost="$20" size="tiny" />,
+        <Terrain type="water" cost="$40" />,
+        <Terrain type="water" cost="$80" size="medium" />,
+        <Terrain type="water" cost="$120" size="large" />,
       ]
     },
     {

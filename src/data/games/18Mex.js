@@ -738,19 +738,20 @@ const game = {
       },
       { // 120 Mountain
         color: "plain",
-        mountain: {
+        terrain: [{
+          type: "mountain",
           cost: "$120"
-        },
+        }],
         hexes: ["E2","D3","G4","D5","G6","I6","H7","E8","F9","I14","I16"]
       },
       { // 60 Mountain
         color: "plain",
-        mountain: { cost: "$60" },
+        terrain: [{ type: "mountain", cost: "$60" }],
         hexes: ["B3","K12","H17","L17"]
       },
       { // 20 Plants
         color: "plain",
-        plants: { cost: "$20" },
+        terrain: [{ type: "cactus", cost: "$20" }],
         hexes: ["F3", "E4", "B5", "H5", "J5","C6","F7","I8","I10","K10"]
       },
       {
@@ -780,7 +781,7 @@ const game = {
       },
       { // 20 Water
         color: "plain",
-        water: {cost: "$20"},
+        terrain: [{type: "river", cost: "$20"}],
         hexes: ["I4","K8","G14","K20","M20"]
       },
       {
@@ -820,16 +821,17 @@ const game = {
         cities: [{
           name: {name: "Nuevo Laredo", reverse: true}
         }],
-        water: {
+        terrain: [{
+          type: "river",
           cost: "$20",
           angle: 180,
           percent: 0.65
-        },
+        }],
         hexes: ["J7"]
       },
       { // 40 Swamp
         color: "plain",
-        swamp: { cost: "$40" },
+        terrain: [{ type: "swamp", cost: "$40" }],
         hexes: ["L7","L11"]
       },
       {
@@ -837,11 +839,12 @@ const game = {
         cities: [{
           name: {name: "Los Mochis", reverse: true}
         }],
-        water: {
+        terrain: [{
+          type: "river",
           cost: "$20",
           angle: 180,
           percent: 0.65
-        },
+        }],
         hexes: ["D9"]
       },
       {
@@ -897,7 +900,7 @@ const game = {
       {
         color: "plain",
         centerTowns: [{name:{name:"Zacatecas"}}],
-        plants: { percent: 0.6, cost: "$20" },
+        terrain: [{ type: "cactus", percent: 0.6, cost: "$20" }],
         hexes: ["H11"]
       },
       {
@@ -918,11 +921,12 @@ const game = {
             label: "B"
           }]
         }],
-        water: {
+        terrain: [{
+          type: "river",
           cost: "$20",
           angle: 180,
           percent: 0.65
-        },
+        }],
         towns: [{angle:60, percent: 0.58, rotate: 60}],
         track: [{side:2,type:"mid"}],
         hexes: ["F11"]
@@ -937,7 +941,7 @@ const game = {
         cities: [{
           name: {name: "Querétaro"}
         }],
-        mountain: { percent: 0.667, cost: "$60" },
+        terrain: [{ type: "mountain", percent: 0.667, cost: "$60" }],
         hexes: ["J13"]
       },
       {
@@ -971,16 +975,17 @@ const game = {
         cities: [{
           name: {name: "Guadalajara", reverse: true}
         }],
-        water: {
+        terrain: [{
+          type: "river",
           cost: "$20",
           angle: 180,
           percent: 0.65
-        },
+        }],
         hexes: ["H15"]
       },
       {
         color: "plain",
-        mountain: { cost: "$60" },
+        terrain: [{ type: "mountain", cost: "$60" }],
         borders: [{
           side: 1, dashed: true, color: "red"
         },{
@@ -1013,7 +1018,7 @@ const game = {
       },
       {
         color: "plain",
-        mountain: { cost: "$60" },
+        terrain: [{ type: "mountain", cost: "$60" }],
         borders: [{
           side: 6, dashed: true, color: "red"
         }],
@@ -1026,7 +1031,7 @@ const game = {
       },
       {
         color: "yellow",
-        mountain: { cost: "$60", angle: 210, percent: 0.6},
+        terrain: [{ type: "mountain", cost: "$60", angle: 210, percent: 0.6}],
         values: [{
           value: 10,
           angle: 30,
@@ -1051,13 +1056,13 @@ const game = {
           name: {name: "Veracruz"}
         }],
         centerTowns: [{ angle: 300, percent: 0.667}],
-        swamp: { cost: "$40" },
+        swamp: { cost: "$40", percent: 0.65 },
         borders: [{color: "red", dashed: true, side: 3}],
         hexes: ["M16"]
       },
       {
         color: "plain",
-        mountain: {cost: "$120"},
+        terrain: [{type: "mountain", cost: "$120"}],
         borders: [{color: "red", dashed: true, side: 5}],
         hexes: ["J17"]
       },
@@ -1083,20 +1088,20 @@ const game = {
       },
       {
         color: "plain",
-        mountain: {cost: "$120"},
+        terrain: [{type: "mountain", cost: "$120"}],
         borders: [{color: "red", dashed: true, side: 4}],
         hexes: ["K18"]
       },
       {
         color: "yellow",
-        mountain: {angle: 150, percent: 0.6, cost: "$60"},
+        terrain: [{type: "mountain", angle: 150, percent: 0.6, cost: "$60"}],
         track: [{side: 2, type: "straight"}],
         hexes: ["M18"]
       },
       {
         color: "plain",
         centerTowns: [{name:{name:"Acapulco"}}],
-        mountain: { percent: 0.6, cost: "$120" },
+        terrain: [{ type: "mountain", percent: 0.6, cost: "$120" }],
         hexes: ["J19"]
       },
       {
@@ -1113,10 +1118,11 @@ const game = {
             label: "C"
           }]
         }],
-        water: {
+        terrain: [{
+          type: "river",
           cost: "$20",
           percent: 0.65
-        },
+        }],
         track: [{side:5}],
         hexes: ["L19"]
       },
