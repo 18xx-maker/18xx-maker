@@ -2395,6 +2395,12 @@ const tiles = {
         value: 20
       }
     ],
+    names: [{
+      name: "Copper Canyon",
+      angle: 90,
+      percent: 0.35,
+      rotation: -45
+    }],
     towns: [{
       percent: 0.667,
       rotate: 10
@@ -2409,6 +2415,269 @@ const tiles = {
       side: 5,
       type: "gentle"
     }]
+  },
+  "471": {
+    color: "yellow",
+    values: [{
+      angle: 150,
+      percent: 0.8,
+      value: 30
+    },{
+      angle: 315,
+      percent: 0.7,
+      value: 10
+    }],
+    cities: [{
+      name: {offset: 25, name: "Mazatlán"}
+    }],
+    towns: [{
+      angle: 270,
+      rotation: 90,
+      percent: 0.58
+    }],
+    track: [{
+      side: 1
+    },{
+      side: 4
+    },{
+      side: 5.5,
+      type: "mid"
+    }]
+  },
+  "472": {
+    color: "yellow",
+    values: [{
+      angle: 90,
+      percent: 0.8,
+      value: 20
+    },{
+      angle: 285,
+      percent: 0.7,
+      value: 10
+    }],
+    cities: [{
+      name: {name: "Tampico"}
+    }],
+    towns: [{
+      angle: 240,
+      rotation: 60,
+      percent: 0.58
+    }],
+    track: [{
+      side: 1
+    },{
+      side: 2
+    },{
+      side: 3
+    },{
+      side: 5,
+      type: "mid"
+    }]
+  },
+  "473": {
+    color: "yellow",
+    values: [{
+      angle: 90,
+      percent: 0.8,
+      value: 20
+    },{
+      angle: 285,
+      percent: 0.7,
+      value: 10
+    }],
+    cities: [{
+      name: {name: "Veracruz"}
+    }],
+    towns: [{
+      angle: 240,
+      rotation: 60,
+      percent: 0.58
+    }],
+    track: [{
+      side: 1
+    },{
+      side: 3
+    },{
+      side: 5,
+      type: "mid"
+    }]
+  },
+  "474": {
+    color: "green",
+    values: [{
+      value: 10,
+      angle: 180,
+      percent: 0.5
+    }],
+    centerTowns: [{}],
+    track: [{side:1},{side:2},{side:3},{side:5},{side:6}]
+  },
+  "475": {
+    color: "green",
+    values: [{
+      value: 30,
+      angle: 330,
+      percent: 0.8
+    }],
+    cities: [{
+      name: {name: "Los Mochis"}
+    }],
+    track: [{side:1},{side:2},{side:6}]
+  },
+  "476": {
+    color: "green",
+    values: [{
+      value: 30,
+      angle: 270,
+      percent: 0.8
+    },{
+      value: 10,
+      angle: 75,
+      percent: 0.7
+    }],
+    cities: [{
+      name: {name: "Mazatlán"}
+    }],
+    towns: [{
+      angle: 30,
+      percent: 0.58,
+      rotation: 30
+    }],
+    track: [{side: 1.5, type: "mid"},{side:3},{side:5},{side:6}]
+  },
+  "477": {
+    color: "green",
+    values: [{
+      value: 30,
+      angle: 90,
+      percent: 0.8
+    },{
+      value: 10,
+      angle: 255,
+      percent: 0.7
+    }],
+    names: [{
+      name: "Tampico",
+      angle: 156,
+      percent: 0.7
+    }],
+    cities: [{}],
+    towns: [{
+      angle: 210,
+      percent: 0.58,
+      rotation: 30
+    }],
+    track: [{side: 4.5, type: "mid"},{side:1},{side:2},{side:3},{side:6}]
+  },
+  "478": {
+    color: "green",
+    values: [{
+      value: 30,
+      angle: 180,
+      percent: 0.7
+    },{
+      value: 20,
+      angle: 325,
+      percent: 0.8
+    }],
+    cities: [{
+      size: 2,
+      name: {reverse: true, offset: 31, name: "Veracruz"}
+    }],
+    towns: [{ percent: 0.58 }],
+    track: [{side:1,type:"mid"},{side:3},{side:5}]
+  },
+  "480": {
+    color: "brown",
+    names: [{
+      angle: 210,
+      percent: 0.8,
+      rotation: 15,
+      name: "Guadalajara",
+      fontSize: 8
+    }],
+    values: [{
+      value: 50,
+      angle: 330,
+      percent: 0.8
+    }],
+    cities: [{size:2}],
+    track: [{side:1},{side:2},{side:3},{side:4},{side:5},{side:6}]
+  },
+  "481": {
+    color: "brown",
+    values: [{
+      value: 40,
+      angle: 330,
+      percent: 0.8
+    }],
+    cities: [{
+      size: 2,
+      name: {name: "Los Mochis"}
+    }],
+    track: [{side:1},{side:2},{side:6}]
+  },
+  "482": {
+    color: "brown",
+    values: [{
+      value: 40,
+      angle: 270,
+      percent: 0.85
+    },{
+      value: 20,
+      angle: 68,
+      percent: 0.75
+    }],
+    names: [{name: "Mazatlán", angle: -20, percent: 0.8}],
+    cities: [{size:2,rotation:30}],
+    towns: [{
+      angle: 30,
+      percent: 0.58,
+      rotation: 30
+    }],
+    track: [{side: 1.5, type: "mid"},{side:3},{side:4},{side:5},{side:6}]
+  },
+  "483": {
+    color: "brown",
+    values: [{
+      value: 40,
+      angle: 90,
+      percent: 0.8
+    },{
+      value: 20,
+      angle: 255,
+      percent: 0.7
+    }],
+    names: [{
+      name: "Tampico",
+      angle: 156,
+      percent: 0.7
+    }],
+    cities: [{}],
+    towns: [{
+      angle: 210,
+      percent: 0.58,
+      rotation: 30
+    }],
+    track: [{side: 4.5, type: "mid"},{side:1},{side:2},{side:3},{side:6}]
+  },
+  "484": {
+    color: "brown",
+    values: [{
+      value: 40,
+      angle: 210,
+      percent: 0.8
+    },{
+      value: 30,
+      angle: 325,
+      percent: 0.8
+    }],
+    cities: [{
+      size: 2,
+      name: {reverse: true, offset: 31, name: "Veracruz"}
+    }],
+    towns: [{ percent: 0.58 }],
+    track: [{side:1,type:"mid"},{side:3},{side:4},{side:5}]
   },
   "513": {
     color: "gray",

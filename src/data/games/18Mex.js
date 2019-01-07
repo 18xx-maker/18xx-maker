@@ -811,9 +811,9 @@ const game = {
         mountain: {
           cost: "$120"
         },
-        labels: [{
-          percent: 0.55,
-          label: "CC"
+        names: [{
+          name: "Copper Canyon",
+          percent: 0.55
         }],
         hexes: ["E6"]
       },
