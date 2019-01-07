@@ -53,3 +53,19 @@ npm start
 
 Until more things get added to the UI, simple options can be edited in the
 [src/data/index.js](src/data/index.js) file.
+
+## Changes
+
+### Terrain
+
+Using `water` and `mountain` for map hexes is now deprecated. The new way is to
+use `terrain` like this:
+
+``` js
+{ terrain: [{ type: "mountain", cost: "$60" }] }
+```
+
+Right now valid types are `mountain`, `water`, `river`, `stream`, `cactus`, and
+`swamp`. More might be added in the future. You can also add a `size` attribute
+as `tiny` if you want it small. If you want to enlarge the icon you can pass in
+`medium` or `large`.

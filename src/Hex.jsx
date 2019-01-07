@@ -6,26 +6,25 @@ import Position from "./Position";
 
 import HexContext from "./context/HexContext";
 
-import Hex from "./atoms/Hex";
-import Divide from "./atoms/Divide";
-import Track from "./atoms/Track";
-import Id from "./atoms/Id";
-import City from "./atoms/City";
-import Town from "./atoms/Town";
+import Border from "./atoms/Border";
+import Bridge from "./atoms/Bridge";
 import CenterTown from "./atoms/CenterTown";
-import Label from "./atoms/Label";
-import Icon from "./atoms/Icon";
-import Value from "./atoms/Value";
-import Industry from "./atoms/Industry";
+import City from "./atoms/City";
 import Company from "./atoms/Company";
+import Divide from "./atoms/Divide";
+import Hex from "./atoms/Hex";
+import Icon from "./atoms/Icon";
+import Id from "./atoms/Id";
+import Industry from "./atoms/Industry";
+import Label from "./atoms/Label";
 import OffBoardRevenue from "./atoms/OffBoardRevenue";
 import OffBoardTrack from "./atoms/OffBoardTrack";
-import Water from "./atoms/Water";
-import Bridge from "./atoms/Bridge";
-import Mountain from "./atoms/Mountain";
-import Tunnel from "./atoms/Tunnel";
 import RouteBonus from "./atoms/RouteBonus";
-import Border from "./atoms/Border";
+import Terrain from "./atoms/Terrain";
+import Town from "./atoms/Town";
+import Track from "./atoms/Track";
+import Tunnel from "./atoms/Tunnel";
+import Value from "./atoms/Value";
 
 import Token from "./Token";
 
@@ -143,11 +142,15 @@ const HexTile = ({ hex, id, border, transparent }) => {
   let labels = <Position data={hex.labels}>{l => <Label {...l} />}</Position>;
   let icons = <Position data={hex.icons}>{i => <Icon {...i} />}</Position>;
 
-  let water = <Position data={hex.water}>{w => <Water {...w} />}</Position>;
-
-  let mountain = (
-    <Position data={hex.mountain}>{m => <Mountain {...m} />}</Position>
-  );
+  // Deprecating stuff... let's convert old mountain and water to new format
+  hex.terrain = hex.terrain || [];
+  if(hex.mountain) {
+    hex.terrain.push({...hex.mountain,type:"mountain"});
+  }
+  if(hex.water) {
+    hex.terrain.push({...hex.water,type:"water"});
+  }
+  let terrain = <Position data={hex.terrain}>{t => <Terrain {...t} />}</Position>;
 
   let bridges = (
     <Position data={hex.bridges}>{b => <Bridge {...b} />}</Position>
@@ -206,8 +209,7 @@ const HexTile = ({ hex, id, border, transparent }) => {
               {tokens}
               {bonus}
               {offBoardRevenue}
-              {water}
-              {mountain}
+              {terrain}
               {divides}
               {borders}
             </g>
