@@ -7,7 +7,7 @@ const edge = 150 * 0.57735;
 
 const Border = ({ color, dashed, offset }) => {
   let strokeDashArray = "none";
-  let strokeDashOffset = "none";
+  let strokeDashOffset = "-3";
   let width = 16;
   if (dashed) {
     strokeDashArray = `${width}`;

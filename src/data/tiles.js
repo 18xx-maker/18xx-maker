@@ -2321,6 +2321,12 @@ const tiles = {
     ],
     track: [{ side: 1 }, { side: 4 }, { side: 2 }, { side: 3 }]
   },
+  "455": {
+    color: "gray",
+    cities: [ { size: 3, rotate: 180 } ],
+    values: [ { angle: 270, percent: 0.88, value: 50 } ],
+    track: [ { side: 1 }, { side: 2 }, { side: 3 }, { side: 4 }, { side: 5 }, { side: 6 } ]
+  },
   "465": {
     color: "brown",
     values: [
@@ -2380,37 +2386,30 @@ const tiles = {
     ],
     track: [{ side: 1 }, { side: 2 }, { side: 3 }]
   },
-  "492": {
-    color: "brown",
+  "470": {
+    color: "yellow",
     values: [
       {
-        angle: 210,
-        percent: 0.9,
-        value: 80
+        angle: 300,
+        percent: 0.667,
+        value: 20
       }
     ],
-    labels: [
-      {
-        label: "H",
-        angle: 335,
-        percent: 0.82
-      }
-    ],
-    cities: [
-      {
-        size: 3
-      }
-    ],
-    track: [
-      { side: 1 },
-      { side: 2 },
-      { side: 3 },
-      { side: 4 },
-      { side: 5 },
-      { side: 6 }
-    ]
+    towns: [{
+      percent: 0.667,
+      rotate: 10
+    }],
+    track: [{
+      side: 1,
+      type: "straight"
+    },{
+      side: 4,
+      type: "sharp"
+    },{
+      side: 5,
+      type: "gentle"
+    }]
   },
-
   "513": {
     color: "gray",
     cities: [ { size: 3, rotate: 180 } ],

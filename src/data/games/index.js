@@ -14,6 +14,7 @@ import game_1890 from "./1890";
 import game_1899 from "./1899";
 import game_18AL from "./18AL";
 import game_18EU from "./18EU";
+import game_18Mex from "./18Mex";
 import game_FourthAge from "./FourthAge";
 
 let games = {
@@ -30,7 +31,8 @@ let games = {
   "1889": game_1889,
   "1890": game_1890,
   "18AL": game_18AL,
-  "18EU": game_18EU
+  "18EU": game_18EU,
+  "18Mex": game_18Mex
 };
 
 if(process.env.REACT_APP_ALL_GAMES) {
