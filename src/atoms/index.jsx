@@ -11,6 +11,7 @@ import CenterTown from "./CenterTown";
 import City from "./City";
 import Company from "./Company";
 import Divide from "./Divide";
+import Good from "./Good";
 import Hex from "./Hex";
 import Icon from "./Icon";
 import Id from "./Id";
@@ -42,6 +43,14 @@ const Atoms = () => {
       examples: [
         <Industry top={1} bottom={20} />,
         <Industry top="ZH" bottom={10} />
+      ]
+    },
+    {
+      name: "Good",
+      examples: [
+        <Good />,
+        <Good color="purple" />,
+        <Good color="orange" />
       ]
     },
     {
