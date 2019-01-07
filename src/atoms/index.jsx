@@ -196,10 +196,43 @@ const Atoms = () => {
           ]}
         />,
         <OffBoardRevenue
+          name={{name: "Austin"}}
+          revenues={[
+            { cost: "20", color: "yellow", phaseColor: "black", phase: "2" },
+            { cost: "30", color: "green", phaseColor: "black", phase: "3" },
+            { cost: "40", color: "brown", phaseColor: "black", phase: "5" }
+          ]}
+        />,
+        <OffBoardRevenue
+          name={{name: "Boston"}}
+          reverse={true}
+          revenues={[
+            { cost: "20", color: "yellow", phaseColor: "black", phase: "2" },
+            { cost: "30", color: "green", phaseColor: "black", phase: "3" },
+            { cost: "40", color: "brown", phaseColor: "black", phase: "5" },
+            { cost: "60", color: "gray", phaseColor: "black", phase: "8" }
+          ]}
+        />,
+        <OffBoardRevenue
+          name={{name: "Austin"}}
+          rows={2}
           revenues={[
             { cost: "20", color: "yellow" },
             { cost: "30", color: "green" },
             { cost: "40", color: "brown" },
+            { cost: "50", color: "red" },
+            { cost: "60", color: "gray" }
+          ]}
+        />,
+        <OffBoardRevenue
+          name={{name: "Austin"}}
+          rows={3}
+          reverse={true}
+          revenues={[
+            { cost: "20", color: "yellow" },
+            { cost: "30", color: "green" },
+            { cost: "40", color: "brown" },
+            { cost: "50", color: "red" },
             { cost: "60", color: "gray" }
           ]}
         />
