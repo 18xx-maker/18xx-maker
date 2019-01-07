@@ -155,6 +155,7 @@ const Atoms = () => {
           );
         },
         [
+          "stub",
           "stop",
           "city",
           "mid",
