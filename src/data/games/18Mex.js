@@ -200,7 +200,7 @@ const game = {
     {
       name: "2",
       quantity: 6,
-      price: "$80",
+      price: "$100",
       color: "yellow",
       info: [
         {
@@ -211,7 +211,7 @@ const game = {
     },
     {
       name: "3",
-      quantity: 5,
+      quantity: 6,
       price: "$180",
       color: "green",
       info: [
@@ -223,19 +223,19 @@ const game = {
     },
     {
       name: "4",
-      quantity: 4,
+      quantity: 3,
       price: "$300",
       color: "green",
       info: [
         {
           color: "brown",
-          note: "Rusted by D"
+          note: "Phased Out by 4D"
         }
       ]
     },
     {
       name: "5",
-      quantity: 3,
+      quantity: 2,
       price: "$450",
       color: "brown",
       info: [
@@ -248,7 +248,7 @@ const game = {
     {
       name: "6",
       quantity: 2,
-      price: "$630",
+      price: "$600",
       color: "brown",
       info: [
         {
@@ -258,11 +258,10 @@ const game = {
       ]
     },
     {
-      name: "D",
-      quantity: 6,
-      price: "$1100",
+      name: "4D",
+      quantity: 7,
+      price: "$700",
       color: "brown",
-      description: "Cost $800 when trading in a 4T, 5T or 6T",
       info: [
         {
           color: "yellow",
@@ -322,41 +321,60 @@ const game = {
 
   phases: [
     {
-      name: "2",
-      limit: "-/4/1",
+      phase: "2",
+      train: "2",
+      limit: "-/3/1",
       number: "6",
       tiles: "yellow"
     },
     {
-      name: "3",
-      limit: "-/4/1",
+      phase: "3",
+      train: "3",
+      limit: "-/3/1",
       number: "6",
       tiles: "green",
       notes: "Private companies may be purchased"
     },
     {
-      name: "4",
+      phase: "3.5",
+      limit: "4/3/-",
+      tiles: "green",
+      notes: "Minor companies are closed. NRM stock available."
+    },
+    {
+      phase: "4",
+      train: "4",
       rust: "2",
-      limit: "4/3/2",
+      limit: "3/2/-",
       number: "3",
       tiles: "green"
     },
     {
-      name: "5",
+      phase: "5",
+      train: "5",
       limit: "3/2/-",
       number: "2",
       tiles: "brown",
-      notes: "Private companies are closed"
+      notes: "Private companies are closed. NRM merges."
     },
     {
-      name: "6",
+      phase: "6",
+      train: "6",
       limit: "3/2/-",
       number: "2",
       rust: "3",
       tiles: "brown"
     },
     {
-      name: "4D",
+      phase: "6.5",
+      limit: "3/2/-",
+      tiles: "brown",
+      rust: "4-O",
+      notes: "4T's are phased out."
+    },
+    {
+      phase: "4D",
+      train: "4D",
       limit: "3/2/-",
       number: "7",
       tiles: "brown"
