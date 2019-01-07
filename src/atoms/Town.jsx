@@ -15,8 +15,8 @@ const Town = ({ border, name, color }) => {
       nameNode = (
         <Name
           name={name.name}
-          y={name.y || (name.reverse ? 20 : -28)}
-          rotation={name.rotation}
+          y={name.y || (name.reverse ? 20 : -30)}
+          rotation={(name.rotation || 0) + (name.reverse ? -90 : 90)}
           reverse={true}
         />
       );
