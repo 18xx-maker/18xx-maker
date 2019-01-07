@@ -1019,11 +1019,7 @@ const game = {
           {
             angle: 75,
             percent: 0.55,
-            name: {name: "Dunkirk"},
-            companies: [{
-              label: "ERIE",
-              color: "yellow"
-            }]
+            name: {name: "Dunkirk"}
           },
           {
             angle: 285,
@@ -1312,36 +1308,17 @@ const game = {
       },
       {
         color: "yellow",
-        companies: [
-          {
-            label: "C&A",
-            y: -30
-          }
-        ],
-        labels: [
-          {
-            label: "OO",
-            y: 57
-          }
-        ],
-        cities: [
-          {
-            x: -40,
-            y: 10,
-            name: {
-              name: "Philidelphia",
-              reverse: true
-            }
-          },
-          {
-            x: 40,
-            y: 10,
-            name: {
-              name: "Trenton",
-              reverse: true
-            }
-          }
-        ],
+        companies: [{label: "C&A", angle: 180, percent: 0.65}],
+        labels: [{label: "OO", y: 57}],
+        cities: [{
+          x: -40,
+          y: 10,
+          name: {name: "Philidelphia"}
+        },{
+          x: 40,
+          y: 10,
+          name: {name: "Trenton"}
+        }],
         hexes: ["H18"]
       },
       {
