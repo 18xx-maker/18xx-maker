@@ -2701,6 +2701,7 @@ const tiles = {
     color: "brown",
     values: [{value: 60, angle: 210, percent: 0.8}],
     cities: [{angle:300,percent:0.333,size:2,rotation:30,
+              extend: "right",
               name: {name: "Mexico City"},
               companies: [{color: "gray", label: "NdM"}]}],
     towns: [{angle: 120, percent: 0.65, rotation: -60,
@@ -2710,7 +2711,7 @@ const tiles = {
   "485|b": {
     color: "brown",
     values: [{value: 10, angle: 270, percent: 0.85}],
-    cities: [{angle:120,percent:0.667}],
+    cities: [{size:2,angle:120,percent:1,rotation:30}],
     towns: [{rotation: -60, angle: 300, percent: 0.5,
              name: {reverse: true, name: "Puebla", rotation: 90}}],
     track: [{side:3,type:"gentle"},{side:3,type: "straight"}]
@@ -2719,6 +2720,7 @@ const tiles = {
     color: "brown",
     values: [{value: 50, angle: 210, percent: 0.8}],
     cities: [{angle:300,percent:0.333,size:2,rotation:30,
+              extend: "right",
               name: {name: "Mexico City"},
               companies: [{color: "gray", label: "NdM"}]}],
     towns: [{angle: 120, percent: 0.65, rotation: -60,
@@ -2728,7 +2730,7 @@ const tiles = {
   "486|b": {
     color: "brown",
     values: [{value: 10, angle: 265, percent: 0.82}],
-    cities: [{angle:120,percent:0.333,size:2,rotation:30}],
+    cities: [{angle:120,percent:0.333,size:2,rotation:30,extend:"left"}],
     towns: [{rotation: -60, angle: 300, percent: 0.6,
              name: {reverse: true, name: "Puebla", rotation: 90}}],
     track: [{side:3,type:"gentle"},{side:3,type: "straight"}]

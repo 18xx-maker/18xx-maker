@@ -3,7 +3,7 @@ import { colors, textColor } from "../data";
 
 import Name from "./Name";
 
-const City = ({ size, companies, border, name, rotation }) => {
+const City = ({ size, companies, border, name, extend, rotation }) => {
   if (size === undefined) {
     size = 1;
   }
@@ -83,10 +83,12 @@ const City = ({ size, companies, border, name, rotation }) => {
       );
     }
   } else if (size === 2) {
+    let leftBorder = extend === "left" ? -55 : -25;
+    let rightBorder = extend === "right" ? 55 : 25;
     if (border) {
       return (
         <polygon
-          points="-25,0 25,0"
+          points={`${leftBorder},0 ${rightBorder},0`}
           fill={colors["border"]}
           stroke={colors["border"]}
           strokeWidth="56"
@@ -98,7 +100,7 @@ const City = ({ size, companies, border, name, rotation }) => {
       return (
         <g>
           <polygon
-            points="-25,-25, 25,-25 25,25 -25,25"
+            points={`${leftBorder},-25, ${rightBorder},-25 ${rightBorder},25 ${leftBorder},25`}
             fill={colors["border"]}
             stroke={colors["track"]}
             strokeWidth="2"
