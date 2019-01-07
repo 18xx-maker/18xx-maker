@@ -185,7 +185,15 @@ const mergeHex = (a, b) => {
   }, a, b);
 };
 
-const pages = (total, page) => {
+const equalPages = (total, page) => {
+  let pages = Math.ceil(total/page);
+
+  let result = new Array(pages);
+  result.fill(total/pages);
+  return result;
+};
+
+const maxPages = (total, page) => {
   let helper = (total, page, result) => {
     if(total <= page) {
       return R.append(total, result);
@@ -216,5 +224,6 @@ export default {
   toCoords,
   mergeHex,
   resolveHex,
-  pages
+  equalPages,
+  maxPages
 };

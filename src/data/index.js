@@ -94,7 +94,12 @@ const paper = {
   height: 1025 // 0.25in top and 0.50in bottom margins
 };
 
-const fonts = ["Bitter:700", "Limelight"]
+// This can also be "max"
+// equal: evenly divide the item into pages
+// max: make the two end pages even, the others are full
+const pagination = "equal";
+
+const fonts = ["Bitter:700", "Limelight"];
 
 const market = {
   fontSize: "0.15in",
@@ -126,4 +131,4 @@ const strokeColor = color =>
     .darken(10)
     .toString();
 
-export { alpha, colors, paper, market, fonts, textColor, strokeColor };
+export { alpha, colors, paper, pagination, market, fonts, textColor, strokeColor };

@@ -749,10 +749,15 @@ const game = {
         terrain: [{ type: "mountain", cost: "$60" }],
         hexes: ["B3","K12","H17","L17"]
       },
+      { // 10 Plants
+        color: "plain",
+        terrain: [{ type: "cactus", cost: "$10" }],
+        hexes: ["B5"]
+      },
       { // 20 Plants
         color: "plain",
         terrain: [{ type: "cactus", cost: "$20" }],
-        hexes: ["F3", "E4", "B5", "H5", "J5","C6","F7","I8","I10","K10"]
+        hexes: ["F3", "E4", "H5", "J5","C6","F7","I8","I10","K10"]
       },
       {
         color: "plain",
@@ -962,10 +967,11 @@ const game = {
             label: "A"
           }]
         }],
-        swamp: {
+        terrain: [{
+          type: "swamp",
           cost: "$40",
           percent: 0.65
-        },
+        }],
         towns: [{angle:240, percent: 0.58, rotate: 60}],
         track: [{side:5,type:"mid"}],
         hexes: ["L13"]

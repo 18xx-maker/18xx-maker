@@ -11,6 +11,8 @@ import { NavLink, Redirect } from "react-router-dom";
 
 import "./MapPaginated.css";
 
+const splitPages = data.pagination === "max" ? util.maxPages : util.equalPages;
+
 const MapPaginated = ({ match }) => {
   let game = games[match.params.game];
 
@@ -88,11 +90,11 @@ const MapPaginated = ({ match }) => {
 
       x = x + width;
       return page;
-    }, util.pages(totalWidth + 50, pageWidth));
+    }, splitPages(totalWidth + 50, pageWidth));
 
     y = y + height;
     return pages;
-  }, util.pages(totalHeight + 50, pageHeight));
+  }, splitPages(totalHeight + 50, pageHeight));
 
   let defs = (
     <g id={`${game.info.abbrev || game.info.title}_map`}>

@@ -30,29 +30,55 @@ describe("trackType", () => {
   });
 });
 
-describe("pages", () => {
+describe("maxPages", () => {
   it("handle < single pages", () => {
-    expect(util.pages(90, 100)).toEqual([90]);
+    expect(util.maxPages(90, 100)).toEqual([90]);
   });
 
   it("handle single pages", () => {
-    expect(util.pages(100, 100)).toEqual([100]);
+    expect(util.maxPages(100, 100)).toEqual([100]);
   });
 
   it("handle < double pages", () => {
-    expect(util.pages(190, 100)).toEqual([95,95]);
+    expect(util.maxPages(190, 100)).toEqual([95,95]);
   });
 
   it("handle double pages", () => {
-    expect(util.pages(200, 100)).toEqual([100,100]);
+    expect(util.maxPages(200, 100)).toEqual([100,100]);
   });
 
   it("handle > double pages", () => {
-    expect(util.pages(210, 100)).toEqual([55,100,55]);
+    expect(util.maxPages(210, 100)).toEqual([55,100,55]);
   });
 
   it("handle triple pages", () => {
-    expect(util.pages(300, 100)).toEqual([100,100,100]);
+    expect(util.maxPages(300, 100)).toEqual([100,100,100]);
+  });
+});
+
+describe("equalPages", () => {
+  it("handle < single pages", () => {
+    expect(util.equalPages(90, 100)).toEqual([90]);
+  });
+
+  it("handle single pages", () => {
+    expect(util.equalPages(100, 100)).toEqual([100]);
+  });
+
+  it("handle < double pages", () => {
+    expect(util.equalPages(190, 100)).toEqual([95,95]);
+  });
+
+  it("handle double pages", () => {
+    expect(util.equalPages(200, 100)).toEqual([100,100]);
+  });
+
+  it("handle > double pages", () => {
+    expect(util.equalPages(210, 100)).toEqual([70,70,70]);
+  });
+
+  it("handle triple pages", () => {
+    expect(util.equalPages(300, 100)).toEqual([100,100,100]);
   });
 });
 
