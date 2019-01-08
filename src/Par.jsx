@@ -76,7 +76,7 @@ const ParDoubleRow = ({ par, legend }) => {
 const ParRow = ({ par, legend }) => {
   let rows = R.map(value => {
     return (
-      <div key={`par-${value}`} className="Par__Row">
+      <div key={`par-${R.is(Object,value) ? value.label : value}`} className="Par__Row">
         <ParCell {...{ value, par, legend }} />
       </div>
     );
