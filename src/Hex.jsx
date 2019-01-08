@@ -141,7 +141,7 @@ const HexTile = ({ hex, id, border, transparent }) => {
   }
   if(hex.water) {
     if(R.is(Array, hex.water)) {
-      terrainHexes = hex.terrain.concat(R.map(m => ({...m,type:"water"}),
+      terrainHexes = terrainHexes.concat(R.map(m => ({...m,type:"water"}),
                                              hex.water));
     } else {
       terrainHexes.push({...hex.water,type:"water"});
