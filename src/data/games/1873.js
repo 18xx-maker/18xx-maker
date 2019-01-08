@@ -813,12 +813,12 @@ const game = {
         ],
         borders: [
           {
-            side: 6,
-            color: "red"
-          },
-          {
             side: 5,
             color: "mountain"
+          },
+          {
+            side: 6,
+            color: "red"
           }
         ],
         tokens: [
@@ -889,12 +889,12 @@ const game = {
         ],
         borders: [
           {
-            side: 5,
-            color: "red"
-          },
-          {
             side: 6,
             color: "mountain"
+          },
+          {
+            side: 5,
+            color: "red"
           }
         ],
         tokens: [
@@ -1063,6 +1063,10 @@ const game = {
         ],
         borders: [
           {
+            side: 4,
+            color: "mountain"
+          },
+          {
             side: 1,
             color: "red"
           },
@@ -1081,10 +1085,6 @@ const game = {
           {
             side: 6,
             color: "red"
-          },
-          {
-            side: 4,
-            color: "mountain"
           }
         ],
         hexes: ["D9"]
@@ -1150,16 +1150,16 @@ const game = {
         },
         borders: [
           {
-            side: 4,
-            color: "red"
-          },
-          {
             side: 2,
             color: "mountain"
           },
           {
             side: 3,
             color: "mountain"
+          },
+          {
+            side: 4,
+            color: "red"
           }
         ],
         hexes: ["D13"]
@@ -1428,12 +1428,12 @@ const game = {
         ],
         borders: [
           {
-            side: 3,
-            color: "red"
-          },
-          {
             side: 4,
             color: "mountain"
+          },
+          {
+            side: 3,
+            color: "red"
           }
         ],
         mountain: {
@@ -1465,20 +1465,20 @@ const game = {
         ],
         borders: [
           {
-            side: 2,
-            color: "red"
-          },
-          {
-            side: 5,
-            color: "red"
-          },
-          {
             side: 1,
             color: "mountain"
           },
           {
             side: 4,
             color: "mountain"
+          },
+          {
+            side: 2,
+            color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
           }
         ],
         mountain: {
@@ -1492,12 +1492,12 @@ const game = {
         color: "plain",
         borders: [
           {
-            side: 6,
-            color: "red"
-          },
-          {
             side: 1,
             color: "mountain"
+          },
+          {
+            side: 6,
+            color: "red"
           }
         ],
         mountain: {
@@ -1743,16 +1743,16 @@ const game = {
         ],
         borders: [
           {
+            side: 6,
+            color: "mountain"
+          },
+          {
             side: 2,
             color: "red"
           },
           {
             side: 5,
             color: "red"
-          },
-          {
-            side: 6,
-            color: "mountain"
           }
         ],
         track: [
@@ -2020,6 +2020,10 @@ const game = {
           {
             side: 3,
             color: "red"
+          },
+          {
+            side: 5,
+            color: "red"
           }
         ],
         track: [
@@ -2036,29 +2040,23 @@ const game = {
       },
       {
         color: "plain",
-        industries: [
-          {
-            top: "9",
-            bottom: "30",
-            angle: 150,
-            percent: 0.667
+        industries: [{
+          top: "9",
+          bottom: "30",
+          angle: 150,
+          percent: 0.667
+        }],
+        centerTowns: [{
+          name: {
+            name: "Wieda",
+            rotation: -60
           }
-        ],
-        centerTowns: [
-          {
-            name: {
-              name: "Wieda",
-              rotation: -60
-            }
-          }
-        ],
-        track: [
-          {
-            side: 3,
-            type: "straight",
-            gauge: "line"
-          }
-        ],
+        }],
+        track: [{
+          side: 3,
+          type: "straight",
+          gauge: "line"
+        }],
         mountain: {
           cost: "150M",
           angle: 300,
@@ -2130,6 +2128,14 @@ const game = {
         ],
         borders: [
           {
+            side: 1,
+            color: "mountain"
+          },
+          {
+            side: 3,
+            color: "mountain"
+          },
+          {
             side: 2,
             color: "red"
           },
@@ -2144,14 +2150,6 @@ const game = {
           {
             side: 6,
             color: "red"
-          },
-          {
-            side: 1,
-            color: "mountain"
-          },
-          {
-            side: 3,
-            color: "mountain"
           }
         ],
         hexes: ["G4"]
@@ -2422,6 +2420,10 @@ const game = {
         color: "plain",
         borders: [
           {
+            side: 2,
+            color: "mountain"
+          },
+          {
             side: 3,
             color: "red"
           },
@@ -2432,10 +2434,6 @@ const game = {
           {
             side: 6,
             color: "red"
-          },
-          {
-            side: 2,
-            color: "mountain"
           }
         ],
         mountain: {

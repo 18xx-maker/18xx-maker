@@ -53,6 +53,8 @@ const Terrain = ({ type, size, cost, color, fontSize }) => {
   case "large":
     scale = 2;
     break;
+  default:
+    break;
   }
 
   return (
