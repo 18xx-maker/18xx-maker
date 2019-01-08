@@ -44,7 +44,7 @@ const game = {
   companies: [
     {
       name: "Chihuahua Pacific Railway",
-      abbrev: "CPR",
+      abbrev: "CHI",
       tokens: ["Free", "$40", "$100", "$100"],
       color: "red",
       shares: [
@@ -63,7 +63,7 @@ const game = {
     },
     {
       name: "National Railways of Mexicon",
-      abbrev: "NRM",
+      abbrev: "NdM",
       tokens: ["Free", "$40", "$100", "$100"],
       color: "darkGreen",
       shares: [
@@ -82,7 +82,7 @@ const game = {
     },
     {
       name: "Mexican Central Railway",
-      abbrev: "MCR",
+      abbrev: "MC",
       tokens: ["Free", "$40"],
       color: "black",
       shares: [
@@ -101,7 +101,7 @@ const game = {
     },
     {
       name: "Pacific Railroad",
-      abbrev: "Pac",
+      abbrev: "PAC",
       tokens: ["Free", "$40", "$100", "$100"],
       color: "yellow",
       shares: [
@@ -139,7 +139,7 @@ const game = {
     },
     {
       name: "Mexican Railway",
-      abbrev: "Mex",
+      abbrev: "MEX",
       tokens: ["Free", "$40", "$100"],
       color: "gray",
       shares: [
@@ -158,7 +158,7 @@ const game = {
     },
     {
       name: "Southern Pacific Railroad of Mexico",
-      abbrev: "SoPac",
+      abbrev: "SPM",
       tokens: ["Free", "$40", "$100"],
       color: "blue",
       shares: [
@@ -177,7 +177,7 @@ const game = {
     },
     {
       name: "United Railways of Yucatan",
-      abbrev: "URY",
+      abbrev: "UdY",
       tokens: ["Free", "$40"],
       color: "purple",
       shares: [
@@ -675,7 +675,7 @@ const game = {
         color: "gray",
         cities: [{
           companies: [{
-            label: "Pac",
+            label: "PAC",
             color: "yellow"
           }]
         }],
@@ -732,7 +732,7 @@ const game = {
         }],
         cities: [{
           companies: [{
-            label: "CPR",
+            label: "CHI",
             color: "red"
           }],
           name: {offset: 75, name: "Chihuahua"}
@@ -812,7 +812,7 @@ const game = {
         cities: [{
           name: {name: "Torreón"},
           companies: [{
-            label: "MCR",
+            label: "MC",
             color: "black"
           }]
         }],
@@ -936,7 +936,7 @@ const game = {
         cities: [{
           name: {name: "Guadalajara", reverse: true},
           companies: [{
-            label: "SoPac",
+            label: "SPM",
             color: "blue"
           }]
         }],
@@ -963,7 +963,7 @@ const game = {
         cities: [{
           name: {offset: 40, name: "Mexico City", reverse: true},
           companies: [{
-            label: "NRM",
+            label: "NdM",
             color: "darkGreen"
           }]
         }],
@@ -1015,7 +1015,7 @@ const game = {
         color: "plain",
         cities: [{
           companies: [{
-            label: "Mex",
+            label: "MEX",
             color: "gray"
           }],
           name: {name: "Veracruz"}
@@ -1045,7 +1045,7 @@ const game = {
         cities: [{
           companies: [{
             color: "purple",
-            label: "URY"
+            label: "UdY"
           }]
         }],
         offBoardTrack: [{side: 2},{side:3}],
