@@ -946,49 +946,28 @@ const game = {
       },
       {
         color: "gray",
-        values: [
-          {
-            value: 10,
-            angle: 195,
-            percent: 0.667
-          }
-        ],
-        tunnels: [
-          {
-            angle: 150,
-            cost: "$40",
-            percent: 1
-          }
-        ],
-        cities: [
-          {
-            name: {
-              name: "Homewood",
-              reverse: true,
-              rotation: 30
-            },
-            companies: [
-              {
-                label: "PRR",
-                color: "red"
-              }
-            ]
-          }
-        ],
-        track: [
-          {
-            side: 1
-          },
-          {
-            side: 2
-          },
-          {
-            side: 4
-          },
-          {
-            side: 5
-          }
-        ],
+        values: [{
+          value: 10,
+          angle: 195,
+          percent: 0.667
+        }],
+        tunnels: [{
+          angle: 150,
+          cost: "$40",
+          percent: 1
+        }],
+        names: [{
+          name: "Homewood",
+          angle: 33,
+          percent: 0.65
+        }],
+        cities: [{
+          companies: [{
+            label: "PRR",
+            color: "red"
+          }]
+        }],
+        track: [{side: 1}, {side: 2}, {side: 4}, {side: 5}],
         hexes: ["F20"]
       },
       {
