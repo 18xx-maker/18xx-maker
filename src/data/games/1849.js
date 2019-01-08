@@ -1288,13 +1288,12 @@ const game = {
       },
       {
         color: "yellow",
-        mountain: {
+        terrain: [{
+          type: "mountain",
           angle: 90,
           percent: 0.5,
-          border: true,
-          cost: "L.160",
-          size: "tiny"
-        },
+          cost: "L.160"
+        }],
         track: [{ type: "straight", side: 1, gauge: "narrow", offset: 12 }],
         hexes: ["I12"]
       },
@@ -1419,13 +1418,12 @@ const game = {
           { side: 6, color: "mountain" }
         ],
         values: [{ value: 20, angle: 90, percent: 0.75 }],
-        mountain: {
-          size: "tiny",
-          border: true,
+        terrain: [{
+          type: "mountain",
           cost: "L.40",
           angle: -30,
           percent: 0.7
-        },
+        }],
         hexes: ["K14"]
       },
       {
