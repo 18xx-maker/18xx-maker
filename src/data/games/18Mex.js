@@ -273,45 +273,45 @@ const game = {
 
   privates: [
     {
-      name: "P1",
+      name: "Mexico City-Acapulco Railroad",
       price: "$20",
       revenue: "$5",
       description: ""
     },
     {
-      name: "P2",
+      name: "Kansas City, Mexico, & Orient Railroad",
       price: "$40",
       revenue: "$10",
       description:
-      "Owning company may place the Copper Canyan tile in the named hex for $60 unless that hex is already built."
+      "Owning company may place the Copper Canyan tile in E6 for $60 unless that hex is already built."
     },
     {
-      name: "P3",
+      name: "Interoceanic Railroad",
       price: "$50",
       description:
-      "Immediately trade in for associated minor railroad"
+      "Minor company. Begins in Tampico (L13). Once closed owner receives a 5% share in NdM."
     },
     {
-      name: "P4",
+      name: "Sonora-Baja California Railway",
       price: "$50",
       description:
-      "Immediately trade in for associated minor railroad"
+      "Minor company. Begins in Mazatlán (F11). Once closed owner receives a 5% share in NdM."
     },
     {
-      name: "P5",
+      name: "Southeastern Railway",
       price: "$50",
       description:
-      "Immediately trade in for associated minor railroad"
+      "Minor company. Begins in Oaxaca (L19). Once closed owner receives a 10% share in UdY."
     },
     {
-      name: "P6",
+      name: "Mexican International Railroad",
       price: "$100",
       revenue: "$20",
       description:
-      "Comes with 10% Chi"
+      "Comes with a 10% share of Chi."
     },
     {
-      name: "P7",
+      name: "Mexican National Railroad",
       price: "$140",
       revenue: "$25",
       description:
@@ -339,7 +339,7 @@ const game = {
       phase: "3.5",
       limit: "4/3/-",
       tiles: "green",
-      notes: "Minor companies are closed. NRM stock available."
+      notes: "When 5/6 3T's have been sold. Minor companies are closed. NRM stock available."
     },
     {
       phase: "4",
@@ -370,7 +370,7 @@ const game = {
       limit: "3/2/-",
       tiles: "brown",
       rust: "4-O",
-      notes: "4T's are phased out."
+      notes: "When both 6T's are sold. 4T's become obsolete."
     },
     {
       phase: "4D",
