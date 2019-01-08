@@ -20,11 +20,11 @@ const CenterTown = ({ border, name, color }) => {
       );
     }
     return ([
-      <g>
+      <g key="center-town-outline">
         <circle fill={colors["track"]} stroke="none" cx="0" cy="0" r="12" />
         {nameNode}
       </g>,
-      <g>
+      <g key="center-town-fill">
         <circle fill={colors[color] || colors["track"]} stroke="none" cx="0" cy="0" r="10" />
         {nameNode}
       </g>

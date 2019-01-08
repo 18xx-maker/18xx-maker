@@ -68,7 +68,6 @@ const makeNode = (x, y, reverse, revenue) => {
 const getWidth = r => R.max(r.cost.length, 2) * LETTER + 5;
 
 const makeNodes = (y, reverse, revenues) => {
-  let nodes = [];
   let totalWidth = R.sum(R.map(r => 5 + LETTER * R.max(r.cost.length, 2),
                                revenues));
   let bx = -0.5 * totalWidth; // Starting x for border box
@@ -79,7 +78,8 @@ const makeNodes = (y, reverse, revenues) => {
     x = x + getWidth(r);
     return result;
   }, revenues),[
-    <rect width={totalWidth}
+    <rect key="rect"
+          width={totalWidth}
           height="20"
           y={y - 10}
           x={bx}
