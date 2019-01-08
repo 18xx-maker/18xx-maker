@@ -612,13 +612,11 @@ const game = {
       },
       {
         color: "yellow",
-        labels: [
-          {
-            label: "Z",
-            angle: 60,
-            percent: 0.85
-          }
-        ],
+        labels: [{
+          label: "Z",
+          angle: 60,
+          percent: 0.85
+        }],
         cities: [{
           size: 2,
           name: {
@@ -630,29 +628,13 @@ const game = {
             color: "white"
           }]
         }],
-        values: [
-          {
-            angle: 180,
-            percent: 0.75,
-            value: 40
-          }
-        ],
-        track: [
-          {
-            side: 1
-          },
-          {
-            side: 3
-          }
-        ],
-        water: [
-          {
-            cost: "$40",
-            size: "tiny",
-            border: true,
-            percent: 0.7
-          }
-        ],
+        values: [{
+          angle: 180,
+          percent: 0.75,
+          value: 40
+        }],
+        track: [{side: 1}, {side: 3}],
+        terrain: [{ cost: "$40", percent: 0.7, type: "water" }],
         hexes: ["C15"]
       },
       {
@@ -959,11 +941,7 @@ const game = {
       },
       {
         color: "plain",
-        mountain: [
-          {
-            cost: "$40"
-          }
-        ],
+        terrain: [{ type: "mountain", cost: "$40" }],
         hexes: ["F18", "G17", "H14", "H16"]
       },
       {

@@ -130,14 +130,24 @@ const HexTile = ({ hex, id, border, transparent }) => {
   let names = <Position data={hex.names}>{n => <Name {...n} />}</Position>;
 
   // Deprecating stuff... let's convert old mountain and water to new format
-  hex.terrain = hex.terrain || [];
+  let terrainHexes = [...(hex.terrain || [])];
   if(hex.mountain) {
-    hex.terrain.push({...hex.mountain,type:"mountain"});
+    if(R.is(Array, hex.mountain)) {
+      terrainHexes.concat(R.map(m => ({...m,type:"mountain"}),
+                                             hex.mountain));
+    } else {
+      terrainHexes.push({...hex.mountain, type:"mountain"});
+    }
   }
   if(hex.water) {
-    hex.terrain.push({...hex.water,type:"water"});
+    if(R.is(Array, hex.water)) {
+      terrainHexes = hex.terrain.concat(R.map(m => ({...m,type:"water"}),
+                                             hex.water));
+    } else {
+      terrainHexes.push({...hex.water,type:"water"});
+    }
   }
-  let terrain = <Position data={hex.terrain}>{t => <Terrain {...t} />}</Position>;
+  let terrain = <Position data={terrainHexes}>{t => <Terrain {...t} />}</Position>;
   let bridges = <Position data={hex.bridges}>{b => <Bridge {...b} />}</Position>;
   let tunnels = <Position data={hex.tunnels}>{t => <Tunnel {...t} />}</Position>;
   let divides = <Position data={hex.divides}>{t => <Divide />}</Position>;
