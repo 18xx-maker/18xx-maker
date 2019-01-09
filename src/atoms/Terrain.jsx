@@ -45,7 +45,7 @@ const Terrain = ({ type, size, cost, color, fontSize }) => {
   }
   switch(size) {
   case "tiny":
-    scale = 0.5;
+    scale = 0.75;
     break;
   case "medium":
     scale = 1.5;
