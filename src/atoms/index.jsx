@@ -64,10 +64,15 @@ const newatoms = [{
              {towns: [{name:{name:"Austin"}}]},
              {towns: [{name:{name:"Boston", reverse: true}}]}]
 },{
-  group: "Center Town",
+  group: "Center Towns",
   examples: [{centerTowns: [{}]},
              {centerTowns: [{color:"orange",name:{name:"Austin"}}]},
              {centerTowns: [{name:{name:"Boston", reverse: true}}]}]
+},{
+  group: "Town Cities",
+  examples: [{townCities: [{}]},
+             {townCities: [{color:"orange",name:{name:"Austin"}}]},
+             {townCities: [{name:{name:"Boston", reverse: true}}]}]
 },{
   group: "Labels",
   examples: [
@@ -178,19 +183,19 @@ const newatoms = [{
 }];
 
 const examples = R.addIndex(R.chain)((h,id) => {
-  return <dd>
-      <Svg width="160" height="160" viewBox="-80 -80 160 160">
-        <Hex hex={h} id={`${id}`} border={true} />
-      </Svg>
-      <pre>{JSON.stringify(h, null, 2)}</pre>
-    </dd>;
+  return <dd key={`example-${id}`}>
+           <Svg width="160" height="160" viewBox="-80 -80 160 160">
+             <Hex hex={h} id={`${id}`} border={true} />
+           </Svg>
+           <pre>{JSON.stringify(h, null, 2)}</pre>
+         </dd>;
 });
 
-const groups = R.chain(g => {
-  return <dl>
-         <dt>{g.group}</dt>
-         {examples(g.examples)}
-       </dl>;
+const groups = R.addIndex(R.chain)((g,id) => {
+  return <dl key={`group-${id}`}>
+           <dt>{g.group}</dt>
+           {examples(g.examples)}
+         </dl>;
 });
 
 const Atoms = () => {
