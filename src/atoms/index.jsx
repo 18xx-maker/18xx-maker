@@ -21,22 +21,22 @@ const atoms = [{
              {values: [{value: 60}]},
              {values: [{value: 120}]}]
 },{
-  group: "Industry",
+  group: "Industries",
   examples: [{industries: [{top:1,bottom:20}]},
              {industries: [{top:"ZH",bottom:10}]}]
 },{
-  group: "Good",
+  group: "Goods",
   examples: [{goods: [{}]},
              {goods: [{color: "purple"}]},
              {goods: [{color: "orange"}]}]
 },{
-  group: "Private Company",
+  group: "Private Companies",
   examples: [{companies: [{label:"A"}]},
              {companies: [{label: "CdH", left: 50, right: 50, color: "blue"}]},
              {companies: [{label: "C", left: 30, bottom: true}]},
              {companies: [{label: "ERR", color: "orange", radius: 8, bottom: true}]}]
 },{
-  group: "Icon",
+  group: "Icons",
   examples: [{icons: [{type: "meat"}]},
              {icons: [{type: "steam"}]}]
 },{
@@ -102,7 +102,7 @@ const atoms = [{
     {track: [{side:1,type:"offboard"},{side:6,type:"offboard"}]}
   ]
 },{
-  group: "Labels",
+  group: "Offboard Revenues",
   examples: [{
     offBoardRevenue: {
       name: {name: "Boston"},
@@ -170,7 +170,7 @@ const atoms = [{
     {terrain: [{size:"large",type:"swamp",cost:"$120"}]}
   ]
 },{
-  group: "Tunnel's and Bridge",
+  group: "Tunnels and Bridges",
   examples: [
     {tunnels: [{cost:"$40"}]},
     {bridges: [{cost:"$40"}]}]
