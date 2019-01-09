@@ -21,7 +21,6 @@ import Label from "./atoms/Label";
 import MediumCity from "./atoms/MediumCity";
 import Name from "./atoms/Name";
 import OffBoardRevenue from "./atoms/OffBoardRevenue";
-import OffBoardTrack from "./atoms/OffBoardTrack";
 import RouteBonus from "./atoms/RouteBonus";
 import Terrain from "./atoms/Terrain";
 import Town from "./atoms/Town";
@@ -32,18 +31,6 @@ import Value from "./atoms/Value";
 import Token from "./Token";
 
 const concat = R.unapply(R.reduce(R.concat, []));
-
-const makeOffBoardTrack = track => {
-  let side = track.side;
-  let rotation = (track.rotation || 0) + (side - 1) * 60;
-  let transform = `rotate(${rotation || 0})`;
-  return (
-    <g transform={transform} key={`offboard-${side}`}>
-      <OffBoardTrack border={true} />
-      <OffBoardTrack />
-    </g>
-  );
-};
 
 const makeTrack = track => {
   let point = track.start || track.end || track.side;
@@ -63,7 +50,7 @@ const makeBorder = track => {
   let transform = `rotate(${rotation || 0})`;
   let type = track.type || util.trackType(track);
   return (
-    <g transform={transform} key={`track-board-${type}-${point}`}>
+    <g transform={transform} key={`track-border-${type}-${point}`}>
       <Track
         type={track.type || util.trackType(track)}
         gauge={track.gauge}
@@ -95,8 +82,10 @@ const HexTile = ({ hex, id, border, transparent }) => {
       R.filter(t => t.cross !== "under"))
   ]);
 
-  let tracks = getTracks(hex.track || []);
-  let offBoardTracks = R.map(makeOffBoardTrack, hex.offBoardTrack || []);
+  let allTracks = [...hex.track || [],
+                   ...(R.map(obt => ({...obt, type:"offboard"}),
+                             hex.offBoardTrack || []))];
+  let tracks = getTracks(allTracks);
 
   let outsideCities = (
     <Position data={R.filter(c => c.outside === true, hex.cities || [])}>
@@ -181,7 +170,6 @@ const HexTile = ({ hex, id, border, transparent }) => {
               {mediumCityBorders}
               {townBorders}
               {tracks}
-              {offBoardTracks}
               {values}
               {cities}
               {mediumCities}
