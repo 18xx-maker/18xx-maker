@@ -928,7 +928,7 @@ const game = {
       },
       {
         color: "offboard",
-        offBoardTrack: [{ side: 5 }],
+        track: [{type:"offboard",side:5}],
         hexes: ["F24"]
       },
       {
@@ -977,7 +977,7 @@ const game = {
       },
       {
         color: "offboard",
-        offBoardTrack: [{ side: 4 }],
+        track: [{type:"offboard",side:4}],
         offBoardRevenue: {
           name: {name: "Southlands"},
           revenues: [
@@ -1021,7 +1021,9 @@ const game = {
       },
       {
         color: "offboard",
-        offBoardTrack: [{side: 3},{side: 4},{side: 5}],
+        track: [{type:"offboard",side: 3},
+                {type:"offboard",side: 4},
+                {type:"offboard",side: 5}],
         hexes: ["H24"]
       },
       {
@@ -1190,7 +1192,9 @@ const game = {
       },
       {
         color: "offboard",
-        offBoardTrack: [{side: 3},{side: 4},{side: 5}],
+        track: [{type:"offboard",side: 3},
+                {type:"offboard",side: 4},
+                {type:"offboard",side: 5}],
         offBoardRevenue: {
           name: {name: "Far Harad"},
           revenues: [
@@ -1237,7 +1241,8 @@ const game = {
       },
       {
         color: "offboard",
-        offBoardTrack: [{side: 1},{side: 2}],
+        track: [{type:"offboard",side: 1},
+                {type:"offboard",side: 2}],
         offBoardRevenue: {
           name: {name: "Iron Hills"},
           angle: 270,
@@ -1260,7 +1265,9 @@ const game = {
       },
       {
         color: "offboard",
-        offBoardTrack: [{side: 1},{side: 2},{side: 3}],
+        track: [{type:"offboard",side: 1},
+                {type:"offboard",side: 2},
+                {type:"offboard",side: 3}],
         offBoardRevenue: {
           name: {name: "East Lands"},
           angle: 270,

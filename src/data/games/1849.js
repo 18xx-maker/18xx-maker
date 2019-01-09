@@ -623,14 +623,14 @@ const game = {
     hexes: [
       {
         color: "water",
-        offBoardTrack: [{ side: 6 }],
+        track: [{type:"offboard",side:6}],
         icons: [{ type: "port" }],
         values: [{ value: 20, angle: 180, percent: 0.58 }],
         hexes: ["L1"]
       },
       {
         color: "water",
-        offBoardTrack: [{ side: 1 }],
+        track: [{type:"offboard",side:1}],
         icons: [{ type: "port" }],
         values: [{ value: 10, angle: 180, percent: 0.58 }],
         hexes: ["E2"]
@@ -1359,7 +1359,7 @@ const game = {
       },
       {
         color: "water",
-        offBoardTrack: [{ side: 3 }],
+        track: [{type:"offboard",side:3}],
         icons: [{ type: "port" }],
         values: [{ value: 60, angle: 180, percent: 0.58 }],
         hexes: ["N13"]
@@ -1455,7 +1455,7 @@ const game = {
       },
       {
         color: "water",
-        offBoardTrack: [{ side: 5 }],
+        track: [{type:"offboard",side:5}],
         icons: [{ type: "port" }],
         values: [{ value: 20, angle: 180, percent: 0.58 }],
         hexes: ["H15"]
