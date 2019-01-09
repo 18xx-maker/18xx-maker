@@ -107,21 +107,21 @@ const marketColor = R.curry((limits, value) => {
 const toAlpha = num => {
   if (num <= 0) {
     return "";
-  } else if (num <= 26) {
+  } else if (num <= alpha.length) {
     return R.nth(num - 1, alpha);
   } else {
-    let remainder = num % 26;
+    let remainder = num % alpha.length;
     if(remainder === 0) {
-      remainder = 26;
+      remainder = alpha.length;
     }
-    let quotient = Math.floor((num - 1) / 26);
+    let quotient = Math.floor((num - 1) / alpha.length);
     return `${toAlpha(quotient)}${toAlpha(remainder)}`;
   }
 };
 
 const alphaToInt = R.compose(
   R.reduce((total, c) => {
-    return total * 26 + (R.indexOf(c, alpha) + 1);
+    return total * alpha.length + (R.indexOf(c, alpha) + 1);
   }, 0),
   R.splitEvery(1)
 );
