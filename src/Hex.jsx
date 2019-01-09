@@ -18,13 +18,13 @@ import Icon from "./atoms/Icon";
 import Id from "./atoms/Id";
 import Industry from "./atoms/Industry";
 import Label from "./atoms/Label";
+import MediumCity from "./atoms/MediumCity";
 import Name from "./atoms/Name";
 import OffBoardRevenue from "./atoms/OffBoardRevenue";
 import OffBoardTrack from "./atoms/OffBoardTrack";
 import RouteBonus from "./atoms/RouteBonus";
 import Terrain from "./atoms/Terrain";
 import Town from "./atoms/Town";
-import TownCity from "./atoms/TownCity";
 import Track from "./atoms/Track";
 import Tunnel from "./atoms/Tunnel";
 import Value from "./atoms/Value";
@@ -126,8 +126,8 @@ const HexTile = ({ hex, id, border, transparent }) => {
   let centerTowns = <Position data={hex.centerTowns}>{t => <CenterTown {...t} />}</Position>;
   let centerTownBorders = <Position data={hex.centerTowns}>{t => <CenterTown border={true} />}</Position>;
 
-  let townCities = <Position data={hex.townCities}>{t => <TownCity {...t} />}</Position>;
-  let townCityBorders = <Position data={hex.townCities}>{t => <TownCity border={true} />}</Position>;
+  let mediumCities = <Position data={hex.mediumCities}>{m => <MediumCity {...m} />}</Position>;
+  let mediumCityBorders = <Position data={hex.mediumCities}>{m => <MediumCity border={true} />}</Position>;
 
   let labels = <Position data={hex.labels}>{l => <Label {...l} />}</Position>;
   let icons = <Position data={hex.icons}>{i => <Icon {...i} />}</Position>;
@@ -178,13 +178,13 @@ const HexTile = ({ hex, id, border, transparent }) => {
             <g transform={`rotate(-${hx.rotation})`}>
               {icons}
               {cityBorders}
-              {townCityBorders}
+              {mediumCityBorders}
               {townBorders}
               {tracks}
               {offBoardTracks}
               {values}
               {cities}
-              {townCities}
+              {mediumCities}
               {towns}
               {centerTownBorders}
               {centerTowns}

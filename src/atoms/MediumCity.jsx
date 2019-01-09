@@ -3,7 +3,7 @@ import { colors } from "../data";
 
 import Name from "./Name";
 
-const TownCity = ({ border, name, reverse, color }) => {
+const MediumCity = ({ border, name, reverse, color }) => {
   if (border) {
     return (
       <circle fill={colors["border"]} stroke="none" cx="0" cy="0" r="21" />
@@ -42,4 +42,4 @@ const TownCity = ({ border, name, reverse, color }) => {
   }
 };
 
-export default TownCity;
+export default MediumCity;

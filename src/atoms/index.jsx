@@ -69,10 +69,10 @@ const newatoms = [{
              {centerTowns: [{color:"orange",name:{name:"Austin"}}]},
              {centerTowns: [{name:{name:"Boston", reverse: true}}]}]
 },{
-  group: "Town Cities",
-  examples: [{townCities: [{}]},
-             {townCities: [{color:"orange",name:{name:"Austin"}}]},
-             {townCities: [{name:{name:"Boston", reverse: true}}]}]
+  group: "Medium Cities",
+  examples: [{mediumCities: [{}]},
+             {mediumCities: [{color:"orange",name:{name:"Austin"}}]},
+             {mediumCities: [{name:{name:"Boston", reverse: true}}]}]
 },{
   group: "Labels",
   examples: [
