@@ -888,14 +888,14 @@ const game = {
       },
       {
         color: "plain",
-        water: {size:"small",cost:"$40",percent:0.5},
+        terrain: [{type:"river",cost:"$40",percent:0.5}],
         centerTowns: [{ angle: 120, percent: 0.5 },
                       { angle: 240, percent: 0.5 }],
         hexes: ["A16"]
       },
       {
         color: "plain",
-        water: {size:"small",cost:"$60",percent:0.5},
+        terrain: [{type:"river",cost:"$60",percent:0.5}],
         centerTowns: [{ angle: 120, percent: 0.5 },
                       { angle: 240, percent: 0.5 }],
         hexes: ["E20","I10"]
@@ -915,7 +915,7 @@ const game = {
       },
       {
         color: "plain",
-        water: {size:"small",cost:"$40",percent:0.67},
+        terrain: [{type:"river",cost:"$40",percent:0.67}],
         labels: [{percent: 0.67,angle:180,label:"P"}],
         cities: [{
           name: {name: "Kansas City", offset: 71},
@@ -928,7 +928,7 @@ const game = {
       },
       {
         color: "plain",
-        mountain: {size:"small",cost:"$60",percent:0.67},
+        terrain: [{cost:"$60",percent:0.67}],
         cities: [{
           name: {name: "Springfield"},
           companies: [{
@@ -940,7 +940,7 @@ const game = {
       },
       {
         color: "plain",
-        water: {size:"small",cost:"$60",percent:0.67},
+        terrain: [{type:"river",cost:"$60",percent:0.67}],
         cities: [{
           name: {name: "Memphis"},
           companies: [{
@@ -952,7 +952,7 @@ const game = {
       },
       {
         color: "plain",
-        water: {size:"small",cost:"$40",angle:60,percent:0.7},
+        terrain: [{type:"river",cost:"$40",angle:60,percent:0.7}],
         labels: [{percent: 0.67,angle:180,label:"P"}],
         cities: [{
           name: {name: "St. Louis", offset: 66},
@@ -1030,26 +1030,26 @@ const game = {
       },
       {
         color: "plain",
-        water: {size:"small",cost:"$60",percent: 0.67},
+        terrain: [{type:"river",cost:"$60",percent: 0.67}],
         cities: [{}],
         hexes: ["L11"]
       },
       {
         color: "plain",
-        water: {size:"small",cost:"$80",percent: 0.67},
+        terrain: [{cost:"$80",percent: 0.67,type:"river"}],
         cities: [{}],
         hexes: ["M14"]
       },
       {
         color: "plain",
-        water: {size:"small",cost:"$80",percent: 0.67},
+        terrain: [{cost:"$80",percent: 0.67,type:"river"}],
         cities: [{}],
         hexes: ["N7"]
       },
       {
         color: "plain",
         borders: [{color:"water",side:4}],
-        water: {size:"small",cost:"$80",percent: 0.67},
+        terrain: [{cost:"$80",percent: 0.67,type:"river"}],
         labels: [{percent: 0.67,angle:180,label:"P"}],
         cities: [{
           name: {
@@ -1076,50 +1076,50 @@ const game = {
         color: "plain",
         borders: [{color: "water", side: 1},
                   {color: "water", side: 6}],
-        water: {cost: "$80", size: "small"},
+        terrain: [{cost:"$80",type:"river"}],
         hexes: ["N19"]
       },
       {
         color: "plain",
         borders: [{color: "water", side: 3}],
-        water: {cost: "$100", size: "small"},
+        terrain: [{cost:"$100",type:"river"}],
         hexes: ["O18"]
       },
       {
         color: "plain",
-        water: {cost: "$80", size: "small", angle: 270, percent: 0.4},
+        terrain: [{cost:"$80",type:"river",angle:270,percent:0.4}],
         centerTowns: [{ angle: 90, percent: 0.4 }],
         hexes: ["N21"]
       },
       {
         color: "plain",
-        water: {cost: "$40", size: "small", angle: 270, percent: 0.4},
+        terrain: [{cost:"$40",type:"river",angle:270,percent:0.4}],
         centerTowns: [{ angle: 90, percent: 0.4 }],
         hexes: ["A10", "B13", "D17", "H3", "K14"]
       },
       {
         color: "plain",
-        mountain: {cost: "$60", size: "small"},
+        terrain: [{cost:"$60",percent:0.67}],
         hexes: ["D13", "D15", "E14", "E16", "F11", "F13", "F15"]
       },
       {
         color: "plain",
-        water: {cost: "$40", size: "small"},
+        terrain: [{cost:"$40",type:"river"}],
         hexes: ["B17","C14","C16","G2","H5"]
       },
       {
         color: "plain",
-        water: {cost: "$60", size: "small"},
+        terrain: [{cost:"$60",type:"river"}],
         hexes: ["E18","F19","G18","H7","I8","I16","J11","J15","K10","O2"]
       },
       {
         color: "plain",
-        water: {cost: "$80", size: "small"},
+        terrain: [{cost:"$80",type:"river"}],
         hexes: ["L13","O4","O6","N9","N11","N13","N15"]
       },
       {
         color: "plain",
-        water: {cost: "$100", size: "small"},
+        terrain: [{cost:"$100",type:"river"}],
         hexes: ["O14","O16"]
       },
       {

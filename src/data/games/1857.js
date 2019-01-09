@@ -836,23 +836,17 @@ const game = {
       },
       {
         color: "plain",
-        mountain: {
-          cost: "$120"
-        },
+        terrain: [{type:"mountain",cost:"$120",size:"large"}],
         hexes: ["B11"]
       },
       {
         color: "plain",
-        mountain: {
-          cost: "$80"
-        },
+        terrain: [{type:"mountain",cost:"$80",size:"medium"}],
         hexes: ["C12"]
       },
       {
         color: "plain",
-        mountain: {
-          cost: "$40"
-        },
+        terrain: [{type:"mountain",cost:"$40"}],
         hexes: ["B15", "C8", "C10"]
       },
       {
