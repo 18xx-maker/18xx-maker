@@ -981,22 +981,9 @@ const game = {
         offBoardRevenue: {
           name: {name: "Southlands"},
           revenues: [
-            {
-              color: "white",
-              cost: "30",
-              phase: 2
-            },
-            {
-              color: "black",
-              textColor: "white",
-              cost: "40",
-              phase: 5
-            },
-            {
-              color: "white",
-              cost: "60",
-              phase: 8
-            }
+            {color: "yellow", cost: "30"},
+            {color: "brown", cost: "40"},
+            {color: "gray", cost: "60", phase: 8}
           ]
         },
         tokens: [{
@@ -1207,22 +1194,9 @@ const game = {
         offBoardRevenue: {
           name: {name: "Far Harad"},
           revenues: [
-            {
-              color: "white",
-              cost: "20",
-              phase: 2
-            },
-            {
-              color: "black",
-              textColor: "white",
-              cost: "30",
-              phase: 5
-            },
-            {
-              color: "white",
-              cost: "50",
-              phase: 8
-            }
+            {color: "yellow", cost: "20"},
+            {color: "brown", cost: "30"},
+            {color: "gray", cost: "50", phase: 8}
           ]
         },
         hexes:["N24"]
@@ -1270,22 +1244,9 @@ const game = {
           percent: 0.25,
           reverse: true,
           revenues: [
-            {
-              color: "white",
-              cost: "30",
-              phase: 2
-            },
-            {
-              color: "black",
-              textColor: "white",
-              cost: "40",
-              phase: 5
-            },
-            {
-              color: "white",
-              cost: "60",
-              phase: 8
-            }
+            {color: "yellow", cost: "30"},
+            {color: "brown", cost: "40"},
+            {color: "gray", cost: "60", phase: 8}
           ]
         },
         tokens: [{
@@ -1306,22 +1267,9 @@ const game = {
           percent: 0.25,
           reverse: true,
           revenues: [
-            {
-              color: "white",
-              cost: "20",
-              phase: 2
-            },
-            {
-              color: "black",
-              textColor: "white",
-              cost: "30",
-              phase: 5
-            },
-            {
-              color: "white",
-              cost: "40",
-              phase: 8
-            }
+            {color: "yellow", cost: "20"},
+            {color: "brown", cost: "30"},
+            {color: "gray", cost: "40", phase: 8}
           ]
         },
         hexes:["Q11"]
