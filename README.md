@@ -82,7 +82,7 @@ of this:
 you can:
 
 ``` js
-{ track: [{side:5,type:"offboard"}] }
+{ track: [{side:5, type:"offboard"}] }
 ```
 
 For now `offBoardTrack` is deprecated, the old syntax will work until the next
