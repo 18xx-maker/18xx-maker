@@ -55,6 +55,7 @@ const makeBorder = track => {
         type={track.type || util.trackType(track)}
         gauge={track.gauge}
         border={true}
+        path={track.path}
       />
     </g>
   );
