@@ -22,9 +22,6 @@ const Track = ({ type, gauge, border, offset }) => {
     case "straight":
       path = "m 0 75 L 0 -75";
       break;
-    case "straightLawson":
-      path = "m 0 75 L 0 -4";
-      break;
     case "straightStop":
       path = "m 0 75 L 0 -37.5";
       break;
@@ -36,6 +33,9 @@ const Track = ({ type, gauge, border, offset }) => {
       break;
     case "gentleStopRev":
       path = `m 0 75 A 129.90375 129.90375 0 0 1 38.047927473438027 -16.855822526561973`;
+      break;
+    case "lawson":
+      path = "m 0 75 L 0 0 L -64.951875 -37.5";
       break;
     case "sharp":
       path = `m 0 75 A 43.30125 43.30125 0 0 0 -64.951875 37.5`;
@@ -81,7 +81,7 @@ const Track = ({ type, gauge, border, offset }) => {
         fill="none"
         stroke={colors["border"]}
         strokeLinecap="butt"
-        strokeLinejoin="bevel"
+        strokeLinejoin="miter"
         strokeWidth={width - 4}
         strokeDasharray={strokeDashArray}
         strokeDashoffset={strokeDashOffset}
@@ -99,7 +99,7 @@ const Track = ({ type, gauge, border, offset }) => {
             fill="none"
             stroke={color}
             strokeLinecap="butt"
-            strokeLinejoin="bevel"
+            strokeLinejoin="miter"
             strokeWidth={width}
             strokeDasharray={strokeDashArray}
             strokeDashoffset={strokeDashOffset}

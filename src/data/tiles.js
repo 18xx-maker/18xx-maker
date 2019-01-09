@@ -1399,7 +1399,7 @@ const tiles = {
   },
   "80": {
     color: "green",
-    track: [{side: 1, type: "straightLawson" }, {side: 2, type: "straightLawson" }, {side: 6, type: "straightLawson" } ]
+    track: [{side:1},{side:6, type: "lawson" }]
   },
   "81": {
     color: "green",
