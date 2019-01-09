@@ -6,7 +6,7 @@ import Hex from "../Hex";
 
 require("./atoms.css");
 
-const newatoms = [{
+const atoms = [{
   group: "Hexes",
   examples: [{},
              {color: "water"},
@@ -202,7 +202,7 @@ const Atoms = () => {
   return (
     <div className="atoms">
       <h1>Atoms</h1>
-      {groups(newatoms)}
+      {groups(atoms)}
     </div>
   );
 };
