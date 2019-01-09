@@ -32,9 +32,9 @@ const newatoms = [{
 },{
   group: "Private Company",
   examples: [{companies: [{label:"A"}]},
-             {companies: [{label: "CdH", radius: 7, color: "blue"}]},
+             {companies: [{label: "CdH", left: 50, right: 50, color: "blue"}]},
              {companies: [{label: "C", left: 30, bottom: true}]},
-             {companies: [{label: "ERR", color: "orange", bottom: true}]}]
+             {companies: [{label: "ERR", color: "orange", radius: 8, bottom: true}]}]
 },{
   group: "Icon",
   examples: [{icons: [{type: "meat"}]},
