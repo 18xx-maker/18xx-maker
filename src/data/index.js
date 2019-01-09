@@ -99,6 +99,13 @@ const paper = {
 // max: make the two end pages even, the others are full
 const pagination = "equal";
 
+// How to display map coordinates
+// outside: On the outside border of the map
+// inside: Inside each hex
+// edge: Along the edge of the map
+// none: No map coordinates
+const coords = "outside";
+
 const fonts = ["Bitter:700", "Limelight"];
 
 const market = {
@@ -131,4 +138,4 @@ const strokeColor = color =>
     .darken(10)
     .toString();
 
-export { alpha, colors, paper, pagination, market, fonts, textColor, strokeColor };
+export { alpha, coords, colors, paper, pagination, market, fonts, textColor, strokeColor };

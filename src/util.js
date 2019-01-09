@@ -156,6 +156,54 @@ const maxMapY = R.compose(
   R.chain(R.prop("hexes"))
 );
 
+const hexesToCoords = R.compose(R.map(toCoords), R.chain(R.prop("hexes")));
+
+const topCoord = (hexes, x) => {
+  let coords = hexesToCoords(hexes);
+  let filtered = R.filter(c => c[0] === x, coords);
+  let maxHex = R.reduce((m,x) => R.min(m, R.nth(1,x)), 1000, filtered);
+
+  let extra = 0;
+  let hexesAbove = R.filter(c => R.equals(c, [x - 1, maxHex - 1]) || R.equals(c, [x + 1, maxHex - 1]),
+                            coords);
+  if(hexesAbove.length > 0) {
+    extra = 150 * HEX_RATIO;
+  }
+
+  let y = (x % 2 === 0 ? 35 : 33) + (1.5 * 150 * HEX_RATIO * (maxHex - 1)) - extra;
+  return y;
+};
+
+const bottomCoord = (hexes, x) => {
+  let coords = hexesToCoords(hexes);
+  let filtered = R.filter(c => c[0] === x, coords);
+  let maxHex = R.reduce((m,x) => R.max(m, R.nth(1,x)), 1, filtered);
+
+  let extra = 0;
+  let hexesAbove = R.filter(c => R.equals(c, [x - 1, maxHex + 1]) || R.equals(c, [x + 1, maxHex + 1]),
+                            coords);
+  if(hexesAbove.length > 0) {
+    extra = 150 * HEX_RATIO;
+  }
+
+  let y = (x % 2 === 0 ? -23 : -21) + (1.5 * 150 * HEX_RATIO * (maxHex + 1)) + extra;
+  return y;
+};
+
+const leftCoord = (hexes, y) => {
+  let filtered = R.filter(c => c[1] === y, hexesToCoords(hexes));
+  let maxHex = R.reduce((m,x) => R.min(m, R.nth(0,x)), 1000, filtered);
+  let x = 35 + (150 * 0.5 * (maxHex - 1));
+  return x;
+};
+
+const rightCoord = (hexes, y) => {
+  let filtered = R.filter(c => c[1] === y, hexesToCoords(hexes));
+  let maxHex = R.reduce((m,x) => R.max(m, R.nth(0,x)), 1, filtered);
+  let x = 65 + (150 * 0.5 * (maxHex + 1));
+  return x;
+};
+
 const resolveHex = (hex, hexes) => {
   if (hex.copy) {
     // Find copy
@@ -228,5 +276,9 @@ export default {
   mergeHex,
   resolveHex,
   equalPages,
-  maxPages
+  maxPages,
+  topCoord,
+  bottomCoord,
+  leftCoord,
+  rightCoord
 };
