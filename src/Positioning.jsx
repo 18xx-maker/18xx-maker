@@ -1,56 +1,53 @@
 import React from "react";
 import * as R from "ramda";
 
-import Hex from "./Hex";
 import Svg from "./Svg";
+import Hex from "./Hex";
 
-import HexContext from "./context/HexContext";
+require("./atoms/atoms.css");
+
+const positions = [{
+  group: "X and Y",
+  examples: [{centerTowns: [{}]},
+             {centerTowns: [{y:35}]},
+             {centerTowns: [{x:35}]},
+             {centerTowns: [{x:35, y:-35}]}]
+},{
+  group: "Angle and Percent",
+  examples: [{centerTowns: [{}]},
+             {centerTowns: [{percent: 0.5}]},
+             {centerTowns: [{angle: 270, percent: 0.5}]},
+             {centerTowns: [{angle: 150, percent: 0.5}]}]
+},{
+  group: "Rotation",
+  examples: [{values: [{value: 10}]},
+             {values: [{value: 10, rotate: 45, percent: 0.5}]},
+             {values: [{value: 10, rotate: 90, angle: 270, percent: 0.5}]},
+             {values: [{value: 10, rotate: 180}]}
+            ]
+}];
+
+const examples = R.addIndex(R.chain)((h,id) => {
+  return <dd key={`example-${id}`}>
+           <Svg width="160" height="160" viewBox="-80 -80 160 160">
+             <Hex hex={h} id={`${id}`} border={true} />
+           </Svg>
+           <pre>{JSON.stringify(h, null, 2)}</pre>
+         </dd>;
+});
+
+const groups = R.addIndex(R.chain)((g,id) => {
+  return <dl key={`group-${id}`}>
+           <dt>{g.group}</dt>
+           {examples(g.examples)}
+         </dl>;
+});
 
 const Positioning = () => {
-  let nodes = R.chain(i => {
-    let angle = i * 30;
-
-    return (
-      <tr>
-        {R.map(j => {
-          let percent = (j + 1) * 0.25;
-
-          let displayPercent = Math.floor(percent * 100);
-
-          let data = {
-            color: "yellow",
-            values: [
-              {
-                value: 20,
-                angle,
-                percent
-              }
-            ]
-          };
-
-          return (
-            <td>
-              <Svg width="200" height="200" viewBox="-100 -100 200 200">
-                <Hex
-                  hex={data}
-                  id={`${angle} ${displayPercent}%`}
-                  border={true}
-                />
-              </Svg>
-            </td>
-          );
-        }, Array.from(Array(4).keys()))}
-      </tr>
-    );
-  }, Array.from(Array(12).keys()));
-
   return (
-    <div className="positioning">
-      <HexContext.Provider value={{ width: 150, rotation: 90 }}>
-        <table>
-          <tbody>{nodes}</tbody>
-        </table>
-      </HexContext.Provider>
+    <div className="atoms">
+      <h1>Positioning</h1>
+      {groups(positions)}
     </div>
   );
 };
