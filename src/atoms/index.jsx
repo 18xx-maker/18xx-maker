@@ -16,7 +16,7 @@ const atoms = [{
              {color: "green"},
              {color: "gray", divides: [{side:2}]}]
 },{
-  group: "Value",
+  group: "Values",
   examples: [{values: [{value: 20}]},
              {values: [{value: 60}]},
              {values: [{value: 120}]}]
