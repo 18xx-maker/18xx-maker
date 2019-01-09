@@ -3,12 +3,13 @@ import { colors } from "../data";
 
 import HexContext from "../context/HexContext";
 
-const Track = ({ type, gauge, border, offset }) => {
+const Track = ({ type, gauge, border, offset, path }) => {
   let width = border ? 16 : 12;
   let color = border ? colors["border"] : colors["track"];
-  let path;
 
   switch (type) {
+  case "custom":
+    break;
   case "offboard":
     let end = border ? 30:40;
     width = border ? 8 : 6;

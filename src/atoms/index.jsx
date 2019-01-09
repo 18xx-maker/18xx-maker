@@ -99,6 +99,7 @@ const atoms = [{
              {side:4,type:"mid"}]},
     {track: [{side:1,type:"bent"},
              {side:3,type:"1860-C"}]},
+    {track: [{path:"m 0 75 L 0 32.5 Q 75 0, 0 -32.5 L 0 -75", type:"custom"}]},
     {track: [{side:1,type:"offboard"},{side:6,type:"offboard"}]}
   ]
 },{
