@@ -166,7 +166,7 @@ const HexTile = ({ hex, id, border, transparent }) => {
 
   return (
     <g>
-      <Hex color={hex.color} transparent={transparent} />
+      <Hex color={hex.color || "plain"} transparent={transparent} />
 
       <HexContext.Consumer>
         {hx => (
@@ -175,12 +175,12 @@ const HexTile = ({ hex, id, border, transparent }) => {
               {icons}
               {cityBorders}
               {townBorders}
-              {centerTownBorders}
               {tracks}
               {offBoardTracks}
               {values}
               {cities}
               {towns}
+              {centerTownBorders}
               {centerTowns}
               {labels}
               {names}

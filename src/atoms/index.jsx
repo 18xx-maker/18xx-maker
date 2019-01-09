@@ -1,341 +1,203 @@
 import React from "react";
 import * as R from "ramda";
 
-import { colors } from "../data";
-
 import Svg from "../Svg";
-
-import Border from "./Border";
-import Bridge from "./Bridge";
-import CenterTown from "./CenterTown";
-import City from "./City";
-import Company from "./Company";
-import Divide from "./Divide";
-import Good from "./Good";
-import Hex from "./Hex";
-import Icon from "./Icon";
-import Id from "./Id";
-import Industry from "./Industry";
-import Label from "./Label";
-import OffBoardRevenue from "./OffBoardRevenue";
-import OffBoardTrack from "./OffBoardTrack";
-import RouteBonus from "./RouteBonus";
-import Terrain from "./Terrain";
-import Town from "./Town";
-import Track from "./Track";
-import Tunnel from "./Tunnel";
-import Value from "./Value";
+import Hex from "../Hex";
 
 require("./atoms.css");
 
-const Atoms = () => {
-  let atoms = [
-    {
-      name: "Id",
-      examples: [<Id id="1" />, <Id id="13" />, <Id id="130" />]
-    },
-    {
-      name: "Value",
-      examples: [<Value value={20} />, <Value value={100} />]
-    },
-    {
-      name: "Industry",
-      examples: [
-        <Industry top={1} bottom={20} />,
-        <Industry top="ZH" bottom={10} />
-      ]
-    },
-    {
-      name: "Good",
-      examples: [
-        <Good />,
-        <Good color="purple" />,
-        <Good color="orange" />
-      ]
-    },
-    {
-      name: "Company",
-      examples: [
-        <Company label="A" />,
-        <Company label="CdH" radius="7" color="blue" />,
-        <Company label="C" left="30" bottom={true} />,
-        <Company label="ERR" color="orange" bottom={true} />
-      ]
-    },
-    {
-      name: "Icon",
-      examples: [<Icon type="meat" />, <Icon type="steam" />, <Icon type="mountain60" />, <Icon type="mountain120" />]
-    },
-    {
-      name: "City",
-      examples: [
-        [
-          <City size={1} border={true} />,
-          <City size={1} name={{ name: "Boston" }} />
-        ],
-        [
-          <City size={1} border={true} />,
-          <City size={1} name={{ name: "New York", rotation: 90 }} />
-        ],
-        [
-          <City size={1} border={true} />,
-          <City
-            size={1}
-            companies={[{ color: "orange", label: "GT" }]}
-            name={{ name: "Toronto", reverse: true }}
-          />
-        ],
-        [<City size={2} border={true} />, <City size={2} />],
-        [
-          <City size={2} border={true} />,
-          <City
-            size={2}
-            companies={[
-              { color: "blue", label: "B&O" },
-              { color: "red", label: "PRR" }
-            ]}
-          />
-        ],
-        [<City size={3} border={true} />, <City size={3} />],
-        [
-          <City size={3} border={true} />,
-          <City
-            size={3}
-            companies={[
-              { color: "maroon", label: "B&M" },
-              { color: "black", label: "NYC" },
-              { color: "green", label: "ILC" }
-            ]}
-          />
-        ],
-        [<City size={4} border={true} />, <City size={4} />],
-        [
-          <City size={4} border={true} />,
-          <City
-            size={4}
-            companies={[
-              { color: "maroon", label: "B&M" },
-              { color: "black", label: "NYC" },
-              { color: "cyan", textColor: "black", label: "C&O" },
-              { color: "yellow", textColor: "black", label: "Erie" }
-            ]}
-          />
-        ]
-      ]
-    },
-    {
-      name: "Town",
-      examples: [[<Town border={true} />, <Town />],
-                 [<Town border={true} />, <Town name={{name: "Austin"}} />],
-                 [<Town border={true} />, <Town name={{name: "Boston", reverse: true}} />]]
-    },
-    {
-      name: "Center Town",
-      examples: [
-        [<CenterTown border={true} />, <CenterTown />],
-        [
-          <CenterTown border={true} />,
-          <CenterTown name={{ name: "Austin", reverse: true }} />
-        ],
-        [
-          <CenterTown border={true} />,
-          <CenterTown name={{ name: "Boston" }} color="white" />
-        ]
-      ]
-    },
-    {
-      name: "Label",
-      examples: [
-        <Label label="B" />,
-        <Label label="NY" />,
-        <Label label="OO" />
-      ]
-    },
-    {
-      name: "Track",
-      examples: R.chain(
-        type => {
-          return R.map(
-            gauge => {
-              return [
-                <Track type={type} gauge={gauge} border={true} />,
-                <Track type={type} gauge={gauge} />
-              ];
-            },
-            ["standard", "narrow", "double", "line"]
-          );
-        },
-        [
-          "stub",
-          "stop",
-          "city",
-          "mid",
-          "straightStop",
-          "straightLawson",
-          "straight",
-          "gentleStop",
-          "gentleStopRev",
-          "gentle",
-          "sharpStop",
-          "sharpStopRev",
-          "sharp",
-          "bent",
-          "1860-C"
-        ]
-      )
-    },
-    {
-      name: "OffBoard Track",
-      examples: [[<OffBoardTrack border={true} />, <OffBoardTrack />]]
-    },
-    {
-      name: "OffBoard Revenue",
-      examples: [
-        <OffBoardRevenue
-          revenues={[
-            { cost: "20", color: "yellow" },
-            { cost: "40", color: "brown" }
-          ]}
-        />,
-        <OffBoardRevenue
-          name={{name: "Austin"}}
-          revenues={[
-            { cost: "20", color: "yellow", phaseColor: "black", phase: "2" },
-            { cost: "30", color: "green", phaseColor: "black", phase: "3" },
-            { cost: "40", color: "brown", phaseColor: "black", phase: "5" }
-          ]}
-        />,
-        <OffBoardRevenue
-          name={{name: "Boston"}}
-          reverse={true}
-          revenues={[
-            { cost: "20", color: "yellow", phaseColor: "black", phase: "2" },
-            { cost: "30", color: "green", phaseColor: "black", phase: "3" },
-            { cost: "40", color: "brown", phaseColor: "black", phase: "5" },
-            { cost: "60", color: "gray", phaseColor: "black", phase: "8" }
-          ]}
-        />,
-        <OffBoardRevenue
-          name={{name: "Austin"}}
-          rows={2}
-          revenues={[
-            { cost: "20", color: "yellow" },
-            { cost: "30", color: "green" },
-            { cost: "40", color: "brown" },
-            { cost: "50", color: "red" },
-            { cost: "60", color: "gray" }
-          ]}
-        />,
-        <OffBoardRevenue
-          name={{name: "Austin"}}
-          rows={3}
-          reverse={true}
-          revenues={[
-            { cost: "20", color: "yellow" },
-            { cost: "30", color: "green" },
-            { cost: "40", color: "brown" },
-            { cost: "50", color: "red" },
-            { cost: "60", color: "gray" }
-          ]}
-        />
-      ]
-    },
-    {
-      name: "Hex",
-      examples: [
-        [<Hex color="plain" />, <Hex border={true} />],
-        [<Hex color="yellow" />, <Hex border={true} />],
-        [<Hex color="green" />, <Hex border={true} />],
-        [<Hex color="brown" />, <Hex border={true} />],
-        [<Hex color="gray" />, <Hex border={true} />],
-        [<Hex color="water" />, <Hex border={true} />],
-        [<Hex color="offboard" />, <Hex border={true} />]
-      ]
-    },
-    {
-      name: "Divide",
-      examples: [[<Divide />]]
-    },
-    {
-      name: "Border",
-      examples: [
-        <Border color="black" />,
-        <Border color="water" />,
-        <Border color="mountain" />,
-        <Border color="red" />,
-        <Border color="gray" dashed="true" />,
-      ]
-    },
-    {
-      name: "Terrain",
-      examples: [
-        <Terrain type="cactus" cost="$20" size="tiny" />,
-        <Terrain type="cactus" cost="$40" />,
-        <Terrain type="cactus" cost="$80" size="medium" />,
-        <Terrain type="cactus" cost="$120" size="large" />,
-        <Terrain type="mountain" cost="$20" size="tiny" />,
-        <Terrain type="mountain" cost="$40" />,
-        <Terrain type="mountain" cost="$80" size="medium" />,
-        <Terrain type="mountain" cost="$120" size="large" />,
-        <Terrain type="stream" cost="$20" size="tiny" />,
-        <Terrain type="stream" cost="$40" />,
-        <Terrain type="stream" cost="$80" size="medium" />,
-        <Terrain type="stream" cost="$120" size="large" />,
-        <Terrain type="swamp" cost="$20" size="tiny" />,
-        <Terrain type="swamp" cost="$40" />,
-        <Terrain type="swamp" cost="$80" size="medium" />,
-        <Terrain type="swamp" cost="$120" size="large" />,
-        <Terrain type="water" cost="$20" size="tiny" />,
-        <Terrain type="water" cost="$40" />,
-        <Terrain type="water" cost="$80" size="medium" />,
-        <Terrain type="water" cost="$120" size="large" />,
-      ]
-    },
-    {
-      name: "Tunnel and Bridge",
-      examples: [<Tunnel cost="$40" />,
-                 <Bridge cost="$40" />]
-    },
-    {
-      name: "Route Bonus",
-      examples: [
-        <RouteBonus value="$4" />,
-        <RouteBonus value="+30" />,
-        <RouteBonus value="+$400" />
-      ]
-    },
-    {
-      name: "Clip Paths",
-      examples: [
-        <use href="#cityPath" fill="none" stroke={colors["purple"]} />,
-        <use href="#cityPathReverse" fill="none" stroke={colors["purple"]} />,
-        <use href="#city2Path" fill="none" stroke={colors["purple"]} />,
-        <use href="#city2PathReverse" fill="none" stroke={colors["purple"]} />,
-        <use href="#city3Path" fill="none" stroke={colors["purple"]} />,
-        <use href="#city3PathReverse" fill="none" stroke={colors["purple"]} />
-      ]
+const newatoms = [{
+  group: "Hexes",
+  examples: [{},
+             {color: "water"},
+             {color: "mountain"},
+             {color: "offboard", divides: [{side:3}]},
+             {color: "yellow"},
+             {color: "green"},
+             {color: "gray", divides: [{side:2}]}]
+},{
+  group: "Value",
+  examples: [{values: [{value: 20}]},
+             {values: [{value: 60}]},
+             {values: [{value: 120}]}]
+},{
+  group: "Industry",
+  examples: [{industries: [{top:1,bottom:20}]},
+             {industries: [{top:"ZH",bottom:10}]}]
+},{
+  group: "Good",
+  examples: [{goods: [{}]},
+             {goods: [{color: "purple"}]},
+             {goods: [{color: "orange"}]}]
+},{
+  group: "Private Company",
+  examples: [{companies: [{label:"A"}]},
+             {companies: [{label: "CdH", radius: 7, color: "blue"}]},
+             {companies: [{label: "C", left: 30, bottom: true}]},
+             {companies: [{label: "ERR", color: "orange", bottom: true}]}]
+},{
+  group: "Icon",
+  examples: [{icons: [{type: "meat"}]},
+             {icons: [{type: "steam"}]}]
+},{
+  group: "Cities",
+  examples: [{cities: [{}]},
+             {cities: [{name:{offset: 75, name: "Boston"}}]},
+             {cities: [{companies:[{label:"GT",color:"orange"}],
+                        name:{reverse:true, name: "Boston"}}]},
+             {cities: [{size:2,
+                        companies: [{},{label:"B&O",color:"blue"}],
+                        name: {name: "Baltimore"}
+                       }]},
+             {cities: [{size:3,
+                        companies: [{label:"NYC",color:"black"}]
+                       }]},
+             {cities: [{size:4,
+                        companies: [{},
+                                    {label:"BM",color:"maroon"},
+                                    {label:"PRR",color:"green"}]
+                       }]
+             }]
+},{
+  group: "Towns",
+  examples: [{towns: [{}]},
+             {towns: [{name:{name:"Austin"}}]},
+             {towns: [{name:{name:"Boston", reverse: true}}]}]
+},{
+  group: "Center Town",
+  examples: [{centerTowns: [{}]},
+             {centerTowns: [{color:"orange",name:{name:"Austin"}}]},
+             {centerTowns: [{name:{name:"Boston", reverse: true}}]}]
+},{
+  group: "Labels",
+  examples: [
+    {labels: [{label:"B"}]},
+    {labels: [{label:"NY"}]},
+    {labels: [{label:"OO"}]}
+  ]
+},{
+  group: "Track",
+  examples: [
+    {track: [{side:1,type:"straight"}]},
+    {track: [{side:3,type:"gentle",gauge:"narrow"}]},
+    {track: [{side:5,type:"gentleStop"},
+             {side:5,type:"gentleStopRev"}]},
+    {track: [{side:1,type:"sharp",gauge:"double"},
+             {side:3,type:"sharpStop"},
+             {side:5,type:"sharpStopRev"}]},
+    {track: [{side:1,type:"straight",cross:"under"},
+             {side:3,type:"gentle",cross:"over"}]},
+    {track: [{side:4,type:"straightStop",gauge:"line"}]},
+    {track: [{side:2,type:"lawson"}]},
+    {track: [{side:2,type:"stub"},
+             {side:3,type:"stop"},
+             {side:4,type:"mid"}]},
+    {track: [{side:1,type:"bent"},
+             {side:3,type:"1860-C"}]},
+    {offBoardTrack: [{side:1},{side:6}],
+     track: [{side:3,type:"sharp"}]}
+  ]
+},{
+  group: "Labels",
+  examples: [{
+    offBoardRevenue: {
+      name: {name: "Boston"},
+      revenues: [{
+        color: "yellow",
+        cost: "20"
+      },{
+        color: "brown",
+        cost: "40"
+      }]
     }
-  ];
+  },{
+    color: "offboard",
+    offBoardRevenue: {
+      reverse: true,
+      name: {name: "Boston"},
+      revenues: [{
+        color: "yellow",
+        cost: "20",
+        phase: 2
+      },{
+        color: "brown",
+        cost: "40",
+        phase: 5
+      }]
+    }
+  },{
+    offBoardRevenue: {
+      name: {name: "Boston"},
+      reverse: true,
+      rows: 2,
+      revenues: [{
+        color: "yellow",
+        cost: "20"
+      },{
+        color: "green",
+        cost: "30"
+      },{
+        color: "brown",
+        cost: "40"
+      },{
+        color: "gray",
+        cost: "120"
+      }]
+    }
+  }]
+},{
+  group: "Borders",
+  examples: [
+    {borders: [{side:1,color:"red"}]},
+    {borders: [{side:1,color:"water"},{side:2,color:"water"}]},
+    {borders: [{side:4,color:"mountain",dashed:true},
+               {side:5,color:"mountain",dashed:true},
+               {side:6,color:"mountain",dashed:true}]},
+  ]
+},{
+  group: "Terrain",
+  examples: [
+    {terrain: [{}]},
+    {terrain: [{size:"medium",cost:"$60"}]},
+    {terrain: [{type:"water",cost:"$40"}]},
+    {terrain: [{type:"stream",cost:"$20"}]},
+    {terrain: [{size:"tiny",type:"river",cost:"$10"}]},
+    {terrain: [{type:"cactus",cost:"$20"}]},
+    {terrain: [{size:"large",type:"swamp",cost:"$120"}]}
+  ]
+},{
+  group: "Tunnel's and Bridge",
+  examples: [
+    {tunnels: [{cost:"$40"}]},
+    {bridges: [{cost:"$40"}]}]
+},{
+  group: "Route Bonuses",
+  examples: [
+    {routeBonus: [{value:"$40"}]},
+    {routeBonus: [{value:"+$120"}]}]
+}];
 
-  let nodes = R.chain(atom => {
-    let exampleNodes = R.map(
-      example => (
-        <dd>
-          <Svg width="200" height="200" viewBox="-100 -100 200 200">
-            {example}
-          </Svg>
-        </dd>
-      ),
-      atom.examples
-    );
+const examples = R.addIndex(R.chain)((h,id) => {
+  return <dd>
+      <Svg width="160" height="160" viewBox="-80 -80 160 160">
+        <Hex hex={h} id={`${id}`} border={true} />
+      </Svg>
+      <pre>{JSON.stringify(h, null, 2)}</pre>
+    </dd>;
+});
 
-    return R.concat([<dt>{atom.name}</dt>], exampleNodes);
-  }, atoms);
+const groups = R.chain(g => {
+  return <dl>
+         <dt>{g.group}</dt>
+         {examples(g.examples)}
+       </dl>;
+});
 
+const Atoms = () => {
   return (
     <div className="atoms">
       <h1>Atoms</h1>
-      <dl>{nodes}</dl>
+      {groups(newatoms)}
     </div>
   );
 };
