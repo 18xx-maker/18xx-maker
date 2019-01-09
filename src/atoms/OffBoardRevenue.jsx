@@ -78,7 +78,7 @@ const makeNodes = (y, reverse, revenues) => {
     x = x + getWidth(r);
     return result;
   }, revenues),[
-    <rect key="rect"
+    <rect key={`rect-border-${y}`}
           width={totalWidth}
           height="20"
           y={y - 10}
