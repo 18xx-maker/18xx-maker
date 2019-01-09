@@ -14,6 +14,7 @@ const positions = [{
              {centerTowns: [{x:35, y:-35}]}]
 },{
   group: "Angle and Percent",
+  description: "This allows you to place elements using polar coordinates which is often much nicer when working in hexes.",
   examples: [{centerTowns: [{}]},
              {centerTowns: [{percent: 0.5}]},
              {centerTowns: [{angle: 270, percent: 0.5}]},
@@ -24,6 +25,16 @@ const positions = [{
              {values: [{value: 10, rotate: 45, percent: 0.5}]},
              {values: [{value: 10, rotate: 90, angle: 270, percent: 0.5}]},
              {values: [{value: 10, rotate: 180}]}
+            ]
+},{
+  group: "Sides",
+  description: "Side is an alias for rotation by 0, 60, 120, 180, 240, and 300. This is useful when placing hex size objects like track.",
+  examples: [{track: [{side: 1}]},
+             {track: [{side: 2}]},
+             {track: [{side: 3}]},
+             {track: [{side: 4}]},
+             {track: [{side: 5}]},
+             {track: [{side: 6}]}
             ]
 }];
 
@@ -39,6 +50,7 @@ const examples = R.addIndex(R.chain)((h,id) => {
 const groups = R.addIndex(R.chain)((g,id) => {
   return <dl key={`group-${id}`}>
            <dt>{g.group}</dt>
+           {g.description && <p>{g.description}</p>}
            {examples(g.examples)}
          </dl>;
 });

@@ -23,6 +23,13 @@
   float: left;
 }
 
+.atoms p {
+  font-weight: normal;
+  font-size: 10pt;
+  font-family: sans-serif;
+  text-align: left;
+}
+
 dd pre {
   text-align: left;
 }
