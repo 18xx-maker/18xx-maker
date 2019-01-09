@@ -5764,7 +5764,7 @@ const tiles = {
         percent: 0.667
       }
     ],
-    track: [{ side: 1 }, { type: "1860-C", side: 2 }]
+    track: [{ side: 1 }, { type: "custom", path: "m 0 75 C 0 50, 30 50, 45 25", side: 2 }]
   },
   "789": {
     color: "brown",
@@ -5811,7 +5811,7 @@ const tiles = {
         percent: 0.667
       }
     ],
-    track: [{ side: 1 }, { type: "1860-C", side: 2 }]
+    track: [{ side: 1 }, { type: "custom", path: "m 0 75 C 0 50, 30 50, 45 25", side: 2 }]
   },
   "800": {
     color: "green",
