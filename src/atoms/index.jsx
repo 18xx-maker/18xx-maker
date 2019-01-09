@@ -99,8 +99,7 @@ const atoms = [{
              {side:4,type:"mid"}]},
     {track: [{side:1,type:"bent"},
              {side:3,type:"1860-C"}]},
-    {offBoardTrack: [{side:1},{side:6}],
-     track: [{side:3,type:"sharp"}]}
+    {track: [{side:1,type:"offboard"},{side:6,type:"offboard"}]}
   ]
 },{
   group: "Labels",
