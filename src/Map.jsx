@@ -2,7 +2,7 @@ import React from "react";
 import * as R from "ramda";
 import util from "./util";
 import Hex from "./Hex";
-import { colors } from "./data";
+import { coords, colors } from "./data";
 
 const Map = ({ game, variation }) => {
   variation = variation || 0;
@@ -36,11 +36,13 @@ const Map = ({ game, variation }) => {
   let maxY = util.maxMapY(hexes);
 
   let totalWidth =
-    (game.info.extraTotalWidth || 0) + 100 + halfHexWidth * (maxX + 1);
+      (game.info.extraTotalWidth || 0) +
+      ((coords === "edge" || coords === "outside") ? 100 : 0) +
+      halfHexWidth * (maxX + 1);
   let totalHeight =
-    (game.info.extraTotalHeight || 0) +
-    100 +
-    (1.5 * (maxY - 1) * edge + 2 * edge);
+      (game.info.extraTotalHeight || 0) +
+      ((coords === "edge" || coords === "outside") ? 100 : 0) +
+      (1.5 * (maxY - 1) * edge + 2 * edge);
 
   if (game.info.orientation === "horizontal") {
     let tmp = totalWidth;
@@ -48,7 +50,7 @@ const Map = ({ game, variation }) => {
     totalHeight = tmp;
   }
 
-  let coords = R.concat(
+  let coordinates = R.concat(
     R.chain(
       x => [
         <text
@@ -64,7 +66,11 @@ const Map = ({ game, variation }) => {
             (game.info.orientation === "horizontal" ? hexY(0, x) : hexX(x, 0)) +
             50
           }
-          y="25"
+          y={coords === "edge" ?
+             (game.info.orientation !== "horizontal" ?
+              util.topCoord(hexes, x) :
+              util.leftCoord(hexes, x)) :
+             25}
         >
           {game.info.orientation === "horizontal" ? util.toAlpha(x) : x}
         </text>,
@@ -81,7 +87,11 @@ const Map = ({ game, variation }) => {
             (game.info.orientation === "horizontal" ? hexY(0, x) : hexX(x, 0)) +
             50
           }
-          y={totalHeight - 25}
+          y={coords === "edge" ?
+             (game.info.orientation !== "horizontal" ?
+              util.bottomCoord(hexes, x) :
+              util.rightCoord(hexes, x)) :
+             (totalHeight - 25)}
         >
           {game.info.orientation === "horizontal" ? util.toAlpha(x) : x}
         </text>
@@ -99,9 +109,15 @@ const Map = ({ game, variation }) => {
           alignmentBaseline="central"
           textAnchor="middle"
           lengthAdjust="spacingAndGlyphs"
-          x="25"
+          x={coords === "edge" ?
+             (game.info.orientation !== "horizontal" ?
+              util.leftCoord(hexes, y) :
+              util.topCoord(hexes, y)) :
+             25}
           y={
-            (game.info.orientation !== "horizontal" ? hexY(0, y) : hexX(y, 0)) +
+            (game.info.orientation !== "horizontal" ?
+             hexY(0, y) :
+             hexX(y, 0)) +
             50
           }
         >
@@ -116,9 +132,15 @@ const Map = ({ game, variation }) => {
           alignmentBaseline="central"
           textAnchor="middle"
           lengthAdjust="spacingAndGlyphs"
-          x={totalWidth - 25}
+          x={coords === "edge" ?
+             (game.info.orientation !== "horizontal" ?
+              util.rightCoord(hexes, y) :
+              util.bottomCoord(hexes, y)) :
+             (totalWidth - 25)}
           y={
-            (game.info.orientation !== "horizontal" ? hexY(0, y) : hexX(y, 0)) +
+            (game.info.orientation !== "horizontal" ?
+             hexY(0, y) :
+             hexX(y, 0)) +
             50
           }
         >
@@ -135,20 +157,23 @@ const Map = ({ game, variation }) => {
     return R.map(([x, y]) => {
       let translate =
         game.info.orientation === "horizontal"
-          ? `translate(${hexY(x, y) + 50} ${hexX(x, y) + 50})`
-          : `translate(${hexX(x, y) + 50} ${hexY(x, y) + 50})`;
+          ? `translate(${hexY(x, y) + ((coords === "edge" || coords === "outside") ? 50 : 0)} ${hexX(x, y) + ((coords === "edge" || coords === "outside") ? 50 : 0)})`
+          : `translate(${hexX(x, y) + ((coords === "edge" || coords === "outside") ? 50 : 0)} ${hexY(x, y) + ((coords === "edge" || coords === "outside") ? 50 : 0)})`;
+      let coord = `${util.toAlpha(y)}${x}`;
       return (
         <g
           transform={`${translate}`}
-          key={`hex-${resolvedHex.variation}-${util.toAlpha(y)}${x}`}
+          key={`hex-${resolvedHex.variation}-${coord}`}
         >
-          <Hex hex={resolvedHex} border={true} transparent={game.info.transparent} />
+          <Hex hex={resolvedHex} border={true} transparent={game.info.transparent} id={coords === "inside" && coord} />
         </g>
       );
     }, R.map(util.toCoords, hex.hexes || []));
   }, hexes);
 
-  return R.concat(coords, mapHexes);
+  return R.concat(((coords === "edge" || coords === "outside") ?
+                   coordinates : []),
+                  mapHexes);
 };
 
 export default Map;
