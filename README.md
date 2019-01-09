@@ -69,3 +69,21 @@ Right now valid types are `mountain`, `water`, `river`, `stream`, `cactus`, and
 `swamp`. More might be added in the future. You can also add a `size` attribute
 as `tiny` if you want it small. If you want to enlarge the icon you can pass in
 `medium` or `large`.
+
+### OffBoardTrack
+
+I finally made the offboard track arrows just another type of track. So instead
+of this:
+
+``` js
+{ offBoardTrack: [{side:5}] }
+```
+
+you can:
+
+``` js
+{ track: [{side:5,type:"offboard"}] }
+```
+
+For now `offBoardTrack` is deprecated, the old syntax will work until the next
+major version release.
