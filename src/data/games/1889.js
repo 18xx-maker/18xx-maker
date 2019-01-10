@@ -823,26 +823,18 @@ const game = {
       },
       {
         color: "plain",
-        water: {
-          cost: "80"
-        },
+        terrain: [{type: "river", cost: "¥80"}],
         hexes: ["K6"]
       },
       {
         color: "plain",
-        water: {percent: 0.38},
-        mountain: {
-          angle: 180,
-          percent: 0.1,
-          cost: "80"
-        },
+        terrain: [{type: "river", percent: 0.38},
+                  {cost: "¥80", angle: 180, percent: 0.1}],
         hexes: ["H5", "I6"]
       },
       {
         color: "plain",
-        mountain: {
-          cost: "80"
-        },
+        terrain: [{cost: "¥80"}],
         hexes: [
           "E4",
           "D5",
@@ -862,28 +854,17 @@ const game = {
       },
       {
         color: "plain",
-        cities: [
-          {
-            angle: 120,
-            percent: 0.4,
-            name: {
-              name: "Kotohira",
-              rotation: 30
-            }
-          }
-        ],
-        mountain: {
-          angle: 270,
-          percent: 0.5,
-          cost: "80"
-        },
-        labels: [
-          {
-            label: "H",
-            angle: 330,
-            percent: 0.8
-          }
-        ],
+        cities: [{
+          angle: 120,
+          percent: 0.4,
+          name: {name: "Kotohira", rotation: 30}
+        }],
+        terrain: [{angle: 270, percent: 0.5, cost: "¥80"}],
+        labels: [{
+          label: "H",
+          angle: 330,
+          percent: 0.8
+        }],
         hexes: ["I4"]
       },
       {
@@ -994,29 +975,20 @@ const game = {
       },
       {
         color: "gray",
-        towns: [
-          {
+        towns: [{
             angle: -30,
             percent: 0.57735,
-            rotation: 60,
+            rotation: -120,
             name: {
               name: "Yawatahama"
             }
-          }
-        ],
-        track: [
-          {
-            type: "sharp",
-            side: 6
-          }
-        ],
-        values: [
-          {
+          }],
+        track: [{type: "sharp", side: 6}],
+        values: [{
             value: 20,
             angle: 150,
             percent: 0.2
-          }
-        ],
+          }],
         hexes: ["B3"]
       },
       {
@@ -1128,7 +1100,7 @@ const game = {
       },
       {
         color: "green",
-        water: {cost: 80, angle: 90, percent: 0.8},
+        terrain: [{type:"river", cost: "¥80", angle: 90, percent: 0.75}],
         values: [{
           angle: 150,
           percent: 0.82,

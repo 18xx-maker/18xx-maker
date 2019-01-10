@@ -2735,6 +2735,13 @@ const tiles = {
              name: {reverse: true, name: "Puebla"}}],
     track: [{side:3,type:"gentle"},{side:3,type: "straight"}]
   },
+  "492": {
+    color: "brown",
+    values: [{angle: 210, percent: 0.9, value: 80}],
+    labels: [{label: "H", angle: 335, percent: 0.82}],
+    cities: [{size:3}],
+    track: [{side:1},{side:2},{side:3},{side:4},{side:5},{side:6}]
+  },
   "513": {
     color: "gray",
     cities: [ { size: 3, rotate: 180 } ],
