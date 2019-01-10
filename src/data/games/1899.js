@@ -8,7 +8,8 @@ const game = {
     color_10: "orange",
     titleX: 850,
     titleY: 1150,
-    hexCoords: true
+    hexCoords: true,
+    currency: "CNY"
   },
 
   tokens: [],

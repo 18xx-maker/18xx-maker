@@ -10,7 +10,8 @@ const game = {
     titleY: 900,
     titleX: 25,
     extraTokens: 2,
-    color_5: "water"
+    color_5: "water",
+    currency: "EUR"
   },
 
   tokens: ["Round", "+L.20", "+L.20", "#port", "#port"],

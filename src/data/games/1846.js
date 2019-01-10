@@ -9,7 +9,8 @@ const game = {
     width: 150,
     rotation: 90,
     color_5: "orange",
-    color_10: "brown"
+    color_10: "brown",
+    currency: "USD"
   },
 
   // Extra Tokens

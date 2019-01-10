@@ -11,7 +11,8 @@ const game = {
     titleY: 1440,
     titleSize: 100,
     orientation: "horizontal",
-    hexCoords: true
+    hexCoords: true,
+    currency: "XAU"
   },
 
   // Extra Tokens

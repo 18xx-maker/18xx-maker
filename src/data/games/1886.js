@@ -7,7 +7,8 @@ const game = {
     width: 150,
     titleX: 975,
     titleY: 2125,
-    extraTotalHeight: 100
+    extraTotalHeight: 100,
+    currency: "JPY"
   },
 
   // Extra Tokens

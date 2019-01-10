@@ -9,7 +9,8 @@ const game = {
     orientation: "horizontal",
     titleY: 720,
     titleX: 12,
-    color_10: "orange"
+    color_10: "orange",
+    currency: "GBP"
   },
 
   // Extra Tokens

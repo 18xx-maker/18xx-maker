@@ -8,7 +8,8 @@ const game = {
     width: 150,
     color_10: "orange",
     titleX: 50,
-    hexCoords: true
+    hexCoords: true,
+    currency: "USD"
   },
 
   // Extra Tokens

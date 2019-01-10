@@ -10,7 +10,8 @@ const game = {
     titleRotate: -90,
     extraTokens: 3,
     extraHomeTokens: 1,
-    color_10: "orange"
+    color_10: "orange",
+    currency: "ARS"
   },
 
   // Extra Tokens

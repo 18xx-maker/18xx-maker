@@ -13,7 +13,8 @@ const game = {
     titleSize: 165,
     subTitleSize: 17,
     extraMinors: 0,
-    hexCoords: true
+    hexCoords: true,
+    currency: "EUR"
   },
 
   // Extra Tokens

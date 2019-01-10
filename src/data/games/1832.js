@@ -11,7 +11,8 @@ const game = {
     color_10: "orange",
     titleX: 50,
     hexCoords: true,
-    extraHomeTokens: 6
+    extraHomeTokens: 6,
+    currency: "USD"
   },
 
   // Extra Tokens
@@ -1615,53 +1616,7 @@ const game = {
       },
       {
         color: "gray",
-        track: [
-          {
-            type: "sharp",
-            side: 4
-          },
-        ],
-        icons: [
-          {
-            type: "port",
-            angle: 240,
-            percent: 0.75
-          }
-        ],
-        offBoardRevenue: {
-          angle: 120,
-          percent: 0.3,
-          name: {
-            name: "New Orleans"
-          },
-          rows: 3,
-          revenues: [
-            {
-              color: "yellow",
-              cost: "20"
-            },
-            {
-              color: "brown",
-              cost: "30"
-            },
-            {
-              color: "gray",
-              cost: "50"
-            }
-          ]
-        },
-        cities: [
-          {
-            angle: 300,
-            percent: 0.6,
-            companies: [
-              {
-                label: "GM&O",
-                color: "yellow"
-              }
-            ]
-          },
-        ],
+        track: [{type: "sharp", side: 4}],
         hexes: ["I1"]
       },
       {
@@ -1713,51 +1668,26 @@ const game = {
       },
       {
         color: "gray",
-        track: [
-          {
-            type: "sharp",
-            side: 2
-          },
-          {
-            type: "gentle",
-            side: 2
-          },
-        ],
-        /*cities: [
-          {
-          angle: 150,
-          percent: 1,
-          companies: [
-          {
-          label: "GM&O",
-          color: "black"
-          }
-          ]
-          },
-          ],*/
+        cities: [{companies: [{label: "GM&O", color: "yellow"}],
+                  name: {reverse: true, name: "New Orleans"}}],
+        track: [{side:2},{side:3},{side:4}],
+        icons: [{type: "port", angle: 240, percent: 0.75}],
+        offBoardRevenue: {
+          angle: 90,
+          percent: 0.7,
+          y: -20,
+          rows: 3,
+          revenues: [{color: "yellow", cost: "20"},
+                     {color: "brown", cost: "30"},
+                     {color: "gray", cost: "50"}]
+        },
         hexes: ["J2"]
       },
       {
         color: "plain",
-        icons: [
-          {
-            type: "port",
-            angle: 240,
-            percent: 0.75
-          }
-        ],
-        water: {
-          angle: 0,
-          percent: 0.7,
-          cost: "$80"
-        },
-        centerTowns: [
-          {
-            name: {
-              name: "Pensacola"
-            }
-          }
-        ],
+        icons: [{type: "port", angle: 240, percent: 0.75}],
+        terrain: [{type:"water",percent:0.667,cost:"$80"}],
+        centerTowns: [{name: {name: "Pensacola"}}],
         hexes: ["J4"]
       },
       {

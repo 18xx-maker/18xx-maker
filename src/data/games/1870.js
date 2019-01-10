@@ -10,7 +10,8 @@ const game = {
     titleX: 75,
     titleY: 2000,
     extraTotalHeight: 300,
-    hexCoords: true
+    hexCoords: true,
+    currency: "USD"
   },
 
   // Extra Tokens

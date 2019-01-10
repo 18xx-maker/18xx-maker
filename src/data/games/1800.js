@@ -14,7 +14,8 @@ const game = {
     extraTotalWidth: 210,
     titleSize: 150,
     extraTokens: 2,
-    paginated: false
+    paginated: false,
+    currency: "USD"
   },
 
   // Extra Tokens

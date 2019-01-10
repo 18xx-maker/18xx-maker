@@ -11,7 +11,8 @@ const game = {
     titleRotate: -90,
     titleX: 175,
     titleY: 1550,
-    hexCoords: true
+    hexCoords: true,
+    currency: "MXN"
   },
 
   // Extra Tokens

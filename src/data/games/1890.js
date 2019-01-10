@@ -8,7 +8,8 @@ const game = {
     rotation: 90,
     color_10: "orange",
     titleY: 830,
-    titleX: 148
+    titleX: 148,
+    currency: "JPY"
   },
 
   // Tokens
