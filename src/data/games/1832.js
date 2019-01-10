@@ -5,11 +5,10 @@ const game = {
     subtitle: "The South",
     designer: "W.R. Dixon",
     background: "gray",
-    titleX: 450,
+    titleX: 50,
     titleY: 1500,
     width: 150,
     color_10: "orange",
-    titleX: 50,
     hexCoords: true,
     extraHomeTokens: 6,
     currency: "USD"
@@ -1843,7 +1842,6 @@ const game = {
         hexes: ["N14"]
       },
       {
-        color: "plain",
         color: "offboard",
         cities: [
           {
