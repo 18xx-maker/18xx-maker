@@ -1870,16 +1870,7 @@ const game = {
       },
       {
         color: "plain",
-        cities: [
-          {
-            name: {
-              name: "Orlando"
-            }
-          }
-        ],
-        centerTowns: [
-          { }
-        ],
+        mediumCities: [{name: {name: "Orlando"}}],
         hexes: ["L14"]
       },
       {
