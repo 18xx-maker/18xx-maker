@@ -345,7 +345,7 @@ const game = {
       price: "£200",
       revenue: "£25",
       description:
-      "Not available until the first 6+2 train has been purchased. Closes all other private companies."
+      "Not available until the first 6+3 train has been purchased. Closes all other private companies."
     }
   ],
 
