@@ -1534,6 +1534,31 @@ const tiles = {
     values: [ { angle: 210, percent: 0.8, value: 60 } ],
     track: [ { side: 1 }, { side: 2 }, { side: 3 }, { side: 4 }, { side: 5 }, { side: 6 } ]
   },
+  "190": {
+    color: "green",
+    values: [{angle: -22, percent: 0.9, value: 40}],
+    labels: [{angle: 145, percent: 0.92, label: "A"}],
+    cities: [{angle: 60, percent: 0.55},
+             {angle: 180, percent: 0.55},
+             {angle: 300, percent: 0.55}],
+    track: [{type: "straight", side: 1, cross: "over"},
+            {type: "straight", side: 2, cross: "under"},
+            {type: "straight", side: 3, cross: "under"}]
+  },
+  "191": {
+    color: "brown",
+    values: [{angle: -90, percent: 0.9, value: 60}],
+    labels: {angle: -270, percent: 0.9, label: "A"},
+    cities: [{ size: 4 }],
+    track: [{side: 1}, {side: 2}, {side: 3}, {side: 4}, {side: 5}, {side: 6}]
+  },
+  "193": {
+    color: "brown",
+    values: [{angle: 215, percent: 0.8, value: 40}],
+    labels: [{angle: 270, percent: 0.9, label: "S"}],
+    cities: [{ size: 2 }],
+    track: [{side: 1}, {side: 2}, {side: 3}, {side: 4}]
+  },
   "201": {
     color: "yellow",
     values: [ { angle: 210, percent: 0.75, value: 30 } ],
@@ -1550,347 +1575,87 @@ const tiles = {
   },
   "290": {
     color: "gray",
-    cities: [
-      {
-        size: 3,
-        rotate: 180
-      }
-    ],
-    values: [
-      {
-        angle: 270,
-        percent: 0.88,
-        value: 70
-      }
-    ],
-    labels: {
-      label: "Z",
-      angle: 330,
-      percent: 0.88
-    },
-    track: [
-      {
-        side: 1
-      },
-      {
-        side: 2
-      },
-      {
-        side: 3
-      },
-      {
-        side: 4
-      },
-      {
-        side: 5
-      }
-    ]
+    cities: [{size: 3, rotate: 180}],
+    values: [{angle: 270, percent: 0.88, value: 70}],
+    labels: {label: "Z", angle: 330, percent: 0.88},
+    track: [{side: 1}, {side: 2}, {side: 3}, {side: 4}, {side: 5}]
   },
   "291": {
     color: "yellow",
     cities: [{}],
-    labels: {
-      label: "Z",
-      angle: 150,
-      percent: 0.75
-    },
-    values: [
-      {
-        angle: 210,
-        percent: 0.75,
-        value: 40
-      }
-    ],
-    track: [
-      {
-        side: 1
-      },
-      {
-        side: 2
-      }
-    ]
+    labels: {label: "Z", angle: 150, percent: 0.75},
+    values: [{angle: 210, percent: 0.75, value: 40}],
+    track: [{side: 1}, {side: 2}]
   },
   "292": {
     color: "yellow",
     cities: [{}],
-    labels: {
-      label: "Z",
-      angle: 150,
-      percent: 0.75
-    },
-    values: [
-      {
-        angle: 210,
-        percent: 0.75,
-        value: 40
-      }
-    ],
-    track: [
-      {
-        side: 1
-      },
-      {
-        side: 3
-      }
-    ]
+    labels: {label: "Z", angle: 150, percent: 0.75},
+    values: [{angle: 210, percent: 0.75, value: 40}],
+    track: [{side: 1}, {side: 3}]
   },
   "293": {
     color: "yellow",
     cities: [{}],
-    labels: {
-      label: "Z",
-      angle: 150,
-      percent: 0.75
-    },
-    values: [
-      {
-        angle: 210,
-        percent: 0.75,
-        value: 40
-      }
-    ],
-    track: [
-      {
-        side: 1
-      },
-      {
-        side: 4
-      }
-    ]
+    labels: {label: "Z", angle: 150, percent: 0.75},
+    values: [{angle: 210, percent: 0.75, value: 40}],
+    track: [{side: 1}, {side: 4}]
   },
   "294": {
     color: "green",
-    values: [
-      {
-        angle: 210,
-        percent: 0.75,
-        value: 50
-      }
-    ],
-    labels: {
-      label: "Z",
-      angle: 150,
-      percent: 0.75
-    },
+    values: [{angle: 210, percent: 0.75, value: 50}],
+    labels: {label: "Z", angle: 150, percent: 0.75},
     cities: [{ size: 2 }],
-    track: [
-      {
-        side: 1
-      },
-      {
-        side: 2
-      },
-      {
-        side: 4
-      },
-      {
-        side: 5
-      }
-    ]
+    track: [{side: 1}, {side: 2}, {side: 4}, {side: 5}]
   },
   "295": {
     color: "green",
-    values: [
-      {
-        angle: 210,
-        percent: 0.75,
-        value: 50
-      }
-    ],
-    labels: {
-      label: "Z",
-      angle: 150,
-      percent: 0.75
-    },
+    values: [{angle: 210, percent: 0.75, value: 50}],
+    labels: {label: "Z", angle: 150, percent: 0.75},
     cities: [{ size: 2 }],
-    track: [
-      {
-        side: 1
-      },
-      {
-        side: 2
-      },
-      {
-        side: 3
-      },
-      {
-        side: 4
-      }
-    ]
+    track: [{side: 1}, {side: 2}, {side: 3}, {side: 4}]
   },
   "296": {
     color: "green",
-    values: [
-      {
-        angle: 210,
-        percent: 0.75,
-        value: 50
-      }
-    ],
-    labels: {
-      label: "Z",
-      angle: 150,
-      percent: 0.75
-    },
+    values: [{angle: 210, percent: 0.75, value: 50}],
+    labels: {label: "Z", angle: 150, percent: 0.75},
     cities: [{ size: 2 }],
-    track: [
-      {
-        side: 1
-      },
-      {
-        side: 3
-      },
-      {
-        side: 4
-      },
-      {
-        side: 5
-      }
-    ]
+    track: [{side: 1}, {side: 3}, {side: 4}, {side: 5}]
   },
   "297": {
     color: "brown",
-    values: [
-      {
-        angle: 210,
-        percent: 0.9,
-        value: 60
-      }
-    ],
-    labels: {
-      label: "Z",
-      angle: 150,
-      percent: 0.9
-    },
+    values: [{angle: 210, percent: 0.9, value: 60}],
+    labels: {label: "Z", angle: 150, percent: 0.9},
     cities: [{ size: 3, rotate: 180 }],
-    track: [
-      {
-        side: 1
-      },
-      {
-        side: 2
-      },
-      {
-        side: 3
-      },
-      {
-        side: 4
-      },
-      {
-        side: 5
-      }
-    ]
+    track: [{side: 1}, {side: 2}, {side: 3}, {side: 4}, {side: 5}]
   },
   "298": {
     color: "green",
-    labels: {
-      angle: 30,
-      percent: 0.7,
-      label: "Chi"
-    },
-    values: [
-      {
-        angle: -10,
-        percent: 0.7,
-        rotation: -90,
-        value: 40
-      }
-    ],
-    cities: [
-      {
-        angle: -60,
-        percent: 0.75
-      },
-      {
-        angle: -120,
-        percent: 0.75,
-        rotation: -90,
-        companies: [
-          {
-            label: "C&WI",
-            color: "white"
-          }
-        ]
-      },
-      {
-        angle: -180,
-        percent: 0.75
-      },
-      {
-        angle: -240,
-        percent: 0.75
-      }
-    ],
-    track: [
-      {
-        type: "sharp",
-        side: 2
-      },
-      {
-        type: "gentle",
-        side: 2
-      },
-      {
-        type: "straight",
-        side: 2
-      },
-      {
-        type: "gentle",
-        side: 6
-      }
-    ]
+    labels: {angle: 30, percent: 0.7, label: "Chi"},
+    values: [{angle: -10, percent: 0.7, rotation: -90, value: 40}],
+    cities: [{angle: -60, percent: 0.75},
+             {angle: -120, percent: 0.75, rotation: -90,
+              companies: [{label: "C&WI", color: "white"}]},
+             {angle: -180, percent: 0.75},
+             {angle: -240, percent: 0.75}],
+    track: [{type: "sharp", side: 2},
+
+            {type: "gentle", side: 2},
+            {type: "straight", side: 2},
+            {type: "gentle", side: 6}]
   },
   "299": {
     color: "brown",
-    labels: {
-      angle: 30,
-      percent: 0.7,
-      label: "Chi"
-    },
-    values: [
-      {
-        angle: -10,
-        percent: 0.7,
-        rotation: -90,
-        value: 70
-      }
-    ],
-    cities: [
-      {
-        angle: -60,
-        percent: 0.75
-      },
-      {
-        angle: -120,
-        percent: 0.75
-      },
-      {
-        angle: -180,
-        percent: 0.75
-      },
-      {
-        angle: -240,
-        percent: 0.75
-      }
-    ],
-    track: [
-      {
-        type: "sharp",
-        side: 2
-      },
-      {
-        type: "gentle",
-        side: 2
-      },
-      {
-        type: "straight",
-        side: 2
-      },
-      {
-        type: "gentle",
-        side: 6
-      }
-    ]
+    labels: {angle: 30, percent: 0.7, label: "Chi"},
+    values: [{angle: -10, percent: 0.7, rotation: -90, value: 70}],
+    cities: [{angle: -60, percent: 0.75},
+             {angle: -120, percent: 0.75},
+             {angle: -180, percent: 0.75},
+             {angle: -240, percent: 0.75}],
+    track: [{type: "sharp", side: 2},
+            {type: "gentle", side: 2},
+            {type: "straight", side: 2},
+            {type: "gentle", side: 6}]
   },
   "300": {
     color: "gray",
@@ -1972,87 +1737,35 @@ const tiles = {
       }
     ]
   },
+  "611|JC": {
+    color: "brown",
+    values: [{angle: 210, percent: 0.8, value: 40}],
+    labels: [{angle: 154, percent: 0.8, label: "JC"}],
+    cities: [{ size: 2 }],
+    track: [{side: 1}, {side: 2}, {side: 3}, {side: 4}, {side: 5}]
+  },
   "619": {
     color: "green",
-    values: [
-      {
-        angle: 210,
-        percent: 0.8,
-        value: 30
-      }
-    ],
+    values: [{angle: 210, percent: 0.8, value: 30}],
     cities: [{ size: 2 }],
-    track: [
-      {
-        side: 1
-      },
-      {
-        side: 3
-      },
-      {
-        side: 4
-      },
-      {
-        side: 5
-      }
-    ]
+    track: [{side: 1}, {side: 3}, {side: 4}, {side: 5}]
   },
 
   // 1889
   "437": {
     color: "yellow",
-    icons: [
-      {
-        type: "port",
-        angle: 60,
-        percent: 0.73
-      }
-    ],
-    values: [
-      {
-        angle: -120,
-        percent: 0.20,
-        value: 30
-      }
-    ],
-    towns: [
-      {
-        angle: 60,
-        percent: 0.28,
-        rotate: -30
-      }
-    ],
-    track: [
-      {
-        type: "gentle",
-        side: 1
-      }
-    ]
+    icons: [{type: "port", angle: 60, percent: 0.73}],
+    values: [{angle: -120, percent: 0.20, value: 30}],
+    towns: [{angle: 60, percent: 0.28, rotate: -30}],
+    track: [{type: "gentle", side: 1}]
   },
   "438": {
     color: "yellow",
-    values: [
-      {
-        angle: 210,
-        percent: 0.8,
-        value: 40
-      }
-    ],
-    labels: [
-      {
-        label: "H",
-        angle: 330,
-        percent: 0.75
-      }
-    ],
+    values: [{angle: 210, percent: 0.8, value: 40}],
+    labels: [{label: "H", angle: 330, percent: 0.75}],
     cities: [{}],
-    mountain: {
-      angle: 150,
-      percent: 0.8,
-      cost: "80",
-      size: "tiny",
-      border: true
-    },
+    mountain: {angle: 150, percent: 0.8, cost: "80",
+               size: "tiny", border: true},
     track: [{ side: 1 }, { side: 3 }]
   },
   "205": {

@@ -10,7 +10,8 @@ const game = {
     titleX: 280,
     titleY: 860,
     color_5: "cyan",
-    color_10: "blue"
+    color_10: "blue",
+    currency: "JPY"
   },
 
   tokens: ["Round"],
