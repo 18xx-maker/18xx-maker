@@ -2,6 +2,7 @@ import React from "react";
 import * as R from "ramda";
 import { paper } from "./data";
 
+import tileDefs from "./data/tiles";
 import util from "./util";
 import Tile from "./Tile";
 import Svg from "./Svg";
@@ -10,6 +11,8 @@ import games from "./data/games";
 
 const HEX_RATIO = 0.57735;
 const RATIO = 1.0;
+
+const tileColors = ["yellow", "green", "brown", "gray"];
 
 const TileSheet = ({ match }) => {
   let game = games[match.params.game];
@@ -20,6 +23,7 @@ const TileSheet = ({ match }) => {
   let perRow = Math.floor(paper.width / (tileWidth + 12.5));
   let ids = R.sortWith(
     [
+      R.ascend(id => tileColors.indexOf((tileDefs[id] || tileDefs[id.split("|")[0]] || {color:"other"}).color)),
       R.ascend(id => Number(id.split("|")[0] || 0)),
       R.ascend(id => Number(id.split("|")[1] || 0))
     ],
