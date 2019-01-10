@@ -38,6 +38,7 @@ const atoms = [{
 },{
   group: "Icons",
   examples: [{icons: [{type: "meat"}]},
+             {icons: [{type: "coal"}]},
              {icons: [{type: "steam"}]}]
 },{
   group: "Cities",

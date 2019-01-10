@@ -1008,45 +1008,16 @@ const game = {
       },
       {
         color: "gray",
-        track: [
-          {
-            side: 1
-          },
-          {
-            side: 4
-          },
-          {
-            side: 5
-          },
-          {
-            side: 6
-          }
-        ],
+        track: [{side: 1}, {side: 4}, {side: 5}, {side: 6}],
         offBoardRevenue: {
           angle: 180,
           percent: 0.4,
-          name: {
-            name: "W. Va. Coalfields"
-          },
-          revenues: [
-            {
-              color: "yellow",
-              cost: "40"
-            },
-            {
-              color: "brown",
-              cost: "50"
-            }
-          ]
+          name: {name: "W. Va. Coalfields"},
+          revenues: [{color: "yellow", cost: "40"},
+                     {color: "brown", cost: "50"}]
         },
-        mountain: {
-          angle: 0,
-          percent: 0.8,
-          cost: "$80"
-        },
-        centerTowns: [
-          { }
-        ],
+        icons: [{type: "coal", percent: 0.8}],
+        centerTowns: [{ }],
         hexes: ["B14"]
       },
       {

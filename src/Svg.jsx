@@ -45,6 +45,24 @@ const Svg = ({ className, width, height, viewBox, style, defs, children }) => {
             strokeLinejoin="round"
           />
         </g>
+        <g id="coal">
+          <path
+            d="M -7 7 L 4 -4"
+            fill={colors["track"]}
+            stroke={colors["track"]}
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M -5 -9 Q 12 -12, 9 5 Q 8 -8, -5 -9"
+            fill={colors["track"]}
+            stroke={colors["track"]}
+            strokeWidth="1"
+            strokeLinecap="miter"
+            strokeLinejoin="miter"
+          />
+        </g>
         <g id="port">
           <path
             d="M 0 -6 L 0 8"
