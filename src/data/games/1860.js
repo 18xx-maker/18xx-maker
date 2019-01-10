@@ -345,7 +345,7 @@ const game = {
       price: "£200",
       revenue: "£25",
       description:
-        "Not available until the first 6+2 train has been purchased. Closes all other private companies."
+      "Not available until the first 6+2 train has been purchased. Closes all other private companies."
     }
   ],
 
@@ -387,7 +387,7 @@ const game = {
       rust: "3+2",
       tiles: "brown",
       notes:
-        "Fishbourne private available; Purchase of Fishbourne closes shipping companies."
+      "Fishbourne private available; Purchase of Fishbourne closes shipping companies."
     },
     {
       phase: "7",
@@ -405,7 +405,7 @@ const game = {
       rust: "5+3",
       tiles: "brown",
       notes:
-        "Selling doesn’t reduce share price; no limit on certificates per player."
+      "Selling doesn’t reduce share price; no limit on certificates per player."
     },
     {
       phase: "9",
@@ -414,7 +414,7 @@ const game = {
       number: "6+",
       tiles: "brown",
       notes:
-        "Southern Railway forms; no more track or base building after the next SR."
+      "Southern Railway forms; no more track or base building after the next SR."
     }
   ],
 
@@ -425,12 +425,12 @@ const game = {
         {
           color: "orange",
           note:
-            "If a company does not have a train, shares in that company are sold at HALF the current market price (round fractions down)"
+          "If a company does not have a train, shares in that company are sold at HALF the current market price (round fractions down)"
         },
         {
           color: "brown",
           note:
-            "There may be any number of certificates in the bank pool for any one company"
+          "There may be any number of certificates in the bank pool for any one company"
         },
         {
           color: "red",
@@ -1135,18 +1135,10 @@ const game = {
         },
         {
           color: "plain",
-          centerTowns: [
-            {
-              name: { name: "Wooton" },
-              angle: 90,
-              percent: 0.5
-            },
-            {
-              name: { name: "Havenstreet", reverse: true },
-              angle: 270,
-              percent: 0.5
-            }
-          ],
+          centerTowns: [{name: { name: "Wooton" },
+                         angle: 90, percent: 0.4},
+                        {name: { name: "Havenstreet", reverse: true },
+                         angle: 270, percent: 0.4}],
           hexes: ["H4"]
         },
         {
@@ -1229,22 +1221,9 @@ const game = {
         },
         {
           color: "plain",
-          centerTowns: [
-            {
-              name: {
-                name: "St. Helens"
-              },
-              angle: 90,
-              percent: 0.5
-            }
-          ],
-          water: [
-            {
-              angle: 270,
-              percent: 0.5,
-              cost: "£60"
-            }
-          ],
+          centerTowns: [{name: {name: "St. Helens"},
+                         angle: 90, percent: 0.4}],
+          terrain: [{angle: 270, percent: 0.4, cost: "£60"}],
           hexes: ["K5"]
         },
         {
@@ -1314,22 +1293,9 @@ const game = {
         },
         {
           color: "plain",
-          centerTowns: [
-            {
-              name: {
-                name: "Shalcombe"
-              },
-              angle: 90,
-              percent: 0.5
-            }
-          ],
-          mountain: [
-            {
-              angle: 270,
-              percent: 0.5,
-              cost: "£60"
-            }
-          ],
+          centerTowns: [{name: {name: "Shalcombe"},
+                         angle: 90, percent: 0.40}],
+          terrain: [{angle: 270, percent: 0.4, cost: "£60"}],
           hexes: ["C7"]
         },
         {
@@ -1393,18 +1359,10 @@ const game = {
         },
         {
           color: "plain",
-          centerTowns: [
-            {
-              name: { name: "Newchurch" },
-              angle: 90,
-              percent: 0.5
-            },
-            {
-              name: { name: "Alverstone", reverse: true },
-              angle: 270,
-              percent: 0.5
-            }
-          ],
+          centerTowns: [{name: { name: "Newchurch" },
+                         angle: 90, percent: 0.4},
+                        {name: { name: "Alverstone", reverse: true },
+                         angle: 270, percent: 0.4}],
           borders: [
             {
               side: 4,
