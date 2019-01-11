@@ -2,102 +2,27 @@ const tiles = {
   // 1830 Tiles
   "1": {
     color: "yellow",
-    values: [
-      {
-        angle: 150,
-        percent: 0.8,
-        value: 10
-      },
-      {
-        angle: -30,
-        percent: 0.8,
-        value: 10
-      }
-    ],
-    towns: [
-      {
-        x: -129.90375,
-        y: 75,
-        rotate: -45,
-        angle: 225,
-        percent: 1.73
-      },
-      {
-        x: 129.90375,
-        y: -75,
-        rotate: -45,
-        angle: 45,
-        percent: 1.73
-      }
-    ],
-    track: [
-      {
-        type: "gentle",
-        side: 1
-      },
-      {
-        type: "gentle",
-        side: 4
-      }
-    ]
+    values: [{angle: 150, percent: 0.8, value: 10},
+             {angle: -30, percent: 0.8, value: 10}],
+    towns: [{x: -129.90375, y: 75, rotate: -45, angle: 225, percent: 1.73},
+            {x: 129.90375, y: -75, rotate: -45, angle: 45, percent: 1.73}],
+    track: [{type: "gentle", side: 1},
+            {type: "gentle", side: 4}]
   },
   "2": {
     color: "yellow",
-    values: [
-      {
-        angle: 215,
-        percent: 0.75,
-        value: 10
-      },
-      {
-        angle: 30,
-        percent: 0.667,
-        value: 10
-      }
-    ],
-    towns: [
-      {
-        angle: 180,
-        percent: 0.66
-      },
-      {
-        rotation: 30,
-        x: -86.6025,
-        angle: -60,
-        percent: 0.57735
-      }
-    ],
-    track: [
-      {
-        type: "straight",
-        side: 1
-      },
-      {
-        type: "sharp",
-        side: 2
-      }
-    ]
+    values: [{angle: 215, percent: 0.75, value: 10},
+             {angle: 30, percent: 0.667, value: 10}],
+    towns: [{angle: 180, percent: 0.66},
+            {rotation: 30, x: -86.6025, angle: -60, percent: 0.57735}],
+    track: [{type: "straight", side: 1},
+            {type: "sharp", side: 2}]
   },
   "3": {
     color: "yellow",
-    values: [
-      {
-        value: 10
-      }
-    ],
-    towns: [
-      {
-        angle: 30,
-        percent: 0.57735,
-        rotation: -60
-      }
-    ],
-    track: [
-      {
-        type: "sharp",
-        side: 1
-      }
-    ]
+    values: [{value: 10}],
+    towns: [{angle: 30, percent: 0.57735, rotation: -60}],
+    track: [{type: "sharp", side: 1}]
   },
   "4": {
     color: "yellow",
@@ -699,265 +624,79 @@ const tiles = {
   },
   "53": {
     color: "green",
-    values: [
-      {
-        angle: 210,
-        percent: 0.8,
-        value: 50
-      }
-    ],
-    labels: [
-      {
-        label: "B",
-        angle: 150,
-        percent: 0.8
-      }
-    ],
+    values: [{angle: 210, percent: 0.8, value: 50}],
+    labels: [{label: "B", angle: 150, percent: 0.8}],
     cities: [{ size: 1 }],
-    track: [
-      {
-        side: 1
-      },
-      {
-        side: 3
-      },
-      {
-        side: 5
-      }
-    ]
+    track: [{side: 1}, {side: 3}, {side: 5}]
+  },
+  "53|BA": {
+    color: "green",
+    values: [{angle: 210, percent: 0.8, value: 50}],
+    names: [{name: "Baltimore", rotate:60, angle: 60, percent: 0.5}],
+    cities: [{ size: 1 }],
+    track: [{side: 1}, {side: 3}, {side: 5}]
   },
   "54": {
     color: "green",
-    values: [
-      {
-        angle: 90,
-        percent: 0.7,
-        value: 60
-      },
-      {
-        angle: -30,
-        percent: 0.7,
-        value: 60
-      }
-    ],
-    labels: {
-      label: "NY",
-      angle: 30,
-      percent: 0.5
-    },
-    cities: [
-      {
-        angle: 150,
-        percent: 0.5
-      },
-      {
-        angle: -90,
-        percent: 0.5
-      }
-    ],
-    track: [
-      {
-        type: "sharp",
-        side: 3
-      },
-      {
-        type: "sharp",
-        side: 5
-      }
-    ]
+    values: [{angle: 90, percent: 0.7, value: 60},
+             {angle: -30, percent: 0.7, value: 60}],
+    labels: {label: "NY", angle: 30, percent: 0.5},
+    cities: [{angle: 150, percent: 0.5},
+             {angle: -90, percent: 0.5}],
+    track: [{type: "sharp", side: 3}, {type: "sharp", side: 5}]
   },
   "55": {
     color: "yellow",
-    values: [
-      {
-        value: 10,
-        angle: 145,
-        percent: 0.75
-      },
-      {
-        value: 10,
-        angle: 95,
-        percent: 0.75
-      }
-    ],
-    towns: [
-      {
-        angle: 180,
-        percent: 0.7
-      },
-      {
-        angle: 60,
-        percent: 0.7,
-        rotation: 60
-      }
-    ],
-    track: [
-      {
-        type: "straight",
-        side: 1,
-        cross: "over"
-      },
-      {
-        type: "straight",
-        side: 2,
-        cross: "under"
-      }
-    ]
+    values: [{value: 10, angle: 145, percent: 0.75},
+             {value: 10, angle: 95, percent: 0.75}],
+    towns: [{angle: 180, percent: 0.7},
+            {angle: 60, percent: 0.7, rotation: 60}],
+    track: [{type: "straight", side: 1, cross: "over"},
+            {type: "straight", side: 2, cross: "under"}]
   },
   "56": {
     color: "yellow",
-    values: [
-      {
-        x: -129.90375,
-        y: 75,
-        angle: 255,
-        percent: 2.2,
-        value: 10
-      },
-      {
-        x: -129.90375,
-        y: -75,
-        angle: 285,
-        percent: 2.2,
-        value: 10
-      }
-    ],
-    towns: [
-      {
-        x: -129.90375,
-        y: 75,
-        rotate: -15,
-        angle: 255,
-        percent: 1.7216875
-      },
-      {
-        x: -129.90375,
-        y: -75,
-        rotate: 15,
-        angle: 285,
-        percent: 1.7216875
-      }
-    ],
-    track: [
-      {
-        type: "gentle",
-        side: 1,
-        cross: "over"
-      },
-      {
-        type: "gentle",
-        side: 2,
-        cross: "under"
-      }
-    ]
+    values: [{x: -129.90375, y: 75, angle: 255, percent: 2.2, value: 10},
+             {x: -129.90375, y: -75, angle: 285, percent: 2.2, value: 10}],
+    towns: [{x: -129.90375, y: 75, rotate: -15, angle: 255, percent: 1.7216875},
+            {x: -129.90375, y: -75, rotate: 15, angle: 285, percent: 1.7216875}],
+    track: [{type: "gentle", side: 1, cross: "over"},
+            {type: "gentle", side: 2, cross: "under"}]
   },
   "57": {
     color: "yellow",
-    values: [
-      {
-        angle: 210,
-        percent: 0.75,
-        value: 20
-      }
-    ],
+    values: [{angle: 210, percent: 0.75, value: 20}],
     cities: [{}],
-    track: [
-      {
-        type: "straight"
-      }
-    ]
+    track: [{type: "straight"}]
   },
   "58": {
     color: "yellow",
-    values: [
-      {
-        angle: -120,
-        percent: 0.20,
-        value: 10
-      }
-    ],
-    towns: [
-      {
-        angle: 60,
-        percent: 0.28,
-        rotate: -30
-      }
-    ],
-    track: [
-      {
-        type: "gentle",
-        side: 1
-      }
-    ]
+    values: [{angle: -120, percent: 0.20, value: 10}],
+    towns: [{angle: 60, percent: 0.28, rotate: -30}],
+    track: [{type: "gentle", side: 1}]
   },
   "59": {
     color: "green",
-    values: [
-      {
-        angle: 180,
-        percent: 0.7,
-        value: 40
-      },
-      {
-        angle: -60,
-        percent: 0.7,
-        value: 40
-      }
-    ],
-    labels: {
-      angle: 240,
-      percent: 0.5,
-      label: "OO"
-    },
-    cities: [
-      {
-        percent: 0.5
-      },
-      {
-        angle: 120,
-        percent: 0.5
-      }
-    ],
-    track: [
-      {
-        type: "stop",
-        side: 1
-      },
-      {
-        type: "stop",
-        side: 3
-      }
-    ]
+    values: [{angle: 180, percent: 0.7, value: 40},
+             {angle: -60, percent: 0.7, value: 40}],
+    labels: {angle: 240, percent: 0.5, label: "OO"},
+    cities: [{percent: 0.5},
+             {angle: 120, percent: 0.5}],
+    track: [{type: "stop", side: 1}, {type: "stop", side: 3}]
   },
   "61": {
     color: "brown",
-    values: [
-      {
-        angle: 210,
-        percent: 0.8,
-        value: 60
-      }
-    ],
-    labels: {
-      label: "B",
-      angle: 150,
-      percent: 0.8
-    },
+    values: [{angle: 210, percent: 0.8, value: 60}],
+    labels: {label: "B", angle: 150, percent: 0.8},
     cities: [{ size: 1 }],
-    track: [
-      {
-        side: 1
-      },
-      {
-        side: 3
-      },
-      {
-        side: 4
-      },
-      {
-        side: 5
-      }
-    ]
+    track: [{side: 1}, {side: 3}, {side: 4}, {side: 5}]
+  },
+  "61|BA": {
+    color: "brown",
+    values: [{angle: 210, percent: 0.8, value: 60}],
+    names: [{name: "Baltimore", rotate:60, angle: 60, percent: 0.5}],
+    cities: [{ size: 1 }],
+    track: [{side: 1}, {side: 3}, {side: 4}, {side: 5}]
   },
   "62": {
     color: "brown",
@@ -1074,43 +813,12 @@ const tiles = {
   },
   "65": {
     color: "brown",
-    values: [
-      {
-        angle: 60,
-        percent: 0.7,
-        value: 50
-      },
-      {
-        angle: -30,
-        percent: 0.8,
-        value: 50
-      }
-    ],
-    labels: {
-      angle: 195,
-      percent: 0.7,
-      label: "OO"
-    },
-    cities: [
-      {
-        angle: 120,
-        percent: 0.57735
-      },
-      {
-        angle: 270,
-        percent: 0.5
-      }
-    ],
-    track: [
-      {
-        type: "gentle",
-        side: 1
-      },
-      {
-        type: "sharp",
-        side: 5
-      }
-    ]
+    values: [{angle: 60, percent: 0.7, value: 50},
+             {angle: -30, percent: 0.8, value: 50}],
+    labels: {angle: 195, percent: 0.7, label: "OO"},
+    cities: [{angle: 120, percent: 0.57735},
+             {angle: 270, percent: 0.5}],
+    track: [{type: "gentle", side: 1}, {type: "sharp", side: 5}]
   },
   "66": {
     color: "brown",
@@ -1461,6 +1169,19 @@ const tiles = {
       }
     ]
   },
+  "121": {
+    color: "green",
+    values: [{angle: 210, percent: 0.8, value: 50}],
+    labels: [{label: "B", angle: 150, percent: 0.8}],
+    cities: [{size: 2}],
+    track: [{side: 1}, {side: 3}, {side: 5}]
+  },
+  "121|BO": {
+    color: "green",
+    values: [{angle: 210, percent: 0.8, value: 50}],
+    cities: [{ size: 2, name:{name:"Boston",reverse:true,offset:33}}],
+    track: [{side: 1}, {side: 3}, {side: 5}]
+  },
   "141": {
     color: "green",
     centerTowns: [{}],
@@ -1770,81 +1491,29 @@ const tiles = {
   },
   "205": {
     color: "green",
-    values: [
-      {
-        angle: 210,
-        percent: 0.75,
-        value: 30
-      }
-    ],
+    values: [{angle: 210, percent: 0.75, value: 30}],
     cities: [{}],
     track: [{ side: 1 }, { side: 2 }, { side: 4 }]
   },
   "206": {
     color: "green",
-    values: [
-      {
-        angle: 210,
-        percent: 0.75,
-        value: 30
-      }
-    ],
+    values: [{angle: 210, percent: 0.75, value: 30}],
     cities: [{}],
     track: [{ side: 1 }, { side: 6 }, { side: 4 }]
   },
   "439": {
     color: "green",
-    values: [
-      {
-        angle: 210,
-        percent: 0.8,
-        value: 60
-      }
-    ],
-    mountain: {
-      angle: 150,
-      percent: 0.8,
-      cost: "80",
-      size: "tiny",
-      border: true
-    },
-    labels: [
-      {
-        label: "H",
-        angle: 330,
-        percent: 0.75
-      }
-    ],
+    values: [{angle: 210, percent: 0.8, value: 60}],
+    mountain: {angle: 150, percent: 0.8, cost: "80", size: "tiny", border: true},
+    labels: [{label: "H", angle: 330, percent: 0.75}],
     cities: [{ size: 2 }],
     track: [{ side: 1 }, { side: 3 }, { side: 5 }]
   },
   "440": {
     color: "green",
-    values: [
-      {
-        angle: 150,
-        percent: 0.8,
-        value: 40
-      }
-    ],
-    labels: [
-      {
-        label: "T",
-        angle: 330,
-        percent: 0.8
-      }
-    ],
-    cities: [
-      {
-        size: 2,
-        companies: [
-          {
-            label: "KO",
-            color: "pink"
-          }
-        ]
-      }
-    ],
+    values: [{angle: 150, percent: 0.8, value: 40}],
+    labels: [{label: "T", angle: 330, percent: 0.8}],
+    cities: [{size: 2, companies: [{label: "KO", color: "pink"}]}],
     track: [{ side: 1 }, { side: 2 }, { side: 3 }]
   },
   "441": {
@@ -6976,6 +6645,12 @@ const tiles = {
         side: 6
       }
     ]
+  },
+  "997|BO": {
+    color: "brown",
+    values: [{angle: 210, percent: 0.8, value: 60}],
+    cities: [{ size: 2, name:{name:"Boston",reverse:true,offset:33}}],
+    track: [{side: 1}, {side: 3}, {side: 4}, {side: 5}]
   },
   "18340": {
     color: "yellow",
