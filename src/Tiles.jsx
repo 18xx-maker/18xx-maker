@@ -7,7 +7,18 @@ import Tile from "./Tile";
 
 import Svg from "./Svg";
 
+const tileColors = ["yellow", "green", "brown", "gray"];
+
 const Tiles = () => {
+  let ids = R.sortWith(
+    [
+      R.ascend(id => tileColors.indexOf((tiles[id] || tiles[id.split("|")[0]] || {color:"other"}).color)),
+      R.ascend(id => Number(id.split("|")[0] || 0)),
+      R.ascend(id => Number(id.split("|")[1] || 0))
+    ],
+    R.keys(tiles)
+  );
+
   let tileNodes = R.map(id => {
     return (
       <Link to={`/tiles/${id}`}>
@@ -21,7 +32,7 @@ const Tiles = () => {
         </Svg>
       </Link>
     );
-  }, R.keys(tiles));
+  }, ids);
 
   return <div className="tiles">{tileNodes}</div>;
 };
