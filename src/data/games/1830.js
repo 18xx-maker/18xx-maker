@@ -433,32 +433,7 @@ const game = {
   stock: {
     type: "2D",
     par: {
-      values: [
-        {
-          label: 100,
-          width: "2.75in"
-        },
-        {
-          label: 90,
-          width: "2.5in"
-        },
-        {
-          label: 82,
-          width: "2.25in"
-        },
-        {
-          label: 76,
-          width: "2in"
-        },
-        {
-          label: 71,
-          width: "1.75in"
-        },
-        {
-          label: 67,
-          width: "1.5in"
-        }
-      ]
+      values: [100,90,82,76,71,67]
     },
     movement: {
       up: ["Sold out"],
@@ -1172,7 +1147,8 @@ const game = {
             angle: 90,
             percent: 1.35,
             bottom: true,
-            right: 40
+            right: 40,
+            color: "blue"
           }
         ],
         values: [

@@ -1,6 +1,8 @@
 import React from "react";
 import Token from "./Token";
-import * as R from "ramda";
+
+import addIndex from "ramda/es/addIndex";
+import map from "ramda/es/map";
 
 const Rounds = ({ rounds, horizontal }) => {
   let classes = "rounds";
@@ -10,7 +12,7 @@ const Rounds = ({ rounds, horizontal }) => {
 
   let arrow = horizontal ? "right" : "up";
 
-  let items = R.addIndex(R.map)(
+  let items = addIndex(map)(
     (round, index) => (
       <div key={`token-${index}`} className="Token">
         <svg viewBox="-25 -25 50 50" key={round.name}>

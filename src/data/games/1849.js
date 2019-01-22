@@ -190,9 +190,9 @@ const game = {
         224,
         248,
         276,
-        {color:"cyan",label:306},
-        {color:"cyan",label:340},
-        {color:"cyan",label:377}
+        {color:"water",label:306},
+        {color:"water",label:340},
+        {color:"water",label:377}
       ],
       [
         63,
@@ -207,10 +207,10 @@ const game = {
         175,
         195,
         { label: 216, color: "brown" },
-        { label: 240, arrow: "up", arrowColor: "cyan" },
-        {color:"cyan",label:266},
-        {color:"cyan",label:295},
-        {color:"cyan",label:328}
+        { label: 240, arrow: "up", arrowColor: "water" },
+        {color:"water",label:266},
+        {color:"water",label:295},
+        {color:"water",label:328}
       ],
       [
         57,
@@ -225,10 +225,10 @@ const game = {
         159,
         177,
         196,
-        { label: 218, arrow: "up", arrowColor: "cyan" },
-        {color:"cyan",label:242},
-        {color:"cyan",label:269},
-        {color:"cyan",label:298}
+        { label: 218, arrow: "up", arrowColor: "water" },
+        {color:"water",label:242},
+        {color:"water",label:269},
+        {color:"water",label:298}
       ],
       [
         54,

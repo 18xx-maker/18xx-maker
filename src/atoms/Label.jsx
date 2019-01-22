@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "../data";
+import Color from "../data/Color";
 
 const Label = ({ label, size, length }) => {
   let fontSize = label.length > 2 ? 20 : 30;
@@ -18,20 +18,24 @@ const Label = ({ label, size, length }) => {
   }
 
   return (
-    <text
-      fill={colors["track"]}
-      fontFamily="Bitter"
-      fontWeight="bold"
-      fontSize={fontSize}
-      alignmentBaseline="central"
-      textAnchor="middle"
-      textLength={length}
-      lengthAdjust="spacingAndGlyphs"
-      x="0"
-      y="0"
-    >
-      {label}
-    </text>
+    <Color>
+      {c => (
+        <text
+          fill={c("black")}
+          fontFamily="Bitter"
+          fontWeight="bold"
+          fontSize={fontSize}
+          alignmentBaseline="central"
+          textAnchor="middle"
+          textLength={length}
+          lengthAdjust="spacingAndGlyphs"
+          x="0"
+          y="0"
+        >
+          {label}
+        </text>
+      )}
+    </Color>
   );
 };
 

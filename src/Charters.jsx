@@ -28,7 +28,8 @@ const Charters = ({ match }) => {
       }, companies)}
       <div className="PrintNotes">
         Charters are meant to be printed in <b>portait</b> mode
-      </div>
+       </div>
+      <style>{`@media print {@page {size: 8.5in 11in;}}`}</style>
     </div>
   );
 };

@@ -125,6 +125,7 @@ class Cards extends React.Component {
           n => <Number number={n} background={game.info.background} key={`number=${n}`} />,
           numbers
         )}
+        <style>{`@media print {@page {size: 11in 8.5in;}}`}</style>
       </div>
     );
   }

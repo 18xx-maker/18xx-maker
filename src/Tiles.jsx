@@ -6,6 +6,7 @@ import tiles from "./data/tiles";
 import Tile from "./Tile";
 
 import Svg from "./Svg";
+import ColorContext from "./context/ColorContext";
 
 const tileColors = ["yellow", "green", "brown", "gray"];
 
@@ -34,7 +35,11 @@ const Tiles = () => {
     );
   }, ids);
 
-  return <div className="tiles">{tileNodes}</div>;
+  return (
+    <ColorContext.Provider value="tile">
+      <div className="tiles">{tileNodes}</div>
+    </ColorContext.Provider>
+  );
 };
 
 export default Tiles;

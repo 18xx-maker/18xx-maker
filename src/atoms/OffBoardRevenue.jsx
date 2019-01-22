@@ -1,8 +1,9 @@
 import React from "react";
-import { colors } from "../data";
 import * as R from "ramda";
 
 import Name from "./Name";
+
+import Color from "../data/Color";
 
 const splitRevenues = (rows, revenues) => {
   if(!rows || rows < 2 || revenues.length < 2) {
@@ -20,45 +21,57 @@ const makeNode = (x, y, reverse, revenue) => {
   let width = R.max(revenue.cost.length, 2) * LETTER + 5;
 
   let nodes = [
-    <rect
-      width={width}
-      height="20"
-      x={x}
-      y={y - 10}
-      stroke="none"
-      fill={colors[revenue.color]}
-      key={`rect-${revenue.cost}`}
-    />,
-    <text
-      fill={colors[revenue.textColor] || colors["black"]}
-      fontSize="14"
-      alignmentBaseline="central"
-      textAnchor="middle"
-      textLength={length}
-      lengthAdjust="spacingAndGlyphs"
-      x={x + 0.5 * width}
-      y={y - 1}
-      key={`text-${revenue.cost}`}
-    >
-      {revenue.cost}
-    </text>
+    <Color context="map">
+      {c => (
+        <rect
+          width={width}
+          height="20"
+          x={x}
+          y={y - 10}
+          stroke="none"
+          fill={c(revenue.color)}
+          key={`rect-${revenue.cost}`}
+        />
+      )}
+    </Color>,
+    <Color context="map">
+      {c => (
+        <text
+          fill={c(revenue.textColor) || c("black")}
+          fontSize="14"
+          alignmentBaseline="central"
+          textAnchor="middle"
+          textLength={length}
+          lengthAdjust="spacingAndGlyphs"
+          x={x + 0.5 * width}
+          y={y - 1}
+          key={`text-${revenue.cost}`}
+        >
+          {revenue.cost}
+        </text>
+      )}
+    </Color>
   ];
 
   if(revenue.phase) {
     nodes.push([
-      <text
-        fill={colors[revenue.phaseColor] || colors["white"]}
-        fontSize="14"
-        alignmentBaseline="central"
-        textAnchor="middle"
-        textLength={phaseLength}
-        lengthAdjust="spacingAndGlyphs"
-        x={x + 0.5 * width}
-        y={y + (reverse ? -20 : 20)}
-        key={`phase-${revenue.phase}`}
-      >
-        {revenue.phase}
-      </text>
+      <Color context="map">
+        {c => (
+          <text
+            fill={c(revenue.phaseColor) || c("white")}
+            fontSize="14"
+            alignmentBaseline="central"
+            textAnchor="middle"
+            textLength={phaseLength}
+            lengthAdjust="spacingAndGlyphs"
+            x={x + 0.5 * width}
+            y={y + (reverse ? -20 : 20)}
+            key={`phase-${revenue.phase}`}
+          >
+            {revenue.phase}
+          </text>
+        )}
+      </Color>
     ]);
   };
 
@@ -78,14 +91,18 @@ const makeNodes = (y, reverse, revenues) => {
     x = x + getWidth(r);
     return result;
   }, revenues),[
-    <rect key={`rect-border-${y}`}
-          width={totalWidth}
-          height="20"
-          y={y - 10}
-          x={bx}
-          fill="none"
-          strokeWidth="1"
-          stroke={colors["black"]} />
+    <Color context="map">
+      {c => (
+        <rect key={`rect-border-${y}`}
+              width={totalWidth}
+              height="20"
+              y={y - 10}
+              x={bx}
+              fill="none"
+              strokeWidth="1"
+              stroke={c("black")} />
+      )}
+    </Color>
   ]);
 };
 

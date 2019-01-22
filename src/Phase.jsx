@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "./data";
+import Color from "./data/Color";
 import * as R from "ramda";
 
 const formatCell = value => {
@@ -37,15 +37,19 @@ const Phase = ({ phases }) => {
 
   let phaseRows = phases.map(phase => {
     return (
-      <tr key={phase.phase || phase.name}>
-        <td>{phase.phase || phase.name}</td>
-        {includeTrain && <td>{formatCell(phase.train)}</td>}
-        <td>{formatCell(phase.number)}</td>
-        <td>{phase.limit}</td>
-        {!excludeTiles && <td style={{ backgroundColor: colors[phase.tiles] }}>&nbsp;</td>}
-        {!excludeRust && <td>{phase.rust}</td>}
-        <td className="phase__notes">{phase.notes}</td>
-      </tr>
+      <Color>
+        {c => (
+          <tr key={phase.phase || phase.name}>
+            <td>{phase.phase || phase.name}</td>
+            {includeTrain && <td>{formatCell(phase.train)}</td>}
+            <td>{formatCell(phase.number)}</td>
+            <td>{phase.limit}</td>
+            {!excludeTiles && <td style={{ backgroundColor: c(phase.tiles) }}>&nbsp;</td>}
+            {!excludeRust && <td>{phase.rust}</td>}
+            <td className="phase__notes">{phase.notes}</td>
+          </tr>
+        )}
+      </Color>
     );
   });
 
