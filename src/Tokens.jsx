@@ -2,6 +2,7 @@ import React from "react";
 import Token from "./Token";
 import games from "./data/games";
 import * as R from "ramda";
+import ColorContext from "./context/ColorContext";
 
 import Svg from "./Svg";
 
@@ -16,7 +17,7 @@ const Tokens = ({ match }) => {
   }
 
   let extraNormals =
-    (game.info.extraTokens || 3) + (game.info.extraHomeTokens || 0);
+      (game.info.extraTokens || 3) + (game.info.extraHomeTokens || 0);
   let extraMinors = (game.info.extraMinors || 0);
   let tokenCount = R.scan(R.add, 0, R.addIndex(R.chain)((company, index) => {
     return(company.tokens.length + extraNormals + (game.info.extraTokens || 3))
@@ -146,9 +147,12 @@ const Tokens = ({ match }) => {
 
   return (
     <div className="tokens">
-      <Svg width={width} height={height}>
-        {tokens}
-      </Svg>
+      <ColorContext.Provider value="companies">
+        <Svg width={width} height={height}>
+          {tokens}
+        </Svg>
+        <style>{`@media print {@page {size: 8.5in 11in;}}`}</style>
+      </ColorContext.Provider>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import * as R from "ramda";
 import Position from "./Position";
 
 import HexContext from "./context/HexContext";
+import PhaseContext from "./context/PhaseContext";
 
 import Border from "./atoms/Border";
 import Bridge from "./atoms/Bridge";
@@ -61,7 +62,7 @@ const makeBorder = track => {
   );
 };
 
-const HexTile = ({ hex, id, border, transparent }) => {
+const HexTile = ({ hex, id, border, transparent, map }) => {
   if (hex === undefined || hex === null) {
     return null;
   }
@@ -128,7 +129,7 @@ const HexTile = ({ hex, id, border, transparent }) => {
   if(hex.mountain) {
     if(R.is(Array, hex.mountain)) {
       terrainHexes.concat(R.map(m => ({...m,type:"mountain"}),
-                                             hex.mountain));
+                                hex.mountain));
     } else {
       terrainHexes.push({...hex.mountain, type:"mountain"});
     }
@@ -136,7 +137,7 @@ const HexTile = ({ hex, id, border, transparent }) => {
   if(hex.water) {
     if(R.is(Array, hex.water)) {
       terrainHexes = terrainHexes.concat(R.map(m => ({...m,type:"water"}),
-                                             hex.water));
+                                               hex.water));
     } else {
       terrainHexes.push({...hex.water,type:"water"});
     }
@@ -147,8 +148,8 @@ const HexTile = ({ hex, id, border, transparent }) => {
   let divides = <Position data={hex.divides}>{t => <Divide />}</Position>;
 
   let offBoardRevenue = <Position data={hex.offBoardRevenue}>
-                          {r => <OffBoardRevenue {...r} />}
-                        </Position>;
+                            {r => <OffBoardRevenue {...r} />}
+                          </Position>;
 
   let borders = <Position data={hex.borders}>{b => <Border {...b} />}</Position>;
   let values = <Position data={hex.values}>{v => <Value {...v} />}</Position>;
@@ -160,49 +161,51 @@ const HexTile = ({ hex, id, border, transparent }) => {
 
   return (
     <g>
-      <Hex color={hex.color || "plain"} transparent={transparent} />
+      <PhaseContext.Provider value={hex.color || "plain"}>
+        <Hex color={hex.color || "plain"} transparent={transparent} map={map} />
 
-      <HexContext.Consumer>
-        {hx => (
-          <g clipPath="url(#hexClip)" transform={`rotate(${hx.rotation || 0})`}>
-            <g transform={`rotate(-${hx.rotation})`}>
-              {icons}
-              {cityBorders}
-              {mediumCityBorders}
-              {townBorders}
-              {tracks}
-              {values}
-              {cities}
-              {mediumCities}
-              {towns}
-              {centerTownBorders}
-              {centerTowns}
-              {labels}
-              {names}
-              {tokens}
-              {bonus}
-              {offBoardRevenue}
-              {terrain}
-              {divides}
-              {borders}
+        <HexContext.Consumer>
+          {hx => (
+            <g clipPath="url(#hexClip)" transform={`rotate(${hx.rotation || 0})`}>
+              <g transform={`rotate(-${hx.rotation})`}>
+                {icons}
+                {cityBorders}
+                {mediumCityBorders}
+                {townBorders}
+                {tracks}
+                {values}
+                {cities}
+                {mediumCities}
+                {towns}
+                {centerTownBorders}
+                {centerTowns}
+                {labels}
+                {names}
+                {tokens}
+                {bonus}
+                {offBoardRevenue}
+                {terrain}
+                {divides}
+                {borders}
+              </g>
             </g>
-          </g>
-        )}
-      </HexContext.Consumer>
+          )}
+        </HexContext.Consumer>
 
-      {border && <Hex border={true} />}
-      {outsideCityBorders}
+        {border && <Hex border={true} />}
+        {outsideCityBorders}
 
-      {id && <Id id={idBase} extra={idExtra} />}
+        {id && <Id id={idBase} extra={idExtra} />}
 
-      {outsideCities}
-      {offBoardRevenue}
-      {industries}
-      {goods}
-      {companies}
+        {outsideCities}
+        {offBoardRevenue}
+        {industries}
+        {goods}
+        {companies}
 
-      {tunnels}
-      {bridges}
+        {tunnels}
+        {bridges}
+      </PhaseContext.Provider>
     </g>
   );
 };

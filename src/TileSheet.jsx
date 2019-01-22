@@ -8,6 +8,7 @@ import Tile from "./Tile";
 import Svg from "./Svg";
 
 import games from "./data/games";
+import ColorContext from "./context/ColorContext";
 
 const HEX_RATIO = 0.57735;
 const RATIO = 1.0;
@@ -58,12 +59,15 @@ const TileSheet = ({ match }) => {
   );
 
   return (
-    <div className="tileSheet">
-      <div className="PrintNotes">
-        Tiles are meant to be printed in <b>portait</b> mode
+    <ColorContext.Provider value="tile">
+      <div className="tileSheet">
+        <div className="PrintNotes">
+          Tiles are meant to be printed in <b>portait</b> mode
+        </div>
+        {tiles}
+        <style>{`@media print {@page {size: 8.5in 11in;}}`}</style>
       </div>
-      {tiles}
-    </div>
+    </ColorContext.Provider>
   );
 };
 

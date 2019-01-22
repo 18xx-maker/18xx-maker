@@ -1,12 +1,16 @@
 import React from "react";
-import { colors } from "../data";
+import Color from "../data/Color";
 
 import Name from "./Name";
 
 const CenterTown = ({ border, name, color }) => {
   if (border) {
     return (
-      <circle fill={colors["border"]} stroke="none" cx="0" cy="0" r="14" />
+      <Color>
+        {c => (
+          <circle fill={c("border")} stroke="none" cx="0" cy="0" r="14" />
+        )}
+      </Color>
     );
   } else {
     let nameNode = null;
@@ -19,16 +23,22 @@ const CenterTown = ({ border, name, color }) => {
         />
       );
     }
-    return ([
-      <g key="center-town-outline">
-        <circle fill={colors["track"]} stroke="none" cx="0" cy="0" r="12" />
-        {nameNode}
-      </g>,
-      <g key="center-town-fill">
-        <circle fill={colors[color] || colors["track"]} stroke="none" cx="0" cy="0" r="10" />
-        {nameNode}
-      </g>
-    ]);
+    return (
+      <Color context="companies">
+        {c => (
+          <React.Fragment>
+            <g key="center-town-outline">
+              <circle fill={c("centerTown")} stroke="none" cx="0" cy="0" r="12" />
+              {nameNode}
+            </g>
+            <g key="center-town-fill">
+              <circle fill={c(color || "centerTown")} stroke="none" cx="0" cy="0" r="10" />
+              {nameNode}
+            </g>
+          </React.Fragment>
+        )}
+      </Color>
+    );
   }
 };
 
