@@ -30,7 +30,7 @@ const Industry = ({ top, bottom }) => {
             fontSize={12}
             fontFamily="Helvetica, Arial, sans-serif"
             fill={c("pink")}
-            alignmentBaseline="central"
+            dominantBaseline="central"
             textAnchor="middle"
             x="0"
             y="-8"
@@ -42,7 +42,7 @@ const Industry = ({ top, bottom }) => {
             fontSize={12}
             fontFamily="Helvetica, Arial, sans-serif"
             fill={c("pink")}
-            alignmentBaseline="central"
+            dominantBaseline="central"
             textAnchor="middle"
             x="0"
             y="8"

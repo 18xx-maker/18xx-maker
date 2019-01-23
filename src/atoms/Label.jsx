@@ -25,7 +25,7 @@ const Label = ({ label, size, length }) => {
           fontFamily="Bitter"
           fontWeight="bold"
           fontSize={fontSize}
-          alignmentBaseline="central"
+          dominantBaseline="central"
           textAnchor="middle"
           textLength={length}
           lengthAdjust="spacingAndGlyphs"

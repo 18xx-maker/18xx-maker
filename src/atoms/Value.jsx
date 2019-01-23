@@ -24,7 +24,7 @@ const Value = ({ value }) => {
             fontSize={size}
             fontFamily="Helvetica, Arial, sans-serif"
             fill={c("black")}
-            alignmentBaseline="central"
+            dominantBaseline="central"
             textAnchor="middle"
             x="0"
             y="0"

@@ -39,7 +39,7 @@ const makeNode = (x, y, reverse, revenue) => {
         <text
           fill={c(revenue.textColor) || c("black")}
           fontSize="14"
-          alignmentBaseline="central"
+          dominantBaseline="central"
           textAnchor="middle"
           textLength={length}
           lengthAdjust="spacingAndGlyphs"
@@ -60,7 +60,7 @@ const makeNode = (x, y, reverse, revenue) => {
           <text
             fill={c(revenue.phaseColor) || c("white")}
             fontSize="14"
-            alignmentBaseline="central"
+            dominantBaseline="central"
             textAnchor="middle"
             textLength={phaseLength}
             lengthAdjust="spacingAndGlyphs"

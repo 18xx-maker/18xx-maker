@@ -33,7 +33,7 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
                }
                lengthAdjust="spacingAndGlyphs"
                textAnchor="middle"
-               alignmentBaseline="central"
+               dominantBaseline="central"
                x="0"
                y="0"
              >

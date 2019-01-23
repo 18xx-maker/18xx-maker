@@ -21,7 +21,7 @@ const RouteBonus = ({ value }) => {
             fontSize={size}
             fontFamily="Helvetica, Arial, sans-serif"
             fill={c("track")}
-            alignmentBaseline="central"
+            dominantBaseline="central"
             textAnchor="middle"
             x="0"
             y="0"

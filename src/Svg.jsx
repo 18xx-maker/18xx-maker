@@ -112,7 +112,7 @@ const Svg = ({ className, width, height, viewBox, style, defs, children }) => {
               <text
                 fill={c("black")}
                 fontSize="10"
-                alignmentBaseline="hanging"
+                dominantBaseline="hanging"
                 textAnchor="middle"
                 x="0"
                 y="0"
@@ -131,7 +131,7 @@ const Svg = ({ className, width, height, viewBox, style, defs, children }) => {
               <text
                 fill={c("black")}
                 fontSize="14"
-                alignmentBaseline="hanging"
+                dominanteBaseline="hanging"
                 textAnchor="middle"
                 x="0"
                 y="-5"
