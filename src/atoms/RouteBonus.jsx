@@ -12,15 +12,15 @@ const RouteBonus = ({ value }) => {
         <g>
           <polygon
             points={`${-width - 10},0 ${-width},10 ${width},10 ${width+10},0 ${width},-10 ${-width},-10`}
-            fill={c("border")}
-            stroke={c("track")}
+            fill={c("white")}
+            stroke={c("black")}
             strokeWidth="2"
           />
           <text
             fontWeight="bold"
             fontSize={size}
             fontFamily="Helvetica, Arial, sans-serif"
-            fill={c("track")}
+            fill={c("black")}
             dominantBaseline="central"
             textAnchor="middle"
             x="0"
