@@ -25,7 +25,7 @@ const Token = ({
           alignmentBaseline="central"
           strokeWidth="0.5"
           stroke={inverse ? s(c(color)) : "none"}
-          fill={inverse ? c(color) : (c(labelColor) || t(c(color)))}
+          fill={inverse ? c(color) : (labelColor ? c(labelColor) : t(c(color)))}
           textLength={
             label.length > 2
               ? width * 2 - width * 0.4
