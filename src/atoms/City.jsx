@@ -17,7 +17,7 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
       (companies &&
        companies[num] &&
        companies[num].label && (
-         <Color>
+         <Color context="companies">
            {(c,t) => (
              <text
                transform={`rotate(${companies[num].rotate ?  0 : -rotation || 0})`}
@@ -71,7 +71,7 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
           <Color context="companies">
             {c => (
               <circle
-                fill={c(companyColor(0)) || c("city")}
+                fill={c(companyColor(0) || "city")}
                 stroke={c("track")}
                 strokeWidth="2"
                 cx="0"
@@ -116,7 +116,7 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
               />
               <g transform="translate(-25 0)">
                 <circle
-                  fill={c(companyColor(0)) || c("city")}
+                  fill={c(companyColor(0) || "city")}
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
@@ -125,7 +125,7 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
               </g>
               <g transform="translate(25 0)">
                 <circle
-                  fill={c(companyColor(1)) || c("city")}
+                  fill={c(companyColor(1) || "city")}
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
@@ -167,7 +167,7 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
               />
               <g transform="translate(0 -29)">
                 <circle
-                  fill={c(companyColor(0)) || c("city")}
+                  fill={c(companyColor(0) || "city")}
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
@@ -176,7 +176,7 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
               </g>
               <g transform="translate(-25 15)">
                 <circle
-                  fill={c(companyColor(1)) || c("city")}
+                  fill={c(companyColor(1) || "city")}
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
@@ -185,7 +185,7 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
               </g>
               <g transform="translate(25 15)">
                 <circle
-                  fill={c(companyColor(2)) || c("city")}
+                  fill={c(companyColor(2) || "city")}
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
@@ -227,7 +227,7 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
               />
               <g transform="translate(-25 -25)">
                 <circle
-                  fill={c(companyColor(0)) || c("city")}
+                  fill={c(companyColor(0) || "city")}
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
@@ -236,7 +236,7 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
               </g>
               <g transform="translate(25 -25)">
                 <circle
-                  fill={c(companyColor(1)) || c("city")}
+                  fill={c(companyColor(1) || "city")}
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
@@ -245,7 +245,7 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
               </g>
               <g transform="translate(25 25)">
                 <circle
-                  fill={c(companyColor(3)) || c("city")}
+                  fill={c(companyColor(3) || "city")}
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
@@ -254,7 +254,7 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
               </g>
               <g transform="translate(-25 25)">
                 <circle
-                  fill={c(companyColor(2)) || c("city")}
+                  fill={c(companyColor(2) || "city")}
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
