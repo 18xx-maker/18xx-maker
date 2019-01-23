@@ -1,12 +1,16 @@
 import React from "react";
-import { colors } from "../data";
 
+import Color from "../data/Color";
 import Name from "./Name";
 
 const MediumCity = ({ border, name, reverse, color }) => {
   if (border) {
     return (
-      <circle fill={colors["border"]} stroke="none" cx="0" cy="0" r="21" />
+      <Color>
+        {c => (
+          <circle fill={c("border")} stroke="none" cx="0" cy="0" r="21" />
+        )}
+      </Color>
     );
   } else {
     let nameNode = null;
@@ -21,23 +25,27 @@ const MediumCity = ({ border, name, reverse, color }) => {
     }
 
     return (
-      <g>
-        <circle
-          fill={colors["border"]}
-          stroke={colors["track"]}
-          strokeWidth="3"
-          cx="0"
-          cy="0"
-          r="17"
-        />
-        <circle
-          fill={colors[color || "track"]}
-          cx="0"
-          cy="0"
-          r="12"
-        />
-        {nameNode}
-      </g>
+      <Color context="companies">
+        {c => (
+          <g>
+            <circle
+              fill={c("border")}
+              stroke={c("track")}
+              strokeWidth="3"
+              cx="0"
+              cy="0"
+              r="17"
+            />
+            <circle
+              fill={c(color || "track")}
+              cx="0"
+              cy="0"
+              r="12"
+            />
+            {nameNode}
+          </g>
+        )}
+      </Color>
     );
   }
 };

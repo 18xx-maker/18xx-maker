@@ -1,29 +1,36 @@
 import React from "react";
-import { colors } from "../data";
+import Color from "../data/Color";
+import PhaseContext from "../context/PhaseContext";
 
 const Tunnel = ({ cost }) => {
   return (
-    <g>
-      <path
-        d="M -22 13 L 0 -24 L 22 13 Z"
-        fill={colors["mountain"]}
-        stroke={colors["black"]}
-        strokeWidth="2"
-        strokeLinecap="round"
-        x="0"
-        y="0"
-      />
-      <text
-        fill={colors["white"]}
-        fontSize="10"
-        alignmentBaseline="hanging"
-        textAnchor="middle"
-        x="0"
-        y="-5"
-      >
-        {cost}
-      </text>
-    </g>
+    <PhaseContext.Provider value="default">
+      <Color context="map">
+        {(c,t) => (
+          <g>
+            <path
+              d="M -22 13 L 0 -24 L 22 13 Z"
+              fill={c("mountain")}
+              stroke={c("track")}
+              strokeWidth="2"
+              strokeLinecap="round"
+              x="0"
+              y="0"
+            />
+            <text
+              fill={t(c("mountain"))}
+              fontSize="12"
+              alignmentBaseline="hanging"
+              textAnchor="middle"
+              x="0"
+              y="-3"
+            >
+              {cost}
+            </text>
+          </g>
+        )}
+      </Color>
+    </PhaseContext.Provider>
   );
 };
 

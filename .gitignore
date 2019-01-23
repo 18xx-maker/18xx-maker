@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+# print output
+output
+
 # testing
 /coverage
 

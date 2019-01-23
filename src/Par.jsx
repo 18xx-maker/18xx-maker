@@ -1,6 +1,7 @@
 import React from "react";
 import * as R from "ramda";
-import { colors, textColor, market } from "./data";
+import { market } from "./data";
+import Color from "./data/Color";
 
 import "./Par.css";
 
@@ -34,21 +35,25 @@ const ParCell = ({ value, par, legend }) => {
   let height = value.height || par.height || market.par.height;
 
   return (
-    <div
-      className="Par__Cell"
-      style={{
-        width: width,
-        height: height,
-        backgroundColor: colors[color],
-        color: textColor(color),
-        fontFamily: market.par.fontFamily,
-        fontWeight: market.par.fontWeight,
-        fontSize: market.par.fontSize,
-        lineHeight: market.par.fontSize
-      }}
-    >
-      {(value && value.label) || value}
-    </div>
+    <Color context="companies">
+      {(c,t) => (
+        <div
+          className="Par__Cell"
+          style={{
+            width: width,
+            height: height,
+            backgroundColor: c(color),
+            color: t(c(color)),
+            fontFamily: market.par.fontFamily,
+            fontWeight: market.par.fontWeight,
+            fontSize: market.par.fontSize,
+            lineHeight: market.par.fontSize
+          }}
+        >
+          {(value && value.label) || value}
+        </div>
+      )}
+    </Color>
   );
 };
 
@@ -91,10 +96,10 @@ const ParRow = ({ par, legend }) => {
 
 const Par = props => {
   switch (props.par.type) {
-    case "double":
-      return <ParDoubleRow {...props} />;
-    default:
-      return <ParRow {...props} />;
+  case "double":
+    return <ParDoubleRow {...props} />;
+  default:
+    return <ParRow {...props} />;
   }
 };
 

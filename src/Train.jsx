@@ -1,22 +1,28 @@
 import React from "react";
-import { colors, textColor } from "./data";
-import * as R from "ramda";
+
+import Color from "./data/Color";
+
+import addIndex from "ramda/es/addIndex";
+import map from "ramda/es/map";
 
 const Train = ({ train }) => {
   let { name, price, color, info, description, players } = train;
 
-  let notes = R.addIndex(R.map)(
+  let notes = addIndex(map)(
     (i, index) => (
-      <span
-        key={index}
-        className="train__info"
-        style={{
-          backgroundColor: colors[i.color],
-          color: textColor(i.color)
-        }}
-      >
-        {i.note}
-      </span>
+      <Color key={index}>
+        {(c,t) => (
+          <span
+            className="train__info"
+            style={{
+              backgroundColor: c(i.color),
+              color: t(c(i.color))
+            }}
+          >
+            {i.note}
+          </span>
+        )}
+      </Color>
     ),
     info
   );
@@ -35,7 +41,7 @@ const Train = ({ train }) => {
         <div className="train__price">{price}</div>
         <div className="train__description">{description}</div>
         <div className="train__notes">{notes}</div>
-        <div className="train__hr" style={{ backgroundColor: colors[color] }} />
+          <Color>{c => (<div className="train__hr" style={{ backgroundColor: c(color) }} />)}</Color>
         <div className="train__name">{name}</div>
       </div>
     </div>

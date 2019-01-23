@@ -2,6 +2,11 @@
   margin: 0.25in;
 }
 
+html {
+  background-color: #FFFFFF;
+  margin: 0px;  /* this affects the margin on the html before sending to printer */
+}
+
 body {
   margin: 0;
   padding: 0;

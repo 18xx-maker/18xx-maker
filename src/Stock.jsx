@@ -77,6 +77,7 @@ class Stock extends React.Component {
             horizontal={game.stock.type === "2D" ? false : true}
           />
         </div>
+        <style>{`@media print {@page {size: ${stock.orientation === "landscape" ? "11in 8.5in" : "8.5in 11in"};}}`}</style>
       </div>
     );
   }

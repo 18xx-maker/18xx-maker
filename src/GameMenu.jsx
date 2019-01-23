@@ -5,6 +5,7 @@ import games from "./data/games";
 import * as R from "ramda";
 import GameNav from "./GameNav";
 import TileNav from "./TileNav";
+import Themes from "./Themes";
 
 import "./GameMenu.css";
 
@@ -30,6 +31,7 @@ const GameMenu = ({ match, location }) => {
         <NavLink to="/">Home</NavLink>
       </h2>
       <TileNav />
+      <Themes />
       <h2>Games</h2>
       <nav>
         <ul>{gameList}</ul>

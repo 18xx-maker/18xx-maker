@@ -1,11 +1,10 @@
 import React from "react";
-import { colors } from "../data";
+import Color from "../data/Color";
 
 import HexContext from "../context/HexContext";
 
 const Track = ({ type, gauge, border, offset, path }) => {
   let width = border ? 16 : 12;
-  let color = border ? colors["border"] : colors["track"];
 
   switch (type) {
   case "custom":
@@ -78,38 +77,46 @@ const Track = ({ type, gauge, border, offset, path }) => {
   let double = null;
   if (!border && gauge === "double") {
     double = (
-      <path
-        d={path}
-        fill="none"
-        stroke={colors["border"]}
-        strokeLinecap="butt"
-        strokeLinejoin="miter"
-        strokeWidth={width - 4}
-        strokeDasharray={strokeDashArray}
-        strokeDashoffset={strokeDashOffset}
-      />
+      <Color>
+        {c => (
+          <path
+            d={path}
+            fill="none"
+            stroke={c("white")}
+            strokeLinecap="butt"
+            strokeLinejoin="miter"
+            strokeWidth={width - 4}
+            strokeDasharray={strokeDashArray}
+            strokeDashoffset={strokeDashOffset}
+          />
+        )}
+      </Color>
     );
   }
 
   // Track
   return (
-    <HexContext.Consumer>
-      {hx => (
-        <g transform={`rotate(${hx.rotation})`}>
-          <path
-            d={path}
-            fill={type === "offboard" ? color : "none"}
-            stroke={type === "offboard" ? "none" : color}
-            strokeLinecap="butt"
-            strokeLinejoin="miter"
-            strokeWidth={width}
-            strokeDasharray={strokeDashArray}
-            strokeDashoffset={strokeDashOffset}
-          />
-          {double}
-        </g>
+    <Color>
+      {c => (
+        <HexContext.Consumer>
+          {hx => (
+            <g transform={`rotate(${hx.rotation})`}>
+              <path
+                d={path}
+                fill={type === "offboard" ? (c(border ? "border" : "track")) : "none"}
+                stroke={type === "offboard" ? "none" : (c(border ? "border" : "track"))}
+                strokeLinecap="butt"
+                strokeLinejoin="miter"
+                strokeWidth={width}
+                strokeDasharray={strokeDashArray}
+                strokeDashoffset={strokeDashOffset}
+              />
+              {double}
+            </g>
+          )}
+        </HexContext.Consumer>
       )}
-    </HexContext.Consumer>
+    </Color>
   );
 };
 
