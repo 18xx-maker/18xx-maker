@@ -1,6 +1,6 @@
 import React from "react";
 import * as R from "ramda";
-import { colors, textColor } from "./data";
+import Color from "./data/Color";
 import games from "./data/games";
 
 import Pool from "./Pool";
@@ -21,12 +21,16 @@ const generateCells = (rows, cols, color_5, color_10) => {
         color = color_10 || "green";
       }
       return (
-        <td
-          key={`${row}-${col}`}
-          style={{ backgroundColor: colors[color], color: textColor(color) }}
-        >
-          {value}
-        </td>
+        <Color context="companies">
+          {(c,t) => (
+            <td
+              key={`${row}-${col}`}
+              style={{ backgroundColor: c(color), color: t(c(color)) }}
+            >
+              {value}
+            </td>
+          )}
+        </Color>
       );
     }, cols);
 
@@ -60,6 +64,7 @@ const Revenue = ({ match }) => {
         {pools}
         <Players players={game.players} bank={game.bank} capital={game.capital} />
       </div>
+      <style>{`@media print {@page {size: 11in 8.5in;}}`}</style>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "../data";
+import Color from "../data/Color";
 
 const types = {
   cactus: "M 0 0 L 0 -20 M 0 -5 Q -5 -5, -5 -10 M 0 -10 Q 5 -10, 5 -15",
@@ -58,36 +58,40 @@ const Terrain = ({ type, size, cost, color, fontSize }) => {
   }
 
   return (
-    <g>
-      <path
-        transform={`translate(0 -4) scale(${scale})`}
-        d={types[type]}
-        fill="none"
-        stroke={colors["white"]}
-        strokeWidth={width}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        transform={`translate(0 -5) scale(${scale})`}
-        d={types[type]}
-        fill="none"
-        stroke={colors[color]}
-        strokeWidth={width}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <text
-        fill={colors["black"]}
-        fontSize={fontSize}
-        alignmentBaseline="hanging"
-        textAnchor="middle"
-        x="0"
-        y="0"
-      >
-        {cost}
-      </text>
-    </g>
+    <Color context="companies">
+      {c => (
+        <g>
+          <path
+            transform={`translate(0 -4) scale(${scale})`}
+            d={types[type]}
+            fill="none"
+            stroke={c("white")}
+            strokeWidth={width}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            transform={`translate(0 -5) scale(${scale})`}
+            d={types[type]}
+            fill="none"
+            stroke={c(color)}
+            strokeWidth={width}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <text
+            fill={c("black")}
+            fontSize={fontSize}
+            alignmentBaseline="hanging"
+            textAnchor="middle"
+            x="0"
+            y="0"
+          >
+            {cost}
+          </text>
+        </g>
+      )}
+    </Color>
   );
 };
 

@@ -2,7 +2,8 @@ import React from "react";
 import * as R from "ramda";
 import util from "./util";
 import Hex from "./Hex";
-import { coords, colors } from "./data";
+import { coords } from "./data";
+import Color from "./data/Color";
 
 const Map = ({ game, variation }) => {
   variation = variation || 0;
@@ -53,99 +54,103 @@ const Map = ({ game, variation }) => {
   let coordinates = R.concat(
     R.chain(
       x => [
-        <text
-          key={`start-row-${x}`}
-          fill={colors["track"]}
-          fontFamily="Bitter"
-          fontWeight="normal"
-          fontSize="16"
-          alignmentBaseline="central"
-          textAnchor="middle"
-          lengthAdjust="spacingAndGlyphs"
-          x={
-            (game.info.orientation === "horizontal" ? hexY(0, x) : hexX(x, 0)) +
-            50
-          }
-          y={coords === "edge" ?
-             (game.info.orientation !== "horizontal" ?
-              util.topCoord(hexes, x) :
-              util.leftCoord(hexes, x)) :
-             25}
-        >
-          {game.info.orientation === "horizontal" ? util.toAlpha(x) : x}
-        </text>,
-        <text
-          key={`end-row-${x}`}
-          fill={colors["track"]}
-          fontFamily="Bitter"
-          fontWeight="bold"
-          fontSize="16"
-          alignmentBaseline="central"
-          textAnchor="middle"
-          lengthAdjust="spacingAndGlyphs"
-          x={
-            (game.info.orientation === "horizontal" ? hexY(0, x) : hexX(x, 0)) +
-            50
-          }
-          y={coords === "edge" ?
-             (game.info.orientation !== "horizontal" ?
-              util.bottomCoord(hexes, x) :
-              util.rightCoord(hexes, x)) :
-             (totalHeight - 25)}
-        >
-          {game.info.orientation === "horizontal" ? util.toAlpha(x) : x}
-        </text>
+        <Color>{c => (
+          <text
+            key={`start-row-${x}`}
+            fill={c("black")}
+            fontFamily="Bitter"
+            fontWeight="normal"
+            fontSize="16"
+            alignmentBaseline="central"
+            textAnchor="middle"
+            lengthAdjust="spacingAndGlyphs"
+            x={
+              (game.info.orientation === "horizontal" ? hexY(0, x) : hexX(x, 0)) +
+                50
+            }
+            y={coords === "edge" ?
+               (game.info.orientation !== "horizontal" ?
+                util.topCoord(hexes, x) :
+                util.leftCoord(hexes, x)) :
+               25}
+          >
+            {game.info.orientation === "horizontal" ? util.toAlpha(x) : x}
+          </text>)}</Color>,
+        <Color>{c => (
+          <text
+            key={`end-row-${x}`}
+            fill={c("black")}
+            fontFamily="Bitter"
+            fontWeight="bold"
+            fontSize="16"
+            alignmentBaseline="central"
+            textAnchor="middle"
+            lengthAdjust="spacingAndGlyphs"
+            x={
+              (game.info.orientation === "horizontal" ? hexY(0, x) : hexX(x, 0)) +
+                50
+            }
+            y={coords === "edge" ?
+               (game.info.orientation !== "horizontal" ?
+                util.bottomCoord(hexes, x) :
+                util.rightCoord(hexes, x)) :
+               (totalHeight - 25)}
+          >
+            {game.info.orientation === "horizontal" ? util.toAlpha(x) : x}
+          </text>)}</Color>
       ],
       R.range(1, (game.info.orientation === "horizontal" ? maxY : maxX) + 1)
     ),
     R.chain(
       y => [
-        <text
-          key={`start-col-${y}`}
-          fill={colors["track"]}
-          fontFamily="Bitter"
-          fontWeight="bold"
-          fontSize="16"
-          alignmentBaseline="central"
-          textAnchor="middle"
-          lengthAdjust="spacingAndGlyphs"
-          x={coords === "edge" ?
-             (game.info.orientation !== "horizontal" ?
-              util.leftCoord(hexes, y) :
-              util.topCoord(hexes, y)) :
-             25}
-          y={
-            (game.info.orientation !== "horizontal" ?
-             hexY(0, y) :
-             hexX(y, 0)) +
-            50
-          }
-        >
-          {game.info.orientation === "horizontal" ? y : util.toAlpha(y)}
-        </text>,
-        <text
-          key={`end-col-${y}`}
-          fill={colors["track"]}
-          fontFamily="Bitter"
-          fontWeight="bold"
-          fontSize="16"
-          alignmentBaseline="central"
-          textAnchor="middle"
-          lengthAdjust="spacingAndGlyphs"
-          x={coords === "edge" ?
-             (game.info.orientation !== "horizontal" ?
-              util.rightCoord(hexes, y) :
-              util.bottomCoord(hexes, y)) :
-             (totalWidth - 25)}
-          y={
-            (game.info.orientation !== "horizontal" ?
-             hexY(0, y) :
-             hexX(y, 0)) +
-            50
-          }
-        >
-          {game.info.orientation === "horizontal" ? y : util.toAlpha(y)}
-        </text>
+        <Color>{c => (
+          <text
+            key={`start-col-${y}`}
+            fill={c("black")}
+            fontFamily="Bitter"
+            fontWeight="bold"
+            fontSize="16"
+            alignmentBaseline="central"
+            textAnchor="middle"
+            lengthAdjust="spacingAndGlyphs"
+            x={coords === "edge" ?
+               (game.info.orientation !== "horizontal" ?
+                util.leftCoord(hexes, y) :
+                util.topCoord(hexes, y)) :
+               25}
+            y={
+              (game.info.orientation !== "horizontal" ?
+               hexY(0, y) :
+               hexX(y, 0)) +
+                50
+            }
+          >
+            {game.info.orientation === "horizontal" ? y : util.toAlpha(y)}
+          </text>)}</Color>,
+        <Color>{c => (
+          <text
+            key={`end-col-${y}`}
+            fill={c("black")}
+            fontFamily="Bitter"
+            fontWeight="bold"
+            fontSize="16"
+            alignmentBaseline="central"
+            textAnchor="middle"
+            lengthAdjust="spacingAndGlyphs"
+            x={coords === "edge" ?
+               (game.info.orientation !== "horizontal" ?
+                util.rightCoord(hexes, y) :
+                util.bottomCoord(hexes, y)) :
+               (totalWidth - 25)}
+            y={
+              (game.info.orientation !== "horizontal" ?
+               hexY(0, y) :
+               hexX(y, 0)) +
+                50
+            }
+          >
+            {game.info.orientation === "horizontal" ? y : util.toAlpha(y)}
+          </text>)}</Color>
       ],
       R.range(1, (game.info.orientation === "horizontal" ? maxX : maxY) + 1)
     )
@@ -156,7 +161,7 @@ const Map = ({ game, variation }) => {
 
     return R.map(([x, y]) => {
       let translate =
-        game.info.orientation === "horizontal"
+          game.info.orientation === "horizontal"
           ? `translate(${hexY(x, y) + ((coords === "edge" || coords === "outside") ? 50 : 0)} ${hexX(x, y) + ((coords === "edge" || coords === "outside") ? 50 : 0)})`
           : `translate(${hexX(x, y) + ((coords === "edge" || coords === "outside") ? 50 : 0)} ${hexY(x, y) + ((coords === "edge" || coords === "outside") ? 50 : 0)})`;
       let coord = `${util.toAlpha(y)}${x}`;
@@ -165,7 +170,7 @@ const Map = ({ game, variation }) => {
           transform={`${translate}`}
           key={`hex-${resolvedHex.variation}-${coord}`}
         >
-          <Hex hex={resolvedHex} border={true} transparent={game.info.transparent} id={coords === "inside" && coord} />
+          <Hex hex={resolvedHex} border={true} transparent={game.info.transparent} map={true} id={coords === "inside" && coord} />
         </g>
       );
     }, R.map(util.toCoords, hex.hexes || []));

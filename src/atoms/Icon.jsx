@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "../data";
+import Color from "../data/Color";
 
 const Value = ({ type }) => {
   let icon;
@@ -25,17 +25,21 @@ const Value = ({ type }) => {
   }
 
   return (
-    <g>
-      <circle
-        fill={colors["border"]}
-        stroke={colors["track"]}
-        strokeWidth="2"
-        cx="0"
-        cy="0"
-        r="15"
-      />
-      {icon}
-    </g>
+    <Color>
+      {c => (
+        <g>
+          <circle
+            fill={c("white")}
+            stroke={c("black")}
+            strokeWidth="2"
+            cx="0"
+            cy="0"
+            r="15"
+          />
+          {icon}
+        </g>
+      )}
+    </Color>
   );
 };
 

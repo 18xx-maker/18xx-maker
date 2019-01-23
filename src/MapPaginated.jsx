@@ -127,6 +127,7 @@ const MapPaginated = ({ match }) => {
         )}
       </div>
       {mapPages}
+      <style>{`@media print {@page {size: ${map.print === "landscape" ? "11in 8.5in" : "8.5in 11in"};}}`}</style>
     </HexContext.Provider>
   );
 };

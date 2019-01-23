@@ -44,6 +44,9 @@ const MapSingle = ({ match }) => {
     totalHeight = tmp;
   }
 
+  let printWidth = `${(200 + totalWidth) / 100}in`;
+  let printHeight = `${(150 + totalHeight) / 100}in`;
+
   return (
     <HexContext.Provider
       value={{
@@ -71,6 +74,7 @@ const MapSingle = ({ match }) => {
             </ul>
           )}
         </div>
+        <style>{`@media print {@page {size: ${printWidth} ${printHeight};}}`}</style>
       </div>
     </HexContext.Provider>
   );
