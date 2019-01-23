@@ -29,12 +29,11 @@ const CenterTown = ({ border, name, color }) => {
           <React.Fragment>
             <g key="center-town-outline">
               <circle fill={c("centerTown")} stroke="none" cx="0" cy="0" r="12" />
-              {nameNode}
             </g>
             <g key="center-town-fill">
               <circle fill={c(color || "centerTown")} stroke="none" cx="0" cy="0" r="10" />
-              {nameNode}
             </g>
+            {nameNode}
           </React.Fragment>
         )}
       </Color>

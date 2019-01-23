@@ -43,7 +43,7 @@ const Company = ({ label, bottom, left, right, radius, color }) => {
             fontSize={size}
             fontFamily="Helvetica, Arial, sans-serif"
             fill={c("black")}
-            alignmentBaseline={bottom ? "baseline" : "hanging"}
+            dominantBaseline={bottom ? "baseline" : "hanging"}
             textAnchor="middle"
             x="0"
             y={ty}

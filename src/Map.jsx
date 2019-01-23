@@ -61,7 +61,7 @@ const Map = ({ game, variation }) => {
             fontFamily="Bitter"
             fontWeight="normal"
             fontSize="16"
-            alignmentBaseline="central"
+            dominantBaseline="central"
             textAnchor="middle"
             lengthAdjust="spacingAndGlyphs"
             x={
@@ -83,7 +83,7 @@ const Map = ({ game, variation }) => {
             fontFamily="Bitter"
             fontWeight="bold"
             fontSize="16"
-            alignmentBaseline="central"
+            dominantBaseline="central"
             textAnchor="middle"
             lengthAdjust="spacingAndGlyphs"
             x={
@@ -110,7 +110,7 @@ const Map = ({ game, variation }) => {
             fontFamily="Bitter"
             fontWeight="bold"
             fontSize="16"
-            alignmentBaseline="central"
+            dominantBaseline="central"
             textAnchor="middle"
             lengthAdjust="spacingAndGlyphs"
             x={coords === "edge" ?
@@ -134,7 +134,7 @@ const Map = ({ game, variation }) => {
             fontFamily="Bitter"
             fontWeight="bold"
             fontSize="16"
-            alignmentBaseline="central"
+            dominantBaseline="central"
             textAnchor="middle"
             lengthAdjust="spacingAndGlyphs"
             x={coords === "edge" ?

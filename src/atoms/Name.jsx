@@ -4,7 +4,9 @@ const Name = ({ name, color, bgColor, path, rotation, reverse, offset, y, textLe
   let fillColor = color || "black";
 
   let nameNode = path ? (
-    <textPath transform="scale(1.8)" startOffset={`${offset || 50}%`} href={`#${path}`}>
+    <textPath startOffset={`${offset || 50}%`}
+              href={`#${path}`}
+              xlinkHref={`#${path}`}>
       {name}
     </textPath>
   ) : name;
@@ -19,6 +21,7 @@ const Name = ({ name, color, bgColor, path, rotation, reverse, offset, y, textLe
       fontWeight="bold"
       textLength={textLength}
       alignmentBaseline={reverse ? "hanging" : "baseline"}
+      dominantBaseline={path ? null : (reverse ? "hanging" : null)}
       textAnchor="middle"
     >
       {nameNode}

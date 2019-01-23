@@ -27,7 +27,7 @@ const Title = ({ game, variation }) => {
             fontFamily="Bitter"
             fontWeight="bold"
             fontSize={size}
-            alignmentBaseline="hanging"
+            dominantBaseline="hanging"
             textAnchor="start"
             lengthAdjust="spacingAndGlyphs"
             x="0"
@@ -41,7 +41,7 @@ const Title = ({ game, variation }) => {
               fontFamily="Bitter"
               fontWeight="bold"
               fontSize={subSize}
-              alignmentBaseline="hanging"
+              dominantBaseline="hanging"
               textAnchor="start"
               lengthAdjust="spacingAndGlyphs"
               x="0"
@@ -55,7 +55,7 @@ const Title = ({ game, variation }) => {
             fontFamily="Bitter"
             fontWeight="bold"
             fontSize={designerSize}
-            alignmentBaseline="hanging"
+            dominantBaseline="hanging"
             textAnchor="start"
             lengthAdjust="spacingAndGlyphs"
             x="0"

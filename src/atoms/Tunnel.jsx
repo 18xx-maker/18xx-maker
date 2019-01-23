@@ -20,7 +20,7 @@ const Tunnel = ({ cost }) => {
             <text
               fill={t(c("mountain"))}
               fontSize="12"
-              alignmentBaseline="hanging"
+              dominantBaseline="hanging"
               textAnchor="middle"
               x="0"
               y="-3"
