@@ -9,6 +9,8 @@ const game = {
     titleSize: 108,
     subTitleSize: 28,
     extraTokens: 2,
+    titleY:-80,
+    titleX:20,
     width: 150,
     currency: "EUR"
   },

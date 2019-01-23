@@ -9,7 +9,7 @@ const game = {
     orientation: "horizontal",
     color_5: "orange",
     color_10: "brown",
-    titleY: 750,
+    titleY: 700,
     titleX: 170,
     extraTotalWidth: 210,
     titleSize: 150,

@@ -9,8 +9,8 @@ const game = {
     color_10: "brown",
     orientation: "horizontal",
     titleRotate: -90,
-    titleX: 175,
-    titleY: 1550,
+    titleX: 350,
+    titleY: 1400,
     hexCoords: true,
     currency: "MXN"
   },
