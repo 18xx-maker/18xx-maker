@@ -13,7 +13,7 @@ const Title = ({ game, variation }) => {
   }
 
   let x = (game.info.titleX || 0) + 50;
-  let y = (game.info.titleY || 0) + 50;
+  let y = (game.info.titleY || 0) + 220;
   let rotate = (game.info.titleRotate || 0);
 
   return (
@@ -27,7 +27,6 @@ const Title = ({ game, variation }) => {
             fontFamily="Bitter"
             fontWeight="bold"
             fontSize={size}
-            dominantBaseline="hanging"
             textAnchor="start"
             lengthAdjust="spacingAndGlyphs"
             x="0"
@@ -41,11 +40,10 @@ const Title = ({ game, variation }) => {
               fontFamily="Bitter"
               fontWeight="bold"
               fontSize={subSize}
-              dominantBaseline="hanging"
               textAnchor="start"
               lengthAdjust="spacingAndGlyphs"
               x="0"
-              y={size}
+              y={subSize + 10}
             >
               {game.info.subtitle}
             </text>
@@ -55,11 +53,10 @@ const Title = ({ game, variation }) => {
             fontFamily="Bitter"
             fontWeight="bold"
             fontSize={designerSize}
-            dominantBaseline="hanging"
             textAnchor="start"
             lengthAdjust="spacingAndGlyphs"
             x="0"
-            y={size + (game.info.subtitle ? 40 : 0)}
+            y={designerSize + 10 + (game.info.subtitle ? (subSize + 10) : 0)}
           >
             by {game.info.designer}
             {mapName && ` ⋯ ${mapName}`}
