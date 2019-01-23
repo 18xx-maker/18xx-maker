@@ -1,5 +1,3 @@
-import * as tinycolor from "tinycolor2";
-
 // Color Scheme default setting
 const scheme = "gmt";
 
@@ -9,7 +7,6 @@ const paper = {
   height: 1025 // 0.25in top and 0.50in bottom margins
 };
 
-// This can also be "max"
 // equal: evenly divide the item into pages
 // max: make the two end pages even, the others are full
 const pagination = "equal";
@@ -21,8 +18,10 @@ const pagination = "equal";
 // none: No map coordinates
 const coords = "outside";
 
+// What google fonts to load
 const fonts = ["Bitter:700", "Limelight"];
 
+// Stock market font settings
 const market = {
   fontSize: "0.15in",
   fontWeight: "bold",
@@ -41,6 +40,7 @@ const market = {
   }
 };
 
+// What alpha digits to use for coordinates
 const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 export {
