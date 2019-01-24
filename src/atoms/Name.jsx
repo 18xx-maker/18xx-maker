@@ -1,4 +1,5 @@
 import React from "react";
+import Color from "../data/Color";
 
 const Name = ({ name, color, bgColor, path, rotation, reverse, offset, y, textLength, fontSize }) => {
   let fillColor = color || "black";
@@ -19,18 +20,22 @@ const Name = ({ name, color, bgColor, path, rotation, reverse, offset, y, textLe
   }
 
   return (
-    <text
-      dy={y}
-      transform={`rotate(${(rotation || 0) + 360})`}
-      fill={fillColor}
-      fontFamily="Helvetica, Arial, sans-serif"
-      fontSize={fontSize || 11}
-      fontWeight="bold"
-      textLength={textLength}
-      textAnchor="middle"
-    >
-      {nameNode}
-    </text>
+    <Color>
+      {c => (
+        <text
+          dy={y}
+          transform={`rotate(${(rotation || 0) + 360})`}
+          fill={c(fillColor)}
+          fontFamily="Helvetica, Arial, sans-serif"
+          fontSize={fontSize || 11}
+          fontWeight="bold"
+          textLength={textLength}
+          textAnchor="middle"
+        >
+          {nameNode}
+        </text>
+      )}
+    </Color>
   );
 };
 
