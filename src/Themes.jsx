@@ -15,6 +15,7 @@ const Themes = ({scheme, setScheme}) => {
         <option value="dtg">Deep Thought</option>
         <option value="ps18xx">px18xx</option>
         <option value="carth">Carth</option>
+        <option value="kelsin">Kelsin</option>
       </select>
     </div>
   );
