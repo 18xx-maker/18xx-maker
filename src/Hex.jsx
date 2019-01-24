@@ -6,6 +6,7 @@ import Position from "./Position";
 
 import HexContext from "./context/HexContext";
 import PhaseContext from "./context/PhaseContext";
+import ColorContext from "./context/ColorContext";
 
 import Border from "./atoms/Border";
 import Bridge from "./atoms/Bridge";
@@ -181,7 +182,9 @@ const HexTile = ({ hex, id, border, transparent, map }) => {
                 {centerTowns}
                 {labels}
                 {names}
-                {tokens}
+                <ColorContext.Provider value="companies">
+                  {tokens}
+                </ColorContext.Provider>
                 {bonus}
                 {offBoardRevenue}
                 {terrain}
