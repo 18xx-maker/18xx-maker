@@ -21,7 +21,7 @@ const game = {
   },
 
   // Extra Tokens
-  tokens: ["Round", "Merger", "Block", "Block", "Block", "Block", "Block", "Block", "#coal", "#coal", "#coal"],
+  tokens: ["Round", "Merger", "Block", "Block", "Block", "Block", "Block", "Block", "Coal", "Coal", "Coal"],
 
   // Need an IPO sheet
   ipo: false,
@@ -320,11 +320,11 @@ const game = {
   phases: [
     {phase: "Yellow", train: "2", limit: "4", number: "6", tiles: "yellow"},
     {phase: "Green", train: "3", limit: "4", number: "9", tiles: "green", notes: "Private companies may be purchased"},
-    {phase: "Blue", train: "5", limit: "4", number: "4", tiles: "green"},
+    {phase: "Blue", train: "5", limit: "4", rust: "2", number: "4", tiles: "green"},
     {phase: "Brown", train: "3+D", limit: "3", number: "6", tiles: "brown"},
-    {phase: "Red", train: "6", limit: "2", number: "4", tiles: "brown", notes: "Private companies are closed"},
-    {phase: "Gray", train: "8E", limit: "2", number: "3", tiles: "brown"},
-    {phase: "Purple", train: "Diesel", limit: "2", number: "∞", tiles: "brown", notes: "Public companies may not be started"},
+    {phase: "Red", train: "6", limit: "2", rust: "3", number: "4", tiles: "brown", notes: "One less 6T when playing with 3 players. Private companies are closed"},
+    {phase: "Gray", train: "8E", limit: "2", rust: "5", number: "3", tiles: "brown"},
+    {phase: "Purple", train: "Diesel", limit: "2", rust: "3+D", number: "∞", tiles: "brown", notes: "Public companies may not be started"},
   ],
 
   pools: [
