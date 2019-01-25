@@ -3,7 +3,7 @@ import Color from "../data/Color";
 
 import RotateContext from "../context/RotateContext";
 
-const Label = ({ label, size, length }) => {
+const Label = ({ label, size, length, fixed }) => {
   let fontSize = label.length > 2 ? 20 : 30;
   if (label.length > 8) {
     fontSize = 18;
@@ -25,7 +25,7 @@ const Label = ({ label, size, length }) => {
         <Color>
           {c => (
             <text
-              transform={`rotate(-${rotation})`}
+              transform={fixed ? null : `rotate(-${rotation})`}
               fill={c("black")}
               fontFamily="Bitter"
               fontWeight="bold"

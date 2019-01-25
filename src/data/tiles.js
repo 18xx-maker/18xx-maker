@@ -714,6 +714,7 @@ const tiles = {
     ],
     labels: {
       label: "NY",
+      fixed: true,
       rotation: -60
     },
     cities: [
