@@ -32,6 +32,8 @@ import GameMenu from "./GameMenu";
 
 import Footer from "./Footer";
 
+import B18Tiles from "./b18/Tiles";
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
@@ -49,7 +51,6 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          {fontLinks}
           <Switch>
             <Route exact path="/" component={Home} />
 
@@ -76,13 +77,17 @@ class App extends Component {
             <Route path="/:game/tiles" component={TileSheet} />
             <Route path="/:game/manifest" component={TileManifest} />
             <Route path="/:game/tokens" component={Tokens} />
+
+            <Route path="/b18/:game/tiles/:color" component={B18Tiles} />
+            <Route path="/b18/:game/map" component={TileSheet} />
           </Switch>
 
           <Switch>
+            <Route path="/b18/"/>
             <Route path="/tiles" component={GameMenu} />
             <Route path="/:game/" component={GameMenu} />
           </Switch>
-          <Footer />
+          {fontLinks}
         </div>
       </Router>
     );
