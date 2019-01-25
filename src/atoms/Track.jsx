@@ -61,11 +61,28 @@ const Track = ({ type, gauge, border, offset, path }) => {
   // Gauge
   let strokeDashArray = "none";
   let strokeDashOffset = "none";
+  let narrow = null;
   if (!border && gauge === "narrow") {
-    strokeDashArray = `${width}`;
+    strokeDashArray = `${width * 0.75}`;
     if (offset) {
       strokeDashOffset = `${offset}`;
     }
+    narrow = (
+      <Color>
+        {c => (
+          <path
+            d={path}
+            fill="none"
+            stroke={c("white")}
+            strokeLinecap="butt"
+            strokeLinejoin="miter"
+            strokeWidth={width - 4}
+            strokeDasharray={strokeDashArray}
+            strokeDashoffset={strokeDashOffset}
+          />
+        )}
+      </Color>
+    );
   }
 
   // Line Gauge
@@ -86,8 +103,6 @@ const Track = ({ type, gauge, border, offset, path }) => {
             strokeLinecap="butt"
             strokeLinejoin="miter"
             strokeWidth={width - 4}
-            strokeDasharray={strokeDashArray}
-            strokeDashoffset={strokeDashOffset}
           />
         )}
       </Color>
@@ -108,9 +123,8 @@ const Track = ({ type, gauge, border, offset, path }) => {
                 strokeLinecap="butt"
                 strokeLinejoin="miter"
                 strokeWidth={width}
-                strokeDasharray={strokeDashArray}
-                strokeDashoffset={strokeDashOffset}
               />
+              {narrow}
               {double}
             </g>
           )}
