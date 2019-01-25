@@ -11,7 +11,10 @@ import Rounds from "./Rounds";
 import Par from "./Par";
 import Legend from "./Legend";
 
+import GameContext from "./context/GameContext";
 import "./StockPaginated.css";
+
+const splitPages = data.pagination === "max" ? util.maxPages : util.equalPages;
 
 const StockPaginated = ({ match }) => {
   let game = games[match.params.game];
@@ -24,7 +27,7 @@ const StockPaginated = ({ match }) => {
 
   let totalWidth = 100.0 * (0.26 + cell.width * mutil.width(game.stock.market));
   let totalHeight =
-    100.0 * (0.76 + cell.height * mutil.height(game.stock.market));
+      100.0 * (0.76 + cell.height * mutil.height(game.stock.market));
 
   let pageWidth = data.paper.width - 75;
   let pageHeight = data.paper.height - 75;
@@ -74,9 +77,9 @@ const StockPaginated = ({ match }) => {
                 <Market {...stock} />
                 <div className="StockHelpers">
                   {stock.par &&
-                    stock.par.values && (
-                      <Par par={stock.par} legend={stock.legend || []} />
-                    )}
+                   stock.par.values && (
+                     <Par par={stock.par} legend={stock.legend || []} />
+                   )}
                   <Rounds
                     rounds={game.rounds}
                     horizontal={game.stock.type === "2D" ? false : true}
@@ -95,21 +98,23 @@ const StockPaginated = ({ match }) => {
 
       x = x - width;
       return page;
-    }, util.pages(totalWidth + 25, pageWidth));
+    }, splitPages(totalWidth + 25, pageWidth));
 
     y = y - height;
     return pages;
-  }, util.pages(totalHeight, pageHeight));
+  }, splitPages(totalHeight, pageHeight));
 
   return (
-    <div className="stock">
-      <div className="PrintNotes">
-        Stock Market is meant to be printed in{" "}
-        <b>{stock.orientation || "landscape"}</b> mode
+    <GameContext.Provider value={match.params.game}>
+      <div className="stock">
+        <div className="PrintNotes">
+          Stock Market is meant to be printed in{" "}
+          <b>{stock.orientation || "landscape"}</b> mode
+        </div>
+        {stockPages}
+        <style>{`@media print {@page {size: ${stock.orientation === "landscape" ? "11in 8.5in" : "8.5in 11in"};}}`}</style>
       </div>
-      {stockPages}
-      <style>{`@media print {@page {size: ${stock.orientation === "landscape" ? "11in 8.5in" : "8.5in 11in"};}}`}</style>
-    </div>
+    </GameContext.Provider>
   );
 };
 

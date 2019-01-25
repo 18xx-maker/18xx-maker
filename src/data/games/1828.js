@@ -21,33 +21,310 @@ const game = {
   },
 
   // Extra Tokens
-  tokens: ["Round"],
+  tokens: ["Round", "Merger", "Block", "Block", "Block", "Block", "Block", "Block", "#coal", "#coal", "#coal"],
 
   // Need an IPO sheet
-  ipo: true,
+  ipo: false,
   revenue: false,
 
   players: [
-    {number: 3, capital: "$800"},
-    {number: 4, capital: "$700"},
-    {number: 5, capital: "$640"},
+    {number: 3, certLimit: "∞", capital: "$800"},
+    {number: 4, certLimit: "∞", capital: "$700"},
+    {number: 5, certLimit: "∞", capital: "$640"},
   ],
 
   // Railway Companies
-  companies: [],
+  companies: [{
+    name: "Boston & Maine",
+    abbrev: "B&M",
+    tokens: ["Free", "$100", "$100", "$100"],
+    color: "maroon",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  },{
+    name: "Baltimore & Ohio",
+    abbrev: "B&O",
+    tokens: ["Free", "$100", "$100"],
+    color: "blue",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  },{
+    name: "Chesapeake & Ohio",
+    abbrev: "C&O",
+    tokens: ["Free", "$100", "$100"],
+    color: "cyan",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  },{
+    name: "Canadian Pacific Railway",
+    abbrev: "CPR",
+    tokens: ["Free", "$100", "$100", "$100"],
+    color: "red",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  },{
+    name: "Grand Trunk",
+    abbrev: "GT",
+    tokens: ["Free", "$100", "$100"],
+    color: "orange",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  },{
+    name: "Erie Railroad",
+    abbrev: "ERIE",
+    tokens: ["Free", "$100", "$100"],
+    color: "yellow",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  },{
+    name: "Illinois Central",
+    abbrev: "IC",
+    tokens: ["Free", "$100", "$100", "$100"],
+    color: "darkGreen",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  },{
+    name: "Michigan Central Railroad",
+    abbrev: "MC",
+    tokens: ["Free", "$100", "$100", "$100"],
+    color: "pink",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  },{
+    name: "Missouri Pacific Railraod",
+    abbrev: "MP",
+    tokens: ["Free", "$100", "$100", "$100"],
+    color: "brown",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  },{
+    name: "New York Central",
+    abbrev: "NYC",
+    tokens: ["Free", "$100", "$100"],
+    color: "black",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  },{
+    name: "New York, Chicago & St. Louis Railroad",
+    abbrev: "NKP",
+    tokens: ["Free", "$100", "$100"],
+    color: "gray",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  },{
+    name: "New York, New Haven & Hartford",
+    abbrev: "NYH",
+    tokens: ["Free", "$100", "$100"],
+    color: "natural",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  },{
+    name: "Norfold & Western Railway",
+    abbrev: "NW",
+    tokens: ["Free", "$100", "$100", "$100"],
+    color: "turqoise",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  },{
+    name: "Ontario, Simcoe & Huron",
+    abbrev: "OS&H",
+    tokens: ["Free", "$100", "$100", "$100"],
+    color: "lightGreen",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  },{
+    name: "Pennsylvania Railroad",
+    abbrev: "PRR",
+    tokens: ["Free", "$100", "$100", "$100"],
+    color: "lightPurple",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  },{
+    name: "Wabash Railroad",
+    abbrev: "WAB",
+    tokens: ["Free", "$100", "$100"],
+    color: "purple",
+    shares: [{ quantity: 1,
+               label: "President Share",
+               percent: 20,
+               shares: 2 },
+             { quantity: 8,
+               percent: 10,
+               shares: 1 }]
+  }],
 
-  trains: [],
+  trains: [
+    {
+      name: "2",
+      quantity: 6,
+      price: "$80",
+      color: "train_yellow",
+      info: [
+        {
+          color: "train_blue",
+          note: "Rusted by 5"
+        }
+      ]
+    },
+    {
+      name: "3",
+      quantity: 9,
+      price: "$160",
+      color: "train_green",
+      info: [
+        {
+          color: "brown",
+          note: "Rusted by 6"
+        }
+      ]
+    },
+    {
+      name: "5",
+      quantity: 4,
+      price: "$250",
+      color: "train_blue",
+      info: [
+        {
+          color: "train_gray",
+          note: "Rusted by 8E"
+        }
+      ]
+    },
+    {
+      name: "3+D",
+      quantity: 6,
+      price: "$350",
+      color: "train_brown",
+      info: [
+        {
+          color: "train_purple",
+          note: "Rusted by D"
+        }
+      ]
+    },
+    {
+      name: "6",
+      quantity: 4,
+      price: "$650",
+      color: "train_red",
+      info: [
+        {
+          color: "train_yellow",
+          note: "Permanent"
+        }
+      ]
+    },
+    {
+      name: "8E",
+      quantity: 3,
+      price: "$800",
+      color: "train_gray",
+      info: [
+        {
+          color: "train_yellow",
+          note: "Permanent"
+        }
+      ]
+    },
+    {
+      name: "D",
+      quantity: 6,
+      price: "$900",
+      color: "train_gray",
+      info: [
+        {
+          color: "train_yellow",
+          note: "Permanent"
+        }
+      ]
+    }
+  ],
 
   privates: [],
 
   phases: [
-    {name: "2",      limit: "4", number: "6", tiles: "yellow", },
-    {name: "3",      limit: "4", number: "9", tiles: "green", },
-    {name: "5",      limit: "4", number: "4", tiles: "green", },
-    {name: "3+D",    limit: "3", number: "6", tiles: "brown", },
-    {name: "6",      limit: "2", number: "4", tiles: "brown", },
-    {name: "*E",     limit: "2", number: "3", tiles: "brown", },
-    {name: "Diesel", limit: "2", number: "6", tiles: "brown", },
+    {phase: "Yellow", train: "2", limit: "4", number: "6", tiles: "yellow"},
+    {phase: "Green", train: "3", limit: "4", number: "9", tiles: "green", notes: "Private companies may be purchased"},
+    {phase: "Blue", train: "5", limit: "4", number: "4", tiles: "green"},
+    {phase: "Brown", train: "3+D", limit: "3", number: "6", tiles: "brown"},
+    {phase: "Red", train: "6", limit: "2", number: "4", tiles: "brown", notes: "Private companies are closed"},
+    {phase: "Gray", train: "8E", limit: "2", number: "3", tiles: "brown"},
+    {phase: "Purple", train: "Diesel", limit: "2", number: "∞", tiles: "brown", notes: "Public companies may not be started"},
   ],
 
   pools: [
