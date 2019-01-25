@@ -6,6 +6,7 @@ import Tile from "./Tile";
 import Svg from "./Svg";
 
 import games from "./data/games";
+import ColorContext from "./context/ColorContext";
 
 import "./TileManifest.css";
 
@@ -18,14 +19,14 @@ const getCol = id => {
   }
 
   switch (tile.color) {
-    case "yellow":
-      return 1;
-    case "green":
-      return 2;
-    case "brown":
-      return 3;
-    default:
-      return 4;
+  case "yellow":
+    return 1;
+  case "green":
+    return 2;
+  case "brown":
+    return 3;
+  default:
+    return 4;
   }
 };
 
@@ -70,13 +71,15 @@ const TileManifest = ({ match }) => {
   }, ids);
 
   return (
-    <div className="TileManifest">
-      <div className="TileManifest--Title">{game.info.title} Tile Manifest</div>
-      {tiles}
-      <div className="PrintNotes">
-        Tile Manifest is meant to be printed in <b>portait</b> mode
+    <ColorContext.Provider value="tile">
+      <div className="TileManifest">
+        <div className="TileManifest--Title">{game.info.title} Tile Manifest</div>
+        {tiles}
+        <div className="PrintNotes">
+          Tile Manifest is meant to be printed in <b>portait</b> mode
+        </div>
       </div>
-    </div>
+    </ColorContext.Provider>
   );
 };
 
