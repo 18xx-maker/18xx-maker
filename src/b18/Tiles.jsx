@@ -17,7 +17,7 @@ import RotateContext from "../context/RotateContext";
 
 import "./b18.scss";
 
-const games = require('../data/games');
+import games from "../data/games";
 
 const getTile = id => compose(assoc("id", id), prop(id))(tileDefs);
 
