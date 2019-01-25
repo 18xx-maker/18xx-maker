@@ -4065,28 +4065,10 @@ const tiles = {
   },
   "758": {
     color: "green",
-    labels: [
-      {
-        label: "R",
-        angle: 150,
-        percent: 0.75
-      }
-    ],
-    track: [
-      {
-        side: 1
-      },
-      {
-        side: 2
-      }
-    ],
-    values: [
-      {
-        angle: 210,
-        percent: 0.7,
-        value: 50
-      }
-    ],
+    rotations: [0],
+    labels: [{label: "R", angle: 180, percent: 0.667}],
+    track: [{side: 5}, {side: 6}],
+    values: [{angle: 90, percent: 0.667, value: 50}],
     cities: [{}]
   },
   "759": {
@@ -4107,134 +4089,39 @@ const tiles = {
   },
   "760": {
     color: "green",
-    values: [
-      {
-        value: 40,
-        angle: 210,
-        percent: 0.75
-      },
-      {
-        value: 40,
-        angle: 330,
-        percent: 0.75
-      }
-    ],
-    labels: [
-      {
-        label: "V",
-        angle: 270,
-        percent: 0.667
-      }
-    ],
-    cities: [
-      {
-        angle: 150,
-        percent: 0.5
-      },
-      {
-        angle: 30,
-        percent: 0.5
-      }
-    ],
+    rotations: [0],
+    values: [{value: 40, angle: 210, percent: 0.75},
+             {value: 40, angle: 330, percent: 0.75}],
+    labels: [{label: "V", angle: 270, percent: 0.667}],
+    cities: [{angle: 150, percent: 0.5},
+             {angle: 30, percent: 0.5}],
     track: [{ type: "sharpStopRev", side: 2 }, { type: "sharpStop", side: 3 }]
   },
   "761": {
     color: "green",
-    labels: [
-      {
-        label: "£",
-        angle: 270,
-        percent: 0.333,
-        y: 50,
-        size: 15
-      },
-      {
-        label: "M",
-        angle: 150,
-        percent: 0.8
-      }
-    ],
-    values: [
-      {
-        angle: 210,
-        percent: 0.75,
-        value: 20
-      }
-    ],
-    towns: [
-      {
-        color: "halt",
-        percent: 0.667
-      }
-    ],
+    rotations: [0],
+    labels: [{label: "£", angle: 90, percent: 0.333, y: -50, size: 15},
+             {label: "M", angle: 30, percent: 0.65}],
+    values: [{angle: 330, percent: 0.75, value: 20}],
+    towns: [{color: "halt", angle: 180, percent: 0.667}],
     cities: [{}],
-    track: [
-      {
-        type: "city",
-        side: 1
-      },
-      {
-        type: "city",
-        side: 2
-      },
-      {
-        type: "city",
-        side: 3
-      },
-      {
-        type: "city",
-        side: 4
-      }
-    ]
+    track: [{side: 1}, {side: 4}, {side: 5}, {side: 6}]
   },
   "762": {
     color: "green",
-    values: [
-      {
-        angle: 210,
-        percent: 0.8,
-        value: 20
-      }
-    ],
-    labels: [
-      {
-        label: "B",
-        angle: 150,
-        percent: 0.8
-      }
-    ],
+    values: [{angle: 210, percent: 0.8, value: 20}],
+    labels: [{label: "B", angle: 150, percent: 0.8}],
     cities: [{ size: 1 }],
     track: [{ side: 1 }, { side: 2 }, { side: 3 }, { side: 4 }]
   },
   "763": {
     color: "green",
-    values: [
-      {
-        angle: 150,
-        percent: 0.8,
-        value: 50
-      },
-      {
-        value: 30,
-        angle: -120,
-        percent: 0.7
-      }
-    ],
-    labels: [
-      {
-        label: "N",
-        angle: 90,
-        percent: 0.8
-      }
-    ],
+    rotations: [60],
+    values: [{angle: 150, percent: 0.8, value: 50},
+             {value: 30, angle: -120, percent: 0.7}],
+    labels: [{label: "N", angle: 90, percent: 0.8}],
     cities: [{ angle: 90, percent: 0.20 }, { angle: -60, percent: 0.6 }],
-    track: [
-      { side: 1 },
-      { side: 2 },
-      { side: 3 },
-      { side: 4 },
-      { side: 6, type: "stop" }
-    ]
+    track: [{ side: 1 }, { side: 2 }, { side: 3 }, { side: 4 }, { side: 6, type: "stop" }]
   },
   "764": {
     color: "brown",
@@ -4423,124 +4310,35 @@ const tiles = {
   },
   "773": {
     color: "brown",
-    values: [
-      {
-        angle: 90,
-        percent: 0.825,
-        value: 50
-      },
-      {
-        value: 30,
-        angle: -35,
-        percent: 0.75
-      }
-    ],
-    labels: [
-      {
-        label: "N",
-        angle: 210,
-        percent: 0.8
-      }
-    ],
-    cities: [
-      { rotation: 90, size: 2, angle: 90, percent: 0.2 },
-      { angle: -90, percent: 0.6 }
-    ],
-    track: [
-      { side: 6, type: "mid", rotation: -30 },
-      { side: 1 },
-      { side: 2 },
-      { side: 3 },
-      { side: 4 },
-      { side: 5, type: "sharp" }
-    ]
+    rotations: [60],
+    values: [{angle: 90, percent: 0.825, value: 50},
+             {value: 30, angle: -35, percent: 0.75}],
+    labels: [{label: "N", angle: 210, percent: 0.8}],
+    cities: [{ rotation: 90, size: 2, angle: 90, percent: 0.2 },
+             { angle: -90, percent: 0.6 }],
+    track: [{ side: 6, type: "mid", rotation: -30 },
+            { side: 1 }, { side: 2 }, { side: 3 }, { side: 4 },
+            { side: 5, type: "sharp" }]
   },
   "774": {
     color: "brown",
-    values: [
-      {
-        value: 50,
-        angle: 210,
-        percent: 0.75
-      },
-      {
-        value: 50,
-        angle: 330,
-        percent: 0.75
-      }
-    ],
-    labels: [
-      {
-        label: "V",
-        angle: 270,
-        percent: 0.667
-      }
-    ],
-    cities: [
-      {
-        angle: 150,
-        percent: 0.5
-      },
-      {
-        angle: 30,
-        percent: 0.5
-      }
-    ],
+    rotations: [0],
+    values: [{value: 50, angle: 210, percent: 0.75},
+             {value: 50, angle: 330, percent: 0.75}],
+    labels: [{label: "V", angle: 270, percent: 0.667}],
+    cities: [{angle: 150, percent: 0.5},
+             {angle: 30, percent: 0.5}],
     track: [{ type: "sharpStopRev", side: 2 }, { type: "sharpStop", side: 3 }]
   },
   "775": {
     color: "brown",
-    values: [
-      {
-        angle: 210,
-        percent: 0.8,
-        value: 20
-      },
-      {
-        angle: -30,
-        percent: 0.8,
-        value: 10
-      }
-    ],
-    labels: [
-      {
-        label: "M",
-        angle: 150,
-        percent: 0.8
-      }
-    ],
-    towns: [
-      {
-        percent: 0.667
-      }
-    ],
+    rotations: [0],
+    values: [{angle: 330, percent: 0.75, value: 20},
+             {angle: 213, percent: 0.8, value: 10}],
+    labels: [{label: "M", angle: 30, percent: 0.65}],
+    towns: [{angle: 180, percent: 0.667}],
     cities: [{ size: 2 }],
-    track: [
-      {
-        type: "city",
-        side: 1
-      },
-      {
-        type: "city",
-        side: 2
-      },
-      {
-        type: "city",
-        side: 3
-      },
-      {
-        type: "city",
-        side: 4
-      },
-      {
-        type: "city",
-        side: 5
-      },
-      {
-        type: "city",
-        side: 6
-      }
-    ]
+    track: [{side: 1}, {side: 2}, {side: 3}, {side: 4}, {side: 5}, {side: 6}]
   },
   "776": {
     color: "brown",
@@ -4756,28 +4554,10 @@ const tiles = {
   },
   "786": {
     color: "brown",
-    labels: [
-      {
-        label: "R",
-        angle: 150,
-        percent: 0.75
-      }
-    ],
-    track: [
-      {
-        side: 1
-      },
-      {
-        side: 2
-      }
-    ],
-    values: [
-      {
-        angle: 210,
-        percent: 0.7,
-        value: 60
-      }
-    ],
+    rotations: [0],
+    labels: [{label: "R", angle: 180, percent: 0.667}],
+    track: [{side: 5}, {side: 6}],
+    values: [{angle: 90, percent: 0.667, value: 60}],
     cities: [{}]
   },
   "787": {
