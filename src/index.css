@@ -939,6 +939,10 @@ ul.notes li span {
   display: block;
 }
 
+@page {
+  margin: 0.25in;
+}
+
 @media print {
   .Footer,
   .PrintNotes {
