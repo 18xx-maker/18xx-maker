@@ -13,6 +13,7 @@ import map from "ramda/es/map";
 import prop from "ramda/es/prop";
 import propEq from "ramda/es/propEq";
 
+import ColorContext from "../context/ColorContext";
 import RotateContext from "../context/RotateContext";
 
 import "./b18.scss";
@@ -43,29 +44,32 @@ const Tiles = ({match}) => {
          className={`tile tile-${tile.id}`}>
       {map(rotation => (
         <div className="tile-rotation">
-        <Svg
-          key={`tile-${tile.id}-${rotation}`}
-          style={{width: `${width}px`,
-                  height: `${height}px`}}
-          viewBox={viewBox}>
-          <g transform={`rotate(${rotation})`}>
-            <RotateContext.Provider value={rotation}>
-              <Tile id={tile.id} border={true} />
-            </RotateContext.Provider>
-          </g>
-        </Svg>
+          <Svg
+            key={`tile-${tile.id}-${rotation}`}
+            style={{width: `${width}px`,
+                    height: `${height}px`}}
+            viewBox={viewBox}>
+            <g transform={`rotate(${rotation})`}>
+              <RotateContext.Provider value={rotation}>
+                <Tile id={tile.id} border={true} />
+              </RotateContext.Provider>
+            </g>
+          </Svg>
         </div>
       ), rotations)}
     </div>
   ), tiles);
 
   return (
-    <div className="b18"
-         style={{width: `${totalWidth}px`}}>
-      <div className={`tiles ${color}`}>
-        {tileNodes}
+    <ColorContext.Provider value="tile">
+      <div className="b18"
+           style={{width: `${totalWidth}px`}}>
+        <div className={`tiles ${color}`}>
+          {tileNodes}
+        </div>
       </div>
-    </div>
+      <style>{`@media print {@page {size: ${totalWidth}px 900px;}}`}</style>
+    </ColorContext.Provider>
   );
 };
 

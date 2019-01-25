@@ -78,12 +78,10 @@ class App extends Component {
             <Route path="/:game/manifest" component={TileManifest} />
             <Route path="/:game/tokens" component={Tokens} />
 
-            <Route path="/b18/:game/tiles/:color" component={B18Tiles} />
-            <Route path="/b18/:game/map" component={TileSheet} />
+            <Route path="/:game/b18/tiles/:color" component={B18Tiles} />
           </Switch>
 
           <Switch>
-            <Route path="/b18/"/>
             <Route path="/tiles" component={GameMenu} />
             <Route path="/:game/" component={GameMenu} />
           </Switch>
