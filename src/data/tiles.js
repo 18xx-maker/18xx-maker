@@ -3747,103 +3747,39 @@ const tiles = {
   },
   "741": {
     color: "yellow",
-    labels: [
-      {
-        label: "£",
-        size: 15
-      }
-    ],
-    towns: [
-      {
-        angle: 30,
-        percent: 0.57735,
-        rotation: -60,
-        color: "halt"
-      }
-    ],
+    labels: [{label: "£", angle: 30, percent: 0.1, size: 30}],
+    towns: [{angle: 30, percent: 0.57735, rotation: -60, color: "halt"}],
     track: [{ type: "sharp", side: 1 }]
   },
   "742": {
     color: "yellow",
-    labels: [
-      {
-        angle: -120,
-        percent: 0.2,
-        size: 15,
-        label: "£"
-      }
-    ],
-    towns: [
-      {
-        angle: 60,
-        percent: 0.28,
-        rotate: -30,
-        color: "halt"
-      }
-    ],
-    track: [
-      {
-        type: "gentle",
-        side: 1
-      }
-    ]
+    labels: [{angle: 240, percent: 0.2, size: 30, label: "£"}],
+    towns: [{angle: 60, percent: 0.28, rotate: -30, color: "halt"}],
+    track: [{type: "gentle", side: 1}]
   },
   "743": {
     color: "yellow",
     rotations: [0,60,120],
-    labels: [{angle: 270, percent: 0.333, size: 15, label: "£"}],
+    labels: [{angle: 270, percent: 0.45, size: 30, label: "£"}],
     towns: [{color: "halt"}],
     track: [{ type: "straight", side: 1 }]
   },
   "744": {
     color: "yellow",
     rotations: [0,60,120],
-    labels: [{angle: 270, percent: 0.333, y: -25, size: 15, label: "£"},
-             {angle: 270, percent: 0.333, y: 25, size: 15, label: "£"}],
+    labels: [{angle: 270, percent: 0.45, y: -25, size: 30, label: "£"},
+             {angle: 270, percent: 0.45, y: 25, size: 30, label: "£"}],
     towns: [{percent: 0.333, color: "halt"},
             {angle: 180, percent: 0.333, color: "halt"}],
     track: [{ type: "straight", side: 1 }]
   },
   "745": {
     color: "yellow",
-    labels: [
-      {
-        angle: 150,
-        percent: 0.5,
-        size: 15,
-        label: "£"
-      },
-      {
-        angle: 330,
-        percent: 0.5,
-        size: 15,
-        label: "£"
-      }
-    ],
-    towns: [
-      {
-        x: -129.88125,
-        y: 75,
-        angle: 225,
-        percent: 1.73,
-        rotate: -45,
-        color: "halt"
-      },
-      {
-        x: -129.88125,
-        y: 75,
-        angle: 255,
-        percent: 1.73,
-        rotate: -15,
-        color: "halt"
-      }
-    ],
-    track: [
-      {
-        type: "gentle",
-        side: 1
-      }
-    ]
+    labels: [{angle: 150, percent: 0.5, x: 5, size: 30, label: "£"},
+             {angle: 330, percent: 0.5, x: 5, y: 5, size: 30, label: "£"}],
+    towns: [{x: -129.88125, y: 75, angle: 225, percent: 1.73, rotate: -45, color: "halt"},
+            {x: -129.88125, y: 75, angle: 255, percent: 1.73, rotate: -15, color: "halt"}],
+    track: [{type: "gentle", side: 1}]
   },
   "746": {
     color: "yellow",
@@ -3918,109 +3854,41 @@ const tiles = {
   },
   "750": {
     color: "green",
-    labels: [
-      {
-        label: "£",
-        angle: 180,
-        percent: 0.333,
-        size: 15
-      }
-    ],
+    labels: [{label: "£", angle: 180, percent: 0.45, size: 30}],
     centerTowns: [{ color: "halt" }],
     track: [{ side: 1 }, { side: 2 }, { side: 6 }]
   },
   "751": {
     color: "green",
-    labels: [
-      {
-        label: "£",
-        angle: 90,
-        percent: 0.333,
-        size: 15
-      }
-    ],
+    labels: [{label: "£", angle: 90, percent: 0.45, size: 30}],
     centerTowns: [{ color: "halt" }],
     track: [{ side: 1 }, { side: 4 }, { side: 6 }]
   },
   "752": {
     color: "green",
-    labels: [
-      {
-        label: "£",
-        angle: 270,
-        percent: 0.333,
-        size: 15
-      }
-    ],
+    labels: [{label: "£", angle: 270, percent: 0.45, size: 30}],
     centerTowns: [{ color: "halt" }],
     track: [{ side: 1 }, { side: 4 }, { side: 2 }]
   },
   "753": {
     color: "green",
-    labels: [
-      {
-        label: "£",
-        angle: 180,
-        percent: 0.333,
-        size: 15
-      }
-    ],
+    labels: [{label: "£", angle: 180, percent: 0.45, size: 30}],
     centerTowns: [{ color: "halt" }],
     track: [{ side: 1 }, { side: 3 }, { side: 5 }]
   },
   "754": {
     color: "green",
-    labels: [
-      {
-        label: "£",
-        angle: 90,
-        percent: 0.333,
-        y: -37.5,
-        size: 15
-      }
-    ],
-    values: [
-      {
-        value: 10,
-        angle: 90,
-        percent: 0.5
-      }
-    ],
-    towns: [
-      {
-        color: "halt",
-        angle: 180,
-        percent: 0.5
-      }
-    ],
+    labels: [{label: "£", angle: 90, percent: 0.45, y: -37.5, size: 30}],
+    values: [{value: 10, angle: 90, percent: 0.5}],
+    towns: [{color: "halt", angle: 180, percent: 0.5}],
     centerTowns: [{}],
     track: [{ side: 1 }, { side: 4 }, { side: 6 }]
   },
   "755": {
     color: "green",
-    labels: [
-      {
-        label: "£",
-        angle: 270,
-        percent: 0.333,
-        y: -37.5,
-        size: 15
-      }
-    ],
-    values: [
-      {
-        value: 10,
-        angle: -90,
-        percent: 0.5
-      }
-    ],
-    towns: [
-      {
-        color: "halt",
-        angle: 180,
-        percent: 0.5
-      }
-    ],
+    labels: [{label: "£", angle: 270, percent: 0.45, y: -37.5, size: 30}],
+    values: [{value: 10, angle: -90, percent: 0.5}],
+    towns: [{color: "halt", angle: 180, percent: 0.5}],
     centerTowns: [{}],
     track: [{ side: 1 }, { side: 4 }, { side: 2 }]
   },
@@ -4100,7 +3968,7 @@ const tiles = {
   "761": {
     color: "green",
     rotations: [0],
-    labels: [{label: "£", angle: 90, percent: 0.333, y: -50, size: 15},
+    labels: [{label: "£", angle: 90, percent: 0.45, y: -50, size: 30},
              {label: "M", angle: 30, percent: 0.65}],
     values: [{angle: 330, percent: 0.75, value: 20}],
     towns: [{color: "halt", angle: 180, percent: 0.667}],
@@ -4442,113 +4310,33 @@ const tiles = {
   },
   "782": {
     color: "brown",
-    labels: [
-      {
-        label: "£",
-        angle: 90,
-        percent: 0.333,
-        y: -50,
-        size: 15
-      }
-    ],
-    values: [
-      {
-        angle: 240,
-        percent: 0.5,
-        value: 20
-      }
-    ],
-    towns: [
-      {
-        color: "halt",
-        angle: 180,
-        percent: 0.667
-      }
-    ],
+    labels: [{label: "£", angle: 90, percent: 0.45, y: -50, size: 30}],
+    values: [{angle: 240, percent: 0.5, value: 20}],
+    towns: [{color: "halt", angle: 180, percent: 0.667}],
     centerTowns: [{}],
     track: [{ side: 1 }, { side: 2 }, { side: 3 }, { side: 4 }, { side: 6 }]
   },
   "783": {
     color: "brown",
-    labels: [
-      {
-        label: "£",
-        angle: 90,
-        percent: 0.333,
-        y: -50,
-        size: 15
-      }
-    ],
-    values: [
-      {
-        angle: 60,
-        percent: 0.5,
-        value: 20
-      }
-    ],
-    towns: [
-      {
-        color: "halt",
-        angle: 180,
-        percent: 0.667
-      }
-    ],
+    labels: [{label: "£", angle: 90, percent: 0.45, y: -50, size: 30}],
+    values: [{angle: 60, percent: 0.5, value: 20}],
+    towns: [{color: "halt", angle: 180, percent: 0.667}],
     centerTowns: [{}],
     track: [{ side: 1 }, { side: 3 }, { side: 4 }, { side: 5 }, { side: 6 }]
   },
   "784": {
     color: "brown",
-    labels: [
-      {
-        label: "£",
-        angle: 90,
-        percent: 0.333,
-        y: -50,
-        size: 15
-      }
-    ],
-    values: [
-      {
-        angle: -60,
-        percent: 0.5,
-        value: 20
-      }
-    ],
-    towns: [
-      {
-        color: "halt",
-        angle: 180,
-        percent: 0.667
-      }
-    ],
+    labels: [{label: "£", angle: 90, percent: 0.45, y: -50, size: 30}],
+    values: [{angle: -60, percent: 0.5, value: 20}],
+    towns: [{color: "halt", angle: 180, percent: 0.667}],
     centerTowns: [{}],
     track: [{ side: 1 }, { side: 2 }, { side: 3 }, { side: 4 }, { side: 5 }]
   },
   "785": {
     color: "brown",
-    labels: [
-      {
-        label: "£",
-        angle: 90,
-        percent: 0.333,
-        y: -50,
-        size: 15
-      }
-    ],
-    values: [
-      {
-        angle: 120,
-        percent: 0.5,
-        value: 20
-      }
-    ],
-    towns: [
-      {
-        color: "halt",
-        angle: 180,
-        percent: 0.667
-      }
-    ],
+    labels: [{label: "£", angle: 90, percent: 0.45, y: -50, size: 30}],
+    values: [{angle: 120, percent: 0.5, value: 20}],
+    towns: [{color: "halt", angle: 180, percent: 0.667}],
     centerTowns: [{}],
     track: [{ side: 1 }, { side: 2 }, { side: 4 }, { side: 5 }, { side: 6 }]
   },
@@ -4563,47 +4351,13 @@ const tiles = {
   "787": {
     color: "yellow",
     rotations: [0],
-    labels: [
-      {
-        label: "£",
-        angle: 270,
-        percent: 0.333,
-        y: 50,
-        size: 15
-      },
-      {
-        label: "C",
-        angle: 120,
-        percent: 0.7
-      }
-    ],
-    values: [
-      {
-        angle: 240,
-        percent: 0.7,
-        value: 20
-      },
-      {
-        angle: 300,
-        percent: 0.5,
-        value: 10
-      }
-    ],
-    cities: [
-      {
-        angle: 180,
-        percent: 0.333
-      }
-    ],
-    towns: [
-      {
-        percent: 0.25
-      },
-      {
-        color: "halt",
-        percent: 0.667
-      }
-    ],
+    labels: [{label: "£", angle: 270, percent: 0.333, y: 50, size: 30},
+             {label: "C", angle: 120, percent: 0.7}],
+    values: [{angle: 240, percent: 0.7, value: 20},
+             {angle: 300, percent: 0.5, value: 10}],
+    cities: [{angle: 180, percent: 0.333}],
+    towns: [{percent: 0.25},
+            {color: "halt", percent: 0.667}],
     track: [{ side: 1 }]
   },
   "788": {
@@ -4615,7 +4369,7 @@ const tiles = {
         angle: 270,
         percent: 0.333,
         y: 50,
-        size: 15
+        size: 30
       },
       {
         label: "C",
@@ -4663,7 +4417,7 @@ const tiles = {
         angle: 270,
         percent: 0.333,
         y: 50,
-        size: 15
+        size: 30
       },
       {
         label: "C",
