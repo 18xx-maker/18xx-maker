@@ -1,7 +1,3 @@
-@page {
-  margin: 0.25in;
-}
-
 html {
   background-color: #FFFFFF;
   margin: 0px;  /* this affects the margin on the html before sending to printer */
@@ -955,7 +951,7 @@ ul.notes li span {
     padding-top: 0.25in;
     padding-right: 0.25in;
     padding-left: 0.25in;
-    padding-bottom: 0.5in;
+    padding-bottom: 0.25in;
   }
 
   .Footer {

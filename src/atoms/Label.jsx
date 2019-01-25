@@ -1,6 +1,8 @@
 import React from "react";
 import Color from "../data/Color";
 
+import RotateContext from "../context/RotateContext";
+
 const Label = ({ label, size, length }) => {
   let fontSize = label.length > 2 ? 20 : 30;
   if (label.length > 8) {
@@ -18,24 +20,29 @@ const Label = ({ label, size, length }) => {
   }
 
   return (
-    <Color>
-      {c => (
-        <text
-          fill={c("black")}
-          fontFamily="Bitter"
-          fontWeight="bold"
-          fontSize={fontSize}
-          dominantBaseline="central"
-          textAnchor="middle"
-          textLength={length}
-          lengthAdjust="spacingAndGlyphs"
-          x="0"
-          y="0"
-        >
-          {label}
-        </text>
+    <RotateContext.Consumer>
+      {rotation => (
+        <Color>
+          {c => (
+            <text
+              transform={`rotate(-${rotation})`}
+              fill={c("black")}
+              fontFamily="Bitter"
+              fontWeight="bold"
+              fontSize={fontSize}
+              dominantBaseline="central"
+              textAnchor="middle"
+              textLength={length}
+              lengthAdjust="spacingAndGlyphs"
+              x="0"
+              y="0"
+            >
+              {label}
+            </text>
+          )}
+        </Color>
       )}
-    </Color>
+    </RotateContext.Consumer>
   );
 };
 

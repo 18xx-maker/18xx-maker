@@ -12,6 +12,11 @@ const game = {
     currency: "USD"
   },
 
+  links: {
+    bgg: "https://www.boardgamegeek.com/boardgame/421/1830-railways-robber-barons",
+    rules: "https://boardgamegeek.com/wiki/page/1830_Rules"
+  },
+
   // Extra Tokens
   tokens: ["Round"],
 

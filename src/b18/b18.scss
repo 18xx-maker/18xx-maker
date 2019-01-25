@@ -1,0 +1,37 @@
+.b18 {
+  position: relative;
+  text-align: left;
+  top: -0.25in;
+  left: -0.25in;
+
+  .tiles {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 900px;
+
+    .tile {
+      width: 150px;
+      height: 900px;
+
+      display: flex;
+      flex-direction: column;
+
+      .tile-rotation {
+        width: 150px;
+        height: 150px;
+
+        svg {
+          margin: 0 0 10px 0;
+
+          &:last-child {
+            margin: 0;
+          }
+        }
+      }
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
+}

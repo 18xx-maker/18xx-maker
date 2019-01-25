@@ -2,9 +2,6 @@ const fs = require('fs');
 const puppeteer = require('puppeteer');
 
 let games = [process.argv[2] || "1830"];
-if(games[0] === "all") {
-  games = ["1800","1830","1832","1834","1846","1849","1857","1860","1870","1873","1886","1889","1890","18AL","18EU","18Mex"];
-}
 
 // Create the output folder
 try {
