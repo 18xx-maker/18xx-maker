@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/node": "^7.2.2",
     "accounting": "^0.4.1",
     "node-sass": "^4.11.0",
     "puppeteer": "^1.11.0",
@@ -25,7 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "print": "NODE_ENV=production babel-node --presets @babel/env,@babel/preset-react ./bin/print.js"
+    "print": "node ./bin/print.js"
   },
   "browserslist": [
     ">0.2%",

@@ -21,7 +21,7 @@ const game = {
   },
 
   // Extra Tokens
-  tokens: ["Round", "Merger", "Block", "Block", "Block", "Block", "Block", "Block", "Coal", "Coal", "Coal"],
+  tokens: ["Round", "Merger", "Block", "Block", "Block", "Block", "Block", "Block", "coal", "coal", "coal"],
 
   // Need an IPO sheet
   ipo: false,
