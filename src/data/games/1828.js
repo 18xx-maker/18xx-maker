@@ -8,7 +8,16 @@ const game = {
     color_10: "orange",
     titleY: 1300,
     titleX: 1700,
-    currency: "USD"
+  },
+
+  colors: {
+    train_yellow: "rgb(241, 231, 141)",
+    train_green: "rgb(165,211,167)",
+    train_blue: "rgb(148, 205, 235)",
+    train_brown: "rgb(204, 170, 144)",
+    train_red: "rgb(231, 103, 113)",
+    train_gray: "rgb(180, 180, 180)",
+    train_purple: "rgb(202, 161, 221)"
   },
 
   // Extra Tokens
@@ -21,9 +30,8 @@ const game = {
   players: [
     {number: 3, capital: "$800"},
     {number: 4, capital: "$700"},
-    {number: 5, capital: "$600"},
+    {number: 5, capital: "$640"},
   ],
-
 
   // Railway Companies
   companies: [],
@@ -147,7 +155,7 @@ const game = {
         { label: 58, color: "train_gray", arrow: "down" },
         { label: 61, color: "train_gray",},
         { label: 64, color: "train_gray",},
-        67, 71, 74, 78, 82, 81,
+        67, 71, 74, 78, 82, 91,
         { label: 101, arrow: "up" },
       ],
       [
@@ -169,7 +177,7 @@ const game = {
         { label: 79, arrow: "up" },
       ],
       [
-        { label: 47, color: "train_gray", arrow: "down" },
+        { label: 47, color: "train_gray",},
         { label: 50, color: "train_gray",},
         { label: 52, color: "train_gray",},
         { label: 55, color: "train_gray",},
@@ -189,7 +197,7 @@ const game = {
       ],
       [
         null,
-        { label: 43, color: "train_gray", arrow: "down" },
+        { label: 43, color: "train_gray",},
         { label: 46, color: "train_gray",},
         { label: 48, color: "train_gray",},
         { label: 50, color: "train_gray",},
@@ -206,7 +214,7 @@ const game = {
       ],
       [
         null, null,
-        { label: 40, color: "train_gray", arrow: "down" },
+        { label: 40, color: "train_gray",},
         { label: 42, color: "train_gray",},
         { label: 44, color: "train_gray",},
         { label: 46, color: "train_gray",},
@@ -216,7 +224,67 @@ const game = {
     legend: [],
   },
 
-  tiles: {},
+  tiles: {
+    // Yellow
+    "7": 6,
+    "9": 16,
+    "3": 3,
+    "8": 15,
+    "4": 4,
+    "58": 3,
+    "57": 7,
+    "1": 1,
+    "2": 1,
+    "69": 1,
+    "55": 1,
+    "56": 1,
+
+    // Green
+    "14": 6,
+    "15": 4,
+    "16": 1,
+    "18": 1,
+    "19": 1,
+    "20": 1,
+    "23": 4,
+    "24": 4,
+    "25": 3,
+    "26": 2,
+    "27": 2,
+    "28": 2,
+    "29": 2,
+    "30": 2,
+    "31": 2,
+    "205": 2,
+    "206": 2,
+    "121|BO": 1,
+    "53|BA": 1,
+    "54": 1,
+    "59": 3,
+
+    // Brown
+    "39": 2,
+    "40": 2,
+    "70": 2,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 2,
+    "45": 2,
+    "46": 2,
+    "47": 4,
+    "62": 1,
+    "63": 3,
+    "448": 2,
+    "449": 2,
+    "61|BA": 1,
+    "997|BO": 1,
+    "64": 1,
+    "65": 1,
+    "66": 1,
+    "67": 1,
+    "68": 1
+  },
 
   map: {
     hexes: [
@@ -232,8 +300,6 @@ const game = {
         values: [
           {
             value: 60,
-            angle: 270,
-            percent: 0.10,
           }
         ],
         offBoardTrack: [{side: 4},],
@@ -249,8 +315,7 @@ const game = {
             rotation: 90,
             name: {
               name: "Marquette",
-              reverse: true,
-              rotation: -90,
+              reverse: true
             },
           },
         ],
@@ -558,7 +623,15 @@ const game = {
       },
       {
         color: "plain",
-        companies: [{label: "E&K", angle: 180, percent: 0.60,},],
+        companies: [
+          {
+            label: "E&K",
+            angle: 180,
+            percent: 0.60,
+            radius: 8,
+            color: "red",
+          },
+        ],
         centerTowns: [
           { x: -30, name: { name: "Adrian", reverse: true } },
           { x: 30, name: { name: "Ann Arbor" } }
@@ -629,12 +702,14 @@ const game = {
             ]
           }
         ],
-        values: [
-          {
-            value: 30,
-            percent: 0.75,
-          }
-        ],
+        offBoardRevenue: {
+          angle: 180,
+          percent: 0.78,
+          revenues: [
+            {color: "yellow", cost: "30",},
+            {color: "brown", cost: "40",},
+          ]
+        },
         track: [
           {
             side: 1
@@ -685,7 +760,7 @@ const game = {
         color: "yellow",
         water: {
           angle: 330,
-          percent: 0.7,
+          percent: 0.667,
           cost: "$80",
           size: "small"
         },
@@ -701,7 +776,15 @@ const game = {
             ]
           },
         ],
-        companies: [{label: "C&P", angle: 180, percent: 0.75,},],
+        companies: [
+          {
+            label: "C&P",
+            angle: 180,
+            percent: 0.75,
+            radius: 8,
+            color: "red",
+          },
+        ],
         track: [
           {start: 1, end: 1,},
           {start: 4, end: 4,},
@@ -760,8 +843,7 @@ const game = {
             rotation: 90,
             name: {
               name: "Suffolk",
-              reverse: true,
-              rotation: -90
+              reverse: true
             }
           }
         ],
@@ -841,7 +923,7 @@ const game = {
         color: "gray",
         offBoardRevenue: {
           angle: 180,
-          percent: 0.80,
+          percent: 0.75,
           revenues: [
             {color: "yellow", cost: "20",},
             {color: "brown", cost: "30",},
@@ -926,8 +1008,7 @@ const game = {
             percent: 0.26,
             name: {
               name: "Kingston",
-              reverse: true,
-              rotation: -90
+              reverse: true
             }
           }
         ],
@@ -948,9 +1029,11 @@ const game = {
         },
         companies: [
           {
-            label: "SVR",
+            label: "SVN",
             angle: 180,
-            percent: 0.333
+            percent: 0.333,
+            radius: 8,
+            color: "red",
           }
         ],
         hexes: ["G19"]
@@ -1002,7 +1085,7 @@ const game = {
         ],
         offBoardRevenue: {
           angle: 330,
-          percent: 0.66,
+          percent: 0.60,
           revenues: [
             {color: "yellow", cost: "30",},
             {color: "brown", cost: "40",},
@@ -1021,7 +1104,7 @@ const game = {
           {
             name: {
               rotation: 30,
-              name: "Ottowa",
+              name: "Ottawa",
             }
           }
         ],
@@ -1055,7 +1138,9 @@ const game = {
           {
             label: "D&H",
             angle: 60,
-            percent: 0.57
+            percent: 0.57,
+            radius: 8,
+            color: "red",
           }
         ],
         hexes: ["F20"]
@@ -1079,6 +1164,8 @@ const game = {
         companies: [
           {
             label: "M&H",
+            radius: 8,
+            color: "red",
           }
         ],
         hexes: ["D22"]
@@ -1108,6 +1195,8 @@ const game = {
             label: "C&A",
             angle: 180,
             percent: 0.60,
+            radius: 8,
+            color: "red",
           }
         ],
         labels: [
@@ -1202,7 +1291,7 @@ const game = {
           angle: 310,
           percent: 0.7,
           cost: "$80",
-          size: "medium"
+          size: "small"
         },
         track: [
           {
@@ -1225,8 +1314,7 @@ const game = {
             rotation: 30,
             name: {
               name: "Atlantic City",
-              reverse: true,
-              rotation: -90
+              reverse: true
             }
           }
         ],
@@ -1262,6 +1350,8 @@ const game = {
           {
             label: "C&StL",
             percent: 0.60,
+            radius: 8,
+            color: "red",
           }
         ],
         centerTowns: [
@@ -1361,7 +1451,15 @@ const game = {
       },
       {
         color: "plain",
-        companies: [{label: "StCT", angle: 0, percent: 0.60,},],
+        companies: [
+          {
+            label: "StCT",
+            angle: 0,
+            percent: 0.60,
+            radius: 8,
+            color: "red",
+          },
+        ],
         centerTowns: [
           {
             name: {
@@ -1427,7 +1525,7 @@ const game = {
           {
             name: {
               rotation: 30,
-              name: "Cincinatti"
+              name: "Cincinati"
             }
           }
         ],
@@ -1507,9 +1605,10 @@ const game = {
         cities: [
           {
             name: {
-              name: "Virgina Coalfields",
+              name: "Virginia Coalfields",
               reverse: true,
-              rotation: 30
+              rotation: 30,
+              y: 9,
             },
             companies: [
               {label: "coal", color: "black",},
@@ -1522,7 +1621,7 @@ const game = {
           {side: 4},
         ],
         offBoardRevenue: {
-          percent: 0.80,
+          percent: 0.70,
           revenues: [
             {color: "yellow", cost: "30",},
             {color: "brown", cost: "60",},

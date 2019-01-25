@@ -6,6 +6,7 @@ import Rounds from "./Rounds";
 import Par from "./Par";
 import Legend from "./Legend";
 
+import GameContext from "./context/GameContext";
 import "./Stock.css";
 
 class Stock extends React.Component {
@@ -34,51 +35,53 @@ class Stock extends React.Component {
     }
 
     return (
-      <div className="stock" style={{ height: "100vh" }}>
-        <div className="PrintNotes">
-          Stock Market is meant to be printed in{" "}
-          <b>{stock.orientation || "landscape"}</b> mode
-          {false &&
-            stock.type === "2D" && (
-              <React.Fragment>
-                <br />
-                <br />
-                <label>
-                  <select
-                    name="displayMode"
-                    value={this.state.displayMode}
-                    onChange={this.handleDisplayMode}
-                  >
-                    <option value="normal">Normal</option>
-                    <option value="delta">%Δ</option>
-                  </select>
-                </label>
-              </React.Fragment>
-            )}
-        </div>
-        <Market
-          {...stock}
-          paginated={false}
-          title={game.info.title}
-          displayMode={this.state.displayMode}
-        />
-        <div className="StockHelpers">
-          {stock.par &&
-            stock.par.values && (
-              <Par par={stock.par} legend={stock.legend || []} />
-            )}
-          <Rounds
-            rounds={game.rounds}
-            horizontal={game.stock.type === "2D" ? false : true}
+      <GameContext.Provider value={match.params.game}>
+        <div className="stock" style={{ height: "100vh" }}>
+          <div className="PrintNotes">
+            Stock Market is meant to be printed in{" "}
+            <b>{stock.orientation || "landscape"}</b> mode
+            {false &&
+             stock.type === "2D" && (
+               <React.Fragment>
+                 <br />
+                 <br />
+                 <label>
+                   <select
+                     name="displayMode"
+                     value={this.state.displayMode}
+                     onChange={this.handleDisplayMode}
+                   >
+                     <option value="normal">Normal</option>
+                     <option value="delta">%Δ</option>
+                   </select>
+                 </label>
+               </React.Fragment>
+             )}
+          </div>
+          <Market
+            {...stock}
+            paginated={false}
+            title={game.info.title}
+            displayMode={this.state.displayMode}
           />
-          <Legend
-            legend={game.stock.legend || []}
-            movement={game.stock.movement}
-            horizontal={game.stock.type === "2D" ? false : true}
-          />
+          <div className="StockHelpers">
+            {stock.par &&
+             stock.par.values && (
+               <Par par={stock.par} legend={stock.legend || []} />
+             )}
+            <Rounds
+              rounds={game.rounds}
+              horizontal={game.stock.type === "2D" ? false : true}
+            />
+            <Legend
+              legend={game.stock.legend || []}
+              movement={game.stock.movement}
+              horizontal={game.stock.type === "2D" ? false : true}
+            />
+          </div>
+          <style>{`@media print {@page {size: ${stock.orientation === "landscape" ? "11in 8.5in" : "8.5in 11in"};}}`}</style>
         </div>
-        <style>{`@media print {@page {size: ${stock.orientation === "landscape" ? "11in 8.5in" : "8.5in 11in"};}}`}</style>
-      </div>
+      </GameContext.Provider>
     );
   }
 }
