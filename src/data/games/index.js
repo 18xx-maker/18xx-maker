@@ -20,6 +20,7 @@ import game_FourthAge from "./FourthAge";
 
 let games = {
   "1800": game_1800,
+  "1828": game_1828,
   "1830": game_1830,
   "1832": game_1832,
   "1834": game_1834,
@@ -40,7 +41,6 @@ let games = {
 if(process.env.REACT_APP_ALL_GAMES) {
   games = {
     ...games,
-    "1828": game_1828,
     "1899": game_1899,
     "FourthAge": game_FourthAge
   };

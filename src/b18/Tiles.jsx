@@ -1,5 +1,4 @@
 import React from "react";
-import games from "../data/games";
 import tileDefs from "../data/tiles";
 
 import Svg from "../Svg";
@@ -18,14 +17,13 @@ import RotateContext from "../context/RotateContext";
 
 import "./b18.scss";
 
+const games = require('../data/games');
+
 const getTile = id => compose(assoc("id", id), prop(id))(tileDefs);
 
 const Tiles = ({match}) => {
   let color = match.params.color;
   let game = games[match.params.game];
-
-  let rotations = map(r => r + (game.info.orientation === "horizontal" ? 0 : 30),
-                      [0,60,120,180,240,300]);
 
   let tiles = filter(propEq("color", color),
                      map(getTile, keys(game.tiles)));
@@ -39,26 +37,30 @@ const Tiles = ({match}) => {
       "-87.6025 -76 175.205 152" :
       "-76 -87.6025 152 175.205";
 
-  let tileNodes = map(tile => (
-    <div key={tile.id}
-         className={`tile tile-${tile.id}`}>
-      {map(rotation => (
-        <div className="tile-rotation">
-          <Svg
-            key={`tile-${tile.id}-${rotation}`}
-            style={{width: `${width}px`,
-                    height: `${height}px`}}
-            viewBox={viewBox}>
-            <g transform={`rotate(${rotation})`}>
-              <RotateContext.Provider value={rotation}>
-                <Tile id={tile.id} border={true} />
-              </RotateContext.Provider>
-            </g>
-          </Svg>
-        </div>
-      ), rotations)}
-    </div>
-  ), tiles);
+  let tileNodes = map(tile => {
+    let rotations = map(r => r + (game.info.orientation === "horizontal" ? 0 : 30),
+                        tile.rotations || [0,60,120,180,240,300]);
+
+    return (
+      <div key={tile.id}
+           className={`tile tile-${tile.id}`}>
+        {map(rotation => (
+          <div className="tile-rotation">
+            <Svg
+              key={`tile-${tile.id}-${rotation}`}
+              style={{width: `${width}px`,
+                      height: `${height}px`}}
+              viewBox={viewBox}>
+              <g transform={`rotate(${rotation})`}>
+                <RotateContext.Provider value={rotation}>
+                  <Tile id={tile.id} border={true} />
+                </RotateContext.Provider>
+              </g>
+            </Svg>
+          </div>
+        ), rotations)}
+      </div>
+    );}, tiles);
 
   return (
     <ColorContext.Provider value="tile">

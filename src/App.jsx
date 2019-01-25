@@ -86,6 +86,7 @@ class App extends Component {
             <Route path="/:game/" component={GameMenu} />
           </Switch>
           {fontLinks}
+          <Footer/>
         </div>
       </Router>
     );

@@ -3,7 +3,7 @@ import Color from "../data/Color";
 
 import RotateContext from "../context/RotateContext";
 
-const Value = ({ value }) => {
+const Value = ({ value, fixed }) => {
   let size = 15;
   if (value > 99) {
     size = 13;
@@ -24,7 +24,7 @@ const Value = ({ value }) => {
                 r="15"
               />
               <text
-                transform={`rotate(-${rotation})`}
+                transform={fixed ? null : `rotate(-${rotation})`}
                 fontWeight="bold"
                 fontSize={size}
                 fontFamily="Helvetica, Arial, sans-serif"

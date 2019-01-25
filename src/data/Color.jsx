@@ -10,10 +10,13 @@ import curry from "ramda/es/curry";
 import is from "ramda/es/is";
 
 import ColorContext from '../context/ColorContext';
+import GameContext from '../context/GameContext';
 import PhaseContext from '../context/PhaseContext';
 
 import React from 'react';
 import { connect } from 'react-redux';
+
+import games from "./games";
 
 const schemes = {
   carth,
@@ -23,8 +26,14 @@ const schemes = {
   ps18xx
 };
 
-const resolveColor = curry((scheme, phase, context, name) => {
+const resolveColor = curry((scheme, phase, context, game, name) => {
   let colors = schemes[scheme || "gmt"] || schemes["gmt"];
+
+  // Add in game colors
+  colors = {
+    ...colors,
+    ...(game ? game.colors || {} : {})
+  };
 
   // Get color from context if it exists
   let color = colors[name];
@@ -39,9 +48,9 @@ const resolveColor = curry((scheme, phase, context, name) => {
   return color;
 });
 
-const textColor = curry((scheme, phase, context, color) => {
-  let text = [resolveColor(scheme, phase, context, "white"),
-              resolveColor(scheme, phase, context, "black")];
+const textColor = curry((scheme, phase, context, game, color) => {
+  let text = [resolveColor(scheme, phase, context, game, "white"),
+              resolveColor(scheme, phase, context, game, "black")];
   let tc = tinycolor(color);
   return tinycolor.mostReadable(tc, text).toRgbString();
 });
@@ -50,23 +59,30 @@ const strokeColor = color => tinycolor(color).darken(10).toString();
 
 const Color = ({ scheme, context, children }) => {
   return (
-    <ColorContext.Consumer>
-      {colorContext => (
-        <PhaseContext.Consumer>
-          {phase => {
-            let c = resolveColor(scheme, phase, context || colorContext);
-            let t = textColor(scheme, phase, context || colorContext);
-            let s = strokeColor;
+    <GameContext.Consumer>
+      {gameContext => {
+        let game = games[gameContext];
+        return (
+          <ColorContext.Consumer>
+            {colorContext => (
+              <PhaseContext.Consumer>
+                {phase => {
+                  let c = resolveColor(scheme, phase, context || colorContext, game);
+                  let t = textColor(scheme, phase, context || colorContext, game);
+                  let s = strokeColor;
 
-            return (
-              <React.Fragment>
-                {children(c, t, s)}
-              </React.Fragment>
-            );
-          }}
-        </PhaseContext.Consumer>
-      )}
-    </ColorContext.Consumer>
+                  return (
+                    <React.Fragment>
+                      {children(c, t, s)}
+                    </React.Fragment>
+                  );
+                }}
+              </PhaseContext.Consumer>
+            )}
+          </ColorContext.Consumer>
+        );
+      }}
+    </GameContext.Consumer>
   );
 };
 
