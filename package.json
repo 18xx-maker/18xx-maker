@@ -27,12 +27,12 @@
     "tinycolor2": "^1.4.1"
   },
   "scripts": {
-    "analyze": "yarn build && source-map-explorer build/static/js/main.*",
+    "analyze": "react-scripts build && source-map-explorer build/static/js/main.*",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && yarn print all",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "print": "yarn build && node ./bin/print.js"
+    "print": "node ./bin/print.js"
   },
   "browserslist": [
     ">0.2%",
