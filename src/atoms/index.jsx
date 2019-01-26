@@ -153,7 +153,7 @@ const atoms = [{
 },{
   group: "Borders",
   examples: [
-    {borders: [{side:1,color:"red"}]},
+    {borders: [{side:1,color:"offboard"}]},
     {borders: [{side:1,color:"water"},{side:2,color:"water"}]},
     {borders: [{side:4,color:"mountain",dashed:true},
                {side:5,color:"mountain",dashed:true},
