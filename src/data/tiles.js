@@ -2739,33 +2739,14 @@ const tiles = {
   },
   "771": {
     color: "brown",
-    values: [
-      {
-        angle: 180,
-        percent: 0.667,
-        value: 50
-      }
-    ],
+    values: [{angle: 180, percent: 0.667, value: 50}],
     cities: [{}],
     track: [{ side: 1 }, { side: 2 }, { side: 6 }]
   },
   "772": {
     color: "brown",
-    track: [
-      {
-        side: 1
-      },
-      {
-        side: 2
-      }
-    ],
-    values: [
-      {
-        angle: 210,
-        percent: 0.7,
-        value: 40
-      }
-    ],
+    track: [{side: 1}, {side: 2}],
+    values: [{angle: 210, percent: 0.7, value: 40}],
     cities: [{}]
   },
   "773": {
@@ -2894,49 +2875,13 @@ const tiles = {
   "788": {
     color: "green",
     rotations: [0],
-    labels: [
-      {
-        label: "£",
-        angle: 270,
-        percent: 0.333,
-        y: 50,
-        size: 30
-      },
-      {
-        label: "C",
-        angle: 120,
-        percent: 0.7
-      }
-    ],
-    values: [
-      {
-        angle: 240,
-        percent: 0.7,
-        value: 30
-      },
-      {
-        angle: 300,
-        percent: 0.5,
-        value: 10
-      }
-    ],
-    cities: [
-      {
-        angle: 180,
-        percent: 0.333
-      }
-    ],
-    towns: [
-      {
-        percent: 0.25
-      }
-    ],
-    centerTowns: [
-      {
-        color: "halt",
-        percent: 0.667
-      }
-    ],
+    labels: [{label: "£", angle: 270, percent: 0.333, y: 50, size: 30},
+             {label: "C", angle: 120, percent: 0.7}],
+    values: [{angle: 240, percent: 0.7, value: 30},
+             {angle: 300, percent: 0.5, value: 10}],
+    cities: [{angle: 180, percent: 0.333}],
+    towns: [{percent: 0.25}],
+    centerTowns: [{color: "halt", percent: 0.667}],
     track: [{ side: 1 }, { type: "custom", path: "m 0 75 C 0 50, 30 50, 45 25", side: 2 }]
   },
   "789": {
@@ -3129,169 +3074,54 @@ const tiles = {
   },
   "971": {
     color: "green",
-    values: [
-      {
-        angle: 210,
-        percent: 0.7,
-        value: 40
-      }
-    ],
-    borders: [
-      {
-        side: 1,
-        color: "red"
-      },
-      {
-        side: 2,
-        color: "red"
-      },
-      {
-        side: 3,
-        color: "red"
-      },
-      {
-        side: 4,
-        color: "red"
-      },
-      {
-        side: 5,
-        color: "red"
-      },
-      {
-        side: 6,
-        color: "red"
-      }
-    ],
+    values: [{angle: 210, percent: 0.7, value: 40}],
+    borders: [{side: 1, color: "offboard"},
+              {side: 2, color: "offboard"},
+              {side: 3, color: "offboard"},
+              {side: 4, color: "offboard"},
+              {side: 5, color: "offboard"},
+              {side: 6, color: "offboard"}],
     cities: [{}],
-    track: [
-      {
-        side: 1,
-        gauge: "narrow"
-      },
-      {
-        side: 2,
-        gauge: "narrow"
-      }
-    ]
+    track: [{side: 1, gauge: "narrow"}, {side: 2, gauge: "narrow"}]
   },
   "972": {
     color: "green",
-    values: [
-      {
-        angle: 210,
-        percent: 0.7,
-        value: 40
-      }
-    ],
-    borders: [
-      {
-        side: 1,
-        color: "red"
-      },
-      {
-        side: 2,
-        color: "red"
-      },
-      {
-        side: 3,
-        color: "red"
-      },
-      {
-        side: 4,
-        color: "red"
-      },
-      {
-        side: 5,
-        color: "red"
-      },
-      {
-        side: 6,
-        color: "red"
-      }
-    ],
+    values: [{angle: 210, percent: 0.7, value: 40}],
+    borders: [{side: 1, color: "offboard"},
+              {side: 2, color: "offboard"},
+              {side: 3, color: "offboard"},
+              {side: 4, color: "offboard"},
+              {side: 5, color: "offboard"},
+              {side: 6, color: "offboard"}],
     cities: [{}],
-    track: [
-      {
-        side: 1,
-        gauge: "narrow"
-      },
-      {
-        side: 3,
-        gauge: "narrow"
-      }
-    ]
+    track: [{side: 1, gauge: "narrow"},
+            {side: 3, gauge: "narrow"}]
   },
   "973": {
     color: "green",
     rotations: 3,
-    values: [
-      {
-        angle: 210,
-        percent: 0.7,
-        value: 40
-      }
-    ],
-    borders: [
-      {
-        side: 1,
-        color: "red"
-      },
-      {
-        side: 2,
-        color: "red"
-      },
-      {
-        side: 3,
-        color: "red"
-      },
-      {
-        side: 4,
-        color: "red"
-      },
-      {
-        side: 5,
-        color: "red"
-      },
-      {
-        side: 6,
-        color: "red"
-      }
-    ],
+    values: [{angle: 210, percent: 0.7, value: 40}],
+    borders: [{side: 1, color: "offboard"},
+              {side: 2, color: "offboard"},
+              {side: 3, color: "offboard"},
+              {side: 4, color: "offboard"},
+              {side: 5, color: "offboard"},
+              {side: 6, color: "offboard"}],
     cities: [{}],
-    track: [
-      {
-        side: 1,
-        gauge: "narrow"
-      },
-      {
-        side: 4,
-        gauge: "narrow"
-      }
-    ]
+    track: [{side: 1, gauge: "narrow"},
+            {side: 4, gauge: "narrow"}]
   },
   "974": {
     color: "green",
-    values: [
-      {
-        angle: 210,
-        percent: 0.8,
-        value: 60
-      }
-    ],
-    labels: [
-      {
-        label: "B",
-        angle: 150,
-        percent: 0.8
-      }
-    ],
+    values: [{angle: 210, percent: 0.8, value: 60}],
+    labels: [{label: "B", angle: 150, percent: 0.8}],
     cities: [{ size: 2 }],
-    borders: [{side: 1, color: "red"},
-              {side: 2, color: "red"},
-              {side: 3, color: "red"},
-              {side: 4, color: "red"},
-              {side: 5, color: "red"},
-              {side: 6, color: "red"}],
+    borders: [{side: 1, color: "offboard"},
+              {side: 2, color: "offboard"},
+              {side: 3, color: "offboard"},
+              {side: 4, color: "offboard"},
+              {side: 5, color: "offboard"},
+              {side: 6, color: "offboard"}],
     track: [{side: 1, gauge: "narrow"},
             {side: 3, gauge: "narrow"},
             {side: 4, gauge: "narrow"},
@@ -3329,12 +3159,12 @@ const tiles = {
     color: "brown",
     values: [{angle: 210, percent: 0.75, value: 60}],
     cities: [{ size: 2 }],
-    borders: [{side: 1, color: "red"},
-              {side: 2, color: "red"},
-              {side: 3, color: "red"},
-              {side: 4, color: "red"},
-              {side: 5, color: "red"},
-              {side: 6, color: "red"}],
+    borders: [{side: 1, color: "offboard"},
+              {side: 2, color: "offboard"},
+              {side: 3, color: "offboard"},
+              {side: 4, color: "offboard"},
+              {side: 5, color: "offboard"},
+              {side: 6, color: "offboard"}],
     track: [{side: 1, gauge: "narrow"},
             {side: 2, gauge: "narrow"},
             {side: 6, gauge: "narrow"}]
@@ -3344,117 +3174,44 @@ const tiles = {
     rotations: 2,
     values: [{angle: 210, percent: 0.75, value: 60}],
     cities: [{ size: 2 }],
-    borders: [{side: 1, color: "red"},
-              {side: 2, color: "red"},
-              {side: 3, color: "red"},
-              {side: 4, color: "red"},
-              {side: 5, color: "red"},
-              {side: 6, color: "red"}],
+    borders: [{side: 1, color: "offboard"},
+              {side: 2, color: "offboard"},
+              {side: 3, color: "offboard"},
+              {side: 4, color: "offboard"},
+              {side: 5, color: "offboard"},
+              {side: 6, color: "offboard"}],
     track: [{side: 1, gauge: "narrow"},
             {side: 3, gauge: "narrow"},
             {side: 5, gauge: "narrow"}]
   },
   "980": {
     color: "brown",
-    values: [
-      {
-        angle: 210,
-        percent: 0.75,
-        value: 60
-      }
-    ],
+    values: [{angle: 210, percent: 0.75, value: 60}],
     cities: [{ size: 2 }],
-    borders: [
-      {
-        side: 1,
-        color: "red"
-      },
-      {
-        side: 2,
-        color: "red"
-      },
-      {
-        side: 3,
-        color: "red"
-      },
-      {
-        side: 4,
-        color: "red"
-      },
-      {
-        side: 5,
-        color: "red"
-      },
-      {
-        side: 6,
-        color: "red"
-      }
-    ],
-    track: [
-      {
-        side: 1,
-        gauge: "narrow"
-      },
-      {
-        side: 4,
-        gauge: "narrow"
-      },
-      {
-        side: 6,
-        gauge: "narrow"
-      }
-    ]
+    borders: [{side: 1, color: "offboard"},
+              {side: 2, color: "offboard"},
+              {side: 3, color: "offboard"},
+              {side: 4, color: "offboard"},
+              {side: 5, color: "offboard"},
+              {side: 6, color: "offboard"}
+             ],
+    track: [{side: 1, gauge: "narrow"},
+            {side: 4, gauge: "narrow"},
+            {side: 6, gauge: "narrow"}]
   },
   "985": {
     color: "brown",
-    values: [
-      {
-        angle: 210,
-        percent: 0.75,
-        value: 60
-      }
-    ],
+    values: [{angle: 210, percent: 0.75, value: 60}],
     cities: [{ size: 2 }],
-    borders: [
-      {
-        side: 1,
-        color: "red"
-      },
-      {
-        side: 2,
-        color: "red"
-      },
-      {
-        side: 3,
-        color: "red"
-      },
-      {
-        side: 4,
-        color: "red"
-      },
-      {
-        side: 5,
-        color: "red"
-      },
-      {
-        side: 6,
-        color: "red"
-      }
-    ],
-    track: [
-      {
-        side: 1,
-        gauge: "narrow"
-      },
-      {
-        side: 4,
-        gauge: "narrow"
-      },
-      {
-        side: 2,
-        gauge: "narrow"
-      }
-    ]
+    borders: [{side: 1, color: "offboard"},
+              {side: 2, color: "offboard"},
+              {side: 3, color: "offboard"},
+              {side: 4, color: "offboard"},
+              {side: 5, color: "offboard"},
+              {side: 6, color: "offboard"}],
+    track: [{side: 1, gauge: "narrow"},
+            {side: 4, gauge: "narrow"},
+            {side: 2, gauge: "narrow"}]
   },
   "986": {
     color: "brown",
@@ -3476,27 +3233,27 @@ const tiles = {
     borders: [
       {
         side: 1,
-        color: "red"
+        color: "offboard"
       },
       {
         side: 2,
-        color: "red"
+        color: "offboard"
       },
       {
         side: 3,
-        color: "red"
+        color: "offboard"
       },
       {
         side: 4,
-        color: "red"
+        color: "offboard"
       },
       {
         side: 5,
-        color: "red"
+        color: "offboard"
       },
       {
         side: 6,
-        color: "red"
+        color: "offboard"
       }
     ],
     track: [
@@ -3542,27 +3299,27 @@ const tiles = {
     borders: [
       {
         side: 1,
-        color: "red"
+        color: "offboard"
       },
       {
         side: 2,
-        color: "red"
+        color: "offboard"
       },
       {
         side: 3,
-        color: "red"
+        color: "offboard"
       },
       {
         side: 4,
-        color: "red"
+        color: "offboard"
       },
       {
         side: 5,
-        color: "red"
+        color: "offboard"
       },
       {
         side: 6,
-        color: "red"
+        color: "offboard"
       }
     ],
     track: [
@@ -3625,12 +3382,12 @@ const tiles = {
       }
     ],
     cities: [{ size: 3 }],
-    borders: [{side: 1, color: "red"},
-              {side: 2, color: "red"},
-              {side: 3, color: "red"},
-              {side: 4, color: "red"},
-              {side: 5, color: "red"},
-              {side: 6, color: "red"}],
+    borders: [{side: 1, color: "offboard"},
+              {side: 2, color: "offboard"},
+              {side: 3, color: "offboard"},
+              {side: 4, color: "offboard"},
+              {side: 5, color: "offboard"},
+              {side: 6, color: "offboard"}],
     track: [{gauge: "narrow", side: 1},
             {gauge: "narrow", side: 3},
             {gauge: "narrow", side: 4},
@@ -3642,12 +3399,12 @@ const tiles = {
     labels: [{label: "B", angle: 150, percent: 0.85}],
     values: [{angle: 210, percent: 0.825, value: 100}],
     cities: [{ size: 3 }],
-    borders: [{side: 1, color: "red"},
-              {side: 2, color: "red"},
-              {side: 3, color: "red"},
-              {side: 4, color: "red"},
-              {side: 5, color: "red"},
-              {side: 6, color: "red"}],
+    borders: [{side: 1, color: "offboard"},
+              {side: 2, color: "offboard"},
+              {side: 3, color: "offboard"},
+              {side: 4, color: "offboard"},
+              {side: 5, color: "offboard"},
+              {side: 6, color: "offboard"}],
     track: [{gauge: "narrow", side: 1},
             {gauge: "narrow", side: 2},
             {gauge: "narrow", side: 3},
