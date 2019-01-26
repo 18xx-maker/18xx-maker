@@ -6,13 +6,21 @@ const path = require('path');
 
 require("@babel/register");
 
-let game = process.argv[2] || "1830";
-
-// Create the output folder
 try {
-  fs.mkdirSync(`./public/render/${game}`);
+  fs.mkdirSync(`./build`);
 } catch (err) {
   if (err.code !== 'EEXIST') throw err;
+}
+
+try {
+  fs.mkdirSync(`./build/render`);
+} catch (err) {
+  if (err.code !== 'EEXIST') throw err;
+}
+
+let games = [process.argv[2] || "1830"];
+if(games[0] === "all") {
+  games = R.keys(require("../src/data/games").default);
 }
 
 const app = express();
@@ -29,37 +37,48 @@ const server = app.listen(9000);
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  const items = ['background', 'cards', 'charters', 'map', 'map-paginated', 'tiles', 'tokens'];
+  for(let g=0;g<games.length;g++) {
+    let game = games[g];
 
-  for(let i=0;i<items.length;i++) {
-    let item = items[i];
-    console.log("Printing " + game + "/" + item);
-    await page.goto(`http://localhost:9000/${game}/${item}`, {waitUntil: 'networkidle2'});
-    await page.pdf({path: `public/render/${game}/${item.replace(/\//g,'-')}.pdf`, scale: 1.0, preferCSSPageSize: true});
-  }
+    // Create the output folder
+    try {
+      fs.mkdirSync(`./build/render/${game}`);
+    } catch (err) {
+      if (err.code !== 'EEXIST') throw err;
+    }
 
-  // Board 18 Output
-  let gameDef = require(`../src/data/games/${game}`).default;
-  let tileDefs = require('../src/data/tiles').default;
-  let counts = R.compose(
-    R.countBy(R.identity),
-    R.map(R.prop("color")),
-    R.map(id => tileDefs[id] || tileDefs[id.split("|")[0]])
-  )(R.keys(gameDef.tiles));
-  let colors = R.keys(counts);
+    const items = ['background', 'cards', 'charters', 'map', 'map-paginated', 'tiles', 'tokens'];
 
-  for(let j=0;j<colors.length;j++) {
-    let color = colors[j];
+    for(let i=0;i<items.length;i++) {
+      let item = items[i];
+      console.log("Printing " + game + "/" + item);
+      await page.goto(`http://localhost:9000/${game}/${item}`, {waitUntil: 'networkidle2'});
+      await page.pdf({path: `build/render/${game}/${item.replace(/\//g,'-')}.pdf`, scale: 1.0, preferCSSPageSize: true});
+    }
 
-    let width = counts[color] * 150;
-    let height = 900;
+    // Board 18 Output
+    let gameDef = require(`../src/data/games/${game}`).default;
+    let tileDefs = require('../src/data/tiles').default;
+    let counts = R.compose(
+      R.countBy(R.identity),
+      R.map(R.prop("color")),
+      R.map(id => tileDefs[id] || tileDefs[id.split("|")[0]])
+    )(R.keys(gameDef.tiles));
+    let colors = R.keys(counts);
 
-    console.log("Printing " + game + "/b18/tiles/" + color);
-    await page.goto(`http://localhost:9000/${game}/b18/tiles/${color}`, {waitUntil: 'networkidle2'});
-    await page.pdf({path: `public/render/${game}/b18-tiles-${color}.pdf`, scale: 1.0, preferCSSPageSize: true});
-    await page.setViewport({ width, height });
-    await page.addStyleTag({ content: '.App {padding:0;} .Footer {display:none;} .GameMenu {display:none;}'});
-    await page.screenshot({ path: `public/render/${game}/b18-tiles-${color}.png`, omitBackground: true });
+    for(let j=0;j<colors.length;j++) {
+      let color = colors[j];
+
+      let width = counts[color] * 150;
+      let height = 900;
+
+      console.log("Printing " + game + "/b18/tiles/" + color);
+      await page.goto(`http://localhost:9000/${game}/b18/tiles/${color}`, {waitUntil: 'networkidle2'});
+      await page.pdf({path: `build/render/${game}/b18-tiles-${color}.pdf`, scale: 1.0, preferCSSPageSize: true});
+      await page.setViewport({ width, height });
+      await page.addStyleTag({ content: '.App {padding:0;} .Footer {display:none;} .GameMenu {display:none;}'});
+      await page.screenshot({ path: `build/render/${game}/b18-tiles-${color}.png`, omitBackground: true });
+    }
   }
 
   await browser.close();
