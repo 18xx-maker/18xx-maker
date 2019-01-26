@@ -33,17 +33,11 @@ let games = {
   "1886": game_1886,
   "1889": game_1889,
   "1890": game_1890,
+  "1899": game_1899,
   "18AL": game_18AL,
   "18EU": game_18EU,
-  "18Mex": game_18Mex
+  "18Mex": game_18Mex,
+  "FourthAge": game_FourthAge
 };
-
-if(process.env.REACT_APP_ALL_GAMES) {
-  games = {
-    ...games,
-    "1899": game_1899,
-    "FourthAge": game_FourthAge
-  };
-}
 
 export default games;

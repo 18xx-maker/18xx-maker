@@ -8,15 +8,9 @@ require("@babel/register");
 
 let game = process.argv[2] || "1830";
 
-// Create the output folders
+// Create the output folder
 try {
-  fs.mkdirSync('./output');
-} catch (err) {
-  if (err.code !== 'EEXIST') throw err;
-}
-
-try {
-  fs.mkdirSync(`./output/${game}`);
+  fs.mkdirSync(`./public/render/${game}`);
 } catch (err) {
   if (err.code !== 'EEXIST') throw err;
 }
@@ -41,7 +35,7 @@ const server = app.listen(9000);
     let item = items[i];
     console.log("Printing " + game + "/" + item);
     await page.goto(`http://localhost:9000/${game}/${item}`, {waitUntil: 'networkidle2'});
-    await page.pdf({path: `output/${game}/${item.replace(/\//g,'-')}.pdf`, scale: 1.0, preferCSSPageSize: true});
+    await page.pdf({path: `public/render/${game}/${item.replace(/\//g,'-')}.pdf`, scale: 1.0, preferCSSPageSize: true});
   }
 
   // Board 18 Output
@@ -62,10 +56,10 @@ const server = app.listen(9000);
 
     console.log("Printing " + game + "/b18/tiles/" + color);
     await page.goto(`http://localhost:9000/${game}/b18/tiles/${color}`, {waitUntil: 'networkidle2'});
-    await page.pdf({path: `output/${game}/b18-tiles-${color}.pdf`, scale: 1.0, preferCSSPageSize: true});
+    await page.pdf({path: `public/render/${game}/b18-tiles-${color}.pdf`, scale: 1.0, preferCSSPageSize: true});
     await page.setViewport({ width, height });
     await page.addStyleTag({ content: '.App {padding:0;} .Footer {display:none;} .GameMenu {display:none;}'});
-    await page.screenshot({ path: `output/${game}/b18-tiles-${color}.png`, omitBackground: true });
+    await page.screenshot({ path: `public/render/${game}/b18-tiles-${color}.png`, omitBackground: true });
   }
 
   await browser.close();
