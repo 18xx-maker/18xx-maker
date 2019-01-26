@@ -74,7 +74,6 @@ const server = app.listen(9000);
 
       console.log("Printing " + game + "/b18/tiles/" + color);
       await page.goto(`http://localhost:9000/${game}/b18/tiles/${color}`, {waitUntil: 'networkidle2'});
-      await page.pdf({path: `build/render/${game}/b18-tiles-${color}.pdf`, scale: 1.0, preferCSSPageSize: true});
       await page.setViewport({ width, height });
       await page.addStyleTag({ content: '.App {padding:0;} .Footer {display:none;} .GameMenu {display:none;}'});
       await page.screenshot({ path: `build/render/${game}/b18-tiles-${color}.png`, omitBackground: true });

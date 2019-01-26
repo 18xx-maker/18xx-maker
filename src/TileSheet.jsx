@@ -10,6 +10,9 @@ import Svg from "./Svg";
 import games from "./data/games";
 import ColorContext from "./context/ColorContext";
 
+import is from "ramda/es/is";
+import propOr from "ramda/es/propOr";
+
 const HEX_RATIO = 0.57735;
 const RATIO = 1.0;
 
@@ -28,7 +31,10 @@ const TileSheet = ({ match }) => {
       R.ascend(id => Number(id.split("|")[0] || 0)),
       R.ascend(id => Number(id.split("|")[1] || 0))
     ],
-    R.chain(k => Array(game.tiles[k]).fill(k), R.keys(game.tiles))
+    R.chain(k => Array((is(Object, game.tiles[k]) ?
+                       propOr(1, 'quantity', game.tiles[k]) :
+                       game.tiles[k])).fill(k),
+            R.keys(game.tiles))
   );
 
   let tiles = R.addIndex(R.map)(
