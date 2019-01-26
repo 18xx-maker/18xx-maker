@@ -60,7 +60,8 @@ const colors = {
     yellow: "#BC9806",
     green: "#4A7522",
     brown: "#743C0A",
-    gray: "#37383A"
+    gray: "#37383A",
+    offboard: "#37383A"
   },
   centerTown: {
     plain: "#B9BF81",
