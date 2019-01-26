@@ -14,7 +14,10 @@ const atoms = [{
              {color: "offboard", divides: [{side:3}]},
              {color: "yellow"},
              {color: "green"},
-             {color: "gray", divides: [{side:2}]}]
+             {color: "gray", divides: [{side:2}]},
+             {color: "yellow/green"},
+             {color: "green/brown"},
+             {color: "brown/gray"}]
 },{
   group: "Values",
   examples: [{values: [{value: 20}]},
@@ -184,18 +187,18 @@ const atoms = [{
 
 const examples = R.addIndex(R.chain)((h,id) => {
   return <dd key={`example-${id}`}>
-           <Svg width="160" height="160" viewBox="-80 -80 160 160">
-             <Hex hex={h} id={`${id}`} border={true} />
-           </Svg>
-           <pre>{JSON.stringify(h, null, 2)}</pre>
-         </dd>;
+   <Svg width="160" height="160" viewBox="-80 -80 160 160">
+     <Hex hex={h} id={`${id}`} border={true} />
+   </Svg>
+   <pre>{JSON.stringify(h, null, 2)}</pre>
+ </dd>;
 });
 
 const groups = R.addIndex(R.chain)((g,id) => {
   return <dl key={`group-${id}`}>
-           <dt>{g.group}</dt>
-           {examples(g.examples)}
-         </dl>;
+      <dt>{g.group}</dt>
+      {examples(g.examples)}
+    </dl>;
 });
 
 const Atoms = () => {

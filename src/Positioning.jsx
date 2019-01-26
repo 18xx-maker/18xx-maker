@@ -28,13 +28,14 @@ const positions = [{
             ]
 },{
   group: "Sides",
-  description: "Side is an alias for rotation by 0, 60, 120, 180, 240, and 300. This is useful when placing hex size objects like track.",
+  description: "Side is an alias for rotation multiplied by 60. This is useful when placing hex size objects like track.",
   examples: [{track: [{side: 1}]},
              {track: [{side: 2}]},
              {track: [{side: 3}]},
              {track: [{side: 4}]},
              {track: [{side: 5}]},
-             {track: [{side: 6}]}
+             {track: [{side: 6}]},
+             {track: [{side: 2.5}]},
             ]
 }];
 

@@ -9,11 +9,16 @@ const Hex = ({ color, border, transparent, map }) => {
         {hx => (
           <Color context={map ? "map" : "tile"}>
             {(c,t) => {
+              let fill = border || transparent ? "transparent" : c(color);
+              if(color && color.includes("/")) {
+                fill = `url(#${color.replace(/\//g, "-")})`;
+              }
+
               return (
                 <g transform={`rotate(${hx.rotation})`}>
                   <polygon
                     points="-86.6025,0 -43.30125,-75 43.30125,-75 86.6025,0 43.30125,75 -43.30125,75"
-                    fill={border || transparent ? "transparent" : c(color)}
+                    fill={fill}
                     strokeLinecap="round"
                     strokeLinejoin="bevel"
                     strokeWidth="2"
