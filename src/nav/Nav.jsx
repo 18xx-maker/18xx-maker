@@ -23,6 +23,7 @@ const Nav = ({match}) => {
         {gameName === "tiles" && <Tiles/>}
         {gameName !== "tiles" && <GameSelect/>}
         {gameName !== "tiles" && <ComponentSelect/>}
+        {gameName !== "tiles" && <ul><li><a href={`/render/${gameName}/map.pdf`}>Map PDF</a></li></ul>}
       </div>
     </nav>
   );

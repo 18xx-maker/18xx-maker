@@ -47,7 +47,7 @@ const server = app.listen(9000);
       if (err.code !== 'EEXIST') throw err;
     }
 
-    const items = ['background', 'cards', 'charters', 'market', 'map', 'map-paginated', 'tiles', 'tokens'];
+    const items = ['map'];
 
     for(let i=0;i<items.length;i++) {
       let item = items[i];
