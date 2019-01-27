@@ -39,7 +39,9 @@ const colors = {
     purple: "#593E8F",
     red: "#EE100F",
     white: "#EFF6F7",
-    yellow: "#FFDC0C"
+    yellow: "#FFDC0C",
+    lightPurple: "#ac85db",
+    turqoise: "#0AA99E"
   }
 };
 
