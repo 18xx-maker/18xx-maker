@@ -18,7 +18,14 @@ class RandomTile extends React.Component {
   }
 
   componentDidMount() {
-    this.props.history.listen(() => this.setState({tile: randomTile()}));
+    let unlisten = this.props.history.listen(() => this.setState({...this.state, tile: randomTile()}));
+    this.setState({...this.state, unlisten});
+  }
+
+  componentWillUnmount() {
+    if(this.state.unlisten) {
+      this.state.unlisten();
+    }
   }
 
   render() {
