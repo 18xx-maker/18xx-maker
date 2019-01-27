@@ -66,10 +66,14 @@ const TileSheet = ({ match }) => {
 
   return (
     <ColorContext.Provider value="tile">
-      <div className="tileSheet">
-        <div className="PrintNotes">
-          Tiles are meant to be printed in <b>portait</b> mode
+      <div className="PrintNotes">
+        <div>
+          <p>
+            Tiles are meant to be printed in <b>portait</b> mode
+          </p>
         </div>
+      </div>
+      <div className="tileSheet">
         {tiles}
         <style>{`@media print {@page {size: 8.5in 11in;}}`}</style>
       </div>

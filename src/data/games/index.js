@@ -8,7 +8,6 @@ import game_1849 from "./1849";
 import game_1857 from "./1857";
 import game_1860 from "./1860";
 import game_1870 from "./1870";
-import game_1873 from "./1873";
 import game_1886 from "./1886";
 import game_1889 from "./1889";
 import game_1890 from "./1890";
@@ -17,6 +16,7 @@ import game_18AL from "./18AL";
 import game_18EU from "./18EU";
 import game_18Mex from "./18Mex";
 import game_FourthAge from "./FourthAge";
+import game_Harzbahn from "./Harzbahn";
 
 let games = {
   "1800": game_1800,
@@ -29,7 +29,6 @@ let games = {
   "1857": game_1857,
   "1860": game_1860,
   "1870": game_1870,
-  "1873": game_1873,
   "1886": game_1886,
   "1889": game_1889,
   "1890": game_1890,
@@ -37,7 +36,8 @@ let games = {
   "18AL": game_18AL,
   "18EU": game_18EU,
   "18Mex": game_18Mex,
-  "FourthAge": game_FourthAge
+  "FourthAge": game_FourthAge,
+  "Harzbahn": game_Harzbahn
 };
 
 export default games;

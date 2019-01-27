@@ -36,28 +36,32 @@ class Stock extends React.Component {
 
     return (
       <GameContext.Provider value={match.params.game}>
-        <div className="stock" style={{ height: "100vh" }}>
-          <div className="PrintNotes">
-            Stock Market is meant to be printed in{" "}
-            <b>{stock.orientation || "landscape"}</b> mode
-            {false &&
-             stock.type === "2D" && (
-               <React.Fragment>
-                 <br />
-                 <br />
-                 <label>
-                   <select
-                     name="displayMode"
-                     value={this.state.displayMode}
-                     onChange={this.handleDisplayMode}
-                   >
-                     <option value="normal">Normal</option>
-                     <option value="delta">%Δ</option>
-                   </select>
-                 </label>
-               </React.Fragment>
-             )}
+        <div className="PrintNotes">
+          <div>
+            <p>
+              Stock Market is meant to be printed in{" "}
+              <b>{stock.orientation || "landscape"}</b> mode
+            </p>
           </div>
+          {false &&
+           stock.type === "2D" && (
+             <React.Fragment>
+               <br />
+               <br />
+               <label>
+                 <select
+                   name="displayMode"
+                   value={this.state.displayMode}
+                   onChange={this.handleDisplayMode}
+                 >
+                   <option value="normal">Normal</option>
+                   <option value="delta">%Δ</option>
+                 </select>
+               </label>
+             </React.Fragment>
+           )}
+        </div>
+        <div className="stock" style={{ height: "100vh" }}>
           <Market
             {...stock}
             paginated={false}

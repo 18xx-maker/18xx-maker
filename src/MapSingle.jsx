@@ -8,6 +8,8 @@ import util from "./util";
 import * as R from "ramda";
 import { NavLink, Redirect } from "react-router-dom";
 
+import VariationSelect from "./nav/VariationSelect";
+
 const MapSingle = ({ match }) => {
   let game = games[match.params.game];
 
@@ -32,11 +34,11 @@ const MapSingle = ({ match }) => {
   let maxY = util.maxMapY(hexes);
 
   let totalWidth =
-    100 + (game.info.extraTotalWidth || 0) + halfHexWidth * (maxX + 1);
+      100 + (game.info.extraTotalWidth || 0) + halfHexWidth * (maxX + 1);
   let totalHeight =
-    100 +
-    (game.info.extraTotalHeight || 0) +
-    (1.5 * (maxY - 1) * edge + 2 * edge);
+      100 +
+      (game.info.extraTotalHeight || 0) +
+      (1.5 * (maxY - 1) * edge + 2 * edge);
 
   if (game.info.orientation === "horizontal") {
     let tmp = totalWidth;
@@ -47,6 +49,15 @@ const MapSingle = ({ match }) => {
   let printWidth = `${(200 + totalWidth) / 100}in`;
   let printHeight = `${(150 + totalHeight) / 100}in`;
 
+  let variationSelect = null;
+  if(Array.isArray(game.map)) {
+    let variations = R.map(R.prop("name"), game.map);
+    variationSelect = (
+      <VariationSelect base={`/${match.params.game}/map/`}
+                       variations={variations} />
+    );
+  }
+
   return (
     <HexContext.Provider
       value={{
@@ -54,6 +65,15 @@ const MapSingle = ({ match }) => {
         rotation: game.info.orientation === "horizontal" ? 0 : 90
       }}
     >
+      <div className="PrintNotes">
+        <div>
+          {variationSelect}
+          <p>
+            This map is meant to be printed in <b>{map.print || "portrait"}</b>{" "}
+            mode
+          </p>
+        </div>
+      </div>
       <div className="map">
         <Svg width={totalWidth} height={totalHeight}>
           <Title game={game} variation={variation} />

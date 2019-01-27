@@ -107,7 +107,7 @@ const HexTile = ({ hex, id, border, transparent, map }) => {
     </Position>
   );
   let cityBorders = (
-    <Position data={R.filter(c => c.coutside !== true, hex.cities || [])}>
+    <Position data={R.filter(c => c.outside !== true, hex.cities || [])}>
       {c => <City {...c} border={true} />}
     </Position>
   );

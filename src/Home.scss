@@ -1,0 +1,27 @@
+.home {
+  width: 800px;
+  margin: 0 auto;
+
+  strong {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  h1 {
+    font-size: 5em;
+    margin: 0;
+
+    span {
+      font-size: .4em;
+    }
+  }
+
+  p, ul {
+    font-family: sans-serif;
+  }
+
+  li.game a {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+};

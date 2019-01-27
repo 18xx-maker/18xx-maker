@@ -1,3 +1,7 @@
+.number {
+  text-align: center;
+}
+
 .number__digit {
   color: white;
   font-size: 40mm;

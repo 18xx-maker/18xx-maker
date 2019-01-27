@@ -7,7 +7,9 @@ import HexContext from "./context/HexContext";
 import util from "./util";
 import * as data from "./data";
 import * as R from "ramda";
-import { NavLink, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+
+import VariationSelect from "./nav/VariationSelect";
 
 import "./MapPaginated.css";
 
@@ -103,6 +105,15 @@ const MapPaginated = ({ match }) => {
     </g>
   );
 
+  let variationSelect = null;
+  if(Array.isArray(game.map)) {
+    let variations = R.map(R.prop("name"), game.map);
+    variationSelect = (
+      <VariationSelect base={`/${match.params.game}/map-paginated/`}
+                       variations={variations} />
+    );
+  }
+
   return (
     <HexContext.Provider
       value={{
@@ -110,22 +121,16 @@ const MapPaginated = ({ match }) => {
         rotation: game.info.orientation === "horizontal" ? 0 : 90
       }}
     >
-      <Svg className="FullMap" defs={defs} />
       <div className="PrintNotes">
-        This map is meant to be printed in <b>{map.print || "portrait"}</b>{" "}
-        mode
-        {Array.isArray(game.map) && (
-          <ul>
-            {game.map.map((m, i) => (
-              <li key={`${match.params.game}-${i}`}>
-                <NavLink to={`/${match.params.game}/map-paginated/${i}`}>
-                  {m.name}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        )}
+        <div>
+          {variationSelect}
+          <p>
+            This map is meant to be printed in <b>{map.print || "portrait"}</b>{" "}
+            mode
+          </p>
+        </div>
       </div>
+      <Svg className="FullMap" defs={defs} />
       {mapPages}
       <style>{`@media print {@page {size: ${map.print === "landscape" ? "11in 8.5in" : "8.5in 11in"};}}`}</style>
     </HexContext.Provider>

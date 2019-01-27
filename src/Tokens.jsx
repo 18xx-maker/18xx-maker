@@ -54,7 +54,7 @@ const Tokens = ({ match }) => {
 
     let groups = R.addIndex(R.map)(
       (token, tokenIndex) => (
-        <g key={tokenIndex} transform={`translate(${(60 * (tokenIndex + tokenCount[index]) + 30)%(60 * tokensWidth)} ${60 * Math.floor(((tokenIndex + tokenCount[index]))/tokensWidth)})`}>
+        <g key={tokenIndex} transform={`translate(${(60 * (tokenIndex + tokenCount[index]) + 30)%(60 * tokensWidth)} ${30 + (60 * Math.floor(((tokenIndex + tokenCount[index]))/tokensWidth))})`}>
           {token}
         </g>
       ),
@@ -89,7 +89,7 @@ const Tokens = ({ match }) => {
 
     let groups = R.addIndex(R.map)(
       (token, tokenIndex) => (
-        <g key={tokenIndex} transform={`translate(${(60 * (tokenIndex + minorTokenCount[index] + totalTokenCount) + 30)%(60 * tokensWidth)} ${60 * Math.floor(((tokenIndex + minorTokenCount[index] + totalTokenCount))/tokensWidth)})`}>
+        <g key={tokenIndex} transform={`translate(${(60 * (tokenIndex + minorTokenCount[index] + totalTokenCount) + 30)%(60 * tokensWidth)} ${30 + (60 * Math.floor(((tokenIndex + minorTokenCount[index] + totalTokenCount))/tokensWidth))})`}>
           {token}
         </g>
       ),
@@ -112,7 +112,7 @@ const Tokens = ({ match }) => {
   let extras = R.addIndex(R.map)((label, index) => {
     if (label.match(/^#/)) {
       return (
-        <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * tokensWidth)} ${60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/tokensWidth)})`}>
+        <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * tokensWidth)} ${30 + (60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/tokensWidth))})`}>
           <Token
             icon={label}
             bleed={true}
@@ -123,7 +123,7 @@ const Tokens = ({ match }) => {
       );
     } else {
       return (
-        <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * tokensWidth)} ${60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/tokensWidth)})`}>
+        <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * tokensWidth)} ${30 + (60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/tokensWidth))})`}>
           <Token
             label={label}
             bleed={true}

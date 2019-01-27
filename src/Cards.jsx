@@ -55,11 +55,8 @@ class Cards extends React.Component {
 
     return (
       <GameContext.Provider value={match.params.game}>
-        <div className="cards">
-          <div className="PrintNotes">
-            Cards are meant to be printed in <b>landscape</b> mode
-            <br />
-            <br />
+        <div className="PrintNotes">
+          <div>
             <label>
               <input
                 name="displayPrivates"
@@ -96,7 +93,10 @@ class Cards extends React.Component {
               />
               Numbers
             </label>
+            <p>Cards are meant to be printed in <b>landscape</b> mode</p>
           </div>
+        </div>
+        <div className="cards">
           {R.addIndex(R.map)(
             (p, i) => (
               <Private key={`private-${match.params.game}-${i}`} {...p} />

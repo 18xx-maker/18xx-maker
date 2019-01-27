@@ -4,7 +4,7 @@ import * as R from "ramda";
 import Svg from "./Svg";
 import Hex from "./Hex";
 
-require("./atoms/atoms.css");
+require("./atoms/atoms.scss");
 
 const positions = [{
   group: "X and Y",

@@ -54,9 +54,8 @@ const Map = ({ game, variation }) => {
   let coordinates = R.concat(
     R.chain(
       x => [
-        <Color>{c => (
+        <Color key={`start-row-${x}`}>{c => (
           <text
-            key={`start-row-${x}`}
             fill={c("black")}
             fontFamily="Bitter"
             fontWeight="normal"
@@ -76,9 +75,8 @@ const Map = ({ game, variation }) => {
           >
             {game.info.orientation === "horizontal" ? util.toAlpha(x) : x}
           </text>)}</Color>,
-        <Color>{c => (
+        <Color key={`end-row-${x}`}>{c => (
           <text
-            key={`end-row-${x}`}
             fill={c("black")}
             fontFamily="Bitter"
             fontWeight="bold"
@@ -103,9 +101,8 @@ const Map = ({ game, variation }) => {
     ),
     R.chain(
       y => [
-        <Color>{c => (
+        <Color key={`start-col-${y}`}>{c => (
           <text
-            key={`start-col-${y}`}
             fill={c("black")}
             fontFamily="Bitter"
             fontWeight="bold"
@@ -127,9 +124,8 @@ const Map = ({ game, variation }) => {
           >
             {game.info.orientation === "horizontal" ? y : util.toAlpha(y)}
           </text>)}</Color>,
-        <Color>{c => (
+        <Color key={`end-col-${y}`}>{c => (
           <text
-            key={`end-col-${y}`}
             fill={c("black")}
             fontFamily="Bitter"
             fontWeight="bold"

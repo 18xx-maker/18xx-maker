@@ -1,0 +1,48 @@
+nav {
+  padding: 1em 2em;
+  background-color: #eee;
+  border-bottom: 2px solid #ccc;
+
+  > div {
+    width: 800px;
+    margin: 0 auto;
+  }
+
+  div.select {
+    margin-left: 2em;
+    display: inline-block;
+  }
+
+  h3 {
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 3em;
+    margin: 0;
+    display: inline-block;
+
+    a:visited {
+      color: #000;
+    }
+
+    a:hover {
+      color: purple;
+    }
+  }
+
+  ul {
+    list-style: none;
+    display: inline-block;
+    margin: 0;
+  }
+
+  li {
+    float: left;
+    margin-right: 2em;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
