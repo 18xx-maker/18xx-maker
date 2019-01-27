@@ -3,6 +3,7 @@ import games from "./data/games";
 import {NavLink} from "react-router-dom";
 
 import Tiles from "./nav/Tiles";
+import RandomTile from "./RandomTile";
 
 import Color from "./data/Color";
 
@@ -30,6 +31,7 @@ const Home = () => {
 
   return (
     <div className="home">
+      <RandomTile/>
       <Color>
         {(c,t) => (
           <React.Fragment>
