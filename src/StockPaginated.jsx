@@ -29,8 +29,8 @@ const StockPaginated = ({ match }) => {
   let totalHeight =
       100.0 * (0.76 + cell.height * mutil.height(game.stock.market));
 
-  let pageWidth = data.paper.width - 75;
-  let pageHeight = data.paper.height - 75;
+  let pageWidth = data.paper.width;
+  let pageHeight = data.paper.height;
 
   if (stock.orientation === "landscape") {
     let tmp = pageWidth;
@@ -106,11 +106,15 @@ const StockPaginated = ({ match }) => {
 
   return (
     <GameContext.Provider value={match.params.game}>
-      <div className="stock">
-        <div className="PrintNotes">
-          Stock Market is meant to be printed in{" "}
-          <b>{stock.orientation || "landscape"}</b> mode
+      <div className="PrintNotes">
+        <div>
+          <p>
+            Stock Market is meant to be printed in{" "}
+            <b>{stock.orientation || "landscape"}</b> mode
+          </p>
         </div>
+      </div>
+      <div className="stock">
         {stockPages}
         <style>{`@media print {@page {size: ${stock.orientation === "landscape" ? "11in 8.5in" : "8.5in 11in"};}}`}</style>
       </div>

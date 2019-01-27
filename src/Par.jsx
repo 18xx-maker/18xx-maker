@@ -72,7 +72,6 @@ const ParDoubleRow = ({ par, legend }) => {
   }, groupValues(par.values));
   return (
     <div className="par Par--DoubleRow">
-      <h2>Par</h2>
       <div className="Par__Container">{rows}</div>
     </div>
   );
@@ -88,7 +87,6 @@ const ParRow = ({ par, legend }) => {
   }, par.values);
   return (
     <div className="par">
-      <h2>Par</h2>
       <div className="Par__Container">{rows}</div>
     </div>
   );
