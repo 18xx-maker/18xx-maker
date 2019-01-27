@@ -79,21 +79,6 @@ const MapSingle = ({ match }) => {
           <Title game={game} variation={variation} />
           <Map game={game} variation={variation} />
         </Svg>
-        <div className="PrintNotes">
-          This map is meant to be printed in <b>{map.print || "portrait"}</b>{" "}
-          mode
-          {Array.isArray(game.map) && (
-            <ul>
-              {game.map.map((m, i) => (
-                <li key={`${match.params.game}-${i}`}>
-                  <NavLink to={`/${match.params.game}/map/${i}`}>
-                    {m.name}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
         <style>{`@media print {@page {size: ${printWidth} ${printHeight};}}`}</style>
       </div>
     </HexContext.Provider>
