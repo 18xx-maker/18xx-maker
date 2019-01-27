@@ -204,7 +204,6 @@ const groups = R.addIndex(R.chain)((g,id) => {
 const Atoms = () => {
   return (
     <div className="atoms">
-      <h1>Atoms</h1>
       {groups(atoms)}
     </div>
   );

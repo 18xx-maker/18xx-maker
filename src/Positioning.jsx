@@ -59,7 +59,6 @@ const groups = R.addIndex(R.chain)((g,id) => {
 const Positioning = () => {
   return (
     <div className="atoms">
-      <h1>Positioning</h1>
       {groups(positions)}
     </div>
   );

@@ -41,7 +41,7 @@ const Home = () => {
               printing.</p>
             <p>The original purpose was for personal pnp projects. Many games
               displayed on this site are <strong>NOT</strong> licensed for public print and play.
-              A lot of great titles are availalbe from <a target="_blank" href="http://www.all-aboardgames.com/">All-Aboard Games</a> and <a target="_blank" href="http://www.goldenspikegames.com/">Golden Spike Games</a>.
+              A lot of great titles are availalbe from <a target="_blank" rel="noopener noreferrer" href="http://www.all-aboardgames.com/">All-Aboard Games</a> and <a target="_blank" rel="noopener noreferrer" href="http://www.goldenspikegames.com/">Golden Spike Games</a>.
               If you are a designer and/or publisher and would like your design
               to not be available either on this site or in the <a href="https://github.com/kelsin/18xx">source code</a> please <a href="mailto:kelsin@valefor.com">let me know</a>!</p>
             <p className="note" style={{backgroundColor:c("offboard"),color:t(c("offboard"))}}>

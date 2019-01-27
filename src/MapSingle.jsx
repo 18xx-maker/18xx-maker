@@ -6,7 +6,7 @@ import Title from "./Title";
 import HexContext from "./context/HexContext";
 import util from "./util";
 import * as R from "ramda";
-import { NavLink, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import VariationSelect from "./nav/VariationSelect";
 

@@ -10,6 +10,7 @@ nav {
   }
 
   div.select {
+    font-family: sans-serif;
     margin-left: 2em;
     display: inline-block;
   }
@@ -32,7 +33,21 @@ nav {
     }
   }
 
+  a:visited {
+    color: inherit;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  a.active {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
   ul {
+    font-family: sans-serif;
     list-style: none;
     display: inline-block;
     margin: 0;

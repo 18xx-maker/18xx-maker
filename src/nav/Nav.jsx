@@ -1,5 +1,5 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 import Tiles from "./Tiles";
 
@@ -18,7 +18,7 @@ const Nav = ({match}) => {
     <nav>
       <div>
         <RandomTile/>
-        <h1><NavLink to="/">18xx</NavLink></h1>
+        <h1><Link to="/">18xx</Link></h1>
         <ThemeSelect/>
         {gameName === "tiles" && <Tiles/>}
         {gameName !== "tiles" && <GameSelect/>}

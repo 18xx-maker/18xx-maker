@@ -11,6 +11,7 @@ const Hex = ({ color, border, transparent, map }) => {
             {(c,t) => {
               let fill = border || transparent ? "transparent" : c(color);
               if(color && color.includes("/")) {
+                console.log("gradient");
                 fill = `url(#${color.replace(/\//g, "-")})`;
               }
 
