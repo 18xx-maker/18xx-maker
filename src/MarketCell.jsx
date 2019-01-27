@@ -11,7 +11,7 @@ const MarketCell = ({ borders, value, legend, par, colSpan, width, height }) => 
   let companies = null;
 
   return (
-    <Color>
+    <Color context="companies">
       {(c,t) => {
 
         let classes = [];
@@ -50,13 +50,13 @@ const MarketCell = ({ borders, value, legend, par, colSpan, width, height }) => 
               style={{ gridTemplateRows: `repeat(8, 0.1in)` }}
             >
               {R.map(
-                c => (
+                company => (
                   <div
-                    key={`row-${c.row}`}
+                    key={`row-${company.row}`}
                     style={{
-                      backgroundColor: c[c.color],
-                      color: t(c(c.color)),
-                      gridRow: `${c.row} / span 1`
+                      backgroundColor: c(company.color),
+                      color: t(c(company.color)),
+                      gridRow: `${company.row} / span 1`
                     }}
                     className="MarketCell--Company"
                   />
