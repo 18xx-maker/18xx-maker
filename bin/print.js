@@ -62,6 +62,7 @@ const server = app.listen(9000);
     let counts = R.compose(
       R.countBy(R.identity),
       R.map(R.prop("color")),
+      R.uniq,
       R.map(id => tileDefs[id] || tileDefs[id.split("|")[0]])
     )(R.keys(gameDef.tiles));
     let colors = R.keys(counts);
@@ -72,10 +73,10 @@ const server = app.listen(9000);
       let width = counts[color] * 150;
       let height = 900;
 
-      console.log("Printing " + game + "/b18/tiles/" + color);
-      await page.goto(`http://localhost:9000/${game}/b18/tiles/${color}`, {waitUntil: 'networkidle2'});
+      console.log("Printing " + game + "/b18-tiles-" + color);
+      await page.goto(`http://localhost:9000/${game}/b18-tiles-${color}`, {waitUntil: 'networkidle2'});
       await page.setViewport({ width, height });
-      await page.addStyleTag({ content: '.App {padding:0;} .Footer {display:none;} .GameMenu {display:none;}'});
+      await page.addStyleTag({ content: 'nav {display:none;} footer {display:none;} .PrintNotes {display:none;}'});
       await page.screenshot({ path: `build/render/${game}/b18-tiles-${color}.png`, omitBackground: true });
     }
   }

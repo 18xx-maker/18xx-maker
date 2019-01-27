@@ -4,15 +4,14 @@ import tileDefs from "../data/tiles";
 import Svg from "../Svg";
 import Tile from "../Tile";
 
-import assoc from "ramda/es/assoc";
 import compose from "ramda/es/compose";
 import filter from "ramda/es/filter";
 import is from "ramda/es/is";
 import keys from "ramda/es/keys";
 import map from "ramda/es/map";
-import prop from "ramda/es/prop";
 import propEq from "ramda/es/propEq";
 import take from "ramda/es/take";
+import uniq from "ramda/es/uniq";
 
 import ColorContext from "../context/ColorContext";
 import RotateContext from "../context/RotateContext";
@@ -21,7 +20,15 @@ import "./b18.scss";
 
 import games from "../data/games";
 
-const getTile = id => compose(assoc("id", id), prop(id))(tileDefs);
+const getTile = id => {
+  if(!tileDefs[id]) {
+    id = id.split("|")[0];
+  }
+
+  let tile = tileDefs[id];
+  tile.id = id;
+  return tile;
+};
 
 const ROTATIONS = [0,60,120,180,240,300];
 
@@ -29,7 +36,8 @@ const Tiles = ({match}) => {
   let color = match.params.color;
   let game = games[match.params.game];
 
-  let tiles = compose(filter(propEq("color", color)),
+  let tiles = compose(uniq,
+                      filter(propEq("color", color)),
                       map(getTile))(keys(game.tiles));
 
   let height = game.info.orientation === "horizontal" ? 100 : 116;
