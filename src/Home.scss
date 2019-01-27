@@ -20,8 +20,26 @@
     font-family: sans-serif;
   }
 
+  p.note {
+    padding: 0.5em;
+    border-radius: 0.5em;
+  }
+
   li.game a {
     font-weight: bold;
     font-size: 1.2em;
+  }
+
+  a:link {
+    text-decoration: underline;
+    color: inherit;
+  }
+
+  a:visited {
+    color: inherit;
+  }
+
+  a:hover {
+    text-decoration: none;
   }
 };
