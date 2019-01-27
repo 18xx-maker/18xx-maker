@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
-import "./App.css";
-
 import * as R from "ramda";
 import { fonts } from "./data";
 
 import Color from "./data/Color";
+
+import Nav from "./nav/Nav";
 
 import Tiles from "./Tiles";
 import SingleTile from "./SingleTile";
@@ -30,8 +30,6 @@ import MapSingle from "./MapSingle";
 import Stock from "./Stock";
 import StockPaginated from "./StockPaginated";
 
-import GameMenu from "./GameMenu";
-
 import Footer from "./Footer";
 
 import B18Tiles from "./b18/Tiles";
@@ -54,6 +52,11 @@ class App extends Component {
       <Router>
         <div className="App">
           <Switch>
+            <Route exact path="/"/>
+            <Route path="/:game" component={Nav}/>
+          </Switch>
+
+          <Switch>
             <Route exact path="/" component={Home} />
 
             <Route exact path="/tiles" component={Tiles} />
@@ -74,33 +77,23 @@ class App extends Component {
               component={MapPaginated}
             />
             <Route path="/:game/revenue" component={Revenue} />
-            <Route exact path="/:game/stock" component={Stock} />
-            <Route path="/:game/stock-paginated" component={StockPaginated} />
+            <Route exact path="/:game/market" component={Stock} />
+            <Route path="/:game/market-paginated" component={StockPaginated} />
             <Route path="/:game/tiles" component={TileSheet} />
             <Route path="/:game/manifest" component={TileManifest} />
             <Route path="/:game/tokens" component={Tokens} />
 
-            <Route path="/:game/b18/tiles/:color" component={B18Tiles} />
-          </Switch>
-
-          <Switch>
-            <Route path="/tiles" component={GameMenu} />
-            <Route path="/:game/" component={GameMenu} />
+            <Route path="/:game/b18-tiles-:color" component={B18Tiles} />
           </Switch>
           {fontLinks}
           <svg
             version="1.1"
-            xmlns="http://www.w3.org/2000/svg">
+            xmlns="http://www.w3.org/2000/svg"
+            style={{display:"none"}}>
             <defs>
               <Color>
                 {c => (
                   <React.Fragment>
-                    <clipPath id="hexClip">
-                      <polygon points="-86.6025,0 -43.30125,-75 43.30125,-75 86.6025,0 43.30125,75 -43.30125,75"
-                               fill="black"
-                               stroke="black"
-                               strokeWidth="2" />
-                    </clipPath>
                     <g id="meat" transform="translate(0 2)">
                       <path
                         d="M 0 0 c 7 0, 2 -5, 12 -5 C 5 -4, 7 4, 0 4 C -7 4, -5 -4, -12 -5 C -2 -5, -7 0, 0 0"
@@ -237,24 +230,24 @@ class App extends Component {
                     />
                     <linearGradient id="yellow-green" spreadMethod="repeat"
                                     x1="0" x2="0" y1="0" y2="16.6667%">
-                      <stop offset="0%" stop-color={c("yellow")}/>
-                      <stop offset="50%" stop-color={c("yellow")}/>
-                      <stop offset="50%" stop-color={c("green")}/>
-                      <stop offset="100%" stop-color={c("green")}/>
+                      <stop offset="0%" stopColor={c("yellow")}/>
+                      <stop offset="50%" stopColor={c("yellow")}/>
+                      <stop offset="50%" stopColor={c("green")}/>
+                      <stop offset="100%" stopColor={c("green")}/>
                     </linearGradient>
                     <linearGradient id="green-brown" spreadMethod="repeat"
                                     x1="0" x2="0" y1="0" y2="16.6667%">
-                      <stop offset="0%" stop-color={c("green")}/>
-                      <stop offset="50%" stop-color={c("green")}/>
-                      <stop offset="50%" stop-color={c("brown")}/>
-                      <stop offset="100%" stop-color={c("brown")}/>
+                      <stop offset="0%" stopColor={c("green")}/>
+                      <stop offset="50%" stopColor={c("green")}/>
+                      <stop offset="50%" stopColor={c("brown")}/>
+                      <stop offset="100%" stopColor={c("brown")}/>
                     </linearGradient>
                     <linearGradient id="brown-gray" spreadMethod="repeat"
                                     x1="0" x2="0" y1="0" y2="16.6667%">
-                      <stop offset="0%" stop-color={c("brown")}/>
-                      <stop offset="50%" stop-color={c("brown")}/>
-                      <stop offset="50%" stop-color={c("gray")}/>
-                      <stop offset="100%" stop-color={c("gray")}/>
+                      <stop offset="0%" stopColor={c("brown")}/>
+                      <stop offset="50%" stopColor={c("brown")}/>
+                      <stop offset="50%" stopColor={c("gray")}/>
+                      <stop offset="100%" stopColor={c("gray")}/>
                     </linearGradient>
                   </React.Fragment>
                 )}

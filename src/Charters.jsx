@@ -13,6 +13,13 @@ const Charters = ({ match }) => {
 
   return (
     <div className="charters">
+      <div className="PrintNotes">
+        <div>
+          <p>
+            Charters are meant to be printed in <b>portait</b> mode
+          </p>
+        </div>
+      </div>
       {R.addIndex(R.chain)((company, index) => {
         return (
           <Charter
@@ -26,9 +33,6 @@ const Charters = ({ match }) => {
           />
         );
       }, companies)}
-      <div className="PrintNotes">
-        Charters are meant to be printed in <b>portait</b> mode
-       </div>
       <style>{`@media print {@page {size: 8.5in 11in;}}`}</style>
     </div>
   );

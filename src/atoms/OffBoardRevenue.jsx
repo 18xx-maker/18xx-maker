@@ -21,7 +21,8 @@ const makeNode = (x, y, reverse, revenue) => {
   let width = R.max(revenue.cost.length, 2) * LETTER + 5;
 
   let nodes = [
-    <Color context="map">
+    <Color context="map"
+           key={`rect-${revenue.cost}`}>
       {c => (
         <rect
           width={width}
@@ -30,11 +31,11 @@ const makeNode = (x, y, reverse, revenue) => {
           y={y - 10}
           stroke="none"
           fill={c(revenue.color)}
-          key={`rect-${revenue.cost}`}
         />
       )}
     </Color>,
-    <Color context="map">
+    <Color context="map"
+           key={`text-${revenue.cost}`}>
       {c => (
         <text
           fill={c(revenue.textColor) || c("black")}
@@ -45,7 +46,6 @@ const makeNode = (x, y, reverse, revenue) => {
           lengthAdjust="spacingAndGlyphs"
           x={x + 0.5 * width}
           y={y - 1}
-          key={`text-${revenue.cost}`}
         >
           {revenue.cost}
         </text>
@@ -55,7 +55,8 @@ const makeNode = (x, y, reverse, revenue) => {
 
   if(revenue.phase) {
     nodes.push([
-      <Color context="map">
+      <Color key={`phase-${revenue.phase}`}
+             context="map">
         {c => (
           <text
             fill={c(revenue.phaseColor) || c("white")}
@@ -66,7 +67,6 @@ const makeNode = (x, y, reverse, revenue) => {
             lengthAdjust="spacingAndGlyphs"
             x={x + 0.5 * width}
             y={y + (reverse ? -20 : 20)}
-            key={`phase-${revenue.phase}`}
           >
             {revenue.phase}
           </text>
@@ -91,10 +91,9 @@ const makeNodes = (y, reverse, revenues) => {
     x = x + getWidth(r);
     return result;
   }, revenues),[
-    <Color context="map">
+    <Color key={`rect-border-${y}`} context="map">
       {c => (
-        <rect key={`rect-border-${y}`}
-              width={totalWidth}
+        <rect width={totalWidth}
               height="20"
               y={y - 10}
               x={bx}
@@ -110,9 +109,9 @@ const OffBoardRevenue = ({ name, revenues, reverse, rows }) => {
   let nameNode = null;
   if (name) {
     nameNode = <Name {...name}
-                     y={name.y || (reverse ? 16 : -16)}
-                     reverse={reverse}
-                     bgColor={name.bgColor || "offboard"} />;
+                               y={name.y || (reverse ? 16 : -16)}
+                               reverse={reverse}
+                               bgColor={name.bgColor || "offboard"} />;
   }
 
   let split = splitRevenues(rows, revenues);

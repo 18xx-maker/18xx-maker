@@ -22,7 +22,7 @@ const Tiles = () => {
 
   let tileNodes = R.map(id => {
     return (
-      <Link to={`/tiles/${id}`}>
+      <Link key={id} to={`/tiles/${id}`}>
         <Svg
           width="200"
           height="200"

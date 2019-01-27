@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="Footer">
+    <footer>
       Code available on{" "}
       <a
         target="_blank"
@@ -14,7 +14,7 @@ const Footer = () => {
       meant for personal use when you already own the original game. Please
       email any corrections or suggestions to{" "}
       <a href="mailto:kelsin@valefor.com">Christopher Giroir</a>.
-    </div>
+    </footer>
   );
 };
 

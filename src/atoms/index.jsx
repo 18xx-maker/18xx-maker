@@ -4,7 +4,7 @@ import * as R from "ramda";
 import Svg from "../Svg";
 import Hex from "../Hex";
 
-require("./atoms.css");
+require("./atoms.scss");
 
 const atoms = [{
   group: "Hexes",
@@ -100,7 +100,7 @@ const atoms = [{
     {track: [{side:2,type:"lawson"}]},
     {track: [{side:2,type:"stub"},
              {side:3,type:"stop"},
-             {side:4,type:"mid"}]},
+             {side:4.5,type:"mid"}]},
     {track: [{side:1,type:"bent"}]},
     {track: [{path:"m 0 75 L 0 50 C 75 0, -75 0, 0 -50 L 0 -75", type:"custom"}]},
     {track: [{side:1,type:"offboard"},{side:6,type:"offboard"}]}
@@ -187,7 +187,7 @@ const atoms = [{
 
 const examples = R.addIndex(R.chain)((h,id) => {
   return <dd key={`example-${id}`}>
-   <Svg width="160" height="160" viewBox="-80 -80 160 160">
+   <Svg width="175.205" height="152" viewBox="-87.6025 -76 175.205 152">
      <Hex hex={h} id={`${id}`} border={true} />
    </Svg>
    <pre>{JSON.stringify(h, null, 2)}</pre>

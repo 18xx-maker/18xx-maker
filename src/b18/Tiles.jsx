@@ -61,9 +61,8 @@ const Tiles = ({match}) => {
       <div key={tile.id}
            className={`tile tile-${tile.id}`}>
         {map(rotation => (
-          <div className="tile-rotation">
+          <div key={`tile-${tile.id}-${rotation}`} className="tile-rotation">
             <Svg
-              key={`tile-${tile.id}-${rotation}`}
               style={{width: `${width}px`,
                       height: `${height}px`}}
               viewBox={viewBox}>

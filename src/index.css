@@ -12,8 +12,8 @@ body {
 
 .tokens {
   position: relative;
-  float: left;
-  margin: 0.35in 0.25in;
+  margin: 2em auto;
+  width: 720px;
 }
 
 .background {
@@ -21,6 +21,7 @@ body {
   width: 8in;
   overflow: hidden;
   position: relative;
+  margin: 0 auto;
 }
 
 .background .text {
@@ -45,22 +46,9 @@ body {
   padding: 0.0625in;
 }
 
-h1 {
-  text-align: left;
-}
-
-h2 {
-  font-size: 5mm;
-  line-height: 0.5in;
-  height: 0.5in;
-  text-align: left;
-  margin: 0;
-}
-
-.home ul,
-.home h1,
-.home h2 {
-  padding-left: 40px;
+.map svg {
+  margin: 0 auto;
+  display: block;
 }
 
 .tileSheet div.row {
@@ -80,21 +68,6 @@ h2 {
 
 .tileSheet svg {
   float: left;
-}
-
-.home {
-  overflow: auto;
-  text-align: left;
-}
-
-.home ul {
-  overflow: auto;
-  list-style: none;
-}
-
-.home li {
-  display: inline-block;
-  margin-right: 2em;
 }
 
 a {
@@ -874,44 +847,54 @@ ul.notes li span {
   border-right: 1px solid black;
 }
 
-.Footer {
-  position: fixed;
-  bottom: 0;
-  z-index: 10;
-  background: #ccc;
-  border: 2px solid black;
-  border-width: 2px 2px 0 0;
-  border-top-right-radius: 5px;
-  padding: 4px 8px;
-  margin: auto auto;
+footer {
+  width: 800px;
+  margin: 0 auto;
   font-weight: normal;
   font-family: sans-serif;
   font-size: 0.8em;
 }
 
-.Footer a {
+footer a {
   font-weight: bold;
   text-decoration: underline;
   color: black;
 }
 
-.Footer a:hover {
+footer a:hover {
   color: rgb(95,35,132);
 }
 
 .PrintNotes {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 10;
-  background: #ccc;
-  border: 2px solid black;
-  border-width: 0 0 2px 2px;
-  border-bottom-left-radius: 5px;
-  padding: 2px 8px 4px 8px;
-  margin: auto auto;
-  font-weight: normal;
+  padding: 0 2em;
+  background-color: #ddd;
+  border-bottom: 2px solid #bbb;
   font-family: sans-serif;
+  font-weight: normal;
+}
+
+.PrintNotes > div {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.PrintNotes h3 {
+  display: inline-block;
+  font-size: 0.8em;
+}
+
+.PrintNotes .select {
+  display: inline-block;
+  margin-right: 2em;
+}
+
+.PrintNotes label {
+  display: inline-block;
+  margin-right: 1em;
+}
+
+.PrintNotes p {
+  display: inline-block;
 }
 
 .PrintNotes b {
@@ -934,35 +917,14 @@ ul.notes li span {
   font-weight: bold;
 }
 
-.PrintNotes label {
-  text-align: left;
-  display: block;
-}
-
 @page {
   margin: 0.25in;
 }
 
 @media print {
-  .Footer,
+  nav,
+  footer,
   .PrintNotes {
     display: none;
-  }
-}
-
-@media screen {
-  .App {
-    padding-top: 0.25in;
-    padding-right: 0.25in;
-    padding-left: 0.25in;
-    padding-bottom: 0.5in;
-  }
-
-  .Footer {
-    left: 0;
-  }
-
-  .PrintNotes {
-    right: 0;
   }
 }

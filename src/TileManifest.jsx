@@ -43,6 +43,7 @@ const TileManifest = ({ match }) => {
 
   let tiles = R.addIndex(R.map)((id, i) => {
     let [idBase, idExtra] = id.split("|");
+    let quantity = R.is(Object, game.tiles[id]) ? R.propOr(1, "quantity", game.tiles[id]) : game.tiles[id];
     return (
       <div
         key={i}
@@ -65,19 +66,19 @@ const TileManifest = ({ match }) => {
           {idBase}
           {idExtra && ` (${idExtra})`}
         </div>
-        <div className="TileManifest--Quantity">{game.tiles[id]}x</div>
+        <div className="TileManifest--Quantity">{quantity}x</div>
       </div>
     );
   }, ids);
 
   return (
     <ColorContext.Provider value="tile">
+      <div className="PrintNotes">
+        <div><p>Tile Manifest is meant to be printed in <b>portait</b> mode</p></div>
+      </div>
       <div className="TileManifest">
         <div className="TileManifest--Title">{game.info.title} Tile Manifest</div>
         {tiles}
-        <div className="PrintNotes">
-          Tile Manifest is meant to be printed in <b>portait</b> mode
-        </div>
       </div>
     </ColorContext.Provider>
   );

@@ -16,13 +16,17 @@ const Background = ({ match }) => {
   return (
     <Color context="companies">
       {c => (
-        <div className="background" style={{ backgroundColor: c(color) }}>
-          <div className="text">{text}</div>
+        <React.Fragment>
           <div className="PrintNotes">
-            Background is meant to be printed in <b>portait</b> mode
+            <div>
+              <p>Background is meant to be printed in <b>portait</b> mode</p>
+            </div>
           </div>
-          <style>{`@media print {@page {size: 8.5in 11in;}}`}</style>
-        </div>
+          <div className="background" style={{ backgroundColor: c(color) }}>
+            <div className="text">{text}</div>
+            <style>{`@media print {@page {size: 8.5in 11in;}}`}</style>
+          </div>
+        </React.Fragment>
       )}
     </Color>
   );
