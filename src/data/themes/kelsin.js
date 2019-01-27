@@ -42,6 +42,8 @@ const colors = {
     pink: "rgb(193,60,125)",
     purple: "rgb(95,35,132)",
     red: "rgb(209,35,42)",
+    lightPurple: "#ac85db",
+    turqoise: "#0AA99E"
   }
 };
 

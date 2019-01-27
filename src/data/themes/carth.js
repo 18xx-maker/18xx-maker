@@ -90,6 +90,8 @@ const colors = {
     lightBrown: "#7B3529",
     lightGreen: "#77A444",
     lightYellow: "#F5821F",
+    lightPurple: "#ac85db",
+    turqoise: "#0AA99E",
     maroon: "#A83324",
     natural: "#F9C20B",
     orange: "#F5821F",
