@@ -1,10 +1,19 @@
 .home {
   width: 800px;
   margin: 0 auto;
+  position: relative;
 
   strong {
     font-weight: bold;
     font-size: 1.2em;
+  }
+
+  svg {
+    position: absolute;
+    top: 1.5em;
+    left: calc(-75.0555px - 1em);
+    width: 75.0555px;
+    height: 65px;
   }
 
   h1 {

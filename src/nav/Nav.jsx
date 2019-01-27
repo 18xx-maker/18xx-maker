@@ -3,6 +3,8 @@ import {NavLink} from "react-router-dom";
 
 import Tiles from "./Tiles";
 
+import RandomTile from "../RandomTile";
+
 import ThemeSelect from "./ThemeSelect";
 import GameSelect from "./GameSelect";
 import ComponentSelect from "./ComponentSelect";
@@ -15,6 +17,7 @@ const Nav = ({match}) => {
   return (
     <nav>
       <div>
+        <RandomTile/>
         <h1><NavLink to="/">18xx</NavLink></h1>
         <ThemeSelect/>
         {gameName === "tiles" && <Tiles/>}
