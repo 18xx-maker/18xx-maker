@@ -4,13 +4,8 @@
 
 .Market table {
   width: calc(100% - 1px);
-  height: calc(100% - 0.5in - 1px);
+  height: calc(100% - 1px);
   table-layout: fixed;
-}
-
-.Market td {
-  width: auto;
-  height: auto;
 }
 
 .Market__1Diag table,

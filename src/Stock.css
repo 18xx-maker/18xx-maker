@@ -19,6 +19,7 @@
 
 .Token {
   position: relative;
+  text-align: center;
 }
 
 .Token i {
