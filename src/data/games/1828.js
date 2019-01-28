@@ -55,112 +55,112 @@ const game = {
     abbrev: "B&M",
     tokens: ["Free", "$100", "$100", "$100"],
     token: "blue",
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Baltimore & Ohio",
     abbrev: "B&O",
     tokens: ["Free", "$100", "$100"],
     token: { type: "quarters", colors: ["blue", "yellow"]},
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Chesapeake & Ohio",
     abbrev: "C&O",
     tokens: ["Free", "$100", "$100"],
     token: "cyan",
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Canadian Pacific Railway",
     abbrev: "CPR",
     tokens: ["Free", "$100", "$100", "$100"],
     token: {type:"bar", colors:["brown"]},
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Grand Trunk",
     abbrev: "GT",
     tokens: ["Free", "$100", "$100"],
     token: { type: "stripe", colors: ["yellow", "red"]},
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Erie Railroad",
     abbrev: "ERIE",
     tokens: ["Free", "$100", "$100"],
     token: {type:"bar", colors: ["yellow"]},
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Illinois Central",
     abbrev: "IC",
     tokens: ["Free", "$100", "$100", "$100"],
     token: {type: "halves", colors: ["green", "yellow"]},
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Michigan Central Railroad",
     abbrev: "MC",
     tokens: ["Free", "$100", "$100", "$100"],
     token: {type: "square", colors: ["yellow", "black"]},
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Missouri Pacific Railraod",
     abbrev: "MP",
     tokens: ["Free", "$100", "$100", "$100"],
     token: {type: "target", colors: ["red", "white"]},
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "New York Central",
     abbrev: "NYC",
     tokens: ["Free", "$100", "$100"],
     token: {type: "stripe", colors:["black", "white"]},
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "New York, Chicago & St. Louis Railroad",
     abbrev: "NKP",
     tokens: ["Free", "$100", "$100"],
     token: {type: "halves", colors: ["blue", "cyan"]},
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "New York, New Haven & Hartford",
     abbrev: "NYH",
     tokens: ["Free", "$100", "$100"],
     token: "orange",
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Norfold & Western Railway",
     abbrev: "NW",
     tokens: ["Free", "$100", "$100", "$100"],
     token: {type: "stripes", colors:["red", "yellow"]},
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Ontario, Simcoe & Huron",
     abbrev: "OS&H",
     tokens: ["Free", "$100", "$100", "$100"],
     token: {type:"stripe", colors: ["green", "lightGreen"]},
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Pennsylvania Railroad",
     abbrev: "PRR",
     tokens: ["Free", "$100", "$100", "$100"],
     token: "red",
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Wabash Railroad",
     abbrev: "WAB",
     tokens: ["Free", "$100", "$100"],
     token: {type: "square", labelColor: "yellow", colors: ["blue", "red"]},
-    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+    shares: [{ quantity: 1, label: "Director's Share", percent: 20, shares: 2 },
              { quantity: 8, percent: 10, shares: 1 }]
   }],
 
@@ -260,7 +260,7 @@ const game = {
     {phase: "Brown", train: "3+D", limit: "3", number: "6", tiles: "brown"},
     {phase: "Red", train: "6", limit: "2", rust: "3", number: "4", tiles: "brown", notes: "One less 6T when playing with 3 players. Private companies are closed"},
     {phase: "Gray", train: "8E", limit: "2", rust: "5", number: "3", tiles: "brown"},
-    {phase: "Purple", train: "Diesel", limit: "2", rust: "3+D", number: "∞", tiles: "brown", notes: "Public companies may not be started"},
+    {phase: "Purple", train: "Diesel", limit: "2", rust: "3+D", number: "∞", tiles: "brown", notes: "Director's certificates cannot be bought from the IPO."},
   ],
 
   pools: [
