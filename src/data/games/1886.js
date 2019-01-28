@@ -48,7 +48,7 @@ const game = {
       name: "Pennsylvania",
       abbrev: "PRR",
       tokens: ["Free", "$40", "$100", "$100"],
-      color: "darkGreen",
+      color: "green",
       shares: [
         {
           quantity: 1,
@@ -181,7 +181,7 @@ const game = {
       name: "Boston & Maine",
       abbrev: "B&M",
       tokens: ["Free", "$40"],
-      color: "maroon",
+      color: "brown",
       shares: [
         {
           quantity: 1,
@@ -1570,7 +1570,7 @@ const game = {
             companies: [
               {
                 label: "OR",
-                color: "darkGreen"
+                color: "green"
               }
             ],
             name: {
@@ -1727,7 +1727,7 @@ const game = {
             companies: [
               {
                 label: "KR",
-                color: "darkGreen"
+                color: "green"
               }
             ],
             name: {

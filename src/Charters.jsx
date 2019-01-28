@@ -26,7 +26,7 @@ const Charters = ({ match }) => {
             key={company.abbrev}
             name={company.name}
             abbrev={company.abbrev}
-            color={company.color}
+            token={company.token || company.color}
             tokens={company.tokens}
             phases={game.phases}
             turns={game.turns}

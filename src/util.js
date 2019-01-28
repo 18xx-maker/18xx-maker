@@ -210,7 +210,11 @@ const resolveHex = (hex, hexes) => {
     let copyHex = R.find(h => R.indexOf(hex.copy, h.hexes) > -1, hexes);
 
     if (copyHex) {
-      return mergeHex(hex, resolveHex(copyHex, hexes));
+      let merged = mergeHex(hex, resolveHex(copyHex, hexes));
+
+      delete merged.copy;
+
+      return merged;
     }
   }
 
@@ -225,11 +229,12 @@ const mergeHex = (a, b) => {
       if(key === "track" || key === "offBoardTrack") {
         // Concat tracks
         return R.concat(da, db);
+      } else if(key === "companies") {
+        // New companies only
+        return da;
       } else {
         return R.zipWith(mergeHex, da, db);
       }
-    } else if (da instanceof Object) {
-      return mergeHex(da, db);
     } else {
       return da;
     }

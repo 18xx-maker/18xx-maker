@@ -156,7 +156,7 @@ const game = {
       name: "Illinois Central",
       abbrev: "IC",
       tokens: ["Free", "$80", "$80", "$80"],
-      color: "darkGreen",
+      color: "green",
       shares: [
         {
           quantity: 1,
@@ -419,7 +419,7 @@ const game = {
     hexes: [
       {
         color: "plain",
-        tokens: [{label: "IC", color: "darkGreen", width: 15}],
+        tokens: [{label: "IC", token: "green", width: 15}],
         hexes: ["E5", "F6", "G5", "H6", "J4"]
       },
       {
@@ -1394,7 +1394,7 @@ const game = {
             companies: [
               {
                 label: "IC",
-                color: "darkGreen"
+                color: "green"
               }
             ]
           }

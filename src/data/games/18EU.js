@@ -1001,7 +1001,7 @@ const game = {
                    { side: 6, dashed: "true", color: "gray" } ],
       },
       {
-        color: "green",
+        color: "land",
         hexes: [
           "M18",
           "L19",

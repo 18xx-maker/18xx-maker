@@ -1,14 +1,14 @@
 const colors = {
-  plain: "#CBE6D3",
-  yellow: "#FCE803",
-  green: "#23994F",
-  brown: "#AE774E",
+  plain: "#CFE6C5",
+  yellow: "#FDE900",
+  green: "#71BF44",
+  brown: "#CB7745",
   gray: "#BCBDC0",
 
-  offboard: "#ED1D25",
+  offboard: "#EC232A",
   mountain: "#CD8C5E",
-  water: "#94D4E9",
-  orange: "#FF6607",
+  water: "#147EBE",
+  land: "#8DA98C",
 
   white: "#fff",
   black: "#000",
@@ -22,26 +22,17 @@ const colors = {
 
   // Companies
   companies: {
-    black: "#22272B",
-    blue: "#03A0F9",
-    brown: "#9A3A25",
-    cyan: "#39B9C6",
-    darkGreen: "#1EA656",
-    gray: "#B4BBBC",
-    green: "#1EA656",
-    lightBlue: "#76E7FF",
-    lightBrown: "#C46A52",
-    lightGreen: "#ADE43F",
-    maroon: "#9A3A25",
-    natural: "#D4C9BE",
-    orange: "#FF6607",
-    pink: "#FB77A9",
-    purple: "#593E8F",
-    red: "#EE100F",
-    white: "#EFF6F7",
-    yellow: "#FFDC0C",
-    lightPurple: "#ac85db",
-    turqoise: "#0AA99E"
+    black: "#1A1919",
+    blue: "#0089C4",
+    cyan: "#B9E5FB",
+    lightGreen: "#76BA44",
+    green: "#12A969",
+    brown: "#76451D",
+    orange: "#F47D20",
+    pink: "#FAD5E4",
+    purple: "#772B7B",
+    red: "#D8222A",
+    yellow: "#FFF103"
   }
 };
 

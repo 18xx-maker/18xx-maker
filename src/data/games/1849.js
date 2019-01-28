@@ -1441,7 +1441,7 @@ const game = {
             companies: [
               {
                 label: "ATA",
-                color: "darkGreen"
+                color: "green"
               }
             ],
             name: {

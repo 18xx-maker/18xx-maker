@@ -132,7 +132,7 @@ const game = {
       name: "Missouri Pacific Railroad",
       abbrev: "MP",
       tokens: ["Free", "$40", "$100", "Dallas"],
-      color: "maroon",
+      color: "brown",
       shares: [
         {
           quantity: 1,
@@ -151,7 +151,7 @@ const game = {
       name: "Missouri Kansas Texas Railroad",
       abbrev: "MKT",
       tokens: ["Free", "$40", "$100", "Southwest"],
-      color: "darkGreen",
+      color: "green",
       shares: [
         {
           quantity: 1,
@@ -821,7 +821,7 @@ const game = {
         },{
           label: "MKT",
           width: 15,
-          color: "darkGreen",
+          color: "green",
           angle: 300,
           percent: 0.8
 
@@ -922,7 +922,7 @@ const game = {
           name: {name: "Kansas City", offset: 71},
           companies: [{
             label: "MKT",
-            color: "darkGreen"
+            color: "green"
           }]
         }],
         hexes: ["B11"]
@@ -959,7 +959,7 @@ const game = {
           name: {name: "St. Louis", offset: 66},
           companies: [{
             label: "MP",
-            color: "maroon"
+            color: "brown"
           }]
         }],
         tokens: [{
@@ -1002,7 +1002,7 @@ const game = {
         tokens: [{
           label: "MP",
           width: 15,
-          color: "maroon",
+          color: "brown",
           percent: 0.7
         }],
         hexes: ["J5"]

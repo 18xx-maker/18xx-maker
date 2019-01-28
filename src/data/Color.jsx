@@ -1,7 +1,6 @@
 import carth from "./themes/carth";
 import dtg from "./themes/dtg";
 import gmt from "./themes/gmt";
-import kelsin from "./themes/kelsin";
 import ps18xx from "./themes/ps18xx";
 
 import * as tinycolor from "tinycolor2";
@@ -22,7 +21,6 @@ const schemes = {
   carth,
   dtg,
   gmt,
-  kelsin,
   ps18xx
 };
 

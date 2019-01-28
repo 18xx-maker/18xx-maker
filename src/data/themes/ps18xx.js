@@ -1,5 +1,5 @@
 const colors = {
-  plain: "#F5F5DC",
+  plain: "#F5F5DD",
   yellow: "#FFFE03",
   green: "#64E164",
   brown: "#CE6601",
@@ -7,8 +7,8 @@ const colors = {
 
   offboard: "#FE6464",
   mountain: "#ee874b",
-  water: "#1e90ff",
-  orange: "#FF6607",
+  water: "#2090ff",
+  land: "#0a0",
 
   white: "#fff",
   black: "#000",
@@ -22,26 +22,17 @@ const colors = {
 
   // Companies
   companies: {
-    black: "#22272B",
-    blue: "#03A0F9",
-    brown: "#9A3A25",
-    cyan: "#39B9C6",
-    darkGreen: "#1EA656",
-    gray: "#B4BBBC",
-    green: "#1EA656",
-    lightBlue: "#76E7FF",
-    lightBrown: "#C46A52",
-    lightGreen: "#ADE43F",
-    maroon: "#9A3A25",
-    natural: "#D4C9BE",
-    orange: "#FF6607",
-    pink: "#FB77A9",
-    purple: "#593E8F",
-    red: "#EE100F",
-    white: "#EFF6F7",
-    yellow: "#FFDC0C",
-    lightPurple: "#ac85db",
-    turqoise: "#0AA99E"
+    black: "#000",
+    blue: "#00f",
+    cyan: "#0ff",
+    lightGreen: "#90ee90",
+    green: "#0a0",
+    brown: "#a52a2a",
+    orange: "#ffa500",
+    pink: "#ff69b4",
+    purple: "#808",
+    red: "#f00",
+    yellow: "#ff0"
   }
 };
 

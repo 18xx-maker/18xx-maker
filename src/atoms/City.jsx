@@ -3,6 +3,13 @@ import Color from "../data/Color";
 
 import Name from "./Name";
 
+import find from "ramda/es/find";
+import is from "ramda/es/is";
+import propEq from "ramda/es/propEq";
+import Token from "../Token";
+
+import Config from "../data/Config";
+
 const City = ({ size, companies, border, name, extend, rotation }) => {
   if (size === undefined) {
     size = 1;
@@ -13,36 +20,32 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
        companies[num] &&
        companies[num].color);
 
-  let companyLabel = num =>
-      (companies &&
-       companies[num] &&
-       companies[num].label && (
-         <Color context="companies">
-           {(c,t) => (
-             <text
-               transform={`rotate(${companies[num].rotate ?  0 : -rotation || 0})`}
-               fill={t(c(companyColor(num)))}
-               fontFamily="Bitter"
-               fontWeight="bold"
-               textLength={
-                 companies[num].label.length > 2
-                   ? 40
-                   : companies[num].label.length === 1
-                   ? 12.5
-                   : 25
-               }
-               lengthAdjust="spacingAndGlyphs"
-               textAnchor="middle"
-               dominantBaseline="central"
-               x="0"
-               y="0"
-             >
-               {companies[num].label}
-             </text>
-           )}
-         </Color>
-       )) ||
-      null;
+  let companyLabel = num => {
+    if(companies && companies[num]) {
+      if(is(Object, companies[num])) {
+        return <Token label={companies[num].label} token={companies[num].token || companies[num].color}/>;
+      } else {
+        return (
+          <Config>
+            {(config, game) => {
+              if(config.plainMapHomes) {
+                return <Token label={companies[num]} token="white"/>;
+              } else {
+                let company = find(propEq("abbrev", companies[num]), game.companies);
+                if(company) {
+                  return <Token label={company.abbrev} token={company.color || company.token}/>;
+                } else {
+                  return null;
+                }
+              }
+            }}
+          </Config>
+        );
+      }
+    }
+
+    return null;
+  };
 
   let nameNode = null;
 
@@ -52,8 +55,8 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
       path = path + "Reverse";
     }
     nameNode = <Name {...name}
-               y={name.y || (name.reverse ? 7 : 0)}
-               path={path} />;
+                  y={name.y || (name.reverse ? 7 : 0)}
+                  path={path} />;
   }
 
   if (size === 1) {

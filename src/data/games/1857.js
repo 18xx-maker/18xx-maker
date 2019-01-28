@@ -90,7 +90,7 @@ const game = {
       name: "Central Cordoba Railway",
       abbrev: "CC",
       tokens: ["$40", "$100", "$100"],
-      color: "maroon",
+      color: "brown",
       shares: [
         {
           quantity: 1,
@@ -166,7 +166,7 @@ const game = {
       name: "Buenos Aires Great Southern Railway",
       abbrev: "BAS",
       tokens: ["$40", "$100", "$100"],
-      color: "darkGreen",
+      color: "green",
       shares: [
         {
           quantity: 1,
@@ -761,7 +761,7 @@ const game = {
             companies: [
               {
                 label: "CC",
-                color: "maroon"
+                color: "brown"
               }
             ]
           }
@@ -1046,7 +1046,7 @@ const game = {
               name: "Buenos Aires",
               rotation: 30
             },
-            companies: [{ label: "BAS", color: "darkGreen" }]
+            companies: [{ label: "BAS", color: "green" }]
           }
         ],
         track: [
@@ -1190,7 +1190,7 @@ const game = {
             companies: [
               {
                 label: "B&M",
-                color: "maroon"
+                color: "brown"
               }
             ]
           }
@@ -1243,7 +1243,7 @@ const game = {
               name: "Buenos Aires",
               rotation: 30
             },
-            companies: [{ label: "PRR", color: "darkGreen" }]
+            companies: [{ label: "PRR", color: "green" }]
           }
         ],
         track: [

@@ -3,6 +3,8 @@ import Token from "./Token";
 import Color from "./data/Color";
 import ColorContext from "./context/ColorContext";
 
+import is from "ramda/es/is";
+
 const Share = ({
   cost,
   revenue,
@@ -11,7 +13,7 @@ const Share = ({
   label,
   name,
   abbrev,
-  color
+  token
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -25,13 +27,13 @@ const Share = ({
         <div className="share__token">
           <ColorContext.Provider value="companies">
             <svg>
-              <Token label={abbrev} color={color} width={25} />
+              <Token label={abbrev} token={token} width={25} />
             </svg>
           </ColorContext.Provider>
         </div>
         <Color context="companies">
           {(c,t) => (
-            <div className="share__hr" style={{ backgroundColor: c(color) }} />
+            <div className="share__hr" style={{ backgroundColor: c(is(Object,token) ? token.colors[0] : token) }} />
           )}
         </Color>
         {label &&

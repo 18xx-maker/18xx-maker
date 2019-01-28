@@ -111,7 +111,7 @@ const game = {
       name: "Freshwater, Yarmouth & Newport",
       abbrev: "FYN",
       tokens: ["Home", "£40", "£100"],
-      color: "darkGreen",
+      color: "green",
       shares: [
         {
           quantity: 1,
@@ -615,7 +615,7 @@ const game = {
           },
           {
             label: "FYN",
-            color: "darkGreen",
+            color: "green",
             row: 4
           },
           {
@@ -655,7 +655,7 @@ const game = {
           },
           {
             label: "FYN",
-            color: "darkGreen",
+            color: "green",
             row: 4
           },
           {
@@ -695,7 +695,7 @@ const game = {
           },
           {
             label: "FYN",
-            color: "darkGreen",
+            color: "green",
             row: 4
           }
         ],
@@ -725,7 +725,7 @@ const game = {
           },
           {
             label: "FYN",
-            color: "darkGreen",
+            color: "green",
             row: 4
           }
         ],
@@ -1108,7 +1108,7 @@ const game = {
               companies: [
                 {
                   label: "FYN",
-                  color: "darkGreen"
+                  color: "green"
                 }
               ]
             }
@@ -1529,7 +1529,7 @@ const game = {
               companies: [
                 {
                   label: "FYN",
-                  color: "darkGreen"
+                  color: "green"
                 }
               ]
             }

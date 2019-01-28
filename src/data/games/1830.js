@@ -54,7 +54,7 @@ const game = {
       name: "Pennsylvania",
       abbrev: "PRR",
       tokens: ["Free", "$40", "$100", "$100"],
-      color: "darkGreen",
+      color: "green",
       shares: [
         {
           quantity: 1,
@@ -187,7 +187,7 @@ const game = {
       name: "Boston & Maine",
       abbrev: "B&M",
       tokens: ["Free", "$40"],
-      color: "maroon",
+      color: "brown",
       shares: [
         {
           quantity: 1,
@@ -860,12 +860,7 @@ const game = {
             name: {
               name: "Cleveland"
             },
-            companies: [
-              {
-                label: "C&O",
-                color: "cyan"
-              }
-            ]
+            companies: ["C&O"]
           }
         ],
         hexes: ["F6"]
@@ -1006,10 +1001,7 @@ const game = {
             angle: 285,
             percent: 0.55,
             name: {name: "Buffalo"},
-            companies: [{
-              label: "ERIE",
-              color: "yellow"
-            }]
+            companies: ["ERIE"]
           }
         ],
         hexes: ["E11"]
@@ -1042,12 +1034,7 @@ const game = {
             name: {
               name: "Altoona"
             },
-            companies: [
-              {
-                label: "PRR",
-                color: "darkGreen"
-              }
-            ]
+            companies: ["PRR"]
           }
         ],
         track: [
@@ -1170,12 +1157,7 @@ const game = {
               reverse: true,
               rotation: -30
             },
-            companies: [
-              {
-                label: "B&O",
-                color: "blue"
-              }
-            ]
+            companies: ["B&O"]
           }
         ],
         track: [
@@ -1309,19 +1291,10 @@ const game = {
             value: 40
           }
         ],
-        cities: [
-          {
-            name: {
-              name: "Montreal"
-            },
-            companies: [
-              {
-                label: "CPR",
-                color: "red"
-              }
-            ]
-          }
-        ],
+        cities: [{
+          name: {name: "Montreal"},
+          companies: ["CPR"]
+        }],
         hexes: ["A19"]
       },
       {
@@ -1331,12 +1304,7 @@ const game = {
             name: {
               name: "Albany"
             },
-            companies: [
-              {
-                label: "NYC",
-                color: "black"
-              }
-            ]
+            companies: ["NYC"]
           }
         ],
         hexes: ["E19"]
@@ -1362,12 +1330,7 @@ const game = {
               name: "New York",
               reverse: true
             },
-            companies: [
-              {
-                label: "NYNH",
-                color: "orange"
-              }
-            ]
+            companies: ["NYNH"]
           },
           {
             angle: 50,
@@ -1473,12 +1436,7 @@ const game = {
               reverse: true,
               rotation: -90
             },
-            companies: [
-              {
-                label: "B&M",
-                color: "maroon"
-              }
-            ]
+            companies: ["B&M"]
           }
         ],
         values: [

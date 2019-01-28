@@ -84,7 +84,7 @@ const game = {
       name: "Nordhausen-Wernigeroder Eisenbahn",
       abbrev: "NWE",
       tokens: ["Free"],
-      color: "darkGreen",
+      color: "green",
       shares: [
         {
           quantity: 1,
@@ -122,7 +122,7 @@ const game = {
       name: "Kleinbahn Ellrich-Zorge",
       abbrev: "KEZ",
       tokens: ["Free"],
-      color: "maroon",
+      color: "brown",
       shares: [
         {
           quantity: 1,
@@ -527,7 +527,7 @@ const game = {
             companies: [
               {
                 label: "NWE",
-                color: "darkGreen"
+                color: "green"
               },
               {
                 label: "WBE",
@@ -650,7 +650,7 @@ const game = {
           {
             label: "HBE",
             width: 15,
-            color: "red",
+            token: "red",
             angle: 60,
             percent: 0.75
           }
@@ -792,7 +792,7 @@ const game = {
           {
             label: "NWE",
             width: 15,
-            color: "darkGreen",
+            token: "green",
             angle: 240,
             percent: 0.75
           }
@@ -828,7 +828,7 @@ const game = {
           {
             label: "WBE",
             width: 15,
-            color: "black",
+            token: "black",
             angle: 300,
             percent: 0.7
           }
@@ -864,7 +864,7 @@ const game = {
           {
             label: "WBE",
             width: 15,
-            color: "black",
+            token: "black",
             angle: 300,
             percent: 0.7
           }
@@ -904,7 +904,7 @@ const game = {
           {
             label: "WBE",
             width: 15,
-            color: "black",
+            token: "black",
             angle: 300,
             percent: 0.7
           }
@@ -1018,7 +1018,7 @@ const game = {
           {
             label: "NWE",
             width: 15,
-            color: "darkGreen",
+            token: "green",
             angle: 240,
             percent: 0.75
           }
@@ -1402,7 +1402,7 @@ const game = {
           {
             label: "NWE",
             width: 15,
-            color: "darkGreen",
+            token: "green",
             angle: 240,
             percent: 0.75
           }
@@ -1708,7 +1708,7 @@ const game = {
           {
             label: "SHE",
             width: 15,
-            color: "yellow",
+            token: "yellow",
             angle: 240,
             percent: 0.75
           }
@@ -2079,7 +2079,7 @@ const game = {
           {
             label: "SHE",
             width: 15,
-            color: "yellow",
+            token: "yellow",
             angle: 240,
             percent: 0.75
           }
@@ -2104,7 +2104,7 @@ const game = {
             companies: [
               {
                 label: "KEZ",
-                color: "maroon"
+                color: "brown"
               }
             ]
           }
@@ -2181,7 +2181,7 @@ const game = {
             companies: [
               {
                 label: "NWE",
-                color: "darkGreen"
+                color: "green"
               }
             ],
             name: {
@@ -2455,7 +2455,7 @@ const game = {
           {
             label: "KEZ",
             width: 15,
-            color: "maroon",
+            token: "brown",
             percent: 0.7
           }
         ],
@@ -2510,7 +2510,7 @@ const game = {
           {
             label: "NWE",
             width: 15,
-            color: "darkGreen",
+            token: "green",
             angle: 240,
             percent: 0.75
           }
@@ -2721,7 +2721,7 @@ const game = {
           {
             label: "GHE",
             width: 15,
-            color: "blue",
+            token: "blue",
             angle: 240,
             percent: 0.75
           }
@@ -2851,7 +2851,7 @@ const game = {
             companies: [
               {
                 label: "KEZ",
-                color: "maroon"
+                color: "brown"
               }
             ]
           }
@@ -2924,14 +2924,7 @@ const game = {
           angle: 300,
           percent: 0.5
         },
-        tokens: [
-          {
-            label: "NWE",
-            width: 15,
-            color: "darkGreen",
-            angle: 240,
-            percent: 0.75
-          }
+        tokens: [{label: "NWE", width: 15, token: "green", angle: 240, percent: 0.75}
         ],
         hexes: ["I8"]
       },
@@ -3156,7 +3149,7 @@ const game = {
             companies: [
               {
                 label: "NWE",
-                color: "darkGreen"
+                color: "green"
               }
             ]
           }

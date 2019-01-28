@@ -121,7 +121,7 @@ const game = {
       name: "Atlanta, Birmingham & Coast Railroad",
       abbrev: "ABC",
       tokens: ["Free", "$40"],
-      color: "darkGreen",
+      color: "green",
       shares: [
         {
           quantity: 1,
@@ -852,7 +852,7 @@ const game = {
             },
             companies: [
               {
-                color: "darkGreen",
+                color: "green",
                 label: "ABC"
               }
             ]

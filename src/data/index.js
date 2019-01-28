@@ -11,6 +11,10 @@ const paper = {
 // max: make the two end pages even, the others are full
 const pagination = "equal";
 
+// If true don't use tokens as map home locations,
+// just display in black and white
+const plainMapHomes = false;
+
 // How to display map coordinates
 // outside: On the outside border of the map
 // inside: Inside each hex
@@ -50,5 +54,6 @@ export {
   market,
   pagination,
   paper,
-  scheme
+  scheme,
+  plainMapHomes
 };

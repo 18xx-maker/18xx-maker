@@ -405,7 +405,7 @@ const game = {
     {
       name: "Tosa Electric Railway",
       abbrev: "TR",
-      color: "darkGreen",
+      color: "green",
       tokens: ["Free", "¥40", "¥40"],
       shares: [
         {
@@ -443,7 +443,7 @@ const game = {
     {
       name: "Uwajima Railway",
       abbrev: "UR",
-      color: "maroon",
+      color: "brown",
       tokens: ["Free", "¥40", "¥40"],
       shares: [
         {
@@ -966,7 +966,7 @@ const game = {
             companies: [
               {
                 label: "UR",
-                color: "maroon"
+                color: "brown"
               }
             ]
           }
@@ -1124,7 +1124,7 @@ const game = {
             companies: [
               {
                 label: "TR",
-                color: "darkGreen"
+                color: "green"
               }
             ]
           }

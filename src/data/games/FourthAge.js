@@ -76,7 +76,7 @@ const game = {
       name: "Shire and Westlands",
       abbrev: "SWR",
       tokens: ["Free", "$40"],
-      color: "goldenrod",
+      color: "water",
       shares: [
         {
           quantity: 1,
@@ -190,7 +190,7 @@ const game = {
       name: "Orcish",
       abbrev: "O",
       tokens: ["Free", "$40", "$100"],
-      color: "darkGreen",
+      color: "green",
       shares: [
         {
           quantity: 1,
@@ -209,7 +209,7 @@ const game = {
       name: "Southern Excursion Railway",
       abbrev: "SER",
       tokens: ["Free", "$40"],
-      color: "maroon",
+      color: "brown",
       shares: [
         {
           quantity: 1,
@@ -882,7 +882,7 @@ const game = {
         cities: [{
           companies: [{
             label: "SWR",
-            color: "goldenrod"
+            color: "water"
           }],
           name: {
             name: "Hobbitown",
@@ -990,7 +990,7 @@ const game = {
         tokens: [{
           label: "SER",
           width: 15,
-          color: "maroon",
+          color: "brown",
           angle: 150,
           percent: 0.7
         },{
@@ -1041,7 +1041,7 @@ const game = {
         tokens: [{
           label: "SWR",
           width: 15,
-          color: "goldenrod",
+          color: "water",
           percent: 0.65
         }],
         hexes:["I5"]
@@ -1088,7 +1088,7 @@ const game = {
         cities: [{
           companies: [{
             label: "SER",
-            color: "maroon"
+            color: "brown"
           }],
           name: {
             name: "Harondor"
@@ -1211,7 +1211,7 @@ const game = {
         cities: [{
           companies: [{
             label: "O",
-            color: "darkGreen"
+            color: "green"
           }],
           name: {
             name: "Barad-Dur"

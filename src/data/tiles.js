@@ -932,7 +932,7 @@ const tiles = {
     labels: [{label: "K", angle: 270, percent: 0.82}],
     cities: [{size: 3,
               rotation: 30,
-              companies: [{label: "TR", color: "darkGreen"}]}],
+              companies: [{label: "TR", color: "green"}]}],
     track: [{ side: 4 }, { side: 5 }, { side: 3 }, { side: 6 }]
   },
   "466": {
@@ -1127,7 +1127,7 @@ const tiles = {
     values: [{value: 40, angle: 210, percent: 0.75}],
     cities: [{angle:300,percent:0.33,size:2,rotation:30,
               name: {name: "Mexico City", reverse: true},
-              companies: [{color: "darkGreen", label: "NdM"}]}],
+              companies: [{color: "green", label: "NdM"}]}],
     centerTowns: [{angle: 120, percent: 0.65,
                    name: {name: "Toluca", rotation: 30}}],
     track: [{side:4},{side:6}]
@@ -1188,7 +1188,7 @@ const tiles = {
     cities: [{angle:300,percent:0.333,size:2,rotation:30,
               extend: "right",
               name: {name: "Mexico City"},
-              companies: [{color: "darkGreen", label: "NdM"}]}],
+              companies: [{color: "green", label: "NdM"}]}],
     towns: [{angle: 120, percent: 0.65, rotation: -60,
              name: {name: "Toluca"}}],
     track: [{side:1},{side:2},{side:3},{side:4},{side:6}]
@@ -1209,7 +1209,7 @@ const tiles = {
     cities: [{angle:300,percent:0.333,size:2,rotation:30,
               extend: "right",
               name: {name: "Mexico City"},
-              companies: [{color: "darkGreen", label: "NdM"}]}],
+              companies: [{color: "green", label: "NdM"}]}],
     towns: [{angle: 120, percent: 0.65, rotation: -60,
              name: {name: "Toluca"}}],
     track: [{side:1},{side:2},{side:3},{side:4},{side:6}]

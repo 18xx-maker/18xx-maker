@@ -173,7 +173,7 @@ const game = {
       name: "Hankyû Railways",
       abbrev: "H",
       tokens: ["Toyonaka", "¥40", "¥100", "¥100"],
-      color: "maroon",
+      color: "brown",
       shares: [
         {
           quantity: 1,
@@ -192,7 +192,7 @@ const game = {
       name: "Hanshin Electric Railroad",
       abbrev: "HE",
       tokens: ["Nishinomiya", "¥40", "¥100"],
-      color: "darkGreen",
+      color: "green",
       shares: [
         {
           quantity: 1,
@@ -958,7 +958,7 @@ const game = {
           {
             companies: [
               {
-                color: "maroon",
+                color: "brown",
                 label: "H"
               }
             ],
@@ -1132,7 +1132,7 @@ const game = {
             companies: [
               {
                 label: "HE",
-                color: "darkGreen"
+                color: "green"
               }
             ],
             name: { name: "Nishinomiya" }

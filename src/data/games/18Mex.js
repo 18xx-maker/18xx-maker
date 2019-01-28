@@ -66,7 +66,7 @@ const game = {
       name: "National Railways of Mexicon",
       abbrev: "NdM",
       tokens: ["Free", "$40", "$100", "$100"],
-      color: "darkGreen",
+      color: "green",
       shares: [
         {
           quantity: 1,
@@ -965,7 +965,7 @@ const game = {
           name: {offset: 40, name: "Mexico City", reverse: true},
           companies: [{
             label: "NdM",
-            color: "darkGreen"
+            color: "green"
           }]
         }],
         values: [{

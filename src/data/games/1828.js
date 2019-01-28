@@ -10,6 +10,10 @@ const game = {
     titleX: 1700,
   },
 
+  config: {
+    plainMapHomes: true
+  },
+
   colors: {
     train_yellow: "rgb(241, 231, 141)",
     train_green: "rgb(165,211,167)",
@@ -21,7 +25,18 @@ const game = {
   },
 
   // Extra Tokens
-  tokens: ["Round", "Merger", "Block", "Block", "Block", "Block", "Block", "Block", "coal", "coal", "coal"],
+  tokens: ["Round",
+           "Merger",
+           {token:"black"},
+           {token:"black"},
+           {token:"black"},
+           {token:"black"},
+           {token:"black"},
+           {token:"black"},
+           {label:"C&P", token:{type:"bar",colors:["white", "black"]}},
+           {label:"coal", token:"black"},
+           {label:"coal", token:"black"},
+           {label:"coal", token:"black"}],
 
   // Need an IPO sheet
   ipo: false,
@@ -38,194 +53,114 @@ const game = {
     name: "Boston & Maine",
     abbrev: "B&M",
     tokens: ["Free", "$100", "$100", "$100"],
-    color: "maroon",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: "blue",
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Baltimore & Ohio",
     abbrev: "B&O",
     tokens: ["Free", "$100", "$100"],
-    color: "blue",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: { type: "quarters", colors: ["blue", "yellow"]},
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Chesapeake & Ohio",
     abbrev: "C&O",
     tokens: ["Free", "$100", "$100"],
-    color: "cyan",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: "cyan",
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Canadian Pacific Railway",
     abbrev: "CPR",
     tokens: ["Free", "$100", "$100", "$100"],
-    color: "red",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: {type:"bar", colors:["brown"]},
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Grand Trunk",
     abbrev: "GT",
     tokens: ["Free", "$100", "$100"],
-    color: "orange",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: { type: "stripe", colors: ["yellow", "red"]},
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Erie Railroad",
     abbrev: "ERIE",
     tokens: ["Free", "$100", "$100"],
-    color: "yellow",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: {type:"bar", colors: ["yellow"]},
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Illinois Central",
     abbrev: "IC",
     tokens: ["Free", "$100", "$100", "$100"],
-    color: "darkGreen",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: {type: "halves", colors: ["green", "yellow"]},
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Michigan Central Railroad",
     abbrev: "MC",
     tokens: ["Free", "$100", "$100", "$100"],
-    color: "pink",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: {type: "square", colors: ["yellow", "black"]},
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Missouri Pacific Railraod",
     abbrev: "MP",
     tokens: ["Free", "$100", "$100", "$100"],
-    color: "brown",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: {type: "target", colors: ["red", "white"]},
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "New York Central",
     abbrev: "NYC",
     tokens: ["Free", "$100", "$100"],
-    color: "black",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: {type: "stripe", colors:["black", "white"]},
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "New York, Chicago & St. Louis Railroad",
     abbrev: "NKP",
     tokens: ["Free", "$100", "$100"],
-    color: "gray",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: {type: "halves", colors: ["blue", "cyan"]},
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "New York, New Haven & Hartford",
     abbrev: "NYH",
     tokens: ["Free", "$100", "$100"],
-    color: "natural",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: "orange",
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Norfold & Western Railway",
     abbrev: "NW",
     tokens: ["Free", "$100", "$100", "$100"],
-    color: "turqoise",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: {type: "stripes", colors:["red", "yellow"]},
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Ontario, Simcoe & Huron",
     abbrev: "OS&H",
     tokens: ["Free", "$100", "$100", "$100"],
-    color: "lightGreen",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: {type:"stripe", colors: ["green", "lightGreen"]},
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Pennsylvania Railroad",
     abbrev: "PRR",
     tokens: ["Free", "$100", "$100", "$100"],
-    color: "lightPurple",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: "red",
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   },{
     name: "Wabash Railroad",
     abbrev: "WAB",
     tokens: ["Free", "$100", "$100"],
-    color: "purple",
-    shares: [{ quantity: 1,
-               label: "President Share",
-               percent: 20,
-               shares: 2 },
-             { quantity: 8,
-               percent: 10,
-               shares: 1 }]
+    token: {type: "square", labelColor: "yellow", colors: ["blue", "red"]},
+    shares: [{ quantity: 1, label: "President Share", percent: 20, shares: 2 },
+             { quantity: 8, percent: 10, shares: 1 }]
   }],
 
   trains: [
@@ -607,7 +542,7 @@ const game = {
               rotation: 30,
               name: "Mackinaw City",
             },
-            companies: [{label: "MC", color: "white",},]
+            companies: ["MC"]
           },
         ],
         values: [{angle: 30, percent: 0.667, value: 30,},],
@@ -636,9 +571,7 @@ const game = {
             angle: 90,
             percent: 1.0,
             outside: true,
-            companies: [
-              {label: "OS&H", color: "white",},
-            ],
+            companies: ["OS&H"],
             name: {
               rotation: 60,
               name: "Canada",
@@ -674,9 +607,7 @@ const game = {
               rotation: 30,
               name: "Montreal",
             },
-            companies: [
-              {label: "CPR", color: "white",},
-            ]
+            companies: ["CPR"]
           }
         ],
         hexes: ["A23"]
@@ -719,9 +650,7 @@ const game = {
               name: "St Louis",
               rotation: 30
             },
-            companies: [
-              {label: "MP", color: "white",},
-            ],
+            companies: ["MP"]
           }
         ],
         water: {
@@ -768,12 +697,7 @@ const game = {
               name: "Grand Rapids",
               rotation: 270
             },
-            companies: [
-              {
-                label: "GT",
-                color: "white"
-              }
-            ],
+            companies: ["GT"]
           }
         ],
         values: [
@@ -839,9 +763,7 @@ const game = {
             name: {
               name: "Nashville"
             },
-            companies: [
-              {label: "IC", color: "white",},
-            ],
+            companies: ["IC"]
           },
         ],
         track: [
@@ -971,12 +893,7 @@ const game = {
               rotation: 30,
               name: "Cleveland"
             },
-            companies: [
-              {
-                label: "NKP",
-                color: "white"
-              }
-            ]
+            companies: ["NKP"]
           }
         ],
         offBoardRevenue: {
@@ -1045,12 +962,7 @@ const game = {
         cities: [
           {
             name: {name: "Peterborough",},
-            companies: [
-              {
-                label: "C&P",
-                color: "white"
-              }
-            ]
+            companies: ["C&P"]
           },
         ],
         companies: [
@@ -1161,12 +1073,7 @@ const game = {
             name: {
               name: "Buffalo",
             },
-            companies: [
-              {
-                label: "ERIE",
-                color: "white"
-              }
-            ]
+            companies: ["ERIE"]
           }
         ],
         hexes: ["E15"]
@@ -1214,12 +1121,7 @@ const game = {
               y: 30,
 
             },
-            companies: [
-              {
-                label: "PRR",
-                color: "white"
-              }
-            ]
+            companies: ["PRR"]
           }
         ],
         track: [
@@ -1326,15 +1228,8 @@ const game = {
         ],
         cities: [
           {
-            name: {
-              name: "Baltimore",
-            },
-            companies: [
-              {
-                label: "B&O",
-                color: "white"
-              }
-            ]
+            name: {name: "Baltimore"},
+            companies: ["B&O"]
           }
         ],
         track: [
@@ -1355,9 +1250,7 @@ const game = {
               rotation: 30,
               name: "Norfolk",
             },
-            companies: [
-              {label: "NW", color: "white",},
-            ],
+            companies: ["NW"],
           }
         ],
         offBoardRevenue: {
@@ -1511,12 +1404,7 @@ const game = {
               rotation: 30,
               name: "Albany"
             },
-            companies: [
-              {
-                label: "NYC",
-                color: "white"
-              }
-            ]
+            companies: ["NYC"]
           }
         ],
         hexes: ["E23"]
@@ -1542,12 +1430,7 @@ const game = {
               name: "New York",
               reverse: true
             },
-            companies: [
-              {
-                label: "NYH",
-                color: "white"
-              }
-            ]
+            companies: ["NYH"]
           },
           {
             angle: 50,
@@ -1649,12 +1532,7 @@ const game = {
               reverse: true,
               rotation: -90
             },
-            companies: [
-              {
-                label: "B&M",
-                color: "white"
-              }
-            ]
+            companies: ["B&M"]
           }
         ],
         values: [
@@ -1789,9 +1667,7 @@ const game = {
               rotation: 30,
               name: "Louisville"
             },
-            companies: [
-              {label: "WAB", color: "white",},
-            ],
+            companies: ["WAB"]
           }
         ],
         hexes: ["H6"]
@@ -1938,9 +1814,7 @@ const game = {
               rotation: 30,
               name: "Richmond"
             },
-            companies: [
-              {label: "C&O", color: "white",},
-            ]
+            companies: ["C&O"],
           }
         ],
         hexes: ["K15"]

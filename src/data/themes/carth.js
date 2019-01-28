@@ -10,7 +10,7 @@ const colors = {
   offboard: "#DC8281",
   mountain: "#997749",
   water: "#4CB2D7",
-  orange: "#F5821F",
+  land: "#DFE2C7",
 
   // Text
   white: "#fefffe",
@@ -80,25 +80,16 @@ const colors = {
   // Companies
   companies: {
     black: "#37383A",
-    blue: "#0088D2",
-    brown: "#7B3529",
-    cyan: "#0AA99E",
-    darkGreen: "#247434",
-    gray: "#898A8F",
-    green: "#247434",
-    lightBlue: "#50C5E2",
-    lightBrown: "#7B3529",
-    lightGreen: "#77A444",
-    lightYellow: "#F5821F",
-    lightPurple: "#ac85db",
-    turqoise: "#0AA99E",
-    maroon: "#A83324",
-    natural: "#F9C20B",
-    orange: "#F5821F",
+    blue: "#0189D1",
+    cyan: "#00A99E",
+    lightGreen: "#76A042",
+    green: "#237333",
+    brown: "#7B352A",
+    orange: "#F48221",
     pink: "rgb(193,60,125)",
-    purple: "#614880",
-    red: "#D82340",
-    yellow: "#F9C30B"
+    purple: "#7F528B",
+    red: "#D81E3E",
+    yellow: "#F8C200"
   }
 };
 

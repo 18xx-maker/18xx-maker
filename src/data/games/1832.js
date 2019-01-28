@@ -213,7 +213,7 @@ const game = {
       name: "Southern Railway",
       abbrev: "SR",
       tokens: ["Free", "$40","$100"],
-      color: "darkGreen",
+      color: "green",
       shares: [
         {
           quantity: 1,
@@ -1150,7 +1150,7 @@ const game = {
             companies: [
               {
                 label: "SR",
-                color: "darkGreen"
+                color: "green"
               }
             ]
           },

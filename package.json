@@ -24,7 +24,8 @@
     "redux": "^4.0.0",
     "redux-localstorage": "^0.4.1",
     "source-map-explorer": "^1.6.0",
-    "tinycolor2": "^1.4.1"
+    "tinycolor2": "^1.4.1",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "analyze": "react-scripts build && source-map-explorer build/static/js/main.*",
