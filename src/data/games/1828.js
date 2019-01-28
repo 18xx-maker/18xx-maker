@@ -8,6 +8,7 @@ const game = {
     color_10: "orange",
     titleY: 1300,
     titleX: 1700,
+    extraHomeTokens: 4
   },
 
   config: {
