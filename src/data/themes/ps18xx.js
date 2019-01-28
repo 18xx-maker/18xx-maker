@@ -13,6 +13,8 @@ const colors = {
   white: "#fff",
   black: "#000",
 
+  orange: "#ffa500",
+
   track: "#000",
   border: "#fff",
   town: "#000",

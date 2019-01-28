@@ -12,6 +12,9 @@ const colors = {
   water: "#67A7C4",
   land: "#59B578",
 
+  // Market
+  orange: "#F58121",
+
   // Text
   white: "#fff",
   black: "#110A0C",

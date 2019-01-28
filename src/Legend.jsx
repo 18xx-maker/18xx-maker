@@ -6,7 +6,7 @@ import Movement from "./Movement";
 
 const Legend = ({ legend, movement, horizontal }) => {
   return (
-    <Color context="companies">
+    <Color>
       {(c,t) => {
         let items = R.map(item => {
           let backgroundColor = c(item.color || "orange");

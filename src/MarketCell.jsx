@@ -11,7 +11,7 @@ const MarketCell = ({ borders, value, legend, par, colSpan, width, height }) => 
   let companies = null;
 
   return (
-    <Color context="companies">
+    <Color>
       {(c,t) => {
 
         let classes = [];
