@@ -15,12 +15,6 @@ const Svg = ({ className, width, height, viewBox, style, defs, children }) => {
           className={className}
         >
           <defs>
-            <clipPath id="hexClip">
-              <polygon points="-86.6025,0 -43.30125,-75 43.30125,-75 86.6025,0 43.30125,75 -43.30125,75"
-                       fill="black"
-                       stroke="black"
-                       strokeWidth="2" />
-            </clipPath>
             <style>
               @import url("https://fonts.googleapis.com/css?family=Bitter:700");
             </style>
