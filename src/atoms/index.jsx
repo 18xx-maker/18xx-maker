@@ -4,6 +4,8 @@ import * as R from "ramda";
 import Svg from "../Svg";
 import Hex from "../Hex";
 
+import ColorContext from "../context/ColorContext";
+
 require("./atoms.scss");
 
 const atoms = [{
@@ -58,7 +60,7 @@ const atoms = [{
                        }]},
              {cities: [{size:4,
                         companies: [{},
-                                    {label:"BM",color:"maroon"},
+                                    {label:"BM",color:"brown"},
                                     {label:"PRR",color:"green"}]
                        }]
              }]
@@ -187,25 +189,27 @@ const atoms = [{
 
 const examples = R.addIndex(R.chain)((h,id) => {
   return <dd key={`example-${id}`}>
-   <Svg width="175.205" height="152" viewBox="-87.6025 -76 175.205 152">
-     <Hex hex={h} id={`${id}`} border={true} />
-   </Svg>
-   <pre>{JSON.stringify(h, null, 2)}</pre>
- </dd>;
+           <Svg width="175.205" height="152" viewBox="-87.6025 -76 175.205 152">
+             <Hex hex={h} id={`${id}`} border={true} />
+           </Svg>
+           <pre>{JSON.stringify(h, null, 2)}</pre>
+         </dd>;
 });
 
 const groups = R.addIndex(R.chain)((g,id) => {
   return <dl key={`group-${id}`}>
-      <dt>{g.group}</dt>
-      {examples(g.examples)}
-    </dl>;
+             <dt>{g.group}</dt>
+             {examples(g.examples)}
+           </dl>;
 });
 
 const Atoms = () => {
   return (
-    <div className="atoms">
-      {groups(atoms)}
-    </div>
+    <ColorContext.Provider value="companies">
+      <div className="atoms">
+        {groups(atoms)}
+      </div>
+    </ColorContext.Provider>
   );
 };
 
