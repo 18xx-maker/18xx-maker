@@ -29,10 +29,10 @@ const Terrain = ({ type, size, cost, color, fontSize }) => {
       color = "water";
       break;
     case "swamp":
-      color = "darkGreen";
+      color = "land";
       break;
     case "cactus":
-      color = "lightGreen";
+      color = "land";
       break;
     case "mountain":
     case "water":

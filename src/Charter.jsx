@@ -5,17 +5,24 @@ import Phase from "./Phase";
 import Color from "./data/Color";
 import ColorContext from "./context/ColorContext";
 
-const Charter = ({ name, abbrev, color, tokens, phases, turns }) => {
-  let tokenSpots = R.addIndex(R.map)((token, index) => {
+import is from "ramda/es/is";
+
+const Charter = ({ name, abbrev, token, tokens, phases, turns }) => {
+  let color = token;
+  if(is(Object, token)) {
+    color = token.colors[0];
+  }
+
+  let tokenSpots = R.addIndex(R.map)((label, index) => {
     return (
       <svg key={`token-${index}`}>
         <g transform={`translate(25 25)`}>
           <ColorContext.Provider value="companies">
-            <Token label={abbrev} color={color} />
+            <Token label={abbrev} token={token} />
           </ColorContext.Provider>
           <g transform={`translate(0 39)`}>
             <text fontSize="10" textAnchor="middle">
-              {token}
+              {label}
             </text>
           </g>
         </g>
@@ -33,7 +40,7 @@ const Charter = ({ name, abbrev, color, tokens, phases, turns }) => {
     let optionals = R.addIndex(R.map)((step, i) => {
       return <li key={i}><span>{step}</span></li>;
     }, turn.optional || []);
-    let optionalList = <ul>{optionals}</ul>
+    let optionalList = <ul>{optionals}</ul>;
 
         return (
           <React.Fragment key={`turn-${turn.name}`}>

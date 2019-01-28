@@ -4,6 +4,7 @@ import Map from "./Map";
 import Svg from "./Svg";
 import Title from "./Title";
 import HexContext from "./context/HexContext";
+import GameContext from "./context/GameContext";
 import util from "./util";
 import * as R from "ramda";
 import { Redirect } from "react-router-dom";
@@ -59,6 +60,7 @@ const MapSingle = ({ match }) => {
   }
 
   return (
+    <GameContext.Provider value={match.params.game}>
     <HexContext.Provider
       value={{
         width: game.info.width,
@@ -82,6 +84,7 @@ const MapSingle = ({ match }) => {
         <style>{`@media print {@page {size: ${printWidth} ${printHeight};}}`}</style>
       </div>
     </HexContext.Provider>
+    </GameContext.Provider>
   );
 };
 

@@ -111,7 +111,7 @@ class Cards extends React.Component {
                   key={`${company.abbrev}-${i}`}
                   name={company.name}
                   abbrev={company.abbrev}
-                  color={company.color}
+                  token={company.token || company.color}
                   {...share}
                 />
               ),

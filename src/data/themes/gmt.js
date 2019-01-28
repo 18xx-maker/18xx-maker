@@ -1,49 +1,42 @@
 const colors = {
   // Phases
-  yellow: "rgb(255,231,16)",
-  green: "rgb(92,174,115)",
-  brown: "rgb(179,123,84)",
-  gray: "rgb(165,170,170)",
+  yellow: "#FFE600",
+  green: "#59B578",
+  brown: "#BF8156",
+  gray: "#A9AFB2",
 
   // Map
-  plain: "rgb(252,241,222)",
-  offboard: "rgb(209,35,42)",
-  mountain: "rgb(179,123,84)",
-  water: "rgb(101,161,184)",
-  orange: "rgb(245,129,33)",
+  plain: "#FCEFDE",
+  offboard: "#EC2126",
+  mountain: "#D1AE85",
+  water: "#67A7C4",
+  land: "#59B578",
 
   // Text
   white: "#fff",
-  black: "#000",
+  black: "#110A0C",
 
   // Tiles
-  track: "#000",
+  track: "#110A0C",
   border: "#fff",
   city: "#fff",
-  town: "#000",
-  centerTown: "#000",
+  town: "#110A0C",
+  centerTown: "#110A0C",
   halt: "#666",
 
   // Companies
   companies: {
-    blue: "rgb(2,90,170)",
-    brown: "rgb(179,123,84)",
-    cyan: "rgb(141,215,248)",
-    darkGreen: "rgb(50,118,63)",
-    gray: "rgb(165,170,170)",
-    green: "rgb(50,118,63)",
-    lightBlue: "rgb(141,215,248)",
-    lightBrown: "#C46A52",
+    black: "#110A0C",
+    blue: "#025AAA",
+    cyan: "#8DD7F6",
     lightGreen: "rgb(110,192,55)",
-    lightYellow: "rgb(255, 255, 224)",
-    lightPurple: "#ac85db",
-    maroon: "rgb(96,23,44)",
-    natural: "rgb(218, 165, 32)",
-    orange: "rgb(245,129,33)",
-    turqoise: "#0AA99E",
+    green: "#32763F",
+    brown: "#680B26",
+    orange: "#F58121",
     pink: "rgb(193,60,125)",
     purple: "rgb(95,35,132)",
-    red: "rgb(209,35,42)",
+    red: "#D1232A",
+    yellow: "#FFE600"
   }
 };
 

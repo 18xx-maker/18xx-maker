@@ -4,6 +4,8 @@ import games from "./data/games";
 import * as R from "ramda";
 import ColorContext from "./context/ColorContext";
 
+import is from "ramda/es/is";
+
 import Svg from "./Svg";
 
 const Tokens = ({ match }) => {
@@ -20,24 +22,24 @@ const Tokens = ({ match }) => {
       (game.info.extraTokens || 3) + (game.info.extraHomeTokens || 0);
   let extraMinors = (game.info.extraMinors || 0);
   let tokenCount = R.scan(R.add, 0, R.addIndex(R.chain)((company, index) => {
-    return(company.tokens.length + extraNormals + (game.info.extraTokens || 3))
+    return(company.tokens.length + extraNormals + (game.info.extraTokens || 3));
   }, companies));
   let totalTokenCount = R.reduce(R.add, 0, R.addIndex(R.chain)((company, index) => {
-    return(company.tokens.length + extraNormals + (game.info.extraTokens || 3))
+    return(company.tokens.length + extraNormals + (game.info.extraTokens || 3));
   }, companies));
   let minorTokenCount = R.scan(R.add, 0, R.addIndex(R.chain)((minors, index) => {
-    return(minors.tokens.length + extraMinors)
+    return(minors.tokens.length + extraMinors);
   }, minorCompanies));
   let totalMinorTokenCount = R.reduce(R.add, 0, R.addIndex(R.chain)((minor, index) => {
-    return(minor.tokens.length + extraMinors)
+    return(minor.tokens.length + extraMinors);
   }, minorCompanies));
-  let gameTokenCount = game.tokens.length
+  let gameTokenCount = game.tokens.length;
 
   let tokens = R.addIndex(R.chain)((company, index) => {
     let companyTokens = Array(company.tokens.length + extraNormals).fill(
       <Token
         label={company.abbrev}
-        color={company.color}
+        token={company.token || company.color}
         bleed={true}
       />
     );
@@ -45,7 +47,7 @@ const Tokens = ({ match }) => {
       companyTokens.push(
         <Token
           label={company.abbrev}
-          color={company.color}
+          token={company.token || company.color}
           bleed={true}
           inverse={true}
         />
@@ -71,7 +73,7 @@ const Tokens = ({ match }) => {
     let minorCompanyTokens = Array(minorCompany.tokens.length + extraMinors).fill(
       <Token
         label={minorCompany.abbrev}
-        color={minorCompany.color}
+        token={minorCompany.token || minorCompany.color}
         bleed={true}
         outline="black"
       />
@@ -80,7 +82,7 @@ const Tokens = ({ match }) => {
       minorCompanyTokens.push(
         <Token
           label={minorCompany.abbrev}
-          color={minorCompany.color}
+          token={minorCompany.token || minorCompany.color}
           bleed={true}
           outline="black"
         />
@@ -109,29 +111,41 @@ const Tokens = ({ match }) => {
     </g>
   );
 
-  let extras = R.addIndex(R.map)((label, index) => {
-    if (label.match(/^#/)) {
+  let extras = R.addIndex(R.map)((token, index) => {
+    if(is(Object, token)) {
       return (
         <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * tokensWidth)} ${30 + (60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/tokensWidth))})`}>
           <Token
-            icon={label}
             bleed={true}
-            color="white"
             outline="black"
+            {...token}
           />
         </g>
       );
     } else {
-      return (
-        <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * tokensWidth)} ${30 + (60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/tokensWidth))})`}>
-          <Token
-            label={label}
-            bleed={true}
-            color="white"
-            outline="black"
-          />
-        </g>
-      );
+      if (token.match(/^#/)) {
+        return (
+          <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * tokensWidth)} ${30 + (60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/tokensWidth))})`}>
+            <Token
+              icon={token}
+              bleed={true}
+              token="white"
+              outline="black"
+            />
+          </g>
+        );
+      } else {
+        return (
+          <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * tokensWidth)} ${30 + (60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/tokensWidth))})`}>
+            <Token
+              label={token}
+              bleed={true}
+              token="white"
+              outline="black"
+            />
+          </g>
+        );
+      }
     }
   }, game.tokens);
 
