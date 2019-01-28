@@ -18,7 +18,7 @@ const Rounds = ({ rounds, horizontal }) => {
         <svg viewBox="-25 -25 50 50" key={round.name}>
           <Token
             label={round.name}
-            color={round.color}
+            token={round.color}
             labelColor="black"
           />
         </svg>

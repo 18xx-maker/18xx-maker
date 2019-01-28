@@ -51,7 +51,7 @@ const Token = ({
   );
 
   return (
-    <Color context="companies">
+    <Color>
       {(c,t,s) => {
 
         let textFill = (token && token.labelColor) ? c(token.labelColor) : c("black");
