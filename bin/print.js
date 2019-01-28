@@ -19,7 +19,7 @@ try {
 }
 
 let games = [process.argv[2] || "1830"];
-if(games[0] === "all") {
+if(process.argv[2] === "all") {
   games = R.keys(require("../src/data/games").default);
 }
 
@@ -47,7 +47,10 @@ const server = app.listen(9000);
       if (err.code !== 'EEXIST') throw err;
     }
 
-    const items = ['map'];
+    let items = ['cards', 'charters', 'map', 'map-paginated', 'tiles', 'tokens'];
+    if(process.argv[2] === "all") {
+      items = ['map'];
+    }
 
     for(let i=0;i<items.length;i++) {
       let item = items[i];

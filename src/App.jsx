@@ -93,6 +93,12 @@ class App extends Component {
               xmlns="http://www.w3.org/2000/svg"
               style={{height:0,width:0,position:"absolute"}}>
               <defs>
+                <clipPath id="hexClip">
+                  <polygon points="-86.6025,0 -43.30125,-75 43.30125,-75 86.6025,0 43.30125,75 -43.30125,75"
+                           fill="black"
+                           stroke="black"
+                           strokeWidth="2" />
+                </clipPath>
                 <Color>
                   {c => (
                     <React.Fragment>
