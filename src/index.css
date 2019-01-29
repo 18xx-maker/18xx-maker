@@ -91,7 +91,7 @@ svg {
 .card {
   page-break-inside: avoid;
   font-family: "Bitter", serif;
-  height: calc(43.5mm + 0.25in);
+  height: calc(44mm + 0.25in);
   width: calc(67.5mm + 0.25in);
   box-sizing: border-box;
   position: relative;
