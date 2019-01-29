@@ -482,12 +482,27 @@ svg {
   text-align: center;
 }
 
-.share__token {
-  width: 50%;
-  height: 75%;
+.share__tokens {
   position: absolute;
-  top: 0.5in;
-  right: 0;
+  top: 0.125in;
+  width: 75%;
+  left: 12.5%;
+  height: 0.75in;
+  display: flex;
+  overflow: auto;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.share__token__wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.share__token {
+  height: 0.52in;
+  width: 0.52in;
 }
 
 .share__label {
