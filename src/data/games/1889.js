@@ -682,12 +682,7 @@ const game = {
             name: {
               name: "Matsuyama"
             },
-            companies: [
-              {
-                label: "IR",
-                color: "orange"
-              }
-            ]
+            companies: ["IR"]
           }
         ],
         hexes: ["E2"]
@@ -699,12 +694,7 @@ const game = {
             name: {
               name: "Marugame"
             },
-            companies: [
-              {
-                label: "SR",
-                color: "blue"
-              }
-            ]
+            companies: ["SR"]
           }
         ],
         hexes: ["I2"]
@@ -716,12 +706,7 @@ const game = {
             name: {
               name: "Tokushima"
             },
-            companies: [
-              {
-                label: "AR",
-                color: "red"
-              }
-            ]
+            companies: ["AR"]
           }
         ],
         hexes: ["K8"]
@@ -733,12 +718,7 @@ const game = {
             name: {
               name: "Kubokawa"
             },
-            companies: [
-              {
-                label: "KU",
-                color: "purple"
-              }
-            ]
+            companies: ["KU"]
           }
         ],
         hexes: ["C10"]
@@ -916,12 +896,7 @@ const game = {
               reverse: false,
               rotation: 60
             },
-            companies: [
-              {
-                label: "KO",
-                color: "pink"
-              }
-            ]
+            companies: ["KO"]
           }
         ],
         values: [
@@ -934,17 +909,11 @@ const game = {
         companies: [
           {
             label: "TR",
+            angle: 30,
             percent: 0.75
           }
         ],
-        track: [
-          {
-            side: 1
-          },
-          {
-            side: 2
-          }
-        ],
+        track: [{side: 1}, {side: 2}],
         hexes: ["K4"]
       },
       {
@@ -963,12 +932,7 @@ const game = {
               name: "Uwajima",
               reverse: true
             },
-            companies: [
-              {
-                label: "UR",
-                color: "brown"
-              }
-            ]
+            companies: ["UR"]
           }
         ],
         track: [{ side: 2 }, { side: 4 }, { side: 6 }],
@@ -1121,12 +1085,7 @@ const game = {
               reverse: true,
               offset: 90
             },
-            companies: [
-              {
-                label: "TR",
-                color: "green"
-              }
-            ]
+            companies: ["TR"]
           }
         ],
         track: [{ side: 3 }, { side: 4 }, { side: 5 }, { side: 6 }],
