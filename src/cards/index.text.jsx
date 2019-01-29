@@ -1,4 +1,4 @@
-import { maxPlayers } from "./Cards";
+import { maxPlayers } from "./index";
 
 describe("Cards", () => {
   it("Can compute the max number of players from the players object", () => {

@@ -6,10 +6,10 @@ import Private from "./Private";
 import Share from "./Share";
 import Train from "./Train";
 
-import games from "./data/games";
-import util from "./util";
+import games from "../data/games";
+import util from "../util";
 
-import GameContext from "./context/GameContext";
+import GameContext from "../context/GameContext";
 
 export const maxPlayers = R.compose(
   R.reduce(R.max, 0),

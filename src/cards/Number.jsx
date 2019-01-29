@@ -1,7 +1,7 @@
 import React from "react";
-import Color from "./data/Color";
+import Color from "../data/Color";
 
-import "./Number.css";
+import "./number.scss";
 
 const Number = ({ number, background }) => {
   return (

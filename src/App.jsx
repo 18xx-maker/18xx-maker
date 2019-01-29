@@ -14,7 +14,7 @@ import Atoms from "./atoms";
 import Positioning from "./Positioning";
 
 import Background from "./Background";
-import Cards from "./Cards";
+import Cards from "./cards";
 import Charters from "./Charters";
 import Minors from "./Minors";
 import Home from "./Home";

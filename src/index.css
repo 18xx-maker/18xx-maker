@@ -463,66 +463,6 @@ svg {
   margin-top: 0.05in;
 }
 
-.share__hr {
-  height: 0.0625in;
-  position: absolute;
-  bottom: 0.5in;
-  width: 100%;
-}
-
-.share__name {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: calc(100% - 0.5in);
-  padding: 0.125in;
-  line-height: 0.21in;
-  font-size: 0.21in;
-  margin: 0.125in;
-  text-align: center;
-}
-
-.share__tokens {
-  position: absolute;
-  top: 0.125in;
-  width: 75%;
-  left: 12.5%;
-  height: 0.75in;
-  display: flex;
-  overflow: auto;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.share__token__wrapper {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-
-.share__token {
-  height: 0.52in;
-  width: 0.52in;
-}
-
-.share__label {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  bottom: 0.625in;
-  width: 100%;
-  height: 0.5in;
-}
-.share__label__text {
-  height: 0.25in;
-  line-height: 0.25in;
-  padding: 0 0.1in;
-  border-radius: 0.06in;
-  display: inline-block;
-}
-
 .charter__tokens {
   position: absolute;
   top: 0;
@@ -553,28 +493,6 @@ svg {
   width: 0.5in;
   height: 0.7in;
   padding: 0 0 0 0.15in;
-}
-
-.share__percent {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 0.125in;
-  padding: 0.125in;
-  height: 0.25in;
-  line-height: 0.25in;
-  font-size: 0.18in;
-}
-
-.share__shares {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin: 0.125in;
-  padding: 0.125in;
-  height: 0.25in;
-  line-height: 0.25in;
-  font-size: 0.18in;
 }
 
 .private__name {

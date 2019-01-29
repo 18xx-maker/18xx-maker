@@ -34,7 +34,8 @@ const Token = ({
   token,
   inverse,
   width,
-  bleed
+  bleed,
+  outline
 }) => {
   width = width || 25;
 
@@ -216,7 +217,7 @@ const Token = ({
               cy="0"
               r={width + (bleed ? 5 : 0)}
               fill={tokenFill}
-              stroke={c("black")}
+              stroke={c(outline || "black")}
             />
             {shape}
             {content}
