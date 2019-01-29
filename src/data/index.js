@@ -59,5 +59,6 @@ export {
   pagination,
   paper,
   scheme,
-  plainMapHomes
+  plainMapHomes,
+  shareLayout
 };
