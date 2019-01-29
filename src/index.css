@@ -405,9 +405,9 @@ svg {
 .train__hr {
   position: absolute;
   left: 0;
-  top: 0.75in;
+  top: 0;
   width: 100%;
-  height: 0.0625in;
+  height: 0.8125in;
 }
 
 .train__price {
