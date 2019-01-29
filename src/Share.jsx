@@ -4,6 +4,7 @@ import Color from "./data/Color";
 import ColorContext from "./context/ColorContext";
 
 import is from "ramda/es/is";
+import min from "ramda/es/min";
 
 const Share = ({
   cost,
@@ -17,6 +18,21 @@ const Share = ({
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
+  let tokens = [];
+  let sharesLeft = shares;
+  while(sharesLeft > 0) {
+    tokens.push(<div key={sharesLeft} className="share__token">
+                  <div style={{width:`${min(1.0, sharesLeft) * 100}%`}}
+                       className="share__token__wrapper">
+                    <svg style={{width:"0.52in",height:"0.52in"}}
+                         viewBox="-26 -26 52 52">
+                      <Token label={abbrev} token={token} width={25} />
+                    </svg>
+                  </div>
+                </div>);
+    sharesLeft -= 1;
+  }
+
   return (
     <div className="cutlines">
       <div className="card share">
@@ -24,11 +40,9 @@ const Share = ({
         {cost && <div className="share__shares">{cost}</div>}
         {percent && <div className="share__percent">{percent}%</div>}
         {revenue && <div className="share__percent">Revenue: {revenue}</div>}
-        <div className="share__token">
+        <div className="share__tokens">
           <ColorContext.Provider value="companies">
-            <svg>
-              <Token label={abbrev} token={token} width={25} />
-            </svg>
+            {tokens}
           </ColorContext.Provider>
         </div>
         <Color context="companies">

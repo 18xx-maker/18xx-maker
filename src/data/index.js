@@ -15,6 +15,10 @@ const pagination = "equal";
 // just display in black and white
 const plainMapHomes = false;
 
+// This can be "left" to get bands of color with circles on the left, or
+// "center" for the tokens in the center
+const shareLayout = "left";
+
 // How to display map coordinates
 // outside: On the outside border of the map
 // inside: Inside each hex
