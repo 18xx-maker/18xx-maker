@@ -157,8 +157,12 @@ const HexTile = ({ hex, id, border, transparent, map }) => {
   let industries = <Position data={hex.industries}>{i => <Industry {...i} />}</Position>;
   let goods = <Position data={hex.goods}>{g => <Good {...g} />}</Position>;
   let companies = <Position data={hex.companies}>{c => <Company {...c} />}</Position>;
-  let tokens = <Position data={hex.tokens}>{t => <Token {...t} />}</Position>;
   let bonus = <Position data={hex.routeBonus}>{b => <RouteBonus {...b} />}</Position>;
+  let tokens = <Position data={hex.tokens}>{t => (
+    <ColorContext.Provider value="companies">
+      <Token token={t.color} {...t} />
+    </ColorContext.Provider>
+  )}</Position>;
 
   return (
     <g>
@@ -182,9 +186,7 @@ const HexTile = ({ hex, id, border, transparent, map }) => {
                 {centerTowns}
                 {labels}
                 {names}
-                <ColorContext.Provider value="companies">
-                  {tokens}
-                </ColorContext.Provider>
+                {tokens}
                 {bonus}
                 {offBoardRevenue}
                 {terrain}
