@@ -1,6 +1,6 @@
 import React from "react";
 
-import Color from "./data/Color";
+import Color from "../data/Color";
 
 import addIndex from "ramda/es/addIndex";
 import map from "ramda/es/map";
