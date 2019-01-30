@@ -46,7 +46,7 @@ const game = {
   players: [
     {number: 3, certLimit: "∞", capital: "$800"},
     {number: 4, certLimit: "∞", capital: "$700"},
-    {number: 5, certLimit: "∞", capital: "$640"},
+    {number: 5, certLimit: "∞", capital: "$620"},
   ],
 
   // Railway Companies
