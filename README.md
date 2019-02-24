@@ -3,8 +3,12 @@
 This is a small pet project to help layout and print
 [18xx](https://en.wikipedia.org/wiki/18XX) games.
 
-My current version is always running at
-[https://18xx.kelsin.net](https://18xx.kelsin.net).
+**Important Note**: I have removed the running version of the site (from
+18xx.kelsin.net). While I want to keep the tool open, having a site always up
+with other people's intellectual property and allowing people to VERY easily
+make copies of that work was **not** the intent of the project. I will be
+working in the next few weeks to beef up the documentation of the tool so that
+people can run it themselves.
 
 This project was bootstrapped with [Create React
 App](https://github.com/facebookincubator/create-react-app).
