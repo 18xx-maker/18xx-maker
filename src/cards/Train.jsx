@@ -38,10 +38,14 @@ const Train = ({ train }) => {
   return (
     <div className="cutlines">
       <div className="card train">
+        <Color>
+          {c => (
+            <div className="train__hr" style={{ backgroundColor: c(color) }} />
+          )}
+        </Color>
         <div className="train__price">{price}</div>
         <div className="train__description">{description}</div>
         <div className="train__notes">{notes}</div>
-          <Color>{c => (<div className="train__hr" style={{ backgroundColor: c(color) }} />)}</Color>
         <div className="train__name">{name}</div>
       </div>
     </div>
