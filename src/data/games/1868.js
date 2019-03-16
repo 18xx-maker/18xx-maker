@@ -649,9 +649,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 5
+            side: 5,
+            type: "offboard"
           }
         ],
         hexes: ["A3"]
@@ -673,9 +674,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 6
+            side: 6,
+            type: "offboard"
           }
         ],
         hexes: ["A5"]
@@ -697,9 +699,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 6
+            side: 6,
+            type: "offboard"
           }
         ],
         hexes: ["B10"]
@@ -721,9 +724,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 6
+            side: 6,
+            type: "offboard"
           }
         ],
         hexes: ["C13"]
@@ -745,9 +749,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 1
+            side: 1,
+            type: "offboard"
           }
         ],
         hexes: ["D14"]
@@ -769,9 +774,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 4
+            side: 4,
+            type: "offboard"
           }
         ],
         hexes: ["E1"]
@@ -793,9 +799,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 6
+            side: 6,
+            type: "offboard"
           }
         ],
         hexes: ["H18"]
@@ -817,9 +824,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 4
+            side: 4,
+            type: "offboard"
           }
         ],
         hexes: ["G1"]
@@ -841,9 +849,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 4
+            side: 4,
+            type: "offboard"
           }
         ],
         hexes: ["I1"]
@@ -865,9 +874,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 3
+            side: 3,
+            type: "offboard"
           }
         ],
         hexes: ["L4"]
@@ -889,9 +899,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 3
+            side: 3,
+            type: "offboard"
           }
         ],
         hexes: ["M7"]
@@ -913,9 +924,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 2
+            side: 2,
+            type: "offboard"
           }
         ],
         hexes: ["M9"]
@@ -937,9 +949,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 3
+            side: 3,
+            type: "offboard"
           }
         ],
         hexes: ["M11"]
@@ -961,9 +974,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 2
+            side: 2,
+            type: "offboard"
           }
         ],
         hexes: ["M13"]
@@ -985,9 +999,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 3
+            side: 3,
+            type: "offboard"
           }
         ],
         hexes: ["M7"]
@@ -1009,9 +1024,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 3
+            side: 3,
+            type: "offboard"
           }
         ],
         hexes: ["M15"]
@@ -1033,9 +1049,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 1
+            side: 1,
+            type: "offboard"
           }
         ],
         hexes: ["L18"]
@@ -1057,9 +1074,10 @@ const game = {
             }
           ]
         },
-        offBoardTrack: [
+        track: [
           {
-            side: 2
+            side: 2,
+            type: "offboard"
           }
         ],
         hexes: ["M17"]
