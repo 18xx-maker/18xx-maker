@@ -1337,12 +1337,23 @@ const game = {
       },
       {
         color: "gray",
+        labels: [
+          {
+            label: "Monte-",
+            size: 10,
+            angle: 180,
+            percent: 0.94
+          },
+          {
+            label: "video",
+            size: 10,
+            angle: 180,
+            percent: 0.81
+          }
+        ],
         cities: [
           {
-            size: 4,
-            name: {
-              name: "Montevideo"
-            }
+            size: 4
           }
         ],
         track: [
