@@ -58,14 +58,14 @@ const Terrain = ({ type, size, cost, color, fontSize }) => {
   }
 
   return (
-    <Color context="companies">
-      {c => (
+    <Color>
+      {(c,t,s,p) => (
         <g>
           <path
             transform={`translate(0 -4) scale(${scale})`}
             d={types[type]}
             fill="none"
-            stroke={c("white")}
+            stroke={p("white")}
             strokeWidth={width}
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -74,13 +74,13 @@ const Terrain = ({ type, size, cost, color, fontSize }) => {
             transform={`translate(0 -5) scale(${scale})`}
             d={types[type]}
             fill="none"
-            stroke={c(color)}
+            stroke={p(color)}
             strokeWidth={width}
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <text
-            fill={c("black")}
+            fill={p("black")}
             fontSize={fontSize}
             dominantBaseline="hanging"
             textAnchor="middle"

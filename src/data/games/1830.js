@@ -12,6 +12,12 @@ const game = {
     currency: "USD"
   },
 
+    colors: {
+        companies: {
+            black: "red"
+        }
+    },
+
   links: {
     bgg: "https://www.boardgamegeek.com/boardgame/421/1830-railways-robber-barons",
     rules: "https://boardgamegeek.com/wiki/page/1830_Rules"

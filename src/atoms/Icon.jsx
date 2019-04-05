@@ -26,11 +26,11 @@ const Value = ({ type }) => {
 
   return (
     <Color>
-      {c => (
+      {(c,t,s,p) => (
         <g>
           <circle
-            fill={c("white")}
-            stroke={c("black")}
+            fill={p("white")}
+            stroke={p("black")}
             strokeWidth="2"
             cx="0"
             cy="0"
