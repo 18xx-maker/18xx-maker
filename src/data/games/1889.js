@@ -1079,11 +1079,11 @@ const game = {
         cities: [
           {
             size: 2,
-            rotation: 120,
+            rotation: -60,
             name: {
               name: "Kouchi",
               reverse: true,
-              offset: 90
+              offset: 31
             },
             companies: ["TR"]
           }
