@@ -8,19 +8,19 @@ const RouteBonus = ({ value }) => {
 
   return (
     <Color>
-      {c => (
+      {(c,t,s,p) => (
         <g>
           <polygon
             points={`${-width - 10},0 ${-width},10 ${width},10 ${width+10},0 ${width},-10 ${-width},-10`}
-            fill={c("white")}
-            stroke={c("black")}
+            fill={p("white")}
+            stroke={p("black")}
             strokeWidth="2"
           />
           <text
             fontWeight="bold"
             fontSize={size}
             fontFamily="Helvetica, Arial, sans-serif"
-            fill={c("black")}
+            fill={p("black")}
             dominantBaseline="central"
             textAnchor="middle"
             x="0"

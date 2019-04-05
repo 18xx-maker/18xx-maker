@@ -46,6 +46,19 @@ const atoms = [{
              {icons: [{type: "coal"}]},
              {icons: [{type: "steam"}]}]
 },{
+  group: "Tokens",
+  examples: [
+    {tokens: [{label:"AA", token:"orange"}]},
+    {tokens: [{label:"BB", token:{type:"square", colors:["blue", "orange"]}}]},
+    {tokens: [{label:"CC", token:{type:"quarters", colors:["blue", "orange"]}}]},
+    {tokens: [{label:"DD", token:{type:"halves", colors:["blue", "orange"]}}]},
+    {tokens: [{label:"EE", token:{type:"stripes", colors:["blue", "orange"]}}]},
+    {tokens: [{label:"FF", token:{type:"bar", colors:["blue", "orange"]}}]},
+    {tokens: [{label:"GG", token:{type:"stripe", colors:["blue", "orange"]}}]},
+    {tokens: [{label:"HH", token:{type:"target", colors:["blue", "orange"]}}]},
+    {tokens: [{label:"Longer", token:"blue"}]}
+  ]
+},{
   group: "Cities",
   examples: [{cities: [{}]},
              {cities: [{name:{offset: 75, name: "Boston"}}]},

@@ -53,9 +53,9 @@ const Token = ({
 
   return (
     <Color>
-      {(c,t,s) => {
+      {(c,t,s,p) => {
 
-        let textFill = (token && token.labelColor) ? c(token.labelColor) : c("black");
+        let textFill = (token && token.labelColor) ? c(token.labelColor) : p("black");
         let textStroke = "none";
 
         if(inverse) {
@@ -71,7 +71,7 @@ const Token = ({
                 <rect rx="2" ry="2" x="-17.5" y="-17.5" width="35" height="35"
                       fill={c(token.colors[0])}/>
               );
-              textFill = token.labelColor ? c(token.labelColor) : t(c(token.colors[0]));
+              textFill = token.labelColor ? p(token.labelColor) : t(c(token.colors[0]));
               tokenFill = c(token.colors[1]);
               textStroke = "none";
               break;
@@ -84,8 +84,8 @@ const Token = ({
                       fill={c(token.colors[1])}
                       clipPath={`url(#${clipId})`}/>,
                 <rect key="bar" x="-50" y="-8" width="100" height="18"
-                      fill={c("white")}
-                      stroke={c("black")}
+                      fill={p("white")}
+                      stroke={p("black")}
                       clipPath={`url(#${clipId})`}/>
               ];
               break;
@@ -98,8 +98,8 @@ const Token = ({
               );
               shape = (
                 <rect x="-50" y="-9" width="100" height="18"
-                      fill={c("white")}
-                      stroke={c("black")}
+                      fill={p("white")}
+                      stroke={p("black")}
                       clipPath={`url(#${clipId})`}/>
               );
               break;
@@ -122,8 +122,8 @@ const Token = ({
               );
               shape = (
                 <rect x="-50" y="-9" width="100" height="18"
-                      fill={c("white")}
-                      stroke={c("black")}
+                      fill={p("white")}
+                      stroke={p("black")}
                       clipPath={`url(#${clipId})`}/>
               );
               break;
@@ -131,7 +131,7 @@ const Token = ({
               shape = (
                 <rect x="-50" y="-9" width="100" height="18"
                       fill={c(token.colors[1] || "white")}
-                      stroke={c("black")}
+                      stroke={p("black")}
                       clipPath={`url(#${clipId})`}/>
               );
               textFill = token.labelColor ? c(token.labelColor) : t(c(token.colors[1] || "white"));
@@ -147,8 +147,8 @@ const Token = ({
               );
               shape = (
                 <rect x="-50" y="-9" width="100" height="18"
-                      fill={c("white")}
-                      stroke={c("black")}
+                      fill={p("white")}
+                      stroke={p("black")}
                       clipPath={`url(#${clipId})`}/>
               );
               break;
@@ -165,8 +165,8 @@ const Token = ({
               );
               shape = (
                 <rect x="-50" y="-9" width="100" height="18"
-                      fill={c("white")}
-                      stroke={c("black")}
+                      fill={p("white")}
+                      stroke={p("black")}
                       clipPath={`url(#${clipId})`}/>
               );
               break;
@@ -178,7 +178,7 @@ const Token = ({
           } else {
 
             textFill = t(c(color));
-            tokenFill = c(color) || c("white");
+            tokenFill = c(color) || p("white");
           }
         }
 
@@ -217,7 +217,7 @@ const Token = ({
               cy="0"
               r={width + (bleed ? 5 : 0)}
               fill={tokenFill}
-              stroke={c(outline || "black")}
+              stroke={p(outline || "black")}
             />
             {shape}
             {content}

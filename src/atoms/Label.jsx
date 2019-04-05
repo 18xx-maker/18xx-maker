@@ -23,10 +23,10 @@ const Label = ({ label, size, length, fixed }) => {
     <RotateContext.Consumer>
       {rotation => (
         <Color>
-          {c => (
+          {(c,t,s,p) => (
             <text
               transform={fixed ? null : `rotate(-${rotation})`}
-              fill={c("black")}
+              fill={p("black")}
               fontFamily="Bitter"
               fontWeight="bold"
               fontSize={fontSize}

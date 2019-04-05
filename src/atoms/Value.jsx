@@ -13,11 +13,11 @@ const Value = ({ value, fixed }) => {
     <RotateContext.Consumer>
       {rotation => (
         <Color>
-          {c => (
+          {(c,t,s,p) => (
             <g>
               <circle
-                fill={c("white")}
-                stroke={c("black")}
+                fill={p("white")}
+                stroke={p("black")}
                 strokeWidth="2"
                 cx="0"
                 cy="0"
@@ -28,7 +28,7 @@ const Value = ({ value, fixed }) => {
                 fontWeight="bold"
                 fontSize={size}
                 fontFamily="Helvetica, Arial, sans-serif"
-                fill={c("black")}
+                fill={p("black")}
                 dominantBaseline="central"
                 textAnchor="middle"
                 x="0"

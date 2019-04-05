@@ -4,10 +4,10 @@ import Color from "../data/Color";
 const Divide = () => {
   return (
     <Color>
-      {c => (
+      {(c,t,s,p) => (
         <path d="M -43.30125,75 L 43.30125,-75"
               fill="none"
-              stroke={c("black")}
+              stroke={p("black")}
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="bevel"
