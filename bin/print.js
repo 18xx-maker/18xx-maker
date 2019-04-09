@@ -34,7 +34,7 @@ app.get('/*', function(req, res) {
 const server = app.listen(9000);
 
 (async () => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox']});
   const page = await browser.newPage();
 
   for(let g=0;g<games.length;g++) {
