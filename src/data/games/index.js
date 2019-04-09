@@ -1,4 +1,5 @@
 import game_1800 from "./1800";
+import game_1828 from "./1828";
 import game_1830 from "./1830";
 import game_1832 from "./1832";
 import game_1834 from "./1834";
@@ -20,6 +21,7 @@ import game_Harzbahn from "./Harzbahn";
 
 let games = {
   "1800": game_1800,
+  "1828": game_1828,
   "1830": game_1830,
   "1832": game_1832,
   "1834": game_1834,
