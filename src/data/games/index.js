@@ -19,7 +19,7 @@ import game_18Mex from "./18Mex";
 import game_FourthAge from "./FourthAge";
 import game_Harzbahn from "./Harzbahn";
 
-let games = {
+let all_games = {
   "1800": game_1800,
   "1828": game_1828,
   "1830": game_1830,
@@ -42,4 +42,12 @@ let games = {
   Harzbahn: game_Harzbahn
 };
 
-export default games;
+let public_games = {
+  "1800": game_1800,
+  "1830": game_1830,
+  "1886": game_1886,
+  "1890": game_1890,
+  "18AL": game_18AL
+};
+
+export default (process.env.REACT_APP_ONLY_PUBLIC_GAMES ? public_games : all_games);
