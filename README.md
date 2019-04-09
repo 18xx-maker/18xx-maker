@@ -12,10 +12,10 @@ App](https://github.com/facebookincubator/create-react-app).
 
 ## Docker
 
-If you have docker installed (or available) you can run a public docker image
-that includes all games. Run the following command and the site should be
-available at http://localhost (you might need to edit the port depending on your
-OS and other running apps):
+If you have docker installed (or available) you can run a [public docker
+image](https://hub.docker.com/r/kelsin/18xx) that includes all games. Run the
+following command and the site should be available at http://localhost (you
+might need to edit the port depending on your OS and other running apps):
 
 ```sh
 docker run -it --rm -p 80:80 kelsin/18xx
