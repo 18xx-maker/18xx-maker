@@ -4,8 +4,11 @@ This is a small pet project to help layout and print
 [18xx](https://en.wikipedia.org/wiki/18XX) games.
 
 **Important Note**: A small version of the site is up and running on
-[18xx.kelsin.net](https://18xx.kelsin.net). This version only has games that are
-100% available as Print and Play.
+[18xx.kelsin.net](https://18xx.kelsin.net). This version only has a few games on
+it. If you want to see all games included in the data files you'll need to
+download the app and run it yourself (or run the public docker image). If any
+designers/publishers would like to add their games to this public site just let
+me know!
 
 This project was bootstrapped with [Create React
 App](https://github.com/facebookincubator/create-react-app).
