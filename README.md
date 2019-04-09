@@ -3,15 +3,25 @@
 This is a small pet project to help layout and print
 [18xx](https://en.wikipedia.org/wiki/18XX) games.
 
-**Important Note**: I have removed the running version of the site (from
-18xx.kelsin.net). While I want to keep the tool open, having a site always up
-with other people's intellectual property and allowing people to VERY easily
-make copies of that work was **not** the intent of the project. I will be
-working in the next few weeks to beef up the documentation of the tool so that
-people can run it themselves.
+**Important Note**: A small version of the site is up and running on
+[18xx.kelsin.net](https://18xx.kelsin.net). This version only has games that are
+100% available as Print and Play.
 
 This project was bootstrapped with [Create React
 App](https://github.com/facebookincubator/create-react-app).
+
+## Docker
+
+If you have docker installed (or available) you can run a public docker image
+that includes all games. Run the following command and the site should be
+available at http://localhost (you might need to edit the port depending on your
+OS and other running apps):
+
+```sh
+docker run -it --rm -p 80:80 kelsin/18xx
+```
+
+More documentation about this will be coming soon.
 
 ## Usage
 
