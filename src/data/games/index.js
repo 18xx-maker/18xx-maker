@@ -49,6 +49,7 @@ let public_games = {
   "1830": game_1830,
   "1836jr": game_1836jr,
   "1886": game_1886,
+  "1899": game_1899,
   "1890": game_1890,
   "18AL": game_18AL
 };
