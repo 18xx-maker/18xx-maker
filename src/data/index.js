@@ -26,9 +26,6 @@ const shareLayout = "left";
 // none: No map coordinates
 const coords = "outside";
 
-// What google fonts to load
-const fonts = ["Bitter:700", "Limelight"];
-
 // Stock market font settings
 const market = {
   fontSize: "0.15in",
@@ -54,7 +51,6 @@ const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 export {
   alpha,
   coords,
-  fonts,
   market,
   pagination,
   paper,
