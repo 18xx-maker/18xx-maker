@@ -739,7 +739,7 @@ const game = {
                  {label:"TOR", angle:240, percent: 0.7}],
         track: [{type:"sharp", side: 5}],
         terrain: [{type:"water", cost:"F40", angle: 180, percent: 0.7}],
-        tokens: [{color: "lightGreen", label: "NFL", width: 15, angle: 60, percent: 0.75}],
+        tokens: [{company: "NFL", width: 15, angle: 60, percent: 0.75}],
         hexes: ["D6"]
       },
       {
@@ -749,13 +749,138 @@ const game = {
       },
       {
         color: "plain",
+        labels: [{label: "OO", percent: 0.667},
+                 {label: "H", percent: 0.667, angle: 180}],
+        cities: [{angle: 65, percent: 0.6,
+                  name: {name: "Rotterdam"}},
+                 {angle: 295, percent: 0.6,
+                  name: {name: "Den Haag"}}],
+        tokens: [{company: "NBDS", angle: 225, percent: 0.75, width: 15}],
+        hexes: ["E5"]
+      },
+      {
+        color: "plain",
+        cities: [{name: {name: "Utrecht"}}],
+        hexes: ["E7"]
+      },
+      {
+        color: "plain",
+        labels: [{label: "OO", percent: 0.667}],
+        terrain: [{type: "water", cost: "F40", angle: 180, percent: 0.6}],
+        cities: [{angle: 65, percent: 0.6,
+                  name: {name: "Arnhem"}},
+                 {angle: 295, percent: 0.6,
+                  companies: ["NBDS"],
+                  name: {name: "Nijmegen"}}],
+        tokens: [{company: "HSM", angle: 135, percent: 0.75, width: 15}],
+        hexes: ["E11"]
+      },
+      {
+        color: "plain",
+        centerTowns: [{name: {name: "Hoek van Holland"}}],
+        terrain: [{type: "water", cost: "F40", percent: 0.6}],
+        borders: [{color: "water", side: 5},
+                  {color: "water", side: 6}],
+        hexes: ["F4"]
+      },
+      {
+        color: "plain",
         terrain: [{type:"water",cost:"F80"}],
+        borders: [{color: "water", side: 6}],
         hexes: ["F6"]
+      },
+      {
+        color: "plain",
+        centerTowns: [{name: {name: "Eindhoven"}}],
+        hexes: ["F10"]
+      },
+      {
+        color: "plain",
+        borders: [{color: "water", side: 3}],
+        hexes: ["G3"]
+      },
+      {
+        color: "plain",
+        borders: [{color: "water", side: 2},
+                  {color: "water", side: 3}],
+        hexes: ["G5"]
+      },
+      {
+        color: "plain",
+        cities: [{name: {name: "Antwerp"}}],
+        hexes: ["G7"]
+      },
+      {
+        color: "plain",
+        centerTowns: [{name: {name: "Bruges"}}],
+        hexes: ["H2"]
+      },
+      {
+        color: "plain",
+        cities: [{name: {name: "Gand"}}],
+        hexes: ["H4"]
+      },
+      {
+        color: "yellow",
+        values: [{percent: 0.5, value:30}],
+        cities: [{angle: 150, percent: 0.333,
+                  companies: ["B"],
+                  name: {name: "Brussels", offset: 42}}],
+        track: [{type: "gentle", side: 1}],
+        labels: [{label: "B", angle: 240, percent: 0.6},
+                 {label: "L", angle: 300, percent: 0.6}],
+        hexes: ["H6"]
+      },
+      {
+        color: "plain",
+        labels: [{label: "OO", percent: 0.667}],
+        terrain: [{type: "water", cost: "F40", angle: 180, percent: 0.6}],
+        cities: [{angle: 65, percent: 0.6,
+                  name: {name: "Maastricht"}},
+                 {angle: 295, percent: 0.6,
+                  name: {name: "Liège"}}],
+        tokens: [{company: "B", angle: 135, percent: 0.75, width: 15}],
+        hexes: ["H10"]
+      },
+      {
+        color: "yellow",
+        values: [{angle: 180, percent: 0.5, value:30}],
+        cities: [{angle: 330, percent: 0.333,
+                  companies: ["Nord"],
+                  name: {name: "Lille", offset: 58, reverse: true}}],
+        track: [{type: "gentle", side: 4}],
+        labels: [{label: "B", angle: 60, percent: 0.6},
+                 {label: "Bar", angle: 120, percent: 0.6}],
+        hexes: ["I3"]
       },
       {
         color: "plain",
         terrain: [{type:"mountain",cost:"F60"}],
         hexes: ["I11","J10","J12","K7","K9"]
+      },
+      {
+        color: "plain",
+        cities: [{companies:["GCL"],
+                  name: {reverse: true, name: "Namur"}}],
+        terrain: [{type: "water", cost: "F40", angle: 180, percent: 0.6}],
+        tokens: [{company: "Nord", percent: 0.8, width: 15}],
+        hexes: ["I9"]
+      },
+      {
+        color: "plain",
+        hexes: ["J4"]
+      },
+      {
+        color: "plain",
+        cities: [{name: {name: "Charleroi"}}],
+        hexes: ["J6"]
+      },
+      {
+        color: "plain",
+        cities: [{name: {reverse: true, name: "Hainaut Coalfields"}}],
+        terrain: [{type: "mountain", cost: "F60", angle: 180, percent: 0.6}],
+        icons: [{type: "coal", percent: 0.8}],
+        hexes: ["J8"]
       },
       {
         color: "water",
@@ -818,9 +943,8 @@ const game = {
       },
       {
         color: "offboard",
-        tokens: [{label:"GCL", color: "green", width: 15, percent: 0.6}],
+        tokens: [{company:"GCL", width: 15, percent: 0.6}],
         offBoardRevenue: {
-          
           name: {name: "Strasbourg"},
           revenues: [{color: "yellow", cost: "40"},
                      {color: "brown", cost: "70"}]
