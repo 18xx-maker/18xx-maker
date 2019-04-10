@@ -15,6 +15,10 @@ const pagination = "equal";
 // just display in black and white
 const plainMapHomes = false;
 
+// If true don't use tokens as map destination locations,
+// just display in black and white
+const plainMapDestinations = false;
+
 // This can be "left" to get bands of color with circles on the left, or
 // "center" for the tokens in the center
 const shareLayout = "left";
@@ -56,5 +60,6 @@ export {
   paper,
   scheme,
   plainMapHomes,
+  plainMapDestinations,
   shareLayout
 };
