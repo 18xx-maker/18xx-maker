@@ -191,7 +191,7 @@ const game = {
     {
       name: "2",
       quantity: 5,
-      price: "$80",
+      price: "F100",
       color: "yellow",
       info: [
         {
@@ -203,7 +203,7 @@ const game = {
     {
       name: "3",
       quantity: 4,
-      price: "$180",
+      price: "F225",
       color: "green",
       info: [
         {
@@ -215,7 +215,7 @@ const game = {
     {
       name: "4",
       quantity: 3,
-      price: "$300",
+      price: "F350",
       color: "green",
       info: [
         {
@@ -227,7 +227,7 @@ const game = {
     {
       name: "5",
       quantity: 2,
-      price: "$450",
+      price: "F550",
       color: "brown",
       info: [
         {
@@ -239,7 +239,7 @@ const game = {
     {
       name: "6",
       quantity: 2,
-      price: "$630",
+      price: "F700",
       color: "brown",
       info: [
         {
@@ -251,8 +251,9 @@ const game = {
     {
       name: "8",
       quantity: 5,
-      price: "$1100",
+      price: "F1000",
       color: "brown",
+      description: "Cost F650 when trading in a 4T, 5T or 6T",
       info: [
         {
           color: "yellow",
