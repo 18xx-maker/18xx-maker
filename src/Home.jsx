@@ -19,7 +19,7 @@ import "./Home.scss";
 
 const makeGameNode = game => (
   <li key={game.id} className="game">
-    <NavLink to={`/${game.id}/map`}>{game.info.title}</NavLink> by {game.info.designer}
+    <NavLink to={`/${game.id}/map`}>{game.info.title}</NavLink> <em>{game.info.subtitle}</em> by {game.info.designer}
   </li>
 );
 

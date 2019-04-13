@@ -21,7 +21,7 @@ following command and the site should be available at http://localhost (you
 might need to edit the port depending on your OS and other running apps):
 
 ```sh
-docker run -it --rm -p 80:80 kelsin/18xx
+docker run -it --rm -p 80:80 -n 18xx kelsin/18xx
 ```
 
 More documentation about this will be coming soon.

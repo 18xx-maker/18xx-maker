@@ -3,7 +3,8 @@ import game_1828 from "./1828";
 import game_1830 from "./1830";
 import game_1832 from "./1832";
 import game_1834 from "./1834";
-import game_1836jr from "./1836jr";
+import game_1836jr_30 from "./1836jr-30";
+import game_1836jr_56 from "./1836jr-56";
 import game_1846 from "./1846";
 import game_1849 from "./1849";
 import game_1857 from "./1857";
@@ -26,7 +27,8 @@ let all_games = {
   "1830": game_1830,
   "1832": game_1832,
   "1834": game_1834,
-  "1836jr": game_1836jr,
+  "1836jr-30": game_1836jr_30,
+  "1836jr-56": game_1836jr_56,
   "1846": game_1846,
   "1849": game_1849,
   "1857": game_1857,
@@ -47,7 +49,8 @@ let all_games = {
 let public_games = {
   "1800": game_1800,
   "1830": game_1830,
-  "1836jr": game_1836jr,
+  "1836jr-30": game_1836jr_30,
+  "1836jr": game_1836jr_56,
   "1886": game_1886,
   "1889": game_1889,
   "1890": game_1890,
