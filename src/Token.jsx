@@ -63,13 +63,18 @@ const Token = ({
           {(config, game) => {
 
             if (company) {
-              let gameCompany = find(propEq("abbrev", company), game.companies);
-              label = gameCompany.abbrev;
-
-              if (config.plainMapDestinations) {
-                color = "black";
+              if (is(Object, company)) {
+                label = company.label;
+                color = company.color;
               } else {
-                color = gameCompany.color;
+                let gameCompany = find(propEq("abbrev", company), game.companies);
+                label = gameCompany.abbrev;
+
+                if (config.plainMapDestinations) {
+                  color = "black";
+                } else {
+                  color = gameCompany.color;
+                }
               }
             }
 

@@ -2,6 +2,7 @@ const game = {
   // Generic Game Info
   info: {
     title: "1836jr",
+    subtitle: "1856 Variant",
     designer: "David Hecht",
     background: "brown",
     width: 150,
@@ -24,28 +25,23 @@ const game = {
   // Need an IPO sheet
   ipo: true,
 
-  bank: "$12,000",
+  bank: "F6,000",
 
   players: [
     {
-      number: 3,
+      number: 2,
       certLimit: 20,
-      capital: "$800"
+      capital: "F450"
+    },
+    {
+      number: 3,
+      certLimit: 13,
+      capital: "F300"
     },
     {
       number: 4,
-      certLimit: 16,
-      capital: "$600"
-    },
-    {
-      number: 5,
-      certLimit: 13,
-      capital: "$480"
-    },
-    {
-      number: 6,
-      certLimit: 11,
-      capital: "$400"
+      certLimit: 10,
+      capital: "F225"
     }
   ],
 
@@ -54,7 +50,7 @@ const game = {
     {
       name: "Chemins de Fer de L'Etat Belge",
       abbrev: "B",
-      tokens: ["Free", "$40", "$100", "$100"],
+      tokens: ["Free", "F40", "F100", "F100"],
       color: "black",
       shares: [
         {
@@ -73,7 +69,7 @@ const game = {
     {
       name: "Grande Compagnie Du Luxembourg",
       abbrev: "GCL",
-      tokens: ["Free", "$40", "$100", "$100"],
+      tokens: ["Free", "F40", "F100", "F100"],
       color: "green",
       shares: [
         {
@@ -92,7 +88,7 @@ const game = {
     {
       name: "Chemin de Fer Du Nord",
       abbrev: "Nord",
-      tokens: ["Free", "$40", "$100"],
+      tokens: ["Free", "F40", "F100", "F100"],
       color: "blue",
       shares: [
         {
@@ -111,7 +107,7 @@ const game = {
     {
       name: "Noord-Brabantsch-Duitsche Spoorweg-Maatschappij",
       abbrev: "NBDS",
-      tokens: ["Free", "$40", "$100"],
+      tokens: ["Free", "F40", "F100"],
       color: "yellow",
       shares: [
         {
@@ -130,7 +126,7 @@ const game = {
     {
       name: "Hollandsche IJzeren Spoorweg Maatschappij",
       abbrev: "HSM",
-      tokens: ["Free", "$40"],
+      tokens: ["Free", "F40"],
       color: "orange",
       shares: [
         {
@@ -149,7 +145,7 @@ const game = {
     {
       name: "Noord-Friesche Locaal",
       abbrev: "NFL",
-      tokens: ["Free", "$40"],
+      tokens: ["Free", "F40"],
       color: "lightGreen",
       shares: [
         {
@@ -166,10 +162,10 @@ const game = {
       ]
     },
     {
-      name: "Maatschappij Tot Exploitatie Van de Staats-Spoorwegen",
-      abbrev: "MES",
-      tokens: ["Free", "$40", "$100"],
-      color: "purple",
+      name: "Maatschappij tot Exploitie van de Staats-Spoorwegen",
+      abbrev: "SS",
+      tokens: ["Free", "F40", "F100", "F100"],
+      color: "red",
       shares: [
         {
           quantity: 1,
@@ -194,7 +190,7 @@ const game = {
   trains: [
     {
       name: "2",
-      quantity: 6,
+      quantity: 5,
       price: "$80",
       color: "yellow",
       info: [
@@ -206,7 +202,7 @@ const game = {
     },
     {
       name: "3",
-      quantity: 5,
+      quantity: 4,
       price: "$180",
       color: "green",
       info: [
@@ -218,7 +214,7 @@ const game = {
     },
     {
       name: "4",
-      quantity: 4,
+      quantity: 3,
       price: "$300",
       color: "green",
       info: [
@@ -230,7 +226,7 @@ const game = {
     },
     {
       name: "5",
-      quantity: 3,
+      quantity: 2,
       price: "$450",
       color: "brown",
       info: [
@@ -253,11 +249,10 @@ const game = {
       ]
     },
     {
-      name: "D",
-      quantity: 6,
+      name: "8",
+      quantity: 5,
       price: "$1100",
       color: "brown",
-      description: "Cost $800 when trading in a 4T, 5T or 6T",
       info: [
         {
           color: "yellow",
@@ -269,29 +264,22 @@ const game = {
 
   privates: [
     {
-      name: "Amsterdam Canal Company",
+      name: "Amsterdam Canal Company - ACC",
       price: "F20",
       revenue: "F5",
       description: "Blocks Hex D6."
     },
     {
-      name: "Enkhuizen-Stavoren Ferry",
+      name: "Enkhuizen-Stavoren Ferry - E-SF",
       price: "F40",
       revenue: "F10",
       description:
       "Company may place free tile on B8."
     },
     {
-      name: "Charbonnages du Hainaut",
+      name: "Charbonnages du Hainaut - CdH",
       price: "F50",
       revenue: "F10",
-      description:
-      "Blocks Hex J8. Company may place tile and token on Hex J8 for F60."
-    },
-    {
-      name: "Charbonnages du Hainaut",
-      price: "F70",
-      revenue: "F15",
       description:
       "Blocks Hex J8. Company may place tile and token on Hex J8 for F60."
     },
@@ -301,20 +289,6 @@ const game = {
       revenue: "F15",
       description:
       "Owning company may place a +20 token on any city or town."
-    },
-    {
-      name: "Chemins de Fer Luxembourgeois",
-      price: "F160",
-      revenue: "F25",
-      description:
-      "Blocks Hexes K11 & J12. Player gets a 10% certificate for GCL."
-    },
-    {
-      name: "Chemin de Fer de Lille Á Valenciennes",
-      price: "F220",
-      revenue: "F30",
-      description:
-      "Blocks Hexes I3 & J4. Includes president's certificate for the Chemin de Fer du Nord. Closes on first train purchase."
     }
   ],
 
@@ -322,7 +296,7 @@ const game = {
     {
       name: "2",
       limit: "4",
-      number: "6",
+      numbtr: "6",
       tiles: "yellow"
     },
     {
@@ -614,75 +588,51 @@ const game = {
   tiles: {
     "2": 1,
     "3": 2,
-    "3|56": 1,
     "4": 2,
-    "4|56": 1,
-    "5|56": 2,
-    "6|56": 2,
     "7": 4,
-    "7|56": 3,
     "8": 8,
-    "8|56": 6,
     "9": 7,
-    "9|56": 6,
     "56": 1,
     "57": 4,
     "58": 2,
-    "58|56": 1,
     "14": 3,
-    "14|56": 1,
     "15": 2,
-    "15|56": 2,
     "16": 1,
-    "17|56": 1,
     "18": 1,
     "19": 1,
     "20": 1,
     "23": 3,
-    "23|56": 1,
     "24": 3,
-    "24|56": 1,
     "25": 1,
     "26": 1,
     "27": 1,
     "28": 1,
     "29": 1,
-    "53|30": 2,
-    "54|30": 1,
+    "53": 2,
+    "54": 1,
     "59": 2,
-    "120|56": 1,
-    "121|56": 2,
     "39": 1,
     "40": 1,
     "41": 2,
-    "41|56": 1,
     "42": 2,
-    "42|56": 1,
     "43": 2,
     "44": 1,
     "45": 2,
     "46": 2,
     "47": 1,
-    "47|56": 1,
-    "61|30": 2,
-    "62|30": 1,
+    "61": 2,
+    "62": 1,
     "63": 3,
-    "63|56": 1,
     "64": 1,
     "65": 1,
     "66": 1,
     "67": 1,
     "68": 1,
-    "70": 1,
-    "122|56": 1,
-    "125|56": 4,
-    "126|56": 1,
-    "127|56": 1,
-    "123|56": 1,
-    "124|56": 1
+    "70": 1
   },
 
-  map: {
+  map: [{
+    name: "Original Companies",
     hexes: [
       { color: "gray",
         track: [{type: "sharp", side: 5}],
@@ -708,6 +658,7 @@ const game = {
       {
         color: "plain",
         terrain: [{type: "water", cost: "F80", percent: 0.75}],
+        companies: [{label:"E-SF", percent: 0.7, angle: 180}],
         centerTowns: [
           { x: -30, name: { name: "Enkhuizen", reverse: true } },
           { x: 30, name: { name: "Stavoren" } }
@@ -732,11 +683,11 @@ const game = {
       {
         color: "yellow",
         values: [{angle: 180, percent: 0.26, value: 40}],
+        companies: [{label:"ACC",angle:240, percent: 0.6}],
         cities: [{percent: 0.5,
                   name: {name: "Amsterdam"},
                   companies: ["HSM"]}],
-        labels: [{label:"NY", angle:120, percent: 0.7},
-                 {label:"TOR", angle:240, percent: 0.7}],
+        labels: [{label:"T", angle:120, percent: 0.7}],
         track: [{type:"sharp", side: 5}],
         terrain: [{type:"water", cost:"F40", angle: 180, percent: 0.7}],
         tokens: [{company: "NFL", width: 15, angle: 60, percent: 0.75}],
@@ -827,8 +778,7 @@ const game = {
                   companies: ["B"],
                   name: {name: "Brussels", offset: 42}}],
         track: [{type: "gentle", side: 1}],
-        labels: [{label: "B", angle: 240, percent: 0.6},
-                 {label: "L", angle: 300, percent: 0.6}],
+        labels: [{label: "L", angle: 240, percent: 0.6}],
         hexes: ["H6"]
       },
       {
@@ -839,18 +789,17 @@ const game = {
                   name: {name: "Maastricht"}},
                  {angle: 295, percent: 0.6,
                   name: {name: "Liège"}}],
-        tokens: [{company: "B", angle: 135, percent: 0.75, width: 15}],
+        tokens: [{company: "B", angle: 225, percent: 0.75, width: 15}],
         hexes: ["H10"]
       },
       {
         color: "yellow",
-        values: [{angle: 180, percent: 0.5, value:30}],
+        values: [{angle: 180, percent: 0.6, value:30}],
         cities: [{angle: 330, percent: 0.333,
                   companies: ["Nord"],
-                  name: {name: "Lille", offset: 58, reverse: true}}],
+                  name: {name: "Lille", offset: 42, reverse: false}}],
         track: [{type: "gentle", side: 4}],
-        labels: [{label: "B", angle: 60, percent: 0.6},
-                 {label: "Bar", angle: 120, percent: 0.6}],
+        labels: [{label: "B", angle: 60, percent: 0.6}],
         hexes: ["I3"]
       },
       {
@@ -879,7 +828,7 @@ const game = {
         color: "plain",
         cities: [{name: {reverse: true, name: "Hainaut Coalfields"}}],
         terrain: [{type: "mountain", cost: "F60", angle: 180, percent: 0.6}],
-        icons: [{type: "coal", percent: 0.8}],
+        companies: [{label: "CdH", percent: 0.75}],
         hexes: ["J8"]
       },
       {
@@ -953,7 +902,113 @@ const game = {
         hexes: ["K13"]
       }
     ]
-  }
+  },{
+    name: "1830 Companies",
+    copy: 0,
+    hexes: [
+      { color: "gray",
+        track: [{type: "sharp", side: 5}],
+        values: [{angle: 180, percent: 0.333, value: 10}],
+        cities: [{percent: 0.5,
+                  name: {name: "Leeuwarden"},
+                  companies: [{color:"brown", label:"B&M"}]}],
+        hexes: ["A9"]
+      },
+      {
+        color: "yellow",
+        values: [{angle: 180, percent: 0.26, value: 40}],
+        companies: [{label:"ACC",angle:240, percent: 0.6}],
+        cities: [{percent: 0.5,
+                  name: {name: "Amsterdam"},
+                  companies: [{color:"orange",label:"NYNH"}]}],
+        labels: [{label:"T", angle:120, percent: 0.7}],
+        track: [{type:"sharp", side: 5}],
+        terrain: [{type:"water", cost:"F40", angle: 180, percent: 0.7}],
+        tokens: [{company: {color:"brown",label:"B&M"},
+                  width: 15, angle: 60, percent: 0.75}],
+        hexes: ["D6"]
+      },
+      {
+        color: "plain",
+        labels: [{label: "OO", percent: 0.667},
+                 {label: "H", percent: 0.667, angle: 180}],
+        cities: [{angle: 65, percent: 0.6,
+                  name: {name: "Rotterdam"}},
+                 {angle: 295, percent: 0.6,
+                  name: {name: "Den Haag"}}],
+        tokens: [{company: {label:"ERIE", color:"yellow"}, angle: 225, percent: 0.75, width: 15}],
+        hexes: ["E5"]
+      },
+      {
+        color: "plain",
+        labels: [{label: "OO", percent: 0.667}],
+        terrain: [{type: "water", cost: "F40", angle: 180, percent: 0.6}],
+        cities: [{angle: 65, percent: 0.6,
+                  name: {name: "Arnhem"}},
+                 {angle: 295, percent: 0.6,
+                  companies: [{color:"yellow",label:"ERIE"}],
+                  name: {name: "Nijmegen"}}],
+        tokens: [{company: {color:"orange",label:"NYNH"}, angle: 135, percent: 0.75, width: 15}],
+        hexes: ["E11"]
+      },
+      {
+        color: "yellow",
+        values: [{percent: 0.5, value:30}],
+        cities: [{angle: 150, percent: 0.333,
+                  companies: [{color:"black",label:"NYC"}],
+                  name: {name: "Brussels", offset: 42}}],
+        track: [{type: "gentle", side: 1}],
+        labels: [{label: "L", angle: 240, percent: 0.6}],
+        hexes: ["H6"]
+      },
+      {
+        color: "plain",
+        labels: [{label: "OO", percent: 0.667}],
+        terrain: [{type: "water", cost: "F40", angle: 180, percent: 0.6}],
+        cities: [{angle: 65, percent: 0.6,
+                  name: {name: "Maastricht"}},
+                 {angle: 295, percent: 0.6,
+                  name: {name: "Liège"}}],
+        tokens: [{company: {color:"black",label:"NYC"}, angle: 225, percent: 0.75, width: 15}],
+        companies: [{label:"GCB", rotate: 30, reverse: true,
+                     left: 55, right: 55, angle: 120, percent: 1.75}],
+        hexes: ["H10"]
+      },
+      {
+        color: "yellow",
+        values: [{angle: 180, percent: 0.6, value:30}],
+        cities: [{angle: 330, percent: 0.333,
+                  companies: [{color:"blue",label:"B&O"}],
+                  name: {name: "Lille", offset: 42, reverse: false}}],
+        track: [{type: "gentle", side: 4}],
+        labels: [{label: "B", angle: 60, percent: 0.6}],
+        hexes: ["I3"]
+      },
+      {
+        color: "plain",
+        cities: [{companies:[{color:"green",label:"PRR"}],
+                  name: {reverse: true, name: "Namur"}}],
+        terrain: [{type: "water", cost: "F40", angle: 180, percent: 0.6}],
+        tokens: [{company: {label:"B&O",color:"blue"}, percent: 0.8, width: 15}],
+        hexes: ["I9"]
+      },
+      {
+        color: "offboard",
+        tokens: [{company:{color:"green",label:"PRR"}, width: 15, percent: 0.6}],
+        offBoardRevenue: {
+          name: {name: "Strasbourg"},
+          revenues: [{color: "yellow", cost: "40"},
+                     {color: "brown", cost: "70"}]
+        },
+        offBoardTrack: [{side:1},{side:2}],
+        hexes: ["K13"]
+      },
+      {
+        color: "plain",
+        hexes: ["J4"]
+      }
+    ]
+  }]
 };
 
 export default game;
