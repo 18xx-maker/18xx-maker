@@ -21,7 +21,7 @@ const Value = ({ value, fixed }) => {
                 strokeWidth="2"
                 cx="0"
                 cy="0"
-                r="15"
+                r="14"
               />
               <text
                 transform={fixed ? null : `rotate(-${rotation})`}
