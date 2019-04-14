@@ -278,7 +278,6 @@ const game = {
   turns: [],
 
   stock: {
-
     paginated: true,
     orientation: "portrait",
     cell: {

@@ -40,17 +40,22 @@ const server = app.listen(9000);
       if (err.code !== 'EEXIST') throw err;
     }
 
-    let items = ['cards', 'charters', 'map', 'map-paginated', 'tiles', 'tokens'];
+    let items = ['background', 'cards', 'charters', 'map', 'map-paginated', 'market', 'tiles', 'tokens'];
+
+    let gameDef = require(`../src/data/games/${game}`).default;
 
     for(let i=0;i<items.length;i++) {
       let item = items[i];
+
+      if(item === "map-paginated" && gameDef.info.paginated === false) continue;
+      if(item === "market" && gameDef.stock.paginated === true) item = 'market-paginated';
+
       console.log("Printing " + game + "/" + item);
       await page.goto(`http://localhost:9000/${game}/${item}`, {waitUntil: 'networkidle2'});
       await page.pdf({path: `build/render/${game}/${item.replace(/\//g,'-')}.pdf`, scale: 1.0, preferCSSPageSize: true});
     }
 
     // Board 18 Output
-    let gameDef = require(`../src/data/games/${game}`).default;
     let tileDefs = require('../src/data/tiles').default;
     let counts = R.compose(
       R.countBy(R.identity),
