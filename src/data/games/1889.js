@@ -236,13 +236,13 @@ const game = {
     ],
     legend: [
       {
-        color: "cyan",
+        color: "yellow",
         description:
         "Shares of this corporation do not count toward the certificate limit",
         icon: "certificate"
       },
       {
-        color: "blue",
+        color: "orange",
         description: "Players may own more than 60% of this corporation",
         icon: "percentage"
       }
