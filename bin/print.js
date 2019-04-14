@@ -6,17 +6,10 @@ const path = require('path');
 
 require("@babel/register");
 
-try {
-  fs.mkdirSync(`./build`);
-} catch (err) {
-  if (err.code !== 'EEXIST') throw err;
-}
+const util = require('../src/render/util');
+const setup = util.setup;
 
-try {
-  fs.mkdirSync(`./build/render`);
-} catch (err) {
-  if (err.code !== 'EEXIST') throw err;
-}
+setup();
 
 let games = [process.argv[2] || "1830"];
 if(process.argv[2] === "all") {
@@ -48,9 +41,6 @@ const server = app.listen(9000);
     }
 
     let items = ['cards', 'charters', 'map', 'map-paginated', 'tiles', 'tokens'];
-    if(process.argv[2] === "all") {
-      items = ['map'];
-    }
 
     for(let i=0;i<items.length;i++) {
       let item = items[i];
