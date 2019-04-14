@@ -799,14 +799,22 @@ footer a:hover {
   color: rgb(95,35,132);
 }
 
+.LegalNotes {
+  background-color: #a00;
+  color: #fff;
+  border-bottom: 2px solid #b00;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
 .PrintNotes {
-  padding: 0 2em;
   background-color: #ddd;
   border-bottom: 2px solid #bbb;
   font-family: sans-serif;
   font-weight: normal;
 }
 
+.LegalNotes > div,
 .PrintNotes > div {
   width: 800px;
   margin: 0 auto;
@@ -827,6 +835,11 @@ footer a:hover {
   margin-right: 1em;
 }
 
+.LegalNotes p {
+  margin: 0.5em 0 0.4em;
+}
+
+.LegalNotes p,
 .PrintNotes p {
   display: inline-block;
 }
@@ -858,6 +871,7 @@ footer a:hover {
 @media print {
   nav,
   footer,
+  .LegalNotes,
   .PrintNotes {
     display: none;
   }
