@@ -4,9 +4,9 @@ import Config from "./data/Config";
 
 import * as uuid from "uuid";
 
-import find from "ramda/es/find";
-import is from "ramda/es/is";
-import propEq from "ramda/es/propEq";
+import find from "ramda/src/find";
+import is from "ramda/src/is";
+import propEq from "ramda/src/propEq";
 
 const bleedAdjust = (bleed, percent) => {
   let ratio = 0.833333333;

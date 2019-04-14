@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "https://18xx.kelsin.net/schemas/config.schema.json",
+
+  "definitions": {
+    "font": {
+      "type": "object",
+      "properties": {
+        "size": { "type": "string" },
+        "weight": { "type": "string", "enum": ["normal", "bold"] },
+        "family": { "type": "string" }
+      },
+      "additionalProperties": { "$ref": "#/definitions/font" }
+    },
+    "dimension": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "dimensions": {
+      "type": "object",
+      "properties": {
+        "width": { "$ref": "#/definitions/dimension" },
+        "height": { "$ref": "#/definitions/dimension" }
+      },
+      "required": ["width", "height"]
+    }
+  },
+
+  "type": "object",
+  "properties": {
+    "scheme": { "type": "string" },
+    "paper": { "$ref": "#/definitions/dimensions" },
+    "stock": {
+      "type": "object",
+      "properties": {
+        "cell": { "$ref": "#/definitions/dimensions" },
+        "column": { "$ref": "#/definitions/dimensions" },
+        "diag": { "$ref": "#/definitions/dimensions" },
+        "par": { "$ref": "#/definitions/dimensions" }
+      },
+      "required": ["cell", "column", "diag", "par"],
+      "additionalProperties": false
+    },
+    "pagination": {
+      "type": "string",
+      "enum": ["equal", "max"]
+    },
+    "shareLayout": {
+      "type": "string",
+      "enum": ["center", "left"]
+    },
+    "coords": {
+      "type": "string",
+      "enum": ["outside", "inside", "edge", "none"]
+    },
+    "tiles": {
+      "type": "string",
+      "enum": ["offset", "individual", "die"]
+    },
+    "useCompanySvgLogos": { "type": "boolean" },
+    "plainMapHomes": { "type": "boolean" },
+    "plainMapDestinations": { "type": "boolean" },
+    "font": { "$ref": "#/definitions/font" }
+  },
+  "required": [
+    "scheme",
+    "paper",
+    "stock",
+    "pagination",
+    "shareLayout",
+    "coords",
+    "useCompanySvgLogos",
+    "plainMapHomes",
+    "plainMapDestinations",
+    "font"
+  ],
+  "additionalProperties": false
+}

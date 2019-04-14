@@ -6,9 +6,9 @@ import ps18xx from "./themes/ps18xx";
 
 import * as tinycolor from "tinycolor2";
 
-import curry from "ramda/es/curry";
-import is from "ramda/es/is";
-import mergeDeepRight from "ramda/es/mergeDeepRight";
+import curry from "ramda/src/curry";
+import is from "ramda/src/is";
+import mergeDeepRight from "ramda/src/mergeDeepRight";
 
 import ColorContext from '../context/ColorContext';
 import GameContext from '../context/GameContext';
@@ -50,7 +50,7 @@ const resolveColor = curry((scheme, phase, context, game, name) => {
 const textColor = curry((scheme, phase, game, color) => {
   let text = [resolveColor(scheme, phase, null, game, "white"),
               resolveColor(scheme, phase, null, game, "black")];
-  let tc = tinycolor(color);
+  let tc = tinycolor.default(color);
   return tinycolor.mostReadable(tc, text).toRgbString();
 });
 

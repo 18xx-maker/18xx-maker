@@ -1,4 +1,4 @@
-import assoc from "ramda/es/assoc";
+import assoc from "ramda/src/assoc";
 import {SET_CONFIG, SET_SCHEME} from "../actions";
 
 const configReducer = (state = {}, action) => {

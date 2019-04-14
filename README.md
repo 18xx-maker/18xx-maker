@@ -13,6 +13,12 @@ me know!
 This project was bootstrapped with [Create React
 App](https://github.com/facebookincubator/create-react-app).
 
+## Donation
+
+I've been asked about donation buttons, if you find this software usefull to you
+and would like to donate money towards it's development you can do so via
+[paypal](https://paypal.me/kelsin) or [square cash](https://cash.me/$kelsin).
+
 ## Docker
 
 If you have docker installed (or available) you can run a [public docker
@@ -48,6 +54,33 @@ npm install
 # Run the app
 npm start
 ```
+### Printing
+
+Running `yarn build` will build the app and then output pdf's into the
+`build/render` folder for all games.
+
+Running `yarn print <game>` will output the pdf's for only one game. The app
+needs to be built first by running `yarn build:app`.
+
+### Board18
+
+Running `yarn b18 <game> <verison> <author>` will create a board18 game box zip
+file. The app needs to be built first by running `yarn build:app`.
+
+### Example
+
+``` sh
+# Build the app
+yarn build:app
+
+# Print 1830 PDF's
+yarn print 1830
+
+# Build an 1830 Board18 Game Box
+yarn b18 1830 CGG01 Kelsin
+```
+
+## Developing
 
 ### Adding a game
 
