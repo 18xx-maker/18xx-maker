@@ -1,0 +1,40 @@
+{
+  "coords": "outside",
+  "font": {
+    "family": "Bitter, serif",
+    "size": "0.15in",
+    "weight": "normal",
+    "stock": {
+      "weight": "bold"
+    }
+  },
+  "pagination": "equal",
+  "paper": {
+    "width": 800,
+    "height": 1025
+  },
+  "useCompanySvgLogos": false,
+  "plainMapDestinations": false,
+  "plainMapHomes": false,
+  "scheme": "gmt",
+  "shareLayout": "left",
+  "tiles": "offset",
+  "stock": {
+    "cell": {
+      "width": 70,
+      "height": 85
+    },
+    "column": {
+      "width": 70,
+      "height": 375
+    },
+    "diag": {
+      "width": 70,
+      "height": 175
+    },
+    "par": {
+      "width": 200,
+      "height": 85
+    }
+  }
+}

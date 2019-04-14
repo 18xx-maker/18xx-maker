@@ -5,7 +5,7 @@ import Phase from "./Phase";
 import Color from "./data/Color";
 import ColorContext from "./context/ColorContext";
 
-import is from "ramda/es/is";
+import is from "ramda/src/is";
 
 const Charter = ({ name, abbrev, token, tokens, phases, turns }) => {
   let color = token;

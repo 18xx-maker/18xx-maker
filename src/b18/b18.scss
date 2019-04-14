@@ -32,4 +32,18 @@
       }
     }
   }
+
+  .tokens {
+    width: 90px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+
+    .token {
+      width: 90px;
+      height: 30px;
+      margin: 0;
+      padding: 0;
+    }
+  }
 }

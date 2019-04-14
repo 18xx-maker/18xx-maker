@@ -2,7 +2,6 @@ import React from "react";
 import * as R from "ramda";
 import * as util from "./market-utils";
 import * as tinycolor from "tinycolor2";
-import { paper } from "./data";
 
 import MarketCell from "./MarketCell";
 
@@ -84,12 +83,6 @@ const Market1Diag = ({ legend, market, par, title }) => {
 
 const Market2D = ({ legend, market, par, title, displayMode, paginated, cell }) => {
   market = util.normalize(market);
-  let numberOfRows = market.length;
-  let numberOfCols = R.reduce((max, row) => {
-    return Math.max(max, row.length);
-  }, 0, market);
-  let width = `${(paper.height) / numberOfCols / 100.0}`;
-  let height = `${(paper.width - 50) / numberOfRows / 100.0}`;
   let rows = R.addIndex(R.map)((marketRow, row) => {
     let cells = R.addIndex(R.map)((value, col) => {
       if (displayMode === "delta") {
@@ -107,7 +100,7 @@ const Market2D = ({ legend, market, par, title, displayMode, paginated, cell }) 
       }
 
       return (
-        <MarketCell {...{width, height, value, legend, par, ...cell}} key={`cell-${row}-${col}`} />
+        <MarketCell {...{value, legend, par, ...cell}} key={`cell-${row}-${col}`} />
       );
     }, marketRow);
     return <tr key={row}>{cells}</tr>;

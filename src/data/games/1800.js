@@ -421,6 +421,7 @@ const game = {
 
   stock: {
     type: "2D",
+    paginated: false,
     movement: {
       up: ["Sold out"],
       down: ["Once per sale"],

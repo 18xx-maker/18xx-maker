@@ -1,23 +1,25 @@
 import React from "react";
-import games from "./data/games";
+import { connect } from "react-redux";
+import games from "../data/games";
 import Map from "./Map";
-import Svg from "./Svg";
-import Title from "./Title";
-import HexContext from "./context/HexContext";
-import GameContext from "./context/GameContext";
-import util from "./util";
-import * as data from "./data";
-import * as R from "ramda";
+import Svg from "../Svg";
+import Title from "../Title";
+import HexContext from "../context/HexContext";
+import GameContext from "../context/GameContext";
+import { equalPages, maxPages } from "../util";
 import { Redirect } from "react-router-dom";
 
-import VariationSelect from "./nav/VariationSelect";
+import VariationSelect from "../nav/VariationSelect";
+import { getMapData } from "./util";
+
+import map from "ramda/src/map";
+import prop from "ramda/src/prop";
 
 import "./MapPaginated.css";
 
-const splitPages = data.pagination === "max" ? util.maxPages : util.equalPages;
-
-const MapPaginated = ({ match }) => {
+const MapPaginated = ({ match, coords, pagination, paper }) => {
   let game = games[match.params.game];
+  let splitPages = pagination === "max" ? maxPages : equalPages;
 
   if(game.info.paginated === false && match.params.variation) {
     return <Redirect to={`/${match.params.game}/map/${match.params.variation}`} />;
@@ -30,42 +32,21 @@ const MapPaginated = ({ match }) => {
   }
 
   let variation = Number(match.params.variation) || 0;
+  let data = getMapData(game, coords, variation);
 
-  let hexWidth = game.info.width;
-  let edge = hexWidth * util.HEX_RATIO;
-  let halfHexWidth = 0.5 * hexWidth;
+  let pageWidth = paper.width - 75;
+  let pageHeight = paper.height - 75;
 
-  let map = Array.isArray(game.map) ? game.map[variation] : game.map;
-  let hexes = map.hexes;
-  if (map.copy !== undefined) {
-    hexes = R.concat(game.map[map.copy].hexes, hexes);
-  }
-  let maxX = util.maxMapX(hexes);
-  let maxY = util.maxMapY(hexes);
-
-  let totalWidth = (game.info.extraTotalWidth || 0) + 100 + halfHexWidth * (maxX + 1);
-  let totalHeight =
-    (game.info.extraTotalHeight || 0) + 100 + (1.5 * (maxY - 1) * edge + 2 * edge);
-
-  if (game.info.orientation === "horizontal") {
-    let tmp = totalWidth;
-    totalWidth = totalHeight;
-    totalHeight = tmp;
-  }
-
-  let pageWidth = data.paper.width - 75;
-  let pageHeight = data.paper.height - 75;
-
-  if (map.print === "landscape") {
+  if (data.map.print === "landscape") {
     let tmp = pageWidth;
     pageWidth = pageHeight;
     pageHeight = tmp;
   }
 
   let y = -25; // Start with room for margins
-  let mapPages = R.map(height => {
+  let mapPages = map(height => {
     let x = -25; // Start with room for margins
-    let pages = R.map(width => {
+    let pages = map(width => {
       let page = (
         <div
           key={`page-${x}-${y}`}
@@ -77,7 +58,7 @@ const MapPaginated = ({ match }) => {
             margin: "auto auto"
           }}
         >
-          <div className="MapPage">
+          <div classname="mappage">
             <svg
               style={{
                 width: `${(width + 25) / 100}in`,
@@ -93,11 +74,11 @@ const MapPaginated = ({ match }) => {
 
       x = x + width;
       return page;
-    }, splitPages(totalWidth + 50, pageWidth));
+    }, splitPages(data.totalWidth + 50, pageWidth));
 
     y = y + height;
     return pages;
-  }, splitPages(totalHeight + 50, pageHeight));
+  }, splitPages(data.totalHeight + 50, pageHeight));
 
   let defs = (
     <g id={`${game.info.abbrev || game.info.title}_map`}>
@@ -108,7 +89,7 @@ const MapPaginated = ({ match }) => {
 
   let variationSelect = null;
   if(Array.isArray(game.map)) {
-    let variations = R.map(R.prop("name"), game.map);
+    let variations = map(prop("name"), game.map);
     variationSelect = (
       <VariationSelect base={`/${match.params.game}/map-paginated/`}
                        variations={variations} />
@@ -127,17 +108,23 @@ const MapPaginated = ({ match }) => {
         <div>
           {variationSelect}
           <p>
-            This map is meant to be printed in <b>{map.print || "portrait"}</b>{" "}
+            This map is meant to be printed in <b>{data.map.print || "portrait"}</b>{" "}
             mode
           </p>
         </div>
       </div>
       <Svg className="FullMap" defs={defs} />
       {mapPages}
-      <style>{`@media print {@page {size: ${map.print === "landscape" ? "11in 8.5in" : "8.5in 11in"};}}`}</style>
+      <style>{`@media print {@page {size: ${data.map.print === "landscape" ? "11in 8.5in" : "8.5in 11in"};}}`}</style>
     </HexContext.Provider>
     </GameContext.Provider>
   );
 };
 
-export default MapPaginated;
+const mapStateToProps = state => ({
+  coords: state.config.coords,
+  pagination: state.config.pagination,
+  paper: state.config.paper
+});
+
+export default connect(mapStateToProps)(MapPaginated);
