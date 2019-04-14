@@ -40,20 +40,24 @@
 }
 
 .share--left .share__tokens {
-  left: 0.255in;
+  left: 0.23in;
+  top: 0.375in;
   width: 0.52in;
-  height: calc(100% - 0.5in);
-  flex-direction: column;
+  height: calc(100% - 0.75in);
+  flex-direction: column-reverse;
+  overflow: visible;
 }
 
 .share__token__wrapper {
-  height: 100%;
+  height: 0.52in;
   width: 100%;
+  top: -0.26in;
   overflow: hidden;
+  position: relative;
 }
 
 .share__token {
-  height: 0.52in;
+  height: 0px;
   width: 0.52in;
 }
 

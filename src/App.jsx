@@ -246,7 +246,7 @@ const App = () => (
             </Color>
           </defs>
         </svg>
-        <Footer/>
+        <Route exact path="/" component={Footer}/>
       </div>
     </ScrollToTop>
   </Router>
