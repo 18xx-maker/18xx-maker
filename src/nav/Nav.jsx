@@ -30,7 +30,7 @@ const Nav = ({match}) => {
       <div className="LegalNotes">
         <div>
           <p>
-            Items copyright to their respective creators and publishers. Only meant for personal use when you already own the original game.
+            <strong>Important:</strong> Please only use this site to print games for which you have a license by owning the game.
           </p>
         </div>
       </div>

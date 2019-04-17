@@ -803,6 +803,9 @@ footer a:hover {
   color: #fff;
   border-bottom: 2px solid #b00;
   font-family: sans-serif;
+}
+
+.LegalNotes strong {
   font-weight: bold;
 }
 

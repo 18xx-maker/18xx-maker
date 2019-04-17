@@ -45,9 +45,7 @@ const Home = () => {
               If you are a designer and/or publisher and would like your design
               to not be available either on this site or in the <a href="https://github.com/kelsin/18xx">source code</a> please <a href="mailto:kelsin@valefor.com">let me know</a>!</p>
             <p className="note" style={{backgroundColor:c("offboard"),color:t(c("offboard"))}}>
-              <strong>Important:</strong> Please use this site to print copies of games for which you already
-              have a license by owning a version of the game. Information about games
-              which are available for free print and play can be found <a href="https://boardgamegeek.com/geeklist/58420/18xx-available-pnp">on this geeklist</a>.
+              <strong>Important:</strong> Please only use this site to print games for which you have a license by owning the game.
             </p>
             <p className="note" style={{backgroundColor:c("yellow"),color:t(c("yellow"))}}>
               <strong>Note:</strong> Some games are still works in progress and in general the rendering of stock markets is not in a good place. Work will continue on this stuff.
