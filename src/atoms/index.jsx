@@ -26,6 +26,11 @@ const atoms = [{
              {values: [{value: 60}]},
              {values: [{value: 120}]}]
 },{
+  group: "Names",
+  examples: [{names: [{name:"Boston"}]},
+             {names: [{name: "Austin", percent: 0.6, angle: 240}]},
+             {names: [{name: "Seattle", percent: 0.6, rotate: -60, angle: 120}]}]
+},{
   group: "Industries",
   examples: [{industries: [{top:1,bottom:20}]},
              {industries: [{top:"ZH",bottom:10}]}]
