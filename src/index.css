@@ -57,12 +57,8 @@ body {
   overflow: hidden;
 }
 
-.tileSheet div.row svg {
-  margin: 0.125in 0.125in 0 0;
-}
-
-.tileSheet div.row svg:last-child {
-  margin: 0.125in 0 0 0;
+.tileSheet div.row:nth-child(even) {
+    padding-left: 1.73205in;
 }
 
 .tileSheet svg {
