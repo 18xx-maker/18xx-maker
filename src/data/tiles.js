@@ -1456,7 +1456,7 @@ const tiles = {
             {side: 5}]
   },
   "655": {
-    color: "brown",
+    color: "green",
     rotations: 2,
     values: [{angle: 210, percent: 0.8, value: 50}],
     labels: [{label: "M", angle: 150, percent: 0.8}],
