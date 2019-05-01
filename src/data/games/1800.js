@@ -216,7 +216,7 @@ const game = {
       name: "2E",
       quantity: 2,
       price: "$250",
-      color: "black",
+      color: "gray",
       info: [
         {
           color: "yellow",
@@ -228,7 +228,7 @@ const game = {
       name: "2E",
       quantity: 1,
       price: "$250",
-      color: "black",
+      color: "gray",
       players: "3 Player",
       info: [
         {
@@ -241,7 +241,7 @@ const game = {
       name: "3E",
       quantity: 1,
       price: "$350",
-      color: "black",
+      color: "gray",
       info: [
         {
           color: "yellow",
@@ -253,7 +253,7 @@ const game = {
       name: "3E",
       quantity: 1,
       price: "$350",
-      color: "black",
+      color: "gray",
       players: "3 Player",
       info: [
         {
@@ -266,7 +266,7 @@ const game = {
       name: "2x2E",
       quantity: 1,
       price: "$500",
-      color: "black",
+      color: "gray",
       info: [
         {
           color: "yellow",

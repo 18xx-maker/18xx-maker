@@ -4,10 +4,10 @@ import Color from "../data/Color";
 const Industry = ({ top, bottom }) => {
   return (
     <Color context="companies">
-      {c => (
+      {(c,t,s,p) => (
         <g>
           <circle
-            fill={c("white")}
+            fill={p("white")}
             stroke="none"
             r="18"
             cx="0"

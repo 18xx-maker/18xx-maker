@@ -406,7 +406,7 @@ const game = {
       name: "Operating Round",
       steps: [
         "Lay track",
-        "Please one token",
+        "Place one token",
         "Run trains",
         "Purchase trains",
         "Sell treasury stock",

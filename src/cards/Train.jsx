@@ -38,11 +38,17 @@ const Train = ({ train }) => {
   return (
     <div className="cutlines">
       <div className="card train">
-        <div className="train__price">{price}</div>
-        <div className="train__description">{description}</div>
-        <div className="train__notes">{notes}</div>
-          <Color>{c => (<div className="train__hr" style={{ backgroundColor: c(color) }} />)}</Color>
-        <div className="train__name">{name}</div>
+        <Color>
+          {(c,t) => (
+            <React.Fragment>
+              <div className="train__hr" style={{ backgroundColor: c(color) }} />
+              <div className="train__price" style={{ color: t(c(color)) }}>{price}</div>
+              <div className="train__description">{description}</div>
+              <div className="train__notes">{notes}</div>
+              <div className="train__name" style={{ color: t(c(color)) }}>{name}</div>
+            </React.Fragment>
+          )}
+        </Color>
       </div>
     </div>
   );

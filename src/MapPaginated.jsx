@@ -4,6 +4,7 @@ import Map from "./Map";
 import Svg from "./Svg";
 import Title from "./Title";
 import HexContext from "./context/HexContext";
+import GameContext from "./context/GameContext";
 import util from "./util";
 import * as data from "./data";
 import * as R from "ramda";
@@ -115,6 +116,7 @@ const MapPaginated = ({ match }) => {
   }
 
   return (
+    <GameContext.Provider value={match.params.game}>
     <HexContext.Provider
       value={{
         width: game.info.width,
@@ -134,6 +136,7 @@ const MapPaginated = ({ match }) => {
       {mapPages}
       <style>{`@media print {@page {size: ${map.print === "landscape" ? "11in 8.5in" : "8.5in 11in"};}}`}</style>
     </HexContext.Provider>
+    </GameContext.Provider>
   );
 };
 

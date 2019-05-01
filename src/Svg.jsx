@@ -15,9 +15,6 @@ const Svg = ({ className, width, height, viewBox, style, defs, children }) => {
           className={className}
         >
           <defs>
-            <style>
-              @import url("https://fonts.googleapis.com/css?family=Bitter:700");
-            </style>
             {defs}
           </defs>
           {children}

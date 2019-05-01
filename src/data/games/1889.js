@@ -236,13 +236,13 @@ const game = {
     ],
     legend: [
       {
-        color: "cyan",
+        color: "yellow",
         description:
         "Shares of this corporation do not count toward the certificate limit",
         icon: "certificate"
       },
       {
-        color: "blue",
+        color: "orange",
         description: "Players may own more than 60% of this corporation",
         icon: "percentage"
       }
@@ -1079,11 +1079,11 @@ const game = {
         cities: [
           {
             size: 2,
-            rotation: 120,
+            rotation: -60,
             name: {
               name: "Kouchi",
               reverse: true,
-              offset: 90
+              offset: 31
             },
             companies: ["TR"]
           }

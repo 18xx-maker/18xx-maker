@@ -25,7 +25,7 @@ const IPO = ({ match }) => {
                   <div className="ipo__token">
                     <ColorContext.Provider value="companies">
                       <Svg viewBox="-25 -25 50 50">
-                        <Token label={company.abbrev} color={company.color} />
+                        <Token company={company.abbrev} />
                       </Svg>
                     </ColorContext.Provider>
                   </div>

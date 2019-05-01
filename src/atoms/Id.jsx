@@ -8,12 +8,12 @@ const Id = ({ id, extra }) => {
     <HexContext.Consumer>
       {hx => (
         <Color>
-          {c => (
+          {(c,t,s,p) => (
             <React.Fragment>
               <g transform={`rotate(${hx.rotation}) translate(-40 70)`}>
                 <text
                   fontFamily="Helvetica, Arial, sans-serif"
-                  fill={c("black")}
+                  fill={p("black")}
                   stroke="none"
                   strokeLinecap="round"
                   strokeLinejoin="bevel"

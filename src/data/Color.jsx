@@ -7,6 +7,7 @@ import * as tinycolor from "tinycolor2";
 
 import curry from "ramda/es/curry";
 import is from "ramda/es/is";
+import mergeDeepRight from "ramda/es/mergeDeepRight";
 
 import ColorContext from '../context/ColorContext';
 import GameContext from '../context/GameContext';
@@ -28,10 +29,8 @@ const resolveColor = curry((scheme, phase, context, game, name) => {
   let colors = schemes[scheme || "gmt"] || schemes["gmt"];
 
   // Add in game colors
-  colors = {
-    ...colors,
-    ...(game ? game.colors || {} : {})
-  };
+  colors = mergeDeepRight(colors,
+                          game ? game.colors || {} : {});
 
   // Get color from context if it exists
   let color = colors[name];
@@ -46,9 +45,9 @@ const resolveColor = curry((scheme, phase, context, game, name) => {
   return color;
 });
 
-const textColor = curry((scheme, phase, context, game, color) => {
-  let text = [resolveColor(scheme, phase, context, game, "white"),
-              resolveColor(scheme, phase, context, game, "black")];
+const textColor = curry((scheme, phase, game, color) => {
+  let text = [resolveColor(scheme, phase, null, game, "white"),
+              resolveColor(scheme, phase, null, game, "black")];
   let tc = tinycolor(color);
   return tinycolor.mostReadable(tc, text).toRgbString();
 });
@@ -66,12 +65,13 @@ const Color = ({ scheme, context, children }) => {
               <PhaseContext.Consumer>
                 {phase => {
                   let c = resolveColor(scheme, phase, context || colorContext, game);
-                  let t = textColor(scheme, phase, context || colorContext, game);
+                  let p = resolveColor(scheme, phase, undefined, game);
+                  let t = textColor(scheme, phase, game);
                   let s = strokeColor;
 
                   return (
                     <React.Fragment>
-                      {children(c, t, s)}
+                      {children(c, t, s, p)}
                     </React.Fragment>
                   );
                 }}

@@ -26,6 +26,11 @@ const atoms = [{
              {values: [{value: 60}]},
              {values: [{value: 120}]}]
 },{
+  group: "Names",
+  examples: [{names: [{name:"Boston"}]},
+             {names: [{name: "Austin", percent: 0.6, angle: 240}]},
+             {names: [{name: "Seattle", percent: 0.6, rotate: -60, angle: 120}]}]
+},{
   group: "Industries",
   examples: [{industries: [{top:1,bottom:20}]},
              {industries: [{top:"ZH",bottom:10}]}]
@@ -45,6 +50,19 @@ const atoms = [{
   examples: [{icons: [{type: "meat"}]},
              {icons: [{type: "coal"}]},
              {icons: [{type: "steam"}]}]
+},{
+  group: "Tokens",
+  examples: [
+    {tokens: [{label:"AA", token:"orange"}]},
+    {tokens: [{label:"BB", token:{type:"square", colors:["blue", "orange"]}}]},
+    {tokens: [{label:"CC", token:{type:"quarters", colors:["blue", "orange"]}}]},
+    {tokens: [{label:"DD", token:{type:"halves", colors:["blue", "orange"]}}]},
+    {tokens: [{label:"EE", token:{type:"stripes", colors:["blue", "orange"]}}]},
+    {tokens: [{label:"FF", token:{type:"bar", colors:["blue", "orange"]}}]},
+    {tokens: [{label:"GG", token:{type:"stripe", colors:["blue", "orange"]}}]},
+    {tokens: [{label:"HH", token:{type:"target", colors:["blue", "orange"]}}]},
+    {tokens: [{label:"Longer", token:"blue"}]}
+  ]
 },{
   group: "Cities",
   examples: [{cities: [{}]},
