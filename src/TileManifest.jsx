@@ -41,9 +41,11 @@ const TileManifest = ({ match }) => {
     R.keys(game.tiles)
   );
 
-  let tiles = R.addIndex(R.map)((id, i) => {
+  let tileNodes = R.addIndex(R.map)((id, i) => {
     let [idBase, idExtra] = id.split("|");
-    let quantity = R.is(Object, game.tiles[id]) ? R.propOr(1, "quantity", game.tiles[id]) : game.tiles[id];
+    if (!tiles[id] && !tiles[idBase]) return null;
+    let tile = game.tiles[id] || game.tiles[idBase];
+    let quantity = R.is(Object, tile) ? R.propOr(1, "quantity", tile) : tile;
     return (
       <div
         key={i}
@@ -78,7 +80,7 @@ const TileManifest = ({ match }) => {
       </div>
       <div className="TileManifest">
         <div className="TileManifest--Title">{game.info.title} Tile Manifest</div>
-        {tiles}
+        {tileNodes}
       </div>
     </ColorContext.Provider>
   );

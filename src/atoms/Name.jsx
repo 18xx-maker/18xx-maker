@@ -21,11 +21,11 @@ const Name = ({ name, color, bgColor, path, rotation, reverse, offset, y, textLe
 
   return (
     <Color>
-      {c => (
+      {(c,t,s,p) => (
         <text
           dy={y}
           transform={`rotate(${(rotation || 0) + 360})`}
-          fill={c(fillColor)}
+          fill={p(fillColor)}
           fontFamily="Helvetica, Arial, sans-serif"
           fontSize={fontSize || 11}
           fontWeight="bold"

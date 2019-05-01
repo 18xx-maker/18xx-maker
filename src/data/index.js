@@ -15,6 +15,10 @@ const pagination = "equal";
 // just display in black and white
 const plainMapHomes = false;
 
+// If true don't use tokens as map destination locations,
+// just display in black and white
+const plainMapDestinations = false;
+
 // This can be "left" to get bands of color with circles on the left, or
 // "center" for the tokens in the center
 const shareLayout = "left";
@@ -25,9 +29,6 @@ const shareLayout = "left";
 // edge: Along the edge of the map
 // none: No map coordinates
 const coords = "outside";
-
-// What google fonts to load
-const fonts = ["Bitter:700", "Limelight"];
 
 // Stock market font settings
 const market = {
@@ -54,11 +55,11 @@ const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 export {
   alpha,
   coords,
-  fonts,
   market,
   pagination,
   paper,
   scheme,
   plainMapHomes,
+  plainMapDestinations,
   shareLayout
 };
