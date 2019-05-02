@@ -1,5 +1,6 @@
 import carth from "./themes/carth";
 import dtg from "./themes/dtg";
+import aag from "./themes/aag";
 import gmt from "./themes/gmt";
 import ps18xx from "./themes/ps18xx";
 
@@ -21,6 +22,7 @@ import games from "./games";
 const schemes = {
   carth,
   dtg,
+  aag,
   gmt,
   ps18xx
 };
