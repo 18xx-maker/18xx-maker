@@ -24,7 +24,7 @@ const ComponentSelect = ({match,history,location}) => {
         {game.minorCompanies && <option value="minors">Minors</option>}
         {false && game.ipo && <option value="ipo">IPO</option>}
         <option value="market">Market</option>
-        {game.stock.paginated && <option value="market-paginated">Market - Paginated</option>}
+        <option value="market-paginated">Market - Paginated</option>
         <option value="map">Map</option>
         <option value="map-paginated">Map - Paginated</option>
         <option value="tiles">Tiles</option>

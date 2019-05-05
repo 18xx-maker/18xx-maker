@@ -5,8 +5,8 @@ import ColorContext from "../context/ColorContext";
 
 import Config from "../data/Config";
 
-import is from "ramda/es/is";
-import min from "ramda/es/min";
+import is from "ramda/src/is";
+import min from "ramda/src/min";
 
 import "./share.scss";
 

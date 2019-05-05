@@ -4,7 +4,7 @@ import games from "./data/games";
 import * as R from "ramda";
 import ColorContext from "./context/ColorContext";
 
-import is from "ramda/es/is";
+import is from "ramda/src/is";
 
 import Svg from "./Svg";
 

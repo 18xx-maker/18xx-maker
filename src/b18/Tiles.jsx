@@ -4,14 +4,14 @@ import tileDefs from "../data/tiles";
 import Svg from "../Svg";
 import Tile from "../Tile";
 
-import compose from "ramda/es/compose";
-import filter from "ramda/es/filter";
-import is from "ramda/es/is";
-import keys from "ramda/es/keys";
-import map from "ramda/es/map";
-import propEq from "ramda/es/propEq";
-import take from "ramda/es/take";
-import uniq from "ramda/es/uniq";
+import compose from "ramda/src/compose";
+import filter from "ramda/src/filter";
+import is from "ramda/src/is";
+import keys from "ramda/src/keys";
+import map from "ramda/src/map";
+import propEq from "ramda/src/propEq";
+import take from "ramda/src/take";
+import uniq from "ramda/src/uniq";
 
 import ColorContext from "../context/ColorContext";
 import RotateContext from "../context/RotateContext";

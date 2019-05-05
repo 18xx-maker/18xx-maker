@@ -1,13 +1,13 @@
 import React from "react";
 import {withRouter} from "react-router";
 
-import assoc from "ramda/es/assoc";
-import compose from "ramda/es/compose";
-import map from "ramda/es/map";
-import mapObj from "ramda/es/mapObjIndexed";
-import path from "ramda/es/path";
-import sortBy from "ramda/es/sortBy";
-import values from "ramda/es/values";
+import assoc from "ramda/src/assoc";
+import compose from "ramda/src/compose";
+import map from "ramda/src/map";
+import mapObj from "ramda/src/mapObjIndexed";
+import path from "ramda/src/path";
+import sortBy from "ramda/src/sortBy";
+import values from "ramda/src/values";
 
 import games from "../data/games";
 

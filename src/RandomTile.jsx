@@ -5,7 +5,7 @@ import Svg from "./Svg";
 import Tile from "./Tile";
 import tiles from "./data/tiles";
 
-import keys from "ramda/es/keys";
+import keys from "ramda/src/keys";
 
 const randomTile = () => keys(tiles)[Math.floor(Math.random() * keys(tiles).length)];
 

@@ -1,8 +1,8 @@
 import React from "react";
 import Token from "./Token";
 
-import addIndex from "ramda/es/addIndex";
-import map from "ramda/es/map";
+import addIndex from "ramda/src/addIndex";
+import map from "ramda/src/map";
 
 const Rounds = ({ rounds, horizontal }) => {
   let classes = "rounds";

@@ -1,8 +1,8 @@
 import React from "react";
 import {withRouter} from "react-router";
 
-import map from "ramda/es/map";
-import addIndex from "ramda/es/addIndex";
+import map from "ramda/src/map";
+import addIndex from "ramda/src/addIndex";
 
 const VariationSelect = ({base, variations, match, history}) => {
   let handleChange = e => {

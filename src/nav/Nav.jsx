@@ -12,16 +12,16 @@ import ComponentSelect from "./ComponentSelect";
 import "./nav.scss";
 
 let ConfigLink = (
-  <ul><li><NavLink to="/config">Config</NavLink></li></ul>
+  <ul key="config"><li><NavLink to="/config">Config</NavLink></li></ul>
 );
 
 const Nav = ({match}) => {
   let gameName = match.params.game;
 
-  let menuOptions = [];
+  let menuOptions = [<ThemeSelect key="theme"/>];
   switch(gameName) {
   case "tiles":
-    menuOptions.push(<Tiles/>);
+    menuOptions.push(<Tiles key="tiles"/>);
     menuOptions.push(ConfigLink);
     break;
   case "logos":
@@ -29,8 +29,8 @@ const Nav = ({match}) => {
   case "config":
     break;
   default:
-    menuOptions.push(<GameSelect/>);
-    menuOptions.push(<ComponentSelect/>);
+    menuOptions.push(<GameSelect key="game"/>);
+    menuOptions.push(<ComponentSelect key="component"/>);
     menuOptions.push(ConfigLink);
   }
 
