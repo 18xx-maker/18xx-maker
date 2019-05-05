@@ -5,7 +5,9 @@ import Color from "./data/Color";
 
 import Nav from "./nav/Nav";
 
+import Config from "./Config";
 import Logos from "./Logos";
+
 import Tiles from "./Tiles";
 import SingleTile from "./SingleTile";
 import Atoms from "./atoms";
@@ -47,6 +49,7 @@ const App = () => (
         <Switch>
           <Route exact path="/" component={Home} />
 
+          <Route exact path="/config" component={Config} />
           <Route exact path="/logos" component={Logos} />
 
           <Route exact path="/tiles" component={Tiles} />
