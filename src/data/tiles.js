@@ -1376,6 +1376,41 @@ const tiles = {
     track: [ { side: 1 }, { side: 2 }, { side: 3 }, { side: 4 }, { side: 5 }, { side: 6 } ]
   },
 
+  // 1817
+  "592": {
+    color: "green",
+    values: [{ angle: 210, percent: 0.75, value: 50 }],
+    cities: [{ size: 2 }],
+    track: [{ side: 1 }, { side: 3 }, { side: 5 }],
+    labels: [{
+      angle: 150,
+      percent: 0.75,
+      label: "B"
+    }],
+  },
+  "593": {
+    color: "brown",
+    values: [{ angle: 300, percent: 0.75, value: 60 }],
+    cities: [{ size: 3, rotation: 180 }],
+    track: [{ side: 1 }, { side: 2 }, { side: 3 }, { side: 5 }],
+    labels: [{
+      angle: 150,
+      percent: 0.85,
+      label: "B"
+    }],
+  },
+  "597": {
+    color: "gray",
+    values: [{ angle: 300, percent: 0.75, value: 80 }],
+    cities: [{ size: 3, rotation: 180 }],
+    track: [{ side: 1 }, { side: 2 }, { side: 3 }, { side: 4 }, { side: 5 }],
+    labels: [{
+      angle: 150,
+      percent: 0.85,
+      label: "B"
+    }],
+  },
+
   // 1849
   "644": {
     color: "yellow",
@@ -3445,6 +3480,26 @@ const tiles = {
     values: [ { angle: 335, percent: 0.85, value: 80 } ],
     cities: [{ size: 4 }],
     track: [ { side: 2 }, {side: 3}, {side: 4}, {size: 5} ]
+  },
+
+  // 1817
+  "X00": {
+    color: "yellow",
+    values: [{ angle: 210, percent: 0.75, value: 30 }],
+    cities: [{ size: 1 }],
+    track: [{ side: 1 }, { side: 3 }, { side: 5 }],
+    labels: [{
+      angle: 150,
+      percent: 0.75,
+      label: "B"
+    }],
+  },
+  "X30": {
+    color: "gray",
+    values: [{ angle: 270, percent: 0.87, value: 100 }],
+    labels: { label: "NY", angle: 205, percent: 0.84 },
+    cities: [{ size: 4, percent: 0.1 }],
+    track: [{ side: 2 }, { side: 3 }, { side: 4 }, { size: 5 }]
   },
 };
 
