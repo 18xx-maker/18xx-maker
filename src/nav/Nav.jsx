@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 import Tiles from "./Tiles";
 
@@ -11,19 +11,27 @@ import ComponentSelect from "./ComponentSelect";
 
 import "./nav.scss";
 
+let ConfigLink = (
+  <ul><li><NavLink to="/config">Config</NavLink></li></ul>
+);
+
 const Nav = ({match}) => {
   let gameName = match.params.game;
 
-  let menuOptions = null;
-  if (gameName === "tiles") {
-    menuOptions = <Tiles/>;
-  } else if (gameName !== "logos") {
-    menuOptions = (
-      <>
-        <GameSelect/>
-        <ComponentSelect/>
-      </>
-    );
+  let menuOptions = [];
+  switch(gameName) {
+  case "tiles":
+    menuOptions.push(<Tiles/>);
+    menuOptions.push(ConfigLink);
+    break;
+  case "logos":
+    break;
+  case "config":
+    break;
+  default:
+    menuOptions.push(<GameSelect/>);
+    menuOptions.push(<ComponentSelect/>);
+    menuOptions.push(ConfigLink);
   }
 
   return (

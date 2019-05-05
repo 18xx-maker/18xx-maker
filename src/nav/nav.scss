@@ -33,17 +33,17 @@ nav {
     }
   }
 
-  a:visited {
-    color: inherit;
-  }
+  a {
+    color: #000;
 
-  a:hover {
-    text-decoration: underline;
-  }
+    &:hover {
+      text-decoration: underline;
+    }
 
-  a.active {
-    font-weight: bold;
-    text-decoration: underline;
+    &.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
   }
 
   ul {

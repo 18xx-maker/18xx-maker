@@ -57,6 +57,9 @@ const Home = () => {
       <ul>
         {gameNodes}
       </ul>
+      <h2>Config</h2>
+      <p>You can configure your settings for how you like your 18xx games to look here.</p>
+      <ul><li><NavLink to="/config">Config</NavLink></li></ul>
       <h2>Logos</h2>
       <p>This repo is also holding a collection of company logo SVGs. Please let me know if you have nice SVG's of any others!</p>
       <ul><li><NavLink to="/logos">Logos</NavLink></li></ul>

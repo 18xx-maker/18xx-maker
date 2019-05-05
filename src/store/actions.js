@@ -1,7 +1,14 @@
+const SET_CONFIG = "SET_CONFIG";
+const setConfig = config => ({
+  type: SET_CONFIG,
+  config
+});
+
 const SET_SCHEME = "SET_SCHEME";
-const setScheme = (scheme) => ({
+const setScheme = scheme => ({
   type: SET_SCHEME,
   scheme
 });
 
-export { SET_SCHEME, setScheme };
+export { SET_CONFIG, setConfig,
+         SET_SCHEME, setScheme };
