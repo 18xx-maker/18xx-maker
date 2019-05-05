@@ -57,6 +57,9 @@ const Home = () => {
       <ul>
         {gameNodes}
       </ul>
+      <h2>Logos</h2>
+      <p>This repo is also holding a collection of company logo SVGs. Please let me know if you have nice SVG's of any others!</p>
+      <ul><li><NavLink to="/logos">Logos</NavLink></li></ul>
       <h2>Tiles</h2>
       <p>Tiles are defined separately from each game in (currently){" "}
         <a href="https://github.com/kelsin/18xx/blob/master/src/data/tiles.js">one giant file</a>.

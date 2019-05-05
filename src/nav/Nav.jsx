@@ -14,17 +14,25 @@ import "./nav.scss";
 const Nav = ({match}) => {
   let gameName = match.params.game;
 
+  let menuOptions = null;
+  if (gameName === "tiles") {
+    menuOptions = <Tiles/>;
+  } else if (gameName !== "logos") {
+    menuOptions = (
+      <>
+        <GameSelect/>
+        <ComponentSelect/>
+      </>
+    );
+  }
+
   return (
     <React.Fragment>
       <nav>
         <div>
           <RandomTile/>
           <h1><Link to="/">18xx</Link></h1>
-          <ThemeSelect/>
-          {gameName === "tiles" && <Tiles/>}
-          {gameName !== "tiles" && <GameSelect/>}
-          {gameName !== "tiles" && <ComponentSelect/>}
-          {gameName !== "tiles" && <ul><li><a href={`/render/${gameName}/map.pdf`}>Map PDF</a></li></ul>}
+          {menuOptions}
         </div>
       </nav>
       <div className="LegalNotes">

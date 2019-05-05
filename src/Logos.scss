@@ -1,0 +1,46 @@
+.logos {
+  width: 800px;
+  margin: 0 auto;
+  position: relative;
+
+  strong {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  h1 {
+    font-size: 5em;
+    margin: 0;
+
+    span {
+      font-size: .4em;
+    }
+  }
+
+  p, ul {
+    font-family: sans-serif;
+  }
+
+  p.note {
+    padding: 0.5em;
+    border-radius: 0.5em;
+  }
+
+  li.game a {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  a:link {
+    text-decoration: underline;
+    color: inherit;
+  }
+
+  a:visited {
+    color: inherit;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+};
