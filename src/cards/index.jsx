@@ -7,7 +7,7 @@ import Share from "./Share";
 import Train from "./Train";
 
 import games from "../data/games";
-import util from "../util";
+import { fillArray } from "../util";
 
 import GameContext from "../context/GameContext";
 
@@ -45,7 +45,7 @@ class Cards extends React.Component {
 
     let companies = this.state.displayShares ? game.companies || [] : [];
     let privates = this.state.displayPrivates ? game.privates || [] : [];
-    let trains = util.fillArray(
+    let trains = fillArray(
       R.prop("quantity"),
       this.state.displayTrains ? game.trains || [] : []
     );
@@ -104,7 +104,7 @@ class Cards extends React.Component {
             privates
           )}
           {R.addIndex(R.chain)((company, index) => {
-            let shares = util.fillArray(R.prop("quantity"), company.shares);
+            let shares = fillArray(R.prop("quantity"), company.shares);
             return R.addIndex(R.map)(
               (share, i) => (
                 <Share

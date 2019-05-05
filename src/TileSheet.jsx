@@ -1,24 +1,24 @@
 import React from "react";
+import { connect } from "react-redux";
 import * as R from "ramda";
-import { paper } from "./data";
 
 import tileDefs from "./data/tiles";
-import util from "./util";
+import { groupsOf } from "./util";
 import Tile from "./Tile";
 import Svg from "./Svg";
 
 import games from "./data/games";
 import ColorContext from "./context/ColorContext";
 
-import is from "ramda/es/is";
-import propOr from "ramda/es/propOr";
+import is from "ramda/src/is";
+import propOr from "ramda/src/propOr";
 
 const HEX_RATIO = 0.57735;
 const RATIO = 1.0;
 
 const tileColors = ["yellow", "green", "brown", "gray"];
 
-const TileSheet = ({ match }) => {
+const TileSheet = ({ match, paper, tileStyle }) => {
   let game = games[match.params.game];
   let height = game.info.width;
   let width = height * HEX_RATIO * 2;
@@ -37,12 +37,13 @@ const TileSheet = ({ match }) => {
             R.keys(game.tiles))
   );
 
+  let margin = tileStyle === "individual" ? 12.5 : 0;
   let tiles = R.addIndex(R.map)(
     (row, i) => (
       <div
         key={i}
         className="row"
-        style={{ width: `${(perRow * (tileWidth + 12.5) - 12.5) * 0.01}in` }}
+        style={{ width: `${(perRow * (tileWidth + margin) - margin) * 0.01}in` }}
       >
         {R.addIndex(R.map)(
           (id, i) => (
@@ -61,8 +62,11 @@ const TileSheet = ({ match }) => {
         )}
       </div>
     ),
-    util.groupsOf(perRow, ids)
+    groupsOf(perRow, ids)
   );
+
+  let offsetCss = `.tileSheet--offset div.row:nth-child(even) { padding-left: ${tileWidth * 0.005}in; }`;
+  offsetCss +=    `.tileSheet--offset div.row:nth-child(odd) { padding-right: ${tileWidth * 0.005}in; }`;
 
   return (
     <ColorContext.Provider value="tile">
@@ -73,7 +77,8 @@ const TileSheet = ({ match }) => {
           </p>
         </div>
       </div>
-      <div className="tileSheet">
+      <style>{offsetCss}</style>
+      <div className={`tileSheet tileSheet--${tileStyle}`}>
         {tiles}
         <style>{`@media print {@page {size: 8.5in 11in;}}`}</style>
       </div>
@@ -81,4 +86,8 @@ const TileSheet = ({ match }) => {
   );
 };
 
-export default TileSheet;
+const mapStateToProps = state => ({
+  tileStyle: state.config.tiles,
+  paper: state.config.paper
+});
+export default connect(mapStateToProps)(TileSheet);

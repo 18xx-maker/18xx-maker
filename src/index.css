@@ -57,11 +57,15 @@ body {
   overflow: hidden;
 }
 
-.tileSheet div.row svg {
+.tileSheet--offset div.row:nth-child(even) {
+    padding-left: 1.73205in;
+}
+
+.tileSheet--individual div.row svg {
   margin: 0.125in 0.125in 0 0;
 }
 
-.tileSheet div.row svg:last-child {
+.tileSheet--individual div.row svg:last-child {
   margin: 0.125in 0 0 0;
 }
 
@@ -561,16 +565,16 @@ svg {
   font-size: 0.18in;
 }
 
-.stock {
-  position: relative;
-  overflow: auto;
-}
-
 .prices {
   position: relative;
   overflow: hidden;
   page-break-inside: avoid;
   height: 8in;
+}
+
+.stock {
+  position: relative;
+  margin: 0.25in;
 }
 
 .stock table {
@@ -580,8 +584,6 @@ svg {
 .stock td {
   line-height: 0.15in;
   font-size: 0.15in;
-  height: 0.67in;
-  width: 0.6in;
   border: 1px solid black;
   padding: 0.05in;
   box-sizing: border-box;
@@ -876,5 +878,13 @@ footer a:hover {
   .LegalNotes,
   .PrintNotes {
     display: none;
+  }
+
+  .map {
+    padding: 0;
+  }
+
+  .stock {
+    margin: 0;
   }
 }

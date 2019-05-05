@@ -3,9 +3,9 @@ import Color from "../data/Color";
 
 import Name from "./Name";
 
-import find from "ramda/es/find";
-import is from "ramda/es/is";
-import propEq from "ramda/es/propEq";
+import find from "ramda/src/find";
+import is from "ramda/src/is";
+import propEq from "ramda/src/propEq";
 import Token from "../Token";
 
 import Config from "../data/Config";
@@ -26,7 +26,15 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
       if(is(Object, companies[num])) {
         return (
           <ColorContext.Provider value="companies">
-            <Token label={companies[num].label} token={companies[num].token || companies[num].color}/>;
+            <Config>
+              {(config, game) => {
+                if(config.plainMapHomes) {
+                  return <Token label={companies[num].label} token="white"/>;
+                } else {
+                  return <Token label={companies[num].label} token={companies[num].token || companies[num].color}/>;
+                }
+              }}
+            </Config>
           </ColorContext.Provider>
         );
       } else {
@@ -62,8 +70,8 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
       path = path + "Reverse";
     }
     nameNode = <Name {...name}
-                                                                                    y={name.y || (name.reverse ? 7 : 0)}
-                                                                                    path={path} />;
+             y={name.y || (name.reverse ? 7 : 0)}
+             path={path} />;
   }
 
   if (size === 1) {

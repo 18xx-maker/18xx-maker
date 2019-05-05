@@ -1,5 +1,5 @@
 import React from "react";
-import util from "./util";
+import { trackType } from "./util";
 import * as R from "ramda";
 
 import Position from "./Position";
@@ -38,7 +38,7 @@ const makeTrack = track => {
   let point = track.start || track.end || track.side;
   let rotation = (track.rotation || 0) + (point - 1) * 60;
   let transform = `rotate(${rotation || 0})`;
-  let type = track.type || util.trackType(track);
+  let type = track.type || trackType(track);
   return (
     <g transform={transform} key={`track-${type}-${point}`}>
       <Track type={type} gauge={track.gauge} offset={track.offset} path={track.path} />
@@ -50,11 +50,11 @@ const makeBorder = track => {
   let point = track.start || track.end || track.side;
   let rotation = (track.rotation || 0) + (point - 1) * 60;
   let transform = `rotate(${rotation || 0})`;
-  let type = track.type || util.trackType(track);
+  let type = track.type || trackType(track);
   return (
     <g transform={transform} key={`track-border-${type}-${point}`}>
       <Track
-        type={track.type || util.trackType(track)}
+        type={track.type || trackType(track)}
         gauge={track.gauge}
         border={true}
         path={track.path}
