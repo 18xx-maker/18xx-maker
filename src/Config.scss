@@ -17,7 +17,7 @@
     }
   }
 
-  p, ul, label {
+  p, ul, label, span {
     font-family: sans-serif;
   }
 
@@ -42,5 +42,10 @@
 
   a:hover {
     text-decoration: none;
+  }
+
+  .input span {
+    color: #777;
+    font-size: 0.8em;
   }
 };

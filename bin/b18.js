@@ -188,7 +188,7 @@ const server = app.listen(9000);
   const page = await browser.newPage();
   await page.emulateMedia('print');
 
-  let mapData = getMapData(game, config.coords, 0, 100);
+  let mapData = getMapData(game, config.coords, 100, 0);
   let printWidth = Math.ceil(mapData.totalWidth);
   let printHeight = Math.ceil(mapData.totalHeight);
 

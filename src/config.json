@@ -10,15 +10,19 @@
   },
   "pagination": "equal",
   "paper": {
-    "width": 800,
-    "height": 1025
+    "width": 850,
+    "height": 1100,
+    "margins": 25
   },
   "useCompanySvgLogos": false,
   "plainMapDestinations": false,
   "plainMapHomes": false,
   "scheme": "gmt",
   "shareLayout": "left",
-  "tiles": "offset",
+  "tiles": {
+    "layout": "offset",
+    "width": 150
+  },
   "stock": {
     "cell": {
       "width": 70,

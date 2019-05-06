@@ -23,13 +23,37 @@
         "height": { "$ref": "#/definitions/dimension" }
       },
       "required": ["width", "height"]
+    },
+    "margins": {
+      "oneOf": [{
+        "$ref": "#/definitions/dimension"
+      },{
+        "type": "object",
+        "properties": {
+          "top": { "$ref": "#/definitions/dimension" },
+          "right": { "$ref": "#/definitions/dimension" },
+          "bottom": { "$ref": "#/definitions/dimension" },
+          "left": { "$ref": "#/definitions/dimension" }
+        },
+        "required": ["top", "right", "bottom", "left"],
+        "additionalProperties": false
+      }]
     }
   },
 
   "type": "object",
   "properties": {
     "scheme": { "type": "string" },
-    "paper": { "$ref": "#/definitions/dimensions" },
+    "paper": {
+      "allOf": [{
+        "$ref": "#/definitions/dimensions"
+      },{
+        "properties": {
+          "margins": { "$ref": "#/definitions/margins" }
+        },
+        "required": ["margins"]
+      }]
+    },
     "stock": {
       "type": "object",
       "properties": {
@@ -54,8 +78,22 @@
       "enum": ["outside", "inside", "edge", "none"]
     },
     "tiles": {
-      "type": "string",
-      "enum": ["offset", "individual", "die"]
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "layout": {
+          "type": "string",
+          "enum": ["offset", "individual", "die"]
+        }
+      },
+      "required": [
+        "layout",
+        "width"
+      ],
+      "additionalProperties": false
     },
     "useCompanySvgLogos": { "type": "boolean" },
     "plainMapHomes": { "type": "boolean" },

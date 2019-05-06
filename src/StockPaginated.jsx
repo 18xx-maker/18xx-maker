@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import games from "./data/games";
-import { equalPages, maxPages } from "./util";
+import { equalPages, maxPages, printableWidth, printableHeight } from "./util";
 import Market from "./Market";
 import * as mutil from "./market-utils";
 import * as R from "ramda";
@@ -9,6 +9,7 @@ import * as R from "ramda";
 import Rounds from "./Rounds";
 import Par from "./Par";
 import Legend from "./Legend";
+import PageSetup from "./PageSetup";
 
 import GameContext from "./context/GameContext";
 import "./StockPaginated.css";
@@ -21,8 +22,8 @@ const StockPaginated = ({ match, cell, pagination, paper }) => {
   let totalWidth = 100.0 * (0.26 + ((1 + cell.width) / 100.0) * mutil.width(game.stock.market));
   let totalHeight = 50 + (100.0 * (0.76 + ((1 + cell.height) / 100.0) * mutil.height(game.stock.market)));
 
-  let pageWidth = paper.width;
-  let pageHeight = paper.height;
+  let pageWidth = printableWidth(paper);
+  let pageHeight = printableHeight(paper);
 
   if (stock.orientation === "landscape") {
     let tmp = pageWidth;
@@ -108,7 +109,7 @@ const StockPaginated = ({ match, cell, pagination, paper }) => {
       </div>
       <div className="stock">
         {stockPages}
-        <style>{`@media print {@page {size: ${stock.orientation === "landscape" ? "11in 8.5in" : "8.5in 11in"};}}`}</style>
+        <PageSetup landscape={stock.orientation !== "portrait"}/>
       </div>
     </GameContext.Provider>
   );

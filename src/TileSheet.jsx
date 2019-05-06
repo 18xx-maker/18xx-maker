@@ -6,6 +6,7 @@ import tileDefs from "./data/tiles";
 import { groupsOf } from "./util";
 import Tile from "./Tile";
 import Svg from "./Svg";
+import PageSetup from "./PageSetup";
 
 import games from "./data/games";
 import ColorContext from "./context/ColorContext";
@@ -18,9 +19,9 @@ const RATIO = 1.0;
 
 const tileColors = ["yellow", "green", "brown", "gray"];
 
-const TileSheet = ({ match, paper, tileStyle }) => {
+const TileSheet = ({ match, paper, layout, hexWidth }) => {
   let game = games[match.params.game];
-  let height = game.info.width;
+  let height = hexWidth;
   let width = height * HEX_RATIO * 2;
   let tileHeight = height * RATIO;
   let tileWidth = width * RATIO;
@@ -37,7 +38,7 @@ const TileSheet = ({ match, paper, tileStyle }) => {
             R.keys(game.tiles))
   );
 
-  let margin = tileStyle === "individual" ? 12.5 : 0;
+  let margin = layout === "individual" ? 12.5 : 0;
   let tiles = R.addIndex(R.map)(
     (row, i) => (
       <div
@@ -78,16 +79,18 @@ const TileSheet = ({ match, paper, tileStyle }) => {
         </div>
       </div>
       <style>{offsetCss}</style>
-      <div className={`tileSheet tileSheet--${tileStyle}`}>
+      <div className={`tileSheet tileSheet--${layout}`}>
         {tiles}
-        <style>{`@media print {@page {size: 8.5in 11in;}}`}</style>
+        <PageSetup landscape={false}/>
       </div>
     </ColorContext.Provider>
   );
 };
 
 const mapStateToProps = state => ({
-  tileStyle: state.config.tiles,
-  paper: state.config.paper
+  layout: state.config.tiles.layout,
+  paper: state.config.paper,
+  hexWidth: state.config.tiles.width
 });
+
 export default connect(mapStateToProps)(TileSheet);

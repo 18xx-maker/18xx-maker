@@ -1,5 +1,25 @@
 import * as util from "./util";
 
+describe("inchesToCss", () => {
+  it("should format a number to css inches", () => {
+    expect(util.inchesToCss(5)).toEqual("5in");
+  });
+});
+
+describe("unitsToInches", () => {
+  it("should convert a number of units to a number of inches", () => {
+    expect(util.unitsToInches(150)).toEqual(1.5);
+    expect(util.unitsToInches(100)).toEqual(1);
+  });
+});
+
+describe("unitsToCss", () => {
+  it("should format units to css inches", () => {
+    expect(util.unitsToCss(150)).toEqual("1.5in");
+    expect(util.unitsToCss(100)).toEqual("1in");
+  });
+});
+
 describe("trackType", () => {
   it("should identify city tiles", () => {
     expect(util.trackType({ start: 1 })).toEqual("city");

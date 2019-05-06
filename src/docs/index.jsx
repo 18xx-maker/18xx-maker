@@ -20,7 +20,7 @@ const Docs = ({match}) => {
 
   useEffect(() => {
     if (doc) fetch(doc).then(result => result.text()).then(setSource);
-  }, [match]);
+  }, [doc, match]);
 
   if (redirect) return <Redirect to="/docs"/>;
 

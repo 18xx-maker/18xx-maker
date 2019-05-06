@@ -43,8 +43,10 @@ const Tiles = ({match}) => {
   let height = game.info.orientation === "horizontal" ? 100 : 116;
   let width = game.info.orientation === "horizontal" ? 116 : 100;
 
+  // Hardcoding tile width here since this is only for b18 output
   let totalWidth = (tiles.length * 150);
 
+  // Same as above
   let viewBox = game.info.orientation === "horizontal" ?
       "-87.6025 -76 175.205 152" :
       "-76 -87.6025 152 175.205";

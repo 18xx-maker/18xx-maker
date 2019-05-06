@@ -12,7 +12,7 @@ import { Redirect } from "react-router-dom";
 import VariationSelect from "../nav/VariationSelect";
 import { getMapData } from "./util";
 
-const MapSingle = ({ match, coords }) => {
+const MapSingle = ({ match, coords, hexWidth }) => {
   let game = games[match.params.game];
 
   // Do redirects if we need or do not need a variation in the url
@@ -24,7 +24,7 @@ const MapSingle = ({ match, coords }) => {
 
   // Get map data
   let variation = Number(match.params.variation) || 0;
-  let data = getMapData(game, coords, variation);
+  let data = getMapData(game, coords, hexWidth, variation);
 
   // Variation Select Box
   let variationSelect = null;
@@ -66,7 +66,8 @@ const MapSingle = ({ match, coords }) => {
 };
 
 const mapStateToProps = state => ({
-  coords: state.config.coords
+  coords: state.config.coords,
+  hexWidth: state.config.tiles.width
 });
 
 export default connect(mapStateToProps)(MapSingle);

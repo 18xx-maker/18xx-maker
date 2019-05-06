@@ -6,9 +6,10 @@ import Svg from "../Svg";
 import Title from "../Title";
 import HexContext from "../context/HexContext";
 import GameContext from "../context/GameContext";
-import { equalPages, maxPages } from "../util";
+import { equalPages, maxPages, printableWidth, printableHeight } from "../util";
 import { Redirect } from "react-router-dom";
 
+import PageSetup from "../PageSetup";
 import VariationSelect from "../nav/VariationSelect";
 import { getMapData } from "./util";
 
@@ -17,7 +18,7 @@ import prop from "ramda/src/prop";
 
 import "./MapPaginated.css";
 
-const MapPaginated = ({ match, coords, pagination, paper }) => {
+const MapPaginated = ({ match, coords, pagination, paper, hexWidth }) => {
   let game = games[match.params.game];
   let splitPages = pagination === "max" ? maxPages : equalPages;
 
@@ -32,10 +33,10 @@ const MapPaginated = ({ match, coords, pagination, paper }) => {
   }
 
   let variation = Number(match.params.variation) || 0;
-  let data = getMapData(game, coords, variation);
+  let data = getMapData(game, coords, hexWidth, variation);
 
-  let pageWidth = paper.width - 75;
-  let pageHeight = paper.height - 75;
+  let pageWidth = printableWidth(paper) - 75;
+  let pageHeight = printableHeight(paper) - 75;
 
   if (data.map.print === "landscape") {
     let tmp = pageWidth;
@@ -58,7 +59,7 @@ const MapPaginated = ({ match, coords, pagination, paper }) => {
             margin: "auto auto"
           }}
         >
-          <div classname="mappage">
+          <div className="mappage">
             <svg
               style={{
                 width: `${(width + 25) / 100}in`,
@@ -115,16 +116,17 @@ const MapPaginated = ({ match, coords, pagination, paper }) => {
       </div>
       <Svg className="FullMap" defs={defs} />
       {mapPages}
-      <style>{`@media print {@page {size: ${data.map.print === "landscape" ? "11in 8.5in" : "8.5in 11in"};}}`}</style>
+      <PageSetup landscape={data.map.print === "landscape"}/>
     </HexContext.Provider>
     </GameContext.Provider>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, {hexWidth}) => ({
   coords: state.config.coords,
   pagination: state.config.pagination,
-  paper: state.config.paper
+  paper: state.config.paper,
+  hexWidth: hexWidth || state.config.tiles.width
 });
 
 export default connect(mapStateToProps)(MapPaginated);

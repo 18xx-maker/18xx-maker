@@ -7,7 +7,7 @@ import Coordinates from "./Coordinates";
 import { getMapData, toAlpha, toCoords } from "./util";
 
 const Map = ({ game, coords, variation, hexWidth }) => {
-  let data = getMapData(game, coords, variation, hexWidth);
+  let data = getMapData(game, coords, hexWidth, variation);
 
   if (!data.map) {
     return null;
@@ -39,7 +39,8 @@ const Map = ({ game, coords, variation, hexWidth }) => {
 };
 
 const mapStateToProps = state => ({
-  coords: state.config.coords
+  coords: state.config.coords,
+  hexWidth: state.config.tiles.width
 });
 
 export default connect(mapStateToProps)(Map);
