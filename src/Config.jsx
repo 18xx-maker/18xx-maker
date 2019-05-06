@@ -82,7 +82,7 @@ const _Input = ({name, label, description, config, value, setConfig, dimension})
     inputNode = (
       <>
         <label htmlFor={name}>{label}: </label>
-        <input style={{width:"0.5in"}} type="number"
+        <input style={{width:"1in"}} type="number"
                id={name} name={name}
                value={value}
                onChange={update}/>
@@ -108,7 +108,6 @@ const Config = ({config, setConfig, resetConfig}) => {
       <h2>Config</h2>
       <p>Here you can set any options for how to lay out and render these 18xx games.</p>
       <h3>Theme</h3>
-      <p>The theme determines which colors are used for all of the elements on the maps and tiles.</p>
       <select name="scheme" value={config.scheme} onChange={setOption}>
         <option value="gmt">GMT</option>
         <option value="dtg">Deep Thought</option>
@@ -116,6 +115,7 @@ const Config = ({config, setConfig, resetConfig}) => {
         <option value="ps18xx">px18xx</option>
         <option value="carth">Carth</option>
       </select>
+      <p className="description">The theme determines which colors are used for all of the elements on the maps and tiles.</p>
       <h3>Layout</h3>
       <Input name="pagination" label="Pagination Type"
              description="This lets you configure the type of pagination. Equal keeps all pages directly equal. Max keeps the first and last page equal and set all middle pages to max based on page size."/>
@@ -125,6 +125,7 @@ const Config = ({config, setConfig, resetConfig}) => {
              description="Print paper height in 100th's of an inch."/>
       <Input name="paper.margins" label="Paper Margins" dimension={true}
              description="Print paper margin in 100th's of an inch."/>
+      <p>For reference US Letter size would be 850 by 1100. A4 is 826.7716535 by 1169.291339</p>
       <h3>Maps</h3>
       <Input name="plainMapHomes" label="Plain Map Home Spaces"
              description="This sets all home spots on maps to be empty white cities with black company text instead of colored or using logos." />

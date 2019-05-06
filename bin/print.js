@@ -50,6 +50,8 @@ const server = app.listen(9000);
       'map-paginated',
       'market',
       'market-paginated',
+      'revenue',
+      'tile-manifest',
       'tiles',
       'tokens'
     ];

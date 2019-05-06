@@ -45,18 +45,18 @@ const App = () => (
     <ScrollToTop>
       <div className="App">
         <Switch>
-          <Route exact path="/"/>
-          <Route path="/:game" component={Nav}/>
+          <Route path="/" exact />
+          <Route path="/:game" component={Nav} />
         </Switch>
 
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route path="/" exact component={Home} />
 
-          <Route exact path="/config" component={Config} />
-          <Route exact path="/docs/:id?" component={Docs} />
-          <Route exact path="/logos" component={Logos} />
+          <Route path="/config" exact component={Config} />
+          <Route path="/docs/:id?" exact component={Docs} />
+          <Route path="/logos" exact component={Logos} />
 
-          <Route exact path="/tiles" component={Tiles} />
+          <Route path="/tiles" exact component={Tiles} />
           <Route path="/tiles/atoms" component={Atoms} />
           <Route path="/tiles/positioning" component={Positioning} />
           <Route path="/tiles/:id" component={SingleTile} />
@@ -66,18 +66,15 @@ const App = () => (
           <Route path="/:game/charters" component={Charters} />
           <Route path="/:game/minors" component={Minors} />
           <Route path="/:game/ipo" component={IPO} />
-          <Route exact path="/:game/map" component={MapSingle} />
-          <Route exact path="/:game/map-paginated" component={MapPaginated} />
+          <Route path="/:game/map" exact component={MapSingle} />
+          <Route path="/:game/map-paginated" exact component={MapPaginated} />
           <Route path="/:game/map/:variation" component={MapSingle} />
-          <Route
-            path="/:game/map-paginated/:variation"
-            component={MapPaginated}
-          />
-          <Route path="/:game/revenue" component={Revenue} />
-          <Route exact path="/:game/market" component={Stock} />
+          <Route path="/:game/map-paginated/:variation" component={MapPaginated} />
+          <Route path="/:game/market" exact component={Stock} />
           <Route path="/:game/market-paginated" component={StockPaginated} />
+          <Route path="/:game/revenue" component={Revenue} />
+          <Route path="/:game/tile-manifest" component={TileManifest} />
           <Route path="/:game/tiles" component={TileSheet} />
-          <Route path="/:game/manifest" component={TileManifest} />
           <Route path="/:game/tokens" component={Tokens} />
 
           <Route path="/:game/b18-map" component={B18Map} />
