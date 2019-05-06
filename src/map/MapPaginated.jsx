@@ -59,7 +59,7 @@ const MapPaginated = ({ match, coords, pagination, paper, hexWidth }) => {
             margin: "auto auto"
           }}
         >
-          <div className="mappage">
+          <div className="MapPage">
             <svg
               style={{
                 width: `${(width + 25) / 100}in`,
