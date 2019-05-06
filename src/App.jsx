@@ -6,6 +6,7 @@ import Color from "./data/Color";
 import Nav from "./nav/Nav";
 
 import Config from "./Config.jsx";
+import Docs from "./docs";
 import Logos from "./Logos";
 
 import Tiles from "./Tiles";
@@ -52,6 +53,7 @@ const App = () => (
           <Route exact path="/" component={Home} />
 
           <Route exact path="/config" component={Config} />
+          <Route exact path="/docs/:id?" component={Docs} />
           <Route exact path="/logos" component={Logos} />
 
           <Route exact path="/tiles" component={Tiles} />

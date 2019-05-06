@@ -11,8 +11,11 @@ import ComponentSelect from "./ComponentSelect";
 
 import "./nav.scss";
 
-let ConfigLink = (
-  <ul key="config"><li><NavLink to="/config">Config</NavLink></li></ul>
+let Links = (
+  <ul key="config">
+    <li><NavLink to="/docs">Docs</NavLink></li>
+    <li><NavLink to="/config">Config</NavLink></li>
+  </ul>
 );
 
 const Nav = ({match}) => {
@@ -22,17 +25,18 @@ const Nav = ({match}) => {
   switch(gameName) {
   case "tiles":
     menuOptions.push(<Tiles key="tiles"/>);
-    menuOptions.push(ConfigLink);
     break;
   case "logos":
     break;
   case "config":
     break;
+  case "docs":
+    break;
   default:
     menuOptions.push(<GameSelect key="game"/>);
     menuOptions.push(<ComponentSelect key="component"/>);
-    menuOptions.push(ConfigLink);
   }
+  menuOptions.push(Links);
 
   return (
     <React.Fragment>
