@@ -756,11 +756,6 @@ ul.notes li span {
   border-bottom: 1px solid black;
 }
 
-.cutlines > div {
-  position: relative;
-  overflow: hidden;
-}
-
 .cutlines > div:before {
   content: '';
   width: calc(100% - 0.25in);
@@ -891,5 +886,9 @@ footer a:hover {
 
   .tokens {
     margin: 0;
+  }
+
+  .TileManifest {
+    margin: 0 auto;
   }
 }
