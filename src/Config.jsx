@@ -93,8 +93,8 @@ const _Input = ({name, label, description, config, value, setConfig, dimension})
 
   return (
     <div id={`config-${name}`} className="input">
-      <p>{description}</p>
       {inputNode}
+      <p className="description">{description}</p>
     </div>
   );
 };
