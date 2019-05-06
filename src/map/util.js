@@ -101,12 +101,12 @@ export const maxMapY = compose(
 );
 
 export const getTotalWidth = (maxX, hexWidth, extraWidth, coordSpace) =>
-  (extraWidth || 0) +
+  ((extraWidth || 0) * hexWidth / 150.0) +
   coordSpace +
   0.5 * hexWidth * (maxX + 1);
 
 export const getTotalHeight = (maxY, hexWidth, extraHeight, coordSpace) =>
-  (extraHeight || 0) +
+  ((extraHeight || 0) * hexWidth / 150.0) +
   coordSpace +
   (1.5 * (maxY - 1) * (HEX_RATIO * hexWidth) + 2 * (HEX_RATIO * hexWidth));
 
@@ -195,9 +195,10 @@ const rightCoord = curry((hexes, hexWidth, y) => {
   return x;
 });
 
-export const getMapData = (game, coords, variation, hexWidth) => {
-  hexWidth = hexWidth || game.info.width || 150;
+export const getMapData = (game, coords, hexWidth, variation) => {
   variation = variation || 0;
+
+  let scale = hexWidth / 150.0;
 
   // Get the relevant map
   let gameMap = Array.isArray(game.map) ? game.map[variation] : game.map;
@@ -242,7 +243,7 @@ export const getMapData = (game, coords, variation, hexWidth) => {
 
     // Hex width flat to flat
     hexWidth,
-    scale: hexWidth / 150.0,
+    scale,
 
     // Coords choice
     coords,

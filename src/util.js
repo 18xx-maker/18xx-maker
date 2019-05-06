@@ -7,6 +7,7 @@ import drop from "ramda/src/drop";
 import find from "ramda/src/find";
 import fromPairs from "ramda/src/fromPairs";
 import head from "ramda/src/head";
+import is from "ramda/src/is";
 import isEmpty from "ramda/src/isEmpty";
 import join from "ramda/src/join";
 import juxt from "ramda/src/juxt";
@@ -47,8 +48,34 @@ export const pointsToString = compose(
 );
 
 export const inchesToCss = inches => `${inches}in`;
+export const mmToCss = inches => `${inches}mm`;
+export const inchesToMm = inches => inches * 25.4;
 export const unitsToInches = units => units / 100.0;
 export const unitsToCss = compose(inchesToCss, unitsToInches);
+export const unitsToCssMm = compose(mmToCss, inchesToMm, unitsToInches);
+
+
+export const printableWidth = ({width, margins}) => {
+  let margin = 0;
+  if (is(Number, margins)) {
+    margin += (2 * margins);
+  } else {
+    margin += (margins.left + margins.right);
+  }
+
+  return width - margin;
+};
+
+export const printableHeight = ({height, margins}) => {
+  let margin = 0;
+  if (is(Number, margins)) {
+    margin += (2 * margins);
+  } else {
+    margin += (margins.top + margins.bottom);
+  }
+
+  return height - margin;
+};
 
 export const trackType = track => {
   if (track.end === undefined && track.start === undefined) {

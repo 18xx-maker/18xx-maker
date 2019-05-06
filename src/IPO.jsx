@@ -6,6 +6,7 @@ import ColorContext from "./context/ColorContext";
 
 import Token from "./Token";
 import Svg from "./Svg";
+import PageSetup from "./PageSetup";
 
 require("./IPO.css");
 
@@ -34,7 +35,7 @@ const IPO = ({ match }) => {
               companies
             )}
           </div>
-          <style>{`@media print {@page {size: 11in 8.5in;}}`}</style>
+          <PageSetup landscape={true}/>
         </div>
       )}
     </Color>

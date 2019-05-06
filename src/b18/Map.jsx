@@ -16,7 +16,7 @@ const B18Map = ({ match, coords }) => {
 
   // Get map data
   let variation = Number(match.params.variation) || 0;
-  let data = getMapData(game, coords, variation, 100);
+  let data = getMapData(game, coords, 100, variation);
 
   return (
     <GameContext.Provider value={match.params.game}>

@@ -6,6 +6,7 @@ import ColorContext from "./context/ColorContext";
 
 import is from "ramda/src/is";
 
+import PageSetup from "./PageSetup";
 import Svg from "./Svg";
 
 const Tokens = ({ match }) => {
@@ -165,7 +166,7 @@ const Tokens = ({ match }) => {
         <Svg width={width} height={height}>
           {tokens}
         </Svg>
-        <style>{`@media print {@page {size: 8.5in 11in;}}`}</style>
+        <PageSetup landscape={false}/>
       </ColorContext.Provider>
     </div>
   );

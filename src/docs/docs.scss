@@ -1,6 +1,7 @@
 .docs {
-  width: 800px;
+  width: 570px;
   margin: 0 auto;
+  padding-right: 230px;
   position: relative;
 
   .docs-nav {
@@ -9,7 +10,8 @@
     right: 0;
     width: 200px;
     background-color: #eee;
-    padding: 1em;
+    border-radius: 0 0 10px 10px;
+    padding: 10px;
 
     ul {
       list-style: none;

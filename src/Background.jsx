@@ -2,6 +2,8 @@ import React from "react";
 import games from "./data/games";
 import Color from "./data/Color";
 
+import PageSetup from "./PageSetup";
+
 import addIndex from "ramda/src/addIndex";
 import map from "ramda/src/map";
 
@@ -24,7 +26,7 @@ const Background = ({ match }) => {
           </div>
           <div className="background" style={{ backgroundColor: c(color) }}>
             <div className="text">{text}</div>
-            <style>{`@media print {@page {size: 8.5in 11in;}}`}</style>
+            <PageSetup landscape={false}/>
           </div>
         </React.Fragment>
       )}

@@ -4,6 +4,7 @@ import games from "./data/games";
 import * as R from "ramda";
 
 import GameContext from "./context/GameContext";
+import PageSetup from "./PageSetup";
 
 const Charters = ({ match }) => {
   let game = games[match.params.game];
@@ -36,7 +37,7 @@ const Charters = ({ match }) => {
             />
           );
         }, companies)}
-        <style>{`@media print {@page {size: 8.5in 11in;}}`}</style>
+        <PageSetup landscape={false}/>
       </div>
     </GameContext.Provider>
   );

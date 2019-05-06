@@ -756,6 +756,11 @@ ul.notes li span {
   border-bottom: 1px solid black;
 }
 
+.cutlines > div {
+  position: relative;
+  overflow: hidden;
+}
+
 .cutlines > div:before {
   content: '';
   width: calc(100% - 0.25in);
@@ -868,10 +873,6 @@ footer a:hover {
   font-weight: bold;
 }
 
-@page {
-  margin: 0.25in;
-}
-
 @media print {
   nav,
   footer,
@@ -885,6 +886,10 @@ footer a:hover {
   }
 
   .stock {
+    margin: 0;
+  }
+
+  .tokens {
     margin: 0;
   }
 }

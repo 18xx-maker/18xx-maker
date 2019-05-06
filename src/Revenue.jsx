@@ -5,6 +5,7 @@ import games from "./data/games";
 
 import Pool from "./Pool";
 import Players from "./Players";
+import PageSetup from "./PageSetup";
 
 require("./Revenue.css");
 
@@ -21,12 +22,10 @@ const generateCells = (rows, cols, color_5, color_10) => {
         color = color_10 || "green";
       }
       return (
-        <Color context="companies">
+        <Color key={`${row}-${col}`}
+               context="companies">
           {(c,t) => (
-            <td
-              key={`${row}-${col}`}
-              style={{ backgroundColor: c(color), color: t(c(color)) }}
-            >
+            <td style={{ backgroundColor: c(color), color: t(c(color)) }}>
               {value}
             </td>
           )}
@@ -64,7 +63,7 @@ const Revenue = ({ match }) => {
         {pools}
         <Players players={game.players} bank={game.bank} capital={game.capital} />
       </div>
-      <style>{`@media print {@page {size: 11in 8.5in;}}`}</style>
+      <PageSetup landscape={true}/>
     </div>
   );
 };

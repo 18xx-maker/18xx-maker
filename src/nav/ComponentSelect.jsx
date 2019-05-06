@@ -27,6 +27,7 @@ const ComponentSelect = ({match,history,location}) => {
         <option value="market-paginated">Market - Paginated</option>
         <option value="map">Map</option>
         <option value="map-paginated">Map - Paginated</option>
+        <option value="revenue">Revenue</option>
         <option value="tiles">Tiles</option>
         <option value="manifest">Tile Manifest</option>
         <option value="tokens">Tokens</option>
