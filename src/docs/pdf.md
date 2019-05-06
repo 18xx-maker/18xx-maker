@@ -24,7 +24,9 @@ build/render/1830
 ├── map.pdf
 ├── market-paginated.pdf
 ├── market.pdf
+├── revenue.pdf
 ├── tiles.pdf
+├── tile-manifest.pdf
 └── tokens.pdf
 ```
 

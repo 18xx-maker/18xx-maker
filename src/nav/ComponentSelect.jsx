@@ -21,15 +21,15 @@ const ComponentSelect = ({match,history,location}) => {
         <option value="background">Background</option>
         <option value="cards">Cards</option>
         <option value="charters">Charters</option>
-        {game.minorCompanies && <option value="minors">Minors</option>}
         {false && game.ipo && <option value="ipo">IPO</option>}
-        <option value="market">Market</option>
-        <option value="market-paginated">Market - Paginated</option>
         <option value="map">Map</option>
         <option value="map-paginated">Map - Paginated</option>
+        <option value="market">Market</option>
+        <option value="market-paginated">Market - Paginated</option>
+        {game.minorCompanies && <option value="minors">Minors</option>}
         <option value="revenue">Revenue</option>
+        <option value="tile-manifest">Tile Manifest</option>
         <option value="tiles">Tiles</option>
-        <option value="manifest">Tile Manifest</option>
         <option value="tokens">Tokens</option>
       </select>
     </div>
