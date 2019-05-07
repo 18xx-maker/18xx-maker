@@ -5,7 +5,17 @@ import * as R from "ramda";
 import Color from "./data/Color";
 import * as tinycolor from "tinycolor2";
 
+import is from "ramda/src/is";
+import map from "ramda/src/map";
+
 const cap = str => str.charAt(0).toUpperCase() + str.slice(1);
+
+const arrows = {
+  up: "↑",
+  down: "↓",
+  left: "←",
+  right: "→"
+};
 
 const MarketCell = ({ borders, value, legend, par, colSpan, width, height }) => {
   let color = null;
@@ -83,6 +93,23 @@ const MarketCell = ({ borders, value, legend, par, colSpan, width, height }) => 
               style[`border${cap(border.side)}`] = `3px solid ${c(border.color)}`;
             }, (value && value.borders) || []);
 
+            let arrow = null;
+            if (value && value.arrow) {
+              arrow = map(a => (
+                <span
+                  style={{
+                    color: value.arrowColor
+                      ? c(value.arrowColor)
+                      : c("black"),
+                    ...font
+                  }}
+                  className={`Arrow Arrow--${a}`}
+                >
+                  {arrows[a] || "↻"}
+                </span>
+              ), is(Array, value.arrow) ? value.arrow : [value.arrow]);
+            }
+
             return (
               <td
                 style={style}
@@ -95,20 +122,7 @@ const MarketCell = ({ borders, value, legend, par, colSpan, width, height }) => 
                    <span className="MarketCell--SubLabel">{value.subLabel}</span>
                  )}
                 {companies}
-                {value &&
-                 value.arrow && (
-                   <span
-                     style={{
-                       color: value.arrowColor
-                         ? c(value.arrowColor)
-                         : c("black"),
-                       ...font
-                     }}
-                     className={`Arrow Arrow--${value.arrow}`}
-                   >
-                     {value.arrow === "up" ? "↑" : "↓"}
-                   </span>
-                 )}
+                {arrow}
               </td>
             );
           }}

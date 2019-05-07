@@ -45,8 +45,12 @@
   color: black;
 }
 
-.Arrow--down {
+.Arrow--down, .Arrow--left {
   left: 1mm;
+}
+
+.Arrow--right {
+  top: 1mm;
 }
 
 .Legend {
