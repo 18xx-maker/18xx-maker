@@ -25,7 +25,7 @@ const StockPaginated = ({ match, cell, pagination, paper }) => {
   let pageWidth = printableWidth(paper);
   let pageHeight = printableHeight(paper);
 
-  if (stock.orientation === "landscape") {
+  if (stock.orientation !== "portrait") {
     let tmp = pageWidth;
     pageWidth = pageHeight;
     pageHeight = tmp;
