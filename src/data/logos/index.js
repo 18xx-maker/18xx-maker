@@ -6,6 +6,7 @@ import IC, { ReactComponent as IC_Component } from "./IC.svg";
 import LIRR, { ReactComponent as LIRR_Component } from "./LIRR.svg";
 import MKT, { ReactComponent as MKT_Component } from "./MKT.svg";
 import MP, { ReactComponent as MP_Component } from "./MP.svg";
+import NYC, { ReactComponent as NYC_Component } from "./NYC.svg";
 import PRR, { ReactComponent as PRR_Component } from "./PRR.svg";
 import SLSF, { ReactComponent as SLSF_Component } from "./SLSF.svg";
 import SP, { ReactComponent as SP_Component } from "./SP.svg";
@@ -21,6 +22,7 @@ export default {
   LIRR : { src: LIRR, Component: LIRR_Component },
   MKT : { src: MKT, Component: MKT_Component },
   MP : { src: MP, Component: MP_Component },
+  NYC : { src: NYC, Component: NYC_Component },
   PRR : { src: PRR, Component: PRR_Component },
   SLSF : { src: SLSF, Component: SLSF_Component },
   SP : { src: SP, Component: SP_Component },
