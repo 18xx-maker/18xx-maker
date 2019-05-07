@@ -22,5 +22,4 @@ This is a collection of docs that talk about how to use and extend this tool.
 
 * [Github](https://github.com/kelsin/18xx) - Source Code
 * [Hosted Version](https://18xx.kelsin.net) - Publicly hosted version
-* [Board18](https://dev2.board18.org/) - Remote play tool for 18xx
-  style games
+* [Board18](https://dev2.board18.org/) - Remote play tool for 18xx style games
