@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import Color from "./data/Color";
 import Config from "./data/Config";
 
@@ -7,6 +8,8 @@ import * as uuid from "uuid";
 import find from "ramda/src/find";
 import is from "ramda/src/is";
 import propEq from "ramda/src/propEq";
+
+import logos from "./data/logos";
 
 const bleedAdjust = (bleed, percent) => {
   let ratio = 0.833333333;
@@ -40,14 +43,15 @@ const Token = ({
   inverse,
   width,
   bleed,
-  outline
+  outline,
+  useCompanySvgLogos
 }) => {
   width = width || 25;
 
   let gradient = null;
   let shape = null;
   let tokenFill = null;
-  let color = is(Object, token) ? token.colors[0] : token;
+  let color = is(Object, token) ? (token.colors ? token.colors[0] : "black") : token;
 
   let clipId = uuid.v4();
   let clip = (
@@ -81,6 +85,15 @@ const Token = ({
             let textFill = (token && token.labelColor) ? c(token.labelColor) : p("black");
             let textStroke = "none";
 
+            if (useCompanySvgLogos) {
+              if(!is(Object, token)) {
+                let temp = token;
+                token = {colors: [temp]};
+              }
+
+              token["type"] = "logo";
+            }
+
             if(inverse) {
               textStroke = s(c(color));
               textFill = c(color);
@@ -89,6 +102,20 @@ const Token = ({
               if(is(Object, token)) {
                 let id = uuid.v4();
                 switch(token.type) {
+                case "logo":
+                  let logo = logos[label];
+                  let start = -0.68 * width;
+                  let size = 1.36 * width;
+                  if (logo) {
+                    let Component = logo.Component;
+                    shape = (
+                      <Component x={start} y={start} height={size} width={size}/>
+                    );
+                    tokenFill = c("white");
+                    textStroke = "none";
+                    textFill = "none";
+                    break;
+                  }
                 case "square":
                   shape = (
                     <rect rx="2" ry="2" x="-17.5" y="-17.5" width="35" height="35"
@@ -253,4 +280,8 @@ const Token = ({
   );
 };
 
-export default Token;
+const mapStateToProps = state => ({
+  useCompanySvgLogos: state.config.useCompanySvgLogos
+});
+
+export default connect(mapStateToProps)(Token);

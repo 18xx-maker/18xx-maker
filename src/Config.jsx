@@ -126,6 +126,9 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="paper.margins" label="Paper Margins" dimension={true}
              description="Print paper margin in 100th's of an inch."/>
       <p>For reference US Letter size would be 850 by 1100. A4 is 826.7716535 by 1169.291339</p>
+      <h3>Companies</h3>
+      <Input name="useCompanySvgLogos" label="Use Company SVG Logos"
+             description="Use Company logos (if available) instead of text on tokens and city spots." />
       <h3>Maps</h3>
       <Input name="plainMapHomes" label="Plain Map Home Spaces"
              description="This sets all home spots on maps to be empty white cities with black company text instead of colored or using logos." />
