@@ -5,6 +5,7 @@ import Color from "./data/Color";
 
 import Nav from "./nav/Nav";
 
+import CheatSheet from "./CheatSheet.jsx";
 import Config from "./Config.jsx";
 import Docs from "./docs";
 import Logos from "./Logos";
@@ -52,6 +53,7 @@ const App = () => (
         <Switch>
           <Route path="/" exact component={Home} />
 
+          <Route path="/cheat" exact component={CheatSheet} />
           <Route path="/config" exact component={Config} />
           <Route path="/docs/:id?" exact component={Docs} />
           <Route path="/logos" exact component={Logos} />

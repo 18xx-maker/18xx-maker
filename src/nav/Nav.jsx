@@ -14,6 +14,7 @@ import "./nav.scss";
 let Links = (
   <ul key="config">
     <li><NavLink to="/docs">Docs</NavLink></li>
+    <li><NavLink to="/cheat">Cheat Sheet</NavLink></li>
     <li><NavLink to="/config">Config</NavLink></li>
   </ul>
 );
@@ -31,6 +32,8 @@ const Nav = ({match}) => {
   case "config":
     break;
   case "docs":
+    break;
+  case "cheat":
     break;
   default:
     menuOptions.push(<GameSelect key="game"/>);
