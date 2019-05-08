@@ -116,6 +116,8 @@ const Token = ({
                     textFill = "none";
                     break;
                   }
+                  // We're ok with the above statement falling through the case for now
+                  // eslint-disable-next-line
                 case "square":
                   shape = (
                     <rect rx="2" ry="2" x="-17.5" y="-17.5" width="35" height="35"

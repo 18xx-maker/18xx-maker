@@ -57,6 +57,7 @@ const Home = () => {
       <ul>
         {gameNodes}
       </ul>
+      <p>I've also included a single page <NavLink to="/cheat">Cheat Sheet</NavLink> for things often looked up per game.</p>
       <h2>Config</h2>
       <p>You can configure your settings for how you like your 18xx games to look here.</p>
       <ul><li><NavLink to="/config">Config</NavLink></li></ul>
