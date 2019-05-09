@@ -70,3 +70,21 @@ nav {
     height: 65px;
   }
 }
+
+.PrintNotes {
+  ul {
+    font-family: sans-serif;
+    list-style: none;
+    display: inline-block;
+    margin: 1em 0;
+  }
+
+  li {
+    float: left;
+    margin-right: 2em;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

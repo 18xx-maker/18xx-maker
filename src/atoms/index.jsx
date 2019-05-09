@@ -1,6 +1,8 @@
 import React from "react";
 import * as R from "ramda";
 
+import TileNav from "../nav/Tiles";
+
 import Svg from "../Svg";
 import Hex from "../Hex";
 
@@ -216,14 +218,15 @@ const examples = R.addIndex(R.chain)((h,id) => {
 
 const groups = R.addIndex(R.chain)((g,id) => {
   return <dl key={`group-${id}`}>
-             <dt>{g.group}</dt>
-             {examples(g.examples)}
-           </dl>;
+           <dt>{g.group}</dt>
+           {examples(g.examples)}
+         </dl>;
 });
 
 const Atoms = () => {
   return (
     <ColorContext.Provider value="companies">
+      <TileNav/>
       <div className="atoms">
         {groups(atoms)}
       </div>

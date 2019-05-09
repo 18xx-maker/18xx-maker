@@ -1,6 +1,8 @@
 import React from "react";
 import * as R from "ramda";
 
+import TileNav from "./nav/Tiles";
+
 import Svg from "./Svg";
 import Hex from "./Hex";
 
@@ -58,9 +60,12 @@ const groups = R.addIndex(R.chain)((g,id) => {
 
 const Positioning = () => {
   return (
-    <div className="atoms">
-      {groups(positions)}
-    </div>
+    <>
+      <TileNav/>
+      <div className="atoms">
+        {groups(positions)}
+      </div>
+    </>
   );
 };
 

@@ -51,7 +51,9 @@ const Revenue = ({ match }) => {
   return (
     <div className="revenue">
       <div className="PrintNotes">
-        Revenue is meant to be printed in <b>landscape</b> mode
+        <div>
+          <p>Revenue is meant to be printed in <b>landscape</b> mode</p>
+        </div>
       </div>
       <div className="revenue__tracker">
         <h2>{game.info.title} Revenue</h2>
