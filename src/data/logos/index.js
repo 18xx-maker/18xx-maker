@@ -23,6 +23,9 @@ import SR, { ReactComponent as SR_Component } from "./SR.svg";
 import TR, { ReactComponent as TR_Component } from "./TR.svg";
 import UR, { ReactComponent as UR_Component } from "./UR.svg";
 
+// 18EU
+import NFL, { ReactComponent as NFL_Component } from "./NFL.svg";
+
 // 1849
 import AFG, { ReactComponent as AFG_Component } from "./AFG.svg";
 import ATA, { ReactComponent as ATA_Component } from "./ATA.svg";
@@ -56,6 +59,9 @@ export default {
   SR : { src: SR, Component: SR_Component },
   TR : { src: TR, Component: TR_Component },
   UR : { src: UR, Component: UR_Component },
+
+  // 18EU
+  NFL: { src: NFL, Component: NFL_Component },
 
   // 1849
   AFG: { src: AFG, Component: AFG_Component },
