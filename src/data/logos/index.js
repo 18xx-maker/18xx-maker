@@ -14,6 +14,14 @@ import SP, { ReactComponent as SP_Component } from "./SP.svg";
 import SSW, { ReactComponent as SSW_Component } from "./SSW.svg";
 import TP, { ReactComponent as TP_Component } from "./TP.svg";
 
+import AR, { ReactComponent as AR_Component } from "./AR.svg";
+import IR, { ReactComponent as IR_Component } from "./IR.svg";
+import KO, { ReactComponent as KO_Component } from "./KO.svg";
+import KU, { ReactComponent as KU_Component } from "./KU.svg";
+import SR, { ReactComponent as SR_Component } from "./SR.svg";
+import TR, { ReactComponent as TR_Component } from "./TR.svg";
+import UR, { ReactComponent as UR_Component } from "./UR.svg";
+
 export default {
   ATSF : { src: ATSF, Component: ATSF_Component },
   "B&O" : { src: BO, Component: BO_Component },
@@ -29,5 +37,14 @@ export default {
   SLSF : { src: SLSF, Component: SLSF_Component },
   SP : { src: SP, Component: SP_Component },
   SSW : { src: SSW, Component: SSW_Component },
-  TP : { src: TP, Component: TP_Component }
+  TP : { src: TP, Component: TP_Component },
+
+  // 1889
+  AR : { src: AR, Component: AR_Component },
+  IR : { src: IR, Component: IR_Component },
+  KO : { src: KO, Component: KO_Component },
+  KU : { src: KU, Component: KU_Component },
+  SR : { src: SR, Component: SR_Component },
+  TR : { src: TR, Component: TR_Component },
+  UR : { src: UR, Component: UR_Component },
 };
