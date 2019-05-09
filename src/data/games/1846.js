@@ -749,12 +749,12 @@ const game = {
                 color: "black"
               },
               {
-                label: "Erie",
+                label: "ERIE",
                 color: "gray"
               }
             ],
             name: {
-              name: "Erie",
+              name: "ERIE",
               reverse: true,
               offset: 63
             }
@@ -882,7 +882,7 @@ const game = {
         cities: [
           {
             companies: [{
-              label: "Erie",
+              label: "ERIE",
               color: "yellow"
             }],
             name: {

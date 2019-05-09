@@ -1,5 +1,6 @@
 import ATSF, { ReactComponent as ATSF_Component } from "./ATSF.svg";
 import BO, { ReactComponent as BO_Component } from "./BO.svg";
+import ERIE, { ReactComponent as ERIE_Component } from "./ERIE.svg";
 import FW, { ReactComponent as FW_Component } from "./FW.svg";
 import GMO, { ReactComponent as GMO_Component } from "./GMO.svg";
 import IC, { ReactComponent as IC_Component } from "./IC.svg";
@@ -16,6 +17,7 @@ import TP, { ReactComponent as TP_Component } from "./TP.svg";
 export default {
   ATSF : { src: ATSF, Component: ATSF_Component },
   "B&O" : { src: BO, Component: BO_Component },
+  ERIE : { src: ERIE, Component: ERIE_Component },
   FW : { src: FW, Component: FW_Component },
   GMO : { src: GMO, Component: GMO_Component },
   IC : { src: IC, Component: IC_Component },
