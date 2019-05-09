@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import { unitsToCss, unitsToCssMm } from "./util";
 import { setConfig } from "./store/actions";
 
 import defaultConfig from "./config.json";
@@ -13,6 +12,7 @@ import compose from "ramda/src/compose";
 import complement from "ramda/src/complement";
 import filter from "ramda/src/filter";
 import isEmpty from "ramda/src/isEmpty";
+import keys from "ramda/src/keys";
 import map from "ramda/src/map";
 import path from "ramda/src/path";
 import split from "ramda/src/split";
@@ -25,6 +25,43 @@ export const getSchemaPath = compose(chain(n => ['properties', n]),
                                      split('.'));
 export const getSchema = name => path(getSchemaPath(name), schema);
 
+const allUnits = {
+  inches: 100.0,
+  mm: 3.937007874
+};
+
+// Component to help input units
+const UnitInput = ({name, value, onChange}) => {
+  let [units, setUnits] = useState("inches");
+  let [internalValue, setInternalValue] = useState(value / allUnits[units]);
+
+  useEffect(() => {
+    setInternalValue(value / allUnits[units]);
+  }, [value, units]);
+
+  let handler = event => {
+    setInternalValue(event.target.value);
+    onChange(event.target.value * allUnits[units]);
+  };
+
+  let unitsHandler = event => {
+    setUnits(event.target.value);
+    setInternalValue(value / allUnits[event.target.value]);
+  };
+
+  return (
+    <>
+      <input style={{textAlign: "right", width:"0.5in"}} type="number"
+             id={name} name={name}
+             value={internalValue}
+             onChange={handler}/>
+      <select id={`${name}-units`} value={units} onChange={unitsHandler}>
+        {map(key => <option key={key} value={key}>{key}</option>, keys(allUnits))}
+      </select>
+    </>
+  );
+};
+
 const inputState = (state , {name}) => ({
   config: state.config,
   value: path(split('.', name), state.config)
@@ -35,6 +72,7 @@ const inputDispatch = dispatch => ({
 
 const _Input = ({name, label, description, config, value, setConfig, dimension}) => {
   let valuePath = getPath(name);
+  let rawUpdate = value => setConfig(assocPath(valuePath,value,config));
   let update = event => setConfig(assocPath(valuePath,
                                            event.target.type === "checkbox" ?
                                            event.target.checked :
@@ -82,11 +120,14 @@ const _Input = ({name, label, description, config, value, setConfig, dimension})
     inputNode = (
       <>
         <label htmlFor={name}>{label}: </label>
-        <input style={{width:"1in"}} type="number"
-               id={name} name={name}
-               value={value}
-               onChange={update}/>
-        {dimension && <span> {unitsToCss(value)} / {unitsToCssMm(value)}</span>}
+        {dimension ? (
+          <UnitInput name={name} value={value} onChange={rawUpdate}/>
+        ) : (
+          <input style={{width:"1in"}} type="number"
+                 id={name} name={name}
+                 value={value}
+                 onChange={update}/>
+        )}
       </>
     );
   }
@@ -119,13 +160,10 @@ const Config = ({config, setConfig, resetConfig}) => {
       <h3>Layout</h3>
       <Input name="pagination" label="Pagination Type"
              description="This lets you configure the type of pagination. Equal keeps all pages directly equal. Max keeps the first and last page equal and set all middle pages to max based on page size."/>
-      <Input name="paper.width" label="Paper Width" dimension={true}
-             description="Print paper width in 100th's of an inch."/>
-      <Input name="paper.height" label="Paper Height" dimension={true}
-             description="Print paper height in 100th's of an inch."/>
-      <Input name="paper.margins" label="Paper Margins" dimension={true}
-             description="Print paper margin in 100th's of an inch."/>
-      <p>For reference US Letter size would be 850 by 1100. A4 is 826.7716535 by 1169.291339</p>
+      <Input name="paper.width" label="Paper Width" dimension={true}/>
+      <Input name="paper.height" label="Paper Height" dimension={true}/>
+      <Input name="paper.margins" label="Paper Margins" dimension={true}/>
+      <p>For reference US Letter size would be 8.5in by 11in. A4 is 210mm by 297mm</p>
       <h3>Companies</h3>
       <Input name="useCompanySvgLogos" label="Use Company SVG Logos"
              description="Use Company logos (if available) instead of text on tokens and city spots." />
@@ -143,8 +181,8 @@ const Config = ({config, setConfig, resetConfig}) => {
       <h3>Tiles</h3>
       <Input name="tiles.layout" label="Tile Sheet Layout"
              description="This determines how to lay out the tiles on the tile sheet. Offset is the style that tries to make as few cuts as possible. Individual just has each tile separate from the others, and Die is meant from the custom Die cutters that Deep Thought Games uses"/>
-      <Input name="tiles.width" label="Tile Width"
-             description="This determines the default size of maps and tiles. It is an integer in 100th's of an inch that define the distance from flat to flat. 150 would be standard 18xx size. 100 is small (1822 / 18OE) size. GMT uses 175."/>
+      <Input name="tiles.width" label="Tile Width" dimension={true}
+             description="This determines the default size of maps and tiles. It defines the distance from flat to flat. 1.5in would be standard 18xx size. 1in is small (1822 / 18OE) size. GMT uses 1.75in."/>
       <h3>Stock Markets</h3>
       <h3>Cards</h3>
       <Input name="shareLayout" label="Share Layout"
