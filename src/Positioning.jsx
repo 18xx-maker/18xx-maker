@@ -61,7 +61,11 @@ const groups = R.addIndex(R.chain)((g,id) => {
 const Positioning = () => {
   return (
     <>
-      <TileNav/>
+      <div className="PrintNotes">
+        <div>
+          <TileNav/>
+        </div>
+      </div>
       <div className="atoms">
         {groups(positions)}
       </div>

@@ -38,7 +38,11 @@ const Tiles = () => {
 
   return (
     <ColorContext.Provider value="tile">
-      <TileNav/>
+      <div className="PrintNotes">
+        <div>
+          <TileNav/>
+        </div>
+      </div>
       <div className="tiles">{tileNodes}</div>
     </ColorContext.Provider>
   );
