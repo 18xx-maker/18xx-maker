@@ -38,12 +38,10 @@ const Home = () => {
             <h1>18xx <span>Print and Play Tool</span></h1>
             <p>This site is a react client-side application which can take 18xx game
               definitions written in json display them in a browser ready for
-              printing.</p>
-            <p>The original purpose was for personal pnp projects. Many games
-              displayed on this site are <strong>NOT</strong> licensed for public print and play.
-              A lot of great titles are availalbe from <a target="_blank" rel="noopener noreferrer" href="http://www.all-aboardgames.com/">All-Aboard Games</a> and <a target="_blank" rel="noopener noreferrer" href="http://www.goldenspikegames.com/">Golden Spike Games</a>.
-              If you are a designer and/or publisher and would like your design
-              to not be available either on this site or in the <a href="https://github.com/kelsin/18xx">source code</a> please <a href="mailto:kelsin@valefor.com">let me know</a>!</p>
+              printing. The original purpose of this site was for personal pnp projects. <NavLink to="/docs">Read more</NavLink> on our docs page.</p>
+            <p>If you are a designer and/or publisher and would like your design
+              to be available on this site please <a href="mailto:kelsin@valefor.com">let me know</a>!</p>
+            <p>In case printing games yourself isn't feasible (or if you are looking for a specific game) please check out <a target="_blank" rel="noopener noreferrer" href="http://www.all-aboardgames.com/">All-Aboard Games</a>, <a target="_blank" rel="noopener noreferrer" href="http://www.goldenspikegames.com/">Golden Spike Games</a>, <a href="http://18xx-marflow-games.de/english-new/index.html">Marflow Games</a>, and <a href="https://www.gmtgames.com/">GMT Games</a> as places where you can buy full 18xx games ready to play.</p>
             <p className="note" style={{backgroundColor:c("offboard"),color:t(c("offboard"))}}>
               <strong>Important:</strong> Please only use this site to print games for which you have a license by owning the game.
             </p>
