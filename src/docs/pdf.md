@@ -29,7 +29,3 @@ build/render/1830
 ├── tile-manifest.pdf
 └── tokens.pdf
 ```
-
-You only need to include the `yarn build &&` at the beginning of the command if
-you have never run it, or if you made changes too the app since the last time
-you ran it.
