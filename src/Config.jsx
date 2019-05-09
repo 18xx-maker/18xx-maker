@@ -163,19 +163,16 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="paper.width" label="Paper Width" dimension={true}/>
       <Input name="paper.height" label="Paper Height" dimension={true}/>
       <Input name="paper.margins" label="Paper Margins" dimension={true}/>
-      <p>For reference US Letter size would be 8.5in by 11in. A4 is 210mm by 297mm</p>
+      <p>For reference US Letter size would be 8.5in by 11in. A4 is 210mm by 297mm.</p>
       <h3>Companies</h3>
       <Input name="useCompanySvgLogos" label="Use Company SVG Logos"
              description="Use Company logos (if available) instead of text on tokens and city spots." />
-      <h3>Maps</h3>
       <Input name="plainMapHomes" label="Plain Map Home Spaces"
              description="This sets all home spots on maps to be empty white cities with black company text instead of colored or using logos." />
+      <h3>Maps</h3>
       {/* This option isn't working yet, will add later */}
       {/* <Checkbox name="plainMapDestinations" label="Plain Map Destination Spaces" */}
       {/*           description="This sets all destination spots on maps to be empty white cities with black company text:" /> */}
-      {/* This option isn't working yet, will add later */}
-      {/* <Checkbox name="useCompanySvgLogos" label="Use Company SVG Logos" */}
-      {/*           description="This will attempt to use svg images for company logos on the map and tokens if the logo is avaialable:" /> */}
       <Input name="coords" label="Coordinate Type"
              description="This lets you choose where the coordinates appear on the map (if at all)."/>
       <h3>Tiles</h3>
