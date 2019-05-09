@@ -1,11 +1,8 @@
 import React from "react";
 import {Link, NavLink} from "react-router-dom";
 
-import Tiles from "./Tiles";
-
 import RandomTile from "../RandomTile";
 
-import ThemeSelect from "./ThemeSelect";
 import GameSelect from "./GameSelect";
 import ComponentSelect from "./ComponentSelect";
 
@@ -13,6 +10,7 @@ import "./nav.scss";
 
 let Links = (
   <ul key="config">
+    <li><NavLink to="/tiles">Tiles</NavLink></li>
     <li><NavLink to="/docs">Docs</NavLink></li>
     <li><NavLink to="/cheat">Cheat Sheet</NavLink></li>
     <li><NavLink to="/config">Config</NavLink></li>
@@ -20,26 +18,9 @@ let Links = (
 );
 
 const Nav = ({match}) => {
-  let gameName = match.params.game;
-
-  let menuOptions = [<ThemeSelect key="theme"/>];
-  switch(gameName) {
-  case "tiles":
-    menuOptions.push(<Tiles key="tiles"/>);
-    break;
-  case "logos":
-    break;
-  case "config":
-    break;
-  case "docs":
-    break;
-  case "cheat":
-    break;
-  default:
-    menuOptions.push(<GameSelect key="game"/>);
-    menuOptions.push(<ComponentSelect key="component"/>);
-  }
-  menuOptions.push(Links);
+  let menuOptions = [<GameSelect key="game"/>,
+                     <ComponentSelect key="component"/>,
+                     Links];
 
   return (
     <React.Fragment>

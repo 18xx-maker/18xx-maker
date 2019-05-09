@@ -11,6 +11,25 @@ import reduce from "ramda/src/reduce";
 
 import "./CheatSheet.scss";
 
+const Value = ({game, field}) => {
+  if (game[field]) {
+    return game[field];
+  } else {
+    return (
+      <table>
+        <tbody>
+          {map(p=> (
+            <tr key={p.number}>
+              <th>{p.number}</th>
+              <td>{p[field]}</td>
+            </tr>
+          ), game.players)}
+        </tbody>
+      </table>
+    );
+  }
+};
+
 const gameRows = map(key => {
   let game = games[key];
 
@@ -25,8 +44,9 @@ const gameRows = map(key => {
       </td>
       <td>{game.info.designer}</td>
       <td>{players}</td>
-      <td className="bank">{game.bank}</td>
-      <td></td>
+      <td className="bank"><Value game={game} field="bank"/></td>
+      <td><Value game={game} field="capital"/></td>
+      <td><Value game={game} field="certLimit"/></td>
     </tr>
   );
 }, keys(games));
@@ -43,7 +63,8 @@ const CheatSheet = () => {
             <th>Designer</th>
             <th>Players</th>
             <th>Bank</th>
-            <th>Limits</th>
+            <th>Initial Capital</th>
+            <th>Cert Limit</th>
           </tr>
         </thead>
         <tbody>

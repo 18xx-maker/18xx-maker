@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import tiles from "./data/tiles";
 import Tile from "./Tile";
+import TileNav from "./nav/Tiles";
 
 import Svg from "./Svg";
 import ColorContext from "./context/ColorContext";
@@ -37,6 +38,7 @@ const Tiles = () => {
 
   return (
     <ColorContext.Provider value="tile">
+      <TileNav/>
       <div className="tiles">{tileNodes}</div>
     </ColorContext.Provider>
   );
