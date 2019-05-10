@@ -1,38 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns="http://www.w3.org/2000/svg"
-   id="svg1456"
-   version="1.1"
-   viewBox="0 0 50.799999 50.799999"
-   height="50.799999mm"
-   width="50.799999mm">
-  <g
-     transform="translate(-75.897619,-72.028572)"
-     id="layer1">
-    <g
-       transform="matrix(3.9076923,0,0,3.9076923,-119.42573,-78.157177)"
-       id="g3559"
-       style="display:inline;stroke-width:0.25999999">
-      <circle
-         style="fill:#f68121;fill-opacity:1;fill-rule:evenodd;stroke-width:0.06879167"
-         id="path3077-4"
-         cx="56.484322"
-         cy="44.933361"
-         r="6.5" />
-      <g
-         style="stroke-width:0.25999999"
-         id="g3353"
-         transform="translate(16.139498,16.134861)">
-        <path
-           id="rect3314"
-           d="m 40.346064,25.985004 3.972834,2.812255 -3.977575,2.814738 -3.970574,-2.814439 z"
-           style="fill:#f2f2ff;fill-opacity:1;fill-rule:evenodd;stroke-width:0.06879167" />
-        <path
-           id="rect3321"
-           transform="scale(0.26458333)"
-           d="m 152.54688,99.220703 v 4.097657 l -2.00391,0.62891 v 4.88671 h -3.53906 v -3.26757 l -8.46875,3.3164 h 5.65234 l 0.98242,1.40039 h 7.18555 v 2.26758 h -4.86914 l 4.93555,5.91797 v -4.09766 l 2.0039,-0.6289 v -4.88672 h 3.53906 v 3.26758 l 8.46875,-3.31641 h -5.65234 l -0.98242,-1.40039 h -7.18555 v -2.26758 h 4.86914 z"
-           style="fill:#f68121;fill-opacity:1;fill-rule:evenodd;stroke-width:0.25999999" />
-      </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50.799999 50.799999" height="191.999996" width="191.999996">
+    <g transform="translate(-195.323349 -150.185749) scale(3.90769)" stroke-width=".26" fill-rule="evenodd">
+        <circle cx="56.484322" cy="44.933361" r="6.5" fill="#f68121"/>
+        <path d="M56.485562 42.119865l3.972834 2.812255-3.977575 2.814738-3.970574-2.814439z" fill="#f2f2ff"/>
+        <path d="M56.50086 42.387005v1.084172l-.530202.166399v1.292942h-.936376v-.864545l-2.24069.877464h1.495515l.259932.37052h1.901177v.599964h-1.288294l1.305865 1.565796v-1.084172l.530198-.166397v-1.292944h.936376v.864547l2.24069-.877467h-1.495514l-.259932-.37052h-1.901177V43.9528h1.288293z" fill="#f68121"/>
     </g>
-  </g>
 </svg>
