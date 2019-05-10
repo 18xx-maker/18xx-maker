@@ -104,8 +104,8 @@ const Token = ({
                 switch(token.type) {
                 case "logo":
                   let logo = logos[label];
-                  let start = -0.68 * width;
-                  let size = 1.36 * width;
+                  let start = -0.75 * width;
+                  let size = 1.50 * width;
                   if (logo) {
                     let Component = logo.Component;
                     shape = (

@@ -28,6 +28,7 @@
     "redux-localstorage": "^0.4.1",
     "sharp": "^0.22.0",
     "source-map-explorer": "^1.6.0",
+    "svgo": "^1.2.2",
     "tinycolor2": "^1.4.1",
     "uuid": "^3.3.2"
   },
@@ -40,6 +41,7 @@
     "eject": "react-scripts eject",
     "print": "node ./bin/print.js",
     "b18": "node ./bin/b18.js",
+    "svgo": "svgo --pretty --multipass --disable=removeViewBox -p 6 -r -f src/data/logos",
     "validate:schemas": "ajv compile -s src/data/schemas/*.schema.json",
     "validate:config": "ajv -s src/data/schemas/config.schema.json -d src/*.json",
     "validate": "yarn validate:schemas; yarn validate:config"
