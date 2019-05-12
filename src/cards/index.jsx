@@ -97,7 +97,7 @@ const Cards = ({ match }) => {
           privates
         )}
         {R.addIndex(R.chain)((company, index) => {
-          let shares = fillArray(R.prop("quantity"), company.shares);
+          let shares = fillArray(R.prop("quantity"), (company.shares || []));
           return R.addIndex(R.map)(
             (share, i) => (
               <Share

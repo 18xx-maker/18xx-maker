@@ -1,4 +1,54 @@
 {
   "$schema": "http://json-schema.org/schema#",
-  "$id": "https://18xx.kelsin.net/schemas/game.schema.json"
+  "$id": "https://18xx.kelsin.net/schemas/game.schema.json",
+
+  "definitions": {
+    "link": {
+      "type": "string",
+      "pattern": "https?://.*/.*"
+    }
+  },
+
+  "type": "object",
+  "properties": {
+    "info": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "designer": { "type": "string" },
+        "currency": { "type": "string", "pattern": "[A-Z]{3}" }
+      },
+      "required": ["title", "designer", "currency"]
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "bgg": { "$ref": "#/definitions/link" },
+        "rules": { "$ref": "#/definitions/link" }
+      },
+      "additionalProperties": false
+    },
+    "bank": {},
+    "capital": {},
+    "certLimit": {},
+    "companies": {},
+    "ipo": { "type": "boolean" },
+    "map": {},
+    "phases": {},
+    "players": {},
+    "pools": {},
+    "privates": {},
+    "rounds": {},
+    "stock": {},
+    "tiles": {},
+    "tokens": {},
+    "turns": {},
+    "trains": {}
+  },
+  "additionalProperties": false,
+  "required": [
+    "info",
+    "ipo"
+  ]
 }
