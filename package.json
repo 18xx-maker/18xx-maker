@@ -13,6 +13,7 @@
     "@babel/register": "^7.0.0",
     "accounting": "^0.4.1",
     "ajv": "^6.10.0",
+    "ajv-cli": "^3.0.0",
     "archiver": "^3.0.0",
     "node-sass": "^4.11.0",
     "puppeteer": "^1.11.0",
@@ -42,9 +43,12 @@
     "print": "node ./bin/print.js",
     "b18": "node ./bin/b18.js",
     "svgo": "svgo --pretty --multipass --disable=removeViewBox -p 6 -r -f src/data/logos",
-    "validate:schemas": "ajv compile -s src/data/schemas/*.schema.json",
-    "validate:config": "ajv -s src/data/schemas/config.schema.json -d src/*.json",
-    "validate": "yarn validate:schemas; yarn validate:config"
+    "validate:schemas": "ajv compile -s src/data/schemas/\\*.schema.json -r src/data/schemas/\\*.schema.json",
+    "validate:config": "ajv -s src/data/schemas/config.schema.json -d src/\\*.json",
+    "validate:themes": "ajv -s src/data/schemas/theme.schema.json -r src/data/schemas/\\*.schema.json -d src/data/themes/\\*.json",
+    "validate:companies": "ajv -s src/data/schemas/companies.schema.json -r src/data/schemas/\\*.schema.json -d src/data/themes/companies/\\*.json",
+    "validate:colors": "yarn validate:themes; yarn validate:companies",
+    "validate": "yarn validate:schemas; yarn validate:config; yarn validate:colors"
   },
   "browserslist": [
     ">0.2%",
