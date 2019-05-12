@@ -185,6 +185,8 @@ const Config = ({config, setConfig, resetConfig}) => {
       {/*           description="This sets all destination spots on maps to be empty white cities with black company text:" /> */}
       <Input name="coords" label="Coordinate Type"
              description="This lets you choose where the coordinates appear on the map (if at all)."/>
+      <Input name="straightCityNames" label="Straight City Names"
+             description="Draw city names straight instead of curved along the city. None of the games included with this tool are meant to be drawn this way so layout issues might be present." />
       <h3>Tiles</h3>
       <Input name="tiles.layout" label="Tile Sheet Layout"
              description="This determines how to lay out the tiles on the tile sheet. Offset is the style that tries to make as few cuts as possible. Individual just has each tile separate from the others, and Die is meant from the custom Die cutters that Deep Thought Games uses"/>

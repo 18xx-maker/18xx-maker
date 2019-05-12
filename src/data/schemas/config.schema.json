@@ -99,6 +99,7 @@
     "useCompanySvgLogos": { "type": "boolean" },
     "plainMapHomes": { "type": "boolean" },
     "plainMapDestinations": { "type": "boolean" },
+    "straightCityNames": { "type": "boolean" },
     "font": { "$ref": "#/definitions/font" }
   },
   "required": [

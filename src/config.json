@@ -17,6 +17,7 @@
   "useCompanySvgLogos": false,
   "plainMapDestinations": false,
   "plainMapHomes": false,
+  "straightCityNames": false,
   "theme": "gmt",
   "companiesTheme": "gmt",
   "shareLayout": "left",

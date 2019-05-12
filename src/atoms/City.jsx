@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import Color from "../data/Color";
 
 import Name from "./Name";
@@ -11,7 +12,7 @@ import Token from "../Token";
 import Config from "../data/Config";
 import ColorContext from "../context/ColorContext";
 
-const City = ({ size, companies, border, name, extend, rotation }) => {
+const City = ({ straightCityNames, size, companies, border, name, extend, rotation }) => {
   if (size === undefined) {
     size = 1;
   }
@@ -65,13 +66,15 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
   let nameNode = null;
 
   if (name) {
-    let path = `city${size > 1 ? size : ""}Path`;
-    if(name.reverse) {
+    let path = straightCityNames ? null : `city${size > 1 ? size : ""}Path`;
+    if(path && name.reverse) {
       path = path + "Reverse";
     }
-    nameNode = <Name {...name}
-             y={name.y || (name.reverse ? 7 : 0)}
-             path={path} />;
+    let y = name.y || (name.reverse ? 7 : 0);
+    if (straightCityNames) {
+      y -= name.reverse ? -24 : 32;
+    }
+    nameNode = <Name {...name} y={y} path={path} />;
   }
 
   if (size === 1) {
@@ -289,4 +292,8 @@ const City = ({ size, companies, border, name, extend, rotation }) => {
   }
 };
 
-export default City;
+const mapStateToProps = state => ({
+  straightCityNames: state.config.straightCityNames
+});
+
+export default connect(mapStateToProps)(City);
