@@ -5,14 +5,14 @@ draft-07.
 
 ## Current Schemas
 
-* [companies](/schemas/companies.schema.json) - Schema to define a companies file
 * [config](/schemas/config.schema.json) - Schema to define the `config.json`
   format to manage the [config
   file](https://github.com/kelsin/18xx/blob/master/src/config.json) for this
   tool.
-* [game](/schemas/game.schema.json) - Schema to define a game file **WIP**
 * [tiles](/schemas/tiles.schema.json) - Schema to define a tiles file **WIP**
-* [theme](/schemas/theme.schema.json) - Schema to define a theme file
+* [game](/schemas/game.schema.json) - Schema to define a game file **WIP**
+* [theme](/schemas/theme.schema.json) - Schema to define a color theme file
+* [companies](/schemas/companies.schema.json) - Schema to define a companies color theme file
 
 ## Validation
 
