@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "https://18xx.kelsin.net/schemas/companies.schema.json",
+
+  "type": "object",
+  "properties": {
+    "yellow": { "$ref": "theme.schema.json#/definitions/color" },
+    "orange": { "$ref": "theme.schema.json#/definitions/color" },
+    "red": { "$ref": "theme.schema.json#/definitions/color" },
+    "pink": { "$ref": "theme.schema.json#/definitions/color" },
+    "white": { "$ref": "theme.schema.json#/definitions/color" },
+    "black": { "$ref": "theme.schema.json#/definitions/color" },
+    "gray": { "$ref": "theme.schema.json#/definitions/color" },
+    "blue": { "$ref": "theme.schema.json#/definitions/color" },
+    "cyan": { "$ref": "theme.schema.json#/definitions/color" },
+    "green": { "$ref": "theme.schema.json#/definitions/color" },
+    "lime": { "$ref": "theme.schema.json#/definitions/color" },
+    "turquoise": { "$ref": "theme.schema.json#/definitions/color" },
+    "purple": { "$ref": "theme.schema.json#/definitions/color" },
+    "lavender": { "$ref": "theme.schema.json#/definitions/color" },
+    "brown": { "$ref": "theme.schema.json#/definitions/color" },
+    "tan": { "$ref": "theme.schema.json#/definitions/color" },
+    "natural": { "$ref": "theme.schema.json#/definitions/color" }
+  },
+  "additionalProperties": false
+}

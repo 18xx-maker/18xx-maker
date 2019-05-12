@@ -17,7 +17,8 @@
   "useCompanySvgLogos": false,
   "plainMapDestinations": false,
   "plainMapHomes": false,
-  "scheme": "gmt",
+  "theme": "gmt",
+  "companiesTheme": "gmt",
   "shareLayout": "left",
   "tiles": {
     "layout": "offset",

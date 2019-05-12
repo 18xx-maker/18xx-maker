@@ -1,9 +1,3 @@
-import carth from "./themes/carth";
-import dtg from "./themes/dtg";
-import aag from "./themes/aag";
-import gmt from "./themes/gmt";
-import ps18xx from "./themes/ps18xx";
-
 import * as tinycolor from "tinycolor2";
 
 import curry from "ramda/src/curry";
@@ -18,17 +12,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import games from "./games";
+import themes from "./themes";
+import companies from "./themes/companies";
 
-const schemes = {
-  carth,
-  dtg,
-  aag,
-  gmt,
-  ps18xx
-};
+const resolveColor = curry((theme, companiesTheme, phase, context, game, name) => {
+  let colors = themes[theme || "gmt"] || themes["gmt"];
 
-const resolveColor = curry((scheme, phase, context, game, name) => {
-  let colors = schemes[scheme || "gmt"] || schemes["gmt"];
+  // Add in company colors
+  colors["companies"] = companies[companiesTheme || "rob"] || companies["rob"];
 
   // Add in game colors
   colors = mergeDeepRight(colors,
@@ -47,16 +38,16 @@ const resolveColor = curry((scheme, phase, context, game, name) => {
   return color;
 });
 
-const textColor = curry((scheme, phase, game, color) => {
-  let text = [resolveColor(scheme, phase, null, game, "white"),
-              resolveColor(scheme, phase, null, game, "black")];
+const textColor = curry((theme, companiesTheme, phase, game, color) => {
+  let text = [resolveColor(theme, companiesTheme, phase, null, game, "white"),
+              resolveColor(theme, companiesTheme, phase, null, game, "black")];
   let tc = tinycolor.default(color);
   return tinycolor.mostReadable(tc, text).toRgbString();
 });
 
 const strokeColor = color => tinycolor(color).darken(10).toString();
 
-const Color = ({ scheme, context, children }) => {
+const Color = ({ theme, companiesTheme, context, children }) => {
   return (
     <GameContext.Consumer>
       {gameContext => {
@@ -66,9 +57,9 @@ const Color = ({ scheme, context, children }) => {
             {colorContext => (
               <PhaseContext.Consumer>
                 {phase => {
-                  let c = resolveColor(scheme, phase, context || colorContext, game);
-                  let p = resolveColor(scheme, phase, undefined, game);
-                  let t = textColor(scheme, phase, game);
+                  let c = resolveColor(theme, companiesTheme, phase, context || colorContext, game);
+                  let p = resolveColor(theme, companiesTheme, phase, undefined, game);
+                  let t = textColor(theme, companiesTheme, phase, game);
                   let s = strokeColor;
 
                   return (
@@ -87,9 +78,8 @@ const Color = ({ scheme, context, children }) => {
 };
 
 const mapStateToProps = state => ({
-  scheme: state.config.scheme
+  theme: state.config.theme,
+  companiesTheme: state.config.companiesTheme
 });
 
-const connectScheme = connect(mapStateToProps);
-const connectedColor = connectScheme(Color);
-export default connectedColor;
+export default connect(mapStateToProps)(Color);

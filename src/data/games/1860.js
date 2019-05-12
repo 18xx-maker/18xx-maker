@@ -199,7 +199,7 @@ const game = {
       name: "Ventor, Yarmouth & South Coast",
       abbrev: "VYSC",
       tokens: ["Home", "£40"],
-      color: "lightGreen",
+      color: "lime",
       shares: [
         {
           quantity: 1,
@@ -565,7 +565,7 @@ const game = {
           },
           {
             label: "VYSC",
-            color: "lightGreen",
+            color: "lime",
             row: 8
           }
         ],
@@ -595,7 +595,7 @@ const game = {
           },
           {
             label: "VYSC",
-            color: "lightGreen",
+            color: "lime",
             row: 8
           }
         ],
@@ -635,7 +635,7 @@ const game = {
           },
           {
             label: "VYSC",
-            color: "lightGreen",
+            color: "lime",
             row: 8
           }
         ],
@@ -1389,7 +1389,7 @@ const game = {
               companies: [
                 {
                   label: "VYSC",
-                  color: "lightGreen"
+                  color: "lime"
                 }
               ]
             }

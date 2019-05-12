@@ -9,6 +9,8 @@ draft-07.
   format to manage the [config
   file](https://github.com/kelsin/18xx/blob/master/src/config.json) for this
   tool.
+* [theme](/schemas/theme.schema.json) - Schema to define a theme file
+* [companies](/schemas/companies.schema.json) - Schema to define a companies file
 
 ## Validation
 

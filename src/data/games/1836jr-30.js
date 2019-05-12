@@ -146,7 +146,7 @@ const game = {
       name: "Noord-Friesche Locaal",
       abbrev: "NFL",
       tokens: ["Free", "F40"],
-      color: "lightGreen",
+      color: "lime",
       shares: [
         {
           quantity: 1,

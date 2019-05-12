@@ -43,7 +43,8 @@
 
   "type": "object",
   "properties": {
-    "scheme": { "type": "string" },
+    "theme": { "type": "string" },
+    "companiesTheme": { "type": "string" },
     "paper": {
       "allOf": [{
         "$ref": "#/definitions/dimensions"
@@ -101,16 +102,17 @@
     "font": { "$ref": "#/definitions/font" }
   },
   "required": [
-    "scheme",
-    "paper",
-    "stock",
-    "pagination",
-    "shareLayout",
+    "companiesTheme",
     "coords",
-    "useCompanySvgLogos",
-    "plainMapHomes",
+    "font",
+    "pagination",
+    "paper",
     "plainMapDestinations",
-    "font"
+    "plainMapHomes",
+    "shareLayout",
+    "stock",
+    "theme",
+    "useCompanySvgLogos"
   ],
   "additionalProperties": false
 }

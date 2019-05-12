@@ -148,15 +148,25 @@ const Config = ({config, setConfig, resetConfig}) => {
     <div className="config">
       <h2>Config</h2>
       <p>Here you can set any options for how to lay out and render these 18xx games.</p>
-      <h3>Theme</h3>
-      <select name="scheme" value={config.scheme} onChange={setOption}>
-        <option value="gmt">GMT</option>
-        <option value="dtg">Deep Thought</option>
+      <h3>Colors</h3>
+      <label htmlFor="theme">Theme: </label>
+      <select id="theme" name="theme" value={config.theme} onChange={setOption}>
         <option value="aag">All Aboard Games</option>
-        <option value="ps18xx">px18xx</option>
         <option value="carth">Carth</option>
+        <option value="dtg">Deep Thought</option>
+        <option value="gmt">GMT</option>
+        <option value="ps18xx">px18xx</option>
       </select>
       <p className="description">The theme determines which colors are used for all of the elements on the maps and tiles.</p>
+      <label htmlFor="companiesTheme">Companies Theme: </label>
+      <select id="companiesTheme" name="companiesTheme" value={config.companiesTheme} onChange={setOption}>
+        <option value="carth">Carth</option>
+        <option value="dtg">Deep Thought</option>
+        <option value="gmt">GMT</option>
+        <option value="ps18xx">px18xx</option>
+        <option value="rob">Rails on Board</option>
+      </select>
+      <p className="description">The company theme determines which colors are used for all of the elements on the maps and tiles.</p>
       <h3>Layout</h3>
       <Input name="pagination" label="Pagination Type"
              description="This lets you configure the type of pagination. Equal keeps all pages directly equal. Max keeps the first and last page equal and set all middle pages to max based on page size."/>
