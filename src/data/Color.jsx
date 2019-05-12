@@ -19,7 +19,8 @@ const resolveColor = curry((theme, companiesTheme, phase, context, game, name) =
   let colors = themes[theme || "gmt"] || themes["gmt"];
 
   // Add in company colors
-  colors["companies"] = companies[companiesTheme || "rob"] || companies["rob"];
+  colors["companies"] = mergeDeepRight(companies["rob"],
+                                       companies[companiesTheme || "rob"] || companies["rob"]);
 
   // Add in game colors
   colors = mergeDeepRight(colors,
