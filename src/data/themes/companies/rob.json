@@ -1,5 +1,5 @@
 {
-  "black": "#22272a",
+  "black": "#110a0c",
   "blue": "#03a0f9",
   "brown": "#993a23",
   "cyan": "#76e7ff",
@@ -14,6 +14,6 @@
   "red": "#ee100f",
   "tan": "#c46a52",
   "turquoise": "#39b9c6",
-  "white": "#eff6f7",
+  "white": "#fff",
   "yellow": "#ffdc0c"
 }
