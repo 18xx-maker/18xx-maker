@@ -9,8 +9,8 @@ draft-07.
   format to manage the [config
   file](https://github.com/kelsin/18xx/blob/master/src/config.json) for this
   tool.
-* [tiles](/schemas/tiles.schema.json) - Schema to define a tiles file **WIP**
-* [game](/schemas/game.schema.json) - Schema to define a game file **WIP**
+* [tiles](/schemas/tiles.schema.json) - **WIP** - Schema to define a tiles file
+* [game](/schemas/game.schema.json) - **WIP** - Schema to define a game file
 * [theme](/schemas/theme.schema.json) - Schema to define a color theme file
 * [companies](/schemas/companies.schema.json) - Schema to define a companies color theme file
 
