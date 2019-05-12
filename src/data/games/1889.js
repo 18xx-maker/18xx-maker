@@ -810,12 +810,12 @@ const game = {
       {
         color: "plain",
         terrain: [{type: "river", percent: 0.38},
-                  {cost: "¥80", angle: 180, percent: 0.1}],
+                  {type: "mountain", cost: "¥80", angle: 180, percent: 0.1}],
         hexes: ["H5", "I6"]
       },
       {
         color: "plain",
-        terrain: [{cost: "¥80"}],
+        terrain: [{type: "mountain", cost: "¥80"}],
         hexes: [
           "E4",
           "D5",

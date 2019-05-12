@@ -841,7 +841,7 @@ const tiles = {
     color: "green",
     rotations: 3,
     values: [{angle: 210, percent: 0.8, value: 60}],
-    mountain: {angle: 150, percent: 0.8, cost: "80", size: "tiny", border: true},
+    terrain: [{angle: 150, percent: 0.9, cost: "¥80", size: "tiny", border: true}],
     labels: [{label: "H", angle: 330, percent: 0.75}],
     cities: [{ size: 2 }],
     track: [{ side: 1 }, { side: 3 }, { side: 5 }]

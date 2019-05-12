@@ -929,7 +929,7 @@ const game = {
       },
       {
         color: "plain",
-        terrain: [{cost:"$60",percent:0.67}],
+        terrain: [{type:"mountain", cost:"$60",percent:0.67}],
         cities: [{
           name: {name: "Springfield"},
           companies: [{
@@ -1100,7 +1100,7 @@ const game = {
       },
       {
         color: "plain",
-        terrain: [{cost:"$60",percent:0.67}],
+        terrain: [{type:"mountain", cost:"$60",percent:0.67}],
         hexes: ["D13", "D15", "E14", "E16", "F11", "F13", "F15"]
       },
       {

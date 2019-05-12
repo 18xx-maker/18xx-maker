@@ -1223,7 +1223,7 @@ const game = {
           color: "plain",
           centerTowns: [{name: {name: "St. Helens"},
                          angle: 90, percent: 0.4}],
-          terrain: [{angle: 270, percent: 0.4, cost: "£60"}],
+          terrain: [{type:"mountain", angle: 270, percent: 0.4, cost: "£60"}],
           hexes: ["K5"]
         },
         {
@@ -1295,7 +1295,7 @@ const game = {
           color: "plain",
           centerTowns: [{name: {name: "Shalcombe"},
                          angle: 90, percent: 0.40}],
-          terrain: [{angle: 270, percent: 0.4, cost: "£60"}],
+          terrain: [{type: "mountain", angle: 270, percent: 0.4, cost: "£60"}],
           hexes: ["C7"]
         },
         {
