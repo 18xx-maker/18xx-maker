@@ -507,11 +507,13 @@
         "value": 30
       }
     ],
-    "labels": {
-      "label": "Y",
-      "angle": 155,
-      "percent": 0.75
-    },
+    "labels": [
+      {
+        "label": "Y",
+        "angle": 155,
+        "percent": 0.75
+      }
+    ],
     "cities": [
       {
         "size": 1
@@ -535,11 +537,13 @@
         "value": 30
       }
     ],
-    "labels": {
-      "label": "Y",
-      "angle": 155,
-      "percent": 0.75
-    },
+    "labels": [
+      {
+        "label": "Y",
+        "angle": 155,
+        "percent": 0.75
+      }
+    ],
     "cities": [
       {
         "size": 1
@@ -559,11 +563,13 @@
     "cities": [
       {}
     ],
-    "labels": {
-      "label": "Z",
-      "angle": 150,
-      "percent": 0.75
-    },
+    "labels": [
+      {
+        "label": "Z",
+        "angle": 150,
+        "percent": 0.75
+      }
+    ],
     "values": [
       {
         "angle": 210,
@@ -585,11 +591,13 @@
     "cities": [
       {}
     ],
-    "labels": {
-      "label": "Z",
-      "angle": 150,
-      "percent": 0.75
-    },
+    "labels": [
+      {
+        "label": "Z",
+        "angle": 150,
+        "percent": 0.75
+      }
+    ],
     "values": [
       {
         "angle": 210,
@@ -612,11 +620,13 @@
     "cities": [
       {}
     ],
-    "labels": {
-      "label": "Z",
-      "angle": 150,
-      "percent": 0.75
-    },
+    "labels": [
+      {
+        "label": "Z",
+        "angle": 150,
+        "percent": 0.75
+      }
+    ],
     "values": [
       {
         "angle": 210,
@@ -682,13 +692,15 @@
     "cities": [
       {}
     ],
-    "mountain": {
-      "angle": 150,
-      "percent": 0.8,
-      "cost": "80",
-      "size": "tiny",
-      "border": true
-    },
+    "terrain": [
+      {
+        "type": "mountain",
+        "angle": 150,
+        "percent": 0.8,
+        "cost": 80,
+        "size": "tiny"
+      }
+    ],
     "track": [
       {
         "side": 1
