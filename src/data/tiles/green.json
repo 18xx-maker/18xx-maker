@@ -371,11 +371,13 @@
         "value": 60
       }
     ],
-    "labels": {
-      "label": "NY",
-      "angle": 30,
-      "percent": 0.5
-    },
+    "labels": [
+      {
+        "label": "NY",
+        "angle": 30,
+        "percent": 0.5
+      }
+    ],
     "cities": [
       {
         "angle": 150,
@@ -411,11 +413,13 @@
         "value": 40
       }
     ],
-    "labels": {
-      "angle": 240,
-      "percent": 0.5,
-      "label": "OO"
-    },
+    "labels": [
+      {
+        "angle": 240,
+        "percent": 0.5,
+        "label": "OO"
+      }
+    ],
     "cities": [
       {
         "percent": 0.5
@@ -560,11 +564,13 @@
         "value": 60
       }
     ],
-    "labels": {
-      "label": "T",
-      "angle": 30,
-      "percent": 0.2
-    },
+    "labels": [
+      {
+        "label": "T",
+        "angle": 30,
+        "percent": 0.2
+      }
+    ],
     "cities": [
       {
         "angle": 150,
@@ -824,11 +830,13 @@
         "value": 50
       }
     ],
-    "labels": {
-      "label": "Z",
-      "angle": 150,
-      "percent": 0.75
-    },
+    "labels": [
+      {
+        "label": "Z",
+        "angle": 150,
+        "percent": 0.75
+      }
+    ],
     "cities": [
       {
         "size": 2
@@ -858,11 +866,13 @@
         "value": 50
       }
     ],
-    "labels": {
-      "label": "Z",
-      "angle": 150,
-      "percent": 0.75
-    },
+    "labels": [
+      {
+        "label": "Z",
+        "angle": 150,
+        "percent": 0.75
+      }
+    ],
     "cities": [
       {
         "size": 2
@@ -892,11 +902,13 @@
         "value": 50
       }
     ],
-    "labels": {
-      "label": "Z",
-      "angle": 150,
-      "percent": 0.75
-    },
+    "labels": [
+      {
+        "label": "Z",
+        "angle": 150,
+        "percent": 0.75
+      }
+    ],
     "cities": [
       {
         "size": 2
@@ -919,11 +931,13 @@
   },
   "298": {
     "color": "green",
-    "labels": {
-      "angle": 30,
-      "percent": 0.7,
-      "label": "Chi"
-    },
+    "labels": [
+      {
+        "angle": 30,
+        "percent": 0.7,
+        "label": "Chi"
+      }
+    ],
     "values": [
       {
         "angle": -10,
@@ -990,9 +1004,8 @@
       {
         "angle": 150,
         "percent": 0.9,
-        "cost": "¥80",
-        "size": "tiny",
-        "border": true
+        "cost": 80,
+        "size": "tiny"
       }
     ],
     "labels": [
@@ -1336,11 +1349,13 @@
         "value": 40
       }
     ],
-    "labels": {
-      "label": "Y",
-      "angle": 155,
-      "percent": 0.75
-    },
+    "labels": [
+      {
+        "label": "Y",
+        "angle": 155,
+        "percent": 0.75
+      }
+    ],
     "cities": [
       {
         "size": 1
@@ -1367,11 +1382,13 @@
         "value": 40
       }
     ],
-    "labels": {
-      "label": "Y",
-      "angle": 155,
-      "percent": 0.75
-    },
+    "labels": [
+      {
+        "label": "Y",
+        "angle": 155,
+        "percent": 0.75
+      }
+    ],
     "cities": [
       {
         "size": 1
@@ -1398,11 +1415,13 @@
         "value": 40
       }
     ],
-    "labels": {
-      "label": "Y",
-      "angle": 155,
-      "percent": 0.75
-    },
+    "labels": [
+      {
+        "label": "Y",
+        "angle": 155,
+        "percent": 0.75
+      }
+    ],
     "cities": [
       {
         "size": 1
@@ -1430,11 +1449,13 @@
         "value": 40
       }
     ],
-    "labels": {
-      "label": "Y",
-      "angle": 155,
-      "percent": 0.75
-    },
+    "labels": [
+      {
+        "label": "Y",
+        "angle": 155,
+        "percent": 0.75
+      }
+    ],
     "cities": [
       {
         "size": 1
@@ -1466,11 +1487,13 @@
         "value": 60
       }
     ],
-    "labels": {
-      "label": "P",
-      "angle": 90,
-      "percent": 0.5
-    },
+    "labels": [
+      {
+        "label": "P",
+        "angle": 90,
+        "percent": 0.5
+      }
+    ],
     "cities": [
       {
         "angle": 210,
@@ -1502,11 +1525,13 @@
         "value": 50
       }
     ],
-    "labels": {
-      "label": "B-V",
-      "angle": 90,
-      "percent": 0.75
-    },
+    "labels": [
+      {
+        "label": "B-V",
+        "angle": 90,
+        "percent": 0.75
+      }
+    ],
     "cities": [
       {
         "angle": 270,
@@ -4314,7 +4339,7 @@
       }
     ]
   },
-  "479a": {
+  "479|a": {
     "color": "green",
     "rotations": 1,
     "values": [
@@ -4361,7 +4386,7 @@
       }
     ]
   },
-  "479b": {
+  "479|b": {
     "color": "green",
     "rotations": 1,
     "values": [
@@ -4374,7 +4399,7 @@
     "terrain": [
       {
         "type": "mountain",
-        "cost": "$40",
+        "cost": 40,
         "angle": 180,
         "percent": 0.6
       }

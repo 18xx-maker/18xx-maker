@@ -194,11 +194,13 @@
         "value": 60
       }
     ],
-    "labels": {
-      "label": "B",
-      "angle": 150,
-      "percent": 0.8
-    },
+    "labels": [
+      {
+        "label": "B",
+        "angle": 150,
+        "percent": 0.8
+      }
+    ],
     "cities": [
       {
         "size": 1
@@ -233,11 +235,13 @@
         "value": 80
       }
     ],
-    "labels": {
-      "label": "NY",
-      "fixed": true,
-      "rotation": 120
-    },
+    "labels": [
+      {
+        "label": "NY",
+        "fixed": true,
+        "rotation": 120
+      }
+    ],
     "cities": [
       {
         "angle": 120,
@@ -313,11 +317,13 @@
         "value": 50
       }
     ],
-    "labels": {
-      "angle": -75,
-      "percent": 0.65,
-      "label": "OO"
-    },
+    "labels": [
+      {
+        "angle": -75,
+        "percent": 0.65,
+        "label": "OO"
+      }
+    ],
     "cities": [
       {
         "percent": 0.57735
@@ -352,11 +358,13 @@
         "value": 50
       }
     ],
-    "labels": {
-      "angle": 195,
-      "percent": 0.7,
-      "label": "OO"
-    },
+    "labels": [
+      {
+        "angle": 195,
+        "percent": 0.7,
+        "label": "OO"
+      }
+    ],
     "cities": [
       {
         "angle": 120,
@@ -392,11 +400,13 @@
         "value": 50
       }
     ],
-    "labels": {
-      "angle": 300,
-      "percent": 0.5,
-      "label": "OO"
-    },
+    "labels": [
+      {
+        "angle": 300,
+        "percent": 0.5,
+        "label": "OO"
+      }
+    ],
     "cities": [
       {
         "angle": 180,
@@ -432,11 +442,13 @@
         "value": 50
       }
     ],
-    "labels": {
-      "label": "OO",
-      "angle": 270,
-      "percent": 0.7
-    },
+    "labels": [
+      {
+        "label": "OO",
+        "angle": 270,
+        "percent": 0.7
+      }
+    ],
     "cities": [
       {
         "angle": 180,
@@ -474,11 +486,13 @@
         "value": 50
       }
     ],
-    "labels": {
-      "label": "OO",
-      "angle": -90,
-      "percent": 0.7
-    },
+    "labels": [
+      {
+        "label": "OO",
+        "angle": -90,
+        "percent": 0.7
+      }
+    ],
     "cities": [
       {
         "angle": 180,
@@ -539,11 +553,13 @@
         "value": 80
       }
     ],
-    "labels": {
-      "label": "T",
-      "fixed": true,
-      "rotation": 120
-    },
+    "labels": [
+      {
+        "label": "T",
+        "fixed": true,
+        "rotation": 120
+      }
+    ],
     "cities": [
       {
         "angle": 120,
@@ -778,11 +794,13 @@
         "size": 2
       }
     ],
-    "labels": {
-      "label": "P",
-      "angle": 150,
-      "percent": 0.8
-    },
+    "labels": [
+      {
+        "label": "P",
+        "angle": 150,
+        "percent": 0.8
+      }
+    ],
     "values": [
       {
         "angle": 210,
@@ -818,11 +836,13 @@
         "value": 60
       }
     ],
-    "labels": {
-      "angle": -270,
-      "percent": 0.9,
-      "label": "A"
-    },
+    "labels": [
+      {
+        "angle": -270,
+        "percent": 0.9,
+        "label": "A"
+      }
+    ],
     "cities": [
       {
         "size": 4
@@ -894,11 +914,13 @@
         "value": 60
       }
     ],
-    "labels": {
-      "label": "Z",
-      "angle": 150,
-      "percent": 0.9
-    },
+    "labels": [
+      {
+        "label": "Z",
+        "angle": 150,
+        "percent": 0.9
+      }
+    ],
     "cities": [
       {
         "size": 3,
@@ -925,11 +947,13 @@
   },
   "299": {
     "color": "brown",
-    "labels": {
-      "angle": 30,
-      "percent": 0.7,
-      "label": "Chi"
-    },
+    "labels": [
+      {
+        "angle": 30,
+        "percent": 0.7,
+        "label": "Chi"
+      }
+    ],
     "values": [
       {
         "angle": -10,
@@ -1480,11 +1504,13 @@
         "value": 50
       }
     ],
-    "labels": {
-      "label": "Y",
-      "angle": 155,
-      "percent": 0.75
-    },
+    "labels": [
+      {
+        "label": "Y",
+        "angle": 155,
+        "percent": 0.75
+      }
+    ],
     "cities": [
       {
         "size": 2
@@ -1519,12 +1545,14 @@
         "value": 80
       }
     ],
-    "labels": {
-      "label": "P",
-      "angle": 0,
-      "percent": 0,
-      "size": "medium"
-    },
+    "labels": [
+      {
+        "label": "P",
+        "angle": 0,
+        "percent": 0,
+        "size": "medium"
+      }
+    ],
     "cities": [
       {
         "angle": 180,
@@ -1556,11 +1584,13 @@
         "rotate": 180
       }
     ],
-    "labels": {
-      "label": "B-V",
-      "angle": 155,
-      "percent": 0.85
-    },
+    "labels": [
+      {
+        "label": "B-V",
+        "angle": 155,
+        "percent": 0.85
+      }
+    ],
     "values": [
       {
         "angle": 270,
@@ -3431,7 +3461,7 @@
       }
     ]
   },
-  "485a": {
+  "485|a": {
     "color": "brown",
     "rotations": 1,
     "values": [
@@ -3487,7 +3517,7 @@
       }
     ]
   },
-  "485b": {
+  "485|b": {
     "color": "brown",
     "rotations": 1,
     "values": [
@@ -3527,7 +3557,7 @@
       }
     ]
   },
-  "486a": {
+  "486|a": {
     "color": "brown",
     "rotations": 1,
     "values": [
@@ -3583,7 +3613,7 @@
       }
     ]
   },
-  "486b": {
+  "486|b": {
     "color": "brown",
     "rotations": 1,
     "values": [

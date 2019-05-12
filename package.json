@@ -48,7 +48,9 @@
     "validate:themes": "ajv -s src/data/schemas/theme.schema.json -r src/data/schemas/\\*.schema.json -d src/data/themes/\\*.json",
     "validate:companies": "ajv -s src/data/schemas/companies.schema.json -r src/data/schemas/\\*.schema.json -d src/data/themes/companies/\\*.json",
     "validate:colors": "yarn validate:themes; yarn validate:companies",
-    "validate": "yarn validate:schemas; yarn validate:config; yarn validate:colors"
+    "validate:tiles": "ajv -s src/data/schemas/tiles.schema.json -r src/data/schemas/\\*.schema.json -d src/data/tiles/\\*.json",
+    "validate:games": "ajv -s src/data/schemas/game.schema.json -r src/data/schemas/\\*.schema.json -d src/data/games/\\*.json",
+    "validate": "yarn validate:schemas; yarn validate:config; yarn validate:colors; yarn validate:tiles; yarn validate:games"
   },
   "browserslist": [
     ">0.2%",

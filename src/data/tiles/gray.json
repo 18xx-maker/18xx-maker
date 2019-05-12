@@ -200,11 +200,13 @@
         "value": 70
       }
     ],
-    "labels": {
-      "label": "Z",
-      "angle": 330,
-      "percent": 0.88
-    },
+    "labels": [
+      {
+        "label": "Z",
+        "angle": 330,
+        "percent": 0.88
+      }
+    ],
     "track": [
       {
         "side": 1
@@ -225,11 +227,13 @@
   },
   "300": {
     "color": "gray",
-    "labels": {
-      "angle": 30,
-      "percent": 0.7,
-      "label": "Chi"
-    },
+    "labels": [
+      {
+        "angle": 30,
+        "percent": 0.7,
+        "label": "Chi"
+      }
+    ],
     "values": [
       {
         "angle": -10,
@@ -778,11 +782,13 @@
         "value": 100
       }
     ],
-    "labels": {
-      "label": "NY",
-      "angle": 205,
-      "percent": 0.84
-    },
+    "labels": [
+      {
+        "label": "NY",
+        "angle": 205,
+        "percent": 0.84
+      }
+    ],
     "cities": [
       {
         "size": 4,

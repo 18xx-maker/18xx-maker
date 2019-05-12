@@ -11,6 +11,7 @@ draft-07.
   tool.
 * [theme](/schemas/theme.schema.json) - Schema to define a theme file
 * [companies](/schemas/companies.schema.json) - Schema to define a companies file
+* [tiles](/schemas/tiles.schema.json) - Schema to define a tiles file **WIP**
 
 ## Validation
 
