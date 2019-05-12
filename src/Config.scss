@@ -54,4 +54,17 @@
     margin-top: 0.2em;
     line-height: 1.4em;
   }
+
+  div.preview-bar {
+    margin-left: 1em;
+    overflow: auto;
+    display: inline-block;
+    clear: both;
+  }
+
+  div.preview {
+    height: 1.4em;
+    width: 1.4em;
+    float: left;
+  }
 };

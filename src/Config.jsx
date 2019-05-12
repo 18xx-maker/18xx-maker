@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import { setConfig } from "./store/actions";
+import ColorContext from "./context/ColorContext";
 
 import defaultConfig from "./config.json";
 import schema from "./data/schemas/config.schema.json";
+
+import Color from "./data/Color";
 
 import assocPath from "ramda/src/assocPath";
 import chain from "ramda/src/chain";
@@ -141,6 +144,36 @@ const _Input = ({name, label, description, config, value, setConfig, dimension})
 };
 const Input = connect(inputState, inputDispatch)(_Input);
 
+const ThemePreview = ({}) => {
+  return (
+    <div className="preview-bar">
+      <Color>
+        {c => map(color => (
+          <div key={color} className="preview" style={{backgroundColor: c(color)}}/>
+        ), ["yellow", "green", "brown", "gray",
+            "plain", "offboard", "mountain", "water", "land"])}
+      </Color>
+    </div>
+  );
+};
+
+const CompaniesThemePreview = ({}) => {
+  return (
+    <div className="preview-bar">
+      <ColorContext.Provider value="companies">
+        <Color>
+          {c => map(color => (
+            <div key={color} className="preview" style={{backgroundColor: c(color)}}/>
+          ), ["red", "orange", "yellow", "green", "lime",
+              "blue", "cyan", "turquoise", "purple",
+              "lavender", "pink", "brown", "tan", "natural",
+              "white", "gray", "black"])}
+        </Color>
+      </ColorContext.Provider>
+    </div>
+  );
+};
+
 const Config = ({config, setConfig, resetConfig}) => {
   let setOption = event => setConfig({ ...config, [event.target.name]: event.target.value });
 
@@ -157,6 +190,7 @@ const Config = ({config, setConfig, resetConfig}) => {
         <option value="gmt">GMT</option>
         <option value="ps18xx">px18xx</option>
       </select>
+      <ThemePreview/>
       <p className="description">The theme determines which colors are used for all of the elements on the maps and tiles.</p>
       <label htmlFor="companiesTheme">Companies Theme: </label>
       <select id="companiesTheme" name="companiesTheme" value={config.companiesTheme} onChange={setOption}>
@@ -166,6 +200,7 @@ const Config = ({config, setConfig, resetConfig}) => {
         <option value="ps18xx">px18xx</option>
         <option value="rob">Rails on Board</option>
       </select>
+      <CompaniesThemePreview/>
       <p className="description">The company theme determines which colors are used for all of the elements on the maps and tiles.</p>
       <h3>Layout</h3>
       <Input name="pagination" label="Pagination Type"
