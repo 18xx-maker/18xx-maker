@@ -1,12 +1,10 @@
 import React from "react";
 import * as R from "ramda";
 
-import TileNav from "./nav/Tiles";
+import Svg from "../Svg";
+import Hex from "../Hex";
 
-import Svg from "./Svg";
-import Hex from "./Hex";
-
-require("./atoms/atoms.scss");
+require("../atoms/atoms.scss");
 
 const positions = [{
   group: "X and Y",
@@ -61,11 +59,6 @@ const groups = R.addIndex(R.chain)((g,id) => {
 const Positioning = () => {
   return (
     <>
-      <div className="PrintNotes">
-        <div>
-          <TileNav/>
-        </div>
-      </div>
       <div className="atoms">
         {groups(positions)}
       </div>

@@ -1,8 +1,6 @@
 import React from "react";
 import * as R from "ramda";
 
-import TileNav from "../nav/Tiles";
-
 import Svg from "../Svg";
 import Hex from "../Hex";
 
@@ -12,12 +10,14 @@ require("./atoms.scss");
 
 const atoms = [{
   group: "Hexes",
-  examples: [{},
-             {color: "water"},
+  examples: [{color: "plain"},
              {color: "mountain"},
+             {color: "water"},
+             {color: "land"},
              {color: "offboard", divides: [{side:3}]},
              {color: "yellow"},
              {color: "green"},
+             {color: "brown"},
              {color: "gray", divides: [{side:2}]},
              {color: "yellow/green"},
              {color: "green/brown"},
@@ -226,11 +226,6 @@ const groups = R.addIndex(R.chain)((g,id) => {
 const Atoms = () => {
   return (
     <ColorContext.Provider value="companies">
-      <div className="PrintNotes">
-        <div>
-          <TileNav/>
-        </div>
-      </div>
       <div className="atoms">
         {groups(atoms)}
       </div>
