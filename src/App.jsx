@@ -10,10 +10,7 @@ import Config from "./Config.jsx";
 import Docs from "./docs";
 import Logos from "./Logos";
 
-import Tiles from "./Tiles";
-import SingleTile from "./SingleTile";
-import Atoms from "./atoms";
-import Positioning from "./Positioning";
+import Tiles from "./tiles";
 
 import Background from "./Background";
 import Cards from "./cards";
@@ -58,10 +55,7 @@ const App = () => (
           <Route path="/docs/:id?" exact component={Docs} />
           <Route path="/logos" exact component={Logos} />
 
-          <Route path="/tiles" exact component={Tiles} />
-          <Route path="/tiles/atoms" component={Atoms} />
-          <Route path="/tiles/positioning" component={Positioning} />
-          <Route path="/tiles/:id" component={SingleTile} />
+          <Route path="/tiles" component={Tiles} />
 
           <Route path="/:game/background" component={Background} />
           <Route path="/:game/cards" component={Cards} />

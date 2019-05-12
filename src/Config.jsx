@@ -144,7 +144,7 @@ const _Input = ({name, label, description, config, value, setConfig, dimension})
 };
 const Input = connect(inputState, inputDispatch)(_Input);
 
-const ThemePreview = ({}) => {
+const ThemePreview = () => {
   return (
     <div className="preview-bar">
       <Color>
@@ -157,7 +157,7 @@ const ThemePreview = ({}) => {
   );
 };
 
-const CompaniesThemePreview = ({}) => {
+const CompaniesThemePreview = () => {
   return (
     <div className="preview-bar">
       <ColorContext.Provider value="companies">
