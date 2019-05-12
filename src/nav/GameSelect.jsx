@@ -22,7 +22,10 @@ const makeGameNode = game => (
 const GameSelect = ({match,history,location}) => {
   let name = match.params.game;
   let game = games[name];
-  let selection = location.pathname.split('/')[2] || "map";
+  let selection = "map";
+  if (game) {
+    selection = location.pathname.split('/')[2];
+  }
 
   let handleChange = event => {
     if(event.target.value !== name) {

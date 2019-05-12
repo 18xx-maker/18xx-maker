@@ -11,7 +11,10 @@ const ComponentSelect = ({match,history,location}) => {
     history.push(`/${gameName}/${event.target.value}`);
   };
 
-  let selection = location.pathname.split('/')[2] || "";
+  let selection = "";
+  if (game) {
+    selection = location.pathname.split('/')[2];
+  }
 
   return (
     <div className="select">

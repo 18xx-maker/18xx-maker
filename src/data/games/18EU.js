@@ -60,7 +60,7 @@ const game = {
       name: "Belgian National Railways",
       abbrev: "BNR",
       tokens: ["Free", "Free", "Free", "Free"],
-      color: "goldenrod",
+      color: "orange",
       shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
     },
     {
@@ -95,7 +95,7 @@ const game = {
       name: "Austrial Imperial Royal State",
       abbrev: "AIRS",
       tokens: ["Free", "Free", "Free", "Free"],
-      color: "lightYellow",
+      color: "natural",
       shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
     },
     {
@@ -109,7 +109,7 @@ const game = {
       name: "German State Railways",
       abbrev: "GSR",
       tokens: ["Free", "Free", "Free", "Free"],
-      color: "Black",
+      color: "black",
       shares: [ { quantity: 1, label: "President Share", percent: 20, shares: 2 }, { quantity: 8, percent: 10, shares: 1 } ]
     }
   ],
