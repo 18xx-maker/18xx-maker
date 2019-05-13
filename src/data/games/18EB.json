@@ -10,6 +10,10 @@
     "currency": "XAU",
     "orientation": "horizontal"
   },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/18291/unpublished-prototype",
+    "rules": "https://www.dropbox.com/sh/4onmo5d7mrx6ig7/AACmRPhO4cT_khBoWcpc8R57a?dl=0"
+  },
   "tokens": [
     "Round"
   ],

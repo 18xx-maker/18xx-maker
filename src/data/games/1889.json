@@ -12,6 +12,10 @@
     "color_10": "blue",
     "currency": "JPY"
   },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/23540/1889-history-shikoku-railways",
+    "rules": "http://dl.deepthoughtgames.com/1889-Rules.pdf"
+  },
   "tokens": [
     "Round"
   ],
