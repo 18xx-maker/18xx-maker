@@ -44,6 +44,12 @@ const MapSingle = ({ match, coords, hexWidth }) => {
         rotation: data.horizontal ? 0 : 90
       }}
     >
+      {game.wip && (
+      <div className="WIP">
+        <div>
+          <p>This game is a work in progress. It is not fully implemented</p>
+        </div>
+      </div>)}
       <div className="PrintNotes">
         <div>
           {variationSelect}

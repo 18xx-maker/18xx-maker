@@ -44,7 +44,8 @@
     "tiles": {},
     "tokens": {},
     "turns": {},
-    "trains": {}
+    "trains": {},
+    "wip": { "type": "boolean" }
   },
   "additionalProperties": false,
   "required": [
