@@ -811,6 +811,13 @@ footer a:hover {
   font-weight: bold;
 }
 
+.WIP {
+  background-color: #ffa;
+  border-bottom: 2px solid #ff9;
+  font-family: sans-serif;
+  font-weight: normal;
+}
+
 .PrintNotes {
   background-color: #ddd;
   border-bottom: 2px solid #bbb;
@@ -818,6 +825,7 @@ footer a:hover {
   font-weight: normal;
 }
 
+.WIP > div,
 .LegalNotes > div,
 .PrintNotes > div {
   width: 800px;
@@ -843,6 +851,7 @@ footer a:hover {
   margin: 0.5em 0 0.4em;
 }
 
+.WIP p,
 .LegalNotes p,
 .PrintNotes p {
   display: inline-block;
