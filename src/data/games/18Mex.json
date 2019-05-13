@@ -13,6 +13,10 @@
     "hexCoords": true,
     "currency": "MXN"
   },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/18485/18mex",
+    "rules": "http://dl.deepthoughtgames.com/18MEX-Rules.pdf"
+  },
   "tokens": [
     "Round"
   ],

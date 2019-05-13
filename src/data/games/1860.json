@@ -11,6 +11,10 @@
     "color_10": "orange",
     "currency": "GBP"
   },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/12750/1860-railways-isle-wight",
+    "rules": "https://boardgamegeek.com/filepage/79633/second-edition-rules"
+  },
   "tokens": [
     "Round"
   ],

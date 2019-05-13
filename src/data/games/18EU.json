@@ -15,6 +15,10 @@
     "hexCoords": true,
     "currency": "EUR"
   },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/5684/18eu",
+    "rules": "http://dl.deepthoughtgames.com/18EU-Rules.pdf"
+  },
   "tokens": [
     "Round",
     "#mountain60",

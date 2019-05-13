@@ -13,6 +13,10 @@
     "width": 150,
     "currency": "EUR"
   },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/28944/harzbahn-1873",
+    "rules": "https://www.boardgamegeek.com/filepage/68310/harzbahn-1873-english-rules"
+  },
   "tokens": [
     "Round"
   ],

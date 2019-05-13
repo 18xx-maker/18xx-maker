@@ -13,6 +13,9 @@
     "color_10": "orange",
     "currency": "ARS"
   },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/180204/1857"
+  },
   "tokens": [
     "Round",
     "+$10",

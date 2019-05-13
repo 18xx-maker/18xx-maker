@@ -10,6 +10,10 @@
     "titleX": 148,
     "currency": "JPY"
   },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/38335/1890",
+    "rules": "https://www.boardgamegeek.com/wiki/page/1890_English_Rules"
+  },
   "tokens": [
     "Round"
   ],

@@ -11,6 +11,9 @@
     "hexCoords": true,
     "currency": "EUR"
   },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/253320/1834"
+  },
   "tokens": [
     "Round"
   ],

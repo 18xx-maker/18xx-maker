@@ -11,6 +11,10 @@
     "titleY": 1275,
     "currency": "USD"
   },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/2612/18al",
+    "rules": "https://www.boardgamegeek.com/filepage/80315/18al-rules-v17"
+  },
   "tokens": [
     "Round"
   ],

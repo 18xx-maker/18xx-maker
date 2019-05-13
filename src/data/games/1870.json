@@ -12,6 +12,10 @@
     "hexCoords": true,
     "currency": "USD"
   },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/424/1870-railroading-across-trans-mississippi-1870",
+    "rules": "http://www.hexagonia.com/rules/MFG_1870.pdf"
+  },
   "tokens": [
     "Round",
     "#port",

@@ -12,6 +12,10 @@
     "extraHomeTokens": 6,
     "currency": "USD"
   },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/23421/1832-south",
+    "rules": "https://sites.google.com/a/dl.deepthoughtgames.com/www/1832-rules.pdf?attredirects=0&d=1"
+  },
   "tokens": [
     "Round",
     "#port",

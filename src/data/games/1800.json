@@ -16,6 +16,10 @@
     "paginated": false,
     "currency": "USD"
   },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/17132/1800",
+    "rules": "https://www.boardgamegeek.com/filepage/147724/1800-full-and-complete-rules"
+  },
   "tokens": [
     "Round"
   ],
