@@ -14,6 +14,7 @@ import SP, { ReactComponent as SP_Component } from "./SP.svg";
 import SSW, { ReactComponent as SSW_Component } from "./SSW.svg";
 import TP, { ReactComponent as TP_Component } from "./TP.svg";
 
+// 1889
 import AR, { ReactComponent as AR_Component } from "./AR.svg";
 import IR, { ReactComponent as IR_Component } from "./IR.svg";
 import KO, { ReactComponent as KO_Component } from "./KO.svg";
@@ -22,7 +23,16 @@ import SR, { ReactComponent as SR_Component } from "./SR.svg";
 import TR, { ReactComponent as TR_Component } from "./TR.svg";
 import UR, { ReactComponent as UR_Component } from "./UR.svg";
 
+// 18EU
 import NFL, { ReactComponent as NFL_Component } from "./NFL.svg";
+
+// 1849
+import AFG, { ReactComponent as AFG_Component } from "./AFG.svg";
+import ATA, { ReactComponent as ATA_Component } from "./ATA.svg";
+import CTL, { ReactComponent as CTL_Component } from "./CTL.svg";
+import IFT, { ReactComponent as IFT_Component } from "./IFT.svg";
+import RCS, { ReactComponent as RCS_Component } from "./RCS.svg";
+import SFA, { ReactComponent as SFA_Component } from "./SFA.svg";
 
 export default {
   ATSF : { src: ATSF, Component: ATSF_Component },
@@ -50,6 +60,14 @@ export default {
   TR : { src: TR, Component: TR_Component },
   UR : { src: UR, Component: UR_Component },
 
-  // EU
+  // 18EU
   NFL: { src: NFL, Component: NFL_Component },
+
+  // 1849
+  AFG: { src: AFG, Component: AFG_Component },
+  ATA: { src: ATA, Component: ATA_Component },
+  CTL: { src: CTL, Component: CTL_Component },
+  IFT: { src: IFT, Component: IFT_Component },
+  RCS: { src: RCS, Component: RCS_Component },
+  SFA: { src: SFA, Component: SFA_Component }
 };
