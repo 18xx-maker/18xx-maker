@@ -5,6 +5,7 @@ import * as R from "ramda";
 import Color from "./data/Color";
 import * as tinycolor from "tinycolor2";
 
+import addIndex from "ramda/src/addIndex";
 import is from "ramda/src/is";
 import map from "ramda/src/map";
 
@@ -95,8 +96,9 @@ const MarketCell = ({ borders, value, legend, par, colSpan, width, height }) => 
 
             let arrow = null;
             if (value && value.arrow) {
-              arrow = map(a => (
+              arrow = addIndex(map)((a,i) => (
                 <span
+                  key={`arrow-${i}`}
                   style={{
                     color: value.arrowColor
                       ? c(value.arrowColor)

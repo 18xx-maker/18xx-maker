@@ -53,8 +53,13 @@ body {
 .tileSheet div.row {
   clear: left;
   page-break-inside: avoid;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.tileSheet--die {
+  width: 8in;
   margin: auto;
-  overflow: hidden;
 }
 
 .tileSheet--offset div.row:nth-child(even) {
@@ -62,15 +67,33 @@ body {
 }
 
 .tileSheet--individual div.row svg {
-  margin: 0.125in 0.125in 0 0;
+  margin: 0 0.125in 0.125in 0;
 }
 
 .tileSheet--individual div.row svg:last-child {
-  margin: 0.125in 0 0 0;
+  margin: 0 0 0.125in 0;
+}
+
+.tileSheet--die div.row {
+  overflow: hidden;
+}
+
+.tileSheet--die div.row:first-child,
+.tileSheet--die div.row:last-child {
+  overflow: visible;
+}
+
+.tileSheet--die div.row svg {
+  margin: 0 0.05in 0 0;
+}
+
+.tileSheet--die div.row svg:last-child {
+  margin: 0;
 }
 
 .tileSheet svg {
   float: left;
+  position: relative;
 }
 
 a {

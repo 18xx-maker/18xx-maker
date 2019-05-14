@@ -56,7 +56,7 @@ const server = app.listen(9000);
       'tokens'
     ];
 
-    let gameDef = require(`../src/data/games/${game}`).default;
+    let gameDef = require(`../src/data/games/${game}`);
 
     for(let i=0;i<items.length;i++) {
       let item = items[i];
