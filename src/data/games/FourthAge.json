@@ -1612,6 +1612,9 @@
             "side": 5
           }
         ],
+        "removeBorders": [
+          6
+        ],
         "hexes": [
           "F24"
         ]
@@ -1758,6 +1761,10 @@
             "percent": 0.7
           }
         ],
+        "removeBorders": [
+          3,
+          5
+        ],
         "hexes": [
           "G25"
         ]
@@ -1810,6 +1817,9 @@
             "type": "offboard",
             "side": 5
           }
+        ],
+        "removeBorders": [
+          2
         ],
         "hexes": [
           "H24"

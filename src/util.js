@@ -1,25 +1,41 @@
 import adjust from "ramda/src/adjust";
 import append from "ramda/src/append";
+import ascend from "ramda/src/ascend";
 import chain from "ramda/src/chain";
 import compose from "ramda/src/compose";
 import curry from "ramda/src/curry";
-import drop from "ramda/src/drop";
+import defaultTo from "ramda/src/defaultTo";
 import find from "ramda/src/find";
 import fromPairs from "ramda/src/fromPairs";
 import head from "ramda/src/head";
 import is from "ramda/src/is";
-import isEmpty from "ramda/src/isEmpty";
 import join from "ramda/src/join";
 import juxt from "ramda/src/juxt";
 import lte from "ramda/src/lte";
 import map from "ramda/src/map";
+import nth from "ramda/src/nth";
 import prepend from "ramda/src/prepend";
+import prop from "ramda/src/prop";
 import propOr from "ramda/src/propOr";
 import reverse from "ramda/src/reverse";
+import sortWith from "ramda/src/sortWith";
+import split from "ramda/src/split";
 import tail from "ramda/src/tail";
-import take from "ramda/src/take";
 import toPairs from "ramda/src/toPairs";
 import toUpper from "ramda/src/toUpper";
+
+export const tileColors = ["yellow", "green", "brown", "gray", "mountain", "water", "land", "plain", "other"];
+
+const idBaseSort = compose(Number, defaultTo(0), nth(0), split("|"), propOr("", "id"));
+const idExtraSort = compose(Number, defaultTo(0), nth(1), split("|"), propOr("", "id"));
+const colorSort = compose(tileColors.indexOf, prop("color"), defaultTo({color:"other"}));
+export const sortTiles = sortWith(
+  [
+    ascend(colorSort),
+    ascend(idBaseSort),
+    ascend(idExtraSort)
+  ]
+);
 
 export const capitalize = compose(
   join(''),
@@ -27,13 +43,7 @@ export const capitalize = compose(
 );
 
 export const mapKeys = curry((fn, obj) =>
-  fromPairs(map(adjust(0, fn), toPairs(obj))));
-
-export const groupsOf = curry(function group(n, list) {
-  return isEmpty(list)
-    ? []
-    : prepend(take(n, list), group(n, drop(n, list)));
-});
+                             fromPairs(map(adjust(0, fn), toPairs(obj))));
 
 export const linear = curry((percent, p1, p2) => [
   p1[0] * percent + p2[0] * (1.0 - percent),
@@ -75,32 +85,6 @@ export const printableHeight = ({height, margins}) => {
   }
 
   return height - margin;
-};
-
-export const trackType = track => {
-  if (track.end === undefined && track.start === undefined) {
-    return null;
-  } else if (track.end === undefined) {
-    return "city";
-  } else if (track.start === undefined) {
-    return "stop";
-  } else {
-    let diff = Math.abs(track.start - track.end);
-    if (diff > 3) {
-      diff = Math.abs(6 - diff);
-    }
-
-    switch (diff) {
-      case 1:
-        return "sharp";
-      case 2:
-        return "gentle";
-      case 3:
-        return "straight";
-      default:
-        return "city";
-    }
-  }
 };
 
 export const fillArray = curry((getNumber, array) => {

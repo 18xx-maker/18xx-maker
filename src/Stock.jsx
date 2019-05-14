@@ -29,8 +29,6 @@ const Stock = ({match, cell, paper}) => {
   let pageHeight = ((rows * (1 + cell.height)) / 100.0) + 1.0;
   let pageWidth = ((cols * (1 + cell.width)) / 100.0) + 0.5;
 
-  console.log({cell, rows, cols, pageHeight, pageWidth});
-
   let css = `@media print {
     @page {
         size: ${pageWidth}in ${pageHeight}in;

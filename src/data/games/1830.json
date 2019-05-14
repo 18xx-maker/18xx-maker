@@ -968,10 +968,10 @@
         ],
         "track": [
           {
-            "start": 4
+            "side": 4
           },
           {
-            "start": 5
+            "side": 5
           }
         ],
         "hexes": [
@@ -1218,8 +1218,8 @@
         "color": "gray",
         "track": [
           {
-            "start": 2,
-            "end": 3
+            "type": "sharp",
+            "side": 2
           }
         ],
         "hexes": [

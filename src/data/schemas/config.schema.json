@@ -25,19 +25,7 @@
       "required": ["width", "height"]
     },
     "margins": {
-      "oneOf": [{
         "$ref": "#/definitions/dimension"
-      },{
-        "type": "object",
-        "properties": {
-          "top": { "$ref": "#/definitions/dimension" },
-          "right": { "$ref": "#/definitions/dimension" },
-          "bottom": { "$ref": "#/definitions/dimension" },
-          "left": { "$ref": "#/definitions/dimension" }
-        },
-        "required": ["top", "right", "bottom", "left"],
-        "additionalProperties": false
-      }]
     }
   },
 
@@ -81,13 +69,13 @@
     "tiles": {
       "type": "object",
       "properties": {
-        "width": {
-          "type": "number",
-          "exclusiveMinimum": 0
-        },
         "layout": {
           "type": "string",
           "enum": ["offset", "individual", "die"]
+        },
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0
         }
       },
       "required": [
