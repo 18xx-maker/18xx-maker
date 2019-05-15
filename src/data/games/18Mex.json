@@ -1442,12 +1442,12 @@
           {
             "side": 1,
             "dashed": true,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 2,
             "dashed": true,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -1489,7 +1489,7 @@
         ],
         "borders": [
           {
-            "color": "red",
+            "color": "offboard",
             "dashed": true,
             "side": 5
           }
@@ -1518,7 +1518,7 @@
           {
             "side": 6,
             "dashed": true,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -1565,17 +1565,17 @@
         ],
         "borders": [
           {
-            "color": "red",
+            "color": "offboard",
             "dashed": true,
             "side": 1
           },
           {
-            "color": "red",
+            "color": "offboard",
             "dashed": true,
             "side": 2
           },
           {
-            "color": "red",
+            "color": "offboard",
             "dashed": true,
             "side": 4
           }
@@ -1620,7 +1620,7 @@
         ],
         "borders": [
           {
-            "color": "red",
+            "color": "offboard",
             "dashed": true,
             "side": 3
           }
@@ -1639,7 +1639,7 @@
         ],
         "borders": [
           {
-            "color": "red",
+            "color": "offboard",
             "dashed": true,
             "side": 5
           }
@@ -1699,7 +1699,7 @@
         ],
         "borders": [
           {
-            "color": "red",
+            "color": "offboard",
             "dashed": true,
             "side": 4
           }

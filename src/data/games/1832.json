@@ -721,7 +721,7 @@
           "label": 275,
           "borders": [
             {
-              "color": "red",
+              "color": "offboard",
               "side": "bottom"
             }
           ]
@@ -731,7 +731,7 @@
           "label": 300,
           "borders": [
             {
-              "color": "red",
+              "color": "offboard",
               "side": "bottom"
             }
           ]
@@ -741,7 +741,7 @@
           "label": 325,
           "borders": [
             {
-              "color": "red",
+              "color": "offboard",
               "side": "bottom"
             }
           ]
@@ -751,7 +751,7 @@
           "label": 350,
           "borders": [
             {
-              "color": "red",
+              "color": "offboard",
               "side": "bottom"
             }
           ]
@@ -762,7 +762,7 @@
           "arrow": "up",
           "borders": [
             {
-              "color": "red",
+              "color": "offboard",
               "side": "bottom"
             }
           ]
@@ -804,7 +804,7 @@
           "label": 180,
           "borders": [
             {
-              "color": "red",
+              "color": "offboard",
               "side": "bottom"
             }
           ]
@@ -814,7 +814,7 @@
           "label": 200,
           "borders": [
             {
-              "color": "red",
+              "color": "offboard",
               "side": "bottom"
             }
           ]
@@ -825,11 +825,11 @@
           "arrow": "up",
           "borders": [
             {
-              "color": "red",
+              "color": "offboard",
               "side": "right"
             },
             {
-              "color": "red",
+              "color": "offboard",
               "side": "bottom"
             }
           ]
@@ -882,7 +882,7 @@
           "label": 120,
           "borders": [
             {
-              "color": "red",
+              "color": "offboard",
               "side": "bottom"
             }
           ]
@@ -893,11 +893,11 @@
           "arrow": "up",
           "borders": [
             {
-              "color": "red",
+              "color": "offboard",
               "side": "right"
             },
             {
-              "color": "red",
+              "color": "offboard",
               "side": "bottom"
             }
           ]
@@ -953,11 +953,11 @@
           "arrow": "up",
           "borders": [
             {
-              "color": "red",
+              "color": "offboard",
               "side": "right"
             },
             {
-              "color": "red",
+              "color": "offboard",
               "side": "bottom"
             }
           ]
@@ -1013,11 +1013,11 @@
           "arrow": "up",
           "borders": [
             {
-              "color": "red",
+              "color": "offboard",
               "side": "right"
             },
             {
-              "color": "red",
+              "color": "offboard",
               "side": "bottom"
             }
           ]
@@ -1066,11 +1066,11 @@
           "arrow": "up",
           "borders": [
             {
-              "color": "red",
+              "color": "offboard",
               "side": "right"
             },
             {
-              "color": "red",
+              "color": "offboard",
               "side": "bottom"
             }
           ]
@@ -1121,11 +1121,11 @@
           "arrow": "up",
           "borders": [
             {
-              "color": "red",
+              "color": "offboard",
               "side": "right"
             },
             {
-              "color": "red",
+              "color": "offboard",
               "side": "bottom"
             }
           ]
@@ -1173,7 +1173,7 @@
           "legend": 0,
           "borders": [
             {
-              "color": "red",
+              "color": "offboard",
               "side": "right"
             }
           ]

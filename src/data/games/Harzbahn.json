@@ -812,7 +812,7 @@
         "borders": [
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -835,7 +835,7 @@
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "tokens": [
@@ -915,7 +915,7 @@
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "tokens": [
@@ -952,7 +952,7 @@
         "borders": [
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "track": [
@@ -1037,7 +1037,7 @@
         "borders": [
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "tokens": [
@@ -1099,23 +1099,23 @@
           },
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -1194,7 +1194,7 @@
           },
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -1265,27 +1265,27 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -1304,7 +1304,7 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -1316,7 +1316,7 @@
         "borders": [
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -1334,7 +1334,7 @@
         "borders": [
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -1350,23 +1350,23 @@
           },
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "industries": [
@@ -1439,7 +1439,7 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "tokens": [
@@ -1482,7 +1482,7 @@
           },
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "mountain": {
@@ -1525,11 +1525,11 @@
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "mountain": {
@@ -1550,7 +1550,7 @@
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "mountain": {
@@ -1565,11 +1565,11 @@
         "borders": [
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "mountain": {
@@ -1594,11 +1594,11 @@
         "borders": [
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "mountain": {
@@ -1638,7 +1638,7 @@
         "borders": [
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "track": [
@@ -1671,27 +1671,27 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "labels": [
@@ -1757,11 +1757,11 @@
         "borders": [
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "tokens": [
@@ -1813,11 +1813,11 @@
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "track": [
@@ -1857,7 +1857,7 @@
         "borders": [
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "industries": [
@@ -1914,7 +1914,7 @@
         "borders": [
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "mountain": {
@@ -1954,27 +1954,27 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "values": [
@@ -2025,27 +2025,27 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "offBoardRevenue": {
@@ -2078,7 +2078,7 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "track": [
@@ -2096,11 +2096,11 @@
         "borders": [
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "track": [
@@ -2224,19 +2224,19 @@
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -2279,27 +2279,27 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -2314,7 +2314,7 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -2329,7 +2329,7 @@
         "borders": [
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -2351,11 +2351,11 @@
         "borders": [
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "mountain": {
@@ -2382,11 +2382,11 @@
         "borders": [
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "mountain": {
@@ -2413,7 +2413,7 @@
         "borders": [
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "mountain": {
@@ -2430,7 +2430,7 @@
         "borders": [
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "mountain": {
@@ -2452,27 +2452,27 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "labels": [
@@ -2534,15 +2534,15 @@
           },
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "mountain": {
@@ -2577,15 +2577,15 @@
         "borders": [
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -2597,7 +2597,7 @@
         "borders": [
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
@@ -2680,7 +2680,7 @@
         "borders": [
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -2725,27 +2725,27 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -2760,7 +2760,7 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -2780,7 +2780,7 @@
         "borders": [
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "mountain": {
@@ -2825,11 +2825,11 @@
         "borders": [
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "track": [
@@ -2904,27 +2904,27 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -2985,27 +2985,27 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -3017,7 +3017,7 @@
         "borders": [
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 2,
@@ -3073,7 +3073,7 @@
         "borders": [
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -3108,7 +3108,7 @@
         "borders": [
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -3143,7 +3143,7 @@
         "borders": [
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -3205,27 +3205,27 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
@@ -3237,11 +3237,11 @@
         "borders": [
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "track": [
@@ -3306,27 +3306,27 @@
         "borders": [
           {
             "side": 1,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 2,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 3,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 4,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 5,
-            "color": "red"
+            "color": "offboard"
           },
           {
             "side": 6,
-            "color": "red"
+            "color": "offboard"
           }
         ],
         "hexes": [
