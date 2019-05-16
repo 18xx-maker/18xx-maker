@@ -26,6 +26,19 @@ import UR, { ReactComponent as UR_Component } from "./UR.svg";
 // 18EU
 import NFL, { ReactComponent as NFL_Component } from "./NFL.svg";
 
+// 1848
+/*
+import BOE, { ReactComponent as BOE_Component } from "./BOE.svg";
+import CAR, { ReactComponent as CAR_Component } from "./CAR.svg";
+import CR, { ReactComponent as CR_Component } from "./CR.svg";
+import FT, { ReactComponent as FT_Component } from "./FT.svg";
+import NSW, { ReactComponent as NSW_Component } from "./NSW.svg";
+import QR, { ReactComponent as QR_Component } from "./QR.svg";
+import SAR, { ReactComponent as SAR_Component } from "./SAR.svg";
+import VR, { ReactComponent as VR_Component } from "./VR.svg";
+import WA, { ReactComponent as WA_Component } from "./WA.svg";
+*/
+
 // 1849
 import AFG, { ReactComponent as AFG_Component } from "./AFG.svg";
 import ATA, { ReactComponent as ATA_Component } from "./ATA.svg";
@@ -62,6 +75,19 @@ export default {
 
   // 18EU
   NFL: { src: NFL, Component: NFL_Component },
+
+  // 1848
+  /*
+  BOE: { src: BOE, Component: BOE_Component },
+  CAR: { src: CAR, Component: CAR_Component },
+  CR: { src: CR, Component: CR_Component },
+  FT: { src: FT, Component: FT_Component },
+  NSW: { src: NSW, Component: NSW_Component },
+  QR: { src: QR, Component: QR_Component },
+  SAR: { src: SAR, Component: SAR_Component },
+  VR: { src: VR, Component: VR_Component },
+  WA: { src: WA, Component: WA_Component },
+  */
 
   // 1849
   AFG: { src: AFG, Component: AFG_Component },

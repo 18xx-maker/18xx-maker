@@ -185,6 +185,68 @@
       }
     ]
   },
+  "240": {
+    "color": "gray",
+    "values": [
+      {
+        "angle": 150,
+        "percent": 0.82,
+        "value": 80
+      }
+    ],
+    "labels": [
+      {
+        "label": "K",
+        "angle": 270,
+        "percent": 0.82
+      }
+    ],
+    "cities": [
+      {
+        "size": 3,
+        "rotation": 30
+      }
+    ],
+    "track": [
+      {
+        "side": 4
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
+  "241": {
+    "color": "water",
+    "icons": [
+      {
+        "type": "port",
+        "angle": -30,
+        "percent": 0.6
+      }
+    ],
+    "values": [
+      {
+        "angle": 270,
+        "percent": 0,
+        "value": 50
+      }
+    ],
+    "offBoardTrack": [
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          }
+        ]
+  },
   "290": {
     "color": "gray",
     "cities": [
@@ -555,6 +617,39 @@
       {
         "type": "city",
         "side": 6
+      }
+    ]
+  },
+  "915": {
+    "color": "gray",
+    "values": [
+      {
+        "angle": 150,
+        "percent": 0.82,
+        "value": 50
+      }
+    ],
+    "cities": [
+      {
+        "size": 3,
+        "rotation": 30
+      }
+    ],
+    "track": [
+      {
+        "side": 4
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 6
+      },
+      {
+        "side": 5
       }
     ]
   },

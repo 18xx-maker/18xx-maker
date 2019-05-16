@@ -905,6 +905,43 @@
       }
     ]
   },
+  "239": {
+    "color": "brown",
+    "values": [
+      {
+        "angle": 150,
+        "percent": 0.82,
+        "value": 60
+      }
+    ],
+    "labels": [
+      {
+        "label": "K",
+        "angle": 270,
+        "percent": 0.82
+      }
+    ],
+    "cities": [
+      {
+        "size": 3,
+        "rotation": 30
+      }
+    ],
+    "track": [
+      {
+        "side": 4
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
   "297": {
     "color": "brown",
     "values": [
@@ -3761,6 +3798,166 @@
       },
       {
         "side": 5
+      }
+    ]
+  },
+  "X6": {
+    "color": "brown",
+    "rotations": [
+      6
+    ],
+    "values": [
+      {
+        "angle": -30,
+        "percent": 0.825,
+        "value": 70
+      }
+    ],
+    "labels": [
+      {
+        "label": "M",
+        "angle": 210,
+        "percent": 0.8
+      }
+    ],
+    "cities": [
+      {
+        "rotation": 90,
+        "size": 2,
+        "angle": 90,
+        "percent": 0.2
+      },
+      {
+        "angle": -90,
+        "percent": 0.6
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5,
+        "type": "sharp"
+      }
+    ]
+  },
+  "X7": {
+    "color": "brown",
+    "rotations": [
+      6
+    ],
+    "values": [
+      {
+        "angle": -30,
+        "percent": 0.75,
+        "value": 70
+      }
+    ],
+    "labels": [
+      {
+        "label": "M",
+        "angle": 210,
+        "percent": 0.8
+      }
+    ],
+    "cities": [
+      {
+        "rotation": 0,
+        "size": 2,
+        "angle": 270,
+        "percent": 0.4
+      },
+      {
+        "angle": 160,
+        "percent": 0.7
+      }
+    ],
+    "track": [
+      {
+        "side": 6,
+        "cross": "over"
+      },
+      {
+        "side": 2,
+        "cross": "over"
+      },
+      {
+        "side": 3,
+        "cross": "over"
+      },
+      {
+        "side": 4,
+        "cross": "under",
+        "type": "bent"
+      },
+      {
+        "side": 5,
+        "cross": "over"
+      }
+    ]
+  },
+  "X8": {
+    "color": "brown",
+    "rotations": [
+      6
+    ],
+    "values": [
+      {
+        "angle": 270,
+        "percent": 0.85,
+        "value": 70
+      }
+    ],
+    "labels": [
+      {
+        "label": "M",
+        "angle": 210,
+        "percent": 0.8
+      }
+    ],
+    "cities": [
+      {
+        "rotation": 0,
+        "size": 2,
+        "angle": 0,
+        "percent": 0.3
+      },
+      {
+        "angle": 130,
+        "percent": 0.65
+      }
+    ],
+    "track": [
+      {
+        "side": 1,
+        "cross": "over"
+      },
+      {
+        "side": 2,
+        "cross": "over"
+      },
+      {
+        "side": 3,
+        "type": "gentle",
+        "cross": "under"
+      },
+      {
+        "side": 4,
+        "cross": "over"
+      },
+      {
+        "side": 6,
+        "cross": "over"
       }
     ]
   }
