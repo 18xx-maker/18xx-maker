@@ -26,6 +26,9 @@ import UR, { ReactComponent as UR_Component } from "./UR.svg";
 // 18EU
 import NFL, { ReactComponent as NFL_Component } from "./NFL.svg";
 
+// 1848
+
+
 // 1849
 import AFG, { ReactComponent as AFG_Component } from "./AFG.svg";
 import ATA, { ReactComponent as ATA_Component } from "./ATA.svg";
