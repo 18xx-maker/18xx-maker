@@ -905,6 +905,43 @@
       }
     ]
   },
+  "239": {
+    "color": "brown",
+    "values": [
+      {
+        "angle": 150,
+        "percent": 0.82,
+        "value": 60
+      }
+    ],
+    "labels": [
+      {
+        "label": "K",
+        "angle": 270,
+        "percent": 0.82
+      }
+    ],
+    "cities": [
+      {
+        "size": 3,
+        "rotation": 30
+      }
+    ],
+    "track": [
+      {
+        "side": 4
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
   "297": {
     "color": "brown",
     "values": [
