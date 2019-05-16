@@ -558,6 +558,40 @@
       }
     ]
   },
+  "235": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.6,
+        "value": 30
+      }
+    ],
+    "labels": [
+      {
+        "angle": 45,
+        "percent": 0.6,
+        "label": "OO"
+      }
+    ],
+    "cities": [
+      {
+        "angle": -60,
+        "percent": 0.5
+      },
+      {
+        "angle": 120,
+        "percent": 0.5
+      }
+    ],
+    "track": [
+
+      {
+        "type": "stop",
+        "side": 3
+      }
+    ]
+  },
   "291": {
     "color": "yellow",
     "cities": [
@@ -694,10 +728,9 @@
     ],
     "terrain": [
       {
-        "type": "mountain",
         "angle": 150,
-        "percent": 0.8,
-        "cost": 80,
+        "percent": 0.85,
+        "cost": "¥80",
         "size": "tiny"
       }
     ],
