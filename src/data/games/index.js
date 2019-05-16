@@ -8,6 +8,7 @@ import game_1846 from "./1846";
 import game_1849 from "./1849";
 import game_1857 from "./1857";
 import game_1860 from "./1860";
+import game_1867 from "./1867";
 import game_1868 from "./1868";
 import game_1870 from "./1870";
 import game_1886 from "./1886";
@@ -32,6 +33,7 @@ let all_games = {
   "1849": game_1849,
   "1857": game_1857,
   "1860": game_1860,
+  "1867": game_1867,
   "1868": game_1868,
   "1870": game_1870,
   "1886": game_1886,
