@@ -2329,6 +2329,9 @@
             "side": 4
           }
         ],
+        "removeBorders": [
+          5
+        ],
         "hexes": [
           "I1"
         ]
@@ -2448,6 +2451,9 @@
             }
           ]
         },
+        "removeBorders": [
+          2
+        ],
         "hexes": [
           "J2"
         ]

@@ -937,25 +937,14 @@
     "hexes": [
       {
         "color": "offboard",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Gulf"
-          },
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "30"
-            },
-            {
-              "color": "brown",
-              "cost": "60"
-            }
-          ]
-        },
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 4
           }
+        ],
+        "removeBorders": [
+          5
         ],
         "hexes": [
           "I1"
@@ -1022,11 +1011,36 @@
         ]
       },
       {
-        "copy": "I1",
-        "offBoardTrack": [
+        "color": "offboard",
+        "offBoardRevenue": {
+          "angle": 150,
+          "percent": 1,
+          "name": {
+            "name": "Gulf"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            }
+          ]
+        },
+        "track": [
           {
+            "type": "offboard",
             "side": 3
+          },
+          {
+            "type": "offboard",
+            "side": 4
           }
+        ],
+        "removeBorders": [
+          2
         ],
         "hexes": [
           "J2"
@@ -1187,25 +1201,14 @@
       },
       {
         "color": "offboard",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Canadian West"
-          },
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "30"
-            },
-            {
-              "color": "brown",
-              "cost": "50"
-            }
-          ]
-        },
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 5
           }
+        ],
+        "removeBorders": [
+          4
         ],
         "hexes": [
           "A9"
@@ -1224,11 +1227,36 @@
         ]
       },
       {
-        "copy": "A9",
-        "offBoardTrack": [
+        "color": "offboard",
+        "offBoardRevenue": {
+          "angle": 90,
+          "percent": 1,
+          "name": {
+            "name": "Canadian West"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            }
+          ]
+        },
+        "track": [
           {
+            "type": "offboard",
+            "side": 5
+          },
+          {
+            "type": "offboard",
             "side": 6
           }
+        ],
+        "removeBorders": [
+          1
         ],
         "hexes": [
           "A11"
@@ -1400,6 +1428,9 @@
             "side": 6
           }
         ],
+        "removeBorders": [
+          3
+        ],
         "hexes": [
           "D14"
         ]
@@ -1429,6 +1460,9 @@
             "type": "gentle",
             "side": 1
           }
+        ],
+        "removeBorders": [
+          6
         ],
         "hexes": [
           "C15"
@@ -1582,6 +1616,9 @@
             "side": 5
           }
         ],
+        "removeBorders": [
+          4
+        ],
         "hexes": [
           "A17"
         ]
@@ -1663,6 +1700,9 @@
               "CPR"
             ]
           }
+        ],
+        "removeBorders": [
+          1
         ],
         "hexes": [
           "A19"

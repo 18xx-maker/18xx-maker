@@ -1069,42 +1069,33 @@
         },
         {
           "color": "offboard",
-          "offBoardTrack": [
+          "track": [
             {
+              "type": "offboard",
               "side": 6
             }
           ],
-          "offBoardRevenue": {
-            "name": {
-              "name": "Chile"
-            },
-            "revenues": [
-              {
-                "color": "yellow",
-                "cost": "0"
-              },
-              {
-                "color": "brown",
-                "cost": "70"
-              }
-            ]
-          },
+          "removeBorders": [
+            1
+          ],
           "hexes": [
             "A12"
           ]
         },
         {
           "color": "offboard",
-          "offBoardTrack": [
+          "track": [
             {
+              "type": "offboard",
               "side": 5
             }
           ],
           "offBoardRevenue": {
+            "angle": 180,
+            "percent": 1,
             "name": {
               "name": "Chile"
             },
-            "reverse": true,
             "revenues": [
               {
                 "color": "yellow",
@@ -1116,6 +1107,9 @@
               }
             ]
           },
+          "removeBorders": [
+            4
+          ],
           "hexes": [
             "A14"
           ]
@@ -1128,8 +1122,25 @@
               "side": 4
             }
           ],
+          "removeBorders": [
+            6
+          ],
           "hexes": [
-            "B17",
+            "B17"
+          ]
+        },
+        {
+          "color": "gray",
+          "track": [
+            {
+              "type": "sharp",
+              "side": 4
+            }
+          ],
+          "removeBorders": [
+            3
+          ],
+          "hexes": [
             "C18"
           ]
         },
@@ -1200,6 +1211,9 @@
               "side": 3
             }
           ],
+          "removeBorders": [
+            5
+          ],
           "hexes": [
             "F21"
           ]
@@ -1235,6 +1249,9 @@
               "type": "sharp",
               "side": 4
             }
+          ],
+          "removeBorders": [
+            2
           ],
           "hexes": [
             "G20"

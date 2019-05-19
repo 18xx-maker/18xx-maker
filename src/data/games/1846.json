@@ -944,37 +944,22 @@
       },
       {
         "color": "offboard",
-        "routeBonus": {
-          "value": "+30",
-          "percent": 0.5
-        },
-        "labels": [
+        "track": [
           {
-            "angle": 180,
-            "percent": 0.7,
-            "label": "E"
-          }
-        ],
-        "offBoardTrack": [
-          {
+            "type": "offboard",
             "side": 6
           }
         ],
-        "offBoardRevenue": {
-          "name": {
-            "name": "Buffalo"
-          },
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "30"
-            },
-            {
-              "color": "brown",
-              "cost": "60"
-            }
-          ]
-        },
+        "labels": [
+          {
+            "angle": 330,
+            "percent": 0.25,
+            "label": "E"
+          }
+        ],
+        "removeBorders": [
+          5
+        ],
         "hexes": [
           "C21"
         ]
@@ -983,21 +968,19 @@
         "color": "offboard",
         "routeBonus": {
           "value": "+30",
-          "percent": 0.5
+          "angle": 150,
+          "percent": 0.45,
+          "label": "E"
         },
-        "labels": [
+        "track": [
           {
-            "angle": 180,
-            "percent": 0.7,
-            "label": "E"
-          }
-        ],
-        "offBoardTrack": [
-          {
+            "type": "offboard",
             "side": 1
           }
         ],
         "offBoardRevenue": {
+          "angle": 150,
+          "percent": 1,
           "name": {
             "name": "Buffalo"
           },
@@ -1012,6 +995,9 @@
             }
           ]
         },
+        "removeBorders": [
+          2
+        ],
         "hexes": [
           "D22"
         ]
@@ -1218,37 +1204,22 @@
       },
       {
         "color": "offboard",
-        "routeBonus": {
-          "value": "+20",
-          "percent": 0.5
-        },
         "labels": [
           {
-            "angle": 180,
-            "percent": 0.7,
+            "angle": 30,
+            "percent": 0.25,
             "label": "E"
           }
         ],
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 1
           }
         ],
-        "offBoardRevenue": {
-          "name": {
-            "name": "Pittsburgh"
-          },
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "30"
-            },
-            {
-              "color": "brown",
-              "cost": "70"
-            }
-          ]
-        },
+        "removeBorders": [
+          6
+        ],
         "hexes": [
           "F22"
         ]
@@ -1382,17 +1353,6 @@
       },
       {
         "color": "offboard",
-        "routeBonus": {
-          "value": "+20",
-          "percent": 0.5
-        },
-        "labels": [
-          {
-            "angle": 180,
-            "percent": 0.7,
-            "label": "E"
-          }
-        ],
         "tunnels": [
           {
             "cost": "$20",
@@ -1400,15 +1360,24 @@
             "percent": 1
           }
         ],
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 1
           },
           {
+            "type": "offboard",
             "side": 2
           }
         ],
+        "routeBonus": {
+          "angle": 210,
+          "percent": 0.45,
+          "value": "+20"
+        },
         "offBoardRevenue": {
+          "angle": 210,
+          "percent": 1,
           "name": {
             "name": "Pittsburgh"
           },
@@ -1423,6 +1392,9 @@
             }
           ]
         },
+        "removeBorders": [
+          3
+        ],
         "hexes": [
           "G21"
         ]

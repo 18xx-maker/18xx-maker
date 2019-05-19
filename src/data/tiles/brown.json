@@ -3803,9 +3803,6 @@
   },
   "X6": {
     "color": "brown",
-    "rotations": [
-      6
-    ],
     "values": [
       {
         "angle": -30,
@@ -3853,9 +3850,6 @@
   },
   "X7": {
     "color": "brown",
-    "rotations": [
-      6
-    ],
     "values": [
       {
         "angle": -30,
@@ -3908,9 +3902,6 @@
   },
   "X8": {
     "color": "brown",
-    "rotations": [
-      6
-    ],
     "values": [
       {
         "angle": 270,

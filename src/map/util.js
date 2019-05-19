@@ -119,7 +119,7 @@ export const mergeHex = (a, b) => {
       if(key === "track" || key === "offBoardTrack") {
         // Concat tracks
         return concat(da, db);
-      } else if(key === "companies" || key === "hexes") {
+      } else if(key === "companies" || key === "hexes" || key === "removeBorders") {
         // New companies and hexes only
         return da;
       } else {

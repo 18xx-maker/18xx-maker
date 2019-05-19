@@ -6,8 +6,9 @@
     "background": "pink",
     "width": 150,
     "color_10": "orange",
-    "titleX": -100,
+    "titleX": 40,
     "titleY": 900,
+    "titleSize": 160,
     "hexCoords": true,
     "currency": "USD"
   },
@@ -833,6 +834,9 @@
             "side": 6
           }
         ],
+        "removeBorders": [
+          4
+        ],
         "hexes": [
           "A4"
         ]
@@ -871,6 +875,9 @@
           {
             "side": 6
           }
+        ],
+        "removeBorders": [
+          1
         ],
         "hexes": [
           "A6"
@@ -1342,7 +1349,7 @@
               "percent": 0.667
             }
           ],
-          
+
           "borders": [
           {
             "side": 4,
