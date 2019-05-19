@@ -11,17 +11,21 @@ require("./atoms.scss");
 const atoms = [{
   group: "Hexes",
   examples: [{color: "plain"},
+             {color: "offboard"},
              {color: "mountain"},
              {color: "water"},
-             {color: "land"},
-             {color: "offboard", divides: [{side:3}]},
+             {color: "land", divides: [{side:3}]},
              {color: "yellow"},
              {color: "green"},
              {color: "brown"},
-             {color: "gray", divides: [{side:2}]},
+             {color: "gray"},
+             {color: "orange", divides: [{side:2}]},
              {color: "yellow/green"},
              {color: "green/brown"},
-             {color: "brown/gray"}]
+             {color: "brown/gray"},
+             {color: "mountain", removeBorders: [1,4]},
+             {color: "water", removeBorders: [1,3,5]}
+            ]
 },{
   group: "Values",
   examples: [{values: [{value: 20}]},

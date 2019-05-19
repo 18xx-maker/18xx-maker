@@ -16,6 +16,15 @@
       }
     },
 
+    "removeBorders": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 6
+      }
+    },
+
     "borders": {
       "type": "array",
       "items": {
@@ -230,6 +239,7 @@
         "terrain": { "$ref": "#/definitions/terrain" },
         "names": { "$ref": "#/definitions/names" },
         "borders": { "$ref": "#/definitions/borders" },
+        "removeBorders": { "$ref": "#/definitions/removeBorders" },
         "rotations": {
           "oneOf": [
             {

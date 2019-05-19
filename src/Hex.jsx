@@ -16,6 +16,7 @@ import Company from "./atoms/Company";
 import Divide from "./atoms/Divide";
 import Good from "./atoms/Good";
 import Hex from "./atoms/Hex";
+import HexBorder from "./atoms/HexBorder";
 import Icon from "./atoms/Icon";
 import Id from "./atoms/Id";
 import Industry from "./atoms/Industry";
@@ -188,7 +189,6 @@ const HexTile = ({ hex, id, border, transparent, map }) => {
                 {names}
                 {tokens}
                 {bonus}
-                {offBoardRevenue}
                 {terrain}
                 {divides}
                 {borders}
@@ -197,7 +197,7 @@ const HexTile = ({ hex, id, border, transparent, map }) => {
           )}
         </HexContext.Consumer>
 
-        {border && <Hex border={true} />}
+        <HexBorder removeBorders={hex.removeBorders} border={border} map={map}/>
         {outsideCityBorders}
 
         {id && <Id id={idBase} extra={idExtra} />}
