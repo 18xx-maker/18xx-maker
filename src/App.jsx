@@ -82,6 +82,48 @@ const App = () => (
           xmlns="http://www.w3.org/2000/svg"
           style={{height:0,width:0,position:"absolute"}}>
           <defs>
+            <mask id="hexMask">
+              <rect x="-100" y="-100" width="200" height="200" fill="black"/>
+              <polygon points="-86.6025,0 -43.30125,-75 43.30125,-75 86.6025,0 43.30125,75 -43.30125,75"
+                       fill="white"
+                       stroke="white"
+                       strokeWidth="2" />
+            </mask>
+            <mask id="hexBleedMask">
+              <rect x="-100" y="-100" width="200" height="200" fill="black"/>
+              <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 49.07475,85 -49.07475,85"
+                       fill="white"
+                       stroke="white"
+                       strokeWidth="2" />
+            </mask>
+            <mask id="hexBleedMaskOffset">
+              <rect x="-100" y="-100" width="200" height="200" fill="black"/>
+              <polygon points="-86.6025,0 -92.376,-9.999995337 -54.84825,-75 -43.30125,-75 -37.52775,-85 37.52775,-85 43.30125,-75 54.84825,-75 92.376,-9.999995337 86.6025,0 92.376,9.999995337 54.84825,75 43.30125,75 37.52775,85 -37.52775,85 -43.30125,75 -54.84825,75 -92.376,9.999995337"
+                       fill="white"
+                       stroke="white"
+                       strokeWidth="2" />
+            </mask>
+            <mask id="hexBleedMaskDie">
+              <rect x="-100" y="-100" width="200" height="200" fill="black"/>
+              <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 54.84825,75 -54.84825,75"
+                       fill="white"
+                       stroke="white"
+                       strokeWidth="2" />
+            </mask>
+            <mask id="hexBleedMaskDieTop">
+              <rect x="-100" y="-100" width="200" height="200" fill="black"/>
+              <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 54.84825,75 -54.84825,75"
+                       fill="white"
+                       stroke="white"
+                       strokeWidth="2" />
+            </mask>
+            <mask id="hexBleedMaskDieBottom">
+              <rect x="-100" y="-100" width="200" height="200" fill="black"/>
+              <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 49.07475,85 -49.07475,85"
+                       fill="white"
+                       stroke="white"
+                       strokeWidth="2" />
+            </mask>
             <clipPath id="hexClip">
               <polygon points="-86.6025,0 -43.30125,-75 43.30125,-75 86.6025,0 43.30125,75 -43.30125,75"
                        fill="black"

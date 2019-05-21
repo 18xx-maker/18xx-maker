@@ -134,13 +134,13 @@ const TileSheet = ({ match, paper, layout, hexWidth }) => {
 
           if (layout === "die") {
             if (tileAbove(page, i) && tileBelow(page, i)) {
-              clipPath = "hexBleedClipDie";
+              clipPath = "hexBleedMaskDie";
             } else if (tileAbove(page, i)) {
-              clipPath = "hexBleedClipDieBottom";
+              clipPath = "hexBleedMaskDieBottom";
             } else if (tileBelow(page, i)) {
-              clipPath = "hexBleedClipDieTop";
+              clipPath = "hexBleedMaskDieTop";
             } else {
-              clipPath = "hexBleedClip";
+              clipPath = "hexBleedMask";
             }
           }
 
@@ -181,11 +181,11 @@ const TileSheet = ({ match, paper, layout, hexWidth }) => {
         }
 
         return (
-          <g clipPath={`url(#${clipPath})`}
+          <g mask={`url(#${clipPath})`}
              transform={`translate(${c.getX(i)} ${c.getY(i)})`}
              key={`${hex.id}-${i}`}>
             <g transform={`rotate(${rotation})`}>
-              <Hex hex={hex} id={hex.id} clipPath="hexBleedClip" />
+              <Hex hex={hex} id={hex.id} clipPath="hexBleedMask" />
             </g>
           </g>
         )
