@@ -182,7 +182,7 @@ const TileSheet = ({ match, paper, layout, hexWidth }) => {
 
         return (
           <g mask={`url(#${mask})`}
-             transform={`translate(${c.getX(i)} ${c.getY(i)})`}
+             transform={`translate(${c.getX(i)} ${c.getY(i)}) scale(${hexWidth/150})`}
              key={`${hex.id}-${i}`}>
             <g transform={`rotate(${rotation})`}>
               <Hex hex={hex} id={hex.id} mask="hexBleedMask" />
