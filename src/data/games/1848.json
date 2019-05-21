@@ -752,11 +752,6 @@
     "7": 4,
     "8": 9,
     "9": 12,
-    "55": 1,
-    "56": 1,
-    "57": 3,
-    "69": 1,
-    "235": 3,
     "14": 3,
     "15": 6,
     "16": 1,
@@ -772,10 +767,6 @@
     "29": 1,
     "30": 1,
     "31": 1,
-    "59": 2,
-    "236": 2,
-    "237": 1,
-    "238": 1,
     "39": 1,
     "40": 1,
     "41": 1,
@@ -785,17 +776,26 @@
     "45": 1,
     "46": 1,
     "47": 1,
+    "55": 1,
+    "56": 1,
+    "57": 3,
+    "59": 2,
     "64": 1,
     "65": 1,
     "66": 1,
     "67": 1,
     "68": 1,
+    "69": 1,
     "70": 1,
+    "235": 3,
+    "236": 2,
+    "237": 1,
+    "238": 1,
     "239": 3,
-    "611": 4,
     "240": 2,
-    "915": 1,
-    "241": 1
+    "241": 1,
+    "611": 4,
+    "915": 1
   },
   "map": {
     "hexes": [
@@ -923,12 +923,12 @@
       {
         "color": "offboard",
         "labels": [
-            {
-              "label": "K",
-              "angle": 180,
-              "percent": 0.667
-            }
-          ],
+          {
+            "label": "K",
+            "angle": 180,
+            "percent": 0.667
+          }
+        ],
         "offBoardRevenue": {
           "name": {
             "name": "Perth"
@@ -956,15 +956,15 @@
           ]
         },
         "cities": [
-            {
-              "companies": [
-                {
-                  "label": "WA",
-                  "color": "red"
-                }
-              ]
-            }
-          ],
+          {
+            "companies": [
+              {
+                "label": "WA",
+                "color": "red"
+              }
+            ]
+          }
+        ],
         "offBoardTrack": [
           {
             "side": 4
@@ -1094,7 +1094,7 @@
           "E8"
         ]
       },
-            {
+      {
         "color": "plain",
         "terrain": [
           {
@@ -1204,279 +1204,279 @@
         ]
       },
       {
-          "color": "plain",
-          "labels": [
-            {
-              "label": "K",
-              "angle": 180,
-              "percent": 0.667
-            }
-          ],
-          "cities": [
-            {
-              "name": {
-                "name": "Brisbane",
-                "reverse": true
-              },
-              "companies": [
-                {
-                  "label": "QR",
-                  "color": "green"
-                }
-              ]
-            }
-          ],
-          "hexes": [
-            "B19"
-          ]
-        },
-        {
-          "color": "plain",
-          "labels": [
-            {
-              "label": "K",
-              "angle": 180,
-              "percent": 0.667
-            }
-          ],
-          "cities": [
-            {
-              "name": {
-                "name": "Sydney",
-                "reverse": true
-              },
-              "companies": [
-                {
-                  "label": "NSW",
-                  "color": "orange"
-                }
-              ]
-            }
-          ],
-          "hexes": [
-            "F17"
-          ]
-        },
-        {
-          "color": "plain",
-          "borders": [
+        "color": "plain",
+        "labels": [
+          {
+            "label": "K",
+            "angle": 180,
+            "percent": 0.667
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Brisbane",
+              "reverse": true
+            },
+            "companies": [
+              {
+                "label": "QR",
+                "color": "green"
+              }
+            ]
+          }
+        ],
+        "hexes": [
+          "B19"
+        ]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "K",
+            "angle": 180,
+            "percent": 0.667
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Sydney",
+              "reverse": true
+            },
+            "companies": [
+              {
+                "label": "NSW",
+                "color": "orange"
+              }
+            ]
+          }
+        ],
+        "hexes": [
+          "F17"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [
           {
             "side": 1,
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 5,
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 6,
             "dashed": true,
             "color": "offboard"
           }
         ],
-          "cities": [
-            {
-              "name": {
-                "name": "Canberra",
-                "reverse": true
-              },
-              "companies": [
-                {
-                  "label": "FT",
-                  "color": "cyan"
-                }
-              ]
-            }
-          ],
-          "hexes": [
-            "G14"
-          ]
-        },
-        {
-          "color": "plain",
-          "labels": [
-            {
-              "label": "K",
-              "angle": 180,
-              "percent": 0.667
-            }
-          ],
-          "cities": [
-            {
-              "name": {
-                "name": "Melbourne",
-                "reverse": true
-              },
-              "companies": [
-                {
-                  "label": "VR",
-                  "color": "yellow"
-                }
-              ]
-            }
-          ],
-          "hexes": [
-            "H11"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Port Augusta"
-              },
-              "companies": [
-                {
-                  "label": "CAR",
-                  "color": "black"
-                }
-              ]
-            }
-          ],
-          "hexes": [
-            "E4"
-          ]
-        },
-        {
-          "color": "plain",
-          "labels": [
-            {
-              "label": "K",
-              "angle": 180,
-              "percent": 0.667
-            }
-          ],
-
-          "borders": [
+        "cities": [
+          {
+            "name": {
+              "name": "Canberra",
+              "reverse": true
+            },
+            "companies": [
+              {
+                "label": "FT",
+                "color": "cyan"
+              }
+            ]
+          }
+        ],
+        "hexes": [
+          "G14"
+        ]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "K",
+            "angle": 180,
+            "percent": 0.667
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Melbourne",
+              "reverse": true
+            },
+            "companies": [
+              {
+                "label": "VR",
+                "color": "yellow"
+              }
+            ]
+          }
+        ],
+        "hexes": [
+          "H11"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Port Augusta"
+            },
+            "companies": [
+              {
+                "label": "CAR",
+                "color": "black"
+              }
+            ]
+          }
+        ],
+        "hexes": [
+          "E4"
+        ]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "K",
+            "angle": 180,
+            "percent": 0.667
+          }
+        ],
+        "borders": [
           {
             "side": 4,
             "dashed": true,
             "color": "offboard"
           }
-        ],"cities": [
-            {
-              "name": {
-                "name": "Adelaide",
-                "reverse": true
-              },
-              "companies": [
-                {
-                  "label": "SAR",
-                  "color": "purple"
-                }
-              ]
-            }
-          ],
-          "hexes": [
-            "G6"
-          ]
-        },
-        {
-          "color": "plain",
-          "borders": [
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Adelaide",
+              "reverse": true
+            },
+            "companies": [
+              {
+                "label": "SAR",
+                "color": "purple"
+              }
+            ]
+          }
+        ],
+        "hexes": [
+          "G6"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [
           {
             "side": 6,
             "dashed": true,
             "color": "offboard"
           }
         ],
-          "cities": [
-            {
-              "name": {
-                "name": "Southport",
-                "reverse": true
-              }
-            }
-          ],
-          "hexes": [
-            "C20"
-          ]
-        },
-      {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Newcastle",
-                "reverse": true
-              }
-            }
-          ],
-          "hexes": [
-            "E18"
-          ]
-        },
-      {
-       "color": "plain",
-          "cities": [
-            {
-              "name": {
-               "name": "Dubbo",
+        "cities": [
+          {
+            "name": {
+              "name": "Southport",
               "reverse": true
-             }
+            }
           }
-          ],
-          "hexes": [
-            "E14"
-          ]
-        },
+        ],
+        "hexes": [
+          "C20"
+        ]
+      },
       {
-       "color": "plain",
-          "borders": [
-                    {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Newcastle",
+              "reverse": true
+            }
+          }
+        ],
+        "hexes": [
+          "E18"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Dubbo",
+              "reverse": true
+            }
+          }
+        ],
+        "hexes": [
+          "E14"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
             "side": 6,
             "dashed": true,
             "color": "offboard"
           }
         ],
-          "cities": [
-            {
-              "name": {
-               "name": "Wagga Wagga",
+        "cities": [
+          {
+            "name": {
+              "name": "Wagga Wagga",
               "reverse": true
-             }
+            }
           }
-          ],
-          "hexes": [
-            "F13"
-          ]
-        },
+        ],
+        "hexes": [
+          "F13"
+        ]
+      },
       {
-       "color": "plain",
-          "borders": [
+        "color": "plain",
+        "borders": [
           {
             "side": 1,
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 2,
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 3,
             "dashed": true,
             "color": "offboard"
           }
         ],
-          "cities": [
-            {
-              "name": {
-               "name": "Broken Hill",
+        "cities": [
+          {
+            "name": {
+              "name": "Broken Hill",
               "reverse": true
-             }
+            }
           }
-          ],
-          "hexes": [
-            "D9"
-          ]
-        },
+        ],
+        "hexes": [
+          "D9"
+        ]
+      },
       {
-       "color": "plain",
+        "color": "plain",
         "borders": [
           {
             "side": 1,
@@ -1485,19 +1485,19 @@
           }
         ],
         "cities": [
-            {
-              "name": {
-               "name": "Geelong",
+          {
+            "name": {
+              "name": "Geelong",
               "reverse": true
-             }
+            }
           }
-          ],
-          "hexes": [
-            "H9"
-          ]
-        },
+        ],
+        "hexes": [
+          "H9"
+        ]
+      },
       {
-       "color": "plain",
+        "color": "plain",
         "borders": [
           {
             "side": 3,
@@ -1511,45 +1511,45 @@
           }
         ],
         "cities": [
-            {
-              "name": {
-               "name": "Mount Gambier",
+          {
+            "name": {
+              "name": "Mount Gambier",
               "reverse": true
-             }
+            }
           }
-          ],
-          "hexes": [
-            "H7"
-          ]
-        },
+        ],
+        "hexes": [
+          "H7"
+        ]
+      },
       {
-       "color": "plain",
-          "cities": [
-            {
-              "name": {
-               "name": "Port Pirie",
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Port Pirie",
               "reverse": true
-             }
+            }
           }
-          ],
-          "hexes": [
-            "F5"
-          ]
-        },
+        ],
+        "hexes": [
+          "F5"
+        ]
+      },
       {
-       "color": "plain",
-          "cities": [
-            {
-              "name": {
-               "name": "Whyalla",
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Whyalla",
               "reverse": true
-             }
+            }
           }
-          ],
-          "hexes": [
-            "E2"
-          ]
-        },
+        ],
+        "hexes": [
+          "E2"
+        ]
+      },
       {
         "color": "plain",
         "terrain": [
@@ -1640,7 +1640,7 @@
           }
         ],
         "borders": [
-                    {
+          {
             "side": 6,
             "dashed": true,
             "color": "offboard"
@@ -1713,17 +1713,17 @@
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 2,
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 6,
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 5,
             "dashed": true,
             "color": "offboard"
@@ -1733,9 +1733,9 @@
           "C8"
         ]
       },
-            {
+      {
         "borders": [
-                    {
+          {
             "side": 4,
             "dashed": true,
             "color": "offboard"
@@ -1746,19 +1746,18 @@
         ]
       },
       {
-
         "borders": [
-                    {
+          {
             "side": 3,
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 4,
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 5,
             "dashed": true,
             "color": "offboard"
@@ -1768,7 +1767,7 @@
           "D7"
         ]
       },
-            {
+      {
         "terrain": [
           {
             "type": "cactus",
@@ -1781,17 +1780,17 @@
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 2,
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 6,
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 5,
             "dashed": true,
             "color": "offboard"
@@ -1801,7 +1800,7 @@
           "E8"
         ]
       },
-            {
+      {
         "terrain": [
           {
             "type": "cactus",
@@ -1809,7 +1808,7 @@
           }
         ],
         "borders": [
-                    {
+          {
             "side": 4,
             "dashed": true,
             "color": "offboard"
@@ -1820,7 +1819,6 @@
         ]
       },
       {
-
         "borders": [
           {
             "side": 2,
@@ -1884,14 +1882,13 @@
         ]
       },
       {
-
         "borders": [
-                    {
+          {
             "side": 3,
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 4,
             "dashed": true,
             "color": "offboard"
@@ -1901,7 +1898,7 @@
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 1,
             "dashed": true,
             "color": "offboard"
@@ -1912,14 +1909,13 @@
         ]
       },
       {
-
         "borders": [
-                    {
+          {
             "side": 3,
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 4,
             "dashed": true,
             "color": "offboard"
@@ -1935,14 +1931,13 @@
         ]
       },
       {
-
         "borders": [
-                    {
+          {
             "side": 1,
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 2,
             "dashed": true,
             "color": "offboard"
@@ -1958,7 +1953,6 @@
         ]
       },
       {
-
         "borders": [
           {
             "side": 6,
@@ -1971,14 +1965,13 @@
         ]
       },
       {
-
         "borders": [
-                    {
+          {
             "side": 1,
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 5,
             "dashed": true,
             "color": "offboard"
@@ -2001,12 +1994,12 @@
           }
         ],
         "borders": [
-                    {
+          {
             "side": 2,
             "dashed": true,
             "color": "offboard"
           },
-                    {
+          {
             "side": 3,
             "dashed": true,
             "color": "offboard"
@@ -2024,7 +2017,7 @@
           }
         ],
         "borders": [
-                    {
+          {
             "side": 3,
             "dashed": true,
             "color": "offboard"

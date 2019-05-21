@@ -1,20 +1,14 @@
 {
   "info": {
-    "title": "1889",
-    "subtitle": "History of Shikoku Railways",
-    "designer": "Yasutaka Ikeda",
+    "title": "1867 (WIP)",
+    "designer": "Ian Wilson",
     "background": "water",
     "width": 150,
     "orientation": "horizontal",
-    "titleX": 280,
-    "titleY": 860,
+    "titleX": 1200,
+    "titleY": 1200,
     "color_5": "cyan",
-    "color_10": "blue",
-    "currency": "JPY"
-  },
-  "links": {
-    "bgg": "https://www.boardgamegeek.com/boardgame/23540/1889-history-shikoku-railways",
-    "rules": "http://dl.deepthoughtgames.com/1889-Rules.pdf"
+    "color_10": "blue"
   },
   "tokens": [
     "Round"
@@ -366,12 +360,12 @@
     ],
     "legend": [
       {
-        "color": "yellow",
+        "color": "cyan",
         "description": "Shares of this corporation do not count toward the certificate limit",
         "icon": "certificate"
       },
       {
-        "color": "orange",
+        "color": "blue",
         "description": "Players may own more than 60% of this corporation",
         "icon": "percentage"
       }
@@ -544,7 +538,7 @@
     {
       "name": "Tosa Electric Railway",
       "abbrev": "TR",
-      "color": "green",
+      "color": "darkGreen",
       "tokens": [
         "Free",
         "¥40",
@@ -588,7 +582,7 @@
     {
       "name": "Uwajima Railway",
       "abbrev": "UR",
-      "color": "brown",
+      "color": "maroon",
       "tokens": [
         "Free",
         "¥40",
@@ -655,15 +649,15 @@
   ],
   "privates": [
     {
-      "name": "Takamatsu E-Railroad",
-      "price": "¥20",
-      "revenue": "¥5",
-      "desription": "Blocks Takamatsu (K4)."
+      "name": "Champlain & St. Lawrence",
+      "price": "Min Bid $20",
+      "revenue": "$10",
+      "description": "Face Value $30."
     },
     {
       "name": "Mitsubishi Ferry",
-      "price": "¥30",
-      "revenue": "¥5",
+      "price": "$30",
+      "revenue": "$5",
       "description": "Player owner may place the port tile on a coastal town (B11, G10, I12, or J9) without a tile on it already, outside of the operating rounds of a company controller by another player. The player need not control a company or have connectivity to the placed tile from one of their companies. This does not close the company."
     },
     {
@@ -699,46 +693,19 @@
     }
   ],
   "tiles": {
-    "3": 2,
-    "5": 2,
-    "6": 2,
-    "7": 2,
-    "8": 5,
-    "9": 5,
-    "12": 1,
-    "13": 1,
-    "14": 1,
-    "15": 3,
-    "16": 1,
-    "19": 1,
-    "20": 1,
-    "23": 2,
-    "24": 2,
-    "25": 1,
-    "26": 1,
-    "27": 1,
-    "28": 1,
-    "29": 1,
-    "39": 1,
-    "40": 1,
-    "41": 1,
-    "42": 1,
-    "45": 1,
-    "46": 1,
-    "47": 1,
-    "57": 2,
-    "58": 3,
-    "205": 1,
-    "206": 1,
-    "437": 1,
-    "438": 1,
-    "439": 1,
-    "440": 1,
-    "448": 4,
-    "465": 1,
-    "466": 1,
-    "492": 1,
-    "611": 2
+    "15": 2,
+    "70": 2,
+    "120": 1,
+    "122": 1,
+    "124": 1,
+    "X1": 1,
+    "X2": 1,
+    "X3": 1,
+    "X4": 1,
+    "X5": 1,
+    "X6": 1,
+    "X7": 1,
+    "X8": 1
   },
   "map": {
     "print": "landscape",
@@ -746,413 +713,53 @@
       {
         "color": "plain",
         "hexes": [
-          "D3",
-          "H3",
-          "J3",
-          "B5",
-          "C8",
-          "E8",
-          "I8",
-          "D9",
-          "I10"
-        ]
-      },
-      {
-        "color": "plain",
-        "cities": [
-          {
-            "name": {
-              "name": "Saijou"
-            }
-          }
-        ],
-        "hexes": [
-          "F3"
-        ]
-      },
-      {
-        "copy": "F3",
-        "cities": [
-          {
-            "name": {
-              "name": "Niihama"
-            }
-          }
-        ],
-        "hexes": [
-          "G4"
-        ]
-      },
-      {
-        "copy": "F3",
-        "cities": [
-          {
-            "name": {
-              "name": "Ikeda"
-            }
-          }
-        ],
-        "hexes": [
-          "H7"
-        ]
-      },
-      {
-        "copy": "F3",
-        "cities": [
-          {
-            "name": {
-              "name": "Sukumo"
-            }
-          }
-        ],
-        "hexes": [
-          "A10"
-        ]
-      },
-      {
-        "copy": "F3",
-        "cities": [
-          {
-            "name": {
-              "name": "Anan"
-            }
-          }
-        ],
-        "hexes": [
-          "J11"
-        ]
-      },
-      {
-        "copy": "F3",
-        "cities": [
-          {
-            "name": {
-              "name": "Nahari"
-            }
-          }
-        ],
-        "hexes": [
-          "G12"
-        ]
-      },
-      {
-        "copy": "F3",
-        "cities": [
-          {
-            "name": {
-              "name": "Matsuyama"
-            },
-            "companies": [
-              "IR"
-            ]
-          }
-        ],
-        "hexes": [
-          "E2"
-        ]
-      },
-      {
-        "copy": "F3",
-        "cities": [
-          {
-            "name": {
-              "name": "Marugame"
-            },
-            "companies": [
-              "SR"
-            ]
-          }
-        ],
-        "hexes": [
-          "I2"
-        ]
-      },
-      {
-        "copy": "F3",
-        "cities": [
-          {
-            "name": {
-              "name": "Tokushima"
-            },
-            "companies": [
-              "AR"
-            ]
-          }
-        ],
-        "hexes": [
-          "K8"
-        ]
-      },
-      {
-        "copy": "F3",
-        "cities": [
-          {
-            "name": {
-              "name": "Kubokawa"
-            },
-            "companies": [
-              "KU"
-            ]
-          }
-        ],
-        "hexes": [
-          "C10"
-        ]
-      },
-      {
-        "color": "plain",
-        "centerTowns": [
-          {
-            "name": {
-              "name": "Ritsurin Kouen"
-            }
-          }
-        ],
-        "hexes": [
-          "J5"
-        ]
-      },
-      {
-        "color": "plain",
-        "icons": [
-          {
-            "type": "port",
-            "percent": 0.5
-          }
-        ],
-        "centerTowns": [
-          {
-            "name": {
-              "name": "Nangoku"
-            }
-          }
-        ],
-        "hexes": [
-          "G10"
-        ]
-      },
-      {
-        "color": "plain",
-        "icons": [
-          {
-            "type": "port",
-            "percent": 0.5
-          }
-        ],
-        "centerTowns": [
-          {
-            "name": {
-              "name": "Komatsujima"
-            }
-          }
-        ],
-        "hexes": [
-          "J9"
-        ]
-      },
-      {
-        "color": "plain",
-        "icons": [
-          {
-            "type": "port",
-            "percent": 0.5
-          }
-        ],
-        "centerTowns": [
-          {
-            "name": {
-              "name": "Muki"
-            }
-          }
-        ],
-        "hexes": [
-          "I12"
-        ]
-      },
-      {
-        "color": "plain",
-        "icons": [
-          {
-            "type": "port",
-            "percent": 0.5
-          }
-        ],
-        "centerTowns": [
-          {
-            "name": {
-              "name": "Nakamura"
-            }
-          }
-        ],
-        "hexes": [
-          "B11"
-        ]
-      },
-      {
-        "color": "plain",
-        "terrain": [
-          {
-            "type": "river",
-            "cost": "¥80"
-          }
-        ],
-        "hexes": [
-          "K6"
-        ]
-      },
-      {
-        "color": "plain",
-        "terrain": [
-          {
-            "type": "river",
-            "percent": 0.38
-          },
-          {
-            "type": "mountain",
-            "cost": "¥80",
-            "angle": 180,
-            "percent": 0.1
-          }
-        ],
-        "hexes": [
-          "H5",
-          "I6"
-        ]
-      },
-      {
-        "color": "plain",
-        "terrain": [
-          {
-            "type": "mountain",
-            "cost": "¥80"
-          }
-        ],
-        "hexes": [
-          "E4",
-          "D5",
-          "F5",
-          "C6",
-          "E6",
-          "G6",
-          "D7",
-          "F7",
-          "A8",
-          "G8",
-          "B9",
-          "H9",
-          "H11",
-          "H13"
-        ]
-      },
-      {
-        "color": "plain",
-        "cities": [
-          {
-            "angle": 120,
-            "percent": 0.4,
-            "name": {
-              "name": "Kotohira",
-              "rotation": 30
-            }
-          }
-        ],
-        "terrain": [
-          {
-            "angle": 270,
-            "percent": 0.5,
-            "cost": "¥80"
-          }
-        ],
-        "labels": [
-          {
-            "label": "H",
-            "angle": 330,
-            "percent": 0.8
-          }
-        ],
-        "hexes": [
-          "I4"
-        ]
-      },
-      {
-        "color": "yellow",
-        "values": [
-          {
-            "value": 20,
-            "angle": 180,
-            "percent": 0.667
-          }
-        ],
-        "cities": [
-          {
-            "name": {
-              "name": "Ohzu",
-              "reverse": true
-            }
-          }
-        ],
-        "companies": [
-          {
-            "label": "ER",
-            "bottom": true,
-            "angle": 270,
-            "percent": 0.667
-          }
-        ],
-        "track": [
-          {
-            "side": 3
-          }
-        ],
-        "hexes": [
-          "C4"
-        ]
-      },
-      {
-        "copy": "C4",
-        "labels": [
-          {
-            "label": "T",
-            "angle": 330,
-            "percent": 0.8
-          }
-        ],
-        "cities": [
-          {
-            "name": {
-              "name": "Takamatsu",
-              "reverse": false,
-              "rotation": 60
-            },
-            "companies": [
-              "KO"
-            ]
-          }
-        ],
-        "values": [
-          {
-            "value": 30,
-            "angle": 150,
-            "percent": 0.8
-          }
-        ],
-        "companies": [
-          {
-            "label": "TR",
-            "angle": 30,
-            "percent": 0.75
-          }
-        ],
-        "track": [
-          {
-            "side": 1
-          },
-          {
-            "side": 2
-          }
-        ],
-        "hexes": [
-          "K4"
+          "B6",
+          "B8",
+          "C5",
+          "C7",
+          "C19",
+          "D4",
+          "D6",
+          "D14",
+          "E3",
+          "E5",
+          "E7",
+          "E9",
+          "F2",
+          "F4",
+          "F6",
+          "F10",
+          "F12",
+          "F14",
+          "G3",
+          "G5",
+          "G7",
+          "G9",
+          "G11",
+          "G13",
+          "H4",
+          "H6",
+          "H8",
+          "H12",
+          "I5",
+          "I7",
+          "I9",
+          "I11",
+          "I13",
+          "J6",
+          "J8",
+          "J10",
+          "J14",
+          "K5",
+          "K7",
+          "K9",
+          "L6",
+          "L8",
+          "M5",
+          "M7",
+          "N6",
+          "O9",
+          "O11"
         ]
       },
       {
@@ -1166,241 +773,25 @@
         ],
         "cities": [
           {
-            "size": 2,
+            "size": 1,
             "name": {
-              "name": "Uwajima",
-              "reverse": true
+              "name": "Timmins",
+              "rotation": -30,
+              "reverse": false
             },
             "companies": [
-              "UR"
+              {
+                "color": "green"
+              }
             ]
           }
         ],
         "track": [
-          {
-            "side": 2
-          },
-          {
-            "side": 4
-          },
-          {
-            "side": 6
-          }
-        ],
-        "hexes": [
-          "B7"
-        ]
-      },
-      {
-        "color": "gray",
-        "towns": [
-          {
-            "angle": -30,
-            "percent": 0.57735,
-            "rotation": -120,
-            "name": {
-              "name": "Yawatahama"
-            }
-          }
-        ],
-        "track": [
-          {
-            "type": "sharp",
-            "side": 6
-          }
-        ],
-        "values": [
-          {
-            "value": 20,
-            "angle": 150,
-            "percent": 0.2
-          }
-        ],
-        "hexes": [
-          "B3"
-        ]
-      },
-      {
-        "color": "gray",
-        "towns": [
-          {
-            "angle": -150,
-            "percent": 0.57735,
-            "rotation": 120,
-            "name": {
-              "name": "Muroto",
-              "reverse": true
-            }
-          }
-        ],
-        "track": [
-          {
-            "type": "sharp",
-            "side": 4
-          }
-        ],
-        "values": [
-          {
-            "value": 20,
-            "angle": 30,
-            "percent": 0.2
-          }
-        ],
-        "hexes": [
-          "G14"
-        ]
-      },
-      {
-        "color": "gray",
-        "track": [
-          {
-            "type": "gentle",
-            "side": 6
-          }
-        ],
-        "hexes": [
-          "J7"
-        ]
-      },
-      {
-        "color": "offboard",
-        "offBoardTrack": [
           {
             "side": 1
           },
           {
             "side": 2
-          }
-        ],
-        "offBoardRevenue": {
-          "name": {
-            "name": "Imabari"
-          },
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "30"
-            },
-            {
-              "color": "brown",
-              "cost": "60"
-            },
-            {
-              "color": "black",
-              "textColor": "white",
-              "cost": "D100"
-            }
-          ]
-        },
-        "hexes": [
-          "F1"
-        ]
-      },
-      {
-        "copy": "F1",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Sakaide & Okayama"
-          },
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "20"
-            },
-            {
-              "color": "brown",
-              "cost": "40"
-            },
-            {
-              "color": "black",
-              "textColor": "white",
-              "cost": "D80"
-            }
-          ]
-        },
-        "hexes": [
-          "J1"
-        ]
-      },
-      {
-        "color": "offboard",
-        "offBoardTrack": [
-          {
-            "side": 2
-          },
-          {
-            "side": 3
-          }
-        ],
-        "offBoardRevenue": {
-          "name": {
-            "name": "Naruto & Awaji"
-          },
-          "x": 20,
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "20"
-            },
-            {
-              "color": "brown",
-              "cost": "40"
-            },
-            {
-              "color": "black",
-              "textColor": "white",
-              "cost": "D80"
-            }
-          ]
-        },
-        "hexes": [
-          "L7"
-        ]
-      },
-      {
-        "color": "green",
-        "terrain": [
-          {
-            "type": "river",
-            "cost": "¥80",
-            "angle": 90,
-            "percent": 0.75
-          }
-        ],
-        "values": [
-          {
-            "angle": 150,
-            "percent": 0.82,
-            "value": 30
-          }
-        ],
-        "labels": [
-          {
-            "label": "K",
-            "angle": 270,
-            "percent": 0.82
-          }
-        ],
-        "cities": [
-          {
-            "size": 2,
-            "rotation": -60,
-            "name": {
-              "name": "Kouchi",
-              "reverse": true,
-              "offset": 31
-            },
-            "companies": [
-              "TR"
-            ]
-          }
-        ],
-        "track": [
-          {
-            "side": 3
-          },
-          {
-            "side": 4
           },
           {
             "side": 5
@@ -1410,7 +801,1050 @@
           }
         ],
         "hexes": [
-          "F9"
+          "D2"
+        ]
+      },
+      {
+        "color": "plain",
+        "water": {
+          "cost": "$20"
+        },
+        "hexes": [
+          "K11"
+        ]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "gentle",
+            "side": 5
+          }
+        ],
+        "hexes": [
+          "C3"
+        ]
+      },
+      {
+        "color": "gray",
+        "values": [
+          {
+            "angle": 180,
+            "percent": 0.6,
+            "value": 80
+          }
+        ],
+        "labels": [
+          {
+            "label": "Run to T, M, Q",
+            "angle": 180,
+            "percent": 0.15
+          }
+        ],
+        "track": [
+          {
+            "type": "gentle",
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "E1"
+        ]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "B16"
+        ]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 3
+          }
+        ],
+        "hexes": [
+          "L14"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Sudbury"
+            }
+          }
+        ],
+        "hexes": [
+          "D8"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "North Bay"
+            }
+          }
+        ],
+        "hexes": [
+          "F8"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Barrie"
+            }
+          }
+        ],
+        "hexes": [
+          "E13"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Guelph"
+            }
+          }
+        ],
+        "hexes": [
+          "E15"
+        ]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "Y",
+            "angle": 330,
+            "percent": 0.8
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Hamilton"
+            }
+          }
+        ],
+        "hexes": [
+          "E17"
+        ]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "Y",
+            "angle": 330,
+            "percent": 0.8
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Berlin"
+            }
+          }
+        ],
+        "hexes": [
+          "D16"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "London"
+            }
+          }
+        ],
+        "hexes": [
+          "C17"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Peterborough"
+            }
+          }
+        ],
+        "hexes": [
+          "G15"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Kingston"
+            }
+          }
+        ],
+        "hexes": [
+          "I15"
+        ]
+      },
+      {
+        "color": "plain",
+        "water": {
+          "angle": 0,
+          "percent": 0.7,
+          "cost": "$20"
+        },
+        "labels": [
+          {
+            "label": "Y",
+            "angle": 270,
+            "percent": 0.7
+          },
+          {
+            "label": "O",
+            "angle": 90,
+            "percent": 0.7
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Ottawa"
+            }
+          }
+        ],
+        "hexes": [
+          "J12"
+        ]
+      },
+      {
+        "color": "plain",
+        "bridges": [
+          {
+            "cost": "$80",
+            "angle": 0,
+            "percent": 1
+          },
+          {
+            "cost": "$80",
+            "angle": 300,
+            "percent": 1
+          }
+        ],
+        "borders": [
+          {
+            "side": 1,
+            "color": "water"
+          },
+          {
+            "side": 6,
+            "color": "water"
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Trois-Rivières"
+            }
+          }
+        ],
+        "hexes": [
+          "M9"
+        ]
+      },
+      {
+        "color": "plain",
+        "bridges": [
+          {
+            "cost": "$80",
+            "angle": 300,
+            "percent": 1
+          },
+          {
+            "cost": "$80",
+            "angle": 0,
+            "percent": 1
+          }
+        ],
+        "borders": [
+          {
+            "side": 1,
+            "color": "water"
+          },
+          {
+            "side": 6,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "N8"
+        ]
+      },
+      {
+        "color": "plain",
+        "bridges": [
+          {
+            "cost": "$80",
+            "angle": 120,
+            "percent": 1
+          }
+        ],
+        "borders": [
+          {
+            "side": 3,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "O9"
+        ]
+      },
+      {
+        "color": "plain",
+        "bridges": [
+          {
+            "cost": "$80",
+            "angle": 180,
+            "percent": 1
+          },
+          {
+            "cost": "$80",
+            "angle": 120,
+            "percent": 1
+          }
+        ],
+        "borders": [
+          {
+            "side": 3,
+            "color": "water"
+          },
+          {
+            "side": 4,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "N10"
+        ]
+      },
+      {
+        "color": "plain",
+        "bridges": [
+          {
+            "cost": "$80",
+            "angle": 180,
+            "percent": 1
+          },
+          {
+            "cost": "$80",
+            "angle": 120,
+            "percent": 1
+          }
+        ],
+        "borders": [
+          {
+            "side": 3,
+            "color": "water"
+          },
+          {
+            "side": 4,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "M11"
+        ]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "Y",
+            "angle": 330,
+            "percent": 0.8
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Quebec"
+            }
+          }
+        ],
+        "hexes": [
+          "O7"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Sherbrooke"
+            }
+          }
+        ],
+        "hexes": [
+          "N12"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Goderich"
+            }
+          }
+        ],
+        "hexes": [
+          "C15"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Sarnia"
+            }
+          }
+        ],
+        "hexes": [
+          "B18"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 1,
+            "color": "water"
+          }
+        ],
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Belleville"
+            }
+          }
+        ],
+        "hexes": [
+          "H14"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Pembroke"
+            }
+          }
+        ],
+        "hexes": [
+          "H10"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Cornwall"
+            }
+          }
+        ],
+        "hexes": [
+          "K13"
+        ]
+      },
+      {
+        "color": "plain",
+        "bridges": [
+          {
+            "cost": "$80",
+            "angle": 300,
+            "percent": 1
+          }
+        ],
+        "borders": [
+          {
+            "side": 6,
+            "color": "water"
+          }
+        ],
+        "centerTowns": [
+          {
+            "name": {
+              "name": "St. Jerome"
+            }
+          }
+        ],
+        "hexes": [
+          "L10"
+        ]
+      },
+      {
+        "color": "plain",
+        "companies": [
+          {
+            "label": "C&StL",
+            "percent": 0.5
+          }
+        ],
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Granby"
+            }
+          }
+        ],
+        "hexes": [
+          "M13"
+        ]
+      },
+      {
+        "color": "yellow",
+        "track": [
+          {
+            "side": 2,
+            "type": "stop"
+          },
+          {
+            "side": 4,
+            "type": "stop"
+          }
+        ],
+        "labels": {
+          "angle": 130,
+          "percent": 0.75,
+          "label": "M"
+        },
+        "values": [
+          {
+            "angle": 240,
+            "percent": 0.7,
+            "value": 40
+          }
+        ],
+        "water": {
+          "cost": "$20",
+          "angle": 0,
+          "percent": 0.8
+        },
+        "cities": [
+          {
+            "angle": 60,
+            "percent": 0.5,
+            "name": {
+              "name": "Montreal"
+            }
+          },
+          {
+            "angle": 180,
+            "percent": 0.5,
+            "companies": [
+              {}
+            ]
+          },
+          {
+            "angle": 300,
+            "percent": 0.5,
+            "companies": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        ],
+        "hexes": [
+          "L12"
+        ]
+      },
+      {
+        "color": "yellow",
+        "track": [
+          {
+            "side": 2,
+            "type": "stop"
+          },
+          {
+            "side": 5,
+            "type": "stop"
+          }
+        ],
+        "labels": {
+          "angle": 150,
+          "percent": 0.75,
+          "label": "T"
+        },
+        "values": [
+          {
+            "angle": 330,
+            "percent": 0.7,
+            "value": 30
+          }
+        ],
+        "cities": [
+          {
+            "angle": 60,
+            "percent": 0.5,
+            "name": {
+              "name": "Toronto"
+            },
+            "companies": [
+              {
+                "label": "CN",
+                "color": "white"
+              }
+            ]
+          },
+          {
+            "angle": 240,
+            "percent": 0.5,
+            "companies": [
+              {}
+            ]
+          }
+        ],
+        "hexes": [
+          "F16"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardTrack": [
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Sault Ste. Marie"
+          },
+          "angle": 90,
+          "percent": 0.3,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            },
+            {
+              "color": "gray",
+              "cost": "40"
+            }
+          ]
+        },
+        "hexes": [
+          "A7"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardTrack": [
+          {
+            "side": 3
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Buffalo"
+          },
+          "angle": 300,
+          "percent": 0.25,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            },
+            {
+              "color": "gray",
+              "cost": "60"
+            }
+          ]
+        },
+        "hexes": [
+          "F18"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 1,
+            "color": "water"
+          },
+          {
+            "side": 6,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "C9"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 1,
+            "color": "water"
+          },
+          {
+            "side": 2,
+            "color": "water"
+          },
+          {
+            "side": 3,
+            "color": "water"
+          },
+          {
+            "side": 6,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "D10"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 2,
+            "color": "water"
+          },
+          {
+            "side": 3,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "E11"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 4,
+            "color": "water"
+          },
+          {
+            "side": 1,
+            "color": "water"
+          },
+          {
+            "side": 5,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "C11"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 4,
+            "color": "water"
+          },
+          {
+            "side": 5,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "D12"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 4,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "C13"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 6,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "D18"
+        ]
+      },
+      {
+        "color": "water",
+        "icons": [
+          {
+            "type": "port",
+            "percent": 0.6
+          }
+        ],
+        "offBoardTrack": [
+          {
+            "side": 4
+          }
+        ],
+        "values": [
+          {
+            "value": 10,
+            "angle": 270,
+            "percent": 0
+          }
+        ],
+        "borders": [
+          {
+            "side": 3,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "E19"
+        ]
+      },
+      {
+        "color": "water",
+        "icons": [
+          {
+            "type": "port",
+            "percent": 0.6
+          }
+        ],
+        "offBoardTrack": [
+          {
+            "side": 3
+          },
+          {
+            "side": 5
+          }
+        ],
+        "values": [
+          {
+            "value": 10,
+            "angle": 270,
+            "percent": 0
+          }
+        ],
+        "borders": [
+          {
+            "side": 4,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "H16"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardTrack": [
+          {
+            "side": 4
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "New England"
+          },
+          "angle": 0,
+          "percent": 0.25,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            },
+            {
+              "color": "gray",
+              "cost": "60"
+            }
+          ]
+        },
+        "hexes": [
+          "M15"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardTrack": [
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Maine"
+          },
+          "angle": 300,
+          "percent": 0.2,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            },
+            {
+              "color": "gray",
+              "cost": "40"
+            }
+          ]
+        },
+        "hexes": [
+          "O13"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardTrack": [
+          {
+            "side": 3
+          },
+          {
+            "side": 2
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Maritime Provinces"
+          },
+          "angle": 270,
+          "percent": 0.3,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            },
+            {
+              "color": "gray",
+              "cost": "40"
+            }
+          ]
+        },
+        "hexes": [
+          "P8"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardTrack": [
+          {
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "A17"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardTrack": [
+          {
+            "side": 5
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Detroit"
+          },
+          "rows": 4,
+          "angle": 180,
+          "percent": 1.4,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            },
+            {
+              "color": "gray",
+              "cost": "70"
+            }
+          ]
+        },
+        "hexes": [
+          "A19"
         ]
       }
     ]
