@@ -1122,9 +1122,6 @@
               "side": 4
             }
           ],
-          "removeBorders": [
-            6
-          ],
           "hexes": [
             "B17"
           ]
@@ -1136,9 +1133,6 @@
               "type": "sharp",
               "side": 4
             }
-          ],
-          "removeBorders": [
-            3
           ],
           "hexes": [
             "C18"
@@ -1211,9 +1205,6 @@
               "side": 3
             }
           ],
-          "removeBorders": [
-            5
-          ],
           "hexes": [
             "F21"
           ]
@@ -1249,9 +1240,6 @@
               "type": "sharp",
               "side": 4
             }
-          ],
-          "removeBorders": [
-            2
           ],
           "hexes": [
             "G20"
