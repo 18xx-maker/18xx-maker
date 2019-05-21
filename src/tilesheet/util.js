@@ -94,6 +94,5 @@ export const getTileSheetContext = (layout, paper, hexWidth) => {
   // Calculate how many tiles per page from the other values
   c.perPage = c.perRow * c.rowsPerPage;
 
-  console.log(c);
   return c;
 };
