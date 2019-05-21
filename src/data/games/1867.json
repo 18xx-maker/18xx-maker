@@ -1,6 +1,6 @@
 {
   "info": {
-    "title": "1867 (WIP)",
+    "title": "1867",
     "designer": "Ian Wilson",
     "background": "water",
     "width": 150,
@@ -10,6 +10,7 @@
     "color_5": "cyan",
     "color_10": "blue"
   },
+  "wip": true,
   "tokens": [
     "Round"
   ],
@@ -721,6 +722,7 @@
           "D4",
           "D6",
           "D14",
+          "D18",
           "E3",
           "E5",
           "E7",
@@ -800,6 +802,10 @@
             "side": 6
           }
         ],
+        "removeBorders": [
+          2,
+          5
+        ],
         "hexes": [
           "D2"
         ]
@@ -820,6 +826,9 @@
             "type": "gentle",
             "side": 5
           }
+        ],
+        "removeBorders": [
+          5
         ],
         "hexes": [
           "C3"
@@ -846,6 +855,9 @@
             "type": "gentle",
             "side": 6
           }
+        ],
+        "removeBorders": [
+          2
         ],
         "hexes": [
           "E1"
@@ -1235,12 +1247,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "water"
-          }
-        ],
         "centerTowns": [
           {
             "name": {
@@ -1611,18 +1617,6 @@
         ]
       },
       {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "D18"
-        ]
-      },
-      {
         "color": "water",
         "icons": [
           {
@@ -1640,12 +1634,6 @@
             "value": 10,
             "angle": 270,
             "percent": 0
-          }
-        ],
-        "borders": [
-          {
-            "side": 3,
-            "color": "water"
           }
         ],
         "hexes": [
@@ -1673,12 +1661,6 @@
             "value": 10,
             "angle": 270,
             "percent": 0
-          }
-        ],
-        "borders": [
-          {
-            "side": 4,
-            "color": "water"
           }
         ],
         "hexes": [
@@ -1806,6 +1788,9 @@
             "side": 6
           }
         ],
+        "removeBorders": [
+          1
+        ],
         "hexes": [
           "A17"
         ]
@@ -1843,6 +1828,9 @@
             }
           ]
         },
+        "removeBorders": [
+          4
+        ],
         "hexes": [
           "A19"
         ]
