@@ -169,7 +169,7 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map }) => {
       <PhaseContext.Provider value={hex.color || "plain"}>
         <HexContext.Consumer>
           {hx => (
-            <g clipPath={`url(#${clipPath || "hexClip"})`} transform={`rotate(${hx.rotation || 0})`}>
+            <g mask={`url(#${clipPath || "hexMask"})`} transform={`rotate(${hx.rotation || 0})`}>
               <Hex color={hex.color || "plain"}
                    transparent={transparent}
                    map={map} />

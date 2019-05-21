@@ -11,7 +11,7 @@ const Hex = ({ color, border, transparent, map }) => {
       {hx => (
         <Color context={map ? "map" : "tile"}>
           {(c,t) => {
-            let fill = border || transparent ? "transparent" : c(color);
+            let fill = transparent ? "transparent" : c(color);
             if(color && color.includes("/")) {
               console.log("gradient");
               fill = `url(#${color.replace(/\//g, "-")})`;
@@ -24,7 +24,7 @@ const Hex = ({ color, border, transparent, map }) => {
                 strokeLinecap="round"
                 strokeLinejoin="bevel"
                 strokeWidth="2"
-                stroke={border ? c("black") : "none"}
+                stroke={fill}
               />
             );
           }}
