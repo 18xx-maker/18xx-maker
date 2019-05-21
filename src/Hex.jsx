@@ -63,7 +63,7 @@ const makeBorder = track => {
   );
 };
 
-const HexTile = ({ hex, id, clipPath, border, transparent, map }) => {
+const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   if (hex === undefined || hex === null) {
     return null;
   }
@@ -169,7 +169,7 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map }) => {
       <PhaseContext.Provider value={hex.color || "plain"}>
         <HexContext.Consumer>
           {hx => (
-            <g mask={`url(#${clipPath || "hexMask"})`} transform={`rotate(${hx.rotation || 0})`}>
+            <g mask={`url(#${mask || "hexMask"})`} transform={`rotate(${hx.rotation || 0})`}>
               <Hex color={hex.color || "plain"}
                    transparent={transparent}
                    map={map} />

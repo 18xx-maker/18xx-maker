@@ -123,7 +123,7 @@ const TileSheet = ({ match, paper, layout, hexWidth }) => {
         }
 
         let rotation = 0;
-        let clipPath = c.clipPath;
+        let mask = c.mask;
 
         if (layout === "die" || layout === "individual") {
           let currentSides = sidesFromTile(hex);
@@ -134,13 +134,13 @@ const TileSheet = ({ match, paper, layout, hexWidth }) => {
 
           if (layout === "die") {
             if (tileAbove(page, i) && tileBelow(page, i)) {
-              clipPath = "hexBleedMaskDie";
+              mask = "hexBleedMaskDie";
             } else if (tileAbove(page, i)) {
-              clipPath = "hexBleedMaskDieBottom";
+              mask = "hexBleedMaskDieBottom";
             } else if (tileBelow(page, i)) {
-              clipPath = "hexBleedMaskDieTop";
+              mask = "hexBleedMaskDieTop";
             } else {
-              clipPath = "hexBleedMask";
+              mask = "hexBleedMask";
             }
           }
 
@@ -181,11 +181,11 @@ const TileSheet = ({ match, paper, layout, hexWidth }) => {
         }
 
         return (
-          <g mask={`url(#${clipPath})`}
+          <g mask={`url(#${mask})`}
              transform={`translate(${c.getX(i)} ${c.getY(i)})`}
              key={`${hex.id}-${i}`}>
             <g transform={`rotate(${rotation})`}>
-              <Hex hex={hex} id={hex.id} clipPath="hexBleedMask" />
+              <Hex hex={hex} id={hex.id} mask="hexBleedMask" />
             </g>
           </g>
         )

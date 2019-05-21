@@ -124,42 +124,6 @@ const App = () => (
                        stroke="white"
                        strokeWidth="2" />
             </mask>
-            <clipPath id="hexClip">
-              <polygon points="-86.6025,0 -43.30125,-75 43.30125,-75 86.6025,0 43.30125,75 -43.30125,75"
-                       fill="black"
-                       stroke="black"
-                       strokeWidth="2" />
-            </clipPath>
-            <clipPath id="hexBleedClip">
-              <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 49.07475,85 -49.07475,85"
-                       fill="black"
-                       stroke="black"
-                       strokeWidth="2" />
-            </clipPath>
-            <clipPath id="hexBleedClipOffset">
-              <polygon points="-86.6025,0 -92.376,-9.999995337 -54.84825,-75 -43.30125,-75 -37.52775,-85 37.52775,-85 43.30125,-75 54.84825,-75 92.376,-9.999995337 86.6025,0 92.376,9.999995337 54.84825,75 43.30125,75 37.52775,85 -37.52775,85 -43.30125,75 -54.84825,75 -92.376,9.999995337"
-                       fill="black"
-                       stroke="black"
-                       strokeWidth="2" />
-            </clipPath>
-            <clipPath id="hexBleedClipDie">
-              <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 54.84825,75 -54.84825,75"
-                       fill="black"
-                       stroke="black"
-                       strokeWidth="2" />
-            </clipPath>
-            <clipPath id="hexBleedClipDieTop">
-              <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 54.84825,75 -54.84825,75"
-                       fill="black"
-                       stroke="black"
-                       strokeWidth="2" />
-            </clipPath>
-            <clipPath id="hexBleedClipDieBottom">
-              <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 49.07475,85 -49.07475,85"
-                       fill="black"
-                       stroke="black"
-                       strokeWidth="2" />
-            </clipPath>
             <Color>
               {c => (
                 <React.Fragment>
