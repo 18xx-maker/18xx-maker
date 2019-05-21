@@ -23,7 +23,7 @@ const Hex = ({ color, border, transparent, map }) => {
                 fill={fill}
                 strokeLinecap="round"
                 strokeLinejoin="bevel"
-                strokeWidth="2"
+                strokeWidth="1"
                 stroke={fill}
               />
             );
