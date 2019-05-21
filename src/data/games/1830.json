@@ -1428,9 +1428,6 @@
             "side": 6
           }
         ],
-        "removeBorders": [
-          3
-        ],
         "hexes": [
           "D14"
         ]
@@ -1460,9 +1457,6 @@
             "type": "gentle",
             "side": 1
           }
-        ],
-        "removeBorders": [
-          6
         ],
         "hexes": [
           "C15"
@@ -1616,9 +1610,6 @@
             "side": 5
           }
         ],
-        "removeBorders": [
-          4
-        ],
         "hexes": [
           "A17"
         ]
@@ -1700,9 +1691,6 @@
               "CPR"
             ]
           }
-        ],
-        "removeBorders": [
-          1
         ],
         "hexes": [
           "A19"

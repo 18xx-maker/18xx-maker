@@ -27,10 +27,22 @@ following command and the site should be available at http://localhost (you
 might need to edit the port depending on your OS and other running apps):
 
 ```sh
-docker run -it --rm -p 80:80 -n 18xx kelsin/18xx
+docker run -it --rm -p 80:80 --name 18xx kelsin/18xx
 ```
 
-More documentation about this will be coming soon.
+### Persistant
+
+If you want to use docker to hack on the site, you can use a docker volume to
+keep a persistant image of the game code. Knowledge of how to manage docker
+volumes is important to use this properly.
+
+```sh
+docker run -it --rm -p 3000:3000 --name 18xx-develop -v 18xx:/home/18xx kelsin/18xx:develop
+```
+
+This will run the react-development server that will live update if you edit
+files, and store anything edited (starting with the current code) on the volume
+named `18xx`.
 
 ## Usage
 
