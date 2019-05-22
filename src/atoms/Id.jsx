@@ -30,7 +30,7 @@ const Id = ({ id, extra }) => {
               {extra && (
                 <g transform={`rotate(${hx.rotation}) translate(40 70)`}>
                   <text
-                    fontFamily="Helvetica, Arial, sans-serif"
+                    fontFamily="Open Sans, sans-serif"
                     fill={c("black")}
                     stroke="none"
                     strokeLinecap="round"

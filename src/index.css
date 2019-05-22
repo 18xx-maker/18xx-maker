@@ -197,7 +197,7 @@ svg {
 }
 
 .charter__phase table {
-  font-family: 'Open Sans', sans-serif;
+  font-family: Open Sans, sans-serif;
   font-weight: normal;
   font-size: 0.09in;
   border-collapse: collapse;
@@ -243,7 +243,7 @@ svg {
 .charter dd {
   margin: 0;
   font-size: 0.12in;
-  font-family: "Open Sans", sans-serif;
+  font-family: Open Sans, sans-serif;
   font-weight: normal;
 }
 
@@ -347,7 +347,7 @@ svg {
 }
 
 .minorCharter__phase table {
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: Open Sans, sans-serif;
   font-size: 0.09in;
   border-collapse: collapse;
   width: 100%;
@@ -379,7 +379,7 @@ svg {
 .minorCharter dd {
   margin: 0;
   font-size: 0.12in;
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: Open Sans, sans-serif;
 }
 
 .minorCharter ul {
@@ -465,7 +465,7 @@ svg {
   box-sizing: border-box;
   right: 0;
   text-align: right;
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: Open Sans, sans-serif;
   font-size: 0.12in;
   font-weight: normal;
   line-height: 0.16in;
@@ -560,7 +560,7 @@ svg {
   line-height: 0.105in;
   font-size: 0.085in;
   font-weight: normal;
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: Open Sans, sans-serif;
 }
 
 
@@ -818,7 +818,7 @@ footer {
   width: 800px;
   margin: 0 auto;
   font-weight: normal;
-  font-family: sans-serif;
+  font-family: Open Sans, sans-serif;
   font-size: 0.8em;
 }
 
@@ -836,7 +836,7 @@ footer a:hover {
   background-color: #a00;
   color: #fff;
   border-bottom: 2px solid #b00;
-  font-family: sans-serif;
+  font-family: Open Sans, sans-serif;
 }
 
 .LegalNotes strong {
@@ -846,14 +846,14 @@ footer a:hover {
 .WIP {
   background-color: #ffa;
   border-bottom: 2px solid #ff9;
-  font-family: sans-serif;
+  font-family: Open Sans, sans-serif;
   font-weight: normal;
 }
 
 .PrintNotes {
   background-color: #ddd;
   border-bottom: 2px solid #bbb;
-  font-family: sans-serif;
+  font-family: Open Sans, sans-serif;
   font-weight: normal;
 }
 
