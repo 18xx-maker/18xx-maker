@@ -19,7 +19,6 @@ const rotatedHeight = (w, h) => Math.abs(h * cos + w * sin);
 const Background = ({ match, paper }) => {
   let game = games[match.params.game];
 
-
   let color = game.info.background;
   let title = game.info.title;
 

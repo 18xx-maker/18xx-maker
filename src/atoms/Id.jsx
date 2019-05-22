@@ -12,7 +12,7 @@ const Id = ({ id, extra }) => {
             <React.Fragment>
               <g transform={`rotate(${hx.rotation}) translate(-40 70)`}>
                 <text
-                  fontFamily="Helvetica, Arial, sans-serif"
+                  fontFamily="Open Sans, sans-serif"
                   fill={p("black")}
                   stroke="none"
                   strokeLinecap="round"
@@ -20,6 +20,7 @@ const Id = ({ id, extra }) => {
                   dominantBaseline="baseline"
                   textAnchor="start"
                   fontSize="12"
+                  fontWeight="normal"
                   x="0"
                   y="0"
                 >
