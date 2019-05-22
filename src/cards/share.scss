@@ -18,12 +18,13 @@
   top: 0;
   right: 0;
   height: calc(100% - 0.5in);
-  width: calc(100% - 1.0in);
+  width: calc(100% - 0.88in);
   padding: 0.125in;
   line-height: 0.18in;
   font-size: 0.18in;
   margin: 0.125in;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .share__tokens {
@@ -40,7 +41,7 @@
 }
 
 .share--left .share__tokens {
-  left: 0.23in;
+  left: 0.245in;
   top: 0.375in;
   width: 0.52in;
   height: calc(100% - 0.75in);
@@ -110,5 +111,5 @@
 }
 
 .share--left .share__shares {
-  left: 0.625in;
+  left: 0.635in;
 }
