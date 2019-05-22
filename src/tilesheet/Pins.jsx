@@ -2,8 +2,12 @@ import React from "react";
 
 const Pins = () => (
   <>
-    <circle r="10" cx="100" cy="25" fill="gray" stroke="black" strokeWidth="2" />
-    <circle r="10" cx="700" cy="25" fill="gray" stroke="black" strokeWidth="2" />
+    <circle r="12.5" cx="100" cy="25" fill="black" />
+    <circle r="12.5" cx="700" cy="25" fill="black" />
+
+    <circle r="6.25" cx="100" cy="25" fill="white" />
+    <circle r="6.25" cx="700" cy="25" fill="white" />
+
   </>
 );
 
