@@ -1725,6 +1725,69 @@
       }
     ]
   },
+  "627": {
+    "color": "brown",
+    "track": [
+      {
+        "type": "straight",
+        "side": 1
+      },
+      {
+        "type": "sharp",
+        "side": 4
+      },
+      {
+        "type": "sharp",
+        "side": 5
+      },
+      {
+        "type": "sharp",
+        "side": 6
+      }
+    ]
+  },
+  "628": {
+    "color": "brown",
+    "track": [
+      {
+        "type": "gentle",
+        "side": 1
+      },
+      {
+        "type": "sharp",
+        "side": 3
+      },
+      {
+        "type": "gentle",
+        "side": 4
+      },
+      {
+        "type": "sharp",
+        "side": 6
+      }
+    ]
+  },
+  "629": {
+    "color": "brown",
+    "track": [
+      {
+        "type": "gentle",
+        "side": 2
+      },
+      {
+        "type": "sharp",
+        "side": 4
+      },
+      {
+        "type": "sharp",
+        "side": 5
+      },
+      {
+        "type": "gentle",
+        "side": 6
+      }
+    ]
+  },
   "646": {
     "color": "brown",
     "rotations": 2,
@@ -2939,7 +3002,9 @@
         "type": "custom",
         "path": "m 0 85 C 0 50, 30 50, 45 25",
         "side": 2,
-        "sides": [2]
+        "sides": [
+          2
+        ]
       }
     ]
   },
