@@ -13,6 +13,14 @@
   width: 0.25in;
 }
 
+.share--gmt .share__hr {
+  height: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0.795in;
+}
+
 .share__name {
   position: absolute;
   top: 0;
@@ -42,6 +50,15 @@
 
 .share--left .share__tokens {
   left: 0.245in;
+  top: 0.375in;
+  width: 0.52in;
+  height: calc(100% - 0.75in);
+  flex-direction: column-reverse;
+  overflow: visible;
+}
+
+.share--gmt .share__tokens {
+  left: 0.2in;
   top: 0.375in;
   width: 0.52in;
   height: calc(100% - 0.75in);
@@ -80,6 +97,14 @@
   display: inline-block;
 }
 
+.share--gmt .share__label {
+  bottom: 0.25in;
+  right: 0;
+  width: calc(100% - 1.17in);
+  height: 0.5in;
+  margin: 0.125in;
+  padding: 0.125in;
+}
 .share--left .share__label {
   bottom: 0.25in;
   right: 0;
@@ -112,4 +137,10 @@
 
 .share--left .share__shares {
   left: 0.635in;
+}
+.share--gmt .share__shares {
+  left: 0.67in;
+}
+.share--gmt .share__name {
+  width: calc(100% - 0.92in);
 }

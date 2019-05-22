@@ -28,7 +28,7 @@ const Name = ({ name, color, bgColor, path, rotation, reverse, offset, y, textLe
           fill={p(fillColor)}
           fontFamily="Open Sans, sans-serif"
           fontSize={fontSize || 11}
-          fontWeight="bold"
+          fontWeight="normal"
           textLength={textLength}
           textAnchor="middle"
         >

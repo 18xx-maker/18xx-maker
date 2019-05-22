@@ -60,7 +60,7 @@
     },
     "shareLayout": {
       "type": "string",
-      "enum": ["center", "left"]
+      "enum": ["center", "left", "gmt"]
     },
     "coords": {
       "type": "string",
