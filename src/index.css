@@ -7,6 +7,11 @@ body {
   padding: 0;
   -webkit-print-color-adjust: exact;
   font-family: "Bitter", serif;
+  font-weight: bold;
+}
+
+p {
+  font-weight: normal;
 }
 
 .tokens {
@@ -192,7 +197,8 @@ svg {
 }
 
 .charter__phase table {
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: normal;
   font-size: 0.09in;
   border-collapse: collapse;
   width: 100%;
@@ -237,7 +243,8 @@ svg {
 .charter dd {
   margin: 0;
   font-size: 0.12in;
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
 }
 
 .charter ul {
@@ -460,6 +467,7 @@ svg {
   text-align: right;
   font-family: "Helvetica", "Arial", sans-serif;
   font-size: 0.12in;
+  font-weight: normal;
   line-height: 0.16in;
 }
 
@@ -551,6 +559,7 @@ svg {
   left: 0;
   line-height: 0.105in;
   font-size: 0.085in;
+  font-weight: normal;
   font-family: "Helvetica", "Arial", sans-serif;
 }
 

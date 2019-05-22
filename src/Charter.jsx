@@ -21,7 +21,7 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns }) => {
             <Token label={abbrev} token={token} />
           </ColorContext.Provider>
           <g transform={`translate(0 39)`}>
-            <text fontSize="10" textAnchor="middle">
+            <text fontSize="11" fontWeight="normal" textAnchor="middle">
               {label}
             </text>
           </g>
