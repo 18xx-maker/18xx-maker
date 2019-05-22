@@ -38,7 +38,6 @@
 
   strong {
     font-weight: bold;
-    font-size: 1.2em;
   }
 
   h1 {
@@ -51,7 +50,8 @@
   }
 
   p, ul, label {
-    font-family: sans-serif;
+    font-family: Open Sans, sans-serif;
+    font-weight: normal;
     line-height: 1.3em;
   }
 
@@ -75,6 +75,8 @@
     background-color: #eee;
     padding: 0.2em 0.5em;
     border-radius: 3px;
+    font-family: monospace;
+    font-weight: normal;
   }
 
   pre {
