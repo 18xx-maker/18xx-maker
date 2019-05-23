@@ -19,6 +19,7 @@
   "companiesTheme": "gmt",
   "charterStyle": "color",
   "shareStyle": "gmt",
+  "tokenLayout": "gsp",
   "tiles": {
     "layout": "offset",
     "width": 150

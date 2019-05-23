@@ -66,6 +66,10 @@
       "type": "string",
       "enum": ["carth", "color"]
     },
+    "tokenLayout": {
+      "type": "string",
+      "enum": ["max", "gsp"]
+    },
     "coords": {
       "type": "string",
       "enum": ["outside", "inside", "edge", "none"]
@@ -106,6 +110,7 @@
     "shareStyle",
     "stock",
     "theme",
+    "tokenLayout",
     "useCompanySvgLogos"
   ],
   "additionalProperties": false
