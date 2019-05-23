@@ -8,7 +8,7 @@ import ColorContext from "./context/ColorContext";
 
 import is from "ramda/src/is";
 
-const Charter = ({ name, abbrev, token, tokens, phases, turns, charterLayout }) => {
+const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle }) => {
   let color = token;
   if(is(Object, token)) {
     color = token.colors[0];
@@ -19,14 +19,14 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns, charterLayout }) 
       <svg key={`token-${index}`}>
         <g transform={`translate(25 25)`}>
           <ColorContext.Provider value="companies">
-            <Token outline={charterLayout === "color" ? "black" : null}
-                   label={charterLayout === "color" ? null : abbrev}
-                   token={charterLayout === "color" ? null : token} />
+            <Token outline={charterStyle === "color" ? "black" : null}
+                   label={charterStyle === "color" ? null : abbrev}
+                   token={charterStyle === "color" ? null : token} />
           </ColorContext.Provider>
           <g transform={`translate(0 39)`}>
             <Color context="companies">
               {(c, t) => (
-                <text fill={charterLayout === "color" ? t(c(color)) : null}
+                <text fill={charterStyle === "color" ? t(c(color)) : null}
                       fontSize="11" fontWeight="normal" textAnchor="middle">
                   {label}
                 </text>
@@ -63,14 +63,14 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns, charterLayout }) 
     <Color context="companies">
       {(c, t) => (
         <div className="cutlines">
-          <div className={`charter charter--${charterLayout}`}>
+          <div className={`charter charter--${charterStyle}`}>
             <div
               className="charter__hr"
               style={{ backgroundColor: c(color) }}
             />
-            <div style={{ color: t(c(charterLayout === "color" ? color : "white")) }}
+            <div style={{ color: t(c(charterStyle === "color" ? color : "white")) }}
                  className="charter__name">{name}</div>
-            {charterLayout === "color" && (
+            {charterStyle === "color" && (
               <div className="charter__logo">
                 <svg viewBox="-37.5 -37.5 75 75">
                   <ColorContext.Provider value="companies">
@@ -101,7 +101,7 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns, charterLayout }) 
 };
 
 const mapStateToProps = state => ({
-  charterLayout: state.config.charterLayout
+  charterStyle: state.config.charterStyle
 });
 
 export default connect(mapStateToProps)(Charter);
