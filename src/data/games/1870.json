@@ -532,7 +532,7 @@
     {
       "name": "Operating Round",
       "steps": [
-        "Lay or upgrade track",
+        "Lay two yellow or one upgrade tile",
         "Purchase a station",
         "Run trains",
         "Pay dividends or withhold revenue",
