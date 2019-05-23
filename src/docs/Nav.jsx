@@ -17,6 +17,9 @@ const Nav = () => {
         <li>
           <NavLink to="/docs/b18">Board18 Output</NavLink>
         </li>
+        <li>
+          <NavLink to="/docs/ellison">Ellison Die Cutter</NavLink>
+        </li>
       </ul>
     </div>
   );
