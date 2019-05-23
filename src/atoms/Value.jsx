@@ -27,7 +27,7 @@ const Value = ({ value, fixed }) => {
                 transform={fixed ? null : `rotate(-${rotation})`}
                 fontWeight="bold"
                 fontSize={size}
-                fontFamily="Open Sans, sans-serif"
+                fontFamily="sans-serif"
                 fill={p("black")}
                 dominantBaseline="central"
                 textAnchor="middle"

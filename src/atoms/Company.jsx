@@ -41,7 +41,7 @@ const Company = ({ label, reverse, bottom, left, right, radius, color }) => {
           <text
             fontWeight="bold"
             fontSize={size}
-            fontFamily="Open Sans, sans-serif"
+            fontFamily="sans-serif"
             fill={p("black")}
             dominantBaseline={bottom ? "baseline" : "hanging"}
             textAnchor="middle"

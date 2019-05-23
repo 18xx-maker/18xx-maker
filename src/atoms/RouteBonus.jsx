@@ -19,7 +19,7 @@ const RouteBonus = ({ value }) => {
           <text
             fontWeight="bold"
             fontSize={size}
-            fontFamily="Open Sans, sans-serif"
+            fontFamily="sans-serif"
             fill={p("black")}
             dominantBaseline="central"
             textAnchor="middle"

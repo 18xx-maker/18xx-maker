@@ -11,6 +11,22 @@ const formatCell = value => {
 }
 
 const Phase = ({ phases }) => {
+  let includeName = !R.all(
+    R.compose(
+      R.isNil,
+      R.prop("name")
+    ),
+    phases
+  );
+
+  let includePhase = !R.all(
+    R.compose(
+      R.isNil,
+      R.prop("phase")
+    ),
+    phases
+  );
+
   let includeTrain = !R.all(
     R.compose(
       R.isNil,
@@ -40,7 +56,8 @@ const Phase = ({ phases }) => {
       <Color key={phase.phase || phase.name}>
         {c => (
           <tr>
-            <td>{phase.phase || phase.name}</td>
+            {includeName && <td>{phase.name}</td>}
+            {includePhase && <td>{phase.phase}</td>}
             {includeTrain && <td>{formatCell(phase.train)}</td>}
             <td>{formatCell(phase.number)}</td>
             <td>{phase.limit}</td>
@@ -57,7 +74,8 @@ const Phase = ({ phases }) => {
     <table>
       <thead>
         <tr>
-          <th>Phase</th>
+          {includeName && <th>Name</th>}
+          {includePhase && <th>Phase</th>}
           {includeTrain && <th>Train</th>}
           <th>#</th>
           <th>Limit</th>
