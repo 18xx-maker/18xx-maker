@@ -26,9 +26,9 @@ const Name = ({ name, color, bgColor, path, rotation, reverse, offset, y, textLe
           dy={y}
           transform={`rotate(${(rotation || 0) + 360})`}
           fill={p(fillColor)}
-          fontFamily="Open Sans, sans-serif"
+          fontFamily="Lato, sans-serif"
           fontSize={fontSize || 11}
-          fontWeight="normal"
+          fontWeight="bold"
           textLength={textLength}
           textAnchor="middle"
         >

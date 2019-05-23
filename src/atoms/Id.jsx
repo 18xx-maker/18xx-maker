@@ -12,7 +12,7 @@ const Id = ({ id, extra }) => {
             <React.Fragment>
               <g transform={`rotate(${hx.rotation}) translate(-40 70)`}>
                 <text
-                  fontFamily="Open Sans, sans-serif"
+                  fontFamily="sans-serif"
                   fill={p("black")}
                   stroke="none"
                   strokeLinecap="round"
@@ -30,7 +30,7 @@ const Id = ({ id, extra }) => {
               {extra && (
                 <g transform={`rotate(${hx.rotation}) translate(40 70)`}>
                   <text
-                    fontFamily="Open Sans, sans-serif"
+                    fontFamily="sans-serif"
                     fill={c("black")}
                     stroke="none"
                     strokeLinecap="round"
