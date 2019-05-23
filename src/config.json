@@ -17,7 +17,8 @@
   "straightCityNames": false,
   "theme": "gmt",
   "companiesTheme": "gmt",
-  "shareLayout": "left",
+  "charterLayout": "color",
+  "shareLayout": "gmt",
   "tiles": {
     "layout": "offset",
     "width": 150

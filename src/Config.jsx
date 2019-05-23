@@ -228,6 +228,9 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="tiles.width" label="Tile Width" dimension={true}
              description="This determines the default size of maps and tiles. It defines the distance from flat to flat. 1.5in would be standard 18xx size. 1in is small (1822 / 18OE) size. GMT uses 1.75in."/>
       <h3>Stock Markets</h3>
+      <h3>Charters</h3>
+      <Input name="charterLayout" label="Charter Layout"
+             description="This lets you choose between two layouts for charters. One is simular to Carth's style while the other includes more color at the top."/>
       <h3>Cards</h3>
       <Input name="shareLayout" label="Share Layout"
              description="This lets you choose between two layouts for shares. One keeps the token in the center of the card, the other puts the tokens on the let (Simular to All Aboard Games and Deep Thought Games)."/>

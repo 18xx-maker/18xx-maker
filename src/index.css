@@ -147,6 +147,11 @@ svg {
   width: 100%;
 }
 
+.charter--color .charter__hr {
+  top: 0;
+  height: 1.1875in;
+}
+
 .charter__name {
   position: absolute;
   top: 0;
@@ -159,6 +164,26 @@ svg {
   box-sizing: border-box;
   width: calc(100% - 0.25in);
   text-align: left;
+}
+
+.charter__logo {
+  height: 0.75in;
+  width: 0.75in;
+  margin: 0.125in 0.125in 0 0.125in;
+  padding-top: 0.125in;
+  padding-left: 0.125in;
+  position: relative;
+}
+.charter__logo > svg {
+  height: 0.75in;
+  width: 0.75in;
+  position: relative;
+}
+
+.charter--color .charter__name {
+  left: 1in;
+  padding-left: 0;
+  width: 45%;
 }
 
 

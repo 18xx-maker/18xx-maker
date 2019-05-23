@@ -62,6 +62,10 @@
       "type": "string",
       "enum": ["center", "left", "gmt"]
     },
+    "charterLayout": {
+      "type": "string",
+      "enum": ["carth", "color"]
+    },
     "coords": {
       "type": "string",
       "enum": ["outside", "inside", "edge", "none"]
