@@ -211,7 +211,7 @@ const Config = ({config, setConfig, resetConfig}) => {
       <p>For reference US Letter size would be 8.5in by 11in. A4 is 210mm by 297mm.</p>
       <h3>Companies</h3>
       <Input name="tokenLayout" label="Token Layout"
-             description="This lets you choose between different layouts when printing tokens."/>
+             description="This lets you choose between different layouts when printing tokens. GSP matches the GarageSalePup AWE label sheets."/>
       <Input name="useCompanySvgLogos" label="Use Company SVG Logos"
              description="Use Company logos (if available) instead of text on tokens and city spots." />
       <Input name="plainMapHomes" label="Plain Map Home Spaces"
