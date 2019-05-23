@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import * as R from "ramda";
 import Token from "./Token";
 import Phase from "./Phase";
@@ -7,7 +8,7 @@ import ColorContext from "./context/ColorContext";
 
 import is from "ramda/src/is";
 
-const Charter = ({ name, abbrev, token, tokens, phases, turns }) => {
+const Charter = ({ name, abbrev, token, tokens, phases, turns, charterLayout }) => {
   let color = token;
   if(is(Object, token)) {
     color = token.colors[0];
@@ -18,12 +19,19 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns }) => {
       <svg key={`token-${index}`}>
         <g transform={`translate(25 25)`}>
           <ColorContext.Provider value="companies">
-            <Token label={abbrev} token={token} />
+            <Token outline={charterLayout === "color" ? "black" : null}
+                   label={charterLayout === "color" ? null : abbrev}
+                   token={charterLayout === "color" ? null : token} />
           </ColorContext.Provider>
           <g transform={`translate(0 39)`}>
-            <text fontSize="11" fontWeight="normal" textAnchor="middle">
-              {label}
-            </text>
+            <Color context="companies">
+              {(c, t) => (
+                <text fill={charterLayout === "color" ? t(c(color)) : null}
+                      fontSize="11" fontWeight="normal" textAnchor="middle">
+                  {label}
+                </text>
+              )}
+            </Color>
           </g>
         </g>
       </svg>
@@ -42,26 +50,39 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns }) => {
     }, turn.optional || []);
     let optionalList = <ul>{optionals}</ul>;
 
-        return (
-          <React.Fragment key={`turn-${turn.name}`}>
-            <dt>{turn.name}</dt>
-            <dd>{stepsList}</dd>
-            {turn.optional && <dd>{optionalList}</dd>}
-          </React.Fragment>
-        );
+    return (
+      <React.Fragment key={`turn-${turn.name}`}>
+        <dt>{turn.name}</dt>
+        <dd>{stepsList}</dd>
+        {turn.optional && <dd>{optionalList}</dd>}
+      </React.Fragment>
+    );
   }, turns);
 
   return (
     <Color context="companies">
-      {c => (
+      {(c, t) => (
         <div className="cutlines">
-          <div className="charter">
-            <div className="charter__name">{name}</div>
-            <div className="charter__tokens">{tokenSpots}</div>
+          <div className={`charter charter--${charterLayout}`}>
             <div
               className="charter__hr"
               style={{ backgroundColor: c(color) }}
             />
+            <div style={{ color: t(c(charterLayout === "color" ? color : "white")) }}
+                 className="charter__name">{name}</div>
+            {charterLayout === "color" && (
+              <div className="charter__logo">
+                <svg viewBox="-37.5 -37.5 75 75">
+                  <ColorContext.Provider value="companies">
+                    <Token outline="white"
+                           label={abbrev}
+                           width={37.5}
+                           token={token} />
+                  </ColorContext.Provider>
+                </svg>
+              </div>
+            )}
+            <div className="charter__tokens">{tokenSpots}</div>
             <div className="charter__trains">
               Trains
               <div className="charter__phase">
@@ -72,10 +93,6 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns }) => {
               Treasury
               <dl>{turnNodes}</dl>
             </div>
-            <div
-              className="charter__hr"
-              style={{ backgroundColor: c(color) }}
-            />
           </div>
         </div>
       )}
@@ -83,4 +100,8 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns }) => {
   );
 };
 
-export default Charter;
+const mapStateToProps = state => ({
+  charterLayout: state.config.charterLayout
+});
+
+export default connect(mapStateToProps)(Charter);

@@ -58,9 +58,9 @@
       "abbrev": "SP",
       "tokens": [
         "Free",
+        "New Orleans",
         "$40",
-        "$100",
-        "New Orleans"
+        "$100"
       ],
       "color": "orange",
       "shares": [
@@ -82,9 +82,9 @@
       "abbrev": "MKT",
       "tokens": [
         "Free",
+        "Southwest",
         "$40",
-        "$100",
-        "Southwest"
+        "$100"
       ],
       "color": "green",
       "shares": [
@@ -106,8 +106,8 @@
       "abbrev": "FW",
       "tokens": [
         "Free",
-        "$40",
-        "Denver"
+        "Denver",
+        "$40"
       ],
       "color": "purple",
       "shares": [
@@ -129,9 +129,9 @@
       "abbrev": "MP",
       "tokens": [
         "Free",
+        "Dallas",
         "$40",
-        "$100",
-        "Dallas"
+        "$100"
       ],
       "color": "brown",
       "shares": [
@@ -153,8 +153,8 @@
       "abbrev": "GMO",
       "tokens": [
         "Free",
-        "$40",
-        "St. Louis"
+        "St. Louis",
+        "$40"
       ],
       "color": "pink",
       "shares": [
@@ -176,8 +176,8 @@
       "abbrev": "TP",
       "tokens": [
         "Free",
-        "$40",
-        "New Orleans"
+        "New Orleans",
+        "$40"
       ],
       "color": "black",
       "shares": [
@@ -199,8 +199,8 @@
       "abbrev": "SSW",
       "tokens": [
         "Free",
-        "$40",
-        "Fort Worth"
+        "Fort Worth",
+        "$40"
       ],
       "color": "blue",
       "shares": [
@@ -222,8 +222,8 @@
       "abbrev": "IC",
       "tokens": [
         "Free",
-        "$40",
-        "Chicago"
+        "Chicago",
+        "$40"
       ],
       "color": "lime",
       "shares": [
@@ -245,9 +245,9 @@
       "abbrev": "ATSF",
       "tokens": [
         "Free",
+        "Southwest",
         "$40",
-        "$100",
-        "Southwest"
+        "$100"
       ],
       "color": "cyan",
       "shares": [
@@ -269,9 +269,9 @@
       "abbrev": "SLSF",
       "tokens": [
         "Free",
+        "Southeast",
         "$40",
-        "$100",
-        "Southeast"
+        "$100"
       ],
       "color": "red",
       "shares": [
