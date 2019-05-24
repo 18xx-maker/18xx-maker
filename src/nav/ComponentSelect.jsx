@@ -3,8 +3,10 @@ import {withRouter} from "react-router";
 
 import games from "../data/games";
 
+import equals from "ramda/src/equals";
+
 const disabled = value => {
-  return value === undefined || value === null || value === [];
+  return value === undefined || value === null || equals(value, []) || equals(value, {})
 }
 
 const ComponentSelect = ({match,history,location}) => {

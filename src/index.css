@@ -858,8 +858,8 @@ footer a:hover {
 
 .LegalNotes {
   background-color: #a00;
+  border-bottom: 2px solid #900;
   color: #fff;
-  border-bottom: 2px solid #b00;
   font-family: sans-serif;
 }
 
@@ -869,7 +869,7 @@ footer a:hover {
 
 .WIP {
   background-color: #ffa;
-  border-bottom: 2px solid #ff9;
+  border-bottom: 2px solid #dda;
   font-family: sans-serif;
   font-weight: normal;
 }
@@ -886,6 +886,7 @@ footer a:hover {
 .PrintNotes > div {
   width: 800px;
   margin: 0 auto;
+  padding: 0 0 2px 0;
 }
 
 .PrintNotes h3 {
@@ -903,13 +904,10 @@ footer a:hover {
   margin-right: 1em;
 }
 
-.LegalNotes p {
-  margin: 0.5em 0 0.4em;
-}
-
 .WIP p,
 .LegalNotes p,
 .PrintNotes p {
+  margin: 0.5em 0 0.4em;
   display: inline-block;
 }
 

@@ -5,7 +5,6 @@ import Map from "./Map";
 import Svg from "../Svg";
 import Title from "../Title";
 import HexContext from "../context/HexContext";
-import GameContext from "../context/GameContext";
 import * as R from "ramda";
 import { Redirect } from "react-router-dom";
 
@@ -39,24 +38,19 @@ const MapSingle = ({ match, coords, hexWidth }) => {
   }
 
   return (
-    <GameContext.Provider value={match.params.game}>
     <HexContext.Provider
       value={{
         width: data.hexWidth,
         rotation: data.horizontal ? 0 : 90
       }}
     >
-      {game.wip && (
-      <div className="WIP">
-        <div>
-          <p>This game is a work in progress. It is not fully implemented</p>
+      {variationSelect && (
+        <div className="PrintNotes">
+          <div>
+            {variationSelect}
+          </div>
         </div>
-      </div>)}
-      <div className="PrintNotes">
-        <div>
-          {variationSelect}
-        </div>
-      </div>
+      )}
       <div className="map">
         <Svg width={data.totalWidth} height={data.totalHeight}>
           <Title game={game} variation={variation} />
@@ -65,7 +59,6 @@ const MapSingle = ({ match, coords, hexWidth }) => {
         <style>{`@media print {@page {size: ${data.printWidth} ${data.printHeight};}}`}</style>
       </div>
     </HexContext.Provider>
-    </GameContext.Provider>
   );
 };
 
