@@ -1,4 +1,6 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+
 import { connect } from "react-redux";
 import games from "./data/games";
 import { equalPages, maxPages, printableWidth, printableHeight } from "./util";
@@ -16,9 +18,12 @@ import "./StockPaginated.css";
 
 const StockPaginated = ({ match, cell, pagination, paper }) => {
   let game = games[match.params.game];
-  let stock = game.stock;
 
-  if (!stock) return null;
+  if (!game.stock) {
+    return <Redirect to={`/${match.params.game}/background`} />;
+  }
+
+  let stock = game.stock;
 
   let splitPages = pagination === "max" ? maxPages : equalPages;
 

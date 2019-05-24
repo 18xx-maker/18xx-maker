@@ -16,7 +16,9 @@ const MapSingle = ({ match, coords, hexWidth }) => {
   let game = games[match.params.game];
 
   // Do redirects if we need or do not need a variation in the url
-  if (match.params.variation && !Array.isArray(game.map)) {
+  if (!game.map) {
+    return <Redirect to={`/${match.params.game}/background`} />;
+  } else if (match.params.variation && !Array.isArray(game.map)) {
     return <Redirect to={`/${match.params.game}/map`} />;
   } else if (!match.params.variation && Array.isArray(game.map)) {
     return <Redirect to={`/${match.params.game}/map/0`} />;

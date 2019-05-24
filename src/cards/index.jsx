@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import * as R from "ramda";
 
 import Number from "./Number";
@@ -35,6 +36,10 @@ const Cards = ({ match }) => {
   };
 
   let game = games[match.params.game];
+
+  if (!game.companies && !game.privates && !game.trains) {
+    return <Redirect to={`/${match.params.game}/background`} />;
+  }
 
   let companies = state.displayShares ? game.companies || [] : [];
   let privates = state.displayPrivates ? game.privates || [] : [];
