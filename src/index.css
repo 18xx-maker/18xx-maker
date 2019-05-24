@@ -155,15 +155,24 @@ svg {
   position: absolute;
   top: 0;
   left: 0;
-  margin: 0.125in 0.125in 0 0.125in;
-  padding-left: 0.125in;
-  height: 1in;
-  line-height: 1in;
+  padding: 0.25in 0.25in 0.25in 0.25in;
+  height: 1.1875in;
   font-size: 0.25in;
+  line-height: 0.3in;
   box-sizing: border-box;
-  width: calc(100% - 0.25in);
+  width: 100%;
   text-align: left;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
+.charter--color .charter__name {
+  padding-left: 1.125in;
+}
+
+
 
 .charter__logo {
   height: 0.75in;
@@ -178,13 +187,6 @@ svg {
   width: 0.75in;
   position: relative;
 }
-
-.charter--color .charter__name {
-  left: 1in;
-  padding-left: 0;
-  width: 45%;
-}
-
 
 .charter__trains {
   text-align: left;

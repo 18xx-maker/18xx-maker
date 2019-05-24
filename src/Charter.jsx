@@ -5,6 +5,7 @@ import Token from "./Token";
 import Phase from "./Phase";
 import Color from "./data/Color";
 import ColorContext from "./context/ColorContext";
+import { unitsToCss } from "./util";
 
 import is from "ramda/src/is";
 
@@ -68,8 +69,9 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle }) =
               className="charter__hr"
               style={{ backgroundColor: c(color) }}
             />
-            <div style={{ color: t(c(charterStyle === "color" ? color : "white")) }}
-                 className="charter__name">{name}</div>
+            <div style={{ color: t(c(charterStyle === "color" ? color : "white")),
+                          paddingRight: unitsToCss(25 + (65 * tokens.length)) }}
+                 className="charter__name"><div>{name}</div></div>
             {charterStyle === "color" && (
               <div className="charter__logo">
                 <svg viewBox="-37.5 -37.5 75 75">
