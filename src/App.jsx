@@ -15,9 +15,6 @@ import Tiles from "./tiles";
 import Home from "./Home";
 import Game from "./Game";
 
-import TileSheet from "./TileSheet";
-import TileManifest from "./TileManifest";
-
 import Footer from "./Footer";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
