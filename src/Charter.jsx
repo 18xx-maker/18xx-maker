@@ -9,7 +9,7 @@ import { unitsToCss } from "./util";
 
 import is from "ramda/src/is";
 
-const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle }) => {
+const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle, game }) => {
   let color = token;
   if(is(Object, token)) {
     color = token.colors[0];
@@ -84,6 +84,7 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle }) =
                 </svg>
               </div>
             )}
+            <div className="charter__game">{game}</div>
             <div className="charter__tokens">{tokenSpots}</div>
             <div className="charter__trains">
               Trains
