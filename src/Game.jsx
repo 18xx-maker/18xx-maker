@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import GameContext from "./context/GameContext";
 
@@ -8,7 +8,6 @@ import games from "./data/games";
 import Background from "./Background";
 import Cards from "./cards";
 import Charters from "./Charters";
-import Minors from "./Minors";
 import IPO from "./IPO";
 import Revenue from "./Revenue";
 import Tokens from "./Tokens";
