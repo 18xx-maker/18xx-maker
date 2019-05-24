@@ -6,9 +6,6 @@
     "background": "gray",
     "titleX": 50,
     "titleY": 1500,
-    "width": 150,
-    "color_10": "orange",
-    "hexCoords": true,
     "extraHomeTokens": 6,
     "currency": "USD"
   },

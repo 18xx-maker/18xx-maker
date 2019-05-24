@@ -43,7 +43,7 @@ const Cards = ({ match }) => {
     state.displayTrains ? game.trains || [] : []
   );
   let numbers = state.displayNumbers
-      ? R.range(1, maxPlayers(game.players) + 1)
+      ? R.range(1, maxPlayers(game.players || []) + 1)
       : [];
 
   return (

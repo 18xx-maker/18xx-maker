@@ -4,12 +4,9 @@
     "subtitle": "1856 Variant",
     "designer": "David Hecht",
     "background": "brown",
-    "width": 150,
-    "color_10": "orange",
     "titleX": 50,
     "titleY": -30,
     "titleSize": 150,
-    "hexCoords": true,
     "currency": "BEF"
   },
   "links": {

@@ -195,14 +195,12 @@ const GspTokens = ({ game }) => {
 
   let extraNormals =
       (game.info.extraTokens || 3) + (game.info.extraHomeTokens || 0);
-  let extraMinors = (game.info.extraMinors || 0);
   let tokenCount = R.scan(R.add, 0, R.addIndex(R.chain)((company, index) => {
     return(company.tokens.length + extraNormals + (game.info.extraTokens || 3));
   }, companies));
   let totalTokenCount = R.reduce(R.add, 0, R.addIndex(R.chain)((company, index) => {
     return(company.tokens.length + extraNormals + (game.info.extraTokens || 3));
   }, companies));
-  let gameTokenCount = game.tokens.length;
 
   let tokens = R.addIndex(R.chain)((company, index) => {
     let companyTokens = Array(company.tokens.length + extraNormals).fill(

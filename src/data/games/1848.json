@@ -4,12 +4,9 @@
     "subtitle": "Australia",
     "designer": "Helmut Ohley & Leonard Orgler",
     "background": "pink",
-    "width": 150,
-    "color_10": "orange",
     "titleX": 40,
     "titleY": 900,
     "titleSize": 160,
-    "hexCoords": true,
     "currency": "USD"
   },
   "links": {

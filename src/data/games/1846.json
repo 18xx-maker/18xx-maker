@@ -5,10 +5,6 @@
     "designer": "Thomas Lehmann",
     "background": "brown",
     "extraTokens": 2,
-    "width": 150,
-    "rotation": 90,
-    "color_5": "orange",
-    "color_10": "brown",
     "currency": "USD"
   },
   "links": {

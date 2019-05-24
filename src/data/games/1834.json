@@ -5,10 +5,7 @@
     "designer": "Eddie Robbins",
     "background": "gray",
     "orientation": "horizontal",
-    "width": 150,
-    "color_10": "orange",
     "titleX": 50,
-    "hexCoords": true,
     "currency": "EUR"
   },
   "links": {

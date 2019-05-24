@@ -3,14 +3,12 @@
     "title": "1857",
     "designer": "Eddie Robbins",
     "background": "purple",
-    "width": 150,
     "orientation": "horizontal",
     "titleY": 500,
     "titleX": 200,
     "titleRotate": -90,
     "extraTokens": 3,
     "extraHomeTokens": 1,
-    "color_10": "orange",
     "currency": "ARS"
   },
   "links": {

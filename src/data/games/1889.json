@@ -4,12 +4,9 @@
     "subtitle": "History of Shikoku Railways",
     "designer": "Yasutaka Ikeda",
     "background": "water",
-    "width": 150,
     "orientation": "horizontal",
     "titleX": 280,
     "titleY": 860,
-    "color_5": "cyan",
-    "color_10": "blue",
     "currency": "JPY"
   },
   "links": {

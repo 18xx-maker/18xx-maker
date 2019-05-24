@@ -4,10 +4,7 @@
     "subtitle": "Railways & Robber Barons",
     "designer": "Francis Tresham",
     "background": "gray",
-    "width": 150,
-    "color_10": "orange",
     "titleX": 50,
-    "hexCoords": true,
     "currency": "USD"
   },
   "links": {

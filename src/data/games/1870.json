@@ -4,12 +4,9 @@
     "subtitle": "Railroading across the Trans Mississippi from 1870",
     "designer": "Bill Dixon",
     "background": "green",
-    "width": 150,
-    "color_10": "orange",
     "titleX": 75,
     "titleY": 2000,
     "extraTotalHeight": 300,
-    "hexCoords": true,
     "currency": "USD"
   },
   "links": {

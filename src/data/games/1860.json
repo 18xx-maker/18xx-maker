@@ -4,11 +4,9 @@
     "subtitle": "Railways on the Isle of Wight",
     "designer": "Mike Hutton",
     "background": "water",
-    "width": 150,
     "orientation": "horizontal",
     "titleY": 720,
     "titleX": 12,
-    "color_10": "orange",
     "currency": "GBP"
   },
   "links": {

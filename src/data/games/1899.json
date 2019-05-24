@@ -3,11 +3,8 @@
     "title": "1899",
     "designer": "Dirk Clemens & Ingo Mayer",
     "background": "gray",
-    "width": 150,
-    "color_10": "orange",
     "titleX": 850,
     "titleY": 1150,
-    "hexCoords": true,
     "currency": "CNY"
   },
   "links": {

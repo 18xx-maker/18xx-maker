@@ -53,10 +53,6 @@ const MapSingle = ({ match, coords, hexWidth }) => {
       <div className="PrintNotes">
         <div>
           {variationSelect}
-          <p>
-            This map is meant to be printed in <b>{data.map.print || "portrait"}</b>{" "}
-            mode
-          </p>
         </div>
       </div>
       <div className="map">

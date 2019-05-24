@@ -3,14 +3,10 @@
     "title": "18Mex",
     "designer": "Mark Derrick",
     "background": "brown",
-    "width": 150,
-    "color_5": "orange",
-    "color_10": "brown",
     "orientation": "horizontal",
     "titleRotate": -90,
     "titleX": 350,
     "titleY": 1400,
-    "hexCoords": true,
     "currency": "MXN"
   },
   "links": {

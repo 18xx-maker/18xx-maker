@@ -1,7 +1,6 @@
 {
   "info": {
     "title": "Harzbahn 1873",
-    "abbrev": "1873",
     "subtitle": "Mining and Railways in the Harz Mountains",
     "designer": "Klaus Kiermeier",
     "background": "brown",
@@ -10,7 +9,6 @@
     "extraTokens": 2,
     "titleY": -80,
     "titleX": 20,
-    "width": 150,
     "currency": "EUR"
   },
   "links": {
