@@ -53,9 +53,9 @@ const Phase = ({ phases }) => {
 
   let phaseRows = phases.map(phase => {
     return (
-      <Color key={phase.phase || phase.name}>
+      <Color key={phase.phase || phase.name || phase.train}>
         {c => (
-          <tr>
+          <tr key={phase.phase || phase.name || phase.train}>
             {includeName && <td>{phase.name}</td>}
             {includePhase && <td>{phase.phase}</td>}
             {includeTrain && <td>{formatCell(phase.train)}</td>}
