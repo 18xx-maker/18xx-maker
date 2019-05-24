@@ -203,6 +203,17 @@ svg {
   border-style: dashed;
 }
 
+.charter__game {
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0 0.125in 0.125in 0;
+  width: 3.625in;
+  padding: 0 0.125in 0.125in 0;
+  box-sizing: border-box;
+}
+
 .charter__treasury {
   text-align: left;
   position: absolute;

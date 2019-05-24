@@ -29,6 +29,7 @@ const Charters = ({ match }) => {
         {R.addIndex(R.chain)((company, index) => {
           return (
             <Charter
+              game={game.info.title}
               key={company.abbrev}
               name={company.name}
               abbrev={company.abbrev}
