@@ -3,7 +3,7 @@
     "title": "1846",
     "subtitle": "The Race for the Midwest",
     "designer": "Thomas Lehmann",
-    "background": "brown",
+    "background": "orange",
     "extraTokens": 2,
     "currency": "USD"
   },
@@ -45,10 +45,10 @@
       "abbrev": "PRR",
       "tokens": [
         "Free",
+        "$80 / $40 / $60",
         "$80",
         "$80",
-        "$80",
-        "$80 / $40 / $60"
+        "$80"
       ],
       "color": "red",
       "shares": [
@@ -94,9 +94,9 @@
       "abbrev": "B&O",
       "tokens": [
         "Free",
+        "$80 / $60 / $100",
         "$80",
-        "$80",
-        "$80 / $60 / $100"
+        "$80"
       ],
       "color": "blue",
       "shares": [
@@ -142,9 +142,9 @@
       "abbrev": "ERIE",
       "tokens": [
         "Free",
+        "$80 / $40",
         "$80",
-        "$80",
-        "$80 / $40"
+        "$80"
       ],
       "color": "yellow",
       "shares": [
@@ -335,7 +335,10 @@
         "Pay dividends, half dividends or retain revenue",
         "Purchase trains"
       ],
-      "ordered": true
+      "ordered": true,
+      "optional": [
+        "Purchase private companies"
+      ]
     }
   ],
   "stock": {
