@@ -33,7 +33,7 @@ const Value = ({game, field}) => {
 const gameRows = map(key => {
   let game = games[key];
 
-  let players = reduce(max, 0, map(prop("number"), game.players));
+  let players = reduce(max, 0, map(prop("number"), game.players || []));
 
   return (
     <tr key={key}>

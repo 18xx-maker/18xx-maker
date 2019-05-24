@@ -140,7 +140,7 @@
           {
             "type": "object",
             "properties": {
-              "cost": { "type": "number", "minimum": 0 },
+              "cost": { "type": "string" },
               "size": {
                 "type": "string",
                 "enum": [

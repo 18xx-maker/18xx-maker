@@ -19,7 +19,7 @@ const LeftShare = ({
   name,
   abbrev,
   token,
-  style
+  shareStyle
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -39,7 +39,7 @@ const LeftShare = ({
 
   return (
     <div className="cutlines">
-      <div className={`card share share--${style || "left"}`}>
+      <div className={`card share share--${shareStyle || "left"}`}>
         {name && <div className="share__name">{name}</div>}
         {shares && <div className="share__shares">{count}</div>}
         {cost && <div className="share__shares">{cost}</div>}
@@ -141,7 +141,7 @@ const Share = (props) => (
       if(config.shareStyle === "left") {
         return <LeftShare {...props} />;
       } else if (config.shareStyle === "gmt") {
-        return <LeftShare {...props} style="gmt" />;
+        return <LeftShare {...props} shareStyle="gmt" />;
       } else {
         return <CenterShare {...props} />;
       }

@@ -3,12 +3,14 @@
     "title": "1867",
     "designer": "Ian Wilson",
     "background": "water",
-    "width": 150,
     "orientation": "horizontal",
     "titleX": 1200,
     "titleY": 1200,
-    "color_5": "cyan",
-    "color_10": "blue"
+    "currency": "CAD"
+  },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/227143/1867-railways-canada",
+    "rules": "http://www.all-aboardgames.com/home/ian-wilson-s-1867"
   },
   "wip": true,
   "tokens": [

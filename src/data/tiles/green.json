@@ -4501,7 +4501,7 @@
     "terrain": [
       {
         "type": "mountain",
-        "cost": 40,
+        "cost": "40",
         "angle": 180,
         "percent": 0.6
       }

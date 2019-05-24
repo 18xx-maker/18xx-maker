@@ -202,6 +202,12 @@ export const getMapData = (game, coords, hexWidth, variation) => {
 
   // Get the relevant map
   let gameMap = Array.isArray(game.map) ? game.map[variation] : game.map;
+
+  // If the game is map-less, just return an empty object
+  if (!gameMap) {
+    return {};
+  }
+
   let coordSpace = getCoordSpace(coords);
   let coordOffset = getCoordOffset(coords);
 
@@ -218,7 +224,7 @@ export const getMapData = (game, coords, hexWidth, variation) => {
   };
 
   // Find all hexes
-  let hexes = map(assoc("variation", variation), gameMap.hexes);
+  let hexes = map(assoc("variation", variation), gameMap.hexes || []);
   if (gameMap.copy !== undefined) {
     hexes = concat(
       map(assoc("variation", gameMap.copy), game.map[gameMap.copy].hexes),
