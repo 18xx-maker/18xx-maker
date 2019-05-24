@@ -40,7 +40,7 @@ const LeftShare = ({
   return (
     <div className="cutlines">
       <div className={`card share share--${shareStyle || "left"}`}>
-        {name && <div className="share__name">{name}</div>}
+        {name && <div className="share__name"><div>{name}</div></div>}
         {shares && <div className="share__shares">{count}</div>}
         {cost && <div className="share__shares">{cost}</div>}
         {percent && <div className="share__percent">{percent}%</div>}
