@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./TileSheet.scss";
@@ -81,6 +82,10 @@ const pageTiles = (perPage, pages, tiles) => {
 
 const TileSheet = ({ match, paper, layout, hexWidth }) => {
   let game = games[match.params.game];
+
+  if (!game.tiles) {
+    return <Redirect to={`/${match.params.game}/background`} />;
+  }
 
   let c = getTileSheetContext(layout, paper, hexWidth);
 

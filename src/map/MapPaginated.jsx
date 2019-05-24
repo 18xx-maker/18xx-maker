@@ -22,7 +22,9 @@ const MapPaginated = ({ match, coords, pagination, paper, hexWidth }) => {
   let game = games[match.params.game];
   let splitPages = pagination === "max" ? maxPages : equalPages;
 
-  if(game.info.paginated === false && match.params.variation) {
+  if (!game.map) {
+    return <Redirect to={`/${match.params.game}/background`} />;
+  } else if (game.info.paginated === false && match.params.variation) {
     return <Redirect to={`/${match.params.game}/map/${match.params.variation}`} />;
   } else if (game.info.paginated === false) {
     return <Redirect to={`/${match.params.game}/map`} />;

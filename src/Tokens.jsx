@@ -1,4 +1,6 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+
 import Token from "./Token";
 import games from "./data/games";
 import * as R from "ramda";
@@ -17,10 +19,6 @@ const MaxTokens = ({ game }) => {
   let companies = game.companies;
   let minorCompanies = game.minorCompanies || [];
   let tokensWidth = 12;
-
-  if (!companies) {
-    return null;
-  }
 
   let extraNormals =
       (game.info.extraTokens || 3) + (game.info.extraHomeTokens || 0);
@@ -294,6 +292,10 @@ const GspTokens = ({ game }) => {
 
 const Tokens = ({ match }) => {
   let game = games[match.params.game];
+
+  if (!game.companies) {
+    return <Redirect to={`/${match.params.game}/background`} />;
+  }
 
   return (
     <Config>
