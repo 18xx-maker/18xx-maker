@@ -12,15 +12,7 @@
     "bgg": "https://www.boardgamegeek.com/boardgame/3130/1899",
     "rules": "http://www.18xx.net/1899/1899.htm"
   },
-  "tokens": [],
-  "ipo": false,
   "bank": "$12,000",
-  "players": [],
-  "companies": [],
-  "trains": [],
-  "privates": [],
-  "phases": [],
-  "pools": [],
   "rounds": [
     {
       "name": "OR3",
@@ -39,7 +31,6 @@
       "color": "train_gray"
     }
   ],
-  "turns": [],
   "stock": {
     "type": "2D",
     "cell": {

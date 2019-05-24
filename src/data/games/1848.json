@@ -13,6 +13,7 @@
     "bgg": "https://boardgamegeek.com/boardgame/32424/1848-australia",
     "rules": "https://docs.google.com/document/d/1quWp3ZS2kzMirB4bwwT11wjJTFN9y9-1JMANRjzY564/edit"
   },
+  "wip": true,
   "tokens": [
     "Round"
   ],
