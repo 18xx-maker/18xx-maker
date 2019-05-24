@@ -204,13 +204,18 @@ svg {
 }
 
 .charter__game {
-  text-align: right;
+  font-family: sans-serif;
+  font-weight: normal;
+  font-size: 0.12in;
+  text-align: left;
   position: absolute;
+  transform-origin: left bottom;
+  transform: rotate(-90deg);
   bottom: 0;
-  right: 0;
-  margin: 0 0.125in 0.125in 0;
-  width: 3.625in;
-  padding: 0 0.125in 0.125in 0;
+  width: 100%;
+  left: calc(100% - 0.25in);
+  margin: 0.125in;
+  padding: 0.125in;
   box-sizing: border-box;
 }
 
