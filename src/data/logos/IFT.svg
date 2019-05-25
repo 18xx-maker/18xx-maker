@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 43.309685" height="163.690148" width="50mm">
     <g stroke-width=".429573">
-        <path d="M49.999994 43.180803l-25.103401.043997L0 43.309768l12.562165-21.770325L24.895196.000093l12.876383 21.30782z" fill="#214799" fill-rule="evenodd"/>
+        <path class="color-blue" d="M49.999994 43.180803l-25.103401.043997L0 43.309768l12.562165-21.770325L24.895196.000093l12.876383 21.30782z" fill="#214799" fill-rule="evenodd"/>
         <g style="line-height:1.25;-inkscape-font-specification:'Pump Demi Bold Plain'">
             <path d="M28.076578 16.144787s-3.556344-.268523-4.964508.625364c-.574734.36485-.873798 1.080608-1.093248 1.725038-.119887.352257-.103591.739594-.102195 1.111731.006984 1.652384.00014 4.901003.00014 4.901003h2.338856v-2.365137h3.829242v-2.316672h-3.829242s-.020951-.36627 0-.547776c.369949-1.2731 2.667834-.977412 3.820885-.984395z" style="-inkscape-font-specification:'Pump Demi Bold Plain'" aria-label="F" font-weight="400" font-size="5.644444" font-family="Pump Demi Bold Plain" letter-spacing="0" word-spacing="0" fill="#fff"/>
         </g>

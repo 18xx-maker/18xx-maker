@@ -44,14 +44,15 @@ const Token = ({
   width,
   bleed,
   outline,
-  useCompanySvgLogos
+  useCompanySvgLogos,
+  overrideSvgLogoColors
 }) => {
   width = width || 25;
 
   let gradient = null;
   let shape = null;
   let tokenFill = null;
-  let color = is(Object, token) ? (token.colors ? token.colors[0] : "black") : token;
+  let color = is(Object, token) ? (token.colors ? token.colors[0] : "black") : token || "white";
 
   let clipId = uuid.v4();
   let clip = (
@@ -102,22 +103,6 @@ const Token = ({
               if(is(Object, token)) {
                 let id = uuid.v4();
                 switch(token.type) {
-                case "logo":
-                  let logo = logos[label];
-                  let start = -0.75 * width;
-                  let size = 1.50 * width;
-                  if (logo) {
-                    let Component = logo.Component;
-                    shape = (
-                      <Component x={start} y={start} height={size} width={size}/>
-                    );
-                    tokenFill = c("white");
-                    textStroke = "none";
-                    textFill = "none";
-                    break;
-                  }
-                  // We're ok with the above statement falling through the case for now
-                  // eslint-disable-next-line
                 case "square":
                   shape = (
                     <rect rx="2" ry="2" x="-17.5" y="-17.5" width="35" height="35"
@@ -222,6 +207,24 @@ const Token = ({
                           clipPath={`url(#${clipId})`}/>
                   );
                   break;
+                case "logo":
+                  let logo = logos[label];
+                  let start = -1 * width;
+                  let size = 2 * width;
+                  if (logo) {
+                    let Component = logo.Component;
+                    shape = (
+                      <Component x={start} y={start}
+                                 height={size} width={size}/>
+                    );
+                    tokenFill = c("white");
+                    textStroke = "none";
+                    textFill = "none";
+                  } else {
+                    textFill = t(c(color));
+                    tokenFill = c(color) || p("white");
+                  }
+                  break;
                 default:
                   break;
                 }
@@ -283,7 +286,8 @@ const Token = ({
 };
 
 const mapStateToProps = state => ({
-  useCompanySvgLogos: state.config.useCompanySvgLogos
+  useCompanySvgLogos: state.config.useCompanySvgLogos,
+  overrideSvgLogoColors: state.config.overrideSvgLogoColors
 });
 
 export default connect(mapStateToProps)(Token);

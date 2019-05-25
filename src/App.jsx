@@ -1,5 +1,6 @@
 import React from "react";
 
+import SetSvgColors from "./data/SetSvgColors";
 import ScrollToTop from "./ScrollToTop";
 import Color from "./data/Color";
 
@@ -252,6 +253,7 @@ const App = () => (
         </svg>
         <Route exact path="/" component={Footer}/>
       </div>
+      <SetSvgColors/>
     </ScrollToTop>
   </Router>
 );

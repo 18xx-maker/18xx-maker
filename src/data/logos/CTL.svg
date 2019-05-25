@@ -4,7 +4,7 @@
         <path d="M76.193206 98.861267s6.81389 2.689103 15.763952 2.641763c8.410492-.0445 15.330882-2.598456 15.330882-2.598456" id="b" fill="none" stroke="none" stroke-width=".264583" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
     </defs>
     <g transform="matrix(1.09771 0 0 1.0997 -75.925854 -91.157627)" stroke-width=".910158">
-        <ellipse cx="91.941948" cy="92.631607" rx="22.433317" ry="9.39774" fill="#f4e910" fill-rule="evenodd" stroke="#000" stroke-width=".682619" paint-order="stroke markers fill"/>
+        <ellipse class="color-yellow" cx="91.941948" cy="92.631607" rx="22.433317" ry="9.39774" fill="#f4e910" fill-rule="evenodd" stroke="#000" stroke-width=".682619" paint-order="stroke markers fill"/>
         <text style="line-height:1.25;-inkscape-font-specification:'Bodoni MT'" x="82.024513" y="95.446602" font-weight="400" font-size="7.761111" font-family="Bodoni MT" letter-spacing="0" word-spacing="0" stroke-width=".240813">
             <tspan x="82.024513" y="95.446602" style="-inkscape-font-specification:'Bodoni MT'" dx="0 0.050000001 0.090000004 0.23 0.27000001 0.41999999">ILIBEO</tspan>
         </text>

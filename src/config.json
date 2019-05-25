@@ -12,6 +12,7 @@
     "margins": 25
   },
   "useCompanySvgLogos": false,
+  "overrideSvgLogoColors": false,
   "plainMapDestinations": false,
   "plainMapHomes": false,
   "straightCityNames": false,

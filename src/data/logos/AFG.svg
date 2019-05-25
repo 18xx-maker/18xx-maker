@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 22.806999" height="86.199681" width="50mm">
     <g stroke-width=".773922">
         <g fill-rule="evenodd">
-            <path fill="#cc202c" d="M0 0h43.062173v22.807H0z"/>
-            <path fill="#057a00" d="M43.062177 0h2.312605v22.807h-2.312605z"/>
-            <path fill="#fff" d="M45.374786 0h2.312606v22.807h-2.312606z"/>
-            <path fill="#ff000b" d="M47.687394 0H50v22.807h-2.312606z"/>
+            <path class="color-red" fill="#cc202c" d="M0 0h43.062173v22.807H0z"/>
+            <path class="color-green" fill="#057a00" d="M43.062177 0h2.312605v22.807h-2.312605z"/>
+            <path class="color-white" fill="#fff" d="M45.374786 0h2.312606v22.807h-2.312606z"/>
+            <path class="color-red" fill="#ff000b" d="M47.687394 0H50v22.807h-2.312606z"/>
         </g>
         <text style="line-height:1.25;-inkscape-font-specification:'Bodoni MT Bold'" x="59.371029" y="49.764725" font-weight="700" font-size="5.644444" font-family="Bodoni MT" letter-spacing="0" word-spacing="0" fill="#fff" stroke-width=".204767" transform="translate(-73.835782 -56.530395) scale(1.29212)">
             <tspan x="59.371029" y="49.764725" style="-inkscape-font-specification:'Bodoni MT Bold'" dx="0 -0.46000001 -0.07 -0.23 0 -0.63 -0.12 -0.090000004 -0.090000004" font-size="5.997222">GARIBALDI</tspan>
