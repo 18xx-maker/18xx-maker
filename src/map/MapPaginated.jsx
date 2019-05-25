@@ -46,8 +46,6 @@ const MapPaginated = ({ match, coords, pagination, paper, hexWidth }) => {
     pageHeight = tmp;
   }
 
-  console.log({pageWidth,pageHeight})
-
   let y = -25; // Start with room for margins
   let mapPages = map(height => {
     let x = -25; // Start with room for margins
