@@ -92,6 +92,7 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle, gam
             {halfWidthCharters && (
               <div className="charter__assets">
                 Assets
+                <dl>{turnNodes}</dl>
               </div>
             )}
             {halfWidthCharters || (
