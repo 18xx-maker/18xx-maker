@@ -256,7 +256,7 @@ svg {
 .charter__phase {
   position: absolute;
   bottom: 0;
-  padding: 0 0.125in 0.25in 0;
+  padding: 0 0.125in 0 0;
   width: calc(100% - 0.25in);
 }
 
