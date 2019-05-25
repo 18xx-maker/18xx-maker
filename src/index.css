@@ -1000,7 +1000,8 @@ footer a:hover {
   nav,
   footer,
   .LegalNotes,
-  .PrintNotes {
+  .PrintNotes,
+  .WIP {
     display: none;
   }
 
