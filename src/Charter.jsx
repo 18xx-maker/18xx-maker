@@ -9,7 +9,7 @@ import { unitsToCss } from "./util";
 
 import is from "ramda/src/is";
 
-const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle, game }) => {
+const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle, game, halfWidthCharters }) => {
   let color = token;
   if(is(Object, token)) {
     color = token.colors[0];
@@ -24,10 +24,10 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle, gam
                    label={charterStyle === "color" ? null : abbrev}
                    token={charterStyle === "color" ? null : token} />
           </ColorContext.Provider>
-          <g transform={`translate(0 39)`}>
+          <g transform={`${halfWidthCharters ? "rotate(-90) " : ""}translate(0 39)`}>
             <Color context="companies">
               {(c, t) => (
-                <text fill={charterStyle === "color" ? t(c(color)) : null}
+                <text fill={(charterStyle === "color" && !halfWidthCharters) ? t(c(color)) : c("black")}
                       fontSize="11" fontWeight="normal" textAnchor="middle">
                   {label}
                 </text>
@@ -64,13 +64,13 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle, gam
     <Color context="companies">
       {(c, t) => (
         <div className="cutlines">
-          <div className={`charter charter--${charterStyle}`}>
+          <div className={`charter charter--${charterStyle}${halfWidthCharters ? " charter--half" : ""}`}>
             <div
               className="charter__hr"
               style={{ backgroundColor: c(color) }}
             />
             <div style={{ color: t(c(charterStyle === "color" ? color : "white")),
-                          paddingRight: unitsToCss(25 + (65 * tokens.length)) }}
+                          paddingRight: halfWidthCharters ? null : unitsToCss(25 + (65 * tokens.length)) }}
                  className="charter__name"><div>{name}</div></div>
             {charterStyle === "color" && (
               <div className="charter__logo">
@@ -85,17 +85,29 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle, gam
               </div>
             )}
             <div className="charter__game">{game}</div>
-            <div className="charter__tokens">{tokenSpots}</div>
-            <div className="charter__trains">
-              Trains
-              <div className="charter__phase">
-                <Phase phases={phases} />
+            <div className="charter__tokens">
+              {halfWidthCharters && "Tokens"}
+              {tokenSpots}
+            </div>
+            {halfWidthCharters && (
+              <div className="charter__assets">
+                Assets
               </div>
-            </div>
-            <div className="charter__treasury">
-              Treasury
-              <dl>{turnNodes}</dl>
-            </div>
+            )}
+            {halfWidthCharters || (
+              <div className="charter__trains">
+                Trains
+                <div className="charter__phase">
+                  <Phase phases={phases} />
+                </div>
+              </div>
+            )}
+            {halfWidthCharters || (
+              <div className="charter__treasury">
+                Treasury
+                <dl>{turnNodes}</dl>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -104,7 +116,8 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle, gam
 };
 
 const mapStateToProps = state => ({
-  charterStyle: state.config.charterStyle
+  charterStyle: state.config.charterStyle,
+  halfWidthCharters: state.config.halfWidthCharters
 });
 
 export default connect(mapStateToProps)(Charter);

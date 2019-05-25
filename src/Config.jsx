@@ -235,6 +235,8 @@ const Config = ({config, setConfig, resetConfig}) => {
       <h3>Charters</h3>
       <Input name="charterStyle" label="Charter Style"
              description="This lets you choose between two styles for charters. One is simular to Carth's style while the other includes more color at the top."/>
+      <Input name="halfWidthCharters" label="Half Width Charters"
+             description="This draws all charters (major and minor) as half width. They will take up half of the width of your page (minus cutlines)."/>
       <h3>Cards</h3>
       <Input name="shareStyle" label="Share Style"
              description="This lets you choose between two styles for shares. One keeps the token in the center of the card, the other puts the tokens on the let (Simular to All Aboard Games and Deep Thought Games)."/>
