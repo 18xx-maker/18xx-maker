@@ -84,7 +84,7 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle, gam
                 </svg>
               </div>
             )}
-            <div className="charter__game">{game}</div>
+            {false && <div className="charter__game">{game}</div>}
             <div className="charter__tokens">
               {halfWidthCharters && "Tokens"}
               {tokenSpots}
