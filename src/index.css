@@ -198,12 +198,12 @@ svg {
 .charter__trains {
   text-align: left;
   position: absolute;
-  height: 3.4375in;
+  height: 3.1875in;
   bottom: 0;
   left: 0;
-  margin: 0.125in 0 0 0.125in;
+  margin: 0.125in 0 0.25in 0.125in;
   width: 3.625in;
-  padding: 0 0.125in 0.25in 0.125in;
+  padding: 0 0.125in 0 0.125in;
   box-sizing: border-box;
   border-width: 0 1px 0 0;
   border-color: #666;
@@ -218,7 +218,7 @@ svg {
   left: 0;
   margin: 0.125in 0.125in 0.25in 1.125in;
   width: 2.5in;
-  padding: 0 0.125in 0 0.125in;
+  padding: 0 0.125in;
   box-sizing: border-box;
   border-width: 0 0 0 1px;
   border-color: #666;
@@ -296,6 +296,14 @@ svg {
   bottom: 0;
   margin: 0 0 0.125in 0;
   padding: 0 0 0.125in 0;
+  width: calc(100% - 0.25in);
+}
+
+.charter--half dl {
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
   width: calc(100% - 0.25in);
 }
 
