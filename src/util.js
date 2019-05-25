@@ -101,7 +101,7 @@ export const marketColor = curry((limits, value) => {
 
 export const equalPages = (total, page) => {
   total = total || 0;
-  page = total || 1;
+  page = page || 1;
 
   let pages = Math.ceil(total / page);
 
