@@ -15,7 +15,7 @@
     "ajv": "^6.10.0",
     "ajv-cli": "^3.0.0",
     "archiver": "^3.0.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "puppeteer": "1.16.0",
     "ramda": "^0.26.1",
     "react": "16.8.6",

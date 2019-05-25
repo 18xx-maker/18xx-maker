@@ -93,6 +93,7 @@
       "additionalProperties": false
     },
     "useCompanySvgLogos": { "type": "boolean" },
+    "overrideSvgLogoColors": { "type": "boolean" },
     "plainMapHomes": { "type": "boolean" },
     "plainMapDestinations": { "type": "boolean" },
     "straightCityNames": { "type": "boolean" },

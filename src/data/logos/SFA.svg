@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 31.900461" height="120.568671" width="50mm">
     <g stroke-width=".603623">
         <g stroke="#000" transform="translate(-80.564216 -138.901154) scale(1.65666)">
-            <path d="M78.53103 93.684065l-14.810003-9.659913-14.810004 9.659912 14.810004 9.237926z" fill="#ec0b7f" stroke-width=".301812"/>
+            <path class="color-pink" d="M78.53103 93.684065l-14.810003-9.659913-14.810004 9.659912 14.810004 9.237926z" fill="#ec0b7f" stroke-width=".301812"/>
             <rect ry=".2" rx=".2" y="86.835213" x="52.554523" height="13.271882" width="22.333006" fill="#fff" fill-rule="evenodd" stroke-width=".452718" paint-order="stroke markers fill"/>
         </g>
         <text style="line-height:1.25;-inkscape-font-specification:'Bell MT Italic'" x="53.096611" y="95.007324" font-style="italic" font-weight="400" font-size="4.586111" font-family="Bell MT" letter-spacing="0" word-spacing="0" stroke-width=".159709" transform="translate(-80.564216 -138.901154) scale(1.65666)">

@@ -214,6 +214,8 @@ const Config = ({config, setConfig, resetConfig}) => {
              description="This lets you choose between different layouts when printing tokens. GSP matches the GarageSalePup AWE label sheets."/>
       <Input name="useCompanySvgLogos" label="Use Company SVG Logos"
              description="Use Company logos (if available) instead of text on tokens and city spots." />
+      <Input name="overrideSvgLogoColors" label="Override SVG Logo Colors"
+             description="Override the colors used in the company SVG's with the colors from your selected company theme." />
       <Input name="plainMapHomes" label="Plain Map Home Spaces"
              description="This sets all home spots on maps to be empty white cities with black company text instead of colored or using logos." />
       <h3>Maps</h3>
