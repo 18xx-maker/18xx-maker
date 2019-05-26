@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { connect } from "react-redux";
 
 import { setConfig } from "./store/actions";
@@ -138,7 +139,7 @@ const _Input = ({name, label, description, config, value, setConfig, dimension})
   return (
     <div id={`config-${name}`} className="input">
       {inputNode}
-      <p className="description">{description}</p>
+      <ReactMarkdown className="description" source={description}/>
     </div>
   );
 };
@@ -213,7 +214,7 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="tokenLayout" label="Token Layout"
              description="This lets you choose between different layouts when printing tokens. GSP matches the GarageSalePup AWE label sheets."/>
       <Input name="companySvgLogos" label="Company Logos"
-             description="This lets you choose to use SVG logos (when available) for companies instead of only colors and text. The different settings are explained on the [logos doc](/doc/logos) page" />
+             description="This lets you choose to use SVG logos (when available) for companies instead of only colors and text. The different settings are explained on the [logos doc](/docs/logos) page" />
       <h3>Maps</h3>
       <Input name="coords" label="Coordinate Type"
              description="This lets you choose where the coordinates appear on the map (if at all)."/>
