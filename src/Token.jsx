@@ -87,12 +87,9 @@ const Token = ({
 
             if (companySvgLogos !== "none") {
               if (!is(Object, token)) {
-                console.log("Not Object");
                 if (is(Array, token)) {
-                  console.log("Array");
                   token = {colors: token}
                 } else {
-                  console.log("Not Array");
                   token = {colors: [token]}
                 }
               }
@@ -101,8 +98,6 @@ const Token = ({
               if (logo) {
                 token["type"] = "logo";
               }
-
-              console.log(token);
             }
 
             if(inverse) {
@@ -233,7 +228,7 @@ const Token = ({
                                  x={start} y={start}
                                  height={size} width={size}/>
                     );
-                    tokenFill = c(color);
+                    tokenFill = c("white");
                     textStroke = "none";
                     textFill = "none";
                   } else {
@@ -252,8 +247,6 @@ const Token = ({
                 tokenFill = c(color) || p("white");
               }
             }
-
-            console.log({tokenFill, textFill});
 
             let content = icon ? (
               <use href={icon} transform="scale(1.66666 1.66666)" />
