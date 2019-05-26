@@ -199,7 +199,7 @@ const Config = ({config, setConfig, resetConfig}) => {
         <option value="dtg">Deep Thought</option>
         <option value="gmt">GMT</option>
         <option value="ps18xx">px18xx</option>
-        <option value="rob">Rails on Board</option>
+        <option value="rob">Rails on Boards</option>
       </select>
       <CompaniesThemePreview/>
       <p className="description">The company theme determines which colors are used for all of the elements on the maps and tiles.</p>
