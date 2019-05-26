@@ -296,7 +296,7 @@ const Token = ({
   );
 };
 
-const mapStateToProps = (state, companySvgLogos) => ({
+const mapStateToProps = (state, {companySvgLogos}) => ({
   companySvgLogos: companySvgLogos || state.config.companySvgLogos,
 });
 
