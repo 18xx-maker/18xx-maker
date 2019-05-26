@@ -8,7 +8,6 @@ import chain from "ramda/src/chain";
 import concat from "ramda/src/concat";
 import join from "ramda/src/join";
 import keys from "ramda/src/keys";
-import reduce from "ramda/src/reduce";
 
 const colors = keys(require("./themes/companies/rob.json"));
 
