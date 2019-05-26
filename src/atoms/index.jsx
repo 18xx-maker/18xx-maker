@@ -67,7 +67,8 @@ const atoms = [{
     {tokens: [{label:"FF", token:{type:"bar", colors:["blue", "orange"]}}]},
     {tokens: [{label:"GG", token:{type:"stripe", colors:["blue", "orange"]}}]},
     {tokens: [{label:"HH", token:{type:"target", colors:["blue", "orange"]}}]},
-    {tokens: [{label:"Longer", token:"blue"}]}
+    {tokens: [{label:"Longer", token:"blue"}]},
+    {tokens: [{label:"KO", token:"purple"}]}
   ]
 },{
   group: "Cities",

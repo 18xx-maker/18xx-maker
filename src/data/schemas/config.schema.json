@@ -92,8 +92,10 @@
       ],
       "additionalProperties": false
     },
-    "useCompanySvgLogos": { "type": "boolean" },
-    "overrideSvgLogoColors": { "type": "boolean" },
+    "companySvgLogos": {
+      "type": "string",
+      "enum": ["none", "original", "match", "main"]
+    },
     "plainMapHomes": { "type": "boolean" },
     "plainMapDestinations": { "type": "boolean" },
     "straightCityNames": { "type": "boolean" },
@@ -103,6 +105,7 @@
   "required": [
     "charterStyle",
     "companiesTheme",
+    "companySvgLogos",
     "coords",
     "font",
     "pagination",
@@ -112,8 +115,7 @@
     "shareStyle",
     "stock",
     "theme",
-    "tokenLayout",
-    "useCompanySvgLogos"
+    "tokenLayout"
   ],
   "additionalProperties": false
 }

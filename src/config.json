@@ -11,8 +11,7 @@
     "height": 1100,
     "margins": 25
   },
-  "useCompanySvgLogos": false,
-  "overrideSvgLogoColors": false,
+  "companySvgLogos": "none",
   "plainMapDestinations": false,
   "plainMapHomes": false,
   "straightCityNames": false,

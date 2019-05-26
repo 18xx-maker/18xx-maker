@@ -61,9 +61,6 @@ const server = app.listen(9000);
     for(let i=0;i<items.length;i++) {
       let item = items[i];
 
-      if(item === "map-paginated" && gameDef.info.paginated === false) continue;
-      if(item === "market-paginated" && gameDef.stock.paginated === false) continue;
-
       console.log("Printing " + game + "/" + item);
       await page.goto(`http://localhost:9000/${game}/${item}`, {waitUntil: 'networkidle2'});
       await page.pdf({path: `build/render/${game}/${item}.pdf`, scale: 1.0, preferCSSPageSize: true});
