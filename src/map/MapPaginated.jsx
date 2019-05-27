@@ -22,7 +22,9 @@ const MapPaginated = ({ match, coords, pagination, paper, hexWidth }) => {
   let game = games[match.params.game];
   let splitPages = pagination === "max" ? maxPages : equalPages;
 
-  if(game.info.paginated === false && match.params.variation) {
+  if (!game.map) {
+    return <Redirect to={`/${match.params.game}/background`} />;
+  } else if (game.info.paginated === false && match.params.variation) {
     return <Redirect to={`/${match.params.game}/map/${match.params.variation}`} />;
   } else if (game.info.paginated === false) {
     return <Redirect to={`/${match.params.game}/map`} />;
@@ -38,7 +40,7 @@ const MapPaginated = ({ match, coords, pagination, paper, hexWidth }) => {
   let pageWidth = printableWidth(paper) - 75;
   let pageHeight = printableHeight(paper) - 75;
 
-  if (data.map.print === "landscape") {
+  if (data && data.map && data.map.print === "landscape") {
     let tmp = pageWidth;
     pageWidth = pageHeight;
     pageHeight = tmp;
@@ -109,14 +111,14 @@ const MapPaginated = ({ match, coords, pagination, paper, hexWidth }) => {
         <div>
           {variationSelect}
           <p>
-            This map is meant to be printed in <b>{data.map.print || "portrait"}</b>{" "}
+            This map is meant to be printed in <b>{(data && data.map && data.map.print) || "portrait"}</b>{" "}
             mode
           </p>
         </div>
       </div>
       <Svg className="FullMap" defs={defs} />
       {mapPages}
-      <PageSetup landscape={data.map.print === "landscape"}/>
+      <PageSetup landscape={data && data.map && data.map.print === "landscape"}/>
     </HexContext.Provider>
     </GameContext.Provider>
   );

@@ -18,7 +18,8 @@ const LeftShare = ({
   label,
   name,
   abbrev,
-  token
+  token,
+  shareStyle
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -29,7 +30,7 @@ const LeftShare = ({
                   <div className="share__token__wrapper">
                     <svg style={{width:"0.52in",height:"0.52in"}}
                          viewBox="-26 -26 52 52">
-                      <Token label={abbrev} token={token} width={25} />
+                      <Token label={abbrev} token={token} outline="white" width={25} />
                     </svg>
                   </div>
                 </div>);
@@ -38,8 +39,8 @@ const LeftShare = ({
 
   return (
     <div className="cutlines">
-      <div className="card share share--left">
-        {name && <div className="share__name">{name}</div>}
+      <div className={`card share share--${shareStyle || "left"}`}>
+        {name && <div className="share__name"><div>{name}</div></div>}
         {shares && <div className="share__shares">{count}</div>}
         {cost && <div className="share__shares">{cost}</div>}
         {percent && <div className="share__percent">{percent}%</div>}
@@ -137,8 +138,10 @@ const CenterShare = ({
 const Share = (props) => (
   <Config>
     {config => {
-      if(config.shareLayout === "left") {
+      if(config.shareStyle === "left") {
         return <LeftShare {...props} />;
+      } else if (config.shareStyle === "gmt") {
+        return <LeftShare {...props} shareStyle="gmt" />;
       } else {
         return <CenterShare {...props} />;
       }

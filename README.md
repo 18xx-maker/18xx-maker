@@ -27,10 +27,22 @@ following command and the site should be available at http://localhost (you
 might need to edit the port depending on your OS and other running apps):
 
 ```sh
-docker run -it --rm -p 80:80 -n 18xx kelsin/18xx
+docker run -it --rm -p 80:80 --name 18xx kelsin/18xx
 ```
 
-More documentation about this will be coming soon.
+### Persistant
+
+If you want to use docker to hack on the site, you can use a docker volume to
+keep a persistant image of the game code. Knowledge of how to manage docker
+volumes is important to use this properly.
+
+```sh
+docker run -it --rm -p 3000:3000 --name 18xx-develop -v 18xx:/home/18xx kelsin/18xx:develop
+```
+
+This will run the react-development server that will live update if you edit
+files, and store anything edited (starting with the current code) on the volume
+named `18xx`.
 
 ## Usage
 
@@ -56,22 +68,22 @@ npm start
 ```
 ### Printing
 
-Running `yarn build` will build the app and then output pdf's into the
-`build/render` folder for all games.
+Running `yarn build` will build the app. This is required before you using the b18 or the print script.
 
-Running `yarn print <game>` will output the pdf's for only one game. The app
-needs to be built first by running `yarn build:app`.
+Running `yarn print <game>` will output the pdf's for only one game.
+
+Running `yarn print all` will output the pdf's for all games.
 
 ### Board18
 
 Running `yarn b18 <game> <verison> <author>` will create a board18 game box zip
-file. The app needs to be built first by running `yarn build:app`.
+file. The app needs to be built first by running `yarn build`.
 
 ### Example
 
 ``` sh
 # Build the app
-yarn build:app
+yarn build
 
 # Print 1830 PDF's
 yarn print 1830

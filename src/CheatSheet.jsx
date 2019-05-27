@@ -23,7 +23,7 @@ const Value = ({game, field}) => {
               <th>{p.number}</th>
               <td>{p[field]}</td>
             </tr>
-          ), game.players)}
+          ), game.players || [])}
         </tbody>
       </table>
     );
@@ -33,7 +33,7 @@ const Value = ({game, field}) => {
 const gameRows = map(key => {
   let game = games[key];
 
-  let players = reduce(max, 0, map(prop("number"), game.players));
+  let players = reduce(max, 0, map(prop("number"), game.players || []));
 
   return (
     <tr key={key}>
@@ -43,7 +43,7 @@ const gameRows = map(key => {
         <span>{game.info.subtitle}</span>
       </td>
       <td>{game.info.designer}</td>
-      <td>{players}</td>
+      <td>{players === 0 ? null : players}</td>
       <td className="bank"><Value game={game} field="bank"/></td>
       <td><Value game={game} field="capital"/></td>
       <td><Value game={game} field="certLimit"/></td>

@@ -44,14 +44,14 @@ const Token = ({
   width,
   bleed,
   outline,
-  useCompanySvgLogos
+  companySvgLogos,
 }) => {
   width = width || 25;
 
   let gradient = null;
   let shape = null;
   let tokenFill = null;
-  let color = is(Object, token) ? (token.colors ? token.colors[0] : "black") : token;
+  let color = is(Object, token) ? (token.colors ? token.colors[0] : "black") : token || "white";
 
   let clipId = uuid.v4();
   let clip = (
@@ -82,16 +82,22 @@ const Token = ({
               }
             }
 
-            let textFill = (token && token.labelColor) ? c(token.labelColor) : p("black");
+            let textFill = (token && token.labelColor) ? c(token.labelColor) : t(c(color));
             let textStroke = "none";
 
-            if (useCompanySvgLogos) {
-              if(!is(Object, token)) {
-                let temp = token;
-                token = {colors: [temp]};
+            if (companySvgLogos !== "none") {
+              if (!is(Object, token)) {
+                if (is(Array, token)) {
+                  token = {colors: token}
+                } else {
+                  token = {colors: [token]}
+                }
               }
 
-              token["type"] = "logo";
+              let logo = logos[label];
+              if (logo) {
+                token["type"] = "logo";
+              }
             }
 
             if(inverse) {
@@ -102,22 +108,6 @@ const Token = ({
               if(is(Object, token)) {
                 let id = uuid.v4();
                 switch(token.type) {
-                case "logo":
-                  let logo = logos[label];
-                  let start = -0.75 * width;
-                  let size = 1.50 * width;
-                  if (logo) {
-                    let Component = logo.Component;
-                    shape = (
-                      <Component x={start} y={start} height={size} width={size}/>
-                    );
-                    tokenFill = c("white");
-                    textStroke = "none";
-                    textFill = "none";
-                    break;
-                  }
-                  // We're ok with the above statement falling through the case for now
-                  // eslint-disable-next-line
                 case "square":
                   shape = (
                     <rect rx="2" ry="2" x="-17.5" y="-17.5" width="35" height="35"
@@ -140,6 +130,7 @@ const Token = ({
                           stroke={p("black")}
                           clipPath={`url(#${clipId})`}/>
                   ];
+                  textFill = t(c("white"));
                   break;
                 case "halves":
                   gradient = (
@@ -154,6 +145,7 @@ const Token = ({
                           stroke={p("black")}
                           clipPath={`url(#${clipId})`}/>
                   );
+                  textFill = t(c("white"));
                   break;
                 case "stripes":
                   gradient = (
@@ -178,6 +170,7 @@ const Token = ({
                           stroke={p("black")}
                           clipPath={`url(#${clipId})`}/>
                   );
+                  textFill = t(c("white"));
                   break;
                 case "bar":
                   shape = (
@@ -203,6 +196,7 @@ const Token = ({
                           stroke={p("black")}
                           clipPath={`url(#${clipId})`}/>
                   );
+                  textFill = t(c("white"));
                   break;
                 case "target":
                   gradient = (
@@ -221,6 +215,26 @@ const Token = ({
                           stroke={p("black")}
                           clipPath={`url(#${clipId})`}/>
                   );
+                  textFill = t(c("white"));
+                  break;
+                case "logo":
+                  let logo = logos[label];
+                  let start = -1 * width;
+                  let size = 2 * width;
+                  if (logo) {
+                    let Component = logo.Component;
+                    shape = (
+                      <Component className={`color-main-${color}`}
+                                 x={start} y={start}
+                                 height={size} width={size}/>
+                    );
+                    tokenFill = c("white");
+                    textStroke = "none";
+                    textFill = "none";
+                  } else {
+                    textFill = t(c(color));
+                    tokenFill = c(color) || p("white");
+                  }
                   break;
                 default:
                   break;
@@ -238,7 +252,7 @@ const Token = ({
               <use href={icon} transform="scale(1.66666 1.66666)" />
             ) : (
               <text
-                fontFamily="Bitter"
+                fontFamily="display"
                 fontSize={width * 0.64}
                 textAnchor="middle"
                 strokeWidth="0.5"
@@ -282,8 +296,8 @@ const Token = ({
   );
 };
 
-const mapStateToProps = state => ({
-  useCompanySvgLogos: state.config.useCompanySvgLogos
+const mapStateToProps = (state, {companySvgLogos}) => ({
+  companySvgLogos: companySvgLogos || state.config.companySvgLogos,
 });
 
 export default connect(mapStateToProps)(Token);

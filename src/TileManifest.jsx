@@ -1,4 +1,6 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+
 import * as R from "ramda";
 import tiles from "./data/tiles";
 
@@ -32,6 +34,10 @@ const getCol = id => {
 
 const TileManifest = ({ match }) => {
   let game = games[match.params.game];
+
+  if (!game.tiles) {
+    return <Redirect to={`/${match.params.game}/background`} />;
+  }
 
   let ids = R.sortWith(
     [

@@ -28,7 +28,7 @@ const Industry = ({ top, bottom }) => {
           <text
             fontWeight="bold"
             fontSize={12}
-            fontFamily="Helvetica, Arial, sans-serif"
+            fontFamily="sans-serif"
             fill={c("pink")}
             dominantBaseline="central"
             textAnchor="middle"
@@ -40,7 +40,7 @@ const Industry = ({ top, bottom }) => {
           <text
             fontWeight="bold"
             fontSize={12}
-            fontFamily="Helvetica, Arial, sans-serif"
+            fontFamily="sans-serif"
             fill={c("pink")}
             dominantBaseline="central"
             textAnchor="middle"
