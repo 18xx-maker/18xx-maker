@@ -1,0 +1,1564 @@
+{
+  "1": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 150,
+        "percent": 0.8,
+        "value": 10
+      },
+      {
+        "angle": -30,
+        "percent": 0.8,
+        "value": 10
+      }
+    ],
+    "towns": [
+      {
+        "x": -129.90375,
+        "y": 75,
+        "rotate": -45,
+        "angle": 225,
+        "percent": 1.73
+      },
+      {
+        "x": 129.90375,
+        "y": -75,
+        "rotate": -45,
+        "angle": 45,
+        "percent": 1.73
+      }
+    ],
+    "track": [
+      {
+        "type": "gentle",
+        "side": 1
+      },
+      {
+        "type": "gentle",
+        "side": 4
+      }
+    ]
+  },
+  "2": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 215,
+        "percent": 0.75,
+        "value": 10
+      },
+      {
+        "angle": 30,
+        "percent": 0.667,
+        "value": 10
+      }
+    ],
+    "towns": [
+      {
+        "angle": 180,
+        "percent": 0.66
+      },
+      {
+        "rotation": 30,
+        "x": -86.6025,
+        "angle": -60,
+        "percent": 0.57735
+      }
+    ],
+    "track": [
+      {
+        "type": "straight",
+        "side": 1
+      },
+      {
+        "type": "sharp",
+        "side": 2
+      }
+    ]
+  },
+  "3": {
+    "color": "yellow",
+    "values": [
+      {
+        "value": 10
+      }
+    ],
+    "towns": [
+      {
+        "angle": 30,
+        "percent": 0.57735,
+        "rotation": -60
+      }
+    ],
+    "track": [
+      {
+        "type": "sharp",
+        "side": 1
+      }
+    ]
+  },
+  "4": {
+    "color": "yellow",
+    "rotations": 3,
+    "values": [
+      {
+        "angle": -90,
+        "percent": 0.5,
+        "value": 10
+      }
+    ],
+    "towns": [
+      {}
+    ],
+    "track": [
+      {
+        "type": "straight",
+        "side": 1
+      }
+    ]
+  },
+  "5": {
+    "color": "yellow",
+    "rotations": 3,
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      }
+    ],
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.7,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ]
+  },
+  "6": {
+    "color": "yellow",
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      }
+    ],
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.7,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ]
+  },
+  "7": {
+    "color": "yellow",
+    "track": [
+      {
+        "type": "sharp",
+        "side": 1
+      }
+    ]
+  },
+  "8": {
+    "color": "yellow",
+    "track": [
+      {
+        "type": "gentle",
+        "side": 1
+      }
+    ]
+  },
+  "9": {
+    "color": "yellow",
+    "rotations": 3,
+    "track": [
+      {
+        "type": "straight",
+        "side": 1
+      }
+    ]
+  },
+  "55": {
+    "color": "yellow",
+    "values": [
+      {
+        "value": 10,
+        "angle": 145,
+        "percent": 0.75
+      },
+      {
+        "value": 10,
+        "angle": 95,
+        "percent": 0.75
+      }
+    ],
+    "towns": [
+      {
+        "angle": 180,
+        "percent": 0.7
+      },
+      {
+        "angle": 60,
+        "percent": 0.7,
+        "rotation": 60
+      }
+    ],
+    "track": [
+      {
+        "type": "straight",
+        "side": 1,
+        "cross": "over"
+      },
+      {
+        "type": "straight",
+        "side": 2,
+        "cross": "under"
+      }
+    ]
+  },
+  "56": {
+    "color": "yellow",
+    "values": [
+      {
+        "x": -129.90375,
+        "y": 75,
+        "angle": 255,
+        "percent": 2.2,
+        "value": 10
+      },
+      {
+        "x": -129.90375,
+        "y": -75,
+        "angle": 285,
+        "percent": 2.2,
+        "value": 10
+      }
+    ],
+    "towns": [
+      {
+        "x": -129.90375,
+        "y": 75,
+        "rotate": -15,
+        "angle": 255,
+        "percent": 1.7216875
+      },
+      {
+        "x": -129.90375,
+        "y": -75,
+        "rotate": 15,
+        "angle": 285,
+        "percent": 1.7216875
+      }
+    ],
+    "track": [
+      {
+        "type": "gentle",
+        "side": 1,
+        "cross": "over"
+      },
+      {
+        "type": "gentle",
+        "side": 2,
+        "cross": "under"
+      }
+    ]
+  },
+  "57": {
+    "color": "yellow",
+    "rotations": 3,
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ],
+    "track": [
+      {
+        "type": "straight"
+      }
+    ]
+  },
+  "58": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": -120,
+        "percent": 0.2,
+        "value": 10
+      }
+    ],
+    "towns": [
+      {
+        "angle": 60,
+        "percent": 0.28,
+        "rotate": -30
+      }
+    ],
+    "track": [
+      {
+        "type": "gentle",
+        "side": 1
+      }
+    ]
+  },
+  "69": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 215,
+        "percent": 0.75,
+        "value": 10
+      },
+      {
+        "y": 150,
+        "angle": 165,
+        "percent": 2.2,
+        "value": 10
+      }
+    ],
+    "towns": [
+      {
+        "angle": 180,
+        "percent": 0.66
+      },
+      {
+        "y": 150,
+        "angle": 165,
+        "percent": 1.73,
+        "rotate": 75
+      }
+    ],
+    "track": [
+      {
+        "type": "straight",
+        "side": 1,
+        "cross": "over"
+      },
+      {
+        "type": "gentle",
+        "side": 6,
+        "cross": "under"
+      }
+    ]
+  },
+  "73": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": -120,
+        "percent": 0.2,
+        "value": 10
+      }
+    ],
+    "towns": [
+      {
+        "angle": 60,
+        "percent": 0.28,
+        "rotate": -30
+      }
+    ],
+    "track": [
+      {
+        "type": "gentle",
+        "side": 1,
+        "gauge": "narrow",
+        "offset": 10
+      }
+    ]
+  },
+  "74": {
+    "color": "yellow",
+    "rotations": 3,
+    "values": [
+      {
+        "angle": -90,
+        "percent": 0.5,
+        "value": 10
+      }
+    ],
+    "towns": [
+      {}
+    ],
+    "track": [
+      {
+        "type": "straight",
+        "side": 1,
+        "gauge": "narrow",
+        "offset": 3
+      }
+    ]
+  },
+  "75": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.7,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ],
+    "track": [
+      {
+        "side": 1,
+        "gauge": "narrow"
+      },
+      {
+        "side": 2,
+        "gauge": "narrow"
+      }
+    ]
+  },
+  "76": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.7,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ],
+    "track": [
+      {
+        "side": 1,
+        "gauge": "narrow"
+      },
+      {
+        "side": 3,
+        "gauge": "narrow"
+      }
+    ]
+  },
+  "77": {
+    "color": "yellow",
+    "track": [
+      {
+        "type": "sharp",
+        "side": 1,
+        "gauge": "narrow"
+      }
+    ]
+  },
+  "78": {
+    "color": "yellow",
+    "track": [
+      {
+        "type": "gentle",
+        "side": 1,
+        "gauge": "narrow"
+      }
+    ]
+  },
+  "79": {
+    "color": "yellow",
+    "rotations": 3,
+    "track": [
+      {
+        "type": "straight",
+        "side": 1,
+        "gauge": "narrow"
+      }
+    ]
+  },
+  "115": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ],
+    "track": [
+      {
+        "side": 1
+      }
+    ]
+  },
+  "201": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 30
+      }
+    ],
+    "labels": [
+      {
+        "label": "Y",
+        "angle": 155,
+        "percent": 0.75
+      }
+    ],
+    "cities": [
+      {
+        "size": 1
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "202": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 30
+      }
+    ],
+    "labels": [
+      {
+        "label": "Y",
+        "angle": 155,
+        "percent": 0.75
+      }
+    ],
+    "cities": [
+      {
+        "size": 1
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
+  "235": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.6,
+        "value": 30
+      }
+    ],
+    "labels": [
+      {
+        "angle": 45,
+        "percent": 0.6,
+        "label": "OO"
+      }
+    ],
+    "cities": [
+      {
+        "angle": -60,
+        "percent": 0.5
+      },
+      {
+        "angle": 120,
+        "percent": 0.5
+      }
+    ],
+    "track": [
+      {
+        "type": "stop",
+        "side": 3
+      }
+    ]
+  },
+  "291": {
+    "color": "yellow",
+    "cities": [
+      {}
+    ],
+    "labels": [
+      {
+        "label": "Z",
+        "angle": 150,
+        "percent": 0.75
+      }
+    ],
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 40
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      }
+    ]
+  },
+  "292": {
+    "color": "yellow",
+    "cities": [
+      {}
+    ],
+    "labels": [
+      {
+        "label": "Z",
+        "angle": 150,
+        "percent": 0.75
+      }
+    ],
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 40
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      }
+    ]
+  },
+  "293": {
+    "color": "yellow",
+    "rotations": 3,
+    "cities": [
+      {}
+    ],
+    "labels": [
+      {
+        "label": "Z",
+        "angle": 150,
+        "percent": 0.75
+      }
+    ],
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 40
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+  "437": {
+    "color": "yellow",
+    "icons": [
+      {
+        "type": "port",
+        "angle": 60,
+        "percent": 0.73
+      }
+    ],
+    "values": [
+      {
+        "angle": -120,
+        "percent": 0.2,
+        "value": 30
+      }
+    ],
+    "towns": [
+      {
+        "angle": 60,
+        "percent": 0.28,
+        "rotate": -30
+      }
+    ],
+    "track": [
+      {
+        "type": "gentle",
+        "side": 1
+      }
+    ]
+  },
+  "438": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 40
+      }
+    ],
+    "labels": [
+      {
+        "label": "H",
+        "angle": 330,
+        "percent": 0.75
+      }
+    ],
+    "cities": [
+      {}
+    ],
+    "terrain": [
+      {
+        "angle": 150,
+        "percent": 0.85,
+        "cost": "¥80",
+        "size": "tiny"
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      }
+    ]
+  },
+  "441": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 10
+      }
+    ],
+    "labels": [
+      {
+        "label": "B",
+        "angle": 150,
+        "percent": 0.75
+      }
+    ],
+    "cities": [
+      {
+        "size": 1
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      }
+    ]
+  },
+  "445": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": -120,
+        "percent": 0.2,
+        "value": 20
+      }
+    ],
+    "towns": [
+      {
+        "angle": 60,
+        "percent": 0.28,
+        "rotate": -30
+      }
+    ],
+    "track": [
+      {
+        "type": "gentle",
+        "side": 1
+      }
+    ]
+  },
+  "470": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 300,
+        "percent": 0.667,
+        "value": 20
+      }
+    ],
+    "names": [
+      {
+        "name": "Copper Canyon",
+        "angle": 90,
+        "percent": 0.35,
+        "rotation": -45
+      }
+    ],
+    "towns": [
+      {
+        "percent": 0.667,
+        "rotate": 10
+      }
+    ],
+    "track": [
+      {
+        "side": 1,
+        "type": "straight"
+      },
+      {
+        "side": 4,
+        "type": "sharp"
+      },
+      {
+        "side": 5,
+        "type": "gentle"
+      }
+    ]
+  },
+  "471": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 150,
+        "percent": 0.8,
+        "value": 30
+      },
+      {
+        "angle": 315,
+        "percent": 0.7,
+        "value": 10
+      }
+    ],
+    "cities": [
+      {
+        "name": {
+          "offset": 25,
+          "name": "Mazatlán"
+        }
+      }
+    ],
+    "towns": [
+      {
+        "angle": 270,
+        "rotation": 90,
+        "percent": 0.58
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5.5,
+        "type": "mid"
+      }
+    ]
+  },
+  "472": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 90,
+        "percent": 0.8,
+        "value": 20
+      },
+      {
+        "angle": 285,
+        "percent": 0.7,
+        "value": 10
+      }
+    ],
+    "cities": [
+      {
+        "name": {
+          "name": "Tampico"
+        }
+      }
+    ],
+    "towns": [
+      {
+        "angle": 240,
+        "rotation": 60,
+        "percent": 0.58
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 5,
+        "type": "mid"
+      }
+    ]
+  },
+  "473": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 90,
+        "percent": 0.8,
+        "value": 20
+      },
+      {
+        "angle": 285,
+        "percent": 0.7,
+        "value": 10
+      }
+    ],
+    "cities": [
+      {
+        "name": {
+          "name": "Veracruz"
+        }
+      }
+    ],
+    "towns": [
+      {
+        "angle": 240,
+        "rotation": 60,
+        "percent": 0.58
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 5,
+        "type": "mid"
+      }
+    ]
+  },
+  "630": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 150,
+        "percent": 0.8,
+        "value": 10
+      },
+      {
+        "angle": -30,
+        "percent": 0.8,
+        "value": 10
+      }
+    ],
+    "towns": [
+      {
+        "angle": 90,
+        "percent": 0.57735,
+        "rotation": 0
+      },
+      {
+        "x": 129.90375,
+        "y": -75,
+        "rotate": -45,
+        "angle": 45,
+        "percent": 1.73
+      }
+    ],
+    "track": [
+      {
+        "type": "sharp",
+        "side": 2
+      },
+      {
+        "type": "gentle",
+        "side": 4
+      }
+    ]
+  },
+  "631": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 150,
+        "percent": 0.8,
+        "value": 10
+      },
+      {
+        "angle": -30,
+        "percent": 0.8,
+        "value": 10
+      }
+    ],
+    "towns": [
+      {
+        "angle": 30,
+        "percent": 0.57735,
+        "rotation": -60
+      },
+      {
+        "x": 129.90375,
+        "y": -75,
+        "rotate": -15,
+        "angle": 75,
+        "percent": 1.73
+      }
+    ],
+    "track": [
+      {
+        "type": "sharp",
+        "side": 1
+      },
+      {
+        "type": "gentle",
+        "side": 4
+      }
+    ]
+  },
+  "632": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 150,
+        "percent": 0.6,
+        "value": 10
+      },
+      {
+        "angle": 30,
+        "percent": 0.6,
+        "value": 10
+      }
+    ],
+    "towns": [
+      {
+        "angle": 210,
+        "percent": 0.57735,
+        "rotation": -60
+      },
+      {
+        "angle": 330,
+        "percent": 0.57735,
+        "rotation": 60
+      }
+    ],
+    "track": [
+      {
+        "type": "sharp",
+        "side": 4
+      },
+      {
+        "type": "sharp",
+        "side": 6
+      }
+    ]
+  },
+  "633": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 150,
+        "percent": 0.6,
+        "value": 10
+      },
+      {
+        "angle": -30,
+        "percent": 0.6,
+        "value": 10
+      }
+    ],
+    "towns": [
+      {
+        "angle": 210,
+        "percent": 0.57735,
+        "rotation": -60
+      },
+      {
+        "angle": 30,
+        "percent": 0.57735,
+        "rotation": -60
+      }
+    ],
+    "track": [
+      {
+        "type": "sharp",
+        "side": 1
+      },
+      {
+        "type": "sharp",
+        "side": 4
+      }
+    ]
+  },
+  "644": {
+    "color": "yellow",
+    "track": [
+      {
+        "side": 1,
+        "gauge": "narrow"
+      },
+      {
+        "side": 2
+      }
+    ],
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.7,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ]
+  },
+  "645": {
+    "color": "yellow",
+    "track": [
+      {
+        "side": 1,
+        "gauge": "narrow"
+      },
+      {
+        "side": 3
+      }
+    ],
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.7,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ]
+  },
+  "657": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ],
+    "track": [
+      {
+        "side": 1,
+        "gauge": "narrow"
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+  "658": {
+    "color": "yellow",
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3,
+        "gauge": "narrow"
+      }
+    ],
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.7,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ]
+  },
+  "659": {
+    "color": "yellow",
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2,
+        "gauge": "narrow"
+      }
+    ],
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.7,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ]
+  },
+  "679": {
+    "color": "yellow",
+    "values": [
+      {
+        "value": 10
+      }
+    ],
+    "towns": [
+      {
+        "angle": 30,
+        "percent": 0.57735,
+        "rotation": -60
+      }
+    ],
+    "track": [
+      {
+        "type": "sharp",
+        "side": 1,
+        "offset": -3,
+        "gauge": "narrow"
+      }
+    ]
+  },
+  "741": {
+    "color": "yellow",
+    "labels": [
+      {
+        "label": "£",
+        "angle": 30,
+        "percent": 0.1,
+        "size": 30
+      }
+    ],
+    "towns": [
+      {
+        "angle": 30,
+        "percent": 0.57735,
+        "rotation": -60,
+        "color": "halt"
+      }
+    ],
+    "track": [
+      {
+        "type": "sharp",
+        "side": 1
+      }
+    ]
+  },
+  "742": {
+    "color": "yellow",
+    "labels": [
+      {
+        "angle": 240,
+        "percent": 0.2,
+        "size": 30,
+        "label": "£"
+      }
+    ],
+    "towns": [
+      {
+        "angle": 60,
+        "percent": 0.28,
+        "rotate": -30,
+        "color": "halt"
+      }
+    ],
+    "track": [
+      {
+        "type": "gentle",
+        "side": 1
+      }
+    ]
+  },
+  "743": {
+    "color": "yellow",
+    "rotations": 3,
+    "labels": [
+      {
+        "angle": 270,
+        "percent": 0.45,
+        "size": 30,
+        "label": "£"
+      }
+    ],
+    "towns": [
+      {
+        "color": "halt"
+      }
+    ],
+    "track": [
+      {
+        "type": "straight",
+        "side": 1
+      }
+    ]
+  },
+  "744": {
+    "color": "yellow",
+    "rotations": 3,
+    "labels": [
+      {
+        "angle": 270,
+        "percent": 0.45,
+        "y": -25,
+        "size": 30,
+        "label": "£"
+      },
+      {
+        "angle": 270,
+        "percent": 0.45,
+        "y": 25,
+        "size": 30,
+        "label": "£"
+      }
+    ],
+    "towns": [
+      {
+        "percent": 0.333,
+        "color": "halt"
+      },
+      {
+        "angle": 180,
+        "percent": 0.333,
+        "color": "halt"
+      }
+    ],
+    "track": [
+      {
+        "type": "straight",
+        "side": 1
+      }
+    ]
+  },
+  "745": {
+    "color": "yellow",
+    "labels": [
+      {
+        "angle": 150,
+        "percent": 0.5,
+        "x": 5,
+        "size": 30,
+        "label": "£"
+      },
+      {
+        "angle": 330,
+        "percent": 0.5,
+        "x": 5,
+        "y": 5,
+        "size": 30,
+        "label": "£"
+      }
+    ],
+    "towns": [
+      {
+        "x": -129.88125,
+        "y": 75,
+        "angle": 225,
+        "percent": 1.73,
+        "rotate": -45,
+        "color": "halt"
+      },
+      {
+        "x": -129.88125,
+        "y": 75,
+        "angle": 255,
+        "percent": 1.73,
+        "rotate": -15,
+        "color": "halt"
+      }
+    ],
+    "track": [
+      {
+        "type": "gentle",
+        "side": 1
+      }
+    ]
+  },
+  "746": {
+    "color": "yellow",
+    "rotations": 3,
+    "labels": [
+      {
+        "label": "B",
+        "angle": 150,
+        "percent": 0.8
+      }
+    ],
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ],
+    "track": [
+      {
+        "type": "straight"
+      }
+    ]
+  },
+  "787": {
+    "color": "yellow",
+    "rotations": [
+      0
+    ],
+    "labels": [
+      {
+        "label": "£",
+        "angle": 270,
+        "percent": 0.333,
+        "y": 50,
+        "size": 30
+      },
+      {
+        "label": "C",
+        "angle": 120,
+        "percent": 0.7
+      }
+    ],
+    "values": [
+      {
+        "angle": 240,
+        "percent": 0.7,
+        "value": 20
+      },
+      {
+        "angle": 300,
+        "percent": 0.5,
+        "value": 10
+      }
+    ],
+    "cities": [
+      {
+        "angle": 180,
+        "percent": 0.333
+      }
+    ],
+    "towns": [
+      {
+        "percent": 0.25
+      },
+      {
+        "color": "halt",
+        "percent": 0.667
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      }
+    ]
+  },
+  "956": {
+    "color": "yellow",
+    "rotations": 3,
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.7,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ],
+    "track": [
+      {
+        "side": 1,
+        "gauge": "narrow"
+      },
+      {
+        "side": 4,
+        "gauge": "narrow"
+      }
+    ]
+  },
+  "18340": {
+    "color": "yellow",
+    "labels": [
+      {
+        "label": "B",
+        "angle": 150,
+        "percent": 0.85
+      }
+    ],
+    "values": [
+      {
+        "angle": 335,
+        "percent": 0.825,
+        "value": 30
+      }
+    ],
+    "cities": [
+      {
+        "size": 1,
+        "name": {
+          "name": "Luxembourg"
+        }
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      }
+    ]
+  },
+  "X00": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 30
+      }
+    ],
+    "cities": [
+      {
+        "size": 1
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 5
+      }
+    ],
+    "labels": [
+      {
+        "angle": 150,
+        "percent": 0.75,
+        "label": "B"
+      }
+    ]
+  }
+}

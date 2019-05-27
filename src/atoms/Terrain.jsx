@@ -18,7 +18,6 @@ const width = 2;
 
 const Terrain = ({ type, size, cost, color, fontSize }) => {
   fontSize = fontSize || 15;
-  type = type || "mountain";
 
   let scale = 1;
 

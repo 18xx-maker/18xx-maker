@@ -1,3 +1,9 @@
+.revenue h2 {
+  margin: 0;
+  height: calc(0.5in - 1px);
+  line-height: calc(0.5in - 1px);
+}
+
 .revenue__table {
   width: 100%;
   height: 3.5in;

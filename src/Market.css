@@ -1,17 +1,7 @@
-.Market {
-  height: 100%;
-}
-
 .Market > h2 {
   margin: 0;
   height: calc(0.5in - 1px);
   line-height: calc(0.5in - 1px);
-}
-
-.Market table {
-  width: calc(100% - 1px);
-  height: calc(100% - 1px);
-  table-layout: fixed;
 }
 
 .Market__1Diag table,

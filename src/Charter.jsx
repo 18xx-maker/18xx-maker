@@ -1,13 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
 import * as R from "ramda";
 import Token from "./Token";
 import Phase from "./Phase";
 import Color from "./data/Color";
 import ColorContext from "./context/ColorContext";
+import { unitsToCss } from "./util";
 
-import is from "ramda/es/is";
+import is from "ramda/src/is";
 
-const Charter = ({ name, abbrev, token, tokens, phases, turns }) => {
+const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle, game, halfWidthCharters }) => {
   let color = token;
   if(is(Object, token)) {
     color = token.colors[0];
@@ -18,12 +20,19 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns }) => {
       <svg key={`token-${index}`}>
         <g transform={`translate(25 25)`}>
           <ColorContext.Provider value="companies">
-            <Token label={abbrev} token={token} />
+            <Token outline={charterStyle === "color" ? "black" : null}
+                   label={charterStyle === "color" ? null : abbrev}
+                   token={charterStyle === "color" ? null : token} />
           </ColorContext.Provider>
-          <g transform={`translate(0 39)`}>
-            <text fontSize="10" textAnchor="middle">
-              {label}
-            </text>
+          <g transform={`${halfWidthCharters ? "rotate(-90) " : ""}translate(0 39)`}>
+            <Color context="companies">
+              {(c, t) => (
+                <text fill={(charterStyle === "color" && !halfWidthCharters) ? t(c(color)) : c("black")}
+                      fontSize="11" fontWeight="normal" textAnchor="middle">
+                  {label}
+                </text>
+              )}
+            </Color>
           </g>
         </g>
       </svg>
@@ -42,40 +51,64 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns }) => {
     }, turn.optional || []);
     let optionalList = <ul>{optionals}</ul>;
 
-        return (
-          <React.Fragment key={`turn-${turn.name}`}>
-            <dt>{turn.name}</dt>
-            <dd>{stepsList}</dd>
-            {turn.optional && <dd>{optionalList}</dd>}
-          </React.Fragment>
-        );
+    return (
+      <React.Fragment key={`turn-${turn.name}`}>
+        <dt>{turn.name}</dt>
+        <dd>{stepsList}</dd>
+        {turn.optional && <dd>{optionalList}</dd>}
+      </React.Fragment>
+    );
   }, turns);
 
   return (
     <Color context="companies">
-      {c => (
+      {(c, t) => (
         <div className="cutlines">
-          <div className="charter">
-            <div className="charter__name">{name}</div>
-            <div className="charter__tokens">{tokenSpots}</div>
+          <div className={`charter charter--${charterStyle}${halfWidthCharters ? " charter--half" : ""}`}>
             <div
               className="charter__hr"
               style={{ backgroundColor: c(color) }}
             />
-            <div className="charter__trains">
-              Trains
-              <div className="charter__phase">
-                <Phase phases={phases} />
+            <div style={{ color: t(c(charterStyle === "color" ? color : "white")),
+                          paddingRight: halfWidthCharters ? null : unitsToCss(25 + (65 * tokens.length)) }}
+                 className="charter__name"><div>{name}</div></div>
+            {charterStyle === "color" && (
+              <div className="charter__logo">
+                <svg viewBox="-37.5 -37.5 75 75">
+                  <ColorContext.Provider value="companies">
+                    <Token outline="white"
+                           label={abbrev}
+                           width={37.5}
+                           token={token} />
+                  </ColorContext.Provider>
+                </svg>
               </div>
+            )}
+            {false && <div className="charter__game">{game}</div>}
+            <div className="charter__tokens">
+              {halfWidthCharters && "Tokens"}
+              {tokenSpots}
             </div>
-            <div className="charter__treasury">
-              Treasury
-              <dl>{turnNodes}</dl>
-            </div>
-            <div
-              className="charter__hr"
-              style={{ backgroundColor: c(color) }}
-            />
+            {halfWidthCharters && (
+              <div className="charter__assets">
+                Assets
+                <dl>{turnNodes}</dl>
+              </div>
+            )}
+            {halfWidthCharters || (
+              <div className="charter__trains">
+                Trains
+                <div className="charter__phase">
+                  <Phase phases={phases} />
+                </div>
+              </div>
+            )}
+            {halfWidthCharters || (
+              <div className="charter__treasury">
+                Treasury
+                <dl>{turnNodes}</dl>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -83,4 +116,9 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns }) => {
   );
 };
 
-export default Charter;
+const mapStateToProps = state => ({
+  charterStyle: state.config.charterStyle,
+  halfWidthCharters: state.config.halfWidthCharters
+});
+
+export default connect(mapStateToProps)(Charter);

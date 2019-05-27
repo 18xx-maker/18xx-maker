@@ -1,10 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
 import Color from "./data/Color";
 
-const Title = ({ game, variation }) => {
-  let size = game.info.titleSize || 200;
-  let subSize = game.info.subTitleSize || 30;
-  let designerSize = game.info.designerSize || 20;
+const Title = ({ game, variation, hexWidth }) => {
+  let scale = hexWidth / 150.0;
+  let size = (game.info.titleSize || 200) * scale;
+  let subSize = (game.info.subTitleSize || 30) * scale;
+  let designerSize = (game.info.designerSize || 20) * scale;
 
   let mapName = null;
   variation = variation || 0;
@@ -12,8 +14,8 @@ const Title = ({ game, variation }) => {
     mapName = game.map[variation].name;
   }
 
-  let x = (game.info.titleX || 0) + 50;
-  let y = (game.info.titleY || 0) + 220;
+  let x = (game.info.titleX || 0) * scale + 50;
+  let y = ((game.info.titleY || 0) + 170) * scale + 50;
   let rotate = (game.info.titleRotate || 0);
 
   return (
@@ -24,7 +26,7 @@ const Title = ({ game, variation }) => {
         >
           <text
             fill={c("black")}
-            fontFamily="Bitter"
+            fontFamily="display"
             fontWeight="bold"
             fontSize={size}
             textAnchor="start"
@@ -37,7 +39,7 @@ const Title = ({ game, variation }) => {
           {game.info.subtitle && (
             <text
               fill={c("black")}
-              fontFamily="Bitter"
+              fontFamily="display"
               fontWeight="bold"
               fontSize={subSize}
               textAnchor="start"
@@ -50,7 +52,7 @@ const Title = ({ game, variation }) => {
           )}
           <text
             fill={c("black")}
-            fontFamily="Bitter"
+            fontFamily="display"
             fontWeight="bold"
             fontSize={designerSize}
             textAnchor="start"
@@ -67,4 +69,7 @@ const Title = ({ game, variation }) => {
   );
 };
 
-export default Title;
+const mapStateToProps = (state, {hexWidth}) => ({
+  hexWidth: hexWidth || state.config.tiles.width
+});
+export default connect(mapStateToProps)(Title);

@@ -1,16 +1,17 @@
 import React from "react";
 import {withRouter} from "react-router";
 
-import assoc from "ramda/es/assoc";
-import compose from "ramda/es/compose";
-import map from "ramda/es/map";
-import mapObj from "ramda/es/mapObjIndexed";
-import path from "ramda/es/path";
-import sortBy from "ramda/es/sortBy";
-import values from "ramda/es/values";
+import assoc from "ramda/src/assoc";
+import compose from "ramda/src/compose";
+import map from "ramda/src/map";
+import mapObj from "ramda/src/mapObjIndexed";
+import path from "ramda/src/path";
+import sortBy from "ramda/src/sortBy";
+import values from "ramda/src/values";
 
 import games from "../data/games";
 
+const emptyGame = <option key="None" value="">Select</option>;
 const makeGameNode = game => (
   <option key={game.id}
           value={game.id}>
@@ -19,11 +20,16 @@ const makeGameNode = game => (
 );
 
 const GameSelect = ({match,history,location}) => {
-  let gameName = match.params.game;
+  let name = match.params.game;
+  let game = games[name];
+  let selection = "map";
+  if (game) {
+    selection = location.pathname.split('/')[2];
+  }
 
   let handleChange = event => {
-    if(event.target.value !== gameName) {
-      history.push(`/${event.target.value}/map`);
+    if(event.target.value !== name) {
+      history.push(`/${event.target.value}/${selection}`);
     }
   };
 
@@ -32,11 +38,15 @@ const GameSelect = ({match,history,location}) => {
                           values,
                           mapObj((game, id) => assoc("id", id, game)))(games);
 
+  if (!game) {
+    gameNodes.unshift(emptyGame);
+  }
+
   return (
     <div className="select">
       <h3>Game</h3>
       <select onChange={handleChange}
-              value={gameName}>
+              value={name}>
         {gameNodes}
       </select>
     </div>

@@ -2,8 +2,8 @@ import React from "react";
 
 import Color from "../data/Color";
 
-import addIndex from "ramda/es/addIndex";
-import map from "ramda/es/map";
+import addIndex from "ramda/src/addIndex";
+import map from "ramda/src/map";
 
 const Train = ({ train }) => {
   let { name, price, color, info, description, players } = train;

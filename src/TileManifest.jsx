@@ -1,4 +1,6 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+
 import * as R from "ramda";
 import tiles from "./data/tiles";
 
@@ -33,6 +35,10 @@ const getCol = id => {
 const TileManifest = ({ match }) => {
   let game = games[match.params.game];
 
+  if (!game.tiles) {
+    return <Redirect to={`/${match.params.game}/background`} />;
+  }
+
   let ids = R.sortWith(
     [
       R.ascend(id => Number(id.split("|")[0] || 0)),
@@ -52,21 +58,21 @@ const TileManifest = ({ match }) => {
         className="TileManifest--Tile"
         style={{ gridColumn: `${getCol(id)} / span 1` }}
       >
+        <div className="TileManifest--Id">
+          {idBase}
+          {idExtra && ` (${idExtra})`}
+        </div>
         <div className="TileManifest--Image">
           <Svg
             key={`${id}-${i}`}
             style={{
-              height: "0.4in",
-              width: "0.46188in"
+              height: "0.5in",
+              width: "0.5in"
             }}
-            viewBox={`-86.6025 -75 173.205 150`}
+            viewBox={`-86.6025 -86.6025 173.205 173.205`}
           >
             <Tile id={id} />
           </Svg>
-        </div>
-        <div className="TileManifest--Id">
-          {idBase}
-          {idExtra && ` (${idExtra})`}
         </div>
         <div className="TileManifest--Quantity">{quantity}x</div>
       </div>

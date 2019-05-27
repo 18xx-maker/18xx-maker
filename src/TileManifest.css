@@ -1,19 +1,20 @@
 .TileManifest {
   display: grid;
-  grid-template-columns: 1.7in 1.7in 1.7in 1.7in;
+  grid-template-columns: repeat(4, calc((8in - 5px) / 4));
   grid-template-rows: 0.5in;
   grid-auto-rows: 0.5in;
   grid-auto-flow: row dense;
-  gap: 0.05in 0.4in;
+  gap: 1px;
   grid-template-areas: "title title title title";
   text-align: left;
   width: 768px;
-  margin: 0 auto;
+  margin: 0 auto 0.5in;
+  font-family: sans-serif;
+  font-weight: normal;
 }
 
 .TileManifest--Title {
   grid-area: title;
-  border-bottom: 1px solid black;
   line-height: 0.5in;
   font-size: 0.25in;
   text-align: center;
@@ -23,21 +24,27 @@
   display: flex;
   justify-content: center;
   line-height: 0.5in;
+  box-sizing: border-box;
+  box-shadow: 0 0 0 1px #999;
 }
 
 .TileManifest--Image {
   height: 0.5in;
-  width: 0.57735in;
-  padding: 0.05in 0;
+  width: 0.5in;
   box-sizing: border-box;
 }
 
 .TileManifest--Id {
-  width: 0.75in;
+  width: 0.6in;
   font-size: 0.16in;
+  text-align: right;
+  padding-right: 0.1in;
+  box-sizing: border-box;
 }
 
 .TileManifest--Quantity {
-  width: 0.25in;
+  padding-left: 0.1in;
+  width: calc(((8in - 5px) / 4) - 1.1in);
   font-size: 0.16in;
+  box-sizing: border-box;
 }

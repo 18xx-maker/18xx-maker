@@ -1,0 +1,46 @@
+{
+  "coords": "outside",
+  "font": {
+    "family": "display",
+    "size": "0.15in",
+    "weight": "bold"
+  },
+  "pagination": "equal",
+  "paper": {
+    "width": 850,
+    "height": 1100,
+    "margins": 25
+  },
+  "companySvgLogos": "none",
+  "plainMapDestinations": false,
+  "plainMapHomes": false,
+  "straightCityNames": false,
+  "theme": "gmt",
+  "companiesTheme": "gmt",
+  "charterStyle": "color",
+  "halfWidthCharters": false,
+  "shareStyle": "gmt",
+  "tokenLayout": "gsp",
+  "tiles": {
+    "layout": "offset",
+    "width": 150
+  },
+  "stock": {
+    "cell": {
+      "width": 70,
+      "height": 85
+    },
+    "column": {
+      "width": 70,
+      "height": 375
+    },
+    "diag": {
+      "width": 70,
+      "height": 175
+    },
+    "par": {
+      "width": 200,
+      "height": 85
+    }
+  }
+}
