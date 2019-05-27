@@ -19,31 +19,6 @@ I've been asked about donation buttons, if you find this software usefull to you
 and would like to donate money towards it's development you can do so via
 [paypal](https://paypal.me/kelsin) or [square cash](https://cash.me/$kelsin).
 
-## Docker
-
-If you have docker installed (or available) you can run a [public docker
-image](https://hub.docker.com/r/kelsin/18xx) that includes all games. Run the
-following command and the site should be available at http://localhost (you
-might need to edit the port depending on your OS and other running apps):
-
-```sh
-docker run -it --rm -p 80:80 --name 18xx kelsin/18xx
-```
-
-### Persistant
-
-If you want to use docker to hack on the site, you can use a docker volume to
-keep a persistant image of the game code. Knowledge of how to manage docker
-volumes is important to use this properly.
-
-```sh
-docker run -it --rm -p 3000:3000 --name 18xx-develop -v 18xx:/home/18xx kelsin/18xx:develop
-```
-
-This will run the react-development server that will live update if you edit
-files, and store anything edited (starting with the current code) on the volume
-named `18xx`.
-
 ## Usage
 
 This node app uses `yarn` as it's package managing. Installing with `npm` is not
@@ -89,3 +64,28 @@ how to output a full board18 game box .zip file from the command line.
    file.
 
 3. Before opening a PR please run `yarn validate` and correct any errors.
+
+## Docker
+
+If you have docker installed (or available) you can run a [public docker
+image](https://hub.docker.com/r/kelsin/18xx) that includes all games. Run the
+following command and the site should be available at http://localhost (you
+might need to edit the port depending on your OS and other running apps):
+
+```sh
+docker run -it --rm -p 80:80 --name 18xx kelsin/18xx
+```
+
+### Persistant Docker Volume
+
+If you want to use docker to hack on the site, you can use a docker volume to
+keep a persistant image of the game code. Knowledge of how to manage docker
+volumes is important to use this properly.
+
+```sh
+docker run -it --rm -p 3000:3000 --name 18xx-develop -v 18xx:/home/18xx kelsin/18xx:develop
+```
+
+This will run the react-development server that will live update if you edit
+files, and store anything edited (starting with the current code) on the volume
+named `18xx`.
