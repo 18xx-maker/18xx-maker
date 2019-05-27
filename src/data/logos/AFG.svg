@@ -6,7 +6,7 @@
             <path class="color-white" fill="#fff" d="M45.374786 0h2.312606v22.807h-2.312606z"/>
             <path class="color-main color-red" fill="#ff000b" d="M47.687394 0H50v22.807h-2.312606z"/>
         </g>
-        <text fill="#fff" stroke-width=".204767" x="59.371029" y="49.764725" font-family="Bodoni MT" font-size="5.644444" style="line-height:1.25;-inkscape-font-specification:'Bodoni MT Bold'" font-weight="700" letter-spacing="0" transform="translate(-73.835782 -56.530395) scale(1.29212)" word-spacing="0">
+        <text font-size="5.644444" style="line-height:1.25;-inkscape-font-specification:'Bodoni MT Bold'" fill="#fff" stroke-width=".204767" x="59.371029" y="49.764725" font-family="Bodoni MT" font-weight="700" letter-spacing="0" transform="translate(-73.835782 -56.530395) scale(1.29212)" word-spacing="0">
             <tspan x="59.371029" y="49.764725" dx="0 -0.46000001 -0.07 -0.23 0 -0.63 -0.12 -0.090000004 -0.090000004" font-size="5.997222" style="-inkscape-font-specification:'Bodoni MT Bold'">GARIBALDI</tspan>
         </text>
     </g>
