@@ -3,7 +3,7 @@ import Color from "../data/Color";
 
 import Name from "./Name";
 
-const CenterTown = ({ border, name, color }) => {
+const CenterTown = ({ border, name, color, bgColor }) => {
   if (border) {
     return (
       <Color>
@@ -18,6 +18,7 @@ const CenterTown = ({ border, name, color }) => {
     if (name) {
       nameNode = (
         <Name
+          bgColor={bgColor}
           {...name}
           y={name.y || (name.reverse ? 18 : -18)}
         />
