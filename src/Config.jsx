@@ -188,6 +188,7 @@ const Config = ({config, setConfig, resetConfig}) => {
         <option value="aag">All Aboard Games</option>
         <option value="carth">Carth</option>
         <option value="dtg">Deep Thought</option>
+        <option value="hartland">Hartland Trefoil</option>
         <option value="gmt">GMT</option>
         <option value="ps18xx">px18xx</option>
       </select>
