@@ -26,6 +26,18 @@ import UR, { ReactComponent as UR_Component } from "./UR.svg";
 // 18EU
 import NFL, { ReactComponent as NFL_Component } from "./NFL.svg";
 
+// 1832
+import ACL, { ReactComponent as ACL_Component } from "./1832-ACL.svg";
+import AWP, { ReactComponent as AWP_Component } from "./1832-AWP.svg";
+import SALR, { ReactComponent as SALR_Component } from "./1832-SALR.svg";
+import NW, { ReactComponent as NW_Component } from "./1832-NW.svg";
+import COG, { ReactComponent as COG_Component } from "./1832-COG.svg";
+import LN, { ReactComponent as LN_Component } from "./1832-LN.svg";
+import GRR, { ReactComponent as GRR_Component } from "./1832-GRR.svg";
+//import GMO, { ReactComponent as GMO_Component } from "./1832-GMO.svg";
+import SOU, { ReactComponent as SOU_Component } from "./1832-SOU.svg";
+import FECR, { ReactComponent as FECR_Component } from "./1832-FECR.svg";
+
 // 1848
 /*
 import BOE, { ReactComponent as BOE_Component } from "./BOE.svg";
@@ -75,6 +87,18 @@ export default {
 
   // 18EU
   NFL: { src: NFL, Component: NFL_Component },
+
+  // 1832
+  ACL: { src: ACL, Component: ACL_Component },
+  "A&WP": { src: AWP, Component: AWP_Component },
+  SALR: { src: SALR, Component: SALR_Component },
+  "N&W": { src: NW, Component: NW_Component },
+  COG: { src: COG, Component: COG_Component },
+  "L&N": { src: LN, Component: LN_Component },
+  GRR: { src: GRR, Component: GRR_Component },
+  //"GM&O": { src: GMO, Component: GMO_Component },
+  SOU: { src: SOU, Component: SOU_Component },
+  FECR: { src: FECR, Component: FECR_Component },
 
   // 1848
   /*

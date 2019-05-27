@@ -68,7 +68,7 @@
         "$40",
         "$100"
       ],
-      "color": "purple",
+      "color": "pink",
       "shares": [
         {
           "quantity": 1,
@@ -90,7 +90,7 @@
         "Free",
         "$40"
       ],
-      "color": "pink",
+      "color": "lavender",
       "shares": [
         {
           "quantity": 1,
@@ -153,13 +153,13 @@
     },
     {
       "name": "Central of Georgia Railway",
-      "abbrev": "CGR",
+      "abbrev": "COG",
       "tokens": [
         "Free",
         "$40",
         "$100"
       ],
-      "color": "gray",
+      "color": "turquoise",
       "shares": [
         {
           "quantity": 1,
@@ -221,7 +221,7 @@
     },
     {
       "name": "Gulf, Mobile & Ohio Railroad",
-      "abbrev": "GM&O",
+      "abbrev": "GMO",
       "tokens": [
         "Free",
         "$40",
@@ -244,7 +244,7 @@
     },
     {
       "name": "Southern Railway",
-      "abbrev": "SR",
+      "abbrev": "SOU",
       "tokens": [
         "Free",
         "$40",
@@ -1657,7 +1657,7 @@
             },
             "companies": [
               {
-                "label": "SR",
+                "label": "SOU",
                 "color": "green"
               }
             ]
@@ -2042,7 +2042,7 @@
             "companies": [
               {
                 "label": "A&WP",
-                "color": "pink"
+                "color": "lavender"
               }
             ]
           },
@@ -2209,7 +2209,7 @@
             "companies": [
               {
                 "label": "ACL",
-                "color": "purple"
+                "color": "pink"
               }
             ]
           }
@@ -2308,8 +2308,8 @@
             },
             "companies": [
               {
-                "label": "CGR",
-                "color": "gray"
+                "label": "COG",
+                "color": "turqoise"
               }
             ]
           }
@@ -2400,7 +2400,7 @@
           {
             "companies": [
               {
-                "label": "GM&O",
+                "label": "GMO",
                 "color": "yellow"
               }
             ],
