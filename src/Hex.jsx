@@ -92,12 +92,12 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
 
   let outsideCities = (
     <Position data={R.filter(c => c.outside === true, hex.cities || [])}>
-      {c => <City {...c} />}
+      {c => <City bgColor={hex.color} {...c} />}
     </Position>
   );
   let cities = (
     <Position data={R.filter(c => c.outside !== true, hex.cities || [])}>
-      {c => <City {...c} />}
+      {c => <City bgColor={hex.color} {...c} />}
     </Position>
   );
 
@@ -112,18 +112,18 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
     </Position>
   );
 
-  let towns = <Position data={hex.towns}>{t => <Town {...t} />}</Position>;
+  let towns = <Position data={hex.towns}>{t => <Town bgColor={hex.color} {...t} />}</Position>;
   let townBorders = <Position data={hex.towns}>{t => <Town {...t} border={true} />}</Position>;
 
-  let centerTowns = <Position data={hex.centerTowns}>{t => <CenterTown {...t} />}</Position>;
+  let centerTowns = <Position data={hex.centerTowns}>{t => <CenterTown bgColor={hex.color} {...t} />}</Position>;
   let centerTownBorders = <Position data={hex.centerTowns}>{t => <CenterTown border={true} />}</Position>;
 
   let mediumCities = <Position data={hex.mediumCities}>{m => <MediumCity {...m} />}</Position>;
   let mediumCityBorders = <Position data={hex.mediumCities}>{m => <MediumCity border={true} />}</Position>;
 
-  let labels = <Position data={hex.labels}>{l => <Label {...l} />}</Position>;
+  let labels = <Position data={hex.labels}>{l => <Label bgColor={hex.color} {...l} />}</Position>;
   let icons = <Position data={hex.icons}>{i => <Icon {...i} />}</Position>;
-  let names = <Position data={hex.names}>{n => <Name {...n} />}</Position>;
+  let names = <Position data={hex.names}>{n => <Name bgColor={hex.color} {...n} />}</Position>;
 
   // Deprecating stuff... let's convert old mountain and water to new format
   let terrainHexes = [...(hex.terrain || [])];
