@@ -51,7 +51,9 @@ supported as I can't guaruntee proper package versions.
 
 First install [node.js](https://nodejs.org/en/) and
 [yarn](https://yarnpkg.com/en/) for your operating system. I recommend using the
-LTS version of node (current 10.x).
+LTS version of node (current 10.x). The version I'm currently developing with
+will always be listed in
+[.node-version](https://github.com/kelsin/18xx/blob/master/.node-version).
 
 Download the app (either using git or just downloading the zip file from
 github), and then (from the folder that you downloaded into) run the following:
