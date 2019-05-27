@@ -73,11 +73,11 @@
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 8,
           "percent": "10/5",
           "shares": 1
         }
@@ -95,11 +95,11 @@
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 8,
           "percent": "10/5",
           "shares": 1
         }
@@ -118,11 +118,11 @@
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 8,
           "percent": "10/5",
           "shares": 1
         }
@@ -141,11 +141,11 @@
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 8,
           "percent": "10/5",
           "shares": 1
         }
@@ -164,11 +164,11 @@
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 8,
           "percent": "10/5",
           "shares": 1
         }
@@ -187,11 +187,11 @@
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 8,
           "percent": "10/5",
           "shares": 1
         }
@@ -209,11 +209,11 @@
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 8,
           "percent": "10/5",
           "shares": 1
         }
@@ -227,16 +227,16 @@
         "$40",
         "$100"
       ],
-      "color": "yellow",
+      "color": "red",
       "shares": [
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 8,
           "percent": "10/5",
           "shares": 1
         }
@@ -255,11 +255,11 @@
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 8,
           "percent": "10/5",
           "shares": 1
         }
@@ -271,18 +271,18 @@
       "tokens": [
         "Free",
         "$40",
-        "$100 KW only"
+        "$100 (KW)"
       ],
-      "color": "red",
+      "color": "yellow",
       "shares": [
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 8,
           "percent": "10/5",
           "shares": 1
         }
@@ -2401,7 +2401,7 @@
             "companies": [
               {
                 "label": "GMO",
-                "color": "yellow"
+                "color": "red"
               }
             ],
             "name": {
@@ -2549,7 +2549,7 @@
             "companies": [
               {
                 "label": "FECR",
-                "color": "red"
+                "color": "yellow"
               }
             ]
           }

@@ -39,17 +39,16 @@ import SOU, { ReactComponent as SOU_Component } from "./1832-SOU.svg";
 import FECR, { ReactComponent as FECR_Component } from "./1832-FECR.svg";
 
 // 1848
-/*
-import BOE, { ReactComponent as BOE_Component } from "./BOE.svg";
-import CAR, { ReactComponent as CAR_Component } from "./CAR.svg";
-import CR, { ReactComponent as CR_Component } from "./CR.svg";
-import FT, { ReactComponent as FT_Component } from "./FT.svg";
-import NSW, { ReactComponent as NSW_Component } from "./NSW.svg";
-import QR, { ReactComponent as QR_Component } from "./QR.svg";
-import SAR, { ReactComponent as SAR_Component } from "./SAR.svg";
-import VR, { ReactComponent as VR_Component } from "./VR.svg";
-import WA, { ReactComponent as WA_Component } from "./WA.svg";
-*/
+
+//import BOE, { ReactComponent as BOE_Component } from "./BOE.svg";
+import CAR, { ReactComponent as CAR_Component } from "./1848-CAR.svg";
+import CR, { ReactComponent as CR_Component } from "./1848-CR.svg";
+import FT, { ReactComponent as FT_Component } from "./1848-FT.svg";
+import NSW, { ReactComponent as NSW_Component } from "./1848-NSW.svg";
+import QR, { ReactComponent as QR_Component } from "./1848-QR.svg";
+import SAR, { ReactComponent as SAR_Component } from "./1848-SAR.svg";
+import VR, { ReactComponent as VR_Component } from "./1848-VR.svg";
+import WA, { ReactComponent as WA_Component } from "./1848-WA.svg";
 
 // 1849
 import AFG, { ReactComponent as AFG_Component } from "./AFG.svg";
@@ -101,8 +100,7 @@ export default {
   FECR: { src: FECR, Component: FECR_Component },
 
   // 1848
-  /*
-  BOE: { src: BOE, Component: BOE_Component },
+  //BOE: { src: BOE, Component: BOE_Component },
   CAR: { src: CAR, Component: CAR_Component },
   CR: { src: CR, Component: CR_Component },
   FT: { src: FT, Component: FT_Component },
@@ -111,7 +109,7 @@ export default {
   SAR: { src: SAR, Component: SAR_Component },
   VR: { src: VR, Component: VR_Component },
   WA: { src: WA, Component: WA_Component },
-  */
+
 
   // 1849
   AFG: { src: AFG, Component: AFG_Component },
