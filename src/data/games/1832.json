@@ -73,11 +73,17 @@
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": "20/10",
+          "percent": 20,
           "shares": 2
         },
         {
-          "quantity": 8,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -99,7 +105,13 @@
           "shares": 2
         },
         {
-          "quantity": 8,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -122,7 +134,13 @@
           "shares": 2
         },
         {
-          "quantity": 8,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -145,7 +163,13 @@
           "shares": 2
         },
         {
-          "quantity": 8,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -168,7 +192,13 @@
           "shares": 2
         },
         {
-          "quantity": 8,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -191,7 +221,13 @@
           "shares": 2
         },
         {
-          "quantity": 8,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -213,7 +249,13 @@
           "shares": 2
         },
         {
-          "quantity": 8,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -236,7 +278,13 @@
           "shares": 2
         },
         {
-          "quantity": 8,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -259,7 +307,13 @@
           "shares": 2
         },
         {
-          "quantity": 8,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -282,7 +336,13 @@
           "shares": 2
         },
         {
-          "quantity": 8,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
