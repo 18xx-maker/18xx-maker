@@ -4,12 +4,10 @@
     "subtitle": "The Game of Sicilian Railways",
     "designer": "Federico Vellani",
     "background": "water",
-    "width": 150,
     "orientation": "horizontal",
     "titleY": 900,
     "titleX": 25,
     "extraTokens": 2,
-    "color_5": "water",
     "currency": "EUR"
   },
   "links": {
@@ -579,7 +577,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Certificate",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -608,7 +606,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Certificate",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -637,7 +635,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Certificate",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -666,7 +664,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Certificate",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -695,7 +693,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Certificate",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -724,7 +722,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Certificate",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },

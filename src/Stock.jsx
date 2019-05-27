@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+
 import { connect } from "react-redux";
 import Market from "./Market";
 import games from "./data/games";
@@ -18,18 +20,17 @@ const Stock = ({match, cell, paper}) => {
   let handleDisplayMode = event => setDisplayMode(event.target.value);
 
   let game = games[match.params.game];
-  let stock = game.stock;
 
-  if (!stock) {
-    return null;
+  if (!game.stock) {
+    return <Redirect to={`/${match.params.game}/background`} />;
   }
+
+  let stock = game.stock;
 
   let rows = height(stock.market);
   let cols = width(stock.market);
   let pageHeight = ((rows * (1 + cell.height)) / 100.0) + 1.0;
   let pageWidth = ((cols * (1 + cell.width)) / 100.0) + 0.5;
-
-  console.log({cell, rows, cols, pageHeight, pageWidth});
 
   let css = `@media print {
     @page {

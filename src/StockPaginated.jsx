@@ -1,4 +1,6 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+
 import { connect } from "react-redux";
 import games from "./data/games";
 import { equalPages, maxPages, printableWidth, printableHeight } from "./util";
@@ -16,16 +18,22 @@ import "./StockPaginated.css";
 
 const StockPaginated = ({ match, cell, pagination, paper }) => {
   let game = games[match.params.game];
+
+  if (!game.stock) {
+    return <Redirect to={`/${match.params.game}/background`} />;
+  }
+
   let stock = game.stock;
+
   let splitPages = pagination === "max" ? maxPages : equalPages;
 
-  let totalWidth = 100.0 * (0.26 + ((1 + cell.width) / 100.0) * mutil.width(game.stock.market));
-  let totalHeight = 50 + (100.0 * (0.76 + ((1 + cell.height) / 100.0) * mutil.height(game.stock.market)));
+  let totalWidth = 100.0 * (0.26 + ((1 + cell.width) / 100.0) * mutil.width((game && game.stock && game.stock.market) || []));
+  let totalHeight = 50 + (100.0 * (0.76 + ((1 + cell.height) / 100.0) * mutil.height((game && game.stock && game.stock.market) || [])));
 
   let pageWidth = printableWidth(paper);
   let pageHeight = printableHeight(paper);
 
-  if (stock.orientation !== "portrait") {
+  if (stock && stock.orientation !== "portrait") {
     let tmp = pageWidth;
     pageWidth = pageHeight;
     pageHeight = tmp;
@@ -69,7 +77,8 @@ const StockPaginated = ({ match, cell, pagination, paper }) => {
               >
                 <Market {...stock} />
                 <div className="StockHelpers">
-                  {stock.par &&
+                  {stock &&
+                   stock.par &&
                    stock.par.values && (
                      <Par par={stock.par} legend={stock.legend || []} />
                    )}

@@ -29,3 +29,9 @@ build/render/1830
 ├── tile-manifest.pdf
 └── tokens.pdf
 ```
+
+If you want to build all games at once you can run:
+
+```sh
+yarn build && yarn print all
+```

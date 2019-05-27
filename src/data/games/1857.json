@@ -3,14 +3,12 @@
     "title": "1857",
     "designer": "Eddie Robbins",
     "background": "purple",
-    "width": 150,
     "orientation": "horizontal",
     "titleY": 500,
     "titleX": 200,
     "titleRotate": -90,
     "extraTokens": 3,
     "extraHomeTokens": 1,
-    "color_10": "orange",
     "currency": "ARS"
   },
   "links": {
@@ -60,7 +58,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -82,7 +80,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -105,7 +103,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -126,7 +124,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -148,7 +146,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -169,7 +167,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -192,7 +190,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -214,7 +212,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -1069,42 +1067,33 @@
         },
         {
           "color": "offboard",
-          "offBoardTrack": [
+          "track": [
             {
+              "type": "offboard",
               "side": 6
             }
           ],
-          "offBoardRevenue": {
-            "name": {
-              "name": "Chile"
-            },
-            "revenues": [
-              {
-                "color": "yellow",
-                "cost": "0"
-              },
-              {
-                "color": "brown",
-                "cost": "70"
-              }
-            ]
-          },
+          "removeBorders": [
+            1
+          ],
           "hexes": [
             "A12"
           ]
         },
         {
           "color": "offboard",
-          "offBoardTrack": [
+          "track": [
             {
+              "type": "offboard",
               "side": 5
             }
           ],
           "offBoardRevenue": {
+            "angle": 180,
+            "percent": 1,
             "name": {
               "name": "Chile"
             },
-            "reverse": true,
             "revenues": [
               {
                 "color": "yellow",
@@ -1116,6 +1105,9 @@
               }
             ]
           },
+          "removeBorders": [
+            4
+          ],
           "hexes": [
             "A14"
           ]
@@ -1129,7 +1121,18 @@
             }
           ],
           "hexes": [
-            "B17",
+            "B17"
+          ]
+        },
+        {
+          "color": "gray",
+          "track": [
+            {
+              "type": "sharp",
+              "side": 4
+            }
+          ],
+          "hexes": [
             "C18"
           ]
         },

@@ -16,6 +16,15 @@
       }
     },
 
+    "removeBorders": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 6
+      }
+    },
+
     "borders": {
       "type": "array",
       "items": {
@@ -131,7 +140,7 @@
           {
             "type": "object",
             "properties": {
-              "cost": { "type": "number", "minimum": 0 },
+              "cost": { "type": "string" },
               "size": {
                 "type": "string",
                 "enum": [
@@ -183,12 +192,20 @@
           {
             "type": "object",
             "properties": {
+              "sides": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": 1,
+                  "maximum": 6
+                }
+              },
               "type": {
                 "type": "string",
                 "enum": ["custom", "offboard", "stub", "stop", "mid", "straight",
                          "straightStop", "gentle", "gentleStop", "gentleStopRev",
                          "lawson", "sharp", "sharpStop", "sharpStopRev", "bent",
-                         "city"]
+                         "city", "bleed"]
               }
             }
           },
@@ -230,6 +247,7 @@
         "terrain": { "$ref": "#/definitions/terrain" },
         "names": { "$ref": "#/definitions/names" },
         "borders": { "$ref": "#/definitions/borders" },
+        "removeBorders": { "$ref": "#/definitions/removeBorders" },
         "rotations": {
           "oneOf": [
             {

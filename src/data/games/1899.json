@@ -3,26 +3,16 @@
     "title": "1899",
     "designer": "Dirk Clemens & Ingo Mayer",
     "background": "gray",
-    "width": 150,
-    "color_10": "orange",
     "titleX": 850,
     "titleY": 1150,
-    "hexCoords": true,
     "currency": "CNY"
   },
+  "wip": true,
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/3130/1899",
     "rules": "http://www.18xx.net/1899/1899.htm"
   },
-  "tokens": [],
-  "ipo": false,
   "bank": "$12,000",
-  "players": [],
-  "companies": [],
-  "trains": [],
-  "privates": [],
-  "phases": [],
-  "pools": [],
   "rounds": [
     {
       "name": "OR3",
@@ -41,7 +31,6 @@
       "color": "train_gray"
     }
   ],
-  "turns": [],
   "stock": {
     "type": "2D",
     "cell": {
@@ -621,10 +610,10 @@
         ],
         "track": [
           {
-            "start": 4
+            "side": 4
           },
           {
-            "start": 6
+            "side": 6
           }
         ],
         "hexes": [
@@ -669,10 +658,10 @@
         ],
         "track": [
           {
-            "start": 1
+            "side": 1
           },
           {
-            "start": 6
+            "side": 6
           }
         ],
         "hexes": [
@@ -888,10 +877,10 @@
         ],
         "track": [
           {
-            "start": 1
+            "side": 1
           },
           {
-            "start": 2
+            "side": 2
           }
         ],
         "hexes": [
@@ -1170,10 +1159,10 @@
         ],
         "track": [
           {
-            "start": 3
+            "side": 3
           },
           {
-            "start": 6
+            "side": 6
           }
         ],
         "companies": [
@@ -1266,13 +1255,13 @@
         },
         "track": [
           {
-            "start": 1
+            "side": 1
           },
           {
-            "start": 3
+            "side": 3
           },
           {
-            "start": 6
+            "side": 6
           }
         ],
         "hexes": [
@@ -1495,11 +1484,11 @@
         ],
         "track": [
           {
-            "start": 4,
+            "side": 4,
             "type": "stop"
           },
           {
-            "start": 6,
+            "side": 6,
             "type": "stop"
           }
         ],
@@ -1572,11 +1561,11 @@
         ],
         "track": [
           {
-            "start": 3,
+            "side": 3,
             "type": "stop"
           },
           {
-            "start": 5,
+            "side": 5,
             "type": "stop"
           }
         ],
@@ -1632,10 +1621,10 @@
         ],
         "track": [
           {
-            "start": 3
+            "side": 3
           },
           {
-            "start": 5
+            "side": 5
           }
         ],
         "hexes": [
@@ -1846,10 +1835,10 @@
         ],
         "track": [
           {
-            "start": 2
+            "side": 2
           },
           {
-            "start": 4
+            "side": 4
           }
         ],
         "hexes": [

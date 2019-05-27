@@ -9,17 +9,17 @@ import PageSetup from "./PageSetup";
 
 require("./Revenue.css");
 
-const generateCells = (rows, cols, color_5, color_10) => {
+const generateCells = (rows, cols) => {
   let length = cols.length;
   let items = R.map(row => {
     let cells = R.map(col => {
       let color = "plain";
       let value = length * row + col + 1;
       if (value % 5 === 0) {
-        color = color_5 || "yellow";
+        color = "yellow";
       }
       if (value % 10 === 0) {
-        color = color_10 || "green";
+        color = "orange";
       }
       return (
         <Color key={`${row}-${col}`}
@@ -45,8 +45,8 @@ const Revenue = ({ match }) => {
   let rows = Array.from(Array(5).keys());
   let cols = Array.from(Array(20).keys());
 
-  let items = generateCells(rows, cols, game.info.color_5, game.info.color_10);
-  let pools = R.map(p => <Pool key={`pool-${p.name}`} {...p}/>, game.pools);
+  let items = generateCells(rows, cols);
+  let pools = R.map(p => <Pool key={`pool-${p.name}`} {...p}/>, game.pools || []);
 
   return (
     <div className="revenue">
