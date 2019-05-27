@@ -68,7 +68,7 @@
         "$40",
         "$100"
       ],
-      "color": "purple",
+      "color": "pink",
       "shares": [
         {
           "quantity": 1,
@@ -77,7 +77,13 @@
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -90,16 +96,22 @@
         "Free",
         "$40"
       ],
-      "color": "pink",
+      "color": "lavender",
       "shares": [
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -118,11 +130,17 @@
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -141,11 +159,17 @@
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -153,22 +177,28 @@
     },
     {
       "name": "Central of Georgia Railway",
-      "abbrev": "CGR",
+      "abbrev": "COG",
       "tokens": [
         "Free",
         "$40",
         "$100"
       ],
-      "color": "gray",
+      "color": "turquoise",
       "shares": [
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -187,11 +217,17 @@
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -209,11 +245,17 @@
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -221,22 +263,28 @@
     },
     {
       "name": "Gulf, Mobile & Ohio Railroad",
-      "abbrev": "GM&O",
+      "abbrev": "GMO",
       "tokens": [
         "Free",
         "$40",
         "$100"
       ],
-      "color": "yellow",
+      "color": "red",
       "shares": [
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -244,7 +292,7 @@
     },
     {
       "name": "Southern Railway",
-      "abbrev": "SR",
+      "abbrev": "SOU",
       "tokens": [
         "Free",
         "$40",
@@ -255,11 +303,17 @@
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -271,18 +325,24 @@
       "tokens": [
         "Free",
         "$40",
-        "$100 KW only"
+        "$100 (KW)"
       ],
-      "color": "red",
+      "color": "yellow",
       "shares": [
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -1657,7 +1717,7 @@
             },
             "companies": [
               {
-                "label": "SR",
+                "label": "SOU",
                 "color": "green"
               }
             ]
@@ -2042,7 +2102,7 @@
             "companies": [
               {
                 "label": "A&WP",
-                "color": "pink"
+                "color": "lavender"
               }
             ]
           },
@@ -2209,7 +2269,7 @@
             "companies": [
               {
                 "label": "ACL",
-                "color": "purple"
+                "color": "pink"
               }
             ]
           }
@@ -2308,8 +2368,8 @@
             },
             "companies": [
               {
-                "label": "CGR",
-                "color": "gray"
+                "label": "COG",
+                "color": "turqoise"
               }
             ]
           }
@@ -2400,8 +2460,8 @@
           {
             "companies": [
               {
-                "label": "GM&O",
-                "color": "yellow"
+                "label": "GMO",
+                "color": "red"
               }
             ],
             "name": {
@@ -2549,7 +2609,7 @@
             "companies": [
               {
                 "label": "FECR",
-                "color": "red"
+                "color": "yellow"
               }
             ]
           }
