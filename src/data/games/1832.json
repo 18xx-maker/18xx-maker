@@ -2779,9 +2779,13 @@
         "color": "offboard",
         "cities": [
           {
+          	"name": {
+              "name": "Key West",
+              "offset": 75
+            },
             "companies": [
               {
-                "label": "KW",
+                "label": "FECR",
                 "color": "black"
               }
             ]
