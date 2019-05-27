@@ -1,0 +1,29 @@
+full: false
+plugins:
+  - removeViewBox: false
+  - cleanupIds: true
+  - sortAttrs:
+      order:
+        - id
+        - class
+        - fill
+        - stroke
+        - stroke-width
+        - style
+        - width
+        - height
+        - x
+        - x1
+        - x2
+        - y
+        - y1
+        - y2
+        - cx
+        - cy
+        - r
+        - marker
+        - d
+        - points
+  - inlineStyles:
+      onlyMatchedOnce: false
+      removeMatchedSelectors: true
