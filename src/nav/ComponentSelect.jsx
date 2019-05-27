@@ -3,6 +3,12 @@ import {withRouter} from "react-router";
 
 import games from "../data/games";
 
+import equals from "ramda/src/equals";
+
+const disabled = value => {
+  return value === undefined || value === null || equals(value, []) || equals(value, {})
+}
+
 const ComponentSelect = ({match,history,location}) => {
   let gameName = match.params.game;
   let game = games[gameName];
@@ -11,25 +17,29 @@ const ComponentSelect = ({match,history,location}) => {
     history.push(`/${gameName}/${event.target.value}`);
   };
 
-  let selection = location.pathname.split('/')[2];
+  let selection = "";
+  if (game) {
+    selection = location.pathname.split('/')[2];
+  }
 
   return (
     <div className="select">
       <h3>Component</h3>
       <select onChange={handleChange}
               value={selection}>
-        <option value="background">Background</option>
-        <option value="cards">Cards</option>
-        <option value="charters">Charters</option>
-        {game.minorCompanies && <option value="minors">Minors</option>}
-        {false && game.ipo && <option value="ipo">IPO</option>}
-        <option value="market">Market</option>
-        {game.stock.paginated && <option value="market-paginated">Market - Paginated</option>}
-        <option value="map">Map</option>
-        <option value="map-paginated">Map - Paginated</option>
-        <option value="tiles">Tiles</option>
-        <option value="manifest">Tile Manifest</option>
-        <option value="tokens">Tokens</option>
+        {selection !== "" || <option value="">None</option>}
+        <option disabled={!selection} value="background">Background</option>
+        <option disabled={!selection || disabled(game.privates || game.companies || game.trains)} value="cards">Cards</option>
+        <option disabled={!selection || disabled(game.companies)} value="charters">Charters</option>
+        {false && game.ipo && <option disabled={!selection || disabled(game.ipo)} value="ipo">IPO</option>}
+        <option disabled={!selection || disabled(game.map)} value="map">Map</option>
+        <option disabled={!selection || disabled(game.map)} value="map-paginated">Map - Paginated</option>
+        <option disabled={!selection || disabled(game.stock)} value="market">Market</option>
+        <option disabled={!selection || disabled(game.stock)} value="market-paginated">Market - Paginated</option>
+        <option disabled={!selection} value="revenue">Revenue</option>
+        <option disabled={!selection || disabled(game.tiles)} value="tile-manifest">Tile Manifest</option>
+        <option disabled={!selection || disabled(game.tiles)} value="tiles">Tiles</option>
+        <option disabled={!selection || disabled(game.companies)} value="tokens">Tokens</option>
       </select>
     </div>
   );

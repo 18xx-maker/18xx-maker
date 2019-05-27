@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+
+import { connect } from "react-redux";
 import Market from "./Market";
 import games from "./data/games";
 
@@ -7,35 +10,38 @@ import Par from "./Par";
 import Legend from "./Legend";
 
 import GameContext from "./context/GameContext";
+import { SetFont } from "./context/FontContext";
 import "./Stock.css";
+import { height, width } from "./market-utils";
+import { paperToCssMargins } from "./PageSetup";
 
-class Stock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayMode: "normal"
-    };
-    this.handleDisplayMode = this.handleDisplayMode.bind(this);
+const Stock = ({match, cell, paper}) => {
+  let [displayMode, setDisplayMode] = useState("normal");
+  let handleDisplayMode = event => setDisplayMode(event.target.value);
+
+  let game = games[match.params.game];
+
+  if (!game.stock) {
+    return <Redirect to={`/${match.params.game}/background`} />;
   }
 
-  handleDisplayMode(event) {
-    const value = event.target.value;
-    this.setState({
-      displayMode: value
-    });
-  }
+  let stock = game.stock;
 
-  render() {
-    let match = this.props.match;
-    let game = games[match.params.game];
-    let stock = game.stock;
+  let rows = height(stock.market);
+  let cols = width(stock.market);
+  let pageHeight = ((rows * (1 + cell.height)) / 100.0) + 1.0;
+  let pageWidth = ((cols * (1 + cell.width)) / 100.0) + 0.5;
 
-    if (!stock) {
-      return null;
+  let css = `@media print {
+    @page {
+        size: ${pageWidth}in ${pageHeight}in;
+        ${paperToCssMargins(paper, pageHeight < pageWidth)}
     }
+}`;
 
-    return (
-      <GameContext.Provider value={match.params.game}>
+  return (
+    <GameContext.Provider value={match.params.game}>
+      <SetFont context="stock">
         <div className="PrintNotes">
           <div>
             <p>
@@ -51,8 +57,8 @@ class Stock extends React.Component {
                <label>
                  <select
                    name="displayMode"
-                   value={this.state.displayMode}
-                   onChange={this.handleDisplayMode}
+                   value={displayMode}
+                   onChange={handleDisplayMode}
                  >
                    <option value="normal">Normal</option>
                    <option value="delta">%Δ</option>
@@ -61,12 +67,12 @@ class Stock extends React.Component {
              </React.Fragment>
            )}
         </div>
-        <div className="stock" style={{ height: "100vh" }}>
+        <div className="stock">
           <Market
             {...stock}
             paginated={false}
             title={game.info.title}
-            displayMode={this.state.displayMode}
+            displayMode={displayMode}
           />
           <div className="StockHelpers">
             {stock.par &&
@@ -83,11 +89,16 @@ class Stock extends React.Component {
               horizontal={game.stock.type === "2D" ? false : true}
             />
           </div>
-          <style>{`@media print {@page {size: ${stock.orientation !== "landscape" ? "11in 8.5in" : "8.5in 11in"};}}`}</style>
+          <style>{css}</style>
         </div>
-      </GameContext.Provider>
-    );
-  }
-}
+      </SetFont>
+    </GameContext.Provider>
+  );
+};
 
-export default Stock;
+const mapStateToProps = state => ({
+  cell: state.config.stock.cell,
+  paper: state.config.paper
+});
+
+export default connect(mapStateToProps)(Stock);

@@ -1,6 +1,4 @@
 .StockHelpers {
-  height: 100%;
-  width: 100%;
   box-sizing: border-box;
   position: absolute;
   right: 0;
@@ -47,8 +45,12 @@
   color: black;
 }
 
-.Arrow--down {
+.Arrow--down, .Arrow--left {
   left: 1mm;
+}
+
+.Arrow--right {
+  top: 1mm;
 }
 
 .Legend {

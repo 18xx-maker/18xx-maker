@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "https://18xx.kelsin.net/schemas/game.schema.json",
+
+  "definitions": {
+    "link": {
+      "type": "string",
+      "pattern": "https?://.*/.*"
+    }
+  },
+
+  "type": "object",
+  "properties": {
+    "info": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "designer": { "type": "string" },
+        "background": { "type": "string" },
+        "extraTotalHeight": { "type": "number", "minimum": 1 },
+        "extraTotalWidth": { "type": "number", "minimum": 1 },
+        "titleX": { "type": "number" },
+        "titleY": { "type": "number" },
+        "titleRotate": {
+          "type": "number",
+          "minimum": -360,
+          "maximum": 360
+        },
+        "titleSize": { "type": "number" },
+        "subTitleSize": { "type": "number" },
+        "orientation": {
+          "type": "string",
+          "enum": ["horizontal", "vertical"]
+        },
+        "extraHomeTokens": { "type": "number", "minimum": 1 },
+        "extraTokens": { "type": "number", "minimum": 1 },
+        "currency": { "type": "string", "pattern": "[A-Z]{3}" }
+      },
+      "required": ["title", "designer", "currency"],
+      "additionalProperties": false
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "bgg": { "$ref": "#/definitions/link" },
+        "rules": { "$ref": "#/definitions/link" }
+      },
+      "additionalProperties": false
+    },
+    "bank": {},
+    "capital": {},
+    "certLimit": {},
+    "companies": {},
+    "ipo": { "type": "boolean" },
+    "map": {},
+    "phases": {},
+    "players": {},
+    "pools": {},
+    "privates": {},
+    "rounds": {},
+    "stock": {},
+    "tiles": {},
+    "tokens": {},
+    "turns": {},
+    "trains": {},
+    "wip": { "type": "boolean" }
+  },
+  "additionalProperties": false,
+  "required": [
+    "info",
+    "links"
+  ]
+}

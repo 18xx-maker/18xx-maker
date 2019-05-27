@@ -13,6 +13,7 @@ const ThemeSelect = ({scheme, setScheme}) => {
       <select value={scheme} onChange={handleChange}>
         <option value="gmt">GMT</option>
         <option value="dtg">Deep Thought</option>
+        <option value="aag">All Aboard Games</option>
         <option value="ps18xx">px18xx</option>
         <option value="carth">Carth</option>
       </select>

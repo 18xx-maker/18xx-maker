@@ -33,17 +33,17 @@ nav {
     }
   }
 
-  a:visited {
-    color: inherit;
-  }
+  a {
+    color: #000;
 
-  a:hover {
-    text-decoration: underline;
-  }
+    &:hover {
+      text-decoration: underline;
+    }
 
-  a.active {
-    font-weight: bold;
-    text-decoration: underline;
+    &.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
   }
 
   ul {
@@ -68,5 +68,23 @@ nav {
     left: calc(-75.0555px - 1em);
     width: 75.0555px;
     height: 65px;
+  }
+}
+
+.PrintNotes {
+  ul {
+    font-family: sans-serif;
+    list-style: none;
+    display: inline-block;
+    margin: 1em 0;
+  }
+
+  li {
+    float: left;
+    margin-right: 2em;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }

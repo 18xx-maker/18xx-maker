@@ -1,38 +1,39 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+
+import { connect } from "react-redux";
 import games from "./data/games";
-import util from "./util";
+import { equalPages, maxPages, printableWidth, printableHeight } from "./util";
 import Market from "./Market";
 import * as mutil from "./market-utils";
-import * as data from "./data";
 import * as R from "ramda";
-import { Redirect } from "react-router-dom";
 
 import Rounds from "./Rounds";
 import Par from "./Par";
 import Legend from "./Legend";
+import PageSetup from "./PageSetup";
 
 import GameContext from "./context/GameContext";
 import "./StockPaginated.css";
 
-const splitPages = data.pagination === "max" ? util.maxPages : util.equalPages;
-
-const StockPaginated = ({ match }) => {
+const StockPaginated = ({ match, cell, pagination, paper }) => {
   let game = games[match.params.game];
-  let stock = game.stock;
-  let cell = stock.cell || "auto";
 
-  if (cell === "auto") {
-    return <Redirect to={`/${match.params.game}/stock`} />;
+  if (!game.stock) {
+    return <Redirect to={`/${match.params.game}/background`} />;
   }
 
-  let totalWidth = 100.0 * (0.26 + cell.width * mutil.width(game.stock.market));
-  let totalHeight =
-      100.0 * (0.76 + cell.height * mutil.height(game.stock.market));
+  let stock = game.stock;
 
-  let pageWidth = data.paper.width;
-  let pageHeight = data.paper.height;
+  let splitPages = pagination === "max" ? maxPages : equalPages;
 
-  if (stock.orientation === "landscape") {
+  let totalWidth = 100.0 * (0.26 + ((1 + cell.width) / 100.0) * mutil.width((game && game.stock && game.stock.market) || []));
+  let totalHeight = 50 + (100.0 * (0.76 + ((1 + cell.height) / 100.0) * mutil.height((game && game.stock && game.stock.market) || [])));
+
+  let pageWidth = printableWidth(paper);
+  let pageHeight = printableHeight(paper);
+
+  if (stock && stock.orientation !== "portrait") {
     let tmp = pageWidth;
     pageWidth = pageHeight;
     pageHeight = tmp;
@@ -76,7 +77,8 @@ const StockPaginated = ({ match }) => {
               >
                 <Market {...stock} />
                 <div className="StockHelpers">
-                  {stock.par &&
+                  {stock &&
+                   stock.par &&
                    stock.par.values && (
                      <Par par={stock.par} legend={stock.legend || []} />
                    )}
@@ -116,10 +118,16 @@ const StockPaginated = ({ match }) => {
       </div>
       <div className="stock">
         {stockPages}
-        <style>{`@media print {@page {size: ${stock.orientation === "landscape" ? "11in 8.5in" : "8.5in 11in"};}}`}</style>
+        <PageSetup landscape={stock.orientation !== "portrait"}/>
       </div>
     </GameContext.Provider>
   );
 };
 
-export default StockPaginated;
+const mapStateToProps = state => ({
+  cell: state.config.stock.cell,
+  pagination: state.config.pagination,
+  paper: state.config.paper
+});
+
+export default connect(mapStateToProps)(StockPaginated);

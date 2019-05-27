@@ -29,20 +29,22 @@ const Players = ({ players, bank, capital }) => {
       <table className="players__table players__table--variable">
         <thead>
           <tr>
-            <th>
-              <i className="fas fa-user-friends" />
-            </th>
-            {players[0].certLimit && (
+            {players && (
+              <th>
+                <i className="fas fa-user-friends" />
+              </th>
+            )}
+            {players && players[0].certLimit && (
               <th>
                 <i className="fas fa-certificate" />
               </th>
             )}
-            {players[0].capital && (
+            {players && players[0].capital && (
               <th>
                 <i className="fas fa-coins" />
               </th>
             )}
-            {players[0].bank && (
+            {players && players[0].bank && (
               <th>
                 <i className="fas fa-university" />
               </th>
@@ -59,7 +61,7 @@ const Players = ({ players, bank, capital }) => {
                 {p.bank && <td>{p.bank}</td>}
               </tr>
             ),
-            players
+            players || []
           )}
         </tbody>
       </table>

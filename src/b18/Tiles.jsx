@@ -4,14 +4,14 @@ import tileDefs from "../data/tiles";
 import Svg from "../Svg";
 import Tile from "../Tile";
 
-import compose from "ramda/es/compose";
-import filter from "ramda/es/filter";
-import is from "ramda/es/is";
-import keys from "ramda/es/keys";
-import map from "ramda/es/map";
-import propEq from "ramda/es/propEq";
-import take from "ramda/es/take";
-import uniq from "ramda/es/uniq";
+import compose from "ramda/src/compose";
+import filter from "ramda/src/filter";
+import is from "ramda/src/is";
+import keys from "ramda/src/keys";
+import map from "ramda/src/map";
+import propEq from "ramda/src/propEq";
+import take from "ramda/src/take";
+import uniq from "ramda/src/uniq";
 
 import ColorContext from "../context/ColorContext";
 import RotateContext from "../context/RotateContext";
@@ -43,8 +43,10 @@ const Tiles = ({match}) => {
   let height = game.info.orientation === "horizontal" ? 100 : 116;
   let width = game.info.orientation === "horizontal" ? 116 : 100;
 
+  // Hardcoding tile width here since this is only for b18 output
   let totalWidth = (tiles.length * 150);
 
+  // Same as above
   let viewBox = game.info.orientation === "horizontal" ?
       "-87.6025 -76 175.205 152" :
       "-76 -87.6025 152 175.205";

@@ -13,6 +13,12 @@ me know!
 This project was bootstrapped with [Create React
 App](https://github.com/facebookincubator/create-react-app).
 
+## Donation
+
+I've been asked about donation buttons, if you find this software usefull to you
+and would like to donate money towards it's development you can do so via
+[paypal](https://paypal.me/kelsin) or [square cash](https://cash.me/$kelsin).
+
 ## Docker
 
 If you have docker installed (or available) you can run a [public docker
@@ -21,10 +27,22 @@ following command and the site should be available at http://localhost (you
 might need to edit the port depending on your OS and other running apps):
 
 ```sh
-docker run -it --rm -p 80:80 -n 18xx kelsin/18xx
+docker run -it --rm -p 80:80 --name 18xx kelsin/18xx
 ```
 
-More documentation about this will be coming soon.
+### Persistant
+
+If you want to use docker to hack on the site, you can use a docker volume to
+keep a persistant image of the game code. Knowledge of how to manage docker
+volumes is important to use this properly.
+
+```sh
+docker run -it --rm -p 3000:3000 --name 18xx-develop -v 18xx:/home/18xx kelsin/18xx:develop
+```
+
+This will run the react-development server that will live update if you edit
+files, and store anything edited (starting with the current code) on the volume
+named `18xx`.
 
 ## Usage
 
@@ -48,6 +66,33 @@ npm install
 # Run the app
 npm start
 ```
+### Printing
+
+Running `yarn build` will build the app. This is required before you using the b18 or the print script.
+
+Running `yarn print <game>` will output the pdf's for only one game.
+
+Running `yarn print all` will output the pdf's for all games.
+
+### Board18
+
+Running `yarn b18 <game> <verison> <author>` will create a board18 game box zip
+file. The app needs to be built first by running `yarn build`.
+
+### Example
+
+``` sh
+# Build the app
+yarn build
+
+# Print 1830 PDF's
+yarn print 1830
+
+# Build an 1830 Board18 Game Box
+yarn b18 1830 CGG01 Kelsin
+```
+
+## Developing
 
 ### Adding a game
 

@@ -1,12 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
 import Color from "./data/Color";
 import Config from "./data/Config";
 
 import * as uuid from "uuid";
 
-import find from "ramda/es/find";
-import is from "ramda/es/is";
-import propEq from "ramda/es/propEq";
+import find from "ramda/src/find";
+import is from "ramda/src/is";
+import propEq from "ramda/src/propEq";
+
+import logos from "./data/logos";
 
 const bleedAdjust = (bleed, percent) => {
   let ratio = 0.833333333;
@@ -40,14 +43,15 @@ const Token = ({
   inverse,
   width,
   bleed,
-  outline
+  outline,
+  companySvgLogos,
 }) => {
   width = width || 25;
 
   let gradient = null;
   let shape = null;
   let tokenFill = null;
-  let color = is(Object, token) ? token.colors[0] : token;
+  let color = is(Object, token) ? (token.colors ? token.colors[0] : "black") : token || "white";
 
   let clipId = uuid.v4();
   let clip = (
@@ -78,8 +82,23 @@ const Token = ({
               }
             }
 
-            let textFill = (token && token.labelColor) ? c(token.labelColor) : p("black");
+            let textFill = (token && token.labelColor) ? c(token.labelColor) : t(c(color));
             let textStroke = "none";
+
+            if (companySvgLogos !== "none") {
+              if (!is(Object, token)) {
+                if (is(Array, token)) {
+                  token = {colors: token}
+                } else {
+                  token = {colors: [token]}
+                }
+              }
+
+              let logo = logos[label];
+              if (logo) {
+                token["type"] = "logo";
+              }
+            }
 
             if(inverse) {
               textStroke = s(c(color));
@@ -111,6 +130,7 @@ const Token = ({
                           stroke={p("black")}
                           clipPath={`url(#${clipId})`}/>
                   ];
+                  textFill = t(c("white"));
                   break;
                 case "halves":
                   gradient = (
@@ -125,6 +145,7 @@ const Token = ({
                           stroke={p("black")}
                           clipPath={`url(#${clipId})`}/>
                   );
+                  textFill = t(c("white"));
                   break;
                 case "stripes":
                   gradient = (
@@ -149,6 +170,7 @@ const Token = ({
                           stroke={p("black")}
                           clipPath={`url(#${clipId})`}/>
                   );
+                  textFill = t(c("white"));
                   break;
                 case "bar":
                   shape = (
@@ -174,6 +196,7 @@ const Token = ({
                           stroke={p("black")}
                           clipPath={`url(#${clipId})`}/>
                   );
+                  textFill = t(c("white"));
                   break;
                 case "target":
                   gradient = (
@@ -192,6 +215,26 @@ const Token = ({
                           stroke={p("black")}
                           clipPath={`url(#${clipId})`}/>
                   );
+                  textFill = t(c("white"));
+                  break;
+                case "logo":
+                  let logo = logos[label];
+                  let start = -1 * width;
+                  let size = 2 * width;
+                  if (logo) {
+                    let Component = logo.Component;
+                    shape = (
+                      <Component className={`color-main-${color}`}
+                                 x={start} y={start}
+                                 height={size} width={size}/>
+                    );
+                    tokenFill = c("white");
+                    textStroke = "none";
+                    textFill = "none";
+                  } else {
+                    textFill = t(c(color));
+                    tokenFill = c(color) || p("white");
+                  }
                   break;
                 default:
                   break;
@@ -209,7 +252,7 @@ const Token = ({
               <use href={icon} transform="scale(1.66666 1.66666)" />
             ) : (
               <text
-                fontFamily="Bitter"
+                fontFamily="display"
                 fontSize={width * 0.64}
                 textAnchor="middle"
                 strokeWidth="0.5"
@@ -253,4 +296,8 @@ const Token = ({
   );
 };
 
-export default Token;
+const mapStateToProps = (state, {companySvgLogos}) => ({
+  companySvgLogos: companySvgLogos || state.config.companySvgLogos,
+});
+
+export default connect(mapStateToProps)(Token);

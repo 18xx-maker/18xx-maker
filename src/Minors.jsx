@@ -3,6 +3,8 @@ import Minor from "./Minor";
 import games from "./data/games";
 import * as R from "ramda";
 
+import PageSetup from "./PageSetup";
+
 const Minors = ({ match }) => {
   let game = games[match.params.game];
   let minorCompanies = game.minorCompanies;
@@ -29,7 +31,7 @@ const Minors = ({ match }) => {
       <div className="PrintNotes">
         Minors are meant to be printed in <b>landscape</b> mode
       </div>
-      <style>{`@media print {@page {size: 11in 8.5in;}}`}</style>
+      <PageSetup landscape={true}/>
     </div>
   );
 };

@@ -1,36 +1,22 @@
 import React from "react";
 
+import SetSvgColors from "./data/SetSvgColors";
 import ScrollToTop from "./ScrollToTop";
 import Color from "./data/Color";
 
 import Nav from "./nav/Nav";
 
-import Tiles from "./Tiles";
-import SingleTile from "./SingleTile";
-import Atoms from "./atoms";
-import Positioning from "./Positioning";
+import CheatSheet from "./CheatSheet.jsx";
+import Config from "./Config.jsx";
+import Docs from "./docs";
+import Logos from "./Logos";
 
-import Background from "./Background";
-import Cards from "./cards";
-import Charters from "./Charters";
-import Minors from "./Minors";
+import Tiles from "./tiles";
+
 import Home from "./Home";
-import IPO from "./IPO";
-import Revenue from "./Revenue";
-import Tokens from "./Tokens";
-
-import TileSheet from "./TileSheet";
-import TileManifest from "./TileManifest";
-
-import MapPaginated from "./MapPaginated";
-import MapSingle from "./MapSingle";
-
-import Stock from "./Stock";
-import StockPaginated from "./StockPaginated";
+import Game from "./Game";
 
 import Footer from "./Footer";
-
-import B18Tiles from "./b18/Tiles";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -39,50 +25,69 @@ const App = () => (
     <ScrollToTop>
       <div className="App">
         <Switch>
-          <Route exact path="/"/>
-          <Route path="/:game" component={Nav}/>
+          <Route path="/" exact />
+          <Route path="/:game" component={Nav} />
         </Switch>
 
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route path="/" exact component={Home} />
 
-          <Route exact path="/tiles" component={Tiles} />
-          <Route path="/tiles/atoms" component={Atoms} />
-          <Route path="/tiles/positioning" component={Positioning} />
-          <Route path="/tiles/:id" component={SingleTile} />
+          <Route path="/cheat" exact component={CheatSheet} />
+          <Route path="/config" exact component={Config} />
+          <Route path="/docs/:id?" exact component={Docs} />
+          <Route path="/logos" exact component={Logos} />
 
-          <Route path="/:game/background" component={Background} />
-          <Route path="/:game/cards" component={Cards} />
-          <Route path="/:game/charters" component={Charters} />
-          <Route path="/:game/minors" component={Minors} />
-          <Route path="/:game/ipo" component={IPO} />
-          <Route exact path="/:game/map" component={MapSingle} />
-          <Route exact path="/:game/map-paginated" component={MapPaginated} />
-          <Route path="/:game/map/:variation" component={MapSingle} />
-          <Route
-            path="/:game/map-paginated/:variation"
-            component={MapPaginated}
-          />
-          <Route path="/:game/revenue" component={Revenue} />
-          <Route exact path="/:game/market" component={Stock} />
-          <Route path="/:game/market-paginated" component={StockPaginated} />
-          <Route path="/:game/tiles" component={TileSheet} />
-          <Route path="/:game/manifest" component={TileManifest} />
-          <Route path="/:game/tokens" component={Tokens} />
+          <Route path="/tiles" component={Tiles} />
 
-          <Route path="/:game/b18-tiles-:color" component={B18Tiles} />
+          <Route path="/:game" component={Game} />
         </Switch>
         <svg
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           style={{height:0,width:0,position:"absolute"}}>
           <defs>
-            <clipPath id="hexClip">
+            <mask id="hexMask">
+              <rect x="-100" y="-100" width="200" height="200" fill="black"/>
               <polygon points="-86.6025,0 -43.30125,-75 43.30125,-75 86.6025,0 43.30125,75 -43.30125,75"
-                       fill="black"
-                       stroke="black"
+                       fill="white"
+                       stroke="white"
                        strokeWidth="2" />
-            </clipPath>
+            </mask>
+            <mask id="hexBleedMask">
+              <rect x="-100" y="-100" width="200" height="200" fill="black"/>
+              <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 49.07475,85 -49.07475,85"
+                       fill="white"
+                       stroke="white"
+                       strokeWidth="2" />
+            </mask>
+            <mask id="hexBleedMaskOffset">
+              <rect x="-100" y="-100" width="200" height="200" fill="black"/>
+              <polygon points="-86.6025,0 -92.376,-9.999995337 -54.84825,-75 -43.30125,-75 -37.52775,-85 37.52775,-85 43.30125,-75 54.84825,-75 92.376,-9.999995337 86.6025,0 92.376,9.999995337 54.84825,75 43.30125,75 37.52775,85 -37.52775,85 -43.30125,75 -54.84825,75 -92.376,9.999995337"
+                       fill="white"
+                       stroke="white"
+                       strokeWidth="2" />
+            </mask>
+            <mask id="hexBleedMaskDie">
+              <rect x="-100" y="-100" width="200" height="200" fill="black"/>
+              <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 54.84825,75 -54.84825,75"
+                       fill="white"
+                       stroke="white"
+                       strokeWidth="2" />
+            </mask>
+            <mask id="hexBleedMaskDieTop">
+              <rect x="-100" y="-100" width="200" height="200" fill="black"/>
+              <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 54.84825,75 -54.84825,75"
+                       fill="white"
+                       stroke="white"
+                       strokeWidth="2" />
+            </mask>
+            <mask id="hexBleedMaskDieBottom">
+              <rect x="-100" y="-100" width="200" height="200" fill="black"/>
+              <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 49.07475,85 -49.07475,85"
+                       fill="white"
+                       stroke="white"
+                       strokeWidth="2" />
+            </mask>
             <Color>
               {c => (
                 <React.Fragment>
@@ -221,21 +226,21 @@ const App = () => (
                     d="M 0 42 L 25 42 A 30 30 0 0 0 47 -1 L 25 -40 A 30 30 0 0 0 -25 -40 L -47 -1 A 30 30 0 0 0 -25 42 L 0 42"
                   />
                   <linearGradient id="yellow-green" spreadMethod="repeat"
-                                  x1="0" x2="0" y1="0" y2="16.6667%">
+                                  x1="0" x2="0" y1="0" y2="22%">
                     <stop offset="0%" stopColor={c("yellow")}/>
                     <stop offset="50%" stopColor={c("yellow")}/>
                     <stop offset="50%" stopColor={c("green")}/>
                     <stop offset="100%" stopColor={c("green")}/>
                   </linearGradient>
                   <linearGradient id="green-brown" spreadMethod="repeat"
-                                  x1="0" x2="0" y1="0" y2="16.6667%">
+                                  x1="0" x2="0" y1="0" y2="22%">
                     <stop offset="0%" stopColor={c("green")}/>
                     <stop offset="50%" stopColor={c("green")}/>
                     <stop offset="50%" stopColor={c("brown")}/>
                     <stop offset="100%" stopColor={c("brown")}/>
                   </linearGradient>
                   <linearGradient id="brown-gray" spreadMethod="repeat"
-                                  x1="0" x2="0" y1="0" y2="16.6667%">
+                                  x1="0" x2="0" y1="0" y2="22%">
                     <stop offset="0%" stopColor={c("brown")}/>
                     <stop offset="50%" stopColor={c("brown")}/>
                     <stop offset="50%" stopColor={c("gray")}/>
@@ -248,6 +253,7 @@ const App = () => (
         </svg>
         <Route exact path="/" component={Footer}/>
       </div>
+      <SetSvgColors/>
     </ScrollToTop>
   </Router>
 );

@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "https://18xx.kelsin.net/schemas/config.schema.json",
+
+  "definitions": {
+    "font": {
+      "type": "object",
+      "properties": {
+        "size": { "type": "string" },
+        "weight": { "type": "string", "enum": ["normal", "bold"] },
+        "family": { "type": "string" }
+      },
+      "additionalProperties": { "$ref": "#/definitions/font" }
+    },
+    "dimension": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "dimensions": {
+      "type": "object",
+      "properties": {
+        "width": { "$ref": "#/definitions/dimension" },
+        "height": { "$ref": "#/definitions/dimension" }
+      },
+      "required": ["width", "height"]
+    },
+    "margins": {
+        "$ref": "#/definitions/dimension"
+    }
+  },
+
+  "type": "object",
+  "properties": {
+    "theme": { "type": "string" },
+    "companiesTheme": { "type": "string" },
+    "paper": {
+      "allOf": [{
+        "$ref": "#/definitions/dimensions"
+      },{
+        "properties": {
+          "margins": { "$ref": "#/definitions/margins" }
+        },
+        "required": ["margins"]
+      }]
+    },
+    "stock": {
+      "type": "object",
+      "properties": {
+        "cell": { "$ref": "#/definitions/dimensions" },
+        "column": { "$ref": "#/definitions/dimensions" },
+        "diag": { "$ref": "#/definitions/dimensions" },
+        "par": { "$ref": "#/definitions/dimensions" }
+      },
+      "required": ["cell", "column", "diag", "par"],
+      "additionalProperties": false
+    },
+    "pagination": {
+      "type": "string",
+      "enum": ["equal", "max"]
+    },
+    "shareStyle": {
+      "type": "string",
+      "enum": ["center", "left", "gmt"]
+    },
+    "charterStyle": {
+      "type": "string",
+      "enum": ["carth", "color"]
+    },
+    "tokenLayout": {
+      "type": "string",
+      "enum": ["max", "gsp"]
+    },
+    "coords": {
+      "type": "string",
+      "enum": ["outside", "inside", "edge", "none"]
+    },
+    "tiles": {
+      "type": "object",
+      "properties": {
+        "layout": {
+          "type": "string",
+          "enum": ["offset", "individual", "die"]
+        },
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "layout",
+        "width"
+      ],
+      "additionalProperties": false
+    },
+    "companySvgLogos": {
+      "type": "string",
+      "enum": ["none", "original", "match", "main"]
+    },
+    "plainMapHomes": { "type": "boolean" },
+    "plainMapDestinations": { "type": "boolean" },
+    "straightCityNames": { "type": "boolean" },
+    "halfWidthCharters": { "type": "boolean" },
+    "font": { "$ref": "#/definitions/font" }
+  },
+  "required": [
+    "charterStyle",
+    "companiesTheme",
+    "companySvgLogos",
+    "coords",
+    "font",
+    "pagination",
+    "paper",
+    "plainMapDestinations",
+    "plainMapHomes",
+    "shareStyle",
+    "stock",
+    "theme",
+    "tokenLayout"
+  ],
+  "additionalProperties": false
+}

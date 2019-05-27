@@ -1,0 +1,91 @@
+.docs {
+  width: 570px;
+  margin: 0 auto;
+  padding-right: 230px;
+  position: relative;
+
+  .docs-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    background-color: #eee;
+    border-radius: 0 0 10px 10px;
+    padding: 10px;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      line-height: 1.5em;
+    }
+
+    a {
+      text-decoration: none;
+      font-weight: normal;
+      color: #000;
+
+      &.active {
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  strong {
+    font-weight: bold;
+  }
+
+  h1 {
+    font-size: 3em;
+    margin: 0;
+
+    span {
+      font-size: .4em;
+    }
+  }
+
+  p, ul, label {
+    font-family: sans-serif;
+    font-weight: normal;
+    line-height: 1.3em;
+  }
+
+  p.note {
+    padding: 0.5em;
+    border-radius: 0.5em;
+  }
+
+  a {
+    color: #44f;
+    text-decoration: underline;
+    font-weight: bold;
+
+    &:hover {
+      color: #000;
+      text-decoration: none;
+    }
+  }
+
+  pre, code {
+    background-color: #eee;
+    padding: 0.2em 0.5em;
+    border-radius: 3px;
+    font-family: monospace;
+    font-weight: normal;
+  }
+
+  pre {
+    padding: 0.5em;
+  }
+
+  pre > code {
+    padding: 0;
+    background-color: inherit;
+    border-radius: inherit;
+  }
+};
