@@ -3,7 +3,7 @@ import Color from "../data/Color";
 
 import Name from "./Name";
 
-const Town = ({ border, name, color }) => {
+const Town = ({ border, name, color, bgColor }) => {
   if (border) {
     return (
       <Color>
@@ -18,6 +18,7 @@ const Town = ({ border, name, color }) => {
     if (name) {
       nameNode = (
         <Name
+          bgColor={bgColor}
           name={name.name}
           y={name.y || (name.reverse ? 20 : -30)}
           rotation={(name.rotation || 0) + (name.reverse ? -90 : 90)}
