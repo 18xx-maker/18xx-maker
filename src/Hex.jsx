@@ -1,5 +1,4 @@
 import React from "react";
-import { trackType } from "./util";
 import * as R from "ramda";
 
 import Position from "./Position";
@@ -16,6 +15,7 @@ import Company from "./atoms/Company";
 import Divide from "./atoms/Divide";
 import Good from "./atoms/Good";
 import Hex from "./atoms/Hex";
+import HexBorder from "./atoms/HexBorder";
 import Icon from "./atoms/Icon";
 import Id from "./atoms/Id";
 import Industry from "./atoms/Industry";
@@ -38,7 +38,7 @@ const makeTrack = track => {
   let point = track.start || track.end || track.side;
   let rotation = (track.rotation || 0) + (point - 1) * 60;
   let transform = `rotate(${rotation || 0})`;
-  let type = track.type || trackType(track);
+  let type = track.type;
   return (
     <g transform={transform} key={`track-${type}-${point}`}>
       <Track type={type} gauge={track.gauge} offset={track.offset} path={track.path} />
@@ -50,11 +50,11 @@ const makeBorder = track => {
   let point = track.start || track.end || track.side;
   let rotation = (track.rotation || 0) + (point - 1) * 60;
   let transform = `rotate(${rotation || 0})`;
-  let type = track.type || trackType(track);
+  let type = track.type;
   return (
     <g transform={transform} key={`track-border-${type}-${point}`}>
       <Track
-        type={track.type || trackType(track)}
+        type={track.type}
         gauge={track.gauge}
         border={true}
         path={track.path}
@@ -63,7 +63,7 @@ const makeBorder = track => {
   );
 };
 
-const HexTile = ({ hex, id, border, transparent, map }) => {
+const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   if (hex === undefined || hex === null) {
     return null;
   }
@@ -92,12 +92,12 @@ const HexTile = ({ hex, id, border, transparent, map }) => {
 
   let outsideCities = (
     <Position data={R.filter(c => c.outside === true, hex.cities || [])}>
-      {c => <City {...c} />}
+      {c => <City bgColor={hex.color} {...c} />}
     </Position>
   );
   let cities = (
     <Position data={R.filter(c => c.outside !== true, hex.cities || [])}>
-      {c => <City {...c} />}
+      {c => <City bgColor={hex.color} {...c} />}
     </Position>
   );
 
@@ -112,18 +112,18 @@ const HexTile = ({ hex, id, border, transparent, map }) => {
     </Position>
   );
 
-  let towns = <Position data={hex.towns}>{t => <Town {...t} />}</Position>;
+  let towns = <Position data={hex.towns}>{t => <Town bgColor={hex.color} {...t} />}</Position>;
   let townBorders = <Position data={hex.towns}>{t => <Town {...t} border={true} />}</Position>;
 
-  let centerTowns = <Position data={hex.centerTowns}>{t => <CenterTown {...t} />}</Position>;
+  let centerTowns = <Position data={hex.centerTowns}>{t => <CenterTown bgColor={hex.color} {...t} />}</Position>;
   let centerTownBorders = <Position data={hex.centerTowns}>{t => <CenterTown border={true} />}</Position>;
 
   let mediumCities = <Position data={hex.mediumCities}>{m => <MediumCity {...m} />}</Position>;
   let mediumCityBorders = <Position data={hex.mediumCities}>{m => <MediumCity border={true} />}</Position>;
 
-  let labels = <Position data={hex.labels}>{l => <Label {...l} />}</Position>;
+  let labels = <Position data={hex.labels}>{l => <Label bgColor={hex.color} {...l} />}</Position>;
   let icons = <Position data={hex.icons}>{i => <Icon {...i} />}</Position>;
-  let names = <Position data={hex.names}>{n => <Name {...n} />}</Position>;
+  let names = <Position data={hex.names}>{n => <Name bgColor={hex.color} {...n} />}</Position>;
 
   // Deprecating stuff... let's convert old mountain and water to new format
   let terrainHexes = [...(hex.terrain || [])];
@@ -167,11 +167,13 @@ const HexTile = ({ hex, id, border, transparent, map }) => {
   return (
     <g>
       <PhaseContext.Provider value={hex.color || "plain"}>
-        <Hex color={hex.color || "plain"} transparent={transparent} map={map} />
-
         <HexContext.Consumer>
           {hx => (
-            <g clipPath="url(#hexClip)" transform={`rotate(${hx.rotation || 0})`}>
+            <g mask={`url(#${mask || "hexMask"})`} transform={`rotate(${hx.rotation || 0})`}>
+              <Hex color={hex.color || "plain"}
+                   transparent={transparent}
+                   map={map} />
+
               <g transform={`rotate(-${hx.rotation})`}>
                 {icons}
                 {cityBorders}
@@ -188,7 +190,6 @@ const HexTile = ({ hex, id, border, transparent, map }) => {
                 {names}
                 {tokens}
                 {bonus}
-                {offBoardRevenue}
                 {terrain}
                 {divides}
                 {borders}
@@ -197,7 +198,7 @@ const HexTile = ({ hex, id, border, transparent, map }) => {
           )}
         </HexContext.Consumer>
 
-        {border && <Hex border={true} />}
+        <HexBorder removeBorders={hex.removeBorders} border={border} map={map}/>
         {outsideCityBorders}
 
         {id && <Id id={idBase} extra={idExtra} />}

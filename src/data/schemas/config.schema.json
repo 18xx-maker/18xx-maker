@@ -25,19 +25,7 @@
       "required": ["width", "height"]
     },
     "margins": {
-      "oneOf": [{
         "$ref": "#/definitions/dimension"
-      },{
-        "type": "object",
-        "properties": {
-          "top": { "$ref": "#/definitions/dimension" },
-          "right": { "$ref": "#/definitions/dimension" },
-          "bottom": { "$ref": "#/definitions/dimension" },
-          "left": { "$ref": "#/definitions/dimension" }
-        },
-        "required": ["top", "right", "bottom", "left"],
-        "additionalProperties": false
-      }]
     }
   },
 
@@ -70,9 +58,17 @@
       "type": "string",
       "enum": ["equal", "max"]
     },
-    "shareLayout": {
+    "shareStyle": {
       "type": "string",
-      "enum": ["center", "left"]
+      "enum": ["center", "left", "gmt"]
+    },
+    "charterStyle": {
+      "type": "string",
+      "enum": ["carth", "color"]
+    },
+    "tokenLayout": {
+      "type": "string",
+      "enum": ["max", "gsp"]
     },
     "coords": {
       "type": "string",
@@ -81,13 +77,13 @@
     "tiles": {
       "type": "object",
       "properties": {
-        "width": {
-          "type": "number",
-          "exclusiveMinimum": 0
-        },
         "layout": {
           "type": "string",
           "enum": ["offset", "individual", "die"]
+        },
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0
         }
       },
       "required": [
@@ -96,24 +92,30 @@
       ],
       "additionalProperties": false
     },
-    "useCompanySvgLogos": { "type": "boolean" },
+    "companySvgLogos": {
+      "type": "string",
+      "enum": ["none", "original", "match", "main"]
+    },
     "plainMapHomes": { "type": "boolean" },
     "plainMapDestinations": { "type": "boolean" },
     "straightCityNames": { "type": "boolean" },
+    "halfWidthCharters": { "type": "boolean" },
     "font": { "$ref": "#/definitions/font" }
   },
   "required": [
+    "charterStyle",
     "companiesTheme",
+    "companySvgLogos",
     "coords",
     "font",
     "pagination",
     "paper",
     "plainMapDestinations",
     "plainMapHomes",
-    "shareLayout",
+    "shareStyle",
     "stock",
     "theme",
-    "useCompanySvgLogos"
+    "tokenLayout"
   ],
   "additionalProperties": false
 }

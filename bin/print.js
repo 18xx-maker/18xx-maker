@@ -56,13 +56,10 @@ const server = app.listen(9000);
       'tokens'
     ];
 
-    let gameDef = require(`../src/data/games/${game}`).default;
+    let gameDef = require(`../src/data/games/${game}`);
 
     for(let i=0;i<items.length;i++) {
       let item = items[i];
-
-      if(item === "map-paginated" && gameDef.info.paginated === false) continue;
-      if(item === "market-paginated" && gameDef.stock.paginated === false) continue;
 
       console.log("Printing " + game + "/" + item);
       await page.goto(`http://localhost:9000/${game}/${item}`, {waitUntil: 'networkidle2'});

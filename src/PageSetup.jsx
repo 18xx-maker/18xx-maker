@@ -38,8 +38,8 @@ const PageSetup = ({paper, landscape}) => {
   return <style>{css}</style>;
 };
 
-const mapStateToProps = state => ({
-  paper: state.config.paper
+const mapStateToProps = (state, {paper}) => ({
+  paper: paper || state.config.paper
 });
 
 export default connect(mapStateToProps)(PageSetup);

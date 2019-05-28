@@ -238,14 +238,16 @@
         "value": 50
       }
     ],
-    "offBoardTrack": [
-          {
-            "side": 3
-          },
-          {
-            "side": 4
-          }
-        ]
+    "track": [
+      {
+        "type": "offboard",
+        "side": 3
+      },
+      {
+        "type": "offboard",
+        "side": 4
+      }
+    ]
   },
   "290": {
     "color": "gray",

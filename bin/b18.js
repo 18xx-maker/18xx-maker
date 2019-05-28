@@ -44,7 +44,7 @@ const server = app.listen(9000);
   let folder = `board18-${id}`;
   let author = process.argv[4];
 
-  let game = require(`../src/data/games/${bname}`).default;
+  let game = require(`../src/data/games/${bname}`);
   let tiles = require('../src/data/tiles').default;
 
   const getTile = id => {
