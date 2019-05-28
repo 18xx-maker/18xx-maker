@@ -11,17 +11,21 @@ require("./atoms.scss");
 const atoms = [{
   group: "Hexes",
   examples: [{color: "plain"},
+             {color: "offboard"},
              {color: "mountain"},
              {color: "water"},
-             {color: "land"},
-             {color: "offboard", divides: [{side:3}]},
+             {color: "land", divides: [{side:3}]},
              {color: "yellow"},
              {color: "green"},
              {color: "brown"},
-             {color: "gray", divides: [{side:2}]},
+             {color: "gray"},
+             {color: "orange", divides: [{side:2}]},
              {color: "yellow/green"},
              {color: "green/brown"},
-             {color: "brown/gray"}]
+             {color: "brown/gray"},
+             {color: "mountain", removeBorders: [1,4]},
+             {color: "water", removeBorders: [1,3,5]}
+            ]
 },{
   group: "Values",
   examples: [{values: [{value: 20}]},
@@ -63,7 +67,8 @@ const atoms = [{
     {tokens: [{label:"FF", token:{type:"bar", colors:["blue", "orange"]}}]},
     {tokens: [{label:"GG", token:{type:"stripe", colors:["blue", "orange"]}}]},
     {tokens: [{label:"HH", token:{type:"target", colors:["blue", "orange"]}}]},
-    {tokens: [{label:"Longer", token:"blue"}]}
+    {tokens: [{label:"Longer", token:"blue"}]},
+    {tokens: [{label:"KO", token:"purple"}]}
   ]
 },{
   group: "Cities",
@@ -119,12 +124,12 @@ const atoms = [{
     {track: [{side:1,type:"straight",cross:"under"},
              {side:3,type:"gentle",cross:"over"}]},
     {track: [{side:4,type:"straightStop",gauge:"line"}]},
-    {track: [{side:2,type:"lawson"}]},
+    {track: [{side:1,type:"lawson"}]},
     {track: [{side:2,type:"stub"},
              {side:3,type:"stop"},
              {side:4.5,type:"mid"}]},
     {track: [{side:1,type:"bent"}]},
-    {track: [{path:"m 0 75 L 0 50 C 75 0, -75 0, 0 -50 L 0 -75", type:"custom"}]},
+    {track: [{path:"m 0 85 L 0 50 C 75 0, -75 0, 0 -50 L 0 -85", type:"custom"}]},
     {track: [{side:1,type:"offboard"},{side:6,type:"offboard"}]}
   ]
 },{
@@ -210,7 +215,7 @@ const atoms = [{
 const examples = R.addIndex(R.chain)((h,id) => {
   return <dd key={`example-${id}`}>
            <Svg width="175.205" height="152" viewBox="-87.6025 -76 175.205 152">
-             <Hex hex={h} id={`${id}`} border={true} />
+             <Hex hex={h} id={`${id}`} border={true} bleed={true} />
            </Svg>
            <pre>{JSON.stringify(h, null, 2)}</pre>
          </dd>;

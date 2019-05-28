@@ -5,10 +5,7 @@
     "designer": "Eddie Robbins",
     "background": "gray",
     "orientation": "horizontal",
-    "width": 150,
-    "color_10": "orange",
     "titleX": 50,
-    "hexCoords": true,
     "currency": "EUR"
   },
   "links": {
@@ -50,7 +47,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -73,7 +70,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -95,7 +92,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -118,7 +115,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -141,7 +138,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },

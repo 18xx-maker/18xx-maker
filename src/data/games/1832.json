@@ -6,9 +6,6 @@
     "background": "gray",
     "titleX": 50,
     "titleY": 1500,
-    "width": 150,
-    "color_10": "orange",
-    "hexCoords": true,
     "extraHomeTokens": 6,
     "currency": "USD"
   },
@@ -71,16 +68,22 @@
         "$40",
         "$100"
       ],
-      "color": "purple",
+      "color": "pink",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -93,16 +96,22 @@
         "Free",
         "$40"
       ],
-      "color": "pink",
+      "color": "lavender",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
-          "percent": 20,
+          "label": "President's Certificate",
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -120,12 +129,18 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
-          "percent": 20,
+          "label": "President's Certificate",
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -143,12 +158,18 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
-          "percent": 20,
+          "label": "President's Certificate",
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -156,22 +177,28 @@
     },
     {
       "name": "Central of Georgia Railway",
-      "abbrev": "CGR",
+      "abbrev": "COG",
       "tokens": [
         "Free",
         "$40",
         "$100"
       ],
-      "color": "gray",
+      "color": "turquoise",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
-          "percent": 20,
+          "label": "President's Certificate",
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -189,12 +216,18 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
-          "percent": 20,
+          "label": "President's Certificate",
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -211,12 +244,18 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
-          "percent": 20,
+          "label": "President's Certificate",
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -224,22 +263,28 @@
     },
     {
       "name": "Gulf, Mobile & Ohio Railroad",
-      "abbrev": "GM&O",
+      "abbrev": "GMO",
       "tokens": [
         "Free",
         "$40",
         "$100"
       ],
-      "color": "yellow",
+      "color": "red",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
-          "percent": 20,
+          "label": "President's Certificate",
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -247,7 +292,7 @@
     },
     {
       "name": "Southern Railway",
-      "abbrev": "SR",
+      "abbrev": "SOU",
       "tokens": [
         "Free",
         "$40",
@@ -257,12 +302,18 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
-          "percent": 20,
+          "label": "President's Certificate",
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -274,18 +325,24 @@
       "tokens": [
         "Free",
         "$40",
-        "$100 KW only"
+        "$100 (KW)"
       ],
-      "color": "red",
+      "color": "yellow",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
-          "percent": 20,
+          "label": "President's Certificate",
+          "percent": "20/10",
           "shares": 2
         },
         {
-          "quantity": 18,
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 4
+        },
+        {
+          "quantity": 16,
           "percent": "10/5",
           "shares": 1
         }
@@ -1660,7 +1717,7 @@
             },
             "companies": [
               {
-                "label": "SR",
+                "label": "SOU",
                 "color": "green"
               }
             ]
@@ -2045,7 +2102,7 @@
             "companies": [
               {
                 "label": "A&WP",
-                "color": "pink"
+                "color": "lavender"
               }
             ]
           },
@@ -2212,7 +2269,7 @@
             "companies": [
               {
                 "label": "ACL",
-                "color": "purple"
+                "color": "pink"
               }
             ]
           }
@@ -2311,8 +2368,8 @@
             },
             "companies": [
               {
-                "label": "CGR",
-                "color": "gray"
+                "label": "COG",
+                "color": "turqoise"
               }
             ]
           }
@@ -2328,6 +2385,9 @@
             "type": "sharp",
             "side": 4
           }
+        ],
+        "removeBorders": [
+          5
         ],
         "hexes": [
           "I1"
@@ -2400,8 +2460,8 @@
           {
             "companies": [
               {
-                "label": "GM&O",
-                "color": "yellow"
+                "label": "GMO",
+                "color": "red"
               }
             ],
             "name": {
@@ -2448,6 +2508,9 @@
             }
           ]
         },
+        "removeBorders": [
+          2
+        ],
         "hexes": [
           "J2"
         ]
@@ -2546,7 +2609,7 @@
             "companies": [
               {
                 "label": "FECR",
-                "color": "red"
+                "color": "yellow"
               }
             ]
           }

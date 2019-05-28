@@ -4,13 +4,10 @@
     "subtitle": "Railroading in Middle Earth",
     "designer": "Rick Dutton",
     "background": "purple",
-    "width": 150,
-    "color_10": "orange",
     "titleX": 54,
     "titleY": 1440,
     "titleSize": 100,
     "orientation": "horizontal",
-    "hexCoords": true,
     "currency": "XAU"
   },
   "links": {
@@ -23,32 +20,32 @@
     "+20"
   ],
   "ipo": true,
-  "bank": "$12,000",
+  "bank": "12,000g",
   "players": [
     {
       "number": 2,
-      "certLimit": 28,
-      "capital": "$1050"
+      "certLimit": "28 / 24",
+      "capital": "1050g"
     },
     {
       "number": 3,
-      "certLimit": 20,
-      "capital": "$700"
+      "certLimit": "20 / 17",
+      "capital": "700g"
     },
     {
       "number": 4,
-      "certLimit": 16,
-      "capital": "$525"
+      "certLimit": "16 / 14",
+      "capital": "525g"
     },
     {
       "number": 5,
-      "certLimit": 13,
-      "capital": "$420"
+      "certLimit": "13 / 11",
+      "capital": "420g"
     },
     {
       "number": 6,
-      "certLimit": 11,
-      "capital": "$350"
+      "certLimit": "11 / 9",
+      "capital": "350g"
     }
   ],
   "companies": [
@@ -65,7 +62,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -83,11 +80,11 @@
         "Free",
         "$40"
       ],
-      "color": "water",
+      "color": "green",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -110,7 +107,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -129,11 +126,11 @@
         "$40",
         "$100"
       ],
-      "color": "mountain",
+      "color": "brown",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -156,7 +153,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -179,7 +176,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -203,7 +200,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -222,11 +219,11 @@
         "$40",
         "$100"
       ],
-      "color": "green",
+      "color": "lime",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -244,11 +241,11 @@
         "Free",
         "$40"
       ],
-      "color": "brown",
+      "color": "cyan",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -265,13 +262,13 @@
       "tokens": [
         "Free",
         "$40",
-        "Southlands"
+        "Bonus"
       ],
       "color": "red",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -480,38 +477,60 @@
   ],
   "phases": [
     {
-      "phase": "2",
-      "train": "2 / 2+2",
+      "train": "2",
       "limit": "4",
-      "number": "4 / 2",
+      "number": "4",
       "tiles": "yellow",
-      "notes": "Bridge and Mountain private companies may be purchased"
+      "notes": "2+2 trains are available for sale. Bridge and Mountain private companies may be purchased for up to 1x face value."
     },
     {
-      "phase": "3",
-      "train": "3 / 3+3",
+      "train": "2+2",
       "limit": "4",
-      "number": "3 / 3",
-      "tiles": "green",
-      "notes": "Other private companies may be purchased"
+      "number": "2",
+      "tiles": "yellow"
     },
     {
-      "phase": "4",
-      "rust": "2",
-      "train": "4 / 4+4",
-      "limit": "3",
-      "number": "3 / 2",
+      "train": "3",
+      "limit": "4",
+      "number": "3",
+      "tiles": "green",
+      "notes": "3+3 trains are available for sale. Private companies may be purchased for up to 2x face value."
+    },
+    {
+      "train": "3+3",
+      "limit": "4",
+      "number": "3",
       "tiles": "green"
     },
     {
-      "phase": "5",
-      "train": "5 / 5+5",
+      "train": "4",
+      "limit": "3",
+      "number": "3",
+      "rust": "2",
+      "tiles": "green",
+      "notes": "4+4 trains are available for sale."
+    },
+    {
+      "train": "4+4",
+      "limit": "3",
+      "number": "2",
+      "rust": "2+2",
+      "tiles": "green"
+    },
+    {
+      "train": "5",
       "limit": "2",
-      "number": "2 / 2",
+      "number": "2",
+      "tiles": "brown",
+      "notes": "5+5 trains are available for sale. Private companies are closed."
+    },
+    {
+      "train": "5+5",
+      "limit": "2",
+      "number": "2",
       "tiles": "brown"
     },
     {
-      "phase": "6",
       "train": "6",
       "limit": "2",
       "number": "1",
@@ -519,7 +538,6 @@
       "tiles": "gray"
     },
     {
-      "phase": "7",
       "train": "7",
       "limit": "2",
       "number": "1",
@@ -527,7 +545,6 @@
       "tiles": "gray"
     },
     {
-      "phase": "8",
       "train": "8",
       "limit": "2",
       "number": "1",
@@ -535,14 +552,12 @@
       "tiles": "gray"
     },
     {
-      "phase": "9",
       "train": "9",
       "limit": "2",
       "number": "2",
       "tiles": "gray"
     },
     {
-      "phase": "D",
       "train": "D",
       "limit": "2",
       "number": "∞",
@@ -601,7 +616,7 @@
     {
       "name": "Operating Round",
       "steps": [
-        "Lay or upgrade track",
+        "Lay two yellow or one upgrade tile",
         "Purchase a station",
         "Run trains",
         "Pay dividends or withhold revenue",
@@ -1513,7 +1528,7 @@
           {
             "label": "THT",
             "angle": 180,
-            "percent": 0.6
+            "percent": 0.667
           }
         ],
         "cities": [
@@ -1521,7 +1536,7 @@
             "companies": [
               {
                 "label": "SWR",
-                "color": "water"
+                "color": "green"
               }
             ],
             "name": {
@@ -1611,6 +1626,9 @@
             "type": "offboard",
             "side": 5
           }
+        ],
+        "removeBorders": [
+          6
         ],
         "hexes": [
           "F24"
@@ -1746,7 +1764,7 @@
           {
             "label": "SER",
             "width": 15,
-            "color": "brown",
+            "color": "cyan",
             "angle": 150,
             "percent": 0.7
           },
@@ -1757,6 +1775,10 @@
             "angle": 210,
             "percent": 0.7
           }
+        ],
+        "removeBorders": [
+          3,
+          5
         ],
         "hexes": [
           "G25"
@@ -1811,6 +1833,9 @@
             "side": 5
           }
         ],
+        "removeBorders": [
+          2
+        ],
         "hexes": [
           "H24"
         ]
@@ -1834,7 +1859,7 @@
           {
             "label": "SWR",
             "width": 15,
-            "color": "water",
+            "color": "green",
             "percent": 0.65
           }
         ],
@@ -1904,7 +1929,7 @@
             "companies": [
               {
                 "label": "DMH",
-                "color": "mountain"
+                "color": "brown"
               }
             ],
             "name": {
@@ -1925,7 +1950,7 @@
             "companies": [
               {
                 "label": "SER",
-                "color": "brown"
+                "color": "cyan"
               }
             ],
             "name": {
@@ -2149,7 +2174,7 @@
             "companies": [
               {
                 "label": "O",
-                "color": "green"
+                "color": "lime"
               }
             ],
             "name": {
@@ -2243,7 +2268,7 @@
           {
             "label": "DMH",
             "width": 15,
-            "color": "mountain",
+            "color": "brown",
             "angle": 90,
             "percent": 0.75
           }

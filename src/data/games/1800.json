@@ -3,17 +3,13 @@
     "title": "1800",
     "subtitle": "Railroading in Colorado",
     "designer": "Antonio Leal",
-    "background": "brown",
-    "width": 150,
+    "background": "mountain",
     "orientation": "horizontal",
-    "color_5": "orange",
-    "color_10": "brown",
     "titleY": 700,
     "titleX": 170,
-    "extraTotalWidth": 210,
     "titleSize": 150,
+    "extraTotalWidth": 210,
     "extraTokens": 2,
-    "paginated": false,
     "currency": "USD"
   },
   "links": {
@@ -50,7 +46,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 40,
           "shares": 4
         },
@@ -85,7 +81,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 40,
           "shares": 4
         },
@@ -114,7 +110,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 40,
           "shares": 4
         },

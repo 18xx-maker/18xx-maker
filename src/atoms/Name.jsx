@@ -25,8 +25,8 @@ const Name = ({ name, color, bgColor, path, rotation, reverse, offset, y, textLe
         <text
           dy={y}
           transform={`rotate(${(rotation || 0) + 360})`}
-          fill={p(fillColor)}
-          fontFamily="Helvetica, Arial, sans-serif"
+          fill={bgColor ? t(c(bgColor)) : p(fillColor)}
+          fontFamily="sans-serif"
           fontSize={fontSize || 11}
           fontWeight="bold"
           textLength={textLength}

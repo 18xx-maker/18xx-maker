@@ -3,10 +3,7 @@
     "title": "18EB",
     "designer": "Michael Carter, Jeremy Long and Alexandra Sime",
     "background": "purple",
-    "width": 150,
-    "color_10": "orange",
     "titleX": 50,
-    "hexCoords": true,
     "currency": "XAU",
     "orientation": "horizontal"
   },
@@ -51,7 +48,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -75,7 +72,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -99,7 +96,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -122,7 +119,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -145,7 +142,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -168,7 +165,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -190,7 +187,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -212,7 +209,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },

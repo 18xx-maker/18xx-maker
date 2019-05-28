@@ -17,9 +17,28 @@
         "title": { "type": "string" },
         "subtitle": { "type": "string" },
         "designer": { "type": "string" },
+        "background": { "type": "string" },
+        "extraTotalHeight": { "type": "number", "minimum": 1 },
+        "extraTotalWidth": { "type": "number", "minimum": 1 },
+        "titleX": { "type": "number" },
+        "titleY": { "type": "number" },
+        "titleRotate": {
+          "type": "number",
+          "minimum": -360,
+          "maximum": 360
+        },
+        "titleSize": { "type": "number" },
+        "subTitleSize": { "type": "number" },
+        "orientation": {
+          "type": "string",
+          "enum": ["horizontal", "vertical"]
+        },
+        "extraHomeTokens": { "type": "number", "minimum": 1 },
+        "extraTokens": { "type": "number", "minimum": 1 },
         "currency": { "type": "string", "pattern": "[A-Z]{3}" }
       },
-      "required": ["title", "designer", "currency"]
+      "required": ["title", "designer", "currency"],
+      "additionalProperties": false
     },
     "links": {
       "type": "object",
@@ -50,7 +69,6 @@
   "additionalProperties": false,
   "required": [
     "info",
-    "links",
-    "ipo"
+    "links"
   ]
 }

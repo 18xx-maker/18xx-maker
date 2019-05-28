@@ -4,12 +4,9 @@
     "subtitle": "Railroading across the Trans Mississippi from 1870",
     "designer": "Bill Dixon",
     "background": "green",
-    "width": 150,
-    "color_10": "orange",
     "titleX": 75,
     "titleY": 2000,
     "extraTotalHeight": 300,
-    "hexCoords": true,
     "currency": "USD"
   },
   "links": {
@@ -28,138 +25,45 @@
   "players": [
     {
       "number": 2,
-      "certLimit": 28,
+      "certLimit": "28 / 24",
       "capital": "$1050"
     },
     {
       "number": 3,
-      "certLimit": 20,
+      "certLimit": "20 / 17",
       "capital": "$700"
     },
     {
       "number": 4,
-      "certLimit": 16,
+      "certLimit": "16 / 14",
       "capital": "$525"
     },
     {
       "number": 5,
-      "certLimit": 13,
+      "certLimit": "13 / 11",
       "capital": "$420"
     },
     {
       "number": 6,
-      "certLimit": 11,
+      "certLimit": "11 / 9",
       "capital": "$350"
     }
   ],
   "companies": [
     {
-      "name": "Atchison, Topeka & Santa Fe",
-      "abbrev": "ATSF",
+      "name": "Southern Pacific Railroad",
+      "abbrev": "SP",
       "tokens": [
         "Free",
+        "New Orleans",
         "$40",
-        "$100",
-        "Southwest"
+        "$100"
       ],
-      "color": "cyan",
+      "color": "orange",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
-    },
-    {
-      "name": "Fort Worth & Denver City Railway",
-      "abbrev": "FW",
-      "tokens": [
-        "Free",
-        "$40",
-        "Denver"
-      ],
-      "color": "purple",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
-    },
-    {
-      "name": "Gulf, Mobile & Ohio Railroad",
-      "abbrev": "GMO",
-      "tokens": [
-        "Free",
-        "$40",
-        "St. Louis"
-      ],
-      "color": "pink",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
-    },
-    {
-      "name": "Illinois Central Railroad",
-      "abbrev": "IC",
-      "tokens": [
-        "Free",
-        "$40",
-        "Chicago"
-      ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
-    },
-    {
-      "name": "Missouri Pacific Railroad",
-      "abbrev": "MP",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100",
-        "Dallas"
-      ],
-      "color": "brown",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -175,15 +79,15 @@
       "abbrev": "MKT",
       "tokens": [
         "Free",
+        "Southwest",
         "$40",
-        "$100",
-        "Southwest"
+        "$100"
       ],
       "color": "green",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -195,19 +99,18 @@
       ]
     },
     {
-      "name": "Southern Pacific Railroad",
-      "abbrev": "SP",
+      "name": "Fort Worth & Denver City Railway",
+      "abbrev": "FW",
       "tokens": [
         "Free",
-        "$40",
-        "$100",
-        "New Orleans"
+        "Denver",
+        "$40"
       ],
-      "color": "orange",
+      "color": "purple",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -219,18 +122,19 @@
       ]
     },
     {
-      "name": "St. Louis Southwestern Railway",
-      "abbrev": "SSW",
+      "name": "Missouri Pacific Railroad",
+      "abbrev": "MP",
       "tokens": [
         "Free",
+        "Dallas",
         "$40",
-        "Fort Worth"
+        "$100"
       ],
-      "color": "blue",
+      "color": "brown",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -242,19 +146,18 @@
       ]
     },
     {
-      "name": "St. Louis-San Francisco Railway",
-      "abbrev": "SLSF",
+      "name": "Gulf, Mobile & Ohio Railroad",
+      "abbrev": "GMO",
       "tokens": [
         "Free",
-        "$40",
-        "$100",
-        "Southeast"
+        "St. Louis",
+        "$40"
       ],
-      "color": "red",
+      "color": "pink",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -270,14 +173,108 @@
       "abbrev": "TP",
       "tokens": [
         "Free",
-        "$40",
-        "New Orleans"
+        "New Orleans",
+        "$40"
       ],
       "color": "black",
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "St. Louis Southwestern Railway",
+      "abbrev": "SSW",
+      "tokens": [
+        "Free",
+        "Fort Worth",
+        "$40"
+      ],
+      "color": "blue",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Illinois Central Railroad",
+      "abbrev": "IC",
+      "tokens": [
+        "Free",
+        "Chicago",
+        "$40"
+      ],
+      "color": "lime",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Atchison, Topeka & Santa Fe",
+      "abbrev": "ATSF",
+      "tokens": [
+        "Free",
+        "Southwest",
+        "$40",
+        "$100"
+      ],
+      "color": "cyan",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "St. Louis-San Francisco Railway",
+      "abbrev": "SLSF",
+      "tokens": [
+        "Free",
+        "Southeast",
+        "$40",
+        "$100"
+      ],
+      "color": "red",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -532,7 +529,7 @@
     {
       "name": "Operating Round",
       "steps": [
-        "Lay or upgrade track",
+        "Lay two yellow or one upgrade tile",
         "Purchase a station",
         "Run trains",
         "Pay dividends or withhold revenue",
@@ -1312,7 +1309,7 @@
           {
             "label": "IC",
             "width": 15,
-            "color": "yellow",
+            "color": "lime",
             "percent": 0.75
           }
         ],
@@ -1752,7 +1749,7 @@
             "companies": [
               {
                 "label": "IC",
-                "color": "yellow"
+                "color": "lime"
               }
             ]
           }
@@ -1942,6 +1939,26 @@
         "color": "plain",
         "terrain": [
           {
+            "cost": "$80",
+            "type": "river",
+            "angle": 270,
+            "percent": 0.4
+          }
+        ],
+        "centerTowns": [
+          {
+            "angle": 90,
+            "percent": 0.4
+          }
+        ],
+        "hexes": [
+          "K14"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
             "cost": "$40",
             "type": "river",
             "angle": 270,
@@ -1958,8 +1975,7 @@
           "A10",
           "B13",
           "D17",
-          "H3",
-          "K14"
+          "H3"
         ]
       },
       {

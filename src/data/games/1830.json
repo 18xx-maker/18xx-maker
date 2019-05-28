@@ -4,10 +4,7 @@
     "subtitle": "Railways & Robber Barons",
     "designer": "Francis Tresham",
     "background": "gray",
-    "width": 150,
-    "color_10": "orange",
     "titleX": 50,
-    "hexCoords": true,
     "currency": "USD"
   },
   "links": {
@@ -55,7 +52,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -79,7 +76,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -103,7 +100,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -126,7 +123,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -149,7 +146,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -172,7 +169,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -194,7 +191,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -216,7 +213,7 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "President Share",
+          "label": "President's Certificate",
           "percent": 20,
           "shares": 2
         },
@@ -937,25 +934,14 @@
     "hexes": [
       {
         "color": "offboard",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Gulf"
-          },
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "30"
-            },
-            {
-              "color": "brown",
-              "cost": "60"
-            }
-          ]
-        },
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 4
           }
+        ],
+        "removeBorders": [
+          5
         ],
         "hexes": [
           "I1"
@@ -979,10 +965,10 @@
         ],
         "track": [
           {
-            "start": 4
+            "side": 4
           },
           {
-            "start": 5
+            "side": 5
           }
         ],
         "hexes": [
@@ -1022,11 +1008,36 @@
         ]
       },
       {
-        "copy": "I1",
-        "offBoardTrack": [
+        "color": "offboard",
+        "offBoardRevenue": {
+          "angle": 150,
+          "percent": 1,
+          "name": {
+            "name": "Gulf"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            }
+          ]
+        },
+        "track": [
           {
+            "type": "offboard",
             "side": 3
+          },
+          {
+            "type": "offboard",
+            "side": 4
           }
+        ],
+        "removeBorders": [
+          2
         ],
         "hexes": [
           "J2"
@@ -1187,7 +1198,36 @@
       },
       {
         "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "removeBorders": [
+          4
+        ],
+        "hexes": [
+          "A9"
+        ]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 2
+          }
+        ],
+        "hexes": [
+          "E9"
+        ]
+      },
+      {
+        "color": "offboard",
         "offBoardRevenue": {
+          "angle": 90,
+          "percent": 1,
           "name": {
             "name": "Canadian West"
           },
@@ -1202,33 +1242,18 @@
             }
           ]
         },
-        "offBoardTrack": [
-          {
-            "side": 5
-          }
-        ],
-        "hexes": [
-          "A9"
-        ]
-      },
-      {
-        "color": "gray",
         "track": [
           {
-            "start": 2,
-            "end": 3
-          }
-        ],
-        "hexes": [
-          "E9"
-        ]
-      },
-      {
-        "copy": "A9",
-        "offBoardTrack": [
+            "type": "offboard",
+            "side": 5
+          },
           {
+            "type": "offboard",
             "side": 6
           }
+        ],
+        "removeBorders": [
+          1
         ],
         "hexes": [
           "A11"
@@ -1632,7 +1657,7 @@
             "x": -40,
             "y": 10,
             "name": {
-              "name": "Philidelphia"
+              "name": "Philadelphia"
             }
           },
           {

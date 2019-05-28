@@ -12,7 +12,7 @@ import Token from "../Token";
 import Config from "../data/Config";
 import ColorContext from "../context/ColorContext";
 
-const City = ({ straightCityNames, size, companies, border, name, extend, rotation }) => {
+const City = ({ straightCityNames, size, companies, border, name, extend, rotation, bgColor }) => {
   if (size === undefined) {
     size = 1;
   }
@@ -74,7 +74,7 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
     if (straightCityNames) {
       y -= name.reverse ? -24 : 32;
     }
-    nameNode = <Name {...name} y={y} path={path} />;
+    nameNode = <Name bgColor={bgColor} {...name} y={y} path={path} />;
   }
 
   if (size === 1) {
