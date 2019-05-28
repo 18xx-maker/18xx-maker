@@ -837,7 +837,7 @@
         "label": "Antwerp",
         "angle": 300,
         "x": 30,
-        "y": -20,
+        "y": -10,
         "percent": 0.5,
         "rotation": 90,
         "size": 16
@@ -845,8 +845,8 @@
     ],
     "values": [
       {
-        "angle": 335,
-        "percent": 0.85,
+        "angle": 90,
+        "percent": 0.9,
         "value": 80
       }
     ],
@@ -866,7 +866,7 @@
         "side": 4
       },
       {
-        "size": 5
+        "side": 5
       }
     ]
   },
