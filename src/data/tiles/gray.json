@@ -832,22 +832,21 @@
   },
   "18343": {
     "color": "gray",
-    "labels": [
-      {
-        "label": "Antwerp",
-        "angle": 300,
-        "x": 30,
-        "y": -10,
-        "percent": 0.5,
-        "rotation": 90,
-        "size": 15
-      }
-    ],
     "values": [
       {
         "angle": 90,
         "percent": 0.9,
         "value": 80
+      }
+    ],
+    "names": [ 
+      {
+        "name": "Antwerp",
+        "angle": -90,
+        "percent": 0.75,
+        "rotation": 45,
+        "y": 8,
+        "x": 10
       }
     ],
     "cities": [
