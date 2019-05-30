@@ -1439,6 +1439,48 @@
       }
     ]
   },
+  "514": {
+    "color": "green",
+    "values": [
+      {
+        "value": 70,
+        "angle": 150,
+        "percent": 0.2
+      }
+    ],
+    "labels": [
+      {
+        "label": "P",
+        "angle": 330,
+        "percent": 0.25
+      }
+    ],
+    "cities": [
+      {
+        "percent": 0.8
+      },
+      {
+        "angle": 60,
+        "percent": 0.8
+      },
+      {
+        "angle": 120,
+        "percent": 0.8
+      },
+      {
+        "angle": 180,
+        "percent": 0.8
+      },
+      {
+        "angle": 240,
+        "percent": 0.8
+      },
+      {
+        "angle": 300,
+        "percent": 0.8
+      }
+    ]
+  },
   "576": {
     "color": "green",
     "values": [
@@ -1700,6 +1742,42 @@
         "angle": 210,
         "percent": 0.8,
         "value": 30
+      }
+    ],
+    "cities": [
+      {
+        "size": 2
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
+  "622": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 40
+      }
+    ],
+    "labels": [
+      {
+        "label": "Y",
+        "angle": 150,
+        "percent": 0.8
       }
     ],
     "cities": [
@@ -4849,6 +4927,103 @@
         "type": "sharp",
         "side": 3,
         "cross": "under"
+      }
+    ]
+  },
+  "X02": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 50
+      }
+    ],
+    "centerTowns": [
+      {}
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
+  "H902": {
+    "color": "green",
+    "values": [
+      {
+        "value": 50,
+        "angle": 90,
+        "percent": 0.85
+      }
+    ],
+    "cities": [
+      {
+        "size": 2,
+        "angle": 90,
+        "percent": 0.3,
+        "rotate": 90
+      },
+      {
+        "size": 2,
+        "angle": 270,
+        "percent": 0.5,
+        "rotate": 90
+      }
+    ],
+    "track": [
+      {
+        "side": 1,
+        "type": "sharpStop"
+      },
+      {
+        "side": 4,
+        "type": "sharpStopRev"
+      },
+      {
+        "side": 5,
+        "type": "stub"
+      },
+      {
+        "side": 6,
+        "type": "stub"
+      }
+    ]
+  },
+  "H908": {
+    "color": "green",
+    "cities": [
+      {
+        "size": 2,
+        "name": {
+          "reverse": true,
+          "name": "Tomo"
+        },
+        "rotate": -90
+      }
+    ],
+    "values": [
+      {
+        "value": 30,
+        "angle": 90,
+        "percent": 0.8
+      }
+    ],
+    "track": [
+      {
+        "side": 2
+      },
+      {
+        "side": 3
       }
     ]
   }
