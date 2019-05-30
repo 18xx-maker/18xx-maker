@@ -29,4 +29,6 @@ FROM nginx:1.15.10-alpine
 LABEL maintainer="kelsin@valefor.com"
 WORKDIR /usr/share/nginx/html
 
+COPY default.conf /etc/nginx/conf.d/default.conf
+
 COPY --from=build /home/18xx/build /usr/share/nginx/html

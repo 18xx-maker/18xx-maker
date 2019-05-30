@@ -86,7 +86,7 @@ const MapPaginated = ({ match, coords, pagination, paper, hexWidth }) => {
   let defs = (
     <g id={`${game.info.abbrev || game.info.title}_map`}>
       <Title game={game} variation={variation} />
-      <Map game={game} variation={variation} />
+      <Map name={match.params.game} game={game} variation={variation} />
     </g>
   );
 
