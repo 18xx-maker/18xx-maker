@@ -1480,6 +1480,48 @@
       }
     ]
   },
+  "515": {
+    "color": "brown",
+    "values": [
+      {
+        "value": 90,
+        "angle": 150,
+        "percent": 0.2
+      }
+    ],
+    "labels": [
+      {
+        "label": "P",
+        "angle": 330,
+        "percent": 0.25
+      }
+    ],
+    "cities": [
+      {
+        "percent": 0.8
+      },
+      {
+        "angle": 60,
+        "percent": 0.8
+      },
+      {
+        "angle": 120,
+        "percent": 0.8
+      },
+      {
+        "angle": 180,
+        "percent": 0.8
+      },
+      {
+        "angle": 240,
+        "percent": 0.8
+      },
+      {
+        "angle": 300,
+        "percent": 0.8
+      }
+    ]
+  },
   "544": {
     "color": "brown",
     "rotations": 3,
@@ -1722,6 +1764,49 @@
       },
       {
         "side": 5
+      }
+    ]
+  },
+  "623": {
+    "color": "brown",
+    "rotations": 1,
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 40
+      }
+    ],
+    "labels": [
+      {
+        "angle": 150,
+        "percent": 0.8,
+        "label": "Y"
+      }
+    ],
+    "cities": [
+      {
+        "size": 2
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
       }
     ]
   },
@@ -3564,6 +3649,42 @@
       }
     ]
   },
+  "125|SY": {
+    "color": "brown",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.87,
+        "value": 40
+      }
+    ],
+    "cities": [
+      {
+        "size": 2,
+        "name": {
+          "name": "Asa",
+          "reverse": true
+        }
+      }
+    ],
+    "track": [
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
   "485|a": {
     "color": "brown",
     "rotations": 1,
@@ -4015,6 +4136,280 @@
       {
         "side": 6,
         "cross": "over"
+      }
+    ]
+  },
+  "SS01": {
+    "color": "brown",
+    "centerTowns": [
+      {}
+    ],
+    "values": [
+      {
+        "value": 80,
+        "angle": 330,
+        "percent": 0.7
+      }
+    ],
+    "labels": [
+      {
+        "label": "B",
+        "angle": 210,
+        "percent": 0.7
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "SS03": {
+    "color": "brown",
+    "centerTowns": [
+      {}
+    ],
+    "values": [
+      {
+        "value": 40,
+        "angle": 330,
+        "percent": 0.7
+      }
+    ],
+    "labels": [
+      {
+        "label": "L",
+        "angle": 210,
+        "percent": 0.7
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+  "SS05": {
+    "color": "brown",
+    "centerTowns": [
+      {}
+    ],
+    "values": [
+      {
+        "value": 80,
+        "angle": 330,
+        "percent": 0.7
+      }
+    ],
+    "labels": [
+      {
+        "label": "C",
+        "angle": 210,
+        "percent": 0.7
+      }
+    ],
+    "track": [
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      }
+    ]
+  },
+  "SS07": {
+    "color": "brown",
+    "rotations": 1,
+    "cities": [
+      {
+        "size": 3,
+        "rotate": 180
+      }
+    ],
+    "values": [
+      {
+        "angle": 270,
+        "percent": 0.88,
+        "value": 40
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "X03": {
+    "color": "brown",
+    "centerTowns": [
+      {}
+    ],
+    "values": [
+      {
+        "value": 60,
+        "angle": 210,
+        "percent": 0.8
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "H901": {
+    "color": "brown",
+    "cities": [
+      {
+        "size": 2,
+        "name": {
+          "name": "Kure"
+        }
+      }
+    ],
+    "values": [
+      {
+        "value": 50,
+        "angle": 330,
+        "percent": 0.8
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "H903": {
+    "color": "brown",
+    "values": [
+      {
+        "value": 60,
+        "angle": 90,
+        "percent": 0.85
+      }
+    ],
+    "cities": [
+      {
+        "size": 2,
+        "angle": 90,
+        "percent": 0.3,
+        "rotate": 90
+      },
+      {
+        "size": 2,
+        "angle": 270,
+        "percent": 0.5,
+        "rotate": 90
+      }
+    ],
+    "track": [
+      {
+        "side": 1,
+        "type": "sharpStop"
+      },
+      {
+        "side": 4,
+        "type": "sharpStopRev"
+      },
+      {
+        "side": 5,
+        "type": "stub"
+      },
+      {
+        "side": 6,
+        "type": "stub"
+      }
+    ]
+  },
+  "H905": {
+    "color": "brown",
+    "cities": [
+      {
+        "size": 2,
+        "rotate": -90
+      }
+    ],
+    "values": [
+      {
+        "value": 40,
+        "angle": 90,
+        "percent": 0.8
+      }
+    ],
+    "track": [
+      {
+        "side": 1,
+        "type": "straight"
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
       }
     ]
   }
