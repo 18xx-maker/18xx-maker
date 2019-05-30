@@ -4456,16 +4456,6 @@
   },
   "18341": {
     "color": "green",
-    "labels": [
-      {
-        "label": "Antwerp",
-        "angle": 250,
-        "x": 20,
-        "y": -20,
-        "percent": 0.5,
-        "rotation": 60
-      }
-    ],
     "values": [
       {
         "angle": 335,
@@ -4475,6 +4465,9 @@
     ],
     "cities": [
       {
+        "name": {
+          "name": "Antwerp"
+        },
         "size": 2
       }
     ],
