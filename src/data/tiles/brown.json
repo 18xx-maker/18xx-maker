@@ -3615,25 +3615,20 @@
   },
   "18342": {
     "color": "brown",
-    "labels": [
-      {
-        "label": "Antwerp",
-        "angle": 250,
-        "x": 20,
-        "y": -20,
-        "percent": 0.5,
-        "rotation": 60
-      }
-    ],
     "values": [
       {
         "angle": 335,
-        "percent": 0.825,
+        "percent": 0.85,
         "value": 60
       }
     ],
     "cities": [
       {
+        "name": {
+          "name": "Antwerp",
+          "offset": 66.67,
+          "y": -5
+        },
         "size": 3
       }
     ],
