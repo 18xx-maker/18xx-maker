@@ -8,6 +8,7 @@
     "extraTotalHeight": 100,
     "currency": "JPY"
   },
+  "wip": true,
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/42660/1886",
     "rules": "https://www.boardgamegeek.com/filepage/43416/1886-rules-english-letter-format"
