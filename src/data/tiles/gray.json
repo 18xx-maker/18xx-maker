@@ -460,6 +460,48 @@
       }
     ]
   },
+  "516": {
+    "color": "gray",
+    "values": [
+      {
+        "value": 120,
+        "angle": 150,
+        "percent": 0.2
+      }
+    ],
+    "labels": [
+      {
+        "label": "P",
+        "angle": 330,
+        "percent": 0.25
+      }
+    ],
+    "cities": [
+      {
+        "percent": 0.8
+      },
+      {
+        "angle": 60,
+        "percent": 0.8
+      },
+      {
+        "angle": 120,
+        "percent": 0.8
+      },
+      {
+        "angle": 180,
+        "percent": 0.8
+      },
+      {
+        "angle": 240,
+        "percent": 0.8
+      },
+      {
+        "angle": 300,
+        "percent": 0.8
+      }
+    ]
+  },
   "597": {
     "color": "gray",
     "values": [
@@ -839,7 +881,7 @@
         "value": 80
       }
     ],
-    "names": [ 
+    "names": [
       {
         "name": "Antwerp",
         "angle": -90,
@@ -903,6 +945,343 @@
       },
       {
         "size": 5
+      }
+    ]
+  },
+  "H904": {
+    "color": "gray",
+    "values": [
+      {
+        "value": 80,
+        "angle": 90,
+        "percent": 0.9
+      }
+    ],
+    "names": [
+      {
+        "name": "Hiroshima",
+        "angle": 208,
+        "percent": 0.85,
+        "fontSize": 8
+      }
+    ],
+    "cities": [
+      {
+        "size": 4
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "H906": {
+    "color": "gray",
+    "values": [
+      {
+        "value": 40,
+        "angle": 215,
+        "percent": 0.85
+      }
+    ],
+    "names": [
+      {
+        "name": "Kaidaichi",
+        "angle": 332,
+        "percent": 0.82,
+        "fontSize": 8
+      }
+    ],
+    "cities": [
+      {
+        "size": 3
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "H907": {
+    "color": "gray",
+    "values": [
+      {
+        "value": 60,
+        "angle": 215,
+        "percent": 0.85
+      }
+    ],
+    "names": [
+      {
+        "name": "Fukuyama",
+        "angle": 332,
+        "percent": 0.82,
+        "fontSize": 8
+      }
+    ],
+    "cities": [
+      {
+        "size": 3
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "X04": {
+    "color": "gray",
+    "centerTowns": [
+      {}
+    ],
+    "values": [
+      {
+        "value": 80,
+        "angle": 210,
+        "percent": 0.8
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "SY5": {
+    "color": "gray",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.87,
+        "value": 60
+      }
+    ],
+    "cities": [
+      {
+        "size": 3,
+        "name": {
+          "name": "Asa",
+          "offset": 4,
+          "reverse": true,
+          "y": 10
+        }
+      }
+    ],
+    "track": [
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "SY6": {
+    "color": "gray",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.87,
+        "value": 60
+      }
+    ],
+    "cities": [
+      {
+        "size": 3,
+        "name": {
+          "name": "Ogori",
+          "offset": 25,
+          "reverse": true,
+          "y": 10
+        }
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "SS02": {
+    "color": "gray",
+    "centerTowns": [
+      {}
+    ],
+    "values": [
+      {
+        "value": 120,
+        "angle": 330,
+        "percent": 0.7
+      }
+    ],
+    "labels": [
+      {
+        "label": "B",
+        "angle": 210,
+        "percent": 0.7
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "SS04": {
+    "color": "gray",
+    "centerTowns": [
+      {}
+    ],
+    "values": [
+      {
+        "value": 80,
+        "angle": 330,
+        "percent": 0.7
+      }
+    ],
+    "labels": [
+      {
+        "label": "L",
+        "angle": 210,
+        "percent": 0.7
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+  "SS06": {
+    "color": "gray",
+    "centerTowns": [
+      {}
+    ],
+    "values": [
+      {
+        "value": 120,
+        "angle": 330,
+        "percent": 0.7
+      }
+    ],
+    "labels": [
+      {
+        "label": "C",
+        "angle": 210,
+        "percent": 0.7
+      }
+    ],
+    "track": [
+      {
+        "side": 2
+      },
+      {
+        "side": 3
       }
     ]
   }
