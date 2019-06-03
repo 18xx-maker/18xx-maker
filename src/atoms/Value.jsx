@@ -3,7 +3,7 @@ import Color from "../data/Color";
 
 import RotateContext from "../context/RotateContext";
 
-const Value = ({ value, fixed, outerBorderColor="" }) => {
+const Value = ({ value, fixed, outerBorderColor }) => {
   let size = 15;
   if (value > 99) {
     size = 13;
