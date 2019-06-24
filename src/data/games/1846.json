@@ -5,6 +5,7 @@
     "designer": "Thomas Lehmann",
     "background": "orange",
     "extraTokens": 2,
+    "extraHomeTokens": 1,
     "currency": "USD"
   },
   "links": {
@@ -13,6 +14,7 @@
   },
   "tokens": [
     "Round",
+    "Phase",
     "#port",
     "#port",
     "#meat",
@@ -21,20 +23,28 @@
     "MS"
   ],
   "ipo": false,
-  "capital": "$400",
   "players": [
     {
+      "number": 2,
+      "capital": "$600",
+      "certLimit": 19,
+      "bank": "$7,000"
+    },
+    {
       "number": 3,
+      "capital": "$400",
       "certLimit": 14,
       "bank": "$6,500"
     },
     {
       "number": 4,
+      "capital": "$400",
       "certLimit": 12,
       "bank": "$7,500"
     },
     {
       "number": 5,
+      "capital": "$400",
       "certLimit": 11,
       "bank": "$9,000"
     }
@@ -45,10 +55,10 @@
       "abbrev": "PRR",
       "tokens": [
         "Free",
-        "$80*",
         "$80",
         "$80",
-        "$80"
+        "$80",
+        "$80*"
       ],
       "color": "red",
       "shares": [
@@ -94,9 +104,9 @@
       "abbrev": "B&O",
       "tokens": [
         "Free",
-        "$80*",
         "$80",
-        "$80"
+        "$80",
+        "$80*"
       ],
       "color": "blue",
       "shares": [
@@ -142,9 +152,9 @@
       "abbrev": "ERIE",
       "tokens": [
         "Free",
-        "$80*",
         "$80",
-        "$80"
+        "$80",
+        "$80*"
       ],
       "color": "yellow",
       "shares": [
@@ -191,7 +201,7 @@
         "Free",
         "$80",
         "$80",
-        "$80"
+        "$80*"
       ],
       "color": "green",
       "shares": [
@@ -211,6 +221,36 @@
   ],
   "trains": [
     {
+      "name": "2: Big 4",
+      "quantity": 1,
+      "color": "yellow",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Phased Out"
+        },
+        {
+          "color": "gray",
+          "note": "Removed"
+        }
+      ]
+    },
+    {
+      "name": "2: MS",
+      "quantity": 1,
+      "color": "yellow",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Phased Out"
+        },
+        {
+          "color": "gray",
+          "note": "Removed"
+        }
+      ]
+    },
+    {
       "name": "2",
       "quantity": 7,
       "price": "$80",
@@ -227,11 +267,70 @@
       ]
     },
     {
-      "name": "D",
+      "name": "3/5",
       "quantity": 6,
-      "price": "$1100",
+      "price": "$160",
+      "color": "green",
+      "info": [
+        {
+          "color": "gray",
+          "note": "Phased Out"
+        }
+      ]
+    },
+    {
+      "name": "4",
+      "quantity": 6,
+      "price": "$180",
+      "color": "green",
+      "info": [
+        {
+          "color": "gray",
+          "note": "Phased Out"
+        }
+      ]
+    },
+    {
+      "name": "4/6",
+      "quantity": 6,
+      "price": "$450",
       "color": "brown",
-      "description": "Cost $800 when exchanging a 4, 5, or 6 train",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "5",
+      "quantity": 6,
+      "price": "$500",
+      "color": "brown",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "6",
+      "quantity": 9,
+      "price": "$800",
+      "color": "gray",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "7/8",
+      "quantity": 9,
+      "price": "$900",
+      "color": "gray",
       "info": [
         {
           "color": "yellow",
@@ -242,16 +341,62 @@
   ],
   "privates": [
     {
+      "name": "Michigan Southern",
+      "price": "$60 + $80 Debt",
+      "description": "Starts with $60 in treasury, a 2 train, and a token in Detroit (C15). Splits revenue evenly with owner."
+    },
+    {
+      "name": "Big 4",
+      "price": "$40 + $60 Debt",
+      "description": "Starts with $60 in treasury, a 2 train, and a token in Indianapolis (G9). Splits revenue evenly with owner."
+    },
+    {
       "name": "Mail Contract",
       "price": "$80",
       "revenue": "$0",
-      "description": "Never closes once purchased by a corporation. Adds $10 per location visited by any one train of the owning corporation."
+      "description": "Adds $10 per location visited by any one train of the owning corporation. Never closes once purchased by a corporation."
+    },
+    {
+      "name": "Tunnel Blasting Company",
+      "price": "$60",
+      "revenue": "$20",
+      "description": "Reduces, for the owning corporation, the cost of laying all mountain tiles and tunnel/pass hexsides by $20."
+    },
+    {
+      "name": "Meat Packing Company",
+      "price": "$60",
+      "revenue": "$15",
+      "description": "The owning corporation may place a $30 marker in either St. Louis (I1) or Chicago (D6), to add $30 to all routes run to this location."
+    },
+    {
+      "name": "Steamboat Company",
+      "price": "$40",
+      "revenue": "$10",
+      "description": "Place or shift the port marker among port locations (B8, C5, D14, G19, I1). Add $20 per port symbol to all routes run to this location by the owning (or assigned) company."
     },
     {
       "name": "Chicago and Western Indiana",
-      "price": "$80",
+      "price": "$60",
       "revenue": "$10",
       "description": "Reserves a token slot in Chicago (D6), in which the owning corporation may place an extra token at no cost."
+    },
+    {
+      "name": "Lake Shore Line",
+      "price": "$40",
+      "revenue": "$15",
+      "description": "The owning corporation may make an extra $0 cost tile upgrade of either Cleveland (E17) or Toledo (D14), but not both."
+    },
+    {
+      "name": "Michigan Central",
+      "price": "$40",
+      "revenue": "$15",
+      "description": "The owning corporation may lay up to two extra $0 cost yellow tiles in the MC's reserved hexes (B10, B12)."
+    },
+    {
+      "name": "Ohio & Indiana",
+      "price": "$40",
+      "revenue": "$15",
+      "description": "The owning corporation may lay up to two extra $0 cost yellow tiles in the O&I's reserved hexes (F14, F16)."
     }
   ],
   "phases": [
@@ -259,21 +404,21 @@
       "phase": "Yellow",
       "train": "2",
       "limit": "4",
-      "number": "5/6/7",
+      "number": "5/5/6/7",
       "tiles": "yellow"
     },
     {
       "phase": "Green",
       "train": "3/5 or 4",
       "limit": "4",
-      "number": "4/5/6",
+      "number": "5/4/5/6",
       "tiles": "green"
     },
     {
       "phase": "Brown",
       "train": "4/6 or 5",
       "limit": "3",
-      "number": "3/4/5",
+      "number": "3/3/4/5",
       "tiles": "brown",
       "notes": "Private companies close, Phase out 2 trains"
     },
@@ -282,7 +427,7 @@
       "train": "6/7 or 8",
       "rust": "2",
       "limit": "2",
-      "number": "∞",
+      "number": "4/∞/∞/∞",
       "tiles": "gray",
       "notes": "Private tokens removed, Phase out 3/5 and 4 trains"
     }
@@ -349,11 +494,14 @@
     "movement": {
       "left": [
         "President sold shares",
-        "Withheld revenue"
+        "Stock has shares in the market",
+        "Dividend less than 1/2 the current price"
       ],
       "right": [
-        "Sold Out",
-        "Paid dividends"
+        "Stock is 100% held by players",
+        "Dividend at least stock price, but less than double",
+        "[Double] Dividend two times or more its current price",
+        "[Triple] Dividend three times or more its current price (when $165 or more)"
       ]
     },
     "market": [
@@ -491,9 +639,11 @@
         "color": "plain",
         "tokens": [
           {
-            "label": "IC",
+            "label": "$0 IC",
+            "angle": 180,
+            "percent": 0.75,
             "token": "green",
-            "width": 15
+            "width": 18
           }
         ],
         "hexes": [
@@ -513,7 +663,6 @@
           "D8",
           "D10",
           "D12",
-          "D18",
           "E7",
           "E9",
           "E13",
@@ -532,6 +681,18 @@
           "I7",
           "I9",
           "J8"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 2,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "D18"
         ]
       },
       {
@@ -812,6 +973,12 @@
             }
           ]
         },
+        "borders": [
+          {
+            "side": 5,
+            "color": "water"
+          }
+        ],
         "hexes": [
           "C17"
         ]
@@ -1146,8 +1313,19 @@
         "hexes": [
           "F18",
           "G17",
-          "H14",
           "H16"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": "$60"
+          }
+        ],
+        "hexes": [
+          "H14"
         ]
       },
       {
@@ -1427,7 +1605,7 @@
       {
         "color": "offboard",
         "routeBonus": {
-          "value": "+20",
+          "value": "+30",
           "percent": 0.5
         },
         "labels": [
@@ -1476,7 +1654,7 @@
           }
         ],
         "routeBonus": {
-          "value": "+30",
+          "value": "+20",
           "percent": 0.5
         },
         "labels": [
