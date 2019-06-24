@@ -4407,5 +4407,88 @@
         "side": 3
       }
     ]
+  },
+  "CC7": {
+    "color": "brown",
+    "cities": [
+      {
+        "size": 2
+      }
+    ],
+    "labels": [
+      {
+        "label": "OO",
+        "angle": 180,
+        "percent": 0.7
+      }
+    ],
+    "values": [
+      {
+        "angle": 330,
+        "percent": 0.8,
+        "value": 50
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 6
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
+  "CC6": {
+    "color": "brown",
+    "rotations": 1,
+    "cities": [
+      {
+        "size": 3,
+        "rotate": 180
+      }
+    ],
+    "labels": [
+      {
+        "label": "DC",
+        "angle": 155,
+        "percent": 0.85
+      }
+    ],
+    "values": [
+      {
+        "angle": 270,
+        "percent": 0.9,
+        "value": 70
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
   }
 }

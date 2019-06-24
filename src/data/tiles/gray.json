@@ -944,7 +944,7 @@
         "side": 4
       },
       {
-        "size": 5
+        "side": 5
       }
     ]
   },
@@ -1282,6 +1282,124 @@
       },
       {
         "side": 3
+      }
+    ]
+  },
+  "CC9": {
+    "color": "gray",
+    "rotations": 1,
+    "cities": [
+      {
+        "size": 3,
+        "rotate": 180
+      }
+    ],
+    "labels": [
+      {
+        "label": "OO",
+        "angle": 180,
+        "percent": 0.78
+      }
+    ],
+    "values": [
+      {
+        "angle": 335,
+        "percent": 0.85,
+        "value": 70
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "CC51": {
+    "color": "gray",
+    "rotations": 1,
+    "cities": [
+      {
+        "size": 3,
+        "rotate": 180
+      }
+    ],
+    "values": [
+      {
+        "angle": 180,
+        "percent": 0.78,
+        "value": 50
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "CC8": {
+    "color": "gray",
+    "values": [
+      {
+        "angle": 270,
+        "percent": 0.87,
+        "value": 100
+      }
+    ],
+    "labels": [
+      {
+        "label": "DC",
+        "angle": 205,
+        "percent": 0.84
+      }
+    ],
+    "cities": [
+      {
+        "size": 4,
+        "percent": 0.1
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
       }
     ]
   }
