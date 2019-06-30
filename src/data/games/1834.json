@@ -179,10 +179,10 @@
       "name": "4",
       "quantity": 3,
       "price": "$300",
-      "color": "blue",
+      "color": "green",
       "info": [
         {
-          "color": "red",
+          "color": "gray",
           "note": "Rusted by 6"
         }
       ]
@@ -203,7 +203,7 @@
       "name": "6",
       "quantity": 2,
       "price": "$630",
-      "color": "red",
+      "color": "gray",
       "info": [
         {
           "color": "gray",
@@ -1411,7 +1411,7 @@
         ],
         "water": {
           "percent": 0.5,
-          "cost": "30",
+          "cost": "$30",
           "size": "small"
         },
         "hexes": [
