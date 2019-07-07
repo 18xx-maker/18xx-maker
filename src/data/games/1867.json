@@ -862,9 +862,12 @@
       },
       {
         "color": "plain",
-        "water": {
-          "cost": "$20"
-        },
+        "terrain": [
+          {
+            "type": "river",
+            "cost": "$20"
+          }
+        ],
         "hexes": [
           "K11"
         ]
@@ -1070,11 +1073,14 @@
       },
       {
         "color": "plain",
-        "water": {
-          "angle": 0,
-          "percent": 0.7,
-          "cost": "$20"
-        },
+        "terrain": [
+          {
+            "type": "river",
+            "cost": "$20",
+            "angle": 0,
+            "percent": 0.7
+          }
+        ],
         "labels": [
           {
             "label": "Y",
