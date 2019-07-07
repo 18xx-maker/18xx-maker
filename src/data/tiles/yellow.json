@@ -957,6 +957,32 @@
       }
     ]
   },
+  "621": {
+    "color": "yellow",
+    "rotations": 3,
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 30
+      }
+    ],
+    "labels": [
+      {
+        "label": "Y",
+        "angle": 155,
+        "percent": 0.75
+      }
+    ],
+    "cities": [
+      {}
+    ],
+    "track": [
+      {
+        "type": "straight"
+      }
+    ]
+  },
   "630": {
     "color": "yellow",
     "values": [
