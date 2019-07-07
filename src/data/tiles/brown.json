@@ -3093,6 +3093,42 @@
       }
     ]
   },
+  "801": {
+    "color": "brown",
+    "values": [
+      {
+        "angle": 215,
+        "percent": 0.8,
+        "value": 50
+      }
+    ],
+    "labels": [
+      {
+        "angle": 270,
+        "percent": 0.9,
+        "label": "Y"
+      }
+    ],
+    "cities": [
+      {
+        "size": 2
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
   "803": {
     "color": "brown",
     "values": [
@@ -3152,6 +3188,36 @@
       },
       {
         "side": 2
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "911": {
+    "color": "brown",
+    "centerTowns": [
+      {}
+    ],
+    "values": [
+      {
+        "value": 10,
+        "angle": 150,
+        "percent": 0.8
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
       },
       {
         "side": 6
@@ -3983,54 +4049,7 @@
       }
     ]
   },
-  "X6": {
-    "color": "brown",
-    "values": [
-      {
-        "angle": -30,
-        "percent": 0.825,
-        "value": 70
-      }
-    ],
-    "labels": [
-      {
-        "label": "M",
-        "angle": 210,
-        "percent": 0.8
-      }
-    ],
-    "cities": [
-      {
-        "rotation": 90,
-        "size": 2,
-        "angle": 90,
-        "percent": 0.2
-      },
-      {
-        "angle": -90,
-        "percent": 0.6
-      }
-    ],
-    "track": [
-      {
-        "side": 1
-      },
-      {
-        "side": 2
-      },
-      {
-        "side": 3
-      },
-      {
-        "side": 4
-      },
-      {
-        "side": 5,
-        "type": "sharp"
-      }
-    ]
-  },
-  "X7": {
+  "X5": {
     "color": "brown",
     "values": [
       {
@@ -4082,7 +4101,54 @@
       }
     ]
   },
-  "X8": {
+  "X6": {
+    "color": "brown",
+    "values": [
+      {
+        "angle": -30,
+        "percent": 0.825,
+        "value": 70
+      }
+    ],
+    "labels": [
+      {
+        "label": "M",
+        "angle": 210,
+        "percent": 0.8
+      }
+    ],
+    "cities": [
+      {
+        "rotation": 90,
+        "size": 2,
+        "angle": 90,
+        "percent": 0.2
+      },
+      {
+        "angle": -90,
+        "percent": 0.6
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5,
+        "type": "sharp"
+      }
+    ]
+  },
+  "X7": {
     "color": "brown",
     "values": [
       {
