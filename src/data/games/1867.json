@@ -482,6 +482,118 @@
       "color": "white",
       "tokens": ["", "", "", "", "", "", "", ""],
       "shares": []
+    },
+    {
+      "name": "Buffalo, Brantford, and Goderich",
+      "minor": true,
+      "abbrev": "BBG",
+      "tokens": [ "" ],
+      "color": "yellow"
+    },
+    {
+      "name": "Brockville and Ottawa",
+      "minor": true,
+      "abbrev": "BO",
+      "tokens": [ "" ],
+      "color": "yellow"
+    },
+    {
+      "name": "Canada Southern",
+      "minor": true,
+      "abbrev": "CS",
+      "tokens": [ "" ],
+      "color": "yellow"
+    },
+    {
+      "name": "Credit Valley Railway",
+      "minor": true,
+      "abbrev": "CV",
+      "tokens": [ "" ],
+      "color": "yellow"
+    },
+    {
+      "name": "Kingston and Pembroke",
+      "minor": true,
+      "abbrev": "KP",
+      "tokens": [ "" ],
+      "color": "yellow"
+    },
+    {
+      "name": "London and Port Stanley",
+      "minor": true,
+      "abbrev": "LPS",
+      "tokens": [ "" ],
+      "color": "yellow"
+    },
+    {
+      "name": "Ottawa and Prescott",
+      "minor": true,
+      "abbrev": "OP",
+      "tokens": [ "" ],
+      "color": "yellow"
+    },
+    {
+      "name": "St. Lawrence and Atlantic",
+      "minor": true,
+      "abbrev": "SLA",
+      "tokens": [ "" ],
+      "color": "yellow"
+    },
+    {
+      "name": "Toronto, Grey, and Bruce",
+      "minor": true,
+      "abbrev": "TGB",
+      "tokens": [ "" ],
+      "color": "yellow"
+    },
+    {
+      "name": "Toronto and Nipissing",
+      "minor": true,
+      "abbrev": "TN",
+      "tokens": [ "" ],
+      "color": "yellow"
+    },
+    {
+      "name": "Algoma Eastern Railway",
+      "minor": true,
+      "abbrev": "TN",
+      "tokens": [ "" ],
+      "color": "green"
+    },
+    {
+      "name": "Canada Atlantic Railway",
+      "minor": true,
+      "abbrev": "CA",
+      "tokens": [ "" ],
+      "color": "green"
+    },
+    {
+      "name": "New York and Ottawa",
+      "minor": true,
+      "abbrev": "NYO",
+      "tokens": [ "" ],
+      "color": "green"
+    },
+    {
+      "name": "Pere Marquette Railway",
+      "minor": true,
+      "abbrev": "PM",
+      "tokens": [ "" ],
+      "color": "green"
+    },
+    {
+      "name": "Quebec and Lake St. John",
+      "minor": true,
+      "abbrev": "QLS",
+      "tokens": [ "" ],
+      "color": "green"
+    },
+    {
+      "name": "Toronto, Hamilton and Buffalo",
+      "minor": true,
+      "abbrev": "THB",
+      "tokens": [ "" ],
+      "color": "green"
     }
   ],
   "phases": [
