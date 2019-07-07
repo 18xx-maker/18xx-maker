@@ -30,7 +30,7 @@
     {
       "number": 5,
       "certLimit": 8,
-      "capital": "$440"
+      "capital": "$430"
     }
   ],
   "companies": [
@@ -158,7 +158,7 @@
       "color": "yellow",
       "info": [
         {
-          "color": "blue",
+          "color": "green",
           "note": "Rusted by 4"
         }
       ]
@@ -194,7 +194,7 @@
       "color": "brown",
       "info": [
         {
-          "color": "gray",
+          "color": "yellow",
           "note": "Permanent"
         }
       ]
@@ -206,7 +206,7 @@
       "color": "gray",
       "info": [
         {
-          "color": "gray",
+          "color": "yellow",
           "note": "Permanent"
         }
       ]
@@ -214,12 +214,12 @@
     {
       "name": "2T",
       "quantity": 5,
-      "price": "$750",
+      "price": "$700",
       "color": "gray",
       "description": "Runs between 2 cities, counts all towns, doubles one city.",
       "info": [
         {
-          "color": "gray",
+          "color": "yellow",
           "note": "Permanent"
         }
       ]
@@ -230,25 +230,25 @@
       "name": "Ostend Port Society",
       "price": "$20",
       "revenue": "$5",
-      "description": "Increase runs to Ostend port(blue offboard) by $20. Can be sold in YELLOW and GREEN."
+      "description": "Increases runs to Ostend port (blue offboard) for owning railroad by $20. Can be sold in YELLOW and GREEN."
     },
     {
       "name": "De Kempen Coal Company",
       "price": "$40",
       "revenue": "$10",
-      "description": "Owning corporation may place a track tile on a mountain hex at half cost. Can be sold in YELLOW and GREEN."
+      "description": "Owning corporation may place a track tile on a mountain hex at half cost, this closes the private. Can be sold in YELLOW and GREEN."
     },
     {
       "name": "Burbach Foundry",
       "price": "$70",
       "revenue": "$15",
-      "description": "Owning corporation may upgrade an additional track tile, the Luxembourg city tile(hexes N11 and M10), from YELLOW to GREEN. THis is in addition to it's normal placement. Can be sold in GREEN."
+      "description": "Owning corporation may upgrade an additional track tile, in a Luxembourg city tile (hexes N11 and M10), from YELLOW to GREEN. This is in addition to its normal placement and closes the private. Can be sold in GREEN."
     },
     {
-      "name": "MNBS SNCF Electrification",
+      "name": "MNBS/SNCB Electrification",
       "price": "$100",
       "revenue": "$0",
-      "description": "At the start of the silver phase after all 4 trains have been removed, the player holding this private must place a 2T train on a railraod's charter. This costs nothing and can be used immediately. MAY NOT BE SOLD TO A RAILROAD."
+      "description": "At the start of the silver phase after all 4 trains have been removed, the player holding this private must place a 2T train on a railroad's charter. This train costs nothing and can be used immediately. This action closes the private. MAY NOT BE SOLD TO A RAILROAD."
     },
     {
       "name": "Cockerill Locomotive Company",
