@@ -5,7 +5,7 @@ import RotateContext from "../context/RotateContext";
 
 const Value = ({ value, fixed, outerBorderColor }) => {
   let size = 15;
-  if (value > 99) {
+  if (value.toString().length > 2) {
     size = 13;
   }
 
