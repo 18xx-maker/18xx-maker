@@ -1,46 +1,49 @@
 {
   "info": {
-    "title": "1834",
-    "subtitle": "Belgium & Luxembourg",
+    "title": "1879",
+    "subtitle": "US Pacific Northwest",
     "designer": "Eddie Robbins",
     "background": "gray",
     "orientation": "horizontal",
-    "titleX": 50,
-    "currency": "EUR"
+    "titleX": 1250,
+    "titleY": 1150,
+    "currency": "USD"
   },
   "links": {
-    "bgg": "https://www.boardgamegeek.com/boardgame/253320/1834"
+    "bgg": "https://boardgamegeek.com/boardgame/161886/1879"
   },
   "tokens": [
     "Round"
   ],
   "ipo": true,
-  "bank": "$7,500",
+  "bank": "$8,000",
   "players": [
     {
       "number": 3,
-      "certLimit": 13,
-      "capital": "$700"
+      "certLimit": 16,
+      "capital": "$680"
     },
     {
       "number": 4,
-      "certLimit": 10,
-      "capital": "$550"
+      "certLimit": 12,
+      "capital": "$510"
     },
     {
       "number": 5,
-      "certLimit": 8,
-      "capital": "$430"
+      "certLimit": 10,
+      "capital": "$408"
     }
   ],
   "companies": [
     {
-      "name": "Luxembourg Railway",
-      "abbrev": "LUX",
+      "name": "Northern Pacific Railway",
+      "abbrev": "NP",
       "tokens": [
         "Free",
         "$40",
-        "$70",
+        "$100",
+        "$100",
+        "$100",
         "$100"
       ],
       "color": "purple",
@@ -59,14 +62,16 @@
       ]
     },
     {
-      "name": "Ostend Railway",
-      "abbrev": "OST",
+      "name": "Great Northern Railway",
+      "abbrev": "GN",
       "tokens": [
-        "Home",
+        "Free",
         "$40",
+        "$100",
+        "$100",
         "$100"
       ],
-      "color": "blue",
+      "color": "cyan",
       "shares": [
         {
           "quantity": 1,
@@ -82,33 +87,12 @@
       ]
     },
     {
-      "name": "Antwerp Railway",
-      "abbrev": "ANT",
+      "name": "Milwaukee Road",
+      "abbrev": "MILW",
       "tokens": [
-        "Home",
-        "$100"
-      ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
-    },
-    {
-      "name": "Liege Railway",
-      "abbrev": "LIE",
-      "tokens": [
-        "Home",
+        "Free",
         "$40",
+        "$100",
         "$100"
       ],
       "color": "red",
@@ -127,12 +111,58 @@
       ]
     },
     {
-      "name": "Mons Railway",
-      "abbrev": "MON",
+      "name": "Union Pacific Railroad",
+      "abbrev": "UP",
       "tokens": [
-        "Home",
+        "Free",
+        "$40",
+        "$100",
+        "$100"
+      ],
+      "color": "natural",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Southern Pacific",
+      "abbrev": "SP",
+      "tokens": [
+        "Free",
         "$40",
         "$100"
+      ],
+      "color": "yellow",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Spokane, Portland and Seattle Railway",
+      "abbrev": "SPS",
+      "tokens": [
+        "Free",
+        "$40"
       ],
       "color": "green",
       "shares": [
@@ -171,7 +201,7 @@
       "info": [
         {
           "color": "brown",
-          "note": "Rusted by 5"
+          "note": "Rusted by 6"
         }
       ]
     },
@@ -182,8 +212,8 @@
       "color": "green",
       "info": [
         {
-          "color": "gray",
-          "note": "Rusted by 6"
+          "color": "brown",
+          "note": "Rusted by D"
         }
       ]
     },
@@ -203,7 +233,7 @@
       "name": "6",
       "quantity": 2,
       "price": "$630",
-      "color": "gray",
+      "color": "brown",
       "info": [
         {
           "color": "yellow",
@@ -212,55 +242,17 @@
       ]
     },
     {
-      "name": "2T",
-      "quantity": 5,
-      "price": "$700",
-      "color": "gray",
-      "description": "Runs between 2 cities, counts all towns, doubles one city.",
+      "name": "D",
+      "quantity": 6,
+      "price": "$1100",
+      "color": "brown",
+      "description": "Cost $800 when trading in a 4T, 5T or 6T",
       "info": [
         {
           "color": "yellow",
           "note": "Permanent"
         }
       ]
-    }
-  ],
-  "privates": [
-    {
-      "name": "Ostend Port Society",
-      "price": "$20",
-      "revenue": "$5",
-      "description": "Increases runs to Ostend port (blue offboard) for owning railroad by $20. Can be sold in YELLOW and GREEN."
-    },
-    {
-      "name": "De Kempen Coal Company",
-      "price": "$40",
-      "revenue": "$10",
-      "description": "Owning corporation may place a track tile on a mountain hex at half cost, this closes the private. Can be sold in YELLOW and GREEN."
-    },
-    {
-      "name": "Burbach Foundry",
-      "price": "$70",
-      "revenue": "$15",
-      "description": "Owning corporation may upgrade an additional track tile, in a Luxembourg city tile (hexes N11 and M10), from YELLOW to GREEN. This is in addition to its normal placement and closes the private. Can be sold in GREEN."
-    },
-    {
-      "name": "MNBS/SNCB Electrification",
-      "price": "$100",
-      "revenue": "$0",
-      "description": "At the start of the silver phase after all 4 trains have been removed, the player holding this private must place a 2T train on a railroad's charter. This train costs nothing and can be used immediately. This action closes the private. MAY NOT BE SOLD TO A RAILROAD."
-    },
-    {
-      "name": "Cockerill Locomotive Company",
-      "price": "$120",
-      "revenue": "$20",
-      "description": "Allows owning railroad to purchase a train at half price, this closes the private. Can be sold in YELLOW and GREEN."
-    },
-    {
-      "name": "Albert Canal Corporation",
-      "price": "$150",
-      "revenue": "$25",
-      "description": "No other ability. Closes in BROWN or if track connects Antwerp to Liege by any route or manner regardless of tokens. Can be sold in GREEN."
     }
   ],
   "phases": [
@@ -268,15 +260,13 @@
       "name": "2",
       "limit": "4",
       "number": "5",
-      "tiles": "yellow",
-      "notes": "Some Private companies may be purchased"
+      "tiles": "yellow"
     },
     {
       "name": "3",
-      "limit": "3",
+      "limit": "4",
       "number": "4",
-      "tiles": "green",
-      "notes": "All Private companies may be purchased"
+      "tiles": "green"
     },
     {
       "name": "4",
@@ -287,30 +277,29 @@
     },
     {
       "name": "5",
-      "rust": "3",
       "limit": "2",
       "number": "2",
-      "tiles": "brown",
-      "notes": "Private companies are closed"
+      "tiles": "brown"
     },
     {
       "name": "6",
-      "limit": "1",
+      "limit": "2",
       "number": "2",
-      "rust": "4",
-      "tiles": "gray",
-      "notes": "2T may be purchased"
+      "rust": "3",
+      "tiles": "brown",
+      "notes": "D Trains may be purchased"
     },
     {
-      "name": "2T",
-      "limit": "1",
-      "number": "5",
-      "tiles": "gray"
+      "name": "D",
+      "limit": "2",
+      "number": "6",
+      "rust": "4",
+      "tiles": "brown"
     }
   ],
   "pools": [
     {
-      "name": "Market",
+      "name": "Bank Pool",
       "notes": [
         {
           "color": "orange",
@@ -366,14 +355,21 @@
         "Pay dividends or withhold revenue",
         "Purchase trains"
       ],
-      "ordered": true,
-      "optional": [
-        "Purchase private companies"
-      ]
+      "ordered": true
     }
   ],
   "stock": {
     "type": "2D",
+    "par": {
+      "values": [
+        100,
+        90,
+        82,
+        76,
+        71,
+        67
+      ]
+    },
     "movement": {
       "up": [
         "Sold out"
@@ -688,6 +684,96 @@
           "label": 68,
           "arrow": "up"
         }
+      ],
+      [
+        null,
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        null,
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        null,
+        null,
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1,
+          "arrow": "up"
+        }
       ]
     ],
     "legend": [
@@ -738,13 +824,13 @@
     "45": 2,
     "46": 2,
     "47": 1,
-    "53": 2,
+    "54": 1,
     "55": 1,
     "56": 1,
     "57": 4,
     "58": 2,
     "59": 2,
-    "61": 2,
+    "62": 1,
     "63": 3,
     "64": 1,
     "65": 1,
@@ -752,31 +838,45 @@
     "67": 1,
     "68": 1,
     "69": 1,
-    "70": 1,
-    "18340": 1,
-    "18341": 1,
-    "18342": 1,
-    "18343": 1
+    "70": 1
   },
   "map": {
     "hexes": [
       {
-        "color": "plain",
-        "cities": [
+        "color": "gray",
+        "track": [
           {
-            "name": {
-              "name": "Ostend"
-            },
-            "companies": [
-              {
-                "label": "OST",
-                "color": "blue"
-              }
-            ]
+            "type": "sharp",
+            "side": 5
           }
         ],
         "hexes": [
-          "B9"
+          "A14",
+          "A16"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 1,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "B11"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 4,
+            "color": "water"
+          }
+        ],
+        "hexes": [
+          "B13"
         ]
       },
       {
@@ -784,50 +884,25 @@
         "cities": [
           {
             "name": {
-              "name": "Mons"
-            },
-            "companies": [
-              {
-                "label": "MON",
-                "color": "green"
-              }
-            ]
-          }
-        ],
-        "hexes": [
-          "G12"
-        ]
-      },
-      {
-        "color": "plain",
-        "cities": [
-          {
-            "name": {
-              "name": "Liege"
-            },
-            "companies": [
-              {
-                "label": "LIE",
-                "color": "red"
-              }
-            ]
-          }
-        ],
-        "hexes": [
-          "K6"
-        ]
-      },
-      {
-        "color": "plain",
-        "cities": [
-          {
-            "name": {
-              "name": "Brussels"
+              "name": "McMinnville"
             }
           }
         ],
         "hexes": [
-          "G8"
+          "B15"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Albany"
+            }
+          }
+        ],
+        "hexes": [
+          "B17"
         ]
       },
       {
@@ -835,12 +910,12 @@
         "cities": [
           {
             "name": {
-              "name": "Arlon"
+              "name": "Olympia"
             }
           }
         ],
         "hexes": [
-          "L13"
+          "C6"
         ]
       },
       {
@@ -848,89 +923,335 @@
         "cities": [
           {
             "name": {
-              "name": "Diekirch"
+              "name": "Salem"
             }
           }
         ],
         "hexes": [
-          "M10"
+          "C16"
         ]
       },
       {
         "color": "yellow",
-        "labels": [
-          {
-            "label": "OO",
-            "angle": 210,
-            "percent": 0.667
-          }
-        ],
         "cities": [
           {
-            "angle": 120,
-            "percent": 0.5,
+            "angle": 320,
+            "percent": 0.55,
             "name": {
-              "name": "Bruges",
-              "reverse": true
+              "name": "Portland"
             }
           },
           {
-            "angle": -60,
-            "percent": 0.5
+            "angle": 140,
+            "percent": 0.55,
+            "name": {
+              "name": "Beaverton",
+              "reverse": true
+            }
+          }
+        ],
+        "labels": [
+          {
+            "label": "OO",
+            "angle": 220,
+            "percent": 0.65
           }
         ],
         "hexes": [
-          "C8"
+          "C14"
         ]
       },
       {
-        "color": "yellow",
-        "labels": [
-          {
-            "label": "OO",
-            "angle": 210,
-            "percent": 0.667
-          }
-        ],
+        "copy": "C14",
         "cities": [
           {
-            "angle": 120,
-            "percent": 0.5,
+            "angle": 320,
+            "percent": 0.55,
             "name": {
-              "name": "Hasselt",
-              "reverse": true
+              "name": "Walla Walla"
             }
           },
           {
-            "angle": -60,
-            "percent": 0.5
+            "angle": 140,
+            "percent": 0.55,
+            "name": {
+              "name": "Milton",
+              "reverse": true
+            }
           }
         ],
         "hexes": [
-          "I4"
+          "L11"
         ]
       },
       {
-        "color": "yellow",
-        "labels": [
+        "copy": "C14",
+        "cities": [
           {
-            "label": "OO",
-            "angle": 210,
-            "percent": 0.667
+            "angle": 320,
+            "percent": 0.55,
+            "name": {
+              "name": "Vancouver"
+            },
+            "companies": [
+              "SPS"
+            ]
+          },
+          {
+            "angle": 140,
+            "percent": 0.55,
+            "name": {
+              "name": "St. Helens",
+              "reverse": true
+            }
+          }
+        ],
+        "track": [
+          {
+            "type": "stop",
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "C12"
+        ]
+      },
+      {
+        "color": "gray",
+        "offBoardTrack": [
+          {
+            "side": 3
+          },
+          {
+            "side": 4
           }
         ],
         "cities": [
           {
-            "angle": 120,
+            "companies": [
+              "SP"
+            ]
+          }
+        ],
+        "hexes": [
+          "C18"
+        ]
+      },
+      {
+        "copy": "C18",
+        "cities": [
+          {
+            "companies": [
+              "UP"
+            ]
+          }
+        ],
+        "hexes": [
+          "M14"
+        ]
+      },
+      {
+        "color": "gray",
+        "cities": [
+          {
+            "companies": [
+              "NP"
+            ]
+          }
+        ],
+        "offBoardTrack": [
+          {
+            "side": 2
+          }
+        ],
+        "hexes": [
+          "N1"
+        ]
+      },
+      {
+        "color": "gray",
+        "cities": [
+          {
+            "companies": [
+              "GN"
+            ]
+          }
+        ],
+        "offBoardTrack": [
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          }
+        ],
+        "hexes": [
+          "N3"
+        ]
+      },
+      {
+        "color": "gray",
+        "cities": [
+          {
+            "companies": [
+              "MILW"
+            ]
+          }
+        ],
+        "offBoardTrack": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          }
+        ],
+        "hexes": [
+          "N5"
+        ]
+      },
+
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "angle": 240,
+            "percent": 0.5
+          },
+          {
+            "angle": 40,
             "percent": 0.5,
             "name": {
-              "name": "Namur",
-              "reverse": true
+              "name": "Seattle"
+            }
+          }
+        ],
+        "labels": [
+          {
+            "label": "NY",
+            "angle": 140,
+            "percent": 0.60
+          }
+        ],
+        "values": [
+          {
+            "value": "40",
+            "angle": 320,
+            "percent": 0.6
+          }
+        ],
+        "track": [
+          {
+            "type": "stop",
+            "side": 5
+          }
+        ],
+        "hexes": [
+          "D3"
+        ]
+      },
+      {
+        "copy": "C14",
+        "cities": [
+          {
+            "angle": 320,
+            "percent": 0.55,
+            "name": {
+              "name": "Orting"
             }
           },
           {
-            "angle": -60,
-            "percent": 0.5
+            "angle": 140,
+            "percent": 0.55,
+            "name": {
+              "name": "Tacoma",
+              "reverse": true
+            }
+          }
+        ],
+        "hexes": [
+          "D5"
+        ]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "gentle",
+            "side": 3
+          }
+        ],
+        "hexes": [
+          "E14",
+          "G14",
+          "I14"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "The Dalles"
+            }
+          }
+        ],
+        "hexes": [
+          "F13"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Ellensburg"
+            }
+          }
+        ],
+        "hexes": [
+          "G6"
+        ]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "side": 3
+          },
+          {
+            "side": 6
+          }
+        ],
+        "values": [
+          {
+            "value": "20",
+            "angle": 30,
+            "percent": 0.7
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Wenatchee",
+              "offset": 60
+            }
+          }
+        ],
+        "hexes": [
+          "H3"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Pasco"
+            }
           }
         ],
         "hexes": [
@@ -939,532 +1260,143 @@
       },
       {
         "color": "plain",
-        "labels": [
-          {
-            "angle": 150,
-            "percent": 0.7,
-            "label": "B"
-          }
-        ],
-        "cities": [
-          {
-            "name": {
-              "name": "Luxembourge",
-              "reverse": true,
-              "rotation": -90
-            },
-            "companies": [
-              {
-                "label": "LUX",
-                "color": "purple"
-              }
-            ]
-          }
-        ],
-        "hexes": [
-          "N11"
-        ]
-      },
-      {
-        "color": "yellow",
-        "labels": [
-          {
-            "angle": 150,
-            "percent": 0.7,
-            "label": "B"
-          }
-        ],
-        "cities": [
-          {
-            "name": {
-              "name": "Ghent",
-              "reverse": true,
-              "rotation": -90
-            }
-          }
-        ],
-        "values": [
-          {
-            "value": 20,
-            "angle": 90,
-            "percent": 0.67
-          }
-        ],
-        "track": [
-          {
-            "side": 1
-          }
-        ],
-        "hexes": [
-          "E8"
-        ]
-      },
-      {
-        "color": "yellow",
-        "labels": [
-          {
-            "angle": 150,
-            "percent": 0.7,
-            "label": "B"
-          }
-        ],
-        "cities": [
-          {
-            "name": {
-              "name": "Antwerp",
-              "rotation": 40
-            },
-            "companies": [
-              {
-                "label": "ANT",
-                "color": "yellow"
-              }
-            ]
-          }
-        ],
-        "values": [
-          {
-            "value": "20",
-            "angle": 90,
-            "percent": 0.67
-          },
-          {
-            "value": "30",
-            "angle": 20,
-            "percent": 0.67,
-            "outerBorderColor": "green"
-          }
-        ],
-        "track": [
-          {
-            "side": 6
-          }
-        ],
-        "hexes": [
-          "F5"
-        ]
-      },
-      {
-        "color": "plain",
-        "centerTowns": [
-          {}
-        ],
-        "hexes": [
-          "E12",
-          "I6",
-          "N9"
-        ]
-      },
-      {
-        "color": "water",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Port",
-            "bgColor": "water"
-          },
-          "revenues": [
-            {
-              "cost": "10",
-              "color": "yellow"
-            },
-            {
-              "cost": "30",
-              "color": "brown"
-            }
-          ]
-        },
-        "offBoardTrack": [
-          {
-            "side": 6
-          }
-        ],
-        "icons": [
-          {
-            "type": "port",
-            "percent": 0.5
-          }
-        ],
-        "hexes": [
-          "A8"
-        ]
-      },
-      {
-        "color": "water",
-        "icons": [
-          {
-            "type": "port",
-            "percent": 0.5
-          }
-        ],
-        "offBoardRevenue": {
-          "name": {
-            "name": "Port",
-            "bgColor": "water"
-          },
-          "revenues": [
-            {
-              "cost": "10",
-              "color": "yellow"
-            },
-            {
-              "cost": "30",
-              "color": "brown"
-            }
-          ]
-        },
-        "offBoardTrack": [
-          {
-            "side": 5
-          }
-        ],
-        "hexes": [
-          "A10"
-        ]
-      },
-      {
-        "color": "offboard",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Lille"
-          },
-          "reverse": true,
-          "revenues": [
-            {
-              "cost": "40",
-              "color": "yellow"
-            },
-            {
-              "cost": "50",
-              "color": "brown"
-            }
-          ]
-        },
-        "offBoardTrack": [
-          {
-            "side": 3
-          },
-          {
-            "side": 4
-          },
-          {
-            "side": 5
-          }
-        ],
-        "hexes": [
-          "D13"
-        ]
-      },
-      {
-        "color": "offboard",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Tilburg"
-          },
-          "revenues": [
-            {
-              "cost": "10",
-              "color": "yellow"
-            },
-            {
-              "cost": "30",
-              "color": "brown"
-            }
-          ]
-        },
-        "offBoardTrack": [
-          {
-            "side": 1
-          }
-        ],
-        "hexes": [
-          "H1"
-        ]
-      },
-      {
-        "color": "offboard",
-        "divides": [
-          {
-            "side": 3.25
-          }
-        ],
-        "offBoardRevenue": {
-          "x": -30,
-          "y": 10,
-          "name": {
-            "name": "Valenciennes"
-          },
-          "reverse": true,
-          "revenues": [
-            {
-              "cost": "20",
-              "color": "yellow"
-            },
-            {
-              "cost": "30",
-              "color": "brown"
-            }
-          ]
-        },
-        "track": [
-          {
-            "type": "sharp",
-            "side": 4
-          }
-        ],
-        "offBoardTrack": [
-          {
-            "side": 3
-          }
-        ],
-        "hexes": [
-          "G14"
-        ]
-      },
-      {
-        "color": "offboard",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Maastricht"
-          },
-          "revenues": [
-            {
-              "cost": "30",
-              "color": "yellow"
-            },
-            {
-              "cost": "40",
-              "color": "brown"
-            }
-          ]
-        },
-        "offBoardTrack": [
-          {
-            "side": 1
-          },
-          {
-            "side": 2
-          }
-        ],
-        "hexes": [
-          "K2"
-        ]
-      },
-      {
-        "color": "offboard",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Aachen"
-          },
-          "revenues": [
-            {
-              "cost": "20",
-              "color": "yellow"
-            },
-            {
-              "cost": "50",
-              "color": "brown"
-            }
-          ]
-        },
-        "offBoardTrack": [
-          {
-            "side": 1
-          }
-        ],
-        "hexes": [
-          "L3"
-        ]
-      },
-      {
-        "color": "offboard",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Aachen"
-          },
-          "revenues": [
-            {
-              "cost": "20",
-              "color": "yellow"
-            },
-            {
-              "cost": "50",
-              "color": "brown"
-            }
-          ]
-        },
-        "offBoardTrack": [
-          {
-            "side": 2
-          }
-        ],
-        "hexes": [
-          "M4"
-        ]
-      },
-      {
-        "color": "offboard",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Metz"
-          },
-          "reverse": true,
-          "revenues": [
-            {
-              "cost": "10",
-              "color": "yellow"
-            },
-            {
-              "cost": "40",
-              "color": "brown"
-            }
-          ]
-        },
-        "offBoardTrack": [
-          {
-            "side": 3
-          },
-          {
-            "side": 4
-          },
-          {
-            "side": 5
-          }
-        ],
-        "hexes": [
-          "M14"
-        ]
-      },
-      {
-        "color": "offboard",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Koln"
-          },
-          "revenues": [
-            {
-              "cost": "30",
-              "color": "yellow"
-            },
-            {
-              "cost": "50",
-              "color": "brown"
-            }
-          ]
-        },
-        "offBoardTrack": [
-          {
-            "side": 1
-          },
-          {
-            "side": 2
-          }
-        ],
-        "hexes": [
-          "O8"
-        ]
-      },
-      {
-        "color": "gray",
-        "track": [
-          {
-            "type": "sharp",
-            "side": 4
-          }
-        ],
-        "hexes": [
-          "K14"
-        ]
-      },
-      {
-        "color": "plain",
         "centerTowns": [
           {
-            "angle": 90,
-            "percent": -0.4
+            "x": -30,
+            "name": {
+              "name": "Umatilla",
+              "reverse": true
+            }
           },
           {
-            "angle": 270,
-            "percent": -0.4
+            "x": 30,
+            "name": {
+              "name": "Plymouth"
+            }
           }
         ],
         "hexes": [
-          "G6"
+          "J11"
         ]
       },
       {
-        "color": "plain",
-        "water": {
-          "cost": "$40"
-        },
+        "copy": "J11",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Kahlos"
+            }
+          },
+          {
+            "name": {
+              "name": "Connell"
+            }
+          }
+        ],
         "hexes": [
-          "F7",
-          "K4",
           "K8"
         ]
       },
       {
-        "color": "plain",
+        "copy": "J11",
         "centerTowns": [
           {
-            "percent": -0.4
-          }
-        ],
-        "water": {
-          "percent": 0.5,
-          "cost": "$30",
-          "size": "small"
-        },
-        "hexes": [
-          "D9",
-          "I10"
-        ]
-      },
-      {
-        "color": "plain",
-        "water": {
-          "cost": "$20"
-        },
-        "hexes": [
-          "D11",
-          "H13"
-        ]
-      },
-      {
-        "color": "plain",
-        "centerTowns": [
-          {
-            "angle": 90,
-            "percent": -0.4
+            "name": {
+              "name": "Marengo"
+            }
           },
           {
-            "angle": 270,
-            "percent": -0.4
+            "name": {
+              "name": "Ritzville"
+            }
           }
         ],
-        "water": {
-          "cost": "$20",
-          "percent": 0.6
-        },
         "hexes": [
-          "H11"
+          "L5"
         ]
       },
       {
         "color": "plain",
-        "mountain": {
-          "cost": "$120"
-        },
+        "cities": [
+          {
+            "name": {
+              "name": "Pendleton"
+            }
+          }
+        ],
         "hexes": [
-          "M8"
+          "K12"
         ]
       },
       {
         "color": "plain",
-        "mountain": {
-          "cost": "$100"
-        },
+        "cities": [
+          {
+            "name": {
+              "name": "Hooper"
+            }
+          }
+        ],
         "hexes": [
-          "L9"
+          "L7"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Minam"
+            }
+          }
+        ],
+        "hexes": [
+          "M12"
+        ]
+      },
+      {
+        "color": "gray",
+        "cities": [
+          {
+            "size": 2,
+            "name": {
+              "name": "Spokane"
+            }
+          }
+        ],
+        "offBoardRevenue": {
+          "percent": -0.75,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            }
+          ]
+        },
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "M2"
         ]
       },
       {
@@ -1473,69 +1405,83 @@
           "cost": "$80"
         },
         "hexes": [
-          "L7"
+          "G4",
+          "H5",
+          "M8",
+          "M10",
+          "N9",
+          "N11"
         ]
       },
       {
         "color": "plain",
         "mountain": {
-          "cost": "$60"
+          "cost": "$120"
         },
         "hexes": [
-          "K10",
-          "L11"
-        ]
-      },
-      {
-        "color": "plain",
-        "mountain": {
-          "cost": "$50"
-        },
-        "hexes": [
-          "K12"
-        ]
-      },
-      {
-        "color": "plain",
-        "mountain": {
-          "cost": "$40"
-        },
-        "hexes": [
-          "L5"
-        ]
-      },
-      {
-        "color": "plain",
-        "hexes": [
-          "B7",
-          "B11",
-          "C6",
-          "C10",
-          "C12",
-          "D7",
-          "E6",
-          "E10",
+          "D11",
+          "D15",
+          "F7",
           "F9",
           "F11",
-          "F13",
-          "G4",
+          "N13"
+        ]
+      },
+      {
+        "color": "plain",
+        "mountain": {
+          "cost": "$160"
+        },
+        "hexes": [
+          "D9",
+          "E6",
+          "E8",
+          "E10"
+        ]
+      },
+      {
+        "color": "plain",
+        "hexes": [
+          "B5",
+          "B7",
+          "B9",
+          "C8",
+          "C10",
+          "D1",
+          "D7",
+          "D13",
+          "E2",
+          "E4",
+          "E12",
+          "F3",
+          "F5",
+          "G2",
+          "G8",
           "G10",
-          "H3",
-          "H5",
+          "G12",
           "H7",
           "H9",
-          "I2",
+          "H11",
+          "H13",
+          "I4",
+          "I6",
           "I8",
+          "I10",
           "I12",
           "J3",
           "J5",
           "J7",
-          "J11",
           "J13",
-          "M12",
-          "N13",
-          "O10",
-          "O12"
+          "K4",
+          "K6",
+          "K10",
+          "K14",
+          "L3",
+          "L9",
+          "L13",
+          "M4",
+          "M6",
+          "N7"
         ]
       }
     ]

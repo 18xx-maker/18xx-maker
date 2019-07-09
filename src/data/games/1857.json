@@ -322,7 +322,7 @@
       "name": "Saint Barbara Mining Company",
       "price": "$40",
       "revenue": "$10",
-      "description": "The owning corporation doubles their revenue at Cordoba (D11) once per run. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
+      "description": "The owning corporation doubles their revenue at Cordoba (D11) for ONE run to or through Cordoba. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
       "name": "Saint Zolius Land Company",
@@ -331,7 +331,7 @@
       "description": "The owning corporation may place one token at no cost, this action closes the company. This must follow normal placement rules. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
-      "name": "Saint Dominic Road Company",
+      "name": "Saint Dominic de la Calzada Company",
       "price": "$40",
       "revenue": "$10",
       "description": "The owning corporation may lay or upgrade one track in addition to their normal track action, this action closes the company. Closes when the first 5 Train is purchased."
@@ -560,7 +560,7 @@
           "label": "60",
           "legend": 0
         },
-        66,
+        67,
         71,
         {
           "label": "76",
@@ -641,7 +641,7 @@
           "legend": 0
         },
         63,
-        67,
+        66,
         69,
         {
           "label": "70",
@@ -666,7 +666,7 @@
           "label": "60",
           "legend": 0
         },
-        67,
+        65,
         {
           "label": "68",
           "arrow": "up"

@@ -5,7 +5,7 @@
     "designer": "Thomas Lehmann",
     "background": "orange",
     "extraTokens": 2,
-    "extraHomeTokens": 1,
+    "extraHomeTokens": 3,
     "currency": "USD"
   },
   "links": {
@@ -292,7 +292,7 @@
     },
     {
       "name": "4/6",
-      "quantity": 6,
+      "quantity": 5,
       "price": "$450",
       "color": "brown",
       "info": [
@@ -304,7 +304,7 @@
     },
     {
       "name": "5",
-      "quantity": 6,
+      "quantity": 5,
       "price": "$500",
       "color": "brown",
       "info": [
@@ -351,6 +351,12 @@
       "description": "Starts with $60 in treasury, a 2 train, and a token in Indianapolis (G9). Splits revenue evenly with owner."
     },
     {
+      "name": "Chicago and Western Indiana",
+      "price": "$60",
+      "revenue": "$10",
+      "description": "Reserves a token slot in Chicago (D6), in which the owning corporation may place an extra token at no cost."
+    },
+    {
       "name": "Mail Contract",
       "price": "$80",
       "revenue": "$0",
@@ -373,12 +379,6 @@
       "price": "$40",
       "revenue": "$10",
       "description": "Place or shift the port marker among port locations (B8, C5, D14, G19, I1). Add $20 per port symbol to all routes run to this location by the owning (or assigned) company."
-    },
-    {
-      "name": "Chicago and Western Indiana",
-      "price": "$60",
-      "revenue": "$10",
-      "description": "Reserves a token slot in Chicago (D6), in which the owning corporation may place an extra token at no cost."
     },
     {
       "name": "Lake Shore Line",
