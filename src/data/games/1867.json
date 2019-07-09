@@ -341,7 +341,7 @@
     {
       "name": "Chesapeake and Ohio Railway",
       "abbrev": "C&O",
-      "color": "blue",
+      "color": "cyan",
       "tokens": [
         "Free",
         "$20/hex",
@@ -409,7 +409,7 @@
     },
     {
       "name": "Intercolonial Railway",
-      "abbrev": "CNR",
+      "abbrev": "ICR",
       "color": "yellow",
       "tokens": [
         "Free",
@@ -477,10 +477,11 @@
       ]
     },
     {
-      "name": "Canadian National Railway",
+      "name": "Canadian National",
       "abbrev": "CN",
       "color": "white",
       "tokens": ["", "", "", "", "", "", "", ""],
+      "token": { "colors": [ "white", "red"] },
       "shares": []
     },
     {
@@ -488,6 +489,7 @@
       "minor": true,
       "abbrev": "BBG",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "red", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -495,6 +497,7 @@
       "minor": true,
       "abbrev": "BO",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "red", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -502,6 +505,7 @@
       "minor": true,
       "abbrev": "CS",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "yellow", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -509,6 +513,7 @@
       "minor": true,
       "abbrev": "CV",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "purple", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -516,6 +521,7 @@
       "minor": true,
       "abbrev": "KP",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "white", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -523,6 +529,7 @@
       "minor": true,
       "abbrev": "LPS",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "blue", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -530,6 +537,7 @@
       "minor": true,
       "abbrev": "OP",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "lime", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -537,6 +545,7 @@
       "minor": true,
       "abbrev": "SLA",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "brown", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -544,6 +553,7 @@
       "minor": true,
       "abbrev": "TGB",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "gray", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -551,6 +561,7 @@
       "minor": true,
       "abbrev": "TN",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "orange", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -558,6 +569,7 @@
       "minor": true,
       "abbrev": "TN",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "orange", "green" ] },
       "color": "green"
     },
     {
@@ -565,6 +577,7 @@
       "minor": true,
       "abbrev": "CA",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "green", "green" ] },
       "color": "green"
     },
     {
@@ -572,6 +585,7 @@
       "minor": true,
       "abbrev": "NYO",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "cyan", "green" ] },
       "color": "green"
     },
     {
@@ -579,6 +593,7 @@
       "minor": true,
       "abbrev": "PM",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "blue", "green" ] },
       "color": "green"
     },
     {
@@ -586,6 +601,7 @@
       "minor": true,
       "abbrev": "QLS",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "brown", "green" ] },
       "color": "green"
     },
     {
@@ -593,6 +609,7 @@
       "minor": true,
       "abbrev": "THB",
       "tokens": [ "" ],
+      "token": { "type": "bar", "colors": [ "black", "green" ] },
       "color": "green"
     }
   ],
