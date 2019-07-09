@@ -481,7 +481,7 @@
       "abbrev": "CN",
       "color": "white",
       "tokens": ["", "", "", "", "", "", "", ""],
-      "token": { "colors": ["white", "red" ] },
+      "token": { "colors": [ "white", "red"] },
       "shares": []
     },
     {
@@ -489,7 +489,7 @@
       "minor": true,
       "abbrev": "BBG",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["red", "yellow" ] },
+      "token": { "type": "bar", "colors": [ "red", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -497,7 +497,7 @@
       "minor": true,
       "abbrev": "BO",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["red", "yellow" ] },
+      "token": { "type": "bar", "colors": [ "red", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -505,7 +505,7 @@
       "minor": true,
       "abbrev": "CS",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["yellow", "yellow" ] },
+      "token": { "type": "bar", "colors": [ "yellow", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -513,7 +513,7 @@
       "minor": true,
       "abbrev": "CV",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["purple", "yellow" ] },
+      "token": { "type": "bar", "colors": [ "purple", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -521,7 +521,7 @@
       "minor": true,
       "abbrev": "KP",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["white", "yellow" ] },
+      "token": { "type": "bar", "colors": [ "white", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -529,7 +529,7 @@
       "minor": true,
       "abbrev": "LPS",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["blue", "yellow" ] },
+      "token": { "type": "bar", "colors": [ "blue", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -537,7 +537,7 @@
       "minor": true,
       "abbrev": "OP",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["lime", "yellow" ] },
+      "token": { "type": "bar", "colors": [ "lime", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -545,7 +545,7 @@
       "minor": true,
       "abbrev": "SLA",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["brown", "yellow" ] },
+      "token": { "type": "bar", "colors": [ "brown", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -553,7 +553,7 @@
       "minor": true,
       "abbrev": "TGB",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["gray", "yellow" ] },
+      "token": { "type": "bar", "colors": [ "gray", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -561,7 +561,7 @@
       "minor": true,
       "abbrev": "TN",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["orange", "yellow" ] },
+      "token": { "type": "bar", "colors": [ "orange", "yellow" ] },
       "color": "yellow"
     },
     {
@@ -569,7 +569,7 @@
       "minor": true,
       "abbrev": "TN",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["orange", "green" ] },
+      "token": { "type": "bar", "colors": [ "orange", "green" ] },
       "color": "green"
     },
     {
@@ -577,7 +577,7 @@
       "minor": true,
       "abbrev": "CA",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["green", "green" ] },
+      "token": { "type": "bar", "colors": [ "green", "green" ] },
       "color": "green"
     },
     {
@@ -585,7 +585,7 @@
       "minor": true,
       "abbrev": "NYO",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["cyan", "green" ] },
+      "token": { "type": "bar", "colors": [ "cyan", "green" ] },
       "color": "green"
     },
     {
@@ -593,7 +593,7 @@
       "minor": true,
       "abbrev": "PM",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["blue", "green" ] },
+      "token": { "type": "bar", "colors": [ "blue", "green" ] },
       "color": "green"
     },
     {
@@ -601,7 +601,7 @@
       "minor": true,
       "abbrev": "QLS",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["brown", "green" ] },
+      "token": { "type": "bar", "colors": [ "brown", "green" ] },
       "color": "green"
     },
     {
@@ -609,7 +609,7 @@
       "minor": true,
       "abbrev": "THB",
       "tokens": [ "" ],
-      "token": { "type": "bar", "colors": ["black", "green" ] },
+      "token": { "type": "bar", "colors": [ "black", "green" ] },
       "color": "green"
     }
   ],
