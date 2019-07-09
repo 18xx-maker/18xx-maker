@@ -2,6 +2,7 @@ import { HEX_RATIO } from "../map/util";
 
 export const getTileSheetContext = (layout, paper, hexWidth) => {
   let c = { layout, paper, hexWidth };
+  let bleedExtraHeight = 20;
 
   // Usable Height and Width on the chosen paper
   c.pageWidth = paper.width - (paper.margins * 2);
@@ -9,7 +10,7 @@ export const getTileSheetContext = (layout, paper, hexWidth) => {
 
   // The height of a tile
   c.height = hexWidth;
-  c.bleedHeight = hexWidth + 20;
+  c.bleedHeight = hexWidth + bleedExtraHeight;
 
   // The width of a tile
   c.width = c.height * HEX_RATIO * 2;
@@ -39,7 +40,7 @@ export const getTileSheetContext = (layout, paper, hexWidth) => {
 
     // Extra space around the page
     c.extraX = (c.pageWidth - (c.perRow * c.width) - ((c.perRow - 1) * 25)) / 2;
-    c.extraY = 25 + 37.5; // Half inch above the pins, rest below
+    c.extraY = 25 + 37.5 - (bleedExtraHeight / 2); // Half inch above the pins, rest below
 
     // Functions to get coordinates
     c.getX = n => (c.width / 2) + c.extraX + (c.getXindex(n) * c.tileOffsetX);
