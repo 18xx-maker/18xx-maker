@@ -657,33 +657,38 @@
   "privates": [
     {
       "name": "Champlain & St. Lawrence",
-      "price": "Min Bid $20",
+      "price": "Face: $30",
       "revenue": "$10",
-      "description": "Face Value $30"
+      "bid": "$20",
+      "description": ""
     },
     {
       "name": "Niagara Falls Bridge",
-      "price": "Min Bid $30",
+      "price": "Face: $45",
       "revenue": "$15",
-      "description": "Face Value $45, +10 Buffalo"
+      "bid": "$30",
+      "description": "+10 Buffalo"
     },
     {
       "name": "Montreal Bridge",
-      "price": "Min Bid $40",
+      "price": "Face: $60",
       "revenue": "$20",
-      "description": "Face Value $60, +10 Montreal"
+      "bid": "$40",
+      "description": "+10 Montreal"
     },
     {
       "name": "Quebec Bridge",
-      "price": "Min Bid $50",
+      "price": "Face: $75",
       "revenue": "$25",
-      "description": "Face Value $75, +10 Quebec"
+      "bid": "$50",
+      "description": "+10 Quebec"
     },
     {
       "name": "St. Clair Tunnel",
-      "price": "Min Bid $60",
+      "price": "Face: $90",
       "revenue": "$30",
-      "description": "Face Value $90, +10 Detroit"
+      "bid": "$60",
+      "description": "+10 Detroit"
     }
   ],
   "tiles": {
