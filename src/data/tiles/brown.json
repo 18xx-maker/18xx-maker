@@ -4556,5 +4556,53 @@
         "side": 6
       }
     ]
+  },
+  "22X9": {
+    "color": "brown",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 0
+      }
+    ],
+    "names": [
+      {
+        "name": "£100",
+        "angle": 150,
+        "percent": 0.75
+      }
+    ],
+    "labels": [
+      {
+        "label": "EC",
+        "angle": 45,
+        "percent": 0.65
+      }
+    ],
+    "cities": [
+      {
+        "size": 2,
+        "rotate": 30
+      }
+    ],
+    "track": [
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 6,
+        "x": 3.5,
+        "y": -6.06217782649
+      },
+      {
+        "side": 6,
+        "x": -3.5,
+        "y": 6.06217782649
+      }
+    ]
   }
 }

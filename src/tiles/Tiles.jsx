@@ -18,7 +18,8 @@ const Tiles = ({color}) => {
 
   let tileNodes = R.map(id => {
     return (
-      <Svg width="200"
+      <Svg key={id}
+           width="200"
            height="200"
            viewBox="-100 -100 200 200"
            transform="rotate(-90)">
