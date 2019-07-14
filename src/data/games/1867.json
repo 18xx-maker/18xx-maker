@@ -477,14 +477,6 @@
       ]
     },
     {
-      "name": "Canadian National",
-      "abbrev": "CN",
-      "color": "white",
-      "tokens": ["", "", "", "", "", "", "", ""],
-      "token": { "colors": [ "white", "red"] },
-      "shares": []
-    },
-    {
       "name": "Buffalo, Brantford, and Goderich",
       "minor": true,
       "abbrev": "BBG",
@@ -611,12 +603,21 @@
       "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "black", "green" ] },
       "color": "green"
+    },
+    {
+      "name": "Canadian National",
+      "abbrev": "CN",
+      "color": "white",
+      "tokens": ["", "", "", "", "", "", "", ""],
+      "token": { "colors": [ "white", "red"] },
+      "shares": []
     }
   ],
   "phases": [
     {
       "name": "3",
       "limit": "4",
+      "price": "$225",
       "number": "7",
       "tiles": "green",
       "notes": "May purchase privates"
@@ -625,6 +626,7 @@
       "name": "4",
       "rust": "2",
       "limit": "3",
+      "price": "$350",
       "number": "4",
       "tiles": "green",
       "notes": "Public companies may be started"
@@ -632,6 +634,7 @@
     {
       "name": "5",
       "limit": "3",
+      "price": "$550",
       "number": "4",
       "tiles": "brown",
       "notes": "Remove unstarted Minor Companies"
@@ -639,6 +642,7 @@
     {
       "name": "6",
       "limit": "2",
+      "price": "$650",
       "number": "2",
       "rust": "3",
       "tiles": "brown",
@@ -647,12 +651,14 @@
     {
       "name": "7",
       "limit": "2",
+      "price": "$800",
       "number": "2",
       "tiles": "gray"
     },
     {
       "name": "8",
       "limit": "2",
+      "price": "$1000",
       "number": "∞",
       "rust": "4",
       "tiles": "gray",
@@ -661,14 +667,75 @@
     {
       "name": "2+2",
       "limit": "2",
+      "price": "$800",
       "number": "∞",
       "tiles": "gray"
     },
     {
       "name": "5+5E",
       "limit": "2",
+      "price": "$1500",
       "number": "∞",
       "tiles": "gray"
+    }
+  ],
+  "minorPhases": [
+    {
+      "name": "2",
+      "limit": "2",
+      "price": "$100",
+      "number": "10",
+      "tiles": "yellow"
+    },
+    {
+      "name": "3",
+      "limit": "2",
+      "price": "$225",
+      "number": "7",
+      "tiles": "green",
+      "notes": "May purchase privates"
+    },
+    {
+      "name": "4",
+      "rust": "2",
+      "limit": "1",
+      "price": "$350",
+      "number": "4",
+      "tiles": "green",
+      "notes": "Public companies may be started"
+    },
+    {
+      "name": "5",
+      "limit": "1",
+      "price": "$550",
+      "number": "4",
+      "tiles": "brown",
+      "notes": "Remove unstarted Minor Companies"
+    },
+    {
+      "name": "6",
+      "limit": "1",
+      "price": "$650",
+      "number": "2",
+      "rust": "3",
+      "tiles": "brown",
+      "notes": "Remaining Private Companies are nationalized"
+    },
+    {
+      "name": "7",
+      "limit": "1",
+      "price": "$800",
+      "number": "2",
+      "tiles": "gray"
+    },
+    {
+      "name": "8",
+      "limit": "2",
+      "price": "$1000",
+      "number": "∞",
+      "rust": "4",
+      "tiles": "gray",
+      "notes": "Remaining Minor Companies are nationalized"
     }
   ],
   "privates": [
