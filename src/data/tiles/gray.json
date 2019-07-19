@@ -1495,5 +1495,394 @@
         "side": 6
       }
     ]
+  },
+  "CLE8": {
+    "color": "gray",
+    "values": [
+      {
+        "angle": 150,
+        "percent": 0.667,
+        "value": 20
+      }
+    ],
+    "centerTowns": [
+      {}
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "CLE9": {
+    "color": "gray",
+    "values": [
+      {
+        "angle": 120,
+        "percent": 0.667,
+        "value": 20
+      }
+    ],
+    "centerTowns": [
+      {}
+    ],
+    "track": [
+      {
+        "side": 2
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "CLE10": {
+    "color": "gray",
+    "values": [
+      {
+        "angle": 60,
+        "percent": 0.667,
+        "value": 20
+      }
+    ],
+    "centerTowns": [
+      {}
+    ],
+    "track": [
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "CLE11": {
+    "color": "gray",
+    "cities": [
+      {}
+    ],
+    "values": [
+      {
+        "angle": 180,
+        "percent": 0.667,
+        "value": 60
+      }
+    ],
+    "track": [
+      {
+        "type": "city",
+        "side": 2
+      },
+      {
+        "type": "city",
+        "side": 3
+      },
+      {
+        "type": "city",
+        "side": 5
+      },
+      {
+        "type": "city",
+        "side": 6
+      }
+    ]
+  },
+  "CLE12": {
+    "color": "gray",
+    "cities": [
+      {}
+    ],
+    "values": [
+      {
+        "angle": 240,
+        "percent": 0.75,
+        "value": 60
+      }
+    ],
+    "track": [
+      {
+        "type": "city",
+        "side": 2
+      },
+      {
+        "type": "city",
+        "side": 3
+      },
+      {
+        "type": "city",
+        "side": 4
+      },
+      {
+        "type": "city",
+        "side": 6
+      }
+    ]
+  },
+  "CLE13": {
+    "color": "gray",
+    "values": [
+      {
+        "angle": 180,
+        "percent": 0.667,
+        "value": 20
+      }
+    ],
+    "centerTowns": [
+      {}
+    ],
+    "track": [
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "CLE15": {
+    "color": "gray",
+    "cities": [
+      {
+        "size": 3,
+	"companies": [
+	  {
+	    "label": "CMV",
+	    "color": "gray"
+	  }
+	]
+      }
+    ],
+    "labels": [
+      {
+	"label": "The Flats",
+	"angle": 210,
+	"percent": 0.9,
+	"size": 8
+      }
+    ],
+    "values": [
+      {
+        "angle": 150,
+        "percent": 0.90,
+        "value": 80
+      }
+    ],
+    "track": [
+      {
+        "type": "city",
+        "side": 1
+      },
+      {
+        "type": "city",
+        "side": 2
+      },
+      {
+        "type": "city",
+        "side": 3
+      },
+      {
+        "type": "city",
+        "side": 4
+      },
+      {
+        "type": "city",
+        "side": 5
+      },
+      {
+        "type": "city",
+        "side": 6
+      }
+    ]
+  },
+  "CLE16": {
+    "color": "gray",
+    "cities": [
+      {
+        "size": 3,
+	"companies": [
+	  {
+	    "label": "RTA",
+	    "color": "red"
+	  }
+	]
+      }
+    ],
+    "labels": [
+      {
+	"label": "Hopkins",
+	"angle": 210,
+	"percent": 0.9,
+	"size": 8
+      }
+    ],
+    "values": [
+      {
+        "angle": 150,
+        "percent": 0.90,
+        "value": 80
+      }
+    ],
+    "track": [
+      {
+        "type": "city",
+        "side": 1
+      },
+      {
+        "type": "city",
+        "side": 2
+      },
+      {
+        "type": "city",
+        "side": 3
+      },
+      {
+        "type": "city",
+        "side": 4
+      },
+      {
+        "type": "city",
+        "side": 5
+      },
+      {
+        "type": "city",
+        "side": 6
+      }
+    ]
+  },
+  "CLE17": {
+    "color": "gray",
+    "labels": [
+      {
+        "label": "Union Depot",
+        "angle": 0,
+        "percent": 0.5
+      }
+    ],
+    "track": [
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ],
+    "values": [
+      {
+        "angle": 80,
+        "percent": 0.667,
+        "value": 40
+      }
+    ],
+    "centerTowns": [
+      {}
+    ]
+  },
+  "51CLE": {
+    "color": "gray",
+    "cities": [
+      {
+        "size": 2
+      }
+    ],
+    "values": [
+      {
+        "angle": 150,
+        "percent": 0.75,
+        "value": 50
+      }
+    ],
+    "track": [
+      {
+        "type": "city",
+        "side": 1
+      },
+      {
+        "type": "city",
+        "side": 2
+      },
+      {
+        "type": "city",
+        "side": 3
+      },
+      {
+        "type": "city",
+        "side": 4
+      },
+      {
+        "type": "city",
+        "side": 5
+      },
+      {
+        "type": "city",
+        "side": 6
+      }
+    ]
+  },
+  "OE34": {
+    "color": "gray",
+    "cities": [
+      {}
+    ],
+    "values": [
+      {
+        "angle": 300,
+        "percent": 0.667,
+        "value": 60
+      }
+    ],
+    "track": [
+      {
+        "type": "city",
+        "side": 2
+      },
+      {
+        "type": "city",
+        "side": 3
+      },
+      {
+        "type": "city",
+        "side": 4
+      },
+      {
+        "type": "city",
+        "side": 5
+      }
+    ]
   }
 }

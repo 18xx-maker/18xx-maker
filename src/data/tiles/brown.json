@@ -4604,5 +4604,117 @@
         "y": 6.06217782649
       }
     ]
+  },
+  "CLE4": {
+    "color": "brown",
+    "track": [
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ],
+    "values": [
+      {
+        "angle": 180,
+        "percent": 0.75,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ]
+  },
+  "CLE5": {
+    "color": "brown",
+    "track": [
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ],
+    "values": [
+      {
+        "angle": 300,
+        "percent": 0.75,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ]
+  },
+  "CLE6": {
+    "color": "brown",
+    "track": [
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 6
+      }
+    ],
+    "values": [
+      {
+        "angle": 240,
+        "percent": 0.75,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {}
+    ]
+  },
+  "CLE7": {
+    "color": "brown",
+    "labels": [
+      {
+        "label": "Union Depot",
+        "angle": 0,
+        "percent": 0.5
+      }
+    ],
+    "track": [
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ],
+    "values": [
+      {
+        "angle": 80,
+        "percent": 0.667,
+        "value": 20
+      }
+    ],
+    "centerTowns": [
+      {}
+    ]
   }
 }

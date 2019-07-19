@@ -5289,5 +5289,299 @@
         "side": 3
       }
     ]
+  },
+  "20CLE": {
+    "color": "green",
+    "track": [
+      {
+        "side": 3
+      },	  
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ],
+    "values": [
+      {
+        "angle": 60,
+        "percent": 0.667,
+        "value": 20
+      }
+    ],
+    "centerTowns": [
+      {}
+    ]
+  },
+  "44CLE": {
+    "color": "green",
+    "track": [
+      {
+        "type": "straight",
+        "side": 1,
+	"cross": "over"
+	  
+      },
+      {
+        "type": "straight",
+        "side": 3,
+	"cross": "under"  
+      },
+      {
+        "type": "sharp",
+        "side": 3
+      },
+      {
+        "type": "sharp",
+        "side": 6
+      }
+    ]
+  },
+  "47CLE": {
+    "color": "green",
+    "track": [
+      {
+        "type": "straight",
+        "side": 2,
+	"cross": "under"
+	  
+      },
+      {
+        "type": "straight",
+        "side": 3,
+	"cross": "over"  
+      },
+      {
+        "type": "gentle",
+        "side": 3
+      },
+      {
+        "type": "gentle",
+        "side": 6
+      }
+    ]
+  },
+  "80CLE": {
+    "color": "green",
+    "track": [
+      {
+        "type": "gentle",
+        "side": 3
+      },
+      {
+        "type": "sharp",
+        "side": 3
+      },
+      {
+        "type": "sharp",
+        "side": 4
+      }
+    ]
+  },
+  "81CLE": {
+    "color": "green",
+    "track": [
+      {
+        "type": "gentle",
+        "side": 1
+      },
+      {
+        "type": "gentle",
+        "side": 3
+      },
+      {
+        "type": "gentle",
+        "side": 5
+      }
+    ]
+  },
+  "82CLE": {
+    "color": "green",
+    "track": [
+      {
+        "type": "sharp",
+        "side": 1
+      },
+      {
+        "type": "gentle",
+        "side": 2
+      },
+      {
+        "type": "straight",
+        "side": 4
+      }
+    ]
+  },
+  "83CLE": {
+    "color": "green",
+    "track": [
+      {
+        "type": "gentle",
+        "side": 1
+      },
+      {
+        "type": "sharp",
+        "side": 3
+      },
+      {
+        "type": "straight",
+        "side": 4
+      }
+    ]
+  },
+  "185CLE": {
+    "color": "green",
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      }
+    ],
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 40
+      }
+    ],
+    "cities": [
+      {
+        "size": 2
+      }
+    ]
+  },
+  "186CLE": {
+    "color": "green",
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ],
+    "values": [
+      {
+        "angle": 150,
+        "percent": 0.75,
+        "value": 40
+      }
+    ],
+    "cities": [
+      {
+        "size": 2
+      }
+    ]
+  },
+  "187CLE": {
+    "color": "green",
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 5
+      }
+    ],
+    "values": [
+      {
+        "angle": 180,
+        "percent": 0.75,
+        "value": 40
+      }
+    ],
+    "cities": [
+      {
+        "size": 2
+      }
+    ]
+  },
+  "758CLE": {
+    "color": "green",
+    "labels": [
+      {
+        "label": "Union Depot",
+        "angle": 0,
+        "percent": 0.5
+      }
+    ],
+    "track": [
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ],
+    "values": [
+      {
+        "angle": 120,
+        "percent": 0.667,
+        "value": 50
+      }
+    ],
+    "cities": [
+      {}
+    ]
+  },
+  "CLE1": {
+    "color": "green",
+    "track": [
+      {
+        "side": 2
+      },	  
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ],
+    "values": [
+      {
+        "angle": 120,
+        "percent": 0.667,
+        "value": 20
+      }
+    ],
+    "centerTowns": [
+      {}
+    ]
+  },
+  "CLE2": {
+    "color": "green",
+    "track": [
+      {
+        "side": 3
+      },	  
+      {
+        "side": 4
+      },
+      {
+        "side": 6
+      }
+    ],
+    "values": [
+      {
+        "angle": 240,
+        "percent": 0.667,
+        "value": 20
+      }
+    ],
+    "centerTowns": [
+      {}
+    ]
   }
 }
