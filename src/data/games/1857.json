@@ -342,12 +342,14 @@
       "name": "2",
       "limit": "4",
       "number": "5",
+      "price": "$80",
       "tiles": "yellow"
     },
     {
       "name": "3",
       "limit": "4",
       "number": "4",
+      "price": "$180",
       "tiles": "green",
       "notes": "Private companies may be purchased"
     },
@@ -355,6 +357,7 @@
       "name": "4",
       "rust": "2",
       "limit": "3",
+      "price": "$300",
       "number": "3",
       "tiles": "green"
     },
@@ -362,6 +365,7 @@
       "name": "5",
       "limit": "2",
       "number": "2",
+      "price": "$450",
       "tiles": "brown",
       "notes": "Private companies are closed"
     },
@@ -369,6 +373,7 @@
       "name": "6",
       "limit": "2",
       "number": "2",
+      "price": "$630",
       "rust": "3",
       "tiles": "brown",
       "notes": "D Trains may be purchased"
@@ -377,6 +382,7 @@
       "name": "D",
       "limit": "2",
       "number": "∞",
+      "price": "$1100",
       "rust": "4",
       "tiles": "brown"
     }
