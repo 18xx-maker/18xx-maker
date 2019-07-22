@@ -43,7 +43,7 @@ export const getTileSheetContext = (layout, paper, hexWidth) => {
 
     // Functions to get coordinates
     c.getX = n => (c.width / 2) + c.extraX + (c.getXindex(n) * c.tileOffsetX);
-    c.getY = n => (c.bleedHeight / 2) + c.extraY + (c.getYindex(n) * c.tileOffsetY);
+    c.getY = n => (c.height / 2) + c.extraY + (c.getYindex(n) * c.tileOffsetY);
     break;
   case "individual":
     c.perRow = Math.floor((c.pageWidth + 12.5) / (c.width + 12.5));
