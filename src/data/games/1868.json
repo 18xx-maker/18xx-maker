@@ -254,7 +254,7 @@
     },
     {
       "name": "North Western of Uruguay Railway",
-      "price": "60",
+      "price": "$60",
       "revenue": "$15",
       "description": "Owning corporation may place a station token in Tucarembo (E9) or Melo (G15), paying all costs, if there are no existing tokens in the hex. This action applies to the one token placement limit per operating round. This action immediately closes the Private."
     },
