@@ -30,7 +30,11 @@ const atoms = [{
   group: "Values",
   examples: [{values: [{value: 20}]},
              {values: [{value: 60}]},
-             {values: [{value: 120}]}]
+             {values: [{
+              "outerBorderColor": "green",
+              "value": 120
+             }]}
+            ]
 },{
   group: "Names",
   examples: [{names: [{name:"Boston"}]},

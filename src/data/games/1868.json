@@ -254,9 +254,9 @@
     },
     {
       "name": "North Western of Uruguay Railway",
-      "price": "60",
+      "price": "$60",
       "revenue": "$15",
-      "description": "Owning corporation may place a station token in Tucarembo (H14) or Melo (F7), paying all costs, if there are no existing tokens in the hex. This action applies to the one token placement limit per operating round. This action immediately closes the Private."
+      "description": "Owning corporation may place a station token in Tucarembo (E9) or Melo (G15), paying all costs, if there are no existing tokens in the hex. This action applies to the one token placement limit per operating round. This action immediately closes the Private."
     },
     {
       "name": "Uruguay Northern Railway",
@@ -274,7 +274,7 @@
       "name": "Frey Bentos Corned Beef",
       "price": "$120",
       "revenue": "$30",
-      "description": "Owning corporation receives an additional $20 bonus income for one run to Mercedes/Fray Bentos (D1) every operating round. After purchase of first 5 train, this Private closes but $20 bonus run income remains with owning corporation."
+      "description": "Owning corporation receives an additional $20 bonus income for one run to Mercedes/Fray Bentos (I3) every operating round. After purchase of first 5 train, this Private closes but $20 bonus run income remains with owning corporation."
     }
   ],
   "phases": [
@@ -282,12 +282,14 @@
       "name": "2",
       "limit": "4",
       "number": "6",
+      "price": "$80",
       "tiles": "yellow"
     },
     {
       "name": "3",
       "limit": "4",
       "number": "5",
+      "price": "$180",
       "tiles": "green",
       "notes": "Private companies may be purchased"
     },
@@ -296,12 +298,14 @@
       "rust": "2",
       "limit": "3",
       "number": "4",
+      "price": "$300",
       "tiles": "green"
     },
     {
       "name": "5",
       "limit": "2",
       "number": "3",
+      "price": "$450",
       "tiles": "brown",
       "notes": "Private companies are closed"
     },
@@ -310,6 +314,7 @@
       "limit": "2",
       "number": "2",
       "rust": "3",
+      "price": "$630",
       "tiles": "brown",
       "notes": "D Trains may be purchased"
     },
@@ -317,6 +322,7 @@
       "name": "D",
       "limit": "2",
       "number": "6",
+      "price": "$1100",
       "rust": "4",
       "tiles": "brown"
     }
