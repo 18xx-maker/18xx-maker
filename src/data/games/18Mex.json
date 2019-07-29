@@ -37,6 +37,27 @@
   ],
   "companies": [
     {
+      "name": "Interoceanic Railroad",
+      "abbrev": "A",
+      "tokens": [
+      ],
+      "color": "green"
+    },
+    {
+      "name": "Sonora-Baja Railway",
+      "abbrev": "B",
+      "tokens": [
+      ],
+      "color": "green"
+    },
+    {
+      "name": "Southeastern Railway",
+      "abbrev": "C",
+      "tokens": [
+      ],
+      "color": "purple"
+    },
+    {
       "name": "Chihuahua Pacific Railway",
       "abbrev": "CHI",
       "tokens": [

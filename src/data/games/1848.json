@@ -42,6 +42,20 @@
     }
   ],
   "companies": [
+      {
+      "name": "Bank of England",
+      "abbrev": "BOE",
+      "tokens": [
+      ],
+      "color": "blue",
+      "shares": [
+        {
+          "quantity": 10,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
     {
       "name": "Central Australian Railway",
       "abbrev": "CAR",
@@ -1606,14 +1620,14 @@
             "angle": 90,
             "percent": 0.5,
             "name": {
-              "name": "Bendigo"
+              "name": "Ballarat"
             }
           },
           {
             "angle": 270,
             "percent": 0.5,
             "name": {
-              "name": "Ballarat"
+              "name": "Bendigo"
             }
           }
         ],

@@ -40,7 +40,7 @@
   ],
   "companies": [
     {
-      "name": "Pennsylvania",
+      "name": "Pennsylvania Railroad",
       "abbrev": "PRR",
       "tokens": [
         "Free",
@@ -64,7 +64,7 @@
       ]
     },
     {
-      "name": "New York Central",
+      "name": "New York Central Railroad",
       "abbrev": "NYC",
       "tokens": [
         "Free",
@@ -88,7 +88,7 @@
       ]
     },
     {
-      "name": "Canadian Pacific",
+      "name": "Canadian Pacific Railroad",
       "abbrev": "CPR",
       "tokens": [
         "Free",
@@ -112,7 +112,7 @@
       ]
     },
     {
-      "name": "Baltimore & Ohio",
+      "name": "Baltimore & Ohio Railroad",
       "abbrev": "B&O",
       "tokens": [
         "Free",
@@ -135,7 +135,7 @@
       ]
     },
     {
-      "name": "Chesapeake & Ohio",
+      "name": "Chesapeake & Ohio Railroad",
       "abbrev": "C&O",
       "tokens": [
         "Free",
@@ -158,7 +158,7 @@
       ]
     },
     {
-      "name": "Erie",
+      "name": "Erie Railroad",
       "abbrev": "ERIE",
       "tokens": [
         "Free",
@@ -181,7 +181,7 @@
       ]
     },
     {
-      "name": "New York, New Haven & Hartford",
+      "name": "New York, New Haven & Hartford Railroad",
       "abbrev": "NYNH",
       "tokens": [
         "Free",
@@ -203,13 +203,13 @@
       ]
     },
     {
-      "name": "Boston & Maine",
+      "name": "Boston & Maine Railroad",
       "abbrev": "B&M",
       "tokens": [
         "Free",
         "$40"
       ],
-      "color": "brown",
+      "color": "lime",
       "shares": [
         {
           "quantity": 1,
