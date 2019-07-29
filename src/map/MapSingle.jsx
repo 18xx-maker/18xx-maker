@@ -54,7 +54,7 @@ const MapSingle = ({ match, coords, hexWidth }) => {
       <div className="map">
         <Svg width={data.totalWidth} height={data.totalHeight}>
           <Title game={game} variation={variation} />
-          <Map game={game} variation={variation} />
+          <Map name={match.params.game} game={game} variation={variation} />
         </Svg>
         <style>{`@media print {@page {size: ${data.printWidth} ${data.printHeight};}}`}</style>
       </div>

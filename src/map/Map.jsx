@@ -6,7 +6,7 @@ import Coordinates from "./Coordinates";
 
 import { getMapData, toAlpha, toCoords } from "./util";
 
-const Map = ({ game, coords, variation, hexWidth }) => {
+const Map = ({ name, game, coords, variation, hexWidth }) => {
   let data = getMapData(game, coords, hexWidth, variation);
 
   if (!data.map) {
@@ -21,7 +21,7 @@ const Map = ({ game, coords, variation, hexWidth }) => {
       return (
         <g
           transform={`${translate} ${scale}`}
-          key={`hex-${hex.variation}-${coord}`}
+          key={`hex-${name}-${hex.variation}-${coord}`}
         >
           <Hex hex={hex} border={true} transparent={game.info.transparent}
                map={true} id={coords === "inside" && coord} />

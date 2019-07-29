@@ -664,6 +664,17 @@ svg {
   font-size: 0.18in;
 }
 
+.private__bid {
+  position: absolute;
+  bottom: 0.25in;
+  left: 0;
+  margin: 0.125in;
+  padding: 0.125in;
+  height: 0.25in;
+  line-height: 0.25in;
+  font-size: 0.18in;
+}
+
 .private__players {
   position: absolute;
   bottom: 0.25in;

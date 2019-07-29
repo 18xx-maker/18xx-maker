@@ -229,7 +229,7 @@ const TileSheet = ({ match, paper, layout, hexWidth }) => {
       </div>
       <div className={`tileSheet tileSheet--${layout}`}>
         {pageNodes}
-        <PageSetup paper={{width:850, height:1100, margins:25}}
+        <PageSetup paper={c.paper}
                    landscape={false}/>
       </div>
     </ColorContext.Provider>
