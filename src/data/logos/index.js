@@ -14,7 +14,17 @@ import SP, { ReactComponent as SP_Component } from "./SP.svg";
 import SSW, { ReactComponent as SSW_Component } from "./SSW.svg";
 import TP, { ReactComponent as TP_Component } from "./TP.svg";
 
-
+// 4th Age
+import BPS, { ReactComponent as BPS_Component } from "./BPS.svg";
+import DMH, { ReactComponent as DMH_Component } from "./DMH.svg";
+import E, { ReactComponent as E_Component } from "./E.svg";
+import FHR, { ReactComponent as FHR_Component } from "./FHR.svg";
+import LLM, { ReactComponent as LLM_Component } from "./LLM.svg";
+import MTR, { ReactComponent as MTR_Component } from "./MTR.svg";
+import O, { ReactComponent as O_Component } from "./O.svg";
+import RGH, { ReactComponent as RGH_Component } from "./RGH.svg";
+import SWR, { ReactComponent as SWR_Component } from "./SWR.svg";
+import SER, { ReactComponent as SER_Component } from "./SER.svg";
 
 // 18EU
 import NFL, { ReactComponent as NFL_Component } from "./NFL.svg";
@@ -99,6 +109,18 @@ export default {
   SP : { src: SP, Component: SP_Component },
   SSW : { src: SSW, Component: SSW_Component },
   TP : { src: TP, Component: TP_Component },
+
+  // 4th Age
+  BPS : { src: BPS, Component: BPS_Component },
+  DMH : { src: DMH, Component: DMH_Component },
+  E : { src: E, Component: E_Component },
+  FHR : { src: FHR, Component: FHR_Component },
+  LLM : { src: LLM, Component: LLM_Component },
+  MTR : { src: MTR, Component: MTR_Component },
+  O : { src: O, Component: O_Component },
+  RGH : { src: RGH, Component: RGH_Component },
+  SWR : { src: SWR, Component: SWR_Component },
+  SER : { src: SER, Component: SER_Component },
 
   // 18EU
   NFL: { src: NFL, Component: NFL_Component },
