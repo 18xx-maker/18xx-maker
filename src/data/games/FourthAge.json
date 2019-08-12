@@ -58,7 +58,7 @@
         "100g",
         "100g"
       ],
-      "color": "brown",
+      "color": "blue",
       "shares": [
         {
           "quantity": 1,
@@ -241,7 +241,7 @@
         "Free",
         "$40"
       ],
-      "color": "cyan",
+      "color": "yellow",
       "shares": [
         {
           "quantity": 1,
@@ -1589,10 +1589,7 @@
         "cities": [
           {
             "companies": [
-              {
-                "label": "BPS",
-                "color": "orange"
-              }
+              "BPS"
             ],
             "name": {
               "name": "Bree",
@@ -1764,7 +1761,7 @@
           {
             "label": "SER",
             "width": 15,
-            "color": "cyan",
+            "color": "yellow",
             "angle": 150,
             "percent": 0.7
           },
@@ -1927,10 +1924,7 @@
         "cities": [
           {
             "companies": [
-              {
-                "label": "DMH",
-                "color": "brown"
-              }
+              "DMH"
             ],
             "name": {
               "name": "Moria",
@@ -1948,10 +1942,7 @@
         "cities": [
           {
             "companies": [
-              {
-                "label": "SER",
-                "color": "cyan"
-              }
+              "SER"
             ],
             "name": {
               "name": "Harondor"
@@ -2014,10 +2005,7 @@
         "cities": [
           {
             "companies": [
-              {
-                "label": "MTR",
-                "color": "blue"
-              }
+              "MTR"
             ],
             "name": {
               "name": "Minas Tirith",
@@ -2030,7 +2018,7 @@
           {
             "label": "BPS",
             "width": 15,
-            "color": "orange",
+            "color": "blue",
             "angle": 330,
             "percent": 0.75
           }
@@ -2092,7 +2080,7 @@
           {
             "label": "MTR",
             "width": 15,
-            "color": "blue",
+            "color": "orange",
             "percent": 0.65
           }
         ],
