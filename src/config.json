@@ -22,7 +22,7 @@
   "shareStyle": "gmt",
   "tokenLayout": "gsp",
   "tiles": {
-    "layout": "offset",
+    "layout": "die",
     "width": 150
   },
   "stock": {
