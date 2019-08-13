@@ -5,6 +5,19 @@ import Nav from "./Nav";
 
 import "./docs.scss";
 
+const flatten = (text, child) => {
+  return typeof child === 'string'
+    ? text + child
+    : React.Children.toArray(child.props.children).reduce(flatten, text)
+};
+
+const HeadingRenderer = props => {
+  var children = React.Children.toArray(props.children)
+  var text = children.reduce(flatten, '')
+  var slug = text.toLowerCase().replace(/\W/g, '-')
+  return React.createElement('h' + props.level, {id: slug}, props.children)
+};
+
 const Docs = ({match}) => {
   let id = match.params.id || "index";
 
@@ -24,7 +37,12 @@ const Docs = ({match}) => {
 
   if (redirect) return <Redirect to="/docs"/>;
 
-  return <div className="docs"><Nav/><ReactMarkdown source={source}/></div>;
+  return (
+    <div className="docs">
+      <Nav/>
+      <ReactMarkdown source={source} renderers={{heading: HeadingRenderer}}/>
+    </div>
+  );
 };
 
 export default Docs;

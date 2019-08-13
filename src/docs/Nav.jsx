@@ -9,6 +9,9 @@ const Nav = () => {
           <NavLink exact to="/docs">Documentation Home</NavLink>
         </li>
         <li>
+          <NavLink to="/docs/running">Running Locally</NavLink>
+        </li>
+        <li>
           <NavLink to="/docs/schema">JSON Schemas</NavLink>
         </li>
         <li>
