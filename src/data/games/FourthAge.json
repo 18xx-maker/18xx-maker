@@ -1406,8 +1406,16 @@
           "H22",
           "I21",
           "J22",
-          "K7",
           "P10"
+        ]
+      },
+      {
+        "color": "river",
+        "water": {
+          "cost": "60g"
+        },
+        "hexes": [
+          "K7"
         ]
       },
       {
@@ -1420,6 +1428,16 @@
         ]
       },
       {
+        "color": "river",
+        "water": {
+          "cost": "80g"
+        },
+        "hexes": [
+          "K11",
+          "K13"
+        ]
+      },
+      {
         "color": "plain",
         "water": {
           "cost": "80g"
@@ -1428,9 +1446,7 @@
           "C1",
           "C9",
           "D10",
-          "E15",
-          "K11",
-          "K13"
+          "E15"
         ]
       },
       {
@@ -1518,7 +1534,15 @@
         "hexes": [
           "D18",
           "E17",
-          "F22",
+          "F22"
+        ]
+      },
+      {
+        "color": "river",
+        "water": {
+          "cost": "100g"
+        },
+        "hexes": [
           "J18"
         ]
       },
@@ -1898,7 +1922,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "water": {
           "cost": "120g"
         },
@@ -1954,7 +1978,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "water": {
           "percent": 0.7,
           "angle": 30,
@@ -1987,7 +2011,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "labels": [
           {
             "percent": 0.67,
@@ -2028,7 +2052,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "water": {
           "size": "small",
           "cost": "$80",

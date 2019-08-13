@@ -152,7 +152,7 @@ const ThemePreview = () => {
         {c => map(color => (
           <div key={color} className="preview" style={{backgroundColor: c(color)}}/>
         ), ["yellow", "green", "brown", "gray",
-            "plain", "offboard", "mountain", "water", "land"])}
+            "plain", "offboard", "mountain", "water", "river", "land"])}
       </Color>
     </div>
   );
