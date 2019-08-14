@@ -93,6 +93,18 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
             {c => (
               <circle
                 fill={c(companyColor(0) || "city")}
+                stroke="none"
+                cx="0"
+                cy="0"
+                r="25"
+              />
+            )}
+          </Color>
+          {companyLabel(0)}
+          <Color context="companies">
+            {c => (
+              <circle
+                fill="none"
                 stroke={c("track")}
                 strokeWidth="2"
                 cx="0"
@@ -101,7 +113,6 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
               />
             )}
           </Color>
-          {companyLabel(0)}
           {nameNode}
         </g>
       );
@@ -138,20 +149,30 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
               <g transform="translate(-25 0)">
                 <circle
                   fill={c(companyColor(0) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {companyLabel(0)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(0)}
               </g>
               <g transform="translate(25 0)">
                 <circle
                   fill={c(companyColor(1) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {companyLabel(1)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(1)}
               </g>
               {nameNode}
             </g>
@@ -189,29 +210,44 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
               <g transform="translate(0 -29)">
                 <circle
                   fill={c(companyColor(0) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {companyLabel(0)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(0)}
               </g>
               <g transform="translate(-25 15)">
                 <circle
                   fill={c(companyColor(1) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {companyLabel(1)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(1)}
               </g>
               <g transform="translate(25 15)">
                 <circle
                   fill={c(companyColor(2) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {companyLabel(2)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(2)}
               </g>
               {nameNode}
             </g>
@@ -249,38 +285,58 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
               <g transform="translate(-25 -25)">
                 <circle
                   fill={c(companyColor(0) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {companyLabel(0)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(0)}
               </g>
               <g transform="translate(25 -25)">
                 <circle
                   fill={c(companyColor(1) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {companyLabel(1)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(1)}
               </g>
               <g transform="translate(25 25)">
                 <circle
                   fill={c(companyColor(3) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {companyLabel(3)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(3)}
               </g>
               <g transform="translate(-25 25)">
                 <circle
                   fill={c(companyColor(2) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {companyLabel(2)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(2)}
               </g>
             </g>
           )}
