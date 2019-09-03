@@ -161,7 +161,8 @@ const atoms = [{
       },{
         color: "brown",
         cost: "40",
-        phase: 5
+        phase: 5,
+        phaseColor: "brown"
       }]
     }
   },{
