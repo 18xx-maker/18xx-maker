@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 import games from "../data/games";
 import Map from "./Map";
 import Svg from "../Svg";
@@ -18,23 +19,24 @@ import prop from "ramda/src/prop";
 
 import "./MapPaginated.css";
 
-const MapPaginated = ({ match, coords, pagination, paper, hexWidth }) => {
-  let game = games[match.params.game];
+const MapPaginated = ({ coords, pagination, paper, hexWidth }) => {
+  let params = useParams();
+  let game = games[params.game];
   let splitPages = pagination === "max" ? maxPages : equalPages;
 
   if (!game.map) {
-    return <Redirect to={`/${match.params.game}/background`} />;
-  } else if (game.info.paginated === false && match.params.variation) {
-    return <Redirect to={`/${match.params.game}/map/${match.params.variation}`} />;
+    return <Redirect to={`/${params.game}/background`} />;
+  } else if (game.info.paginated === false && params.variation) {
+    return <Redirect to={`/${params.game}/map/${params.variation}`} />;
   } else if (game.info.paginated === false) {
-    return <Redirect to={`/${match.params.game}/map`} />;
-  } else if (match.params.variation && !Array.isArray(game.map)) {
-    return <Redirect to={`/${match.params.game}/map-paginated`} />;
-  } else if (!match.params.variation && Array.isArray(game.map)) {
-    return <Redirect to={`/${match.params.game}/map-paginated/0`} />;
+    return <Redirect to={`/${params.game}/map`} />;
+  } else if (params.variation && !Array.isArray(game.map)) {
+    return <Redirect to={`/${params.game}/map-paginated`} />;
+  } else if (!params.variation && Array.isArray(game.map)) {
+    return <Redirect to={`/${params.game}/map-paginated/0`} />;
   }
 
-  let variation = Number(match.params.variation) || 0;
+  let variation = Number(params.variation) || 0;
   let data = getMapData(game, coords, hexWidth, variation);
 
   let pageWidth = printableWidth(paper) - 75;
@@ -86,7 +88,7 @@ const MapPaginated = ({ match, coords, pagination, paper, hexWidth }) => {
   let defs = (
     <g id={`${game.info.abbrev || game.info.title}_map`}>
       <Title game={game} variation={variation} />
-      <Map name={match.params.game} game={game} variation={variation} />
+      <Map name={params.game} game={game} variation={variation} />
     </g>
   );
 
@@ -94,13 +96,13 @@ const MapPaginated = ({ match, coords, pagination, paper, hexWidth }) => {
   if(Array.isArray(game.map)) {
     let variations = map(prop("name"), game.map);
     variationSelect = (
-      <VariationSelect base={`/${match.params.game}/map-paginated/`}
+      <VariationSelect base={`/${params.game}/map-paginated/`}
                        variations={variations} />
     );
   }
 
   return (
-    <GameContext.Provider value={match.params.game}>
+    <GameContext.Provider value={params.game}>
     <HexContext.Provider
       value={{
         width: game.info.width,

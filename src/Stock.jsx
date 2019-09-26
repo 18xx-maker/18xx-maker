@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 
 import { connect } from "react-redux";
 import Market from "./Market";
@@ -15,14 +15,15 @@ import "./Stock.css";
 import { height, width } from "./market-utils";
 import { paperToCssMargins } from "./PageSetup";
 
-const Stock = ({match, cell, paper}) => {
+const Stock = ({cell, paper}) => {
+  let params = useParams();
   let [displayMode, setDisplayMode] = useState("normal");
   let handleDisplayMode = event => setDisplayMode(event.target.value);
 
-  let game = games[match.params.game];
+  let game = games[params.game];
 
   if (!game.stock) {
-    return <Redirect to={`/${match.params.game}/background`} />;
+    return <Redirect to={`/${params.game}/background`} />;
   }
 
   let stock = game.stock;
@@ -40,7 +41,7 @@ const Stock = ({match, cell, paper}) => {
 }`;
 
   return (
-    <GameContext.Provider value={match.params.game}>
+    <GameContext.Provider value={params.game}>
       <SetFont context="stock">
         <div className="PrintNotes">
           <div>

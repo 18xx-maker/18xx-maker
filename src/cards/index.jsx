@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import * as R from "ramda";
 
 import Number from "./Number";
@@ -19,7 +19,8 @@ export const maxPlayers = R.compose(
   R.map(R.prop("number"))
 );
 
-const Cards = ({ match }) => {
+const Cards = () => {
+  let params = useParams();
   let [state, setState] = useState({
     displayPrivates: true,
     displayShares: true,
@@ -35,10 +36,10 @@ const Cards = ({ match }) => {
     setState({...state, [name]: value});
   };
 
-  let game = games[match.params.game];
+  let game = games[params.game];
 
   if (!game.companies && !game.privates && !game.trains) {
-    return <Redirect to={`/${match.params.game}/background`} />;
+    return <Redirect to={`/${params.game}/background`} />;
   }
 
   let companies = state.displayShares ? game.companies || [] : [];
@@ -52,7 +53,7 @@ const Cards = ({ match }) => {
       : [];
 
   return (
-    <GameContext.Provider value={match.params.game}>
+    <GameContext.Provider value={params.game}>
       <div className="PrintNotes">
         <div>
           <label>
@@ -97,7 +98,7 @@ const Cards = ({ match }) => {
       <div className="cards">
         {R.addIndex(R.map)(
           (p, i) => (
-            <Private key={`private-${match.params.game}-${i}`} {...p} />
+            <Private key={`private-${params.game}-${i}`} {...p} />
           ),
           privates
         )}

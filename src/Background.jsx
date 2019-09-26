@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 import { unitsToCss, printableWidth, printableHeight } from "./util";
 import { GetFont, SetFont } from "./context/FontContext";
 import games from "./data/games";
@@ -16,8 +17,9 @@ const cos = Math.cos(radians(30));
 const rotatedWidth = (w, h) => Math.abs(w * cos + h * sin);
 const rotatedHeight = (w, h) => Math.abs(h * cos + w * sin);
 
-const Background = ({ match, paper }) => {
-  let game = games[match.params.game];
+const Background = ({ paper }) => {
+  let params = useParams();
+  let game = games[params.game];
 
   let color = game.info.background;
   let title = game.info.title;

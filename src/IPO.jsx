@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import games from "./data/games";
 import * as R from "ramda";
 import Color from "./data/Color";
@@ -10,8 +11,9 @@ import PageSetup from "./PageSetup";
 
 require("./IPO.css");
 
-const IPO = ({ match }) => {
-  let game = games[match.params.game];
+const IPO = () => {
+  let params = useParams();
+  let game = games[params.game];
   let companies = game.companies;
 
   return (

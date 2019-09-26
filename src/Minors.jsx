@@ -5,8 +5,9 @@ import * as R from "ramda";
 
 import PageSetup from "./PageSetup";
 
-const Minors = ({ match }) => {
-  let game = games[match.params.game];
+const Minors = () => {
+  let params = useParams();
+  let game = games[params.game];
   let minorCompanies = game.minorCompanies;
 
   if(!minorCompanies) {
