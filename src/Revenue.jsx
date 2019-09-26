@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import * as R from "ramda";
 import Color from "./data/Color";
 import games from "./data/games";
@@ -39,8 +40,9 @@ const generateCells = (rows, cols) => {
   return items;
 };
 
-const Revenue = ({ match }) => {
-  let game = games[match.params.game];
+const Revenue = () => {
+  let params = useParams();
+  let game = games[params.game];
 
   let rows = Array.from(Array(5).keys());
   let cols = Array.from(Array(20).keys());

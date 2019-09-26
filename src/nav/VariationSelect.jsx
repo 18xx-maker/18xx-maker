@@ -1,12 +1,14 @@
 import React from "react";
-import {withRouter} from "react-router";
+import {withRouter, useHistory, useParams} from "react-router";
 
 import map from "ramda/src/map";
 import addIndex from "ramda/src/addIndex";
 
-const VariationSelect = ({base, variations, match, history}) => {
+const VariationSelect = ({base, variations}) => {
+  let params = useParams();
+  let history = useHistory();
   let handleChange = e => {
-    if(e.target.value !== match.params.variation) {
+    if(e.target.value !== params.variation) {
       history.push(`${base}${e.target.value}`);
     }
   };
@@ -14,7 +16,7 @@ const VariationSelect = ({base, variations, match, history}) => {
   return (
     <div className="select">
       <h3>Variation</h3>&nbsp;
-      <select value={match.params.variation} onChange={handleChange}>
+      <select value={params.variation} onChange={handleChange}>
         {addIndex(map)((variation, index) => (
           <option key={index} value={index}>{variation}</option>
         ), variations)}

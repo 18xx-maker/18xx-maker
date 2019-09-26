@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import Nav from "./Nav";
 
 import "./docs.scss";
@@ -18,8 +18,9 @@ const HeadingRenderer = props => {
   return React.createElement('h' + props.level, {id: slug}, props.children)
 };
 
-const Docs = ({match}) => {
-  let id = match.params.id || "index";
+const Docs = () => {
+  let params = useParams();
+  let id = params.id || "index";
 
   let doc = null;
   let redirect = false;
@@ -33,7 +34,7 @@ const Docs = ({match}) => {
 
   useEffect(() => {
     if (doc) fetch(doc).then(result => result.text()).then(setSource);
-  }, [doc, match]);
+  }, [doc]);
 
   if (redirect) return <Redirect to="/docs"/>;
 

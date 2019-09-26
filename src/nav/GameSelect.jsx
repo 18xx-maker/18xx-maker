@@ -1,5 +1,5 @@
 import React from "react";
-import {withRouter} from "react-router";
+import {withRouter, useHistory, useLocation, useParams} from "react-router";
 
 import assoc from "ramda/src/assoc";
 import compose from "ramda/src/compose";
@@ -19,8 +19,12 @@ const makeGameNode = game => (
   </option>
 );
 
-const GameSelect = ({match,history,location}) => {
-  let name = match.params.game;
+const GameSelect = () => {
+  let params = useParams();
+  let history = useHistory();
+  let location = useLocation();
+
+  let name = params.game;
   let game = games[name];
   let selection = "map";
   if (game) {
