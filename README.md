@@ -15,8 +15,8 @@ App](https://github.com/facebookincubator/create-react-app).
 
 ## Donation
 
-I've been asked about donation buttons, if you find this software usefull to you
-and would like to donate money towards it's development you can do so via
+I've been asked about donation buttons; if you find this software useful to you
+and would like to donate money towards its development you can do so via
 [paypal](https://paypal.me/kelsin) or [square cash](https://cash.me/$kelsin).
 
 ## Usage

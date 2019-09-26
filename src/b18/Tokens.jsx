@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 import Svg from "../Svg";
 import Token from "../Token";
@@ -18,8 +19,9 @@ import games from "../data/games";
 //   </Svg>
 // );
 
-const Tokens = ({match}) => {
-  let game = games[match.params.game];
+const Tokens = () => {
+  let params = useParams();
+  let game = games[params.game];
 
   let totalHeight = 30 * ((game.companies || []).length +
                           (game.tokens || []).length);

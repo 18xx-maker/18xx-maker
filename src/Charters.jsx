@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import Charter from "./Charter";
 import games from "./data/games";
 import * as R from "ramda";
@@ -7,17 +7,18 @@ import * as R from "ramda";
 import GameContext from "./context/GameContext";
 import PageSetup from "./PageSetup";
 
-const Charters = ({ match }) => {
-  let game = games[match.params.game];
+const Charters = () => {
+  let params = useParams();
+  let game = games[params.game];
 
   if (!game.companies) {
-    return <Redirect to={`/${match.params.game}/background`} />;
+    return <Redirect to={`/${params.game}/background`} />;
   }
 
   let companies = game.companies;
 
   return (
-    <GameContext.Provider value={match.params.game}>
+    <GameContext.Provider value={params.game}>
       <div className="charters">
         <div className="PrintNotes">
           <div>
