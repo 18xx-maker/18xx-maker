@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./TileSheet.scss";
@@ -80,11 +80,12 @@ const pageTiles = (perPage, pages, tiles) => {
   return pageTiles(perPage, append(current, pages), rest);
 };
 
-const TileSheet = ({ match, paper, layout, hexWidth }) => {
-  let game = games[match.params.game];
+const TileSheet = ({ paper, layout, hexWidth }) => {
+  let params = useParams();
+  let game = games[params.game];
 
   if (!game.tiles) {
-    return <Redirect to={`/${match.params.game}/background`} />;
+    return <Redirect to={`/${params.game}/background`} />;
   }
 
   let c = getTileSheetContext(layout, paper, hexWidth);

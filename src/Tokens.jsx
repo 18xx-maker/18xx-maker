@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 
 import Token from "./Token";
 import games from "./data/games";
@@ -290,11 +290,12 @@ const GspTokens = ({ game }) => {
   );
 };
 
-const Tokens = ({ match }) => {
-  let game = games[match.params.game];
+const Tokens = () => {
+  let params = useParams();
+  let game = games[params.game];
 
   if (!game.companies) {
-    return <Redirect to={`/${match.params.game}/background`} />;
+    return <Redirect to={`/${params.game}/background`} />;
   }
 
   return (

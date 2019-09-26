@@ -26,20 +26,32 @@ const App = () => (
       <div className="App">
         <Switch>
           <Route path="/" exact />
-          <Route path="/:game" component={Nav} />
+          <Route path="/:game">
+            <Nav />
+          </Route>
         </Switch>
-
         <Switch>
-          <Route path="/" exact component={Home} />
-
-          <Route path="/cheat" exact component={CheatSheet} />
-          <Route path="/config" exact component={Config} />
-          <Route path="/docs/:id?" exact component={Docs} />
-          <Route path="/logos" exact component={Logos} />
-
-          <Route path="/tiles" component={Tiles} />
-
-          <Route path="/:game" component={Game} />
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/cheat" exact>
+            <CheatSheet />
+          </Route>
+          <Route path="/config" exact>
+            <Config />
+          </Route>
+          <Route path="/docs/:id?" exact>
+            <Docs />
+          </Route>
+          <Route path="/logos" exact>
+            <Logos />
+          </Route>
+          <Route path="/tiles">
+            <Tiles />
+          </Route>
+          <Route path="/:game">
+            <Game />
+          </Route>
         </Switch>
         <svg
           version="1.1"
@@ -251,9 +263,11 @@ const App = () => (
             </Color>
           </defs>
         </svg>
-        <Route exact path="/" component={Footer}/>
+        <Route exact path="/">
+          <Footer />
+        </Route>
       </div>
-      <SetSvgColors/>
+      <SetSvgColors />
     </ScrollToTop>
   </Router>
 );

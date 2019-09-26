@@ -1,6 +1,12 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 
-const About = ({ match }) => <Redirect to={`/${match.params.game}/map`}/>;
+const About = () => {
+    let params = useParams();
+    return (
+        <Redirect to={`/${params.game}/map`}/>
+    );
+};
+
 
 export default About;

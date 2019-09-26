@@ -74,8 +74,8 @@ const Home = () => {
         All tiles for games are available on each game's page.</p>
       <Tiles/>
       <h2>Donations</h2>
-      <p>I've been asked about donation buttons, if you find this software
-        usefull to you and would like to donate money towards it's development
+      <p>I've been asked about donation buttons; if you find this software
+        useful to you and would like to donate money towards its development
         you can do so via <a href="https://paypal.me/kelsin">paypal</a> or <a href="https://cash.me/$kelsin">square cash</a>.</p>
     </div>
   );

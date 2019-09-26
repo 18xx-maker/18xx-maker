@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 
 import { connect } from "react-redux";
 import games from "./data/games";
@@ -16,11 +16,12 @@ import PageSetup from "./PageSetup";
 import GameContext from "./context/GameContext";
 import "./StockPaginated.css";
 
-const StockPaginated = ({ match, cell, pagination, paper }) => {
-  let game = games[match.params.game];
+const StockPaginated = ({ cell, pagination, paper }) => {
+  let params = useParams();
+  let game = games[params.game];
 
   if (!game.stock) {
-    return <Redirect to={`/${match.params.game}/background`} />;
+    return <Redirect to={`/${params.game}/background`} />;
   }
 
   let stock = game.stock;
@@ -107,7 +108,7 @@ const StockPaginated = ({ match, cell, pagination, paper }) => {
   }, splitPages(totalHeight, pageHeight));
 
   return (
-    <GameContext.Provider value={match.params.game}>
+    <GameContext.Provider value={params.game}>
       <div className="PrintNotes">
         <div>
           <p>
