@@ -350,12 +350,12 @@
       "name": "Mexican International Railroad",
       "price": "$100",
       "revenue": "$20",
-      "description": "Comes with a 10% share of Chi."
+      "description": "Comes with a 10% share of the Chihuahua Pacific Railway (CHI)."
     },
     {
       "name": "Mexican National Railroad",
       "price": "$140",
-      "revenue": "$25",
+      "revenue": "$20",
       "description": "Comes with President's Certificate of NdM. Owner must immediately set NdM's par price. Closes when NdM buys a train. May not be sold to a company."
     }
   ],
