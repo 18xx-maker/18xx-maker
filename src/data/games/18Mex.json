@@ -101,7 +101,19 @@
           "shares": 2
         },
         {
-          "quantity": 8,
+          "quantity": 2,
+          "label": "Minor Exchange Share",
+          "percent": 5,
+          "shares": 0.5
+        },
+        {
+          "quantity": 1,
+          "label": "Merger Exchange Share",
+          "percent": 10,
+          "shares": 1
+        },
+        {
+          "quantity": 6,
           "percent": 10,
           "shares": 1
         }
@@ -237,7 +249,13 @@
           "shares": 2
         },
         {
-          "quantity": 8,
+          "quantity": 1,
+          "label": "Minor Exchange Share",
+          "percent": 10,
+          "shares": 1
+        },
+        {
+          "quantity": 7,
           "percent": 10,
           "shares": 1
         }
