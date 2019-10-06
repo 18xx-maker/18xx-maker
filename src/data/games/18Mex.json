@@ -365,7 +365,9 @@
       "train": "2",
       "limit": "-/3/1",
       "number": "6",
-      "tiles": "yellow"
+      "tiles": "yellow",
+      "notes": "Buy only one train from bank.",
+      "price": "$100"
     },
     {
       "phase": "3",
@@ -373,13 +375,14 @@
       "limit": "-/3/1",
       "number": "6",
       "tiles": "green",
-      "notes": "Private companies may be purchased"
+      "notes": "Private companies may be purchased.",
+      "price": "$180"
     },
     {
       "phase": "3.5",
       "limit": "4/3/-",
       "tiles": "green",
-      "notes": "When 5/6 3T's have been sold. Minor companies are closed. NRM stock available."
+      "notes": "When five 3Ts have been sold. Minor companies are closed. NdM stock available."
     },
     {
       "phase": "4",
@@ -387,7 +390,9 @@
       "rust": "2",
       "limit": "3/2/-",
       "number": "3",
-      "tiles": "green"
+      "tiles": "green",
+      "notes": "May buy multiple trains.",
+      "price": "$300"
     },
     {
       "phase": "5",
@@ -395,7 +400,8 @@
       "limit": "3/2/-",
       "number": "2",
       "tiles": "brown",
-      "notes": "Private companies are closed. NRM merges."
+      "notes": "Private companies are closed. NdM merges.",
+      "price": "$450"
     },
     {
       "phase": "6",
@@ -403,21 +409,23 @@
       "limit": "3/2/-",
       "number": "2",
       "rust": "3",
-      "tiles": "brown"
+      "tiles": "brown",
+      "price": "$600"
     },
     {
       "phase": "6.5",
       "limit": "3/2/-",
       "tiles": "brown",
       "rust": "4-O",
-      "notes": "When both 6T's are sold. 4T's become obsolete."
+      "notes": "When both 6Ts are sold. 4Ts become obsolete."
     },
     {
       "phase": "4D",
       "train": "4D",
       "limit": "3/2/-",
       "number": "7",
-      "tiles": "brown"
+      "tiles": "brown",
+      "price": "$700"
     }
   ],
   "pools": [
