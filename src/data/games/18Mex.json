@@ -443,15 +443,15 @@
   ],
   "rounds": [
     {
-      "name": "5",
+      "name": "OR 3",
       "color": "brown"
     },
     {
-      "name": "4",
+      "name": "OR 2",
       "color": "green"
     },
     {
-      "name": "2",
+      "name": "OR 1",
       "color": "yellow"
     },
     {
@@ -728,6 +728,11 @@
         "color": "yellow",
         "description": "Shares of this corporation do not count toward the certificate limit",
         "icon": "certificate"
+      },
+      {
+        "color": "yellow",
+        "description": "Selling half shares of NdM does not affect current market value.",
+        "icon": "info"
       }
     ]
   },
