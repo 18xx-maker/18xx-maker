@@ -429,6 +429,14 @@
           "note": "Shares in the market pay dividends to the corporation"
         },
         {
+          "color": "orange",
+          "note": "Corporations float when 50% is owned by players or the open market - trade-in shares do not count."
+        },
+        {
+          "color": "orange",
+          "note": "Certificate limit +1 if no corporation merges into NdM at the start of phase 5."
+        },
+        {
           "color": "brown",
           "icon": "exclamation",
           "note": "No more than 50% of a corporation's shares may be in the market at any time"
