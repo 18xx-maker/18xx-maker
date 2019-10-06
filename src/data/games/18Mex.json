@@ -294,7 +294,7 @@
       "color": "green",
       "info": [
         {
-          "color": "brown",
+          "color": "gray",
           "note": "Phased Out by 4D"
         }
       ]
@@ -327,7 +327,7 @@
       "name": "4D",
       "quantity": 7,
       "price": "$700",
-      "color": "brown",
+      "color": "gray",
       "info": [
         {
           "color": "yellow",
@@ -451,8 +451,9 @@
       "train": "4D",
       "limit": "3/2/-",
       "number": "7",
-      "tiles": "brown",
-      "price": "$700"
+      "tiles": "gray",
+      "price": "$700",
+      "notes": "The gray tile becomes available."
     }
   ],
   "pools": [
