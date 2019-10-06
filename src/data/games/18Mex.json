@@ -551,7 +551,11 @@
         150,
         165,
         180,
-        200
+        {
+          "value": 200,
+          "label": 200,
+          "legend": 2
+        }
       ],
       [
         {
@@ -733,6 +737,11 @@
         "color": "yellow",
         "description": "Selling half shares of NdM does not affect current market value.",
         "icon": "info"
+      },
+      {
+        "color": "offboard",
+        "description": "Complete 1 OR when bank breaks or stock hits 200.",
+        "icon": "stop"
       }
     ]
   },
