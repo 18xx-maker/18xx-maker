@@ -556,7 +556,7 @@
       [
         {
           "value": 55,
-          "label": 53,
+          "label": 55,
           "arrow": "down"
         },
         60,
@@ -589,7 +589,7 @@
       [
         {
           "value": 50,
-          "label": 53,
+          "label": 50,
           "arrow": "down"
         },
         55,
@@ -688,7 +688,7 @@
       [
         {
           "value": 20,
-          "label": 30,
+          "label": 20,
           "legend": 0,
           "arrow": "down"
         },
