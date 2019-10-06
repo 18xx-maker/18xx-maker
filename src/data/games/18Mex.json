@@ -357,7 +357,16 @@
       "price": "$140",
       "revenue": "$20",
       "description": "Comes with President's Certificate of NdM. Owner must immediately set NdM's par price. Closes when NdM buys a train. May not be sold to a company."
+    },
+    {
+      "name": "Reminder Card 1: Place after 5th 3T",
+      "description": "PHASE 3.5 BEGINS: All minors close - trade in minors for corresponding shares of NdM and UdY. NdM shares are available for purchase."
+    },
+    {
+      "name": "Reminder Card 2: Place after 2nd 6T",
+      "description": "PHASE 6.5 BEGINS: 4T become obsolete (see 4.3.4.1). Obsolete trains get one additional run and are then discarded. Obsolete trains may not be bought and are removed if discarded to Open Market."
     }
+
   ],
   "phases": [
     {
