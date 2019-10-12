@@ -531,26 +531,11 @@
     "type": "2D",
     "par": {
       "values": [
-        {
-          "label": 90,
-          "width": "2.5in"
-        },
-        {
-          "label": 80,
-          "width": "2.25in"
-        },
-        {
-          "label": 75,
-          "width": "2.125in"
-        },
-        {
-          "label": 70,
-          "width": "2in"
-        },
-        {
-          "label": 60,
-          "width": "1.75in"
-        }
+        90,
+        80,
+        75,
+        70,
+        60
       ]
     },
     "movement": {
