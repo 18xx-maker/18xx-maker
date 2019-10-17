@@ -25,6 +25,7 @@ const StockPaginated = ({ cell, pagination, paper }) => {
   }
 
   let stock = game.stock;
+  stock.title = game.info.title;
 
   let splitPages = pagination === "max" ? maxPages : equalPages;
 
