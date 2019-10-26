@@ -67,7 +67,7 @@ const Phase = ({ phases }) => {
             {includeName && <td>{phase.name}</td>}
             {includePhase && <td>{phase.phase}</td>}
             {includeTrain && <td>{formatCell(phase.train)}</td>}
-            {includePrice && <td>{phase.price}</td>}
+            {includePrice && <td>{formatCell(phase.price)}</td>}
             <td>{formatCell(phase.number)}</td>
             <td>{phase.limit}</td>
             {!excludeTiles && <td style={{ backgroundColor: c(phase.tiles) }}>&nbsp;</td>}
