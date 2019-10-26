@@ -175,7 +175,10 @@
     "type": "2D",
     "market": [
       [
-        72,
+        {
+          "label": 72,
+          "arrow": "down"
+        },
         83,
         95,
         107,
@@ -202,7 +205,10 @@
         }
       ],
       [
-        63,
+        {
+          "label": 63,
+          "arrow": "down"
+        },
         72,
         82,
         93,
@@ -236,7 +242,10 @@
         }
       ],
       [
-        57,
+        {
+          "label": 57,
+          "arrow": "down"
+        },
         66,
         75,
         84,
@@ -266,11 +275,15 @@
         },
         {
           "color": "water",
-          "label": 298
+          "label": 298,
+          "arrow": "up"
         }
       ],
       [
-        54,
+        {
+          "label": 54,
+          "arrow": "down"
+        },
         62,
         71,
         80,
@@ -286,10 +299,16 @@
         169,
         187,
         208,
-        230
+        {
+          "label": 230,
+          "arrow": "up"
+        }
       ],
       [
-        52,
+        {
+          "label": 52,
+          "arrow": "down"
+        },
         59,
         {
           "label": 68,
@@ -304,10 +323,16 @@
         145,
         160,
         178,
-        198
+        {
+          "label": 198,
+          "arrow": "up"
+        }
       ],
       [
-        47,
+        {
+          "label": 47,
+          "arrow": "down"
+        },
         54,
         62,
         70,
@@ -318,10 +343,16 @@
         118,
         131,
         146,
-        162
+        {
+          "label": 162,
+          "arrow": "up"
+        }
       ],
       [
-        41,
+        {
+          "label": 41,
+          "arrow": "down"
+        },
         47,
         54,
         61,
@@ -331,10 +362,16 @@
         93,
         103,
         114,
-        127
+        {
+          "label": 127,
+          "arrow": "up"
+        }
       ],
       [
-        34,
+        {
+          "label": 34,
+          "arrow": "down"
+        },
         39,
         45,
         50,
@@ -343,16 +380,25 @@
         70,
         77,
         86,
-        95
+        {
+          "label": 95,
+          "arrow": "up"
+        }
       ],
       [
-        27,
+        {
+          "label": 27,
+          "arrow": "down"
+        },
         31,
         36,
         40,
         45,
         50,
-        56
+        {
+          "label": 56,
+          "arrow": "up"
+        }
       ],
       [
         {
@@ -361,7 +407,10 @@
         },
         24,
         27,
-        31
+        {
+          "label": 31,
+          "arrow": "up"
+        }
       ]
     ],
     "limits": []
@@ -373,6 +422,10 @@
         {
           "color": "water",
           "note": "Shares in the bank pool pay dividends to the bank"
+        },
+        {
+          "color": "water",
+          "note": "Shares in the treasury pay dividends to the corporation"
         },
         {
           "color": "red",
@@ -491,21 +544,24 @@
       "name": "Stock Round",
       "steps": [
         "Sell any number of certificates",
-        "Buy one certificate or start company"
+        "Buy one certificate from treasury or bank pool, or start company"
       ],
       "ordered": true
     },
     {
       "name": "Operating Round",
       "steps": [
-        "Lay track",
+        "Lay or upgrade one track tile",
         "Place one token",
         "Run trains",
         "Purchase trains",
-        "Sell treasury stock",
-        "Buy back treasury stock"
+        "Sell treasury stock to the bank pool",
+        "Buy one stock certificate from the bank pool"
       ],
-      "ordered": true
+      "ordered": true,
+      "optional": [
+        "Purchase private companies"
+      ]
     }
   ],
   "phases": [
@@ -514,7 +570,9 @@
       "train": "4H",
       "limit": "4",
       "number": "4",
-      "tiles": "yellow"
+      "tiles": "yellow",
+      "notes": "Grey cities score 1st value",
+      "price": "L.100"
     },
     {
       "phase": "6",
@@ -522,7 +580,8 @@
       "limit": "4",
       "number": "3/4",
       "tiles": "green",
-      "notes": "Private companies can be bought"
+      "notes": "Private companies can be bought",
+      "price": "L.200"
     },
     {
       "phase": "8",
@@ -530,7 +589,9 @@
       "rust": "4H",
       "limit": "3",
       "number": "2/3",
-      "tiles": "green"
+      "tiles": "green",
+      "notes": "Grey cities score 2nd value",
+      "price": "L.350"
     },
     {
       "phase": "10",
@@ -538,7 +599,8 @@
       "rust": "6H",
       "limit": "2",
       "number": "2",
-      "tiles": "brown"
+      "tiles": "brown",
+      "price": "L.550"
     },
     {
       "phase": "12",
@@ -546,7 +608,8 @@
       "limit": "2",
       "number": "1",
       "tiles": "brown",
-      "notes": "Private companies close, Messina Earthquake"
+      "notes": "Private companies close, Messina Earthquake, Grey cities score 3rd value",
+      "price": "L.800"
     },
     {
       "phase": "16",
@@ -561,7 +624,11 @@
       ],
       "rust": "8H",
       "tiles": "brown",
-      "notes": "Stock market tokens can advance in the blue zone"
+      "notes": "Stock market tokens can advance in the blue zone",
+      "price": [
+        "L.1100",
+        "L.350"
+      ]
     }
   ],
   "companies": [
@@ -588,14 +655,14 @@
         },
         {
           "quantity": 1,
-          "label": "Double Certificate",
+          "label": "Last Certificate",
           "percent": 20,
           "shares": 2
         }
       ]
     },
     {
-      "name": "Aziena Trasporti Archimede",
+      "name": "Azienda Trasporti Archimede",
       "abbrev": "ATA",
       "tokens": [
         "L.30",
@@ -617,7 +684,7 @@
         },
         {
           "quantity": 1,
-          "label": "Double Certificate",
+          "label": "Last Certificate",
           "percent": 20,
           "shares": 2
         }
@@ -646,7 +713,7 @@
         },
         {
           "quantity": 1,
-          "label": "Double Certificate",
+          "label": "Last Certificate",
           "percent": 20,
           "shares": 2
         }
@@ -675,7 +742,7 @@
         },
         {
           "quantity": 1,
-          "label": "Double Certificate",
+          "label": "Last Certificate",
           "percent": 20,
           "shares": 2
         }
@@ -704,14 +771,14 @@
         },
         {
           "quantity": 1,
-          "label": "Double Certificate",
+          "label": "Last Certificate",
           "percent": 20,
           "shares": 2
         }
       ]
     },
     {
-      "name": "Societa Ferroviaria Akragas",
+      "name": "Società Ferroviaria Akragas",
       "abbrev": "SFA",
       "tokens": [
         "L.40",
@@ -733,7 +800,7 @@
         },
         {
           "quantity": 1,
-          "label": "Double Certificate",
+          "label": "Last Certificate",
           "percent": 20,
           "shares": 2
         }
