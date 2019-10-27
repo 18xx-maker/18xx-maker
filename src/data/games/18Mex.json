@@ -427,7 +427,7 @@
       "limit": "3/2/-",
       "number": "2",
       "tiles": "brown",
-      "notes": "Private companies are closed. NdM merges.",
+      "notes": "Private companies are closed. NdM merges (Pacific Railroad and Texas-Mexican Railway are not eligible to merge).",
       "price": "$450"
     },
     {
@@ -467,6 +467,10 @@
         {
           "color": "orange",
           "note": "Corporations float when 50% is owned by players or the open market - trade-in shares do not count."
+        },
+        {
+          "color": "orange",
+          "note": "Major corporations receive mail contract equal to value of home city when starting an operating round with a train."
         },
         {
           "color": "orange",
