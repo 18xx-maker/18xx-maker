@@ -41,21 +41,24 @@
       "abbrev": "A",
       "tokens": [
       ],
-      "color": "green"
+      "color": "green",
+      "minor": true
     },
     {
       "name": "Sonora-Baja Railway",
       "abbrev": "B",
       "tokens": [
       ],
-      "color": "green"
+      "color": "green",
+      "minor": true
     },
     {
       "name": "Southeastern Railway",
       "abbrev": "C",
       "tokens": [
       ],
-      "color": "purple"
+      "color": "purple",
+      "minor": true
     },
     {
       "name": "Chihuahua Pacific Railway",
