@@ -41,21 +41,24 @@
       "abbrev": "A",
       "tokens": [
       ],
-      "color": "green"
+      "color": "green",
+      "minor": true
     },
     {
       "name": "Sonora-Baja Railway",
       "abbrev": "B",
       "tokens": [
       ],
-      "color": "green"
+      "color": "green",
+      "minor": true
     },
     {
       "name": "Southeastern Railway",
       "abbrev": "C",
       "tokens": [
       ],
-      "color": "purple"
+      "color": "purple",
+      "minor": true
     },
     {
       "name": "Chihuahua Pacific Railway",
@@ -63,8 +66,8 @@
       "tokens": [
         "Free",
         "$40",
-        "$100",
-        "$100"
+        "$60",
+        "$80"
       ],
       "color": "red",
       "shares": [
@@ -82,13 +85,15 @@
       ]
     },
     {
-      "name": "National Railways of Mexicon",
+      "name": "National Railways of Mexico",
       "abbrev": "NdM",
       "tokens": [
         "Free",
         "$40",
-        "$100",
-        "$100"
+        "$60",
+        "$80",
+        "($80)",
+        "($80)"
       ],
       "color": "green",
       "shares": [
@@ -99,7 +104,19 @@
           "shares": 2
         },
         {
-          "quantity": 8,
+          "quantity": 2,
+          "label": "Minor Exchange Share",
+          "percent": 5,
+          "shares": 0.5
+        },
+        {
+          "quantity": 1,
+          "label": "Merger Exchange Share",
+          "percent": 10,
+          "shares": 1
+        },
+        {
+          "quantity": 6,
           "percent": 10,
           "shares": 1
         }
@@ -133,8 +150,8 @@
       "tokens": [
         "Free",
         "$40",
-        "$100",
-        "$100"
+        "$60",
+        "$80"
       ],
       "color": "yellow",
       "shares": [
@@ -179,7 +196,7 @@
       "tokens": [
         "Free",
         "$40",
-        "$100"
+        "$60"
       ],
       "color": "gray",
       "shares": [
@@ -202,7 +219,7 @@
       "tokens": [
         "Free",
         "$40",
-        "$100"
+        "$60"
       ],
       "color": "blue",
       "shares": [
@@ -235,7 +252,13 @@
           "shares": 2
         },
         {
-          "quantity": 8,
+          "quantity": 1,
+          "label": "Minor Exchange Share",
+          "percent": 10,
+          "shares": 1
+        },
+        {
+          "quantity": 7,
           "percent": 10,
           "shares": 1
         }
@@ -274,7 +297,7 @@
       "color": "green",
       "info": [
         {
-          "color": "brown",
+          "color": "gray",
           "note": "Phased Out by 4D"
         }
       ]
@@ -307,7 +330,7 @@
       "name": "4D",
       "quantity": 7,
       "price": "$700",
-      "color": "brown",
+      "color": "gray",
       "info": [
         {
           "color": "yellow",
@@ -348,14 +371,23 @@
       "name": "Mexican International Railroad",
       "price": "$100",
       "revenue": "$20",
-      "description": "Comes with a 10% share of Chi."
+      "description": "Comes with a 10% share of the Chihuahua Pacific Railway (CHI)."
     },
     {
       "name": "Mexican National Railroad",
       "price": "$140",
-      "revenue": "$25",
+      "revenue": "$20",
       "description": "Comes with President's Certificate of NdM. Owner must immediately set NdM's par price. Closes when NdM buys a train. May not be sold to a company."
+    },
+    {
+      "name": "Reminder Card 1: Place after 5th 3T",
+      "description": "PHASE 3.5 BEGINS: All minors close - trade in minors for corresponding shares of NdM and UdY. NdM shares are available for purchase."
+    },
+    {
+      "name": "Reminder Card 2: Place after 2nd 6T",
+      "description": "PHASE 6.5 BEGINS: 4T become obsolete (see 4.3.4.1). Obsolete trains get one additional run and are then discarded. Obsolete trains may not be bought and are removed if discarded to Open Market."
     }
+
   ],
   "phases": [
     {
@@ -363,7 +395,9 @@
       "train": "2",
       "limit": "-/3/1",
       "number": "6",
-      "tiles": "yellow"
+      "tiles": "yellow",
+      "notes": "Buy only one train from bank.",
+      "price": "$100"
     },
     {
       "phase": "3",
@@ -371,13 +405,14 @@
       "limit": "-/3/1",
       "number": "6",
       "tiles": "green",
-      "notes": "Private companies may be purchased"
+      "notes": "Private companies may be purchased.",
+      "price": "$180"
     },
     {
       "phase": "3.5",
       "limit": "4/3/-",
       "tiles": "green",
-      "notes": "When 5/6 3T's have been sold. Minor companies are closed. NRM stock available."
+      "notes": "When five 3Ts have been sold. Minor companies are closed. NdM stock available."
     },
     {
       "phase": "4",
@@ -385,7 +420,9 @@
       "rust": "2",
       "limit": "3/2/-",
       "number": "3",
-      "tiles": "green"
+      "tiles": "green",
+      "notes": "May buy multiple trains.",
+      "price": "$300"
     },
     {
       "phase": "5",
@@ -393,7 +430,8 @@
       "limit": "3/2/-",
       "number": "2",
       "tiles": "brown",
-      "notes": "Private companies are closed. NRM merges."
+      "notes": "Private companies are closed. NdM merges (Pacific Railroad and Texas-Mexican Railway are not eligible to merge).",
+      "price": "$450"
     },
     {
       "phase": "6",
@@ -401,21 +439,24 @@
       "limit": "3/2/-",
       "number": "2",
       "rust": "3",
-      "tiles": "brown"
+      "tiles": "brown",
+      "price": "$600"
     },
     {
       "phase": "6.5",
       "limit": "3/2/-",
       "tiles": "brown",
       "rust": "4-O",
-      "notes": "When both 6T's are sold. 4T's become obsolete."
+      "notes": "When both 6Ts are sold. 4Ts become obsolete."
     },
     {
       "phase": "4D",
       "train": "4D",
       "limit": "3/2/-",
       "number": "7",
-      "tiles": "brown"
+      "tiles": "gray",
+      "price": "$700",
+      "notes": "The gray tile becomes available."
     }
   ],
   "pools": [
@@ -425,6 +466,18 @@
         {
           "color": "orange",
           "note": "Shares in the market pay dividends to the corporation"
+        },
+        {
+          "color": "orange",
+          "note": "Corporations float when 50% is owned by players or the open market - trade-in shares do not count."
+        },
+        {
+          "color": "orange",
+          "note": "Major corporations receive mail contract equal to value of home city when starting an operating round with a train."
+        },
+        {
+          "color": "orange",
+          "note": "Certificate limit +1 if no corporation merges into NdM at the start of phase 5."
         },
         {
           "color": "brown",
@@ -441,15 +494,15 @@
   ],
   "rounds": [
     {
-      "name": "5",
+      "name": "OR 3",
       "color": "brown"
     },
     {
-      "name": "4",
+      "name": "OR 2",
       "color": "green"
     },
     {
-      "name": "2",
+      "name": "OR 1",
       "color": "yellow"
     },
     {
@@ -485,26 +538,11 @@
     "type": "2D",
     "par": {
       "values": [
-        {
-          "label": 90,
-          "width": "2.5in"
-        },
-        {
-          "label": 80,
-          "width": "2.25in"
-        },
-        {
-          "label": 75,
-          "width": "2.125in"
-        },
-        {
-          "label": 70,
-          "width": "2in"
-        },
-        {
-          "label": 60,
-          "width": "1.75in"
-        }
+        90,
+        80,
+        75,
+        70,
+        60
       ]
     },
     "movement": {
@@ -549,12 +587,16 @@
         150,
         165,
         180,
-        200
+        {
+          "value": 200,
+          "label": 200,
+          "legend": 2
+        }
       ],
       [
         {
           "value": 55,
-          "label": 53,
+          "label": 55,
           "arrow": "down"
         },
         60,
@@ -587,7 +629,7 @@
       [
         {
           "value": 50,
-          "label": 53,
+          "label": 50,
           "arrow": "down"
         },
         55,
@@ -686,7 +728,7 @@
       [
         {
           "value": 20,
-          "label": 30,
+          "label": 20,
           "legend": 0,
           "arrow": "down"
         },
@@ -726,6 +768,16 @@
         "color": "yellow",
         "description": "Shares of this corporation do not count toward the certificate limit",
         "icon": "certificate"
+      },
+      {
+        "color": "yellow",
+        "description": "Selling half shares of NdM does not affect current market value.",
+        "icon": "info"
+      },
+      {
+        "color": "offboard",
+        "description": "Complete 1 OR when bank breaks or stock hits 200.",
+        "icon": "stop"
       }
     ]
   },
@@ -735,10 +787,10 @@
     "5": 2,
     "6": 2,
     "7": 5,
-    "8": 13,
-    "9": 9,
-    "14": 4,
-    "15": 4,
+    "8": 11,
+    "9": 11,
+    "14": 3,
+    "15": 3,
     "16": 1,
     "17": 1,
     "18": 1,
@@ -763,12 +815,10 @@
     "57": 4,
     "58": 4,
     "63": 7,
-    "69": 1,
     "70": 1,
     "141": 2,
     "142": 2,
     "143": 2,
-    "144": 2,
     "455": 1,
     "470": 1,
     "471": 1,
@@ -789,7 +839,8 @@
     "485|a": 1,
     "485|b": 1,
     "486|a": 1,
-    "486|b": 1
+    "486|b": 1,
+    "619": 2
   },
   "map": {
     "hexes": [
@@ -1235,7 +1286,7 @@
         "centerTowns": [
           {
             "name": {
-              "name": "Culicán"
+              "name": "Culiacán"
             }
           }
         ],
