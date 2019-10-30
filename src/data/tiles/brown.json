@@ -3754,6 +3754,11 @@
         "value": 60,
         "angle": 210,
         "percent": 0.8
+      },
+      {
+        "value": 10,
+        "angle": 85,
+        "percent": 0.8
       }
     ],
     "cities": [
@@ -3849,6 +3854,11 @@
       {
         "value": 50,
         "angle": 210,
+        "percent": 0.8
+      },
+      {
+        "value": 10,
+        "angle": 85,
         "percent": 0.8
       }
     ],
