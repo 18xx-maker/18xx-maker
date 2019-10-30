@@ -14,13 +14,13 @@ require("./IPO.css");
 const IPO = () => {
   let params = useParams();
   let game = games[params.game];
-  let companies = game.companies;
+  let companies = R.filter(company => (!company.minor), game.companies); // only show non-minor companies in IPO
 
   return (
     <Color>
       {c => (
         <div className="ipo">
-          <h2>IPO</h2>
+          <h2>{game.info.title} IPO</h2>
           <div className="ipo__companies">
             {R.map(
               company => (
