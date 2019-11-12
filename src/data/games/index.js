@@ -5,6 +5,7 @@ import game_1832 from "./1832";
 import game_1834 from "./1834";
 import game_1836jr_30 from "./1836jr-30";
 import game_1836jr_56 from "./1836jr-56";
+import game_1838T from "./1838T";
 import game_1846 from "./1846";
 import game_1848 from "./1848";
 import game_1849 from "./1849";
@@ -41,6 +42,7 @@ let all_games = {
   "1834": game_1834,
   "1836jr-30": game_1836jr_30,
   "1836jr-56": game_1836jr_56,
+  "1838T": game_1838T,
   "1846": game_1846,
   "1848": game_1848,
   "1849": game_1849,

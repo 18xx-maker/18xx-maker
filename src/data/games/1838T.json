@@ -1,0 +1,652 @@
+{
+  "info": {
+    "title": "1838T",
+    "subtitle": "The Thuringia Connection",
+    "designer": "Dieter Danziger",
+    "background": "blue",
+    "titleSize": 108,
+    "subTitleSize": 28,
+    "extraTokens": 2,
+    "titleY": -80,
+    "titleX": 20,
+    "currency": ""
+  },
+  "links": {
+    "bgg": "",
+    "rules": ""
+  },
+  "tokens": [
+    "Round"
+  ],
+  "ipo": false,
+  "players": [
+    {
+      "number": 2,
+      "capital": "2100M"
+    },
+    {
+      "number": 3,
+      "capital": "1400M"
+    },
+    {
+      "number": 4,
+      "capital": "1050M"
+    },
+    {
+      "number": 5,
+      "capital": "840M"
+    }
+  ],
+  "companies": [
+    {
+      "name": "ORANGE",
+      "abbrev": "O",
+      "tokens": [
+        "00",
+        "40",
+        "100"
+      ],
+      "color": "orange",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "Director's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "DUNKELGRÜN",
+      "abbrev": "DG",
+      "tokens": [
+        "00",
+        "40",
+        "100"
+      ],
+      "color": "green",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "Director's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "HELLGRÜN",
+      "abbrev": "HG",
+      "tokens": [
+        "00",
+        "40",
+        "100"
+      ],
+      "color": "lime",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "Director's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "SCHWARTZ",
+      "abbrev": "S/B",
+      "tokens": [
+        "00",
+        "40",
+        "100"
+      ],
+      "color": "black",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "Director's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "DUNKELBLAU",
+      "abbrev": "DB",
+      "tokens": [
+        "00",
+        "40",
+        "100"
+      ],
+      "color": "blue",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "Director's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "HELLBLAU",
+      "abbrev": "HB",
+      "tokens": [
+        "00",
+        "40",
+        "100"
+      ],
+      "color": "cyan",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "Director's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "GELB",
+      "abbrev": "G/Y",
+      "tokens": [
+        "00",
+        "40",
+        "100"
+      ],
+      "color": "yellow",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "Director's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "ROT",
+      "abbrev": "R",
+      "tokens": [
+        "00",
+        "40",
+        "100"
+      ],
+      "color": "red",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "Director's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    }
+  ],
+  "trains": [
+    {
+      "name": "2T",
+      "quantity": 6,
+      "price": "$80",
+      "color": "yellow",
+      "info": [
+        {
+          "color": "green",
+          "note": "Rusted by 4T"
+        }
+      ]
+    },
+    {
+      "name": "2+1T",
+      "quantity": 2,
+      "price": "$120",
+      "color": "yellow",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Rusted by 5T"
+        }
+      ]
+    },
+    {
+      "name": "3T",
+      "quantity": 3,
+      "price": "$180",
+      "color": "green",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Rusted by 6T"
+        }
+      ]
+    },
+    {
+      "name": "4T",
+      "quantity": 3,
+      "price": "$300",
+      "color": "green",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Rusted by DT"
+        }
+      ]
+    },
+    {
+      "name": "5T",
+      "quantity": 3,
+      "price": "$450",
+      "color": "brown",
+      "info": [
+        {
+          "color": "black",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "6T",
+      "quantity": 2,
+      "price": "$630",
+      "color": "brown",
+      "info": [
+        {
+          "color": "black",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "6+xT",
+      "quantity": 1,
+      "price": "$780",
+      "color": "gray",
+      "info": [
+        {
+          "color": "black",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "7T",
+      "quantity": 2,
+      "price": "$700",
+      "color": "gray",
+      "info": [
+        {
+          "color": "black",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "8T",
+      "quantity": 2,
+      "price": "$800",
+      "color": "gray",
+      "info": [
+        {
+          "color": "black",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "6+xT",
+      "quantity": 2,
+      "price": "$780",
+      "color": "gray",
+      "info": [
+        {
+          "color": "black",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "DT",
+      "quantity": 8,
+      "price": "$1100",
+      "color": "pink",
+      "description": "Cost $800 when trading in a 4T - 8T",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "Mail Car",
+      "quantity": 1,
+      "price": "$70",
+      "color": "red",
+      "info": [
+        {
+          "color": "white",
+          "note": "one per company max"
+        }
+      ]
+    },
+    {
+      "name": "Mail Car",
+      "quantity": 1,
+      "price": "$80",
+      "color": "red",
+      "info": [
+        {
+          "color": "white",
+          "note": "one per company max"
+        }
+      ]
+    },
+    {
+      "name": "Mail Car",
+      "quantity": 1,
+      "price": "$90",
+      "color": "red",
+      "info": [
+        {
+          "color": "white",
+          "note": "one per company max"
+        }
+      ]
+    },
+    {
+      "name": "Mail Car",
+      "quantity": 1,
+      "price": "$100",
+      "color": "red",
+      "info": [
+        {
+          "color": "white",
+          "note": "one per company max"
+        }
+      ]
+    },
+    {
+      "name": "Mail Car",
+      "quantity": 1,
+      "price": "$120",
+      "color": "red",
+      "info": [
+        {
+          "color": "white",
+          "note": "one per company max"
+        }
+      ]
+    },
+    {
+      "name": "Mail Car",
+      "quantity": 1,
+      "price": "$150",
+      "color": "red",
+      "info": [
+        {
+          "color": "white",
+          "note": "one per company max"
+        }
+      ]
+    },
+    {
+      "name": "Mail Car",
+      "quantity": 1,
+      "price": "$180",
+      "color": "red",
+      "info": [
+        {
+          "color": "white",
+          "note": "one per company max"
+        }
+      ]
+    },
+    {
+      "name": "Mail Car",
+      "quantity": 1,
+      "price": "$200",
+      "color": "red",
+      "info": [
+        {
+          "color": "white",
+          "note": "one per company max"
+        }
+      ]
+    }
+  ],
+  "privates": [
+    {
+      "name": "Private #1",
+      "price": "$20",
+      "revenue": "$5",
+      "description": ""
+    },
+    {
+      "name": "Private #2",
+      "price": "$40",
+      "revenue": "$10",
+      "description": ""
+    },
+    {
+      "name": "Private #3",
+      "price": "$70",
+      "revenue": "$15",
+      "description": ""
+    },
+    {
+      "name": "Private #4",
+      "price": "$110",
+      "revenue": "$20",
+      "description": ""
+    },
+    {
+      "name": "Private #5",
+      "price": "$160",
+      "revenue": "$25",
+      "description": "Includes 10% share of DUNKELGRÜN"
+    },
+    {
+      "name": "Private #6",
+      "price": "$220",
+      "revenue": "$30",
+      "description": "Includes 20% share of DUNKELBLAU"
+    }
+  ],
+  "phases": [
+    {
+      "name": "2T",
+      "limit": "4",
+      "number": "6",
+      "tiles": "yellow"
+    },
+    {
+      "name": "2+1T",
+      "limit": "4",
+      "number": "2",
+      "tiles": "yellow"
+    },
+    {
+      "name": "3T",
+      "limit": "4",
+      "number": "5",
+      "tiles": "green"
+    },
+    {
+      "name": "4T",
+      "rust": "2T",
+      "limit": "3",
+      "number": "4",
+      "tiles": "green",
+      "notes": "In games without private companies, the per-OR d6x10 revenue ends."
+    },
+    {
+      "name": "5T",
+      "rust": "2+1T",
+      "limit": "2",
+      "number": "3",
+      "tiles": "brown",
+      "notes": "Private companies are closed."
+    },
+    {
+      "name": "6T",
+      "limit": "2",
+      "number": "2",
+      "rust": "3T",
+      "tiles": "brown",
+      "notes": "All other trains available, including DT."
+    },
+    {
+      "name": "7T",
+      "limit": "2",
+      "number": "2",
+      "tiles": "gray"
+    },
+    {
+      "name": "8T",
+      "limit": "2",
+      "number": "2",
+      "rust": "3T",
+      "tiles": "gray"
+    },
+    {
+      "name": "6+xT",
+      "limit": "2",
+      "number": "2",
+      "tiles": "gray",
+      "notes": "Only used in some scenarios."
+    },
+    {
+      "name": "DT",
+      "limit": "2",
+      "number": "6",
+      "rust": "4T",
+      "tiles": "pink"
+    }
+  ],
+  "pools": [
+    {
+      "name": "Market",
+      "notes": [
+        {
+          "color": "orange",
+          "note": "Shares in the market pay dividends to the company"
+        },
+        {
+          "color": "brown",
+          "icon": "exclamation",
+          "note": "No more than 50% of a company may be in the market"
+        },
+        {
+          "color": "red",
+          "icon": "times",
+          "note": "No stock sales during first stock round"
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "OR3",
+      "color": "brown"
+    },
+    {
+      "name": "OR2",
+      "color": "green"
+    },
+    {
+      "name": "OR1",
+      "color": "yellow"
+    },
+    {
+      "name": "SR",
+      "color": "gray"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": [
+        "Sell any number of shares",
+        "Buy one share",
+        "Sell any number of shares"
+      ],
+      "ordered": true
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Lay or upgrade 1 track tile.",
+        "Purchase a station.",
+        "Run trains.",
+        "Pay dividends or withhold revenue",
+        "Buy new trains (max 2)."
+      ],
+      "ordered": true
+    }
+  ],
+  "stock": {
+    "type": "2D",
+    "market": [
+    ]
+  },
+  "tiles": {
+    "3": 24,
+    "4": 24,
+    "7": 24,
+    "8": 24,
+    "9": 24,
+    "58": 24,
+    "141": 16,
+    "142": 14,
+    "143": 12,
+    "144": 6,
+    "767": 3,
+    "768": 3,
+    "769": 3
+  },
+  "map": {
+    "print": "landscape",
+    "hexes": [
+    ]
+  }
+}
