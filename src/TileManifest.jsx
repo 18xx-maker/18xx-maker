@@ -27,8 +27,11 @@ const getCol = id => {
     return 2;
   case "brown":
     return 3;
-  default:
+  case "gray":
+  case "fuschiaPink":
     return 4;
+  default:
+    return 5;
   }
 };
 

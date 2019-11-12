@@ -15,6 +15,12 @@
   "black": "#000",
 
   "orange": "#f47d20",
+  "cyan": "#0ff",
+  "blue": "#00f",
+  "medBlue": "#007fff",
+  "lightBlue": "80d4ff",
+  "fuschiaPink": "#ff80ff",
+  "red": "#ff0000",
 
   "track": "#000",
   "border": "#fff",

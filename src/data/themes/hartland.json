@@ -12,6 +12,18 @@
   "river": "#b4a86f",
 
   "orange": "#f58121",
+  "cyan": "#0ff",
+  "blue": "#00f",
+  "medBlue": "#007fff",
+  "lightBlue": "80d4ff",
+  "fuschiaPink": "#ff80ff",
+  "red": "#ff0000",
+  "tile": {
+    "yellow": "#f2f4e8",
+    "green": "#e4e8d1",
+    "brown": "#d9ddba",
+    "gray": "#babe81"
+  },
 
   "white": "#fff",
   "black": "#110a0c",
