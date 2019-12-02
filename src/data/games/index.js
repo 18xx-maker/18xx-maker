@@ -1,5 +1,6 @@
 import game_1800 from "./1800";
 import game_1817 from "./1817";
+import game_1828K from "./1828K";
 import game_1830 from "./1830";
 import game_1832 from "./1832";
 import game_1834 from "./1834";
@@ -35,6 +36,7 @@ import game_Harzbahn from "./Harzbahn";
 let all_games = {
   "1800": game_1800,
   "1817": game_1817,
+  "1828K": game_1828K,
   "1830": game_1830,
   "1832": game_1832,
   "1834": game_1834,
@@ -56,7 +58,7 @@ let all_games = {
   "1891": game_1891,
   "1899": game_1899,
   "18AL": game_18AL,
-  "18CLE": game_18CLE,  
+  "18CLE": game_18CLE,
   "18EB": game_18EB,
   "18EU": game_18EU,
   "18NK": game_18NK,
