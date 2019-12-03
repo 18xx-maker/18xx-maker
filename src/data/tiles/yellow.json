@@ -3,40 +3,44 @@
     "color": "yellow",
     "values": [
       {
-        "angle": 150,
-        "percent": 0.8,
+        "x": -129.90375,
+        "y": -75,
+        "angle": 285,
+        "percent": 1.25,
         "value": 10
       },
       {
-        "angle": -30,
-        "percent": 0.8,
+        "x": 129.90375,
+        "y": 75,
+        "angle": 105,
+        "percent": 1.25,
         "value": 10
       }
     ],
     "towns": [
       {
         "x": -129.90375,
-        "y": 75,
-        "rotate": -45,
-        "angle": 225,
+        "y": -75,
+        "rotate": 15,
+        "angle": 285,
         "percent": 1.73
       },
       {
         "x": 129.90375,
-        "y": -75,
-        "rotate": -45,
-        "angle": 45,
+        "y": 75,
+        "rotate": 15,
+        "angle": 105,
         "percent": 1.73
       }
     ],
     "track": [
       {
         "type": "gentle",
-        "side": 1
+        "side": 2
       },
       {
         "type": "gentle",
-        "side": 4
+        "side": 5
       }
     ]
   },
@@ -44,12 +48,13 @@
     "color": "yellow",
     "values": [
       {
-        "angle": 215,
-        "percent": 0.75,
+        "angle": 180,
+        "percent": 0.66,
+        "x": -35,
         "value": 10
       },
       {
-        "angle": 30,
+        "angle": 330,
         "percent": 0.667,
         "value": 10
       }
@@ -60,9 +65,9 @@
         "percent": 0.66
       },
       {
-        "rotation": 30,
-        "x": -86.6025,
-        "angle": -60,
+        "rotation": -30,
+        "x": 86.6025,
+        "angle": 60,
         "percent": 0.57735
       }
     ],
@@ -73,7 +78,7 @@
       },
       {
         "type": "sharp",
-        "side": 2
+        "side": 5
       }
     ]
   },
@@ -103,13 +108,15 @@
     "rotations": 3,
     "values": [
       {
-        "angle": -90,
-        "percent": 0.5,
+        "percent": 0.4,
+        "x": 35,
         "value": 10
       }
     ],
     "towns": [
-      {}
+      {
+        "percent": 0.4
+      }
     ],
     "track": [
       {
@@ -166,7 +173,7 @@
     "track": [
       {
         "type": "sharp",
-        "side": 1
+        "side": 6
       }
     ]
   },
@@ -175,7 +182,7 @@
     "track": [
       {
         "type": "gentle",
-        "side": 1
+        "side": 5
       }
     ]
   },
@@ -194,13 +201,13 @@
     "values": [
       {
         "value": 10,
-        "angle": 145,
-        "percent": 0.75
+        "angle": 215,
+        "percent": 0.8
       },
       {
         "value": 10,
-        "angle": 95,
-        "percent": 0.75
+        "angle": 85,
+        "percent": 0.8
       }
     ],
     "towns": [
@@ -209,9 +216,9 @@
         "percent": 0.7
       },
       {
-        "angle": 60,
+        "angle": 120,
         "percent": 0.7,
-        "rotation": 60
+        "rotation": -60
       }
     ],
     "track": [
@@ -222,7 +229,7 @@
       },
       {
         "type": "straight",
-        "side": 2,
+        "side": 6,
         "cross": "under"
       }
     ]
@@ -231,45 +238,43 @@
     "color": "yellow",
     "values": [
       {
-        "x": -129.90375,
-        "y": 75,
-        "angle": 255,
+        "y": 150,
+        "angle": 165,
         "percent": 2.2,
         "value": 10
       },
       {
-        "x": -129.90375,
-        "y": -75,
-        "angle": 285,
+        "x": 129.90375,
+        "y": 75,
+        "angle": 135,
         "percent": 2.2,
         "value": 10
       }
     ],
     "towns": [
       {
-        "x": -129.90375,
-        "y": 75,
-        "rotate": -15,
-        "angle": 255,
-        "percent": 1.7216875
+        "y": 150,
+        "angle": 165,
+        "percent": 1.7216875,
+        "rotate": 75
       },
       {
-        "x": -129.90375,
-        "y": -75,
-        "rotate": 15,
-        "angle": 285,
+        "x": 129.90375,
+        "y": 75,
+        "rotate": 45,
+        "angle": 135,
         "percent": 1.7216875
       }
     ],
     "track": [
       {
         "type": "gentle",
-        "side": 1,
+        "side": 5,
         "cross": "over"
       },
       {
         "type": "gentle",
-        "side": 2,
+        "side": 6,
         "cross": "under"
       }
     ]
@@ -320,9 +325,9 @@
     "color": "yellow",
     "values": [
       {
+        "value": 10,
         "angle": 215,
-        "percent": 0.75,
-        "value": 10
+        "percent": 0.8
       },
       {
         "y": 150,
@@ -339,7 +344,7 @@
       {
         "y": 150,
         "angle": 165,
-        "percent": 1.73,
+        "percent": 1.7216875,
         "rotate": 75
       }
     ],
