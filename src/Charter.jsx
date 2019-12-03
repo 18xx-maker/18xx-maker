@@ -9,7 +9,7 @@ import { unitsToCss } from "./util";
 
 import is from "ramda/src/is";
 
-const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle, game, halfWidthCharters }) => {
+const Charter = ({ name, abbrev, minor, token, tokens, phases, turns, charterStyle, game, halfWidthCharters }) => {
   let color = token;
   if(is(Object, token)) {
     color = token.colors[0];
@@ -64,7 +64,7 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle, gam
     <Color context="companies">
       {(c, t) => (
         <div className="cutlines">
-          <div className={`charter charter--${charterStyle}${halfWidthCharters ? " charter--half" : ""}`}>
+          <div className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidthCharters ? " charter--half" : ""}`}>
             <div
               className="charter__hr"
               style={{ backgroundColor: c(color) }}
@@ -106,7 +106,7 @@ const Charter = ({ name, abbrev, token, tokens, phases, turns, charterStyle, gam
             {halfWidthCharters || (
               <div className="charter__treasury">
                 Treasury
-                <dl>{turnNodes}</dl>
+                <dl>{minor || turnNodes}</dl>
               </div>
             )}
           </div>

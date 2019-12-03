@@ -27,35 +27,19 @@ const Charters = () => {
             </p>
           </div>
         </div>
-        {R.addIndex(R.chain)((company, index) => {
-          if (company.minor && game.minorPhases) {
-            return (
-              <Charter
-                game={game.info.title}
-                key={company.abbrev}
-                name={company.name}
-                abbrev={company.abbrev}
-                token={company.token || company.color}
-                tokens={company.tokens}
-                phases={game.minorPhases}
-                turns={game.turns}
-              />
-            );
-          } else {
-            return (
-              <Charter
-                game={game.info.title}
-                key={company.abbrev}
-                name={company.name}
-                abbrev={company.abbrev}
-                token={company.token || company.color}
-                tokens={company.tokens}
-                phases={game.phases}
-                turns={game.turns}
-              />
-            );
-          }
-        }, companies)}
+        {R.addIndex(R.chain)((company, index) => (
+          <Charter
+            game={game.info.title}
+            key={company.abbrev}
+            name={company.name}
+            abbrev={company.abbrev}
+            token={company.token || company.color}
+            tokens={company.tokens}
+            phases={(company.minor && game.minorPhases) ? game.minorPhases : game.phases}
+            turns={game.turns}
+            minor={!!company.minor}
+          />
+        ), companies)}
         <PageSetup landscape={false}/>
       </div>
     </GameContext.Provider>
