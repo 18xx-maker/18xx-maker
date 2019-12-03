@@ -92,14 +92,14 @@ const Charter = ({ name, abbrev, minor, token, tokens, phases, turns, charterSty
             {halfWidthCharters && (
               <div className="charter__assets">
                 Assets
-                <dl>{turnNodes}</dl>
+                <dl>{minor || turnNodes}</dl>
               </div>
             )}
             {halfWidthCharters || (
               <div className="charter__trains">
                 Trains
                 <div className="charter__phase">
-                  <Phase phases={phases} />
+                  <Phase phases={phases} minor={!!minor} />
                 </div>
               </div>
             )}

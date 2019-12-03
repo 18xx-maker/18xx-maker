@@ -49,7 +49,7 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
         return (
           <RotateContext.Consumer>
             {rotateContext => (
-              <g transform={`rotate(${-rotateContext - rotation})`}>
+              <g transform={`rotate(${-(rotateContext || 0) - (rotation || 0)})`}>
                 <ColorContext.Provider value="companies">
                   <Config>
                     {(config, game) => {

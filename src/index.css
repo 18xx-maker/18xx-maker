@@ -144,7 +144,7 @@ svg {
 }
 
 .charter--half {
-  width: 3.75in;
+  width: 3.5in;
 }
 
 .charter__hr {
@@ -152,6 +152,10 @@ svg {
   position: absolute;
   top: 1.125in;
   width: 100%;
+}
+
+.charter--minor .charter__hr {
+  top: 1in;
 }
 
 .charter--color .charter__hr {
@@ -234,7 +238,7 @@ svg {
 }
 
 .charter--minor .charter__trains {
-  height: 1.4375in;
+  height: 1.5625in;
 }
 
 .charter__assets {
@@ -250,6 +254,10 @@ svg {
   border-width: 0 0 0 1px;
   border-color: #666;
   border-style: dashed;
+}
+
+.charter--minor .charter__assets {
+  height: 1.5625in;
 }
 
 .charter__game {
@@ -281,7 +289,7 @@ svg {
 }
 
 .charter--minor .charter__treasury {
-  height: 1.6875in;
+  height: 1.8125in;
 }
 
 .charter__phase {
@@ -630,6 +638,11 @@ svg {
   padding: 0 0.125in 0.125in 0.125in;
   left: 0;
   right: auto;
+}
+
+.charter--minor.charter--half .charter__tokens {
+  top: 1.0625in;
+  height: calc(100% - 1.0625 - 0.25in);
 }
 
 .charter--half .charter__tokens svg {

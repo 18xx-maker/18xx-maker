@@ -371,10 +371,9 @@
       "price": "$1100",
       "rust": "4",
       "tiles": "brown"
-    }
-  ],
-  "minorPhases": [
+    },
     {
+      "minor": true,
       "name": "2",
       "limit": "3",
       "number": "6",
@@ -382,6 +381,7 @@
       "tiles": "yellow"
     },
     {
+      "minor": true,
       "name": "3",
       "limit": "3",
       "number": "5",
@@ -389,6 +389,7 @@
       "tiles": "green"
     },
     {
+      "minor": true,
       "name": "4",
       "limit": "3",
       "number": "4",
@@ -397,6 +398,7 @@
       "tiles": "green"
     },
     {
+      "minor": true,
       "name": "5",
       "limit": "2",
       "price": "$450",

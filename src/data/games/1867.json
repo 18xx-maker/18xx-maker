@@ -677,10 +677,9 @@
       "price": "$1500",
       "number": "∞",
       "tiles": "gray"
-    }
-  ],
-  "minorPhases": [
+    },
     {
+      "minor": true,
       "name": "2",
       "limit": "2",
       "price": "$100",
@@ -688,6 +687,7 @@
       "tiles": "yellow"
     },
     {
+      "minor": true,
       "name": "3",
       "limit": "2",
       "price": "$225",
@@ -696,6 +696,7 @@
       "notes": "May purchase privates"
     },
     {
+      "minor": true,
       "name": "4",
       "rust": "2",
       "limit": "1",
@@ -705,6 +706,7 @@
       "notes": "Public companies may be started"
     },
     {
+      "minor": true,
       "name": "5",
       "limit": "1",
       "price": "$550",
@@ -713,6 +715,7 @@
       "notes": "Remove unstarted Minor Companies"
     },
     {
+      "minor": true,
       "name": "6",
       "limit": "1",
       "price": "$650",
@@ -722,6 +725,7 @@
       "notes": "Remaining Private Companies are nationalized"
     },
     {
+      "minor": true,
       "name": "7",
       "limit": "1",
       "price": "$800",
@@ -729,6 +733,7 @@
       "tiles": "gray"
     },
     {
+      "minor": true,
       "name": "8",
       "limit": "2",
       "price": "$1000",
