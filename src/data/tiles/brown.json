@@ -172,16 +172,16 @@
       },
       {
         "type": "straight",
-        "side": 2,
+        "side": 6,
         "cross": "under"
       },
       {
         "type": "gentle",
-        "side": 2
+        "side": 1
       },
       {
         "type": "gentle",
-        "side": 5
+        "side": 4
       }
     ]
   },
@@ -225,41 +225,37 @@
     "color": "brown",
     "values": [
       {
-        "angle": 30,
-        "percent": 0.6,
-        "value": 80
-      },
-      {
-        "angle": 210,
-        "percent": 0.6,
+        "angle": 330,
+        "percent": 0.8,
         "value": 80
       }
     ],
     "labels": [
       {
         "label": "NY",
-        "fixed": true,
-        "rotation": 120
+        "size": 24,
+        "angle": 150,
+        "percent": 0.8
       }
     ],
     "cities": [
       {
-        "angle": 120,
-        "rotate": -60,
-        "percent": 0.57,
+        "angle": 240,
+        "rotate": 60,
+        "percent": 0.39,
         "size": 2
       },
       {
-        "angle": -60,
-        "rotate": -60,
-        "percent": 0.57,
+        "angle": 60,
+        "rotate": 60,
+        "percent": 0.39,
         "size": 2
       }
     ],
     "track": [
       {
         "type": "sharp",
-        "side": 3
+        "side": 1
       },
       {
         "type": "sharp",
@@ -391,19 +387,19 @@
     "values": [
       {
         "angle": 240,
-        "percent": 0.7,
+        "percent": 0.68,
         "value": 50
       },
       {
         "angle": 30,
-        "percent": 0.7,
+        "percent": 0.68,
         "value": 50
       }
     ],
     "labels": [
       {
         "angle": 300,
-        "percent": 0.5,
+        "percent": 0.6,
         "label": "OO"
       }
     ],
@@ -476,12 +472,12 @@
     "color": "brown",
     "values": [
       {
-        "angle": 120,
+        "angle": 210,
         "percent": 0.7,
         "value": 50
       },
       {
-        "angle": -30,
+        "angle": 270,
         "percent": 0.7,
         "value": 50
       }
@@ -489,17 +485,16 @@
     "labels": [
       {
         "label": "OO",
-        "angle": -90,
-        "percent": 0.7
+        "angle": 68,
+        "percent": 0.68
       }
     ],
     "cities": [
       {
-        "angle": 180,
         "percent": 0.6
       },
       {
-        "angle": 60,
+        "angle": 120,
         "percent": 0.6
       }
     ],
@@ -511,7 +506,7 @@
       },
       {
         "type": "straight",
-        "side": 2,
+        "side": 6,
         "cross": "under"
       }
     ]

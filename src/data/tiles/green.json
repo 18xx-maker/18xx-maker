@@ -112,12 +112,12 @@
     "track": [
       {
         "type": "gentle",
-        "side": 1,
+        "side": 5,
         "cross": "over"
       },
       {
         "type": "gentle",
-        "side": 2,
+        "side": 6,
         "cross": "under"
       }
     ]
@@ -366,7 +366,7 @@
         "value": 60
       },
       {
-        "angle": -30,
+        "angle": 210,
         "percent": 0.7,
         "value": 60
       }
@@ -374,24 +374,24 @@
     "labels": [
       {
         "label": "NY",
-        "angle": 30,
+        "angle": 150,
         "percent": 0.5
       }
     ],
     "cities": [
       {
-        "angle": 150,
+        "angle": 30,
         "percent": 0.5
       },
       {
-        "angle": -90,
+        "angle": 270,
         "percent": 0.5
       }
     ],
     "track": [
       {
         "type": "sharp",
-        "side": 3
+        "side": 1
       },
       {
         "type": "sharp",
@@ -408,14 +408,14 @@
         "value": 40
       },
       {
-        "angle": -60,
+        "angle": 60,
         "percent": 0.7,
         "value": 40
       }
     ],
     "labels": [
       {
-        "angle": 240,
+        "angle": 120,
         "percent": 0.5,
         "label": "OO"
       }
@@ -425,7 +425,7 @@
         "percent": 0.5
       },
       {
-        "angle": 120,
+        "angle": 240,
         "percent": 0.5
       }
     ],
@@ -436,7 +436,7 @@
       },
       {
         "type": "stop",
-        "side": 3
+        "side": 5
       }
     ]
   },
@@ -5295,7 +5295,7 @@
     "track": [
       {
         "side": 3
-      },	  
+      },
       {
         "side": 4
       },
@@ -5321,12 +5321,12 @@
         "type": "straight",
         "side": 1,
 	"cross": "over"
-	  
+
       },
       {
         "type": "straight",
         "side": 3,
-	"cross": "under"  
+	"cross": "under"
       },
       {
         "type": "sharp",
@@ -5345,12 +5345,12 @@
         "type": "straight",
         "side": 2,
 	"cross": "under"
-	  
+
       },
       {
         "type": "straight",
         "side": 3,
-	"cross": "over"  
+	"cross": "over"
       },
       {
         "type": "gentle",
@@ -5541,7 +5541,7 @@
     "track": [
       {
         "side": 2
-      },	  
+      },
       {
         "side": 4
       },
@@ -5565,7 +5565,7 @@
     "track": [
       {
         "side": 3
-      },	  
+      },
       {
         "side": 4
       },

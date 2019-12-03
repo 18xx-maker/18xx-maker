@@ -8,9 +8,6 @@
     "titleX": 1510,
     "extraHomeTokens": 4
   },
-  "config": {
-    "plainMapHomes": true
-  },
   "colors": {
     "train_yellow": "rgb(241, 231, 141)",
     "train_green": "rgb(165,211,167)",
