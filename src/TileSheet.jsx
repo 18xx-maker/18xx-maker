@@ -58,12 +58,20 @@ const gatherTiles = compose(sortTiles,
 const rotate = sides => map(s => (s % 6) + 1, sides);
 
 const tileAbove = (page, i) => {
-  let target = i - 4;
+  if (i % 6 === 0) {
+    return null;
+  }
+
+  let target = i - 1;
   return target >= 0 && page[target];
 };
 
 const tileBelow = (page, i) => {
-  let target = i + 4;
+  if ((i + 1) % 6 === 0) {
+    return null;
+  }
+
+  let target = i + 1;
   return target < page.length && page[target];
 };
 
@@ -107,12 +115,15 @@ const TileSheet = ({ paper, layout, hexWidth }) => {
           return concat(tiles, concat(repeat(null, c.perRow + 1), color));
         }
       case "die":
-        return concat(tiles, concat(repeat(null, c.perRow), color));
+        if (tiles.length % 6 === 0) {
+          return concat(tiles, color);
+        } else {
+          return concat(tiles, concat([null], color));
+        }
       default:
         return concat(tiles, color);
       }
     }, []),
-    // intersperse(repeat(null, layout === "offset" ? 5 : 4)),
     filter(x => x && x.length > 0),
     map(color => groupedByColor[color])
   )(tileColors);
@@ -134,7 +145,9 @@ const TileSheet = ({ paper, layout, hexWidth }) => {
         if (layout === "die" || layout === "individual") {
           let currentSides = sidesFromTile(hex);
           let pastSides = [];
-          if (i - c.perRow >= 0) {
+          if (layout === "die" && i - 1 >= 0) {
+            pastSides = sides[i - 1];
+          } else if (layout === "individual" && i - c.perRow >= 0) {
             pastSides = sides[i - c.perRow];
           }
 
