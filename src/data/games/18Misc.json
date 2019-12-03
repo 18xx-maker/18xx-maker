@@ -1311,22 +1311,25 @@
     "hexes": [
       {
         "color": "offboard",
-        "offBoardRevenue": {
+        "centerTowns": [{
           "name": {
-            "name": "Copper Country"
-          },
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "60"
-            }
-          ]
-        },
-        "offBoardTrack": [
+            "name": "Copper Country",
+            "reverse": true
+          }
+        }],
+        "values": [
+          {
+            "value": 60,
+            "angle": 180,
+            "percent": 0.5
+          }
+        ],
+        "track": [
           {
             "side": 4
           }
         ],
+        "removeBorders": [4],
         "hexes": [
           "A3"
         ]
@@ -1340,6 +1343,7 @@
             "percent": 0.5
           }
         ],
+        "removeBorders": [1],
         "towns": [
           {
             "rotation": 90,
@@ -1408,6 +1412,7 @@
             ]
           }
         ],
+        "removeBorders": [4],
         "hexes": [
           "A13"
         ]
