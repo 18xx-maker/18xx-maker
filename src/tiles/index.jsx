@@ -22,13 +22,13 @@ const TilesIndex = () => {
         <Route path="/tiles/yellow">
           <Tiles color="yellow" />
         </Route>
-        <Route path="/tiles/green">}>
+        <Route path="/tiles/green">
           <Tiles color="green" />
         </Route>
-        <Route path="/tiles/brown">}>
+        <Route path="/tiles/brown">
           <Tiles color="brown" />
         </Route>
-        <Route path="/tiles/gray">}>
+        <Route path="/tiles/gray">
           <Tiles color="gray" />
         </Route>
         <Route path="/tiles/atoms">
