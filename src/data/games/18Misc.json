@@ -1630,13 +1630,13 @@
         ],
         "track": [
           {
-            "start": 3
+            "side": 3
           },
           {
-            "start": 4
+            "side": 4
           },
           {
-            "start": 5
+            "side": 5
           }
         ],
         "hexes": [
@@ -1715,10 +1715,10 @@
         ],
         "track": [
           {
-            "start": 1
+            "side": 1
           },
           {
-            "start": 4
+            "side": 4
           }
         ],
         "values": [
@@ -1919,8 +1919,8 @@
         "color": "gray",
         "track": [
           {
-            "start": 2,
-            "end": 3
+            "type": "sharp",
+            "side": 2
           }
         ],
         "hexes": [
@@ -1995,16 +1995,13 @@
         ],
         "track": [
           {
-            "start": 1,
-            "end": 1
+            "side": 1
           },
           {
-            "start": 4,
-            "end": 4
+            "side": 4
           },
           {
-            "start": 6,
-            "end": 6
+            "side": 6
           }
         ],
         "borders": [
