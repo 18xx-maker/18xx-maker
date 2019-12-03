@@ -1,13 +1,12 @@
 {
   "info": {
-    "title": "1828K",
-    "subtitle": "1828 Redraw by Kelsin",
+    "title": "18Misc",
     "designer": "J C Lawrence",
     "background": "gray",
     "width": 150,
     "color_10": "orange",
     "titleY": 1300,
-    "titleX": 1525,
+    "titleX": 1510,
     "extraHomeTokens": 4
   },
   "config": {
