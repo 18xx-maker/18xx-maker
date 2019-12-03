@@ -10,7 +10,7 @@ const formatCell = value => {
   }
 }
 
-const Phase = ({ phases }) => {
+const Phase = ({ phases, minor }) => {
   let includeName = !R.all(
     R.compose(
       R.isNil,
@@ -60,7 +60,7 @@ const Phase = ({ phases }) => {
   );
 
   let phaseRows = phases.map(phase => {
-    return (
+    return (!!phase.minor === minor) && (
       <Color key={phase.phase || phase.name || phase.train}>
         {c => (
           <tr key={phase.phase || phase.name || phase.train}>
