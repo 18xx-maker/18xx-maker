@@ -1785,7 +1785,7 @@
           {
             "label": "E&K",
             "angle": 180,
-            "percent": 0.6,
+            "percent": 0.7,
             "radius": 8,
             "color": "red"
           }
@@ -2275,7 +2275,7 @@
           {
             "label": "SVN",
             "angle": 180,
-            "percent": 0.333,
+            "percent": 0.5,
             "radius": 8,
             "color": "red"
           }
@@ -3007,7 +3007,7 @@
           "cost": "$120",
           "size": "large",
           "angle": 180,
-          "percent": 0.6
+          "percent": 0.5
         },
         "track": [
           {
