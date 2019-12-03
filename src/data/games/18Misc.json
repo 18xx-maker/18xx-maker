@@ -1311,18 +1311,17 @@
     "hexes": [
       {
         "color": "offboard",
-        "labels": [
-          {
-            "angle": 0,
-            "percent": 0.333,
-            "label": "Copper Country"
-          }
-        ],
-        "values": [
-          {
-            "value": 60
-          }
-        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Copper Country"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "60"
+            }
+          ]
+        },
         "offBoardTrack": [
           {
             "side": 4
@@ -1394,23 +1393,19 @@
       },
       {
         "color": "offboard",
-        "offBoardRevenue": {
-          "angle": 0,
-          "percent": 0.15,
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "30"
-            },
-            {
-              "color": "brown",
-              "cost": "50"
-            }
-          ]
-        },
         "offBoardTrack": [
           {
             "side": 5
+          }
+        ],
+        "cities": [
+          {
+            "angle": 270,
+            "percent": 0.55,
+            "outside": true,
+            "companies": [
+              "OS&H"
+            ]
           }
         ],
         "hexes": [
@@ -1419,23 +1414,12 @@
       },
       {
         "color": "offboard",
-        "cities": [
-          {
-            "angle": 90,
-            "percent": 1,
-            "outside": true,
-            "companies": [
-              "OS&H"
-            ],
-            "name": {
-              "rotation": 60,
-              "name": "Canada"
-            }
-          }
-        ],
         "offBoardRevenue": {
-          "angle": 0,
-          "percent": 0.15,
+          "angle": 90,
+          "percent": 0.5,
+          "name": {
+            "name": "Canada"
+          },
           "revenues": [
             {
               "color": "yellow",
@@ -1455,6 +1439,7 @@
             "side": 6
           }
         ],
+        "removeBorders": [1],
         "hexes": [
           "A15"
         ]
@@ -1505,8 +1490,7 @@
       {
         "color": "plain",
         "water": {
-          "cost": "$80",
-          "size": "medium"
+          "cost": "$80"
         },
         "hexes": [
           "B6",
@@ -1515,15 +1499,10 @@
       },
       {
         "color": "offboard",
-        "labels": [
-          {
-            "angle": 180,
-            "percent": 0.333,
-            "label": "West",
-            "x": -25
-          }
-        ],
         "offBoardRevenue": {
+          "name": {
+            "name": "West"
+          },
           "revenues": [
             {
               "color": "yellow",
@@ -1568,8 +1547,7 @@
         "water": {
           "angle": 300,
           "percent": 0.5,
-          "cost": "$80",
-          "size": "medium"
+          "cost": "$80"
         },
         "hexes": [
           "I3"
@@ -1577,14 +1555,11 @@
       },
       {
         "color": "offboard",
-        "labels": [
-          {
-            "angle": 0,
-            "percent": 0.333,
-            "label": "New Orleans"
-          }
-        ],
         "offBoardRevenue": {
+          "reverse": true,
+          "name": {
+            "name": "New Orleans"
+          },
           "revenues": [
             {
               "color": "yellow",
@@ -1658,8 +1633,7 @@
         "water": {
           "angle": 300,
           "percent": 0.5,
-          "cost": "$80",
-          "size": "medium"
+          "cost": "$80"
         },
         "hexes": [
           "D6"
@@ -1667,14 +1641,10 @@
       },
       {
         "color": "offboard",
-        "labels": [
-          {
-            "angle": 180,
-            "percent": 0.333,
-            "label": "Chicago"
-          }
-        ],
         "offBoardRevenue": {
+          "name": {
+            "name": "Chicago"
+          },
           "revenues": [
             {
               "color": "yellow",
@@ -1746,8 +1716,7 @@
         "water": {
           "angle": 300,
           "percent": 0.5,
-          "cost": "$80",
-          "size": "medium"
+          "cost": "$80"
         },
         "hexes": [
           "F8"
@@ -1786,7 +1755,6 @@
             "label": "E&K",
             "angle": 180,
             "percent": 0.7,
-            "radius": 8,
             "color": "red"
           }
         ],
@@ -1814,8 +1782,7 @@
         "water": {
           "angle": 180,
           "percent": 0.6,
-          "cost": "$80",
-          "size": "medium"
+          "cost": "$80"
         },
         "labels": [
           {
@@ -1988,8 +1955,7 @@
           {
             "label": "C&P",
             "angle": 180,
-            "percent": 0.75,
-            "radius": 8,
+            "percent": 0.8,
             "color": "red"
           }
         ],
@@ -2028,14 +1994,11 @@
       },
       {
         "color": "offboard",
-        "labels": [
-          {
-            "angle": 0,
-            "percent": 0.333,
-            "label": "Deep South"
-          }
-        ],
         "offBoardRevenue": {
+          "reverse": true,
+          "name": {
+            "name": "Deep South"
+          },
           "revenues": [
             {
               "color": "yellow",
@@ -2276,7 +2239,6 @@
             "label": "SVN",
             "angle": 180,
             "percent": 0.5,
-            "radius": 8,
             "color": "red"
           }
         ],
@@ -2400,7 +2362,6 @@
             "label": "D&H",
             "angle": 60,
             "percent": 0.57,
-            "radius": 8,
             "color": "red"
           }
         ],
@@ -2429,7 +2390,6 @@
         "companies": [
           {
             "label": "M&H",
-            "radius": 8,
             "color": "red"
           }
         ],
@@ -2476,7 +2436,6 @@
             "label": "C&A",
             "angle": 180,
             "percent": 0.6,
-            "radius": 8,
             "color": "red"
           }
         ],
@@ -2633,7 +2592,6 @@
           {
             "label": "C&StL",
             "percent": 0.6,
-            "radius": 8,
             "color": "red"
           }
         ],
@@ -2683,15 +2641,11 @@
       },
       {
         "color": "offboard",
-        "labels": [
-          {
-            "label": "Maine",
-            "angle": 180,
-            "percent": 0.333
-          }
-        ],
         "offBoardRevenue": {
           "y": 0,
+          "name": {
+            "name": "Maine"
+          },
           "revenues": [
             {
               "cost": "20",
@@ -2752,7 +2706,6 @@
             "label": "StCT",
             "angle": 0,
             "percent": 0.6,
-            "radius": 8,
             "color": "red"
           }
         ],
@@ -2897,8 +2850,7 @@
         "water": {
           "angle": 300,
           "percent": 0.5,
-          "cost": "$80",
-          "size": "medium"
+          "cost": "$80"
         },
         "hexes": [
           "B14"
@@ -2934,8 +2886,7 @@
       {
         "color": "plain",
         "water": {
-          "cost": "$80",
-          "size": "medium"
+          "cost": "$80"
         },
         "borders": [
           {
@@ -3039,8 +2990,7 @@
       {
         "color": "plain",
         "water": {
-          "cost": "$80",
-          "size": "medium"
+          "cost": "$80"
         },
         "hexes": [
           "H2",
