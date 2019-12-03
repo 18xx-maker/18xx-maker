@@ -37,6 +37,10 @@ export const getTileSheetContext = (layout, paper, hexWidth) => {
     c.tileOffsetX = (c.width + 25);
     c.tileOffsetY = c.height;
 
+    // Functions to help find tile locations
+    c.getXindex = n => Math.floor(n / c.rowsPerPage)
+    c.getYindex = n => n % c.rowsPerPage;
+
     // Extra space around the page
     c.extraX = (c.pageWidth - (c.perRow * c.width) - ((c.perRow - 1) * 25)) / 2;
     c.extraY = 25 + 37.5; // Half inch above the pins, rest below
