@@ -1401,7 +1401,7 @@
         "cities": [
           {
             "angle": 270,
-            "percent": 0.55,
+            "percent": 0.6,
             "outside": true,
             "companies": [
               "OS&H"
@@ -1416,7 +1416,7 @@
         "color": "offboard",
         "offBoardRevenue": {
           "angle": 90,
-          "percent": 0.5,
+          "percent": 0.6,
           "name": {
             "name": "Canada"
           },
@@ -2230,7 +2230,6 @@
       {
         "color": "plain",
         "mountain": {
-          "size": "large",
           "cost": "$120",
           "percent": 0.333
         },
@@ -2343,7 +2342,6 @@
         "color": "plain",
         "mountain": {
           "cost": "$120",
-          "size": "large",
           "percent": 0.5,
           "angle": 180
         },
@@ -2372,8 +2370,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$120",
-          "size": "large"
+          "cost": "$120"
         },
         "borders": [
           {
@@ -2956,7 +2953,6 @@
         ],
         "mountain": {
           "cost": "$120",
-          "size": "large",
           "angle": 180,
           "percent": 0.5
         },
@@ -3003,8 +2999,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$120",
-          "size": "large"
+          "cost": "$120"
         },
         "hexes": [
           "C25",
