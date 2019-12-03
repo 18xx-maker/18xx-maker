@@ -1480,39 +1480,40 @@
     "values": [
       {
         "value": 90,
-        "angle": 150,
+        "angle": 143,
         "percent": 0.2
       }
     ],
     "labels": [
       {
         "label": "P",
-        "angle": 330,
+        "angle": 323,
         "percent": 0.25
       }
     ],
     "cities": [
       {
+        "angle": 353,
         "percent": 0.8
       },
       {
-        "angle": 60,
+        "angle": 53,
         "percent": 0.8
       },
       {
-        "angle": 120,
+        "angle": 113,
         "percent": 0.8
       },
       {
-        "angle": 180,
+        "angle": 173,
         "percent": 0.8
       },
       {
-        "angle": 240,
+        "angle": 233,
         "percent": 0.8
       },
       {
-        "angle": 300,
+        "angle": 293,
         "percent": 0.8
       }
     ]
@@ -1725,7 +1726,8 @@
     "labels": [
       {
         "angle": 150,
-        "percent": 0.85,
+        "percent": 0.9,
+        "size": 24,
         "label": "B"
       }
     ]
@@ -4415,7 +4417,7 @@
       {
         "value": 60,
         "angle": 90,
-        "percent": 0.85
+        "percent": 0.9
       }
     ],
     "cities": [
@@ -4529,6 +4531,7 @@
     ],
     "labels": [
       {
+        "size": 20,
         "label": "DC",
         "angle": 155,
         "percent": 0.85
@@ -4693,13 +4696,6 @@
   },
   "CLE7": {
     "color": "brown",
-    "labels": [
-      {
-        "label": "Union Depot",
-        "angle": 0,
-        "percent": 0.5
-      }
-    ],
     "track": [
       {
         "side": 3
@@ -4719,7 +4715,12 @@
       }
     ],
     "centerTowns": [
-      {}
+      {
+        "name": {
+          "name": "Union Depot",
+          "reverse": true
+        }
+      }
     ]
   }
 }
