@@ -1,12 +1,16 @@
 {
   "info": {
     "title": "18Misc",
+    "designer": "",
     "background": "gray",
-    "width": 150,
-    "color_10": "orange",
     "titleY": 1300,
     "titleX": 1510,
-    "extraHomeTokens": 4
+    "extraHomeTokens": 4,
+    "currency": "USD"
+  },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/272538/1828",
+    "rules": "https://kanga.nu/~claw/1828/1828-Rules.pdf"
   },
   "colors": {
     "train_yellow": "rgb(241, 231, 141)",
