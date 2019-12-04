@@ -6,9 +6,13 @@ import games from "../data/games";
 
 import GameContext from "../context/GameContext";
 
-const Currency = ({value, type, config}) => {
-  let converter = gameContext => {
-    let game = games[gameContext];
+export const format = (value, gameName, doCurrencyFormat) => {
+  if (value === null || value === undefined) {
+    return null;
+  } else if (is(String, value)) {
+    return value;
+  } else if (doCurrencyFormat) {
+    let game = games[gameName];
     let currency = game.info.currency || "USD";
 
     if (currency.indexOf("#") >= 0) {
@@ -16,17 +20,14 @@ const Currency = ({value, type, config}) => {
     } else {
       return Number(value).toLocaleString([], { style: "currency", currency, minimumFractionDigits: 0 });
     }
-  }
-
-  if (value === null || value === undefined) {
-    return null;
-  } else if (is(String, value)) {
-    return value;
-  } else if (config[type]) {
-    return <GameContext.Consumer>{converter}</GameContext.Consumer>;
   } else {
     return `${value}`;
   }
+}
+
+const Currency = ({value, type, config}) => {
+  let converter = gameContext => format(value, gameContext, config[type]);
+  return <GameContext.Consumer>{converter}</GameContext.Consumer>;
 }
 
 const mapStateToProps = state => ({
