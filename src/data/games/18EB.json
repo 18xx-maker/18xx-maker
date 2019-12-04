@@ -161,8 +161,8 @@
   "trains": [
     {
       "name": "2",
-      "quantity": 6,
-      "price": "$80",
+      "quantity": 12,
+      "price": "70",
       "color": "yellow",
       "info": [
         {
@@ -173,8 +173,8 @@
     },
     {
       "name": "3",
-      "quantity": 5,
-      "price": "$180",
+      "quantity": 6,
+      "price": "140",
       "color": "green",
       "info": [
         {
@@ -186,7 +186,7 @@
     {
       "name": "4",
       "quantity": 4,
-      "price": "$300",
+      "price": "250",
       "color": "green",
       "info": [
         {
@@ -198,7 +198,7 @@
     {
       "name": "5",
       "quantity": 3,
-      "price": "$450",
+      "price": "500",
       "color": "brown",
       "info": [
         {
@@ -210,7 +210,7 @@
     {
       "name": "6",
       "quantity": 2,
-      "price": "$630",
+      "price": "750",
       "color": "brown",
       "info": [
         {
@@ -220,11 +220,23 @@
       ]
     },
     {
-      "name": "D",
+      "name": "4D",
       "quantity": 6,
-      "price": "$1100",
+      "price": "1000",
+      "color": "gray",
+      "description": "Cost 800 when trading in a 4T, 5T or 6T",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "5",
+      "quantity": "1",
       "color": "brown",
-      "description": "Cost $800 when trading in a 4T, 5T or 6T",
+      "description": "Granted By P7",
       "info": [
         {
           "color": "yellow",
@@ -274,45 +286,42 @@
   "phases": [
     {
       "name": "2",
-      "limit": "4",
-      "number": "6",
+      "limit": "4/3",
+      "number": "12",
       "tiles": "yellow"
     },
     {
       "name": "3",
-      "limit": "4",
-      "number": "5",
-      "tiles": "green",
-      "notes": "Private companies may be purchased"
+      "limit": "4/3",
+      "number": "6",
+      "tiles": "green"
     },
     {
       "name": "4",
       "rust": "2",
-      "limit": "3",
+      "limit": "3/2",
       "number": "4",
       "tiles": "green"
     },
     {
       "name": "5",
-      "limit": "2",
+      "limit": "3/2",
       "number": "3",
-      "tiles": "brown",
-      "notes": "Private companies are closed"
+      "tiles": "brown"
     },
     {
       "name": "6",
-      "limit": "2",
+      "limit": "2/1",
       "number": "2",
       "rust": "3",
-      "tiles": "brown",
-      "notes": "D Trains may be purchased"
+      "tiles": "brown"
     },
     {
       "name": "D",
-      "limit": "2",
-      "number": "6",
+      "limit": "2/1",
+      "number": "∞",
       "rust": "4",
-      "tiles": "brown"
+      "tiles": "gray"
     }
   ],
   "pools": [
