@@ -2253,7 +2253,12 @@
         }],
         "cities": [{
           "rotate": 60,
-          "size": 2
+          "size": 2,
+          "name": {
+            "reverse": true,
+            "offset": 67.5,
+            "name": "Whitehearth"
+          }
         }],
         "hexes": ["K19"]
       },
