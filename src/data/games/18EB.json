@@ -2342,7 +2342,18 @@
           "type": "straight",
           "gauge": "dashed"
         }],
-        "hexes": ["L20", "M21", "N22"]
+        "removeBorders": [6],
+        "hexes": ["L20"]
+      },
+      {
+        "color": "water",
+        "track": [{
+          "side": 3,
+          "type": "straight",
+          "gauge": "dashed"
+        }],
+        "removeBorders": [3, 6],
+        "hexes": ["M21", "N22"]
       },
       {
         "color": "water",
@@ -2555,6 +2566,7 @@
           "percent": 0.1,
           "value": -10
         }],
+        "removeBorders": [3,5],
         "hexes": ["O23"]
       },
       {
@@ -2634,6 +2646,7 @@
           "type": "gentle",
           "gauge": "dashed"
         }],
+        "removeBorders": [1],
         "hexes": ["P20"]
       },
       {
@@ -2643,6 +2656,7 @@
           "type": "gentle",
           "gauge": "dashed"
         }],
+        "removeBorders": [2,4],
         "hexes": ["P22"]
       }
     ]
