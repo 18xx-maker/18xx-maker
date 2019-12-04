@@ -919,6 +919,13 @@
         ]
       },
       {
+        "color": "gray",
+        "routeBonus": [{
+          "value": "Q'Barra +40"
+        }],
+        "hexes": ["A15"]
+      },
+      {
         "color": "offboard",
         "offBoardTrack": [
           {
@@ -998,7 +1005,13 @@
           "F12",
           "G5",
           "G23",
-          "H14"
+          "H14",
+          "J4",
+          "J6",
+          "L4",
+          "M3",
+          "J24",
+          "O21"
         ]
       },
       {
@@ -1055,7 +1068,11 @@
           "E21",
           "F20",
           "H18",
-          "H22"
+          "H22",
+          "I17",
+          "J16",
+          "L6",
+          "N4"
         ]
       },
       {
@@ -1195,7 +1212,31 @@
           "F6",
           "F18",
           "G13",
-          "G19"
+          "G19",
+          "I15",
+          "I19",
+          "I23",
+          "J14",
+          "J18",
+          "K13",
+          "K17",
+          "L16",
+          "L18",
+          "M5",
+          "M7",
+          "M11",
+          "M17",
+          "M19",
+          "N8",
+          "N12",
+          "N14",
+          "N18",
+          "O7",
+          "O9",
+          "O11",
+          "O13",
+          "O15",
+          "O17"
         ]
       },
       {
@@ -1466,6 +1507,10 @@
         "color": "gray",
         "names": [{
           "name": "Blackcap Mountains"
+        }],
+        "terrain": [{
+          "type": "mountain",
+          "percent": 0.4
         }],
         "hexes": ["E15"]
       },
@@ -1829,6 +1874,136 @@
         "hexes": ["I3"]
       },
       {
+        "color": "gray",
+        "track": [{
+          "type": "gentle",
+          "side": 1,
+          "gauge": "dashed"
+        }],
+        "values": [{
+          "angle": 240,
+          "percent": 0.1,
+          "value": -10
+        }],
+        "hexes": ["I5"]
+      },
+      {
+        "color": "yellow",
+        "track": [{
+          "type": "straight",
+          "side": 1,
+          "gauge": "dashed"
+        },{
+          "type": "stop",
+          "side": 3
+        },{
+          "type": "stop",
+          "side": 5
+        }],
+        "labels": [{
+          "angle": 202,
+          "percent": 0.88,
+          "label": "OO",
+          "size": 20
+        }],
+        "values": [{
+          "angle": 330,
+          "percent": 0.75,
+          "value": 20
+        }],
+        "terrain": [{
+          "type": "water",
+          "cost": 50,
+          "angle": 30,
+          "percent": 0.75
+        }],
+        "borders": [{
+          "color": "black",
+          "side": 2
+        },{
+          "color": "black",
+          "side": 6
+        }],
+        "cities": [{
+          "angle": 120,
+          "percent": 0.5,
+          "name": {
+            "reverse": true,
+            "name": "Thaliost",
+            "offset": 45
+          }
+        },{
+          "angle": 240,
+          "percent": 0.5,
+          "name": {
+            "reverse": true,
+            "name": "Rekkenmark",
+            "offset": 55
+          }
+        }],
+        "hexes": ["I7"]
+      },
+      {
+        "color": "gray",
+        "track": [{
+          "type": "sharp",
+          "side": 3,
+          "gauge": "dashed"
+        }],
+        "hexes": ["I9"]
+      },
+      {
+        "color": "plain",
+        "borders": [{
+          "side": 3,
+          "color": "black"
+        },{
+          "side": 3,
+          "color": "black"
+        },{
+          "side": 5,
+          "color": "black"
+        },{
+          "side": 6,
+          "color": "black"
+        }],
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Aruldusk"
+            }
+          }
+        ],
+        "hexes": [
+          "I11"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "name": {
+            "name": "Vathirond"
+          }
+        }],
+        "borders": [{
+          "side": 5,
+          "color": "black"
+        }],
+        "hexes": ["I13"]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "companies": [{
+            "label": "DAR"
+          }],
+          "name": {
+            "name": "Rhukaan Draal"
+          }
+        }],
+        "hexes": ["I21"]
+      },
+      {
         "color": "water",
         "track": [{
           "type": "gentle",
@@ -1844,6 +2019,240 @@
         "hexes": ["J2"]
       },
       {
+        "color": "plain",
+        "borders": [
+          {
+            "color": "black",
+            "side": 1
+          },{
+            "color": "black",
+            "side": 3
+          }
+        ],
+        "labels": [{
+          "angle": 90,
+          "percent": 0.667,
+          "label": "Y"
+        }],
+        "cities": [{
+          "angle": 180,
+          "percent": 0.333,
+          "name": {
+            "name": "Korth"
+          }
+        }],
+        "terrain": [
+          {
+            "percent": 0.5,
+            "type": "swamp",
+            "cost": 20
+          }
+        ],
+        "hexes": ["J8"]
+      },
+      {
+        "color": "plain",
+        "borders": [{
+          "side": 2,
+          "color": "black"
+        },{
+          "side": 4,
+          "color": "black"
+        },{
+          "side": 5,
+          "color": "black"
+        }],
+        "hexes": ["J10"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{
+          "name": {
+            "name": "Kalazart",
+            "offset": 33
+          }
+        }],
+        "values": [{
+          "value": 20,
+          "angle": 300,
+          "percent": 0.667
+        }],
+        "track": [{
+          "side": 1
+        },{
+          "side": 5
+        }],
+        "borders": [{
+          "side": 2,
+          "color": "black"
+        },{
+          "side": 3,
+          "color": "black"
+        }],
+        "hexes": ["J12"]
+      },
+      {
+        "color": "plain",
+        "borders": [{
+          "side": 1,
+          "color": "black"
+        }],
+        "hexes": ["J20"]
+      },
+      {
+        "color": "plain",
+        "borders": [{
+          "side": 4,
+          "color": "black"
+        },{
+          "side": 5,
+          "color": "black"
+        }],
+        "terrain": [
+          {
+            "type": "swamp",
+            "cost": 20
+          }
+        ],
+        "hexes": ["J22"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "swamp",
+            "cost": 20,
+            "percent": 0.5,
+            "angle": 180
+          }
+        ],
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Ravengro"
+            },
+            "percent": 0.5
+          }
+        ],
+        "hexes": [
+          "K3"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "swamp",
+            "cost": 20,
+            "percent": 0.5,
+            "angle": 180
+          }
+        ],
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Askinor Lodge"
+            },
+            "percent": 0.5
+          }
+        ],
+        "hexes": [
+          "K5"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "angle": 180,
+          "percent": 0.333,
+          "name": {
+            "name": "Atur"
+          }
+        }],
+        "terrain": [
+          {
+            "percent": 0.5,
+            "type": "swamp",
+            "cost": 20
+          }
+        ],
+        "hexes": ["K7"]
+      },
+      {
+        "color": "plain",
+        "labels": [{
+          "angle": 90,
+          "percent": 0.667,
+          "label": "Y"
+        }],
+        "borders": [{
+          "side": 1,
+          "color": "black"
+        },{
+          "side": 2,
+          "color": "black"
+        },{
+          "side": 6,
+          "color": "black"
+        }],
+        "cities": [{
+          "name": {
+            "name": "Karrlakton"
+          }
+        }],
+        "hexes": ["K9"]
+      },
+      {
+        "color": "plain",
+        "borders": [{
+          "side": 4,
+          "color": "black"
+        }],
+        "hexes": ["K11"]
+      },
+      {
+        "color": "yellow",
+        "track": [{
+          "type": "straight",
+          "side": 1
+        }],
+        "values": [{
+          "value": 20,
+          "angle": 90,
+          "percent": 0.667
+        }],
+        "cities": [{
+          "name": {
+            "offset": 75,
+            "reverse": true,
+            "name": "Making"
+          }
+        }],
+        "hexes": ["K15"]
+      },
+      {
+        "color": "green",
+        "track": [{"side":2},{"side":4},{"side":5},{"side":6}],
+        "values": [{
+          "value": 30,
+          "angle": 90,
+          "percent": 0.8
+        }],
+        "cities": [{
+          "rotate": 60,
+          "size": 2
+        }],
+        "hexes": ["K19"]
+      },
+      {
+        "color": "plain",
+        "borders": [{
+          "side": 2,
+          "color": "black"
+        }],
+        "hexes": ["K21"]
+      },
+      {
         "color": "water",
         "track": [{
           "type": "straight",
@@ -1852,6 +2261,75 @@
         }],
         "removeBorders": [5],
         "hexes": ["L2"]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "name": {
+            "name": "Vedykar"
+          }
+        }],
+        "hexes": ["L8"]
+      },
+      {
+        "color": "plain",
+        "borders": [{
+          "side": 3,
+          "color": "black"
+        }],
+        "centerTowns": [{
+          "angle": 90,
+          "percent": 0.4,
+          "name": {
+            "name": "Fort Zombie"
+          }
+        },{
+          "angle": 270,
+          "percent": 0.4,
+          "name": {
+            "reverse": true,
+            "name": "Fort Bones"
+          }
+        }],
+        "hexes": ["L10"]
+      },
+      {
+        "color": "plain",
+        "labels": [{
+          "angle": 270,
+          "percent": 0.667,
+          "label": "Y"
+        }],
+        "cities": [{
+          "name": {
+            "name": "Metrol",
+            "offset": 56
+          }
+        }],
+        "track": [{
+          "side": 3
+        }],
+        "hexes": ["L12"]
+      },
+      {
+        "color": "gray",
+        "names": [{
+          "name": "Lake Cyre"
+        }],
+        "terrain": [{
+          "type": "water",
+          "percent": 0.4
+        }],
+        "hexes": ["L14"]
+      },
+      {
+        "color": "water",
+        "track": [{
+          "side": 3,
+          "type": "straight",
+          "gauge": "dashed"
+        }],
+        "hexes": ["L20", "M21", "N22"]
       },
       {
         "color": "water",
@@ -1869,6 +2347,35 @@
         "hexes": ["M1"]
       },
       {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Vulyar"
+            }
+          }
+        ],
+        "hexes": [
+          "M9"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [{
+          "color": "black",
+          "side": 1
+        }],
+        "hexes": ["M13"]
+      },
+      {
+        "color": "plain",
+        "borders": [{
+          "color": "black",
+          "side": 4
+        }],
+        "hexes": ["M15"]
+      },
+      {
         "color": "water",
         "track": [{
           "type": "straight",
@@ -1877,6 +2384,253 @@
         }],
         "removeBorders": [3],
         "hexes": ["N2"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Lakeside"
+            }
+          }
+        ],
+        "borders": [{
+          "side": 5,
+          "color": "black"
+        }],
+        "hexes": [
+          "N6"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "companies": [{
+            "label": "TP"
+          }],
+          "name": {
+            "name": "Gaterhold"
+          }
+        }],
+        "hexes": ["N10"]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "name": {
+            "name": "Keth"
+          }
+        }],
+        "hexes": ["N16"]
+      },
+      {
+        "color": "offboard",
+        "routeBonus": [{
+          "percent": 0.667,
+          "value": "East +50"
+        },{
+          "percent": 0.333,
+          "value": "South +30"
+        }],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Aerenal"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            },
+            {
+              "color": "gray",
+              "cost": "50"
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          }
+        ],
+        "hexes": [
+          "N20"
+        ]
+      },
+      {
+        "color": "offboard",
+        "routeBonus": [{
+          "angle": 180,
+          "percent": 0.667,
+          "value": "East +40"
+        },{
+          "angle": 180,
+          "percent": 0.333,
+          "value": "North +30"
+        }],
+        "offBoardRevenue": {
+          "reverse": true,
+          "name": {
+            "name": "Mror Holds"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            },
+            {
+              "color": "gray",
+              "cost": "60"
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          }
+        ],
+        "hexes": [
+          "O3"
+        ]
+      },
+      {
+        "color": "plain",
+        "borders": [{
+          "side": 2,
+          "color": "black"
+        }],
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 20
+          }
+        ],
+        "hexes": ["O5"]
+      },
+      {
+        "color": "water",
+        "track": [{
+          "side": 3,
+          "type": "gentle",
+          "gauge": "dashed"
+        }],
+        "values": [{
+          "percent": 0.1,
+          "value": -10
+        }],
+        "hexes": ["O23"]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "companies": [{
+            "label": "VAL"
+          }],
+          "name": {
+            "name": "Taer Valaestas"
+          }
+        }],
+        "hexes": ["O19"]
+      },
+      {
+        "color": "offboard",
+        "offBoardTrack": [
+          {
+            "side": 3
+          }
+        ],
+        "routeBonus": [{
+          "value": "East +50"
+        }],
+        "removeBorders": [1],
+        "hexes": [
+          "P12"
+        ]
+      },
+      {
+        "color": "offboard",
+        "removeBorders": [4],
+        "cities": [{
+          "angle": 180,
+          "percent": 1,
+          "outside": true,
+          "companies": [{
+            "label": "Q'B"
+          }]
+        }],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Q'Barra"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            },
+            {
+              "color": "gray",
+              "cost": "50"
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 2
+          }
+        ],
+        "hexes": [
+          "P14"
+        ]
+      },
+      {
+        "color": "water",
+        "track": [{
+          "side": 1,
+          "type": "gentle",
+          "gauge": "dashed"
+        }],
+        "hexes": ["P20"]
+      },
+      {
+        "color": "water",
+        "track": [{
+          "side": 2,
+          "type": "gentle",
+          "gauge": "dashed"
+        }],
+        "hexes": ["P22"]
       }
     ]
   }
