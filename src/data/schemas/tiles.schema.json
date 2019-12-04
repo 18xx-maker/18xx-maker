@@ -222,8 +222,7 @@
             "type": "object",
             "properties": {
               "value": {
-                "type": "number",
-                "minimum": 0
+                "type": "number"
               }
             },
             "required": ["value"]

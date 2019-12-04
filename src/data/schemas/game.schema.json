@@ -35,7 +35,7 @@
         },
         "extraHomeTokens": { "type": "number", "minimum": 1 },
         "extraTokens": { "type": "number", "minimum": 1 },
-        "currency": { "type": "string", "pattern": "[A-Z]{3}" }
+        "currency": { "type": "string" }
       },
       "required": ["title", "designer", "currency"],
       "additionalProperties": false
