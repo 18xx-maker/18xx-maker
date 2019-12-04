@@ -5,6 +5,8 @@ import { unitsToCss } from "./util";
 import Color from "./data/Color";
 import { GetFont, SetFont } from "./context/FontContext";
 
+import Currency from "./util/Currency";
+
 import "./Par.css";
 
 const mapStateToProps = state => ({
@@ -55,7 +57,7 @@ const ParCell = connect(mapStateToProps)(({ value, par, legend, stock }) => {
               ...font
             }}
           >
-            {(value && value.label) || value}
+            <Currency value={(value && value.label) || value} type="par"/>
           </div>
         )}</GetFont>
       )}

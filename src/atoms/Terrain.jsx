@@ -1,6 +1,8 @@
 import React from "react";
 import Color from "../data/Color";
 
+import Currency from "../util/Currency";
+
 const types = {
   cactus: "M 0 0 L 0 -20 M 0 -5 Q -5 -5, -5 -10 M 0 -10 Q 5 -10, 5 -15",
   mountain: "M -15 0 L -10 -5 L -5 0 M 5 0 L 10 -5 L 15 0 M -7.5 -2.5 L 0 -10 L 7.5 -2.5",
@@ -86,7 +88,7 @@ const Terrain = ({ type, size, cost, color, fontSize }) => {
             x="0"
             y="0"
           >
-            {cost}
+            <Currency value={cost} type="terrain" />
           </text>
         </g>
       )}
