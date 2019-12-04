@@ -9,8 +9,13 @@ import GameContext from "../context/GameContext";
 const Currency = ({value, type, config}) => {
   let converter = gameContext => {
     let game = games[gameContext];
-    let currency = game.currency || "USD";
-    return Number(value).toLocaleString([], { style: "currency", currency, minimumFractionDigits: 0 });
+    let currency = game.info.currency || "USD";
+
+    if (currency.indexOf("#") >= 0) {
+      return currency.replace("#", Number(value).toLocaleString([], { mimimumFractionDigits: 0 }));
+    } else {
+      return Number(value).toLocaleString([], { style: "currency", currency, minimumFractionDigits: 0 });
+    }
   }
 
   if (value === null || value === undefined) {
