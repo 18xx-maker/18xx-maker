@@ -25,9 +25,9 @@ const height = (size) => {
 }
 
 const makeNode = (x, y, reverse, revenue, size) => {
-  let length = letter(size) * revenue.cost.length;
+  let length = letter(size) * `${revenue.cost}`.length;
   let phaseLength = letter(size) * `${revenue.phase}`.length;
-  let width = R.max(revenue.cost.length, 2) * letter(size) + 5;
+  let width = R.max(`${revenue.cost}`.length, 2) * letter(size) + 5;
 
   let nodes = [
     <Color context="map"
@@ -87,10 +87,10 @@ const makeNode = (x, y, reverse, revenue, size) => {
   return nodes;
 };
 
-const getWidth = (r, size) => R.max(r.cost.length, 2) * letter(size) + 5;
+const getWidth = (r, size) => R.max(`${r.cost}`.length, 2) * letter(size) + 5;
 
 const makeNodes = (y, reverse, revenues, size) => {
-  let totalWidth = R.sum(R.map(r => 5 + letter(size) * R.max(r.cost.length, 2),
+  let totalWidth = R.sum(R.map(r => 5 + letter(size) * R.max(`${r.cost}`.length, 2),
                                revenues));
   let bx = -0.5 * totalWidth; // Starting x for border box
   let x = bx;

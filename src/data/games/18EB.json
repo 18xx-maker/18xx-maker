@@ -4,7 +4,7 @@
     "designer": "Michael Carter, Jeremy Long and Alexandra Sime",
     "background": "purple",
     "titleX": 50,
-    "currency": "XAU",
+    "currency": "#gp",
     "orientation": "horizontal",
     "extraTokens": 2
   },
@@ -42,7 +42,7 @@
       "abbrev": "ER",
       "tokens": [
         "Free",
-        "50"
+        50
       ],
       "color": "green"
     },
@@ -52,7 +52,7 @@
       "abbrev": "ZIL",
       "tokens": [
         "Free",
-        "50"
+        50
       ],
       "color": "black"
     },
@@ -62,7 +62,7 @@
       "abbrev": "DAR",
       "tokens": [
         "Free",
-        "50"
+        50
       ],
       "color": "black"
     },
@@ -72,7 +72,7 @@
       "abbrev": "VAL",
       "tokens": [
         "Free",
-        "50"
+        50
       ],
       "color": "black"
     },
@@ -82,7 +82,7 @@
       "abbrev": "TP",
       "tokens": [
         "Free",
-        "50"
+        50
       ],
       "color": "black"
     },
@@ -92,7 +92,7 @@
       "abbrev": "Q'B",
       "tokens": [
         "Free",
-        "50"
+        50
       ],
       "color": "black"
     },
@@ -102,7 +102,7 @@
       "abbrev": "DR",
       "tokens": [
         "Free",
-        "50"
+        50
       ],
       "color": "black"
     },
@@ -112,7 +112,7 @@
       "abbrev": "MH",
       "tokens": [
         "Free",
-        "50"
+        50
       ],
       "color": "black"
     },
@@ -122,7 +122,7 @@
       "abbrev": "DW",
       "tokens": [
         "Free",
-        "50"
+        50
       ],
       "color": "black"
     },
@@ -130,10 +130,10 @@
       "name": "Breland",
       "abbrev": "CPR",
       "tokens": [
-        "Free",
-        "40",
-        "60",
-        "80",
+        "Home",
+        40,
+        60,
+        80,
         "",
         "Exchange",
         ""
@@ -163,7 +163,7 @@
     {
       "name": "2",
       "quantity": 12,
-      "price": "70",
+      "price": 70,
       "color": "yellow",
       "info": [
         {
@@ -175,7 +175,7 @@
     {
       "name": "3",
       "quantity": 6,
-      "price": "140",
+      "price": 140,
       "color": "green",
       "info": [
         {
@@ -187,7 +187,7 @@
     {
       "name": "4",
       "quantity": 4,
-      "price": "250",
+      "price": 250,
       "color": "green",
       "info": [
         {
@@ -199,7 +199,7 @@
     {
       "name": "5",
       "quantity": 3,
-      "price": "500",
+      "price": 500,
       "color": "brown",
       "info": [
         {
@@ -211,7 +211,7 @@
     {
       "name": "6",
       "quantity": 2,
-      "price": "750",
+      "price": 750,
       "color": "brown",
       "info": [
         {
@@ -223,7 +223,7 @@
     {
       "name": "4D",
       "quantity": 6,
-      "price": "1000",
+      "price": 1000,
       "color": "gray",
       "description": "Cost 800 when trading in a 4T, 5T or 6T",
       "info": [
@@ -906,19 +906,19 @@
           "revenues": [
             {
               "color": "yellow",
-              "cost": "30"
+              "cost": 30
             },
             {
               "color": "green",
-              "cost": "40"
+              "cost": 40
             },
             {
               "color": "brown",
-              "cost": "50"
+              "cost": 50
             },
             {
               "color": "gray",
-              "cost": "60"
+              "cost": 60
             }
           ]
         },
@@ -970,19 +970,19 @@
           "revenues": [
             {
               "color": "yellow",
-              "cost": "20"
+              "cost": 20
             },
             {
               "color": "green",
-              "cost": "30"
+              "cost": 30
             },
             {
               "color": "brown",
-              "cost": "40"
+              "cost": 40
             },
             {
               "color": "gray",
-              "cost": "50"
+              "cost": 50
             }
           ]
         },
@@ -1110,19 +1110,19 @@
           "revenues": [
             {
               "color": "yellow",
-              "cost": "20"
+              "cost": 20
             },
             {
               "color": "green",
-              "cost": "30"
+              "cost": 30
             },
             {
               "color": "brown",
-              "cost": "40"
+              "cost": 40
             },
             {
               "color": "gray",
-              "cost": "50"
+              "cost": 50
             }
           ]
         },
@@ -1336,11 +1336,11 @@
           "revenues": [
             {
               "color": "yellow",
-              "cost": "40"
+              "cost": 40
             },
             {
               "color": "green",
-              "cost": "60"
+              "cost": 60
             },
             {
               "color": "brown",
@@ -2468,19 +2468,19 @@
           "revenues": [
             {
               "color": "yellow",
-              "cost": "20"
+              "cost": 20
             },
             {
               "color": "green",
-              "cost": "30"
+              "cost": 30
             },
             {
               "color": "brown",
-              "cost": "40"
+              "cost": 40
             },
             {
               "color": "gray",
-              "cost": "50"
+              "cost": 50
             }
           ]
         },
@@ -2515,19 +2515,19 @@
           "revenues": [
             {
               "color": "yellow",
-              "cost": "30"
+              "cost": 30
             },
             {
               "color": "green",
-              "cost": "40"
+              "cost": 40
             },
             {
               "color": "brown",
-              "cost": "50"
+              "cost": 50
             },
             {
               "color": "gray",
-              "cost": "60"
+              "cost": 60
             }
           ]
         },
@@ -2619,19 +2619,19 @@
           "revenues": [
             {
               "color": "yellow",
-              "cost": "20"
+              "cost": 20
             },
             {
               "color": "green",
-              "cost": "30"
+              "cost": 30
             },
             {
               "color": "brown",
-              "cost": "40"
+              "cost": 40
             },
             {
               "color": "gray",
-              "cost": "50"
+              "cost": 50
             }
           ]
         },
