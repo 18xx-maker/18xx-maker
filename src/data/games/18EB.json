@@ -5,7 +5,8 @@
     "background": "purple",
     "titleX": 50,
     "currency": "XAU",
-    "orientation": "horizontal"
+    "orientation": "horizontal",
+    "extraTokens": 2
   },
   "wip": true,
   "links": {
@@ -130,11 +131,11 @@
       "abbrev": "CPR",
       "tokens": [
         "Free",
-        "50",
-        "50",
-        "50",
+        "40",
+        "60",
+        "80",
         "",
-        "",
+        "Exchange",
         ""
       ],
       "color": "red",
@@ -367,11 +368,12 @@
     {
       "name": "Stock Round",
       "steps": [
-        "Sell any number of shares",
-        "Buy one share",
-        "Sell any number of shares"
+        "Place or incease bid",
+        "Sell then Buy shares",
+        "Launch a public company",
+        "Auction a minor company"
       ],
-      "ordered": true
+      "ordered": false
     },
     {
       "name": "Operating Round",
@@ -380,7 +382,9 @@
         "Purchase a station",
         "Run trains",
         "Pay dividends or withhold revenue",
-        "Purchase trains"
+        "Purchase trains",
+        "Acquire a minor company",
+        "Redeem or Issue Shares"
       ],
       "ordered": true,
       "optional": [
