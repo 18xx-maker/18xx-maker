@@ -8,6 +8,8 @@ import Pool from "./Pool";
 import Players from "./Players";
 import PageSetup from "./PageSetup";
 
+import Currency from "./util/Currency";
+
 require("./Revenue.css");
 
 const generateCells = (rows, cols) => {
@@ -27,7 +29,7 @@ const generateCells = (rows, cols) => {
                context="companies">
           {(c,t) => (
             <td style={{ backgroundColor: c(color), color: t(c(color)) }}>
-              {value}
+              <Currency value={value} type="revenue"/>
             </td>
           )}
         </Color>

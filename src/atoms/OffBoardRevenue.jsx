@@ -2,6 +2,7 @@ import React from "react";
 import * as R from "ramda";
 
 import Name from "./Name";
+import Currency from "../util/Currency";
 
 import Color from "../data/Color";
 
@@ -55,7 +56,7 @@ const makeNode = (x, y, reverse, revenue, size) => {
           x={x + 0.5 * width}
           y={y - 10 + (size / 2) + 2}
         >
-          {revenue.cost}
+          <Currency value={revenue.cost} type="offboard" />
         </text>
       )}
     </Color>

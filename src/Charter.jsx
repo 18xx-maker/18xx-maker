@@ -6,6 +6,7 @@ import Phase from "./Phase";
 import Color from "./data/Color";
 import ColorContext from "./context/ColorContext";
 import { unitsToCss } from "./util";
+import Currency from "./util/Currency";
 
 import is from "ramda/src/is";
 
@@ -29,7 +30,7 @@ const Charter = ({ name, abbrev, minor, token, tokens, phases, turns, charterSty
               {(c, t) => (
                 <text fill={(charterStyle === "color" && !halfWidthCharters) ? t(c(color)) : c("black")}
                       fontSize="11" fontWeight="normal" textAnchor="middle">
-                  {label}
+                  <Currency value={label} type="token"/>
                 </text>
               )}
             </Color>

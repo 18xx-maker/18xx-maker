@@ -2,11 +2,13 @@ import React from "react";
 import Color from "./data/Color";
 import * as R from "ramda";
 
+import Currency from "./util/Currency";
+
 const formatCell = value => {
   if(Array.isArray(value)) {
-    return R.addIndex(R.chain)((v,i) => [v,<br key={`br-${i}`}/>], value);
+    return R.addIndex(R.chain)((v,i) => [v,<br key={`br-${i}`}/>], <Currency value={value} type="train"/>);
   } else {
-    return value;
+    return <Currency value={value} type="train"/>;
   }
 }
 

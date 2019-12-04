@@ -40,6 +40,9 @@
       "required": ["title", "designer", "currency"],
       "additionalProperties": false
     },
+    "colors": {
+      "type": "object"
+    },
     "links": {
       "type": "object",
       "properties": {

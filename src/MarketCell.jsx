@@ -9,6 +9,8 @@ import addIndex from "ramda/src/addIndex";
 import is from "ramda/src/is";
 import map from "ramda/src/map";
 
+import Currency from "./util/Currency";
+
 const cap = str => str.charAt(0).toUpperCase() + str.slice(1);
 
 const arrows = {
@@ -112,13 +114,15 @@ const MarketCell = ({ borders, value, legend, par, colSpan, width, height }) => 
               ), is(Array, value.arrow) ? value.arrow : [value.arrow]);
             }
 
+            let displayValue = R.is(Object, value) ? (value.label || "") : value;
+
             return (
               <td
                 style={style}
                 className={classes.join(" ")}
                 colSpan={colSpan}
               >
-                {R.is(Object, value) ? (value.label || "") : value}
+                <Currency value={displayValue} type="market"/>
                 {value &&
                  R.has("subLabel") && (
                    <span className="MarketCell--SubLabel">{value.subLabel}</span>
