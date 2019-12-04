@@ -113,7 +113,7 @@ const Track = ({ type, gauge, border, offset, path }) => {
   let strokeDashArray = "none";
   let strokeDashOffset = "none";
   let narrow = null;
-  if (!border && gauge === "narrow") {
+  if (!border && (gauge === "narrow" || gauge === "dashed")) {
     strokeDashArray = `${width * 0.75}`;
     if (offset) {
       strokeDashOffset = `${offset}`;
@@ -137,7 +137,7 @@ const Track = ({ type, gauge, border, offset, path }) => {
   }
 
   // Line Gauge
-  if (gauge === "line") {
+  if (gauge === "line" || gauge === "dashed") {
     width = border ? 6 : 2;
   }
 

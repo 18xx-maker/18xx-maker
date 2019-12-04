@@ -20,201 +20,138 @@
   "players": [
     {
       "number": 2,
-      "certLimit": 20,
-      "capital": "$600"
+      "certLimit": 17,
+      "capital": "600"
     },
     {
       "number": 3,
-      "certLimit": 16,
-      "capital": "$400"
+      "certLimit": 15,
+      "cnkapital": "400"
     },
     {
       "number": 4,
-      "certLimit": 13,
-      "capital": "$300"
+      "certLimit": 12,
+      "capital": "300"
     }
   ],
   "companies": [
     {
-      "name": "Pennsylvania",
-      "abbrev": "PRR",
+      "name": "Eldeen Reaches",
+      "minor": true,
+      "abbrev": "ER",
       "tokens": [
         "Free",
-        "$40",
-        "$100",
-        "$100"
+        "50"
       ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     },
     {
-      "name": "New York Central",
-      "abbrev": "NYC",
+      "name": "Zilargo",
+      "minor": true,
+      "abbrev": "ZIL",
       "tokens": [
         "Free",
-        "$40",
-        "$100",
-        "$100"
+        "50"
       ],
-      "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "black"
     },
     {
-      "name": "Canadian Pacific",
+      "name": "Darguun",
+      "minor": true,
+      "abbrev": "DAR",
+      "tokens": [
+        "Free",
+        "50"
+      ],
+      "color": "black"
+    },
+    {
+      "name": "Valenar",
+      "minor": true,
+      "abbrev": "VAL",
+      "tokens": [
+        "Free",
+        "50"
+      ],
+      "color": "black"
+    },
+    {
+      "name": "Talenta Plains",
+      "minor": true,
+      "abbrev": "TP",
+      "tokens": [
+        "Free",
+        "50"
+      ],
+      "color": "black"
+    },
+    {
+      "name": "Q'Barra",
+      "minor": true,
+      "abbrev": "Q'B",
+      "tokens": [
+        "Free",
+        "50"
+      ],
+      "color": "black"
+    },
+    {
+      "name": "Droaam",
+      "minor": true,
+      "abbrev": "DR",
+      "tokens": [
+        "Free",
+        "50"
+      ],
+      "color": "black"
+    },
+    {
+      "name": "Mror Holds",
+      "minor": true,
+      "abbrev": "MH",
+      "tokens": [
+        "Free",
+        "50"
+      ],
+      "color": "black"
+    },
+    {
+      "name": "Demon Wastes",
+      "minor": true,
+      "abbrev": "DW",
+      "tokens": [
+        "Free",
+        "50"
+      ],
+      "color": "black"
+    },
+    {
+      "name": "Breland",
       "abbrev": "CPR",
       "tokens": [
         "Free",
-        "$40",
-        "$100",
-        "$100"
+        "50",
+        "50",
+        "50",
+        "",
+        "",
+        ""
       ],
       "color": "red",
       "shares": [
         {
           "quantity": 1,
           "label": "President's Certificate",
-          "percent": 20,
+          "percent": "20/40",
           "shares": 2
         },
         {
-          "quantity": 8,
-          "percent": 10,
+          "quantity": 3,
+          "percent": "20/10",
           "shares": 1
-        }
-      ]
-    },
-    {
-      "name": "Baltimore & Ohio",
-      "abbrev": "B&O",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
         },
         {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
-    },
-    {
-      "name": "Chesapeake & Ohio",
-      "abbrev": "C&O",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "cyan",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
-    },
-    {
-      "name": "Erie",
-      "abbrev": "ERIE",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
-    },
-    {
-      "name": "New York, New Haven & Hartford",
-      "abbrev": "NYNH",
-      "tokens": [
-        "Free",
-        "$40"
-      ],
-      "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
-    },
-    {
-      "name": "Boston & Maine",
-      "abbrev": "B&M",
-      "tokens": [
-        "Free",
-        "$40"
-      ],
-      "color": "brown",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
+          "quantity": 5,
           "percent": 10,
           "shares": 1
         }
@@ -925,40 +862,30 @@
     "hexes": [
       {
         "color": "offboard",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Eldeen Reaches"
-          },
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "30"
-            },
-            {
-              "color": "green",
-              "cost": "40"
-            },
-            {
-              "color": "brown",
-              "cost": "50"
-            },
-            {
-              "color": "gray",
-              "cost": "60"
-            }
-          ]
-        },
         "offBoardTrack": [
           {
             "side": 5
           }
         ],
+        "routeBonus": [{
+          "value": "West +60"
+        }],
+        "removeBorders": [1],
         "hexes": [
           "A11"
         ]
       },
       {
         "color": "offboard",
+        "removeBorders": [4],
+        "cities": [{
+          "angle": 180,
+          "percent": 1,
+          "outside": true,
+          "companies": [{
+            "label": "ER"
+          }]
+        }],
         "offBoardRevenue": {
           "name": {
             "name": "Eldeen Reaches"
@@ -993,40 +920,29 @@
       },
       {
         "color": "offboard",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Droaam"
-          },
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "20"
-            },
-            {
-              "color": "green",
-              "cost": "30"
-            },
-            {
-              "color": "brown",
-              "cost": "40"
-            },
-            {
-              "color": "gray",
-              "cost": "50"
-            }
-          ]
-        },
         "offBoardTrack": [
           {
             "side": 5
           }
         ],
+        "routeBonus": [{
+          "value": "West +60"
+        }],
+        "removeBorders": [1],
         "hexes": [
           "A17"
         ]
       },
       {
         "color": "offboard",
+        "cities": [{
+          "outside": true,
+          "percent": 1,
+          "angle": 180,
+          "companies": [{
+            "label": "DR"
+          }]
+        }],
         "offBoardRevenue": {
           "name": {
             "name": "Droaam"
@@ -1055,6 +971,7 @@
             "side": 6
           }
         ],
+        "removeBorders": [4],
         "hexes": [
           "A19"
         ]
@@ -1073,7 +990,15 @@
           "B12",
           "B20",
           "C7",
-          "C9"
+          "C9",
+          "D24",
+          "E7",
+          "E17",
+          "E23",
+          "F12",
+          "G5",
+          "G23",
+          "H14"
         ]
       },
       {
@@ -1126,7 +1051,11 @@
           }
         ],
         "hexes": [
-          "B18"
+          "B18",
+          "E21",
+          "F20",
+          "H18",
+          "H22"
         ]
       },
       {
@@ -1248,6 +1177,9 @@
             "side": 5
           }
         ],
+        "names": [{
+          "name": "Silver Lake"
+        }],
         "hexes": [
           "C15"
         ]
@@ -1255,7 +1187,15 @@
       {
         "color": "plain",
         "hexes": [
-          "C17"
+          "C17",
+          "D16",
+          "D18",
+          "E13",
+          "E19",
+          "F6",
+          "F18",
+          "G13",
+          "G19"
         ]
       },
       {
@@ -1296,6 +1236,647 @@
         "hexes": [
           "C21"
         ]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "color": "black",
+            "side": 4
+          }
+        ],
+        "labels": [{
+          "angle": 90,
+          "percent": 0.667,
+          "label": "SH"
+        }],
+        "cities": [{
+          "angle": 180,
+          "percent": 0.333,
+          "name": {
+            "name": "Sharn"
+          }
+        }],
+        "terrain": [
+          {
+            "percent": 0.5,
+            "type": "swamp",
+            "cost": 20
+          }
+        ],
+        "hexes": ["C23"]
+      },
+      {
+        "color": "offboard",
+        "routeBonus": [{
+          "percent": 0.667,
+          "value": "West +50"
+        },{
+          "percent": 0.333,
+          "value": "South +30"
+        }],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Xen'Drik"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "40"
+            },
+            {
+              "color": "green",
+              "cost": "60"
+            },
+            {
+              "color": "brown",
+              "cost": "80"
+            },
+            {
+              "color": "gray",
+              "cost": "100"
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 4
+          }
+        ],
+        "hexes": [
+          "C25"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "angle": 90,
+          "percent": 0.5,
+          "name": {
+            "name": "Alrivad"
+          }
+        },{
+          "angle": 270,
+          "percent": 0.5,
+          "name": {
+            "name": "Merylsward"
+          }
+        }],
+        "terrain": [
+          {
+            "percent": 0.5,
+            "type": "swamp",
+            "cost": 20
+          }
+        ],
+        "hexes": ["D6"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Wolf's Paw"
+            }
+          }
+        ],
+        "hexes": [
+          "D8"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Cree"
+            }
+          }
+        ],
+        "hexes": [
+          "D10"
+        ]
+      },
+      {
+        "color": "water",
+        "removeBorders": [5],
+        "hexes": ["D12"]
+      },
+      {
+        "color": "plain",
+        "borders": [{
+          "side": 2,
+          "color": "black"
+        }],
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 20
+          }
+        ],
+        "hexes": ["D14"]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "color": "black",
+            "side": 2
+          },{
+            "color": "black",
+            "side": 3
+          }
+        ],
+        "labels": [{
+          "angle": 90,
+          "percent": 0.667,
+          "label": "Y"
+        }],
+        "cities": [{
+          "angle": 180,
+          "percent": 0.333,
+          "name": {
+            "name": "Wroat"
+          }
+        }],
+        "terrain": [
+          {
+            "percent": 0.5,
+            "type": "swamp",
+            "cost": 20
+          }
+        ],
+        "hexes": ["D20"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "swamp",
+            "cost": 20
+          }
+        ],
+        "borders": [{
+          "side": 3,
+          "color": "black"
+        }],
+        "hexes": ["D22"]
+      },
+      {
+        "color": "water",
+        "track": [{
+          "gauge": "dashed",
+          "type": "straight",
+          "side": 2
+        }],
+        "removeBorders": [5],
+        "hexes": ["E5"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "swamp",
+            "cost": 20,
+            "percent": 0.5,
+            "angle": 180
+          }
+        ],
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Varna"
+            },
+            "percent": 0.5
+          }
+        ],
+        "hexes": [
+          "E9"
+        ]
+      },
+      {
+        "color": "water",
+        "names": [{
+          "name": "Lake Galifar"
+        }],
+        "removeBorders": [2],
+        "hexes": ["E11"]
+      },
+      {
+        "color": "gray",
+        "names": [{
+          "name": "Blackcap Mountains"
+        }],
+        "hexes": ["E15"]
+      },
+      {
+        "color": "water",
+        "track": [{
+          "gauge": "dashed",
+          "type": "straight",
+          "side": 2
+        }],
+        "removeBorders": [2,5],
+        "hexes": ["F4"]
+      },
+      {
+        "color": "plain",
+        "labels": [{
+          "angle": 90,
+          "percent": 0.667,
+          "label": "Y"
+        }],
+        "cities": [{
+          "name": {
+            "name": "Fairhaven"
+          }
+        }],
+        "hexes": ["F8"]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "name": {
+            "name": "Passage"
+          }
+        }],
+        "hexes": ["F10"]
+      },
+      {
+        "color": "yellow",
+        "values": [{
+          "angle": 270,
+          "percent": 0.5,
+          "value": 10
+        }],
+        "towns": [{
+          "rotate": 180,
+          "name": {
+            "name": "Cragwar"
+          }
+        }],
+        "track": [{
+          "side": 1,
+          "type": "straight"
+        }],
+        "hexes": ["F14"]
+      },
+      {
+        "color": "yellow",
+        "track": [{
+          "side": 1,
+          "type": "straight"
+        }],
+        "hexes": ["F16"]
+      },
+      {
+        "color": "water",
+        "track": [{
+          "gauge": "dashed",
+          "type": "gentle",
+          "side": 6
+        }],
+        "values": [{
+          "angle": 180,
+          "percent": 0.1,
+          "value": -10
+        }],
+        "removeBorders": [2],
+        "hexes": ["G3"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Oskilor"
+            }
+          }
+        ],
+        "hexes": [
+          "F22"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "angle": 180,
+          "percent": 0.333,
+          "companies": [{
+            "label": "ZIL"
+          }],
+          "name": {
+            "name": "Trollanport"
+          }
+        }],
+        "terrain": [
+          {
+            "percent": 0.5,
+            "type": "swamp",
+            "cost": 20
+          }
+        ],
+        "hexes": ["F24"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "angle": 90,
+          "percent": 0.4,
+          "name": {
+            "name": "Wrogar Keep"
+          }
+        },{
+          "angle": 270,
+          "percent": 0.4,
+          "name": {
+            "reverse": true,
+            "name": "Daskaran"
+          }
+        }],
+        "hexes": ["G7"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Lathleer"
+            }
+          }
+        ],
+        "hexes": [
+          "G9"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Morningcrest"
+            }
+          }
+        ],
+        "hexes": [
+          "G11"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Sword Keep"
+            }
+          }
+        ],
+        "borders": [{
+          "side": 6,
+          "color": "black"
+        }],
+        "hexes": [
+          "G15"
+        ]
+      },
+      {
+        "color": "yellow",
+        "values": [{
+          "angle": 330,
+          "percent": 0.5,
+          "value": 10
+        }],
+        "towns": [{
+          "rotate": 240,
+          "name": {
+            "name": "Dragon's Crown"
+          }
+        }],
+        "track": [{
+          "side": 2,
+          "type": "straight"
+        }],
+        "hexes": ["G17"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Dragonroost"
+            }
+          }
+        ],
+        "hexes": [
+          "G21"
+        ]
+      },
+      {
+        "color": "water",
+        "track": [{
+          "type": "gentle",
+          "side": 3,
+          "gauge": "dashed"
+        }],
+        "values": [{
+          "percent": 0.1,
+          "value": -10
+        }],
+        "hexes": ["G25"]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "angle": 180,
+          "percent": 0.333,
+          "name": {
+            "name": "Stormhome"
+          }
+        }],
+        "terrain": [
+          {
+            "percent": 0.5,
+            "type": "swamp",
+            "cost": 20
+          }
+        ],
+        "hexes": ["H4"]
+      },
+      {
+        "color": "plain",
+        "borders": [{
+          "side": 1,
+          "color": "black"
+        }],
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 20
+          }
+        ],
+        "hexes": ["H6"]
+      },
+      {
+        "color": "plain",
+        "labels": [{
+          "angle": 90,
+          "percent": 0.667,
+          "label": "Y"
+        }],
+        "borders": [{
+          "side": 4,
+          "color": "black"
+        },{
+          "side": 5,
+          "color": "black"
+        }],
+        "cities": [{
+          "name": {
+            "name": "Flamekeep"
+          }
+        }],
+        "hexes": ["H8"]
+      },
+      {
+        "color": "plain",
+        "borders": [{
+          "side": 6,
+          "color": "black"
+        }],
+        "hexes": ["H10"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Sigilstar"
+            }
+          }
+        ],
+        "hexes": [
+          "H12"
+        ]
+      },
+      {
+        "color": "yellow",
+        "track": [{
+          "type": "straight",
+          "side": 2
+        }],
+        "labels": [{
+          "label": "S",
+          "angle": 210,
+          "percent": 0.75
+        }],
+        "values": [{
+          "value": 20,
+          "angle": 150,
+          "percent": 0.667
+        }],
+        "cities": [{
+          "name": {
+            "offset": 59,
+            "reverse": true,
+            "name": "Starilaskur"
+          }
+        }],
+        "borders": [{
+          "side": 3,
+          "color": "black"
+        }],
+        "hexes": ["H16"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 20,
+            "percent": 0.5,
+            "angle": 180
+          }
+        ],
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Volaar Draal"
+            },
+            "percent": 0.5
+          }
+        ],
+        "hexes": [
+          "H20"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "name": {
+            "name": "Korranberg"
+          }
+        }],
+        "hexes": ["H24"]
+      },
+      {
+        "color": "water",
+        "track": [{
+          "type": "straight",
+          "side": 2,
+          "gauge": "dashed"
+        }],
+        "removeBorders": [5],
+        "hexes": ["I3"]
+      },
+      {
+        "color": "water",
+        "track": [{
+          "type": "gentle",
+          "side": 6,
+          "gauge": "dashed"
+        }],
+        "values": [{
+          "angle": 180,
+          "percent": 0.1,
+          "value": -10
+        }],
+        "removeBorders": [2],
+        "hexes": ["J2"]
+      },
+      {
+        "color": "water",
+        "track": [{
+          "type": "straight",
+          "side": 2,
+          "gauge": "dashed"
+        }],
+        "removeBorders": [5],
+        "hexes": ["L2"]
+      },
+      {
+        "color": "water",
+        "track": [{
+          "type": "gentle",
+          "side": 6,
+          "gauge": "dashed"
+        }],
+        "values": [{
+          "angle": 180,
+          "percent": 0.1,
+          "value": -10
+        }],
+        "removeBorders": [2,6],
+        "hexes": ["M1"]
+      },
+      {
+        "color": "water",
+        "track": [{
+          "type": "straight",
+          "side": 3,
+          "gauge": "dashed"
+        }],
+        "removeBorders": [3],
+        "hexes": ["N2"]
       }
     ]
   }
