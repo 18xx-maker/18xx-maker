@@ -240,6 +240,19 @@ const Config = ({config, setConfig, resetConfig}) => {
       <h3>Cards</h3>
       <Input name="shareStyle" label="Share Style"
              description="This lets you choose between two styles for shares. One keeps the token in the center of the card, the other puts the tokens on the let (Simular to All Aboard Games and Deep Thought Games)."/>
+      <h3>Currency</h3>
+      <p>This lets you turn on currency symbols for each item individually. Only works if the game file specificies values as numbers and not strings.</p>
+      <Input name="currency.bank" label="Bank" description="Bank total on revenue page"/>
+      <Input name="currency.capital" label="Capital" description="Player capital list on revenue page"/>
+      <Input name="currency.market" label="Market" description="Stock market cells"/>
+      <Input name="currency.offboard" label="Offboard" description="Offboard values on maps"/>
+      <Input name="currency.par" label="Par" description="Stock market par boxes"/>
+      <Input name="currency.private" label="Private" description="Private costs and revenue on cards"/>
+      <Input name="currency.revenue" label="Revenue" description="Revenue tracker cells"/>
+      <Input name="currency.terrain" label="Terrain" description="Terrain costs on maps and track tiles"/>
+      <Input name="currency.token" label="Token" description="Token costs on charters"/>
+      <Input name="currency.train" label="Train" description="Train costs on cards and charters"/>
+      <Input name="currency.value" label="Value" description="Values on maps and track tiles"/>
       <h2>Reset</h2>
       <p>You can remove any custom settings and revert back to the defaults with this button.</p>
       <button onClick={resetConfig}>Reset To Defaults</button>
