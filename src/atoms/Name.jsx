@@ -1,7 +1,7 @@
 import React from "react";
 import Color from "../data/Color";
 
-const Name = ({ name, color, bgColor, path, rotation, reverse, offset, y, textLength, fontSize }) => {
+const Name = ({ name, color, bgColor, path, rotation, reverse, offset, y, textLength, fontFamily, fontSize, fontStyle, fontWeight }) => {
   let fillColor = color || "black";
   fontSize = fontSize || 11;
 
@@ -26,9 +26,10 @@ const Name = ({ name, color, bgColor, path, rotation, reverse, offset, y, textLe
           dy={y}
           transform={`rotate(${(rotation || 0) + 360})`}
           fill={bgColor ? t(c(bgColor)) : p(fillColor)}
-          fontFamily="sans-serif"
+          fontFamily={fontFamily || "sans-serif"}
           fontSize={fontSize || 11}
-          fontWeight="bold"
+          fontStyle={fontStyle || "regular"}
+          fontWeight={fontWeight || "bold"}
           textLength={textLength}
           textAnchor="middle"
         >
