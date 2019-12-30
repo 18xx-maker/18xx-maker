@@ -25,8 +25,8 @@ const SetSvgColors = ({ companySvgLogos }) => {
 
           if (companySvgLogos === "main") {
             rules = concat(rules, chain(color => [
-              `svg .color-main-${color} .color-main{fill:${c(color)}}`,
-              `svg .color-main-${color} .color-stroke-main{stroke:${c(color)}}`,
+              `svg.color-main-${color} .color-main{fill:${c(color)}}`,
+              `svg.color-main-${color} .color-stroke-main{stroke:${c(color)}}`,
             ], colors));
           }
 
