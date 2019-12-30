@@ -97,7 +97,7 @@
       "properties": {
         "layout": {
           "type": "string",
-          "enum": ["offset", "individual", "die"]
+          "enum": ["offset", "individual", "die", "smallDie"]
         },
         "width": {
           "type": "number",
