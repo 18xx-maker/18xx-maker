@@ -92,8 +92,14 @@ const atoms = [{
                         companies: [{},
                                     {label:"BM",color:"brown"},
                                     {label:"PRR",color:"green"}]
-                       }]
-             }]
+                       }]},
+             {cities: [{size:1,
+                        pass:true
+                       }]},
+             {cities: [{size:2,
+                        pass:true
+                       }]},
+            ]
 },{
   group: "Towns",
   examples: [{towns: [{}]},

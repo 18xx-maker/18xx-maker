@@ -13,7 +13,7 @@ import Config from "../data/Config";
 import ColorContext from "../context/ColorContext";
 import RotateContext from "../context/RotateContext";
 
-const City = ({ straightCityNames, size, companies, border, name, extend, rotation, bgColor }) => {
+const City = ({ straightCityNames, size, companies, border, name, extend, rotation, pass, bgColor }) => {
   if (size === undefined) {
     size = 1;
   }
@@ -95,7 +95,14 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
       return (
         <Color>
           {c => (
-            <circle fill={c("border")} stroke="none" cx="0" cy="0" r="28" />
+            <g>
+              {pass && <polygon
+                          fill={c("border")}
+                          stroke="none"
+                          points="0,-46 -39.83716857,23 39.83716857,23"
+                          />}
+              <circle fill={c("border")} stroke="none" cx="0" cy="0" r="28" />
+            </g>
           )}
         </Color>
       );
@@ -104,13 +111,21 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
         <g>
           <Color context="companies">
             {c => (
-              <circle
-                fill={c(companyColor(0) || "city")}
-                stroke="none"
-                cx="0"
-                cy="0"
-                r="25"
-              />
+              <g>
+                {pass && <polygon
+                          fill={c("gray")}
+                          stroke={c("track")}
+                          strokeWidth="2"
+                          points="0,-40 -34.64101615,20 34.64101615,20"
+                        />}
+                <circle
+                  fill={c(companyColor(0) || "city")}
+                  stroke="none"
+                  cx="0"
+                  cy="0"
+                  r="25"
+                />
+              </g>
             )}
           </Color>
           {companyLabel(0)}
@@ -137,14 +152,21 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
       return (
         <Color>
           {c => (
-            <polygon
-              points={`${leftBorder},0 ${rightBorder},0`}
-              fill={c("border")}
-              stroke={c("border")}
-              strokeWidth="56"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-            />
+            <g>
+              {pass && <polygon
+                            fill={c("border")}
+                            stroke="none"
+                            points="0,-48 -48.49742261,35 48.49742261,35"
+                    />}
+              <polygon
+                points={`${leftBorder},0 ${rightBorder},0`}
+                fill={c("border")}
+                stroke={c("border")}
+                strokeWidth="56"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+              />
+            </g>
           )}
         </Color>
       );
@@ -153,6 +175,12 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
         <Color context="companies">
           {c => (
             <g>
+              {pass && <polygon
+                          fill={c("gray")}
+                          stroke={c("track")}
+                          strokeWidth="2"
+                          points="0,-42 -43.30127019,32 43.30127019,32"
+                        />}
               <polygon
                 points={`${leftBorder},-25, ${rightBorder},-25 ${rightBorder},25 ${leftBorder},25`}
                 fill={c("city")}
