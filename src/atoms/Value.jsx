@@ -3,6 +3,8 @@ import Color from "../data/Color";
 
 import RotateContext from "../context/RotateContext";
 
+import Currency from "../util/Currency";
+
 const Value = ({ value, fixed, outerBorderColor }) => {
   let size = 15;
   if (value.toString().length > 2) {
@@ -40,10 +42,12 @@ const Value = ({ value, fixed, outerBorderColor }) => {
                 fill={p("black")}
                 dominantBaseline="central"
                 textAnchor="middle"
+                textLength={18}
+                lengthAdjust="spacingAndGlyphs"
                 x="0"
                 y="0"
               >
-                {value}
+                <Currency value={value} type="value"/>
               </text>
             </g>
           )}

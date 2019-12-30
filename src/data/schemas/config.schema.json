@@ -43,6 +43,24 @@
         "required": ["margins"]
       }]
     },
+    "currency": {
+      "type": "object",
+      "properties": {
+        "bank": { "type": "boolean" },
+        "capital": { "type": "boolean" },
+        "market": { "type": "boolean" },
+        "offboard": { "type": "boolean" },
+        "par": { "type": "boolean" },
+        "private": { "type": "boolean" },
+        "revenue": { "type": "boolean" },
+        "terrain": { "type": "boolean" },
+        "token": { "type": "boolean" },
+        "train": { "type": "boolean" },
+        "value": { "type": "boolean" }
+      },
+      "required": ["bank", "capital", "market", "offboard", "par", "private", "revenue", "terrain", "token", "train", "value"],
+      "additionalProperties": false
+    },
     "stock": {
       "type": "object",
       "properties": {
