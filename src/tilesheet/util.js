@@ -3,10 +3,14 @@ import { HEX_RATIO } from "../map/util";
 export const getTileSheetContext = (layout, paper, hexWidth) => {
   let c = { layout, paper, hexWidth };
 
-  if (layout === "die") {
+  // Hardcode hexWidth for the layouts corresponding to dies
+  switch (layout) {
+  case "die":
     c.hexWidth = 150;
-  } else if (layout === "smallDie") {
+    break;
+  case "smallDie":
     c.hexWidth = 106.25;
+    break;
   }
 
   // Usable Height and Width on the chosen paper
