@@ -14,22 +14,22 @@
     "Round"
   ],
   "ipo": true,
-  "bank": "$9,000",
+  "bank": 9000,
   "players": [
     {
       "number": 3,
       "certLimit": 13,
-      "capital": "$400"
+      "capital": 400
     },
     {
       "number": 4,
       "certLimit": 10,
-      "capital": "$300"
+      "capital": 300
     },
     {
       "number": 5,
       "certLimit": 8,
-      "capital": "$240"
+      "capital": 240
     }
   ],
   "companies": [
@@ -37,10 +37,10 @@
       "name": "Pennsylvania Railroad",
       "abbrev": "PRR",
       "tokens": [
-        "$100",
-        "$100",
-        "$100",
-        "$100"
+        100,
+        100,
+        100,
+        100
       ],
       "color": "green",
       "shares": [
@@ -61,10 +61,10 @@
       "name": "New York Central Railroad",
       "abbrev": "NYC",
       "tokens": [
-        "$100",
-        "$100",
-        "$100",
-        "$100"
+        100,
+        100,
+        100,
+        100
       ],
       "color": "black",
       "shares": [
@@ -85,10 +85,10 @@
       "name": "Baltimore & Ohio Railroad",
       "abbrev": "B&O",
       "tokens": [
-        "$100",
-        "$100",
-        "$100",
-        "$100"
+        100,
+        100,
+        100,
+        100
       ],
       "color": "blue",
       "shares": [
@@ -109,10 +109,10 @@
       "name": "Chesapeake & Ohio Railroad",
       "abbrev": "C&O",
       "tokens": [
-        "$100",
-        "$100",
-        "$100",
-        "$100"
+        100,
+        100,
+        100,
+        100
       ],
       "color": "cyan",
       "shares": [
@@ -133,10 +133,10 @@
       "name": "Erie Railroad",
       "abbrev": "ERIE",
       "tokens": [
-        "$100",
-        "$100",
-        "$100",
-        "$100"
+        100,
+        100,
+        100,
+        100
       ],
       "color": "yellow",
       "shares": [
@@ -254,7 +254,7 @@
     {
       "name": "2",
       "quantity": 6,
-      "price": "$80",
+      "price": 80,
       "color": "yellow",
       "info": [
         {
@@ -266,7 +266,7 @@
     {
       "name": "3",
       "quantity": 5,
-      "price": "$180",
+      "price": 180,
       "color": "green",
       "info": [
         {
@@ -278,7 +278,7 @@
     {
       "name": "4",
       "quantity": 4,
-      "price": "$300",
+      "price": 300,
       "color": "green",
       "info": [
         {
@@ -290,7 +290,7 @@
     {
       "name": "5",
       "quantity": 3,
-      "price": "$450",
+      "price": 450,
       "color": "brown",
       "info": [
         {
@@ -302,7 +302,7 @@
     {
       "name": "6",
       "quantity": 3,
-      "price": "$630",
+      "price": 630,
       "color": "brown",
       "info": [
         {
@@ -314,7 +314,7 @@
     {
       "name": "D",
       "quantity": 6,
-      "price": "$1100",
+      "price": 1100,
       "color": "brown",
       "description": "Cost $800 when trading in a 4T, 5T or 6T",
       "info": [
@@ -330,14 +330,14 @@
       "name": "2",
       "limit": "4",
       "number": "6",
-      "price": "$80",
+      "price": 80,
       "tiles": "yellow"
     },
     {
       "name": "3",
       "limit": "4",
       "number": "5",
-      "price": "$180",
+      "price": 180,
       "tiles": "green"
     },
     {
@@ -345,21 +345,21 @@
       "rust": "2",
       "limit": "3",
       "number": "4",
-      "price": "$300",
+      "price": 300,
       "tiles": "green"
     },
     {
       "name": "5",
       "limit": "2",
       "number": "3",
-      "price": "$450",
+      "price": 450,
       "tiles": "brown"
     },
     {
       "name": "6",
       "limit": "2",
       "number": "3",
-      "price": "$630",
+      "price": 630,
       "rust": "3",
       "tiles": "brown",
       "notes": "D Trains may be purchased, Early Railroads are closed"
@@ -368,7 +368,7 @@
       "name": "D",
       "limit": "2",
       "number": "6",
-      "price": "$1100",
+      "price": 1100,
       "rust": "4",
       "tiles": "brown"
     },
@@ -377,7 +377,7 @@
       "name": "2",
       "limit": "3",
       "number": "6",
-      "price": "$80",
+      "price": 80,
       "tiles": "yellow"
     },
     {
@@ -385,7 +385,7 @@
       "name": "3",
       "limit": "3",
       "number": "5",
-      "price": "$180",
+      "price": 180,
       "tiles": "green"
     },
     {
@@ -393,7 +393,7 @@
       "name": "4",
       "limit": "3",
       "number": "4",
-      "price": "$300",
+      "price": 300,
       "rust": "2",
       "tiles": "green"
     },
@@ -401,7 +401,7 @@
       "minor": true,
       "name": "5",
       "limit": "2",
-      "price": "$450",
+      "price": 450,
       "number": "3",
       "tiles": "brown"
     }
@@ -1424,7 +1424,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$40",
+          "cost": 40,
           "size": "medium"
         },
         "hexes": [
@@ -1606,7 +1606,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$20"
+          "cost": 20
         },
         "hexes": [
           "H18",

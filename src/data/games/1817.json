@@ -3,13 +3,10 @@
     "title": "1817",
     "designer": "Craig Bartell, Tim Flowers",
     "background": "gray",
-    "width": 150,
     "titleX": 1340,
     "titleY": 1570,
     "titleSize": 165,
     "subTitleSize": 17,
-    "extraMinors": 0,
-    "hexCoords": true,
     "currency": "USD"
   },
   "links": {

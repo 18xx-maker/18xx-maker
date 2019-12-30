@@ -11,6 +11,19 @@
     "height": 1100,
     "margins": 25
   },
+  "currency": {
+    "bank": true,
+    "capital": true,
+    "market": false,
+    "offboard": false,
+    "par": false,
+    "private": true,
+    "revenue": false,
+    "terrain": false,
+    "token": true,
+    "train": true,
+    "value": false
+  },
   "companySvgLogos": "none",
   "plainMapDestinations": false,
   "plainMapHomes": false,
