@@ -57,6 +57,15 @@ const gatherTiles = compose(sortTiles,
 
 const rotate = sides => map(s => (s % 6) + 1, sides);
 
+const tileAboveSmall = (page, i) => {
+  let offset = i % 60;
+  if ([0,9,17,26,34,43,51].includes(offset)) {
+    return null;
+  }
+
+  let target = i - 1;
+  return target >= 0 && page[target];
+};
 const tileAbove = (page, i) => {
   if (i % 6 === 0) {
     return null;
@@ -66,6 +75,15 @@ const tileAbove = (page, i) => {
   return target >= 0 && page[target];
 };
 
+const tileBelowSmall = (page, i) => {
+  let offset = (i + 1) % 60;
+  if ([0,9,17,26,34,43,51].includes(offset)) {
+    return null;
+  }
+
+  let target = i + 1;
+  return target < page.length && page[target];
+};
 const tileBelow = (page, i) => {
   if ((i + 1) % 6 === 0) {
     return null;
@@ -114,6 +132,13 @@ const TileSheet = ({ paper, layout, hexWidth }) => {
         } else {
           return concat(tiles, concat(repeat(null, c.perRow + 1), color));
         }
+      case "smallDie":
+        let offset = tiles.length % 60;
+        if ([0,9,17,26,34,43,51].includes(offset)) {
+          return concat(tiles, color);
+        } else {
+          return concat(tiles, concat([null], color));
+        }
       case "die":
         if (tiles.length % 6 === 0) {
           return concat(tiles, color);
@@ -142,13 +167,25 @@ const TileSheet = ({ paper, layout, hexWidth }) => {
         let rotation = 0;
         let mask = c.mask;
 
-        if (layout === "die" || layout === "individual") {
+        if (layout === "smallDie" || layout === "die" || layout === "individual") {
           let currentSides = sidesFromTile(hex);
           let pastSides = [];
-          if (layout === "die" && i - 1 >= 0) {
+          if ((layout === "smallDie" || layout === "die") && i - 1 >= 0) {
             pastSides = sides[i - 1];
           } else if (layout === "individual" && i - c.perRow >= 0) {
             pastSides = sides[i - c.perRow];
+          }
+
+          if (layout === "smallDie") {
+            if (tileAboveSmall(page, i) && tileBelowSmall(page, i)) {
+              mask = "hexBleedMaskDie";
+            } else if (tileAboveSmall(page, i)) {
+              mask = "hexBleedMaskDieBottom";
+            } else if (tileBelowSmall(page, i)) {
+              mask = "hexBleedMaskDieTop";
+            } else {
+              mask = "hexBleedMask";
+            }
           }
 
           if (layout === "die") {
@@ -201,7 +238,7 @@ const TileSheet = ({ paper, layout, hexWidth }) => {
 
         return (
           <g mask={`url(#${mask})`}
-             transform={`translate(${c.getX(i)} ${c.getY(i)}) scale(${hexWidth/150})`}
+             transform={`translate(${c.getX(i)} ${c.getY(i)}) scale(${c.hexWidth/150})`}
              key={`${hex.id}-${i}`}>
             <g transform={`rotate(${rotation})`}>
               <Hex hex={hex} id={hex.id} mask="hexBleedMask" />
@@ -212,7 +249,7 @@ const TileSheet = ({ paper, layout, hexWidth }) => {
       page
     );
 
-    let pins = layout === "die" ? <Pins/> : null;
+    let pins = (layout === "die" || layout === "smallDie") ? <Pins/> : null;
 
     return (
       <div className="TileSheet--Page"
