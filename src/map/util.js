@@ -249,6 +249,8 @@ export const getMapData = (game, coords, hexWidth, variation) => {
 
     // Hex width flat to flat
     hexWidth,
+    halfHexWidth,
+    edge,
     scale,
 
     // Coords choice
@@ -284,6 +286,9 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     map: gameMap,
 
     // The resolved hexes
-    hexes: hexes
+    hexes: hexes,
+
+    // Borders
+    borders: gameMap.borders
   };
 };
