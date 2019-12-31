@@ -40,7 +40,7 @@ Here is a definition using every option.
   "map": {
     "borders": [{
       "color": "mountain",
-      "type": "dashed",
+      "dashed": true,
       "offset": 4,
       "border": false,
       "width": 8,
@@ -52,5 +52,5 @@ Here is a definition using every option.
 ```
 
 That is the default `width` and `borderWidth`. If you set `border` to `false`
-then setting `borderWidth` doesn't really matter. If you set `type` to `dashed`
+then setting `borderWidth` doesn't really matter. If you set `dashed` to `true`
 you can set an `offset` that helps you position the dashes to be pretty.
