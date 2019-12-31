@@ -1347,10 +1347,6 @@
         "water": {
           "cost": "100g"
         },
-        "borders": {
-          "side": 1,
-          "color": "water"
-        },
         "hexes": [
           "A3"
         ]
@@ -1359,10 +1355,6 @@
         "color": "plain",
         "water": {
           "cost": "100g"
-        },
-        "borders": {
-          "side": 4,
-          "color": "water"
         },
         "hexes": [
           "A5"
@@ -1516,12 +1508,6 @@
         "water": {
           "cost": "100g"
         },
-        "borders": [
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "D12"
         ]
@@ -1576,12 +1562,6 @@
         "water": {
           "cost": "80g"
         },
-        "borders": [
-          {
-            "side": 3,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "E13"
         ]
@@ -1624,12 +1604,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
         "water": {
           "cost": "100g"
         },
@@ -1697,16 +1671,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "water"
-          },
-          {
-            "side": 3,
-            "color": "water"
-          }
-        ],
         "water": {
           "cost": "100g"
         },
@@ -1716,12 +1680,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 4,
-            "color": "water"
-          }
-        ],
         "water": {
           "cost": "100g"
         },
@@ -2194,12 +2152,6 @@
         "centerTowns": [
           {}
         ],
-        "borders": [
-          {
-            "side": 1,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "O17"
         ]
@@ -2209,12 +2161,6 @@
         "mountain": {
           "cost": "120g"
         },
-        "borders": [
-          {
-            "side": 4,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "O19"
         ]
@@ -2396,6 +2342,28 @@
           "Q19",
           "Q21"
         ]
+      }
+    ],
+    "borders": [
+      {
+        "color": "water",
+        "coords": ["A4", "B4"]
+      },
+      {
+        "color": "water",
+        "coords": ["E12", "E13"]
+      },
+      {
+        "color": "water",
+        "coords": ["G18", "G19"]
+      },
+      {
+        "color": "water",
+        "coords": ["G20", "H20"]
+      },
+      {
+        "color": "water",
+        "coords": ["O18", "P18"]
       }
     ]
   }

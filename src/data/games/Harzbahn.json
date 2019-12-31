@@ -4,10 +4,10 @@
     "subtitle": "Mining and Railways in the Harz Mountains",
     "designer": "Klaus Kiermeier",
     "background": "brown",
-    "titleSize": 108,
-    "subTitleSize": 28,
+    "titleSize": 76,
+    "subTitleSize": 20,
     "extraTokens": 2,
-    "titleY": -80,
+    "titleY": -115,
     "titleX": 20,
     "currency": "EUR"
   },
@@ -512,7 +512,7 @@
       {
         "color": "plain",
         "hexes": [
-          "C18"
+          "B18"
         ]
       },
       {
@@ -574,7 +574,7 @@
           ]
         },
         "hexes": [
-          "B9"
+          "A9"
         ]
       },
       {
@@ -627,7 +627,7 @@
           ]
         },
         "hexes": [
-          "B13"
+          "A13"
         ]
       },
       {
@@ -636,7 +636,7 @@
           "cost": "50M"
         },
         "hexes": [
-          "B15"
+          "A15"
         ]
       },
       {
@@ -658,7 +658,7 @@
           }
         ],
         "hexes": [
-          "B17"
+          "A17"
         ]
       },
       {
@@ -704,7 +704,7 @@
           }
         ],
         "hexes": [
-          "B19"
+          "A19"
         ]
       },
       {
@@ -747,7 +747,7 @@
           ]
         },
         "hexes": [
-          "C4"
+          "B4"
         ]
       },
       {
@@ -781,7 +781,7 @@
           }
         ],
         "hexes": [
-          "C6"
+          "B6"
         ]
       },
       {
@@ -807,14 +807,8 @@
             "percent": 0.75
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "C8"
+          "B8"
         ]
       },
       {
@@ -824,16 +818,6 @@
             "type": "gentle",
             "side": 2,
             "gauge": "line"
-          }
-        ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "mountain"
-          },
-          {
-            "side": 6,
-            "color": "offboard"
           }
         ],
         "tokens": [
@@ -846,7 +830,7 @@
           }
         ],
         "hexes": [
-          "C10"
+          "B10"
         ]
       },
       {
@@ -864,16 +848,6 @@
             "gauge": "line"
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "mountain"
-          },
-          {
-            "side": 6,
-            "color": "mountain"
-          }
-        ],
         "tokens": [
           {
             "label": "WBE",
@@ -884,7 +858,7 @@
           }
         ],
         "hexes": [
-          "C12"
+          "B12"
         ]
       },
       {
@@ -906,16 +880,6 @@
             "gauge": "line"
           }
         ],
-        "borders": [
-          {
-            "side": 6,
-            "color": "mountain"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "tokens": [
           {
             "label": "WBE",
@@ -926,7 +890,7 @@
           }
         ],
         "hexes": [
-          "C14"
+          "B14"
         ]
       },
       {
@@ -947,12 +911,6 @@
             }
           }
         ],
-        "borders": [
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "track": [
           {
             "gauge": "narrow",
@@ -968,7 +926,7 @@
           }
         ],
         "hexes": [
-          "C16"
+          "B16"
         ]
       },
       {
@@ -980,7 +938,7 @@
           }
         ],
         "hexes": [
-          "C20"
+          "B20"
         ]
       },
       {
@@ -1007,7 +965,7 @@
           "percent": 0.5
         },
         "hexes": [
-          "D5"
+          "C5"
         ]
       },
       {
@@ -1032,12 +990,6 @@
           "angle": 300,
           "percent": 0.5
         },
-        "borders": [
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "tokens": [
           {
             "label": "NWE",
@@ -1048,7 +1000,7 @@
           }
         ],
         "hexes": [
-          "D7"
+          "C7"
         ]
       },
       {
@@ -1117,7 +1069,7 @@
           }
         ],
         "hexes": [
-          "D9"
+          "C9"
         ]
       },
       {
@@ -1145,22 +1097,8 @@
           "angle": 300,
           "percent": 0.5
         },
-        "borders": [
-          {
-            "side": 1,
-            "color": "mountain"
-          },
-          {
-            "side": 2,
-            "color": "mountain"
-          },
-          {
-            "side": 3,
-            "color": "mountain"
-          }
-        ],
         "hexes": [
-          "D11"
+          "C11"
         ]
       },
       {
@@ -1168,35 +1106,28 @@
         "industries": [
           {
             "top": "5",
-            "bottom": "10"
+            "bottom": "10",
+            "angle": 60,
+            "percent": 0.5
           }
         ],
         "centerTowns": [
           {
             "name": {
-              "name": "Braunesurnpf"
-            }
+              "name": "Braunesurnpf",
+              "reverse": true
+            },
+            "angle": 150,
+            "percent": 0.5
           }
         ],
         "mountain": {
-          "cost": "150M"
+          "cost": "150M",
+          "angle": 300,
+          "percent": 0.5
         },
-        "borders": [
-          {
-            "side": 2,
-            "color": "mountain"
-          },
-          {
-            "side": 3,
-            "color": "mountain"
-          },
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "D13"
+          "C13"
         ]
       },
       {
@@ -1287,7 +1218,7 @@
           }
         ],
         "hexes": [
-          "D15"
+          "C15"
         ]
       },
       {
@@ -1299,26 +1230,14 @@
             }
           }
         ],
-        "borders": [
-          {
-            "side": 1,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "D17"
+          "C17"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "D19"
+          "C19"
         ]
       },
       {
@@ -1329,14 +1248,8 @@
             "side": 6
           }
         ],
-        "borders": [
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "D21"
+          "C21"
         ]
       },
       {
@@ -1409,7 +1322,7 @@
           }
         ],
         "hexes": [
-          "E4"
+          "D4"
         ]
       },
       {
@@ -1434,12 +1347,6 @@
           "angle": 300,
           "percent": 0.5
         },
-        "borders": [
-          {
-            "side": 1,
-            "color": "offboard"
-          }
-        ],
         "tokens": [
           {
             "label": "NWE",
@@ -1450,7 +1357,7 @@
           }
         ],
         "hexes": [
-          "E6"
+          "D6"
         ]
       },
       {
@@ -1473,23 +1380,13 @@
             "percent": 0.5
           }
         ],
-        "borders": [
-          {
-            "side": 4,
-            "color": "mountain"
-          },
-          {
-            "side": 3,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "100M",
           "angle": 300,
           "percent": 0.5
         },
         "hexes": [
-          "E8"
+          "D8"
         ]
       },
       {
@@ -1512,69 +1409,31 @@
             "percent": 0.5
           }
         ],
-        "borders": [
-          {
-            "side": 1,
-            "color": "mountain"
-          },
-          {
-            "side": 4,
-            "color": "mountain"
-          },
-          {
-            "side": 2,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "100M",
           "angle": 300,
           "percent": 0.5
         },
         "hexes": [
-          "E10"
+          "D10"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "mountain"
-          },
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "100M"
         },
         "hexes": [
-          "E12"
+          "D12"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 3,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "150M"
         },
         "hexes": [
-          "E14"
+          "D14"
         ]
       },
       {
@@ -1589,23 +1448,13 @@
             "percent": 0.5
           }
         ],
-        "borders": [
-          {
-            "side": 2,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "50M",
           "angle": 300,
           "percent": 0.5
         },
         "hexes": [
-          "E16"
+          "D16"
         ]
       },
       {
@@ -1633,12 +1482,6 @@
             "percent": 0.725
           }
         ],
-        "borders": [
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "track": [
           {
             "side": 1,
@@ -1654,7 +1497,7 @@
           }
         ],
         "hexes": [
-          "E18"
+          "D18"
         ]
       },
       {
@@ -1727,7 +1570,7 @@
           }
         ],
         "hexes": [
-          "E20"
+          "D20"
         ]
       },
       {
@@ -1752,16 +1595,6 @@
           "angle": 300,
           "percent": 0.5
         },
-        "borders": [
-          {
-            "side": 3,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "tokens": [
           {
             "label": "SHE",
@@ -1772,7 +1605,7 @@
           }
         ],
         "hexes": [
-          "F3"
+          "E3"
         ]
       },
       {
@@ -1804,20 +1637,6 @@
             "percent": 0.6
           }
         ],
-        "borders": [
-          {
-            "side": 6,
-            "color": "mountain"
-          },
-          {
-            "side": 2,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "track": [
           {
             "side": 1,
@@ -1833,7 +1652,7 @@
           }
         ],
         "hexes": [
-          "F5"
+          "E5"
         ]
       },
       {
@@ -1852,12 +1671,6 @@
           "border": true,
           "cost": "50M"
         },
-        "borders": [
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "industries": [
           {
             "top": "11",
@@ -1894,7 +1707,7 @@
           }
         ],
         "hexes": [
-          "F7"
+          "E7"
         ]
       },
       {
@@ -1909,19 +1722,13 @@
             "percent": 0.5
           }
         ],
-        "borders": [
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "100M",
           "angle": 300,
           "percent": 0.5
         },
         "hexes": [
-          "F9"
+          "E9"
         ]
       },
       {
@@ -1990,7 +1797,7 @@
           "size": "tiny"
         },
         "hexes": [
-          "F11"
+          "E11"
         ]
       },
       {
@@ -2068,17 +1875,11 @@
           ]
         },
         "hexes": [
-          "F15"
+          "E15"
         ]
       },
       {
         "color": "gray",
-        "borders": [
-          {
-            "side": 1,
-            "color": "offboard"
-          }
-        ],
         "track": [
           {
             "side": 1,
@@ -2086,21 +1887,11 @@
           }
         ],
         "hexes": [
-          "F17"
+          "E17"
         ]
       },
       {
         "color": "gray",
-        "borders": [
-          {
-            "side": 3,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "track": [
           {
             "side": 1,
@@ -2112,7 +1903,7 @@
           }
         ],
         "hexes": [
-          "F19"
+          "E19"
         ]
       },
       {
@@ -2165,7 +1956,7 @@
           }
         ],
         "hexes": [
-          "G2"
+          "F2"
         ]
       },
       {
@@ -2238,7 +2029,7 @@
           }
         ],
         "hexes": [
-          "G4"
+          "F4"
         ]
       },
       {
@@ -2301,7 +2092,7 @@
           }
         ],
         "hexes": [
-          "G6"
+          "F6"
         ]
       },
       {
@@ -2309,14 +2100,8 @@
         "mountain": {
           "cost": "100M"
         },
-        "borders": [
-          {
-            "side": 1,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "G8"
+          "F8"
         ]
       },
       {
@@ -2324,14 +2109,8 @@
         "mountain": {
           "cost": "150M"
         },
-        "borders": [
-          {
-            "side": 3,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "G10"
+          "F10"
         ]
       },
       {
@@ -2346,23 +2125,13 @@
             "percent": 0.5
           }
         ],
-        "borders": [
-          {
-            "side": 2,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "50M",
           "angle": 300,
           "percent": 0.5
         },
         "hexes": [
-          "G12"
+          "F12"
         ]
       },
       {
@@ -2377,23 +2146,13 @@
             "percent": 0.5
           }
         ],
-        "borders": [
-          {
-            "side": 3,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "50M",
           "angle": 300,
           "percent": 0.5
         },
         "hexes": [
-          "G14"
+          "F14"
         ]
       },
       {
@@ -2408,34 +2167,22 @@
             "percent": 0.5
           }
         ],
-        "borders": [
-          {
-            "side": 2,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "100M",
           "angle": 300,
           "percent": 0.5
         },
         "hexes": [
-          "G16"
+          "F16"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "150M"
         },
         "hexes": [
-          "G18"
+          "F18"
         ]
       },
       {
@@ -2507,7 +2254,7 @@
           }
         ],
         "hexes": [
-          "G20"
+          "F20"
         ]
       },
       {
@@ -2520,29 +2267,11 @@
           }
         ],
         "hexes": [
-          "H1"
+          "G1"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "mountain"
-          },
-          {
-            "side": 3,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "100M",
           "angle": 90,
@@ -2564,7 +2293,7 @@
           }
         ],
         "hexes": [
-          "H3"
+          "G3"
         ]
       },
       {
@@ -2572,36 +2301,12 @@
         "mountain": {
           "cost": "150M"
         },
-        "borders": [
-          {
-            "side": 2,
-            "color": "offboard"
-          },
-          {
-            "side": 3,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "H5"
+          "G5"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "mountain"
-          }
-        ],
         "mountain": {
           "cost": "100M",
           "angle": 60,
@@ -2624,7 +2329,7 @@
           }
         ],
         "hexes": [
-          "H7"
+          "G7"
         ]
       },
       {
@@ -2667,7 +2372,7 @@
           }
         ],
         "hexes": [
-          "H9"
+          "G9"
         ]
       },
       {
@@ -2675,14 +2380,8 @@
         "mountain": {
           "cost": "100M"
         },
-        "borders": [
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "H11"
+          "G11"
         ]
       },
       {
@@ -2747,7 +2446,7 @@
           }
         ],
         "hexes": [
-          "H13"
+          "G13"
         ]
       },
       {
@@ -2755,14 +2454,8 @@
         "mountain": {
           "cost": "150M"
         },
-        "borders": [
-          {
-            "side": 1,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "H15"
+          "G15"
         ]
       },
       {
@@ -2773,12 +2466,6 @@
               "name": "Alexisbad",
               "offset": 40
             }
-          }
-        ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "offboard"
           }
         ],
         "mountain": {
@@ -2810,7 +2497,7 @@
           }
         ],
         "hexes": [
-          "H17"
+          "G17"
         ]
       },
       {
@@ -2820,16 +2507,6 @@
           "percent": 0.3333,
           "cost": "150M"
         },
-        "borders": [
-          {
-            "side": 3,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "track": [
           {
             "type": "gentle",
@@ -2847,7 +2524,7 @@
           }
         ],
         "hexes": [
-          "H19"
+          "G19"
         ]
       },
       {
@@ -2926,7 +2603,7 @@
           }
         ],
         "hexes": [
-          "I2"
+          "H2"
         ]
       },
       {
@@ -3007,26 +2684,16 @@
           }
         ],
         "hexes": [
-          "I4"
+          "H4"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 6,
-            "color": "offboard"
-          },
-          {
-            "side": 2,
-            "color": "mountain"
-          }
-        ],
         "industries": [
           {
             "top": "8",
             "bottom": "20",
-            "angle": 150,
+            "angle": 120,
             "percent": 0.667
           }
         ],
@@ -3060,7 +2727,7 @@
           }
         ],
         "hexes": [
-          "I8"
+          "H8"
         ]
       },
       {
@@ -3068,14 +2735,8 @@
         "mountain": {
           "cost": "150M"
         },
-        "borders": [
-          {
-            "side": 3,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "I12"
+          "H12"
         ]
       },
       {
@@ -3103,14 +2764,8 @@
           "angle": 300,
           "percent": 0.5
         },
-        "borders": [
-          {
-            "side": 2,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "I14"
+          "H14"
         ]
       },
       {
@@ -3138,14 +2793,8 @@
           "angle": 300,
           "percent": 0.5
         },
-        "borders": [
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "I16"
+          "H16"
         ]
       },
       {
@@ -3227,21 +2876,11 @@
           }
         ],
         "hexes": [
-          "I18"
+          "H18"
         ]
       },
       {
         "color": "gray",
-        "borders": [
-          {
-            "side": 2,
-            "color": "offboard"
-          },
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "track": [
           {
             "side": 2,
@@ -3249,7 +2888,7 @@
           }
         ],
         "hexes": [
-          "J5"
+          "I5"
         ]
       },
       {
@@ -3328,8 +2967,38 @@
           }
         ],
         "hexes": [
-          "J7"
+          "I7"
         ]
+      }
+    ],
+    "borders": [
+      {
+        "color": "mountain",
+        "coords": ["D4", "D5"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["D9", "E9"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["D11", "E11"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["F3", "G3", "G2"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["F4", "F5"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["H7", "H8"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["D10", "C10", "C11", "C12", "C13", "C14"]
       }
     ]
   }

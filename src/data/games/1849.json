@@ -1010,7 +1010,7 @@
               "cost": 20
             },
             {
-              "color": "white",
+              "color": "gray",
               "cost": 30
             },
             {
@@ -1160,7 +1160,7 @@
               "cost": 10
             },
             {
-              "color": "white",
+              "color": "gray",
               "cost": 30
             },
             {
@@ -1243,7 +1243,7 @@
               "cost": 20
             },
             {
-              "color": "white",
+              "color": "gray",
               "cost": 30
             },
             {
@@ -1746,7 +1746,7 @@
               "cost": 20
             },
             {
-              "color": "white",
+              "color": "gray",
               "cost": 30
             },
             {
