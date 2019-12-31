@@ -1174,26 +1174,8 @@
             }
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "E7"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "F8"
         ]
       },
       {
@@ -1260,30 +1242,6 @@
         ]
       },
       {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "C11"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "C13"
-        ]
-      },
-      {
         "color": "offboard",
         "offBoardRevenue": {
           "reverse": true,
@@ -1342,22 +1300,6 @@
         ],
         "hexes": [
           "E11"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "color": "water",
-            "side": 2
-          },
-          {
-            "color": "water",
-            "side": 3
-          }
-        ],
-        "hexes": [
-          "D12"
         ]
       },
       {
@@ -1561,12 +1503,6 @@
             }
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "B16"
         ]
@@ -1609,21 +1545,6 @@
         ],
         "hexes": [
           "A17"
-        ]
-      },
-      {
-        "color": "plain",
-        "mountain": {
-          "cost": 120
-        },
-        "borders": [
-          {
-            "side": 2,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "C17"
         ]
       },
       {
@@ -2064,6 +1985,7 @@
           "cost": 120
         },
         "hexes": [
+          "C17",
           "C21",
           "D22",
           "E17",
@@ -2082,13 +2004,17 @@
           "B22",
           "C7",
           "C9",
+          "C11",
+          "C13",
           "C23",
           "D8",
+          "D12",
           "D16",
           "D20",
           "E3",
           "E13",
           "E15",
+          "F8",
           "F12",
           "F14",
           "F18",
@@ -2109,6 +2035,16 @@
           "J8"
         ]
       }
-    ]
+    ],
+    "borders": [{
+      "color": "water",
+      "coords": ["F7", "F8"]
+    },{
+      "color": "water",
+      "coords": ["D11", "D12", "D13"]
+    },{
+      "color": "water",
+      "coords": ["C16", "C17"]
+    }]
   }
 }

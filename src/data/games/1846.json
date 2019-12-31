@@ -685,12 +685,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "D18"
         ]
@@ -973,12 +967,6 @@
             }
           ]
         },
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "C17"
         ]

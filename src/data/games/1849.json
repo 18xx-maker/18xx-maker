@@ -941,35 +941,19 @@
         ]
       },
       {
-        "copy": "D3",
-        "mountain": {
-          "size": "small",
-          "cost": 40
-        },
-        "hexes": [
-          "B3"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "D3",
-          "G4"
-        ]
-      },
-      {
         "color": "plain",
         "hexes": [
           "L3",
           "N5",
           "B9",
+          "D3",
+          "F5",
+          "G4",
+          "H5",
+          "J5",
+          "K4",
           "L11",
+          "L15",
           "H13",
           "K16"
         ]
@@ -1035,12 +1019,6 @@
             }
           ]
         },
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
         "track": [
           {
             "side": 1,
@@ -1062,12 +1040,6 @@
             "name": {
               "name": "Alcamo"
             }
-          }
-        ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
           }
         ],
         "hexes": [
@@ -1153,18 +1125,6 @@
         ]
       },
       {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "mountain"
-          }
-        ],
-        "hexes": [
-          "K4"
-        ]
-      },
-      {
         "color": "gray",
         "track": [
           {
@@ -1230,9 +1190,12 @@
           "B7",
           "D7",
           "E8",
+          "H7",
+          "I6",
           "K8",
           "H11",
-          "L13"
+          "L13",
+          "J13"
         ]
       },
       {
@@ -1253,39 +1216,6 @@
         },
         "hexes": [
           "D5"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "F5"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "mountain"
-          },
-          {
-            "side": 2,
-            "color": "mountain"
-          },
-          {
-            "side": 6,
-            "color": "mountain"
-          }
-        ],
-        "hexes": [
-          "H5",
-          "J5"
         ]
       },
       {
@@ -1381,33 +1311,8 @@
             }
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "mountain"
-          }
-        ],
         "hexes": [
           "G6"
-        ]
-      },
-      {
-        "color": "plain",
-        "mountain": {
-          "cost": 160
-        },
-        "borders": [
-          {
-            "side": 3,
-            "color": "mountain"
-          },
-          {
-            "side": 5,
-            "color": "mountain"
-          }
-        ],
-        "hexes": [
-          "I6"
         ]
       },
       {
@@ -1422,16 +1327,6 @@
         "mountain": {
           "cost": 160
         },
-        "borders": [
-          {
-            "side": 3,
-            "color": "mountain"
-          },
-          {
-            "side": 4,
-            "color": "mountain"
-          }
-        ],
         "hexes": [
           "K6"
         ]
@@ -1472,28 +1367,7 @@
         ]
       },
       {
-        "color": "plain",
-        "mountain": {
-          "cost": 160
-        },
-        "borders": [
-          {
-            "side": 4,
-            "color": "mountain"
-          }
-        ],
-        "hexes": [
-          "H7"
-        ]
-      },
-      {
         "copy": "E6",
-        "borders": [
-          {
-            "side": 4,
-            "color": "mountain"
-          }
-        ],
         "centerTowns": [
           {
             "name": {
@@ -1599,8 +1473,10 @@
           "cost": 40
         },
         "hexes": [
+          "B3",
           "F9",
-          "J9"
+          "J9",
+          "K12"
         ]
       },
       {
@@ -1774,25 +1650,6 @@
         ]
       },
       {
-        "color": "plain",
-        "mountain": {
-          "cost": 40
-        },
-        "borders": [
-          {
-            "side": 1,
-            "color": "mountain"
-          },
-          {
-            "side": 2,
-            "color": "mountain"
-          }
-        ],
-        "hexes": [
-          "K12"
-        ]
-      },
-      {
         "color": "gray",
         "values": [
           {
@@ -1822,21 +1679,6 @@
         ],
         "hexes": [
           "M12"
-        ]
-      },
-      {
-        "color": "plain",
-        "mountain": {
-          "cost": 160
-        },
-        "borders": [
-          {
-            "side": 5,
-            "color": "mountain"
-          }
-        ],
-        "hexes": [
-          "J13"
         ]
       },
       {
@@ -1936,16 +1778,6 @@
             "gauge": "narrow"
           }
         ],
-        "borders": [
-          {
-            "side": 4,
-            "color": "mountain"
-          },
-          {
-            "side": 6,
-            "color": "mountain"
-          }
-        ],
         "values": [
           {
             "value": 20,
@@ -2041,18 +1873,30 @@
         "hexes": [
           "J15"
         ]
-      },
+      }
+    ],
+    "borders": [
       {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 3,
-            "color": "mountain"
-          }
-        ],
-        "hexes": [
-          "L15"
-        ]
+        "color": "water",
+        "coords": ["B3", "B4"]
+      },{
+        "color": "water",
+        "coords": ["D3", "D4"]
+      },{
+        "color": "water",
+        "coords": ["G4", "G5"]
+      },{
+        "color": "mountain",
+        "coords": ["H5", "H6", "I6", "I5"]
+      },{
+        "color": "mountain",
+        "coords": ["J5", "J6", "K6", "K5", "L5"]
+      },{
+        "color": "mountain",
+        "coords": ["K12", "K13", "L13"]
+      },{
+        "color": "mountain",
+        "coords": ["L15", "L14"]
       }
     ]
   }
