@@ -207,6 +207,12 @@
   },
   "stock": {
     "type": "2D",
+    "movement": {
+      "up": ["All Shares Held"],
+      "down": ["Per Share Sold"],
+      "left": ["Withheld"],
+      "right": ["Paid out"]
+    },
     "market": [
       [
         {

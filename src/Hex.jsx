@@ -155,14 +155,13 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
                 {mediumCityBorders}
                 {townBorders}
                 {tracks}
-                {values}
                 {cities}
                 {mediumCities}
                 {towns}
                 {centerTownBorders}
                 {centerTowns}
+                {values}
                 {labels}
-                {names}
                 {tokens}
                 {bonus}
                 {terrain}
@@ -179,13 +178,13 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
         {id && <Id id={idBase} extra={idExtra} />}
 
         {outsideCities}
-        {offBoardRevenue}
         {industries}
         {goods}
         {companies}
-
+        {names}
         {tunnels}
         {bridges}
+        {offBoardRevenue}
       </PhaseContext.Provider>
     </g>
   );
