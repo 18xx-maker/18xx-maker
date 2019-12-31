@@ -62,10 +62,6 @@ const Border = ({ border, data }) => {
     }
   }
 
-  if (border.type === "square") {
-    linecap = "square";
-  }
-
   return (
     <Color context="companies">
       {c => (
