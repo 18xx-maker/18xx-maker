@@ -243,6 +243,18 @@ export const getMapData = (game, coords, hexWidth, variation) => {
 
   let horizontal = game.info.orientation === "horizontal";
 
+  let a1Valid = true;
+  let expCoord = toCoords(hexes[0].hexes[0]);
+  if (expCoord[0] % 2 === 0) {
+    if (expCoord[1] % 2 !== 0) {
+      a1Valid = false;
+    }
+  } else {
+    if (expCoord[1] % 2 === 0) {
+      a1Valid = false;
+    }
+  }
+
   return {
     // Is this map in horizontal layout?
     horizontal,
@@ -252,6 +264,7 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     halfHexWidth,
     edge,
     scale,
+    a1Valid,
 
     // Coords choice
     coords,

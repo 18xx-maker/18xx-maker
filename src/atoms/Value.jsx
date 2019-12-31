@@ -42,7 +42,7 @@ const Value = ({ value, fixed, outerBorderColor }) => {
                 fill={p("black")}
                 dominantBaseline="central"
                 textAnchor="middle"
-                textLength={18}
+                textLength={value.toString().length > 2 ? 18 : null}
                 lengthAdjust="spacingAndGlyphs"
                 x="0"
                 y="0"

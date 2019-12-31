@@ -15,15 +15,31 @@ const Border = ({ border, data }) => {
     if (data.horizontal) {
       if (c[0] % 2 === 0) {
         if (c[1] % 2 === 0) {
-          x -= (0.5 * data.edge);
+          if (data.a1Valid) {
+            x -= data.edge;
+          } else {
+            x -= (0.5 * data.edge);
+          }
         } else {
-          x -= data.edge;
+          if (data.a1Valid) {
+            x -= (0.5 * data.edge);
+          } else {
+            x -= data.edge;
+          }
         }
       } else {
         if (c[1] % 2 === 0) {
-          x -= data.edge;
+          if (data.a1Valid) {
+            x -= (0.5 * data.edge);
+          } else {
+            x -= data.edge;
+          }
         } else {
-          x -= (0.5 * data.edge);
+          if (data.a1Valid) {
+            x -= data.edge;
+          } else {
+            x -= (0.5 * data.edge);
+          }
         }
       }
     } else {
