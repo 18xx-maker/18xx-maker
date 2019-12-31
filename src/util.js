@@ -24,7 +24,7 @@ import tail from "ramda/src/tail";
 import toPairs from "ramda/src/toPairs";
 import toUpper from "ramda/src/toUpper";
 
-export const tileColors = ["yellow", "green", "brown", "gray", "mountain", "water", "land", "plain", "other"];
+export const tileColors = ["yellow", "green", "brown", "gray", "mountain", "water", "land", "plain", "offboard", "yellow/green", "green/brown", "brown/gray", "other"];
 
 const idBaseSort = compose(Number, defaultTo(0), nth(0), split("|"), propOr("", "id"));
 const idExtraSort = compose(Number, defaultTo(0), nth(1), split("|"), propOr("", "id"));

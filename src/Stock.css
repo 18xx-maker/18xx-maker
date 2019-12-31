@@ -157,7 +157,6 @@
   grid-area: up;
   display: flex;
   flex-direction: column-reverse;
-  justify-content: flex-end;
   align-items: center;
 }
 
@@ -165,7 +164,6 @@
   grid-area: down;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
 }
 
@@ -173,7 +171,6 @@
   grid-area: left;
   display: flex;
   flex-direction: row-reverse;
-  justify-content: flex-end;
   align-items: center;
 }
 
@@ -181,6 +178,5 @@
   grid-area: right;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   align-items: center;
 }
