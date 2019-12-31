@@ -11,6 +11,8 @@ export const getTileSheetContext = (layout, paper, hexWidth) => {
   case "smallDie":
     c.hexWidth = 106.25;
     break;
+  default:
+    break;
   }
 
   // Usable Height and Width on the chosen paper
