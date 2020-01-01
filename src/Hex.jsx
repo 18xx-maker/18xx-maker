@@ -150,6 +150,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
                    map={map} />
 
               <g transform={`rotate(-${hx.rotation})`}>
+                {goods}
                 {icons}
                 {cityBorders}
                 {mediumCityBorders}
@@ -179,7 +180,6 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
 
         {outsideCities}
         {industries}
-        {goods}
         {companies}
         {names}
         {tunnels}
