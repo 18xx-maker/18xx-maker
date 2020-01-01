@@ -1,7 +1,7 @@
 {
   "info": {
     "title": "18Test",
-    "subtitle": "18xxMaker Test File",
+    "subtitle": "xxMaker Test File",
     "designer": "Christopher Giroir",
     "background": "purple",
     "currency": "USD",
@@ -966,7 +966,10 @@
     "67": 1,
     "68": 1,
     "69": 1,
-    "70": 1
+    "70": 1,
+    "972": 2,
+    "973": 2,
+    "1749": 2
   },
   "map": {
     "hexes": [
