@@ -10,7 +10,7 @@ import Currency from "./util/Currency";
 
 import is from "ramda/src/is";
 
-const Charter = ({ name, abbrev, minor, token, tokens, phases, turns, charterStyle, game, halfWidthCharters }) => {
+const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, charterStyle, game, halfWidthCharters }) => {
   let color = token;
   if(is(Object, token)) {
     color = token.colors[0];
@@ -22,6 +22,7 @@ const Charter = ({ name, abbrev, minor, token, tokens, phases, turns, charterSty
         <g transform={`translate(25 25)`}>
           <ColorContext.Provider value="companies">
             <Token outline={charterStyle === "color" ? "black" : null}
+                   logo={charterStyle === "color" ? null : logo}
                    label={charterStyle === "color" ? null : abbrev}
                    token={charterStyle === "color" ? null : token} />
           </ColorContext.Provider>
@@ -79,6 +80,7 @@ const Charter = ({ name, abbrev, minor, token, tokens, phases, turns, charterSty
                   <ColorContext.Provider value="companies">
                     <Token outline="white"
                            label={abbrev}
+                           logo={logo || abbrev}
                            width={37.5}
                            token={token} />
                   </ColorContext.Provider>
