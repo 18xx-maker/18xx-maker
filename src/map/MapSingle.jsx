@@ -45,13 +45,13 @@ const MapSingle = ({ coords, hexWidth }) => {
         rotation: data.horizontal ? 0 : 90
       }}
     >
-      {variationSelect && (
-        <div className="PrintNotes">
-          <div>
-            {variationSelect}
-          </div>
+      <div className="PrintNotes">
+        <div>
+          {variationSelect}
+          <h3>Width: {data.humanWidth}</h3>
+          <h3>Height: {data.humanHeight}</h3>
         </div>
-      )}
+      </div>
       <div className="map">
         <Svg width={data.totalWidth} height={data.totalHeight}>
           <Title game={game} variation={variation} />
