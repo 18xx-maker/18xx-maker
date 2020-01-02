@@ -1250,12 +1250,7 @@
     "cities": [
       {
         "size": 2,
-        "companies": [
-          {
-            "label": "KO",
-            "color": "pink"
-          }
-        ]
+        "companies": ["KO"]
       }
     ],
     "track": [

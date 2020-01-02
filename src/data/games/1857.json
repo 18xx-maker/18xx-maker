@@ -893,12 +893,7 @@
               "name": {
                 "name": "Bahia Blanca"
               },
-              "companies": [
-                {
-                  "label": "BBN",
-                  "color": "orange"
-                }
-              ]
+              "companies": ["BBN"]
             }
           ],
           "hexes": [
@@ -912,12 +907,7 @@
               "name": {
                 "name": "Santiago del Estero"
               },
-              "companies": [
-                {
-                  "label": "NCA",
-                  "color": "black"
-                }
-              ]
+              "companies": ["NCA"]
             }
           ],
           "hexes": [
@@ -931,12 +921,7 @@
               "name": {
                 "name": "Cordoba"
               },
-              "companies": [
-                {
-                  "label": "CC",
-                  "color": "brown"
-                }
-              ]
+              "companies": ["CC"]
             }
           ],
           "hexes": [
@@ -1271,12 +1256,7 @@
                 "name": "Rosario",
                 "reverse": true
               },
-              "companies": [
-                {
-                  "label": "CA",
-                  "color": "purple"
-                }
-              ]
+              "companies": ["CA"]
             }
           ],
           "track": [
@@ -1314,12 +1294,7 @@
             {
               "angle": 180,
               "percent": 0.5,
-              "companies": [
-                {
-                  "label": "BAC",
-                  "color": "blue"
-                }
-              ]
+              "companies": ["BAC"]
             },
             {
               "angle": 30,
@@ -1328,12 +1303,7 @@
                 "name": "Buenos Aires",
                 "rotation": 30
               },
-              "companies": [
-                {
-                  "label": "BAS",
-                  "color": "green"
-                }
-              ]
+              "companies": ["BAS"]
             }
           ],
           "track": [
@@ -1401,12 +1371,7 @@
               "name": {
                 "name": "Santa Fe"
               },
-              "companies": [
-                {
-                  "label": "SF",
-                  "color": "red"
-                }
-              ]
+              "companies": ["SF"]
             }
           ],
           "hexes": [
@@ -1440,12 +1405,7 @@
               "name": {
                 "name": "Mendoza"
               },
-              "companies": [
-                {
-                  "label": "AGW",
-                  "color": "yellow"
-                }
-              ]
+              "companies": ["AGW"]
             }
           ],
           "track": [

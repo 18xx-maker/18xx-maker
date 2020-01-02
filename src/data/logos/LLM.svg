@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__Layer_1" width="192" height="192" x="0" y="0" version="1.1" viewBox="0 0 192 192" xml:space="preserve">
     <defs id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__defs308">
+        <clipPath id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__clipPath4944" clipPathUnits="userSpaceOnUse">
+            <circle id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__circle4946" class="LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-black LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>
+        </clipPath>
         <clipPath id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__clipPath4924" clipPathUnits="userSpaceOnUse">
             <circle id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__circle4926" class="LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-black LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>
-        </clipPath>
-        <clipPath id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__clipPath4928" clipPathUnits="userSpaceOnUse">
-            <circle id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__circle4930" class="LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-black LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>
         </clipPath>
         <clipPath id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__clipPath4932" clipPathUnits="userSpaceOnUse">
             <circle id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__circle4934" class="LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-black LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>
@@ -15,8 +15,8 @@
         <clipPath id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__clipPath4940" clipPathUnits="userSpaceOnUse">
             <circle id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__circle4942" class="LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-black LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>
         </clipPath>
-        <clipPath id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__clipPath4944" clipPathUnits="userSpaceOnUse">
-            <circle id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__circle4946" class="LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-black LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>
+        <clipPath id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__clipPath4928" clipPathUnits="userSpaceOnUse">
+            <circle id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__circle4930" class="LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-black LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>
         </clipPath>
         <clipPath id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__clipPath4948" clipPathUnits="userSpaceOnUse">
             <circle id="LLM_svg__LLM_svg__LLM_svg__LLM_svg__circle4950" class="LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-black LLM_svg__LLM_svg__LLM_svg__LLM_svg__color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>

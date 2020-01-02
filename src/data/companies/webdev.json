@@ -81,10 +81,10 @@
       "logo": "webdev/yarn"
     },
     {
-      "name": "Web Pack",
-      "abbrev": "WP",
-      "color": "cyan",
-      "logo": "webdev/webpack"
+      "name": "Git",
+      "abbrev": "GIT",
+      "color": "red",
+      "logo": "dev/git"
     },
     {
       "name": "Hypertext Markup Language",

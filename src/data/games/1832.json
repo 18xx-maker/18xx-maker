@@ -1605,12 +1605,7 @@
           {
             "angle": 60,
             "percent": 0.6,
-            "companies": [
-              {
-                "label": "N&W",
-                "color": "black"
-              }
-            ]
+            "companies": ["N&W"]
           }
         ],
         "track": [
@@ -1682,12 +1677,7 @@
             "name": {
               "name": "Nashville"
             },
-            "companies": [
-              {
-                "label": "L&N",
-                "color": "blue"
-              }
-            ]
+            "companies": ["L&N"]
           }
         ],
         "hexes": [
@@ -1715,12 +1705,7 @@
             "name": {
               "name": "Knoxville"
             },
-            "companies": [
-              {
-                "label": "SOU",
-                "color": "green"
-              }
-            ]
+            "companies": ["SOU"]
           }
         ],
         "hexes": [
@@ -1898,12 +1883,7 @@
             "name": {
               "name": "Raleigh"
             },
-            "companies": [
-              {
-                "label": "SALR",
-                "color": "orange"
-              }
-            ]
+            "companies": ["SALR"]
           }
         ],
         "hexes": [
@@ -2099,29 +2079,16 @@
             "name": {
               "name": "Atlanta"
             },
-            "companies": [
-              {
-                "label": "A&WP",
-                "color": "lavender"
-              }
-            ]
+            "companies": ["A&WP"]
           },
           {
             "angle": 150,
-            "percent": 0.5,
-            "companies": [
-              {}
-            ]
+            "percent": 0.5
           },
           {
             "angle": 270,
             "percent": 0.5,
-            "companies": [
-              {
-                "label": "GRR",
-                "color": "cyan"
-              }
-            ]
+            "companies": ["GRR"]
           }
         ],
         "hexes": [
@@ -2266,12 +2233,7 @@
             "name": {
               "name": "Charleston"
             },
-            "companies": [
-              {
-                "label": "ACL",
-                "color": "pink"
-              }
-            ]
+            "companies": ["ACL"]
           }
         ],
         "hexes": [
@@ -2366,12 +2328,7 @@
             "name": {
               "name": "Savannah"
             },
-            "companies": [
-              {
-                "label": "COG",
-                "color": "turqoise"
-              }
-            ]
+            "companies": ["COG"]
           }
         ],
         "hexes": [
@@ -2458,12 +2415,7 @@
         "color": "gray",
         "cities": [
           {
-            "companies": [
-              {
-                "label": "GMO",
-                "color": "red"
-              }
-            ],
+            "companies": ["GMO"],
             "name": {
               "reverse": true,
               "name": "New Orleans"
@@ -2606,12 +2558,7 @@
             "name": {
               "name": "Jacksonville"
             },
-            "companies": [
-              {
-                "label": "FECR",
-                "color": "yellow"
-              }
-            ]
+            "companies": ["FECR"]
           }
         ],
         "hexes": [
@@ -2783,12 +2730,7 @@
               "name": "Key West",
               "offset": 75
             },
-            "companies": [
-              {
-                "label": "FECR",
-                "color": "black"
-              }
-            ]
+            "companies": ["FECR"]
           }
         ],
         "offBoardRevenue": {

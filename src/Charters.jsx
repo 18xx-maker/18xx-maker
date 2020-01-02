@@ -19,7 +19,7 @@ import repeat from "ramda/src/repeat";
 const isMinor = prop("minor");
 const isMajor = compose(not, prop("minor"));
 
-const Charters = ({halfWidthCharters}) => {
+const Charters = ({halfWidthCharters, override, selection}) => {
   let params = useParams();
   let game = games[params.game];
 
@@ -27,7 +27,7 @@ const Charters = ({halfWidthCharters}) => {
     return <Redirect to={`/${params.game}/background`} />;
   }
 
-  let gameCompanies = compileCompanies(game);
+  let gameCompanies = compileCompanies(game, override, selection);
 
   let majors = filter(isMajor, gameCompanies);
 
@@ -73,7 +73,9 @@ const Charters = ({halfWidthCharters}) => {
 };
 
 const mapStateToProps = state => ({
-  halfWidthCharters: state.config.halfWidthCharters
+  halfWidthCharters: state.config.halfWidthCharters,
+  override: state.config.overrideCompanies,
+  selection: state.config.overrideSelection
 });
 
 export default connect(mapStateToProps)(Charters);
