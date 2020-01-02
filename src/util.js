@@ -1,3 +1,6 @@
+import overrides from "./data/companies";
+
+import addIndex from "ramda/src/addIndex";
 import adjust from "ramda/src/adjust";
 import append from "ramda/src/append";
 import ascend from "ramda/src/ascend";
@@ -13,6 +16,7 @@ import join from "ramda/src/join";
 import juxt from "ramda/src/juxt";
 import lte from "ramda/src/lte";
 import map from "ramda/src/map";
+import merge from "ramda/src/merge";
 import nth from "ramda/src/nth";
 import prepend from "ramda/src/prepend";
 import prop from "ramda/src/prop";
@@ -125,14 +129,32 @@ export const maxPages = (total, page) => {
   return helper(total, page, []);
 };
 
-export const compileCompanies = game => {
-  return map(company => {
+export const compileCompanies = (game, override, selections) => {
+  return addIndex(map)((company, index) => {
     if (is(String, company.tokens)) {
       company.tokens = game.tokenTypes[company.tokens];
     }
 
     if (is(String, company.shares)) {
       company.shares = game.shareTypes[company.shares];
+    }
+
+    if (override !== "none" && overrides[override]) {
+      let overrideCompanies = overrides[override].companies;
+
+      // Filter
+      console.log(selections);
+      if ((selections || []).length > 0) {
+        overrideCompanies = map(index => prop(index, overrideCompanies), selections);
+      }
+
+      if (overrideCompanies[index]) {
+        company = merge(company, overrideCompanies[index]);
+
+        // Remove logo if needed
+        company.logo = overrideCompanies[index].logo;
+        company.token = overrideCompanies[index].token;
+      }
     }
 
     return company;

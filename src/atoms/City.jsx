@@ -4,7 +4,7 @@ import Color from "../data/Color";
 
 import Name from "./Name";
 
-import find from "ramda/src/find";
+import findIndex from "ramda/src/findIndex";
 import is from "ramda/src/is";
 import propEq from "ramda/src/propEq";
 import Token from "../Token";
@@ -12,6 +12,8 @@ import Token from "../Token";
 import Config from "../data/Config";
 import ColorContext from "../context/ColorContext";
 import RotateContext from "../context/RotateContext";
+
+import { compileCompanies } from "../util";
 
 const City = ({ straightCityNames, size, companies, border, name, extend, rotation, pass, bgColor }) => {
   if (size === undefined) {
@@ -53,10 +55,13 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
                 <ColorContext.Provider value="companies">
                   <Config>
                     {(config, game) => {
+                      let gameCompanies = compileCompanies(game, config.overrideCompanies, config.overrideSelection);
+                      let companyIndex = findIndex(propEq("abbrev", companies[num]), game.companies);
+                      let company = gameCompanies[companyIndex];
+
                       if(config.plainMapHomes) {
-                        return <Token label={companies[num]} token="white"/>;
+                        return <Token label={company.label} token="white"/>;
                       } else {
-                        let company = find(propEq("abbrev", companies[num]), game.companies);
                         if(company) {
                           return <Token label={company.abbrev} logo={company.logo || company.abbrev} token={company.color || company.token}/>;
                         } else {

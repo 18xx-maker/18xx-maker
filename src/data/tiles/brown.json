@@ -1148,12 +1148,7 @@
       {
         "size": 3,
         "rotation": 30,
-        "companies": [
-          {
-            "label": "TR",
-            "color": "green"
-          }
-        ]
+        "companies": ["TR"]
       }
     ],
     "track": [
@@ -1190,12 +1185,7 @@
     "cities": [
       {
         "size": 2,
-        "companies": [
-          {
-            "label": "KO",
-            "color": "pink"
-          }
-        ]
+        "companies": ["KO"]
       }
     ],
     "track": [

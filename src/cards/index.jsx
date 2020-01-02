@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import * as R from "ramda";
 
@@ -19,7 +20,7 @@ export const maxPlayers = R.compose(
   R.map(R.prop("number"))
 );
 
-const Cards = () => {
+const Cards = ({ override, selection }) => {
   let params = useParams();
   let [state, setState] = useState({
     displayPrivates: true,
@@ -28,12 +29,12 @@ const Cards = () => {
     displayNumbers: true
   });
 
-  let handleDisplay = (event) => {
+  let handleDisplay = event => {
     let target = event.target;
     let value = target.checked;
     let name = target.name;
 
-    setState({...state, [name]: value});
+    setState({ ...state, [name]: value });
   };
 
   let game = games[params.game];
@@ -42,15 +43,15 @@ const Cards = () => {
     return <Redirect to={`/${params.game}/background`} />;
   }
 
-  let companies = state.displayShares ? compileCompanies(game) || [] : [];
+  let companies = state.displayShares ? compileCompanies(game, override, selection) || [] : [];
   let privates = state.displayPrivates ? game.privates || [] : [];
   let trains = fillArray(
     R.prop("quantity"),
     state.displayTrains ? game.trains || [] : []
   );
   let numbers = state.displayNumbers
-      ? R.range(1, maxPlayers(game.players || []) + 1)
-      : [];
+    ? R.range(1, maxPlayers(game.players || []) + 1)
+    : [];
 
   return (
     <GameContext.Provider value={params.game}>
@@ -92,7 +93,9 @@ const Cards = () => {
             />
             Numbers
           </label>
-          <p>Cards are meant to be printed in <b>landscape</b> mode</p>
+          <p>
+            Cards are meant to be printed in <b>landscape</b> mode
+          </p>
         </div>
       </div>
       <div className="cards">
@@ -103,7 +106,7 @@ const Cards = () => {
           privates
         )}
         {R.addIndex(R.chain)((company, index) => {
-          let shares = fillArray(R.prop("quantity"), (company.shares || []));
+          let shares = fillArray(R.prop("quantity"), company.shares || []);
           return R.addIndex(R.map)(
             (share, i) => (
               <Share
@@ -125,13 +128,24 @@ const Cards = () => {
           trains
         )}
         {R.map(
-          n => <Number number={n} background={game.info.background} key={`number=${n}`} />,
+          n => (
+            <Number
+              number={n}
+              background={game.info.background}
+              key={`number=${n}`}
+            />
+          ),
           numbers
         )}
-        <PageSetup landscape={true}/>
+        <PageSetup landscape={true} />
       </div>
     </GameContext.Provider>
   );
 };
 
-export default Cards;
+const mapStateToProps = state => ({
+  override: state.config.overrideCompanies,
+  selection: state.config.overrideSelection
+});
+
+export default connect(mapStateToProps)(Cards);

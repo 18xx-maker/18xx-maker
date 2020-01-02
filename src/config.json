@@ -24,7 +24,9 @@
     "train": true,
     "value": false
   },
-  "companySvgLogos": "none",
+  "companySvgLogos": "webdev",
+  "overrideCompanies": "none",
+  "overrideSelection": [],
   "plainMapDestinations": false,
   "plainMapHomes": false,
   "straightCityNames": false,

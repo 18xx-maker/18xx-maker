@@ -35,91 +35,91 @@
       "name": "Common Lisp",
       "abbrev": "CL",
       "color": "gray",
-      "logo": "lanaguages/commonlisp"
+      "logo": "languages/commonlisp"
     },
     {
       "name": "Erlang",
       "abbrev": "ERL",
       "color": "red",
-      "logo": "lanaguages/erlang"
+      "logo": "languages/erlang"
     },
     {
       "name": "Go",
       "abbrev": "GO",
       "color": "cyan",
-      "logo": "lanaguages/go"
+      "logo": "languages/go"
     },
     {
       "name": "Haskell",
       "abbrev": "HS",
       "color": "gray",
-      "logo": "lanaguages/haskell"
+      "logo": "languages/haskell"
     },
     {
       "name": "Java",
       "abbrev": "JAVA",
       "color": "orange",
-      "logo": "lanaguages/java"
+      "logo": "languages/java"
     },
     {
       "name": "Javascript",
       "abbrev": "JS",
       "color": "yellow",
-      "logo": "lanaguages/js"
+      "logo": "languages/javascript"
     },
     {
       "name": "Lua",
       "abbrev": "LUA",
       "color": "blue",
-      "logo": "lanaguages/lua"
+      "logo": "languages/lua"
     },
     {
       "name": "Perl",
       "abbrev": "PL",
       "color": "blue",
-      "logo": "lanaguages/perl"
+      "logo": "languages/perl"
     },
     {
       "name": "PHP",
       "abbrev": "PHP",
       "color": "blue",
-      "logo": "lanaguages/php"
+      "logo": "languages/php"
     },
     {
       "name": "Python",
       "abbrev": "PY",
       "color": "lime",
-      "logo": "lanaguages/python"
+      "logo": "languages/python"
     },
     {
       "name": "Ruby",
       "abbrev": "RB",
       "color": "red",
-      "logo": "lanaguages/ruby"
+      "logo": "languages/ruby"
     },
     {
       "name": "Rust",
       "abbrev": "RS",
       "color": "black",
-      "logo": "lanaguages/rust"
+      "logo": "languages/rust"
     },
     {
       "name": "Scala",
       "abbrev": "SC",
       "color": "red",
-      "logo": "lanaguages/scala"
+      "logo": "languages/scala"
     },
     {
       "name": "Shell",
       "abbrev": "SH",
       "color": "green",
-      "logo": "lanaguages/shell"
+      "logo": "languages/shell"
     },
     {
       "name": "Swift",
       "abbrev": "SW",
       "color": "orange",
-      "logo": "lanaguages/swift"
+      "logo": "languages/swift"
     }
   ]
 }

@@ -114,6 +114,10 @@
       "type": "string",
       "enum": ["none", "original", "match", "main"]
     },
+    "overrideCompanies": {
+      "type": "string",
+      "enum": ["none", "languages", "lotr", "dev", "webdev", "owl"]
+    },
     "plainMapHomes": { "type": "boolean" },
     "plainMapDestinations": { "type": "boolean" },
     "straightCityNames": { "type": "boolean" },

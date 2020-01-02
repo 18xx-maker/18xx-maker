@@ -72,7 +72,7 @@
       "name": "New York Excelsior",
       "abbrev": "NYE",
       "color": "blue",
-      "logo": "owl/new_york_exxcelsior"
+      "logo": "owl/new_york_excelsior"
     },
     {
       "name": "Paris Eternal",
@@ -84,7 +84,7 @@
       "name": "Philadelphia Fusion",
       "abbrev": "PF",
       "color": "orange",
-      "logo": "owl/orange"
+      "logo": "owl/philadelphia_fusion"
     },
     {
       "name": "San Francisco Shock",

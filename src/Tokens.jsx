@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 
 import Token from "./Token";
@@ -15,13 +16,12 @@ import is from "ramda/src/is";
 import PageSetup from "./PageSetup";
 import Svg from "./Svg";
 
-const MaxTokens = ({ game }) => {
-  let companies = compileCompanies(game);
+const MaxTokens = ({ game, override }) => {
+  let companies = compileCompanies(game, override);
   let tokensWidth = 12;
 
   let extraNormals =
       (game.info.extraTokens || 3) + (game.info.extraHomeTokens || 0);
-  let extraMinors = (game.info.extraMinors || 0);
   let tokenCount = R.scan(R.add, 0, R.addIndex(R.chain)((company, index) => {
     return(company.tokens.length + extraNormals + (game.info.extraTokens || 3));
   }, companies));
@@ -126,8 +126,8 @@ const MaxTokens = ({ game }) => {
   );
 };
 
-const GspTokens = ({ game }) => {
-  let companies = compileCompanies(game);
+const GspTokens = ({ game, override }) => {
+  let companies = compileCompanies(game, override);
 
   if (!companies) {
     return null;
@@ -245,7 +245,7 @@ const GspTokens = ({ game }) => {
   );
 };
 
-const Tokens = () => {
+const Tokens = ({ override }) => {
   let params = useParams();
   let game = games[params.game];
 
@@ -257,13 +257,17 @@ const Tokens = () => {
     <Config>
       {config => {
         if(config.tokenLayout === "gsp") {
-          return <GspTokens game={game} />;
+          return <GspTokens game={game} override={override} />;
         } else {
-          return <MaxTokens game={game} />;
+          return <MaxTokens game={game} override={override} />;
         }
       }}
     </Config>
   );
 };
 
-export default Tokens;
+const mapStateToProps = state => ({
+  override: state.config.overrideCompanies
+});
+
+export default connect(mapStateToProps)(Tokens);
