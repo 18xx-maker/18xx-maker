@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
+import { compileCompanies } from "./util";
 import Charter from "./Charter";
 import games from "./data/games";
 import * as R from "ramda";
@@ -26,7 +27,9 @@ const Charters = ({halfWidthCharters}) => {
     return <Redirect to={`/${params.game}/background`} />;
   }
 
-  let majors = filter(isMajor, game.companies);
+  let gameCompanies = compileCompanies(game);
+
+  let majors = filter(isMajor, gameCompanies);
 
   let extra = majors.length % (halfWidthCharters ? 4 : 2);
   let padding = 0;
@@ -34,9 +37,9 @@ const Charters = ({halfWidthCharters}) => {
     padding = (halfWidthCharters ? 4 : 2) - extra;
   }
 
-  let companies = concat(filter(isMajor, game.companies),
+  let companies = concat(filter(isMajor, gameCompanies),
                          concat(repeat(null, padding),
-                                filter(isMinor, game.companies)));
+                                filter(isMinor, gameCompanies)));
 
   return (
     <GameContext.Provider value={params.game}>
@@ -55,6 +58,7 @@ const Charters = ({halfWidthCharters}) => {
               key={company.abbrev}
               name={company.name}
               abbrev={company.abbrev}
+              logo={company.logo}
               token={company.token || company.color}
               tokens={company.tokens}
               phases={game.phases}

@@ -135,7 +135,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   let bonus = <Position data={hex.routeBonus}>{b => <RouteBonus {...b} />}</Position>;
   let tokens = <Position data={hex.tokens}>{t => (
     <ColorContext.Provider value="companies">
-      <Token token={t.color} {...t} />
+      <Token token={t.color} logo={t.logo || t.label} {...t} />
     </ColorContext.Provider>
   )}</Position>;
 

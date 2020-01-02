@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 144 144">
     <defs>
-        <circle id="a" cx="72" cy="72" r="70.2"/>
+        <circle id="ft_a" cx="72" cy="72" r="70.2"/>
     </defs>
-    <clipPath id="b">
-        <use overflow="visible" xlink:href="#a"/>
+    <clipPath id="ft_b">
+        <use overflow="visible" xlink:href="#ft_a"/>
     </clipPath>
-    <g clip-path="url(#b)">
+    <g clip-path="url(#ft_b)">
         <path fill="#8dd7f6" d="M0 0h143.9v143.9H0z"/>
         <path fill="#fff" d="M-12.4 22.7L0 42.7l147.6 73.7-3.7-15.1z"/>
         <path fill="#fff" d="M155.3 22.7l-12.4 20-147.6 73.7 3.7-15.1z"/>

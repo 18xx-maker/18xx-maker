@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 144 144">
     <defs>
-        <circle id="a" cx="72" cy="72" r="70.2"/>
+        <circle id="boe_a" cx="72" cy="72" r="70.2"/>
     </defs>
-    <clipPath id="b">
-        <use overflow="visible" xlink:href="#a"/>
+    <clipPath id="boe_b">
+        <use overflow="visible" xlink:href="#boe_a"/>
     </clipPath>
-    <g clip-path="url(#b)">
+    <g clip-path="url(#boe_b)">
         <path fill="#fff" d="M-21.6-3.9h187.1v151.7H-21.6z"/>
         <path fill="#d0202d" d="M62.7 87.1v60.8h18.7V87.1h84.2V56.8H81.4V-3.9H62.7v60.7h-84.3v30.3z"/>
         <path fill="#095ca9" d="M87.6 45.3V-3.9h60.6zm0 53.4v49.2h60.6zm-31.2 0v49.2H-4.2zm0-53.4V-3.9H-4.2zm-78-35.1v36.5h45zm187.2 0v36.5h-45zm0 123.6V97.3h-45zm-187.2 0V97.3h45z"/>

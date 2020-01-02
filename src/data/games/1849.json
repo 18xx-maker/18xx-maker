@@ -671,6 +671,27 @@
       ]
     }
   ],
+  "shareTypes": {
+    "normal": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 6,
+        "percent": 10,
+        "shares": 1
+      },
+      {
+        "quantity": 1,
+        "label": "Last Certificate",
+        "percent": 20,
+        "shares": 2
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Azienda Ferroviaria Garibaldi",
@@ -681,25 +702,7 @@
         ""
       ],
       "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Last Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "shares": "normal"
     },
     {
       "name": "Azienda Trasporti Archimede",
@@ -710,25 +713,7 @@
         ""
       ],
       "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Last Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "shares": "normal"
     },
     {
       "name": "Compagnia Trasporti Lilibeo",
@@ -739,25 +724,7 @@
         ""
       ],
       "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Last Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "shares": "normal"
     },
     {
       "name": "Impresa Ferroviaria Trinacria",
@@ -768,25 +735,7 @@
         ""
       ],
       "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Last Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "shares": "normal"
     },
     {
       "name": "Rete Centrale Sicula",
@@ -797,25 +746,7 @@
         ""
       ],
       "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Last Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "shares": "normal"
     },
     {
       "name": "Società Ferroviaria Akragas",
@@ -826,25 +757,7 @@
         ""
       ],
       "color": "pink",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Last Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "shares": "normal"
     }
   ],
   "map": {

@@ -124,3 +124,17 @@ export const maxPages = (total, page) => {
 
   return helper(total, page, []);
 };
+
+export const compileCompanies = game => {
+  return map(company => {
+    if (is(String, company.tokens)) {
+      company.tokens = game.tokenTypes[company.tokens];
+    }
+
+    if (is(String, company.shares)) {
+      company.shares = game.shareTypes[company.shares];
+    }
+
+    return company;
+  }, game.companies || []);
+};

@@ -10,7 +10,7 @@ import Train from "./Train";
 import PageSetup from "../PageSetup";
 
 import games from "../data/games";
-import { fillArray } from "../util";
+import { compileCompanies, fillArray } from "../util";
 
 import GameContext from "../context/GameContext";
 
@@ -42,7 +42,7 @@ const Cards = () => {
     return <Redirect to={`/${params.game}/background`} />;
   }
 
-  let companies = state.displayShares ? game.companies || [] : [];
+  let companies = state.displayShares ? compileCompanies(game) || [] : [];
   let privates = state.displayPrivates ? game.privates || [] : [];
   let trains = fillArray(
     R.prop("quantity"),
@@ -110,6 +110,7 @@ const Cards = () => {
                 key={`${company.abbrev}-${i}`}
                 name={company.name}
                 abbrev={company.abbrev}
+                logo={company.logo}
                 token={company.token || company.color}
                 {...share}
               />

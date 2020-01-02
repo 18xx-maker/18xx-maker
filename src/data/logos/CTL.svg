@@ -1,22 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50mm" height="80.958331" viewBox="-8 -21 65 65">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50mm" height="80.958" viewBox="-8 -21 65 65">
     <defs>
-        <path id="a" fill="none" stroke="none" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1" stroke-width=".264583" d="M76.394539 85.832325s6.81389-2.689098 15.763952-2.641762c8.410489.04448 15.330879 2.598455 15.330879 2.598455"/>
-        <path id="b" fill="none" stroke="none" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1" stroke-width=".264583" d="M76.193206 98.861267s6.81389 2.689103 15.763952 2.641763c8.410492-.0445 15.330882-2.598456 15.330882-2.598456"/>
+        <path id="ctl_a" fill="none" stroke="none" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1" stroke-width=".265" d="M76.395 85.832s6.813-2.689 15.763-2.641c8.411.044 15.331 2.598 15.331 2.598"/>
+        <path id="ctl_b" fill="none" stroke="none" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1" stroke-width=".265" d="M76.193 98.861s6.814 2.69 15.764 2.642c8.41-.044 15.331-2.598 15.331-2.598"/>
     </defs>
-    <g stroke-width=".910158" transform="matrix(1.09771 0 0 1.0997 -75.925854 -91.157627)">
-        <ellipse class="color-main color-yellow" fill="#f4e910" fill-rule="evenodd" stroke="#000" stroke-width=".682619" cx="91.941948" cy="92.631607" paint-order="stroke markers fill" rx="22.433317" ry="9.39774"/>
-        <text style="line-height:1.25;-inkscape-font-specification:'Bodoni MT'" stroke-width=".240813" x="82.024513" y="95.446602" font-family="Bodoni MT" font-size="7.761111" font-weight="400" letter-spacing="0" word-spacing="0">
-            <tspan x="82.024513" y="95.446602" dx="0 0.050000001 0.090000004 0.23 0.27000001 0.41999999" style="-inkscape-font-specification:'Bodoni MT'">ILIBEO</tspan>
+    <g stroke-width=".91" transform="matrix(1.09771 0 0 1.0997 -75.926 -91.158)">
+        <ellipse class="color-yellow" fill="#f4e910" fill-rule="evenodd" stroke="#000" stroke-width=".683" cx="91.942" cy="92.632" paint-order="stroke markers fill" rx="22.433" ry="9.398"/>
+        <text stroke-width=".241" x="82.025" y="95.447" font-family="Bodoni MT" font-size="7.761" font-weight="400" letter-spacing="0" word-spacing="0" style="line-height:1.25;-inkscape-font-specification:'Bodoni MT'">
+            <tspan style="-inkscape-font-specification:'Bodoni MT'" x="82.025" y="95.447" dx="0 0.050000001 0.090000004 0.23 0.27000001 0.41999999">ILIBEO</tspan>
         </text>
-        <text style="line-height:1.25;-inkscape-font-specification:'Bodoni MT'" stroke-width=".240813" x="74.272469" y="95.564079" font-family="Bodoni MT" font-size="11.288889" font-weight="400" letter-spacing="0" word-spacing="0">
-            <tspan x="74.272469" y="95.564079" style="-inkscape-font-specification:'Bodoni MT'">L</tspan>
+        <text stroke-width=".241" x="74.272" y="95.564" font-family="Bodoni MT" font-size="11.289" font-weight="400" letter-spacing="0" word-spacing="0" style="line-height:1.25;-inkscape-font-specification:'Bodoni MT'">
+            <tspan style="-inkscape-font-specification:'Bodoni MT'" x="74.272" y="95.564">L</tspan>
         </text>
-        <text font-weight="400" style="line-height:1.25;-inkscape-font-specification:'Bodoni MT';text-align:end" stroke-width=".240813" x="-17.471378" y=".043294" font-family="Bodoni MT" font-size="3.175" letter-spacing="0" text-anchor="end" transform="translate(0 2.684204)" word-spacing="0">
-            <textPath startOffset="100%" xlink:href="#a">AL CENTRO DEL</textPath>
+        <text stroke-width=".241" x="-17.471" y=".043" font-family="Bodoni MT" font-size="3.175" font-weight="400" letter-spacing="0" text-anchor="end" transform="translate(0 2.684)" word-spacing="0" style="line-height:1.25;-inkscape-font-specification:'Bodoni MT';text-align:end">
+            <textPath startOffset="100%" xlink:href="#ctl_a">AL CENTRO DEL</textPath>
         </text>
-        <text style="line-height:1.25;-inkscape-font-specification:'Bodoni MT'" stroke-width=".240813" font-family="Bodoni MT" font-size="3.175" font-weight="400" letter-spacing="0" word-spacing="0">
-            <textPath xlink:href="#b"><tspan style="-inkscape-font-specification:'Bodoni MT'">MEDITERRANEO</tspan></textPath>
+        <text stroke-width=".241" font-family="Bodoni MT" font-size="3.175" font-weight="400" letter-spacing="0" word-spacing="0" style="line-height:1.25;-inkscape-font-specification:'Bodoni MT'">
+            <textPath xlink:href="#ctl_b"><tspan style="-inkscape-font-specification:'Bodoni MT'">MEDITERRANEO</tspan></textPath>
         </text>
-        <path fill="none" d="M76.394539 85.832325s6.81389-2.689098 15.763952-2.641762c8.410489.04448 15.330879 2.598455 15.330879 2.598455M76.193206 98.861267s6.81389 2.689103 15.763952 2.641763c8.410492-.0445 15.330882-2.598456 15.330882-2.598456"/>
+        <path fill="none" d="M76.395 85.832s6.813-2.689 15.763-2.641c8.411.044 15.331 2.598 15.331 2.598M76.193 98.861s6.814 2.69 15.764 2.642c8.41-.044 15.331-2.598 15.331-2.598"/>
     </g>
 </svg>

@@ -37,6 +37,7 @@ const radialBleedAdjust = (bleed, percent) => {
 
 const Token = ({
   company,
+  logo,
   icon,
   label,
   token,
@@ -94,7 +95,6 @@ const Token = ({
                 }
               }
 
-              let logo = logos[label];
               if (logo) {
                 token["type"] = "logo";
               }
@@ -218,11 +218,11 @@ const Token = ({
                   textFill = t(c("white"));
                   break;
                 case "logo":
-                  let logo = logos[label];
+                  let svg = logos[logo];
                   let start = -1 * width;
                   let size = 2 * width;
-                  if (logo) {
-                    let Component = logo.Component;
+                  if (svg) {
+                    let Component = svg.Component;
                     shape = (
                       <Component className={`color-main-${color}`}
                                  x={start} y={start}

@@ -16,6 +16,7 @@ const LeftShare = ({
   shares,
   percent,
   label,
+  logo,
   name,
   abbrev,
   token,
@@ -30,7 +31,7 @@ const LeftShare = ({
                   <div className="share__token__wrapper">
                     <svg style={{width:"0.52in",height:"0.52in"}}
                          viewBox="-26 -26 52 52">
-                      <Token label={abbrev} token={token} outline={shareStyle === "gmt" ? "white" : null} width={25} />
+                      <Token label={abbrev} logo={logo || abbrev} token={token} outline={shareStyle === "gmt" ? "white" : null} width={25} />
                     </svg>
                   </div>
                 </div>);
@@ -79,6 +80,7 @@ const CenterShare = ({
   shares,
   percent,
   label,
+  logo,
   name,
   abbrev,
   token
@@ -93,7 +95,7 @@ const CenterShare = ({
                        className="share__token__wrapper">
                     <svg style={{width:"0.52in",height:"0.52in"}}
                          viewBox="-26 -26 52 52">
-                      <Token label={abbrev} token={token} width={25} />
+                      <Token label={abbrev} logo={logo || abbrev} token={token} width={25} />
                     </svg>
                   </div>
                 </div>);

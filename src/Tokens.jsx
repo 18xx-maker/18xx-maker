@@ -8,7 +8,7 @@ import ColorContext from "./context/ColorContext";
 
 import Config from "./data/Config";
 
-import { unitsToCss } from "./util";
+import { compileCompanies, unitsToCss } from "./util";
 
 import is from "ramda/src/is";
 
@@ -16,8 +16,7 @@ import PageSetup from "./PageSetup";
 import Svg from "./Svg";
 
 const MaxTokens = ({ game }) => {
-  let companies = game.companies;
-  let minorCompanies = game.minorCompanies || [];
+  let companies = compileCompanies(game);
   let tokensWidth = 12;
 
   let extraNormals =
@@ -29,18 +28,13 @@ const MaxTokens = ({ game }) => {
   let totalTokenCount = R.reduce(R.add, 0, R.addIndex(R.chain)((company, index) => {
     return(company.tokens.length + extraNormals + (game.info.extraTokens || 3));
   }, companies));
-  let minorTokenCount = R.scan(R.add, 0, R.addIndex(R.chain)((minors, index) => {
-    return(minors.tokens.length + extraMinors);
-  }, minorCompanies));
-  let totalMinorTokenCount = R.reduce(R.add, 0, R.addIndex(R.chain)((minor, index) => {
-    return(minor.tokens.length + extraMinors);
-  }, minorCompanies));
   let gameTokenCount = game.tokens.length;
 
   let tokens = R.addIndex(R.chain)((company, index) => {
     let companyTokens = Array(company.tokens.length + extraNormals).fill(
       <Token
         label={company.abbrev}
+        logo={company.logo || company.abbrev}
         token={company.token || company.color}
         bleed={true}
       />
@@ -49,6 +43,7 @@ const MaxTokens = ({ game }) => {
       companyTokens.push(
         <Token
           label={company.abbrev}
+          logo={company.logo || company.abbrev}
           token={company.token || company.color}
           bleed={true}
           inverse={true}
@@ -71,52 +66,10 @@ const MaxTokens = ({ game }) => {
     );
   }, companies);
 
-  let minorTokens = R.addIndex(R.chain)((minorCompany, index) => {
-    let minorCompanyTokens = Array(minorCompany.tokens.length + extraMinors).fill(
-      <Token
-        label={minorCompany.abbrev}
-        token={minorCompany.token || minorCompany.color}
-        bleed={true}
-        outline="black"
-      />
-    );
-    R.times(() => {
-      minorCompanyTokens.push(
-        <Token
-          label={minorCompany.abbrev}
-          token={minorCompany.token || minorCompany.color}
-          bleed={true}
-          outline="black"
-        />
-      );
-    }, extraMinors);
-
-    let groups = R.addIndex(R.map)(
-      (token, tokenIndex) => (
-        <g key={tokenIndex} transform={`translate(${(60 * (tokenIndex + minorTokenCount[index] + totalTokenCount) + 30)%(60 * tokensWidth)} ${30 + (60 * Math.floor(((tokenIndex + minorTokenCount[index] + totalTokenCount))/tokensWidth))})`}>
-          {token}
-        </g>
-      ),
-      minorCompanyTokens
-    );
-
-    return (
-      <g key={index}>
-        {groups}
-      </g>
-    );
-  }, minorCompanies);
-
-  tokens.push(
-    <g key="minorTokens">
-      {minorTokens}
-    </g>
-  );
-
   let extras = R.addIndex(R.map)((token, index) => {
     if(is(Object, token)) {
       return (
-        <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * tokensWidth)} ${30 + (60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/tokensWidth))})`}>
+        <g key={index} transform={`translate(${(60 * (index + totalTokenCount) + 30)%(60 * tokensWidth)} ${30 + (60 * Math.floor(((index + totalTokenCount))/tokensWidth))})`}>
           <Token
             bleed={true}
             outline="black"
@@ -127,7 +80,7 @@ const MaxTokens = ({ game }) => {
     } else {
       if (token.match(/^#/)) {
         return (
-          <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * tokensWidth)} ${30 + (60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/tokensWidth))})`}>
+          <g key={index} transform={`translate(${(60 * (index + totalTokenCount) + 30)%(60 * tokensWidth)} ${30 + (60 * Math.floor(((index + totalTokenCount))/tokensWidth))})`}>
             <Token
               icon={token}
               bleed={true}
@@ -138,7 +91,7 @@ const MaxTokens = ({ game }) => {
         );
       } else {
         return (
-          <g key={index} transform={`translate(${(60 * (index + totalMinorTokenCount + totalTokenCount) + 30)%(60 * tokensWidth)} ${30 + (60 * Math.floor(((index + totalMinorTokenCount + totalTokenCount))/tokensWidth))})`}>
+          <g key={index} transform={`translate(${(60 * (index + totalTokenCount) + 30)%(60 * tokensWidth)} ${30 + (60 * Math.floor(((index + totalTokenCount))/tokensWidth))})`}>
             <Token
               label={token}
               bleed={true}
@@ -159,7 +112,7 @@ const MaxTokens = ({ game }) => {
 
 
   let width = 60 * tokensWidth;
-  let height = 60 * Math.ceil(((gameTokenCount + totalMinorTokenCount + totalTokenCount))/tokensWidth);
+  let height = 60 * Math.ceil(((gameTokenCount + totalTokenCount))/tokensWidth);
 
   return (
     <div className="tokens">
@@ -174,7 +127,7 @@ const MaxTokens = ({ game }) => {
 };
 
 const GspTokens = ({ game }) => {
-  let companies = game.companies;
+  let companies = compileCompanies(game);
 
   if (!companies) {
     return null;
@@ -204,6 +157,7 @@ const GspTokens = ({ game }) => {
     let companyTokens = Array(company.tokens.length + extraNormals).fill(
       <Token
         label={company.abbrev}
+        logo={company.logo || company.abbrev}
         token={company.token || company.color}
         bleed={true}
       />
@@ -212,6 +166,7 @@ const GspTokens = ({ game }) => {
       companyTokens.push(
         <Token
           label={company.abbrev}
+          logo={company.logo || company.abbrev}
           token={company.token || company.color}
           bleed={true}
           inverse={true}

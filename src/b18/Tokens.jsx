@@ -31,10 +31,12 @@ const Tokens = () => {
       <div className="token" key={company.abbrev}>
         <Svg width={30} height={30} viewBox="-26 -26 52 52">
           <Token label={company.abbrev}
+                 logo={company.logo || company.abbrev}
                  token={company.token || company.color} />
         </Svg>
         <Svg width={30} height={30} viewBox="-26 -26 52 52">
           <Token label={company.abbrev}
+                 logo={company.logo || company.abbrev}
                  inverse={true}
                  token={company.token || company.color} />
         </Svg>

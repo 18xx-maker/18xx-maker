@@ -1,0 +1,125 @@
+{
+  "name": "Programming Languages",
+  "abbrev": "languages",
+  "companies": [
+    {
+      "name": "Assembly",
+      "abbrev": "ASM",
+      "color": "black"
+    },
+    {
+      "name": "C",
+      "abbrev": "C",
+      "color": "gray",
+      "logo": "languages/c"
+    },
+    {
+      "name": "C++",
+      "abbrev": "C++",
+      "color": "blue",
+      "logo": "languages/cpp"
+    },
+    {
+      "name": "C#",
+      "abbrev": "C#",
+      "color": "purple",
+      "logo": "languages/csharp"
+    },
+    {
+      "name": "Clojure",
+      "abbrev": "CLJ",
+      "color": "green",
+      "logo": "languages/clojure"
+    },
+    {
+      "name": "Common Lisp",
+      "abbrev": "CL",
+      "color": "gray",
+      "logo": "lanaguages/commonlisp"
+    },
+    {
+      "name": "Erlang",
+      "abbrev": "ERL",
+      "color": "red",
+      "logo": "lanaguages/erlang"
+    },
+    {
+      "name": "Go",
+      "abbrev": "GO",
+      "color": "cyan",
+      "logo": "lanaguages/go"
+    },
+    {
+      "name": "Haskell",
+      "abbrev": "HS",
+      "color": "gray",
+      "logo": "lanaguages/haskell"
+    },
+    {
+      "name": "Java",
+      "abbrev": "JAVA",
+      "color": "orange",
+      "logo": "lanaguages/java"
+    },
+    {
+      "name": "Javascript",
+      "abbrev": "JS",
+      "color": "yellow",
+      "logo": "lanaguages/js"
+    },
+    {
+      "name": "Lua",
+      "abbrev": "LUA",
+      "color": "blue",
+      "logo": "lanaguages/lua"
+    },
+    {
+      "name": "Perl",
+      "abbrev": "PL",
+      "color": "blue",
+      "logo": "lanaguages/perl"
+    },
+    {
+      "name": "PHP",
+      "abbrev": "PHP",
+      "color": "blue",
+      "logo": "lanaguages/php"
+    },
+    {
+      "name": "Python",
+      "abbrev": "PY",
+      "color": "lime",
+      "logo": "lanaguages/python"
+    },
+    {
+      "name": "Ruby",
+      "abbrev": "RB",
+      "color": "red",
+      "logo": "lanaguages/ruby"
+    },
+    {
+      "name": "Rust",
+      "abbrev": "RS",
+      "color": "black",
+      "logo": "lanaguages/rust"
+    },
+    {
+      "name": "Scala",
+      "abbrev": "SC",
+      "color": "red",
+      "logo": "lanaguages/scala"
+    },
+    {
+      "name": "Shell",
+      "abbrev": "SH",
+      "color": "green",
+      "logo": "lanaguages/shell"
+    },
+    {
+      "name": "Swift",
+      "abbrev": "SW",
+      "color": "orange",
+      "logo": "lanaguages/swift"
+    }
+  ]
+}

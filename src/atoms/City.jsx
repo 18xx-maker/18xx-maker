@@ -36,7 +36,7 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
                       if(config.plainMapHomes) {
                         return <Token label={companies[num].label} token="white"/>;
                       } else {
-                        return <Token label={companies[num].label} token={companies[num].token || companies[num].color}/>;
+                        return <Token label={companies[num].label} logo={companies[num].logo || companies[num].label} token={companies[num].token || companies[num].color}/>;
                       }
                     }}
                   </Config>
@@ -58,7 +58,7 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
                       } else {
                         let company = find(propEq("abbrev", companies[num]), game.companies);
                         if(company) {
-                          return <Token label={company.abbrev} token={company.color || company.token}/>;
+                          return <Token label={company.abbrev} logo={company.logo || company.abbrev} token={company.color || company.token}/>;
                         } else {
                           return null;
                         }
