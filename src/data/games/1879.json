@@ -16,24 +16,39 @@
     "Round"
   ],
   "ipo": true,
-  "bank": "$8,000",
+  "bank": 8000,
   "players": [
     {
       "number": 3,
       "certLimit": 16,
-      "capital": "$680"
+      "capital": 680
     },
     {
       "number": 4,
       "certLimit": 12,
-      "capital": "$510"
+      "capital": 510
     },
     {
       "number": 5,
       "certLimit": 10,
-      "capital": "$408"
+      "capital": 408
     }
   ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Northern Pacific Railway",
@@ -46,20 +61,7 @@
         "$100",
         "$100"
       ],
-      "color": "purple",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "purple"
     },
     {
       "name": "Great Northern Railway",
@@ -71,20 +73,7 @@
         "$100",
         "$100"
       ],
-      "color": "cyan",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "cyan"
     },
     {
       "name": "Milwaukee Road",
@@ -95,20 +84,7 @@
         "$100",
         "$100"
       ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "red"
     },
     {
       "name": "Union Pacific Railroad",
@@ -119,20 +95,7 @@
         "$100",
         "$100"
       ],
-      "color": "natural",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "natural"
     },
     {
       "name": "Southern Pacific",
@@ -142,20 +105,7 @@
         "$40",
         "$100"
       ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "yellow"
     },
     {
       "name": "Spokane, Portland and Seattle Railway",
@@ -164,20 +114,7 @@
         "Free",
         "$40"
       ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     }
   ],
   "trains": [

@@ -70,52 +70,57 @@
     {
       "number": 3,
       "certLimit": "∞",
-      "capital": "$800"
+      "capital": 800
     },
     {
       "number": 4,
       "certLimit": "∞",
-      "capital": "$700"
+      "capital": 700
     },
     {
       "number": 5,
       "certLimit": "∞",
-      "capital": "$620"
+      "capital": 620
     }
   ],
+  "tokenTypes": {
+    "three": [
+      "Free",
+      100,
+      100
+    ],
+    "four": [
+      "Free",
+      100,
+      100,
+      100
+    ]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "Director's Share",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Boston & Maine",
       "abbrev": "B&M",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100",
-        "$100"
-      ],
       "token": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "Baltimore & Ohio",
       "abbrev": "B&O",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100"
-      ],
       "token": {
         "type": "quarters",
         "colors": [
@@ -123,80 +128,28 @@
           "yellow"
         ]
       },
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Chesapeake & Ohio",
       "abbrev": "C&O",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100"
-      ],
       "token": "cyan",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Canadian Pacific Railway",
       "abbrev": "CPR",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100",
-        "$100"
-      ],
       "token": {
         "type": "bar",
         "colors": [
           "brown"
         ]
       },
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "Grand Trunk",
       "abbrev": "GT",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100"
-      ],
       "token": {
         "type": "stripe",
         "colors": [
@@ -204,57 +157,22 @@
           "red"
         ]
       },
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Erie Railroad",
       "abbrev": "ERIE",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100"
-      ],
       "token": {
         "type": "bar",
         "colors": [
           "yellow"
         ]
       },
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Illinois Central",
       "abbrev": "IC",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100",
-        "$100"
-      ],
       "token": {
         "type": "halves",
         "colors": [
@@ -262,29 +180,11 @@
           "yellow"
         ]
       },
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "Michigan Central Railroad",
       "abbrev": "MC",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100",
-        "$100"
-      ],
       "token": {
         "type": "square",
         "colors": [
@@ -292,29 +192,11 @@
           "black"
         ]
       },
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "Missouri Pacific Railraod",
       "abbrev": "MP",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100",
-        "$100"
-      ],
       "token": {
         "type": "target",
         "colors": [
@@ -322,28 +204,11 @@
           "white"
         ]
       },
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "New York Central",
       "abbrev": "NYC",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100"
-      ],
       "token": {
         "type": "stripe",
         "colors": [
@@ -351,28 +216,11 @@
           "white"
         ]
       },
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "New York, Chicago & St. Louis Railroad",
       "abbrev": "NKP",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100"
-      ],
       "token": {
         "type": "halves",
         "colors": [
@@ -380,52 +228,17 @@
           "cyan"
         ]
       },
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "New York, New Haven & Hartford",
       "abbrev": "NYH",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100"
-      ],
       "token": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Norfold & Western Railway",
       "abbrev": "NW",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100",
-        "$100"
-      ],
       "token": {
         "type": "stripes",
         "colors": [
@@ -433,29 +246,11 @@
           "yellow"
         ]
       },
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "Ontario, Simcoe & Huron",
       "abbrev": "OS&H",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100",
-        "$100"
-      ],
       "token": {
         "type": "stripe",
         "colors": [
@@ -463,52 +258,17 @@
           "lightGreen"
         ]
       },
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "Pennsylvania Railroad",
       "abbrev": "PRR",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100",
-        "$100"
-      ],
       "token": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "Wabash Railroad",
       "abbrev": "WAB",
-      "tokens": [
-        "Free",
-        "$100",
-        "$100"
-      ],
       "token": {
         "type": "square",
         "labelColor": "yellow",
@@ -517,19 +277,7 @@
           "red"
         ]
       },
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "Director's Share",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     }
   ],
   "trains": [

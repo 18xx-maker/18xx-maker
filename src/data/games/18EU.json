@@ -9,7 +9,7 @@
     "titleY": 1570,
     "titleSize": 165,
     "subTitleSize": 17,
-    "currency": "EUR"
+    "currency": "GBP"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/5684/18eu",
@@ -35,360 +35,188 @@
     "#mountain120"
   ],
   "ipo": false,
-  "bank": "£12,000",
+  "bank": 12000,
   "players": [
     {
       "number": 2,
       "certLimit": 28,
-      "capital": "£750"
+      "capital": 750
     },
     {
       "number": 3,
       "certLimit": 20,
-      "capital": "£450"
+      "capital": 450
     },
     {
       "number": 4,
       "certLimit": 16,
-      "capital": "£350"
+      "capital": 350
     },
     {
       "number": 5,
       "certLimit": 13,
-      "capital": "£300"
+      "capital": 300
     },
     {
       "number": 6,
       "certLimit": 11,
-      "capital": "£250"
+      "capital": 250
     }
   ],
+  "tokenTypes": {
+    "minor": [""],
+    "default": [
+      "Free",
+      "Free",
+      "Free",
+      "Free"
+    ]
+  },
+  "shareTypes": {
+    "minor": [],
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Belgian National Railways",
       "abbrev": "BNR",
-      "tokens": [
-        "Free",
-        "Free",
-        "Free",
-        "Free"
-      ],
-      "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "orange"
     },
     {
       "name": "Dutch Railways",
       "abbrev": "DR",
-      "tokens": [
-        "Free",
-        "Free",
-        "Free",
-        "Free"
-      ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "yellow"
     },
     {
       "name": "Italian State Railways",
       "abbrev": "FS",
-      "tokens": [
-        "Free",
-        "Free",
-        "Free",
-        "Free"
-      ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     },
     {
       "name": "Royal Bavarian State Railroad",
       "abbrev": "RBSR",
-      "tokens": [
-        "Free",
-        "Free",
-        "Free",
-        "Free"
-      ],
-      "color": "cyan",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "cyan"
     },
     {
       "name": "Royal Prussian Railway",
       "abbrev": "RPR",
-      "tokens": [
-        "Free",
-        "Free",
-        "Free",
-        "Free"
-      ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "blue"
     },
     {
       "name": "Austrial Imperial Royal State",
       "abbrev": "AIRS",
-      "tokens": [
-        "Free",
-        "Free",
-        "Free",
-        "Free"
-      ],
-      "color": "natural",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "natural"
     },
     {
       "name": "SNCF",
       "abbrev": "SNCF",
-      "tokens": [
-        "Free",
-        "Free",
-        "Free",
-        "Free"
-      ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "red"
     },
     {
       "name": "German State Railways",
       "abbrev": "GSR",
-      "tokens": [
-        "Free",
-        "Free",
-        "Free",
-        "Free"
-      ],
-      "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "black"
     },
     {
       "name": "Chemin de Fer du Nord",
       "minor": true,
       "abbrev": "1",
-      "tokens": [
-        ""
-      ],
       "color": "white"
     },
     {
       "name": "État Belge",
       "minor": true,
       "abbrev": "2",
-      "tokens": [
-        ""
-      ],
       "color": "white"
     },
     {
       "name": "Paris-Lyon-Méditerranée",
       "minor": true,
       "abbrev": "3",
-      "tokens": [
-        ""
-      ],
       "color": "white"
     },
     {
       "name": "Leipzig-Dresdner-Bahn",
       "minor": true,
       "abbrev": "4",
-      "tokens": [
-        ""
-      ],
       "color": "white"
     },
     {
       "name": "Ferrovia Adriatica",
       "minor": true,
       "abbrev": "5",
-      "tokens": [
-        ""
-      ],
       "color": "white"
     },
     {
       "name": "Kaiser-Ferdinand-Nordbahn",
       "minor": true,
       "abbrev": "6",
-      "tokens": [
-        ""
-      ],
       "color": "white"
     },
     {
       "name": "Berlin-Potsdamer-Bahn",
       "minor": true,
       "abbrev": "7",
-      "tokens": [
-        ""
-      ],
       "color": "white"
     },
     {
       "name": "Ungarische Staatsbahn",
       "minor": true,
       "abbrev": "8",
-      "tokens": [
-        ""
-      ],
       "color": "white"
     },
     {
       "name": "Berlin-Stettiner-Bahn",
       "minor": true,
       "abbrev": "9",
-      "tokens": [
-        ""
-      ],
       "color": "white"
     },
     {
       "name": "Strade Ferrate Alta Italia",
       "minor": true,
       "abbrev": "10",
-      "tokens": [
-        ""
-      ],
       "color": "white"
     },
     {
       "name": "Südbahn",
       "minor": true,
       "abbrev": "11",
-      "tokens": [
-        ""
-      ],
       "color": "white"
     },
     {
       "name": "Hollandsche Maatschappij",
       "minor": true,
       "abbrev": "12",
-      "tokens": [
-        ""
-      ],
       "color": "white"
     },
     {
       "name": "Ludwigsbahn",
       "minor": true,
       "abbrev": "13",
-      "tokens": [
-        ""
-      ],
       "color": "white"
     },
     {
       "name": "Ligne Strasbourg-Bâle",
       "minor": true,
       "abbrev": "14",
-      "tokens": [
-        ""
-      ],
       "color": "white"
     },
     {
       "name": "Grand Central",
       "minor": true,
       "abbrev": "15",
-      "tokens": [
-        ""
-      ],
       "color": "white"
     }
   ],

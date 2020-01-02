@@ -7,7 +7,6 @@ import AWP, { ReactComponent as AWP_Component } from "./AWP.svg";
 import BM, { ReactComponent as BM_Component } from "./BM.svg";
 import BO, { ReactComponent as BO_Component } from "./BO.svg";
 import BOE, { ReactComponent as BOE_Component } from "./BOE.svg";
-import BPS, { ReactComponent as BPS_Component } from "./BPS.svg";
 import CAR, { ReactComponent as CAR_Component } from "./CAR.svg";
 import CHI, { ReactComponent as CHI_Component } from "./CHI.svg";
 import CO, { ReactComponent as CO_Component } from "./CO.svg";
@@ -35,11 +34,8 @@ import dev_postgresql, { ReactComponent as dev_postgresql_Component } from "./de
 import dev_redis, { ReactComponent as dev_redis_Component } from "./dev/redis.svg";
 import dev_vim, { ReactComponent as dev_vim_Component } from "./dev/vim.svg";
 import dev_vscode, { ReactComponent as dev_vscode_Component } from "./dev/vscode.svg";
-import DMH, { ReactComponent as DMH_Component } from "./DMH.svg";
-import E, { ReactComponent as E_Component } from "./E.svg";
 import ERIE, { ReactComponent as ERIE_Component } from "./ERIE.svg";
 import FECR, { ReactComponent as FECR_Component } from "./FECR.svg";
-import FHR, { ReactComponent as FHR_Component } from "./FHR.svg";
 import FT, { ReactComponent as FT_Component } from "./FT.svg";
 import FW, { ReactComponent as FW_Component } from "./FW.svg";
 import GMO, { ReactComponent as GMO_Component } from "./GMO.svg";
@@ -72,20 +68,27 @@ import languages_scala, { ReactComponent as languages_scala_Component } from "./
 import languages_shell, { ReactComponent as languages_shell_Component } from "./languages/shell.svg";
 import languages_swift, { ReactComponent as languages_swift_Component } from "./languages/swift.svg";
 import LIRR, { ReactComponent as LIRR_Component } from "./LIRR.svg";
-import LLM, { ReactComponent as LLM_Component } from "./LLM.svg";
 import LN, { ReactComponent as LN_Component } from "./LN.svg";
+import lotr_BPS, { ReactComponent as lotr_BPS_Component } from "./lotr/BPS.svg";
+import lotr_DMH, { ReactComponent as lotr_DMH_Component } from "./lotr/DMH.svg";
+import lotr_E, { ReactComponent as lotr_E_Component } from "./lotr/E.svg";
+import lotr_FHR, { ReactComponent as lotr_FHR_Component } from "./lotr/FHR.svg";
+import lotr_LLM, { ReactComponent as lotr_LLM_Component } from "./lotr/LLM.svg";
+import lotr_MTR, { ReactComponent as lotr_MTR_Component } from "./lotr/MTR.svg";
+import lotr_O, { ReactComponent as lotr_O_Component } from "./lotr/O.svg";
+import lotr_RGH, { ReactComponent as lotr_RGH_Component } from "./lotr/RGH.svg";
+import lotr_SER, { ReactComponent as lotr_SER_Component } from "./lotr/SER.svg";
+import lotr_SWR, { ReactComponent as lotr_SWR_Component } from "./lotr/SWR.svg";
 import MC, { ReactComponent as MC_Component } from "./MC.svg";
 import MEX, { ReactComponent as MEX_Component } from "./MEX.svg";
 import MKT, { ReactComponent as MKT_Component } from "./MKT.svg";
 import MP, { ReactComponent as MP_Component } from "./MP.svg";
-import MTR, { ReactComponent as MTR_Component } from "./MTR.svg";
 import NdM, { ReactComponent as NdM_Component } from "./NdM.svg";
 import NFL, { ReactComponent as NFL_Component } from "./NFL.svg";
 import NNH, { ReactComponent as NNH_Component } from "./NNH.svg";
 import NSW, { ReactComponent as NSW_Component } from "./NSW.svg";
 import NW, { ReactComponent as NW_Component } from "./NW.svg";
 import NYC, { ReactComponent as NYC_Component } from "./NYC.svg";
-import O, { ReactComponent as O_Component } from "./O.svg";
 import owl_atlanta_reign, { ReactComponent as owl_atlanta_reign_Component } from "./owl/atlanta_reign.svg";
 import owl_boston_uprising, { ReactComponent as owl_boston_uprising_Component } from "./owl/boston_uprising.svg";
 import owl_chengdu_hunters, { ReactComponent as owl_chengdu_hunters_Component } from "./owl/chengdu_hunters.svg";
@@ -110,17 +113,14 @@ import PAC, { ReactComponent as PAC_Component } from "./PAC.svg";
 import PRR, { ReactComponent as PRR_Component } from "./PRR.svg";
 import QR, { ReactComponent as QR_Component } from "./QR.svg";
 import RCS, { ReactComponent as RCS_Component } from "./RCS.svg";
-import RGH, { ReactComponent as RGH_Component } from "./RGH.svg";
 import SALR, { ReactComponent as SALR_Component } from "./SALR.svg";
 import SAR, { ReactComponent as SAR_Component } from "./SAR.svg";
-import SER, { ReactComponent as SER_Component } from "./SER.svg";
 import SFA, { ReactComponent as SFA_Component } from "./SFA.svg";
 import SLSF, { ReactComponent as SLSF_Component } from "./SLSF.svg";
 import SOU, { ReactComponent as SOU_Component } from "./SOU.svg";
 import SP, { ReactComponent as SP_Component } from "./SP.svg";
 import SR, { ReactComponent as SR_Component } from "./SR.svg";
 import SSW, { ReactComponent as SSW_Component } from "./SSW.svg";
-import SWR, { ReactComponent as SWR_Component } from "./SWR.svg";
 import TM, { ReactComponent as TM_Component } from "./TM.svg";
 import TP, { ReactComponent as TP_Component } from "./TP.svg";
 import TR, { ReactComponent as TR_Component } from "./TR.svg";
@@ -190,11 +190,6 @@ export default {
     name: "BOE",
     src: BOE,
     Component: BOE_Component
-  },
-  "BPS": {
-    name: "BPS",
-    src: BPS,
-    Component: BPS_Component
   },
   "CAR": {
     name: "CAR",
@@ -351,16 +346,6 @@ export default {
     src: dev_vscode,
     Component: dev_vscode_Component
   },
-  "DMH": {
-    name: "DMH",
-    src: DMH,
-    Component: DMH_Component
-  },
-  "E": {
-    name: "E",
-    src: E,
-    Component: E_Component
-  },
   "ERIE": {
     name: "ERIE",
     src: ERIE,
@@ -370,11 +355,6 @@ export default {
     name: "FECR",
     src: FECR,
     Component: FECR_Component
-  },
-  "FHR": {
-    name: "FHR",
-    src: FHR,
-    Component: FHR_Component
   },
   "FT": {
     name: "FT",
@@ -557,15 +537,70 @@ export default {
     src: LIRR,
     Component: LIRR_Component
   },
-  "LLM": {
-    name: "LLM",
-    src: LLM,
-    Component: LLM_Component
-  },
   "LN": {
     name: "LN",
     src: LN,
     Component: LN_Component
+  },
+  "lotr/BPS": {
+    name: "BPS",
+    group: "lotr",
+    src: lotr_BPS,
+    Component: lotr_BPS_Component
+  },
+  "lotr/DMH": {
+    name: "DMH",
+    group: "lotr",
+    src: lotr_DMH,
+    Component: lotr_DMH_Component
+  },
+  "lotr/E": {
+    name: "E",
+    group: "lotr",
+    src: lotr_E,
+    Component: lotr_E_Component
+  },
+  "lotr/FHR": {
+    name: "FHR",
+    group: "lotr",
+    src: lotr_FHR,
+    Component: lotr_FHR_Component
+  },
+  "lotr/LLM": {
+    name: "LLM",
+    group: "lotr",
+    src: lotr_LLM,
+    Component: lotr_LLM_Component
+  },
+  "lotr/MTR": {
+    name: "MTR",
+    group: "lotr",
+    src: lotr_MTR,
+    Component: lotr_MTR_Component
+  },
+  "lotr/O": {
+    name: "O",
+    group: "lotr",
+    src: lotr_O,
+    Component: lotr_O_Component
+  },
+  "lotr/RGH": {
+    name: "RGH",
+    group: "lotr",
+    src: lotr_RGH,
+    Component: lotr_RGH_Component
+  },
+  "lotr/SER": {
+    name: "SER",
+    group: "lotr",
+    src: lotr_SER,
+    Component: lotr_SER_Component
+  },
+  "lotr/SWR": {
+    name: "SWR",
+    group: "lotr",
+    src: lotr_SWR,
+    Component: lotr_SWR_Component
   },
   "MC": {
     name: "MC",
@@ -586,11 +621,6 @@ export default {
     name: "MP",
     src: MP,
     Component: MP_Component
-  },
-  "MTR": {
-    name: "MTR",
-    src: MTR,
-    Component: MTR_Component
   },
   "NdM": {
     name: "NdM",
@@ -621,11 +651,6 @@ export default {
     name: "NYC",
     src: NYC,
     Component: NYC_Component
-  },
-  "O": {
-    name: "O",
-    src: O,
-    Component: O_Component
   },
   "owl/atlanta_reign": {
     name: "atlanta_reign",
@@ -767,11 +792,6 @@ export default {
     src: RCS,
     Component: RCS_Component
   },
-  "RGH": {
-    name: "RGH",
-    src: RGH,
-    Component: RGH_Component
-  },
   "SALR": {
     name: "SALR",
     src: SALR,
@@ -781,11 +801,6 @@ export default {
     name: "SAR",
     src: SAR,
     Component: SAR_Component
-  },
-  "SER": {
-    name: "SER",
-    src: SER,
-    Component: SER_Component
   },
   "SFA": {
     name: "SFA",
@@ -816,11 +831,6 @@ export default {
     name: "SSW",
     src: SSW,
     Component: SSW_Component
-  },
-  "SWR": {
-    name: "SWR",
-    src: SWR,
-    Component: SWR_Component
   },
   "TM": {
     name: "TM",

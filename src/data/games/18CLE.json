@@ -18,256 +18,116 @@
     "+20"
   ],
   "ipo": true,
-  "bank": "$12,000",
+  "bank": 12000,
   "players": [
     {
       "number": 3,
       "certLimit": 21,
-      "capital": "$700"
+      "capital": 700
     },
     {
       "number": 4,
       "certLimit": 18,
-      "capital": "$500"
+      "capital": 500
     },
     {
       "number": 5,
       "certLimit": 15,
-      "capital": "$500"
+      "capital": 500
     },
     {
       "number": 6,
       "certLimit": 12,
-      "capital": "$450"
+      "capital": 450
     }
   ],
+  "tokenTypes": {
+    "default": [
+      "Free",
+      "$40",
+      "$100"
+    ]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Akron, Bedford & Cleveland Railroad",
       "abbrev": "ABC",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "yellow"
     },
     {
       "name": "Cleveland Southwestern & Columbus Railway Co.",
       "abbrev": "CSC",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "tan",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "tan"
     },
     {
       "name": "Lakeshore Electric Railway Co.",
       "abbrev": "LSE",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "turquoise",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "turquoise"
     },
     {
       "name": "Cleveland Painesville & Eastern Railroad Co.",
       "abbrev": "CPE",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "black"
     },
     {
       "name": "Cleveland & Manhoning Valley Railroad Co.",
       "abbrev": "CMV",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "gray",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "gray"
     },
     {
       "name": "Cleveland & Eastern Interuban",
       "abbrev": "C&E",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     },
     {
       "name": "Shaker Heights Rapid Transit Co.",
       "abbrev": "SHR",
-      "tokens": [
-        "Free",
-        "$40",
-	"100"  
-      ],
-      "color": "natural",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "natural"
     },
     {
       "name": "Woodland Avenue & West Side Railroad",
       "abbrev": "WW",
-      "tokens": [
-        "Free",
-        "$40",
-	"100"  
-      ],
-      "color": "brown",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "brown"
     },
     {
       "name": "Cincinnati & Lake Erie Railroad",
       "abbrev": "CLE",
-      "tokens": [
-        "Free",
-        "$40",
-	"100"  
-      ],
-      "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "orange"
     },
     {
       "name": "Greater Cleveland Rapid Transit Authority",
       "abbrev": "RTA",
       "tokens": [
         "Free",
-	"Free",
-	"Free",
-	"Free",
-	"Free",
-	"Free",
+        "Free",
+        "Free",
+        "Free",
+        "Free",
+        "Free",
         "Replace",
-	"Replace",
-	"Replace",
-	"Replace",
-	"Replace",
-	"Replace",
-	"Replace",
-	"Replace",
-	"Replace"
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace",
+        "Replace"
       ],
       "color": "red",
       "shares": [
@@ -386,50 +246,50 @@
   "privates": [
     {
       "name": "Euclid Railroad",
-      "price": "$20",
-      "revenue": "$5",
+      "price": 20,
+      "revenue": 5,
       "description": "Blocks hex E-26"
     },
     {
       "name": "Union Depot",
-      "price": "$35",
-      "revenue": "$5",
+      "price": 35,
+      "revenue": 5,
       "description": "Owning corperation may upgrade hex E-18 to green and brown. No connection is required, but they do count as the corperation's tily lay. Upgrading E-18 to brown closes the Union Depot."
     },
     {
       "name": "West Side Market",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
       "description": "Owning corperation may do one of the following: (1) Upgrade any stop that it runs to by plus $10 revenue, (2) Upgrade Ohio City by plus $20 revenue if it can legally run to Ohio City, or (3) Upgrade any yellow stop to a yellow station maintaining existing track. Using any of these abilites closes the West Side Market."
     },
     {
       "name": "Central Viaduct",
-      "price": "$60",
-      "revenue": "$10",
+      "price": 60,
+      "revenue": 10,
       "description": "Blocks east-west routes over the Cuyahoga River while owned by a player. The owning corperation may place a tile on any river hex for free. Placing the free tile closes the Central Viaduct."
     },
     {
       "name": "Azko Nobel Salt, Inc.",
-      "price": "$80",
-      "revenue": "$15",
+      "price": 80,
+      "revenue": 15,
       "description": "Blocks hex F-15. Only owning corperation may place a tile on hex F-15. Placing a tile on hex F-15 closes Azko Nobel Salt, Inc. This company does not close with the purchase of the first 6 train and may remain open until the end of the game."
     },
     {
       "name": "The Terminal Tower",
-      "price": "$110",
-      "revenue": "$15",
+      "price": 110,
+      "revenue": 15,
       "description": "Until the Terminal Tower is purchased by a corperation, hex F-17 blocks train routes from passing through. The owning corperation may place a station marker on hex F-17 for normal cost and does not need to be able to reach hex F-17 to place the station marker. The empty station pot on the upper right side of hex F-17 is reserved for the corperation owning this private company until this private closes. Placing a station maker on hex F-17 closes this company."
     },
     {
       "name": "Cleveland, Plainsville & Ashtabula Railroad",
-      "price": "$135",
-      "revenue": "$20",
+      "price": 135,
+      "revenue": 20,
       "description": "Provides a 10% share of CPE to the owning placer. May not be purchased by a corperation. CLoses when the CPE pays its first dividend."
     },
     {
       "name": "Cleveland & Berea Street Railroad Co.",
-      "price": "$150",
-      "revenue": "$0",
+      "price": 150,
+      "revenue": 0,
       "description": "Provides 20% president share of CSC to owning player. Only 20% is required to float CSC. Closes when CSC purchases its first train."
     }
   ],
@@ -970,7 +830,7 @@
         {
           "value": 30,
           "label": 30,
-	  "arrow": "down",  
+	  "arrow": "down",
           "legend": 2
         },
         {
@@ -1026,7 +886,7 @@
         {
           "value": 20,
           "label": 20,
-	  "arrow": "down",  
+	  "arrow": "down",
           "legend": 2
         },
         {
@@ -1147,7 +1007,7 @@
     "5": 4,
     "6": 4,
     "7": 4,
-    "8": 4,  
+    "8": 4,
     "9": 6,
     "51CLE": 4,
     "57": 4,
@@ -1655,7 +1515,7 @@
             "side": 4,
             "color": "water",
 	    "dashed": true
-          }  
+          }
         ],
         "hexes": [
           "F15"
@@ -1751,7 +1611,7 @@
             "side": 4,
             "color": "water",
 	    "dashed": true
-          }  
+          }
         ],
         "hexes": [
           "G16"
@@ -1831,7 +1691,7 @@
             "side": 4,
             "color": "water",
 	    "dashed": true
-          }  
+          }
         ],
 	"names": {
 	  "name": "Cuyahoga River",
@@ -1923,7 +1783,7 @@
             "side": 4,
             "color": "water",
 	    "dashed": true
-          }  
+          }
         ],
         "hexes": [
           "I18"
@@ -2033,7 +1893,7 @@
             "side": 6,
             "color": "water",
 	    "dashed": true
-          }  
+          }
         ],
         "hexes": [
           "I20"
@@ -2143,7 +2003,7 @@
             "side": 6,
             "color": "water",
 	    "dashed": true
-          }  
+          }
         ],
         "hexes": [
           "J21"
@@ -2172,7 +2032,7 @@
             "side": 5,
             "color": "water",
 	    "dashed": true
-          }  
+          }
         ],
         "hexes": [
           "L21"
@@ -2255,7 +2115,7 @@
             "side": 1,
             "color": "water",
 	    "dashed": true
-          }  
+          }
         ],
         "hexes": [
           "K22"
@@ -2274,7 +2134,7 @@
             "side": 1,
             "color": "water",
 	    "dashed": true
-          }  
+          }
         ],
         "hexes": [
           "M22"
@@ -2512,7 +2372,7 @@
 	    "name": {
 	      "name": "Shaker Heights",
 	      "reverse": true
-	    },  
+	    },
 	    "companies": [
               {
                 "label": "SHR",

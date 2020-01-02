@@ -39,7 +39,7 @@
     }
   ],
   "shareTypes": {
-    "normal": [
+    "default": [
       {
         "quantity": 1,
         "label": "President's Certificate",
@@ -76,64 +76,56 @@
       "abbrev": "PRR",
       "logo": "PRR",
       "color": "green",
-      "tokens": "four",
-      "shares": "normal"
+      "tokens": "four"
     },
     {
       "name": "New York Central Railroad",
       "abbrev": "NYC",
       "logo": "NYC",
       "color": "black",
-      "tokens": "four",
-      "shares": "normal"
+      "tokens": "four"
     },
     {
       "name": "Canadian Pacific Railroad",
       "abbrev": "CPR",
       "logo": "CPR",
       "color": "red",
-      "tokens": "four",
-      "shares": "normal"
+      "tokens": "four"
     },
     {
       "name": "Baltimore & Ohio Railroad",
       "abbrev": "B&O",
       "logo": "BO",
       "color": "blue",
-      "tokens": "three",
-      "shares": "normal"
+      "tokens": "three"
     },
     {
       "name": "Chesapeake & Ohio Railroad",
       "abbrev": "C&O",
       "logo": "CO",
       "color": "cyan",
-      "tokens": "three",
-      "shares": "normal"
+      "tokens": "three"
     },
     {
       "name": "Erie Railroad",
       "abbrev": "ERIE",
       "logo": "ERIE",
       "color": "yellow",
-      "tokens": "three",
-      "shares": "normal"
+      "tokens": "three"
     },
     {
       "name": "New York, New Haven & Hartford Railroad",
       "abbrev": "NYNH",
       "logo": "NNH",
       "color": "orange",
-      "tokens": "two",
-      "shares": "normal"
+      "tokens": "two"
     },
     {
       "name": "Boston & Maine Railroad",
       "abbrev": "B&M",
       "logo": "BM",
       "color": "brown",
-      "tokens": "two",
-      "shares": "normal"
+      "tokens": "two"
     }
   ],
   "trains": [

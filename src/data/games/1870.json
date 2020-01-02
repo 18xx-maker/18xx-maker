@@ -21,34 +21,49 @@
     "#meat"
   ],
   "ipo": true,
-  "bank": "$12,000",
+  "bank": 12000,
   "players": [
     {
       "number": 2,
       "certLimit": "28 / 24",
-      "capital": "$1050"
+      "capital": 1050
     },
     {
       "number": 3,
       "certLimit": "20 / 17",
-      "capital": "$700"
+      "capital": 700
     },
     {
       "number": 4,
       "certLimit": "16 / 14",
-      "capital": "$525"
+      "capital": 525
     },
     {
       "number": 5,
       "certLimit": "13 / 11",
-      "capital": "$420"
+      "capital": 420
     },
     {
       "number": 6,
       "certLimit": "11 / 9",
-      "capital": "$350"
+      "capital": 350
     }
   ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Southern Pacific Railroad",
@@ -56,23 +71,10 @@
       "tokens": [
         "Free",
         "New Orleans",
-        "$40",
-        "$100"
+        40,
+        100
       ],
-      "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "orange"
     },
     {
       "name": "Missouri Kansas Texas Railroad",
@@ -80,23 +82,10 @@
       "tokens": [
         "Free",
         "Southwest",
-        "$40",
-        "$100"
+        40,
+        100
       ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     },
     {
       "name": "Fort Worth & Denver City Railway",
@@ -104,22 +93,9 @@
       "tokens": [
         "Free",
         "Denver",
-        "$40"
+        40
       ],
-      "color": "purple",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "purple"
     },
     {
       "name": "Missouri Pacific Railroad",
@@ -127,23 +103,10 @@
       "tokens": [
         "Free",
         "Dallas",
-        "$40",
-        "$100"
+        40,
+        100
       ],
-      "color": "brown",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "brown"
     },
     {
       "name": "Gulf, Mobile & Ohio Railroad",
@@ -151,22 +114,9 @@
       "tokens": [
         "Free",
         "St. Louis",
-        "$40"
+        40
       ],
-      "color": "pink",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "pink"
     },
     {
       "name": "Texas & Pacific Railway",
@@ -174,22 +124,9 @@
       "tokens": [
         "Free",
         "New Orleans",
-        "$40"
+        40
       ],
-      "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "black"
     },
     {
       "name": "St. Louis Southwestern Railway",
@@ -197,22 +134,9 @@
       "tokens": [
         "Free",
         "Fort Worth",
-        "$40"
+        40
       ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "blue"
     },
     {
       "name": "Illinois Central Railroad",
@@ -220,22 +144,9 @@
       "tokens": [
         "Free",
         "Chicago",
-        "$40"
+        40
       ],
-      "color": "lime",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "lime"
     },
     {
       "name": "Atchison, Topeka & Santa Fe",
@@ -243,23 +154,10 @@
       "tokens": [
         "Free",
         "Southwest",
-        "$40",
-        "$100"
+        40,
+        100
       ],
-      "color": "cyan",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "cyan"
     },
     {
       "name": "St. Louis-San Francisco Railway",
@@ -267,30 +165,17 @@
       "tokens": [
         "Free",
         "Southeast",
-        "$40",
-        "$100"
+        40,
+        100
       ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "red"
     }
   ],
   "trains": [
     {
       "name": "2",
       "quantity": 7,
-      "price": "$80",
+      "price": 80,
       "color": "yellow",
       "info": [
         {
@@ -302,7 +187,7 @@
     {
       "name": "3",
       "quantity": 6,
-      "price": "$180",
+      "price": 180,
       "color": "green",
       "info": [
         {
@@ -314,7 +199,7 @@
     {
       "name": "4",
       "quantity": 5,
-      "price": "$300",
+      "price": 300,
       "color": "green",
       "info": [
         {
@@ -326,7 +211,7 @@
     {
       "name": "5",
       "quantity": 4,
-      "price": "$450",
+      "price": 450,
       "color": "brown",
       "info": [
         {
@@ -338,7 +223,7 @@
     {
       "name": "6",
       "quantity": 3,
-      "price": "$630",
+      "price": 630,
       "color": "gray",
       "info": [
         {
@@ -350,7 +235,7 @@
     {
       "name": "8",
       "quantity": 3,
-      "price": "$800",
+      "price": 800,
       "color": "gray",
       "info": [
         {
@@ -362,7 +247,7 @@
     {
       "name": "10",
       "quantity": 2,
-      "price": "$950",
+      "price": 950,
       "color": "gray",
       "info": [
         {
@@ -374,7 +259,7 @@
     {
       "name": "12",
       "quantity": 6,
-      "price": "$1100",
+      "price": 1100,
       "color": "gray",
       "info": [
         {
@@ -387,37 +272,37 @@
   "privates": [
     {
       "name": "Great River Shipping Company",
-      "price": "$20",
-      "revenue": "$5",
+      "price": 20,
+      "revenue": 5,
       "description": ""
     },
     {
       "name": "Mississippi River Bridge Company",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
       "description": ""
     },
     {
       "name": "The Southern Cattle Company",
-      "price": "$50",
-      "revenue": "$10",
+      "price": 50,
+      "revenue": 10,
       "description": "This company has a token that may be placed on any city west of the Mississippi River. Cities located in the same hex as any portion of the Mississippi are not eligible for this placement. This increases the value of that city by $10 for that company only. Placing the token does not close the company."
     },
     {
       "name": "The Gulf Shipping Company",
-      "price": "$80",
-      "revenue": "$15",
+      "price": 80,
+      "revenue": 15,
       "description": ""
     },
     {
       "name": "St. Louis-San Francisco Railway",
-      "price": "$140",
+      "price": 140,
       "description": "This is the President's certificate of the St.Louis-San Francisco Railway. The purchaser sets the par value of the railway. Unlike other companies, this company may operate with just 20% sold. It may not be purchased by another public company."
     },
     {
       "name": "Missouri-Kansas-Texas Railroad",
-      "price": "$160",
-      "revenue": "$20",
+      "price": 160,
+      "revenue": 20,
       "description": "Comes with a 10% share of the Missouri-Kansas-Texas Railroad."
     }
   ],
@@ -1478,7 +1363,7 @@
         "terrain": [
           {
             "type": "river",
-            "cost": "$40",
+            "cost": 40,
             "percent": 0.5
           }
         ],
@@ -1501,7 +1386,7 @@
         "terrain": [
           {
             "type": "river",
-            "cost": "$60",
+            "cost": 60,
             "percent": 0.5
           }
         ],
@@ -1544,7 +1429,7 @@
         "terrain": [
           {
             "type": "river",
-            "cost": "$40",
+            "cost": 40,
             "percent": 0.67
           }
         ],
@@ -1578,7 +1463,7 @@
         "terrain": [
           {
             "type": "mountain",
-            "cost": "$60",
+            "cost": 60,
             "percent": 0.67
           }
         ],
@@ -1604,7 +1489,7 @@
         "terrain": [
           {
             "type": "river",
-            "cost": "$60",
+            "cost": 60,
             "percent": 0.67
           }
         ],
@@ -1630,7 +1515,7 @@
         "terrain": [
           {
             "type": "river",
-            "cost": "$40",
+            "cost": 40,
             "angle": 60,
             "percent": 0.7
           }
@@ -1782,7 +1667,7 @@
         "terrain": [
           {
             "type": "river",
-            "cost": "$60",
+            "cost": 60,
             "percent": 0.67
           }
         ],
@@ -1797,7 +1682,7 @@
         "color": "plain",
         "terrain": [
           {
-            "cost": "$80",
+            "cost": 80,
             "percent": 0.67,
             "type": "river"
           }
@@ -1813,7 +1698,7 @@
         "color": "plain",
         "terrain": [
           {
-            "cost": "$80",
+            "cost": 80,
             "percent": 0.67,
             "type": "river"
           }
@@ -1835,7 +1720,7 @@
         ],
         "terrain": [
           {
-            "cost": "$80",
+            "cost": 80,
             "percent": 0.67,
             "type": "river"
           }
@@ -1889,7 +1774,7 @@
         ],
         "terrain": [
           {
-            "cost": "$80",
+            "cost": 80,
             "type": "river"
           }
         ],
@@ -1907,7 +1792,7 @@
         ],
         "terrain": [
           {
-            "cost": "$100",
+            "cost": 100,
             "type": "river"
           }
         ],
@@ -1919,7 +1804,7 @@
         "color": "plain",
         "terrain": [
           {
-            "cost": "$80",
+            "cost": 80,
             "type": "river",
             "angle": 270,
             "percent": 0.4
@@ -1939,7 +1824,7 @@
         "color": "plain",
         "terrain": [
           {
-            "cost": "$80",
+            "cost": 80,
             "type": "river",
             "angle": 270,
             "percent": 0.4
@@ -1959,7 +1844,7 @@
         "color": "plain",
         "terrain": [
           {
-            "cost": "$40",
+            "cost": 40,
             "type": "river",
             "angle": 270,
             "percent": 0.4
@@ -1983,7 +1868,7 @@
         "terrain": [
           {
             "type": "mountain",
-            "cost": "$60",
+            "cost": 60,
             "percent": 0.67
           }
         ],
@@ -2001,7 +1886,7 @@
         "color": "plain",
         "terrain": [
           {
-            "cost": "$40",
+            "cost": 40,
             "type": "river"
           }
         ],
@@ -2017,7 +1902,7 @@
         "color": "plain",
         "terrain": [
           {
-            "cost": "$60",
+            "cost": 60,
             "type": "river"
           }
         ],
@@ -2038,7 +1923,7 @@
         "color": "plain",
         "terrain": [
           {
-            "cost": "$80",
+            "cost": 80,
             "type": "river"
           }
         ],
@@ -2056,7 +1941,7 @@
         "color": "plain",
         "terrain": [
           {
-            "cost": "$100",
+            "cost": 100,
             "type": "river"
           }
         ],

@@ -7,7 +7,7 @@
     "designer": "David V. H. Peters",
     "orientation": "horizontal",
     "background": "gray",
-    "currency": "ZAR"
+    "currency": "R #"
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/202264/1859"
@@ -16,175 +16,84 @@
     "Round"
   ],
   "ipo": true,
-  "bank": "$9,000",
+  "bank": 9000,
   "players": [
     {
       "number": 3,
       "certLimit": 15,
-      "capital": "$800"
+      "capital": 800
     },
     {
       "number": 4,
       "certLimit": 12,
-      "capital": "$600"
+      "capital": 600
     },
     {
       "number": 5,
       "certLimit": 10,
-      "capital": "$480"
+      "capital": 480
     }
   ],
+  "tokenTypes": {
+    "default": [
+      "Free",
+      40,
+      70,
+      100
+    ]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Netherlands South African Railway",
       "abbrev": "NS",
-      "tokens": [
-        "Free",
-        "$40",
-        "$70",
-        "$100"
-      ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "yellow"
     },
     {
       "name": "Durban Railway",
       "abbrev": "DR",
-      "tokens": [
-        "Free",
-        "$40",
-        "$70",
-        "$100"
-      ],
-      "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "black"
     },
     {
       "name": "Cape Midland Railway",
       "abbrev": "CM",
-      "tokens": [
-        "Free",
-        "$40",
-        "$70",
-        "$100"
-      ],
-      "color": "natural",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "natural"
     },
     {
       "name": "Cape Town Railway",
       "abbrev": "CT",
-      "tokens": [
-        "Free",
-        "$40",
-        "$70",
-        "$100"
-      ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "red"
     },
     {
       "name": "Wynberg Railway",
       "abbrev": "WR",
-      "tokens": [
-        "Free",
-        "$40",
-        "$70",
-        "$100"
-      ],
-      "color": "cyan",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "cyan"
     },
     {
       "name": "Port Elizabeth & Uitenhage Railway",
       "abbrev": "PE",
-      "tokens": [
-        "Free",
-        "$40",
-        "$70",
-        "$100"
-      ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     }
   ],
   "trains": [
     {
       "name": "2",
       "quantity": 6,
-      "price": "$80",
+      "price": 80,
       "color": "yellow",
       "info": [
         {
@@ -196,7 +105,7 @@
     {
       "name": "3",
       "quantity": 4,
-      "price": "$180",
+      "price": 180,
       "color": "green",
       "info": [
         {
@@ -208,7 +117,7 @@
     {
       "name": "4",
       "quantity": 3,
-      "price": "$300",
+      "price": 300,
       "color": "green",
       "info": [
         {
@@ -220,7 +129,7 @@
     {
       "name": "5",
       "quantity": 3,
-      "price": "$450",
+      "price": 450,
       "color": "brown",
       "info": [
         {
@@ -232,7 +141,7 @@
     {
       "name": "6",
       "quantity": 2,
-      "price": "$630",
+      "price": 630,
       "color": "brown",
       "info": [
         {
@@ -244,7 +153,7 @@
     {
       "name": "D",
       "quantity": 6,
-      "price": "$1100",
+      "price": 1100,
       "color": "gray",
       "description": "Cost $800 when trading in a 4T, 5T or 6T",
       "info": [
@@ -258,38 +167,38 @@
   "privates": [
     {
       "name": "Cape Town Dock Company",
-      "price": "$20",
-      "revenue": "$5",
+      "price": 20,
+      "revenue": 5,
       "description": "This can be purchased by a corporation during the yellow or green phase, and closes when the first 5T is purchased."
     },
     {
       "name": "George Pauling Construction Company",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
       "description": "Allows the owning corporation to avoid paying construction costs for one track placement. This action immediately closes the Private. This can be purchased by a corporation during the yellow or green phase, and closes when the first 5T is purchased."
     },
     {
       "name": "Military Railroad Commission",
-      "price": "$70",
-      "revenue": "$15",
+      "price": 70,
+      "revenue": 15,
       "description": "Allows the owning corporation to place a second tile on its turn, still paying all construction costs. This action immediately closes the Private. This can be purchased by a corporation during the yellow or green phase, and closes when the first 5T is purchased."
     },
     {
       "name": "Kimberley Diamond Mine Concession",
-      "price": "$110",
-      "revenue": "$20",
+      "price": 110,
+      "revenue": 20,
       "description": "Owning corporation receives +$10 for one run during the green phase and +$20 for one run during the brown phase. This can be purchased by a corporation during the green or brown phase, and never closes."
     },
     {
       "name": "Johannesberg Gold Mining Contract",
-      "price": "$160",
-      "revenue": "$25",
+      "price": 160,
+      "revenue": 25,
       "description": "Owning corporation receives +$30 for one run during the brown phase to Johannesberg. This can be purchased by a corporation during the green or brown phase, and never closes."
     },
     {
       "name": "Cape Town Railway",
-      "price": "$220",
-      "revenue": "$30",
+      "price": 220,
+      "revenue": 30,
       "description": "Provides the winner with the Director's share of the Cape Town Railway. This works the same as the B&O private in 1830."
     }
   ],
@@ -298,14 +207,14 @@
       "name": "2",
       "limit": "4",
       "number": "6",
-      "price": "$80",
+      "price": 80,
       "tiles": "yellow"
     },
     {
       "name": "3",
       "limit": "4",
       "number": "5",
-      "price": "$180",
+      "price": 180,
       "tiles": "green",
       "notes": "Private companies may be purchased"
     },
@@ -314,14 +223,14 @@
       "rust": "2",
       "limit": "3",
       "number": "4",
-      "price": "$300",
+      "price": 300,
       "tiles": "green"
     },
     {
       "name": "5",
       "limit": "2",
       "number": "3",
-      "price": "$450",
+      "price": 450,
       "tiles": "brown",
       "notes": "Private companies are closed"
     },
@@ -329,7 +238,7 @@
       "name": "6",
       "limit": "2",
       "number": "2",
-      "price": "$630",
+      "price": 630,
       "rust": "3",
       "tiles": "brown",
       "notes": "D Trains may be purchased"
@@ -338,7 +247,7 @@
       "name": "D",
       "limit": "2",
       "number": "6",
-      "price": "$1100",
+      "price": 1100,
       "rust": "4",
       "tiles": "brown"
     }
@@ -832,7 +741,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$40"
+          "cost": 40
         },
         "hexes": [
           "D15",
@@ -849,7 +758,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$80"
+          "cost": 80
         },
         "hexes": [
           "C14",
@@ -863,7 +772,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$120"
+          "cost": 120
         },
         "hexes": [
           "B11",
@@ -1817,7 +1726,7 @@
           }
         ],
         "mountain": {
-          "cost": "$40",
+          "cost": 40,
           "angle": 0,
           "percent": 0.65
         },

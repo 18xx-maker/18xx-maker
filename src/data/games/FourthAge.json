@@ -8,7 +8,7 @@
     "titleY": 1440,
     "titleSize": 100,
     "orientation": "horizontal",
-    "currency": "XAU"
+    "currency": "#g"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/18291/unpublished-prototype",
@@ -20,264 +20,159 @@
     "+20"
   ],
   "ipo": true,
-  "bank": "12,000g",
+  "bank": 12000,
   "players": [
     {
       "number": 2,
       "certLimit": "28 / 24",
-      "capital": "1050g"
+      "capital": 1050
     },
     {
       "number": 3,
       "certLimit": "20 / 17",
-      "capital": "700g"
+      "capital": 700
     },
     {
       "number": 4,
       "certLimit": "16 / 14",
-      "capital": "525g"
+      "capital": 525
     },
     {
       "number": 5,
       "certLimit": "13 / 11",
-      "capital": "420g"
+      "capital": 420
     },
     {
       "number": 6,
       "certLimit": "11 / 9",
-      "capital": "350g"
+      "capital": 350
     }
   ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Bree and Points South",
       "abbrev": "BPS",
+      "logo": "lotr/BPS",
       "tokens": [
         "Free",
         "40g",
         "100g",
         "100g"
       ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "blue"
     },
     {
       "name": "Shire and Westlands",
       "abbrev": "SWR",
+      "logo": "lotr/SWR",
       "tokens": [
         "Free",
         "$40"
       ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     },
     {
       "name": "Rivendell and Grey Havens",
       "abbrev": "RGH",
+      "logo": "lotr/RGH",
       "tokens": [
         "Free",
         "$40",
         "Bonus"
       ],
-      "color": "purple",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "purple"
     },
     {
       "name": "Dwarvish Mountain Express",
       "abbrev": "DMH",
+      "logo": "lotr/DMH",
       "tokens": [
         "Free",
         "$40",
         "$100"
       ],
-      "color": "brown",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "brown"
     },
     {
       "name": "Elvish",
       "abbrev": "E",
+      "logo": "lotr/E",
       "tokens": [
         "Free",
         "$40",
         "$100"
       ],
-      "color": "pink",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "pink"
     },
     {
       "name": "Laketown and Lonely Mountain",
       "abbrev": "LLM",
+      "logo": "lotr/LLM",
       "tokens": [
         "Free",
         "$40",
         "$100"
       ],
-      "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "black"
     },
     {
       "name": "Minas Tirith Railway",
       "abbrev": "MTR",
+      "logo": "lotr/MTR",
       "tokens": [
         "Free",
         "$40",
         "$100",
         "Bonus"
       ],
-      "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "orange"
     },
     {
       "name": "Orcish",
       "abbrev": "O",
+      "logo": "lotr/O",
       "tokens": [
         "Free",
         "$40",
         "$100"
       ],
-      "color": "lime",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "lime"
     },
     {
       "name": "Southern Excursion Railway",
       "abbrev": "SER",
+      "logo": "lotr/SER",
       "tokens": [
         "Free",
         "$40"
       ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "yellow"
     },
     {
       "name": "Far Harad Railway",
       "abbrev": "FHR",
+      "logo": "lotr/FHR",
       "tokens": [
         "Free",
         "$40",
         "Bonus"
       ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "red"
     }
   ],
   "trains": [
@@ -441,37 +336,37 @@
   "privates": [
     {
       "name": "The Hobbiton Teakettle",
-      "price": "$20",
-      "revenue": "$5",
+      "price": 20,
+      "revenue": 5,
       "description": ""
     },
     {
       "name": "The Great River Bridge Company",
-      "price": "$50",
-      "revenue": "$10",
+      "price": 50,
+      "revenue": 10,
       "description": "Owning railroad pays nothing for one tile lay across the Anduin; may be bought in during Phase 2 for up to face value."
     },
     {
       "name": "Mountain Guides, Inc",
-      "price": "$80",
-      "revenue": "$15",
+      "price": 80,
+      "revenue": 15,
       "description": "Owning railroad pays nothing for one tile lay in a mountain hex; may be bought in during Phase 2 for up to face value."
     },
     {
       "name": "Trollheim",
-      "price": "$120",
-      "revenue": "$20",
+      "price": 120,
+      "revenue": 20,
       "description": "Owning railroad may play a permanent +20 marker in any city or town. Bonus applies only to the owning railroad."
     },
     {
       "name": "Moria Mining Company",
-      "price": "$140",
+      "price": 140,
       "description": "This is the President's certificate of the Moria Mining Company. The purchaser sets the par value of the railway. Unlike other companies, this company may operate with just 20% sold. It may not be purchased by another public company."
     },
     {
       "name": "Lorien Border Railway",
-      "price": "$170",
-      "revenue": "$25",
+      "price": 170,
+      "revenue": 25,
       "description": "Comes with a 10% share of the Elvish."
     }
   ],

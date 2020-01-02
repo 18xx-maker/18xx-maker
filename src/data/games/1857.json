@@ -9,7 +9,7 @@
     "titleRotate": -90,
     "extraTokens": 3,
     "extraHomeTokens": 1,
-    "currency": "ARS"
+    "currency": "$#"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/180204/1857"
@@ -22,213 +22,104 @@
     "x2"
   ],
   "ipo": true,
-  "bank": "$9,000",
+  "bank": 9000,
   "players": [
     {
       "number": 3,
       "certLimit": 20,
-      "capital": "$800"
+      "capital": 800
     },
     {
       "number": 4,
       "certLimit": 16,
-      "capital": "$600"
+      "capital": 600
     },
     {
       "number": 5,
       "certLimit": 13,
-      "capital": "$480"
+      "capital": 480
     },
     {
       "number": 6,
       "certLimit": 11,
-      "capital": "$400"
+      "capital": 400
     }
   ],
+  "tokenTypes": {
+    "three": [40, 100, 100],
+    "two": [40, 100],
+    "one": [40]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Argentine Great Western Railway",
       "abbrev": "AGW",
-      "tokens": [
-        "$40",
-        "$100",
-        "$100"
-      ],
       "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Central Argentine Railway",
       "abbrev": "CA",
-      "tokens": [
-        "$40",
-        "$100"
-      ],
       "color": "purple",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     },
     {
       "name": "Central Cordoba Railway",
       "abbrev": "CC",
-      "tokens": [
-        "$40",
-        "$100",
-        "$100"
-      ],
       "color": "brown",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Bahia Blanca & Northwest Railway",
       "abbrev": "BBN",
-      "tokens": [
-        "$40"
-      ],
       "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "one"
     },
     {
       "name": "North Central Argentine Railway",
       "abbrev": "NCA",
-      "tokens": [
-        "$40",
-        "$100"
-      ],
       "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     },
     {
       "name": "Santa Fe Railway",
       "abbrev": "SF",
-      "tokens": [
-        "$40"
-      ],
       "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "one"
     },
     {
       "name": "Buenos Aires Great Southern Railway",
       "abbrev": "BAS",
-      "tokens": [
-        "$40",
-        "$100",
-        "$100"
-      ],
       "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Buenos Aires Central Railway",
       "abbrev": "BAC",
-      "tokens": [
-        "$40",
-        "$100"
-      ],
       "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     }
   ],
   "trains": [
     {
       "name": "2",
       "quantity": 5,
-      "price": "$80",
+      "price": 80,
       "color": "yellow",
       "info": [
         {
@@ -240,7 +131,7 @@
     {
       "name": "3",
       "quantity": 4,
-      "price": "$180",
+      "price": 180,
       "color": "green",
       "info": [
         {
@@ -252,7 +143,7 @@
     {
       "name": "4",
       "quantity": 3,
-      "price": "$300",
+      "price": 300,
       "color": "green",
       "info": [
         {
@@ -264,7 +155,7 @@
     {
       "name": "5",
       "quantity": 2,
-      "price": "$450",
+      "price": 450,
       "color": "brown",
       "info": [
         {
@@ -276,7 +167,7 @@
     {
       "name": "6",
       "quantity": 2,
-      "price": "$630",
+      "price": 630,
       "color": "brown",
       "info": [
         {
@@ -288,7 +179,7 @@
     {
       "name": "D",
       "quantity": 12,
-      "price": "$1100",
+      "price": 1100,
       "color": "brown",
       "description": "Cost $800 when trading in a 4T, 5T or 6T",
       "info": [
@@ -302,38 +193,38 @@
   "privates": [
     {
       "name": "Camino de Hierro de Buenos Aires al Oeste",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
       "description": "Reserves the Camino de Hierro de Buenos Aires al Oeste hex (G16). Only the owning corporation is permitted to lay this track. This can be purchased by a corporation during the yellow phase. Closes when the first 5 Train is purchased."
     },
     {
       "name": "Saint Sebastian Trading Company",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
       "description": "Trade for one share at any time, this action closes the company. This trade cannot allow you to own more than 60% of a corporation. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if owned by a corporation."
     },
     {
       "name": "Saint Pedro Shipping Company",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
       "description": "The owning corporation increases their revenue at Bahia Blanco (E20) by $10 for all runs. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
       "name": "Saint Barbara Mining Company",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
       "description": "The owning corporation doubles their revenue at Cordoba (D11) for ONE run to or through Cordoba. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
       "name": "Saint Zolius Land Company",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
       "description": "The owning corporation may place one token at no cost, this action closes the company. This must follow normal placement rules. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
       "name": "Saint Dominic de la Calzada Company",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
       "description": "The owning corporation may lay or upgrade one track in addition to their normal track action, this action closes the company. Closes when the first 5 Train is purchased."
     }
   ],
@@ -342,14 +233,14 @@
       "name": "2",
       "limit": "4",
       "number": "5",
-      "price": "$80",
+      "price": 80,
       "tiles": "yellow"
     },
     {
       "name": "3",
       "limit": "4",
       "number": "4",
-      "price": "$180",
+      "price": 180,
       "tiles": "green",
       "notes": "Private companies may be purchased"
     },
@@ -357,7 +248,7 @@
       "name": "4",
       "rust": "2",
       "limit": "3",
-      "price": "$300",
+      "price": 300,
       "number": "3",
       "tiles": "green"
     },
@@ -365,7 +256,7 @@
       "name": "5",
       "limit": "2",
       "number": "2",
-      "price": "$450",
+      "price": 450,
       "tiles": "brown",
       "notes": "Private companies are closed"
     },
@@ -373,7 +264,7 @@
       "name": "6",
       "limit": "2",
       "number": "2",
-      "price": "$630",
+      "price": 630,
       "rust": "3",
       "tiles": "brown",
       "notes": "D Trains may be purchased"
@@ -382,7 +273,7 @@
       "name": "D",
       "limit": "2",
       "number": "∞",
-      "price": "$1100",
+      "price": 1100,
       "rust": "4",
       "tiles": "brown"
     }
@@ -1021,7 +912,7 @@
           "terrain": [
             {
               "type": "mountain",
-              "cost": "$120",
+              "cost": 120,
               "size": "large"
             }
           ],
@@ -1034,7 +925,7 @@
           "terrain": [
             {
               "type": "mountain",
-              "cost": "$80",
+              "cost": 80,
               "size": "medium"
             }
           ],
@@ -1047,7 +938,7 @@
           "terrain": [
             {
               "type": "mountain",
-              "cost": "$40"
+              "cost": 40
             }
           ],
           "hexes": [

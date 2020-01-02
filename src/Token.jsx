@@ -95,7 +95,7 @@ const Token = ({
                 }
               }
 
-              if (logo) {
+              if (logos[logo]) {
                 token["type"] = "logo";
               }
             }
