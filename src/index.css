@@ -1018,7 +1018,8 @@ footer a:hover {
   font-size: 0.8em;
 }
 
-.PrintNotes .select {
+.PrintNotes .select,
+.PrintNotes > div > h3 {
   display: inline-block;
   margin-right: 2em;
 }

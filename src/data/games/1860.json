@@ -1045,12 +1045,7 @@
               "name": {
                 "name": "Cowes"
               },
-              "companies": [
-                {
-                  "label": "C&N",
-                  "color": "cyan"
-                }
-              ]
+              "companies": ["C&N"]
             }
           ],
           "centerTowns": [
@@ -1152,12 +1147,7 @@
                 "name": "Ryde",
                 "reverse": true
               },
-              "companies": [
-                {
-                  "label": "IOW",
-                  "color": "red"
-                }
-              ]
+              "companies": ["IOW"]
             }
           ],
           "values": [
@@ -1190,12 +1180,7 @@
               "name": {
                 "name": "Yarmouth"
               },
-              "companies": [
-                {
-                  "label": "FYN",
-                  "color": "green"
-                }
-              ]
+              "companies": ["FYN"]
             }
           ],
           "hexes": [
@@ -1502,12 +1487,7 @@
               "name": {
                 "name": "Bembridge"
               },
-              "companies": [
-                {
-                  "label": "BHI&R",
-                  "color": "pink"
-                }
-              ]
+              "companies": ["BHI&R"]
             }
           ],
           "hexes": [
@@ -1596,12 +1576,7 @@
               "name": {
                 "name": "Merstone"
               },
-              "companies": [
-                {
-                  "label": "IWNJ",
-                  "color": "black"
-                }
-              ]
+              "companies": ["IWNJ"]
             }
           ],
           "track": [
@@ -1658,12 +1633,7 @@
                 "name": "Shorwell",
                 "reverse": true
               },
-              "companies": [
-                {
-                  "label": "VYSC",
-                  "color": "lime"
-                }
-              ]
+              "companies": ["VYSC"]
             }
           ],
           "hexes": [
@@ -1685,12 +1655,7 @@
                 "name": "Godshill",
                 "reverse": true
               },
-              "companies": [
-                {
-                  "label": "NGStL",
-                  "color": "yellow"
-                }
-              ]
+              "companies": ["NGStL"]
             }
           ],
           "hexes": [
@@ -1760,12 +1725,7 @@
               "name": {
                 "name": "Chale"
               },
-              "companies": [
-                {
-                  "label": "S&C",
-                  "color": "purple"
-                }
-              ]
+              "companies": ["S&C"]
             }
           ],
           "hexes": [
@@ -1818,12 +1778,7 @@
               "name": {
                 "name": "Yarmouth"
               },
-              "companies": [
-                {
-                  "label": "FYN",
-                  "color": "green"
-                }
-              ]
+              "companies": ["FYN"]
             }
           ],
           "borders": [

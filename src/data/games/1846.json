@@ -758,12 +758,7 @@
             "name": {
               "name": "Port Huron"
             },
-            "companies": [
-              {
-                "label": "GT",
-                "color": "orange"
-              }
-            ]
+            "companies": ["GT"]
           }
         ],
         "hexes": [
@@ -1065,10 +1060,7 @@
           {
             "size": 2,
             "companies": [
-              {
-                "label": "NYC",
-                "color": "black"
-              },
+              "NYC",
               {
                 "label": "ERIE",
                 "color": "gray"
@@ -1214,12 +1206,7 @@
         ],
         "cities": [
           {
-            "companies": [
-              {
-                "label": "ERIE",
-                "color": "yellow"
-              }
-            ],
+            "companies": ["ERIE"],
             "name": {
               "name": "Salamanca",
               "reverse": true
@@ -1341,12 +1328,7 @@
         ],
         "cities": [
           {
-            "companies": [
-              {
-                "label": "PRR",
-                "color": "red"
-              }
-            ]
+            "companies": ["PRR"]
           }
         ],
         "track": [
@@ -1499,12 +1481,7 @@
               "name": "Wheeling",
               "offset": 30
             },
-            "companies": [
-              {
-                "label": "B&O",
-                "color": "blue"
-              }
-            ]
+            "companies": ["B&O"]
           }
         ],
         "track": [
@@ -1751,12 +1728,7 @@
               "reverse": true,
               "rotation": 30
             },
-            "companies": [
-              {
-                "label": "C&O",
-                "color": "cyan"
-              }
-            ]
+            "companies": ["C&O"]
           }
         ],
         "track": [
@@ -1870,12 +1842,7 @@
               "reverse": true,
               "rotation": 30
             },
-            "companies": [
-              {
-                "label": "IC",
-                "color": "green"
-              }
-            ]
+            "companies": ["IC"]
           }
         ],
         "track": [
