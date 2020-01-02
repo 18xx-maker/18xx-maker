@@ -131,11 +131,19 @@ export const maxPages = (total, page) => {
 
 export const compileCompanies = (game, override, selections) => {
   return addIndex(map)((company, index) => {
-    if (is(String, company.tokens)) {
+    if (company.minor && game.tokenTypes && game.tokenTypes["minor"]) {
+      company.tokens = game.tokenTypes["minor"];
+    } else if (!company.tokens && game.tokenTypes && game.tokenTypes["default"]) {
+      company.tokens = game.tokenTypes["default"];
+    } else if (is(String, company.tokens)) {
       company.tokens = game.tokenTypes[company.tokens];
     }
 
-    if (is(String, company.shares)) {
+    if (company.minor && game.shareTypes && game.shareTypes["minor"]) {
+      company.shares = game.shareTypes["minor"];
+    } else if (!company.shares && game.shareTypes && game.shareTypes["default"]) {
+      company.shares = game.shareTypes["default"];
+    } else if (is(String, company.shares)) {
       company.shares = game.shareTypes[company.shares];
     }
 

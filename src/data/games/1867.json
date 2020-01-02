@@ -19,27 +19,27 @@
     "Round"
   ],
   "ipo": false,
-  "bank": "$15,000",
+  "bank": 15000,
   "players": [
     {
       "number": 3,
       "certLimit": 21,
-      "capital": "$420"
+      "capital": 420
     },
     {
       "number": 4,
       "certLimit": 16,
-      "capital": "$315"
+      "capital": 315
     },
     {
       "number": 5,
       "certLimit": 13,
-      "capital": "$252"
+      "capital": 252
     },
     {
       "number": 6,
       "certLimit": 11,
-      "capital": "$210"
+      "capital": 210
     }
   ],
   "pools": [
@@ -182,7 +182,7 @@
     {
       "name": "2",
       "quantity": 10,
-      "price": "$100",
+      "price": 100,
       "color": "yellow",
       "info": [
         {
@@ -194,7 +194,7 @@
     {
       "name": "3",
       "quantity": 7,
-      "price": "$225",
+      "price": 225,
       "color": "green",
       "info": [
         {
@@ -206,7 +206,7 @@
     {
       "name": "4",
       "quantity": 4,
-      "price": "$350",
+      "price": 350,
       "color": "green",
       "info": [
         {
@@ -218,7 +218,7 @@
     {
       "name": "5",
       "quantity": 4,
-      "price": "$550",
+      "price": 550,
       "color": "brown",
       "info": [
         {
@@ -230,7 +230,7 @@
     {
       "name": "6",
       "quantity": 2,
-      "price": "$650",
+      "price": 650,
       "color": "brown",
       "info": [
         {
@@ -242,7 +242,7 @@
     {
       "name": "7",
       "quantity": 2,
-      "price": "$800",
+      "price": 800,
       "color": "brown",
       "info": [
         {
@@ -254,7 +254,7 @@
     {
       "name": "8",
       "quantity": 6,
-      "price": "$1000",
+      "price": 1000,
       "color": "gray",
       "info": [
         {
@@ -266,7 +266,7 @@
     {
       "name": "2+2",
       "quantity": 6,
-      "price": "$600",
+      "price": 600,
       "color": "gray",
       "info": [
         {
@@ -278,7 +278,7 @@
     {
       "name": "5+5E",
       "quantity": 7,
-      "price": "$1500",
+      "price": 1500,
       "color": "gray",
       "info": [
         {
@@ -287,199 +287,76 @@
         }
       ]
     }
-
-
   ],
+  "tokenTypes": {
+    "minor": [""],
+    "default": [
+      "Free",
+      "$20/hex",
+      "$40/hex"
+    ]
+  },
+  "shareTypes": {
+    "minor": [],
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Canadian Northern Railway",
       "abbrev": "CNR",
-      "color": "green",
-      "tokens": [
-        "Free",
-        "$20/hex",
-        "$40/hex"
-      ],
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     },
     {
       "name": "Canadian Pacific Railway",
       "abbrev": "CPR",
-      "color": "red",
-      "tokens": [
-        "Free",
-        "$20/hex",
-        "$40/hex"
-      ],
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "red"
     },
     {
       "name": "Chesapeake and Ohio Railway",
       "abbrev": "C&O",
-      "color": "cyan",
-      "tokens": [
-        "Free",
-        "$20/hex",
-        "$40/hex"
-      ],
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "cyan"
     },
     {
       "name": "Grand Trunk Railway",
       "abbrev": "GTR",
-      "color": "orange",
-      "tokens": [
-        "Free",
-        "$20/hex",
-        "$40/hex"
-      ],
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "orange"
     },
     {
       "name": "Great Western Railway",
       "abbrev": "GWR",
-      "color": "brown",
-      "tokens": [
-        "Free",
-        "$20/hex",
-        "$40/hex"
-      ],
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "brown"
     },
     {
       "name": "Intercolonial Railway",
       "abbrev": "ICR",
-      "color": "yellow",
-      "tokens": [
-        "Free",
-        "$20/hex",
-        "$40/hex"
-      ],
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "yellow"
     },
     {
       "name": "National Transcontinental Railway",
       "abbrev": "NTR",
-      "color": "tan",
-      "tokens": [
-        "Free",
-        "$20/hex",
-        "$40/hex"
-      ],
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "tan"
     },
     {
       "name": "New York Central Railroad",
       "abbrev": "NYC",
-      "color": "black",
-      "tokens": [
-        "Free",
-        "$20/hex",
-        "$40/hex"
-      ],
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "black"
     },
     {
       "name": "Buffalo, Brantford, and Goderich",
       "minor": true,
       "abbrev": "BBG",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "red", "yellow" ] },
       "color": "yellow"
     },
@@ -487,7 +364,6 @@
       "name": "Brockville and Ottawa",
       "minor": true,
       "abbrev": "BO",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "red", "yellow" ] },
       "color": "yellow"
     },
@@ -495,7 +371,6 @@
       "name": "Canada Southern",
       "minor": true,
       "abbrev": "CS",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "yellow", "yellow" ] },
       "color": "yellow"
     },
@@ -503,7 +378,6 @@
       "name": "Credit Valley Railway",
       "minor": true,
       "abbrev": "CV",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "purple", "yellow" ] },
       "color": "yellow"
     },
@@ -511,7 +385,6 @@
       "name": "Kingston and Pembroke",
       "minor": true,
       "abbrev": "KP",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "white", "yellow" ] },
       "color": "yellow"
     },
@@ -519,7 +392,6 @@
       "name": "London and Port Stanley",
       "minor": true,
       "abbrev": "LPS",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "blue", "yellow" ] },
       "color": "yellow"
     },
@@ -527,7 +399,6 @@
       "name": "Ottawa and Prescott",
       "minor": true,
       "abbrev": "OP",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "lime", "yellow" ] },
       "color": "yellow"
     },
@@ -535,7 +406,6 @@
       "name": "St. Lawrence and Atlantic",
       "minor": true,
       "abbrev": "SLA",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "brown", "yellow" ] },
       "color": "yellow"
     },
@@ -543,7 +413,6 @@
       "name": "Toronto, Grey, and Bruce",
       "minor": true,
       "abbrev": "TGB",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "gray", "yellow" ] },
       "color": "yellow"
     },
@@ -551,7 +420,6 @@
       "name": "Toronto and Nipissing",
       "minor": true,
       "abbrev": "TN",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "orange", "yellow" ] },
       "color": "yellow"
     },
@@ -559,7 +427,6 @@
       "name": "Algoma Eastern Railway",
       "minor": true,
       "abbrev": "TN",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "orange", "green" ] },
       "color": "green"
     },
@@ -567,7 +434,6 @@
       "name": "Canada Atlantic Railway",
       "minor": true,
       "abbrev": "CA",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "green", "green" ] },
       "color": "green"
     },
@@ -575,7 +441,6 @@
       "name": "New York and Ottawa",
       "minor": true,
       "abbrev": "NYO",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "cyan", "green" ] },
       "color": "green"
     },
@@ -583,7 +448,6 @@
       "name": "Pere Marquette Railway",
       "minor": true,
       "abbrev": "PM",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "blue", "green" ] },
       "color": "green"
     },
@@ -591,7 +455,6 @@
       "name": "Quebec and Lake St. John",
       "minor": true,
       "abbrev": "QLS",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "brown", "green" ] },
       "color": "green"
     },
@@ -599,7 +462,6 @@
       "name": "Toronto, Hamilton and Buffalo",
       "minor": true,
       "abbrev": "THB",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "black", "green" ] },
       "color": "green"
     },
@@ -616,7 +478,7 @@
     {
       "name": "3",
       "limit": "4",
-      "price": "$225",
+      "price": 225,
       "number": "7",
       "tiles": "green",
       "notes": "May purchase privates"
@@ -625,7 +487,7 @@
       "name": "4",
       "rust": "2",
       "limit": "3",
-      "price": "$350",
+      "price": 350,
       "number": "4",
       "tiles": "green",
       "notes": "Public companies may be started"
@@ -633,7 +495,7 @@
     {
       "name": "5",
       "limit": "3",
-      "price": "$550",
+      "price": 550,
       "number": "4",
       "tiles": "brown",
       "notes": "Remove unstarted Minor Companies"
@@ -641,7 +503,7 @@
     {
       "name": "6",
       "limit": "2",
-      "price": "$650",
+      "price": 650,
       "number": "2",
       "rust": "3",
       "tiles": "brown",
@@ -650,14 +512,14 @@
     {
       "name": "7",
       "limit": "2",
-      "price": "$800",
+      "price": 800,
       "number": "2",
       "tiles": "gray"
     },
     {
       "name": "8",
       "limit": "2",
-      "price": "$1000",
+      "price": 1000,
       "number": "∞",
       "rust": "4",
       "tiles": "gray",
@@ -666,14 +528,14 @@
     {
       "name": "2+2",
       "limit": "2",
-      "price": "$800",
+      "price": 800,
       "number": "∞",
       "tiles": "gray"
     },
     {
       "name": "5+5E",
       "limit": "2",
-      "price": "$1500",
+      "price": 1500,
       "number": "∞",
       "tiles": "gray"
     },
@@ -681,7 +543,7 @@
       "minor": true,
       "name": "2",
       "limit": "2",
-      "price": "$100",
+      "price": 100,
       "number": "10",
       "tiles": "yellow"
     },
@@ -689,7 +551,7 @@
       "minor": true,
       "name": "3",
       "limit": "2",
-      "price": "$225",
+      "price": 225,
       "number": "7",
       "tiles": "green",
       "notes": "May purchase privates"
@@ -699,7 +561,7 @@
       "name": "4",
       "rust": "2",
       "limit": "1",
-      "price": "$350",
+      "price": 350,
       "number": "4",
       "tiles": "green",
       "notes": "Public companies may be started"
@@ -708,7 +570,7 @@
       "minor": true,
       "name": "5",
       "limit": "1",
-      "price": "$550",
+      "price": 550,
       "number": "4",
       "tiles": "brown",
       "notes": "Remove unstarted Minor Companies"
@@ -717,7 +579,7 @@
       "minor": true,
       "name": "6",
       "limit": "1",
-      "price": "$650",
+      "price": 650,
       "number": "2",
       "rust": "3",
       "tiles": "brown",
@@ -727,7 +589,7 @@
       "minor": true,
       "name": "7",
       "limit": "1",
-      "price": "$800",
+      "price": 800,
       "number": "2",
       "tiles": "gray"
     },
@@ -735,7 +597,7 @@
       "minor": true,
       "name": "8",
       "limit": "2",
-      "price": "$1000",
+      "price": 1000,
       "number": "∞",
       "rust": "4",
       "tiles": "gray",
@@ -746,36 +608,36 @@
     {
       "name": "Champlain & St. Lawrence",
       "price": "Face: $30",
-      "revenue": "$10",
-      "bid": "$20",
+      "revenue": 10,
+      "bid": 20,
       "description": ""
     },
     {
       "name": "Niagara Falls Bridge",
       "price": "Face: $45",
-      "revenue": "$15",
-      "bid": "$30",
+      "revenue": 15,
+      "bid": 30,
       "description": "+10 Buffalo"
     },
     {
       "name": "Montreal Bridge",
       "price": "Face: $60",
-      "revenue": "$20",
-      "bid": "$40",
+      "revenue": 20,
+      "bid": 40,
       "description": "+10 Montreal"
     },
     {
       "name": "Quebec Bridge",
       "price": "Face: $75",
-      "revenue": "$25",
-      "bid": "$50",
+      "revenue": 25,
+      "bid": 50,
       "description": "+10 Quebec"
     },
     {
       "name": "St. Clair Tunnel",
       "price": "Face: $90",
-      "revenue": "$30",
-      "bid": "$60",
+      "revenue": 30,
+      "bid": 60,
       "description": "+10 Detroit"
     }
   ],
@@ -958,7 +820,7 @@
         "terrain": [
           {
             "type": "river",
-            "cost": "$20"
+            "cost": 20
           }
         ],
         "hexes": [
@@ -1169,7 +1031,7 @@
         "terrain": [
           {
             "type": "river",
-            "cost": "$20",
+            "cost": 20,
             "angle": 0,
             "percent": 0.7
           }
@@ -1201,12 +1063,12 @@
         "color": "plain",
         "bridges": [
           {
-            "cost": "$80",
+            "cost": 80,
             "angle": 0,
             "percent": 1
           },
           {
-            "cost": "$80",
+            "cost": 80,
             "angle": 300,
             "percent": 1
           }
@@ -1236,12 +1098,12 @@
         "color": "plain",
         "bridges": [
           {
-            "cost": "$80",
+            "cost": 80,
             "angle": 300,
             "percent": 1
           },
           {
-            "cost": "$80",
+            "cost": 80,
             "angle": 0,
             "percent": 1
           }
@@ -1264,7 +1126,7 @@
         "color": "plain",
         "bridges": [
           {
-            "cost": "$80",
+            "cost": 80,
             "angle": 120,
             "percent": 1
           }
@@ -1283,12 +1145,12 @@
         "color": "plain",
         "bridges": [
           {
-            "cost": "$80",
+            "cost": 80,
             "angle": 180,
             "percent": 1
           },
           {
-            "cost": "$80",
+            "cost": 80,
             "angle": 120,
             "percent": 1
           }
@@ -1311,12 +1173,12 @@
         "color": "plain",
         "bridges": [
           {
-            "cost": "$80",
+            "cost": 80,
             "angle": 180,
             "percent": 1
           },
           {
-            "cost": "$80",
+            "cost": 80,
             "angle": 120,
             "percent": 1
           }
@@ -1437,7 +1299,7 @@
         "color": "plain",
         "bridges": [
           {
-            "cost": "$80",
+            "cost": 80,
             "angle": 300,
             "percent": 1
           }
@@ -1503,7 +1365,7 @@
           }
         ],
         "water": {
-          "cost": "$20",
+          "cost": 20,
           "angle": 0,
           "percent": 0.8
         },
