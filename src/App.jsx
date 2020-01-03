@@ -237,6 +237,12 @@ const App = () => (
                     id="city3PathReverse"
                     d="M 0 42 L 25 42 A 30 30 0 0 0 47 -1 L 25 -40 A 30 30 0 0 0 -25 -40 L -47 -1 A 30 30 0 0 0 -25 42 L 0 42"
                   />
+                </React.Fragment>
+              )}
+            </Color>
+            <Color context="tile">
+              {c => (
+                <React.Fragment>
                   <linearGradient id="yellow-green" spreadMethod="repeat"
                                   x1="13.5%" x2="0" y1="0" y2="20%">
                     <stop offset="0%" stopColor={c("yellow")}/>
