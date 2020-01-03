@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import games from "../data/games";
 import Map from "./Map";
 import Svg from "../Svg";
-import Title from "../Title";
 import HexContext from "../context/HexContext";
 import GameContext from "../context/GameContext";
 import { equalPages, maxPages, printableWidth, printableHeight } from "../util";
@@ -87,7 +86,6 @@ const MapPaginated = ({ coords, pagination, paper, hexWidth }) => {
 
   let defs = (
     <g id={`${game.info.abbrev || game.info.title}_map`}>
-      <Title game={game} variation={variation} />
       <Map name={params.game} game={game} variation={variation} />
     </g>
   );

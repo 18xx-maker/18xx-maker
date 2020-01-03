@@ -5,7 +5,6 @@ import games from "../data/games";
 
 import Map from "../map/Map";
 import Svg from "../Svg";
-import Title from "../Title";
 
 import HexContext from "../context/HexContext";
 import GameContext from "../context/GameContext";
@@ -30,7 +29,6 @@ const B18Map = ({ coords }) => {
     >
       <div className="map">
         <Svg width={data.totalWidth} height={data.totalHeight}>
-          <Title game={game} variation={variation} hexWidth={data.hexWidth} />
           <Map game={game} variation={variation} hexWidth={data.hexWidth} />
         </Svg>
         <style>{`@media print {@page {size: ${data.printWidth} ${data.printHeight};}}`}</style>
