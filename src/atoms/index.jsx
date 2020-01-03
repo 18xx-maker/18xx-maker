@@ -64,16 +64,16 @@ const atoms = [{
 },{
   group: "Tokens",
   examples: [
-    {tokens: [{label:"AA", token:"orange"}]},
-    {tokens: [{label:"BB", token:{type:"square", colors:["blue", "orange"]}}]},
-    {tokens: [{label:"CC", token:{type:"quarters", colors:["blue", "orange"]}}]},
-    {tokens: [{label:"DD", token:{type:"halves", colors:["blue", "orange"]}}]},
-    {tokens: [{label:"EE", token:{type:"stripes", colors:["blue", "orange"]}}]},
-    {tokens: [{label:"FF", token:{type:"bar", colors:["blue", "orange"]}}]},
-    {tokens: [{label:"GG", token:{type:"stripe", colors:["blue", "orange"]}}]},
-    {tokens: [{label:"HH", token:{type:"target", colors:["blue", "orange"]}}]},
-    {tokens: [{label:"Longer", token:"blue"}]},
-    {tokens: [{label:"KO", token:"purple"}]}
+    {tokens: [{label:"AA", color:"orange"}]},
+    {tokens: [{label:"BB", type:"square", colors:["blue", "orange"]}]},
+    {tokens: [{label:"CC", type:"quarters", colors:["blue", "orange"]}]},
+    {tokens: [{label:"DD", type:"halves", colors:["blue", "orange"]}]},
+    {tokens: [{label:"EE", type:"stripes", colors:["blue", "orange"]}]},
+    {tokens: [{label:"FF", type:"bar", colors:["blue", "orange"]}]},
+    {tokens: [{label:"GG", type:"stripe", colors:["blue", "orange"]}]},
+    {tokens: [{label:"HH", type:"target", colors:["blue", "orange"]}]},
+    {tokens: [{label:"Longer", color:"blue"}]},
+    {tokens: [{label:"KO", color:"purple"}]}
   ]
 },{
   group: "Cities",
