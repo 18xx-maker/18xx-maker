@@ -149,7 +149,11 @@ const atoms = [{
              {side:4.5,type:"mid"}]},
     {track: [{side:1,type:"bent"}]},
     {track: [{path:"m 0 85 L 0 50 C 75 0, -75 0, 0 -50 L 0 -85", type:"custom"}]},
-    {track: [{side:1,type:"offboard"},{side:6,type:"offboard"}]}
+    {track: [{side:1,type:"offboard"},{side:6,type:"offboard"}]},
+    {track: [{side:1,type:"gentle",cross:"under",color:"water"},
+             {side:2,type:"gentle",cross:"over",color:"mountain"}]},
+    {track: [{side:3,type:"gentle",gauge:"narrow",color:"mountain",borderColor:"black",gaugeColor:"yellow"},
+             {side:4,type:"gentle",gauge:"double",color:"water",borderColor:"black",gaugeColor:"green"}]}
   ]
 },{
   group: "Offboard Revenues",
