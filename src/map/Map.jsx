@@ -34,8 +34,8 @@ const Map = ({ name, game, coords, variation, hexWidth }) => {
 
   return (
     <React.Fragment>
-      <Coordinates {...data}/>
       {mapHexes}
+      <Coordinates {...data}/>
       <Title game={game} variation={variation} hexWidth={hexWidth} />
       <Borders data={data} />
     </React.Fragment>
