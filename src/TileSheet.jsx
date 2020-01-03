@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import "./TileSheet.scss";
 
-import { sortTiles, tileColors } from "./util";
+import { sortTiles } from "./util";
 import { getTileSheetContext } from "./tilesheet/util";
 import tileDefs from "./data/tiles";
 import { sidesFromTile } from "./atoms/Track";
@@ -151,7 +151,7 @@ const TileSheet = ({ paper, layout, hexWidth }) => {
     }, []),
     filter(x => x && x.length > 0),
     map(color => groupedByColor[color])
-  )(tileColors);
+  )(keys(groupedByColor));
 
   let pagedTiles = pageTiles(c.perPage, [], separatedTiles);
 
