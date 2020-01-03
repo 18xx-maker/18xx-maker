@@ -106,7 +106,7 @@ const pageTiles = (perPage, pages, tiles) => {
   return pageTiles(perPage, append(current, pages), rest);
 };
 
-const TileSheet = ({ paper, layout, hexWidth }) => {
+const TileSheet = ({ paper, layout, hexWidth, gaps }) => {
   let params = useParams();
   let game = games[params.game];
 
@@ -122,6 +122,11 @@ const TileSheet = ({ paper, layout, hexWidth }) => {
   let separatedTiles = compose(
     reduce((tiles, color) => {
       if (tiles.length === 0) return color;
+
+      // If people don't want gaps... let them do it!
+      if (gaps === false) {
+        return concat(tiles, color);
+      }
 
       switch(layout) {
       case "offset":
@@ -290,7 +295,8 @@ const TileSheet = ({ paper, layout, hexWidth }) => {
 const mapStateToProps = state => ({
   layout: state.config.tiles.layout,
   paper: state.config.paper,
-  hexWidth: state.config.tiles.width
+  hexWidth: state.config.tiles.width,
+  gaps: state.config.tiles.gaps
 });
 
 export default connect(mapStateToProps)(TileSheet);

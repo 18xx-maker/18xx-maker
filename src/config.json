@@ -37,7 +37,8 @@
   "tokenLayout": "gsp",
   "tiles": {
     "layout": "die",
-    "width": 150
+    "width": 150,
+    "gaps": true
   },
   "stock": {
     "cell": {
