@@ -16,7 +16,6 @@ const GameMapCompanyToken = (props) => {
   let passing = { ...props };
   delete passing.abbrev;
 
-  console.log(props);
   return (
     <Config>
       {(config, game) => {
