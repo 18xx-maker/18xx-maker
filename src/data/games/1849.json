@@ -1766,25 +1766,25 @@
     "borders": [
       {
         "color": "water",
-        "coords": ["B3", "B4"]
+        "coords": ["B3p1", "B3p6"]
       },{
         "color": "water",
-        "coords": ["D3", "D4"]
+        "coords": ["D3p1", "D3p6"]
       },{
         "color": "water",
-        "coords": ["G4", "G5"]
+        "coords": ["G4p1", "G4p6"]
       },{
         "color": "mountain",
-        "coords": ["H5", "H6", "I6", "I5"]
+        "coords": ["H5p1", "H5p6", "H5p5", "H5p4"]
       },{
         "color": "mountain",
-        "coords": ["J5", "J6", "K6", "K5", "L5"]
+        "coords": ["J5p1", "J5p6", "J5p5", "K6p2", "K6p3"]
       },{
         "color": "mountain",
-        "coords": ["K12", "K13", "L13"]
+        "coords": ["K12p1", "K12p6", "K12p5"]
       },{
         "color": "mountain",
-        "coords": ["L15", "L14"]
+        "coords": ["L15p1", "L15p2"]
       }
     ]
   }

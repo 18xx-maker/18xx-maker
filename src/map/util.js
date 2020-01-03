@@ -20,6 +20,8 @@ import zipWith from "ramda/src/zipWith";
 export const HEX_RATIO = 0.57735;
 export const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+const radians = degrees => degrees * (Math.PI / 180);
+
 // Get amount of space needed for coordinates
 export const getCoordSpace = coords => {
   switch(coords) {
@@ -194,6 +196,111 @@ const rightCoord = curry((hexes, hexWidth, y) => {
   let x = 40 + (hexWidth * 0.5 * (maxHex + 1));
   return x;
 });
+
+// Takes in a string in one of these forms:
+// * A1a30p0.4 - Angle 30, percent 0.4 of hex A1
+// * A1a30 - Angle 30, percent 1.0 of hex A1
+// * A1s1 - Middle of side 1 on the border of hex A1
+// * A1p1 - Point 1 on the border of hex A1
+// * A1x0y0 - At coordinate (0,0) from the middle of hex A1
+const RE_mapCoordxy = /^([A-Z]+[0-9]+)x([0-9.-]+)y([0-9.-]+)$/;
+const RE_mapCoordap = /^([A-Z]+[0-9]+)a([0-9.-]+)p([0-9.-]+)$/;
+const RE_mapCoorda = /^([A-Z]+[0-9]+)a([0-9.-]+)$/;
+const RE_mapCoords = /^([A-Z]+[0-9]+)s([0-9.-]+)$/;
+const RE_mapCoordp = /^([A-Z]+[0-9]+)p([0-9.-]+)$/;
+export const mapCoord = (string, data) => {
+  // First attempt x/y coordinates
+  let xyTest = string.match(RE_mapCoordxy);
+
+  if (xyTest) {
+    let [i, j] = toCoords(xyTest[1]);
+    let x = data.hexX(i, j);
+    let y = data.hexY(i, j);
+
+    x += Number(xyTest[2]) * data.scale;
+    y += Number(xyTest[3]) * data.scale;
+
+    return `${x} ${y}`;
+  }
+
+  let apTest = string.match(RE_mapCoordap);
+
+  if (apTest) {
+    let [i, j] = toCoords(apTest[1]);
+    let x = data.hexX(i, j);
+    let y = data.hexY(i, j);
+
+    let angle = Number(apTest[2]);
+    let length = Number(apTest[3] * 75) * data.scale;
+
+    let angleFromFlat = (angle % 60) - (data.horizontal ? 0 : 30);
+    length = length / Math.cos(radians(angleFromFlat));
+
+    x += length * Math.sin(radians(-angle));
+    y += length * Math.cos(radians(-angle));
+
+    return `${x} ${y}`;
+  }
+
+  let aTest = string.match(RE_mapCoorda);
+
+  if (aTest) {
+    let [i, j] = toCoords(aTest[1]);
+    let x = data.hexX(i, j);
+    let y = data.hexY(i, j);
+
+    let angle = Number(aTest[2]);
+    let length = 75 * data.scale;
+
+    let angleFromFlat = (angle % 60) - (data.horizontal ? 0 : 30);
+    length = length / Math.cos(radians(angleFromFlat));
+
+    x += length * Math.sin(radians(-angle));
+    y += length * Math.cos(radians(-angle));
+
+    return `${x} ${y}`;
+  }
+
+  let sTest = string.match(RE_mapCoords);
+  if (sTest) {
+    let [i, j] = toCoords(sTest[1]);
+    let x = data.hexX(i, j);
+    let y = data.hexY(i, j);
+
+    let side = sTest[2];
+    let angle = 60 * (side - 1) + 90;
+    let length = 75 * data.scale;
+
+    let angleFromFlat = (angle % 60) - 30;
+    length = length / Math.cos(radians(angleFromFlat));
+
+    x += length * Math.sin(radians(-(angle + (data.horizontal ? -90 : 0))));
+    y += length * Math.cos(radians(-(angle + (data.horizontal ? -90 : 0))));
+
+    return `${x} ${y}`;
+  }
+
+  let pTest = string.match(RE_mapCoordp);
+  if (pTest) {
+    let [i, j] = toCoords(pTest[1]);
+    let x = data.hexX(i, j);
+    let y = data.hexY(i, j);
+
+    let point = pTest[2];
+    let angle = (60 * (point - 1));
+    let length = 75 * data.scale;
+
+    let angleFromFlat = (angle % 60) - 30;
+    length = length / Math.cos(radians(angleFromFlat));
+
+    x += length * Math.sin(radians(-(angle + (data.horizontal ? 90 : 0))));
+    y += length * Math.cos(radians(-(angle + (data.horizontal ? 90 : 0))));
+
+    return `${x} ${y}`;
+  }
+
+  return string
+}
 
 export const getMapData = (game, coords, hexWidth, variation) => {
   variation = variation || 0;

@@ -2242,23 +2242,23 @@
     "borders": [
       {
         "color": "water",
-        "coords": ["A4", "B4"]
+        "coords": ["A3p5", "A3p6"]
       },
       {
         "color": "water",
-        "coords": ["E12", "E13"]
+        "coords": ["E13p1", "E13p2"]
       },
       {
         "color": "water",
-        "coords": ["G18", "G19"]
+        "coords": ["G19p1", "G19p2"]
       },
       {
         "color": "water",
-        "coords": ["G20", "H20"]
+        "coords": ["G19p5", "G19p6"]
       },
       {
         "color": "water",
-        "coords": ["O18", "P18"]
+        "coords": ["O17p5", "O17p6"]
       }
     ]
   }

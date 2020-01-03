@@ -1941,13 +1941,13 @@
     ],
     "borders": [{
       "color": "water",
-      "coords": ["F7", "F8"]
+      "coords": ["F8p3", "F8p4"]
     },{
       "color": "water",
-      "coords": ["D11", "D12", "D13"]
+      "coords": ["D12p3", "D12p4", "D12p5"]
     },{
       "color": "water",
-      "coords": ["C16", "C17"]
+      "coords": ["C17p3", "C17p4"]
     }]
   }
 }

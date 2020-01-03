@@ -26,6 +26,9 @@ breaking changes until I decide that version 1.0 is ready for release. I will
 try to list major ones here. Please open issues for any breaking changes that
 aren't listed here so I can either fix, or add it.
 
+* If you used the new map Border features during the first three days after
+  launch... I broke it already. Moving to a more full featured coordinate
+  system.
 * `extraTokens` has been renamed to `marketTokens` (still defaults to
   3). `extraHomeTokens` has been renamed to `extraStationTokens`. This is for
   clarity, I'm sorry for any inconvience, but the old names were extremely

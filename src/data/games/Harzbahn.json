@@ -2854,31 +2854,31 @@
     "borders": [
       {
         "color": "mountain",
-        "coords": ["D4", "D5"]
+        "coords": ["C5p1", "C5p2"]
       },
       {
         "color": "mountain",
-        "coords": ["D9", "E9"]
+        "coords": ["D10p2", "D10p3"]
       },
       {
         "color": "mountain",
-        "coords": ["D11", "E11"]
+        "coords": ["D10p5", "D10p6"]
       },
       {
         "color": "mountain",
-        "coords": ["F3", "G3", "G2"]
+        "coords": ["F2p5", "F2p6", "F2p1"]
       },
       {
         "color": "mountain",
-        "coords": ["F4", "F5"]
+        "coords": ["E5p1", "E5p2"]
       },
       {
         "color": "mountain",
-        "coords": ["H7", "H8"]
+        "coords": ["H8p3", "H8p4"]
       },
       {
         "color": "mountain",
-        "coords": ["D10", "C10", "C11", "C12", "C13", "C14"]
+        "coords": ["C11p2", "C11p3", "C11p4", "C13p3", "C13p4", "C13p5"]
       }
     ]
   }

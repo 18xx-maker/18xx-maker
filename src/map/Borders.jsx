@@ -3,83 +3,14 @@ import React from "react";
 import addIndex from "ramda/src/addIndex";
 import map from "ramda/src/map";
 
-import { toCoords } from "./util";
+import { mapCoord } from "./util";
 import Color from "../data/Color";
 
 const Border = ({ border, data }) => {
-  let coords = map(toCoords, border.coords);
-  let pathCoords = map(c => {
-    let x = data.hexX(c[0], c[1]);
-    let y = data.hexY(c[0], c[1]);
+  let path = "M " + map(coord => mapCoord(coord, data), border.coords).join(" L ");
 
-    if (data.horizontal) {
-      if (c[0] % 2 === 0) {
-        if (c[1] % 2 === 0) {
-          if (data.a1Valid) {
-            x -= data.edge;
-          } else {
-            x -= (0.5 * data.edge);
-          }
-        } else {
-          if (data.a1Valid) {
-            x -= (0.5 * data.edge);
-          } else {
-            x -= data.edge;
-          }
-        }
-      } else {
-        if (c[1] % 2 === 0) {
-          if (data.a1Valid) {
-            x -= (0.5 * data.edge);
-          } else {
-            x -= data.edge;
-          }
-        } else {
-          if (data.a1Valid) {
-            x -= data.edge;
-          } else {
-            x -= (0.5 * data.edge);
-          }
-        }
-      }
-    } else {
-      if (c[0] % 2 === 0) {
-        if (c[1] % 2 === 0) {
-          if (data.a1Valid) {
-            y -= data.edge;
-          } else {
-            y -= (0.5 * data.edge);
-          }
-        } else {
-          if (data.a1Valid) {
-            y -= (0.5 * data.edge);
-          } else {
-            y -= data.edge;
-          }
-        }
-      } else {
-        if (c[1] % 2 === 0) {
-          if (data.a1Valid) {
-            y -= (0.5 * data.edge);
-          } else {
-            y -= data.edge;
-          }
-        } else {
-          if (data.a1Valid) {
-            y -= data.edge;
-          } else {
-            y -= (0.5 * data.edge);
-          }
-        }
-      }
-    }
-
-    return `${x} ${y}`;
-  }, coords)
-  let path = `M ${pathCoords.join(" L ")}`
-
-  let width = border.width || 8;
-  let borderWidth = border.borderWidth || 12;
+  let width = (border.width || 8) * data.scale;
+  let borderWidth = border.borderWidth ? (border.borderWidth * data.scale) : (width + (4 * data.scale));
 
   let linecap = "round";
   let linejoin = "round";
