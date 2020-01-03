@@ -102,11 +102,13 @@
         "width": {
           "type": "number",
           "exclusiveMinimum": 0
-        }
+        },
+        "gaps": { "type": "boolean" }
       },
       "required": [
         "layout",
-        "width"
+        "width",
+        "gaps"
       ],
       "additionalProperties": false
     },
