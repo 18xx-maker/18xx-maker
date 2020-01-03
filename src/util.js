@@ -1,3 +1,6 @@
+import overrides from "./data/companies";
+
+import addIndex from "ramda/src/addIndex";
 import adjust from "ramda/src/adjust";
 import append from "ramda/src/append";
 import ascend from "ramda/src/ascend";
@@ -13,6 +16,7 @@ import join from "ramda/src/join";
 import juxt from "ramda/src/juxt";
 import lte from "ramda/src/lte";
 import map from "ramda/src/map";
+import merge from "ramda/src/merge";
 import nth from "ramda/src/nth";
 import prepend from "ramda/src/prepend";
 import prop from "ramda/src/prop";
@@ -124,3 +128,52 @@ export const maxPages = (total, page) => {
 
   return helper(total, page, []);
 };
+
+export const compileCompanies = (game) => {
+  return map(company => {
+    if (company.minor && game.tokenTypes && game.tokenTypes["minor"]) {
+      company.tokens = game.tokenTypes["minor"];
+    } else if (!company.tokens && game.tokenTypes && game.tokenTypes["default"]) {
+      company.tokens = game.tokenTypes["default"];
+    } else if (is(String, company.tokens)) {
+      company.tokens = game.tokenTypes[company.tokens];
+    }
+
+    if (company.minor && game.shareTypes && game.shareTypes["minor"]) {
+      company.shares = game.shareTypes["minor"];
+    } else if (!company.shares && game.shareTypes && game.shareTypes["default"]) {
+      company.shares = game.shareTypes["default"];
+    } else if (is(String, company.shares)) {
+      company.shares = game.shareTypes[company.shares];
+    }
+
+    return company;
+  }, game.companies || []);
+};
+
+export const overrideCompanies = (companies, override, selections) => {
+  if (override === "none" || !overrides[override]) {
+    return companies;
+  }
+
+  let overrideCompanies = overrides[override].companies;
+
+  return addIndex(map)((company, index) => {
+    // If we have selections, filter/select our overrides with them
+    if ((selections || []).length > 0) {
+      overrideCompanies = map(index => prop(index, overrideCompanies), selections);
+    }
+
+    // If we have a valid override for the index, merge!
+    if (overrideCompanies[index]) {
+      company = merge(company, overrideCompanies[index]);
+
+      // Remove some fields if they don't exist on the override company
+      company.logo = overrideCompanies[index].logo;
+      company.token = overrideCompanies[index].token;
+    }
+
+    return company;
+
+  }, companies || []);
+}

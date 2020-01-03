@@ -17,32 +17,32 @@
     "Round"
   ],
   "ipo": true,
-  "bank": "¥7,000",
+  "bank": 7000,
   "players": [
     {
       "number": 2,
       "certLimit": 25,
-      "capital": "¥420"
+      "capital": 420
     },
     {
       "number": 3,
       "certLimit": 19,
-      "capital": "¥420"
+      "capital": 420
     },
     {
       "number": 4,
       "certLimit": 14,
-      "capital": "¥420"
+      "capital": 420
     },
     {
       "number": 5,
       "certLimit": 12,
-      "capital": "¥390"
+      "capital": 390
     },
     {
       "number": 6,
       "certLimit": 11,
-      "capital": "¥390"
+      "capital": 390
     }
   ],
   "pools": [
@@ -378,7 +378,7 @@
     {
       "name": "2",
       "quantity": 6,
-      "price": "¥80",
+      "price": 80,
       "color": "yellow",
       "info": [
         {
@@ -390,7 +390,7 @@
     {
       "name": "3",
       "quantity": 5,
-      "price": "¥180",
+      "price": 180,
       "color": "green",
       "info": [
         {
@@ -402,7 +402,7 @@
     {
       "name": "4",
       "quantity": 4,
-      "price": "¥300",
+      "price": 300,
       "color": "green",
       "info": [
         {
@@ -414,7 +414,7 @@
     {
       "name": "5",
       "quantity": 3,
-      "price": "¥450",
+      "price": 450,
       "color": "brown",
       "info": [
         {
@@ -426,7 +426,7 @@
     {
       "name": "6",
       "quantity": 2,
-      "price": "¥630",
+      "price": 630,
       "color": "brown",
       "info": [
         {
@@ -438,7 +438,7 @@
     {
       "name": "D",
       "quantity": 9,
-      "price": "¥1100",
+      "price": 1100,
       "color": "brown",
       "description": "Cost ¥800 when trading in a 4T, 5T or 6T",
       "info": [
@@ -449,161 +449,73 @@
       ]
     }
   ],
+  "tokenTypes": {
+    "default": [
+      "Free",
+      40
+    ],
+    "three": [
+      "Free",
+      40,
+      40
+    ],
+    "one": [
+      "Free"
+    ]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Awa Railroad",
       "abbrev": "AR",
-      "color": "red",
-      "tokens": [
-        "Free",
-        "¥40"
-      ],
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "red"
     },
     {
       "name": "Iyo Railway",
       "abbrev": "IR",
-      "color": "orange",
-      "tokens": [
-        "Free",
-        "¥40"
-      ],
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "orange"
     },
     {
       "name": "Sanuki Railway",
       "abbrev": "SR",
-      "color": "blue",
-      "tokens": [
-        "Free",
-        "¥40"
-      ],
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "blue"
     },
     {
       "name": "Takamatsu & Kotohira Electric Railway",
       "abbrev": "KO",
-      "color": "pink",
-      "tokens": [
-        "Free",
-        "¥40"
-      ],
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "pink"
     },
     {
       "name": "Tosa Electric Railway",
       "abbrev": "TR",
       "color": "green",
-      "tokens": [
-        "Free",
-        "¥40",
-        "¥40"
-      ],
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Tosa Kuroshio Railway",
       "abbrev": "KU",
       "color": "purple",
-      "tokens": [
-        "Free"
-      ],
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "one"
     },
     {
       "name": "Uwajima Railway",
       "abbrev": "UR",
       "color": "brown",
-      "tokens": [
-        "Free",
-        "¥40",
-        "¥40"
-      ],
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     }
   ],
   "phases": [
@@ -653,44 +565,44 @@
   "privates": [
     {
       "name": "Takamatsu E-Railroad",
-      "price": "¥20",
-      "revenue": "¥5",
+      "price": 20,
+      "revenue": 5,
       "desription": "Blocks Takamatsu (K4)."
     },
     {
       "name": "Mitsubishi Ferry",
-      "price": "¥30",
-      "revenue": "¥5",
+      "price": 30,
+      "revenue": 5,
       "description": "Player owner may place the port tile on a coastal town (B11, G10, I12, or J9) without a tile on it already, outside of the operating rounds of a company controller by another player. The player need not control a company or have connectivity to the placed tile from one of their companies. This does not close the company."
     },
     {
       "name": "Ehime Railroad",
-      "price": "¥40",
-      "revenue": "¥10",
+      "price": 40,
+      "revenue": 10,
       "description": "When this company is sold to a corporation, the selling player may immediately place a green tile on Ohzu (C4), in addition to any tile which it may lay during the same operating round. This does not close the company."
     },
     {
       "name": "Sumitomo Mines Railway",
-      "price": "¥50",
-      "revenue": "¥15",
+      "price": 50,
+      "revenue": 15,
       "description": "Owning corporation may ignore building cost for mountain hexes which do not also contain rivers. This does not close the company."
     },
     {
       "name": "Dougo Railway",
-      "price": "¥60",
-      "revenue": "¥15",
+      "price": 60,
+      "revenue": 15,
       "description": "Owning player may exchange this private company for a 10% share of Iyo Railway from the initial offering."
     },
     {
       "name": "South Iyo Railway",
-      "price": "¥80",
-      "revenue": "¥20",
+      "price": 80,
+      "revenue": 20,
       "players": "Players: 3+"
     },
     {
       "name": "Uno-Takamatsu Ferry",
-      "price": "¥150",
-      "revenue": "¥30 / ¥50",
+      "price": 150,
+      "revenue": [30,50],
       "players": "Players: 4+",
       "description": "Does not close while owned by a player. If owned by a player when the first 5-train is purchased it may no longer be sold to a public company and the revenue is increased to 50."
     }

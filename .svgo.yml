@@ -1,7 +1,8 @@
 full: false
 plugins:
   - removeViewBox: false
-  - cleanupIds: true
+  - cleanupIDs:
+      minify: false
   - sortAttrs:
       order:
         - id
