@@ -253,6 +253,8 @@ const Token = ({
             {label}
           </text>
         );
+
+        let outlineColor = p(outline || "black");
         return (
           <g>
             {clip}
@@ -262,7 +264,7 @@ const Token = ({
               cy="0"
               r={width + (bleed ? 5 : 0)}
               fill={tokenFill}
-              stroke={p(outline || "black")}
+              stroke={outlineColor}
             />
             {shape}
             {content}
