@@ -68,5 +68,12 @@ required to make sure the react app can load it. After you run this please check
 your SVG and make sure it still looks right. If it doesn't or you have issues
 please [let me know](mailto:kelsin@valefor.com).
 
-Last (but not least) you need to add this logo to
-[/src/data/logos/index.js](https://github.com/kelsin/18xx/blob/master/src/data/logos/index.js).
+You also need to run:
+
+```sh
+yarn generate:logos:index
+```
+
+to auto generate an `index.js` file with all of the logos. We used to have to
+edit this file by hand but this is easier. This will be run automatically as
+part of `yarn build`.

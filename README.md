@@ -19,27 +19,26 @@ I've been asked about donation buttons; if you find this software useful to you
 and would like to donate money towards its development you can do so via
 [paypal](https://paypal.me/kelsin) or [square cash](https://cash.me/$kelsin).
 
+## Deprecations and Breaks
+
+I try to keep the tool as backwards compatible as possible, but I'm allowing
+breaking changes until I decide that version 1.0 is ready for release. I will
+try to list major ones here. Please open issues for any breaking changes that
+aren't listed here so I can either fix, or add it.
+
+* The old method for defining a company color with the `token` field has been
+  removed. Please use `"color": "black"` (for example) or define an actual token
+  object if you want to set type and an array of colors for your company tokens.
+* A lot of features dealing with logos and svgs won't work if you defined your
+  cities using `colors` and `labels` in the `companies` array. In order to put a
+  company in a city please just provide the companies abbrev in an array of
+  companies. Otherwise it will make a label with exactly what you specify
+  (allowing any text / colors / etc to be used in city nodes).
+
 ## Usage
 
-This node app uses `yarn` as it's package managing. Installing with `npm` is not
-supported as I can't guaruntee proper package versions.
-
-First install [node.js](https://nodejs.org/en/) and
-[yarn](https://yarnpkg.com/en/) for your operating system. I recommend using the
-LTS version of node (current 10.x). The version I'm currently developing with
-will always be listed in
-[.node-version](https://github.com/kelsin/18xx/blob/master/.node-version).
-
-Download the app (either using git or just downloading the zip file from
-github), and then (from the folder that you downloaded into) run the following:
-
-```sh
-# Install the dependencies
-yarn
-
-# Run the app
-yarn start
-```
+Please check out the [docs](https://18xx.kelsin.net/docs/running) for how to run
+the site locally.
 
 ### Printing
 
