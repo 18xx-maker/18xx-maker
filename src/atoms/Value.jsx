@@ -6,23 +6,11 @@ import Currency, { format } from "../util/Currency";
 import RotateContext from "../context/RotateContext";
 
 const Value = ({ value, fixed, outerBorderColor }) => {
-  let size = 15;
-  let rx = 14;
-  let ry = 14;
-  if (value.toString().length > 3) {
-    rx = 6 + (value.toString().length * 4);
-    console.log({rx,ry})
-  }
-  if (value.toString().length > 2) {
-    size = 13;
-  }
-
   return (
     <RotateContext.Consumer>
       {rotation => (
         <Config>
           {(config, game) => {
-            console.log(game);
             let length = format(value, game, config.currency["value"]).length;
             let size = 15;
             let ry = 14;
