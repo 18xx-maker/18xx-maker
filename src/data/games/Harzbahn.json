@@ -544,7 +544,7 @@
           {
             "label": "HBE",
             "width": 15,
-            "token": "red",
+            "color": "red",
             "angle": 60,
             "percent": 0.75
           }
@@ -692,9 +692,8 @@
         ],
         "tokens": [
           {
-            "label": "NWE",
-            "width": 15,
-            "token": "green",
+            "company": "NWE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
@@ -714,9 +713,8 @@
         ],
         "tokens": [
           {
-            "label": "WBE",
-            "width": 15,
-            "token": "black",
+            "company": "WBE",
+            "destination": true,
             "angle": 300,
             "percent": 0.7
           }
@@ -742,9 +740,8 @@
         ],
         "tokens": [
           {
-            "label": "WBE",
-            "width": 15,
-            "token": "black",
+            "company": "WBE",
+            "destination": true,
             "angle": 300,
             "percent": 0.7
           }
@@ -774,9 +771,8 @@
         ],
         "tokens": [
           {
-            "label": "WBE",
-            "width": 15,
-            "token": "black",
+            "company": "WBE",
+            "destination": true,
             "angle": 300,
             "percent": 0.7
           }
@@ -884,9 +880,8 @@
         },
         "tokens": [
           {
-            "label": "NWE",
-            "width": 15,
-            "token": "green",
+            "company": "NWE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
@@ -1241,9 +1236,8 @@
         },
         "tokens": [
           {
-            "label": "NWE",
-            "width": 15,
-            "token": "green",
+            "company": "NWE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
@@ -1489,9 +1483,8 @@
         },
         "tokens": [
           {
-            "label": "SHE",
-            "width": 15,
-            "token": "yellow",
+            "company": "SHE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
@@ -1840,9 +1833,8 @@
         ],
         "tokens": [
           {
-            "label": "SHE",
-            "width": 15,
-            "token": "yellow",
+            "company": "SHE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
@@ -2178,9 +2170,8 @@
         ],
         "tokens": [
           {
-            "label": "KEZ",
-            "width": 15,
-            "token": "brown",
+            "company": "KEZ",
+            "destination": true,
             "percent": 0.7
           }
         ],
@@ -2213,9 +2204,8 @@
         ],
         "tokens": [
           {
-            "label": "NWE",
-            "width": 15,
-            "token": "green",
+            "company": "NWE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
@@ -2408,9 +2398,8 @@
         ],
         "tokens": [
           {
-            "label": "GHE",
-            "width": 15,
-            "token": "blue",
+            "company": "GHE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
@@ -2611,9 +2600,8 @@
         },
         "tokens": [
           {
-            "label": "NWE",
-            "width": 15,
-            "token": "green",
+            "company": "NWE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }

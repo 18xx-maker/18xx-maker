@@ -1,5 +1,5 @@
 import React from "react";
-import Token from "../Token";
+import CompanyToken from "../tokens/CompanyToken";
 import Color from "../data/Color";
 import ColorContext from "../context/ColorContext";
 
@@ -20,7 +20,9 @@ const LeftShare = ({
   name,
   abbrev,
   token,
-  shareStyle
+  color,
+  shareStyle,
+  company
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -31,7 +33,8 @@ const LeftShare = ({
                   <div className="share__token__wrapper">
                     <svg style={{width:"0.52in",height:"0.52in"}}
                          viewBox="-26 -26 52 52">
-                      <Token label={abbrev} logo={logo || abbrev} token={token} outline={shareStyle === "gmt" ? "white" : null} width={25} />
+                      <CompanyToken company={company}
+                                    outline={shareStyle === "gmt" ? "white" : null} />
                     </svg>
                   </div>
                 </div>);
@@ -83,7 +86,8 @@ const CenterShare = ({
   logo,
   name,
   abbrev,
-  token
+  token,
+  company
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -95,7 +99,7 @@ const CenterShare = ({
                        className="share__token__wrapper">
                     <svg style={{width:"0.52in",height:"0.52in"}}
                          viewBox="-26 -26 52 52">
-                      <Token label={abbrev} logo={logo || abbrev} token={token} width={25} />
+                      <CompanyToken company={company} />
                     </svg>
                   </div>
                 </div>);

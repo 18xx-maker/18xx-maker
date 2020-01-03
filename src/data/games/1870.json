@@ -1178,9 +1178,8 @@
         ],
         "tokens": [
           {
-            "label": "FW",
-            "width": 15,
-            "color": "purple",
+            "company": "FW",
+            "destination": true,
             "percent": 0.75
           }
         ],
@@ -1192,9 +1191,8 @@
         "color": "offboard",
         "tokens": [
           {
-            "label": "IC",
-            "width": 15,
-            "color": "lime",
+            "company": "IC",
+            "destination": true,
             "percent": 0.75
           }
         ],
@@ -1255,9 +1253,8 @@
         ],
         "tokens": [
           {
-            "label": "ATSF",
-            "width": 15,
-            "color": "cyan",
+            "company": "ATSF",
+            "destination": true,
             "angle": 240,
             "percent": 0.8
           },
@@ -1348,9 +1345,8 @@
         ],
         "tokens": [
           {
-            "label": "SLSF",
-            "width": 15,
-            "color": "red",
+            "company": "SLSF",
+            "destination": true,
             "percent": 0.75
           }
         ],
@@ -1543,9 +1539,8 @@
         ],
         "tokens": [
           {
-            "label": "GMO",
-            "width": 15,
-            "color": "pink",
+            "company": "GMO",
+            "destination": true,
             "angle": 300,
             "percent": 0.7
           }
@@ -1579,9 +1574,8 @@
         ],
         "tokens": [
           {
-            "label": "SSW",
-            "width": 15,
-            "color": "blue",
+            "company": "SSW",
+            "destination": true,
             "percent": 0.7
           }
         ],
@@ -1614,9 +1608,8 @@
         ],
         "tokens": [
           {
-            "label": "MP",
-            "width": 15,
-            "color": "brown",
+            "company": "MP",
+            "destination": true,
             "percent": 0.7
           }
         ],
@@ -1742,9 +1735,8 @@
         ],
         "tokens": [
           {
-            "label": "SP",
-            "width": 15,
-            "color": "orange",
+            "company": "SP",
+            "destination": true,
             "angle": 60,
             "percent": 0.7
           },

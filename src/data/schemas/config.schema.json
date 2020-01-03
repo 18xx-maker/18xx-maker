@@ -118,8 +118,7 @@
       "type": "string",
       "enum": ["none", "languages", "lotr", "dev", "webdev", "owl"]
     },
-    "plainMapHomes": { "type": "boolean" },
-    "plainMapDestinations": { "type": "boolean" },
+    "plainMapCompanies": { "type": "boolean" },
     "straightCityNames": { "type": "boolean" },
     "halfWidthCharters": { "type": "boolean" },
     "font": { "$ref": "#/definitions/font" }

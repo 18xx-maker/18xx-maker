@@ -11,7 +11,7 @@ import Train from "./Train";
 import PageSetup from "../PageSetup";
 
 import games from "../data/games";
-import { compileCompanies, fillArray } from "../util";
+import { compileCompanies, overrideCompanies, fillArray } from "../util";
 
 import GameContext from "../context/GameContext";
 
@@ -43,7 +43,7 @@ const Cards = ({ override, selection }) => {
     return <Redirect to={`/${params.game}/background`} />;
   }
 
-  let companies = state.displayShares ? compileCompanies(game, override, selection) || [] : [];
+  let companies = state.displayShares ? overrideCompanies(compileCompanies(game), override, selection) || [] : [];
   let privates = state.displayPrivates ? game.privates || [] : [];
   let trains = fillArray(
     R.prop("quantity"),
@@ -111,9 +111,11 @@ const Cards = ({ override, selection }) => {
             (share, i) => (
               <Share
                 key={`${company.abbrev}-${i}`}
+                company={company}
                 name={company.name}
                 abbrev={company.abbrev}
                 logo={company.logo}
+                color={company.color}
                 token={company.token || company.color}
                 {...share}
               />

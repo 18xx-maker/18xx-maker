@@ -566,7 +566,7 @@
             "label": "$0 IC",
             "angle": 180,
             "percent": 0.75,
-            "token": "green",
+            "color": "green",
             "width": 18
           }
         ],
@@ -986,8 +986,8 @@
             "companies": [
               "NYC",
               {
-                "label": "ERIE",
-                "color": "gray"
+                "abbrev": "ERIE",
+                "reserved": true
               }
             ],
             "name": {
@@ -1078,8 +1078,8 @@
           {
             "companies": [
               {
-                "label": "PRR",
-                "color": "gray"
+                "abbrev": "PRR",
+                "reserved": true
               }
             ],
             "name": {

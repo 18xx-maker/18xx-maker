@@ -129,8 +129,8 @@ export const maxPages = (total, page) => {
   return helper(total, page, []);
 };
 
-export const compileCompanies = (game, override, selections) => {
-  return addIndex(map)((company, index) => {
+export const compileCompanies = (game) => {
+  return map(company => {
     if (company.minor && game.tokenTypes && game.tokenTypes["minor"]) {
       company.tokens = game.tokenTypes["minor"];
     } else if (!company.tokens && game.tokenTypes && game.tokenTypes["default"]) {
@@ -147,24 +147,33 @@ export const compileCompanies = (game, override, selections) => {
       company.shares = game.shareTypes[company.shares];
     }
 
-    if (override !== "none" && overrides[override]) {
-      let overrideCompanies = overrides[override].companies;
-
-      // Filter
-      console.log(selections);
-      if ((selections || []).length > 0) {
-        overrideCompanies = map(index => prop(index, overrideCompanies), selections);
-      }
-
-      if (overrideCompanies[index]) {
-        company = merge(company, overrideCompanies[index]);
-
-        // Remove logo if needed
-        company.logo = overrideCompanies[index].logo;
-        company.token = overrideCompanies[index].token;
-      }
-    }
-
     return company;
   }, game.companies || []);
 };
+
+export const overrideCompanies = (companies, override, selections) => {
+  if (override === "none" || !overrides[override]) {
+    return companies;
+  }
+
+  let overrideCompanies = overrides[override].companies;
+
+  return addIndex(map)((company, index) => {
+    // If we have selections, filter/select our overrides with them
+    if ((selections || []).length > 0) {
+      overrideCompanies = map(index => prop(index, overrideCompanies), selections);
+    }
+
+    // If we have a valid override for the index, merge!
+    if (overrideCompanies[index]) {
+      company = merge(company, overrideCompanies[index]);
+
+      // Remove some fields if they don't exist on the override company
+      company.logo = overrideCompanies[index].logo;
+      company.token = overrideCompanies[index].token;
+    }
+
+    return company;
+
+  }, companies || []);
+}

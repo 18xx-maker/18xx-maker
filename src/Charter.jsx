@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as R from "ramda";
-import Token from "./Token";
+import CompanyToken from "./tokens/CompanyToken";
+import Token from "./tokens/Token";
 import Phase from "./Phase";
 import Color from "./data/Color";
 import ColorContext from "./context/ColorContext";
@@ -10,21 +11,24 @@ import Currency from "./util/Currency";
 
 import is from "ramda/src/is";
 
-const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, charterStyle, game, halfWidthCharters }) => {
+const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, charterStyle, game, halfWidthCharters, company }) => {
   let color = token;
   if(is(Object, token)) {
     color = token.colors[0];
   }
 
   let tokenSpots = R.addIndex(R.map)((label, index) => {
+    // Color charters just use empty token circles, carth style uses full
+    // company tokens.
+    let companyToken = charterStyle === "color" ?
+        <Token outline="black" /> :
+        <CompanyToken company={company} />;
+
     return (
       <svg key={`token-${index}`}>
         <g transform={`translate(25 25)`}>
           <ColorContext.Provider value="companies">
-            <Token outline={charterStyle === "color" ? "black" : null}
-                   logo={charterStyle === "color" ? null : logo}
-                   label={charterStyle === "color" ? null : abbrev}
-                   token={charterStyle === "color" ? null : token} />
+            {companyToken}
           </ColorContext.Provider>
           <g transform={`${halfWidthCharters ? "rotate(-90) " : ""}translate(0 39)`}>
             <Color context="companies">
@@ -78,11 +82,9 @@ const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, char
               <div className="charter__logo">
                 <svg viewBox="-37.5 -37.5 75 75">
                   <ColorContext.Provider value="companies">
-                    <Token outline="white"
-                           label={abbrev}
-                           logo={logo || abbrev}
-                           width={37.5}
-                           token={token} />
+                    <CompanyToken outline="white"
+                                  company={company}
+                                  width={37.5} />
                   </ColorContext.Provider>
                 </svg>
               </div>
