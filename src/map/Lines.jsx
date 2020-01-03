@@ -8,7 +8,7 @@ import Color from "../data/Color";
 const Line = ({ line, data }) => {
   let ratio = data.hexWidth / 150;
 
-  let path = "M " + map(pair => map(coord => coord * ratio,
+  let path = "M " + map(pair => map(coord => ((coord - data.coordSpace) * ratio) + data.coordSpace,
                                    pair).join(" "),
                         line.coords).join(" L ");
 
@@ -59,7 +59,6 @@ const Line = ({ line, data }) => {
 }
 
 const Lines = ({ data }) => {
-  console.log("Lines");
   return addIndex(map)((line, i) => <Line key={`line-${i}`} line={line} data={data}/>, data.lines || []);
 }
 
