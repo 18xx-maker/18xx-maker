@@ -44,7 +44,7 @@ const Map = ({ name, game, coords, variation, hexWidth }) => {
 
 const mapStateToProps = (state, {hexWidth}) => ({
   coords: state.config.coords,
-  hexWidth: hexWidth || state.config.tiles.width
+  hexWidth: hexWidth || state.config.tiles.mapWidth
 });
 
 export default connect(mapStateToProps)(Map);
