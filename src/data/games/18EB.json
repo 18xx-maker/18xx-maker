@@ -6,7 +6,7 @@
     "titleX": 50,
     "currency": "#gp",
     "orientation": "horizontal",
-    "extraTokens": 2
+    "marketTokens": 2
   },
   "wip": true,
   "links": {
