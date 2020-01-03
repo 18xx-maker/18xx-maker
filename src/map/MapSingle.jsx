@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import games from "../data/games";
 import Map from "./Map";
 import Svg from "../Svg";
-import Title from "../Title";
 import HexContext from "../context/HexContext";
 import * as R from "ramda";
 import { Redirect, useParams } from "react-router-dom";
@@ -54,7 +53,6 @@ const MapSingle = ({ coords, hexWidth }) => {
       </div>
       <div className="map">
         <Svg width={data.totalWidth} height={data.totalHeight}>
-          <Title game={game} variation={variation} />
           <Map name={params.game} game={game} variation={variation} />
         </Svg>
         <style>{`@media print {@page {size: ${data.printWidth} ${data.printHeight};}}`}</style>

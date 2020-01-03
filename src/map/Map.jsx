@@ -4,6 +4,7 @@ import * as R from "ramda";
 import Hex from "../Hex";
 import Coordinates from "./Coordinates";
 import Borders from "./Borders";
+import Title from "./Title";
 
 import { getMapData, toAlpha, toCoords } from "./util";
 
@@ -35,6 +36,7 @@ const Map = ({ name, game, coords, variation, hexWidth }) => {
     <React.Fragment>
       <Coordinates {...data}/>
       {mapHexes}
+      <Title game={game} variation={variation} hexWidth={hexWidth} />
       <Borders data={data} />
     </React.Fragment>
   );
