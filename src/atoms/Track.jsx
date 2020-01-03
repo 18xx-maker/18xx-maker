@@ -54,8 +54,11 @@ export const sidesFromTile = compose(uniq,
                                      propOr([], "track"),
                                      defaultTo([]));
 
-const Track = ({ type, gauge, border, offset, path }) => {
+const Track = ({ type, gauge, border, offset, path, color, borderColor, gaugeColor }) => {
   let width = border ? 16 : 12;
+  color = color || "track";
+  borderColor = borderColor || "border";
+  gaugeColor = gaugeColor || "white";
 
   switch (type) {
   case "custom":
@@ -124,7 +127,7 @@ const Track = ({ type, gauge, border, offset, path }) => {
           <path
             d={path}
             fill="none"
-            stroke={c("white")}
+            stroke={c(gaugeColor)}
             strokeLinecap="butt"
             strokeLinejoin="miter"
             strokeWidth={width - 4}
@@ -150,7 +153,7 @@ const Track = ({ type, gauge, border, offset, path }) => {
           <path
             d={path}
             fill="none"
-            stroke={c("white")}
+            stroke={c(gaugeColor)}
             strokeLinecap="butt"
             strokeLinejoin="miter"
             strokeWidth={width - 4}
@@ -169,8 +172,8 @@ const Track = ({ type, gauge, border, offset, path }) => {
             <g transform={`rotate(${hx.rotation})`}>
               <path
                 d={path}
-                fill={type === "offboard" ? (c(border ? "border" : "track")) : "none"}
-                stroke={type === "offboard" ? "none" : (c(border ? "border" : "track"))}
+                fill={type === "offboard" ? (c(border ? borderColor : color)) : "none"}
+                stroke={type === "offboard" ? "none" : (c(border ? borderColor : color))}
                 strokeLinecap="butt"
                 strokeLinejoin="miter"
                 strokeWidth={width}
