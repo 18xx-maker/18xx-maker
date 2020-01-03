@@ -1705,12 +1705,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "color": "water",
-            "side": 4
-          }
-        ],
         "terrain": [
           {
             "cost": 80,
@@ -1750,46 +1744,6 @@
         ],
         "hexes": [
           "N17"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "color": "water",
-            "side": 1
-          },
-          {
-            "color": "water",
-            "side": 6
-          }
-        ],
-        "terrain": [
-          {
-            "cost": 80,
-            "type": "river"
-          }
-        ],
-        "hexes": [
-          "N19"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "color": "water",
-            "side": 3
-          }
-        ],
-        "terrain": [
-          {
-            "cost": 100,
-            "type": "river"
-          }
-        ],
-        "hexes": [
-          "O18"
         ]
       },
       {
@@ -1926,7 +1880,8 @@
           "N9",
           "N11",
           "N13",
-          "N15"
+          "N15",
+          "N19"
         ]
       },
       {
@@ -1939,7 +1894,8 @@
         ],
         "hexes": [
           "O14",
-          "O16"
+          "O16",
+          "O18"
         ]
       },
       {
@@ -2060,6 +2016,21 @@
           "N5"
         ]
       }
-    ]
+    ],
+    "borders": [{
+      "color": "water",
+      "coords": ["N18", "O18", "O19"]
+    }],
+    "lines": [{
+      "color": "water",
+      "coords": [
+        [780, 70],
+        [860, 190],
+        [1075, 325],
+        [1175, 375],
+        [1325, 400]
+      ],
+      "width": 10
+    }]
   }
 }

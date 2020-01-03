@@ -45,15 +45,31 @@ const Border = ({ border, data }) => {
     } else {
       if (c[0] % 2 === 0) {
         if (c[1] % 2 === 0) {
-          y -= data.edge;
+          if (data.a1Valid) {
+            y -= data.edge;
+          } else {
+            y -= (0.5 * data.edge);
+          }
         } else {
-          y -= (0.5 * data.edge);
+          if (data.a1Valid) {
+            y -= (0.5 * data.edge);
+          } else {
+            y -= data.edge;
+          }
         }
       } else {
         if (c[1] % 2 === 0) {
-          y -= (0.5 * data.edge);
+          if (data.a1Valid) {
+            y -= (0.5 * data.edge);
+          } else {
+            y -= data.edge;
+          }
         } else {
-          y -= data.edge;
+          if (data.a1Valid) {
+            y -= data.edge;
+          } else {
+            y -= (0.5 * data.edge);
+          }
         }
       }
     }

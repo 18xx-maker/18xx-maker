@@ -307,7 +307,8 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     // The resolved hexes
     hexes: hexes,
 
-    // Borders
-    borders: gameMap.borders
+    // Borders and Lines
+    borders: gameMap.borders,
+    lines : gameMap.lines
   };
 };

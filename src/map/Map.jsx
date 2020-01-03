@@ -1,9 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as R from "ramda";
+
 import Hex from "../Hex";
+
 import Coordinates from "./Coordinates";
 import Borders from "./Borders";
+import Lines from "./Lines";
 import Title from "./Title";
 
 import { getMapData, toAlpha, toCoords } from "./util";
@@ -38,6 +41,7 @@ const Map = ({ name, game, coords, variation, hexWidth }) => {
       <Coordinates {...data}/>
       <Title game={game} variation={variation} hexWidth={hexWidth} />
       <Borders data={data} />
+      <Lines data={data} />
     </React.Fragment>
   );
 };
