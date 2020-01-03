@@ -166,7 +166,7 @@ const server = app.listen(9000);
 
   R.map(company => {
     btok.token.push({
-      dups:(company.tokens.length + (game.info.extraHomeTokens || 0)),
+      dups:(company.tokens.length + (game.info.extraStationTokens || 0)),
       flip:true
     });
     mtok.token.push({

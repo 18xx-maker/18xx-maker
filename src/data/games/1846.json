@@ -4,8 +4,8 @@
     "subtitle": "The Race for the Midwest",
     "designer": "Thomas Lehmann",
     "background": "orange",
-    "extraTokens": 2,
-    "extraHomeTokens": 3,
+    "marketTokens": 2,
+    "extraStationTokens": 3,
     "currency": "USD"
   },
   "links": {

@@ -6,7 +6,7 @@
     "background": "gray",
     "titleX": 50,
     "titleY": 1500,
-    "extraHomeTokens": 6,
+    "extraStationTokens": 6,
     "currency": "USD"
   },
   "links": {

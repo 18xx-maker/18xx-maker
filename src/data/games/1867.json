@@ -4,7 +4,7 @@
     "subtitle": "The Railways of Canada",
     "designer": "Ian Wilson",
     "background": "water",
-    "extraTokens": 2,
+    "marketTokens": 2,
     "orientation": "horizontal",
     "titleX": 1200,
     "titleY": 1200,

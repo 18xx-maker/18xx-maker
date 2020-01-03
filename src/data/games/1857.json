@@ -7,8 +7,7 @@
     "titleY": 500,
     "titleX": 200,
     "titleRotate": -90,
-    "extraTokens": 3,
-    "extraHomeTokens": 1,
+    "extraStationTokens": 1,
     "currency": "$#"
   },
   "links": {

@@ -6,7 +6,7 @@
     "background": "brown",
     "titleSize": 76,
     "subTitleSize": 20,
-    "extraTokens": 2,
+    "marketTokens": 2,
     "titleY": -115,
     "titleX": 20,
     "currency": "#M"

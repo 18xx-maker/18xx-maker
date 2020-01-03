@@ -7,7 +7,7 @@
     "orientation": "horizontal",
     "titleY": 900,
     "titleX": 25,
-    "extraTokens": 2,
+    "marketTokens": 2,
     "currency": "L.#"
   },
   "links": {

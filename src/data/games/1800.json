@@ -9,7 +9,7 @@
     "titleX": 170,
     "titleSize": 150,
     "extraTotalWidth": 210,
-    "extraTokens": 2,
+    "marketTokens": 2,
     "currency": "USD"
   },
   "links": {

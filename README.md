@@ -26,6 +26,10 @@ breaking changes until I decide that version 1.0 is ready for release. I will
 try to list major ones here. Please open issues for any breaking changes that
 aren't listed here so I can either fix, or add it.
 
+* `extraTokens` has been renamed to `marketTokens` (still defaults to
+  3). `extraHomeTokens` has been renamed to `extraStationTokens`. This is for
+  clarity, I'm sorry for any inconvience, but the old names were extremely
+  confusing for new users.
 * The old method for defining a company color with the `token` field has been
   removed. Please use `"color": "black"` (for example) or define an actual token
   object if you want to set type and an array of colors for your company tokens.

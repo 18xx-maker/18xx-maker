@@ -22,13 +22,13 @@ const MaxTokens = ({ game, override, selection }) => {
   let tokensWidth = 12;
 
   let extraNormals =
-    (game.info.extraTokens || 3) + (game.info.extraHomeTokens || 0);
+    (game.info.marketTokens || 3) + (game.info.extraStationTokens || 0);
   let tokenCount = R.scan(
     R.add,
     0,
     R.addIndex(R.chain)((company, index) => {
       return (
-        company.tokens.length + extraNormals + (game.info.extraTokens || 3)
+        company.tokens.length + extraNormals + (game.info.marketTokens || 3)
       );
     }, companies)
   );
@@ -37,7 +37,7 @@ const MaxTokens = ({ game, override, selection }) => {
     0,
     R.addIndex(R.chain)((company, index) => {
       return (
-        company.tokens.length + extraNormals + (game.info.extraTokens || 3)
+        company.tokens.length + extraNormals + (game.info.marketTokens || 3)
       );
     }, companies)
   );
@@ -51,7 +51,7 @@ const MaxTokens = ({ game, override, selection }) => {
       companyTokens.push(
         <CompanyToken company={company} bleed={true} inverse={true} />
       );
-    }, game.info.extraTokens || 3);
+    }, game.info.marketTokens || 3);
 
     let groups = R.addIndex(R.map)(
       (token, tokenIndex) => (
@@ -144,13 +144,13 @@ const GspTokens = ({ game, override, selection }) => {
   let getY = i => marginY + Math.floor(i / perRow) * offsetY;
 
   let extraNormals =
-    (game.info.extraTokens || 3) + (game.info.extraHomeTokens || 0);
+    (game.info.marketTokens || 3) + (game.info.extraStationTokens || 0);
   let tokenCount = R.scan(
     R.add,
     0,
     R.addIndex(R.chain)((company, index) => {
       return (
-        company.tokens.length + extraNormals + (game.info.extraTokens || 3)
+        company.tokens.length + extraNormals + (game.info.marketTokens || 3)
       );
     }, companies)
   );
@@ -159,7 +159,7 @@ const GspTokens = ({ game, override, selection }) => {
     0,
     R.addIndex(R.chain)((company, index) => {
       return (
-        company.tokens.length + extraNormals + (game.info.extraTokens || 3)
+        company.tokens.length + extraNormals + (game.info.marketTokens || 3)
       );
     }, companies)
   );
@@ -172,7 +172,7 @@ const GspTokens = ({ game, override, selection }) => {
       companyTokens.push(
         <CompanyToken company={company} bleed={true} inverse={true} />
       );
-    }, game.info.extraTokens || 3);
+    }, game.info.marketTokens || 3);
 
     let groups = R.addIndex(R.map)(
       (token, tokenIndex) => (
