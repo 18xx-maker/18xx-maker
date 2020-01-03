@@ -76,6 +76,20 @@
       "type": "string",
       "enum": ["equal", "max"]
     },
+    "cards": {
+      "type": "object",
+      "properties": {
+        "layout": {
+          "type": "string",
+          "enum": ["free", "miniEuroDie", "dtgDie"]
+        },
+        "width": { "type": "number", "minimum": 1 },
+        "height": { "type": "number", "minimum": 1 },
+        "cutlines": { "type": "number", "minimum": 0 }
+      },
+      "required": ["layout", "width", "height", "cutlines"],
+      "additionalProperties": false
+    },
     "shareStyle": {
       "type": "string",
       "enum": ["center", "left", "gmt"]
@@ -84,6 +98,7 @@
       "type": "string",
       "enum": ["carth", "color"]
     },
+    "charterCutlines": { "type": "number", "minimum": 0 },
     "tokenLayout": {
       "type": "string",
       "enum": ["max", "gsp"]
@@ -125,6 +140,10 @@
       "type": "string",
       "enum": ["none", "languages", "lotr", "dev", "webdev", "owl"]
     },
+    "overrideSelection": {
+      "type": "array",
+      "items": { "type": "integer", "minimum": 0 }
+    },
     "plainMapCompanies": { "type": "boolean" },
     "straightCityNames": { "type": "boolean" },
     "halfWidthCharters": { "type": "boolean" },
@@ -138,12 +157,13 @@
     "font",
     "pagination",
     "paper",
-    "plainMapDestinations",
-    "plainMapHomes",
+    "plainMapCompanies",
     "shareStyle",
     "stock",
     "theme",
-    "tokenLayout"
+    "tokenLayout",
+    "overrideCompanies",
+    "overrideSelection"
   ],
   "additionalProperties": false
 }

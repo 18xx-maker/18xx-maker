@@ -230,7 +230,7 @@ const Config = ({config, setConfig, resetConfig}) => {
       {/*           description="This sets all destination spots on maps to be empty white cities with black company text:" /> */}
       <h3>Tiles</h3>
       <Input name="tiles.layout" label="Tile Sheet Layout"
-             description="This determines how to lay out the tiles on the tile sheet. Offset is the style that tries to make as few cuts as possible. Individual just has each tile separate from the others, and Die is meant from the custom Die cutters that Deep Thought Games uses"/>
+             description="This determines how to lay out the tiles on the tile sheet. Offset is the style that tries to make as few cuts as possible. Individual just has each tile separate from the others, and die is meant from the custom die cutters that Deep Thought Games uses. Setting either die option overrides page size and the tile size option below."/>
       <Input name="tiles.width" label="Tile Width" dimension={true}
              description="This determines the default size of tiles. It defines the distance from flat to flat. 1.5in would be standard 18xx size. 1.0625in is small (1822 / 18OE) size. GMT uses 1.75in."/>
       <Input name="tiles.mapWidth" label="Map Tile Width" dimension={true}
@@ -243,9 +243,17 @@ const Config = ({config, setConfig, resetConfig}) => {
              description="This lets you choose between two styles for charters. One is simular to Carth's style while the other includes more color at the top."/>
       <Input name="halfWidthCharters" label="Half Width Charters"
              description="This draws all charters (major and minor) as half width. They will take up half of the width of your page (minus cutlines)."/>
+      <Input name="charterCutlines" label="Charter Cutlines Size" dimension={true}
+             description="Set to 0 to disable any cutlines and have the charters next to each other"/>
       <h3>Cards</h3>
       <Input name="shareStyle" label="Share Style"
              description="This lets you choose between two styles for shares. One keeps the token in the center of the card, the other puts the tokens on the let (Simular to All Aboard Games and Deep Thought Games)."/>
+      <Input name="cards.layout" label="Cards Layout"
+             description="Free allows cards to free flow and uses the other options below. Mini euro is for my custom die that cuts mini-euro sized cards and dtgDie uses the standard Deep Thought Games asset die. Either die option overrides the page size as well as the width, height and cutlines option below."/>
+      <Input name="cards.width" label="Card Width" dimension={true} />
+      <Input name="cards.height" label="Card Height" dimension={true} />
+      <Input name="cards.cutlines" label="Card Cutlines Size" dimension={true}
+             description="Set to 0 to disable any cutlines and have the cards next to each other"/>
       <h3>Currency</h3>
       <p>This lets you turn on currency symbols for each item individually. Only works if the game file specificies values as numbers and not strings.</p>
       <Input name="currency.bank" label="Bank" description="Bank total on revenue page"/>
