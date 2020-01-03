@@ -161,6 +161,7 @@ svg {
 .charter--color .charter__hr {
   top: 0;
   height: 1.1875in;
+  border-bottom: 2px solid black;
 }
 
 .charter--color.charter--minor .charter__hr {

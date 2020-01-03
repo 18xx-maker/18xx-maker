@@ -73,7 +73,7 @@ const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, char
           <div className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidthCharters ? " charter--half" : ""}`}>
             <div
               className="charter__hr"
-              style={{ backgroundColor: c(color) }}
+              style={{ backgroundColor: c(charterStyle === "color" ? color : (color === "white" ? "black" : color)) }}
             />
             <div style={{ color: t(c(charterStyle === "color" ? color : "white")),
                           paddingRight: halfWidthCharters ? null : unitsToCss(25 + (65 * tokens.length)) }}
@@ -82,7 +82,7 @@ const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, char
               <div className="charter__logo">
                 <svg viewBox="-37.5 -37.5 75 75">
                   <ColorContext.Provider value="companies">
-                    <CompanyToken outline="white"
+                    <CompanyToken outline={color === "white" ? "black" : "white"}
                                   company={company}
                                   width={37.5} />
                   </ColorContext.Provider>
