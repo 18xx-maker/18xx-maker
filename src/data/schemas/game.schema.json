@@ -25,7 +25,12 @@
         }
       ]
     },
-    "capital": { "type": "number", "minimum": 0 },
+    "capital": {
+      "oneOf": [
+        { "type": "number", "minimum": 0 },
+        { "type": "string" }
+      ]
+    },
     "certLimit": { "$ref": "#/definitions/numberOrSlash" },
     "link": {
       "type": "string",
