@@ -18,7 +18,7 @@ const Nav = () => {
           <NavLink to="/docs/types">Share and Token Types</NavLink>
         </li>
         <li>
-          <NavLink to="/docs/borders">Map Borders</NavLink>
+          <NavLink to="/docs/borders">Map Lines and Borders</NavLink>
         </li>
         <li>
           <NavLink to="/docs/logos">Company Logos</NavLink>
