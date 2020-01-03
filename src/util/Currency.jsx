@@ -12,7 +12,10 @@ export const format = (value, gameName, doCurrencyFormat) => {
   } else if (is(String, value)) {
     return value;
   } else if (doCurrencyFormat) {
-    let game = games[gameName];
+    let game = gameName;
+    if (is(String, gameName)) {
+      game = games[gameName];
+    }
     let currency = game.info.currency || "USD";
 
     if (currency.indexOf("#") >= 0) {

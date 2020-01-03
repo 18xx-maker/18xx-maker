@@ -33,7 +33,10 @@ const atoms = [{
              {values: [{
               "outerBorderColor": "green",
               "value": 120
-             }]}
+             }]},
+             {values: [{value: 1024}]},
+             {values: [{value: "60/60"}]},
+             {values: [{value: "Longer"}]}
             ]
 },{
   group: "Names",
