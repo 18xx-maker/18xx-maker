@@ -74,8 +74,9 @@ const atoms = [{
     {tokens: [{label:"HH", type:"target", colors:["blue", "orange"]}]},
     {tokens: [{label:"Longer", color:"blue"}]},
     {tokens: [{label:"KO", color:"purple"}]},
-    {tokens: [{label:"PRR", color:"green", destination: true}]},
-    {tokens: [{label:"CPR", color:"red", reserved: true}]},
+    {tokens: [{company:"CPR"}]},
+    {tokens: [{company:"PRR", destination: true}]},
+    {tokens: [{company:"C&O", reserved: true}]},
     {tokens: [{logo:"dev/emacs"}]}
   ]
 },{
