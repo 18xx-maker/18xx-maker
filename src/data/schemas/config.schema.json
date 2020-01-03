@@ -103,11 +103,16 @@
           "type": "number",
           "exclusiveMinimum": 0
         },
+        "mapWidth": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
         "gaps": { "type": "boolean" }
       },
       "required": [
         "layout",
         "width",
+        "mapWidth",
         "gaps"
       ],
       "additionalProperties": false
