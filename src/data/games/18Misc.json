@@ -25,22 +25,22 @@
     "Round",
     "Merger",
     {
-      "token": "black"
+      "color": "black"
     },
     {
-      "token": "black"
+      "color": "black"
     },
     {
-      "token": "black"
+      "color": "black"
     },
     {
-      "token": "black"
+      "color": "black"
     },
     {
-      "token": "black"
+      "color": "black"
     },
     {
-      "token": "black"
+      "color": "black"
     },
     {
       "label": "C&P",
@@ -54,15 +54,15 @@
     },
     {
       "label": "coal",
-      "token": "black"
+      "color": "black"
     },
     {
       "label": "coal",
-      "token": "black"
+      "color": "black"
     },
     {
       "label": "coal",
-      "token": "black"
+      "color": "black"
     }
   ],
   "ipo": false,
@@ -115,7 +115,7 @@
     {
       "name": "Boston & Maine",
       "abbrev": "B&M",
-      "token": "blue",
+      "color": "blue",
       "tokens": "four"
     },
     {
@@ -133,7 +133,7 @@
     {
       "name": "Chesapeake & Ohio",
       "abbrev": "C&O",
-      "token": "cyan",
+      "color": "cyan",
       "tokens": "three"
     },
     {
@@ -233,7 +233,7 @@
     {
       "name": "New York, New Haven & Hartford",
       "abbrev": "NYH",
-      "token": "orange",
+      "color": "orange",
       "tokens": "three"
     },
     {
@@ -263,7 +263,7 @@
     {
       "name": "Pennsylvania Railroad",
       "abbrev": "PRR",
-      "token": "red",
+      "color": "red",
       "tokens": "four"
     },
     {
