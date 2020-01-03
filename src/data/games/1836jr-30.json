@@ -7,7 +7,7 @@
     "titleX": 50,
     "titleY": -30,
     "titleSize": 150,
-    "currency": "BEF"
+    "currency": "F#"
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgameexpansion/173574/1836jr",
@@ -17,169 +17,99 @@
     "Round"
   ],
   "ipo": true,
-  "bank": "F6,000",
+  "bank": 6000,
   "players": [
     {
       "number": 2,
       "certLimit": 20,
-      "capital": "F900"
+      "capital": 900
     },
     {
       "number": 3,
       "certLimit": 13,
-      "capital": "F600"
+      "capital": 600
     },
     {
       "number": 4,
       "certLimit": 10,
-      "capital": "F450"
+      "capital": 450
     }
   ],
+  "tokenTypes": {
+    "two": [
+      "Free",
+      40
+    ],
+    "three": [
+      "Free",
+      40,
+      100
+    ],
+    "four": [
+      "Free",
+      40,
+      100,
+      100
+    ]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Chemins de Fer de L'Etat Belge",
       "abbrev": "B",
-      "tokens": [
-        "Free",
-        "F40",
-        "F100",
-        "F100"
-      ],
       "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "Grande Compagnie Du Luxembourg",
       "abbrev": "GCL",
-      "tokens": [
-        "Free",
-        "F40",
-        "F100",
-        "F100"
-      ],
       "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "Chemin de Fer Du Nord",
       "abbrev": "Nord",
-      "tokens": [
-        "Free",
-        "F40",
-        "F100"
-      ],
       "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Noord-Brabantsch-Duitsche Spoorweg-Maatschappij",
       "abbrev": "NBDS",
-      "tokens": [
-        "Free",
-        "F40",
-        "F100"
-      ],
       "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Hollandsche IJzeren Spoorweg Maatschappij",
       "abbrev": "HSM",
-      "tokens": [
-        "Free",
-        "F40"
-      ],
       "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     },
     {
       "name": "Noord-Friesche Locaal",
       "abbrev": "NFL",
-      "tokens": [
-        "Free",
-        "F40"
-      ],
       "color": "lime",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     }
   ],
   "trains": [
     {
       "name": "2",
       "quantity": 5,
-      "price": "F80",
+      "price": 80,
       "color": "yellow",
       "info": [
         {
@@ -191,7 +121,7 @@
     {
       "name": "3",
       "quantity": 4,
-      "price": "F180",
+      "price": 180,
       "color": "green",
       "info": [
         {
@@ -203,7 +133,7 @@
     {
       "name": "4",
       "quantity": 3,
-      "price": "F300",
+      "price": 300,
       "color": "green",
       "info": [
         {
@@ -215,7 +145,7 @@
     {
       "name": "5",
       "quantity": 2,
-      "price": "F450",
+      "price": 450,
       "color": "brown",
       "info": [
         {
@@ -227,7 +157,7 @@
     {
       "name": "6",
       "quantity": 2,
-      "price": "F630",
+      "price": 630,
       "color": "brown",
       "info": [
         {
@@ -239,7 +169,7 @@
     {
       "name": "D",
       "quantity": 5,
-      "price": "F1100",
+      "price": 1100,
       "color": "brown",
       "description": "Cost F800 when trading in a 4T, 5T or 6T",
       "info": [
@@ -253,38 +183,38 @@
   "privates": [
     {
       "name": "Amsterdam Canal Company - ACC",
-      "price": "F20",
-      "revenue": "F5",
+      "price": 20,
+      "revenue": 5,
       "description": "Blocks Hex D6."
     },
     {
       "name": "Enkhuizen-Stavoren Ferry - E-SF",
-      "price": "F40",
-      "revenue": "F10",
+      "price": 40,
+      "revenue": 10,
       "description": "Company may place free tile on B8."
     },
     {
       "name": "Charbonnages du Hainaut - CdH",
-      "price": "F70",
-      "revenue": "F15",
+      "price": 70,
+      "revenue": 15,
       "description": "Blocks Hex J8. Company may place tile and token on Hex J8 for F60."
     },
     {
       "name": "Grand Central Belge - GCB",
-      "price": "F110",
-      "revenue": "F20",
+      "price": 110,
+      "revenue": 20,
       "description": "Blocks Hex G7, G9 and H10. Owner may exchange for a share of the Etat Belge (this closes the private company)."
     },
     {
       "name": "Chemins de Fer Luxembourgeois - CFL",
-      "price": "F160",
-      "revenue": "F25",
+      "price": 160,
+      "revenue": 25,
       "description": "Blocks Hexes K11 & J12. Player gets a 10% certificate for GCL."
     },
     {
       "name": "Chemin de Fer de Lille Á Valenciennes - CFLV",
-      "price": "F220",
-      "revenue": "F30",
+      "price": 220,
+      "revenue": 30,
       "description": "Blocks Hexes I3 & J4. Includes president's certificate for the Chemin de Fer du Nord. Closes on first train purchase."
     }
   ],
@@ -959,7 +889,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F80",
+              "cost": 80,
               "percent": 0.75
             }
           ],
@@ -1069,7 +999,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.7
             }
@@ -1091,13 +1021,13 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40"
+              "cost": 40
             }
           ],
           "hexes": [
             "D8",
             "D10",
-            "F8",
+            8,
             "G9",
             "G11"
           ]
@@ -1167,7 +1097,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.6
             }
@@ -1215,7 +1145,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "percent": 0.6
             }
           ],
@@ -1230,7 +1160,7 @@
             }
           ],
           "hexes": [
-            "F4"
+            4
           ]
         },
         {
@@ -1238,7 +1168,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F80"
+              "cost": 80
             }
           ],
           "borders": [
@@ -1248,7 +1178,7 @@
             }
           ],
           "hexes": [
-            "F6"
+            6
           ]
         },
         {
@@ -1261,7 +1191,7 @@
             }
           ],
           "hexes": [
-            "F10"
+            10
           ]
         },
         {
@@ -1380,7 +1310,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.6
             }
@@ -1469,7 +1399,7 @@
           "terrain": [
             {
               "type": "mountain",
-              "cost": "F60"
+              "cost": 60
             }
           ],
           "hexes": [
@@ -1496,7 +1426,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.6
             }
@@ -1552,7 +1482,7 @@
           "terrain": [
             {
               "type": "mountain",
-              "cost": "F60",
+              "cost": 60,
               "angle": 180,
               "percent": 0.6
             }
@@ -1711,7 +1641,7 @@
           "terrain": [
             {
               "type": "mountain",
-              "cost": "F60",
+              "cost": 60,
               "percent": 0.75
             }
           ],
@@ -1863,7 +1793,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.7
             }
@@ -1933,7 +1863,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.6
             }
@@ -2027,7 +1957,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.6
             }
@@ -2136,7 +2066,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.6
             }

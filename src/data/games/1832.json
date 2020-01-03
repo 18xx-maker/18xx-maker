@@ -26,334 +26,140 @@
     "KW"
   ],
   "ipo": true,
-  "bank": "$12,000",
+  "bank": 12000,
   "players": [
     {
       "number": 2,
       "certLimit": 28,
-      "capital": "$1050"
+      "capital": 1050
     },
     {
       "number": 3,
       "certLimit": 20,
-      "capital": "$700"
+      "capital": 700
     },
     {
       "number": 4,
       "certLimit": 16,
-      "capital": "$525"
+      "capital": 525
     },
     {
       "number": 5,
       "certLimit": 13,
-      "capital": "$420"
+      "capital": 420
     },
     {
       "number": 6,
       "certLimit": 11,
-      "capital": "$350"
+      "capital": 350
     },
     {
       "number": 7,
       "certLimit": 9,
-      "capital": "$300"
+      "capital": 300
     }
   ],
+  "tokenTypes": {
+    "two": [
+      "Free",
+      40
+    ],
+    "default": [
+      "Free",
+      40,
+      100
+    ]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 4
+      },
+      {
+        "quantity": 8,
+        "percent": "10/5",
+        "shares": 1
+      },
+      {
+        "quantity": 8,
+        "percent": 5,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Atlantic Coast Line Railroad",
       "abbrev": "ACL",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "pink",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 4
-        },
-        {
-          "quantity": 16,
-          "percent": "10/5",
-          "shares": 1
-        }
-      ]
+      "color": "pink"
     },
     {
       "name": "Atlanta & West Point Railroad",
       "abbrev": "A&WP",
-      "tokens": [
-        "Free",
-        "$40"
-      ],
       "color": "lavender",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": "20/10",
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 4
-        },
-        {
-          "quantity": 16,
-          "percent": "10/5",
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     },
     {
       "name": "Seaboard Air Line Railway",
       "abbrev": "SALR",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": "20/10",
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 4
-        },
-        {
-          "quantity": 16,
-          "percent": "10/5",
-          "shares": 1
-        }
-      ]
+      "color": "orange"
     },
     {
       "name": "Norfolk & Western Railway",
       "abbrev": "N&W",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": "20/10",
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 4
-        },
-        {
-          "quantity": 16,
-          "percent": "10/5",
-          "shares": 1
-        }
-      ]
+      "color": "black"
     },
     {
       "name": "Central of Georgia Railway",
       "abbrev": "COG",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "turquoise",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": "20/10",
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 4
-        },
-        {
-          "quantity": 16,
-          "percent": "10/5",
-          "shares": 1
-        }
-      ]
+      "color": "turquoise"
     },
     {
       "name": "Louisville & Nashville Railroad",
       "abbrev": "L&N",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": "20/10",
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 4
-        },
-        {
-          "quantity": 16,
-          "percent": "10/5",
-          "shares": 1
-        }
-      ]
+      "color": "blue"
     },
     {
       "name": "Georgia Railroad",
       "abbrev": "GRR",
-      "tokens": [
-        "Free",
-        "$40"
-      ],
       "color": "cyan",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": "20/10",
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 4
-        },
-        {
-          "quantity": 16,
-          "percent": "10/5",
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     },
     {
       "name": "Gulf, Mobile & Ohio Railroad",
       "abbrev": "GMO",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": "20/10",
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 4
-        },
-        {
-          "quantity": 16,
-          "percent": "10/5",
-          "shares": 1
-        }
-      ]
+      "color": "red"
     },
     {
       "name": "Southern Railway",
       "abbrev": "SOU",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": "20/10",
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 4
-        },
-        {
-          "quantity": 16,
-          "percent": "10/5",
-          "shares": 1
-        }
-      ]
+      "color": "green"
     },
     {
       "name": "Florida East Coast Railroad",
       "abbrev": "FECR",
       "tokens": [
         "Free",
-        "$40",
+        40,
         "$100 (KW)"
       ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": "20/10",
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 4
-        },
-        {
-          "quantity": 16,
-          "percent": "10/5",
-          "shares": 1
-        }
-      ]
+      "color": "yellow"
     }
   ],
   "trains": [
     {
       "name": "2",
       "quantity": 7,
-      "price": "$80",
+      "price": 80,
       "color": "yellow",
       "info": [
         {
@@ -365,7 +171,7 @@
     {
       "name": "3",
       "quantity": 6,
-      "price": "$180",
+      "price": 180,
       "color": "green",
       "info": [
         {
@@ -377,7 +183,7 @@
     {
       "name": "4",
       "quantity": 4,
-      "price": "$300",
+      "price": 300,
       "color": "green",
       "info": [
         {
@@ -389,7 +195,7 @@
     {
       "name": "5",
       "quantity": 3,
-      "price": "$450",
+      "price": 450,
       "color": "brown",
       "info": [
         {
@@ -401,7 +207,7 @@
     {
       "name": "6",
       "quantity": 3,
-      "price": "$630",
+      "price": 630,
       "color": "brown",
       "info": [
         {
@@ -413,7 +219,7 @@
     {
       "name": "8",
       "quantity": 3,
-      "price": "$800",
+      "price": 800,
       "color": "gray",
       "info": [
         {
@@ -425,7 +231,7 @@
     {
       "name": "10",
       "quantity": 2,
-      "price": "$950",
+      "price": 950,
       "color": "gray",
       "info": [
         {
@@ -437,7 +243,7 @@
     {
       "name": "12",
       "quantity": 6,
-      "price": "$1100",
+      "price": 1100,
       "color": "gray",
       "info": [
         {
@@ -450,44 +256,44 @@
   "privates": [
     {
       "name": "P1: Carolina Stage Coach",
-      "price": "$20",
-      "revenue": "$5",
+      "price": 20,
+      "revenue": 5,
       "description": ""
     },
     {
       "name": "P2: Cotton Warehouse",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
       "description": "This company has a $10 token which may be placed in any non-coastal city (Atlantic or Gulf Coast) as an extra token lay during the token placement step of an owning public company's operating round."
     },
     {
       "name": "P3: Atlantic Shipping",
-      "price": "$50",
-      "revenue": "$10",
+      "price": 50,
+      "revenue": 10,
       "description": "This company has a Port token which may be placed on any city on the coasts an extra token lay during the token placement step of an owning public company's operating round. All eligible cities are marked with an anchor symbol. This token increases the value of the selected city by $20 for the owning company and by $10 for all other companies."
     },
     {
       "name": "P4: London Investment",
-      "price": "$70",
-      "revenue": "$10",
+      "price": 70,
+      "revenue": 10,
       "description": "This company represents those shrewd investors in London. They have hired you to invest their money in the new Southern railways. They will purchase a share in your choice of any newly started company. You get the share. After the company pays its first dividend, the London Investment Company is closed, as they realize they have paid you for nothing and you spent the money for yourself."
     },
     {
       "name": "P5: West Virginia Coalfields",
-      "price": "$80",
-      "revenue": "$15",
+      "price": 80,
+      "revenue": 15,
       "description": "This private company gives the owning company a WVCF token for free. When other companies connect to the coal fields, they may buy a WVCF token (if available) during their operating round for $80 ($40 goes to the company owning the WVCF private company)."
     },
     {
       "name": "P6: Southern Bank (var)",
-      "price": "$100",
+      "price": 100,
       "revenue": "$10/10%",
       "description": "You may loan money to your company by taking out a mortgage on a company asset. The mortgage value is from half to double the value of the asset. At the start of each operating round, the company will pay you 10% interest (10% of the value of the mortgaged asset). If the company does not have enough money to pay the interest, it pays nothing. The company will repay the mortgage for half to full value of the asset. "
     },
     {
       "name": "P7: Central Railroad & Canal",
-      "price": "$200",
-      "revenue": "$30",
+      "price": 200,
+      "revenue": 30,
       "description": "Comes with the president's share of the Central of Georgia Railway. The player buying this private company must immediately set the par value of the CoG. "
     }
   ],
@@ -1483,7 +1289,7 @@
       {
         "color": "plain",
         "water": {
-          "cost": "$40"
+          "cost": 40
         },
         "hexes": [
           "B4"
@@ -1504,7 +1310,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$60"
+          "cost": 60
         },
         "hexes": [
           "B10"
@@ -1513,7 +1319,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$60"
+          "cost": 60
         },
         "hexes": [
           "B12"
@@ -1568,7 +1374,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$70"
+          "cost": 70
         },
         "hexes": [
           "B16"
@@ -1605,12 +1411,7 @@
           {
             "angle": 60,
             "percent": 0.6,
-            "companies": [
-              {
-                "label": "N&W",
-                "color": "black"
-              }
-            ]
+            "companies": ["N&W"]
           }
         ],
         "track": [
@@ -1656,7 +1457,7 @@
         "water": {
           "angle": 0,
           "percent": 0.6,
-          "cost": "$40"
+          "cost": 40
         },
         "centerTowns": [
           {
@@ -1682,12 +1483,7 @@
             "name": {
               "name": "Nashville"
             },
-            "companies": [
-              {
-                "label": "L&N",
-                "color": "blue"
-              }
-            ]
+            "companies": ["L&N"]
           }
         ],
         "hexes": [
@@ -1697,7 +1493,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$60"
+          "cost": 60
         },
         "hexes": [
           "C9"
@@ -1708,19 +1504,14 @@
         "water": {
           "angle": 0,
           "percent": 0.7,
-          "cost": "$60"
+          "cost": 60
         },
         "cities": [
           {
             "name": {
               "name": "Knoxville"
             },
-            "companies": [
-              {
-                "label": "SOU",
-                "color": "green"
-              }
-            ]
+            "companies": ["SOU"]
           }
         ],
         "hexes": [
@@ -1730,7 +1521,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$80"
+          "cost": 80
         },
         "hexes": [
           "C13"
@@ -1739,7 +1530,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$70"
+          "cost": 70
         },
         "hexes": [
           "C15"
@@ -1799,7 +1590,7 @@
           {
             "type": "water",
             "percent": 0.667,
-            "cost": "$40"
+            "cost": 40
           }
         ],
         "centerTowns": [
@@ -1818,7 +1609,7 @@
         "mountain": {
           "angle": 0,
           "percent": 0,
-          "cost": "$40"
+          "cost": 40
         },
         "hexes": [
           "D6"
@@ -1830,7 +1621,7 @@
           {
             "type": "water",
             "percent": 0.667,
-            "cost": "$40"
+            "cost": 40
           }
         ],
         "mediumCities": [
@@ -1849,7 +1640,7 @@
         "mountain": {
           "angle": 0,
           "percent": 0,
-          "cost": "$60"
+          "cost": 60
         },
         "hexes": [
           "D10"
@@ -1860,7 +1651,7 @@
         "mountain": {
           "angle": 0,
           "percent": 0,
-          "cost": "$80"
+          "cost": 80
         },
         "hexes": [
           "D12"
@@ -1898,12 +1689,7 @@
             "name": {
               "name": "Raleigh"
             },
-            "companies": [
-              {
-                "label": "SALR",
-                "color": "orange"
-              }
-            ]
+            "companies": ["SALR"]
           }
         ],
         "hexes": [
@@ -1933,7 +1719,7 @@
         "mountain": {
           "angle": 0,
           "percent": 0,
-          "cost": "$40"
+          "cost": 40
         },
         "hexes": [
           "E7"
@@ -1944,7 +1730,7 @@
         "mountain": {
           "angle": 0,
           "percent": 0,
-          "cost": "$40"
+          "cost": 40
         },
         "hexes": [
           "E9"
@@ -1955,7 +1741,7 @@
         "mountain": {
           "angle": 0,
           "percent": 0,
-          "cost": "$60"
+          "cost": 60
         },
         "hexes": [
           "E11"
@@ -1966,7 +1752,7 @@
         "water": {
           "angle": 0,
           "percent": 0,
-          "cost": "$40"
+          "cost": 40
         },
         "hexes": [
           "E13"
@@ -2022,7 +1808,7 @@
         "water": {
           "angle": 0,
           "percent": 0,
-          "cost": "$80"
+          "cost": 80
         },
         "hexes": [
           "E23"
@@ -2058,7 +1844,7 @@
         "mountain": {
           "angle": 0,
           "percent": 0,
-          "cost": "$40"
+          "cost": 40
         },
         "hexes": [
           "F8"
@@ -2099,29 +1885,16 @@
             "name": {
               "name": "Atlanta"
             },
-            "companies": [
-              {
-                "label": "A&WP",
-                "color": "lavender"
-              }
-            ]
+            "companies": ["A&WP"]
           },
           {
             "angle": 150,
-            "percent": 0.5,
-            "companies": [
-              {}
-            ]
+            "percent": 0.5
           },
           {
             "angle": 270,
             "percent": 0.5,
-            "companies": [
-              {
-                "label": "GRR",
-                "color": "cyan"
-              }
-            ]
+            "companies": ["GRR"]
           }
         ],
         "hexes": [
@@ -2140,7 +1913,7 @@
           {
             "type": "water",
             "percent": 0.667,
-            "cost": "$40"
+            "cost": 40
           }
         ],
         "mediumCities": [
@@ -2171,7 +1944,7 @@
         "water": {
           "angle": 0,
           "percent": 0,
-          "cost": "$80"
+          "cost": 80
         },
         "hexes": [
           "F20"
@@ -2239,7 +2012,7 @@
         "water": {
           "angle": 0,
           "percent": 0,
-          "cost": "$60"
+          "cost": 60
         },
         "hexes": [
           "G15"
@@ -2251,7 +2024,7 @@
           {
             "type": "water",
             "percent": 0.667,
-            "cost": "$60"
+            "cost": 60
           }
         ],
         "icons": [
@@ -2266,12 +2039,7 @@
             "name": {
               "name": "Charleston"
             },
-            "companies": [
-              {
-                "label": "ACL",
-                "color": "pink"
-              }
-            ]
+            "companies": ["ACL"]
           }
         ],
         "hexes": [
@@ -2283,7 +2051,7 @@
         "water": {
           "angle": 0,
           "percent": 0,
-          "cost": "$80"
+          "cost": 80
         },
         "hexes": [
           "G19"
@@ -2351,7 +2119,7 @@
           {
             "type": "water",
             "percent": 0.667,
-            "cost": "$60"
+            "cost": 60
           }
         ],
         "icons": [
@@ -2366,12 +2134,7 @@
             "name": {
               "name": "Savannah"
             },
-            "companies": [
-              {
-                "label": "COG",
-                "color": "turqoise"
-              }
-            ]
+            "companies": ["COG"]
           }
         ],
         "hexes": [
@@ -2448,7 +2211,7 @@
         "water": {
           "angle": 0,
           "percent": 0,
-          "cost": "$60"
+          "cost": 60
         },
         "hexes": [
           "I15"
@@ -2458,12 +2221,7 @@
         "color": "gray",
         "cities": [
           {
-            "companies": [
-              {
-                "label": "GMO",
-                "color": "red"
-              }
-            ],
+            "companies": ["GMO"],
             "name": {
               "reverse": true,
               "name": "New Orleans"
@@ -2528,7 +2286,7 @@
           {
             "type": "water",
             "percent": 0.667,
-            "cost": "$80"
+            "cost": 80
           }
         ],
         "centerTowns": [
@@ -2547,7 +2305,7 @@
         "water": {
           "angle": 0,
           "percent": 0,
-          "cost": "$80"
+          "cost": 80
         },
         "hexes": [
           "J6"
@@ -2606,12 +2364,7 @@
             "name": {
               "name": "Jacksonville"
             },
-            "companies": [
-              {
-                "label": "FECR",
-                "color": "yellow"
-              }
-            ]
+            "companies": ["FECR"]
           }
         ],
         "hexes": [
@@ -2623,7 +2376,7 @@
         "water": {
           "angle": 0,
           "percent": 0,
-          "cost": "$80"
+          "cost": 80
         },
         "hexes": [
           "K9"
@@ -2634,7 +2387,7 @@
         "water": {
           "angle": 0,
           "percent": 0,
-          "cost": "$80"
+          "cost": 80
         },
         "hexes": [
           "K11"
@@ -2651,7 +2404,7 @@
         "water": {
           "angle": 0,
           "percent": 0,
-          "cost": "$40"
+          "cost": 40
         },
         "hexes": [
           "K15"
@@ -2662,7 +2415,7 @@
         "water": {
           "angle": 0,
           "percent": 0,
-          "cost": "$80"
+          "cost": 80
         },
         "hexes": [
           "L12"
@@ -2686,7 +2439,7 @@
         "water": {
           "angle": 0,
           "percent": 0,
-          "cost": "$40"
+          "cost": 40
         },
         "hexes": [
           "L16"
@@ -2704,7 +2457,7 @@
         "water": {
           "angle": 0,
           "percent": 0.75,
-          "cost": "$40"
+          "cost": 40
         },
         "cities": [
           {
@@ -2758,7 +2511,7 @@
         "water": {
           "angle": 0,
           "percent": 0,
-          "cost": "$80"
+          "cost": 80
         },
         "hexes": [
           "N12"
@@ -2769,7 +2522,7 @@
         "water": {
           "angle": 0,
           "percent": 0,
-          "cost": "$60"
+          "cost": 60
         },
         "hexes": [
           "N14"
@@ -2779,16 +2532,11 @@
         "color": "offboard",
         "cities": [
           {
-          	"name": {
+            "name": {
               "name": "Key West",
               "offset": 75
             },
-            "companies": [
-              {
-                "label": "FECR",
-                "color": "black"
-              }
-            ]
+            "companies": ["FECR"]
           }
         ],
         "offBoardRevenue": {

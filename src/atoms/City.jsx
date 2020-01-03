@@ -4,12 +4,10 @@ import Color from "../data/Color";
 
 import Name from "./Name";
 
-import find from "ramda/src/find";
 import is from "ramda/src/is";
-import propEq from "ramda/src/propEq";
-import Token from "../Token";
 
-import Config from "../data/Config";
+import GameMapCompanyToken from "../tokens/GameMapCompanyToken";
+
 import ColorContext from "../context/ColorContext";
 import RotateContext from "../context/RotateContext";
 
@@ -24,53 +22,24 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
        companies[num].color);
 
   let companyLabel = num => {
+    // Do we have companies defined for this city space?
     if(companies && companies[num]) {
-      if(is(Object, companies[num])) {
-        return (
-          <RotateContext.Consumer>
-            {rotateContext => (
-              <g transform={`rotate(${-(rotateContext || 0) - (rotation || 0)})`}>
-                <ColorContext.Provider value="companies">
-                  <Config>
-                    {(config, game) => {
-                      if(config.plainMapHomes) {
-                        return <Token label={companies[num].label} token="white"/>;
-                      } else {
-                        return <Token label={companies[num].label} token={companies[num].token || companies[num].color}/>;
-                      }
-                    }}
-                  </Config>
-                </ColorContext.Provider>
-              </g>
-            )}
-          </RotateContext.Consumer>
-        );
-      } else {
-        return (
-          <RotateContext.Consumer>
-            {rotateContext => (
-              <g transform={`rotate(${-(rotateContext || 0) - (rotation || 0)})`}>
-                <ColorContext.Provider value="companies">
-                  <Config>
-                    {(config, game) => {
-                      if(config.plainMapHomes) {
-                        return <Token label={companies[num]} token="white"/>;
-                      } else {
-                        let company = find(propEq("abbrev", companies[num]), game.companies);
-                        if(company) {
-                          return <Token label={company.abbrev} token={company.color || company.token}/>;
-                        } else {
-                          return null;
-                        }
-                      }
-                    }}
-                  </Config>
-                </ColorContext.Provider>
-              </g>
-            )}
-          </RotateContext.Consumer>
-        );
-      }
+
+      let companyToken = is(Object, companies[num]) ?
+          <GameMapCompanyToken {...companies[num]} abbrev={companies[num].abbrev || companies[num].label} /> :
+          <GameMapCompanyToken abbrev={companies[num]} />;
+
+      return (
+        <RotateContext.Consumer>
+        {rotateContext => (
+          <g transform={`rotate(${-(rotateContext || 0) - (rotation || 0)})`}>
+            <ColorContext.Provider value="companies">
+              {companyToken}
+            </ColorContext.Provider>
+          </g>
+        )}
+        </RotateContext.Consumer>
+      );
     }
 
     return null;

@@ -240,6 +240,8 @@ export const getMapData = (game, coords, hexWidth, variation) => {
   let totalHeight = getTotalHeight(maxY, hexWidth, game.info.extraTotalHeight, coordSpace);
   let printWidth = `${(50 + totalWidth) / 100.0}in`;
   let printHeight = `${(50 + totalHeight) / 100.0}in`;
+  let humanWidth = `${Math.ceil((50 + totalWidth) / 100.0)}in`;
+  let humanHeight = `${Math.ceil((50 + totalHeight) / 100.0)}in`;
 
   let horizontal = game.info.orientation === "horizontal";
 
@@ -284,6 +286,10 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     // Print height and width in CSS units
     printWidth: horizontal ? printHeight : printWidth,
     printHeight: horizontal ? printWidth : printHeight,
+
+    // Human readable width and height
+    humanWidth: horizontal ? humanHeight : humanWidth,
+    humanHeight: horizontal ? humanWidth : humanHeight,
 
     // Function to computer coordinates of a hex
     hexX: horizontal ? hexY : hexX,

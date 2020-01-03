@@ -1,5 +1,5 @@
 import React from "react";
-import Token from "./Token";
+import Token from "./tokens/Token";
 
 import addIndex from "ramda/src/addIndex";
 import map from "ramda/src/map";
@@ -18,7 +18,7 @@ const Rounds = ({ rounds, horizontal }) => {
         <svg viewBox="-25 -25 50 50" key={round.name}>
           <Token
             label={round.name}
-            token={round.color}
+            color={round.color}
             labelColor="black"
           />
         </svg>

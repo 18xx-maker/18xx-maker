@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
+import { compileCompanies, overrideCompanies } from "./util";
 import Charter from "./Charter";
 import games from "./data/games";
 import * as R from "ramda";
@@ -18,7 +19,7 @@ import repeat from "ramda/src/repeat";
 const isMinor = prop("minor");
 const isMajor = compose(not, prop("minor"));
 
-const Charters = ({halfWidthCharters}) => {
+const Charters = ({halfWidthCharters, override, selection}) => {
   let params = useParams();
   let game = games[params.game];
 
@@ -26,7 +27,9 @@ const Charters = ({halfWidthCharters}) => {
     return <Redirect to={`/${params.game}/background`} />;
   }
 
-  let majors = filter(isMajor, game.companies);
+  let gameCompanies = overrideCompanies(compileCompanies(game), override, selection);
+
+  let majors = filter(isMajor, gameCompanies);
 
   let extra = majors.length % (halfWidthCharters ? 4 : 2);
   let padding = 0;
@@ -34,9 +37,9 @@ const Charters = ({halfWidthCharters}) => {
     padding = (halfWidthCharters ? 4 : 2) - extra;
   }
 
-  let companies = concat(filter(isMajor, game.companies),
+  let companies = concat(filter(isMajor, gameCompanies),
                          concat(repeat(null, padding),
-                                filter(isMinor, game.companies)));
+                                filter(isMinor, gameCompanies)));
 
   return (
     <GameContext.Provider value={params.game}>
@@ -55,11 +58,13 @@ const Charters = ({halfWidthCharters}) => {
               key={company.abbrev}
               name={company.name}
               abbrev={company.abbrev}
+              logo={company.logo}
               token={company.token || company.color}
               tokens={company.tokens}
               phases={game.phases}
               turns={game.turns}
               minor={!!company.minor}
+              company={company}
             /> : <div key="spacer" className="cutlines"><div className={`charter${halfWidthCharters ? " charter--half" : ""}`}></div></div>
         ), companies)}
         <PageSetup landscape={false}/>
@@ -69,7 +74,9 @@ const Charters = ({halfWidthCharters}) => {
 };
 
 const mapStateToProps = state => ({
-  halfWidthCharters: state.config.halfWidthCharters
+  halfWidthCharters: state.config.halfWidthCharters,
+  override: state.config.overrideCompanies,
+  selection: state.config.overrideSelection
 });
 
 export default connect(mapStateToProps)(Charters);

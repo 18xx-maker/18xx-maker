@@ -7,7 +7,7 @@
     "titleRotate": -90,
     "titleX": 350,
     "titleY": 1400,
-    "currency": "MXN"
+    "currency": "$#"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/18485/18mex",
@@ -17,76 +17,87 @@
     "Round"
   ],
   "ipo": true,
-  "bank": "$9,000",
+  "bank": 9000,
   "players": [
     {
       "number": 3,
       "certLimit": 19,
-      "capital": "$625"
+      "capital": 625
     },
     {
       "number": 4,
       "certLimit": 14,
-      "capital": "$500"
+      "capital": 500
     },
     {
       "number": 5,
       "certLimit": 11,
-      "capital": "$450"
+      "capital": 450
     }
   ],
+  "tokenTypes": {
+    "minor": [],
+    "four": [
+      "Free",
+      40,
+      60,
+      80
+    ],
+    "three": [
+      "Free",
+      40,
+      60
+    ],
+    "two": [
+      "Free",
+      40
+    ]
+  },
+  "shareTypes": {
+    "minor": [],
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Interoceanic Railroad",
       "abbrev": "A",
-      "tokens": [
-      ],
       "color": "green",
       "minor": true
     },
     {
       "name": "Sonora-Baja Railway",
       "abbrev": "B",
-      "tokens": [
-      ],
       "color": "green",
       "minor": true
     },
     {
       "name": "Southeastern Railway",
       "abbrev": "C",
-      "tokens": [
-      ],
       "color": "purple",
       "minor": true
     },
     {
       "name": "Chihuahua Pacific Railway",
       "abbrev": "CHI",
-      "tokens": [
-        "Free",
-        "$40",
-        "$60",
-        "$80"
-      ],
       "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "National Railways of Mexico",
       "abbrev": "NdM",
+      "color": "green",
       "tokens": [
         "Free",
         "$40",
@@ -95,7 +106,6 @@
         "($80)",
         "($80)"
       ],
-      "color": "green",
       "shares": [
         {
           "quantity": 1,
@@ -125,125 +135,38 @@
     {
       "name": "Mexican Central Railway",
       "abbrev": "MC",
-      "tokens": [
-        "Free",
-        "$40"
-      ],
       "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     },
     {
       "name": "Pacific Railroad",
       "abbrev": "PAC",
-      "tokens": [
-        "Free",
-        "$40",
-        "$60",
-        "$80"
-      ],
       "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "Texas-Mexican Railway",
       "abbrev": "TM",
-      "tokens": [
-        "Free",
-        "$40"
-      ],
       "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     },
     {
       "name": "Mexican Railway",
       "abbrev": "MEX",
-      "tokens": [
-        "Free",
-        "$40",
-        "$60"
-      ],
       "color": "gray",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Southern Pacific Railroad of Mexico",
       "abbrev": "SPM",
-      "tokens": [
-        "Free",
-        "$40",
-        "$60"
-      ],
       "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "United Railways of Yucatan",
       "abbrev": "UdY",
-      "tokens": [
-        "Free",
-        "$40"
-      ],
       "color": "purple",
+      "tokens": "two",
       "shares": [
         {
           "quantity": 1,
@@ -342,41 +265,41 @@
   "privates": [
     {
       "name": "Mexico City-Acapulco Railroad",
-      "price": "$20",
-      "revenue": "$5",
+      "price": 20,
+      "revenue": 5,
       "description": ""
     },
     {
       "name": "Kansas City, Mexico, & Orient Railroad",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
       "description": "Owning company may place the Copper Canyan tile in E6 for $60 unless that hex is already built."
     },
     {
       "name": "Interoceanic Railroad",
-      "price": "$50",
+      "price": 50,
       "description": "Minor company. Begins in Tampico (L13). Once closed owner receives a 5% share in NdM."
     },
     {
       "name": "Sonora-Baja California Railway",
-      "price": "$50",
+      "price": 50,
       "description": "Minor company. Begins in Mazatlán (F11). Once closed owner receives a 5% share in NdM."
     },
     {
       "name": "Southeastern Railway",
-      "price": "$50",
+      "price": 50,
       "description": "Minor company. Begins in Oaxaca (L19). Once closed owner receives a 10% share in UdY."
     },
     {
       "name": "Mexican International Railroad",
-      "price": "$100",
-      "revenue": "$20",
+      "price": 100,
+      "revenue": 20,
       "description": "Comes with a 10% share of the Chihuahua Pacific Railway (CHI)."
     },
     {
       "name": "Mexican National Railroad",
-      "price": "$140",
-      "revenue": "$20",
+      "price": 140,
+      "revenue": 20,
       "description": "Comes with President's Certificate of NdM. Owner must immediately set NdM's par price. Closes when NdM buys a train. May not be sold to a company."
     },
     {
@@ -393,24 +316,44 @@
     {
       "phase": "2",
       "train": "2",
-      "limit": "-/3/1",
-      "number": "6",
+      "limit": 1,
+      "number": 6,
       "tiles": "yellow",
       "notes": "Buy only one train from bank.",
-      "price": "$100"
+      "price": 100,
+      "minor": true
     },
     {
       "phase": "3",
       "train": "3",
-      "limit": "-/3/1",
+      "limit": 1,
+      "number": 6,
+      "tiles": "green",
+      "notes": "Private companies may be purchased.",
+      "price": 180,
+      "minor": true
+    },
+    {
+      "phase": "2",
+      "train": "2",
+      "limit": "-/3",
+      "number": "6",
+      "tiles": "yellow",
+      "notes": "Buy only one train from bank.",
+      "price": 100
+    },
+    {
+      "phase": "3",
+      "train": "3",
+      "limit": "-/3",
       "number": "6",
       "tiles": "green",
       "notes": "Private companies may be purchased.",
-      "price": "$180"
+      "price": 180
     },
     {
       "phase": "3.5",
-      "limit": "4/3/-",
+      "limit": "4/3",
       "tiles": "green",
       "notes": "When five 3Ts have been sold. Minor companies are closed. NdM stock available."
     },
@@ -418,33 +361,33 @@
       "phase": "4",
       "train": "4",
       "rust": "2",
-      "limit": "3/2/-",
+      "limit": "3/2",
       "number": "3",
       "tiles": "green",
       "notes": "May buy multiple trains.",
-      "price": "$300"
+      "price": 300
     },
     {
       "phase": "5",
       "train": "5",
-      "limit": "3/2/-",
+      "limit": "3/2",
       "number": "2",
       "tiles": "brown",
       "notes": "Private companies are closed. NdM merges (Pacific Railroad and Texas-Mexican Railway are not eligible to merge).",
-      "price": "$450"
+      "price": 450
     },
     {
       "phase": "6",
       "train": "6",
-      "limit": "3/2/-",
+      "limit": "3/2",
       "number": "2",
       "rust": "3",
       "tiles": "brown",
-      "price": "$600"
+      "price": 600
     },
     {
       "phase": "6.5",
-      "limit": "3/2/-",
+      "limit": "3/2",
       "tiles": "brown",
       "rust": "4-O",
       "notes": "When both 6Ts are sold. 4Ts become obsolete."
@@ -452,10 +395,10 @@
     {
       "phase": "4D",
       "train": "4D",
-      "limit": "3/2/-",
+      "limit": "3/2",
       "number": "7",
       "tiles": "gray",
-      "price": "$700",
+      "price": 700,
       "notes": "The gray tile becomes available."
     }
   ],

@@ -56,53 +56,53 @@
     { "label": "+L.160", "token": "mountain" }
   ],
   "ipo": false,
-  "bank": "L.7,760",
+  "bank": 7760,
   "players": [
     {
       "number": 3,
       "certLimit": 12,
-      "capital": "L.500"
+      "capital": 500
     },
     {
       "number": 4,
       "certLimit": "9/11",
-      "capital": "L.375"
+      "capital": 375
     },
     {
       "number": 5,
       "certLimit": 9,
-      "capital": "L.300"
+      "capital": 300
     }
   ],
   "privates": [
     {
       "name": "Società Corriere Etnee",
-      "price": "L.20",
-      "revenue": "L.5",
+      "price": 20,
+      "revenue": 5,
       "description": "A Corporation cannot build track in the Acireale hex until this Company is either eliminated or bought by any Corporation."
     },
     {
       "name": "Studio di Ingegneria Giuseppe Incorpora",
-      "price": "L.45",
-      "revenue": "L.10",
+      "price": 45,
+      "revenue": 10,
       "description": "The owning Corporation can lay or upgrade standard gauge track at half cost on Mountain, Hill or Rough hexes. Narrow gauge track is still at normal cost."
     },
     {
       "name": "Compagnia Navale Mediterranea",
-      "price": "L.75",
-      "revenue": "L.15",
+      "price": 75,
+      "revenue": 15,
       "description": "The owning Corporation can place the +L. 20 token on any port. This action closes the Company but the Corporation adds L. 20 to the revenue of the port until the end of the game."
     },
     {
       "name": "Società Marittima Siciliana",
-      "price": "L.110",
-      "revenue": "L.20",
+      "price": 110,
+      "revenue": 20,
       "description": "The owning Corporation can place a tile and a token on a coastal city, even if that city is not connected to one of its railheads, subject to all other limitations described on rule 4.2. This action closes the Company, and is made instead of the regular Track Laying and Token Laying Steps."
     },
     {
       "name": "Reale Società d'Affari",
-      "price": "L.150",
-      "revenue": "L.25",
+      "price": 150,
+      "revenue": 25,
       "description": "When a player buys the R.S.A. they immediately open the first available corporation and get the president's certificate. The R.S.A. is eliminated when the Corporation buys its first train."
     }
   ],
@@ -479,7 +479,7 @@
     {
       "name": "4H",
       "quantity": 4,
-      "price": "L.100",
+      "price": 100,
       "color": "yellow",
       "info": [
         {
@@ -491,7 +491,7 @@
     {
       "name": "6H",
       "quantity": 4,
-      "price": "L.200",
+      "price": 200,
       "color": "green",
       "info": [
         {
@@ -503,7 +503,7 @@
     {
       "name": "8H",
       "quantity": 3,
-      "price": "L.350",
+      "price": 350,
       "color": "green",
       "info": [
         {
@@ -515,7 +515,7 @@
     {
       "name": "10H",
       "quantity": 2,
-      "price": "L.550",
+      "price": 550,
       "color": "brown",
       "info": [
         {
@@ -527,7 +527,7 @@
     {
       "name": "12H",
       "quantity": 1,
-      "price": "L.800",
+      "price": 800,
       "color": "brown",
       "info": [
         {
@@ -539,7 +539,7 @@
     {
       "name": "16H",
       "quantity": 5,
-      "price": "L.1100",
+      "price": 1100,
       "color": "brown",
       "info": [
         {
@@ -551,7 +551,7 @@
     {
       "name": "R6H",
       "quantity": 2,
-      "price": "L.350",
+      "price": 350,
       "color": "brown",
       "info": [
         {
@@ -612,7 +612,7 @@
       "number": "4",
       "tiles": "yellow",
       "notes": "Grey cities score 1st value",
-      "price": "L.100"
+      "price": 100
     },
     {
       "phase": "6",
@@ -621,7 +621,7 @@
       "number": "3/4",
       "tiles": "green",
       "notes": "Private companies can be bought",
-      "price": "L.200"
+      "price": 200
     },
     {
       "phase": "8",
@@ -631,7 +631,7 @@
       "number": "2/3",
       "tiles": "green",
       "notes": "Grey cities score 2nd value",
-      "price": "L.350"
+      "price": 350
     },
     {
       "phase": "10",
@@ -640,7 +640,7 @@
       "limit": "2",
       "number": "2",
       "tiles": "brown",
-      "price": "L.550"
+      "price": 550
     },
     {
       "phase": "12",
@@ -649,7 +649,7 @@
       "number": "1",
       "tiles": "brown",
       "notes": "Private companies close, Messina Earthquake, Grey cities score 3rd value",
-      "price": "L.800"
+      "price": 800
     },
     {
       "phase": "16",
@@ -666,185 +666,92 @@
       "tiles": "brown",
       "notes": "Stock market tokens can advance in the blue zone",
       "price": [
-        "L.1100",
-        "L.350"
+        1100,
+        350
       ]
     }
   ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 6,
+        "percent": 10,
+        "shares": 1
+      },
+      {
+        "quantity": 1,
+        "label": "Last Certificate",
+        "percent": 20,
+        "shares": 2
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Azienda Ferroviaria Garibaldi",
       "abbrev": "AFG",
       "tokens": [
-        "L.40",
+        40,
         "",
         ""
       ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Last Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "color": "red"
     },
     {
       "name": "Azienda Trasporti Archimede",
       "abbrev": "ATA",
       "tokens": [
-        "L.30",
+        30,
         "",
         ""
       ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Last Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "color": "green"
     },
     {
       "name": "Compagnia Trasporti Lilibeo",
       "abbrev": "CTL",
       "tokens": [
-        "L.40",
+        40,
         "",
         ""
       ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Last Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "color": "yellow"
     },
     {
       "name": "Impresa Ferroviaria Trinacria",
       "abbrev": "IFT",
       "tokens": [
-        "L.90",
+        90,
         "",
         ""
       ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Last Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "color": "blue"
     },
     {
       "name": "Rete Centrale Sicula",
       "abbrev": "RCS",
       "tokens": [
-        "L.130",
+        130,
         "",
         ""
       ],
-      "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Last Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "color": "orange"
     },
     {
       "name": "Società Ferroviaria Akragas",
       "abbrev": "SFA",
       "tokens": [
-        "L.40",
+        40,
         "",
         ""
       ],
-      "color": "pink",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Last Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "color": "pink"
     }
   ],
   "map": {
@@ -1070,12 +977,7 @@
         ],
         "cities": [
           {
-            "companies": [
-              {
-                "label": "RCS",
-                "color": "orange"
-              }
-            ],
+            "companies": ["RCS"],
             "name": {
               "name": "Palermo",
               "reverse": true,
@@ -1228,12 +1130,7 @@
         "color": "gray",
         "cities": [
           {
-            "companies": [
-              {
-                "label": "CTL",
-                "color": "yellow"
-              }
-            ],
+            "companies": ["CTL"],
             "name": {
               "name": "Marsala",
               "rotation": -90
@@ -1522,12 +1419,7 @@
         ],
         "cities": [
           {
-            "companies": [
-              {
-                "label": "IFT",
-                "color": "blue"
-              }
-            ],
+            "companies": ["IFT"],
             "name": {
               "name": "Catania",
               "reverse": true,
@@ -1595,12 +1487,7 @@
             "name": {
               "name": "Girgenti"
             },
-            "companies": [
-              {
-                "color": "pink",
-                "label": "SFA"
-              }
-            ]
+            "companies": ["SFA"]
           }
         ],
         "hexes": [
@@ -1814,12 +1701,7 @@
         ],
         "cities": [
           {
-            "companies": [
-              {
-                "label": "ATA",
-                "color": "green"
-              }
-            ],
+            "companies": ["ATA"],
             "name": {
               "name": "Siacusa",
               "rotation": 30

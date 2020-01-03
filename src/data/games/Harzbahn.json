@@ -9,7 +9,7 @@
     "extraTokens": 2,
     "titleY": -115,
     "titleX": 20,
-    "currency": "EUR"
+    "currency": "#M"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/28944/harzbahn-1873",
@@ -22,189 +22,81 @@
   "players": [
     {
       "number": 2,
-      "capital": "2100M"
+      "capital": 2100
     },
     {
       "number": 3,
-      "capital": "1400M"
+      "capital": 1400
     },
     {
       "number": 4,
-      "capital": "1050M"
+      "capital": 1050
     },
     {
       "number": 5,
-      "capital": "840M"
+      "capital": 840
     }
   ],
+  "tokenTypes": {
+    "default": [
+      "Free"
+    ]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Halberstadt-Blankenburger Eisenbahn",
       "abbrev": "HBE",
-      "tokens": [
-        "Free"
-      ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "red"
     },
     {
       "name": "Gernrode-Harzgeroder Eisenbahn",
       "abbrev": "GHE",
-      "tokens": [
-        "Free"
-      ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "blue"
     },
     {
       "name": "Nordhausen-Wernigeroder Eisenbahn",
       "abbrev": "NWE",
-      "tokens": [
-        "Free"
-      ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     },
     {
       "name": "Südharzeisenbahn",
       "abbrev": "SHE",
-      "tokens": [
-        "Free"
-      ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "yellow"
     },
     {
       "name": "Kleinbahn Ellrich-Zorge",
       "abbrev": "KEZ",
-      "tokens": [
-        "Free"
-      ],
-      "color": "brown",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "brown"
     },
     {
       "name": "Wernigerode-Blankenburger Eisenbahn",
       "abbrev": "WBE",
-      "tokens": [
-        "Free"
-      ],
-      "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "black"
     },
     {
       "name": "Quedlinburger Lokalbahn",
       "abbrev": "QLB",
-      "tokens": [
-        "Free"
-      ],
-      "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "orange"
     },
     {
       "name": "Madgeburger-Halberstädter Eisenbahn",
       "abbrev": "MHE",
-      "tokens": [
-        "Free"
-      ],
-      "color": "purple",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "purple"
     }
   ],
   "trains": [
@@ -285,38 +177,38 @@
   "privates": [
     {
       "name": "Schuylkill Valley",
-      "price": "$20",
-      "revenue": "$5",
+      "price": 20,
+      "revenue": 5,
       "description": ""
     },
     {
       "name": "Champlain & St.Lawrence",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
       "description": "A corporation owning the C&StL may lay a tile on the C&StL's hex even if this hex is not connected to the corporations's railhead. This free tile placement is in addition to the corporation's normal tile placement - for this turn only the corporation may play two tiles. The tile played on the C&StL hex does not have to connect to any existing adjacent track."
     },
     {
       "name": "Delaware & Hudson",
-      "price": "$70",
-      "revenue": "$15",
+      "price": 70,
+      "revenue": 15,
       "description": "A corporation owning the Delaware & Hudson may establish a railhead on the D&H hex by laying a station tile and a token. The station does not have to be connected to the remainder of the corporation's route. The tile laid is the owning corporation's one tile placement for the turn. Removal of the mountain costs $120 as usual but there is no charge for laying the token. Placing the token is not required, but if placed in a future turn, it must be paid for. Other corporations may place a tile here subject to the ordinary rules."
     },
     {
       "name": "Mohawk & Hudson",
-      "price": "$110",
-      "revenue": "$20",
+      "price": 110,
+      "revenue": 20,
       "description": "A player owning the M&H may exhange it for a 10% share of the NYC provided he does not already hold 60% of the NYC stock and there is NYC stock available in the Bank or the Pool. The exchange may be made during the player's turn of a stock round or between the turns of other players or corporations in either stock or operating rounds. This action closes the M&H."
     },
     {
       "name": "Camden & Amboy",
-      "price": "$160",
-      "revenue": "$25",
+      "price": 160,
+      "revenue": 25,
       "description": "The initial purchaser of the C&A immediately receives a 10% share of PRR stock without further payment. This action does not close the C&A. The PRR corporation will not be running at this point, but the stock may be retained or sold subject to the ordinary rules of the game."
     },
     {
       "name": "Baltimore & Ohio",
-      "price": "$220",
-      "revenue": "$30",
+      "price": 220,
+      "revenue": 30,
       "description": "The owner of the B&O private company immediately receives the President's certificate of the B&O corporation without further payment. The B&O private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the B&O corporation. When the B&O corporation purchases its first train the private company is closed down."
     }
   ],
@@ -652,7 +544,7 @@
           {
             "label": "HBE",
             "width": 15,
-            "token": "red",
+            "color": "red",
             "angle": 60,
             "percent": 0.75
           }
@@ -800,9 +692,8 @@
         ],
         "tokens": [
           {
-            "label": "NWE",
-            "width": 15,
-            "token": "green",
+            "company": "NWE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
@@ -822,9 +713,8 @@
         ],
         "tokens": [
           {
-            "label": "WBE",
-            "width": 15,
-            "token": "black",
+            "company": "WBE",
+            "destination": true,
             "angle": 300,
             "percent": 0.7
           }
@@ -850,9 +740,8 @@
         ],
         "tokens": [
           {
-            "label": "WBE",
-            "width": 15,
-            "token": "black",
+            "company": "WBE",
+            "destination": true,
             "angle": 300,
             "percent": 0.7
           }
@@ -882,9 +771,8 @@
         ],
         "tokens": [
           {
-            "label": "WBE",
-            "width": 15,
-            "token": "black",
+            "company": "WBE",
+            "destination": true,
             "angle": 300,
             "percent": 0.7
           }
@@ -992,9 +880,8 @@
         },
         "tokens": [
           {
-            "label": "NWE",
-            "width": 15,
-            "token": "green",
+            "company": "NWE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
@@ -1349,9 +1236,8 @@
         },
         "tokens": [
           {
-            "label": "NWE",
-            "width": 15,
-            "token": "green",
+            "company": "NWE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
@@ -1597,9 +1483,8 @@
         },
         "tokens": [
           {
-            "label": "SHE",
-            "width": 15,
-            "token": "yellow",
+            "company": "SHE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
@@ -1948,9 +1833,8 @@
         ],
         "tokens": [
           {
-            "label": "SHE",
-            "width": 15,
-            "token": "yellow",
+            "company": "SHE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
@@ -2286,9 +2170,8 @@
         ],
         "tokens": [
           {
-            "label": "KEZ",
-            "width": 15,
-            "token": "brown",
+            "company": "KEZ",
+            "destination": true,
             "percent": 0.7
           }
         ],
@@ -2321,9 +2204,8 @@
         ],
         "tokens": [
           {
-            "label": "NWE",
-            "width": 15,
-            "token": "green",
+            "company": "NWE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
@@ -2516,9 +2398,8 @@
         ],
         "tokens": [
           {
-            "label": "GHE",
-            "width": 15,
-            "token": "blue",
+            "company": "GHE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
@@ -2719,9 +2600,8 @@
         },
         "tokens": [
           {
-            "label": "NWE",
-            "width": 15,
-            "token": "green",
+            "company": "NWE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }

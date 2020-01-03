@@ -5,7 +5,7 @@
     "designer": "Eddie Robbins",
     "background": "gray",
     "titleX": 900,
-    "currency": "UYU"
+    "currency": "$#"
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/228373/1868"
@@ -14,161 +14,81 @@
     "Round"
   ],
   "ipo": true,
-  "bank": "$9,000",
+  "bank": 9000,
   "players": [
     {
       "number": 3,
       "certLimit": 13,
-      "capital": "$700"
+      "capital": 700
     },
     {
       "number": 4,
       "certLimit": 10,
-      "capital": "$550"
+      "capital": 550
     },
     {
       "number": 5,
       "certLimit": 8,
-      "capital": "$430"
+      "capital": 430
     }
   ],
+  "tokenTypes": {
+    "default": [
+      "Free",
+      20,
+      30,
+      40,
+      50,
+      60
+    ]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Montevideo Railway",
       "abbrev": "M",
-      "tokens": [
-        "Free",
-        "$20",
-        "$30",
-        "$40",
-        "$50",
-        "$60"
-      ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "yellow"
     },
     {
       "name": "Noroeste Railway",
       "abbrev": "NO",
-      "tokens": [
-        "Free",
-        "$20",
-        "$30",
-        "$40",
-        "$50",
-        "$60"
-      ],
-      "color": "purple",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "purple"
     },
     {
       "name": "Norte Railway",
       "abbrev": "N",
-      "tokens": [
-        "Free",
-        "$20",
-        "$30",
-        "$40",
-        "$50",
-        "$60"
-      ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "blue"
     },
     {
       "name": "Central Railway",
       "abbrev": "C",
-      "tokens": [
-        "Free",
-        "$20",
-        "$30",
-        "$40",
-        "$50",
-        "$60"
-      ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     },
     {
       "name": "Oeste Railway",
       "abbrev": "O",
-      "tokens": [
-        "Free",
-        "$20",
-        "$30",
-        "$40",
-        "$50",
-        "$60"
-      ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "red"
     }
   ],
   "trains": [
     {
       "name": "2",
       "quantity": 5,
-      "price": "$80",
+      "price": 80,
       "color": "yellow",
       "info": [
         {
@@ -180,7 +100,7 @@
     {
       "name": "3",
       "quantity": 4,
-      "price": "$180",
+      "price": 180,
       "color": "green",
       "info": [
         {
@@ -192,7 +112,7 @@
     {
       "name": "4",
       "quantity": 3,
-      "price": "$300",
+      "price": 300,
       "color": "green",
       "info": [
         {
@@ -204,7 +124,7 @@
     {
       "name": "5",
       "quantity": 2,
-      "price": "$450",
+      "price": 450,
       "color": "brown",
       "info": [
         {
@@ -216,7 +136,7 @@
     {
       "name": "6",
       "quantity": 2,
-      "price": "$630",
+      "price": 630,
       "color": "brown",
       "info": [
         {
@@ -228,7 +148,7 @@
     {
       "name": "D",
       "quantity": 6,
-      "price": "$1100",
+      "price": 1100,
       "color": "gray",
       "description": "Cost $800 when trading in a 4T, 5T or 6T",
       "info": [
@@ -242,38 +162,38 @@
   "privates": [
     {
       "name": "Midland Uruguay Railway",
-      "price": "$20",
-      "revenue": "$5",
+      "price": 20,
+      "revenue": 5,
       "description": "Owning corporation may place a YELLOW track tile, paying all costs, in addition to their normal track placement. This action immediately closes the Private."
     },
     {
       "name": "Central Uruguay Railway",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
       "description": "Owning corporation may upgrade a YELLOW track tile to GREEN, paying all costs, in addition to their normal track placement. This action immediately closes the Private."
     },
     {
       "name": "North Western of Uruguay Railway",
-      "price": "$60",
-      "revenue": "$15",
+      "price": 60,
+      "revenue": 15,
       "description": "Owning corporation may place a station token in Tucarembo (E9) or Melo (G15), paying all costs, if there are no existing tokens in the hex. This action applies to the one token placement limit per operating round. This action immediately closes the Private."
     },
     {
       "name": "Uruguay Northern Railway",
-      "price": "$80",
-      "revenue": "$20",
+      "price": 80,
+      "revenue": 20,
       "description": "Owning corporation may place a GREEN track tile (as a direct placement, not an upgrade), paying all costs. This action applies to the two track placement limit per operating round. This action immediately closes the Private."
     },
     {
       "name": "Uruguay East Coast Railway",
-      "price": "$100",
-      "revenue": "$25",
+      "price": 100,
+      "revenue": 25,
       "description": "Allows owning corporation to continue operating a 2 Train until the first 5 train is purchased."
     },
     {
       "name": "Frey Bentos Corned Beef",
-      "price": "$120",
-      "revenue": "$30",
+      "price": 120,
+      "revenue": 30,
       "description": "Owning corporation receives an additional $20 bonus income for one run to Mercedes/Fray Bentos (I3) every operating round. After purchase of first 5 train, this Private closes but $20 bonus run income remains with owning corporation."
     }
   ],
@@ -282,14 +202,14 @@
       "name": "2",
       "limit": "4",
       "number": "6",
-      "price": "$80",
+      "price": 80,
       "tiles": "yellow"
     },
     {
       "name": "3",
       "limit": "4",
       "number": "5",
-      "price": "$180",
+      "price": 180,
       "tiles": "green",
       "notes": "Private companies may be purchased"
     },
@@ -298,14 +218,14 @@
       "rust": "2",
       "limit": "3",
       "number": "4",
-      "price": "$300",
+      "price": 300,
       "tiles": "green"
     },
     {
       "name": "5",
       "limit": "2",
       "number": "3",
-      "price": "$450",
+      "price": 450,
       "tiles": "brown",
       "notes": "Private companies are closed"
     },
@@ -314,7 +234,7 @@
       "limit": "2",
       "number": "2",
       "rust": "3",
-      "price": "$630",
+      "price": 630,
       "tiles": "brown",
       "notes": "D Trains may be purchased"
     },
@@ -322,7 +242,7 @@
       "name": "D",
       "limit": "2",
       "number": "6",
-      "price": "$1100",
+      "price": 1100,
       "rust": "4",
       "tiles": "brown"
     }

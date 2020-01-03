@@ -38,191 +38,94 @@
       "capital": 400
     }
   ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "tokenTypes": {
+    "two": [
+      "Home",
+      40
+    ],
+    "three": [
+      "Home",
+      40,
+      100
+    ],
+    "four": [
+      "Home",
+      40,
+      100,
+      100
+    ]
+  },
   "companies": [
     {
       "name": "Pennsylvania Railroad",
       "abbrev": "PRR",
-      "tokens": [
-        "Home",
-        40,
-        100,
-        100
-      ],
+      "logo": "PRR",
       "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "New York Central Railroad",
       "abbrev": "NYC",
-      "tokens": [
-        "Home",
-        40,
-        100,
-        100
-      ],
+      "logo": "NYC",
       "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "Canadian Pacific Railroad",
       "abbrev": "CPR",
-      "tokens": [
-        "Home",
-        40,
-        100,
-        100
-      ],
+      "logo": "CPR",
       "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "Baltimore & Ohio Railroad",
       "abbrev": "B&O",
-      "tokens": [
-        "Home",
-        40,
-        100
-      ],
+      "logo": "BO",
       "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Chesapeake & Ohio Railroad",
       "abbrev": "C&O",
-      "tokens": [
-        "Home",
-        40,
-        100
-      ],
+      "logo": "CO",
       "color": "cyan",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Erie Railroad",
       "abbrev": "ERIE",
-      "tokens": [
-        "Home",
-        40,
-        100
-      ],
+      "logo": "ERIE",
       "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "New York, New Haven & Hartford Railroad",
       "abbrev": "NYNH",
-      "tokens": [
-        "Home",
-        40
-      ],
+      "logo": "NNH",
       "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     },
     {
       "name": "Boston & Maine Railroad",
       "abbrev": "B&M",
-      "tokens": [
-        "Home",
-        40
-      ],
+      "logo": "BM",
       "color": "brown",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     }
   ],
   "trains": [

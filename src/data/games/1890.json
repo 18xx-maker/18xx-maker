@@ -15,39 +15,54 @@
     "Round"
   ],
   "ipo": true,
-  "bank": "¥12,000",
+  "bank": 12000,
   "players": [
     {
       "number": 2,
       "certLimit": 26,
-      "capital": "¥1260"
+      "capital": 1260
     },
     {
       "number": 3,
       "certLimit": 18,
-      "capital": "¥840"
+      "capital": 840
     },
     {
       "number": 4,
       "certLimit": 15,
-      "capital": "¥630"
+      "capital": 630
     },
     {
       "number": 5,
       "certLimit": 13,
-      "capital": "¥504"
+      "capital": 504
     },
     {
       "number": 6,
       "certLimit": 11,
-      "capital": "¥420"
+      "capital": 420
     },
     {
       "number": 7,
       "certLimit": 10,
-      "capital": "¥360"
+      "capital": 360
     }
   ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Japan Railways",
@@ -60,20 +75,7 @@
         "¥40",
         "¥100"
       ],
-      "color": "purple",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "purple"
     },
     {
       "name": "Ôsaka Municipal Subway",
@@ -81,20 +83,7 @@
       "tokens": [
         "Ôsaka Nishi"
       ],
-      "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "orange"
     },
     {
       "name": "Nankai Electric Railway",
@@ -104,20 +93,7 @@
         "¥40",
         "¥100"
       ],
-      "color": "cyan",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "cyan"
     },
     {
       "name": "Sanyô Electric Railway",
@@ -126,20 +102,7 @@
         "Akashi",
         "¥40"
       ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "red"
     },
     {
       "name": "Kinki Nippon Railways",
@@ -152,20 +115,7 @@
         "¥40",
         "¥100"
       ],
-      "color": "pink",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "pink"
     },
     {
       "name": "Keihan Electric Railways",
@@ -175,20 +125,7 @@
         "¥40",
         "¥100"
       ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "blue"
     },
     {
       "name": "Hankyû Railways",
@@ -199,20 +136,7 @@
         "¥100",
         "¥100"
       ],
-      "color": "brown",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "brown"
     },
     {
       "name": "Hanshin Electric Railroad",
@@ -222,20 +146,7 @@
         "¥40",
         "¥100"
       ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     }
   ],
   "trains": [
@@ -340,38 +251,38 @@
   "privates": [
     {
       "name": "Arima Railway",
-      "price": "¥20",
-      "revenue": "¥5",
+      "price": 20,
+      "revenue": 5,
       "description": ""
     },
     {
       "name": "Kobe Tramway",
-      "price": "¥40",
-      "revenue": "¥10",
+      "price": 40,
+      "revenue": 10,
       "description": ""
     },
     {
       "name": "Hankai Tramway",
-      "price": "¥70",
-      "revenue": "¥15",
+      "price": 70,
+      "revenue": 15,
       "description": ""
     },
     {
       "name": "Hanshin Tramway",
-      "price": "¥110",
-      "revenue": "¥20",
+      "price": 110,
+      "revenue": 20,
       "description": ""
     },
     {
       "name": "Kaishin Railway",
-      "price": "¥160",
-      "revenue": "¥25",
+      "price": 160,
+      "revenue": 25,
       "description": ""
     },
     {
       "name": "Osaka Municipal Eletric Railway",
-      "price": "¥220",
-      "revenue": "¥40",
+      "price": 220,
+      "revenue": 40,
       "description": ""
     }
   ],

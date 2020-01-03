@@ -7,7 +7,7 @@
     "titleX": 40,
     "titleY": 900,
     "titleSize": 160,
-    "currency": "USD"
+    "currency": "GBP"
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/32424/1848-australia",
@@ -18,35 +18,69 @@
     "Round"
   ],
   "ipo": true,
-  "bank": "10,000£",
+  "bank": 10000,
   "players": [
     {
       "number": 3,
       "certLimit": 20,
-      "capital": "840£"
+      "capital": 840
     },
     {
       "number": 4,
       "certLimit": 17,
-      "capital": "630£"
+      "capital": 630
     },
     {
       "number": 5,
       "certLimit": 14,
-      "capital": "510£"
+      "capital": 510
     },
     {
       "number": 6,
       "certLimit": 12,
-      "capital": "430£"
+      "capital": 430
     }
   ],
+  "tokenTypes": {
+    "three": [
+      "Home (Free)",
+      40,
+      100
+    ],
+    "default": [
+      "Home (Free)",
+      40,
+      100,
+      100
+    ],
+    "five": [
+      "Home (Free)",
+      40,
+      100,
+      100,
+      100
+    ]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
       {
       "name": "Bank of England",
       "abbrev": "BOE",
-      "tokens": [
-      ],
+      "tokens": [],
       "color": "blue",
       "shares": [
         {
@@ -59,96 +93,24 @@
     {
       "name": "Central Australian Railway",
       "abbrev": "CAR",
-      "tokens": [
-        "Home (Free)",
-        "40£",
-        "100£"
-      ],
       "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Victorian Railways",
       "abbrev": "VR",
-      "tokens": [
-        "Home (Free)",
-        "40£",
-        "100£"
-      ],
       "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "New South Wales Railways",
       "abbrev": "NSW",
-      "tokens": [
-        "Home (Free)",
-        "40£",
-        "100£",
-        "100£"
-      ],
-      "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "orange"
     },
     {
       "name": "South Australian Railway",
       "abbrev": "SAR",
-      "tokens": [
-        "Home (Free)",
-        "40£",
-        "100£",
-        "100£"
-      ],
-      "color": "pink",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "pink"
     },
     {
       "name": "Commonwealth Railways",
@@ -156,105 +118,35 @@
       "tokens": [
         "Home (Free)",
         "Home (Free)",
-        "100£",
-        "100£",
-        "100£"
+        100,
+        100,
+        100
       ],
-      "color": "gray",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "gray"
     },
     {
       "name": "Federal Territory Railway",
       "abbrev": "FT",
-      "tokens": [
-        "Home (Free)",
-        "40£",
-        "100£",
-        "100£"
-      ],
-      "color": "cyan",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "cyan"
     },
     {
       "name": "West Australian Railway",
       "abbrev": "WA",
-      "tokens": [
-        "Home (Free)",
-        "40£",
-        "100£",
-        "100£",
-        "100£"
-      ],
       "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "five"
     },
     {
       "name": "Queensland Gov't Railway",
       "abbrev": "QR",
-      "tokens": [
-        "Home (Free)",
-        "40£",
-        "100£",
-        "100£",
-        "100£"
-      ],
       "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "five"
     }
   ],
   "trains": [
     {
       "name": "2",
       "quantity": 6,
-      "price": "100£",
+      "price": 100,
       "color": "yellow",
       "info": [
         {
@@ -266,7 +158,7 @@
     {
       "name": "2+",
       "quantity": 6,
-      "price": "120£",
+      "price": 120,
       "color": "yellow",
       "info": [
         {
@@ -278,7 +170,7 @@
     {
       "name": "3",
       "quantity": 5,
-      "price": "200£",
+      "price": 200,
       "color": "green",
       "info": [
         {
@@ -290,7 +182,7 @@
     {
       "name": "3+",
       "quantity": 5,
-      "price": "230£",
+      "price": 230,
       "color": "green",
       "info": [
         {
@@ -302,7 +194,7 @@
     {
       "name": "4",
       "quantity": 4,
-      "price": "300£",
+      "price": 300,
       "color": "green",
       "info": [
         {
@@ -314,7 +206,7 @@
     {
       "name": "4+",
       "quantity": 4,
-      "price": "340£",
+      "price": 340,
       "color": "green",
       "info": [
         {
@@ -326,7 +218,7 @@
     {
       "name": "5",
       "quantity": 3,
-      "price": "500£",
+      "price": 500,
       "color": "brown",
       "info": [
         {
@@ -338,7 +230,7 @@
     {
       "name": "5+",
       "quantity": 3,
-      "price": "550£",
+      "price": 550,
       "color": "brown",
       "info": [
         {
@@ -350,7 +242,7 @@
     {
       "name": "6",
       "quantity": 2,
-      "price": "600£",
+      "price": 600,
       "color": "brown",
       "info": [
         {
@@ -362,7 +254,7 @@
     {
       "name": "6+",
       "quantity": 2,
-      "price": "660£",
+      "price": 660,
       "color": "brown",
       "info": [
         {
@@ -374,7 +266,7 @@
     {
       "name": "D",
       "quantity": 6,
-      "price": "1100£",
+      "price": 1100,
       "color": "gray",
       "description": "Cost $800 when trading in a 4T, 5T or 6T",
       "info": [
@@ -387,7 +279,7 @@
     {
       "name": "8",
       "quantity": 6,
-      "price": "800£",
+      "price": 800,
       "color": "gray",
       "info": [
         {
@@ -399,7 +291,7 @@
     {
       "name": "2E",
       "quantity": 6,
-      "price": "200£",
+      "price": 200,
       "color": "gray",
       "description": "Does not count against train limit or fulfill the requirement to own a train.",
       "info": [
@@ -414,36 +306,36 @@
     {
       "name": "Melbourne & Hobson's Bay Railway Company",
       "price": "1£-40£",
-      "revenue": "5£"
+      "revenue": 5
     },
     {
       "name": "Sydney Railway Company",
       "price": "1£-80£",
-      "revenue": "10£",
+      "revenue": 10,
       "description": "If the company is owned by a Public Company or its Director, that company can, on one occasion, develop a cost-incurring desert hex for 40£ less than it would otherwise cost"
     },
     {
       "name": "Tasmanian Railways",
       "price": "1£-140£",
-      "revenue": "15£",
+      "revenue": 15,
       "description": "The Tasmania tile can be placed by a Public Company on one of the dark blue hexes. This is in addition to the company's normal build that turn."
     },
     {
       "name": "The Ghan",
       "price": "1£-220£",
-      "revenue": "20£",
+      "revenue": 20,
       "description": "The owner has a one-time discount of £100 on the purchase of a 2E train, 'The Ghan'"
     },
     {
       "name": "Trans-Australian Railway",
       "price": "N/A",
-      "revenue": "25£",
+      "revenue": 25,
       "description": "The owner receives in addition a 10% share in the QR."
     },
     {
       "name": "North Australian Railway",
       "price": "N/A",
-      "revenue": "30£",
+      "revenue": 30,
       "description": "The owner receives in addition the Director's Share share in the CAR, which must start at a par value of 100£."
     }
   ],
@@ -1073,7 +965,7 @@
         "terrain": [
           {
             "type": "cactus",
-            "cost": "40£"
+            "cost": 40
           }
         ],
         "hexes": [
@@ -1099,7 +991,7 @@
         "terrain": [
           {
             "type": "cactus",
-            "cost": "40£"
+            "cost": 40
           }
         ],
         "hexes": [
@@ -1111,7 +1003,7 @@
         "terrain": [
           {
             "type": "mountain",
-            "cost": "50£"
+            "cost": 50
           }
         ],
         "hexes": [
@@ -1138,7 +1030,7 @@
         "terrain": [
           {
             "type": "cactus",
-            "cost": "40£"
+            "cost": 40
           }
         ],
         "hexes": [
@@ -1187,7 +1079,7 @@
         "terrain": [
           {
             "type": "mountain",
-            "cost": "50£",
+            "cost": 50,
             "percent": 0.5
           }
         ],
@@ -1567,7 +1459,7 @@
         "terrain": [
           {
             "type": "mountain",
-            "cost": "50£",
+            "cost": 50,
             "percent": 0.6
           }
         ],
@@ -1647,7 +1539,7 @@
         "terrain": [
           {
             "type": "mountain",
-            "cost": "50£",
+            "cost": 50,
             "percent": 0.7
           }
         ],
@@ -1675,7 +1567,7 @@
         "terrain": [
           {
             "type": "cactus",
-            "cost": "40£"
+            "cost": 40
           }
         ],
         "borders": [
@@ -1698,7 +1590,7 @@
         "terrain": [
           {
             "type": "cactus",
-            "cost": "40£"
+            "cost": 40
           }
         ],
         "borders": [
@@ -1716,7 +1608,7 @@
         "terrain": [
           {
             "type": "cactus",
-            "cost": "40£"
+            "cost": 40
           }
         ],
         "borders": [
@@ -1783,7 +1675,7 @@
         "terrain": [
           {
             "type": "cactus",
-            "cost": "40£"
+            "cost": 40
           }
         ],
         "borders": [
@@ -1816,7 +1708,7 @@
         "terrain": [
           {
             "type": "cactus",
-            "cost": "40£"
+            "cost": 40
           }
         ],
         "borders": [
@@ -1874,7 +1766,7 @@
         "terrain": [
           {
             "type": "mountain",
-            "cost": "50£"
+            "cost": 50
           }
         ],
         "borders": [
@@ -2002,7 +1894,7 @@
         "terrain": [
           {
             "type": "mountain",
-            "cost": "50£"
+            "cost": 50
           }
         ],
         "borders": [
@@ -2025,7 +1917,7 @@
         "terrain": [
           {
             "type": "mountain",
-            "cost": "50£"
+            "cost": 50
           }
         ],
         "borders": [

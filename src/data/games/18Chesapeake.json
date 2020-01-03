@@ -16,266 +16,116 @@
     "Round"
   ],
   "ipo": true,
-  "bank": "$8,000",
+  "bank": 8000,
   "players": [
     {
       "number": 2,
       "certLimit": 20,
-      "capital": "$1200"
+      "capital": 1200
     },
     {
       "number": 3,
       "certLimit": 20,
-      "capital": "$800"
+      "capital": 800
     },
     {
       "number": 4,
       "certLimit": 16,
-      "capital": "$600"
+      "capital": 600
     },
     {
       "number": 5,
       "certLimit": 13,
-      "capital": "$480"
+      "capital": 480
     },
     {
       "number": 6,
       "certLimit": 11,
-      "capital": "$400"
+      "capital": 400
     }
   ],
+  "tokenTypes": {
+    "four": [
+      "Free",
+      "$40",
+      "$100",
+      "$100"
+    ],
+    "default": [
+      "Free",
+      "$40",
+      "$100"
+    ],
+    "two": [
+      "Free",
+      "$40"
+    ]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 30,
+        "shares": 3
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Pennsylvania Railroad",
       "abbrev": "PRR",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100",
-        "$100"
-      ],
       "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 30,
-          "shares": 3
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "Pittsburgh and Lake Erie Railroad",
       "abbrev": "PLE",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 30,
-          "shares": 3
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "black"
     },
     {
       "name": "Strasburg Rail Road",
       "abbrev": "SR",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 30,
-          "shares": 3
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "red"
     },
     {
       "name": "Baltimore & Ohio Railroad",
       "abbrev": "B&O",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 30,
-          "shares": 3
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "blue"
     },
     {
       "name": "Chesapeake & Ohio Railroad",
       "abbrev": "C&O",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100",
-        "$100"
-      ],
       "color": "cyan",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 30,
-          "shares": 3
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "Lehigh Valley Railroad",
       "abbrev": "LV",
-      "tokens": [
-        "Free",
-        "$40"
-      ],
       "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 30,
-          "shares": 3
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     },
     {
       "name": "Camden & Amboy Railroad",
       "abbrev": "C&A",
-      "tokens": [
-        "Free",
-        "$40"
-      ],
       "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 30,
-          "shares": 3
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     },
     {
       "name": "Norfolk & Western Railway",
       "abbrev": "N&W",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "brown",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 30,
-          "shares": 3
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "brown"
     }
   ],
   "trains": [
@@ -356,38 +206,38 @@
   "privates": [
     {
       "name": "Delaware and Raritan Canal",
-      "price": "$20",
-      "revenue": "$5",
+      "price": 20,
+      "revenue": 5,
       "description": "No special ability. Blocks hex K3 while owned by a player. Companies may purchase P1 - P5 from a player for half to double the face value."
     },
     {
       "name": "Columbia - Philadelphia Railroad",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
       "description": "Blocks hexes H2 and I3 while owned by a player. The owning company may lay two connected tiles in hexes H2 and I3. Only #8 and #9 tiles may be used. If any tiles are played in these hexes other than by using this ability, the ability is forfeit. These tiles may be placed even if the owning company does not have a route to the hexes. These tiles are laid during the tile laying step and are in addition to the company’s tile placement action."
     },
     {
       "name": "Baltimore and Susquehanna Railroad",
-      "price": "$50",
-      "revenue": "$10",
+      "price": 50,
+      "revenue": 10,
       "description": "Blocks hexes F4 and G5 while owned by a player. The owning company may lay two connected tiles in hexes F4 and G5. Only #8 and #9 tiles may be used. If any tiles are played in these hexes other than by using this ability, the ability is forfeit. These tiles may be placed even if the owning company does not have a route to the hexes. These tiles are laid during the tile laying step and are in addition to the company’s tile placement action."
     },
     {
       "name": "Chesapeake and Ohio Canal",
-      "price": "$80",
-      "revenue": "$15",
+      "price": 80,
+      "revenue": 15,
       "description": "Blocks hex D2 while owned by a player.Owning company may place a tile in hex D2.The company does not need to have a route to this hex.The tile placed counts as the company’ s tile lay action and the company must pay the terrain cost.The company may then immediately place a station token free of charge."
     },
     {
       "name": "Baltimore & Ohio Railroad",
-      "price": "$100",
-      "revenue": "$0",
+      "price": 100,
+      "revenue": 0,
       "description": "During game setup place one share of the Baltimore & Ohio public company with this certificate.The player purchasing this private immediately takes both the private company and the B & O share.This private company has no other special ability."
     },
     {
       "name": "Cornelius Vanderbilt",
-      "price": "$200",
-      "revenue": "$30",
+      "price": 200,
+      "revenue": 30,
       "description": "During game setup select a random president’s certificate and place it with this certificate.The player purchasing this private company takes both this certificate and the randomly selected president’ s certificate.The player immediately sets the par value of the public company.This private closes when the associated public company buys it’s first train."
     }
   ],

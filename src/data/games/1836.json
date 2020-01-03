@@ -32,132 +32,61 @@
       "capital": 240
     }
   ],
+  "tokenTypes": {
+    "minor": [""],
+    "default": [
+      100,
+      100,
+      100,
+      100
+    ]
+  },
+  "shareTypes": {
+    "minor": [],
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Pennsylvania Railroad",
       "abbrev": "PRR",
-      "tokens": [
-        100,
-        100,
-        100,
-        100
-      ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     },
     {
       "name": "New York Central Railroad",
       "abbrev": "NYC",
-      "tokens": [
-        100,
-        100,
-        100,
-        100
-      ],
-      "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "black"
     },
     {
       "name": "Baltimore & Ohio Railroad",
       "abbrev": "B&O",
-      "tokens": [
-        100,
-        100,
-        100,
-        100
-      ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "blue"
     },
     {
       "name": "Chesapeake & Ohio Railroad",
       "abbrev": "C&O",
-      "tokens": [
-        100,
-        100,
-        100,
-        100
-      ],
-      "color": "cyan",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "cyan"
     },
     {
       "name": "Erie Railroad",
       "abbrev": "ERIE",
-      "tokens": [
-        100,
-        100,
-        100,
-        100
-      ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "yellow"
     },
     {
       "name": "Cincinnati, Hamilton & Dayton Railway ①",
       "minor": true,
       "abbrev": "CH&D",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "natural", "white" ] },
       "color": "natural"
     },
@@ -165,7 +94,6 @@
       "name": "Zanesville & Ohio River Railroad ②",
       "minor": true,
       "abbrev": "Z&OR",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "lime", "white" ] },
       "color": "lime"
     },
@@ -173,7 +101,6 @@
       "name": "Columbus, Hocking Valley & Toledo Railway ③",
       "minor": true,
       "abbrev": "CHV&T",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "red", "white" ] },
       "color": "red"
     },
@@ -181,7 +108,6 @@
       "name": "Columbus, Sandusky & Hocking Railway ④",
       "minor": true,
       "abbrev": "CS&H",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "orange", "white" ] },
       "color": "orange"
     },
@@ -189,7 +115,6 @@
       "name": "Cleveland, Canton & Southern Railroad ⑤",
       "minor": true,
       "abbrev": "CC&S",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "brown", "white" ] },
       "color": "brown"
     },
@@ -197,7 +122,6 @@
       "name": "Detroit & Lima Northern Railroad ⑥",
       "minor": true,
       "abbrev": "D&LN",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "lavender", "white" ] },
       "color": "lavender"
     },
@@ -205,7 +129,6 @@
       "name": "Lake Shore & Michigan Southern Railway ⑦",
       "minor": true,
       "abbrev": "LS&MS",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "pink", "white" ] },
       "color": "pink"
     },
@@ -213,7 +136,6 @@
       "name": "Cleveland, Lorain & Wheeling Railway ⑧",
       "minor": true,
       "abbrev": "CL&W",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "turquoise", "white" ] },
       "color": "turquoise"
     },
@@ -221,7 +143,6 @@
       "name": "Cincinnati & Muskingum Valley Railway ⑨",
       "minor": true,
       "abbrev": "C&MV",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "tan", "white" ] },
       "color": "tan"
     },
@@ -229,7 +150,6 @@
       "name": "Toledo & Ohio Central Railway ⑩",
       "minor": true,
       "abbrev": "T&OC",
-      "tokens": [ "" ],
       "token": { "type": "bar", "colors": [ "purple", "white" ] },
       "color": "purple"
     }

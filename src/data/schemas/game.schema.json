@@ -3,9 +3,57 @@
   "$id": "https://18xx.kelsin.net/schemas/game.schema.json",
 
   "definitions": {
+    "numberOrSlash": {
+      "oneOf": [
+        { "type": "number", "mimimum": 1},
+        {
+          "type": "string",
+          "pattern": "^[0-9]+\\ ?/\\ ?[0-9]+$"
+        },
+        {
+          "type": "string",
+          "pattern": "^∞$"
+        }
+      ]
+    },
+    "bank": {
+      "oneOf": [
+        { "type": "number", "minimum": 1 },
+        {
+          "type": "string",
+          "pattern": "^∞$"
+        }
+      ]
+    },
+    "capital": { "type": "number", "minimum": 0 },
+    "certLimit": { "$ref": "#/definitions/numberOrSlash" },
     "link": {
       "type": "string",
       "pattern": "https?://.*/.*"
+    },
+    "shares": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "quantity": { "type": "number", "minimum": 1 },
+          "label": { "type": "string" },
+          "cost": { "type": "number", "minimum": 0 },
+          "percent": { "$ref": "#/definitions/numberOrSlash" },
+          "revenue": { "$ref": "#/definitions/numberOrSlash" },
+          "shares": { "$ref": "#/definitions/numberOrSlash" }
+        },
+        "required": ["quantity"]
+      }
+    },
+    "tokens": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "type": "string" },
+          { "type": "number" }
+        ]
+      }
     }
   },
 
@@ -51,16 +99,87 @@
       },
       "additionalProperties": false
     },
-    "bank": {},
-    "capital": {},
-    "certLimit": {},
-    "companies": {},
+    "bank": { "$ref": "#/definitions/bank" },
+    "capital": { "$ref": "#/definitions/capital" },
+    "certLimit": { "$ref": "#/definitions/certLimit" },
+    "tokenTypes": {
+      "type": "object",
+      "additionalProperties": { "$ref" : "#/definitions/tokens" }
+    },
+    "shareTypes": {
+      "type": "object",
+      "additionalProperties": { "$ref" : "#/definitions/shares" }
+    },
+    "companies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "abbrev"],
+        "properties": {
+          "name": { "type": "string" },
+          "shares": {
+            "oneOf": [
+              { "$ref" : "#/definitions/shares" },
+              { "type": "string" }
+            ]
+          },
+          "tokens": {
+            "oneOf": [
+              { "$ref" : "#/definitions/tokens" },
+              { "type": "string" }
+            ]
+          }
+        }
+      }
+    },
     "ipo": { "type": "boolean" },
     "map": {},
     "phases": {},
-    "players": {},
+    "players": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "bank": { "$ref": "#/definitions/bank" },
+          "capital": { "$ref": "#/definitions/capital" },
+          "certLimit": { "$ref": "#/definitions/certLimit" },
+          "number": { "type": "number", "minimum": 1 }
+        },
+        "required": ["number"]
+      }
+    },
     "pools": {},
-    "privates": {},
+    "privates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "players": { "type": "string" },
+          "description": { "type": "string" },
+          "price": {
+            "oneOf": [
+              { "type": "string" },
+              { "type": "number", "minimum": 0 }
+            ]
+          },
+          "revenue": {
+            "oneOf": [
+              { "type": "number", "minimum": 0 },
+              {
+                "type": "array",
+                "items": { "type": "number", "minimum": 0 }
+              },
+              {
+                "type": "string",
+                "pattern": "^.?.?[0-9].?%?\\ ?/\\ ?.?.?[0-9].?%?$"
+              }
+            ]
+          }
+        },
+        "required": ["name"]
+      }
+    },
     "rounds": {},
     "stock": {},
     "tiles": {},
