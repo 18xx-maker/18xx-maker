@@ -33,6 +33,13 @@
   "companiesTheme": "gmt",
   "charterStyle": "color",
   "halfWidthCharters": false,
+  "charterCutlines": 25,
+  "cards": {
+    "layout": "free",
+    "width": 265.748,
+    "height":  173.228,
+    "cutlines": 25
+  },
   "shareStyle": "gmt",
   "tokenLayout": "gsp",
   "tiles": {
