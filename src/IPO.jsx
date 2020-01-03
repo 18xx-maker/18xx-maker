@@ -5,7 +5,7 @@ import * as R from "ramda";
 import Color from "./data/Color";
 import ColorContext from "./context/ColorContext";
 
-import Token from "./Token";
+import Token from "./tokens/Token";
 import Svg from "./Svg";
 import PageSetup from "./PageSetup";
 

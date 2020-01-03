@@ -24,11 +24,10 @@
     "train": true,
     "value": false
   },
-  "companySvgLogos": "webdev",
+  "companySvgLogos": "none",
   "overrideCompanies": "none",
   "overrideSelection": [],
-  "plainMapDestinations": false,
-  "plainMapHomes": false,
+  "plainMapCompanies": false,
   "straightCityNames": false,
   "theme": "gmt",
   "companiesTheme": "gmt",

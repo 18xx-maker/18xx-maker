@@ -89,7 +89,7 @@ const _Input = ({name, label, description, config, value, setConfig, dimension})
   let [tempValue, setTempValue] = useState(value);
   useEffect(() => {
     setTempValue(value);
-  }, [value]); // Only re-run the effect if count changes
+  }, [value]); // Only re-run the effect if value changes
 
   if (inputSchema && inputSchema.type === "string") {
     if (inputSchema.enum) {
@@ -223,8 +223,8 @@ const Config = ({config, setConfig, resetConfig}) => {
              description="This lets you choose where the coordinates appear on the map (if at all)."/>
       <Input name="straightCityNames" label="Straight City Names"
              description="Draw city names straight instead of curved along the city. None of the games included with this tool are meant to be drawn this way so layout issues might be present." />
-      <Input name="plainMapHomes" label="Plain Map Home Spaces"
-             description="This sets all home spots on maps to be empty white cities with black company text instead of colored or using logos." />
+      <Input name="plainMapCompanies" label="Plain Map Company Spaces"
+             description="This sets all home/destination/token spots on maps to be empty white cities with black company text instead of colored or using logos." />
       {/* This option isn't working yet, will add later */}
       {/* <Checkbox name="plainMapDestinations" label="Plain Map Destination Spaces" */}
       {/*           description="This sets all destination spots on maps to be empty white cities with black company text:" /> */}

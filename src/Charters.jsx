@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
-import { compileCompanies } from "./util";
+import { compileCompanies, overrideCompanies } from "./util";
 import Charter from "./Charter";
 import games from "./data/games";
 import * as R from "ramda";
@@ -27,7 +27,7 @@ const Charters = ({halfWidthCharters, override, selection}) => {
     return <Redirect to={`/${params.game}/background`} />;
   }
 
-  let gameCompanies = compileCompanies(game, override, selection);
+  let gameCompanies = overrideCompanies(compileCompanies(game), override, selection);
 
   let majors = filter(isMajor, gameCompanies);
 
@@ -64,6 +64,7 @@ const Charters = ({halfWidthCharters, override, selection}) => {
               phases={game.phases}
               turns={game.turns}
               minor={!!company.minor}
+              company={company}
             /> : <div key="spacer" className="cutlines"><div className={`charter${halfWidthCharters ? " charter--half" : ""}`}></div></div>
         ), companies)}
         <PageSetup landscape={false}/>
