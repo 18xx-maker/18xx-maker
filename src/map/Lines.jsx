@@ -8,7 +8,7 @@ import Color from "../data/Color";
 const Line = ({ line, data }) => {
   let ratio = data.hexWidth / 150;
 
-  let path = "M " + map(pair => map(coord => ((coord - data.coordSpace) * ratio) + data.coordSpace,
+  let path = "M " + map(pair => map(coord => (coord * ratio) + (0.5 * data.coordSpace),
                                    pair).join(" "),
                         line.coords).join(" L ");
 
