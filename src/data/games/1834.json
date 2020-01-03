@@ -6,7 +6,7 @@
     "background": "gray",
     "orientation": "horizontal",
     "titleX": 50,
-    "currency": "EUR"
+    "currency": "# fr."
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/253320/1834"
