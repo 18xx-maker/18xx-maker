@@ -73,25 +73,28 @@ const atoms = [{
     {tokens: [{label:"GG", type:"stripe", colors:["blue", "orange"]}]},
     {tokens: [{label:"HH", type:"target", colors:["blue", "orange"]}]},
     {tokens: [{label:"Longer", color:"blue"}]},
-    {tokens: [{label:"KO", color:"purple"}]}
+    {tokens: [{label:"KO", color:"purple"}]},
+    {tokens: [{label:"PRR", color:"green", destination: true}]},
+    {tokens: [{label:"CPR", color:"red", reserved: true}]},
+    {tokens: [{logo:"dev/emacs"}]}
   ]
 },{
   group: "Cities",
   examples: [{cities: [{}]},
              {cities: [{name:{offset: 75, name: "Boston"}}]},
-             {cities: [{companies:[{label:"GT",color:"orange"}],
-                        name:{reverse:true, name: "Boston"}}]},
+             {cities: [{companies:["NYNH"],
+                        name:{reverse:true, name: "New York"}}]},
              {cities: [{size:2,
-                        companies: [{},{label:"B&O",color:"blue"}],
+                        companies: [{},"B&O"],
                         name: {name: "Baltimore"}
                        }]},
              {cities: [{size:3,
-                        companies: [{label:"NYC",color:"black"}]
+                        companies: ["NYC"]
                        }]},
              {cities: [{size:4,
                         companies: [{},
-                                    {label:"BM",color:"brown"},
-                                    {label:"PRR",color:"green"}]
+                                    "B&M",
+                                    { abbrev:"PRR", reserved: true }]
                        }]},
              {cities: [{size:1,
                         pass:true
