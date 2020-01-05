@@ -85,9 +85,10 @@
         },
         "width": { "type": "number", "minimum": 1 },
         "height": { "type": "number", "minimum": 1 },
-        "cutlines": { "type": "number", "minimum": 0 }
+        "cutlines": { "type": "number", "minimum": 0 },
+        "bleed": { "type": "number", "minimum": 0 }
       },
-      "required": ["layout", "width", "height", "cutlines"],
+      "required": ["layout", "width", "height", "cutlines", "bleed"],
       "additionalProperties": false
     },
     "shareStyle": {

@@ -10,8 +10,11 @@ import Train from "./Train";
 
 import PageSetup from "../PageSetup";
 
+import Config from "../data/Config";
+
 import games from "../data/games";
 import { compileCompanies, overrideCompanies, fillArray } from "../util";
+import { getCardData } from "./util";
 
 import GameContext from "../context/GameContext";
 
@@ -50,97 +53,138 @@ const Cards = ({ override, selection }) => {
     state.displayTrains ? game.trains || [] : []
   );
   let numbers = state.displayNumbers
-    ? R.range(1, maxPlayers(game.players || []) + 1)
-    : [];
+      ? R.range(1, maxPlayers(game.players || []) + 1)
+      : [];
 
   return (
     <GameContext.Provider value={params.game}>
-      <div className="PrintNotes">
-        <div>
-          <label>
-            <input
-              name="displayPrivates"
-              type="checkbox"
-              checked={state.displayPrivates}
-              onChange={handleDisplay}
-            />
-            Privates
-          </label>
-          <label>
-            <input
-              name="displayShares"
-              type="checkbox"
-              checked={state.displayShares}
-              onChange={handleDisplay}
-            />
-            Shares
-          </label>
-          <label>
-            <input
-              name="displayTrains"
-              type="checkbox"
-              checked={state.displayTrains}
-              onChange={handleDisplay}
-            />
-            Trains
-          </label>
-          <label>
-            <input
-              name="displayNumbers"
-              type="checkbox"
-              checked={state.displayNumbers}
-              onChange={handleDisplay}
-            />
-            Numbers
-          </label>
-          <p>
-            Cards are meant to be printed in <b>landscape</b> mode
-          </p>
-        </div>
-      </div>
-      <div className="cards">
-        {R.addIndex(R.map)(
-          (p, i) => (
-            <Private key={`private-${params.game}-${i}`} {...p} />
-          ),
-          privates
-        )}
-        {R.addIndex(R.chain)((company, index) => {
-          let shares = fillArray(R.prop("quantity"), company.shares || []);
-          return R.addIndex(R.map)(
-            (share, i) => (
-              <Share
-                key={`${company.abbrev}-${i}`}
-                company={company}
-                name={company.name}
-                abbrev={company.abbrev}
-                logo={company.logo}
-                color={company.color}
-                token={company.token || company.color}
-                {...share}
-              />
-            ),
-            shares
+      <Config>
+        {(config, game) => {
+          let data = getCardData(config.cards, config.paper)
+          console.log(data);
+
+          let css = `
+.cutlines {
+    padding: ${data.css.cutlines};
+}
+
+.cutlines:after,
+.cutlines:before {
+    width: ${data.css.cutlines};
+    height: ${data.css.height};
+    top: ${data.css.cutlinesAndBleed};
+}
+
+.cutlines > div:after,
+.cutlines > div:before {
+    width: ${data.css.width};
+    height: ${data.css.cutlines};
+    left: ${data.css.bleed};
+}
+
+.cutlines > div:after {
+    bottom: -${data.css.cutlines};
+}
+
+.cutlines > div:before {
+    top: -${data.css.cutlines};
+}
+
+`;
+
+          return (
+            <React.Fragment>
+              <style>{css}</style>
+              <div className="PrintNotes">
+                <div>
+                  <label>
+                    <input
+                      name="displayPrivates"
+                      type="checkbox"
+                      checked={state.displayPrivates}
+                      onChange={handleDisplay}
+                    />
+                    Privates
+                  </label>
+                  <label>
+                    <input
+                      name="displayShares"
+                      type="checkbox"
+                      checked={state.displayShares}
+                      onChange={handleDisplay}
+                    />
+                    Shares
+                  </label>
+                  <label>
+                    <input
+                      name="displayTrains"
+                      type="checkbox"
+                      checked={state.displayTrains}
+                      onChange={handleDisplay}
+                    />
+                    Trains
+                  </label>
+                  <label>
+                    <input
+                      name="displayNumbers"
+                      type="checkbox"
+                      checked={state.displayNumbers}
+                      onChange={handleDisplay}
+                    />
+                    Numbers
+                  </label>
+                  <p>
+                    Cards are meant to be printed in <b>landscape</b> mode
+                  </p>
+                </div>
+              </div>
+              <div className="cards">
+                {R.addIndex(R.map)(
+                  (p, i) => (
+                    <Private key={`private-${params.game}-${i}`} {...p} />
+                  ),
+                  privates
+                )}
+                {R.addIndex(R.chain)((company, index) => {
+                  let shares = fillArray(R.prop("quantity"), company.shares || []);
+                  return R.addIndex(R.map)(
+                    (share, i) => (
+                      <Share
+                        key={`${company.abbrev}-${i}`}
+                        company={company}
+                        name={company.name}
+                        abbrev={company.abbrev}
+                        logo={company.logo}
+                        color={company.color}
+                        token={company.token || company.color}
+                        {...share}
+                      />
+                    ),
+                    shares
+                  );
+                }, companies)}
+                {R.addIndex(R.map)(
+                  (train, index) => (
+                    <Train train={train} key={`train-${train.name}-${index}`} />
+                  ),
+                  trains
+                )}
+                {R.map(
+                  n => (
+                    <Number
+                      number={n}
+                      background={game.info.background}
+                      key={`number=${n}`}
+                    />
+                  ),
+                  numbers
+                )}
+                <PageSetup landscape={data.layout.landscape} />
+              </div>
+            </React.Fragment>
           );
-        }, companies)}
-        {R.addIndex(R.map)(
-          (train, index) => (
-            <Train train={train} key={`train-${train.name}-${index}`} />
-          ),
-          trains
-        )}
-        {R.map(
-          n => (
-            <Number
-              number={n}
-              background={game.info.background}
-              key={`number=${n}`}
-            />
-          ),
-          numbers
-        )}
-        <PageSetup landscape={true} />
-      </div>
+        }}
+      </Config>
     </GameContext.Provider>
   );
 };

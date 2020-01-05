@@ -67,7 +67,6 @@ export const unitsToInches = units => units / 100.0;
 export const unitsToCss = compose(inchesToCss, unitsToInches);
 export const unitsToCssMm = compose(mmToCss, inchesToMm, unitsToInches);
 
-
 export const printableWidth = ({width, margins}) => {
   let margin = 0;
   if (is(Number, margins)) {
