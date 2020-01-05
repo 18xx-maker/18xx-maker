@@ -38,12 +38,13 @@
     "layout": "free",
     "width": 265.748,
     "height":  173.228,
-    "cutlines": 25
+    "cutlines": 25,
+    "bleed": 12.5
   },
   "shareStyle": "gmt",
   "tokenLayout": "gsp",
   "tiles": {
-    "layout": "die",
+    "layout": "smallDie",
     "width": 150,
     "mapWidth": 150,
     "gaps": true

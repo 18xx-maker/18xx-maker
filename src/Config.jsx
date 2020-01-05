@@ -254,6 +254,8 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="cards.height" label="Card Height" dimension={true} />
       <Input name="cards.cutlines" label="Card Cutlines Size" dimension={true}
              description="Set to 0 to disable any cutlines and have the cards next to each other"/>
+      <Input name="cards.bleed" label="Card Bleed Size" dimension={true}
+             description="Set to 0 to disable any bleed, or set to a value to have a margin of this amount used as the bleed amount for printing."/>
       <h3>Currency</h3>
       <p>This lets you turn on currency symbols for each item individually. Only works if the game file specificies values as numbers and not strings.</p>
       <Input name="currency.bank" label="Bank" description="Bank total on revenue page"/>

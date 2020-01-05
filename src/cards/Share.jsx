@@ -34,7 +34,7 @@ const LeftShare = ({
                     <svg style={{width:"0.52in",height:"0.52in"}}
                          viewBox="-26 -26 52 52">
                       <CompanyToken company={company}
-                                    outline={shareStyle === "gmt" ? "white" : null} />
+                                    outline={shareStyle === "gmt" ? (company.color === "white" ? "black" : "white") : null} />
                     </svg>
                   </div>
                 </div>);
