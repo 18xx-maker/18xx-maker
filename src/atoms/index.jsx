@@ -107,7 +107,8 @@ const atoms = [{
                         companies: ["NYC"]
                        }]},
              {cities: [{size:4,
-                        companies: [{},
+                        icons: ["mail", null, null, "boat"],
+                        companies: [null,
                                     "B&M",
                                     { abbrev:"PRR", reserved: true }]
                        }]},
@@ -118,7 +119,7 @@ const atoms = [{
                         pass:true
                        }]},
              {cities: [{size:3,
-                        icons: ["meat", "water", "port"]
+                        icons: ["meat", null, "share"]
                        }]}
             ]
 },{
