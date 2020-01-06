@@ -999,7 +999,7 @@
       {
         "color": "water",
         "removeBorders": [
-          6
+          1
         ],
         "offBoardTrack": [
           {
