@@ -239,14 +239,18 @@ const Config = ({config, setConfig, resetConfig}) => {
              description="This says whether to separate different colors with spaces needed to prevent bleed crossover. Leave on unless you really know you want it."/>
       <h3>Stock Markets</h3>
       <h3>Charters</h3>
-      <Input name="charterStyle" label="Charter Style"
+      <Input name="charters.style" label="Charter Style"
              description="This lets you choose between two styles for charters. One is simular to Carth's style while the other includes more color at the top."/>
-      <Input name="halfWidthCharters" label="Half Width Charters"
+      <Input name="charters.halfWidth" label="Half Width Charters"
              description="This draws all charters (major and minor) as half width. They will take up half of the width of your page (minus cutlines)."/>
-      <Input name="charterCutlines" label="Charter Cutlines Size" dimension={true}
+      <Input name="charters.cutlines" label="Charter Cutlines Size" dimension={true}
              description="Set to 0 to disable any cutlines and have the charters next to each other"/>
+      <Input name="charters.bleed" label="Charter Bleed Size" dimension={true}
+             description="Set to 0 to disable any bleed, or set to a value to have a margin of this amount used as the bleed amount for printing."/>
+      <Input name="charters.border" label="Charter Border Size"
+             description="Set to 0 to disable any border, or set to a value to have a border of that many pixels drawn around the charter."/>
       <h3>Cards</h3>
-      <Input name="shareStyle" label="Share Style"
+      <Input name="cards.shareStyle" label="Share Style"
              description="This lets you choose between two styles for shares. One keeps the token in the center of the card, the other puts the tokens on the let (Simular to All Aboard Games and Deep Thought Games)."/>
       <Input name="cards.layout" label="Cards Layout"
              description="Free allows cards to free flow and uses the other options below. Mini euro is for my custom die that cuts mini-euro sized cards and dtgDie uses the standard Deep Thought Games asset die. Either die option overrides the page size as well as the width, height and cutlines option below."/>
@@ -256,6 +260,8 @@ const Config = ({config, setConfig, resetConfig}) => {
              description="Set to 0 to disable any cutlines and have the cards next to each other"/>
       <Input name="cards.bleed" label="Card Bleed Size" dimension={true}
              description="Set to 0 to disable any bleed, or set to a value to have a margin of this amount used as the bleed amount for printing."/>
+      <Input name="cards.border" label="Card Border Size"
+             description="Set to 0 to disable any border, or set to a value to have a border of that many pixels drawn around the card."/>
       <h3>Currency</h3>
       <p>This lets you turn on currency symbols for each item individually. Only works if the game file specificies values as numbers and not strings.</p>
       <Input name="currency.bank" label="Bank" description="Bank total on revenue page"/>

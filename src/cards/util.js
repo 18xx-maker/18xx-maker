@@ -1,7 +1,7 @@
 import { unitsToCss } from "../util";
 
 export const getCardData = (cards, paper) => {
-  let { width, height, cutlines, bleed } = cards;
+  let { width, height, cutlines, bleed, border } = cards;
   let { margins, width: pageWidth, height: pageHeight } = paper;
 
   let cutlinesAndBleed = cutlines + bleed;
@@ -46,6 +46,7 @@ export const getCardData = (cards, paper) => {
     height,
     cutlines,
     bleed,
+    border,
     cutlinesAndBleed,
     bleedWidth,
     bleedHeight,

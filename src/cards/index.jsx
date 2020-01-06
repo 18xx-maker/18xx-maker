@@ -18,6 +18,8 @@ import { getCardData } from "./util";
 
 import GameContext from "../context/GameContext";
 
+import "./card.scss";
+
 export const maxPlayers = R.compose(
   R.reduce(R.max, 0),
   R.map(R.prop("number"))
@@ -66,6 +68,8 @@ const Cards = ({ override, selection }) => {
           let css = `
 .cutlines {
     padding: ${data.css.cutlines};
+    width: ${data.css.totalWidth};
+    height: ${data.css.totalHeight};
 }
 
 .cutlines:after,
@@ -90,6 +94,26 @@ const Cards = ({ override, selection }) => {
     top: -${data.css.cutlines};
 }
 
+.card,
+.card__bleed {
+    height: ${data.css.bleedHeight};
+    width: ${data.css.bleedWidth};
+}
+
+.card__body {
+    border: ${data.border}px solid black;
+    margin: ${data.css.bleed};
+    width: ${data.css.width};
+    height: ${data.css.height};
+}
+
+.share--gmt .share__hr {
+    width: calc(0.67in + ${data.css.bleed});
+}
+
+.train__hr {
+    height: calc(0.6875in + ${data.css.bleed});
+}
 `;
 
           return (
@@ -134,7 +158,7 @@ const Cards = ({ override, selection }) => {
                     Numbers
                   </label>
                   <p>
-                    Cards are meant to be printed in <b>landscape</b> mode
+                    Cards are meant to be printed in <b>{data.layout.landscape ? "landscape" : "portrait"}</b> mode
                   </p>
                 </div>
               </div>

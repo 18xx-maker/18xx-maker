@@ -1281,15 +1281,6 @@
           }
         ],
         "hexes": ["G16"]
-      },
-      {
-        "terrain": [
-          {
-            "type": "mountain",
-            "cost": 50
-          }
-        ],
-        "hexes": ["D17"]
       }
     ],
     "borders": [
