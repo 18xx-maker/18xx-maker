@@ -154,8 +154,9 @@ const Cards = ({ override, selection }) => {
 
           let splitCardNodes = R.splitEvery(data.layout.perPage, cardNodes);
 
-          let pageNodes = R.map(cardNodes => (
+          let pageNodes = R.addIndex(R.map)((cardNodes, i) => (
             <div className={`cards cards--${config.cards.layout}`}
+                 key={`cards-page-${i}`}
                  style={{width: data.css.printableWidth,
                          height: data.css.printableHeight}}>
               {cardNodes}
