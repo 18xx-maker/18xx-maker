@@ -75,13 +75,13 @@
       "tokens": "four"
     },
     {
-      "name": "Grande Compagnie Du Luxembourg",
+      "name": "Grande Compagnie du Luxembourg",
       "abbrev": "GCL",
       "color": "green",
       "tokens": "four"
     },
     {
-      "name": "Chemin de Fer Du Nord",
+      "name": "Chemin de Fer du Nord",
       "abbrev": "Nord",
       "color": "blue",
       "tokens": "three"
@@ -212,7 +212,7 @@
       "description": "Blocks Hexes K11 & J12. Player gets a 10% certificate for GCL."
     },
     {
-      "name": "Chemin de Fer de Lille Á Valenciennes - CFLV",
+      "name": "Chemin de Fer de Lille à Valenciennes - CFLV",
       "price": 220,
       "revenue": 30,
       "description": "Blocks Hexes I3 & J4. Includes president's certificate for the Chemin de Fer du Nord. Closes on first train purchase."
@@ -223,14 +223,15 @@
       "name": "2",
       "limit": "4",
       "number": "6",
-      "tiles": "yellow"
+      "tiles": "yellow",
+      "notes": "1 operating round, low off-board values"
     },
     {
       "name": "3",
       "limit": "4",
       "number": "5",
       "tiles": "green",
-      "notes": "Private companies may be purchased"
+      "notes": "2 operating rounds, private companies may be purchased"
     },
     {
       "name": "4",
@@ -244,7 +245,7 @@
       "limit": "2",
       "number": "3",
       "tiles": "brown",
-      "notes": "Private companies are closed"
+      "notes": "3 operating rounds, high off-board values, private companies are closed"
     },
     {
       "name": "6",
