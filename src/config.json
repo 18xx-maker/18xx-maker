@@ -49,7 +49,7 @@
   },
   "tokenLayout": "gsp",
   "tiles": {
-    "layout": "smallDie",
+    "layout": "die",
     "width": 150,
     "mapWidth": 150,
     "gaps": true

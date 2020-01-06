@@ -186,19 +186,23 @@ export const getCharterData = (charters, paper) => {
   let usableHeight = pageHeight - (2.0 * margins);
 
   let totalWidth = usableWidth;
+  let totalHalfWidth = usableWidth / 2;
   let totalHeight = usableHeight / 2;
   let totalMinorHeight = usableHeight / 3;
 
   let width = totalWidth - (2.0 * cutlinesAndBleed);
+  let halfWidth = totalHalfWidth - (2.0 * cutlinesAndBleed);
   let height = totalHeight - (2.0 * cutlinesAndBleed);
   let minorHeight = totalMinorHeight - (2.0 * cutlinesAndBleed);
 
   let bleedWidth = width + (2.0 * bleed);
+  let bleedHalfWidth = halfWidth + (2.0 * bleed);
   let bleedHeight = height + (2.0 * bleed);
   let bleedMinorHeight = minorHeight + (2.0 * bleed);
 
   return {
     width,
+    halfWidth,
     height,
     minorHeight,
     cutlines,
@@ -206,9 +210,11 @@ export const getCharterData = (charters, paper) => {
     border,
     cutlinesAndBleed,
     bleedWidth,
+    bleedHalfWidth,
     bleedHeight,
     bleedMinorHeight,
     totalWidth,
+    totalHalfWidth,
     totalHeight,
     totalMinorHeight,
 
@@ -220,15 +226,18 @@ export const getCharterData = (charters, paper) => {
 
     css: {
       width: unitsToCss(width),
+      halfWidth: unitsToCss(halfWidth),
       height: unitsToCss(height),
       minorHeight: unitsToCss(minorHeight),
       cutlines: unitsToCss(cutlines),
       bleed: unitsToCss(bleed),
       cutlinesAndBleed: unitsToCss(cutlinesAndBleed),
       bleedWidth: unitsToCss(bleedWidth),
+      bleedHalfWidth: unitsToCss(bleedHalfWidth),
       bleedHeight: unitsToCss(bleedHeight),
       bleedMinorHeight: unitsToCss(bleedMinorHeight),
       totalWidth: unitsToCss(totalWidth),
+      totalHalfWidth: unitsToCss(totalHalfWidth),
       totalHeight: unitsToCss(totalHeight),
       totalMinorHeight: unitsToCss(totalMinorHeight),
 
