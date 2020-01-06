@@ -31,9 +31,22 @@
   "straightCityNames": false,
   "theme": "gmt",
   "companiesTheme": "gmt",
-  "charterStyle": "color",
-  "halfWidthCharters": false,
-  "shareStyle": "gmt",
+  "charters": {
+    "style": "color",
+    "cutlines": 25,
+    "bleed": 12.5,
+    "halfWidth": false,
+    "border": 0
+  },
+  "cards": {
+    "shareStyle": "gmt",
+    "layout": "free",
+    "width": 265.748,
+    "height":  173.228,
+    "cutlines": 25,
+    "bleed": 12.5,
+    "border": 0
+  },
   "tokenLayout": "gsp",
   "tiles": {
     "layout": "die",

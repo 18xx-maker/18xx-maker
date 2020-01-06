@@ -19,7 +19,7 @@ const Border = ({ border, data }) => {
   let strokeDashArray = "none";
 
   if (border.dashed) {
-    strokeDashArray = width * 2.5;
+    strokeDashArray = border.dashArray || (width * 2.5);
     if (border.offset) {
       strokeDashOffset = border.offset;
     }

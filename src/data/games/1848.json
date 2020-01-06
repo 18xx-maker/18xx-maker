@@ -14,9 +14,7 @@
     "rules": "https://docs.google.com/document/d/1quWp3ZS2kzMirB4bwwT11wjJTFN9y9-1JMANRjzY564/edit"
   },
   "wip": true,
-  "tokens": [
-    "Round"
-  ],
+  "tokens": ["Round"],
   "ipo": true,
   "bank": 10000,
   "players": [
@@ -42,24 +40,9 @@
     }
   ],
   "tokenTypes": {
-    "three": [
-      "Home (Free)",
-      40,
-      100
-    ],
-    "default": [
-      "Home (Free)",
-      40,
-      100,
-      100
-    ],
-    "five": [
-      "Home (Free)",
-      40,
-      100,
-      100,
-      100
-    ]
+    "three": ["Home (Free)", 40, 100],
+    "default": ["Home (Free)", 40, 100, 100],
+    "five": ["Home (Free)", 40, 100, 100, 100]
   },
   "shareTypes": {
     "default": [
@@ -77,11 +60,11 @@
     ]
   },
   "companies": [
-      {
+    {
       "name": "Bank of England",
       "abbrev": "BOE",
       "tokens": [],
-      "color": "blue",
+      "color": "white",
       "shares": [
         {
           "quantity": 10,
@@ -110,24 +93,18 @@
     {
       "name": "South Australian Railway",
       "abbrev": "SAR",
-      "color": "pink"
+      "color": "purple"
     },
     {
       "name": "Commonwealth Railways",
       "abbrev": "CR",
-      "tokens": [
-        "Home (Free)",
-        "Home (Free)",
-        100,
-        100,
-        100
-      ],
+      "tokens": ["Home (Free)", "Home (Free)", 100, 100, 100],
       "color": "gray"
     },
     {
       "name": "Federal Territory Railway",
       "abbrev": "FT",
-      "color": "cyan"
+      "color": "blue"
     },
     {
       "name": "West Australian Railway",
@@ -422,10 +399,7 @@
   "turns": [
     {
       "name": "Stock Round",
-      "steps": [
-        "Sell any number of shares",
-        "Buy one share"
-      ],
+      "steps": ["Sell any number of shares", "Buy one share"],
       "ordered": true
     },
     {
@@ -438,34 +412,19 @@
         "Purchase trains"
       ],
       "ordered": true,
-      "optional": [
-        "Purchase private companies"
-      ]
+      "optional": ["Purchase private companies"]
     }
   ],
   "stock": {
     "type": "2D",
     "par": {
-      "values": [
-        100,
-        90,
-        80,
-        70
-      ]
+      "values": [100, 90, 80, 70]
     },
     "movement": {
-      "up": [
-        "Sold out"
-      ],
-      "down": [
-        "Each sale (not each share)"
-      ],
-      "left": [
-        "Withheld revenue"
-      ],
-      "right": [
-        "Paid dividends"
-      ]
+      "up": ["Sold out"],
+      "down": ["Each sale (not each share)"],
+      "left": ["Withheld revenue"],
+      "right": ["Paid dividends"]
     },
     "market": [
       [
@@ -738,12 +697,8 @@
             "side": 6
           }
         ],
-        "removeBorders": [
-          4
-        ],
-        "hexes": [
-          "A4"
-        ]
+        "removeBorders": [4],
+        "hexes": ["A4"]
       },
       {
         "color": "offboard",
@@ -780,12 +735,8 @@
             "side": 6
           }
         ],
-        "removeBorders": [
-          1
-        ],
-        "hexes": [
-          "A6"
-        ]
+        "removeBorders": [1],
+        "hexes": ["A6"]
       },
       {
         "color": "offboard",
@@ -820,9 +771,7 @@
             "side": 6
           }
         ],
-        "hexes": [
-          "A18"
-        ]
+        "hexes": ["A18"]
       },
       {
         "color": "offboard",
@@ -861,12 +810,7 @@
         },
         "cities": [
           {
-            "companies": [
-              {
-                "label": "WA",
-                "color": "red"
-              }
-            ]
+            "companies": ["WA"]
           }
         ],
         "offBoardTrack": [
@@ -880,9 +824,7 @@
             "side": 3
           }
         ],
-        "hexes": [
-          "D1"
-        ]
+        "hexes": ["D1"]
       },
       {
         "color": "water",
@@ -918,13 +860,14 @@
             "percent": 0.6
           }
         ],
-        "hexes": [
-          "B21"
-        ]
+        "hexes": ["B21"]
       },
       {
         "color": "water",
         "offBoardRevenue": {
+          "name": {
+            "name": "Port Lincoln"
+          },
           "revenues": [
             {
               "color": "yellow",
@@ -956,9 +899,7 @@
             "percent": 0.6
           }
         ],
-        "hexes": [
-          "F3"
-        ]
+        "hexes": ["F3"]
       },
       {
         "color": "plain",
@@ -968,35 +909,7 @@
             "cost": 40
           }
         ],
-        "hexes": [
-          "B3",
-          "C2",
-          "C4",
-          "B7",
-          "E6"
-        ]
-      },
-      {
-        "color": "plain",
-        "hexes": [
-          "B5",
-          "C6",
-          "D5",
-          "D7",
-          "F7"
-        ]
-      },
-      {
-        "color": "plain",
-        "terrain": [
-          {
-            "type": "cactus",
-            "cost": 40
-          }
-        ],
-        "hexes": [
-          "E8"
-        ]
+        "hexes": ["B3", "B7", "B9", "C2", "C4", "C8", "E6", "E8"]
       },
       {
         "color": "plain",
@@ -1006,37 +919,7 @@
             "cost": 50
           }
         ],
-        "hexes": [
-          "D17",
-          "E16",
-          "H15",
-          "H13"
-        ]
-      },
-      {
-        "color": "plain",
-        "hexes": [
-          "D11",
-          "D13",
-          "D15",
-          "D19",
-          "E10",
-          "E12",
-          "F11"
-        ]
-      },
-      {
-        "color": "plain",
-        "terrain": [
-          {
-            "type": "cactus",
-            "cost": 40
-          }
-        ],
-        "hexes": [
-          "B9",
-          "C8"
-        ]
+        "hexes": ["D17", "E16", "H15", "H13"]
       },
       {
         "color": "plain",
@@ -1044,12 +927,24 @@
           "B11",
           "B13",
           "B15",
+          "B5",
           "C10",
+          "C12",
           "C14",
           "C16",
+          "C6",
+          "D11",
+          "D13",
+          "D15",
+          "D19",
+          "D5",
+          "D7",
+          "E10",
+          "E12",
+          "F11",
+          "F7",
           "F9",
-          "G8",
-          "C12"
+          "G8"
         ]
       },
       {
@@ -1070,9 +965,7 @@
             }
           }
         ],
-        "hexes": [
-          "B17"
-        ]
+        "hexes": ["B17"]
       },
       {
         "color": "plain",
@@ -1091,21 +984,7 @@
             "x": 30
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "C18"
-        ]
+        "hexes": ["C18"]
       },
       {
         "color": "plain",
@@ -1122,17 +1001,10 @@
               "name": "Brisbane",
               "reverse": true
             },
-            "companies": [
-              {
-                "label": "QR",
-                "color": "green"
-              }
-            ]
+            "companies": ["QR"]
           }
         ],
-        "hexes": [
-          "B19"
-        ]
+        "hexes": ["B19"]
       },
       {
         "color": "plain",
@@ -1149,54 +1021,23 @@
               "name": "Sydney",
               "reverse": true
             },
-            "companies": [
-              {
-                "label": "NSW",
-                "color": "orange"
-              }
-            ]
+            "companies": ["NSW"]
           }
         ],
-        "hexes": [
-          "F17"
-        ]
+        "hexes": ["F17"]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
         "cities": [
           {
             "name": {
               "name": "Canberra",
               "reverse": true
             },
-            "companies": [
-              {
-                "label": "FT",
-                "color": "cyan"
-              }
-            ]
+            "companies": ["FT"]
           }
         ],
-        "hexes": [
-          "G14"
-        ]
+        "hexes": ["G14"]
       },
       {
         "color": "plain",
@@ -1213,17 +1054,10 @@
               "name": "Melbourne",
               "reverse": true
             },
-            "companies": [
-              {
-                "label": "VR",
-                "color": "yellow"
-              }
-            ]
+            "companies": ["VR"]
           }
         ],
-        "hexes": [
-          "H11"
-        ]
+        "hexes": ["H11"]
       },
       {
         "color": "plain",
@@ -1232,17 +1066,10 @@
             "name": {
               "name": "Port Augusta"
             },
-            "companies": [
-              {
-                "label": "CAR",
-                "color": "black"
-              }
-            ]
+            "companies": ["CAR"]
           }
         ],
-        "hexes": [
-          "E4"
-        ]
+        "hexes": ["E4"]
       },
       {
         "color": "plain",
@@ -1253,40 +1080,19 @@
             "percent": 0.667
           }
         ],
-        "borders": [
-          {
-            "side": 4,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
         "cities": [
           {
             "name": {
               "name": "Adelaide",
               "reverse": true
             },
-            "companies": [
-              {
-                "label": "SAR",
-                "color": "purple"
-              }
-            ]
+            "companies": ["SAR"]
           }
         ],
-        "hexes": [
-          "G6"
-        ]
+        "hexes": ["G6"]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 6,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
         "cities": [
           {
             "name": {
@@ -1295,9 +1101,7 @@
             }
           }
         ],
-        "hexes": [
-          "C20"
-        ]
+        "hexes": ["C20"]
       },
       {
         "color": "plain",
@@ -1309,9 +1113,7 @@
             }
           }
         ],
-        "hexes": [
-          "E18"
-        ]
+        "hexes": ["E18"]
       },
       {
         "color": "plain",
@@ -1323,19 +1125,10 @@
             }
           }
         ],
-        "hexes": [
-          "E14"
-        ]
+        "hexes": ["E14"]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 6,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
         "cities": [
           {
             "name": {
@@ -1344,29 +1137,10 @@
             }
           }
         ],
-        "hexes": [
-          "F13"
-        ]
+        "hexes": ["F13"]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 2,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 3,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
         "cities": [
           {
             "name": {
@@ -1375,19 +1149,10 @@
             }
           }
         ],
-        "hexes": [
-          "D9"
-        ]
+        "hexes": ["D9"]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
         "cities": [
           {
             "name": {
@@ -1396,24 +1161,10 @@
             }
           }
         ],
-        "hexes": [
-          "H9"
-        ]
+        "hexes": ["H9"]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 3,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 4,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
         "cities": [
           {
             "name": {
@@ -1422,9 +1173,7 @@
             }
           }
         ],
-        "hexes": [
-          "H7"
-        ]
+        "hexes": ["H7"]
       },
       {
         "color": "plain",
@@ -1436,9 +1185,7 @@
             }
           }
         ],
-        "hexes": [
-          "F5"
-        ]
+        "hexes": ["F5"]
       },
       {
         "color": "plain",
@@ -1450,9 +1197,7 @@
             }
           }
         ],
-        "hexes": [
-          "E2"
-        ]
+        "hexes": ["E2"]
       },
       {
         "color": "plain",
@@ -1479,9 +1224,7 @@
             }
           }
         ],
-        "hexes": [
-          "F15"
-        ]
+        "hexes": ["F15"]
       },
       {
         "color": "plain",
@@ -1493,20 +1236,10 @@
             "x": 30
           }
         ],
-        "hexes": [
-          "G12",
-          "D3"
-        ]
+        "hexes": ["G12", "D3"]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 3,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
         "cities": [
           {
             "angle": 90,
@@ -1523,16 +1256,11 @@
             }
           }
         ],
-        "hexes": [
-          "G10"
-        ]
+        "hexes": ["G10"]
       },
       {
         "color": "water",
-        "hexes": [
-          "I8",
-          "I10"
-        ]
+        "hexes": ["I8", "I10"]
       },
       {
         "color": "plain",
@@ -1541,13 +1269,6 @@
             "type": "mountain",
             "cost": 50,
             "percent": 0.7
-          }
-        ],
-        "borders": [
-          {
-            "side": 6,
-            "dashed": true,
-            "color": "offboard"
           }
         ],
         "cities": [
@@ -1559,406 +1280,75 @@
             }
           }
         ],
-        "hexes": [
-          "G16"
+        "hexes": ["G16"]
+      }
+    ],
+    "borders": [
+      {
+        "color": "gray",
+        "width": 4,
+        "dashed": true,
+        "dashArray": 20,
+        "offset": 22,
+        "coords": [
+          "D9p3",
+          "D9p4",
+          "D9p5",
+          "D11p4",
+          "D11p5",
+          "D13p4",
+          "D13p5",
+          "D15p4",
+          "D15p5",
+          "D17p4",
+          "D17p5",
+          "D19p4",
+          "D19p5"
         ]
       },
       {
-        "terrain": [
-          {
-            "type": "cactus",
-            "cost": 40
-          }
-        ],
-        "borders": [
-          {
-            "side": 5,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 4,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "B7"
+        "color": "gray",
+        "width": 4,
+        "dashed": true,
+        "dashArray": 20,
+        "offset": 22,
+        "offset": 21,
+        "coords": [
+          "F9p3",
+          "F9p4",
+          "F9p5",
+          "G10p4",
+          "G10p5",
+          "G12p4",
+          "G12p5",
+          "H13p4",
+          "H13p5",
+          "H15p4",
+          "H15p5"
         ]
       },
       {
-        "terrain": [
-          {
-            "type": "cactus",
-            "cost": 40
-          }
-        ],
-        "borders": [
-          {
-            "side": 1,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "B9"
-        ]
-      },
-      {
-        "terrain": [
-          {
-            "type": "cactus",
-            "cost": 40
-          }
-        ],
-        "borders": [
-          {
-            "side": 1,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 2,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "C8"
-        ]
-      },
-      {
-        "borders": [
-          {
-            "side": 4,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "C6"
-        ]
-      },
-      {
-        "borders": [
-          {
-            "side": 3,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 4,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "D7"
-        ]
-      },
-      {
-        "terrain": [
-          {
-            "type": "cactus",
-            "cost": 40
-          }
-        ],
-        "borders": [
-          {
-            "side": 1,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 2,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "E8"
-        ]
-      },
-      {
-        "terrain": [
-          {
-            "type": "cactus",
-            "cost": 40
-          }
-        ],
-        "borders": [
-          {
-            "side": 4,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "E6"
-        ]
-      },
-      {
-        "borders": [
-          {
-            "side": 2,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 3,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "D11",
-          "D13",
-          "D15",
-          "D19"
-        ]
-      },
-      {
-        "borders": [
-          {
-            "side": 5,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "C10",
-          "C12",
-          "C14",
-          "C16"
-        ]
-      },
-      {
-        "terrain": [
-          {
-            "type": "mountain",
-            "cost": 50
-          }
-        ],
-        "borders": [
-          {
-            "side": 3,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 2,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "D17"
-        ]
-      },
-      {
-        "borders": [
-          {
-            "side": 3,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 4,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 2,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 1,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "F9"
-        ]
-      },
-      {
-        "borders": [
-          {
-            "side": 3,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 4,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "F7"
-        ]
-      },
-      {
-        "borders": [
-          {
-            "side": 1,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 2,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "G8"
-        ]
-      },
-      {
-        "borders": [
-          {
-            "side": 6,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "E10"
-        ]
-      },
-      {
-        "borders": [
-          {
-            "side": 1,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "F11"
-        ]
-      },
-      {
-        "terrain": [
-          {
-            "type": "mountain",
-            "cost": 50
-          }
-        ],
-        "borders": [
-          {
-            "side": 2,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 3,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "H15"
-        ]
-      },
-      {
-        "terrain": [
-          {
-            "type": "mountain",
-            "cost": 50
-          }
-        ],
-        "borders": [
-          {
-            "side": 3,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "H13"
-        ]
-      },
-      {
-        "centerTowns": [
-          {
-            "x": -30
-          },
-          {
-            "x": 30
-          }
-        ],
-        "borders": [
-          {
-            "side": 2,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 3,
-            "dashed": true,
-            "color": "offboard"
-          },
-          {
-            "side": 4,
-            "dashed": true,
-            "color": "offboard"
-          }
-        ],
-        "hexes": [
-          "G12"
+        "color": "gray",
+        "width": 4,
+        "dashed": true,
+        "dashArray": 20,
+        "offset": 22,
+        "offset": -12,
+        "coords": [
+          "B7p5",
+          "C8p4",
+          "C8p3",
+          "C8p2",
+          "C8p1",
+          "E8p4",
+          "E8p3",
+          "E8p2",
+          "E8p1",
+          "G8p4",
+          "G8p3",
+          "G8p2",
+          "G8p1",
+          "H9p2"
         ]
       }
     ]
