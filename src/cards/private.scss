@@ -1,0 +1,73 @@
+.private__name {
+  box-sizing: border-box;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.125in 0.125in 0.03125in 0.125in;
+  line-height: 0.22in;
+  font-size: 0.18in;
+  text-align: left;
+}
+
+.private__icon {
+  float: right;
+  line-height: 0.22in;
+  font-size: 0.18in;
+  margin: 0.125in 0.125in 0 0;
+  padding: 0.125in;
+}
+
+.private__description {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  padding: 0 0.125in;
+  text-align: left;
+  left: 0;
+  line-height: 0.105in;
+  font-size: 0.085in;
+  font-weight: normal;
+  font-family: sans-serif;
+}
+
+
+.private__price {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0.125in;
+  height: 0.25in;
+  line-height: 0.25in;
+  font-size: 0.18in;
+}
+
+.private__bid {
+  position: absolute;
+  bottom: 0.25in;
+  left: 0;
+  padding: 0.125in;
+  height: 0.25in;
+  line-height: 0.25in;
+  font-size: 0.18in;
+}
+
+.private__players {
+  position: absolute;
+  bottom: 0.25in;
+  right: 0;
+  padding: 0.125in;
+  line-height: 0.25in;
+  height: 0.25in;
+  font-size: 0.14in;
+}
+
+.private__revenue {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0.125in;
+  line-height: 0.25in;
+  height: 0.25in;
+  font-size: 0.18in;
+}

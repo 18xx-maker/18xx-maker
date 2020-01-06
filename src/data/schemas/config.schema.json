@@ -25,7 +25,7 @@
       "required": ["width", "height"]
     },
     "margins": {
-        "$ref": "#/definitions/dimension"
+      "$ref": "#/definitions/dimension"
     }
   },
 
@@ -76,13 +76,40 @@
       "type": "string",
       "enum": ["equal", "max"]
     },
-    "shareStyle": {
-      "type": "string",
-      "enum": ["center", "left", "gmt"]
+    "cards": {
+      "type": "object",
+      "properties": {
+        "shareStyle": {
+          "type": "string",
+          "enum": ["center", "left", "gmt"]
+        },
+        "layout": {
+          "type": "string",
+          "enum": ["free", "miniEuroDie", "dtgDie"]
+        },
+        "width": { "type": "number", "minimum": 1 },
+        "height": { "type": "number", "minimum": 1 },
+        "cutlines": { "type": "number", "minimum": 0 },
+        "bleed": { "type": "number", "minimum": 0 },
+        "border": { "type": "number", "minimum": 0}
+      },
+      "required": ["shareStyle", "layout", "width", "height", "cutlines", "bleed"],
+      "additionalProperties": false
     },
-    "charterStyle": {
-      "type": "string",
-      "enum": ["carth", "color"]
+    "charters": {
+      "type": "object",
+      "properties": {
+        "style": {
+          "type": "string",
+          "enum": ["carth", "color"]
+        },
+        "cutlines": { "type": "number", "minimum": 0 },
+        "bleed": { "type": "number", "minimum": 0 },
+        "border": { "type": "number", "minimum": 0},
+        "halfWidth": { "type": "boolean" }
+      },
+      "required": ["style", "halfWidth", "cutlines", "border"],
+      "additionalProperties": false
     },
     "tokenLayout": {
       "type": "string",
@@ -125,25 +152,27 @@
       "type": "string",
       "enum": ["none", "languages", "lotr", "dev", "webdev", "owl"]
     },
+    "overrideSelection": {
+      "type": "array",
+      "items": { "type": "integer", "minimum": 0 }
+    },
     "plainMapCompanies": { "type": "boolean" },
     "straightCityNames": { "type": "boolean" },
-    "halfWidthCharters": { "type": "boolean" },
     "font": { "$ref": "#/definitions/font" }
   },
   "required": [
-    "charterStyle",
     "companiesTheme",
     "companySvgLogos",
     "coords",
     "font",
     "pagination",
     "paper",
-    "plainMapDestinations",
-    "plainMapHomes",
-    "shareStyle",
+    "plainMapCompanies",
     "stock",
     "theme",
-    "tokenLayout"
+    "tokenLayout",
+    "overrideCompanies",
+    "overrideSelection"
   ],
   "additionalProperties": false
 }
