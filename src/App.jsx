@@ -463,44 +463,6 @@ const App = () => (
                       strokeLinejoin="round"
                     />
                   </g>
-                  <g id="mountain60">
-                    <path
-                      d="M -15 -5 L -10 -10 L -5 -5 M 5 -5 L 10 -10 L 15 -5 M -7.5 -7.5 L 0 -15 L 7.5 -7.5"
-                      fill="none"
-                      stroke={c("mountain")}
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                    <text
-                      fill={c("black")}
-                      fontSize="10"
-                      dominantBaseline="hanging"
-                      textAnchor="middle"
-                      x="0"
-                      y="0"
-                    >
-                      £60
-                    </text>
-                  </g>
-                  <g id="mountain120">
-                    <path
-                      d="M -15 -5 L -10 -10 L -5 -5 M 5 -5 L 10 -10 L 15 -5 M -7.5 -7.5 L 0 -15 L 7.5 -7.5"
-                      fill="none"
-                      stroke={c("mountain")}
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                    <text
-                      fill={c("black")}
-                      fontSize="14"
-                      dominantBaseline="hanging"
-                      textAnchor="middle"
-                      x="0"
-                      y="-5"
-                    >
-                      £120
-                    </text>
-                  </g>
                   <path id="cityPath" d="M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30" />
                   <path
                     id="cityPathReverse"

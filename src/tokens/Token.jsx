@@ -223,37 +223,64 @@ const Token = ({
             tokenFill = gradient ? `url(#${id})` : (tokenFill || c(colors[0]));
           } else {
 
-            textFill = t(c(colors[0]));
+            textFill = t(c(colors[0]) || p("white"));
             tokenFill = c(colors[0]) || p("white");
           }
         }
 
-        let content = icon ? (
-          <use href={icon} transform="scale(1.66666 1.66666)" />
-        ) : (
-          <text
-            fontFamily="display"
-            fontSize={width * 0.64}
-            textAnchor="middle"
-            strokeWidth="0.5"
-            stroke={textStroke}
-            fill={textFill}
-            textLength={
-              label ?
-                label.length > 2
-                ? width * 2 - width * 0.4
-                : label.length === 1
-                ? width * 0.5
-                : width
-              : 0
-            }
-            lengthAdjust="spacingAndGlyphs"
-            x="0"
-            y={width * 0.24}
-          >
-            {label}
-          </text>
-        );
+        let content = [];
+        if (icon) {
+          content.push(<use href={`#${icon}`} transform="scale(1.66666 1.66666)" />);
+          if (label) {
+            content.push(<text
+                           fontFamily="display"
+                           fontSize={width * 0.48}
+                           textAnchor="middle"
+                           strokeWidth="0.5"
+                           stroke={textStroke}
+                           fill={textFill}
+                           textLength={
+                             label ?
+                               label.length > 2
+                               ? width * 1.8 - width * 0.4
+                               : label.length === 1
+                               ? width * 0.4
+                               : width * 0.8
+                             : 0
+                           }
+                           lengthAdjust="spacingAndGlyphs"
+                           x="0"
+                           y={(width * 0.24) + 12}
+                         >
+                           {label}
+                         </text>
+                        );
+          }
+        } else {
+          content.push(<text
+                         fontFamily="display"
+                         fontSize={width * 0.64}
+                         textAnchor="middle"
+                         strokeWidth="0.5"
+                         stroke={textStroke}
+                         fill={textFill}
+                         textLength={
+                           label ?
+                             label.length > 2
+                             ? width * 2 - width * 0.4
+                             : label.length === 1
+                             ? width * 0.5
+                             : width
+                           : 0
+                         }
+                         lengthAdjust="spacingAndGlyphs"
+                         x="0"
+                         y={width * 0.24}
+                       >
+                         {label}
+                       </text>
+                      );
+        }
 
         let outlineColor = p(outline || "black");
         return (

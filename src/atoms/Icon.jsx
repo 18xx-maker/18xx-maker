@@ -44,17 +44,10 @@ const Value = ({ type }) => {
   case "meat":
     icon = <use href="#meat" />;
     break;
-  case "mountain60":
-    icon = <use href="#mountain60" />;
-    break;
-  case "mountain120":
-    icon = <use href="#mountain120" />;
-    break;
   case "coal":
     icon = <use href="#coal" />;
     break;
   case "port":
-  case "steam":
   default:
     icon = <use href="#port" />;
     break;
