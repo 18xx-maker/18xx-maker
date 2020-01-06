@@ -29,6 +29,11 @@ const CompanyToken = (props) => {
         // Set the main color
         passing.color = props.color || company.color;
 
+        if (passing.inverse) {
+          delete passing.inverse;
+          passing.reserved = true;
+        }
+
         // Anything that the company defined in it's "token" field should override
         passing = { ...passing, ...company.token };
 

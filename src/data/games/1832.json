@@ -6,7 +6,6 @@
     "background": "gray",
     "titleX": 50,
     "titleY": 1500,
-    "extraStationTokens": 6,
     "currency": "USD"
   },
   "links": {
@@ -15,15 +14,15 @@
   },
   "tokens": [
     "Round",
-    "#port",
+    { "icon": "port" },
     "+$10",
-    "Coal",
-    "Coal",
-    "Coal",
-    "Coal",
-    "Coal",
-    "Coal",
-    "KW"
+    { "icon": "coal" },
+    { "icon": "coal" },
+    { "icon": "coal" },
+    { "icon": "coal" },
+    { "icon": "coal" },
+    { "icon": "coal" },
+    { "icon": "river", "label": "Key West" }
   ],
   "ipo": true,
   "bank": 12000,
@@ -60,6 +59,7 @@
     }
   ],
   "tokenTypes": {
+    "system": [100,100,100,100,100,100],
     "two": [
       "Free",
       40
@@ -71,6 +71,19 @@
     ]
   },
   "shareTypes": {
+    "system": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 4
+      },
+      {
+        "quantity": 16,
+        "percent": 5,
+        "shares": 1
+      }
+    ],
     "default": [
       {
         "quantity": 1,
@@ -79,24 +92,48 @@
         "shares": 2
       },
       {
-        "quantity": 1,
-        "label": "President's Certificate",
-        "percent": 20,
-        "shares": 4
-      },
-      {
         "quantity": 8,
-        "percent": "10/5",
-        "shares": 1
-      },
-      {
-        "quantity": 8,
-        "percent": 5,
+        "percent": 10,
         "shares": 1
       }
     ]
   },
   "companies": [
+    {
+      "name": "System A",
+      "color": "red",
+      "abbrev": "A",
+      "shares": "system",
+      "tokens": "system"
+    },
+    {
+      "name": "System B",
+      "color": "orange",
+      "abbrev": "B",
+      "shares": "system",
+      "tokens": "system"
+    },
+    {
+      "name": "System C",
+      "color": "green",
+      "abbrev": "C",
+      "shares": "system",
+      "tokens": "system"
+    },
+    {
+      "name": "System D",
+      "color": "blue",
+      "abbrev": "D",
+      "shares": "system",
+      "tokens": "system"
+    },
+    {
+      "name": "System E",
+      "color": "purple",
+      "abbrev": "E",
+      "shares": "system",
+      "tokens": "system"
+    },
     {
       "name": "Atlantic Coast Line Railroad",
       "abbrev": "ACL",
@@ -105,6 +142,7 @@
     {
       "name": "Atlanta & West Point Railroad",
       "abbrev": "A&WP",
+      "logo": "AWP",
       "color": "lavender",
       "tokens": "two"
     },
@@ -116,6 +154,7 @@
     {
       "name": "Norfolk & Western Railway",
       "abbrev": "N&W",
+      "logo": "NW",
       "color": "black"
     },
     {
@@ -126,6 +165,7 @@
     {
       "name": "Louisville & Nashville Railroad",
       "abbrev": "L&N",
+      "logo": "LN",
       "color": "blue"
     },
     {
@@ -258,42 +298,53 @@
       "name": "P1: Carolina Stage Coach",
       "price": 20,
       "revenue": 5,
+      "token": { "color": "yellow", "label": "$" },
       "description": ""
     },
     {
       "name": "P2: Cotton Warehouse",
       "price": 40,
       "revenue": 10,
+      "token": {
+        "color": "white",
+        "label": "+$10"
+      },
       "description": "This company has a $10 token which may be placed in any non-coastal city (Atlantic or Gulf Coast) as an extra token lay during the token placement step of an owning public company's operating round."
     },
     {
       "name": "P3: Atlantic Shipping",
       "price": 50,
       "revenue": 10,
+      "icon": "port",
       "description": "This company has a Port token which may be placed on any city on the coasts an extra token lay during the token placement step of an owning public company's operating round. All eligible cities are marked with an anchor symbol. This token increases the value of the selected city by $20 for the owning company and by $10 for all other companies."
     },
     {
       "name": "P4: London Investment",
       "price": 70,
       "revenue": 10,
+      "icon": "share",
       "description": "This company represents those shrewd investors in London. They have hired you to invest their money in the new Southern railways. They will purchase a share in your choice of any newly started company. You get the share. After the company pays its first dividend, the London Investment Company is closed, as they realize they have paid you for nothing and you spent the money for yourself."
     },
     {
       "name": "P5: West Virginia Coalfields",
       "price": 80,
       "revenue": 15,
+      "icon": "coal",
       "description": "This private company gives the owning company a WVCF token for free. When other companies connect to the coal fields, they may buy a WVCF token (if available) during their operating round for $80 ($40 goes to the company owning the WVCF private company)."
     },
     {
-      "name": "P6: Southern Bank (var)",
+      "name": "P6: Southern Bank",
+      "note": "Variant",
       "price": 100,
       "revenue": "$10/10%",
+      "icon": "charter",
       "description": "You may loan money to your company by taking out a mortgage on a company asset. The mortgage value is from half to double the value of the asset. At the start of each operating round, the company will pay you 10% interest (10% of the value of the mortgaged asset). If the company does not have enough money to pay the interest, it pays nothing. The company will repay the mortgage for half to full value of the asset. "
     },
     {
       "name": "P7: Central Railroad & Canal",
       "price": 200,
       "revenue": 30,
+      "company": "COG",
       "description": "Comes with the president's share of the Central of Georgia Railway. The player buying this private company must immediately set the par value of the CoG. "
     }
   ],
