@@ -83,6 +83,7 @@ const MaxTokens = ({ game, override, selection }) => {
       );
     } else {
       if (token.match(/^#/)) {
+        console.log(token);
         return (
           <g
             key={index}
@@ -90,7 +91,7 @@ const MaxTokens = ({ game, override, selection }) => {
               (60 * tokensWidth)} ${30 +
               60 * Math.floor((index + totalTokenCount) / tokensWidth)})`}
           >
-            <Token icon={token} bleed={true} color="white" outline="black" />
+            <Token icon={token.replace("#", "")} bleed={true} color="white" outline="black" />
           </g>
         );
       } else {

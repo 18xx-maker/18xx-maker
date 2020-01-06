@@ -208,7 +208,7 @@ const Token = ({
               let size = 2 * width;
               let Component = svg.Component;
               shape = (
-                <Component className={`color-main-${colors[0]}`}
+                <Component className={`color-main-${colors[0]}${reserved ? " color-reserved" : ""}`}
                            x={start} y={start}
                            height={size} width={size}/>
               );
