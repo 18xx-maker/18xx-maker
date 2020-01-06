@@ -63,7 +63,7 @@ const atoms = [{
   group: "Icons",
   examples: [{icons: [{type: "meat"}]},
              {icons: [{type: "coal"}]},
-             {icons: [{type: "steam"}]},
+             {icons: [{type: "port"}]},
              {icons: [{type: "tree"}]},
              {icons: [{type: "mail"}]},
              {icons: [{type: "boat"}]},

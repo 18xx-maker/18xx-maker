@@ -308,7 +308,7 @@
       "name": "Steamboat Company",
       "price": 40,
       "revenue": 10,
-      "icon": "steam",
+      "icon": "port",
       "description": "Place or shift the port marker among port locations (B8, C5, D14, G19, I1). Add $20 per port symbol to all routes run to this location by the owning (or assigned) company."
     },
     {
