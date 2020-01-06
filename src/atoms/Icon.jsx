@@ -5,6 +5,21 @@ const Value = ({ type }) => {
   let icon;
 
   switch (type) {
+  case "mountain":
+    icon = <use href="#mountain" />
+    break;
+  case "water":
+    icon = <use href="#water" />
+    break;
+  case "river":
+    icon = <use href="#river" />
+    break;
+  case "cactus":
+    icon = <use href="#cactus" />
+    break;
+  case "swamp":
+    icon = <use href="#swamp" />
+    break;
   case "meat":
     icon = <use href="#meat" />;
     break;
