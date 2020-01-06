@@ -69,6 +69,7 @@ const atoms = [{
              {icons: [{type: "boat"}]},
              {icons: [{type: "tracks"}]},
              {icons: [{type: "share"}]},
+             {icons: [{type: "charter"}]},
              {icons: [{type: "bridge"}]},
              {icons: [{type: "swamp"}]},
              {icons: [{type: "cactus"}]},

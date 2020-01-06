@@ -5,6 +5,9 @@ const Value = ({ type }) => {
   let icon;
 
   switch (type) {
+  case "charter":
+    icon = <use href="#charter" />
+    break;
   case "tracks":
     icon = <use href="#tracks" />
     break;

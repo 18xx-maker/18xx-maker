@@ -290,6 +290,34 @@ const App = () => (
                       strokeLinejoin="round"
                     />
                   </g>
+                  <g id="charter">
+                    <rect
+                      width="20"
+                      height="12"
+                      x="-10"
+                      y="-6"
+                      rx="3"
+                      ry="3"
+                      fill="none"
+                      stroke={c("black")}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <rect
+                      width="20"
+                      height="5"
+                      x="-10"
+                      y="-6"
+                      rx="3"
+                      ry="3"
+                      fill={c("red")}
+                      stroke={c("black")}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </g>
                   <g id="share">
                     <rect
                       width="20"
