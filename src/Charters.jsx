@@ -54,6 +54,10 @@ const Charters = ({charters, paper, override, selection}) => {
     height: ${data.css.totalMinorHeight};
 }
 
+.cutlines--half {
+    width: ${data.css.totalHalfWidth};
+}
+
 .cutlines:after,
 .cutlines:before {
     width: ${data.css.cutlines};
@@ -64,6 +68,11 @@ const Charters = ({charters, paper, override, selection}) => {
 .cutlines--minor:after,
 .cutlines--minor:before {
     height: ${data.css.minorHeight};
+}
+
+.cutlines--half:after,
+.cutlines--half:before {
+    width: ${data.css.halfWidth};
 }
 
 .cutlines > div:after,
@@ -81,6 +90,11 @@ const Charters = ({charters, paper, override, selection}) => {
     top: -${data.css.cutlines};
 }
 
+.cutlines--half > div:before,
+.cutlines--half > div:after {
+    width: ${data.css.halfWidth};
+}
+
 .charter,
 .charter__bleed {
     height: ${data.css.bleedHeight};
@@ -90,6 +104,11 @@ const Charters = ({charters, paper, override, selection}) => {
 .charter--minor,
 .charter--minor .charter__bleed {
     height: ${data.css.bleedMinorHeight};
+}
+
+.charter--half,
+.charter--half .charter__bleed {
+    width: ${data.css.bleedHalfWidth};
 }
 
 .charter__body {
@@ -103,8 +122,24 @@ const Charters = ({charters, paper, override, selection}) => {
     height: ${data.css.minorHeight};
 }
 
+.charter--half .charter__body {
+    width: ${data.css.halfWidth};
+}
+
 .charter--color .charter__hr {
     height: calc(1.0625in + ${data.css.bleed});
+}
+.charter--color.charter--minor .charter__hr {
+    height: calc(0.875in + ${data.css.bleed});
+}
+
+.charter--carth .charter__hr {
+    top: calc(1.125in + ${data.css.bleed});
+}
+
+.charter--carth.harter--minor .charter__hr,
+.charter--carth.charter--half .charter__hr {
+    top: calc(0.875in + ${data.css.bleed});
 }
 `;
 
@@ -133,7 +168,7 @@ const Charters = ({charters, paper, override, selection}) => {
               turns={game.turns}
               minor={!!company.minor}
               company={company}
-            /> : <div key="spacer" className="cutlines"><div className={`charter${charters.halfWidth ? " charter--half" : ""}`}></div></div>
+            /> : <div key="spacer" className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}><div className={`charter${charters.halfWidth ? " charter--half" : ""}`}></div></div>
         ), companies)}
         <PageSetup landscape={false}/>
       </div>

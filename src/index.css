@@ -157,8 +157,9 @@ svg {
   width: 100%;
 }
 
+.charter--half .charter__hr,
 .charter--minor .charter__hr {
-  top: 1in;
+  top: 0.875in;
 }
 
 .charter--color .charter__hr {
@@ -167,7 +168,7 @@ svg {
 }
 
 .charter--color.charter--minor .charter__hr {
-  height: 1in;
+  height: 0.875in;
 }
 
 .charter__name {
@@ -185,6 +186,7 @@ svg {
   justify-content: center;
 }
 
+.charter--carth.charter--half .charter__name,
 .charter--minor .charter__name {
   height: 0.875in;
 }
@@ -235,26 +237,33 @@ svg {
   left: 0;
   width: 50%;
   padding: 0.125in;
-  box-sizing: border-box;
   border-width: 0 1px 0 0;
   border-color: #666;
   border-style: dashed;
   box-sizing: border-box;
 }
 
+.charter--carth .charter__trains {
+  height: calc(100% - 1.1875in);
+}
+
 .charter--minor .charter__trains {
-  height: 1.5625in;
+  height: calc(100% - 0.875in);
+}
+
+.charter--minor.charter--carth .charter__trains {
+  height: calc(100% - 0.9375in);
 }
 
 .charter__assets {
   text-align: left;
   position: absolute;
-  height: 3.1875in;
+  height: calc(100% - 1.0625in);
   bottom: 0;
   left: 0;
-  margin: 0.125in 0.125in 0.25in 1.125in;
-  width: 2.5in;
-  padding: 0 0.125in;
+  margin-left: 1in;
+  width: calc(100% - 1in);
+  padding: 0.125in;
   box-sizing: border-box;
   border-width: 0 0 0 1px;
   border-color: #666;
@@ -262,7 +271,11 @@ svg {
 }
 
 .charter--minor .charter__assets {
-  height: 1.5625in;
+  height: calc(100% - 0.875in);
+}
+
+.charter--carth .charter__assets {
+  height: calc(100% - 0.9375in);
 }
 
 .charter__game {
@@ -292,8 +305,16 @@ svg {
   box-sizing: border-box;
 }
 
+.charter--carth .charter__treasury {
+  height: calc(100% - 1.1875in);
+}
+
 .charter--minor .charter__treasury {
-  height: 1.8125in;
+  height: calc(100% - 0.875in);
+}
+
+.charter--minor.charter--carth .charter__treasury {
+  height: calc(100% - 0.9375in);
 }
 
 .charter__phase {
@@ -350,8 +371,8 @@ svg {
   position: absolute;
   bottom: 0;
   margin: 0;
-  padding: 0;
-  width: calc(100% - 0.25in);
+  padding: 0.125in;
+  width: 100%;
 }
 
 .charter dt {
@@ -408,18 +429,22 @@ svg {
 }
 
 .charter--half .charter__tokens {
-  top: 1.1875in;
-  height: calc(100% - 1.1875in - 0.25in);
+  top: 1.0625in;
+  height: calc(100% - 1.0625in);
   width: 1in;
-  margin: 0.125in 0 0.125in 0.125in;
-  padding: 0 0.125in 0.125in 0.125in;
+  padding: 0.125in;
   left: 0;
   right: auto;
 }
 
 .charter--minor.charter--half .charter__tokens {
-  top: 1.0625in;
-  height: calc(100% - 1.0625 - 0.25in);
+  top: 0.875in;
+  height: calc(100% - 0.875in);
+}
+
+.charter--carth.charter--half .charter__tokens {
+  top: 0.9375in;
+  height: calc(100% - 0.9375in);
 }
 
 .charter--half .charter__tokens svg {

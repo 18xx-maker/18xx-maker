@@ -69,7 +69,7 @@ const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, char
   return (
     <Color context="companies">
       {(c, t) => (
-        <div className={`cutlines${minor ? " cutlines--minor" : ""}`}>
+        <div className={`cutlines${minor ? " cutlines--minor" : ""}${halfWidthCharters ? " cutlines--half" : ""}`}>
           <div className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidthCharters ? " charter--half" : ""}`}>
             <div className="charter__bleed">
               <div
