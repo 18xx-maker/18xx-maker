@@ -107,7 +107,7 @@
       "name": "Reale Società d'Affari",
       "price": 150,
       "revenue": 25,
-      "token": { "color": "white", "label": "#1" },
+      "icon": "charter",
       "description": "When a player buys the R.S.A. they immediately open the first available corporation and get the president's certificate. The R.S.A. is eliminated when the Corporation buys its first train."
     }
   ],
