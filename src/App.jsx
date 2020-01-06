@@ -123,7 +123,7 @@ const App = () => (
                        stroke="white"
                        strokeWidth="2" />
             </mask>
-            <Color>
+            <Color context="companies">
               {(c,t,s,p) => (
                 <React.Fragment>
                   {terrainIcon("mountain",
@@ -155,6 +155,211 @@ const App = () => (
                                10,
                                1,
                                "M 0 0 L 0 -20 M 0 -5 Q -5 -5, -5 -10 M 0 -10 Q 5 -10, 5 -15")}
+                  <g id="bridge">
+                    <rect
+                      width="20"
+                      height="1"
+                      x="-10"
+                      y="2"
+                      fill={c("black")}
+                      stroke={c("black")}
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <rect
+                      width="1"
+                      height="16"
+                      x="4"
+                      y="-8"
+                      fill={c("black")}
+                      stroke={c("black")}
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <rect
+                      width="1"
+                      height="16"
+                      x="-5"
+                      y="-8"
+                      fill={c("black")}
+                      stroke={c("black")}
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M -4 -8 C -3 -1 3 -1 4 -8"
+                      fill="none"
+                      stroke={c("black")}
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M -10 2 C -7 2 -5 -5 -5 -8"
+                      fill="none"
+                      stroke={c("black")}
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M 10 2 C 7 2 5 -5 5 -8"
+                      fill="none"
+                      stroke={c("black")}
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </g>
+                  <g id="boat">
+                    <polygon
+                      points="9,2 3,2 3,-10"
+                      fill={c("orange")}
+                      stroke={c("black")}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <polygon
+                      points="-6,2 0,2 0,-8"
+                      fill={c("orange")}
+                      stroke={c("black")}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M -10 5 C -6 12 6 12 10 5 L -10 5"
+                      fill={c("orange")}
+                      stroke={c("black")}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </g>
+                  <g id="tracks">
+                    <path
+                      d="M -10 -3 L 10 -3"
+                      fill="none"
+                      stroke={c("black")}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M -10 3 L 10 3"
+                      fill="none"
+                      stroke={c("black")}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M -7 -6 L -7 6"
+                      fill="none"
+                      stroke={c("black")}
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M -2 -6 L -2 6"
+                      fill="none"
+                      stroke={c("black")}
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M 3 -6 L 3 6"
+                      fill="none"
+                      stroke={c("black")}
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M 8 -6 L 8 6"
+                      fill="none"
+                      stroke={c("black")}
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </g>
+                  <g id="share">
+                    <rect
+                      width="20"
+                      height="12"
+                      x="-10"
+                      y="-6"
+                      rx="3"
+                      ry="3"
+                      fill="none"
+                      stroke={c("black")}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <rect
+                      width="7"
+                      height="12"
+                      x="-10"
+                      y="-6"
+                      rx="3"
+                      ry="3"
+                      fill={c("purple")}
+                      stroke={c("black")}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </g>
+                  <g id="mail">
+                    <rect
+                      width="20"
+                      height="12"
+                      x="-10"
+                      y="-6"
+                      fill={c("cyan")}
+                      stroke={c("black")}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M -10 -6 L 0 0 L 10 -6 L -10 -6"
+                      fill={c("cyan")}
+                      stroke={c("black")}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </g>
+                  <g id="tree">
+                    <rect
+                      width="4"
+                      height="8"
+                      x="-2"
+                      y="1"
+                      fill={c("mountain")}
+                      stroke={c("mountain")}
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <polygon
+                      points="-6,3 0,-10 6,3"
+                      fill={c("land")}
+                      stroke={c("land")}
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </g>
                   <g id="meat" transform="translate(0 2)">
                     <path
                       d="M 0 0 c 7 0, 2 -5, 12 -5 C 5 -4, 7 4, 0 4 C -7 4, -5 -4, -12 -5 C -2 -5, -7 0, 0 0"

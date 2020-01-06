@@ -77,7 +77,7 @@ const Token = ({
   );
 
   return (
-    <Color>
+    <Color context="companies">
       {(c,t,s,p) => {
         let textFill = labelColor ? c(labelColor) : t(c(colors[0]));
         let textStroke = "none";

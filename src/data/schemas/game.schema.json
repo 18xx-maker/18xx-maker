@@ -168,6 +168,8 @@
           "hex": { "type": "string" },
           "token": { "$ref": "#/definitions/token" },
           "company": { "type": "string" },
+          "icon": { "type": "string" },
+          "tile": { "type": "string" },
           "bid": {
             "oneOf": [
               { "type": "string" },
