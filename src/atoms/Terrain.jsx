@@ -3,8 +3,6 @@ import Color from "../data/Color";
 
 import Currency from "../util/Currency";
 
-const width = 2;
-
 const Terrain = ({ type, size, cost, fontSize }) => {
   fontSize = fontSize || 15;
 

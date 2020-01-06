@@ -230,9 +230,10 @@ const Token = ({
 
         let content = [];
         if (icon) {
-          content.push(<use href={`#${icon}`} transform="scale(1.66666 1.66666)" />);
+          content.push(<use key="icon" href={`#${icon}`} transform="scale(1.66666 1.66666)" />);
           if (label) {
             content.push(<text
+                           key="text"
                            fontFamily="display"
                            fontSize={width * 0.48}
                            textAnchor="middle"
@@ -258,6 +259,7 @@ const Token = ({
           }
         } else {
           content.push(<text
+                         key="text"
                          fontFamily="display"
                          fontSize={width * 0.64}
                          textAnchor="middle"
