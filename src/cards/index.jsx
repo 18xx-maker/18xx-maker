@@ -15,6 +15,7 @@ import Config from "../data/Config";
 import games from "../data/games";
 import { compileCompanies, overrideCompanies, fillArray } from "../util";
 import { getCardData } from "./util";
+import Svg from "../Svg";
 
 import GameContext from "../context/GameContext";
 
@@ -58,12 +59,109 @@ const Cards = ({ override, selection }) => {
       ? R.range(1, maxPlayers(game.players || []) + 1)
       : [];
 
+  let privateNodes = R.addIndex(R.map)(
+    (p, i) => (
+      <Private key={`private-${params.game}-${i}`} {...p} />
+    ),
+    privates
+  );
+  let shareNodes = R.addIndex(R.chain)((company, index) => {
+    let shares = fillArray(R.prop("quantity"), company.shares || []);
+    return R.addIndex(R.map)(
+      (share, i) => (
+        <Share
+          key={`${company.abbrev}-${i}`}
+          company={company}
+          name={company.name}
+          abbrev={company.abbrev}
+          logo={company.logo}
+          color={company.color}
+          token={company.token || company.color}
+          {...share}
+        />
+      ),
+      shares
+    );
+  }, companies);
+  let trainNodes = R.addIndex(R.map)(
+    (train, index) => (
+      <Train train={train} key={`train-${train.name}-${index}`} />
+    ),
+    trains
+  );
+  let numberNodes = R.map(
+    n => (
+      <Number
+        number={n}
+        background={game.info.background}
+        key={`number=${n}`}
+      />
+    ),
+    numbers
+  );
+
+  let cardNodes = [...privateNodes, ...shareNodes, ...trainNodes, ...numberNodes];
+
   return (
     <GameContext.Provider value={params.game}>
       <Config>
         {(config, game) => {
-          let data = getCardData(config.cards, config.paper)
-          console.log(data);
+          let cardConfig = R.clone(config.cards);
+          let paperConfig = R.clone(config.paper);
+
+          switch(config.cards.layout) {
+          case "miniEuroDie":
+            paperConfig.width = 850;
+            paperConfig.height = 1100;
+            paperConfig.margins = 25;
+
+            cardConfig.width = 265.748;
+            cardConfig.height = 173.228;
+            cardConfig.cutlines = 25;
+            cardConfig.bleed = 12.5;
+            cardConfig.border = 0;
+
+            break;
+          case "dtgDie":
+            paperConfig.width = 850;
+            paperConfig.height = 1100;
+            paperConfig.margins = 25;
+
+            cardConfig.width = 250;
+            cardConfig.height = 150;
+            cardConfig.cutlines = 0;
+            cardConfig.bleed = 0;
+            cardConfig.border = 0;
+
+            break;
+          default:
+            // No overrides for "free" layout
+            break;
+          }
+
+          let data = getCardData(cardConfig, paperConfig);
+
+          let pins = null;
+
+          if (config.cards.layout !== "free") {
+            pins = (<Svg className="pins" viewBox="0 0 50 800">
+                      <circle r="12.5" cy="100" cx="25" fill="gray" strokeWidth="1" stroke="black" />
+                      <circle r="12.5" cy="700" cx="25" fill="gray" strokeWidth="1" stroke="black" />
+                      <circle r="6.25" cy="100" cx="25" fill="white" strokeWidth="1" stroke="black" />
+                      <circle r="6.25" cy="700" cx="25" fill="white" strokeWidth="1" stroke="black" />
+                    </Svg>);
+          }
+
+          let splitCardNodes = R.splitEvery(data.layout.perPage, cardNodes);
+
+          let pageNodes = R.map(cardNodes => (
+            <div className={`cards cards--${config.cards.layout}`}
+                 style={{width: data.css.printableWidth,
+                         height: data.css.printableHeight}}>
+              {cardNodes}
+              {pins}
+            </div>
+          ), splitCardNodes);
 
           let css = `
 .cutlines {
@@ -170,49 +268,8 @@ const Cards = ({ override, selection }) => {
                   </p>
                 </div>
               </div>
-              <div className="cards">
-                {R.addIndex(R.map)(
-                  (p, i) => (
-                    <Private key={`private-${params.game}-${i}`} {...p} />
-                  ),
-                  privates
-                )}
-                {R.addIndex(R.chain)((company, index) => {
-                  let shares = fillArray(R.prop("quantity"), company.shares || []);
-                  return R.addIndex(R.map)(
-                    (share, i) => (
-                      <Share
-                        key={`${company.abbrev}-${i}`}
-                        company={company}
-                        name={company.name}
-                        abbrev={company.abbrev}
-                        logo={company.logo}
-                        color={company.color}
-                        token={company.token || company.color}
-                        {...share}
-                      />
-                    ),
-                    shares
-                  );
-                }, companies)}
-                {R.addIndex(R.map)(
-                  (train, index) => (
-                    <Train train={train} key={`train-${train.name}-${index}`} />
-                  ),
-                  trains
-                )}
-                {R.map(
-                  n => (
-                    <Number
-                      number={n}
-                      background={game.info.background}
-                      key={`number=${n}`}
-                    />
-                  ),
-                  numbers
-                )}
-                <PageSetup landscape={data.layout.landscape} />
-              </div>
+              {pageNodes}
+              <PageSetup landscape={data.layout.landscape} />
             </React.Fragment>
           );
         }}

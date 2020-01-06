@@ -108,11 +108,6 @@ svg {
   overflow: visible;
 }
 
-.cards {
-  position: relative;
-  overflow: auto;
-}
-
 .charters {
   position: relative;
   overflow: auto;
