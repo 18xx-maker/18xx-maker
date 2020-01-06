@@ -107,6 +107,14 @@ const Cards = ({ override, selection }) => {
     height: ${data.css.height};
 }
 
+.share__hr {
+    bottom: calc(0.375in + ${data.css.bleed});
+}
+
+.share--left .share__hr {
+    left: calc(0.2225in + ${data.css.bleed});
+}
+
 .share--gmt .share__hr {
     width: calc(0.67in + ${data.css.bleed});
 }

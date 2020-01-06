@@ -119,13 +119,27 @@ svg {
 }
 
 .charter {
+  box-sizing: border-box;
   page-break-inside: avoid;
   font-family: display;
-  height: 4.75in;
-  width: 7.5in;
   position: relative;
   background-color: white;
   float: left;
+}
+
+.charter__bleed {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
+.charter__body {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .charter--minor {
@@ -149,7 +163,6 @@ svg {
 
 .charter--color .charter__hr {
   top: 0;
-  height: 1.1875in;
   border-bottom: 2px solid black;
 }
 
@@ -158,11 +171,9 @@ svg {
 }
 
 .charter__name {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 0.25in 0.25in 0.25in 0.25in;
-  height: 1.1875in;
+  position: relative;
+  padding: 0.125in;
+  height: 1.0625in;
   font-size: 0.25in;
   line-height: 0.3in;
   box-sizing: border-box;
@@ -175,7 +186,7 @@ svg {
 }
 
 .charter--minor .charter__name {
-  height: 1in;
+  height: 0.875in;
 }
 
 .charter--half .charter__name {
@@ -184,16 +195,21 @@ svg {
 }
 
 .charter--color .charter__name {
-  padding-left: 1.125in;
+  padding-left: 1in;
+}
+
+.charter--minor.charter--color .charter__name {
+  padding-left: 0.875in;
 }
 
 .charter__logo {
   height: 0.75in;
   width: 0.75in;
-  margin: 0.125in 0.125in 0 0.125in;
   padding-top: 0.125in;
   padding-left: 0.125in;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .charter__logo > svg {
   height: 0.75in;
@@ -204,7 +220,6 @@ svg {
 .charter--minor .charter__logo {
   height: 0.625in;
   width: 0.625in;
-  padding-top: 0.0625in;
 }
 
 .charter--minor .charter__logo > svg {
@@ -215,16 +230,16 @@ svg {
 .charter__trains {
   text-align: left;
   position: absolute;
-  height: 3.1875in;
+  height: calc(100% - 1.0625in);
   bottom: 0;
   left: 0;
-  margin: 0.125in 0 0.25in 0.125in;
-  width: 3.625in;
-  padding: 0 0.125in 0 0.125in;
+  width: 50%;
+  padding: 0.125in;
   box-sizing: border-box;
   border-width: 0 1px 0 0;
   border-color: #666;
   border-style: dashed;
+  box-sizing: border-box;
 }
 
 .charter--minor .charter__trains {
@@ -269,12 +284,11 @@ svg {
 .charter__treasury {
   text-align: left;
   position: absolute;
-  height: 3.4375in;
+  height: calc(100% - 1.0625in);
   bottom: 0;
   right: 0;
-  margin: 0.125in 0.125in 0 0;
-  width: 3.625in;
-  padding: 0 0.125in 0.25in 0.125in;
+  width: 50%;
+  padding: 0.125in;
   box-sizing: border-box;
 }
 
@@ -285,8 +299,10 @@ svg {
 .charter__phase {
   position: absolute;
   bottom: 0;
-  padding: 0 0.125in 0 0;
-  width: calc(100% - 0.25in);
+  padding: 0.125in;
+  box-sizing: border-box;
+  width: 100%;
+  left: 0;
 }
 
 .charter__phase table {
@@ -322,10 +338,12 @@ svg {
 
 .charter dl {
   position: absolute;
+  margin: 0;
   bottom: 0;
-  margin: 0 0 0.125in 0;
-  padding: 0 0 0.125in 0;
-  width: calc(100% - 0.25in);
+  left: 0;
+  padding: 0.125in;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .charter--half dl {
@@ -368,147 +386,11 @@ svg {
   margin: 0 0 0 0.15in;
 }
 
-.minorCharter {
-  page-break-inside: avoid;
-  font-family: display;
-  height: 3in;
-  width: 5in;
-  position: relative;
-  background-color: white;
-  float: left;
-}
-
-.minorCharter__hr {
-  height: 0.0625in;
-  position: absolute;
-  top: .7in;
-  width: 100%;
-}
-
-.minorCharter__name {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 0 0.125in 0 0.125in;
-  padding-left: 0.125in;
-  height: 1in;
-  line-height: 1in;
-  font-size: 0.25in;
-  box-sizing: border-box;
-  width: calc(100% - 0.25in);
-  text-align: left;
-}
-
-
-.minorCharter__trains {
-  text-align: left;
-  position: absolute;
-  height: 2.25in;
-  bottom: 0;
-  left: 0;
-  margin: 0.125in 0 0 0.125in;
-  width: 1.75in;
-  padding: 0 0.125in 0.25in 0.125in;
-  box-sizing: border-box;
-  border-width: 0 1px 0 0;
-  border-color: #666;
-  border-style: dashed;
-}
-
-.minorCharter__treasury {
-  text-align: left;
-  position: absolute;
-  height: 2.25in;
-  bottom: 0;
-  right: 0;
-  margin: 0.0in 0.125in 0 0;
-  width: 2.625in;
-  padding: 0 0.125in 0.25in 0.125in;
-  box-sizing: border-box;
-}
-
-.minorCharter dl {
-  position: absolute;
-  bottom: 0;
-  margin: 0 0 0.125in 0;
-  padding: 0 0 0.125in 0;
-  width: calc(100% - 0.25in);
-}
-
-.minorCharter dt {
-  margin: 0.125in 0 0 0;
-  font-size: 0.13in;
-}
-
-.minorCharter__phase {
-  position: absolute;
-  bottom: 0;
-  padding: 0 0.125in 0.25in 0;
-  width: calc(100% - 0.25in);
-}
-
-.minorCharter__phase table {
-  font-family: sans-serif;
-  font-size: 0.09in;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.minorCharter__phase th {
-  padding: 0 0.05in;
-  font-family: display;
-  text-align: center;
-}
-
-.minorCharter__phase th.phase__notes {
-  text-align: left;
-}
-
-.minorCharter__phase td {
-  padding: 0.03in 0.05in;
-  border: 1px solid black;
-  text-align: center;
-  vertical-align: top;
-  white-space: nowrap;
-}
-
-.minorCharter__phase td.phase__notes {
-  text-align: left;
-  white-space: normal;
-}
-
-.minorCharter dd {
-  margin: 0;
-  font-size: 0.12in;
-  font-family: sans-serif;
-}
-
-.minorCharter ul {
-  list-style-type: disc;
-  list-style-position: outside;
-  padding: 0;
-  padding-left: 3px;
-  margin: 0 0 0 0.15in;
-}
-
-.minorCharter ul li span {
-  position: relative;
-  left: -3px;
-}
-
-.minorCharter ol {
-  list-style-type: decimal;
-  list-style-position: outside;
-  padding: 0;
-  margin: 0 0 0 0.15in;
-}
-
 .charter__tokens {
   position: absolute;
   top: 0;
   right: 0;
   padding: 0.26in 0.125in 0.125in 0.125in;
-  margin: 0.125in 0.125in 0 0;
   height: 1in;
   box-sizing: border-box;
   line-height: normal;
@@ -516,6 +398,7 @@ svg {
 
 .charter--minor .charter__tokens {
   padding-top: 0.135in;
+  height: 0.875in;
 }
 
 .charter__tokens svg {
@@ -542,23 +425,6 @@ svg {
 .charter--half .charter__tokens svg {
   height: 0.5in;
   padding: 0.05in 0 0 0;
-}
-
-
-.minorCharter__tokens {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0.26in 0.125in 0.125in 0.125in;
-  margin: 0in 0.125in 0 0;
-  height: 1in;
-  box-sizing: border-box;
-}
-
-.minorCharter__tokens svg {
-  width: 0.5in;
-  height: 0.7in;
-  padding: 0 0 0 0.15in;
 }
 
 .prices {

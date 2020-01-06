@@ -175,3 +175,68 @@ export const overrideCompanies = (companies, override, selections) => {
 
   }, companies || []);
 }
+
+export const getCharterData = (charters, paper) => {
+  let { cutlines, bleed, border } = charters;
+  let { margins, width: pageWidth, height: pageHeight } = paper;
+
+  let cutlinesAndBleed = cutlines + bleed;
+
+  let usableWidth = pageWidth - (2.0 * margins);
+  let usableHeight = pageHeight - (2.0 * margins);
+
+  let totalWidth = usableWidth;
+  let totalHeight = usableHeight / 2;
+  let totalMinorHeight = usableHeight / 3;
+
+  let width = totalWidth - (2.0 * cutlinesAndBleed);
+  let height = totalHeight - (2.0 * cutlinesAndBleed);
+  let minorHeight = totalMinorHeight - (2.0 * cutlinesAndBleed);
+
+  let bleedWidth = width + (2.0 * bleed);
+  let bleedHeight = height + (2.0 * bleed);
+  let bleedMinorHeight = minorHeight + (2.0 * bleed);
+
+  return {
+    width,
+    height,
+    minorHeight,
+    cutlines,
+    bleed,
+    border,
+    cutlinesAndBleed,
+    bleedWidth,
+    bleedHeight,
+    bleedMinorHeight,
+    totalWidth,
+    totalHeight,
+    totalMinorHeight,
+
+    margins,
+    pageWidth,
+    pageHeight,
+    usableWidth,
+    usableHeight,
+
+    css: {
+      width: unitsToCss(width),
+      height: unitsToCss(height),
+      minorHeight: unitsToCss(minorHeight),
+      cutlines: unitsToCss(cutlines),
+      bleed: unitsToCss(bleed),
+      cutlinesAndBleed: unitsToCss(cutlinesAndBleed),
+      bleedWidth: unitsToCss(bleedWidth),
+      bleedHeight: unitsToCss(bleedHeight),
+      bleedMinorHeight: unitsToCss(bleedMinorHeight),
+      totalWidth: unitsToCss(totalWidth),
+      totalHeight: unitsToCss(totalHeight),
+      totalMinorHeight: unitsToCss(totalMinorHeight),
+
+      margins: unitsToCss(margins),
+      pageWidth: unitsToCss(pageWidth),
+      pageHeight: unitsToCss(pageHeight),
+      usableWidth: unitsToCss(usableWidth),
+      usableHeight: unitsToCss(usableHeight)
+    }
+  };
+}
