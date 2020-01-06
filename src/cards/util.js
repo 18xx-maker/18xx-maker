@@ -1,7 +1,7 @@
 import { unitsToCss } from "../util";
 
 export const getCardData = (cards, paper) => {
-  let { width, height, cutlines, bleed, border } = cards;
+  let { layout, width, height, cutlines, bleed, border } = cards;
   let { margins, width: pageWidth, height: pageHeight } = paper;
 
   let cutlinesAndBleed = cutlines + bleed;
@@ -14,8 +14,11 @@ export const getCardData = (cards, paper) => {
   let totalWidth = (2.0 * cutlinesAndBleed) + width;
   let totalHeight = (2.0 * cutlinesAndBleed) + height;
 
-  let usableWidth = pageWidth - (2.0 * margins);
-  let usableHeight = pageHeight - (2.0 * margins);
+  let printableWidth = pageWidth - (2.0 * margins);
+  let printableHeight = pageHeight - (2.0 * margins);
+
+  let usableWidth = printableWidth;
+  let usableHeight = printableHeight - (layout === "free" ? 0 : 25);
 
   // Calculate how many in portait
   let portrait = {
@@ -33,7 +36,7 @@ export const getCardData = (cards, paper) => {
   // Use portrait if it's more or equal to landscape
   let usePortrait = portrait.perPage >= landscape.perPage;
 
-  let layout = {
+  let cardLayout = {
     perPage: usePortrait ? portrait.perPage : landscape.perPage,
     perRow: usePortrait ? portrait.perRow : landscape.perRow,
     perColumn: usePortrait ? portrait.perColumn : landscape.perColumn,
@@ -54,14 +57,16 @@ export const getCardData = (cards, paper) => {
     totalHeight,
 
     margins,
-    pageWidth: layout.landscape ? pageHeight : pageWidth,
-    pageHeight: layout.landscape ? pageWidth : pageHeight,
-    usableWidth: layout.landscape ? usableHeight : usableWidth,
-    usableHeight: layout.landscape ? usableWidth : usableHeight,
+    pageWidth: cardLayout.landscape ? pageHeight : pageWidth,
+    pageHeight: cardLayout.landscape ? pageWidth : pageHeight,
+    printableWidth: cardLayout.landscape ? printableHeight : printableWidth,
+    printableHeight: cardLayout.landscape ? printableWidth : printableHeight,
+    usableWidth: cardLayout.landscape ? usableHeight : usableWidth,
+    usableHeight: cardLayout.landscape ? usableWidth : usableHeight,
 
     portrait,
     landscape,
-    layout,
+    layout: cardLayout,
 
     css: {
       width: unitsToCss(width),
@@ -75,10 +80,12 @@ export const getCardData = (cards, paper) => {
       totalHeight: unitsToCss(totalHeight),
 
       margins: unitsToCss(margins),
-      pageWidth: unitsToCss(pageWidth),
-      pageHeight: unitsToCss(pageHeight),
-      usableWidth: unitsToCss(usableWidth),
-      usableHeight: unitsToCss(usableHeight)
+      pageWidth: cardLayout.landscape ? unitsToCss(pageHeight) : unitsToCss(pageWidth),
+      pageHeight: cardLayout.landscape ? unitsToCss(pageWidth) : unitsToCss(pageHeight),
+      printableWidth: cardLayout.landscape ? unitsToCss(printableHeight) : unitsToCss(printableWidth),
+      printableHeight: cardLayout.landscape ? unitsToCss(printableWidth) : unitsToCss(printableHeight),
+      usableWidth: cardLayout.landscape ? unitsToCss(usableHeight) : unitsToCss(usableWidth),
+      usableHeight: cardLayout.landscape ? unitsToCss(usableWidth) : unitsToCss(usableHeight)
     }
   };
 }
