@@ -302,6 +302,36 @@ export const mapCoord = (string, data) => {
   return string
 }
 
+export const getMapHexes = (game, variation) => {
+  variation = variation || 0;
+
+  // Get the relevant map
+  let gameMap = Array.isArray(game.map) ? game.map[variation] : game.map;
+
+  // If the game is map-less, just return an empty object
+  if (!gameMap) {
+    return [];
+  }
+
+  let hexes = map(assoc("variation", variation), gameMap.hexes || []);
+  if (gameMap.copy !== undefined) {
+    hexes = concat(
+      map(assoc("variation", gameMap.copy), game.map[gameMap.copy].hexes),
+      hexes
+    );
+  }
+  hexes = map(resolveHex(hexes), hexes);
+
+  return hexes;
+}
+
+export const getMapHex = (game, hex, variation) => {
+  let hexes = getMapHexes(game, variation);
+
+  return find(h => h.hexes.includes(hex),
+         hexes);
+}
+
 export const getMapData = (game, coords, hexWidth, variation) => {
   variation = variation || 0;
 

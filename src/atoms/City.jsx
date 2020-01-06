@@ -11,9 +11,17 @@ import GameMapCompanyToken from "../tokens/GameMapCompanyToken";
 import ColorContext from "../context/ColorContext";
 import RotateContext from "../context/RotateContext";
 
-const City = ({ straightCityNames, size, companies, border, name, extend, rotation, pass, bgColor }) => {
+const City = ({ straightCityNames, size, companies, icons, border, name, extend, rotation, pass, bgColor }) => {
   if (size === undefined) {
     size = 1;
+  }
+
+  let icon = num => {
+    if (icons && icons[num]) {
+      return <g transform="scale(1.2)"><use href={`#${icons[num]}`} /></g>;
+    }
+
+    return null;
   }
 
   let companyColor = num =>
@@ -97,6 +105,7 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
               </g>
             )}
           </Color>
+          {icon(0)}
           {companyLabel(0)}
           <Color context="companies">
             {c => (
@@ -162,6 +171,7 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
                   stroke="none"
                   r="25"
                 />
+                {icon(0)}
                 {companyLabel(0)}
                 <circle
                   fill="none"
@@ -176,6 +186,7 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
                   stroke="none"
                   r="25"
                 />
+                {icon(1)}
                 {companyLabel(1)}
                 <circle
                   fill="none"
@@ -223,6 +234,7 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
                   stroke="none"
                   r="25"
                 />
+                {icon(0)}
                 {companyLabel(0)}
                 <circle
                   fill="none"
@@ -237,6 +249,7 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
                   stroke="none"
                   r="25"
                 />
+                {icon(1)}
                 {companyLabel(1)}
                 <circle
                   fill="none"
@@ -251,6 +264,7 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
                   stroke="none"
                   r="25"
                 />
+                {icon(2)}
                 {companyLabel(2)}
                 <circle
                   fill="none"
@@ -298,6 +312,7 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
                   stroke="none"
                   r="25"
                 />
+                {icon(0)}
                 {companyLabel(0)}
                 <circle
                   fill="none"
@@ -312,6 +327,7 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
                   stroke="none"
                   r="25"
                 />
+                {icon(1)}
                 {companyLabel(1)}
                 <circle
                   fill="none"
@@ -326,6 +342,7 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
                   stroke="none"
                   r="25"
                 />
+                {icon(3)}
                 {companyLabel(3)}
                 <circle
                   fill="none"
@@ -340,6 +357,7 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
                   stroke="none"
                   r="25"
                 />
+                {icon(2)}
                 {companyLabel(2)}
                 <circle
                   fill="none"

@@ -10,14 +10,6 @@
   text-align: left;
 }
 
-.private__icon {
-  float: right;
-  line-height: 0.22in;
-  font-size: 0.18in;
-  margin: 0.125in 0.125in 0 0;
-  padding: 0.125in;
-}
-
 .private__description {
   box-sizing: border-box;
   position: relative;
@@ -70,4 +62,26 @@
   line-height: 0.25in;
   height: 0.25in;
   font-size: 0.18in;
+}
+
+.private__hex,
+.private__icon,
+.private__company {
+  float: left;
+  padding: 0 1em 1em 0;
+  width: 0.3in;
+  height: 0.3in;
+
+  svg {
+    width: 0.3in;
+    height: 0.3in;
+  }
+}
+
+.private__group {
+  float: right;
+  line-height: 0.22in;
+  font-size: 0.18in;
+  margin: 0.125in 0.125in 0 0;
+  padding: 0.125in;
 }

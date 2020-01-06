@@ -46,7 +46,8 @@ const Token = ({
   inverse, // Should we render the "inverse" of this token? No logos, only text
 
   bleed, // Should we draw bleed around the token (for printing)
-  outline // Should we draw an outline around the token circle
+  outline, // Should we draw an outline around the token circle
+  outlineWidth // What stroke width to use on the outline
 }) => {
   // If we only passed in one color, collect it in a single item array as "colors"
   colors = colors || [color];
@@ -265,6 +266,7 @@ const Token = ({
               r={width + (bleed ? 5 : 0)}
               fill={tokenFill}
               stroke={outlineColor}
+              strokeWidth={outlineWidth || 1}
             />
             {shape}
             {content}

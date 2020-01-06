@@ -20,6 +20,29 @@ import Footer from "./Footer";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+const terrainIcon = (id, color, translate, scale, path) => (
+  <g id={id}>
+    <path
+      transform={`translate(0 ${translate + 1}) scale(${scale})`}
+      d={path}
+      fill="none"
+      stroke="white"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      transform={`translate(0 ${translate}) scale(${scale})`}
+      d={path}
+      fill="none"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </g>
+);
+
 const App = () => (
   <Router>
     <ScrollToTop>
@@ -101,8 +124,37 @@ const App = () => (
                        strokeWidth="2" />
             </mask>
             <Color>
-              {c => (
+              {(c,t,s,p) => (
                 <React.Fragment>
+                  {terrainIcon("mountain",
+                               p("mountain"),
+                               1,
+                               0.75,
+                               "M -15 0 L -10 -5 L -5 0 M 5 0 L 10 -5 L 15 0 M -7.5 -2.5 L 0 -10 L 7.5 -2.5")}
+                  {terrainIcon("water",
+                               p("water"),
+                               5,
+                               0.60,
+                               "M -17.5 -5 C -17.5 0, -7.5 0, -7.5 -5 C -7.5 0, 2.5 0, 2.5 -5 C 2.5 0, 12.5 0, 12.5 -5" +
+                               "M -12.5 -12.5 C -12.5 -7.5, -2.5 -7.5, -2.5 -12.5 C -2.5 -7.5, 7.5 -7.5, 7.5 -12.5 C 7.5 -7.5, 17.5 -7.5, 17.5 -12.5")}
+                  {terrainIcon("river",
+                               p("water"),
+                               3,
+                               0.70,
+                               "M -15 -7 Q -7.5 -15, 0 -7 S 7.5 1, 15 -7" +
+                               "M -15 -2  Q -7.5 -10, 0 -2  S 7.5 6, 15 -2")}
+                  {terrainIcon("swamp",
+                               p("land"),
+                               3,
+                               0.75,
+                               "M -10 0 Q -10 -5, -15 -5 M -10 0 Q -10 -5, -5 -5" +
+                               "M 0 -5 Q 0 -10, -5 -10 M 0 -5 Q 0 -10, 5 -10" +
+                               "M 10 0 Q 10 -5, 15 -5 M 10 0 Q 10 -5, 5 -5")}
+                  {terrainIcon("cactus",
+                               p("land"),
+                               10,
+                               1,
+                               "M 0 0 L 0 -20 M 0 -5 Q -5 -5, -5 -10 M 0 -10 Q 5 -10, 5 -15")}
                   <g id="meat" transform="translate(0 2)">
                     <path
                       d="M 0 0 c 7 0, 2 -5, 12 -5 C 5 -4, 7 4, 0 4 C -7 4, -5 -4, -12 -5 C -2 -5, -7 0, 0 0"
