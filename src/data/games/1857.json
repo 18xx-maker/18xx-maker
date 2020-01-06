@@ -194,36 +194,42 @@
       "name": "Camino de Hierro de Buenos Aires al Oeste",
       "price": 40,
       "revenue": 10,
+      "hex": "G16",
       "description": "Reserves the Camino de Hierro de Buenos Aires al Oeste hex (G16). Only the owning corporation is permitted to lay this track. This can be purchased by a corporation during the yellow phase. Closes when the first 5 Train is purchased."
     },
     {
       "name": "Saint Sebastian Trading Company",
       "price": 40,
       "revenue": 10,
+      "icon": "share",
       "description": "Trade for one share at any time, this action closes the company. This trade cannot allow you to own more than 60% of a corporation. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if owned by a corporation."
     },
     {
       "name": "Saint Pedro Shipping Company",
       "price": 40,
       "revenue": 10,
+      "hex": "E20",
       "description": "The owning corporation increases their revenue at Bahia Blanco (E20) by $10 for all runs. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
       "name": "Saint Barbara Mining Company",
       "price": 40,
       "revenue": 10,
+      "hex": "D11",
       "description": "The owning corporation doubles their revenue at Cordoba (D11) for ONE run to or through Cordoba. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
       "name": "Saint Zolius Land Company",
       "price": 40,
       "revenue": 10,
+      "token": { "color": "black", "label": "Free" },
       "description": "The owning corporation may place one token at no cost, this action closes the company. This must follow normal placement rules. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
       "name": "Saint Dominic de la Calzada Company",
       "price": 40,
       "revenue": 10,
+      "tile": "8",
       "description": "The owning corporation may lay or upgrade one track in addition to their normal track action, this action closes the company. Closes when the first 5 Train is purchased."
     }
   ],

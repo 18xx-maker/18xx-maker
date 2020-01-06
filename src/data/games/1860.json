@@ -292,30 +292,35 @@
       "name": "Brading Harbour Company",
       "price": 30,
       "revenue": 5,
+      "company": "BHI&R",
       "description": "Can be exchanged for a share in the BHI&R pubilc company."
     },
     {
       "name": "Yarmouth Harbour Company",
       "price": 50,
       "revenue": 10,
+      "company": "FYN",
       "description": "Can be exchanged for a share in the FYN public company."
     },
     {
       "name": "Cowes Marina and Harbour",
       "price": 90,
       "revenue": 20,
+      "company": "C&N",
       "description": "Can be exchanged for a share in the C&N public company."
     },
     {
       "name": "Ryde Pier & Shipping Company",
       "price": 130,
       "revenue": 30,
+      "company": "IOW",
       "description": "Can be exchanged for a share in the IOW public company."
     },
     {
       "name": "Fishbourne Ferry Company",
       "price": 200,
       "revenue": 25,
+      "icon": "boat",
       "description": "Not available until the first 6+3 train has been purchased. Closes all other private companies."
     }
   ],

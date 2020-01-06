@@ -567,36 +567,42 @@
       "name": "Takamatsu E-Railroad",
       "price": 20,
       "revenue": 5,
+      "hex": "K4",
       "description": "Blocks Takamatsu (K4)."
     },
     {
       "name": "Mitsubishi Ferry",
       "price": 30,
       "revenue": 5,
+      "tile": "437",
       "description": "Player owner may place the port tile on a coastal town (B11, G10, I12, or J9) without a tile on it already, outside of the operating rounds of a company controller by another player. The player need not control a company or have connectivity to the placed tile from one of their companies. This does not close the company."
     },
     {
       "name": "Ehime Railroad",
       "price": 40,
       "revenue": 10,
+      "hex": "C4",
       "description": "When this company is sold to a corporation, the selling player may immediately place a green tile on Ohzu (C4), in addition to any tile which it may lay during the same operating round. This does not close the company."
     },
     {
       "name": "Sumitomo Mines Railway",
       "price": 50,
       "revenue": 15,
+      "icon": "mountain",
       "description": "Owning corporation may ignore building cost for mountain hexes which do not also contain rivers. This does not close the company."
     },
     {
       "name": "Dougo Railway",
       "price": 60,
       "revenue": 15,
+      "company": "IR",
       "description": "Owning player may exchange this private company for a 10% share of Iyo Railway from the initial offering."
     },
     {
       "name": "South Iyo Railway",
       "price": 80,
       "revenue": 20,
+      "icon": "tracks",
       "players": "Players: 3+"
     },
     {
@@ -604,6 +610,7 @@
       "price": 150,
       "revenue": [30,50],
       "players": "Players: 4+",
+      "icon": "boat",
       "description": "Does not close while owned by a player. If owned by a player when the first 5-train is purchased it may no longer be sold to a public company and the revenue is increased to 50."
     }
   ],

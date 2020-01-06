@@ -259,12 +259,14 @@
       "name": "Midland Terminal",
       "price": 20,
       "players": "2 Player",
+      "token": { "color": "yellow", "label": "$" },
       "revenue": 5
     },
     {
       "name": "Midland Terminal",
       "price": 25,
       "players": "3 Player",
+      "token": { "color": "yellow", "label": "$" },
       "revenue": 5
     },
     {
@@ -272,6 +274,7 @@
       "price": 70,
       "revenue": 10,
       "players": "2 Player",
+      "tile": "800",
       "description": "The owning corporation may lay the D&SL tile on their reserved hex (B4 or D4) instead of their normal track action, this action closes the company. Closes when the first 5 Train is purchased, however, the tile may still be laid by the corporation."
     },
     {
@@ -279,12 +282,14 @@
       "price": 70,
       "revenue": 10,
       "players": "3 Player",
+      "icon": "share",
       "description": "Trade for any share in the market at any time, this action closes the company. Closes when the first 5 Train is purchased."
     },
     {
       "name": "Rio Grande Southern",
       "price": 150,
       "revenue": 20,
+      "company": "D&RGW",
       "description": "Obtain a 10% share of D&RGW. The bank will compensate D&RGW for this share after its par value has been set."
     }
   ],

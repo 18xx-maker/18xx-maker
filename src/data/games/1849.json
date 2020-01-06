@@ -79,30 +79,35 @@
       "name": "Società Corriere Etnee",
       "price": 20,
       "revenue": 5,
+      "hex": "M8",
       "description": "A Corporation cannot build track in the Acireale hex until this Company is either eliminated or bought by any Corporation."
     },
     {
       "name": "Studio di Ingegneria Giuseppe Incorpora",
       "price": 45,
       "revenue": 10,
+      "icon": "mountain",
       "description": "The owning Corporation can lay or upgrade standard gauge track at half cost on Mountain, Hill or Rough hexes. Narrow gauge track is still at normal cost."
     },
     {
       "name": "Compagnia Navale Mediterranea",
       "price": 75,
       "revenue": 15,
+      "token": { "color": "white", "label": "+L.20" },
       "description": "The owning Corporation can place the +L. 20 token on any port. This action closes the Company but the Corporation adds L. 20 to the revenue of the port until the end of the game."
     },
     {
       "name": "Società Marittima Siciliana",
       "price": 110,
       "revenue": 20,
-      "description": "The owning Corporation can place a tile and a token on a coastal city, even if that city is not connected to one of its railheads, subject to all other limitations described on rule 4.2. This action closes the Company, and is made instead of the regular Track Laying and Token Laying Steps."
+      "tile": "657",
+      "description": "The owning Corporation can place a tile and a token on a coastal city, even if that city is not connected to one of its railheads. This action closes the Company, and is made instead of the regular Track Laying and Token Laying Steps."
     },
     {
       "name": "Reale Società d'Affari",
       "price": 150,
       "revenue": 25,
+      "token": { "color": "white", "label": "#1" },
       "description": "When a player buys the R.S.A. they immediately open the first available corporation and get the president's certificate. The R.S.A. is eliminated when the Corporation buys its first train."
     }
   ],
