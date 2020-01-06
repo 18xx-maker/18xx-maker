@@ -1347,16 +1347,14 @@
         ],
         "tokens": [
           {
-            "label": "RGH",
-            "width": 15,
-            "color": "purple",
+            "company": "RGH",
+            "destination": true,
             "angle": 270,
             "percent": 0.7
           },
           {
-            "label": "E",
-            "width": 15,
-            "color": "pink",
+            "company": "E",
+            "destination": true,
             "angle": 330,
             "percent": 0.7
           }
@@ -1632,16 +1630,14 @@
         },
         "tokens": [
           {
-            "label": "SER",
-            "width": 15,
-            "color": "yellow",
+            "company": "SER",
+            "destination": true,
             "angle": 150,
             "percent": 0.7
           },
           {
-            "label": "FHR",
-            "width": 15,
-            "color": "red",
+            "company": "FHR",
+            "destination": true,
             "angle": 210,
             "percent": 0.7
           }
@@ -1669,9 +1665,8 @@
         ],
         "tokens": [
           {
-            "label": "E",
-            "width": 15,
-            "color": "pink",
+            "company": "E",
+            "destination": true,
             "angle": 210,
             "percent": 0.8
           }
@@ -1727,9 +1722,8 @@
         ],
         "tokens": [
           {
-            "label": "SWR",
-            "width": 15,
-            "color": "green",
+            "company": "SWR",
+            "destination": true,
             "angle": 90,
             "percent": 0.667
           }
@@ -1769,9 +1763,8 @@
         ],
         "tokens": [
           {
-            "label": "MTR",
-            "width": 15,
-            "color": "orange",
+            "company": "MTR",
+            "destination": true,
             "angle": 330,
             "percent": 0.7
           }
@@ -1855,9 +1848,8 @@
         ],
         "tokens": [
           {
-            "label": "LLM",
-            "width": 15,
-            "color": "black",
+            "company": "LLM",
+            "destination": true,
             "angle": 270,
             "percent": 0.667
           }
@@ -1893,9 +1885,8 @@
         ],
         "tokens": [
           {
-            "label": "BPS",
-            "width": 15,
-            "color": "blue",
+            "company": "BPS",
+            "destination": true,
             "angle": 150,
             "percent": 0.8
           }
@@ -2110,9 +2101,8 @@
         },
         "tokens": [
           {
-            "label": "DMH",
-            "width": 15,
-            "color": "brown",
+            "company": "DMH",
+            "destination": true,
             "angle": 90,
             "percent": 0.75
           }

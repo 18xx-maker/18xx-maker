@@ -3,15 +3,22 @@
   "abbrev": "languages",
   "companies": [
     {
-      "name": "Assembly",
-      "abbrev": "ASM",
-      "color": "black"
+      "name": "Ruby",
+      "abbrev": "RB",
+      "color": "red",
+      "logo": "languages/ruby"
     },
     {
-      "name": "C",
-      "abbrev": "C",
-      "color": "gray",
-      "logo": "languages/c"
+      "name": "Python",
+      "abbrev": "PY",
+      "color": "green",
+      "logo": "languages/python"
+    },
+    {
+      "name": "Javascript",
+      "abbrev": "JS",
+      "color": "yellow",
+      "logo": "languages/javascript"
     },
     {
       "name": "C++",
@@ -24,6 +31,42 @@
       "abbrev": "C#",
       "color": "purple",
       "logo": "languages/csharp"
+    },
+    {
+      "name": "Haskell",
+      "abbrev": "HS",
+      "color": "gray",
+      "logo": "languages/haskell"
+    },
+    {
+      "name": "Rust",
+      "abbrev": "RS",
+      "color": "black",
+      "logo": "languages/rust"
+    },
+    {
+      "name": "Java",
+      "abbrev": "JAVA",
+      "color": "orange",
+      "logo": "languages/java"
+    },
+    {
+      "name": "Go",
+      "abbrev": "GO",
+      "color": "cyan",
+      "logo": "languages/go"
+    },
+    {
+      "name": "Scala",
+      "abbrev": "SC",
+      "color": "red",
+      "logo": "languages/scala"
+    },
+    {
+      "name": "Lua",
+      "abbrev": "LUA",
+      "color": "blue",
+      "logo": "languages/lua"
     },
     {
       "name": "Clojure",
@@ -44,70 +87,10 @@
       "logo": "languages/erlang"
     },
     {
-      "name": "Go",
-      "abbrev": "GO",
-      "color": "cyan",
-      "logo": "languages/go"
-    },
-    {
-      "name": "Haskell",
-      "abbrev": "HS",
-      "color": "gray",
-      "logo": "languages/haskell"
-    },
-    {
-      "name": "Java",
-      "abbrev": "JAVA",
+      "name": "Swift",
+      "abbrev": "SW",
       "color": "orange",
-      "logo": "languages/java"
-    },
-    {
-      "name": "Javascript",
-      "abbrev": "JS",
-      "color": "yellow",
-      "logo": "languages/javascript"
-    },
-    {
-      "name": "Lua",
-      "abbrev": "LUA",
-      "color": "blue",
-      "logo": "languages/lua"
-    },
-    {
-      "name": "Perl",
-      "abbrev": "PL",
-      "color": "blue",
-      "logo": "languages/perl"
-    },
-    {
-      "name": "PHP",
-      "abbrev": "PHP",
-      "color": "blue",
-      "logo": "languages/php"
-    },
-    {
-      "name": "Python",
-      "abbrev": "PY",
-      "color": "lime",
-      "logo": "languages/python"
-    },
-    {
-      "name": "Ruby",
-      "abbrev": "RB",
-      "color": "red",
-      "logo": "languages/ruby"
-    },
-    {
-      "name": "Rust",
-      "abbrev": "RS",
-      "color": "black",
-      "logo": "languages/rust"
-    },
-    {
-      "name": "Scala",
-      "abbrev": "SC",
-      "color": "red",
-      "logo": "languages/scala"
+      "logo": "languages/swift"
     },
     {
       "name": "Shell",
@@ -116,10 +99,27 @@
       "logo": "languages/shell"
     },
     {
-      "name": "Swift",
-      "abbrev": "SW",
-      "color": "orange",
-      "logo": "languages/swift"
+      "name": "C",
+      "abbrev": "C",
+      "color": "gray",
+      "logo": "languages/c"
+    },
+    {
+      "name": "PHP",
+      "abbrev": "PHP",
+      "color": "blue",
+      "logo": "languages/php"
+    },
+    {
+      "name": "Perl",
+      "abbrev": "PL",
+      "color": "blue",
+      "logo": "languages/perl"
+    },
+    {
+      "name": "Assembly",
+      "abbrev": "ASM",
+      "color": "black"
     }
   ]
 }
