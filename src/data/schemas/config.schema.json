@@ -25,7 +25,7 @@
       "required": ["width", "height"]
     },
     "margins": {
-        "$ref": "#/definitions/dimension"
+      "$ref": "#/definitions/dimension"
     }
   },
 
@@ -79,6 +79,10 @@
     "cards": {
       "type": "object",
       "properties": {
+        "shareStyle": {
+          "type": "string",
+          "enum": ["center", "left", "gmt"]
+        },
         "layout": {
           "type": "string",
           "enum": ["free", "miniEuroDie", "dtgDie"]
@@ -86,20 +90,27 @@
         "width": { "type": "number", "minimum": 1 },
         "height": { "type": "number", "minimum": 1 },
         "cutlines": { "type": "number", "minimum": 0 },
-        "bleed": { "type": "number", "minimum": 0 }
+        "bleed": { "type": "number", "minimum": 0 },
+        "border": { "type": "number", "minimum": 0}
       },
-      "required": ["layout", "width", "height", "cutlines", "bleed"],
+      "required": ["shareStyle", "layout", "width", "height", "cutlines", "bleed"],
       "additionalProperties": false
     },
-    "shareStyle": {
-      "type": "string",
-      "enum": ["center", "left", "gmt"]
+    "charters": {
+      "type": "object",
+      "properties": {
+        "style": {
+          "type": "string",
+          "enum": ["carth", "color"]
+        },
+        "cutlines": { "type": "number", "minimum": 0 },
+        "bleed": { "type": "number", "minimum": 0 },
+        "border": { "type": "number", "minimum": 0},
+        "halfWidth": { "type": "boolean" }
+      },
+      "required": ["style", "halfWidth", "cutlines", "border"],
+      "additionalProperties": false
     },
-    "charterStyle": {
-      "type": "string",
-      "enum": ["carth", "color"]
-    },
-    "charterCutlines": { "type": "number", "minimum": 0 },
     "tokenLayout": {
       "type": "string",
       "enum": ["max", "gsp"]
@@ -147,11 +158,9 @@
     },
     "plainMapCompanies": { "type": "boolean" },
     "straightCityNames": { "type": "boolean" },
-    "halfWidthCharters": { "type": "boolean" },
     "font": { "$ref": "#/definitions/font" }
   },
   "required": [
-    "charterStyle",
     "companiesTheme",
     "companySvgLogos",
     "coords",
@@ -159,7 +168,6 @@
     "pagination",
     "paper",
     "plainMapCompanies",
-    "shareStyle",
     "stock",
     "theme",
     "tokenLayout",

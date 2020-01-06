@@ -1,4 +1,4 @@
-html {
+height {
   margin: 0px;  /* this affects the margin on the html before sending to printer */
 }
 
@@ -116,17 +116,6 @@ svg {
 .charters {
   position: relative;
   overflow: auto;
-}
-
-.card {
-  page-break-inside: avoid;
-  font-family: display;
-  height: calc(44mm + 0.25in);
-  width: calc(67.5mm + 0.25in);
-  box-sizing: border-box;
-  position: relative;
-  background-color: white;
-  float: left;
 }
 
 .charter {
@@ -514,102 +503,6 @@ svg {
   margin: 0 0 0 0.15in;
 }
 
-.train__name {
-  color: #000;
-
-  box-sizing: border-box;
-  width: 100%;
-  height: 0.875in;
-  padding: 0.25in 0.25in 0.125in 0.25in;
-  line-height: 0.4in;
-  font-size: 0.4in;
-  text-align: left;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  font-weight: bold;
-}
-
-.train__tracks {
-  display: none;
-  position: absolute;
-  width: 100%;
-  height: 0.5in;
-  bottom: -0.0625in;
-  left: 0;
-  opacity: 0.25;
-}
-
-.train__tracks svg {
-  height: 100%;
-  width: 100%;
-}
-
-.train__hr {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 0.8125in;
-}
-
-.train__price {
-  color: #000;
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0.125in;
-  padding: 0.125in;
-  height: 0.5in;
-  line-height: 0.5in;
-  font-size: 0.25in;
-}
-
-.train__description {
-  position: absolute;
-  height: 0.4375in;
-  width: calc(100% - 0.25in);
-  bottom: 0.625in;
-  margin: 0 0.125in;
-  padding: 0 0.125in 0 0.125in;
-  box-sizing: border-box;
-  right: 0;
-  text-align: right;
-  font-family: sans-serif;
-  font-size: 0.12in;
-  font-weight: normal;
-  line-height: 0.16in;
-}
-
-.train__notes {
-  position: absolute;
-  bottom: 0;
-  width: calc(100% - 0.25in);
-  padding: 0.125in;
-  margin: 0.125in;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.train__info {
-  height: 0.25in;
-  line-height: 0.25in;
-  padding: 0 0.1in;
-  margin-top: 0.05in;
-  border-radius: 0.06in;
-}
-
-.train__players {
-  line-height: 0.25in;
-  height: 0.25in;
-  font-size: 0.14in;
-  margin-top: 0.05in;
-}
-
 .charter__tokens {
   position: absolute;
   top: 0;
@@ -666,84 +559,6 @@ svg {
   width: 0.5in;
   height: 0.7in;
   padding: 0 0 0 0.15in;
-}
-
-.private__name {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: calc(100% - 0.5in);
-  padding: 0.125in 0.125in 0.03125in 0.125in;
-  line-height: 0.22in;
-  font-size: 0.18in;
-  margin: 0.125in 0.125in 0 0.125in;
-  text-align: left;
-}
-
-.private__icon {
-  float: right;
-  line-height: 0.22in;
-  font-size: 0.18in;
-  margin: 0.125in 0.125in 0 0;
-  padding: 0.125in;
-}
-
-.private__description {
-  position: relative;
-  width: calc(100% - 0.5in);
-  padding: 0 0.125in;
-  margin: 0 0.125in;
-  text-align: left;
-  left: 0;
-  line-height: 0.105in;
-  font-size: 0.085in;
-  font-weight: normal;
-  font-family: sans-serif;
-}
-
-
-.private__price {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin: 0.125in;
-  padding: 0.125in;
-  height: 0.25in;
-  line-height: 0.25in;
-  font-size: 0.18in;
-}
-
-.private__bid {
-  position: absolute;
-  bottom: 0.25in;
-  left: 0;
-  margin: 0.125in;
-  padding: 0.125in;
-  height: 0.25in;
-  line-height: 0.25in;
-  font-size: 0.18in;
-}
-
-.private__players {
-  position: absolute;
-  bottom: 0.25in;
-  right: 0;
-  margin: 0.125in;
-  padding: 0.125in;
-  line-height: 0.25in;
-  height: 0.25in;
-  font-size: 0.14in;
-}
-
-.private__revenue {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 0.125in;
-  padding: 0.125in;
-  line-height: 0.25in;
-  height: 0.25in;
-  font-size: 0.18in;
 }
 
 .prices {
@@ -905,6 +720,7 @@ ul.notes li span {
   float: left;
   padding: 0.25in;
   page-break-inside: avoid;
+  box-sizing: border-box;
 }
 
 .cutlines-inner {
