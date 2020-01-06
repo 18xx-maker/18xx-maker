@@ -69,51 +69,55 @@ const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, char
   return (
     <Color context="companies">
       {(c, t) => (
-        <div className="cutlines">
+        <div className={`cutlines${minor ? " cutlines--minor" : ""}`}>
           <div className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidthCharters ? " charter--half" : ""}`}>
-            <div
-              className="charter__hr"
-              style={{ backgroundColor: c(charterStyle === "color" ? color : (color === "white" ? "black" : color)) }}
-            />
-            <div style={{ color: t(c(charterStyle === "color" ? color : "white")),
-                          paddingRight: halfWidthCharters ? null : unitsToCss(25 + (65 * tokens.length)) }}
-                 className="charter__name"><div>{name}</div></div>
-            {charterStyle === "color" && (
-              <div className="charter__logo">
-                <svg viewBox="-37.5 -37.5 75 75">
-                  <ColorContext.Provider value="companies">
-                    <CompanyToken outline={color === "white" ? "black" : "white"}
-                                  company={company}
-                                  width={37.5} />
-                  </ColorContext.Provider>
-                </svg>
-              </div>
-            )}
-            {false && <div className="charter__game">{game}</div>}
-            <div className="charter__tokens">
-              {halfWidthCharters && "Tokens"}
-              {tokenSpots}
-            </div>
-            {halfWidthCharters && (
-              <div className="charter__assets">
-                Assets
-                <dl>{minor || turnNodes}</dl>
-              </div>
-            )}
-            {halfWidthCharters || (
-              <div className="charter__trains">
-                Trains
-                <div className="charter__phase">
-                  <Phase phases={phases} minor={!!minor} />
+            <div className="charter__bleed">
+              <div
+                className="charter__hr"
+                style={{ backgroundColor: c(charterStyle === "color" ? color : (color === "white" ? "black" : color)) }}
+              />
+              <div className="charter__body">
+                <div style={{ color: t(c(charterStyle === "color" ? color : "white")),
+                              paddingRight: halfWidthCharters ? null : unitsToCss(12.5 + (65 * tokens.length)) }}
+                     className="charter__name"><div>{name}</div></div>
+                {charterStyle === "color" && (
+                  <div className="charter__logo">
+                    <svg viewBox="-37.5 -37.5 75 75">
+                      <ColorContext.Provider value="companies">
+                        <CompanyToken outline={color === "white" ? "black" : "white"}
+                                      company={company}
+                                      width={37.5} />
+                      </ColorContext.Provider>
+                    </svg>
+                  </div>
+                )}
+                {false && <div className="charter__game">{game}</div>}
+                <div className="charter__tokens">
+                  {halfWidthCharters && "Tokens"}
+                  {tokenSpots}
                 </div>
+                {halfWidthCharters && (
+                  <div className="charter__assets">
+                    Assets
+                    <dl>{minor || turnNodes}</dl>
+                  </div>
+                )}
+                {halfWidthCharters || (
+                  <div className="charter__trains">
+                    Trains
+                    <div className="charter__phase">
+                      <Phase phases={phases} minor={!!minor} />
+                    </div>
+                  </div>
+                )}
+                {halfWidthCharters || (
+                  <div className="charter__treasury">
+                    Treasury
+                    <dl>{minor || turnNodes}</dl>
+                  </div>
+                )}
               </div>
-            )}
-            {halfWidthCharters || (
-              <div className="charter__treasury">
-                Treasury
-                <dl>{minor || turnNodes}</dl>
-              </div>
-            )}
+            </div>
           </div>
         </div>
       )}
@@ -122,8 +126,8 @@ const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, char
 };
 
 const mapStateToProps = state => ({
-  charterStyle: state.config.charterStyle,
-  halfWidthCharters: state.config.halfWidthCharters
+  charterStyle: state.config.charters.style,
+  halfWidthCharters: state.config.charters.halfWidth
 });
 
 export default connect(mapStateToProps)(Charter);

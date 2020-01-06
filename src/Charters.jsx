@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
-import { compileCompanies, overrideCompanies } from "./util";
+import { getCharterData, compileCompanies, overrideCompanies } from "./util";
 import Charter from "./Charter";
 import games from "./data/games";
 import * as R from "ramda";
@@ -19,7 +19,7 @@ import repeat from "ramda/src/repeat";
 const isMinor = prop("minor");
 const isMajor = compose(not, prop("minor"));
 
-const Charters = ({halfWidthCharters, override, selection}) => {
+const Charters = ({charters, paper, override, selection}) => {
   let params = useParams();
   let game = games[params.game];
 
@@ -31,19 +31,87 @@ const Charters = ({halfWidthCharters, override, selection}) => {
 
   let majors = filter(isMajor, gameCompanies);
 
-  let extra = majors.length % (halfWidthCharters ? 4 : 2);
+  let extra = majors.length % (charters.halfWidth ? 4 : 2);
   let padding = 0;
   if (extra > 0) {
-    padding = (halfWidthCharters ? 4 : 2) - extra;
+    padding = (charters.halfWidth ? 4 : 2) - extra;
   }
 
   let companies = concat(filter(isMajor, gameCompanies),
                          concat(repeat(null, padding),
                                 filter(isMinor, gameCompanies)));
 
+  let data = getCharterData(charters, paper);
+
+  let css = `
+.cutlines {
+    padding: ${data.css.cutlines};
+    width: ${data.css.totalWidth};
+    height: ${data.css.totalHeight};
+}
+
+.cutlines--minor {
+    height: ${data.css.totalMinorHeight};
+}
+
+.cutlines:after,
+.cutlines:before {
+    width: ${data.css.cutlines};
+    height: ${data.css.height};
+    top: ${data.css.cutlinesAndBleed};
+}
+
+.cutlines--minor:after,
+.cutlines--minor:before {
+    height: ${data.css.minorHeight};
+}
+
+.cutlines > div:after,
+.cutlines > div:before {
+    width: ${data.css.width};
+    height: ${data.css.cutlines};
+    left: ${data.css.bleed};
+}
+
+.cutlines > div:after {
+    bottom: -${data.css.cutlines};
+}
+
+.cutlines > div:before {
+    top: -${data.css.cutlines};
+}
+
+.charter,
+.charter__bleed {
+    height: ${data.css.bleedHeight};
+    width: ${data.css.bleedWidth};
+}
+
+.charter--minor,
+.charter--minor .charter__bleed {
+    height: ${data.css.bleedMinorHeight};
+}
+
+.charter__body {
+    border: ${data.border}px solid black;
+    margin: ${data.css.bleed};
+    width: ${data.css.width};
+    height: ${data.css.height};
+}
+
+.charter--minor .charter__body {
+    height: ${data.css.minorHeight};
+}
+
+.charter--color .charter__hr {
+    height: calc(1.0625in + ${data.css.bleed});
+}
+`;
+
   return (
     <GameContext.Provider value={params.game}>
       <div className="charters">
+        <style>{css}</style>
         <div className="PrintNotes">
           <div>
             <p>
@@ -65,7 +133,7 @@ const Charters = ({halfWidthCharters, override, selection}) => {
               turns={game.turns}
               minor={!!company.minor}
               company={company}
-            /> : <div key="spacer" className="cutlines"><div className={`charter${halfWidthCharters ? " charter--half" : ""}`}></div></div>
+            /> : <div key="spacer" className="cutlines"><div className={`charter${charters.halfWidth ? " charter--half" : ""}`}></div></div>
         ), companies)}
         <PageSetup landscape={false}/>
       </div>
@@ -74,7 +142,8 @@ const Charters = ({halfWidthCharters, override, selection}) => {
 };
 
 const mapStateToProps = state => ({
-  halfWidthCharters: state.config.halfWidthCharters,
+  charters: state.config.charters,
+  paper: state.config.paper,
   override: state.config.overrideCompanies,
   selection: state.config.overrideSelection
 });
