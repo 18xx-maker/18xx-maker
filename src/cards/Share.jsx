@@ -22,15 +22,17 @@ const LeftShare = ({
   token,
   color,
   shareStyle,
-  company
+  company,
+  tokenCount
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
   let tokens = [];
-  let sharesLeft = shares;
+  let sharesLeft = tokenCount || shares;
   while(sharesLeft > 0) {
     tokens.push(<div key={sharesLeft} className="share__token">
-                  <div className="share__token__wrapper">
+                  <div style={{height:`${min(1.0, sharesLeft) * 0.52}in`}}
+                       className="share__token__wrapper">
                     <svg style={{width:"0.52in",height:"0.52in"}}
                          viewBox="-26 -26 52 52">
                       <CompanyToken company={company}
@@ -91,12 +93,13 @@ const CenterShare = ({
   name,
   abbrev,
   token,
-  company
+  company,
+  tokenCount
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
   let tokens = [];
-  let sharesLeft = shares;
+  let sharesLeft = tokenCount || shares;
   while(sharesLeft > 0) {
     tokens.push(<div key={sharesLeft} className="share__token">
                   <div style={{width:`${min(1.0, sharesLeft) * 100}%`}}
