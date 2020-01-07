@@ -5,8 +5,7 @@
     "designer": "Christopher Giroir",
     "background": "purple",
     "currency": "USD",
-    "extraTokens": 1,
-    "homeTokens": 0
+    "marketTokens": 1
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgamefamily/19/18xx",
@@ -15,40 +14,53 @@
   "tokens": [
     "Round",
     "#meat",
-    "#port"
+    "#coal",
+    "#port",
+    "#tree",
+    "#mail",
+    "#boat",
+    "#tracks",
+    "#share",
+    "#charter",
+    "#bridge",
+    "#swamp",
+    "#cactus",
+    "#water",
+    "#river",
+    "#mountain"
   ],
   "ipo": true,
-  "bank": "$12,345",
+  "bank": 12345,
   "players": [
     {
       "number": 1,
       "certLimit": 56,
-      "capital": "$2400"
+      "capital": 2400
     },
     {
       "number": 2,
       "certLimit": 28,
-      "capital": "$1200"
+      "capital": 1200
     },
     {
       "number": 3,
       "certLimit": 20,
-      "capital": "$800"
+      "capital": 800
     },
     {
       "number": 4,
       "certLimit": 16,
-      "capital": "$600"
+      "capital": 600
     },
     {
       "number": 5,
       "certLimit": 13,
-      "capital": "$480"
+      "capital": 480
     },
     {
       "number": 6,
       "certLimit": 11,
-      "capital": "$400"
+      "capital": 400
     }
   ],
   "companies": [
