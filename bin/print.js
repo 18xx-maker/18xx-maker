@@ -61,6 +61,46 @@ const server = app.listen(9000);
     for(let i=0;i<items.length;i++) {
       let item = items[i];
 
+      // Break if the game doesn't include certain items
+      let hasData = true;
+      switch (item) {
+      case "cards":
+        if (!gameDef.companies && !gameDef.privates && !gameDef.trains && !gameDef.players) {
+          hasData = false;
+        }
+        break;
+      case "tokens":
+      case "charters":
+        if (!gameDef.companies) {
+          hasData = false;
+        }
+        break;
+      case "map":
+      case "map-paginated":
+        if (!gameDef.map) {
+          hasData = false;
+        }
+        break;
+      case "market":
+      case "market-paginated":
+        if (!gameDef.stock) {
+          hasData = false;
+        }
+        break;
+      case "tiles":
+      case "tile-manifest":
+        if (!gameDef.tiles) {
+          hasData = false;
+        }
+        break;
+      default:
+        break;
+      }
+
+      if (!hasData) {
+        continue;
+      }
+
       console.log("Printing " + game + "/" + item);
       await page.goto(`http://localhost:9000/${game}/${item}`, {waitUntil: 'networkidle2'});
       await page.pdf({path: `build/render/${game}/${item}.pdf`, scale: 1.0, preferCSSPageSize: true});
