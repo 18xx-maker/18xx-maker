@@ -7,19 +7,14 @@ import tiles from "./data/tiles";
 import Tile from "./Tile";
 import Svg from "./Svg";
 
+import { getTile } from "./TileSheet";
+
 import games from "./data/games";
 import ColorContext from "./context/ColorContext";
 
 import "./TileManifest.css";
 
-const getCol = id => {
-  let tile = tiles[id];
-
-  if (!tile) {
-    let [idBase] = id.split("|");
-    tile = tiles[idBase];
-  }
-
+const getCol = tile => {
   switch (tile.color) {
   case "yellow":
     return 1;
@@ -50,14 +45,14 @@ const TileManifest = () => {
 
   let tileNodes = R.addIndex(R.map)((id, i) => {
     let [idBase, idExtra] = id.split("|");
-    if (!tiles[id] && !tiles[idBase]) return null;
-    let tile = game.tiles[id] || game.tiles[idBase];
-    let quantity = R.is(Object, tile) ? R.propOr(1, "quantity", tile) : tile;
+    let tile = getTile(tiles, game.tiles, id);
+    if (!tile) return null;
+    let quantity = tile.quantity;
     return (
       <div
         key={i}
         className="TileManifest--Tile"
-        style={{ gridColumn: `${getCol(id)} / span 1` }}
+        style={{ gridColumn: `${getCol(tile)} / span 1` }}
       >
         <div className="TileManifest--Id">
           {idBase}
@@ -72,7 +67,7 @@ const TileManifest = () => {
             }}
             viewBox={`-86.6025 -86.6025 173.205 173.205`}
           >
-            <Tile id={id} />
+            <Tile id={id} gameTiles={game.tiles} />
           </Svg>
         </div>
         <div className="TileManifest--Quantity">{quantity}x</div>
