@@ -92,9 +92,10 @@
         "cutlines": { "type": "number", "minimum": 0 },
         "bleed": { "type": "number", "minimum": 0 },
         "border": { "type": "number", "minimum": 0},
-        "blackBand": { "type": "boolean" }
+        "blackBand": { "type": "boolean" },
+        "trainImages": { "type": "boolean" }
       },
-      "required": ["shareStyle", "layout", "width", "height", "cutlines", "bleed", "blackBand"],
+      "required": ["shareStyle", "layout", "width", "height", "cutlines", "bleed", "blackBand", "trainImages"],
       "additionalProperties": false
     },
     "charters": {
