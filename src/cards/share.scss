@@ -54,7 +54,7 @@
   width: 75%;
   height: 0.52in;
   left: 12.5%;
-  overflow: auto;
+  overflow: visible;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -66,7 +66,7 @@
   top: 0.125in;
   width: 0.52in;
   height: calc(100% - 0.25in);
-  flex-direction: column-reverse;
+  flex-direction: column;
   overflow: visible;
 }
 
@@ -75,7 +75,7 @@
   top: 0.125in;
   width: 0.52in;
   height: calc(100% - 0.25in);
-  flex-direction: column-reverse;
+  flex-direction: column;
   overflow: visible;
 }
 

@@ -86,14 +86,22 @@
       "shares": [
         {
           "quantity": 1,
-          "label": "Special"
+          "label": "Special 1.5",
+          "tokenCount": 1.5
         }
       ]
     },
     {
       "name": "Blue Railroad",
       "abbrev": "BRR",
-      "color": "blue"
+      "color": "blue",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "Special 3.5",
+          "tokenCount": 3.5
+        }
+      ]
     },
     {
       "name": "Brown Railroad",
