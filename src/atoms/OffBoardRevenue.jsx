@@ -25,13 +25,14 @@ const height = (size) => {
 }
 
 const makeNode = (x, y, reverse, revenue, size) => {
-  let length = letter(size) * `${revenue.cost}`.length;
+  let value = revenue.value || revenue.revenue || revenue.cost;
+  let length = letter(size) * `${value}`.length;
   let phaseLength = letter(size) * `${revenue.phase}`.length;
-  let width = R.max(`${revenue.cost}`.length, 2) * letter(size) + 5;
+  let width = R.max(`${value}`.length, 2) * letter(size) + 5;
 
   let nodes = [
     <Color context="map"
-           key={`rect-${revenue.cost}`}>
+           key={`rect-${value}`}>
       {c => (
         <rect
           width={width}
@@ -44,7 +45,7 @@ const makeNode = (x, y, reverse, revenue, size) => {
       )}
     </Color>,
     <Color context="map"
-           key={`text-${revenue.cost}`}>
+           key={`text-${value}`}>
       {c => (
         <text
           fill={c(revenue.textColor) || c("black")}
@@ -56,7 +57,7 @@ const makeNode = (x, y, reverse, revenue, size) => {
           x={x + 0.5 * width}
           y={y - 10 + (size / 2) + 2}
         >
-          <Currency value={revenue.cost} type="offboard" />
+          <Currency value={value} type="offboard" />
         </text>
       )}
     </Color>
@@ -87,10 +88,10 @@ const makeNode = (x, y, reverse, revenue, size) => {
   return nodes;
 };
 
-const getWidth = (r, size) => R.max(`${r.cost}`.length, 2) * letter(size) + 5;
+const getWidth = (r, size) => R.max(`${r.value || r.revenue || r.cost}`.length, 2) * letter(size) + 5;
 
 const makeNodes = (y, reverse, revenues, size) => {
-  let totalWidth = R.sum(R.map(r => 5 + letter(size) * R.max(`${r.cost}`.length, 2),
+  let totalWidth = R.sum(R.map(r => 5 + letter(size) * R.max(`${r.value || r.revenue || r.cost}`.length, 2),
                                revenues));
   let bx = -0.5 * totalWidth; // Starting x for border box
   let x = bx;
