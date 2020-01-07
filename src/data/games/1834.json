@@ -180,19 +180,19 @@
       "name": "Ostend Port Society",
       "price": 20,
       "revenue": 5,
-      "description": "Increases runs to Ostend port (blue offboard) for owning railroad by $20. Can be sold in YELLOW and GREEN."
+      "description": "Increases runs to Ostend port (blue offboard) for owning railroad by 20 francs. Can be sold during the YELLOW and GREEN phases."
     },
     {
       "name": "De Kempen Coal Company",
       "price": 40,
       "revenue": 10,
-      "description": "Owning corporation may place a track tile on a mountain hex at half cost, this closes the private. Can be sold in YELLOW and GREEN."
+      "description": "Owning corporation may lay a track tile on a mountain hex at half cost, closing the private. Can be sold during the YELLOW and GREEN phases."
     },
     {
       "name": "Burbach Foundry",
       "price": 70,
       "revenue": 15,
-      "description": "Owning corporation may upgrade an additional track tile, in a Luxembourg city tile (hexes N11 and M10), from YELLOW to GREEN. This is in addition to its normal placement and closes the private. Can be sold in GREEN."
+      "description": "Owning corporation may upgrade an additional track tile in a Luxembourg city tile (hexes N11 and M10), from YELLOW to GREEN. This is in addition to its normal placement and closes the private. Can be sold in the GREEN phase."
     },
     {
       "name": "MNBS/SNCB Electrification",
@@ -204,13 +204,13 @@
       "name": "Cockerill Locomotive Company",
       "price": 120,
       "revenue": 20,
-      "description": "Allows owning railroad to purchase a train at half price, this closes the private. Can be sold in YELLOW and GREEN."
+      "description": "Allows owning railroad to purchase a train at half price, closing the private. Can be sold during the YELLOW and GREEN phases."
     },
     {
       "name": "Albert Canal Corporation",
       "price": 150,
       "revenue": 25,
-      "description": "No other ability. Closes in BROWN or if track connects Antwerp to Liege by any route or manner regardless of tokens. Can be sold in GREEN."
+      "description": "No other ability. Closes in BROWN or if track connects Antwerp to Liege by any route or manner regardless of tokens. Can be sold during the GREEN phase."
     }
   ],
   "phases": [
