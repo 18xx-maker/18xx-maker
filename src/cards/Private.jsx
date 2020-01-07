@@ -31,26 +31,27 @@ const Private = ({ name, note, price, revenue, bid, players, description, icon, 
                            <Hex hex={hexData} id={hex} border={true} map={true} />
                          </Svg>
                        </div>);
+                  } else if (tile) {
+                    return (<div className="private__tile">
+                         <Svg viewBox="-80 -80 160 160">
+                           <Tile id={tile} border={true} gameTiles={game.tiles} />
+                         </Svg>
+                       </div>);
                   } else {
                     return null;
                   }
                 }}
               </Config>
-              {tile && <div className="private__tile">
-                         <Svg viewBox="-80 -80 160 160">
-                           <Tile id={tile} border={true} />
-                         </Svg>
-                      </div>}
               {company && <div className="private__company">
                            <Svg viewBox="-15 -15 30 30">
                              <GameCompanyToken abbrev={company} outlineWidth={2} width={15} />
                            </Svg>
                          </div>}
               {token && <div className="private__company">
-                           <Svg viewBox="-15 -15 30 30">
-                             <Token {...token} outlineWidth={2} width={15} />
-                           </Svg>
-                         </div>}
+                         <Svg viewBox="-15 -15 30 30">
+                           <Token {...token} outlineWidth={2} width={15} />
+                         </Svg>
+                       </div>}
               {icon && <div className="private__icon">
                         <Svg viewBox="-15 -15 30 30">
                           <Icon type={icon} />

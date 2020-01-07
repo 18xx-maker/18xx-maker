@@ -39,10 +39,32 @@ import split from "ramda/src/split";
 import take from "ramda/src/take";
 import unnest from "ramda/src/unnest";
 
-const getTile = curry((tiles, id) => ({
-  ...(tiles[id] || tiles[split("|", id)[0]]),
-  id
-}));
+export const getTile = curry((tileDefs, tiles, id) => {
+  let tile = {};
+  let quantity = 1;
+
+  if (is(Object, tiles[id])) {
+    quantity = tiles[id].quantity || 1;
+    if (tiles[id].tile) {
+      // We aliased (in a game file) this tile to another tile)
+      let aliasId = tiles[id].tile;
+      tile = tileDefs[aliasId] || tileDefs[split("|", aliasId)][0];
+    } else {
+      // This is actually the tile object
+      tile = tiles[id];
+    }
+  } else {
+    // Search for tiles in the tile def with this id
+    tile = tileDefs[id] || tileDefs[split("|", id)[0]];
+    quantity = tiles[id] || 1;
+  }
+
+  return {
+    ...tile,
+    id,
+    quantity
+  };
+});
 
 const gatherIds = tiles => {
   return compose(unnest,
@@ -51,9 +73,9 @@ const gatherIds = tiles => {
                             tiles[id])).fill(id)))(keys(tiles));
 }
 
-const gatherTiles = compose(sortTiles,
-                            map(getTile(tileDefs)),
-                            gatherIds);
+const gatherTiles = tiles => compose(sortTiles,
+                                    map(getTile(tileDefs, tiles)),
+                                    gatherIds)(tiles);
 
 const rotate = sides => map(s => (s % 6) + 1, sides);
 

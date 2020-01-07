@@ -70,7 +70,7 @@ const Cards = ({ override, selection }) => {
     return R.addIndex(R.map)(
       (share, i) => (
         <Share
-          key={`${company.abbrev}-${i}`}
+          key={`${index}-${company.abbrev}-${i}`}
           company={company}
           name={company.name}
           abbrev={company.abbrev}
