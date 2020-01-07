@@ -2,13 +2,14 @@ import React from "react";
 
 import Color from "../data/Color";
 import Currency from "../util/Currency";
+import Config from "../data/Config";
 
 import addIndex from "ramda/src/addIndex";
 import map from "ramda/src/map";
 
 import "./train.scss";
 
-const Train = ({ train }) => {
+const Train = ({ train, blackBand }) => {
   let { name, price, color, info, description, players } = train;
 
   let notes = addIndex(map)(
@@ -44,7 +45,18 @@ const Train = ({ train }) => {
         {(c,t) => (
           <div className="card train">
             <div className="card__bleed">
-              <div className="train__hr" style={{ backgroundColor: c(color) }} />
+              <Config>
+                {config => {
+                  return (
+                    <div className="train__hr"
+                         style={{
+                           backgroundColor: c(color),
+                           borderBottom: (color === "white" || config.cards.blackBand) ? "2px solid black" : null
+                         }}
+                    />
+                  );
+                }}
+              </Config>
               <div className="card__body">
                 <React.Fragment>
                   <div className="train__name" style={{ color: t(c(color)) }}>{name}</div>

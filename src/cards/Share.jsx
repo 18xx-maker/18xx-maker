@@ -23,7 +23,8 @@ const LeftShare = ({
   color,
   shareStyle,
   company,
-  tokenCount
+  tokenCount,
+  blackBand
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -43,13 +44,40 @@ const LeftShare = ({
     sharesLeft -= 1;
   }
 
+  let bandColor = is(Object,token) ? token.colors[0] : token;
+
+  let borderLeft = null;
+  let borderRight = null;
+
+  switch (shareStyle) {
+  case "left":
+    if (blackBand || bandColor === "white") {
+      borderLeft = "1px solid black";
+      borderRight = "1px solid black";
+    }
+    break;
+  case "gmt":
+    if (blackBand || bandColor === "white") {
+      borderRight = "2px solid black";
+    }
+    break;
+  default:
+    break;
+  }
+
   return (
     <div className="cutlines">
       <div className={`card share share--${shareStyle || "left"}`}>
         <div className="card__bleed">
           <Color context="companies">
             {(c,t) => (
-              <div className="share__hr" style={{ backgroundColor: c(is(Object,token) ? token.colors[0] : token) }} />
+              <div className="share__hr"
+                   style={{
+                     backgroundColor: c(bandColor),
+                     borderLeft,
+                     borderRight
+                   }}
+              />
             )}
           </Color>
           <div className="card__body">
@@ -156,9 +184,9 @@ const Share = (props) => (
   <Config>
     {config => {
       if(config.cards.shareStyle === "left") {
-        return <LeftShare {...props} />;
+        return <LeftShare {...props} blackBand={config.cards.blackBand} shareStyle="left" />;
       } else if (config.cards.shareStyle === "gmt") {
-        return <LeftShare {...props} shareStyle="gmt" />;
+        return <LeftShare {...props} blackBand={config.cards.blackBand} shareStyle="gmt" />;
       } else {
         return <CenterShare {...props} />;
       }

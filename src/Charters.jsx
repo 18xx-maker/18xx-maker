@@ -158,7 +158,7 @@ const Charters = ({charters, paper, override, selection}) => {
           company ?
             <Charter
               game={game.info.title}
-              key={company.abbrev}
+              key={`${index}-${company.abbrev}`}
               name={company.name}
               abbrev={company.abbrev}
               logo={company.logo}
