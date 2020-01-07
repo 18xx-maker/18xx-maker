@@ -266,6 +266,8 @@ const Config = ({config, setConfig, resetConfig}) => {
              description="Set to 0 to disable any border, or set to a value to have a border of that many pixels drawn around the card."/>
       <Input name="cards.blackBand" label="Card Black Band"
              description="Whether or not to put a black border against the color section of the share. Only relevent to &quot;gmt&quot; and &quot;left&quot; shares as well as trains. Always put on white color cards."/>
+      <Input name="cards.trainImages" label="Train Images"
+             description="Whether or not to put some train images on the cards" />
       <h3>Currency</h3>
       <p>This lets you turn on currency symbols for each item individually. Only works if the game file specificies values as numbers and not strings.</p>
       <Input name="currency.bank" label="Bank" description="Bank total on revenue page"/>

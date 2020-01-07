@@ -47,7 +47,8 @@
     "cutlines": 25,
     "bleed": 12.5,
     "border": 0,
-    "blackBand": false
+    "blackBand": false,
+    "trainImages": false
   },
   "tokenLayout": "gsp",
   "tiles": {
