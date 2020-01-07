@@ -211,7 +211,7 @@ const Cards = ({ override, selection }) => {
 }
 
 .share--left .share__hr {
-    left: calc(0.2225in + ${data.css.bleed});
+    left: calc(0.2025in + ${data.css.bleed});
 }
 
 .share--gmt .share__hr {

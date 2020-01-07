@@ -68,7 +68,14 @@
     "default": ["Major"]
   },
   "shareTypes": {
-    "minor": [],
+    "minor": [
+      {
+        "quantity": 1,
+        "label": "Minor Certificate",
+        "percent": 50,
+        "shares": 1
+      }
+    ],
     "default": [
       {
         "quantity": 1,

@@ -91,9 +91,10 @@
         "height": { "type": "number", "minimum": 1 },
         "cutlines": { "type": "number", "minimum": 0 },
         "bleed": { "type": "number", "minimum": 0 },
-        "border": { "type": "number", "minimum": 0}
+        "border": { "type": "number", "minimum": 0},
+        "blackBand": { "type": "boolean" }
       },
-      "required": ["shareStyle", "layout", "width", "height", "cutlines", "bleed"],
+      "required": ["shareStyle", "layout", "width", "height", "cutlines", "bleed", "blackBand"],
       "additionalProperties": false
     },
     "charters": {
@@ -106,9 +107,10 @@
         "cutlines": { "type": "number", "minimum": 0 },
         "bleed": { "type": "number", "minimum": 0 },
         "border": { "type": "number", "minimum": 0},
-        "halfWidth": { "type": "boolean" }
+        "halfWidth": { "type": "boolean" },
+        "blackBand": { "type": "boolean" }
       },
-      "required": ["style", "halfWidth", "cutlines", "border"],
+      "required": ["style", "halfWidth", "cutlines", "border", "blackBand"],
       "additionalProperties": false
     },
     "tokenLayout": {

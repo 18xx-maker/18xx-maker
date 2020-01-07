@@ -11,7 +11,7 @@ import Currency from "./util/Currency";
 
 import is from "ramda/src/is";
 
-const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, charterStyle, game, halfWidthCharters, company }) => {
+const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, charterStyle, game, halfWidthCharters, company, blackBand }) => {
   let color = token;
   if(is(Object, token)) {
     color = token.colors[0];
@@ -74,7 +74,10 @@ const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, char
             <div className="charter__bleed">
               <div
                 className="charter__hr"
-                style={{ backgroundColor: c(charterStyle === "color" ? color : (color === "white" ? "black" : color)) }}
+                style={{
+                  backgroundColor: c(charterStyle === "color" ? color : (color === "white" ? "black" : color)),
+                  borderBottom: ((charterStyle === "color" && (color === "white" || blackBand)) ? "2px solid black" : null)
+                }}
               />
               <div className="charter__body">
                 <div style={{ color: t(c(charterStyle === "color" ? color : "white")),
@@ -127,7 +130,8 @@ const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, char
 
 const mapStateToProps = state => ({
   charterStyle: state.config.charters.style,
-  halfWidthCharters: state.config.charters.halfWidth
+  halfWidthCharters: state.config.charters.halfWidth,
+  blackBand: state.config.charters.blackBand
 });
 
 export default connect(mapStateToProps)(Charter);
