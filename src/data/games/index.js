@@ -34,6 +34,9 @@ import game_18Mex from "./18Mex";
 import game_FourthAge from "./FourthAge";
 import game_Harzbahn from "./Harzbahn";
 
+// These games will be available in the docker image and on local versions of
+// the site. The name in the string (on the left) needs to be identical to the
+// file name (without the .json) in order for command line printing to work.
 let all_games = {
   "1800": game_1800,
   "1817": game_1817,
@@ -72,6 +75,8 @@ let all_games = {
   Harzbahn: game_Harzbahn
 };
 
+// These games will be available on the public version of the site. Please keep
+// the names (in the string on the left) the same as the version above.
 let public_games = {
   "1800": game_1800,
   "1830": game_1830,
