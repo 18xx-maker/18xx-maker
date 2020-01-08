@@ -30,7 +30,7 @@ const CompanyToken = (props) => {
         // Set the main color
         passing.color = props.color || company.color;
 
-        if (passing.inverse) {
+        if (passing.inverse && config.companySvgLogos !== "none") {
           delete passing.inverse;
           passing.reserved = true;
         }

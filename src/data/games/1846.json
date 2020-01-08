@@ -91,6 +91,7 @@
     {
       "name": "Baltimore & Ohio",
       "abbrev": "B&O",
+      "logo": "BO",
       "tokens": [
         "Free",
         80,
@@ -102,6 +103,7 @@
     {
       "name": "Chesapeake & Ohio",
       "abbrev": "C&O",
+      "logo": "CO",
       "tokens": [
         "Free",
         80,
