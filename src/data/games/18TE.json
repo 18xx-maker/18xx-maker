@@ -62,38 +62,36 @@
       }
     ]
   },
-  "tokenTypes": {
-    "default": [
-      "MS",
-      50,
-      "RH"
-    ]
-  },
   "companies": [
     {
       "name": "Königlich Hannöversche Staatseisenbahnen",
       "abbrev": "KHS",
-      "color": "purple"
+      "color": "purple",
+      "tokens": ["OS", 50, "RH"]
     },
     {
       "name": "Königlich-Westfälische Eisenbahn-Gesellschaft",
       "abbrev": "KWE",
-      "color": "green"
+      "color": "green",
+      "tokens": ["MS", 50, "RH"]
     },
     {
       "name": "Cöln-Mindener Eisenbahn-Gesellschaft",
       "abbrev": "CME",
-      "color": "red"
+      "color": "red",
+      "tokens": ["MS", 50, "OS"]
     },
     {
       "name": "Teutoburger Wald-Eisenbahn",
       "abbrev": "TWE",
-      "color": "yellow"
+      "color": "yellow",
+      "tokens": ["TE", 50]
     },
     {
       "name": "Kleinbahn Piesberg-Rheine A.G.",
       "abbrev": "KPR",
-      "color": "blue"
+      "color": "blue",
+      "tokens": ["OS", "RH"]
     }
   ],
   "trains": [
