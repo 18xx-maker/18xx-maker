@@ -92,11 +92,19 @@
         "cutlines": { "type": "number", "minimum": 0 },
         "bleed": { "type": "number", "minimum": 0 },
         "border": { "type": "number", "minimum": 0},
-        "blackBand": { "type": "boolean" },
-        "trainImages": { "type": "boolean" }
+        "blackBand": { "type": "boolean" }
       },
-      "required": ["shareStyle", "layout", "width", "height", "cutlines", "bleed", "blackBand", "trainImages"],
+      "required": ["shareStyle", "layout", "width", "height", "cutlines", "bleed", "blackBand"],
       "additionalProperties": false
+    },
+    "trains": {
+      "type": "object",
+      "properties": {
+        "style": { "type": "string", "enum": ["color", "number"] },
+        "images": { "type": "boolean" }
+      },
+      "additionalProperties": false,
+      "required": ["styles", "images"]
     },
     "charters": {
       "type": "object",
