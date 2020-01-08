@@ -90,8 +90,8 @@ const Market2D = ({ legend, market, par, title, displayMode, paginated, cell }) 
           if (!R.is(Object, value)) {
             value = { label: value, value: value };
           } else {
-          value = R.clone(value);
-        }
+            value = R.clone(value);
+          }
           let delta = util.delta(col, row, market);
           value.subLabel = delta;
           // value.rawColor = tinycolor.fromRatio({h:(delta * 0.00667 * 4.0), s:0.85, v:0.85}).toHexString();
@@ -118,14 +118,14 @@ const Market2D = ({ legend, market, par, title, displayMode, paginated, cell }) 
 
 const Market = stock => {
   switch (stock.type) {
-    case "1D":
-      return <Market1D {...stock} />;
-    case "1Diag":
-      return <Market1Diag {...stock} />;
-    case "2D":
-      return <Market2D {...stock} />;
-    default:
-      return null;
+  case "1D":
+    return <Market1D {...stock} />;
+  case "1Diag":
+    return <Market1Diag {...stock} />;
+  case "2D":
+    return <Market2D {...stock} />;
+  default:
+    return null;
   }
 };
 
