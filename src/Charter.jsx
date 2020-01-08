@@ -64,7 +64,7 @@ const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, char
         {turn.optional && <dd>{optionalList}</dd>}
       </React.Fragment>
     );
-  }, turns);
+  }, turns || []);
 
   return (
     <Color context="companies">
