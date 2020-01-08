@@ -119,13 +119,14 @@
       "properties": {
         "layout": {
           "type": "string",
-          "enum": ["max", "gsp"]
+          "enum": ["free", "gsp"]
         },
         "marketTokenSize": { "$ref": "#/definitions/dimension" },
-        "stationTokenSize": { "$ref": "#/definitions/dimension" }
+        "stationTokenSize": { "$ref": "#/definitions/dimension" },
+        "bleed": { "type": "boolean" }
       },
       "additionalProperties": false,
-      "required": ["layout", "marketTokenSize", "stationTokenSize"]
+      "required": ["layout", "marketTokenSize", "stationTokenSize", "bleed"]
     },
     "coords": {
       "type": "string",

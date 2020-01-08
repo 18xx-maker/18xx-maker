@@ -53,7 +53,8 @@
   "tokens": {
     "layout": "gsp",
     "marketTokenSize": 50,
-    "stationTokenSize": 50
+    "stationTokenSize": 50,
+    "bleed": true
   },
   "tiles": {
     "layout": "die",

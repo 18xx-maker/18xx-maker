@@ -213,7 +213,7 @@ const Config = ({config, setConfig, resetConfig}) => {
       <p>For reference US Letter size would be 8.5in by 11in. A4 is 210mm by 297mm.</p>
       <h3>Tokens</h3>
       <Input name="tokens.layout" label="Token Layout"
-             description="This lets you choose between different layouts when printing tokens. GSP matches the GarageSalePup AWE label sheets."/>
+             description="This lets you choose between different layouts when printing tokens. GSP matches the GarageSalePup AWE label sheets and overrides the values below."/>
       <Input name="tokens.marketTokenSize" label="Market Token Size" dimension={true}
              description="Size of the market tokens. 0.5 inches is the default. 12mm and 10mm are good sizes for the Rails on Boards tokens."/>
       <Input name="tokens.stationTokenSize" label="Station Token Size" dimension={true}

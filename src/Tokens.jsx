@@ -5,7 +5,6 @@ import { Redirect, useParams } from "react-router-dom";
 import CompanyToken from "./tokens/CompanyToken";
 import Token from "./tokens/Token";
 import games from "./data/games";
-import * as R from "ramda";
 import ColorContext from "./context/ColorContext";
 
 import Config from "./data/Config";
@@ -13,239 +12,156 @@ import Config from "./data/Config";
 import { compileCompanies, overrideCompanies, unitsToCss } from "./util";
 
 import is from "ramda/src/is";
+import chain from "ramda/src/chain";
+import map from "ramda/src/map";
+import addIndex from "ramda/src/addIndex";
 
 import PageSetup from "./PageSetup";
 import Svg from "./Svg";
 
-const MaxTokens = ({ game, override, selection }) => {
-  let companies = overrideCompanies(compileCompanies(game), override, selection);
-  let tokensWidth = 12;
+// Takes in a game object, a tokens config object and a paper config object.
+//
+// Returns data that's needed to layout a token sheet.
+export const getTokenData = (game, tokens, paper) => {
+  let { marketTokenSize, stationTokenSize, bleed } = tokens;
 
-  let extraNormals =
-    (game.info.marketTokens || 3) + (game.info.extraStationTokens || 0);
-  let tokenCount = R.scan(
-    R.add,
-    0,
-    R.addIndex(R.chain)((company, index) => {
-      return (
-        company.tokens.length + extraNormals + (game.info.marketTokens || 3)
-      );
-    }, companies)
-  );
-  let totalTokenCount = R.reduce(
-    R.add,
-    0,
-    R.addIndex(R.chain)((company, index) => {
-      return (
-        company.tokens.length + extraNormals + (game.info.marketTokens || 3)
-      );
-    }, companies)
-  );
-  let gameTokenCount = game.tokens.length;
+  // Extra token counts from config
+  let marketTokens = game.info.marketTokens || 3;
+  let extraStationTokens = game.info.extraStationTokens || 0;
 
-  let tokens = R.addIndex(R.chain)((company, index) => {
-    let companyTokens = Array(company.tokens.length + extraNormals).fill(
-      <CompanyToken company={company} bleed={true} />
-    );
-    R.times(() => {
-      companyTokens.push(
-        <CompanyToken company={company} bleed={true} inverse={true} />
-      );
-    }, game.info.marketTokens || 3);
+  // Layout
+  let layout = tokens.layout;
 
-    let groups = R.addIndex(R.map)(
-      (token, tokenIndex) => (
-        <g
-          key={tokenIndex}
-          transform={`translate(${(60 * (tokenIndex + tokenCount[index]) + 30) %
-            (60 * tokensWidth)} ${30 +
-            60 * Math.floor((tokenIndex + tokenCount[index]) / tokensWidth)})`}
-        >
-          {token}
-        </g>
-      ),
-      companyTokens
-    );
-    return <g key={index}>{groups}</g>;
-  }, companies);
+  // Width
+  let width = Math.max(marketTokenSize, stationTokenSize);
 
-  let extras = R.addIndex(R.map)((token, index) => {
-    if (is(Object, token)) {
-      return (
-        <g
-          key={index}
-          transform={`translate(${(60 * (index + totalTokenCount) + 30) %
-            (60 * tokensWidth)} ${30 +
-            60 * Math.floor((index + totalTokenCount) / tokensWidth)})`}
-        >
-          <Token bleed={true} outline="black" {...token} />
-        </g>
-      );
-    } else {
-      if (token.match(/^#/)) {
-        console.log(token);
-        return (
-          <g
-            key={index}
-            transform={`translate(${(60 * (index + totalTokenCount) + 30) %
-              (60 * tokensWidth)} ${30 +
-              60 * Math.floor((index + totalTokenCount) / tokensWidth)})`}
-          >
-            <Token icon={token.replace("#", "")} bleed={true} color="white" outline="black" />
-          </g>
-        );
-      } else {
-        return (
-          <g
-            key={index}
-            transform={`translate(${(60 * (index + totalTokenCount) + 30) %
-              (60 * tokensWidth)} ${30 +
-              60 * Math.floor((index + totalTokenCount) / tokensWidth)})`}
-          >
-            <Token label={token} bleed={true} color="white" outline="black" />
-          </g>
-        );
-      }
-    }
-  }, game.tokens);
-
-  tokens.push(<g key="extras">{extras}</g>);
-
-  let width = 60 * tokensWidth;
-  let height = 60 * Math.ceil((gameTokenCount + totalTokenCount) / tokensWidth);
-
-  return (
-    <div className="tokens">
-      <ColorContext.Provider value="companies">
-        <Svg width={width} height={height}>
-          {tokens}
-        </Svg>
-        <PageSetup landscape={false} />
-      </ColorContext.Provider>
-    </div>
-  );
-};
-
-const GspTokens = ({ game, override, selection }) => {
-  let companies = overrideCompanies(compileCompanies(game), override, selection);
-
-  if (!companies) {
-    return null;
+  if (layout === "gsp") {
+    width = marketTokenSize = stationTokenSize = 50;
   }
 
-  let perRow = 12;
-  let offsetX = 50 + 14;
-  let offsetY = 50 + 10;
-  let extraX = (850 - 12 * 50 - 11 * 14) / 2;
-  let extraY = (1100 - 17 * 50 - 16 * 10) / 2;
-  let marginX = extraX + 25;
-  let marginY = extraY + 25;
+  // Bleed
+  let bleedWidth = bleed ? 5 : 0;
+  let totalWidth = width + (2 * bleedWidth);
 
-  let getX = i => marginX + (i % perRow) * offsetX;
-  let getY = i => marginY + Math.floor(i / perRow) * offsetY;
+  // Paper setup
+  let usableWidth = paper.width - (2 * paper.margins);
+  let usableHeight = paper.height - (2 * paper.margins);
 
-  let extraNormals =
-    (game.info.marketTokens || 3) + (game.info.extraStationTokens || 0);
-  let tokenCount = R.scan(
-    R.add,
-    0,
-    R.addIndex(R.chain)((company, index) => {
-      return (
-        company.tokens.length + extraNormals + (game.info.marketTokens || 3)
-      );
-    }, companies)
-  );
-  let totalTokenCount = R.reduce(
-    R.add,
-    0,
-    R.addIndex(R.chain)((company, index) => {
-      return (
-        company.tokens.length + extraNormals + (game.info.marketTokens || 3)
-      );
-    }, companies)
-  );
+  // Page row and column settings
+  let perRow = Math.floor(usableWidth / totalWidth);
+  let perColumn = Math.floor(usableHeight / totalWidth);
+  let offsetX = totalWidth;
+  let offsetY = totalWidth;
 
-  let tokens = R.addIndex(R.chain)((company, index) => {
-    let companyTokens = Array(company.tokens.length + extraNormals).fill(
-      <CompanyToken company={company} bleed={true} />
+  if (layout === "gsp") {
+    perRow = 12;
+    perColumn = 17;
+    offsetX = 64;
+    offsetY = 60;
+  }
+
+  let rowWidth = (perRow * offsetX) - (offsetX - totalWidth);
+  let columnHeight = (perColumn * offsetY) - (offsetY - totalWidth);
+  let extraX = (usableWidth - rowWidth) / 2;
+  let extraY = (usableHeight - columnHeight) / 2;
+
+  let getX = i => extraX + ((i % perRow) * offsetX) + (0.5 * totalWidth);
+  let getY = i => extraY + (Math.floor(i / perRow) * offsetY) + (0.5 *  totalWidth);
+
+  let perPage = perRow * perColumn;
+
+  return {
+    marketTokens,
+    extraStationTokens,
+    width,
+    totalWidth,
+    marketTokenSize,
+    stationTokenSize,
+    bleed,
+    bleedWidth,
+    layout,
+    perRow,
+    perColumn,
+    perPage,
+    rowWidth,
+    columnHeight,
+    extraX,
+    extraY,
+    paper,
+    usableWidth,
+    usableHeight,
+    offsetX,
+    offsetY,
+    getX,
+    getY
+  };
+};
+
+const TokenLayout = ({ companies, data, game }) => {
+  let companyTokens = chain(company => {
+    // Market tokens
+    let marketTokens = Array(data.marketTokens).fill(
+      <CompanyToken company={company}
+                    width={data.marketTokenSize / 2}
+                    bleed={data.bleed} />
     );
-    R.times(() => {
-      companyTokens.push(
-        <CompanyToken company={company} bleed={true} inverse={true} />
-      );
-    }, game.info.marketTokens || 3);
 
-    let groups = R.addIndex(R.map)(
-      (token, tokenIndex) => (
-        <g
-          key={tokenIndex}
-          transform={`translate(${getX(tokenIndex + tokenCount[index])} ${getY(
-            tokenIndex + tokenCount[index]
-          )})`}
-        >
-          {token}
-        </g>
-      ),
-      companyTokens
+    let inverseMarketTokens = Array(data.marketTokens).fill(
+      <CompanyToken company={company}
+                    width={data.marketTokenSize / 2}
+                    bleed={data.bleed}
+                    inverse={true} />
     );
-    return <g key={index}>{groups}</g>;
+
+    let stationTokens = Array(company.tokens.length + data.extraStationTokens).fill(
+      <CompanyToken company={company}
+                    width={data.stationTokenSize / 2}
+                    bleed={data.bleed} />
+    );
+
+    return [...marketTokens, ...inverseMarketTokens, ...stationTokens];
   }, companies);
 
-  let extras = R.addIndex(R.map)((token, index) => {
+  let gameTokens = map(token => {
     if (is(Object, token)) {
-      return (
-        <g
-          key={index}
-          transform={`translate(${getX(index + totalTokenCount)} ${getY(
-            index + totalTokenCount
-          )})`}
-        >
-          <Token bleed={true} outline="black" {...token} />
-        </g>
-      );
+      return <Token bleed={true}
+               outline="black"
+               {...token}
+               width={data.stationTokenSize / 2} />
     } else {
-      if (token.match(/^#/)) {
-        return (
-          <g
-            key={index}
-            transform={`translate(${getX(index + totalTokenCount)} ${getY(
-              index + totalTokenCount
-            )})`}
-          >
-            <Token icon={token} bleed={true} color="white" outline="black" />
-          </g>
-        );
-      } else {
-        return (
-          <g
-            key={index}
-            transform={`translate(${getX(index + totalTokenCount)} ${getY(
-              index + totalTokenCount
-            )})`}
-          >
-            <Token label={token} bleed={true} color="white" outline="black" />
-          </g>
-        );
-      }
+      return <Token bleed={true}
+               outline="black"
+               color="white"
+               label={token}
+               width={data.stationTokenSize / 2} />
     }
   }, game.tokens);
 
-  tokens.push(<g key="extras">{extras}</g>);
+  // Combine all tokens
+  let tokens = [...companyTokens, ...gameTokens];
+
+  let nodes = addIndex(map)((token, index) => (
+    <g
+      key={`token-${index}`}
+      transform={`translate(${data.getX(index)} ${data.getY(index)})`} >
+      {token}
+    </g>
+  ), tokens);
 
   return (
     <div
       className="tokens"
-      style={{ width: "8.5in", height: unitsToCss(1100 - extraY / 2) }}
-    >
+      style={{ width: unitsToCss(data.usableWidth),
+               height: unitsToCss(data.usableHeight) }}>
       <ColorContext.Provider value="companies">
         <Svg
-          viewBox={`0 0 850 ${1100 - extraY / 2}`}
-          style={{ width: "8.5in", height: unitsToCss(1100 - extraY / 2) }}
-        >
-          {tokens}
+          viewBox={`0 0 ${data.usableWidth} ${data.usableHeight}`}
+          style={{ width: unitsToCss(data.usableWidth),
+                   height: unitsToCss(data.usableHeight) }}>
+          {nodes}
         </Svg>
         <PageSetup
-          paper={{ margins: 0, width: 850, height: 1100 }}
+          paper={data.paper}
           landscape={false}
         />
       </ColorContext.Provider>
@@ -261,18 +177,14 @@ const Tokens = ({ override, selection }) => {
     return <Redirect to={`/${params.game}/background`} />;
   }
 
+  let companies = overrideCompanies(compileCompanies(game), override, selection);
+
   return (
     <Config>
       {config => {
-        if (config.tokens.layout === "gsp") {
-          return (
-            <GspTokens game={game} override={override} selection={selection} />
-          );
-        } else {
-          return (
-            <MaxTokens game={game} override={override} selection={selection} />
-          );
-        }
+        let data = getTokenData(game, config.tokens, config.paper);
+
+        return <TokenLayout companies={companies} data={data} game={game} />;
       }}
     </Config>
   );
