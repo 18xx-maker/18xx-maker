@@ -66,20 +66,22 @@ const Train = ({ train, blackBand }) => {
         {(c,t) => (
           <Config>
             {config => (
-              <div className={`card train card--${config.cards.layout}`}>
+              <div className={`card train card--${config.cards.layout} train--${config.trains.style}`}>
                 <div className="card__bleed">
-                  <div className="train__hr"
-                       style={{
-                         backgroundColor: c(color),
-                         borderBottom: (color === "white" || config.cards.blackBand) ? "2px solid black" : null
-                       }}
-                  />
+                  {config.trains.style === "color" && (<div className="train__hr"
+                                                         style={{
+                                                           backgroundColor: c(color),
+                                                           borderBottom: (color === "white" || config.cards.blackBand) ? "2px solid black" : null
+                                                         }}
+                                                    />)}
                   <div className="card__body">
-                    {config.cards.trainImages && (
+                    {config.trains.images && (
                       <div className="train__image"><img alt={`${color} train`} src={image}/></div>
                     )}
-                    <div className="train__name" style={{ color: t(c(color)) }}>{name}</div>
-                    <div className="train__price" style={{ backgroundColor: c(color), color: t(c(color)) }}>
+                    <div className="train__name" style={{ color: config.trains.style === "color" ? t(c(color)) : c(color) }}>{name}</div>
+                    <div className="train__price"
+                         style={{ backgroundColor: config.trains.style === "color" ? c(color) : null,
+                                  color: t(c(color)) }}>
                       <Currency value={price} type="train"/>
                     </div>
                     {description && <div className="train__description">{description}</div>}
