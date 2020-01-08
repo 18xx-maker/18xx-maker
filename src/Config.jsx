@@ -211,9 +211,14 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="paper.height" label="Paper Height" dimension={true}/>
       <Input name="paper.margins" label="Paper Margins" dimension={true}/>
       <p>For reference US Letter size would be 8.5in by 11in. A4 is 210mm by 297mm.</p>
-      <h3>Companies</h3>
-      <Input name="tokenLayout" label="Token Layout"
+      <h3>Tokens</h3>
+      <Input name="tokens.layout" label="Token Layout"
              description="This lets you choose between different layouts when printing tokens. GSP matches the GarageSalePup AWE label sheets."/>
+      <Input name="tokens.marketTokenSize" label="Market Token Size" dimension={true}
+             description="Size of the market tokens. 0.5 inches is the default. 12mm and 10mm are good sizes for the Rails on Boards tokens."/>
+      <Input name="tokens.stationTokenSize" label="Station Token Size" dimension={true}
+             description="Size of the station tokens. 0.5 inches is the default. 12mm and 10mm are good sizes for the Rails on Boards tokens."/>
+      <h3>Companies</h3>
       <Input name="companySvgLogos" label="Company Logos"
              description="This lets you choose to use SVG logos (when available) for companies instead of only colors and text. The different settings are explained on the [logos doc](/docs/logos) page" />
       <Input name="overrideCompanies" label="Override Companies"

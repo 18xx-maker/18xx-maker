@@ -264,7 +264,7 @@ const Tokens = ({ override, selection }) => {
   return (
     <Config>
       {config => {
-        if (config.tokenLayout === "gsp") {
+        if (config.tokens.layout === "gsp") {
           return (
             <GspTokens game={game} override={override} selection={selection} />
           );
