@@ -50,7 +50,11 @@
     "blackBand": false,
     "trainImages": false
   },
-  "tokenLayout": "gsp",
+  "tokens": {
+    "layout": "gsp",
+    "marketTokenSize": 50,
+    "stationTokenSize": 50
+  },
   "tiles": {
     "layout": "die",
     "width": 150,

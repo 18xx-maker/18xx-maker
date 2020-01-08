@@ -114,9 +114,18 @@
       "required": ["style", "halfWidth", "cutlines", "border", "blackBand"],
       "additionalProperties": false
     },
-    "tokenLayout": {
-      "type": "string",
-      "enum": ["max", "gsp"]
+    "tokens": {
+      "type": "object",
+      "properties": {
+        "layout": {
+          "type": "string",
+          "enum": ["max", "gsp"]
+        },
+        "marketTokenSize": { "$ref": "#/definitions/dimension" },
+        "stationTokenSize": { "$ref": "#/definitions/dimension" }
+      },
+      "additionalProperties": false,
+      "required": ["layout", "marketTokenSize", "stationTokenSize"]
     },
     "coords": {
       "type": "string",
@@ -173,7 +182,7 @@
     "plainMapCompanies",
     "stock",
     "theme",
-    "tokenLayout",
+    "tokens",
     "overrideCompanies",
     "overrideSelection"
   ],
