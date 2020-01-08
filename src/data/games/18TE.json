@@ -590,7 +590,79 @@
     "hexes": [
       {
         "color": "plain",
-        "hexes": ["C1", "D2", "E3", "B6", "G7", "B8", "C9", "D10", "C11", "D12", "F12"]
+        "hexes": ["C1", "D2", "E3", "G7", "B8", "C11", "F12"]
+      },
+      {
+        "color": "plain",
+        "names": [{
+          "name": "30ℳ",
+          "color": "water",
+          "fontSize": 14,
+          "rotate": 60,
+          "angle": 60,
+          "percent": 0.85
+        },{
+          "name": "30ℳ",
+          "color": "water",
+          "fontSize": 14,
+          "percent": 0.85
+        }],
+        "hexes": ["B6"]
+      },
+      {
+        "color": "plain",
+        "names": [{
+          "name": "30ℳ",
+          "color": "water",
+          "fontSize": 14,
+          "rotate": 120,
+          "angle": 120,
+          "percent": 0.85
+        },{
+          "name": "30ℳ",
+          "color": "water",
+          "fontSize": 14,
+          "rotate": 60,
+          "angle": 60,
+          "percent": 0.85
+        },{
+          "name": "30ℳ",
+          "color": "water",
+          "fontSize": 14,
+          "percent": 0.85
+        }],
+        "hexes": ["C9"]
+      },
+      {
+        "color": "plain",
+        "names": [{
+          "name": "30ℳ",
+          "color": "water",
+          "fontSize": 14,
+          "rotate": 60,
+          "angle": 60,
+          "percent": 0.85
+        }],
+        "hexes": ["D10"]
+      },
+      {
+        "color": "plain",
+        "names": [{
+          "name": "30ℳ",
+          "color": "water",
+          "fontSize": 14,
+          "rotate": 120,
+          "angle": 120,
+          "percent": 0.85
+        },{
+          "name": "30ℳ",
+          "color": "water",
+          "fontSize": 14,
+          "rotate": 60,
+          "angle": 60,
+          "percent": 0.85
+        }],
+        "hexes": ["D12"]
       },
       {
         "color": "plain",
@@ -660,6 +732,14 @@
         "color": "plain",
         "centerTowns": [{
           "name": { "name": "Hörstel" }
+        }],
+        "names": [{
+          "name": "30ℳ",
+          "color": "water",
+          "fontSize": 14,
+          "rotate": 60,
+          "angle": 60,
+          "percent": 0.85
         }],
         "hexes": ["C7"]
       },
