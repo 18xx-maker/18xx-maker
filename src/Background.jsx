@@ -32,7 +32,7 @@ const Background = ({ paper }) => {
 
   let text = null;
   let [BB, setBB] = useState({x:0,y:0,width:containerWidth,height:containerHeight});
-  useEffect(() => setBB(text.getBBox()), [text]);
+  useEffect(() => setBB(text.getBBox()), [title, text]);
 
   let textWidth = BB.width + 12;
   let textHeight = BB.height;
@@ -40,7 +40,7 @@ const Background = ({ paper }) => {
   let cols = Math.ceil(containerWidth / textWidth);
   let rows = Math.ceil(containerHeight / textHeight);
 
-  let textNodes = flatten(times(x => times(y => <text key={`${x}-${y}`}
+  let textNodes = flatten(times(x => times(y => <text key={`${title}-${x}-${y}`}
                                                     x={x * textWidth} y={y * textHeight}
                                                     fill="#fff" opacity="0.2">{title}</text>, rows), cols));
 
