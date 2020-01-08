@@ -808,1288 +808,797 @@
     "68": 1,
     "70": 1
   },
-  "map": [
-    {
-      "name": "Original Companies",
-      "hexes": [
-        {
-          "color": "gray",
-          "track": [
-            {
-              "type": "sharp",
-              "side": 5
-            }
-          ],
-          "values": [
-            {
-              "angle": 180,
-              "percent": 0.333,
-              "value": 10
-            }
-          ],
-          "cities": [
-            {
-              "percent": 0.5,
-              "name": {
-                "name": "Leeuwarden"
-              },
-              "companies": [
-                "NFL"
-              ]
-            }
-          ],
-          "hexes": [
-            "A9"
-          ]
-        },
-        {
-          "color": "plain",
-          "hexes": [
-            "A11",
-            "B12",
-            "C7",
-            "C9",
-            "C11",
-            "D12",
-            "E9",
-            "G3",
-            "G5",
-            "H8",
-            "I5",
-            "I7",
-            "K5"
-          ]
-        },
-        {
-          "color": "offboard",
-          "offBoardRevenue": {
+  "map": {
+    "hexes": [
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 5
+          }
+        ],
+        "values": [
+          {
+            "angle": 180,
+            "percent": 0.333,
+            "value": 10
+          }
+        ],
+        "cities": [
+          {
+            "percent": 0.5,
             "name": {
-              "name": "Hamburg"
+              "name": "Leeuwarden"
             },
-            "revenues": [
-              {
-                "color": "yellow",
-                "cost": "40"
-              },
-              {
-                "color": "brown",
-                "cost": "70"
-              }
+            "companies": [
+              "NFL"
             ]
+          }
+        ],
+        "hexes": [
+          "A9"
+        ]
+      },
+      {
+        "color": "plain",
+        "hexes": [
+          "A11",
+          "B12",
+          "C7",
+          "C9",
+          "C11",
+          "D12",
+          "E9",
+          "G3",
+          "G5",
+          "H8",
+          "I5",
+          "I7",
+          "K5"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Hamburg"
           },
-          "offBoardTrack": [
+          "revenues": [
             {
-              "side": 1
+              "color": "yellow",
+              "cost": "40"
             },
             {
-              "side": 6
+              "color": "brown",
+              "cost": "70"
             }
-          ],
-          "hexes": [
-            "A13"
           ]
         },
-        {
-          "color": "plain",
-          "terrain": [
-            {
-              "type": "water",
-              "cost": 80,
-              "percent": 0.75
+        "offBoardTrack": [
+          {
+            "side": 1
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "A13"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 80,
+            "percent": 0.75
+          }
+        ],
+        "companies": [
+          {
+            "label": "E-SF",
+            "percent": 0.7,
+            "angle": 180
+          }
+        ],
+        "centerTowns": [
+          {
+            "x": -30,
+            "name": {
+              "name": "Enkhuizen",
+              "reverse": true
             }
-          ],
-          "companies": [
-            {
-              "label": "E-SF",
-              "percent": 0.7,
-              "angle": 180
+          },
+          {
+            "x": 30,
+            "name": {
+              "name": "Stavoren"
             }
-          ],
-          "centerTowns": [
-            {
-              "x": -30,
-              "name": {
-                "name": "Enkhuizen",
-                "reverse": true
-              }
+          }
+        ],
+        "hexes": [
+          "B8"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Groningen"
+            }
+          }
+        ],
+        "hexes": [
+          "B10"
+        ]
+      },
+      {
+        "color": "yellow",
+        "values": [
+          {
+            "angle": 180,
+            "percent": 0.26,
+            "value": 40
+          }
+        ],
+        "companies": [
+          {
+            "label": "ACC",
+            "angle": 240,
+            "percent": 0.6
+          }
+        ],
+        "cities": [
+          {
+            "percent": 0.5,
+            "name": {
+              "name": "Amsterdam"
             },
-            {
-              "x": 30,
-              "name": {
-                "name": "Stavoren"
-              }
+            "companies": [
+              "HSM"
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "label": "NY",
+            "angle": 120,
+            "percent": 0.7
+          }
+        ],
+        "track": [
+          {
+            "type": "sharp",
+            "side": 5
+          }
+        ],
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 40,
+            "angle": 180,
+            "percent": 0.7
+          }
+        ],
+        "hexes": [
+          "D6"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 40
+          }
+        ],
+        "hexes": [
+          "D8",
+          "D10",
+          "F8",
+          "G9",
+          "G11"
+        ]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "OO",
+            "percent": 0.667
+          }
+        ],
+        "cities": [
+          {
+            "angle": 65,
+            "percent": 0.6,
+            "name": {
+              "name": "Rotterdam"
             }
-          ],
-          "hexes": [
-            "B8"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Groningen"
-              }
+          },
+          {
+            "angle": 295,
+            "percent": 0.6,
+            "name": {
+              "name": "Den Haag"
             }
-          ],
-          "hexes": [
-            "B10"
-          ]
-        },
-        {
-          "color": "yellow",
-          "values": [
-            {
-              "angle": 180,
-              "percent": 0.26,
-              "value": 40
+          }
+        ],
+        "hexes": [
+          "E5"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Utrecht"
             }
-          ],
-          "companies": [
-            {
-              "label": "ACC",
-              "angle": 240,
-              "percent": 0.6
+          }
+        ],
+        "hexes": [
+          "E7"
+        ]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "OO",
+            "percent": 0.667
+          }
+        ],
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 40,
+            "angle": 180,
+            "percent": 0.6
+          }
+        ],
+        "cities": [
+          {
+            "angle": 65,
+            "percent": 0.6,
+            "name": {
+              "name": "Arnhem"
             }
-          ],
-          "cities": [
-            {
-              "percent": 0.5,
-              "name": {
-                "name": "Amsterdam"
-              },
-              "companies": [
-                "HSM"
-              ]
+          },
+          {
+            "angle": 295,
+            "percent": 0.6,
+            "companies": [
+              "NBDS"
+            ],
+            "name": {
+              "name": "Nijmegen"
             }
-          ],
-          "labels": [
-            {
-              "label": "NY",
-              "angle": 120,
-              "percent": 0.7
+          }
+        ],
+        "hexes": [
+          "E11"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Hoek van Holland"
             }
-          ],
-          "track": [
-            {
-              "type": "sharp",
-              "side": 5
+          }
+        ],
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 40,
+            "percent": 0.6
+          }
+        ],
+        "hexes": [
+          "F4"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 80
+          }
+        ],
+        "hexes": [
+          "F6"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Eindhoven"
             }
-          ],
-          "terrain": [
-            {
-              "type": "water",
-              "cost": 40,
-              "angle": 180,
-              "percent": 0.7
+          }
+        ],
+        "hexes": [
+          "F10"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Antwerp"
             }
-          ],
-          "tokens": [
-            {
-              "company": "NFL",
-              "width": 15,
-              "angle": 60,
-              "percent": 0.75
+          }
+        ],
+        "hexes": [
+          "G7"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Bruges"
             }
-          ],
-          "hexes": [
-            "D6"
-          ]
-        },
-        {
-          "color": "plain",
-          "terrain": [
-            {
-              "type": "water",
-              "cost": 40
+          }
+        ],
+        "hexes": [
+          "H2"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Gand"
             }
-          ],
-          "hexes": [
-            "D8",
-            "D10",
-            "F8",
-            "G9",
-            "G11"
-          ]
-        },
-        {
-          "color": "plain",
-          "labels": [
-            {
-              "label": "OO",
-              "percent": 0.667
-            },
-            {
-              "label": "H",
-              "percent": 0.667,
-              "angle": 180
+          }
+        ],
+        "hexes": [
+          "H4"
+        ]
+      },
+      {
+        "color": "yellow",
+        "values": [
+          {
+            "percent": 0.5,
+            "value": 30
+          }
+        ],
+        "cities": [
+          {
+            "angle": 150,
+            "percent": 0.333,
+            "companies": [
+              "B"
+            ],
+            "name": {
+              "name": "Brussels",
+              "offset": 42
             }
-          ],
-          "cities": [
-            {
-              "angle": 65,
-              "percent": 0.6,
-              "name": {
-                "name": "Rotterdam"
-              }
-            },
-            {
-              "angle": 295,
-              "percent": 0.6,
-              "name": {
-                "name": "Den Haag"
-              }
+          }
+        ],
+        "track": [
+          {
+            "type": "gentle",
+            "side": 1
+          }
+        ],
+        "labels": [
+          {
+            "label": "B",
+            "angle": 240,
+            "percent": 0.6
+          }
+        ],
+        "hexes": [
+          "H6"
+        ]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "OO",
+            "percent": 0.667
+          }
+        ],
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 40,
+            "angle": 180,
+            "percent": 0.6
+          }
+        ],
+        "cities": [
+          {
+            "angle": 65,
+            "percent": 0.6,
+            "name": {
+              "name": "Maastricht"
             }
-          ],
-          "tokens": [
-            {
-              "company": "NBDS",
-              "angle": 225,
-              "percent": 0.75,
-              "width": 15
+          },
+          {
+            "angle": 295,
+            "percent": 0.6,
+            "name": {
+              "name": "Liège"
             }
-          ],
-          "hexes": [
-            "E5"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Utrecht"
-              }
+          }
+        ],
+        "companies": [
+          {
+            "label": "GCB",
+            "rotate": 30,
+            "reverse": true,
+            "left": 55,
+            "right": 55,
+            "angle": 120,
+            "percent": 1.75
+          }
+        ],
+        "hexes": [
+          "H10"
+        ]
+      },
+      {
+        "color": "yellow",
+        "values": [
+          {
+            "angle": 180,
+            "percent": 0.6,
+            "value": 30
+          }
+        ],
+        "cities": [
+          {
+            "angle": 330,
+            "percent": 0.333,
+            "companies": [
+              "Nord"
+            ],
+            "name": {
+              "name": "Lille",
+              "offset": 42,
+              "reverse": false
             }
-          ],
-          "hexes": [
-            "E7"
-          ]
-        },
-        {
-          "color": "plain",
-          "labels": [
-            {
-              "label": "OO",
-              "percent": 0.667
-            }
-          ],
-          "terrain": [
-            {
-              "type": "water",
-              "cost": 40,
-              "angle": 180,
-              "percent": 0.6
-            }
-          ],
-          "cities": [
-            {
-              "angle": 65,
-              "percent": 0.6,
-              "name": {
-                "name": "Arnhem"
-              }
-            },
-            {
-              "angle": 295,
-              "percent": 0.6,
-              "companies": [
-                "NBDS"
-              ],
-              "name": {
-                "name": "Nijmegen"
-              }
-            }
-          ],
-          "tokens": [
-            {
-              "company": "HSM",
-              "angle": 135,
-              "percent": 0.75,
-              "width": 15
-            }
-          ],
-          "hexes": [
-            "E11"
-          ]
-        },
-        {
-          "color": "plain",
-          "centerTowns": [
-            {
-              "name": {
-                "name": "Hoek van Holland"
-              }
-            }
-          ],
-          "terrain": [
-            {
-              "type": "water",
-              "cost": 40,
-              "percent": 0.6
-            }
-          ],
-          "hexes": [
-            "F4"
-          ]
-        },
-        {
-          "color": "plain",
-          "terrain": [
-            {
-              "type": "water",
-              "cost": 80
-            }
-          ],
-          "hexes": [
-            "F6"
-          ]
-        },
-        {
-          "color": "plain",
-          "centerTowns": [
-            {
-              "name": {
-                "name": "Eindhoven"
-              }
-            }
-          ],
-          "hexes": [
-            "F10"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Antwerp"
-              }
-            }
-          ],
-          "hexes": [
-            "G7"
-          ]
-        },
-        {
-          "color": "plain",
-          "centerTowns": [
-            {
-              "name": {
-                "name": "Bruges"
-              }
-            }
-          ],
-          "hexes": [
-            "H2"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Gand"
-              }
-            }
-          ],
-          "hexes": [
-            "H4"
-          ]
-        },
-        {
-          "color": "yellow",
-          "values": [
-            {
-              "percent": 0.5,
-              "value": 30
-            }
-          ],
-          "cities": [
-            {
-              "angle": 150,
-              "percent": 0.333,
-              "companies": [
-                "B"
-              ],
-              "name": {
-                "name": "Brussels",
-                "offset": 42
-              }
-            }
-          ],
-          "track": [
-            {
-              "type": "gentle",
-              "side": 1
-            }
-          ],
-          "labels": [
-            {
-              "label": "B",
-              "angle": 240,
-              "percent": 0.6
-            }
-          ],
-          "hexes": [
-            "H6"
-          ]
-        },
-        {
-          "color": "plain",
-          "labels": [
-            {
-              "label": "OO",
-              "percent": 0.667
-            }
-          ],
-          "terrain": [
-            {
-              "type": "water",
-              "cost": 40,
-              "angle": 180,
-              "percent": 0.6
-            }
-          ],
-          "cities": [
-            {
-              "angle": 65,
-              "percent": 0.6,
-              "name": {
-                "name": "Maastricht"
-              }
-            },
-            {
-              "angle": 295,
-              "percent": 0.6,
-              "name": {
-                "name": "Liège"
-              }
-            }
-          ],
-          "tokens": [
-            {
-              "company": "B",
-              "angle": 225,
-              "percent": 0.75,
-              "width": 15
-            }
-          ],
-          "companies": [
-            {
-              "label": "GCB",
-              "rotate": 30,
+          }
+        ],
+        "track": [
+          {
+            "type": "gentle",
+            "side": 4
+          }
+        ],
+        "labels": [
+          {
+            "label": "B",
+            "angle": 60,
+            "percent": 0.6
+          }
+        ],
+        "hexes": [
+          "I3"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 60
+          }
+        ],
+        "hexes": [
+          "I11",
+          "J10",
+          "J12",
+          "K7",
+          "K9"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "companies": [
+              "GCL"
+            ],
+            "name": {
               "reverse": true,
-              "left": 55,
-              "right": 55,
-              "angle": 120,
-              "percent": 1.75
+              "name": "Namur"
             }
-          ],
-          "hexes": [
-            "H10"
-          ]
-        },
-        {
-          "color": "yellow",
-          "values": [
-            {
-              "angle": 180,
-              "percent": 0.6,
-              "value": 30
-            }
-          ],
-          "cities": [
-            {
-              "angle": 330,
-              "percent": 0.333,
-              "companies": [
-                "Nord"
-              ],
-              "name": {
-                "name": "Lille",
-                "offset": 42,
-                "reverse": false
-              }
-            }
-          ],
-          "track": [
-            {
-              "type": "gentle",
-              "side": 4
-            }
-          ],
-          "labels": [
-            {
-              "label": "B",
-              "angle": 60,
-              "percent": 0.6
-            }
-          ],
-          "hexes": [
-            "I3"
-          ]
-        },
-        {
-          "color": "plain",
-          "terrain": [
-            {
-              "type": "mountain",
-              "cost": 60
-            }
-          ],
-          "hexes": [
-            "I11",
-            "J10",
-            "J12",
-            "K7",
-            "K9"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "companies": [
-                "GCL"
-              ],
-              "name": {
-                "reverse": true,
-                "name": "Namur"
-              }
-            }
-          ],
-          "terrain": [
-            {
-              "type": "water",
-              "cost": 40,
-              "angle": 180,
-              "percent": 0.6
-            }
-          ],
-          "tokens": [
-            {
-              "company": "Nord",
-              "percent": 0.8,
-              "width": 15
-            }
-          ],
-          "hexes": [
-            "I9"
-          ]
-        },
-        {
-          "color": "plain",
-          "companies": [
-            {
-              "label": "CFLV",
-              "angle": 165,
-              "left": 35,
-              "percent": 0.8
-            }
-          ],
-          "hexes": [
-            "J4"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Charleroi"
-              }
-            }
-          ],
-          "hexes": [
-            "J6"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "reverse": true,
-                "name": "Hainaut Coalfields"
-              }
-            }
-          ],
-          "terrain": [
-            {
-              "type": "mountain",
-              "cost": 60,
-              "angle": 180,
-              "percent": 0.6
-            }
-          ],
-          "companies": [
-            {
-              "label": "CdH",
-              "percent": 0.75
-            }
-          ],
-          "hexes": [
-            "J8"
-          ]
-        },
-        {
-          "color": "water",
-          "offBoardRevenue": {
+          }
+        ],
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 40,
+            "angle": 180,
+            "percent": 0.6
+          }
+        ],
+        "hexes": [
+          "I9"
+        ]
+      },
+      {
+        "color": "plain",
+        "companies": [
+          {
+            "label": "CFLV",
+            "angle": 165,
+            "left": 35,
+            "percent": 0.8
+          }
+        ],
+        "hexes": [
+          "J4"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
             "name": {
-              "name": "Harwich"
-            },
-            "revenues": [
-              {
-                "color": "yellow",
-                "cost": "+20"
-              },
-              {
-                "color": "brown",
-                "cost": "+30"
-              }
-            ]
-          },
-          "offBoardTrack": [
-            {
-              "side": 4
-            },
-            {
-              "side": 5
+              "name": "Charleroi"
             }
-          ],
-          "hexes": [
-            "E3"
-          ]
-        },
-        {
-          "color": "water",
-          "offBoardRevenue": {
+          }
+        ],
+        "hexes": [
+          "J6"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
             "name": {
-              "name": "Dover"
-            },
-            "revenues": [
-              {
-                "color": "yellow",
-                "cost": "+20"
-              },
-              {
-                "color": "brown",
-                "cost": "+30"
-              }
-            ]
-          },
-          "offBoardTrack": [
-            {
-              "side": 4
-            },
-            {
-              "side": 5
-            }
-          ],
-          "hexes": [
-            "G1"
-          ]
-        },
-        {
-          "color": "land",
-          "offBoardRevenue": {
-            "name": {
-              "name": "Paris"
-            },
-            "revenues": [
-              {
-                "color": "yellow",
-                "cost": "+20"
-              },
-              {
-                "color": "brown",
-                "cost": "+30"
-              }
-            ]
-          },
-          "offBoardTrack": [
-            {
-              "side": 3
-            },
-            {
-              "side": 4
-            }
-          ],
-          "hexes": [
-            "J2"
-          ]
-        },
-        {
-          "color": "offboard",
-          "offBoardRevenue": {
-            "name": {
-              "name": "Dortmund"
-            },
-            "revenues": [
-              {
-                "color": "yellow",
-                "cost": "30"
-              },
-              {
-                "color": "brown",
-                "cost": "50"
-              }
-            ]
-          },
-          "offBoardTrack": [
-            {
-              "side": 1
-            }
-          ],
-          "hexes": [
-            "E13"
-          ]
-        },
-        {
-          "color": "offboard",
-          "offBoardRevenue": {
-            "name": {
-              "name": "Cologne"
-            },
-            "revenues": [
-              {
-                "color": "yellow",
-                "cost": "30"
-              },
-              {
-                "color": "brown",
-                "cost": "50"
-              }
-            ]
-          },
-          "offBoardTrack": [
-            {
-              "side": 1
-            }
-          ],
-          "hexes": [
-            "H12"
-          ]
-        },
-        {
-          "color": "plain",
-          "terrain": [
-            {
-              "type": "mountain",
-              "cost": 60,
-              "percent": 0.75
-            }
-          ],
-          "centerTowns": [
-            {
-              "x": -30,
-              "name": {
-                "name": "Arlon",
-                "reverse": true
-              }
-            },
-            {
-              "x": 30,
-              "name": {
-                "name": "Luxembourg"
-              }
-            }
-          ],
-          "companies": [
-            {
-              "label": "CFL",
-              "angle": 195,
-              "right": 35,
-              "percent": 0.8
-            }
-          ],
-          "hexes": [
-            "K11"
-          ]
-        },
-        {
-          "color": "offboard",
-          "tokens": [
-            {
-              "company": "GCL",
-              "width": 15,
-              "percent": 0.6
-            }
-          ],
-          "offBoardRevenue": {
-            "name": {
-              "name": "Strasbourg"
-            },
-            "revenues": [
-              {
-                "color": "yellow",
-                "cost": "40"
-              },
-              {
-                "color": "brown",
-                "cost": "70"
-              }
-            ]
-          },
-          "offBoardTrack": [
-            {
-              "side": 1
-            },
-            {
-              "side": 2
-            }
-          ],
-          "hexes": [
-            "K13"
-          ]
-        }
-      ],
-      "borders": [{
-        "color": "water",
-        "coords": ["G3p4", "G3p5", "G5p4", "G5p5"]
-      },{
-        "color": "water",
-        "coords": ["C9p2", "C9p3"]
-      }]
-    },
-    {
-      "name": "1830 Companies",
-      "copy": 0,
-      "hexes": [
-        {
-          "color": "gray",
-          "track": [
-            {
-              "type": "sharp",
-              "side": 5
-            }
-          ],
-          "values": [
-            {
-              "angle": 180,
-              "percent": 0.333,
-              "value": 10
-            }
-          ],
-          "cities": [
-            {
-              "percent": 0.5,
-              "name": {
-                "name": "Leeuwarden"
-              },
-              "companies": [
-                {
-                  "color": "brown",
-                  "label": "B&M"
-                }
-              ]
-            }
-          ],
-          "hexes": [
-            "A9"
-          ]
-        },
-        {
-          "color": "yellow",
-          "values": [
-            {
-              "angle": 180,
-              "percent": 0.26,
-              "value": 40
-            }
-          ],
-          "companies": [
-            {
-              "label": "ACC",
-              "angle": 240,
-              "percent": 0.6
-            }
-          ],
-          "cities": [
-            {
-              "percent": 0.5,
-              "name": {
-                "name": "Amsterdam"
-              },
-              "companies": [
-                {
-                  "color": "orange",
-                  "label": "NYNH"
-                }
-              ]
-            }
-          ],
-          "labels": [
-            {
-              "label": "NY",
-              "angle": 120,
-              "percent": 0.7
-            }
-          ],
-          "track": [
-            {
-              "type": "sharp",
-              "side": 5
-            }
-          ],
-          "terrain": [
-            {
-              "type": "water",
-              "cost": 40,
-              "angle": 180,
-              "percent": 0.7
-            }
-          ],
-          "tokens": [
-            {
-              "company": {
-                "color": "brown",
-                "label": "B&M"
-              },
-              "width": 15,
-              "angle": 60,
-              "percent": 0.75
-            }
-          ],
-          "hexes": [
-            "D6"
-          ]
-        },
-        {
-          "color": "plain",
-          "labels": [
-            {
-              "label": "OO",
-              "percent": 0.667
-            }
-          ],
-          "cities": [
-            {
-              "angle": 65,
-              "percent": 0.6,
-              "name": {
-                "name": "Rotterdam"
-              }
-            },
-            {
-              "angle": 295,
-              "percent": 0.6,
-              "name": {
-                "name": "Den Haag"
-              }
-            }
-          ],
-          "tokens": [
-            {
-              "company": {
-                "label": "ERIE",
-                "color": "yellow"
-              },
-              "angle": 225,
-              "percent": 0.75,
-              "width": 15
-            }
-          ],
-          "hexes": [
-            "E5"
-          ]
-        },
-        {
-          "color": "plain",
-          "labels": [
-            {
-              "label": "OO",
-              "percent": 0.667
-            }
-          ],
-          "terrain": [
-            {
-              "type": "water",
-              "cost": 40,
-              "angle": 180,
-              "percent": 0.6
-            }
-          ],
-          "cities": [
-            {
-              "angle": 65,
-              "percent": 0.6,
-              "name": {
-                "name": "Arnhem"
-              }
-            },
-            {
-              "angle": 295,
-              "percent": 0.6,
-              "companies": [
-                {
-                  "color": "yellow",
-                  "label": "ERIE"
-                }
-              ],
-              "name": {
-                "name": "Nijmegen"
-              }
-            }
-          ],
-          "tokens": [
-            {
-              "company": {
-                "color": "orange",
-                "label": "NYNH"
-              },
-              "angle": 135,
-              "percent": 0.75,
-              "width": 15
-            }
-          ],
-          "hexes": [
-            "E11"
-          ]
-        },
-        {
-          "color": "yellow",
-          "values": [
-            {
-              "percent": 0.5,
-              "value": 30
-            }
-          ],
-          "cities": [
-            {
-              "angle": 150,
-              "percent": 0.333,
-              "companies": [
-                {
-                  "color": "black",
-                  "label": "NYC"
-                }
-              ],
-              "name": {
-                "name": "Brussels",
-                "offset": 42
-              }
-            }
-          ],
-          "track": [
-            {
-              "type": "gentle",
-              "side": 1
-            }
-          ],
-          "labels": [
-            {
-              "label": "B",
-              "angle": 240,
-              "percent": 0.6
-            }
-          ],
-          "hexes": [
-            "H6"
-          ]
-        },
-        {
-          "color": "plain",
-          "labels": [
-            {
-              "label": "OO",
-              "percent": 0.667
-            }
-          ],
-          "terrain": [
-            {
-              "type": "water",
-              "cost": 40,
-              "angle": 180,
-              "percent": 0.6
-            }
-          ],
-          "cities": [
-            {
-              "angle": 65,
-              "percent": 0.6,
-              "name": {
-                "name": "Maastricht"
-              }
-            },
-            {
-              "angle": 295,
-              "percent": 0.6,
-              "name": {
-                "name": "Liège"
-              }
-            }
-          ],
-          "tokens": [
-            {
-              "company": {
-                "color": "black",
-                "label": "NYC"
-              },
-              "angle": 225,
-              "percent": 0.75,
-              "width": 15
-            }
-          ],
-          "companies": [
-            {
-              "label": "GCB",
-              "rotate": 30,
               "reverse": true,
-              "left": 55,
-              "right": 55,
-              "angle": 120,
-              "percent": 1.75
+              "name": "Hainaut Coalfields"
             }
-          ],
-          "hexes": [
-            "H10"
-          ]
-        },
-        {
-          "color": "yellow",
-          "values": [
-            {
-              "angle": 180,
-              "percent": 0.6,
-              "value": 30
-            }
-          ],
-          "cities": [
-            {
-              "angle": 330,
-              "percent": 0.333,
-              "companies": [
-                {
-                  "color": "blue",
-                  "label": "B&O"
-                }
-              ],
-              "name": {
-                "name": "Lille",
-                "offset": 42,
-                "reverse": false
-              }
-            }
-          ],
-          "track": [
-            {
-              "type": "gentle",
-              "side": 4
-            }
-          ],
-          "labels": [
-            {
-              "label": "B",
-              "angle": 60,
-              "percent": 0.6
-            }
-          ],
-          "hexes": [
-            "I3"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "companies": [
-                {
-                  "color": "green",
-                  "label": "PRR"
-                }
-              ],
-              "name": {
-                "reverse": true,
-                "name": "Namur"
-              }
-            }
-          ],
-          "terrain": [
-            {
-              "type": "water",
-              "cost": 40,
-              "angle": 180,
-              "percent": 0.6
-            }
-          ],
-          "tokens": [
-            {
-              "company": {
-                "label": "B&O",
-                "color": "blue"
-              },
-              "percent": 0.8,
-              "width": 15
-            }
-          ],
-          "hexes": [
-            "I9"
-          ]
-        },
-        {
-          "color": "offboard",
-          "tokens": [
-            {
-              "company": {
-                "color": "green",
-                "label": "PRR"
-              },
-              "width": 15,
-              "percent": 0.6
-            }
-          ],
-          "offBoardRevenue": {
-            "name": {
-              "name": "Strasbourg"
-            },
-            "revenues": [
-              {
-                "color": "yellow",
-                "cost": "40"
-              },
-              {
-                "color": "brown",
-                "cost": "70"
-              }
-            ]
+          }
+        ],
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 60,
+            "angle": 180,
+            "percent": 0.6
+          }
+        ],
+        "companies": [
+          {
+            "label": "CdH",
+            "percent": 0.75
+          }
+        ],
+        "hexes": [
+          "J8"
+        ]
+      },
+      {
+        "color": "water",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Harwich"
           },
-          "offBoardTrack": [
+          "revenues": [
             {
-              "side": 1
+              "color": "yellow",
+              "cost": "+20"
             },
             {
-              "side": 2
+              "color": "brown",
+              "cost": "+30"
             }
-          ],
-          "hexes": [
-            "K13"
           ]
         },
-        {
-          "color": "plain",
-          "companies": [
+        "offBoardTrack": [
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          }
+        ],
+        "hexes": [
+          "E3"
+        ]
+      },
+      {
+        "color": "water",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Dover"
+          },
+          "revenues": [
             {
-              "label": "CFLV",
-              "angle": 165,
-              "left": 35,
-              "percent": 0.8
+              "color": "yellow",
+              "cost": "+20"
+            },
+            {
+              "color": "brown",
+              "cost": "+30"
             }
-          ],
-          "hexes": [
-            "J4"
           ]
-        }
-      ],
-      "borders": [{
-        "color": "water",
-        "coords": ["G3p4", "G3p5", "G5p4", "G5p5"]
-      },{
-        "color": "water",
-        "coords": ["C9p2", "C9p3"]
-      }]
-    }
-  ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          }
+        ],
+        "hexes": [
+          "G1"
+        ]
+      },
+      {
+        "color": "land",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Paris"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "+20"
+            },
+            {
+              "color": "brown",
+              "cost": "+30"
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          }
+        ],
+        "hexes": [
+          "J2"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Dortmund"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 1
+          }
+        ],
+        "hexes": [
+          "E13"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Cologne"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 1
+          }
+        ],
+        "hexes": [
+          "H12"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 60,
+            "percent": 0.75
+          }
+        ],
+        "centerTowns": [
+          {
+            "x": -30,
+            "name": {
+              "name": "Arlon",
+              "reverse": true
+            }
+          },
+          {
+            "x": 30,
+            "name": {
+              "name": "Luxembourg"
+            }
+          }
+        ],
+        "companies": [
+          {
+            "label": "CFL",
+            "angle": 195,
+            "right": 35,
+            "percent": 0.8
+          }
+        ],
+        "hexes": [
+          "K11"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Strasbourg"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "70"
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          }
+        ],
+        "hexes": [
+          "K13"
+        ]
+      }
+    ],
+    "borders": [{
+      "color": "water",
+      "coords": ["G3p4", "G3p5", "G5p4", "G5p5"]
+    },{
+      "color": "water",
+      "coords": ["C9p2", "C9p3"]
+    }]
+  }
 }

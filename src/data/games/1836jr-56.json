@@ -934,7 +934,7 @@
           "tokens": [
             {
               "company": "NFL",
-              "width": 15,
+              "destination": true,
               "angle": 60,
               "percent": 0.75
             }
@@ -960,7 +960,7 @@
           ]
         },
         {
-          "color": "plain",
+          "color": "yellow",
           "labels": [
             {
               "label": "OO",
@@ -991,9 +991,9 @@
           "tokens": [
             {
               "company": "NBDS",
+              "destination": true,
               "angle": 225,
-              "percent": 0.75,
-              "width": 15
+              "percent": 0.75
             }
           ],
           "hexes": [
@@ -1014,7 +1014,7 @@
           ]
         },
         {
-          "color": "plain",
+          "color": "yellow",
           "labels": [
             {
               "label": "OO",
@@ -1051,9 +1051,9 @@
           "tokens": [
             {
               "company": "HSM",
+              "destination": true,
               "angle": 135,
-              "percent": 0.75,
-              "width": 15
+              "percent": 0.75
             }
           ],
           "hexes": [
@@ -1183,7 +1183,7 @@
           ]
         },
         {
-          "color": "plain",
+          "color": "yellow",
           "labels": [
             {
               "label": "OO",
@@ -1217,9 +1217,9 @@
           "tokens": [
             {
               "company": "B",
+              "destination": true,
               "angle": 225,
-              "percent": 0.75,
-              "width": 15
+              "percent": 0.75
             }
           ],
           "hexes": [
@@ -1306,8 +1306,8 @@
           "tokens": [
             {
               "company": "Nord",
-              "percent": 0.8,
-              "width": 15
+              "destination": true,
+              "percent": 0.8
             }
           ],
           "hexes": [
@@ -1533,7 +1533,7 @@
           "tokens": [
             {
               "company": "GCL",
-              "width": 15,
+              "destination": true,
               "percent": 0.6
             }
           ],
@@ -1574,7 +1574,7 @@
       }]
     },
     {
-      "name": "1830 Companies",
+      "name": "1856 Companies",
       "copy": 0,
       "hexes": [
         {
@@ -1600,8 +1600,8 @@
               },
               "companies": [
                 {
-                  "color": "brown",
-                  "label": "B&M"
+                  "color": "cyan",
+                  "label": "LPS"
                 }
               ]
             }
@@ -1634,8 +1634,8 @@
               },
               "companies": [
                 {
-                  "color": "orange",
-                  "label": "NYNH"
+                  "color": "purple",
+                  "label": "CV"
                 }
               ]
             }
@@ -1664,10 +1664,10 @@
           "tokens": [
             {
               "company": {
-                "color": "brown",
-                "label": "B&M"
+                "color": "cyan",
+                "label": "LPS"
               },
-              "width": 15,
+              "destination": true,
               "angle": 60,
               "percent": 0.75
             }
@@ -1677,7 +1677,7 @@
           ]
         },
         {
-          "color": "plain",
+          "color": "yellow",
           "labels": [
             {
               "label": "OO",
@@ -1708,12 +1708,12 @@
           "tokens": [
             {
               "company": {
-                "label": "ERIE",
+                "label": "THB",
                 "color": "yellow"
               },
+              "destination": true,
               "angle": 225,
-              "percent": 0.75,
-              "width": 15
+              "percent": 0.75
             }
           ],
           "hexes": [
@@ -1721,7 +1721,7 @@
           ]
         },
         {
-          "color": "plain",
+          "color": "yellow",
           "labels": [
             {
               "label": "OO",
@@ -1750,7 +1750,7 @@
               "companies": [
                 {
                   "color": "yellow",
-                  "label": "ERIE"
+                  "label": "THB"
                 }
               ],
               "name": {
@@ -1761,12 +1761,12 @@
           "tokens": [
             {
               "company": {
-                "color": "orange",
-                "label": "NYNH"
+                "color": "purple",
+                "label": "CV"
               },
+              "destination": true,
               "angle": 135,
-              "percent": 0.75,
-              "width": 15
+              "percent": 0.75
             }
           ],
           "hexes": [
@@ -1787,8 +1787,8 @@
               "percent": 0.333,
               "companies": [
                 {
-                  "color": "black",
-                  "label": "NYC"
+                  "color": "pink",
+                  "label": "CPR"
                 }
               ],
               "name": {
@@ -1815,7 +1815,7 @@
           ]
         },
         {
-          "color": "plain",
+          "color": "yellow",
           "labels": [
             {
               "label": "OO",
@@ -1849,12 +1849,12 @@
           "tokens": [
             {
               "company": {
-                "color": "black",
-                "label": "NYC"
+                "color": "pink",
+                "label": "CPR"
               },
+              "destination": true,
               "angle": 225,
-              "percent": 0.75,
-              "width": 15
+              "percent": 0.75
             }
           ],
           "companies": [
@@ -1887,8 +1887,8 @@
               "percent": 0.333,
               "companies": [
                 {
-                  "color": "blue",
-                  "label": "B&O"
+                  "color": "brown",
+                  "label": "GW"
                 }
               ],
               "name": {
@@ -1921,8 +1921,8 @@
             {
               "companies": [
                 {
-                  "color": "green",
-                  "label": "PRR"
+                  "color": "lime",
+                  "label": "GT"
                 }
               ],
               "name": {
@@ -1942,11 +1942,11 @@
           "tokens": [
             {
               "company": {
-                "label": "B&O",
-                "color": "blue"
+                "label": "GW",
+                "color": "brown"
               },
-              "percent": 0.8,
-              "width": 15
+              "destination": true,
+              "percent": 0.8
             }
           ],
           "hexes": [
@@ -1959,9 +1959,9 @@
             {
               "company": {
                 "color": "green",
-                "label": "PRR"
+                "label": "GT"
               },
-              "width": 15,
+              "destination": true,
               "percent": 0.6
             }
           ],
