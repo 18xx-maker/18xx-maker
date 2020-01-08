@@ -100,37 +100,37 @@
   },
   "companies": [
     {
-      "name": "System A",
+      "name": "Seaboard Coast Lines",
       "color": "red",
-      "abbrev": "A",
+      "abbrev": "SCL",
       "shares": "system",
       "tokens": "system"
     },
     {
-      "name": "System B",
+      "name": "Norfolk Southern",
       "color": "orange",
-      "abbrev": "B",
+      "abbrev": "NS",
       "shares": "system",
       "tokens": "system"
     },
     {
-      "name": "System C",
+      "name": "Illinois Central",
       "color": "green",
-      "abbrev": "C",
+      "abbrev": "IC",
       "shares": "system",
       "tokens": "system"
     },
     {
-      "name": "System D",
+      "name": "Amtrak",
       "color": "blue",
-      "abbrev": "D",
+      "abbrev": "AM",
       "shares": "system",
       "tokens": "system"
     },
     {
-      "name": "System E",
+      "name": "Chessie System",
       "color": "purple",
-      "abbrev": "E",
+      "abbrev": "CS",
       "shares": "system",
       "tokens": "system"
     },
