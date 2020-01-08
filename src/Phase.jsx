@@ -18,7 +18,7 @@ const Phase = ({ phases, minor }) => {
       R.isNil,
       R.prop("name")
     ),
-    phases
+    phases || []
   );
 
   let includePhase = !R.all(
@@ -26,7 +26,7 @@ const Phase = ({ phases, minor }) => {
       R.isNil,
       R.prop("phase")
     ),
-    phases
+    phases || []
   );
 
   let includeTrain = !R.all(
@@ -34,7 +34,7 @@ const Phase = ({ phases, minor }) => {
       R.isNil,
       R.prop("train")
     ),
-    phases
+    phases || []
   );
 
   let excludeRust = R.all(
@@ -42,7 +42,7 @@ const Phase = ({ phases, minor }) => {
       R.isNil,
       R.prop("rust")
     ),
-    phases
+    phases || []
   );
 
   let excludeTiles = R.all(
@@ -50,7 +50,7 @@ const Phase = ({ phases, minor }) => {
       R.isNil,
       R.prop("tiles")
     ),
-    phases
+    phases || []
   );
 
   let includePrice = !R.all(
@@ -58,10 +58,10 @@ const Phase = ({ phases, minor }) => {
       R.isNil,
       R.prop("price")
     ),
-    phases
+    phases || []
   );
 
-  let phaseRows = phases.map(phase => {
+  let phaseRows = (phases || []).map(phase => {
     return (!!phase.minor === minor) && (
       <Color key={phase.phase || phase.name || phase.train}>
         {c => (
