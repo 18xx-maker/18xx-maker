@@ -23,11 +23,11 @@
   "bank": 12000,
   "rounds": [
     {
-      "name": "OR2",
+      "name": "OR1",
       "color": "white"
     },
     {
-      "name": "OR1",
+      "name": "OR2",
       "color": "white"
     },
     {
@@ -144,6 +144,217 @@
       ]
     }
   ],
+  "stock": {
+    "type": "2D",
+    "par": {
+      "values": [
+        100,
+        90,
+        80,
+        70,
+        60
+      ]
+    },
+    "movement": {
+      "up": [
+        "Sold out"
+      ],
+      "down": [
+        "Every share sold"
+      ],
+      "left": [
+        "Revenue withheld"
+      ],
+      "right": [
+        "Revenue paid ≥ value"
+      ]
+    },
+    "market": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "value": 100,
+          "label": 100,
+          "arrow": "down"
+        },
+        110,
+        120,
+        130,
+        140,
+        150,
+        160,
+        180,
+        210,
+        250,
+        {
+          "color": "green",
+          "value": 300,
+          "label": 300,
+          "subLabel": "Game End"
+        }
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        {
+          "value": 80,
+          "label": 80,
+          "arrow": "down"
+        },
+        90,
+        {
+          "value": 100,
+          "label": 100,
+          "par": true
+        },
+        110,
+        120,
+        130,
+        140,
+        150,
+        160,
+        180,
+        {
+          "value": 210,
+          "label": 210,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        null,
+        null,
+        {
+          "value": 60,
+          "label": 60,
+          "arrow": "down"
+        },
+        70,
+        80,
+        {
+          "value": 90,
+          "label": 90,
+          "par": true
+        },
+        100,
+        110,
+        120,
+        130,
+        140,
+        {
+          "value": 150,
+          "label": 150,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        null,
+        {
+          "value": 40,
+          "label": 40,
+          "arrow": "down",
+          "legend": 0
+        },
+        50,
+        60,
+        70,
+        {
+          "value": 80,
+          "label": 80,
+          "par": true
+        },
+        90,
+        100,
+        110,
+        {
+          "value": 120,
+          "label": 120,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 0,
+          "arrow": "down"
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 0
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 0
+        },
+        50,
+        60,
+        {
+          "value": 70,
+          "label": 70,
+          "par": true
+        },
+        80,
+        {
+          "value": 90,
+          "label": 90,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "color": "offboard",
+          "value": 0,
+          "label": 0,
+          "subLabel": "Bankrupt"
+        },
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 0
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 0
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 0
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 0
+        },
+        50,
+        {
+          "value": 60,
+          "label": 60,
+          "par": true,
+          "arrow": "up"
+        }
+      ]
+    ],
+    "legend": [
+      {
+        "color": "yellow",
+        "description": "Shares of this corporation do not count toward the certificate limit",
+        "icon": "certificate"
+      }
+    ]
+  },
   "tiles": {
     "3": 4,
     "4": 4,
