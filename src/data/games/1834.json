@@ -180,18 +180,21 @@
       "name": "Ostend Port Society",
       "price": 20,
       "revenue": 5,
+      "icon":"port",
       "description": "Increases runs to Ostend port (blue offboard) for owning railroad by 20 francs. Can be sold during the YELLOW and GREEN phases."
     },
     {
       "name": "De Kempen Coal Company",
       "price": 40,
       "revenue": 10,
+      "icon":"mountain",
       "description": "Owning corporation may lay a track tile on a mountain hex at half cost, closing the private. Can be sold during the YELLOW and GREEN phases."
     },
     {
       "name": "Burbach Foundry",
       "price": 70,
       "revenue": 15,
+      "tile": "27",
       "description": "Owning corporation may upgrade an additional track tile in a Luxembourg city tile (hexes N11 and M10), from YELLOW to GREEN. This is in addition to its normal placement and closes the private. Can be sold in the GREEN phase."
     },
     {
@@ -210,6 +213,7 @@
       "name": "Albert Canal Corporation",
       "price": 150,
       "revenue": 25,
+      "token": { "color": "yellow", "label": "fr." },
       "description": "No other ability. Closes in BROWN or if track connects Antwerp to Liege by any route or manner regardless of tokens. Can be sold during the GREEN phase."
     }
   ],
