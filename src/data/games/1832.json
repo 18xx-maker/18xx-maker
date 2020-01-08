@@ -101,14 +101,14 @@
   "companies": [
     {
       "name": "Seaboard Coast Lines",
-      "color": "red",
+      "color": "orange",
       "abbrev": "SCL",
       "shares": "system",
       "tokens": "system"
     },
     {
       "name": "Norfolk Southern",
-      "color": "orange",
+      "color": "purple",
       "abbrev": "NS",
       "shares": "system",
       "tokens": "system"
@@ -122,15 +122,15 @@
     },
     {
       "name": "Amtrak",
-      "color": "blue",
-      "abbrev": "AM",
+      "color": "red",
+      "abbrev": "AMTK",
       "shares": "system",
       "tokens": "system"
     },
     {
-      "name": "Chessie System",
-      "color": "purple",
-      "abbrev": "CS",
+      "name": "CSX Transportation",
+      "color": "blue",
+      "abbrev": "CSX",
       "shares": "system",
       "tokens": "system"
     },

@@ -1,5 +1,6 @@
 import ACL, { ReactComponent as ACL_Component } from "./ACL.svg";
 import AFG, { ReactComponent as AFG_Component } from "./AFG.svg";
+import AMTK, { ReactComponent as AMTK_Component } from "./AMTK.svg";
 import AR, { ReactComponent as AR_Component } from "./AR.svg";
 import ATA, { ReactComponent as ATA_Component } from "./ATA.svg";
 import ATSF, { ReactComponent as ATSF_Component } from "./ATSF.svg";
@@ -13,6 +14,7 @@ import CO, { ReactComponent as CO_Component } from "./CO.svg";
 import COG, { ReactComponent as COG_Component } from "./COG.svg";
 import CPR, { ReactComponent as CPR_Component } from "./CPR.svg";
 import CR, { ReactComponent as CR_Component } from "./CR.svg";
+import CSX, { ReactComponent as CSX_Component } from "./CSX.svg";
 import CTL, { ReactComponent as CTL_Component } from "./CTL.svg";
 import dev_apple, { ReactComponent as dev_apple_Component } from "./dev/apple.svg";
 import dev_atom, { ReactComponent as dev_atom_Component } from "./dev/atom.svg";
@@ -86,6 +88,7 @@ import MP, { ReactComponent as MP_Component } from "./MP.svg";
 import NdM, { ReactComponent as NdM_Component } from "./NdM.svg";
 import NFL, { ReactComponent as NFL_Component } from "./NFL.svg";
 import NNH, { ReactComponent as NNH_Component } from "./NNH.svg";
+import NS, { ReactComponent as NS_Component } from "./NS.svg";
 import NSW, { ReactComponent as NSW_Component } from "./NSW.svg";
 import NW, { ReactComponent as NW_Component } from "./NW.svg";
 import NYC, { ReactComponent as NYC_Component } from "./NYC.svg";
@@ -115,6 +118,7 @@ import QR, { ReactComponent as QR_Component } from "./QR.svg";
 import RCS, { ReactComponent as RCS_Component } from "./RCS.svg";
 import SALR, { ReactComponent as SALR_Component } from "./SALR.svg";
 import SAR, { ReactComponent as SAR_Component } from "./SAR.svg";
+import SCL, { ReactComponent as SCL_Component } from "./SCL.svg";
 import SFA, { ReactComponent as SFA_Component } from "./SFA.svg";
 import SLSF, { ReactComponent as SLSF_Component } from "./SLSF.svg";
 import SOU, { ReactComponent as SOU_Component } from "./SOU.svg";
@@ -155,6 +159,11 @@ export default {
     name: "AFG",
     src: AFG,
     Component: AFG_Component
+  },
+  "AMTK": {
+    name: "AMTK",
+    src: AMTK,
+    Component: AMTK_Component
   },
   "AR": {
     name: "AR",
@@ -220,6 +229,11 @@ export default {
     name: "CR",
     src: CR,
     Component: CR_Component
+  },
+  "CSX": {
+    name: "CSX",
+    src: CSX,
+    Component: CSX_Component
   },
   "CTL": {
     name: "CTL",
@@ -637,6 +651,11 @@ export default {
     src: NNH,
     Component: NNH_Component
   },
+  "NS": {
+    name: "NS",
+    src: NS,
+    Component: NS_Component
+  },
   "NSW": {
     name: "NSW",
     src: NSW,
@@ -801,6 +820,11 @@ export default {
     name: "SAR",
     src: SAR,
     Component: SAR_Component
+  },
+  "SCL": {
+    name: "SCL",
+    src: SCL,
+    Component: SCL_Component
   },
   "SFA": {
     name: "SFA",
