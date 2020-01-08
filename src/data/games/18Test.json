@@ -261,6 +261,7 @@
       "name": "Private with a token",
       "price": 160,
       "revenue": 15,
+      "players": "Players: 3+",
       "token": { "color": "green", "label": "3" },
       "description": "Description"
     },
