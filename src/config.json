@@ -47,9 +47,15 @@
     "cutlines": 25,
     "bleed": 12.5,
     "border": 0,
-    "blackBand": false
+    "blackBand": false,
+    "trainImages": false
   },
-  "tokenLayout": "gsp",
+  "tokens": {
+    "layout": "gsp",
+    "marketTokenSize": 50,
+    "stationTokenSize": 50,
+    "bleed": true
+  },
   "tiles": {
     "layout": "die",
     "width": 150,

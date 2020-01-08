@@ -21,9 +21,9 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 100%;
-  height: 0.6875in;
-  padding: 0.125in;
+  padding: 0.125in 0.125in 0.03125in 0.03125in;
+  border-radius: 0 0 0 0.0625in;
+
   font-size: 0.25in;
   line-height: 1;
   box-sizing: border-box;
@@ -58,15 +58,16 @@
 
 .train__description {
   position: relative;
-  height: 0.4375in;
-  width: 100%;
-  padding: 0.0625in 0.125in;
+  padding: 0.03125in 0.125in 0.03125in 0.03125in;
+  float: right;
   box-sizing: border-box;
   text-align: right;
   font-family: sans-serif;
   font-size: 0.12in;
   font-weight: normal;
   line-height: 0.16in;
+  background-color: #ffffffb0;
+  border-radius: 0 0 0 0.125in;
 }
 
 .train__notes {
@@ -93,4 +94,16 @@
   height: 0.25in;
   font-size: 0.14in;
   margin-top: 0.05in;
+}
+
+.train__image {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0.25in;
+  width: 100%;
+
+  img {
+    width: 72%;
+    padding-left: 3%;
+  }
 }

@@ -9,6 +9,11 @@ import map from "ramda/src/map";
 
 import "./train.scss";
 
+import yellowTrain from "../images/yellow-train.png";
+import greenTrain from "../images/green-train.png";
+import brownTrain from "../images/brown-train.png";
+import grayTrain from "../images/gray-train.png";
+
 const Train = ({ train, blackBand }) => {
   let { name, price, color, info, description, players } = train;
 
@@ -39,36 +44,51 @@ const Train = ({ train, blackBand }) => {
     );
   }
 
+  let image = null;
+  switch (color) {
+  case "green":
+    image = greenTrain;
+    break;
+  case "brown":
+    image = brownTrain;
+    break;
+  case "gray":
+    image = grayTrain;
+    break;
+  default:
+    image = yellowTrain;
+    break;
+  }
+
   return (
     <div className="cutlines">
       <Color>
         {(c,t) => (
-          <div className="card train">
-            <div className="card__bleed">
-              <Config>
-                {config => {
-                  return (
-                    <div className="train__hr"
-                         style={{
-                           backgroundColor: c(color),
-                           borderBottom: (color === "white" || config.cards.blackBand) ? "2px solid black" : null
-                         }}
-                    />
-                  );
-                }}
-              </Config>
-              <div className="card__body">
-                <React.Fragment>
-                  <div className="train__name" style={{ color: t(c(color)) }}>{name}</div>
-                  <div className="train__price" style={{ color: t(c(color)) }}>
-                    <Currency value={price} type="train"/>
+          <Config>
+            {config => (
+              <div className={`card train card--${config.cards.layout}`}>
+                <div className="card__bleed">
+                  <div className="train__hr"
+                       style={{
+                         backgroundColor: c(color),
+                         borderBottom: (color === "white" || config.cards.blackBand) ? "2px solid black" : null
+                       }}
+                  />
+                  <div className="card__body">
+                    {config.cards.trainImages && (
+                      <div className="train__image"><img alt={`${color} train`} src={image}/></div>
+                    )}
+                    <div className="train__name" style={{ color: t(c(color)) }}>{name}</div>
+                    <div className="train__price" style={{ backgroundColor: c(color), color: t(c(color)) }}>
+                      <Currency value={price} type="train"/>
+                    </div>
+                    {description && <div className="train__description">{description}</div>}
+                    <div className="train__notes">{notes}</div>
                   </div>
-                  <div className="train__description">{description}</div>
-                  <div className="train__notes">{notes}</div>
-                </React.Fragment>
+                </div>
               </div>
-            </div>
-          </div>
+            )}
+          </Config>
         )}
       </Color>
     </div>

@@ -92,9 +92,10 @@
         "cutlines": { "type": "number", "minimum": 0 },
         "bleed": { "type": "number", "minimum": 0 },
         "border": { "type": "number", "minimum": 0},
-        "blackBand": { "type": "boolean" }
+        "blackBand": { "type": "boolean" },
+        "trainImages": { "type": "boolean" }
       },
-      "required": ["shareStyle", "layout", "width", "height", "cutlines", "bleed", "blackBand"],
+      "required": ["shareStyle", "layout", "width", "height", "cutlines", "bleed", "blackBand", "trainImages"],
       "additionalProperties": false
     },
     "charters": {
@@ -113,9 +114,19 @@
       "required": ["style", "halfWidth", "cutlines", "border", "blackBand"],
       "additionalProperties": false
     },
-    "tokenLayout": {
-      "type": "string",
-      "enum": ["max", "gsp"]
+    "tokens": {
+      "type": "object",
+      "properties": {
+        "layout": {
+          "type": "string",
+          "enum": ["free", "gsp"]
+        },
+        "marketTokenSize": { "$ref": "#/definitions/dimension" },
+        "stationTokenSize": { "$ref": "#/definitions/dimension" },
+        "bleed": { "type": "boolean" }
+      },
+      "additionalProperties": false,
+      "required": ["layout", "marketTokenSize", "stationTokenSize", "bleed"]
     },
     "coords": {
       "type": "string",
@@ -172,7 +183,7 @@
     "plainMapCompanies",
     "stock",
     "theme",
-    "tokenLayout",
+    "tokens",
     "overrideCompanies",
     "overrideSelection"
   ],
