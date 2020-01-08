@@ -1,0 +1,697 @@
+{
+  "info": {
+    "title": "18TE",
+    "subtitle": "Eisenbahnen im Tecklenburger Land",
+    "designer": "Herbert Harengel",
+    "background": "green",
+    "currency": "#ℳ",
+    "orientation": "horizontal",
+    "titleSize": 85,
+    "subTitleSize": 26,
+    "designerSize": 16,
+    "titleX": 600,
+    "titleY": -100
+  },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/291864/18te-eisenbahnen-im-tecklenburger-land",
+    "rules": "https://www.boardgamegeek.com/filepage/191151/rules"
+  },
+  "tokens": [
+    "Round"
+  ],
+  "ipo": true,
+  "bank": 12000,
+  "rounds": [
+    {
+      "name": "OR2",
+      "color": "white"
+    },
+    {
+      "name": "OR1",
+      "color": "white"
+    },
+    {
+      "name": "SR",
+      "color": "white"
+    }
+  ],
+  "players": [
+    {
+      "number": 2,
+      "certLimit": 15,
+      "capital": 500
+    },
+    {
+      "number": 3,
+      "certLimit": 10,
+      "capital": 350
+    }
+  ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 30,
+        "shares": 3
+      },
+      {
+        "quantity": 7,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "tokenTypes": {
+    "default": [
+      "MS",
+      50,
+      "RH"
+    ]
+  },
+  "companies": [
+    {
+      "name": "Königlich Hannöversche Staatseisenbahnen",
+      "abbrev": "KHS",
+      "color": "purple"
+    },
+    {
+      "name": "Königlich-Westfälische Eisenbahn-Gesellschaft",
+      "abbrev": "KWE",
+      "color": "green"
+    },
+    {
+      "name": "Cöln-Mindener Eisenbahn-Gesellschaft",
+      "abbrev": "CME",
+      "color": "red"
+    },
+    {
+      "name": "Teutoburger Wald-Eisenbahn",
+      "abbrev": "TWE",
+      "color": "yellow"
+    },
+    {
+      "name": "Kleinbahn Piesberg-Rheine A.G.",
+      "abbrev": "KPR",
+      "color": "blue"
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 7,
+      "price": 100,
+      "color": "yellow",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Rusted by 3+3/4"
+        }
+      ]
+    },
+    {
+      "name": "3",
+      "quantity": 5,
+      "price": 200,
+      "color": "green",
+      "info": [
+        {
+          "color": "gray",
+          "note": "Rusted by D"
+        }
+      ]
+    },
+    {
+      "name": "4",
+      "quantity": 4,
+      "price": 400,
+      "color": "brown",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "D",
+      "quantity": 2,
+      "price": 800,
+      "color": "gray",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    }
+  ],
+  "tiles": {
+    "3": 4,
+    "4": 4,
+    "5": 1,
+    "6": 4,
+    "7": 7,
+    "8": 8,
+    "9": 8,
+    "12": 2,
+    "14": 2,
+    "15": 1,
+    "16": 1,
+    "17": 1,
+    "18": 1,
+    "19": 1,
+    "20": 1,
+    "21": 1,
+    "22": 1,
+    "23": 1,
+    "24": 1,
+    "25": 1,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "30": 1,
+    "31": 1,
+
+    "39": 1,
+    "40": 1,
+    "41": 1,
+    "42": 1,
+    "43": 1,
+    "44": 1,
+    "45": 1,
+    "46": 1,
+    "47": 1,
+
+    "57": 2,
+    "58": 4,
+    "804": 2,
+
+    "TE1": {
+      "color": "green",
+      "cities": [{
+        "companies": ["TWE"]
+      }],
+      "values": [{
+        "value": 30,
+        "angle": 150,
+        "percent": 0.75
+      }],
+      "labels": [{
+        "label": "TE",
+        "angle": 330,
+        "percent": 0.8,
+        "y": 5
+      }],
+      "track": [{ "side": 6 }]
+    },
+    "TE2": {
+      "color": "green",
+      "cities": [{
+        "size": 3,
+        "companies": ["KPR", "KHS", { "color": "red", "label": "Dest" }]
+      }],
+      "values": [{
+        "value": 30,
+        "angle": 90,
+        "percent": 0.8
+      }],
+      "labels": [{
+        "label": "OS",
+        "angle": 330,
+        "percent": 0.8,
+        "y": 5
+      }],
+      "track": [
+        { "side": 1 },
+        { "side": 2 },
+        { "side": 3 },
+        { "side": 6 }
+      ]
+    },
+    "TE3": {
+      "color": "green",
+      "cities": [{
+        "size": 2,
+        "companies": ["KWE", "CME"]
+      }],
+      "values": [{
+        "value": 30,
+        "angle": 180,
+        "percent": 0.7
+      }],
+      "labels": [{
+        "label": "MS",
+        "angle": 330,
+        "percent": 0.8,
+        "y": 5
+      }],
+      "track": [
+        { "side": 3 },
+        { "side": 5 },
+        { "side": 6 }
+      ]
+    },
+    "TE4": {
+      "color": "green",
+      "cities": [{
+        "size": 3,
+        "companies": [
+          { "color": "blue", "label": "Dest" },
+          { "color": "green", "label": "Dest" },
+          { "color": "purple", "label": "Dest" }
+        ]
+      }],
+      "values": [{
+        "value": 30,
+        "angle": 90,
+        "percent": 0.8
+      }],
+      "labels": [{
+        "label": "RH",
+        "angle": 330,
+        "percent": 0.8,
+        "y": 5
+      }],
+      "track": [
+        { "side": 4 },
+        { "side": 5 },
+        { "side": 6 }
+      ]
+    },
+
+    "TE5": {
+      "color": "brown",
+      "cities": [{
+        "companies": ["TWE"]
+      }],
+      "values": [{
+        "value": 50,
+        "angle": 150,
+        "percent": 0.75
+      }],
+      "labels": [{
+        "label": "TE",
+        "angle": 330,
+        "percent": 0.8,
+        "y": 5
+      }],
+      "track": [{ "side": 3 }, { "side": 6 }]
+    },
+    "TE6": {
+      "color": "brown",
+      "cities": [{
+        "size": 3,
+        "companies": ["KPR", "KHS", { "color": "red", "label": "Dest" }]
+      }],
+      "values": [{
+        "value": 50,
+        "angle": 90,
+        "percent": 0.8
+      }],
+      "labels": [{
+        "label": "OS",
+        "angle": 330,
+        "percent": 0.8,
+        "y": 5
+      }],
+      "track": [
+        { "side": 1 },
+        { "side": 2 },
+        { "side": 3 },
+        { "side": 4 },
+        { "side": 6 }
+      ]
+    },
+    "TE7": {
+      "color": "brown",
+      "cities": [{
+        "size": 2,
+        "companies": ["KWE", "CME"]
+      }],
+      "values": [{
+        "value": 50,
+        "angle": 180,
+        "percent": 0.7
+      }],
+      "labels": [{
+        "label": "MS",
+        "angle": 330,
+        "percent": 0.8,
+        "y": 5
+      }],
+      "track": [
+        { "side": 1 },
+        { "side": 2 },
+        { "side": 3 },
+        { "side": 5 },
+        { "side": 6 }
+      ]
+    },
+    "TE8": {
+      "color": "brown",
+      "cities": [{
+        "size": 3,
+        "companies": [
+          { "color": "blue", "label": "Dest" },
+          { "color": "green", "label": "Dest" },
+          { "color": "purple", "label": "Dest" }
+        ]
+      }],
+      "values": [{
+        "value": 50,
+        "angle": 90,
+        "percent": 0.8
+      }],
+      "labels": [{
+        "label": "RH",
+        "angle": 330,
+        "percent": 0.8,
+        "y": 5
+      }],
+      "track": [
+        { "side": 4 },
+        { "side": 5 },
+        { "side": 6 }
+      ]
+    }
+  },
+  "map": {
+    "hexes": [
+      {
+        "color": "plain",
+        "hexes": ["C1", "D2", "E3", "B6", "G7", "B8", "C9", "D10", "C11", "D12", "F12"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{
+          "type": "mountain",
+          "cost": 50
+        }],
+        "hexes": ["B4", "C5", "E7", "F8"]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "name": { "name": "Emsdetten" }
+        }],
+        "hexes": ["B10"]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "name": { "name": "Lengerich" }
+        }],
+        "hexes": ["F10"]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "name": { "name": "Greven" }
+        }],
+        "hexes": ["C13"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "name": { "name": "Hopsten" }
+        }],
+        "hexes": ["C3"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "name": { "name": "Recke" }
+        }],
+        "hexes": ["D4"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "name": { "name": "Mettingen" }
+        }],
+        "hexes": ["E5"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "name": { "name": "Westerkappeln" }
+        }],
+        "hexes": ["F4"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "name": { "name": "Lotte" }
+        }],
+        "hexes": ["F6"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "name": { "name": "Hörstel" }
+        }],
+        "hexes": ["C7"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "name": { "name": "Brochterbeck" }
+        }],
+        "hexes": ["D8"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "name": { "name": "Ladbergen" }
+        }],
+        "hexes": ["E11"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "name": { "name": "Lienen" }
+        }],
+        "hexes": ["G11"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "name": { "name": "Brook" }
+        }],
+        "hexes": ["E13"]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "angle": 330,
+          "percent": 0.333,
+          "name": { "name": "Ibbenbüren",
+                    "reverse": true }
+        }],
+        "terrain": [{
+          "type": "mountain",
+          "cost": 50,
+          "angle": 150,
+          "percent": 0.5
+        }],
+        "hexes": ["D6"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": { "name": "Hamburg" },
+          "revenues": [
+            { "color": "yellow", "cost": 20 },
+            { "color": "green", "cost": 40 },
+            { "color": "brown", "cost": 80 }
+          ]
+        },
+        "track": [{ "side": 1, "type": "offboard" }],
+        "hexes": ["G3"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": { "name": "Emden" },
+          "revenues": [
+            { "color": "yellow", "cost": 20 },
+            { "color": "green", "cost": 30 },
+            { "color": "brown", "cost": 50 }
+          ]
+        },
+        "track": [{ "side": 1, "type": "offboard" }],
+        "hexes": ["A5"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": { "name": "Löhne" },
+          "revenues": [
+            { "color": "yellow", "cost": 20 },
+            { "color": "green", "cost": 30 },
+            { "color": "brown", "cost": 50 }
+          ]
+        },
+        "track": [{ "side": 3, "type": "offboard" }],
+        "hexes": ["H6"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": { "name": "Hövelhof" },
+          "revenues": [
+            { "color": "yellow", "cost": 20 },
+            { "color": "green", "cost": 30 },
+            { "color": "brown", "cost": 50 }
+          ]
+        },
+        "track": [{ "side": 3, "type": "offboard" }],
+        "hexes": ["H12"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": { "name": "Venlo" },
+          "revenues": [
+            { "color": "yellow", "cost": 20 },
+            { "color": "green", "cost": 30 },
+            { "color": "brown", "cost": 50 }
+          ]
+        },
+        "track": [{ "side": 5, "type": "offboard" }],
+        "hexes": ["C15"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": { "name": "Wanne" },
+          "revenues": [
+            { "color": "yellow", "cost": 20 },
+            { "color": "green", "cost": 30 },
+            { "color": "brown", "cost": 50 }
+          ]
+        },
+        "track": [{ "side": 4, "type": "offboard" }],
+        "hexes": ["D16"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": { "name": "Hamm" },
+          "revenues": [
+            { "color": "yellow", "cost": 20 },
+            { "color": "green", "cost": 30 },
+            { "color": "brown", "cost": 50 }
+          ]
+        },
+        "track": [{ "side": 3, "type": "offboard" }],
+        "hexes": ["E15"]
+      },
+      {
+        "color": "yellow",
+        "labels": [{
+          "angle": 240,
+          "percent": 0.6667,
+          "label": "OS"
+        }],
+        "values": [{
+          "angle": 180,
+          "percent": 0.6667,
+          "value": 20
+        }],
+        "cities": [{
+          "angle": 90,
+          "percent": 0.5,
+          "companies": ["KHS"]
+        },{
+          "companies": [{ "color": "red", "label": "Dest" }],
+          "angle": 330,
+          "percent": 0.5,
+          "name": { "name": "Osnabrück", "offset": 56 }
+        }],
+        "track": [
+          { "side": 1, "type": "sharpStopRev" },
+          { "side": 2, "type": "sharpStop" }
+        ],
+        "hexes": ["G5"]
+      },
+      {
+        "color": "yellow",
+        "labels": [{
+          "angle": 120,
+          "percent": 0.6667,
+          "label": "RH"
+        }],
+        "values": [{
+          "angle": 60,
+          "percent": 0.6667,
+          "value": 20
+        }],
+        "cities": [{
+          "angle": 210,
+          "percent": 0.5,
+          "companies": [{ "color": "purple", "label": "Dest" }]
+        },{
+          "companies": [{ "color": "green", "label": "Dest" }],
+          "angle": 330,
+          "percent": 0.5,
+          "name": { "name": "Rheine", "offset": 25 }
+        }],
+        "track": [
+          { "side": 5, "type": "sharpStopRev" },
+          { "side": 6, "type": "sharpStop" }
+        ],
+        "hexes": ["A7"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{
+          "companies": ["TWE"],
+          "name": { "name": "Tecklenburg", "reverse": true }
+        }],
+        "labels": [{
+          "label": "TE",
+          "angle": 180,
+          "percent": 0.6667
+        }],
+        "hexes": ["E9"]
+      },
+      {
+        "color": "yellow",
+        "labels": [{
+          "label": "MS",
+          "angle": 180,
+          "percent": 0.667
+        }],
+        "values": [{
+          "value": 20,
+          "percent": 0.667
+        }],
+        "cities": [{
+          "companies": ["KWE"],
+          "angle": 90,
+          "percent": 0.5
+        },{
+          "name": { "name": "Münster", "reverse": true, "offset": 40 },
+          "companies": ["CME"],
+          "angle": 270,
+          "percent": 0.5
+        }],
+        "track": [{
+          "side": 3,
+          "type": "sharpStopRev"
+        },{
+          "side": 5,
+          "type": "sharpStop"
+        }],
+        "hexes": ["D14"]
+      }
+    ],
+    "borders": [{
+      "color": "water",
+      "coords": ["B6p1", "B8p2", "B8p3", "B8p4", "B8p5", "B10p4", "C11p3", "C11p4", "C11p5", "C13p4"]
+    }]
+  }
+}
