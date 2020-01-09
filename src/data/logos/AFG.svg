@@ -1,13 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 22.806999" height="86.199681" width="50mm">
-    <g stroke-width=".773922">
+<svg width="50mm" height="86.2" viewBox="-11 -23 70 70">
+    <path fill="#fff" fill-rule="evenodd" d="M-.832-1.074h49.537v24.768H-.832z"/>
+    <g stroke-width=".774">
         <g fill-rule="evenodd">
-            <path class="color-main color-red" fill="#cc202c" d="M0 0h43.062173v22.807H0z"/>
-            <path class="color-green" fill="#057a00" d="M43.062177 0h2.312605v22.807h-2.312605z"/>
-            <path class="color-white" fill="#fff" d="M45.374786 0h2.312606v22.807h-2.312606z"/>
-            <path class="color-main color-red" fill="#ff000b" d="M47.687394 0H50v22.807h-2.312606z"/>
+            <path class="AFG_svg__AFG_svg__AFG_svg__AFG_svg__color-main AFG_svg__AFG_svg__AFG_svg__AFG_svg__color-red" fill="#cc202c" d="M-.02-.262h40.966v23.144H-.02z"/>
+            <path class="AFG_svg__AFG_svg__AFG_svg__AFG_svg__color-green" fill="#057a00" d="M40.946-.262h2.2v23.144h-2.2z"/>
+            <path class="AFG_svg__AFG_svg__AFG_svg__AFG_svg__color-white" fill="#fff" d="M43.146-.262h2.2v23.144h-2.2z"/>
+            <path class="AFG_svg__AFG_svg__AFG_svg__AFG_svg__color-main AFG_svg__AFG_svg__AFG_svg__AFG_svg__color-red" fill="#ff000b" d="M45.346-.262h2.2v23.144h-2.2z"/>
         </g>
-        <text style="line-height:1.25;-inkscape-font-specification:'Bodoni MT Bold'" x="59.371029" y="49.764725" font-weight="700" font-size="5.644444" font-family="Bodoni MT" letter-spacing="0" word-spacing="0" fill="#fff" stroke-width=".204767" transform="translate(-73.835782 -56.530395) scale(1.29212)">
-            <tspan x="59.371029" y="49.764725" style="-inkscape-font-specification:'Bodoni MT Bold'" dx="0 -0.46000001 -0.07 -0.23 0 -0.63 -0.12 -0.090000004 -0.090000004" font-size="5.997222">GARIBALDI</tspan>
+        <text font-size="5.644" style="line-height:1.25;-inkscape-font-specification:'Bodoni MT Bold'" fill="#fff" stroke-width=".205" x="59.371" y="49.765" font-family="Bodoni MT" font-weight="700" letter-spacing="0" transform="matrix(1.2292 0 0 1.3112 -70.26 -57.628)" word-spacing="0">
+            <tspan x="59.371" y="49.765" dx="0 -0.46000001 -0.07 -0.23 0 -0.63 -0.12 -0.090000004 -0.090000004" font-size="5.997" style="-inkscape-font-specification:'Bodoni MT Bold'">GARIBALDI</tspan>
         </text>
     </g>
 </svg>

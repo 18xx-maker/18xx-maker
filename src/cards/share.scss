@@ -1,16 +1,16 @@
 .share__hr {
   height: 0.0625in;
   position: absolute;
-  bottom: 0.5in;
+  bottom: 0.375in;
   width: 100%;
 }
 
 .share--left .share__hr {
   height: 100%;
   position: absolute;
-  left: 0.38in;
   bottom: 0;
   width: 0.25in;
+  box-sizing: border-box;
 }
 
 .share--gmt .share__hr {
@@ -22,34 +22,35 @@
 }
 
 .share__name {
-  position: absolute;
+  box-sizing: border-box;
+  position: relative;
   top: 0;
   right: 0;
-  height: calc(100% - 0.875in);
-  width: calc(100% - 0.88in);
+  width: 100%;
   padding: 0.125in;
   line-height: 0.20in;
   font-size: 0.16in;
-  margin: 0.125in;
   text-align: center;
-  box-sizing: border-box;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
+.share--left .share__name,
 .share--gmt .share__name {
-  width: calc(100% - 0.92in);
+  width: calc(100% - 0.67in);
+  margin-left: 0.67in;
 }
 
 .share__tokens {
+  box-sizing: border-box;
   position: absolute;
-  top: 0.25in;
+  top: 0.125in;
   width: 75%;
   height: 0.52in;
   left: 12.5%;
-  overflow: auto;
+  overflow: visible;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -57,20 +58,20 @@
 }
 
 .share--left .share__tokens {
-  left: 0.245in;
-  top: 0.375in;
+  left: 0.075in;
+  top: 0.125in;
   width: 0.52in;
-  height: calc(100% - 0.75in);
-  flex-direction: column-reverse;
+  height: calc(100% - 0.25in);
+  flex-direction: column;
   overflow: visible;
 }
 
 .share--gmt .share__tokens {
-  left: 0.2in;
-  top: 0.375in;
+  left: 0.075in;
+  top: 0.125in;
   width: 0.52in;
-  height: calc(100% - 0.75in);
-  flex-direction: column-reverse;
+  height: calc(100% - 0.25in);
+  flex-direction: column;
   overflow: visible;
 }
 
@@ -93,9 +94,8 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  bottom: 0.625in;
+  bottom: 0.5in;
   width: 100%;
-  height: 0.5in;
   box-sizing: border-box;
 }
 .share__label__text {
@@ -110,44 +110,46 @@
 .share--gmt .share__label {
   bottom: 0.375in;
   right: 0;
-  width: calc(100% - 0.92in);
+  width: calc(100% - 0.67in);
+  margin-left: 0.67in;
   height: 0.5in;
-  margin: 0.125in;
   padding: 0.125in;
 }
 .share--left .share__label {
   bottom: 0.375in;
   right: 0;
-  width: calc(100% - 0.88in);
+  width: calc(100% - 0.67in);
+  margin-left: 0.67in;
   height: 0.5in;
-  margin: 0.125in;
   padding: 0.125in;
 }
 .share__percent {
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: 0.125in;
-  padding: 0.125in;
+  padding: 0.0625in 0.125in;
   height: 0.25in;
   line-height: 0.25in;
   font-size: 0.16in;
+}
+
+.share--gmt .share__percent,
+.share--left .share__percent {
+  padding: 0.125in;
 }
 
 .share__shares {
   position: absolute;
   bottom: 0;
   left: 0;
-  margin: 0.125in;
-  padding: 0.125in;
+  padding: 0.0625in 0.125in;
   height: 0.25in;
   line-height: 0.25in;
   font-size: 0.16in;
 }
 
-.share--left .share__shares {
-  left: 0.63in;
-}
+.share--left .share__shares,
 .share--gmt .share__shares {
-  left: 0.67in;
+  margin-left: 0.67in;
+  padding: 0.125in;
 }

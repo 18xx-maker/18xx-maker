@@ -15,84 +15,54 @@ App](https://github.com/facebookincubator/create-react-app).
 
 ## Donation
 
-I've been asked about donation buttons, if you find this software usefull to you
-and would like to donate money towards it's development you can do so via
+I've been asked about donation buttons; if you find this software useful to you
+and would like to donate money towards its development you can do so via
 [paypal](https://paypal.me/kelsin) or [square cash](https://cash.me/$kelsin).
 
-## Docker
+## Deprecations and Breaks
 
-If you have docker installed (or available) you can run a [public docker
-image](https://hub.docker.com/r/kelsin/18xx) that includes all games. Run the
-following command and the site should be available at http://localhost (you
-might need to edit the port depending on your OS and other running apps):
+I try to keep the tool as backwards compatible as possible, but I'm allowing
+breaking changes until I decide that version 1.0 is ready for release. I will
+try to list major ones here. Please open issues for any breaking changes that
+aren't listed here so I can either fix, or add it.
 
-```sh
-docker run -it --rm -p 80:80 --name 18xx kelsin/18xx
-```
-
-### Persistant
-
-If you want to use docker to hack on the site, you can use a docker volume to
-keep a persistant image of the game code. Knowledge of how to manage docker
-volumes is important to use this properly.
-
-```sh
-docker run -it --rm -p 3000:3000 --name 18xx-develop -v 18xx:/home/18xx kelsin/18xx:develop
-```
-
-This will run the react-development server that will live update if you edit
-files, and store anything edited (starting with the current code) on the volume
-named `18xx`.
+* If you used the new map Border features during the first three days after
+  launch... I broke it already. Moving to a more full featured coordinate
+  system.
+* `extraTokens` has been renamed to `marketTokens` (still defaults to
+  3). `extraHomeTokens` has been renamed to `extraStationTokens`. This is for
+  clarity, I'm sorry for any inconvience, but the old names were extremely
+  confusing for new users.
+* The old method for defining a company color with the `token` field has been
+  removed. Please use `"color": "black"` (for example) or define an actual token
+  object if you want to set type and an array of colors for your company tokens.
+* A lot of features dealing with logos and svgs won't work if you defined your
+  cities using `colors` and `labels` in the `companies` array. In order to put a
+  company in a city please just provide the companies abbrev in an array of
+  companies. Otherwise it will make a label with exactly what you specify
+  (allowing any text / colors / etc to be used in city nodes).
 
 ## Usage
 
-Download the app, and then (from the folder that you downloaded into) run the
-following:
+Please check out the [docs](https://18xx.kelsin.net/docs/running) for how to run
+the site locally.
 
-```sh
-# Install the dependencies
-yarn
-
-# Run the app
-yarn start
-```
-
-or if you don't want to use [yarn](https://yarnpkg.com/en/):
-
-```sh
-# Install the dependencies
-npm install
-
-# Run the app
-npm start
-```
 ### Printing
 
-Running `yarn build` will build the app. This is required before you using the b18 or the print script.
-
-Running `yarn print <game>` will output the pdf's for only one game.
-
-Running `yarn print all` will output the pdf's for all games.
+Please check out the [docs](https://18xx.kelsin.net/docs/pdf) for how to print
+pdf's from the command line.
 
 ### Board18
 
-Running `yarn b18 <game> <verison> <author>` will create a board18 game box zip
-file. The app needs to be built first by running `yarn build`.
-
-### Example
-
-``` sh
-# Build the app
-yarn build
-
-# Print 1830 PDF's
-yarn print 1830
-
-# Build an 1830 Board18 Game Box
-yarn b18 1830 CGG01 Kelsin
-```
+Please check out the [docs](https://18xx.kelsin.net/docs/b18) for information on
+how to output a full board18 game box .zip file from the command line.
 
 ## Developing
+
+### Running the site
+
+Please check out the [docs](https://18xx.kelsin.net/docs/running) for
+information on how to run the site locally to make changes.
 
 ### Adding a game
 
@@ -104,48 +74,9 @@ yarn b18 1830 CGG01 Kelsin
    exported object in the [src/data/games/index.js](src/data/games/index.js)
    file.
 
-### Adding tiles
+3. Before opening a PR please run `yarn validate` and correct any errors.
 
-1. Edit [src/data/tiles.js](src/data/tiles.js) and add your tile.
+## Docker
 
-2. If your tile is a variant you can include a `|` in the name. Everything
-   before the `|` will be shown on the tile, but anything after won't.
-
-### Editing simple options
-
-Until more things get added to the UI, simple options can be edited in the
-[src/data/index.js](src/data/index.js) file.
-
-## Changes
-
-### Terrain
-
-Using `water` and `mountain` for map hexes is now deprecated. The new way is to
-use `terrain` like this:
-
-``` js
-{ terrain: [{ type: "mountain", cost: "$60" }] }
-```
-
-Right now valid types are `mountain`, `water`, `river`, `stream`, `cactus`, and
-`swamp`. More might be added in the future. You can also add a `size` attribute
-as `tiny` if you want it small. If you want to enlarge the icon you can pass in
-`medium` or `large`.
-
-### OffBoardTrack
-
-I finally made the offboard track arrows just another type of track. So instead
-of this:
-
-``` js
-{ offBoardTrack: [{side:5}] }
-```
-
-you can:
-
-``` js
-{ track: [{side:5, type:"offboard"}] }
-```
-
-For now `offBoardTrack` is deprecated, the old syntax will work until the next
-major version release.
+Please check out the [docs](https://18xx.kelsin.net/docs/running#using-docker) for
+information on how to run the site locally via Docker.

@@ -1,5 +1,6 @@
 import React from "react";
 import * as R from "ramda";
+import hash from "object-hash";
 
 import Position from "./Position";
 
@@ -30,38 +31,21 @@ import Track from "./atoms/Track";
 import Tunnel from "./atoms/Tunnel";
 import Value from "./atoms/Value";
 
-import Token from "./Token";
+import GameMapCompanyToken from "./tokens/GameMapCompanyToken";
+import Token from "./tokens/Token";
 
 const concat = R.unapply(R.reduce(R.concat, []));
 
-const makeTrack = track => {
-  let point = track.start || track.end || track.side;
-  let rotation = (track.rotation || 0) + (point - 1) * 60;
-  let transform = `rotate(${rotation || 0})`;
-  let type = track.type;
-  return (
-    <g transform={transform} key={`track-${type}-${point}`}>
-      <Track type={type} gauge={track.gauge} offset={track.offset} path={track.path} />
-    </g>
-  );
-};
-
-const makeBorder = track => {
-  let point = track.start || track.end || track.side;
-  let rotation = (track.rotation || 0) + (point - 1) * 60;
-  let transform = `rotate(${rotation || 0})`;
-  let type = track.type;
-  return (
-    <g transform={transform} key={`track-border-${type}-${point}`}>
-      <Track
-        type={track.type}
-        gauge={track.gauge}
-        border={true}
-        path={track.path}
-      />
-    </g>
-  );
-};
+const makeTrack = track => (
+  <Position key={`track-${hash(track)}`} data={track}>
+    {t => <Track {...t} />}
+  </Position>
+);
+const makeBorder = track => (
+  <Position key={`track-border-${hash(track)}`} data={track}>
+    {t => <Track {...t} border={true} />}
+  </Position>
+);
 
 const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   if (hex === undefined || hex === null) {
@@ -73,31 +57,36 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   let getTracks = R.converge(concat, [
     R.compose(
       R.map(makeBorder),
-      R.filter(t => t.cross !== "over")),
+      R.filter(t => t.cross !== "over")
+    ),
     R.compose(
       R.map(makeTrack),
-      R.filter(t => t.cross === "under")),
+      R.filter(t => t.cross === "under")
+    ),
     R.compose(
       R.map(makeBorder),
-      R.filter(t => t.cross === "over")),
+      R.filter(t => t.cross === "over")
+    ),
     R.compose(
       R.map(makeTrack),
-      R.filter(t => t.cross !== "under"))
+      R.filter(t => t.cross !== "under")
+    )
   ]);
 
-  let allTracks = [...hex.track || [],
-                   ...(R.map(obt => ({...obt, type:"offboard"}),
-                             hex.offBoardTrack || []))];
+  let allTracks = [
+    ...(hex.track || []),
+    ...R.map(obt => ({ ...obt, type: "offboard" }), hex.offBoardTrack || [])
+  ];
   let tracks = getTracks(allTracks);
 
   let outsideCities = (
     <Position data={R.filter(c => c.outside === true, hex.cities || [])}>
-      {c => <City {...c} />}
+      {c => <City bgColor={hex.color} {...c} />}
     </Position>
   );
   let cities = (
     <Position data={R.filter(c => c.outside !== true, hex.cities || [])}>
-      {c => <City {...c} />}
+      {c => <City bgColor={hex.color} {...c} />}
     </Position>
   );
 
@@ -112,82 +101,141 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
     </Position>
   );
 
-  let towns = <Position data={hex.towns}>{t => <Town {...t} />}</Position>;
-  let townBorders = <Position data={hex.towns}>{t => <Town {...t} border={true} />}</Position>;
+  let towns = (
+    <Position data={hex.towns}>
+      {t => <Town bgColor={hex.color} {...t} />}
+    </Position>
+  );
+  let townBorders = (
+    <Position data={hex.towns}>{t => <Town {...t} border={true} />}</Position>
+  );
 
-  let centerTowns = <Position data={hex.centerTowns}>{t => <CenterTown {...t} />}</Position>;
-  let centerTownBorders = <Position data={hex.centerTowns}>{t => <CenterTown border={true} />}</Position>;
+  let centerTowns = (
+    <Position data={hex.centerTowns}>
+      {t => <CenterTown bgColor={hex.color} {...t} />}
+    </Position>
+  );
+  let centerTownBorders = (
+    <Position data={hex.centerTowns}>
+      {t => <CenterTown border={true} />}
+    </Position>
+  );
 
-  let mediumCities = <Position data={hex.mediumCities}>{m => <MediumCity {...m} />}</Position>;
-  let mediumCityBorders = <Position data={hex.mediumCities}>{m => <MediumCity border={true} />}</Position>;
+  let mediumCities = (
+    <Position data={hex.mediumCities}>{m => <MediumCity {...m} />}</Position>
+  );
+  let mediumCityBorders = (
+    <Position data={hex.mediumCities}>
+      {m => <MediumCity border={true} />}
+    </Position>
+  );
 
-  let labels = <Position data={hex.labels}>{l => <Label {...l} />}</Position>;
+  let labels = (
+    <Position data={hex.labels}>
+      {l => <Label bgColor={hex.color} {...l} />}
+    </Position>
+  );
   let icons = <Position data={hex.icons}>{i => <Icon {...i} />}</Position>;
-  let names = <Position data={hex.names}>{n => <Name {...n} />}</Position>;
+  let names = (
+    <Position data={hex.names}>
+      {n => <Name bgColor={hex.color} {...n} />}
+    </Position>
+  );
 
   // Deprecating stuff... let's convert old mountain and water to new format
   let terrainHexes = [...(hex.terrain || [])];
-  if(hex.mountain) {
-    if(R.is(Array, hex.mountain)) {
-      terrainHexes.concat(R.map(m => ({...m,type:"mountain"}),
-                                hex.mountain));
+  if (hex.mountain) {
+    if (R.is(Array, hex.mountain)) {
+      terrainHexes.concat(
+        R.map(m => ({ ...m, type: "mountain" }), hex.mountain)
+      );
     } else {
-      terrainHexes.push({...hex.mountain, type:"mountain"});
+      terrainHexes.push({ ...hex.mountain, type: "mountain" });
     }
   }
-  if(hex.water) {
-    if(R.is(Array, hex.water)) {
-      terrainHexes = terrainHexes.concat(R.map(m => ({...m,type:"water"}),
-                                               hex.water));
+  if (hex.water) {
+    if (R.is(Array, hex.water)) {
+      terrainHexes = terrainHexes.concat(
+        R.map(m => ({ ...m, type: "water" }), hex.water)
+      );
     } else {
-      terrainHexes.push({...hex.water,type:"water"});
+      terrainHexes.push({ ...hex.water, type: "water" });
     }
   }
-  let terrain = <Position data={terrainHexes}>{t => <Terrain {...t} />}</Position>;
-  let bridges = <Position data={hex.bridges}>{b => <Bridge {...b} />}</Position>;
-  let tunnels = <Position data={hex.tunnels}>{t => <Tunnel {...t} />}</Position>;
+  let terrain = (
+    <Position data={terrainHexes}>{t => <Terrain {...t} />}</Position>
+  );
+  let bridges = (
+    <Position data={hex.bridges}>{b => <Bridge {...b} />}</Position>
+  );
+  let tunnels = (
+    <Position data={hex.tunnels}>{t => <Tunnel {...t} />}</Position>
+  );
   let divides = <Position data={hex.divides}>{t => <Divide />}</Position>;
 
-  let offBoardRevenue = <Position data={hex.offBoardRevenue}>
-                            {r => <OffBoardRevenue {...r} />}
-                          </Position>;
+  let offBoardRevenue = (
+    <Position data={hex.offBoardRevenue}>
+      {r => <OffBoardRevenue {...r} />}
+    </Position>
+  );
 
-  let borders = <Position data={hex.borders}>{b => <Border {...b} />}</Position>;
+  let borders = (
+    <Position data={hex.borders}>{b => <Border {...b} />}</Position>
+  );
   let values = <Position data={hex.values}>{v => <Value {...v} />}</Position>;
-  let industries = <Position data={hex.industries}>{i => <Industry {...i} />}</Position>;
+  let industries = (
+    <Position data={hex.industries}>{i => <Industry {...i} />}</Position>
+  );
   let goods = <Position data={hex.goods}>{g => <Good {...g} />}</Position>;
-  let companies = <Position data={hex.companies}>{c => <Company {...c} />}</Position>;
-  let bonus = <Position data={hex.routeBonus}>{b => <RouteBonus {...b} />}</Position>;
-  let tokens = <Position data={hex.tokens}>{t => (
+  let companies = (
+    <Position data={hex.companies}>{c => <Company {...c} />}</Position>
+  );
+  let bonus = (
+    <Position data={hex.routeBonus}>{b => <RouteBonus {...b} />}</Position>
+  );
+  let tokens = (
     <ColorContext.Provider value="companies">
-      <Token token={t.color} {...t} />
+      <Position data={hex.tokens}>
+        {t => {
+          if (t.company) {
+            return <GameMapCompanyToken {...t} abbrev={t.company} />;
+          } else {
+            return <Token {...t} />;
+          }
+        }}
+      </Position>
     </ColorContext.Provider>
-  )}</Position>;
+  );
 
   return (
     <g>
       <PhaseContext.Provider value={hex.color || "plain"}>
         <HexContext.Consumer>
           {hx => (
-            <g mask={`url(#${mask || "hexMask"})`} transform={`rotate(${hx.rotation || 0})`}>
-              <Hex color={hex.color || "plain"}
-                   transparent={transparent}
-                   map={map} />
+            <g
+              mask={`url(#${mask || "hexMask"})`}
+              transform={`rotate(${hx.rotation || 0})`}
+            >
+              <Hex
+                color={hex.color || "plain"}
+                transparent={transparent}
+                map={map}
+              />
 
               <g transform={`rotate(-${hx.rotation})`}>
+                {goods}
                 {icons}
                 {cityBorders}
                 {mediumCityBorders}
                 {townBorders}
                 {tracks}
-                {values}
                 {cities}
                 {mediumCities}
                 {towns}
                 {centerTownBorders}
                 {centerTowns}
+                {values}
                 {labels}
-                {names}
                 {tokens}
                 {bonus}
                 {terrain}
@@ -198,19 +246,22 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
           )}
         </HexContext.Consumer>
 
-        <HexBorder removeBorders={hex.removeBorders} border={border} map={map}/>
+        <HexBorder
+          removeBorders={hex.removeBorders}
+          border={border}
+          map={map}
+        />
         {outsideCityBorders}
 
         {id && <Id id={idBase} extra={idExtra} />}
 
         {outsideCities}
-        {offBoardRevenue}
         {industries}
-        {goods}
         {companies}
-
+        {names}
         {tunnels}
         {bridges}
+        {offBoardRevenue}
       </PhaseContext.Provider>
     </g>
   );

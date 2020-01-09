@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import tileDefs from "../data/tiles";
 
 import Svg from "../Svg";
@@ -32,9 +33,10 @@ const getTile = id => {
 
 const ROTATIONS = [0,60,120,180,240,300];
 
-const Tiles = ({match}) => {
-  let color = match.params.color;
-  let game = games[match.params.game];
+const Tiles = () => {
+  let params = useParams();
+  let color = params.color;
+  let game = games[params.game];
 
   let tiles = compose(uniq,
                       filter(propEq("color", color)),

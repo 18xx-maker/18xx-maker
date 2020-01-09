@@ -3,28 +3,28 @@ import { connect } from "react-redux";
 import games from "../data/games";
 import Map from "./Map";
 import Svg from "../Svg";
-import Title from "../Title";
 import HexContext from "../context/HexContext";
 import * as R from "ramda";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 
 import VariationSelect from "../nav/VariationSelect";
 import { getMapData } from "./util";
 
-const MapSingle = ({ match, coords, hexWidth }) => {
-  let game = games[match.params.game];
+const MapSingle = ({ coords, hexWidth }) => {
+  let params = useParams();
+  let game = games[params.game];
 
   // Do redirects if we need or do not need a variation in the url
   if (!game.map) {
-    return <Redirect to={`/${match.params.game}/background`} />;
-  } else if (match.params.variation && !Array.isArray(game.map)) {
-    return <Redirect to={`/${match.params.game}/map`} />;
-  } else if (!match.params.variation && Array.isArray(game.map)) {
-    return <Redirect to={`/${match.params.game}/map/0`} />;
+    return <Redirect to={`/${params.game}/background`} />;
+  } else if (params.variation && !Array.isArray(game.map)) {
+    return <Redirect to={`/${params.game}/map`} />;
+  } else if (!params.variation && Array.isArray(game.map)) {
+    return <Redirect to={`/${params.game}/map/0`} />;
   }
 
   // Get map data
-  let variation = Number(match.params.variation) || 0;
+  let variation = Number(params.variation) || 0;
   let data = getMapData(game, coords, hexWidth, variation);
 
   // Variation Select Box
@@ -32,7 +32,7 @@ const MapSingle = ({ match, coords, hexWidth }) => {
   if(Array.isArray(game.map)) {
     let variations = R.map(R.prop("name"), game.map);
     variationSelect = (
-      <VariationSelect base={`/${match.params.game}/map/`}
+      <VariationSelect base={`/${params.game}/map/`}
                        variations={variations} />
     );
   }
@@ -44,17 +44,16 @@ const MapSingle = ({ match, coords, hexWidth }) => {
         rotation: data.horizontal ? 0 : 90
       }}
     >
-      {variationSelect && (
-        <div className="PrintNotes">
-          <div>
-            {variationSelect}
-          </div>
+      <div className="PrintNotes">
+        <div>
+          {variationSelect}
+          <h3>Width: {data.humanWidth}</h3>
+          <h3>Height: {data.humanHeight}</h3>
         </div>
-      )}
+      </div>
       <div className="map">
         <Svg width={data.totalWidth} height={data.totalHeight}>
-          <Title game={game} variation={variation} />
-          <Map game={game} variation={variation} />
+          <Map name={params.game} game={game} variation={variation} />
         </Svg>
         <style>{`@media print {@page {size: ${data.printWidth} ${data.printHeight};}}`}</style>
       </div>

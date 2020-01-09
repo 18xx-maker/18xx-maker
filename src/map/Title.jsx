@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import Color from "./data/Color";
+import Color from "../data/Color";
 
 const Title = ({ game, variation, hexWidth }) => {
   let scale = hexWidth / 150.0;

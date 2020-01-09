@@ -1,7 +1,12 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 import Svg from "../Svg";
-import Token from "../Token";
+import CompanyToken from "../tokens/CompanyToken";
+import Token from "../tokens/Token";
+
+import Config from "../data/Config";
+import { compileCompanies, overrideCompanies } from "../util";
 
 import addIndex from "ramda/src/addIndex";
 import map from "ramda/src/map";
@@ -12,43 +17,41 @@ import "./b18.scss";
 
 import games from "../data/games";
 
-// const BlankToken = () => (
-//   <Svg width={30} height={30} viewBox="-26 -26 52 52">
-//     <Token label="" token="black" />
-//   </Svg>
-// );
-
-const Tokens = ({match}) => {
-  let game = games[match.params.game];
+const Tokens = () => {
+  let params = useParams();
+  let game = games[params.game];
 
   let totalHeight = 30 * ((game.companies || []).length +
                           (game.tokens || []).length);
 
-  let companyTokenNodes = map(company => {
-    return (
-      <div className="token" key={company.abbrev}>
-        <Svg width={30} height={30} viewBox="-26 -26 52 52">
-          <Token label={company.abbrev}
-                 token={company.token || company.color} />
-        </Svg>
-        <Svg width={30} height={30} viewBox="-26 -26 52 52">
-          <Token label={company.abbrev}
-                 inverse={true}
-                 token={company.token || company.color} />
-        </Svg>
-      </div>
-    );
-  }, game.companies || []);
+  let companyTokenNodes = (
+    <Config>
+      {(config, game) => {
+        return map(company => {
+          return (
+            <div className="token" key={company.abbrev}>
+              <Svg width={30} height={30} viewBox="-26 -26 52 52">
+                <CompanyToken company={company} />
+              </Svg>
+              <Svg width={30} height={30} viewBox="-26 -26 52 52">
+                <CompanyToken company={company} inverse={true} />
+              </Svg>
+            </div>
+          );
+        }, overrideCompanies(compileCompanies(game), config.overrideCompanies, config.overrideSelection));
+      }}
+    </Config>
+  );
 
   let extraTokenNodes = addIndex(map)((extraToken, index) => {
     if (extraToken.match(/^#/)) {
       return (
         <div className="token" key={index}>
           <Svg width={30} height={30} viewBox="-26 -26 52 52">
-            <Token icon={extraToken} token="white" />
+            <Token icon={extraToken} color="white" />
           </Svg>
           <Svg width={30} height={30} viewBox="-26 -26 52 52">
-            <Token icon={extraToken} token="black" />
+            <Token icon={extraToken} color="black" />
           </Svg>
         </div>
       );
@@ -56,10 +59,10 @@ const Tokens = ({match}) => {
       return (
         <div className="token" key={index}>
           <Svg width={30} height={30} viewBox="-26 -26 52 52">
-            <Token label={extraToken} token="white" />
+            <Token label={extraToken} color="white" />
           </Svg>
           <Svg width={30} height={30} viewBox="-26 -26 52 52">
-            <Token label={extraToken} token="black" />
+            <Token label={extraToken} color="black" />
           </Svg>
         </div>
       );

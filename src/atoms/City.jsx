@@ -4,17 +4,24 @@ import Color from "../data/Color";
 
 import Name from "./Name";
 
-import find from "ramda/src/find";
 import is from "ramda/src/is";
-import propEq from "ramda/src/propEq";
-import Token from "../Token";
 
-import Config from "../data/Config";
+import GameMapCompanyToken from "../tokens/GameMapCompanyToken";
+
 import ColorContext from "../context/ColorContext";
+import RotateContext from "../context/RotateContext";
 
-const City = ({ straightCityNames, size, companies, border, name, extend, rotation }) => {
+const City = ({ straightCityNames, size, companies, icons, border, name, extend, rotation, pass, bgColor }) => {
   if (size === undefined) {
     size = 1;
+  }
+
+  let icon = num => {
+    if (icons && icons[num]) {
+      return <g transform="scale(1.2)"><use href={`#${icons[num]}`} /></g>;
+    }
+
+    return null;
   }
 
   let companyColor = num =>
@@ -23,41 +30,24 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
        companies[num].color);
 
   let companyLabel = num => {
+    // Do we have companies defined for this city space?
     if(companies && companies[num]) {
-      if(is(Object, companies[num])) {
-        return (
-          <ColorContext.Provider value="companies">
-            <Config>
-              {(config, game) => {
-                if(config.plainMapHomes) {
-                  return <Token label={companies[num].label} token="white"/>;
-                } else {
-                  return <Token label={companies[num].label} token={companies[num].token || companies[num].color}/>;
-                }
-              }}
-            </Config>
-          </ColorContext.Provider>
-        );
-      } else {
-        return (
-          <ColorContext.Provider value="companies">
-            <Config>
-              {(config, game) => {
-                if(config.plainMapHomes) {
-                  return <Token label={companies[num]} token="white"/>;
-                } else {
-                  let company = find(propEq("abbrev", companies[num]), game.companies);
-                  if(company) {
-                    return <Token label={company.abbrev} token={company.color || company.token}/>;
-                  } else {
-                    return null;
-                  }
-                }
-              }}
-            </Config>
-          </ColorContext.Provider>
-        );
-      }
+
+      let companyToken = is(Object, companies[num]) ?
+          <GameMapCompanyToken {...companies[num]} abbrev={companies[num].abbrev || companies[num].label} /> :
+          <GameMapCompanyToken abbrev={companies[num]} />;
+
+      return (
+        <RotateContext.Consumer>
+        {rotateContext => (
+          <g transform={`rotate(${-(rotateContext || 0) - (rotation || 0)})`}>
+            <ColorContext.Provider value="companies">
+              {companyToken}
+            </ColorContext.Provider>
+          </g>
+        )}
+        </RotateContext.Consumer>
+      );
     }
 
     return null;
@@ -74,7 +64,7 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
     if (straightCityNames) {
       y -= name.reverse ? -24 : 32;
     }
-    nameNode = <Name {...name} y={y} path={path} />;
+    nameNode = <Name bgColor={bgColor} {...name} y={y} path={path} />;
   }
 
   if (size === 1) {
@@ -82,7 +72,14 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
       return (
         <Color>
           {c => (
-            <circle fill={c("border")} stroke="none" cx="0" cy="0" r="28" />
+            <g>
+              {pass && <polygon
+                          fill={c("border")}
+                          stroke="none"
+                          points="0,-46 -39.83716857,23 39.83716857,23"
+                          />}
+              <circle fill={c("border")} stroke="none" cx="0" cy="0" r="28" />
+            </g>
           )}
         </Color>
       );
@@ -91,8 +88,29 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
         <g>
           <Color context="companies">
             {c => (
+              <g>
+                {pass && <polygon
+                          fill={c("gray")}
+                          stroke={c("track")}
+                          strokeWidth="2"
+                          points="0,-40 -34.64101615,20 34.64101615,20"
+                        />}
+                <circle
+                  fill={c(companyColor(0) || "city")}
+                  stroke="none"
+                  cx="0"
+                  cy="0"
+                  r="25"
+                />
+              </g>
+            )}
+          </Color>
+          {icon(0)}
+          {companyLabel(0)}
+          <Color context="companies">
+            {c => (
               <circle
-                fill={c(companyColor(0) || "city")}
+                fill="none"
                 stroke={c("track")}
                 strokeWidth="2"
                 cx="0"
@@ -101,7 +119,6 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
               />
             )}
           </Color>
-          {companyLabel(0)}
           {nameNode}
         </g>
       );
@@ -113,14 +130,21 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
       return (
         <Color>
           {c => (
-            <polygon
-              points={`${leftBorder},0 ${rightBorder},0`}
-              fill={c("border")}
-              stroke={c("border")}
-              strokeWidth="56"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-            />
+            <g>
+              {pass && <polygon
+                            fill={c("border")}
+                            stroke="none"
+                            points="0,-48 -48.49742261,35 48.49742261,35"
+                    />}
+              <polygon
+                points={`${leftBorder},0 ${rightBorder},0`}
+                fill={c("border")}
+                stroke={c("border")}
+                strokeWidth="56"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+              />
+            </g>
           )}
         </Color>
       );
@@ -129,6 +153,12 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
         <Color context="companies">
           {c => (
             <g>
+              {pass && <polygon
+                          fill={c("gray")}
+                          stroke={c("track")}
+                          strokeWidth="2"
+                          points="0,-42 -43.30127019,32 43.30127019,32"
+                        />}
               <polygon
                 points={`${leftBorder},-25, ${rightBorder},-25 ${rightBorder},25 ${leftBorder},25`}
                 fill={c("city")}
@@ -138,20 +168,32 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
               <g transform="translate(-25 0)">
                 <circle
                   fill={c(companyColor(0) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(0)}
+                {companyLabel(0)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(0)}
               </g>
               <g transform="translate(25 0)">
                 <circle
                   fill={c(companyColor(1) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(1)}
+                {companyLabel(1)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(1)}
               </g>
               {nameNode}
             </g>
@@ -189,29 +231,47 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
               <g transform="translate(0 -29)">
                 <circle
                   fill={c(companyColor(0) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(0)}
+                {companyLabel(0)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(0)}
               </g>
               <g transform="translate(-25 15)">
                 <circle
                   fill={c(companyColor(1) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(1)}
+                {companyLabel(1)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(1)}
               </g>
               <g transform="translate(25 15)">
                 <circle
                   fill={c(companyColor(2) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(2)}
+                {companyLabel(2)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(2)}
               </g>
               {nameNode}
             </g>
@@ -249,38 +309,62 @@ const City = ({ straightCityNames, size, companies, border, name, extend, rotati
               <g transform="translate(-25 -25)">
                 <circle
                   fill={c(companyColor(0) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(0)}
+                {companyLabel(0)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(0)}
               </g>
               <g transform="translate(25 -25)">
                 <circle
                   fill={c(companyColor(1) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(1)}
+                {companyLabel(1)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(1)}
               </g>
               <g transform="translate(25 25)">
                 <circle
                   fill={c(companyColor(3) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(3)}
+                {companyLabel(3)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(3)}
               </g>
               <g transform="translate(-25 25)">
                 <circle
                   fill={c(companyColor(2) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(2)}
+                {companyLabel(2)}
+                <circle
+                  fill="none"
                   stroke={c("track")}
                   strokeWidth="2"
                   r="25"
                 />
-                {companyLabel(2)}
               </g>
             </g>
           )}

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" width="2in" height="2in" x="0" y="0" version="1.1" viewBox="0 0 192 192" xml:space="preserve">
+    <style id="style2" type="text/css"/>
+    <g id="g38" stroke-miterlimit="10" transform="translate(7.045 7.045) scale(4.18416)">
+        <circle id="circle4" class="color-pink color-main color-stroke-pink color-stroke-main" fill="#e8358c" stroke="#e8358c" stroke-width=".533" cx="21.26" cy="21.26" r="22.677"/>
+        <g id="g36" class="color-stroke-white" fill="none" stroke="#fff">
+            <circle id="circle6" stroke-width=".45" cx="21.26" cy="21.985" r="12.754"/>
+            <path id="path8" stroke-width=".45" d="M21.249 33.373c-6.33 0-11.479-5.149-11.479-11.479 0-6.33 5.149-11.479 11.479-11.479 6.33 0 11.479 5.149 11.479 11.479 0 6.33-5.15 11.479-11.479 11.479z"/>
+            <path id="polygon10" stroke-width=".75" d="M21.26 5.781L7.087 30.33h28.346z"/>
+            <g id="g16" stroke-width=".25">
+                <circle id="circle12" cx="21.26" cy="28.697" r="3.826"/>
+                <circle id="circle14" cx="21.26" cy="15.199" r="3.826"/>
+            </g>
+            <g id="g22" stroke-width=".25">
+                <circle id="ellipse18" cx="27.105" cy="25.323" r="3.826" transform="rotate(-60 27.105 25.324)"/>
+                <circle id="ellipse20" cx="15.415" cy="18.574" r="3.826" transform="rotate(-60 15.415 18.574)"/>
+            </g>
+            <g id="g28" stroke-width=".25">
+                <circle id="ellipse24" cx="27.105" cy="18.574" r="3.826" transform="rotate(-30 27.104 18.575)"/>
+                <circle id="ellipse26" cx="15.415" cy="25.323" r="3.826" transform="rotate(-30 15.414 25.323)"/>
+            </g>
+            <path id="polygon30" stroke-width=".495" d="M21.26 30.141l6.9-11.951h-13.8z"/>
+            <path id="polygon32" stroke-width=".25" d="M21.368 18.204l-3.385 5.862h6.769z"/>
+            <path id="polygon34" stroke-width=".234" d="M21.368 23.83l1.565-2.712h-3.131z"/>
+        </g>
+    </g>
+    <circle id="circle40" class="color-stroke-white" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2.172" cx="96" cy="96" r="80.06"/>
+</svg>

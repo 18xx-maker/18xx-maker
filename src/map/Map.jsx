@@ -1,12 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as R from "ramda";
+
 import Hex from "../Hex";
+
 import Coordinates from "./Coordinates";
+import Borders from "./Borders";
+import Lines from "./Lines";
+import Title from "./Title";
 
 import { getMapData, toAlpha, toCoords } from "./util";
 
-const Map = ({ game, coords, variation, hexWidth }) => {
+const Map = ({ name, game, coords, variation, hexWidth }) => {
   let data = getMapData(game, coords, hexWidth, variation);
 
   if (!data.map) {
@@ -21,7 +26,7 @@ const Map = ({ game, coords, variation, hexWidth }) => {
       return (
         <g
           transform={`${translate} ${scale}`}
-          key={`hex-${hex.variation}-${coord}`}
+          key={`hex-${name}-${hex.variation}-${coord}`}
         >
           <Hex hex={hex} border={true} transparent={game.info.transparent}
                map={true} id={coords === "inside" && coord} />
@@ -32,15 +37,18 @@ const Map = ({ game, coords, variation, hexWidth }) => {
 
   return (
     <React.Fragment>
-      <Coordinates {...data}/>
       {mapHexes}
+      <Coordinates {...data}/>
+      <Title game={game} variation={variation} hexWidth={hexWidth} />
+      <Borders data={data} />
+      <Lines data={data} />
     </React.Fragment>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, {hexWidth}) => ({
   coords: state.config.coords,
-  hexWidth: state.config.tiles.width
+  hexWidth: hexWidth || state.config.tiles.mapWidth
 });
 
 export default connect(mapStateToProps)(Map);

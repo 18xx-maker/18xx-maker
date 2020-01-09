@@ -4,6 +4,9 @@ import Color from "../data/Color";
 import HexContext from "../context/HexContext";
 
 const Id = ({ id, extra }) => {
+  let fontSize = (id && id.length > 4) ? "9" : (id && id.length > 3) ? "10" : "12";
+  let extraFontSize = (extra && extra.length > 4) ? "9" : (extra && extra.length > 3) ? "10" : "12";
+
   return (
     <HexContext.Consumer>
       {hx => (
@@ -19,7 +22,7 @@ const Id = ({ id, extra }) => {
                   strokeLinejoin="bevel"
                   dominantBaseline="baseline"
                   textAnchor="start"
-                  fontSize="12"
+                  fontSize={fontSize}
                   fontWeight="normal"
                   x="0"
                   y="0"
@@ -37,7 +40,7 @@ const Id = ({ id, extra }) => {
                     strokeLinejoin="bevel"
                     dominantBaseline="baseline"
                     textAnchor="end"
-                    fontSize="12"
+                    fontSize={extraFontSize}
                     x="0"
                     y="0"
                   >

@@ -1,4 +1,4 @@
-html {
+height {
   margin: 0px;  /* this affects the margin on the html before sending to printer */
 }
 
@@ -108,39 +108,41 @@ svg {
   overflow: visible;
 }
 
-.cards {
-  position: relative;
-  overflow: auto;
-}
-
 .charters {
   position: relative;
   overflow: auto;
 }
 
-.card {
+.charter {
+  box-sizing: border-box;
   page-break-inside: avoid;
   font-family: display;
-  height: calc(44mm + 0.25in);
-  width: calc(67.5mm + 0.25in);
-  box-sizing: border-box;
   position: relative;
   background-color: white;
   float: left;
 }
 
-.charter {
-  page-break-inside: avoid;
-  font-family: display;
-  height: 4.75in;
-  width: 7.5in;
-  position: relative;
-  background-color: white;
-  float: left;
+.charter__bleed {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
+.charter__body {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.charter--minor {
+  height: 3in;
 }
 
 .charter--half {
-  width: 3.75in;
+  width: 3.5in;
 }
 
 .charter__hr {
@@ -150,17 +152,23 @@ svg {
   width: 100%;
 }
 
+.charter--half .charter__hr,
+.charter--minor .charter__hr {
+  top: 0.875in;
+}
+
 .charter--color .charter__hr {
   top: 0;
-  height: 1.1875in;
+}
+
+.charter--color.charter--minor .charter__hr {
+  height: 0.875in;
 }
 
 .charter__name {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 0.25in 0.25in 0.25in 0.25in;
-  height: 1.1875in;
+  position: relative;
+  padding: 0.125in;
+  height: 1.0625in;
   font-size: 0.25in;
   line-height: 0.3in;
   box-sizing: border-box;
@@ -172,22 +180,32 @@ svg {
   justify-content: center;
 }
 
+.charter--carth.charter--half .charter__name,
+.charter--minor .charter__name {
+  height: 0.875in;
+}
+
 .charter--half .charter__name {
   font-size: 0.18in;
   line-height: 0.22in;
 }
 
 .charter--color .charter__name {
-  padding-left: 1.125in;
+  padding-left: 1in;
+}
+
+.charter--minor.charter--color .charter__name {
+  padding-left: 0.875in;
 }
 
 .charter__logo {
   height: 0.75in;
   width: 0.75in;
-  margin: 0.125in 0.125in 0 0.125in;
   padding-top: 0.125in;
   padding-left: 0.125in;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .charter__logo > svg {
   height: 0.75in;
@@ -195,34 +213,63 @@ svg {
   position: relative;
 }
 
+.charter--minor .charter__logo {
+  height: 0.625in;
+  width: 0.625in;
+}
+
+.charter--minor .charter__logo > svg {
+  height: 0.625in;
+  width: 0.66in;
+}
+
 .charter__trains {
   text-align: left;
   position: absolute;
-  height: 3.1875in;
+  height: calc(100% - 1.0625in);
   bottom: 0;
   left: 0;
-  margin: 0.125in 0 0.25in 0.125in;
-  width: 3.625in;
-  padding: 0 0.125in 0 0.125in;
-  box-sizing: border-box;
+  width: 50%;
+  padding: 0.125in;
   border-width: 0 1px 0 0;
   border-color: #666;
   border-style: dashed;
+  box-sizing: border-box;
+}
+
+.charter--carth .charter__trains {
+  height: calc(100% - 1.1875in);
+}
+
+.charter--minor .charter__trains {
+  height: calc(100% - 0.875in);
+}
+
+.charter--minor.charter--carth .charter__trains {
+  height: calc(100% - 0.9375in);
 }
 
 .charter__assets {
   text-align: left;
   position: absolute;
-  height: 3.1875in;
+  height: calc(100% - 1.0625in);
   bottom: 0;
   left: 0;
-  margin: 0.125in 0.125in 0.25in 1.125in;
-  width: 2.5in;
-  padding: 0 0.125in;
+  margin-left: 1in;
+  width: calc(100% - 1in);
+  padding: 0.125in;
   box-sizing: border-box;
   border-width: 0 0 0 1px;
   border-color: #666;
   border-style: dashed;
+}
+
+.charter--minor .charter__assets {
+  height: calc(100% - 0.875in);
+}
+
+.charter--carth .charter__assets {
+  height: calc(100% - 0.9375in);
 }
 
 .charter__game {
@@ -244,20 +291,33 @@ svg {
 .charter__treasury {
   text-align: left;
   position: absolute;
-  height: 3.4375in;
+  height: calc(100% - 1.0625in);
   bottom: 0;
   right: 0;
-  margin: 0.125in 0.125in 0 0;
-  width: 3.625in;
-  padding: 0 0.125in 0.25in 0.125in;
+  width: 50%;
+  padding: 0.125in;
   box-sizing: border-box;
+}
+
+.charter--carth .charter__treasury {
+  height: calc(100% - 1.1875in);
+}
+
+.charter--minor .charter__treasury {
+  height: calc(100% - 0.875in);
+}
+
+.charter--minor.charter--carth .charter__treasury {
+  height: calc(100% - 0.9375in);
 }
 
 .charter__phase {
   position: absolute;
   bottom: 0;
-  padding: 0 0.125in 0 0;
-  width: calc(100% - 0.25in);
+  padding: 0.125in;
+  box-sizing: border-box;
+  width: 100%;
+  left: 0;
 }
 
 .charter__phase table {
@@ -293,18 +353,20 @@ svg {
 
 .charter dl {
   position: absolute;
+  margin: 0;
   bottom: 0;
-  margin: 0 0 0.125in 0;
-  padding: 0 0 0.125in 0;
-  width: calc(100% - 0.25in);
+  left: 0;
+  padding: 0.125in;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .charter--half dl {
   position: absolute;
   bottom: 0;
   margin: 0;
-  padding: 0;
-  width: calc(100% - 0.25in);
+  padding: 0.125in;
+  width: 100%;
 }
 
 .charter dt {
@@ -339,246 +401,19 @@ svg {
   margin: 0 0 0 0.15in;
 }
 
-.minorCharter {
-  page-break-inside: avoid;
-  font-family: display;
-  height: 3in;
-  width: 5in;
-  position: relative;
-  background-color: white;
-  float: left;
-}
-
-.minorCharter__hr {
-  height: 0.0625in;
-  position: absolute;
-  top: .7in;
-  width: 100%;
-}
-
-.minorCharter__name {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 0 0.125in 0 0.125in;
-  padding-left: 0.125in;
-  height: 1in;
-  line-height: 1in;
-  font-size: 0.25in;
-  box-sizing: border-box;
-  width: calc(100% - 0.25in);
-  text-align: left;
-}
-
-
-.minorCharter__trains {
-  text-align: left;
-  position: absolute;
-  height: 2.25in;
-  bottom: 0;
-  left: 0;
-  margin: 0.125in 0 0 0.125in;
-  width: 1.75in;
-  padding: 0 0.125in 0.25in 0.125in;
-  box-sizing: border-box;
-  border-width: 0 1px 0 0;
-  border-color: #666;
-  border-style: dashed;
-}
-
-.minorCharter__treasury {
-  text-align: left;
-  position: absolute;
-  height: 2.25in;
-  bottom: 0;
-  right: 0;
-  margin: 0.0in 0.125in 0 0;
-  width: 2.625in;
-  padding: 0 0.125in 0.25in 0.125in;
-  box-sizing: border-box;
-}
-
-.minorCharter dl {
-  position: absolute;
-  bottom: 0;
-  margin: 0 0 0.125in 0;
-  padding: 0 0 0.125in 0;
-  width: calc(100% - 0.25in);
-}
-
-.minorCharter dt {
-  margin: 0.125in 0 0 0;
-  font-size: 0.13in;
-}
-
-.minorCharter__phase {
-  position: absolute;
-  bottom: 0;
-  padding: 0 0.125in 0.25in 0;
-  width: calc(100% - 0.25in);
-}
-
-.minorCharter__phase table {
-  font-family: sans-serif;
-  font-size: 0.09in;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.minorCharter__phase th {
-  padding: 0 0.05in;
-  font-family: display;
-  text-align: center;
-}
-
-.minorCharter__phase th.phase__notes {
-  text-align: left;
-}
-
-.minorCharter__phase td {
-  padding: 0.03in 0.05in;
-  border: 1px solid black;
-  text-align: center;
-  vertical-align: top;
-  white-space: nowrap;
-}
-
-.minorCharter__phase td.phase__notes {
-  text-align: left;
-  white-space: normal;
-}
-
-.minorCharter dd {
-  margin: 0;
-  font-size: 0.12in;
-  font-family: sans-serif;
-}
-
-.minorCharter ul {
-  list-style-type: disc;
-  list-style-position: outside;
-  padding: 0;
-  padding-left: 3px;
-  margin: 0 0 0 0.15in;
-}
-
-.minorCharter ul li span {
-  position: relative;
-  left: -3px;
-}
-
-.minorCharter ol {
-  list-style-type: decimal;
-  list-style-position: outside;
-  padding: 0;
-  margin: 0 0 0 0.15in;
-}
-
-.train__name {
-  color: #000;
-
-  box-sizing: border-box;
-  width: 100%;
-  height: 0.875in;
-  padding: 0.25in 0.25in 0.125in 0.25in;
-  line-height: 0.4in;
-  font-size: 0.4in;
-  text-align: left;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  font-weight: bold;
-}
-
-.train__tracks {
-  display: none;
-  position: absolute;
-  width: 100%;
-  height: 0.5in;
-  bottom: -0.0625in;
-  left: 0;
-  opacity: 0.25;
-}
-
-.train__tracks svg {
-  height: 100%;
-  width: 100%;
-}
-
-.train__hr {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 0.8125in;
-}
-
-.train__price {
-  color: #000;
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0.125in;
-  padding: 0.125in;
-  height: 0.5in;
-  line-height: 0.5in;
-  font-size: 0.25in;
-}
-
-.train__description {
-  position: absolute;
-  height: 0.4375in;
-  width: calc(100% - 0.25in);
-  bottom: 0.625in;
-  margin: 0 0.125in;
-  padding: 0 0.125in 0 0.125in;
-  box-sizing: border-box;
-  right: 0;
-  text-align: right;
-  font-family: sans-serif;
-  font-size: 0.12in;
-  font-weight: normal;
-  line-height: 0.16in;
-}
-
-.train__notes {
-  position: absolute;
-  bottom: 0;
-  width: calc(100% - 0.25in);
-  padding: 0.125in;
-  margin: 0.125in;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.train__info {
-  height: 0.25in;
-  line-height: 0.25in;
-  padding: 0 0.1in;
-  margin-top: 0.05in;
-  border-radius: 0.06in;
-}
-
-.train__players {
-  line-height: 0.25in;
-  height: 0.25in;
-  font-size: 0.14in;
-  margin-top: 0.05in;
-}
-
 .charter__tokens {
   position: absolute;
   top: 0;
   right: 0;
   padding: 0.26in 0.125in 0.125in 0.125in;
-  margin: 0.125in 0.125in 0 0;
   height: 1in;
   box-sizing: border-box;
   line-height: normal;
+}
+
+.charter--minor .charter__tokens {
+  padding-top: 0.135in;
+  height: 0.875in;
 }
 
 .charter__tokens svg {
@@ -588,102 +423,27 @@ svg {
 }
 
 .charter--half .charter__tokens {
-  top: 1.1875in;
-  height: calc(100% - 1.1875in - 0.25in);
+  top: 1.0625in;
+  height: calc(100% - 1.0625in);
   width: 1in;
-  margin: 0.125in 0 0.125in 0.125in;
-  padding: 0 0.125in 0.125in 0.125in;
+  padding: 0.125in;
   left: 0;
   right: auto;
+}
+
+.charter--minor.charter--half .charter__tokens {
+  top: 0.875in;
+  height: calc(100% - 0.875in);
+}
+
+.charter--carth.charter--half .charter__tokens {
+  top: 0.9375in;
+  height: calc(100% - 0.9375in);
 }
 
 .charter--half .charter__tokens svg {
   height: 0.5in;
   padding: 0.05in 0 0 0;
-}
-
-
-.minorCharter__tokens {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0.26in 0.125in 0.125in 0.125in;
-  margin: 0in 0.125in 0 0;
-  height: 1in;
-  box-sizing: border-box;
-}
-
-.minorCharter__tokens svg {
-  width: 0.5in;
-  height: 0.7in;
-  padding: 0 0 0 0.15in;
-}
-
-.private__name {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: calc(100% - 0.5in);
-  padding: 0.125in 0.125in 0.03125in 0.125in;
-  line-height: 0.22in;
-  font-size: 0.18in;
-  margin: 0.125in 0.125in 0 0.125in;
-  text-align: left;
-}
-
-.private__icon {
-  float: right;
-  line-height: 0.22in;
-  font-size: 0.18in;
-  margin: 0.125in 0.125in 0 0;
-  padding: 0.125in;
-}
-
-.private__description {
-  position: relative;
-  width: calc(100% - 0.5in);
-  padding: 0 0.125in;
-  margin: 0 0.125in;
-  text-align: left;
-  left: 0;
-  line-height: 0.105in;
-  font-size: 0.085in;
-  font-weight: normal;
-  font-family: sans-serif;
-}
-
-
-.private__price {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin: 0.125in;
-  padding: 0.125in;
-  height: 0.25in;
-  line-height: 0.25in;
-  font-size: 0.18in;
-}
-
-.private__players {
-  position: absolute;
-  bottom: 0.25in;
-  right: 0;
-  margin: 0.125in;
-  padding: 0.125in;
-  line-height: 0.25in;
-  height: 0.25in;
-  font-size: 0.14in;
-}
-
-.private__revenue {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 0.125in;
-  padding: 0.125in;
-  line-height: 0.25in;
-  height: 0.25in;
-  font-size: 0.18in;
 }
 
 .prices {
@@ -845,6 +605,7 @@ ul.notes li span {
   float: left;
   padding: 0.25in;
   page-break-inside: avoid;
+  box-sizing: border-box;
 }
 
 .cutlines-inner {
@@ -959,7 +720,8 @@ footer a:hover {
   font-size: 0.8em;
 }
 
-.PrintNotes .select {
+.PrintNotes .select,
+.PrintNotes > div > h3 {
   display: inline-block;
   margin-right: 2em;
 }

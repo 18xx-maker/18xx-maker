@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import * as R from "ramda";
 import Color from "./data/Color";
 import games from "./data/games";
@@ -6,6 +7,8 @@ import games from "./data/games";
 import Pool from "./Pool";
 import Players from "./Players";
 import PageSetup from "./PageSetup";
+
+import Currency from "./util/Currency";
 
 require("./Revenue.css");
 
@@ -26,7 +29,7 @@ const generateCells = (rows, cols) => {
                context="companies">
           {(c,t) => (
             <td style={{ backgroundColor: c(color), color: t(c(color)) }}>
-              {value}
+              <Currency value={value} type="revenue"/>
             </td>
           )}
         </Color>
@@ -39,8 +42,9 @@ const generateCells = (rows, cols) => {
   return items;
 };
 
-const Revenue = ({ match }) => {
-  let game = games[match.params.game];
+const Revenue = () => {
+  let params = useParams();
+  let game = games[params.game];
 
   let rows = Array.from(Array(5).keys());
   let cols = Array.from(Array(20).keys());

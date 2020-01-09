@@ -1,0 +1,126 @@
+{
+  "name": "Overwatch League Teams",
+  "abbrev": "owl",
+  "companies": [
+    {
+      "name": "Atlanta Reign",
+      "abbrev": "AR",
+      "color": "gray",
+      "logo": "owl/atlanta_reign"
+    },
+    {
+      "name": "Boston Uprising",
+      "abbrev": "BU",
+      "color": "blue",
+      "logo": "owl/boston_uprising"
+    },
+    {
+      "name": "Chengdu Hunters",
+      "abbrev": "CH",
+      "color": "tan",
+      "logo": "owl/chengdu_hunters"
+    },
+    {
+      "name": "Dallas Fuel",
+      "abbrev": "DF",
+      "color": "blue",
+      "logo": "owl/dallas_fuel"
+    },
+    {
+      "name": "Florida Mayhem",
+      "abbrev": "FM",
+      "color": "yellow",
+      "logo": "owl/florida_mayhem"
+    },
+    {
+      "name": "Guangzhou Charge",
+      "abbrev": "GC",
+      "color": "turquoise",
+      "logo": "owl/guangzhou_charge"
+    },
+    {
+      "name": "Hangzhou Spark",
+      "abbrev": "HS",
+      "color": "pink",
+      "logo": "owl/hangzhou_spark"
+    },
+    {
+      "name": "Houston Outlaws",
+      "abbrev": "HO",
+      "color": "lime",
+      "logo": "owl/houston_outlaws"
+    },
+    {
+      "name": "London Spitfire",
+      "abbrev": "LS",
+      "color": "cyan",
+      "logo": "owl/london_spitfire"
+    },
+    {
+      "name": "Los Angeles Gladiators",
+      "abbrev": "LAG",
+      "color": "purple",
+      "logo": "owl/los_angeles_gladiators"
+    },
+    {
+      "name": "Los Angeles Valiant",
+      "abbrev": "LAV",
+      "color": "green",
+      "logo": "owl/los_angeles_valiant"
+    },
+    {
+      "name": "New York Excelsior",
+      "abbrev": "NYE",
+      "color": "blue",
+      "logo": "owl/new_york_excelsior"
+    },
+    {
+      "name": "Paris Eternal",
+      "abbrev": "PE",
+      "color": "red",
+      "logo": "owl/paris_eternal"
+    },
+    {
+      "name": "Philadelphia Fusion",
+      "abbrev": "PF",
+      "color": "orange",
+      "logo": "owl/philadelphia_fusion"
+    },
+    {
+      "name": "San Francisco Shock",
+      "abbrev": "SFS",
+      "color": "orange",
+      "logo": "owl/san_francisco_shock"
+    },
+    {
+      "name": "Seoul Dynasty",
+      "abbrev": "SD",
+      "color": "black",
+      "logo": "owl/seoul_dynasty"
+    },
+    {
+      "name": "Shanghai Dragons",
+      "abbrev": "SD",
+      "color": "red",
+      "logo": "owl/shanghai_dragons"
+    },
+    {
+      "name": "Toronto Defiant",
+      "abbrev": "TD",
+      "color": "black",
+      "logo": "owl/toronto_defiant"
+    },
+    {
+      "name": "Vancouver Titans",
+      "abbrev": "VT",
+      "color": "green",
+      "logo": "owl/vancouver_titans"
+    },
+    {
+      "name": "Washington Justice",
+      "abbrev": "WJ",
+      "color": "blue",
+      "logo": "owl/washington_justice"
+    }
+  ]
+}

@@ -1,3 +1,6 @@
+import overrides from "./data/companies";
+
+import addIndex from "ramda/src/addIndex";
 import adjust from "ramda/src/adjust";
 import append from "ramda/src/append";
 import ascend from "ramda/src/ascend";
@@ -13,6 +16,7 @@ import join from "ramda/src/join";
 import juxt from "ramda/src/juxt";
 import lte from "ramda/src/lte";
 import map from "ramda/src/map";
+import merge from "ramda/src/merge";
 import nth from "ramda/src/nth";
 import prepend from "ramda/src/prepend";
 import prop from "ramda/src/prop";
@@ -24,8 +28,7 @@ import tail from "ramda/src/tail";
 import toPairs from "ramda/src/toPairs";
 import toUpper from "ramda/src/toUpper";
 
-export const tileColors = ["yellow", "green", "brown", "gray", "mountain", "water", "land", "plain", "other"];
-
+const tileColors = ["yellow", "yellow/green", "green", "green/brown", "brown", "brown/gray", "gray", "other"];
 const idBaseSort = compose(Number, defaultTo(0), nth(0), split("|"), propOr("", "id"));
 const idExtraSort = compose(Number, defaultTo(0), nth(1), split("|"), propOr("", "id"));
 const colorSort = compose(tileColors.indexOf, prop("color"), defaultTo({color:"other"}));
@@ -63,7 +66,6 @@ export const inchesToMm = inches => inches * 25.4;
 export const unitsToInches = units => units / 100.0;
 export const unitsToCss = compose(inchesToCss, unitsToInches);
 export const unitsToCssMm = compose(mmToCss, inchesToMm, unitsToInches);
-
 
 export const printableWidth = ({width, margins}) => {
   let margin = 0;
@@ -124,3 +126,126 @@ export const maxPages = (total, page) => {
 
   return helper(total, page, []);
 };
+
+export const compileCompanies = (game) => {
+  return map(company => {
+    if (company.minor && game.tokenTypes && game.tokenTypes["minor"]) {
+      company.tokens = game.tokenTypes["minor"];
+    } else if (!company.tokens && game.tokenTypes && game.tokenTypes["default"]) {
+      company.tokens = game.tokenTypes["default"];
+    } else if (is(String, company.tokens)) {
+      company.tokens = game.tokenTypes[company.tokens];
+    }
+
+    if (company.minor && game.shareTypes && game.shareTypes["minor"]) {
+      company.shares = game.shareTypes["minor"];
+    } else if (!company.shares && game.shareTypes && game.shareTypes["default"]) {
+      company.shares = game.shareTypes["default"];
+    } else if (is(String, company.shares)) {
+      company.shares = game.shareTypes[company.shares];
+    }
+
+    return company;
+  }, game.companies || []);
+};
+
+export const overrideCompanies = (companies, override, selections) => {
+  if (override === "none" || !overrides[override]) {
+    return companies;
+  }
+
+  let overrideCompanies = overrides[override].companies;
+
+  return addIndex(map)((company, index) => {
+    // If we have selections, filter/select our overrides with them
+    if ((selections || []).length > 0) {
+      overrideCompanies = map(index => prop(index, overrideCompanies), selections);
+    }
+
+    // If we have a valid override for the index, merge!
+    if (overrideCompanies[index]) {
+      company = merge(company, overrideCompanies[index]);
+
+      // Remove some fields if they don't exist on the override company
+      company.logo = overrideCompanies[index].logo;
+      company.token = overrideCompanies[index].token;
+    }
+
+    return company;
+
+  }, companies || []);
+}
+
+export const getCharterData = (charters, paper) => {
+  let { cutlines, bleed, border } = charters;
+  let { margins, width: pageWidth, height: pageHeight } = paper;
+
+  let cutlinesAndBleed = cutlines + bleed;
+
+  let usableWidth = pageWidth - (2.0 * margins);
+  let usableHeight = pageHeight - (2.0 * margins);
+
+  let totalWidth = usableWidth;
+  let totalHalfWidth = usableWidth / 2;
+  let totalHeight = usableHeight / 2;
+  let totalMinorHeight = usableHeight / 3;
+
+  let width = totalWidth - (2.0 * cutlinesAndBleed);
+  let halfWidth = totalHalfWidth - (2.0 * cutlinesAndBleed);
+  let height = totalHeight - (2.0 * cutlinesAndBleed);
+  let minorHeight = totalMinorHeight - (2.0 * cutlinesAndBleed);
+
+  let bleedWidth = width + (2.0 * bleed);
+  let bleedHalfWidth = halfWidth + (2.0 * bleed);
+  let bleedHeight = height + (2.0 * bleed);
+  let bleedMinorHeight = minorHeight + (2.0 * bleed);
+
+  return {
+    width,
+    halfWidth,
+    height,
+    minorHeight,
+    cutlines,
+    bleed,
+    border,
+    cutlinesAndBleed,
+    bleedWidth,
+    bleedHalfWidth,
+    bleedHeight,
+    bleedMinorHeight,
+    totalWidth,
+    totalHalfWidth,
+    totalHeight,
+    totalMinorHeight,
+
+    margins,
+    pageWidth,
+    pageHeight,
+    usableWidth,
+    usableHeight,
+
+    css: {
+      width: unitsToCss(width),
+      halfWidth: unitsToCss(halfWidth),
+      height: unitsToCss(height),
+      minorHeight: unitsToCss(minorHeight),
+      cutlines: unitsToCss(cutlines),
+      bleed: unitsToCss(bleed),
+      cutlinesAndBleed: unitsToCss(cutlinesAndBleed),
+      bleedWidth: unitsToCss(bleedWidth),
+      bleedHalfWidth: unitsToCss(bleedHalfWidth),
+      bleedHeight: unitsToCss(bleedHeight),
+      bleedMinorHeight: unitsToCss(bleedMinorHeight),
+      totalWidth: unitsToCss(totalWidth),
+      totalHalfWidth: unitsToCss(totalHalfWidth),
+      totalHeight: unitsToCss(totalHeight),
+      totalMinorHeight: unitsToCss(totalMinorHeight),
+
+      margins: unitsToCss(margins),
+      pageWidth: unitsToCss(pageWidth),
+      pageHeight: unitsToCss(pageHeight),
+      usableWidth: unitsToCss(usableWidth),
+      usableHeight: unitsToCss(usableHeight)
+    }
+  };
+}

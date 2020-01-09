@@ -1,5 +1,5 @@
 import React from "react";
-import {withRouter} from "react-router";
+import {withRouter, useHistory, useLocation, useParams} from "react-router";
 
 import games from "../data/games";
 
@@ -9,8 +9,12 @@ const disabled = value => {
   return value === undefined || value === null || equals(value, []) || equals(value, {})
 }
 
-const ComponentSelect = ({match,history,location}) => {
-  let gameName = match.params.game;
+const ComponentSelect = () => {
+  let params = useParams();
+  let history = useHistory();
+  let location = useLocation();
+
+  let gameName = params.game;
   let game = games[gameName];
 
   let handleChange = event => {
