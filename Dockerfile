@@ -11,21 +11,23 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /src/*.deb
 
-RUN groupadd -r 18xx && useradd -r -g 18xx -G audio,video 18xx \
-  && mkdir -p /home/18xx/Downloads \
-  && chown -R 18xx:18xx /home/18xx
+COPY package.json /home/18xx/
+COPY yarn.lock /home/18xx
 
-USER 18xx
 WORKDIR /home/18xx
 
 # Install Deps
-COPY package.json /home/18xx/
-COPY yarn.lock /home/18xx
 RUN yarn
 
 # Build site
 COPY . /home/18xx
 RUN yarn build
+
+RUN groupadd -r 18xx && useradd -r -g 18xx -G audio,video 18xx \
+  && mkdir -p /home/18xx/Downloads \
+  && chown -R 18xx:18xx /home/18xx
+
+USER 18xx
 
 FROM nginx:1.15.10-alpine
 LABEL maintainer="kelsin@valefor.com"
