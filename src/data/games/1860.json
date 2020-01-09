@@ -960,28 +960,12 @@
               }
             }
           ],
-          "borders": [
-            {
-              "side": 2,
-              "color": "mountain"
-            }
-          ],
           "hexes": [
             "G1"
           ]
         },
         {
           "color": "plain",
-          "borders": [
-            {
-              "side": 5,
-              "color": "mountain"
-            },
-            {
-              "side": 6,
-              "color": "mountain"
-            }
-          ],
           "labels": [
             {
               "label": "C",
@@ -1076,16 +1060,6 @@
               }
             }
           ],
-          "borders": [
-            {
-              "side": 2,
-              "color": "mountain"
-            },
-            {
-              "side": 3,
-              "color": "mountain"
-            }
-          ],
           "hexes": [
             "G3"
           ]
@@ -1154,12 +1128,6 @@
               "name": {
                 "name": "Cement Mills"
               }
-            }
-          ],
-          "borders": [
-            {
-              "side": 5,
-              "color": "mountain"
             }
           ],
           "hexes": [
@@ -1332,12 +1300,6 @@
         },
         {
           "color": "plain",
-          "borders": [
-            {
-              "side": 1,
-              "color": "mountain"
-            }
-          ],
           "centerTowns": [
             {
               "name": {
@@ -1559,12 +1521,6 @@
               "percent": 0.4
             }
           ],
-          "borders": [
-            {
-              "side": 4,
-              "color": "mountain"
-            }
-          ],
           "hexes": [
             "I7"
           ]
@@ -1622,12 +1578,6 @@
               }
             }
           ],
-          "borders": [
-            {
-              "side": 1,
-              "color": "mountain"
-            }
-          ],
           "hexes": [
             "I9"
           ]
@@ -1659,12 +1609,6 @@
               "side": 3
             }
           ],
-          "borders": [
-            {
-              "side": 4,
-              "color": "mountain"
-            }
-          ],
           "hexes": [
             "I11"
           ]
@@ -1683,6 +1627,20 @@
             "F12"
           ]
         }
+      ],
+      "borders": [
+        {
+          "color": "mountain",
+          "coords": ["F2p3", "F2p4", "F2p5", "F4p4"]
+        },
+        {
+          "color": "mountain",
+          "coords": ["I7p2", "I7p3"]
+        },
+        {
+          "color": "mountain",
+          "coords": ["I11p2", "I11p3"]
+        }
       ]
     },
     {
@@ -1697,12 +1655,6 @@
               "name": {
                 "name": "Norton Green"
               }
-            }
-          ],
-          "borders": [
-            {
-              "side": 5,
-              "color": "mountain"
             }
           ],
           "hexes": [
@@ -1732,12 +1684,6 @@
               "companies": ["FYN"]
             }
           ],
-          "borders": [
-            {
-              "side": 2,
-              "color": "mountain"
-            }
-          ],
           "hexes": [
             "B4"
           ]
@@ -1747,6 +1693,24 @@
           "hexes": [
             "E11"
           ]
+        }
+      ],
+      "borders": [
+        {
+          "color": "mountain",
+          "coords": ["F2p3", "F2p4", "F2p5", "F4p4"]
+        },
+        {
+          "color": "mountain",
+          "coords": ["I7p2", "I7p3"]
+        },
+        {
+          "color": "mountain",
+          "coords": ["I11p2", "I11p3"]
+        },
+        {
+          "color": "mountain",
+          "coords": ["A5p3", "A5p4"]
         }
       ]
     }
