@@ -1,4 +1,73 @@
 {
+  "10": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 275,
+        "percent": 0.667,
+        "value": 30
+      },
+      {
+        "angle": 95,
+        "percent": 0.667,
+        "value": 30
+      }
+    ],
+    "cities": [
+      {"angle": 30,
+       "percent": 0.5},
+      {"angle": 210,
+       "percent": 0.5}
+    ],
+    "track": [
+      {
+        "side": 1,
+        "type": "sharpStop"
+      },
+      {
+        "side": 4,
+        "type": "sharpStop"
+      }
+    ]
+  },
+  "11": {
+    "color": "green",
+    "labels": [
+      {
+        "angle": 180,
+        "percent": 0.8,
+        "label": "HALT"
+      }
+    ],
+    "towns": [
+      {
+        "angle": 180,
+        "percent": 0.275,
+        "rotate": 90
+      }
+    ],
+    "values": [
+      {
+        "angle": 300,
+        "percent": 0.667,
+        "value": 10
+      }
+    ],
+    "track": [
+      {
+        "type": "gentle",
+        "side": 1
+      },
+      {
+        "type": "gentle",
+        "side": 3
+      },
+      {
+        "type": "gentle",
+        "side": 5
+      }
+    ]
+  },
   "12": {
     "color": "green",
     "values": [
@@ -323,6 +392,41 @@
       }
     ]
   },
+  "52": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 40
+      },
+      {
+        "angle": 270,
+        "percent": 0.75,
+        "value": 40
+      }
+    ],
+    "cities": [
+      {
+        "angle": -30,
+        "percent": 0.5
+      },
+      {
+        "angle": 150,
+        "percent": 0.5
+      }
+    ],
+    "track": [
+      {
+        "side": 1,
+        "type": "sharpStopRev"
+      },
+      {
+        "side": 3,
+        "type": "sharpStop"
+      }
+    ]
+  },
   "53": {
     "color": "green",
     "rotations": 2,
@@ -489,6 +593,411 @@
       },
       {
         "side": 2
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
+  "87": {
+    "color": "green",
+    "centerTowns": [
+      {}
+    ],
+    "values": [
+      {
+        "value": 10,
+        "angle": 270,
+        "percent": 0.45
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+  "88": {
+    "color": "green",
+    "centerTowns": [
+      {}
+    ],
+    "values": [
+      {
+        "value": 10,
+        "angle": 235,
+        "percent": 0.5
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "89": {
+    "color": "green",
+    "centerTowns": [
+      {}
+    ],
+    "values": [
+      {
+        "value": 10,
+        "angle": 235,
+        "percent": 0.5
+      }
+    ],
+    "track": [
+      {
+        "side": 1,
+        "gauge": "narrow",
+        "offset": 7.5
+      },
+      {
+        "side": 3,
+        "gauge": "narrow",
+        "offset": 7.5
+      },
+      {
+        "side": 4,
+        "gauge": "narrow",
+        "offset": 7.5
+      },
+      {
+        "side": 6,
+        "gauge": "narrow",
+        "offset": 7.5
+      }
+    ]
+  },
+  "90": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {"size": 2}
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2,
+        "gauge": "narrow"
+      },
+      {
+        "side": 3,
+        "gauge": "narrow"
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "91": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {"size": 2}
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2,
+        "gauge": "narrow"
+      },
+      {
+        "side": 3,
+        "gauge": "narrow"
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5,
+        "gauge": "narrow"
+      },
+      {
+        "side": 6,
+        "gauge": "narrow"
+      }
+    ]
+  },
+  "92": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {"size": 2}
+    ],
+    "track": [
+      {
+        "side": 1,
+        "gauge": "narrow"
+      },
+      {
+        "side": 2,
+        "gauge": "narrow"
+      },
+      {
+        "side": 3,
+        "gauge": "narrow"
+      },
+      {
+        "side": 4,
+        "gauge": "narrow"
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "93": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {"size": 2}
+    ],
+    "track": [
+      {
+        "side": 1,
+        "gauge": "narrow"
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4,
+        "gauge": "narrow"
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "94": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {"size": 2}
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2,
+        "gauge": "narrow"
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4,
+        "gauge": "narrow"
+      }
+    ]
+  },
+  "95": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 20
+      }
+    ],
+    "cities": [
+      {"size": 2}
+    ],
+    "track": [
+      {
+        "side": 1,
+        "gauge": "narrow"
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3,
+        "gauge": "narrow"
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+  "96": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 30
+      }
+    ],
+    "cities": [
+      {"size": 2}
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3,
+        "gauge": "narrow"
+      },
+      {
+        "side": 4,
+        "gauge": "narrow"
+      }
+    ]
+  },
+  "97": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 30
+      }
+    ],
+    "cities": [
+      {"size": 2}
+    ],
+    "track": [
+      {
+        "side": 1,
+        "gauge": "narrow"
+      },
+      {
+        "side": 2,
+        "gauge": "narrow"
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+  "98": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 30
+      }
+    ],
+    "cities": [
+      {"size": 2}
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4,
+        "gauge": "narrow"
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
+  "99": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 30
+      }
+    ],
+    "cities": [
+      {"size": 2}
+    ],
+    "track": [
+      {
+        "side": 1,
+        "gauge": "narrow"
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
       },
       {
         "side": 5
@@ -3988,6 +4497,60 @@
       },
       {
         "side": 5
+      }
+    ]
+  },
+  "887": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 270,
+        "percent": 0.5,
+        "value": 20
+      }
+    ],
+    "centerTowns": [
+      {}
+    ],
+    "track": [
+      {
+        "side": 2
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      }
+    ]
+  },
+  "888": {
+    "color": "green",
+    "values": [
+      {
+        "angle": 240,
+        "percent": 0.5,
+        "value": 20
+      }
+    ],
+    "centerTowns": [
+      {}
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 6
       }
     ]
   },
