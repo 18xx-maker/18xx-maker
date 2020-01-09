@@ -22,7 +22,13 @@
     { "icon": "coal" },
     { "icon": "coal" },
     { "icon": "coal" },
-    { "icon": "river", "label": "Key West" }
+    { "icon": "river", "label": "Key West" },
+    { "icon": "medium-city" },
+    { "icon": "medium-city" },
+    { "icon": "medium-city" },
+    { "icon": "medium-city" },
+    { "icon": "medium-city" },
+    { "icon": "medium-city" }
   ],
   "ipo": true,
   "bank": 12000,
@@ -316,14 +322,14 @@
       "price": 50,
       "revenue": 10,
       "icon": "port",
-      "description": "This company has a Port token which may be placed on any city on the coasts an extra token lay during the token placement step of an owning public company's operating round. All eligible cities are marked with an anchor symbol. This token increases the value of the selected city by $20 for the owning company and by $10 for all other companies."
+      "description": "This company has a Port token which may be placed on any city on the coasts as an extra token lay during the token placement step of an owning public company's operating round. All eligible cities are marked with an anchor symbol. This token increases the value of the selected city by $20 for the owning company and by $10 for all other companies."
     },
     {
       "name": "P4: London Investment",
       "price": 70,
       "revenue": 10,
       "icon": "share",
-      "description": "This company represents those shrewd investors in London. They have hired you to invest their money in the new Southern railways. They will purchase a share in your choice of any newly started company. You get the share. After the company pays its first dividend, the London Investment Company is closed, as they realize they have paid you for nothing and you spent the money for yourself."
+      "description": "This company represents those shrewd investors in London. They have hired you to invest their money in the new Southern railways. They will purchase a share of your choice in any newly started company. You get the share. After the company pays its first dividend, the London Investment Company is closed, as they realize they have paid you for nothing and you spent the money for yourself."
     },
     {
       "name": "P5: West Virginia Coalfields",
@@ -354,14 +360,14 @@
       "limit": "4",
       "number": "7",
       "tiles": "yellow",
-      "notes": "P5 may be sold 0.5-2x"
+      "notes": "P5 may be purchased at 0.5-1x"
     },
     {
       "name": "3",
       "limit": "4",
       "number": "6",
       "tiles": "green",
-      "notes": "Private companies may be purchased"
+      "notes": "Private companies may be purchased 0.5-2x"
     },
     {
       "name": "4",
@@ -375,7 +381,7 @@
       "limit": "2",
       "number": "3",
       "tiles": "brown",
-      "notes": "All but P6 are closed"
+      "notes": "Private companies except P6 are closed"
     },
     {
       "name": "6",
@@ -383,7 +389,7 @@
       "number": "2",
       "rust": "3",
       "tiles": "brown",
-      "notes": "private tokens removed"
+      "notes": "Private company tokens removed"
     },
     {
       "name": "8",
@@ -451,7 +457,7 @@
       "steps": [
         "Sell any number of shares then buy one share",
         "Buy one share then sell any number of shares",
-        "Redeem shares",
+        "Redeem a share (once per SR)",
         "Reissue shares"
       ],
       "ordered": false
@@ -459,7 +465,8 @@
     {
       "name": "Merger Phase",
       "steps": [
-        "Conducted after each SR during Phases 4 and 5"
+        "Conducted after each SR during Phases 4 and 5",
+        "Conducted for the last time immediately after purchase of first 6 train"
       ],
       "ordered": false
     },
@@ -469,7 +476,7 @@
         "Lay or upgrade track",
         "Purchase a station",
         "Run trains",
-        "Pay dividends or withhold revenue",
+        "Pay full dividends, pay half dividends, or withhold revenue",
         "Purchase trains"
       ],
       "ordered": true,
@@ -1306,7 +1313,7 @@
         "color": "offboard",
         "offBoardRevenue": {
           "name": {
-            "name": "Kansas city"
+            "name": "Kansas City"
           },
           "angle": 90,
           "percent": 0.2,
