@@ -5,6 +5,9 @@ const Value = ({ type }) => {
   let icon;
 
   switch (type) {
+  case "medium-city":
+    icon = <use href="#medium-city" />
+    break;
   case "charter":
     icon = <use href="#charter" />
     break;

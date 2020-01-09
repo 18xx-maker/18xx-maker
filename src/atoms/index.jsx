@@ -75,7 +75,8 @@ const atoms = [{
              {icons: [{type: "cactus"}]},
              {icons: [{type: "water"}]},
              {icons: [{type: "river"}]},
-             {icons: [{type: "mountain"}]}]
+             {icons: [{type: "mountain"}]},
+             {icons: [{type: "medium-city"}]}]
 },{
   group: "Tokens",
   examples: [
