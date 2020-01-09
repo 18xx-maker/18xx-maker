@@ -1132,10 +1132,10 @@
         ],
         "track": [
           {
-            "start": 1
+            "side": 1
           },
           {
-            "start": 5
+            "side": 5
           }
         ],
         "hexes": [
