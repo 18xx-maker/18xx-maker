@@ -361,6 +361,66 @@
       }
     ]
   },
+  "71": {
+    "color": "yellow",
+    "values": [
+      {
+        "angle": 180,
+        "percent": 0.4,
+        "value": 10
+      },
+      {
+        "angle": 45,
+        "percent": 0.55,
+        "value": 10
+      }
+    ],
+    "towns": [
+      {
+        "angle": -7.5,
+        "percent": 0.5,
+        "rotate": 15.5
+      },
+      {
+        "angle": 252.5,
+        "percent": 0.4,
+        "rotate": 40
+      }
+    ],
+    "track": [
+      {
+        "type": "gentle",
+        "side": 5,
+        "gauge": "narrow",
+        "offset": 12.5
+      }
+    ]
+  },
+  "72": {
+    "color": "yellow",
+    "values": [
+      {
+        "value": 10,
+        "angle": -30,
+        "percent": 0.1
+      }
+    ],
+    "towns": [
+      {
+        "angle": -30,
+        "percent": 0.57735,
+        "rotation": 60
+      }
+    ],
+    "track": [
+      {
+        "type": "sharp",
+        "side": 6,
+        "gauge": "narrow",
+        "offset": -5
+      }
+    ]
+  },
   "73": {
     "color": "yellow",
     "values": [
