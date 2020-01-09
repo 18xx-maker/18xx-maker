@@ -34,7 +34,6 @@
   position: relative;
   padding: 0.05in;
   flex-grow: 1;
-  display: inline-block;
 }
 
 .Par__Cell:first-child {
