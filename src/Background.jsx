@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 import { unitsToCss, printableWidth, printableHeight } from "./util";
 import { GetFont, SetFont } from "./context/FontContext";
 import games from "./data/games";
@@ -16,8 +17,9 @@ const cos = Math.cos(radians(30));
 const rotatedWidth = (w, h) => Math.abs(w * cos + h * sin);
 const rotatedHeight = (w, h) => Math.abs(h * cos + w * sin);
 
-const Background = ({ match, paper }) => {
-  let game = games[match.params.game];
+const Background = ({ paper }) => {
+  let params = useParams();
+  let game = games[params.game];
 
   let color = game.info.background;
   let title = game.info.title;
@@ -30,7 +32,7 @@ const Background = ({ match, paper }) => {
 
   let text = null;
   let [BB, setBB] = useState({x:0,y:0,width:containerWidth,height:containerHeight});
-  useEffect(() => setBB(text.getBBox()), [text]);
+  useEffect(() => setBB(text.getBBox()), [title, text]);
 
   let textWidth = BB.width + 12;
   let textHeight = BB.height;
@@ -38,7 +40,7 @@ const Background = ({ match, paper }) => {
   let cols = Math.ceil(containerWidth / textWidth);
   let rows = Math.ceil(containerHeight / textHeight);
 
-  let textNodes = flatten(times(x => times(y => <text key={`${x}-${y}`}
+  let textNodes = flatten(times(x => times(y => <text key={`${title}-${x}-${y}`}
                                                     x={x * textWidth} y={y * textHeight}
                                                     fill="#fff" opacity="0.2">{title}</text>, rows), cols));
 

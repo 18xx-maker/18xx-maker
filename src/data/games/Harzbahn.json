@@ -4,12 +4,12 @@
     "subtitle": "Mining and Railways in the Harz Mountains",
     "designer": "Klaus Kiermeier",
     "background": "brown",
-    "titleSize": 108,
-    "subTitleSize": 28,
-    "extraTokens": 2,
-    "titleY": -80,
+    "titleSize": 76,
+    "subTitleSize": 20,
+    "marketTokens": 2,
+    "titleY": -115,
     "titleX": 20,
-    "currency": "EUR"
+    "currency": "#M"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/28944/harzbahn-1873",
@@ -22,189 +22,81 @@
   "players": [
     {
       "number": 2,
-      "capital": "2100M"
+      "capital": 2100
     },
     {
       "number": 3,
-      "capital": "1400M"
+      "capital": 1400
     },
     {
       "number": 4,
-      "capital": "1050M"
+      "capital": 1050
     },
     {
       "number": 5,
-      "capital": "840M"
+      "capital": 840
     }
   ],
+  "tokenTypes": {
+    "default": [
+      "Free"
+    ]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Halberstadt-Blankenburger Eisenbahn",
       "abbrev": "HBE",
-      "tokens": [
-        "Free"
-      ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "red"
     },
     {
       "name": "Gernrode-Harzgeroder Eisenbahn",
       "abbrev": "GHE",
-      "tokens": [
-        "Free"
-      ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "blue"
     },
     {
       "name": "Nordhausen-Wernigeroder Eisenbahn",
       "abbrev": "NWE",
-      "tokens": [
-        "Free"
-      ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     },
     {
       "name": "Südharzeisenbahn",
       "abbrev": "SHE",
-      "tokens": [
-        "Free"
-      ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "yellow"
     },
     {
       "name": "Kleinbahn Ellrich-Zorge",
       "abbrev": "KEZ",
-      "tokens": [
-        "Free"
-      ],
-      "color": "brown",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "brown"
     },
     {
       "name": "Wernigerode-Blankenburger Eisenbahn",
       "abbrev": "WBE",
-      "tokens": [
-        "Free"
-      ],
-      "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "black"
     },
     {
       "name": "Quedlinburger Lokalbahn",
       "abbrev": "QLB",
-      "tokens": [
-        "Free"
-      ],
-      "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "orange"
     },
     {
       "name": "Madgeburger-Halberstädter Eisenbahn",
       "abbrev": "MHE",
-      "tokens": [
-        "Free"
-      ],
-      "color": "purple",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "purple"
     }
   ],
   "trains": [
@@ -285,38 +177,38 @@
   "privates": [
     {
       "name": "Schuylkill Valley",
-      "price": "$20",
-      "revenue": "$5",
+      "price": 20,
+      "revenue": 5,
       "description": ""
     },
     {
       "name": "Champlain & St.Lawrence",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
       "description": "A corporation owning the C&StL may lay a tile on the C&StL's hex even if this hex is not connected to the corporations's railhead. This free tile placement is in addition to the corporation's normal tile placement - for this turn only the corporation may play two tiles. The tile played on the C&StL hex does not have to connect to any existing adjacent track."
     },
     {
       "name": "Delaware & Hudson",
-      "price": "$70",
-      "revenue": "$15",
+      "price": 70,
+      "revenue": 15,
       "description": "A corporation owning the Delaware & Hudson may establish a railhead on the D&H hex by laying a station tile and a token. The station does not have to be connected to the remainder of the corporation's route. The tile laid is the owning corporation's one tile placement for the turn. Removal of the mountain costs $120 as usual but there is no charge for laying the token. Placing the token is not required, but if placed in a future turn, it must be paid for. Other corporations may place a tile here subject to the ordinary rules."
     },
     {
       "name": "Mohawk & Hudson",
-      "price": "$110",
-      "revenue": "$20",
+      "price": 110,
+      "revenue": 20,
       "description": "A player owning the M&H may exhange it for a 10% share of the NYC provided he does not already hold 60% of the NYC stock and there is NYC stock available in the Bank or the Pool. The exchange may be made during the player's turn of a stock round or between the turns of other players or corporations in either stock or operating rounds. This action closes the M&H."
     },
     {
       "name": "Camden & Amboy",
-      "price": "$160",
-      "revenue": "$25",
+      "price": 160,
+      "revenue": 25,
       "description": "The initial purchaser of the C&A immediately receives a 10% share of PRR stock without further payment. This action does not close the C&A. The PRR corporation will not be running at this point, but the stock may be retained or sold subject to the ordinary rules of the game."
     },
     {
       "name": "Baltimore & Ohio",
-      "price": "$220",
-      "revenue": "$30",
+      "price": 220,
+      "revenue": 30,
       "description": "The owner of the B&O private company immediately receives the President's certificate of the B&O corporation without further payment. The B&O private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the B&O corporation. When the B&O corporation purchases its first train the private company is closed down."
     }
   ],
@@ -512,7 +404,7 @@
       {
         "color": "plain",
         "hexes": [
-          "C18"
+          "B18"
         ]
       },
       {
@@ -574,7 +466,7 @@
           ]
         },
         "hexes": [
-          "B9"
+          "A9"
         ]
       },
       {
@@ -627,7 +519,7 @@
           ]
         },
         "hexes": [
-          "B13"
+          "A13"
         ]
       },
       {
@@ -636,7 +528,7 @@
           "cost": "50M"
         },
         "hexes": [
-          "B15"
+          "A15"
         ]
       },
       {
@@ -652,13 +544,13 @@
           {
             "label": "HBE",
             "width": 15,
-            "token": "red",
+            "color": "red",
             "angle": 60,
             "percent": 0.75
           }
         ],
         "hexes": [
-          "B17"
+          "A17"
         ]
       },
       {
@@ -704,7 +596,7 @@
           }
         ],
         "hexes": [
-          "B19"
+          "A19"
         ]
       },
       {
@@ -747,7 +639,7 @@
           ]
         },
         "hexes": [
-          "C4"
+          "B4"
         ]
       },
       {
@@ -781,7 +673,7 @@
           }
         ],
         "hexes": [
-          "C6"
+          "B6"
         ]
       },
       {
@@ -800,21 +692,14 @@
         ],
         "tokens": [
           {
-            "label": "NWE",
-            "width": 15,
-            "token": "green",
+            "company": "NWE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "C8"
+          "B8"
         ]
       },
       {
@@ -826,27 +711,16 @@
             "gauge": "line"
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "mountain"
-          },
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "tokens": [
           {
-            "label": "WBE",
-            "width": 15,
-            "token": "black",
+            "company": "WBE",
+            "destination": true,
             "angle": 300,
             "percent": 0.7
           }
         ],
         "hexes": [
-          "C10"
+          "B10"
         ]
       },
       {
@@ -864,27 +738,16 @@
             "gauge": "line"
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "mountain"
-          },
-          {
-            "side": 6,
-            "color": "mountain"
-          }
-        ],
         "tokens": [
           {
-            "label": "WBE",
-            "width": 15,
-            "token": "black",
+            "company": "WBE",
+            "destination": true,
             "angle": 300,
             "percent": 0.7
           }
         ],
         "hexes": [
-          "C12"
+          "B12"
         ]
       },
       {
@@ -906,27 +769,16 @@
             "gauge": "line"
           }
         ],
-        "borders": [
-          {
-            "side": 6,
-            "color": "mountain"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "tokens": [
           {
-            "label": "WBE",
-            "width": 15,
-            "token": "black",
+            "company": "WBE",
+            "destination": true,
             "angle": 300,
             "percent": 0.7
           }
         ],
         "hexes": [
-          "C14"
+          "B14"
         ]
       },
       {
@@ -947,12 +799,6 @@
             }
           }
         ],
-        "borders": [
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "track": [
           {
             "gauge": "narrow",
@@ -968,7 +814,7 @@
           }
         ],
         "hexes": [
-          "C16"
+          "B16"
         ]
       },
       {
@@ -980,7 +826,7 @@
           }
         ],
         "hexes": [
-          "C20"
+          "B20"
         ]
       },
       {
@@ -1007,7 +853,7 @@
           "percent": 0.5
         },
         "hexes": [
-          "D5"
+          "C5"
         ]
       },
       {
@@ -1032,23 +878,16 @@
           "angle": 300,
           "percent": 0.5
         },
-        "borders": [
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "tokens": [
           {
-            "label": "NWE",
-            "width": 15,
-            "token": "green",
+            "company": "NWE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
         ],
         "hexes": [
-          "D7"
+          "C7"
         ]
       },
       {
@@ -1117,7 +956,7 @@
           }
         ],
         "hexes": [
-          "D9"
+          "C9"
         ]
       },
       {
@@ -1145,22 +984,8 @@
           "angle": 300,
           "percent": 0.5
         },
-        "borders": [
-          {
-            "side": 1,
-            "color": "mountain"
-          },
-          {
-            "side": 2,
-            "color": "mountain"
-          },
-          {
-            "side": 3,
-            "color": "mountain"
-          }
-        ],
         "hexes": [
-          "D11"
+          "C11"
         ]
       },
       {
@@ -1168,35 +993,28 @@
         "industries": [
           {
             "top": "5",
-            "bottom": "10"
+            "bottom": "10",
+            "angle": 60,
+            "percent": 0.5
           }
         ],
         "centerTowns": [
           {
             "name": {
-              "name": "Braunesurnpf"
-            }
+              "name": "Braunesurnpf",
+              "reverse": true
+            },
+            "angle": 150,
+            "percent": 0.5
           }
         ],
         "mountain": {
-          "cost": "150M"
+          "cost": "150M",
+          "angle": 300,
+          "percent": 0.5
         },
-        "borders": [
-          {
-            "side": 2,
-            "color": "mountain"
-          },
-          {
-            "side": 3,
-            "color": "mountain"
-          },
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "D13"
+          "C13"
         ]
       },
       {
@@ -1287,7 +1105,7 @@
           }
         ],
         "hexes": [
-          "D15"
+          "C15"
         ]
       },
       {
@@ -1299,26 +1117,14 @@
             }
           }
         ],
-        "borders": [
-          {
-            "side": 1,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "D17"
+          "C17"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "D19"
+          "C19"
         ]
       },
       {
@@ -1329,14 +1135,8 @@
             "side": 6
           }
         ],
-        "borders": [
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "D21"
+          "C21"
         ]
       },
       {
@@ -1409,7 +1209,7 @@
           }
         ],
         "hexes": [
-          "E4"
+          "D4"
         ]
       },
       {
@@ -1434,23 +1234,16 @@
           "angle": 300,
           "percent": 0.5
         },
-        "borders": [
-          {
-            "side": 1,
-            "color": "offboard"
-          }
-        ],
         "tokens": [
           {
-            "label": "NWE",
-            "width": 15,
-            "token": "green",
+            "company": "NWE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
         ],
         "hexes": [
-          "E6"
+          "D6"
         ]
       },
       {
@@ -1473,23 +1266,13 @@
             "percent": 0.5
           }
         ],
-        "borders": [
-          {
-            "side": 4,
-            "color": "mountain"
-          },
-          {
-            "side": 3,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "100M",
           "angle": 300,
           "percent": 0.5
         },
         "hexes": [
-          "E8"
+          "D8"
         ]
       },
       {
@@ -1512,69 +1295,31 @@
             "percent": 0.5
           }
         ],
-        "borders": [
-          {
-            "side": 1,
-            "color": "mountain"
-          },
-          {
-            "side": 4,
-            "color": "mountain"
-          },
-          {
-            "side": 2,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "100M",
           "angle": 300,
           "percent": 0.5
         },
         "hexes": [
-          "E10"
+          "D10"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "mountain"
-          },
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "100M"
         },
         "hexes": [
-          "E12"
+          "D12"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 3,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "150M"
         },
         "hexes": [
-          "E14"
+          "D14"
         ]
       },
       {
@@ -1589,23 +1334,13 @@
             "percent": 0.5
           }
         ],
-        "borders": [
-          {
-            "side": 2,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "50M",
           "angle": 300,
           "percent": 0.5
         },
         "hexes": [
-          "E16"
+          "D16"
         ]
       },
       {
@@ -1633,12 +1368,6 @@
             "percent": 0.725
           }
         ],
-        "borders": [
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "track": [
           {
             "side": 1,
@@ -1654,7 +1383,7 @@
           }
         ],
         "hexes": [
-          "E18"
+          "D18"
         ]
       },
       {
@@ -1727,7 +1456,7 @@
           }
         ],
         "hexes": [
-          "E20"
+          "D20"
         ]
       },
       {
@@ -1752,27 +1481,16 @@
           "angle": 300,
           "percent": 0.5
         },
-        "borders": [
-          {
-            "side": 3,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "tokens": [
           {
-            "label": "SHE",
-            "width": 15,
-            "token": "yellow",
+            "company": "SHE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
         ],
         "hexes": [
-          "F3"
+          "E3"
         ]
       },
       {
@@ -1804,20 +1522,6 @@
             "percent": 0.6
           }
         ],
-        "borders": [
-          {
-            "side": 6,
-            "color": "mountain"
-          },
-          {
-            "side": 2,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "track": [
           {
             "side": 1,
@@ -1833,7 +1537,7 @@
           }
         ],
         "hexes": [
-          "F5"
+          "E5"
         ]
       },
       {
@@ -1852,12 +1556,6 @@
           "border": true,
           "cost": "50M"
         },
-        "borders": [
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "industries": [
           {
             "top": "11",
@@ -1894,7 +1592,7 @@
           }
         ],
         "hexes": [
-          "F7"
+          "E7"
         ]
       },
       {
@@ -1909,19 +1607,13 @@
             "percent": 0.5
           }
         ],
-        "borders": [
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "100M",
           "angle": 300,
           "percent": 0.5
         },
         "hexes": [
-          "F9"
+          "E9"
         ]
       },
       {
@@ -1990,7 +1682,7 @@
           "size": "tiny"
         },
         "hexes": [
-          "F11"
+          "E11"
         ]
       },
       {
@@ -2068,17 +1760,11 @@
           ]
         },
         "hexes": [
-          "F15"
+          "E15"
         ]
       },
       {
         "color": "gray",
-        "borders": [
-          {
-            "side": 1,
-            "color": "offboard"
-          }
-        ],
         "track": [
           {
             "side": 1,
@@ -2086,21 +1772,11 @@
           }
         ],
         "hexes": [
-          "F17"
+          "E17"
         ]
       },
       {
         "color": "gray",
-        "borders": [
-          {
-            "side": 3,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "track": [
           {
             "side": 1,
@@ -2112,7 +1788,7 @@
           }
         ],
         "hexes": [
-          "F19"
+          "E19"
         ]
       },
       {
@@ -2157,15 +1833,14 @@
         ],
         "tokens": [
           {
-            "label": "SHE",
-            "width": 15,
-            "token": "yellow",
+            "company": "SHE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
         ],
         "hexes": [
-          "G2"
+          "F2"
         ]
       },
       {
@@ -2238,7 +1913,7 @@
           }
         ],
         "hexes": [
-          "G4"
+          "F4"
         ]
       },
       {
@@ -2301,7 +1976,7 @@
           }
         ],
         "hexes": [
-          "G6"
+          "F6"
         ]
       },
       {
@@ -2309,14 +1984,8 @@
         "mountain": {
           "cost": "100M"
         },
-        "borders": [
-          {
-            "side": 1,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "G8"
+          "F8"
         ]
       },
       {
@@ -2324,14 +1993,8 @@
         "mountain": {
           "cost": "150M"
         },
-        "borders": [
-          {
-            "side": 3,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "G10"
+          "F10"
         ]
       },
       {
@@ -2346,23 +2009,13 @@
             "percent": 0.5
           }
         ],
-        "borders": [
-          {
-            "side": 2,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "50M",
           "angle": 300,
           "percent": 0.5
         },
         "hexes": [
-          "G12"
+          "F12"
         ]
       },
       {
@@ -2377,23 +2030,13 @@
             "percent": 0.5
           }
         ],
-        "borders": [
-          {
-            "side": 3,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "50M",
           "angle": 300,
           "percent": 0.5
         },
         "hexes": [
-          "G14"
+          "F14"
         ]
       },
       {
@@ -2408,34 +2051,22 @@
             "percent": 0.5
           }
         ],
-        "borders": [
-          {
-            "side": 2,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "100M",
           "angle": 300,
           "percent": 0.5
         },
         "hexes": [
-          "G16"
+          "F16"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "150M"
         },
         "hexes": [
-          "G18"
+          "F18"
         ]
       },
       {
@@ -2507,7 +2138,7 @@
           }
         ],
         "hexes": [
-          "G20"
+          "F20"
         ]
       },
       {
@@ -2520,29 +2151,11 @@
           }
         ],
         "hexes": [
-          "H1"
+          "G1"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "mountain"
-          },
-          {
-            "side": 3,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "mountain": {
           "cost": "100M",
           "angle": 90,
@@ -2557,14 +2170,13 @@
         ],
         "tokens": [
           {
-            "label": "KEZ",
-            "width": 15,
-            "token": "brown",
+            "company": "KEZ",
+            "destination": true,
             "percent": 0.7
           }
         ],
         "hexes": [
-          "H3"
+          "G3"
         ]
       },
       {
@@ -2572,36 +2184,12 @@
         "mountain": {
           "cost": "150M"
         },
-        "borders": [
-          {
-            "side": 2,
-            "color": "offboard"
-          },
-          {
-            "side": 3,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "H5"
+          "G5"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "offboard"
-          },
-          {
-            "side": 5,
-            "color": "mountain"
-          }
-        ],
         "mountain": {
           "cost": "100M",
           "angle": 60,
@@ -2616,15 +2204,14 @@
         ],
         "tokens": [
           {
-            "label": "NWE",
-            "width": 15,
-            "token": "green",
+            "company": "NWE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
         ],
         "hexes": [
-          "H7"
+          "G7"
         ]
       },
       {
@@ -2667,7 +2254,7 @@
           }
         ],
         "hexes": [
-          "H9"
+          "G9"
         ]
       },
       {
@@ -2675,14 +2262,8 @@
         "mountain": {
           "cost": "100M"
         },
-        "borders": [
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "H11"
+          "G11"
         ]
       },
       {
@@ -2747,7 +2328,7 @@
           }
         ],
         "hexes": [
-          "H13"
+          "G13"
         ]
       },
       {
@@ -2755,14 +2336,8 @@
         "mountain": {
           "cost": "150M"
         },
-        "borders": [
-          {
-            "side": 1,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "H15"
+          "G15"
         ]
       },
       {
@@ -2773,12 +2348,6 @@
               "name": "Alexisbad",
               "offset": 40
             }
-          }
-        ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "offboard"
           }
         ],
         "mountain": {
@@ -2810,7 +2379,7 @@
           }
         ],
         "hexes": [
-          "H17"
+          "G17"
         ]
       },
       {
@@ -2820,16 +2389,6 @@
           "percent": 0.3333,
           "cost": "150M"
         },
-        "borders": [
-          {
-            "side": 3,
-            "color": "offboard"
-          },
-          {
-            "side": 6,
-            "color": "offboard"
-          }
-        ],
         "track": [
           {
             "type": "gentle",
@@ -2839,15 +2398,14 @@
         ],
         "tokens": [
           {
-            "label": "GHE",
-            "width": 15,
-            "token": "blue",
+            "company": "GHE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
         ],
         "hexes": [
-          "H19"
+          "G19"
         ]
       },
       {
@@ -2926,7 +2484,7 @@
           }
         ],
         "hexes": [
-          "I2"
+          "H2"
         ]
       },
       {
@@ -3007,26 +2565,16 @@
           }
         ],
         "hexes": [
-          "I4"
+          "H4"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 6,
-            "color": "offboard"
-          },
-          {
-            "side": 2,
-            "color": "mountain"
-          }
-        ],
         "industries": [
           {
             "top": "8",
             "bottom": "20",
-            "angle": 150,
+            "angle": 120,
             "percent": 0.667
           }
         ],
@@ -3052,15 +2600,14 @@
         },
         "tokens": [
           {
-            "label": "NWE",
-            "width": 15,
-            "token": "green",
+            "company": "NWE",
+            "destination": true,
             "angle": 240,
             "percent": 0.75
           }
         ],
         "hexes": [
-          "I8"
+          "H8"
         ]
       },
       {
@@ -3068,14 +2615,8 @@
         "mountain": {
           "cost": "150M"
         },
-        "borders": [
-          {
-            "side": 3,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "I12"
+          "H12"
         ]
       },
       {
@@ -3103,14 +2644,8 @@
           "angle": 300,
           "percent": 0.5
         },
-        "borders": [
-          {
-            "side": 2,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "I14"
+          "H14"
         ]
       },
       {
@@ -3138,14 +2673,8 @@
           "angle": 300,
           "percent": 0.5
         },
-        "borders": [
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "hexes": [
-          "I16"
+          "H16"
         ]
       },
       {
@@ -3227,21 +2756,11 @@
           }
         ],
         "hexes": [
-          "I18"
+          "H18"
         ]
       },
       {
         "color": "gray",
-        "borders": [
-          {
-            "side": 2,
-            "color": "offboard"
-          },
-          {
-            "side": 4,
-            "color": "offboard"
-          }
-        ],
         "track": [
           {
             "side": 2,
@@ -3249,7 +2768,7 @@
           }
         ],
         "hexes": [
-          "J5"
+          "I5"
         ]
       },
       {
@@ -3328,8 +2847,38 @@
           }
         ],
         "hexes": [
-          "J7"
+          "I7"
         ]
+      }
+    ],
+    "borders": [
+      {
+        "color": "mountain",
+        "coords": ["C5p1", "C5p2"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["D10p2", "D10p3"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["D10p5", "D10p6"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["F2p5", "F2p6", "F2p1"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["E5p1", "E5p2"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["H8p3", "H8p4"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["C11p2", "C11p3", "C11p4", "C13p3", "C13p4", "C13p5"]
       }
     ]
   }

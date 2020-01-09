@@ -7,9 +7,8 @@
     "titleY": 500,
     "titleX": 200,
     "titleRotate": -90,
-    "extraTokens": 3,
-    "extraHomeTokens": 1,
-    "currency": "ARS"
+    "extraStationTokens": 1,
+    "currency": "$#"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/180204/1857"
@@ -22,213 +21,104 @@
     "x2"
   ],
   "ipo": true,
-  "bank": "$9,000",
+  "bank": 9000,
   "players": [
     {
       "number": 3,
       "certLimit": 20,
-      "capital": "$800"
+      "capital": 800
     },
     {
       "number": 4,
       "certLimit": 16,
-      "capital": "$600"
+      "capital": 600
     },
     {
       "number": 5,
       "certLimit": 13,
-      "capital": "$480"
+      "capital": 480
     },
     {
       "number": 6,
       "certLimit": 11,
-      "capital": "$400"
+      "capital": 400
     }
   ],
+  "tokenTypes": {
+    "three": [40, 100, 100],
+    "two": [40, 100],
+    "one": [40]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
+    {
+      "name": "Buenos Aires Great Southern Railway",
+      "abbrev": "BAS",
+      "color": "green",
+      "tokens": "three"
+    },
     {
       "name": "Argentine Great Western Railway",
       "abbrev": "AGW",
-      "tokens": [
-        "$40",
-        "$100",
-        "$100"
-      ],
       "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
-    },
-    {
-      "name": "Central Argentine Railway",
-      "abbrev": "CA",
-      "tokens": [
-        "$40",
-        "$100"
-      ],
-      "color": "purple",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Central Cordoba Railway",
       "abbrev": "CC",
-      "tokens": [
-        "$40",
-        "$100",
-        "$100"
-      ],
       "color": "brown",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
-    },
-    {
-      "name": "Bahia Blanca & Northwest Railway",
-      "abbrev": "BBN",
-      "tokens": [
-        "$40"
-      ],
-      "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
-    },
-    {
-      "name": "North Central Argentine Railway",
-      "abbrev": "NCA",
-      "tokens": [
-        "$40",
-        "$100"
-      ],
-      "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
-    },
-    {
-      "name": "Santa Fe Railway",
-      "abbrev": "SF",
-      "tokens": [
-        "$40"
-      ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
-    },
-    {
-      "name": "Buenos Aires Great Southern Railway",
-      "abbrev": "BAS",
-      "tokens": [
-        "$40",
-        "$100",
-        "$100"
-      ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Buenos Aires Central Railway",
       "abbrev": "BAC",
-      "tokens": [
-        "$40",
-        "$100"
-      ],
       "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
+    },
+    {
+      "name": "Central Argentine Railway",
+      "abbrev": "CA",
+      "color": "purple",
+      "tokens": "two"
+    },
+    {
+      "name": "North Central Argentine Railway",
+      "abbrev": "NCA",
+      "color": "black",
+      "tokens": "two"
+    },
+    {
+      "name": "Bahia Blanca & Northwest Railway",
+      "abbrev": "BBN",
+      "color": "orange",
+      "tokens": "one"
+    },
+    {
+      "name": "Santa Fe Railway",
+      "abbrev": "SF",
+      "color": "red",
+      "tokens": "one"
     }
   ],
   "trains": [
     {
       "name": "2",
       "quantity": 5,
-      "price": "$80",
+      "price": 80,
       "color": "yellow",
       "info": [
         {
@@ -240,7 +130,7 @@
     {
       "name": "3",
       "quantity": 4,
-      "price": "$180",
+      "price": 180,
       "color": "green",
       "info": [
         {
@@ -252,7 +142,7 @@
     {
       "name": "4",
       "quantity": 3,
-      "price": "$300",
+      "price": 300,
       "color": "green",
       "info": [
         {
@@ -264,7 +154,7 @@
     {
       "name": "5",
       "quantity": 2,
-      "price": "$450",
+      "price": 450,
       "color": "brown",
       "info": [
         {
@@ -276,7 +166,7 @@
     {
       "name": "6",
       "quantity": 2,
-      "price": "$630",
+      "price": 630,
       "color": "brown",
       "info": [
         {
@@ -288,7 +178,7 @@
     {
       "name": "D",
       "quantity": 12,
-      "price": "$1100",
+      "price": 1100,
       "color": "brown",
       "description": "Cost $800 when trading in a 4T, 5T or 6T",
       "info": [
@@ -302,38 +192,44 @@
   "privates": [
     {
       "name": "Camino de Hierro de Buenos Aires al Oeste",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
+      "hex": "G16",
       "description": "Reserves the Camino de Hierro de Buenos Aires al Oeste hex (G16). Only the owning corporation is permitted to lay this track. This can be purchased by a corporation during the yellow phase. Closes when the first 5 Train is purchased."
     },
     {
       "name": "Saint Sebastian Trading Company",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
+      "icon": "share",
       "description": "Trade for one share at any time, this action closes the company. This trade cannot allow you to own more than 60% of a corporation. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if owned by a corporation."
     },
     {
       "name": "Saint Pedro Shipping Company",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
+      "hex": "E20",
       "description": "The owning corporation increases their revenue at Bahia Blanco (E20) by $10 for all runs. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
       "name": "Saint Barbara Mining Company",
-      "price": "$40",
-      "revenue": "$10",
-      "description": "The owning corporation doubles their revenue at Cordoba (D11) once per run. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
+      "price": 40,
+      "revenue": 10,
+      "hex": "D11",
+      "description": "The owning corporation doubles their revenue at Cordoba (D11) for ONE run to or through Cordoba. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
       "name": "Saint Zolius Land Company",
-      "price": "$40",
-      "revenue": "$10",
+      "price": 40,
+      "revenue": 10,
+      "token": { "color": "black", "label": "Free" },
       "description": "The owning corporation may place one token at no cost, this action closes the company. This must follow normal placement rules. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {
-      "name": "Saint Dominic Road Company",
-      "price": "$40",
-      "revenue": "$10",
+      "name": "Saint Dominic de la Calzada Company",
+      "price": 40,
+      "revenue": 10,
+      "tile": "8",
       "description": "The owning corporation may lay or upgrade one track in addition to their normal track action, this action closes the company. Closes when the first 5 Train is purchased."
     }
   ],
@@ -342,12 +238,14 @@
       "name": "2",
       "limit": "4",
       "number": "5",
+      "price": 80,
       "tiles": "yellow"
     },
     {
       "name": "3",
       "limit": "4",
       "number": "4",
+      "price": 180,
       "tiles": "green",
       "notes": "Private companies may be purchased"
     },
@@ -355,6 +253,7 @@
       "name": "4",
       "rust": "2",
       "limit": "3",
+      "price": 300,
       "number": "3",
       "tiles": "green"
     },
@@ -362,6 +261,7 @@
       "name": "5",
       "limit": "2",
       "number": "2",
+      "price": 450,
       "tiles": "brown",
       "notes": "Private companies are closed"
     },
@@ -369,6 +269,7 @@
       "name": "6",
       "limit": "2",
       "number": "2",
+      "price": 630,
       "rust": "3",
       "tiles": "brown",
       "notes": "D Trains may be purchased"
@@ -377,6 +278,7 @@
       "name": "D",
       "limit": "2",
       "number": "∞",
+      "price": 1100,
       "rust": "4",
       "tiles": "brown"
     }
@@ -560,7 +462,7 @@
           "label": "60",
           "legend": 0
         },
-        66,
+        67,
         71,
         {
           "label": "76",
@@ -641,7 +543,7 @@
           "legend": 0
         },
         63,
-        67,
+        66,
         69,
         {
           "label": "70",
@@ -666,7 +568,7 @@
           "label": "60",
           "legend": 0
         },
-        67,
+        65,
         {
           "label": "68",
           "arrow": "up"
@@ -786,918 +688,630 @@
     "69": 1,
     "70": 1
   },
-  "map": [
-    {
-      "name": "Original Companies",
-      "hexes": [
-        {
-          "color": "plain",
-          "hexes": [
-            "C2",
-            "C4",
-            "C6",
-            "C14",
-            "D5",
-            "D9",
-            "D15",
-            "D17",
-            "D19",
-            "E2",
-            "E4",
-            "E6",
-            "E8",
-            "E12",
-            "E14",
-            "E18",
-            "F3",
-            "F5",
-            "F7",
-            "F9",
-            "F11",
-            "F13",
-            "F15",
-            "F19",
-            "G2",
-            "G10",
-            "G14",
-            "G18",
-            "H3",
-            "H5",
-            "H7",
-            "H15",
-            "H19"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Tucuman"
-              }
-            }
-          ],
-          "hexes": [
-            "D3"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Resistencia & Carrientes"
-              }
-            }
-          ],
-          "hexes": [
-            "G4"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Oliviarria"
-              }
-            }
-          ],
-          "hexes": [
-            "E16"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Tandil"
-              }
-            }
-          ],
-          "hexes": [
-            "F17"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Bahia Blanca"
-              },
-              "companies": [
-                {
-                  "label": "BBN",
-                  "color": "orange"
-                }
-              ]
-            }
-          ],
-          "hexes": [
-            "E20"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Santiago del Estero"
-              },
-              "companies": [
-                {
-                  "label": "NCA",
-                  "color": "black"
-                }
-              ]
-            }
-          ],
-          "hexes": [
-            "D7"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Cordoba"
-              },
-              "companies": [
-                {
-                  "label": "CC",
-                  "color": "brown"
-                }
-              ]
-            }
-          ],
-          "hexes": [
-            "D11"
-          ]
-        },
-        {
-          "color": "plain",
-          "centerTowns": [
-            {}
-          ],
-          "hexes": [
-            "E10",
-            "G6",
-            "H13"
-          ]
-        },
-        {
-          "color": "plain",
-          "centerTowns": [
-            {
-              "angle": 90,
-              "percent": 0.4
-            },
-            {
-              "angle": 270,
-              "percent": 0.4
-            }
-          ],
-          "hexes": [
-            "D13"
-          ]
-        },
-        {
-          "color": "plain",
-          "companies": [
-            {
-              "label": "CdH",
-              "angle": 180,
-              "percent": 0.5
-            }
-          ],
-          "centerTowns": [
-            {
-              "angle": 90,
-              "percent": 0.4
-            },
-            {
-              "angle": 270,
-              "percent": 0.4
-            }
-          ],
-          "hexes": [
-            "G16"
-          ]
-        },
-        {
-          "color": "offboard",
-          "offBoardTrack": [
-            {
-              "side": 6
-            }
-          ],
-          "offBoardRevenue": {
+  "map": {
+    "hexes": [
+      {
+        "color": "plain",
+        "hexes": [
+          "C2",
+          "C4",
+          "C6",
+          "C14",
+          "D5",
+          "D9",
+          "D15",
+          "D17",
+          "D19",
+          "E2",
+          "E4",
+          "E6",
+          "E8",
+          "E12",
+          "E14",
+          "E18",
+          "F3",
+          "F5",
+          "F7",
+          "F9",
+          "F11",
+          "F13",
+          "F15",
+          "F19",
+          "G2",
+          "G10",
+          "G14",
+          "G18",
+          "H3",
+          "H5",
+          "H7",
+          "H15",
+          "H19"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
             "name": {
-              "name": "Salta"
+              "name": "Tucuman"
+            }
+          }
+        ],
+        "hexes": [
+          "D3"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Resistencia & Carrientes"
+            }
+          }
+        ],
+        "hexes": [
+          "G4"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Oliviarria"
+            }
+          }
+        ],
+        "hexes": [
+          "E16"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Tandil"
+            }
+          }
+        ],
+        "hexes": [
+          "F17"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Bahia Blanca"
             },
-            "revenues": [
-              {
-                "color": "yellow",
-                "cost": "20"
-              },
-              {
-                "color": "brown",
-                "cost": "60"
-              }
-            ]
+            "companies": ["BBN"]
+          }
+        ],
+        "hexes": [
+          "E20"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Santiago del Estero"
+            },
+            "companies": ["NCA"]
+          }
+        ],
+        "hexes": [
+          "D7"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Cordoba"
+            },
+            "companies": ["CC"]
+          }
+        ],
+        "hexes": [
+          "D11"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {}
+        ],
+        "hexes": [
+          "E10",
+          "G6",
+          "H13"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": 90,
+            "percent": 0.4
           },
-          "hexes": [
-            "B1"
-          ]
-        },
-        {
-          "color": "gray",
-          "track": [
-            {
-              "type": "sharp",
-              "side": 1
-            }
-          ],
-          "hexes": [
-            "D1"
-          ]
-        },
-        {
-          "color": "plain",
-          "terrain": [
-            {
-              "type": "mountain",
-              "cost": "$120",
-              "size": "large"
-            }
-          ],
-          "hexes": [
-            "B11"
-          ]
-        },
-        {
-          "color": "plain",
-          "terrain": [
-            {
-              "type": "mountain",
-              "cost": "$80",
-              "size": "medium"
-            }
-          ],
-          "hexes": [
-            "C12"
-          ]
-        },
-        {
-          "color": "plain",
-          "terrain": [
-            {
-              "type": "mountain",
-              "cost": "$40"
-            }
-          ],
-          "hexes": [
-            "B15",
-            "C8",
-            "C10"
-          ]
-        },
-        {
-          "color": "offboard",
-          "track": [
-            {
-              "type": "offboard",
-              "side": 6
-            }
-          ],
-          "removeBorders": [
-            1
-          ],
-          "hexes": [
-            "A12"
-          ]
-        },
-        {
-          "color": "offboard",
-          "track": [
-            {
-              "type": "offboard",
-              "side": 5
-            }
-          ],
-          "offBoardRevenue": {
+          {
+            "angle": 270,
+            "percent": 0.4
+          }
+        ],
+        "hexes": [
+          "D13"
+        ]
+      },
+      {
+        "color": "plain",
+        "companies": [
+          {
+            "label": "CdH",
             "angle": 180,
-            "percent": 1,
+            "percent": 0.5
+          }
+        ],
+        "centerTowns": [
+          {
+            "angle": 90,
+            "percent": 0.4
+          },
+          {
+            "angle": 270,
+            "percent": 0.4
+          }
+        ],
+        "hexes": [
+          "G16"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardTrack": [
+          {
+            "side": 6
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Salta"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            }
+          ]
+        },
+        "hexes": [
+          "B1"
+        ]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 1
+          }
+        ],
+        "hexes": [
+          "D1"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 120,
+            "size": "large"
+          }
+        ],
+        "hexes": [
+          "B11"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 80,
+            "size": "medium"
+          }
+        ],
+        "hexes": [
+          "C12"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 40
+          }
+        ],
+        "hexes": [
+          "B15",
+          "C8",
+          "C10"
+        ]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "removeBorders": [
+          1
+        ],
+        "hexes": [
+          "A12"
+        ]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": 180,
+          "percent": 1,
+          "name": {
+            "name": "Chile"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "0"
+            },
+            {
+              "color": "brown",
+              "cost": "70"
+            }
+          ]
+        },
+        "removeBorders": [
+          4
+        ],
+        "hexes": [
+          "A14"
+        ]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 4
+          }
+        ],
+        "hexes": [
+          "B17"
+        ]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 4
+          }
+        ],
+        "hexes": [
+          "C18"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardTrack": [
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Patagonia"
+          },
+          "reverse": true,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "10"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            }
+          ]
+        },
+        "hexes": [
+          "D21"
+        ]
+      },
+      {
+        "color": "water",
+        "offBoardTrack": [
+          {
+            "side": 4
+          }
+        ],
+        "icons": [
+          {
+            "type": "port",
+            "percent": 0.5
+          }
+        ],
+        "offBoardRevenue": {
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "30"
+            }
+          ]
+        },
+        "hexes": [
+          "E22"
+        ]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 3
+          }
+        ],
+        "hexes": [
+          "F21"
+        ]
+      },
+      {
+        "color": "gray",
+        "cities": [
+          {
+            "angle": 180,
+            "percent": 0.1,
             "name": {
-              "name": "Chile"
-            },
-            "revenues": [
-              {
-                "color": "yellow",
-                "cost": "0"
-              },
-              {
-                "color": "brown",
-                "cost": "70"
-              }
-            ]
+              "name": "Mar del Plata",
+              "reverse": true
+            }
+          }
+        ],
+        "values": [
+          {
+            "value": 20,
+            "percent": 0.667
+          }
+        ],
+        "track": [
+          {
+            "type": "gentle",
+            "side": 3
           },
-          "removeBorders": [
-            4
-          ],
-          "hexes": [
-            "A14"
-          ]
-        },
-        {
-          "color": "gray",
-          "track": [
-            {
-              "type": "sharp",
-              "side": 4
-            }
-          ],
-          "hexes": [
-            "B17"
-          ]
-        },
-        {
-          "color": "gray",
-          "track": [
-            {
-              "type": "sharp",
-              "side": 4
-            }
-          ],
-          "hexes": [
-            "C18"
-          ]
-        },
-        {
-          "color": "offboard",
-          "offBoardTrack": [
-            {
-              "side": 4
-            },
-            {
-              "side": 5
-            }
-          ],
-          "offBoardRevenue": {
+          {
+            "type": "sharp",
+            "side": 3
+          },
+          {
+            "type": "sharp",
+            "side": 4
+          }
+        ],
+        "hexes": [
+          "G20"
+        ]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "B",
+            "angle": 150,
+            "percent": 0.75
+          }
+        ],
+        "values": [
+          {
+            "value": 30,
+            "angle": 210,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
             "name": {
-              "name": "Patagonia"
+              "name": "Rosario",
+              "reverse": true
             },
-            "reverse": true,
-            "revenues": [
-              {
-                "color": "yellow",
-                "cost": "10"
-              },
-              {
-                "color": "brown",
-                "cost": "40"
-              }
-            ]
+            "companies": ["CA"]
+          }
+        ],
+        "track": [
+          {
+            "side": 2
           },
-          "hexes": [
-            "D21"
-          ]
-        },
-        {
-          "color": "water",
-          "offBoardTrack": [
-            {
-              "side": 4
-            }
-          ],
-          "icons": [
-            {
-              "type": "port",
-              "percent": 0.5
-            }
-          ],
-          "offBoardRevenue": {
-            "revenues": [
-              {
-                "color": "yellow",
-                "cost": "20"
-              },
-              {
-                "color": "brown",
-                "cost": "30"
-              }
-            ]
+          {
+            "side": 4
           },
-          "hexes": [
-            "E22"
-          ]
-        },
-        {
-          "color": "gray",
-          "track": [
-            {
-              "type": "sharp",
-              "side": 3
-            }
-          ],
-          "hexes": [
-            "F21"
-          ]
-        },
-        {
-          "color": "gray",
-          "cities": [
-            {
-              "angle": 180,
-              "percent": 0.1,
-              "name": {
-                "name": "Mar del Plata",
-                "reverse": true
-              }
-            }
-          ],
-          "values": [
-            {
-              "value": 20,
-              "percent": 0.667
-            }
-          ],
-          "track": [
-            {
-              "type": "gentle",
-              "side": 3
+          {
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "G12"
+        ]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "NY",
+            "angle": 270,
+            "percent": 0.667
+          }
+        ],
+        "values": [
+          {
+            "value": 40,
+            "angle": 115,
+            "percent": 0.667
+          }
+        ],
+        "cities": [
+          {
+            "angle": 180,
+            "percent": 0.5,
+            "companies": ["BAC"]
+          },
+          {
+            "angle": 30,
+            "percent": 0.5,
+            "name": {
+              "name": "Buenos Aires",
+              "rotation": 30
             },
-            {
-              "type": "sharp",
-              "side": 3
+            "companies": ["BAS"]
+          }
+        ],
+        "track": [
+          {
+            "type": "stop",
+            "side": 4
+          },
+          {
+            "type": "sharp",
+            "side": 1
+          }
+        ],
+        "hexes": [
+          "H17"
+        ]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "OO",
+            "angle": 210,
+            "percent": 0.667
+          }
+        ],
+        "cities": [
+          {
+            "angle": 120,
+            "percent": 0.5,
+            "name": {
+              "name": "San Juan",
+              "reverse": true
+            }
+          },
+          {
+            "angle": -60,
+            "percent": 0.5
+          }
+        ],
+        "hexes": [
+          "C16"
+        ]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "OO",
+            "angle": 210,
+            "percent": 0.667
+          }
+        ],
+        "cities": [
+          {
+            "angle": 120,
+            "percent": 0.5,
+            "name": {
+              "name": "Parana",
+              "reverse": true
+            }
+          },
+          {
+            "angle": -60,
+            "percent": 0.5,
+            "name": {
+              "name": "Santa Fe"
             },
-            {
-              "type": "sharp",
-              "side": 4
-            }
-          ],
-          "hexes": [
-            "G20"
-          ]
-        },
-        {
-          "color": "yellow",
-          "labels": [
-            {
-              "label": "B",
-              "angle": 150,
-              "percent": 0.75
-            }
-          ],
-          "values": [
-            {
-              "value": 30,
-              "angle": 210,
-              "percent": 0.75
-            }
-          ],
-          "cities": [
-            {
-              "name": {
-                "name": "Rosario",
-                "reverse": true
-              },
-              "companies": [
-                {
-                  "label": "CA",
-                  "color": "purple"
-                }
-              ]
-            }
-          ],
-          "track": [
-            {
-              "side": 2
+            "companies": ["SF"]
+          }
+        ],
+        "hexes": [
+          "G8"
+        ]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "OO",
+            "angle": 210,
+            "percent": 0.667
+          }
+        ],
+        "values": [
+          {
+            "value": 20,
+            "angle": 30,
+            "percent": 0.5
+          }
+        ],
+        "cities": [
+          {
+            "angle": 120,
+            "percent": 0.5
+          },
+          {
+            "angle": -60,
+            "percent": 0.5,
+            "name": {
+              "name": "Mendoza"
             },
-            {
-              "side": 4
-            },
-            {
-              "side": 6
-            }
-          ],
-          "hexes": [
-            "G12"
-          ]
-        },
-        {
-          "color": "yellow",
-          "labels": [
-            {
-              "label": "NY",
-              "angle": 270,
-              "percent": 0.667
-            }
-          ],
-          "values": [
-            {
-              "value": 40,
-              "angle": 115,
-              "percent": 0.667
-            }
-          ],
-          "cities": [
-            {
-              "angle": 180,
-              "percent": 0.5,
-              "companies": [
-                {
-                  "label": "BAC",
-                  "color": "blue"
-                }
-              ]
-            },
-            {
-              "angle": 30,
-              "percent": 0.5,
-              "name": {
-                "name": "Buenos Aires",
-                "rotation": 30
-              },
-              "companies": [
-                {
-                  "label": "BAS",
-                  "color": "green"
-                }
-              ]
-            }
-          ],
-          "track": [
-            {
-              "type": "stop",
-              "side": 4
-            },
-            {
-              "type": "sharp",
-              "side": 1
-            }
-          ],
-          "hexes": [
-            "H17"
-          ]
-        },
-        {
-          "color": "yellow",
-          "labels": [
-            {
-              "label": "OO",
-              "angle": 210,
-              "percent": 0.667
-            }
-          ],
-          "cities": [
-            {
-              "angle": 120,
-              "percent": 0.5,
-              "name": {
-                "name": "San Juan",
-                "reverse": true
-              }
-            },
-            {
-              "angle": -60,
-              "percent": 0.5
-            }
-          ],
-          "hexes": [
-            "C16"
-          ]
-        },
-        {
-          "color": "yellow",
-          "labels": [
-            {
-              "label": "OO",
-              "angle": 210,
-              "percent": 0.667
-            }
-          ],
-          "cities": [
-            {
-              "angle": 120,
-              "percent": 0.5,
-              "name": {
-                "name": "Parana",
-                "reverse": true
-              }
-            },
-            {
-              "angle": -60,
-              "percent": 0.5,
-              "name": {
-                "name": "Santa Fe"
-              },
-              "companies": [
-                {
-                  "label": "SF",
-                  "color": "red"
-                }
-              ]
-            }
-          ],
-          "hexes": [
-            "G8"
-          ]
-        },
-        {
-          "color": "yellow",
-          "labels": [
-            {
-              "label": "OO",
-              "angle": 210,
-              "percent": 0.667
-            }
-          ],
-          "values": [
-            {
-              "value": 20,
-              "angle": 30,
-              "percent": 0.5
-            }
-          ],
-          "cities": [
-            {
-              "angle": 120,
-              "percent": 0.5
-            },
-            {
-              "angle": -60,
-              "percent": 0.5,
-              "name": {
-                "name": "Mendoza"
-              },
-              "companies": [
-                {
-                  "label": "AGW",
-                  "color": "yellow"
-                }
-              ]
-            }
-          ],
-          "track": [
-            {
-              "type": "stop",
-              "side": 6
-            }
-          ],
-          "hexes": [
-            "B13"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "1830 Companies",
-      "copy": 0,
-      "hexes": [
-        {
-          "color": "yellow",
-          "labels": [
-            {
-              "label": "OO",
-              "angle": 210,
-              "percent": 0.667
-            }
-          ],
-          "cities": [
-            {
-              "angle": 120,
-              "percent": 0.5,
-              "name": {
-                "name": "Parana",
-                "reverse": true
-              }
-            },
-            {
-              "angle": -60,
-              "percent": 0.5,
-              "name": {
-                "name": "Santa Fe"
-              },
-              "companies": [
-                {
-                  "label": "B&M",
-                  "color": "brown"
-                }
-              ]
-            }
-          ],
-          "hexes": [
-            "G8"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Bahia Blanca"
-              },
-              "companies": [
-                {
-                  "label": "NYNH",
-                  "color": "orange"
-                }
-              ]
-            }
-          ],
-          "hexes": [
-            "E20"
-          ]
-        },
-        {
-          "color": "yellow",
-          "labels": [
-            {
-              "label": "NY",
-              "angle": 270,
-              "percent": 0.667
-            }
-          ],
-          "values": [
-            {
-              "value": 40,
-              "angle": 115,
-              "percent": 0.667
-            }
-          ],
-          "cities": [
-            {
-              "angle": 180,
-              "percent": 0.5,
-              "companies": [
-                {
-                  "label": "B&O",
-                  "color": "blue"
-                }
-              ]
-            },
-            {
-              "angle": 30,
-              "percent": 0.5,
-              "name": {
-                "name": "Buenos Aires",
-                "rotation": 30
-              },
-              "companies": [
-                {
-                  "label": "PRR",
-                  "color": "green"
-                }
-              ]
-            }
-          ],
-          "track": [
-            {
-              "type": "stop",
-              "side": 4
-            },
-            {
-              "type": "sharp",
-              "side": 1
-            }
-          ],
-          "hexes": [
-            "H17"
-          ]
-        },
-        {
-          "color": "yellow",
-          "labels": [
-            {
-              "label": "OO",
-              "angle": 210,
-              "percent": 0.667
-            }
-          ],
-          "values": [
-            {
-              "value": 20,
-              "angle": 30,
-              "percent": 0.5
-            }
-          ],
-          "cities": [
-            {
-              "angle": 120,
-              "percent": 0.5
-            },
-            {
-              "angle": -60,
-              "percent": 0.5,
-              "name": {
-                "name": "Mendoza"
-              },
-              "companies": [
-                {
-                  "label": "NYC",
-                  "color": "black"
-                }
-              ]
-            }
-          ],
-          "track": [
-            {
-              "type": "stop",
-              "side": 6
-            }
-          ],
-          "hexes": [
-            "B13"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Cordoba"
-              },
-              "companies": [
-                {
-                  "label": "CPR",
-                  "color": "red"
-                }
-              ]
-            }
-          ],
-          "hexes": [
-            "D11"
-          ]
-        },
-        {
-          "color": "yellow",
-          "labels": [
-            {
-              "label": "B",
-              "angle": 150,
-              "percent": 0.75
-            }
-          ],
-          "values": [
-            {
-              "value": 30,
-              "angle": 210,
-              "percent": 0.75
-            }
-          ],
-          "cities": [
-            {
-              "name": {
-                "name": "Rosario",
-                "reverse": true
-              },
-              "companies": [
-                {
-                  "label": "ERIE",
-                  "color": "yellow"
-                }
-              ]
-            }
-          ],
-          "track": [
-            {
-              "side": 2
-            },
-            {
-              "side": 4
-            },
-            {
-              "side": 6
-            }
-          ],
-          "hexes": [
-            "G12"
-          ]
-        },
-        {
-          "color": "plain",
-          "cities": [
-            {
-              "name": {
-                "name": "Santiago del Estero"
-              },
-              "companies": [
-                {
-                  "label": "C&O",
-                  "color": "cyan"
-                }
-              ]
-            }
-          ],
-          "hexes": [
-            "D7"
-          ]
-        }
-      ]
-    }
-  ]
+            "companies": ["AGW"]
+          }
+        ],
+        "track": [
+          {
+            "type": "stop",
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "B13"
+        ]
+      }
+    ]
+  }
 }

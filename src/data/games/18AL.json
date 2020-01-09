@@ -17,24 +17,39 @@
     "Round"
   ],
   "ipo": true,
-  "bank": "$8,000",
+  "bank": 8000,
   "players": [
     {
       "number": 3,
       "certLimit": 25,
-      "capital": "$600"
+      "capital": 600
     },
     {
       "number": 4,
       "certLimit": 12,
-      "capital": "$500"
+      "capital": 500
     },
     {
       "number": 5,
       "certLimit": 10,
-      "capital": "$400"
+      "capital": 400
     }
   ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Louisville & Nashville Railroad",
@@ -45,20 +60,7 @@
         "$100",
         "$100"
       ],
-      "color": "purple",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "purple"
     },
     {
       "name": "Mobile & Ohio Railroad",
@@ -69,20 +71,7 @@
         "$100",
         "$100"
       ],
-      "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "orange"
     },
     {
       "name": "Western Railway of Alabama",
@@ -93,20 +82,7 @@
         "$100",
         "$100"
       ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "red"
     },
     {
       "name": "Alabama, Tennessee & Northern Railroad",
@@ -116,20 +92,7 @@
         "$40",
         "$100"
       ],
-      "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "black"
     },
     {
       "name": "Atlanta, Birmingham & Coast Railroad",
@@ -138,20 +101,7 @@
         "Free",
         "$40"
       ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     },
     {
       "name": "Tennessee, Alabama & Georgia Railway",
@@ -160,20 +110,7 @@
         "Free",
         "$40"
       ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "yellow"
     }
   ],
   "trains": [
@@ -265,28 +202,28 @@
   "privates": [
     {
       "name": "Tuscumbia Railway",
-      "price": "$20",
-      "revenue": "$5"
+      "price": 20,
+      "revenue": 5
     },
     {
       "name": "South & North Alabama Railroad",
-      "price": "$40",
-      "revenue": "$10"
+      "price": 40,
+      "revenue": 10
     },
     {
       "name": "Brown & Sons Lumber Co.",
-      "price": "$70",
-      "revenue": "$15"
+      "price": 70,
+      "revenue": 15
     },
     {
       "name": "Memphis & Charleston Railroad",
-      "price": "$100",
-      "revenue": "$20"
+      "price": 100,
+      "revenue": 20
     },
     {
       "name": "New Decatur Yards",
-      "price": "$120",
-      "revenue": "$20"
+      "price": 120,
+      "revenue": 20
     }
   ],
   "phases": [

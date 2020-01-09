@@ -17,35 +17,62 @@
     "Round"
   ],
   "ipo": true,
-  "bank": "£10,000",
+  "bank": 10000,
   "players": [
     {
       "number": 2,
       "certLimit": 32,
-      "capital": "£1000"
+      "capital": 1000
     },
     {
       "number": 3,
       "certLimit": 21,
-      "capital": "£670"
+      "capital": 670
     },
     {
       "number": 4,
       "certLimit": 16,
-      "capital": "£500"
+      "capital": 500
     }
   ],
+  "tokenTypes": {
+    "default": [
+      "Home",
+      40
+    ],
+    "three": [
+      "Home",
+      40,
+      100
+    ],
+    "four": [
+      "Home",
+      40,
+      100,
+      100
+    ]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Cowes & Newport",
       "abbrev": "C&N",
-      "tokens": [
-        "Home",
-        "£40",
-        "£100",
-        "£100"
-      ],
       "color": "cyan",
+      "tokens": "four",
       "shares": [
         {
           "quantity": 1,
@@ -69,13 +96,8 @@
     {
       "name": "Isle of Wight",
       "abbrev": "IOW",
-      "tokens": [
-        "Home",
-        "£40",
-        "£100",
-        "£100"
-      ],
       "color": "red",
+      "tokens": "four",
       "shares": [
         {
           "quantity": 1,
@@ -99,35 +121,14 @@
     {
       "name": "Isle of Wight, Newport Juntion",
       "abbrev": "IWNJ",
-      "tokens": [
-        "Home",
-        "£40",
-        "£100"
-      ],
       "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Freshwater, Yarmouth & Newport",
       "abbrev": "FYN",
-      "tokens": [
-        "Home",
-        "£40",
-        "£100"
-      ],
       "color": "green",
+      "tokens": "three",
       "shares": [
         {
           "quantity": 1,
@@ -151,32 +152,11 @@
     {
       "name": "Newport, Godshill & St. Lawrence",
       "abbrev": "NGStL",
-      "tokens": [
-        "Home",
-        "£40"
-      ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "yellow"
     },
     {
       "name": "Brading Harbour Improvement & Railway",
       "abbrev": "BHI&R",
-      "tokens": [
-        "Home",
-        "£40"
-      ],
       "color": "pink",
       "shares": [
         {
@@ -201,53 +181,19 @@
     {
       "name": "Shanklin & Chale",
       "abbrev": "S&C",
-      "tokens": [
-        "Home",
-        "£40"
-      ],
-      "color": "purple",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "purple"
     },
     {
       "name": "Ventor, Yarmouth & South Coast",
       "abbrev": "VYSC",
-      "tokens": [
-        "Home",
-        "£40"
-      ],
-      "color": "lime",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "lime"
     }
   ],
   "trains": [
     {
       "name": "2+1",
       "quantity": 5,
-      "price": "£250",
+      "price": 250,
       "color": "yellow",
       "info": [
         {
@@ -259,7 +205,7 @@
     {
       "name": "3+2",
       "quantity": 4,
-      "price": "£300",
+      "price": 300,
       "color": "green",
       "info": [
         {
@@ -271,7 +217,7 @@
     {
       "name": "4+2",
       "quantity": 3,
-      "price": "£350",
+      "price": 350,
       "color": "green",
       "info": [
         {
@@ -283,7 +229,7 @@
     {
       "name": "5+3",
       "quantity": 2,
-      "price": "£400",
+      "price": 400,
       "color": "brown",
       "info": [
         {
@@ -295,7 +241,7 @@
     {
       "name": "6+3",
       "quantity": 2,
-      "price": "£500",
+      "price": 500,
       "color": "brown",
       "info": [
         {
@@ -307,7 +253,7 @@
     {
       "name": "7+4",
       "quantity": 1,
-      "price": "£600",
+      "price": 600,
       "color": "brown",
       "info": [
         {
@@ -319,7 +265,7 @@
     {
       "name": "8+4",
       "quantity": 1,
-      "price": "£700",
+      "price": 700,
       "color": "brown",
       "info": [
         {
@@ -331,7 +277,7 @@
     {
       "name": "9+5",
       "quantity": 6,
-      "price": "£800",
+      "price": 800,
       "color": "brown",
       "info": [
         {
@@ -344,32 +290,37 @@
   "privates": [
     {
       "name": "Brading Harbour Company",
-      "price": "£30",
-      "revenue": "£5",
+      "price": 30,
+      "revenue": 5,
+      "company": "BHI&R",
       "description": "Can be exchanged for a share in the BHI&R pubilc company."
     },
     {
       "name": "Yarmouth Harbour Company",
-      "price": "£50",
-      "revenue": "£10",
+      "price": 50,
+      "revenue": 10,
+      "company": "FYN",
       "description": "Can be exchanged for a share in the FYN public company."
     },
     {
       "name": "Cowes Marina and Harbour",
-      "price": "£90",
-      "revenue": "£20",
+      "price": 90,
+      "revenue": 20,
+      "company": "C&N",
       "description": "Can be exchanged for a share in the C&N public company."
     },
     {
       "name": "Ryde Pier & Shipping Company",
-      "price": "£130",
-      "revenue": "£30",
+      "price": 130,
+      "revenue": 30,
+      "company": "IOW",
       "description": "Can be exchanged for a share in the IOW public company."
     },
     {
       "name": "Fishbourne Ferry Company",
-      "price": "£200",
-      "revenue": "£25",
+      "price": 200,
+      "revenue": 25,
+      "icon": "boat",
       "description": "Not available until the first 6+3 train has been purchased. Closes all other private companies."
     }
   ],
@@ -946,6 +897,7 @@
     "750": 3,
     "751": 3,
     "752": 3,
+    "753": 3,
     "754": 2,
     "755": 2,
     "756": 2,
@@ -1008,28 +960,12 @@
               }
             }
           ],
-          "borders": [
-            {
-              "side": 2,
-              "color": "mountain"
-            }
-          ],
           "hexes": [
             "G1"
           ]
         },
         {
           "color": "plain",
-          "borders": [
-            {
-              "side": 5,
-              "color": "mountain"
-            },
-            {
-              "side": 6,
-              "color": "mountain"
-            }
-          ],
           "labels": [
             {
               "label": "C",
@@ -1044,12 +980,7 @@
               "name": {
                 "name": "Cowes"
               },
-              "companies": [
-                {
-                  "label": "C&N",
-                  "color": "cyan"
-                }
-              ]
+              "companies": ["C&N"]
             }
           ],
           "centerTowns": [
@@ -1129,16 +1060,6 @@
               }
             }
           ],
-          "borders": [
-            {
-              "side": 2,
-              "color": "mountain"
-            },
-            {
-              "side": 3,
-              "color": "mountain"
-            }
-          ],
           "hexes": [
             "G3"
           ]
@@ -1151,12 +1072,7 @@
                 "name": "Ryde",
                 "reverse": true
               },
-              "companies": [
-                {
-                  "label": "IOW",
-                  "color": "red"
-                }
-              ]
+              "companies": ["IOW"]
             }
           ],
           "values": [
@@ -1189,12 +1105,7 @@
               "name": {
                 "name": "Yarmouth"
               },
-              "companies": [
-                {
-                  "label": "FYN",
-                  "color": "green"
-                }
-              ]
+              "companies": ["FYN"]
             }
           ],
           "hexes": [
@@ -1217,12 +1128,6 @@
               "name": {
                 "name": "Cement Mills"
               }
-            }
-          ],
-          "borders": [
-            {
-              "side": 5,
-              "color": "mountain"
             }
           ],
           "hexes": [
@@ -1395,12 +1300,6 @@
         },
         {
           "color": "plain",
-          "borders": [
-            {
-              "side": 1,
-              "color": "mountain"
-            }
-          ],
           "centerTowns": [
             {
               "name": {
@@ -1501,12 +1400,7 @@
               "name": {
                 "name": "Bembridge"
               },
-              "companies": [
-                {
-                  "label": "BHI&R",
-                  "color": "pink"
-                }
-              ]
+              "companies": ["BHI&R"]
             }
           ],
           "hexes": [
@@ -1595,12 +1489,7 @@
               "name": {
                 "name": "Merstone"
               },
-              "companies": [
-                {
-                  "label": "IWNJ",
-                  "color": "black"
-                }
-              ]
+              "companies": ["IWNJ"]
             }
           ],
           "track": [
@@ -1632,12 +1521,6 @@
               "percent": 0.4
             }
           ],
-          "borders": [
-            {
-              "side": 4,
-              "color": "mountain"
-            }
-          ],
           "hexes": [
             "I7"
           ]
@@ -1657,12 +1540,7 @@
                 "name": "Shorwell",
                 "reverse": true
               },
-              "companies": [
-                {
-                  "label": "VYSC",
-                  "color": "lime"
-                }
-              ]
+              "companies": ["VYSC"]
             }
           ],
           "hexes": [
@@ -1684,12 +1562,7 @@
                 "name": "Godshill",
                 "reverse": true
               },
-              "companies": [
-                {
-                  "label": "NGStL",
-                  "color": "yellow"
-                }
-              ]
+              "companies": ["NGStL"]
             }
           ],
           "hexes": [
@@ -1703,12 +1576,6 @@
               "name": {
                 "name": "Shanklin"
               }
-            }
-          ],
-          "borders": [
-            {
-              "side": 1,
-              "color": "mountain"
             }
           ],
           "hexes": [
@@ -1742,12 +1609,6 @@
               "side": 3
             }
           ],
-          "borders": [
-            {
-              "side": 4,
-              "color": "mountain"
-            }
-          ],
           "hexes": [
             "I11"
           ]
@@ -1759,17 +1620,26 @@
               "name": {
                 "name": "Chale"
               },
-              "companies": [
-                {
-                  "label": "S&C",
-                  "color": "purple"
-                }
-              ]
+              "companies": ["S&C"]
             }
           ],
           "hexes": [
             "F12"
           ]
+        }
+      ],
+      "borders": [
+        {
+          "color": "mountain",
+          "coords": ["F2p3", "F2p4", "F2p5", "F4p4"]
+        },
+        {
+          "color": "mountain",
+          "coords": ["I7p2", "I7p3"]
+        },
+        {
+          "color": "mountain",
+          "coords": ["I11p2", "I11p3"]
         }
       ]
     },
@@ -1785,12 +1655,6 @@
               "name": {
                 "name": "Norton Green"
               }
-            }
-          ],
-          "borders": [
-            {
-              "side": 5,
-              "color": "mountain"
             }
           ],
           "hexes": [
@@ -1817,18 +1681,7 @@
               "name": {
                 "name": "Yarmouth"
               },
-              "companies": [
-                {
-                  "label": "FYN",
-                  "color": "green"
-                }
-              ]
-            }
-          ],
-          "borders": [
-            {
-              "side": 2,
-              "color": "mountain"
+              "companies": ["FYN"]
             }
           ],
           "hexes": [
@@ -1840,6 +1693,24 @@
           "hexes": [
             "E11"
           ]
+        }
+      ],
+      "borders": [
+        {
+          "color": "mountain",
+          "coords": ["F2p3", "F2p4", "F2p5", "F4p4"]
+        },
+        {
+          "color": "mountain",
+          "coords": ["I7p2", "I7p3"]
+        },
+        {
+          "color": "mountain",
+          "coords": ["I11p2", "I11p3"]
+        },
+        {
+          "color": "mountain",
+          "coords": ["A5p3", "A5p4"]
         }
       ]
     }

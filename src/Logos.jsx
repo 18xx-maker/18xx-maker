@@ -2,24 +2,30 @@ import React from "react";
 
 import logos from "./data/logos";
 
-import map from "ramda/src/map";
+import chain from "ramda/src/chain";
 import toPairs from "ramda/src/toPairs";
 
 import "./Logos.scss";
 
-const logoNodes = map(([label, company]) => {
-  return (
-    <div key={label}>
-      <h2>{label}</h2>
-      <a href={company.src}><company.Component/></a>
-    </div>
-  );
-}, toPairs(logos));
+const logoNodes = chain(([label, company]) => {
+  if (company.src) {
+    return [(
+      <div key={label}>
+        <h2>{label}</h2>
+        <a href={encodeURIComponent(company.src)}>
+          <company.Component width="128" height="128"/>
+        </a>
+      </div>
+    )];
+  } else {
+    return logoNodes(toPairs(company))
+  }
+});
 
 const Logos = () => {
   return (
     <div className="logos">
-      {logoNodes}
+      {logoNodes(toPairs(logos))}
     </div>
   );
 };

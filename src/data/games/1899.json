@@ -12,7 +12,7 @@
     "bgg": "https://www.boardgamegeek.com/boardgame/3130/1899",
     "rules": "http://www.18xx.net/1899/1899.htm"
   },
-  "bank": "$12,000",
+  "bank": 12000,
   "rounds": [
     {
       "name": "OR3",

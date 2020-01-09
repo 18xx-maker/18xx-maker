@@ -11,19 +11,59 @@
     "height": 1100,
     "margins": 25
   },
+  "currency": {
+    "bank": true,
+    "capital": true,
+    "market": false,
+    "offboard": false,
+    "par": false,
+    "private": true,
+    "revenue": false,
+    "terrain": true,
+    "token": true,
+    "train": true,
+    "value": false
+  },
   "companySvgLogos": "none",
-  "plainMapDestinations": false,
-  "plainMapHomes": false,
+  "overrideCompanies": "none",
+  "overrideSelection": [],
+  "plainMapCompanies": false,
   "straightCityNames": false,
   "theme": "gmt",
   "companiesTheme": "gmt",
-  "charterStyle": "color",
-  "halfWidthCharters": false,
-  "shareStyle": "gmt",
-  "tokenLayout": "gsp",
+  "charters": {
+    "style": "color",
+    "cutlines": 25,
+    "bleed": 12.5,
+    "halfWidth": false,
+    "border": 0,
+    "blackBand": false
+  },
+  "cards": {
+    "shareStyle": "gmt",
+    "layout": "free",
+    "width": 265.748,
+    "height":  173.228,
+    "cutlines": 25,
+    "bleed": 12.5,
+    "border": 0,
+    "blackBand": false
+  },
+  "tokens": {
+    "layout": "gsp",
+    "marketTokenSize": 50,
+    "stationTokenSize": 50,
+    "bleed": true
+  },
+  "trains": {
+    "style": "color",
+    "images": false
+  },
   "tiles": {
-    "layout": "offset",
-    "width": 150
+    "layout": "die",
+    "width": 150,
+    "mapWidth": 150,
+    "gaps": true
   },
   "stock": {
     "cell": {

@@ -1,24 +1,26 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import games from "./data/games";
 import * as R from "ramda";
 import Color from "./data/Color";
 import ColorContext from "./context/ColorContext";
 
-import Token from "./Token";
+import Token from "./tokens/Token";
 import Svg from "./Svg";
 import PageSetup from "./PageSetup";
 
 require("./IPO.css");
 
-const IPO = ({ match }) => {
-  let game = games[match.params.game];
-  let companies = game.companies;
+const IPO = () => {
+  let params = useParams();
+  let game = games[params.game];
+  let companies = R.filter(company => (!company.minor), game.companies); // only show non-minor companies in IPO
 
   return (
     <Color>
       {c => (
         <div className="ipo">
-          <h2>IPO</h2>
+          <h2>{game.info.title} IPO</h2>
           <div className="ipo__companies">
             {R.map(
               company => (

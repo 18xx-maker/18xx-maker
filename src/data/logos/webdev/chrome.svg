@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="249.93192" height="250" viewBox="0 0 249.93192 250">
+    <linearGradient id="chrome_b" x1="64.080002" x2="64.080002" y1="32.125999" y2="66.811996" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#81b4e0"/>
+        <stop offset="1" stop-color="#0c5a94"/>
+    </linearGradient>
+    <linearGradient id="chrome_c" x1="65.595001" x2="65.595001" y1="2.11" y2="40.610001" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#f06b59"/>
+        <stop offset="1" stop-color="#df2227"/>
+    </linearGradient>
+    <linearGradient id="chrome_d" x1="28.268999" x2="47.729" y1="83.175003" y2="51.021999" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#388b41"/>
+        <stop offset="1" stop-color="#4cb749"/>
+    </linearGradient>
+    <linearGradient id="chrome_e" x1="93.460999" x2="72.731003" y1="86.594002" y2="36.673" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#e4b022"/>
+        <stop offset=".3" stop-color="#fcd209"/>
+    </linearGradient>
+    <linearGradient id="chrome_a">
+        <stop offset="0" stop-opacity=".15"/>
+        <stop offset=".3" stop-opacity=".06"/>
+        <stop offset="1" stop-opacity=".03"/>
+    </linearGradient>
+    <linearGradient id="chrome_f" x1="34.710999" x2="34.710999" y1="54.570999" y2="20.726" gradientUnits="userSpaceOnUse" xlink:href="#chrome_a"/>
+    <linearGradient id="chrome_g" x1="81.427002" x2="58.159" y1="65.500999" y2="89.192001" gradientUnits="userSpaceOnUse" xlink:href="#chrome_a"/>
+    <linearGradient id="chrome_h" x1="81.089996" x2="84.473999" y1="72.316002" y2="38.896" gradientUnits="userSpaceOnUse" xlink:href="#chrome_a"/>
+    <g transform="translate(-10.406621 20.69088) scale(2.11517)">
+        <circle fill="#fff" cx="64.113998" cy="49.494999" r="46.536999"/>
+        <path fill-opacity=".1" d="M93.73 57.956c0-16.356-13.26-29.615-29.614-29.615S34.5 41.6 34.5 57.956h8.46c0-11.683 9.47-21.153 21.152-21.153s21.153 9.47 21.153 21.153"/>
+        <circle fill-opacity=".1" cx="66.228996" cy="55.417" r="16.077"/>
+        <circle fill="url(#chrome_b)" cx="64.113998" cy="49.493999" r="17.346001"/>
+        <path fill="url(#chrome_c)" d="M106.42 28.34C94.773 4.908 66.334-4.648 42.9 7a47.37 47.37 0 00-18.13 15.843l19.038 33C40.3 44.7 46.494 32.823 57.638 29.316c1.96-.617 4-.944 6.053-.973"/>
+        <path fill="url(#chrome_d)" d="M24.77 22.84C10.198 44.577 16.006 74 37.744 88.583a47.385 47.385 0 0022.563 7.87L80.2 62.6c-7.435 9.012-20.767 10.3-29.778 2.854a21.14 21.14 0 01-6.604-9.623"/>
+        <path fill="url(#chrome_e)" d="M60.307 96.455c26.094 1.973 48.847-17.582 50.82-43.676a47.38 47.38 0 00-4.706-24.438H63.7c11.683.054 21.1 9.567 21.056 21.25A21.16 21.16 0 0180.2 62.609"/>
+        <path fill="url(#chrome_f)" d="M24.77 22.84l19.038 33c-1.4-4.747-1.1-9.837.845-14.385L25.615 21.572"/>
+        <path fill="url(#chrome_g)" d="M60.307 96.455L80.2 62.6a21.16 21.16 0 01-12.269 7.192l-8.46 26.653"/>
+        <path fill="url(#chrome_h)" d="M106.42 28.34H63.7c6.437.03 12.5 2.988 16.5 8.038l27.076-6.77"/>
+    </g>
+</svg>

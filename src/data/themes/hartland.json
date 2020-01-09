@@ -1,0 +1,25 @@
+{
+  "yellow": "#FDD800",
+  "green": "#91BE2E",
+  "brown": "#D46C27",
+  "gray": "#513210",
+
+  "plain": "#F3DE6C",
+  "offboard": "#513210",
+  "mountain": "#513210",
+  "water": "#0C1977",
+  "land": "#1A3426",
+  "river": "#b4a86f",
+
+  "orange": "#f58121",
+
+  "white": "#fff",
+  "black": "#110a0c",
+
+  "track": "#110a0c",
+  "border": "#fff",
+  "city": "#fff",
+  "town": "#110a0c",
+  "centerTown": "#110a0c",
+  "halt": "#666"
+}

@@ -12,7 +12,11 @@ const Number = ({ number, background }) => {
             className="card number"
             style={{ backgroundColor: c(background || "gray") }}
           >
-            <div className="number__digit">{number}</div>
+            <div className="card__bleed">
+              <div className="card__body">
+                <div className="number__digit">{number}</div>
+              </div>
+            </div>
           </div>
         </div>
       )}

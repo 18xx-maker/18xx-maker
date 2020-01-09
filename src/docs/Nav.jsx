@@ -9,10 +9,22 @@ const Nav = () => {
           <NavLink exact to="/docs">Documentation Home</NavLink>
         </li>
         <li>
+          <NavLink to="/docs/running">Running Locally</NavLink>
+        </li>
+        <li>
           <NavLink to="/docs/schema">JSON Schemas</NavLink>
         </li>
         <li>
+          <NavLink to="/docs/types">Share and Token Types</NavLink>
+        </li>
+        <li>
+          <NavLink to="/docs/borders">Map Lines and Borders</NavLink>
+        </li>
+        <li>
           <NavLink to="/docs/logos">Company Logos</NavLink>
+        </li>
+        <li>
+          <NavLink to="/docs/overrides">Company Overrides</NavLink>
         </li>
         <li>
           <NavLink to="/docs/pdf">PDF Output</NavLink>

@@ -7,7 +7,7 @@
     "titleX": 50,
     "titleY": -30,
     "titleSize": 150,
-    "currency": "BEF"
+    "currency": "F#"
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgameexpansion/173574/1836jr",
@@ -18,174 +18,98 @@
     "+20"
   ],
   "ipo": true,
-  "bank": "F6,000",
+  "bank": 6000,
   "players": [
     {
       "number": 2,
       "certLimit": 20,
-      "capital": "F450"
+      "capital": 450
     },
     {
       "number": 3,
       "certLimit": 13,
-      "capital": "F300"
+      "capital": 300
     },
     {
       "number": 4,
       "certLimit": 10,
-      "capital": "F225"
+      "capital": 225
     }
   ],
+  "tokenTypes": {
+    "two": [
+      "Free",
+      40
+    ],
+    "three": [
+      "Free",
+      40,
+      100
+    ],
+    "four": [
+      "Free",
+      40,
+      100,
+      100
+    ]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Chemins de Fer de L'Etat Belge",
       "abbrev": "B",
-      "tokens": [
-        "Free",
-        "F40",
-        "F100",
-        "F100"
-      ],
       "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
-      "name": "Grande Compagnie Du Luxembourg",
+      "name": "Grande Compagnie du Luxembourg",
       "abbrev": "GCL",
-      "tokens": [
-        "Free",
-        "F40",
-        "F100",
-        "F100"
-      ],
       "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
-      "name": "Chemin de Fer Du Nord",
+      "name": "Chemin de Fer du Nord",
       "abbrev": "Nord",
-      "tokens": [
-        "Free",
-        "F40",
-        "F100",
-        "F100"
-      ],
       "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
       "name": "Noord-Brabantsch-Duitsche Spoorweg-Maatschappij",
       "abbrev": "NBDS",
-      "tokens": [
-        "Free",
-        "F40",
-        "F100"
-      ],
       "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
       "name": "Hollandsche IJzeren Spoorweg Maatschappij",
       "abbrev": "HSM",
-      "tokens": [
-        "Free",
-        "F40"
-      ],
       "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     },
     {
       "name": "Noord-Friesche Locaal",
       "abbrev": "NFL",
-      "tokens": [
-        "Free",
-        "F40"
-      ],
       "color": "lime",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     },
     {
       "name": "Maatschappij tot Exploitie van de Staats-Spoorwegen",
       "abbrev": "SS",
-      "tokens": [
-        "Free",
-        "F40",
-        "F100",
-        "F100"
-      ],
       "color": "red",
+      "tokens": "four",
       "shares": [
         {
           "quantity": 1,
@@ -200,7 +124,7 @@
         },
         {
           "quantity": 10,
-          "percent": "5",
+          "percent": 5,
           "shares": 1
         }
       ]
@@ -210,7 +134,7 @@
     {
       "name": "2",
       "quantity": 5,
-      "price": "F100",
+      "price": 100,
       "color": "yellow",
       "info": [
         {
@@ -222,7 +146,7 @@
     {
       "name": "3",
       "quantity": 4,
-      "price": "F225",
+      "price": 225,
       "color": "green",
       "info": [
         {
@@ -234,19 +158,19 @@
     {
       "name": "4",
       "quantity": 3,
-      "price": "F350",
+      "price": 350,
       "color": "green",
       "info": [
         {
           "color": "brown",
-          "note": "Rusted by D"
+          "note": "Rusted by 8"
         }
       ]
     },
     {
       "name": "5",
       "quantity": 2,
-      "price": "F550",
+      "price": 550,
       "color": "brown",
       "info": [
         {
@@ -258,7 +182,7 @@
     {
       "name": "6",
       "quantity": 2,
-      "price": "F700",
+      "price": 700,
       "color": "brown",
       "info": [
         {
@@ -270,9 +194,9 @@
     {
       "name": "8",
       "quantity": 5,
-      "price": "F1000",
+      "price": 1000,
       "color": "brown",
-      "description": "Cost F650 when trading in a 4T, 5T or 6T",
+      "description": "Cost F650 when trading in a 4T, 5T, or 6T",
       "info": [
         {
           "color": "yellow",
@@ -284,26 +208,26 @@
   "privates": [
     {
       "name": "Amsterdam Canal Company - ACC",
-      "price": "F20",
-      "revenue": "F5",
+      "price": 20,
+      "revenue": 5,
       "description": "Blocks Hex D6."
     },
     {
       "name": "Enkhuizen-Stavoren Ferry - E-SF",
-      "price": "F40",
-      "revenue": "F10",
+      "price": 40,
+      "revenue": 10,
       "description": "Company may place free tile on B8."
     },
     {
       "name": "Charbonnages du Hainaut - CdH",
-      "price": "F50",
-      "revenue": "F10",
+      "price": 50,
+      "revenue": 10,
       "description": "Blocks Hex J8. Company may place tile and token on Hex J8 for F60."
     },
     {
       "name": "Régie des Postes",
-      "price": "F70",
-      "revenue": "F15",
+      "price": 70,
+      "revenue": 15,
       "description": "Owning company may place a +20 token on any city or town."
     }
   ],
@@ -311,29 +235,30 @@
     {
       "name": "2",
       "limit": "4",
-      "numbtr": "6",
-      "tiles": "yellow"
+      "number": "5",
+      "tiles": "yellow",
+      "notes": "1 operating round, low off-board values"
     },
     {
       "name": "3",
       "limit": "4",
-      "number": "5",
+      "number": "4",
       "tiles": "green",
-      "notes": "Private companies may be purchased"
+      "notes": "2 operating rounds, private companies may be purchased"
     },
     {
       "name": "4",
       "rust": "2",
       "limit": "3",
-      "number": "4",
+      "number": "3",
       "tiles": "green"
     },
     {
       "name": "5",
       "limit": "2",
-      "number": "3",
+      "number": "2",
       "tiles": "brown",
-      "notes": "Private companies are closed"
+      "notes": "3 operating rounds, high off-board values, private companies are closed"
     },
     {
       "name": "6",
@@ -341,12 +266,12 @@
       "number": "2",
       "rust": "3",
       "tiles": "brown",
-      "notes": "D Trains may be purchased"
+      "notes": "SS railway forms, 8 Trains may be purchased"
     },
     {
-      "name": "D",
+      "name": "8",
       "limit": "2",
-      "number": "6",
+      "number": "5",
       "rust": "4",
       "tiles": "brown"
     }
@@ -362,7 +287,7 @@
         {
           "color": "brown",
           "icon": "exclamation",
-          "note": "No more than 50% of a corporation's shares may be in the market at any time"
+          "note": "No more than 50% of a corporation's shares may be in the market at any time (except during SS formation, consult rules)"
         },
         {
           "color": "red",
@@ -396,9 +321,11 @@
       "steps": [
         "Sell any number of shares",
         "Buy one share",
+        "OR",
+        "Buy one share",
         "Sell any number of shares"
       ],
-      "ordered": true
+      "ordered": false
     },
     {
       "name": "Operating Round",
@@ -406,11 +333,14 @@
         "Lay or upgrade track",
         "Purchase a station",
         "Run trains",
+        "Pay interest on outstanding government loans",
         "Pay dividends or withhold revenue",
-        "Purchase trains"
+        "Purchase trains",
+        "Redeem goernment loans"
       ],
       "ordered": true,
       "optional": [
+        "Receive government loan",
         "Purchase private companies"
       ]
     }
@@ -421,10 +351,10 @@
       "values": [
         100,
         90,
-        82,
-        76,
-        71,
-        67
+        80,
+        75,
+        70,
+        65
       ]
     },
     "movement": {
@@ -444,105 +374,118 @@
     "market": [
       [
         {
-          "value": 60,
-          "label": 60,
-          "legend": 0,
+          "value": 70,
+          "label": 70,
           "arrow": "down"
         },
-        67,
-        71,
-        76,
-        82,
+        75,
+        80,
         90,
         {
           "value": 100,
           "label": 100,
           "par": true
         },
-        112,
-        126,
-        142,
-        160,
-        180,
+        110,
+        125,
+        150,
+        175,
         200,
         225,
         250,
         275,
         300,
         325,
-        350
+        350,
+        375,
+        400,
+        425,
+        450
       ],
       [
         {
-          "value": 53,
-          "label": 53,
-          "legend": 0,
+          "value": 65,
+          "label": 65,
           "arrow": "down"
         },
-        {
-          "value": 60,
-          "label": 60,
-          "legend": 0
-        },
-        66,
         70,
-        76,
-        82,
+        75,
+        80,
         {
           "value": 90,
           "label": 90,
           "par": true
         },
         100,
-        112,
-        126,
-        142,
-        160,
-        180,
+        110,
+        125,
+        150,
+        175,
         200,
-        220,
-        240,
-        260,
-        280,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350,
+        375,
+        400,
         {
-          "value": 300,
-          "label": 300,
+          "value": 425,
+          "label": 425,
           "arrow": "up"
         }
       ],
       [
         {
-          "value": 46,
-          "label": 46,
-          "legend": 0,
-          "arrow": "down"
-        },
-        {
-          "value": 55,
-          "label": 55,
-          "legend": 0
-        },
-        {
           "value": 60,
           "label": 60,
-          "legend": 0
+          "arrow": "down"
         },
         65,
         70,
-        76,
+        75,
         {
-          "value": 82,
-          "label": 82,
+          "value": 80,
+          "label": 80,
           "par": true
         },
         90,
         100,
-        111,
+        110,
         125,
-        140,
-        155,
-        170,
-        185,
+        150,
+        175,
+        200,
+        225,
+        250,
+        {
+          "value": 275,
+          "label": 275,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 55,
+          "label": 55,
+          "arrow": "down"
+        },
+        60,
+        65,
+        70,
+        {
+          "value": 75,
+          "label": 75,
+          "par": true
+        },
+        80,
+        90,
+        100,
+        110,
+        125,
+        150,
+        175,
         {
           "value": 200,
           "label": 200,
@@ -551,153 +494,78 @@
       ],
       [
         {
-          "value": 39,
-          "label": 39,
-          "legend": 1,
-          "arrow": "down"
-        },
-        {
-          "value": 48,
-          "label": 48,
+          "value": 50,
+          "label": 50,
+          "arrow": "down",
           "legend": 0
         },
+        55,
+        60,
+        65,
         {
-          "value": 54,
-          "label": 54,
-          "legend": 0
-        },
-        {
-          "value": 60,
-          "label": 60,
-          "legend": 0
-        },
-        66,
-        71,
-        {
-          "value": 76,
-          "label": 76,
+          "value": 70,
+          "label": 70,
           "par": true
         },
-        82,
+        75,
+        80,
         90,
         100,
         110,
-        120,
         {
-          "value": 130,
-          "label": 130,
+          "value": 125,
+          "label": 125,
           "arrow": "up"
         }
       ],
       [
         {
-          "value": 32,
-          "label": 32,
-          "legend": 1,
-          "arrow": "down"
-        },
-        {
-          "value": 41,
-          "label": 41,
-          "legend": 1
-        },
-        {
-          "value": 48,
-          "label": 48,
+          "value": 45,
+          "label": 45,
+          "arrow": "down",
           "legend": 0
-        },
-        {
-          "value": 55,
-          "label": 55,
-          "legend": 0
-        },
-        62,
-        67,
-        {
-          "value": 71,
-          "label": 71,
-          "par": true
-        },
-        76,
-        82,
-        90,
-        {
-          "value": 100,
-          "label": 100,
-          "arrow": "up"
-        }
-      ],
-      [
-        {
-          "value": 25,
-          "label": 25,
-          "legend": 2,
-          "arrow": "down"
-        },
-        {
-          "value": 34,
-          "label": 34,
-          "legend": 1
-        },
-        {
-          "value": 42,
-          "label": 42,
-          "legend": 1
         },
         {
           "value": 50,
           "label": 50,
           "legend": 0
         },
+        55,
+        60,
         {
-          "value": 58,
-          "label": 58,
-          "legend": 0
-        },
-        65,
-        {
-          "value": 67,
-          "label": 67,
+          "value": 65,
+          "label": 65,
           "par": true
         },
-        71,
+        70,
         75,
+        80,
         {
-          "value": 80,
-          "label": 80,
+          "value": 90,
+          "label": 90,
           "arrow": "up"
         }
       ],
       [
         {
-          "value": 18,
-          "label": 18,
-          "legend": 2,
-          "arrow": "down"
-        },
-        {
-          "value": 27,
-          "label": 27,
-          "legend": 2
-        },
-        {
-          "value": 36,
-          "label": 36,
+          "value": 40,
+          "label": 40,
+          "arrow": "down",
           "legend": 1
         },
         {
           "value": 45,
           "label": 45,
-          "legend": 1
-        },
-        {
-          "value": 54,
-          "label": 54,
           "legend": 0
         },
-        63,
-        67,
-        69,
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0
+        },
+        55,
+        60,
+        65,
         {
           "value": 70,
           "label": 70,
@@ -706,19 +574,10 @@
       ],
       [
         {
-          "value": 10,
-          "label": 10,
-          "legend": 2
-        },
-        {
-          "value": 12,
-          "label": 12,
-          "legend": 2
-        },
-        {
-          "value": 30,
-          "label": 30,
-          "legend": 2
+          "value": 35,
+          "label": 35,
+          "arrow": "down",
+          "legend": 1
         },
         {
           "value": 40,
@@ -726,38 +585,33 @@
           "legend": 1
         },
         {
+          "value": 45,
+          "label": 45,
+          "legend": 0
+        },
+        {
           "value": 50,
           "label": 50,
           "legend": 0
         },
+        55,
         {
           "value": 60,
           "label": 60,
-          "legend": 0
-        },
-        67,
-        {
-          "value": 68,
-          "label": 68,
           "arrow": "up"
         }
       ],
       [
-        null,
-        {
-          "value": 10,
-          "label": 10,
-          "legend": 2
-        },
-        {
-          "value": 20,
-          "label": 20,
-          "legend": 2
-        },
         {
           "value": 30,
           "label": 30,
-          "legend": 2
+          "arrow": "down",
+          "legend": 1
+        },
+        {
+          "value": 35,
+          "label": 35,
+          "legend": 1
         },
         {
           "value": 40,
@@ -765,34 +619,31 @@
           "legend": 1
         },
         {
-          "value": 50,
-          "label": 50,
+          "value": 45,
+          "label": 45,
           "legend": 0
         },
         {
-          "value": 60,
-          "label": 60,
-          "legend": 0,
-          "arrow": "up"
+          "value": 50,
+          "label": 50,
+          "arrow": "up",
+          "legend": 0
         }
       ],
       [
-        null,
-        null,
         {
-          "value": 10,
-          "label": 10,
-          "legend": 2
-        },
-        {
-          "value": 20,
-          "label": 20,
-          "legend": 2
+          "value": 0,
+          "label": 0
         },
         {
           "value": 30,
           "label": 30,
-          "legend": 2
+          "legend": 1
+        },
+        {
+          "value": 35,
+          "label": 35,
+          "legend": 1
         },
         {
           "value": 40,
@@ -800,36 +651,36 @@
           "legend": 1
         },
         {
-          "value": 50,
-          "label": 50,
-          "legend": 0,
-          "arrow": "up"
+          "value": 45,
+          "label": 45,
+          "arrow": "up",
+          "legend": 0
         }
       ],
       [
-        null,
-        null,
-        null,
         {
-          "value": 10,
-          "label": 10,
-          "legend": 2
+          "value": 0,
+          "label": "Closed"
         },
         {
-          "value": 20,
-          "label": 20,
-          "legend": 2
+          "value": 0,
+          "label": 0
         },
         {
           "value": 30,
           "label": 30,
-          "legend": 2
+          "legend": 1
+        },
+        {
+          "value": 35,
+          "label": 35,
+          "legend": 1
         },
         {
           "value": 40,
           "label": 40,
-          "legend": 1,
-          "arrow": "up"
+          "arrow": "up",
+          "legend": 1
         }
       ]
     ],
@@ -942,9 +793,13 @@
           "hexes": [
             "A11",
             "B12",
+            "C7",
+            "C9",
             "C11",
             "D12",
             "E9",
+            "G3",
+            "G5",
             "H8",
             "I5",
             "I7",
@@ -985,7 +840,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F80",
+              "cost": 80,
               "percent": 0.75
             }
           ],
@@ -1026,30 +881,6 @@
           ],
           "hexes": [
             "B10"
-          ]
-        },
-        {
-          "color": "plain",
-          "borders": [
-            {
-              "color": "water",
-              "side": 4
-            }
-          ],
-          "hexes": [
-            "C7"
-          ]
-        },
-        {
-          "color": "plain",
-          "borders": [
-            {
-              "color": "water",
-              "side": 1
-            }
-          ],
-          "hexes": [
-            "C9"
           ]
         },
         {
@@ -1095,7 +926,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.7
             }
@@ -1103,7 +934,7 @@
           "tokens": [
             {
               "company": "NFL",
-              "width": 15,
+              "destination": true,
               "angle": 60,
               "percent": 0.75
             }
@@ -1117,7 +948,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40"
+              "cost": 40
             }
           ],
           "hexes": [
@@ -1129,7 +960,7 @@
           ]
         },
         {
-          "color": "plain",
+          "color": "yellow",
           "labels": [
             {
               "label": "OO",
@@ -1160,9 +991,9 @@
           "tokens": [
             {
               "company": "NBDS",
+              "destination": true,
               "angle": 225,
-              "percent": 0.75,
-              "width": 15
+              "percent": 0.75
             }
           ],
           "hexes": [
@@ -1183,7 +1014,7 @@
           ]
         },
         {
-          "color": "plain",
+          "color": "yellow",
           "labels": [
             {
               "label": "OO",
@@ -1193,7 +1024,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.6
             }
@@ -1220,9 +1051,9 @@
           "tokens": [
             {
               "company": "HSM",
+              "destination": true,
               "angle": 135,
-              "percent": 0.75,
-              "width": 15
+              "percent": 0.75
             }
           ],
           "hexes": [
@@ -1241,18 +1072,8 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "percent": 0.6
-            }
-          ],
-          "borders": [
-            {
-              "color": "water",
-              "side": 5
-            },
-            {
-              "color": "water",
-              "side": 6
             }
           ],
           "hexes": [
@@ -1264,13 +1085,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F80"
-            }
-          ],
-          "borders": [
-            {
-              "color": "water",
-              "side": 6
+              "cost": 80
             }
           ],
           "hexes": [
@@ -1288,34 +1103,6 @@
           ],
           "hexes": [
             "F10"
-          ]
-        },
-        {
-          "color": "plain",
-          "borders": [
-            {
-              "color": "water",
-              "side": 3
-            }
-          ],
-          "hexes": [
-            "G3"
-          ]
-        },
-        {
-          "color": "plain",
-          "borders": [
-            {
-              "color": "water",
-              "side": 2
-            },
-            {
-              "color": "water",
-              "side": 3
-            }
-          ],
-          "hexes": [
-            "G5"
           ]
         },
         {
@@ -1396,7 +1183,7 @@
           ]
         },
         {
-          "color": "plain",
+          "color": "yellow",
           "labels": [
             {
               "label": "OO",
@@ -1406,7 +1193,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.6
             }
@@ -1430,9 +1217,9 @@
           "tokens": [
             {
               "company": "B",
+              "destination": true,
               "angle": 225,
-              "percent": 0.75,
-              "width": 15
+              "percent": 0.75
             }
           ],
           "hexes": [
@@ -1484,7 +1271,7 @@
           "terrain": [
             {
               "type": "mountain",
-              "cost": "F60"
+              "cost": 60
             }
           ],
           "hexes": [
@@ -1511,7 +1298,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.6
             }
@@ -1519,8 +1306,8 @@
           "tokens": [
             {
               "company": "Nord",
-              "percent": 0.8,
-              "width": 15
+              "destination": true,
+              "percent": 0.8
             }
           ],
           "hexes": [
@@ -1559,7 +1346,7 @@
           "terrain": [
             {
               "type": "mountain",
-              "cost": "F60",
+              "cost": 60,
               "angle": 180,
               "percent": 0.6
             }
@@ -1718,7 +1505,7 @@
           "terrain": [
             {
               "type": "mountain",
-              "cost": "F60",
+              "cost": 60,
               "percent": 0.75
             }
           ],
@@ -1746,7 +1533,7 @@
           "tokens": [
             {
               "company": "GCL",
-              "width": 15,
+              "destination": true,
               "percent": 0.6
             }
           ],
@@ -1777,10 +1564,17 @@
             "K13"
           ]
         }
-      ]
+      ],
+      "borders": [{
+        "color": "water",
+        "coords": ["G3p4", "G3p5", "G5p4", "G5p5"]
+      },{
+        "color": "water",
+        "coords": ["C9p2", "C9p3"]
+      }]
     },
     {
-      "name": "1830 Companies",
+      "name": "1856 Companies",
       "copy": 0,
       "hexes": [
         {
@@ -1806,8 +1600,8 @@
               },
               "companies": [
                 {
-                  "color": "brown",
-                  "label": "B&M"
+                  "color": "cyan",
+                  "label": "LPS"
                 }
               ]
             }
@@ -1840,8 +1634,8 @@
               },
               "companies": [
                 {
-                  "color": "orange",
-                  "label": "NYNH"
+                  "color": "purple",
+                  "label": "CV"
                 }
               ]
             }
@@ -1862,7 +1656,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.7
             }
@@ -1870,10 +1664,10 @@
           "tokens": [
             {
               "company": {
-                "color": "brown",
-                "label": "B&M"
+                "color": "cyan",
+                "label": "LPS"
               },
-              "width": 15,
+              "destination": true,
               "angle": 60,
               "percent": 0.75
             }
@@ -1883,7 +1677,7 @@
           ]
         },
         {
-          "color": "plain",
+          "color": "yellow",
           "labels": [
             {
               "label": "OO",
@@ -1914,12 +1708,12 @@
           "tokens": [
             {
               "company": {
-                "label": "ERIE",
+                "label": "THB",
                 "color": "yellow"
               },
+              "destination": true,
               "angle": 225,
-              "percent": 0.75,
-              "width": 15
+              "percent": 0.75
             }
           ],
           "hexes": [
@@ -1927,7 +1721,7 @@
           ]
         },
         {
-          "color": "plain",
+          "color": "yellow",
           "labels": [
             {
               "label": "OO",
@@ -1937,7 +1731,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.6
             }
@@ -1956,7 +1750,7 @@
               "companies": [
                 {
                   "color": "yellow",
-                  "label": "ERIE"
+                  "label": "THB"
                 }
               ],
               "name": {
@@ -1967,12 +1761,12 @@
           "tokens": [
             {
               "company": {
-                "color": "orange",
-                "label": "NYNH"
+                "color": "purple",
+                "label": "CV"
               },
+              "destination": true,
               "angle": 135,
-              "percent": 0.75,
-              "width": 15
+              "percent": 0.75
             }
           ],
           "hexes": [
@@ -1993,8 +1787,8 @@
               "percent": 0.333,
               "companies": [
                 {
-                  "color": "black",
-                  "label": "NYC"
+                  "color": "pink",
+                  "label": "CPR"
                 }
               ],
               "name": {
@@ -2021,7 +1815,7 @@
           ]
         },
         {
-          "color": "plain",
+          "color": "yellow",
           "labels": [
             {
               "label": "OO",
@@ -2031,7 +1825,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.6
             }
@@ -2055,12 +1849,12 @@
           "tokens": [
             {
               "company": {
-                "color": "black",
-                "label": "NYC"
+                "color": "pink",
+                "label": "CPR"
               },
+              "destination": true,
               "angle": 225,
-              "percent": 0.75,
-              "width": 15
+              "percent": 0.75
             }
           ],
           "companies": [
@@ -2093,8 +1887,8 @@
               "percent": 0.333,
               "companies": [
                 {
-                  "color": "blue",
-                  "label": "B&O"
+                  "color": "brown",
+                  "label": "GW"
                 }
               ],
               "name": {
@@ -2127,8 +1921,8 @@
             {
               "companies": [
                 {
-                  "color": "green",
-                  "label": "PRR"
+                  "color": "lime",
+                  "label": "GT"
                 }
               ],
               "name": {
@@ -2140,7 +1934,7 @@
           "terrain": [
             {
               "type": "water",
-              "cost": "F40",
+              "cost": 40,
               "angle": 180,
               "percent": 0.6
             }
@@ -2148,11 +1942,11 @@
           "tokens": [
             {
               "company": {
-                "label": "B&O",
-                "color": "blue"
+                "label": "GW",
+                "color": "brown"
               },
-              "percent": 0.8,
-              "width": 15
+              "destination": true,
+              "percent": 0.8
             }
           ],
           "hexes": [
@@ -2165,9 +1959,9 @@
             {
               "company": {
                 "color": "green",
-                "label": "PRR"
+                "label": "GT"
               },
-              "width": 15,
+              "destination": true,
               "percent": 0.6
             }
           ],
@@ -2204,7 +1998,14 @@
             "J4"
           ]
         }
-      ]
+      ],
+      "borders": [{
+        "color": "water",
+        "coords": ["G3p4", "G3p5", "G5p4", "G5p5"]
+      },{
+        "color": "water",
+        "coords": ["C9p2", "C9p3"]
+      }]
     }
   ]
 }

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="281.38461" height="280" viewBox="0 0 281.38461 280">
+    <linearGradient id="scala_a">
+        <stop offset="0" stop-color="#656565"/>
+        <stop offset="1" stop-color="#010101"/>
+    </linearGradient>
+    <linearGradient id="scala_b" x1="13.528" x2="88.264" y1="-36.175999" y2="-36.175999" gradientTransform="translate(62.384616 164.61538) scale(1.53846)" gradientUnits="userSpaceOnUse" xlink:href="#scala_a"/>
+    <linearGradient id="scala_c" x1="13.528" x2="88.264" y1="3.91" y2="3.91" gradientTransform="translate(62.384616 164.61538) scale(1.53846)" gradientUnits="userSpaceOnUse" xlink:href="#scala_a"/>
+    <linearGradient id="scala_d">
+        <stop offset="0" stop-color="#9f1c20"/>
+        <stop offset="1" stop-color="#ed2224"/>
+    </linearGradient>
+    <linearGradient id="scala_e" x1="13.528" x2="88.264" y1="-55.973999" y2="-55.973999" gradientTransform="translate(62.384616 164.61538) scale(1.53846)" gradientUnits="userSpaceOnUse" xlink:href="#scala_d"/>
+    <linearGradient id="scala_f" x1="13.528" x2="88.264" y1="-15.87" y2="-15.87" gradientTransform="translate(62.384616 164.61538) scale(1.53846)" gradientUnits="userSpaceOnUse" xlink:href="#scala_d"/>
+    <linearGradient id="scala_g" x1="13.528" x2="88.264" y1="24.219999" y2="24.219999" gradientTransform="translate(62.384616 164.61538) scale(1.53846)" gradientUnits="userSpaceOnUse" xlink:href="#scala_d"/>
+    <path fill="url(#scala_b)" d="M83 116.92308s115.38462 11.53846 115.38462 30.76923v-46.15385s0-19.230768-115.38462-30.769229z"/>
+    <path fill="url(#scala_c)" d="M83 178.46154S198.38462 190 198.38462 209.23077v-46.15385s0-19.23077-115.38462-30.76923z"/>
+    <path fill="url(#scala_e)" d="M198.38462 40v46.153846s0 19.230774-115.38462 30.769234V70.769231S198.38462 59.230769 198.38462 40"/>
+    <path fill="url(#scala_f)" d="M83 132.30769s115.38462-11.53846 115.38462-30.76923v46.15385s0 19.23077-115.38462 30.76923z"/>
+    <path fill="url(#scala_g)" d="M83 240v-46.15385s115.38462-11.53846 115.38462-30.76923v46.15385S198.38462 228.46154 83 240"/>
+</svg>

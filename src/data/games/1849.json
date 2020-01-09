@@ -7,8 +7,8 @@
     "orientation": "horizontal",
     "titleY": 900,
     "titleX": 25,
-    "extraTokens": 2,
-    "currency": "EUR"
+    "marketTokens": 2,
+    "currency": "L.#"
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/3097/1849-game-sicilian-railways",
@@ -18,57 +18,96 @@
     "Round",
     "+L.20",
     "+L.20",
-    "#port",
-    "#port"
+    { "icon": "port" },
+    { "icon": "port" },
+    { "label": "+L.40", "icon": "mountain" },
+    { "label": "+L.40", "icon": "mountain" },
+    { "label": "+L.40", "icon": "mountain" },
+    { "label": "+L.40", "icon": "mountain" },
+    { "label": "+L.40", "icon": "mountain" },
+    { "label": "+L.40", "icon": "mountain" },
+    { "label": "+L.40", "icon": "mountain" },
+    { "label": "+L.40", "icon": "mountain" },
+    { "label": "+L.40", "icon": "mountain" },
+
+    { "label": "+L.80", "icon": "mountain" },
+    { "label": "+L.80", "icon": "mountain" },
+    { "label": "+L.80", "icon": "mountain" },
+    { "label": "+L.80", "icon": "mountain" },
+    { "label": "+L.80", "icon": "mountain" },
+    { "label": "+L.80", "icon": "mountain" },
+    { "label": "+L.80", "icon": "mountain" },
+
+    { "label": "+L.160", "icon": "mountain" },
+    { "label": "+L.160", "icon": "mountain" },
+    { "label": "+L.160", "icon": "mountain" },
+    { "label": "+L.160", "icon": "mountain" },
+    { "label": "+L.160", "icon": "mountain" },
+    { "label": "+L.160", "icon": "mountain" },
+    { "label": "+L.160", "icon": "mountain" },
+    { "label": "+L.160", "icon": "mountain" },
+    { "label": "+L.160", "icon": "mountain" },
+    { "label": "+L.160", "icon": "mountain" },
+    { "label": "+L.160", "icon": "mountain" },
+    { "label": "+L.160", "icon": "mountain" },
+    { "label": "+L.160", "icon": "mountain" },
+    { "label": "+L.160", "icon": "mountain" },
+    { "label": "+L.160", "icon": "mountain" },
+    { "label": "+L.160", "icon": "mountain" }
   ],
   "ipo": false,
-  "bank": "L.7,760",
+  "bank": 7760,
   "players": [
     {
       "number": 3,
       "certLimit": 12,
-      "capital": "L.500"
+      "capital": 500
     },
     {
       "number": 4,
       "certLimit": "9/11",
-      "capital": "L.375"
+      "capital": 375
     },
     {
       "number": 5,
       "certLimit": 9,
-      "capital": "L.300"
+      "capital": 300
     }
   ],
   "privates": [
     {
       "name": "Società Corriere Etnee",
-      "price": "L.20",
-      "revenue": "L.5",
+      "price": 20,
+      "revenue": 5,
+      "hex": "M8",
       "description": "A Corporation cannot build track in the Acireale hex until this Company is either eliminated or bought by any Corporation."
     },
     {
       "name": "Studio di Ingegneria Giuseppe Incorpora",
-      "price": "L.45",
-      "revenue": "L.10",
+      "price": 45,
+      "revenue": 10,
+      "icon": "mountain",
       "description": "The owning Corporation can lay or upgrade standard gauge track at half cost on Mountain, Hill or Rough hexes. Narrow gauge track is still at normal cost."
     },
     {
       "name": "Compagnia Navale Mediterranea",
-      "price": "L.75",
-      "revenue": "L.15",
+      "price": 75,
+      "revenue": 15,
+      "token": { "color": "white", "label": "+L.20" },
       "description": "The owning Corporation can place the +L. 20 token on any port. This action closes the Company but the Corporation adds L. 20 to the revenue of the port until the end of the game."
     },
     {
       "name": "Società Marittima Siciliana",
-      "price": "L.110",
-      "revenue": "L.20",
-      "description": "The owning Corporation can place a tile and a token on a coastal city, even if that city is not connected to one of its railheads, subject to all other limitations described on rule 4.2. This action closes the Company, and is made instead of the regular Track Laying and Token Laying Steps."
+      "price": 110,
+      "revenue": 20,
+      "tile": "657",
+      "description": "The owning Corporation can place a tile and a token on a coastal city, even if that city is not connected to one of its railheads. This action closes the Company, and is made instead of the regular Track Laying and Token Laying Steps."
     },
     {
       "name": "Reale Società d'Affari",
-      "price": "L.150",
-      "revenue": "L.25",
+      "price": 150,
+      "revenue": 25,
+      "icon": "charter",
       "description": "When a player buys the R.S.A. they immediately open the first available corporation and get the president's certificate. The R.S.A. is eliminated when the Corporation buys its first train."
     }
   ],
@@ -173,9 +212,18 @@
   },
   "stock": {
     "type": "2D",
+    "movement": {
+      "up": ["All Shares Held"],
+      "down": ["Per Share Sold"],
+      "left": ["Withheld"],
+      "right": ["Paid out"]
+    },
     "market": [
       [
-        72,
+        {
+          "label": 72,
+          "arrow": "down"
+        },
         83,
         95,
         107,
@@ -202,7 +250,10 @@
         }
       ],
       [
-        63,
+        {
+          "label": 63,
+          "arrow": "down"
+        },
         72,
         82,
         93,
@@ -236,7 +287,10 @@
         }
       ],
       [
-        57,
+        {
+          "label": 57,
+          "arrow": "down"
+        },
         66,
         75,
         84,
@@ -266,11 +320,15 @@
         },
         {
           "color": "water",
-          "label": 298
+          "label": 298,
+          "arrow": "up"
         }
       ],
       [
-        54,
+        {
+          "label": 54,
+          "arrow": "down"
+        },
         62,
         71,
         80,
@@ -286,10 +344,16 @@
         169,
         187,
         208,
-        230
+        {
+          "label": 230,
+          "arrow": "up"
+        }
       ],
       [
-        52,
+        {
+          "label": 52,
+          "arrow": "down"
+        },
         59,
         {
           "label": 68,
@@ -304,10 +368,16 @@
         145,
         160,
         178,
-        198
+        {
+          "label": 198,
+          "arrow": "up"
+        }
       ],
       [
-        47,
+        {
+          "label": 47,
+          "arrow": "down"
+        },
         54,
         62,
         70,
@@ -318,10 +388,16 @@
         118,
         131,
         146,
-        162
+        {
+          "label": 162,
+          "arrow": "up"
+        }
       ],
       [
-        41,
+        {
+          "label": 41,
+          "arrow": "down"
+        },
         47,
         54,
         61,
@@ -331,10 +407,16 @@
         93,
         103,
         114,
-        127
+        {
+          "label": 127,
+          "arrow": "up"
+        }
       ],
       [
-        34,
+        {
+          "label": 34,
+          "arrow": "down"
+        },
         39,
         45,
         50,
@@ -343,16 +425,25 @@
         70,
         77,
         86,
-        95
+        {
+          "label": 95,
+          "arrow": "up"
+        }
       ],
       [
-        27,
+        {
+          "label": 27,
+          "arrow": "down"
+        },
         31,
         36,
         40,
         45,
         50,
-        56
+        {
+          "label": 56,
+          "arrow": "up"
+        }
       ],
       [
         {
@@ -361,7 +452,10 @@
         },
         24,
         27,
-        31
+        {
+          "label": 31,
+          "arrow": "up"
+        }
       ]
     ],
     "limits": []
@@ -375,6 +469,10 @@
           "note": "Shares in the bank pool pay dividends to the bank"
         },
         {
+          "color": "water",
+          "note": "Shares in the treasury pay dividends to the corporation"
+        },
+        {
           "color": "red",
           "icon": "times",
           "note": "Unoperated companies may not be sold"
@@ -386,7 +484,7 @@
     {
       "name": "4H",
       "quantity": 4,
-      "price": "L.100",
+      "price": 100,
       "color": "yellow",
       "info": [
         {
@@ -398,7 +496,7 @@
     {
       "name": "6H",
       "quantity": 4,
-      "price": "L.200",
+      "price": 200,
       "color": "green",
       "info": [
         {
@@ -410,7 +508,7 @@
     {
       "name": "8H",
       "quantity": 3,
-      "price": "L.350",
+      "price": 350,
       "color": "green",
       "info": [
         {
@@ -422,7 +520,7 @@
     {
       "name": "10H",
       "quantity": 2,
-      "price": "L.550",
+      "price": 550,
       "color": "brown",
       "info": [
         {
@@ -434,7 +532,7 @@
     {
       "name": "12H",
       "quantity": 1,
-      "price": "L.800",
+      "price": 800,
       "color": "brown",
       "info": [
         {
@@ -446,7 +544,7 @@
     {
       "name": "16H",
       "quantity": 5,
-      "price": "L.1100",
+      "price": 1100,
       "color": "brown",
       "info": [
         {
@@ -458,7 +556,7 @@
     {
       "name": "R6H",
       "quantity": 2,
-      "price": "L.350",
+      "price": 350,
       "color": "brown",
       "info": [
         {
@@ -491,21 +589,24 @@
       "name": "Stock Round",
       "steps": [
         "Sell any number of certificates",
-        "Buy one certificate or start company"
+        "Buy one certificate from treasury or bank pool, or start company"
       ],
       "ordered": true
     },
     {
       "name": "Operating Round",
       "steps": [
-        "Lay track",
+        "Lay or upgrade one track tile",
         "Place one token",
         "Run trains",
         "Purchase trains",
-        "Sell treasury stock",
-        "Buy back treasury stock"
+        "Sell treasury stock to the bank pool",
+        "Buy one stock certificate from the bank pool"
       ],
-      "ordered": true
+      "ordered": true,
+      "optional": [
+        "Purchase private companies"
+      ]
     }
   ],
   "phases": [
@@ -514,7 +615,9 @@
       "train": "4H",
       "limit": "4",
       "number": "4",
-      "tiles": "yellow"
+      "tiles": "yellow",
+      "notes": "Grey cities score 1st value",
+      "price": 100
     },
     {
       "phase": "6",
@@ -522,7 +625,8 @@
       "limit": "4",
       "number": "3/4",
       "tiles": "green",
-      "notes": "Private companies can be bought"
+      "notes": "Private companies can be bought",
+      "price": 200
     },
     {
       "phase": "8",
@@ -530,7 +634,9 @@
       "rust": "4H",
       "limit": "3",
       "number": "2/3",
-      "tiles": "green"
+      "tiles": "green",
+      "notes": "Grey cities score 2nd value",
+      "price": 350
     },
     {
       "phase": "10",
@@ -538,7 +644,8 @@
       "rust": "6H",
       "limit": "2",
       "number": "2",
-      "tiles": "brown"
+      "tiles": "brown",
+      "price": 550
     },
     {
       "phase": "12",
@@ -546,7 +653,8 @@
       "limit": "2",
       "number": "1",
       "tiles": "brown",
-      "notes": "Private companies close, Messina Earthquake"
+      "notes": "Private companies close, Messina Earthquake, Grey cities score 3rd value",
+      "price": 800
     },
     {
       "phase": "16",
@@ -561,183 +669,94 @@
       ],
       "rust": "8H",
       "tiles": "brown",
-      "notes": "Stock market tokens can advance in the blue zone"
+      "notes": "Stock market tokens can advance in the blue zone",
+      "price": [
+        1100,
+        350
+      ]
     }
   ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 6,
+        "percent": 10,
+        "shares": 1
+      },
+      {
+        "quantity": 1,
+        "label": "Last Certificate",
+        "percent": 20,
+        "shares": 2
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Azienda Ferroviaria Garibaldi",
       "abbrev": "AFG",
       "tokens": [
-        "L.40",
+        40,
         "",
         ""
       ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Double Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "color": "red"
     },
     {
-      "name": "Aziena Trasporti Archimede",
+      "name": "Azienda Trasporti Archimede",
       "abbrev": "ATA",
       "tokens": [
-        "L.30",
+        30,
         "",
         ""
       ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Double Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "color": "green"
     },
     {
       "name": "Compagnia Trasporti Lilibeo",
       "abbrev": "CTL",
       "tokens": [
-        "L.40",
+        40,
         "",
         ""
       ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Double Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "color": "yellow"
     },
     {
       "name": "Impresa Ferroviaria Trinacria",
       "abbrev": "IFT",
       "tokens": [
-        "L.90",
+        90,
         "",
         ""
       ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Double Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "color": "blue"
     },
     {
       "name": "Rete Centrale Sicula",
       "abbrev": "RCS",
       "tokens": [
-        "L.130",
+        130,
         "",
         ""
       ],
-      "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Double Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "color": "orange"
     },
     {
-      "name": "Societa Ferroviaria Akragas",
+      "name": "Società Ferroviaria Akragas",
       "abbrev": "SFA",
       "tokens": [
-        "L.40",
+        40,
         "",
         ""
       ],
-      "color": "pink",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Double Certificate",
-          "percent": 20,
-          "shares": 2
-        }
-      ]
+      "color": "pink"
     }
   ],
   "map": {
@@ -840,35 +859,19 @@
         ]
       },
       {
-        "copy": "D3",
-        "mountain": {
-          "size": "small",
-          "cost": "L.40"
-        },
-        "hexes": [
-          "B3"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "D3",
-          "G4"
-        ]
-      },
-      {
         "color": "plain",
         "hexes": [
           "L3",
           "N5",
           "B9",
+          "D3",
+          "F5",
+          "G4",
+          "H5",
+          "J5",
+          "K4",
           "L11",
+          "L15",
           "H13",
           "K16"
         ]
@@ -922,24 +925,18 @@
           "revenues": [
             {
               "color": "white",
-              "cost": "20"
+              "cost": 20
+            },
+            {
+              "color": "gray",
+              "cost": 30
             },
             {
               "color": "white",
-              "cost": "30"
-            },
-            {
-              "color": "white",
-              "cost": "40"
+              "cost": 40
             }
           ]
         },
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
         "track": [
           {
             "side": 1,
@@ -961,12 +958,6 @@
             "name": {
               "name": "Alcamo"
             }
-          }
-        ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
           }
         ],
         "hexes": [
@@ -991,12 +982,7 @@
         ],
         "cities": [
           {
-            "companies": [
-              {
-                "label": "RCS",
-                "color": "orange"
-              }
-            ],
+            "companies": ["RCS"],
             "name": {
               "name": "Palermo",
               "reverse": true,
@@ -1052,18 +1038,6 @@
         ]
       },
       {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "mountain"
-          }
-        ],
-        "hexes": [
-          "K4"
-        ]
-      },
-      {
         "color": "gray",
         "track": [
           {
@@ -1096,15 +1070,15 @@
           "revenues": [
             {
               "color": "white",
-              "cost": "10"
+              "cost": 10
+            },
+            {
+              "color": "gray",
+              "cost": 30
             },
             {
               "color": "white",
-              "cost": "30"
-            },
-            {
-              "color": "white",
-              "cost": "90"
+              "cost": 90
             }
           ]
         },
@@ -1121,7 +1095,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "L.160"
+          "cost": 160
         },
         "hexes": [
           "B5",
@@ -1129,9 +1103,12 @@
           "B7",
           "D7",
           "E8",
+          "H7",
+          "I6",
           "K8",
           "H11",
-          "L13"
+          "L13",
+          "J13"
         ]
       },
       {
@@ -1147,7 +1124,7 @@
         ],
         "mountain": {
           "size": "small",
-          "cost": "L.40",
+          "cost": 40,
           "percent": 0.333
         },
         "hexes": [
@@ -1155,48 +1132,10 @@
         ]
       },
       {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "F5"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "mountain"
-          },
-          {
-            "side": 2,
-            "color": "mountain"
-          },
-          {
-            "side": 6,
-            "color": "mountain"
-          }
-        ],
-        "hexes": [
-          "H5",
-          "J5"
-        ]
-      },
-      {
         "color": "gray",
         "cities": [
           {
-            "companies": [
-              {
-                "label": "CTL",
-                "color": "yellow"
-              }
-            ],
+            "companies": ["CTL"],
             "name": {
               "name": "Marsala",
               "rotation": -90
@@ -1209,15 +1148,15 @@
           "revenues": [
             {
               "color": "white",
-              "cost": "20"
+              "cost": 20
+            },
+            {
+              "color": "gray",
+              "cost": 30
             },
             {
               "color": "white",
-              "cost": "30"
-            },
-            {
-              "color": "white",
-              "cost": "40"
+              "cost": 40
             }
           ]
         },
@@ -1246,7 +1185,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "L.80"
+          "cost": 80
         },
         "hexes": [
           "C6",
@@ -1258,7 +1197,7 @@
       {
         "copy": "D5",
         "mountain": {
-          "cost": "L.160"
+          "cost": 160
         },
         "centerTowns": [
           {
@@ -1280,33 +1219,8 @@
             }
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "mountain"
-          }
-        ],
         "hexes": [
           "G6"
-        ]
-      },
-      {
-        "color": "plain",
-        "mountain": {
-          "cost": "L.160"
-        },
-        "borders": [
-          {
-            "side": 3,
-            "color": "mountain"
-          },
-          {
-            "side": 5,
-            "color": "mountain"
-          }
-        ],
-        "hexes": [
-          "I6"
         ]
       },
       {
@@ -1319,18 +1233,8 @@
           }
         ],
         "mountain": {
-          "cost": "L.160"
+          "cost": 160
         },
-        "borders": [
-          {
-            "side": 3,
-            "color": "mountain"
-          },
-          {
-            "side": 4,
-            "color": "mountain"
-          }
-        ],
         "hexes": [
           "K6"
         ]
@@ -1371,28 +1275,7 @@
         ]
       },
       {
-        "color": "plain",
-        "mountain": {
-          "cost": "L.160"
-        },
-        "borders": [
-          {
-            "side": 4,
-            "color": "mountain"
-          }
-        ],
-        "hexes": [
-          "H7"
-        ]
-      },
-      {
         "copy": "E6",
-        "borders": [
-          {
-            "side": 4,
-            "color": "mountain"
-          }
-        ],
         "centerTowns": [
           {
             "name": {
@@ -1401,7 +1284,7 @@
           }
         ],
         "mountain": {
-          "cost": "L.160"
+          "cost": 160
         },
         "hexes": [
           "J7"
@@ -1442,7 +1325,7 @@
       {
         "copy": "D5",
         "mountain": {
-          "cost": "L.80"
+          "cost": 80
         },
         "centerTowns": [
           {
@@ -1479,7 +1362,7 @@
       {
         "copy": "D5",
         "mountain": {
-          "cost": "L.80"
+          "cost": 80
         },
         "centerTowns": [
           {
@@ -1495,18 +1378,20 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "L.40"
+          "cost": 40
         },
         "hexes": [
+          "B3",
           "F9",
-          "J9"
+          "J9",
+          "K12"
         ]
       },
       {
         "color": "plain",
         "mountain": {
           "percent": 0.45,
-          "cost": "L.80"
+          "cost": 80
         },
         "cities": [
           {
@@ -1539,12 +1424,7 @@
         ],
         "cities": [
           {
-            "companies": [
-              {
-                "label": "IFT",
-                "color": "blue"
-              }
-            ],
+            "companies": ["IFT"],
             "name": {
               "name": "Catania",
               "reverse": true,
@@ -1571,7 +1451,7 @@
           }
         ],
         "mountain": {
-          "cost": "L.40"
+          "cost": 40
         },
         "hexes": [
           "G10"
@@ -1605,19 +1485,14 @@
       {
         "copy": "H9",
         "mountain": {
-          "cost": "L.40"
+          "cost": 40
         },
         "cities": [
           {
             "name": {
               "name": "Girgenti"
             },
-            "companies": [
-              {
-                "color": "pink",
-                "label": "SFA"
-              }
-            ]
+            "companies": ["SFA"]
           }
         ],
         "hexes": [
@@ -1657,7 +1532,7 @@
             "type": "mountain",
             "angle": 90,
             "percent": 0.5,
-            "cost": "L.160"
+            "cost": 160
           }
         ],
         "track": [
@@ -1670,25 +1545,6 @@
         ],
         "hexes": [
           "I12"
-        ]
-      },
-      {
-        "color": "plain",
-        "mountain": {
-          "cost": "L.40"
-        },
-        "borders": [
-          {
-            "side": 1,
-            "color": "mountain"
-          },
-          {
-            "side": 2,
-            "color": "mountain"
-          }
-        ],
-        "hexes": [
-          "K12"
         ]
       },
       {
@@ -1721,21 +1577,6 @@
         ],
         "hexes": [
           "M12"
-        ]
-      },
-      {
-        "color": "plain",
-        "mountain": {
-          "cost": "L.160"
-        },
-        "borders": [
-          {
-            "side": 5,
-            "color": "mountain"
-          }
-        ],
-        "hexes": [
-          "J13"
         ]
       },
       {
@@ -1800,15 +1641,15 @@
           "revenues": [
             {
               "color": "white",
-              "cost": "20"
+              "cost": 20
+            },
+            {
+              "color": "gray",
+              "cost": 30
             },
             {
               "color": "white",
-              "cost": "30"
-            },
-            {
-              "color": "white",
-              "cost": "40"
+              "cost": 40
             }
           ]
         },
@@ -1835,16 +1676,6 @@
             "gauge": "narrow"
           }
         ],
-        "borders": [
-          {
-            "side": 4,
-            "color": "mountain"
-          },
-          {
-            "side": 6,
-            "color": "mountain"
-          }
-        ],
         "values": [
           {
             "value": 20,
@@ -1855,7 +1686,7 @@
         "terrain": [
           {
             "type": "mountain",
-            "cost": "L.40",
+            "cost": 40,
             "angle": -30,
             "percent": 0.7
           }
@@ -1875,12 +1706,7 @@
         ],
         "cities": [
           {
-            "companies": [
-              {
-                "label": "ATA",
-                "color": "green"
-              }
-            ],
+            "companies": ["ATA"],
             "name": {
               "name": "Siacusa",
               "rotation": 30
@@ -1940,18 +1766,30 @@
         "hexes": [
           "J15"
         ]
-      },
+      }
+    ],
+    "borders": [
       {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 3,
-            "color": "mountain"
-          }
-        ],
-        "hexes": [
-          "L15"
-        ]
+        "color": "water",
+        "coords": ["B3p1", "B3p6"]
+      },{
+        "color": "water",
+        "coords": ["D3p1", "D3p6"]
+      },{
+        "color": "water",
+        "coords": ["G4p1", "G4p6"]
+      },{
+        "color": "mountain",
+        "coords": ["H5p1", "H5p6", "H5p5", "H5p4"]
+      },{
+        "color": "mountain",
+        "coords": ["J5p1", "J5p6", "J5p5", "K6p2", "K6p3"]
+      },{
+        "color": "mountain",
+        "coords": ["K12p1", "K12p6", "K12p5"]
+      },{
+        "color": "mountain",
+        "coords": ["L15p1", "L15p2"]
       }
     ]
   }

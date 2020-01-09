@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 
 import * as R from "ramda";
 import tiles from "./data/tiles";
@@ -7,19 +7,14 @@ import tiles from "./data/tiles";
 import Tile from "./Tile";
 import Svg from "./Svg";
 
+import { getTile } from "./TileSheet";
+
 import games from "./data/games";
 import ColorContext from "./context/ColorContext";
 
 import "./TileManifest.css";
 
-const getCol = id => {
-  let tile = tiles[id];
-
-  if (!tile) {
-    let [idBase] = id.split("|");
-    tile = tiles[idBase];
-  }
-
+const getCol = tile => {
   switch (tile.color) {
   case "yellow":
     return 1;
@@ -32,11 +27,12 @@ const getCol = id => {
   }
 };
 
-const TileManifest = ({ match }) => {
-  let game = games[match.params.game];
+const TileManifest = () => {
+  let params = useParams();
+  let game = games[params.game];
 
   if (!game.tiles) {
-    return <Redirect to={`/${match.params.game}/background`} />;
+    return <Redirect to={`/${params.game}/background`} />;
   }
 
   let ids = R.sortWith(
@@ -49,14 +45,14 @@ const TileManifest = ({ match }) => {
 
   let tileNodes = R.addIndex(R.map)((id, i) => {
     let [idBase, idExtra] = id.split("|");
-    if (!tiles[id] && !tiles[idBase]) return null;
-    let tile = game.tiles[id] || game.tiles[idBase];
-    let quantity = R.is(Object, tile) ? R.propOr(1, "quantity", tile) : tile;
+    let tile = getTile(tiles, game.tiles, id);
+    if (!tile) return null;
+    let quantity = tile.quantity;
     return (
       <div
         key={i}
         className="TileManifest--Tile"
-        style={{ gridColumn: `${getCol(id)} / span 1` }}
+        style={{ gridColumn: `${getCol(tile)} / span 1` }}
       >
         <div className="TileManifest--Id">
           {idBase}
@@ -71,7 +67,7 @@ const TileManifest = ({ match }) => {
             }}
             viewBox={`-86.6025 -86.6025 173.205 173.205`}
           >
-            <Tile id={id} />
+            <Tile id={id} gameTiles={game.tiles} />
           </Svg>
         </div>
         <div className="TileManifest--Quantity">{quantity}x</div>

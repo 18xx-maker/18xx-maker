@@ -17,7 +17,7 @@ let Links = (
   </ul>
 );
 
-const Nav = ({match}) => {
+const Nav = () => {
   let menuOptions = [<GameSelect key="game"/>,
                      <ComponentSelect key="component"/>,
                      Links];

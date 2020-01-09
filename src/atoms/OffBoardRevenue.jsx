@@ -2,6 +2,7 @@ import React from "react";
 import * as R from "ramda";
 
 import Name from "./Name";
+import Currency from "../util/Currency";
 
 import Color from "../data/Color";
 
@@ -13,20 +14,29 @@ const splitRevenues = (rows, revenues) => {
   }
 };
 
-const LETTER = 10;
+const DEFAULT_FONTSIZE = 14;
 
-const makeNode = (x, y, reverse, revenue) => {
-  let length = LETTER * revenue.cost.length;
-  let phaseLength = LETTER * `${revenue.phase}`.length;
-  let width = R.max(revenue.cost.length, 2) * LETTER + 5;
+const letter = (size) => {
+  return size * (5/7.0);
+};
+
+const height = (size) => {
+  return size + 6;
+}
+
+const makeNode = (x, y, reverse, revenue, size) => {
+  let value = revenue.value || revenue.revenue || revenue.cost;
+  let length = letter(size) * `${value}`.length;
+  let phaseLength = letter(size) * `${revenue.phase}`.length;
+  let width = R.max(`${value}`.length, 2) * letter(size) + 5;
 
   let nodes = [
     <Color context="map"
-           key={`rect-${revenue.cost}`}>
+           key={`rect-${value}`}>
       {c => (
         <rect
           width={width}
-          height="20"
+          height={height(size)}
           x={x}
           y={y - 10}
           stroke="none"
@@ -35,19 +45,19 @@ const makeNode = (x, y, reverse, revenue) => {
       )}
     </Color>,
     <Color context="map"
-           key={`text-${revenue.cost}`}>
+           key={`text-${value}`}>
       {c => (
         <text
           fill={c(revenue.textColor) || c("black")}
-          fontSize="14"
+          fontSize={size}
           dominantBaseline="central"
           textAnchor="middle"
           textLength={length}
           lengthAdjust="spacingAndGlyphs"
           x={x + 0.5 * width}
-          y={y - 1}
+          y={y - 10 + (size / 2) + 2}
         >
-          {revenue.cost}
+          <Currency value={value} type="offboard" />
         </text>
       )}
     </Color>
@@ -60,7 +70,7 @@ const makeNode = (x, y, reverse, revenue) => {
         {c => (
           <text
             fill={c(revenue.phaseColor) || c("white")}
-            fontSize="14"
+            fontSize={size}
             dominantBaseline="central"
             textAnchor="middle"
             textLength={phaseLength}
@@ -78,23 +88,23 @@ const makeNode = (x, y, reverse, revenue) => {
   return nodes;
 };
 
-const getWidth = r => R.max(r.cost.length, 2) * LETTER + 5;
+const getWidth = (r, size) => R.max(`${r.value || r.revenue || r.cost}`.length, 2) * letter(size) + 5;
 
-const makeNodes = (y, reverse, revenues) => {
-  let totalWidth = R.sum(R.map(r => 5 + LETTER * R.max(r.cost.length, 2),
+const makeNodes = (y, reverse, revenues, size) => {
+  let totalWidth = R.sum(R.map(r => 5 + letter(size) * R.max(`${r.value || r.revenue || r.cost}`.length, 2),
                                revenues));
   let bx = -0.5 * totalWidth; // Starting x for border box
   let x = bx;
 
   return R.concat(R.map(r => {
-    let result = makeNode(x, y, reverse, r);
-    x = x + getWidth(r);
+    let result = makeNode(x, y, reverse, r, size);
+    x = x + getWidth(r, size);
     return result;
   }, revenues),[
     <Color key={`rect-border-${y}`} context="map">
       {c => (
         <rect width={totalWidth}
-              height="20"
+              height={height(size)}
               y={y - 10}
               x={bx}
               fill="none"
@@ -105,7 +115,7 @@ const makeNodes = (y, reverse, revenues) => {
   ]);
 };
 
-const OffBoardRevenue = ({ name, revenues, reverse, rows }) => {
+const OffBoardRevenue = ({ name, revenues, reverse, rows, size}) => {
   let nameNode = null;
   if (name) {
     nameNode = <Name {...name}
@@ -116,9 +126,14 @@ const OffBoardRevenue = ({ name, revenues, reverse, rows }) => {
 
   let split = splitRevenues(rows, revenues);
 
+  let fontSize = DEFAULT_FONTSIZE;
+	if (size !== undefined) {
+  		fontSize = size;
+	}
+
   let nodes = R.addIndex(R.chain)((revenues, row) => {
-    let y = row * 20 * (reverse ? -1 : 1);
-    return makeNodes(y, reverse, revenues);
+    let y = row * height(fontSize) * (reverse ? -1 : 1);
+    return makeNodes(y, reverse, revenues, fontSize);
   }, split);
   // let nodes = makeNodes(-10, reverse, revenues);
 

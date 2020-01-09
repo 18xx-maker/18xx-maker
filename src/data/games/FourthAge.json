@@ -8,7 +8,7 @@
     "titleY": 1440,
     "titleSize": 100,
     "orientation": "horizontal",
-    "currency": "XAU"
+    "currency": "#g"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/18291/unpublished-prototype",
@@ -20,264 +20,159 @@
     "+20"
   ],
   "ipo": true,
-  "bank": "12,000g",
+  "bank": 12000,
   "players": [
     {
       "number": 2,
       "certLimit": "28 / 24",
-      "capital": "1050g"
+      "capital": 1050
     },
     {
       "number": 3,
       "certLimit": "20 / 17",
-      "capital": "700g"
+      "capital": 700
     },
     {
       "number": 4,
       "certLimit": "16 / 14",
-      "capital": "525g"
+      "capital": 525
     },
     {
       "number": 5,
       "certLimit": "13 / 11",
-      "capital": "420g"
+      "capital": 420
     },
     {
       "number": 6,
       "certLimit": "11 / 9",
-      "capital": "350g"
+      "capital": 350
     }
   ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Bree and Points South",
       "abbrev": "BPS",
+      "logo": "lotr/BPS",
       "tokens": [
         "Free",
         "40g",
         "100g",
         "100g"
       ],
-      "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "blue"
     },
     {
       "name": "Shire and Westlands",
       "abbrev": "SWR",
+      "logo": "lotr/SWR",
       "tokens": [
         "Free",
         "$40"
       ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     },
     {
       "name": "Rivendell and Grey Havens",
       "abbrev": "RGH",
+      "logo": "lotr/RGH",
       "tokens": [
         "Free",
         "$40",
         "Bonus"
       ],
-      "color": "purple",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "purple"
     },
     {
       "name": "Dwarvish Mountain Express",
       "abbrev": "DMH",
+      "logo": "lotr/DMH",
       "tokens": [
         "Free",
         "$40",
         "$100"
       ],
-      "color": "brown",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "brown"
     },
     {
       "name": "Elvish",
       "abbrev": "E",
+      "logo": "lotr/E",
       "tokens": [
         "Free",
         "$40",
         "$100"
       ],
-      "color": "pink",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "pink"
     },
     {
       "name": "Laketown and Lonely Mountain",
       "abbrev": "LLM",
+      "logo": "lotr/LLM",
       "tokens": [
         "Free",
         "$40",
         "$100"
       ],
-      "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "black"
     },
     {
       "name": "Minas Tirith Railway",
       "abbrev": "MTR",
+      "logo": "lotr/MTR",
       "tokens": [
         "Free",
         "$40",
         "$100",
         "Bonus"
       ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "orange"
     },
     {
       "name": "Orcish",
       "abbrev": "O",
+      "logo": "lotr/O",
       "tokens": [
         "Free",
         "$40",
         "$100"
       ],
-      "color": "lime",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "lime"
     },
     {
       "name": "Southern Excursion Railway",
       "abbrev": "SER",
+      "logo": "lotr/SER",
       "tokens": [
         "Free",
         "$40"
       ],
-      "color": "cyan",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "cyan"
     },
     {
       "name": "Far Harad Railway",
       "abbrev": "FHR",
+      "logo": "lotr/FHR",
       "tokens": [
         "Free",
         "$40",
         "Bonus"
       ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "red"
     }
   ],
   "trains": [
@@ -441,37 +336,46 @@
   "privates": [
     {
       "name": "The Hobbiton Teakettle",
-      "price": "$20",
-      "revenue": "$5",
+      "price": 20,
+      "revenue": 5,
+      "token": { "color": "yellow", "label": "g" },
       "description": ""
     },
     {
       "name": "The Great River Bridge Company",
-      "price": "$50",
-      "revenue": "$10",
+      "price": 50,
+      "revenue": 10,
+      "icon": "bridge",
       "description": "Owning railroad pays nothing for one tile lay across the Anduin; may be bought in during Phase 2 for up to face value."
     },
     {
       "name": "Mountain Guides, Inc",
-      "price": "$80",
-      "revenue": "$15",
+      "price": 80,
+      "revenue": 15,
+      "icon": "mountain",
       "description": "Owning railroad pays nothing for one tile lay in a mountain hex; may be bought in during Phase 2 for up to face value."
     },
     {
       "name": "Trollheim",
-      "price": "$120",
-      "revenue": "$20",
+      "price": 120,
+      "revenue": 20,
+      "token": {
+        "color": "white",
+        "label": "+20"
+      },
       "description": "Owning railroad may play a permanent +20 marker in any city or town. Bonus applies only to the owning railroad."
     },
     {
       "name": "Moria Mining Company",
-      "price": "$140",
+      "price": 140,
+      "icon": "coal",
       "description": "This is the President's certificate of the Moria Mining Company. The purchaser sets the par value of the railway. Unlike other companies, this company may operate with just 20% sold. It may not be purchased by another public company."
     },
     {
       "name": "Lorien Border Railway",
-      "price": "$170",
-      "revenue": "$25",
+      "price": 170,
+      "revenue": 25,
+      "company": "E",
       "description": "Comes with a 10% share of the Elvish."
     }
   ],
@@ -1347,10 +1251,6 @@
         "water": {
           "cost": "100g"
         },
-        "borders": {
-          "side": 1,
-          "color": "water"
-        },
         "hexes": [
           "A3"
         ]
@@ -1359,10 +1259,6 @@
         "color": "plain",
         "water": {
           "cost": "100g"
-        },
-        "borders": {
-          "side": 4,
-          "color": "water"
         },
         "hexes": [
           "A5"
@@ -1406,8 +1302,16 @@
           "H22",
           "I21",
           "J22",
-          "K7",
           "P10"
+        ]
+      },
+      {
+        "color": "river",
+        "water": {
+          "cost": "60g"
+        },
+        "hexes": [
+          "K7"
         ]
       },
       {
@@ -1420,6 +1324,16 @@
         ]
       },
       {
+        "color": "river",
+        "water": {
+          "cost": "80g"
+        },
+        "hexes": [
+          "K11",
+          "K13"
+        ]
+      },
+      {
         "color": "plain",
         "water": {
           "cost": "80g"
@@ -1428,9 +1342,7 @@
           "C1",
           "C9",
           "D10",
-          "E15",
-          "K11",
-          "K13"
+          "E15"
         ]
       },
       {
@@ -1444,18 +1356,16 @@
         ],
         "tokens": [
           {
-            "label": "RGH",
-            "width": 15,
-            "color": "purple",
-            "angle": 30,
-            "percent": 0.75
+            "company": "RGH",
+            "destination": true,
+            "angle": 270,
+            "percent": 0.7
           },
           {
-            "label": "E",
-            "width": 15,
-            "color": "pink",
+            "company": "E",
+            "destination": true,
             "angle": 330,
-            "percent": 0.75
+            "percent": 0.7
           }
         ],
         "hexes": [
@@ -1500,12 +1410,6 @@
         "water": {
           "cost": "100g"
         },
-        "borders": [
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "D12"
         ]
@@ -1518,7 +1422,15 @@
         "hexes": [
           "D18",
           "E17",
-          "F22",
+          "F22"
+        ]
+      },
+      {
+        "color": "river",
+        "water": {
+          "cost": "100g"
+        },
+        "hexes": [
           "J18"
         ]
       },
@@ -1527,8 +1439,7 @@
         "companies": [
           {
             "label": "THT",
-            "angle": 180,
-            "percent": 0.667
+            "percent": 0.65
           }
         ],
         "cities": [
@@ -1540,8 +1451,7 @@
               }
             ],
             "name": {
-              "name": "Hobbitown",
-              "reverse": true
+              "name": "Hobbitown"
             }
           }
         ],
@@ -1554,12 +1464,6 @@
         "water": {
           "cost": "80g"
         },
-        "borders": [
-          {
-            "side": 3,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "E13"
         ]
@@ -1581,22 +1485,18 @@
         "color": "plain",
         "labels": [
           {
-            "percent": 0.67,
-            "angle": 180,
+            "percent": 0.667,
+            "angle": 270,
             "label": "P"
           }
         ],
         "cities": [
           {
             "companies": [
-              {
-                "label": "BPS",
-                "color": "orange"
-              }
+              "BPS"
             ],
             "name": {
-              "name": "Bree",
-              "reverse": true
+              "name": "Bree"
             }
           }
         ],
@@ -1606,12 +1506,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
         "water": {
           "cost": "100g"
         },
@@ -1679,16 +1573,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "water"
-          },
-          {
-            "side": 3,
-            "color": "water"
-          }
-        ],
         "water": {
           "cost": "100g"
         },
@@ -1698,12 +1582,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 4,
-            "color": "water"
-          }
-        ],
         "water": {
           "cost": "100g"
         },
@@ -1716,15 +1594,14 @@
         "labels": [
           {
             "percent": 0.67,
-            "angle": 180,
+            "angle": 270,
             "label": "P"
           }
         ],
         "cities": [
           {
             "name": {
-              "name": "Umbar",
-              "reverse": true
+              "name": "Umbar"
             }
           }
         ],
@@ -1762,16 +1639,14 @@
         },
         "tokens": [
           {
-            "label": "SER",
-            "width": 15,
-            "color": "cyan",
+            "company": "SER",
+            "destination": true,
             "angle": 150,
             "percent": 0.7
           },
           {
-            "label": "FHR",
-            "width": 15,
-            "color": "red",
+            "company": "FHR",
+            "destination": true,
             "angle": 210,
             "percent": 0.7
           }
@@ -1787,28 +1662,27 @@
       {
         "color": "plain",
         "water": {
-          "percent": 0.67,
+          "percent": 0.667,
           "cost": "80g"
         },
         "labels": [
           {
-            "percent": 0.67,
-            "angle": 180,
+            "percent": 0.667,
+            "angle": 270,
             "label": "P"
           }
         ],
-        "token": [
+        "tokens": [
           {
-            "label": "E",
-            "width": 15,
-            "color": "pink",
-            "percent": 0.75
+            "company": "E",
+            "destination": true,
+            "angle": 210,
+            "percent": 0.8
           }
         ],
         "cities": [
           {
             "name": {
-              "offset": 25,
               "name": "Dol Amoroth"
             }
           }
@@ -1857,10 +1731,10 @@
         ],
         "tokens": [
           {
-            "label": "SWR",
-            "width": 15,
-            "color": "green",
-            "percent": 0.65
+            "company": "SWR",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.667
           }
         ],
         "hexes": [
@@ -1896,12 +1770,20 @@
             }
           }
         ],
+        "tokens": [
+          {
+            "company": "MTR",
+            "destination": true,
+            "angle": 330,
+            "percent": 0.7
+          }
+        ],
         "hexes": [
           "I13"
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "water": {
           "cost": "120g"
         },
@@ -1913,29 +1795,24 @@
         "color": "plain",
         "labels": [
           {
-            "percent": 0.67,
-            "angle": 180,
+            "percent": 0.667,
+            "angle": 270,
             "label": "P"
           }
         ],
         "water": [
           {
-            "percent": 0.67,
+            "percent": 0.667,
             "cost": "120g"
           }
         ],
         "cities": [
           {
             "companies": [
-              {
-                "label": "DMH",
-                "color": "brown"
-              }
+              "DMH"
             ],
             "name": {
-              "name": "Moria",
-              "offset": 75,
-              "reverse": true
+              "name": "Moria"
             }
           }
         ],
@@ -1948,10 +1825,7 @@
         "cities": [
           {
             "companies": [
-              {
-                "label": "SER",
-                "color": "cyan"
-              }
+              "SER"
             ],
             "name": {
               "name": "Harondor"
@@ -1963,10 +1837,9 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "water": {
-          "percent": 0.7,
-          "angle": 30,
+          "percent": 0.667,
           "cost": "60g"
         },
         "cities": [
@@ -1984,11 +1857,10 @@
         ],
         "tokens": [
           {
-            "label": "LLM",
-            "width": 15,
-            "color": "black",
-            "angle": 330,
-            "percent": 0.7
+            "company": "LLM",
+            "destination": true,
+            "angle": 270,
+            "percent": 0.667
           }
         ],
         "hexes": [
@@ -1996,43 +1868,36 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "labels": [
           {
-            "percent": 0.67,
-            "angle": 180,
+            "percent": 0.667,
+            "angle": 270,
             "label": "P"
           }
         ],
         "water": [
           {
-            "percent": 0.7,
-            "angle": 30,
+            "percent": 0.667,
             "cost": "80g"
           }
         ],
         "cities": [
           {
             "companies": [
-              {
-                "label": "MTR",
-                "color": "blue"
-              }
+              "MTR"
             ],
             "name": {
-              "name": "Minas Tirith",
-              "offset": 75,
-              "reverse": true
+              "name": "Minas Tirith"
             }
           }
         ],
         "tokens": [
           {
-            "label": "BPS",
-            "width": 15,
-            "color": "orange",
-            "angle": 330,
-            "percent": 0.75
+            "company": "BPS",
+            "destination": true,
+            "angle": 150,
+            "percent": 0.8
           }
         ],
         "hexes": [
@@ -2040,7 +1905,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "water": {
           "size": "small",
           "cost": "$80",
@@ -2084,16 +1949,8 @@
         "cities": [
           {
             "name": {
-              "name": "Edoras"
+              "name": "Erebor"
             }
-          }
-        ],
-        "tokens": [
-          {
-            "label": "MTR",
-            "width": 15,
-            "color": "blue",
-            "percent": 0.65
           }
         ],
         "hexes": [
@@ -2104,8 +1961,8 @@
         "color": "plain",
         "labels": [
           {
-            "percent": 0.67,
-            "angle": 180,
+            "percent": 0.667,
+            "angle": 270,
             "label": "P"
           }
         ],
@@ -2118,8 +1975,7 @@
               }
             ],
             "name": {
-              "name": "Laketown",
-              "reverse": true
+              "name": "Laketown"
             }
           }
         ],
@@ -2191,12 +2047,6 @@
         "centerTowns": [
           {}
         ],
-        "borders": [
-          {
-            "side": 1,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "O17"
         ]
@@ -2206,12 +2056,6 @@
         "mountain": {
           "cost": "120g"
         },
-        "borders": [
-          {
-            "side": 4,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "O19"
         ]
@@ -2266,9 +2110,8 @@
         },
         "tokens": [
           {
-            "label": "DMH",
-            "width": 15,
-            "color": "brown",
+            "company": "DMH",
+            "destination": true,
             "angle": 90,
             "percent": 0.75
           }
@@ -2393,6 +2236,28 @@
           "Q19",
           "Q21"
         ]
+      }
+    ],
+    "borders": [
+      {
+        "color": "water",
+        "coords": ["A3p5", "A3p6"]
+      },
+      {
+        "color": "water",
+        "coords": ["E13p1", "E13p2"]
+      },
+      {
+        "color": "water",
+        "coords": ["G19p1", "G19p2"]
+      },
+      {
+        "color": "water",
+        "coords": ["G19p5", "G19p6"]
+      },
+      {
+        "color": "water",
+        "coords": ["O17p5", "O17p6"]
       }
     ]
   }

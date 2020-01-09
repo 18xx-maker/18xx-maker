@@ -9,7 +9,7 @@
     "titleX": 170,
     "titleSize": 150,
     "extraTotalWidth": 210,
-    "extraTokens": 2,
+    "marketTokens": 2,
     "currency": "USD"
   },
   "links": {
@@ -20,28 +20,51 @@
     "Round"
   ],
   "ipo": false,
-  "bank": "$3,720",
+  "bank": 3720,
   "players": [
     {
       "number": 2,
-      "capital": "$520",
+      "capital": 520,
       "certLimit": 7
     },
     {
       "number": 3,
-      "capital": "$520",
+      "capital": 520,
       "certLimit": 7
     }
   ],
+  "tokenTypes": {
+    "default": [
+      "Free",
+      "$40",
+      "$100"
+    ]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 40,
+        "shares": 4
+      },
+      {
+        "quantity": 6,
+        "percent": 10,
+        "shares": 1
+      },
+      {
+        "quantity": 1,
+        "label": "Bond",
+        "cost": 300,
+        "revenue": 50
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Denver & Rio Grande Western",
       "abbrev": "D&RGW",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
       "color": "orange",
       "shares": [
         {
@@ -64,68 +87,20 @@
         {
           "quantity": 1,
           "label": "Bond",
-          "cost": "$300",
-          "revenue": "$50"
+          "cost": 300,
+          "revenue": 50
         }
       ]
     },
     {
       "name": "Colorado & Southern",
       "abbrev": "C&S",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "purple",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 40,
-          "shares": 4
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Bond",
-          "cost": "$300",
-          "revenue": "$50"
-        }
-      ]
+      "color": "purple"
     },
     {
       "name": "Colorado & Western",
       "abbrev": "C&W",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 40,
-          "shares": 4
-        },
-        {
-          "quantity": 6,
-          "percent": 10,
-          "shares": 1
-        },
-        {
-          "quantity": 1,
-          "label": "Bond",
-          "cost": "$300",
-          "revenue": "$50"
-        }
-      ]
+      "color": "blue"
     }
   ],
   "trains": [
@@ -282,34 +257,39 @@
   "privates": [
     {
       "name": "Midland Terminal",
-      "price": "$20",
+      "price": 20,
       "players": "2 Player",
-      "revenue": "$5"
+      "token": { "color": "yellow", "label": "$" },
+      "revenue": 5
     },
     {
       "name": "Midland Terminal",
-      "price": "$25",
+      "price": 25,
       "players": "3 Player",
-      "revenue": "$5"
+      "token": { "color": "yellow", "label": "$" },
+      "revenue": 5
     },
     {
       "name": "Denver and Salt Lake",
-      "price": "$70",
-      "revenue": "$10",
+      "price": 70,
+      "revenue": 10,
       "players": "2 Player",
+      "tile": "800",
       "description": "The owning corporation may lay the D&SL tile on their reserved hex (B4 or D4) instead of their normal track action, this action closes the company. Closes when the first 5 Train is purchased, however, the tile may still be laid by the corporation."
     },
     {
       "name": "Denver and Salt Lake",
-      "price": "$70",
-      "revenue": "$10",
+      "price": 70,
+      "revenue": 10,
       "players": "3 Player",
+      "icon": "share",
       "description": "Trade for any share in the market at any time, this action closes the company. Closes when the first 5 Train is purchased."
     },
     {
       "name": "Rio Grande Southern",
-      "price": "$150",
-      "revenue": "$20",
+      "price": 150,
+      "revenue": 20,
+      "company": "D&RGW",
       "description": "Obtain a 10% share of D&RGW. The bank will compensate D&RGW for this share after its par value has been set."
     }
   ],

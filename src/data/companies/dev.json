@@ -1,0 +1,126 @@
+{
+  "name": "Development",
+  "abbrev": "dev",
+  "companies": [
+    {
+      "name": "Apple OS X",
+      "abbrev": "OSX",
+      "color": "black",
+      "logo": "dev/apple"
+    },
+    {
+      "name": "Atom",
+      "abbrev": "ATOM",
+      "color": "tan",
+      "logo": "dev/atom"
+    },
+    {
+      "name": "Amazon Web Services",
+      "abbrev": "AWS",
+      "color": "orange",
+      "logo": "dev/aws"
+    },
+    {
+      "name": "Microsoft Azure",
+      "abbrev": "AZ",
+      "color": "blue",
+      "logo": "dev/azure"
+    },
+    {
+      "name": "Couchbase",
+      "abbrev": "CB",
+      "color": "red",
+      "logo": "dev/couchbase"
+    },
+    {
+      "name": "Docker",
+      "abbrev": "D",
+      "color": "cyan",
+      "logo": "dev/docker"
+    },
+    {
+      "name": "Emacs",
+      "abbrev": "E",
+      "color": "purple",
+      "logo": "dev/emacs"
+    },
+    {
+      "name": "Google Cloud",
+      "abbrev": "GC",
+      "color": "red",
+      "logo": "dev/gcloud"
+    },
+    {
+      "name": "Git",
+      "abbrev": "GIT",
+      "color": "orange",
+      "logo": "dev/git"
+    },
+    {
+      "name": "Github",
+      "abbrev": "GH",
+      "color": "black",
+      "logo": "dev/github"
+    },
+    {
+      "name": "Kubernetes",
+      "abbrev": "K8S",
+      "color": "blue",
+      "logo": "dev/k8s"
+    },
+    {
+      "name": "Linux",
+      "abbrev": "LNX",
+      "color": "orange",
+      "logo": "dev/linux"
+    },
+    {
+      "name": "Microsoft Windows",
+      "abbrev": "WIN",
+      "color": "red",
+      "logo": "dev/microsoft"
+    },
+    {
+      "name": "Mongo DB",
+      "abbrev": "MDB",
+      "color": "lime",
+      "logo": "dev/mongodb"
+    },
+    {
+      "name": "MySQL",
+      "abbrev": "MY",
+      "color": "blue",
+      "logo": "dev/mysql"
+    },
+    {
+      "name": "Nginx",
+      "abbrev": "NGX",
+      "color": "green",
+      "logo": "dev/nginx"
+    },
+    {
+      "name": "PostgreSQL",
+      "abbrev": "PSQL",
+      "color": "blue",
+      "logo": "dev/postgresql"
+    },
+    {
+      "name": "Redis",
+      "abbrev": "RS",
+      "color": "red",
+      "logo": "dev/redis"
+    },
+    {
+      "name": "Vim",
+      "abbrev": "VIM",
+      "color": "green",
+      "logo": "dev/vim"
+    },
+    {
+      "name": "Visual Studio Code",
+      "abbrev": "VSC",
+      "color": "blue",
+      "logo": "dev/vscode"
+    }
+  ]
+}

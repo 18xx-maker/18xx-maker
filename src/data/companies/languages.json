@@ -1,0 +1,125 @@
+{
+  "name": "Programming Languages",
+  "abbrev": "languages",
+  "companies": [
+    {
+      "name": "Ruby",
+      "abbrev": "RB",
+      "color": "red",
+      "logo": "languages/ruby"
+    },
+    {
+      "name": "Python",
+      "abbrev": "PY",
+      "color": "green",
+      "logo": "languages/python"
+    },
+    {
+      "name": "Javascript",
+      "abbrev": "JS",
+      "color": "yellow",
+      "logo": "languages/javascript"
+    },
+    {
+      "name": "C++",
+      "abbrev": "C++",
+      "color": "blue",
+      "logo": "languages/cpp"
+    },
+    {
+      "name": "C#",
+      "abbrev": "C#",
+      "color": "purple",
+      "logo": "languages/csharp"
+    },
+    {
+      "name": "Haskell",
+      "abbrev": "HS",
+      "color": "gray",
+      "logo": "languages/haskell"
+    },
+    {
+      "name": "Rust",
+      "abbrev": "RS",
+      "color": "black",
+      "logo": "languages/rust"
+    },
+    {
+      "name": "Java",
+      "abbrev": "JAVA",
+      "color": "orange",
+      "logo": "languages/java"
+    },
+    {
+      "name": "Go",
+      "abbrev": "GO",
+      "color": "cyan",
+      "logo": "languages/go"
+    },
+    {
+      "name": "Scala",
+      "abbrev": "SC",
+      "color": "red",
+      "logo": "languages/scala"
+    },
+    {
+      "name": "Lua",
+      "abbrev": "LUA",
+      "color": "blue",
+      "logo": "languages/lua"
+    },
+    {
+      "name": "Clojure",
+      "abbrev": "CLJ",
+      "color": "green",
+      "logo": "languages/clojure"
+    },
+    {
+      "name": "Common Lisp",
+      "abbrev": "CL",
+      "color": "gray",
+      "logo": "languages/commonlisp"
+    },
+    {
+      "name": "Erlang",
+      "abbrev": "ERL",
+      "color": "red",
+      "logo": "languages/erlang"
+    },
+    {
+      "name": "Swift",
+      "abbrev": "SW",
+      "color": "orange",
+      "logo": "languages/swift"
+    },
+    {
+      "name": "Shell",
+      "abbrev": "SH",
+      "color": "green",
+      "logo": "languages/shell"
+    },
+    {
+      "name": "C",
+      "abbrev": "C",
+      "color": "gray",
+      "logo": "languages/c"
+    },
+    {
+      "name": "PHP",
+      "abbrev": "PHP",
+      "color": "blue",
+      "logo": "languages/php"
+    },
+    {
+      "name": "Perl",
+      "abbrev": "PL",
+      "color": "blue",
+      "logo": "languages/perl"
+    },
+    {
+      "name": "Assembly",
+      "abbrev": "ASM",
+      "color": "black"
+    }
+  ]
+}

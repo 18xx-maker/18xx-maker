@@ -1,0 +1,45 @@
+.cards {
+  position: relative;
+  page-break-inside: avoid;
+  box-sizing: border-box;
+}
+
+.cards--dtgDie {
+  padding: 0.25in 0;
+}
+
+.cards > svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 8in;
+  width: 0.5in;
+}
+
+.cards--miniEuroDie > svg {
+  right: 0.21506in;
+}
+
+.card {
+  page-break-inside: avoid;
+  font-family: display;
+  box-sizing: border-box;
+  position: relative;
+  background-color: white;
+  float: left;
+}
+
+.card__bleed {
+  position: absolute;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
+.card__body {
+  position: absolute;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+}

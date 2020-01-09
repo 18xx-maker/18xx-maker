@@ -1,0 +1,66 @@
+{
+  "name": "Lord of the Rings",
+  "abbrev": "lotr",
+  "companies": [
+    {
+      "name": "Bree and Points South",
+      "abbrev": "BPS",
+      "logo": "lotr/BPS",
+      "color": "blue"
+    },
+    {
+      "name": "Shire and Westlands",
+      "abbrev": "SWR",
+      "logo": "lotr/SWR",
+      "color": "green"
+    },
+    {
+      "name": "Rivendell and Grey Havens",
+      "abbrev": "RGH",
+      "logo": "lotr/RGH",
+      "color": "purple"
+    },
+    {
+      "name": "Dwarvish Mountain Express",
+      "abbrev": "DMH",
+      "logo": "lotr/DMH",
+      "color": "brown"
+    },
+    {
+      "name": "Elvish",
+      "abbrev": "E",
+      "logo": "lotr/E",
+      "color": "pink"
+    },
+    {
+      "name": "Laketown and Lonely Mountain",
+      "abbrev": "LLM",
+      "logo": "lotr/LLM",
+      "color": "black"
+    },
+    {
+      "name": "Minas Tirith Railway",
+      "abbrev": "MTR",
+      "logo": "lotr/MTR",
+      "color": "orange"
+    },
+    {
+      "name": "Orcish",
+      "abbrev": "O",
+      "logo": "lotr/O",
+      "color": "lime"
+    },
+    {
+      "name": "Southern Excursion Railway",
+      "abbrev": "SER",
+      "logo": "lotr/SER",
+      "color": "yellow"
+    },
+    {
+      "name": "Far Harad Railway",
+      "abbrev": "FHR",
+      "logo": "lotr/FHR",
+      "color": "red"
+    }
+  ]
+}

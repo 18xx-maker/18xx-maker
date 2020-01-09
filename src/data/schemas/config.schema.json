@@ -25,7 +25,7 @@
       "required": ["width", "height"]
     },
     "margins": {
-        "$ref": "#/definitions/dimension"
+      "$ref": "#/definitions/dimension"
     }
   },
 
@@ -43,6 +43,24 @@
         "required": ["margins"]
       }]
     },
+    "currency": {
+      "type": "object",
+      "properties": {
+        "bank": { "type": "boolean" },
+        "capital": { "type": "boolean" },
+        "market": { "type": "boolean" },
+        "offboard": { "type": "boolean" },
+        "par": { "type": "boolean" },
+        "private": { "type": "boolean" },
+        "revenue": { "type": "boolean" },
+        "terrain": { "type": "boolean" },
+        "token": { "type": "boolean" },
+        "train": { "type": "boolean" },
+        "value": { "type": "boolean" }
+      },
+      "required": ["bank", "capital", "market", "offboard", "par", "private", "revenue", "terrain", "token", "train", "value"],
+      "additionalProperties": false
+    },
     "stock": {
       "type": "object",
       "properties": {
@@ -58,17 +76,65 @@
       "type": "string",
       "enum": ["equal", "max"]
     },
-    "shareStyle": {
-      "type": "string",
-      "enum": ["center", "left", "gmt"]
+    "cards": {
+      "type": "object",
+      "properties": {
+        "shareStyle": {
+          "type": "string",
+          "enum": ["center", "left", "gmt"]
+        },
+        "layout": {
+          "type": "string",
+          "enum": ["free", "miniEuroDie", "dtgDie"]
+        },
+        "width": { "type": "number", "minimum": 1 },
+        "height": { "type": "number", "minimum": 1 },
+        "cutlines": { "type": "number", "minimum": 0 },
+        "bleed": { "type": "number", "minimum": 0 },
+        "border": { "type": "number", "minimum": 0},
+        "blackBand": { "type": "boolean" }
+      },
+      "required": ["shareStyle", "layout", "width", "height", "cutlines", "bleed", "blackBand"],
+      "additionalProperties": false
     },
-    "charterStyle": {
-      "type": "string",
-      "enum": ["carth", "color"]
+    "trains": {
+      "type": "object",
+      "properties": {
+        "style": { "type": "string", "enum": ["color", "number"] },
+        "images": { "type": "boolean" }
+      },
+      "additionalProperties": false,
+      "required": ["styles", "images"]
     },
-    "tokenLayout": {
-      "type": "string",
-      "enum": ["max", "gsp"]
+    "charters": {
+      "type": "object",
+      "properties": {
+        "style": {
+          "type": "string",
+          "enum": ["carth", "color"]
+        },
+        "cutlines": { "type": "number", "minimum": 0 },
+        "bleed": { "type": "number", "minimum": 0 },
+        "border": { "type": "number", "minimum": 0},
+        "halfWidth": { "type": "boolean" },
+        "blackBand": { "type": "boolean" }
+      },
+      "required": ["style", "halfWidth", "cutlines", "border", "blackBand"],
+      "additionalProperties": false
+    },
+    "tokens": {
+      "type": "object",
+      "properties": {
+        "layout": {
+          "type": "string",
+          "enum": ["free", "gsp"]
+        },
+        "marketTokenSize": { "$ref": "#/definitions/dimension" },
+        "stationTokenSize": { "$ref": "#/definitions/dimension" },
+        "bleed": { "type": "boolean" }
+      },
+      "additionalProperties": false,
+      "required": ["layout", "marketTokenSize", "stationTokenSize", "bleed"]
     },
     "coords": {
       "type": "string",
@@ -79,16 +145,23 @@
       "properties": {
         "layout": {
           "type": "string",
-          "enum": ["offset", "individual", "die"]
+          "enum": ["offset", "individual", "die", "smallDie"]
         },
         "width": {
           "type": "number",
           "exclusiveMinimum": 0
-        }
+        },
+        "mapWidth": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "gaps": { "type": "boolean" }
       },
       "required": [
         "layout",
-        "width"
+        "width",
+        "mapWidth",
+        "gaps"
       ],
       "additionalProperties": false
     },
@@ -96,26 +169,31 @@
       "type": "string",
       "enum": ["none", "original", "match", "main"]
     },
-    "plainMapHomes": { "type": "boolean" },
-    "plainMapDestinations": { "type": "boolean" },
+    "overrideCompanies": {
+      "type": "string",
+      "enum": ["none", "languages", "lotr", "dev", "webdev", "owl", "1830"]
+    },
+    "overrideSelection": {
+      "type": "array",
+      "items": { "type": "integer", "minimum": 0 }
+    },
+    "plainMapCompanies": { "type": "boolean" },
     "straightCityNames": { "type": "boolean" },
-    "halfWidthCharters": { "type": "boolean" },
     "font": { "$ref": "#/definitions/font" }
   },
   "required": [
-    "charterStyle",
     "companiesTheme",
     "companySvgLogos",
     "coords",
     "font",
     "pagination",
     "paper",
-    "plainMapDestinations",
-    "plainMapHomes",
-    "shareStyle",
+    "plainMapCompanies",
     "stock",
     "theme",
-    "tokenLayout"
+    "tokens",
+    "overrideCompanies",
+    "overrideSelection"
   ],
   "additionalProperties": false
 }

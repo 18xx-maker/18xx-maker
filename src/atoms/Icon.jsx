@@ -5,20 +5,49 @@ const Value = ({ type }) => {
   let icon;
 
   switch (type) {
+  case "charter":
+    icon = <use href="#charter" />
+    break;
+  case "tracks":
+    icon = <use href="#tracks" />
+    break;
+  case "boat":
+    icon = <use href="#boat" />
+    break;
+  case "mail":
+    icon = <use href="#mail" />
+    break;
+  case "share":
+    icon = <use href="#share" />
+    break;
+  case "bridge":
+    icon = <use href="#bridge" />
+    break;
+  case "tree":
+    icon = <use href="#tree" />
+    break;
+  case "mountain":
+    icon = <use href="#mountain" />
+    break;
+  case "water":
+    icon = <use href="#water" />
+    break;
+  case "river":
+    icon = <use href="#river" />
+    break;
+  case "cactus":
+    icon = <use href="#cactus" />
+    break;
+  case "swamp":
+    icon = <use href="#swamp" />
+    break;
   case "meat":
     icon = <use href="#meat" />;
-    break;
-  case "mountain60":
-    icon = <use href="#mountain60" />;
-    break;
-  case "mountain120":
-    icon = <use href="#mountain120" />;
     break;
   case "coal":
     icon = <use href="#coal" />;
     break;
   case "port":
-  case "steam":
   default:
     icon = <use href="#port" />;
     break;

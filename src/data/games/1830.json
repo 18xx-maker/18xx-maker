@@ -15,221 +15,124 @@
     "Round"
   ],
   "ipo": true,
-  "bank": "$12,000",
+  "bank": 12000,
   "players": [
     {
       "number": 3,
       "certLimit": 20,
-      "capital": "$800"
+      "capital": 800
     },
     {
       "number": 4,
       "certLimit": 16,
-      "capital": "$600"
+      "capital": 600
     },
     {
       "number": 5,
       "certLimit": 13,
-      "capital": "$480"
+      "capital": 480
     },
     {
       "number": 6,
       "certLimit": 11,
-      "capital": "$400"
+      "capital": 400
     }
   ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "tokenTypes": {
+    "two": [
+      "Home",
+      40
+    ],
+    "three": [
+      "Home",
+      40,
+      100
+    ],
+    "four": [
+      "Home",
+      40,
+      100,
+      100
+    ]
+  },
   "companies": [
     {
-      "name": "Pennsylvania",
+      "name": "Pennsylvania Railroad",
       "abbrev": "PRR",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100",
-        "$100"
-      ],
+      "logo": "PRR",
       "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
-      "name": "New York Central",
+      "name": "New York Central Railroad",
       "abbrev": "NYC",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100",
-        "$100"
-      ],
+      "logo": "NYC",
       "color": "black",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
-      "name": "Canadian Pacific",
+      "name": "Canadian Pacific Railroad",
       "abbrev": "CPR",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100",
-        "$100"
-      ],
+      "logo": "CPR",
       "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "four"
     },
     {
-      "name": "Baltimore & Ohio",
+      "name": "Baltimore & Ohio Railroad",
       "abbrev": "B&O",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
+      "logo": "BO",
       "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
-      "name": "Chesapeake & Ohio",
+      "name": "Chesapeake & Ohio Railroad",
       "abbrev": "C&O",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
+      "logo": "CO",
       "color": "cyan",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
-      "name": "Erie",
+      "name": "Erie Railroad",
       "abbrev": "ERIE",
-      "tokens": [
-        "Free",
-        "$40",
-        "$100"
-      ],
+      "logo": "ERIE",
       "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "three"
     },
     {
-      "name": "New York, New Haven & Hartford",
+      "name": "New York, New Haven & Hartford Railroad",
       "abbrev": "NYNH",
-      "tokens": [
-        "Free",
-        "$40"
-      ],
+      "logo": "NNH",
       "color": "orange",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "tokens": "two"
     },
     {
-      "name": "Boston & Maine",
+      "name": "Boston & Maine Railroad",
       "abbrev": "B&M",
-      "tokens": [
-        "Free",
-        "$40"
-      ],
-      "color": "brown",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "logo": "BM",
+      "color": "lime",
+      "tokens": "two"
     }
   ],
   "trains": [
     {
       "name": "2",
       "quantity": 6,
-      "price": "$80",
+      "price": 80,
       "color": "yellow",
       "info": [
         {
@@ -241,7 +144,7 @@
     {
       "name": "3",
       "quantity": 5,
-      "price": "$180",
+      "price": 180,
       "color": "green",
       "info": [
         {
@@ -253,7 +156,7 @@
     {
       "name": "4",
       "quantity": 4,
-      "price": "$300",
+      "price": 300,
       "color": "green",
       "info": [
         {
@@ -265,7 +168,7 @@
     {
       "name": "5",
       "quantity": 3,
-      "price": "$450",
+      "price": 450,
       "color": "brown",
       "info": [
         {
@@ -277,7 +180,7 @@
     {
       "name": "6",
       "quantity": 2,
-      "price": "$630",
+      "price": 630,
       "color": "brown",
       "info": [
         {
@@ -289,7 +192,7 @@
     {
       "name": "D",
       "quantity": 6,
-      "price": "$1100",
+      "price": 1100,
       "color": "brown",
       "description": "Cost $800 when trading in a 4T, 5T or 6T",
       "info": [
@@ -303,39 +206,45 @@
   "privates": [
     {
       "name": "Schuylkill Valley",
-      "price": "$20",
-      "revenue": "$5",
+      "price": 20,
+      "revenue": 5,
+      "hex": "G15",
       "description": ""
     },
     {
       "name": "Champlain & St.Lawrence",
-      "price": "$40",
-      "revenue": "$10",
-      "description": "A corporation owning the C&StL may lay a tile on the C&StL's hex even if this hex is not connected to the corporations's railhead. This free tile placement is in addition to the corporation's normal tile placement - for this turn only the corporation may play two tiles. The tile played on the C&StL hex does not have to connect to any existing adjacent track."
+      "price": 40,
+      "revenue": 10,
+      "hex": "B20",
+      "description": "A corporation owning the C&StL may lay a tile on the C&StL's hex even if this hex is not connected to the corporations's railhead. This free tile placement is in addition to the corporation's normal tile placement."
     },
     {
       "name": "Delaware & Hudson",
-      "price": "$70",
-      "revenue": "$15",
-      "description": "A corporation owning the Delaware & Hudson may establish a railhead on the D&H hex by laying a station tile and a token. The station does not have to be connected to the remainder of the corporation's route. The tile laid is the owning corporation's one tile placement for the turn. Removal of the mountain costs $120 as usual but there is no charge for laying the token. Placing the token is not required, but if placed in a future turn, it must be paid for. Other corporations may place a tile here subject to the ordinary rules."
+      "price": 70,
+      "revenue": 15,
+      "hex": "F16",
+      "description": "A corporation owning the Delaware & Hudson may establish a railhead on the D&H hex by laying a station tile and a token. The station does not have to be connected to the remainder of the corporation's route. The tile laid is the owning corporation's one tile placement for the turn."
     },
     {
       "name": "Mohawk & Hudson",
-      "price": "$110",
-      "revenue": "$20",
-      "description": "A player owning the M&H may exhange it for a 10% share of the NYC provided he does not already hold 60% of the NYC stock and there is NYC stock available in the Bank or the Pool. The exchange may be made during the player's turn of a stock round or between the turns of other players or corporations in either stock or operating rounds. This action closes the M&H."
+      "price": 110,
+      "revenue": 20,
+      "company": "NYC",
+      "description": "A player owning the M&H may exhange it for a 10% share of the NYC if he does not already hold 60% of the NYC and there is NYC stock available in the Bank or the Pool. The exchange may be made during the player's turn of a stock round or between the turns of other players or corporations in either stock or operating rounds. This action closes the M&H."
     },
     {
       "name": "Camden & Amboy",
-      "price": "$160",
-      "revenue": "$25",
+      "price": 160,
+      "revenue": 25,
+      "company": "PRR",
       "description": "The initial purchaser of the C&A immediately receives a 10% share of PRR stock without further payment. This action does not close the C&A. The PRR corporation will not be running at this point, but the stock may be retained or sold subject to the ordinary rules of the game."
     },
     {
       "name": "Baltimore & Ohio",
-      "price": "$220",
-      "revenue": "$30",
-      "description": "The owner of the B&O private company immediately receives the President's certificate of the B&O corporation without further payment. The B&O private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the B&O corporation. When the B&O corporation purchases its first train the private company is closed down."
+      "price": 220,
+      "revenue": 30,
+      "company": "B&O",
+      "description": "The owner of the B&O private company immediately receives the President's certificate of the B&O without further payment. The B&O private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the B&O. When the B&O purchases its first train the private company is closed down."
     }
   ],
   "phases": [
@@ -466,10 +375,10 @@
         "Every share sold"
       ],
       "left": [
-        "Withheld revenue"
+        "Revenue withheld"
       ],
       "right": [
-        "Paid dividends"
+        "Revenue paid out"
       ]
     },
     "market": [
@@ -1058,7 +967,7 @@
         "water": {
           "angle": 300,
           "percent": 0.5,
-          "cost": "$80"
+          "cost": 80
         },
         "hexes": [
           "F4"
@@ -1095,7 +1004,7 @@
         "water": {
           "angle": 180,
           "percent": 0.6,
-          "cost": "$80"
+          "cost": 80
         },
         "labels": [
           {
@@ -1174,26 +1083,8 @@
             }
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "E7"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "F8"
         ]
       },
       {
@@ -1260,30 +1151,6 @@
         ]
       },
       {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "C11"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "C13"
-        ]
-      },
-      {
         "color": "offboard",
         "offBoardRevenue": {
           "reverse": true,
@@ -1342,22 +1209,6 @@
         ],
         "hexes": [
           "E11"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "color": "water",
-            "side": 2
-          },
-          {
-            "color": "water",
-            "side": 3
-          }
-        ],
-        "hexes": [
-          "D12"
         ]
       },
       {
@@ -1462,7 +1313,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$120",
+          "cost": 120,
           "percent": 0.333
         },
         "companies": [
@@ -1561,12 +1412,6 @@
             }
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "B16"
         ]
@@ -1574,7 +1419,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$120",
+          "cost": 120,
           "percent": 0.5,
           "angle": 180
         },
@@ -1609,21 +1454,6 @@
         ],
         "hexes": [
           "A17"
-        ]
-      },
-      {
-        "color": "plain",
-        "mountain": {
-          "cost": "$120"
-        },
-        "borders": [
-          {
-            "side": 2,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "C17"
         ]
       },
       {
@@ -1752,7 +1582,7 @@
         "water": {
           "angle": 310,
           "percent": 0.7,
-          "cost": "$80"
+          "cost": 80
         },
         "track": [
           {
@@ -2049,7 +1879,7 @@
       {
         "color": "plain",
         "water": {
-          "cost": "$80"
+          "cost": 80
         },
         "hexes": [
           "D6",
@@ -2061,9 +1891,10 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$120"
+          "cost": 120
         },
         "hexes": [
+          "C17",
           "C21",
           "D22",
           "E17",
@@ -2082,13 +1913,17 @@
           "B22",
           "C7",
           "C9",
+          "C11",
+          "C13",
           "C23",
           "D8",
+          "D12",
           "D16",
           "D20",
           "E3",
           "E13",
           "E15",
+          "F8",
           "F12",
           "F14",
           "F18",
@@ -2109,6 +1944,16 @@
           "J8"
         ]
       }
-    ]
+    ],
+    "borders": [{
+      "color": "water",
+      "coords": ["F8p3", "F8p4"]
+    },{
+      "color": "water",
+      "coords": ["D12p3", "D12p4", "D12p5"]
+    },{
+      "color": "water",
+      "coords": ["C17p3", "C17p4"]
+    }]
   }
 }

@@ -6,7 +6,7 @@
     "background": "gray",
     "orientation": "horizontal",
     "titleX": 50,
-    "currency": "EUR"
+    "currency": "# fr."
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/253320/1834"
@@ -15,150 +15,100 @@
     "Round"
   ],
   "ipo": true,
-  "bank": "$7,500",
+  "bank": 7500,
   "players": [
     {
       "number": 3,
       "certLimit": 13,
-      "capital": "$700"
+      "capital": 700
     },
     {
       "number": 4,
       "certLimit": 10,
-      "capital": "$550"
+      "capital": 550
     },
     {
       "number": 5,
       "certLimit": 8,
-      "capital": "$440"
+      "capital": 430
     }
   ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
   "companies": [
     {
       "name": "Luxembourg Railway",
       "abbrev": "LUX",
       "tokens": [
         "Free",
-        "$40",
-        "$70",
-        "$100"
+        40,
+        70,
+        100
       ],
-      "color": "purple",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "purple"
     },
     {
       "name": "Ostend Railway",
       "abbrev": "OST",
       "tokens": [
         "Home",
-        "$40",
-        "$100"
+        40,
+        100
       ],
-      "color": "blue",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "blue"
     },
     {
       "name": "Antwerp Railway",
       "abbrev": "ANT",
       "tokens": [
         "Home",
-        "$100"
+        100
       ],
-      "color": "yellow",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "yellow"
     },
     {
       "name": "Liege Railway",
       "abbrev": "LIE",
       "tokens": [
         "Home",
-        "$40",
-        "$100"
+        40,
+        100
       ],
-      "color": "red",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "red"
     },
     {
       "name": "Mons Railway",
       "abbrev": "MON",
       "tokens": [
         "Home",
-        "$40",
-        "$100"
+        40,
+        100
       ],
-      "color": "green",
-      "shares": [
-        {
-          "quantity": 1,
-          "label": "President's Certificate",
-          "percent": 20,
-          "shares": 2
-        },
-        {
-          "quantity": 8,
-          "percent": 10,
-          "shares": 1
-        }
-      ]
+      "color": "green"
     }
   ],
   "trains": [
     {
       "name": "2",
       "quantity": 5,
-      "price": "$80",
+      "price": 80,
       "color": "yellow",
       "info": [
         {
-          "color": "blue",
+          "color": "green",
           "note": "Rusted by 4"
         }
       ]
@@ -166,7 +116,7 @@
     {
       "name": "3",
       "quantity": 4,
-      "price": "$180",
+      "price": 180,
       "color": "green",
       "info": [
         {
@@ -178,11 +128,11 @@
     {
       "name": "4",
       "quantity": 3,
-      "price": "$300",
-      "color": "blue",
+      "price": 300,
+      "color": "green",
       "info": [
         {
-          "color": "red",
+          "color": "gray",
           "note": "Rusted by 6"
         }
       ]
@@ -190,11 +140,11 @@
     {
       "name": "5",
       "quantity": 2,
-      "price": "$450",
+      "price": 450,
       "color": "brown",
       "info": [
         {
-          "color": "gray",
+          "color": "yellow",
           "note": "Permanent"
         }
       ]
@@ -202,11 +152,11 @@
     {
       "name": "6",
       "quantity": 2,
-      "price": "$630",
-      "color": "red",
+      "price": 630,
+      "color": "gray",
       "info": [
         {
-          "color": "gray",
+          "color": "yellow",
           "note": "Permanent"
         }
       ]
@@ -214,12 +164,12 @@
     {
       "name": "2T",
       "quantity": 5,
-      "price": "$750",
+      "price": 700,
       "color": "gray",
       "description": "Runs between 2 cities, counts all towns, doubles one city.",
       "info": [
         {
-          "color": "gray",
+          "color": "yellow",
           "note": "Permanent"
         }
       ]
@@ -228,39 +178,45 @@
   "privates": [
     {
       "name": "Ostend Port Society",
-      "price": "$20",
-      "revenue": "$5",
-      "description": "Increase runs to Ostend port(blue offboard) by $20. Can be sold in YELLOW and GREEN."
+      "price": 20,
+      "revenue": 5,
+      "icon":"port",
+      "description": "Increases runs to Ostend port (blue offboard) for owning railroad by 20 francs. Can be sold during the YELLOW and GREEN phases."
     },
     {
       "name": "De Kempen Coal Company",
-      "price": "$40",
-      "revenue": "$10",
-      "description": "Owning corporation may place a track tile on a mountain hex at half cost. Can be sold in YELLOW and GREEN."
+      "price": 40,
+      "revenue": 10,
+      "icon":"mountain",
+      "description": "Owning corporation may lay a track tile on a mountain hex at half cost, closing the private. Can be sold during the YELLOW and GREEN phases."
     },
     {
       "name": "Burbach Foundry",
-      "price": "$70",
-      "revenue": "$15",
-      "description": "Owning corporation may upgrade an additional track tile, the Luxembourg city tile(hexes N11 and M10), from YELLOW to GREEN. THis is in addition to it's normal placement. Can be sold in GREEN."
+      "price": 70,
+      "revenue": 15,
+      "tile": "27",
+      "description": "Owning corporation may upgrade an additional track tile in a Luxembourg city tile (hexes N11 and M10), from YELLOW to GREEN. This is in addition to its normal placement and closes the private. Can be sold in the GREEN phase."
     },
     {
-      "name": "MNBS SNCF Electrification",
-      "price": "$100",
-      "revenue": "$0",
-      "description": "At the start of the silver phase after all 4 trains have been removed, the player holding this private must place a 2T train on a railraod's charter. This costs nothing and can be used immediately. MAY NOT BE SOLD TO A RAILROAD."
+      "name": "MNBS/SNCB Electrification",
+      "price": 100,
+      "revenue": 0,
+      "token": { "color": "gray", "label": "2T" },
+      "description": "At the start of the silver phase after all 4 trains have been removed, the player holding this private must place a 2T train on a railroad's charter. This train costs nothing and can be used immediately. This action closes the private. MAY NOT BE SOLD TO A RAILROAD."
     },
     {
       "name": "Cockerill Locomotive Company",
-      "price": "$120",
-      "revenue": "$20",
-      "description": "Allows owning railroad to purchase a train at half price, this closes the private. Can be sold in YELLOW and GREEN."
+      "price": 120,
+      "revenue": 20,
+      "icon": "tracks",
+      "description": "Allows owning railroad to purchase a train at half price, closing the private. Can be sold during the YELLOW and GREEN phases."
     },
     {
       "name": "Albert Canal Corporation",
-      "price": "$150",
-      "revenue": "$25",
-      "description": "No other ability. Closes in BROWN or if track connects Antwerp to Liege by any route or manner regardless of tokens. Can be sold in GREEN"
+      "price": 150,
+      "revenue": 25,
+      "token": { "color": "yellow", "label": "fr." },
+      "description": "No other ability. Closes in BROWN or if track connects Antwerp to Liege by any route or manner regardless of tokens. Can be sold during the GREEN phase."
     }
   ],
   "phases": [
@@ -299,7 +255,7 @@
       "number": "2",
       "rust": "4",
       "tiles": "gray",
-      "notes": "2Tmay be purchased after first 6T is purchased"
+      "notes": "2T may be purchased"
     },
     {
       "name": "2T",
@@ -518,7 +474,7 @@
           "label": 60,
           "legend": 0
         },
-        66,
+        67,
         71,
         {
           "value": 76,
@@ -949,9 +905,8 @@
         "cities": [
           {
             "name": {
-              "name": "Luxembourge",
-              "reverse": true,
-              "rotation": -90
+              "name": "Luxembourg",
+              "reverse": true
             },
             "companies": [
               {
@@ -978,8 +933,7 @@
           {
             "name": {
               "name": "Ghent",
-              "reverse": true,
-              "rotation": -90
+              "rotation": 40
             }
           }
         ],
@@ -1001,13 +955,6 @@
       },
       {
         "color": "yellow",
-        "labels": [
-          {
-            "angle": 150,
-            "percent": 0.7,
-            "label": "B"
-          }
-        ],
         "cities": [
           {
             "name": {
@@ -1032,7 +979,7 @@
             "value": "30",
             "angle": 20,
             "percent": 0.67,
-            "color": "green"
+            "outerBorderColor": "green"
           }
         ],
         "track": [
@@ -1057,31 +1004,12 @@
       },
       {
         "color": "water",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Port",
-            "bgColor": "water"
-          },
-          "revenues": [
-            {
-              "cost": "10",
-              "color": "yellow"
-            },
-            {
-              "cost": "30",
-              "color": "brown"
-            }
-          ]
-        },
+        "removeBorders": [
+          1
+        ],
         "offBoardTrack": [
           {
             "side": 6
-          }
-        ],
-        "icons": [
-          {
-            "type": "port",
-            "percent": 0.5
           }
         ],
         "hexes": [
@@ -1093,10 +1021,11 @@
         "icons": [
           {
             "type": "port",
-            "percent": 0.5
+            "percent": -0.5
           }
         ],
         "offBoardRevenue": {
+          "percent": -1,
           "name": {
             "name": "Port",
             "bgColor": "water"
@@ -1112,6 +1041,9 @@
             }
           ]
         },
+        "removeBorders": [
+          4
+        ],
         "offBoardTrack": [
           {
             "side": 5
@@ -1184,7 +1116,7 @@
         "color": "offboard",
         "divides": [
           {
-            "side": 3.25
+            "side": 3
           }
         ],
         "offBoardRevenue": {
@@ -1251,21 +1183,9 @@
       },
       {
         "color": "offboard",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Aachen"
-          },
-          "revenues": [
-            {
-              "cost": "20",
-              "color": "yellow"
-            },
-            {
-              "cost": "50",
-              "color": "brown"
-            }
-          ]
-        },
+        "removeBorders": [
+          6
+        ],
         "offBoardTrack": [
           {
             "side": 1
@@ -1278,6 +1198,8 @@
       {
         "color": "offboard",
         "offBoardRevenue": {
+          "angle": 120,
+          "percent": 1,
           "name": {
             "name": "Aachen"
           },
@@ -1292,6 +1214,9 @@
             }
           ]
         },
+        "removeBorders": [
+          3
+        ],
         "offBoardTrack": [
           {
             "side": 2
@@ -1394,7 +1319,7 @@
       {
         "color": "plain",
         "water": {
-          "cost": "$40"
+          "cost": 40
         },
         "hexes": [
           "F7",
@@ -1411,7 +1336,7 @@
         ],
         "water": {
           "percent": 0.5,
-          "cost": "30",
+          "cost": 30,
           "size": "small"
         },
         "hexes": [
@@ -1422,7 +1347,7 @@
       {
         "color": "plain",
         "water": {
-          "cost": "$20"
+          "cost": 20
         },
         "hexes": [
           "D11",
@@ -1442,7 +1367,7 @@
           }
         ],
         "water": {
-          "cost": "$20",
+          "cost": 20,
           "percent": 0.6
         },
         "hexes": [
@@ -1452,7 +1377,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$120"
+          "cost": 120
         },
         "hexes": [
           "M8"
@@ -1461,7 +1386,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$100"
+          "cost": 100
         },
         "hexes": [
           "L9"
@@ -1470,7 +1395,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$80"
+          "cost": 80
         },
         "hexes": [
           "L7"
@@ -1479,7 +1404,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$60"
+          "cost": 60
         },
         "hexes": [
           "K10",
@@ -1489,7 +1414,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$50"
+          "cost": 50
         },
         "hexes": [
           "K12"
@@ -1498,7 +1423,7 @@
       {
         "color": "plain",
         "mountain": {
-          "cost": "$40"
+          "cost": 40
         },
         "hexes": [
           "L5"
