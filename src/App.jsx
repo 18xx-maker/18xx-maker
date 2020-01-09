@@ -427,6 +427,22 @@ const App = () => (
                       strokeLinejoin="miter"
                     />
                   </g>
+                  <g id="medium-city">
+                    <circle
+                      fill={c("border")}
+                      stroke={c("track")}
+                      strokeWidth="2"
+                      cx="0"
+                      cy="0"
+                      r="10"
+                    />
+                    <circle
+                      fill={c("track")}
+                      cx="0"
+                      cy="0"
+                      r="6"
+                    />
+                  </g>
                   <g id="port">
                     <path
                       d="M 0 -6 L 0 8"
