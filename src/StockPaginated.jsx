@@ -53,7 +53,8 @@ const StockPaginated = ({ cell, pagination, paper }) => {
             width: `${(width + 25) / 100}in`,
             height: `${(height + 25) / 100}in`,
             float: "none",
-            margin: "auto auto"
+            margin: "auto auto",
+            boxSizing: "content-box"
           }}
         >
           <div className="cutlines-inner">
