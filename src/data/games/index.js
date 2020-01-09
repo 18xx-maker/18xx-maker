@@ -1,5 +1,20 @@
 import game_1800 from "./1800";
 import game_1817 from "./1817";
+import game_1825 from "./1825";
+import game_1825U1 from "./1825-U1";
+import game_1825U2 from "./1825-U2";
+import game_1825U3 from "./1825-U3";
+import game_1825K1 from "./1825-K1";
+import game_1825K3 from "./1825-K3";
+import game_1825K5 from "./1825-K5";
+import game_1825K6 from "./1825-K6";
+import game_1825R1_1 from "./1825-R1.1";
+import game_1825R2 from "./1825-R2";
+import game_1825K3_1 from "./1825-R3.1";
+import game_1825Met from "./1825-Met";
+import game_1925DB1 from "./1825-DB1";
+import game_1925DB3 from "./1825-DB3";
+import game_1925DB5 from "./1825-DB5";
 import game_18Misc from "./18Misc";
 import game_1830 from "./1830";
 import game_1832 from "./1832";
@@ -43,6 +58,21 @@ import game_Powerrails from "./Powerrails";
 let all_games = {
   "1800": game_1800,
   "1817": game_1817,
+  "1825": game_1825,
+  "1825-U1": game_1825U1,
+  "1825-U2": game_1825U2,
+  "1825-U3": game_1825U3,
+  "1825-K1": game_1825K1,
+  "1825-K3": game_1825K3,
+  "1825-K5": game_1825K5,
+  "1825-K6": game_1825K6,
+  "1825-R1.1": game_1825R1_1,
+  "1825-R2": game_1825R2,
+  "1825-R3.1": game_1825K3_1,
+  "1825-Met": game_1825Met,
+  "1825-DB1": game_1925DB1,
+  "1825-DB3": game_1925DB3,
+  "1825-DB5": game_1925DB5,
   "1830": game_1830,
   "1832": game_1832,
   "1834": game_1834,
