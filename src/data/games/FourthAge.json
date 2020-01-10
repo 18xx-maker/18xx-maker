@@ -17,7 +17,9 @@
   "tokens": [
     "Round",
     "+20",
-    "+20"
+    "+20",
+    { "color": "brown", "label": "+20" },
+    { "color": "brown", "label": "+20" }
   ],
   "ipo": true,
   "bank": 12000,
@@ -197,6 +199,18 @@
         {
           "color": "green",
           "note": "Rusted by 4+4"
+        }
+      ]
+    },
+    {
+      "name": "2",
+      "quantity": 1,
+      "color": "yellow",
+      "description": "Runs from Hobbiton.",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Shire and Westlands"
         }
       ]
     },
