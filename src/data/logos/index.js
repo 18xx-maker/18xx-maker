@@ -72,7 +72,7 @@ import languages_swift, { ReactComponent as languages_swift_Component } from "./
 import LIRR, { ReactComponent as LIRR_Component } from "./LIRR.svg";
 import LN, { ReactComponent as LN_Component } from "./LN.svg";
 import lotr_BPS, { ReactComponent as lotr_BPS_Component } from "./lotr/BPS.svg";
-import lotr_DMH, { ReactComponent as lotr_DMH_Component } from "./lotr/DMH.svg";
+import lotr_DME, { ReactComponent as lotr_DME_Component } from "./lotr/DME.svg";
 import lotr_E, { ReactComponent as lotr_E_Component } from "./lotr/E.svg";
 import lotr_FHR, { ReactComponent as lotr_FHR_Component } from "./lotr/FHR.svg";
 import lotr_LLM, { ReactComponent as lotr_LLM_Component } from "./lotr/LLM.svg";
@@ -562,11 +562,11 @@ export default {
     src: lotr_BPS,
     Component: lotr_BPS_Component
   },
-  "lotr/DMH": {
-    name: "DMH",
+  "lotr/DME": {
+    name: "DME",
     group: "lotr",
-    src: lotr_DMH,
-    Component: lotr_DMH_Component
+    src: lotr_DME,
+    Component: lotr_DME_Component
   },
   "lotr/E": {
     name: "E",

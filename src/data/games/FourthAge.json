@@ -101,8 +101,8 @@
     },
     {
       "name": "Dwarvish Mountain Express",
-      "abbrev": "DMH",
-      "logo": "lotr/DMH",
+      "abbrev": "DME",
+      "logo": "lotr/DME",
       "tokens": [
         "Free",
         "$40",
@@ -180,6 +180,18 @@
   "trains": [
     {
       "name": "2",
+      "quantity": 1,
+      "color": "yellow",
+      "description": "Runs from Hobbiton.",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Shire and Westlands"
+        }
+      ]
+    },
+    {
+      "name": "2",
       "quantity": 4,
       "price": "$100",
       "color": "yellow",
@@ -199,18 +211,6 @@
         {
           "color": "green",
           "note": "Rusted by 4+4"
-        }
-      ]
-    },
-    {
-      "name": "2",
-      "quantity": 1,
-      "color": "yellow",
-      "description": "Runs from Hobbiton.",
-      "info": [
-        {
-          "color": "yellow",
-          "note": "Shire and Westlands"
         }
       ]
     },
@@ -382,8 +382,8 @@
     {
       "name": "Moria Mining Company",
       "price": 140,
-      "icon": "coal",
-      "description": "This is the President's certificate of the Moria Mining Company. The purchaser sets the par value of the railway. Unlike other companies, this company may operate with just 20% sold. It may not be purchased by another public company."
+      "company": "DME",
+      "description": "This comes with the President's certificate of the Dwarvish Mountain Express, this company may operate with just 20% sold. It may not be purchased by another public company."
     },
     {
       "name": "Lorien Border Railway",
@@ -1823,7 +1823,7 @@
         "cities": [
           {
             "companies": [
-              "DMH"
+              "DME"
             ],
             "name": {
               "name": "Moria"
@@ -2124,7 +2124,7 @@
         },
         "tokens": [
           {
-            "company": "DMH",
+            "company": "DME",
             "destination": true,
             "angle": 90,
             "percent": 0.75
