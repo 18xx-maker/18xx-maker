@@ -746,14 +746,14 @@
     "icons": [
       {
         "type": "port",
-        "angle": 60,
-        "percent": 0.73
+        "angle": 180,
+        "percent": 0.5
       }
     ],
     "values": [
       {
-        "angle": -120,
-        "percent": 0.2,
+        "angle": 300,
+        "percent": 0.5,
         "value": 30
       }
     ],
