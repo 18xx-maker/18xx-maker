@@ -34,6 +34,8 @@ const SetSvgColors = ({ companySvgLogos }) => {
 
           rules.push(`svg.color-reserved .color-reserved-white{fill:${c("white")}}`);
           rules.push(`svg.color-reserved .color-stroke-reserved-white{stroke:${c("white")}}`);
+          rules.push(`svg.color-reserved .color-reserved-gray{fill:${c("gray")}}`);
+          rules.push(`svg.color-reserved .color-stroke-reserved-gray{stroke:${c("gray")}}`);
 
           if (companySvgLogos === "main") {
             rules = concat(rules, chain(color => [

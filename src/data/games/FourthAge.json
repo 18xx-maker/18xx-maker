@@ -18,7 +18,6 @@
     "Round",
     "+20",
     "+20",
-    { "color": "brown", "label": "+20" },
     { "color": "brown", "label": "+20" }
   ],
   "ipo": true,
