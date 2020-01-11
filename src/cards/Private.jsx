@@ -9,11 +9,22 @@ import Svg from "../Svg";
 import Tile from "../Tile";
 import Token from "../tokens/Token";
 
+import intersperse from "ramda/src/intersperse";
+import is from "ramda/src/is";
+import map from "ramda/src/map";
+
 import { getMapHex } from "../map/util";
 
 import "./private.scss";
 
 const Private = ({ name, note, price, revenue, bid, players, description, icon, hex, tile, token, company }) => {
+  let revenueNode = null;
+  if (is(Array, revenue)) {
+    revenueNode = intersperse("/", map(r => <Currency value={r} type="private" />, revenue));
+  } else if (is(Number, revenue)) {
+    revenueNode = <Currency value={revenue} type="private" />;
+  }
+
   return (
     <div className="cutlines">
       <div className="card private">
@@ -62,7 +73,7 @@ const Private = ({ name, note, price, revenue, bid, players, description, icon, 
             {bid && <div className="private__bid">Min Bid: {bid}</div>}
             <div className="private__price"><Currency value={price} type="private"/></div>
             {players && <div className="private__players">{players}</div>}
-            {revenue !== undefined && <div className="private__revenue">Revenue: <Currency value={revenue} type="private"/></div>}
+            {revenueNode && <div className="private__revenue">Revenue: {revenueNode}</div>}
           </div>
         </div>
       </div>

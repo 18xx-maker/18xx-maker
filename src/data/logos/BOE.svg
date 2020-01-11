@@ -7,10 +7,10 @@
     </clipPath>
     <circle class="color-main color-white" fill="#fff" cx="3.6" cy="3.6" r="3.51"/>
     <g clip-path="url(#boe_s)" transform="translate(1.1 2.35) scale(.08333)">
-        <path fill="#00008b" d="M0 0v30h60V0z"/>
+        <path class="color-reserved-gray" fill="#00008b" d="M0 0v30h60V0z"/>
         <path stroke="#fff" stroke-width="6" d="M0 0l60 30m0-30L0 30"/>
-        <path stroke="red" stroke-width="4" d="M0 0l60 30m0-30L0 30" clip-path="url(#boe_t)"/>
+        <path class="color-stroke-reserved-gray" stroke="red" stroke-width="4" d="M0 0l60 30m0-30L0 30" clip-path="url(#boe_t)"/>
         <path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/>
-        <path stroke="red" stroke-width="6" d="M30 0v30M0 15h60"/>
+        <path class="color-stroke-reserved-gray" stroke="red" stroke-width="6" d="M30 0v30M0 15h60"/>
     </g>
 </svg>
