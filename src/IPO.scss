@@ -1,0 +1,41 @@
+.ipo {
+  position: relative;
+
+  h2 {
+    margin: 0;
+    height: calc(0.5in - 1px);
+    line-height: calc(0.5in - 1px);
+    text-align: right;
+  }
+}
+
+.ipo__companies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: flex-start;
+  height: calc(100% - 0.5in);
+  margin: 0;
+}
+
+.ipo__company {
+  border: 1px solid black;
+  margin: 0 0 0.25in 0.25in;
+}
+
+.ipo .ipo__token {
+  height: 0.6in;
+  width: 0.6in;
+}
+
+.ipo .ipo__token svg {
+  height: 0.5in;
+  width: 0.5in;
+  margin: 0.05in;
+}
+
+.ipo .par {
+  float: left;
+  margin-right: 0.5in;
+}
