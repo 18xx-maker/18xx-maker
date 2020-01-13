@@ -9,7 +9,7 @@ const sharp = require('sharp');
 const archiver = require('archiver');
 
 const { getMapData } = require("../src/map/util");
-const gutil = require('../src/util').default;
+const gutil = require('../src/util');
 const util = require('../src/render/util');
 const setup = util.setup;
 const setupB18 = util.setupB18;
@@ -172,7 +172,7 @@ const server = app.listen(9000);
     mtok.token.push({
       flip:true
     });
-  }, game.companies || []);
+  }, gutil.compileCompanies(game) || []);
 
   R.map(extra => {
     btok.token.push({
