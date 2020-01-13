@@ -491,8 +491,7 @@
       "values": [
         {
           "label": 275,
-          "color": "yellow",
-          "width": "1.5in"
+          "color": "yellow"
         },
         {
           "label": 250,
@@ -506,56 +505,56 @@
         },
         {
           "label": "200 (275)",
+          "color": "white",
           "width": "1.5in"
         },
         {
           "label": "180 (250)",
+          "color": "white",
           "width": "1.5in"
         },
         {
           "label": "160 (225)",
+          "color": "white",
           "width": "1.5in"
         },
         {
           "label": "140 (180)",
+          "color": "white",
           "width": "1.5in"
         },
         {
           "label": "120 (160)",
+          "color": "white",
           "width": "1.5in"
         },
         {
           "label": "110 (140)",
+          "color": "white",
           "width": "1.5in"
         },
         {
           "label": 100,
-          "color": "white",
           "width": "1.5in"
         },
         {
           "label": "90 (120)",
-          "color": "white",
           "width": "1.5in"
         },
         {
           "label": "82 (110)",
-          "color": "white",
           "width": "1.5in"
         },
         {
           "label": "76 (100)",
-          "color": "white",
           "width": "1.5in"
         },
         {
           "label": 72,
-          "color": "white",
           "width": "1.5in"
         },
         {
           "label": 68,
-          "color": "white",
           "width": "1.5in"
         }
       ]

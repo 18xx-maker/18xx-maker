@@ -87,11 +87,11 @@ import MKT, { ReactComponent as MKT_Component } from "./MKT.svg";
 import MP, { ReactComponent as MP_Component } from "./MP.svg";
 import NdM, { ReactComponent as NdM_Component } from "./NdM.svg";
 import NFL, { ReactComponent as NFL_Component } from "./NFL.svg";
-import NNH, { ReactComponent as NNH_Component } from "./NNH.svg";
 import NS, { ReactComponent as NS_Component } from "./NS.svg";
 import NSW, { ReactComponent as NSW_Component } from "./NSW.svg";
 import NW, { ReactComponent as NW_Component } from "./NW.svg";
 import NYC, { ReactComponent as NYC_Component } from "./NYC.svg";
+import NYNH, { ReactComponent as NYNH_Component } from "./NYNH.svg";
 import owl_atlanta_reign, { ReactComponent as owl_atlanta_reign_Component } from "./owl/atlanta_reign.svg";
 import owl_boston_uprising, { ReactComponent as owl_boston_uprising_Component } from "./owl/boston_uprising.svg";
 import owl_chengdu_hunters, { ReactComponent as owl_chengdu_hunters_Component } from "./owl/chengdu_hunters.svg";
@@ -646,11 +646,6 @@ export default {
     src: NFL,
     Component: NFL_Component
   },
-  "NNH": {
-    name: "NNH",
-    src: NNH,
-    Component: NNH_Component
-  },
   "NS": {
     name: "NS",
     src: NS,
@@ -670,6 +665,11 @@ export default {
     name: "NYC",
     src: NYC,
     Component: NYC_Component
+  },
+  "NYNH": {
+    name: "NYNH",
+    src: NYNH,
+    Component: NYNH_Component
   },
   "owl/atlanta_reign": {
     name: "atlanta_reign",
