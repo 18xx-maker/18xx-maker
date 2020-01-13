@@ -30,7 +30,7 @@
     { "icon": "medium-city" },
     { "icon": "medium-city" }
   ],
-  "ipo": true,
+  "ipo": ["default"],
   "bank": 12000,
   "players": [
     {

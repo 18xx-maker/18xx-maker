@@ -85,6 +85,7 @@
         },
         "titleSize": { "type": "number" },
         "subTitleSize": { "type": "number" },
+        "designerSize": { "type": "number" },
         "orientation": {
           "type": "string",
           "enum": ["horizontal", "vertical"]
@@ -163,6 +164,7 @@
         "type": "object",
         "properties": {
           "name": { "type": "string" },
+          "note": { "type": "string" },
           "players": { "type": "string" },
           "description": { "type": "string" },
           "hex": { "type": "string" },

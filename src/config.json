@@ -24,13 +24,16 @@
     "train": true,
     "value": false
   },
-  "companySvgLogos": "none",
+  "companySvgLogos": "main",
   "overrideCompanies": "none",
   "overrideSelection": [],
   "plainMapCompanies": false,
   "straightCityNames": false,
   "theme": "gmt",
   "companiesTheme": "gmt",
+  "ipo": {
+    "borderRadius": 11.811
+  },
   "charters": {
     "style": "color",
     "cutlines": 25,
@@ -41,7 +44,7 @@
   },
   "cards": {
     "shareStyle": "gmt",
-    "layout": "free",
+    "layout": "miniEuroDie",
     "width": 265.748,
     "height":  173.228,
     "cutlines": 25,
@@ -50,9 +53,9 @@
     "blackBand": false
   },
   "tokens": {
-    "layout": "gsp",
+    "layout": "free",
     "marketTokenSize": 50,
-    "stationTokenSize": 50,
+    "stationTokenSize": 37.5,
     "bleed": true
   },
   "trains": {

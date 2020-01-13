@@ -6,22 +6,20 @@
     "background": "tile_pink",
     "titleSize": 108,
     "subTitleSize": 28,
-    "extraTokens": 2,
+    "marketTokens": 2,
     "titleY": -80,
     "titleX": 20,
     "currency": "Maüse"
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/72063/powerrails",
-    "rules": ""
+    "rules": "https://boardgamegeek.com/boardgame/72063/powerrails"
   },
   "colors": {
     "tile_pink": "#ff80ff",
     "border_blue": "#007fff",
     "mailcar_red": "#f00"
   },
-  "bank": "depends on scenario",
-  "certLimit": "depends on scenario",
   "tokens": [
     "Round"
   ],
@@ -30,19 +28,19 @@
   "players": [
     {
       "number": 2,
-      "capital": "750"
+      "capital": 750
     },
     {
       "number": 3,
-      "capital": "500"
+      "capital": 500
     },
     {
       "number": 4,
-      "capital": "375"
+      "capital": 375
     },
     {
       "number": 5,
-      "capital": "300"
+      "capital": 300
     }
   ],
   "companies": [
@@ -467,37 +465,33 @@
     {
       "name": "Private #1",
       "price": "$20",
-      "revenue": "$5",
-      "description": ""
+      "revenue": 5
     },
     {
       "name": "Private #2",
       "price": "$40",
-      "revenue": "$10",
-      "description": ""
+      "revenue": 10
     },
     {
       "name": "Private #3",
-      "price": "$70",
-      "revenue": "$15",
-      "description": ""
+      "price": 70,
+      "revenue": 15
     },
     {
       "name": "Private #4",
-      "price": "$110",
-      "revenue": "$20",
-      "description": ""
+      "price": 110,
+      "revenue": 20
     },
     {
       "name": "Private #5",
-      "price": "$160",
-      "revenue": "$25",
+      "price": 160,
+      "revenue": 25,
       "description": "Includes 10% share of DUNKELGRÜN"
     },
     {
       "name": "Private #6",
-      "price": "$220",
-      "revenue": "$30",
+      "price": 220,
+      "revenue": 30,
       "description": "Includes 20% share of DUNKELBLAU"
     }
   ],

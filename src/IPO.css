@@ -19,7 +19,6 @@
   grid-row: auto / auto;
   grid-column: auto / auto;
   border: 1px solid black;
-  border-radius: 3mm;
   height: calc(43.5mm + 0.25in);
   width: calc(67.5mm + 0.25in);
   position: relative;
