@@ -76,6 +76,14 @@
       "type": "string",
       "enum": ["equal", "max"]
     },
+    "ipo": {
+      "type": "object",
+      "properties": {
+        "borderRadius": { "type": "number", "minimum": 0 }
+      },
+      "required": ["borderRadius"],
+      "additionalProperties": false
+    },
     "cards": {
       "type": "object",
       "properties": {
@@ -104,7 +112,7 @@
         "images": { "type": "boolean" }
       },
       "additionalProperties": false,
-      "required": ["styles", "images"]
+      "required": ["style", "images"]
     },
     "charters": {
       "type": "object",
@@ -129,8 +137,8 @@
           "type": "string",
           "enum": ["free", "gsp"]
         },
-        "marketTokenSize": { "$ref": "#/definitions/dimension" },
-        "stationTokenSize": { "$ref": "#/definitions/dimension" },
+        "marketTokenSize": { "type": "number", "minimum": 1 },
+        "stationTokenSize": { "type": "number", "minimum": 1 },
         "bleed": { "type": "boolean" }
       },
       "additionalProperties": false,

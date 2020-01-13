@@ -276,6 +276,9 @@ const Config = ({config, setConfig, resetConfig}) => {
              description="Different styles of train cards. Color uses a large color band, while the number style uses a colored number for the train name." />
       <Input name="trains.images" label="Train Images"
              description="Whether or not to put some train images on the cards" />
+      <h3>IPO</h3>
+      <Input name="ipo.borderRadius" label="IPO Border Radius" dimension={true}
+             description="How much to round the corners, zero will disable rounded corners on the IPO cards" />
       <h3>Currency</h3>
       <p>This lets you turn on currency symbols for each item individually. Only works if the game file specificies values as numbers and not strings.</p>
       <Input name="currency.bank" label="Bank" description="Bank total on revenue page"/>
