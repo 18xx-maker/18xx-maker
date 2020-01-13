@@ -61,26 +61,31 @@
     {
       "name": "Pennsylvania Railroad",
       "abbrev": "PRR",
+      "logo": "PRR",
       "color": "green"
     },
     {
       "name": "New York Central Railroad",
       "abbrev": "NYC",
+      "logo": "NYC",
       "color": "black"
     },
     {
       "name": "Baltimore & Ohio Railroad",
       "abbrev": "B&O",
+      "logo": "BO",
       "color": "blue"
     },
     {
       "name": "Chesapeake & Ohio Railroad",
       "abbrev": "C&O",
+      "logo": "CO",
       "color": "cyan"
     },
     {
       "name": "Erie Railroad",
       "abbrev": "ERIE",
+      "logo": "ERIE",
       "color": "yellow"
     },
     {
