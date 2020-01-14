@@ -84,7 +84,8 @@
         "quantity": 1,
         "label": "Test Certificate",
         "percent": 20,
-        "shares": 2
+        "shares": 2,
+        "id": "Pres"
       },
       {
         "quantity": 1,
@@ -97,6 +98,7 @@
   },
   "companies": [
     {
+      "id": "18Test-1",
       "name": "Black Railroad",
       "abbrev": "BRR",
       "color": "black",
@@ -230,6 +232,7 @@
     },
     {
       "name": "4D",
+      "id": "4D",
       "quantity": 1,
       "price": "$800",
       "color": "brown",
@@ -296,7 +299,8 @@
       "price": 220,
       "revenue": 30,
       "hex": "A11",
-      "description": "Description"
+      "description": "Description",
+      "id": "Players 3+"
     }
   ],
   "phases": [
