@@ -81,10 +81,12 @@
       {
         "quantity": 1,
         "label": "President's Certificate",
+        "subtext": "System",
         "percent": 20,
         "shares": 4
       },
       {
+        "subtext": "System",
         "quantity": 16,
         "percent": 5,
         "shares": 1

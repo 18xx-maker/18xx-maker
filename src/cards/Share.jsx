@@ -18,6 +18,7 @@ const LeftShare = ({
   label,
   logo,
   name,
+  subtext,
   abbrev,
   token,
   color,
@@ -82,6 +83,7 @@ const LeftShare = ({
           </Color>
           <div className="card__body">
             {name && <div className="share__name"><div>{name}</div></div>}
+            {subtext && <div className="share__subtext"><div>{subtext}</div></div>}
             {shares && <div className="share__shares">{count}</div>}
             {cost && <div className="share__shares">{cost}</div>}
             {percent && <div className="share__percent">{percent}%</div>}
@@ -119,6 +121,7 @@ const CenterShare = ({
   label,
   logo,
   name,
+  subtext,
   abbrev,
   token,
   company,
@@ -143,7 +146,7 @@ const CenterShare = ({
 
   return (
     <div className="cutlines">
-      <div className="card share">
+      <div className="card share share--center">
         <div className="card__bleed">
           <Color context="companies">
             {(c,t) => (
@@ -151,6 +154,7 @@ const CenterShare = ({
             )}
           </Color>
           <div className="card__body">
+            {subtext && <div className="share__subtext"><div>{subtext}</div></div>}
             {shares && <div className="share__shares">{count}</div>}
             {cost && <div className="share__shares">{cost}</div>}
             {percent && <div className="share__percent">{percent}%</div>}
