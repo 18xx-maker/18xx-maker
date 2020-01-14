@@ -49,6 +49,7 @@ import game_18Chesapeake from "./18Chesapeake";
 import game_18Mex from "./18Mex";
 import game_18Test from "./18Test";
 import game_18TE from "./18TE";
+import game_18TK from "./18TK";
 import game_FourthAge from "./FourthAge";
 import game_Harzbahn from "./Harzbahn";
 import game_Powerrails from "./Powerrails";
@@ -107,6 +108,7 @@ let all_games = {
   "18Chesapeake": game_18Chesapeake,
   "18Mex": game_18Mex,
   "18TE": game_18TE,
+  "18TK": game_18TK,
   FourthAge: game_FourthAge,
   Harzbahn: game_Harzbahn,
   Powerrails: game_Powerrails,
