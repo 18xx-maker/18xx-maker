@@ -53,6 +53,26 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  > div {
+    margin: auto;
+  }
+
+  .share__id {
+    box-sizing: border-box;
+    position: relative;
+    float: right;
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 2px 3px 1px 3px;
+    font-size: 0.13in;
+    font-style: normal;
+    line-height: 1;
+  }
+
+  div + span {
+    margin-right: 0.125in;
+  }
 }
 
 .share--center .share__subtext {
@@ -175,12 +195,5 @@
 .share--left .share__shares,
 .share--gmt .share__shares {
   margin-left: 0.67in;
-  padding: 0.125in;
-}
-
-.share .share__id {
-  position: absolute;
-  bottom: 0.22in;
-  right: 0;
   padding: 0.125in;
 }
