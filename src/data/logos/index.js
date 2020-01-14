@@ -1,5 +1,12 @@
 import ACL, { ReactComponent as ACL_Component } from "./ACL.svg";
 import AFG, { ReactComponent as AFG_Component } from "./AFG.svg";
+import ah_BO, { ReactComponent as ah_BO_Component } from "./ah/BO.svg";
+import ah_CO, { ReactComponent as ah_CO_Component } from "./ah/CO.svg";
+import ah_CPR, { ReactComponent as ah_CPR_Component } from "./ah/CPR.svg";
+import ah_ERIE, { ReactComponent as ah_ERIE_Component } from "./ah/ERIE.svg";
+import ah_NNH, { ReactComponent as ah_NNH_Component } from "./ah/NNH.svg";
+import ah_NYC, { ReactComponent as ah_NYC_Component } from "./ah/NYC.svg";
+import ah_PRR, { ReactComponent as ah_PRR_Component } from "./ah/PRR.svg";
 import AMTK, { ReactComponent as AMTK_Component } from "./AMTK.svg";
 import AR, { ReactComponent as AR_Component } from "./AR.svg";
 import ATA, { ReactComponent as ATA_Component } from "./ATA.svg";
@@ -45,6 +52,7 @@ import GRR, { ReactComponent as GRR_Component } from "./GRR.svg";
 import GT, { ReactComponent as GT_Component } from "./GT.svg";
 import IC, { ReactComponent as IC_Component } from "./IC.svg";
 import IFT, { ReactComponent as IFT_Component } from "./IFT.svg";
+import imperialrussia_ImperialEagle, { ReactComponent as imperialrussia_ImperialEagle_Component } from "./imperialrussia/ImperialEagle.svg";
 import IR, { ReactComponent as IR_Component } from "./IR.svg";
 import KO, { ReactComponent as KO_Component } from "./KO.svg";
 import KU, { ReactComponent as KU_Component } from "./KU.svg";
@@ -159,6 +167,48 @@ export default {
     name: "AFG",
     src: AFG,
     Component: AFG_Component
+  },
+  "ah/BO": {
+    name: "BO",
+    group: "ah",
+    src: ah_BO,
+    Component: ah_BO_Component
+  },
+  "ah/CO": {
+    name: "CO",
+    group: "ah",
+    src: ah_CO,
+    Component: ah_CO_Component
+  },
+  "ah/CPR": {
+    name: "CPR",
+    group: "ah",
+    src: ah_CPR,
+    Component: ah_CPR_Component
+  },
+  "ah/ERIE": {
+    name: "ERIE",
+    group: "ah",
+    src: ah_ERIE,
+    Component: ah_ERIE_Component
+  },
+  "ah/NNH": {
+    name: "NNH",
+    group: "ah",
+    src: ah_NNH,
+    Component: ah_NNH_Component
+  },
+  "ah/NYC": {
+    name: "NYC",
+    group: "ah",
+    src: ah_NYC,
+    Component: ah_NYC_Component
+  },
+  "ah/PRR": {
+    name: "PRR",
+    group: "ah",
+    src: ah_PRR,
+    Component: ah_PRR_Component
   },
   "AMTK": {
     name: "AMTK",
@@ -404,6 +454,12 @@ export default {
     name: "IFT",
     src: IFT,
     Component: IFT_Component
+  },
+  "imperialrussia/ImperialEagle": {
+    name: "ImperialEagle",
+    group: "imperialrussia",
+    src: imperialrussia_ImperialEagle,
+    Component: imperialrussia_ImperialEagle_Component
   },
   "IR": {
     name: "IR",
