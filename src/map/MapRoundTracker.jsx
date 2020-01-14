@@ -18,7 +18,7 @@ const MapRoundTracker = ({game, hexWidth}) => {
     <Config>
       {(config, game) => {
         let rounds = game.rounds;
-        let size = config.tokens.stationTokenSize;
+        let size = config.tokens.marketTokenSize;
         let type = roundTracker.type || "row";
 
         return (
