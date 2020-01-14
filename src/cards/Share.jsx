@@ -27,7 +27,8 @@ const LeftShare = ({
   shareStyle,
   company,
   tokenCount,
-  blackBand
+  blackBand,
+  id
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -106,16 +107,14 @@ const LeftShare = ({
                      <Color context="map">
                        {(c,t) => (
                          <div className="share__label__text"
-                              style={{
-                                color: t(c(labelColor || "yellow")),
-                                backgroundColor: c(labelColor || "yellow")
-                              }}>
+                              style={{ color: t(c("yellow")), backgroundColor: c("yellow") }} >
                            {label}
                          </div>
                        )}
                      </Color>
                    </div>
                  )}
+                <div className="share__id">{id}</div>
               </div>
             </div>
           )}
@@ -139,7 +138,8 @@ const CenterShare = ({
   company,
   tokenCount,
   backgroundColor,
-  labelColor
+  labelColor,
+  id
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -147,14 +147,14 @@ const CenterShare = ({
   let sharesLeft = tokenCount || shares;
   while(sharesLeft > 0) {
     tokens.push(<div key={sharesLeft} className="share__token">
-                  <div style={{width:`${min(1.0, sharesLeft) * 100}%`}}
-                       className="share__token__wrapper">
-                    <svg style={{width:"0.52in",height:"0.52in"}}
-                         viewBox="-26 -26 52 52">
-                      <CompanyToken company={company} />
-                    </svg>
-                  </div>
-                </div>);
+                <div style={{width:`${min(1.0, sharesLeft) * 100}%`}}
+                     className="share__token__wrapper">
+                  <svg style={{width:"0.52in",height:"0.52in"}}
+                       viewBox="-26 -26 52 52">
+                    <CompanyToken company={company} />
+                  </svg>
+                </div>
+              </div>);
     sharesLeft -= 1;
   }
 
@@ -199,6 +199,7 @@ const CenterShare = ({
                      </Color>
                    </div>
                  )}
+                <div className="share__id">{id}</div>
               </div>
             </div>
           )}

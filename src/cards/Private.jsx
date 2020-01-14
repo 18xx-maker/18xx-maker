@@ -17,7 +17,21 @@ import { getMapHex } from "../map/util";
 
 import "./private.scss";
 
-const Private = ({ name, note, price, revenue, bid, players, description, icon, hex, tile, token, company }) => {
+const Private = ({
+  name,
+  note,
+  price,
+  revenue,
+  bid,
+  players,
+  description,
+  icon,
+  hex,
+  tile,
+  token,
+  company,
+  id
+}) => {
   let revenueNode = null;
   if (is(Array, revenue)) {
     revenueNode = intersperse("/", map(r => <Currency value={r} type="private" />, revenue));
@@ -74,6 +88,7 @@ const Private = ({ name, note, price, revenue, bid, players, description, icon, 
             <div className="private__price"><Currency value={price} type="private"/></div>
             {players && <div className="private__players">{players}</div>}
             {revenueNode && <div className="private__revenue">Revenue: {revenueNode}</div>}
+            <div className="private__id">{id}</div>
           </div>
         </div>
       </div>
