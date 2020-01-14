@@ -191,6 +191,12 @@ const Config = ({config, setConfig, resetConfig}) => {
         <option value="hartland">Hartland Trefoil</option>
         <option value="gmt">GMT</option>
         <option value="ps18xx">px18xx</option>
+        <option value="broggles18EU">B18EU</option>
+        <option value="broggles1817">B1817</option>
+        <option value="broggles18mex">B18mex</option>
+        <option value="broggles18TK">B18TK</option>
+        <option value="broggles1836jr">B1836jr</option>
+        <option value="broggles1849">B1849</option>
       </select>
       <ThemePreview/>
       <p className="description">The theme determines which colors are used for all of the elements on the maps and tiles.</p>
@@ -201,6 +207,8 @@ const Config = ({config, setConfig, resetConfig}) => {
         <option value="gmt">GMT</option>
         <option value="ps18xx">px18xx</option>
         <option value="rob">Rails on Boards</option>
+        <option value="B18TK">B18TK</option>
+        <option value="broggles">broggles</option>
       </select>
       <CompaniesThemePreview/>
       <p className="description">The company theme determines which colors are used for all of the elements on the maps and tiles.</p>
