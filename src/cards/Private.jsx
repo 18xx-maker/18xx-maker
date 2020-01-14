@@ -44,7 +44,10 @@ const Private = ({
       <div className="card private">
         <div className="card__bleed">
           <div className="card__body">
-            <div className="private__name">{name}</div>
+            <div className="private__name">
+              {id && <div className="private__id">{id}</div>}
+              {name}
+            </div>
             {note && <div className="private__note">{note}</div>}
             <div className="private__description">
               <Config>
@@ -88,7 +91,6 @@ const Private = ({
             <div className="private__price"><Currency value={price} type="private"/></div>
             {players && <div className="private__players">{players}</div>}
             {revenueNode && <div className="private__revenue">Revenue: {revenueNode}</div>}
-            <div className="private__id">{id}</div>
           </div>
         </div>
       </div>
