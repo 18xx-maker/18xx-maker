@@ -396,11 +396,11 @@
     },
     {
       "name": "OR1",
-      "color": "white"
+      "color": "yellow"
     },
     {
       "name": "OR2",
-      "color": "white"
+      "color": "yellow"
     }
   ],
   "turns": [
