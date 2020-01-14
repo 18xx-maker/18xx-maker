@@ -130,6 +130,7 @@
     },
     {
       "name": "Cyan Railroad",
+      "subtext": "Cyan Override",
       "abbrev": "CRR",
       "color": "cyan"
     },
