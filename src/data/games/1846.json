@@ -384,18 +384,23 @@
       ]
     }
   ],
+  "roundTracker": {
+    "type": "round",
+    "x": 150,
+    "y": 400
+  },
   "rounds": [
     {
-      "name": "OR2",
+      "name": "SR",
       "color": "gray"
     },
     {
       "name": "OR1",
-      "color": "gray"
+      "color": "white"
     },
     {
-      "name": "SR",
-      "color": "gray"
+      "name": "OR2",
+      "color": "white"
     }
   ],
   "turns": [

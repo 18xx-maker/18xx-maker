@@ -390,6 +390,11 @@
       ]
     }
   ],
+  "roundTracker": {
+    "type": "row",
+    "x": 600,
+    "y": 1910
+  },
   "rounds": [
     {
       "name": "OR3",
