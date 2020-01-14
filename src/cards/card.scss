@@ -44,15 +44,21 @@
   left: 0;
 }
 
-.charter__id,
-.share__id,
-.private__id,
-.train__id {
+.charter__id {
   position: absolute;
   bottom: 0;
   right: 0;
-  padding: 0 0.125in 0.125in 0;
-  font-size: 0.5em;
-  font-style: italic;
-  font-family: sans-serif;
+  padding: 0.125in;
+
+  div {
+    font-size: 0.5em;
+    font-style: italic;
+    font-family: sans-serif;
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 2px 3px 1px 3px;
+    font-size: 0.13in;
+    font-style: normal;
+    line-height: 1;
+  }
 }

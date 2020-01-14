@@ -134,7 +134,7 @@ const Charter = ({
                     <dl>{minor || turnNodes}</dl>
                   </div>
                 )}
-                <div className="charter__id">{id}</div>
+                {id && <div className="charter__id"><div>{id}</div></div>}
               </div>
             </div>
           </div>
