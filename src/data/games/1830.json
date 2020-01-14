@@ -313,7 +313,9 @@
     }
   ],
   "roundTracker": {
-    "type": "row"
+    "type": "row",
+    "x": 40,
+    "y": 250
   },
   "rounds": [
     {
