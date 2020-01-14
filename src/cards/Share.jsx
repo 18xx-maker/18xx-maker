@@ -24,7 +24,8 @@ const LeftShare = ({
   shareStyle,
   company,
   tokenCount,
-  blackBand
+  blackBand,
+  card_identifier
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -104,6 +105,7 @@ const LeftShare = ({
                  </Color>
                </div>
              )}
+             <div className="card__identifier">{card_identifier}</div>
           </div>
         </div>
       </div>
@@ -122,7 +124,8 @@ const CenterShare = ({
   abbrev,
   token,
   company,
-  tokenCount
+  tokenCount,
+  card_identifier
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -173,6 +176,7 @@ const CenterShare = ({
                  </Color>
                </div>
              )}
+             <div className="card__identifier">{card_identifier}</div>
           </div>
         </div>
       </div>
