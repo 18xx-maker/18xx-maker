@@ -71,36 +71,42 @@
     {
       "name": "Chemins de Fer de L'Etat Belge",
       "abbrev": "B",
+      "logo": "thirtysixjr/B",
       "color": "black",
       "tokens": "four"
     },
     {
       "name": "Grande Compagnie du Luxembourg",
       "abbrev": "GCL",
+      "logo": "thirtysixjr/GCL",
       "color": "green",
       "tokens": "four"
     },
     {
       "name": "Chemin de Fer du Nord",
       "abbrev": "Nord",
+      "logo": "thirtysixjr/Nord",
       "color": "blue",
       "tokens": "three"
     },
     {
       "name": "Noord-Brabantsch-Duitsche Spoorweg-Maatschappij",
       "abbrev": "NBDS",
+      "logo": "thirtysixjr/NBDS",
       "color": "yellow",
       "tokens": "three"
     },
     {
       "name": "Hollandsche IJzeren Spoorweg Maatschappij",
       "abbrev": "HSM",
+      "logo": "thirtysixjr/HSM",
       "color": "orange",
       "tokens": "two"
     },
     {
       "name": "Noord-Friesche Locaal",
       "abbrev": "NFL",
+      "logo": "thirtysixjr/NFL",
       "color": "lime",
       "tokens": "two"
     }

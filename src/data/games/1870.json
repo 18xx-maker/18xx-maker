@@ -68,6 +68,7 @@
     {
       "name": "Southern Pacific Railroad",
       "abbrev": "SP",
+      "logo": "seventy/SP",
       "tokens": [
         "Free",
         "New Orleans",
@@ -79,6 +80,7 @@
     {
       "name": "Missouri Kansas Texas Railroad",
       "abbrev": "MKT",
+      "logo": "seventy/MKT",
       "tokens": [
         "Free",
         "Southwest",
@@ -90,6 +92,7 @@
     {
       "name": "Fort Worth & Denver City Railway",
       "abbrev": "FW",
+      "logo": "seventy/FW",
       "tokens": [
         "Free",
         "Denver",
@@ -100,6 +103,7 @@
     {
       "name": "Missouri Pacific Railroad",
       "abbrev": "MP",
+      "logo": "seventy/MP",
       "tokens": [
         "Free",
         "Dallas",
@@ -111,6 +115,7 @@
     {
       "name": "Gulf, Mobile & Ohio Railroad",
       "abbrev": "GMO",
+      "logo": "seventy/GMO",
       "tokens": [
         "Free",
         "St. Louis",
@@ -131,6 +136,7 @@
     {
       "name": "St. Louis Southwestern Railway",
       "abbrev": "SSW",
+      "logo": "seventy/SSW",
       "tokens": [
         "Free",
         "Fort Worth",
@@ -141,6 +147,7 @@
     {
       "name": "Illinois Central Railroad",
       "abbrev": "IC",
+      "logo": "seventy/IC",
       "tokens": [
         "Free",
         "Chicago",
@@ -151,6 +158,7 @@
     {
       "name": "Atchison, Topeka & Santa Fe",
       "abbrev": "ATSF",
+      "logo": "seventy/ATSF",
       "tokens": [
         "Free",
         "Southwest",
@@ -162,6 +170,7 @@
     {
       "name": "St. Louis-San Francisco Railway",
       "abbrev": "SLSF",
+      "logo": "seventy/SLSF",
       "tokens": [
         "Free",
         "Southeast",

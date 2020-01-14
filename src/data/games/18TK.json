@@ -160,6 +160,7 @@
       "abbrev": "JNR",
       "color": "black",
       "tokens": "JNR",
+      "logo": "TK/JNR",
       "shares":[
         {
         "quantity": 1,
@@ -182,54 +183,63 @@
     {
       "name": "Tokyo Subway",
       "abbrev": "TS",
+      "logo": "TK/TS",
       "color": "cyan",
       "tokens": "1"
     },
     {
       "name": "Keio Electric Railway",
       "abbrev": "KER",
+      "logo": "TK/KER",
       "color": "blue",
       "tokens": "3"
     },
     {
       "name": "Odakyo Electric Railroad",
       "abbrev": "OER",
+      "logo": "TK/OER",
       "color": "green",
       "tokens": "3"
     },
     {
       "name": "Keikyu (Keihin Kyuko)",
       "abbrev": "KK",
+      "logo": "TK/KK",
       "color": "lime",
       "tokens": "2"
     },
     {
       "name": "Keisei Electric Railway",
       "abbrev": "KR",
+      "logo": "TK/KR",
       "color": "orange",
       "tokens": "3"
     },
     {
       "name": "Sagami Railway",
       "abbrev": "SR",
+      "logo": "TK/SR",
       "color": "pink",
       "tokens": "2"
     },
     {
       "name": "Tobu Railway",
       "abbrev": "TR",
+      "logo": "TK/TR",
       "color": "purple",
       "tokens": "Tobu"
     },
     {
       "name": "Tokyu Corporation",
       "abbrev": "TC",
+      "logo": "TK/TC",
       "color": "red",
       "tokens": "3"
     },
     {
       "name": "Seibu Railway",
       "abbrev": "SEI",
+      "logo": "TK/SEI",
       "color": "yellow",
       "tokens": "3"
     },
@@ -237,30 +247,35 @@
       "name": "Tokyo Monorail (Cost: ¥300, Treasury: ¥80 & 3-Train[no sell])",
       "minor": true,
       "abbrev": "TM",
+      "logo": "TK/TM",
       "color": "gray"
     },
     {
       "name": "Shonan Monorail (Cost: ¥250, Treasury: ¥80 & 3-Train[no sell])",
       "minor": true,
       "abbrev": "SM",
+      "logo": "TK/SM",
       "color": "gray"
     },
      {
       "name": "New transit Yurikamome (Cost: ¥350, Treasury: ¥80 & 3-Train[no sell])",
       "minor": true,
       "abbrev": "NTY",
+      "logo": "TK/NTY",
       "color": "gray"
     },
      {
       "name": "Tama Toshi Monorail (Cost: ¥300, Treasury: ¥80 & 3-Train[no sell])",
       "minor": true,
       "abbrev": "TTM",
+      "logo": "TK/TTM",
       "color": "gray"
     },
      {
       "name": "Tsukuba Express (Cost: ¥300, Treasury: ¥80 & 4-Train[no sell])",
       "minor": true,
       "abbrev": "TE",
+      "logo": "TK/TE",
       "color": "gray"
     },
     {
@@ -1903,7 +1918,9 @@
               "rotate": -30,
             "name": {
               "name": "Kawasaki"
-            },
+            }
+          },
+          {
             "companies": [
               "KK"
             ]
@@ -2044,11 +2061,13 @@
               "rotate": -30,
             "name": {
               "name": "Tamagawa"
-            },
+            }
+          },
+          {
             "companies": [
               "TC"
             ]
-          }
+}
         ],
            "track": [
           {
@@ -2494,14 +2513,16 @@
       },
       "cities": [
           {
-            "companies": [
-              "KR"
-            ],
-            "rotate": 30,
             "name": {
               "name": "Ichikawa"
-            }
-          }
+            },
+            "rotate": 30
+          },
+          {
+          "companies": [
+              "KR"
+            ]
+        }
         ],
            "track": [
           {

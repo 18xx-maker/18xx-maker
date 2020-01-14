@@ -1,21 +1,3 @@
-import ACL, { ReactComponent as ACL_Component } from "./ACL.svg";
-import AFG, { ReactComponent as AFG_Component } from "./AFG.svg";
-import AMTK, { ReactComponent as AMTK_Component } from "./AMTK.svg";
-import AR, { ReactComponent as AR_Component } from "./AR.svg";
-import ATA, { ReactComponent as ATA_Component } from "./ATA.svg";
-import ATSF, { ReactComponent as ATSF_Component } from "./ATSF.svg";
-import AWP, { ReactComponent as AWP_Component } from "./AWP.svg";
-import BM, { ReactComponent as BM_Component } from "./BM.svg";
-import BO, { ReactComponent as BO_Component } from "./BO.svg";
-import BOE, { ReactComponent as BOE_Component } from "./BOE.svg";
-import CAR, { ReactComponent as CAR_Component } from "./CAR.svg";
-import CHI, { ReactComponent as CHI_Component } from "./CHI.svg";
-import CO, { ReactComponent as CO_Component } from "./CO.svg";
-import COG, { ReactComponent as COG_Component } from "./COG.svg";
-import CPR, { ReactComponent as CPR_Component } from "./CPR.svg";
-import CR, { ReactComponent as CR_Component } from "./CR.svg";
-import CSX, { ReactComponent as CSX_Component } from "./CSX.svg";
-import CTL, { ReactComponent as CTL_Component } from "./CTL.svg";
 import dev_apple, { ReactComponent as dev_apple_Component } from "./dev/apple.svg";
 import dev_atom, { ReactComponent as dev_atom_Component } from "./dev/atom.svg";
 import dev_aws, { ReactComponent as dev_aws_Component } from "./dev/aws.svg";
@@ -36,18 +18,44 @@ import dev_postgresql, { ReactComponent as dev_postgresql_Component } from "./de
 import dev_redis, { ReactComponent as dev_redis_Component } from "./dev/redis.svg";
 import dev_vim, { ReactComponent as dev_vim_Component } from "./dev/vim.svg";
 import dev_vscode, { ReactComponent as dev_vscode_Component } from "./dev/vscode.svg";
-import ERIE, { ReactComponent as ERIE_Component } from "./ERIE.svg";
-import FECR, { ReactComponent as FECR_Component } from "./FECR.svg";
-import FT, { ReactComponent as FT_Component } from "./FT.svg";
-import FW, { ReactComponent as FW_Component } from "./FW.svg";
-import GMO, { ReactComponent as GMO_Component } from "./GMO.svg";
-import GRR, { ReactComponent as GRR_Component } from "./GRR.svg";
-import GT, { ReactComponent as GT_Component } from "./GT.svg";
-import IC, { ReactComponent as IC_Component } from "./IC.svg";
-import IFT, { ReactComponent as IFT_Component } from "./IFT.svg";
-import IR, { ReactComponent as IR_Component } from "./IR.svg";
-import KO, { ReactComponent as KO_Component } from "./KO.svg";
-import KU, { ReactComponent as KU_Component } from "./KU.svg";
+import eightynine_AR, { ReactComponent as eightynine_AR_Component } from "./eightynine/AR.svg";
+import eightynine_IR, { ReactComponent as eightynine_IR_Component } from "./eightynine/IR.svg";
+import eightynine_KO, { ReactComponent as eightynine_KO_Component } from "./eightynine/KO.svg";
+import eightynine_KU, { ReactComponent as eightynine_KU_Component } from "./eightynine/KU.svg";
+import eightynine_SR, { ReactComponent as eightynine_SR_Component } from "./eightynine/SR.svg";
+import eightynine_TR, { ReactComponent as eightynine_TR_Component } from "./eightynine/TR.svg";
+import eightynine_UR, { ReactComponent as eightynine_UR_Component } from "./eightynine/UR.svg";
+import eightynine_VR, { ReactComponent as eightynine_VR_Component } from "./eightynine/VR.svg";
+import EU_AIRS, { ReactComponent as EU_AIRS_Component } from "./EU/AIRS.svg";
+import EU_B, { ReactComponent as EU_B_Component } from "./EU/B.svg";
+import EU_DR, { ReactComponent as EU_DR_Component } from "./EU/DR.svg";
+import EU_FS, { ReactComponent as EU_FS_Component } from "./EU/FS.svg";
+import EU_GS, { ReactComponent as EU_GS_Component } from "./EU/GS.svg";
+import EU_RBSR, { ReactComponent as EU_RBSR_Component } from "./EU/RBSR.svg";
+import EU_RPR, { ReactComponent as EU_RPR_Component } from "./EU/RPR.svg";
+import EU_SNCF, { ReactComponent as EU_SNCF_Component } from "./EU/SNCF.svg";
+import fortyeight_BOE, { ReactComponent as fortyeight_BOE_Component } from "./fortyeight/BOE.svg";
+import fortyeight_CAR, { ReactComponent as fortyeight_CAR_Component } from "./fortyeight/CAR.svg";
+import fortyeight_CR, { ReactComponent as fortyeight_CR_Component } from "./fortyeight/CR.svg";
+import fortyeight_FT, { ReactComponent as fortyeight_FT_Component } from "./fortyeight/FT.svg";
+import fortyeight_NSW, { ReactComponent as fortyeight_NSW_Component } from "./fortyeight/NSW.svg";
+import fortyeight_QR, { ReactComponent as fortyeight_QR_Component } from "./fortyeight/QR.svg";
+import fortyeight_SAR, { ReactComponent as fortyeight_SAR_Component } from "./fortyeight/SAR.svg";
+import fortyeight_VR, { ReactComponent as fortyeight_VR_Component } from "./fortyeight/VR.svg";
+import fortyeight_WA, { ReactComponent as fortyeight_WA_Component } from "./fortyeight/WA.svg";
+import fortynine_AFG, { ReactComponent as fortynine_AFG_Component } from "./fortynine/AFG.svg";
+import fortynine_ATA, { ReactComponent as fortynine_ATA_Component } from "./fortynine/ATA.svg";
+import fortynine_CTL, { ReactComponent as fortynine_CTL_Component } from "./fortynine/CTL.svg";
+import fortynine_IFT, { ReactComponent as fortynine_IFT_Component } from "./fortynine/IFT.svg";
+import fortynine_RCS, { ReactComponent as fortynine_RCS_Component } from "./fortynine/RCS.svg";
+import fortynine_SFA, { ReactComponent as fortynine_SFA_Component } from "./fortynine/SFA.svg";
+import fortysix_BO, { ReactComponent as fortysix_BO_Component } from "./fortysix/BO.svg";
+import fortysix_CO, { ReactComponent as fortysix_CO_Component } from "./fortysix/CO.svg";
+import fortysix_ERIE, { ReactComponent as fortysix_ERIE_Component } from "./fortysix/ERIE.svg";
+import fortysix_GT, { ReactComponent as fortysix_GT_Component } from "./fortysix/GT.svg";
+import fortysix_IC, { ReactComponent as fortysix_IC_Component } from "./fortysix/IC.svg";
+import fortysix_NYC, { ReactComponent as fortysix_NYC_Component } from "./fortysix/NYC.svg";
+import fortysix_PRR, { ReactComponent as fortysix_PRR_Component } from "./fortysix/PRR.svg";
 import languages_c, { ReactComponent as languages_c_Component } from "./languages/c.svg";
 import languages_clojure, { ReactComponent as languages_clojure_Component } from "./languages/clojure.svg";
 import languages_commonlisp, { ReactComponent as languages_commonlisp_Component } from "./languages/commonlisp.svg";
@@ -69,8 +77,6 @@ import languages_rust, { ReactComponent as languages_rust_Component } from "./la
 import languages_scala, { ReactComponent as languages_scala_Component } from "./languages/scala.svg";
 import languages_shell, { ReactComponent as languages_shell_Component } from "./languages/shell.svg";
 import languages_swift, { ReactComponent as languages_swift_Component } from "./languages/swift.svg";
-import LIRR, { ReactComponent as LIRR_Component } from "./LIRR.svg";
-import LN, { ReactComponent as LN_Component } from "./LN.svg";
 import lotr_BPS, { ReactComponent as lotr_BPS_Component } from "./lotr/BPS.svg";
 import lotr_DME, { ReactComponent as lotr_DME_Component } from "./lotr/DME.svg";
 import lotr_E, { ReactComponent as lotr_E_Component } from "./lotr/E.svg";
@@ -81,17 +87,14 @@ import lotr_O, { ReactComponent as lotr_O_Component } from "./lotr/O.svg";
 import lotr_RGH, { ReactComponent as lotr_RGH_Component } from "./lotr/RGH.svg";
 import lotr_SER, { ReactComponent as lotr_SER_Component } from "./lotr/SER.svg";
 import lotr_SWR, { ReactComponent as lotr_SWR_Component } from "./lotr/SWR.svg";
-import MC, { ReactComponent as MC_Component } from "./MC.svg";
-import MEX, { ReactComponent as MEX_Component } from "./MEX.svg";
-import MKT, { ReactComponent as MKT_Component } from "./MKT.svg";
-import MP, { ReactComponent as MP_Component } from "./MP.svg";
-import NdM, { ReactComponent as NdM_Component } from "./NdM.svg";
-import NFL, { ReactComponent as NFL_Component } from "./NFL.svg";
-import NNH, { ReactComponent as NNH_Component } from "./NNH.svg";
-import NS, { ReactComponent as NS_Component } from "./NS.svg";
-import NSW, { ReactComponent as NSW_Component } from "./NSW.svg";
-import NW, { ReactComponent as NW_Component } from "./NW.svg";
-import NYC, { ReactComponent as NYC_Component } from "./NYC.svg";
+import mex_CHI, { ReactComponent as mex_CHI_Component } from "./mex/CHI.svg";
+import mex_MC, { ReactComponent as mex_MC_Component } from "./mex/MC.svg";
+import mex_MEX, { ReactComponent as mex_MEX_Component } from "./mex/MEX.svg";
+import mex_NdM, { ReactComponent as mex_NdM_Component } from "./mex/NdM.svg";
+import mex_PAC, { ReactComponent as mex_PAC_Component } from "./mex/PAC.svg";
+import mex_SP, { ReactComponent as mex_SP_Component } from "./mex/SP.svg";
+import mex_TM, { ReactComponent as mex_TM_Component } from "./mex/TM.svg";
+import mex_UdY, { ReactComponent as mex_UdY_Component } from "./mex/UdY.svg";
 import owl_atlanta_reign, { ReactComponent as owl_atlanta_reign_Component } from "./owl/atlanta_reign.svg";
 import owl_boston_uprising, { ReactComponent as owl_boston_uprising_Component } from "./owl/boston_uprising.svg";
 import owl_chengdu_hunters, { ReactComponent as owl_chengdu_hunters_Component } from "./owl/chengdu_hunters.svg";
@@ -112,26 +115,62 @@ import owl_shanghai_dragons, { ReactComponent as owl_shanghai_dragons_Component 
 import owl_toronto_defiant, { ReactComponent as owl_toronto_defiant_Component } from "./owl/toronto_defiant.svg";
 import owl_vancouver_titans, { ReactComponent as owl_vancouver_titans_Component } from "./owl/vancouver_titans.svg";
 import owl_washington_justice, { ReactComponent as owl_washington_justice_Component } from "./owl/washington_justice.svg";
-import PAC, { ReactComponent as PAC_Component } from "./PAC.svg";
-import PRR, { ReactComponent as PRR_Component } from "./PRR.svg";
-import QR, { ReactComponent as QR_Component } from "./QR.svg";
-import RCS, { ReactComponent as RCS_Component } from "./RCS.svg";
-import SALR, { ReactComponent as SALR_Component } from "./SALR.svg";
-import SAR, { ReactComponent as SAR_Component } from "./SAR.svg";
-import SCL, { ReactComponent as SCL_Component } from "./SCL.svg";
-import SFA, { ReactComponent as SFA_Component } from "./SFA.svg";
-import SLSF, { ReactComponent as SLSF_Component } from "./SLSF.svg";
-import SOU, { ReactComponent as SOU_Component } from "./SOU.svg";
-import SP, { ReactComponent as SP_Component } from "./SP.svg";
-import SR, { ReactComponent as SR_Component } from "./SR.svg";
-import SSW, { ReactComponent as SSW_Component } from "./SSW.svg";
-import TM, { ReactComponent as TM_Component } from "./TM.svg";
-import TP, { ReactComponent as TP_Component } from "./TP.svg";
-import TR, { ReactComponent as TR_Component } from "./TR.svg";
-import UdY, { ReactComponent as UdY_Component } from "./UdY.svg";
-import UR, { ReactComponent as UR_Component } from "./UR.svg";
-import VR, { ReactComponent as VR_Component } from "./VR.svg";
-import WA, { ReactComponent as WA_Component } from "./WA.svg";
+import seventy_ATSF, { ReactComponent as seventy_ATSF_Component } from "./seventy/ATSF.svg";
+import seventy_FW, { ReactComponent as seventy_FW_Component } from "./seventy/FW.svg";
+import seventy_GMO, { ReactComponent as seventy_GMO_Component } from "./seventy/GMO.svg";
+import seventy_IC, { ReactComponent as seventy_IC_Component } from "./seventy/IC.svg";
+import seventy_MKT, { ReactComponent as seventy_MKT_Component } from "./seventy/MKT.svg";
+import seventy_MP, { ReactComponent as seventy_MP_Component } from "./seventy/MP.svg";
+import seventy_SLSF, { ReactComponent as seventy_SLSF_Component } from "./seventy/SLSF.svg";
+import seventy_SP, { ReactComponent as seventy_SP_Component } from "./seventy/SP.svg";
+import seventy_SSW, { ReactComponent as seventy_SSW_Component } from "./seventy/SSW.svg";
+import seventy_TP, { ReactComponent as seventy_TP_Component } from "./seventy/TP.svg";
+import thirty_BM, { ReactComponent as thirty_BM_Component } from "./thirty/BM.svg";
+import thirty_BO, { ReactComponent as thirty_BO_Component } from "./thirty/BO.svg";
+import thirty_CO, { ReactComponent as thirty_CO_Component } from "./thirty/CO.svg";
+import thirty_CPR, { ReactComponent as thirty_CPR_Component } from "./thirty/CPR.svg";
+import thirty_ERIE, { ReactComponent as thirty_ERIE_Component } from "./thirty/ERIE.svg";
+import thirty_NNH, { ReactComponent as thirty_NNH_Component } from "./thirty/NNH.svg";
+import thirty_NYC, { ReactComponent as thirty_NYC_Component } from "./thirty/NYC.svg";
+import thirty_PRR, { ReactComponent as thirty_PRR_Component } from "./thirty/PRR.svg";
+import thirtysixjr_B, { ReactComponent as thirtysixjr_B_Component } from "./thirtysixjr/B.svg";
+import thirtysixjr_GCL, { ReactComponent as thirtysixjr_GCL_Component } from "./thirtysixjr/GCL.svg";
+import thirtysixjr_HSM, { ReactComponent as thirtysixjr_HSM_Component } from "./thirtysixjr/HSM.svg";
+import thirtysixjr_NBDS, { ReactComponent as thirtysixjr_NBDS_Component } from "./thirtysixjr/NBDS.svg";
+import thirtysixjr_NFL, { ReactComponent as thirtysixjr_NFL_Component } from "./thirtysixjr/NFL.svg";
+import thirtysixjr_Nord, { ReactComponent as thirtysixjr_Nord_Component } from "./thirtysixjr/Nord.svg";
+import thirtysixjr_SS, { ReactComponent as thirtysixjr_SS_Component } from "./thirtysixjr/SS.svg";
+import thirtytwo_ACL, { ReactComponent as thirtytwo_ACL_Component } from "./thirtytwo/ACL.svg";
+import thirtytwo_AMTK, { ReactComponent as thirtytwo_AMTK_Component } from "./thirtytwo/AMTK.svg";
+import thirtytwo_AWP, { ReactComponent as thirtytwo_AWP_Component } from "./thirtytwo/AWP.svg";
+import thirtytwo_COG, { ReactComponent as thirtytwo_COG_Component } from "./thirtytwo/COG.svg";
+import thirtytwo_CSX, { ReactComponent as thirtytwo_CSX_Component } from "./thirtytwo/CSX.svg";
+import thirtytwo_FECR, { ReactComponent as thirtytwo_FECR_Component } from "./thirtytwo/FECR.svg";
+import thirtytwo_GMO, { ReactComponent as thirtytwo_GMO_Component } from "./thirtytwo/GMO.svg";
+import thirtytwo_GRR, { ReactComponent as thirtytwo_GRR_Component } from "./thirtytwo/GRR.svg";
+import thirtytwo_IC, { ReactComponent as thirtytwo_IC_Component } from "./thirtytwo/IC.svg";
+import thirtytwo_LN, { ReactComponent as thirtytwo_LN_Component } from "./thirtytwo/LN.svg";
+import thirtytwo_NS, { ReactComponent as thirtytwo_NS_Component } from "./thirtytwo/NS.svg";
+import thirtytwo_NW, { ReactComponent as thirtytwo_NW_Component } from "./thirtytwo/NW.svg";
+import thirtytwo_SALR, { ReactComponent as thirtytwo_SALR_Component } from "./thirtytwo/SALR.svg";
+import thirtytwo_SOU, { ReactComponent as thirtytwo_SOU_Component } from "./thirtytwo/SOU.svg";
+import thirtytwo_SSW, { ReactComponent as thirtytwo_SSW_Component } from "./thirtytwo/SSW.svg";
+import TK_7, { ReactComponent as TK_7_Component } from "./TK/7.svg";
+import TK_JNR, { ReactComponent as TK_JNR_Component } from "./TK/JNR.svg";
+import TK_KER, { ReactComponent as TK_KER_Component } from "./TK/KER.svg";
+import TK_KK, { ReactComponent as TK_KK_Component } from "./TK/KK.svg";
+import TK_KR, { ReactComponent as TK_KR_Component } from "./TK/KR.svg";
+import TK_NTY, { ReactComponent as TK_NTY_Component } from "./TK/NTY.svg";
+import TK_OER, { ReactComponent as TK_OER_Component } from "./TK/OER.svg";
+import TK_SEI, { ReactComponent as TK_SEI_Component } from "./TK/SEI.svg";
+import TK_SM, { ReactComponent as TK_SM_Component } from "./TK/SM.svg";
+import TK_SR, { ReactComponent as TK_SR_Component } from "./TK/SR.svg";
+import TK_TC, { ReactComponent as TK_TC_Component } from "./TK/TC.svg";
+import TK_TE, { ReactComponent as TK_TE_Component } from "./TK/TE.svg";
+import TK_TM, { ReactComponent as TK_TM_Component } from "./TK/TM.svg";
+import TK_TR, { ReactComponent as TK_TR_Component } from "./TK/TR.svg";
+import TK_TS, { ReactComponent as TK_TS_Component } from "./TK/TS.svg";
+import TK_TTM, { ReactComponent as TK_TTM_Component } from "./TK/TTM.svg";
 import webdev_angular, { ReactComponent as webdev_angular_Component } from "./webdev/angular.svg";
 import webdev_chrome, { ReactComponent as webdev_chrome_Component } from "./webdev/chrome.svg";
 import webdev_css3, { ReactComponent as webdev_css3_Component } from "./webdev/css3.svg";
@@ -150,96 +189,6 @@ import webdev_webpack, { ReactComponent as webdev_webpack_Component } from "./we
 import webdev_yarn, { ReactComponent as webdev_yarn_Component } from "./webdev/yarn.svg";
 
 export default {
-  "ACL": {
-    name: "ACL",
-    src: ACL,
-    Component: ACL_Component
-  },
-  "AFG": {
-    name: "AFG",
-    src: AFG,
-    Component: AFG_Component
-  },
-  "AMTK": {
-    name: "AMTK",
-    src: AMTK,
-    Component: AMTK_Component
-  },
-  "AR": {
-    name: "AR",
-    src: AR,
-    Component: AR_Component
-  },
-  "ATA": {
-    name: "ATA",
-    src: ATA,
-    Component: ATA_Component
-  },
-  "ATSF": {
-    name: "ATSF",
-    src: ATSF,
-    Component: ATSF_Component
-  },
-  "AWP": {
-    name: "AWP",
-    src: AWP,
-    Component: AWP_Component
-  },
-  "BM": {
-    name: "BM",
-    src: BM,
-    Component: BM_Component
-  },
-  "BO": {
-    name: "BO",
-    src: BO,
-    Component: BO_Component
-  },
-  "BOE": {
-    name: "BOE",
-    src: BOE,
-    Component: BOE_Component
-  },
-  "CAR": {
-    name: "CAR",
-    src: CAR,
-    Component: CAR_Component
-  },
-  "CHI": {
-    name: "CHI",
-    src: CHI,
-    Component: CHI_Component
-  },
-  "CO": {
-    name: "CO",
-    src: CO,
-    Component: CO_Component
-  },
-  "COG": {
-    name: "COG",
-    src: COG,
-    Component: COG_Component
-  },
-  "CPR": {
-    name: "CPR",
-    src: CPR,
-    Component: CPR_Component
-  },
-  "CR": {
-    name: "CR",
-    src: CR,
-    Component: CR_Component
-  },
-  "CSX": {
-    name: "CSX",
-    src: CSX,
-    Component: CSX_Component
-  },
-  "CTL": {
-    name: "CTL",
-    src: CTL,
-    Component: CTL_Component
-  },
   "dev/apple": {
     name: "apple",
     group: "dev",
@@ -360,65 +309,233 @@ export default {
     src: dev_vscode,
     Component: dev_vscode_Component
   },
-  "ERIE": {
-    name: "ERIE",
-    src: ERIE,
-    Component: ERIE_Component
+  "eightynine/AR": {
+    name: "AR",
+    group: "eightynine",
+    src: eightynine_AR,
+    Component: eightynine_AR_Component
   },
-  "FECR": {
-    name: "FECR",
-    src: FECR,
-    Component: FECR_Component
-  },
-  "FT": {
-    name: "FT",
-    src: FT,
-    Component: FT_Component
-  },
-  "FW": {
-    name: "FW",
-    src: FW,
-    Component: FW_Component
-  },
-  "GMO": {
-    name: "GMO",
-    src: GMO,
-    Component: GMO_Component
-  },
-  "GRR": {
-    name: "GRR",
-    src: GRR,
-    Component: GRR_Component
-  },
-  "GT": {
-    name: "GT",
-    src: GT,
-    Component: GT_Component
-  },
-  "IC": {
-    name: "IC",
-    src: IC,
-    Component: IC_Component
-  },
-  "IFT": {
-    name: "IFT",
-    src: IFT,
-    Component: IFT_Component
-  },
-  "IR": {
+  "eightynine/IR": {
     name: "IR",
-    src: IR,
-    Component: IR_Component
+    group: "eightynine",
+    src: eightynine_IR,
+    Component: eightynine_IR_Component
   },
-  "KO": {
+  "eightynine/KO": {
     name: "KO",
-    src: KO,
-    Component: KO_Component
+    group: "eightynine",
+    src: eightynine_KO,
+    Component: eightynine_KO_Component
   },
-  "KU": {
+  "eightynine/KU": {
     name: "KU",
-    src: KU,
-    Component: KU_Component
+    group: "eightynine",
+    src: eightynine_KU,
+    Component: eightynine_KU_Component
+  },
+  "eightynine/SR": {
+    name: "SR",
+    group: "eightynine",
+    src: eightynine_SR,
+    Component: eightynine_SR_Component
+  },
+  "eightynine/TR": {
+    name: "TR",
+    group: "eightynine",
+    src: eightynine_TR,
+    Component: eightynine_TR_Component
+  },
+  "eightynine/UR": {
+    name: "UR",
+    group: "eightynine",
+    src: eightynine_UR,
+    Component: eightynine_UR_Component
+  },
+  "eightynine/VR": {
+    name: "VR",
+    group: "eightynine",
+    src: eightynine_VR,
+    Component: eightynine_VR_Component
+  },
+  "EU/AIRS": {
+    name: "AIRS",
+    group: "EU",
+    src: EU_AIRS,
+    Component: EU_AIRS_Component
+  },
+  "EU/B": {
+    name: "B",
+    group: "EU",
+    src: EU_B,
+    Component: EU_B_Component
+  },
+  "EU/DR": {
+    name: "DR",
+    group: "EU",
+    src: EU_DR,
+    Component: EU_DR_Component
+  },
+  "EU/FS": {
+    name: "FS",
+    group: "EU",
+    src: EU_FS,
+    Component: EU_FS_Component
+  },
+  "EU/GS": {
+    name: "GS",
+    group: "EU",
+    src: EU_GS,
+    Component: EU_GS_Component
+  },
+  "EU/RBSR": {
+    name: "RBSR",
+    group: "EU",
+    src: EU_RBSR,
+    Component: EU_RBSR_Component
+  },
+  "EU/RPR": {
+    name: "RPR",
+    group: "EU",
+    src: EU_RPR,
+    Component: EU_RPR_Component
+  },
+  "EU/SNCF": {
+    name: "SNCF",
+    group: "EU",
+    src: EU_SNCF,
+    Component: EU_SNCF_Component
+  },
+  "fortyeight/BOE": {
+    name: "BOE",
+    group: "fortyeight",
+    src: fortyeight_BOE,
+    Component: fortyeight_BOE_Component
+  },
+  "fortyeight/CAR": {
+    name: "CAR",
+    group: "fortyeight",
+    src: fortyeight_CAR,
+    Component: fortyeight_CAR_Component
+  },
+  "fortyeight/CR": {
+    name: "CR",
+    group: "fortyeight",
+    src: fortyeight_CR,
+    Component: fortyeight_CR_Component
+  },
+  "fortyeight/FT": {
+    name: "FT",
+    group: "fortyeight",
+    src: fortyeight_FT,
+    Component: fortyeight_FT_Component
+  },
+  "fortyeight/NSW": {
+    name: "NSW",
+    group: "fortyeight",
+    src: fortyeight_NSW,
+    Component: fortyeight_NSW_Component
+  },
+  "fortyeight/QR": {
+    name: "QR",
+    group: "fortyeight",
+    src: fortyeight_QR,
+    Component: fortyeight_QR_Component
+  },
+  "fortyeight/SAR": {
+    name: "SAR",
+    group: "fortyeight",
+    src: fortyeight_SAR,
+    Component: fortyeight_SAR_Component
+  },
+  "fortyeight/VR": {
+    name: "VR",
+    group: "fortyeight",
+    src: fortyeight_VR,
+    Component: fortyeight_VR_Component
+  },
+  "fortyeight/WA": {
+    name: "WA",
+    group: "fortyeight",
+    src: fortyeight_WA,
+    Component: fortyeight_WA_Component
+  },
+  "fortynine/AFG": {
+    name: "AFG",
+    group: "fortynine",
+    src: fortynine_AFG,
+    Component: fortynine_AFG_Component
+  },
+  "fortynine/ATA": {
+    name: "ATA",
+    group: "fortynine",
+    src: fortynine_ATA,
+    Component: fortynine_ATA_Component
+  },
+  "fortynine/CTL": {
+    name: "CTL",
+    group: "fortynine",
+    src: fortynine_CTL,
+    Component: fortynine_CTL_Component
+  },
+  "fortynine/IFT": {
+    name: "IFT",
+    group: "fortynine",
+    src: fortynine_IFT,
+    Component: fortynine_IFT_Component
+  },
+  "fortynine/RCS": {
+    name: "RCS",
+    group: "fortynine",
+    src: fortynine_RCS,
+    Component: fortynine_RCS_Component
+  },
+  "fortynine/SFA": {
+    name: "SFA",
+    group: "fortynine",
+    src: fortynine_SFA,
+    Component: fortynine_SFA_Component
+  },
+  "fortysix/BO": {
+    name: "BO",
+    group: "fortysix",
+    src: fortysix_BO,
+    Component: fortysix_BO_Component
+  },
+  "fortysix/CO": {
+    name: "CO",
+    group: "fortysix",
+    src: fortysix_CO,
+    Component: fortysix_CO_Component
+  },
+  "fortysix/ERIE": {
+    name: "ERIE",
+    group: "fortysix",
+    src: fortysix_ERIE,
+    Component: fortysix_ERIE_Component
+  },
+  "fortysix/GT": {
+    name: "GT",
+    group: "fortysix",
+    src: fortysix_GT,
+    Component: fortysix_GT_Component
+  },
+  "fortysix/IC": {
+    name: "IC",
+    group: "fortysix",
+    src: fortysix_IC,
+    Component: fortysix_IC_Component
+  },
+  "fortysix/NYC": {
+    name: "NYC",
+    group: "fortysix",
+    src: fortysix_NYC,
+    Component: fortysix_NYC_Component
+  },
+  "fortysix/PRR": {
+    name: "PRR",
+    group: "fortysix",
+    src: fortysix_PRR,
+    Component: fortysix_PRR_Component
   },
   "languages/c": {
     name: "c",
@@ -546,16 +663,6 @@ export default {
     src: languages_swift,
     Component: languages_swift_Component
   },
-  "LIRR": {
-    name: "LIRR",
-    src: LIRR,
-    Component: LIRR_Component
-  },
-  "LN": {
-    name: "LN",
-    src: LN,
-    Component: LN_Component
-  },
   "lotr/BPS": {
     name: "BPS",
     group: "lotr",
@@ -616,60 +723,53 @@ export default {
     src: lotr_SWR,
     Component: lotr_SWR_Component
   },
-  "MC": {
+  "mex/CHI": {
+    name: "CHI",
+    group: "mex",
+    src: mex_CHI,
+    Component: mex_CHI_Component
+  },
+  "mex/MC": {
     name: "MC",
-    src: MC,
-    Component: MC_Component
+    group: "mex",
+    src: mex_MC,
+    Component: mex_MC_Component
   },
-  "MEX": {
+  "mex/MEX": {
     name: "MEX",
-    src: MEX,
-    Component: MEX_Component
+    group: "mex",
+    src: mex_MEX,
+    Component: mex_MEX_Component
   },
-  "MKT": {
-    name: "MKT",
-    src: MKT,
-    Component: MKT_Component
-  },
-  "MP": {
-    name: "MP",
-    src: MP,
-    Component: MP_Component
-  },
-  "NdM": {
+  "mex/NdM": {
     name: "NdM",
-    src: NdM,
-    Component: NdM_Component
+    group: "mex",
+    src: mex_NdM,
+    Component: mex_NdM_Component
   },
-  "NFL": {
-    name: "NFL",
-    src: NFL,
-    Component: NFL_Component
+  "mex/PAC": {
+    name: "PAC",
+    group: "mex",
+    src: mex_PAC,
+    Component: mex_PAC_Component
   },
-  "NNH": {
-    name: "NNH",
-    src: NNH,
-    Component: NNH_Component
+  "mex/SP": {
+    name: "SP",
+    group: "mex",
+    src: mex_SP,
+    Component: mex_SP_Component
   },
-  "NS": {
-    name: "NS",
-    src: NS,
-    Component: NS_Component
+  "mex/TM": {
+    name: "TM",
+    group: "mex",
+    src: mex_TM,
+    Component: mex_TM_Component
   },
-  "NSW": {
-    name: "NSW",
-    src: NSW,
-    Component: NSW_Component
-  },
-  "NW": {
-    name: "NW",
-    src: NW,
-    Component: NW_Component
-  },
-  "NYC": {
-    name: "NYC",
-    src: NYC,
-    Component: NYC_Component
+  "mex/UdY": {
+    name: "UdY",
+    group: "mex",
+    src: mex_UdY,
+    Component: mex_UdY_Component
   },
   "owl/atlanta_reign": {
     name: "atlanta_reign",
@@ -791,105 +891,341 @@ export default {
     src: owl_washington_justice,
     Component: owl_washington_justice_Component
   },
-  "PAC": {
-    name: "PAC",
-    src: PAC,
-    Component: PAC_Component
+  "seventy/ATSF": {
+    name: "ATSF",
+    group: "seventy",
+    src: seventy_ATSF,
+    Component: seventy_ATSF_Component
   },
-  "PRR": {
-    name: "PRR",
-    src: PRR,
-    Component: PRR_Component
+  "seventy/FW": {
+    name: "FW",
+    group: "seventy",
+    src: seventy_FW,
+    Component: seventy_FW_Component
   },
-  "QR": {
-    name: "QR",
-    src: QR,
-    Component: QR_Component
+  "seventy/GMO": {
+    name: "GMO",
+    group: "seventy",
+    src: seventy_GMO,
+    Component: seventy_GMO_Component
   },
-  "RCS": {
-    name: "RCS",
-    src: RCS,
-    Component: RCS_Component
+  "seventy/IC": {
+    name: "IC",
+    group: "seventy",
+    src: seventy_IC,
+    Component: seventy_IC_Component
   },
-  "SALR": {
-    name: "SALR",
-    src: SALR,
-    Component: SALR_Component
+  "seventy/MKT": {
+    name: "MKT",
+    group: "seventy",
+    src: seventy_MKT,
+    Component: seventy_MKT_Component
   },
-  "SAR": {
-    name: "SAR",
-    src: SAR,
-    Component: SAR_Component
+  "seventy/MP": {
+    name: "MP",
+    group: "seventy",
+    src: seventy_MP,
+    Component: seventy_MP_Component
   },
-  "SCL": {
-    name: "SCL",
-    src: SCL,
-    Component: SCL_Component
-  },
-  "SFA": {
-    name: "SFA",
-    src: SFA,
-    Component: SFA_Component
-  },
-  "SLSF": {
+  "seventy/SLSF": {
     name: "SLSF",
-    src: SLSF,
-    Component: SLSF_Component
+    group: "seventy",
+    src: seventy_SLSF,
+    Component: seventy_SLSF_Component
   },
-  "SOU": {
-    name: "SOU",
-    src: SOU,
-    Component: SOU_Component
-  },
-  "SP": {
+  "seventy/SP": {
     name: "SP",
-    src: SP,
-    Component: SP_Component
+    group: "seventy",
+    src: seventy_SP,
+    Component: seventy_SP_Component
   },
-  "SR": {
-    name: "SR",
-    src: SR,
-    Component: SR_Component
-  },
-  "SSW": {
+  "seventy/SSW": {
     name: "SSW",
-    src: SSW,
-    Component: SSW_Component
+    group: "seventy",
+    src: seventy_SSW,
+    Component: seventy_SSW_Component
   },
-  "TM": {
-    name: "TM",
-    src: TM,
-    Component: TM_Component
-  },
-  "TP": {
+  "seventy/TP": {
     name: "TP",
-    src: TP,
-    Component: TP_Component
+    group: "seventy",
+    src: seventy_TP,
+    Component: seventy_TP_Component
   },
-  "TR": {
+  "thirty/BM": {
+    name: "BM",
+    group: "thirty",
+    src: thirty_BM,
+    Component: thirty_BM_Component
+  },
+  "thirty/BO": {
+    name: "BO",
+    group: "thirty",
+    src: thirty_BO,
+    Component: thirty_BO_Component
+  },
+  "thirty/CO": {
+    name: "CO",
+    group: "thirty",
+    src: thirty_CO,
+    Component: thirty_CO_Component
+  },
+  "thirty/CPR": {
+    name: "CPR",
+    group: "thirty",
+    src: thirty_CPR,
+    Component: thirty_CPR_Component
+  },
+  "thirty/ERIE": {
+    name: "ERIE",
+    group: "thirty",
+    src: thirty_ERIE,
+    Component: thirty_ERIE_Component
+  },
+  "thirty/NNH": {
+    name: "NNH",
+    group: "thirty",
+    src: thirty_NNH,
+    Component: thirty_NNH_Component
+  },
+  "thirty/NYC": {
+    name: "NYC",
+    group: "thirty",
+    src: thirty_NYC,
+    Component: thirty_NYC_Component
+  },
+  "thirty/PRR": {
+    name: "PRR",
+    group: "thirty",
+    src: thirty_PRR,
+    Component: thirty_PRR_Component
+  },
+  "thirtysixjr/B": {
+    name: "B",
+    group: "thirtysixjr",
+    src: thirtysixjr_B,
+    Component: thirtysixjr_B_Component
+  },
+  "thirtysixjr/GCL": {
+    name: "GCL",
+    group: "thirtysixjr",
+    src: thirtysixjr_GCL,
+    Component: thirtysixjr_GCL_Component
+  },
+  "thirtysixjr/HSM": {
+    name: "HSM",
+    group: "thirtysixjr",
+    src: thirtysixjr_HSM,
+    Component: thirtysixjr_HSM_Component
+  },
+  "thirtysixjr/NBDS": {
+    name: "NBDS",
+    group: "thirtysixjr",
+    src: thirtysixjr_NBDS,
+    Component: thirtysixjr_NBDS_Component
+  },
+  "thirtysixjr/NFL": {
+    name: "NFL",
+    group: "thirtysixjr",
+    src: thirtysixjr_NFL,
+    Component: thirtysixjr_NFL_Component
+  },
+  "thirtysixjr/Nord": {
+    name: "Nord",
+    group: "thirtysixjr",
+    src: thirtysixjr_Nord,
+    Component: thirtysixjr_Nord_Component
+  },
+  "thirtysixjr/SS": {
+    name: "SS",
+    group: "thirtysixjr",
+    src: thirtysixjr_SS,
+    Component: thirtysixjr_SS_Component
+  },
+  "thirtytwo/ACL": {
+    name: "ACL",
+    group: "thirtytwo",
+    src: thirtytwo_ACL,
+    Component: thirtytwo_ACL_Component
+  },
+  "thirtytwo/AMTK": {
+    name: "AMTK",
+    group: "thirtytwo",
+    src: thirtytwo_AMTK,
+    Component: thirtytwo_AMTK_Component
+  },
+  "thirtytwo/AWP": {
+    name: "AWP",
+    group: "thirtytwo",
+    src: thirtytwo_AWP,
+    Component: thirtytwo_AWP_Component
+  },
+  "thirtytwo/COG": {
+    name: "COG",
+    group: "thirtytwo",
+    src: thirtytwo_COG,
+    Component: thirtytwo_COG_Component
+  },
+  "thirtytwo/CSX": {
+    name: "CSX",
+    group: "thirtytwo",
+    src: thirtytwo_CSX,
+    Component: thirtytwo_CSX_Component
+  },
+  "thirtytwo/FECR": {
+    name: "FECR",
+    group: "thirtytwo",
+    src: thirtytwo_FECR,
+    Component: thirtytwo_FECR_Component
+  },
+  "thirtytwo/GMO": {
+    name: "GMO",
+    group: "thirtytwo",
+    src: thirtytwo_GMO,
+    Component: thirtytwo_GMO_Component
+  },
+  "thirtytwo/GRR": {
+    name: "GRR",
+    group: "thirtytwo",
+    src: thirtytwo_GRR,
+    Component: thirtytwo_GRR_Component
+  },
+  "thirtytwo/IC": {
+    name: "IC",
+    group: "thirtytwo",
+    src: thirtytwo_IC,
+    Component: thirtytwo_IC_Component
+  },
+  "thirtytwo/LN": {
+    name: "LN",
+    group: "thirtytwo",
+    src: thirtytwo_LN,
+    Component: thirtytwo_LN_Component
+  },
+  "thirtytwo/NS": {
+    name: "NS",
+    group: "thirtytwo",
+    src: thirtytwo_NS,
+    Component: thirtytwo_NS_Component
+  },
+  "thirtytwo/NW": {
+    name: "NW",
+    group: "thirtytwo",
+    src: thirtytwo_NW,
+    Component: thirtytwo_NW_Component
+  },
+  "thirtytwo/SALR": {
+    name: "SALR",
+    group: "thirtytwo",
+    src: thirtytwo_SALR,
+    Component: thirtytwo_SALR_Component
+  },
+  "thirtytwo/SOU": {
+    name: "SOU",
+    group: "thirtytwo",
+    src: thirtytwo_SOU,
+    Component: thirtytwo_SOU_Component
+  },
+  "thirtytwo/SSW": {
+    name: "SSW",
+    group: "thirtytwo",
+    src: thirtytwo_SSW,
+    Component: thirtytwo_SSW_Component
+  },
+  "TK/7": {
+    name: "7",
+    group: "TK",
+    src: TK_7,
+    Component: TK_7_Component
+  },
+  "TK/JNR": {
+    name: "JNR",
+    group: "TK",
+    src: TK_JNR,
+    Component: TK_JNR_Component
+  },
+  "TK/KER": {
+    name: "KER",
+    group: "TK",
+    src: TK_KER,
+    Component: TK_KER_Component
+  },
+  "TK/KK": {
+    name: "KK",
+    group: "TK",
+    src: TK_KK,
+    Component: TK_KK_Component
+  },
+  "TK/KR": {
+    name: "KR",
+    group: "TK",
+    src: TK_KR,
+    Component: TK_KR_Component
+  },
+  "TK/NTY": {
+    name: "NTY",
+    group: "TK",
+    src: TK_NTY,
+    Component: TK_NTY_Component
+  },
+  "TK/OER": {
+    name: "OER",
+    group: "TK",
+    src: TK_OER,
+    Component: TK_OER_Component
+  },
+  "TK/SEI": {
+    name: "SEI",
+    group: "TK",
+    src: TK_SEI,
+    Component: TK_SEI_Component
+  },
+  "TK/SM": {
+    name: "SM",
+    group: "TK",
+    src: TK_SM,
+    Component: TK_SM_Component
+  },
+  "TK/SR": {
+    name: "SR",
+    group: "TK",
+    src: TK_SR,
+    Component: TK_SR_Component
+  },
+  "TK/TC": {
+    name: "TC",
+    group: "TK",
+    src: TK_TC,
+    Component: TK_TC_Component
+  },
+  "TK/TE": {
+    name: "TE",
+    group: "TK",
+    src: TK_TE,
+    Component: TK_TE_Component
+  },
+  "TK/TM": {
+    name: "TM",
+    group: "TK",
+    src: TK_TM,
+    Component: TK_TM_Component
+  },
+  "TK/TR": {
     name: "TR",
-    src: TR,
-    Component: TR_Component
+    group: "TK",
+    src: TK_TR,
+    Component: TK_TR_Component
   },
-  "UdY": {
-    name: "UdY",
-    src: UdY,
-    Component: UdY_Component
+  "TK/TS": {
+    name: "TS",
+    group: "TK",
+    src: TK_TS,
+    Component: TK_TS_Component
   },
-  "UR": {
-    name: "UR",
-    src: UR,
-    Component: UR_Component
-  },
-  "VR": {
-    name: "VR",
-    src: VR,
-    Component: VR_Component
-  },
-  "WA": {
-    name: "WA",
-    src: WA,
-    Component: WA_Component
+  "TK/TTM": {
+    name: "TTM",
+    group: "TK",
+    src: TK_TTM,
+    Component: TK_TTM_Component
   },
   "webdev/angular": {
     name: "angular",

@@ -109,6 +109,7 @@
       "name": "Seaboard Coast Lines",
       "color": "red",
       "abbrev": "SCL",
+      "logo": "thirtytwo/SCL",
       "shares": "system",
       "tokens": "system"
     },
@@ -116,6 +117,7 @@
       "name": "Norfolk Southern",
       "color": "black",
       "abbrev": "NS",
+      "logo": "thirtytwo/NS",
       "shares": "system",
       "tokens": "system"
     },
@@ -123,6 +125,7 @@
       "name": "Illinois Central",
       "color": "green",
       "abbrev": "IC",
+      "logo": "thirtytwo/IC",
       "shares": "system",
       "tokens": "system"
     },
@@ -130,6 +133,7 @@
       "name": "Amtrak",
       "color": "blue",
       "abbrev": "AMTK",
+      "logo": "thirtytwo/AMTK",
       "shares": "system",
       "tokens": "system"
     },
@@ -137,62 +141,70 @@
       "name": "CSX Transportation",
       "color": "cyan",
       "abbrev": "CSX",
+      "logo": "thirtytwo/CSX",
       "shares": "system",
       "tokens": "system"
     },
     {
       "name": "Atlantic Coast Line Railroad",
       "abbrev": "ACL",
+      "logo": "thirtytwo/ACL",
       "color": "pink"
     },
     {
       "name": "Atlanta & West Point Railroad",
       "abbrev": "A&WP",
-      "logo": "AWP",
+      "logo": "thirtytwo/AWP",
       "color": "purple",
       "tokens": "two"
     },
     {
       "name": "Seaboard Air Line Railway",
       "abbrev": "SALR",
+      "logo": "thirtytwo/SALR",
       "color": "orange"
     },
     {
       "name": "Norfolk & Western Railway",
       "abbrev": "N&W",
-      "logo": "NW",
+      "logo": "thirtytwo/NW",
       "color": "black"
     },
     {
       "name": "Central of Georgia Railway",
       "abbrev": "COG",
+      "logo": "thirtytwo/COG",
       "color": "turquoise"
     },
     {
       "name": "Louisville & Nashville Railroad",
       "abbrev": "L&N",
-      "logo": "LN",
+      "logo": "thirtytwo/LN",
       "color": "blue"
     },
     {
       "name": "Georgia Railroad",
       "abbrev": "GRR",
+      "logo": "thirtytwo/GRR",
       "color": "cyan",
       "tokens": "two"
     },
     {
       "name": "Gulf, Mobile & Ohio Railroad",
       "abbrev": "GMO",
+      "logo": "thirtytwo/GMO",
       "color": "red"
     },
     {
       "name": "Southern Railway",
       "abbrev": "SOU",
+      "logo": "thirtytwo/SOU",
       "color": "green"
     },
     {
       "name": "Florida East Coast Railroad",
       "abbrev": "FECR",
+      "logo": "thirtytwo/FECR",
       "tokens": [
         "Free",
         40,

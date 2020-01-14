@@ -701,6 +701,7 @@
     {
       "name": "Azienda Ferroviaria Garibaldi",
       "abbrev": "AFG",
+      "logo": "fortynine/AFG",
       "tokens": [
         40,
         "",
@@ -711,6 +712,7 @@
     {
       "name": "Azienda Trasporti Archimede",
       "abbrev": "ATA",
+      "logo": "fortynine/ATA",
       "tokens": [
         30,
         "",
@@ -721,6 +723,7 @@
     {
       "name": "Compagnia Trasporti Lilibeo",
       "abbrev": "CTL",
+      "logo": "fortynine/CTL",
       "tokens": [
         40,
         "",
@@ -731,6 +734,7 @@
     {
       "name": "Impresa Ferroviaria Trinacria",
       "abbrev": "IFT",
+      "logo": "fortynine/IFT",
       "tokens": [
         90,
         "",
@@ -741,6 +745,7 @@
     {
       "name": "Rete Centrale Sicula",
       "abbrev": "RCS",
+      "logo": "fortynine/RCS",
       "tokens": [
         130,
         "",
@@ -751,6 +756,7 @@
     {
       "name": "Società Ferroviaria Akragas",
       "abbrev": "SFA",
+      "logo": "fortynine/SFA",
       "tokens": [
         40,
         "",

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 196.1">
+    <circle fill="#181716" stroke="#fff" stroke-miterlimit="10" stroke-width="6.4404" cx="96.1" cy="98.1" r="96.2"/>
+    <path fill="#fff" d="M-.4 98.8c0 9.9 1.5 19.4 4.2 28.3h184c2.8-9 4.2-18.5 4.2-28.3 0-10.1-1.6-19.8-4.4-28.9H4C1.2 79-.4 88.7-.4 98.8z"/>
+    <text fill="#181716" font-family="KozGoPr6N-Medium-90ms-RKSJ-H" font-size="51.5235" transform="translate(40.9856 117.6749)">
+        国
+    </text>
+    <text fill="#181716" font-family="KozGoPr6N-Medium-90ms-RKSJ-H" font-size="51.5235" transform="translate(97.2121 119.4601)">
+        鉄
+    </text>
+</svg>

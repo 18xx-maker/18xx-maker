@@ -1,0 +1,2298 @@
+{
+  "info": {
+    "titleY": 1300,
+    "titleX": 75,
+    "titleSize": 100,
+    "extraTotalHeight": 0,
+    "title": "18DND",
+    "subtitle": "Teckle Trains by the Tay",
+    "designer": "Greg Smith",
+    "background": "purple",
+    "currency": "GBP",
+    "extraTokens": 0,
+    "homeTokens": 1
+  },
+  "links": {
+    "bgg": "https://boardgamegeek.com/boardgamefamily/19/18xx",
+    "rules": "https://boardgamegeek.com/wiki/page/18xx"
+  },
+  "tokens": [
+    "Round",
+    "Ferry",
+    "#NTRL",
+    "#NTRL",
+    "#NTRL",
+    "#NTRL",
+    "#NTRL",
+    "#NTRL",
+    "#NTRL",
+    "#NTRL",
+    "#NTRL",
+    "#NTRL"
+  ],
+  "ipo": true,
+  "bank": "$4000",
+  "players": [
+    {
+      "number": 3,
+      "certLimit": 12,
+      "capital": "$280"
+    },
+    {
+      "number": 4,
+      "certLimit": 10,
+      "capital": "$210"
+    }
+  ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "tokenTypes": {
+    "two": [
+      "Home",
+      40
+    ],
+    "three": [
+      "Home",
+      40,
+      40
+    ],
+    "four": [
+      "Home",
+      40,
+      40,
+      40
+    ]
+  },
+   "companies": [
+    {
+      "name": "Dundee and Newtyle",
+      "abbrev": "PRR",
+      "color": "black",
+      "tokens": "three"
+    },
+    {
+      "name": "Scottish North Eastern Railway",
+      "abbrev": "SNER",
+      "color": "blue",
+      "tokens": "four"
+    },
+    {
+      "name": "Newtyle and Coupar Angus",
+      "abbrev": "N&CA",
+      "color": "green",
+      "tokens": "three"
+    },
+    {
+      "name": "Newtyle and Glamis",
+      "abbrev": "N&G",
+      "color": "pink",
+      "tokens": "three"
+    },
+    {
+      "name": "Scottish Midland Junction Railway",
+      "abbrev": "SMJR",
+      "color": "yellow",
+      "tokens": "four"
+    },
+    {
+      "name": "Dundee and Arbroath",
+      "abbrev": "D&A",
+      "color": "purple",
+      "tokens": "three"
+    },
+    {
+      "name": "Dundee Cooperative",
+      "abbrev": "CO-OP",
+      "tokens": [
+        "Free",
+        "Free",
+        "Free"
+      ],
+      "color": "orange",
+      "shares": [
+        {
+          "quantity": 10,
+          "label": "CO-OP Share",
+          "percent": "",
+          "shares": "1"
+        }
+      ]
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 4,
+      "price": "£100",
+      "color": "yellow",
+      "info": [
+        {
+          "color": "green",
+          "note": "Rusted by 4+4"
+        }
+      ]
+    },
+    {
+      "name": "2+2",
+      "quantity": 3,
+      "price": "£120",
+      "color": "yellow",
+      "info": [
+        {
+          "color": "green",
+          "note": "Rusted by 4+4"
+        }
+      ]
+    },
+    {
+      "name": "3+3",
+      "quantity": 5,
+      "price": "£220",
+      "color": "green",
+      "info": [
+        {
+          "color": "orange",
+          "note": "Rusted by 5+5"
+        }
+      ]
+    },
+    {
+      "name": "4+4",
+      "quantity": 4,
+      "price": "£350",
+      "color": "green",
+      "info": [
+        {
+          "color": "orange",
+          "note": "Rusted by 4D/e"
+       }
+     ]
+        },
+        {
+      "name": "5+5",
+      "quantity": 3,
+      "price": "£500",
+      "color": "orange",
+      "info": [
+        {
+          "color": "white",
+          "note": "Permanent"
+        }
+      ]
+    },
+        {
+      "name": "4D/e",
+      "quantity": 5,
+      "price": "£700",
+      "color": "orange",
+      "info": [
+        {
+          "color": "white",
+          "note": "2x offboards. Skips dits"
+        }
+      ]
+    }
+  ],
+ 
+  "phases": [
+    {
+      "name": "2",
+      "train": "2",
+      "phase": "2",
+      "limit": "3",
+      "number": "4",
+      "tiles": "yellow"
+       },
+       {
+      "name": "2+2",
+      "train": "2+2",
+      "phase": "3",
+      "limit": "3",
+      "number": "3",
+      "tiles": "yellow"
+    },
+    {
+      "name": "3+3",
+      "train": "3+3",
+      "phase": "4",
+      "limit": "3",
+      "number": "5",
+      "tiles": "green",
+      "notes": "Private companies may be purchased"
+    },
+     {
+      "name": "4+4",
+      "train": "4+4",
+      "phase": "5",
+      "limit": "3",
+      "number": "4",
+      "tiles": "green",
+      "notes": ""
+    },
+    {
+      "name": "5+5",
+      "train": "5+5",
+      "phase": "6",
+      "limit": "2",
+      "number": "3",
+      "tiles": "brown",
+      "notes": "Private companies are closed, Port Forced upgrade, Tay rail Bridge collapse, North South Bonus +£50"
+    },
+        {
+      "name": "4D/e",
+      "train": "4D/e",
+      "phase": "7",
+      "limit": "2",
+      "number": "5",
+      "tiles": "brown",
+      "notes": ""
+    }
+  ],
+  "pools": [
+    {
+      "name": "Market",
+      "notes": [
+        {
+          "color": "orange",
+          "note": "Shares in the market will drop stock value at the end of the SR"
+        },
+          {
+          "color": "orange",
+          "note": "During the token laying phase a company can sell on map tokens to the bank for £140 (it must keep at least one token on map at all times) Sold tokens are replaced with neutral tokens which block routes. A token can be bought and placed from the bank instead of from the company charter. The company must pay current market value and replace a neutral token (following standard token laying rules)."
+        },
+        {
+          "color": "brown",
+          "icon": "exclamation",
+          "note": "No more than 50% of a corporation's shares may be in the market at any time"
+        },
+        {
+          "color": "red",
+          "icon": "times",
+          "note": "Shares cannot be sold during the first stock round"
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "OR3",
+      "color": "brown"
+    },
+    {
+      "name": "OR2",
+      "color": "green"
+    },
+    {
+      "name": "OR1",
+      "color": "yellow"
+    },
+    {
+      "name": "SR",
+      "color": "gray"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": [
+   "Sell any number of shares",
+        "Buy one share",
+        "Buy a Token From the bank",
+        "Buy into the COOP"
+      ],
+      "ordered": true
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Pay off Interest and/or Loans",
+        "Lay or upgrade track",
+        "Purchase a station",
+        "Run trains",
+        "Pay Full dividends, half dividends or withhold revenue",
+        "Purchase trains",
+        "Take a £100 Loan against company Assets. (Limited by free token slots on charter)"
+      ],
+      "ordered": true,
+      "optional": [
+        "Purchase private companies"
+      ]
+    }
+  ],
+  "stock": {
+    "type": "2D",
+    "par": {
+      "values": [
+        90,
+        75,
+        60,
+        50,
+        40
+      ]
+    },
+    "movement": {
+      "right": [
+        "Sold out"
+      ],
+      "left": [
+        "Every share sold",
+        "Shares in bank pool at the end of the SR"
+      ]
+    },
+    "market": [
+      [
+        {
+          "value": "CLOSED",
+          "sublabel": "closed",
+          "legend": 2,
+          "arrow": ""
+        },
+        10,
+        15,
+        20,
+        30,
+        {
+          "value": 40,
+          "label": 40,
+          "par": true
+        },
+  {
+          "value": 50,
+          "label": 50,
+          "par": true
+        },
+  {
+          "value": 60,
+          "label": 60,
+          "par": true
+        },
+  {
+          "value": 75,
+          "label": 75,
+          "par": true
+        },
+  {
+          "value": 90,
+          "label": 90,
+          "par": true
+        },
+        100,
+        120,
+  {
+    "value": 140,
+          "label": "FMV",
+          "color": "purple"
+        },
+        160,
+        180,
+        200,
+        225,
+        250,
+        275,
+        290,
+        300,
+        320,
+        330,
+        340,
+        345,
+        350
+      ],
+      [
+                {
+          "value": 0,
+          "label": 0,
+          "legend": 2
+        },
+       {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+         {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+       {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+         {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+            {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+         {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        },
+     {
+          "value": 0,
+          "label": 0,
+          "legend": 0
+        }
+      ],
+      [
+        {
+          "value": 0,
+          "label": 0,
+          "legend": 2
+        },
+       {
+          "value": 5,
+          "label": 5,
+          "legend": 0
+        },
+     {
+          "value": 5,
+          "label": 5,
+          "legend": 0
+        },
+     {
+          "value": 5,
+          "label": 5,
+          "legend": 0
+        },
+     {
+          "value": 10,
+          "label": 10,
+          "legend": 0
+        },
+     {
+          "value": 10,
+          "label": 10,
+          "legend": 0
+        },
+     {
+          "value": 10,
+          "label": 10,
+          "legend": 0
+        },
+     {
+          "value": 15,
+          "label": 15,
+          "legend": 0
+        },
+         {
+          "value": 15,
+          "label": 15,
+          "legend": 0
+        },
+     {
+          "value": 15,
+          "label": 15,
+          "legend": 0
+        },
+     {
+          "value": 15,
+          "label": 15,
+          "legend": 0
+        },
+       {
+          "value": 20,
+          "label": 20,
+          "legend": 0
+        },
+     {
+          "value": 20,
+          "label": 20,
+          "legend": 0
+        },
+     {
+          "value": 20,
+          "label": 20,
+          "legend": 0
+        },
+     {
+          "value": 20,
+          "label": 20,
+          "legend": 0
+        },
+     {
+          "value": 20,
+          "label": 20,
+          "legend": 0
+        },
+     {
+          "value": 25,
+          "label": 25,
+          "legend": 0
+        },
+     {
+          "value": 25,
+          "label": 25,
+          "legend": 0
+        },
+         {
+          "value": 25,
+          "label": 25,
+          "legend": 0
+        },
+     {
+          "value": 30,
+          "label": 30,
+          "legend": 0
+        },
+            {
+          "value": 30,
+          "label": 30,
+          "legend": 0
+        },
+     {
+          "value": 30,
+          "label": 30,
+          "legend": 0
+        },
+     {
+          "value": 35,
+          "label": 35,
+          "legend": 0
+        },
+     {
+          "value": 40,
+          "label": 40,
+          "legend": 0
+        },
+         {
+          "value": 45,
+          "label": 45,
+          "legend": 0
+        },
+     {
+          "value": 50,
+          "label": 50,
+          "legend": 0
+        }
+      ]
+    ],
+    "legend": [
+      {
+        "color": "yellow",
+        "description": "Shares of this corporation do not count toward the certificate limit",
+        "icon": "certificate"
+      },
+      {
+        "color": "orange",
+        "description": "Company Closed",
+        "icon": "certificate"
+      },
+      {
+        "color": "brown",
+        "description": "Available Par Values",
+        "icon": "certificate"
+      }
+    ]
+  },
+  "tiles": {
+    "TB": {
+              "labels": [
+      {
+        "angle": 90,
+        "rotate": -90,
+        "percent": 0.3,
+        "label": "Tay Bridge"
+      }
+    ],
+      "quantity": 1,
+      "color": "green",
+      "track": [{
+        "type": "straight",
+        "side": 1
+      },
+      {
+        "type": "gentle",
+        "side": 5
+      }]
+    },
+    "TB2": {
+              "labels": [
+      {
+        "angle": 90,
+        "rotate": -90,
+        "percent": 0.3,
+        "label": "Tay Bridge"
+      }
+    ],
+      "quantity": 1,
+      "color": "brown",
+      "track": [{
+        "type": "straight",
+        "side": 1
+      },
+      {
+        "type": "gentle",
+        "side": 5
+      }]
+    },
+          "LT": {
+              "labels": [
+      {
+        "percent": -0.7,
+        "label": "Law Tunnel"
+      }
+    ],
+      "quantity": 1,
+      "color": "gray",
+      "track": [{
+        "type": "straight",
+        "side": 3
+      }]
+    },
+          "BAL": {
+    "quantity": 1,
+    "color": "yellow",
+    "values": [
+      {
+        "percent": 0.5,
+        "value": 10
+      },
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 10
+      }
+    ],
+    "centerTowns": [
+      {},
+      {
+        "angle": 180,
+        "percent": 0.5
+      }
+    ],
+    "track": [
+      {
+        "type": "custom",
+        "path": "M 0 0 Q 40 -20, 0 -40"
+      },
+      {
+        "type": "custom",
+        "path": "M 0 0 Q -40 -20, 0 -40"
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+   "Port2": {
+    "labels": [
+      {
+        "rotate": 240,
+        "angle": 210,
+        "percent": 0.85,
+        "label": "Port"
+      }
+    ],
+    "color": "green",
+    "values": [
+      {
+        "rotate": 240,
+        "angle": 90,
+        "percent": 0.9,
+        "value": 60
+      }
+    ],
+    "cities":[
+      {
+        "size": 2
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "Port3": {
+    "labels": [
+      {
+        "rotate": 240,
+        "angle": 210,
+        "percent": 0.85,
+        "label": "Port"
+      }
+    ],
+    "color": "brown",
+    "values": [
+      {
+        "rotate": 240,
+        "angle": "90",
+        "percent": 0.9,
+        "value": 20
+      }
+    ],
+    "cities":[
+      {
+        "size": 3
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+      "WR2": {
+        "labels": [
+      {
+        "rotate": 300,
+        "percent": -0.85,
+        "angle": 120,
+        "label": "Ward Road"
+      }
+    ],
+    "quantity": 1,
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 30
+      }
+    ],
+    "cities": [
+      {
+        "size": 2
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+      "WR3": {
+    "quantity": 1,
+    "labels": [
+      {
+        "rotate": 240,
+        "percent": -0.85,
+        "angle": 60,
+        "label": "Ward Road"
+      }
+    ],
+    "color": "brown",
+    "values": [
+      {
+        "rotate": 270,
+        "angle": 90,
+        "percent": "0.9",
+        "value": 40
+      }
+    ],
+    "cities": [
+      {
+        "size": 3
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+   "205D": {
+    "quantity": 2,
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 40
+      }
+    ],
+    "cities": [
+      {}
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+  "206D": {
+    "quantity": 2,
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.75,
+        "value": 40
+      }
+    ],
+    "cities": [
+      {}
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 6
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+  "208D": {
+    "quantity": 2,
+    "color": "green",
+    "rotations": 3,
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 40
+      }
+    ],
+    "cities": [
+      {
+        "size": 1
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
+   "15D": {
+    "quantity": 2,
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 40
+      }
+    ],
+    "cities": [
+      {
+        "size": 1
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+  "145D": {
+    "quantity": 2,
+    "color": "green",
+    "rotations": 3,
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 10
+      }
+    ],
+ "centerTowns": [
+    {}
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
+  "146D": {
+    "quantity": 2,
+    "color": "green",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 10
+      }
+    ],
+    "centerTowns": [
+    {}
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+    "1": 1,
+    "2": 1,
+    "3": 4,
+    "4": 4,
+    "5": 1,
+    "6": 1,
+    "7": 8,
+    "8": 8,
+    "9": 8,
+    "16": 1,
+    "18": 1,
+    "19": 1,
+    "20": 1,
+    "23": 2,
+    "24": 2,
+    "25": 1,
+    "26": 1,
+    "27": 1,
+    "28": 2,
+    "29": 2,
+    "39": 1,
+    "40": 1,
+    "41": 1,
+    "42": 1,
+    "43": 1,
+    "44": 1,
+    "45": 1,
+    "46": 1,
+    "47": 1,
+    "55": 1,
+    "56": 1,
+    "57": 3,
+    "58": 3,
+    "85": {
+    "quantity": 1,
+    "color": "brown",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 40
+      }
+    ],
+    "labels": [
+      {
+        "label": "Y",
+        "angle": 155,
+        "percent": 0.75
+      }
+    ],
+    "cities": [
+      {
+        "size": 2
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+  "85D": {
+    "quantity": 2,
+    "color": "brown",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 30
+      }
+    ],
+    "cities": [
+      {
+        "size": 2
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+    "115": 2,
+    "201": 1,
+    "202": 1,
+    "207": 2,
+     "611D": {
+    "quantity": 2,
+    "color": "brown",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 30
+      }
+    ],
+    "cities": [
+      {
+        "size": 2
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
+    "621": 1,
+    "630": 1,
+    "631": 1,
+    "632": 1
+  },
+   "privates": [
+    {
+"name": "Whitelaw Horse & haulage",
+      "price": 20,
+      "revenue": 5,
+      "description": "A Corporation cannot build track in the Balbeuchly hex until this Company is either eliminated or bought by any Corporation."
+    },
+    {
+      "name": "Law Tunnel",
+      "price": 40,
+      "revenue": 10,
+      "tile": "LT",
+      "description": "The owning Corporation/Player earns £30 from the bank when the Law tunnel is built"
+    },
+    {
+      "name": "Tayport Ferry",
+      "price": 60,
+      "revenue": 15,
+      "token": { "color": "white", "label": "Ferry" },
+      "description": "The owning Corporation can place an upside down token on the ferry spot. The token does not block or count towards stops. Owning company gains £10 everytime an offboard run is completed to Tayport. No route to Tayport is possible without a Ferry token in place. This token can be sold to the bank closing the Ferry route."
+    },
+    {
+      "name": "Dundee Jute Co.",
+      "price": 80,
+      "revenue": 15,
+      "description": "The owning Corporation will recieve a £15 bonus if it makes at least one off board delivery during its operating round. This money goes into the company treasury"
+    },
+    {
+      "name": "Dundee Co-op",
+      "price": 100,
+      "revenue": "£30/40",
+
+      "token": { "color": "orange", "label": "CO-OP" },
+      "description": "COOP revenue is held on the private. Players/Companies can buy a stake in the COOP by paying the holder £20 during SR. When private is closed the revenue is shared amongst players/companies. Divide revenue evenly any remainder is given to the owner and the private closes. Revenue increases when Port is built."
+    }
+  ],
+  "map": {
+    "hexes": [
+      {
+      "color": "water",
+        "cities":{
+            "name": {
+                       "name": "FERRY",
+            "rotation": -90
+          }
+        },
+      "track": [
+          {
+            "type": "gentle",
+            "side": 3,
+            "gauge": "line"
+          }
+        ],
+        "hexes": [
+          "K13"
+        ]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "name": {
+              "name": "Ward Road",
+              "reverse": true
+            },
+            "companies": [
+              "D&N"
+            ]
+          }
+        ],
+        "values": [
+          {
+            
+            "value": 20,
+            "angle": 0,
+        "percent": -0.8
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          }
+        ],
+        "hexes": [
+          "J12"
+      ]
+      },
+      {
+        "color": "gray",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Kirriemuir"
+            }
+          }
+        ],
+        "values": [
+          {
+            
+            "value": 10,
+            "angle": 0,
+        "percent": 0.8
+          }
+        ],
+        "track": [
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "A13"
+      ]
+      },
+      {
+        "color": "gray",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Alyth"
+            }
+          }
+        ],
+        "values": [
+          {
+            
+            "value": 10,
+            "angle": 0,
+        "percent": 0.8
+          }
+        ],
+        "track": [
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "A9"
+      ]
+      },
+       {
+      "color": "offboard",
+        "offBoardRevenue": {
+          "angle": 90,
+          "percent": -0.2,
+          "reverse": true,
+          "name": {
+            "name": "Aberdeen"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 1
+          }
+        ],
+        "hexes": [
+          "E17"
+        ]
+      },
+      {
+        "color": "gray",
+        "centerTowns": [
+          {
+            "name": {
+              "name": ""
+            }
+          }
+        ],
+        "values": [
+          {
+            
+            "value": 10,
+            "angle": 0,
+        "percent": 0.8
+          }
+        ],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "E15"
+      ]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+         "rows": 4,
+          "angle": 70,
+          "percent": -0.75,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "20"
+            }
+          ]
+        },
+        "cities": [
+          {
+            "name": {
+            "name": "Arbroath"
+          },
+            "companies": ["D&A"]
+          }
+        ],
+        "offBoardTrack": [
+          {
+            "side": 1
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": ["H18"]
+      },
+       {
+        "cities":{
+          "name": {
+            "name": "Broughty Ferry"
+          }
+        },
+        "color": "plain",
+        "labels": [
+      {
+        "label": "Y",
+        "angle": 0,
+        "percent": 0.65
+      }
+    ],
+             "hexes": [
+          "I17"
+        ]
+      },
+      {
+        "cities": [
+          {
+          "name": {
+            "name": "Glamis"
+          },
+            "companies": [
+              "N&G"
+            ]
+            }
+          ],
+        "color": "plain",
+        "labels": [
+      {
+        "label": "Y",
+        "angle": 0,
+        "percent": 0.65
+      }
+    ],
+        "hexes": [
+          "C11"
+        ]
+      },
+       {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "rows": 4,
+          "angle": 70,
+          "percent": -0.75,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "20"
+            }
+          ]
+        },
+        "cities": [
+          {
+                      "name": {
+            "name": "Forfar"
+          },
+            "companies": ["SNER"]
+          }
+        ],
+        "offBoardTrack": [
+          {
+            "side": 1
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": ["B16"]
+      },
+      {
+       "color": "mountain",
+        "mountain": {
+          "cost": "£20",
+          "angle": 0,
+        "percent": 0.75
+        },
+        "cities": [
+          {
+            "name": {
+              "name": "Kirriemuir Junction"
+            }
+          }
+        ],
+        "hexes": [
+          "B14"
+        ]
+      },
+       {
+       "color": "mountain",
+        "mountain": {
+          "cost": "£40",
+          "angle": 0,
+        "percent": 0.75
+        },
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Eassie"
+            }
+          }
+        ],
+        "hexes": [
+          "C13"
+        ]
+      },
+      {
+       "color": "mountain",
+        "mountain": {
+          "cost": "£40",
+          "angle": 0,
+        "percent": 0.75
+        },
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Kirkinch"
+            }
+          }
+        ],
+        "hexes": [
+          "C9"
+        ]
+      },
+       {
+       "color": "mountain",
+        "mountain": {
+          "cost": "£40",
+          "angle": 0,
+        "percent": 0.75
+        },
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Ardler"
+            }
+          }
+        ],
+        "hexes": [
+          "C7"
+        ]
+      },
+      {
+        "color": "green",
+       "cities": [
+          {
+          "rotate": -30,
+          "size": 2,
+          "name": {
+            "name": "Newtyle"
+          }
+        }
+          ],
+        "values": [
+          {
+            
+            "value": 20,
+            "angle": 0,
+        "percent": 0.8
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 3
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "D8"
+      ]
+      },
+      {
+      "color": "yellow",
+      "labels": {
+        "label": "Port Of Dundee",
+        "angle": 0,
+        "percent": 0
+      },
+        "hexes": [
+          "J16"
+        ]
+      },
+      {
+        "color": "plain",       
+        "cities": {
+            "size": 1,
+            "name": {
+            "name": "Newtyle"
+          }
+            },
+                "hexes": [
+          "J8"
+        ]
+      },
+      {
+        "color": "mountain",
+        "mountain": {
+          "cost": "£20",
+          "angle": 0,
+        "percent": 0.7
+        },
+        "cities": {
+          "name": {
+            "name": "Lochee"
+          },
+            "size": 1
+            },
+                "hexes": [
+          "I9"
+        ]
+      },
+      {
+      "color": "gray",
+      "mountain": {
+          "cost": "£40",
+          "angle": 140,
+        "percent": 0.65
+        },
+      "icons": [
+    {
+      "type": "mountain"
+    }
+  ],
+      "labels": {
+        "label": "The Law",
+        "angle": 0,
+        "percent": 0.4
+      },
+      "borders": [
+          {
+            "side": 1,
+            "color": "offboard"
+          },
+          {
+            "side": 2,
+            "color": "offboard"
+          },
+          {
+            "side": 3,
+            "color": "offboard"
+          },
+          {
+            "side": 4,
+            "color": "offboard"
+          },
+          {
+            "side": 5,
+            "color": "offboard"
+          },
+          {
+            "side": 6,
+            "color": "offboard"
+          }
+        ],
+        "hexes": [
+          "I11"
+        ]
+      },
+      {
+      "color": "offboard",
+        "offBoardRevenue": {
+          "angle": 0,
+          "percent": -0.1,
+          "reverse": true,
+          "name": {
+            "name": "Blairgowrie"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "20"
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 5
+          }
+        ],
+        "hexes": [
+          "A3"
+        ]
+      },
+      {
+      "color": "plain",
+      "borders": [
+          {
+            "side": 5,
+            "color": "offboard"
+          }
+        ],
+        "hexes": [
+          "G3"
+        ]
+      },
+      {
+      "color": "plain",
+      "borders": [
+          {
+            "side": 1,
+            "color": "offboard"
+          }
+        ],
+        "hexes": [
+          "B12"
+        ]
+      },
+      {
+      "color": "plain",
+      "borders": [
+          {
+            "side": 4,
+            "color": "offboard"
+          }
+        ],
+        "hexes": [
+          "B8"
+        ]
+      },
+{
+       "color": "plain",
+      "borders": [
+          {
+            "side": 1,
+            "color": "offboard"
+          },
+           {
+            "side": 4,
+            "color": "offboard"
+          }
+        ],
+        "hexes": [
+          "B10"
+        ]
+      },
+      {
+      "color": "plain",
+      "borders": [
+          {
+            "side": 4,
+            "color": "offboard"
+          }
+        ],
+        "hexes": [
+          "E5"
+        ]
+      },
+     {
+      "color": "offboard",
+        "offBoardRevenue": {
+          "reverse": true,
+          "name": {
+            "name": "Tayport"
+          },
+          "revenues": [
+              {
+              "color": "yellow",
+              "cost": "30"
+            },
+             {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "30"
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 2
+          }
+        ],
+        "hexes": [
+          "L14"
+        ]
+      },
+       {
+      "color": "offboard",
+        "offBoardRevenue": {
+          "reverse": true,
+          "name": {
+            "name": "Edinburgh"
+          },
+          "revenues": [
+            {
+              "color": "brown",
+              "cost": "60"
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 2
+          }
+        ],
+        "hexes": [
+          "L10"
+        ]
+      },
+      {
+      "color": "offboard",
+        "offBoardRevenue": {
+          "reverse": true,
+          "name": {
+            "name": "Edinburgh"
+          },
+          "revenues": [
+            {
+              "color": "green",
+              "cost": "50"
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 2
+          }
+        ],
+        "hexes": [
+          "L8"
+        ]
+      },
+     {
+      "color": "green",
+      "labels": {
+        "label": "Tay Rail Bridge",
+        "angle": 0,
+        "percent": 0.45
+      },
+      "bridges": [
+    {
+      "cost": "£150"
+    }
+  ],
+        "hexes": [
+          "K9"
+        ]
+      },
+      {
+      "color": "yellow",
+      "labels": {
+        "label": "Tay Rail Bridge",
+        "angle": 0,
+        "percent": 0.45
+      },
+      "bridges": [
+    {
+      "cost": "£80"
+    }
+  ],
+        "hexes": [
+          "K7"
+        ]
+      },
+       {
+      "color": "water",
+        "hexes": [
+          "K3",
+          "K5",
+          "K11",
+          "K15"
+        ]
+      },
+       {
+        "cities": [
+          {
+          "name": {
+            "name": "Coupar Angus"
+          },
+            "companies": [
+              "N&CA"
+            ]
+            }
+          ],
+        "color": "mountain",
+        "mountain": {
+          "cost": "£20",
+          "angle": 0,
+        "percent": 0.75
+        }, 
+        "hexes": [
+          "C5"
+        ]
+      },
+      {
+        "color": "plain",
+         "companies": [
+          {
+            "label": "Whitelaw H&H",
+            "angle": 180,
+            "percent": 0.55
+          }
+        ],
+        "labels": [
+      {
+        "label": "Balbeuchly",
+        "angle": 0,
+        "percent": 0.6
+      }
+    ],
+        "centerTowns": [
+          {
+            "x": -30
+          },
+          {
+            "x": 30
+            }
+        ],
+        "hexes": [
+          "F10"
+        ]
+      },
+  {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 1,
+            "color": "offboard"
+          }
+        ],
+        "centerTowns": [
+          {
+            "x": -30,
+            "name": {
+              "name": "Hatton",
+              "reverse": true
+            }
+          },
+          {
+            "x": 30,
+            "name": {
+              "name": "Auchterhouse"
+            }
+          }
+        ],
+        "hexes": [
+          "E7"
+        ]
+      },
+ {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Baldragon"
+            }
+          }
+        ],
+        "hexes": [
+          "G11"
+        ]
+      },
+ {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Baldovan"
+            }
+          }
+        ],
+        "hexes": [
+          "H10"
+        ]
+      },
+ {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Ninewells Junction"
+            }
+          }
+        ],
+        "hexes": [
+          "J4"
+        ]
+      },
+ {
+        "color": "mountain",
+        "mountain": {
+          "cost": "£20",
+          "angle": 0,
+        "percent": 0.75
+        },
+        "cities": {
+          "name": {
+            "name": "Liff"
+          },
+            "size": 1
+            },
+        "borders": [
+          {
+            "side": 2,
+            "color": "offboard"
+          }
+        ],
+        "hexes": [
+          "H4"
+        ]
+      },
+{
+        "color": "mountain",
+        "mountain": {
+          "cost": "£40"
+        },
+        "hexes": [
+          "B4",
+          "G5",
+          "D6",
+          "J6",
+          "F8",
+          "H8",
+          "E9",
+          "G9",
+          "D10",
+          "J10",
+          "F12",
+          "H12",
+          "E13",
+          "G13",
+          "I13",
+          "J14",
+          "G15"
+        ]
+      },
+{
+      "color": "plain",
+        "hexes": [
+          "F2",
+          "H2",
+          "C3",
+          "E3",
+          "I3",
+          "D4",
+          "F4",
+          "I5",
+          "B6",
+          "F6",
+          "H6",
+          "G7",
+          "I7",
+          "E11",
+          "D12",
+          "D14",
+          "F14",
+          "H14",
+          "C15",
+          "I15",
+          "H16"
+        ]
+      },
+{
+      "color": "offboard",
+        "offBoardRevenue": {
+          "angle": 270,
+          "percent": -0.2,
+          "reverse": true,
+          "name": {
+            "name": "Edinburgh"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+             {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          }
+        ],
+        "hexes": [
+          "J2"
+        ]
+      },
+{
+      "color": "offboard",
+        "offBoardRevenue": {
+         "angle": 270,
+          "percent": -0.2,
+         "reverse": true,
+          "name": {
+            "name": "Edinburgh"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+             {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          }
+        ],
+        "hexes": [
+          "D2"
+        ]
+      },
+      {
+        "color": "gray",
+        "cities": [
+          {
+            "size": 2,
+            "rotate": -30,
+            "name": {
+            "name": "Perth"
+          },
+            "companies": [
+              "SMJR"
+            ]
+          }
+        ],
+               "values": [
+          {
+            
+            "value": 30,
+            "angle": 300,
+        "percent": -0.8
+          }
+        ],
+        "track": [
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          }
+        ],
+        "hexes": [
+          "G1"
+      ]
+      }
+    ]
+  }
+}
+
+
+

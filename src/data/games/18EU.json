@@ -94,41 +94,49 @@
     {
       "name": "Belgian National Railways",
       "abbrev": "BNR",
+      "logo": "EU/B",
       "color": "orange"
     },
     {
       "name": "Dutch Railways",
       "abbrev": "DR",
+      "logo": "EU/DR",
       "color": "yellow"
     },
     {
       "name": "Italian State Railways",
       "abbrev": "FS",
+      "logo": "EU/FS",
       "color": "green"
     },
     {
       "name": "Royal Bavarian State Railroad",
       "abbrev": "RBSR",
+      "logo": "EU/RBSR",
       "color": "cyan"
     },
     {
       "name": "Royal Prussian Railway",
       "abbrev": "RPR",
+      "logo": "EU/RPR",
       "color": "blue"
     },
     {
-      "name": "Austrial Imperial Royal State",
+      "name": "Austrian Imperial Royal State",
       "abbrev": "AIRS",
+      "logo": "EU/AIRS",
       "color": "natural"
     },
     {
       "name": "SNCF",
       "abbrev": "SNCF",
+      "logo": "EU/SNCF",
       "color": "red"
     },
     {
       "name": "German State Railways",
       "abbrev": "GSR",
+      "logo": "EU/GS",
       "color": "black"
     },
     {

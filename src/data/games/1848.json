@@ -76,45 +76,53 @@
     {
       "name": "Central Australian Railway",
       "abbrev": "CAR",
+      "logo": "fortyeight/CAR",
       "color": "black",
       "tokens": "three"
     },
     {
       "name": "Victorian Railways",
       "abbrev": "VR",
+      "logo": "fortyeight/VR",
       "color": "yellow",
       "tokens": "three"
     },
     {
       "name": "New South Wales Railways",
       "abbrev": "NSW",
+      "logo": "fortyeight/NSW",
       "color": "orange"
     },
     {
       "name": "South Australian Railway",
       "abbrev": "SAR",
+      "logo": "fortyeight/SAR",
       "color": "purple"
     },
     {
       "name": "Commonwealth Railways",
       "abbrev": "CR",
+      "logo": "fortyeight/CR",
       "tokens": ["Home (Free)", "Home (Free)", 100, 100, 100],
       "color": "gray"
     },
     {
       "name": "Federal Territory Railway",
       "abbrev": "FT",
+      "logo": "fortyeight/FT",
       "color": "blue"
     },
     {
       "name": "West Australian Railway",
       "abbrev": "WA",
+      "logo": "fortyeight/WA",
       "color": "red",
       "tokens": "five"
     },
     {
       "name": "Queensland Gov't Railway",
       "abbrev": "QR",
+      "logo": "fortyeight/QR",
       "color": "green",
       "tokens": "five"
     }

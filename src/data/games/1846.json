@@ -68,6 +68,7 @@
     {
       "name": "Pennsylvania",
       "abbrev": "PRR",
+      "logo": "fortysix/PRR",
       "tokens": [
         "Free",
         80,
@@ -80,6 +81,7 @@
     {
       "name": "New York Central",
       "abbrev": "NYC",
+      "logo": "fortysix/NYC",
       "tokens": [
         "Free",
         80,
@@ -91,7 +93,7 @@
     {
       "name": "Baltimore & Ohio",
       "abbrev": "B&O",
-      "logo": "BO",
+      "logo": "fortysix/BO",
       "tokens": [
         "Free",
         80,
@@ -103,7 +105,7 @@
     {
       "name": "Chesapeake & Ohio",
       "abbrev": "C&O",
-      "logo": "CO",
+      "logo": "fortysix/CO",
       "tokens": [
         "Free",
         80,
@@ -115,6 +117,7 @@
     {
       "name": "Erie",
       "abbrev": "ERIE",
+      "logo": "fortysix/ERIE",
       "tokens": [
         "Free",
         80,
@@ -126,6 +129,7 @@
     {
       "name": "Grand Trunk",
       "abbrev": "GT",
+      "logo": "fortysix/GT",
       "tokens": [
         "Free",
         80,
@@ -136,6 +140,7 @@
     {
       "name": "Illinois Central",
       "abbrev": "IC",
+      "logo": "fortysix/IC",
       "tokens": [
         "Free",
         80,

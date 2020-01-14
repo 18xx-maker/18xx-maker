@@ -91,12 +91,14 @@
     {
       "name": "Chihuahua Pacific Railway",
       "abbrev": "CHI",
+      "logo": "mex/CHI",
       "color": "red",
       "tokens": "four"
     },
     {
       "name": "National Railways of Mexico",
       "abbrev": "NdM",
+      "logo": "mex/NdM",
       "color": "green",
       "tokens": [
         "Free",
@@ -135,36 +137,42 @@
     {
       "name": "Mexican Central Railway",
       "abbrev": "MC",
+      "logo": "mex/MC",
       "color": "black",
       "tokens": "two"
     },
     {
       "name": "Pacific Railroad",
       "abbrev": "PAC",
+      "logo": "mex/PAC",
       "color": "yellow",
       "tokens": "four"
     },
     {
       "name": "Texas-Mexican Railway",
       "abbrev": "TM",
+      "logo": "mex/TM",
       "color": "orange",
       "tokens": "two"
     },
     {
       "name": "Mexican Railway",
       "abbrev": "MEX",
+      "logo": "mex/MEX",
       "color": "gray",
       "tokens": "three"
     },
     {
       "name": "Southern Pacific Railroad of Mexico",
       "abbrev": "SPM",
+      "logo": "mex/SP",
       "color": "blue",
       "tokens": "three"
     },
     {
       "name": "United Railways of Yucatan",
       "abbrev": "UdY",
+      "logo": "mex/UdY",
       "color": "purple",
       "tokens": "two",
       "shares": [
