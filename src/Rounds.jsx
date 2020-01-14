@@ -1,35 +1,27 @@
 import React from "react";
-import Token from "./tokens/Token";
 
-import addIndex from "ramda/src/addIndex";
-import map from "ramda/src/map";
+import RoundTracker, { getRoundTrackerData } from "./RoundTracker";
 
-const Rounds = ({ rounds, horizontal }) => {
-  let classes = "rounds";
-  if(horizontal) {
-    classes = `${classes} rounds--horizontal`;
-  }
+import Config from "./data/Config";
 
-  let arrow = horizontal ? "right" : "up";
-
-  let items = addIndex(map)(
-    (round, index) => (
-      <div key={`token-${index}`} className="Token">
-        <svg viewBox="-25 -25 50 50" key={round.name}>
-          <Token
-            label={round.name}
-            color={round.color}
-            labelColor="black"
-          />
-        </svg>
-        {index > 0 && <i className={`fal fa-arrow-${arrow}`} />}
-      </div>
-    ),
-    rounds
-  );
+const Rounds = () => {
   return (
-    <div className={classes}>
-      <div className="tokens">{items}</div>
+    <div className="rounds">
+      <Config>
+        {(config, game) => {
+          let rounds = game.rounds;
+          let size = config.tokens.stationTokenSize;
+          let type = (game.roundTracker && game.roundTracker.type) || "row";
+
+          let data = getRoundTrackerData(rounds, size, type);
+
+          return (
+            <svg viewBox={`${data.startX} ${data.startY} ${data.width} ${data.height}`} width={data.css.width} height={data.css.height}>
+              <RoundTracker {...{rounds,size,type}} />
+            </svg>
+          );
+        }}
+      </Config>
     </div>
   );
 };

@@ -11,6 +11,7 @@ import Cards from "./cards";
 import Charters from "./Charters";
 import IPO from "./IPO";
 import Revenue from "./Revenue";
+import Rounds from "./Rounds";
 import Tokens from "./Tokens";
 
 import MapPaginated from "./map/MapPaginated";
@@ -76,6 +77,9 @@ const Game = () => {
         </Route>
         <Route path="/:game/revenue">
           <Revenue />
+        </Route>
+        <Route path="/:game/rounds">
+          <Rounds />
         </Route>
         <Route path="/:game/tile-manifest">
           <TileManifest />
