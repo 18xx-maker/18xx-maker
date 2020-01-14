@@ -11,7 +11,22 @@ import Currency from "./util/Currency";
 
 import is from "ramda/src/is";
 
-const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, charterStyle, game, halfWidthCharters, company, blackBand }) => {
+const Charter = ({
+  name,
+  abbrev,
+  logo,
+  minor,
+  token,
+  tokens,
+  phases,
+  turns,
+  charterStyle,
+  game,
+  halfWidthCharters,
+  company,
+  blackBand,
+  card_identifier
+}) => {
   let color = token;
   if(is(Object, token)) {
     color = token.colors[0];
@@ -119,6 +134,7 @@ const Charter = ({ name, abbrev, logo, minor, token, tokens, phases, turns, char
                     <dl>{minor || turnNodes}</dl>
                   </div>
                 )}
+                <div className="card__identifier">{card_identifier}</div>
               </div>
             </div>
           </div>
