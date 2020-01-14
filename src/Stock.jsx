@@ -80,10 +80,6 @@ const Stock = ({cell, paper}) => {
              stock.par.values && (
                <Par par={stock.par} legend={stock.legend || []} />
              )}
-            <Rounds
-              rounds={game.rounds}
-              horizontal={game.stock.type === "2D" ? false : true}
-            />
             <Legend
               legend={game.stock.legend || []}
               movement={game.stock.movement}
