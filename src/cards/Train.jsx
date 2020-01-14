@@ -86,7 +86,7 @@ const Train = ({ train, blackBand }) => {
                     </div>
                     {description && <div className="train__description">{description}</div>}
                     <div className="train__notes">{notes}</div>
-                    <div className="train__id">{id}</div>
+                    {id && <div className="train__id"><div>{id}</div></div>}
                   </div>
                 </div>
               </div>
