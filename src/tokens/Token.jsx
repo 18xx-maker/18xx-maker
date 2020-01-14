@@ -47,7 +47,9 @@ const Token = ({
 
   bleed, // Should we draw bleed around the token (for printing)
   outline, // Should we draw an outline around the token circle
-  outlineWidth // What stroke width to use on the outline
+  outlineWidth, // What stroke width to use on the outline
+
+  angle // option for some of the token types
 }) => {
   // If we only passed in one color, collect it in a single item array as "colors"
   colors = colors || [color];
@@ -95,26 +97,28 @@ const Token = ({
             switch(type) {
             case "square":
               shape = (
-                <rect rx="2" ry="2" x="-17.5" y="-17.5" width="35" height="35"
-                      fill={c(colors[0])}/>
+                <g transform={`rotate(${angle || 0})`}>
+                  <rect rx="2" ry="2" x="-17.5" y="-17.5" width="35" height="35"
+                        fill={c(colors[0])}/>
+                </g>
               );
               textFill = labelColor ? p(labelColor) : t(c(colors[0]));
               tokenFill = c(colors[1]);
               textStroke = "none";
               break;
             case "quarters":
-              shape = [
-                <rect key="upperLeft" x="-50" y="-50" width="50" height="50"
-                      fill={c(colors[1])}
-                      clipPath={`url(#${clipId})`}/>,
-                <rect key="lowerRight" x="0" y="0" width="50" height="50"
-                      fill={c(colors[1])}
-                      clipPath={`url(#${clipId})`}/>,
-                <rect key="bar" x="-50" y="-8" width="100" height="18"
-                      fill={p("white")}
-                      stroke={p("black")}
-                      clipPath={`url(#${clipId})`}/>
-              ];
+              shape = [<g transform={`rotate(${angle || 0})`}>
+                         <rect key="upperLeft" x="-50" y="-50" width="50" height="50"
+                               fill={c(colors[1])}
+                               clipPath={`url(#${clipId})`}/>,
+                         <rect key="lowerRight" x="0" y="0" width="50" height="50"
+                               fill={c(colors[1])}
+                               clipPath={`url(#${clipId})`}/>,
+                       </g>,
+                       <rect key="bar" x="-50" y="-8" width="100" height="18"
+                             fill={p("white")}
+                             stroke={p("black")}
+                             clipPath={`url(#${clipId})`}/>];
               textFill = t(c("white"));
               break;
             case "halves":
@@ -134,7 +138,7 @@ const Token = ({
               break;
             case "stripes":
               gradient = (
-                <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
+                <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
                   <stop offset={bleedAdjust(bleed,12.5)} stopColor={c(colors[0])}/>
                   <stop offset={bleedAdjust(bleed,12.5)} stopColor={c(colors[1])}/>
                   <stop offset={bleedAdjust(bleed,25)} stopColor={c(colors[1])}/>
@@ -289,14 +293,16 @@ const Token = ({
           <g>
             {clip}
             {gradient}
-            <circle
-              cx="0"
-              cy="0"
-              r={width + (bleed ? 5 : 0)}
-              fill={tokenFill}
-              stroke={outlineColor}
-              strokeWidth={outlineWidth || 1}
-            />
+            <g transform={`rotate(${angle || 0})`}>
+              <circle
+                cx="0"
+                cy="0"
+                r={width + (bleed ? 5 : 0)}
+                fill={tokenFill}
+                stroke={outlineColor}
+                strokeWidth={outlineWidth || 1}
+              />
+            </g>
             {shape}
             {content}
           </g>
