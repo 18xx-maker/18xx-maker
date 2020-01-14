@@ -168,6 +168,7 @@ const Charters = ({charters, paper, override, selection}) => {
               turns={game.turns}
               minor={!!company.minor}
               company={company}
+              id={company.id}
             /> : <div key="spacer" className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}><div className={`charter${charters.halfWidth ? " charter--half" : ""}`}></div></div>
         ), companies)}
         <PageSetup landscape={false}/>

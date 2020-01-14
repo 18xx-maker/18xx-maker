@@ -1924,8 +1924,8 @@
             "companies": [
               "KK"
             ]
-          }
-        ],
+        },
+        {
            "track": [
           {
             "side": 6
@@ -2067,8 +2067,13 @@
             "companies": [
               "TC"
             ]
-}
-        ],
+},
+{
+            "companies": [
+              "TC"
+            ]
+        },
+        {
            "track": [
           {
             "side": 6
@@ -2522,7 +2527,16 @@
           "companies": [
               "KR"
             ]
-        }
+        },
+        {
+            "companies": [
+              "KR"
+            ],
+            "rotate": 30,
+            "name": {
+              "name": "Ichikawa"
+            }
+          }
         ],
            "track": [
           {

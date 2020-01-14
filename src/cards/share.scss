@@ -27,7 +27,7 @@
   top: 0;
   right: 0;
   width: 100%;
-  padding: 0.125in;
+  padding: 0.125in 0.125in 0 0.125in;
   line-height: 0.20in;
   font-size: 0.16in;
   text-align: center;
@@ -37,6 +37,30 @@
   justify-content: center;
 }
 
+.share__subtext {
+  box-sizing: border-box;
+  position: relative;
+  top: 0;
+  right: 0;
+  width: 100%;
+  padding: 0.0625in 0.125in 0 0.125in;
+  line-height: 0.20in;
+  text-align: center;
+  font-size: 0.12in;
+  font-weight: bold;
+  font-family: sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.share--center .share__subtext {
+  padding-top: 0.75in;
+}
+
+.share--left .share__subtext,
+.share--gmt .share__subtext,
 .share--left .share__name,
 .share--gmt .share__name {
   width: calc(100% - 0.67in);
@@ -151,5 +175,12 @@
 .share--left .share__shares,
 .share--gmt .share__shares {
   margin-left: 0.67in;
+  padding: 0.125in;
+}
+
+.share .share__id {
+  position: absolute;
+  bottom: 0.22in;
+  right: 0;
   padding: 0.125in;
 }

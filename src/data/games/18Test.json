@@ -7,6 +7,9 @@
     "currency": "USD",
     "marketTokens": 1
   },
+  "colors": {
+    "short": "pink"
+  },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgamefamily/19/18xx",
     "rules": "https://boardgamegeek.com/wiki/page/18xx"
@@ -81,12 +84,21 @@
         "quantity": 1,
         "label": "Test Certificate",
         "percent": 20,
-        "shares": 2
+        "shares": 2,
+        "id": "Pres"
+      },
+      {
+        "quantity": 1,
+        "subtext": "Short Share",
+        "percent": 10,
+        "shares": 1,
+        "backgroundColor": "short"
       }
     ]
   },
   "companies": [
     {
+      "id": "18Test-1",
       "name": "Black Railroad",
       "abbrev": "BRR",
       "color": "black",
@@ -94,6 +106,7 @@
         {
           "quantity": 1,
           "label": "Special 1.5",
+          "labelColor": "short",
           "tokenCount": 1.5
         }
       ]
@@ -117,6 +130,7 @@
     },
     {
       "name": "Cyan Railroad",
+      "subtext": "Cyan Override",
       "abbrev": "CRR",
       "color": "cyan"
     },
@@ -219,6 +233,7 @@
     },
     {
       "name": "4D",
+      "id": "4D",
       "quantity": 1,
       "price": "$800",
       "color": "brown",
@@ -285,7 +300,8 @@
       "price": 220,
       "revenue": 30,
       "hex": "A11",
-      "description": "Description"
+      "description": "Description",
+      "id": "Players 3+"
     }
   ],
   "phases": [

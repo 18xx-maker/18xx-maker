@@ -46,7 +46,8 @@
           "cost": { "type": "number", "minimum": 0 },
           "percent": { "$ref": "#/definitions/numberOrSlash" },
           "revenue": { "$ref": "#/definitions/numberOrSlash" },
-          "shares": { "$ref": "#/definitions/numberOrSlash" }
+          "shares": { "$ref": "#/definitions/numberOrSlash" },
+          "id": { "type": "string" }
         },
         "required": ["quantity"]
       }
@@ -126,6 +127,7 @@
         "required": ["name", "abbrev"],
         "properties": {
           "name": { "type": "string" },
+          "id": { "type": "string" },
           "shares": {
             "oneOf": [
               { "$ref" : "#/definitions/shares" },
@@ -141,7 +143,12 @@
         }
       }
     },
-    "ipo": { "type": "boolean" },
+    "ipo": {
+      "oneOf": [
+        {"type": "boolean" },
+        {"type": "array", "items": { "type": "string" }}
+      ]
+    },
     "map": {},
     "phases": {},
     "players": {
@@ -172,6 +179,7 @@
           "company": { "type": "string" },
           "icon": { "type": "string" },
           "tile": { "type": "string" },
+          "id": { "type": "string" },
           "bid": {
             "oneOf": [
               { "type": "string" },
@@ -207,7 +215,16 @@
     "tiles": {},
     "tokens": {},
     "turns": {},
-    "trains": {},
+    "trains": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
     "wip": { "type": "boolean" }
   },
   "additionalProperties": false,
