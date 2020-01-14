@@ -1,5 +1,5 @@
 {{#each svgs}}
-import {{#if group}}{{group}}_{{/if}}{{name}}, { ReactComponent as {{#if group}}{{group}}_{{/if}}{{name}}_Component } from "./{{file}}";
+import logo_{{#if group}}{{group}}_{{/if}}{{name}}, { ReactComponent as logo_{{#if group}}{{group}}_{{/if}}{{name}}_Component } from "./{{file}}";
 {{/each}}
 
 export default {
@@ -8,8 +8,8 @@ export default {
     name: "{{name}}",
 {{#if group}}    group: "{{group}}",
 {{/if}}
-    src: {{#if group}}{{group}}_{{/if}}{{name}},
-    Component: {{#if group}}{{group}}_{{/if}}{{name}}_Component
+    src: logo_{{#if group}}{{group}}_{{/if}}{{name}},
+    Component: logo_{{#if group}}{{group}}_{{/if}}{{name}}_Component
   }{{#unless @last}},{{/unless}}
 {{/each}}
 };
