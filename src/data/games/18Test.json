@@ -7,6 +7,9 @@
     "currency": "USD",
     "marketTokens": 1
   },
+  "colors": {
+    "short": "pink"
+  },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgamefamily/19/18xx",
     "rules": "https://boardgamegeek.com/wiki/page/18xx"
@@ -82,6 +85,13 @@
         "label": "Test Certificate",
         "percent": 20,
         "shares": 2
+      },
+      {
+        "quantity": 1,
+        "subtext": "Short Share",
+        "percent": 10,
+        "shares": 1,
+        "backgroundColor": "short"
       }
     ]
   },
