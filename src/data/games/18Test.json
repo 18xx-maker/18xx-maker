@@ -104,6 +104,7 @@
         {
           "quantity": 1,
           "label": "Special 1.5",
+          "labelColor": "short",
           "tokenCount": 1.5
         }
       ]
