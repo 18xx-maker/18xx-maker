@@ -23,6 +23,7 @@ const LeftShare = ({
   token,
   color,
   backgroundColor,
+  labelColor,
   shareStyle,
   company,
   tokenCount,
@@ -105,7 +106,10 @@ const LeftShare = ({
                      <Color context="map">
                        {(c,t) => (
                          <div className="share__label__text"
-                              style={{ color: t(c("yellow")), backgroundColor: c("yellow") }} >
+                              style={{
+                                color: t(c(labelColor || "yellow")),
+                                backgroundColor: c(labelColor || "yellow")
+                              }}>
                            {label}
                          </div>
                        )}
@@ -134,7 +138,8 @@ const CenterShare = ({
   token,
   company,
   tokenCount,
-  backgroundColor
+  backgroundColor,
+  labelColor
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -184,7 +189,10 @@ const CenterShare = ({
                      <Color context="map">
                        {(c,t) => (
                          <div className="share__label__text"
-                              style={{ color: t(c("yellow")), backgroundColor: c("yellow") }} >
+                              style={{
+                                color: t(c(labelColor || "yellow")),
+                                backgroundColor: c(labelColor || "yellow")
+                              }}>
                            {label}
                          </div>
                        )}
