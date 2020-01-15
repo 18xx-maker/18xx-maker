@@ -1,17 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="299.44479" overflow="visible" viewBox="0 0 299.99999 299.44479">
     <defs>
-        <linearGradient id="XMLID_17_-9" x1="174.0737" x2="132.27631" y1="215.5488" y2="141.7533" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#fb7655"/>
-            <stop offset="0" stop-color="#fb7655"/>
-            <stop offset=".41" stop-color="#e42b1e"/>
-            <stop offset=".99" stop-color="#900"/>
-            <stop offset="1" stop-color="#900"/>
-        </linearGradient>
         <linearGradient id="XMLID_18_-7" x1="194.895" x2="141.0276" y1="153.5576" y2="117.4093" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
             <stop offset="0" stop-color="#871101"/>
             <stop offset="0" stop-color="#871101"/>
             <stop offset=".99" stop-color="#911209"/>
             <stop offset="1" stop-color="#911209"/>
+        </linearGradient>
+        <linearGradient id="XMLID_25_-9" x1="-18.5557" x2="135.0152" y1="155.10451" y2="-2.8093" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#bd0012"/>
+            <stop offset="0" stop-color="#bd0012"/>
+            <stop offset=".07" stop-color="#fff"/>
+            <stop offset=".17" stop-color="#fff"/>
+            <stop offset=".27" stop-color="#c82f1c"/>
+            <stop offset=".33" stop-color="#820c01"/>
+            <stop offset=".46" stop-color="#a31601"/>
+            <stop offset=".72" stop-color="#b31301"/>
+            <stop offset=".99" stop-color="#e82609"/>
+            <stop offset="1" stop-color="#e82609"/>
         </linearGradient>
         <linearGradient id="XMLID_19_-4" x1="151.79539" x2="97.929703" y1="217.7852" y2="181.638" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
             <stop offset="0" stop-color="#871101"/>
@@ -57,17 +62,12 @@
             <stop offset=".99" stop-color="#bf190b"/>
             <stop offset="1" stop-color="#bf190b"/>
         </linearGradient>
-        <linearGradient id="XMLID_25_-9" x1="-18.5557" x2="135.0152" y1="155.10451" y2="-2.8093" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#bd0012"/>
-            <stop offset="0" stop-color="#bd0012"/>
-            <stop offset=".07" stop-color="#fff"/>
-            <stop offset=".17" stop-color="#fff"/>
-            <stop offset=".27" stop-color="#c82f1c"/>
-            <stop offset=".33" stop-color="#820c01"/>
-            <stop offset=".46" stop-color="#a31601"/>
-            <stop offset=".72" stop-color="#b31301"/>
-            <stop offset=".99" stop-color="#e82609"/>
-            <stop offset="1" stop-color="#e82609"/>
+        <linearGradient id="XMLID_17_-9" x1="174.0737" x2="132.27631" y1="215.5488" y2="141.7533" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#fb7655"/>
+            <stop offset="0" stop-color="#fb7655"/>
+            <stop offset=".41" stop-color="#e42b1e"/>
+            <stop offset=".99" stop-color="#900"/>
+            <stop offset="1" stop-color="#900"/>
         </linearGradient>
         <linearGradient id="XMLID_26_-2" x1="99.074699" x2="52.817699" y1="171.0332" y2="159.61659" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
             <stop offset="0" stop-color="#8c0c01"/>
