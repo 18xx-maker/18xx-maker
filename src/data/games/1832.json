@@ -315,14 +315,15 @@
   ],
   "privates": [
     {
-      "name": "P1: Carolina Stage Coach",
+      "id": "P1",
+      "name": "Carolina Stage Coach",
       "price": 20,
       "revenue": 5,
-      "token": { "color": "yellow", "label": "$" },
-      "description": ""
+      "token": { "color": "yellow", "label": "$" }
     },
     {
-      "name": "P2: Cotton Warehouse",
+      "id": "P2",
+      "name": "Cotton Warehouse",
       "price": 40,
       "revenue": 10,
       "token": {
@@ -332,28 +333,32 @@
       "description": "This company has a $10 token which may be placed in any non-coastal city (Atlantic or Gulf Coast) as an extra token lay during the token placement step of an owning public company's operating round."
     },
     {
-      "name": "P3: Atlantic Shipping",
+      "id": "P3",
+      "name": "Atlantic Shipping",
       "price": 50,
       "revenue": 10,
       "icon": "port",
       "description": "This company has a Port token which may be placed on any city on the coasts as an extra token lay during the token placement step of an owning public company's operating round. All eligible cities are marked with an anchor symbol. This token increases the value of the selected city by $20 for the owning company and by $10 for all other companies."
     },
     {
-      "name": "P4: London Investment",
+      "id": "P4",
+      "name": "London Investment",
       "price": 70,
       "revenue": 10,
       "icon": "share",
       "description": "This company represents those shrewd investors in London. They have hired you to invest their money in the new Southern railways. They will purchase a share of your choice in any newly started company. You get the share. After the company pays its first dividend, the London Investment Company is closed, as they realize they have paid you for nothing and you spent the money for yourself."
     },
     {
-      "name": "P5: West Virginia Coalfields",
+      "id": "P5",
+      "name": "West Virginia Coalfields",
       "price": 80,
       "revenue": 15,
       "icon": "coal",
       "description": "This private company gives the owning company a WVCF token for free. When other companies connect to the coal fields, they may buy a WVCF token (if available) during their operating round for $80 ($40 goes to the company owning the WVCF private company)."
     },
     {
-      "name": "P6: Southern Bank",
+      "id": "P6",
+      "name": "Southern Bank",
       "note": "Variant",
       "price": 100,
       "revenue": "$10/10%",
@@ -361,7 +366,8 @@
       "description": "You may loan money to your company by taking out a mortgage on a company asset. The mortgage value is from half to double the value of the asset. At the start of each operating round, the company will pay you 10% interest (10% of the value of the mortgaged asset). If the company does not have enough money to pay the interest, it pays nothing. The company will repay the mortgage for half to full value of the asset. "
     },
     {
-      "name": "P7: Central Railroad & Canal",
+      "id": "P7",
+      "name": "Central Railroad & Canal",
       "price": 200,
       "revenue": 30,
       "company": "COG",

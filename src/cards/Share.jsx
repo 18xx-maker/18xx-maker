@@ -91,7 +91,12 @@ const LeftShare = ({
               </Color>
               <div className="card__body">
                 {name && <div className="share__name"><div>{name}</div></div>}
-                {subtext && <div className="share__subtext"><div>{subtext}</div></div>}
+                {(subtext || id) && <div className="share__subtext">
+                             <div>
+                               {id && <div className="share__id">{id}</div>}
+                               {subtext && <span>{subtext}</span>}
+                             </div>
+                           </div>}
                 {shares && <div className="share__shares">{count}</div>}
                 {cost && <div className="share__shares">{cost}</div>}
                 {percent && <div className="share__percent">{percent}%</div>}
@@ -114,7 +119,6 @@ const LeftShare = ({
                      </Color>
                    </div>
                  )}
-                <div className="share__id">{id}</div>
               </div>
             </div>
           )}
@@ -173,7 +177,12 @@ const CenterShare = ({
                 )}
               </Color>
               <div className="card__body">
-                {subtext && <div className="share__subtext"><div>{subtext}</div></div>}
+                {(subtext || id) && <div className="share__subtext">
+                             <div>
+                               {id && <div className="share__id">{id}</div>}
+                               {subtext && <span>{subtext}</span>}
+                             </div>
+                           </div>}
                 {shares && <div className="share__shares">{count}</div>}
                 {cost && <div className="share__shares">{cost}</div>}
                 {percent && <div className="share__percent">{percent}%</div>}

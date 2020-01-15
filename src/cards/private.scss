@@ -57,11 +57,16 @@
   font-size: 0.18in;
 }
 
-.private .private__id {
-  position: absolute;
-  bottom: 0.25in;
-  right: 0;
-  padding: 0.125in;
+.private__name .private__id {
+  position: relative;
+  float: right;
+  border: 1px solid black;
+  border-radius: 2px;
+  margin: 0 0 0 0.125in;
+  padding: 1px 3px 2px 3px;
+  font-size: 0.13in;
+  font-style: normal;
+  line-height: 1;
 }
 
 .private__players {

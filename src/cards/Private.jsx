@@ -1,5 +1,6 @@
 import React from "react";
 
+import Color from "../data/Color";
 import Config from "../data/Config";
 import Currency from "../util/Currency";
 import GameCompanyToken from "../tokens/GameCompanyToken";
@@ -30,7 +31,8 @@ const Private = ({
   tile,
   token,
   company,
-  id
+  id,
+  backgroundColor
 }) => {
   let revenueNode = null;
   if (is(Array, revenue)) {
@@ -42,55 +44,64 @@ const Private = ({
   return (
     <div className="cutlines">
       <div className="card private">
-        <div className="card__bleed">
-          <div className="card__body">
-            <div className="private__name">{name}</div>
-            {note && <div className="private__note">{note}</div>}
-            <div className="private__description">
-              <Config>
-                {(config, game) => {
-                  if (hex) {
-                    let hexData = getMapHex(game, hex);
-                    return (<div className="private__hex">
-                         <Svg viewBox="-80 -80 160 160">
-                           <Hex hex={hexData} id={hex} border={true} map={true} />
-                         </Svg>
-                       </div>);
-                  } else if (tile) {
-                    return (<div className="private__tile">
-                         <Svg viewBox="-80 -80 160 160">
-                           <Tile id={tile} border={true} gameTiles={game.tiles} />
-                         </Svg>
-                       </div>);
-                  } else {
-                    return null;
-                  }
-                }}
-              </Config>
-              {company && <div className="private__company">
-                           <Svg viewBox="-15 -15 30 30">
-                             <GameCompanyToken abbrev={company} outlineWidth={2} width={15} />
-                           </Svg>
-                         </div>}
-              {token && <div className="private__company">
-                         <Svg viewBox="-15 -15 30 30">
-                           <Token {...token} outlineWidth={2} width={15} />
-                         </Svg>
-                       </div>}
-              {icon && <div className="private__icon">
-                        <Svg viewBox="-15 -15 30 30">
-                          <Icon type={icon} />
-                        </Svg>
-                      </div>}
-              {description}
+        <Color>
+          {c => (
+            <div className="card__bleed"
+                 style={{
+                   backgroundColor: c(backgroundColor || "white")
+                 }}>
+              <div className="card__body">
+                <div className="private__name">
+                  {id && <div className="private__id">{id}</div>}
+                  {name}
+                </div>
+                {note && <div className="private__note">{note}</div>}
+                <div className="private__description">
+                  <Config>
+                    {(config, game) => {
+                      if (hex) {
+                        let hexData = getMapHex(game, hex);
+                        return (<div className="private__hex">
+                             <Svg viewBox="-80 -80 160 160">
+                               <Hex hex={hexData} id={hex} border={true} map={true} />
+                             </Svg>
+                           </div>);
+                      } else if (tile) {
+                        return (<div className="private__tile">
+                             <Svg viewBox="-80 -80 160 160">
+                               <Tile id={tile} border={true} gameTiles={game.tiles} />
+                             </Svg>
+                           </div>);
+                      } else {
+                        return null;
+                      }
+                    }}
+                  </Config>
+                  {company && <div className="private__company">
+                               <Svg viewBox="-15 -15 30 30">
+                                 <GameCompanyToken abbrev={company} outlineWidth={2} width={15} />
+                               </Svg>
+                             </div>}
+                  {token && <div className="private__company">
+                             <Svg viewBox="-15 -15 30 30">
+                               <Token {...token} outlineWidth={2} width={15} />
+                             </Svg>
+                           </div>}
+                  {icon && <div className="private__icon">
+                            <Svg viewBox="-15 -15 30 30">
+                              <Icon type={icon} />
+                            </Svg>
+                          </div>}
+                  {description}
+                </div>
+                {bid && <div className="private__bid">Min Bid: {bid}</div>}
+                <div className="private__price"><Currency value={price} type="private"/></div>
+                {players && <div className="private__players">{players}</div>}
+                {revenueNode && <div className="private__revenue">Revenue: {revenueNode}</div>}
+              </div>
             </div>
-            {bid && <div className="private__bid">Min Bid: {bid}</div>}
-            <div className="private__price"><Currency value={price} type="private"/></div>
-            {players && <div className="private__players">{players}</div>}
-            {revenueNode && <div className="private__revenue">Revenue: {revenueNode}</div>}
-            <div className="private__id">{id}</div>
-          </div>
-        </div>
+          )}
+        </Color>
       </div>
     </div>
   );

@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" width="192" height="192" x="0" y="0" version="1.1" viewBox="0 0 192 192" xml:space="preserve">
     <defs id="defs308">
-        <clipPath id="clipPath4944" clipPathUnits="userSpaceOnUse">
-            <circle id="circle4946" class="color-black color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>
-        </clipPath>
         <clipPath id="clipPath4924" clipPathUnits="userSpaceOnUse">
             <circle id="circle4926" class="color-black color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>
+        </clipPath>
+        <clipPath id="clipPath4928" clipPathUnits="userSpaceOnUse">
+            <circle id="circle4930" class="color-black color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>
         </clipPath>
         <clipPath id="clipPath4932" clipPathUnits="userSpaceOnUse">
             <circle id="circle4934" class="color-black color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>
@@ -15,8 +15,8 @@
         <clipPath id="clipPath4940" clipPathUnits="userSpaceOnUse">
             <circle id="circle4942" class="color-black color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>
         </clipPath>
-        <clipPath id="clipPath4928" clipPathUnits="userSpaceOnUse">
-            <circle id="circle4930" class="color-black color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>
+        <clipPath id="clipPath4944" clipPathUnits="userSpaceOnUse">
+            <circle id="circle4946" class="color-black color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>
         </clipPath>
         <clipPath id="clipPath4948" clipPathUnits="userSpaceOnUse">
             <circle id="circle4950" class="color-black color-main" fill="#181716" stroke-width="1" cx="21.26" cy="21.26" r="22.677"/>

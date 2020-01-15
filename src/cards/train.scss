@@ -117,4 +117,14 @@
   left: 0;
   bottom: 0;
   padding: 0.125in;
+
+  div {
+    border: 1px solid black;
+    border-radius: 2px;
+    float: left;
+    padding: 1px 3px 2px 3px;
+    font-size: 0.13in;
+    font-style: normal;
+    line-height: 1;
+  }
 }
