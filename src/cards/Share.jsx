@@ -27,8 +27,7 @@ const LeftShare = ({
   shareStyle,
   company,
   tokenCount,
-  blackBand,
-  id
+  blackBand
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -91,12 +90,7 @@ const LeftShare = ({
               </Color>
               <div className="card__body">
                 {name && <div className="share__name"><div>{name}</div></div>}
-                {(subtext || id) && <div className="share__subtext">
-                             <div>
-                               {id && <div className="share__id">{id}</div>}
-                               {subtext && <span>{subtext}</span>}
-                             </div>
-                           </div>}
+                {subtext && <div className="share__subtext"><div>{subtext}</div></div>}
                 {shares && <div className="share__shares">{count}</div>}
                 {cost && <div className="share__shares">{cost}</div>}
                 {percent && <div className="share__percent">{percent}%</div>}
@@ -112,7 +106,8 @@ const LeftShare = ({
                      <Color context="map">
                        {(c,t) => (
                          <div className="share__label__text"
-                              style={{ color: t(c("yellow")), backgroundColor: c("yellow") }} >
+                              style={{ color: t(c(labelColor || "yellow")),
+                                       backgroundColor: c(labelColor || "yellow") }} >
                            {label}
                          </div>
                        )}
@@ -142,8 +137,7 @@ const CenterShare = ({
   company,
   tokenCount,
   backgroundColor,
-  labelColor,
-  id
+  labelColor
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -177,12 +171,7 @@ const CenterShare = ({
                 )}
               </Color>
               <div className="card__body">
-                {(subtext || id) && <div className="share__subtext">
-                             <div>
-                               {id && <div className="share__id">{id}</div>}
-                               {subtext && <span>{subtext}</span>}
-                             </div>
-                           </div>}
+                {subtext && <div className="share__subtext"><div>{subtext}</div></div>}
                 {shares && <div className="share__shares">{count}</div>}
                 {cost && <div className="share__shares">{cost}</div>}
                 {percent && <div className="share__percent">{percent}%</div>}
@@ -208,7 +197,6 @@ const CenterShare = ({
                      </Color>
                    </div>
                  )}
-                <div className="share__id">{id}</div>
               </div>
             </div>
           )}
