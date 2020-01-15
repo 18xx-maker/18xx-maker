@@ -16,16 +16,72 @@
     "rules": "https://boardgamegeek.com/filepage/148586/18tk-rules-summary"
   },
   "tokens": [
-    "Round",
-    "JNR",
-    "JNR",
-    "JNR",
-    "JNR",
-    "JNR",
-    "JNR",
-    "JNR",
-    "JNR"
-  ],
+    {
+      "label": "国鉄",
+      "type": "halves",
+      "colors": [
+        "black",
+        "black"
+  ]
+  },
+   {
+      "label": "国鉄",
+      "type": "halves",
+      "colors": [
+        "black",
+        "black"
+  ]
+  },
+   {
+      "label": "国鉄",
+      "type": "halves",
+      "colors": [
+        "black",
+        "black"
+  ]
+  },
+   {
+      "label": "国鉄",
+      "type": "halves",
+      "colors": [
+        "black",
+        "black"
+  ]
+  },
+   {
+      "label": "国鉄",
+      "type": "halves",
+      "colors": [
+        "black",
+        "black"
+  ]
+  },
+   {
+      "label": "国鉄",
+      "type": "halves",
+      "colors": [
+        "black",
+        "black"
+  ]
+  },
+   {
+      "label": "国鉄",
+      "type": "halves",
+      "colors": [
+        "black",
+        "black"
+  ]
+  },
+   {
+      "label": "国鉄",
+      "type": "halves",
+      "colors": [
+        "black",
+        "black"
+  ]
+  },
+    "Round"   
+],
   "ipo": false,
   "bank": 12000,
   "players": [
@@ -132,6 +188,7 @@
     ]
   },
   "shareTypes": {
+
     "minor": [
 {
         "quantity": 1,
@@ -158,9 +215,9 @@
     {
       "name": "Japan National Railways",
       "abbrev": "JNR",
+      "logo": "TK/JNR",
       "color": "black",
       "tokens": "JNR",
-      "logo": "TK/JNR",
       "shares":[
         {
         "quantity": 1,
@@ -187,7 +244,7 @@
       "color": "cyan",
       "tokens": "1"
     },
-    {
+ {
       "name": "Keio Electric Railway",
       "abbrev": "KER",
       "logo": "TK/KER",
@@ -1921,11 +1978,11 @@
             }
           },
           {
-            "companies": [
+          "companies": [
               "KK"
             ]
-        },
-        {
+        }
+        ],
            "track": [
           {
             "side": 6
@@ -2064,16 +2121,11 @@
             }
           },
           {
-            "companies": [
+           "companies": [
               "TC"
             ]
-},
-{
-            "companies": [
-              "TC"
-            ]
-        },
-        {
+         }
+        ],
            "track": [
           {
             "side": 6
@@ -2518,24 +2570,15 @@
       },
       "cities": [
           {
-            "name": {
-              "name": "Ichikawa"
-            },
-            "rotate": 30
-          },
-          {
-          "companies": [
-              "KR"
-            ]
-        },
-        {
-            "companies": [
-              "KR"
-            ],
             "rotate": 30,
             "name": {
               "name": "Ichikawa"
             }
+          },
+           {
+            "companies": [
+              "KR"
+            ]
           }
         ],
            "track": [
