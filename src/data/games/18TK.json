@@ -24,6 +24,14 @@
         "black"
   ]
   },
+    {
+      "label": "国鉄",
+      "type": "halves",
+      "colors": [
+        "black",
+        "black"
+  ]
+  },
    {
       "label": "国鉄",
       "type": "halves",
