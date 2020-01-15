@@ -2,7 +2,7 @@
   "plain": "#CABB9F",
   "yellow": "#DEDC00",
   "green": "#008D34",
-  "brown": "#936745",
+  "brown": "#E94C16",
   "gray": "#9C9C9C",
   "map": {
     "gray": "#9C9C9C",
@@ -21,7 +21,7 @@
   "orange": "#f47d20",
 
   "track": "#181716",
-  "border": "",
+  "border": "#CABB9F",
   "town": "#181716",
   "centerTown": "#181716",
   "city": "#FFFFFF",

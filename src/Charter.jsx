@@ -25,8 +25,7 @@ const Charter = ({
   halfWidthCharters,
   company,
   blackBand,
-  id,
-  backgroundColor
+  id
 }) => {
   let color = token;
   if(is(Object, token)) {
@@ -84,13 +83,10 @@ const Charter = ({
 
   return (
     <Color context="companies">
-      {(c, t, _, p) => (
+      {(c, t) => (
         <div className={`cutlines${minor ? " cutlines--minor" : ""}${halfWidthCharters ? " cutlines--half" : ""}`}>
           <div className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidthCharters ? " charter--half" : ""}`}>
-            <div className="charter__bleed"
-                 style={{
-                   backgroundColor: p(backgroundColor || "white")
-                 }}>
+            <div className="charter__bleed">
               <div
                 className="charter__hr"
                 style={{
@@ -138,7 +134,7 @@ const Charter = ({
                     <dl>{minor || turnNodes}</dl>
                   </div>
                 )}
-                {id && <div className="charter__id"><div>{id}</div></div>}
+                <div className="charter__id">{id}</div>
               </div>
             </div>
           </div>

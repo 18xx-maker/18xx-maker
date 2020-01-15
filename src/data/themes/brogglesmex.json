@@ -1,24 +1,24 @@
 {
-  "plain": "#E4904F",
-  "yellow": "#FAC75A",
-  "green": "#58B060",
-  "brown": "#594A41",
+  "plain": "#E28F4D",
+  "yellow": "#FAC75B",
+  "green": "#39B54A",
+  "brown": "#39B54A",
   "gray": "#939598",
   "map": {
-    "gray": "#818386",
-    "water": "#539E97"
+    "gray": "#939598",
+    "water": "#418F86"
   },
 
-  "offboard": "#DC5136",
-  "mountain": "#D8BDA0",
-  "water": "#4B978F",
-  "land": "#E4904D",
+  "offboard": "#D95236",
+  "mountain": "#CCA87F",
+  "water": "#418F86",
+  "land": "#E28F4D",
   "river": "#4BB693",
 
-  "white": "#f1f1d9",
+  "white": "#FFEFDC",
   "black": "#262262",
 
-  "orange": "#f47d20",
+  "orange": "#D96D4C",
 
   "track": "#262262",
   "border": "#262262",
