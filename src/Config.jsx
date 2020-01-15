@@ -193,7 +193,7 @@ const Config = ({config, setConfig, resetConfig}) => {
         <option value="ps18xx">px18xx</option>
         <option value="broggles18EU">B18EU</option>
         <option value="broggles1817">B1817</option>
-        <option value="broggles18mex">B18mex</option>
+        <option value="brogglesmex">B18mex</option>
         <option value="broggles18TK">B18TK</option>
         <option value="broggles1836jr">B1836jr</option>
         <option value="broggles1849">B1849</option>
