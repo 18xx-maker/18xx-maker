@@ -128,7 +128,7 @@ const Charter = ({
                   <div className="charter__trains">
                     Trains
                     <div className="charter__phase">
-                      <Phase phases={phases} minor={!!minor} />
+                      <Phase phases={phases} minor={!!minor} company={company.abbrev} />
                     </div>
                   </div>
                 )}
