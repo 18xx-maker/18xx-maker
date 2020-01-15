@@ -1113,7 +1113,7 @@
     ],
     "labels": [
       {
-        "label": "BL",
+        "label": "B-L",
         "angle": 150,
         "percent": 0.8
       }
