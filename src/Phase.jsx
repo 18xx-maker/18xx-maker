@@ -12,7 +12,7 @@ const formatCell = value => {
   }
 }
 
-const Phase = ({ phases, minor }) => {
+const Phase = ({ phases, minor, company }) => {
   let includeName = !R.all(
     R.compose(
       R.isNil,
@@ -61,7 +61,11 @@ const Phase = ({ phases, minor }) => {
     phases || []
   );
 
-  let phaseRows = (phases || []).map(phase => {
+  let phaseRows = (phases || []).filter(phase => {
+    return (phases || []).some(phase => phase.company === company)
+      ? phase.company === company
+      : !phase.company;
+  }).map(phase => {
     return (!!phase.minor === minor) && (
       <Color key={phase.phase || phase.name || phase.train}>
         {c => (
