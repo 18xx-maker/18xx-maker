@@ -111,3 +111,16 @@
   margin: 0.125in 0.125in 0 0;
   padding: 0.125in;
 }
+
+.private__variant {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 0.125in;
+  line-height: 1;
+  padding-right: 0.125in;
+  font-weight: normal;
+  font-size: 0.5em;
+  font-style: italic;
+  font-family: sans-serif;
+}

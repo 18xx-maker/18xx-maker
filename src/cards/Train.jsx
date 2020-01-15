@@ -15,7 +15,7 @@ import brownTrain from "../images/brown-train.png";
 import grayTrain from "../images/gray-train.png";
 
 const Train = ({ train, blackBand }) => {
-  let { name, price, color, info, description, players, backgroundColor } = train;
+  let { name, price, color, info, description, players, backgroundColor, variant } = train;
 
   let notes = addIndex(map)(
     (i, index) => (
@@ -89,6 +89,7 @@ const Train = ({ train, blackBand }) => {
                     </div>
                     {description && <div className="train__description">{description}</div>}
                     <div className="train__notes">{notes}</div>
+                    {variant && <div className="train__variant">{variant}</div>}
                   </div>
                 </div>
               </div>

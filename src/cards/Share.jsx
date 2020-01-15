@@ -27,7 +27,8 @@ const LeftShare = ({
   shareStyle,
   company,
   tokenCount,
-  blackBand
+  blackBand,
+  variant
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -114,6 +115,7 @@ const LeftShare = ({
                      </Color>
                    </div>
                  )}
+                {variant && <div className="share__variant">{variant}</div>}
               </div>
             </div>
           )}
@@ -137,7 +139,8 @@ const CenterShare = ({
   company,
   tokenCount,
   backgroundColor,
-  labelColor
+  labelColor,
+  variant
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -197,6 +200,7 @@ const CenterShare = ({
                      </Color>
                    </div>
                  )}
+                {variant && <div className="share__variant">{variant}</div>}
               </div>
             </div>
           )}
