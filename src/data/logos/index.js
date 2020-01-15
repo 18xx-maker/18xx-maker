@@ -1,3 +1,4 @@
+import logo_1830AH_BM, { ReactComponent as logo_1830AH_BM_Component } from "./1830AH/BM.svg";
 import logo_1830AH_BO, { ReactComponent as logo_1830AH_BO_Component } from "./1830AH/BO.svg";
 import logo_1830AH_CO, { ReactComponent as logo_1830AH_CO_Component } from "./1830AH/CO.svg";
 import logo_1830AH_CPR, { ReactComponent as logo_1830AH_CPR_Component } from "./1830AH/CPR.svg";
@@ -158,6 +159,12 @@ import logo_webdev_webpack, { ReactComponent as logo_webdev_webpack_Component } 
 import logo_webdev_yarn, { ReactComponent as logo_webdev_yarn_Component } from "./webdev/yarn.svg";
 
 export default {
+  "1830AH/BM": {
+    name: "BM",
+    group: "1830AH",
+    src: logo_1830AH_BM,
+    Component: logo_1830AH_BM_Component
+  },
   "1830AH/BO": {
     name: "BO",
     group: "1830AH",
