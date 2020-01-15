@@ -79,6 +79,7 @@ const Cards = ({ override, selection }) => {
           token={company.token || company.color}
           {...share}
           subtext={company.subtext || share.subtext}
+          variant={company.variant || share.variant}
         />
       ),
       shares

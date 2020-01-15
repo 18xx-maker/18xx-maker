@@ -32,7 +32,8 @@ const Private = ({
   token,
   company,
   id,
-  backgroundColor
+  backgroundColor,
+  variant
 }) => {
   let revenueNode = null;
   if (is(Array, revenue)) {
@@ -98,6 +99,7 @@ const Private = ({
                 <div className="private__price"><Currency value={price} type="private"/></div>
                 {players && <div className="private__players">{players}</div>}
                 {revenueNode && <div className="private__revenue">Revenue: {revenueNode}</div>}
+                {variant && <div className="private__variant">{variant}</div>}
               </div>
             </div>
           )}

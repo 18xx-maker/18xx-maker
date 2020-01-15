@@ -25,7 +25,8 @@ const Charter = ({
   halfWidthCharters,
   company,
   blackBand,
-  backgroundColor
+  backgroundColor,
+  variant
 }) => {
   let color = token;
   if(is(Object, token)) {
@@ -137,6 +138,7 @@ const Charter = ({
                     <dl>{minor || turnNodes}</dl>
                   </div>
                 )}
+                {variant && <div className="charter__variant">{variant}</div>}
               </div>
             </div>
           </div>

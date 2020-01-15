@@ -91,7 +91,8 @@
         "subtext": "Short Share",
         "percent": 10,
         "shares": 1,
-        "backgroundColor": "short"
+        "backgroundColor": "short",
+        "variant": "short"
       }
     ]
   },
@@ -113,6 +114,7 @@
       "name": "Blue Railroad",
       "abbrev": "BRR",
       "color": "blue",
+      "variant": "blue",
       "shares": [
         {
           "quantity": 1,
@@ -234,6 +236,7 @@
       "quantity": 1,
       "price": "$800",
       "color": "brown",
+      "variant": "heavy",
       "info": [
         {
           "color": "brown",
@@ -289,7 +292,8 @@
       "price": 180,
       "revenue": 20,
       "tile": "T1",
-      "description": "This tile is defined in the game file"
+      "description": "This tile is defined in the game file",
+      "variant": "unused"
     },
     {
       "name": "Private with Hex and Note",
