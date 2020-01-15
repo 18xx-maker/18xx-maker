@@ -78,7 +78,11 @@ const Phase = ({ phases, minor, company }) => {
             <td>{phase.limit}</td>
             {!excludeTiles && <td style={{ backgroundColor: c(phase.tiles) }}>&nbsp;</td>}
             {!excludeRust && <td>{phase.rust}</td>}
-            <td className="phase__notes">{phase.notes}</td>
+            <td className="phase__notes">
+              {Array.isArray(phase.notes)
+                ? phase.notes.reduce((notes, note) => <>{notes}<br />{note}</>)
+                : phase.notes}
+            </td>
           </tr>
         )}
       </Color>
