@@ -25,7 +25,6 @@ const Charter = ({
   halfWidthCharters,
   company,
   blackBand,
-  id,
   backgroundColor
 }) => {
   let color = token;
@@ -138,7 +137,6 @@ const Charter = ({
                     <dl>{minor || turnNodes}</dl>
                   </div>
                 )}
-                {id && <div className="charter__id"><div>{id}</div></div>}
               </div>
             </div>
           </div>
