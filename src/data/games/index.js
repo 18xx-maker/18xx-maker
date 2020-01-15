@@ -47,6 +47,7 @@ import game_18SS from "./18SS";
 import game_18SY from "./18SY";
 import game_18Chesapeake from "./18Chesapeake";
 import game_18Mex from "./18Mex";
+import game_18Scan from "./18Scan";
 import game_18Test from "./18Test";
 import game_18TE from "./18TE";
 import game_FourthAge from "./FourthAge";
@@ -106,6 +107,7 @@ let all_games = {
   "18SY": game_18SY,
   "18Chesapeake": game_18Chesapeake,
   "18Mex": game_18Mex,
+  "18Scan": game_18Scan,
   "18TE": game_18TE,
   FourthAge: game_FourthAge,
   Harzbahn: game_Harzbahn,
