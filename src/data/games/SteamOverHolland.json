@@ -780,6 +780,11 @@
       },
       {
         "color": "plain",
+        "labels": [{
+          "label": "A",
+          "angle": 180,
+          "percent": 0.667
+        }],
         "cities": [{"size": 2, "companies": ["HYSM", "NRS"]}],
         "hexes": ["F9"]
       },
