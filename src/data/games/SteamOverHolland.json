@@ -3,7 +3,7 @@
     "title": "Steam Over Holland",
     "titleRotate": -90,
     "titleSize": 110,
-    "titleX": 174,
+    "titleX": 110,
     "titleY": 946,
     "designer": "Bart Van Dijk",
     "background": "water",
@@ -12,6 +12,11 @@
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/31722/steam-over-holland",
     "rules": "https://www.boardgamegeek.com/filepage/47246/corrected-english-manual-v2"
+  },
+  "roundTracker": {
+    "type": "col",
+    "x": 145,
+    "y": 0
   },
   "tokens": [
     "Round"
@@ -292,11 +297,6 @@
       ]
     }
   ],
-  "roundTracker": {
-    "type": "col",
-    "x": 0,
-    "y": 0
-  },
   "rounds": [
     { "name": "SR" },
     { "name": "OR", "color": "gray" },
@@ -402,7 +402,265 @@
     "46": 1,
     "47": 1,
     "125": 3,
-    "217": 3
+    "217": 3,
+
+    "SOH1": {
+      "color": "yellow",
+      "values": [
+        {
+          "angle": 90,
+          "percent": 0.7,
+          "value": 30
+        }
+      ],
+      "labels": [
+        {
+          "label": "A",
+          "angle": 270,
+          "percent": 0.5
+        }
+      ],
+      "cities": [
+        {
+          "angle": 30,
+          "percent": 0.5,
+          "companies": ["NRS"]
+        },
+        {
+          "angle": 150,
+          "percent": 0.5,
+          "companies": ["HYSM"]
+        }
+      ],
+      "track": [
+        {
+          "type": "sharp",
+          "side": 1
+        },
+        {
+          "type": "sharp",
+          "side": 3
+        }
+      ]
+    },
+    "SOH2": {
+      "quantity": 3,
+      "color": "green",
+      "values": [
+        {
+          "angle": 240,
+          "percent": 0.5,
+          "value": 10
+        }
+      ],
+      "towns": [
+        {
+          "angle": 180,
+          "percent": 0.667
+        },
+        {
+          "angle": 180,
+          "percent": 0.57735,
+          "rotation": 90,
+          "x": 43.30125,
+          "y": 75
+        }
+      ],
+      "track": [
+        {
+          "side": 1,
+          "type": "straight"
+        },
+        {
+          "side": 6,
+          "type": "sharp"
+        }
+      ]
+    },
+    "SOH3": {
+      "quantity": 3,
+      "color": "green",
+      "values": [
+        {
+          "angle": 120,
+          "percent": 0.5,
+          "value": 10
+        }
+      ],
+      "towns": [
+        {
+          "angle": 180,
+          "percent": 0.667
+        },
+        {
+          "angle": 180,
+          "percent": 0.57735,
+          "rotation": 90,
+          "x": -43.30125,
+          "y": 75
+        }
+      ],
+      "track": [
+        {
+          "side": 1,
+          "type": "straight"
+        },
+        {
+          "side": 1,
+          "type": "sharp"
+        }
+      ]
+    },
+    "SOH4": {
+      "quantity": 3,
+      "color": "green",
+      "values": [
+        {
+          "angle": 150,
+          "percent": 0.2,
+          "value": 10
+        }
+      ],
+      "towns": [
+        {
+          "x": 129.90375,
+          "y": 75,
+          "rotate": 45,
+          "angle": 135,
+          "percent": 1.7216875
+        },
+        {
+          "angle": 180,
+          "percent": 0.57735,
+          "rotation": 90,
+          "x": 43.30125,
+          "y": 75
+        }
+      ],
+      "track": [
+        {
+          "side": 5,
+          "type": "gentle"
+        },
+        {
+          "side": 6,
+          "type": "sharp"
+        }
+      ]
+    },
+    "SOH5": {
+      "quantity": 3,
+      "color": "green",
+      "values": [
+        {
+          "angle": 210,
+          "percent": 0.2,
+          "value": 10
+        }
+      ],
+      "towns": [
+        {
+          "x": -129.90375,
+          "y": 75,
+          "rotate": -45,
+          "angle": 225,
+          "percent": 1.7216875
+        },
+        {
+          "angle": 180,
+          "percent": 0.57735,
+          "rotation": 90,
+          "x": -43.30125,
+          "y": 75
+        }
+      ],
+      "track": [
+        {
+          "side": 1,
+          "type": "gentle"
+        },
+        {
+          "side": 1,
+          "type": "sharp"
+        }
+      ]
+    },
+    "SOH6": {
+      "color": "green",
+      "values": [
+        {
+          "angle": 90,
+          "percent": 0.7,
+          "value": 40
+        }
+      ],
+      "labels": [
+        {
+          "label": "A",
+          "angle": 270,
+          "percent": 0.5
+        }
+      ],
+      "cities": [
+        {
+          "angle": 30,
+          "percent": 0.5,
+          "companies": ["NRS"]
+        },
+        {
+          "angle": 150,
+          "percent": 0.5,
+          "companies": ["HYSM"]
+        }
+      ],
+      "track": [
+        {
+          "type": "sharp",
+          "side": 1
+        },
+        {
+          "type": "sharp",
+          "side": 3
+        }
+      ]
+    },
+    "SOH7": {
+      "color": "brown",
+      "labels": [
+        {
+          "angle": 325,
+          "percent": 0.8,
+          "label": "A"
+        }
+      ],
+      "values": [
+        {
+          "angle": 215,
+          "percent": 0.8,
+          "value": 60
+        }
+      ],
+      "cities": [
+        {
+          "size": 2,
+          "companies": ["HYSM", "NRS"]
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        }
+      ]
+    }
   },
   "map": {
     "hexes": [
@@ -562,6 +820,15 @@
       },
       {
         "color": "offboard",
+        "offBoardRevenue": {
+          "revenues": [{
+            "color": "yellow",
+            "value": 40
+          },{
+            "color": "brown",
+            "value": 60
+          }]
+        },
         "track": [
           {
             "type": "offboard",
@@ -572,6 +839,15 @@
       },
       {
         "color": "water",
+        "offBoardRevenue": {
+          "revenues": [{
+            "color": "yellow",
+            "value": 30
+          },{
+            "color": "brown",
+            "value": 50
+          }]
+        },
         "track": [
           {
             "type": "offboard",
@@ -588,6 +864,15 @@
       },
       {
         "color": "offboard",
+        "offBoardRevenue": {
+          "revenues": [{
+            "color": "yellow",
+            "value": 40
+          },{
+            "color": "brown",
+            "value": 60
+          }]
+        },
         "track": [
           {
             "type": "offboard",
@@ -598,6 +883,15 @@
       },
       {
         "color": "offboard",
+        "offBoardRevenue": {
+          "revenues": [{
+            "color": "yellow",
+            "value": 40
+          },{
+            "color": "brown",
+            "value": 60
+          }]
+        },
         "track": [
           {
             "type": "offboard",
@@ -608,6 +902,15 @@
       },
       {
         "color": "offboard",
+        "offBoardRevenue": {
+          "revenues": [{
+            "color": "yellow",
+            "value": 40
+          },{
+            "color": "brown",
+            "value": 60
+          }]
+        },
         "track": [
           {
             "type": "offboard",
@@ -618,6 +921,15 @@
       },
       {
         "color": "offboard",
+        "offBoardRevenue": {
+          "revenues": [{
+            "color": "yellow",
+            "value": 40
+          },{
+            "color": "brown",
+            "value": 60
+          }]
+        },
         "track": [
           {
             "type": "offboard",
@@ -628,6 +940,15 @@
       },
       {
         "color": "offboard",
+        "offBoardRevenue": {
+          "revenues": [{
+            "color": "yellow",
+            "value": 40
+          },{
+            "color": "brown",
+            "value": 60
+          }]
+        },
         "track": [
           {
             "type": "offboard",
@@ -638,6 +959,15 @@
       },
       {
         "color": "water",
+        "offBoardRevenue": {
+          "revenues": [{
+            "color": "yellow",
+            "value": 40
+          },{
+            "color": "brown",
+            "value": 60
+          }]
+        },
         "track": [
           {
             "type": "offboard",
