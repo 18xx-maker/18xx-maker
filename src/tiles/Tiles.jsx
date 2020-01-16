@@ -1,7 +1,9 @@
 import React from "react";
 import * as R from "ramda";
 
-import  * as tiles from "../data/tiles";
+import filter from "ramda/src/filter";
+
+import tiles from "../data/tiles";
 import Tile from "../Tile";
 
 import Svg from "../Svg";
@@ -13,7 +15,7 @@ const Tiles = ({color}) => {
       R.ascend(id => Number(id.split("|")[0] || 0)),
       R.ascend(id => Number(id.split("|")[1] || 0))
     ],
-    R.keys(tiles[color])
+    R.keys(filter(t => t.color === color, tiles))
   );
 
   let tileNodes = R.map(id => {

@@ -375,6 +375,27 @@ const App = () => (
                       strokeLinejoin="round"
                     />
                   </g>
+                  <g id="home">
+                    <rect
+                      width="12"
+                      height="8"
+                      x="-6"
+                      y="-1"
+                      fill={c("blue")}
+                      stroke={c("black")}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <polygon
+                      points="-8,-1 0,-9 8,-1"
+                      fill={c("blue")}
+                      stroke={c("black")}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </g>
                   <g id="tree">
                     <rect
                       width="4"
