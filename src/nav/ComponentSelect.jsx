@@ -6,7 +6,7 @@ import games from "../data/games";
 import equals from "ramda/src/equals";
 
 const disabled = value => {
-  return value === undefined || value === null || equals(value, []) || equals(value, {})
+  return value === false || value === undefined || value === null || equals(value, []) || equals(value, {})
 }
 
 const ComponentSelect = () => {

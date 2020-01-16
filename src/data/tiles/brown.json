@@ -1381,6 +1381,35 @@
       }
     ]
   },
+  "217": {
+    "color": "brown",
+    "values": [
+      {
+        "angle": 215,
+        "percent": 0.8,
+        "value": 40
+      }
+    ],
+    "cities": [
+      {
+        "size": 2
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
   "239": {
     "color": "brown",
     "values": [
