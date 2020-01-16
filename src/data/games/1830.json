@@ -312,11 +312,6 @@
       ]
     }
   ],
-  "roundTracker": {
-    "type": "row",
-    "x": 40,
-    "y": 250
-  },
   "rounds": [
     {
       "name": "OR3",
@@ -845,6 +840,11 @@
     "70": 1
   },
   "map": {
+    "roundTracker": {
+      "type": "row",
+      "x": 40,
+      "y": 250
+    },
     "hexes": [
       {
         "color": "offboard",

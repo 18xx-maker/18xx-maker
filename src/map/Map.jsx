@@ -42,7 +42,7 @@ const Map = ({ name, game, coords, variation, hexWidth }) => {
       {mapHexes}
       <Coordinates {...data}/>
       <Title game={game} variation={variation} hexWidth={hexWidth} />
-      <MapRoundTracker game={game} hexWidth={hexWidth} />
+      <MapRoundTracker roundTracker={data.map.roundTracker} hexWidth={hexWidth} />
       <Borders data={data} />
       <Lines data={data} />
     </React.Fragment>

@@ -3,9 +3,7 @@ import React from "react";
 import Config from "../data/Config";
 import RoundTracker from "../RoundTracker";
 
-const MapRoundTracker = ({game, hexWidth}) => {
-  let roundTracker = game.roundTracker;
-
+const MapRoundTracker = ({roundTracker, hexWidth}) => {
   if (!roundTracker) {
     return null;
   }

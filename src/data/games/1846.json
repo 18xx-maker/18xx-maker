@@ -384,11 +384,6 @@
       ]
     }
   ],
-  "roundTracker": {
-    "type": "round",
-    "x": 150,
-    "y": 400
-  },
   "rounds": [
     {
       "name": "SR",
@@ -575,6 +570,11 @@
     "619": 3
   },
   "map": {
+    "roundTracker": {
+      "type": "round",
+      "x": 150,
+      "y": 400
+    },
     "hexes": [
       {
         "color": "plain",

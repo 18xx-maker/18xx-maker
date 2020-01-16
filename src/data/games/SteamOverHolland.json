@@ -13,11 +13,6 @@
     "bgg": "https://www.boardgamegeek.com/boardgame/31722/steam-over-holland",
     "rules": "https://www.boardgamegeek.com/filepage/47246/corrected-english-manual-v2"
   },
-  "roundTracker": {
-    "type": "col",
-    "x": 145,
-    "y": 0
-  },
   "tokens": [
     "Round"
   ],
@@ -663,6 +658,11 @@
     }
   },
   "map": {
+    "roundTracker": {
+      "type": "col",
+      "x": 145,
+      "y": 0
+    },
     "hexes": [
       {
         "color": "plain",

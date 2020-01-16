@@ -382,11 +382,6 @@
       ]
     }
   ],
-  "roundTracker": {
-    "type": "row",
-    "x": 500,
-    "y": 180
-  },
   "rounds": [
     {
       "name": "OR3",
@@ -882,6 +877,11 @@
     "DB801": 1
   },
   "map": {
+    "roundTracker": {
+      "type": "row",
+      "x": 500,
+      "y": 180
+    },
     "hexes": [
       {
         "color": "offboard",

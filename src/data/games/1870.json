@@ -390,11 +390,6 @@
       ]
     }
   ],
-  "roundTracker": {
-    "type": "row",
-    "x": 600,
-    "y": 1910
-  },
   "rounds": [
     {
       "name": "OR3",
@@ -1150,6 +1145,11 @@
   },
   "map": {
     "print": "landscape",
+    "roundTracker": {
+      "type": "row",
+      "x": 600,
+      "y": 1910
+    },
     "hexes": [
       {
         "color": "offboard",
