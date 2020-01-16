@@ -1063,6 +1063,38 @@
   },
   "125": {
     "color": "brown",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.87,
+        "value": 40
+      }
+    ],
+    "cities": [
+      {
+        "size": 2
+      }
+    ],
+    "track": [
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "125|L": {
+    "color": "brown",
     "labels": [
       {
         "label": "L",
