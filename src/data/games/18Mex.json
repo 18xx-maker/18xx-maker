@@ -159,6 +159,7 @@
     {
       "name": "Southern Pacific Railroad of Mexico",
       "abbrev": "SPM",
+      "logo": "SP",
       "color": "blue",
       "tokens": "three"
     },
