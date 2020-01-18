@@ -12,9 +12,9 @@ import game_1825R1_1 from "./1825-R1.1";
 import game_1825R2 from "./1825-R2";
 import game_1825K3_1 from "./1825-R3.1";
 import game_1825Met from "./1825-Met";
-import game_1925DB1 from "./1825-DB1";
-import game_1925DB3 from "./1825-DB3";
-import game_1925DB5 from "./1825-DB5";
+import game_1825DB1 from "./1825-DB1";
+import game_1825DB3 from "./1825-DB3";
+import game_1825DB5 from "./1825-DB5";
 import game_18Misc from "./18Misc";
 import game_1830 from "./1830";
 import game_1832 from "./1832";
@@ -73,9 +73,9 @@ let all_games = {
   "1825-R2": game_1825R2,
   "1825-R3.1": game_1825K3_1,
   "1825-Met": game_1825Met,
-  "1825-DB1": game_1925DB1,
-  "1825-DB3": game_1925DB3,
-  "1825-DB5": game_1925DB5,
+  "1825-DB1": game_1825DB1,
+  "1825-DB3": game_1825DB3,
+  "1825-DB5": game_1825DB5,
   "1830": game_1830,
   "1832": game_1832,
   "1834": game_1834,
