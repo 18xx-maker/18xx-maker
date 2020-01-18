@@ -17,6 +17,7 @@ import game_1825DB3 from "./1825-DB3";
 import game_1825DB5 from "./1825-DB5";
 import game_18Misc from "./18Misc";
 import game_1830 from "./1830";
+import game_1830Mayfair from "./1830M";
 import game_1832 from "./1832";
 import game_1834 from "./1834";
 import game_1836jr_30 from "./1836jr-30";
@@ -77,6 +78,7 @@ let all_games = {
   "1825-DB3": game_1825DB3,
   "1825-DB5": game_1825DB5,
   "1830": game_1830,
+  "1830Mayfair": game_1830Mayfair,
   "1832": game_1832,
   "1834": game_1834,
   "1836jr-30": game_1836jr_30,
