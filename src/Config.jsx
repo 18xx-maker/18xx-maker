@@ -289,6 +289,9 @@ const Config = ({config, setConfig, resetConfig}) => {
       <h3>IPO</h3>
       <Input name="ipo.borderRadius" label="IPO Border Radius" dimension={true}
              description="How much to round the corners, zero will disable rounded corners on the IPO cards" />
+      <h3>Revenue Table</h3>
+      <Input name="revenueTable.visible" label="Show revenue table"
+             description="Whether or not to render the revenue table. If you use your own revenue tracker, you may wish to print only the market and player info." />
       <h3>Currency</h3>
       <p>This lets you turn on currency symbols for each item individually. Only works if the game file specificies values as numbers and not strings.</p>
       <Input name="currency.bank" label="Bank" description="Bank total on revenue page"/>

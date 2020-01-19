@@ -188,7 +188,15 @@
     },
     "plainMapCompanies": { "type": "boolean" },
     "straightCityNames": { "type": "boolean" },
-    "font": { "$ref": "#/definitions/font" }
+    "font": { "$ref": "#/definitions/font" },
+    "revenueTable": { 
+      "type": "object",
+      "properties": {
+        "visible": { "type": "boolean" }
+      },
+      "additionalProperties": false,
+      "required": ["visible"]
+    }
   },
   "required": [
     "companiesTheme",

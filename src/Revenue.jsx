@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import * as R from "ramda";
 import Color from "./data/Color";
 import games from "./data/games";
+import Config from "./data/Config";
 
 import Pool from "./Pool";
 import Players from "./Players";
@@ -45,7 +46,7 @@ const generateCells = (rows, cols) => {
 const Revenue = () => {
   let params = useParams();
   let game = games[params.game];
-
+  
   let rows = Array.from(Array(5).keys());
   let cols = Array.from(Array(20).keys());
 
@@ -59,12 +60,21 @@ const Revenue = () => {
           <p>Revenue is meant to be printed in <b>landscape</b> mode</p>
         </div>
       </div>
-      <div className="revenue__tracker">
-        <h2>{game.info.title} Revenue</h2>
-        <table className="revenue__table">
-          <tbody>{items}</tbody>
-        </table>
-      </div>
+      <Config>
+        {config => {
+          if (config.revenueTable.visible === false) {
+            return null;
+          }
+          return (
+            <div className="revenue__tracker">
+              <h2>{game.info.title} Revenue</h2>
+              <table className="revenue__table">
+                <tbody>{items}</tbody>
+              </table>
+            </div>
+          )
+        }}
+      </Config>
       <div className="pool-wrapper">
         {pools}
         <Players players={game.players} bank={game.bank} capital={game.capital} />
