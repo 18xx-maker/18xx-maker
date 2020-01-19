@@ -63,7 +63,7 @@ const MapSingle = ({ coords, hexWidth }) => {
 
 const mapStateToProps = state => ({
   coords: state.config.coords,
-  hexWidth: state.config.tiles.width
+  hexWidth: state.config.tiles.mapWidth
 });
 
 export default connect(mapStateToProps)(MapSingle);
