@@ -164,7 +164,30 @@
         "required": ["number"]
       }
     },
-    "pools": {},
+    "pools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "height": { 
+            "type": "string",
+            "description": "A valid CSS height value"
+          },
+          "notes": { 
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "color": { "type": "string" },
+                "icon": { "type": "string" },
+                "note": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
     "privates": {
       "type": "array",
       "items": {

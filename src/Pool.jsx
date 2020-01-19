@@ -2,7 +2,7 @@ import React from "react";
 import * as R from "ramda";
 import Color from "./data/Color";
 
-const Pool = ({ name, notes }) => {
+const Pool = ({ name, notes, height }) => {
   let notesNode = null;
 
   if (notes && notes.length > 0) {
@@ -30,7 +30,7 @@ const Pool = ({ name, notes }) => {
   return (
     <div className="pool">
       <h2>{name}</h2>
-      <div className="pool__box">{notesNode}</div>
+      <div className="pool__box" style={{ height: height}}>{notesNode}</div>
     </div>
   );
 };

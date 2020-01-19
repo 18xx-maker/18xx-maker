@@ -364,6 +364,7 @@
   "pools": [
     {
       "name": "Market",
+      "height": "5in",
       "notes": [
         {
           "color": "orange",
