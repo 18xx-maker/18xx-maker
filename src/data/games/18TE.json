@@ -20,7 +20,7 @@
     "Round"
   ],
   "ipo": true,
-  "bank": 12000,
+  "bank": 4000,
   "rounds": [
     {
       "name": "OR1",
