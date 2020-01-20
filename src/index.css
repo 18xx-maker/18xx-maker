@@ -311,6 +311,10 @@ svg {
   height: calc(100% - 0.9375in);
 }
 
+.charter__capital {
+  font-size: 0.25in;
+}
+
 .charter__phase {
   position: absolute;
   bottom: 0;

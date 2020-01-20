@@ -135,6 +135,11 @@ const Charter = ({
                 {halfWidthCharters || (
                   <div className="charter__treasury">
                     Treasury
+                    {company.capital && (
+                      <div className="charter__capital">
+                        <Currency value={company.capital} type="treasury"/>
+                      </div>
+                    )}
                     <dl>{minor || turnNodes}</dl>
                   </div>
                 )}
