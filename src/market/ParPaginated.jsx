@@ -16,7 +16,7 @@ const ParPaginated = () => {
     <Config>
       {(config, game) => {
 
-        if (!game.stock || !game.stock.par) {
+        if (!game.stock || !game.stock.par || !game.stock.par.values) {
           return <Redirect to={`/${params.game}/background`} />;
         }
         let data = getParData(game.stock, config.stock, config.paper, config.pagination);
