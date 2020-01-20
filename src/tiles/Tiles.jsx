@@ -19,10 +19,6 @@ const Tiles = ({color}) => {
       R.ascend(id => Number(id.split("|")[1] || 0))
     ],
     R.keys(filter(t => {
-      if (!t.color) {
-        console.log(t);
-      }
-
       if (!t || tileFilter === "") {
         return true;
       }

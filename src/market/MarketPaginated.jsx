@@ -25,7 +25,6 @@ const MarketPaginated = () => {
         }
 
         let data = getMarketData(game.stock, config.stock, config.paper, config.pagination);
-        console.log(data);
 
         let cells = [];
         switch (data.type) {

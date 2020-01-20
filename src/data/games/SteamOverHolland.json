@@ -335,9 +335,24 @@
   ],
   "stock": {
     "type": "1D",
-    "par": {
-      "color": "yellow"
-    },
+    "ledges": [
+      {
+        "color": "offboard",
+        "coords": ["9 0", "9 1"]
+      },
+      {
+        "color": "offboard",
+        "coords": ["12 0", "12 1"]
+      },
+      {
+        "color": "offboard",
+        "coords": ["15 0", "15 1"]
+      },
+      {
+        "color": "offboard",
+        "coords": ["18 0", "18 1"]
+      }
+    ],
     "market": [
       50,
       55,
