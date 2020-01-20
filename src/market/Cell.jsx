@@ -99,9 +99,13 @@ const Cell = ({ cell, data }) => {
             /* } */
 
             let rotated = false;
+            let subRotated = false;
 
             if (data.type !== "2D" && cell.label) {
               rotated = true;
+            }
+            if (data.type !== "2D" && cell.subLabel) {
+              subRotated = true;
             }
 
             let arrowNodes = addIndex(map)((arrow, i) => {
@@ -125,7 +129,7 @@ const Cell = ({ cell, data }) => {
               );
             }, cell.arrow ? (is(Array, cell.arrow) ? cell.arrow : [cell.arrow]) : []);
 
-            let text = cell.value ? <Currency value={cell.value} type="market"/> : cell.label;
+            let text = "value" in cell ? <Currency value={cell.value} type="market"/> : cell.label;
 
             return (
               <g>
@@ -155,15 +159,15 @@ const Cell = ({ cell, data }) => {
                 )}
                 {cell.subLabel && (
                   <text
-                    transform={rotated ? "rotate(-90)" : null}
+                    transform={subRotated ? "rotate(-90)" : null}
                     fill={labelColor}
                     fontFamily="display"
                     fontStyle="bold"
                     fontSize="15"
                     textAnchor="start"
-                    dominantBaseline={rotated ? "hanging" : "baseline"}
-                    x={rotated ? (-data.height + 5) : 5}
-                    y={rotated ? 5 : (data.height - 5)}
+                    dominantBaseline={subRotated ? "hanging" : "baseline"}
+                    x={subRotated ? (-data.height + 5) : 5}
+                    y={subRotated ? 5 : (data.height - 5)}
                   >
                     {cell.subLabel}
                   </text>
