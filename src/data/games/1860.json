@@ -953,6 +953,10 @@
     {
       "name": "2 Player",
       "print": "landscape",
+      "players": {
+        "x": 1300,
+        "y": 730
+      },
       "roundTracker": {
         "type": "row",
         "x": 0,
@@ -1654,6 +1658,15 @@
     {
       "name": "3-4 Player",
       "print": "landscape",
+      "players": {
+        "x": 1300,
+        "y": 730
+      },
+      "roundTracker": {
+        "type": "row",
+        "x": 0,
+        "y": 630
+      },
       "copy": 0,
       "hexes": [
         {

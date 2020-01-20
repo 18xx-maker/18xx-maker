@@ -3,8 +3,8 @@
     "title": "1817",
     "designer": "Craig Bartell, Tim Flowers",
     "background": "gray",
-    "titleX": 1340,
-    "titleY": 1570,
+    "titleX": 1740,
+    "titleY": 620,
     "titleSize": 165,
     "subTitleSize": 17,
     "currency": "USD"
@@ -177,6 +177,15 @@
     "X30": 1
   },
   "map": {
+    "players": {
+      "x": 1750,
+      "y": 860
+    },
+    "roundTracker": {
+      "type": "row",
+      "x": 1700,
+      "y": 600
+    },
     "borders": [
       {
         "color": "water",
@@ -557,9 +566,9 @@
         "color": "yellow",
         "labels": [
           {
-            "angle": 120,
-            "percent": 0.8,
-            "label": "NYC"
+            "angle": 150,
+            "percent": 0.6,
+            "label": "NY"
           }
         ],
         "terrain": [

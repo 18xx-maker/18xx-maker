@@ -840,6 +840,10 @@
     "70": 1
   },
   "map": {
+    "players": {
+      "x": 1230,
+      "y": 1270
+    },
     "roundTracker": {
       "type": "row",
       "x": 40,

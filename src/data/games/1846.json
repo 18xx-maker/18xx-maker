@@ -540,6 +540,11 @@
     "619": 3
   },
   "map": {
+    "players": {
+      "x": 900,
+      "y": 1260,
+      "cellWidth": 80
+    },
     "roundTracker": {
       "type": "round",
       "x": 150,

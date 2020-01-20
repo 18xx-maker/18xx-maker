@@ -33,6 +33,7 @@ const ComponentSelect = () => {
               value={selection}>
         {selection !== "" || <option value="">None</option>}
         <option disabled={!selection} value="background">Background</option>
+        <option disabled={!selection} value="bankpool">Bank Pool</option>
         <option disabled={!selection || disabled(game.privates || game.companies || game.trains)} value="cards">Cards</option>
         <option disabled={!selection || disabled(game.companies)} value="charters">Charters</option>
         <option disabled={!selection || disabled(game.ipo)} value="ipo">IPO</option>

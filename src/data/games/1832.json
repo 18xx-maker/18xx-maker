@@ -1082,6 +1082,15 @@
     "611|JC": 2
   },
   "map": {
+    "players": {
+      "x": 90,
+      "y": 1380
+    },
+    "roundTracker": {
+      "type": "row",
+      "x": 220,
+      "y": 1675
+    },
     "hexes": [
       {
         "color": "offboard",

@@ -1,0 +1,38 @@
+.players {
+}
+
+.players__table {
+  width: 100%;
+  height: auto;
+  table-layout: auto;
+  box-sizing: border-box;
+  border-collapse: collapse;
+}
+
+.players__table--static {
+  margin-bottom: 0.17in;
+}
+
+.players__table th {
+  padding: 0.1in 0.1in;
+  text-align: center;
+  border-width: 0;
+}
+
+.players__table--static th,
+.players__table--static td {
+  border-bottom: 1px dashed gray;
+}
+
+.players__table--static th,
+.players__table td {
+  padding: 0.1in;
+  text-align: center;
+  border-color: gray;
+  border-right: 1px solid gray;
+  border-top: 1px dashed gray;
+}
+
+.players__table td:last-child {
+  border-right: none;
+}

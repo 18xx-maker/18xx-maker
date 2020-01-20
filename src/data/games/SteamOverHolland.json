@@ -673,6 +673,10 @@
     }
   },
   "map": {
+    "players": {
+      "x": 250,
+      "y": 50
+    },
     "roundTracker": {
       "type": "col",
       "x": 145,
