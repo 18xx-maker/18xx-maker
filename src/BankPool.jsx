@@ -57,7 +57,6 @@ const BankPool = () => {
                         height={unitsToCss(usableHeight)}
                         viewBox={`0 0 ${poolWidth} ${poolHeight}`}>
                         <rect x="0" y="50"
-                              rx={config.ipo.borderRadius} ry={config.ipo.borderRadius}
                               width={poolWidth} height={poolHeight - 50}
                               stroke="black"
                               fill="white" />
