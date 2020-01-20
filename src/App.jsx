@@ -81,6 +81,14 @@ const App = () => (
           xmlns="http://www.w3.org/2000/svg"
           style={{height:0,width:0,position:"absolute"}}>
           <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5"
+                    markerWidth="5" markerHeight="5"
+                    markerUnits="strokeWidth"
+                    orient="auto-start-reverse">
+              <path d="M 0 0 L 8 4 L 8 6 L 0 10 z"
+                    strokeLinejoin="round"
+                    strokeLinecap="round" />
+            </marker>
             <mask id="hexMask">
               <rect x="-100" y="-100" width="200" height="200" fill="black"/>
               <polygon points="-86.6025,0 -43.30125,-75 43.30125,-75 86.6025,0 43.30125,75 -43.30125,75"
@@ -361,6 +369,27 @@ const App = () => (
                     <path
                       d="M -10 -6 L 0 0 L 10 -6 L -10 -6"
                       fill={c("cyan")}
+                      stroke={c("black")}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </g>
+                  <g id="home">
+                    <rect
+                      width="12"
+                      height="8"
+                      x="-6"
+                      y="-1"
+                      fill={c("blue")}
+                      stroke={c("black")}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <polygon
+                      points="-8,-1 0,-9 8,-1"
+                      fill={c("blue")}
                       stroke={c("black")}
                       strokeWidth="2"
                       strokeLinecap="round"

@@ -6,7 +6,7 @@ import games from "../data/games";
 import equals from "ramda/src/equals";
 
 const disabled = value => {
-  return value === undefined || value === null || equals(value, []) || equals(value, {})
+  return value === false || value === undefined || value === null || equals(value, []) || equals(value, {})
 }
 
 const ComponentSelect = () => {
@@ -40,6 +40,8 @@ const ComponentSelect = () => {
         <option disabled={!selection || disabled(game.map)} value="map-paginated">Map - Paginated</option>
         <option disabled={!selection || disabled(game.stock)} value="market">Market</option>
         <option disabled={!selection || disabled(game.stock)} value="market-paginated">Market - Paginated</option>
+        <option disabled={!selection || disabled(game.stock.par)} value="par">Par</option>
+        <option disabled={!selection || disabled(game.stock.par)} value="par-paginated">Par - Paginated</option>
         <option disabled={!selection} value="revenue">Revenue</option>
         <option disabled={!selection || disabled(game.tiles)} value="tile-manifest">Tile Manifest</option>
         <option disabled={!selection || disabled(game.tiles)} value="tiles">Tiles</option>
