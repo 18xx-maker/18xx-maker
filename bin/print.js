@@ -44,6 +44,7 @@ const server = app.listen(9000);
 
     let items = [
       'background',
+      'bankpool',
       'cards',
       'charters',
       'ipo',
@@ -54,6 +55,7 @@ const server = app.listen(9000);
       'par',
       'par-paginated',
       'revenue',
+      'revenue-paginated',
       'tile-manifest',
       'tiles',
       'tokens'
@@ -67,6 +69,11 @@ const server = app.listen(9000);
       // Break if the game doesn't include certain items
       let hasData = true;
       switch (item) {
+      case "bankpool":
+        if (!gameDef.pools) {
+          hasData = false;
+        }
+        break;
       case "cards":
         if (!gameDef.companies && !gameDef.privates && !gameDef.trains && !gameDef.players) {
           hasData = false;

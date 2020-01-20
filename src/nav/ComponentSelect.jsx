@@ -44,6 +44,7 @@ const ComponentSelect = () => {
         <option disabled={!selection || disabled(game.stock && game.stock.par && game.stock.par.values)} value="par">Par</option>
         <option disabled={!selection || disabled(game.stock && game.stock.par && game.stock.par.values)} value="par-paginated">Par - Paginated</option>
         <option disabled={!selection} value="revenue">Revenue</option>
+        <option disabled={!selection} value="revenue-paginated">Revenue - Paginated</option>
         <option disabled={!selection || disabled(game.tiles)} value="tile-manifest">Tile Manifest</option>
         <option disabled={!selection || disabled(game.tiles)} value="tiles">Tiles</option>
         <option disabled={!selection || disabled(game.companies)} value="tokens">Tokens</option>

@@ -746,9 +746,10 @@ footer a:hover {
   display: block;
 }
 
+.FullMap,
 .FullMarket,
 .FullPar,
-.FullMap {
+.FullRevenue {
   position: absolute;
   top: 0;
   left: 0;
