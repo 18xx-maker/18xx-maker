@@ -97,7 +97,7 @@ const server = app.listen(9000);
         break;
       case "par":
       case "par-paginated":
-        if (!gameDef.stock || !gameDef.stock.par) {
+        if (!gameDef.stock || !gameDef.stock.par || !gameDef.stock.par.values) {
           hasData = false;
         }
         break;
