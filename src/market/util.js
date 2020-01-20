@@ -75,6 +75,7 @@ export const getMarketData = (stock, config, paper, pagination) => {
     type: stock.type || "2D",
     ledges: stock.ledges || [],
     legend: stock.legend || [],
+    market: stock.market || [],
     par: stock.par || {},
     splitPages,
     landscape,

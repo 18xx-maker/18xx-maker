@@ -5,7 +5,6 @@ import Color from "./data/Color";
 import games from "./data/games";
 
 import Pool from "./Pool";
-import Players from "./Players";
 import PageSetup from "./PageSetup";
 
 import Currency from "./util/Currency";
@@ -67,7 +66,6 @@ const Revenue = () => {
       </div>
       <div className="pool-wrapper">
         {pools}
-        <Players players={game.players} bank={game.bank} capital={game.capital} />
       </div>
       <PageSetup landscape={true}/>
     </div>

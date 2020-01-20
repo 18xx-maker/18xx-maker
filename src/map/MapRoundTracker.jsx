@@ -20,7 +20,7 @@ const MapRoundTracker = ({roundTracker, hexWidth}) => {
         let type = roundTracker.type || "row";
 
         return (
-          <g transform={`translate(${x} ${y})`}>
+          <g transform={`translate(${x} ${y}) scale(${scale})`}>
             <RoundTracker {...{rounds, size, type}} />
           </g>
         );

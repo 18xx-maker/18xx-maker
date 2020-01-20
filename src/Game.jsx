@@ -7,6 +7,7 @@ import games from "./data/games";
 
 import About from "./About";
 import Background from "./Background";
+import BankPool from "./BankPool";
 import Cards from "./cards";
 import Charters from "./Charters";
 import IPO from "./IPO";
@@ -16,7 +17,7 @@ import Tokens from "./Tokens";
 import MapPaginated from "./map/MapPaginated";
 import MapSingle from "./map/MapSingle";
 
-import Market from "./market/Market";
+import MarketSingle from "./market/MarketSingle";
 import MarketPaginated from "./market/MarketPaginated";
 import ParSingle from "./market/ParSingle";
 import ParPaginated from "./market/ParPaginated";
@@ -49,6 +50,9 @@ const Game = () => {
         <Route path="/:game/background">
           <Background />
         </Route>
+        <Route path="/:game/bankpool">
+          <BankPool />
+        </Route>
         <Route path="/:game/cards">
           <Cards />
         </Route>
@@ -71,7 +75,7 @@ const Game = () => {
           <MapPaginated />
         </Route>
         <Route path="/:game/market" exact>
-         <Market />
+         <MarketSingle />
         </Route>
         <Route path="/:game/market-paginated">
           <MarketPaginated />
