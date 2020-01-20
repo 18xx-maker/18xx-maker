@@ -1046,7 +1046,10 @@
             "percent": 0.333,
             "name": {
               "name": "Malmö"
-            }
+            },
+            "companies": [
+              "1"
+            ]
           }
         ],
         "water": {
