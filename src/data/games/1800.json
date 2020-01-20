@@ -642,6 +642,15 @@
   "map": [
     {
       "name": "2 Player",
+      "players": {
+        "x": 490,
+        "y": 40
+      },
+      "roundTracker": {
+        "type": "round",
+        "x": 115,
+        "y": 115
+      },
       "hexes": [
         {
           "color": "offboard",

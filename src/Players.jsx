@@ -3,9 +3,11 @@ import * as R from "ramda";
 
 import Currency from "./util/Currency";
 
+import "./Players.scss";
+
 const Players = ({ players, bank, capital }) => {
   return (
-    <div className="players">
+    <div className="players" xmlns="http://www.w3.org/1999/xhtml">
       {(bank || capital) && (
         <table className="players__table players__table--static">
           <thead>

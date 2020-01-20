@@ -9,6 +9,9 @@ import Borders from "./Borders";
 import Lines from "./Lines";
 import Title from "./Title";
 
+import MapPlayers from "./MapPlayers";
+import MapRoundTracker from "./MapRoundTracker";
+
 import { getMapData, toAlpha, toCoords } from "./util";
 
 const Map = ({ name, game, coords, variation, hexWidth }) => {
@@ -40,6 +43,8 @@ const Map = ({ name, game, coords, variation, hexWidth }) => {
       {mapHexes}
       <Coordinates {...data}/>
       <Title game={game} variation={variation} hexWidth={hexWidth} />
+      <MapRoundTracker roundTracker={data.map.roundTracker} hexWidth={hexWidth} />
+      <MapPlayers players={data.map.players} hexWidth={hexWidth} />
       <Borders data={data} />
       <Lines data={data} />
     </React.Fragment>

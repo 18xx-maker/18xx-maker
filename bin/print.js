@@ -44,13 +44,18 @@ const server = app.listen(9000);
 
     let items = [
       'background',
+      'bankpool',
       'cards',
       'charters',
+      'ipo',
       'map',
       'map-paginated',
       'market',
       'market-paginated',
+      'par',
+      'par-paginated',
       'revenue',
+      'revenue-paginated',
       'tile-manifest',
       'tiles',
       'tokens'
@@ -64,6 +69,11 @@ const server = app.listen(9000);
       // Break if the game doesn't include certain items
       let hasData = true;
       switch (item) {
+      case "bankpool":
+        if (!gameDef.pools) {
+          hasData = false;
+        }
+        break;
       case "cards":
         if (!gameDef.companies && !gameDef.privates && !gameDef.trains && !gameDef.players) {
           hasData = false;
@@ -72,6 +82,11 @@ const server = app.listen(9000);
       case "tokens":
       case "charters":
         if (!gameDef.companies) {
+          hasData = false;
+        }
+        break;
+      case "ipo":
+        if (!gameDef.ipo) {
           hasData = false;
         }
         break;
@@ -84,6 +99,12 @@ const server = app.listen(9000);
       case "market":
       case "market-paginated":
         if (!gameDef.stock) {
+          hasData = false;
+        }
+        break;
+      case "par":
+      case "par-paginated":
+        if (!gameDef.stock || !gameDef.stock.par || !gameDef.stock.par.values) {
           hasData = false;
         }
         break;

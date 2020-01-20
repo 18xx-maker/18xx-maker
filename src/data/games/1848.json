@@ -435,8 +435,7 @@
     "market": [
       [
         {
-          "label": "Receivership",
-          "verticalAlign": "bottom",
+          "subLabel": "Receivership",
           "legend": 0
         },
         {
@@ -462,8 +461,7 @@
       ],
       [
         {
-          "label": "Receivership",
-          "verticalAlign": "bottom",
+          "subLabel": "Receivership",
           "legend": 0
         },
         {
@@ -497,8 +495,7 @@
       ],
       [
         {
-          "label": "Receivership",
-          "verticalAlign": "bottom",
+          "subLabel": "Receivership",
           "legend": 0
         },
         {
@@ -529,8 +526,7 @@
       ],
       [
         {
-          "label": "Receivership",
-          "verticalAlign": "bottom",
+          "subLabel": "Receivership",
           "legend": 0
         },
         {
@@ -558,8 +554,7 @@
       ],
       [
         {
-          "label": "Receivership",
-          "verticalAlign": "bottom",
+          "subLabel": "Receivership",
           "legend": 0
         },
         {
@@ -585,8 +580,7 @@
       ],
       [
         {
-          "label": "Receivership",
-          "verticalAlign": "bottom",
+          "subLabel": "Receivership",
           "legend": 0
         },
         {

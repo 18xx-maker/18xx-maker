@@ -327,7 +327,7 @@
     },
     {
       "name": "SR",
-      "color": "gray"
+      "color": "white"
     }
   ],
   "turns": [
@@ -840,6 +840,15 @@
     "70": 1
   },
   "map": {
+    "players": {
+      "x": 1230,
+      "y": 1270
+    },
+    "roundTracker": {
+      "type": "row",
+      "x": 40,
+      "y": 250
+    },
     "hexes": [
       {
         "color": "offboard",

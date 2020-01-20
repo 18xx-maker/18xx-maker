@@ -6,7 +6,7 @@ import games from "../data/games";
 import equals from "ramda/src/equals";
 
 const disabled = value => {
-  return value === undefined || value === null || equals(value, []) || equals(value, {})
+  return value === false || value === undefined || value === null || equals(value, []) || equals(value, {})
 }
 
 const ComponentSelect = () => {
@@ -33,6 +33,7 @@ const ComponentSelect = () => {
               value={selection}>
         {selection !== "" || <option value="">None</option>}
         <option disabled={!selection} value="background">Background</option>
+        <option disabled={!selection || disabled(game.pools)} value="bankpool">Bank Pool</option>
         <option disabled={!selection || disabled(game.privates || game.companies || game.trains)} value="cards">Cards</option>
         <option disabled={!selection || disabled(game.companies)} value="charters">Charters</option>
         <option disabled={!selection || disabled(game.ipo)} value="ipo">IPO</option>
@@ -40,7 +41,10 @@ const ComponentSelect = () => {
         <option disabled={!selection || disabled(game.map)} value="map-paginated">Map - Paginated</option>
         <option disabled={!selection || disabled(game.stock)} value="market">Market</option>
         <option disabled={!selection || disabled(game.stock)} value="market-paginated">Market - Paginated</option>
+        <option disabled={!selection || disabled(game.stock && game.stock.par && game.stock.par.values)} value="par">Par</option>
+        <option disabled={!selection || disabled(game.stock && game.stock.par && game.stock.par.values)} value="par-paginated">Par - Paginated</option>
         <option disabled={!selection} value="revenue">Revenue</option>
+        <option disabled={!selection} value="revenue-paginated">Revenue - Paginated</option>
         <option disabled={!selection || disabled(game.tiles)} value="tile-manifest">Tile Manifest</option>
         <option disabled={!selection || disabled(game.tiles)} value="tiles">Tiles</option>
         <option disabled={!selection || disabled(game.companies)} value="tokens">Tokens</option>

@@ -3,8 +3,8 @@
     "title": "1817",
     "designer": "Craig Bartell, Tim Flowers",
     "background": "gray",
-    "titleX": 1340,
-    "titleY": 1570,
+    "titleX": 1740,
+    "titleY": 620,
     "titleSize": 165,
     "subTitleSize": 17,
     "currency": "USD"
@@ -177,6 +177,21 @@
     "X30": 1
   },
   "map": {
+    "players": {
+      "x": 1750,
+      "y": 860
+    },
+    "roundTracker": {
+      "type": "row",
+      "x": 1700,
+      "y": 600
+    },
+    "borders": [
+      {
+        "color": "water",
+        "coords": ["D11p3", "D11p4"]
+      }
+    ],
     "hexes": [
       {
         "color": "offboard",
@@ -360,16 +375,8 @@
         ]
       },
       {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "C10"
-        ]
+        "color": "water",
+        "hexes": ["C12"]
       },
       {
         "color": "plain",
@@ -537,18 +544,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "D11"
-        ]
-      },
-      {
-        "color": "plain",
         "cities": [
           {
             "name": {
@@ -571,9 +566,9 @@
         "color": "yellow",
         "labels": [
           {
-            "angle": 120,
-            "percent": 0.8,
-            "label": "NYC"
+            "angle": 150,
+            "percent": 0.6,
+            "label": "NY"
           }
         ],
         "terrain": [
@@ -980,10 +975,12 @@
           "B23",
           "C4",
           "C6",
+          "C10",
           "C16",
           "C18",
           "D3",
           "D5",
+          "D11",
           "D15",
           "D17",
           "D21",

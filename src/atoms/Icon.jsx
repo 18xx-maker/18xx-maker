@@ -8,6 +8,9 @@ const Value = ({ type }) => {
   case "medium-city":
     icon = <use href="#medium-city" />
     break;
+  case "home":
+    icon = <use href="#home" />
+    break;
   case "charter":
     icon = <use href="#charter" />
     break;

@@ -452,6 +452,7 @@
     "type": "1Diag",
     "par": {
       "type": "double",
+      "color": "mountain",
       "values": [
         {
           "label": 100,
@@ -501,52 +502,53 @@
     },
     "market": [
       {
-        "label": "0",
+        "value": 0,
+        "color": "offboard",
         "subLabel": "Bankrupt"
       },
       {
         "legend": 1,
-        "label": "7"
+        "value": 7
       },
       {
         "legend": 1,
-        "label": "14"
+        "value": 14
       },
       {
         "legend": 1,
-        "label": "20"
+        "value": 20
       },
       {
         "legend": 1,
-        "label": "26"
+        "value": 26
       },
       {
         "legend": 1,
-        "label": "31"
+        "value": 31
       },
       {
         "legend": 1,
-        "label": "36"
+        "value": 36
       },
       {
         "par": true,
-        "label": "40"
+        "value": 40
       },
       {
         "par": true,
-        "label": "44"
+        "value": 44
       },
       {
         "par": true,
-        "label": "47"
+        "value": 47
       },
       {
         "par": true,
-        "label": "50"
+        "value": 50
       },
       {
         "par": true,
-        "label": "52"
+        "value": 52
       },
       {
         "legend": 0,
@@ -562,11 +564,11 @@
             "row": 8
           }
         ],
-        "label": "54"
+        "value": 54
       },
       {
         "par": true,
-        "label": "56"
+        "value": 56
       },
       {
         "legend": 0,
@@ -592,11 +594,11 @@
             "row": 8
           }
         ],
-        "label": "58"
+        "value": 58
       },
       {
         "par": true,
-        "label": "60"
+        "value": 60
       },
       {
         "legend": 0,
@@ -632,11 +634,11 @@
             "row": 8
           }
         ],
-        "label": "62"
+        "value": 62
       },
       {
         "par": true,
-        "label": "65"
+        "value": 65
       },
       {
         "legend": 0,
@@ -662,11 +664,11 @@
             "row": 6
           }
         ],
-        "label": "68"
+        "value": 68
       },
       {
         "par": true,
-        "label": "71"
+        "value": 71
       },
       {
         "legend": 0,
@@ -692,11 +694,11 @@
             "row": 4
           }
         ],
-        "label": "74"
+        "value": 74
       },
       {
         "par": true,
-        "label": "78"
+        "value": 78
       },
       {
         "legend": 0,
@@ -722,11 +724,11 @@
             "row": 4
           }
         ],
-        "label": "82"
+        "value": 82
       },
       {
         "par": true,
-        "label": "86"
+        "value": 86
       },
       {
         "legend": 0,
@@ -742,11 +744,11 @@
             "row": 2
           }
         ],
-        "label": "90"
+        "value": 90
       },
       {
         "par": true,
-        "label": "95"
+        "value": 95
       },
       {
         "legend": 0,
@@ -762,100 +764,101 @@
             "row": 2
           }
         ],
-        "label": "100"
+        "value": 100
       },
-      "105",
-      "110",
-      "116",
-      "122",
-      "128",
-      "134",
-      "142",
-      "150",
+      105,
+      110,
+      116,
+      122,
+      128,
+      134,
+      142,
+      150,
       {
         "legend": 1,
-        "label": "158"
-      },
-      {
-        "legend": 1,
-        "label": "166"
+        "value": 158
       },
       {
         "legend": 1,
-        "label": "174"
+        "value": 166
       },
       {
         "legend": 1,
-        "label": "182"
+        "value": 174
       },
       {
         "legend": 1,
-        "label": "191"
+        "value": 182
       },
       {
         "legend": 1,
-        "label": "200"
+        "value": 191
       },
       {
         "legend": 1,
-        "label": "210"
+        "value": 200
       },
       {
         "legend": 1,
-        "label": "220"
+        "value": 210
       },
       {
         "legend": 1,
-        "label": "230"
+        "value": 220
       },
       {
         "legend": 1,
-        "label": "240"
+        "value": 230
       },
       {
         "legend": 1,
-        "label": "250"
+        "value": 240
       },
       {
         "legend": 1,
-        "label": "260"
+        "value": 250
       },
       {
         "legend": 1,
-        "label": "270"
+        "value": 260
       },
       {
         "legend": 1,
-        "label": "280"
+        "value": 270
       },
       {
         "legend": 1,
-        "label": "290"
+        "value": 280
       },
       {
         "legend": 1,
-        "label": "300"
+        "value": 290
       },
       {
         "legend": 1,
-        "label": "310"
+        "value": 300
       },
       {
         "legend": 1,
-        "label": "320"
+        "value": 310
       },
       {
         "legend": 1,
-        "label": "330"
+        "value": 320
       },
       {
-        "label": "340",
+        "legend": 1,
+        "value": 330
+      },
+      {
+        "value": 340,
+        "color": "orange",
         "subLabel": "End of Game"
       }
     ],
     "legend": [
       {
-        "color": "blue",
+        "color": "gray",
         "description": "Company initial par values",
         "icon": "money-bill-wave"
       },
@@ -950,6 +953,15 @@
     {
       "name": "2 Player",
       "print": "landscape",
+      "players": {
+        "x": 1300,
+        "y": 730
+      },
+      "roundTracker": {
+        "type": "row",
+        "x": 0,
+        "y": 630
+      },
       "hexes": [
         {
           "color": "plain",
@@ -1646,6 +1658,15 @@
     {
       "name": "3-4 Player",
       "print": "landscape",
+      "players": {
+        "x": 1300,
+        "y": 730
+      },
+      "roundTracker": {
+        "type": "row",
+        "x": 0,
+        "y": 630
+      },
       "copy": 0,
       "hexes": [
         {

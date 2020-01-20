@@ -1,13 +1,14 @@
 import React from "react";
 
 import addIndex from "ramda/src/addIndex";
+import concat from "ramda/src/concat";
 import map from "ramda/src/map";
 
 import Color from "../data/Color";
 
 import { mapCoord } from "./util";
 
-const Line = ({ line, data }) => {
+const Line = ({ line, data, bg }) => {
   let path = "M " + map(coord => mapCoord(coord, data), line.coords).join(" L ");
 
   let width = (line.width || 8) * data.scale;
@@ -30,7 +31,7 @@ const Line = ({ line, data }) => {
     <Color context="companies">
       {c => (
         <g>
-          {line.border === false || (
+          {line.border === false || (bg && (
             <path d={path}
                   fill="none"
                   stroke={c("track")}
@@ -40,16 +41,17 @@ const Line = ({ line, data }) => {
                   strokeDasharray={strokeDashArray}
                   strokeDashoffset={strokeDashOffset}
             />
-          )}
-          <path d={path}
-                fill="none"
-                stroke={c(line.color)}
-                strokeWidth={width}
-                strokeLinecap={linecap}
-                strokeLinejoin={linejoin}
-                strokeDasharray={strokeDashArray}
-                strokeDashoffset={strokeDashOffset}
-          />
+          ))}
+          {bg || (<path d={path}
+                       fill="none"
+                       stroke={c(line.color)}
+                       strokeWidth={width}
+                       strokeLinecap={linecap}
+                       strokeLinejoin={linejoin}
+                       strokeDasharray={strokeDashArray}
+                       strokeDashoffset={strokeDashOffset}
+                 />
+                )}
         </g>
       )}
     </Color>
@@ -57,7 +59,9 @@ const Line = ({ line, data }) => {
 }
 
 const Lines = ({ data }) => {
-  return addIndex(map)((line, i) => <Line key={`line-${i}`} line={line} data={data}/>, data.lines || []);
+  let lines = addIndex(map)((b, i) => <Line key={`line-bg-${i}`} bg={true} line={b} data={data}/>, data.lines || []);
+  lines = concat(lines, addIndex(map)((b, i) => <Line key={`line-${i}`} line={b} data={data}/>, data.lines || []));
+  return lines;
 }
 
 export default Lines;

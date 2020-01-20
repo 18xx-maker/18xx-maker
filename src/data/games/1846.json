@@ -386,16 +386,16 @@
   ],
   "rounds": [
     {
-      "name": "OR2",
-      "color": "gray"
+      "name": "SR",
+      "color": "white"
     },
     {
       "name": "OR1",
-      "color": "gray"
+      "color": "yellow"
     },
     {
-      "name": "SR",
-      "color": "gray"
+      "name": "OR2",
+      "color": "yellow"
     }
   ],
   "turns": [
@@ -424,9 +424,6 @@
   ],
   "stock": {
     "type": "1D",
-    "par": {
-      "color": "orange"
-    },
     "movement": {
       "left": [
         "President sold shares",
@@ -440,6 +437,12 @@
         "[Triple] Dividend three times or more its current price (when $165 or more)"
       ]
     },
+    "ledges": [
+      {
+        "color": "orange",
+        "coords": ["4 0", "4 1", "15 1", "15 0", "4 0"]
+      }
+    ],
     "market": [
       {
         "label": "Closed",
@@ -449,50 +452,17 @@
       10,
       20,
       30,
-      {
-        "label": "40",
-        "par": true
-      },
-      {
-        "label": "50",
-        "par": true
-      },
-      {
-        "label": "60",
-        "par": true
-      },
-      {
-        "label": "70",
-        "par": true
-      },
-      {
-        "label": "80",
-        "par": true
-      },
-      {
-        "label": "90",
-        "par": true
-      },
-      {
-        "label": "100",
-        "par": true
-      },
-      {
-        "label": "112",
-        "par": true
-      },
-      {
-        "label": "124",
-        "par": true
-      },
-      {
-        "label": "137",
-        "par": true
-      },
-      {
-        "label": "150",
-        "par": true
-      },
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100,
+      112,
+      124,
+      137,
+      150,
       165,
       180,
       195,
@@ -570,6 +540,16 @@
     "619": 3
   },
   "map": {
+    "players": {
+      "x": 900,
+      "y": 1260,
+      "cellWidth": 80
+    },
+    "roundTracker": {
+      "type": "round",
+      "x": 150,
+      "y": 400
+    },
     "hexes": [
       {
         "color": "plain",
