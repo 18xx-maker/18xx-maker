@@ -7,8 +7,6 @@ import GameCompanyToken from "./tokens/GameCompanyToken";
 import Svg from "./Svg";
 import PageSetup from "./PageSetup";
 
-import Par from "./Par";
-
 import { compileCompanies, unitsToCss } from "./util";
 
 import filter from "ramda/src/filter";
@@ -23,7 +21,6 @@ const IPO = () => {
       {(config, game) => {
         let companies = compileCompanies(game);
 
-        console.log(companies, game.ipo);
         if (is(Array, game.ipo)) {
           companies = filter(company => game.ipo.includes(company.shareType), companies);
         }
@@ -38,7 +35,6 @@ const IPO = () => {
                      margin: unitsToCss(config.paper.margins),
                    }}>
                 <h2>{game.info.title} Initial Public Offering</h2>
-                <Par par={game.stock.par} legend={game.stock.legend || []} />
                 <div className="ipo__companies">
                   {map(
                     company => (

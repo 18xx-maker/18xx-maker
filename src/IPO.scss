@@ -5,14 +5,13 @@
     margin: 0;
     height: calc(0.5in - 1px);
     line-height: calc(0.5in - 1px);
-    text-align: right;
   }
 }
 
 .ipo__companies {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
   align-content: flex-start;
   height: calc(100% - 0.5in);
@@ -21,7 +20,7 @@
 
 .ipo__company {
   border: 1px solid black;
-  margin: 0 0 0.25in 0.25in;
+  margin: 0 0.25in 0.25in 0;
 }
 
 .ipo .ipo__token {

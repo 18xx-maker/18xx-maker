@@ -4,18 +4,9 @@ import { GetFont } from "../context/FontContext";
 import Color from "../data/Color";
 import Currency from "../util/Currency";
 
-import addIndex from "ramda/src/addIndex";
 import is from "ramda/src/is";
-import map from "ramda/src/map";
 
-const arrows = {
-  up: "↑",
-  down: "↓",
-  left: "←",
-  right: "→"
-};
-
-const Cell = ({ cell, data, par }) => {
+const ParCell = ({ cell, data }) => {
   if (is(String, cell)) {
     cell = {
       label: cell
@@ -38,17 +29,15 @@ const Cell = ({ cell, data, par }) => {
           {(c,t) => {
 
             // Standard colors
-            let color = cell.color ? c(cell.color) : c("plain");
-            let arrowColor = cell.arrowColor ? c(cell.arrowColor) : c("black");
+            let color = cell.color ?
+                c(cell.color) :
+                (data.par && data.par.color ?
+                 c(data.par.color)
+                 : c("gray"));
 
             // Check if legend is used
             if (Number.isInteger(cell.legend) && cell.legend < data.legend.length) {
               color = c(data.legend[cell.legend].color);
-            }
-
-            // Check if this is a par
-            if (cell.par) {
-              color = (data.par && data.par.color) ? c(data.par.color) : c("gray");
             }
 
             // Set labelColor by explicit labelColor or text color with color from above
@@ -56,50 +45,6 @@ const Cell = ({ cell, data, par }) => {
 
             let rotated = false;
             let subRotated = false;
-
-            if (data.type !== "2D" && cell.label) {
-              rotated = true;
-            }
-            if (data.type !== "2D" && cell.subLabel) {
-              subRotated = true;
-            }
-
-            let arrowNodes = addIndex(map)((arrow, i) => {
-              let left = arrow === "down" || arrow === "left";
-              let arrowPadding = (arrow === "down" || arrow === "up") ? 10 : 5;
-
-              return (
-                <text
-                  key={`arrow-${i}`}
-                  fill={arrowColor}
-                  fontFamily="display"
-                  fontStyle="bold"
-                  fontSize="15"
-                  textAnchor={left ? "start" : "end"}
-                  dominantBaseline="baseline"
-                  x={left ? 5 : data.width - 5}
-                  y={data.height - arrowPadding}
-                >
-                  {arrows[arrow] || "↻"}
-                </text>
-              );
-            }, cell.arrow ? (is(Array, cell.arrow) ? cell.arrow : [cell.arrow]) : []);
-
-            let companies = map(company => {
-              let y = data.height - ((company.row || 1) * 10);
-              return <Color context="companies">
-                  {c => (
-                    <path
-                      d={`M 5 ${y} L ${data.width - 5} ${y}`}
-                      linejoin="round"
-                      linecap="round"
-                      fill="none"
-                      stroke={c(company.color)}
-                      strokeWidth="8"
-                    />
-                  )}
-                </Color>;
-            }, cell.companies || []);
 
             let text = "value" in cell ? <Currency value={cell.value} type="market"/> : cell.label;
 
@@ -144,8 +89,6 @@ const Cell = ({ cell, data, par }) => {
                     {cell.subLabel}
                   </text>
                 )}
-                {arrowNodes}
-                {companies}
               </g>
             );
           }}
@@ -155,4 +98,4 @@ const Cell = ({ cell, data, par }) => {
   );
 };
 
-export default Cell;
+export default ParCell;

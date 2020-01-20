@@ -3,7 +3,6 @@ import React from "react";
 import addIndex from "ramda/src/addIndex";
 import map from "ramda/src/map";
 
-import { mapCoord } from "./util";
 import Color from "../data/Color";
 
 const ledgeCoord = (coord, data) => {
