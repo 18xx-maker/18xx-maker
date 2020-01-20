@@ -877,6 +877,11 @@
     "DB801": 1
   },
   "map": {
+    "roundTracker": {
+      "type": "row",
+      "x": 500,
+      "y": 180
+    },
     "hexes": [
       {
         "color": "offboard",

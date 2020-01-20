@@ -386,16 +386,16 @@
   ],
   "rounds": [
     {
-      "name": "OR2",
-      "color": "gray"
+      "name": "SR",
+      "color": "white"
     },
     {
       "name": "OR1",
-      "color": "gray"
+      "color": "yellow"
     },
     {
-      "name": "SR",
-      "color": "gray"
+      "name": "OR2",
+      "color": "yellow"
     }
   ],
   "turns": [
@@ -570,6 +570,11 @@
     "619": 3
   },
   "map": {
+    "roundTracker": {
+      "type": "round",
+      "x": 150,
+      "y": 400
+    },
     "hexes": [
       {
         "color": "plain",

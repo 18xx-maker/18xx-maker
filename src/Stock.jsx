@@ -15,7 +15,9 @@ import "./Stock.css";
 import { height, width } from "./market-utils";
 import { paperToCssMargins } from "./PageSetup";
 
-const Stock = ({cell, paper}) => {
+import { getMarketData } from "./market/util";
+
+const Stock = ({cell, paper, config}) => {
   let params = useParams();
   let [displayMode, setDisplayMode] = useState("normal");
   let handleDisplayMode = event => setDisplayMode(event.target.value);
@@ -27,6 +29,9 @@ const Stock = ({cell, paper}) => {
   }
 
   let stock = game.stock;
+
+  let data = getMarketData(stock, config, paper);
+  console.log(data);
 
   let rows = height(stock.market);
   let cols = width(stock.market);
@@ -80,10 +85,6 @@ const Stock = ({cell, paper}) => {
              stock.par.values && (
                <Par par={stock.par} legend={stock.legend || []} />
              )}
-            <Rounds
-              rounds={game.rounds}
-              horizontal={game.stock.type === "2D" ? false : true}
-            />
             <Legend
               legend={game.stock.legend || []}
               movement={game.stock.movement}
@@ -99,6 +100,7 @@ const Stock = ({cell, paper}) => {
 
 const mapStateToProps = state => ({
   cell: state.config.stock.cell,
+  config: state.config.stock,
   paper: state.config.paper
 });
 

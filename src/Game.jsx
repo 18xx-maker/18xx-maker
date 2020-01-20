@@ -16,8 +16,10 @@ import Tokens from "./Tokens";
 import MapPaginated from "./map/MapPaginated";
 import MapSingle from "./map/MapSingle";
 
-import Stock from "./Stock";
-import StockPaginated from "./StockPaginated";
+import Market from "./market/Market";
+import MarketPaginated from "./market/MarketPaginated";
+import ParSingle from "./market/ParSingle";
+import ParPaginated from "./market/ParPaginated";
 
 import TileSheet from "./TileSheet";
 import TileManifest from "./TileManifest";
@@ -69,13 +71,19 @@ const Game = () => {
           <MapPaginated />
         </Route>
         <Route path="/:game/market" exact>
-         <Stock />
+         <Market />
         </Route>
         <Route path="/:game/market-paginated">
-          <StockPaginated />
+          <MarketPaginated />
         </Route>
         <Route path="/:game/revenue">
           <Revenue />
+        </Route>
+        <Route path="/:game/par">
+          <ParSingle />
+        </Route>
+        <Route path="/:game/par-paginated">
+          <ParPaginated />
         </Route>
         <Route path="/:game/tile-manifest">
           <TileManifest />
