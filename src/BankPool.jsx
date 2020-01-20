@@ -10,6 +10,7 @@ import addIndex from "ramda/src/addIndex";
 import map from "ramda/src/map";
 
 import "./BankPool.scss";
+import PageSetup from "./PageSetup";
 
 import SvgIcon from "./SvgIcon";
 
@@ -95,7 +96,7 @@ const BankPool = () => {
                           </g>
                         ), pool.notes)}
                       </Svg>
-                      <style>{`@media print {@page {size: ${unitsToCss(printWidth)} ${unitsToCss(printHeight)};}}`}</style>
+                      <PageSetup landscape={true} />
                     </div>
                   </div>
                 ), game.pools)}
