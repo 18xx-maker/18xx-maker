@@ -21,10 +21,6 @@ const ParPaginated = () => {
         }
         let data = getParData(game.stock, config.stock, config.paper, config.pagination);
 
-        if (data.pages === 1) {
-          return <Redirect to={`/${params.game}/par`} />;
-        }
-
         let y = -25; // Start with room for margins
         let parPages = map(height => {
           let x = -25; // Start with room for margins
