@@ -37,7 +37,7 @@ const Market = () => {
         case "1Diag":
           cells = addIndex(map)((cell, i) => (
             <g key={`cell-${i}`}
-               transform={`translate(${i * data.width} 0)`}>
+               transform={`translate(${i * 0.5 * data.width} ${i % 2 == 0 ? 0 : data.height})`}>
               <Cell cell={cell} data={data} />
             </g>
           ), game.stock.market || []);
