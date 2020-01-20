@@ -787,6 +787,52 @@
       }
     ]
   },
+  "403sc": {
+    "color": "yellow",
+    "cities": [
+      {
+        "angle": 180,
+        "percent": 0.333
+      }
+    ],
+    "towns": [
+      {
+        "percent": 0.5
+      }
+    ],
+    "labels": [
+      {
+        "label": "COP",
+        "x": 40,
+        "y": 20
+      }
+    ],
+    "values": [
+      {
+        "angle": 240,
+        "percent": 0.7,
+        "value": 30
+      },
+      {
+        "angle": 45,
+        "percent": 0.7,
+        "value": 10
+      }
+    ],
+    "terrain": [
+      {
+        "cost": "K40",
+        "size": "tiny",
+        "x": -50,
+        "y": -20
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      }
+    ]
+  },
   "437": {
     "color": "yellow",
     "icons": [
