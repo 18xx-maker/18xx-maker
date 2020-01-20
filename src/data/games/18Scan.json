@@ -112,25 +112,29 @@
       "name": "Statens Järnvägar",
       "abbrev": "SJ",
       "color": "yellow",
-      "tokens": "six"
+      "tokens": "six",
+      "capital": 700
     },
     {
       "name": "Södra Stambanan",
       "minor": true,
       "abbrev": "1",
-      "color": "turquoise"
+      "color": "turquoise",
+      "capital": 260
     },
     {
       "name": "Nordvästra Stambanan",
       "minor": true,
       "abbrev": "2",
-      "color": "turquoise"
+      "color": "turquoise",
+      "capital": 220
     },
     {
       "name": "Västra Stambanan",
       "minor": true,
       "abbrev": "3",
-      "color": "turquoise"
+      "color": "turquoise",
+      "capital": 200
     }
   ],
   "trains": [

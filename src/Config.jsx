@@ -305,6 +305,7 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="currency.terrain" label="Terrain" description="Terrain costs on maps and track tiles"/>
       <Input name="currency.token" label="Token" description="Token costs on charters"/>
       <Input name="currency.train" label="Train" description="Train costs on cards and charters"/>
+      <Input name="currency.treasury" label="Treasury" description="Companies starting capital on charters"/>
       <Input name="currency.value" label="Value" description="Values on maps and track tiles"/>
       <h2>Reset</h2>
       <p>You can remove any custom settings and revert back to the defaults with this button.</p>
