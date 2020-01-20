@@ -104,7 +104,7 @@
     {
       "name": "Valtionrautatiet",
       "abbrev": "VR",
-      "color": "white",
+      "color": "cyan",
       "tokens": "four",
       "logo": "18Scan_VR"
     },
