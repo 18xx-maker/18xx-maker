@@ -87,7 +87,8 @@ const Cell = ({ cell, data, par }) => {
 
             let companies = map(company => {
               let y = data.height - ((company.row || 1) * 10);
-              return <Color context="companies">
+              return <Color key={`company-${company.row}`}
+                       context="companies">
                   {c => (
                     <path
                       d={`M 5 ${y} L ${data.width - 5} ${y}`}
