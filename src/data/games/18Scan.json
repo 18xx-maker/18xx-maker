@@ -262,7 +262,10 @@
       "revenue": 20,
       "icon": "boat",
       "company": "VR",
-      "description": "Allows up to two Companies to increase the value of a route that runs between Turku and Stockholm via the Ferry (G12) by K20. Tokens may be bought for K20 each during the Additional Token Placement step of the relevant Company's turn."
+      "description": [
+        "Comes with a 10% share of Valtionrautatiet (VR).",
+        "Allows up to two Companies to increase the value of a route that runs between Turku and Stockholm via the Ferry (G12) by K20. Tokens may be bought for K20 each during the Additional Token Placement step."
+      ]
     },
     {
       "name": "Lapland Ore Line",
@@ -270,14 +273,20 @@
       "revenue": 25,
       "icon": "coal",
       "company": "S&NJ",
-      "description": "Allows a Company to increase the its earnings by K50, if the Company has a route that includes the Kiruna Iron Mines (A20). The bonus is only added once to the Company's earnings, even if two of the Company's trains run to Kiruna. The token may be bought for K50 during the Additional Token Placement step of the relevant Company's turn."
+      "description": [
+        "Comes with a 10% share of Sveriges & Norges Järnvägar (S&NJ).",
+        "Allows a Company to increase the its earnings by K50, if the Company has a route that includes the Kiruna Iron Mines (A20). The bonus is only added once to the Company's earnings, even if two of the Company's trains run to Kiruna. The token may be bought for K50 during the Additional Token Placement step."
+      ]
     },
     {
       "name": "Sjællandske Jernbaneselskab",
       "price": 180,
       "revenue": 35,
       "company": "DSB",
-      "description": "Allows a Company to lay (or upgrade) the yellow \"Copenhagen\" tile at no cost. The special power is exercised in the track-laying phase of the placing Company. The Private Company closes when the DSB buys its first train."
+      "description": [
+        "Comes with the president share (20%) of Danske Statsbaner (DSB).",
+        "Allows a Company to lay (or upgrade) the yellow \"Copenhagen\" tile at no cost. The special power is exercised in the track-laying phase of the placing Company. The Private Company closes when the DSB buys its first train."
+      ]
     }
   ],
   "phases": [
