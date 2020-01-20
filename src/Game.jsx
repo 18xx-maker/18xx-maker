@@ -17,6 +17,7 @@ import Tokens from "./Tokens";
 import MapPaginated from "./map/MapPaginated";
 import MapSingle from "./map/MapSingle";
 
+import Market from "./market/Market";
 import Stock from "./Stock";
 import StockPaginated from "./StockPaginated";
 
@@ -70,7 +71,7 @@ const Game = () => {
           <MapPaginated />
         </Route>
         <Route path="/:game/market" exact>
-         <Stock />
+         <Market />
         </Route>
         <Route path="/:game/market-paginated">
           <StockPaginated />
