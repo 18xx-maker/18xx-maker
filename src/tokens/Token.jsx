@@ -107,7 +107,7 @@ const Token = ({
               textStroke = "none";
               break;
             case "quarters":
-              shape = [<g transform={`rotate(${angle || 0})`}>
+              shape = [<g key="quads" transform={`rotate(${angle || 0})`}>
                          <rect key="upperLeft" x="-50" y="-50" width="50" height="50"
                                fill={c(colors[1])}
                                clipPath={`url(#${clipId})`}/>,
