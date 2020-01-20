@@ -1,11 +1,11 @@
-import logo_1830AH_BM, { ReactComponent as logo_1830AH_BM_Component } from "./1830AH/BM.svg";
-import logo_1830AH_BO, { ReactComponent as logo_1830AH_BO_Component } from "./1830AH/BO.svg";
-import logo_1830AH_CO, { ReactComponent as logo_1830AH_CO_Component } from "./1830AH/CO.svg";
-import logo_1830AH_CPR, { ReactComponent as logo_1830AH_CPR_Component } from "./1830AH/CPR.svg";
-import logo_1830AH_ERIE, { ReactComponent as logo_1830AH_ERIE_Component } from "./1830AH/ERIE.svg";
-import logo_1830AH_NNH, { ReactComponent as logo_1830AH_NNH_Component } from "./1830AH/NNH.svg";
-import logo_1830AH_NYC, { ReactComponent as logo_1830AH_NYC_Component } from "./1830AH/NYC.svg";
-import logo_1830AH_PRR, { ReactComponent as logo_1830AH_PRR_Component } from "./1830AH/PRR.svg";
+import logo_1830Mayfair_BM, { ReactComponent as logo_1830Mayfair_BM_Component } from "./1830Mayfair/BM.svg";
+import logo_1830Mayfair_BO, { ReactComponent as logo_1830Mayfair_BO_Component } from "./1830Mayfair/BO.svg";
+import logo_1830Mayfair_CO, { ReactComponent as logo_1830Mayfair_CO_Component } from "./1830Mayfair/CO.svg";
+import logo_1830Mayfair_CPR, { ReactComponent as logo_1830Mayfair_CPR_Component } from "./1830Mayfair/CPR.svg";
+import logo_1830Mayfair_ERIE, { ReactComponent as logo_1830Mayfair_ERIE_Component } from "./1830Mayfair/ERIE.svg";
+import logo_1830Mayfair_NNH, { ReactComponent as logo_1830Mayfair_NNH_Component } from "./1830Mayfair/NNH.svg";
+import logo_1830Mayfair_NYC, { ReactComponent as logo_1830Mayfair_NYC_Component } from "./1830Mayfair/NYC.svg";
+import logo_1830Mayfair_PRR, { ReactComponent as logo_1830Mayfair_PRR_Component } from "./1830Mayfair/PRR.svg";
 import logo_ACL, { ReactComponent as logo_ACL_Component } from "./ACL.svg";
 import logo_AFG, { ReactComponent as logo_AFG_Component } from "./AFG.svg";
 import logo_AMTK, { ReactComponent as logo_AMTK_Component } from "./AMTK.svg";
@@ -159,53 +159,53 @@ import logo_webdev_webpack, { ReactComponent as logo_webdev_webpack_Component } 
 import logo_webdev_yarn, { ReactComponent as logo_webdev_yarn_Component } from "./webdev/yarn.svg";
 
 export default {
-  "1830AH/BM": {
+  "1830Mayfair/BM": {
     name: "BM",
-    group: "1830AH",
-    src: logo_1830AH_BM,
-    Component: logo_1830AH_BM_Component
+    group: "1830Mayfair",
+    src: logo_1830Mayfair_BM,
+    Component: logo_1830Mayfair_BM_Component
   },
-  "1830AH/BO": {
+  "1830Mayfair/BO": {
     name: "BO",
-    group: "1830AH",
-    src: logo_1830AH_BO,
-    Component: logo_1830AH_BO_Component
+    group: "1830Mayfair",
+    src: logo_1830Mayfair_BO,
+    Component: logo_1830Mayfair_BO_Component
   },
-  "1830AH/CO": {
+  "1830Mayfair/CO": {
     name: "CO",
-    group: "1830AH",
-    src: logo_1830AH_CO,
-    Component: logo_1830AH_CO_Component
+    group: "1830Mayfair",
+    src: logo_1830Mayfair_CO,
+    Component: logo_1830Mayfair_CO_Component
   },
-  "1830AH/CPR": {
+  "1830Mayfair/CPR": {
     name: "CPR",
-    group: "1830AH",
-    src: logo_1830AH_CPR,
-    Component: logo_1830AH_CPR_Component
+    group: "1830Mayfair",
+    src: logo_1830Mayfair_CPR,
+    Component: logo_1830Mayfair_CPR_Component
   },
-  "1830AH/ERIE": {
+  "1830Mayfair/ERIE": {
     name: "ERIE",
-    group: "1830AH",
-    src: logo_1830AH_ERIE,
-    Component: logo_1830AH_ERIE_Component
+    group: "1830Mayfair",
+    src: logo_1830Mayfair_ERIE,
+    Component: logo_1830Mayfair_ERIE_Component
   },
-  "1830AH/NNH": {
+  "1830Mayfair/NNH": {
     name: "NNH",
-    group: "1830AH",
-    src: logo_1830AH_NNH,
-    Component: logo_1830AH_NNH_Component
+    group: "1830Mayfair",
+    src: logo_1830Mayfair_NNH,
+    Component: logo_1830Mayfair_NNH_Component
   },
-  "1830AH/NYC": {
+  "1830Mayfair/NYC": {
     name: "NYC",
-    group: "1830AH",
-    src: logo_1830AH_NYC,
-    Component: logo_1830AH_NYC_Component
+    group: "1830Mayfair",
+    src: logo_1830Mayfair_NYC,
+    Component: logo_1830Mayfair_NYC_Component
   },
-  "1830AH/PRR": {
+  "1830Mayfair/PRR": {
     name: "PRR",
-    group: "1830AH",
-    src: logo_1830AH_PRR,
-    Component: logo_1830AH_PRR_Component
+    group: "1830Mayfair",
+    src: logo_1830Mayfair_PRR,
+    Component: logo_1830Mayfair_PRR_Component
   },
   "ACL": {
     name: "ACL",

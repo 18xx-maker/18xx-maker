@@ -209,6 +209,7 @@ const Config = ({config, setConfig, resetConfig}) => {
         <option value="rob">Rails on Boards</option>
         <option value="B18TK">B18TK</option>
         <option value="broggles">broggles</option>
+        <option value="theiss">theiss</option>
       </select>
       <CompaniesThemePreview/>
       <p className="description">The company theme determines which colors are used for all of the elements on the maps and tiles.</p>
