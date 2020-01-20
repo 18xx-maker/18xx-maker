@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import * as R from "ramda";
 
+import any from "ramda/src/any";
 import filter from "ramda/src/filter";
 
 import tiles from "../data/tiles";
@@ -10,12 +11,26 @@ import Svg from "../Svg";
 import ColorContext from "../context/ColorContext";
 
 const Tiles = ({color}) => {
+  let [tileFilter, setTileFilter] = useState("");
+
   let ids = R.sortWith(
     [
       R.ascend(id => Number(id.split("|")[0] || 0)),
       R.ascend(id => Number(id.split("|")[1] || 0))
     ],
-    R.keys(filter(t => t.color === color, tiles))
+    R.keys(filter(t => {
+      if (!t.color) {
+        console.log(t);
+      }
+
+      if (!t || tileFilter === "") {
+        return true;
+      }
+
+      return t.color.includes(tileFilter.toLowerCase()) ||
+        t.id.toLowerCase().includes(tileFilter.toLowerCase()) ||
+        any(label => label.label.toLowerCase().includes(tileFilter.toLowerCase()), t.labels || []);
+    }, tiles))
   );
 
   let tileNodes = R.map(id => {
@@ -30,9 +45,19 @@ const Tiles = ({color}) => {
     );
   }, ids);
 
+  let handleChange = event => {
+    setTileFilter(event.target.value);
+  };
+
   return (
     <ColorContext.Provider value="tile">
-      <div className="tiles">{tileNodes}</div>
+      <div className="tiles">
+        <h3>All Tiles</h3>
+        <label>
+          Filter: <input type="text" value={tileFilter} onChange={handleChange}/>
+        </label>
+        {tileNodes}
+      </div>
     </ColorContext.Provider>
   );
 };

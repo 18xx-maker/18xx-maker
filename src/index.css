@@ -753,3 +753,11 @@ footer a:hover {
   top: 0;
   left: 0;
 }
+
+.tiles {
+  margin: 0.25in;
+}
+
+.tiles label {
+  display: block;
+}
