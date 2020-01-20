@@ -291,6 +291,39 @@
         "Comes with the president share (20%) of Danske Statsbaner (DSB).",
         "Allows a Company to lay (or upgrade) the yellow \"Copenhagen\" tile at no cost. The special power is exercised in the track-laying phase of the placing Company. The Private Company closes when the DSB buys its first train."
       ]
+    },
+    {
+      "name": "Södra Stambanan",
+      "price": 260,
+      "company": "1",
+      "hex": "G4",
+      "description": [
+        "Starts in Malmö (G4)",
+        "Destination: Göteborg (E6)",
+        "Starts with K260 in the treasury"
+      ]
+    },
+    {
+      "name": "Nordvästra Stambanan",
+      "price": 220,
+      "company": "2",
+      "hex": "F11",
+      "description": [
+        "Starts in Stockholm (F11)",
+        "Destination: Trondheim (B11)",
+        "Starts with K220 in the treasury"
+      ]
+    },
+    {
+      "name": "Västra Stambanan",
+      "price": 200,
+      "company": "3",
+      "hex": "F11",
+      "description": [
+        "Starts in Stockholm (F11)",
+        "Destination: Oslo (D7)",
+        "Starts with K200 in the treasury"
+      ]
     }
   ],
   "phases": [
