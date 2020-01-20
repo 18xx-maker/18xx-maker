@@ -84,7 +84,7 @@ const Train = ({ train, blackBand }) => {
                     <div className="train__name" style={{ color: config.trains.style === "color" ? t(c(color)) : c(color) }}>{name}</div>
                     <div className="train__price"
                          style={{ backgroundColor: config.trains.style === "color" ? c(color) : null,
-                                  color: t(c(color)) }}>
+                                  color: config.trains.style === "color" ? t(c(color)) : c(color) }}>
                       <Currency value={price} type="train"/>
                     </div>
                     {description && <div className="train__description">{description}</div>}
