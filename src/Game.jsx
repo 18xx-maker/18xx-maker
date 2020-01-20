@@ -11,7 +11,6 @@ import BankPool from "./BankPool";
 import Cards from "./cards";
 import Charters from "./Charters";
 import IPO from "./IPO";
-import Revenue from "./Revenue";
 import Tokens from "./Tokens";
 
 import MapPaginated from "./map/MapPaginated";
@@ -21,6 +20,8 @@ import MarketSingle from "./market/MarketSingle";
 import MarketPaginated from "./market/MarketPaginated";
 import ParSingle from "./market/ParSingle";
 import ParPaginated from "./market/ParPaginated";
+import RevenueSingle from "./market/RevenueSingle";
+import RevenuePaginated from "./market/RevenuePaginated";
 
 import TileSheet from "./TileSheet";
 import TileManifest from "./TileManifest";
@@ -81,7 +82,10 @@ const Game = () => {
           <MarketPaginated />
         </Route>
         <Route path="/:game/revenue">
-          <Revenue />
+          <RevenueSingle />
+        </Route>
+        <Route path="/:game/revenue-paginated">
+          <RevenuePaginated />
         </Route>
         <Route path="/:game/par">
           <ParSingle />
