@@ -452,6 +452,7 @@
     "type": "1Diag",
     "par": {
       "type": "double",
+      "color": "mountain",
       "values": [
         {
           "label": 100,
@@ -857,7 +858,7 @@
     ],
     "legend": [
       {
-        "color": "blue",
+        "color": "gray",
         "description": "Company initial par values",
         "icon": "money-bill-wave"
       },
@@ -952,6 +953,11 @@
     {
       "name": "2 Player",
       "print": "landscape",
+      "roundTracker": {
+        "type": "row",
+        "x": 0,
+        "y": 630
+      },
       "hexes": [
         {
           "color": "plain",

@@ -728,10 +728,6 @@ footer a:hover {
     padding: 0;
   }
 
-  .stock {
-    margin: 0;
-  }
-
   .tokens {
     margin: 0;
   }
@@ -739,4 +735,21 @@ footer a:hover {
   .TileManifest {
     margin: 0 auto;
   }
+}
+
+.MapPage {
+  position: relative;
+}
+
+.MapPage svg {
+  overflow: hidden;
+  display: block;
+}
+
+.FullMarket,
+.FullPar,
+.FullMap {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

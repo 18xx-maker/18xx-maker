@@ -22,7 +22,7 @@ const Market = () => {
           return <Redirect to={`/${params.game}/background`} />;
         }
 
-        let data = getMarketData(game.stock, config.stock, config.paper);
+        let data = getMarketData(game.stock, config.stock, config.paper, config.pagination);
 
         let cells = [];
         switch (data.type) {
@@ -37,7 +37,7 @@ const Market = () => {
         case "1Diag":
           cells = addIndex(map)((cell, i) => (
             <g key={`cell-${i}`}
-               transform={`translate(${i * 0.5 * data.width} ${i % 2 == 0 ? 0 : data.height})`}>
+               transform={`translate(${i * 0.5 * data.width} ${i % 2 === 0 ? 50 : 50 + data.height})`}>
               <Cell cell={cell} data={data} />
             </g>
           ), game.stock.market || []);
@@ -81,6 +81,7 @@ const Market = () => {
                 {cells}
                 <Ledges data={data} />
               </Svg>
+              <style>{`@media print {@page {size: ${data.css.printWidth} ${data.css.printHeight};}}`}</style>
             </div>
           </React.Fragment>
         );

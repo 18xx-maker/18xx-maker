@@ -46,10 +46,13 @@ const server = app.listen(9000);
       'background',
       'cards',
       'charters',
+      'ipo',
       'map',
       'map-paginated',
       'market',
       'market-paginated',
+      'par',
+      'par-paginated',
       'revenue',
       'tile-manifest',
       'tiles',
@@ -75,6 +78,11 @@ const server = app.listen(9000);
           hasData = false;
         }
         break;
+      case "ipo":
+        if (!gameDef.ipo) {
+          hasData = false;
+        }
+        break;
       case "map":
       case "map-paginated":
         if (!gameDef.map) {
@@ -84,6 +92,12 @@ const server = app.listen(9000);
       case "market":
       case "market-paginated":
         if (!gameDef.stock) {
+          hasData = false;
+        }
+        break;
+      case "par":
+      case "par-paginated":
+        if (!gameDef.stock || !gameDef.stock.par) {
           hasData = false;
         }
         break;
