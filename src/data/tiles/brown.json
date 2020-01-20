@@ -2226,6 +2226,50 @@
       }
     ]
   },
+  "584sc": {
+    "color": "brown",
+    "rotations": 1,
+    "cities": [
+      {
+        "size": 3,
+        "rotate": 180
+      }
+    ],
+    "labels": [
+      {
+        "label": "COP",
+        "angle": 147.5,
+        "percent": 0.85
+      }
+    ],
+    "values": [
+      {
+        "angle": 270,
+        "percent": 0.9,
+        "value": 60
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
   "593": {
     "color": "brown",
     "values": [

@@ -1135,6 +1135,40 @@
       }
     ]
   },
+  "121sc": {
+    "color": "green",
+    "rotations": 2,
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 50
+      }
+    ],
+    "labels": [
+      {
+        "label": "COP",
+        "angle": 150,
+        "percent": 0.8
+      }
+    ],
+    "cities": [
+      {
+        "size": 2
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
   "141": {
     "color": "green",
     "centerTowns": [
