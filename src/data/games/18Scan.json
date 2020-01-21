@@ -605,7 +605,40 @@
     "81": 3,
     "82": 3,
     "83": 3,
-    "121sc": 1,
+    "121": {
+      "color": "green",
+      "rotations": 2,
+      "values": [
+        {
+          "angle": 210,
+          "percent": 0.8,
+          "value": 50
+        }
+      ],
+      "labels": [
+        {
+          "label": "COP",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
+      "cities": [
+        {
+          "size": 2
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 5
+        }
+      ]
+    },
     "141": 3,
     "142": 3,
     "143": 3,
@@ -613,12 +646,100 @@
     "145": 3,
     "146": 3,
     "147": 4,
-    "403sc": 1,
+    "403": {
+      "color": "yellow",
+      "cities": [
+        {
+          "angle": 180,
+          "percent": 0.333
+        }
+      ],
+      "towns": [
+        {
+          "percent": 0.5
+        }
+      ],
+      "labels": [
+        {
+          "label": "COP",
+          "x": 40,
+          "y": 20
+        }
+      ],
+      "values": [
+        {
+          "angle": 240,
+          "percent": 0.7,
+          "value": 30
+        },
+        {
+          "angle": 45,
+          "percent": 0.7,
+          "value": 10
+        }
+      ],
+      "terrain": [
+        {
+          "cost": "K40",
+          "size": "tiny",
+          "x": -50,
+          "y": -20
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        }
+      ]
+    },
     "544": 3,
     "545": 3,
     "546": 4,
     "582": 2,
-    "584sc": 1,
+    "584": {
+      "color": "brown",
+      "rotations": 1,
+      "cities": [
+        {
+          "size": 3,
+          "rotate": 180
+        }
+      ],
+      "labels": [
+        {
+          "label": "COP",
+          "angle": 147.5,
+          "percent": 0.85
+        }
+      ],
+      "values": [
+        {
+          "angle": 270,
+          "percent": 0.9,
+          "value": 60
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
     "622": 3,
     "623": 1
   },
