@@ -502,9 +502,10 @@
     },
     "market": [
       {
-        "value": 0,
         "color": "offboard",
-        "subLabel": "Bankrupt"
+        "value": 0,
+        "subLabel": "Bankrupt",
+        "height": 2
       },
       {
         "legend": 1,
@@ -829,7 +830,10 @@
       {
         "value": 340,
         "color": "orange",
-        "subLabel": "End of Game"
+        "subLabel": "End of Game",
+        "right": true,
+        "bottom": true,
+        "height": 2
       }
     ],
     "legend": [
