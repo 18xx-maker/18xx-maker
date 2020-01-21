@@ -203,7 +203,7 @@
     {
       "name": "London & South Western Railway",
       "abbrev": "LSWR",
-      "color": "lightGreen",
+      "color": "lime",
       "shares": [
         {
           "quantity": 1,
@@ -243,7 +243,7 @@
     {
       "name": "Great Central Railway",
       "abbrev": "GCR",
-      "color": "salmon",
+      "color": "lavender",
       "shares": [
         {
           "quantity": 1,
@@ -263,7 +263,7 @@
     {
       "name": "Great Northern Railway",
       "abbrev": "GNR",
-      "color": "nude",
+      "color": "tan",
       "shares": [
         {
           "quantity": 1,
@@ -328,7 +328,7 @@
         40,
         100
       ],
-      "color": "gray",
+      "color": "natural",
       "shares": [
         {
           "quantity": 1,
@@ -982,102 +982,161 @@
       "width": 0.7,
       "height": 0.85
     },
-    "type": "2D",
-    "par": {
-      "color": "orange"
-    },
+    "type": "1D",
     "movement": {},
     "market": [
-      [
-        {
-          "label": "Closed",
-          "color": "black",
-          "textColor": "white"
-        },
-        {
-          "label": "5",
-          "color": "yellow"
-        },
-        {
-          "label": "10",
-          "color": "yellow"
-        },
-        {
-          "label": "16",
-          "color": "yellow"
-        },
-        {
-          "label": "24",
-          "color": "yellow"
-        },
-        {
-          "label": "34",
-          "color": "yellow"
-        },
-        {
-          "label": "42",
-          "color": "yellow"
-        },
-        {
-          "label": "49",
-          "color": "yellow"
-        },
-        55,
-        61,
-        {
-          "label": "67",
-          "subLabel": "G&SWR & LBSC",
-          "par": true
-        },
-        {
-          "label": "71",
-          "subLabel": "GCR, GNR, L&YR, & SECR",
-          "par": true
-        },
-        {
-          "label": "76",
-          "subLabel": "CR, GER, LSWR, & NBR",
-          "par": true
-        },
-        {
-          "label": "82",
-          "subLabel": "MR & NER",
-          "par": true
-        },
-        {
-          "label": "90",
-          "subLabel": "GWR",
-          "par": true
-        },
-        {
-          "label": "100",
-          "subLabel": "LNWR",
-          "par": true
-        },
-        112,
-        126,
-        142,
-        160,
-        180,
-        205,
-        230,
-        255,
-        280,
-        300,
-        320,
-        340,
-        360,
-        380,
-        400,
-        420,
-        440,
-        460,
-        480,
-        {
-          "label": "500",
-          "subLabel": "End of Game"
-        }
-      ]
+      {
+        "value": 0,
+        "subLabel": "Closed",
+        "color": "black",
+        "textColor": "white"
+      },
+      {
+        "value": 5,
+        "color": "yellow"
+      },
+      {
+        "value": 10,
+        "color": "yellow"
+      },
+      {
+        "value": 16,
+        "color": "yellow"
+      },
+      {
+        "value": 24,
+        "color": "yellow"
+      },
+      {
+        "value": 34,
+        "color": "yellow"
+      },
+      {
+        "value": 42,
+        "color": "yellow"
+      },
+      {
+        "value": 49,
+        "color": "yellow"
+      },
+      55,
+      61,
+      {
+        "value": 67,
+        "companies": [
+          {
+            "abbrev": "GSWR",
+            "row": 1
+          },
+          {
+            "abbrev": "LBSC",
+            "row": 2
+          }
+        ],
+        "par": true
+      },
+      {
+        "value": 71,
+        "companies": [
+          {
+            "abbrev": "GCR",
+            "row": 1
+          },
+          {
+            "abbrev": "GNR",
+            "row": 2
+          },
+          {
+            "abbrev": "L&YR",
+            "row": 3
+          },
+          {
+            "abbrev": "SECR",
+            "row": 4
+          }
+        ],
+        "par": true
+      },
+      {
+        "value": 76,
+        "companies": [
+          {
+            "abbrev": "CR",
+            "row": 1
+          },
+          {
+            "abbrev": "GER",
+            "row": 2
+          },
+          {
+            "abbrev": "LSWR",
+            "row": 3
+          },
+          {
+            "abbrev": "NBR",
+            "row": 4
+          }
+        ],
+        "par": true
+      },
+      {
+        "value": 82,
+        "companies": [
+          {
+            "abbrev": "MR",
+            "row": 1
+          },
+          {
+            "abbrev": "NER",
+            "row": 2
+          }
+        ],
+        "par": true
+      },
+      {
+        "value": 90,
+        "companies": [
+          {
+            "abbrev": "GWR",
+            "row": 1
+          }
+        ],
+        "par": true
+      },
+      {
+        "value": 100,
+        "companies": [
+          {
+            "abbrev": "LNWR",
+            "row": 1
+          }
+        ],
+        "par": true
+      },
+      112,
+      126,
+      142,
+      160,
+      180,
+      205,
+      230,
+      255,
+      280,
+      300,
+      320,
+      340,
+      360,
+      380,
+      400,
+      420,
+      440,
+      460,
+      480,
+      {
+        "value": 500,
+        "color": "red",
+        "subLabel": "End of Game"
+      }
     ]
   },
   "tiles": {
