@@ -6,7 +6,7 @@ import map from "ramda/src/map";
 
 import { unitsToCss } from "./util";
 
-export const getRoundTrackerData = (rounds, size, type) => {
+export const getRoundTrackerData = (rounds, size, type, rotation) => {
   let getI = i => (type === "row-reverse" || type === "col-reverse") ? rounds.length - (i + 1) : i;
 
   let getX = i => size * 0.75;
@@ -28,8 +28,9 @@ export const getRoundTrackerData = (rounds, size, type) => {
     startY = -2.5 * size;
     let angle = 360 / rounds.length;
     let radians = angle * Math.PI / 180;
-    getX = i => Math.sin(i * radians) * (size * 1.5);
-    getY = i => Math.cos(i * radians) * (size * -1.5);
+    let radianRotation = (rotation || 0) * Math.PI / 180;
+    getX = i => Math.sin((i * radians) + radianRotation) * (size * 1.5);
+    getY = i => Math.cos((i * radians) + radianRotation) * (size * -1.5);
     break;
   default:
     break;
@@ -86,8 +87,8 @@ export const getRoundTrackerData = (rounds, size, type) => {
     }
   };
 };
-const RoundTracker = ({ rounds, size, type }) => {
-  let data = getRoundTrackerData(rounds, size, type);
+const RoundTracker = ({ rounds, size, type, rotation }) => {
+  let data = getRoundTrackerData(rounds, size, type, rotation);
 
   let roundNodes = addIndex(map)((round, index) => {
     let arrow = null;

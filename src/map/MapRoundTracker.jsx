@@ -22,10 +22,11 @@ const MapRoundTracker = ({roundTracker, hexWidth}) => {
         let rounds = game.rounds;
         let size = config.tokens.marketTokenSize;
         let type = roundTracker.type || "row";
+        let rotation = roundTracker.rotation || 0;
 
         return (
           <g transform={`translate(${x} ${y}) scale(${scale})`}>
-            <RoundTracker {...{rounds, size, type}} />
+            <RoundTracker {...{rounds, size, type, rotation}} />
           </g>
         );
       }}
