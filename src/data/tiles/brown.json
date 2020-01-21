@@ -3855,6 +3855,7 @@
   },
   "978": {
     "color": "brown",
+    "group": "offboard",
     "values": [
       {
         "angle": 210,
@@ -3910,6 +3911,7 @@
   },
   "979": {
     "color": "brown",
+    "group": "offboard",
     "rotations": 2,
     "values": [
       {
@@ -3966,6 +3968,7 @@
   },
   "980": {
     "color": "brown",
+    "group": "offboard",
     "values": [
       {
         "angle": 210,
@@ -4021,6 +4024,7 @@
   },
   "985": {
     "color": "brown",
+    "group": "offboard",
     "values": [
       {
         "angle": 210,
@@ -4076,6 +4080,7 @@
   },
   "986": {
     "color": "brown",
+    "group": "offboard",
     "values": [
       {
         "angle": 210,
@@ -4146,6 +4151,7 @@
   },
   "987": {
     "color": "brown",
+    "group": "offboard",
     "labels": [
       {
         "label": "HQG",
@@ -4277,6 +4283,9 @@
   },
   "485|a": {
     "color": "brown",
+    "group": "485",
+    "mask": "hexMask",
+    "rotation": 60,
     "rotations": 1,
     "values": [
       {
@@ -4338,6 +4347,9 @@
   },
   "485|b": {
     "color": "brown",
+    "group": "485",
+    "mask": "hexMask",
+    "rotation": 60,
     "rotations": 1,
     "values": [
       {
@@ -4378,6 +4390,9 @@
   },
   "486|a": {
     "color": "brown",
+    "group": "486",
+    "mask": "hexMask",
+    "rotation": 60,
     "rotations": 1,
     "values": [
       {
@@ -4394,7 +4409,7 @@
     "cities": [
       {
         "angle": 300,
-        "percent": 0.333,
+        "percent": 0.32,
         "size": 2,
         "rotation": 30,
         "extend": "right",
@@ -4439,6 +4454,9 @@
   },
   "486|b": {
     "color": "brown",
+    "group": "486",
+    "mask": "hexMask",
+    "rotation": 60,
     "rotations": 1,
     "values": [
       {
@@ -4450,7 +4468,7 @@
     "cities": [
       {
         "angle": 120,
-        "percent": 0.333,
+        "percent": 0.35,
         "size": 2,
         "rotation": 30,
         "extend": "left"

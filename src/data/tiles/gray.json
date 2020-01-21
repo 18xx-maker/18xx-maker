@@ -173,6 +173,7 @@
   },
   "119": {
     "color": "green/brown",
+    "group": "individual",
     "rotations": 3,
     "values": [
       {
@@ -279,6 +280,7 @@
   },
   "166": {
     "color": "brown/gray",
+    "group": "individual",
     "values": [
       {
         "value": 40,
@@ -1032,6 +1034,7 @@
   },
   "989": {
     "color": "gray",
+    "group": "offboard",
     "values": [
       {
         "angle": 210,
@@ -1095,6 +1098,7 @@
   },
   "990": {
     "color": "gray",
+    "group": "offboard",
     "rotations": 1,
     "labels": [
       {
@@ -1250,6 +1254,7 @@
   },
   "1200": {
     "color": "brown/gray",
+    "group": "individual",
     "values": [
       {
         "value": 10,

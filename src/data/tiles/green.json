@@ -4930,6 +4930,7 @@
   },
   "971": {
     "color": "green",
+    "group": "offboard",
     "values": [
       {
         "angle": 210,
@@ -4979,6 +4980,7 @@
   },
   "972": {
     "color": "green",
+    "group": "offboard",
     "values": [
       {
         "angle": 210,
@@ -5028,6 +5030,7 @@
   },
   "973": {
     "color": "green",
+    "group": "offboard",
     "rotations": 3,
     "values": [
       {
@@ -5078,6 +5081,7 @@
   },
   "974": {
     "color": "green",
+    "group": "offboard",
     "values": [
       {
         "angle": 210,
@@ -5222,6 +5226,9 @@
   },
   "479|a": {
     "color": "green",
+    "group": "479",
+    "mask": "hexMask",
+    "rotation": 60,
     "rotations": 1,
     "values": [
       {
@@ -5233,7 +5240,7 @@
     "cities": [
       {
         "angle": 300,
-        "percent": 0.33,
+        "percent": 0.29,
         "size": 2,
         "rotation": 30,
         "name": {
@@ -5269,6 +5276,9 @@
   },
   "479|b": {
     "color": "green",
+    "group": "479",
+    "mask": "hexMask",
+    "rotation": 60,
     "rotations": 1,
     "values": [
       {
