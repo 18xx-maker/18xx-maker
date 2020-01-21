@@ -32,7 +32,6 @@ import includes from "ramda/src/includes";
 import is from "ramda/src/is";
 import keys from "ramda/src/keys";
 import map from "ramda/src/map";
-import prop from "ramda/src/prop";
 import propOr from "ramda/src/propOr";
 import reduce from "ramda/src/reduce";
 import repeat from "ramda/src/repeat";
