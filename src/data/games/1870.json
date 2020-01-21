@@ -961,6 +961,10 @@
   },
   "map": {
     "print": "landscape",
+    "players": {
+      "x": 1035,
+      "y": 2050
+    },
     "roundTracker": {
       "type": "row",
       "x": 600,
