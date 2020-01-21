@@ -1,14 +1,14 @@
 {
-	"info": {
-		"title": "1825 DB3",
-		"designer": "Francis Tresham",
-		"background": "background"
-	},
-	"colors": {
-	  "background": "#aa88aa"
-	},
-	"tiles": {
-          "58": 1,
-          "206": 1
-	}
+  "info": {
+    "title": "1825 DB3",
+    "designer": "Francis Tresham",
+    "background": "background"
+  },
+  "colors": {
+    "background": "#aa88aa"
+  },
+  "tiles": {
+    "58": 1,
+    "206": 1
+  }
 }

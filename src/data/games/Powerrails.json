@@ -656,6 +656,7 @@
     "5|PR": {
       "quantity": 1,
       "color": "yellow",
+      "group": "blue",
       "rotations": 3,
       "track": [
         {
@@ -705,6 +706,7 @@
     "6|PR": {
       "quantity": 1,
       "color": "yellow",
+      "group": "blue",
       "track": [
         {
           "side": 1
@@ -753,6 +755,7 @@
     "14|PR": {
       "quantity": 3,
       "color": "green",
+      "group": "blue",
       "rotations": 3,
       "values": [
         {
@@ -810,6 +813,7 @@
     "15|PR": {
       "quantity": 3,
       "color": "green",
+      "group": "blue",
       "values": [
         {
           "angle": 210,
@@ -866,6 +870,7 @@
     "53|PR": {
       "quantity": 1,
       "color": "green",
+      "group": "black",
       "rotations": 2,
       "values": [
         {
@@ -933,6 +938,7 @@
     "54|PR": {
       "quantity": 1,
       "color": "green",
+      "group": "blue",
       "values": [
         {
           "angle": 90,
@@ -1002,6 +1008,7 @@
     "54D|PR": {
       "quantity": 1,
       "color": "green",
+      "group": "black",
       "values": [
         {
           "angle": 90,
@@ -1077,6 +1084,7 @@
     "57|PR": {
       "quantity": 5,
       "color": "yellow",
+      "group": "blue",
       "rotations": 3,
       "borders": [
         {
@@ -1123,6 +1131,7 @@
     "59|PR": {
       "quantity": 1,
       "color": "green",
+      "group": "blue",
       "values": [
         {
           "angle": 180,
@@ -1191,6 +1200,7 @@
     "59A|PR": {
       "quantity": 1,
       "color": "green",
+      "group": "blue",
       "values": [
         {
           "angle": 150,
@@ -1259,6 +1269,7 @@
     "59B|PR": {
       "quantity": 1,
       "color": "green",
+      "group": "blue",
       "values": [
         {
           "angle": 190,
@@ -1327,6 +1338,7 @@
     "59C|PR": {
       "quantity": 1,
       "color": "green",
+      "group": "blue",
       "values": [
         {
           "angle": 90,
@@ -1395,6 +1407,7 @@
     "61|PR": {
       "quantity": 1,
       "color": "brown",
+      "group": "black",
       "values": [
         {
           "angle": 210,
@@ -1464,6 +1477,7 @@
     "62|PR": {
       "quantity": 1,
       "color": "brown",
+      "group": "blue",
       "values": [
         {
           "angle": -90,
@@ -1533,6 +1547,7 @@
     "63|PR": {
       "quantity": 5,
       "color": "brown",
+      "group": "blue",
       "rotations": 1,
       "values": [
         {
@@ -1596,6 +1611,7 @@
     "64|PR": {
       "quantity": 1,
       "color": "brown",
+      "group": "blue",
       "values": [
         {
           "angle": 60,
@@ -1664,6 +1680,7 @@
     "65|PR": {
       "quantity": 1,
       "color": "brown",
+      "group": "blue",
       "values": [
         {
           "angle": 60,
@@ -1733,6 +1750,7 @@
     "66|PR": {
       "quantity": 1,
       "color": "brown",
+      "group": "blue",
       "values": [
         {
           "angle": 240,
@@ -1802,6 +1820,7 @@
     "67|PR": {
       "quantity": 1,
       "color": "brown",
+      "group": "blue",
       "values": [
         {
           "angle": 120,
@@ -1873,6 +1892,7 @@
     "68|PR": {
       "quantity": 1,
       "color": "brown",
+      "group": "blue",
       "values": [
         {
           "angle": 120,
@@ -1939,6 +1959,7 @@
     "161|PR": {
       "quantity": 1,
       "color": "gray",
+      "group": "black",
       "rotations": 1,
       "values": [
         {
@@ -2012,6 +2033,7 @@
     "162|PR": {
       "quantity": 1,
       "color": "gray",
+      "group": "blue",
       "values": [
         {
           "angle": -90,
@@ -2089,6 +2111,7 @@
     "163|PR": {
       "quantity": 2,
       "color": "gray",
+      "group": "blue",
       "rotations": 1,
       "values": [
         {
@@ -2150,6 +2173,7 @@
     "164|PR": {
       "quantity": 2,
       "color": "gray",
+      "group": "blue",
       "rotations": 1,
       "values": [
         {
@@ -2220,6 +2244,7 @@
     "165|PR": {
       "quantity": 1,
       "color": "gray",
+      "group": "blue",
       "values": [
         {
           "angle": -90,
@@ -2297,6 +2322,7 @@
     "168|PR": {
       "quantity": 2,
       "color": "gray",
+      "group": "blue",
       "values": [
         {
           "angle": 150,
@@ -2375,6 +2401,7 @@
     "262|PR": {
       "quantity": 1,
       "color": "tile_pink",
+      "group": "blue",
       "values": [
         {
           "angle": -93,
@@ -2474,6 +2501,7 @@
     "263|PR": {
       "quantity": 2,
       "color": "tile_pink",
+      "group": "blue",
       "rotations": 1,
       "values": [
         {

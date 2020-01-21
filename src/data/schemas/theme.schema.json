@@ -22,7 +22,8 @@
           "offboard": { "$ref": "#/definitions/color" },
           "mountain": { "$ref": "#/definitions/color" },
           "water": { "$ref": "#/definitions/color" },
-          "land": { "$ref": "#/definitions/color" }
+          "land": { "$ref": "#/definitions/color" },
+          "river": { "$ref": "#/definitions/color" }
         },
         "additionalProperties": false
       }]
@@ -39,8 +40,10 @@
         "offboard": { "$ref": "#/definitions/themeColor" },
         "mountain": { "$ref": "#/definitions/themeColor" },
         "water": { "$ref": "#/definitions/themeColor" },
+        "river": { "$ref": "#/definitions/themeColor" },
         "land": { "$ref": "#/definitions/themeColor" },
         "orange": { "$ref": "#/definitions/themeColor" },
+        "red": { "$ref": "#/definitions/themeColor" },
         "white": { "$ref": "#/definitions/themeColor" },
         "black": { "$ref": "#/definitions/themeColor" },
         "track": { "$ref": "#/definitions/themeColor" },

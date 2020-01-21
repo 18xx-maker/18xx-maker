@@ -56,6 +56,7 @@
         "terrain": { "type": "boolean" },
         "token": { "type": "boolean" },
         "train": { "type": "boolean" },
+        "treasury": { "type": "boolean" },
         "value": { "type": "boolean" }
       },
       "required": ["bank", "capital", "market", "offboard", "par", "private", "revenue", "terrain", "token", "train", "value"],
@@ -185,6 +186,15 @@
     "overrideSelection": {
       "type": "array",
       "items": { "type": "integer", "minimum": 0 }
+    },
+    "maps": {
+      "type": "object",
+      "required": ["players", "roundTracker"],
+      "additionalProperties": false,
+      "properties": {
+        "players": { "type": "boolean" },
+        "roundTracker": { "type": "boolean" }
+      }
     },
     "plainMapCompanies": { "type": "boolean" },
     "straightCityNames": { "type": "boolean" },

@@ -139,7 +139,15 @@ const TileSheet = ({ paper, layout, hexWidth, gaps }) => {
   let c = getTileSheetContext(layout, paper, hexWidth);
 
   let tiles = gatherTiles(game.tiles);
-  let groupedByColor = groupBy(prop("color"), tiles);
+
+  // Let's group by color OR a group field you can provide
+  let groupedByColor = addIndex(groupBy)((tile, i) => {
+    if (tile.group === "individual") {
+      return `z-${i}`;
+    }
+
+    return tile.group || tile.color;
+  }, tiles);
 
   let separatedTiles = compose(
     reduce((tiles, color) => {
@@ -262,6 +270,15 @@ const TileSheet = ({ paper, layout, hexWidth, gaps }) => {
 
           sides.push(clone(currentSides));
         }
+
+        // Overrides from tile definitions
+        if (hex.mask) {
+          mask = hex.mask;
+        }
+
+        if (hex.rotation) {
+          rotation = hex.rotation;
+        };
 
         return (
           <g mask={`url(#${mask})`}

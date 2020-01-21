@@ -689,6 +689,14 @@
     "70": 1
   },
   "map": {
+    "roundTracker": {
+      "x": 38,
+      "y": 1450
+    },
+    "players": {
+      "x": 50,
+      "y": 1535
+    },
     "hexes": [
       {
         "color": "plain",
