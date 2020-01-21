@@ -18,13 +18,13 @@ const Market = ({data, title}) => {
     bottomMarket = map(cell => cell && cell.bottom ? cell : null, data.market || []);
     market = map(cell => cell && cell.bottom ? null : cell, data.market || []);
     cells = addIndex(map)((cell, i) => (
-      <g key={`cell-${i}`}
+      <g key={`cell-bottom-${i}`}
          transform={`translate(${i * data.width} 50)`}>
         <Cell cell={cell} data={data} />
       </g>
     ), bottomMarket);
     cells = concat(cells, addIndex(map)((cell, i) => (
-      <g key={`cell-${i}`}
+      <g key={`cell-top-${i}`}
          transform={`translate(${i * data.width} 50)`}>
         <Cell cell={cell} data={data} />
       </g>
@@ -34,13 +34,13 @@ const Market = ({data, title}) => {
     bottomMarket = map(cell => cell && cell.bottom ? cell : null, data.market || []);
     market = map(cell => cell && cell.bottom ? null : cell, data.market || []);
     cells = addIndex(map)((cell, i) => (
-      <g key={`cell-${i}`}
+      <g key={`cell-bottom-${i}`}
          transform={`translate(${i * 0.5 * data.width} ${i % 2 === 0 ? 50 : 50 + data.height})`}>
         <Cell cell={cell} data={data} />
       </g>
     ), bottomMarket);
     cells = concat(cells, addIndex(map)((cell, i) => (
-      <g key={`cell-${i}`}
+      <g key={`cell-top-${i}`}
          transform={`translate(${i * 0.5 * data.width} ${i % 2 === 0 ? 50 : 50 + data.height})`}>
         <Cell cell={cell} data={data} />
       </g>
@@ -52,7 +52,7 @@ const Market = ({data, title}) => {
     // 2D
     cells = addIndex(chain)((row, y) => {
       return addIndex(map)((cell, x) => (
-        <g key={`cell-${x}-${y}`}
+        <g key={`cell-bottom-${x}-${y}`}
            transform={`translate(${x * data.width} ${y * data.height + 50})`}>
           <Cell cell={cell} data={data} />
         </g>
@@ -60,7 +60,7 @@ const Market = ({data, title}) => {
     }, bottomMarket);
     cells = concat(cells, addIndex(chain)((row, y) => {
       return addIndex(map)((cell, x) => (
-        <g key={`cell-${x}-${y}`}
+        <g key={`cell-top-${x}-${y}`}
            transform={`translate(${x * data.width} ${y * data.height + 50})`}>
           <Cell cell={cell} data={data} />
         </g>
