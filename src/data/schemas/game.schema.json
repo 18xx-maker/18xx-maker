@@ -47,7 +47,7 @@
           "percent": { "$ref": "#/definitions/numberOrSlash" },
           "revenue": { "$ref": "#/definitions/numberOrSlash" },
           "shares": { "$ref": "#/definitions/numberOrSlash" },
-          "id": { "type": "string" }
+          "variant": { "type": "string" }
         },
         "required": ["quantity"]
       }
@@ -95,7 +95,7 @@
         "extraStationTokens": { "type": "integer", "mimimum": 1},
         "currency": { "type": "string" }
       },
-      "required": ["title", "designer", "currency"],
+      "required": ["title"],
       "additionalProperties": false
     },
     "colors": {
@@ -127,7 +127,7 @@
         "required": ["name", "abbrev"],
         "properties": {
           "name": { "type": "string" },
-          "id": { "type": "string" },
+          "variant": { "type": "string" },
           "shares": {
             "oneOf": [
               { "$ref" : "#/definitions/shares" },
@@ -180,6 +180,7 @@
           "icon": { "type": "string" },
           "tile": { "type": "string" },
           "id": { "type": "string" },
+          "variant": { "type": "string" },
           "bid": {
             "oneOf": [
               { "type": "string" },
@@ -220,7 +221,7 @@
       "items": {
         "type": "object",
         "properties": {
-          "id": { "type": "string" }
+          "variant": { "type": "string" }
         },
         "additionalProperties": true
       }
@@ -229,7 +230,6 @@
   },
   "additionalProperties": false,
   "required": [
-    "info",
-    "links"
+    "info"
   ]
 }
