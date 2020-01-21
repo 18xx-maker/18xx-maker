@@ -9,6 +9,7 @@ import { getTileSheetContext } from "./tilesheet/util";
 import tileDefs from "./data/tiles";
 import { sidesFromTile } from "./atoms/Track";
 import Svg from "./Svg";
+import Page from "./util/Page";
 import PageSetup from "./PageSetup";
 import Hex from "./Hex";
 
@@ -301,6 +302,7 @@ const TileSheet = ({ paper, layout, hexWidth, gaps }) => {
     return (
       <div className="TileSheet--Page"
            key={`page-${pageIndex}`}>
+        <Page title={game.info.title} component="Tiles" current={pageIndex + 1} total={pagedTiles.length} />
         <Svg
           style={{
             width: `${c.pageWidth * 0.01}in`,
