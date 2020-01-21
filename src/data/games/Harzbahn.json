@@ -19,6 +19,8 @@
     "Round"
   ],
   "ipo": false,
+  "bank": "∞",
+  "certLimit": "∞",
   "players": [
     {
       "number": 2,
