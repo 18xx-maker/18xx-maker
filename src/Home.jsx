@@ -46,7 +46,7 @@ const Home = () => {
               <strong>Important:</strong> Please only use this site to print games for which you have a license by owning the game.
             </p>
             <p className="note" style={{backgroundColor:c("yellow"),color:t(c("yellow"))}}>
-              <strong>Note:</strong> Some games are still works in progress and in general the rendering of stock markets is not in a good place. Work will continue on this stuff.
+              <strong>Note:</strong> Some games are still works in progress. Please submit any bugs found as <a href="https://github.com/kelsin/18xx/issues">issues on github</a>!
             </p>
           </React.Fragment>
         )}
