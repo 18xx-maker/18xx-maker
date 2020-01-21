@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect, useParams } from "react-router-dom";
 
 import Config from "../data/Config";
 import Svg from "../Svg";
