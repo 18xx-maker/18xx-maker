@@ -24,15 +24,15 @@
   "rounds": [
     {
       "name": "OR1",
-      "color": "white"
+      "color": "yellow"
     },
     {
       "name": "OR2",
-      "color": "white"
+      "color": "yellow"
     },
     {
       "name": "SR",
-      "color": "white"
+      "color": "gray"
     }
   ],
   "players": [
@@ -978,6 +978,16 @@
         "hexes": ["D14"]
       }
     ],
+    "players": {
+      "x": 790,
+      "y": 1065
+    },
+    "roundTracker": {
+      "type": "round",
+      "rotation": 30,
+      "x": 950,
+      "y": 675
+    },
     "borders": [{
       "color": "water",
       "coords": ["B6p1", "B8p2", "B8p3", "B8p4", "B8p5", "B10p4", "C11p3", "C11p4", "C11p5", "C13p4"]

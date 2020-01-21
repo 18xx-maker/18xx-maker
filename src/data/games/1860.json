@@ -574,23 +574,19 @@
         "legend": 0,
         "companies": [
           {
-            "label": "NGStL",
-            "color": "yellow",
+            "abbrev": "NGStL",
             "row": 5
           },
           {
-            "label": "BHI&R",
-            "color": "pink",
+            "abbrev": "BHI&R",
             "row": 6
           },
           {
-            "label": "S&C",
-            "color": "purple",
+            "abbrev": "S&C",
             "row": 7
           },
           {
-            "label": "VYSC",
-            "color": "lime",
+            "abbrev": "VYSC",
             "row": 8
           }
         ],
@@ -604,33 +600,27 @@
         "legend": 0,
         "companies": [
           {
-            "label": "IWNJ",
-            "color": "black",
+            "abbrev": "IWNJ",
             "row": 3
           },
           {
-            "label": "FYN",
-            "color": "green",
+            "abbrev": "FYN",
             "row": 4
           },
           {
-            "label": "NGStL",
-            "color": "yellow",
+            "abbrev": "NGStL",
             "row": 5
           },
           {
-            "label": "BHI&R",
-            "color": "pink",
+            "abbrev": "BHI&R",
             "row": 6
           },
           {
-            "label": "S&C",
-            "color": "purple",
+            "abbrev": "S&C",
             "row": 7
           },
           {
-            "label": "VYSC",
-            "color": "lime",
+            "abbrev": "VYSC",
             "row": 8
           }
         ],
@@ -644,23 +634,19 @@
         "legend": 0,
         "companies": [
           {
-            "label": "IWNJ",
-            "color": "black",
+            "abbrev": "IWNJ",
             "row": 3
           },
           {
-            "label": "FYN",
-            "color": "green",
+            "abbrev": "FYN",
             "row": 4
           },
           {
-            "label": "NGStL",
-            "color": "yellow",
+            "abbrev": "NGStL",
             "row": 5
           },
           {
-            "label": "BHI&R",
-            "color": "pink",
+            "abbrev": "BHI&R",
             "row": 6
           }
         ],
@@ -674,23 +660,19 @@
         "legend": 0,
         "companies": [
           {
-            "label": "C&N",
-            "color": "cyan",
+            "abbrev": "C&N",
             "row": 1
           },
           {
-            "label": "IOW",
-            "color": "red",
+            "abbrev": "IOW",
             "row": 2
           },
           {
-            "label": "IWNJ",
-            "color": "black",
+            "abbrev": "IWNJ",
             "row": 3
           },
           {
-            "label": "FYN",
-            "color": "green",
+            "abbrev": "FYN",
             "row": 4
           }
         ],
@@ -704,23 +686,19 @@
         "legend": 0,
         "companies": [
           {
-            "label": "C&N",
-            "color": "cyan",
+            "abbrev": "C&N",
             "row": 1
           },
           {
-            "label": "IOW",
-            "color": "red",
+            "abbrev": "IOW",
             "row": 2
           },
           {
-            "label": "IWNJ",
-            "color": "black",
+            "abbrev": "IWNJ",
             "row": 3
           },
           {
-            "label": "FYN",
-            "color": "green",
+            "abbrev": "FYN",
             "row": 4
           }
         ],
@@ -734,13 +712,11 @@
         "legend": 0,
         "companies": [
           {
-            "label": "C&N",
-            "color": "cyan",
+            "abbrev": "C&N",
             "row": 1
           },
           {
-            "label": "IOW",
-            "color": "red",
+            "abbrev": "IOW",
             "row": 2
           }
         ],

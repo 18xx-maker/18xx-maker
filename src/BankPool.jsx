@@ -10,6 +10,7 @@ import addIndex from "ramda/src/addIndex";
 import map from "ramda/src/map";
 
 import "./BankPool.scss";
+import PageSetup from "./PageSetup";
 
 import SvgIcon from "./SvgIcon";
 
@@ -56,7 +57,6 @@ const BankPool = () => {
                         height={unitsToCss(usableHeight)}
                         viewBox={`0 0 ${poolWidth} ${poolHeight}`}>
                         <rect x="0" y="50"
-                              rx={config.ipo.borderRadius} ry={config.ipo.borderRadius}
                               width={poolWidth} height={poolHeight - 50}
                               stroke="black"
                               fill="white" />
@@ -95,7 +95,7 @@ const BankPool = () => {
                           </g>
                         ), pool.notes)}
                       </Svg>
-                      <style>{`@media print {@page {size: ${unitsToCss(printWidth)} ${unitsToCss(printHeight)};}}`}</style>
+                      <PageSetup landscape={true} />
                     </div>
                   </div>
                 ), game.pools)}

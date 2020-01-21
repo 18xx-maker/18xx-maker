@@ -104,7 +104,7 @@
     {
       "name": "Valtionrautatiet",
       "abbrev": "VR",
-      "color": "white",
+      "color": "cyan",
       "tokens": "four",
       "logo": "18Scan_VR"
     },
@@ -112,25 +112,29 @@
       "name": "Statens Järnvägar",
       "abbrev": "SJ",
       "color": "yellow",
-      "tokens": "six"
+      "tokens": "six",
+      "capital": 700
     },
     {
       "name": "Södra Stambanan",
       "minor": true,
       "abbrev": "1",
-      "color": "turquoise"
+      "color": "turquoise",
+      "capital": 260
     },
     {
       "name": "Nordvästra Stambanan",
       "minor": true,
       "abbrev": "2",
-      "color": "turquoise"
+      "color": "turquoise",
+      "capital": 220
     },
     {
       "name": "Västra Stambanan",
       "minor": true,
       "abbrev": "3",
-      "color": "turquoise"
+      "color": "turquoise",
+      "capital": 200
     }
   ],
   "trains": [
@@ -262,7 +266,10 @@
       "revenue": 20,
       "icon": "boat",
       "company": "VR",
-      "description": "Allows up to two Companies to increase the value of a route that runs between Turku and Stockholm via the Ferry (G12) by K20. Tokens may be bought for K20 each during the Additional Token Placement step of the relevant Company's turn."
+      "description": [
+        "Comes with a 10% share of Valtionrautatiet (VR).",
+        "Allows up to two Companies to increase the value of a route that runs between Turku and Stockholm via the Ferry (G12) by K20. Tokens may be bought for K20 each during the Additional Token Placement step."
+      ]
     },
     {
       "name": "Lapland Ore Line",
@@ -270,14 +277,53 @@
       "revenue": 25,
       "icon": "coal",
       "company": "S&NJ",
-      "description": "Allows a Company to increase the its earnings by K50, if the Company has a route that includes the Kiruna Iron Mines (A20). The bonus is only added once to the Company's earnings, even if two of the Company's trains run to Kiruna. The token may be bought for K50 during the Additional Token Placement step of the relevant Company's turn."
+      "description": [
+        "Comes with a 10% share of Sveriges & Norges Järnvägar (S&NJ).",
+        "Allows a Company to increase the its earnings by K50, if the Company has a route that includes the Kiruna Iron Mines (A20). The bonus is only added once to the Company's earnings, even if two of the Company's trains run to Kiruna. The token may be bought for K50 during the Additional Token Placement step."
+      ]
     },
     {
       "name": "Sjællandske Jernbaneselskab",
       "price": 180,
       "revenue": 35,
       "company": "DSB",
-      "description": "Allows a Company to lay (or upgrade) the yellow \"Copenhagen\" tile at no cost. The special power is exercised in the track-laying phase of the placing Company. The Private Company closes when the DSB buys its first train."
+      "description": [
+        "Comes with the president share (20%) of Danske Statsbaner (DSB).",
+        "Allows a Company to lay (or upgrade) the yellow \"Copenhagen\" tile at no cost. The special power is exercised in the track-laying phase of the placing Company. The Private Company closes when the DSB buys its first train."
+      ]
+    },
+    {
+      "name": "Södra Stambanan",
+      "price": 260,
+      "company": "1",
+      "hex": "G4",
+      "description": [
+        "Starts in Malmö (G4)",
+        "Destination: Göteborg (E6)",
+        "Starts with K260 in the treasury"
+      ]
+    },
+    {
+      "name": "Nordvästra Stambanan",
+      "price": 220,
+      "company": "2",
+      "hex": "F11",
+      "description": [
+        "Starts in Stockholm (F11)",
+        "Destination: Trondheim (B11)",
+        "Starts with K220 in the treasury"
+      ]
+    },
+    {
+      "name": "Västra Stambanan",
+      "price": 200,
+      "company": "3",
+      "hex": "F11",
+      "description": [
+        "Starts in Stockholm (F11)",
+        "Destination: Oslo (D7)",
+        "Starts with K200 in the treasury"
+      ]
     }
   ],
   "phases": [
@@ -559,7 +605,40 @@
     "81": 3,
     "82": 3,
     "83": 3,
-    "121": 1,
+    "121": {
+      "color": "green",
+      "rotations": 2,
+      "values": [
+        {
+          "angle": 210,
+          "percent": 0.8,
+          "value": 50
+        }
+      ],
+      "labels": [
+        {
+          "label": "COP",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
+      "cities": [
+        {
+          "size": 2
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 5
+        }
+      ]
+    },
     "141": 3,
     "142": 3,
     "143": 3,
@@ -567,12 +646,100 @@
     "145": 3,
     "146": 3,
     "147": 4,
-    "403": 1,
+    "403": {
+      "color": "yellow",
+      "cities": [
+        {
+          "angle": 180,
+          "percent": 0.333
+        }
+      ],
+      "towns": [
+        {
+          "percent": 0.5
+        }
+      ],
+      "labels": [
+        {
+          "label": "COP",
+          "x": 40,
+          "y": 20
+        }
+      ],
+      "values": [
+        {
+          "angle": 240,
+          "percent": 0.7,
+          "value": 30
+        },
+        {
+          "angle": 45,
+          "percent": 0.7,
+          "value": 10
+        }
+      ],
+      "terrain": [
+        {
+          "cost": "K40",
+          "size": "tiny",
+          "x": -50,
+          "y": -20
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        }
+      ]
+    },
     "544": 3,
     "545": 3,
     "546": 4,
     "582": 2,
-    "584": 1,
+    "584": {
+      "color": "brown",
+      "rotations": 1,
+      "cities": [
+        {
+          "size": 3,
+          "rotate": 180
+        }
+      ],
+      "labels": [
+        {
+          "label": "COP",
+          "angle": 147.5,
+          "percent": 0.85
+        }
+      ],
+      "values": [
+        {
+          "angle": 270,
+          "percent": 0.9,
+          "value": 60
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
     "622": 3,
     "623": 1
   },
@@ -899,7 +1066,7 @@
         ],
         "labels": [
           {
-            "label": "B",
+            "label": "COP",
             "angle": 205,
             "percent": 0.5
           }
@@ -1033,7 +1200,10 @@
             "percent": 0.333,
             "name": {
               "name": "Malmö"
-            }
+            },
+            "companies": [
+              "1"
+            ]
           }
         ],
         "water": {

@@ -47,6 +47,10 @@ const MapPlayers = ({players, hexWidth}) => {
       {c => (
         <Config>
           {(config, game) => {
+            if (!config.maps.players) {
+              return null;
+            }
+
             let line = {
               strokeWidth: 1,
               stroke: c("black"),

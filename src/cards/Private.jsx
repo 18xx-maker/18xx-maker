@@ -93,7 +93,9 @@ const Private = ({
                               <Icon type={icon} />
                             </Svg>
                           </div>}
-                  {description}
+                  {Array.isArray(description)
+                   ? description.reduce((lines, line) => <>{lines}<br />{line}</>)
+                   : description}
                 </div>
                 {bid && <div className="private__bid">Min Bid: {bid}</div>}
                 <div className="private__price"><Currency value={price} type="private"/></div>

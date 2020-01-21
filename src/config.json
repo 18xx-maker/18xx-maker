@@ -22,11 +22,16 @@
     "terrain": true,
     "token": true,
     "train": true,
+    "treasury": true,
     "value": false
   },
   "companySvgLogos": "main",
   "overrideCompanies": "none",
   "overrideSelection": [],
+  "maps": {
+    "players": true,
+    "roundTracker": true
+  },
   "plainMapCompanies": false,
   "straightCityNames": false,
   "theme": "gmt",

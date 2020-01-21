@@ -240,6 +240,10 @@ const Config = ({config, setConfig, resetConfig}) => {
              description="Draw city names straight instead of curved along the city. None of the games included with this tool are meant to be drawn this way so layout issues might be present." />
       <Input name="plainMapCompanies" label="Plain Map Company Spaces"
              description="This sets all home/destination/token spots on maps to be empty white cities with black company text instead of colored or using logos." />
+      <Input name="maps.roundTracker" label="Display Map Round Tracker"
+             description="Whether or not to show the round tracker on maps." />
+      <Input name="maps.players" label="Display Map Players Table"
+             description="Whether or not to show the player information table on maps. This includes bank and certificate limit information." />
       {/* This option isn't working yet, will add later */}
       {/* <Checkbox name="plainMapDestinations" label="Plain Map Destination Spaces" */}
       {/*           description="This sets all destination spots on maps to be empty white cities with black company text:" /> */}
@@ -301,6 +305,7 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="currency.terrain" label="Terrain" description="Terrain costs on maps and track tiles"/>
       <Input name="currency.token" label="Token" description="Token costs on charters"/>
       <Input name="currency.train" label="Train" description="Train costs on cards and charters"/>
+      <Input name="currency.treasury" label="Treasury" description="Companies starting capital on charters"/>
       <Input name="currency.value" label="Value" description="Values on maps and track tiles"/>
       <h2>Reset</h2>
       <p>You can remove any custom settings and revert back to the defaults with this button.</p>
