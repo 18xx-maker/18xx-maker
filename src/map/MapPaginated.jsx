@@ -50,7 +50,7 @@ const MapPaginated = ({ coords, pagination, paper, hexWidth }) => {
 
   let xPages = splitPages(data.totalWidth + 50, pageWidth);
   let yPages = splitPages(data.totalHeight + 50, pageHeight);
-  let totalPages = xPages.length * yPages.lenght;
+  let totalPages = xPages.length * yPages.length;
   let currentPage = 0;
 
   let y = -25; // Start with room for margins
