@@ -49,6 +49,9 @@ export const getTile = curry((tileDefs, tiles, id) => {
       // We aliased (in a game file) this tile to another tile)
       let aliasId = tiles[id].tile;
       tile = tileDefs[aliasId] || tileDefs[split("|", aliasId)][0];
+    } else if (!tiles[id].color) {
+      // This tile might have rotations or other such items but isn't a full tile
+      tile = tileDefs[id] || tileDefs[split("|", id)][0];
     } else {
       // This is actually the tile object
       tile = tiles[id];
