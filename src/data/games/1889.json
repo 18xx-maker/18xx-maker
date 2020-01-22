@@ -482,38 +482,45 @@
     {
       "name": "Awa Railroad",
       "abbrev": "AR",
+      "logo": "1889/AR",
       "color": "red"
     },
     {
       "name": "Iyo Railway",
       "abbrev": "IR",
+      "logo": "1889/IR",
       "color": "orange"
     },
     {
       "name": "Sanuki Railway",
       "abbrev": "SR",
+      "logo": "1889/SR",
       "color": "blue"
     },
     {
       "name": "Takamatsu & Kotohira Electric Railway",
       "abbrev": "KO",
+      "logo": "1889/KO",
       "color": "pink"
     },
     {
       "name": "Tosa Electric Railway",
       "abbrev": "TR",
+      "logo": "1889/TR",
       "color": "green",
       "tokens": "three"
     },
     {
       "name": "Tosa Kuroshio Railway",
       "abbrev": "KU",
+      "logo": "1889/KU",
       "color": "purple",
       "tokens": "one"
     },
     {
       "name": "Uwajima Railway",
       "abbrev": "UR",
+      "logo": "1889/UR",
       "color": "brown",
       "tokens": "three"
     }
