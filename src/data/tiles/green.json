@@ -2340,6 +2340,56 @@
       }
     ]
   },
+  "602": {
+    "color": "green",
+    "cities": [{"name": {"offset": 33.333, "name": "Venezia"}}],
+    "towns": [{"angle": 300, "percent": 0.667, "rotation": -60}],
+    "values": [
+      {"value": 30, "angle": 340, "percent": 0.75},
+      {"value": 10, "angle": 210, "percent": 0.75}
+    ],
+    "labels": [{"label": "V", "angle": 90, "percent": 0.75}],
+    "track": [{"side": 2}, {"side": 4}, {"side": 5}, {"side": 6}]
+  },
+  "604": {
+    "color": "green",
+    "cities": [{"size": 2, "name": {"reverse": true, "name": "Milano"}}],
+    "labels": [{"label": "M", "angle": 150, "percent": 0.75}],
+    "values": [{"value": 100, "angle": 210, "percent": 0.75}],
+    "track": [{"side":2},{"side":4},{"side":5},{"side":6}]
+  },
+  "606": {
+    "color": "green",
+    "cities": [{"size": 2, "name": {"offset": 40, "reverse": true, "name": "Torino"}}],
+    "labels": [{"label": "T", "angle": 150, "percent": 0.75}],
+    "values": [{"value": 60, "angle": 210, "percent": 0.75}],
+    "track": [{"side":1},{"side":4},{"side":5},{"side":6}]
+  },
+  "612": {
+    "color": "green",
+    "cities": [{"size": 2, "name": {"offset": 72, "name": "Genova"}}],
+    "labels": [{"label": "G", "angle": 150, "percent": 0.75}],
+    "values": [{"value": 40, "angle": 210, "percent": 0.75}],
+    "track": [{"side":1},{"side":2},{"side":3},{"side":6}]
+  },
+  "613": {
+    "color": "green",
+    "track": [{"side":1},{"side":4}],
+    "cities": [{"pass":true}],
+    "values": [{"angle": 210, "percent": 0.75, "value": 0}]
+  },
+  "614": {
+    "color": "green",
+    "track": [{"side":1},{"side":3}],
+    "cities": [{"pass":true}],
+    "values": [{"angle": 210, "percent": 0.75, "value": 0}]
+  },
+  "615": {
+    "color": "green",
+    "track": [{"side":1},{"side":2}],
+    "cities": [{"pass":true}],
+    "values": [{"angle": 210, "percent": 0.75, "value": 0}]
+  },
   "619": {
     "color": "green",
     "values": [
