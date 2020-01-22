@@ -362,10 +362,16 @@ export const getMapData = (game, coords, hexWidth, variation) => {
 
   // Find all hexes
   let hexes = map(assoc("variation", variation), gameMap.hexes || []);
+  let borders = gameMap.borders || [];
   if (gameMap.copy !== undefined) {
     hexes = concat(
       map(assoc("variation", gameMap.copy), game.map[gameMap.copy].hexes),
       hexes
+    );
+
+    borders = concat(
+      game.map[gameMap.copy].borders || [],
+      borders
     );
   }
   hexes = map(resolveHex(hexes), hexes);
@@ -442,10 +448,10 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     map: gameMap,
 
     // The resolved hexes
-    hexes: hexes,
+    hexes,
 
     // Borders and Lines
-    borders: gameMap.borders,
+    borders,
     lines : gameMap.lines
   };
 };

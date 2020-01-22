@@ -439,11 +439,32 @@
         "Paid dividends"
       ]
     },
+    "ledges": [
+      {
+        "color": "red",
+        "coords": [
+          "5 9",
+          "5 8",
+          "7 8",
+          "7 7",
+          "9 7",
+          "9 6",
+          "11 6",
+          "11 5",
+          "12 5",
+          "12 4",
+          "14 4",
+          "14 3",
+          "16 3",
+          "16 2",
+          "20 2"
+        ]
+      }
+    ],
     "market": [
       [
         {
           "value": 72,
-          "label": 72,
           "arrow": "down"
         },
         76,
@@ -451,7 +472,6 @@
         90,
         {
           "value": 100,
-          "label": 100,
           "par": true
         },
         110,
@@ -466,33 +486,30 @@
         300,
         325,
         350,
-	375,
-	400,
-	450,
-	{
+        375,
+        400,
+        450,
+        {
           "value": 500,
-          "label": 500,
-	  "legend": 3
+          "legend": 3
         }
       ],
       [
         {
           "value": 68,
-          "label": 68,
           "arrow": "down"
         },
-	  72,
-	  76,
-	  82,
+        72,
+        76,
+        82,
         {
           "value": 90,
-          "label": 90,
           "par": true
         },
         100,
         110,
         120,
-	140,
+        140,
         160,
         180,
         200,
@@ -500,56 +517,18 @@
         250,
         275,
         300,
-	{
-          "value": 325,
-          "label": 325,
-          "borders": [
-            {
-              "color": "offboard",
-              "side": "bottom"
-            }
-          ]
-        },
-	{
-          "value": 350,
-          "label": 350,
-          "borders": [
-            {
-              "color": "offboard",
-              "side": "bottom"
-            }
-          ]
-        },
-	{
-          "value": 375,
-          "label": 375,
-          "borders": [
-            {
-              "color": "offboard",
-              "side": "bottom"
-            }
-          ]
-        },
-	{
-          "value": 400,
-          "label": 400,
-          "borders": [
-            {
-              "color": "offboard",
-              "side": "bottom"
-            }
-          ]
-        },
+        325,
+        350,
+        375,
+        400,
         {
           "value": 450,
-          "label": 450,
           "arrow": "up"
         }
       ],
       [
         {
           "value": 64,
-          "label": 64,
           "arrow": "down"
         },
         68,
@@ -557,7 +536,6 @@
         78,
         {
           "value": 82,
-          "label": 82,
           "par": true
         },
         90,
@@ -568,54 +546,31 @@
         160,
         180,
         200,
-	225,
-	{
-          "value": 250,
-          "label": 250,
-          "borders": [
-            {
-              "color": "offboard",
-              "side": "bottom"
-            }
-          ]
-        },
-	{
+        225,
+        250,
+        {
           "value": 275,
-          "label": 275,
-          "arrow": "up",
-	  "borders": [
-	    {
-	      "color": "offboard",
-	      "side": "right"
-	    },
-	    {
-	      "color": "offboard",
-	      "side": "bottom"
-	    }
-	  ]
+          "arrow": "up"
         },
-	300,
-	325,
-	350,
+        300,
+        325,
+        350,
         {
           "value": 375,
-          "label": 375,
           "arrow": "up"
         }
       ],
       [
         {
           "value": 60,
-          "label": 60,
           "legend": 0,
           "arrow": "down"
         },
         64,
         68,
-	72,
+        72,
         {
           "value": 76,
-          "label": 76,
           "par": true
         },
         82,
@@ -623,357 +578,225 @@
         100,
         110,
         120,
-	140,
-	160,
-	{
-          "value": 180,
-          "label": 180,
-          "borders": [
-            {
-              "color": "offboard",
-              "side": "bottom"
-            }
-          ]
-        },
-	{
+        140,
+        160,
+        180,
+        {
           "value": 200,
-          "label": 200,
-          "arrow": "up",
-	  "borders": [
-	    {
-	      "color": "offboard",
-	      "side": "right"
-	    },
-	    {
-	      "color": "offboard",
-	      "side": "bottom"
-	    }
-	  ]
+          "arrow": "up"
         },
-	225,
-	250,
-	275,
+        225,
+        250,
+        275,
         {
           "value": 300,
-          "label": 300,
           "arrow": "up"
         }
       ],
       [
         {
           "value": 55,
-          "label": 55,
           "legend": 0,
           "arrow": "down"
         },
         {
           "value": 60,
-          "label": 60,
           "legend": 0
         },
         64,
         68,
         {
           "value": 72,
-          "label": 72,
           "par": true
         },
         76,
         82,
         90,
-	100,
-	110,
-	120,
-	{
+        100,
+        110,
+        120,
+        {
           "value": 140,
-          "label": 140,
-          "arrow": "up",
-	  "borders": [
-	    {
-	      "color": "offboard",
-	      "side": "right"
-	    },
-	    {
-	      "color": "offboard",
-	      "side": "bottom"
-	    }
-	  ]
+          "arrow": "up"
         },
-	160,
-	180,
-	200,
+        160,
+        180,
+        200,
         {
           "value": 225,
-          "label": 225,
           "arrow": "up"
         }
       ],
       [
         {
           "value": 50,
-          "label": 50,
           "legend": 1,
           "arrow": "down"
         },
         {
           "value": 55,
-          "label": 55,
           "legend": 0
         },
         {
           "value": 60,
-          "label": 60,
           "legend": 0
         },
-	64,
+        64,
         {
           "value": 68,
-          "label": 68,
           "par": true
         },
         72,
         76,
-	82,
-	90,
-	{
-          "value": 110,
-          "label": 110,
-          "borders": [
-            {
-              "color": "offboard",
-              "side": "bottom"
-            }
-          ]
-        },
-	{
+        82,
+        90,
+        110,
+        {
           "value": 100,
-          "label": 100,
-          "arrow": "up",
-	  "borders": [
-	    {
-	      "color": "offboard",
-	      "side": "right"
-	    },
-	    {
-	      "color": "offboard",
-	      "side": "bottom"
-	    }
-	  ]
+          "arrow": "up"
         },
-	120,
-	140,
+        120,
+        140,
         {
           "value": 160,
-          "label": 160,
           "arrow": "up"
         }
       ],
       [
         {
           "value": 40,
-          "label": 40,
           "legend": 1,
           "arrow": "down"
         },
         {
           "value": 50,
-          "label": 50,
           "legend": 1
         },
         {
           "value": 55,
-          "label": 55,
           "legend": 0
         },
         {
           "value": 60,
-          "label": 60,
           "legend": 0
         },
         64,
         68,
         72,
-	{
-          "value": 76,
-          "label": 76,
-          "borders": [
-            {
-              "color": "offboard",
-              "side": "bottom"
-            }
-          ]
-        },
-	{
+        76,
+        {
           "value": 82,
-          "label": 82,
-          "arrow": "up",
-	  "borders": [
-	    {
-	      "color": "offboard",
-	      "side": "right"
-	    },
-	    {
-	      "color": "offboard",
-	      "side": "bottom"
-	    }
-	  ]
+          "arrow": "up"
         },
-	90,
-	100,
+        90,
+        100,
         {
           "value": 110,
-          "label": 110,
           "arrow": "up"
         }
       ],
       [
         {
           "value": 30,
-          "label": 30,
-	  "arrow": "down",
+          "arrow": "down",
           "legend": 2
         },
         {
           "value": 40,
-          "label": 40,
           "legend": 1
         },
         {
           "value": 50,
-          "label": 50,
           "legend": 1
         },
         {
           "value": 55,
-          "label": 55,
           "legend": 0
         },
         60,
-	{
-          "value": 64,
-          "label": 64,
-          "borders": [
-            {
-              "color": "offboard",
-              "side": "bottom"
-            }
-          ]
-        },
-	{
+        64,
+        {
           "value": 68,
-          "label": 68,
-          "arrow": "up",
-	  "borders": [
-	    {
-	      "color": "offboard",
-	      "side": "right"
-	    },
-	    {
-	      "color": "offboard",
-	      "side": "bottom"
-	    }
-	  ]
+          "arrow": "up"
         },
-	72,
-	76,
+        72,
+        76,
         {
           "value": 82,
-          "label": 82,
           "arrow": "up"
         }
       ],
       [
         {
           "value": 20,
-          "label": 20,
-	  "arrow": "down",
+          "arrow": "down",
           "legend": 2
         },
         {
           "value": 30,
-          "label": 30,
           "legend": 2
         },
         {
           "value": 40,
-          "label": 40,
           "legend": 1
         },
         {
           "value": 50,
-          "label": 50,
           "legend": 1
         },
-	{
+        {
           "value": 55,
-          "label": 55,
-	  "arrow": "up",
-          "borders": [
-            {
-              "color": "offboard",
-	      "side": "right"
-            }
-          ]
+          "arrow": "up"
         },
-	60,
-	64,
+        60,
+        64,
         {
           "value": 68,
-          "label": 68,
           "arrow": "up"
         }
       ],
       [
         {
           "value": 10,
-          "label": 10,
           "legend": 2,
-	  "arrow": "down"
+          "arrow": "down"
         },
         {
           "value": 20,
-          "label": 20,
           "legend": 2
         },
         {
           "value": 30,
-          "label": 30,
           "legend": 2
         },
         {
           "value": 40,
-          "label": 40,
           "legend": 1
         },
         {
           "value": 50,
-          "label": 50,
           "arrow": "up"
         }
       ],
       [
         {
-	  "label": "Closed",
-	  "color": "black"
-	},
+          "label": "Closed",
+          "color": "black"
+        },
         {
           "value": 10,
-          "label": 10,
           "legend": 2
         },
         {
           "value": 20,
-          "label": 20,
           "legend": 2
         },
         {
           "value": 30,
-          "label": 30,
           "legend": 2
         },
         {
           "value": 40,
-          "label": 40,
           "arrow": "up"
         }
       ]
@@ -1046,59 +869,59 @@
   "map": {
     "hexes": [
       {
-	"color": "offboard",
-	"cities": [
-	  {
-	    "companies": [
-	      {
-		"label": "CLE",
-		"color": "orange"
-	      }
-	    ],
-	    "name": {
-	      "name": "Lorain",
-	      "rotation": -90
-	    }
-	  }
-	],
-	"track": [
-	  {
-	    "side": 3
-	  },
-	  {
-	    "side": 4
-	  },
-	  {
-	    "side": 5
-	   }
-	],
-	"offBoardRevenue": {
-	  "angle": 90,
-	  "x": -55,
-	  "y": -30,
-	  "rows": 4,
-	  "revenues": [
-	    {
-	      "color": "yellow",
-	      "cost": "40"
-	    },
-	    {
-	      "color": "green",
-	      "cost": "60"
-	    },
-	    {
-	      "color": "brown",
-	      "cost": "20"
-	    },
-	    {
-	      "color": "gray",
-	      "cost": "50"
-	    }
-	  ]
-	},
-	"hexes": [
-	  "H3"
-	]
+        "color": "offboard",
+        "cities": [
+          {
+            "companies": [
+              {
+                "label": "CLE",
+                "color": "orange"
+              }
+            ],
+            "name": {
+              "name": "Lorain",
+              "rotation": -90
+            }
+          }
+        ],
+        "track": [
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": 90,
+          "x": -55,
+          "y": -30,
+          "rows": 4,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "40"
+            },
+            {
+              "color": "green",
+              "cost": "60"
+            },
+            {
+              "color": "brown",
+              "cost": "20"
+            },
+            {
+              "color": "gray",
+              "cost": "50"
+            }
+          ]
+        },
+        "hexes": [
+          "H3"
+        ]
       },
       {
         "color": "plain",
@@ -1235,43 +1058,43 @@
         ]
       },
       {
-	"color": "offboard",
-	"offBoardRevenue": {
-	  "name": {
-	    "name": "Mansfield, OH"
-	  },
-	  "angle": 120,
-	  "percent": 0.5,
-	  "rows": 4,
-	  "revenues": [
-	    {
-	      "color": "yellow",
-	      "cost": "20"
-	    },
-	    {
-	      "color": "green",
-	      "cost": "40"
-	    },
-	    {
-	      "color": "brown",
-	      "cost": "20"
-	    },
-	    {
-	      "color": "gray",
-	      "cost": "40"
-	    }
-	  ]
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Mansfield, OH"
+          },
+          "angle": 120,
+          "percent": 0.5,
+          "rows": 4,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "20"
+            },
+            {
+              "color": "gray",
+              "cost": "40"
+            }
+          ]
         },
         "offBoardTrack": [
-	  {
-	    "side": 3
-	  },
-	  {
-	    "side": 4
-	  }
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          }
         ],
         "hexes": [
-	  "M8"
+          "M8"
         ]
       },
       {
@@ -1289,18 +1112,18 @@
       {
         "color": "yellow",
         "cities": [
-	  {
-	    "companies": [
-	      {
-		"label": "RTA",
-		"color": "red"
-	      }
-	    ],
-	    "name": {
-	      "name": "Hopkins"
-	    }
-	  }
-	],
+          {
+            "companies": [
+              {
+                "label": "RTA",
+                "color": "red"
+              }
+            ],
+            "name": {
+              "name": "Hopkins"
+            }
+          }
+        ],
         "hexes": [
           "J9"
         ]
@@ -1328,18 +1151,18 @@
       {
         "color": "plain",
         "cities": [
-	  {
-	    "companies": [
-	      {
-		"label": "CSC",
-		"color": "tan"
-	      }
-	    ],
-	    "name": {
-	      "name": "Berea"
-	    }
-	  }
-	],
+          {
+            "companies": [
+              {
+                "label": "CSC",
+                "color": "tan"
+              }
+            ],
+            "name": {
+              "name": "Berea"
+            }
+          }
+        ],
         "hexes": [
           "K10"
         ]
@@ -1373,18 +1196,18 @@
       {
         "color": "plain",
         "cities": [
-	  {
-	    "companies": [
-	      {
-		"label": "LSE",
-		"color": "turquoise"
-	      }
-	    ],
-	    "name": {
-	      "name": "Lakewood"
-	    }
-	  }
-	],
+          {
+            "companies": [
+              {
+                "label": "LSE",
+                "color": "turquoise"
+              }
+            ],
+            "name": {
+              "name": "Lakewood"
+            }
+          }
+        ],
         "hexes": [
           "G12"
         ]
@@ -1482,15 +1305,15 @@
       },
       {
         "color": "plain",
-	"companies": [
-	  {
-	    "percent": -0.667,
-	    "left": 15,
-	    "right": 15,
-	    "bottom": true,
-	    "label": "ANSI"
-	  }
-	],
+        "companies": [
+          {
+            "percent": -0.667,
+            "left": 15,
+            "right": 15,
+            "bottom": true,
+            "label": "ANSI"
+          }
+        ],
         "terrain": [
           {
             "type": "water",
@@ -1509,12 +1332,12 @@
           {
             "side": 3,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           },
-	  {
+          {
             "side": 4,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           }
         ],
         "hexes": [
@@ -1524,18 +1347,18 @@
       {
         "color": "plain",
         "cities": [
-	  {
-	    "companies": [
-	      {
-		"label": "WW",
-		"color": "brown"
-	      }
-	    ],
-	    "name": {
-	      "name": "West 25th Street"
-	    }
-	  }
-	],
+          {
+            "companies": [
+              {
+                "label": "WW",
+                "color": "brown"
+              }
+            ],
+            "name": {
+              "name": "West 25th Street"
+            }
+          }
+        ],
         "hexes": [
           "H15"
         ]
@@ -1554,34 +1377,34 @@
         ]
       },
       {
-	"color": "offboard",
-	"offBoardRevenue": {
-	  "name": {
-	    "name": "Public Square"
-	  },
-	  "revenues": [
-	    {
-	      "color": "yellow",
-	      "cost": "50"
-	    },
-	    {
-	      "color": "green",
-	      "cost": "80"
-	    },
-	    {
-	      "color": "brown",
-	      "cost": "40"
-	    },
-	    {
-	      "color": "gray",
-	      "cost": "120"
-	    }
-	  ]
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Public Square"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "50"
+            },
+            {
+              "color": "green",
+              "cost": "80"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            },
+            {
+              "color": "gray",
+              "cost": "120"
+            }
+          ]
         },
         "removeBorders": [
           5
         ],
-	"hexes": [
+        "hexes": [
           "E16"
         ]
       },
@@ -1605,12 +1428,12 @@
           {
             "side": 3,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           },
-	  {
+          {
             "side": 4,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           }
         ],
         "hexes": [
@@ -1632,11 +1455,11 @@
       },
       {
         "color": "offboard",
-	"companies": [
-	  {
-	    "label": "TT"
-	  }
-	],
+        "companies": [
+          {
+            "label": "TT"
+          }
+        ],
         "cities": [
           {
             "angle": 0,
@@ -1646,9 +1469,9 @@
                 "label": "TT",
                 "color": "white"
               }
-	    ]
+            ]
           },
-	  {
+          {
             "angle": 72,
             "percent": 0.6
           },
@@ -1678,37 +1501,37 @@
           {
             "type": "water",
             "cost": "$50",
-	    "percent": 0.5
+            "percent": 0.5
           }
         ],
         "borders": [
           {
             "side": 3,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           },
-	  {
+          {
             "side": 4,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           }
         ],
-	"names": {
-	  "name": "Cuyahoga River",
-	  "x": -15
-	},
-	"companies": [
+        "names": {
+          "name": "Cuyahoga River",
+          "x": -15
+        },
+        "companies": [
           {
-	    "label": "CV",
-	    "percent": -0.80,
-	    "color": "blue",
-	    "rotate": 60,
-	    "left": 40,
-	    "right": 45,
-	    "x": 35,
-	    "y": 35
-	  }
-	],
+            "label": "CV",
+            "percent": -0.80,
+            "color": "blue",
+            "rotate": 60,
+            "left": 40,
+            "right": 45,
+            "x": 35,
+            "y": 35
+          }
+        ],
         "hexes": [
           "H17"
         ]
@@ -1716,18 +1539,18 @@
       {
         "color": "yellow",
         "cities": [
-	  {
-	    "name": {
-	      "name": "Union Depot",
-	      "reverse": true
-	    }
-	  }
-	],
-	"track": [
-	  {
-	    "side": 4
-	  }
-	],
+          {
+            "name": {
+              "name": "Union Depot",
+              "reverse": true
+            }
+          }
+        ],
+        "track": [
+          {
+            "side": 4
+          }
+        ],
         "values": [
           {
             "angle": 180,
@@ -1745,22 +1568,22 @@
           {
             "type": "water",
             "cost": "$50",
-	    "percent": 0.75
+            "percent": 0.75
           }
         ],
         "cities": [
-	  {
-	    "companies": [
-	      {
-		"label": "CMV",
-		"color": "gray"
-	      }
-	    ],
-	    "name": {
-	      "name": "The Flats"
-	    }
-	  }
-	],
+          {
+            "companies": [
+              {
+                "label": "CMV",
+                "color": "gray"
+              }
+            ],
+            "name": {
+              "name": "The Flats"
+            }
+          }
+        ],
         "hexes": [
           "G18"
         ]
@@ -1777,12 +1600,12 @@
           {
             "side": 3,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           },
-	  {
+          {
             "side": 4,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           }
         ],
         "hexes": [
@@ -1887,12 +1710,12 @@
           {
             "side": 1,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           },
-	  {
+          {
             "side": 6,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           }
         ],
         "hexes": [
@@ -1900,56 +1723,56 @@
         ]
       },
       {
-	"color": "offboard",
-	"cities": [
-	  {
-	    "size": 2,
-	    "name": {
-	      "name": "Akron",
-	      "rotation": -90,
-	      "y": -25
-	    }
-	  }
-	],
-	"track": [
-	  {
-	    "side": 2
-	  },
-	  {
-	    "side": 3
-	  }
-	],
-	"offBoardRevenue": {
-	  "y": 40,
-	  "revenues": [
-	    {
-	      "color": "yellow",
-	      "cost": "40"
-	    },
-	    {
-	      "color": "green",
-	      "cost": "60"
-	    },
-	    {
-	      "color": "brown",
-	      "cost": "30"
-	    },
-	    {
-	      "color": "gray",
-	      "cost": "100"
-	    }
-	  ]
-	},
-	"labels": [
-	  {
-	      "label": "*ABC",
-	      "y": -65,
-	      "size": "small"
-	  }
-	],
-	"hexes": [
-	  "O20"
-	]
+        "color": "offboard",
+        "cities": [
+          {
+            "size": 2,
+            "name": {
+              "name": "Akron",
+              "rotation": -90,
+              "y": -25
+            }
+          }
+        ],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          }
+        ],
+        "offBoardRevenue": {
+          "y": 40,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "40"
+            },
+            {
+              "color": "green",
+              "cost": "60"
+            },
+            {
+              "color": "brown",
+              "cost": "30"
+            },
+            {
+              "color": "gray",
+              "cost": "100"
+            }
+          ]
+        },
+        "labels": [
+          {
+            "label": "*ABC",
+            "y": -65,
+            "size": "small"
+          }
+        ],
+        "hexes": [
+          "O20"
+        ]
       },
       {
         "color": "plain",
@@ -1997,12 +1820,12 @@
           {
             "side": 1,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           },
-	  {
+          {
             "side": 6,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           }
         ],
         "hexes": [
@@ -2021,17 +1844,17 @@
           {
             "side": 3,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           },
-	  {
+          {
             "side": 4,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           },
-	  {
+          {
             "side": 5,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           }
         ],
         "hexes": [
@@ -2066,18 +1889,18 @@
       {
         "color": "plain",
         "cities": [
-	  {
-	    "companies": [
-	      {
-		"label": "C&E",
-		"color": "green"
-	      }
-	    ],
-	    "name": {
-	      "name": "University Circle"
-	    }
-	  }
-	],
+          {
+            "companies": [
+              {
+                "label": "C&E",
+                "color": "green"
+              }
+            ],
+            "name": {
+              "name": "University Circle"
+            }
+          }
+        ],
         "hexes": [
           "E22"
         ]
@@ -2106,7 +1929,7 @@
         "terrain": [
           {
             "type": "water",
-	    "percent": 0.667,
+            "percent": 0.667,
             "cost": "$50"
           }
         ],
@@ -2114,7 +1937,7 @@
           {
             "side": 1,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           }
         ],
         "hexes": [
@@ -2133,7 +1956,7 @@
           {
             "side": 1,
             "color": "water",
-	    "dashed": true
+            "dashed": true
           }
         ],
         "hexes": [
@@ -2143,21 +1966,21 @@
       {
         "color": "yellow",
         "cities": [
-	  {
-	    "name": {
-	      "name": "Euclid",
-	      "reverse": true
-	    }
-	  }
-	],
-	"track": [
-	  {
-	    "side": 3
-	  },
-	  {
-	    "side": 6
-	  }
-	],
+          {
+            "name": {
+              "name": "Euclid",
+              "reverse": true
+            }
+          }
+        ],
+        "track": [
+          {
+            "side": 3
+          },
+          {
+            "side": 6
+          }
+        ],
         "values": [
           {
             "angle": 120,
@@ -2299,35 +2122,35 @@
         ]
       },
       {
-	"color": "offboard",
-	"cities": [
-	  {
-	    "size": 2,
-	    "companies": [
+        "color": "offboard",
+        "cities": [
+          {
+            "size": 2,
+            "companies": [
               {
                 "label": "CPE",
                 "color": "black"
               }
             ]
-	  }
-	],
-	"track": [
-	  {
-	    "side": 1
-	  },
-	  {
-	    "side": 5
-	  },
-	  {
-	    "side": 6
-	  }
-	],
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
         "removeBorders": [
           4
         ],
-	"hexes": [
-	  "A26"
-	]
+        "hexes": [
+          "A26"
+        ]
       },
       {
         "color": "plain",
@@ -2351,47 +2174,47 @@
             }
           }
         ],
-	"companies": [
-	  {
-	    "percent": -0.667,
-	    "left": 15,
-	    "right": 15,
-	    "bottom": true,
-	    "label": "ER"
-	  }
-	],
+        "companies": [
+          {
+            "percent": -0.667,
+            "left": 15,
+            "right": 15,
+            "bottom": true,
+            "label": "ER"
+          }
+        ],
         "hexes": [
           "E26"
         ]
       },
       {
-	"color": "green",
-	"cities": [
-	  {
-	    "size": 2,
-	    "name": {
-	      "name": "Shaker Heights",
-	      "reverse": true
-	    },
-	    "companies": [
+        "color": "green",
+        "cities": [
+          {
+            "size": 2,
+            "name": {
+              "name": "Shaker Heights",
+              "reverse": true
+            },
+            "companies": [
               {
                 "label": "SHR",
                 "color": "natural"
               }
             ]
-	  }
-	],
-	"track": [
-	  {
-	    "side": 1
-	  },
-	  {
-	    "side": 2
-	  }
-	],
-	"hexes": [
-	  "G26"
-	]
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          }
+        ],
+        "hexes": [
+          "G26"
+        ]
       },
       {
         "color": "plain",
@@ -2410,13 +2233,13 @@
         "color": "plain",
         "cities": [
           {
-	    "companies": [
-	      {
-		"label": "ABC",
-		"color": "yellow"
-	      }
-	    ],
-	    "name": {
+            "companies": [
+              {
+                "label": "ABC",
+                "color": "yellow"
+              }
+            ],
+            "name": {
               "name": "Bedford"
             }
           }
@@ -2465,34 +2288,34 @@
         ]
       },
       {
-	"color": "offboard",
-	"offBoardRevenue": {
-	  "name": {
-	    "name": "Painesville"
-	  },
-	  "revenues": [
-	    {
-	      "color": "yellow",
-	      "cost": "30"
-	    },
-	    {
-	      "color": "green",
-	      "cost": "50"
-	    },
-	    {
-	      "color": "brown",
-	      "cost": "20"
-	    },
-	    {
-	      "color": "gray",
-	      "cost": "60"
-	    }
-	  ]
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Painesville"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "green",
+              "cost": "50"
+            },
+            {
+              "color": "brown",
+              "cost": "20"
+            },
+            {
+              "color": "gray",
+              "cost": "60"
+            }
+          ]
         },
         "removeBorders": [
           1
         ],
-	"hexes": [
+        "hexes": [
           "A28"
         ]
       },
@@ -2510,53 +2333,53 @@
         ]
       },
       {
-	"color": "plain",
-	"hexes": [
-	  "B25",
-	  "B27",
-	  "C28",
-	  "D25",
-	  "F23",
-	  "F27",
-	  "G28",
-	  "H11",
-	  "H19",
-	  "H21",
-	  "H23",
-	  "H25",
-	  "I4",
-	  "I6",
-	  "I10",
-	  "I16",
-	  "I22",
-	  "I24",
-	  "I28",
-	  "J13",
-	  "J17",
-	  "J19",
-	  "K6",
-	  "K12",
-	  "K16",
-	  "K20",
-	  "K24",
-	  "K28",
-	  "L9",
-	  "L11",
-	  "L15",
-	  "L17",
-	  "L25",
-	  "L27",
-	  "M12",
-	  "M20",
-	  "M26",
-	  "N11",
-	  "N13",
-	  "N15",
-	  "N17",
-	  "N19",
-	  "N23",
-	  "N25"
-	]
+        "color": "plain",
+        "hexes": [
+          "B25",
+          "B27",
+          "C28",
+          "D25",
+          "F23",
+          "F27",
+          "G28",
+          "H11",
+          "H19",
+          "H21",
+          "H23",
+          "H25",
+          "I4",
+          "I6",
+          "I10",
+          "I16",
+          "I22",
+          "I24",
+          "I28",
+          "J13",
+          "J17",
+          "J19",
+          "K6",
+          "K12",
+          "K16",
+          "K20",
+          "K24",
+          "K28",
+          "L9",
+          "L11",
+          "L15",
+          "L17",
+          "L25",
+          "L27",
+          "M12",
+          "M20",
+          "M26",
+          "N11",
+          "N13",
+          "N15",
+          "N17",
+          "N19",
+          "N23",
+          "N25"
+        ]
       }
     ]
   }

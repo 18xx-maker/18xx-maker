@@ -360,7 +360,7 @@
     },
     {
       "phase": "Gray",
-      "train": "6/7 or 8",
+      "train": "6 or 7/8",
       "rust": "2",
       "limit": "2",
       "number": "4/∞/∞/∞",

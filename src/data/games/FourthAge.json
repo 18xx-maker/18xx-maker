@@ -2091,6 +2091,16 @@
         "color": "water",
         "coords": ["O17p5", "O17p6"]
       }
-    ]
+    ],
+    "players": {
+      "x": 100,
+      "y": 1065
+    },
+    "roundTracker": {
+      "rotation": 45,
+      "type": "round",
+      "x": 200,
+      "y": 900
+    }
   }
 }

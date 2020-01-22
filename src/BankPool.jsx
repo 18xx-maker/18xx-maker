@@ -10,6 +10,8 @@ import addIndex from "ramda/src/addIndex";
 import map from "ramda/src/map";
 
 import "./BankPool.scss";
+import Page from "./util/Page";
+
 import PageSetup from "./PageSetup";
 
 import SvgIcon from "./SvgIcon";
@@ -52,6 +54,7 @@ const BankPool = () => {
                     }}
                   >
                     <div className="bankpool">
+                      <Page title={game.info.title} component="Bank Pool" current={i+1} total={game.pools.length} />
                       <Svg
                         width={unitsToCss(usableWidth)}
                         height={unitsToCss(usableHeight)}

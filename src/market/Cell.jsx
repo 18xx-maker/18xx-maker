@@ -64,10 +64,10 @@ const Cell = ({ cell, data, par }) => {
                 let rotated = false;
                 let subRotated = false;
 
-                if (data.type !== "2D" && cell.label) {
+                if (cell.rotated || (data.type !== "2D" && cell.label)) {
                   rotated = true;
                 }
-                if (data.type !== "2D" && cell.subLabel) {
+                if (cell.subRotated || (data.type !== "2D" && cell.subLabel)) {
                   subRotated = true;
                 }
 
@@ -141,12 +141,15 @@ const Cell = ({ cell, data, par }) => {
 
                 let text = "value" in cell ? <Currency value={cell.value} type="market"/> : cell.label;
 
+                let width = (cell.width || 1) * data.width;
+                let height = (cell.height || 1) * data.height;
+
                 return (
                   <g>
                     <rect x="0"
                           y="0"
-                          width={data.width}
-                          height={data.height}
+                          width={width}
+                          height={height}
                           stroke={c("black")}
                           strokeWidth="1"
                           fill={color}
@@ -175,9 +178,9 @@ const Cell = ({ cell, data, par }) => {
                         fontStyle="bold"
                         fontSize="15"
                         textAnchor="start"
-                        dominantBaseline={subRotated ? "hanging" : "baseline"}
-                        x={subRotated ? (-data.height + 5) : 5}
-                        y={subRotated ? 5 : (data.height - 5)}
+                        dominantBaseline={subRotated ? (cell.right ? "baseline" : "hanging") : "baseline"}
+                        x={subRotated ? (-height + 5) : 5}
+                        y={subRotated ? (cell.right ? (width - 5) : 5) : (height - 5)}
                       >
                         {cell.subLabel}
                       </text>
