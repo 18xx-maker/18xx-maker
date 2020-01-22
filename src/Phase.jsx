@@ -6,7 +6,7 @@ import Currency from "./util/Currency";
 
 const formatCell = value => {
   if(Array.isArray(value)) {
-    return R.addIndex(R.chain)((v,i) => [v,<br key={`br-${i}`}/>], <Currency value={value} type="train"/>);
+    return R.addIndex(R.chain)((v,i) => [<Currency key={`currency-${i}`} value={v} type="train"/>,<br key={`br-${i}`}/>], value);
   } else {
     return <Currency value={value} type="train"/>;
   }
