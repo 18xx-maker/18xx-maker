@@ -6,10 +6,16 @@ import logo_1830AH_ERIE, { ReactComponent as logo_1830AH_ERIE_Component } from "
 import logo_1830AH_NNH, { ReactComponent as logo_1830AH_NNH_Component } from "./1830AH/NNH.svg";
 import logo_1830AH_NYC, { ReactComponent as logo_1830AH_NYC_Component } from "./1830AH/NYC.svg";
 import logo_1830AH_PRR, { ReactComponent as logo_1830AH_PRR_Component } from "./1830AH/PRR.svg";
+import logo_1889_AR, { ReactComponent as logo_1889_AR_Component } from "./1889/AR.svg";
+import logo_1889_IR, { ReactComponent as logo_1889_IR_Component } from "./1889/IR.svg";
+import logo_1889_KO, { ReactComponent as logo_1889_KO_Component } from "./1889/KO.svg";
+import logo_1889_KU, { ReactComponent as logo_1889_KU_Component } from "./1889/KU.svg";
+import logo_1889_SR, { ReactComponent as logo_1889_SR_Component } from "./1889/SR.svg";
+import logo_1889_TR, { ReactComponent as logo_1889_TR_Component } from "./1889/TR.svg";
+import logo_1889_UR, { ReactComponent as logo_1889_UR_Component } from "./1889/UR.svg";
 import logo_ACL, { ReactComponent as logo_ACL_Component } from "./ACL.svg";
 import logo_AFG, { ReactComponent as logo_AFG_Component } from "./AFG.svg";
 import logo_AMTK, { ReactComponent as logo_AMTK_Component } from "./AMTK.svg";
-import logo_AR, { ReactComponent as logo_AR_Component } from "./AR.svg";
 import logo_ATA, { ReactComponent as logo_ATA_Component } from "./ATA.svg";
 import logo_ATSF, { ReactComponent as logo_ATSF_Component } from "./ATSF.svg";
 import logo_AWP, { ReactComponent as logo_AWP_Component } from "./AWP.svg";
@@ -54,9 +60,6 @@ import logo_GT, { ReactComponent as logo_GT_Component } from "./GT.svg";
 import logo_IC, { ReactComponent as logo_IC_Component } from "./IC.svg";
 import logo_IFT, { ReactComponent as logo_IFT_Component } from "./IFT.svg";
 import logo_imperialrussia_ImperialEagle, { ReactComponent as logo_imperialrussia_ImperialEagle_Component } from "./imperialrussia/ImperialEagle.svg";
-import logo_IR, { ReactComponent as logo_IR_Component } from "./IR.svg";
-import logo_KO, { ReactComponent as logo_KO_Component } from "./KO.svg";
-import logo_KU, { ReactComponent as logo_KU_Component } from "./KU.svg";
 import logo_languages_c, { ReactComponent as logo_languages_c_Component } from "./languages/c.svg";
 import logo_languages_clojure, { ReactComponent as logo_languages_clojure_Component } from "./languages/clojure.svg";
 import logo_languages_commonlisp, { ReactComponent as logo_languages_commonlisp_Component } from "./languages/commonlisp.svg";
@@ -132,13 +135,10 @@ import logo_SFA, { ReactComponent as logo_SFA_Component } from "./SFA.svg";
 import logo_SLSF, { ReactComponent as logo_SLSF_Component } from "./SLSF.svg";
 import logo_SOU, { ReactComponent as logo_SOU_Component } from "./SOU.svg";
 import logo_SP, { ReactComponent as logo_SP_Component } from "./SP.svg";
-import logo_SR, { ReactComponent as logo_SR_Component } from "./SR.svg";
 import logo_SSW, { ReactComponent as logo_SSW_Component } from "./SSW.svg";
 import logo_TM, { ReactComponent as logo_TM_Component } from "./TM.svg";
 import logo_TP, { ReactComponent as logo_TP_Component } from "./TP.svg";
-import logo_TR, { ReactComponent as logo_TR_Component } from "./TR.svg";
 import logo_UdY, { ReactComponent as logo_UdY_Component } from "./UdY.svg";
-import logo_UR, { ReactComponent as logo_UR_Component } from "./UR.svg";
 import logo_VR, { ReactComponent as logo_VR_Component } from "./VR.svg";
 import logo_WA, { ReactComponent as logo_WA_Component } from "./WA.svg";
 import logo_webdev_angular, { ReactComponent as logo_webdev_angular_Component } from "./webdev/angular.svg";
@@ -207,6 +207,48 @@ export default {
     src: logo_1830AH_PRR,
     Component: logo_1830AH_PRR_Component
   },
+  "1889/AR": {
+    name: "AR",
+    group: "1889",
+    src: logo_1889_AR,
+    Component: logo_1889_AR_Component
+  },
+  "1889/IR": {
+    name: "IR",
+    group: "1889",
+    src: logo_1889_IR,
+    Component: logo_1889_IR_Component
+  },
+  "1889/KO": {
+    name: "KO",
+    group: "1889",
+    src: logo_1889_KO,
+    Component: logo_1889_KO_Component
+  },
+  "1889/KU": {
+    name: "KU",
+    group: "1889",
+    src: logo_1889_KU,
+    Component: logo_1889_KU_Component
+  },
+  "1889/SR": {
+    name: "SR",
+    group: "1889",
+    src: logo_1889_SR,
+    Component: logo_1889_SR_Component
+  },
+  "1889/TR": {
+    name: "TR",
+    group: "1889",
+    src: logo_1889_TR,
+    Component: logo_1889_TR_Component
+  },
+  "1889/UR": {
+    name: "UR",
+    group: "1889",
+    src: logo_1889_UR,
+    Component: logo_1889_UR_Component
+  },
   "ACL": {
     name: "ACL",
     src: logo_ACL,
@@ -221,11 +263,6 @@ export default {
     name: "AMTK",
     src: logo_AMTK,
     Component: logo_AMTK_Component
-  },
-  "AR": {
-    name: "AR",
-    src: logo_AR,
-    Component: logo_AR_Component
   },
   "ATA": {
     name: "ATA",
@@ -467,21 +504,6 @@ export default {
     group: "imperialrussia",
     src: logo_imperialrussia_ImperialEagle,
     Component: logo_imperialrussia_ImperialEagle_Component
-  },
-  "IR": {
-    name: "IR",
-    src: logo_IR,
-    Component: logo_IR_Component
-  },
-  "KO": {
-    name: "KO",
-    src: logo_KO,
-    Component: logo_KO_Component
-  },
-  "KU": {
-    name: "KU",
-    src: logo_KU,
-    Component: logo_KU_Component
   },
   "languages/c": {
     name: "c",
@@ -909,11 +931,6 @@ export default {
     src: logo_SP,
     Component: logo_SP_Component
   },
-  "SR": {
-    name: "SR",
-    src: logo_SR,
-    Component: logo_SR_Component
-  },
   "SSW": {
     name: "SSW",
     src: logo_SSW,
@@ -929,20 +946,10 @@ export default {
     src: logo_TP,
     Component: logo_TP_Component
   },
-  "TR": {
-    name: "TR",
-    src: logo_TR,
-    Component: logo_TR_Component
-  },
   "UdY": {
     name: "UdY",
     src: logo_UdY,
     Component: logo_UdY_Component
-  },
-  "UR": {
-    name: "UR",
-    src: logo_UR,
-    Component: logo_UR_Component
   },
   "VR": {
     name: "VR",
