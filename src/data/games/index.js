@@ -11,6 +11,7 @@ import game_1825K6 from "./1825-K6";
 import game_1825R1_1 from "./1825-R1.1";
 import game_1825R2 from "./1825-R2";
 import game_1825K3_1 from "./1825-R3.1";
+import game_1825D1 from "./1825-D1";
 import game_1825Met from "./1825-Met";
 import game_1825DB1 from "./1825-DB1";
 import game_1825DB3 from "./1825-DB3";
@@ -23,9 +24,6 @@ import game_1834 from "./1834";
 import game_1836jr_30 from "./1836jr-30";
 import game_1836jr_56 from "./1836jr-56";
 import game_1836 from "./1836";
-import game_1838TL from "./1838TL";
-import game_1839NL from "./1839NL";
-import game_1845 from "./1845";
 import game_1841 from "./1841";
 import game_1846 from "./1846";
 import game_1848 from "./1848";
@@ -53,7 +51,6 @@ import game_18SY from "./18SY";
 import game_18Chesapeake from "./18Chesapeake";
 import game_18Mex from "./18Mex";
 import game_18Scan from "./18Scan";
-import game_18SW from "./18SW";
 import game_18Test from "./18Test";
 import game_18TE from "./18TE";
 import game_18TK from "./18TK";
@@ -74,6 +71,7 @@ let all_games = {
   "1825-U3": game_1825U3,
   "1825-K1": game_1825K1,
   "1825-K3": game_1825K3,
+  "1825-D1": game_1825D1,
   "1825-K5": game_1825K5,
   "1825-K6": game_1825K6,
   "1825-R1.1": game_1825R1_1,
@@ -90,9 +88,6 @@ let all_games = {
   "1836jr-30": game_1836jr_30,
   "1836jr-56": game_1836jr_56,
   "1836": game_1836,
-  "1838TL": game_1838TL,
-  "1839NL": game_1839NL,
-  "1845": game_1845,
   "1841": game_1841,
   "1846": game_1846,
   "1848": game_1848,
@@ -121,7 +116,6 @@ let all_games = {
   "18Chesapeake": game_18Chesapeake,
   "18Mex": game_18Mex,
   "18Scan": game_18Scan,
-  "18SW": game_18SW,
   "18TE": game_18TE,
   "18TK": game_18TK,
   FourthAge: game_FourthAge,
