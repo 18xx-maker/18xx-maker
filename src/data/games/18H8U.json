@@ -3,6 +3,8 @@
     "title": "18H8U",
     "designer": "Mark Derrick",
     "background": "pink",
+    "titleSize": 120,
+    "titleY": -80,
     "currency": "USD"
   },
   "tokens": [
@@ -10,7 +12,7 @@
   ],
   "wip": true,
   "ipo": true,
-  "bank": 12000,
+  "bank": 8001,
   "players": [
     {
       "number": 3,
@@ -37,7 +39,21 @@
         "shares": 2
       },
       {
-        "quantity": 8,
+        "quantity": 2,
+        "percent": 10,
+        "shares": 1
+      },
+      {
+        "quantity": 3,
+        "label": "Preferred Share: +$1",
+        "labelColor": "green",
+        "percent": 10,
+        "shares": 1
+      },
+      {
+        "quantity": 3,
+        "label": "Unsecured Share: -$1",
+        "labelColor": "brown",
         "percent": 10,
         "shares": 1
       }
@@ -45,25 +61,249 @@
   },
   "tokenTypes": {
     "two": [
-      "Home",
+      "Free",
       40
     ],
     "three": [
-      "Home",
+      "Free",
       40,
       100
     ],
     "four": [
-      "Home",
+      "Free",
       40,
       100,
       100
     ]
   },
-  "companies": [],
-  "trains": [],
-  "privates": [],
-  "phases": [],
+  "companies": [
+    {
+      "name": "Central of Georgia Railway",
+      "abbrev": "COG",
+      "color": "cyan",
+      "tokens": "three"
+    },
+    {
+      "name": "Gulf, Mobile & Ohio Railroad",
+      "abbrev": "GMO",
+      "color": "pink",
+      "tokens": "four"
+    },
+    {
+      "name": "Louisville & Nashville Railroad",
+      "abbrev": "L&N",
+      "logo": "LN",
+      "color": "blue",
+      "tokens": "four"
+    },
+    {
+      "name": "Nashville, Chattanooga and St. Louis Railway",
+      "abbrev": "NC&SL",
+      "color": "orange",
+      "tokens": "two"
+    },
+    {
+      "name": "St. Louis - San Francisco Railway",
+      "abbrev": "SLSF",
+      "color": "red",
+      "tokens": "three"
+    },
+    {
+      "name": "Southern Railway",
+      "abbrev": "SOU",
+      "color": "green",
+      "tokens": "four"
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 5,
+      "price": 80,
+      "color": "yellow",
+      "description": "Salvage Value: $20"
+    },
+    {
+      "name": "3",
+      "quantity": 4,
+      "price": 150,
+      "color": "green",
+      "description": "Salvage Value: $35"
+    },
+    {
+      "name": "4",
+      "quantity": 3,
+      "price": 250,
+      "color": "green",
+      "description": "Salvage Value: $60"
+    },
+    {
+      "name": "5",
+      "quantity": 2,
+      "price": 479,
+      "color": "green",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "6",
+      "quantity": 2,
+      "price": 539,
+      "color": "brown",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "2D",
+      "quantity": 2,
+      "price": 579,
+      "color": "brown",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "4D",
+      "quantity": 2,
+      "price": 669,
+      "color": "brown",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "5D",
+      "quantity": 1,
+      "price": 709,
+      "color": "brown",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "1D+1",
+      "quantity": 1,
+      "color": "brown",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    }
+  ],
+  "privates": [
+    {
+      "name": "Slippery Slope Ski Resort & Mine",
+      "id": 1,
+      "price": 15,
+      "revenue": 4,
+      "icon": "mountain",
+      "description": "Free extra tile lay in a mountain hex, then closes."
+    },
+    {
+      "name": "Tennessee River Bridge and Blasting",
+      "id": 2,
+      "price": 18,
+      "revenue": 3,
+      "tile": "7",
+      "description": "May play one or two extra free yellow tiles. Closes when special ability is used."
+    },
+    {
+      "name": "Emergency Response Teams",
+      "id": 3,
+      "price": 20,
+      "revenue": 4,
+      "token": {"color": "black", "label": "Parts"},
+      "description": "May place two extra spare parts tokens on the charter of a Major Company controlled by the owner of this private company. Closes when special ability is used."
+    },
+    {
+      "name": "Maria's Stock Tip of the Week",
+      "id": 4,
+      "price": 22,
+      "revenue": 5,
+      "token": {"color": "yellow", "label": "$"},
+      "description": "May move any railroad stock market one space to the right during any Major Company's operating turn. Closes when special ability is used or when first 5T is bought."
+    },
+    {
+      "name": "Dixie Flyer Pullman Service",
+      "id": 5,
+      "price": 72,
+      "revenue": 2,
+      "token": {"color": "brown", "label": "1D+1"},
+      "description": "Provides free 1D+1 train which must be assigned to any Major Company upon the purchase of the first 6T."
+    },
+    {
+      "name": "Investor's Choice",
+      "id": 6,
+      "price": 80,
+      "icon": "charter",
+      "description": "Receive the president's certificate for either the SOU or the GM&O."
+    },
+    {
+      "name": "Bruce's Hedge Fund",
+      "id": 7,
+      "price": 38,
+      "icon": "share",
+      "description": "May take an available share of any railroad from the initial offering. This counts as a stock action and closes the company."
+    }
+  ],
+  "phases": [
+    {
+      "name": "2",
+      "train": "2",
+      "limit": "3",
+      "number": "5",
+      "tiles": "yellow"
+    },
+    {
+      "name": "3",
+      "train": "3",
+      "limit": "3",
+      "number": "4",
+      "tiles": "green"
+    },
+    {
+      "name": "4",
+      "train": "4",
+      "limit": "3",
+      "number": "3",
+      "tiles": "green"
+    },
+    {
+      "name": "5",
+      "train": "5",
+      "limit": "3",
+      "number": "2",
+      "tiles": "green",
+      "notes": "Private company #5 closes"
+    },
+    {
+      "name": "6",
+      "train": ["6", "2D", "4D", "5D"],
+      "limit": "3",
+      "number": "2",
+      "tiles": "brown",
+      "notes": "All remaining private companies are removed from play"
+    }
+  ],
   "pools": [
     {
       "name": "Market",
@@ -314,9 +554,317 @@
       }
     ]
   },
-  "tiles": {},
+  "tiles": {
+    "3": 3,
+    "4": 3,
+    "5": 2,
+    "6": 2,
+    "7": 3,
+    "8": 9,
+    "9": 10,
+    "57": 4,
+    "58": 3,
+    "U69": {
+      "color": "yellow",
+      "centerTowns": [{}],
+      "track": [{"side":1},{"side":5},{"side":6}],
+      "values": [{"value":20,"angle":90,"percent":0.6}]
+    },
+
+    "14": 3,
+    "15": 3,
+    "16": 1,
+    "19": 1,
+    "20": 1,
+    "23": 4,
+    "24": 4,
+    "25": 1,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "619": 1,
+    "U11": {
+      "color": "green",
+      "values": [{"angle": 210, "percent": 0.8, "value": 25}],
+      "cities": [{"size": 2}],
+      "track": [{"side": 1}, {"side": 3}, {"side": 4}, {"side": 5}]
+    },
+    "U14": {
+      "color": "green",
+      "values": [{"angle": 210, "percent": 0.8, "value": 25}],
+      "cities": [{"size": 2}],
+      "track": [{"side": 1}, {"side": 2}, {"side": 4}, {"side": 5}]
+    },
+    "U15": {
+      "color": "green",
+      "values": [{"angle": 210, "percent": 0.8, "value": 25}],
+      "cities": [{"size": 2}],
+      "track": [{"side": 1}, {"side": 2}, {"side": 3}, {"side": 4}]
+    },
+
+    "39": 1,
+    "40": 1,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "45": 2,
+    "46": 2,
+    "47": 2,
+    "63": 4,
+    "U12": {
+      "color": "brown",
+      "cities": [{"rotate": -30,"size":2}],
+      "track": [{"side":1},{"side":3},{"side":4},{"side":5},{"side":6}],
+      "values": [{"value":40,"angle":330,"percent": 0.8}],
+      "labels": [{"x":5,"label":"J","angle":150,"percent":0.8}]
+    },
+    "U13": {
+      "color": "brown",
+      "track": [{"side":5},{"side":6},{"side":3},{"side":4}],
+      "cities": [{"rotate":30,"size":2}],
+      "values": [{"value":40,"angle":30,"percent": 0.6}],
+      "labels": [{"label":"B","angle":210,"percent":0.8}]
+    }
+  },
   "map": {
-    "hexes": [],
-    "borders": []
+    "hexes": [
+      {
+        "color": "plain",
+        "hexes": ["C3", "G3", "G5", "F4", "D6", "E7", "B8", "G11", "B14", "G15", "B16", "F16"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{
+          "type": "mountain",
+          "cost": 60
+        }],
+        "hexes": ["B10", "D10", "C11", "B12", "E15", "E17"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{
+          "type": "mountain",
+          "cost": 120
+        }],
+        "hexes": ["E13", "D14", "C15", "D16", "C17"]
+      },
+      {
+        "color": "river",
+        "terrain": [{
+          "type": "river",
+          "cost": 20
+        }],
+        "hexes": ["F14"]
+      },
+      {
+        "color": "river",
+        "terrain": [{
+          "type": "river",
+          "cost": 40
+        }],
+        "hexes": ["B4", "C5", "D4", "D12", "E5", "F8"]
+      },
+      {
+        "color": "river",
+        "cities": [{"name": {"name": "Nashville"}}],
+        "terrain": [{
+          "percent": 0.667,
+          "type": "river",
+          "cost": 40
+        }],
+        "hexes": ["C7"]
+      },
+      {
+        "color": "river",
+        "centerTowns": [{"name": {"name": "Huntsville"}}],
+        "terrain": [{
+          "percent": 0.6,
+          "type": "river",
+          "cost": 40
+        }],
+        "hexes": ["F6"]
+      },
+      {
+        "color": "river",
+        "terrain": [{
+          "type": "mountain",
+          "cost": 60
+        }],
+        "hexes": ["E9"]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "name": {"name": "Corinth"}
+        }],
+        "hexes": ["E3"]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "name": {"name": "Tupelo"}
+        }],
+        "hexes": ["F2"]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "name": {"name": "Murphesboro"}
+        }],
+        "hexes": ["D8"]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "name": {"name": "Gadsden"}
+        }],
+        "hexes": ["F10"]
+      },
+      {
+        "color": "plain",
+        "cities": [{
+          "companies": ["SOU"],
+          "name": {"name": "Knoxville"}
+        }],
+        "hexes": ["C13"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "name": {"name": "Dyersburg"}
+        }],
+        "hexes": ["C1"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "name": {"name": "Clarksville"}
+        }],
+        "hexes": ["B6"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "name": {"name": "Tuscaloosa"}
+        }],
+        "hexes": ["G7"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{
+          "name": {"name": "Lebanon"}
+        }],
+        "hexes": ["C9"]
+      },
+      {
+        "color": "gray",
+        "cities": [{"name": {"name": "Paducah"}}],
+        "track": [{"side":4},{"side":5}],
+        "values": [{"value":40,"angle":90,"percent":0.667}],
+        "hexes":["B2"]
+      },
+      {
+        "color": "grey",
+        "cities": [{"companies": ["L&N"], "name": {"name": "Louisville"}}],
+        "track": [{"side":5},{"side":6}],
+        "values": [{"value":40,"angle":90,"percent":0.667}],
+        "hexes":["A9"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{"companies": ["GMO"], "name": {"offset": 42, "name": "Jackson"}}],
+        "track": [{"side":3},{"side":5}],
+        "values": [{"value":20,"angle":90,"percent":0.667}],
+        "hexes":["D2"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{"companies": ["SLSF"], "name": {"reverse": true, "name": "Birmingham"}}],
+        "track": [{"side":1},{"side":3},{"side":4}],
+        "values": [{"value":20,"angle":150,"percent":0.667}],
+        "hexes":["G9"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{"companies": ["NC&SL"], "name": {"offset": 66, "name": "Chattanooga"}}],
+        "track": [{"side":1},{"side":5}],
+        "values": [{"value":20,"angle":150,"percent":0.667}],
+        "hexes":["E11"]
+      },
+      {
+        "color": "yellow",
+        "towns": [{"rotate": 150, "name": {"reverse": true, "name": "Rome"}}],
+        "track": [{"side":2,"type":"straight"}],
+        "values": [{"value":10,"angle":240,"percent":0.6}],
+        "hexes":["F12"]
+      },
+      {
+        "color": "gray",
+        "cities": [{"companies": ["COG"], "name": {"reverse": true, "name": "Atlanta"}}],
+        "track": [{"side":1},{"side":2},{"side":3},{"side":4}],
+        "offBoardRevenue": {
+          "percent": 0.7,
+          "revenues": [
+            {"color":"yellow","value":20},
+            {"color":"brown","value":50}
+          ]
+        },
+        "hexes":["G13"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {"name": "Memphis"},
+          "revenues": [
+            {"color":"yellow", "value": 30},
+            {"color":"brown", "value": 70}
+          ]
+        },
+        "track": [{"side":3,"type":"offboard"},
+                  {"side":4,"type":"offboard"},
+                  {"side":5,"type":"offboard"}],
+        "hexes":["E1"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {"name": "Augusta"},
+          "revenues": [
+            {"color":"yellow", "value": 30},
+            {"color":"brown", "value": 60}
+          ]
+        },
+        "track": [{"side":1,"type":"offboard"},
+                  {"side":2,"type":"offboard"}],
+        "hexes":["G17"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {"name": "Lexington"},
+          "revenues": [
+            {"color":"yellow", "value": 30},
+            {"color":"brown", "value": 40}
+          ]
+        },
+        "track": [{"side":5,"type":"offboard"},
+                  {"side":6,"type":"offboard"}],
+        "hexes":["A13"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {"name": "Bristol Coalfields"},
+          "revenues": [
+            {"color":"yellow", "value": 60},
+            {"color":"brown", "value": 40}
+          ]
+        },
+        "track": [{"side":1,"type":"offboard"},
+                  {"side":6,"type":"offboard"}],
+        "hexes":["B18"]
+      }
+    ]
   }
 }

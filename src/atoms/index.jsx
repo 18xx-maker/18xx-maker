@@ -19,6 +19,7 @@ const atoms = [{
              {color: "green"},
              {color: "brown"},
              {color: "gray"},
+             {color: "grey"},
              {color: "orange", divides: [{side:2}]},
              {color: "yellow/green"},
              {color: "green/brown"},
