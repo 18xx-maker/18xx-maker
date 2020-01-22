@@ -785,7 +785,7 @@
     {
       "minor": true,
       "phase": "3",
-      "limit": "4",
+      "limit": "2",
       "number": "6",
       "tiles": "green",
       "notes": "Tiles may be laid across active borders.",

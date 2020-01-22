@@ -8,7 +8,7 @@
     "orientation": "horizontal",
     "titleX": 1200,
     "titleY": 1200,
-    "currency": "CAD"
+    "currency": "$#"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/227143/1867-railways-canada",
