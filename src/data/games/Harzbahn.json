@@ -19,6 +19,8 @@
     "Round"
   ],
   "ipo": false,
+  "bank": "∞",
+  "certLimit": "∞",
   "players": [
     {
       "number": 2,
@@ -2880,6 +2882,14 @@
         "color": "mountain",
         "coords": ["C11p2", "C11p3", "C11p4", "C13p3", "C13p4", "C13p5"]
       }
-    ]
+    ],
+    "roundTracker": {
+      "x": 977,
+      "y": 1110
+    },
+    "players": {
+      "x": 0,
+      "y": 287
+    }
   }
 }

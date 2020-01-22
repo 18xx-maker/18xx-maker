@@ -2,6 +2,12 @@
   page-break-inside: avoid;
   overflow: auto;
 
+  position: relative;
+
+  .cutlines__page {
+    top: 0;
+  }
+
   svg {
     overflow: hidden;
   }

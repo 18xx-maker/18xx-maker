@@ -124,16 +124,16 @@
       100
     ],
     "Tobu": [
-     "Free",
-     "Free",
-     40,
+      "Free",
+      "Free",
+      40,
       100,
       100
     ]
   },
   "shareTypes": {
     "minor": [
-{
+      {
         "quantity": 1,
         "label": "Late Minor",
         "percent": 50,
@@ -153,7 +153,7 @@
         "shares": 1
       }
     ]
-    },  
+  },
   "companies": [
     {
       "name": "Japan National Railways",
@@ -162,22 +162,22 @@
       "tokens": "JNR",
       "shares":[
         {
-        "quantity": 1,
-        "label": "President's Certificate",
-        "percent": 20,
-        "shares": 2
-      },
-      {
-        "quantity": 6,
-        "percent": 10,
-        "shares": 1
-      },
-      {
-        "quantity": 4,
-        "percent": 5,
-        "shares": 0.5
-      }
-    ]
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 6,
+          "percent": 10,
+          "shares": 1
+        },
+        {
+          "quantity": 4,
+          "percent": 5,
+          "shares": 0.5
+        }
+      ]
     },
     {
       "name": "Tokyo Subway",
@@ -233,7 +233,7 @@
       "color": "yellow",
       "tokens": "3"
     },
-     {
+    {
       "name": "Tokyo Monorail (Cost: ¥300, Treasury: ¥80 & 3-Train[no sell])",
       "minor": true,
       "abbrev": "TM",
@@ -245,19 +245,19 @@
       "abbrev": "SM",
       "color": "gray"
     },
-     {
+    {
       "name": "New transit Yurikamome (Cost: ¥350, Treasury: ¥80 & 3-Train[no sell])",
       "minor": true,
       "abbrev": "NTY",
       "color": "gray"
     },
-     {
+    {
       "name": "Tama Toshi Monorail (Cost: ¥300, Treasury: ¥80 & 3-Train[no sell])",
       "minor": true,
       "abbrev": "TTM",
       "color": "gray"
     },
-     {
+    {
       "name": "Tsukuba Express (Cost: ¥300, Treasury: ¥80 & 4-Train[no sell])",
       "minor": true,
       "abbrev": "TE",
@@ -293,7 +293,7 @@
       "abbrev": "5",
       "color": "black"
     },
-   {
+    {
       "name": "Sobu Railway (exchange for 5% of JNR when formed)",
       "minor": true,
       "abbrev": "6",
@@ -377,7 +377,7 @@
         }
       ]
     },
-     {
+    {
       "name": "3 [TTM]",
       "quantity": 1,
       "color": "green",
@@ -388,7 +388,7 @@
         }
       ]
     },
-     {
+    {
       "name": "3 [SM]",
       "quantity": 1,
       "color": "green",
@@ -621,7 +621,7 @@
           "icon": "times",
           "note": "Early Minors cannot be sold"
         },
-         {
+        {
           "color": "red",
           "icon": "times",
           "note": "Late Minors can only be sold if someone other than the director holds the 50% share."
@@ -681,11 +681,11 @@
       "optional": [
         "Purchase private companies"
       ]
-     }
+    }
   ],
   "stock": {
     "type": "2D",
-     "par": {
+    "par": {
       "values": [
         100,
         90,
@@ -719,7 +719,6 @@
         null,
         {
           "value": 180,
-          "label": 180,
           "arrow": "down"
         },
         200,
@@ -733,18 +732,16 @@
       [
         {
           "value": 81,
-          "label": 81,
           "arrow": "down"
         },
         90,
         {
           "value": 100,
-          "label": 100,
           "par": true
         },
         {
           "value": 115,
-          "label": "115 [JNR]",
+          "companies": [{"abbrev": "JNR"}],
           "par": true
         },
         130,
@@ -758,20 +755,17 @@
         280,
         {
           "value": 300,
-          "label": 300,
           "arrow": "up"
         }
       ],
       [
         {
           "value": 75,
-          "label": 75,
           "arrow": "down"
         },
         82,
         {
           "value": 90,
-          "label": 90,
           "par": true
         },
         100,
@@ -786,20 +780,17 @@
         235,
         {
           "value": 250,
-          "label": 250,
           "arrow": "up"
         }
       ],
       [
         {
           "value": 69,
-          "label": 69,
           "arrow": "down"
         },
         75,
         {
           "value": 82,
-          "label": 82,
           "par": true
         },
         90,
@@ -813,22 +804,18 @@
         185,
         {
           "value": 200,
-          "label": 200,
           "arrow": "up"
-        },
-        null,
-        null
+        }
       ],
       [
         {
           "value": 64,
-          "label": 64,
           "arrow": "down"
         },
-        70,     
+        70,
         {
           "value": 75,
-          "label": "75 [Tobu]",
+          "companies": [{ "abbrev": "TR" }],
           "par": true
         },
         82,
@@ -840,23 +827,17 @@
         150,
         {
           "value": 165,
-          "label": 165,
           "arrow": "up"
-        },
-        null,
-        null,
-        null
+        }
       ],
       [
         {
           "value": 60,
-          "label": 60,
           "arrow": "down"
         },
         65,
-         {
+        {
           "value": 70,
-          "label": 70,
           "par": true
         },
         75,
@@ -864,40 +845,29 @@
         90,
         100,
         {
-          "value": 10,
-          "label": 110,
+          "value": 110,
           "arrow": "up"
-        },
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        }
       ],
       [
-{
+        {
           "value": 56,
-          "label": 56,
           "arrow": "down"
         },
         62,
         {
           "value": 65,
-          "label": 65,
           "par": true
         },
         70,
         {
           "value": 74,
-          "label": 74,
           "arrow": "up"
         }
       ],
       [
         {
           "value": 52,
-          "label": 52,
           "legend": 0,
           "arrow": "down"
         },
@@ -905,56 +875,49 @@
         63,
         {
           "value": 67,
-          "label": 67,
           "arrow": "up"
         }
       ],
       [
-{
+        {
           "value": 40,
-          "label": 40,
           "legend": 0,
           "arrow": "down"
         },
         {
           "value": 50,
-          "label": 50,
           "legend": 0
         },
         {
           "value": 60,
-          "label": 60,
           "arrow": "up"
         }
-],
-[
-{
+      ],
+      [
+        {
           "value": 30,
-          "label": 30,
           "legend": 0,
           "arrow": "down"
         },
         {
           "value": 40,
-          "label": 40,
           "legend": 0
         },
         {
           "value": 50,
-          "label": 50,
           "legend": 0,
           "arrow": "up"
         }
-          ]
-],
-  "legend": [   
-    {
+      ]
+    ],
+    "legend": [
+      {
         "color": "yellow",
         "description": "Shares of this corporation do not count toward the certificate limit",
         "icon": "certificate"
       }
     ]
-},
+  },
   "tiles": {
     "3": 2,
     "4": 3,
@@ -965,670 +928,670 @@
     "57": 3,
     "58": 3,
     "Y10": {
-    "color": "yellow",
-    "labels": [
-      {
-        "label": "Y",
-        "angle": 150,
-        "percent": 0.8
-      }
-    ],
+      "color": "yellow",
+      "labels": [
+        {
+          "label": "Y",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
       "cities": [
-      {}
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 20
-      }
-    ],
-    "track": [
-      {
-        "side": 1
-      },
-      {
-        "side": 3
-      },
-      {
-        "side": 5
-      }
-    ]
-  },
-"C10": {
-    "color": "yellow",
-     "quantity": 5,
-    "labels": [
-      {
-        "label": "C",
-        "angle": 150,
-        "percent": 0.8
-      }
-    ],
-      "cities": [
-      {}
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 20
-      }
-    ],
-    "track": [
-      {
-        "side": 1
-      }
-    ]
-  },
-  "16": 1,
-"19": 1,
-"20": 1,
-"23": 3,
-"24": 3,
-"25" : 2,
-"26": 2,
-"26": 2,
-"27": 2,
-"28": 2,
-"29": 2,
-"87": {
-    "color": "green",
-     "quantity": 4,
-      "centerTowns": [
-      {}
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 10
-      }
-    ],
-    "track": [
-      {
-        "side": 1
-      },
-       {
-        "side": 2
-      },
-       {
-        "side": 3
-      },
-       {
-        "side": 6
-      }
-    ]
-  },
-  "87": {
-    "color": "green",
-     "quantity": 4,
-      "centerTowns": [
-      {}
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 10
-      }
-    ],
-    "track": [
-      {
-        "side": 2
-      },
-       {
-        "side": 3
-      },
-       {
-        "side": 5
-      },
-       {
-        "side": 6
-      }
-    ]
-  },
-"116": {
-    "color": "green",
-     "quantity": 6,
-      "cities": [
-      {}
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 30
-      }
-    ],
-    "track": [
-      {
-        "side": 2
-      },
-       {
-        "side": 3
-      },
-       {
-        "side": 5
-      },
-       {
-        "side": 6
-      }
-    ]
-  },
-"117": {
-    "color": "green",
-     "quantity": 5,
-      "cities": [
-      {}
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 30
-      }
-    ],
-    "track": [
-      {
-        "side": 2
-      },
-       {
-        "side": 3
-      },
-       {
-        "side": 4
-      },
-       {
-        "side": 5
-      }
-    ]
-  },
-  "L20": {
-    "color": "green",
-     "quantity": 1,
-     "labels": [
-      {
-        "label": "L",
-        "angle": 150,
-        "percent": 0.8
-      }
-    ],
-      "cities": [
-      {}
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 30
-      }
-    ],
-    "track": [
-      {
-        "side": 2
-      },
-       {
-        "side": 3
-      },
-       {
-        "side": 5
-      },
-       {
-        "side": 6
-      }
-    ]
-  },
-  "P20": {
-    "color": "green",
-     "quantity": 2,
-     "labels": [
-      {
-        "label": "P",
-        "angle": 150,
-        "percent": 0.8
-      }
-    ],
-      "cities": [
-      {}
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 30
-      }
-    ],
-    "track": [
-      {
-        "side": 2
-      },
-       {
-        "side": 4
-      }
-    ]
-  },
-   "Y20": {
-    "color": "green",
-     "quantity": 3,
-     "labels": [
-      {
-        "label": "Y",
-        "angle": 150,
-        "percent": 0.8
-      }
-    ],
-      "cities": [
-      {}
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 40
-      }
-    ],
-    "track": [
-      {
-        "side": 2
-      },
-       {
-        "side": 3
-      },
-       {
-        "side": 4
-      },
-       {
-        "side": 6
-      }
-    ]
-  },
-  "C20": {
-    "color": "green",
-    "quantity": 2,
-    "labels": [
-      {
-        "label": "C",
-        "angle": 150,
-        "percent": 0.8
-      }
-    ],
-      "cities": [
-      {}
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 40
-      }
-    ],
-    "track": [
-      {
-        "side": 1
-      },
-      {
-        "side": 3
-      },
-      {
-        "side": 5
-      }
-    ]
-  },
-  "C21": {
-    "color": "green",
-    "quantity": 2,
-     "cities": [
-      {
- "percent": 0.3
-      }
-    ],
-     "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 40
-      }
-    ],
-    "track": [
-      {
-        "type": "straight",
-        "side": 1
-      },
-      {
-        "type": "gentle",
-        "side": 5
-      }
-    ]
-  },
-   "C22": {
-    "color": "green",
-    "quantity": 2,
-     "cities": [
-      {
- "percent": 0.3
-      }
-    ],
+        {}
+      ],
       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 40
-      }
-    ],
-    "track": [
-      {
-        "type": "straight",
-        "side": 1
-      },
-      {
-        "type": "gentle",
-        "side": 1
-      }
-    ]
-  },
-  "39": 1,
-"40": 1,
-"41": 2,
-"42": 2,
-"43": 2,
-"44": 2,
-"45": 2,
-"46": 2,
-"47": 2,
-"70": 1,
-"611": 9,
-"911" : 3,
- "P30": {
-    "color": "brown",
-     "quantity": 4,
-     "labels": [
-      {
-        "label": "P",
-        "angle": 150,
-        "percent": 0.8
-      }
-    ],
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 20
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 5
+        }
+      ]
+    },
+    "C10": {
+      "color": "yellow",
+      "quantity": 5,
+      "labels": [
+        {
+          "label": "C",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
       "cities": [
-      {}
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 40
-      }
-    ],
-    "track": [
-      {
-        "side": 2
-      },
-       {
-        "side": 3
-      },
-       {
-        "side": 4
-      }
-    ]
-  },
-  "L30": {
-    "color": "brown",
-     "quantity": 2,
-     "labels": [
-      {
-        "label": "L",
-        "angle": 150,
-        "percent": 0.8
-      }
-    ],
+        {}
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 20
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        }
+      ]
+    },
+    "16": 1,
+    "19": 1,
+    "20": 1,
+    "23": 3,
+    "24": 3,
+    "25" : 2,
+    "26": 2,
+    "26": 2,
+    "27": 2,
+    "28": 2,
+    "29": 2,
+    "87": {
+      "color": "green",
+      "quantity": 4,
+      "centerTowns": [
+        {}
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 10
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "87": {
+      "color": "green",
+      "quantity": 4,
+      "centerTowns": [
+        {}
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 10
+        }
+      ],
+      "track": [
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "116": {
+      "color": "green",
+      "quantity": 6,
       "cities": [
-      {}
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 40
-      }
-    ],
-    "track": [
-      {
-        "side": 2
-      },
-       {
-        "side": 3
-      },
-       {
-        "side": 4
-      },
-       {
-        "side": 5
-      },
-       {
-        "side": 6
-      }
-    ]
-  },
-   "Y30": {
-    "color": "brown",
-     "quantity": 3,
-     "labels": [
-      {
-        "label": "Y",
-        "angle": 150,
-        "percent": 0.8
-      }
-    ],
+        {}
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 30
+        }
+      ],
+      "track": [
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "117": {
+      "color": "green",
+      "quantity": 5,
       "cities": [
-      {
-"size": 2
-      }
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 50
-      }
-    ],
-    "track": [
-      {
-        "side": 2
-      },
-       {
-        "side": 3
-      },
-       {
-        "side": 4
-      },
-       {
-        "side": 6
-      }
-    ]
-  },
-   "C30": {
-    "color": "brown",
-     "quantity": 6,
-     "labels": [
-      {
-        "label": "C",
-        "angle": 150,
-        "percent": 0.8
-      }
-    ],
+        {}
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 30
+        }
+      ],
+      "track": [
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        }
+      ]
+    },
+    "L20": {
+      "color": "green",
+      "quantity": 1,
+      "labels": [
+        {
+          "label": "L",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
       "cities": [
-      {}
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 50
-      }
-    ],
-    "track": [
-      {
-        "side": 2
-      },
-       {
-        "side": 3
-      },
-       {
-        "side": 4
-      },
-       {
-        "side": 5
-      },
-       {
-        "side": 6
-      }
-    ]
-  },
- "P40": {
-    "color": "gray",
-     "quantity": 2,
-     "labels": [
-      {
-        "label": "P",
-        "angle": 150,
-        "percent": 0.8
-      }
-    ],
+        {}
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 30
+        }
+      ],
+      "track": [
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "P20": {
+      "color": "green",
+      "quantity": 2,
+      "labels": [
+        {
+          "label": "P",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
       "cities": [
-      {}
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 50
-      }
-    ],
-    "track": [
-      {
-        "side": 2
-      },
-       {
-        "side": 3
-      },
-       {
-        "side": 4
-      }
-    ]
-  },
-   "Y40": {
-    "color": "gray",
-     "quantity": 2,
-     "labels": [
-      {
-        "label": "Y",
-        "angle": 150,
-        "percent": 0.8
-      }
-    ],
+        {}
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 30
+        }
+      ],
+      "track": [
+        {
+          "side": 2
+        },
+        {
+          "side": 4
+        }
+      ]
+    },
+    "Y20": {
+      "color": "green",
+      "quantity": 3,
+      "labels": [
+        {
+          "label": "Y",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
       "cities": [
-      {
-"size": 2
-      }
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 60
-      }
-    ],
-    "track": [
-      {
-        "side": 2
-      },
-       {
-        "side": 3
-      },
-       {
-        "side": 4
-      },
-       {
-        "side": 5
-      },
-       {
-        "side": 6
-      }
-    ]
-  },
-   "C40": {
-    "color": "gray",
-     "quantity": 3,
-     "labels": [
-      {
-        "label": "C",
-        "angle": 150,
-        "percent": 0.8
-      }
-    ],
+        {}
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 40
+        }
+      ],
+      "track": [
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "C20": {
+      "color": "green",
+      "quantity": 2,
+      "labels": [
+        {
+          "label": "C",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
       "cities": [
-      {
-"size": 2
-      }
-    ],
-       "values": [
-      {
-        "angle": -150,
-        "percent": 0.75,
-        "value": 60
-      }
-    ],
-    "track": [
-      {
-        "side": 1
-      },
-      {
-        "side": 2
-      },
-       {
-        "side": 3
-      },
-       {
-        "side": 4
-      },
-       {
-        "side": 5
-      },
-       {
-        "side": 6
-      }
-    ]
-  }
-},
+        {}
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 40
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 5
+        }
+      ]
+    },
+    "C21": {
+      "color": "green",
+      "quantity": 2,
+      "cities": [
+        {
+          "percent": 0.3
+        }
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 40
+        }
+      ],
+      "track": [
+        {
+          "type": "straight",
+          "side": 1
+        },
+        {
+          "type": "gentle",
+          "side": 5
+        }
+      ]
+    },
+    "C22": {
+      "color": "green",
+      "quantity": 2,
+      "cities": [
+        {
+          "percent": 0.3
+        }
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 40
+        }
+      ],
+      "track": [
+        {
+          "type": "straight",
+          "side": 1
+        },
+        {
+          "type": "gentle",
+          "side": 1
+        }
+      ]
+    },
+    "39": 1,
+    "40": 1,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 2,
+    "45": 2,
+    "46": 2,
+    "47": 2,
+    "70": 1,
+    "611": 9,
+    "911" : 3,
+    "P30": {
+      "color": "brown",
+      "quantity": 4,
+      "labels": [
+        {
+          "label": "P",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
+      "cities": [
+        {}
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 40
+        }
+      ],
+      "track": [
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        }
+      ]
+    },
+    "L30": {
+      "color": "brown",
+      "quantity": 2,
+      "labels": [
+        {
+          "label": "L",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
+      "cities": [
+        {}
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 40
+        }
+      ],
+      "track": [
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "Y30": {
+      "color": "brown",
+      "quantity": 3,
+      "labels": [
+        {
+          "label": "Y",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
+      "cities": [
+        {
+          "size": 2
+        }
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 50
+        }
+      ],
+      "track": [
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "C30": {
+      "color": "brown",
+      "quantity": 6,
+      "labels": [
+        {
+          "label": "C",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
+      "cities": [
+        {}
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 50
+        }
+      ],
+      "track": [
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "P40": {
+      "color": "gray",
+      "quantity": 2,
+      "labels": [
+        {
+          "label": "P",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
+      "cities": [
+        {}
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 50
+        }
+      ],
+      "track": [
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        }
+      ]
+    },
+    "Y40": {
+      "color": "gray",
+      "quantity": 2,
+      "labels": [
+        {
+          "label": "Y",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
+      "cities": [
+        {
+          "size": 2
+        }
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 60
+        }
+      ],
+      "track": [
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "C40": {
+      "color": "gray",
+      "quantity": 3,
+      "labels": [
+        {
+          "label": "C",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
+      "cities": [
+        {
+          "size": 2
+        }
+      ],
+      "values": [
+        {
+          "angle": -150,
+          "percent": 0.75,
+          "value": 60
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    }
+  },
   "map": {
     "hexes": [
       {
         "color": "plain",
         "labels": {
-        "label": "飯能",
-        "angle": 0,
-        "percent": -0.6
-      },
-      "centerTowns": [
+          "label": "飯能",
+          "angle": 0,
+          "percent": -0.6
+        },
+        "centerTowns": [
           {
             "name": {
               "name": "Hanno"
             }
           }
         ],
-         "hexes":[
-        "B4"
-      ]
+        "hexes":[
+          "B4"
+        ]
       },
       {
         "color": "gray",
         "labels": {
-        "label": "横須賀",
-        "rotate": 0,
-        "angle": 0,
-        "percent": 0.5
-      },
-      "cities": [
+          "label": "横須賀",
+          "rotate": 0,
+          "angle": 0,
+          "percent": 0.5
+        },
+        "cities": [
           {
             "percent": -0.2,
             "name": {
@@ -1638,32 +1601,32 @@
             }
           }
         ],
-           "track": [
+        "track": [
           {
             "side": 1,
             "type": "gentle"
           }
         ],
-           "values": [
+        "values": [
           {
             "value": 30,
             "angle": 55,
             "percent": -0.75
           }
         ],
-         "hexes":[
-        "K7"
-      ]
+        "hexes":[
+          "K7"
+        ]
       },
       {
         "color": "gray",
         "labels": {
-        "label": "江ノ島",
-        "rotate": 0,
-        "angle": 0,
-        "percent": 0.5
-      },
-      "cities": [
+          "label": "江ノ島",
+          "rotate": 0,
+          "angle": 0,
+          "percent": 0.5
+        },
+        "cities": [
           {
             "companies": [
               "SM"
@@ -1676,51 +1639,51 @@
             }
           }
         ],
-           "track": [
+        "track": [
           {
             "side": 2,
             "type": "gentle"
           }
         ],
-           "values": [
+        "values": [
           {
             "value": 30,
             "angle": 55,
             "percent": -0.75
           }
         ],
-         "hexes":[
-        "K5"
-      ]
+        "hexes":[
+          "K5"
+        ]
       },
- {
+      {
         "color": "plain",
         "track": [
-    {
-      "path": "m 50 125 L 80 80 C 75 50, -95 120, 0 -50 L -20 -85",
-      "type": "custom",
-      "color": "water",
-      "cross": "under"
-    }
-  ],
+          {
+            "path": "m 50 125 L 80 80 C 75 50, -95 120, 0 -50 L -20 -85",
+            "type": "custom",
+            "color": "water",
+            "cross": "under"
+          }
+        ],
         "labels": {
-        "label": "鶴見",
-        "rotate": 0,
-        "angle": 0,
-        "percent": -0.75
-      },
-      "companies": [
-    {
-      "label": "鶴見臨港鉄道",
-      "rotate": 80,
-      "angle": 90,
-      "percent": 0.55,
-      "left": 10,
-      "right": 10,
-      "color": "blue"
-    }
-  ],
-      "cities": [
+          "label": "鶴見",
+          "rotate": 0,
+          "angle": 0,
+          "percent": -0.75
+        },
+        "companies": [
+          {
+            "label": "鶴見臨港鉄道",
+            "rotate": 80,
+            "angle": 90,
+            "percent": 0.55,
+            "left": 10,
+            "right": 10,
+            "color": "blue"
+          }
+        ],
+        "cities": [
           {
             "rotate": 0,
             "name": {
@@ -1728,35 +1691,35 @@
             }
           }
         ],
-      "water": {
-        "percent": 0.75,
+        "water": {
+          "percent": 0.75,
           "cost": 80
         },
-         "hexes":[
-        "J12"
-      ]
+        "hexes":[
+          "J12"
+        ]
       },
       {
         "color": "yellow",
-           "track": [
-           {
+        "track": [
+          {
             "side": 1,
             "type": "gentle"
           }
         ],
-         "hexes":[
-        "J10"
-      ]
+        "hexes":[
+          "J10"
+        ]
       },
       {
         "color": "yellow",
         "labels": {
-        "label": "黄浜 Y",
-        "rotate": 0,
-        "angle": 0,
-        "percent": -0.8
-      },
-      "cities": [
+          "label": "黄浜 Y",
+          "rotate": 0,
+          "angle": 0,
+          "percent": -0.8
+        },
+        "cities": [
           {
             "rotate": 0,
             "name": {
@@ -1764,51 +1727,51 @@
             }
           }
         ],
-           "track": [
-{
+        "track": [
+          {
             "side": 4
           }
         ],
-           "values": [
+        "values": [
           {
             "value": 30,
             "angle": 50,
             "percent": -0.8
           }
         ],
-         "hexes":[
-        "J8"
-      ]
-      },
-       {
-        "color": "plain",
-        "labels": {
-        "label": "藤沢",
-        "angle": 0,
-        "percent": -0.6
-      },
-       "centerTowns": {
-            "name": {
-              "name": "Fujisawa"
-            }
-        },
-         "hexes":[
-        "J4"
-      ]
+        "hexes":[
+          "J8"
+        ]
       },
       {
-            "color": "offboard",
-            "labels": {
-        "label": "羽田",
-        "angle": 125,
-        "percent": -0.2
-                      },
-            "offBoardRevenue": {
+        "color": "plain",
+        "labels": {
+          "label": "藤沢",
+          "angle": 0,
+          "percent": -0.6
+        },
+        "centerTowns": {
+          "name": {
+            "name": "Fujisawa"
+          }
+        },
+        "hexes":[
+          "J4"
+        ]
+      },
+      {
+        "color": "offboard",
+        "labels": {
+          "label": "羽田",
+          "angle": 125,
+          "percent": -0.2
+        },
+        "offBoardRevenue": {
           "angle": 0,
           "percent": 0.6,
           "reverse": true,
           "revenues": [
-             {
+            {
               "color": "green",
               "cost": "10"
             },
@@ -1818,59 +1781,59 @@
             }
           ]
         },
-           "cities": [
-{
-          "angle": 15,
-          "percent": -0.6,
+        "cities": [
+          {
+            "angle": 15,
+            "percent": -0.6,
             "name": {
               "rotate": 180,
               "reverse": true,
-            "name": "Haneda"
-          },
-          "companies": [
+              "name": "Haneda"
+            },
+            "companies": [
               "TM"
             ]
-           }
-         ],
-           "track": [
+          }
+        ],
+        "track": [
           {
             "side": 1,
             "type": "offboard"
           },
-           {
+          {
             "side": 2,
             "type": "sharpStop"
           }
         ],
-      "hexes":[
-        "I15"
-      ]
-    },
-       {
+        "hexes":[
+          "I15"
+        ]
+      },
+      {
         "color": "yellow",
         "labels": {
-        "label": "蒲田",
-        "angle": 0,
-        "percent": -0.6
-      },
-      "centerTowns": [
+          "label": "蒲田",
+          "angle": 0,
+          "percent": -0.6
+        },
+        "centerTowns": [
           {
             "name": {
               "name": "Kamata"
             }
           }
         ],
-      "track": [
+        "track": [
           {
             "type": "straight",
             "side": 1
           },
           {
-             "side": 5,
-      "type": "gentle",
-      "cross": "under",
-      "color": "water"
-    }
+            "side": 5,
+            "type": "gentle",
+            "cross": "under",
+            "color": "water"
+          }
         ],
         "values": [
           {
@@ -1879,28 +1842,28 @@
             "percent": 0.5
           }
         ],
-         "water": {
-            "angle": 120,
-            "percent": -0.75,
+        "water": {
+          "angle": 120,
+          "percent": -0.75,
           "cost": 80
         },
-         "hexes":[
-        "I13"
-      ]
+        "hexes":[
+          "I13"
+        ]
       },
       {
         "color": "yellow",
         "labels": {
-        "label": "川崎",
-        "angle": -30,
-        "rotate": -30,
-        "percent": -0.75
-      },
-      "cities": [
+          "label": "川崎",
+          "angle": -30,
+          "rotate": -30,
+          "percent": -0.75
+        },
+        "cities": [
           {
             "angle": 0,
-             "percent": 0,
-              "rotate": -30,
+            "percent": 0,
+            "rotate": -30,
             "name": {
               "name": "Kawasaki"
             },
@@ -1909,53 +1872,53 @@
             ]
           }
         ],
-           "track": [
+        "track": [
           {
             "side": 6
           },
           {
-          "side": 3
-        },
-        {
-         "side": 2,
-      "type": "gentle",
-      "cross": "under",
-      "color": "water"
-    }
+            "side": 3
+          },
+          {
+            "side": 2,
+            "type": "gentle",
+            "cross": "under",
+            "color": "water"
+          }
         ],
-           "values": [
+        "values": [
           {
             "value": 20,
             "angle": 270,
             "percent": 0.65
           }
         ],
-           "tokens": [
-    {
-      "angle": 90,
-      "percent": 0.65,
-      "company": "7",
-      "destination": true
-    }
-  ],
-           "water": {
-            "angle": 0,
-            "percent": 0.75,
+        "tokens": [
+          {
+            "angle": 90,
+            "percent": 0.65,
+            "company": "7",
+            "destination": true
+          }
+        ],
+        "water": {
+          "angle": 0,
+          "percent": 0.75,
           "cost": 80
         },
-         "hexes":[
-        "I11"
-      ]
+        "hexes":[
+          "I11"
+        ]
       },
-       {
+      {
         "color": "yellow",
         "labels": {
-        "label": "大和",
-        "rotate": 0,
-        "angle": 0,
-        "percent": -0.8
-      },
-      "cities": [
+          "label": "大和",
+          "rotate": 0,
+          "angle": 0,
+          "percent": -0.8
+        },
+        "cities": [
           {
             "companies": [
               "KR"
@@ -1966,82 +1929,82 @@
             }
           }
         ],
-           "track": [
+        "track": [
           {
             "side": 1
           },
-{
+          {
             "side": 5
           }
         ],
-           "values": [
+        "values": [
           {
             "value": 20,
             "angle": 50,
             "percent": -0.65
           }
         ],
-         "hexes":[
-        "I5"
-      ]
-      },
-       {
-        "color": "plain",
-        "labels": {
-        "label": "海老名",
-        "angle": 0,
-        "percent": -0.6
-      },
-       "centerTowns": {
-            "name": {
-              "name": "Ebina"
-            }
-        },
-         "hexes":[
-        "I3"
-      ]
+        "hexes":[
+          "I5"
+        ]
       },
       {
         "color": "plain",
         "labels": {
-        "label": "大井町",
-        "angle": 0,
-        "percent": -0.6
-      },
-       "centerTowns": {
-            "name": {
-              "name": "Oi"
-            }
+          "label": "海老名",
+          "angle": 0,
+          "percent": -0.6
         },
-         "hexes":[
-        "H14"
-      ]
+        "centerTowns": {
+          "name": {
+            "name": "Ebina"
+          }
+        },
+        "hexes":[
+          "I3"
+        ]
       },
-       {
+      {
+        "color": "plain",
+        "labels": {
+          "label": "大井町",
+          "angle": 0,
+          "percent": -0.6
+        },
+        "centerTowns": {
+          "name": {
+            "name": "Oi"
+          }
+        },
+        "hexes":[
+          "H14"
+        ]
+      },
+      {
         "color": "yellow",
-           "track": [
-           {
+        "track": [
+          {
             "side": 3,
             "type": "straight"
           }
         ],
-         "hexes":[
-        "H12"
-      ]
+        "hexes":[
+          "H12"
+        ]
       },
       {
         "color": "yellow",
         "labels": {
-        "label": "多摩川",
-        "angle": -30,
-        "rotate": -30,
-        "percent": -0.75
-      },
-      "cities": [
+          "label": "多摩川",
+          "angle": -30,
+          "rotate": -30,
+          "percent": -0.75
+        },
+        "cities": [
           {
             "angle": 0,
-             "percent": 0,
-              "rotate": -30,
+            "percent": 0,
+            "rotate": -30,
             "name": {
               "name": "Tamagawa"
             },
@@ -2050,85 +2013,85 @@
             ]
           }
         ],
-           "track": [
+        "track": [
           {
             "side": 6
           },
           {
-          "side": 3
-        },
-        {
-         "side": 5,
-      "type": "gentle",
-      "cross": "under",
-      "color": "water"
-    }
+            "side": 3
+          },
+          {
+            "side": 5,
+            "type": "gentle",
+            "cross": "under",
+            "color": "water"
+          }
         ],
-           "values": [
+        "values": [
           {
             "value": 20,
             "angle": 270,
             "percent": 0.65
           }
         ],
-           "water": {
-            "angle": 0,
-            "percent": 0.75,
+        "water": {
+          "angle": 0,
+          "percent": 0.75,
           "cost": 80
         },
-         "hexes":[
-        "H10"
-      ]
+        "hexes":[
+          "H10"
+        ]
       },
       {
         "color": "plain",
-         "track": [
-{
-      "side": 4,
-      "type": "offboard",
-      "cross": "under",
-      "color": "water"
-    }
-  ],
-          "water": {
+        "track": [
+          {
+            "side": 4,
+            "type": "offboard",
+            "cross": "under",
+            "color": "water"
+          }
+        ],
+        "water": {
           "cost": 80
         },
-         "hexes":[
-        "H8"
-      ]
+        "hexes":[
+          "H8"
+        ]
       },
-        {
+      {
         "color": "yellow",
         "labels": {
-        "label": "町田 Y",
-        "angle": 0,
-        "percent": -0.75
-      },
-       "cities": {
-            "name": {
-              "name": "Machida"
-            }
+          "label": "町田 Y",
+          "angle": 0,
+          "percent": -0.75
         },
-         "hexes":[
-        "H4"
-      ]
+        "cities": {
+          "name": {
+            "name": "Machida"
+          }
+        },
+        "hexes":[
+          "H4"
+        ]
       },
-       {
+      {
         "color": "green",
-         "track": [
-    {
-      "path": "m 0 -125 L 80 -80 C 75 50, -75 100, 0 -50 L 0 -85",
-      "type": "custom",
-      "color": "water",
-      "cross": "under"
-    }
-  ],
+        "track": [
+          {
+            "path": "m 0 -125 L 80 -80 C 75 50, -75 100, 0 -50 L 0 -85",
+            "type": "custom",
+            "color": "water",
+            "cross": "under"
+          }
+        ],
         "labels": {
-        "label": "お台場 P",
-        "angle": 0,
-        "percent": -0.75
-      },
-    "cities": [
+          "label": "お台場 P",
+          "angle": 0,
+          "percent": -0.75
+        },
+        "cities": [
           {
             "name": {
               "name": "Odaiba"
@@ -2138,34 +2101,34 @@
             ]
           }
         ],
-    "water": {
+        "water": {
           "cost": 80,
           "percent": 0.7
         },
-         "hexes":[
-        "G15"
-      ]
+        "hexes":[
+          "G15"
+        ]
       },
-       {
+      {
         "color": "yellow",
-           "track": [
-           {
+        "track": [
+          {
             "side": 3,
             "type": "straight"
           }
         ],
-         "hexes":[
-        "G13"
-      ]
+        "hexes":[
+          "G13"
+        ]
       },
-       {
+      {
         "color": "green",
         "labels": {
-        "label": "品川 C",
-        "angle": 0,
-        "percent": -0.75
-      },
-    "cities": [
+          "label": "品川 C",
+          "angle": 0,
+          "percent": -0.75
+        },
+        "cities": [
           {
             "name": {
               "name": "Seijo"
@@ -2175,7 +2138,7 @@
             ]
           }
         ],
-           "track": [
+        "track": [
           {
             "side": 6
           },
@@ -2183,90 +2146,90 @@
             "side": 4
           }
         ],
-           "values": [
+        "values": [
           {
             "value": 30,
             "angle": 270,
             "percent": -0.65
           }
         ],
-         "hexes":[
-        "G7"
-      ]
+        "hexes":[
+          "G7"
+        ]
       },
       {
         "color": "green",
         "labels": {
-        "label": "多摩 L",
-        "angle": 0,
-        "percent": -0.75
-      },
-       "cities": {
-            "name": {
-              "name": "Tama Centre"
-            }
+          "label": "多摩 L",
+          "angle": 0,
+          "percent": -0.75
         },
-         "hexes":[
-        "G5"
-      ]
+        "cities": {
+          "name": {
+            "name": "Tama Centre"
+          }
+        },
+        "hexes":[
+          "G5"
+        ]
       },
-       {
+      {
         "color": "plain",
         "labels": {
-        "label": "橋本",
-        "angle": 0,
-        "percent": -0.6
-      },
-       "centerTowns": {
-            "name": {
-              "name": "Hashimoto"
-            }
+          "label": "橋本",
+          "angle": 0,
+          "percent": -0.6
         },
-         "hexes":[
-        "G3"
-      ]
+        "centerTowns": {
+          "name": {
+            "name": "Hashimoto"
+          }
+        },
+        "hexes":[
+          "G3"
+        ]
       },
       {
         "color": "green",
         "labels": {
-        "label": "浦安 P",
-        "angle": 0,
-        "percent": -0.75
-      },
-       "cities": {
-            "name": {
-              "name": "Urayasu"
-            }
+          "label": "浦安 P",
+          "angle": 0,
+          "percent": -0.75
         },
-         "hexes":[
-        "F18"
-      ]
+        "cities": {
+          "name": {
+            "name": "Urayasu"
+          }
+        },
+        "hexes":[
+          "F18"
+        ]
       },
       {
         "color": "plain",
         "track": [
-{
-      "side": 3,
-      "type": "gentle",
-      "cross": "under",
-      "color": "water"
-    }
-  ],
-          "water": {
+          {
+            "side": 3,
+            "type": "gentle",
+            "cross": "under",
+            "color": "water"
+          }
+        ],
+        "water": {
           "cost": 80
         },
-         "hexes":[
-        "F16"
-      ]
+        "hexes":[
+          "F16"
+        ]
       },
       {
         "color": "yellow",
         "labels": {
-        "label": "品川 C",
-        "angle": 0,
-        "percent": -0.75
-      },
-    "cities": [
+          "label": "品川 C",
+          "angle": 0,
+          "percent": -0.75
+        },
+        "cities": [
           {
             "name": {
               "name": "Shinagawa"
@@ -2276,69 +2239,69 @@
             ]
           }
         ],
-           "track": [
+        "track": [
           {
             "side": 6
           }
         ],
-           "values": [
+        "values": [
           {
             "value": 20,
             "angle": 270,
             "percent": 0.65
           }
         ],
-         "hexes":[
-        "F14"
-      ]
+        "hexes":[
+          "F14"
+        ]
       },
       {
         "color": "plain",
         "labels": {
-        "label": "渋谷 C",
-        "angle": 0,
-        "percent": -0.75
-      },
-       "cities": {
-            "name": {
-              "name": "Shibuya"
-            }
+          "label": "渋谷 C",
+          "angle": 0,
+          "percent": -0.75
         },
-         "hexes":[
-        "F12"
-      ]
+        "cities": {
+          "name": {
+            "name": "Shibuya"
+          }
+        },
+        "hexes":[
+          "F12"
+        ]
       },
-       {
+      {
         "color": "yellow",
         "labels": {
-        "label": "府中  P",
-        "angle": 0,
-        "percent": -0.7
-      },
-      "cities": [
+          "label": "府中  P",
+          "angle": 0,
+          "percent": -0.7
+        },
+        "cities": [
           {
             "name": {
               "name": "Fuchu"
             }
           }
-      ],
-         "hexes":[
-        "F4"
-      ]
+        ],
+        "hexes":[
+          "F4"
+        ]
       },
       {
-            "color": "offboard",
-            "labels": {
-        "label": "船橋",
-        "angle": 320,
-        "percent": -0.45
-      },
-            "offBoardRevenue": {
+        "color": "offboard",
+        "labels": {
+          "label": "船橋",
+          "angle": 320,
+          "percent": -0.45
+        },
+        "offBoardRevenue": {
           "angle": 0,
           "percent": -0.75,
           "reverse": true,
           "revenues": [
-             {
+            {
               "color": "green",
               "cost": "30"
             },
@@ -2348,78 +2311,78 @@
             }
           ]
         },
-           "cities": [
-{
-          "angle": 40,
-          "percent": 0.5,
+        "cities": [
+          {
+            "angle": 40,
+            "percent": 0.5,
             "name": {
-            "name": "Funabashi"
-          },
-          "companies": [
+              "name": "Funabashi"
+            },
+            "companies": [
               "6"
             ]
-           }
-         ],
-           "track": [
+          }
+        ],
+        "track": [
           {
             "side": 1,
             "type": "sharpStopRev"
           }
         ],
-      "hexes":[
-        "E21"
-      ]
-    },
-       {
+        "hexes":[
+          "E21"
+        ]
+      },
+      {
         "color": "plain",
         "track": [
-{
-      "side": 6,
-      "type": "gentle",
-      "cross": "under",
-      "color": "water"
-    }
-  ],
-          "water": {
+          {
+            "side": 6,
+            "type": "gentle",
+            "cross": "under",
+            "color": "water"
+          }
+        ],
+        "water": {
           "cost": 80
         },
-         "hexes":[
-        "E17"
-      ]
+        "hexes":[
+          "E17"
+        ]
       },
       {
         "color": "plain",
         "labels": {
-        "label": "東京  C",
-        "angle": 0,
-        "percent": -0.7
-      },
-      "companies": [
-    {
-      "label": "出島屋要助商店",
-      "percent": 0.5,
-      "color": "blue"
-    }
-  ],
-      "cities": [
+          "label": "東京  C",
+          "angle": 0,
+          "percent": -0.7
+        },
+        "companies": [
+          {
+            "label": "出島屋要助商店",
+            "percent": 0.5,
+            "color": "blue"
+          }
+        ],
+        "cities": [
           {
             "name": {
               "name": "Tokyo"
             }
           }
-      ],
-         "hexes":[
-        "E15"
-      ]
+        ],
+        "hexes":[
+          "E15"
+        ]
       },
       {
         "color": "yellow",
         "labels": {
-        "label": "大手町   L",
-        "angle": 0,
-        "percent": -0.7
-      },
-      "cities": [
+          "label": "大手町   L",
+          "angle": 0,
+          "percent": -0.7
+        },
+        "cities": [
           {
             "name": {
               "name": "Otemachi"
@@ -2427,27 +2390,27 @@
             "companies": [
               "TS"
             ]
-        }
-      ],
-         "hexes":[
-        "E13"
-      ]
+          }
+        ],
+        "hexes":[
+          "E13"
+        ]
       },
       {
         "color": "yellow",
         "labels": {
-        "label": "新宿  C",
-        "angle": 0,
-        "percent": -0.7
-      },
-      "cities": [
+          "label": "新宿  C",
+          "angle": 0,
+          "percent": -0.7
+        },
+        "cities": [
           {
             "name": {
               "name": "Shinjuku"
             }
-        }
-      ],
-       "track": [
+          }
+        ],
+        "track": [
           {
             "side": 6
           }
@@ -2459,18 +2422,18 @@
             "percent": 0.65
           }
         ],
-         "hexes":[
-        "E11"
-      ]
+        "hexes":[
+          "E11"
+        ]
       },
       {
         "color": "plain",
         "labels": {
-        "label": "八王子  Y",
-        "angle": 0,
-        "percent": -0.7
-      },
-      "cities": [
+          "label": "八王子  Y",
+          "angle": 0,
+          "percent": -0.7
+        },
+        "cities": [
           {
             "name": {
               "name": "Hachioki"
@@ -2480,19 +2443,19 @@
             ]
           }
         ],
-         "hexes":[
-        "E3"
-      ]
+        "hexes":[
+          "E3"
+        ]
       },
-       {
+      {
         "color": "yellow",
         "labels": {
-        "label": "市川",
-        "rotate": 30,
-        "angle": 30,
-        "percent": -0.8
-      },
-      "cities": [
+          "label": "市川",
+          "rotate": 30,
+          "angle": 30,
+          "percent": -0.8
+        },
+        "cities": [
           {
             "companies": [
               "KR"
@@ -2503,31 +2466,31 @@
             }
           }
         ],
-           "track": [
+        "track": [
           {
             "side": 2,
             "type": "straight"
-        }
+          }
         ],
-           "values": [
+        "values": [
           {
             "value": 20,
             "angle": 270,
             "percent": 0.65
           }
         ],
-         "hexes":[
-        "D18"
-      ]
+        "hexes":[
+          "D18"
+        ]
       },
-       {
+      {
         "color": "yellow",
         "labels": {
-        "label": "浅草",
-        "angle": 0,
-        "percent": 0.75
-      },
-      "cities": [
+          "label": "浅草",
+          "angle": 0,
+          "percent": 0.75
+        },
+        "cities": [
           {
             "name": {
               "rotate": 180,
@@ -2539,62 +2502,62 @@
             ]
           }
         ],
-           "track": [
+        "track": [
           {
             "side": 2
           },
           {
-          "side": 3
-        },
-{
-      "side": 3,
-      "type": "gentle",
-      "cross": "under",
-      "color": "water"
-    }
+            "side": 3
+          },
+          {
+            "side": 3,
+            "type": "gentle",
+            "cross": "under",
+            "color": "water"
+          }
         ],
-           "values": [
+        "values": [
           {
             "value": 20,
             "angle": 270,
             "percent": 0.65
           }
         ],
-           "water": {
-            "angle": 90,
-            "percent": 0.65,
+        "water": {
+          "angle": 90,
+          "percent": 0.65,
           "cost": 80
         },
-         "hexes":[
-        "D16"
-      ]
+        "hexes":[
+          "D16"
+        ]
       },
-       {
+      {
         "color": "plain",
         "labels": {
-        "label": "北干住",
-        "angle": 0,
-        "percent": -0.75
-      },
-      "cities": [
+          "label": "北干住",
+          "angle": 0,
+          "percent": -0.75
+        },
+        "cities": [
           {
             "name": {
               "name": "Kita-Senju"
             }
           }
         ],
-         "hexes":[
-        "C15"
-      ]
-       },
-       {
+        "hexes":[
+          "C15"
+        ]
+      },
+      {
         "color": "yellow",
         "labels": {
-        "label": "練馬",
-        "angle": 0,
-        "percent": -0.75
-      },
-      "cities": [
+          "label": "練馬",
+          "angle": 0,
+          "percent": -0.75
+        },
+        "cities": [
           {
             "name": {
               "name": "Nerina"
@@ -2604,51 +2567,51 @@
             ]
           }
         ],
-           "track": [
+        "track": [
           {
             "side": 5
           },
           {
-          "side": 1
-        }
+            "side": 1
+          }
         ],
-           "values": [
+        "values": [
           {
             "value": 20,
             "angle": 270,
             "percent": 0.65
           }
         ],
-         "hexes":[
-        "C11"
-      ]
+        "hexes":[
+          "C11"
+        ]
       },
       {
         "color": "plain",
         "labels": {
-        "label": "上野  C",
-        "angle": 0,
-        "percent": -0.75
-      },
-      "cities": [
+          "label": "上野  C",
+          "angle": 0,
+          "percent": -0.75
+        },
+        "cities": [
           {
             "name": {
               "name": "Ueno"
             }
           }
         ],
-         "hexes":[
-        "D14"
-      ]
+        "hexes":[
+          "D14"
+        ]
       },
       {
         "color": "plain",
         "labels": {
-        "label": "池袋  C",
-        "angle": 0,
-        "percent": -0.75
-      },
-      "cities": [
+          "label": "池袋  C",
+          "angle": 0,
+          "percent": -0.75
+        },
+        "cities": [
           {
             "name": {
               "name": "Ikebukuro"
@@ -2658,25 +2621,25 @@
             ]
           }
         ],
-         "hexes":[
-        "D12"
-      ]
+        "hexes":[
+          "D12"
+        ]
       },
-       {
+      {
         "color": "yellow",
         "labels": {
-        "label": "吉祥寺",
-        "angle": 0,
-        "percent": -0.5
-      },
-      "centerTowns": [
+          "label": "吉祥寺",
+          "angle": 0,
+          "percent": -0.5
+        },
+        "centerTowns": [
           {
             "name": {
               "name": "Kichijoji"
             }
           }
         ],
-      "track": [
+        "track": [
           {
             "type": "straight",
             "side": 1
@@ -2689,18 +2652,18 @@
             "percent": 0.5
           }
         ],
-         "hexes":[
-        "D8"
-      ]
+        "hexes":[
+          "D8"
+        ]
       },
-       {
+      {
         "color": "plain",
         "labels": {
-        "label": "立川",
-        "angle": 0,
-        "percent": -0.75
-      },
-      "cities": [
+          "label": "立川",
+          "angle": 0,
+          "percent": -0.75
+        },
+        "cities": [
           {
             "name": {
               "name": "Tachikawa"
@@ -2710,66 +2673,66 @@
             ]
           }
         ],
-         "hexes":[
-        "D4"
-      ]
+        "hexes":[
+          "D4"
+        ]
       },
-       {
+      {
         "color": "mountain",
         "mountain": {
           "cost": "£80",
           "angle": 0,
-        "percent": 0
+          "percent": 0
         },
-         "hexes":[
-        "C5"
-      ]
+        "hexes":[
+          "C5"
+        ]
       },
       {
         "color": "plain",
         "labels": {
-        "label": "柏市",
-        "angle": 0,
-        "percent": -0.75
-      },
-      "cities": [
+          "label": "柏市",
+          "angle": 0,
+          "percent": -0.75
+        },
+        "cities": [
           {
             "name": {
               "name": "Kashiwa"
             }
           }
         ],
-         "hexes":[
-        "B18"
-      ]
+        "hexes":[
+          "B18"
+        ]
       },
       {
         "color": "plain",
         "labels": {
-        "label": "草加",
-        "angle": 0,
-        "percent": -0.6
-      },
-      "centerTowns": [
+          "label": "草加",
+          "angle": 0,
+          "percent": -0.6
+        },
+        "centerTowns": [
           {
             "name": {
               "name": "Soka"
             }
           }
         ],
-         "hexes":[
-        "B16"
-      ]
+        "hexes":[
+          "B16"
+        ]
       },
       {
         "color": "yellow",
         "labels": {
-        "label": "浦和",
-        "rotate": 30,
-        "angle": 30,
-        "percent": -0.55
-      },
-      "centerTowns": [
+          "label": "浦和",
+          "rotate": 30,
+          "angle": 30,
+          "percent": -0.55
+        },
+        "centerTowns": [
           {
             "rotate": 30,
             "name": {
@@ -2777,52 +2740,52 @@
             }
           }
         ],
-           "track": [
+        "track": [
           {
             "side": 5,
             "type": "straight"
           }
         ],
-           "values": [
+        "values": [
           {
             "value": 10,
             "angle": 270,
             "percent": -0.5
           }
         ],
-         "hexes":[
-        "B12"
-      ]
+        "hexes":[
+          "B12"
+        ]
       },
       {
         "color": "yellow",
         "labels": {
-        "label": "所沢  P",
-        "angle": 0,
-        "percent": -0.75
-      },
-         "cities": {
-         "name": {
+          "label": "所沢  P",
+          "angle": 0,
+          "percent": -0.75
+        },
+        "cities": {
+          "name": {
             "name": "Tokorazawa"
           }
         },
-         "hexes":[
-        "B8"
-      ]
+        "hexes":[
+          "B8"
+        ]
       },
-         {
-            "color": "offboard",
-            "labels": {
-        "label": "つくば",
-        "angle": 320,
-        "percent": -0.45
-      },
-            "offBoardRevenue": {
+      {
+        "color": "offboard",
+        "labels": {
+          "label": "つくば",
+          "angle": 320,
+          "percent": -0.45
+        },
+        "offBoardRevenue": {
           "angle": 0,
           "percent": -0.75,
           "reverse": true,
           "revenues": [
-             {
+            {
               "color": "green",
               "cost": "10"
             },
@@ -2832,44 +2795,44 @@
             }
           ]
         },
-           "cities": [
-{
-          "angle": 40,
-          "percent": 0.5,
+        "cities": [
+          {
+            "angle": 40,
+            "percent": 0.5,
             "name": {
-            "name": "Tsukuba"
-          },
-          "companies": [
+              "name": "Tsukuba"
+            },
+            "companies": [
               "TE"
             ]
-           }
-         ],
-           "offBoardTrack": [
+          }
+        ],
+        "offBoardTrack": [
           {
             "side": 6
           }
         ],
-      "hexes":[
-        "A19"
-      ]
-    },
-       {
-            "color": "offboard",
-            "labels": {
-        "label": "野田",
-        "angle": 0,
-        "percent": -0.6
+        "hexes":[
+          "A19"
+        ]
       },
-            "offBoardRevenue": {
+      {
+        "color": "offboard",
+        "labels": {
+          "label": "野田",
+          "angle": 0,
+          "percent": -0.6
+        },
+        "offBoardRevenue": {
           "angle": 0,
           "percent": -0.2,
-            "name": {
+          "name": {
             "name": "Noda"
           },
           "reverse": true,
           "revenues": [
-  
-             {
+
+            {
               "color": "green",
               "cost": "20"
             },
@@ -2879,29 +2842,29 @@
             }
           ]
         },
-           "offBoardTrack": [
+        "offBoardTrack": [
           {
             "side": 5
           }
         ],
-      "hexes":[
-        "A17"
-      ]
-    },
-              {
-            "color": "offboard",
-            "labels": {
-        "label": "春日部",
-        "angle": 320,
-        "percent": -0.45
+        "hexes":[
+          "A17"
+        ]
       },
-            "offBoardRevenue": {
+      {
+        "color": "offboard",
+        "labels": {
+          "label": "春日部",
+          "angle": 320,
+          "percent": -0.45
+        },
+        "offBoardRevenue": {
           "angle": 0,
           "percent": -0.75,
           "reverse": true,
           "revenues": [
-  
-             {
+
+            {
               "color": "green",
               "cost": "30"
             },
@@ -2911,19 +2874,19 @@
             }
           ]
         },
-           "cities": [
-{
-          "angle": 40,
-          "percent": 0.5,
+        "cities": [
+          {
+            "angle": 40,
+            "percent": 0.5,
             "name": {
-            "name": "Kasukabe"
-          },
-          "companies": [
+              "name": "Kasukabe"
+            },
+            "companies": [
               "TR"
             ]
-           }
-         ],
-           "offBoardTrack": [
+          }
+        ],
+        "offBoardTrack": [
           {
             "side": 5
           },
@@ -2931,24 +2894,24 @@
             "side": 6
           }
         ],
-      "hexes":[
-        "A15"
-      ]
-    },
-        {
-            "color": "offboard",
-            "labels": {
-        "label": "大宮",
-        "angle": 0,
-        "percent": -0.75
+        "hexes":[
+          "A15"
+        ]
       },
-            "offBoardRevenue": {
+      {
+        "color": "offboard",
+        "labels": {
+          "label": "大宮",
+          "angle": 0,
+          "percent": -0.75
+        },
+        "offBoardRevenue": {
           "angle": 0,
           "percent": 0.6,
           "reverse": true,
           "revenues": [
-  
-             {
+
+            {
               "color": "green",
               "cost": "20"
             },
@@ -2958,17 +2921,17 @@
             }
           ]
         },
-           "cities": [
-{
+        "cities": [
+          {
             "name": {
-            "name": "Omiya"
-          },
-          "companies": [
+              "name": "Omiya"
+            },
+            "companies": [
               "2"
             ]
-           }
-         ],
-            "track": [
+          }
+        ],
+        "track": [
           {
             "side": 1
           },
@@ -2976,24 +2939,24 @@
             "side": 5
           }
         ],
-      "hexes":[
-        "A11"
-      ]
-    },
-    {
-           "color": "offboard",
-            "labels": {
-        "label": "川越",
-        "angle": 0,
-        "percent": -0.75
+        "hexes":[
+          "A11"
+        ]
       },
-            "offBoardRevenue": {
+      {
+        "color": "offboard",
+        "labels": {
+          "label": "川越",
+          "angle": 0,
+          "percent": -0.75
+        },
+        "offBoardRevenue": {
           "angle": 0,
           "percent": 0.6,
           "reverse": true,
           "revenues": [
-  
-             {
+
+            {
               "color": "green",
               "cost": "20"
             },
@@ -3003,14 +2966,14 @@
             }
           ]
         },
-           "cities": [
-{
+        "cities": [
+          {
             "name": {
-            "name": "Kawagoe"
+              "name": "Kawagoe"
+            }
           }
-           }
-         ],
-            "track": [
+        ],
+        "track": [
           {
             "side": 4,
             "type": "straight"
@@ -3019,25 +2982,25 @@
             "side": 5
           }
         ],
-      "hexes":[
-        "A9"
-      ]
-    },
-        {
-           "color": "gray", 
-            "labels": {
-        "label": "高麗川",
-        "angle": 0,
-        "percent": -0.5
+        "hexes":[
+          "A9"
+        ]
       },
-           "centerTowns": [
-{
+      {
+        "color": "gray",
+        "labels": {
+          "label": "高麗川",
+          "angle": 0,
+          "percent": -0.5
+        },
+        "centerTowns": [
+          {
             "name": {
-            "name": "Koma River"
+              "name": "Koma River"
+            }
           }
-           }
-         ],
-            "track": [
+        ],
+        "track": [
           {
             "side": 4,
             "type": "straight"
@@ -3046,36 +3009,36 @@
             "side": 6
           }
         ],
-             "values": [
+        "values": [
+          {
+            "angle": 130,
+            "percent": -0.55,
+            "value": 10
+          }
+        ],
+        "hexes":[
+          "A5"
+        ]
+      },
       {
-        "angle": 130,
-        "percent": -0.55,
-        "value": 10
-      }
-    ],
-      "hexes":[
-        "A5"
-      ]
-    },
-   {
-           "color": "gray",
-            "track": [
+        "color": "gray",
+        "track": [
           {
             "side": 4,
             "type": "straight"
           }
         ],
-      "hexes":[
-        "A7"
-      ]
-    },
-    {
-      "color": "offboard",
-       "labels": {
-        "label": "京浜島",
-        "angle": 40,
-        "percent": -0.45
+        "hexes":[
+          "A7"
+        ]
       },
+      {
+        "color": "offboard",
+        "labels": {
+          "label": "京浜島",
+          "angle": 40,
+          "percent": -0.45
+        },
         "offBoardRevenue": {
           "angle": 270,
           "percent": 0.3,
@@ -3084,8 +3047,8 @@
             "name": "Keihinjima"
           },
           "revenues": [
-  
-             {
+
+            {
               "color": "green",
               "cost": "20"
             },
@@ -3104,13 +3067,13 @@
           "J14"
         ]
       },
-        {
-      "color": "offboard",
-      "labels": {
-        "label": "成田",
-        "angle": 0,
-        "percent": -0.49
-      },
+      {
+        "color": "offboard",
+        "labels": {
+          "label": "成田",
+          "angle": 0,
+          "percent": -0.49
+        },
         "offBoardRevenue": {
           "angle": 0,
           "percent": -0.1,
@@ -3119,8 +3082,8 @@
             "name": "Narita Airport"
           },
           "revenues": [
-  
-             {
+
+            {
               "color": "green",
               "cost": "30"
             },
@@ -3139,13 +3102,13 @@
           "C21"
         ]
       },
-        {
-      "color": "offboard",
-      "labels": {
-        "label": "小田原",
-        "angle": -35,
-        "percent": -0.49
-      },
+      {
+        "color": "offboard",
+        "labels": {
+          "label": "小田原",
+          "angle": -35,
+          "percent": -0.49
+        },
         "offBoardRevenue": {
           "angle": 275,
           "percent": -0.3,
@@ -3154,8 +3117,8 @@
             "name": "Odawara"
           },
           "revenues": [
-  
-             {
+
+            {
               "color": "green",
               "cost": "30"
             },
@@ -3177,13 +3140,13 @@
           "J2"
         ]
       },
-       {
-      "color": "offboard",
-      "labels": {
-        "label": "甲府",
-        "angle": -27,
-        "percent": -0.49
-      },
+      {
+        "color": "offboard",
+        "labels": {
+          "label": "甲府",
+          "angle": -27,
+          "percent": -0.49
+        },
         "offBoardRevenue": {
           "angle": 270,
           "percent": -0.2,
@@ -3192,8 +3155,8 @@
             "name": "Kofu"
           },
           "revenues": [
-  
-             {
+
+            {
               "color": "green",
               "cost": "30"
             },
@@ -3213,12 +3176,12 @@
         ]
       },
       {
-      "color": "offboard",
-       "labels": {
-        "label": "高崎",
-        "angle": -27,
-        "percent": -0.49
-      },
+        "color": "offboard",
+        "labels": {
+          "label": "高崎",
+          "angle": -27,
+          "percent": -0.49
+        },
         "offBoardRevenue": {
           "angle": 270,
           "percent": -0.2,
@@ -3227,8 +3190,8 @@
             "name": "Takasaki"
           },
           "revenues": [
-  
-             {
+
+            {
               "color": "green",
               "cost": "30"
             },
@@ -3248,118 +3211,118 @@
         ]
       },
       {
-       "color": "gray",
- "hexes": [
-"A1",
-"C1",
-"G1",
-"I1",
-"K1",
-"B2",
-"F2",
-"H2",
-"A13",
-"A21",
-    "B20",
-    "B22",
-    "D22",
-    "D22",
-    "F22", 
-"H22",
-"I21",
-"J20",
-"J22",
-"K19",
-"K21"
-  ]
-},
-{
-       "color": "plain",
- "hexes": [
-"B6",
-"B10",
-"B14",
-"C3",
-"C7",
-"C9",
-"C13",
-"C19",
-"D2",
-"D10",
-"D20",
-"E5",
-    "E7",
-    "E9",
-    "E19",
-    "F2",
-    "F8", 
-"G9",
-"G11",
-"H6",
-"I7",
-"I9",
-"J6"
-  ]
-},
-{
-       "color": "water",
- "hexes": [
-  "F20",
-  "G17",
-  "G19",
-  "G21",
-  "H16",
-  "H18",
-  "H20",
-  "I17",
-  "I19",
-  "J16",
-  "J18",
-  "K3",
-  "K9",
-  "K11",
-  "K13",
-  "K15",
-  "K17"
-]
-},
- {
-        "color": "plain",
-        "labels": {
-        "label": "下北沢",
-        "angle": 0,
-        "percent": 0
+        "color": "gray",
+        "hexes": [
+          "A1",
+          "C1",
+          "G1",
+          "I1",
+          "K1",
+          "B2",
+          "F2",
+          "H2",
+          "A13",
+          "A21",
+          "B20",
+          "B22",
+          "D22",
+          "D22",
+          "F22",
+          "H22",
+          "I21",
+          "J20",
+          "J22",
+          "K19",
+          "K21"
+        ]
       },
-       "companies": [
-    {
-      "label": "帝都電鉄",
-      "color": "blue",
-      "rotate": 60,
-              "reverse": true,
-              "left": 20,
-              "right": 2,
-              "angle": -30,
-              "percent": -0.9
-    }
-  ],
-       "centerTowns": {
-        "percent": 0.6,
-            "name": {
-              "name": "Shimo-Kitazawa Station"
-            }
-        },
-         "hexes":[
-        "F10"
-      ]
+      {
+        "color": "plain",
+        "hexes": [
+          "B6",
+          "B10",
+          "B14",
+          "C3",
+          "C7",
+          "C9",
+          "C13",
+          "C19",
+          "D2",
+          "D10",
+          "D20",
+          "E5",
+          "E7",
+          "E9",
+          "E19",
+          "F2",
+          "F8",
+          "G9",
+          "G11",
+          "H6",
+          "I7",
+          "I9",
+          "J6"
+        ]
+      },
+      {
+        "color": "water",
+        "hexes": [
+          "F20",
+          "G17",
+          "G19",
+          "G21",
+          "H16",
+          "H18",
+          "H20",
+          "I17",
+          "I19",
+          "J16",
+          "J18",
+          "K3",
+          "K9",
+          "K11",
+          "K13",
+          "K15",
+          "K17"
+        ]
       },
       {
         "color": "plain",
         "labels": {
-        "label": "調布",
-        "angle": 0,
-        "percent": -0.75
+          "label": "下北沢",
+          "angle": 0,
+          "percent": 0
+        },
+        "companies": [
+          {
+            "label": "帝都電鉄",
+            "color": "blue",
+            "rotate": 60,
+            "reverse": true,
+            "left": 20,
+            "right": 2,
+            "angle": -30,
+            "percent": -0.9
+          }
+        ],
+        "centerTowns": {
+          "percent": 0.6,
+          "name": {
+            "name": "Shimo-Kitazawa Station"
+          }
+        },
+        "hexes":[
+          "F10"
+        ]
       },
-       "cities": [
+      {
+        "color": "plain",
+        "labels": {
+          "label": "調布",
+          "angle": 0,
+          "percent": -0.75
+        },
+        "cities": [
           {
             "name": {
               "name": "Chofu"
@@ -3369,54 +3332,54 @@
             ]
           }
         ],
-         "hexes":[
-        "F6"
-      ]
+        "hexes":[
+          "F6"
+        ]
       },
-{
+      {
         "color": "plain",
         "track": [
-{
-      "side": 6,
-      "type": "offboard",
-      "cross": "under",
-      "color": "water"
-    }
-  ],
+          {
+            "side": 6,
+            "type": "offboard",
+            "cross": "under",
+            "color": "water"
+          }
+        ],
         "companies": [
-    {
-      "label": "帝釈人車軌道",
-      "color": "blue"
-    }
-  ],
-          "water": {
+          {
+            "label": "帝釈人車軌道",
+            "color": "blue"
+          }
+        ],
+        "water": {
           "cost": 80,
           "percent": 0.5
         },
-         "hexes":[
-        "C17"
-      ]
+        "hexes":[
+          "C17"
+        ]
       },
-{
+      {
         "color": "plain",
         "labels": {
-        "label": "国分寺",
-        "angle": 0,
-        "percent": -0.75
-      },
-      "companies": [
-    {
-      "label": "多摩湖鉄道",
-      "color": "blue",
-      "rotate": -60,
-              "reverse": true,
-              "left": 20,
-              "right": 20,
-              "angle": 60,
-              "percent": -1.2
-    }
-  ],
-      "cities": [
+          "label": "国分寺",
+          "angle": 0,
+          "percent": -0.75
+        },
+        "companies": [
+          {
+            "label": "多摩湖鉄道",
+            "color": "blue",
+            "rotate": -60,
+            "reverse": true,
+            "left": 20,
+            "right": 20,
+            "angle": 60,
+            "percent": -1.2
+          }
+        ],
+        "cities": [
           {
             "name": {
               "name": "Kokobunji"
@@ -3426,10 +3389,10 @@
             ]
           }
         ],
-         "hexes":[
-        "D6"
-      ]
+        "hexes":[
+          "D6"
+        ]
       }
-]
-}
+    ]
+  }
 }

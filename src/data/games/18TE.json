@@ -176,6 +176,7 @@
         null,
         null,
         null,
+        null,
         {
           "value": 100,
           "label": 100,
@@ -194,10 +195,13 @@
           "color": "green",
           "value": 300,
           "label": 300,
+          "width": 2,
           "subLabel": "Game End"
-        }
+        },
+        null
       ],
       [
+        null,
         null,
         null,
         null,
@@ -230,6 +234,7 @@
         null,
         null,
         null,
+        null,
         {
           "value": 60,
           "label": 60,
@@ -256,6 +261,7 @@
       [
         null,
         null,
+        null,
         {
           "value": 40,
           "label": 40,
@@ -280,6 +286,7 @@
         }
       ],
       [
+        null,
         null,
         {
           "value": 20,
@@ -316,8 +323,10 @@
           "color": "offboard",
           "value": 0,
           "label": 0,
+          "width": 2,
           "subLabel": "Bankrupt"
         },
+        null,
         {
           "value": 10,
           "label": 10,

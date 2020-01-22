@@ -54,6 +54,14 @@ export const getMarketData = (stock, config, paper, pagination) => {
   // width
   let totalWidth = width * columns;
   let totalHeight = height * rows + 50; // Add space for the title
+
+  if (stock.type === "1D" || stock.type === "1Diag") {
+    if (stock.legend && stock.legend.length > 0) {
+      // Add space for legend
+      totalHeight += 50;
+    }
+  }
+
   let printWidth = 55 + totalWidth;
   let printHeight = 55 + totalHeight;
 

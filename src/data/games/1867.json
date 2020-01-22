@@ -119,25 +119,49 @@
         "Paid dividends"
       ]
     },
+    "ledges": [
+      {
+        "color": "red",
+        "dashed": true,
+        "width": 6,
+        "offset": -3,
+        "coords": ["16 0", "16 1"]
+      },
+      {
+        "color": "brown",
+        "width": 6,
+        "coords": ["3 0", "3 1", "7 1", "7 0", "3 0"]
+      },
+      {
+        "color": "purple",
+        "width": 6,
+        "coords": ["14 0", "14 1", "18 1", "18 0", "14 0"]
+      },
+      {
+        "color": "red",
+        "width": 6,
+        "coords": ["7 0", "7 1", "14 1", "14 0", "7 0"]
+      }
+    ],
     "market": [
       35,
       40,
       45,
-      50,
-      55,
-      60,
-      65,
-      70,
-      80,
-      90,
-      100,
-      110,
-      120,
-      135,
-      150,
-      165,
-      180,
-      200,
+      { "value": 50, "par": true },
+      { "value": 55, "par": true },
+      { "value": 60, "par": true },
+      { "value": 65, "par": true },
+      { "value": 70, "par": true },
+      { "value": 80, "par": true },
+      { "value": 90, "par": true },
+      { "value": 100, "legend": 0 },
+      { "value": 110, "legend": 0 },
+      { "value": 120, "legend": 0 },
+      { "value": 135, "legend": 0 },
+      { "value": 150, "legend": 0 },
+      { "value": 165, "legend": 0 },
+      { "value": 180, "legend": 0 },
+      { "value": 200, "legend": 0 },
       220,
       245,
       270,
@@ -176,6 +200,26 @@
       }
     ],
     "legend": [
+      {
+        "color": "yellow",
+        "description": "Minor companies may convert here",
+        "icon": "info"
+      },
+      {
+        "color": "brown",
+        "description": "Minor companies may start here",
+        "icon": "certificate"
+      },
+      {
+        "color": "red",
+        "description": "Any company may start here",
+        "icon": "certificate"
+      },
+      {
+        "color": "purple",
+        "description": "Only Public Companies may start here",
+        "icon": "certificate"
+      }
     ]
   },
   "trains": [
