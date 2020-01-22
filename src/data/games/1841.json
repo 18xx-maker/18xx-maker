@@ -1155,6 +1155,14 @@
   ],
   "map": {
     "print": "landscape",
+    "roundTracker": {
+      "x": 700,
+      "y": 1500
+    },
+    "players": {
+      "x": 650,
+      "y": 1600
+    },
     "hexes": [
       {
         "color": "plain",
