@@ -928,64 +928,229 @@
   },
   "companies": [
     {
-      "name": "Azienda Ferroviaria Garibaldi",
-      "abbrev": "AFG",
+      "name": "Strada Ferrata Maria Antonia",
+      "minor": true,
+      "abbrev": "SFMA",
       "tokens": [
-        40,
-        "",
+        "Firenze",
         ""
       ],
       "color": "red"
     },
     {
-      "name": "Azienda Trasporti Archimede",
-      "abbrev": "ATA",
+      "name": "Strada Ferrata da Lucca a Pistoia",
+      "minor": true,
+      "abbrev": "SFLP",
       "tokens": [
-        30,
+        "Lucca",
+        ""
+      ],
+      "color": "lime"
+    },
+    {
+      "name": "Società per la Strada Ferrata Leopolda",
+      "abbrev": "SSFL",
+      "tokens": [
+        "Pisa",
+        "",
+        "",
         "",
         ""
       ],
-      "color": "green"
+      "color": "purple"
     },
     {
-      "name": "Compagnia Trasporti Lilibeo",
-      "abbrev": "CTL",
+      "name": "Imperial Regia Strada Ferrata Ferdinandea",
+      "abbrev": "IRSFF",
       "tokens": [
-        40,
+        "Milano",
+        "Venezia",
         "",
-        ""
-      ],
-      "color": "yellow"
-    },
-    {
-      "name": "Impresa Ferroviaria Trinacria",
-      "abbrev": "IFT",
-      "tokens": [
-        90,
-        "",
-        ""
-      ],
-      "color": "blue"
-    },
-    {
-      "name": "Rete Centrale Sicula",
-      "abbrev": "RCS",
-      "tokens": [
-        130,
         "",
         ""
       ],
       "color": "orange"
     },
     {
-      "name": "Società Ferroviaria Akragas",
-      "abbrev": "SFA",
+      "name": "Strada Ferrata da Torina a Genova",
+      "abbrev": "SFTG",
       "tokens": [
-        40,
+        "Torino (S)",
+        "Alessandria",
+        "",
         "",
         ""
       ],
+      "color": "blue"
+    },
+    {
+      "name": "Strada di Ferro da Torina a Novara",
+      "abbrev": "SFTN",
+      "tokens": [
+        "Torino (N)",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "brown"
+    },
+    {
+      "name": "Strada di Ferro da Torino a Cuneo",
+      "abbrev": "SFTC",
+      "variant": "V2",
+      "tokens": [
+        "Cuneo",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "yellow"
+    },
+    {
+      "name": "Strade Ferrate Livornesi",
+      "abbrev": "SFLi",
+      "tokens": [
+        "Pisa",
+        "Firenze",
+        "",
+        "",
+        ""
+      ],
+      "color": "brown"
+    },
+    {
+      "name": "Strade Ferrate del Sud dell'Austria",
+      "abbrev": "SB",
+      "variant": "V2",
+      "tokens": [
+        "Venezia",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "yellow"
+    },
+    {
+      "name": "Strade Ferrate della Lombardia & dell'Italia Centrale",
+      "abbrev": "SFL",
+      "variant": "V2",
+      "tokens": [
+        "Milano",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "cyan"
+    },
+    {
+      "name": "Società Leonardo Da Vinci",
+      "abbrev": "SLDV",
+      "minor": true,
+      "color": "black"
+    },
+    {
+      "name": "Ferrovie Trans Padane",
+      "abbrev": "FTP",
+      "minor": true,
+      "color": "gray"
+    },
+    {
+      "name": "Compagnia Trasporti La Patria",
+      "abbrev": "CTLP",
+      "minor": true,
+      "color": "purple"
+    },
+    {
+      "name": "Compagnia Ferroviaria Conte di Cavour",
+      "abbrev": "CFCC",
+      "color": "green"
+    },
+    {
+      "name": "Compagnia Trasporti Dante Alighieri",
+      "abbrev": "CTDA",
+      "color": "cyan"
+    },
+    {
+      "name": "Impresa Centrale Strade Ferrate",
+      "abbrev": "ICSF",
+      "color": "lime"
+    },
+    {
+      "name": "Reale Società Ferroviaria Sabauda",
+      "abbrev": "RSFS",
+      "color": "purple"
+    },
+    {
+      "name": "Compagnia Garibaldi per i Trasporti Ferroviari",
+      "abbrev": "CGTF",
+      "color": "red"
+    },
+    {
+      "name": "Regia Azienda Trasporti Ferroviari",
+      "abbrev": "RATF",
+      "color": "orange"
+    },
+    {
+      "name": "Compagnia Trasporti Subalpini",
+      "abbrev": "CTS",
+      "color": "gray"
+    },
+    {
+      "name": "Impresa Ferroviaria Alta Italia",
+      "abbrev": "IFAI",
       "color": "pink"
+    },
+    {
+      "name": "Impresa Latina Trasporti su Ferro",
+      "abbrev": "ILTF",
+      "color": "green"
+    },
+    {
+      "name": "Azienda Trasporti Ferroviari Ausonia",
+      "abbrev": "ATFA",
+      "color": "brown"
+    },
+    {
+      "name": "Azienda Ferroviaria Italica",
+      "abbrev": "AFI",
+      "color": "lavender"
+    },
+    {
+      "name": "Strada di Ferro da Torino a Cuneo",
+      "abbrev": "SFTC",
+      "minor": true,
+      "color": "yellow",
+      "variant": "V1",
+      "tokens": [
+        "Cuneo",
+        ""
+      ]
+    },
+    {
+      "name": "Strade di Ferro Venete",
+      "abbrev": "SFV",
+      "minor": true,
+      "color": "yellow",
+      "variant": "V1",
+      "tokens": [
+        "Venezia",
+        ""
+      ]
+    },
+    {
+      "name": "Strade Ferrate Lombarde",
+      "abbrev": "SFL",
+      "minor": true,
+      "color": "cyan",
+      "variant": "V1",
+      "tokens": [
+        "Milano",
+        ""
+      ]
     }
   ],
   "map": {
@@ -993,7 +1158,7 @@
     "hexes": [
       {
         "color": "plain",
-        "hexes": ["C8", "C10", "C12", "D5", "D7", "D11", "D13", "E6", "E8", "E12", "F3", "F5", "F9", "G8", "G10", "H3", "I2", "I4", "I8", "J3", "J7", "J11", "J13", "K4", "K8", "K10", "L7", "L11", "L17", "L19", "M6", "M10", "M18", "N9", "N11", "N15", "O6", "O14", "P9"]
+        "hexes": ["C8", "C10", "C12", "D5", "D7", "D11", "D13", "E6", "E8", "E12", "F3", "F5", "F9", "G8", "G10", "H3", "I2", "I4", "I8", "J3", "J7", "J11", "J13", "K4", "K8", "K10", "L7", "L11", "L19", "L21", "M6", "M10", "M20", "N9", "N11", "N15", "O6", "O14", "P9"]
       },
       {
         "color": "plain",
@@ -1017,13 +1182,26 @@
       {
         "color": "green",
         "cities": [{
-          "pass": true
+          "pass": true,
+          "name": {"name": "Fréjus", "reverse": true}
         }],
         "terrain": [{
-          "percent": 0.4,
+          "percent": 0.6,
           "cost": 200
         }],
-        "hexes": ["A8", "E2"]
+        "hexes": ["A8"]
+      },
+      {
+        "color": "green",
+        "cities": [{
+          "pass": true,
+          "name": {"name": "Simplon", "reverse": true}
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 200
+        }],
+        "hexes": ["E2"]
       },
       {
         "color": "water",
@@ -1144,11 +1322,6 @@
           "name": {"name": "Lyon"},
           "revenues": [
             {
-              "color": "white",
-              "value": "0",
-              "phase": 2
-            },
-            {
               "color": "gray",
               "value": 140,
               "phase": 4
@@ -1170,11 +1343,6 @@
           "percent": 0.2,
           "name": {"name": "Lausanne / Lotschberg"},
           "revenues": [
-            {
-              "color": "white",
-              "value": "0",
-              "phase": 2
-            },
             {
               "color": "gray",
               "value": 90,
@@ -1199,12 +1367,12 @@
           "revenues": [
             {
               "color": "white",
-              "value": "0",
+              "value": 20,
               "phase": 2
             },
             {
               "color": "gray",
-              "value": 90,
+              "value": 30,
               "phase": 4
             },
             {
@@ -1349,9 +1517,334 @@
           ]
         },
         "hexes": ["Q16"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"angle": 60, "percent": 0.5, "name": {"name": "Forli"}},
+                        {"angle": 240, "percent": 0.5, "name": {"name": "Cesena", "reverse": true}}],
+        "hexes": ["P15"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"angle": 60, "percent": 0.5, "name": {"name": "Vercelli"}},
+                        {"angle": 240, "percent": 0.5, "name": {"name": "Navara", "reverse": true}}],
+        "hexes": ["F7"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"angle": 60, "percent": 0.5, "name": {"name": "Pistoia"}},
+                        {"angle": 240, "percent": 0.5, "name": {"name": "Prato", "reverse": true}}],
+        "hexes": ["M18"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Asti"}}],
+        "hexes": ["E10"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Siena"}}],
+        "hexes": ["N21"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Piacenza"}}],
+        "hexes": ["I10"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Rovigo"}}],
+        "hexes": ["O10"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Arezzo"}}],
+        "hexes": ["O20"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "La Spezia"}}],
+        "hexes": ["J17"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{"companies": ["SFTC"], "name": {"name": "Cuneo", "reverse": true}}],
+        "track": [{"side": 4}, {"side": 5}, {"side": 6}],
+        "labels": [{"label": "Y", "angle": 150, "percent": 0.75}],
+        "terrain": [{"type": "mountain", "cost": 50, "angle": 90, "percent": 0.667}],
+        "values": [{"value": 30, "angle": 30, "percent": 0.8}],
+        "hexes": ["C14"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Albenga"}}],
+        "terrain": [{"type": "mountain", "cost": 50, "angle": 90, "percent": 0.6}],
+        "hexes": ["E16"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Savona"}}],
+        "terrain": [{"type": "mountain", "cost": 50, "angle": 90, "percent": 0.6}],
+        "hexes": ["F15"]
+      },
+      {
+        "color": "plain",
+        "labels": [{"label": "Y", "angle": 180, "percent": 0.667}],
+        "cities": [{"name": {"name": "Bergamo", "reverse": true}}],
+        "hexes": ["I6"]
+      },
+      {
+        "color": "plain",
+        "labels": [{"label": "Y", "angle": 180, "percent": 0.667}],
+        "cities": [{"name": {"name": "Brescia", "reverse": true}}],
+        "hexes": ["K6"]
+      },
+      {
+        "color": "plain",
+        "labels": [{"label": "Y", "angle": 180, "percent": 0.667}],
+        "cities": [{"name": {"name": "Verona", "reverse": true}}],
+        "hexes": ["M8"]
+      },
+      {
+        "color": "plain",
+        "labels": [{"label": "Y", "angle": 180, "percent": 0.667}],
+        "cities": [{"name": {"name": "Padova", "reverse": true}}],
+        "hexes": ["O8"]
+      },
+      {
+        "color": "plain",
+        "labels": [{"label": "Y", "angle": 180, "percent": 0.667}],
+        "cities": [{"name": {"name": "Bologna", "reverse": true}}],
+        "hexes": ["N13"]
+      },
+      {
+        "color": "yellow",
+        "labels": [{"label": "M", "angle": 140, "percent": 0.7}],
+        "values": [{"value": 60, "angle": 300, "percent": 0.5}],
+        "cities": [{"angle": 60, "percent": 0.333, "companies": ["IRSFF"], "name": {"reverse": true, "name": "Milano"}}],
+        "track": [{"type": "straightStop", "side": 5},
+                  {"type": "custom", "path": "m 0 -85 C 30 0 0 0 -10 0"}],
+        "hexes": ["H7"]
+      },
+      {
+        "color": "yellow",
+        "labels": [{"label": "G", "angle": 90, "percent": 0.667}],
+        "terrain": [{"type": "mountain", "angle": 270, "percent": 0.667, "cost": 50}],
+        "cities": [{"name": {"name": "Genova"}}],
+        "hexes": ["G14"]
+      },
+      {
+        "color": "plain",
+        "labels": [{"label": "V", "angle": 90, "percent": 0.667}],
+        "terrain": [{"type": "swamp", "angle": 270, "percent": 0.667, "cost": 50}],
+        "cities": [{"name": {"name": "Venezia"}, "companies": ["IRSFF"]}],
+        "hexes": ["P7"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Alessandria"},
+                    "companies": ["SFTG"]}],
+        "hexes": ["F11"]
+      },
+      {
+        "color": "yellow",
+        "values": [{
+          "value": 30,
+          "angle": 215,
+          "percent": 0.667
+        }],
+        "labels": [{
+          "label": "Y",
+          "angle": 15,
+          "percent": 0.667
+        }],
+        "cities": [{
+          "angle": 300,
+          "percent": 0.5,
+          "name": {"name": "Firenze"},
+          "companies": ["SFMA"]
+        },{
+          "angle": 150,
+          "percent": 0.5,
+          "companies": ["SFMA"]
+        }],
+        "track": [{"side": 6, "type": "gentle"}, {"side": 3, "type": "sharpStop"}],
+        "hexes": ["N19"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Livorno"}}],
+        "hexes": ["K20"]
+      },
+      {
+        "color": "yellow",
+        "values": [{
+          "angle": 90,
+          "percent": 0.667,
+          "value": 20
+        }],
+        "cities": [{
+          "companies": ["SSFL"],
+          "name": {"name": "Pisa"}
+        }],
+        "track": [{"side": 1},{"side": 5},{"side": 6}],
+        "hexes": ["K18"]
+      },
+      {
+        "color": "yellow",
+        "values": [{
+          "percent": 0.667,
+          "value": 20
+        }],
+        "cities": [{
+          "companies": ["SFLP"],
+          "name": {"name": "Lucca"}
+        }],
+        "track": [{"side": 2},{"side": 6}],
+        "hexes": ["L17"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Lugano"}}],
+        "hexes": ["G4"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Busto Arsizio"}}],
+        "hexes": ["G6"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Cumo"}}],
+        "hexes": ["H5"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Pavia"}}],
+        "hexes": ["H9"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Cremona"}}],
+        "hexes": ["J9"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Montova"}}],
+        "hexes": ["L9"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Vicenza"}}],
+        "hexes": ["N7"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Treviso"}}],
+        "hexes": ["P5"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Parma"}}],
+        "hexes": ["K12"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Reggio Emilia"}}],
+        "hexes": ["L13"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Modena"}}],
+        "hexes": ["M12"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Ferrara"}}],
+        "hexes": ["O12"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "swamp", "cost": 50}],
+        "hexes": ["P11"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Ravenna"}}],
+        "terrain": [{"type": "swamp", "cost": 50, "angle": 90, "percent": 0.6}],
+        "hexes": ["P13"]
+      },
+      {
+        "color": "yellow",
+        "values": [{
+          "value": 40,
+          "angle": 145,
+          "percent": 0.667
+        }],
+        "labels": [{
+          "label": "T",
+          "angle": 345,
+          "percent": 0.667
+        }],
+        "cities": [{
+          "angle": 60,
+          "percent": 0.5,
+          "name": {"name": "Torino"},
+          "companies": ["SFTG"]
+        },{
+          "angle": 210,
+          "percent": 0.5,
+          "companies": ["SFTN"]
+        }],
+        "track": [{"side": 6, "type": "gentle"}, {"side": 5, "type": "sharpStopRev"}],
+        "hexes": ["D9"]
       }
     ],
     "borders": [
+      {
+        "color": "gray",
+        "dashed": true,
+        "dashArray": "12",
+        "offset": 4,
+        "width": 2,
+        "coords": ["G4p4", "G4p5", "G4p6"]
+      },
+      {
+        "color": "green",
+        "dashed": true,
+        "dashArray": "12 24",
+        "width": 2,
+        "coords": ["G6p2", "G6p1", "G8p2", "G8p1", "G10p2", "G10p1", "G10p6", "G10p5", "H11p6", "H11p5", "I12p6"]
+      },
+      {
+        "color": "green",
+        "dashed": true,
+        "dashArray": "12 24",
+        "width": 2,
+        "coords": ["J17p2", "J17p3", "J17p4", "J17p5"]
+      },
+      {
+        "color": "green",
+        "dashed": true,
+        "dashArray": "12 24",
+        "width": 2,
+        "coords": ["L17p1", "L17p2", "L17p3", "M16p2", "M16p3", "M16p4", "O16p1", "O16p2", "O16p3", "P17p2", "P17p3"]
+      },
+      {
+        "color": "green",
+        "dashed": true,
+        "dashArray": "12 24",
+        "width": 2,
+        "coords": ["I12p1", "I12p2", "I10p1", "I10p2", "I10p3", "I10p4", "K10p1", "K10p6", "K10p5", "K10p4", "L9p5", "M10p2", "M10p3", "N9p6", "N9p5", "O10p6", "O10p5", "O10p4", "P9p5"]
+      },
+      {
+        "color": "yellow",
+        "dashed": true,
+        "dashArray": "12 24",
+        "offset": -2,
+        "width": 2,
+        "coords": ["L7p1", "L9p2", "L9p1", "L9p6", "L9p5", "M10p2", "M10p3", "N9p6", "N9p5", "O10p6", "O10p5", "O10p4", "P9p5"]
+      },
       {
         "color": "mountain",
         "coords": ["B9p1", "B9p2"]
