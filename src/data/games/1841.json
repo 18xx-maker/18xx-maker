@@ -1844,8 +1844,17 @@
           "color": "blue",
           "dashed": true,
           "dashArray": "12 24",
+          "offset": -1,
           "width": 4,
-          "coords": ["J17p2", "J17p3", "J17p4", "J17p5"]
+          "coords": ["J17p2", "J17p3"]
+        },
+        {
+          "color": "blue",
+          "dashed": true,
+          "dashArray": "12 24",
+          "offset": -2,
+          "width": 4,
+          "coords": ["J17p4", "J17p5"]
         },
         {
           "color": "blue",
