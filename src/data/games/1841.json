@@ -1064,9 +1064,372 @@
         "icons": [{ "type": "port", "angle": 300, "percent": 0.6 }],
         "track": [{ "type": "offboard", "side": 3 }],
         "hexes": ["Q14"]
+      },
+      {
+        "color": "gray",
+        "values": [{"value": 10, "angle": 60, "percent": 0.5}],
+        "centerTowns": [{"name": {"name": "Aosta", "rotation": -30}}],
+        "track": [{"type": "city", "side": 5}],
+        "hexes": ["C6"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {"type": "straight", "side": 2},
+          {"type": "sharp", "side": 1},
+          {"type": "sharp", "side": 5}],
+        "hexes": ["J5"]
+      },
+      {
+        "color": "gray",
+        "values": [{"value": 20, "angle": 150, "percent": 0.7},
+                   {"value": 10, "angle": 270, "percent": 0.7}],
+        "centerTowns": [{"angle": 90, "percent": 0.6, "name": {"name": "Tirano"}},
+                        {"angle": 330, "percent": 0.6, "name": {"name": "Edolo"}}],
+        "track": [{"type": "sharpStop", "side": 2},
+                  {"type": "sharpStopRev", "side": 1}],
+        "hexes": ["K2"]
+      },
+      {
+        "color": "offboard",
+        "removeBorders": [5],
+        "track": [{"type": "offboard", "side": 4}],
+        "hexes": ["L23"]
+      },
+      {
+        "color": "offboard",
+        "removeBorders": [2,6],
+        "offBoardRevenue": {
+          "name": {"name": "Roma"},
+          "revenues": [
+            {
+              "color": "white",
+              "value": 10,
+              "phase": 2
+            },
+            {
+              "color": "gray",
+              "value": 40,
+              "phase": 4
+            },
+            {
+              "color": "white",
+              "value": 200,
+              "phase": 6
+            }
+          ]
+        },
+        "hexes": ["M22"]
+      },
+      {
+        "color": "offboard",
+        "removeBorders": [3,5],
+        "track": [{"type": "offboard", "side": 4}],
+        "hexes": ["N23"]
+      },
+      {
+        "color": "offboard",
+        "removeBorders": [2],
+        "track": [{"type": "offboard", "side": 4}],
+        "hexes": ["O22"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 6}],
+        "offBoardRevenue": {
+          "angle": 180,
+          "percent": 0.333,
+          "name": {"name": "Lyon"},
+          "revenues": [
+            {
+              "color": "white",
+              "value": "0",
+              "phase": 2
+            },
+            {
+              "color": "gray",
+              "value": 140,
+              "phase": 4
+            },
+            {
+              "color": "white",
+              "value": 200,
+              "phase": 6
+            }
+          ]
+        },
+        "hexes": ["A6"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 6}],
+        "offBoardRevenue": {
+          "angle": 180,
+          "percent": 0.333,
+          "name": {"name": "Lausanne / Lotschberg"},
+          "revenues": [
+            {
+              "color": "white",
+              "value": "0",
+              "phase": 2
+            },
+            {
+              "color": "gray",
+              "value": 90,
+              "phase": 4
+            },
+            {
+              "color": "white",
+              "value": 150,
+              "phase": 6
+            }
+          ]
+        },
+        "hexes": ["D1"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 1}],
+        "offBoardRevenue": {
+          "angle": 180,
+          "percent": 0.333,
+          "name": {"name": "Gotthard"},
+          "revenues": [
+            {
+              "color": "white",
+              "value": "0",
+              "phase": 2
+            },
+            {
+              "color": "gray",
+              "value": 90,
+              "phase": 4
+            },
+            {
+              "color": "white",
+              "value": 150,
+              "phase": 6
+            }
+          ]
+        },
+        "hexes": ["G2"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 4}],
+        "removeBorders": [5],
+        "hexes": ["C18"]
+      },
+      {
+        "color": "offboard",
+        "removeBorders": [2,6],
+        "offBoardRevenue": {
+          "name": {"name": "Marseille"},
+          "revenues": [
+            {
+              "color": "white",
+              "value": 60,
+              "phase": 2
+            },
+            {
+              "color": "gray",
+              "value": 100,
+              "phase": 4
+            },
+            {
+              "color": "white",
+              "value": 150,
+              "phase": 6
+            }
+          ]
+        },
+        "hexes": ["D17"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 4}],
+        "removeBorders": [3],
+        "hexes": ["E18"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 6}],
+        "removeBorders": [2],
+        "hexes": ["N3"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 1},
+                  {"type": "offboard", "side": 2},
+                  {"type": "offboard", "side": 6}],
+        "removeBorders": [5],
+        "offBoardRevenue": {
+          "angle": 180,
+          "percent": 0.333,
+          "name": {"name": "Trento/Brennero"},
+          "revenues": [
+            {
+              "color": "white",
+              "value": 20,
+              "phase": 2
+            },
+            {
+              "color": "gray",
+              "value": 70,
+              "phase": 4
+            },
+            {
+              "color": "white",
+              "value": 140,
+              "phase": 6
+            }
+          ]
+        },
+        "hexes": ["M4"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 2}],
+        "removeBorders": [1],
+        "hexes": ["Q4"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 2}, {"type": "offboard", "side": 3}],
+        "removeBorders": [4],
+        "offBoardRevenue": {
+          "angle": 270,
+          "percent": 0.333,
+          "name": {"name": "East"},
+          "revenues": [
+            {
+              "color": "white",
+              "value": 50,
+              "phase": 2
+            },
+            {
+              "color": "gray",
+              "value": 80,
+              "phase": 4
+            },
+            {
+              "color": "white",
+              "value": 120,
+              "phase": 6
+            }
+          ]
+        },
+        "hexes": ["Q6"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 2}, {"type": "offboard", "side": 3}],
+        "offBoardRevenue": {
+          "angle": 270,
+          "percent": 0.333,
+          "name": {"name": "Adriatic Coast"},
+          "revenues": [
+            {
+              "color": "white",
+              "value": 10,
+              "phase": 2
+            },
+            {
+              "color": "gray",
+              "value": 70,
+              "phase": 4
+            },
+            {
+              "color": "white",
+              "value": 150,
+              "phase": 6
+            }
+          ]
+        },
+        "hexes": ["Q16"]
       }
     ],
     "borders": [
+      {
+        "color": "mountain",
+        "coords": ["B9p1", "B9p2"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["C8p5", "C8p6", "C8p1"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["C6p4", "C6p5", "C6p6"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["E14p5", "E14p6"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["F13p5", "F13p6"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["H13p1", "H13p6", "H13p5", "I14p6", "I14p5", "J15p6"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["I14p1", "I14p2"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["J15p1", "J15p2"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["J13p1", "J13p2", "J13p3"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["G4p6", "G4p1", "G4p2"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["H3p5", "H3p6", "H3p1"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["I4p2", "I4p3", "I4p4", "I4p5"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["J3p4", "J3p5", "J3p6"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["K4p4", "K4p5", "K4p6"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["L7p1", "L7p2", "L7p3", "M6p2"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["M6p3", "M6p4", "M6p5", "M6p6"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["K16p5", "K16p6", "K16p1"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["N17p1", "N17p2", "N17p3"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["O20p6", "O20p1"]
+      },
+      {
+        "color": "mountain",
+        "coords": ["O20p2", "O20p3"]
+      }
     ]
   }
 }
