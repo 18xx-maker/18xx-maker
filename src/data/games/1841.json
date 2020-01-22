@@ -1339,7 +1339,7 @@
         },
         {
           "color": "offboard",
-          "track": [{"type": "offboard", "side": 6}],
+          "track": [{"type": "offboard", "side": 1}],
           "offBoardRevenue": {
             "angle": 180,
             "percent": 0.333,
@@ -1739,7 +1739,7 @@
         },
         {
           "color": "plain",
-          "cities": [{"name": {"name": "Cumo"}}],
+          "cities": [{"name": {"name": "Como"}}],
           "hexes": ["H5"]
         },
         {
