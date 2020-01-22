@@ -1830,35 +1830,35 @@
           "dashed": true,
           "dashArray": "12",
           "offset": 4,
-          "width": 2,
+          "width": 4,
           "coords": ["G4p4", "G4p5", "G4p6"]
         },
         {
           "color": "green",
           "dashed": true,
           "dashArray": "12 24",
-          "width": 2,
+          "width": 4,
           "coords": ["G6p2", "G6p1", "G8p2", "G8p1", "G10p2", "G10p1", "G10p6", "G10p5", "H11p6", "H11p5", "I12p6"]
         },
         {
           "color": "green",
           "dashed": true,
           "dashArray": "12 24",
-          "width": 2,
+          "width": 4,
           "coords": ["J17p2", "J17p3", "J17p4", "J17p5"]
         },
         {
           "color": "green",
           "dashed": true,
           "dashArray": "12 24",
-          "width": 2,
+          "width": 4,
           "coords": ["L17p1", "L17p2", "L17p3", "M16p2", "M16p3", "M16p4", "O16p1", "O16p2", "O16p3", "P17p2", "P17p3"]
         },
         {
           "color": "green",
           "dashed": true,
           "dashArray": "12 24",
-          "width": 2,
+          "width": 4,
           "coords": ["I12p1", "I12p2", "I10p1", "I10p2", "I10p3", "I10p4", "K10p1", "K10p6", "K10p5", "K10p4", "L9p5", "M10p2", "M10p3", "N9p6", "N9p5", "O10p6", "O10p5", "O10p4", "P9p5"]
         },
         {
@@ -1866,7 +1866,7 @@
           "dashed": true,
           "dashArray": "12 24",
           "offset": -2,
-          "width": 2,
+          "width": 4,
           "coords": ["L7p1", "L9p2", "L9p1", "L9p6", "L9p5", "M10p2", "M10p3", "N9p6", "N9p5", "O10p6", "O10p5", "O10p4", "P9p5"]
         },
         {
