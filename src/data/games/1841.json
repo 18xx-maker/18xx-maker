@@ -6,7 +6,9 @@
     "background": "water",
     "orientation": "horizontal",
     "marketTokens": 2,
-    "currency": "L.#"
+    "currency": "L.#",
+    "titleY": 1500,
+    "titleX": 50
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/1447/1841",
@@ -1165,7 +1167,7 @@
         "track": [{"type": "offboard", "side": 6}],
         "offBoardRevenue": {
           "angle": 180,
-          "percent": 0.333,
+          "percent": 0.2,
           "name": {"name": "Lausanne / Lotschberg"},
           "revenues": [
             {
@@ -1192,7 +1194,7 @@
         "track": [{"type": "offboard", "side": 1}],
         "offBoardRevenue": {
           "angle": 180,
-          "percent": 0.333,
+          "percent": 0.2,
           "name": {"name": "Gotthard"},
           "revenues": [
             {
