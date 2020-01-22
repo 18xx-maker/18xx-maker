@@ -10,6 +10,7 @@ import Market from "./Market";
 
 const MarketSingle = () => {
   let params = useParams();
+
   return (
     <Config>
       {(config, game) => {

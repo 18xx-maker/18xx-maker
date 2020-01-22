@@ -202,7 +202,23 @@
     "legend": [
       {
         "color": "yellow",
-        "description": "Minor companies may convert here"
+        "description": "Minor companies may convert here",
+        "icon": "info"
+      },
+      {
+        "color": "brown",
+        "description": "Minor companies may start here",
+        "icon": "certificate"
+      },
+      {
+        "color": "red",
+        "description": "Any company may start here",
+        "icon": "certificate"
+      },
+      {
+        "color": "purple",
+        "description": "Only Public Companies may start here",
+        "icon": "certificate"
       }
     ]
   },
