@@ -802,7 +802,7 @@
       "limit": "2",
       "number": "6",
       "tiles": "green",
-      "notes": "Tiles may be laid across active borders.",
+      "notes": "Tiles may be laid across borders.",
       "price": 200
     },
     {
@@ -810,7 +810,7 @@
       "limit": "4",
       "number": "6",
       "tiles": "green",
-      "notes": "Tiles may be laid across active borders. May lay two yellows maximum.",
+      "notes": "Tiles may be laid across borders. May lay two yellows maximum.",
       "price": 200
     },
     {
@@ -820,7 +820,7 @@
       "limit": "2",
       "number": "4",
       "tiles": "green",
-      "notes": "Concessions are removed. Tuscan merge is performed. Ferdinandea secession is performed.",
+      "notes": "Concessions are removed. Tuscan merge and Ferdinandea secession are performed.",
       "price": 350
     },
     {
@@ -829,7 +829,7 @@
       "limit": "3",
       "number": "4",
       "tiles": "green",
-      "notes": "Concessions are removed. Tuscan merge is performed. Ferdinandea secession is performed.",
+      "notes": "Concessions are removed. Tuscan merge and Ferdinandea secession are performed.",
       "price": 350
     },
     {
