@@ -33,7 +33,7 @@ const Train = ({ train, blackBand }) => {
         )}
       </Color>
     ),
-    info
+    info || []
   );
 
   if (players) {
