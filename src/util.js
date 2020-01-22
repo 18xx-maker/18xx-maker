@@ -129,7 +129,7 @@ export const maxPages = (total, page) => {
 
 export const compileCompanies = (game) => {
   return map(company => {
-    if (company.minor && game.tokenTypes && game.tokenTypes["minor"]) {
+    if (company.minor && !company.tokens && game.tokenTypes && game.tokenTypes["minor"]) {
       company.tokenType = "minor";
       company.tokens = game.tokenTypes["minor"];
     } else if (!company.tokens && game.tokenTypes && game.tokenTypes["default"]) {

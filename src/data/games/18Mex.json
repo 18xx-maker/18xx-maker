@@ -275,7 +275,7 @@
       "name": "Kansas City, Mexico, & Orient Railroad",
       "price": 40,
       "revenue": 10,
-      "hex": "E6",
+      "tile": "470",
       "description": "Owning company may place the Copper Canyan tile in E6 for $60 unless that hex is already built."
     },
     {
