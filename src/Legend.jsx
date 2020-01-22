@@ -1,32 +1,37 @@
 import React from "react";
-import * as R from "ramda";
 import Color from "./data/Color";
 
-import Movement from "./Movement";
+import SvgIcon from "./SvgIcon";
 
-const Legend = ({ legend, movement, horizontal }) => {
+const Legend = ({ color, icon, description, right }) => {
   return (
-    <Color>
-      {(c,t) => {
-        let items = R.map(item => {
-          let backgroundColor = c(item.color || "orange");
-          let color = item.textColor ? c(item.textColor) : t(c(item.color || "orange"));
-
-          return (
-            <li key={item.description}>
-              <i className={`${item.iconStyle || "fas"} fa-${item.icon || "info"}`} style={{ backgroundColor, color }} />
-              {item.description}
-            </li>
-          );
-        }, legend);
-
-        return (
-          <div className={`Legend${horizontal ? " Legend--Horizontal" : "" }`}>
-            <Movement movement={movement} />
-            <ul className="notes">{items}</ul>
-          </div>
-        );
-      }}
+    <Color context="companies">
+      {(c,t) => (
+        <g>
+          <circle r="15" cx={right ? -15 : 15} cy="0"
+                  stroke="none"
+                  fill={c(color || "orange")}
+          />
+          <SvgIcon name={icon || "info"}
+                   style={{fill: t(c(color || "orange"))}}
+                   x={right ? -30 : 0}
+                   y={-15}
+          />
+          <text
+            fontFamily="sans-serif"
+            fontSize="14"
+            fontWeight="normal"
+            textAnchor={right ? "end" : "start"}
+            dominantBaseline="middle"
+            fill="black"
+            stroke="black"
+            x={right ? -34 : 34}
+            y="1"
+          >
+            {description}
+          </text>
+        </g>
+      )}
     </Color>
   );
 };

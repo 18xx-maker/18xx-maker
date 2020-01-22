@@ -508,47 +508,47 @@
         "height": 2
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 7
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 14
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 20
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 26
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 31
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 36
       },
       {
-        "par": true,
+        "legend": 1,
         "value": 40
       },
       {
-        "par": true,
+        "legend": 1,
         "value": 44
       },
       {
-        "par": true,
+        "legend": 1,
         "value": 47
       },
       {
-        "par": true,
+        "legend": 1,
         "value": 50
       },
       {
-        "par": true,
+        "legend": 1,
         "value": 52
       },
       {
@@ -568,7 +568,7 @@
         "value": 54
       },
       {
-        "par": true,
+        "legend": 1,
         "value": 56
       },
       {
@@ -594,7 +594,7 @@
         "value": 58
       },
       {
-        "par": true,
+        "legend": 1,
         "value": 60
       },
       {
@@ -628,7 +628,7 @@
         "value": 62
       },
       {
-        "par": true,
+        "legend": 1,
         "value": 65
       },
       {
@@ -654,7 +654,7 @@
         "value": 68
       },
       {
-        "par": true,
+        "legend": 1,
         "value": 71
       },
       {
@@ -680,7 +680,7 @@
         "value": 74
       },
       {
-        "par": true,
+        "legend": 1,
         "value": 78
       },
       {
@@ -706,7 +706,7 @@
         "value": 82
       },
       {
-        "par": true,
+        "legend": 1,
         "value": 86
       },
       {
@@ -724,7 +724,7 @@
         "value": 90
       },
       {
-        "par": true,
+        "legend": 1,
         "value": 95
       },
       {
@@ -752,79 +752,79 @@
       142,
       150,
       {
-        "legend": 1,
+        "legend": 2,
         "value": 158
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 166
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 174
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 182
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 191
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 200
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 210
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 220
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 230
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 240
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 250
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 260
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 270
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 280
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 290
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 300
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 310
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 320
       },
       {
-        "legend": 1,
+        "legend": 2,
         "value": 330
       },
       {
@@ -839,7 +839,12 @@
     "legend": [
       {
         "color": "gray",
-        "description": "Company initial par values",
+        "description": "Initial company par values",
+        "icon": "money-bill-wave"
+      },
+      {
+        "color": "mountain",
+        "description": "Restarted company par values",
         "icon": "money-bill-wave"
       },
       {

@@ -15,9 +15,13 @@ import { ReactComponent as stop } from "./images/icons/stop.svg";
 import { ReactComponent as times } from "./images/icons/times.svg";
 
 const icons = {
+  certificate: certLimit,
   certLimit,
+  university: bank,
   bank,
+  "user-friends": number,
   number,
+  coins: capital,
   capital,
   exclamation,
   info,

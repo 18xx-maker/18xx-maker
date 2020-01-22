@@ -1,12 +1,37 @@
 import React from "react";
 
+import Color from "../data/Color";
+import Config from "../data/Config";
 import Cell from "./Cell";
 import Ledges from "./Ledges";
+
+import Legend from "../Legend";
 
 import addIndex from "ramda/src/addIndex";
 import chain from "ramda/src/chain";
 import concat from "ramda/src/concat";
 import map from "ramda/src/map";
+import reverse from "ramda/src/reverse";
+
+const findBottomRightMost = market => {
+  let bottomRightMost = 0;
+  let maxLength = 0;
+
+  for(let i = 0; i < market.length; i++) {
+    let row = market[i];
+
+    if (row.length >= maxLength) {
+      maxLength = row.length;
+      bottomRightMost = i;
+    }
+  }
+
+  return bottomRightMost;
+}
+
+const findRightBottomMost = market => {
+  return market[market.length - 1].length - 1;
+}
 
 const Market = ({data, title}) => {
   let cells = [];
@@ -69,6 +94,101 @@ const Market = ({data, title}) => {
     break;
   };
 
+  let legend = null;
+
+  if (data.type === "2D") {
+    let bottomRightMost = findBottomRightMost(data.market);
+    let rightBottomMost = findRightBottomMost(data.market);
+
+    let left = (rightBottomMost + 1) * data.width + 5;
+    let top = (bottomRightMost + 1) * data.height + 55;
+    let right = data.totalWidth;
+    let bottom = data.totalHeight;
+
+    legend = (
+      <Config>
+        {(config, game) => {
+          let legend = reverse((game.stock && game.stock.legend) || []);
+
+          return (
+            <Color context="companies">
+              {c => (
+                <g>
+                  <path
+                    d={`M ${left} ${bottom} L ${right} ${bottom} L ${right} ${top}`}
+                    stroke={c("black")}
+                    strokeWidth="1"
+                    fill="none"
+                  />
+                  {addIndex(map)((legend, i) => (
+                    <g
+                      key={`pool-note-${i}`}
+                      transform={`translate(${right - 5} ${bottom - (i * 35) - 20})`}
+                    >
+                      <Legend right={true} {...legend}/>
+                    </g>
+                  ), legend)}
+                </g>
+              )}
+            </Color>
+          );
+        }}
+      </Config>
+    );
+  } else if (data.type === "1D") {
+    legend = (
+      <Config>
+        {(config, game) => {
+          let legend = (game.stock && game.stock.legend) || [];
+          let left = 0;
+
+          return (
+            <g>
+              {addIndex(map)((legend, i) => {
+                let current = left;
+                left += 40 + legend.description.length * 8;
+                return (
+                  <g
+                    key={`pool-note-${i}`}
+                    transform={`translate(${current} ${1 * data.height + 75})`}
+                  >
+                    <Legend {...legend}/>
+                  </g>
+                );
+              }, legend)}
+            </g>
+          );
+        }}
+      </Config>
+    );
+  } else if (data.type === "1Diag") {
+    legend = (
+      <Config>
+        {(config, game) => {
+          let legend = (game.stock && game.stock.legend) || [];
+          let left = 0;
+
+          return (
+            <g>
+              {addIndex(map)((legend, i) => {
+                let current = left;
+                left += 40 + legend.description.length * 8;
+                return (
+                  <g
+                    key={`pool-note-${i}`}
+                    transform={`translate(${current} ${2 * data.height + 75})`}
+                  >
+                    <Legend {...legend}/>
+                  </g>
+                );
+              }, legend)}
+            </g>
+          );
+        }}
+      </Config>
+    );
+  }
+
   return (
     <g>
       <text
@@ -81,6 +201,7 @@ const Market = ({data, title}) => {
       >
         {title} Stock Market
       </text>
+      {legend}
       {cells}
       <Ledges data={data} />
     </g>
