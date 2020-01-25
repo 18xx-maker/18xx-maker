@@ -248,6 +248,7 @@
       "name": "8E",
       "quantity": 2,
       "price": "$1100",
+      "tradeInPrice": 900,
       "color": "gray",
       "info": [
         {

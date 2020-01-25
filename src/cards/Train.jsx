@@ -15,7 +15,16 @@ import brownTrain from "../images/brown-train.png";
 import grayTrain from "../images/gray-train.png";
 
 const Train = ({ train, blackBand }) => {
-  let { name, price, color, info, description, players, backgroundColor, variant } = train;
+  let { 
+    name, 
+    price, 
+    tradeInPrice,
+    color, 
+    info, 
+    description, 
+    players, 
+    backgroundColor, 
+    variant } = train;
 
   let notes = addIndex(map)(
     (i, index) => (
@@ -86,6 +95,11 @@ const Train = ({ train, blackBand }) => {
                          style={{ backgroundColor: config.trains.style === "color" ? c(color) : null,
                                   color: config.trains.style === "color" ? t(c(color)) : c(color) }}>
                       <Currency value={price} type="train"/>
+                      {tradeInPrice && (
+                        <div className="train__trade_in_price">
+                          (<Currency value={tradeInPrice} type="train"/>)
+                        </div>
+                      )}
                     </div>
                     {description && <div className="train__description">{description}</div>}
                     <div className="train__notes">{notes}</div>

@@ -221,6 +221,7 @@
       "items": {
         "type": "object",
         "properties": {
+          "tradeInPrice": { "type": "number"},
           "variant": { "type": "string" }
         },
         "additionalProperties": true
