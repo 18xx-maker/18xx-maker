@@ -31,6 +31,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  flex-direction: column;
 }
 
 .train__tracks {
@@ -123,4 +124,9 @@
   font-size: 0.5em;
   font-style: italic;
   font-family: sans-serif;
+}
+
+.train__trade_in_price {
+  font-size: 0.6em;
+  padding-top: 0.2em;
 }
