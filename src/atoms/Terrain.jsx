@@ -3,7 +3,7 @@ import Color from "../data/Color";
 
 import Currency from "../util/Currency";
 
-const Terrain = ({ type, size, cost, fontSize }) => {
+const Terrain = ({ type, size, cost, fontSize, color }) => {
   fontSize = fontSize || 15;
 
   let translate = 0;
@@ -43,7 +43,7 @@ const Terrain = ({ type, size, cost, fontSize }) => {
             <use href={`#${type}`} />
           </g>
           <text
-            fill={p("black")}
+            fill={p(color || "black")}
             fontSize={fontSize}
             dominantBaseline="hanging"
             textAnchor="middle"
