@@ -1253,7 +1253,7 @@
             },
             {
               "color": "brown",
-              "cost": "50"
+              "cost": "60"
             }
           ]
         },
@@ -1265,6 +1265,13 @@
         ],
         "centerTowns": [
           {}
+        ],
+        "terrain": [
+          {
+            "angle": -70,
+            "percent": 0.667,
+            "cost": 80
+          }
         ],
         "hexes": [
           "B14"
@@ -1339,7 +1346,7 @@
             },
             {
               "color": "brown",
-              "cost": "30"
+              "cost": "40"
             },
             {
               "color": "gray",
