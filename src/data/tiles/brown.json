@@ -5400,5 +5400,45 @@
         }
       }
     ]
+  },
+  "R862": {
+    "color": "brown",
+    "labels": [
+      {
+        "label": "RE",
+        "angle": -40,
+        "percent": 0.7
+      }
+    ],
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 70
+      }
+    ],
+    "cities": [
+      {
+        "size": 2,
+        "name": {
+          "name": "Regina",
+          "offset": 75
+        }
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      }
+    ]
   }
 }
