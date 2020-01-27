@@ -6375,5 +6375,44 @@
     "centerTowns": [
       {}
     ]
+  },
+  "R861": {
+    "color": "green",
+    "labels": [
+      {
+        "label": "RE",
+        "angle": -30,
+        "percent": 0.667
+      }
+    ],
+    "cities": [
+      {
+        "angle": 60,
+        "percent": 0.45,
+        "name": {
+          "name": "Pile o' Bones"
+        },
+        "rotation": -20
+      },
+      {
+        "angle": -120,
+        "percent": 0.4,
+        "rotation": -30,
+        "name": {
+          "name": "Lumsden",
+          "reverse": true
+        }
+      }
+    ],
+    "track": [
+      {
+        "type": "stop",
+        "side": 2
+      },
+      {
+        "type": "stop",
+        "side": 5
+      }
+    ]
   }
 }
