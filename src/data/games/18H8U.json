@@ -212,7 +212,7 @@
   "privates": [
     {
       "name": "Slippery Slope Ski Resort & Mine",
-      "id": 1,
+      "id": "P1",
       "price": 15,
       "revenue": 4,
       "icon": "mountain",
@@ -220,7 +220,7 @@
     },
     {
       "name": "Tennessee River Bridge and Blasting",
-      "id": 2,
+      "id": "P2",
       "price": 18,
       "revenue": 3,
       "tile": "7",
@@ -228,7 +228,7 @@
     },
     {
       "name": "Emergency Response Teams",
-      "id": 3,
+      "id": "P3",
       "price": 20,
       "revenue": 4,
       "token": {"color": "black", "label": "Parts"},
@@ -236,7 +236,7 @@
     },
     {
       "name": "Maria's Stock Tip of the Week",
-      "id": 4,
+      "id": "P4",
       "price": 22,
       "revenue": 5,
       "token": {"color": "yellow", "label": "$"},
@@ -244,7 +244,7 @@
     },
     {
       "name": "Dixie Flyer Pullman Service",
-      "id": 5,
+      "id": "P5",
       "price": 72,
       "revenue": 2,
       "token": {"color": "brown", "label": "1D+1"},
@@ -252,14 +252,14 @@
     },
     {
       "name": "Investor's Choice",
-      "id": 6,
+      "id": "P6",
       "price": 80,
       "icon": "charter",
       "description": "Receive the president's certificate for either the SOU or the GM&O."
     },
     {
       "name": "Bruce's Hedge Fund",
-      "id": 7,
+      "id": "P7",
       "price": 38,
       "icon": "share",
       "description": "May take an available share of any railroad from the initial offering. This counts as a stock action and closes the company."

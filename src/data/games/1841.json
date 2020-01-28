@@ -54,52 +54,52 @@
   ],
   "privates": [
     {
+      "id": "Concession #1",
       "name": "Società della Strada di Ferro da Napoli a Noeera e Castellamunare",
       "price": 50,
       "revenue": 20,
-      "id": 1,
       "icon": "tracks"
     },
     {
+      "id": "Concession #2",
       "name": "Società della Dtrada Ferrata da Lucca a Pistoia",
       "price": 50,
-      "id": 2,
       "company": "SFLP"
     },
     {
+      "id": "Concession #3",
       "name": "Strada di Ferro da Torino a Cuneo",
       "price": 50,
-      "id": 3,
       "company": "SFTC"
     },
     {
+      "id": "Concession #4",
       "name": "Società per la Strada Ferrata Maria Autonia",
       "price": 50,
-      "id": 4,
       "company": "SFMA"
     },
     {
+      "id": "Concession #5",
       "name": "Strada di Ferro da Torina a Novara",
       "price": 50,
-      "id": 5,
       "company": "SFTN"
     },
     {
+      "id": "Concession #6",
       "name": "Società per la Strada Ferrata Leopolda",
       "price": 50,
-      "id": 6,
       "company": "SSFL"
     },
     {
+      "id": "Concession #7",
       "name": "Strada Ferrata da Torino a Genova",
       "price": 50,
-      "id": 7,
       "company": "SFTG"
     },
     {
+      "id": "Concession #8",
       "name": "Imperial Regia Strada Ferrata Ferdinandea",
       "price": 50,
-      "id": 8,
       "company": "IRSFF"
     }
   ],
