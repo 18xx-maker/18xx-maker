@@ -113,7 +113,26 @@
       "abbrev": "SJ",
       "color": "yellow",
       "tokens": "six",
-      "capital": 700
+      "capital": 700,
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 5,
+          "percent": 10,
+          "shares": 1
+        },
+        {
+          "quantity": 3,
+          "label": "Minor Exchange Share",
+          "percent": 10,
+          "shares": 1
+        }
+      ]
     },
     {
       "name": "Södra Stambanan",
@@ -1363,6 +1382,14 @@
         "color": "water",
         "coords": ["D17p5", "D17p6", "D17p1", "D17p2", "D15p1", "D15p2", "D13p1", "E12p6", "E12p1", "F11p6"]
       }
-    ]
+    ],
+    "roundTracker": {
+      "x": 268,
+      "y": 975
+    },
+    "players": {
+      "x": 1344,
+      "y": 807
+    }
   }
 }
