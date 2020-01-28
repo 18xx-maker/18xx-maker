@@ -1,11 +1,11 @@
 {
   "info": {
     "title": "1836",
-    "designer": "John Bohrer",
+    "designer": "Eddie Robbins",
     "background": "gray",
     "orientation": "horizontal",
     "titleX": 500,
-    "currency": "USD"
+    "currency": "$#"
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/273636/1836"
@@ -13,7 +13,7 @@
   "tokens": [
     "Round"
   ],
-  "ipo": true,
+  "ipo": [ "default" ],
   "bank": 9000,
   "players": [
     {
@@ -1601,6 +1601,14 @@
           "K7"
         ]
       }
-    ]
+    ],
+    "roundTracker": {
+      "x": 50,
+      "y": 1550
+    },
+    "players": {
+      "x": 1200,
+      "y": 1475
+    }
   }
 }
