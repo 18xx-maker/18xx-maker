@@ -1266,11 +1266,10 @@
         "centerTowns": [
           {}
         ],
-        "terrain": [
+        "names": [
           {
-            "angle": -70,
-            "percent": 0.667,
-            "cost": 80
+            "name": "$80",
+            "percent": 0.55
           }
         ],
         "hexes": [
