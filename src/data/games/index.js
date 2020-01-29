@@ -36,6 +36,7 @@ import game_1890 from "./1890";
 import game_1891 from "./1891";
 import game_1899 from "./1899";
 import game_18AL from "./18AL";
+import game_18Alex from "./18Alex";
 import game_18CLE from "./18CLE";
 import game_18Chesapeake from "./18Chesapeake";
 import game_18EB from "./18EB";
@@ -103,6 +104,7 @@ let all_games = {
   "1891": game_1891,
   "1899": game_1899,
   "18AL": game_18AL,
+  "18Alex": game_18Alex,
   "18CLE": game_18CLE,
   "18Chesapeake": game_18Chesapeake,
   "18EB": game_18EB,

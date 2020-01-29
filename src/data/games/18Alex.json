@@ -1,0 +1,2030 @@
+{
+  "info": {
+    "title": "18Alex",
+    "subtitle": "",
+    "designer": "Alex Rockwell",
+    "background": "pink",
+    "orientation": "horizontal",
+    "marketTokens": 2,
+    "currency": "USD",
+    "titleY": 1500,
+    "titleX": 50,
+    "titleSize": 15
+  },
+  "links": {
+    "bgg": "https://boardgamegeek.com/",
+    "rules": "https://boardgamegeek.com/"
+  },
+  "tokens": [
+    "Round"
+  ],
+  "ipo": false,
+  "wip": true,
+  "bank": 1440,
+  "players": [
+    {
+      "number": 3,
+      "certLimit": 21,
+      "capital": 1120
+    },
+    {
+      "number": 4,
+      "certLimit": 16,
+      "capital": 840
+    },
+    {
+      "number": 5,
+      "certLimit": 13,
+      "capital": 672
+    },
+    {
+      "number": 6,
+      "certLimit": 11,
+      "capital": 560
+    },
+    {
+      "number": 7,
+      "certLimit": 10,
+      "capital": 480
+    },
+    {
+      "number": 8,
+      "certLimit": 9,
+      "capital": 420
+    }
+  ],
+  "tiles": {
+    "1": 1,
+    "2": 1,
+    "3": 3,
+    "4": 3,
+    "5": 4,
+    "6": 4,
+    "7": 8,
+    "8": 16,
+    "9": 11,
+    "55": 1,
+    "56": 1,
+    "57": 4,
+    "58": 3,
+    "69": 1,
+    "201": 2,
+    "202": 2,
+    "601": 1,
+    "621": 2,
+    "630": 1,
+    "631": 1,
+    "632": 1,
+    "633": 1,
+
+    "12": 1,
+    "13": 1,
+    "14": 2,
+    "15": 2,
+    "16": 2,
+    "17": 2,
+    "18": 2,
+    "19": 2,
+    "20": 2,
+    "21": 2,
+    "22": 2,
+    "23": 3,
+    "24": 3,
+    "25": 3,
+    "26": 2,
+    "27": 2,
+    "28": 2,
+    "29": 2,
+    "30": 2,
+    "31": 2,
+    "87": 2,
+    "88": 2,
+    "144": 2,
+    "204": 2,
+    "205": 1,
+    "206": 1,
+    "207": 2,
+    "208": 2,
+    "602": 1,
+    "604": 1,
+    "606": 1,
+    "612": 1,
+    "613": 3,
+    "614": 4,
+    "615": 1,
+    "619": 2,
+    "622": 2,
+    "624": 1,
+    "625": 1,
+    "626": 1,
+
+    "39": 2,
+    "40": 2,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 2,
+    "45": 2,
+    "46": 2,
+    "47": 2,
+    "70": 2,
+    "627": 2,
+    "628": 2,
+    "629": 2
+  },
+  "stock": {
+    "type": "1D",
+    "movement": {
+      "left": ["Withheld"],
+      "right": ["Paid out, total at least share price"],
+      "right twice": ["Paid out, total at least 2x share price"]
+    },
+    "market": [
+        40,
+        45,
+        50,
+        55,
+        60,
+        { "par": true, "value": 67 },
+        75,
+        82,
+        90,
+        { "par": true, "value": 100 },
+        110,
+        120,
+        135,
+        { "par": true, "value": 150 },
+        165,
+        180,
+        200,
+        { "par": true, "value": 225 },
+        250,
+        275,
+        { "par": true, "value": 300 },
+        330,
+        360,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700
+    ],
+    "legend": [
+      {
+        "color": "gray",
+        "description": "Available par prices"
+      }
+    ]
+  },
+  "pools": [
+    {
+      "name": "Bank Pool",
+      "notes": [
+        {
+          "color": "water",
+          "note": "Shares in the treasury pay dividends to the corporation"
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "OR2",
+      "color": "white"
+    },
+    {
+      "name": "OR1",
+      "color": "white"
+    },
+    {
+      "name": "SR",
+      "color": "gray"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Parliament Round",
+      "steps": [
+        "Buy one certificate from treasury"
+      ]
+    },
+    {
+      "name": "Sale Round",
+      "steps": [
+        "Sell any number of certificates"
+      ]
+    },
+    {
+      "name": "Buy Round",
+      "steps": [
+        "Buy one certificate from treasury or bank pool, start company"
+      ]
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Lay or upgrade up to two track tile",
+        "Place one token",
+        "Run trains",
+        "Purchase a token from another corporation",
+        "Purchase trains",
+        "Sell treasury stock to the bank pool",
+        "Buy one stock certificate from the bank pool or IPO",
+        "Start a shipping company",
+        "Merge with another corporation of the same class",
+        "Transform from minor to major"
+      ],
+      "ordered": true,
+      "optional": []
+    }
+  ],
+  "map": {
+    "name": "18Alex",
+    "print": "landscape",
+    "hexes": [
+      {
+        "color": "water",
+        "hexes": ["A2"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 0, "type": "offboard"}],
+        "values": [
+          {
+            "value": 10,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "hexes": ["A4"]
+      },
+      {
+        "color": "green",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 200
+        }],
+        "hexes": ["A6"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 4
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "offBoardRevenue": {
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "white",
+              "cost": "30"
+            },
+            {
+              "textColor": "white",
+              "color": "black",
+              "cost": "50"
+            }
+          ]
+        },
+        "hexes": ["A8"]
+      },
+      {
+        "color": "water",
+        "hexes": ["A10"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 0, "type": "offboard"}],
+        "values": [
+          {
+            "value": 10,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["A12"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": ""}],
+        "hexes": ["A14"]
+      },
+      {
+        "color": "water",
+        "hexes": ["A16"],
+        "values": [
+          {
+            "value": 10,
+            "angle": 120,
+            "percent": 0.7
+          }
+        ],
+        "cities": [
+          {
+            "angle": 0,
+            "percent": 0.32
+          },
+          {
+            "angle": 180,
+            "percent": 0.32
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"angle": 120, "percent": 0.5},
+                        {"angle": -60, "percent": 0.5}],
+        "hexes": ["A18"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["A20"]
+      },
+      {
+        "color": "water",
+        "hexes": ["A22"],
+        "track": [{"side": 4, "type": "offboard"}],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.4}],
+        "values": [
+          {
+            "value": 20,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "water",
+        "hexes": ["B1"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 0, "type": "offboard"}],
+        "values": [
+          {
+            "value": 10,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["B3"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["B5"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["B7"]
+      },
+      {
+        "color": "green",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 200
+        }],
+        "hexes": ["B9"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["B11"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["B13"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["B15"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["B17"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{}],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 4
+          }
+        ],
+        "hexes": ["B19"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 50
+          }
+        ],
+        "hexes": ["B21"]
+      },
+      {
+        "color": "water",
+        "hexes": ["B23"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 4, "type": "offboard"}],
+        "values": [
+          {
+            "value": 10,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["C2"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["C4"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["C6"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["C8"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["C10"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["C12"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["C14"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["C16"]
+      },
+      {
+        "color": "water",
+        "hexes": ["C18"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 6, "type": "offboard"}],
+        "values": [
+          {
+            "value": 10,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "gray",
+        "hexes": ["C20"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 50
+          }
+        ],
+        "hexes": ["C22"]
+      },
+      {
+        "color": "water",
+        "hexes": ["D1"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 1, "type": "offboard"}],
+        "values": [
+          {
+            "value": 10,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["D3"]
+      },
+      {
+        "color": "water",
+        "hexes": ["D5"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 6, "type": "offboard"}],
+        "values": [
+          {
+            "value": 10,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "hexes": ["D7"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"angle": 120, "percent": 0.5},
+                        {"angle": -60, "percent": 0.5}],
+        "hexes": ["D9"]
+      },
+      {
+        "color": "water",
+        "hexes": ["D11"],
+        "values": [
+          {
+            "value": 10,
+            "angle": 120,
+            "percent": 0.7
+          }
+        ],
+        "cities": [
+          {
+            "angle": 0,
+            "percent": 0.32
+          },
+          {
+            "angle": 180,
+            "percent": 0.32
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "hexes": ["D13"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["D15"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["D17"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["D19"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["D21"],
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 50,
+            "percent": 0.7
+          }
+        ],
+        "labels": [
+          {
+            "label": "Y",
+            "angle": -150,
+            "percent": 0.7
+          }
+        ]
+      },
+      {
+        "color": "water",
+        "hexes": ["D23"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 4, "type": "offboard"}],
+        "values": [
+          {
+            "value": 50,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "yellow",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["E2"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["E4"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["E6"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["E8"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["E10"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["E12"]
+      },
+      {
+        "color": "yellow",
+        "hexes": ["E14"],
+        "cities": [{}],
+        "values": [
+          {
+            "value": 20,
+            "angle": 150,
+            "percent": 0.6
+          }
+        ],
+        "track": [
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ]
+      },
+      {
+        "color": "yellow",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["E16"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"angle": 120, "percent": 0.5},
+                        {"angle": -60, "percent": 0.5}],
+        "hexes": ["E18"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["E20"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 50
+          }
+        ],
+        "hexes": ["E22"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "offBoardRevenue": {
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "white",
+              "cost": "80"
+            },
+            {
+              "textColor": "white",
+              "color": "black",
+              "cost": "50"
+            }
+          ]
+        },
+        "hexes": ["F3"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["F5"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["F7"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "offBoardRevenue": {
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "white",
+              "cost": "120"
+            },
+            {
+              "textColor": "white",
+              "color": "black",
+              "cost": "200"
+            }
+          ]
+        },
+        "hexes": ["F9"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["F11"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["F13"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["F15"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["F17"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["F19"]
+      },
+      {
+        "color": "offboard",
+        "hexes": ["F21"],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "offBoardRevenue": {
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "white",
+              "cost": "90"
+            },
+            {
+              "textColor": "white",
+              "color": "black",
+              "cost": "180"
+            }
+          ]
+        }
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 50
+          }
+        ],
+        "hexes": ["F23"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["G2"]
+      },
+      {
+        "color": "green",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["G4"]
+      },
+      {
+        "color": "offboard",
+        "hexes": ["G6"],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "offBoardRevenue": {
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "white",
+              "cost": "20"
+            },
+            {
+              "textColor": "white",
+              "color": "black",
+              "cost": "80"
+            }
+          ]
+        }
+      },
+      {
+        "color": "gray",
+        "hexes": ["G8"]
+      },
+      {
+        "color": "green",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["G10"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {"type": "straight", "side": 2},
+          {"type": "sharp", "side": 1},
+          {"type": "sharp", "side": 5}],
+        "hexes": ["G12"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["G14"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["G16"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["G18"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 50
+          }
+        ],
+        "hexes": ["G20"]
+      },
+      {
+        "color": "water",
+        "hexes": ["G22"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 6, "type": "offboard"}],
+        "values": [
+          {
+            "value": 10,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "water",
+        "hexes": ["H1"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 1, "type": "offboard"}],
+        "values": [
+          {
+            "value": 20,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["H3"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["H5"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["H7"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["H9"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["H11"],
+        "cities": [{}],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          },
+          {
+            "side": 5
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": -15,
+          "percent": 0.7,
+          "revenues": [
+            {
+              "color": "white",
+              "cost": "60"
+            },
+            {
+              "textColor": "white",
+              "color": "black",
+              "cost": "80"
+            }
+          ]
+        }
+      },
+      {
+        "color": "plain",
+        "hexes": ["H13"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 50
+          }
+        ],
+        "hexes": ["H15"]
+      },
+      {
+        "color": "gray",
+        "cities": [{}],
+        "hexes": ["H17"],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          }
+        ],
+        "offBoardRevenue": {
+          "rows": 2,
+          "angle": -105,
+          "percent": 0.6,
+          "revenues": [
+            {
+              "color": "white",
+              "cost": "10"
+            },
+            {
+              "textColor": "white",
+              "color": "black",
+              "cost": "60"
+            }
+          ]
+        }
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "terrain": [
+          {
+            "percent": 0.6,
+            "type": "mountain",
+            "cost": 50
+          }
+        ],
+        "hexes": ["H19"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["H21"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["H23"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["I2"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["I4"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["I6"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["I8"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["I10"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["I12"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["I14"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["I16"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["I18"]
+      },
+      {
+        "color": "green",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["I20"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 2
+          }
+        ],
+        "hexes": ["I22"]
+      },
+      {
+        "color": "water",
+        "hexes": ["I24"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 3, "type": "offboard"}],
+        "values": [
+          {
+            "value": 40,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "gray",
+        "hexes": ["J3"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["J5"]
+      },
+      {
+        "color": "water",
+        "hexes": ["J7"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [
+          {
+            "side": 3,
+            "type": "offboard"
+          },
+          {
+            "side": 5,
+            "type": "offboard"
+          }
+        ],
+        "values": [
+          {
+            "value": 10,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "hexes": ["J9"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["J11"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["J13"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"angle": 120, "percent": 0.5},
+                        {"angle": -60, "percent": 0.5}],
+        "hexes": ["J15"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["J17"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["J19"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "terrain": [
+          {
+            "percent": 0.7,
+            "type": "mountain",
+            "cost": 50
+          }
+        ],
+        "hexes": ["J21"]
+      },
+      {
+        "color": "offboard",
+        "hexes": ["J23"],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 4
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "offBoardRevenue": {
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "white",
+              "cost": "40"
+            },
+            {
+              "textColor": "white",
+              "color": "black",
+              "cost": "120"
+            }
+          ]
+        }
+      },
+      {
+        "color": "offboard",
+        "hexes": ["K2"],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          }
+        ],
+        "offBoardRevenue": {
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "white",
+              "cost": "60"
+            },
+            {
+              "textColor": "white",
+              "color": "black",
+              "cost": "140"
+            }
+          ]
+        }
+      },
+      {
+        "color": "yellow",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["K4"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["K6"]
+      },
+      {
+        "color": "green",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["K8"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["K10"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["K12"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["K14"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {"type": "straight", "side": 3},
+          {"type": "sharp", "side": 2},
+          {"type": "sharp", "side": 6}],
+        "hexes": ["K16"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["K18"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["K20"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "terrain": [
+          {
+            "percent": 0.6,
+            "type": "mountain",
+            "cost": 50
+          }
+        ],
+        "hexes": ["K22"]
+      },
+      {
+        "color": "water",
+        "hexes": ["K24"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 5, "type": "offboard"}],
+        "values": [
+          {
+            "value": 10,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["L3"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["L5"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["L7"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["L9"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["L11"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["L13"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["L15"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["L17"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["L19"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["L21"]
+      },
+      {
+        "color": "water",
+        "hexes": ["L23"],
+        "values": [
+          {
+            "value": 10,
+            "angle": 120,
+            "percent": 0.7
+          }
+        ],
+        "cities": [
+          {
+            "angle": 90,
+            "percent": 0.32
+          },
+          {
+            "angle": 270,
+            "percent": 0.32
+          }
+        ],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          }
+        ]
+      },
+      {
+        "color": "water",
+        "hexes": ["M2"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 6, "type": "offboard"}],
+        "values": [
+          {
+            "value": 20,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["M4"],
+        "labels": [
+          {
+            "label": "Y",
+            "percent": 0.7
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "hexes": ["M6"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "percent": 0.6,
+            "type": "mountain",
+            "cost": 50
+          }
+        ],
+        "hexes": ["M8"]
+      },
+      {
+        "color": "water",
+        "hexes": ["M10"],
+        "values": [
+          {
+            "value": 10,
+            "angle": 120,
+            "percent": 0.7
+          }
+        ],
+        "cities": [
+          {
+            "angle": 90,
+            "percent": 0.32
+          },
+          {
+            "angle": 270,
+            "percent": 0.32
+          }
+        ],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ]
+      },
+      {
+        "color": "gray",
+        "hexes": ["M12"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["M14"]
+      },
+      {
+        "color": "water",
+        "hexes": ["M16"],
+        "cities": [
+          {
+            "angle": 180,
+            "percent": 0.32
+          },
+          {
+            "angle": 60,
+            "percent": 0.32
+          },
+          {
+            "angle": -60,
+            "percent": 0.32
+          }
+        ],
+        "offBoardRevenue": {
+          "percent": 0.7,
+          "revenues": [
+            {
+              "color": "white",
+              "cost": "60"
+            },
+            {
+              "textColor": "white",
+              "color": "black",
+              "cost": "100"
+            }
+          ]
+        },
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 6
+          }
+        ]
+      },
+      {
+        "color": "gray",
+        "hexes": ["M18"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["M20"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["M22"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["N3"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["N5"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"angle": 120, "percent": 0.5},
+                        {"angle": -60, "percent": 0.5}],
+        "hexes": ["N7"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["N9"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["N11"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "percent": 0.6,
+            "type": "mountain",
+            "cost": 50
+          }
+        ],
+        "hexes": ["N13"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["N15"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["N17"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["N19"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["N21"],
+        "labels": [
+          {
+            "label": "Y",
+            "percent": 0.7
+          }
+        ]
+      },
+      {
+        "color": "offboard",
+        "hexes": ["N23"],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          },
+          {
+            "type": "offboard",
+            "side": 4
+          }
+        ],
+        "offBoardRevenue": {
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "white",
+              "cost": "60"
+            },
+            {
+              "textColor": "white",
+              "color": "black",
+              "cost": "140"
+            }
+          ]
+        }
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "percent": 0.6,
+            "type": "mountain",
+            "cost": 50
+          }
+        ],
+        "hexes": ["O2"]
+      },
+      {
+        "color": "offboard",
+        "hexes": ["O4"],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "offBoardRevenue": {
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "white",
+              "cost": "20"
+            },
+            {
+              "textColor": "white",
+              "color": "black",
+              "cost": "80"
+            }
+          ]
+        }
+      },
+      {
+        "color": "gray",
+        "hexes": ["O6"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["O8"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["O10"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["O12"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["O14"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["O16"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 3
+          }
+        ],
+        "hexes": ["O18"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["O20"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 3
+          }
+        ],
+        "hexes": ["O22"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{
+          "pass": true
+        }],
+        "terrain": [{
+          "percent": 0.6,
+          "cost": 50
+        }],
+        "hexes": ["P3"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "percent": 0.6,
+            "type": "mountain",
+            "cost": 50
+          }
+        ],
+        "hexes": ["P7"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["P5"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["P7"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "percent": 0.6,
+            "type": "mountain",
+            "cost": 50
+          }
+        ],
+        "hexes": ["P9"]
+      },
+      {
+        "color": "water",
+        "hexes": ["P21"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 5, "type": "offboard"}],
+        "values": [
+          {
+            "value": 10,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "offboard",
+        "hexes": ["Q2"],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ],
+        "offBoardRevenue": {
+          "rows": 2,
+          "angle": 180,
+          "percent": 0.2,
+          "revenues": [
+            {
+              "color": "white",
+              "cost": "80"
+            },
+            {
+              "textColor": "white",
+              "color": "black",
+              "cost": "180"
+            }
+          ]
+        }
+      },
+      {
+        "color": "water",
+        "hexes": ["P11"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 5, "type": "offboard"}],
+        "values": [
+          {
+            "value": 30,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "hexes": ["P13"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["P15"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["P17"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["P19"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["Q4"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["Q6"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["Q8"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "terrain": [
+          {
+            "percent": 0.7,
+            "type": "mountain",
+            "cost": 50
+          }
+        ],
+        "hexes": ["Q10"]
+      },
+      {
+        "color": "water",
+        "hexes": ["Q12"],
+        "icons": [{"type": "port", "angle": 60, "percent": 0.40}],
+        "track": [{"side": 1, "type": "offboard"}],
+        "values": [
+          {
+            "value": 50,
+            "angle": -120,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "labels": [
+          {
+            "label": "Y",
+            "percent": 0.7
+          }
+        ],
+        "hexes": ["Q14"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["Q16"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["Q18"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["Q20"]
+      },
+      {
+        "color": "offboard",
+        "hexes": ["Q22"],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 4
+          }
+        ],
+        "offBoardRevenue": {
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "white",
+              "cost": "80"
+            },
+            {
+              "textColor": "white",
+              "color": "black",
+              "cost": "180"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
