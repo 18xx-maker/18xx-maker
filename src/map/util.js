@@ -386,7 +386,7 @@ export const getMapData = (game, coords, hexWidth, variation) => {
   let b18TotalHeight = totalHeight * squashRatio;
   let printWidth = `${(50 + totalWidth) / 100.0}in`;
   let printHeight = `${(50 + totalHeight) / 100.0}in`;
-  let b18PrintHeight = `${(55 + b18TotalHeight) / 100.0}in`;
+  let b18PrintHeight = `${(50 + b18TotalHeight) / 100.0}in`;
   let humanWidth = `${Math.ceil((50 + totalWidth) / 100.0)}in`;
   let humanHeight = `${Math.ceil((50 + totalHeight) / 100.0)}in`;
 
