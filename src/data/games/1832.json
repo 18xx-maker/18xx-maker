@@ -1253,7 +1253,7 @@
             },
             {
               "color": "brown",
-              "cost": "50"
+              "cost": "60"
             }
           ]
         },
@@ -1265,6 +1265,12 @@
         ],
         "centerTowns": [
           {}
+        ],
+        "names": [
+          {
+            "name": "$80",
+            "percent": 0.55
+          }
         ],
         "hexes": [
           "B14"
@@ -1339,7 +1345,7 @@
             },
             {
               "color": "brown",
-              "cost": "30"
+              "cost": "40"
             },
             {
               "color": "gray",

@@ -1413,6 +1413,45 @@
       }
     ]
   },
+  "216": {
+    "color": "brown",
+    "cities": [
+      {
+        "size": 2
+      }
+    ],
+    "labels": [
+      {
+        "label": "Y",
+        "angle": 150,
+        "percent": 0.8
+      }
+    ],
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 50
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
   "217": {
     "color": "brown",
     "values": [
@@ -2264,6 +2303,44 @@
       }
     ]
   },
+  "603": {
+    "color": "brown",
+    "cities": [{}],
+    "towns": [{"angle": 300, "percent": 0.667, "rotation": -60}],
+    "values": [
+      {"value": 30, "angle": 335, "percent": 0.8},
+      {"value": 20, "angle": 210, "percent": 0.75}
+    ],
+    "labels": [{"label": "V", "angle": 90, "percent": 0.75}],
+    "track": [{"side": 1}, {"side": 2}, {"side": 3}, {"side": 4}, {"side": 5}, {"side": 6}]
+  },
+  "605": {
+    "color": "brown",
+    "cities": [{"size": 3}],
+    "labels": [{"x": -5, "label": "M", "angle": 330, "percent": 0.85}],
+    "values": [{"value": 150, "angle": 210, "percent": 0.85}],
+    "track": [{"side":1},{"side":2},{"side":3},{"side":4},{"side":5},{"side":6}]
+  },
+  "607": {
+    "color": "brown",
+    "cities": [{"size": 2}],
+    "labels": [{"label": "T", "angle": 150, "percent": 0.75}],
+    "values": [{"value": 90, "angle": 210, "percent": 0.75}],
+    "track": [{"side":1},{"side":2},{"side":3},{"side":4},{"side":5},{"side":6}]
+  },
+  "609": {
+    "color": "brown",
+    "cities": [{"size": 2, "name": {"offset": 72, "name": "Genova"}}],
+    "labels": [{"label": "G", "angle": 150, "percent": 0.75}],
+    "values": [{"value": 60, "angle": 210, "percent": 0.75}],
+    "track": [{"side":1},{"side":2},{"side":3},{"side":4},{"side":6}]
+  },
+  "610": {
+    "color": "brown",
+    "track": [{"side":1},{"side":4}],
+    "cities": [{"pass":true}],
+    "values": [{"angle": 210, "percent": 0.75, "value": 0}]
+  },
   "611": {
     "color": "brown",
     "values": [
@@ -2295,6 +2372,24 @@
         "side": 5
       }
     ]
+  },
+  "616": {
+    "color": "brown",
+    "track": [{"side":1},{"side":2},{"side":4},{"side":5}],
+    "cities": [{"pass":true, "size": 2}],
+    "values": [{"angle": 210, "percent": 0.75, "value": 0}]
+  },
+  "617": {
+    "color": "brown",
+    "track": [{"side":1},{"side":2},{"side":3},{"side":4}],
+    "cities": [{"pass":true, "size": 2}],
+    "values": [{"angle": 210, "percent": 0.75, "value": 0}]
+  },
+  "618": {
+    "color": "brown",
+    "track": [{"side":1},{"side":3},{"side":4},{"side":5}],
+    "cities": [{"pass":true, "size": 2}],
+    "values": [{"angle": 210, "percent": 0.75, "value": 0}]
   },
   "623": {
     "color": "brown",

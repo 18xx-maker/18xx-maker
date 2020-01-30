@@ -332,6 +332,8 @@ export const getMapHex = (game, hex, variation) => {
          hexes);
 }
 
+const squashRatio = 87/86.6025;
+
 export const getMapData = (game, coords, hexWidth, variation) => {
   variation = variation || 0;
 
@@ -381,8 +383,10 @@ export const getMapData = (game, coords, hexWidth, variation) => {
 
   let totalWidth = getTotalWidth(maxX, hexWidth, game.info.extraTotalWidth, coordSpace);
   let totalHeight = getTotalHeight(maxY, hexWidth, game.info.extraTotalHeight, coordSpace);
+  let b18TotalHeight = totalHeight * squashRatio;
   let printWidth = `${(50 + totalWidth) / 100.0}in`;
   let printHeight = `${(50 + totalHeight) / 100.0}in`;
+  let b18PrintHeight = `${(50 + b18TotalHeight) / 100.0}in`;
   let humanWidth = `${Math.ceil((50 + totalWidth) / 100.0)}in`;
   let humanHeight = `${Math.ceil((50 + totalHeight) / 100.0)}in`;
 
@@ -425,10 +429,14 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     // Total height and width in svg units
     totalWidth: horizontal ? totalHeight : totalWidth,
     totalHeight: horizontal ? totalWidth : totalHeight,
+    b18TotalWidth : horizontal ? b18TotalHeight : totalWidth,
+    b18TotalHeight : horizontal ? totalWidth : b18TotalHeight,
 
     // Print height and width in CSS units
     printWidth: horizontal ? printHeight : printWidth,
     printHeight: horizontal ? printWidth : printHeight,
+    b18PrintWidth: horizontal ? b18PrintHeight : printWidth,
+    b18PrintHeight: horizontal ? printWidth : b18PrintHeight,
 
     // Human readable width and height
     humanWidth: horizontal ? humanHeight : humanWidth,

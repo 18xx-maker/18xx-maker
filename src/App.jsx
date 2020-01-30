@@ -91,7 +91,7 @@ const App = () => (
             </marker>
             <mask id="hexMask">
               <rect x="-100" y="-100" width="200" height="200" fill="black"/>
-              <polygon points="-86.6025,0 -43.30125,-75 43.30125,-75 86.6025,0 43.30125,75 -43.30125,75"
+              <polygon points="-86.0252,0 -43.0126,-74.5 43.0126,-74.5 86.0252,0 43.0126,74.5 -43.0126,74.5"
                        fill="white"
                        stroke="white"
                        strokeWidth="2" />

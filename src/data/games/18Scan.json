@@ -113,7 +113,26 @@
       "abbrev": "SJ",
       "color": "yellow",
       "tokens": "six",
-      "capital": 700
+      "capital": 700,
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 5,
+          "percent": 10,
+          "shares": 1
+        },
+        {
+          "quantity": 3,
+          "label": "Minor Exchange Share",
+          "percent": 10,
+          "shares": 1
+        }
+      ]
     },
     {
       "name": "Södra Stambanan",
@@ -261,69 +280,54 @@
   ],
   "privates": [
     {
+      "id": "P1",
       "name": "Stockholm-Åbo Ferry Company",
       "price": 120,
       "revenue": 20,
       "icon": "boat",
       "company": "VR",
-      "description": [
-        "Comes with a 10% share of Valtionrautatiet (VR).",
-        "Allows up to two Companies to increase the value of a route that runs between Turku and Stockholm via the Ferry (G12) by K20. Tokens may be bought for K20 each during the Additional Token Placement step."
-      ]
+      "description": "Comes with a 10% share of Valtionrautatiet (VR). Allows up to two Companies to increase the value of a route that runs between Turku and Stockholm via the Ferry (G12) by K20. Tokens may be bought for K20 each during the Additional Token Placement step."
     },
     {
+      "id": "P2",
       "name": "Lapland Ore Line",
       "price": 150,
       "revenue": 25,
       "icon": "coal",
       "company": "S&NJ",
-      "description": [
-        "Comes with a 10% share of Sveriges & Norges Järnvägar (S&NJ).",
-        "Allows a Company to increase the its earnings by K50, if the Company has a route that includes the Kiruna Iron Mines (A20). The bonus is only added once to the Company's earnings, even if two of the Company's trains run to Kiruna. The token may be bought for K50 during the Additional Token Placement step."
-      ]
+      "description": "Comes with a 10% share of Sveriges & Norges Järnvägar (S&NJ). Allows a Company to increase the its earnings by K50, if the Company has a route that includes the Kiruna Iron Mines (A20). The bonus is only added once to the Company's earnings, even if two of the Company's trains run to Kiruna. The token may be bought for K50 during the Additional Token Placement step."
     },
     {
+      "id": "P3",
       "name": "Sjællandske Jernbaneselskab",
       "price": 180,
       "revenue": 35,
       "company": "DSB",
-      "description": [
-        "Comes with the president share (20%) of Danske Statsbaner (DSB).",
-        "Allows a Company to lay (or upgrade) the yellow \"Copenhagen\" tile at no cost. The special power is exercised in the track-laying phase of the placing Company. The Private Company closes when the DSB buys its first train."
-      ]
+      "description": "Comes with the president share (20%) of Danske Statsbaner (DSB). Allows a Company to lay (or upgrade) the yellow \"Copenhagen\" tile at no cost. The special power is exercised in the track-laying phase of the placing Company. The Private Company closes when the DSB buys its first train."
     },
     {
+      "id": "P4",
       "name": "Södra Stambanan",
       "price": 260,
       "company": "1",
       "hex": "G4",
-      "description": [
-        "Starts in Malmö (G4)",
-        "Destination: Göteborg (E6)",
-        "Starts with K260 in the treasury"
-      ]
+      "description": "Starts in Malmö (G4). Destination: Göteborg (E6). Starts with K260 in the treasury."
     },
     {
+      "id": "P5",
       "name": "Nordvästra Stambanan",
       "price": 220,
       "company": "2",
       "hex": "F11",
-      "description": [
-        "Starts in Stockholm (F11)",
-        "Destination: Trondheim (B11)",
-        "Starts with K220 in the treasury"
-      ]
+      "description": "Starts in Stockholm (F11). Destination: Trondheim (B11). Starts with K220 in the treasury."
     },
     {
+      "id": "P6",
       "name": "Västra Stambanan",
       "price": 200,
       "company": "3",
       "hex": "F11",
-      "description": [
-        "Starts in Stockholm (F11)",
-        "Destination: Oslo (D7)",
-        "Starts with K200 in the treasury"
-      ]
+      "description": "Starts in Stockholm (F11). Destination: Oslo (D7). Starts with K200 in the treasury."
     }
   ],
   "phases": [
@@ -1363,6 +1367,14 @@
         "color": "water",
         "coords": ["D17p5", "D17p6", "D17p1", "D17p2", "D15p1", "D15p2", "D13p1", "E12p6", "E12p1", "F11p6"]
       }
-    ]
+    ],
+    "roundTracker": {
+      "x": 268,
+      "y": 975
+    },
+    "players": {
+      "x": 1344,
+      "y": 807
+    }
   }
 }
