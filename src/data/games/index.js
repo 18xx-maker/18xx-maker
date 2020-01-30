@@ -1,6 +1,7 @@
 import game_1800 from "./1800";
 import game_1817 from "./1817";
 import game_1825 from "./1825";
+import game_1825D1 from "./1825-D1";
 import game_1825DB1 from "./1825-DB1";
 import game_1825DB3 from "./1825-DB3";
 import game_1825DB5 from "./1825-DB5";
@@ -12,11 +13,6 @@ import game_1825K6 from "./1825-K6";
 import game_1825Met from "./1825-Met";
 import game_1825R1_1 from "./1825-R1.1";
 import game_1825R2 from "./1825-R2";
-import game_1825D1 from "./1825-D1";
-import game_1825DB1 from "./1825-DB1";
-import game_1825DB3 from "./1825-DB3";
-import game_1825DB5 from "./1825-DB5";
-import game_18Misc from "./18Misc";
 import game_1825U1 from "./1825-U1";
 import game_1825U2 from "./1825-U2";
 import game_1825U3 from "./1825-U3";
@@ -27,6 +23,8 @@ import game_1834 from "./1834";
 import game_1836 from "./1836";
 import game_1836jr_30 from "./1836jr-30";
 import game_1836jr_56 from "./1836jr-56";
+import game_1838TL from "./1838TL";
+import game_1839 from "./1839NL";
 import game_1841 from "./1841";
 import game_1846 from "./1846";
 import game_1848 from "./1848";
@@ -58,6 +56,7 @@ import game_18SY from "./18SY";
 import game_18Scan from "./18Scan";
 import game_18TE from "./18TE";
 import game_18TK from "./18TK";
+import game_18SW from "./18SW";
 import game_18Test from "./18Test";
 import game_FourthAge from "./FourthAge";
 import game_Harzbahn from "./Harzbahn";
@@ -71,21 +70,18 @@ let all_games = {
   "1800": game_1800,
   "1817": game_1817,
   "1825": game_1825,
+  "1825-D1": game_1825D1,
   "1825-DB1": game_1825DB1,
   "1825-DB3": game_1825DB3,
   "1825-DB5": game_1825DB5,
   "1825-K1": game_1825K1,
   "1825-K3": game_1825K3,
-  "1825-D1": game_1825D1,
   "1825-K5": game_1825K5,
   "1825-K6": game_1825K6,
   "1825-Met": game_1825Met,
   "1825-R1.1": game_1825R1_1,
   "1825-R2": game_1825R2,
   "1825-R3.1": game_1825K3_1,
-  "1825-DB1": game_1825DB1,
-  "1825-DB3": game_1825DB3,
-  "1825-DB5": game_1825DB5,
   "1825-U1": game_1825U1,
   "1825-U2": game_1825U2,
   "1825-U3": game_1825U3,
@@ -96,6 +92,8 @@ let all_games = {
   "1836": game_1836,
   "1836jr-30": game_1836jr_30,
   "1836jr-56": game_1836jr_56,
+  "1838TL": game_1838TL,
+  "1839NL": game_1839,
   "1841": game_1841,
   "1846": game_1846,
   "1848": game_1848,
@@ -125,6 +123,7 @@ let all_games = {
   "18SS": game_18SS,
   "18SY": game_18SY,
   "18Scan": game_18Scan,
+  "18SW": game_18SW,
   "18TE": game_18TE,
   "18TK": game_18TK,
   FourthAge: game_FourthAge,
