@@ -15,7 +15,7 @@ const setup = util.setup;
 const setupB18 = util.setupB18;
 
 const config = require('../src/config.json');
-const mutil = require('../src/market-utils');
+const mutil = require('../src/market/util');
 
 const capitalize = R.compose(
   R.join(''),
@@ -63,9 +63,9 @@ const server = app.listen(9000);
     author,
     board: {
       imgLoc: `images/${id}/Map.png`,
-      xStart: game.info.orientation === "horizontal" ? 47 : 50,
+      xStart: 50,
       xStep: game.info.orientation === "horizontal" ? 87 : 50,
-      yStart: game.info.orientation === "horizontal" ? 0 : 47,
+      yStart: 50,
       yStep: game.info.orientation === "horizontal" ? 50 : 87
     },
     market: {
@@ -189,17 +189,23 @@ const server = app.listen(9000);
   await page.emulateMedia('print');
 
   let mapData = getMapData(game, config.coords, 100, 0);
-  let printWidth = Math.ceil(mapData.totalWidth);
-  let printHeight = Math.ceil(mapData.totalHeight);
+  let printWidth = Math.ceil(mapData.b18TotalWidth);
+  let printHeight = Math.ceil(mapData.b18TotalHeight);
+  let offset = 0;
+
+  if (mapData.horizontal && mapData.a1Valid === false) {
+    offset = 87;
+  }
 
   console.log(`Printing ${bname}/${folder}/${id}/Map.png`);
   await page.goto(`http://localhost:9000/${bname}/b18-map`, {waitUntil: 'networkidle2'});
-  await page.setViewport({ width: printWidth, height: printHeight });
+  await page.setViewport({ width: printWidth + offset, height: printHeight });
   await page.screenshot({ path: `build/render/${bname}/${folder}/${id}/Map.png`});
 
   console.log(`Printing ${bname}/${folder}/${id}/Market.png`);
-  let marketWidth = (config.stock.cell.width + 1) * mutil.width(game.stock.market);
-  let marketHeight = 50 + ((config.stock.cell.height + 1) * mutil.height(game.stock.market));
+  let marketData = mutil.getMarketData(game.stock, config.stock, config.paper, config.pagination);
+  let marketWidth = marketData.totalWidth;
+  let marketHeight = marketData.totalHeight;
   await page.goto(`http://localhost:9000/${bname}/market`, {waitUntil: 'networkidle2'});
   await page.addStyleTag({ content: '.stock {margin: 0.25in !important;}'});
   await page.setViewport({ width: marketWidth + 1, height: marketHeight + 1 });
