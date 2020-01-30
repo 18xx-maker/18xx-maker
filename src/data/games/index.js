@@ -1,6 +1,9 @@
 import game_1800 from "./1800";
 import game_1817 from "./1817";
 import game_1825 from "./1825";
+import game_1825DB1 from "./1825-DB1";
+import game_1825DB3 from "./1825-DB3";
+import game_1825DB5 from "./1825-DB5";
 import game_1825K1 from "./1825-K1";
 import game_1825K3 from "./1825-K3";
 import game_1825K3_1 from "./1825-R3.1";
@@ -56,9 +59,6 @@ import game_18Scan from "./18Scan";
 import game_18TE from "./18TE";
 import game_18TK from "./18TK";
 import game_18Test from "./18Test";
-import game_1925DB1 from "./1825-DB1";
-import game_1925DB3 from "./1825-DB3";
-import game_1925DB5 from "./1825-DB5";
 import game_FourthAge from "./FourthAge";
 import game_Harzbahn from "./Harzbahn";
 import game_Powerrails from "./Powerrails";
@@ -71,9 +71,9 @@ let all_games = {
   "1800": game_1800,
   "1817": game_1817,
   "1825": game_1825,
-  "1825-DB1": game_1925DB1,
-  "1825-DB3": game_1925DB3,
-  "1825-DB5": game_1925DB5,
+  "1825-DB1": game_1825DB1,
+  "1825-DB3": game_1825DB3,
+  "1825-DB5": game_1825DB5,
   "1825-K1": game_1825K1,
   "1825-K3": game_1825K3,
   "1825-D1": game_1825D1,

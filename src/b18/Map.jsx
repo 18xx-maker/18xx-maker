@@ -18,6 +18,13 @@ const B18Map = ({ coords }) => {
   // Get map data
   let variation = Number(params.variation) || 0;
   let data = getMapData(game, coords, 100, variation);
+  let offset = 0;
+
+  // B18 Type F maps
+  // https://wiki.board18.org/w/Type_%22F%22_Board_Map_Glitch
+  if (data.horizontal && data.a1Valid === false) {
+    offset = 87;
+  }
 
   return (
     <GameContext.Provider value={params.game}>
@@ -28,10 +35,10 @@ const B18Map = ({ coords }) => {
       }}
     >
       <div className="map">
-        <Svg width={data.totalWidth} height={data.totalHeight}>
+        <Svg width={data.b18TotalWidth + offset} height={data.b18TotalHeight} viewBox={`${-offset} 0 ${data.totalWidth + offset} ${data.totalHeight}`}>
           <Map game={game} variation={variation} hexWidth={data.hexWidth} />
         </Svg>
-        <style>{`@media print {@page {size: ${data.printWidth} ${data.printHeight};}}`}</style>
+        <style>{`@media print {@page {size: ${data.b18PrintWidth} ${data.b18PrintHeight};}}`}</style>
       </div>
     </HexContext.Provider>
     </GameContext.Provider>

@@ -16,6 +16,10 @@ import themes from "./themes";
 import companies from "./themes/companies";
 
 const resolveColor = curry((theme, companiesTheme, phase, context, game, name) => {
+  if (name === "grey") {
+    name = "gray";
+  }
+
   let colors = themes[theme || "gmt"] || themes["gmt"];
 
   // Add in company colors

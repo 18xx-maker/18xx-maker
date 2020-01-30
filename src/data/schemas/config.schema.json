@@ -181,7 +181,7 @@
     },
     "overrideCompanies": {
       "type": "string",
-      "enum": ["none", "languages", "lotr", "dev", "webdev", "owl", "1830"]
+      "enum": ["none", "languages", "lotr", "dev", "webdev", "owl", "1830", "1830-Mayfair"]
     },
     "overrideSelection": {
       "type": "array",

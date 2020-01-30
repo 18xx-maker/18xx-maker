@@ -753,6 +753,10 @@ footer a:hover {
   .TileManifest {
     margin: 0 auto;
   }
+
+  .b18 .tiles {
+    margin: 0;
+  }
 }
 
 .ParPage,

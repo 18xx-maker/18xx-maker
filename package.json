@@ -40,8 +40,8 @@
   "scripts": {
     "analyze": "react-scripts build && source-map-explorer build/static/js/main.*",
     "start": "react-scripts start",
-    "build:app": "yarn generate:logos:index; react-scripts build",
-    "build": "yarn generate:logos:index; react-scripts build",
+    "build:app": "yarn generate:logos:index && react-scripts build",
+    "build": "yarn generate:logos:index && react-scripts build",
     "clean": "node ./bin/clean.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -53,10 +53,10 @@
     "validate:config": "ajv -s src/data/schemas/config.schema.json -d src/\\*.json",
     "validate:themes": "ajv -s src/data/schemas/theme.schema.json -r src/data/schemas/\\*.schema.json -d src/data/themes/\\*.json",
     "validate:companies": "ajv -s src/data/schemas/companies.schema.json -r src/data/schemas/\\*.schema.json -d src/data/themes/companies/\\*.json",
-    "validate:colors": "yarn validate:themes; yarn validate:companies",
+    "validate:colors": "yarn validate:themes && yarn validate:companies",
     "validate:tiles": "ajv -s src/data/schemas/tiles.schema.json -r src/data/schemas/\\*.schema.json -d src/data/tiles/\\*.json",
     "validate:games": "ajv -s src/data/schemas/game.schema.json -r src/data/schemas/\\*.schema.json -d src/data/games/\\*.json",
-    "validate": "yarn validate:schemas; yarn validate:config; yarn validate:colors; yarn validate:tiles; yarn validate:games"
+    "validate": "yarn validate:schemas && yarn validate:config && yarn validate:colors && yarn validate:tiles && yarn validate:games"
   },
   "browserslist": [
     ">0.2%",

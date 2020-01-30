@@ -9,6 +9,7 @@ import Config from "../data/Config";
 import { compileCompanies, overrideCompanies } from "../util";
 
 import addIndex from "ramda/src/addIndex";
+import is from "ramda/src/is";
 import map from "ramda/src/map";
 
 import ColorContext from "../context/ColorContext";
@@ -44,14 +45,15 @@ const Tokens = () => {
   );
 
   let extraTokenNodes = addIndex(map)((extraToken, index) => {
-    if (extraToken.match(/^#/)) {
+    console.log(extraToken);
+    if (is(Object, extraToken)) {
       return (
         <div className="token" key={index}>
           <Svg width={30} height={30} viewBox="-26 -26 52 52">
-            <Token icon={extraToken} color="white" />
+            <Token color="white" {...extraToken} />
           </Svg>
           <Svg width={30} height={30} viewBox="-26 -26 52 52">
-            <Token icon={extraToken} color="black" />
+            <Token color="black" {...extraToken} />
           </Svg>
         </div>
       );
