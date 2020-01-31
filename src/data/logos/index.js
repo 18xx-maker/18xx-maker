@@ -6,6 +6,15 @@ import logo_1830Mayfair_ERIE, { ReactComponent as logo_1830Mayfair_ERIE_Componen
 import logo_1830Mayfair_NNH, { ReactComponent as logo_1830Mayfair_NNH_Component } from "./1830Mayfair/NNH.svg";
 import logo_1830Mayfair_NYC, { ReactComponent as logo_1830Mayfair_NYC_Component } from "./1830Mayfair/NYC.svg";
 import logo_1830Mayfair_PRR, { ReactComponent as logo_1830Mayfair_PRR_Component } from "./1830Mayfair/PRR.svg";
+import logo_1848_BOE, { ReactComponent as logo_1848_BOE_Component } from "./1848/BOE.svg";
+import logo_1848_CAR, { ReactComponent as logo_1848_CAR_Component } from "./1848/CAR.svg";
+import logo_1848_CR, { ReactComponent as logo_1848_CR_Component } from "./1848/CR.svg";
+import logo_1848_FT, { ReactComponent as logo_1848_FT_Component } from "./1848/FT.svg";
+import logo_1848_NSW, { ReactComponent as logo_1848_NSW_Component } from "./1848/NSW.svg";
+import logo_1848_QR, { ReactComponent as logo_1848_QR_Component } from "./1848/QR.svg";
+import logo_1848_SAR, { ReactComponent as logo_1848_SAR_Component } from "./1848/SAR.svg";
+import logo_1848_VR, { ReactComponent as logo_1848_VR_Component } from "./1848/VR.svg";
+import logo_1848_WA, { ReactComponent as logo_1848_WA_Component } from "./1848/WA.svg";
 import logo_1889_AR, { ReactComponent as logo_1889_AR_Component } from "./1889/AR.svg";
 import logo_1889_IR, { ReactComponent as logo_1889_IR_Component } from "./1889/IR.svg";
 import logo_1889_KO, { ReactComponent as logo_1889_KO_Component } from "./1889/KO.svg";
@@ -21,13 +30,10 @@ import logo_ATSF, { ReactComponent as logo_ATSF_Component } from "./ATSF.svg";
 import logo_AWP, { ReactComponent as logo_AWP_Component } from "./AWP.svg";
 import logo_BM, { ReactComponent as logo_BM_Component } from "./BM.svg";
 import logo_BO, { ReactComponent as logo_BO_Component } from "./BO.svg";
-import logo_BOE, { ReactComponent as logo_BOE_Component } from "./BOE.svg";
-import logo_CAR, { ReactComponent as logo_CAR_Component } from "./CAR.svg";
 import logo_CHI, { ReactComponent as logo_CHI_Component } from "./CHI.svg";
 import logo_CO, { ReactComponent as logo_CO_Component } from "./CO.svg";
 import logo_COG, { ReactComponent as logo_COG_Component } from "./COG.svg";
 import logo_CPR, { ReactComponent as logo_CPR_Component } from "./CPR.svg";
-import logo_CR, { ReactComponent as logo_CR_Component } from "./CR.svg";
 import logo_CSX, { ReactComponent as logo_CSX_Component } from "./CSX.svg";
 import logo_CTL, { ReactComponent as logo_CTL_Component } from "./CTL.svg";
 import logo_dev_apple, { ReactComponent as logo_dev_apple_Component } from "./dev/apple.svg";
@@ -52,7 +58,6 @@ import logo_dev_vim, { ReactComponent as logo_dev_vim_Component } from "./dev/vi
 import logo_dev_vscode, { ReactComponent as logo_dev_vscode_Component } from "./dev/vscode.svg";
 import logo_ERIE, { ReactComponent as logo_ERIE_Component } from "./ERIE.svg";
 import logo_FECR, { ReactComponent as logo_FECR_Component } from "./FECR.svg";
-import logo_FT, { ReactComponent as logo_FT_Component } from "./FT.svg";
 import logo_FW, { ReactComponent as logo_FW_Component } from "./FW.svg";
 import logo_GMO, { ReactComponent as logo_GMO_Component } from "./GMO.svg";
 import logo_GRR, { ReactComponent as logo_GRR_Component } from "./GRR.svg";
@@ -100,7 +105,6 @@ import logo_MP, { ReactComponent as logo_MP_Component } from "./MP.svg";
 import logo_NdM, { ReactComponent as logo_NdM_Component } from "./NdM.svg";
 import logo_NFL, { ReactComponent as logo_NFL_Component } from "./NFL.svg";
 import logo_NS, { ReactComponent as logo_NS_Component } from "./NS.svg";
-import logo_NSW, { ReactComponent as logo_NSW_Component } from "./NSW.svg";
 import logo_NW, { ReactComponent as logo_NW_Component } from "./NW.svg";
 import logo_NYC, { ReactComponent as logo_NYC_Component } from "./NYC.svg";
 import logo_NYNH, { ReactComponent as logo_NYNH_Component } from "./NYNH.svg";
@@ -126,10 +130,8 @@ import logo_owl_vancouver_titans, { ReactComponent as logo_owl_vancouver_titans_
 import logo_owl_washington_justice, { ReactComponent as logo_owl_washington_justice_Component } from "./owl/washington_justice.svg";
 import logo_PAC, { ReactComponent as logo_PAC_Component } from "./PAC.svg";
 import logo_PRR, { ReactComponent as logo_PRR_Component } from "./PRR.svg";
-import logo_QR, { ReactComponent as logo_QR_Component } from "./QR.svg";
 import logo_RCS, { ReactComponent as logo_RCS_Component } from "./RCS.svg";
 import logo_SALR, { ReactComponent as logo_SALR_Component } from "./SALR.svg";
-import logo_SAR, { ReactComponent as logo_SAR_Component } from "./SAR.svg";
 import logo_SCL, { ReactComponent as logo_SCL_Component } from "./SCL.svg";
 import logo_SFA, { ReactComponent as logo_SFA_Component } from "./SFA.svg";
 import logo_SLSF, { ReactComponent as logo_SLSF_Component } from "./SLSF.svg";
@@ -139,8 +141,6 @@ import logo_SSW, { ReactComponent as logo_SSW_Component } from "./SSW.svg";
 import logo_TM, { ReactComponent as logo_TM_Component } from "./TM.svg";
 import logo_TP, { ReactComponent as logo_TP_Component } from "./TP.svg";
 import logo_UdY, { ReactComponent as logo_UdY_Component } from "./UdY.svg";
-import logo_VR, { ReactComponent as logo_VR_Component } from "./VR.svg";
-import logo_WA, { ReactComponent as logo_WA_Component } from "./WA.svg";
 import logo_webdev_angular, { ReactComponent as logo_webdev_angular_Component } from "./webdev/angular.svg";
 import logo_webdev_chrome, { ReactComponent as logo_webdev_chrome_Component } from "./webdev/chrome.svg";
 import logo_webdev_css3, { ReactComponent as logo_webdev_css3_Component } from "./webdev/css3.svg";
@@ -206,6 +206,60 @@ export default {
     group: "1830Mayfair",
     src: logo_1830Mayfair_PRR,
     Component: logo_1830Mayfair_PRR_Component
+  },
+  "1848/BOE": {
+    name: "BOE",
+    group: "1848",
+    src: logo_1848_BOE,
+    Component: logo_1848_BOE_Component
+  },
+  "1848/CAR": {
+    name: "CAR",
+    group: "1848",
+    src: logo_1848_CAR,
+    Component: logo_1848_CAR_Component
+  },
+  "1848/CR": {
+    name: "CR",
+    group: "1848",
+    src: logo_1848_CR,
+    Component: logo_1848_CR_Component
+  },
+  "1848/FT": {
+    name: "FT",
+    group: "1848",
+    src: logo_1848_FT,
+    Component: logo_1848_FT_Component
+  },
+  "1848/NSW": {
+    name: "NSW",
+    group: "1848",
+    src: logo_1848_NSW,
+    Component: logo_1848_NSW_Component
+  },
+  "1848/QR": {
+    name: "QR",
+    group: "1848",
+    src: logo_1848_QR,
+    Component: logo_1848_QR_Component
+  },
+  "1848/SAR": {
+    name: "SAR",
+    group: "1848",
+    src: logo_1848_SAR,
+    Component: logo_1848_SAR_Component
+  },
+  "1848/VR": {
+    name: "VR",
+    group: "1848",
+    src: logo_1848_VR,
+    Component: logo_1848_VR_Component
+  },
+  "1848/WA": {
+    name: "WA",
+    group: "1848",
+    src: logo_1848_WA,
+    Component: logo_1848_WA_Component
   },
   "1889/AR": {
     name: "AR",
@@ -289,16 +343,6 @@ export default {
     src: logo_BO,
     Component: logo_BO_Component
   },
-  "BOE": {
-    name: "BOE",
-    src: logo_BOE,
-    Component: logo_BOE_Component
-  },
-  "CAR": {
-    name: "CAR",
-    src: logo_CAR,
-    Component: logo_CAR_Component
-  },
   "CHI": {
     name: "CHI",
     src: logo_CHI,
@@ -318,11 +362,6 @@ export default {
     name: "CPR",
     src: logo_CPR,
     Component: logo_CPR_Component
-  },
-  "CR": {
-    name: "CR",
-    src: logo_CR,
-    Component: logo_CR_Component
   },
   "CSX": {
     name: "CSX",
@@ -463,11 +502,6 @@ export default {
     name: "FECR",
     src: logo_FECR,
     Component: logo_FECR_Component
-  },
-  "FT": {
-    name: "FT",
-    src: logo_FT,
-    Component: logo_FT_Component
   },
   "FW": {
     name: "FW",
@@ -736,11 +770,6 @@ export default {
     src: logo_NS,
     Component: logo_NS_Component
   },
-  "NSW": {
-    name: "NSW",
-    src: logo_NSW,
-    Component: logo_NSW_Component
-  },
   "NW": {
     name: "NW",
     src: logo_NW,
@@ -886,11 +915,6 @@ export default {
     src: logo_PRR,
     Component: logo_PRR_Component
   },
-  "QR": {
-    name: "QR",
-    src: logo_QR,
-    Component: logo_QR_Component
-  },
   "RCS": {
     name: "RCS",
     src: logo_RCS,
@@ -900,11 +924,6 @@ export default {
     name: "SALR",
     src: logo_SALR,
     Component: logo_SALR_Component
-  },
-  "SAR": {
-    name: "SAR",
-    src: logo_SAR,
-    Component: logo_SAR_Component
   },
   "SCL": {
     name: "SCL",
@@ -950,16 +969,6 @@ export default {
     name: "UdY",
     src: logo_UdY,
     Component: logo_UdY_Component
-  },
-  "VR": {
-    name: "VR",
-    src: logo_VR,
-    Component: logo_VR_Component
-  },
-  "WA": {
-    name: "WA",
-    src: logo_WA,
-    Component: logo_WA_Component
   },
   "webdev/angular": {
     name: "angular",

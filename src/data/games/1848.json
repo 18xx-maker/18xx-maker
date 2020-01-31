@@ -63,6 +63,7 @@
     {
       "name": "Bank of England",
       "abbrev": "BOE",
+      "logo": "1848/BOE",
       "tokens": [],
       "color": "white",
       "shares": [
@@ -76,45 +77,53 @@
     {
       "name": "Central Australian Railway",
       "abbrev": "CAR",
+      "logo": "1848/CAR",
       "color": "black",
       "tokens": "three"
     },
     {
       "name": "Victorian Railways",
       "abbrev": "VR",
+      "logo": "1848/VR",
       "color": "yellow",
       "tokens": "three"
     },
     {
       "name": "New South Wales Railways",
       "abbrev": "NSW",
+      "logo": "1848/NSW",
       "color": "orange"
     },
     {
       "name": "South Australian Railway",
       "abbrev": "SAR",
+      "logo": "1848/SAR",
       "color": "purple"
     },
     {
       "name": "Commonwealth Railways",
       "abbrev": "CR",
+      "logo": "1848/CR",
       "tokens": ["Home (Free)", "Home (Free)", 100, 100, 100],
       "color": "gray"
     },
     {
       "name": "Federal Territory Railway",
       "abbrev": "FT",
+      "logo": "1848/FT",
       "color": "blue"
     },
     {
       "name": "West Australian Railway",
       "abbrev": "WA",
+      "logo": "1848/WA",
       "color": "red",
       "tokens": "five"
     },
     {
       "name": "Queensland Gov't Railway",
       "abbrev": "QR",
+      "logo": "1848/QR",
       "color": "green",
       "tokens": "five"
     }
