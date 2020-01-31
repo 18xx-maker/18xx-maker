@@ -28,6 +28,13 @@
     }
   ],
   "shareTypes": {
+    "private": [
+      {
+        "quantity": 5,
+        "percent": 10,
+        "shares": 1
+      }
+    ],
     "default": [
       {
         "quantity": 1,
@@ -43,18 +50,21 @@
     ]
   },
   "tokenTypes": {
+    "none": [],
     "default": [
       "Free", 40, 100
     ]
   },
   "companies": [
     {
-      "name": "Pacific Electric",
+      "name": "Pacific Electric Railway Company",
       "abbrev": "PE",
-      "color": "red"
+      "color": "red",
+      "shares": "private",
+      "tokens": "none"
     },
     {
-      "name": "Southern Pacific",
+      "name": "Southern Pacific Railroad",
       "abbrev": "SP",
       "color": "blue"
     },
@@ -64,31 +74,28 @@
       "color": "orange"
     },
     {
-      "name": "South Pacific and Santa Fe Railroad",
-      "abbrev": "SPSF",
-      "color": "white",
-      "token": {"type": "halves", "colors": ["orange", "blue"]}
+      "name": "Santa Fe Southern Pacific Corporation",
+      "abbrev": "SFSP",
+      "color": "cyan"
     },
     {
-      "name": "Union Pacific",
+      "name": "Union Pacific Railroad",
       "abbrev": "UP",
-      "color": "blue",
-      "token": {"type": "bar", "colors": ["blue", "white"]}
+      "color": "blue"
     },
     {
       "name": "BNSF Railway",
       "abbrev": "BNSF",
-      "color": "orange",
-      "token": {"type": "bar", "colors": ["orange", "white"]}
+      "color": "orange"
     },
     {
-      "name": "Colifornia Southern Railroad",
+      "name": "California Southern Railroad",
       "abbrev": "CSR",
       "color": "yellow"
     },
     {
-      "name": "Santa Ana, Orange & Tustin Street Railway",
-      "abbrev": "SO&T",
+      "name": "Southern California Railway",
+      "abbrev": "SCR",
       "color": "green"
     },
     {
@@ -854,91 +861,91 @@
       "color": "yellow",
       "values": [{"angle": 150, "percent": 0.8, "value": 40}],
       "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
-      "cities": [{"companies": ["SO&T"], "size": 1}],
+      "cities": [{"size": 1}],
       "track": [{"side": 1}, {"side": 2}]
     },
     "OC6": {
       "color": "yellow",
       "values": [{"angle": 150, "percent": 0.8, "value": 40}],
       "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
-      "cities": [{"companies": ["SO&T"], "size": 1}],
+      "cities": [{"size": 1}],
       "track": [{"side": 1}, {"side": 3}]
     },
     "OC7": {
       "color": "yellow",
       "values": [{"angle": 150, "percent": 0.8, "value": 40}],
       "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
-      "cities": [{"companies": ["SO&T"], "size": 1}],
+      "cities": [{"size": 1}],
       "track": [{"side": 1}, {"side": 4}]
     },
     "OC8": {
       "color": "green",
       "values": [{"angle": 150, "percent": 0.8, "value": 60}],
       "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
-      "cities": [{"companies": ["SO&T"], "size": 2}],
+      "cities": [{"size": 2}],
       "track": [{"side": 1}, {"side": 2},{"side":3}]
     },
     "OC9": {
       "color": "green",
       "values": [{"angle": 150, "percent": 0.8, "value": 60}],
       "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
-      "cities": [{"companies": ["SO&T"], "size": 2}],
+      "cities": [{"size": 2}],
       "track": [{"side": 1}, {"side": 2},{"side":4}]
     },
     "OC10": {
       "color": "green",
       "values": [{"angle": 150, "percent": 0.8, "value": 60}],
       "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
-      "cities": [{"companies": ["SO&T"], "size": 2}],
+      "cities": [{"size": 2}],
       "track": [{"side": 1}, {"side": 3},{"side":4}]
     },
     "OC11": {
       "color": "green",
       "values": [{"angle": 150, "percent": 0.8, "value": 60}],
       "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
-      "cities": [{"companies": ["SO&T"], "size": 2}],
+      "cities": [{"size": 2}],
       "track": [{"side": 1}, {"side": 3},{"side":5}]
     },
     "OC12": {
       "color": "brown",
       "values": [{"angle": -30, "percent": 0.88, "value": 80}],
       "labels": [{"angle": 270, "percent": 0.85, "label": "S"}],
-      "cities": [{"companies": ["SO&T"], "size": 3}],
+      "cities": [{"size": 3}],
       "track": [{"side": 1},{"side":2},{"side": 3},{"side":4}]
     },
     "OC13": {
       "color": "brown",
       "values": [{"angle": -30, "percent": 0.88, "value": 80}],
       "labels": [{"angle": 270, "percent": 0.85, "label": "S"}],
-      "cities": [{"companies": ["SO&T"], "size": 3}],
+      "cities": [{"size": 3}],
       "track": [{"side": 1},{"side":5},{"side": 3},{"side":4}]
     },
     "OC14": {
       "color": "brown",
       "values": [{"angle": -30, "percent": 0.88, "value": 80}],
       "labels": [{"angle": 270, "percent": 0.85, "label": "S"}],
-      "cities": [{"companies": ["SO&T"], "size": 3}],
+      "cities": [{"size": 3}],
       "track": [{"side": 1},{"side":6},{"side": 3},{"side":4}]
     },
     "OC15": {
       "color": "grey",
       "values": [{"angle": -30, "percent": 0.88, "value": 100}],
       "labels": [{"angle": 270, "percent": 0.85, "label": "S"}],
-      "cities": [{"companies": ["SO&T"], "size": 3}],
+      "cities": [{"size": 3}],
       "track": [{"side": 1},{"side":2},{"side": 3},{"side":4}]
     },
     "OC16": {
       "color": "grey",
       "values": [{"angle": -30, "percent": 0.88, "value": 100}],
       "labels": [{"angle": 270, "percent": 0.85, "label": "S"}],
-      "cities": [{"companies": ["SO&T"], "size": 3}],
+      "cities": [{"size": 3}],
       "track": [{"side": 1},{"side":5},{"side": 3},{"side":4}]
     },
     "OC17": {
       "color": "grey",
       "values": [{"angle": -30, "percent": 0.88, "value": 100}],
       "labels": [{"angle": 270, "percent": 0.85, "label": "S"}],
-      "cities": [{"companies": ["SO&T"], "size": 3}],
+      "cities": [{"size": 3}],
       "track": [{"side": 1},{"side":6},{"side": 3},{"side":4}]
     }
   },
@@ -946,33 +953,26 @@
     "hexes": [
       {
         "color": "plain",
-        "hexes": ["B4", "C3", "C5", "D6", "D8",
-                  "E3", "E5", "E9", "E11", "F8", "G3", "G9",
+        "hexes": ["A5", "B4", "C3", "C5", "D6", "D8",
+                  "E3", "E5", "E9", "F8", "G3", "G9",
                   "G11", "H4", "H6", "H12", "I9", "I11",
                   "J10", "J12", "K15", "L12", "L14"]
       },
       {
-        "color": "grey",
-        "track": [{"side":4,"type":"gentle"},
-                  {"side":1,"type":"straight"}],
-        "hexes": ["A5"]
+        "color": "plain",
+        "terrain": [{"type": "water", "cost": 20}],
+        "hexes": ["C9", "E11"]
       },
       {
         "color": "grey",
         "track": [{"side":6,"type":"gentle"},
-                  {"side":3,"type":"straight"}],
+                  {"side":3,"type":"gentle"}],
         "hexes": ["B6"]
       },
       {
-        "color": "yellow",
-        "track": [{"side":4,"type":"gentle"}],
-        "hexes": ["C9"]
-      },
-      {
         "color": "offboard",
-        "cities": [{"companies": ["PE"]}],
-        "track": [{"side": 1},
-                  {"side": 6}],
+        "track": [{"type": "offboard", "side": 1},
+                  {"type": "offboard", "side": 6}],
         "removeBorders": [5],
         "hexes": ["A3"]
       },
@@ -1023,12 +1023,14 @@
         "hexes": ["D2"]
       },
       {
-        "color": "yellow",
-        "values": [{"angle": 240, "percent": 0.5, "value": 10}],
-        "towns": [{"angle": 60,
-                   "percent": 0.28,
-                   "rotation": -30,
-                   "name": {"name": "Seal Beach"}}],
+        "color": "grey",
+        "values": [{"angle": 240, "percent": 0.5, "value": 20}],
+        "cities": [{
+          "companies": ["PE"],
+          "angle": 60,
+          "percent": 0.28,
+          "rotation": -30,
+          "name": {"name": "Seal Beach", "offset": 75}}],
         "track": [{"type": "gentle", "side": 1}],
         "hexes": ["C7"]
       },
@@ -1067,30 +1069,35 @@
       },
       {
         "color": "plain",
-        "cities": [{"name": {"name": "Orange"}}],
+        "cities": [{"companies": ["SCR"], "name": {"name": "Orange"}}],
         "hexes": ["G5"]
       },
       {
         "color": "yellow",
-        "cities": [{"name": {"reverse": true, "offset": 63, "name": "Huntington Beach"}}],
-        "values": [{"value": 30, "angle": 180, "percent": 0.667}],
-        "labels": [{"label": "Y", "angle": 60, "percent": 0.667}],
-        "track": [{"side": 3}],
+        "names": [{"angle": 30, "percent": 0.54,
+                   "name": "Huntington Beach", "rotate": 30}],
+        "cities": [{}],
+        "values": [{"value": 30, "angle": 240, "percent": 0.667}],
+        "labels": [{"label": "Y", "angle": 180, "percent": 0.667}],
+        "track": [{"side": 3},{"side":6}],
         "hexes": ["D10"]
       },
       {
         "color": "yellow",
         "labels": [{"label": "Y", "angle": 120, "percent": 0.667}],
         "values": [{"value": 30, "angle": 240, "percent": 0.667}],
-        "cities": [{"companies": ["SNR"],
-                    "name": {"reverse": true, "offset": 42, "name": "Newport Beach"}}],
+        "cities": [{"companies": ["SNR"]}],
+        "names": [{"angle": 30, "percent": 0.54,
+                   "name": "Newport Beach", "rotate": 30}],
         "track": [{"side":6},
                   {"side":4}],
         "hexes": ["F12"]
       },
       {
         "color": "plain",
-        "centerTowns": [{"name": {"name": "Corona Del Mar"}}],
+        "centerTowns": [{"angle": 180, "percent": 0.25,
+                         "name": {"name": "Corona Del Mar"}}],
+        "terrain": [{"percent": 0.5, "type": "water", "cost": 20}],
         "hexes": ["G13"]
       },
       {
@@ -1129,7 +1136,7 @@
       {
         "color": "plain",
         "labels": [{"label": "S", "angle": 60, "percent": 0.667}],
-        "cities": [{"companies": ["SO&T"], "name": {"name": "Santa Ana"}}],
+        "cities": [{"name": {"name": "Santa Ana"}}],
         "hexes": ["G7"]
       },
       {
