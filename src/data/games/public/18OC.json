@@ -76,7 +76,7 @@
     {
       "name": "Santa Fe Southern Pacific Corporation",
       "abbrev": "SFSP",
-      "color": "cyan"
+      "color": "yellow"
     },
     {
       "name": "Union Pacific Railroad",
@@ -91,7 +91,7 @@
     {
       "name": "California Southern Railroad",
       "abbrev": "CSR",
-      "color": "yellow"
+      "color": "black"
     },
     {
       "name": "Southern California Railway",
