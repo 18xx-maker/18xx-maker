@@ -16,6 +16,7 @@ const Charter = ({
   abbrev,
   logo,
   minor,
+  color,
   token,
   tokens,
   phases,
@@ -28,9 +29,8 @@ const Charter = ({
   backgroundColor,
   variant
 }) => {
-  let color = token;
   if(is(Object, token)) {
-    color = token.colors[0];
+    color = color || token.colors[0];
   }
 
   let tokenSpots = R.addIndex(R.map)((label, index) => {
