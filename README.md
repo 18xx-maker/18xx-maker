@@ -67,14 +67,11 @@ information on how to run the site locally to make changes.
 ### Adding a game
 
 1. Copy one of the game files you feel should be closest to the game you're
-   entering from the [src/data/games](src/data/games) folder. Rename it and edit it as
-   much as needed.
+   entering from the [src/data/games](src/data/games) folder. Rename it and edit
+   it as much as needed. Please put it in the `public` folder if you would like
+   the game to appear on the public site.
 
-2. In order for this new game to show up in the UI, please add it to the
-   exported object in the [src/data/games/index.js](src/data/games/index.js)
-   file.
-
-3. Before opening a PR please run `yarn validate` and correct any errors.
+2. Before opening a PR please run `yarn validate` and correct any errors.
 
 ## Docker
 

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import "./TileSheet.scss";
 
-import { sortTiles } from "./util";
+import { getTile, sortTiles } from "./util";
 import { getTileSheetContext } from "./tilesheet/util";
 import tileDefs from "./data/tiles";
 import { sidesFromTile } from "./atoms/Track";
@@ -24,7 +24,6 @@ import append from "ramda/src/append";
 import clone from "ramda/src/clone";
 import compose from "ramda/src/compose";
 import concat from "ramda/src/concat";
-import curry from "ramda/src/curry";
 import drop from "ramda/src/drop";
 import filter from "ramda/src/filter";
 import groupBy from "ramda/src/groupBy";
@@ -35,39 +34,8 @@ import map from "ramda/src/map";
 import propOr from "ramda/src/propOr";
 import reduce from "ramda/src/reduce";
 import repeat from "ramda/src/repeat";
-import split from "ramda/src/split";
 import take from "ramda/src/take";
 import unnest from "ramda/src/unnest";
-
-export const getTile = curry((tileDefs, tiles, id) => {
-  let tile = {};
-  let quantity = 1;
-
-  if (is(Object, tiles[id])) {
-    quantity = tiles[id].quantity || 1;
-    if (tiles[id].tile) {
-      // We aliased (in a game file) this tile to another tile)
-      let aliasId = tiles[id].tile;
-      tile = tileDefs[aliasId] || tileDefs[split("|", aliasId)][0];
-    } else if (!tiles[id].color) {
-      // This tile might have rotations or other such items but isn't a full tile
-      tile = tileDefs[id] || tileDefs[split("|", id)][0];
-    } else {
-      // This is actually the tile object
-      tile = tiles[id];
-    }
-  } else {
-    // Search for tiles in the tile def with this id
-    tile = tileDefs[id] || tileDefs[split("|", id)[0]];
-    quantity = tiles[id] || 1;
-  }
-
-  return {
-    ...tile,
-    id,
-    quantity
-  };
-});
 
 const gatherIds = tiles => {
   return compose(unnest,
