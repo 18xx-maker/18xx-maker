@@ -162,7 +162,8 @@ const Charters = ({charters, paper, override, selection}) => {
               name={company.name}
               abbrev={company.abbrev}
               logo={company.logo}
-              token={company.token || company.color}
+              color={company.color}
+              token={company.token}
               tokens={company.tokens}
               phases={game.phases}
               turns={game.turns}

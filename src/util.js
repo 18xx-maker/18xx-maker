@@ -112,6 +112,36 @@ export const equalPages = (total, page) => {
   return result;
 };
 
+export const getTile = curry((tileDefs, tiles, id) => {
+  let tile = {};
+  let quantity = 1;
+
+  if (is(Object, tiles[id])) {
+    quantity = tiles[id].quantity || 1;
+    if (tiles[id].tile) {
+      // We aliased (in a game file) this tile to another tile)
+      let aliasId = tiles[id].tile;
+      tile = tileDefs[aliasId] || tileDefs[split("|", aliasId)][0];
+    } else if (!tiles[id].color) {
+      // This tile might have rotations or other such items but isn't a full tile
+      tile = tileDefs[id] || tileDefs[split("|", id)][0];
+    } else {
+      // This is actually the tile object
+      tile = tiles[id];
+    }
+  } else {
+    // Search for tiles in the tile def with this id
+    tile = tileDefs[id] || tileDefs[split("|", id)[0]];
+    quantity = tiles[id] || 1;
+  }
+
+  return {
+    ...tile,
+    id,
+    quantity
+  };
+});
+
 export const maxPages = (total, page) => {
   let helper = (total, page, result) => {
     if(total <= page) {
