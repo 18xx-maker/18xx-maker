@@ -17,19 +17,11 @@ import uniq from "ramda/src/uniq";
 import ColorContext from "../context/ColorContext";
 import RotateContext from "../context/RotateContext";
 
+import { getTile } from "../util";
+
 import "./b18.scss";
 
 import games from "../data/games";
-
-const getTile = id => {
-  if(!tileDefs[id]) {
-    id = id.split("|")[0];
-  }
-
-  let tile = tileDefs[id];
-  tile.id = id;
-  return tile;
-};
 
 const ROTATIONS = [0,60,120,180,240,300];
 
@@ -38,9 +30,13 @@ const Tiles = () => {
   let color = params.color;
   let game = games[params.game];
 
+  let getGameTile = getTile(tileDefs, game.tiles || {});
+  console.log(filter(propEq("color", color), map(getGameTile, keys(game.tiles))));
+
   let tiles = compose(uniq,
                       filter(propEq("color", color)),
-                      map(getTile))(keys(game.tiles));
+                      map(getGameTile))(keys(game.tiles));
+  console.log(tiles);
 
   let height = game.info.orientation === "horizontal" ? 100 : 116;
   let width = game.info.orientation === "horizontal" ? 116 : 100;
@@ -55,9 +51,10 @@ const Tiles = () => {
 
   let tileNodes = map(tile => {
     // Merge tile with game tile
-    if(is(Object,game.tiles[tile.id])) {
-      tile = {...tile, ...game.tiles[tile.id]};
-    }
+    // if(is(Object,game.tiles[tile.id])) {
+    //   tile = {...tile, ...game.tiles[tile.id]};
+    // }
+    console.log(tile);
 
     // Figure out rotations
     let rotations = ROTATIONS;
@@ -80,7 +77,7 @@ const Tiles = () => {
               viewBox={viewBox}>
               <g transform={`rotate(${rotation})`}>
                 <RotateContext.Provider value={rotation}>
-                  <Tile id={tile.id} border={true} />
+                  <Tile id={tile.id} border={true} gameTiles={game.tiles} />
                 </RotateContext.Provider>
               </g>
             </Svg>

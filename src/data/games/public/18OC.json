@@ -854,6 +854,7 @@
       "values": [{"angle": 150, "percent": 0.8, "value": 50}],
       "labels": [{"angle": 210, "percent": 0.8, "label": "Y"}],
       "cities": [{"size": 2}],
+      "rotations": 3,
       "track": [{"side": 1}, {"side": 6}, {"side": 3}, {"side": 4}]
     },
 
@@ -876,6 +877,7 @@
       "values": [{"angle": 150, "percent": 0.8, "value": 40}],
       "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
       "cities": [{"size": 1}],
+      "rotations": 3,
       "track": [{"side": 1}, {"side": 4}]
     },
     "OC8": {
@@ -904,6 +906,7 @@
       "values": [{"angle": 150, "percent": 0.8, "value": 60}],
       "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
       "cities": [{"size": 2}],
+      "rotations": 2,
       "track": [{"side": 1}, {"side": 3},{"side":5}]
     },
     "OC12": {
@@ -925,6 +928,7 @@
       "values": [{"angle": -30, "percent": 0.88, "value": 80}],
       "labels": [{"angle": 270, "percent": 0.85, "label": "S"}],
       "cities": [{"size": 3}],
+      "rotations": 3,
       "track": [{"side": 1},{"side":6},{"side": 3},{"side":4}]
     },
     "OC15": {
@@ -946,6 +950,7 @@
       "values": [{"angle": -30, "percent": 0.88, "value": 100}],
       "labels": [{"angle": 270, "percent": 0.85, "label": "S"}],
       "cities": [{"size": 3}],
+      "rotations": 3,
       "track": [{"side": 1},{"side":6},{"side": 3},{"side":4}]
     }
   },
