@@ -50,6 +50,7 @@ import game_18H8U from "./18H8U";
 import game_18Mex from "./18Mex";
 import game_18Misc from "./18Misc";
 import game_18NK from "./18NK";
+import game_18OC from "./18OC";
 import game_18SS from "./18SS";
 import game_18SY from "./18SY";
 import game_18Scan from "./18Scan";
@@ -118,6 +119,7 @@ let all_games = {
   "18Mex": game_18Mex,
   "18Misc": game_18Misc,
   "18NK": game_18NK,
+  "18OC": game_18OC,
   "18SS": game_18SS,
   "18SY": game_18SY,
   "18Scan": game_18Scan,
@@ -143,6 +145,7 @@ let public_games = {
   "1890": game_1890,
   "18AL": game_18AL,
   "18EB": game_18EB,
+  "18OC": game_18OC,
   "18TE": game_18TE,
   "18Test": game_18Test
 };

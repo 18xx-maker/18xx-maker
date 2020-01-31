@@ -1,0 +1,1235 @@
+{
+  "info": {
+    "title": "18OC",
+    "subtitle": "Railways of Orange County",
+    "designer": "Christopher Giroir",
+    "background": "orange",
+    "currency": "$#",
+    "orientation": "horizontal",
+    "titleX": 100,
+    "titleY": 1000
+  },
+  "wip": true,
+  "tokens": [
+    "Round"
+  ],
+  "ipo": true,
+  "bank": "∞",
+  "players": [
+    {
+      "number": 3,
+      "certLimit": 20,
+      "capital": 400
+    },
+    {
+      "number": 4,
+      "certLimit": 16,
+      "capital": 300
+    }
+  ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "tokenTypes": {
+    "default": [
+      "Free", 40, 100
+    ]
+  },
+  "companies": [
+    {
+      "name": "Pacific Electric",
+      "abbrev": "PE",
+      "color": "red"
+    },
+    {
+      "name": "Southern Pacific",
+      "abbrev": "SP",
+      "color": "blue"
+    },
+    {
+      "name": "Atchison, Topeka and Santa Fe Railway",
+      "abbrev": "ATSF",
+      "color": "orange"
+    },
+    {
+      "name": "South Pacific and Santa Fe Railroad",
+      "abbrev": "SPSF",
+      "color": "white",
+      "token": {"type": "halves", "colors": ["orange", "blue"]}
+    },
+    {
+      "name": "Union Pacific",
+      "abbrev": "UP",
+      "color": "blue",
+      "token": {"type": "bar", "colors": ["blue", "white"]}
+    },
+    {
+      "name": "BNSF Railway",
+      "abbrev": "BNSF",
+      "color": "orange",
+      "token": {"type": "bar", "colors": ["orange", "white"]}
+    },
+    {
+      "name": "Colifornia Southern Railroad",
+      "abbrev": "CSR",
+      "color": "yellow"
+    },
+    {
+      "name": "Santa Ana, Orange & Tustin Street Railway",
+      "abbrev": "SO&T",
+      "color": "green"
+    },
+    {
+      "name": "Santa Ana & Newport Railway",
+      "abbrev": "SNR",
+      "color": "purple"
+    },
+    {
+      "name": "Disneyland Railroad",
+      "abbrev": "DRR",
+      "color": "pink"
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 6,
+      "price": 80,
+      "color": "yellow",
+      "info": [
+        {
+          "color": "green",
+          "note": "Rusted by 4"
+        }
+      ]
+    },
+    {
+      "name": "3",
+      "quantity": 5,
+      "price": 180,
+      "color": "green",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Rusted by 6"
+        }
+      ]
+    },
+    {
+      "name": "4",
+      "quantity": 4,
+      "price": 300,
+      "color": "green",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Rusted by D"
+        }
+      ]
+    },
+    {
+      "name": "5",
+      "quantity": 3,
+      "price": 450,
+      "color": "brown",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "6",
+      "quantity": 2,
+      "price": 630,
+      "color": "brown",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "D",
+      "quantity": 6,
+      "price": 1100,
+      "color": "brown",
+      "description": "Cost $800 when trading in a 4T, 5T or 6T",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    }
+  ],
+  "privates": [
+    {
+      "name": "Frozen Banana Stand",
+      "price": 30,
+      "revenue": 5,
+      "hex": "F12",
+      "description": "A corporation owning the Frozen Banana Stand gets +10 when running a train to Newport Beach. This private never closes."
+    },
+    {
+      "name": "Sudden Valley",
+      "price": 40,
+      "revenue": 10,
+      "token": {"color": "white", "label": "+10"},
+      "description": "When a corporation buys in Sudden Valley they may place a +10 token and a yellow tile on Mission Viejo or Lake Forest adding 10 to any company that runs to it. This tile lay is in addition to their normal lay."
+    },
+    {
+      "name": "Dry the Wetlands",
+      "price": 70,
+      "revenue": 15,
+      "icon": "swamp",
+      "description": "A corporation that owns \"Dry the Wetlands\" no longer has to pay swamp terran costs."
+    },
+    {
+      "name": "C.W. Swappigan's",
+      "price": 110,
+      "revenue": 20,
+      "icon": "share",
+      "description": "A player owning C.W. Swappigan's may trade it for any share in the IPO or bank pool."
+    },
+    {
+      "name": "Fakeblock",
+      "price": 160,
+      "revenue": 25,
+      "hex": "H10",
+      "description": "A coporation buying the Fakeblock private gets a station token in Irvine."
+    },
+    {
+      "name": "Put up this wall",
+      "price": 220,
+      "revenue": 30,
+      "company": "CSR",
+      "description": "The owner of the wall private company immediately receives the President's certificate of the CSR without further payment. The wall private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the CSR. When the CSR purchases its first train the private company is closed down."
+    }
+  ],
+  "phases": [
+    {
+      "name": "2",
+      "limit": "4",
+      "number": "6",
+      "tiles": "yellow"
+    },
+    {
+      "name": "3",
+      "limit": "4",
+      "number": "5",
+      "tiles": "green",
+      "notes": "Private companies may be purchased"
+    },
+    {
+      "name": "4",
+      "rust": "2",
+      "limit": "3",
+      "number": "4",
+      "tiles": "green"
+    },
+    {
+      "name": "5",
+      "limit": "2",
+      "number": "3",
+      "tiles": "brown",
+      "notes": "Private companies are closed"
+    },
+    {
+      "name": "6",
+      "limit": "2",
+      "number": "2",
+      "rust": "3",
+      "tiles": "brown",
+      "notes": "D Trains may be purchased"
+    },
+    {
+      "name": "D",
+      "limit": "2",
+      "number": "6",
+      "rust": "4",
+      "tiles": "brown"
+    }
+  ],
+  "pools": [
+    {
+      "name": "Market",
+      "notes": [
+        {
+          "color": "orange",
+          "note": "Shares in the market pay dividends to the corporation"
+        },
+        {
+          "color": "brown",
+          "icon": "exclamation",
+          "note": "No more than 50% of a corporation's shares may be in the market at any time"
+        },
+        {
+          "color": "red",
+          "icon": "times",
+          "note": "Shares cannot be sold during the first stock round"
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "OR3",
+      "color": "brown"
+    },
+    {
+      "name": "OR2",
+      "color": "green"
+    },
+    {
+      "name": "OR1",
+      "color": "yellow"
+    },
+    {
+      "name": "SR",
+      "color": "white"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": [
+        "Sell any number of shares",
+        "Buy one share",
+        "Sell any number of shares"
+      ],
+      "ordered": true
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Lay or upgrade track",
+        "Purchase a station",
+        "Run trains",
+        "Pay dividends or withhold revenue",
+        "Purchase trains"
+      ],
+      "ordered": true,
+      "optional": [
+        "Purchase private companies"
+      ]
+    }
+  ],
+  "stock": {
+    "type": "2D",
+    "par": {
+      "values": [
+        100,
+        90,
+        82,
+        76,
+        71,
+        67
+      ]
+    },
+    "movement": {
+      "up": [
+        "Sold out"
+      ],
+      "down": [
+        "Every share sold"
+      ],
+      "left": [
+        "Revenue withheld"
+      ],
+      "right": [
+        "Revenue paid out"
+      ]
+    },
+    "market": [
+      [
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0,
+          "arrow": "down"
+        },
+        67,
+        71,
+        76,
+        82,
+        90,
+        {
+          "value": 100,
+          "label": 100,
+          "par": true
+        },
+        112,
+        126,
+        142,
+        160,
+        180,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350
+      ],
+      [
+        {
+          "value": 53,
+          "label": 53,
+          "legend": 0,
+          "arrow": "down"
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        66,
+        70,
+        76,
+        82,
+        {
+          "value": 90,
+          "label": 90,
+          "par": true
+        },
+        100,
+        112,
+        126,
+        142,
+        160,
+        180,
+        200,
+        220,
+        240,
+        260,
+        280,
+        {
+          "value": 300,
+          "label": 300,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 46,
+          "label": 46,
+          "legend": 0,
+          "arrow": "down"
+        },
+        {
+          "value": 55,
+          "label": 55,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        65,
+        70,
+        76,
+        {
+          "value": 82,
+          "label": 82,
+          "par": true
+        },
+        90,
+        100,
+        111,
+        125,
+        140,
+        155,
+        170,
+        185,
+        {
+          "value": 200,
+          "label": 200,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 39,
+          "label": 39,
+          "legend": 1,
+          "arrow": "down"
+        },
+        {
+          "value": 48,
+          "label": 48,
+          "legend": 0
+        },
+        {
+          "value": 54,
+          "label": 54,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        66,
+        71,
+        {
+          "value": 76,
+          "label": 76,
+          "par": true
+        },
+        82,
+        90,
+        100,
+        110,
+        120,
+        {
+          "value": 130,
+          "label": 130,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 32,
+          "label": 32,
+          "legend": 1,
+          "arrow": "down"
+        },
+        {
+          "value": 41,
+          "label": 41,
+          "legend": 1
+        },
+        {
+          "value": 48,
+          "label": 48,
+          "legend": 0
+        },
+        {
+          "value": 55,
+          "label": 55,
+          "legend": 0
+        },
+        62,
+        67,
+        {
+          "value": 71,
+          "label": 71,
+          "par": true
+        },
+        76,
+        82,
+        90,
+        {
+          "value": 100,
+          "label": 100,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 25,
+          "label": 25,
+          "legend": 2,
+          "arrow": "down"
+        },
+        {
+          "value": 34,
+          "label": 34,
+          "legend": 1
+        },
+        {
+          "value": 42,
+          "label": 42,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0
+        },
+        {
+          "value": 58,
+          "label": 58,
+          "legend": 0
+        },
+        65,
+        {
+          "value": 67,
+          "label": 67,
+          "par": true
+        },
+        71,
+        75,
+        {
+          "value": 80,
+          "label": 80,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 18,
+          "label": 18,
+          "legend": 2,
+          "arrow": "down"
+        },
+        {
+          "value": 27,
+          "label": 27,
+          "legend": 2
+        },
+        {
+          "value": 36,
+          "label": 36,
+          "legend": 1
+        },
+        {
+          "value": 45,
+          "label": 45,
+          "legend": 1
+        },
+        {
+          "value": 54,
+          "label": 54,
+          "legend": 0
+        },
+        63,
+        67,
+        69,
+        {
+          "value": 70,
+          "label": 70,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 12,
+          "label": 12,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        67,
+        {
+          "value": 68,
+          "label": 68,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        null,
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        null,
+        null,
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1,
+          "arrow": "up"
+        }
+      ]
+    ],
+    "legend": [
+      {
+        "color": "yellow",
+        "description": "Shares of this corporation do not count toward the certificate limit",
+        "icon": "certificate"
+      },
+      {
+        "color": "orange",
+        "description": "Players may own more than 60% of this corporation",
+        "icon": "percentage"
+      },
+      {
+        "color": "brown",
+        "description": "Players may purchase any number of shares of this corporation in one stock action",
+        "icon": "money-bill-wave"
+      }
+    ]
+  },
+  "tiles": {
+    "3": 3,
+    "4": 3,
+    "5": 3,
+    "6": 3,
+    "7": 4,
+    "8": 8,
+    "9": 7,
+    "14": 2,
+    "15": 3,
+    "619": 2,
+    "16": 1,
+    "17": 1,
+    "18": 1,
+    "19": 1,
+    "20": 1,
+    "23": 2,
+    "24": 2,
+    "25": 1,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "30": 1,
+    "31": 1,
+    "39": 1,
+    "40": 1,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 1,
+    "45": 2,
+    "46": 2,
+    "47": 1,
+    "57": 3,
+    "58": 3,
+
+    "70": 1,
+
+    "141": 3,
+    "142": 3,
+    "143": 3,
+    "144": 3,
+
+    "145": 4,
+    "146": 4,
+    "147": 4,
+
+    "63": 2,
+    "OC1": {
+      "color": "brown",
+      "values": [{"angle": 150, "percent": 0.8, "value": 40}],
+      "labels": [{"angle": 210, "percent": 0.8, "label": "L"}],
+      "cities": [{"size": 2}],
+      "track": [{"side": 1}, {"side": 2}, {"side": 3}, {"side": 4}]
+    },
+
+    "207": 4,
+    "208": 2,
+    "622": 2,
+    "OC2": {
+      "quantity": 4,
+      "color": "brown",
+      "values": [{"angle": 150, "percent": 0.8, "value": 50}],
+      "labels": [{"angle": 210, "percent": 0.8, "label": "Y"}],
+      "cities": [{"size": 2}],
+      "track": [{"side": 1}, {"side": 2}, {"side": 3}, {"side": 4}]
+    },
+    "OC3": {
+      "quantity": 2,
+      "color": "brown",
+      "values": [{"angle": 150, "percent": 0.8, "value": 50}],
+      "labels": [{"angle": 210, "percent": 0.8, "label": "Y"}],
+      "cities": [{"size": 2}],
+      "track": [{"side": 1}, {"side": 5}, {"side": 3}, {"side": 4}]
+    },
+    "OC4": {
+      "quantity": 2,
+      "color": "brown",
+      "values": [{"angle": 150, "percent": 0.8, "value": 50}],
+      "labels": [{"angle": 210, "percent": 0.8, "label": "Y"}],
+      "cities": [{"size": 2}],
+      "track": [{"side": 1}, {"side": 6}, {"side": 3}, {"side": 4}]
+    },
+
+    "OC5": {
+      "color": "yellow",
+      "values": [{"angle": 150, "percent": 0.8, "value": 40}],
+      "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
+      "cities": [{"companies": ["SO&T"], "size": 1}],
+      "track": [{"side": 1}, {"side": 2}]
+    },
+    "OC6": {
+      "color": "yellow",
+      "values": [{"angle": 150, "percent": 0.8, "value": 40}],
+      "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
+      "cities": [{"companies": ["SO&T"], "size": 1}],
+      "track": [{"side": 1}, {"side": 3}]
+    },
+    "OC7": {
+      "color": "yellow",
+      "values": [{"angle": 150, "percent": 0.8, "value": 40}],
+      "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
+      "cities": [{"companies": ["SO&T"], "size": 1}],
+      "track": [{"side": 1}, {"side": 4}]
+    },
+    "OC8": {
+      "color": "green",
+      "values": [{"angle": 150, "percent": 0.8, "value": 60}],
+      "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
+      "cities": [{"companies": ["SO&T"], "size": 2}],
+      "track": [{"side": 1}, {"side": 2},{"side":3}]
+    },
+    "OC9": {
+      "color": "green",
+      "values": [{"angle": 150, "percent": 0.8, "value": 60}],
+      "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
+      "cities": [{"companies": ["SO&T"], "size": 2}],
+      "track": [{"side": 1}, {"side": 2},{"side":4}]
+    },
+    "OC10": {
+      "color": "green",
+      "values": [{"angle": 150, "percent": 0.8, "value": 60}],
+      "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
+      "cities": [{"companies": ["SO&T"], "size": 2}],
+      "track": [{"side": 1}, {"side": 3},{"side":4}]
+    },
+    "OC11": {
+      "color": "green",
+      "values": [{"angle": 150, "percent": 0.8, "value": 60}],
+      "labels": [{"angle": 210, "percent": 0.8, "label": "S"}],
+      "cities": [{"companies": ["SO&T"], "size": 2}],
+      "track": [{"side": 1}, {"side": 3},{"side":5}]
+    },
+    "OC12": {
+      "color": "brown",
+      "values": [{"angle": -30, "percent": 0.88, "value": 80}],
+      "labels": [{"angle": 270, "percent": 0.85, "label": "S"}],
+      "cities": [{"companies": ["SO&T"], "size": 3}],
+      "track": [{"side": 1},{"side":2},{"side": 3},{"side":4}]
+    },
+    "OC13": {
+      "color": "brown",
+      "values": [{"angle": -30, "percent": 0.88, "value": 80}],
+      "labels": [{"angle": 270, "percent": 0.85, "label": "S"}],
+      "cities": [{"companies": ["SO&T"], "size": 3}],
+      "track": [{"side": 1},{"side":5},{"side": 3},{"side":4}]
+    },
+    "OC14": {
+      "color": "brown",
+      "values": [{"angle": -30, "percent": 0.88, "value": 80}],
+      "labels": [{"angle": 270, "percent": 0.85, "label": "S"}],
+      "cities": [{"companies": ["SO&T"], "size": 3}],
+      "track": [{"side": 1},{"side":6},{"side": 3},{"side":4}]
+    },
+    "OC15": {
+      "color": "grey",
+      "values": [{"angle": -30, "percent": 0.88, "value": 100}],
+      "labels": [{"angle": 270, "percent": 0.85, "label": "S"}],
+      "cities": [{"companies": ["SO&T"], "size": 3}],
+      "track": [{"side": 1},{"side":2},{"side": 3},{"side":4}]
+    },
+    "OC16": {
+      "color": "grey",
+      "values": [{"angle": -30, "percent": 0.88, "value": 100}],
+      "labels": [{"angle": 270, "percent": 0.85, "label": "S"}],
+      "cities": [{"companies": ["SO&T"], "size": 3}],
+      "track": [{"side": 1},{"side":5},{"side": 3},{"side":4}]
+    },
+    "OC17": {
+      "color": "grey",
+      "values": [{"angle": -30, "percent": 0.88, "value": 100}],
+      "labels": [{"angle": 270, "percent": 0.85, "label": "S"}],
+      "cities": [{"companies": ["SO&T"], "size": 3}],
+      "track": [{"side": 1},{"side":6},{"side": 3},{"side":4}]
+    }
+  },
+  "map": {
+    "hexes": [
+      {
+        "color": "plain",
+        "hexes": ["B4", "C3", "C5", "D6", "D8",
+                  "E3", "E5", "E9", "E11", "F8", "G3", "G9",
+                  "G11", "H4", "H6", "H12", "I9", "I11",
+                  "J10", "J12", "K15", "L12", "L14"]
+      },
+      {
+        "color": "grey",
+        "track": [{"side":4,"type":"gentle"},
+                  {"side":1,"type":"straight"}],
+        "hexes": ["A5"]
+      },
+      {
+        "color": "grey",
+        "track": [{"side":6,"type":"gentle"},
+                  {"side":3,"type":"straight"}],
+        "hexes": ["B6"]
+      },
+      {
+        "color": "yellow",
+        "track": [{"side":4,"type":"gentle"}],
+        "hexes": ["C9"]
+      },
+      {
+        "color": "offboard",
+        "cities": [{"companies": ["PE"]}],
+        "track": [{"side": 1},
+                  {"side": 6}],
+        "removeBorders": [5],
+        "hexes": ["A3"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 1},
+                  {"type": "offboard", "side": 6}],
+        "removeBorders": [2,5],
+        "offBoardRevenue": {
+          "name": {"name": "Los Angeles"},
+          "revenues": [{"color": "yellow", "value": 40},
+                       {"color": "green", "value": 60},
+                       {"color": "brown", "value": 80},
+                       {"color": "gray", "value": 100}]
+        },
+        "hexes": ["B2"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"side": 1},
+                  {"side": 6}],
+        "removeBorders": [2],
+        "cities": [{"companies": ["SP"]}],
+        "hexes": ["C1"]
+      },
+      {
+        "color": "water",
+        "track": [{"type": "offboard", "side": 4},
+                  {"type": "offboard", "side": 5}],
+        "icons": [{"type": "port", "angle": 120, "percent": 0.667}],
+        "offBoardRevenue": {
+          "percent": 0.333,
+          "name": {"name": "Long Beach"},
+          "revenues": [{"color": "green", "value": 40},
+                       {"color": "brown", "value": 60},
+                       {"color": "gray", "value": 80}]
+        },
+        "hexes": ["A7"]
+      },
+      {
+        "color": "grey",
+        "cities": [{"angle": 130,
+                    "percent": 0.4,
+                    "name": {"offset": 58, "name": "Buena Park"}}],
+        "values": [{"value": 30, "angle": 60, "percent": 0.667}],
+        "track": [{"type": "straight", "side": 3},
+                  {"type": "gentle", "side": 1}],
+        "hexes": ["D2"]
+      },
+      {
+        "color": "yellow",
+        "values": [{"angle": 240, "percent": 0.5, "value": 10}],
+        "towns": [{"angle": 60,
+                   "percent": 0.28,
+                   "rotation": -30,
+                   "name": {"name": "Seal Beach"}}],
+        "track": [{"type": "gentle", "side": 1}],
+        "hexes": ["C7"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Cypress"}}],
+        "hexes": ["D4"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Westminster"}}],
+        "hexes": ["E7"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Fullerton"}}],
+        "hexes": ["F2"]
+      },
+      {
+        "color": "grey",
+        "cities": [{"angle": 230,
+                    "percent": 0.4,
+                    "name": {"offset": 42, "name": "Yorba Linda"}}],
+        "values": [{"value": 30, "angle": 300, "percent": 0.667}],
+        "track": [{"type": "straight", "side": 5},
+                  {"type": "gentle", "side": 5}],
+        "hexes": ["H2"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{"companies": ["DRR"], "name": {"offset": 60, "name": "Anaheim"}}],
+        "values": [{"value": 30, "percent": 0.667}],
+        "labels": [{"label": "Y", "angle": 60, "percent": 0.667}],
+        "track": [{"side": 3},{"side":6}],
+        "hexes": ["F4"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Orange"}}],
+        "hexes": ["G5"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{"name": {"reverse": true, "offset": 63, "name": "Huntington Beach"}}],
+        "values": [{"value": 30, "angle": 180, "percent": 0.667}],
+        "labels": [{"label": "Y", "angle": 60, "percent": 0.667}],
+        "track": [{"side": 3}],
+        "hexes": ["D10"]
+      },
+      {
+        "color": "yellow",
+        "labels": [{"label": "Y", "angle": 120, "percent": 0.667}],
+        "values": [{"value": 30, "angle": 240, "percent": 0.667}],
+        "cities": [{"companies": ["SNR"],
+                    "name": {"reverse": true, "offset": 42, "name": "Newport Beach"}}],
+        "track": [{"side":6},
+                  {"side":4}],
+        "hexes": ["F12"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Corona Del Mar"}}],
+        "hexes": ["G13"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Tustin"}}],
+        "hexes": ["H8"]
+      },
+      {
+        "color": "yellow",
+        "labels": [{"label": "Y", "angle": 120, "percent": 0.667}],
+        "values": [{"value": 30, "angle": 240, "percent": 0.667}],
+        "cities": [{"name": {"name": "Irvine", "reverse": true, "offset": 40}}],
+        "track": [{"side":4},{"side":6}],
+        "hexes": ["H10"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Garden Grove"}}],
+        "hexes": ["F6"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Costa Mesa"}}],
+        "hexes": ["F10"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Aliso Viejo"}}],
+        "hexes": ["J14"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Laguna Niguel"}}],
+        "hexes": ["J16"]
+      },
+      {
+        "color": "plain",
+        "labels": [{"label": "S", "angle": 60, "percent": 0.667}],
+        "cities": [{"companies": ["SO&T"], "name": {"name": "Santa Ana"}}],
+        "hexes": ["G7"]
+      },
+      {
+        "color": "plain",
+        "labels": [{"label": "L", "angle": 60, "percent": 0.667}],
+        "cities": [{"name": {"name": "Lake Forest"}}],
+        "hexes": ["K11"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Mission Viejo"}}],
+        "hexes": ["K13"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 40}],
+        "hexes": ["I3", "I5", "J4", "J6"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "swamp", "cost": 20}],
+        "hexes": ["H14", "I13", "I15", "I7", "J8"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"side": 1},
+                  {"side": 2}],
+        "removeBorders": [6],
+        "cities": [{"companies": ["ATSF"]}],
+        "hexes": ["I1"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 1},
+                  {"type": "offboard", "side": 2}],
+        "removeBorders": [3],
+        "offBoardRevenue": {
+          "angle": 120,
+          "percent": 0.667,
+          "name": {"name": "Riverside"},
+          "revenues": [{"color": "yellow", "value": 30},
+                       {"color": "green", "value": 40},
+                       {"color": "brown", "value": 60},
+                       {"color": "gray", "value": 80}]
+        },
+        "hexes": ["J2"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"side": 3},
+                  {"side": 4}],
+        "removeBorders": [5],
+        "cities": [{"companies": ["CSR"]}],
+        "hexes": ["K17"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 3},
+                  {"type": "offboard", "side": 4}],
+        "removeBorders": [2],
+        "offBoardRevenue": {
+          "reverse": true,
+          "name": {"name": "San Diego"},
+          "revenues": [{"color": "yellow", "value": 30},
+                       {"color": "green", "value": 40},
+                       {"color": "brown", "value": 60},
+                       {"color": "gray", "value": 80}]
+        },
+        "hexes": ["L16"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 2}],
+        "removeBorders": [1],
+        "offBoardRevenue": {
+          "name": {"name": "Temecula"},
+          "revenues": [{"color": "yellow", "value": 20},
+                       {"color": "green", "value": 40},
+                       {"color": "brown", "value": 50},
+                       {"color": "gray", "value": 60}]
+        },
+        "hexes": ["M11"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 2},
+                  {"type": "offboard", "side": 3}],
+        "removeBorders": [4],
+        "hexes": ["M13"]
+      }
+    ],
+    "borders": [
+      {
+        "color": "land",
+        "coords": ["J8p2", "J8p3"]
+      },
+      {
+        "color": "land",
+        "coords": ["H14p2", "H14p3", "I15p2", "I15p3", "I15p4"]
+      }
+    ]
+  }
+}
