@@ -25,7 +25,6 @@ import game_1836jr_56 from "./1836jr-56";
 import game_1838TL from "./1838TL";
 import game_1839 from "./1839NL";
 import game_1841 from "./1841";
-import game_1845 from "./1845";
 import game_1846 from "./1846";
 import game_1848 from "./1848";
 import game_1849 from "./1849";
@@ -57,7 +56,6 @@ import game_18Scan from "./18Scan";
 import game_18SW from "./18SW";
 import game_18TE from "./18TE";
 import game_18TK from "./18TK";
-import game_18SW from "./18SW";
 import game_18Test from "./18Test";
 import game_FourthAge from "./FourthAge";
 import game_Harzbahn from "./Harzbahn";
@@ -95,7 +93,6 @@ let all_games = {
   "1838TL": game_1838TL,
   "1839NL": game_1839,
   "1841": game_1841,
-  "1845": game_1845,
   "1846": game_1846,
   "1848": game_1848,
   "1849": game_1849,
