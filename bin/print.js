@@ -11,9 +11,10 @@ const setup = util.setup;
 
 setup();
 
+const gameDefs = require('../src/data/games').default;
 let games = [process.argv[2] || "1830"];
 if(process.argv[2] === "all") {
-  games = R.keys(require("../src/data/games").default);
+  games = R.keys(gameDefs);
 }
 
 const app = express();
@@ -61,7 +62,7 @@ const server = app.listen(9000);
       'tokens'
     ];
 
-    let gameDef = require(`../src/data/games/${game}`);
+    let gameDef = gameDefs[game];
 
     for(let i=0;i<items.length;i++) {
       let item = items[i];

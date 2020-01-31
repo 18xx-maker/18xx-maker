@@ -17,6 +17,8 @@ const setupB18 = util.setupB18;
 const config = require('../src/config.json');
 const mutil = require('../src/market/util');
 
+const gameDefs = require('../src/data/games').default;
+
 const capitalize = R.compose(
   R.join(''),
   R.juxt([R.compose(R.toUpper, R.head), R.tail])
@@ -44,18 +46,10 @@ const server = app.listen(9000);
   let folder = `board18-${id}`;
   let author = process.argv[4];
 
-  let game = require(`../src/data/games/${bname}`);
+  let game = gameDefs[bname];
   let tiles = require('../src/data/tiles').default;
 
-  const getTile = id => {
-    if(!tiles[id]) {
-      id = id.split("|")[0];
-    }
-
-    let tile = tiles[id];
-    tile.id = id;
-    return tile;
-  };
+  const getTile = gutil.getTile(tiles, game.tiles || {});
 
   let json = {
     bname,
@@ -99,7 +93,7 @@ const server = app.listen(9000);
     R.countBy(R.identity),
     R.map(R.prop("color")),
     R.uniq,
-    R.map(id => tiles[id] || tiles[id.split("|")[0]])
+    R.map(getTile)
   )(R.keys(game.tiles));
   let colors = R.keys(counts);
 
@@ -142,7 +136,7 @@ const server = app.listen(9000);
 
       tray.tile.push({
         rots,
-        dups
+        dups: tile.quantity
       });
     }, game.tiles);
 
