@@ -29,6 +29,7 @@ import logo_ATA, { ReactComponent as logo_ATA_Component } from "./ATA.svg";
 import logo_ATSF, { ReactComponent as logo_ATSF_Component } from "./ATSF.svg";
 import logo_AWP, { ReactComponent as logo_AWP_Component } from "./AWP.svg";
 import logo_BM, { ReactComponent as logo_BM_Component } from "./BM.svg";
+import logo_BNSF, { ReactComponent as logo_BNSF_Component } from "./BNSF.svg";
 import logo_BO, { ReactComponent as logo_BO_Component } from "./BO.svg";
 import logo_CHI, { ReactComponent as logo_CHI_Component } from "./CHI.svg";
 import logo_CO, { ReactComponent as logo_CO_Component } from "./CO.svg";
@@ -56,6 +57,7 @@ import logo_dev_postgresql, { ReactComponent as logo_dev_postgresql_Component } 
 import logo_dev_redis, { ReactComponent as logo_dev_redis_Component } from "./dev/redis.svg";
 import logo_dev_vim, { ReactComponent as logo_dev_vim_Component } from "./dev/vim.svg";
 import logo_dev_vscode, { ReactComponent as logo_dev_vscode_Component } from "./dev/vscode.svg";
+import logo_DRR, { ReactComponent as logo_DRR_Component } from "./DRR.svg";
 import logo_ERIE, { ReactComponent as logo_ERIE_Component } from "./ERIE.svg";
 import logo_FECR, { ReactComponent as logo_FECR_Component } from "./FECR.svg";
 import logo_FW, { ReactComponent as logo_FW_Component } from "./FW.svg";
@@ -129,6 +131,7 @@ import logo_owl_toronto_defiant, { ReactComponent as logo_owl_toronto_defiant_Co
 import logo_owl_vancouver_titans, { ReactComponent as logo_owl_vancouver_titans_Component } from "./owl/vancouver_titans.svg";
 import logo_owl_washington_justice, { ReactComponent as logo_owl_washington_justice_Component } from "./owl/washington_justice.svg";
 import logo_PAC, { ReactComponent as logo_PAC_Component } from "./PAC.svg";
+import logo_PE, { ReactComponent as logo_PE_Component } from "./PE.svg";
 import logo_PRR, { ReactComponent as logo_PRR_Component } from "./PRR.svg";
 import logo_RCS, { ReactComponent as logo_RCS_Component } from "./RCS.svg";
 import logo_SALR, { ReactComponent as logo_SALR_Component } from "./SALR.svg";
@@ -141,6 +144,7 @@ import logo_SSW, { ReactComponent as logo_SSW_Component } from "./SSW.svg";
 import logo_TM, { ReactComponent as logo_TM_Component } from "./TM.svg";
 import logo_TP, { ReactComponent as logo_TP_Component } from "./TP.svg";
 import logo_UdY, { ReactComponent as logo_UdY_Component } from "./UdY.svg";
+import logo_UP, { ReactComponent as logo_UP_Component } from "./UP.svg";
 import logo_webdev_angular, { ReactComponent as logo_webdev_angular_Component } from "./webdev/angular.svg";
 import logo_webdev_chrome, { ReactComponent as logo_webdev_chrome_Component } from "./webdev/chrome.svg";
 import logo_webdev_css3, { ReactComponent as logo_webdev_css3_Component } from "./webdev/css3.svg";
@@ -338,6 +342,11 @@ export default {
     src: logo_BM,
     Component: logo_BM_Component
   },
+  "BNSF": {
+    name: "BNSF",
+    src: logo_BNSF,
+    Component: logo_BNSF_Component
+  },
   "BO": {
     name: "BO",
     src: logo_BO,
@@ -492,6 +501,11 @@ export default {
     group: "dev",
     src: logo_dev_vscode,
     Component: logo_dev_vscode_Component
+  },
+  "DRR": {
+    name: "DRR",
+    src: logo_DRR,
+    Component: logo_DRR_Component
   },
   "ERIE": {
     name: "ERIE",
@@ -910,6 +924,11 @@ export default {
     src: logo_PAC,
     Component: logo_PAC_Component
   },
+  "PE": {
+    name: "PE",
+    src: logo_PE,
+    Component: logo_PE_Component
+  },
   "PRR": {
     name: "PRR",
     src: logo_PRR,
@@ -969,6 +988,11 @@ export default {
     name: "UdY",
     src: logo_UdY,
     Component: logo_UdY_Component
+  },
+  "UP": {
+    name: "UP",
+    src: logo_UP,
+    Component: logo_UP_Component
   },
   "webdev/angular": {
     name: "angular",
