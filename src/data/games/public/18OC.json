@@ -394,13 +394,13 @@
   "tiles": {
     "3": 3,
     "4": 3,
-    "5": 3,
-    "6": 3,
+    "5": 4,
+    "6": 4,
     "7": 4,
     "8": 8,
     "9": 7,
     "14": 2,
-    "15": 3,
+    "15": 4,
     "619": 2,
     "16": 1,
     "17": 1,
@@ -425,7 +425,7 @@
     "45": 2,
     "46": 2,
     "47": 1,
-    "57": 3,
+    "57": 4,
     "58": 3,
 
     "70": 1,
@@ -442,8 +442,9 @@
     "63": 2,
     "OC1": {
       "color": "brown",
+      "quantity": 2,
       "values": [{"angle": 150, "percent": 0.8, "value": 40}],
-      "labels": [{"angle": 210, "percent": 0.8, "label": "L"}],
+      "labels": [{"angle": 210, "percent": 0.8, "label": "K"}],
       "cities": [{"size": 2}],
       "rotations": [300],
       "track": [{"side": 1}, {"side": 2}, {"side": 3}, {"side": 4}]
@@ -638,13 +639,9 @@
         "hexes": ["A7"]
       },
       {
-        "color": "grey",
-        "cities": [{"angle": 130,
-                    "percent": 0.4,
-                    "name": {"offset": 58, "name": "Buena Park"}}],
-        "values": [{"value": 30, "angle": 60, "percent": 0.667}],
-        "track": [{"type": "straight", "side": 3},
-                  {"type": "gentle", "side": 1}],
+        "color": "plain",
+        "labels": [{"label": "K", "angle": 60, "percent": 0.667}],
+        "cities": [{"name": {"name": "Buena Park"}}],
         "hexes": ["D2"]
       },
       {
@@ -766,7 +763,7 @@
       },
       {
         "color": "plain",
-        "labels": [{"label": "L", "angle": 60, "percent": 0.667}],
+        "labels": [{"label": "K", "angle": 60, "percent": 0.667}],
         "cities": [{"name": {"name": "Lake Forest"}}],
         "hexes": ["K11"]
       },
