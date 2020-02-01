@@ -74,9 +74,9 @@
       "color": "orange"
     },
     {
-      "name": "Santa Fe Southern Pacific Corporation",
-      "abbrev": "SFSP",
-      "color": "yellow"
+      "name": "Southern Pacific & Santa Fe Railway",
+      "abbrev": "SPSF",
+      "color": "red"
     },
     {
       "name": "Union Pacific Railroad",
@@ -211,7 +211,7 @@
       "price": 110,
       "revenue": 20,
       "icon": "share",
-      "description": "A player owning C.W. Swappigan's may trade it for any share in the IPO or bank pool."
+      "description": "A player owning C.W. Swappigan's may trade it for any share in a treasury or the bank pool. The bank pays current market value for a share taken from a companies treasury."
     },
     {
       "name": "Fakeblock",
