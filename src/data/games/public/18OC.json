@@ -28,6 +28,27 @@
     }
   ],
   "shareTypes": {
+    "denied": [
+      {
+        "quantity": 5,
+        "percent": 10,
+        "shares": 1
+      }
+    ],
+    "merged": [
+      {
+        "quantity": 10,
+        "percent": 10,
+        "shares": 1
+      }
+    ],
+    "premerge": [
+      {
+        "quantity": 5,
+        "percent": 20,
+        "shares": 1
+      }
+    ],
     "private": [
       {
         "quantity": 5,
@@ -66,27 +87,32 @@
     {
       "name": "Southern Pacific Railroad",
       "abbrev": "SP",
-      "color": "blue"
+      "color": "blue",
+      "shares": "premerge"
     },
     {
       "name": "Atchison, Topeka and Santa Fe Railway",
       "abbrev": "ATSF",
-      "color": "orange"
+      "color": "orange",
+      "shares": "premerge"
     },
     {
       "name": "Southern Pacific & Santa Fe Railway",
       "abbrev": "SPSF",
-      "color": "red"
+      "color": "red",
+      "shares": "merged"
     },
     {
       "name": "Union Pacific Railroad",
       "abbrev": "UP",
-      "color": "blue"
+      "color": "blue",
+      "shares": "denied"
     },
     {
       "name": "BNSF Railway",
       "abbrev": "BNSF",
-      "color": "orange"
+      "color": "orange",
+      "shares": "denied"
     },
     {
       "name": "California Southern Railroad",
@@ -344,7 +370,9 @@
         "value": 0,
         "subLabel": "Company Closes"
       },
+      5,
       10,
+      15,
       20,
       30,
       40,
