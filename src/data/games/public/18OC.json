@@ -826,6 +826,7 @@
       "values": [{"angle": 150, "percent": 0.8, "value": 40}],
       "labels": [{"angle": 210, "percent": 0.8, "label": "L"}],
       "cities": [{"size": 2}],
+      "rotations": [300],
       "track": [{"side": 1}, {"side": 2}, {"side": 3}, {"side": 4}]
     },
 
