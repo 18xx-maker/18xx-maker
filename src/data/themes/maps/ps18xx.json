@@ -1,0 +1,29 @@
+{
+  "name": "ps18xx",
+  "colors": {
+    "plain": "#f5f5dd",
+    "yellow": "#fffe03",
+    "green": "#64e164",
+    "brown": "#ce6601",
+    "gray": "#bebebe",
+
+    "offboard": "#fe6464",
+    "mountain": "#ee874b",
+    "water": "#2090ff",
+    "land": "#0a0",
+    "river": "#bbd9e6",
+
+    "white": "#fff",
+    "black": "#000",
+
+    "orange": "#ffa500",
+    "red": "#fe6464",
+
+    "track": "#000",
+    "border": "#fff",
+    "town": "#000",
+    "centerTown": "#000",
+    "city": "#fff",
+    "halt": "#666"
+  }
+}

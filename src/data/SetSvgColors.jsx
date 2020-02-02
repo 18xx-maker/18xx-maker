@@ -9,7 +9,7 @@ import concat from "ramda/src/concat";
 import join from "ramda/src/join";
 import keys from "ramda/src/keys";
 
-const colors = keys(require("./themes/companies/rob.json"));
+const colors = keys(require("./themes/companies/rob.json").colors);
 
 const SetSvgColors = ({ companySvgLogos }) => {
   if (companySvgLogos === "none") return null;

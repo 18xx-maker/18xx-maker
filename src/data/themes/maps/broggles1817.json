@@ -1,0 +1,33 @@
+{
+  "name": "Broggles 1817",
+  "colors": {
+    "plain": "#e3bd00",
+    "yellow": "#f9b231",
+    "green": "#2aac65",
+    "brown": "#ac4f3e",
+    "gray": "#6e6e6e",
+    "map": {
+      "gray": "#868786",
+      "water": "#34a9e1"
+    },
+
+    "offboard": "#be111f",
+    "mountain": "#3a3a39",
+    "water": "#34a9e1",
+    "land": "#e3bd00",
+    "river": "#34a9e1",
+
+    "white": "#3a3a39",
+    "black": "#f6f6f6",
+
+    "orange": "#f47d20",
+    "red": "#be111f",
+
+    "track": "#f6f6f6",
+    "border": "#3a3a39",
+    "town": "#f6f6f6",
+    "centerTown": "#3a3a39",
+    "city": "#f6f6f6",
+    "halt": "#f6f6f6"
+  }
+}
