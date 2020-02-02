@@ -170,7 +170,7 @@ export const compileCompanies = (game) => {
       company.tokens = game.tokenTypes[company.tokens];
     }
 
-    if (company.minor && game.shareTypes && game.shareTypes["minor"]) {
+    if (company.minor && !company.shares && game.shareTypes && game.shareTypes["minor"]) {
       company.shareType = "minor";
       company.shares = game.shareTypes["minor"];
     } else if (!company.shares && game.shareTypes && game.shareTypes["default"]) {

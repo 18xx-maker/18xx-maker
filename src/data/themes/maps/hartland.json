@@ -1,0 +1,29 @@
+{
+  "name": "Hartland-Treefoil",
+  "colors": {
+    "yellow": "#fdd800",
+    "green": "#91be2e",
+    "brown": "#d46c27",
+    "gray": "#513210",
+
+    "plain": "#f3de6c",
+    "offboard": "#513210",
+    "mountain": "#513210",
+    "water": "#0c1977",
+    "land": "#1a3426",
+    "river": "#b4a86f",
+
+    "orange": "#f58121",
+    "offboard": "#ec232a",
+
+    "white": "#fff",
+    "black": "#110a0c",
+
+    "track": "#110a0c",
+    "border": "#fff",
+    "city": "#fff",
+    "town": "#110a0c",
+    "centerTown": "#110a0c",
+    "halt": "#666"
+  }
+}

@@ -12,7 +12,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import games from "./games";
-import themes from "./themes";
+import themes from "./themes/maps";
 import companies from "./themes/companies";
 
 const resolveColor = curry((theme, companiesTheme, phase, context, game, name) => {
@@ -20,11 +20,11 @@ const resolveColor = curry((theme, companiesTheme, phase, context, game, name) =
     name = "gray";
   }
 
-  let colors = themes[theme || "gmt"] || themes["gmt"];
+  let colors = (themes[theme || "gmt"] || themes["gmt"]).colors;
 
   // Add in company colors
-  colors["companies"] = mergeDeepRight(companies["rob"],
-                                       companies[companiesTheme || "rob"] || companies["rob"]);
+  colors["companies"] = mergeDeepRight(companies["rob"].colors,
+                                       (companies[companiesTheme || "rob"] || companies["rob"]).colors);
 
   // Add in game colors
   colors = mergeDeepRight(colors,

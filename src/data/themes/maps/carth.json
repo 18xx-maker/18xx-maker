@@ -1,0 +1,80 @@
+{
+  "name": "Carthaginian",
+  "colors": {
+    "yellow": "#fdcb09",
+    "green": "#0aa99e",
+    "brown": "#cc6b2d",
+    "gray": "#c1c5c6",
+
+    "plain": "#f2f4e8",
+    "offboard": "#dc8281",
+    "mountain": "#997749",
+    "water": "#4cb2d7",
+    "land": "#dfe2c7",
+    "river": "#c5e2e3",
+
+    "orange": "#f48221",
+    "red": "#dc8281",
+
+    "white": "#fefffe",
+    "black": "#37383a",
+
+    "halt": "rgb(102,102,102)",
+
+    "border": {
+      "plain": "#f2f4e8",
+      "yellow": "#fdcb09",
+      "green": "#0aa99e",
+      "brown": "#cc6b2d",
+      "gray": "#c1c5c6",
+      "offboard": "#dc8281",
+      "mountain": "#997749",
+      "water": "#4cb2d7"
+    },
+
+    "tile": {
+      "default": "#babe81",
+      "yellow": "#f2f4e8",
+      "green": "#e4e8d1",
+      "brown": "#d9ddba",
+      "gray": "#babe81",
+
+      "border": {
+        "yellow": "#f2f4e8",
+        "green": "#e4e8d1",
+        "brown": "#d9ddba",
+        "gray": "#babe81"
+      }
+    },
+
+    "track": {
+      "default": "#37383a",
+      "plain": "#b9bf81",
+      "yellow": "#bc9806",
+      "green": "#4a7522",
+      "brown": "#743c0a"
+    },
+
+    "town": {
+      "default": "#b9bf81",
+      "yellow": "#bc9806",
+      "green": "#4a7522",
+      "brown": "#743c0a",
+      "gray": "#37383a",
+      "offboard": "#37383a"
+    },
+
+    "centertown": {
+      "plain": "#b9bf81",
+      "default": "#37383a"
+    },
+
+    "city": {
+      "default": "#dde1e2",
+      "plain": "#fefffe",
+      "yellow": "#f9faf4",
+      "green": "#f1f3e6",
+      "brown": "#eaedda"
+    }
+  }
+}

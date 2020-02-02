@@ -1,0 +1,33 @@
+{
+  "name": "Broggles 1836jr",
+  "colors": {
+    "plain": "#3b3c91",
+    "yellow": "#f7ee83",
+    "green": "#7c9e81",
+    "brown": "#d28979",
+    "gray": "#565655",
+    "map": {
+      "gray": "#d9dada",
+      "water": "#2b90be"
+    },
+
+    "offboard": "#c6473d",
+    "mountain": "#f3aa48",
+    "water": "#2b90be",
+    "land": "#3b3c91",
+    "river": "#1b4f6c",
+
+    "white": "#3b3c91",
+    "black": "#ececec",
+
+    "orange": "#f3aa48",
+    "red": "#c6473d",
+
+    "track": "#3b3c91",
+    "border": "#3b3c91",
+    "town": "#3b3c91",
+    "centerTown": "#ececec",
+    "city": "#ececec",
+    "halt": "#3b3c91"
+  }
+}

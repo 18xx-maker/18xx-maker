@@ -56,6 +56,19 @@
         "shares": 1
       }
     ],
+    "minor": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 40,
+        "shares": 2
+      },
+      {
+        "quantity": 3,
+        "percent": 20,
+        "shares": 1
+      }
+    ],
     "default": [
       {
         "quantity": 1,
@@ -71,48 +84,52 @@
     ]
   },
   "tokenTypes": {
-    "none": [],
-    "default": [
-      "Free", 40, 100
-    ]
+    "default": ["Free", 40, 100],
+    "merger": ["","","","",""]
   },
   "companies": [
     {
       "name": "Pacific Electric Railway Company",
       "abbrev": "PE",
       "color": "red",
+      "minor": true,
       "shares": "private",
-      "tokens": "none"
+      "tokens": ["Seal Beach"]
     },
     {
       "name": "Southern Pacific Railroad",
       "abbrev": "SP",
       "color": "blue",
-      "shares": "premerge"
+      "shares": "premerge",
+      "tokens": "merger"
     },
     {
       "name": "Atchison, Topeka and Santa Fe Railway",
       "abbrev": "ATSF",
       "color": "orange",
-      "shares": "premerge"
+      "shares": "premerge",
+      "tokens": "merger"
     },
     {
       "name": "Southern Pacific & Santa Fe Railway",
       "abbrev": "SPSF",
       "color": "red",
-      "shares": "merged"
+      "shares": "merged",
+      "tokens": "merger"
     },
     {
       "name": "Union Pacific Railroad",
       "abbrev": "UP",
       "color": "blue",
-      "shares": "denied"
+      "shares": "denied",
+      "tokens": "merger"
     },
     {
       "name": "BNSF Railway",
       "abbrev": "BNSF",
       "color": "orange",
-      "shares": "denied"
+      "shares": "denied",
+      "tokens": "merger"
     },
     {
       "name": "California Southern Railroad",
@@ -132,7 +149,9 @@
     {
       "name": "Disneyland Railroad",
       "abbrev": "DRR",
-      "color": "pink"
+      "color": "pink",
+      "minor": true,
+      "tokens": ["Anaheim"]
     }
   ],
   "trains": [
@@ -303,18 +322,19 @@
       "name": "Market",
       "notes": [
         {
-          "color": "orange",
-          "note": "Shares in the market pay dividends to the corporation"
+          "color": "green",
+          "note": "Shares in the market pay dividends to the bank",
+          "icon": "money-bill-wave"
         },
         {
-          "color": "brown",
+          "color": "orange",
           "icon": "exclamation",
           "note": "No more than 50% of a corporation's shares may be in the market at any time"
         },
         {
           "color": "red",
           "icon": "times",
-          "note": "Shares cannot be sold during the first stock round"
+          "note": "Shares cannot be sold of companies that haven't operated"
         }
       ]
     }
@@ -395,14 +415,21 @@
       },
       {
         "value": 100,
-        "par": true
+        "par": true,
+        "companies": ["PE"]
       },
       115,
       130,
       145,
-      160,
+      {
+        "value": 160,
+        "companies": ["ATSF"]
+      },
       180,
-      200,
+      {
+        "value": 200,
+        "companies": ["SP"]
+      },
       220,
       240,
       265,

@@ -1,0 +1,33 @@
+{
+  "name": "Broggles 18EU",
+  "colors": {
+    "plain": "#b5e864",
+    "yellow": "#fedc47",
+    "green": "#92c361",
+    "brown": "#bc5f40",
+    "gray": "#6c5f58",
+    "map": {
+      "gray": "#9a918d",
+      "water": "#3ca3dc"
+    },
+
+    "offboard": "#be111f",
+    "mountain": "#6e6e6e",
+    "water": "#3ca3dc",
+    "land": "#92c361",
+    "river": "#5ac5f2",
+
+    "white": "#f1f1d9",
+    "black": "#4e4039",
+
+    "orange": "#f47d20",
+    "red": "#be111f",
+
+    "track": "#4e4039",
+    "border": "#9a918d",
+    "town": "#4e4039",
+    "centerTown": "#4e4039",
+    "city": "#f4f1e8",
+    "halt": "#4e4039"
+  }
+}

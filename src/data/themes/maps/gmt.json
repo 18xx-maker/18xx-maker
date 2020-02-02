@@ -1,0 +1,29 @@
+{
+  "name": "GMT",
+  "colors": {
+    "yellow": "#ffe600",
+    "green": "#59b578",
+    "brown": "#bf8156",
+    "gray": "#a9afb2",
+
+    "plain": "#fcefde",
+    "offboard": "#ec2126",
+    "mountain": "#d1ae85",
+    "water": "#67a7c4",
+    "land": "#59b578",
+    "river": "#d4dbd7",
+
+    "orange": "#f58121",
+    "red": "#d1232a",
+
+    "white": "#fff",
+    "black": "#110a0c",
+
+    "track": "#110a0c",
+    "border": "#fff",
+    "city": "#fff",
+    "town": "#110a0c",
+    "centerTown": "#110a0c",
+    "halt": "#666"
+  }
+}

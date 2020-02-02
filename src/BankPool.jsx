@@ -18,7 +18,7 @@ import SvgIcon from "./SvgIcon";
 
 const BankPool = () => {
   return (
-    <Color context="companies">
+    <Color>
       {(c,t) => (
         <Config>
           {(config, game) => {

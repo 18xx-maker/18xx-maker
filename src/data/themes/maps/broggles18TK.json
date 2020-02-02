@@ -1,0 +1,33 @@
+{
+  "name": "Broggles 18TK",
+  "colors": {
+    "plain": "#cabb9f",
+    "yellow": "#dedc00",
+    "green": "#008d34",
+    "brown": "#936745",
+    "gray": "#9c9c9c",
+    "map": {
+      "gray": "#9c9c9c",
+      "water": "#009ee3"
+    },
+
+    "offboard": "#be3641",
+    "mountain": "#3a3a39",
+    "water": "#009ee3",
+    "land": "#cabb9f",
+    "river": "#009ee3",
+
+    "white": "#f1f1d9",
+    "black": "#000",
+
+    "orange": "#f47d20",
+    "red": "#be3641",
+
+    "track": "#181716",
+    "border": "#00000000",
+    "town": "#181716",
+    "centerTown": "#181716",
+    "city": "#ffffff",
+    "halt": "#181716"
+  }
+}

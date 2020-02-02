@@ -1,0 +1,81 @@
+{
+  "name": "Broggles 1849",
+  "colors": {
+    "yellow": "#ddd38e",
+    "green": "#006836",
+    "brown": "#5f360d",
+    "gray": "#7e8080",
+
+    "plain": "#7d9b77",
+    "offboard": "#d95236",
+    "mountain": "#f6a012",
+    "water": "#9dcbe8",
+    "land": "#7d9b77",
+    "river": "#9dcbe8",
+
+    "orange": "#f6a012",
+    "red": "#d95236",
+
+    "white": "#fff",
+    "black": "#3f1f0c",
+
+    "halt": "#3f1f0c",
+
+    "border": {
+      "plain": "#7d9b77",
+      "yellow": "#e2d76d",
+      "green": "#006836",
+      "brown": "#5f360d",
+      "gray": "#7e8080",
+      "offboard": "#d95236",
+      "mountain": "#f6a012",
+      "water": "#9dcbe8"
+    },
+
+    "tile": {
+      "default": "#5c92a5",
+      "yellow": "#5c92a5",
+      "green": "#5c92a5",
+      "brown": "#5c92a5",
+      "gray": "#5c92a5",
+
+      "border": {
+        "yellow": "#3f1f0c",
+        "green": "#3f1f0c",
+        "brown": "#3f1f0c",
+        "gray": "#3f1f0c"
+      }
+    },
+
+    "track": {
+      "default": "#3f1f0c",
+      "plain": "#3f1f0c",
+      "yellow": "#d8bf30",
+      "green": "#024f28",
+      "brown": "#5f360d",
+      "gray": "#494948"
+    },
+
+    "town": {
+      "default": "#3f1f0c",
+      "plain": "#3f1f0c",
+      "yellow": "#d8bf30",
+      "green": "#024f28",
+      "brown": "#5f360d",
+      "gray": "#494948"
+    },
+
+    "centerTown": {
+      "plain": "#3f1f0c",
+      "default": "#3f1f0c"
+    },
+
+    "city": {
+      "default": "#ffffff",
+      "plain": "#ffffff",
+      "yellow": "#ffffff",
+      "green": "#ffffff",
+      "brown": "#ffffff"
+    }
+  }
+}

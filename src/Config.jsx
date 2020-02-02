@@ -21,6 +21,9 @@ import map from "ramda/src/map";
 import path from "ramda/src/path";
 import split from "ramda/src/split";
 
+import mapThemes from "./data/themes/maps";
+import companyThemes from "./data/themes/companies";
+
 import "./Config.scss";
 
 export const getPath = split('.');
@@ -185,30 +188,13 @@ const Config = ({config, setConfig, resetConfig}) => {
       <h3>Colors</h3>
       <label htmlFor="theme">Theme: </label>
       <select id="theme" name="theme" value={config.theme} onChange={setOption}>
-        <option value="aag">All Aboard Games</option>
-        <option value="carth">Carth</option>
-        <option value="dtg">Deep Thought</option>
-        <option value="hartland">Hartland Trefoil</option>
-        <option value="gmt">GMT</option>
-        <option value="ps18xx">px18xx</option>
-        <option value="broggles18EU">B18EU</option>
-        <option value="broggles1817">B1817</option>
-        <option value="brogglesmex">B18mex</option>
-        <option value="broggles18TK">B18TK</option>
-        <option value="broggles1836jr">B1836jr</option>
-        <option value="broggles1849">B1849</option>
+        {map(theme => <option value={theme}>{mapThemes[theme].name}</option>, keys(mapThemes))}
       </select>
       <ThemePreview/>
       <p className="description">The theme determines which colors are used for all of the elements on the maps and tiles.</p>
       <label htmlFor="companiesTheme">Companies Theme: </label>
       <select id="companiesTheme" name="companiesTheme" value={config.companiesTheme} onChange={setOption}>
-        <option value="carth">Carth</option>
-        <option value="dtg">Deep Thought</option>
-        <option value="gmt">GMT</option>
-        <option value="ps18xx">px18xx</option>
-        <option value="rob">Rails on Boards</option>
-        <option value="B18TK">B18TK</option>
-        <option value="broggles">broggles</option>
+        {map(theme => <option value={theme}>{companyThemes[theme].name}</option>, keys(companyThemes))}
       </select>
       <CompaniesThemePreview/>
       <p className="description">The company theme determines which colors are used for all of the elements on the maps and tiles.</p>
