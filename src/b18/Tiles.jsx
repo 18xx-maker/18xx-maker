@@ -31,12 +31,10 @@ const Tiles = () => {
   let game = games[params.game];
 
   let getGameTile = getTile(tileDefs, game.tiles || {});
-  console.log(filter(propEq("color", color), map(getGameTile, keys(game.tiles))));
 
   let tiles = compose(uniq,
                       filter(propEq("color", color)),
                       map(getGameTile))(keys(game.tiles));
-  console.log(tiles);
 
   let height = game.info.orientation === "horizontal" ? 100 : 116;
   let width = game.info.orientation === "horizontal" ? 116 : 100;
@@ -50,12 +48,6 @@ const Tiles = () => {
       "-76 -87.6025 152 175.205";
 
   let tileNodes = map(tile => {
-    // Merge tile with game tile
-    // if(is(Object,game.tiles[tile.id])) {
-    //   tile = {...tile, ...game.tiles[tile.id]};
-    // }
-    console.log(tile);
-
     // Figure out rotations
     let rotations = ROTATIONS;
     if(is(Number, tile.rotations)) {
@@ -72,6 +64,7 @@ const Tiles = () => {
         {map(rotation => (
           <div key={`tile-${tile.id}-${rotation}`} className="tile-rotation">
             <Svg
+              preserveAspectRatio="none"
               style={{width: `${width}px`,
                       height: `${height}px`}}
               viewBox={viewBox}>
