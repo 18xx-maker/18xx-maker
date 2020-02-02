@@ -1,7 +1,7 @@
 import React from "react";
 import Color from "./data/Color";
 
-const Svg = ({ className, width, height, viewBox, style, defs, children }) => {
+const Svg = ({ className, width, height, viewBox, style, defs, children, preserveAspectRatio }) => {
   const namespaces = {
     "xmlns": "http://www.w3.org/2000/svg",
     "xmlns:xhtml": "http://www.w3.org/1999/xhtml"
@@ -12,6 +12,7 @@ const Svg = ({ className, width, height, viewBox, style, defs, children }) => {
       {c => (
         <svg
           version="1.1"
+          preserveAspectRatio={preserveAspectRatio}
           width={width}
           height={height}
           viewBox={viewBox}
