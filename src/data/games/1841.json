@@ -945,6 +945,10 @@
       "name": "Strada Ferrata Maria Antonia",
       "minor": true,
       "abbrev": "SFMA",
+      "token": {
+        "stripes": "white",
+        "bar": true
+      },
       "tokens": [
         "Firenze",
         ""
@@ -955,6 +959,10 @@
       "name": "Strada Ferrata da Lucca a Pistoia",
       "minor": true,
       "abbrev": "SFLP",
+      "token": {
+        "bar": true,
+        "stripes": "white"
+      },
       "tokens": [
         "Lucca",
         ""
@@ -964,18 +972,22 @@
     {
       "name": "Società per la Strada Ferrata Leopolda",
       "abbrev": "SSFL",
+      "color": "purple",
+      "token": {
+        "bar": true
+      },
       "tokens": [
         "Pisa",
         "",
         "",
         "",
         ""
-      ],
-      "color": "purple"
+      ]
     },
     {
       "name": "Imperial Regia Strada Ferrata Ferdinandea",
       "abbrev": "IRSFF",
+      "token": { "bar": true },
       "tokens": [
         "Milano",
         "Venezia",
@@ -988,6 +1000,7 @@
     {
       "name": "Strada Ferrata da Torina a Genova",
       "abbrev": "SFTG",
+      "token": { "bar": true },
       "tokens": [
         "Torino (S)",
         "Alessandria",
@@ -1000,6 +1013,7 @@
     {
       "name": "Strada di Ferro da Torina a Novara",
       "abbrev": "SFTN",
+      "token": { "bar": true },
       "tokens": [
         "Torino (N)",
         "",
@@ -1007,11 +1021,12 @@
         "",
         ""
       ],
-      "color": "brown"
+      "color": "tan"
     },
     {
       "name": "Strada di Ferro da Torino a Cuneo",
       "abbrev": "SFTC",
+      "token": { "bar": true },
       "variant": "V2",
       "tokens": [
         "Cuneo",
@@ -1025,6 +1040,9 @@
     {
       "name": "Strade Ferrate Livornesi",
       "abbrev": "SFLi",
+      "token": {
+        "bar": true
+      },
       "tokens": [
         "Pisa",
         "Firenze",
@@ -1037,6 +1055,7 @@
     {
       "name": "Strade Ferrate del Sud dell'Austria",
       "abbrev": "SB",
+      "token": { "bar": true },
       "variant": "V2",
       "tokens": [
         "Venezia",
@@ -1050,6 +1069,7 @@
     {
       "name": "Strade Ferrate della Lombardia & dell'Italia Centrale",
       "abbrev": "SFL",
+      "token": { "bar": true },
       "variant": "V2",
       "tokens": [
         "Milano",
@@ -1064,19 +1084,28 @@
       "name": "Società Leonardo Da Vinci",
       "abbrev": "SLDV",
       "minor": true,
-      "color": "black"
+      "color": "black",
+      "token": {
+        "stripes": "white"
+      }
     },
     {
       "name": "Ferrovie Trans Padane",
       "abbrev": "FTP",
       "minor": true,
-      "color": "gray"
+      "color": "gray",
+      "token": {
+        "stripes": "white"
+      }
     },
     {
       "name": "Compagnia Trasporti La Patria",
       "abbrev": "CTLP",
       "minor": true,
-      "color": "purple"
+      "color": "purple",
+      "token": {
+        "stripes": "white"
+      }
     },
     {
       "name": "Compagnia Ferroviaria Conte di Cavour",
@@ -1139,6 +1168,10 @@
       "minor": true,
       "color": "yellow",
       "variant": "V1",
+      "token": {
+        "stripes": "white",
+        "bar": true
+      },
       "tokens": [
         "Cuneo",
         ""
@@ -1149,6 +1182,10 @@
       "abbrev": "SFV",
       "minor": true,
       "color": "yellow",
+      "token": {
+        "bar": true,
+        "stripes": "white"
+      },
       "variant": "V1",
       "tokens": [
         "Venezia",
@@ -1160,6 +1197,10 @@
       "abbrev": "SFL",
       "minor": true,
       "color": "cyan",
+      "token": {
+        "bar": true,
+        "stripes": "white"
+      },
       "variant": "V1",
       "tokens": [
         "Milano",

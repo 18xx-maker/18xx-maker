@@ -48,7 +48,7 @@ const LeftShare = ({
     sharesLeft -= 1;
   }
 
-  let bandColor = is(Object,token) ? token.colors[0] : token;
+  let bandColor = color; // is(Object,token) ? token.colors[0] : token;
 
   let borderLeft = null;
   let borderRight = null;

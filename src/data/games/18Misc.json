@@ -44,25 +44,16 @@
     },
     {
       "label": "C&P",
-      "token": {
-        "type": "bar",
-        "colors": [
-          "white",
-          "black"
-        ]
-      }
+      "bar": "yellow"
     },
     {
-      "label": "coal",
-      "color": "black"
+      "icon": "coal"
     },
     {
-      "label": "coal",
-      "color": "black"
+      "icon": "coal"
     },
     {
-      "label": "coal",
-      "color": "black"
+      "icon": "coal"
     }
   ],
   "ipo": false,
@@ -121,12 +112,10 @@
     {
       "name": "Baltimore & Ohio",
       "abbrev": "B&O",
+      "color": "blue",
       "token": {
-        "type": "quarters",
-        "colors": [
-          "blue",
-          "yellow"
-        ]
+        "bar": true,
+        "quarters": ["yellow", "blue", "blue", "yellow"]
       },
       "tokens": "three"
     },
@@ -139,45 +128,41 @@
     {
       "name": "Canadian Pacific Railway",
       "abbrev": "CPR",
+      "color": "brown",
       "token": {
-        "type": "bar",
-        "colors": [
-          "brown"
-        ]
+        "bar": true
       },
       "tokens": "four"
     },
     {
       "name": "Grand Trunk",
       "abbrev": "GT",
+      "color": "red",
       "token": {
-        "type": "stripe",
-        "colors": [
-          "yellow",
-          "red"
-        ]
+        "color": "yellow",
+        "bar": true,
+        "stripe": "red"
       },
       "tokens": "three"
     },
     {
       "name": "Erie Railroad",
       "abbrev": "ERIE",
+      "color": "yellow",
       "token": {
-        "type": "bar",
-        "colors": [
-          "yellow"
-        ]
+        "bar": true
       },
       "tokens": "three"
     },
     {
       "name": "Illinois Central",
       "abbrev": "IC",
+      "color": "green",
       "token": {
-        "type": "halves",
-        "colors": [
-          "green",
-          "yellow"
+        "bar": true,
+        "halves": [
+          "yellow",
+          "green"
         ]
       },
       "tokens": "four"
@@ -185,48 +170,40 @@
     {
       "name": "Michigan Central Railroad",
       "abbrev": "MC",
+      "color": "yellow",
       "token": {
-        "type": "square",
-        "colors": [
-          "yellow",
-          "black"
-        ]
+        "color": "black",
+        "square": "yellow"
       },
       "tokens": "four"
     },
     {
       "name": "Missouri Pacific Railraod",
       "abbrev": "MP",
+      "color": "red",
       "token": {
-        "type": "target",
-        "colors": [
-          "red",
-          "white"
-        ]
+        "bar": true,
+        "target": "white"
       },
       "tokens": "four"
     },
     {
       "name": "New York Central",
       "abbrev": "NYC",
+      "color": "black",
       "token": {
-        "type": "stripe",
-        "colors": [
-          "black",
-          "white"
-        ]
+        "bar": true,
+        "stripe": "white"
       },
       "tokens": "three"
     },
     {
       "name": "New York, Chicago & St. Louis Railroad",
       "abbrev": "NKP",
+      "color": "cyan",
       "token": {
-        "type": "halves",
-        "colors": [
-          "blue",
-          "cyan"
-        ]
+        "halves": ["cyan", "blue"],
+        "bar": true
       },
       "tokens": "three"
     },
@@ -239,24 +216,20 @@
     {
       "name": "Norfold & Western Railway",
       "abbrev": "NW",
+      "color": "red",
       "token": {
-        "type": "stripes",
-        "colors": [
-          "red",
-          "yellow"
-        ]
+        "bar": true,
+        "stripes": "yellow"
       },
       "tokens": "four"
     },
     {
       "name": "Ontario, Simcoe & Huron",
       "abbrev": "OS&H",
+      "color": "green",
       "token": {
-        "type": "stripe",
-        "colors": [
-          "green",
-          "lightGreen"
-        ]
+        "bar": true,
+        "stripe": "lime"
       },
       "tokens": "four"
     },
@@ -269,13 +242,11 @@
     {
       "name": "Wabash Railroad",
       "abbrev": "WAB",
+      "color": "red",
       "token": {
-        "type": "square",
-        "labelColor": "yellow",
-        "colors": [
-          "blue",
-          "red"
-        ]
+        "color": "red",
+        "square": "blue",
+        "labelColor": "yellow"
       },
       "tokens": "three"
     }
