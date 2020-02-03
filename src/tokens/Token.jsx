@@ -38,6 +38,7 @@ const Token = ({
 
   type, // What special type of token to render (for special shapes and patterns)
   bar, // Do we add a white bar around the text?
+  barHeight, // Height override for white bar
 
   width, // Set the width directly, overrides the "destination" option
   destination, // Is this a destination token? Sets a smaller default width
@@ -215,8 +216,11 @@ const Token = ({
           }
 
           if (bar) {
+            let height = barHeight || (width * 0.72);
+            let y = height * -0.5;
+
             shapes.push(
-              <rect key="bar" x="-50" y={width * -0.34} width="100" height={width * 0.72}
+              <rect key="bar" x="-50" y={y} width="100" height={height}
                     fill={bar === true ? p("white") : c(bar)}
                     stroke={p("black")}
                     clipPath={`url(#${clipId})`}/>
