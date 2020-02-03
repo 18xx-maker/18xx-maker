@@ -9,6 +9,9 @@
     "titleX": 100,
     "titleY": 1000
   },
+  "links": {
+    "rules": "https://github.com/kelsin/18OC"
+  },
   "wip": true,
   "tokens": [
     "Round"
