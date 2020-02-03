@@ -10,9 +10,7 @@ import "./nav.scss";
 
 let Links = (
   <ul key="config">
-    <li><NavLink to="/tiles">Tiles</NavLink></li>
     <li><NavLink to="/docs">Docs</NavLink></li>
-    <li><NavLink to="/cheat">Cheat Sheet</NavLink></li>
     <li><NavLink to="/config">Config</NavLink></li>
   </ul>
 );
@@ -27,14 +25,14 @@ const Nav = () => {
       <nav>
         <div>
           <RandomTile/>
-          <h1><Link to="/">18xx</Link></h1>
+          <h1><Link to="/">18xx Maker</Link></h1>
           {menuOptions}
         </div>
       </nav>
       <div className="LegalNotes">
         <div>
           <p>
-            <strong>Important:</strong> Please only use this site to print games for which you have a license by owning the game.
+            <strong>Important:</strong> Please do not use this site to print games that you don't have a license to print. This tool is not meant to enable piracy. Please support our 18xx designers, developers and publishers.
           </p>
         </div>
       </div>
