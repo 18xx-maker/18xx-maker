@@ -946,7 +946,6 @@
       "minor": true,
       "abbrev": "SFMA",
       "token": {
-        "stripes": "white",
         "bar": true
       },
       "tokens": [
@@ -960,8 +959,7 @@
       "minor": true,
       "abbrev": "SFLP",
       "token": {
-        "bar": true,
-        "stripes": "white"
+        "bar": true
       },
       "tokens": [
         "Lucca",
@@ -1000,7 +998,7 @@
     {
       "name": "Strada Ferrata da Torina a Genova",
       "abbrev": "SFTG",
-      "token": { "bar": true },
+      "token": { "target": "white", "bar": true },
       "tokens": [
         "Torino (S)",
         "Alessandria",
@@ -1013,7 +1011,7 @@
     {
       "name": "Strada di Ferro da Torina a Novara",
       "abbrev": "SFTN",
-      "token": { "bar": true },
+      "token": { "target": "white", "bar": true },
       "tokens": [
         "Torino (N)",
         "",
@@ -1026,7 +1024,7 @@
     {
       "name": "Strada di Ferro da Torino a Cuneo",
       "abbrev": "SFTC",
-      "token": { "bar": true },
+      "token": { "target": "white", "bar": true },
       "variant": "V2",
       "tokens": [
         "Cuneo",
@@ -1084,28 +1082,19 @@
       "name": "Società Leonardo Da Vinci",
       "abbrev": "SLDV",
       "minor": true,
-      "color": "black",
-      "token": {
-        "stripes": "white"
-      }
+      "color": "black"
     },
     {
       "name": "Ferrovie Trans Padane",
       "abbrev": "FTP",
       "minor": true,
-      "color": "gray",
-      "token": {
-        "stripes": "white"
-      }
+      "color": "gray"
     },
     {
       "name": "Compagnia Trasporti La Patria",
       "abbrev": "CTLP",
       "minor": true,
-      "color": "purple",
-      "token": {
-        "stripes": "white"
-      }
+      "color": "yellow"
     },
     {
       "name": "Compagnia Ferroviaria Conte di Cavour",
@@ -1150,7 +1139,7 @@
     {
       "name": "Impresa Latina Trasporti su Ferro",
       "abbrev": "ILTF",
-      "color": "green"
+      "color": "blue"
     },
     {
       "name": "Azienda Trasporti Ferroviari Ausonia",
@@ -1169,7 +1158,7 @@
       "color": "yellow",
       "variant": "V1",
       "token": {
-        "stripes": "white",
+        "target": "white",
         "bar": true
       },
       "tokens": [
@@ -1183,8 +1172,7 @@
       "minor": true,
       "color": "yellow",
       "token": {
-        "bar": true,
-        "stripes": "white"
+        "bar": true
       },
       "variant": "V1",
       "tokens": [
@@ -1198,8 +1186,7 @@
       "minor": true,
       "color": "cyan",
       "token": {
-        "bar": true,
-        "stripes": "white"
+        "bar": true
       },
       "variant": "V1",
       "tokens": [
