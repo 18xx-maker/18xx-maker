@@ -64,10 +64,14 @@ const server = app.listen(9000);
     },
     market: {
       imgLoc: `images/${id}/Market.png`,
-      xStart: 25,
-      xStep: config.stock.cell.width,
-      yStart: 75,
-      yStep: config.stock.cell.height
+      xStart: 25 * 0.96,
+      xStep: (game.stock.type === "2D" ?
+              config.stock.cell.width :
+              config.stock.column.width) * 0.96,
+      yStart: 75 * 0.96,
+      yStep: (game.stock.type === "2D" ?
+              config.stock.cell.width :
+              config.stock.column.height) * 0.96
     },
     tray: [],
     links: []
@@ -198,8 +202,8 @@ const server = app.listen(9000);
 
   console.log(`Printing ${bname}/${folder}/${id}/Market.png`);
   let marketData = mutil.getMarketData(game.stock, config.stock, config.paper, config.pagination);
-  let marketWidth = marketData.totalWidth;
-  let marketHeight = marketData.totalHeight;
+  let marketWidth = Math.ceil((marketData.totalWidth + 50) * 0.96);
+  let marketHeight = Math.ceil((marketData.totalHeight + 50) * 0.96);
   await page.goto(`http://localhost:9000/${bname}/market`, {waitUntil: 'networkidle2'});
   await page.addStyleTag({ content: '.stock {margin: 0.25in !important;}'});
   await page.setViewport({ width: marketWidth + 1, height: marketHeight + 1 });
