@@ -4,7 +4,7 @@ This is a small pet project to help layout and print
 [18xx](https://en.wikipedia.org/wiki/18XX) games.
 
 **Important Note**: A small version of the site is up and running on
-[18xx.kelsin.net](https://18xx.kelsin.net). This version only has a few games on
+[www.18xx-maker.com](https://www.18xx-maker.com). This version only has a few games on
 it. If you want to see all games included in the data files you'll need to
 download the app and run it yourself (or run the public docker image). If any
 designers/publishers would like to add their games to this public site just let
@@ -44,24 +44,24 @@ aren't listed here so I can either fix, or add it.
 
 ## Usage
 
-Please check out the [docs](https://18xx.kelsin.net/docs/running) for how to run
+Please check out the [docs](https://www.18xx-maker.com/docs/running) for how to run
 the site locally.
 
 ### Printing
 
-Please check out the [docs](https://18xx.kelsin.net/docs/pdf) for how to print
+Please check out the [docs](https://www.18xx-maker.com/docs/pdf) for how to print
 pdf's from the command line.
 
 ### Board18
 
-Please check out the [docs](https://18xx.kelsin.net/docs/b18) for information on
+Please check out the [docs](https://www.18xx-maker.com/docs/b18) for information on
 how to output a full board18 game box .zip file from the command line.
 
 ## Developing
 
 ### Running the site
 
-Please check out the [docs](https://18xx.kelsin.net/docs/running) for
+Please check out the [docs](https://www.18xx-maker.com/docs/running) for
 information on how to run the site locally to make changes.
 
 ### Adding a game
@@ -75,5 +75,5 @@ information on how to run the site locally to make changes.
 
 ## Docker
 
-Please check out the [docs](https://18xx.kelsin.net/docs/running#using-docker) for
+Please check out the [docs](https://www.18xx-maker.com/docs/running#using-docker) for
 information on how to run the site locally via Docker.

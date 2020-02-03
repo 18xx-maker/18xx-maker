@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema#",
-  "$id": "https://18xx.kelsin.net/schemas/companies.schema.json",
+  "$id": "https://www.18xx-maker.com/schemas/companies.schema.json",
 
   "type": "object",
   "properties": {
