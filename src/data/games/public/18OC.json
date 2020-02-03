@@ -21,12 +21,12 @@
   "players": [
     {
       "number": 3,
-      "certLimit": 20,
+      "certLimit": 16,
       "capital": 400
     },
     {
       "number": 4,
-      "certLimit": 16,
+      "certLimit": 13,
       "capital": 300
     }
   ],
@@ -404,41 +404,40 @@
         "value": 60,
         "par": true
       },
-      {
-        "value": 70,
-        "par": true
-      },
-      {
-        "value": 80,
-        "par": true
-      },
-      {
-        "value": 90,
-        "par": true
-      },
+      70,
+      80,
+      90,
       {
         "value": 100,
-        "par": true,
-        "companies": ["PE"]
+        "par": true
       },
       115,
       130,
       145,
       {
         "value": 160,
-        "companies": ["ATSF"]
+        "companies": ["PE"]
       },
-      180,
       {
-        "value": 200,
+        "value": 180,
         "companies": ["SP"]
       },
-      220,
+      {
+        "value": 200,
+        "companies": ["ATSF"]
+      },
+      {
+        "value": 220,
+        "par": true
+      },
       240,
       265,
       290,
       315,
-      340,
+      {
+        "value": 340,
+        "par": true
+      },
       370,
       400,
       430,
