@@ -35,10 +35,9 @@ const Token = ({
   label, // The text label to use on this token
   labelColor, // What color to use for writing the label text
   color, // What color is this token using as a background
-  colors, // What colors is this token using (array of colors). Overrides the
-  // "color" option
 
   type, // What special type of token to render (for special shapes and patterns)
+  bar, // Do we add a white bar around the text?
 
   width, // Set the width directly, overrides the "destination" option
   destination, // Is this a destination token? Sets a smaller default width
@@ -49,28 +48,34 @@ const Token = ({
   outline, // Should we draw an outline around the token circle
   outlineWidth, // What stroke width to use on the outline
 
+  target, // Colors for target shape
+  stripe, // Colors for stripe shape
+  stripes, // Colors for stripes shape
+  halves, // Colors for halves shape
+  quarters, // Colors for quarters shape
+  square, // Draw a square of a certain color on the token
   angle // option for some of the token types
 }) => {
-  // If we only passed in one color, collect it in a single item array as "colors"
-  colors = colors || [color];
-
   // Set a default width (smaller for destination tokens)
   width = width || (destination ? 15 : 25);
 
-  // If thi is a reserved token, override the color to gray
+  // If this is a reserved token, override the color to gray
   if (reserved) {
-    colors = ["gray"];
+    color = "gray";
   }
 
   // If we passed in a valid logo, set the token type to that
-  if (logos[logo]) {
-    type = "logo";
-  }
+  // if (logos[logo]) {
+  //   type = "logo";
+  // }
 
+  // Gradient to use as the background of the token
   let gradient = null;
-  let shape = null;
-  let tokenFill = null;
 
+  // Array of svg elements to add to the token
+  let shapes = [];
+
+  // Create a clipping object for this token
   let clipId = uuid.v4();
   let clip = (
     <clipPath id={clipId}>
@@ -78,11 +83,19 @@ const Token = ({
     </clipPath>
   );
 
+  // Random id for gradients to use
+  let id = uuid.v4();
+
   return (
     <Color>
       {(c,t,s,p) => {
-        let textFill = labelColor ? c(labelColor) : t(c(colors[0]));
+        // Let the text color be specified, or just use the proper color for the
+        // token / bar
         let textStroke = "none";
+        let textFill = t(c(color) || p("white"));
+
+        // Background fill to use for the main token circle object
+        let tokenFill = c(color) || p("white");
 
         if(inverse) {
           // Inverse tokens are always white with colored text
@@ -91,144 +104,118 @@ const Token = ({
           tokenFill = c("white");
         } else {
 
-          // If we passed in a type, setup special rendering
-          if(type) {
-            let id = uuid.v4();
-            switch(type) {
-            case "square":
-              shape = (
-                <g transform={`rotate(${angle || 0})`}>
-                  <rect rx="2" ry="2" x="-17.5" y="-17.5" width="35" height="35"
-                        fill={c(colors[0])}/>
-                </g>
-              );
-              textFill = labelColor ? p(labelColor) : t(c(colors[0]));
-              tokenFill = c(colors[1]);
-              textStroke = "none";
-              break;
-            case "quarters":
-              shape = [<g key="quads" transform={`rotate(${angle || 0})`}>
-                         <rect key="upperLeft" x="-50" y="-50" width="50" height="50"
-                               fill={c(colors[1])}
-                               clipPath={`url(#${clipId})`}/>,
-                         <rect key="lowerRight" x="0" y="0" width="50" height="50"
-                               fill={c(colors[1])}
-                               clipPath={`url(#${clipId})`}/>,
-                       </g>,
-                       <rect key="bar" x="-50" y="-8" width="100" height="18"
-                             fill={p("white")}
-                             stroke={p("black")}
-                             clipPath={`url(#${clipId})`}/>];
-              textFill = t(c("white"));
-              break;
-            case "halves":
-              gradient = (
-                <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
-                  <stop offset={bleedAdjust(bleed, 50)} stopColor={c(colors[1])}/>
-                  <stop offset={bleedAdjust(bleed, 50)} stopColor={c(colors[0])}/>
-                </linearGradient>
-              );
-              shape = (
-                <rect x="-50" y="-9" width="100" height="18"
-                      fill={p("white")}
-                      stroke={p("black")}
-                      clipPath={`url(#${clipId})`}/>
-              );
-              textFill = t(c("white"));
-              break;
-            case "stripes":
-              gradient = (
-                <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-                  <stop offset={bleedAdjust(bleed,12.5)} stopColor={c(colors[0])}/>
-                  <stop offset={bleedAdjust(bleed,12.5)} stopColor={c(colors[1])}/>
-                  <stop offset={bleedAdjust(bleed,25)} stopColor={c(colors[1])}/>
-                  <stop offset={bleedAdjust(bleed,25)} stopColor={c(colors[0])}/>
-                  <stop offset={bleedAdjust(bleed,37.5)} stopColor={c(colors[0])}/>
-                  <stop offset={bleedAdjust(bleed,37.5)} stopColor={c(colors[1])}/>
-                  <stop offset={bleedAdjust(bleed,62.5)} stopColor={c(colors[1])}/>
-                  <stop offset={bleedAdjust(bleed,62.5)} stopColor={c(colors[0])}/>
-                  <stop offset={bleedAdjust(bleed,75)} stopColor={c(colors[0])}/>
-                  <stop offset={bleedAdjust(bleed,75)} stopColor={c(colors[1])}/>
-                  <stop offset={bleedAdjust(bleed,87.5)} stopColor={c(colors[1])}/>
-                  <stop offset={bleedAdjust(bleed,87.5)} stopColor={c(colors[0])}/>
-                </linearGradient>
-              );
-              shape = (
-                <rect x="-50" y="-9" width="100" height="18"
-                      fill={p("white")}
-                      stroke={p("black")}
-                      clipPath={`url(#${clipId})`}/>
-              );
-              textFill = t(c("white"));
-              break;
-            case "bar":
-              shape = (
-                <rect x="-50" y="-9" width="100" height="18"
-                      fill={c(colors[1] || "white")}
-                      stroke={p("black")}
-                      clipPath={`url(#${clipId})`}/>
-              );
-              textFill = labelColor ? c(labelColor) : t(c(colors[1] || "white"));
-              break;
-            case "stripe":
-              gradient = (
-                <linearGradient id={id}>
-                  <stop offset={bleedAdjust(bleed,38)} stopColor={c(colors[0])}/>
-                  <stop offset={bleedAdjust(bleed,38)} stopColor={c(colors[1])}/>
-                  <stop offset={bleedAdjust(bleed,62)} stopColor={c(colors[1])}/>
-                  <stop offset={bleedAdjust(bleed,62)} stopColor={c(colors[0])}/>
-                </linearGradient>
-              );
-              shape = (
-                <rect x="-50" y="-9" width="100" height="18"
-                      fill={p("white")}
-                      stroke={p("black")}
-                      clipPath={`url(#${clipId})`}/>
-              );
-              textFill = t(c("white"));
-              break;
-            case "target":
-              gradient = (
-                <radialGradient id={id}>
-                  <stop offset={radialBleedAdjust(bleed,25)} stopColor={c(colors[1])}/>
-                  <stop offset={radialBleedAdjust(bleed,25)} stopColor={c(colors[0])}/>
-                  <stop offset={radialBleedAdjust(bleed,50)} stopColor={c(colors[0])}/>
-                  <stop offset={radialBleedAdjust(bleed,50)} stopColor={c(colors[1])}/>
-                  <stop offset={radialBleedAdjust(bleed,75)} stopColor={c(colors[1])}/>
-                  <stop offset={radialBleedAdjust(bleed,75)} stopColor={c(colors[0])}/>
-                </radialGradient>
-              );
-              shape = (
-                <rect x="-50" y="-9" width="100" height="18"
-                      fill={p("white")}
-                      stroke={p("black")}
-                      clipPath={`url(#${clipId})`}/>
-              );
-              textFill = t(c("white"));
-              break;
-            case "logo":
-              let svg = logos[logo];
-              let start = -1 * width;
-              let size = 2 * width;
-              let Component = svg.Component;
-              shape = (
-                <Component className={`color-main-${colors[0]}${reserved ? " color-reserved" : ""}`}
-                           x={start} y={start}
-                           height={size} width={size}/>
-              );
-              tokenFill = c("white");
-              textStroke = "none";
-              textFill = "none";
-              break;
-            default:
-              break;
-            }
+          if (square) {
+            shapes.push(
+              <g transform={`rotate(${angle || 0})`}>
+                <rect rx={width * 0.08} ry={width * 0.08}
+                      x={width * -0.7} y={width * -0.7}
+                      width={width * 1.4} height={width * 1.4}
+                      fill={c(square)} />
+              </g>
+            );
+            textFill = t(c(square));
+          }
 
-            tokenFill = gradient ? `url(#${id})` : (tokenFill || c(colors[0]));
-          } else {
+          if (quarters) {
+            shapes.push(<g key="quarters" transform={`rotate(${angle || 0})`}>
+                          <rect key="upperLeft" x="-50" y="-50" width="50" height="50"
+                                fill={c(quarters[0])}
+                                clipPath={`url(#${clipId})`}/>,
+                          <rect key="upperRight" x="0" y="-50" width="50" height="50"
+                                fill={c(quarters[1])}
+                                clipPath={`url(#${clipId})`}/>,
+                          <rect key="lowerLeft" x="-50" y="0" width="50" height="50"
+                                fill={c(quarters[2])}
+                                clipPath={`url(#${clipId})`}/>,
+                          <rect key="lowerRight" x="0" y="0" width="50" height="50"
+                                fill={c(quarters[3])}
+                                clipPath={`url(#${clipId})`}/>,
+                        </g>);
+          }
 
-            textFill = t(c(colors[0]) || p("white"));
-            tokenFill = c(colors[0]) || p("white");
+          if (halves) {
+            shapes.push(<g key="halves" transform={`rotate(${angle || 0})`}>
+                          <rect key="upper" x="-50" y="-50" width="100" height="50"
+                                fill={c(halves[0])}
+                                clipPath={`url(#${clipId})`}/>,
+                          <rect key="lower" x="-50" y="0" width="100" height="50"
+                                fill={c(halves[1])}
+                                clipPath={`url(#${clipId})`}/>,
+                        </g>);
+          }
+
+          if (stripes) {
+            gradient = (
+              <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+                <stop offset={bleedAdjust(bleed,12.5)} stopColor={c(color)}/>
+                <stop offset={bleedAdjust(bleed,12.5)} stopColor={c(stripes)}/>
+                <stop offset={bleedAdjust(bleed,25)} stopColor={c(stripes)}/>
+                <stop offset={bleedAdjust(bleed,25)} stopColor={c(color)}/>
+                <stop offset={bleedAdjust(bleed,75)} stopColor={c(color)}/>
+                <stop offset={bleedAdjust(bleed,75)} stopColor={c(stripes)}/>
+                <stop offset={bleedAdjust(bleed,87.5)} stopColor={c(stripes)}/>
+                <stop offset={bleedAdjust(bleed,87.5)} stopColor={c(color)}/>
+              </linearGradient>
+            );
+          }
+
+          if (stripe) {
+            gradient = (
+              <linearGradient id={id}>
+                <stop offset={bleedAdjust(bleed,38)} stopColor={c(color)}/>
+                <stop offset={bleedAdjust(bleed,38)} stopColor={c(stripe)}/>
+                <stop offset={bleedAdjust(bleed,62)} stopColor={c(stripe)}/>
+                <stop offset={bleedAdjust(bleed,62)} stopColor={c(color)}/>
+              </linearGradient>
+            );
+          }
+
+          if (target) {
+            gradient = (
+              <radialGradient id={id}>
+                <stop offset={radialBleedAdjust(bleed,25)} stopColor={c(target)}/>
+                <stop offset={radialBleedAdjust(bleed,25)} stopColor={c(color)}/>
+                <stop offset={radialBleedAdjust(bleed,50)} stopColor={c(color)}/>
+                <stop offset={radialBleedAdjust(bleed,50)} stopColor={c(target)}/>
+                <stop offset={radialBleedAdjust(bleed,75)} stopColor={c(target)}/>
+                <stop offset={radialBleedAdjust(bleed,75)} stopColor={c(color)}/>
+              </radialGradient>
+            );
+          }
+
+          if (logo) {
+            let svg = logos[logo];
+            let start = -1 * width;
+            let size = 2 * width;
+            let Component = svg.Component;
+            shapes.push(
+              <Component className={`color-main-${color}${reserved ? " color-reserved" : ""}`}
+                         x={start} y={start}
+                         height={size} width={size}/>
+            );
+            tokenFill = c("white");
+            textStroke = "none";
+            textFill = "none";
+          }
+
+          if (bar) {
+            shapes.push(
+              <rect key="bar" x="-50" y={width * -0.34} width="100" height={width * 0.72}
+                    fill={bar === true ? p("white") : c(bar)}
+                    stroke={p("black")}
+                    clipPath={`url(#${clipId})`}/>
+            );
+            textFill = t(bar === true ? p("white") : c(bar));
+          }
+
+          // If we specified a labelColor, use it
+          if (labelColor) {
+            textFill = c(labelColor);
+          }
+
+          // Fill the token with the gradient if we set it
+          if (gradient) {
+            tokenFill = `url(#${id})`;
           }
         }
 
@@ -270,16 +257,6 @@ const Token = ({
                          strokeWidth="0.5"
                          stroke={textStroke}
                          fill={textFill}
-                         textLength={
-                           label ?
-                             label.length > 2
-                             ? width * 2 - width * 0.4
-                             : label.length === 1
-                             ? width * 0.5
-                             : width
-                           : 0
-                         }
-                         lengthAdjust="spacingAndGlyphs"
                          x="0"
                          y={width * 0.24}
                        >
@@ -303,7 +280,7 @@ const Token = ({
                 strokeWidth={outlineWidth || 1}
               />
             </g>
-            {shape}
+            {shapes}
             {content}
           </g>
         );
