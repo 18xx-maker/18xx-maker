@@ -161,7 +161,7 @@
     {
       "name": "2",
       "quantity": 6,
-      "price": 80,
+      "price": 100,
       "color": "yellow",
       "info": [
         {
@@ -209,7 +209,7 @@
     {
       "name": "6",
       "quantity": 2,
-      "price": 630,
+      "price": 600,
       "color": "brown",
       "info": [
         {
@@ -221,9 +221,8 @@
     {
       "name": "D",
       "quantity": 6,
-      "price": 1100,
-      "color": "brown",
-      "description": "Cost $800 when trading in a 4T, 5T or 6T",
+      "price": 800,
+      "color": "gray",
       "info": [
         {
           "color": "yellow",
@@ -309,15 +308,14 @@
       "limit": "2",
       "number": "2",
       "rust": "3",
-      "tiles": "brown",
-      "notes": "D Trains may be purchased"
+      "tiles": "brown"
     },
     {
       "name": "D",
       "limit": "2",
       "number": "6",
       "rust": "4",
-      "tiles": "brown"
+      "tiles": "gray"
     }
   ],
   "pools": [
