@@ -84,6 +84,7 @@ const atoms = [{
   examples: [
     {tokens: [{label:"AA", color:"orange"}]},
     {tokens: [{label:"AA2", bar:true, color:"orange"}]},
+    {tokens: [{label:"AA3", bar:true, barHeight:30, color:"orange"}]},
     {tokens: [{label:"BB", color:"orange", "square": "blue"}]},
     {tokens: [{label:"BB2", color:"orange", "square": "blue", angle: 45}]},
     {tokens: [{label:"CC", bar: true, quarters: ["blue", "orange", "orange", "blue"]}]},
