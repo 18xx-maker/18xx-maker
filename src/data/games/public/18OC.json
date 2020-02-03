@@ -747,7 +747,6 @@
       },
       {
         "color": "plain",
-        "labels": [{"label": "K", "angle": 60, "percent": 0.667}],
         "cities": [{"name": {"name": "Buena Park"}}],
         "hexes": ["D2"]
       },
@@ -860,7 +859,6 @@
       },
       {
         "color": "plain",
-        "labels": [{"label": "K", "angle": 60, "percent": 0.667}],
         "cities": [{"name": {"name": "Lake Forest"}}],
         "hexes": ["K11"]
       },
