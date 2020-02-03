@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema#",
-  "$id": "https://18xx.kelsin.net/schemas/tiles.schema.json",
+  "$id": "https://www.18xx-maker.com/schemas/tiles.schema.json",
 
   "definitions": {
     "position": {

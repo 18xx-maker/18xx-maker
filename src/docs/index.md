@@ -11,7 +11,7 @@ This is a collection of docs that talk about how to use and extend this tool.
   support overriding options in game files, we will also support ignoring those
   options for those that want full control over how they print their game.
 * Built as a web app to allow for a [publicly hosted
-  version](https://18xx.kelsin.net) as well as easy editor support and fast
+  version](https://www.18xx-maker.com) as well as easy editor support and fast
   iteration when creating new tiles and game files.
 * Provide lots of output support:
   * [PDF Output](/docs/pdf)
@@ -20,6 +20,6 @@ This is a collection of docs that talk about how to use and extend this tool.
 
 ## Links
 
-* [Github](https://github.com/kelsin/18xx) - Source Code
-* [Hosted Version](https://18xx.kelsin.net) - Publicly hosted version
+* [Github](https://github.com/18xx-maker/18xx-maker) - Source Code
+* [Hosted Version](https://www.18xx-maker.com) - Publicly hosted version
 * [Board18](https://dev2.board18.org/) - Remote play tool for 18xx style games
