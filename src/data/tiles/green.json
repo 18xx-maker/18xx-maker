@@ -2475,7 +2475,7 @@
   },
   "612": {
     "color": "green",
-    "cities": [{"size": 2, "name": {"offset": 72, "name": "Genova"}}],
+    "cities": [{"name": {"offset": 57, "name": "Genova"}}],
     "labels": [{"label": "G", "angle": 150, "percent": 0.75}],
     "values": [{"value": 40, "angle": 210, "percent": 0.75}],
     "track": [{"side":1},{"side":2},{"side":3},{"side":6}]
