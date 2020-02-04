@@ -1776,7 +1776,6 @@
   },
   "441": {
     "color": "green",
-    "rotations": 3,
     "values": [
       {
         "angle": 210,
@@ -1803,7 +1802,6 @@
   },
   "442": {
     "color": "green",
-    "rotations": 3,
     "values": [
       {
         "angle": 210,
@@ -1830,7 +1828,7 @@
   },
   "443": {
     "color": "green",
-    "rotations": 3,
+    "rotations": 2,
     "values": [
       {
         "angle": 210,
@@ -1857,7 +1855,6 @@
   },
   "444": {
     "color": "green",
-    "rotations": 3,
     "values": [
       {
         "angle": 210,
