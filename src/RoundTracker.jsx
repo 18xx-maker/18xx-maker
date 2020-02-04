@@ -104,7 +104,7 @@ const RoundTracker = ({ rounds, size, type, rotation }) => {
       <g key={`round-tracker-${index}`}>
         {arrow}
         <g transform={`translate(${data.getX(index)} ${data.getY(index)})`}>
-          <Token label={round.name} width={size / 2} color={round.color} labelColor="black" />
+          <Token label={round.name} width={size / (round.small ? 3 : 2)} color={round.color} />
         </g>
       </g>
     );

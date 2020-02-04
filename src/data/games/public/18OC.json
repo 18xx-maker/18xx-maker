@@ -33,13 +33,6 @@
     }
   ],
   "shareTypes": {
-    "denied": [
-      {
-        "quantity": 5,
-        "percent": 10,
-        "shares": 1
-      }
-    ],
     "merged": [
       {
         "quantity": 10,
@@ -50,27 +43,7 @@
     "premerge": [
       {
         "quantity": 5,
-        "percent": 20,
-        "shares": 1
-      }
-    ],
-    "private": [
-      {
-        "quantity": 5,
         "percent": 10,
-        "shares": 1
-      }
-    ],
-    "minor": [
-      {
-        "quantity": 1,
-        "label": "President's Certificate",
-        "percent": 40,
-        "shares": 2
-      },
-      {
-        "quantity": 3,
-        "percent": 20,
         "shares": 1
       }
     ],
@@ -89,18 +62,10 @@
     ]
   },
   "tokenTypes": {
-    "default": ["Free", 40, 100],
+    "default": ["Free", 50],
     "merger": ["","","","",""]
   },
   "companies": [
-    {
-      "name": "Pacific Electric Railway Company",
-      "abbrev": "PE",
-      "color": "red",
-      "minor": true,
-      "shares": "private",
-      "tokens": ["Seal Beach"]
-    },
     {
       "name": "Southern Pacific Railroad",
       "abbrev": "SP",
@@ -119,22 +84,14 @@
       "name": "Southern Pacific & Santa Fe Railway",
       "abbrev": "SPSF",
       "color": "red",
+      "token": { "target": "yellow", "bar": true },
       "shares": "merged",
-      "tokens": ["","","","","","","","","",""]
-    },
-    {
-      "name": "Union Pacific Railroad",
-      "abbrev": "UP",
-      "color": "blue",
-      "shares": "denied",
       "tokens": "merger"
     },
     {
-      "name": "BNSF Railway",
-      "abbrev": "BNSF",
-      "color": "orange",
-      "shares": "denied",
-      "tokens": "merger"
+      "name": "Pacific Electric Railway Company",
+      "abbrev": "PE",
+      "color": "red"
     },
     {
       "name": "California Southern Railroad",
@@ -154,9 +111,7 @@
     {
       "name": "Disneyland Railroad",
       "abbrev": "DRR",
-      "color": "pink",
-      "minor": true,
-      "tokens": ["Anaheim"]
+      "color": "pink"
     }
   ],
   "trains": [
@@ -344,6 +299,10 @@
   ],
   "rounds": [
     {
+      "name": "SR",
+      "color": "white"
+    },
+    {
       "name": "OR3",
       "color": "brown"
     },
@@ -356,8 +315,9 @@
       "color": "yellow"
     },
     {
-      "name": "SR",
-      "color": "white"
+      "name": "M&A",
+      "color": "gray",
+      "small": true
     }
   ],
   "turns": [
@@ -473,9 +433,9 @@
     "29": 1,
     "30": 1,
     "31": 1,
-    "441": 4,
-    "442": 4,
-    "443": 2,
+    "441": 5,
+    "442": 5,
+    "443": 3,
     "444": 4,
 
     "39": 1,
@@ -489,9 +449,9 @@
     "47": 1,
     "57": 4,
     "58": 3,
-    "201": 3,
-    "202": 3,
-    "621": 3,
+    "201": 4,
+    "202": 4,
+    "621": 4,
 
     "70": 1,
 
@@ -546,14 +506,14 @@
       "track": [{"side": 1}, {"side": 2}, {"side": 3}, {"side": 4}]
     },
     "OC13": {
-      "quantity": 2,
+      "quantity": 3,
       "color": "brown",
       "values": [{"angle": 150, "percent": 0.8, "value": 40}],
       "cities": [{"size": 2}],
       "track": [{"side": 1}, {"side": 5}, {"side": 3}, {"side": 4}]
     },
     "OC14": {
-      "quantity": 2,
+      "quantity": 3,
       "color": "brown",
       "values": [{"angle": 150, "percent": 0.8, "value": 40}],
       "cities": [{"size": 2}],
@@ -683,6 +643,12 @@
     }
   },
   "map": {
+    "roundTracker": {
+      "rotation": 0,
+      "type": "round",
+      "x": 180,
+      "y": 860
+    },
     "hexes": [
       {
         "color": "plain",
@@ -739,9 +705,10 @@
         "offBoardRevenue": {
           "percent": 0.333,
           "name": {"name": "Long Beach"},
-          "revenues": [{"color": "green", "value": 40},
-                       {"color": "brown", "value": 60},
-                       {"color": "gray", "value": 80}]
+          "revenues": [{"color": "yellow", "value": 30},
+                       {"color": "green", "value": 40},
+                       {"color": "brown", "value": 50},
+                       {"color": "gray", "value": 60}]
         },
         "hexes": ["A7"]
       },
@@ -751,15 +718,13 @@
         "hexes": ["D2"]
       },
       {
-        "color": "grey",
-        "values": [{"angle": 240, "percent": 0.5, "value": 20}],
+        "color": "yellow",
+        "values": [{"angle": 60, "percent": 0.667, "value": 20}],
         "cities": [{
           "companies": ["PE"],
-          "angle": 60,
-          "percent": 0.28,
           "rotation": -30,
           "name": {"name": "Seal Beach", "offset": 75}}],
-        "track": [{"type": "gentle", "side": 1}],
+        "track": [{"side": 1},{"side": 3}],
         "hexes": ["C7"]
       },
       {
@@ -795,15 +760,13 @@
       },
       {
         "color": "plain",
-        "cities": [{"companies": ["SCR"], "name": {"name": "Orange"}}],
+        "cities": [{"name": {"name": "Orange"}}],
         "hexes": ["G5"]
       },
       {
-        "color": "yellow",
+        "color": "plain",
         "cities": [{"name": {"reverse": true, "name": "Huntington Beach"}}],
-        "values": [{"value": 30, "angle": 240, "percent": 0.667}],
         "labels": [{"label": "Y", "angle": 180, "percent": 0.667}],
-        "track": [{"side": 3}],
         "hexes": ["D10"]
       },
       {
@@ -854,7 +817,7 @@
       {
         "color": "plain",
         "labels": [{"label": "S", "angle": 60, "percent": 0.667}],
-        "cities": [{"name": {"name": "Santa Ana"}}],
+        "cities": [{"companies": ["SCR"], "name": {"name": "Santa Ana"}}],
         "hexes": ["G7"]
       },
       {
