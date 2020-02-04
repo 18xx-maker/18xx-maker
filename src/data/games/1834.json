@@ -58,8 +58,8 @@
         70,
         100
       ],
-      "token": {"color": "purple", "bar":true, "barHeight": 23.5},
-      "color": ["purple"]
+      "token": {"bar":true, "barHeight": 23.5},
+      "color": "purple"
     },
     {
       "name": "Ostend Railway",
@@ -69,7 +69,7 @@
         40,
         100
       ],
-      "token": {"color": "cyan", "bar":true, "barHeight": 23.5},
+      "token": {"bar":true, "barHeight": 23.5},
       "color": "cyan"
     },
     {
@@ -79,7 +79,7 @@
         "Home",
         100
       ],
-      "token": {"color": "yellow", "bar":true, "barHeight": 23.5},
+      "token": {"bar":true, "barHeight": 23.5},
       "color": "yellow"
     },
     {
@@ -90,7 +90,7 @@
         40,
         100
       ],
-      "token": {"color": "red", "bar":true, "barHeight": 23.5},
+      "token": {"bar":true, "barHeight": 23.5},
       "color": "red"
     },
     {
@@ -101,8 +101,8 @@
         40,
         100
       ],
-      "token": {"color": "green", "bar":true, "barHeight": 23.5},
-      "color": ["green"]
+      "token": {"bar":true, "barHeight": 23.5},
+      "color": "green"
     }
   ],
   "trains": [
