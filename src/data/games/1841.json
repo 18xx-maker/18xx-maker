@@ -945,9 +945,7 @@
       "name": "Strada Ferrata Maria Antonia",
       "minor": true,
       "abbrev": "SFMA",
-      "token": {
-        "bar": true
-      },
+      "token": { "stripes": "white", "bar": true },
       "tokens": [
         "Firenze",
         ""
@@ -958,9 +956,7 @@
       "name": "Strada Ferrata da Lucca a Pistoia",
       "minor": true,
       "abbrev": "SFLP",
-      "token": {
-        "bar": true
-      },
+      "token": { "stripes": "white", "bar": true },
       "tokens": [
         "Lucca",
         ""
@@ -971,9 +967,7 @@
       "name": "Società per la Strada Ferrata Leopolda",
       "abbrev": "SSFL",
       "color": "purple",
-      "token": {
-        "bar": true
-      },
+      "token": { "bar": true },
       "tokens": [
         "Pisa",
         "",
@@ -998,7 +992,7 @@
     {
       "name": "Strada Ferrata da Torina a Genova",
       "abbrev": "SFTG",
-      "token": { "target": "white", "bar": true },
+      "token": { "bar": true },
       "tokens": [
         "Torino (S)",
         "Alessandria",
@@ -1011,7 +1005,7 @@
     {
       "name": "Strada di Ferro da Torina a Novara",
       "abbrev": "SFTN",
-      "token": { "target": "white", "bar": true },
+      "token": { "bar": true },
       "tokens": [
         "Torino (N)",
         "",
@@ -1024,7 +1018,7 @@
     {
       "name": "Strada di Ferro da Torino a Cuneo",
       "abbrev": "SFTC",
-      "token": { "target": "white", "bar": true },
+      "token": { "bar": true },
       "variant": "V2",
       "tokens": [
         "Cuneo",
@@ -1036,11 +1030,21 @@
       "color": "yellow"
     },
     {
+      "name": "Strada di Ferro da Torino a Cuneo",
+      "abbrev": "SFTC",
+      "minor": true,
+      "color": "yellow",
+      "variant": "V1",
+      "token": { "bar": true, "stripes": "white" },
+      "tokens": [
+        "Cuneo",
+        ""
+      ]
+    },
+    {
       "name": "Strade Ferrate Livornesi",
       "abbrev": "SFLi",
-      "token": {
-        "bar": true
-      },
+      "token": { "bar": true },
       "tokens": [
         "Pisa",
         "Firenze",
@@ -1062,7 +1066,7 @@
         "",
         ""
       ],
-      "color": "yellow"
+      "color": "gold"
     },
     {
       "name": "Strade Ferrate della Lombardia & dell'Italia Centrale",
@@ -1079,102 +1083,12 @@
       "color": "cyan"
     },
     {
-      "name": "Società Leonardo Da Vinci",
-      "abbrev": "SLDV",
-      "minor": true,
-      "color": "black"
-    },
-    {
-      "name": "Ferrovie Trans Padane",
-      "abbrev": "FTP",
-      "minor": true,
-      "color": "gray"
-    },
-    {
-      "name": "Compagnia Trasporti La Patria",
-      "abbrev": "CTLP",
-      "minor": true,
-      "color": "yellow"
-    },
-    {
-      "name": "Compagnia Ferroviaria Conte di Cavour",
-      "abbrev": "CFCC",
-      "color": "green"
-    },
-    {
-      "name": "Compagnia Trasporti Dante Alighieri",
-      "abbrev": "CTDA",
-      "color": "cyan"
-    },
-    {
-      "name": "Impresa Centrale Strade Ferrate",
-      "abbrev": "ICSF",
-      "color": "lime"
-    },
-    {
-      "name": "Reale Società Ferroviaria Sabauda",
-      "abbrev": "RSFS",
-      "color": "purple"
-    },
-    {
-      "name": "Compagnia Garibaldi per i Trasporti Ferroviari",
-      "abbrev": "CGTF",
-      "color": "red"
-    },
-    {
-      "name": "Regia Azienda Trasporti Ferroviari",
-      "abbrev": "RATF",
-      "color": "orange"
-    },
-    {
-      "name": "Compagnia Trasporti Subalpini",
-      "abbrev": "CTS",
-      "color": "gray"
-    },
-    {
-      "name": "Impresa Ferroviaria Alta Italia",
-      "abbrev": "IFAI",
-      "color": "pink"
-    },
-    {
-      "name": "Impresa Latina Trasporti su Ferro",
-      "abbrev": "ILTF",
-      "color": "blue"
-    },
-    {
-      "name": "Azienda Trasporti Ferroviari Ausonia",
-      "abbrev": "ATFA",
-      "color": "brown"
-    },
-    {
-      "name": "Azienda Ferroviaria Italica",
-      "abbrev": "AFI",
-      "color": "lavender"
-    },
-    {
-      "name": "Strada di Ferro da Torino a Cuneo",
-      "abbrev": "SFTC",
-      "minor": true,
-      "color": "yellow",
-      "variant": "V1",
-      "token": {
-        "target": "white",
-        "bar": true
-      },
-      "tokens": [
-        "Cuneo",
-        ""
-      ]
-    },
-    {
       "name": "Strade di Ferro Venete",
       "abbrev": "SFV",
       "minor": true,
-      "color": "yellow",
-      "token": {
-        "bar": true
-      },
+      "color": "gold",
       "variant": "V1",
+      "token": { "bar": true, "stripes": "white" },
       "tokens": [
         "Venezia",
         ""
@@ -1185,14 +1099,88 @@
       "abbrev": "SFL",
       "minor": true,
       "color": "cyan",
-      "token": {
-        "bar": true
-      },
       "variant": "V1",
+      "token": { "bar": true, "stripes": "white" },
       "tokens": [
         "Milano",
         ""
       ]
+    },
+    {
+      "name": "Azienda Ferroviaria Italica",
+      "abbrev": "AFI",
+      "color": "red"
+    },
+    {
+      "name": "Azienda Trasporti Ferroviari Ausonia",
+      "abbrev": "ATFA",
+      "color": "orange"
+    },
+    {
+      "name": "Compagnia Ferroviaria Conte di Cavour",
+      "abbrev": "CFCC",
+      "color": "lime"
+    },
+    {
+      "name": "Compagnia Garibaldi per i Trasporti Ferroviari",
+      "abbrev": "CGTF",
+      "color": "green"
+    },
+    {
+      "name": "Compagnia Trasporti Dante Alighieri",
+      "abbrev": "CTDA",
+      "color": "turquoise"
+    },
+    {
+      "name": "Compagnia Trasporti Subalpini",
+      "abbrev": "CTS",
+      "color": "purple"
+    },
+    {
+      "name": "Impresa Centrale Strade Ferrate",
+      "abbrev": "ICSF",
+      "color": "pink"
+    },
+    {
+      "name": "Impresa Ferroviaria Alta Italia",
+      "abbrev": "IFAI",
+      "color": "lavender"
+    },
+    {
+      "name": "Impresa Latina Trasporti su Ferro",
+      "abbrev": "ILTF",
+      "color": "natural"
+    },
+    {
+      "name": "Regia Azienda Trasporti Ferroviari",
+      "abbrev": "RATF",
+      "color": "gray"
+    },
+    {
+      "name": "Reale Società Ferroviaria Sabauda",
+      "abbrev": "RSFS",
+      "color": "black"
+    },
+    {
+      "name": "Compagnia Trasporti La Patria",
+      "abbrev": "CTLP",
+      "minor": true,
+      "color": "purple",
+      "token": { "stripes": "white" }
+    },
+    {
+      "name": "Ferrovie Trans Padane",
+      "abbrev": "FTP",
+      "minor": true,
+      "color": "gray",
+      "token": { "stripes": "white" }
+    },
+    {
+      "name": "Società Leonardo Da Vinci",
+      "abbrev": "SLDV",
+      "minor": true,
+      "color": "black",
+      "token": { "stripes": "white" }
     }
   ],
   "map": [
