@@ -162,7 +162,7 @@
   "trains": [
     {
       "name": "2",
-      "quantity": 6,
+      "quantity": 4,
       "price": 100,
       "color": "yellow",
       "info": [
@@ -174,7 +174,7 @@
     },
     {
       "name": "3",
-      "quantity": 5,
+      "quantity": 3,
       "price": 180,
       "color": "green",
       "info": [
@@ -186,7 +186,7 @@
     },
     {
       "name": "4",
-      "quantity": 4,
+      "quantity": 2,
       "price": 300,
       "color": "green",
       "info": [
@@ -198,7 +198,7 @@
     },
     {
       "name": "5",
-      "quantity": 3,
+      "quantity": 1,
       "price": 450,
       "color": "brown",
       "info": [
@@ -210,7 +210,7 @@
     },
     {
       "name": "6",
-      "quantity": 2,
+      "quantity": 1,
       "price": 600,
       "color": "brown",
       "info": [
@@ -281,13 +281,13 @@
     {
       "name": "2",
       "limit": "4",
-      "number": "6",
+      "number": "4",
       "tiles": "yellow"
     },
     {
       "name": "3",
       "limit": "4",
-      "number": "5",
+      "number": "3",
       "tiles": "green",
       "notes": "Private companies may be purchased"
     },
@@ -295,20 +295,20 @@
       "name": "4",
       "rust": "2",
       "limit": "3",
-      "number": "4",
+      "number": "2",
       "tiles": "green"
     },
     {
       "name": "5",
       "limit": "2",
-      "number": "3",
+      "number": "1",
       "tiles": "brown",
       "notes": "Private companies are closed"
     },
     {
       "name": "6",
       "limit": "2",
-      "number": "2",
+      "number": "1",
       "rust": "3",
       "tiles": "brown"
     },
