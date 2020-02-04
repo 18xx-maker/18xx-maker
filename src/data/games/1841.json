@@ -802,7 +802,6 @@
       "limit": "2",
       "number": "6",
       "tiles": "green",
-      "notes": "Tiles may be laid across borders.",
       "price": 200
     },
     {
@@ -810,7 +809,7 @@
       "limit": "4",
       "number": "6",
       "tiles": "green",
-      "notes": "Tiles may be laid across borders. May lay two yellows maximum.",
+      "notes": "May lay two yellows maximum.",
       "price": 200
     },
     {
@@ -820,7 +819,6 @@
       "limit": "2",
       "number": "4",
       "tiles": "green",
-      "notes": "Concessions are removed. Tuscan merge and Ferdinandea secession are performed.",
       "price": 350
     },
     {
