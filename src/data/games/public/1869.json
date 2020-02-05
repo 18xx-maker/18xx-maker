@@ -310,7 +310,7 @@
       "name": "Canadian Pacific Railway",
       "abbrev": "CP",
       "logo": "CPR",
-      "color": "lime",
+      "color": "brightGreen",
       "tokens": "four",
       "shares": "30"
     },

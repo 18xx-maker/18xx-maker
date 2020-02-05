@@ -229,7 +229,7 @@
       "color": "green",
       "token": {
         "bar": true,
-        "stripe": "lime"
+        "stripe": "brightGreen"
       },
       "tokens": "four"
     },

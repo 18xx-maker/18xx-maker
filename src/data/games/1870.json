@@ -146,7 +146,7 @@
         "Chicago",
         40
       ],
-      "color": "lime"
+      "color": "brightGreen"
     },
     {
       "name": "Atchison, Topeka & Santa Fe",
@@ -1455,12 +1455,7 @@
             "name": {
               "name": "Jackson"
             },
-            "companies": [
-              {
-                "label": "IC",
-                "color": "lime"
-              }
-            ]
+            "companies": ["IC"]
           }
         ],
         "hexes": [

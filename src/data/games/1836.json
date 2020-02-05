@@ -80,7 +80,7 @@
       "name": "Chesapeake & Ohio Railroad",
       "abbrev": "C&O",
       "logo": "CO",
-      "color": "cyan"
+      "color": "lightBlue"
     },
     {
       "name": "Erie Railroad",
@@ -100,7 +100,7 @@
       "minor": true,
       "abbrev": "Z&OR",
       "token": { "bar": true },
-      "color": "lime"
+      "color": "brightGreen"
     },
     {
       "name": "Columbus, Hocking Valley & Toledo Railway ③",

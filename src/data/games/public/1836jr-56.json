@@ -102,7 +102,7 @@
     {
       "name": "Noord-Friesche Locaal",
       "abbrev": "NFL",
-      "color": "lime",
+      "color": "brightGreen",
       "tokens": "two"
     },
     {
@@ -1919,12 +1919,7 @@
           "color": "plain",
           "cities": [
             {
-              "companies": [
-                {
-                  "color": "lime",
-                  "label": "GT"
-                }
-              ],
+              "companies": ["GT"],
               "name": {
                 "reverse": true,
                 "name": "Namur"

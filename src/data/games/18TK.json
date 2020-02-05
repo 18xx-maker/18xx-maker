@@ -182,7 +182,7 @@
     {
       "name": "Tokyo Subway",
       "abbrev": "TS",
-      "color": "cyan",
+      "color": "lightBlue",
       "tokens": "1"
     },
     {
@@ -200,7 +200,7 @@
     {
       "name": "Keikyu (Keihin Kyuko)",
       "abbrev": "KK",
-      "color": "lime",
+      "color": "brightGreen",
       "tokens": "2"
     },
     {
@@ -303,7 +303,7 @@
       "name": "Daishi Electric Railway (+Directors share of KR. Closed: 60% of KR sold. [Transfer assets, replace token, 8xPar])",
       "minor": true,
       "abbrev": "7",
-      "color": "lime"
+      "color": "brightGreen"
     }
   ],
   "trains": [

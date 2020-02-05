@@ -111,6 +111,12 @@
       ]
     },
     {
+      "name": "Light Blue Railroad",
+      "subtext": "Light Blue Override",
+      "abbrev": "LBRR",
+      "color": "lightBlue"
+    },
+    {
       "name": "Blue Railroad",
       "abbrev": "BRR",
       "color": "blue",
@@ -124,15 +130,14 @@
       ]
     },
     {
+      "name": "Navy Railroad",
+      "abbrev": "NRR",
+      "color": "navy"
+    },
+    {
       "name": "Brown Railroad",
       "abbrev": "BRR",
       "color": "brown"
-    },
-    {
-      "name": "Cyan Railroad",
-      "subtext": "Cyan Override",
-      "abbrev": "CRR",
-      "color": "cyan"
     },
     {
       "name": "Gray Railroad",
@@ -155,6 +160,16 @@
       "color": "lime"
     },
     {
+      "name": "Bright Green Railroad",
+      "abbrev": "BGRR",
+      "color": "brightGreen"
+    },
+    {
+      "name": "Gold Railroad",
+      "abbrev": "GRR",
+      "color": "gold"
+    },
+    {
       "name": "Natural Railroad",
       "abbrev": "NRR",
       "color": "natural"
@@ -170,9 +185,9 @@
       "color": "pink"
     },
     {
-      "name": "Purple Railroad",
-      "abbrev": "PRR",
-      "color": "purple",
+      "name": "Violet Railroad",
+      "abbrev": "VRR",
+      "color": "violet",
       "minor": true
     },
     {
@@ -182,9 +197,9 @@
       "minor": true
     },
     {
-      "name": "Tan Railroad",
-      "abbrev": "TRR",
-      "color": "tan",
+      "name": "Light Brown Railroad",
+      "abbrev": "LBRR",
+      "color": "lightBrown",
       "minor": true
     },
     {

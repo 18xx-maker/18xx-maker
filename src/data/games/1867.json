@@ -443,7 +443,7 @@
       "name": "Ottawa and Prescott",
       "minor": true,
       "abbrev": "OP",
-      "token": { "color": "lime", "bar": "yellow" },
+      "token": { "color": "brightGreen", "bar": "yellow" },
       "color": "yellow"
     },
     {

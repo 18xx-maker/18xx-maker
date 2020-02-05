@@ -152,7 +152,7 @@
         "$40",
         "$100"
       ],
-      "color": "lime"
+      "color": "brightGreen"
     },
     {
       "name": "Southern Excursion Railway",
@@ -1856,12 +1856,7 @@
         "color": "plain",
         "cities": [
           {
-            "companies": [
-              {
-                "label": "O",
-                "color": "lime"
-              }
-            ],
+            "companies": ["O"],
             "name": {
               "name": "Barad-Dur"
             }
