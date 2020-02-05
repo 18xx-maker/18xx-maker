@@ -959,12 +959,12 @@
         "Lucca",
         ""
       ],
-      "color": "lime"
+      "color": "brightGreen"
     },
     {
       "name": "Società per la Strada Ferrata Leopolda",
       "abbrev": "SSFL",
-      "color": "purple",
+      "color": "violet",
       "token": { "bar": true },
       "tokens": [
         "Pisa",
@@ -1011,7 +1011,7 @@
         "",
         ""
       ],
-      "color": "tan"
+      "color": "lightBrown"
     },
     {
       "name": "Strada di Ferro da Torino a Cuneo",
@@ -1078,7 +1078,7 @@
         "",
         ""
       ],
-      "color": "cyan"
+      "color": "lightBlue"
     },
     {
       "name": "Strade di Ferro Venete",
@@ -1096,7 +1096,7 @@
       "name": "Strade Ferrate Lombarde",
       "abbrev": "SFL",
       "minor": true,
-      "color": "cyan",
+      "color": "lightBlue",
       "variant": "V1",
       "token": { "bar": true, "stripes": "white" },
       "tokens": [
@@ -1117,7 +1117,7 @@
     {
       "name": "Compagnia Ferroviaria Conte di Cavour",
       "abbrev": "CFCC",
-      "color": "lime"
+      "color": "brightGreen"
     },
     {
       "name": "Compagnia Garibaldi per i Trasporti Ferroviari",
@@ -1132,7 +1132,7 @@
     {
       "name": "Compagnia Trasporti Subalpini",
       "abbrev": "CTS",
-      "color": "purple"
+      "color": "violet"
     },
     {
       "name": "Impresa Centrale Strade Ferrate",
@@ -1163,7 +1163,7 @@
       "name": "Compagnia Trasporti La Patria",
       "abbrev": "CTLP",
       "minor": true,
-      "color": "purple",
+      "color": "violet",
       "token": { "stripes": "white" }
     },
     {

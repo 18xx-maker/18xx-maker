@@ -35,7 +35,7 @@
   "plainMapCompanies": false,
   "straightCityNames": false,
   "theme": "gmt",
-  "companiesTheme": "gmt",
+  "companiesTheme": "rob",
   "ipo": {
     "borderRadius": 11.811
   },

@@ -103,7 +103,7 @@
       "name": "Chesapeake & Ohio Railroad",
       "abbrev": "C&O",
       "logo": "CO",
-      "color": "cyan",
+      "color": "lightBlue",
       "tokens": "three"
     },
     {
@@ -124,7 +124,7 @@
       "name": "Boston & Maine Railroad",
       "abbrev": "B&M",
       "logo": "BM",
-      "color": "lime",
+      "color": "brightGreen",
       "tokens": "two"
     }
   ],
