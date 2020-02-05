@@ -150,30 +150,30 @@ const Token = ({
 
           if (quarters) {
             shapes.push(<g key="quarters" transform={`rotate(${angle || 0})`}>
-                    <rect key="upperLeft" x="-50" y="-50" width="50" height="50"
-                          fill={c(quarters[0])}
-                          clipPath={`url(#${clipId})`}/>,
-                    <rect key="upperRight" x="0" y="-50" width="50" height="50"
-                          fill={c(quarters[1])}
-                          clipPath={`url(#${clipId})`}/>,
-                    <rect key="lowerLeft" x="-50" y="0" width="50" height="50"
-                          fill={c(quarters[2])}
-                          clipPath={`url(#${clipId})`}/>,
-                    <rect key="lowerRight" x="0" y="0" width="50" height="50"
-                          fill={c(quarters[3])}
-                          clipPath={`url(#${clipId})`}/>,
-                  </g>);
+                          <rect key="upperLeft" x="-50" y="-50" width="50" height="50"
+                                fill={c(quarters[0])}
+                                clipPath={`url(#${clipId})`}/>,
+                          <rect key="upperRight" x="0" y="-50" width="50" height="50"
+                                fill={c(quarters[1])}
+                                clipPath={`url(#${clipId})`}/>,
+                          <rect key="lowerLeft" x="-50" y="0" width="50" height="50"
+                                fill={c(quarters[2])}
+                                clipPath={`url(#${clipId})`}/>,
+                          <rect key="lowerRight" x="0" y="0" width="50" height="50"
+                                fill={c(quarters[3])}
+                                clipPath={`url(#${clipId})`}/>,
+                        </g>);
           }
 
           if (halves) {
             shapes.push(<g key="halves" transform={`rotate(${angle || 0})`}>
-                                 <rect key="upper" x="-50" y="-50" width="100" height="50"
-                                       fill={c(halves[0])}
-                                       clipPath={`url(#${clipId})`}/>,
-                                 <rect key="lower" x="-50" y="0" width="100" height="50"
-                                       fill={c(halves[1])}
-                                       clipPath={`url(#${clipId})`}/>,
-                               </g>);
+                          <rect key="upper" x="-50" y="-50" width="100" height="50"
+                                fill={c(halves[0])}
+                                clipPath={`url(#${clipId})`}/>,
+                          <rect key="lower" x="-50" y="0" width="100" height="50"
+                                fill={c(halves[1])}
+                                clipPath={`url(#${clipId})`}/>,
+                        </g>);
           }
 
           if (stripes) {
@@ -244,44 +244,40 @@ const Token = ({
           content.push(<use key="icon" href={`#${icon}`} transform="scale(1.66666 1.66666)" />);
           if (label) {
             content.push(<text
-                    key="text"
-                    fontFamily="display"
-                    fontSize={width * 0.48}
-                    textAnchor="middle"
-                    strokeWidth="0.5"
-                    stroke={textStroke}
-                    fill={textFill}
-                    textLength={
-                      label ?
-                        label.length > 2
-                        ? width * 1.8 - width * 0.4
-                        : label.length === 1
-                        ? width * 0.4
-                        : width * 0.8
-                      : 0
-                    }
-                    lengthAdjust="spacingAndGlyphs"
-                    x="0"
-                    y={(width * 0.24) + 12}
-                                                        >
-                                                          {label}
-                                                        </text>
-                        );
-          }
-        } else {
-          content.push(<text
-                              key="text"
-                              fontFamily="display"
-                              fontSize={width * 0.64}
-                              textAnchor="middle"
-                              strokeWidth="0.5"
-                              stroke={textStroke}
-                              fill={textFill}
-                              x="0"
-                              y={width * 0.24}
+                           key="text"
+                           fontFamily="display"
+                           fontSize={width * 0.48}
+                           textAnchor="middle"
+                           strokeWidth="0.5"
+                           stroke={textStroke}
+                           fill={textFill}
+                           x="0"
+                           y={(width * 0.24) + 12}
                          >
                            {label}
                          </text>
+                        );
+          }
+        } else {
+          let fontSize = width * 0.64;
+          let y = width * 0.22;
+          if (label.length > 4) {
+            fontSize = fontSize * 0.8;
+            y = y * 0.8;
+          }
+          content.push(<text
+                         key="text"
+                         fontFamily="display"
+                         fontSize={fontSize}
+                         textAnchor="middle"
+                         strokeWidth="0.5"
+                         stroke={textStroke}
+                         fill={textFill}
+                         x="0"
+                         y={y}
+                       >
+                         {label}
+                       </text>
                       );
         }
 
