@@ -1029,31 +1029,23 @@
     "hexes": [
       {
         "color": "offboard",
-        "centerTowns": [{
-          "name": {
-            "name": "Copper Country",
-            "reverse": true
-          }
+        "names": [{
+          "percent": 0.4,
+          "name": "Copper Country"
         }],
-        "values": [
-          {
-            "value": 60,
-            "angle": 180,
-            "percent": 0.5
-          }
-        ],
+        "values": [{"value": 60}],
         "track": [
           {
+            "type": "offboard",
             "side": 4
           }
         ],
-        "removeBorders": [4],
         "hexes": [
           "A3"
         ]
       },
       {
-        "color": "offboard",
+        "color": "gray",
         "values": [
           {
             "value": 20,
@@ -1061,7 +1053,6 @@
             "percent": 0.5
           }
         ],
-        "removeBorders": [1],
         "towns": [
           {
             "rotation": 90,
@@ -1077,9 +1068,7 @@
             "side": 1
           }
         ],
-        "hexes": [
-          "A5"
-        ]
+        "hexes": ["A5"]
       },
       {
         "color": "gray",
@@ -1595,12 +1584,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "F12"
         ]
@@ -1669,9 +1652,10 @@
             "name": {
               "name": "Peterborough"
             },
-            "companies": [
-              "C&P"
-            ]
+            "companies": [{
+              "label": "C&P",
+              "bar": "yellow"
+            }]
           }
         ],
         "companies": [
@@ -1693,24 +1677,12 @@
             "side": 6
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "C15"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "C17"
         ]
@@ -1808,16 +1780,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "color": "water",
-            "side": 2
-          },
-          {
-            "color": "water",
-            "side": 3
-          }
-        ],
         "hexes": [
           "D16"
         ]
@@ -2051,12 +2013,6 @@
             }
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "B20"
         ]
@@ -2095,12 +2051,6 @@
         "mountain": {
           "cost": "$120"
         },
-        "borders": [
-          {
-            "side": 2,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "C21"
         ]
@@ -2608,12 +2558,6 @@
         "water": {
           "cost": "$80"
         },
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "E11"
         ]
@@ -2771,6 +2715,16 @@
           "K17"
         ]
       }
-    ]
+    ],
+    "borders": [{
+      "color": "water",
+      "coords": ["C21p3", "C21p4"]
+    },{
+      "color": "water",
+      "coords": ["F12p3", "F12p4"]
+    },{
+      "color": "water",
+      "coords": ["D16p3", "D16p4", "D16p5"]
+    }]
   }
 }
