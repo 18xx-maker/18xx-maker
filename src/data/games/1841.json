@@ -1127,44 +1127,44 @@
     {
       "name": "Compagnia Trasporti Dante Alighieri",
       "abbrev": "CTDA",
-      "color": "turquoise"
+      "color": "lime"
     },
     {
       "name": "Compagnia Trasporti Subalpini",
       "abbrev": "CTS",
-      "color": "violet"
+      "color": "turquoise"
     },
     {
       "name": "Impresa Centrale Strade Ferrate",
       "abbrev": "ICSF",
-      "color": "pink"
+      "color": "navy"
     },
     {
       "name": "Impresa Ferroviaria Alta Italia",
       "abbrev": "IFAI",
-      "color": "lavender"
+      "color": "violet"
     },
     {
       "name": "Impresa Latina Trasporti su Ferro",
       "abbrev": "ILTF",
-      "color": "natural"
+      "color": "pink"
     },
     {
       "name": "Regia Azienda Trasporti Ferroviari",
       "abbrev": "RATF",
-      "color": "gray"
+      "color": "lavender"
     },
     {
       "name": "Reale Società Ferroviaria Sabauda",
       "abbrev": "RSFS",
-      "color": "black"
+      "color": "natural"
     },
     {
       "name": "Compagnia Trasporti La Patria",
       "abbrev": "CTLP",
       "minor": true,
-      "color": "violet",
-      "token": { "stripes": "white" }
+      "color": "white",
+      "token": { "stripes": "black" }
     },
     {
       "name": "Ferrovie Trans Padane",
