@@ -168,10 +168,9 @@ const CompaniesThemePreview = () => {
         <Color>
           {c => map(color => (
             <div key={color} className="preview" style={{backgroundColor: c(color)}}/>
-          ), ["red", "orange", "yellow", "green", "lime",
-              "blue", "cyan", "turquoise", "purple",
-              "lavender", "pink", "brown", "tan", "natural",
-              "white", "gray", "black"])}
+          ), ["black", "blue", "brightGreen", "brown", "gold", "gray", "green",
+              "lavender", "lightBlue", "lightBrown", "lime", "navy", "natural",
+              "orange", "pink", "red", "turquoise", "violet", "white", "yellow"])}
         </Color>
       </ColorContext.Provider>
     </div>

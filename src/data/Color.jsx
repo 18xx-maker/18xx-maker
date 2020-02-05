@@ -15,9 +15,18 @@ import games from "./games";
 import themes from "./themes/maps";
 import companies from "./themes/companies";
 
+const colorAliases = {
+  "cyan": "lightBlue",
+  "grey": "gray",
+  "lightGreen": "brightGreen",
+  "navyBlue": "navy",
+  "purple": "violet",
+  "tan": "lightBrown"
+};
+
 const resolveColor = curry((theme, companiesTheme, phase, context, game, name) => {
-  if (name === "grey") {
-    name = "gray";
+  if (colorAliases[name]) {
+    name = colorAliases[name];
   }
 
   let colors = (themes[theme || "gmt"] || themes["gmt"]).colors;
