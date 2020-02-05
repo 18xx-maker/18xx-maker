@@ -258,7 +258,7 @@ const Token = ({
                          </text>
                         );
           }
-        } else {
+        } else if (label && label.length > 0) {
           let fontSize = width * 0.64;
           let y = width * 0.22;
           if (label.length > 4) {
