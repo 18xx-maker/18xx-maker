@@ -296,12 +296,19 @@ const Token = ({
                 cy="0"
                 r={width + (bleed ? 5 : 0)}
                 fill={tokenFill}
-                stroke={outlineColor}
-                strokeWidth={outlineWidth || 1}
+                stroke="none"
               />
             </g>
             {shapes}
             {content}
+            <circle
+              cx="0"
+              cy="0"
+              r={width + (bleed ? 5 : 0)}
+              fill="none"
+              stroke={outlineColor}
+              strokeWidth={outlineWidth || 1}
+            />
           </g>
         );
       }}
