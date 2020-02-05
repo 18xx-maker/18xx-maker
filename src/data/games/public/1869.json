@@ -4,7 +4,9 @@
     "subtitle": "USA West",
     "designer": "Alan R. Moon",
     "background": "gray",
-    "currency": "$#"
+    "currency": "$#",
+    "titleY": 1540,
+    "titleSize": 140
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/22166/1869-usa-west",
@@ -1143,1128 +1145,123 @@
   },
   "map": {
     "players": {
-      "x": 1230,
-      "y": 1270
+      "x": 60,
+      "y": 1830
     },
     "roundTracker": {
       "type": "row",
-      "x": 40,
-      "y": 250
+      "x": 38,
+      "y": 40
     },
     "hexes": [
       {
-        "color": "offboard",
-        "track": [
-          {
-            "type": "offboard",
-            "side": 4
-          }
-        ],
-        "removeBorders": [
-          5
-        ],
-        "hexes": [
-          "I1"
-        ]
+        "color": "gray",
+        "values": [{"value": 10}],
+        "towns": [{"rotation": 90, "percent": 0.57735}],
+        "track": [{"side":5, "type": "sharp"}],
+        "hexes": ["A6", "A10"]
       },
       {
         "color": "gray",
-        "cities": [
-          {
-            "name": {
-              "name": "Lansing"
-            }
-          }
-        ],
-        "values": [
-          {
-            "angle": 90,
-            "percent": 0.667,
-            "value": 20
-          }
-        ],
-        "track": [
-          {
-            "side": 4
-          },
-          {
-            "side": 5
-          }
-        ],
-        "hexes": [
-          "D2"
-        ]
+        "track": [{"side": 2}],
+        "towns": [{"rotation": -30}],
+        "values": [{"value": 40, "angle": 330, "percent": 0.5}],
+        "hexes": ["O10"]
       },
       {
-        "color": "offboard",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Chicago"
-          },
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "40"
-            },
-            {
-              "color": "brown",
-              "cost": "70"
-            }
-          ]
-        },
-        "offBoardTrack": [
-          {
-            "side": 3
-          },
-          {
-            "side": 4
-          },
-          {
-            "side": 5
-          }
-        ],
-        "hexes": [
-          "F2"
-        ]
-      },
-      {
-        "color": "offboard",
-        "offBoardRevenue": {
-          "angle": 150,
-          "percent": 1,
-          "name": {
-            "name": "Gulf"
-          },
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "30"
-            },
-            {
-              "color": "brown",
-              "cost": "60"
-            }
-          ]
-        },
-        "track": [
-          {
-            "type": "offboard",
-            "side": 3
-          },
-          {
-            "type": "offboard",
-            "side": 4
-          }
-        ],
-        "removeBorders": [
-          2
-        ],
-        "hexes": [
-          "J2"
-        ]
-      },
-      {
-        "color": "plain",
-        "cities": [
-          {
-            "angle": 120,
-            "percent": 0.4,
-            "name": {
-              "name": "Toledo",
-              "rotation": 30
-            }
-          }
-        ],
-        "water": {
-          "angle": 300,
-          "percent": 0.5,
-          "cost": 80
-        },
-        "hexes": [
-          "F4"
-        ]
-      },
-      {
-        "copy": "F4",
-        "cities": [
-          {
-            "name": {
-              "name": "Washington"
-            }
-          }
-        ],
-        "hexes": [
-          "J14"
-        ]
-      },
-      {
-        "copy": "F4",
-        "cities": [
-          {
-            "name": {
-              "name": "Providence"
-            }
-          }
-        ],
-        "hexes": [
-          "F22"
-        ]
+        "color": "gray",
+        "track": [{"side": 3}],
+        "towns": [{"rotation": 30}],
+        "values": [{"value": 30, "angle": 30, "percent": 0.5}],
+        "hexes": ["O14"]
       },
       {
         "color": "yellow",
-        "water": {
-          "angle": 180,
-          "percent": 0.6,
-          "cost": 80
-        },
-        "labels": [
-          {
-            "label": "OO",
-            "percent": 0.667
-          }
-        ],
-        "cities": [
-          {
-            "angle": 65,
-            "percent": 0.6,
-            "name": {
-              "name": "Detroit"
-            }
-          },
-          {
-            "angle": 295,
-            "percent": 0.6,
-            "name": {
-              "name": "Windsor"
-            }
-          }
-        ],
-        "hexes": [
-          "E5"
-        ]
-      },
-      {
-        "copy": "E5",
-        "cities": [
-          {
-            "name": {
-              "name": "Hamilton"
-            }
-          },
-          {
-            "name": {
-              "name": "Toronto"
-            }
-          }
-        ],
-        "hexes": [
-          "D10"
-        ]
-      },
-      {
-        "copy": "A17",
-        "values": [
-          {
-            "angle": 180,
-            "percent": 0.333,
-            "value": 30
-          }
-        ],
-        "cities": [
-          {
-            "percent": 0.5,
-            "name": {
-              "name": "Cleveland"
-            },
-            "companies": [
-              "C&O"
-            ]
-          }
-        ],
-        "hexes": [
-          "F6"
-        ]
-      },
-      {
-        "color": "plain",
-        "centerTowns": [
-          {
-            "name": {
-              "name": "London"
-            }
-          }
-        ],
-        "hexes": [
-          "E7"
-        ]
-      },
-      {
-        "color": "offboard",
-        "track": [
-          {
-            "type": "offboard",
-            "side": 5
-          }
-        ],
-        "removeBorders": [
-          4
-        ],
-        "hexes": [
-          "A9"
-        ]
-      },
-      {
-        "color": "gray",
-        "track": [
-          {
-            "type": "sharp",
-            "side": 2
-          }
-        ],
-        "hexes": [
-          "E9"
-        ]
-      },
-      {
-        "color": "offboard",
-        "offBoardRevenue": {
-          "angle": 90,
-          "percent": 1,
-          "name": {
-            "name": "Canadian West"
-          },
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "30"
-            },
-            {
-              "color": "brown",
-              "cost": "50"
-            }
-          ]
-        },
-        "track": [
-          {
-            "type": "offboard",
-            "side": 5
-          },
-          {
-            "type": "offboard",
-            "side": 6
-          }
-        ],
-        "removeBorders": [
-          1
-        ],
-        "hexes": [
-          "A11"
-        ]
-      },
-      {
-        "color": "offboard",
-        "offBoardRevenue": {
-          "reverse": true,
-          "name": {
-            "name": "Deep South"
-          },
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "30"
-            },
-            {
-              "color": "brown",
-              "cost": "40"
-            }
-          ]
-        },
-        "offBoardTrack": [
-          {
-            "side": 2
-          },
-          {
-            "side": 3
-          }
-        ],
-        "hexes": [
-          "K13"
-        ]
+        "track": [{"side": 1, "type": "straight"}],
+        "hexes": ["B25", "F21", "H17", "H19"]
       },
       {
         "color": "yellow",
-        "labels": [
-          {
-            "label": "OO",
-            "percent": 0.667
-          }
-        ],
-        "cities": [
-          {
-            "angle": 75,
-            "percent": 0.55,
-            "name": {
-              "name": "Dunkirk"
-            }
-          },
-          {
-            "angle": 285,
-            "percent": 0.55,
-            "name": {
-              "name": "Buffalo"
-            },
-            "companies": [
-              "ERIE"
-            ]
-          }
-        ],
-        "hexes": [
-          "E11"
-        ]
-      },
-      {
-        "color": "gray",
-        "values": [
-          {
-            "value": 10,
-            "percent": 0.8,
-            "angle": 180
-          }
-        ],
-        "cities": [
-          {
-            "name": {
-              "name": "Altoona"
-            },
-            "companies": [
-              "PRR"
-            ]
-          }
-        ],
-        "track": [
-          {
-            "type": "straight",
-            "side": 1
-          },
-          {
-            "type": "bent",
-            "side": 1
-          }
-        ],
-        "hexes": [
-          "H12"
-        ]
+        "track": [{"side": 5, "type": "gentle"}],
+        "hexes": ["B27", "E22"]
       },
       {
         "color": "plain",
-        "hexes": [
-          "I13"
-        ]
-      },
-      {
-        "color": "gray",
-        "cities": [
-          {
-            "name": {
-              "name": "Rochester"
-            }
-          }
-        ],
-        "values": [
-          {
-            "value": 20,
-            "y": -60
-          }
-        ],
-        "track": [
-          {
-            "side": 1
-          },
-          {
-            "side": 4
-          },
-          {
-            "side": 6
-          }
-        ],
-        "hexes": [
-          "D14"
-        ]
-      },
-      {
-        "color": "gray",
-        "values": [
-          {
-            "value": 10,
-            "angle": -30,
-            "percent": 0.5
-          }
-        ],
-        "towns": [
-          {
-            "rotation": 60,
-            "angle": 150,
-            "percent": 0.26,
-            "name": {
-              "name": "Kingston",
-              "reverse": true
-            }
-          }
-        ],
-        "track": [
-          {
-            "type": "gentle",
-            "side": 1
-          }
-        ],
-        "hexes": [
-          "C15"
-        ]
+        "terrain": [{"type": "water", "cost": 60}],
+        "hexes": ["I22", "I24", "J25"]
       },
       {
         "color": "plain",
-        "mountain": {
-          "cost": 120,
-          "percent": 0.333
-        },
-        "companies": [
-          {
-            "label": "SVR",
-            "angle": 180,
-            "percent": 0.333
-          }
-        ],
-        "hexes": [
-          "G15"
-        ]
-      },
-      {
-        "color": "yellow",
-        "labels": [
-          {
-            "label": "B",
-            "angle": 150,
-            "percent": 0.7
-          }
-        ],
-        "companies": [
-          {
-            "label": "B&O",
-            "angle": 90,
-            "percent": 1.35,
-            "bottom": true,
-            "right": 40,
-            "color": "blue"
-          }
-        ],
-        "values": [
-          {
-            "value": 30,
-            "angle": 210,
-            "percent": 0.667
-          }
-        ],
-        "cities": [
-          {
-            "name": {
-              "name": "Baltimore",
-              "reverse": true,
-              "rotation": -30
-            },
-            "companies": [
-              "B&O"
-            ]
-          }
-        ],
-        "track": [
-          {
-            "side": 4
-          },
-          {
-            "side": 6
-          }
-        ],
-        "hexes": [
-          "I15"
-        ]
-      },
-      {
-        "color": "gray",
-        "cities": [
-          {
-            "name": {
-              "name": "Richmond",
-              "reverse": true
-            }
-          }
-        ],
-        "values": [
-          {
-            "value": 20,
-            "angle": 270,
-            "percent": 0.66
-          }
-        ],
-        "track": [
-          {
-            "side": 2
-          }
-        ],
-        "hexes": [
-          "K15"
-        ]
+        "terrain": [{"type": "water", "cost": 70}],
+        "hexes": ["F25", "H25"]
       },
       {
         "color": "plain",
-        "cities": [
-          {
-            "name": {
-              "name": "Ottowa"
-            }
-          }
-        ],
-        "hexes": [
-          "B16"
-        ]
+        "terrain": [{"type": "water", "cost": 80}],
+        "hexes": ["L27", "M26", "N13"]
       },
       {
         "color": "plain",
-        "mountain": {
-          "cost": 120,
-          "percent": 0.5,
-          "angle": 180
-        },
-        "cities": [
-          {
-            "angle": -45,
-            "percent": 0.5,
-            "name": {
-              "name": "Scranton",
-              "rotation": 45
-            }
-          }
-        ],
-        "companies": [
-          {
-            "label": "D&H",
-            "angle": 60,
-            "percent": 0.57
-          }
-        ],
-        "hexes": [
-          "F16"
-        ]
-      },
-      {
-        "color": "gray",
-        "track": [
-          {
-            "type": "sharp",
-            "side": 5
-          }
-        ],
-        "hexes": [
-          "A17"
-        ]
+        "terrain": [{"type": "water", "cost": 90}],
+        "hexes": ["I26", "L7"]
       },
       {
         "color": "plain",
-        "companies": [
-          {
-            "label": "M&H"
-          }
-        ],
-        "hexes": [
-          "D18"
-        ]
-      },
-      {
-        "color": "yellow",
-        "companies": [
-          {
-            "label": "C&A",
-            "angle": 180,
-            "percent": 0.65
-          }
-        ],
-        "labels": [
-          {
-            "label": "OO",
-            "y": 57
-          }
-        ],
-        "cities": [
-          {
-            "x": -40,
-            "y": 10,
-            "name": {
-              "name": "Philadelphia"
-            }
-          },
-          {
-            "x": 40,
-            "y": 10,
-            "name": {
-              "name": "Trenton"
-            }
-          }
-        ],
-        "hexes": [
-          "H18"
-        ]
-      },
-      {
-        "copy": "F6",
-        "values": [
-          {
-            "value": 40
-          }
-        ],
-        "cities": [
-          {
-            "name": {
-              "name": "Montreal"
-            },
-            "companies": [
-              "CPR"
-            ]
-          }
-        ],
-        "hexes": [
-          "A19"
-        ]
+        "terrain": [{"type": "mountain", "cost": 110}],
+        "hexes": ["D11"]
       },
       {
         "color": "plain",
-        "cities": [
-          {
-            "name": {
-              "name": "Albany"
-            },
-            "companies": [
-              "NYC"
-            ]
-          }
-        ],
-        "hexes": [
-          "E19"
-        ]
-      },
-      {
-        "color": "yellow",
-        "values": [
-          {
-            "angle": 180,
-            "percent": 0.84,
-            "value": 40
-          },
-          {
-            "percent": 0.84,
-            "value": 40
-          }
-        ],
-        "cities": [
-          {
-            "angle": 230,
-            "percent": 0.6,
-            "name": {
-              "name": "New York",
-              "reverse": true
-            },
-            "companies": [
-              "NYNH"
-            ]
-          },
-          {
-            "angle": 50,
-            "percent": 0.6,
-            "name": {
-              "name": "Newark"
-            }
-          }
-        ],
-        "labels": [
-          {
-            "label": "NY",
-            "angle": 140,
-            "percent": 0.5
-          }
-        ],
-        "water": {
-          "angle": 310,
-          "percent": 0.7,
-          "cost": 80
-        },
-        "track": [
-          {
-            "type": "stop",
-            "side": 3
-          },
-          {
-            "type": "stop",
-            "side": 6
-          }
-        ],
-        "hexes": [
-          "G19"
-        ]
-      },
-      {
-        "color": "gray",
-        "towns": [
-          {
-            "angle": 120,
-            "percent": 0.57735,
-            "rotation": 30,
-            "name": {
-              "name": "Atlantic City",
-              "reverse": true
-            }
-          }
-        ],
-        "track": [
-          {
-            "type": "sharp",
-            "side": 1
-          }
-        ],
-        "values": [
-          {
-            "value": 10,
-            "angle": 300,
-            "percent": 0.2
-          }
-        ],
-        "hexes": [
-          "I19"
-        ]
-      },
-      {
-        "copy": "I19",
-        "towns": [
-          {
-            "name": {
-              "name": "Mansfield"
-            }
-          }
-        ],
-        "hexes": [
-          "F24"
-        ]
+        "terrain": [{"type": "mountain", "cost": 120}],
+        "hexes": ["H5", "H7", "I6", "I8", "J7", "K12"]
       },
       {
         "color": "plain",
-        "companies": [
-          {
-            "label": "C&StL",
-            "percent": 0.5
-          }
-        ],
-        "centerTowns": [
-          {
-            "name": {
-              "name": "Burlington"
-            }
-          }
-        ],
-        "hexes": [
-          "B20"
-        ]
-      },
-      {
-        "color": "yellow",
-        "labels": [
-          {
-            "angle": 150,
-            "percent": 0.7,
-            "label": "B"
-          }
-        ],
-        "cities": [
-          {
-            "name": {
-              "name": "Boston",
-              "reverse": true,
-              "rotation": -90
-            },
-            "companies": [
-              "B&M"
-            ]
-          }
-        ],
-        "values": [
-          {
-            "value": 30,
-            "angle": 90,
-            "percent": 0.67
-          }
-        ],
-        "track": [
-          {
-            "side": 3
-          },
-          {
-            "side": 5
-          }
-        ],
-        "hexes": [
-          "E23"
-        ]
-      },
-      {
-        "color": "offboard",
-        "offBoardRevenue": {
-          "name": {
-            "name": "Maritime Provinces"
-          },
-          "revenues": [
-            {
-              "cost": "20",
-              "color": "yellow"
-            },
-            {
-              "cost": "30",
-              "color": "brown"
-            }
-          ]
-        },
-        "offBoardTrack": [
-          {
-            "side": 1
-          },
-          {
-            "side": 6
-          }
-        ],
-        "hexes": [
-          "B24"
-        ]
-      },
-      {
-        "color": "gray",
-        "track": [
-          {
-            "type": "sharp",
-            "side": 6
-          }
-        ],
-        "hexes": [
-          "D24"
-        ]
+        "terrain": [{"type": "mountain", "cost": 130}],
+        "hexes": ["L5", "M6", "M12"]
       },
       {
         "color": "plain",
-        "centerTowns": [
-          {
-            "name": {
-              "name": "Flint"
-            }
-          }
-        ],
-        "hexes": [
-          "D4"
-        ]
+        "terrain": [{"type": "mountain", "cost": 140}],
+        "hexes": ["D1", "F1", "F13", "H1", "L9", "M14"]
       },
       {
         "color": "plain",
-        "centerTowns": [
-          {
-            "name": {
-              "name": "Erie"
-            }
-          }
-        ],
-        "hexes": [
-          "F10"
-        ]
+        "terrain": [{"type": "mountain", "cost": 150}],
+        "hexes": ["F3", "F5", "H3", "J5", "L11"]
       },
       {
         "color": "plain",
-        "centerTowns": [
-          {
-            "x": -30,
-            "name": {
-              "name": "Akron",
-              "reverse": true
-            }
-          },
-          {
-            "x": 30,
-            "name": {
-              "name": "Canton"
-            }
-          }
-        ],
-        "hexes": [
-          "G7"
-        ]
-      },
-      {
-        "copy": "G7",
-        "centerTowns": [
-          {
-            "name": {
-              "name": "Reading"
-            }
-          },
-          {
-            "name": {
-              "name": "Allentown"
-            }
-          }
-        ],
-        "hexes": [
-          "G17"
-        ]
-      },
-      {
-        "copy": "G7",
-        "centerTowns": [
-          {
-            "name": {
-              "name": "New Haven"
-            }
-          },
-          {
-            "name": {
-              "name": "Hartford"
-            }
-          }
-        ],
-        "hexes": [
-          "F20"
-        ]
+        "terrain": [{"type": "mountain", "cost": 160}],
+        "hexes": ["B3", "B5", "B7", "C6", "C8", "C10", "D5", "D9",
+                  "E8", "F9", "F11", "H11", "H13", "I14", "J9", "J13"]
       },
       {
         "color": "plain",
-        "cities": [
-          {
-            "name": {
-              "name": "Columbus"
-            }
-          }
-        ],
-        "hexes": [
-          "H4"
-        ]
-      },
-      {
-        "copy": "H4",
-        "cities": [
-          {
-            "name": {
-              "name": "Barrie"
-            }
-          }
-        ],
-        "hexes": [
-          "B10"
-        ]
-      },
-      {
-        "copy": "H4",
-        "cities": [
-          {
-            "name": {
-              "name": "Pittsburgh"
-            }
-          }
-        ],
-        "hexes": [
-          "H10"
-        ]
-      },
-      {
-        "copy": "H4",
-        "cities": [
-          {
-            "name": {
-              "name": "Lancaster"
-            }
-          }
-        ],
-        "hexes": [
-          "H16"
-        ]
+        "terrain": [{"type": "mountain", "cost": 170}],
+        "hexes": ["I12"]
       },
       {
         "color": "plain",
-        "water": {
-          "cost": 80
-        },
-        "hexes": [
-          "D6",
-          "I17",
-          "B18",
-          "C19"
-        ]
+        "terrain": [{"type": "mountain", "cost": 180}],
+        "hexes": ["J11", "K10"]
       },
       {
         "color": "plain",
-        "mountain": {
-          "cost": 120
-        },
-        "hexes": [
-          "C17",
-          "C21",
-          "D22",
-          "E17",
-          "E21",
-          "G13",
-          "I11",
-          "J10",
-          "J12"
-        ]
+        "hexes": ["B11", "B15", "B17", "B19", "B21", "B23",
+                  "C14", "C18", "C22", "C24",
+                  "E4", "E6", "E14", "E16", "E20", "E26", "E28",
+                  "F15", "F19", "H15", "H27", "I16", "I18", "I20",
+                  "J3", "J17", "J19", "K4", "K16", "K18", "K20",
+                  "K22", "K24", "K26", "L15", "L19", "L21", "L23",
+                  "M16", "M18", "M20", "M24", "N9", "N11", "N17", "N19",
+                  "N21", "N23", "N25", "O16", "O18", "O22", "O26"]
       },
       {
-        "color": "plain",
-        "hexes": [
-          "B12",
-          "B14",
-          "B22",
-          "C7",
-          "C9",
-          "C11",
-          "C13",
-          "C23",
-          "D8",
-          "D12",
-          "D16",
-          "D20",
-          "E3",
-          "E13",
-          "E15",
-          "F8",
-          "F12",
-          "F14",
-          "F18",
-          "G3",
-          "G5",
-          "G9",
-          "G11",
-          "H2",
-          "H6",
-          "H8",
-          "H14",
-          "I3",
-          "I5",
-          "I7",
-          "I9",
-          "J4",
-          "J6",
-          "J8"
-        ]
+        "color": "water",
+        "hexes": ["K8"]
       }
     ],
-    "borders": [{
-      "color": "water",
-      "coords": ["F8p3", "F8p4"]
-    },{
-      "color": "water",
-      "coords": ["D12p3", "D12p4", "D12p5"]
-    },{
-      "color": "water",
-      "coords": ["C17p3", "C17p4"]
-    }]
+    "borders": []
   }
 }
