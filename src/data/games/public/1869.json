@@ -5,8 +5,8 @@
     "designer": "Alan R. Moon",
     "background": "gray",
     "currency": "$#",
-    "titleY": 1540,
-    "titleSize": 140
+    "titleY": 1620,
+    "titleSize": 100
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/22166/1869-usa-west",
@@ -323,8 +323,8 @@
     },
     {
       "name": "Denver & Rio Grande Railroad",
-      "abbrev": "SRG",
-      "color": "tan",
+      "abbrev": "DRG",
+      "color": "lightBrown",
       "tokens": "three",
       "shares": "3020"
     },
@@ -344,7 +344,7 @@
     {
       "name": "Kansas Pacific Railways",
       "abbrev": "KP",
-      "color": "cyan",
+      "color": "lightBlue",
       "tokens": "two",
       "shares": "202020"
     },
@@ -1145,8 +1145,8 @@
   },
   "map": {
     "players": {
-      "x": 60,
-      "y": 1830
+      "x": 0,
+      "y": 1880
     },
     "roundTracker": {
       "type": "row",
@@ -1187,13 +1187,340 @@
       },
       {
         "color": "plain",
+        "terrain": [{"type": "water", "cost": 100,
+                     "percent": 0.5}],
+        "centerTowns": [{"name": {"name": "Victoria"},
+                         "angle": 180, "percent": 0.25}],
+        "hexes": ["C2"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 160,
+                     "angle": 180, "percent": 0.5}],
+        "cities": [{"name": {"name": "Calgary"}, "percent": 0.4}],
+        "hexes": ["B9"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 120,
+                     "angle": 180, "percent": 0.5}],
+        "cities": [{"name": {"name": "Vancouver"}, "percent": 0.4}],
+        "hexes": ["C4"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "water", "cost": 110,
+                     "percent": 0.5}],
+        "cities": [{"name": {"reverse": true, "name": "Seattle"},
+                    "angle": 180, "percent": 0.4}],
+        "hexes": ["D3"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 140,
+                     "angle": 180, "percent": 0.5}],
+        "cities": [{"companies": ["ORN"],
+                    "name": {"name": "Portland"}, "percent": 0.4}],
+        "hexes": ["E2"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 160,
+                     "angle": 180, "percent": 0.4}],
+        "centerTowns": [{"name": {"name": "Boise"},
+                         "percent": 0.4}],
+        "hexes": ["F7"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Spokane"}}],
+        "hexes": ["D7"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Medicine Hat"}}],
+        "hexes": ["C12"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Saskatoon"}}],
+        "hexes": ["B13"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 160,
+                     "angle": 180, "percent": 0.4}],
+        "centerTowns": [{"name": {"name": "Butte"}, "percent": 0.4}],
+        "hexes": ["E10"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Billings"}}],
+        "hexes": ["E12"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Regina"}}],
+        "hexes": ["C16"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Rapid City"}}],
+        "hexes": ["F17"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Bismarck"}}],
+        "hexes": ["E18"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Thunder Bay"}}],
+        "hexes": ["C26"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Duluth"}}],
+        "hexes": ["E24"]
+      },
+      {
+        "color": "green",
+        "values": [{"value":40, "angle": 180, "percent": 0.75}],
+        "cities": [{"size":2, "companies": [null, "CP"],
+                    "name":{"name": "Montreal", "reverse": true}}],
+        "track": [{"side":1},{"side":2}],
+        "hexes": ["C28"]
+      },
+      {
+        "color": "green",
+        "values": [{"value":30, "angle": 180, "percent": 0.75}],
+        "cities": [{"size":2, "companies": ["NP", "GN"],
+                    "name":{"name": "Minneapolis", "reverse": true}}],
+        "terrain": [{"type": "water", "cost": 70, "percent": 0.775}],
+        "track": [{"side":1},{"side":2}],
+        "hexes": ["F23"]
+      },
+      {
+        "color": "green",
+        "values": [{"value":50, "angle": 180, "percent": 0.75}],
+        "cities": [{"size":2, "companies": ["IC", "ATSF"],
+                    "name":{"name": "Chicago", "offset": 55, "reverse": true}}],
+        "track": [{"side":1},{"side":2},{"side":6}],
+        "hexes": ["G28"]
+      },
+      {
+        "color": "yellow",
+        "values": [{"value":20, "angle": 270, "percent": 0.667}],
+        "cities": [{"name":{"name":"Omaha"},"companies":["UP"]}],
+        "track": [{"side":1}],
+        "hexes": ["H21"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Ogden"}}],
+        "hexes": ["H9"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Des Moines"}}],
+        "hexes": ["H23"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"companies": ["CN"],
+                    "name": {"name": "Winnepeg"}}],
+        "hexes": ["C20"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Milwaukee"}}],
+        "hexes": ["F27"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 120,
+                     "angle": 180, "percent": 0.5}],
+        "cities": [{"name": {"name": "Casper"},
+                         "percent": 0.4}],
+        "hexes": ["G14"]
+      },
+      {
+        "color": "yellow",
+        "values": [{"value":20, "angle": 90, "percent": 0.667}],
+        "cities": [{"name":{"name":"Sacramento"},"companies":["CPR"]}],
+        "track": [{"side":4}],
+        "hexes": ["I2"]
+      },
+      {
+        "color": "yellow",
+        "track": [{"side":1, "type":"straight"}],
+        "terrain": [{"type": "mountain", "cost": 60, "percent": 0.55}],
+        "hexes": ["I4"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 110,
+                     "angle": 180, "percent": 0.5}],
+        "cities": [{"name": {"name": "Salt Lake City"},
+                         "percent": 0.4}],
+        "hexes": ["I10"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"companies": ["WP"],
+                    "name":{"name": "San Francisco"}}],
+        "hexes": ["J1"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Las Vegas"}}],
+        "hexes": ["K6"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "water", "cost": 100,
+                     "percent": 0.5}],
+        "cities": [{"name": {"reverse":true, "name": "Los Angeles"},
+                    "angle": 180, "percent": 0.4}],
+        "hexes": ["L3"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "water", "cost": 100,
+                     "percent": 0.5}],
+        "cities": [{"name": {"reverse":true, "name": "San Diego"},
+                    "angle": 180, "percent": 0.4}],
+        "hexes": ["M4"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "water", "cost": 110,
+                     "percent": 0.5}],
+        "cities": [{"name": {"reverse":true, "name": "Phoenix"},
+                    "angle": 180, "percent": 0.4}],
+        "hexes": ["M8"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Denver"}, "companies": ["DRG"]}],
+        "hexes": ["J15"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "El Paso"}}],
+        "hexes": ["N15"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "San Antonio"}}],
+        "hexes": ["O20"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Houston"}}],
+        "hexes": ["O24"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Dallas"}, "companies": ["TP"]}],
+        "hexes": ["M22"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Wichita"}}],
+        "hexes": ["J21"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Little Rock"}}],
+        "hexes": ["L25"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Kansas City"}, "companies": ["KP"]}],
+        "hexes": ["J23"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "water", "cost": 80,
+                     "percent": 0.5}],
+        "centerTowns": [{"name": {"name": "Baton Rouge"},
+                         "angle": 180, "percent": 0.25}],
+        "hexes": ["N27"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Jackson"}}],
+        "hexes": ["M28"]
+      },
+      {
+        "color": "green",
+        "values": [{"value":40, "angle": 180, "percent": 0.75}],
+        "cities": [{"size":2, "companies": [null, "SP"],
+                    "name":{"name": "New Orleans", "reverse": true}}],
+        "terrain": [{"type": "water", "cost": 80, "percent": 0.775}],
+        "track": [{"side":1},{"side":2}],
+        "hexes": ["O28"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 170,
+                     "angle": 180, "percent": 0.5}],
+        "centerTowns": [{"name": {"name": "Santa Fe"},
+                         "percent": 0.4}],
+        "hexes": ["K14"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 140,
+                     "angle": 180, "percent": 0.5}],
+        "cities": [{"name": {"name": "Albuquerque"},
+                         "percent": 0.4}],
+        "hexes": ["L13"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Amarillo"}}],
+        "hexes": ["L17"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Springfield"}}],
+        "hexes": ["I28"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 100,
+                     "angle": 180, "percent": 0.4}],
+        "centerTowns": [{"name": {"name": "Tucson"},
+                         "percent": 0.4}],
+        "hexes": ["M10"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "water", "cost": 80,
+                     "percent": 0.5}],
+        "cities": [{"name": {"reverse":true, "name": "St. Louis"},
+                    "angle": 180, "percent": 0.4}],
+        "hexes": ["J27"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "water", "cost": 80,
+                     "percent": 0.5}],
+        "cities": [{"name": {"reverse":true, "name": "Memphis"},
+                    "angle": 180, "percent": 0.4}],
+        "hexes": ["K28"]
+      },
+      {
+        "color": "plain",
         "terrain": [{"type": "water", "cost": 60}],
         "hexes": ["I22", "I24", "J25"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "water", "cost": 70}],
-        "hexes": ["F25", "H25"]
+        "hexes": ["F25", "H25", "G26"]
       },
       {
         "color": "plain",
@@ -1213,7 +1540,7 @@
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 120}],
-        "hexes": ["H5", "H7", "I6", "I8", "J7", "K12"]
+        "hexes": ["H5", "H7", "G8", "G10", "I6", "I8", "J7", "K12"]
       },
       {
         "color": "plain",
@@ -1223,7 +1550,7 @@
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 140}],
-        "hexes": ["D1", "F1", "F13", "H1", "L9", "M14"]
+        "hexes": ["D1", "F1", "G2", "F13", "H1", "K2", "L9", "M14"]
       },
       {
         "color": "plain",
@@ -1234,7 +1561,7 @@
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 160}],
         "hexes": ["B3", "B5", "B7", "C6", "C8", "C10", "D5", "D9",
-                  "E8", "F9", "F11", "H11", "H13", "I14", "J9", "J13"]
+                  "E8", "F9", "F11", "G12", "H11", "H13", "I14", "J9", "J13"]
       },
       {
         "color": "plain",
@@ -1249,9 +1576,11 @@
       {
         "color": "plain",
         "hexes": ["B11", "B15", "B17", "B19", "B21", "B23",
-                  "C14", "C18", "C22", "C24",
+                  "C14", "C18", "C22", "C24", "D13", "D15", "D17", "D19",
+                  "D21", "D23", "D25",
                   "E4", "E6", "E14", "E16", "E20", "E26", "E28",
-                  "F15", "F19", "H15", "H27", "I16", "I18", "I20",
+                  "F15", "F19", "G4", "G6", "G16", "G18", "G20", "G22", "G24",
+                  "H15", "H27", "I16", "I18", "I20",
                   "J3", "J17", "J19", "K4", "K16", "K18", "K20",
                   "K22", "K24", "K26", "L15", "L19", "L21", "L23",
                   "M16", "M18", "M20", "M24", "N9", "N11", "N17", "N19",
