@@ -728,12 +728,7 @@
             "name": {
               "name": "Ostend"
             },
-            "companies": [
-              {
-                "label": "OST",
-                "color": "blue"
-              }
-            ]
+            "companies": ["OST"]
           }
         ],
         "hexes": [
@@ -747,12 +742,7 @@
             "name": {
               "name": "Mons"
             },
-            "companies": [
-              {
-                "label": "MON",
-                "color": "green"
-              }
-            ]
+            "companies": ["MON"]
           }
         ],
         "hexes": [
@@ -766,12 +756,7 @@
             "name": {
               "name": "Liege"
             },
-            "companies": [
-              {
-                "label": "LIE",
-                "color": "red"
-              }
-            ]
+            "companies": ["LIE"]
           }
         ],
         "hexes": [
@@ -913,12 +898,7 @@
               "name": "Luxembourg",
               "reverse": true
             },
-            "companies": [
-              {
-                "label": "LUX",
-                "color": "purple"
-              }
-            ]
+            "companies": ["LUX"]
           }
         ],
         "hexes": [
@@ -966,12 +946,7 @@
               "name": "Antwerp",
               "rotation": 40
             },
-            "companies": [
-              {
-                "label": "ANT",
-                "color": "yellow"
-              }
-            ]
+            "companies": ["ANT"]
           }
         ],
         "values": [
