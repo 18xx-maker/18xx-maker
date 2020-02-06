@@ -68,14 +68,16 @@
     {
       "name": "Southern Pacific Railroad",
       "abbrev": "SP",
-      "color": "blue",
+      "color": "yellow",
+      "token": { "bar": true },
       "shares": "premerge",
       "tokens": "merger"
     },
     {
       "name": "Atchison, Topeka and Santa Fe Railway",
       "abbrev": "ATSF",
-      "color": "orange",
+      "color": "blue",
+      "token": { "bar": true },
       "shares": "premerge",
       "tokens": "merger"
     },
@@ -90,27 +92,32 @@
     {
       "name": "Pacific Electric Railway Company",
       "abbrev": "PE",
+      "token": { "bar": true },
       "color": "red"
     },
     {
       "name": "California Southern Railroad",
       "abbrev": "CSR",
-      "color": "black"
+      "token": { "bar": true },
+      "color": "purple"
     },
     {
       "name": "Southern California Railway",
       "abbrev": "SCR",
-      "color": "green"
+      "token": { "bar": true },
+      "color": "orange"
     },
     {
       "name": "Santa Ana & Newport Railway",
       "abbrev": "SNR",
-      "color": "purple"
+      "token": { "bar": true },
+      "color": "brightGreen"
     },
     {
       "name": "Disneyland Railroad",
       "abbrev": "DRR",
-      "color": "pink"
+      "token": { "bar": true },
+      "color": "lightBlue"
     }
   ],
   "trains": [
@@ -299,19 +306,20 @@
   "rounds": [
     {
       "name": "SR",
-      "color": "white"
-    },
-    {
-      "name": "OR3",
-      "color": "brown"
-    },
-    {
-      "name": "OR2",
-      "color": "green"
+      "color": "orange"
     },
     {
       "name": "OR1",
-      "color": "yellow"
+      "color": "water"
+    },
+    {
+      "name": "M&A",
+      "color": "gray",
+      "small": true
+    },
+    {
+      "name": "OR2",
+      "color": "water"
     },
     {
       "name": "M&A",
