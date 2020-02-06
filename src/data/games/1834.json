@@ -59,7 +59,7 @@
         100
       ],
       "token": {"bar":true, "barHeight": 23.5},
-      "color": "purple"
+      "color": "violet"
     },
     {
       "name": "Ostend Railway",
@@ -70,7 +70,7 @@
         100
       ],
       "token": {"bar":true, "barHeight": 23.5},
-      "color": "cyan"
+      "color": "lightBlue"
     },
     {
       "name": "Antwerp Railway",
