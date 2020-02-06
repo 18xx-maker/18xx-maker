@@ -7,7 +7,8 @@
     "titleY": 620,
     "titleSize": 165,
     "subTitleSize": 17,
-    "currency": "USD"
+    "currency": "USD",
+    "extraStationTokens": 1
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/63170/1817",
