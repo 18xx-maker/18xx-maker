@@ -1302,9 +1302,9 @@
           "values": [{"value": 20, "angle": 150, "percent": 0.8},
                      {"value": 10, "angle": 270, "percent": 0.8}],
           "towns": [{"angle": 90, "percent": 0.6,
-                     "name": {"name": "Tirano", "rotation": -90}},
+                     "name": {"name": "Tirano", "y": -25, "rotation": -90}},
                     {"angle": 330, "percent": 0.6, "rotation": 240,
-                     "name": {"name": "Edolo", "rotation": 90}}],
+                     "name": {"name": "Edolo", "y": -25, "rotation": 90}}],
           "track": [{"type": "sharpStop", "side": 2},
                     {"type": "sharpStopRev", "side": 1}],
           "hexes": ["K2"]
