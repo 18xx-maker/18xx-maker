@@ -5,9 +5,9 @@ draft-07.
 
 ## Current Schemas
 
-* [config](/schemas/config.schema.json) - Schema to define the `config.json`
+* [config](/schemas/config.schema.json) - Schema to define the `defaults.json`
   format to manage the [config
-  file](https://github.com/kelsin/18xx/blob/master/src/config.json) for this
+  file](https://github.com/kelsin/18xx/blob/master/src/defaults.json) for this
   tool.
 * [tiles](/schemas/tiles.schema.json) - **WIP** - Schema to define a tiles file
 * [game](/schemas/game.schema.json) - **WIP** - Schema to define a game file
