@@ -65,13 +65,11 @@ const server = app.listen(9000);
     market: {
       imgLoc: `images/${id}/Market.png`,
       xStart: 25 * 0.96,
-      xStep: (game.stock.type === "2D" ?
-              config.stock.cell.width :
-              config.stock.column.width) * 0.96,
+      xStep: config.stock.cell.width * 0.96,
       yStart: 75 * 0.96,
       yStep: (game.stock.type === "2D" ?
-              config.stock.cell.width :
-              config.stock.column.height) * 0.96
+              config.stock.cell.height :
+              (config.stock.cell.height * config.stock.column)) * 0.96
     },
     tray: [],
     links: []
