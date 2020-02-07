@@ -4,6 +4,7 @@ import Color from "../data/Color";
 import * as uuid from "uuid";
 
 import logos from "../data/logos";
+import icons from "../data/icons";
 
 const bleedAdjust = (bleed, percent) => {
   let ratio = 0.833333333;
@@ -32,6 +33,7 @@ const radialBleedAdjust = (bleed, percent) => {
 const Token = ({
   logo, // The SVG logo to display on this token
   icon, // The path-based icon (defined in App.jsx) to display on this token
+  iconColor, // The color to use for the svg icon
   label, // The text label to use on this token
   labelColor, // What color to use for writing the label text
   color, // What color is this token using as a background
@@ -241,8 +243,25 @@ const Token = ({
 
         let content = [];
         if (icon) {
-          content.push(<use key="icon" href={`#${icon}`} transform="scale(1.66666 1.66666)" />);
+          let iconSvg = icons[icon];
+          let Component = iconSvg.Component;
+
+          let classes = [];
+          if (iconColor) {
+            classes.push(`icon-color-main-${iconColor}`);
+          }
+          if (reserved) {
+            classes.push("color-reserved");
+          }
+
           if (label) {
+            // Label and icon, position accordingly
+            let x = -0.5 * width;
+            let y = -0.75 * width;
+            let size = 1 * width;
+            content.push(<Component key="icon" className={classes.join(" ")}
+                                    x={x} y={y}
+                                    height={size} width={size} />);
             content.push(<text
                            key="text"
                            fontFamily="display"
@@ -252,16 +271,25 @@ const Token = ({
                            stroke={textStroke}
                            fill={textFill}
                            x="0"
-                           y={(width * 0.24) + 12}
+                           y={(width * 0.12) + 12}
                          >
                            {label}
                          </text>
                         );
+          } else {
+            let start = -0.75 * width;
+            let size = 1.5 * width;
+            content.push(<Component key="icon" className={classes.join(" ")}
+                                    x={start} y={start}
+                                    height={size} width={size} />);
           }
         } else if (label && label.length > 0) {
           let fontSize = width * 0.64;
           let y = width * 0.22;
-          if (label.length > 4) {
+          if (label.length > 3) {
+            fontSize = fontSize * 0.9;
+            y = y * 0.9;
+          } else if (label.length > 4) {
             fontSize = fontSize * 0.8;
             y = y * 0.8;
           }

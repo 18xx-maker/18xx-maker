@@ -1,62 +1,15 @@
 import React from "react";
 import Color from "../data/Color";
+import icons from "../data/icons";
 
-const Value = ({ type }) => {
+const Icon = ({ type, color }) => {
   let icon;
 
-  switch (type) {
-  case "medium-city":
-    icon = <use href="#medium-city" />
-    break;
-  case "home":
-    icon = <use href="#home" />
-    break;
-  case "charter":
-    icon = <use href="#charter" />
-    break;
-  case "tracks":
-    icon = <use href="#tracks" />
-    break;
-  case "boat":
-    icon = <use href="#boat" />
-    break;
-  case "mail":
-    icon = <use href="#mail" />
-    break;
-  case "share":
-    icon = <use href="#share" />
-    break;
-  case "bridge":
-    icon = <use href="#bridge" />
-    break;
-  case "tree":
-    icon = <use href="#tree" />
-    break;
-  case "mountain":
-    icon = <use href="#mountain" />
-    break;
-  case "water":
-    icon = <use href="#water" />
-    break;
-  case "river":
-    icon = <use href="#river" />
-    break;
-  case "cactus":
-    icon = <use href="#cactus" />
-    break;
-  case "swamp":
-    icon = <use href="#swamp" />
-    break;
-  case "meat":
-    icon = <use href="#meat" />;
-    break;
-  case "coal":
-    icon = <use href="#coal" />;
-    break;
-  case "port":
-  default:
-    icon = <use href="#port" />;
-    break;
+  if (icons[type]) {
+    let iconSvg = icons[type];
+    let Component = iconSvg.Component;
+    icon = <Component className={`icon-color-main-${color}`}
+                      width="25" height="25" x="-12.5" y="-12.5"/>;
   }
 
   return (
@@ -78,4 +31,4 @@ const Value = ({ type }) => {
   );
 };
 
-export default Value;
+export default Icon;

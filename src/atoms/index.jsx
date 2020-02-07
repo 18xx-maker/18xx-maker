@@ -71,6 +71,7 @@ const atoms = [{
              {icons: [{type: "boat"}]},
              {icons: [{type: "tracks"}]},
              {icons: [{type: "share"}]},
+             {icons: [{type: "share", color: "orange"}]},
              {icons: [{type: "charter"}]},
              {icons: [{type: "bridge"}]},
              {icons: [{type: "swamp"}]},
@@ -101,7 +102,12 @@ const atoms = [{
     {tokens: [{company:"PRR", destination: true}]},
     {tokens: [{company:"C&O", reserved: true}]},
     {tokens: [{logo:"dev/emacs"}]},
-    {tokens: [{icon:"coal"}]}
+    {tokens: [{icon:"coal"}]},
+    {tokens: [{icon:"port", iconColor:"red"}]},
+    {tokens: [{icon:"mail"}]},
+    {tokens: [{icon:"mail", iconColor:"orange"}]},
+    {tokens: [{icon:"tracks", label: "$100"}]},
+    {tokens: [{icon:"boat", iconColor:"red", label: "Free"}]}
   ]
 },{
   group: "Cities",
