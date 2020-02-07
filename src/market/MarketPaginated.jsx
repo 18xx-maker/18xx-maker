@@ -23,7 +23,7 @@ const MarketPaginated = () => {
           return <Redirect to={`/${params.game}/background`} />;
         }
 
-        let data = getMarketData(game.stock, config.stock, config.paper, config.pagination);
+        let data = getMarketData(game.stock, config);
 
         let xPages = data.splitPages(data.totalWidth + 50, data.usableWidth);
         let yPages = data.splitPages(data.totalHeight + 50, data.usableHeight);

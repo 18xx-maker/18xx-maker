@@ -2,10 +2,15 @@ import React from "react";
 
 import Color from "../data/Color";
 import Config from "../data/Config";
+
 import Cell from "./Cell";
 import Ledges from "./Ledges";
+import Par from "./Par";
+import MarketRoundTracker from "./MarketRoundTracker";
 
 import Legend from "../Legend";
+
+import { getParData } from "./util";
 
 import addIndex from "ramda/src/addIndex";
 import chain from "ramda/src/chain";
@@ -94,6 +99,23 @@ const Market = ({data, title}) => {
     break;
   };
 
+  let roundTracker = null;
+  if (data.display.roundTracker) {
+    roundTracker = <MarketRoundTracker roundTracker={data.display.roundTracker}/>;
+  }
+
+  let par = null;
+  if (data.config.stock.display.par && data.display.par) {
+    // We want to display par chart on the market
+    let x = data.display.par.x * data.config.stock.cell.width;
+    let y = data.display.par.y * data.config.stock.cell.height;
+    par = (
+      <g transform={`translate(${x} ${y})`}>
+        <Par title="Par" data={getParData(data.stock, data.config)} />
+      </g>
+    );
+  }
+
   let legend = null;
 
   if (data.type === "2D") {
@@ -102,6 +124,12 @@ const Market = ({data, title}) => {
 
     let left = (rightBottomMost + 1) * data.width + 5;
     let top = (bottomRightMost + 1) * data.height + 55;
+
+    let parOffset = 0;
+    if (data.display.par) {
+      parOffset = data.display.par.x * data.config.stock.cell.width;
+    }
+
     let right = data.totalWidth;
     let bottom = data.totalHeight;
 
@@ -114,16 +142,10 @@ const Market = ({data, title}) => {
             <Color context="companies">
               {c => (
                 <g>
-                  <path
-                    d={`M ${left} ${bottom} L ${right} ${bottom} L ${right} ${top}`}
-                    stroke={c("black")}
-                    strokeWidth="1"
-                    fill="none"
-                  />
                   {addIndex(map)((legend, i) => (
                     <g
                       key={`pool-note-${i}`}
-                      transform={`translate(${right - 5} ${bottom - (i * 35) - 20})`}
+                      transform={`translate(${(parOffset || right) - 5} ${bottom - (i * 35) - 20})`}
                     >
                       <Legend right={true} {...legend}/>
                     </g>
@@ -201,6 +223,8 @@ const Market = ({data, title}) => {
       >
         {title} Stock Market
       </text>
+      {roundTracker}
+      {par}
       {legend}
       {cells}
       <Ledges data={data} />

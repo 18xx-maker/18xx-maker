@@ -130,7 +130,7 @@ const _Input = ({name, label, description, config, value, setConfig, dimension})
         {dimension ? (
           <UnitInput name={name} value={value} onChange={rawUpdate}/>
         ) : (
-          <input style={{width:"1in"}} type="number"
+          <input style={{width:"0.5in"}} type="number"
                  id={name} name={name}
                  value={value}
                  onChange={update}/>
@@ -226,9 +226,9 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="plainMapCompanies" label="Plain Map Company Spaces"
              description="This sets all home/destination/token spots on maps to be empty white cities with black company text instead of colored or using logos." />
       <Input name="maps.roundTracker" label="Display Map Round Tracker"
-             description="Whether or not to show the round tracker on maps." />
+             description="Whether or not to show the round tracker on maps. Requires the game file to specify the location." />
       <Input name="maps.players" label="Display Map Players Table"
-             description="Whether or not to show the player information table on maps. This includes bank and certificate limit information." />
+             description="Whether or not to show the player information table on maps. This includes bank and certificate limit information. Requires the game file to specify the location." />
       {/* This option isn't working yet, will add later */}
       {/* <Checkbox name="plainMapDestinations" label="Plain Map Destination Spaces" */}
       {/*           description="This sets all destination spots on maps to be empty white cities with black company text:" /> */}
@@ -242,6 +242,20 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="tiles.gaps" label="Tile Gaps"
              description="This says whether to separate different colors with spaces needed to prevent bleed crossover. Leave on unless you really know you want it."/>
       <h3>Stock Markets</h3>
+      <Input name="stock.cell.width" label="Cell Width" dimension={true}
+             description="This determines the default width of one stock market cell."/>
+      <Input name="stock.cell.height" label="Cell Height" dimension={true}
+             description="This determines the default height of one stock market cell."/>
+      <Input name="stock.column" label="Column Height"
+             description="This determines how many cells make up a 1D market column height. The default is 4. Decimals are allowed."/>
+      <Input name="stock.diag" label="Diag Height"
+             description="This determines how many cells make up a 1Diag market cell height. The default is 2. Decimals are allowed."/>
+      <Input name="stock.par" label="Par Width"
+             description="This determines how many cells make up a par market cell width. The default is 4. Decimals are allowed."/>
+      <Input name="stock.display.par" label="Display Market Par Chart"
+             description="Whether or not to show the par chart on markets. Requires the game file to specify the location." />
+      <Input name="stock.display.roundTracker" label="Display Market Round Tracker"
+             description="Whether or not to show the round tracker on markets. Requires the game file to specify the location." />
       <h3>Charters</h3>
       <Input name="charters.style" label="Charter Style"
              description="This lets you choose between two styles for charters. One is simular to Carth's style while the other includes more color at the top."/>

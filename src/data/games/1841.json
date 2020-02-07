@@ -204,28 +204,38 @@
     },
     "ledges": [
       {
+        "color": "yellow",
+        "border": true,
+        "coords": ["11 0", "11 7"]
+      },
+      {
+        "color": "water",
+        "border": true,
+        "coords": ["16 0", "16 3"]
+      },
+      {
         "color": "red",
-        "width": 4,
+        "border": true,
         "coords": ["2 4", "2 5", "3 5", "3 4", "2 4"]
       },
       {
         "color": "red",
-        "width": 4,
+        "border": true,
         "coords": ["5 3", "5 4", "6 4", "6 3", "5 3"]
       },
       {
         "color": "red",
-        "width": 4,
+        "border": true,
         "coords": ["8 2", "8 3", "9 3", "9 2", "8 2"]
       },
       {
         "color": "red",
-        "width": 4,
+        "border": true,
         "coords": ["11 1", "11 2", "12 2", "12 1", "11 1"]
       },
       {
         "color": "red",
-        "width": 4,
+        "border": true,
         "coords": ["14 0", "14 1", "15 1", "15 0", "14 0"]
       }
     ],
@@ -259,6 +269,7 @@
         },
         {
           "value": 340,
+          "par": true,
           "legend": 0
         },
         {
@@ -299,6 +310,7 @@
         },
         {
           "value": 216,
+          "par": true,
           "legend": 0
         },
         {
@@ -345,7 +357,10 @@
         105,
         117,
         129,
-        144,
+        {
+          "value": 144,
+          "par": true
+        },
         159,
         {
           "value": 177,
@@ -397,7 +412,10 @@
         71,
         80,
         90,
-        100,
+        {
+          "value": 100,
+          "par": true
+        },
         111,
         123,
         137,
@@ -435,7 +453,10 @@
           "arrow": "down"
         },
         59,
-        68,
+        {
+          "value": 68,
+          "par": true
+        },
         77,
         86,
         95,

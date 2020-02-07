@@ -201,7 +201,7 @@ const server = app.listen(9000);
   await page.screenshot({ path: `build/render/${bname}/${folder}/${id}/Map.png`});
 
   console.log(`Printing ${bname}/${folder}/${id}/Market.png`);
-  let marketData = mutil.getMarketData(game.stock, config.stock, config.paper, config.pagination);
+  let marketData = mutil.getMarketData(game.stock, config);
   let marketWidth = Math.ceil((marketData.totalWidth + 50) * 0.96);
   let marketHeight = Math.ceil((marketData.totalHeight + 50) * 0.96);
   await page.goto(`http://localhost:9000/${bname}/market`, {waitUntil: 'networkidle2'});

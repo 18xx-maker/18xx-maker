@@ -79,6 +79,8 @@ const Cell = ({ cell, data, par }) => {
                     <text
                       key={`arrow-${i}`}
                       fill={arrowColor}
+                      stroke={c("black")}
+                      strokeWidth={0.5}
                       fontFamily="display"
                       fontStyle="bold"
                       fontSize="15"

@@ -66,9 +66,18 @@
       "type": "object",
       "properties": {
         "cell": { "$ref": "#/definitions/dimensions" },
-        "column": { "$ref": "#/definitions/dimensions" },
-        "diag": { "$ref": "#/definitions/dimensions" },
-        "par": { "$ref": "#/definitions/dimensions" }
+        "column": { "type": "number" },
+        "diag": { "type": "number" },
+        "par": { "type": "number" },
+        "display": {
+          "type": "object",
+          "properties": {
+            "par": { "type": "boolean" },
+            "roundTracker": { "type": "boolean" }
+          },
+          "required": ["par", "roundTracker"],
+          "additionalProperties": false
+        }
       },
       "required": ["cell", "column", "diag", "par"],
       "additionalProperties": false

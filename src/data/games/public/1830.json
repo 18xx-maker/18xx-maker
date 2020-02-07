@@ -357,6 +357,17 @@
   ],
   "stock": {
     "type": "2D",
+    "display": {
+      "par": {
+        "x": 15,
+        "y": 5
+      },
+      "roundTracker": {
+        "type": "row-reverse",
+        "x": 10,
+        "y": 8
+      }
+    },
     "par": {
       "values": [
         100,
