@@ -109,7 +109,7 @@
     },
     {
       "name": "Santa Ana & Newport Railway",
-      "abbrev": "SNR",
+      "abbrev": "SA&N",
       "token": { "bar": true },
       "color": "brightGreen"
     },
