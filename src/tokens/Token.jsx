@@ -112,8 +112,8 @@ const Token = ({
             shapes.push(
               <g key="square" transform={`rotate(${angle || 0})`}>
                 <rect rx={width * 0.08} ry={width * 0.08}
-                      x={width * -0.7} y={width * -0.7}
-                      width={width * 1.4} height={width * 1.4}
+                      x={width * -0.75} y={width * -0.75}
+                      width={width * 1.5} height={width * 1.5}
                       fill={c(square)} />
               </g>
             );
