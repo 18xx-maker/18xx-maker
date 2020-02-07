@@ -18,25 +18,25 @@ import concat from "ramda/src/concat";
 import map from "ramda/src/map";
 import reverse from "ramda/src/reverse";
 
-const findBottomRightMost = market => {
-  let bottomRightMost = 0;
-  let maxLength = 0;
+// const findBottomRightMost = market => {
+//   let bottomRightMost = 0;
+//   let maxLength = 0;
 
-  for(let i = 0; i < market.length; i++) {
-    let row = market[i];
+//   for(let i = 0; i < market.length; i++) {
+//     let row = market[i];
 
-    if (row.length >= maxLength) {
-      maxLength = row.length;
-      bottomRightMost = i;
-    }
-  }
+//     if (row.length >= maxLength) {
+//       maxLength = row.length;
+//       bottomRightMost = i;
+//     }
+//   }
 
-  return bottomRightMost;
-}
+//   return bottomRightMost;
+// }
 
-const findRightBottomMost = market => {
-  return market[market.length - 1].length - 1;
-}
+// const findRightBottomMost = market => {
+//   return market[market.length - 1].length - 1;
+// }
 
 const Market = ({data, title}) => {
   let cells = [];
@@ -119,12 +119,6 @@ const Market = ({data, title}) => {
   let legend = null;
 
   if (data.type === "2D") {
-    let bottomRightMost = findBottomRightMost(data.market);
-    let rightBottomMost = findRightBottomMost(data.market);
-
-    let left = (rightBottomMost + 1) * data.width + 5;
-    let top = (bottomRightMost + 1) * data.height + 55;
-
     let parOffset = 0;
     if (data.display.par) {
       parOffset = data.display.par.x * data.config.stock.cell.width;

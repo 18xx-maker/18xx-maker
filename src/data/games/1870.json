@@ -433,11 +433,16 @@
     }
   ],
   "stock": {
-    "paginated": true,
-    "orientation": "landscape",
-    "cell": {
-      "width": 0.75,
-      "height": 0.85
+    "display": {
+      "roundTracker": {
+        "type": "col-reverse",
+        "x": 15,
+        "y": 6
+      },
+      "par": {
+        "x": 17,
+        "y": 5
+      }
     },
     "type": "2D",
     "par": {
