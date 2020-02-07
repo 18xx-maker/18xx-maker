@@ -19,7 +19,7 @@ const MarketSingle = () => {
           return <Redirect to={`/${params.game}/background`} />;
         }
 
-        let data = getMarketData(game.stock, config.stock, config.paper, config.pagination);
+        let data = getMarketData(game.stock, config);
 
         return (
           <React.Fragment>

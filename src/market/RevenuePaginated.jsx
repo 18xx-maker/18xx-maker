@@ -15,7 +15,7 @@ import Revenue from "./Revenue";
 const RevenuePaginated = () => (
   <Config>
     {(config, game) => {
-      let data = getRevenueData(game.revenue, config.stock, config.paper, config.pagination);
+      let data = getRevenueData(game.revenue, config);
 
       let xPages = data.splitPages(data.totalWidth + 50, data.usableWidth);
       let yPages = data.splitPages(data.totalHeight + 50, data.usableHeight);

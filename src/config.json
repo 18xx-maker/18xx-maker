@@ -79,17 +79,12 @@
       "width": 70,
       "height": 85
     },
-    "column": {
-      "width": 70,
-      "height": 350
-    },
-    "diag": {
-      "width": 70,
-      "height": 175
-    },
-    "par": {
-      "width": 300,
-      "height": 85
+    "column": 4,
+    "diag": 2,
+    "par": 4,
+    "display": {
+      "par": true,
+      "roundTracker": true
     }
   }
 }
