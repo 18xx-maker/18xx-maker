@@ -31,9 +31,15 @@ const atoms = [{
   group: "Values",
   examples: [{values: [{value: 20}]},
              {values: [{value: 60}]},
+             {values: [{value: 60, shape: "square"}]},
              {values: [{
-              "outerBorderColor": "green",
-              "value": 120
+               outerBorderColor: "green",
+               value: 120
+             }]},
+             {values: [{
+               outerBorderColor: "green",
+               shape: "square",
+               value: 120
              }]},
              {values: [{value: 1024}]},
              {values: [{value: "60/60"}]},
@@ -271,18 +277,18 @@ const atoms = [{
 
 const examples = R.addIndex(R.chain)((h,id) => {
   return <dd key={`example-${id}`}>
-           <Svg width="175.205" height="152" viewBox="-87.6025 -76 175.205 152">
-             <Hex hex={h} id={`${id}`} border={true} bleed={true} />
-           </Svg>
-           <pre>{JSON.stringify(h, null, 2)}</pre>
-         </dd>;
+      <Svg width="175.205" height="152" viewBox="-87.6025 -76 175.205 152">
+        <Hex hex={h} id={`${id}`} border={true} bleed={true} />
+      </Svg>
+      <pre>{JSON.stringify(h, null, 2)}</pre>
+    </dd>;
 });
 
 const groups = R.addIndex(R.chain)((g,id) => {
   return <dl key={`group-${id}`}>
-           <dt>{g.group}</dt>
-           {examples(g.examples)}
-         </dl>;
+      <dt>{g.group}</dt>
+      {examples(g.examples)}
+    </dl>;
 });
 
 const Atoms = () => {

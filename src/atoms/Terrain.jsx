@@ -37,17 +37,23 @@ const Terrain = ({ type, size, cost, fontSize, color }) => {
     break;
   }
 
+  let icon = null;
   let iconSvg = icons[type];
-  let Component = iconSvg.Component;
+  if (iconSvg) {
+    let Component = iconSvg.Component;
+    icon = (
+      <g transform={`translate(0 ${translate}) scale(${scale})`}>
+        <Component className={`icon-color-main-${color}`}
+                   width="25" height="25" x="-12.5" y="-12.5" />
+      </g>
+    );
+  }
 
   return (
     <Color>
       {(c,t,s,p) => (
         <g>
-          <g transform={`translate(0 ${translate}) scale(${scale})`}>
-            <Component className={`icon-color-main-${color}`}
-            width="25" height="25" x="-12.5" y="-12.5" />
-          </g>
+          {icon}
           <text
             fill={p(color || "black")}
             fontSize={fontSize}
