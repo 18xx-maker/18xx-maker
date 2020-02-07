@@ -780,7 +780,7 @@
         "color": "plain",
         "labels": [{"label": "Y", "angle": 180, "percent": 0.667}],
         "cities": [{"name": {"name": "Newport Beach", "reverse": true },
-                    "companies": ["SNR"]}],
+                    "companies": ["SA&N"]}],
         "hexes": ["F12"]
       },
       {
