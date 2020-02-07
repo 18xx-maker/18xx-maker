@@ -12,6 +12,11 @@ where `<game>` is which game to build. For example, here is me printing 1830:
 yarn build && yarn print 1830
 ```
 
+Remember that this will not use the options setup in the browser config page. In
+order to make your printed output identical to what you see in the browser, go
+to the [config](/config) page and copy the json found at the bottom into
+`src/config.json` replacing anything previously there.
+
 This will build the app, then output a bunch of files into the
 `build/render/1830` folder:
 
