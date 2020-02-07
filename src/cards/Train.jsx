@@ -9,21 +9,38 @@ import map from "ramda/src/map";
 
 import "./train.scss";
 
-import yellowTrain from "../images/yellow-train.png";
-import greenTrain from "../images/green-train.png";
-import brownTrain from "../images/brown-train.png";
-import grayTrain from "../images/gray-train.png";
+// import yellowTrain from "../images/yellow-train.png";
+// import greenTrain from "../images/green-train.png";
+// import brownTrain from "../images/brown-train.png";
+// import grayTrain from "../images/gray-train.png";
+
+import twoT from "../images/2T.png";
+import threeT from "../images/3T.png";
+import fourT from "../images/4T.png";
+import fiveT from "../images/5T.png";
+import sixT from "../images/6T.png";
+import diesel from "../images/Diesel.png";
+
+const images = {
+  "2T": twoT,
+  "3T": threeT,
+  "4T": fourT,
+  "5T": fiveT,
+  "6T": sixT,
+  "Diesel": diesel
+};
 
 const Train = ({ train, blackBand }) => {
-  let { 
-    name, 
-    price, 
+  let {
+    name,
+    price,
     tradeInPrice,
-    color, 
-    info, 
-    description, 
-    players, 
-    backgroundColor, 
+    color,
+    info,
+    description,
+    players,
+    backgroundColor,
+    image,
     variant } = train;
 
   let notes = addIndex(map)(
@@ -53,20 +70,21 @@ const Train = ({ train, blackBand }) => {
     );
   }
 
-  let image = null;
-  switch (color) {
-  case "green":
-    image = greenTrain;
-    break;
-  case "brown":
-    image = brownTrain;
-    break;
-  case "gray":
-    image = grayTrain;
-    break;
-  default:
-    image = yellowTrain;
-    break;
+  if (!image) {
+    switch (color) {
+    case "green":
+      image = "3T";
+      break;
+    case "brown":
+      image = "4T";
+      break;
+    case "gray":
+      image = "6T";
+      break;
+    default:
+      image = "2T";
+      break;
+    }
   }
 
   return (
@@ -88,7 +106,7 @@ const Train = ({ train, blackBand }) => {
                                                     />)}
                   <div className="card__body">
                     {config.trains.images && (
-                      <div className="train__image"><img alt={`${color} train`} src={image}/></div>
+                      <div className={`train__image train__image--${image}`}><img alt={`${color} ${name} train`} src={images[image]}/></div>
                     )}
                     <div className="train__name" style={{ color: config.trains.style === "color" ? t(c(color)) : c(color) }}>{name}</div>
                     <div className="train__price"

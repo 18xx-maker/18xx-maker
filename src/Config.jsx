@@ -191,13 +191,13 @@ const Config = ({config, setConfig, resetConfig}) => {
       <h3>Colors</h3>
       <label htmlFor="theme">Theme: </label>
       <select id="theme" name="theme" value={config.theme} onChange={setOption}>
-        {map(theme => <option value={theme}>{mapThemes[theme].name}</option>, keys(mapThemes))}
+        {map(theme => <option key={theme} value={theme}>{mapThemes[theme].name}</option>, keys(mapThemes))}
       </select>
       <ThemePreview/>
       <p className="description">The theme determines which colors are used for all of the elements on the maps and tiles.</p>
       <label htmlFor="companiesTheme">Companies Theme: </label>
       <select id="companiesTheme" name="companiesTheme" value={config.companiesTheme} onChange={setOption}>
-        {map(theme => <option value={theme}>{companyThemes[theme].name}</option>, keys(companyThemes))}
+        {map(theme => <option key={theme} value={theme}>{companyThemes[theme].name}</option>, keys(companyThemes))}
       </select>
       <CompaniesThemePreview/>
       <p className="description">The company theme determines which colors are used for all of the elements on the maps and tiles.</p>
