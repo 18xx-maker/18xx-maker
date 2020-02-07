@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { connect } from "react-redux";
 
+import { diff } from "deep-object-diff";
+
 import { setConfig } from "./store/actions";
 import ColorContext from "./context/ColorContext";
 
-import defaultConfig from "./config.json";
+import defaultConfig from "./defaults.json";
+import customConfig from "./config.json";
 import schema from "./data/schemas/config.schema.json";
 
 import Color from "./data/Color";
@@ -18,6 +21,7 @@ import filter from "ramda/src/filter";
 import isEmpty from "ramda/src/isEmpty";
 import keys from "ramda/src/keys";
 import map from "ramda/src/map";
+import mergeDeepRight from "ramda/src/mergeDeepRight";
 import path from "ramda/src/path";
 import split from "ramda/src/split";
 
@@ -306,10 +310,17 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="currency.train" label="Train" description="Train costs on cards and charters"/>
       <Input name="currency.treasury" label="Treasury" description="Companies starting capital on charters"/>
       <Input name="currency.value" label="Value" description="Values on maps and track tiles"/>
-      <h2>Reset</h2>
+      <h2>Config Data</h2>
       <p>You can remove any custom settings and revert back to the defaults with this button.</p>
       <button onClick={resetConfig}>Reset To Defaults</button>
       <p>These values are saved on this browser in local storage.</p>
+      <h3>JSON</h3>
+      <p>You can copy and paste this json value into the file in src/config.json if you want to apply these settings to command line or local servers.</p>
+      <pre>
+        <code>
+          {JSON.stringify(diff(defaultConfig, config), null, 2)}
+        </code>
+      </pre>
     </div>
   );
 };
@@ -320,7 +331,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setConfig: config => dispatch(setConfig(config)),
-  resetConfig: () => dispatch(setConfig(defaultConfig))
+  resetConfig: () => dispatch(setConfig(mergeDeepRight(defaultConfig, customConfig)))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Config);

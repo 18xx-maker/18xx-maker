@@ -14,7 +14,11 @@ const util = require('../src/render/util');
 const setup = util.setup;
 const setupB18 = util.setupB18;
 
-const config = require('../src/config.json');
+const defaultConfig = require('../src/defaults.json');
+const customConfig = require('../src/config.json');
+
+const config = R.mergeDeepRight(defaultConfig, customConfig);
+
 const mutil = require('../src/market/util');
 
 const gameDefs = require('../src/data/games').default;

@@ -126,7 +126,7 @@ const Token = ({
           let size = 2 * width;
           let Component = svg.Component;
           shapes.push(
-            <Component className={`color-main-${color}${reserved ? " color-reserved" : ""}`}
+            <Component key="logo" className={`color-main-${color}${reserved ? " color-reserved" : ""}`}
                        x={start} y={start}
                        height={size} width={size}/>
           );
@@ -138,7 +138,7 @@ const Token = ({
 
           if (square) {
             shapes.push(
-              <g transform={`rotate(${angle || 0})`}>
+              <g key="square" transform={`rotate(${angle || 0})`}>
                 <rect rx={width * 0.08} ry={width * 0.08}
                       x={width * -0.7} y={width * -0.7}
                       width={width * 1.4} height={width * 1.4}

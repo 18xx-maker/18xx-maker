@@ -1,5 +1,8 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
+# Custom json settings
+/src/config.json
+
 # dependencies
 /node_modules
 
