@@ -20,29 +20,6 @@ import Footer from "./Footer";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-const terrainIcon = (id, color, translate, scale, path) => (
-  <g id={id}>
-    <path
-      transform={`translate(0 ${translate + 1}) scale(${scale})`}
-      d={path}
-      fill="none"
-      stroke="white"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      transform={`translate(0 ${translate}) scale(${scale})`}
-      d={path}
-      fill="none"
-      stroke={color}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </g>
-);
-
 const App = () => (
   <Router>
     <ScrollToTop>
