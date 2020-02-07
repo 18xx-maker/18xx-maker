@@ -1,13 +1,13 @@
-<svg width="50mm" height="86.2" viewBox="-11 -23 70 70">
-    <path fill="#fff" fill-rule="evenodd" d="M-.832-1.074h49.537v24.768H-.832z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="50mm" height="86.2" viewBox="-11 -23 70 70">
+    <path class="color-white" fill="#fff" fill-rule="evenodd" d="M-.832-1.074h49.537v24.768H-.832z"/>
     <g stroke-width=".774">
         <g fill-rule="evenodd">
-            <path class="AFG_svg__AFG_svg__AFG_svg__AFG_svg__color-main AFG_svg__AFG_svg__AFG_svg__AFG_svg__color-red" fill="#cc202c" d="M-.02-.262h40.966v23.144H-.02z"/>
-            <path class="AFG_svg__AFG_svg__AFG_svg__AFG_svg__color-green" fill="#057a00" d="M40.946-.262h2.2v23.144h-2.2z"/>
-            <path class="AFG_svg__AFG_svg__AFG_svg__AFG_svg__color-white" fill="#fff" d="M43.146-.262h2.2v23.144h-2.2z"/>
-            <path class="AFG_svg__AFG_svg__AFG_svg__AFG_svg__color-main AFG_svg__AFG_svg__AFG_svg__AFG_svg__color-red" fill="#ff000b" d="M45.346-.262h2.2v23.144h-2.2z"/>
+            <path class="color-main color-red" fill="#cc202c" d="M-.02-.262h40.966v23.144H-.02z"/>
+            <path class="color-green" fill="#057a00" d="M40.946-.262h2.2v23.144h-2.2z"/>
+            <path class="color-white" fill="#fff" d="M43.146-.262h2.2v23.144h-2.2z"/>
+            <path class="color-main color-red" fill="#ff000b" d="M45.346-.262h2.2v23.144h-2.2z"/>
         </g>
-        <text font-size="5.644" style="line-height:1.25;-inkscape-font-specification:'Bodoni MT Bold'" fill="#fff" stroke-width=".205" x="59.371" y="49.765" font-family="Bodoni MT" font-weight="700" letter-spacing="0" transform="matrix(1.2292 0 0 1.3112 -70.26 -57.628)" word-spacing="0">
+        <text font-size="5.644" style="line-height:1.25;-inkscape-font-specification:'Bodoni MT Bold'" class="color-white" fill="#fff" stroke-width=".205" x="59.371" y="49.765" font-family="Bodoni MT" font-weight="700" letter-spacing="0" transform="matrix(1.2292 0 0 1.3112 -70.26 -57.628)" word-spacing="0">
             <tspan x="59.371" y="49.765" dx="0 -0.46000001 -0.07 -0.23 0 -0.63 -0.12 -0.090000004 -0.090000004" font-size="5.997" style="-inkscape-font-specification:'Bodoni MT Bold'">GARIBALDI</tspan>
         </text>
     </g>

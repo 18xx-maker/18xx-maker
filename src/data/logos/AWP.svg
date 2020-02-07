@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
-    <circle class="color-main color-purple" fill="#e4bcee" cx="72" cy="72" r="70.5"/>
+    <circle class="color-main color-lavender" fill="#e4bcee" cx="72" cy="72" r="70.5"/>
     <path class="color-black" d="M3.248 71.908L72.05 3.107l68.801 68.801L72.05 140.71z"/>
     <path class="color-white" fill="#fff" d="M72 141.3L2.7 72 72 2.7 141.3 72 72 141.3zM3.7 72L72 140.3 140.3 72 72 3.7 3.7 72z"/>
     <path class="color-white" fill="#fff" d="M9.35 72L72 9.35 134.65 72 72 134.65z"/>
