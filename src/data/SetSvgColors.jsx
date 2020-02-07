@@ -12,8 +12,6 @@ import keys from "ramda/src/keys";
 const colors = keys(require("./themes/companies/rob.json").colors);
 
 const SetSvgColors = ({ companySvgLogos }) => {
-  if (companySvgLogos === "none") return null;
-
   return (
     <ColorContext.Provider value="companies">
       <Color>
@@ -41,6 +39,13 @@ const SetSvgColors = ({ companySvgLogos }) => {
           rules.push(`svg.color-reserved .color-reserved-gray{fill:${c("gray")}}`);
           rules.push(`svg.color-reserved .color-stroke-reserved-gray{stroke:${c("gray")}}`);
 
+          // Color changing for icons
+          rules = concat(rules, chain(color => [
+            `svg.icon-color-main-${color} .color-main{fill:${c(color)}}`,
+            `svg.icon-color-main-${color} .color-stroke-main{stroke:${c(color)}}`,
+          ], colors));
+
+          // Color changing for logos
           if (companySvgLogos === "main") {
             rules = concat(rules, chain(color => [
               `svg.color-main-${color} .color-main{fill:${c(color)}}`,
