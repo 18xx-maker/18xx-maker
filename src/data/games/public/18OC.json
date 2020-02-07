@@ -76,7 +76,7 @@
     {
       "name": "Atchison, Topeka and Santa Fe Railway",
       "abbrev": "ATSF",
-      "color": "blue",
+      "color": "red",
       "token": { "bar": true },
       "shares": "premerge",
       "tokens": "merger"
@@ -93,7 +93,7 @@
       "name": "Pacific Electric Railway Company",
       "abbrev": "PE",
       "token": { "bar": true },
-      "color": "red"
+      "color": "orange"
     },
     {
       "name": "California Southern Railroad",
@@ -105,7 +105,7 @@
       "name": "Southern California Railway",
       "abbrev": "SCR",
       "token": { "bar": true },
-      "color": "orange"
+      "color": "lightBlue"
     },
     {
       "name": "Santa Ana & Newport Railway",
@@ -117,7 +117,7 @@
       "name": "Disneyland Railroad",
       "abbrev": "DRR",
       "token": { "bar": true },
-      "color": "lightBlue"
+      "color": "pink"
     }
   ],
   "trains": [
