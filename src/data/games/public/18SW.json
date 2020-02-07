@@ -4,11 +4,14 @@
     "titleSize": 1,
     "designer": "Jimmy Okolica",
     "designerSize": 1,
-    "background": "purple",
+    "background": "bg",
     "titleY": 1150,
     "titleX": 120,
     "extraTotalHeight": 0,
     "currency": "USD"
+  },
+  "colors": {
+    "bg": "#a66258"
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/182428/18sw",
@@ -19,6 +22,26 @@
   ],
   "wip": true,
   "ipo": false,
+  "players": [
+    {
+      "number": 2,
+      "capital": 300,
+      "certLimit": 12,
+      "bank": 5000
+    },
+    {
+      "number": 3,
+      "capital": 300,
+      "certLimit": 11,
+      "bank": 5800
+    },
+    {
+      "number": 4,
+      "capital": 300,
+      "certLimit": 10,
+      "bank": 6600
+    }
+  ],
   "tiles": {
     "5": 1,
     "6": 3,
@@ -199,7 +222,7 @@
         {
           "label": "Silver City",
           "angle": 180,
-          "percent": 0.7
+          "percent": 0.75
         }
       ]
     },
@@ -423,9 +446,7 @@
       ],
       "cities": [
         {
-          "name": {
-            "name": "Wisteria"
-          }
+          "name": { }
         }
       ],
       "values": [
@@ -537,9 +558,14 @@
       ],
       "labels": [
         {
-          "label": "Flex City",
-          "angle": 180,
-          "percent": 0.6
+          "label": "Flex",
+          "angle": 148,
+          "percent": 0.7
+        },
+        {
+          "label": "City",
+          "angle": 212,
+          "percent": 0.7
         }
       ]
     },
