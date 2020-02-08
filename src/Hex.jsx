@@ -29,6 +29,7 @@ import Terrain from "./atoms/Terrain";
 import Town from "./atoms/Town";
 import Track from "./atoms/Track";
 import Tunnel from "./atoms/Tunnel";
+import TunnelEntrance from "./atoms/TunnelEntrance";
 import Value from "./atoms/Value";
 
 import GameMapCompanyToken from "./tokens/GameMapCompanyToken";
@@ -171,6 +172,12 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   let tunnels = (
     <Position data={hex.tunnels}>{t => <Tunnel {...t} />}</Position>
   );
+  let tunnelEntranceBorders = (
+    <Position data={hex.tunnelEntrances}>{t => <TunnelEntrance {...t} border={true} />}</Position>
+  );
+  let tunnelEntrances = (
+    <Position data={hex.tunnelEntrances}>{t => <TunnelEntrance {...t} />}</Position>
+  );
   let divides = <Position data={hex.divides}>{t => <Divide />}</Position>;
 
   let offBoardRevenue = (
@@ -225,10 +232,12 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
               <g transform={`rotate(-${hx.rotation})`}>
                 {goods}
                 {icons}
+                {tunnelEntranceBorders}
                 {cityBorders}
                 {mediumCityBorders}
                 {townBorders}
                 {tracks}
+                {tunnelEntrances}
                 {cities}
                 {mediumCities}
                 {towns}
