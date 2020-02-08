@@ -365,15 +365,27 @@ export const getMapData = (game, coords, hexWidth, variation) => {
   // Find all hexes
   let hexes = map(assoc("variation", variation), gameMap.hexes || []);
   let borders = gameMap.borders || [];
+  let borderTexts = gameMap.borderTexts || [];
+  let lines = gameMap.lines || [];
   if (gameMap.copy !== undefined) {
     hexes = concat(
       map(assoc("variation", gameMap.copy), game.map[gameMap.copy].hexes),
       hexes
     );
 
+    borderTexts = concat(
+      game.map[gameMap.copy].borderTexts || [],
+      borderTexts
+    );
+
     borders = concat(
       game.map[gameMap.copy].borders || [],
       borders
+    );
+
+    lines = concat(
+      game.map[gameMap.copy].lines || [],
+      lines
     );
   }
   hexes = map(resolveHex(hexes), hexes);
@@ -459,7 +471,8 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     hexes,
 
     // Borders and Lines
+    borderTexts,
     borders,
-    lines : gameMap.lines
+    lines
   };
 };
