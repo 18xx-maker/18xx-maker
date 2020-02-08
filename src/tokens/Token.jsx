@@ -30,6 +30,8 @@ const Token = ({
   target, // Colors for target shape
   stripe, // Colors for stripe shape
   stripes, // Colors for stripes shape
+  stripesWidth, // Width of the stripes
+  stripesDistance, // Distance from the middle for stripes
   halves, // Colors for halves shape
   quarters, // Colors for quarters shape
   square, // Draw a square of a certain color on the token
@@ -149,16 +151,17 @@ const Token = ({
           }
 
           if (stripes) {
-            let stripeWidth = width / 4;
+            stripesWidth = stripesWidth || (width / 4);
+            stripesDistance = stripesDistance || (width * 0.5);
             shapes.push(<g key="stripes" transform={`rotate(${angle || 0})`}>
                           <rect key="upper"
-                                x="-50" y={-width * 0.5 - stripeWidth}
-                                width="100" height={stripeWidth}
+                                x="-50" y={-stripesDistance - stripesWidth}
+                                width="100" height={stripesWidth}
                                 fill={c(stripes)}
                                 clipPath={`url(#${clipId})`}/>
                           <rect key="lower"
-                                x="-50" y={width * 0.5}
-                                width="100" height={stripeWidth}
+                                x="-50" y={stripesDistance}
+                                width="100" height={stripesWidth}
                                 fill={c(stripes)}
                                 clipPath={`url(#${clipId})`}/>
                         </g>);

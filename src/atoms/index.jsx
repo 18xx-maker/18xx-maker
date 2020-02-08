@@ -105,7 +105,7 @@ const atoms = [{
     {tokens: [{label:"CC2", angle: 120, bar: true, quarters: ["blue", "orange", "orange", "blue"]}]},
     {tokens: [{label:"DD", halves: ["blue", "orange"], bar: true}]},
     {tokens: [{label:"EE", bar: true, color: "blue", stripes: "orange"}]},
-    {tokens: [{label:"EE2", angle: -15, color: "blue", stripes: "orange"}]},
+    {tokens: [{label:"EE2", stripesWidth: 10, stripesDistance: 6, angle: -15, color: "blue", stripes: "orange"}]},
     {tokens: [{label:"FF", color: "orange", bar: "blue"}]},
     {tokens: [{label:"GG", bar: true, stripe: "orange", color: "blue"}]},
     {tokens: [{label:"GG2", bar: true, stripe: "orange", color: "blue", angle: 45}]},
