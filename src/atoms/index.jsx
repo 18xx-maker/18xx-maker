@@ -50,6 +50,9 @@ const atoms = [{
   examples: [{names: [{name:"Boston"}]},
              {names: [{name: "Austin", percent: 0.6, angle: 240}]},
              {names: [{name: "Seattle", percent: 0.6, rotate: -60, angle: 120}]},
+             {names: [{name: "Los Angeles",
+                       fontFamily: "display", fontSize: 20,
+                       color: "yellow", strokeWidth: 1}]},
              {names: [{name: "Paris", fontFamily: "Elegante", fontSize: 16, fontWeight: "normal", fontStyle: "italic"}]}],
 },{
   group: "Industries",
@@ -204,10 +207,10 @@ const atoms = [{
       name: {name: "Boston"},
       revenues: [{
         color: "yellow",
-        cost: "20"
+        cost: 20
       },{
         color: "brown",
-        cost: "40"
+        cost: 40
       }]
     }
   },{
@@ -217,11 +220,11 @@ const atoms = [{
       name: {name: "Boston"},
       revenues: [{
         color: "yellow",
-        cost: "20",
+        cost: 20,
         phase: 2
       },{
         color: "brown",
-        cost: "40",
+        cost: 40,
         phase: 5,
         phaseColor: "brown"
       }]
@@ -233,16 +236,16 @@ const atoms = [{
       rows: 2,
       revenues: [{
         color: "yellow",
-        cost: "20"
+        cost: 20
       },{
         color: "green",
-        cost: "30"
+        cost: 30
       },{
         color: "brown",
-        cost: "40"
+        cost: 40
       },{
         color: "gray",
-        cost: "120"
+        cost: 120
       }]
     }
   }]
@@ -259,20 +262,25 @@ const atoms = [{
   group: "Terrain",
   examples: [
     {terrain: [{}]},
-    {terrain: [{size:"medium",cost:"$60"}]},
-    {terrain: [{type:"mountain",cost:"$100"}]},
-    {terrain: [{type:"water",cost:"$40"}]},
-    {terrain: [{type:"river",cost:"$20"}]},
-    {terrain: [{type:"tree",cost:"$20",color:"green"}]},
-    {terrain: [{type:"cactus",cost:"$20"}]},
-    {terrain: [{size:"tiny",type:"river",cost:"$10"}]},
-    {terrain: [{size:"large",type:"swamp",cost:"$120"}]}
+    {terrain: [{size:"medium",cost:60}]},
+    {terrain: [{type:"mountain",cost:100}]},
+    {terrain: [{type:"water",cost:40}]},
+    {terrain: [{type:"river",cost:20}]},
+    {terrain: [{type:"cactus",cost:20}]},
+    {terrain: [{type:"tree",cost:20,color:"green"}]},
+    {terrain: [{size:"tiny",type:"river",cost:10}]},
+    {terrain: [{size:"large",type:"swamp",cost:120}]}
   ]
 },{
   group: "Tunnels and Bridges",
   examples: [
-    {tunnels: [{cost:"$40"}]},
-    {bridges: [{cost:"$40"}]}]
+    {tunnels: [{cost:40}]},
+    {bridges: [{cost:40}]},
+    {tunnelEntrances: [{percent:1}]},
+    {tunnelEntrances: [{angle:120,percent:1,rotation:-60,color:"red"},
+                       {angle:180,percent:1,color:"orange"},
+                       {angle:240,percent:1,rotation:60,color:"yellow"}
+                      ]}]
 },{
   group: "Route Bonuses",
   examples: [

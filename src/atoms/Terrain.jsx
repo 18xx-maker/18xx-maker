@@ -56,6 +56,8 @@ const Terrain = ({ type, size, cost, fontSize, color }) => {
           {icon}
           <text
             fill={p(color || "black")}
+            strokeWidth={(!color || color === "black") ? 0 : 1}
+            stroke={c("black")}
             fontSize={fontSize}
             dominantBaseline="hanging"
             textAnchor="middle"

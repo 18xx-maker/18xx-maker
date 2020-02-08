@@ -70,6 +70,8 @@ const makeNode = (x, y, reverse, revenue, size) => {
         {c => (
           <text
             fill={c(revenue.phaseColor) || c("white")}
+            strokeWidth="1"
+            stroke={c("black")}
             fontSize={size}
             dominantBaseline="central"
             textAnchor="middle"
