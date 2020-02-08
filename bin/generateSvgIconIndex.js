@@ -13,8 +13,9 @@ let svgs = map(file => {
   let dir = path.dirname(file);
   let group = dir === "." ? undefined : dir;
   let name = path.basename(file, ".svg");
+  let object = name.replace(/[-\.]/g, '_');
 
-  let svg = { name, file, dir };
+  let svg = { name, file, dir, object };
 
   if (group) {
     svg.group = group;
