@@ -102,7 +102,9 @@ const Market = ({data, title}) => {
     legend = (
       <Config>
         {(config, game) => {
-          if (!config.stock.display.legend) {
+          if (!config.stock.display.legend ||
+              !game.stock.display ||
+              !game.stock.display.legend) {
             return null;
           }
 
@@ -120,9 +122,10 @@ const Market = ({data, title}) => {
                   {addIndex(map)((legend, i) => (
                     <g
                       key={`pool-note-${i}`}
-                      transform={`translate(${x} ${y + 50 + (i * (game.stock.display.legend.reverse ? -35 : 35))})`}
+                      transform={`translate(${x} ${y + 50 + (i * (game.stock.display.legend.verticalAlign === "bottom" ? -35 : 35))})`}
                     >
                       <Legend right={game.stock.display.legend.align === "right"}
+                              bottom={game.stock.display.legend.verticalAlign === "bottom"}
                               reverse={game.stock.display.legend.reverse}
                               {...legend}/>
                     </g>
