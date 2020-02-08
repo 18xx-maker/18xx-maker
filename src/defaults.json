@@ -84,6 +84,7 @@
     "diag": 2,
     "par": 4,
     "display": {
+      "legend": true,
       "par": true,
       "roundTracker": true
     }

@@ -73,10 +73,11 @@
         "display": {
           "type": "object",
           "properties": {
+            "legend": { "type": "boolean" },
             "par": { "type": "boolean" },
             "roundTracker": { "type": "boolean" }
           },
-          "required": ["par", "roundTracker"],
+          "required": ["legend", "par", "roundTracker"],
           "additionalProperties": false
         }
       },

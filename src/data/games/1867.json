@@ -810,7 +810,17 @@
           "M5",
           "M7",
           "N6",
-          "O11"
+          "O11",
+          "N8",
+          "O9",
+          "N10",
+          "M11",
+          "C9",
+          "D10",
+          "E11",
+          "C11",
+          "D12",
+          "C13"
         ]
       },
       {
@@ -1105,16 +1115,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "water"
-          },
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
         "cities": [
           {
             "name": {
@@ -1124,66 +1124,6 @@
         ],
         "hexes": [
           "M9"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "water"
-          },
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "N8"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 3,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "O9"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 3,
-            "color": "water"
-          },
-          {
-            "side": 4,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "N10"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 3,
-            "color": "water"
-          },
-          {
-            "side": 4,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "M11"
         ]
       },
       {
@@ -1286,12 +1226,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
         "centerTowns": [
           {
             "name": {
@@ -1503,110 +1437,6 @@
         },
         "hexes": [
           "F18"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "water"
-          },
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "C9"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "water"
-          },
-          {
-            "side": 2,
-            "color": "water"
-          },
-          {
-            "side": 3,
-            "color": "water"
-          },
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "D10"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "water"
-          },
-          {
-            "side": 3,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "E11"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 4,
-            "color": "water"
-          },
-          {
-            "side": 1,
-            "color": "water"
-          },
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "C11"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 4,
-            "color": "water"
-          },
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "D12"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 4,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "C13"
         ]
       },
       {

@@ -256,6 +256,8 @@ const Config = ({config, setConfig, resetConfig}) => {
              description="This determines how many cells make up a 1Diag market cell height. The default is 2. Decimals are allowed."/>
       <Input name="stock.par" label="Par Width"
              description="This determines how many cells make up a par market cell width. The default is 4. Decimals are allowed."/>
+      <Input name="stock.display.legend" label="Display Market Legend"
+             description="Whether or not to show the legend on markets. Requires the game file to specify the location for 2D market legends." />
       <Input name="stock.display.par" label="Display Market Par Chart"
              description="Whether or not to show the par chart on markets. Requires the game file to specify the location." />
       <Input name="stock.display.roundTracker" label="Display Market Round Tracker"

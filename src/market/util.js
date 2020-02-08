@@ -56,8 +56,18 @@ export const getMarketData = (stock, config) => {
   let totalWidth = width * columns;
   let totalHeight = height * rows + 50; // Add space for the title
 
+  // Are we displaying par, if so does this add to the height or width?
+  if (stock.display && stock.display.par) {
+    let parData = getParData(stock, config);
+    let parTotalWidth = parData.totalWidth + (width * stock.display.par.x);
+    let parTotalHeight = parData.totalHeight + (height * stock.display.par.y + 50);
+
+    totalWidth = max(totalWidth, parTotalWidth);
+    totalHeight = max(totalHeight, parTotalHeight);
+  }
+
   if (stock.type === "1D" || stock.type === "1Diag") {
-    if (stock.legend && stock.legend.length > 0) {
+    if (config.stock.display.legend && stock.legend && stock.legend.length > 0) {
       // Add space for legend
       totalHeight += 50;
     }
