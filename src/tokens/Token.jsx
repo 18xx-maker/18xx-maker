@@ -29,6 +29,7 @@ const Token = ({
 
   target, // Colors for target shape
   stripe, // Colors for stripe shape
+  stripeWidth, // Width of the stripe
   stripes, // Colors for stripes shape
   stripesWidth, // Width of the stripes
   stripesDistance, // Distance from the middle for stripes
@@ -192,7 +193,7 @@ const Token = ({
           }
 
           if (stripe) {
-            let stripeWidth = width / 2;
+            stripeWidth = stripeWidth || (width / 2);
             shapes.push(<g key="stripe" transform={`rotate(${angle || 0})`}>
                           <rect key="upper"
                                 x={-0.5 * stripeWidth} y="-50"
