@@ -60,7 +60,7 @@ export const getMarketData = (stock, config) => {
   if (stock.display && stock.display.par) {
     let parData = getParData(stock, config);
     let parTotalWidth = parData.totalWidth + (width * stock.display.par.x);
-    let parTotalHeight = parData.totalHeight + (height * stock.display.par.y + 50);
+    let parTotalHeight = parData.totalHeight + (height * stock.display.par.y);
 
     totalWidth = max(totalWidth, parTotalWidth);
     totalHeight = max(totalHeight, parTotalHeight);

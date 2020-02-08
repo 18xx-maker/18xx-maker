@@ -36,6 +36,9 @@ const Token = ({
   curvedStripes, // Colors for curved stripes shape
   curvedStripesWidth, // Width of the curved stripes
   curvedStripesDistance, // Distance from the middle for curved stripes
+  spiral, // Color of a spiral
+  spiralWidth, // Width of the spiral
+  spiralDistance, // How far each spiral is
   halves, // Colors for halves shape
   quarters, // Colors for quarters shape
   square, // Draw a square of a certain color on the token
@@ -151,6 +154,36 @@ const Token = ({
                           <rect key="lower" x="-50" y="0" width="100" height="50"
                                 fill={c(halves[1])}
                                 clipPath={`url(#${clipId})`}/>
+                        </g>);
+          }
+
+          if (spiral) {
+            spiralWidth = (width / 25 * spiralWidth) || (width / 8);
+            spiralDistance = (width / 25 * spiralDistance) || (width * 0.33);
+
+            let quarterTurns = 25;
+            let pointsPerQuarter = 90;
+            let startRadius = spiralDistance / 4;
+            let endRadius = spiralDistance * 1.333;
+            let points = [];
+            let radiusStep = (endRadius - startRadius) / 4 / pointsPerQuarter;
+
+            for (let i=0; i < (quarterTurns * pointsPerQuarter); i++) {
+              let radius = startRadius + radiusStep * i;
+              let angle = i * Math.PI / 2 / pointsPerQuarter;
+              points.push(radius * Math.cos(angle));
+              points.push(radius * Math.sin(angle));
+            }
+
+            shapes.push(<g key="spiral" transform={`rotate(${angle || 0})`}>
+                          <polyline
+                            points={points.join(',')}
+                            fill="none"
+                            stroke={c(spiral)}
+                            strokeWidth={spiralWidth}
+                            strokeLinecap="round"
+                            clipPath={`url(#${clipId})`}
+                          />
                         </g>);
           }
 

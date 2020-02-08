@@ -1,15 +1,6 @@
 import React from "react";
 import Color from "../data/Color";
 
-import Name from "./Name";
-
-import is from "ramda/src/is";
-
-import GameMapCompanyToken from "../tokens/GameMapCompanyToken";
-
-import ColorContext from "../context/ColorContext";
-import RotateContext from "../context/RotateContext";
-
 const TunnelEntrance = ({ border, borderColor, trackColor, color, size }) => {
   size = size || 15;
   color = color || "city";
