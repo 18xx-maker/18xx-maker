@@ -155,8 +155,8 @@ const Token = ({
           }
 
           if (curvedStripes) {
-            curvedStripesWidth = curvedStripesWidth || (width / 4);
-            curvedStripesDistance = curvedStripesDistance || (width * 0.66);
+            curvedStripesWidth = (width / 25 * curvedStripesWidth) || (width / 4);
+            curvedStripesDistance = (width / 25 * curvedStripesDistance) || (width * 0.66);
             shapes.push(<g key="curvedStripes" transform={`rotate(${angle || 0})`}>
                           <path
                             d={`M ${-curvedStripesDistance} -${width} a ${width} ${1.5 * width} 0 0 1 0 ${2 * width}`}
@@ -176,8 +176,8 @@ const Token = ({
           }
 
           if (stripes) {
-            stripesWidth = stripesWidth || (width / 4);
-            stripesDistance = stripesDistance || (width * 0.5);
+            stripesWidth = (width / 25 * stripesWidth) || (width / 4);
+            stripesDistance = (width / 25 * stripesDistance) || (width * 0.5);
             shapes.push(<g key="stripes" transform={`rotate(${angle || 0})`}>
                           <rect key="upper"
                                 x="-50" y={-stripesDistance - stripesWidth}
@@ -193,7 +193,7 @@ const Token = ({
           }
 
           if (stripe) {
-            stripeWidth = stripeWidth || (width / 2);
+            stripeWidth = (width / 25 * stripeWidth) || (width / 2);
             shapes.push(<g key="stripe" transform={`rotate(${angle || 0})`}>
                           <rect key="upper"
                                 x={-0.5 * stripeWidth} y="-50"
@@ -205,14 +205,14 @@ const Token = ({
 
           if (target) {
             shapes.push(<g key="target">
-                                                    <circle
-                                                      cx="0" cy="0"
-                                                      r={width * 0.625}
-                                                      fill="none"
-                                                      stroke={c(target)}
-                                                      strokeWidth={width / 4}
-                                                      clipPath={`url(#${clipId})`}/>
-                                                  </g>);
+                          <circle
+                            cx="0" cy="0"
+                            r={width * 0.625}
+                            fill="none"
+                            stroke={c(target)}
+                            strokeWidth={width / 4}
+                            clipPath={`url(#${clipId})`}/>
+                        </g>);
           }
 
           if (bar) {
