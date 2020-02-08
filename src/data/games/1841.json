@@ -203,6 +203,11 @@
       "right": ["Paid out"]
     },
     "display": {
+      "roundTracker": {
+        "type": "row-reverse",
+        "x": 14,
+        "y": 4
+      },
       "legend": {
         "reverse": true,
         "x": 16,
