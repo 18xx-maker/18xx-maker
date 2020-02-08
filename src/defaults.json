@@ -31,7 +31,7 @@
   "overrideSelection": [],
   "maps": {
     "players": true,
-    "roundTracker": true
+    "roundTracker": false
   },
   "plainMapCompanies": false,
   "straightCityNames": false,
