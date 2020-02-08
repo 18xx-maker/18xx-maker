@@ -202,6 +202,13 @@
       "left": ["Withheld"],
       "right": ["Paid out"]
     },
+    "display": {
+      "legend": {
+        "reverse": true,
+        "x": 16,
+        "y": 3
+      }
+    },
     "ledges": [
       {
         "color": "yellow",
