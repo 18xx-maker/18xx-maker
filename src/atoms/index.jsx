@@ -111,6 +111,7 @@ const atoms = [{
     {tokens: [{label:"GG2", bar: true, stripe: "orange", color: "blue", angle: 45}]},
     {tokens: [{label:"HH", target: "orange", color: "blue", bar: true}]},
     {tokens: [{label:"II", target: "orange", halves: ["purple", "blue"], bar: true}]},
+    {tokens: [{label:"JJ", bar: true, color: "blue", curvedStripes: "orange"}]},
     {tokens: [{label:"KO", color: "purple"}]},
     {tokens: [{company:"CPR"}]},
     {tokens: [{company:"PRR", destination: true}]},

@@ -32,6 +32,9 @@ const Token = ({
   stripes, // Colors for stripes shape
   stripesWidth, // Width of the stripes
   stripesDistance, // Distance from the middle for stripes
+  curvedStripes, // Colors for curved stripes shape
+  curvedStripesWidth, // Width of the curved stripes
+  curvedStripesDistance, // Distance from the middle for curved stripes
   halves, // Colors for halves shape
   quarters, // Colors for quarters shape
   square, // Draw a square of a certain color on the token
@@ -150,6 +153,27 @@ const Token = ({
                         </g>);
           }
 
+          if (curvedStripes) {
+            curvedStripesWidth = curvedStripesWidth || (width / 4);
+            curvedStripesDistance = curvedStripesDistance || (width * 0.66);
+            shapes.push(<g key="curvedStripes" transform={`rotate(${angle || 0})`}>
+                          <path
+                            d={`M ${-curvedStripesDistance} -${width} a ${width} ${1.5 * width} 0 0 1 0 ${2 * width}`}
+                            fill="none"
+                            stroke={c(curvedStripes)}
+                            strokeWidth={curvedStripesWidth}
+                            clipPath={`url(#${clipId})`}
+                          />
+                          <path
+                            d={`M ${curvedStripesDistance} -${width} a ${width} ${1.5 * width} 0 0 0 0 ${2 * width}`}
+                            fill="none"
+                            stroke={c(curvedStripes)}
+                            strokeWidth={curvedStripesWidth}
+                            clipPath={`url(#${clipId})`}
+                          />
+                        </g>);
+          }
+
           if (stripes) {
             stripesWidth = stripesWidth || (width / 4);
             stripesDistance = stripesDistance || (width * 0.5);
@@ -180,14 +204,14 @@ const Token = ({
 
           if (target) {
             shapes.push(<g key="target">
-                          <circle
-                            cx="0" cy="0"
-                            r={width * 0.625}
-                            fill="none"
-                            stroke={c(target)}
-                            strokeWidth={width / 4}
-                            clipPath={`url(#${clipId})`}/>
-                        </g>);
+                                                    <circle
+                                                      cx="0" cy="0"
+                                                      r={width * 0.625}
+                                                      fill="none"
+                                                      stroke={c(target)}
+                                                      strokeWidth={width / 4}
+                                                      clipPath={`url(#${clipId})`}/>
+                                                  </g>);
           }
 
           if (bar) {
@@ -228,28 +252,28 @@ const Token = ({
             let y = -0.75 * width;
             let size = 1 * width;
             content.push(<Component key="icon" className={classes.join(" ")}
-                                    x={x} y={y}
-                                    height={size} width={size} />);
+             x={x} y={y}
+             height={size} width={size} />);
             content.push(<text
-                           key="text"
-                           fontFamily="display"
-                           fontSize={width * 0.48}
-                           textAnchor="middle"
-                           strokeWidth="0.5"
-                           stroke={textStroke}
-                           fill={textFill}
-                           x="0"
-                           y={(width * 0.12) + 12}
-                         >
-                           {label}
-                         </text>
+                          key="text"
+                          fontFamily="display"
+                          fontSize={width * 0.48}
+                          textAnchor="middle"
+                          strokeWidth="0.5"
+                          stroke={textStroke}
+                          fill={textFill}
+                          x="0"
+                          y={(width * 0.12) + 12}
+                     >
+                       {label}
+                     </text>
                         );
           } else {
             let start = -0.75 * width;
             let size = 1.5 * width;
             content.push(<Component key="icon" className={classes.join(" ")}
-                                    x={start} y={start}
-                                    height={size} width={size} />);
+                       x={start} y={start}
+                       height={size} width={size} />);
           }
         } else if (label && label.length > 0) {
           let fontSize = width * 0.64;
@@ -262,18 +286,18 @@ const Token = ({
             y = y * 0.8;
           }
           content.push(<text
-                          key="text"
-                          fontFamily="display"
-                          fontSize={fontSize}
-                          textAnchor="middle"
-                          strokeWidth="0.5"
-                          stroke={textStroke}
-                          fill={textFill}
-                          x="0"
-                          y={y}
-                     >
-                       {label}
-                     </text>
+            key="text"
+        fontFamily="display"
+        fontSize={fontSize}
+        textAnchor="middle"
+        strokeWidth="0.5"
+        stroke={textStroke}
+        fill={textFill}
+        x="0"
+        y={y}
+   >
+     {label}
+   </text>
                       );
         }
 
