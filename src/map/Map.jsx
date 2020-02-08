@@ -5,6 +5,7 @@ import * as R from "ramda";
 import Hex from "../Hex";
 
 import Coordinates from "./Coordinates";
+import BorderTexts from "./BorderTexts";
 import Borders from "./Borders";
 import Lines from "./Lines";
 import Title from "./Title";
@@ -45,8 +46,9 @@ const Map = ({ name, game, coords, variation, hexWidth }) => {
       <Title game={game} variation={variation} hexWidth={hexWidth} />
       <MapRoundTracker roundTracker={data.map.roundTracker} hexWidth={hexWidth} />
       <MapPlayers players={data.map.players} hexWidth={hexWidth} />
-      <Borders data={data} />
       <Lines data={data} />
+      <Borders data={data} />
+      <BorderTexts data={data} />
     </React.Fragment>
   );
 };

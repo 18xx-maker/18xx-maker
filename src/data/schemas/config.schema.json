@@ -47,6 +47,7 @@
       "type": "object",
       "properties": {
         "bank": { "type": "boolean" },
+        "border": { "type": "boolean" },
         "capital": { "type": "boolean" },
         "market": { "type": "boolean" },
         "offboard": { "type": "boolean" },
@@ -59,7 +60,7 @@
         "treasury": { "type": "boolean" },
         "value": { "type": "boolean" }
       },
-      "required": ["bank", "capital", "market", "offboard", "par", "private", "revenue", "terrain", "token", "train", "value"],
+      "required": ["bank", "border", "capital", "market", "offboard", "par", "private", "revenue", "terrain", "token", "train", "value"],
       "additionalProperties": false
     },
     "stock": {

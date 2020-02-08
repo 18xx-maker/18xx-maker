@@ -13,6 +13,7 @@
   },
   "currency": {
     "bank": true,
+    "border": true,
     "capital": true,
     "market": false,
     "offboard": false,

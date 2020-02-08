@@ -1105,18 +1105,6 @@
       },
       {
         "color": "plain",
-        "bridges": [
-          {
-            "cost": 80,
-            "angle": 0,
-            "percent": 1
-          },
-          {
-            "cost": 80,
-            "angle": 300,
-            "percent": 1
-          }
-        ],
         "borders": [
           {
             "side": 1,
@@ -1140,18 +1128,6 @@
       },
       {
         "color": "plain",
-        "bridges": [
-          {
-            "cost": 80,
-            "angle": 300,
-            "percent": 1
-          },
-          {
-            "cost": 80,
-            "angle": 0,
-            "percent": 1
-          }
-        ],
         "borders": [
           {
             "side": 1,
@@ -1168,13 +1144,6 @@
       },
       {
         "color": "plain",
-        "bridges": [
-          {
-            "cost": 80,
-            "angle": 120,
-            "percent": 1
-          }
-        ],
         "borders": [
           {
             "side": 3,
@@ -1187,18 +1156,6 @@
       },
       {
         "color": "plain",
-        "bridges": [
-          {
-            "cost": 80,
-            "angle": 180,
-            "percent": 1
-          },
-          {
-            "cost": 80,
-            "angle": 120,
-            "percent": 1
-          }
-        ],
         "borders": [
           {
             "side": 3,
@@ -1215,18 +1172,6 @@
       },
       {
         "color": "plain",
-        "bridges": [
-          {
-            "cost": 80,
-            "angle": 180,
-            "percent": 1
-          },
-          {
-            "cost": 80,
-            "angle": 120,
-            "percent": 1
-          }
-        ],
         "borders": [
           {
             "side": 3,
@@ -1341,13 +1286,6 @@
       },
       {
         "color": "plain",
-        "bridges": [
-          {
-            "cost": 80,
-            "angle": 300,
-            "percent": 1
-          }
-        ],
         "borders": [
           {
             "side": 6,
@@ -1889,6 +1827,65 @@
         "hexes": [
           "A19"
         ]
+      }
+    ],
+    "borders": [
+      {
+        "color": "water",
+        "coords": ["C13p2", "C13p3"]
+      },
+      {
+        "color": "water",
+        "coords": ["C11p2", "C11p3", "C11p4", "D12p3", "D12p4"]
+      },
+      {
+        "color": "water",
+        "coords": ["D10p1", "D10p2"]
+      },
+      {
+        "color": "water",
+        "coords": ["E11p1", "E11p2"]
+      },
+      {
+        "color": "water",
+        "coords": ["M11p1", "M11p2", "M11p3", "N10p2", "N10p3", "O9p2"]
+      }
+    ],
+    "borderTexts": [
+      {
+        "cost": 80,
+        "circle": 16,
+        "bgColor": "water",
+        "color": "white",
+        "coord": "M11a180p1"
+      },
+      {
+        "cost": 80,
+        "circle": 16,
+        "bgColor": "water",
+        "color": "white",
+        "coord": "M11a120p1"
+      },
+      {
+        "cost": 80,
+        "circle": 16,
+        "bgColor": "water",
+        "color": "white",
+        "coord": "N10a180p1"
+      },
+      {
+        "cost": 80,
+        "circle": 16,
+        "bgColor": "water",
+        "color": "white",
+        "coord": "N10a120p1"
+      },
+      {
+        "cost": 80,
+        "circle": 16,
+        "bgColor": "water",
+        "color": "white",
+        "coord": "O9a120p1"
       }
     ]
   }

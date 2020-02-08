@@ -299,6 +299,7 @@ const Config = ({config, setConfig, resetConfig}) => {
       <h3>Currency</h3>
       <p>This lets you turn on currency symbols for each item individually. Only works if the game file specificies values as numbers and not strings.</p>
       <Input name="currency.bank" label="Bank" description="Bank total on revenue page"/>
+      <Input name="currency.border" label="Border" description="Costs written on map borders"/>
       <Input name="currency.capital" label="Capital" description="Player capital list on revenue page"/>
       <Input name="currency.market" label="Market" description="Stock market cells"/>
       <Input name="currency.offboard" label="Offboard" description="Offboard values on maps"/>
