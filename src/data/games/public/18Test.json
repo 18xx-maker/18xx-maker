@@ -177,7 +177,14 @@
     {
       "name": "Orange Railroad",
       "abbrev": "ORR",
-      "color": "orange"
+      "color": "orange",
+      "token": {
+        "bar": true,
+        "curvedStripes": "black",
+        "curvedStripesDistance": 19,
+        "stripe": "black",
+        "stripeWidth": "6.25"
+      }
     },
     {
       "name": "Pink Railroad",
