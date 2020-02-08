@@ -18,26 +18,6 @@ import concat from "ramda/src/concat";
 import map from "ramda/src/map";
 import reverse from "ramda/src/reverse";
 
-// const findBottomRightMost = market => {
-//   let bottomRightMost = 0;
-//   let maxLength = 0;
-
-//   for(let i = 0; i < market.length; i++) {
-//     let row = market[i];
-
-//     if (row.length >= maxLength) {
-//       maxLength = row.length;
-//       bottomRightMost = i;
-//     }
-//   }
-
-//   return bottomRightMost;
-// }
-
-// const findRightBottomMost = market => {
-//   return market[market.length - 1].length - 1;
-// }
-
 const Market = ({data, title}) => {
   let cells = [];
   let market = [];
@@ -119,18 +99,19 @@ const Market = ({data, title}) => {
   let legend = null;
 
   if (data.type === "2D") {
-    let parOffset = 0;
-    if (data.display.par) {
-      parOffset = data.display.par.x * data.config.stock.cell.width;
-    }
-
-    let right = data.totalWidth;
-    let bottom = data.totalHeight;
-
     legend = (
       <Config>
         {(config, game) => {
-          let legend = reverse((game.stock && game.stock.legend) || []);
+          if (!config.stock.display.legend) {
+            return null;
+          }
+
+          let legend = (game.stock && game.stock.legend) || [];
+          if (game.stock.display.legend.reverse) {
+            legend = reverse(legend);
+          }
+          let x = game.stock.display.legend.x * config.stock.cell.width;
+          let y = game.stock.display.legend.y * config.stock.cell.height;
 
           return (
             <Color context="companies">
@@ -139,9 +120,11 @@ const Market = ({data, title}) => {
                   {addIndex(map)((legend, i) => (
                     <g
                       key={`pool-note-${i}`}
-                      transform={`translate(${(parOffset || right) - 5} ${bottom - (i * 35) - 20})`}
+                      transform={`translate(${x} ${y + 50 + (i * (game.stock.display.legend.reverse ? -35 : 35))})`}
                     >
-                      <Legend right={true} {...legend}/>
+                      <Legend right={game.stock.display.legend.align === "right"}
+                              reverse={game.stock.display.legend.reverse}
+                              {...legend}/>
                     </g>
                   ), legend)}
                 </g>
@@ -155,6 +138,10 @@ const Market = ({data, title}) => {
     legend = (
       <Config>
         {(config, game) => {
+          if (!config.stock.display.legend) {
+            return null;
+          }
+
           let legend = (game.stock && game.stock.legend) || [];
           let left = 0;
 
@@ -181,6 +168,10 @@ const Market = ({data, title}) => {
     legend = (
       <Config>
         {(config, game) => {
+          if (!config.stock.display.legend) {
+            return null;
+          }
+
           let legend = (game.stock && game.stock.legend) || [];
           let left = 0;
 
@@ -218,9 +209,9 @@ const Market = ({data, title}) => {
         {title} Stock Market
       </text>
       {roundTracker}
+      {cells}
       {par}
       {legend}
-      {cells}
       <Ledges data={data} />
     </g>
   );
