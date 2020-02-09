@@ -246,7 +246,6 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
                 {values}
                 {labels}
                 {tokens}
-                {bonus}
                 {terrain}
                 {divides}
                 {borders}
@@ -265,6 +264,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
         {id && <Id id={idBase} extra={idExtra} />}
 
         {outsideCities}
+        {bonus}
         {industries}
         {companies}
         {names}
