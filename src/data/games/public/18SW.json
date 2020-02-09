@@ -1032,7 +1032,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10"
           }
         ],
@@ -1089,7 +1089,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10"
           }
         ],
@@ -1102,7 +1102,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10"
           }
         ],
@@ -1162,7 +1162,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10"
           }
         ],
@@ -1187,7 +1187,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10"
           }
         ],
@@ -1267,7 +1267,7 @@
         ],
         "mountain": {
           "cost": "$20",
-          "size": "large",
+          "size": "medium",
           "angle": -30,
           "percent": 0.4
         },
@@ -1290,7 +1290,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10",
             "angle": 210,
             "percent": 0.4
@@ -1298,7 +1298,7 @@
         ],
         "mountain": {
           "cost": "$20",
-          "size": "large",
+          "size": "medium",
           "angle": 30,
           "percent": 0.4
         },
@@ -1357,7 +1357,7 @@
         "color": "plain",
         "mountain": {
           "cost": "$20",
-          "size": "large",
+          "size": "medium",
           "angle": -90,
           "percent": 0.4
         },
@@ -1375,14 +1375,14 @@
         "color": "plain",
         "mountain": {
           "cost": "$20",
-          "size": "large",
+          "size": "medium",
           "angle": 90,
           "percent": 0.4
         },
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10",
             "angle": -90,
             "percent": 0.4
@@ -1456,7 +1456,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10"
           }
         ],
@@ -1467,7 +1467,7 @@
       {
         "color": "plain",
         "mountain": {
-          "size": "large",
+          "size": "medium",
           "cost": "$20"
         },
         "hexes": [
@@ -1478,7 +1478,7 @@
         "color": "plain",
         "mountain": {
           "cost": "$20",
-          "size": "large",
+          "size": "medium",
           "angle": 210,
           "percent": 0.4
         },
@@ -1491,7 +1491,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10",
             "angle": -30,
             "percent": 0.4
@@ -1499,7 +1499,7 @@
         ],
         "mountain": {
           "cost": "$20",
-          "size": "large",
+          "size": "medium",
           "angle": 150,
           "percent": 0.4
         },
@@ -1559,7 +1559,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10"
           }
         ],
@@ -1582,7 +1582,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10"
           }
         ],
@@ -1601,7 +1601,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10",
             "angle": 90,
             "percent": 0.4
@@ -1609,7 +1609,7 @@
         ],
         "mountain": {
           "cost": "$20",
-          "size": "large",
+          "size": "medium",
           "angle": -90,
           "percent": 0.4
         },
@@ -1622,7 +1622,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10",
             "angle": 90,
             "percent": 0.4
@@ -1630,7 +1630,7 @@
         ],
         "mountain": {
           "cost": "$40",
-          "size": "large",
+          "size": "medium",
           "angle": -90,
           "percent": 0.4
         },
@@ -1643,7 +1643,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10"
           }
         ],
@@ -1678,7 +1678,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10"
           }
         ],
@@ -1691,7 +1691,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10",
             "angle": 150,
             "percent": 0.4
@@ -1699,7 +1699,7 @@
         ],
         "mountain": {
           "cost": "$20",
-          "size": "large",
+          "size": "medium",
           "angle": -30,
           "percent": 0.4
         },
@@ -1712,7 +1712,7 @@
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "$10"
           }
         ],
@@ -1725,7 +1725,7 @@
         "color": "plain",
         "mountain": {
           "cost": "$20",
-          "size": "large",
+          "size": "medium",
           "angle": -90,
           "percent": 0.4
         },
