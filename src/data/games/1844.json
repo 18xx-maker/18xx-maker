@@ -1167,6 +1167,19 @@
     },
     "hexes": [
       {
+        "color": "gray",
+        "track": [{"side": 2, "type": "offboard"},
+                  {"side": 5, "type": "offboard"}],
+        "offBoardRevenue": {
+          "name": {"name": "Vadus"},
+          "revenues": [{"color": "yellow", "value": 10},
+                       {"color": "green", "value": 20},
+                       {"color": "brown", "value": 30},
+                       {"color": "gray", "value": 40}]
+        },
+        "hexes": ["E26"]
+      },
+      {
         "color": "offboard",
         "track": [{"side": 4, "type": "offboard"},
                   {"side": 5, "type": "offboard"}],
@@ -1271,6 +1284,16 @@
       },
       {
         "color": "gray",
+        "centerTowns": [{}],
+        "names": [{"name": "Altdorf", "angle": 120, "percent": 0.75, "y": 5}],
+        "track": [{"side":1},{"side":3},{"side":4},{"side":6}],
+        "tokens": [{"company": "FNM", "destination": true,
+                    "angle": 240, "percent": 0.75}],
+        "values": [{"value": 20, "angle": 60, "percent": 0.75}],
+        "hexes": ["G20"]
+      },
+      {
+        "color": "gray",
         "track": [{"type": "sharp", "side": 1}],
         "hexes": ["J17"]
       },
@@ -1344,6 +1367,18 @@
       {
         "color": "tunnel",
         "terrain": [{"type": "tunnel", "cost": 100}],
+        "names": [{"name": "Albula", "percent": 0.333}],
+        "tunnelEntrances": [{"percent": 1, "angle": 30, "rotation": 30},
+                            {"percent": 1, "angle": 90, "rotation": 90},
+                            {"percent": 1, "angle": 150, "rotation": 150},
+                            {"percent": 1, "angle": 210, "rotation": 210},
+                            {"percent": 1, "angle": 270, "rotation": 270},
+                            {"percent": 1, "angle": 330, "rotation": 330}],
+        "hexes": ["H27"]
+      },
+      {
+        "color": "tunnel",
+        "terrain": [{"type": "tunnel", "cost": 100}],
         "names": [{"name": "Lötschberg", "percent": 0.333}],
         "tunnelEntrances": [{"percent": 1, "angle": 150, "rotation": 150},
                             {"percent": 1, "angle": 210, "rotation": 210},
@@ -1413,6 +1448,23 @@
         "track": [{"type": "straight", "side": 1, "gauge": "dashed"},
                   {"type": "offboard", "side": 4}],
         "hexes": ["H23"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Sarnen"}}],
+        "hexes": ["G16"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Stana"},
+                    "companies": ["GB"]}],
+        "hexes": ["G18"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Apperhill"},
+                    "companies": ["AB"]}],
+        "hexes": ["D25"]
       },
       {
         "color": "plain",
@@ -1495,27 +1547,41 @@
       },
       {
         "color": "plain",
+        "terrain": [{"type": "river", "cost": 20}],
+        "hexes": ["C16", "E12", "E22"]
+      },
+      {
+        "color": "plain",
         "terrain": [{"type": "mountain", "cost": 30}],
-        "hexes": ["H5", "I8", "J7"]
+        "hexes": ["C22", "D23", "D7", "D9", "D11", "E6", "F15", "H5", "I8", "J7"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 60}],
-        "hexes": ["H9", "H11", "K6", "K12", "L7", "L9", "J15", "J19", "J21", "J23", "I22", "I24"]
+        "hexes": ["F23", "G24", "H9", "H11", "G10", "K6", "K12", "L7", "L9", "J15", "J19", "J21", "J23", "I22", "I24", "I26", "J27"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 90}],
-        "hexes": ["I18", "I20"]
+        "hexes": ["I18", "I20", "G22"]
       },
       {
         "color": "plain",
-        "hexes": ["F5", "G4", "G6", "I2"]
+        "hexes": ["B21", "C10", "C18", "E14", "E16", "E20", "E24", "F5", "G4", "G6", "G12", "I2"]
       }
     ],
     "borders": [{
       "color": "mountain",
       "coords": ["G4p1", "G4p6", "G4p5", "F5p6"]
+    },{
+      "color": "mountain",
+      "coords": ["F9p3", "F9p4"]
+    },{
+      "color": "mountain",
+      "coords": ["J11p3", "J11p4"]
+    },{
+      "color": "mountain",
+      "coords": ["E20p3", "E20p4", "E20p5"]
     }]
   }
 }
