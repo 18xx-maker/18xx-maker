@@ -69,8 +69,8 @@ const makeNode = (x, y, reverse, revenue, size) => {
              context="map">
         {c => (
           <text
-            fill={c(revenue.phaseColor) || c("white")}
-            strokeWidth="1"
+            fill={c(revenue.phaseColor) || c(revenue.color) || c("white")}
+            strokeWidth="0.5"
             stroke={c("black")}
             fontSize={size}
             dominantBaseline="central"

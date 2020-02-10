@@ -146,6 +146,11 @@ const TileSheet = ({ paper, layout, hexWidth, gaps }) => {
           return concat(tiles, concat([null], color));
         }
       case "die":
+        // If we are using transparent tiles, add enough for a new page
+        if (color[0].color === "none") {
+          return concat(tiles, concat(repeat(null, c.perPage - (tiles.length % c.perPage)), color));
+        }
+
         if (tiles.length % 6 === 0) {
           return concat(tiles, color);
         } else {
