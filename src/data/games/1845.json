@@ -83,22 +83,32 @@
       {
         "quantity": 1,
         "label": "President",
-        "percent": 20,
+        "percent": "100/20/10",
         "shares": 2
       },
       {
         "quantity": 8,
-        "percent": 10,
+        "percent": "20/10",
         "shares": 1
       },
       {
         "quantity": 10,
-        "label": "Short Share",
-        "labelColor": "black",
         "percent": 10,
-        "shares": 1,
+        "shares": 1
+      },
+      {
+        "quantity": 5,
         "backgroundColor": "short",
-        "variant": "short"
+        "subtext": "Short",
+        "percent": "20/10",
+        "shares": 1
+      },
+      {
+        "quantity": 5,
+        "backgroundColor": "short",
+        "subtext": "Short",
+        "percent": 10,
+        "shares": 1
       }
     ]
   },
