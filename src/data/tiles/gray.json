@@ -962,6 +962,14 @@
       }
     ]
   },
+  "912": {
+    "color": "gray",
+    "centerTowns": [{}],
+    "values": [{"value": 10, "angle": 150, "percent": 0.8}],
+    "track": [{"side": 1}, {"side": 2},
+              {"side": 3}, {"side": 4},
+              {"side": 5}, {"side": 6}]
+  },
   "915": {
     "color": "gray",
     "values": [
