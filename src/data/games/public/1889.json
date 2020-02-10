@@ -609,7 +609,7 @@
       "name": "South Iyo Railway",
       "price": 80,
       "revenue": 20,
-      "icon": "tracks",
+      "token": {"color": "orange", "icon": "train", "iconColor": "orange"},
       "players": "Players: 3+"
     },
     {

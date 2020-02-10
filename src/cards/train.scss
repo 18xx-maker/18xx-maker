@@ -58,10 +58,6 @@
 }
 
 .train__description {
-  position: relative;
-  padding: 0.03125in 0.125in 0.03125in 0.03125in;
-  float: right;
-  box-sizing: border-box;
   text-align: right;
   font-family: sans-serif;
   font-size: 0.12in;
@@ -69,6 +65,15 @@
   line-height: 0.16in;
   background-color: #ffffffb0;
   border-radius: 0 0 0 0.125in;
+
+  position: absolute;
+  bottom: 0.4in;
+  width: 100%;
+  padding: 0.025in 0.125in;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .train__notes {

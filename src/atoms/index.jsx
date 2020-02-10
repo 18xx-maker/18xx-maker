@@ -83,6 +83,7 @@ const atoms = [{
              {icons: [{type: "mail"}]},
              {icons: [{type: "boat"}]},
              {icons: [{type: "tracks"}]},
+             {icons: [{type: "train"}]},
              {icons: [{type: "share"}]},
              {icons: [{type: "share", color: "orange"}]},
              {icons: [{type: "charter"}]},
