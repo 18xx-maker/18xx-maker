@@ -23,12 +23,16 @@ const Position = ({ data, children }) => {
     let translate = 75 * (d.percent || 0);
     let rotate = -(d.angle || 0) + (rotation || 0);
 
+    let passing = {...d};
+    delete passing.rotate;
+    delete passing.rotation;
+
     return (
       <g
         key={`position-${angle}-${rotate}-${translate}-${x}-${y}`}
         transform={`rotate(${angle} ${x} ${y}) translate(0 ${translate}) rotate(${rotate} ${x} ${y}) translate(${x} ${y})`}
       >
-        {children(d)}
+        {children(passing)}
       </g>
     );
   }, data);

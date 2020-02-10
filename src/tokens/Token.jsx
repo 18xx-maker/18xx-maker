@@ -310,28 +310,28 @@ const Token = ({
             let y = -0.75 * width;
             let size = 1 * width;
             content.push(<Component key="icon" className={classes.join(" ")}
-             x={x} y={y}
-             height={size} width={size} />);
+                                    x={x} y={y}
+                                    height={size} width={size} />);
             content.push(<text
-                          key="text"
-                          fontFamily="display"
-                          fontSize={width * 0.48}
-                          textAnchor="middle"
-                          strokeWidth="0.5"
-                          stroke={textStroke}
-                          fill={textFill}
-                          x="0"
-                          y={(width * 0.12) + 12}
-                     >
-                       {label}
-                     </text>
+                           key="text"
+                           fontFamily="display"
+                           fontSize={width * 0.48}
+                           textAnchor="middle"
+                           strokeWidth="0.5"
+                           stroke={textStroke}
+                           fill={textFill}
+                           x="0"
+                           y={(width * 0.12) + 9}
+                         >
+                           {label}
+                         </text>
                         );
           } else {
             let start = -0.75 * width;
             let size = 1.5 * width;
             content.push(<Component key="icon" className={classes.join(" ")}
-                       x={start} y={start}
-                       height={size} width={size} />);
+                                    x={start} y={start}
+                                    height={size} width={size} />);
           }
         } else if (label && label.length > 0) {
           let fontSize = width * 0.64;
@@ -344,18 +344,18 @@ const Token = ({
             y = y * 0.8;
           }
           content.push(<text
-            key="text"
-        fontFamily="display"
-        fontSize={fontSize}
-        textAnchor="middle"
-        strokeWidth="0.5"
-        stroke={textStroke}
-        fill={textFill}
-        x="0"
-        y={y}
-   >
-     {label}
-   </text>
+                         key="text"
+                         fontFamily="display"
+                         fontSize={fontSize}
+                         textAnchor="middle"
+                         strokeWidth="0.5"
+                         stroke={textStroke}
+                         fill={textFill}
+                         x="0"
+                         y={y}
+                       >
+                         {label}
+                       </text>
                       );
         }
 
