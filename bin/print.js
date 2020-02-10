@@ -30,7 +30,7 @@ const server = app.listen(9000);
 (async () => {
   if (process.argv[2] === "debug") return;
 
-  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox']});
+  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox', '--force-color-profile', 'srgb', '--force-raster-color-profile', 'srgb']});
   const page = await browser.newPage();
 
   for(let g=0;g<games.length;g++) {
