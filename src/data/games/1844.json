@@ -528,7 +528,7 @@
       "name": "Furka - Oberalpbahn",
       "price": 110,
       "revenue": 20,
-      "tile": "57",
+      "hex": "I16",
       "description": "The owner of this Private Railway company may at any time place the Furka-Oberalp special tiles. This is an additional tile lay and free of cost."
     },
     {
