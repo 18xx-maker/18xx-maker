@@ -10,12 +10,13 @@ import join from "ramda/src/join";
 import keys from "ramda/src/keys";
 
 const colors = keys(require("./themes/companies/rob.json").colors);
+const mapColors = keys(require("./themes/maps/gmt.json").colors);
 
 const SetSvgColors = ({ companySvgLogos }) => {
   return (
     <ColorContext.Provider value="companies">
       <Color>
-        {c => {
+        {(c, t, s, p) => {
           let rules = [];
 
           if (companySvgLogos !== "original") {
@@ -23,6 +24,11 @@ const SetSvgColors = ({ companySvgLogos }) => {
               `svg .color-${color}{fill:${c(color)}}`,
               `svg .color-stroke-${color}{stroke:${c(color)}}`
             ], colors));
+
+            rules = concat(rules, chain(color => [
+              `svg .color-map-${color}{fill:${p(color)}}`,
+              `svg .color-stroke-map-${color}{stroke:${p(color)}}`
+            ], mapColors));
           }
 
           rules = concat(rules, chain(color => {
@@ -44,6 +50,11 @@ const SetSvgColors = ({ companySvgLogos }) => {
             `svg.icon-color-main-${color} .color-main{fill:${c(color)}}`,
             `svg.icon-color-main-${color} .color-stroke-main{stroke:${c(color)}}`,
           ], colors));
+
+          rules = concat(rules, chain(color => [
+            `svg.icon-color-main-map-${color} .color-main{fill:${p(color)}}`,
+            `svg.icon-color-main-map-${color} .color-stroke-main{stroke:${p(color)}}`,
+          ], mapColors));
 
           // Color changing for logos
           if (companySvgLogos === "main") {

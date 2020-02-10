@@ -654,13 +654,14 @@
       "price": "Face: $30",
       "revenue": 10,
       "bid": 20,
-      "description": ""
+      "token": {"circle": "yellow", "label": "$" }
     },
     {
       "name": "Niagara Falls Bridge",
       "price": "Face: $45",
       "revenue": 15,
       "bid": 30,
+      "icon": "bridge",
       "description": "+10 Buffalo"
     },
     {
@@ -668,6 +669,7 @@
       "price": "Face: $60",
       "revenue": 20,
       "bid": 40,
+      "hex": "L12",
       "description": "+10 Montreal"
     },
     {
@@ -675,6 +677,7 @@
       "price": "Face: $75",
       "revenue": 25,
       "bid": 50,
+      "hex": "O7",
       "description": "+10 Quebec"
     },
     {
@@ -682,6 +685,7 @@
       "price": "Face: $90",
       "revenue": 30,
       "bid": 60,
+      "icon": "tunnel",
       "description": "+10 Detroit"
     }
   ],

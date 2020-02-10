@@ -552,7 +552,7 @@
       "id": "P7",
       "name": "Lokfabrik Oerlikon",
       "price": 100,
-      "token": {"color": "brown", "label": "5H", "labelColor": "white"},
+      "token": {"color": "brown", "icon": "train", "iconColor": "map-brown"},
       "description": "The P7 will be closed as soon as a 5 or 5H train is bought. The owner of the P7 gets the 5H train named \"EVA\". He may give it immediately or later to any company he's the director of. Train limits have to be kept."
     }
   ],

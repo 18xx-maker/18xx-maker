@@ -239,6 +239,7 @@
       "name": "",
       "price": 40,
       "revenue": 5,
+      "token": {"icon": "token"},
       "description": "In the place station markers phase, the railroad owning P2 may place a free station marker on any hex containing a large city, but not containing any track (this includes preprinted track). This is instead of the railroad's normal station marker placement."
     },
     {

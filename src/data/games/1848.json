@@ -292,7 +292,7 @@
     {
       "name": "Melbourne & Hobson's Bay Railway Company",
       "price": "1£-40£",
-      "token": { "color": "yellow", "label": "£" },
+      "token": { "circle": "yellow", "label": "£" },
       "revenue": 5
     },
     {
@@ -313,7 +313,7 @@
       "name": "The Ghan",
       "price": "1£-220£",
       "revenue": 20,
-      "token": { "color": "gray", "label": "2E" },
+      "token": { "color": "gray", "icon": "train", "iconColor": "map-gray" },
       "description": "The owner has a one-time discount of £100 on the purchase of a 2E train, 'The Ghan'"
     },
     {

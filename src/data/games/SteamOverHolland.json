@@ -67,36 +67,43 @@
     {
       "name": "Noord Brabantsch Duitse Spoorweg Maatschappij",
       "abbrev": "NBD",
+      "token": { "bar": true },
       "color": "blue"
     },
     {
       "name": "Hollandsche IJzeren Spoorweg Maatschappij",
       "abbrev": "HYSM",
+      "token": { "bar": true },
       "color": "green"
     },
     {
       "name": "Nederlansche Rijinspoorweg",
       "abbrev": "NRS",
+      "token": { "bar": true },
       "color": "yellow"
     },
     {
       "name": "Overijsselsche Spporweg Maatschappij",
       "abbrev": "OSM",
+      "token": { "bar": true },
       "color": "black"
     },
     {
       "name": "Société Anonyme des Chemins de Fer d'Anvers à Rotterdam",
       "abbrev": "AR",
+      "token": { "bar": true },
       "color": "red"
     },
     {
       "name": "Nederlansche Centraal Spoorweg Maatschappij",
       "abbrev": "NCS",
+      "token": { "bar": true },
       "color": "purple"
     },
     {
       "name": "Nijmeegsche Spoorweg Maatschappij",
       "abbrev": "NSM",
+      "token": { "bar": true },
       "color": "white"
     }
   ],
@@ -195,7 +202,7 @@
       "name": "Veerdienst Enkhuizen - Stavoren",
       "price": 75,
       "revenue": 15,
-      "hex": "F16",
+      "icon": "boat",
       "description": "Fl. 20 bonus revenue for the owning company if it uses the ferry across the Zuiderzee between Enkhuizen and Stavoren.",
       "id": "3"
     },
@@ -203,7 +210,7 @@
       "name": "Veerdienst Vlissingen - Londen",
       "price": 75,
       "revenue": 15,
-      "hex": "F16",
+      "hex": "J1",
       "description": "Fl. 20 bonus for owning company each time it starts or ends a route in Vlissingen.",
       "id": "4"
     },
@@ -211,7 +218,7 @@
       "name": "Rijks Waterstaat",
       "price": 80,
       "revenue": 20,
-      "icon": "home",
+      "icon": "token",
       "description": "Pays one time the cost of placing a company token. Closes after this action.",
       "id": "5"
     },
@@ -219,7 +226,7 @@
       "name": "Werkspoor",
       "price": 100,
       "revenue": 20,
-      "icon": "track",
+      "token": { "iconColor": "violet", "icon": "train" },
       "description": "Gives a 10% discount on all trains the owning company buys from the bank.",
       "id": "6"
     },

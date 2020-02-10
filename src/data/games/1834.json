@@ -213,7 +213,7 @@
       "name": "Cockerill Locomotive Company",
       "price": 120,
       "revenue": 20,
-      "icon": "tracks",
+      "token": { "color": "yellow", "iconColor": "map-green", "icon": "train" },
       "description": "Allows owning railroad to purchase a train at half price, closing the private. Can be sold during the YELLOW and GREEN phases."
     },
     {
