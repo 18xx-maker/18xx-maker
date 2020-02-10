@@ -63,7 +63,6 @@ const Private = ({
                   <Config>
                     {(config, game) => {
                       if (hex) {
-                        console.log(game.info);
                         let hexData = getMapHex(game, hex);
                         return (<div className="private__hex">
                              <HexContext.Provider

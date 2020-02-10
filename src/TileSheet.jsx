@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import "./TileSheet.scss";
 
-import { getTile, sortTiles, tileColors } from "./util";
+import { getTile, sortTiles } from "./util";
 import { getTileSheetContext } from "./tilesheet/util";
 import tileDefs from "./data/tiles";
 import { sidesFromTile } from "./atoms/Track";
@@ -21,11 +21,9 @@ import Pins from "./tilesheet/Pins";
 
 import addIndex from "ramda/src/addIndex";
 import append from "ramda/src/append";
-import ascend from "ramda/src/ascend";
 import clone from "ramda/src/clone";
 import compose from "ramda/src/compose";
 import concat from "ramda/src/concat";
-import defaultTo from "ramda/src/defaultTo";
 import drop from "ramda/src/drop";
 import filter from "ramda/src/filter";
 import groupBy from "ramda/src/groupBy";
@@ -36,12 +34,8 @@ import map from "ramda/src/map";
 import propOr from "ramda/src/propOr";
 import reduce from "ramda/src/reduce";
 import repeat from "ramda/src/repeat";
-import sortWith from "ramda/src/sortWith";
 import take from "ramda/src/take";
 import unnest from "ramda/src/unnest";
-
-const colorSort = compose(tileColors.indexOf.bind(tileColors), defaultTo("other"));
-const sortColorNames = sortWith([ascend(colorSort)]);
 
 const gatherIds = tiles => {
   return compose(unnest,
