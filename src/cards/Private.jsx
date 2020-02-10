@@ -10,6 +10,8 @@ import Svg from "../Svg";
 import Tile from "../Tile";
 import Token from "../tokens/Token";
 
+import HexContext from "../context/HexContext";
+
 import intersperse from "ramda/src/intersperse";
 import is from "ramda/src/is";
 import map from "ramda/src/map";
@@ -61,11 +63,18 @@ const Private = ({
                   <Config>
                     {(config, game) => {
                       if (hex) {
+                        console.log(game.info);
                         let hexData = getMapHex(game, hex);
                         return (<div className="private__hex">
-                             <Svg viewBox="-80 -80 160 160">
-                               <Hex hex={hexData} id={hex} border={true} map={true} />
-                             </Svg>
+                             <HexContext.Provider
+                               value={{
+                                 width: 100,
+                                 rotation: game.info.orientation === "horizontal" ? 0 : 90
+                               }}>
+                               <Svg viewBox="-80 -80 160 160">
+                                 <Hex hex={hexData} border={true} map={true} />
+                               </Svg>
+                             </HexContext.Provider>
                            </div>);
                       } else if (tile) {
                         return (<div className="private__tile">
