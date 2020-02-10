@@ -436,70 +436,70 @@
       "name": "Mountain #1",
       "price": 50,
       "revenue": 10,
-      "icon": "mountain"
+      "token": {"icon": "mountain", "color": "mountain"}
     },
     {
       "id": "M2",
       "name": "Mountain #2",
       "price": 50,
       "revenue": 10,
-      "icon": "mountain"
+      "token": {"icon": "mountain", "color": "mountain"}
     },
     {
       "id": "M3",
       "name": "Mountain #3",
       "price": 50,
       "revenue": 10,
-      "icon": "mountain"
+      "token": {"icon": "mountain", "color": "mountain"}
     },
     {
       "id": "M4",
       "name": "Mountain #4",
       "price": 50,
       "revenue": 10,
-      "icon": "mountain"
+      "token": {"icon": "mountain", "color": "mountain"}
     },
     {
       "id": "M5",
       "name": "Mountain #5",
       "price": 50,
       "revenue": 10,
-      "icon": "mountain"
+      "token": {"icon": "mountain", "color": "mountain"}
     },
     {
       "id": "T1",
       "name": "Tunnel #1",
       "price": 50,
       "revenue": 10,
-      "icon": "tunnel"
+      "token": {"color": "tunnel", "icon": "tunnel"}
     },
     {
       "id": "T2",
       "name": "Tunnel #2",
       "price": 50,
       "revenue": 10,
-      "icon": "tunnel"
+      "token": {"color": "tunnel", "icon": "tunnel"}
     },
     {
       "id": "T3",
       "name": "Tunnel #3",
       "price": 50,
       "revenue": 10,
-      "icon": "tunnel"
+      "token": {"color": "tunnel", "icon": "tunnel"}
     },
     {
       "id": "T4",
       "name": "Tunnel #4",
       "price": 50,
       "revenue": 10,
-      "icon": "tunnel"
+      "token": {"color": "tunnel", "icon": "tunnel"}
     },
     {
       "id": "T5",
       "name": "Tunnel #5",
       "price": 50,
       "revenue": 10,
-      "icon": "tunnel"
+      "token": {"color": "tunnel", "icon": "tunnel"}
     },
     {
       "id": "P1",
@@ -520,7 +520,7 @@
       "name": "Gotthard - Postkutsche",
       "price": 80,
       "revenue": 15,
-      "icon": "tunnel",
+      "token": {"color": "tunnel", "icon": "tunnel"},
       "description": "Comes with a Tunnel certificate."
     },
     {
@@ -551,7 +551,7 @@
       "id": "P7",
       "name": "Lokfabrik Oerlikon",
       "price": 100,
-      "icon": "tracks",
+      "token": {"color": "brown", "label": "5H", "labelColor": "white"},
       "description": "The P7 will be closed as soon as a 5 or 5H train is bought. The owner of the P7 gets the 5H train named \"EVA\". He may give it immediately or later to any company he's the director of. Train limits have to be kept."
     }
   ],
