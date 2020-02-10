@@ -116,6 +116,8 @@ const atoms = [{
     {tokens: [{label:"KK", bar:true, curvedStripes: "black", curvedStripesDistance: 19, stripe: "black", stripeWidth: "6.25", color: "orange"}]},
     {tokens: [{label:"LL", spiral: "orange", "color": "blue"}]},
     {tokens: [{label:"LL2", spiralWidth: 2, spiralDistance: 4, spiral: "orange", "color": "blue"}]},
+    {tokens: [{label:"MM", circle: true, "color": "blue"}]},
+    {tokens: [{label:"MM2", circleRadius: 20, circle: "orange", "color": "blue"}]},
     {tokens: [{label:"KO", color: "purple"}]},
     {tokens: [{company:"CPR"}]},
     {tokens: [{company:"PRR", destination: true}]},
