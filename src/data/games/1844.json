@@ -1153,7 +1153,51 @@
     "67": 1,
     "68": 1,
     "69": 1,
-    "70": 1
+    "70": 1,
+    "467": {
+      "quantity": 5,
+      "color": "none",
+      "tunnelEntrances": [{"angle": 120, "rotation": 120, "percent": 1},
+                          {"angle": 300, "rotation": 300, "percent": 1}],
+      "track": [{"side": 3, "type": "straight", "gauge": "narrow", "offset": 0.5}]
+    },
+    "468": {
+      "quantity": 5,
+      "color": "none",
+      "tunnelEntrances": [{"angle": 120, "rotation": 120, "percent": 1},
+                          {"angle": 240, "rotation": 240, "percent": 1}],
+      "track": [{"side": 3, "type": "gentle", "gauge": "narrow", "offset": -1.5}]
+    },
+    "M80": {
+      "quantity": 2,
+      "color": "none",
+      "offBoardRevenue": {
+        "revenues": [{"color": "yellow", "value": 10},
+                     {"color": "green", "value": 20},
+                     {"color": "brown", "value": 50},
+                     {"color": "gray", "value": 80}]
+      }
+    },
+    "M60": {
+      "quantity": 2,
+      "color": "none",
+      "offBoardRevenue": {
+        "revenues": [{"color": "yellow", "value": 10},
+                     {"color": "green", "value": 40},
+                     {"color": "brown", "value": 50},
+                     {"color": "gray", "value": 60}]
+      }
+    },
+    "M10": {
+      "quantity": 2,
+      "color": "none",
+      "offBoardRevenue": {
+        "revenues": [{"color": "yellow", "value": 10},
+                     {"color": "green", "value": 50},
+                     {"color": "brown", "value": 80},
+                     {"color": "gray", "value": 10}]
+      }
+    }
   },
   "map": {
     "players": {
@@ -1299,7 +1343,9 @@
       },
       {
         "color": "mountain",
-        "terrain": [{"type": "mountain", "percent": 0.15, "size": "large"}],
+        "terrain": [{"type": "mountain",
+                     "angle": 180,
+                     "percent": 0.667}],
         "track": [{"type":"offboard", "side": 1},
                   {"type":"offboard", "side": 2},
                   {"type":"offboard", "side": 3},
@@ -1310,14 +1356,18 @@
       },
       {
         "color": "mountain",
-        "terrain": [{"type": "mountain", "percent": 0.15, "size": "large"}],
+        "terrain": [{"type": "mountain",
+                     "angle": 180,
+                     "percent": 0.667}],
         "track": [{"type":"offboard", "side": 1},
                   {"type":"offboard", "side": 2}],
         "hexes": ["L13"]
       },
       {
         "color": "mountain",
-        "terrain": [{"type": "mountain", "percent": 0.15, "size": "large"}],
+        "terrain": [{"type": "mountain",
+                     "angle": 180,
+                     "percent": 0.667}],
         "track": [{"type":"offboard", "side": 1},
                   {"type":"offboard", "side": 2},
                   {"type":"offboard", "side": 3},
@@ -1327,7 +1377,9 @@
       },
       {
         "color": "mountain",
-        "terrain": [{"type": "mountain", "percent": 0.15, "size": "large"}],
+        "terrain": [{"type": "mountain",
+                     "angle": 180,
+                     "percent": 0.667}],
         "track": [{"type":"offboard", "side": 2},
                   {"type":"offboard", "side": 6},
                   {"type":"offboard", "side": 3}],
@@ -1335,21 +1387,27 @@
       },
       {
         "color": "mountain",
-        "terrain": [{"type": "mountain", "percent": 0.15, "size": "large"}],
+        "terrain": [{"type": "mountain",
+                     "angle": 180,
+                     "percent": 0.667}],
         "track": [{"type":"offboard", "side": 2},
                   {"type":"offboard", "side": 4}],
         "hexes": ["F19"]
       },
       {
         "color": "mountain",
-        "terrain": [{"type": "mountain", "percent": 0.15, "size": "large"}],
+        "terrain": [{"type": "mountain",
+                     "angle": 180,
+                     "percent": 0.667}],
         "track": [{"type":"offboard", "side": 1},
                   {"type":"offboard", "side": 2}],
         "hexes": ["L23"]
       },
       {
         "color": "mountain",
-        "terrain": [{"type": "mountain", "percent": 0.15, "size": "large"}],
+        "terrain": [{"type": "mountain",
+                     "angle": 180,
+                     "percent": 0.667}],
         "track": [{"type":"offboard", "side": 2}],
         "hexes": ["J29"]
       },

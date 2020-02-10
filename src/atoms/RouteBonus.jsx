@@ -2,19 +2,20 @@ import React from "react";
 
 import Color from "../data/Color";
 
-const RouteBonus = ({ value }) => {
-  let size = 15;
-  let width = 5 * value.length;
+const RouteBonus = ({ value, size }) => {
+  size = size || 14;
+  let width = 5.0 * value.length;
+  let height = size + 6;
 
   return (
     <Color>
       {(c,t,s,p) => (
         <g>
           <polygon
-            points={`${-width - 10},0 ${-width},10 ${width},10 ${width+10},0 ${width},-10 ${-width},-10`}
+            points={`${-width - 10},0 ${-width},${height*0.5} ${width},${height*0.5} ${width+10},0 ${width},${height*-0.5} ${-width},${height*-0.5}`}
             fill={p("white")}
             stroke={p("black")}
-            strokeWidth="2"
+            strokeWidth="1"
           />
           <text
             fontWeight="bold"

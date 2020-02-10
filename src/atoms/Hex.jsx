@@ -29,7 +29,7 @@ const Hex = ({ color, border, transparent, map }) => {
                 break;
               }
             }
-            let fill = transparent ? "transparent" : c(background);
+            let fill = (transparent || background === "none") ? "transparent" : c(background);
 
             return (
               <g>
