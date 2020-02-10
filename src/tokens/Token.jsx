@@ -31,15 +31,23 @@ const Token = ({
   target, // Colors for target shape
   stripe, // Colors for stripe shape
   stripeWidth, // Width of the stripe
+
   stripes, // Colors for stripes shape
   stripesWidth, // Width of the stripes
   stripesDistance, // Distance from the middle for stripes
+
   curvedStripes, // Colors for curved stripes shape
   curvedStripesWidth, // Width of the curved stripes
   curvedStripesDistance, // Distance from the middle for curved stripes
+
   spiral, // Color of a spiral
   spiralWidth, // Width of the spiral
   spiralDistance, // How far each spiral is
+
+  circle, // Color of a middle circle
+  circleRadius, // Radius of the middle circle - 25 is full token radius
+  circleBorderColor, // Color of the border on the circle
+
   halves, // Colors for halves shape
   quarters, // Colors for quarters shape
   square, // Draw a square of a certain color on the token
@@ -251,7 +259,7 @@ const Token = ({
 
           if (bar) {
             barBorderColor = barBorderColor || "black";
-            let height = barHeight || (width * 0.72);
+            let height = (width / 25 * barHeight) || (width * 0.72);
             let y = height * -0.5;
 
             shapes.push(
@@ -261,6 +269,20 @@ const Token = ({
                     clipPath={`url(#${clipId})`}/>
             );
             textFill = t(bar === true ? p("white") : c(bar));
+          }
+
+          if (circle) {
+            circleBorderColor = circleBorderColor || "black";
+            circleRadius = (width / 25 * circleRadius) || (width * 0.6);
+
+            shapes.push(
+              <circle key="circle" cx="0" cy="0"
+                      r={circleRadius}
+                      fill={circle === true ? p("white") : c(circle)}
+                      stroke={p(circleBorderColor)}
+                      clipPath={`url(#${clipId})`} />
+            );
+            textFill = t(circle === true ? p("white") : c(circle));
           }
 
           // If we specified a labelColor, use it
