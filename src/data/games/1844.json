@@ -122,6 +122,7 @@
       "color": "black",
       "token": { "bar": "brown", "barBorderColor": "white" },
       "tokens": [],
+      "marketTokens": 2,
       "extraStationTokens": 10,
       "shares": [
         {

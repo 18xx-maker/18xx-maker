@@ -27,19 +27,7 @@ export const getTokenData = (game, tokens, paper) => {
 
   // Extra token counts from config
   let marketTokens = game.info.marketTokens || 3;
-  let reverseMarketTokens = marketTokens;
   let extraStationTokens = game.info.extraStationTokens || 0;
-
-  switch (tokens.reverseMarketTokens) {
-  case "none":
-    reverseMarketTokens = 0;
-    break;
-  case "one":
-    reverseMarketTokens = 1;
-    break;
-  default:
-    break;
-  }
 
   // Layout
   let layout = tokens.layout;
@@ -83,8 +71,8 @@ export const getTokenData = (game, tokens, paper) => {
   let perPage = perRow * perColumn;
 
   return {
+    tokens, // Config object
     marketTokens,
-    reverseMarketTokens,
     extraStationTokens,
     width,
     totalWidth,
@@ -112,14 +100,28 @@ export const getTokenData = (game, tokens, paper) => {
 
 const TokenLayout = ({ companies, data, game }) => {
   let companyTokens = chain(company => {
+    let numberMarketTokens = company.marketTokens || data.marketTokens;
+
     // Market tokens
-    let marketTokens = Array(data.marketTokens).fill(
+    let marketTokens = Array(numberMarketTokens).fill(
       <CompanyToken company={company}
                     width={data.marketTokenSize / 2}
                     bleed={data.bleed} />
     );
 
-    let reverseMarketTokens = Array(data.reverseMarketTokens).fill(
+    let numberReverseMarketTokens = numberMarketTokens;
+    switch (data.tokens.reverseMarketTokens) {
+    case "none":
+      numberReverseMarketTokens = 0;
+      break;
+    case "one":
+      numberReverseMarketTokens = 1;
+      break;
+    default:
+      break;
+    }
+
+    let reverseMarketTokens = Array(numberReverseMarketTokens).fill(
       <CompanyToken company={company}
                     width={data.marketTokenSize / 2}
                     bleed={data.bleed}
