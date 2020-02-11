@@ -1070,22 +1070,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "purple"
-          },
-          {
-            "side": 6,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "A11"
-        ]
-      },
-      {
-        "color": "plain",
         "terrain": [
           {
             "type": "river",
