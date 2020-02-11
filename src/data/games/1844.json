@@ -624,15 +624,15 @@
   ],
   "rounds": [
     {
-      "name": "OR3",
+      "name": "OR",
       "color": "brown"
     },
     {
-      "name": "OR2",
+      "name": "OR",
       "color": "green"
     },
     {
-      "name": "OR1",
+      "name": "OR",
       "color": "yellow"
     },
     {
@@ -1252,6 +1252,7 @@
       "quantity": 2,
       "color": "none",
       "offBoardRevenue": {
+        "rotation": -30,
         "revenues": [{"color": "yellow", "value": 10},
                      {"color": "green", "value": 20},
                      {"color": "brown", "value": 50},
@@ -1262,6 +1263,7 @@
       "quantity": 2,
       "color": "none",
       "offBoardRevenue": {
+        "rotation": -30,
         "revenues": [{"color": "yellow", "value": 10},
                      {"color": "green", "value": 40},
                      {"color": "brown", "value": 50},
@@ -1272,6 +1274,7 @@
       "quantity": 2,
       "color": "none",
       "offBoardRevenue": {
+        "rotation": -30,
         "revenues": [{"color": "yellow", "value": 10},
                      {"color": "green", "value": 50},
                      {"color": "brown", "value": 80},
@@ -1294,8 +1297,9 @@
         "color": "gray",
         "track": [{"side": 2, "type": "offboard"},
                   {"side": 5, "type": "offboard"}],
+        "names": [{"name": "Liechtenstein", "percent": 0.3}],
         "offBoardRevenue": {
-          "name": {"name": "Vadus"},
+          "name": {"name": "Vaduz"},
           "revenues": [{"color": "yellow", "value": 10},
                        {"color": "green", "value": 20},
                        {"color": "brown", "value": 30},
@@ -1321,10 +1325,10 @@
         "track": [{"side": 1, "type": "offboard"},
                   {"side": 2, "type": "offboard"},
                   {"side": 6, "type": "offboard"}],
-        "routeBonus": [{"x": 10, "value": "W→E +90", "percent": 0.25}],
+        "routeBonus": [{"x": 15, "value": "W→E +90", "percent": 0.25}],
         "offBoardRevenue": {
-          "name": {"name": "Innstrurk"},
-          "x": 10,
+          "name": {"name": "Innsbruck"},
+          "x": 15,
           "angle": 180,
           "percent": 0.25,
           "revenues": [{"color": "yellow", "value": 20},
@@ -1450,7 +1454,7 @@
         "track": [{"side": 5, "type": "offboard"}],
         "routeBonus": [{"value": "N↓S +30", "percent": 0.2}],
         "offBoardRevenue": {
-          "name": {"name": "Stuffgart"},
+          "name": {"name": "Stuttgart"},
           "angle": 180, "percent": 0.333,
           "revenues": [{"color": "yellow", "value": 20},
                        {"color": "green", "value": 40},
@@ -1479,7 +1483,7 @@
                   {"side": 6, "type": "offboard"}],
         "routeBonus": [{"value": "W→E +50", "percent": 0.2}],
         "offBoardRevenue": {
-          "name": {"name": "M..."},
+          "name": {"name": "München"},
           "angle": 180, "percent": 0.333,
           "revenues": [{"color": "yellow", "value": 10},
                        {"color": "green", "value": 30},
@@ -1490,7 +1494,7 @@
       },
       {
         "color": "gray",
-        "cities": [{"name": {"reverse": true, "offset": 54, "name": "Genéve"}, "size": 2}],
+        "cities": [{"name": {"reverse": true, "offset": 54, "name": "Genève"}, "size": 2}],
         "track": [{"side": 6, "type": "gentle"}],
         "values": [{"value": 40, "angle": 180, "percent": 0.667}],
         "hexes": ["K2"]
@@ -1533,6 +1537,7 @@
                   {"type":"offboard", "side": 4},
                   {"type":"offboard", "side": 5},
                   {"type":"offboard", "side": 6}],
+        "names": [{"name": "Rochers de Naye", "angle": 180, "percent": 0.25}],
         "hexes": ["H7"]
       },
       {
@@ -1542,6 +1547,7 @@
                      "percent": 0.667}],
         "track": [{"type":"offboard", "side": 1},
                   {"type":"offboard", "side": 2}],
+        "names": [{"name": "Matterhornbahnen", "angle": 180, "percent": 0.25}],
         "hexes": ["L13"]
       },
       {
@@ -1554,6 +1560,7 @@
                   {"type":"offboard", "side": 3},
                   {"type":"offboard", "side": 4},
                   {"type":"offboard", "side": 5}],
+        "names": [{"name": "Pilatus Bahn", "angle": 180, "percent": 0.25}],
         "hexes": ["G14"]
       },
       {
@@ -1564,6 +1571,7 @@
         "track": [{"type":"offboard", "side": 2},
                   {"type":"offboard", "side": 6},
                   {"type":"offboard", "side": 3}],
+        "names": [{"name": "Jungfraubahnen", "angle": 180, "percent": 0.25}],
         "hexes": ["I14"]
       },
       {
@@ -1573,6 +1581,7 @@
                      "percent": 0.667}],
         "track": [{"type":"offboard", "side": 2},
                   {"type":"offboard", "side": 4}],
+        "names": [{"name": "Rigi-Bahnen", "angle": 180, "percent": 0.25}],
         "hexes": ["F19"]
       },
       {
@@ -1582,6 +1591,7 @@
                      "percent": 0.667}],
         "track": [{"type":"offboard", "side": 1},
                   {"type":"offboard", "side": 2}],
+        "names": [{"name": "Monte Generoso", "angle": 180, "percent": 0.25}],
         "hexes": ["L23"]
       },
       {
@@ -1590,6 +1600,7 @@
                      "angle": 180,
                      "percent": 0.667}],
         "track": [{"type":"offboard", "side": 2}],
+        "names": [{"name": "Bernina", "angle": 180, "percent": 0.25}],
         "hexes": ["J29"]
       },
       {
@@ -1657,7 +1668,7 @@
       {
         "color": "tunnel",
         "terrain": [{"type": "tunnel", "cost": 100, "angle": 180, "percent": 0.333}],
-        "names": [{"name": "Gutthard", "percent": 0.27}],
+        "names": [{"name": "Gotthard", "percent": 0.27}],
         "tunnelEntrances": [{"percent": 1, "angle": 150, "rotation": 150},
                             {"percent": 1, "angle": 210, "rotation": 210},
                             {"percent": 1, "angle": 330, "rotation": 330}],
@@ -1720,19 +1731,19 @@
       },
       {
         "color": "plain",
-        "cities": [{"name": {"name": "Stana"},
+        "cities": [{"name": {"name": "Stans"},
                     "companies": ["GB"]}],
         "hexes": ["G18"]
       },
       {
         "color": "plain",
-        "cities": [{"name": {"name": "S.G."},
+        "cities": [{"name": {"name": "Sankt Gallen"},
                     "companies": ["VSB"]}],
         "hexes": ["C24"]
       },
       {
         "color": "plain",
-        "cities": [{"name": {"name": "Apperhill"},
+        "cities": [{"name": {"name": "Appenzell"},
                     "companies": ["AB"]}],
         "hexes": ["D25"]
       },
@@ -1747,7 +1758,7 @@
       {
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
-        "cities": [{"name": {"name": "Sch"},
+        "cities": [{"name": {"name": "Schaffhausen"},
                     "percent": 0.4}],
         "hexes": ["B19"]
       },
@@ -1755,7 +1766,7 @@
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
         "labels": [{"angle": 90, "label": "Z", "percent": 0.6}],
-        "cities": [{"name": {"name": "Zurich"},
+        "cities": [{"name": {"name": "Zürich"},
                     "companies": ["NOB"],
                     "percent": 0.4}],
         "hexes": ["D19"]
@@ -1763,7 +1774,7 @@
       {
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
-        "cities": [{"name": {"name": "Bamel"},
+        "cities": [{"name": {"name": "Basel"},
                     "companies": ["SCB"],
                     "percent": 0.4}],
         "hexes": ["C12"]
@@ -1778,7 +1789,7 @@
       {
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
-        "cities": [{"name": {"name": "Olien"},
+        "cities": [{"name": {"name": "Olten"},
                     "percent": 0.4}],
         "hexes": ["D13"]
       },
@@ -1799,7 +1810,7 @@
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.5}],
-        "cities": [{"name": {"name": "St. Mor..."}, "percent": 0.4}],
+        "cities": [{"name": {"name": "St. Moritz"}, "percent": 0.4}],
         "hexes": ["I28"]
       },
       {
@@ -1827,7 +1838,7 @@
       {
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
-        "cities": [{"name": {"name": "Bellinaona"}, "percent": 0.4}],
+        "cities": [{"name": {"name": "Bellinzona"}, "percent": 0.4}],
         "hexes": ["K22"]
       },
       {
@@ -1891,9 +1902,9 @@
         "tokens": [{"company": "AB", "destination": true,
                     "percent": 0.75}],
         "cities": [{"angle": 65, "percent": 0.6,
-                    "name": {"name": "Winterthow"}},
+                    "name": {"name": "Winterthur"}},
                    {"angle": 295, "percent": 0.6,
-                    "name": {"name": "Frasenfeld"}}],
+                    "name": {"name": "Frauenfeld"}}],
         "hexes": ["C20"]
       },
       {
@@ -1908,7 +1919,7 @@
       {
         "color": "yellow",
         "cities": [{"companies": ["STB"],
-                    "name": {"reverse": true, "name": "Aurai"},
+                    "name": {"reverse": true, "name": "Aarau"},
                     "angle": 150, "percent": 0.5},
                    {"angle": 270, "percent": 0.5}],
         "values": [{"value": 10, "angle": 210, "percent": 0.7}],
@@ -1935,7 +1946,7 @@
       {
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.3}],
-        "centerTowns": [{"percent": 0.5, "name": {"name": "Salothurn"}}],
+        "centerTowns": [{"percent": 0.5, "name": {"name": "Solothurn"}}],
         "hexes": ["E10"]
       },
       {
