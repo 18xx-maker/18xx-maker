@@ -1,0 +1,1391 @@
+{
+  "info": {
+    "title": "1854",
+    "subtitle": "Austria",
+    "designer": "Lonny Orgler",
+    "background": "mountain",
+    "currency": "#G"
+  },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/4613/1854",
+    "rules": "http://lookout-spiele.de/wp-content/uploads/1854_EN_final.zip"
+  },
+  "colors": {
+    "tunnel": "#9ba2c7"
+  },
+  "tokens": [
+    "Round"
+  ],
+  "wip": true,
+  "ipo": true,
+  "bank": 12000,
+  "players": [
+    {
+      "number": 3,
+      "certLimit": 20,
+      "capital": 800
+    },
+    {
+      "number": 4,
+      "certLimit": 16,
+      "capital": 620
+    },
+    {
+      "number": 5,
+      "certLimit": 13,
+      "capital": 510
+    },
+    {
+      "number": 6,
+      "certLimit": 11,
+      "capital": 440
+    },
+    {
+      "number": 7,
+      "certLimit": 11,
+      "capital": 400
+    }
+  ],
+  "shareTypes": {
+    "regional": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 40,
+        "shares": 2
+      },
+      {
+        "quantity": 3,
+        "percent": 20,
+        "shares": 1
+      }
+    ],
+    "historical": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ],
+    "ssb": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 50,
+        "shares": 2
+      },
+      {
+        "quantity": 2,
+        "percent": 25,
+        "shares": 1
+      }
+    ]
+  },
+  "tokenTypes": {
+    "regional": [
+      "Home",
+      40,
+      100
+    ],
+    "historical": [
+      "Home",
+      40,
+      100,
+      100,
+      100
+    ],
+    "ssb": [
+      "Home",
+      40
+    ]
+  },
+  "companies": [
+    {
+      "name": "",
+      "abbrev": "SSB",
+      "color": "black",
+      "token": { "bar": "brown", "barBorderColor": "white" },
+      "tokens": [],
+      "marketTokens": 2,
+      "extraStationTokens": 10,
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 10,
+          "shares": 2
+        },
+        {
+          "quantity": 18,
+          "percent": 5,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "id": "R1",
+      "minor": true,
+      "name": "Jura Neuchatelois",
+      "abbrev": "JN",
+      "color": "lavender",
+      "token": { "halves": ["violet", "lavender"], "bar": true },
+      "tokens": "regional",
+      "shares": "regional"
+    },
+    {
+      "id": "R2",
+      "minor": true,
+      "name": "Chur - Arosa",
+      "abbrev": "ChA",
+      "color": "lightBlue",
+      "token": { "halves": ["navy", "lightBlue"], "bar": true },
+      "tokens": "regional",
+      "shares": "regional"
+    },
+    {
+      "id": "R3",
+      "minor": true,
+      "name": "Visp - Zermatt",
+      "abbrev": "VZ",
+      "color": "pink",
+      "token": { "halves": ["red", "pink"], "bar": true },
+      "tokens": "regional",
+      "shares": "regional"
+    },
+    {
+      "id": "H1",
+      "name": "Ferrovie Nord Milano",
+      "abbrev": "FNM",
+      "color": "green",
+      "token": { "bar": true },
+      "tokens": "historical",
+      "shares": "historical"
+    },
+    {
+      "id": "H2",
+      "name": "Rhätische Bahn",
+      "abbrev": "RhB",
+      "color": "red",
+      "token": { "bar": true },
+      "tokens": "historical",
+      "shares": "historical"
+    },
+    {
+      "id": "H3",
+      "name": "Bern - Lötschberg - Simplon",
+      "abbrev": "BLS",
+      "color": "yellow",
+      "token": { "bar": true },
+      "tokens": "historical",
+      "shares": "historical"
+    },
+    {
+      "id": "H4",
+      "name": "Sensetalbahn",
+      "abbrev": "STB",
+      "color": "blue",
+      "token": { "bar": true },
+      "tokens": "historical",
+      "shares": "historical"
+    },
+    {
+      "id": "H5",
+      "name": "Appenzeller Bahn",
+      "abbrev": "AB",
+      "color": "gray",
+      "token": { "bar": true },
+      "tokens": "historical",
+      "shares": "historical"
+    },
+    {
+      "id": "H6",
+      "name": "Noxtreux - Oberland bernois",
+      "abbrev": "MOB",
+      "color": "orange",
+      "token": { "bar": true },
+      "tokens": "historical",
+      "shares": "historical"
+    },
+    {
+      "id": "V1",
+      "minor": true,
+      "name": "Schweizerische Nordostbahn",
+      "abbrev": "NOB",
+      "color": "black",
+      "token": { "bar": "blue", "barBorderColor": "white" },
+      "tokens": "ssb",
+      "shares": "ssb"
+    },
+    {
+      "id": "V2",
+      "minor": true,
+      "name": "Schweizerische Centralbahn",
+      "abbrev": "SCB",
+      "color": "black",
+      "token": { "bar": "red", "barBorderColor": "white" },
+      "tokens": "ssb",
+      "shares": "ssb"
+    },
+    {
+      "id": "V3",
+      "minor": true,
+      "name": "Vereinigt Schweizer Bahnen",
+      "abbrev": "VSB",
+      "color": "black",
+      "token": { "bar": "green", "barBorderColor": "white" },
+      "tokens": "ssb",
+      "shares": "ssb"
+    },
+    {
+      "id": "V4",
+      "minor": true,
+      "name": "Jura - Simplon",
+      "abbrev": "JS",
+      "color": "black",
+      "token": { "bar": "brightGreen", "barBorderColor": "white" },
+      "tokens": "ssb",
+      "shares": "ssb"
+    },
+    {
+      "id": "V5",
+      "minor": true,
+      "name": "Gatthardbahn",
+      "abbrev": "GB",
+      "color": "black",
+      "token": { "bar": "yellow", "barBorderColor": "white" },
+      "tokens": "ssb",
+      "shares": "ssb"
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 13,
+      "price": 90,
+      "color": "yellow",
+      "image": "2T",
+      "info": [
+        {
+          "color": "green",
+          "note": "Converted by 3"
+        }
+      ]
+    },
+    {
+      "name": "2H",
+      "quantity": 13,
+      "price": 70,
+      "color": "yellow",
+      "image": "2T",
+      "info": [
+        {
+          "color": "green",
+          "note": "Rusted by 4"
+        }
+      ]
+    },
+    {
+      "name": "3",
+      "quantity": 9,
+      "price": 180,
+      "color": "green",
+      "image": "3T",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Converted by 4"
+        }
+      ]
+    },
+    {
+      "name": "3H",
+      "quantity": 9,
+      "price": 150,
+      "color": "green",
+      "image": "3T",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Rusted by 6"
+        }
+      ]
+    },
+    {
+      "name": "4",
+      "quantity": 6,
+      "price": 300,
+      "color": "green",
+      "image": "4T",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Coverted by 6"
+        }
+      ]
+    },
+    {
+      "name": "4H",
+      "quantity": 6,
+      "price": 260,
+      "color": "green",
+      "image": "4T",
+      "info": [
+        {
+          "color": "gray",
+          "note": "Rusted by 8"
+        }
+      ]
+    },
+    {
+      "name": "5",
+      "quantity": 4,
+      "price": 450,
+      "color": "brown",
+      "image": "5T",
+      "info": [
+        {
+          "color": "gray",
+          "note": "Coverted by 8"
+        }
+      ]
+    },
+    {
+      "name": "5H",
+      "quantity": 4,
+      "price": 400,
+      "color": "brown",
+      "image": "5T",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "6",
+      "quantity": 4,
+      "price": 630,
+      "color": "brown",
+      "image": "6T",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "6H",
+      "quantity": 4,
+      "price": 550,
+      "color": "brown",
+      "image": "6T",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "8E",
+      "quantity": 4,
+      "price": 960,
+      "color": "gray",
+      "image": "Diesel",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "8H",
+      "quantity": 4,
+      "price": 700,
+      "color": "gray",
+      "image": "Diesel",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    }
+  ],
+  "privates": [
+    {
+      "id": "M1",
+      "name": "Mountain #1",
+      "price": 50,
+      "revenue": 10,
+      "token": {"icon": "mountain", "color": "mountain"}
+    },
+    {
+      "id": "M2",
+      "name": "Mountain #2",
+      "price": 50,
+      "revenue": 10,
+      "token": {"icon": "mountain", "color": "mountain"}
+    },
+    {
+      "id": "M3",
+      "name": "Mountain #3",
+      "price": 50,
+      "revenue": 10,
+      "token": {"icon": "mountain", "color": "mountain"}
+    },
+    {
+      "id": "M4",
+      "name": "Mountain #4",
+      "price": 50,
+      "revenue": 10,
+      "token": {"icon": "mountain", "color": "mountain"}
+    },
+    {
+      "id": "M5",
+      "name": "Mountain #5",
+      "price": 50,
+      "revenue": 10,
+      "token": {"icon": "mountain", "color": "mountain"}
+    },
+    {
+      "id": "T1",
+      "name": "Tunnel #1",
+      "price": 50,
+      "revenue": 10,
+      "token": {"color": "tunnel", "icon": "tunnel"}
+    },
+    {
+      "id": "T2",
+      "name": "Tunnel #2",
+      "price": 50,
+      "revenue": 10,
+      "token": {"color": "tunnel", "icon": "tunnel"}
+    },
+    {
+      "id": "T3",
+      "name": "Tunnel #3",
+      "price": 50,
+      "revenue": 10,
+      "token": {"color": "tunnel", "icon": "tunnel"}
+    },
+    {
+      "id": "T4",
+      "name": "Tunnel #4",
+      "price": 50,
+      "revenue": 10,
+      "token": {"color": "tunnel", "icon": "tunnel"}
+    },
+    {
+      "id": "T5",
+      "name": "Tunnel #5",
+      "price": 50,
+      "revenue": 10,
+      "token": {"color": "tunnel", "icon": "tunnel"}
+    },
+    {
+      "id": "P1",
+      "name": "Brienzer - Rothorn - Bahn",
+      "price": 20,
+      "revenue": 5
+    },
+    {
+      "id": "P2",
+      "name": "Bödelibahn",
+      "price": 50,
+      "revenue": 10,
+      "tile": "8",
+      "description": "Once in the game, a company may place an additional yellow track tile according to the rules. Either that company or it's director must be the owner of the P2. Turn over the certificate after use."
+    },
+    {
+      "id": "P3",
+      "name": "Gotthard - Postkutsche",
+      "price": 80,
+      "revenue": 15,
+      "token": {"color": "tunnel", "icon": "tunnel"},
+      "description": "Comes with a Tunnel certificate."
+    },
+    {
+      "id": "P4",
+      "name": "Furka - Oberalpbahn",
+      "price": 110,
+      "revenue": 20,
+      "hex": "I16",
+      "description": "The owner of this Private Railway company may at any time place the Furka-Oberalp special tiles. This is an additional tile lay and free of cost."
+    },
+    {
+      "id": "P5",
+      "name": "Compagnie Montreaux - Montbovon",
+      "price": 140,
+      "revenue": 25,
+      "company": "MOB",
+      "description": "Comes with a 10% share of the MOB. This share can't be sold unless the director's share of the MOB was bought and hence an issue price determined."
+    },
+    {
+      "id": "P6",
+      "name": "Societa Ananima Delle Ferrovie",
+      "price": 180,
+      "revenue": 30,
+      "company": "FNM",
+      "description": "Comes with the director's share of the FNM. The P6 owner sets the issue price for the FNM. The P6 will be closed as soon as the FNM runs a train on a route for the first time."
+    },
+    {
+      "id": "P7",
+      "name": "Lokfabrik Oerlikon",
+      "price": 100,
+      "token": {"color": "brown", "icon": "train", "iconColor": "map-brown"},
+      "description": "The P7 will be closed as soon as a 5 or 5H train is bought. The owner of the P7 gets the 5H train named \"EVA\". He may give it immediately or later to any company he's the director of. Train limits have to be kept."
+    }
+  ],
+  "phases": [
+    {
+      "name": "2/2H",
+      "limit": "4",
+      "number": "13",
+      "tiles": "yellow"
+    },
+    {
+      "name": "3/3H",
+      "rust": "2",
+      "limit": "4",
+      "number": "9",
+      "tiles": "green",
+      "notes": "Private companies may be purchased"
+    },
+    {
+      "name": "4/4H",
+      "rust": "3/2H",
+      "limit": "3",
+      "number": "6",
+      "tiles": "green"
+    },
+    {
+      "name": "5/5H",
+      "limit": "2",
+      "number": "4",
+      "tiles": "brown",
+      "notes": "Private companies are closed"
+    },
+    {
+      "name": "6/6H",
+      "rust": "4/3H",
+      "limit": "2",
+      "number": "4",
+      "tiles": "brown"
+    },
+    {
+      "name": "8E/8H",
+      "rust": "5/4H",
+      "limit": "2",
+      "number": "∞",
+      "rust": "4",
+      "tiles": "brown"
+    }
+  ],
+  "pools": [
+    {
+      "name": "Market",
+      "notes": [
+        {
+          "color": "orange",
+          "note": "Shares in the market pay dividends to the corporation"
+        },
+        {
+          "color": "brown",
+          "icon": "exclamation",
+          "note": "No more than 50% of a corporation's shares may be in the market at any time"
+        },
+        {
+          "color": "red",
+          "icon": "times",
+          "note": "Shares cannot be sold during the first stock round"
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "OR",
+      "color": "brown"
+    },
+    {
+      "name": "OR",
+      "color": "green"
+    },
+    {
+      "name": "OR",
+      "color": "yellow"
+    },
+    {
+      "name": "SR",
+      "color": "white"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": [
+        "Sell any number of shares",
+        "Buy one share",
+        "Sell any number of shares"
+      ],
+      "ordered": true
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Lay or upgrade track",
+        "Purchase a station",
+        "Run trains",
+        "Pay dividends or withhold revenue",
+        "Purchase trains"
+      ],
+      "ordered": true,
+      "optional": [
+        "Purchase private companies"
+      ]
+    }
+  ],
+  "stock": {
+    "type": "2D",
+    "display": {
+      "par": {
+        "x": 15,
+        "y": 5
+      },
+      "roundTracker": {
+        "type": "col-reverse",
+        "x": 13,
+        "y": 5
+      },
+      "legend": {
+        "reverse": true,
+        "verticalAlign": "bottom",
+        "x": 7,
+        "y": 11
+      }
+    },
+    "par": {
+      "values": [93,87,82,77,72,67]
+    },
+    "movement": {
+      "up": [
+        "Sold out"
+      ],
+      "down": [
+        "Every share sold"
+      ],
+      "left": [
+        "Revenue withheld"
+      ],
+      "right": [
+        "Revenue paid out"
+      ]
+    },
+    "market": [
+      [
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0,
+          "arrow": "down"
+        },
+        67,
+        71,
+        76,
+        82,
+        90,
+        {
+          "value": 100,
+          "label": 100,
+          "par": true
+        },
+        112,
+        126,
+        142,
+        160,
+        180,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350
+      ],
+      [
+        {
+          "value": 53,
+          "label": 53,
+          "legend": 0,
+          "arrow": "down"
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        66,
+        70,
+        76,
+        82,
+        {
+          "value": 90,
+          "label": 90,
+          "par": true
+        },
+        100,
+        112,
+        126,
+        142,
+        160,
+        180,
+        200,
+        220,
+        240,
+        260,
+        280,
+        {
+          "value": 300,
+          "label": 300,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 46,
+          "label": 46,
+          "legend": 0,
+          "arrow": "down"
+        },
+        {
+          "value": 55,
+          "label": 55,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        65,
+        70,
+        76,
+        {
+          "value": 82,
+          "label": 82,
+          "par": true
+        },
+        90,
+        100,
+        111,
+        125,
+        140,
+        155,
+        170,
+        185,
+        {
+          "value": 200,
+          "label": 200,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 39,
+          "label": 39,
+          "legend": 1,
+          "arrow": "down"
+        },
+        {
+          "value": 48,
+          "label": 48,
+          "legend": 0
+        },
+        {
+          "value": 54,
+          "label": 54,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        66,
+        71,
+        {
+          "value": 76,
+          "label": 76,
+          "par": true
+        },
+        82,
+        90,
+        100,
+        110,
+        120,
+        {
+          "value": 130,
+          "label": 130,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 32,
+          "label": 32,
+          "legend": 1,
+          "arrow": "down"
+        },
+        {
+          "value": 41,
+          "label": 41,
+          "legend": 1
+        },
+        {
+          "value": 48,
+          "label": 48,
+          "legend": 0
+        },
+        {
+          "value": 55,
+          "label": 55,
+          "legend": 0
+        },
+        62,
+        67,
+        {
+          "value": 71,
+          "label": 71,
+          "par": true
+        },
+        76,
+        82,
+        90,
+        {
+          "value": 100,
+          "label": 100,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 25,
+          "label": 25,
+          "legend": 2,
+          "arrow": "down"
+        },
+        {
+          "value": 34,
+          "label": 34,
+          "legend": 1
+        },
+        {
+          "value": 42,
+          "label": 42,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0
+        },
+        {
+          "value": 58,
+          "label": 58,
+          "legend": 0
+        },
+        65,
+        {
+          "value": 67,
+          "label": 67,
+          "par": true
+        },
+        71,
+        75,
+        {
+          "value": 80,
+          "label": 80,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 18,
+          "label": 18,
+          "legend": 2,
+          "arrow": "down"
+        },
+        {
+          "value": 27,
+          "label": 27,
+          "legend": 2
+        },
+        {
+          "value": 36,
+          "label": 36,
+          "legend": 1
+        },
+        {
+          "value": 45,
+          "label": 45,
+          "legend": 1
+        },
+        {
+          "value": 54,
+          "label": 54,
+          "legend": 0
+        },
+        63,
+        67,
+        69,
+        {
+          "value": 70,
+          "label": 70,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 12,
+          "label": 12,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        67,
+        {
+          "value": 68,
+          "label": 68,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        null,
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        null,
+        null,
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1,
+          "arrow": "up"
+        }
+      ]
+    ],
+    "legend": [
+      {
+        "color": "yellow",
+        "description": "Shares of this corporation do not count toward the certificate limit",
+        "icon": "certificate"
+      },
+      {
+        "color": "orange",
+        "description": "Players may own more than 60% of this corporation",
+        "icon": "percentage"
+      },
+      {
+        "color": "brown",
+        "description": "Players may purchase any number of shares of this corporation in one stock action",
+        "icon": "money-bill-wave"
+      }
+    ]
+  },
+  "tiles": {
+    "7": 5,
+    "8": 11,
+    "9": 11,
+    "3": 3,
+    "4": 6,
+    "58": 6,
+    "5": 5,
+    "6": 6,
+    "57": 6,
+
+    "16": 2,
+    "19": 2,
+    "20": 2,
+    "23": 6,
+    "24": 6,
+    "25": 2,
+    "26": 2,
+    "27": 2,
+    "28": 2,
+    "29": 2,
+
+    "87": 2,
+    "88": 2,
+    "204": 2,
+
+    "14": 4,
+    "15": 7,
+    "619": 4,
+    "901": 1,
+    "904": 1,
+    "907": 1,
+    "908": 1,
+    "59": 2,
+
+    "39": 1,
+    "40": 1,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 1,
+    "45": 2,
+    "46": 2,
+    "47": 1,
+    "70": 1,
+
+    "911": 2,
+    "912|V1": 1,
+
+    "611": 6,
+    "901": 1,
+    "905": 1,
+    "909|V1": 1,
+    "909|V2": 1,
+
+    "64": 1,
+    "65": 1,
+    "66": 1,
+    "67": 1,
+    "68": 1,
+
+    "915": 2,
+    "902": 1,
+    "906": 1,
+    "910": 1,
+
+    "F01": {
+      "color": "tunnel",
+      "terrain": [{"type": "tunnel", "cost": 100, "rotation": 90, "angle": 180, "percent": 0.333}],
+      "tunnelEntrances": [{"percent": 1, "angle": 120, "rotation": 120},
+                          {"percent": 1, "angle": 240, "rotation": 240}],
+      "track": [{"type": "gentle", "side": 6}]
+    },
+    "F02": {
+      "color": "tunnel",
+      "terrain": [{"type": "tunnel", "cost": 100, "rotation": 90, "angle": 270, "percent": 0.333}],
+      "tunnelEntrances": [{"percent": 1, "angle": 180, "rotation": 180},
+                          {"percent": 1, "angle": 240, "rotation": 240},
+                          {"percent": 1, "angle": 300, "rotation": 300},
+                          {"percent": 1, "angle": 60, "rotation": 60}],
+      "towns": [{"angle": 60, "percent": 0.267,
+                 "rotation": 150,
+                 "name": {"reverse": true, "name": "Andermatt"}}],
+      "track": [{"type": "gentle", "side": 1}]
+    },
+    "F03": {
+      "color": "tunnel",
+      "terrain": [{"type": "tunnel", "cost": 100, "rotation": 90, "angle": 270, "percent": 0.333}],
+      "names": [{"name": "Gutthard", "percent": 0.27, "rotation": 90, "angle": 90}],
+      "tunnelEntrances": [{"percent": 1, "angle": 240, "rotation": 240},
+                          {"percent": 1, "angle": 300, "rotation": 300},
+                          {"percent": 1, "angle": 60, "rotation": 60}],
+      "tokens": [{"destination": "true",
+                  "rotation": 90,
+                  "angle": 120, "percent": 0.7,
+                  "company": "GB"}],
+      "track": [{"type": "straight", "side": 1}]
+    },
+    "F04": {
+      "color": "tunnel",
+      "terrain": [{"type": "tunnel", "cost": 100, "angle": 270, "rotation": 90, "percent": 0.333}],
+      "names": [{"name": "Lukmanier", "percent": 0.27, "angle": 90, "rotation": 90}],
+      "tunnelEntrances": [{"percent": 1, "angle": 120, "rotation": 120},
+                          {"percent": 1, "angle": 300, "rotation": 300},
+                          {"percent": 1, "angle": 60, "rotation": 60}],
+      "track": [{"type": "straight", "side": 1}]
+    },
+    "F05": {
+      "color": "tunnel",
+      "terrain": [{"type": "tunnel", "cost": 100, "angle": 270, "rotation": 90, "percent": 0.333}],
+      "tunnelEntrances": [{"percent": 1, "angle": 120, "rotation": 120},
+                          {"percent": 1, "angle": 240, "rotation": 240},
+                          {"percent": 1, "angle": 300, "rotation": 300},
+                          {"percent": 1, "angle": 60, "rotation": 60}],
+      "track": [{"type": "straight", "side": 1}]
+    },
+    "467": {
+      "quantity": 5,
+      "color": "none",
+      "tunnelEntrances": [{"angle": 120, "rotation": 120, "percent": 1},
+                          {"angle": 300, "rotation": 300, "percent": 1}],
+      "track": [{"side": 3, "type": "straight", "gauge": "narrow", "offset": 0.5}]
+    },
+    "468": {
+      "quantity": 5,
+      "color": "none",
+      "tunnelEntrances": [{"angle": 120, "rotation": 120, "percent": 1},
+                          {"angle": 240, "rotation": 240, "percent": 1}],
+      "track": [{"side": 3, "type": "gentle", "gauge": "narrow", "offset": -1.5}]
+    },
+    "M80": {
+      "quantity": 2,
+      "color": "none",
+      "offBoardRevenue": {
+        "rotation": -30,
+        "revenues": [{"color": "yellow", "value": 10},
+                     {"color": "green", "value": 20},
+                     {"color": "brown", "value": 50},
+                     {"color": "gray", "value": 80}]
+      }
+    },
+    "M60": {
+      "quantity": 2,
+      "color": "none",
+      "offBoardRevenue": {
+        "rotation": -30,
+        "revenues": [{"color": "yellow", "value": 10},
+                     {"color": "green", "value": 40},
+                     {"color": "brown", "value": 50},
+                     {"color": "gray", "value": 60}]
+      }
+    },
+    "M10": {
+      "quantity": 2,
+      "color": "none",
+      "offBoardRevenue": {
+        "rotation": -30,
+        "revenues": [{"color": "yellow", "value": 10},
+                     {"color": "green", "value": 50},
+                     {"color": "brown", "value": 80},
+                     {"color": "gray", "value": 10}]
+      }
+    }
+  },
+  "map": {
+    "players": {
+      "x": 10,
+      "y": 340
+    },
+    "roundTracker": {
+      "type": "row",
+      "x": 26,
+      "y": 250
+    },
+    "hexes": [
+      {
+        "color": "offboard",
+        "track": [{"side": 4, "type": "gentle"},
+                  {"side": 5, "type": "city"},
+                  {"type": "offboard", "side": 5, "angle": 150, "percent": 1}],
+        "values": [{"value": -10, "angle": 60, "percent": 0.8}],
+        "offBoardRevenue": {
+          "name": {"name": "München"},
+          "angle": 180,
+          "percent": 0.6,
+          "revenues": [{
+            "color": "yellow",
+            "value": 20
+          },{
+            "color": "green",
+            "value": 30
+          },{
+            "color": "brown",
+            "value": 40
+          },{
+            "color": "gray",
+            "value": 50
+          }]
+        },
+        "hexes": ["D12"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Feldkirch", "reverse": true}, "angle": 90, "percent": 0.4},
+                        {"name": {"name": "Dornbirn"}, "angle": 270, "percent": 0.4}],
+        "hexes": ["F2"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Eisenstadt"}}],
+        "hexes": ["D26"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Oberwart"}}],
+        "hexes": ["F24"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Wiener Neustadt"}}],
+        "hexes": ["D24"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Wels"}}],
+        "hexes": ["D16"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Ried"}}],
+        "hexes": ["C15"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Graz"}}],
+        "hexes": ["F22"]
+      },
+      {
+        "color": "tunnel",
+        "terrain": [{"type": "tunnel", "angle": 180, "percent": 0.6}],
+        "towns": [{"rotation": -90, "name": {"name": "Mauterndorf"}}],
+        "values": [{"value": 10, "angle": 90, "percent": 0.5}],
+        "track": [{"side": 4}],
+        "hexes": ["F14"]
+      },
+      {
+        "color": "tunnel",
+        "terrain": [{"type": "tunnel", "angle": 180, "percent": 0.6}],
+        "hexes": ["G5", "G7", "G11", "G13", "G17", "F12", "F18"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 50}],
+        "hexes": ["B20"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 60}],
+        "hexes": ["B16"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 70}],
+        "hexes": ["E7", "E9", "D14"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 80}],
+        "hexes": ["H14", "G15"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 90}],
+        "hexes": ["E15", "E19"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 100}],
+        "hexes": ["E17"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["G9", "G19", "H20", "G21", "G23", "B24", "C25", "E25", "B26"]
+      }
+    ],
+    "borders": []
+  }
+}
