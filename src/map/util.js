@@ -427,6 +427,9 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     scale,
     a1Valid,
 
+    // Title options
+    title: gameMap.title,
+
     // Coords choice
     coords,
 

@@ -39,11 +39,13 @@ const Map = ({ name, game, coords, variation, hexWidth }) => {
     }, R.map(toCoords, hex.hexes || []));
   }, data.hexes);
 
+  let showTitle = data.title !== false;
+
   return (
     <React.Fragment>
       {mapHexes}
       <Coordinates {...data}/>
-      <Title game={game} variation={variation} hexWidth={hexWidth} />
+      {showTitle && <Title game={game} variation={variation} hexWidth={hexWidth} />}
       <MapRoundTracker roundTracker={data.map.roundTracker} hexWidth={hexWidth} />
       <MapPlayers players={data.map.players} hexWidth={hexWidth} />
       <Lines data={data} />
