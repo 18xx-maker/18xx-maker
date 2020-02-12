@@ -1733,7 +1733,13 @@
         {
           "color": "gray",
           "track": [{"side": 5, "type": "sharp"}],
-          "hexes": ["A4", "A10"]
+          "removeBorders": [1],
+          "hexes": ["A4"]
+        },
+        {
+          "color": "gray",
+          "track": [{"side": 5, "type": "sharp"}],
+          "hexes": ["A10"]
         },
         {
           "color": "gray",
@@ -1745,6 +1751,7 @@
               {"color": "brown", "value": 30}
             ]
           },
+          "removeBorders": [4,6],
           "hexes": ["A2"]
         },
         {
@@ -1757,6 +1764,7 @@
               {"color": "brown", "value": 30}
             ]
           },
+          "removeBorders": [1],
           "hexes": ["E12"]
         },
         {
@@ -1773,6 +1781,7 @@
               {"color": "brown", "value": 30}
             ]
           },
+          "removeBorders": [4],
           "hexes": ["E8"]
         },
         {
@@ -1789,6 +1798,7 @@
               {"color": "brown", "value": 30}
             ]
           },
+          "removeBorders": [3],
           "hexes": ["B1"]
         },
         {
@@ -1803,7 +1813,15 @@
           "track": [{"side": 2, "type": "sharp"}],
           "values": [{"value": 10, "percent": 0.2}],
           "towns": [{"rotation": 90, "angle": 180, "percent": 0.57735}],
-          "hexes": ["E4", "E10"]
+          "hexes": ["E4"]
+        },
+        {
+          "color": "gray",
+          "track": [{"side": 2, "type": "sharp"}],
+          "values": [{"value": 10, "percent": 0.2}],
+          "towns": [{"rotation": 90, "angle": 180, "percent": 0.57735}],
+          "removeBorders": [1,4],
+          "hexes": ["E10"]
         },
         {
           "color": "yellow",
