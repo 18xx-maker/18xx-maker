@@ -293,7 +293,8 @@ const atoms = [{
   group: "Route Bonuses",
   examples: [
     {routeBonus: [{value:"$40"}]},
-    {routeBonus: [{value:"+$120"}]}]
+    {routeBonus: [{value:"+$120"}]},
+    {routeBonus: [{value:"+$120", fillColor:"black",strokeColor:"red",textColor:"white"}]}]
 }];
 
 const examples = R.addIndex(R.chain)((h,id) => {
