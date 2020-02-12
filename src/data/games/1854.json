@@ -1280,7 +1280,7 @@
           "track": [{"side": 4, "type": "gentle"},
                     {"side": 5, "type": "city"},
                     {"type": "offboard", "side": 5, "angle": 150, "percent": 1}],
-          "values": [{"value": -10, "angle": 60, "percent": 0.8}],
+          "values": [{"value": -10, "angle": 30, "percent": 0.667}],
           "offBoardRevenue": {
             "name": {"name": "München"},
             "angle": 180,
