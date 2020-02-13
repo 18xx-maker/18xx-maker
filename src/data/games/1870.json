@@ -95,7 +95,7 @@
         "Denver",
         40
       ],
-      "color": "purple"
+      "color": "brightGreen"
     },
     {
       "name": "Missouri Pacific Railroad",
@@ -146,7 +146,7 @@
         "Chicago",
         40
       ],
-      "color": "brightGreen"
+      "color": "yellow"
     },
     {
       "name": "Atchison, Topeka & Santa Fe",
@@ -157,7 +157,7 @@
         40,
         100
       ],
-      "color": "cyan"
+      "color": "brightBlue"
     },
     {
       "name": "St. Louis-San Francisco Railway",

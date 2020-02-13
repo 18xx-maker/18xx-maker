@@ -12,7 +12,7 @@
       "name": "New York Central Railroad",
       "abbrev": "NYC",
       "logo": "1830Mayfair/NYC",
-      "color": "black"
+      "color": "gray"
     },
     {
       "name": "Canadian Pacific Railroad",
@@ -30,13 +30,13 @@
       "name": "Chesapeake & Ohio Railroad",
       "abbrev": "C&O",
       "logo": "1830Mayfair/CO",
-      "color": "cyan"
+      "color": "yellow"
     },
     {
       "name": "Erie Railroad",
       "abbrev": "ERIE",
       "logo": "1830Mayfair/ERIE",
-      "color": "yellow"
+      "color": "violet"
     },
     {
       "name": "New York, New Haven & Hartford Railroad",
@@ -48,7 +48,7 @@
       "name": "Boston & Maine Railroad",
       "abbrev": "B&M",
       "logo": "1830Mayfair/BM",
-      "color": "brightGreen"
+      "color": "brown"
     }
   ]
 }
