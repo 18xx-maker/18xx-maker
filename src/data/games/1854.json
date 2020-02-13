@@ -1277,6 +1277,30 @@
         },
         {
           "color": "offboard",
+          "track": [{"type": "offboard", "side": 2},
+                    {"type": "offboard", "side": 4}],
+          "offBoardRevenue": {
+            "name": {"name": "Bozen"},
+            "angle": 90,
+            "percent": 0.225,
+            "revenues": [{
+              "color": "yellow",
+              "value": 20
+            },{
+              "color": "green",
+              "value": 30
+            },{
+              "color": "brown",
+              "value": 30
+            },{
+              "color": "gray",
+              "value": 40
+            }]
+          },
+          "hexes": ["G9"]
+        },
+        {
+          "color": "offboard",
           "track": [{"side": 4, "type": "gentle"},
                     {"side": 5, "type": "city"},
                     {"type": "offboard", "side": 5, "angle": 150, "percent": 1}],
@@ -1577,6 +1601,12 @@
         },
         {
           "color": "plain",
+          "mediumCities": [{"name": {"name": "Bludenz"}, "angle": 180, "percent": 0.3}],
+          "terrain": [{"type": "mountain", "percent": 0.4, "cost": 80}],
+          "hexes": ["G3"]
+        },
+        {
+          "color": "plain",
           "mediumCities": [{"name": {"name": "Spital"}, "angle": 180, "percent": 0.3}],
           "terrain": [{"type": "mountain", "percent": 0.4, "cost": 80}],
           "hexes": ["G15"]
@@ -1643,12 +1673,12 @@
         {
           "color": "plain",
           "terrain": [{"type": "mountain", "cost": 70}],
-          "hexes": ["E9", "D14"]
+          "hexes": ["D14"]
         },
         {
           "color": "plain",
           "terrain": [{"type": "mountain", "cost": 80}],
-          "hexes": ["H14"]
+          "hexes": ["E9", "H14"]
         },
         {
           "color": "plain",
@@ -1662,7 +1692,7 @@
         },
         {
           "color": "plain",
-          "hexes": ["G9", "G19", "G21", "G23", "B24", "E25", "B26"]
+          "hexes": ["G19", "G21", "G23", "B24", "E25", "B26"]
         }
       ],
       "borders": [{
@@ -1686,7 +1716,7 @@
         {
           "color": "plain",
           "centerTowns": [{"angle": 180, "percent": 0.3}],
-          "terrain": [{"type": "mountain", "percent": 0.4, "cost": 50}],
+          "terrain": [{"type": "water", "percent": 0.4, "cost": 50}],
           "hexes": ["C6"]
         },
         {
