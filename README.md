@@ -1,5 +1,7 @@
 # 18xx Maker
 
+[![Build Status](https://travis-ci.org/18xx-maker/18xx-maker.svg?branch=master)](https://travis-ci.org/18xx-maker/18xx-maker)
+
 This is a small pet project to help layout and print
 [18xx](https://en.wikipedia.org/wiki/18XX) games.
 
