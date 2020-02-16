@@ -88,6 +88,9 @@
       "type": "string",
       "enum": ["equal", "max"]
     },
+    "cutlines": { "type": "number", "minimum": 0 },
+    "cutlinesOffset": { "type": "number", "minimum": 0 },
+    "bleed": { "type": "number", "minimum": 0 },
     "ipo": {
       "type": "object",
       "properties": {
@@ -212,18 +215,21 @@
     "font": { "$ref": "#/definitions/font" }
   },
   "required": [
+    "bleed",
     "companiesTheme",
     "companySvgLogos",
     "coords",
+    "cutlines",
+    "cutlinesOffset",
     "font",
+    "overrideCompanies",
+    "overrideSelection",
     "pagination",
     "paper",
     "plainMapCompanies",
     "stock",
     "theme",
-    "tokens",
-    "overrideCompanies",
-    "overrideSelection"
+    "tokens"
   ],
   "additionalProperties": false
 }
