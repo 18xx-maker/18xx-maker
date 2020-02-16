@@ -88,7 +88,7 @@ const Private = ({
                   </Config>
                   {company && <div className="private__company">
                                <Svg viewBox="-15 -15 30 30">
-                                 <GameCompanyToken abbrev={company} outlineWidth={2} width={15} />
+                                 <GameCompanyToken abbrev={company} outlineWidth={15/25} width={15} />
                                </Svg>
                              </div>}
                   {token && <div className="private__company">

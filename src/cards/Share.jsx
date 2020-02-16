@@ -35,16 +35,22 @@ const LeftShare = ({
   let tokens = [];
   let sharesLeft = tokenCount || shares;
   while(sharesLeft > 0) {
-    tokens.push(<div key={sharesLeft} className="share__token">
-                  <div style={{height:`${min(1.0, sharesLeft) * 0.52}in`}}
-                       className="share__token__wrapper">
-                    <svg style={{width:"0.52in",height:"0.52in"}}
-                         viewBox="-26 -26 52 52">
-                      <CompanyToken company={company}
-                                    outline={shareStyle === "gmt" ? (company.color === "white" ? "black" : "white") : null} />
-                    </svg>
-                  </div>
-                </div>);
+    tokens.push(
+      <div key={sharesLeft} className="share__token">
+        <div style={{height:`${min(1.0, sharesLeft) * 0.52}in`}}
+             className="share__token__wrapper">
+          <svg style={{width:"0.52in",height:"0.52in"}}
+               viewBox="-26 -26 52 52">
+            <Color context="companies">
+              {(c,t,s) => (
+                <CompanyToken company={company} />
+              )}
+            </Color>
+          </svg>
+        </div>
+      </div>
+    );
+
     sharesLeft -= 1;
   }
 
@@ -148,14 +154,14 @@ const CenterShare = ({
   let sharesLeft = tokenCount || shares;
   while(sharesLeft > 0) {
     tokens.push(<div key={sharesLeft} className="share__token">
-                <div style={{width:`${min(1.0, sharesLeft) * 100}%`}}
-                     className="share__token__wrapper">
-                  <svg style={{width:"0.52in",height:"0.52in"}}
-                       viewBox="-26 -26 52 52">
-                    <CompanyToken company={company} />
-                  </svg>
-                </div>
-              </div>);
+      <div style={{width:`${min(1.0, sharesLeft) * 100}%`}}
+           className="share__token__wrapper">
+        <svg style={{width:"0.52in",height:"0.52in"}}
+             viewBox="-26 -26 52 52">
+          <CompanyToken company={company} />
+        </svg>
+      </div>
+    </div>);
     sharesLeft -= 1;
   }
 
