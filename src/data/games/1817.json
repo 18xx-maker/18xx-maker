@@ -8,7 +8,7 @@
     "titleSize": 165,
     "subTitleSize": 17,
     "currency": "USD",
-    "extraStationTokens": 1
+    "extraStationTokens": 4
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/63170/1817",
@@ -49,7 +49,7 @@
     }
   ],
   "tokenTypes": {
-    "default": ["Home","","","","","","",""]
+    "default": ["","","",""]
   },
   "shareTypes": {
     "default": [
