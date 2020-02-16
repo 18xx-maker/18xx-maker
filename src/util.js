@@ -285,3 +285,69 @@ export const getCharterData = (charters, paper) => {
     }
   };
 }
+
+/*
+ * addPaginationData expects to receive an object with totalWidth and
+ * totalHeight defined. It will then add all pagination data to this using the
+ * config data that was also passed in.
+ */
+export const addPaginationData = (data, config) => {
+  // Pull data we need from the config
+  const { pagination, paper, cutlines, cutlinesOffset, bleed } = config;
+  const { margins, width: pageWidth, height: pageHeight } = paper;
+  const splitPages = pagination === "max" ? maxPages : equalPages;
+  const cutlinesAndBleed = cutlines + bleed;
+
+  const printableWidth = pageWidth - (2.0 * margins);
+  const printableHeight = pageHeight - (2.0 * margins);
+
+  const usableWidth = printableWidth - (2.0 * cutlinesAndBleed);
+  const usableHeight = printableHeight - (2.0 * cutlinesAndBleed);
+
+  const portraitPages =
+        splitPages(data.totalWidth, usableWidth).length *
+        splitPages(data.totalHeight, usableHeight).length;
+  const landscapePages =
+        splitPages(data.totalWidth, usableHeight).length *
+        splitPages(data.totalHeight, usableWidth).length;
+  const landscape = landscapePages < portraitPages;
+  const pages = landscape ? landscapePages : portraitPages;
+
+  let humanWidth = `${Math.ceil(data.totalWidth / 100.0)}in`;
+  let humanHeight = `${Math.ceil(data.totalHeight / 100.0)}in`;
+
+  const measurements = {
+    pageWidth,
+    pageHeight,
+    margins,
+    cutlines,
+    cutlinesOffset,
+    bleed,
+    cutlinesAndBleed,
+
+    printableWidth,
+    printableHeight,
+    usableWidth,
+    usableHeight
+  };
+
+  return {
+    ...data,
+    splitPages,
+    pagination,
+    portraitPages,
+    landscapePages,
+    landscape,
+    pages,
+
+    humanWidth,
+    humanHeight,
+
+    ...measurements,
+
+    css: {
+      ...(data.css || {}),
+      ...(map(unitsToCss, measurements))
+    }
+  }
+};

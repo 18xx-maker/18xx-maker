@@ -1,5 +1,7 @@
 import * as util from "./util";
 
+import config from "./defaults.json";
+
 describe("inchesToCss", () => {
   it("should format a number to css inches", () => {
     expect(util.inchesToCss(5)).toEqual("5in");
@@ -97,4 +99,58 @@ describe("marketColor", () => {
     expect(util.marketColor(limits, 40)).toEqual("orange");
     expect(util.marketColor(limits, 29)).toEqual("brown");
   });
+});
+
+describe("addPaginationData", () => {
+  it("should generate proper pagination data", () => {
+    const input = {
+      totalWidth: 3050,
+      totalHeight: 2050,
+      css: {
+        totalWidth: "30.5in",
+        totalHeight: "20.5in"
+      }
+    };
+
+    const output = {
+      totalWidth: 3050,
+      totalHeight: 2050,
+      pagination: "equal",
+      landscapePages: 12,
+      portraitPages: 15,
+      landscape: true,
+      pages: 12,
+      humanWidth: "31in",
+      humanHeight: "21in",
+      splitPages: util.equalPages,
+      pageWidth: 850,
+      pageHeight: 1100,
+      margins: 25,
+      cutlines: 25,
+      cutlinesOffset: 0,
+      bleed: 12.5,
+      cutlinesAndBleed: 37.5,
+      printableWidth: 800,
+      printableHeight: 1050,
+      usableWidth: 725,
+      usableHeight: 975,
+      css: {
+        totalWidth: "30.5in",
+        totalHeight: "20.5in",
+        pageWidth: "8.5in",
+        pageHeight: "11in",
+        margins: "0.25in",
+        cutlines: "0.25in",
+        cutlinesOffset: "0in",
+        bleed: "0.125in",
+        cutlinesAndBleed: "0.375in",
+        printableWidth: "8in",
+        printableHeight: "10.5in",
+        usableWidth: "7.25in",
+        usableHeight: "9.75in"
+      }
+    };
+
+    expect(util.addPaginationData(input, config)).toEqual(output);
+  })
 });
