@@ -18,6 +18,7 @@ p {
 .tokens {
   position: relative;
   margin: 2em auto;
+  page-break-inside: avoid;
 }
 
 .background {

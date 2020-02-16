@@ -11,10 +11,11 @@ import Config from "./data/Config";
 
 import { compileCompanies, overrideCompanies, unitsToCss } from "./util";
 
-import is from "ramda/src/is";
-import chain from "ramda/src/chain";
-import map from "ramda/src/map";
 import addIndex from "ramda/src/addIndex";
+import chain from "ramda/src/chain";
+import is from "ramda/src/is";
+import map from "ramda/src/map";
+import splitEvery from "ramda/src/splitEvery";
 
 import PageSetup from "./PageSetup";
 import Svg from "./Svg";
@@ -65,8 +66,8 @@ export const getTokenData = (game, tokens, paper) => {
   let extraX = (usableWidth - rowWidth) / 2;
   let extraY = (usableHeight - columnHeight) / 2;
 
-  let getX = i => extraX + ((i % perRow) * offsetX) + (0.5 * totalWidth);
-  let getY = i => extraY + (Math.floor(i / perRow) * offsetY) + (0.5 *  totalWidth);
+  let getX = i => extraX + (((i % perPage) % perRow) * offsetX) + (0.5 * totalWidth);
+  let getY = i => extraY + (Math.floor((i % perPage) / perRow) * offsetY) + (0.5 *  totalWidth);
 
   let perPage = perRow * perColumn;
 
@@ -170,7 +171,9 @@ const TokenLayout = ({ companies, data, game }) => {
     </g>
   ), tokens);
 
-  return (
+  let pageNodes = splitEvery(data.perPage, nodes);
+
+  return map(nodes => (
     <div
       className="tokens"
       style={{ width: unitsToCss(data.usableWidth),
@@ -188,7 +191,7 @@ const TokenLayout = ({ companies, data, game }) => {
         />
       </ColorContext.Provider>
     </div>
-  );
+  ), pageNodes);
 };
 
 const Tokens = ({ override, selection }) => {
