@@ -128,7 +128,14 @@ const TokenLayout = ({ companies, data, game }) => {
                     inverse={true} />
     );
 
-    let stationTokens = Array(company.tokens.length + (company.extraStationTokens || 0) + data.extraStationTokens).fill(
+    let numberExtraStationTokens = 0;
+    if (is(Number, company.extraStationTokens)) {
+      numberExtraStationTokens = company.extraStationTokens;
+    } else if (is(Number, data.extraStationTokens)) {
+      numberExtraStationTokens = data.extraStationTokens;
+    }
+
+    let stationTokens = Array(company.tokens.length + numberExtraStationTokens).fill(
       <CompanyToken company={company}
                     width={data.stationTokenSize / 2}
                     bleed={data.bleed} />

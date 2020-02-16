@@ -88,31 +88,31 @@
     {
       "name": "Canadian Pacific Railroad",
       "abbrev": "CPR",
-      "color": "lavender",
+      "color": "white",
       "tokens": "four"
     },
     {
       "name": "Credit Valley Railway",
-      "abbrev": "CVR",
+      "abbrev": "CV",
       "color": "purple",
       "tokens": "three"
     },
     {
       "name": "Grand Trunk Railway",
       "abbrev": "GT",
-      "color": "green",
+      "color": "brightGreen",
       "tokens": "four"
     },
     {
       "name": "Great Western Railway",
       "abbrev": "GW",
-      "color": "tan",
+      "color": "natural",
       "tokens": "four"
     },
     {
       "name": "London & Port Sarnia Railway",
       "abbrev": "LPS",
-      "color": "cyan",
+      "color": "lightBlue",
       "tokens": "two"
     },
     {
@@ -130,7 +130,7 @@
     {
       "name": "Welland Railway",
       "abbrev": "WR",
-      "color": "brown",
+      "color": "gray",
       "tokens": "three"
     },
     {

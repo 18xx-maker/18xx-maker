@@ -59,7 +59,7 @@ const textColor = curry((theme, companiesTheme, phase, game, color) => {
   return tinycolor.mostReadable(tc, text).toRgbString();
 });
 
-const strokeColor = color => tinycolor(color).darken(40).toString();
+const strokeColor = color => tinycolor(color).darken(20).toString();
 
 const Color = ({ theme, companiesTheme, context, children }) => {
   return (

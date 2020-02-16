@@ -29,7 +29,7 @@
     {
       "name": "Florida Mayhem",
       "abbrev": "FM",
-      "color": "yellow",
+      "color": "lavender",
       "logo": "owl/florida_mayhem"
     },
     {
@@ -77,7 +77,7 @@
     {
       "name": "Paris Eternal",
       "abbrev": "PE",
-      "color": "lavender",
+      "color": "brown",
       "logo": "owl/paris_eternal"
     },
     {
@@ -101,13 +101,13 @@
     {
       "name": "Shanghai Dragons",
       "abbrev": "SD",
-      "color": "red",
+      "color": "yellow",
       "logo": "owl/shanghai_dragons"
     },
     {
       "name": "Toronto Defiant",
       "abbrev": "TD",
-      "color": "brown",
+      "color": "red",
       "logo": "owl/toronto_defiant"
     },
     {
