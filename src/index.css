@@ -764,36 +764,12 @@ footer a:hover {
   position: relative;
 }
 
-.ParPage,
-.RevenuePage,
-.MarketPage,
-.MapPage {
-  position: relative;
-}
-
 .paginated__page svg {
   overflow: hidden;
   display: block;
 }
 
-.ParPage svg,
-.RevenuePage svg,
-.MarketPage svg,
-.MapPage svg {
-  overflow: hidden;
-  display: block;
-}
-
 .paginated-svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.FullMap,
-.FullMarket,
-.FullPar,
-.FullRevenue {
   position: absolute;
   top: 0;
   left: 0;

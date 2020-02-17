@@ -84,10 +84,6 @@
       "required": ["cell", "column", "diag", "par"],
       "additionalProperties": false
     },
-    "pagination": {
-      "type": "string",
-      "enum": ["equal", "max"]
-    },
     "cutlines": { "type": "number", "minimum": 0 },
     "cutlinesOffset": { "type": "number", "minimum": 0 },
     "bleed": { "type": "number", "minimum": 0 },
@@ -226,7 +222,6 @@
     "margin",
     "overrideCompanies",
     "overrideSelection",
-    "pagination",
     "paper",
     "plainMapCompanies",
     "stock",

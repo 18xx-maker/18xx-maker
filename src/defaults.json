@@ -5,7 +5,6 @@
     "size": "0.15in",
     "weight": "bold"
   },
-  "pagination": "equal",
   "cutlines": 25,
   "cutlinesOffset": 0,
   "bleed": 12.5,
