@@ -91,6 +91,7 @@
     "cutlines": { "type": "number", "minimum": 0 },
     "cutlinesOffset": { "type": "number", "minimum": 0 },
     "bleed": { "type": "number", "minimum": 0 },
+    "margin": { "type": "number", "minimum": 0 },
     "ipo": {
       "type": "object",
       "properties": {
@@ -222,6 +223,7 @@
     "cutlines",
     "cutlinesOffset",
     "font",
+    "margin",
     "overrideCompanies",
     "overrideSelection",
     "pagination",
