@@ -2,7 +2,6 @@ import overrides from "./data/companies";
 
 import addIndex from "ramda/src/addIndex";
 import adjust from "ramda/src/adjust";
-import append from "ramda/src/append";
 import ascend from "ramda/src/ascend";
 import chain from "ramda/src/chain";
 import compose from "ramda/src/compose";
@@ -18,7 +17,6 @@ import lte from "ramda/src/lte";
 import map from "ramda/src/map";
 import merge from "ramda/src/merge";
 import nth from "ramda/src/nth";
-import prepend from "ramda/src/prepend";
 import prop from "ramda/src/prop";
 import propOr from "ramda/src/propOr";
 import reverse from "ramda/src/reverse";
