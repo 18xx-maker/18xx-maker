@@ -204,6 +204,8 @@ const Config = ({config, setConfig, resetConfig}) => {
       <h3>Layout</h3>
       <Input name="pagination" label="Pagination Type"
              description="This lets you configure the type of pagination. Equal keeps all pages directly equal. Max keeps the first and last page equal and set all middle pages to max based on page size."/>
+      <Input name="margin" label="Margin Size" dimension={true}
+             description="How much of a margin exists around the printed item."/>
       <Input name="cutlines" label="Pagination Cutlines Size" dimension={true}
              description="Set to 0 to disable any cutlines."/>
       <Input name="cutlinesOffset" label="Pagination Cutlines Offset" dimension={true}
