@@ -106,19 +106,18 @@ const Paginate = ({component, data, notes, children}) => {
           return row;
         }, paginationData.yPages);
 
-
         return (
           <>
             <style>{css}</style>
             <div className="PrintNotes">
               <div>
                 {notes}
-                <p>This {component} is meant to be printed in <b>{paginationData.landscape ? "landscape" : "portrait"}</b> mode</p>
+                <p>This {component.toLowerCase()} is meant to be printed in <b>{paginationData.landscape ? "landscape" : "portrait"}</b> mode</p>
               </div>
             </div>
             <Svg className="paginated-svg" defs={defs} />
             {pages}
-            <PageSetup landscape={paginationData.langscape} />
+            <PageSetup landscape={paginationData.landscape} />
           </>
         );
       }}

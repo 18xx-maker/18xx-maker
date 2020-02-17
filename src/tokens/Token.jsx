@@ -361,7 +361,6 @@ const Token = ({
                       );
         }
 
-        console.log(tokenFill, color, c(color), s(c(color)))
         let outlineColor = is(String, outline) ? c(outline) : s(c(color));
         return (
           <g>
