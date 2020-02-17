@@ -293,7 +293,7 @@ export const getCharterData = (charters, paper) => {
  */
 export const addPaginationData = (data, config) => {
   // Pull data we need from the config
-  const { pagination, paper, cutlines, cutlinesOffset, bleed } = config;
+  const { pagination, paper, cutlines, cutlinesOffset, bleed, margin } = config;
   const { margins, width: pageWidth, height: pageHeight } = paper;
   const splitPages = pagination === "max" ? maxPages : equalPages;
   const cutlinesAndBleed = cutlines + bleed;
@@ -304,31 +304,47 @@ export const addPaginationData = (data, config) => {
   const usableWidth = printableWidth - (2.0 * cutlinesAndBleed);
   const usableHeight = printableHeight - (2.0 * cutlinesAndBleed);
 
+  const contentWidth = data.totalWidth + (2.0 * margin);
+  const contentHeight = data.totalHeight + (2.0 * margin);
+
   const portraitPages =
-        splitPages(data.totalWidth, usableWidth).length *
-        splitPages(data.totalHeight, usableHeight).length;
+        splitPages(contentWidth, usableWidth).length *
+        splitPages(contentHeight, usableHeight).length;
   const landscapePages =
         splitPages(data.totalWidth, usableHeight).length *
         splitPages(data.totalHeight, usableWidth).length;
   const landscape = landscapePages < portraitPages;
   const pages = landscape ? landscapePages : portraitPages;
 
+  const xPages = landscape ?
+        splitPages(contentWidth, usableHeight) :
+        splitPages(contentWidth, usableWidth);
+  const yPages = landscape ?
+        splitPages(contentHeight, usableWidth) :
+        splitPages(contentHeight, usableHeight);
+
   let humanWidth = `${Math.ceil(data.totalWidth / 100.0)}in`;
   let humanHeight = `${Math.ceil(data.totalHeight / 100.0)}in`;
 
   const measurements = {
-    pageWidth,
-    pageHeight,
-    margins,
+    margin,
     cutlines,
     cutlinesOffset,
     bleed,
     cutlinesAndBleed,
 
-    printableWidth,
-    printableHeight,
-    usableWidth,
-    usableHeight
+    contentWidth,
+    contentHeight,
+
+    printableWidth: landscape ? printableHeight : printableWidth,
+    printableHeight: landscape ? printableWidth : printableHeight,
+
+    usableWidth: landscape ? usableHeight : usableWidth,
+    usableHeight: landscape ? usableWidth : usableHeight,
+
+    pageWidth: landscape ? pageHeight : pageWidth,
+    pageHeight: landscape ? pageWidth : pageHeight,
+    margins
   };
 
   return {
@@ -339,6 +355,8 @@ export const addPaginationData = (data, config) => {
     landscapePages,
     landscape,
     pages,
+    xPages,
+    yPages,
 
     humanWidth,
     humanHeight,
