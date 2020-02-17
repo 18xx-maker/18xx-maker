@@ -202,8 +202,6 @@ const Config = ({config, setConfig, resetConfig}) => {
       <CompaniesThemePreview/>
       <p className="description">The company theme determines which colors are used for all of the elements on the maps and tiles.</p>
       <h3>Layout</h3>
-      <Input name="pagination" label="Pagination Type"
-             description="This lets you configure the type of pagination. Equal keeps all pages directly equal. Max keeps the first and last page equal and set all middle pages to max based on page size."/>
       <Input name="margin" label="Margin Size" dimension={true}
              description="How much of a margin exists around the printed item."/>
       <Input name="cutlines" label="Pagination Cutlines Size" dimension={true}

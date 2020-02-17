@@ -16,7 +16,7 @@ import prop from "ramda/src/prop";
 import Paginate from "../util/Paginate";
 import "./MapPaginated.css";
 
-const MapPaginated = ({ coords, pagination, paper, hexWidth }) => {
+const MapPaginated = ({ coords, paper, hexWidth }) => {
   let params = useParams();
   let game = games[params.game];
 
@@ -62,7 +62,6 @@ const MapPaginated = ({ coords, pagination, paper, hexWidth }) => {
 
 const mapStateToProps = (state, {hexWidth}) => ({
   coords: state.config.coords,
-  pagination: state.config.pagination,
   paper: state.config.paper,
   hexWidth: hexWidth || state.config.tiles.width
 });
