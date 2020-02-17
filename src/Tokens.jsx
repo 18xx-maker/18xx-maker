@@ -173,8 +173,9 @@ const TokenLayout = ({ companies, data, game }) => {
 
   let pageNodes = splitEvery(data.perPage, nodes);
 
-  return map(nodes => (
+  return addIndex(map)((nodes, i) => (
     <div
+      key={`tokens-page-${i}`}
       className="tokens"
       style={{ width: unitsToCss(data.usableWidth),
                height: unitsToCss(data.usableHeight) }}>
