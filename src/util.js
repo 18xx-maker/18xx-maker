@@ -142,21 +142,6 @@ export const getTile = curry((tileDefs, tiles, id) => {
   };
 });
 
-export const maxPages = (total, page) => {
-  let helper = (total, page, result) => {
-    if(total <= page) {
-      return append(total, result);
-    } else if(total <= (2 * page)) {
-      let width = total * 0.5;
-      return prepend(width, append(width, result));
-    } else {
-      return helper(total - page, page, append(page, result));
-    }
-  };
-
-  return helper(total, page, []);
-};
-
 export const compileCompanies = (game) => {
   return map(company => {
     if (company.minor && !company.tokens && game.tokenTypes && game.tokenTypes["minor"]) {
@@ -293,9 +278,9 @@ export const getCharterData = (charters, paper) => {
  */
 export const addPaginationData = (data, config) => {
   // Pull data we need from the config
-  const { pagination, paper, cutlines, cutlinesOffset, bleed, margin } = config;
+  const { paper, cutlines, cutlinesOffset, bleed, margin } = config;
   const { margins, width: pageWidth, height: pageHeight } = paper;
-  const splitPages = pagination === "max" ? maxPages : equalPages;
+  const splitPages = equalPages;
   const cutlinesAndBleed = cutlines + bleed;
 
   const printableWidth = pageWidth - (2.0 * margins);
@@ -350,7 +335,6 @@ export const addPaginationData = (data, config) => {
   return {
     ...data,
     splitPages,
-    pagination,
     portraitPages,
     landscapePages,
     landscape,
