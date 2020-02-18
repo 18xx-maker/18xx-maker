@@ -221,143 +221,166 @@
   ],
   "privates": [
     {
-      "name": "P1 - Bridge Builders",
+      "id": "P1",
+      "name": "Bridge Builders",
       "price": 20,
       "token": { "icon": "bridge", "label": "$10" },
       "description": "allows the owning company to place a yellow tile on river hexes without paying the usual 10 fee. Also includes a bridge token which may be placed on a river to increase a route's value by $10."
     },
     {
-      "name": "P2 - Small Mail Contract",
+      "id": "P2",
+      "name": "Small Mail Contract",
       "price": 30,
       "revenue": 5,
       "token": { "icon": "mail", "label": "$5" },
       "description": "If the owning company has a train, it receives $5 at the start of each Operating Round."
     },
     {
-      "name": "P3 - Minor Coal Mine",
+      "id": "P3",
+      "name": "Minor Coal Mine",
       "price": 30,
       "token": { "icon": "coal", "label": "$10" },
       "description": "When the owning company lays yellow track tile in any mountain hex it may also place one of its coal mine tokens. If it does so, it does not pay the usual $15 mountain tile fee. Mines may be placed on any tile with a mountain symbol. The yellow tile underlying the coal mine may not be upgraded. The coal mine increases the value of any company's route through the hex by $10."
     },
     {
-      "name": "P4 - Coastal Port",
+      "id": "P4",
+      "name": "Coastal Port",
       "price": 40,
       "token": { "icon": "port", "label": "$10" },
       "description": "The owning company receives a port token which may be placed in any coastal city marked by an anchor.  This token increases the value of a route through that port by $10.  No connection is required to place the token."
     },
     {
-      "name": "P5 - Coastal Port",
+      "id": "P5",
+      "name": "Coastal Port",
       "price": 40,
       "token": { "icon": "port", "label": "$10" },
       "description": "The owning company receives a port token which may be placed in any coastal city marked by an anchor.  This token increases the value of a route through that port by $10.  No connection is required to place the token."
     },
     {
-      "name": "P6 - Bridge Builders",
+      "id": "P6",
+      "name": "Bridge Builders",
       "price": 40,
       "token": { "icon": "bridge", "label": "$10" },
       "description": "allows the owning company to place a yellow tile on river hexes without paying the usual 10 fee. Also includes a bridge token which may be placed on a river to increase a route's value by $10."
     },
     {
-      "name": "P7 - Bridge Builders",
+      "id": "P7",
+      "name": "Bridge Builders",
       "price": 40,
       "token": { "icon": "bridge", "label": "$10" },
       "description": "allows the owning company to place a yellow tile on river hexes without paying the usual 10 fee. Also includes a bridge token which may be placed on a river to increase a route's value by $10."
     },
     {
-      "name": "P8 – Tunnel Company",
+      "id": "P8",
+      "name": "Tunnel Company",
       "price": 40,
       "icon": "tunnel",
       "description": "The owning company earns $20 every time the it lays a yellow tile in a mountain hex. The company must first pay any applicable fee for placing the tile prior to collecting the $20."
     },
     {
-      "name": "P9 - Société anonyme des Mines de la Loire",
+      "id": "P9",
+      "name": "Société anonyme des Mines de la Loire",
       "price": 40,
       "tile": "116|45",
       "token": { "icon": "coal", "label": "$10" },
       "description": "Upon floating, the owning company may place the reserved Sainte-Étienne yellow tile. There is no connectivity requirement to lay this tile. No other company may start in that hex. The owning Company also receives one Coal Mine token."
     },
     {
-      "name": "P10 - Minor Mail Contract",
+      "id": "P10",
+      "name": "Minor Mail Contract",
       "price": 60,
       "revenue": 10,
       "token": { "icon": "mail", "label": "$10" },
       "description": "If the owning company has a train, it receives $10 at the start of each Operating Round."
     },
     {
-      "name": "P11 - Coastal Port",
+      "id": "P11",
+      "name": "Coastal Port",
       "price": 60,
       "token": { "icon": "port", "label": "$10" },
       "description": "The owning company receives a port token which may be placed in any coastal city marked by an anchor.  This token increases the value of a route through that port by $10.  No connection is required to place the token."
     },
     {
-      "name": "P12 - Bridge Builders",
+      "id": "P12",
+      "name": "Bridge Builders",
       "price": 60,
       "token": { "icon": "bridge", "label": "$10" },
       "description": "allows the owning company to place a yellow tile on river hexes without paying the usual 10 fee. Also includes a bridge token which may be placed on a river to increase a route's value by $10."
     },
     {
-      "name": "P13 - Medium Coal Mine",
+      "id": "P13",
+      "name": "Medium Coal Mine",
       "price": 60,
       "token": { "icon": "coal", "label": "$10" },
       "description": "When the owning company lays yellow track tile in any mountain hex it may also place one of its coal mine tokens. If it does so, it does not pay the usual $15 mountain tile fee. Mines may be placed on any tile with a mountain symbol. The yellow tile underlying the coal mine may not be upgraded. The coal mine increases the value of any company's route through the hex by $10."
     },
     {
-      "name": "P14 - Medium Coal Mine",
+      "id": "P14",
+      "name": "Medium Coal Mine",
       "price": 60,
       "token": { "icon": "coal", "label": "$10" },
       "description": "When the owning company lays yellow track tile in any mountain hex it may also place one of its coal mine tokens. If it does so, it does not pay the usual $15 mountain tile fee. Mines may be placed on any tile with a mountain symbol. The yellow tile underlying the coal mine may not be upgraded. The coal mine increases the value of any company's route through the hex by $10."
     },
     {
-      "name": "P15 – Railway Construction",
+      "id": "P15",
+      "name": "Railway Construction",
       "price": 60,
       "icon": "tracks",
       "description": "The owning company may, during the track laying phase, lay one extra yellow track anywhere that it can legally reach. This counts as one yellow tile, not a build point."
     },
     {
-      "name": "P16 – Paris Pullman",
+      "id": "P16",
+      "name": "Paris Pullman",
       "price": 80,
       "description": "The owning company receives one Pullman."
     },
     {
-      "name": "P17 - Coastal Port",
+      "id": "P17",
+      "name": "Coastal Port",
       "price": 80,
       "token": { "icon": "port", "label": "$10" },
       "description": "The owning company receives a port token which may be placed in any coastal city marked by an anchor.  This token increases the value of a route through that port by $10.  No connection is required to place the token."
     },
     {
-      "name": "P18 - Large Mail Contract",
+      "id": "P18",
+      "name": "Large Mail Contract",
       "price": 90,
       "revenue": 15,
       "token": { "icon": "mail", "label": "$15" },
       "description": "If the owning company has a train, it receives $15 at the start of each Operating Round."
     },
     {
-      "name": "P19 - Major Coal Mine",
+      "id": "P19",
+      "name": "Major Coal Mine",
       "price": 90,
       "token": { "icon": "coal", "label": "$10" },
       "description": "When the owning company lays yellow track tile in any mountain hex it may also place one of its coal mine tokens. If it does so, it does not pay the usual $15 mountain tile fee. Mines may be placed on any tile with a mountain symbol. The yellow tile underlying the coal mine may not be upgraded. The coal mine increases the value of any company's route through the hex by $10."
     },
     {
-      "name": "P20 - Major Coal Mine",
+      "id": "P20",
+      "name": "Major Coal Mine",
       "price": 90,
       "token": { "icon": "coal", "label": "$10" },
       "description": "When the owning company lays yellow track tile in any mountain hex it may also place one of its coal mine tokens. If it does so, it does not pay the usual $15 mountain tile fee. Mines may be placed on any tile with a mountain symbol. The yellow tile underlying the coal mine may not be upgraded. The coal mine increases the value of any company's route through the hex by $10."
     },
     {
-      "name": "P21 – City Expansion",
+      "id": "P21",
+      "name": "City Expansion",
       "price": 110,
       "token": { "icon": "token", "color": "white", "iconColor": "white" },
       "description": "Provides an additional station marker for the owning company. When this is acquired by a company, place a station marker on the company charter. This company is still limited to 8 total station markers."
     },
     {
-      "name": "P22 - Major Mail Contract",
+      "id": "P22",
+      "name": "Major Mail Contract",
       "price": 120,
       "revenue": 20,
       "token": { "icon": "mail", "label": "$20" },
       "description": "If the owning company has a train, it receives $20 at the start of each Operating Round."
     },
     {
-      "name": "P23 – Le Grande Train",
+      "id": "P23",
+      "name": "Le Grande Train",
       "price": 120,
       "icon": "train",
       "description": "The owning company immediately receives a permanent 2-train which may be used in the first Operating Round of the game. This train does not rust, does not count against the train limit, or fulfill the requirement of owning a train to prevent liquidation."
