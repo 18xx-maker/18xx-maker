@@ -2,7 +2,6 @@ import overrides from "./data/companies";
 
 import addIndex from "ramda/src/addIndex";
 import adjust from "ramda/src/adjust";
-import append from "ramda/src/append";
 import ascend from "ramda/src/ascend";
 import chain from "ramda/src/chain";
 import compose from "ramda/src/compose";
@@ -18,7 +17,6 @@ import lte from "ramda/src/lte";
 import map from "ramda/src/map";
 import merge from "ramda/src/merge";
 import nth from "ramda/src/nth";
-import prepend from "ramda/src/prepend";
 import prop from "ramda/src/prop";
 import propOr from "ramda/src/propOr";
 import reverse from "ramda/src/reverse";
@@ -141,21 +139,6 @@ export const getTile = curry((tileDefs, tiles, id) => {
     quantity
   };
 });
-
-export const maxPages = (total, page) => {
-  let helper = (total, page, result) => {
-    if(total <= page) {
-      return append(total, result);
-    } else if(total <= (2 * page)) {
-      let width = total * 0.5;
-      return prepend(width, append(width, result));
-    } else {
-      return helper(total - page, page, append(page, result));
-    }
-  };
-
-  return helper(total, page, []);
-};
 
 export const compileCompanies = (game) => {
   return map(company => {
@@ -285,3 +268,86 @@ export const getCharterData = (charters, paper) => {
     }
   };
 }
+
+/*
+ * addPaginationData expects to receive an object with totalWidth and
+ * totalHeight defined. It will then add all pagination data to this using the
+ * config data that was also passed in.
+ */
+export const addPaginationData = (data, config) => {
+  // Pull data we need from the config
+  const { paper, cutlines, cutlinesOffset, bleed, margin } = config;
+  const { margins, width: pageWidth, height: pageHeight } = paper;
+  const splitPages = equalPages;
+  const cutlinesAndBleed = cutlines + bleed;
+
+  const printableWidth = pageWidth - (2.0 * margins);
+  const printableHeight = pageHeight - (2.0 * margins);
+
+  const usableWidth = printableWidth - (2.0 * cutlinesAndBleed);
+  const usableHeight = printableHeight - (2.0 * cutlinesAndBleed);
+
+  const contentWidth = data.totalWidth + (2.0 * margin);
+  const contentHeight = data.totalHeight + (2.0 * margin);
+
+  const portraitPages =
+        splitPages(contentWidth, usableWidth).length *
+        splitPages(contentHeight, usableHeight).length;
+  const landscapePages =
+        splitPages(data.totalWidth, usableHeight).length *
+        splitPages(data.totalHeight, usableWidth).length;
+  const landscape = landscapePages < portraitPages;
+  const pages = landscape ? landscapePages : portraitPages;
+
+  const xPages = landscape ?
+        splitPages(contentWidth, usableHeight) :
+        splitPages(contentWidth, usableWidth);
+  const yPages = landscape ?
+        splitPages(contentHeight, usableWidth) :
+        splitPages(contentHeight, usableHeight);
+
+  let humanWidth = `${Math.ceil(data.totalWidth / 100.0)}in`;
+  let humanHeight = `${Math.ceil(data.totalHeight / 100.0)}in`;
+
+  const measurements = {
+    margin,
+    cutlines,
+    cutlinesOffset,
+    bleed,
+    cutlinesAndBleed,
+
+    contentWidth,
+    contentHeight,
+
+    printableWidth: landscape ? printableHeight : printableWidth,
+    printableHeight: landscape ? printableWidth : printableHeight,
+
+    usableWidth: landscape ? usableHeight : usableWidth,
+    usableHeight: landscape ? usableWidth : usableHeight,
+
+    pageWidth: landscape ? pageHeight : pageWidth,
+    pageHeight: landscape ? pageWidth : pageHeight,
+    margins
+  };
+
+  return {
+    ...data,
+    splitPages,
+    portraitPages,
+    landscapePages,
+    landscape,
+    pages,
+    xPages,
+    yPages,
+
+    humanWidth,
+    humanHeight,
+
+    ...measurements,
+
+    css: {
+      ...(data.css || {}),
+      ...(map(unitsToCss, measurements))
+    }
+  }
+};

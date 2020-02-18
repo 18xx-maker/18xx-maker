@@ -5,7 +5,10 @@
     "size": "0.15in",
     "weight": "bold"
   },
-  "pagination": "equal",
+  "cutlines": 25,
+  "cutlinesOffset": 0,
+  "bleed": 12.5,
+  "margin": 25,
   "paper": {
     "width": 850,
     "height": 1100,

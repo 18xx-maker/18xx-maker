@@ -84,10 +84,10 @@
       "required": ["cell", "column", "diag", "par"],
       "additionalProperties": false
     },
-    "pagination": {
-      "type": "string",
-      "enum": ["equal", "max"]
-    },
+    "cutlines": { "type": "number", "minimum": 0 },
+    "cutlinesOffset": { "type": "number", "minimum": 0 },
+    "bleed": { "type": "number", "minimum": 0 },
+    "margin": { "type": "number", "minimum": 0 },
     "ipo": {
       "type": "object",
       "properties": {
@@ -212,18 +212,21 @@
     "font": { "$ref": "#/definitions/font" }
   },
   "required": [
+    "bleed",
     "companiesTheme",
     "companySvgLogos",
     "coords",
+    "cutlines",
+    "cutlinesOffset",
     "font",
-    "pagination",
+    "margin",
+    "overrideCompanies",
+    "overrideSelection",
     "paper",
     "plainMapCompanies",
     "stock",
     "theme",
-    "tokens",
-    "overrideCompanies",
-    "overrideSelection"
+    "tokens"
   ],
   "additionalProperties": false
 }

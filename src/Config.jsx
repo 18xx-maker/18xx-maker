@@ -202,8 +202,14 @@ const Config = ({config, setConfig, resetConfig}) => {
       <CompaniesThemePreview/>
       <p className="description">The company theme determines which colors are used for all of the elements on the maps and tiles.</p>
       <h3>Layout</h3>
-      <Input name="pagination" label="Pagination Type"
-             description="This lets you configure the type of pagination. Equal keeps all pages directly equal. Max keeps the first and last page equal and set all middle pages to max based on page size."/>
+      <Input name="margin" label="Margin Size" dimension={true}
+             description="How much of a margin exists around the printed item."/>
+      <Input name="cutlines" label="Pagination Cutlines Size" dimension={true}
+             description="Set to 0 to disable any cutlines."/>
+      <Input name="cutlinesOffset" label="Pagination Cutlines Offset" dimension={true}
+             description="If your method of cutting has a guide that is slightly off from where it cuts, you can adjust an offset here. Leave at 0 otherwise."/>
+      <Input name="bleed" label="Pagination Bleed Size" dimension={true}
+             description="Set to 0 to disable any bleed. For paginated items this detemines how much map pages overlap to help with cutting errors."/>
       <Input name="paper.width" label="Paper Width" dimension={true}/>
       <Input name="paper.height" label="Paper Height" dimension={true}/>
       <Input name="paper.margins" label="Paper Margins" dimension={true}/>

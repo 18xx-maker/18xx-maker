@@ -6,6 +6,8 @@ import * as uuid from "uuid";
 import logos from "../data/logos";
 import icons from "../data/icons";
 
+import is from "ramda/src/is";
+
 const Token = ({
   logo, // The SVG logo to display on this token
   icon, // The path-based icon (defined in App.jsx) to display on this token
@@ -25,7 +27,7 @@ const Token = ({
   inverse, // Should we render the "inverse" of this token? No logos, only text
 
   bleed, // Should we draw bleed around the token (for printing)
-  outline, // Should we draw an outline around the token circle
+  outline, // What color to use as the outline
   outlineWidth, // What stroke width to use on the outline
 
   target, // Colors for target shape
@@ -359,7 +361,7 @@ const Token = ({
                       );
         }
 
-        let outlineColor = p(outline || "black");
+        let outlineColor = is(String, outline) ? c(outline) : s(c(color));
         return (
           <g>
             {clip}

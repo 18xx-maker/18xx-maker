@@ -1494,11 +1494,6 @@
         },
         {
           "color": "plain",
-          "centerTowns": [{"name": {"name": "Wiener Neustadt"}}],
-          "hexes": ["D24"]
-        },
-        {
-          "color": "plain",
           "mediumCities": [{"name": {"name": "Wels"}}],
           "hexes": ["D16"]
         },
