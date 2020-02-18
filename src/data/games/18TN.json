@@ -68,25 +68,31 @@
     {
       "name": "Southern Railway",
       "abbrev": "SR",
+      "logo": "SOU",
       "color": "brightGreen",
+      "token": {"bar": true},
       "tokens": "four"
     },
     {
       "name": "Gulf, Mobile, and Ohio Railroad",
       "abbrev": "GMO",
       "color": "red",
+      "token": {"bar": true},
       "tokens": "four"
     },
     {
       "name": "Louisville and Nashville Railroad",
       "abbrev": "L&N",
+      "logo": "LN",
       "color": "blue",
+      "token": {"bar": true},
       "tokens": "four"
     },
     {
       "name": "Illinois Central Railroad",
       "abbrev": "IC",
       "color": "green",
+      "token": {"bar": true},
       "tokens": "three",
       "shares": [
         {
@@ -106,12 +112,14 @@
       "name": "Nashville, Chattanooga, and St. Louis Railroad",
       "abbrev": "NC&StL",
       "color": "orange",
+      "token": {"bar": true},
       "tokens": "two"
     },
     {
       "name": "Tennessee Central Railway",
       "abbrev": "TC",
       "color": "black",
+      "token": {"bar": true},
       "tokens": "two"
     }
   ],

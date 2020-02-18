@@ -364,7 +364,7 @@ const Token = ({
                       );
         }
 
-        let outlineColor = is(String, outline) ? c(outline) : s(c(color));
+        let outlineColor = is(String, outline) ? c(outline) : (color === "black" ? s(c(color), -40) : s(c(color)));
         return (
           <g>
             {clip}
