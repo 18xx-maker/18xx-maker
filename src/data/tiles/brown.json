@@ -1295,6 +1295,36 @@
       }
     ]
   },
+  "148": {
+    "color": "brown",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 20
+      }
+    ],
+    "centerTowns": [
+      {}
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
   "170": {
     "color": "brown",
     "cities": [
