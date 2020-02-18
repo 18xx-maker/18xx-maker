@@ -56,6 +56,9 @@ export const getMarketData = (stock, config) => {
     totalHeight = max(totalHeight, parTotalHeight);
   }
 
+  let humanWidth = `${Math.ceil(totalWidth / 100.0)}in`;
+  let humanHeight = `${Math.ceil(totalHeight / 100.0)}in`;
+
   if (stock.type === "1D" || stock.type === "1Diag") {
     if (config.stock.display.legend && stock.legend && stock.legend.length > 0) {
       // Add space for legend
@@ -72,6 +75,8 @@ export const getMarketData = (stock, config) => {
     display: stock.display || {},
     width,
     height,
+    humanWidth,
+    humanHeight,
     totalWidth,
     totalHeight,
     rows,

@@ -338,12 +338,15 @@ const Token = ({
         } else if (label && label.length > 0) {
           let fontSize = width * 0.64;
           let y = width * 0.22;
-          if (label.length > 3) {
-            fontSize = fontSize * 0.9;
-            y = y * 0.9;
+          if (label.length > 5) {
+            fontSize = fontSize * 0.7;
+            y = y * 0.7;
           } else if (label.length > 4) {
             fontSize = fontSize * 0.8;
             y = y * 0.8;
+          } else if (label.length > 3) {
+            fontSize = fontSize * 0.9;
+            y = y * 0.9;
           }
           content.push(<text
                          key="text"
