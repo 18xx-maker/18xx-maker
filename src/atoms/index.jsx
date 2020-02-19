@@ -153,6 +153,9 @@ const atoms = [{
              {cities: [{size:5,
                         icons: [null, "share", null, "charter"],
                         companies: ["C&O", null, "B&M", null, "NYC"]}]},
+             {cities: [{size:6,
+                        icons: [null, "water", null, "port", null, "train"],
+                        companies: ["C&O", null, "B&M", null, "NYC"]}]},
              {cities: [{size:1,
                         pass:true
                        }]},
