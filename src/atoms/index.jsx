@@ -150,6 +150,9 @@ const atoms = [{
                                     "B&M",
                                     { abbrev:"PRR", reserved: true }]
                        }]},
+             {cities: [{size:5,
+                        icons: [null, "share", null, "charter"],
+                        companies: ["C&O", null, "B&M", null, "NYC"]}]},
              {cities: [{size:1,
                         pass:true
                        }]},
