@@ -24,8 +24,6 @@ const Position = ({ data, children }) => {
     let rotate = -(d.angle || 0) + (rotation || 0);
 
     let passing = {...d};
-    delete passing.rotate;
-    delete passing.rotation;
 
     return (
       <g

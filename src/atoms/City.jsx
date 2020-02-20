@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Color from "../data/Color";
+import iconSvgs from "../data/icons";
 
 import Name from "./Name";
 
@@ -18,7 +19,9 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
 
   let icon = num => {
     if (icons && icons[num]) {
-      return <g transform="scale(1.2)"><use href={`#${icons[num]}`} /></g>;
+      let iconSvg = iconSvgs[icons[num]];
+      let Component = iconSvg.Component;
+      return <g transform="scale(1.4)"><Component x={-12.5} y={-12.5} height={25} width={25}/></g>;
     }
 
     return null;
@@ -359,6 +362,223 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
                 />
                 {icon(2)}
                 {companyLabel(2)}
+                <circle
+                  fill="none"
+                  stroke={c("track")}
+                  strokeWidth="2"
+                  r="25"
+                />
+              </g>
+            </g>
+          )}
+        </Color>
+      );
+    }
+  } else if (size === 5) {
+    if (border) {
+      return (
+        <Color>
+          {c => (
+            <circle cx="0" cy="0" r="70.5"
+                    fill={c("border")}
+                    stroke="none" />
+          )}
+        </Color>
+      );
+    } else {
+      let radius = 42.5;
+      return (
+        <Color context="companies">
+          {c => (
+            <g>
+              <circle cx="0" cy="0" r="67.5"
+                      fill={c("city")}
+                      stroke={c("track")}
+                      strokeWidth="2" />
+              <g transform={`translate(${-radius * Math.sin(180 * Math.PI / 180)} ${radius * Math.cos(180 * Math.PI / 180)})`}>
+                <circle
+                  fill={c(companyColor(0) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(0)}
+                {companyLabel(0)}
+                <circle
+                  fill="none"
+                  stroke={c("track")}
+                  strokeWidth="2"
+                  r="25"
+                />
+              </g>
+              <g transform={`translate(${-radius * Math.sin(252 * Math.PI / 180)} ${radius * Math.cos(252 * Math.PI / 180)})`}>
+                <circle
+                  fill={c(companyColor(1) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(1)}
+                {companyLabel(1)}
+                <circle
+                  fill="none"
+                  stroke={c("track")}
+                  strokeWidth="2"
+                  r="25"
+                />
+              </g>
+              <g transform={`translate(${-radius * Math.sin(324 * Math.PI / 180)} ${radius * Math.cos(324 * Math.PI / 180)})`}>
+                <circle
+                  fill={c(companyColor(2) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(2)}
+                {companyLabel(2)}
+                <circle
+                  fill="none"
+                  stroke={c("track")}
+                  strokeWidth="2"
+                  r="25"
+                />
+              </g>
+              <g transform={`translate(${-radius * Math.sin(36 * Math.PI / 180)} ${radius * Math.cos(36 * Math.PI / 180)})`}>
+                <circle
+                  fill={c(companyColor(3) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(3)}
+                {companyLabel(3)}
+                <circle
+                  fill="none"
+                  stroke={c("track")}
+                  strokeWidth="2"
+                  r="25"
+                />
+              </g>
+              <g transform={`translate(${-radius * Math.sin(108 * Math.PI / 180)} ${radius * Math.cos(108 * Math.PI / 180)})`}>
+                <circle
+                  fill={c(companyColor(4) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(4)}
+                {companyLabel(4)}
+                <circle
+                  fill="none"
+                  stroke={c("track")}
+                  strokeWidth="2"
+                  r="25"
+                />
+              </g>
+            </g>
+          )}
+        </Color>
+      );
+    }
+  } else if (size === 6) {
+    if (border) {
+      return (
+        <Color>
+          {c => (
+            <circle cx="0" cy="0" r="78"
+                    fill={c("border")}
+                    stroke="none" />
+          )}
+        </Color>
+      );
+    } else {
+      let radius = 50;
+      return (
+        <Color context="companies">
+          {c => (
+            <g>
+              <circle cx="0" cy="0" r="75"
+                      fill={c("city")}
+                      stroke={c("track")}
+                      strokeWidth="2" />
+              <g transform={`translate(${-radius * Math.sin(180 * Math.PI / 180)} ${radius * Math.cos(180 * Math.PI / 180)})`}>
+                <circle
+                  fill={c(companyColor(0) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(0)}
+                {companyLabel(0)}
+                <circle
+                  fill="none"
+                  stroke={c("track")}
+                  strokeWidth="2"
+                  r="25"
+                />
+              </g>
+              <g transform={`translate(${-radius * Math.sin(240 * Math.PI / 180)} ${radius * Math.cos(240 * Math.PI / 180)})`}>
+                <circle
+                  fill={c(companyColor(1) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(1)}
+                {companyLabel(1)}
+                <circle
+                  fill="none"
+                  stroke={c("track")}
+                  strokeWidth="2"
+                  r="25"
+                />
+              </g>
+              <g transform={`translate(${-radius * Math.sin(300 * Math.PI / 180)} ${radius * Math.cos(300 * Math.PI / 180)})`}>
+                <circle
+                  fill={c(companyColor(2) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(2)}
+                {companyLabel(2)}
+                <circle
+                  fill="none"
+                  stroke={c("track")}
+                  strokeWidth="2"
+                  r="25"
+                />
+              </g>
+              <g transform={`translate(${-radius * Math.sin(0 * Math.PI / 180)} ${radius * Math.cos(0 * Math.PI / 180)})`}>
+                <circle
+                  fill={c(companyColor(3) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(3)}
+                {companyLabel(3)}
+                <circle
+                  fill="none"
+                  stroke={c("track")}
+                  strokeWidth="2"
+                  r="25"
+                />
+              </g>
+              <g transform={`translate(${-radius * Math.sin(60 * Math.PI / 180)} ${radius * Math.cos(60 * Math.PI / 180)})`}>
+                <circle
+                  fill={c(companyColor(4) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(4)}
+                {companyLabel(4)}
+                <circle
+                  fill="none"
+                  stroke={c("track")}
+                  strokeWidth="2"
+                  r="25"
+                />
+              </g>
+              <g transform={`translate(${-radius * Math.sin(120 * Math.PI / 180)} ${radius * Math.cos(120 * Math.PI / 180)})`}>
+                <circle
+                  fill={c(companyColor(5) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {icon(5)}
+                {companyLabel(5)}
                 <circle
                   fill="none"
                   stroke={c("track")}
