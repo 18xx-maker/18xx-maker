@@ -1028,7 +1028,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
@@ -1069,7 +1069,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
@@ -1082,7 +1082,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
@@ -1142,7 +1142,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
@@ -1167,7 +1167,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
@@ -1270,7 +1270,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
@@ -1356,7 +1356,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "mountain": {
           "cost": "$20",
           "size": "medium",
@@ -1436,7 +1436,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
@@ -1471,7 +1471,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
@@ -1539,7 +1539,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
@@ -1562,7 +1562,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
@@ -1581,7 +1581,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
@@ -1602,7 +1602,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
@@ -1623,7 +1623,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
@@ -1658,7 +1658,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
@@ -1671,7 +1671,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
@@ -1692,7 +1692,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
