@@ -1676,20 +1676,6 @@
         ]
       },
       {
-        "color": "plain",
-        "centerTowns": [
-          {
-            "name": {
-              "name": "Clapsaddle",
-              "reverse": true
-            }
-          }
-        ],
-        "hexes": [
-          "D6"
-        ]
-      },
-      {
         "color": "river",
         "terrain": [
           {
