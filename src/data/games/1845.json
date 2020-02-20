@@ -2345,13 +2345,13 @@
         "hexes": [ "I23" ]
       },
       {
-        "color": "plain",
+        "color": "mountain",
         "mountain": {
-          "size": "large",
+          "size": "medium",
           "cost": "15"
         },
         "hexes": [
-          "O19", "O39",
+          "O19", "O39", "P40",
           "Q23", "Q25", "Q27", "Q31", "Q39",
           "R22", "R24", "R26", "R32", "R36", "R38",
           "S29", "S31", "S33", "S37", "S39",
@@ -2360,11 +2360,11 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "terrain": [
           {
             "type": "river",
-            "size": "large",
+            "size": "medium",
             "cost": "10"
           }
         ],
@@ -2432,7 +2432,7 @@
         "hexes": [ "E37" ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "cities": [
           {
             "name": {
@@ -2445,6 +2445,7 @@
         "terrain": [
           {
             "type": "river",
+            "size": "medium",
             "cost": "10",
             "angle": -30,
             "percent": 0.7
@@ -2653,17 +2654,20 @@
         "hexes": [ "N38" ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "cities": [
           {
             "name": {
               "name": "La Rochelle"
-            }
+            },
+            "angle": 180,
+            "percent": 0.1
           }
         ],
         "terrain": [
           {
             "type": "river",
+            "size": "medium",
             "cost": "10",
             "angle": -30,
             "percent": 0.7
@@ -2672,7 +2676,7 @@
         "icons": [
           {
             "type": "port",
-            "angle": 30,
+            "angle": 60,
             "percent": 0.7
           }
         ],
@@ -2740,17 +2744,20 @@
         "hexes": [ "Q43" ]
       },
       {
-        "color": "plain",
+        "color": "river",
         "cities": [
           {
             "name": {
               "name": "Bordeaux"
-            }
+            },
+            "angle": 30,
+            "percent": 0.1
           }
         ],
         "terrain": [
           {
             "type": "river",
+            "size": "medium",
             "cost": "10",
             "angle": -90,
             "percent": 0.7
@@ -3129,13 +3136,6 @@
           }
         ],
         "hexes": [ "V8" ]
-      },
-      {
-        "color": "other_country",
-        "mountain": {
-          "cost": "15"
-        },
-        "hexes": [ "P40" ]
       },
       {
         "color": "other_country",
