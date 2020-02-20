@@ -782,21 +782,8 @@
           }
         ],
         "hexes": [
-          "A1",
-          "C1",
-          "G1"
-        ]
-      },
-      {
-        "color": "plain",
-        "divides": [
-          {
-            "side": 6.5
-          }
-        ],
-        "hexes": [
-          "A21",
-          "G21"
+          "A1", "C1", "E1", "G1",
+          "A21", "E21", "G21"
         ]
       },
       {
@@ -1037,61 +1024,7 @@
           }
         ],
         "hexes": [
-          "A7"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 4,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "A9"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "purple"
-          },
-          {
-            "side": 6,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "A11"
-        ]
-      },
-      {
-        "color": "river",
-        "terrain": [
-          {
-            "type": "river",
-            "size": "medium",
-            "cost": "$10"
-          }
-        ],
-        "hexes": [
-          "A17"
-        ]
-      },
-      {
-        "color": "river",
-        "terrain": [
-          {
-            "type": "river",
-            "size": "medium",
-            "cost": "$10"
-          }
-        ],
-        "hexes": [
-          "B6"
+          "A7", "A17", "B6", "B16", "C7", "E7", "F2", "F4", "F18", "G7", "H4", "H6"
         ]
       },
       {
@@ -1099,150 +1032,12 @@
         "cities": [
           {}
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "purple"
-          }
-        ],
         "hexes": [
-          "B8"
+          "B8", "D12", "E13", "G11"
         ]
       },
       {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 3,
-            "color": "purple"
-          },
-          {
-            "side": 5,
-            "color": "purple"
-          },
-          {
-            "side": 6,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "B10"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 6,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "B14"
-        ]
-      },
-      {
-        "color": "river",
-        "terrain": [
-          {
-            "type": "river",
-            "size": "medium",
-            "cost": "$10"
-          }
-        ],
-        "hexes": [
-          "B16"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 5,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "C5"
-        ]
-      },
-      {
-        "color": "river",
-        "terrain": [
-          {
-            "type": "river",
-            "size": "medium",
-            "cost": "$10"
-          }
-        ],
-        "borders": [
-          {
-            "side": 4,
-            "color": "purple"
-          },
-          {
-            "side": 5,
-            "color": "purple"
-          },
-          {
-            "side": 6,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "C7"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "purple"
-          },
-          {
-            "side": 2,
-            "color": "purple"
-          },
-          {
-            "side": 3,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "C9"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "C11"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 3,
-            "color": "purple"
-          },
-          {
-            "side": 4,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "C13"
-        ]
-      },
-      {
-        "color": "plain",
+        "color": "mountain",
         "cities": [
           {
             "angle": 150,
@@ -1255,22 +1050,12 @@
           "angle": -30,
           "percent": 0.4
         },
-        "borders": [
-          {
-            "side": 1,
-            "color": "purple"
-          },
-          {
-            "side": 6,
-            "color": "purple"
-          }
-        ],
         "hexes": [
           "C15"
         ]
       },
       {
-        "color": "river",
+        "color": "mountain",
         "terrain": [
           {
             "type": "river",
@@ -1291,72 +1076,19 @@
         ]
       },
       {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 4,
-            "color": "purple"
-          },
-          {
-            "side": 5,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "D4"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "purple"
-          },
-          {
-            "side": 2,
-            "color": "purple"
-          },
-          {
-            "side": 3,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "D6"
-        ]
-      },
-      {
-        "color": "plain",
-        "cities": [
-          {}
-        ],
-        "hexes": [
-          "D12",
-          "E13",
-          "G11"
-        ]
-      },
-      {
-        "color": "plain",
+        "color": "mountain",
         "mountain": {
           "cost": "$20",
           "size": "medium",
           "angle": -90,
           "percent": 0.4
         },
-        "borders": [
-          {
-            "side": 3,
-            "color": "purple"
-          }
-        ],
         "hexes": [
           "D14"
         ]
       },
       {
-        "color": "river",
+        "color": "mountain",
         "mountain": {
           "cost": "$20",
           "size": "medium",
@@ -1372,84 +1104,12 @@
             "percent": 0.4
           }
         ],
-        "borders": [
-          {
-            "side": 6,
-            "color": "purple"
-          }
-        ],
         "hexes": [
           "D18"
         ]
       },
       {
-        "color": "plain",
-        "divides": [
-          {
-            "side": 3.5
-          }
-        ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "E1"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 4,
-            "color": "purple"
-          },
-          {
-            "side": 5,
-            "color": "purple"
-          },
-          {
-            "side": 6,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "E3"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "purple"
-          },
-          {
-            "side": 2,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "E5"
-        ]
-      },
-      {
-        "color": "river",
-        "terrain": [
-          {
-            "type": "river",
-            "size": "medium",
-            "cost": "$10"
-          }
-        ],
-        "hexes": [
-          "E7"
-        ]
-      },
-      {
-        "color": "plain",
+        "color": "mountain",
         "mountain": {
           "size": "medium",
           "cost": "$20"
@@ -1459,7 +1119,7 @@
         ]
       },
       {
-        "color": "plain",
+        "color": "mountain",
         "mountain": {
           "cost": "$20",
           "size": "medium",
@@ -1471,7 +1131,7 @@
         ]
       },
       {
-        "color": "river",
+        "color": "mountain",
         "terrain": [
           {
             "type": "river",
@@ -1487,101 +1147,12 @@
           "angle": 150,
           "percent": 0.4
         },
-        "borders": [
-          {
-            "side": 3,
-            "color": "purple"
-          },
-          {
-            "side": 4,
-            "color": "purple"
-          }
-        ],
         "hexes": [
           "E17"
         ]
       },
       {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "purple"
-          },
-          {
-            "side": 5,
-            "color": "purple"
-          },
-          {
-            "side": 6,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "E19"
-        ]
-      },
-      {
-        "color": "plain",
-        "divides": [
-          {
-            "side": 6.5
-          }
-        ],
-        "borders": [
-          {
-            "side": 6,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "E21"
-        ]
-      },
-      {
-        "color": "river",
-        "terrain": [
-          {
-            "type": "river",
-            "size": "medium",
-            "cost": "$10"
-          }
-        ],
-        "borders": [
-          {
-            "side": 2,
-            "color": "purple"
-          },
-          {
-            "side": 3,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "F2"
-        ]
-      },
-      {
-        "color": "river",
-        "terrain": [
-          {
-            "type": "river",
-            "size": "medium",
-            "cost": "$10"
-          }
-        ],
-        "borders": [
-          {
-            "side": 2,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "F4"
-        ]
-      },
-      {
-        "color": "river",
+        "color": "mountain",
         "terrain": [
           {
             "type": "river",
@@ -1602,7 +1173,7 @@
         ]
       },
       {
-        "color": "river",
+        "color": "mountain",
         "terrain": [
           {
             "type": "river",
@@ -1623,55 +1194,7 @@
         ]
       },
       {
-        "color": "river",
-        "terrain": [
-          {
-            "type": "river",
-            "size": "medium",
-            "cost": "$10"
-          }
-        ],
-        "borders": [
-          {
-            "side": 3,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "F18"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "purple"
-          },
-          {
-            "side": 3,
-            "color": "purple"
-          }
-        ],
-        "hexes": [
-          "F20"
-        ]
-      },
-      {
-        "color": "river",
-        "terrain": [
-          {
-            "type": "river",
-            "size": "medium",
-            "cost": "$10"
-          }
-        ],
-        "hexes": [
-          "G7"
-        ]
-      },
-      {
-        "color": "river",
+        "color": "mountain",
         "terrain": [
           {
             "type": "river",
@@ -1692,21 +1215,7 @@
         ]
       },
       {
-        "color": "river",
-        "terrain": [
-          {
-            "type": "river",
-            "size": "medium",
-            "cost": "$10"
-          }
-        ],
-        "hexes": [
-          "H4",
-          "H6"
-        ]
-      },
-      {
-        "color": "plain",
+        "color": "mountain",
         "mountain": {
           "cost": "$20",
           "size": "medium",
@@ -1720,33 +1229,34 @@
       {
         "color": "plain",
         "hexes": [
-          "A3",
-          "A5",
-          "A13",
-          "A15",
-          "A19",
-          "B2",
-          "B20",
-          "C3",
-          "C19",
-          "D10",
-          "D20",
-          "E11",
-          "F10",
-          "F12",
-          "F14",
-          "F16",
-          "G3",
-          "G5",
-          "G13",
-          "G17",
-          "H2",
-          "H8",
-          "H10",
-          "H12",
-          "H14",
-          "H16"
+          "A3", "A5", "A9", "A11", "A13", "A15", "A19",
+          "B2", "B10", "B14", "B20",
+          "C3", "C5", "C9", "C11", "C13", "C19",
+          "D4", "D6", "D10", "D20",
+          "E3", "E5", "E11", "E19",
+          "F10", "F12", "F14", "F16", "F20",
+          "G3", "G5", "G13", "G17",
+          "H2", "H8", "H10", "H12", "H14", "H16"
         ]
+      }
+    ],
+    "borders": [
+      {
+        "color": "purple",
+        "coords": [ "F2p3", "F2p4", "F2p5", "F4p3", "F4p4", "E5p3", "E5p4",
+          "D6p3", "D6p4", "D6p5", "D8p4", "C9p3", "C9p4", "C9p5", "C11p4" ]
+      },
+      {
+        "color": "purple",
+        "coords": [ "A11p3", "A11p2", "A11p1" ]
+      },
+      {
+        "color": "purple",
+        "coords": [ "C13p4", "C13p5", "C13p6", "D14p5" ]
+      },
+      {
+        "color": "purple",
+        "coords": [ "E17p4", "E17p5", "E17p6", "F18p5", "F20p4", "F20p5" ]
       }
     ]
   }
