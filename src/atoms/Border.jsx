@@ -18,7 +18,7 @@ const Border = ({ color, dashed, offset }) => {
   return (
     <HexContext.Consumer>
       {hx => (
-        <Color context="map">
+        <Color context="companies">
           {c => (
             <path
               d={`m ${0.5 * edge} 75 L ${-0.5 * edge} 75`}
