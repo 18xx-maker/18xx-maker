@@ -529,7 +529,7 @@
       "name": "Furka - Oberalpbahn",
       "price": 110,
       "revenue": 20,
-      "hex": "I16",
+      "hex": "I18",
       "description": "The owner of this Private Railway company may at any time place the Furka-Oberalp special tiles. This is an additional tile lay and free of cost."
     },
     {
@@ -1305,19 +1305,19 @@
                        {"color": "brown", "value": 30},
                        {"color": "gray", "value": 40}]
         },
-        "hexes": ["E26"]
+        "hexes": ["E28"]
       },
       {
         "color": "offboard",
         "track": [{"side": 1, "type": "offboard"}],
         "removeBorders": [6],
-        "hexes": ["G30"]
+        "hexes": ["G32"]
       },
       {
         "color": "offboard",
         "track": [{"side": 1, "type": "offboard"}],
         "removeBorders": [2],
-        "hexes": ["I30"]
+        "hexes": ["I32"]
       },
       {
         "color": "offboard",
@@ -1336,7 +1336,7 @@
                        {"color": "brown", "value": 60},
                        {"color": "gray", "value": 80}]
         },
-        "hexes": ["H29"]
+        "hexes": ["H31"]
       },
       {
         "color": "offboard",
@@ -1352,7 +1352,7 @@
                        {"color": "brown", "value": 50},
                        {"color": "gray", "value": 70}]
         },
-        "hexes": ["F3"]
+        "hexes": ["F5"]
       },
       {
         "color": "offboard",
@@ -1365,7 +1365,7 @@
                        {"color": "brown", "value": 70},
                        {"color": "gray", "value": 90}]
         },
-        "hexes": ["L1"]
+        "hexes": ["L3"]
       },
       {
         "color": "offboard",
@@ -1378,13 +1378,13 @@
                        {"color": "brown", "value": 70},
                        {"color": "gray", "value": 90}]
         },
-        "hexes": ["L15"]
+        "hexes": ["L17"]
       },
       {
         "color": "offboard",
         "track": [{"side": 3, "type": "offboard"}],
         "removeBorders": [4],
-        "hexes": ["M20"]
+        "hexes": ["M22"]
       },
       {
         "color": "offboard",
@@ -1403,7 +1403,7 @@
                        {"color": "brown", "value": 70},
                        {"color": "gray", "value": 90}]
         },
-        "hexes": ["M22"]
+        "hexes": ["M24"]
       },
       {
         "color": "offboard",
@@ -1417,7 +1417,7 @@
                        {"color": "brown", "value": 50},
                        {"color": "gray", "value": 70}]
         },
-        "hexes": ["M8"]
+        "hexes": ["M10"]
       },
       {
         "color": "offboard",
@@ -1432,7 +1432,7 @@
                        {"color": "brown", "value": 50},
                        {"color": "gray", "value": 70}]
         },
-        "hexes": ["C8"]
+        "hexes": ["C10"]
       },
       {
         "color": "offboard",
@@ -1447,7 +1447,7 @@
                        {"color": "brown", "value": 50},
                        {"color": "gray", "value": 60}]
         },
-        "hexes": ["B11"]
+        "hexes": ["B13"]
       },
       {
         "color": "offboard",
@@ -1462,20 +1462,20 @@
                        {"color": "gray", "value": 70}]
         },
         "removeBorders": [4,6],
-        "hexes": ["A18"]
+        "hexes": ["A20"]
       },
       {
         "color": "offboard",
         "track": [{"side": 5, "type": "offboard"},
                   {"side": 6, "type": "offboard"}],
         "removeBorders": [1],
-        "hexes": ["A20"]
+        "hexes": ["A22"]
       },
       {
         "color": "offboard",
         "track": [{"side": 4, "type": "offboard"}],
         "removeBorders": [3],
-        "hexes": ["B17"]
+        "hexes": ["B19"]
       },
       {
         "color": "offboard",
@@ -1490,14 +1490,14 @@
                        {"color": "brown", "value": 50},
                        {"color": "gray", "value": 70}]
         },
-        "hexes": ["C26"]
+        "hexes": ["C28"]
       },
       {
         "color": "gray",
         "cities": [{"name": {"reverse": true, "offset": 54, "name": "Genève"}, "size": 2}],
         "track": [{"side": 6, "type": "gentle"}],
         "values": [{"value": 40, "angle": 180, "percent": 0.667}],
-        "hexes": ["K2"]
+        "hexes": ["K4"]
       },
       {
         "color": "gray",
@@ -1509,7 +1509,7 @@
                    {"company": "BLS", "destination": true,
                     "angle": 300, "percent": 0.75}],
         "values": [{"value": 20, "angle": 60, "percent": 0.75}],
-        "hexes": ["J13"]
+        "hexes": ["J15"]
       },
       {
         "color": "gray",
@@ -1519,12 +1519,12 @@
         "tokens": [{"company": "FNM", "destination": true,
                     "angle": 240, "percent": 0.75}],
         "values": [{"value": 20, "angle": 60, "percent": 0.75}],
-        "hexes": ["G20"]
+        "hexes": ["G22"]
       },
       {
         "color": "gray",
         "track": [{"type": "sharp", "side": 1}],
-        "hexes": ["J17"]
+        "hexes": ["J19"]
       },
       {
         "color": "mountain",
@@ -1538,7 +1538,7 @@
                   {"type":"offboard", "side": 5},
                   {"type":"offboard", "side": 6}],
         "names": [{"name": "Rochers de Naye", "angle": 180, "percent": 0.25}],
-        "hexes": ["H7"]
+        "hexes": ["H9"]
       },
       {
         "color": "mountain",
@@ -1548,7 +1548,7 @@
         "track": [{"type":"offboard", "side": 1},
                   {"type":"offboard", "side": 2}],
         "names": [{"name": "Matterhornbahnen", "angle": 180, "percent": 0.25}],
-        "hexes": ["L13"]
+        "hexes": ["L15"]
       },
       {
         "color": "mountain",
@@ -1561,7 +1561,7 @@
                   {"type":"offboard", "side": 4},
                   {"type":"offboard", "side": 5}],
         "names": [{"name": "Pilatus Bahn", "angle": 180, "percent": 0.25}],
-        "hexes": ["G14"]
+        "hexes": ["G16"]
       },
       {
         "color": "mountain",
@@ -1572,7 +1572,7 @@
                   {"type":"offboard", "side": 6},
                   {"type":"offboard", "side": 3}],
         "names": [{"name": "Jungfraubahnen", "angle": 180, "percent": 0.25}],
-        "hexes": ["I14"]
+        "hexes": ["I16"]
       },
       {
         "color": "mountain",
@@ -1582,7 +1582,7 @@
         "track": [{"type":"offboard", "side": 2},
                   {"type":"offboard", "side": 4}],
         "names": [{"name": "Rigi-Bahnen", "angle": 180, "percent": 0.25}],
-        "hexes": ["F19"]
+        "hexes": ["F21"]
       },
       {
         "color": "mountain",
@@ -1592,7 +1592,7 @@
         "track": [{"type":"offboard", "side": 1},
                   {"type":"offboard", "side": 2}],
         "names": [{"name": "Monte Generoso", "angle": 180, "percent": 0.25}],
-        "hexes": ["L23"]
+        "hexes": ["L25"]
       },
       {
         "color": "mountain",
@@ -1601,7 +1601,7 @@
                      "percent": 0.667}],
         "track": [{"type":"offboard", "side": 2}],
         "names": [{"name": "Bernina", "angle": 180, "percent": 0.25}],
-        "hexes": ["J29"]
+        "hexes": ["J31"]
       },
       {
         "color": "tunnel",
@@ -1612,7 +1612,7 @@
                             {"percent": 1, "angle": 210, "rotation": 210},
                             {"percent": 1, "angle": 270, "rotation": 270},
                             {"percent": 1, "angle": 330, "rotation": 330}],
-        "hexes": ["J9"]
+        "hexes": ["J11"]
       },
       {
         "color": "tunnel",
@@ -1624,7 +1624,7 @@
                             {"percent": 1, "angle": 210, "rotation": 210},
                             {"percent": 1, "angle": 270, "rotation": 270},
                             {"percent": 1, "angle": 330, "rotation": 330}],
-        "hexes": ["H27"]
+        "hexes": ["H29"]
       },
       {
         "color": "tunnel",
@@ -1633,7 +1633,7 @@
         "tunnelEntrances": [{"percent": 1, "angle": 150, "rotation": 150},
                             {"percent": 1, "angle": 210, "rotation": 210},
                             {"percent": 1, "angle": 330, "rotation": 330}],
-        "hexes": ["I12"]
+        "hexes": ["I14"]
       },
       {
         "color": "tunnel",
@@ -1642,7 +1642,7 @@
         "tunnelEntrances": [{"percent": 1, "angle": 90, "rotation": 90},
                             {"percent": 1, "angle": 150, "rotation": 150},
                             {"percent": 1, "angle": 330, "rotation": 330}],
-        "hexes": ["K14"]
+        "hexes": ["K16"]
       },
       {
         "color": "tunnel",
@@ -1650,7 +1650,7 @@
         "tunnelEntrances": [{"percent": 1, "angle": 30, "rotation": 30},
                             {"percent": 1, "angle": 150, "rotation": 150}],
         "track": [{"type": "gentle", "side": 3, "gauge": "dashed"}],
-        "hexes": ["I16"]
+        "hexes": ["I18"]
       },
       {
         "color": "tunnel",
@@ -1663,7 +1663,7 @@
                    "rotation": 60,
                    "name": {"reverse": true, "name": "Andermatt"}}],
         "track": [{"type": "gentle", "side": 4, "gauge": "dashed"}],
-        "hexes": ["H17"]
+        "hexes": ["H19"]
       },
       {
         "color": "tunnel",
@@ -1676,7 +1676,7 @@
                     "angle": 30, "percent": 0.7,
                     "company": "GB"}],
         "track": [{"type": "straight", "side": 1, "gauge": "dashed"}],
-        "hexes": ["H19"]
+        "hexes": ["H21"]
       },
       {
         "color": "tunnel",
@@ -1686,7 +1686,7 @@
                             {"percent": 1, "angle": 210, "rotation": 210},
                             {"percent": 1, "angle": 330, "rotation": 330}],
         "track": [{"type": "straight", "side": 1, "gauge": "dashed"}],
-        "hexes": ["H21"]
+        "hexes": ["H23"]
       },
       {
         "color": "tunnel",
@@ -1697,55 +1697,55 @@
                             {"percent": 1, "angle": 330, "rotation": 330}],
         "track": [{"type": "straight", "side": 1, "gauge": "dashed"},
                   {"type": "offboard", "side": 4}],
-        "hexes": ["H23"]
+        "hexes": ["H25"]
       },
       {
         "color": "plain",
         "centerTowns": [{"name": {"name": "Biel"}}],
-        "hexes": ["E8"]
+        "hexes": ["E10"]
       },
       {
         "color": "plain",
         "centerTowns": [{"name": {"name": "Liestal"}}],
-        "hexes": ["C14"]
+        "hexes": ["C16"]
       },
       {
         "color": "plain",
         "centerTowns": [{"name": {"name": "Baden"}}],
-        "hexes": ["D17"]
+        "hexes": ["D19"]
       },
       {
         "color": "plain",
         "centerTowns": [{"name": {"name": "Rapperswil"}}],
-        "hexes": ["D21"]
+        "hexes": ["D23"]
       },
       {
         "color": "plain",
         "centerTowns": [{"name": {"name": "Rorschach"}}],
-        "hexes": ["B23"]
+        "hexes": ["B25"]
       },
       {
         "color": "plain",
         "centerTowns": [{"name": {"name": "Sarnen"}}],
-        "hexes": ["G16"]
+        "hexes": ["G18"]
       },
       {
         "color": "plain",
         "cities": [{"name": {"name": "Stans"},
                     "companies": ["GB"]}],
-        "hexes": ["G18"]
+        "hexes": ["G20"]
       },
       {
         "color": "plain",
         "cities": [{"name": {"name": "Sankt Gallen"},
                     "companies": ["VSB"]}],
-        "hexes": ["C24"]
+        "hexes": ["C26"]
       },
       {
         "color": "plain",
         "cities": [{"name": {"name": "Appenzell"},
                     "companies": ["AB"]}],
-        "hexes": ["D25"]
+        "hexes": ["D27"]
       },
       {
         "color": "plain",
@@ -1753,14 +1753,14 @@
         "cities": [{"name": {"name": "Montreux"},
                     "companies": ["MOB"],
                     "percent": 0.4}],
-        "hexes": ["I6"]
+        "hexes": ["I8"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
         "cities": [{"name": {"name": "Schaffhausen"},
                     "percent": 0.4}],
-        "hexes": ["B19"]
+        "hexes": ["B21"]
       },
       {
         "color": "plain",
@@ -1769,7 +1769,7 @@
         "cities": [{"name": {"name": "Zürich"},
                     "companies": ["NOB"],
                     "percent": 0.4}],
-        "hexes": ["D19"]
+        "hexes": ["D21"]
       },
       {
         "color": "plain",
@@ -1777,21 +1777,21 @@
         "cities": [{"name": {"name": "Basel"},
                     "companies": ["SCB"],
                     "percent": 0.4}],
-        "hexes": ["C12"]
+        "hexes": ["C14"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
         "cities": [{"name": {"name": "Zug"},
                     "percent": 0.4}],
-        "hexes": ["E18"]
+        "hexes": ["E20"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
         "cities": [{"name": {"name": "Olten"},
                     "percent": 0.4}],
-        "hexes": ["D13"]
+        "hexes": ["D15"]
       },
       {
         "color": "plain",
@@ -1799,19 +1799,19 @@
         "cities": [{"name": {"name": "Sion"},
                     "companies": ["VZ"],
                     "percent": 0.4}],
-        "hexes": ["K10"]
+        "hexes": ["K12"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.5}],
         "cities": [{"name": {"name": "Goldau"}, "percent": 0.4}],
-        "hexes": ["F21"]
+        "hexes": ["F23"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.5}],
         "cities": [{"name": {"name": "St. Moritz"}, "percent": 0.4}],
-        "hexes": ["I28"]
+        "hexes": ["I30"]
       },
       {
         "color": "plain",
@@ -1819,7 +1819,7 @@
         "cities": [{"name": {"name": "Arosa"},
                     "companies": ["ChA"],
                     "percent": 0.4}],
-        "hexes": ["G28"]
+        "hexes": ["G30"]
       },
       {
         "color": "plain",
@@ -1827,19 +1827,19 @@
         "cities": [{"name": {"name": "Thun"}, "percent": 0.4}],
         "tokens": [{"destination": true, "company": "STB", "angle": 270, "percent": 0.6},
                    {"destination": true, "company": "MOB", "angle": 90, "percent": 0.6}],
-        "hexes": ["H13"]
+        "hexes": ["H15"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
         "cities": [{"name": {"name": "Locarno"}, "percent": 0.4}],
-        "hexes": ["K20"]
+        "hexes": ["K22"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
         "cities": [{"name": {"name": "Bellinzona"}, "percent": 0.4}],
-        "hexes": ["K22"]
+        "hexes": ["K24"]
       },
       {
         "color": "plain",
@@ -1849,7 +1849,7 @@
                     "companies": ["FNM"],
                     "angle": 30, "percent": 0.5}],
         "track": [{"side": 6, "type": "stop"}],
-        "hexes": ["L21"]
+        "hexes": ["L23"]
       },
       {
         "color": "plain",
@@ -1862,7 +1862,7 @@
                     "companies": ["JN"],
                     "angle": 90, "percent": 0.5}],
         "track": [{"side": 1, "type": "stop"}],
-        "hexes": ["F7"]
+        "hexes": ["F9"]
       },
       {
         "color": "plain",
@@ -1874,7 +1874,7 @@
         "cities": [{"name": {"name": "Lucerne", "offset": 60, "reverse": true},
                     "angle": 90, "percent": 0.5}],
         "track": [{"side": 1, "type": "stop"}],
-        "hexes": ["F17"]
+        "hexes": ["F19"]
       },
       {
         "color": "plain",
@@ -1884,7 +1884,7 @@
                     "companies": ["RhB"],
                     "angle": 30, "percent": 0.5}],
         "track": [{"side": 6, "type": "stop"}],
-        "hexes": ["G26"]
+        "hexes": ["G28"]
       },
       {
         "color": "plain",
@@ -1894,7 +1894,7 @@
                     "companies": ["BLS"],
                     "angle": 330, "percent": 0.5}],
         "track": [{"side": 5, "type": "stop"}],
-        "hexes": ["F11"]
+        "hexes": ["F13"]
       },
       {
         "color": "yellow",
@@ -1905,7 +1905,7 @@
                     "name": {"name": "Winterthur"}},
                    {"angle": 295, "percent": 0.6,
                     "name": {"name": "Frauenfeld"}}],
-        "hexes": ["C20"]
+        "hexes": ["C22"]
       },
       {
         "color": "yellow",
@@ -1914,7 +1914,7 @@
                     "name": {"name": "Romont"}},
                    {"angle": 295, "percent": 0.6,
                     "name": {"name": "Fribourg"}}],
-        "hexes": ["G8"]
+        "hexes": ["G10"]
       },
       {
         "color": "yellow",
@@ -1929,7 +1929,7 @@
                     "angle": 60, "percent": 0.667,
                     "company": "NOB"}],
         "terrain": [{"type": "river", "cost": 20, "percent": 0.667}],
-        "hexes": ["D15"]
+        "hexes": ["D17"]
       },
       {
         "color": "yellow",
@@ -1941,108 +1941,108 @@
                    {"angle": 270, "percent": 0.5}],
         "track": [{"side": 1, "type": "sharp"},
                   {"side": 4, "type": "stop"}],
-        "hexes": ["I4"]
+        "hexes": ["I6"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.3}],
         "centerTowns": [{"percent": 0.5, "name": {"name": "Solothurn"}}],
-        "hexes": ["E10"]
+        "hexes": ["E12"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.3}],
         "centerTowns": [{"percent": 0.5, "name": {"name": "Langnau"}}],
-        "hexes": ["F13"]
+        "hexes": ["F15"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.3}],
         "centerTowns": [{"percent": 0.5, "name": {"name": "Disentis"}}],
-        "hexes": ["H25"]
+        "hexes": ["H27"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.3}],
         "centerTowns": [{"percent": 0.5, "name": {"name": "Yverdon"}}],
-        "hexes": ["H3"]
+        "hexes": ["H5"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.3}],
         "centerTowns": [{"percent": 0.5, "name": {"name": "Visp"}}],
-        "hexes": ["J11"]
+        "hexes": ["J13"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.3}],
         "centerTowns": [{"percent": 0.5, "name": {"name": "Gstaad"}}],
-        "hexes": ["I10"]
+        "hexes": ["I12"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.3}],
         "centerTowns": [{"percent": 0.5, "name": {"name": "Zermatt"}}],
-        "hexes": ["L11"]
+        "hexes": ["L13"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.3}],
         "centerTowns": [{"percent": 0.5, "name": {"name": "Martigny"}}],
-        "hexes": ["K8"]
+        "hexes": ["K10"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.3}],
         "tokens": [{"angle": 90, "percent": 0.667, "company": "VSB", "destination": true}],
         "centerTowns": [{"percent": 0.5, "name": {"name": "Sargans"}}],
-        "hexes": ["F25"]
+        "hexes": ["F27"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.3}],
         "centerTowns": [{"percent": 0.5, "name": {"name": "Nyon"}}],
-        "hexes": ["J1"]
+        "hexes": ["J3"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20}],
-        "hexes": ["C16", "E12", "E22", "F9"]
+        "hexes": ["C18", "E14", "E24", "F11"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 30}],
-        "hexes": ["C22", "D23", "D7", "D9", "D11", "E6", "F15", "H5", "H15", "I8", "J7"]
+        "hexes": ["C24", "D25", "D9", "D11", "D13", "E8", "F17", "H7", "H17", "I10", "J9"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 60}],
-        "hexes": ["F23", "G24", "H9", "H11", "G10", "K6", "K12", "L7", "L9", "J15", "J19", "J21", "J23", "I22", "I24", "I26", "J27"]
+        "hexes": ["F25", "G26", "H11", "H13", "G12", "K8", "K14", "L9", "L11", "J17", "J21", "J23", "J25", "I24", "I26", "I28", "J29"]
       },
       {
         "color": "plain",
         "terrain": [{"type": "mountain", "cost": 90}],
-        "hexes": ["I18", "I20", "G22"]
+        "hexes": ["I20", "I22", "G24"]
       },
       {
         "color": "plain",
-        "hexes": ["B21", "C10", "C18", "E14", "E16",
-                  "E20", "E24", "F5", "F27",
-                  "G4", "G6", "G12", "I2"]
+        "hexes": ["B23", "C12", "C20", "E16", "E18",
+                  "E22", "E26", "F7", "F29",
+                  "G6", "G8", "G14", "I4"]
       }
     ],
     "borders": [{
       "color": "mountain",
-      "coords": ["G4p1", "G4p6", "G4p5", "F5p6"]
+      "coords": ["G6p1", "G6p6", "G6p5", "F7p6"]
     },{
       "color": "mountain",
-      "coords": ["F9p3", "F9p4"]
+      "coords": ["F11p3", "F11p4"]
     },{
       "color": "mountain",
-      "coords": ["J11p3", "J11p4"]
+      "coords": ["J13p3", "J13p4"]
     },{
       "color": "mountain",
-      "coords": ["E20p3", "E20p4", "E20p5"]
+      "coords": ["E22p3", "E22p4", "E22p5"]
     }]
   }
 }
