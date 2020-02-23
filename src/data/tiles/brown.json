@@ -3658,6 +3658,34 @@
       }
     ]
   },
+  "902": {
+    "color": "brown",
+    "values": [{"value": 50, "angle": 210, "percent": 0.8}],
+    "labels": [{"label": "L", "angle": 150, "percent": 0.8}],
+    "cities": [{"size": 2}],
+    "track": [{"side": 1}, {"side": 2}, {"side": 3}, {"side": 4}]
+  },
+  "905": {
+    "color": "brown",
+    "values": [{"value": 50, "angle": 210, "percent": 0.8}],
+    "labels": [{"label": "B", "angle": 150, "percent": 0.8}],
+    "cities": [{"size": 2}],
+    "track": [{"side": 1}, {"side": 2}, {"side": 3}, {"side": 4}, {"side": 5}, {"side": 6}]
+  },
+  "909": {
+    "color": "brown",
+    "values": [{"value": 50, "angle": 270, "percent": 0.88}],
+    "labels": [{"label": "Z", "angle": 90, "percent": 0.88}],
+    "cities": [{"size": 3}],
+    "track": [{"side": 1}, {"side": 2}, {"side": 3}, {"side": 4}, {"side": 5}]
+  },
+  "909|V2": {
+    "color": "brown",
+    "values": [{"value": 50, "angle": 270, "percent": 0.88}],
+    "labels": [{"label": "Z", "angle": 90, "percent": 0.88}],
+    "cities": [{"size": 3}],
+    "track": [{"side": 1}, {"side": 2}, {"side": 3}, {"side": 4}]
+  },
   "911": {
     "color": "brown",
     "centerTowns": [
