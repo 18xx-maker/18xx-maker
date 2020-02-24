@@ -14,6 +14,7 @@ import min from "ramda/src/min";
 import nth from "ramda/src/nth";
 import prop from "ramda/src/prop";
 import reduce from "ramda/src/reduce";
+import reject from "ramda/src/reject";
 import splitEvery from "ramda/src/splitEvery";
 import zipWith from "ramda/src/zipWith";
 
@@ -372,6 +373,16 @@ export const getMapData = (game, coords, hexWidth, variation) => {
       map(assoc("variation", gameMap.copy), game.map[gameMap.copy].hexes),
       hexes
     );
+
+    // Remove any hexes set to be removed
+    if (gameMap.remove !== undefined) {
+      hexes = map(hex => {
+        return assoc("hexes",
+                reject(coord => (gameMap.remove || []).includes(coord),
+                       hex.hexes),
+                hex);
+      }, hexes);
+    }
 
     borderTexts = concat(
       game.map[gameMap.copy].borderTexts || [],

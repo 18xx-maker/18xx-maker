@@ -22,6 +22,7 @@ const Town = ({ border, name, color, bgColor }) => {
           name={name.name}
           y={name.y || (name.reverse ? 20 : -30)}
           rotation={(name.rotation || 0) + (name.reverse ? -90 : 90)}
+          doRotation={true}
           reverse={true}
         />
       );
