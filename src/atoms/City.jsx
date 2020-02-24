@@ -67,7 +67,7 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
     if (straightCityNames) {
       y -= name.reverse ? -24 : 32;
     }
-    nameNode = <Name bgColor={bgColor} {...name} y={y} path={path} />;
+    nameNode = <Name bgColor={bgColor} {...name} y={y} path={path} doRotation={true} />;
   }
 
   if (size === 1) {
