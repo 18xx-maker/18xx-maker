@@ -669,29 +669,27 @@
     "type": "2D",
     "display": {
       "par": {
-        "x": 15,
-        "y": 5
+        "x": 20,
+        "y": 0
       },
       "roundTracker": {
         "type": "col-reverse",
-        "x": 13,
-        "y": 5
+        "x": 19,
+        "y": 0
       },
       "legend": {
-        "reverse": true,
-        "verticalAlign": "bottom",
-        "x": 7,
-        "y": 11
+        "verticalAlign": "top",
+        "x": 13,
+        "y": 4
       }
     },
     "par": {
       "values": [
-        100,
-        90,
-        82,
-        76,
-        71,
-        67
+        { "value": 100, "subLabel": "5 Tokens" },
+        { "value": 90, "subLabel": "4 Tokens" },
+        { "value": 80, "subLabel": "3 Tokens" },
+        { "value": 70, "subLabel": "2 Tokens" },
+        { "value": 60, "subLabel": "1 Token" }
       ]
     },
     "movement": {
@@ -699,423 +697,158 @@
         "Sold out"
       ],
       "down": [
-        "Every share sold"
+        "Once per sale"
       ],
       "left": [
-        "Revenue withheld"
+        "Revenue withheld and if shares in the bank pool"
       ],
       "right": [
         "Revenue paid out"
       ]
     },
+    "legend": [
+      {
+        "color": "red",
+        "description": "Regional companies may not pass this line"
+      }
+    ],
+    "ledges": [
+      {
+        "coords": ["13 0", "13 4"],
+        "border": true,
+        "color": "red"
+      }
+    ],
     "market": [
       [
-        {
-          "value": 60,
-          "label": 60,
-          "legend": 0,
-          "arrow": "down"
-        },
-        67,
-        71,
-        76,
-        82,
-        90,
-        {
-          "value": 100,
-          "label": 100,
-          "par": true
-        },
-        112,
-        126,
-        142,
-        160,
-        180,
-        200,
-        225,
-        250,
-        275,
-        300,
-        325,
-        350
-      ],
-      [
-        {
-          "value": 53,
-          "label": 53,
-          "legend": 0,
-          "arrow": "down"
-        },
-        {
-          "value": 60,
-          "label": 60,
-          "legend": 0
-        },
-        66,
-        70,
-        76,
-        82,
-        {
-          "value": 90,
-          "label": 90,
-          "par": true
-        },
+        null,
+        null,
+        null,
+        { "value": 90, "arrow": "down" },
         100,
-        112,
-        126,
-        142,
-        160,
-        180,
-        200,
-        220,
-        240,
-        260,
-        280,
-        {
-          "value": 300,
-          "label": 300,
-          "arrow": "up"
-        }
-      ],
-      [
-        {
-          "value": 46,
-          "label": 46,
-          "legend": 0,
-          "arrow": "down"
-        },
-        {
-          "value": 55,
-          "label": 55,
-          "legend": 0
-        },
-        {
-          "value": 60,
-          "label": 60,
-          "legend": 0
-        },
-        65,
-        70,
-        76,
-        {
-          "value": 82,
-          "label": 82,
-          "par": true
-        },
-        90,
-        100,
-        111,
-        125,
+        110,
+        120,
+        130,
         140,
         155,
         170,
         185,
-        {
-          "value": 200,
-          "label": 200,
-          "arrow": "up"
-        }
+        200,
+        220,
+        240,
+        260,
+        290,
+        320,
+        350
       ],
       [
-        {
-          "value": 39,
-          "label": 39,
-          "legend": 1,
-          "arrow": "down"
-        },
-        {
-          "value": 48,
-          "label": 48,
-          "legend": 0
-        },
-        {
-          "value": 54,
-          "label": 54,
-          "legend": 0
-        },
-        {
-          "value": 60,
-          "label": 60,
-          "legend": 0
-        },
-        66,
-        71,
-        {
-          "value": 76,
-          "label": 76,
-          "par": true
-        },
-        82,
+        null,
+        null,
+        { "value": 70, "arrow": "down" },
+        80,
         90,
+        { "value": 100, "par": true },
+        110,
+        120,
+        130,
+        145,
+        160,
+        175,
+        { "value": 190, "arrow": "up", "arrowColor": "red" },
+        210,
+        230,
+        250,
+        280,
+        310,
+        { "value": 340, "arrow": "up" }
+      ],
+      [
+        null,
+        { "value": 55, "arrow": "down" },
+        60,
+        70,
+        80,
+        { "value": 90, "par": true },
         100,
         110,
         120,
-        {
-          "value": 130,
-          "label": 130,
-          "arrow": "up"
-        }
+        135,
+        150,
+        165,
+        { "value": 180, "arrow": "up", "arrowColor": "red" },
+        200,
+        220,
+        240,
+        270,
+        300,
+        { "value": 330, "arrow": "up" }
       ],
       [
-        {
-          "value": 32,
-          "label": 32,
-          "legend": 1,
-          "arrow": "down"
-        },
-        {
-          "value": 41,
-          "label": 41,
-          "legend": 1
-        },
-        {
-          "value": 48,
-          "label": 48,
-          "legend": 0
-        },
-        {
-          "value": 55,
-          "label": 55,
-          "legend": 0
-        },
-        62,
-        67,
-        {
-          "value": 71,
-          "label": 71,
-          "par": true
-        },
-        76,
-        82,
+        { "value": 40, "arrow": "down" },
+        50,
+        56,
+        60,
+        70,
+        { "value": 80, "par": true },
         90,
-        {
-          "value": 100,
-          "label": 100,
-          "arrow": "up"
-        }
+        100,
+        110,
+        125,
+        140,
+        155,
+        { "value": 170, "arrow": "up", "arrowColor": "red" },
+        190,
+        210,
+        { "value": 230, "arrow": "up" }
       ],
       [
-        {
-          "value": 25,
-          "label": 25,
-          "legend": 2,
-          "arrow": "down"
-        },
-        {
-          "value": 34,
-          "label": 34,
-          "legend": 1
-        },
-        {
-          "value": 42,
-          "label": 42,
-          "legend": 1
-        },
-        {
-          "value": 50,
-          "label": 50,
-          "legend": 0
-        },
-        {
-          "value": 58,
-          "label": 58,
-          "legend": 0
-        },
-        65,
-        {
-          "value": 67,
-          "label": 67,
-          "par": true
-        },
-        71,
-        75,
-        {
-          "value": 80,
-          "label": 80,
-          "arrow": "up"
-        }
+        { "value": 35, "arrow": "down" },
+        45,
+        52,
+        57,
+        60,
+        { "value": 70, "par": true },
+        80,
+        90,
+        100,
+        115,
+        130,
+        145,
+        { "value": 160, "arrow": "up" }
       ],
       [
-        {
-          "value": 18,
-          "label": 18,
-          "legend": 2,
-          "arrow": "down"
-        },
-        {
-          "value": 27,
-          "label": 27,
-          "legend": 2
-        },
-        {
-          "value": 36,
-          "label": 36,
-          "legend": 1
-        },
-        {
-          "value": 45,
-          "label": 45,
-          "legend": 1
-        },
-        {
-          "value": 54,
-          "label": 54,
-          "legend": 0
-        },
-        63,
-        67,
-        69,
-        {
-          "value": 70,
-          "label": 70,
-          "arrow": "up"
-        }
+        { "value": 30, "arrow": "down" },
+        40,
+        50,
+        54,
+        58,
+        { "value": 60, "par": true },
+        70,
+        80,
+        90,
+        100,
+        { "value": 120, "arrow": "up" }
       ],
       [
-        {
-          "value": 10,
-          "label": 10,
-          "legend": 2
-        },
-        {
-          "value": 12,
-          "label": 12,
-          "legend": 2
-        },
-        {
-          "value": 30,
-          "label": 30,
-          "legend": 2
-        },
-        {
-          "value": 40,
-          "label": 40,
-          "legend": 1
-        },
-        {
-          "value": 50,
-          "label": 50,
-          "legend": 0
-        },
-        {
-          "value": 60,
-          "label": 60,
-          "legend": 0
-        },
-        67,
-        {
-          "value": 68,
-          "label": 68,
-          "arrow": "up"
-        }
+        { "value": 25, "arrow": "down" },
+        35,
+        45,
+        52,
+        56,
+        59,
+        64,
+        70,
+        { "value": 80, "arrow": "up" }
       ],
       [
-        null,
-        {
-          "value": 10,
-          "label": 10,
-          "legend": 2
-        },
-        {
-          "value": 20,
-          "label": 20,
-          "legend": 2
-        },
-        {
-          "value": 30,
-          "label": 30,
-          "legend": 2
-        },
-        {
-          "value": 40,
-          "label": 40,
-          "legend": 1
-        },
-        {
-          "value": 50,
-          "label": 50,
-          "legend": 0
-        },
-        {
-          "value": 60,
-          "label": 60,
-          "legend": 0,
-          "arrow": "up"
-        }
-      ],
-      [
-        null,
-        null,
-        {
-          "value": 10,
-          "label": 10,
-          "legend": 2
-        },
-        {
-          "value": 20,
-          "label": 20,
-          "legend": 2
-        },
-        {
-          "value": 30,
-          "label": 30,
-          "legend": 2
-        },
-        {
-          "value": 40,
-          "label": 40,
-          "legend": 1
-        },
-        {
-          "value": 50,
-          "label": 50,
-          "legend": 0,
-          "arrow": "up"
-        }
-      ],
-      [
-        null,
-        null,
-        null,
-        {
-          "value": 10,
-          "label": 10,
-          "legend": 2
-        },
-        {
-          "value": 20,
-          "label": 20,
-          "legend": 2
-        },
-        {
-          "value": 30,
-          "label": 30,
-          "legend": 2
-        },
-        {
-          "value": 40,
-          "label": 40,
-          "legend": 1,
-          "arrow": "up"
-        }
+        20,
+        30,
+        40,
+        48,
+        54,
+        58,
+        { "value": 60, "arrow": "up" }
       ]
-    ],
-    "legend": [
-      {
-        "color": "yellow",
-        "description": "Shares of this corporation do not count toward the certificate limit",
-        "icon": "certificate"
-      },
-      {
-        "color": "orange",
-        "description": "Players may own more than 60% of this corporation",
-        "icon": "percentage"
-      },
-      {
-        "color": "brown",
-        "description": "Players may purchase any number of shares of this corporation in one stock action",
-        "icon": "money-bill-wave"
-      }
     ]
   },
   "tiles": {
