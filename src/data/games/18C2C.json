@@ -1,0 +1,1055 @@
+{
+  "info": {
+    "title": "18C2C",
+    "subtitle": "Manifest Destiny",
+    "designer": "Mark Frazier",
+    "background": "green",
+    "titleX": 75,
+    "titleY": 2000,
+    "extraTotalHeight": 300,
+    "currency": "USD"
+  },
+  "wip": true,
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/424/1870-railroading-across-trans-mississippi-1870",
+    "rules": "http://www.hexagonia.com/rules/MFG_1870.pdf"
+  },
+  "tokens": [
+    "Round",
+    { "icon": "port" },
+    { "icon": "port" },
+    { "icon": "meat" },
+    { "icon": "meat" }
+  ],
+  "ipo": true,
+  "bank": 12000,
+  "players": [
+    {
+      "number": 2,
+      "certLimit": "28 / 24",
+      "capital": 1050
+    },
+    {
+      "number": 3,
+      "certLimit": "20 / 17",
+      "capital": 700
+    },
+    {
+      "number": 4,
+      "certLimit": "16 / 14",
+      "capital": 525
+    },
+    {
+      "number": 5,
+      "certLimit": "13 / 11",
+      "capital": 420
+    },
+    {
+      "number": 6,
+      "certLimit": "11 / 9",
+      "capital": 350
+    }
+  ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "companies": [
+    {
+      "name": "Southern Pacific Railroad",
+      "abbrev": "SP",
+      "tokens": [
+        "Free",
+        "New Orleans",
+        40,
+        100
+      ],
+      "color": "orange"
+    },
+    {
+      "name": "Missouri Kansas Texas Railroad",
+      "abbrev": "MKT",
+      "tokens": [
+        "Free",
+        "Southwest",
+        40,
+        100
+      ],
+      "color": "green"
+    },
+    {
+      "name": "Fort Worth & Denver City Railway",
+      "abbrev": "FW",
+      "tokens": [
+        "Free",
+        "Denver",
+        40
+      ],
+      "color": "brightGreen"
+    },
+    {
+      "name": "Missouri Pacific Railroad",
+      "abbrev": "MP",
+      "tokens": [
+        "Free",
+        "Dallas",
+        40,
+        100
+      ],
+      "color": "brown"
+    },
+    {
+      "name": "Gulf, Mobile & Ohio Railroad",
+      "abbrev": "GMO",
+      "tokens": [
+        "Free",
+        "St. Louis",
+        40
+      ],
+      "color": "pink"
+    },
+    {
+      "name": "Texas & Pacific Railway",
+      "abbrev": "TP",
+      "tokens": [
+        "Free",
+        "New Orleans",
+        40
+      ],
+      "color": "black"
+    },
+    {
+      "name": "St. Louis Southwestern Railway",
+      "abbrev": "SSW",
+      "tokens": [
+        "Free",
+        "Fort Worth",
+        40
+      ],
+      "color": "blue"
+    },
+    {
+      "name": "Illinois Central Railroad",
+      "abbrev": "IC",
+      "tokens": [
+        "Free",
+        "Chicago",
+        40
+      ],
+      "color": "yellow"
+    },
+    {
+      "name": "Atchison, Topeka & Santa Fe",
+      "abbrev": "ATSF",
+      "tokens": [
+        "Free",
+        "Southwest",
+        40,
+        100
+      ],
+      "color": "brightBlue"
+    },
+    {
+      "name": "St. Louis-San Francisco Railway",
+      "abbrev": "SLSF",
+      "tokens": [
+        "Free",
+        "Southeast",
+        40,
+        100
+      ],
+      "color": "red"
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 7,
+      "price": 80,
+      "color": "yellow",
+      "info": [
+        {
+          "color": "green",
+          "note": "Rusted by 4"
+        }
+      ]
+    },
+    {
+      "name": "3",
+      "quantity": 6,
+      "price": 180,
+      "color": "green",
+      "info": [
+        {
+          "color": "gray",
+          "note": "Rusted by 6"
+        }
+      ]
+    },
+    {
+      "name": "4",
+      "quantity": 5,
+      "price": 300,
+      "color": "green",
+      "info": [
+        {
+          "color": "gray",
+          "note": "Rusted by 8"
+        }
+      ]
+    },
+    {
+      "name": "5",
+      "quantity": 4,
+      "price": 450,
+      "color": "brown",
+      "info": [
+        {
+          "color": "gray",
+          "note": "Rusted by 12"
+        }
+      ]
+    },
+    {
+      "name": "6",
+      "quantity": 3,
+      "price": 630,
+      "color": "gray",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "8",
+      "quantity": 3,
+      "price": 800,
+      "color": "gray",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "10",
+      "quantity": 2,
+      "price": 950,
+      "color": "gray",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "12",
+      "quantity": 6,
+      "price": 1100,
+      "color": "gray",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    }
+  ],
+  "privates": [
+    {
+      "name": "Great River Shipping Company",
+      "price": 20,
+      "revenue": 5,
+      "icon": "boat",
+      "description": ""
+    },
+    {
+      "name": "Mississippi River Bridge Company",
+      "price": 40,
+      "revenue": 10,
+      "icon": "bridge",
+      "description": ""
+    },
+    {
+      "name": "The Southern Cattle Company",
+      "price": 50,
+      "revenue": 10,
+      "icon": "meat",
+      "description": "This company has a token that may be placed on any city west of the Mississippi River. Cities located in the same hex as any portion of the Mississippi are not eligible for this placement. This increases the value of that city by $10 for that company only. Placing the token does not close the company."
+    },
+    {
+      "name": "The Gulf Shipping Company",
+      "price": 80,
+      "revenue": 15,
+      "icon": "water",
+      "description": ""
+    },
+    {
+      "name": "St. Louis-San Francisco Railway",
+      "price": 140,
+      "company": "SLSF",
+      "description": "This is the President's certificate of the St.Louis-San Francisco Railway. The purchaser sets the par value of the railway. Unlike other companies, this company may operate with just 20% sold. It may not be purchased by another public company."
+    },
+    {
+      "name": "Missouri-Kansas-Texas Railroad",
+      "price": 160,
+      "revenue": 20,
+      "company": "MKT",
+      "description": "Comes with a 10% share of the Missouri-Kansas-Texas Railroad."
+    }
+  ],
+  "phases": [
+    {
+      "name": "2",
+      "limit": "4",
+      "number": "7",
+      "tiles": "yellow"
+    },
+    {
+      "name": "3",
+      "limit": "4",
+      "number": "6",
+      "tiles": "green",
+      "notes": "Private companies may be purchased"
+    },
+    {
+      "name": "4",
+      "rust": "2",
+      "limit": "3",
+      "number": "5",
+      "tiles": "green"
+    },
+    {
+      "name": "5",
+      "limit": "2",
+      "number": "4",
+      "tiles": "brown",
+      "notes": "Private companies are closed"
+    },
+    {
+      "name": "6",
+      "limit": "2",
+      "number": "3",
+      "rust": "3",
+      "tiles": "gray",
+      "notes": "Remove port & cattle tokens"
+    },
+    {
+      "name": "8",
+      "limit": "2",
+      "number": "3",
+      "rust": "4",
+      "tiles": "gray"
+    },
+    {
+      "name": "10",
+      "limit": "2",
+      "number": "2",
+      "tiles": "gray"
+    },
+    {
+      "name": "12",
+      "limit": "2",
+      "number": "∞",
+      "rust": "5",
+      "tiles": "gray"
+    }
+  ],
+  "pools": [
+    {
+      "name": "Market",
+      "notes": [
+        {
+          "color": "orange",
+          "note": "Shares in the market pay dividends to the corporation"
+        },
+        {
+          "color": "brown",
+          "icon": "exclamation",
+          "note": "No more than 50% of a corporation's shares may be in the market at any time"
+        },
+        {
+          "color": "red",
+          "icon": "times",
+          "note": "Shares cannot be sold during the first stock round"
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "OR3",
+      "color": "brown"
+    },
+    {
+      "name": "OR2",
+      "color": "green"
+    },
+    {
+      "name": "OR1",
+      "color": "yellow"
+    },
+    {
+      "name": "SR",
+      "color": "white"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": [
+        "Buy one share",
+        "Sell any number of shares"
+      ],
+      "ordered": false
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Lay two yellow or one upgrade tile",
+        "Purchase a station",
+        "Run trains",
+        "Pay dividends or withhold revenue",
+        "Purchase trains"
+      ],
+      "ordered": true,
+      "optional": [
+        "Purchase private companies"
+      ]
+    }
+  ],
+  "stock": {
+    "display": {
+      "roundTracker": {
+        "type": "col-reverse",
+        "x": 15,
+        "y": 6
+      },
+      "par": {
+        "x": 17,
+        "y": 5
+      }
+    },
+    "type": "2D",
+    "par": {
+      "width": "3in",
+      "values": [
+        100,
+        90,
+        82,
+        76,
+        72,
+        68
+      ]
+    },
+    "movement": {
+      "up": [
+        "Sold out"
+      ],
+      "down": [
+        "Every unprotected share sold"
+      ],
+      "left": [
+        "Withheld revenue"
+      ],
+      "right": [
+        "Paid dividends"
+      ]
+    },
+    "ledges": [
+      {
+        "color": "red",
+        "coords": [
+          "7 9",
+          "7 8",
+          "8 8",
+          "8 7",
+          "9 7",
+          "9 6",
+          "10 6",
+          "10 5",
+          "11 5",
+          "11 4",
+          "13 4",
+          "13 3",
+          "16 3",
+          "16 2",
+          "21 2"
+        ]
+      }
+    ],
+    "market": [
+      [
+        {
+          "value": 64,
+          "legend": 0,
+          "arrow": "down"
+        },
+        68,
+        72,
+        76,
+        82,
+        90,
+        {
+          "value": 100,
+          "par": true
+        },
+        110,
+        120,
+        140,
+        160,
+        180,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350,
+        375,
+        400
+      ],
+      [
+        {
+          "value": 60,
+          "legend": 0,
+          "arrow": "down"
+        },
+        {
+          "value": 64,
+          "legend": 0
+        },
+        68,
+        72,
+        76,
+        82,
+        {
+          "value": 90,
+          "par": true
+        },
+        100,
+        110,
+        120,
+        140,
+        160,
+        180,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350,
+        {
+          "value": 375,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 55,
+          "legend": 0,
+          "arrow": "down"
+        },
+        {
+          "value": 60,
+          "legend": 0
+        },
+        {
+          "value": 64,
+          "legend": 0
+        },
+        68,
+        72,
+        76,
+        {
+          "value": 82,
+          "par": true
+        },
+        90,
+        100,
+        110,
+        120,
+        140,
+        160,
+        180,
+        200,
+        {
+          "value": 225,
+          "arrow": "up"
+        },
+        250,
+        275,
+        300,
+        325,
+        {
+          "value": 350,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 50,
+          "legend": 1,
+          "arrow": "down"
+        },
+        {
+          "value": 55,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "legend": 0
+        },
+        {
+          "value": 64,
+          "legend": 0
+        },
+        68,
+        72,
+        {
+          "value": 76,
+          "par": true
+        },
+        82,
+        90,
+        100,
+        110,
+        120,
+        {
+          "value": 140,
+          "arrow": "up"
+        },
+        160,
+        180,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325
+      ],
+      [
+        {
+          "value": 40,
+          "legend": 2,
+          "arrow": "down"
+        },
+        {
+          "value": 50,
+          "legend": 1
+        },
+        {
+          "value": 55,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "legend": 0
+        },
+        64,
+        68,
+        {
+          "value": 72,
+          "par": true
+        },
+        76,
+        82,
+        90,
+        {
+          "value": 100,
+          "arrow": "up"
+        },
+        110,
+        120,
+        140,
+        160,
+        {
+          "value": 180,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 30,
+          "legend": 2,
+          "arrow": "down"
+        },
+        {
+          "value": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "legend": 1
+        },
+        {
+          "value": 55,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "legend": 0
+        },
+        64,
+        {
+          "value": 68,
+          "par": true
+        },
+        72,
+        76,
+        {
+          "value": 82,
+          "arrow": "up"
+        },
+        90,
+        100,
+        {
+          "value": 110,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 20,
+          "legend": 2,
+          "arrow": "down"
+        },
+        {
+          "value": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "legend": 1
+        },
+        {
+          "value": 55,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "legend": 0
+        },
+        64,
+        68,
+        {
+          "value": 72,
+          "arrow": "up"
+        },
+        76,
+        {
+          "value": 82,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 10,
+          "legend": 2,
+          "arrow": "down"
+        },
+        {
+          "value": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "legend": 0
+        },
+        {
+          "value": 55,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "legend": 0
+        },
+        {
+          "value": 64,
+          "arrow": "up"
+        },
+        68,
+        {
+          "value": 72,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "color": "black"
+        },
+        {
+          "value": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "legend": 0
+        },
+        {
+          "value": 55,
+          "legend": 0,
+          "arrow": "up"
+        },
+        60,
+        {
+          "value": 64,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "color": "black"
+        },
+        {
+          "color": "black"
+        },
+        {
+          "value": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "legend": 0,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "subLabel": "Closed",
+          "color": "black"
+        },
+        {
+          "color": "black"
+        },
+        {
+          "color": "black"
+        },
+        {
+          "value": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "legend": 1,
+          "arrow": "up"
+        }
+      ]
+    ],
+    "legend": [
+      {
+        "color": "yellow",
+        "description": "Shares of this corporation do not count toward the certificate limit",
+        "icon": "certificate"
+      },
+      {
+        "color": "orange",
+        "description": "Players may own more than 60% of this corporation",
+        "icon": "percentage"
+      },
+      {
+        "color": "brown",
+        "description": "Players may purchase any number of shares of this corporation from the open market in one stock action",
+        "icon": "money-bill-wave"
+      }
+    ]
+  },
+  "tiles": {
+    "1": 1,
+    "2": 1,
+    "3": 3,
+    "4": 6,
+    "5": 2,
+    "6": 2,
+    "7": 9,
+    "8": 22,
+    "9": 23,
+    "14": 4,
+    "15": 4,
+    "16": 2,
+    "17": 2,
+    "18": 2,
+    "19": 2,
+    "20": 2,
+    "23": 4,
+    "24": 4,
+    "25": 3,
+    "26": 2,
+    "27": 2,
+    "28": 2,
+    "29": 2,
+    "39": 1,
+    "40": 2,
+    "41": 3,
+    "42": 3,
+    "43": 2,
+    "44": 1,
+    "45": 2,
+    "46": 2,
+    "47": 2,
+    "55": 1,
+    "56": 1,
+    "57": 5,
+    "58": 4,
+    "63": 5,
+    "69": 1,
+    "70": 2,
+    "141": 2,
+    "142": 2,
+    "143": 1,
+    "144": 1,
+    "145": 2,
+    "146": 2,
+    "147": 2,
+    "170": 4,
+    "171": 1,
+    "172": 1
+  },
+  "map": {
+    "print": "landscape",
+    "players": {
+      "x": 1035,
+      "y": 2050
+    },
+    "roundTracker": {
+      "type": "row",
+      "x": 600,
+      "y": 1910
+    },
+    "hexes": [
+      {
+        "color": "plain",
+        "hexes": [
+          "A10", "A12", "A18", "A22", "A24", "A26", "A28", "A30", "A32", "A34", "A36", "A38", "A40", "A42", "A48", "A50", "A56", "A58", "A60", "A62",
+          "B11", "B13", "B15", "B25", "B35", "B37", "B39", "B41", "B45", "B47", "B49", "B51", "B53", "B59", "B61", "B63", "B65",
+          "C2", "C10", "C14", "C16", "C28", "C30", "C32", "C38", "C40", "C42", "C44", "C50", "C62", "C64", "C66", "C68",
+          "D1", "D3", "D13", "D15", "D17", "D23", "D25", "D27", "D29", "D31", "D33", "D35", "D39", "D41", "D45", "D51", "D53", "D55", "D57", "D59", "D65", "D67", "D71", "D73", "D83", "D85", "D87",
+          "E10", "E14", "E16", "E26", "E28", "E30", "E32", "E34", "E36", "E40", "E42", "E44", "E48", "E50", "E52", "E54", "E56", "E58", "E68", "E70", "E72", "E74", "E76", "E80", "E82", "E84", "E86",
+          "F1", "F3", "F9", "F11", "F25", "F27", "F29", "F31", "F33", "F35", "F39", "F41", "F43", "F45", "F51", "F55", "F57", "F61", "F63", "F69", "F71", "F73", "F79", "F87",
+          "G10", "G14", "G18", "G20", "G28", "G30", "G36", "G40", "G42", "G44", "G46", "G48", "G52", "G54", "G56", "G60", "G62", "G66", "G68", "G70", "G72", "G74", "G76", "G82", "G84",
+          "H1", "H3", "H9", "H11", "H15", "H17", "H29", "H31", "H33", "H35", "H37", "H41", "H45", "H47", "H49", "H53", "H59", "H63", "H67", "H71", "H75", "H77", "H79",
+          "I2", "I10", "I12", "I30", "I32", "I34", "I36", "I38", "I44", "I46", "I48", "I50", "I54", "I56", "I60", "I62", "I66", "I68", "I72", "I74",
+          "J1", "J11", "J15", "J17", "J29", "J31", "J33", "J35", "J37", "J39", "J41", "J45", "J49", "J51", "J55", "J59", "J61", "J67", "J71", "J73", "J77", "J79",
+          "K4", "K10", "K12", "K16", "K18", "K32", "K34", "K36", "K38", "K42", "K46", "K48", "K50", "K54", "K56", "K58", "K60", "K62", "K64", "K66", "K70", "K76",
+          "L1", "L3", "L11", "L13", "L15", "L17", "L19", "L21", "L23", "L31", "L33", "L35", "L37", "L39", "L41", "L43", "L47", "L49", "L55", "L57", "L61", "L63", "L65", "L73", "L77",
+          "M2", "M14", "M18", "M22", "M32", "M34", "M36", "M38", "M40", "M42", "M54", "M56", "M58", "M72",
+          "N3", "N15", "N17", "N43", "N45", "N47", "N55", "N61", "N63",
+          "O6", "O14", "O16", "O18", "O24", "O32", "O34", "O36", "O38", "O40", "O44", "O46", "O58", "O60", "O62", "O70",
+          "P7", "P23", "P31", "P33", "P35", "P37", "P39", "P41", "P45", "P55", "P57", "P59", "P61", "P69", "P71",
+          "Q6", "Q8", "Q20", "Q22", "Q24", "Q32", "Q34", "Q38", "Q40", "Q50", "Q52", "Q56", "Q60", "Q62", "Q68", "Q72",
+          "R13", "R23", "R31", "R33", "R35", "R37", "R39", "R41", "R43", "R45", "R47", "R57", "R59", "R61", "R65", "R67", "R69", "R71", "R73",
+          "S10", "S12", "S14", "S20", "S22", "S32", "S36", "S38", "S40", "S42", "S44", "S46", "S48", "S50", "S54", "S56", "S64", "S66", "S68", "S70",
+          "T17", "T19", "T23", "T31", "T33", "T35", "T37", "T39", "T45", "T47", "T49", "T55", "T57", "T59", "T61", "T63", "T65", "T67",
+          "U20", "U24", "U26", "U30", "U32", "U34", "U36", "U38", "U40", "U42", "U44", "U46", "U50", "U54", "U56", "U58", "U60", "U62", "U64",
+          "V31", "V33", "V35", "V37", "V39", "V43", "V47", "V49", "V59", "V61", "V63", "V65",
+          "W32", "W34", "W36", "W38", "W42", "W44", "W62", "W64",
+          "X37", "X39", "X41", "X43", "X45", "X65", "X67",
+          "Y38", "Y40", "Y66", "Y68",
+          "Z65", "Z67"
+        ]
+      },
+      {
+        "color": "gray",
+        "hexes": [
+          "B55", "B57",
+          "C52", "C54", "C56", "C58", "C60",
+          "E60", "E64", "E66",
+          "F59", "F65", "F67",
+          "G58", "G64",
+          "H57",
+          "I58",
+          "P19"
+        ]
+      },
+      {
+        "color": "plain",
+        "mountain": {
+          "cost": "$60",
+          "size": "small"
+        },
+        "hexes": [
+          "A8", "A14", "A20", "A52",
+          "B5", "B7", "B17", "B19",
+          "C18", "C20",
+          "D5", "D19",
+          "E8", "E20", "E22",
+          "F7", "F15", "F17", "F19", "F21", "F81", "F83",
+          "G4", "G8", "G16", "G22", "G26", "G32", "G78", "G80",
+          "H7", "H23", "H27", "H81",
+          "I4", "I20", "I22", "I76", "I80",
+          "J3", "J5", "J7", "J9", "J13", "J23", "J25", "J27",
+          "K2", "K8", "K14", "K24", "K72", "K74",
+          "L5", "L9", "L71",
+          "M10", "M12", "M16", "M20", "M30", "M68",
+          "N7", "N11", "N13", "N19", "N21", "N25", "N49", "N51", "N69", "N71",
+          "O8", "O12", "O50", "O52", "O64", "O66",
+          "P11", "P17", "P21", "P25", "P47", "P49", "P51", "P65",
+          "Q10", "Q12", "Q18", "Q26", "Q66",
+          "R7", "R11", "R15", "R19", "R25", "R63",
+          "S18", "S30", "S60",
+          "T29"
+        ]
+      }
+    ]
+  }
+}
