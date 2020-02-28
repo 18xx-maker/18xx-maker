@@ -918,9 +918,103 @@
         "hexes": ["Q13"]
       },
       {
+        "color": "water",
+        "track": [{"gauge": "dashed", "type": "gentle", "side": 1}],
+        "removeBorders": [4],
+        "hexes": ["F12"]
+      },
+      {
+        "color": "water",
+        "track": [{"gauge": "dashed", "type": "gentle", "side": 6}],
+        "removeBorders": [1],
+        "hexes": ["F14"]
+      },
+      {
+        "color": "water",
+        "track": [{"gauge": "dashed", "type": "straight", "side": 2}],
+        "removeBorders": [5],
+        "hexes": ["I15"]
+      },
+      {
+        "color": "water",
+        "track": [{"gauge": "dashed", "type": "gentle", "side": 6}],
+        "removeBorders": [2],
+        "hexes": ["J16"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Qiqihar"}}],
+        "hexes": ["A5"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Harbin"}, "companies": ["BZU"]}],
+        "hexes": ["B8"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Changchun"}}],
+        "hexes": ["C9"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Jilin City"}}],
+        "hexes": ["C11"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Taiyuan"}, "companies": ["2"]}],
+        "hexes": ["E13"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Taiyuan"}, "companies": ["3"]}],
+        "hexes": ["H6"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Qingdao"}, "companies": ["4"]}],
+        "hexes": ["H14"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Hefei"}}],
+        "hexes": ["J12"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Chengdu"}, "companies": ["BCR"]}],
+        "hexes": ["M3"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Kunming"}, "companies": ["CKR"]}],
+        "hexes": ["O5"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Nanning"}}],
+        "hexes": ["P8"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Macau"}, "companies": ["6"]}],
+        "hexes": ["P12"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Guangzhou"}}],
+        "hexes": ["P14"]
+      },
+      {
         "color": "plain",
         "centerTowns": [{}],
         "hexes": ["A7", "C7", "D14", "G9", "G15", "L16", "M15", "P6"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20}],
+        "hexes": ["G1", "H4", "I5", "N6"]
       },
       {
         "color": "plain",
