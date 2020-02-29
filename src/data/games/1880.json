@@ -900,6 +900,24 @@
         "hexes": ["A3"]
       },
       {
+        "color": "offboard",
+        "routeBonus": [{"value": "Russia: +¥50", "angle": 180, "percent": 0.4}],
+        "offBoardRevenue": {
+          "name": {"name": "Vladivostok"},
+          "x": 15,
+          "percent": 0.2,
+          "revenues": [
+            {"color": "yellow", "value": 10},
+            {"color": "green", "value": 20},
+            {"color": "brown", "value": 30},
+            {"color": "gray", "value": 40}
+          ]
+        },
+        "track": [{"type": "offboard", "side": 1},
+                  {"type": "offboard", "side": 6}],
+        "hexes": ["A15"]
+      },
+      {
         "color": "water",
         "offBoardRevenue": {
           "name": {"name": "Taiwan"},
@@ -977,8 +995,13 @@
       },
       {
         "color": "plain",
-        "cities": [{"name": {"name": "Taiyuan"}, "companies": ["2"]}],
+        "cities": [{"name": {"name": "Dalian"}, "companies": ["2"]}],
         "hexes": ["E13"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Tianjin"}}],
+        "hexes": ["F10"]
       },
       {
         "color": "plain",
@@ -1022,8 +1045,157 @@
       },
       {
         "color": "plain",
+        "mediumCities": [{}],
+        "hexes": ["B14", "E9", "L14", "N10"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Fushun"}, "angle": 90, "percent": 0.5},
+                   {"name": {"name": "Shenyang", "reverse": true}, "companies": ["QSR"], "angle": 270, "percent": 0.5}],
+        "hexes": ["D12"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Changsha"}, "companies": ["SCR"], "angle": 90, "percent": 0.5},
+                   {"name": {"name": "Nanchang", "reverse": true}, "angle": 270, "percent": 0.5}],
+        "hexes": ["N12"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Hohhot"}, "angle": 90, "percent": 0.5},
+                   {"name": {"name": "Datong", "reverse": true}, "angle": 270, "percent": 0.5}],
+        "hexes": ["F4"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{"angle": 20, "percent": 0.8, "companies": ["JGG"]},
+                   {"angle": 80, "percent": 0.8, "companies": ["JLR"], "name": {"name": "Bejing", "offset": 53}},
+                   {"angle": 200, "percent": 0.8, "companies": ["JHA"]},
+                   {"angle": 260, "percent": 0.8, "companies": ["JHU"]}],
+        "labels": [{"label": "B", "angle": 320, "percent": 0.25, "size": 24}],
+        "values": [{"value": 20, "angle": 140, "percent": 0.18}],
+        "hexes": ["F8"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
+        "cities": [{"percent": 0.5, "name": {"name": "Baotou"}}],
+        "hexes": ["G3"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
+        "cities": [{"percent": 0.5, "name": {"name": "Chongqing"}}],
+        "hexes": ["M7"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
+        "cities": [{"percent": 0.5, "name": {"name": "Nanjing"}, "companies": ["NJR"]}],
+        "hexes": ["K13"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
+        "cities": [{"percent": 0.5, "name": {"name": "Wuhan"}, "companies": ["WNR"]}],
+        "hexes": ["L10"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Shanghai"}, "companies": ["HKR"]}],
+        "labels": [{"label": "S", "angle": 90, "percent": 0.667}],
+        "hexes": ["K15"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.4}],
+        "centerTowns": [{"percent": 0.4}],
+        "hexes": ["G11", "J14"]
+      },
+      {
+        "color": "plain",
+        "mediumCities": [{"angle": 90, "percent": 0.4}, {"angle": 270, "percent": 0.4}],
+        "hexes": ["H8"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
+        "cities": [{"percent": 0.5, "name": {"name": "Jinan"}}],
+        "hexes": ["H10"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.5}],
+        "cities": [{"percent": 0.5, "name": {"name": "Xi'an"}, "companies": ["NXR"]}],
+        "hexes": ["J6"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"angle": 90, "percent": 0.4}, {"angle": 270, "percent": 0.4}],
+        "hexes": ["B12", "H12", "O11"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.4}],
+        "centerTowns": [{"percent": 0.4}],
+        "hexes": ["D4", "K5", "K7", "M5", "O15", "P10"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 40, "angle": 180, "percent": 0.4}],
+        "centerTowns": [{"percent": 0.4}],
+        "hexes": ["P4"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.4}],
+        "mediumCities": [{"percent": 0.4}],
+        "hexes": ["F6", "O7"]
+      },
+      {
+        "color": "plain",
         "centerTowns": [{}],
         "hexes": ["A7", "C7", "D14", "G9", "G15", "L16", "M15", "P6"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 50, "angle": 180, "percent": 0.1},
+                    {"type": "river", "percent": 0.4}],
+        "hexes": ["G5", "I7", "L8"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "percent": 0.7}],
+        "cities": [{"name": {"name": "Kaifeng"}, "angle": 110, "percent": 0.5},
+                   {"name": {"name": "Zhengzhou", "reverse": true}, "companies": ["QSR"], "angle": 250, "percent": 0.5}],
+        "hexes": ["I9"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 30, "percent": 0.5}],
+        "centerTowns": [{"angle": 120, "percent": 0.5},
+                        {"angle": 240, "percent": 0.5}],
+        "hexes": ["J8"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "percent": 0.5}],
+        "centerTowns": [{"angle": 120, "percent": 0.5},
+                        {"angle": 240, "percent": 0.5}],
+        "hexes": ["L12", "O3"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "percent": 0.5}],
+        "mediumCities": [{"angle": 120, "percent": 0.5},
+                        {"angle": 240, "percent": 0.5}],
+        "hexes": ["N4"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 60, "angle": 180, "percent": 0.1},
+                    {"type": "river", "percent": 0.4}],
+        "hexes": ["O1"]
       },
       {
         "color": "plain",
