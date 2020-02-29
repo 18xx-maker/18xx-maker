@@ -997,7 +997,7 @@
           "O6", "O14", "O16", "O18", "O24", "O32", "O34", "O36", "O38", "O40", "O44", "O46", "O58", "O60", "O62", "O70",
           "P7", "P23", "P31", "P33", "P35", "P37", "P39", "P41", "P45", "P55", "P57", "P59", "P61", "P69", "P71",
           "Q6", "Q8", "Q20", "Q22", "Q24", "Q32", "Q34", "Q38", "Q40", "Q50", "Q52", "Q56", "Q60", "Q62", "Q68", "Q72",
-          "R13", "R23", "R31", "R33", "R35", "R37", "R39", "R41", "R43", "R45", "R47", "R57", "R59", "R61", "R65", "R67", "R69", "R71", "R73",
+          "R13", "R23", "R31", "R33", "R35", "R37", "R39", "R41", "R43", "R45", "R47", "R55", "R57", "R59", "R61", "R65", "R67", "R69", "R71", "R73",
           "S10", "S12", "S14", "S20", "S22", "S32", "S36", "S38", "S40", "S42", "S44", "S46", "S48", "S50", "S54", "S56", "S64", "S66", "S68", "S70",
           "T17", "T19", "T23", "T31", "T33", "T35", "T37", "T39", "T45", "T47", "T49", "T55", "T57", "T59", "T61", "T63", "T65", "T67",
           "U20", "U24", "U26", "U30", "U32", "U34", "U36", "U38", "U40", "U42", "U44", "U46", "U50", "U54", "U56", "U58", "U60", "U62", "U64",
@@ -1143,7 +1143,8 @@
           "cost": "$80"
         },
         "hexes": [
-          "D79",
+          "A46",
+          "D61", "D79",
           "E2",
           "F77",
           "H65", "H83",
@@ -1156,6 +1157,1010 @@
           "T15",
           "AA66"
         ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Grand Forks"
+            }
+          }
+        ],
+        "hexes": ["B43"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Spokane"
+            }
+          }
+        ],
+        "hexes": ["C12"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "tree",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Great Falls"
+            }
+          }
+        ],
+        "hexes": ["C22"]
+      },
+      {
+        "color": "plain",
+        "water": [
+          {
+            "cost": "$20",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Bismark"
+            }
+          }
+        ],
+        "hexes": ["D37"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Fargo"
+            }
+          }
+        ],
+        "hexes": ["D43"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "L",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "North Bay"
+            }
+          }
+        ],
+        "hexes": ["D69"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "tree",
+            "angle": 150,
+            "percent": 0.75
+          },
+          {
+            "type": "token",
+            "angle": 210,
+            "percent": 0.75
+          }
+        ],
+        "mountain": {
+          "cost": "$60",
+          "size": "small",
+          "percent": 0.75
+        },
+        "cities": [
+          {
+            "name": {
+              "name": "Butte"
+            }
+          }
+        ],
+        "hexes": ["E18"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "tree",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Billings"
+            }
+          }
+        ],
+        "hexes": ["E24"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "tree",
+            "percent": -0.75
+          }
+        ],
+        "water": [
+          {
+            "cost": "$20",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Saint Cloud"
+            }
+          }
+        ],
+        "hexes": ["E46"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "P",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "water": [
+          {
+            "cost": "$20",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Minneapolis"
+            }
+          }
+        ],
+        "hexes": ["F47"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "tree",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Wausau"
+            }
+          }
+        ],
+        "hexes": ["F53"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "L",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Ottowa"
+            }
+          }
+        ],
+        "hexes": ["F75"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "tree",
+            "angle": 150,
+            "percent": 0.75
+          },
+          {
+            "type": "fish",
+            "angle": 210,
+            "percent": 0.75
+          }
+        ],
+        "labels": [
+          {
+            "label": "L",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Bangor"
+            }
+          }
+        ],
+        "hexes": ["F85"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "tree",
+            "percent": -0.75
+          }
+        ],
+        "labels": [
+          {
+            "label": "L",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Eugene"
+            }
+          }
+        ],
+        "hexes": ["G2"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Rapid City"
+            }
+          }
+        ],
+        "hexes": ["G34"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "tree",
+            "percent": -0.75
+          }
+        ],
+        "water": [
+          {
+            "cost": "$40",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Boise"
+            }
+          }
+        ],
+        "hexes": ["H13"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "tree",
+            "percent": -0.75
+          }
+        ],
+        "water": [
+          {
+            "cost": "$20",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Idaho Falls"
+            }
+          }
+        ],
+        "hexes": ["H19"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Sioux Falls"
+            }
+          }
+        ],
+        "hexes": ["H43"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Lansing"
+            }
+          }
+        ],
+        "hexes": ["H61"]
+      },
+      {
+        "color": "plain",
+        "water": [
+          {
+            "cost": "$80",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Toronto"
+            }
+          }
+        ],
+        "hexes": ["H69"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "K",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Rochester"
+            }
+          }
+        ],
+        "hexes": ["H73"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "tree",
+            "percent": -0.75
+          }
+        ],
+        "water": [
+          {
+            "cost": "$20",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Twin Falls"
+            }
+          }
+        ],
+        "hexes": ["I16"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "tree",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Casper"
+            }
+          }
+        ],
+        "hexes": ["I28"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Ogden"
+            }
+          }
+        ],
+        "hexes": ["J21"]
+      },
+      {
+        "color": "plain",
+        "water": [
+          {
+            "cost": "$80",
+            "percent": 0.75
+          }
+        ],
+        "labels": [
+          {
+            "label": "L",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Toledo"
+            }
+          }
+        ],
+        "hexes": ["J63"]
+      },
+      {
+        "color": "plain",
+        "mountain": {
+          "cost": "$60",
+          "size": "small",
+          "percent": 0.75
+          
+        },
+        "cities": [
+          {
+            "name": {
+              "name": "Scranton"
+            }
+          }
+        ],
+        "hexes": ["J75"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "meat",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Kearney"
+            }
+          }
+        ],
+        "hexes": ["K40"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Springfield"
+            }
+          }
+        ],
+        "hexes": ["L53"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "coal",
+            "percent": -0.75
+          }
+        ],
+        "water": [
+          {
+            "cost": "$40",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Charleston"
+            }
+          }
+        ],
+        "hexes": ["N65"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "meat",
+            "percent": -0.75
+          }
+        ],
+        "water": [
+          {
+            "cost": "$40",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Wichita"
+            }
+          }
+        ],
+        "hexes": ["O42"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "coal",
+            "percent": -0.75
+          }
+        ],
+        "mountain": {
+          "cost": "$60",
+          "size": "small",
+          "percent": 0.75
+          
+        },
+        "cities": [
+          {
+            "name": {
+              "name": "Blacksburg"
+            }
+          }
+        ],
+        "hexes": ["O68"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "K",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Monterey"
+            }
+          }
+        ],
+        "hexes": ["P5"]
+      },
+      {
+        "color": "plain",
+        "mountain": {
+          "cost": "$60",
+          "size": "small",
+          "percent": 0.75
+          
+        },
+        "cities": [
+          {
+            "name": {
+              "name": "Fresno"
+            }
+          }
+        ],
+        "hexes": ["P9"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "token",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Las Vegas"
+            }
+          }
+        ],
+        "hexes": ["P15"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "coal",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Knoxville"
+            }
+          }
+        ],
+        "hexes": ["P63"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "meat",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Amarillo"
+            }
+          }
+        ],
+        "hexes": ["Q36"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "meat",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Oklahoma City"
+            }
+          }
+        ],
+        "hexes": ["Q42"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Nashville"
+            }
+          }
+        ],
+        "hexes": ["Q58"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Flagstaff"
+            }
+          }
+        ],
+        "hexes": ["R21"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "token",
+            "percent": -0.75
+          }
+        ],
+        "mountain": {
+          "cost": "$120",
+          "size": "large",
+          "percent": 0.75
+          
+        },
+        "cities": [
+          {
+            "name": {
+              "name": "Albuquerque"
+            }
+          }
+        ],
+        "hexes": ["R27"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "meat",
+            "percent": -0.75
+          }
+        ],
+        "water": [
+          {
+            "cost": "$40",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Little Rock"
+            }
+          }
+        ],
+        "hexes": ["R49"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "meat",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Lubbock"
+            }
+          }
+        ],
+        "hexes": ["S34"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "token",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Phoenix"
+            }
+          }
+        ],
+        "hexes": ["T21"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "P",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "icons": [
+          {
+            "type": "meat",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Fort Worth"
+            }
+          }
+        ],
+        "hexes": ["T41"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "K",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "icons": [
+          {
+            "type": "meat",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Tuscon"
+            }
+          }
+        ],
+        "hexes": ["U22"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "meat",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Shreveport"
+            }
+          }
+        ],
+        "hexes": ["U48"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "K",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "icons": [
+          {
+            "type": "fish",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Savannah"
+            }
+          }
+        ],
+        "hexes": ["U66"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "meat",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Austin"
+            }
+          }
+        ],
+        "hexes": ["V41"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "meat",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Houston"
+            }
+          }
+        ],
+        "hexes": ["V45"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "port",
+            "percent": -0.75
+          }
+        ],
+        "water": [
+          {
+            "cost": "$60",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Baton Rouge"
+            }
+          }
+        ],
+        "hexes": ["V51"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "meat",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "San Antonio"
+            }
+          }
+        ],
+        "hexes": ["W40"]
+      },
+      {
+        "color": "plain",
+        "water": [
+          {
+            "cost": "$60",
+            "percent": 0.75
+          }
+        ],
+        "icons": [
+          {
+            "type": "port",
+            "angle": 150,
+            "percent": 0.75
+          },
+          {
+            "type": "meat",
+            "angle": 210,
+            "percent": 0.75
+          }
+        ],
+        "labels": [
+          {
+            "label": "L",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Galveston"
+            }
+          }
+        ],
+        "hexes": ["W46"]
+      },
+      {
+        "color": "plain",
+        "water": [
+          {
+            "cost": "$60",
+            "percent": 0.75
+          }
+        ],
+        "icons": [
+          {
+            "type": "port",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "labels": [
+          {
+            "label": "K",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Corpus Christi"
+            }
+          }
+        ],
+        "hexes": ["Y42"]
       }
     ]
   }
