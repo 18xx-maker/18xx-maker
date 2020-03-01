@@ -15,10 +15,10 @@
     "rules": "https://boardgamegeek.com/wiki/page/1830_Rules"
   },
   "colors": {
-    "plusFive": "#b99874",
-    "plusTen": "#a37a4a",
-    "plusFifteen": "#986433",
-    "plusTwenty": "#8a4e20"
+    "plusFive": "#fcea18",
+    "plusTen": "#f3cc10",
+    "plusFifteen": "#e9ae09",
+    "plusTwenty": "#e09001"
   },
   "tokens": [
     "Round"
