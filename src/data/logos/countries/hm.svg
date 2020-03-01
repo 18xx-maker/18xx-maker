@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 10080 5040">
+    <defs>
+        <path id="Star7" d="M0-360l69.421398 215.844981 212.037936-80.30131-125.470868 188.85298L350.974048 80.107536 125.093037 99.758368l31.105109 224.590424L0 160l-156.198146 164.348792 31.105109-224.590424-225.881011-19.650832 194.985582-115.710885-125.470868-188.85298 212.037936 80.30131z"/>
+        <path id="Star5" d="M0-210L54.859957-75.508253l144.861911 10.614684L88.765275 28.841586l34.669628 141.051983L0 93.333333l-123.434903 76.560236 34.669628-141.051983-110.956593-93.735155 144.861911-10.614684z"/>
+        <clipPath id="c">
+            <path d="M0 0v1.5h7V3H6zm6 0H3v3.5H0V3z"/>
+        </clipPath>
+        <use id="Cstar" transform="scale(2.1)" xlink:href="#Star7"/>
+    </defs>
+    <path fill="#00008b" d="M0 0h10080v5040H0z"/>
+    <path stroke="#fff" stroke-width="504" d="M0 0l5040 2520m0-2520L0 2520"/>
+    <path stroke="red" stroke-width=".4" d="M0 0l6 3m0-3L0 3" clip-path="url(#c)" transform="scale(840)"/>
+    <path stroke="#fff" stroke-width="840" d="M2520 0v2940M0 1260h5880"/>
+    <path stroke="red" stroke-width="504" d="M2520 0v2940M0 1260h5880"/>
+    <path fill="#00008b" d="M0 2520h5040V0h1680v3360H0z"/>
+    <g fill="#fff">
+        <use x="2520" y="3780" xlink:href="#Cstar"/>
+        <use x="7560" y="4200" xlink:href="#Star7"/>
+        <use x="6300" y="2205" xlink:href="#Star7"/>
+        <use x="7560" y="840" xlink:href="#Star7"/>
+        <use x="8680" y="1869" xlink:href="#Star7"/>
+        <use x="8064" y="2730" xlink:href="#Star5"/>
+    </g>
+</svg>
