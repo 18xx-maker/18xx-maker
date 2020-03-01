@@ -279,6 +279,18 @@
       "color": "purple"
     },
     {
+      "name": "Gulf, Mobile & Ohio",
+      "abbrev": "GMO",
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "St. Louis, MO"
+      ],
+      "color": "purple"
+    },
+    {
       "name": "Illinois Central",
       "abbrev": "IC",
       "tokens": [
@@ -698,7 +710,6 @@
       "name": "Schuylkill Valley",
       "price": 20,
       "revenue": 5,
-      "hex": "A1",
       "description": "Blocks tile placement on SV hex until purchased/closed."
     },
     {
