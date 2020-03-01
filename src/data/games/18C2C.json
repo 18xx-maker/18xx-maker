@@ -4,53 +4,104 @@
     "subtitle": "Manifest Destiny",
     "designer": "Mark Frazier",
     "background": "green",
-    "titleX": 75,
-    "titleY": 2000,
+    "titleX": 200,
+    "titleY": 3000,
     "extraTotalHeight": 300,
     "currency": "USD"
   },
   "wip": true,
   "links": {
-    "bgg": "https://www.boardgamegeek.com/boardgame/424/1870-railroading-across-trans-mississippi-1870",
-    "rules": "http://www.hexagonia.com/rules/MFG_1870.pdf"
+    "bgg": "https://boardgamegeek.com/boardgame/9132/18c2c-manifest-destiny",
+    "rules": "http://www.designsice.com/files/18C2C%20Rules.pdf"
   },
   "tokens": [
     "Round",
-    { "icon": "port" },
-    { "icon": "port" },
+    { "label": "$10/$20", "icon": "token" },
+    { "label": "$20", "icon": "token" },
+    { "label": "$10/$20", "icon": "port" },
+    { "label": "$20", "icon": "port" },
     { "icon": "meat" },
-    { "icon": "meat" }
+    { "icon": "meat" },
+    { "icon": "fish" },
+    { "icon": "fish" },
+    { "icon": "coal" },
+    { "icon": "coal" },
+    { "icon": "tree" },
+    { "icon": "tree" },
+    { "icon": "mountain" },
+    { "icon": "mountain" },
+    { "icon": "mountain" },
+    { "icon": "mountain" },
+    { "icon": "mountain" },
+    { "icon": "tracks" },
+    { "icon": "tracks" },
+    { "icon": "tracks" },
+    { "icon": "tracks" },
+    { "icon": "tracks" },
+    { "icon": "tracks" },
+    { "icon": "tracks" },
+    { "icon": "tracks" },
+    { "icon": "tracks" },
+    { "icon": "tracks" }
   ],
-  "ipo": true,
-  "bank": 12000,
+  "ipo": ["default"],
+  "bank": 48000,
   "players": [
     {
       "number": 2,
-      "certLimit": "28 / 24",
-      "capital": 1050
+      "certLimit": "96*",
+      "capital": 3600
     },
     {
       "number": 3,
-      "certLimit": "20 / 17",
-      "capital": 700
+      "certLimit": "64*",
+      "capital": 2400
     },
     {
       "number": 4,
-      "certLimit": "16 / 14",
-      "capital": 525
+      "certLimit": "48*",
+      "capital": 1800
     },
     {
       "number": 5,
-      "certLimit": "13 / 11",
-      "capital": 420
+      "certLimit": "38*",
+      "capital": 1440
     },
     {
       "number": 6,
-      "certLimit": "11 / 9",
-      "capital": 350
+      "certLimit": "32*",
+      "capital": 1200
+    },
+    {
+      "number": 7,
+      "certLimit": "27*",
+      "capital": 1028
+    },
+    {
+      "number": 8,
+      "certLimit": "24*",
+      "capital": 900
     }
   ],
   "shareTypes": {
+    "national": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": "20/10",
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": "10/5",
+        "shares": 1
+      },
+      {
+        "quantity": 10,
+        "percent": 5,
+        "shares": 1
+      }
+    ],   
     "default": [
       {
         "quantity": 1,
@@ -67,115 +118,424 @@
   },
   "companies": [
     {
-      "name": "Southern Pacific Railroad",
-      "abbrev": "SP",
+      "name": "Atchison, Topeka & Santa Fe",
+      "abbrev": "SF",
+      "token": {"stripes": "white", "bar": true},
       "tokens": [
         "Free",
-        "New Orleans",
         40,
-        100
-      ],
-      "color": "orange"
-    },
-    {
-      "name": "Missouri Kansas Texas Railroad",
-      "abbrev": "MKT",
-      "tokens": [
-        "Free",
-        "Southwest",
-        40,
-        100
-      ],
-      "color": "green"
-    },
-    {
-      "name": "Fort Worth & Denver City Railway",
-      "abbrev": "FW",
-      "tokens": [
-        "Free",
-        "Denver",
-        40
-      ],
-      "color": "brightGreen"
-    },
-    {
-      "name": "Missouri Pacific Railroad",
-      "abbrev": "MP",
-      "tokens": [
-        "Free",
-        "Dallas",
-        40,
-        100
-      ],
-      "color": "brown"
-    },
-    {
-      "name": "Gulf, Mobile & Ohio Railroad",
-      "abbrev": "GMO",
-      "tokens": [
-        "Free",
-        "St. Louis",
-        40
-      ],
-      "color": "pink"
-    },
-    {
-      "name": "Texas & Pacific Railway",
-      "abbrev": "TP",
-      "tokens": [
-        "Free",
-        "New Orleans",
-        40
-      ],
-      "color": "black"
-    },
-    {
-      "name": "St. Louis Southwestern Railway",
-      "abbrev": "SSW",
-      "tokens": [
-        "Free",
-        "Fort Worth",
-        40
+        100,
+        100,
+        "Santa Fe, NM"
       ],
       "color": "blue"
     },
     {
-      "name": "Illinois Central Railroad",
-      "abbrev": "IC",
+      "name": "Atlantic Coast Line",
+      "abbrev": "ACL",
+      "token": {"stripes": "white", "bar": true},
       "tokens": [
         "Free",
-        "Chicago",
-        40
+        40,
+        100,
+        "Birmingham, AL"
+      ],
+      "color": "brown"
+    },
+    {
+      "name": "Baltimore & Ohio",
+      "abbrev": "B&O",
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "Cincinnati, OH"
+      ],
+      "color": "blue"
+    },
+    {
+      "name": "Boston & Maine",
+      "abbrev": "B&M",
+      "tokens": [
+        "Free",
+        40,
+        100,
+        "Buffalo, NY"
+      ],
+      "color": "gold"
+    },
+    {
+      "name": "Canadian Pacific",
+      "abbrev": "CP",
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "Vancouver/Alaska"
+      ],
+      "color": "red"
+    },
+    {
+      "name": "Chesapeake & Ohio",
+      "abbrev": "C&O",
+      "token": {"bar": true},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "Richmond, VA"
+      ],
+      "color": "blue"
+    },
+    {
+      "name": "Chicago & NorthWestern",
+      "abbrev": "C&N",
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "Salt Lake City, UT"
+      ],
+      "color": "brown"
+    },
+    {
+      "name": "Chicago, Burlington & Quincy",
+      "abbrev": "CBQ",
+      "token": {"bar": true},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        "Denver, CO"
+      ],
+      "color": "gold"
+    },
+    {
+      "name": "Chicago, Rock Island & Pacific",
+      "abbrev": "CRP",
+      "token": {"stripes": "white", "bar": true},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "Pueblo, CO"
+      ],
+      "color": "green"
+    },
+    {
+      "name": "Chicago, Milwaukee, St. Paul & Pacific",
+      "abbrev": "CMP",
+      "token": {"bar": true},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "Seattle, WA"
+      ],
+      "color": "purple"
+    },
+    {
+      "name": "Denver & Rio Grand Western",
+      "abbrev": "DRW",
+      "token": {"stripes": "white", "bar": true},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        "Seattle, WA"
+      ],
+      "color": "red"
+    },
+    {
+      "name": "Erie",
+      "abbrev": "E",
+      "token": {"bar": true},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "Duluth, MN"
       ],
       "color": "yellow"
     },
     {
-      "name": "Atchison, Topeka & Santa Fe",
-      "abbrev": "ATSF",
+      "name": "Great Northern",
+      "abbrev": "GN",
+      "token": {"stripes": "white", "bar": true},
       "tokens": [
         "Free",
-        "Southwest",
         40,
-        100
+        100,
+        100,
+        "Milwaukee, WI"
       ],
-      "color": "brightBlue"
+      "color": "purple"
     },
     {
-      "name": "St. Louis-San Francisco Railway",
+      "name": "Illinois Central",
+      "abbrev": "IC",
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "Chicago, IL"
+      ],
+      "color": "yellow"
+    },
+    {
+      "name": "Louisville & Nashville",
+      "abbrev": "L&N",
+      "token": {"square": "white"},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "New Orleans, LA"
+      ],
+      "color": "blue"
+    },
+    {
+      "name": "Missouri Pacific",
+      "abbrev": "MP",
+      "token": {"bar": true},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "Dallas, TX"
+      ],
+      "color": "brown"
+    },
+    {
+      "name": "Missouri-Kansas-Texas",
+      "abbrev": "MKT",
+      "token": {"square": "white"},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "El Paso, TX"
+      ],
+      "color": "green"
+    },
+    {
+      "name": "New York Central",
+      "abbrev": "NYC",
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "Chicago, IL"
+      ],
+      "color": "black"
+    },
+    {
+      "name": "New York, New Haven, & Hartford",
+      "abbrev": "NYNH",
+      "tokens": [
+        "Free",
+        40,
+        100,
+        "Maritime Provinces"
+      ],
+      "color": "orange"
+    },
+    {
+      "name": "Norfolk & Western",
+      "abbrev": "N&W",
+      "token": {"stripes": "white", "bar": true},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "New Orleans, LA"
+      ],
+      "color": "red"
+    },
+    {
+      "name": "Northern Pacific",
+      "abbrev": "NP",
+      "token": {"square": "white"},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "Chicago, IL"
+      ],
+      "color": "red"
+    },
+    {
+      "name": "Pennsylvania",
+      "abbrev": "P",
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "St. Louis, MO"
+      ],
+      "color": "green"
+    },
+    {
+      "name": "Seaboard Air Line",
+      "abbrev": "SAL",
+      "token": {"bar": true},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        "Richmond, VA"
+      ],
+      "color": "orange"
+    },
+    {
+      "name": "Southern",
+      "abbrev": "S",
+      "token": {"bar": true},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "Baltimore, MD"
+      ],
+      "color": "green"
+    },
+    {
+      "name": "Southern Pacific",
+      "abbrev": "SP",
+      "token": {"stripes": "white", "bar": true},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "New Orleans, LA"
+      ],
+      "color": "orange"
+    },
+    {
+      "name": "St. Louis - San Francisco",
       "abbrev": "SLSF",
       "tokens": [
         "Free",
-        "Southeast",
         40,
+        100,
+        100,
+        "San Francisco, CA"
+      ],
+      "color": "pink"
+    },
+    {
+      "name": "St. Louis Southwestern",
+      "abbrev": "SLS",
+      "token": {"target": "white", "bar": true},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "Mexico City"
+      ],
+      "color": "blue"
+    },
+    {
+      "name": "Texas & Pacific",
+      "abbrev": "T&P",
+      "token": {"bar": true},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "San Diego, CA"
+      ],
+      "color": "black"
+    },
+    {
+      "name": "Union Pacific",
+      "abbrev": "UP",
+      "token": {"stripe": "white", "bar": true},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "Portland, OR"
+      ],
+      "color": "blue"
+    },
+    {
+      "name": "Wabash",
+      "abbrev": "W",
+      "tokens": [
+        "Free",
+        40,
+        100,
+        100,
+        "Philadelphia, PA"
+      ],
+      "color": "gray"
+    },
+    {
+      "name": "Western Pacific",
+      "abbrev": "WP",
+      "token": {"bar": true},
+      "tokens": [
+        "Free",
+        40,
+        100,
+        "Denver, CO"
+      ],
+      "color": "gray"
+    },
+    {
+      "name": "Amtrack",
+      "abbrev": "A",
+      "shares": "national",
+      "token": {"bar": true, "quarters": ["blue", "red", "blue", "red"]},
+      "tokens": [
+        100,
+        100,
+        100,
+        100,
         100
       ],
-      "color": "red"
+      "color": "blue"
+    },
+    {
+      "name": "Conrail",
+      "abbrev": "C",
+      "shares": "national",
+      "token": {"bar": true, "quarters": ["blue", "white", "blue", "white"]},
+      "tokens": [
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "color": "blue"
     }
   ],
   "trains": [
     {
       "name": "2",
-      "quantity": 7,
+      "quantity": 21,
       "price": 80,
       "color": "yellow",
       "info": [
@@ -187,7 +547,7 @@
     },
     {
       "name": "3",
-      "quantity": 6,
+      "quantity": 18,
       "price": 180,
       "color": "green",
       "info": [
@@ -199,7 +559,7 @@
     },
     {
       "name": "4",
-      "quantity": 5,
+      "quantity": 15,
       "price": 300,
       "color": "green",
       "info": [
@@ -211,7 +571,7 @@
     },
     {
       "name": "5",
-      "quantity": 4,
+      "quantity": 12,
       "price": 450,
       "color": "brown",
       "info": [
@@ -223,7 +583,7 @@
     },
     {
       "name": "6",
-      "quantity": 3,
+      "quantity": 9,
       "price": 630,
       "color": "gray",
       "info": [
@@ -235,7 +595,7 @@
     },
     {
       "name": "8",
-      "quantity": 3,
+      "quantity": 39,
       "price": 800,
       "color": "gray",
       "info": [
@@ -247,7 +607,7 @@
     },
     {
       "name": "10",
-      "quantity": 2,
+      "quantity": 6,
       "price": 950,
       "color": "gray",
       "info": [
@@ -259,7 +619,7 @@
     },
     {
       "name": "12",
-      "quantity": 6,
+      "quantity": 18,
       "price": 1100,
       "color": "gray",
       "info": [
@@ -283,34 +643,119 @@
       "price": 40,
       "revenue": 10,
       "icon": "bridge",
-      "description": ""
+      "description": "Can be pruchased by a company with home token adjancent to East/Plains border in Phase Two. Until this corperation is closed/purchased, no track may be laid to cross the Mississippi River. Purchasing company may bridge river once at $40 discount (unless home is adjacent border, than free extra tile lay to bridge river"
     },
     {
       "name": "The Southern Cattle Company",
       "price": 50,
       "revenue": 10,
       "icon": "meat",
-      "description": "This company has a token that may be placed on any city west of the Mississippi River. Cities located in the same hex as any portion of the Mississippi are not eligible for this placement. This increases the value of that city by $10 for that company only. Placing the token does not close the company."
+      "description": "This company has a token that may be placed on any city with a cattle symbol. Increases value of city by $10 for owning corperation."
+    },
+    {
+      "name": "Grace Mountain Lumber Company",
+      "price": 50,
+      "revenue": 10,
+      "icon": "tree",
+      "description": "This company has a token that may be placed on any city with a tree symbol. Increases value of city by $10 for owning corperation."
+    },
+    {
+      "name": "Colorado Engineers",
+      "price": 60,
+      "revenue": 10,
+      "icon": "mountain",
+      "description": "Recieves one Engineer marker. Other four can be purchaseed by other corperations for $50. Engineer markers allow for half price mountin builds in Plains or West Zones."
+    },
+    {
+      "name": "Gold Eagle Mining",
+      "price": 80,
+      "revenue": 15,
+      "icon": "token",
+      "description": "$20/$10 marker can be place in any city with a gold symbol. This marker increases the value of that city by $20 for owning corperation and $10 for other corperations. By closing this private, replace the marker with the $20 marker, and only benfits the owning corperation."
+    },
+    {
+      "name": "Central Pacific",
+      "price": 100,
+      "revenue": 15,
+      "icon": "tracks",
+      "description": "Once purchased, the owning company recieves one marker. Others may be purchased from the company for $25. Companies owning a marker gain one extra plains tile laying point."
+    },
+    {
+      "name": "Denver-Grand Junction",
+      "price": 160,
+      "revenue": 25,
+      "company": "DRW",
+      "description": "Comes with a share of the Denver & Rio Grand Western. Blocks tile placement in the D&RGW hex until purchased/closed."
+    },
+    {
+      "name": "The Southern Pacific Railroad",
+      "price": 220,
+      "revenue": 30,
+      "company": "SP",
+      "description": "Comes with director's cert of the Southern Pacific. Purchaser must set par price of SP. Closed when SP buys a train. Blocks tile placement in the SP hex until closed."
+    },
+    {
+      "name": "Schuylkill Valley",
+      "price": 20,
+      "revenue": 5,
+      "hex": "A1",
+      "description": "Blocks tile placement on SV hex until purchased/closed."
+    },
+    {
+      "name": "Keystone Tunnel",
+      "price": 40,
+      "revenue": 10,
+      "icon": "tracks",
+      "description": "May be purchased by a company with home token in East for $0 in Phase Two. Owning corperation may lay one mountain tile in the east zone at a $60 discount which closes the company."
+    },
+    {
+      "name": "Azure Fisheries",
+      "price": 50,
+      "revenue": 10,
+      "icon": "fish",
+      "description": "This company has a token that may be placed on any city with a fish symbol. Increases value of city by $10 for owning corperation."
+    },
+    {
+      "name": "Appalachian Coal Mining",
+      "price": 50,
+      "revenue": 10,
+      "icon": "coal",
+      "description": "This company has a token that may be placed on any city with a coal symbol. Increases value of city by $10 for owning corperation."
     },
     {
       "name": "The Gulf Shipping Company",
       "price": 80,
       "revenue": 15,
-      "icon": "water",
-      "description": ""
+      "icon": "port",
+      "description": "$20/$10 marker can be place in any city with a port symbol. This marker increases the value of that city by $20 for owning corperation and $10 for other corperations. By closing this private, replace the marker with the $20 marker, and only benfits the owning corperation."
     },
     {
-      "name": "St. Louis-San Francisco Railway",
-      "price": 140,
-      "company": "SLSF",
-      "description": "This is the President's certificate of the St.Louis-San Francisco Railway. The purchaser sets the par value of the railway. Unlike other companies, this company may operate with just 20% sold. It may not be purchased by another public company."
-    },
-    {
-      "name": "Missouri-Kansas-Texas Railroad",
-      "price": 160,
+      "name": "Mohawk & Hudson",
+      "price": 110,
       "revenue": 20,
-      "company": "MKT",
-      "description": "Comes with a 10% share of the Missouri-Kansas-Texas Railroad."
+      "company": "NYC",
+      "description": "May be exchanged for a share of the New York Central. If owned by the NYC, may be exchanged for a share of the NYC as a corperation redemption."
+    },
+    {
+      "name": "Camden & Amboy",
+      "price": 160,
+      "revenue": 25,
+      "company": "P",
+      "description": "Comes with a share of the Pennsylvania. Blocks tile placement in the C&A hex until purchased/closed."
+    },
+    {
+      "name": "The Southern Railroad",
+      "price": 160,
+      "revenue": 25,
+      "company": "S",
+      "description": "Comes with a share of the Southern. Blocks tile placement in the Southern (Atlanta) hex until purchased/closed."
+    },
+    {
+      "name": "Baltimore & Ohio",
+      "price": 220,
+      "revenue": 30,
+      "company": "B&O",
+      "description": "Comes with director's cert of the B&O. Purchaser must set par price of B&O. Closed when B&O buys a train. Blocks tile placement in the B&O hex until closed."
     }
   ],
   "phases": [
@@ -434,27 +879,73 @@
     }
   ],
   "stock": {
-    "display": {
-      "roundTracker": {
-        "type": "col-reverse",
-        "x": 15,
-        "y": 6
-      },
-      "par": {
-        "x": 17,
-        "y": 5
-      }
-    },
     "type": "2D",
     "par": {
-      "width": "3in",
       "values": [
-        100,
-        90,
-        82,
-        76,
-        72,
-        68
+        {
+          "label": "250 (325)",
+          "color": "white",
+          "width": "1.5in"
+        },
+        {
+          "label": "220 (300)",
+          "color": "white",
+          "width": "1.5in"
+        },
+        {
+          "label": "200 (275)",
+          "color": "white",
+          "width": "1.5in"
+        },
+        {
+          "label": "180 (250)",
+          "color": "white",
+          "width": "1.5in"
+        },
+        {
+          "label": "160 (225)",
+          "color": "white",
+          "width": "1.5in"
+        },
+        {
+          "label": "140 (180)",
+          "color": "white",
+          "width": "1.5in"
+        },
+        {
+          "label": "120 (160)",
+          "color": "white",
+          "width": "1.5in"
+        },
+        {
+          "label": "110 (140)",
+          "color": "white",
+          "width": "1.5in"
+        },
+        {
+          "label": 100,
+          "width": "1.5in"
+        },
+        {
+          "label": "90 (120)",
+          "width": "1.5in"
+        },
+        {
+          "label": "82 (110)",
+          "width": "1.5in"
+        },
+        {
+          "label": "76 (100)",
+          "width": "1.5in"
+        },
+        {
+          "label": 72,
+          "width": "1.5in"
+        },
+        {
+          "label": 68,
+          "width": "1.5in"
+        }
       ]
     },
     "movement": {
@@ -468,7 +959,7 @@
         "Withheld revenue"
       ],
       "right": [
-        "Paid dividends"
+        "Paid dividends, Transcontinental Run"
       ]
     },
     "ledges": [
@@ -489,7 +980,11 @@
           "13 3",
           "16 3",
           "16 2",
-          "21 2"
+          "21 2",
+          "22 2",
+          "23 2",
+          "24 2",
+          "25 2"
         ]
       }
     ],
@@ -497,7 +992,6 @@
       [
         {
           "value": 64,
-          "legend": 0,
           "arrow": "down"
         },
         68,
@@ -522,7 +1016,11 @@
         325,
         350,
         375,
-        400
+        400,
+        425,
+        450,
+        475,
+        500
       ],
       [
         {
@@ -530,10 +1028,7 @@
           "legend": 0,
           "arrow": "down"
         },
-        {
-          "value": 64,
-          "legend": 0
-        },
+        64,
         68,
         72,
         76,
@@ -555,8 +1050,12 @@
         300,
         325,
         350,
+        375,
+        400,
+        425,
+        450,
         {
-          "value": 375,
+          "value": 475,
           "arrow": "up"
         }
       ],
@@ -570,10 +1069,7 @@
           "value": 60,
           "legend": 0
         },
-        {
-          "value": 64,
-          "legend": 0
-        },
+        64,
         68,
         72,
         76,
@@ -597,15 +1093,19 @@
         275,
         300,
         325,
+        350,
+        375,
+        400,
+        425,
         {
-          "value": 350,
+          "value": 450,
           "arrow": "up"
         }
       ],
       [
         {
           "value": 50,
-          "legend": 1,
+          "legend": 0,
           "arrow": "down"
         },
         {
@@ -616,10 +1116,7 @@
           "value": 60,
           "legend": 0
         },
-        {
-          "value": 64,
-          "legend": 0
-        },
+        64,
         68,
         72,
         {
@@ -642,17 +1139,24 @@
         250,
         275,
         300,
-        325
+        325,
+        350,
+        375,
+        400,
+        {
+          "value": 425,
+          "arrow": "up"
+        }
       ],
       [
         {
           "value": 40,
-          "legend": 2,
+          "legend": 1,
           "arrow": "down"
         },
         {
           "value": 50,
-          "legend": 1
+          "legend": 0
         },
         {
           "value": 55,
@@ -687,16 +1191,16 @@
       [
         {
           "value": 30,
-          "legend": 2,
+          "legend": 1,
           "arrow": "down"
         },
         {
           "value": 40,
-          "legend": 1
+          "legend": 0
         },
         {
           "value": 50,
-          "legend": 1
+          "legend": 0
         },
         {
           "value": 55,
@@ -727,20 +1231,20 @@
       [
         {
           "value": 20,
-          "legend": 2,
+          "legend": 1,
           "arrow": "down"
         },
         {
           "value": 30,
-          "legend": 2
+          "legend": 1
         },
         {
           "value": 40,
-          "legend": 1
+          "legend": 0
         },
         {
           "value": 50,
-          "legend": 1
+          "legend": 0
         },
         {
           "value": 55,
@@ -765,20 +1269,20 @@
       [
         {
           "value": 10,
-          "legend": 2,
+          "legend": 1,
           "arrow": "down"
         },
         {
           "value": 20,
-          "legend": 2
+          "legend": 1
         },
         {
           "value": 30,
-          "legend": 2
+          "legend": 1
         },
         {
           "value": 40,
-          "legend": 1
+          "legend": 0
         },
         {
           "value": 50,
@@ -788,10 +1292,7 @@
           "value": 55,
           "legend": 0
         },
-        {
-          "value": 60,
-          "legend": 0
-        },
+        60,
         {
           "value": 64,
           "arrow": "up"
@@ -808,19 +1309,19 @@
         },
         {
           "value": 10,
-          "legend": 2
+          "legend": 1
         },
         {
           "value": 20,
-          "legend": 2
+          "legend": 1
         },
         {
           "value": 30,
-          "legend": 2
+          "legend": 1
         },
         {
           "value": 40,
-          "legend": 1
+          "legend": 0
         },
         {
           "value": 50,
@@ -828,7 +1329,6 @@
         },
         {
           "value": 55,
-          "legend": 0,
           "arrow": "up"
         },
         60,
@@ -846,23 +1346,22 @@
         },
         {
           "value": 10,
-          "legend": 2
-        },
-        {
-          "value": 20,
-          "legend": 2
-        },
-        {
-          "value": 30,
-          "legend": 2
-        },
-        {
-          "value": 40,
           "legend": 1
         },
         {
+          "value": 20,
+          "legend": 1
+        },
+        {
+          "value": 30,
+          "legend": 1
+        },
+        {
+          "value": 40,
+          "legend": 0
+        },
+        {
           "value": 50,
-          "legend": 0,
           "arrow": "up"
         }
       ],
@@ -879,19 +1378,18 @@
         },
         {
           "value": 10,
-          "legend": 2
+          "legend": 1
         },
         {
           "value": 20,
-          "legend": 2
+          "legend": 1
         },
         {
           "value": 30,
-          "legend": 2
+          "legend": 1
         },
         {
           "value": 40,
-          "legend": 1,
           "arrow": "up"
         }
       ]
@@ -901,11 +1399,6 @@
         "color": "yellow",
         "description": "Shares of this corporation do not count toward the certificate limit",
         "icon": "certificate"
-      },
-      {
-        "color": "orange",
-        "description": "Players may own more than 60% of this corporation",
-        "icon": "percentage"
       },
       {
         "color": "brown",
@@ -968,13 +1461,13 @@
   "map": {
     "print": "landscape",
     "players": {
-      "x": 1035,
-      "y": 2050
+      "x": 1000,
+      "y": 3050
     },
     "roundTracker": {
       "type": "row",
-      "x": 600,
-      "y": 1910
+      "x": 300,
+      "y": 2850
     },
     "hexes": [
       {
