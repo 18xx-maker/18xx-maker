@@ -369,6 +369,7 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
                   r="25"
                 />
               </g>
+              {nameNode}
             </g>
           )}
         </Color>
@@ -379,7 +380,7 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
       return (
         <Color>
           {c => (
-            <circle cx="0" cy="0" r="70.5"
+            <circle cx="0" cy="0" r="61.5"
                     fill={c("border")}
                     stroke="none" />
           )}
@@ -391,7 +392,7 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
         <Color context="companies">
           {c => (
             <g>
-              <circle cx="0" cy="0" r="67.5"
+              <circle cx="0" cy="0" r="58.5"
                       fill={c("city")}
                       stroke={c("track")}
                       strokeWidth="2" />
@@ -480,7 +481,7 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
       return (
         <Color>
           {c => (
-            <circle cx="0" cy="0" r="78"
+            <circle cx="0" cy="0" r="67"
                     fill={c("border")}
                     stroke="none" />
           )}
@@ -492,7 +493,7 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
         <Color context="companies">
           {c => (
             <g>
-              <circle cx="0" cy="0" r="75"
+              <circle cx="0" cy="0" r="64"
                       fill={c("city")}
                       stroke={c("track")}
                       strokeWidth="2" />

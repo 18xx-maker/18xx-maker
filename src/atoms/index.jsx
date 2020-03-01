@@ -142,10 +142,12 @@ const atoms = [{
                         name: {name: "Baltimore"}
                        }]},
              {cities: [{size:3,
+                        name: {name: "New York"},
                         companies: ["NYC"]
                        }]},
              {cities: [{size:4,
                         icons: ["mail", null, null, "boat"],
+                        name: {name: "Boston"},
                         companies: [null,
                                     "B&M",
                                     { abbrev:"PRR", reserved: true }]
