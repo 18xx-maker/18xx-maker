@@ -4,11 +4,12 @@
     "subtitle": "China",
     "designer": "Helmut Ohley & Leonhard Orgler",
     "background": "gray",
-    "titleX": 1375,
-    "titleY": -150,
-    "titleRotate": 90,
-    "currency": "¥#",
-    "extraTotalWidth": 250
+    "titleX": 100,
+    "titleY": 2035,
+    "titleSize": 108,
+    "subTitleSize": 20,
+    "designerSize": 14,
+    "currency": "¥#"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/421/1830-railways-robber-barons",
@@ -176,44 +177,58 @@
     },
     {
       "name": "Russian Investors",
-      "color": "white",
+      "color": "black",
       "abbrev": "1",
+      "logo": "countries/ru",
+      "token": { "logoColor": "black" },
       "minor": true
     },
     {
       "name": "Japanese Investors",
-      "color": "white",
+      "color": "black",
       "abbrev": "2",
+      "logo": "countries/jp",
+      "token": { "logoColor": "black" },
       "minor": true
     },
     {
       "name": "Belgian Investors",
-      "color": "white",
+      "color": "black",
       "abbrev": "3",
+      "logo": "countries/be",
+      "token": { "logoColor": "white" },
       "minor": true
     },
     {
       "name": "German Investors",
-      "color": "white",
+      "color": "black",
       "abbrev": "4",
+      "logo": "countries/de",
+      "token": { "logoColor": "white" },
       "minor": true
     },
     {
       "name": "British Investors",
-      "color": "white",
+      "color": "black",
       "abbrev": "5",
+      "logo": "countries/gb",
+      "token": { "logoColor": "black" },
       "minor": true
     },
     {
       "name": "Portuguese Investors",
-      "color": "white",
+      "color": "black",
       "abbrev": "6",
+      "logo": "countries/pt",
+      "token": { "logoColor": "black" },
       "minor": true
     },
     {
       "name": "French Investors",
-      "color": "white",
+      "color": "black",
       "abbrev": "7",
+      "logo": "countries/fr",
+      "token": { "logoColor": "black" },
       "minor": true
     }
   ],
@@ -874,15 +889,6 @@
     "8888": 1
   },
   "map": {
-    "players": {
-      "x": 60,
-      "y": 2135
-    },
-    "roundTracker": {
-      "type": "col",
-      "x": 1215,
-      "y": 0
-    },
     "hexes": [
       {
         "color": "offboard",
@@ -1023,12 +1029,14 @@
       {
         "color": "water",
         "track": [{"gauge": "dashed", "type": "gentle", "side": 1}],
+        "values": [{"value": -10, "outerBorderColor": "red", "angle": 330, "percent": 0.2}],
         "removeBorders": [4],
         "hexes": ["F12"]
       },
       {
         "color": "water",
         "track": [{"gauge": "dashed", "type": "gentle", "side": 6}],
+        "values": [{"value": -10, "outerBorderColor": "red", "angle": 270, "percent": 0.2}],
         "removeBorders": [1],
         "hexes": ["F14"]
       },
@@ -1041,6 +1049,7 @@
       {
         "color": "water",
         "track": [{"gauge": "dashed", "type": "gentle", "side": 6}],
+        "values": [{"value": -10, "outerBorderColor": "red", "angle": 270, "percent": 0.2}],
         "removeBorders": [2],
         "hexes": ["J16"]
       },
@@ -1196,6 +1205,13 @@
       },
       {
         "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 50, "angle": 180, "percent": 0.6},
+                    {"type": "river", "angle": 180, "percent": 0.1}],
+        "cities": [{"percent": 0.5, "name": {"name": "Lanzhou"}, "companies": ["LHR"]}],
+        "hexes": ["J2"]
+      },
+      {
+        "color": "plain",
         "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.5}],
         "cities": [{"percent": 0.5, "name": {"name": "Xi'an"}, "companies": ["NXR"]}],
         "hexes": ["J6"]
@@ -1238,7 +1254,7 @@
         "color": "plain",
         "terrain": [{"type": "river", "cost": 20, "percent": 0.7}],
         "cities": [{"name": {"name": "Kaifeng"}, "angle": 110, "percent": 0.5},
-                   {"name": {"name": "Zhengzhou", "reverse": true}, "companies": ["QSR"], "angle": 250, "percent": 0.5}],
+                   {"name": {"name": "Zhengzhou", "reverse": true}, "angle": 250, "percent": 0.5}],
         "hexes": ["I9"]
       },
       {
