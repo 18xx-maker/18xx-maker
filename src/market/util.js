@@ -138,7 +138,7 @@ export const getParData = (stock, config) => {
 
   let values = (stock.par && stock.par.values) || [];
 
-  let width = par * cell.width;
+  let width = (stock.par.width || par) * cell.width;
   let height = cell.height;
   let rows = length(stock.par.values);
   let columns = Math.max(1, getMaxLength(stock.par.values));
