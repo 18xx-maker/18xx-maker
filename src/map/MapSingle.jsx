@@ -55,7 +55,7 @@ const MapSingle = ({ coords, hexWidth }) => {
         <Svg width={data.totalWidth} height={data.totalHeight}>
           <Map name={params.game} game={game} variation={variation} />
         </Svg>
-        <style>{`@media print {@page {size: ${data.printWidth} ${data.printHeight};}}`}</style>
+        <style>{`@media print {@page {size: ${data.printWidth} ${data.printHeight}; margin: 0.25in 0.25in 0.25in 0.25in; }}`}</style>
       </div>
     </HexContext.Provider>
   );
