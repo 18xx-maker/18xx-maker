@@ -887,7 +887,8 @@
         "offBoardRevenue": {
           "name": {"name": "Russia"},
           "angle": 180,
-          "percent": 0.6,
+          "percent": 0.8,
+          "reverse": true,
           "revenues": [
             {"color": "yellow", "value": 20},
             {"color": "green", "value": 30},
@@ -916,6 +917,73 @@
         "track": [{"type": "offboard", "side": 1},
                   {"type": "offboard", "side": 6}],
         "hexes": ["A15"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {"name": "Urümqi"},
+          "x": -15,
+          "revenues": [
+            {"color": "yellow", "value": 10},
+            {"color": "green", "value": 20},
+            {"color": "brown", "value": 30},
+            {"color": "gray", "value": 40}
+          ]
+        },
+        "track": [{"type": "offboard", "side": 3},
+                  {"type": "offboard", "side": 4},
+                  {"type": "offboard", "side": 5}],
+        "hexes": ["I1"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {"name": "Lhasa"},
+          "x": -15,
+          "revenues": [
+            {"color": "yellow", "value": 0},
+            {"color": "green", "value": 0},
+            {"color": "brown", "value": 0},
+            {"color": "gray", "value": 80}
+          ]
+        },
+        "track": [{"type": "offboard", "side": 3},
+                  {"type": "offboard", "side": 4},
+                  {"type": "offboard", "side": 5}],
+        "hexes": ["K1"]
+      },
+      {
+        "color": "offboard",
+        "cities": [{"companies": ["7"]}],
+        "offBoardRevenue": {
+          "name": {"name": "French Indochina"},
+          "percent": 0.8,
+          "revenues": [
+            {"color": "yellow", "value": 30},
+            {"color": "green", "value": 40},
+            {"color": "brown", "value": 50},
+            {"color": "gray", "value": 60}
+          ]
+        },
+        "track": [{"type": "offboard", "side": 2},
+                  {"type": "offboard", "side": 3}],
+        "hexes": ["Q7"]
+      },
+      {
+        "color": "offboard",
+        "cities": [{"companies": ["5"]}],
+        "offBoardRevenue": {
+          "name": {"name": "Hong Kong"},
+          "percent": 0.8,
+          "revenues": [
+            {"color": "yellow", "value": 20},
+            {"color": "green", "value": 30},
+            {"color": "brown", "value": 10},
+            {"color": "gray", "value": 70}
+          ]
+        },
+        "track": [{"type": "offboard", "side": 2}],
+        "hexes": ["Q15"]
       },
       {
         "color": "water",
