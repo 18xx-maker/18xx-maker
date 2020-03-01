@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 720 360">
+    <path fill="#da121a" d="M0 0h720v360H0z"/>
+    <path fill="#fcdd09" d="M0 0h720v240H0z"/>
+    <path fill="#078930" d="M0 0h720v120H0z"/>
+    <g transform="translate(360 180)">
+        <circle fill="#0f47af" r="120"/>
+        <g id="t">
+            <path fill="#fcdd09" d="M0-96l-4.205849 12.944272 17.347494 53.390097H-9.987258l-2.599358 8h74.162668l11.011056-8H21.553343z"/>
+            <path stroke="#fcdd09" stroke-width="4" d="M25.862551-35.596748L56.427384-77.66563"/>
+        </g>
+        <use transform="rotate(72)" xlink:href="#t"/>
+        <use transform="rotate(144)" xlink:href="#t"/>
+        <use transform="rotate(216)" xlink:href="#t"/>
+        <use transform="rotate(288)" xlink:href="#t"/>
+    </g>
+</svg>
