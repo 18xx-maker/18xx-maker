@@ -4,8 +4,11 @@
     "subtitle": "China",
     "designer": "Helmut Ohley & Leonhard Orgler",
     "background": "gray",
-    "titleX": 50,
-    "currency": "¥#"
+    "titleX": 1375,
+    "titleY": -150,
+    "titleRotate": 90,
+    "currency": "¥#",
+    "extraTotalWidth": 250
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/421/1830-railways-robber-barons",
@@ -872,13 +875,13 @@
   },
   "map": {
     "players": {
-      "x": 1230,
-      "y": 1270
+      "x": 60,
+      "y": 2135
     },
     "roundTracker": {
       "type": "col",
-      "x": 40,
-      "y": 250
+      "x": 1215,
+      "y": 0
     },
     "hexes": [
       {
