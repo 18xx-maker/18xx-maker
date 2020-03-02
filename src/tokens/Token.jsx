@@ -97,11 +97,20 @@ const Token = ({
           let start = -1 * width;
           let size = 2 * width;
           let Component = svg.Component;
-          shapes.push(
-            <Component className={`color-main-${color} color-reserved`}
-                       x={start} y={start}
-                       height={size} width={size}/>
-          );
+          if (logo.includes("countries")) {
+            shapes.push(
+              <Component key="logo" className={`color-main-${color} color-reserved`}
+                         x={start} y={start}
+                         preserveAspectRatio="xMidYMid slice"
+                         height={size} width={size}/>
+            );
+          } else {
+            shapes.push(
+              <Component className={`color-main-${color} color-reserved`}
+                         x={start} y={start}
+                         height={size} width={size}/>
+            );
+          }
           tokenFill = c("white");
           textStroke = "none";
           textFill = "none";
