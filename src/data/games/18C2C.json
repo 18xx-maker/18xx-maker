@@ -2740,6 +2740,50 @@
         "color": "green",
         "dashed": "true",
         "coords": ["B45p5", "B45p6", "C46p5", "C46p6", "D47p5", "D47p6", "D47p1", "E46p6", "F47p5", "F47p6", "G48p4", "G48p5", "G50p4", "G50p5", "G50p6", "H51p5", "H51p6", "I52p5", "I52p6", "J51p5", "J51p6", "K52p5", "K52p6", "K52p1", "L51p6", "M52p5", "M52p6", "N53p5", "N53p6", "O54p5", "O54p6", "O54p1", "P53p6", "P53p1", "Q52p6", "Q52p1", "R51p6", "R51p1", "S50p6", "T51p5", "T51p6", "T51p1", "U50p6", "U50p1", "V49p6", "W50p5", "W52p4", "W52p5", "W52p6"]
+      },
+      {
+        "color": "red",
+        "coords": ["C50p1", "C50p6"]
+      },
+      {
+        "color": "red",
+        "coords": ["C62p2", "C62p1"]
+      },
+      {
+        "color": "red",
+        "coords": ["F21p1", "F21p6", "F21p5"]
+      },
+      {
+        "color": "red",
+        "coords": ["F21p6", "F23p1"]
+      },
+      {
+        "color": "red",
+        "coords": ["G70p1", "G70p6", "G72p1", "G72p6", "G74p1", "G74p6", "G74p5", "F75p6"]
+      },
+      {
+        "color": "red",
+        "coords": ["G84p2", "G84p1"]
+      },
+      {
+        "color": "red",
+        "coords": ["I66p1", "I66p6", "I68p1", "I68p6", "I68p5"]
+      },
+      {
+        "color": "red",
+        "coords": ["J19p2", "J19p1", "J19p6"]
+      },
+      {
+        "color": "red",
+        "coords": ["O20p1", "O20p6", "O20p5"]
+      },
+      {
+        "color": "red",
+        "coords": ["P17p2", "P17p1", "P17p6"]
+      },
+      {
+        "color": "red",
+        "coords": ["Q74p2", "Q74p1"]
       }
     ]
   }
