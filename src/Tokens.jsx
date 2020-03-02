@@ -101,7 +101,10 @@ export const getTokenData = (game, tokens, paper) => {
 
 const TokenLayout = ({ companies, data, game }) => {
   let companyTokens = chain(company => {
-    let numberMarketTokens = company.marketTokens || data.marketTokens;
+    let numberMarketTokens = data.marketTokens;
+    if (is(Number, company.marketTokens)) {
+      numberMarketTokens = company.marketTokens;
+    }
 
     // Market tokens
     let marketTokens = Array(numberMarketTokens).fill(

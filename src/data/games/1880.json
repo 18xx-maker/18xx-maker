@@ -181,6 +181,7 @@
       "abbrev": "1",
       "logo": "countries/ru",
       "token": { "logoColor": "black" },
+      "marketTokens": 0,
       "minor": true
     },
     {
@@ -189,6 +190,7 @@
       "abbrev": "2",
       "logo": "countries/jp",
       "token": { "logoColor": "black" },
+      "marketTokens": 0,
       "minor": true
     },
     {
@@ -197,6 +199,7 @@
       "abbrev": "3",
       "logo": "countries/be",
       "token": { "logoColor": "white" },
+      "marketTokens": 0,
       "minor": true
     },
     {
@@ -205,6 +208,7 @@
       "abbrev": "4",
       "logo": "countries/de",
       "token": { "logoColor": "white" },
+      "marketTokens": 0,
       "minor": true
     },
     {
@@ -213,6 +217,7 @@
       "abbrev": "5",
       "logo": "countries/gb",
       "token": { "logoColor": "black" },
+      "marketTokens": 0,
       "minor": true
     },
     {
@@ -221,6 +226,7 @@
       "abbrev": "6",
       "logo": "countries/pt",
       "token": { "logoColor": "black" },
+      "marketTokens": 0,
       "minor": true
     },
     {
@@ -229,6 +235,7 @@
       "abbrev": "7",
       "logo": "countries/fr",
       "token": { "logoColor": "black" },
+      "marketTokens": 0,
       "minor": true
     }
   ],
