@@ -2693,6 +2693,451 @@
           }
         ],
         "hexes": ["Y42"]
+      },
+      {
+        "color": "yellow",
+        "icons": [
+          {
+            "type": "tree",
+            "angle": 180,
+            "percent": 0.75
+          },
+          {
+            "type": "fish",
+            "angle": 240,
+            "percent": 0.75
+          }
+        ],
+        "water": [
+          {
+            "cost": "$80",
+            "percent": 0.75
+          }
+        ],
+        "labels": [
+          {
+            "label": "B",
+            "angle": -75,
+            "percent": 0.75
+          }
+        ],
+        "values": [
+          {
+            "value": "30",
+            "angle": 45,
+            "percent": 0.75
+          }
+        ],
+        "track": [
+          {
+            "side": 3
+          },
+          {
+            "side": 5
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Seattle",
+              "rotation": -90
+            },
+            "companies": [
+              "GN"
+            ]
+          }
+        ],
+        "tokens": [
+          {
+            "company": "CMP",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.75 
+          },
+          {
+            "company": "DRW",
+            "destination": true,
+            "angle": 135,
+            "percent": 0.75 
+          }
+        ],
+        "hexes": ["C4"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "tree",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Duluth"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "company": "E",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.7 
+          }
+        ],
+        "hexes": ["D49"]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "K",
+            "angle": -45,
+            "percent": 0.75
+          }
+        ],
+        "values": [
+          {
+            "value": "20",
+            "angle": 45,
+            "percent": 0.75
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 4
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Sault Ste. Marie"
+            }
+          }
+        ],
+        "hexes": ["D63"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "tree",
+            "angle": 210,
+            "percent": 0.75
+          },
+          {
+            "type": "token",
+            "angle": 160,
+            "percent": 0.75
+          }
+        ],
+        "mountains": [
+          {
+            "cost": "$60",
+            "percent": 0.75
+          }
+        ],
+        "labels": [
+          {
+            "label": "P",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Portland"
+            },
+            "companies": [
+              "NP"
+            ]
+          }
+        ],
+        "tokens": [
+          {
+            "company": "UP",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.75 
+          }
+        ],
+        "hexes": ["E4"]
+      },
+      {
+        "color": "plain",
+        "water": [
+          {
+            "cost": "$40",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Saint Paul"
+            },
+            "companies": [
+              "CMP"
+            ]
+          }
+        ],
+        "hexes": ["F49"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "L",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Milwaukee"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "company": "GN",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.75 
+          }
+        ],
+        "hexes": ["H55"]
+      },
+      {
+        "color": "plain",
+        "companies": [
+          {
+            "label": "M&H"
+          }
+        ],
+        "hexes": ["H77"]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "B",
+            "angle": -45,
+            "percent": 0.75
+          }
+        ],
+        "water": [
+          {
+            "cost": "$80",
+            "percent": 0.75
+          }
+        ],
+        "values": [
+          {
+            "value": "30",
+            "angle": 90,
+            "percent": 0.75
+          }
+        ],
+        "track": [
+          {
+            "side": 4
+          },
+          {
+            "side": 6
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Detroit/Windsor"
+            }
+          }
+        ],
+        "hexes": ["I64"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "P",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Buffalo"
+            },
+            "companies": [
+              "E"
+            ]
+          }
+        ],
+        "tokens": [
+          {
+            "company": "B&M",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.70 
+          }
+        ],
+        "hexes": ["I70"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Albany"
+            },
+            "companies": [
+              "NYC"
+            ]
+          }
+        ],
+        "hexes": ["I78"]
+      },
+      {
+        "color": "yellow",
+        "icons": [
+          {
+            "type": "fish",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "labels": [
+          {
+            "label": "B",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "values": [
+          {
+            "value": "30",
+            "angle": 90,
+            "percent": 0.75
+          }
+        ],
+        "track": [
+          {
+            "side": 3
+          },
+          {
+            "side": 5
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Boston",
+              "rotation": -90
+            }
+          }
+        ],
+        "hexes": ["I82"]
+      },
+      {
+        "color": "plain",
+        "water": [
+          {
+            "cost": "$40",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Des Moines"
+            },
+            "companies": [
+              "CRP"
+            ]
+          }
+        ],
+        "hexes": ["J47"]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "Chi",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "values": [
+          {
+            "value": "40",
+            "angle": 150,
+            "percent": 0.80
+          },
+          {
+            "value": "40",
+            "angle": 210,
+            "percent": 0.80
+          }
+        ],
+        "track": [
+          {
+            "type": "stop",
+            "side": 1
+          },
+          {
+            "type": "stop",
+            "side": 4
+          }
+        ],
+        "cities": [
+          {
+            "angle": 90,
+            "percent": 0.50,
+            "name": {
+              "name": "Chicago"
+            },
+            "companies": [
+              "CNW"
+            ]
+          },
+          {
+            "angle": -90,
+            "percent": 0.50,
+            "name": {
+              "name": "Chicago"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "company": "NYC",
+            "destination": true,
+            "angle": 0,
+            "percent": 0.75 
+          },
+          {
+            "company": "IC",
+            "destination": true,
+            "angle": 40,
+            "percent": 0.75 
+          },
+          {
+            "company": "NP",
+            "destination": true,
+            "angle": -40,
+            "percent": 0.75 
+          }
+        ],
+        "hexes": ["J57"]
       }
     ],
     "borders": [
