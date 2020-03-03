@@ -63,7 +63,7 @@ const MapPaginated = ({ coords, paper, hexWidth }) => {
 const mapStateToProps = (state, {hexWidth}) => ({
   coords: state.config.coords,
   paper: state.config.paper,
-  hexWidth: hexWidth || state.config.tiles.width
+  hexWidth: hexWidth || state.config.tiles.mapWidth
 });
 
 export default connect(mapStateToProps)(MapPaginated);
