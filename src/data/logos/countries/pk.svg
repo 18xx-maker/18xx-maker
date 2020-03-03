@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-75 -40 120 80">
+    <path fill="#fff" d="M-75-40H45v80H-75z"/>
+    <path fill="#01411C" d="M-45-40h90v80h-90z"/>
+    <circle fill="#fff" r="24"/>
+    <circle fill="#01411C" cx="-7" cy="-40" r="22" transform="rotate(-41.634 45 -40)"/>
+    <path fill="#fff" d="M8.751466-17.958847l10.10956 11.373256L3.997189-9.844498l13.940635-6.100234L10.245241-2.81544z"/>
+</svg>

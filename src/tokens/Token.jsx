@@ -97,11 +97,20 @@ const Token = ({
           let start = -1 * width;
           let size = 2 * width;
           let Component = svg.Component;
-          shapes.push(
-            <Component className={`color-main-${color} color-reserved`}
-                       x={start} y={start}
-                       height={size} width={size}/>
-          );
+          if (logo.includes("countries")) {
+            shapes.push(
+              <Component key="logo" className={`color-main-${color} color-reserved`}
+                         x={start} y={start}
+                         preserveAspectRatio="xMidYMid slice"
+                         height={size} width={size}/>
+            );
+          } else {
+            shapes.push(
+              <Component className={`color-main-${color} color-reserved`}
+                         x={start} y={start}
+                         height={size} width={size}/>
+            );
+          }
           tokenFill = c("white");
           textStroke = "none";
           textFill = "none";
@@ -117,11 +126,20 @@ const Token = ({
           let start = -1 * width;
           let size = 2 * width;
           let Component = svg.Component;
-          shapes.push(
-            <Component key="logo" className={`color-main-${color}${reserved ? " color-reserved" : ""}`}
-                       x={start} y={start}
-                       height={size} width={size}/>
-          );
+          if (logo.includes("countries")) {
+            shapes.push(
+              <Component key="logo" className={`color-main-${color}${reserved ? " color-reserved" : ""}`}
+                         x={start} y={start}
+                         preserveAspectRatio="xMidYMid slice"
+                         height={size} width={size}/>
+            );
+          } else {
+            shapes.push(
+              <Component key="logo" className={`color-main-${color}${reserved ? " color-reserved" : ""}`}
+                         x={start} y={start}
+                         height={size} width={size}/>
+            );
+          }
           tokenFill = c("white");
           textStroke = "none";
           textFill = "none";
@@ -368,17 +386,19 @@ const Token = ({
         return (
           <g>
             {clip}
-            <g transform={`rotate(${angle || 0})`}>
-              <circle
-                cx="0"
-                cy="0"
-                r={width + (bleed ? 5 : 0)}
-                fill={tokenFill}
-                stroke="none"
-              />
+            <g clipPath={`url(#${clipId})`}>
+              <g transform={`rotate(${angle || 0})`}>
+                <circle
+                  cx="0"
+                  cy="0"
+                  r={width + (bleed ? 5 : 0)}
+                  fill={tokenFill}
+                  stroke="none"
+                />
+              </g>
+              {shapes}
+              {content}
             </g>
-            {shapes}
-            {content}
             <circle
               cx="0"
               cy="0"

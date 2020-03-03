@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 600">
+    <defs>
+        <clipPath id="c">
+            <path d="M0 0v150h700v150H600zm0 300v100h300V0h300z"/>
+        </clipPath>
+        <path id="star" fill="#ffce00" d="M0-50.0808l29.4368 90.597-77.0665-55.992h95.2594l-77.0665 55.993z"/>
+        <use id="rats" transform="rotate(36)" xlink:href="#star"/>
+    </defs>
+    <path fill="#00247d" d="M0 0h1200v600H0z"/>
+    <path stroke="#fff" stroke-width="60" d="M0 0l600 300M0 300L600 0"/>
+    <path stroke="#cf142b" stroke-width="40" d="M0 0l600 300M0 300L600 0" clip-path="url(#c)"/>
+    <path stroke="#fff" stroke-width="100" d="M300 0v400M0 150h700"/>
+    <path stroke="#cf142b" stroke-width="60" d="M300 0v400M0 150h700"/>
+    <path fill="#5b97b1" d="M0 300h600V0h600v600H0z"/>
+    <use x="645.3396" y="540.9936" xlink:href="#star"/>
+    <use x="788.0256" y="504.516" xlink:href="#rats"/>
+    <use x="788.0256" y="382.5324" xlink:href="#rats"/>
+    <use x="914.0304" y="473.6844" xlink:href="#rats"/>
+    <use x="914.0304" y="208.2708" xlink:href="#rats"/>
+    <use x="996.4416" y="390.0456" xlink:href="#star"/>
+    <use x="1019.928" y="172.0776" xlink:href="#rats"/>
+    <use x="1102.836" y="321.5544" xlink:href="#star"/>
+    <use x="1102.836" y="87.486" xlink:href="#star"/>
+</svg>
