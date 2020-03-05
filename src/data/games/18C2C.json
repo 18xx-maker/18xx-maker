@@ -1506,7 +1506,7 @@
           "I2", "I10", "I12", "I30", "I32", "I34", "I36", "I38", "I44", "I46", "I48", "I50", "I54", "I56", "I60", "I62", "I66", "I68", "I72", "I74",
           "J1", "J11", "J15", "J17", "J29", "J31", "J33", "J35", "J37", "J39", "J41", "J45", "J49", "J51", "J55", "J59", "J61", "J67", "J71", "J73", "J77", "J79",
           "K4", "K10", "K12", "K16", "K18", "K32", "K34", "K36", "K38", "K42", "K46", "K48", "K50", "K54", "K56", "K58", "K60", "K62", "K64", "K66", "K70", "K76",
-          "L1", "L3", "L11", "L13", "L15", "L17", "L19", "L21", "L23", "L31", "L33", "L35", "L37", "L39", "L41", "L43", "L47", "L49", "L55", "L57", "L61", "L63", "L65", "L73", "L77",
+          "L1", "L3", "L11", "L13", "L15", "L17", "L19", "L21", "L23", "L31", "L33", "L35", "L37", "L39", "L41", "L43", "L47", "L49", "L55", "L57", "L61", "L63", "L65", "L73",
           "M2", "M14", "M18", "M22", "M32", "M34", "M36", "M38", "M40", "M42", "M54", "M56", "M58", "M72",
           "N3", "N15", "N17", "N43", "N45", "N47", "N55", "N61", "N63",
           "O6", "O14", "O16", "O18", "O24", "O32", "O34", "O36", "O38", "O40", "O44", "O46", "O58", "O60", "O62", "O70",
@@ -1553,7 +1553,7 @@
           "H7", "H23", "H27", "H81",
           "I4", "I20", "I22", "I76", "I80",
           "J3", "J5", "J7", "J9", "J13", "J23", "J25", "J27",
-          "K2", "K8", "K14", "K24", "K72", "K74",
+          "K2", "K8", "K14", "K24", "K72",
           "L5", "L9", "L71",
           "M10", "M12", "M16", "M20", "M30", "M68",
           "N7", "N11", "N13", "N19", "N21", "N25", "N49", "N51", "N69", "N71",
@@ -1668,7 +1668,6 @@
           "N5", "N23", "N73",
           "O22",
           "Q74",
-          "S16",
           "T15",
           "AA66"
         ]
@@ -2189,6 +2188,46 @@
           }
         ],
         "hexes": ["L53"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "token",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Sacramento"
+            }
+          }
+        ],
+        "hexes": ["M4"]
+      },
+      {
+        "color": "plain",
+        "mountain": {
+          "cost": "$120",
+          "size": "large",
+          "percent": 0.75
+          
+        },
+        "icons": [
+          {
+            "type": "token",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Carson City"
+            }
+          }
+        ],
+        "hexes": ["M8"]
       },
       {
         "color": "plain",
@@ -2836,12 +2875,11 @@
             "percent": 0.75
           }
         ],
-        "mountains": [
-          {
-            "cost": "$60",
-            "percent": 0.75
-          }
-        ],
+        "mountain": {
+          "cost": "$60",
+          "size": "small",
+          "percent": 0.75
+        },
         "labels": [
           {
             "label": "P",
@@ -3049,12 +3087,6 @@
       },
       {
         "color": "plain",
-        "water": [
-          {
-            "cost": "$40",
-            "percent": 0.75
-          }
-        ],
         "cities": [
           {
             "name": {
@@ -3073,7 +3105,7 @@
           {
             "label": "Chi",
             "angle": 180,
-            "percent": 0.75
+            "percent": 0.60
           }
         ],
         "values": [
@@ -3138,6 +3170,1008 @@
           }
         ],
         "hexes": ["J57"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "L",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Salt Lake City"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "company": "C&N",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.75 
+          }
+        ],
+        "hexes": ["K20"]
+      },
+      {
+        "color": "plain",
+        "water": [
+          {
+            "cost": "$40",
+            "percent": 0.75
+          }
+        ],
+        "icons": [
+          {
+            "type": "meat",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Omaha"
+            },
+            "companies": [
+              "UP"
+            ]
+          }
+        ],
+        "hexes": ["K44"]
+      },
+      {
+        "color": "plain",
+        "water": [
+          {
+            "cost": "$40",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Burlington"
+            },
+            "companies": [
+              "CBQ"
+            ]
+          }
+        ],
+        "hexes": ["K52"]
+      },
+      {
+        "color": "plain",
+        "mountain": {
+          "cost": "$60",
+          "size": "small",
+          "percent": 0.75
+        },
+        "companies": [
+          {
+            "label": "SV"
+          }
+        ],
+        "hexes": ["K74"]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "NY",
+            "angle": -75,
+            "percent": 0.6
+          }
+        ],
+        "water": [
+          {
+            "cost": "$80",
+            "angle": -15,
+            "percent": 0.75
+          }
+        ],
+        "values": [
+          {
+            "value": "40",
+            "angle": 105,
+            "percent": 0.80
+          },
+          {
+            "value": "40",
+            "angle": 150,
+            "percent": 0.80
+          }
+        ],
+        "track": [
+          {
+            "type": "stop",
+            "side": 3
+          },
+          {
+            "type": "stop",
+            "side": 6
+          }
+        ],
+        "cities": [
+          {
+            "angle": 45,
+            "percent": 0.50,
+            "name": {
+              "name": "New York City"
+            }
+          },
+          {
+            "angle": -135,
+            "percent": 0.50,
+            "rotation": -90,
+            "name": {
+              "name": "New York City"
+            },
+            "companies": [
+              "NYNH"
+            ]
+          }
+        ],
+        "hexes": ["K78"]
+      },
+      {
+        "color": "plain",
+        "mountain": {
+          "cost": "$120",
+          "size": "large",
+          "percent": 0.75
+        },
+        "companies": [
+          {
+            "label": "D&RW"
+          }
+        ],
+        "hexes": ["L27"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "token",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "mountain": {
+          "cost": "$120",
+          "size": "large",
+          "percent": 0.75
+        },
+        "labels": [
+          {
+            "label": "P",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Denver"
+            },
+            "companies": [
+              "DRW"
+            ]
+          }
+        ],
+        "tokens": [
+          {
+            "company": "CMP",
+            "destination": true,
+            "angle": 115,
+            "percent": 0.75 
+          },
+          {
+            "company": "WP",
+            "destination": true,
+            "angle": 75,
+            "percent": 0.75 
+          }
+        ],
+        "hexes": ["L29"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Indianapolis"
+            },
+            "companies": [
+              "W"
+            ]
+          }
+        ],
+        "hexes": ["L59"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "coal",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Pittsburgh"
+            },
+            "companies": [
+              "P"
+            ]
+          }
+        ],
+        "hexes": ["L69"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Philadelphia"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "company": "W",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.75 
+          }
+        ],
+        "hexes": ["L75"]
+      },
+      {
+        "color": "plain",
+        "companies": [
+          {
+            "label": "C&A"
+          }
+        ],
+        "hexes": ["L77"]
+      },
+      {
+        "color": "plain",
+        "mountain": {
+          "cost": "$60",
+          "size": "small",
+          "percent": 0.75
+        },
+        "companies": [
+          {
+            "label": "CP"
+          }
+        ],
+        "hexes": ["M6"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "meat",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Topeka"
+            },
+            "companies": [
+              "SF"
+            ]
+          }
+        ],
+        "hexes": ["M44"]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "B",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "water": [
+          {
+            "cost": "$40",
+            "percent": 0.75
+          }
+        ],
+        "values": [
+          {
+            "value": "30",
+            "angle": 45,
+            "percent": 0.75
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 5
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Kansas City"
+            },
+            "companies": [
+              "MKT"
+            ]
+          }
+        ],
+        "hexes": ["M46"]
+      },
+      {
+        "color": "plain",
+        "water": [
+          {
+            "cost": "$40",
+            "percent": 0.75
+          }
+        ],
+        "labels": [
+          {
+            "label": "P",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Saint Louis"
+            },
+            "companies": [
+              "MP"
+            ]
+          }
+        ],
+        "tokens": [
+          {
+            "company": "GMO",
+            "destination": true,
+            "angle": 115,
+            "percent": 0.75 
+          },
+          {
+            "company": "P",
+            "destination": true,
+            "angle": 75,
+            "percent": 0.75 
+          }
+        ],
+        "hexes": ["M52"]
+      },
+      {
+        "color": "plain",
+        "water": [
+          {
+            "cost": "$40",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Cincinnati"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "company": "B&O",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.75 
+          }
+        ],
+        "hexes": ["M62"]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "B",
+            "angle": -45,
+            "percent": 0.75
+          }
+        ],
+        "values": [
+          {
+            "value": "30",
+            "angle": 0,
+            "percent": 0.75
+          }
+        ],
+        "track": [
+          {
+            "side": 4
+          },
+          {
+            "side": 6
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Baltimore",
+              "companies": [
+                "B&O"
+              ]
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "company": "S",
+            "destination": true,
+            "angle": 180,
+            "percent": 0.75 
+          }
+        ],
+        "companies": [
+          {
+            "label": "B&O",
+            "angle": 90,
+            "percent": 1
+          }
+        ],
+        "hexes": ["M74"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "token",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "mountain": {
+          "cost": "$120",
+          "size": "large",
+          "percent": 0.75
+        },
+        "cities": [
+          {
+            "name": {
+              "name": "Pueblo"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "company": "CRP",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.75 
+          }
+        ],
+        "hexes": ["N29"]
+      },
+      {
+        "color": "plain",
+        "water": [
+          {
+            "cost": "$40",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Louisville",
+              "companies": [
+                "L&N"
+              ]
+            }
+          }
+        ],
+        "hexes": ["N59"]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "NY",
+            "angle": 60,
+            "percent": 0.6
+          }
+        ],
+        "water": [
+          {
+            "cost": "$80",
+            "angle": 15,
+            "percent": 0.75
+          }
+        ],
+        "values": [
+          {
+            "value": "40",
+            "angle": -105,
+            "percent": 0.80
+          },
+          {
+            "value": "40",
+            "angle": -165,
+            "percent": 0.80
+          }
+        ],
+        "track": [
+          {
+            "type": "stop",
+            "side": 2
+          },
+          {
+            "type": "stop",
+            "side": 5
+          }
+        ],
+        "cities": [
+          {
+            "angle": 135,
+            "percent": 0.50,
+            "rotation": 75,
+            "name": {
+              "name": "San Francisco"
+            },
+            "companies": [
+              "WP"
+            ]
+          },
+          {
+            "angle": -45,
+            "percent": 0.50,
+            "name": {
+              "name": "San Francisco"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "company": "SLSF",
+            "destination": true,
+            "angle": -135,
+            "percent": 0.75 
+          }
+        ],
+        "hexes": ["O4"]
+      },
+      {
+        "color": "plain",
+        "mountain": {
+          "cost": "$60",
+          "size": "small",
+          "percent": 0.75
+        },
+        "cities": [
+          {
+            "name": {
+              "name": "Springfield"
+            },
+            "companies": [
+              "SLSF"
+            ]
+          }
+        ],
+        "hexes": ["O48"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "L",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Richmond"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "company": "C&O",
+            "destination": true,
+            "angle": 120,
+            "percent": 0.75 
+          },
+          {
+            "company": "SAL",
+            "destination": true,
+            "angle": 60,
+            "percent": 0.75 
+          }
+        ],
+        "hexes": ["O72"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "K",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Norfolk"
+            },
+            "companies": [
+              "N&W"
+            ]
+          }
+        ],
+        "hexes": ["P73"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "token",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "mountain": {
+          "cost": "$120",
+          "size": "large",
+          "percent": 0.75
+        },
+        "cities": [
+          {
+            "name": {
+              "name": "Santa Fe"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "company": "SF",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.75 
+          }
+        ],
+        "hexes": ["Q28"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "port",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "water": [
+          {
+            "cost": "$60",
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Memphis"
+            },
+            "companies": [
+              "SLS"
+            ]
+          }
+        ],
+        "hexes": ["Q54"]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "B",
+            "angle": -45,
+            "percent": 0.75
+          }
+        ],
+        "values": [
+          {
+            "value": "30",
+            "angle": 90,
+            "percent": 0.75
+          }
+        ],
+        "track": [
+          {
+            "side": 4
+          },
+          {
+            "side": 6
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Raleigh/Durham"
+            }
+          }
+        ],
+        "hexes": ["Q70"]
+      },
+      {
+        "color": "plain",
+        "mountain": {
+          "cost": "$60",
+          "size": "small",
+          "percent": 0.75
+        },
+        "labels": [
+          {
+            "label": "L",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Los Angeles"
+            },
+            "companies": [
+              "SP"
+            ]
+          }
+        ],
+        "hexes": ["R9"]
+      },
+      {
+        "color": "plain",
+        "water": [
+          {
+            "cost": "$40"
+          }
+        ],
+        "companies": [
+          {
+            "label": "SP",
+            "angle": 30,
+            "percent": 1
+          }
+        ],
+        "hexes": ["S16"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "coal",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Birmingham"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "company": "ACL",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.7 
+          }
+        ],
+        "hexes": ["S58"]
+      },
+      {
+        "color": "yellow",
+        "icons": [
+          {
+            "type": "coal",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "labels": [
+          {
+            "label": "B",
+            "angle": 90,
+            "percent": 0.75
+          }
+        ],
+        "values": [
+          {
+            "value": "30",
+            "angle": -120,
+            "percent": 0.75
+          }
+        ],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 4
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Atlanta",
+              "reverse": true,
+              "companies": [
+                "S"
+              ]
+            }
+          }
+        ],
+        "companies": [
+          {
+            "label": "S",
+            "percent": 0.75
+          }
+        ],
+        "hexes": ["S62"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "meat",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "labels": [
+          {
+            "label": "P",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Dallas"
+            },
+            "companies": [
+              "T&P"
+            ]
+          }
+        ],
+        "tokens": [
+          {
+            "company": "MP",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.75 
+          }
+        ],
+        "hexes": ["T43"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Jackson"
+            },
+            "companies": [
+              "IC"
+            ]
+          }
+        ],
+        "hexes": ["T53"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "K",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "water": [
+          {
+            "cost": "$60",
+            "percent": 0.75
+          }
+        ],
+        "icons": [
+          {
+            "type": "meat",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "El Paso"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "company": "MKT",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.75 
+          }
+        ],
+        "hexes": ["U28"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "port",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Mobile"
+            },
+            "companies": [
+              "GMO"
+            ]
+          }
+        ],
+        "hexes": ["V57"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "K",
+            "angle": -90,
+            "percent": 0.75
+          }
+        ],
+        "icons": [
+          {
+            "type": "fish",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Jacksonville"
+            },
+            "companies": [
+              "SAL"
+            ]
+          }
+        ],
+        "hexes": ["W66"]
       }
     ],
     "borders": [
