@@ -4172,6 +4172,927 @@
           }
         ],
         "hexes": ["W66"]
+      },
+      {
+        "color": "offboard",
+        "icons": [
+          {
+            "type": "tree",
+            "percent": -0.75
+          }
+        ],
+        "offBoardTrack": [
+          {
+            "side": 5
+          }
+        ],
+        "tokens": [
+          {
+            "company": "CP",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.70 
+          }
+        ],
+        "removeBorders": [
+          4
+        ],
+        "hexes": [
+          "A4"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardTrack": [
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": 90,
+          "percent": 1.0,
+          "reverse": true,
+          "name": {
+            "name": "Vancouver & Alaska"
+          },
+          "revenues": [
+            {
+              "color": "white",
+              "cost": 20
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 60,
+              "phase": 5
+            },
+            {
+              "color": "white",
+              "cost": 40,
+              "phase": 8
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 60,
+              "phase": 12
+            }
+          ]
+        },
+        "removeBorders": [
+          1
+        ],
+        "hexes": [
+          "A6"
+        ]
+      },
+      {
+        "color": "offboard",
+        "centerTowns": [
+          {
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": 180,
+          "percent": 0.5,
+          "reverse": true,
+          "name": {
+            "name": "Calgary"
+          },
+          "revenues": [
+            {
+              "color": "white",
+              "cost": 20
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 40,
+              "phase": 5
+            },
+            {
+              "color": "white",
+              "cost": 50,
+              "phase": 8
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 60,
+              "phase": 12
+            }
+          ]
+        },
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "A16"
+        ]
+      },
+      {
+        "color": "offboard",
+        "centerTowns": [
+          {
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": 180,
+          "percent": 0.5,
+          "reverse": true,
+          "name": {
+            "name": "Winnipeg"
+          },
+          "revenues": [
+            {
+              "color": "white",
+              "cost": 20
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 30,
+              "phase": 5
+            },
+            {
+              "color": "white",
+              "cost": 40,
+              "phase": 8
+            }
+          ]
+        },
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "A44"
+        ]
+      },
+      {
+        "color": "offboard",
+        "cities": [
+          {
+            "size": 2,
+            "companies": [
+              {},
+              {
+                "label": "5"
+              }
+            ]
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": 180,
+          "percent": 0.75,
+          "reverse": true,
+          "name": {
+            "name": "Thunder Bay"
+          },
+          "revenues": [
+            {
+              "color": "white",
+              "cost": 20
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 30,
+              "phase": 5
+            },
+            {
+              "color": "white",
+              "cost": 40,
+              "phase": 8
+            }
+          ]
+        },
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "A54"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "reverse": true,
+          "name": {
+            "name": "Montreal"
+          },
+          "revenues": [
+            {
+              "color": "white",
+              "cost": 30
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 50,
+              "phase": 5
+            },
+            {
+              "color": "white",
+              "cost": 60,
+              "phase": 8
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 80,
+              "phase": 12
+            }
+          ]
+        },
+        "removeBorders": [
+          5
+        ],
+        "hexes": [
+          "D77"
+        ]
+      },
+      {
+        "color": "offboard",
+        "centerTowns": [
+          {
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": 180,
+          "percent": 0.5,
+          "reverse": true,
+          "name": {
+            "name": "Quebec"
+          },
+          "revenues": [
+            {
+              "color": "white",
+              "cost": 30
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 40,
+              "phase": 5
+            },
+            {
+              "color": "white",
+              "cost": 50,
+              "phase": 8
+            }
+          ]
+        },
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "D81"
+        ]
+      },
+      {
+        "color": "offboard",
+        "icons": [
+          {
+            "type": "tree",
+            "percent": -0.75
+          }
+        ],
+        "cities": [
+          {
+            "size": 2,
+            "companies": [
+              {},
+              {}
+            ]
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": -90,
+          "percent": 1.25,
+          "reverse": true,
+          "name": {
+            "name": "Mackinaw City"
+          },
+          "revenues": [
+            {
+              "color": "white",
+              "cost": 20
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 30,
+              "phase": 5
+            },
+            {
+              "color": "white",
+              "cost": 40,
+              "phase": 8
+            }
+          ]
+        },
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "E62"
+        ]
+      },
+      {
+        "color": "offboard",
+        "cities": [
+          {
+            "size": 2,
+            "companies": [
+              "CP",
+              {
+                "label": "5"
+              }
+            ]
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "removeBorders": [
+          2
+        ],
+        "hexes": [
+          "E78"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "reverse": true,
+          "name": {
+            "name": "Maritime Provinces"
+          },
+          "revenues": [
+            {
+              "color": "white",
+              "cost": 20
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 30,
+              "phase": 5
+            },
+            {
+              "color": "white",
+              "cost": 40,
+              "phase": 8
+            }
+          ]
+        },
+        "icons": [
+          {
+            "type": "fish",
+            "angle": -150,
+            "percent": 0.75
+          }
+        ],
+        "tokens": [
+          {
+            "company": "NYNH",
+            "destination": true,
+            "angle": -30,
+            "percent": 0.70 
+          }
+        ],
+        "offBoardTrack": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "E88"
+        ]
+      },
+      {
+        "color": "offboard",
+        "cities": [
+          {
+            "size": 2,
+            "companies": [
+              "C&O",
+              {
+                "label": "5"
+              }
+            ]
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": 180,
+          "percent": 0.70,
+          "reverse": true,
+          "name": {
+            "name": "Cleveland"
+          },
+          "revenues": [
+            {
+              "color": "white",
+              "cost": 30
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 40,
+              "phase": 5
+            },
+            {
+              "color": "white",
+              "cost": 50,
+              "phase": 8
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 60,
+              "phase": 12
+            }
+          ]
+        },
+        "track": [
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "J65"
+        ]
+      },
+      {
+        "color": "offboard",
+        "cities": [
+          {
+            "size": 2,
+            "companies": [
+              {},
+              {
+                "label": "8"
+              }
+            ]
+          }
+        ],
+        "offBoardRevenue": {
+          "percent": 0.70,
+          "reverse": true,
+          "name": {
+            "name": "San Diego & Baja"
+          },
+          "revenues": [
+            {
+              "color": "white",
+              "cost": 20
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 30,
+              "phase": 5
+            },
+            {
+              "color": "white",
+              "cost": 40,
+              "phase": 8
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 60,
+              "phase": 12
+            }
+          ]
+        },
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          }
+        ],
+        "tokens": [
+          {
+            "company": "T&P",
+            "destination": true,
+            "percent": -0.70 
+          }
+        ],
+        "hexes": [
+          "T13"
+        ]
+      },
+      {
+        "color": "offboard",
+        "icons": [
+          {
+            "type": "fish",
+            "percent": -0.75
+          }
+        ],  
+        "cities": [
+          {
+            "size": 2,
+            "companies": [
+              {},
+              {
+                "label": "5"
+              }
+            ]
+          }
+        ],
+        "offBoardRevenue": {
+          "percent": 0.70,
+          "reverse": true,
+          "name": {
+            "name": "Charleston"
+          },
+          "revenues": [
+            {
+              "color": "white",
+              "cost": 30
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 40,
+              "phase": 5
+            },
+            {
+              "color": "white",
+              "cost": 30,
+              "phase": 10
+            }
+          ]
+        },
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          }
+        ],
+        "hexes": [
+          "T69"
+        ]
+      },
+      {
+        "color": "offboard", 
+        "cities": [
+          {
+            "size": 3,
+            "companies": [
+              {},
+              {
+                "label": "5"
+              },
+              {
+                "label": "8"
+              }
+            ]
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          }
+        ],
+        "removeBorders": [
+          4
+        ],
+        "hexes": [
+          "W54"
+        ]
+      },
+      {
+        "color": "offboard",
+        "icons": [
+          {
+            "type": "port",
+            "percent": -0.75
+          }
+        ],
+        "offBoardRevenue": {
+          "reverse": true,
+          "name": {
+            "name": "New Orleans"
+          },
+          "revenues": [
+            {
+              "color": "white",
+              "cost": 30
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 50,
+              "phase": 5
+            },
+            {
+              "color": "white",
+              "cost": 70,
+              "phase": 8
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 100,
+              "phase": 12
+            }
+          ]
+        },
+        "tokens": [
+          {
+            "company": "L&N",
+            "destination": true,
+            "percent": 0.70 
+          },
+          {
+            "company": "N&W",
+            "destination": true,
+            "angle": 45,
+            "percent": 0.70 
+          },
+          {
+            "company": "SP",
+            "destination": true,
+            "angle": -45,
+            "percent": 0.70 
+          }
+        ],
+        "removeBorders": [
+          1
+        ],
+        "hexes": [
+          "W56"
+        ]
+      },
+      {
+        "color": "offboard",
+        "icons": [
+          {
+            "type": "port",
+            "percent": -0.75
+          }
+        ],  
+        "cities": [
+          {
+            "size": 2,
+            "companies": [
+              "ACL",
+              {}
+            ]
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": 45,
+          "percent": 1.0,
+          "reverse": true,
+          "name": {
+            "name": "Tampa"
+          },
+          "revenues": [
+            {
+              "color": "white",
+              "cost": 20
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 30,
+              "phase": 5
+            },
+            {
+              "color": "white",
+              "cost": 40,
+              "phase": 10
+            }
+          ]
+        },
+        "track": [
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          }
+        ],
+        "hexes": [
+          "Y64"
+        ]
+      },
+      {
+        "color": "offboard",
+        "tokens": [
+          {
+            "company": "SLS",
+            "destination": true,
+            "angle": 90,
+            "percent": 0.70 
+          }
+        ],
+        "offBoardTrack": [
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          }
+        ],
+        "removeBorders": [
+          4
+        ],
+        "hexes": [
+          "Z39"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "angle": 90,
+          "percent": 1.0,
+          "reverse": true,
+          "name": {
+            "name": "Mexico City"
+          },
+          "revenues": [
+            {
+              "color": "white",
+              "cost": 20
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 40,
+              "phase": 5
+            },
+            {
+              "color": "white",
+              "cost": 60,
+              "phase": 8
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 80,
+              "phase": 12
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          }
+        ],
+        "removeBorders": [
+          1
+        ],
+        "hexes": [
+          "Z41"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "reverse": true,
+          "name": {
+            "name": "Miami & Cuba"
+          },
+          "revenues": [
+            {
+              "color": "white",
+              "cost": 20
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 40,
+              "phase": 5
+            },
+            {
+              "color": "white",
+              "cost": 60,
+              "phase": 8
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": 80,
+              "phase": 12
+            }
+          ]
+        },
+        "offBoardTrack": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          }
+        ],
+        "hexes": [
+          "AA68"
+        ]
       }
     ],
     "borders": [
