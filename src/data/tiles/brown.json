@@ -1783,6 +1783,17 @@
       }
     ]
   },
+  "591": {
+    "color": "brown",
+    "values": [{"angle": 145, "percent": 0.95, "value": 80},
+               {"angle": 190, "percent": 0.8, "value": 80}],
+    "labels": [{"label": "Chi", "angle": 165, "percent": 0.5}],
+    "cities": [{"size": 2, "angle": 270, "percent": 0.5, "rotation": 90},
+               {"size": 2, "angle": 60, "percent": 0.5, "rotation": 60}],
+    "track": [{"type": "sharp", "side": 1},
+              {"type": "sharp", "side": 2},
+              {"type": "sharp", "side": 5}]
+  },
   "593": {
     "color": "brown",
     "values": [

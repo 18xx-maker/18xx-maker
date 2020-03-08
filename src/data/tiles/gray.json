@@ -162,6 +162,13 @@
       }
     ]
   },
+  "131": {
+    "color": "gray",
+    "values": [{"value": 100, "angle": 270, "percent": 0.90}],
+    "labels": [{"label": "Chi", "angle": 90, "percent": 0.90}],
+    "cities": [{"size": 4}],
+    "track": [{"side": 1}, {"side": 2}, {"side": 3}, {"side": 4}, {"side": 5}]
+  },
   "166": {
     "color": "brown/gray",
     "group": "individual",
@@ -603,6 +610,47 @@
       {
         "angle": 293,
         "percent": 0.8
+      }
+    ]
+  },
+  "596": {
+    "color": "gray",
+    "rotations": 1,
+    "cities": [
+      {
+        "size": 2
+      }
+    ],
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 60
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ],
+    "labels": [
+      {
+        "size": 24,
+        "angle": 150,
+        "percent": 0.9,
+        "label": "L"
       }
     ]
   },
