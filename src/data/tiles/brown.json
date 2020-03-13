@@ -874,6 +874,21 @@
       }
     ]
   },
+  "169": {
+    "color": "brown",
+    "values": [
+      {
+        "value": 30,
+        "angle": -60,
+        "percent": 0.6
+      }
+    ],
+    "cities": [ {} ],
+    "track": [
+      { "side": 1, "type": "straight" },
+      { "side": 5 }
+    ]
+  },
   "170": {
     "color": "brown",
     "cities": [
