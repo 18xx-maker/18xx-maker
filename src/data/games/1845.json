@@ -31,7 +31,8 @@
     "Scx_teal": "#2aadad",
     "FP_orange": "#c94414",
     "Midi_red": "#d61e00",
-    "market_blue": "#00b3ff"
+    "market_blue": "#00b3ff",
+    "par_value": "#dcebf7"
   },
   "tokens": [
     "Round",
@@ -557,6 +558,37 @@
   ],
   "stock": {
     "type": "2D",
+    "display": {
+      "legend": {
+        "reverse": true,
+        "verticalAlign": "bottom",
+        "x": 10,
+        "y": 23
+      }
+    },
+    "par": {
+      "color": "par_value"
+    },
+    "legend": [
+      {
+        "color": "market_blue",
+        "description": "only 10-share companies may enter"
+      },
+      {
+        "color": "yellow",
+        "icon": "times",
+        "description": "Shares of this corporation do not count toward the certificate limit."
+      },
+      {
+        "color": "red",
+        "icon": "exclamation",
+        "description": "LIQUIDATION"
+      },
+      {
+        "color": "par_value",
+        "description": "par value"
+      }
+    ],
     "movement": {
       "up": [
         "sold out"
@@ -1201,22 +1233,6 @@
         { "value": 200, "par": true },
         225, 250, 275, 300, 375, 400
       ]
-    ],
-    "legend": [
-      {
-        "color": "market_blue",
-        "description": ""
-      },
-      {
-        "color": "yellow",
-        "icon": "times",
-        "description": "Shares of this corporation do not count toward the certificate limit."
-      },
-      {
-        "color": "red",
-        "icon": "exclamation",
-        "description": "LIQUIDATION"
-      }
     ]
   },
   "trains": [
