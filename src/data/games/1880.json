@@ -1,0 +1,1335 @@
+{
+  "info": {
+    "title": "1880",
+    "subtitle": "China",
+    "designer": "Helmut Ohley & Leonhard Orgler",
+    "background": "gray",
+    "titleX": 100,
+    "titleY": 2035,
+    "titleSize": 108,
+    "subTitleSize": 20,
+    "designerSize": 14,
+    "currency": "¥#"
+  },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/421/1830-railways-robber-barons",
+    "rules": "https://boardgamegeek.com/wiki/page/1830_Rules"
+  },
+  "colors": {
+    "plusFive": "#fcea18",
+    "plusTen": "#f3cc10",
+    "plusFifteen": "#e9ae09",
+    "plusTwenty": "#e09001"
+  },
+  "tokens": [
+    "Round"
+  ],
+  "ipo": ["default"],
+  "wip": true,
+  "bank": "∞",
+  "players": [
+    {
+      "number": 3,
+      "certLimit": 20,
+      "capital": 600
+    },
+    {
+      "number": 4,
+      "certLimit": 16,
+      "capital": 480
+    },
+    {
+      "number": 5,
+      "certLimit": 14,
+      "capital": 400
+    },
+    {
+      "number": 6,
+      "certLimit": 12,
+      "capital": 340
+    },
+    {
+      "number": 7,
+      "certLimit": 11,
+      "capital": 300
+    }
+  ],
+  "shareTypes": {
+    "minor": [],
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 30,
+        "shares": 3
+      },
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 40,
+        "shares": 4
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "tokenTypes": {
+    "minor": ["Home"],
+    "default": [
+      "Home",
+      40,
+      100
+    ]
+  },
+  "companies": [
+    {
+      "name": "Jingguang Railway",
+      "abbrev": "JGG",
+      "color": "violet",
+      "token": { "bar": true }
+    },
+    {
+      "name": "Ningxi Railway",
+      "abbrev": "NXR",
+      "color": "pink",
+      "token": { "bar": true }
+    },
+    {
+      "name": "Wunan Railway",
+      "abbrev": "WNR",
+      "color": "yellow",
+      "token": { "bar": true }
+    },
+    {
+      "name": "Baocheng Railway",
+      "abbrev": "BCR",
+      "color": "navy",
+      "token": { "bar": true }
+    },
+    {
+      "name": "Longhai Railway",
+      "abbrev": "LHR",
+      "color": "gray",
+      "token": { "bar": true }
+    },
+    {
+      "name": "Nanjiang Railway",
+      "abbrev": "NJR",
+      "color": "brown",
+      "token": { "bar": true }
+    },
+    {
+      "name": "Shichang Railway",
+      "abbrev": "SCR",
+      "color": "green",
+      "token": { "bar": true }
+    },
+    {
+      "name": "Hukun Railway",
+      "abbrev": "HKR",
+      "color": "brightGreen",
+      "token": { "bar": true }
+    },
+    {
+      "name": "Chengkun Railway",
+      "abbrev": "CKR",
+      "color": "red",
+      "token": { "bar": true }
+    },
+    {
+      "name": "Qinshen Railway",
+      "abbrev": "QSR",
+      "color": "lightBlue",
+      "token": { "bar": true }
+    },
+    {
+      "name": "Jingha Railway",
+      "abbrev": "JHA",
+      "color": "orange",
+      "token": { "bar": true }
+    },
+    {
+      "name": "Jinghu Railway",
+      "abbrev": "JHU",
+      "color": "black",
+      "token": { "bar": true }
+    },
+    {
+      "name": "Jinglan Railway",
+      "abbrev": "JLR",
+      "color": "turquoise",
+      "token": { "bar": true }
+    },
+    {
+      "name": "Binzhou Railway",
+      "abbrev": "BZU",
+      "color": "natural",
+      "token": { "bar": true }
+    },
+    {
+      "name": "Russian Investors",
+      "color": "black",
+      "abbrev": "1",
+      "logo": "countries/ru",
+      "token": { "logoColor": "black" },
+      "marketTokens": 0,
+      "minor": true
+    },
+    {
+      "name": "Japanese Investors",
+      "color": "black",
+      "abbrev": "2",
+      "logo": "countries/jp",
+      "token": { "logoColor": "black" },
+      "marketTokens": 0,
+      "minor": true
+    },
+    {
+      "name": "Belgian Investors",
+      "color": "black",
+      "abbrev": "3",
+      "logo": "countries/be",
+      "token": { "logoColor": "white" },
+      "marketTokens": 0,
+      "minor": true
+    },
+    {
+      "name": "German Investors",
+      "color": "black",
+      "abbrev": "4",
+      "logo": "countries/de",
+      "token": { "logoColor": "white" },
+      "marketTokens": 0,
+      "minor": true
+    },
+    {
+      "name": "British Investors",
+      "color": "black",
+      "abbrev": "5",
+      "logo": "countries/gb",
+      "token": { "logoColor": "black" },
+      "marketTokens": 0,
+      "minor": true
+    },
+    {
+      "name": "Portuguese Investors",
+      "color": "black",
+      "abbrev": "6",
+      "logo": "countries/pt",
+      "token": { "logoColor": "black" },
+      "marketTokens": 0,
+      "minor": true
+    },
+    {
+      "name": "French Investors",
+      "color": "black",
+      "abbrev": "7",
+      "logo": "countries/fr",
+      "token": { "logoColor": "black" },
+      "marketTokens": 0,
+      "minor": true
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 10,
+      "price": 100,
+      "color": "yellow",
+      "image": "2T",
+      "info": [
+        {
+          "color": "green",
+          "note": "Rusted by 4"
+        }
+      ]
+    },
+    {
+      "name": "2+2",
+      "quantity": 5,
+      "price": 180,
+      "color": "yellow",
+      "image": "2T",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Rusted by 4+4"
+        }
+      ]
+    },
+    {
+      "name": "3",
+      "quantity": 5,
+      "price": 180,
+      "color": "green",
+      "image": "3T",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Rusted by 6"
+        }
+      ]
+    },
+    {
+      "name": "3+3",
+      "quantity": 5,
+      "price": 300,
+      "color": "green",
+      "image": "3T",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Rusted by 6"
+        }
+      ]
+    },
+    {
+      "name": "4",
+      "quantity": 5,
+      "price": 300,
+      "color": "green",
+      "image": "4T",
+      "info": [
+        {
+          "color": "gray",
+          "note": "Rusted by 8"
+        }
+      ]
+    },
+    {
+      "name": "4+4",
+      "quantity": 5,
+      "price": 450,
+      "color": "green",
+      "image": "4T",
+      "info": [
+        {
+          "color": "gray",
+          "note": "Rusted by 8E"
+        }
+      ]
+    },
+    {
+      "name": "6",
+      "quantity": 5,
+      "price": 600,
+      "color": "brown",
+      "image": "5T",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "6E",
+      "quantity": 5,
+      "price": 700,
+      "color": "brown",
+      "image": "5T",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "8",
+      "quantity": 2,
+      "price": 800,
+      "color": "gray",
+      "image": "6T",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "8E",
+      "quantity": 2,
+      "price": 900,
+      "color": "gray",
+      "image": "6T",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "10",
+      "quantity": 14,
+      "price": 1000,
+      "color": "gray",
+      "image": "Diesel",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    }
+  ],
+  "privates": [
+    {
+      "id": "P0",
+      "name": "Woosong Railway",
+      "price": 5,
+      "token": { "color": "yellow", "label": "¥" },
+      "description": "One-off payment of either ¥40 when the last 2+2 train is bought, or ¥70 when the last 3 train is bought, or ¥100 when the last 3+3 train is bought."
+    },
+    {
+      "id": "P1",
+      "name": "Kaiping Railway",
+      "price": 10,
+      "revenue": 5
+    },
+    {
+      "id": "P2",
+      "name": "Yanda Ferry Company",
+      "price": 25,
+      "revenue": 10,
+      "icon": "boat",
+      "description": "Owner may use all ferries for free with all of their companies."
+    },
+    {
+      "id": "P3",
+      "name": "Taiwan Western Line",
+      "price": 45,
+      "revenue": 15,
+      "hex": "N16",
+      "description": "Owner receives +20 to Taiwan with all of their companies."
+    },
+    {
+      "id": "P4",
+      "name": "River Ferry",
+      "price": 70,
+      "revenue": 20,
+      "icon": "river",
+      "description": "Minus ¥20 for river hexes for all of their companies."
+    },
+    {
+      "id": "P5",
+      "name": "Jeme Tien Yow Engineer Office",
+      "price": 100,
+      "revenue": 25,
+      "token": { "color": "white", "label": "D" },
+      "description": "Building permit for Phase D for one of their companies."
+    },
+    {
+      "id": "P6",
+      "name": "Imperial Qing Government",
+      "price": 160,
+      "company": "BCR",
+      "description": "+20% Director of BCR which starts at 100. BCR may always lay 2 yellow tiles."
+    },
+    {
+      "id": "P7",
+      "name": "Rocket of China",
+      "price": 50,
+      "icon": "train",
+      "description": "Exchangable for a 2-4 train, Forced exchange into second 4 train."
+    }
+  ],
+  "phases": [
+    {
+      "minor": true,
+      "name": "A1",
+      "train": "2",
+      "limit": "4",
+      "number": "10",
+      "tiles": "yellow",
+      "notes": "Companies float at 20%, 50% capitalisation, 5 shares available"
+    },
+    {
+      "minor": true,
+      "name": "A2",
+      "train": "2+2",
+      "limit": "4",
+      "number": "5",
+      "tiles": "yellow"
+    },
+    {
+      "minor": true,
+      "name": "B1",
+      "train": "3",
+      "limit": "4",
+      "number": "5",
+      "tiles": "green",
+      "notes": "Companies float at 30%, 10 shares available, Full capitalisation once 5 shares are in play"
+    },
+    {
+      "minor": true,
+      "name": "B2",
+      "train": "3+3",
+      "limit": "3",
+      "number": "5",
+      "tiles": "green"
+    },
+    {
+      "name": "A1",
+      "train": "2",
+      "limit": "4",
+      "number": "10",
+      "tiles": "yellow",
+      "notes": "Companies float at 20%, 50% capitalisation, 5 shares available"
+    },
+    {
+      "name": "A2",
+      "train": "2+2",
+      "limit": "4",
+      "number": "5",
+      "tiles": "yellow"
+    },
+    {
+      "name": "B1",
+      "train": "3",
+      "limit": "4",
+      "number": "5",
+      "tiles": "green",
+      "notes": "Companies float at 30%, 10 shares available, Full capitalisation once 5 shares are in play"
+    },
+    {
+      "name": "B2",
+      "train": "3+3",
+      "limit": "3",
+      "number": "5",
+      "tiles": "green"
+    },
+    {
+      "name": "B3",
+      "train": "4",
+      "limit": "3",
+      "number": "5",
+      "rust": "2",
+      "tiles": "green",
+      "notes": "Companies float at 40%, Communist Takeover, Foreign Investors become inactive"
+    },
+    {
+      "name": "C1",
+      "train": "4+4",
+      "limit": "3",
+      "number": "5",
+      "rust": "2+2",
+      "tiles": "brown"
+    },
+    {
+      "name": "C2",
+      "train": "6",
+      "limit": "3",
+      "number": "5",
+      "rust": "3",
+      "tiles": "brown",
+      "notes": "Companies float at 60%, Shanghai Stock Exchange re-opens"
+    },
+    {
+      "name": "C3",
+      "train": "6E",
+      "limit": "2",
+      "number": "5",
+      "rust": "3+3",
+      "tiles": "brown"
+    },
+    {
+      "name": "D1",
+      "train": "8",
+      "limit": "2",
+      "number": "2",
+      "rust": "4",
+      "tiles": "gray",
+      "notes": "Price of station markers doubled"
+    },
+    {
+      "name": "D2",
+      "train": "8E",
+      "limit": "2",
+      "number": "2",
+      "rust": "4+4",
+      "tiles": "gray"
+    },
+    {
+      "name": "D3",
+      "train": "10",
+      "limit": "2",
+      "number": "2",
+      "tiles": "gray"
+    }
+  ],
+  "pools": [
+    {
+      "name": "Market",
+      "notes": [
+        {
+          "color": "orange",
+          "note": "Shares in the market pay dividends to the corporation"
+        },
+        {
+          "color": "brown",
+          "icon": "exclamation",
+          "note": "No more than 50% of a corporation's shares may be in the market at any time"
+        },
+        {
+          "color": "red",
+          "icon": "times",
+          "note": "Shares cannot be sold during the first stock round"
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "P.",
+      "color": "gray"
+    },
+    {
+      "name": "F.I.",
+      "color": "gray"
+    },
+    {
+      "icon": "train",
+      "iconColor": "lavender",
+      "color": "white"
+    },
+    {
+      "name": "100",
+      "color": "white"
+    },
+    {
+      "name": "",
+      "color": "white"
+    },
+    {
+      "name": "",
+      "color": "white"
+    },
+    {
+      "name": "",
+      "color": "white"
+    },
+    {
+      "name": "90",
+      "color": "white"
+    },
+    {
+      "name": "",
+      "color": "white"
+    },
+    {
+      "name": "",
+      "color": "white"
+    },
+    {
+      "name": "",
+      "color": "white"
+    },
+    {
+      "name": "80",
+      "color": "white"
+    },
+    {
+      "name": "",
+      "color": "white"
+    },
+    {
+      "name": "",
+      "color": "white"
+    },
+    {
+      "name": "",
+      "color": "white"
+    },
+    {
+      "name": "70",
+      "color": "white"
+    },
+    {
+      "name": "",
+      "color": "white"
+    },
+    {
+      "name": "",
+      "color": "white"
+    },
+    {
+      "name": "",
+      "color": "white"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": [
+        "Sell any number of shares",
+        "Buy one share",
+        "Sell any number of shares"
+      ],
+      "ordered": true
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Lay or upgrade track",
+        "Purchase a station",
+        "Run trains",
+        "Pay dividends or withhold revenue",
+        "Purchase trains"
+      ],
+      "ordered": true,
+      "optional": [
+        "Purchase private companies"
+      ]
+    }
+  ],
+  "stock": {
+    "type": "2D",
+    "display": {
+      "legend": {
+        "reverse": true,
+        "x": 12,
+        "y": 3
+      }
+    },
+    "movement": {
+      "up": [
+        "Sold out"
+      ],
+      "down": [
+        "Every share sold + ¥5 fee"
+      ],
+      "left": [
+        "Revenue withheld"
+      ],
+      "right": [
+        "Revenue paid out"
+      ]
+    },
+    "market": [
+      [
+        null,
+        null,
+        { "value": 100, "arrow": "down" },
+        105,
+        110,
+        { "value": 115, "legend": 0, "subLabel": "+5" },
+        { "value": 120, "legend": 0, "subLabel": "+5" },
+        { "value": 125, "legend": 0, "subLabel": "+5" },
+        { "value": 130, "legend": 1, "subLabel": "+10" },
+        { "value": 140, "legend": 1, "subLabel": "+10" },
+        { "value": 150, "legend": 2, "subLabel": "+15" },
+        { "value": 160, "legend": 2, "subLabel": "+15" },
+        { "value": 180, "legend": 3, "subLabel": "+20" },
+        { "value": 200, "legend": 3, "subLabel": "+20" }
+      ],
+      [
+        null,
+        { "value": 85, "arrow": "down" },
+        95,
+        { "value": 100, "par": true },
+        105,
+        { "value": 110, "legend": 0, "subLabel": "+5" },
+        { "value": 115, "legend": 0, "subLabel": "+5" },
+        { "value": 120, "legend": 0, "subLabel": "+5" },
+        { "value": 125, "legend": 1, "subLabel": "+10" },
+        { "value": 135, "legend": 1, "subLabel": "+10" },
+        { "value": 145, "legend": 2, "subLabel": "+15" },
+        { "value": 155, "legend": 2, "subLabel": "+15" },
+        { "value": 170, "legend": 3, "subLabel": "+20" },
+        { "value": 190, "legend": 3, "subLabel": "+20", "arrow": "up" }
+      ],
+      [
+        { "value": 70, "arrow": "down" },
+        80,
+        90,
+        95,
+        100,
+        { "value": 105, "legend": 0, "subLabel": "+5" },
+        { "value": 110, "legend": 0, "subLabel": "+5" },
+        { "value": 115, "legend": 0, "subLabel": "+5" },
+        { "value": 120, "legend": 1, "subLabel": "+10" },
+        { "value": 130, "legend": 1, "subLabel": "+10" },
+        { "value": 140, "legend": 2, "subLabel": "+15" },
+        { "value": 150, "legend": 2, "subLabel": "+15" },
+        { "value": 165, "legend": 3, "subLabel": "+20" },
+        { "value": 180, "legend": 3, "subLabel": "+20", "arrow": "up" }
+      ],
+      [
+        { "value": 65, "arrow": "down" },
+        75,
+        85,
+        { "value": 90, "par": true },
+        95,
+        { "value": 100, "legend": 0, "subLabel": "+5" },
+        { "value": 105, "legend": 0, "subLabel": "+5" },
+        { "value": 110, "legend": 0, "subLabel": "+5" },
+        { "value": 115, "legend": 1, "subLabel": "+10" },
+        { "value": 125, "legend": 1, "subLabel": "+10" },
+        { "value": 135, "legend": 2, "subLabel": "+15" },
+        { "value": 145, "legend": 2, "subLabel": "+15", "arrow": "up" }
+      ],
+      [
+        { "value": 60, "arrow": "down" },
+        70,
+        80,
+        85,
+        90,
+        { "value": 95, "legend": 0, "subLabel": "+5" },
+        { "value": 100, "legend": 0, "subLabel": "+5" },
+        { "value": 105, "legend": 0, "subLabel": "+5" },
+        { "value": 110, "legend": 1, "subLabel": "+10" },
+        { "value": 120, "legend": 1, "subLabel": "+10", "arrow": "up" }
+      ],
+      [
+        { "value": 55, "arrow": "down" },
+        65,
+        75,
+        { "value": 80, "par": true },
+        85,
+        { "value": 90, "legend": 0, "subLabel": "+5" },
+        { "value": 95, "legend": 0, "subLabel": "+5" },
+        { "value": 100, "legend": 0, "subLabel": "+5", "arrow": "up" }
+      ],
+      [
+        { "value": 50, "arrow": "down" },
+        60,
+        70,
+        75,
+        80,
+        { "value": 85, "legend": 0, "subLabel": "+5" },
+        { "value": 90, "legend": 0, "subLabel": "+5", "arrow": "up" }
+      ],
+      [
+        { "value": 45, "arrow": "down" },
+        55,
+        65,
+        { "value": 70, "par": true },
+        75,
+        { "value": 80, "legend": 0, "subLabel": "+5", "arrow": "up" }
+      ],
+      [
+        40,
+        50,
+        60,
+        65,
+        { "value": 70, "arrow": "up" }
+      ]
+    ],
+    "legend": [
+      {
+        "color": "plusFive",
+        "description": "+5 to revenue"
+      },
+      {
+        "color": "plusTen",
+        "description": "+10 to revenue"
+      },
+      {
+        "color": "plusFifteen",
+        "description": "+15 to revenue"
+      },
+      {
+        "color": "plusTwenty",
+        "description": "+20 to revenue"
+      }
+    ]
+  },
+  "tiles": {
+    "7": 5,
+    "8": 15,
+    "9": 15,
+    "8850": 5,
+    "8851": 6,
+    "8852": 6,
+    "5": 6,
+    "6": 6,
+    "57": 6,
+    "8877": 1,
+    "235": 5,
+    "8858": 2,
+    "8854": 2,
+    "8855": 2,
+    "8856": 2,
+    "8857": 2,
+
+    "16": 2,
+    "17": 1,
+    "18": 1,
+    "19": 2,
+    "20": 2,
+    "23": 4,
+    "24": 4,
+    "25": 3,
+    "26": 2,
+    "27": 2,
+    "28": 2,
+    "29": 2,
+    "30": 1,
+    "31": 1,
+    "14": 4,
+    "15": 8,
+    "619": 4,
+    "8886": 1,
+    "8878": 1,
+    "8860": 1,
+    "8861": 1,
+    "8862": 1,
+    "8863": 1,
+    "8864": 1,
+    "8865": 1,
+    "8866": 3,
+    "887": 5,
+    "888": 3,
+
+    "611": 3,
+    "63": 6,
+    "8879": 1,
+    "8871": 3,
+    "8872": 2,
+    "8873": 2,
+    "8874": 2,
+    "8887": 1,
+
+    "455": 3,
+    "895": 3,
+    "8875": 1,
+    "8880": 1,
+    "8888": 1
+  },
+  "map": {
+    "hexes": [
+      {
+        "color": "offboard",
+        "cities": [{"companies": ["1"]}],
+        "offBoardRevenue": {
+          "name": {"name": "Russia"},
+          "angle": 180,
+          "percent": 0.8,
+          "reverse": true,
+          "revenues": [
+            {"color": "yellow", "value": 20},
+            {"color": "green", "value": 30},
+            {"color": "brown", "value": 40},
+            {"color": "gray", "value": 50}
+          ]
+        },
+        "track": [{"type": "offboard", "side": 4},
+                  {"type": "offboard", "side": 5}],
+        "hexes": ["A3"]
+      },
+      {
+        "color": "offboard",
+        "routeBonus": [{"value": "Russia: +¥50", "angle": 180, "percent": 0.4}],
+        "offBoardRevenue": {
+          "name": {"name": "Vladivostok"},
+          "x": 15,
+          "percent": 0.2,
+          "revenues": [
+            {"color": "yellow", "value": 10},
+            {"color": "green", "value": 20},
+            {"color": "brown", "value": 30},
+            {"color": "gray", "value": 40}
+          ]
+        },
+        "track": [{"type": "offboard", "side": 1},
+                  {"type": "offboard", "side": 6}],
+        "hexes": ["A15"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {"name": "Urümqi"},
+          "x": -15,
+          "revenues": [
+            {"color": "yellow", "value": 10},
+            {"color": "green", "value": 20},
+            {"color": "brown", "value": 30},
+            {"color": "gray", "value": 40}
+          ]
+        },
+        "track": [{"type": "offboard", "side": 3},
+                  {"type": "offboard", "side": 4},
+                  {"type": "offboard", "side": 5}],
+        "hexes": ["I1"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {"name": "Lhasa"},
+          "x": -15,
+          "revenues": [
+            {"color": "yellow", "value": 0},
+            {"color": "green", "value": 0},
+            {"color": "brown", "value": 0},
+            {"color": "gray", "value": 80}
+          ]
+        },
+        "track": [{"type": "offboard", "side": 3},
+                  {"type": "offboard", "side": 4},
+                  {"type": "offboard", "side": 5}],
+        "hexes": ["K1"]
+      },
+      {
+        "color": "offboard",
+        "cities": [{"companies": ["7"]}],
+        "offBoardRevenue": {
+          "name": {"name": "French Indochina"},
+          "percent": 0.8,
+          "revenues": [
+            {"color": "yellow", "value": 30},
+            {"color": "green", "value": 40},
+            {"color": "brown", "value": 50},
+            {"color": "gray", "value": 60}
+          ]
+        },
+        "track": [{"type": "offboard", "side": 2},
+                  {"type": "offboard", "side": 3}],
+        "hexes": ["Q7"]
+      },
+      {
+        "color": "offboard",
+        "cities": [{"companies": ["5"]}],
+        "offBoardRevenue": {
+          "name": {"name": "Hong Kong"},
+          "percent": 0.8,
+          "revenues": [
+            {"color": "yellow", "value": 20},
+            {"color": "green", "value": 30},
+            {"color": "brown", "value": 10},
+            {"color": "gray", "value": 70}
+          ]
+        },
+        "track": [{"type": "offboard", "side": 2}],
+        "hexes": ["Q15"]
+      },
+      {
+        "color": "water",
+        "offBoardRevenue": {
+          "name": {"name": "Taiwan"},
+          "x": 15,
+          "revenues": [
+            {"color": "yellow", "value": 30},
+            {"color": "green", "value": 30},
+            {"color": "brown", "value": 0},
+            {"color": "gray", "value": 0}
+          ]
+        },
+        "track": [{"type": "offboard", "side": 1},
+                  {"type": "offboard", "side": 2},
+                  {"type": "offboard", "side": 6}],
+        "hexes": ["N16"]
+      },
+      {
+        "color": "water",
+        "offBoardRevenue": {
+          "name": {"name": "Haikou"},
+          "revenues": [
+            {"color": "yellow", "value": 20},
+            {"color": "green", "value": 30},
+            {"color": "brown", "value": 40},
+            {"color": "gray", "value": 50}
+          ]
+        },
+        "track": [{"type": "offboard", "side": 2},
+                  {"type": "offboard", "side": 3}],
+        "hexes": ["Q13"]
+      },
+      {
+        "color": "water",
+        "track": [{"gauge": "dashed", "type": "gentle", "side": 1}],
+        "values": [{"value": -10, "outerBorderColor": "red", "angle": 330, "percent": 0.2}],
+        "removeBorders": [4],
+        "hexes": ["F12"]
+      },
+      {
+        "color": "water",
+        "track": [{"gauge": "dashed", "type": "gentle", "side": 6}],
+        "values": [{"value": -10, "outerBorderColor": "red", "angle": 270, "percent": 0.2}],
+        "removeBorders": [1],
+        "hexes": ["F14"]
+      },
+      {
+        "color": "water",
+        "track": [{"gauge": "dashed", "type": "straight", "side": 2}],
+        "removeBorders": [5],
+        "hexes": ["I15"]
+      },
+      {
+        "color": "water",
+        "track": [{"gauge": "dashed", "type": "gentle", "side": 6}],
+        "values": [{"value": -10, "outerBorderColor": "red", "angle": 270, "percent": 0.2}],
+        "removeBorders": [2],
+        "hexes": ["J16"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Qiqihar"}}],
+        "hexes": ["A5"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Harbin"}, "companies": ["BZU"]}],
+        "hexes": ["B8"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Changchun"}}],
+        "hexes": ["C9"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Jilin City"}}],
+        "hexes": ["C11"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Dalian"}, "companies": ["2"]}],
+        "hexes": ["E13"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Tianjin"}}],
+        "hexes": ["F10"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Taiyuan"}, "companies": ["3"]}],
+        "hexes": ["H6"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Qingdao"}, "companies": ["4"]}],
+        "hexes": ["H14"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Hefei"}}],
+        "hexes": ["J12"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Chengdu"}, "companies": ["BCR"]}],
+        "hexes": ["M3"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Kunming"}, "companies": ["CKR"]}],
+        "hexes": ["O5"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Nanning"}}],
+        "hexes": ["P8"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Macau"}, "companies": ["6"]}],
+        "hexes": ["P12"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Guangzhou"}}],
+        "hexes": ["P14"]
+      },
+      {
+        "color": "plain",
+        "mediumCities": [{}],
+        "hexes": ["B14", "E9", "L14", "N10"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Fushun"}, "angle": 90, "percent": 0.5},
+                   {"name": {"name": "Shenyang", "reverse": true}, "companies": ["QSR"], "angle": 270, "percent": 0.5}],
+        "hexes": ["D12"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Changsha"}, "companies": ["SCR"], "angle": 90, "percent": 0.5},
+                   {"name": {"name": "Nanchang", "reverse": true}, "angle": 270, "percent": 0.5}],
+        "hexes": ["N12"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Hohhot"}, "angle": 90, "percent": 0.5},
+                   {"name": {"name": "Datong", "reverse": true}, "angle": 270, "percent": 0.5}],
+        "hexes": ["F4"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{"angle": 20, "percent": 0.8, "companies": ["JGG"]},
+                   {"angle": 80, "percent": 0.8, "companies": ["JLR"], "name": {"name": "Bejing", "offset": 53}},
+                   {"angle": 200, "percent": 0.8, "companies": ["JHA"]},
+                   {"angle": 260, "percent": 0.8, "companies": ["JHU"]}],
+        "labels": [{"label": "B", "angle": 320, "percent": 0.25, "size": 24}],
+        "values": [{"value": 20, "angle": 140, "percent": 0.18}],
+        "hexes": ["F8"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
+        "cities": [{"percent": 0.5, "name": {"name": "Baotou"}}],
+        "hexes": ["G3"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
+        "cities": [{"percent": 0.5, "name": {"name": "Chongqing"}}],
+        "hexes": ["M7"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
+        "cities": [{"percent": 0.5, "name": {"name": "Nanjing"}, "companies": ["NJR"]}],
+        "hexes": ["K13"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
+        "cities": [{"percent": 0.5, "name": {"name": "Wuhan"}, "companies": ["WNR"]}],
+        "hexes": ["L10"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Shanghai"}, "companies": ["HKR"]}],
+        "labels": [{"label": "S", "angle": 90, "percent": 0.667}],
+        "hexes": ["K15"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.4}],
+        "centerTowns": [{"percent": 0.4}],
+        "hexes": ["G11", "J14"]
+      },
+      {
+        "color": "plain",
+        "mediumCities": [{"angle": 90, "percent": 0.4}, {"angle": 270, "percent": 0.4}],
+        "hexes": ["H8"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "angle": 180, "percent": 0.5}],
+        "cities": [{"percent": 0.5, "name": {"name": "Jinan"}}],
+        "hexes": ["H10"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 50, "angle": 180, "percent": 0.6},
+                    {"type": "river", "angle": 180, "percent": 0.1}],
+        "cities": [{"percent": 0.5, "name": {"name": "Lanzhou"}, "companies": ["LHR"]}],
+        "hexes": ["J2"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.5}],
+        "cities": [{"percent": 0.5, "name": {"name": "Xi'an"}, "companies": ["NXR"]}],
+        "hexes": ["J6"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"angle": 90, "percent": 0.4}, {"angle": 270, "percent": 0.4}],
+        "hexes": ["B12", "H12", "O11"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.4}],
+        "centerTowns": [{"percent": 0.4}],
+        "hexes": ["D4", "K5", "K7", "M5", "O15", "P10"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 40, "angle": 180, "percent": 0.4}],
+        "centerTowns": [{"percent": 0.4}],
+        "hexes": ["P4"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 30, "angle": 180, "percent": 0.4}],
+        "mediumCities": [{"percent": 0.4}],
+        "hexes": ["F6", "O7"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["A7", "C7", "D14", "G9", "G15", "L16", "M15", "P6"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 50, "angle": 180, "percent": 0.1},
+                    {"type": "river", "percent": 0.4}],
+        "hexes": ["G5", "I7", "L8"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "percent": 0.7}],
+        "cities": [{"name": {"name": "Kaifeng"}, "angle": 110, "percent": 0.5},
+                   {"name": {"name": "Zhengzhou", "reverse": true}, "angle": 250, "percent": 0.5}],
+        "hexes": ["I9"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 30, "percent": 0.5}],
+        "centerTowns": [{"angle": 120, "percent": 0.5},
+                        {"angle": 240, "percent": 0.5}],
+        "hexes": ["J8"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "percent": 0.5}],
+        "centerTowns": [{"angle": 120, "percent": 0.5},
+                        {"angle": 240, "percent": 0.5}],
+        "hexes": ["L12", "O3"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20, "percent": 0.5}],
+        "mediumCities": [{"angle": 120, "percent": 0.5},
+                        {"angle": 240, "percent": 0.5}],
+        "hexes": ["N4"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 60, "angle": 180, "percent": 0.1},
+                    {"type": "river", "percent": 0.4}],
+        "hexes": ["O1"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20}],
+        "hexes": ["G1", "H4", "I5", "N6"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 40}],
+        "hexes": ["L2", "M1", "N2", "P2"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 30}],
+        "hexes": ["B4", "C3", "C5", "C15", "D6", "D8", "E3", "E5", "E7", "H2",
+                  "I3", "J4", "K3", "K9", "L4", "L6", "N8", "O9"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["A9", "A11", "A13", "B6", "B10", "C13", "D10", "E11", "E15",
+                  "F2", "G7", "G13", "I11", "I13", "J10", "K11",
+                  "M9", "M11", "M13", "N14", "O13"]
+      }
+    ],
+    "borders": [{
+      "color": "water",
+      "coords": ["E13p2", "E13p3"]
+    }]
+  }
+}

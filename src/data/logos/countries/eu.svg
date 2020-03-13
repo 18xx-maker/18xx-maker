@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 810 540">
+    <defs>
+        <g id="s">
+            <g id="c">
+                <path id="t" d="M0 0v1h.5z" transform="rotate(18 3.156876 -.5)"/>
+                <use transform="scale(-1 1)" xlink:href="#t"/>
+            </g>
+            <g id="a">
+                <use transform="rotate(72)" xlink:href="#c"/>
+                <use transform="rotate(144)" xlink:href="#c"/>
+            </g>
+            <use transform="scale(-1 1)" xlink:href="#a"/>
+        </g>
+    </defs>
+    <path fill="#039" d="M0 0h810v540H0z"/>
+    <g fill="#fc0" transform="matrix(30 0 0 30 405 270)">
+        <use y="-6" xlink:href="#s"/>
+        <use y="6" xlink:href="#s"/>
+        <g id="l">
+            <use x="-6" xlink:href="#s"/>
+            <use transform="rotate(-144 -2.344166 -2.110697)" xlink:href="#s"/>
+            <use transform="rotate(144 -2.110697 -2.344166)" xlink:href="#s"/>
+            <use transform="rotate(72 -4.66265 -2.075945)" xlink:href="#s"/>
+            <use transform="rotate(72 -5.075945 .533503)" xlink:href="#s"/>
+        </g>
+        <use transform="scale(-1 1)" xlink:href="#l"/>
+    </g>
+</svg>

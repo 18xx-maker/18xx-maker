@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 2880 1440">
+    <defs>
+        <path id="s" d="M0 0l.309017.951057L-.5.363271h1l-.809017.587786z"/>
+    </defs>
+    <path fill="#ce1126" d="M0 0h2880v1440H0z"/>
+    <path fill="#002b7f" d="M0 0h1440v720H0z"/>
+    <g fill="#fff">
+        <use transform="matrix(160 0 0 160 720 30)" xlink:href="#s"/>
+        <use transform="matrix(160 0 0 160 500 210)" xlink:href="#s"/>
+        <use transform="matrix(150 0 0 150 945 180)" xlink:href="#s"/>
+        <use transform="matrix(100 0 0 100 830 364.894348)" xlink:href="#s"/>
+        <use transform="matrix(200 0 0 200 720 499.788697)" xlink:href="#s"/>
+    </g>
+</svg>

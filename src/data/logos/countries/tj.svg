@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1400 700">
+    <path fill="#060" d="M0 0h1400v700H0z"/>
+    <path fill="#fff" d="M0 0h1400v500H0z"/>
+    <path fill="#c00" d="M0 0h1400v200H0z"/>
+    <g fill="#f8c300">
+        <path d="M672 340.7a12.5 12.5 0 0123.3 5.9v50h9.4v-50a12.5 12.5 0 0123.3-5.9 29.5 29.5 0 10-56 0"/>
+        <path fill="#fff" d="M678.7 327.65a20 20 0 0121.3 9.55 20 20 0 0121.3-9.55 21.5 21.5 0 00-42.6 0"/>
+        <path id="w" d="M695.3 376.627a38 38 0 01-63.845 24.316 39.5 39.5 0 01-59.734 17.467c3.6496 36.426 58.252 28.989 62.32-6.4288 17.154 30.115 54.873 21.49 65.91-15.4z"/>
+        <use transform="matrix(-1 0 0 1 1400 0)" xlink:href="#w"/>
+        <path id="r" d="M658.84 441.31c-7.6181 16.446-22.845 19.271-36.164 5.9953 0 0 5.3539-3.7831 11.086-4.826-1.0748-4.5744 1.1291-10.902 4.2354-14.324 3.2575 2.2264 7.8036 6.6886 8.9598 11.874 8.0291-1.0394 11.883 1.2815 11.883 1.2815z"/>
+        <use transform="rotate(9.37 700 804)" xlink:href="#r"/>
+        <use transform="rotate(18.74 700 804)" xlink:href="#r"/>
+        <path fill="none" stroke="#f8c300" stroke-width="16" d="M603 478a340 340 0 01194 0"/>
+        <g transform="translate(700 380)">
+            <g transform="translate(0 -140)">
+                <path id="s" d="M0-513674l301930 929245-790463-574305h977066l-790463 574305z" transform="scale(.00005)"/>
+            </g>
+            <g id="h">
+                <use transform="translate(-70 -121.243557)" xlink:href="#s"/>
+                <use transform="translate(-121.243557 -70)" xlink:href="#s"/>
+                <use transform="translate(-140)" xlink:href="#s"/>
+            </g>
+            <use transform="scale(-1 1)" xlink:href="#h"/>
+        </g>
+    </g>
+</svg>
