@@ -1387,7 +1387,7 @@
         "hexes": [ "F23" ]
       },
       {
-        "color": "mountain",
+        "color": "plain",
         "mountain": {
           "size": "medium",
           "cost": 60
