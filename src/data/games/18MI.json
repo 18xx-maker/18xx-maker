@@ -48,8 +48,8 @@
     "-10", "-10", "-10",
     "-20", "-20", "-20",
     "-30", "-30", "-30",
-    { "icon": "boat", "label": "+20" },
-    { "icon": "boat", "label": "20/10" },
+    { "icon": "steamboat", "label": "+20" },
+    { "icon": "steamboat", "label": "20/10" },
     { "icon": "port" },
     { "icon": "port" },
     { "icon": "coal", "label": "$10" },
@@ -314,8 +314,8 @@
       "name": "Mayflower Steamship",
       "price": 70,
       "revenue": 15,
-      "token": { "icon": "boat", "label": "+20" },
-      "token": { "icon": "boat", "label": "20/10" },
+      "token": { "icon": "steamboat", "label": "+20" },
+      "token": { "icon": "steamboat", "label": "20/10" },
       "description": "Owning corporation may place the steamship token in any city that is a port on Lake Erie or the Detroit River.  No connection is required.Counts as token placement for that round.  The +$20 token closes the Mayflower Steamship but gives sole use of the token to the owning corporation.  Placing the +$20/+$10 side instead does not close the Mayflower Steamship, allows the owning corporation to use the $20, and allows other corporations to use the +$10 to/through the chosen city."
     },
     {
