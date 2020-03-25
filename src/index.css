@@ -747,6 +747,10 @@ footer a:hover {
     padding: 0;
   }
 
+  .stock {
+    margin: 0;
+  }
+
   .tokens {
     margin: 0;
   }

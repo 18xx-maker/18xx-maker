@@ -5,6 +5,7 @@ import Config from "../data/Config";
 import Svg from "../Svg";
 
 import { getMarketData } from "./util";
+import { unitsToCss } from "../util";
 
 import Market from "./Market";
 
@@ -20,6 +21,8 @@ const MarketSingle = () => {
         }
 
         let data = getMarketData(game.stock, config);
+        let paperWidth = unitsToCss(data.totalWidth + 5 + (2 * config.paper.margins));
+        let paperHeight = unitsToCss(data.totalHeight + 5 + (2 * config.paper.margins));
 
         return (
           <React.Fragment>
@@ -36,7 +39,7 @@ const MarketSingle = () => {
                 viewBox={`0 0 ${data.totalWidth} ${data.totalHeight}`}>
                 <Market data={data} title={game.info.title} />
               </Svg>
-              <style>{`@media print {@page {size: ${data.css.printWidth} ${data.css.printHeight};}}`}</style>
+              <style>{`@media print {@page {size: ${paperWidth} ${paperHeight}; margin: ${unitsToCss(config.paper.margins)}}}`}</style>
             </div>
           </React.Fragment>
         );
