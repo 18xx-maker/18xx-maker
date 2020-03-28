@@ -1,10 +1,12 @@
-# Kelsin's 18xx Prototyping React Library
+# 18xx Maker
+
+[![Build Status](https://travis-ci.org/18xx-maker/18xx-maker.svg?branch=master)](https://travis-ci.org/18xx-maker/18xx-maker)
 
 This is a small pet project to help layout and print
 [18xx](https://en.wikipedia.org/wiki/18XX) games.
 
 **Important Note**: A small version of the site is up and running on
-[18xx.kelsin.net](https://18xx.kelsin.net). This version only has a few games on
+[www.18xx-maker.com](https://www.18xx-maker.com). This version only has a few games on
 it. If you want to see all games included in the data files you'll need to
 download the app and run it yourself (or run the public docker image). If any
 designers/publishers would like to add their games to this public site just let
@@ -26,6 +28,8 @@ breaking changes until I decide that version 1.0 is ready for release. I will
 try to list major ones here. Please open issues for any breaking changes that
 aren't listed here so I can either fix, or add it.
 
+* Way to define special tokens has changed, take a look at the atoms page to see
+  examples of the new ones.
 * If you used the new map Border features during the first three days after
   launch... I broke it already. Moving to a more full featured coordinate
   system.
@@ -44,39 +48,36 @@ aren't listed here so I can either fix, or add it.
 
 ## Usage
 
-Please check out the [docs](https://18xx.kelsin.net/docs/running) for how to run
+Please check out the [docs](https://www.18xx-maker.com/docs/running) for how to run
 the site locally.
 
 ### Printing
 
-Please check out the [docs](https://18xx.kelsin.net/docs/pdf) for how to print
+Please check out the [docs](https://www.18xx-maker.com/docs/pdf) for how to print
 pdf's from the command line.
 
 ### Board18
 
-Please check out the [docs](https://18xx.kelsin.net/docs/b18) for information on
+Please check out the [docs](https://www.18xx-maker.com/docs/b18) for information on
 how to output a full board18 game box .zip file from the command line.
 
 ## Developing
 
 ### Running the site
 
-Please check out the [docs](https://18xx.kelsin.net/docs/running) for
+Please check out the [docs](https://www.18xx-maker.com/docs/running) for
 information on how to run the site locally to make changes.
 
 ### Adding a game
 
 1. Copy one of the game files you feel should be closest to the game you're
-   entering from the [src/data/games](src/data/games) folder. Rename it and edit it as
-   much as needed.
+   entering from the [src/data/games](src/data/games) folder. Rename it and edit
+   it as much as needed. Please put it in the `public` folder if you would like
+   the game to appear on the public site.
 
-2. In order for this new game to show up in the UI, please add it to the
-   exported object in the [src/data/games/index.js](src/data/games/index.js)
-   file.
-
-3. Before opening a PR please run `yarn validate` and correct any errors.
+2. Before opening a PR please run `yarn validate` and correct any errors.
 
 ## Docker
 
-Please check out the [docs](https://18xx.kelsin.net/docs/running#using-docker) for
+Please check out the [docs](https://www.18xx-maker.com/docs/running#using-docker) for
 information on how to run the site locally via Docker.

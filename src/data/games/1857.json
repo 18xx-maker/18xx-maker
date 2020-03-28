@@ -222,7 +222,7 @@
       "name": "Saint Zolius Land Company",
       "price": 40,
       "revenue": 10,
-      "token": { "color": "black", "label": "Free" },
+      "token": { "icon": "token" },
       "description": "The owning corporation may place one token at no cost, this action closes the company. This must follow normal placement rules. Stops paying dividends when the first 5 Train is purchased. Closes when the first 5 Train is purchased if player owned."
     },
     {

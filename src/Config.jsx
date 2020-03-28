@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { connect } from "react-redux";
 
+import { diff } from "deep-object-diff";
+
 import { setConfig } from "./store/actions";
 import ColorContext from "./context/ColorContext";
 
-import defaultConfig from "./config.json";
+import defaultConfig from "./defaults.json";
+import customConfig from "./config.json";
 import schema from "./data/schemas/config.schema.json";
 
 import Color from "./data/Color";
@@ -18,8 +21,12 @@ import filter from "ramda/src/filter";
 import isEmpty from "ramda/src/isEmpty";
 import keys from "ramda/src/keys";
 import map from "ramda/src/map";
+import mergeDeepRight from "ramda/src/mergeDeepRight";
 import path from "ramda/src/path";
 import split from "ramda/src/split";
+
+import mapThemes from "./data/themes/maps";
+import companyThemes from "./data/themes/companies";
 
 import "./Config.scss";
 
@@ -127,7 +134,7 @@ const _Input = ({name, label, description, config, value, setConfig, dimension})
         {dimension ? (
           <UnitInput name={name} value={value} onChange={rawUpdate}/>
         ) : (
-          <input style={{width:"1in"}} type="number"
+          <input style={{width:"0.5in"}} type="number"
                  id={name} name={name}
                  value={value}
                  onChange={update}/>
@@ -165,10 +172,9 @@ const CompaniesThemePreview = () => {
         <Color>
           {c => map(color => (
             <div key={color} className="preview" style={{backgroundColor: c(color)}}/>
-          ), ["red", "orange", "yellow", "green", "lime",
-              "blue", "cyan", "turquoise", "purple",
-              "lavender", "pink", "brown", "tan", "natural",
-              "white", "gray", "black"])}
+          ), ["black", "blue", "brightGreen", "brown", "gold", "gray", "green",
+              "lavender", "lightBlue", "lightBrown", "lime", "navy", "natural",
+              "orange", "pink", "red", "turquoise", "violet", "white", "yellow"])}
         </Color>
       </ColorContext.Provider>
     </div>
@@ -185,36 +191,25 @@ const Config = ({config, setConfig, resetConfig}) => {
       <h3>Colors</h3>
       <label htmlFor="theme">Theme: </label>
       <select id="theme" name="theme" value={config.theme} onChange={setOption}>
-        <option value="aag">All Aboard Games</option>
-        <option value="carth">Carth</option>
-        <option value="dtg">Deep Thought</option>
-        <option value="hartland">Hartland Trefoil</option>
-        <option value="gmt">GMT</option>
-        <option value="ps18xx">px18xx</option>
-        <option value="broggles18EU">B18EU</option>
-        <option value="broggles1817">B1817</option>
-        <option value="brogglesmex">B18mex</option>
-        <option value="broggles18TK">B18TK</option>
-        <option value="broggles1836jr">B1836jr</option>
-        <option value="broggles1849">B1849</option>
+        {map(theme => <option key={theme} value={theme}>{mapThemes[theme].name}</option>, keys(mapThemes))}
       </select>
       <ThemePreview/>
       <p className="description">The theme determines which colors are used for all of the elements on the maps and tiles.</p>
       <label htmlFor="companiesTheme">Companies Theme: </label>
       <select id="companiesTheme" name="companiesTheme" value={config.companiesTheme} onChange={setOption}>
-        <option value="carth">Carth</option>
-        <option value="dtg">Deep Thought</option>
-        <option value="gmt">GMT</option>
-        <option value="ps18xx">px18xx</option>
-        <option value="rob">Rails on Boards</option>
-        <option value="B18TK">B18TK</option>
-        <option value="broggles">broggles</option>
+        {map(theme => <option key={theme} value={theme}>{companyThemes[theme].name}</option>, keys(companyThemes))}
       </select>
       <CompaniesThemePreview/>
       <p className="description">The company theme determines which colors are used for all of the elements on the maps and tiles.</p>
       <h3>Layout</h3>
-      <Input name="pagination" label="Pagination Type"
-             description="This lets you configure the type of pagination. Equal keeps all pages directly equal. Max keeps the first and last page equal and set all middle pages to max based on page size."/>
+      <Input name="margin" label="Margin Size" dimension={true}
+             description="How much of a margin exists around the printed item."/>
+      <Input name="cutlines" label="Pagination Cutlines Size" dimension={true}
+             description="Set to 0 to disable any cutlines."/>
+      <Input name="cutlinesOffset" label="Pagination Cutlines Offset" dimension={true}
+             description="If your method of cutting has a guide that is slightly off from where it cuts, you can adjust an offset here. Leave at 0 otherwise."/>
+      <Input name="bleed" label="Pagination Bleed Size" dimension={true}
+             description="Set to 0 to disable any bleed. For paginated items this detemines how much map pages overlap to help with cutting errors."/>
       <Input name="paper.width" label="Paper Width" dimension={true}/>
       <Input name="paper.height" label="Paper Height" dimension={true}/>
       <Input name="paper.margins" label="Paper Margins" dimension={true}/>
@@ -241,9 +236,9 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="plainMapCompanies" label="Plain Map Company Spaces"
              description="This sets all home/destination/token spots on maps to be empty white cities with black company text instead of colored or using logos." />
       <Input name="maps.roundTracker" label="Display Map Round Tracker"
-             description="Whether or not to show the round tracker on maps." />
+             description="Whether or not to show the round tracker on maps. Requires the game file to specify the location." />
       <Input name="maps.players" label="Display Map Players Table"
-             description="Whether or not to show the player information table on maps. This includes bank and certificate limit information." />
+             description="Whether or not to show the player information table on maps. This includes bank and certificate limit information. Requires the game file to specify the location." />
       {/* This option isn't working yet, will add later */}
       {/* <Checkbox name="plainMapDestinations" label="Plain Map Destination Spaces" */}
       {/*           description="This sets all destination spots on maps to be empty white cities with black company text:" /> */}
@@ -257,6 +252,22 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="tiles.gaps" label="Tile Gaps"
              description="This says whether to separate different colors with spaces needed to prevent bleed crossover. Leave on unless you really know you want it."/>
       <h3>Stock Markets</h3>
+      <Input name="stock.cell.width" label="Cell Width" dimension={true}
+             description="This determines the default width of one stock market cell."/>
+      <Input name="stock.cell.height" label="Cell Height" dimension={true}
+             description="This determines the default height of one stock market cell."/>
+      <Input name="stock.column" label="Column Height"
+             description="This determines how many cells make up a 1D market column height. The default is 4. Decimals are allowed."/>
+      <Input name="stock.diag" label="Diag Height"
+             description="This determines how many cells make up a 1Diag market cell height. The default is 2. Decimals are allowed."/>
+      <Input name="stock.par" label="Par Width"
+             description="This determines how many cells make up a par market cell width. The default is 4. Decimals are allowed."/>
+      <Input name="stock.display.legend" label="Display Market Legend"
+             description="Whether or not to show the legend on markets. Requires the game file to specify the location for 2D market legends." />
+      <Input name="stock.display.par" label="Display Market Par Chart"
+             description="Whether or not to show the par chart on markets. Requires the game file to specify the location." />
+      <Input name="stock.display.roundTracker" label="Display Market Round Tracker"
+             description="Whether or not to show the round tracker on markets. Requires the game file to specify the location." />
       <h3>Charters</h3>
       <Input name="charters.style" label="Charter Style"
              description="This lets you choose between two styles for charters. One is simular to Carth's style while the other includes more color at the top."/>
@@ -296,6 +307,7 @@ const Config = ({config, setConfig, resetConfig}) => {
       <h3>Currency</h3>
       <p>This lets you turn on currency symbols for each item individually. Only works if the game file specificies values as numbers and not strings.</p>
       <Input name="currency.bank" label="Bank" description="Bank total on revenue page"/>
+      <Input name="currency.border" label="Border" description="Costs written on map borders"/>
       <Input name="currency.capital" label="Capital" description="Player capital list on revenue page"/>
       <Input name="currency.market" label="Market" description="Stock market cells"/>
       <Input name="currency.offboard" label="Offboard" description="Offboard values on maps"/>
@@ -307,10 +319,17 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="currency.train" label="Train" description="Train costs on cards and charters"/>
       <Input name="currency.treasury" label="Treasury" description="Companies starting capital on charters"/>
       <Input name="currency.value" label="Value" description="Values on maps and track tiles"/>
-      <h2>Reset</h2>
+      <h2>Config Data</h2>
       <p>You can remove any custom settings and revert back to the defaults with this button.</p>
       <button onClick={resetConfig}>Reset To Defaults</button>
       <p>These values are saved on this browser in local storage.</p>
+      <h3>JSON</h3>
+      <p>You can copy and paste this json value into the file in src/config.json if you want to apply these settings to command line or local servers.</p>
+      <pre>
+        <code>
+          {JSON.stringify(diff(defaultConfig, config), null, 2)}
+        </code>
+      </pre>
     </div>
   );
 };
@@ -321,7 +340,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setConfig: config => dispatch(setConfig(config)),
-  resetConfig: () => dispatch(setConfig(defaultConfig))
+  resetConfig: () => dispatch(setConfig(mergeDeepRight(defaultConfig, customConfig)))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Config);

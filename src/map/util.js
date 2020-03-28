@@ -14,6 +14,7 @@ import min from "ramda/src/min";
 import nth from "ramda/src/nth";
 import prop from "ramda/src/prop";
 import reduce from "ramda/src/reduce";
+import reject from "ramda/src/reject";
 import splitEvery from "ramda/src/splitEvery";
 import zipWith from "ramda/src/zipWith";
 
@@ -365,15 +366,37 @@ export const getMapData = (game, coords, hexWidth, variation) => {
   // Find all hexes
   let hexes = map(assoc("variation", variation), gameMap.hexes || []);
   let borders = gameMap.borders || [];
+  let borderTexts = gameMap.borderTexts || [];
+  let lines = gameMap.lines || [];
   if (gameMap.copy !== undefined) {
     hexes = concat(
       map(assoc("variation", gameMap.copy), game.map[gameMap.copy].hexes),
       hexes
     );
 
+    // Remove any hexes set to be removed
+    if (gameMap.remove !== undefined) {
+      hexes = map(hex => {
+        return assoc("hexes",
+                reject(coord => (gameMap.remove || []).includes(coord),
+                       hex.hexes),
+                hex);
+      }, hexes);
+    }
+
+    borderTexts = concat(
+      game.map[gameMap.copy].borderTexts || [],
+      borderTexts
+    );
+
     borders = concat(
       game.map[gameMap.copy].borders || [],
       borders
+    );
+
+    lines = concat(
+      game.map[gameMap.copy].lines || [],
+      lines
     );
   }
   hexes = map(resolveHex(hexes), hexes);
@@ -414,6 +437,9 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     edge,
     scale,
     a1Valid,
+
+    // Title options
+    title: gameMap.title,
 
     // Coords choice
     coords,
@@ -459,7 +485,8 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     hexes,
 
     // Borders and Lines
+    borderTexts,
     borders,
-    lines : gameMap.lines
+    lines
   };
 };

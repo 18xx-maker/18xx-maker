@@ -2,7 +2,7 @@ import length from "ramda/src/length"
 import max from "ramda/src/max"
 import reduce from "ramda/src/reduce"
 
-import { equalPages, maxPages, unitsToCss } from "../util";
+import { unitsToCss } from "../util";
 
 export const getMaxLength = reduce((acc, row) => {
   return max(acc, length(row));
@@ -10,17 +10,8 @@ export const getMaxLength = reduce((acc, row) => {
 
 // Give the stock section of a game and the stock config.json section, compute
 // data that we need.
-export const getMarketData = (stock, config, paper, pagination) => {
-  let { margins, width: pageWidth, height: pageHeight } = paper;
-  let splitPages = pagination === "max" ? maxPages : equalPages;
-
-  // What part of the page can we use?
-  let printableWidth = pageWidth - (2.0 * margins);
-  let printableHeight = pageHeight - (2.0 * margins);
-
-  // We have to make room for cutlines and bleed
-  let usableWidth = printableWidth - 75;
-  let usableHeight = printableHeight - 75;
+export const getMarketData = (stock, config) => {
+  let { stock: { cell, column, diag } } = config;
 
   let width = 0;
   let height = 0;
@@ -29,20 +20,20 @@ export const getMarketData = (stock, config, paper, pagination) => {
 
   switch (stock.type) {
   case "1Diag":
-    width = config.diag.width;
-    height = config.diag.height;
+    width = cell.width;
+    height = diag * cell.height;
     rows = 2;
     columns = Math.ceil(length(stock.market) / 2);
     break;
   case "1D":
-    width = config.column.width;
-    height = config.column.height;
+    width = cell.width;
+    height = column * cell.height;
     rows = 1;
     columns = length(stock.market);
     break;
   case "2D":
-    width = config.cell.width;
-    height = config.cell.height;
+    width = cell.width;
+    height = cell.height;
     rows = length(stock.market);
     columns = getMaxLength(stock.market);
     break;
@@ -55,29 +46,25 @@ export const getMarketData = (stock, config, paper, pagination) => {
   let totalWidth = width * columns;
   let totalHeight = height * rows + 50; // Add space for the title
 
+  // Are we displaying par, if so does this add to the height or width?
+  if (stock.display && stock.display.par) {
+    let parData = getParData(stock, config);
+    let parTotalWidth = parData.totalWidth + (width * stock.display.par.x);
+    let parTotalHeight = parData.totalHeight + (height * stock.display.par.y);
+
+    totalWidth = max(totalWidth, parTotalWidth);
+    totalHeight = max(totalHeight, parTotalHeight);
+  }
+
+  let humanWidth = `${Math.ceil(totalWidth / 100.0)}in`;
+  let humanHeight = `${Math.ceil(totalHeight / 100.0)}in`;
+
   if (stock.type === "1D" || stock.type === "1Diag") {
-    if (stock.legend && stock.legend.length > 0) {
+    if (config.stock.display.legend && stock.legend && stock.legend.length > 0) {
       // Add space for legend
       totalHeight += 50;
     }
   }
-
-  let printWidth = 55 + totalWidth;
-  let printHeight = 55 + totalHeight;
-
-  let humanWidth = `${Math.ceil(printWidth / 100.0)}in`;
-  let humanHeight = `${Math.ceil(printHeight / 100.0)}in`;
-
-  // Are we landscape or portrait
-  let portraitPages =
-      splitPages(totalWidth + 50, usableWidth).length *
-      splitPages(totalHeight + 50, usableHeight).length;
-
-  let landscapePages =
-      splitPages(totalWidth + 50, usableHeight).length *
-      splitPages(totalHeight + 50, usableWidth).length;
-
-  let landscape = landscapePages < portraitPages;
 
   return {
     type: stock.type || "2D",
@@ -85,226 +72,97 @@ export const getMarketData = (stock, config, paper, pagination) => {
     legend: stock.legend || [],
     market: stock.market || [],
     par: stock.par || {},
-    splitPages,
-    landscape,
-    pages: landscape ? landscapePages : portraitPages,
-    landscapePages,
-    portraitPages,
+    display: stock.display || {},
     width,
     height,
-    totalWidth,
-    totalHeight,
-    printWidth,
-    printHeight,
-    printableWidth: landscape ? printableHeight : printableWidth,
-    printableHeight: landscape ? printableWidth : printableHeight,
-    pageWidth: landscape ? pageHeight : pageWidth,
-    pageHeight: landscape ? pageWidth : pageHeight,
-    usableWidth: landscape ? usableHeight : usableWidth,
-    usableHeight: landscape ? usableWidth : usableHeight,
     humanWidth,
     humanHeight,
+    totalWidth,
+    totalHeight,
     rows,
     columns,
-
-    margins,
+    stock,
+    config,
 
     css: {
       width: unitsToCss(width),
       height: unitsToCss(height),
       totalWidth: unitsToCss(totalWidth),
-      totalHeight: unitsToCss(totalHeight),
-      printWidth: unitsToCss(printWidth),
-      printHeight: unitsToCss(printHeight),
-      printableWidth: unitsToCss(landscape ? printableHeight : printableWidth),
-      printableHeight: unitsToCss(landscape ? printableWidth : printableHeight),
-      usableWidth: unitsToCss(landscape ? usableHeight : usableWidth),
-      usableHeight: unitsToCss(landscape ? usableWidth : usableHeight),
-      pageWidth: unitsToCss(landscape ? pageHeight : pageWidth),
-      pageHeight: unitsToCss(landscape ? pageWidth : pageHeight),
-
-      margins: unitsToCss(margins)
+      totalHeight: unitsToCss(totalHeight)
     }
-  }
+  };
 };
 
 // Give the stock section of a game and the stock config.json section, compute
 // data that we need.
-export const getRevenueData = (revenue, config, paper, pagination) => {
-  let { margins, width: pageWidth, height: pageHeight } = paper;
+export const getRevenueData = (revenue, config) => {
+  let { stock: { cell } } = config;
 
   revenue = revenue || {};
   let min = revenue.min || 1;
   let max = revenue.max || 100;
   let perRow = revenue.perRow || 20;
 
-  let splitPages = pagination === "max" ? maxPages : equalPages;
-
-  // What part of the page can we use?
-  let printableWidth = pageWidth - (2.0 * margins);
-  let printableHeight = pageHeight - (2.0 * margins);
-
-  // We have to make room for cutlines and bleed
-  let usableWidth = printableWidth - 75;
-  let usableHeight = printableHeight - 75;
-
-  let width = config.cell.width;
-  let height = config.cell.height;
+  let width = cell.width;
+  let height = cell.height;
   let rows = Math.ceil(max / perRow);
   let columns = perRow;
 
-  // Now with width and height set we can figure out total height and total
-  // width
   let totalWidth = width * columns;
   let totalHeight = height * rows + 50; // Add space for the title
-  let printWidth = 55 + totalWidth;
-  let printHeight = 55 + totalHeight;
-
-  let humanWidth = `${Math.ceil(printWidth / 100.0)}in`;
-  let humanHeight = `${Math.ceil(printHeight / 100.0)}in`;
-
-  // Are we landscape or portrait
-  let portraitPages =
-      splitPages(totalWidth + 50, usableWidth).length *
-      splitPages(totalHeight + 50, usableHeight).length;
-
-  let landscapePages =
-      splitPages(totalWidth + 50, usableHeight).length *
-      splitPages(totalHeight + 50, usableWidth).length;
-
-  let landscape = landscapePages < portraitPages;
 
   return {
     min,
     max,
     perRow,
-    splitPages,
-    landscape,
-    pages: landscape ? landscapePages : portraitPages,
-    landscapePages,
-    portraitPages,
     width,
     height,
     totalWidth,
     totalHeight,
-    printWidth,
-    printHeight,
-    printableWidth: landscape ? printableHeight : printableWidth,
-    printableHeight: landscape ? printableWidth : printableHeight,
-    pageWidth: landscape ? pageHeight : pageWidth,
-    pageHeight: landscape ? pageWidth : pageHeight,
-    usableWidth: landscape ? usableHeight : usableWidth,
-    usableHeight: landscape ? usableWidth : usableHeight,
-    humanWidth,
-    humanHeight,
     rows,
     columns,
-
-    margins,
 
     css: {
       width: unitsToCss(width),
       height: unitsToCss(height),
       totalWidth: unitsToCss(totalWidth),
-      totalHeight: unitsToCss(totalHeight),
-      printWidth: unitsToCss(printWidth),
-      printHeight: unitsToCss(printHeight),
-      printableWidth: unitsToCss(landscape ? printableHeight : printableWidth),
-      printableHeight: unitsToCss(landscape ? printableWidth : printableHeight),
-      usableWidth: unitsToCss(landscape ? usableHeight : usableWidth),
-      usableHeight: unitsToCss(landscape ? usableWidth : usableHeight),
-      pageWidth: unitsToCss(landscape ? pageHeight : pageWidth),
-      pageHeight: unitsToCss(landscape ? pageWidth : pageHeight),
-
-      margins: unitsToCss(margins)
+      totalHeight: unitsToCss(totalHeight)
     }
-  }
+  };
 };
 
 // Give the stock section of a game and the stock config.json section, compute
 // data that we need.
-export const getParData = (stock, config, paper, pagination) => {
-  let { margins, width: pageWidth, height: pageHeight } = paper;
-  let splitPages = pagination === "max" ? maxPages : equalPages;
+export const getParData = (stock, config) => {
+  let { stock: { cell, par } } = config;
 
   let values = (stock.par && stock.par.values) || [];
 
-  // What part of the page can we use?
-  let printableWidth = pageWidth - (2.0 * margins);
-  let printableHeight = pageHeight - (2.0 * margins);
-
-  // We have to make room for cutlines and bleed
-  let usableWidth = printableWidth - 75;
-  let usableHeight = printableHeight - 75;
-
-  let width = config.par.width;
-  let height = config.par.height;
+  let width = (stock.par.width || par) * cell.width;
+  let height = cell.height;
   let rows = length(stock.par.values);
   let columns = Math.max(1, getMaxLength(stock.par.values));
-
-  // Now with width and height set we can figure out total height and total
-  // width
   let totalWidth = width * columns;
   let totalHeight = height * rows + 50; // Add space for the title
-  let printWidth = 55 + totalWidth;
-  let printHeight = 55 + totalHeight;
-  let humanWidth = `${Math.ceil(printWidth / 100.0)}in`;
-  let humanHeight = `${Math.ceil(printHeight / 100.0)}in`;
-
-  // Are we landscape or portrait
-  let portraitPages =
-      splitPages(totalWidth + 50, usableWidth).length *
-      splitPages(totalHeight + 50, usableHeight).length;
-
-  let landscapePages =
-      splitPages(totalWidth + 50, usableHeight).length *
-      splitPages(totalHeight + 50, usableWidth).length;
-
-  let landscape = landscapePages < portraitPages;
 
   return {
     values,
     par: stock.par || {},
     legend: stock.legend || [],
-    splitPages,
-    landscape,
-    pages: landscape ? landscapePages : portraitPages,
-    landscapePages,
-    portraitPages,
+
+    rows,
+    columns,
+
     width,
     height,
     totalWidth,
     totalHeight,
-    printWidth,
-    printHeight,
-    printableWidth: landscape ? printableHeight : printableWidth,
-    printableHeight: landscape ? printableWidth : printableHeight,
-    pageWidth: landscape ? pageHeight : pageWidth,
-    pageHeight: landscape ? pageWidth : pageHeight,
-    usableWidth: landscape ? usableHeight : usableWidth,
-    usableHeight: landscape ? usableWidth : usableHeight,
-    humanWidth,
-    humanHeight,
-    rows,
-    columns,
-
-    margins,
 
     css: {
       width: unitsToCss(width),
       height: unitsToCss(height),
       totalWidth: unitsToCss(totalWidth),
-      totalHeight: unitsToCss(totalHeight),
-      printWidth: unitsToCss(printWidth),
-      printHeight: unitsToCss(printHeight),
-      printableWidth: unitsToCss(landscape ? printableHeight : printableWidth),
-      printableHeight: unitsToCss(landscape ? printableWidth : printableHeight),
-      usableWidth: unitsToCss(landscape ? usableHeight : usableWidth),
-      usableHeight: unitsToCss(landscape ? usableWidth : usableHeight),
-      pageWidth: unitsToCss(landscape ? pageHeight : pageWidth),
-      pageHeight: unitsToCss(landscape ? pageWidth : pageHeight),
-
-      margins: unitsToCss(margins)
+      totalHeight: unitsToCss(totalHeight)
     }
-  }
+  };
 };

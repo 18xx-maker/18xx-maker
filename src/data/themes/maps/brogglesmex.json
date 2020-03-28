@@ -1,0 +1,33 @@
+{
+  "name": "Broggles 18Mex",
+  "colors": {
+    "plain": "#e4904f",
+    "yellow": "#fac75a",
+    "green": "#58b060",
+    "brown": "#594a41",
+    "gray": "#939598",
+    "map": {
+      "gray": "#818386",
+      "water": "#539e97"
+    },
+
+    "offboard": "#dc5136",
+    "mountain": "#d8bda0",
+    "water": "#4b978f",
+    "land": "#e4904d",
+    "river": "#4bb693",
+
+    "white": "#f1f1d9",
+    "black": "#262262",
+
+    "orange": "#f47d20",
+    "red": "#dc5136",
+
+    "track": "#262262",
+    "border": "#262262",
+    "town": "#262262",
+    "centerTown": "#262262",
+    "city": "#ffefdc",
+    "halt": "#262262"
+  }
+}

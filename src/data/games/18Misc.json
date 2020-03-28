@@ -44,25 +44,16 @@
     },
     {
       "label": "C&P",
-      "token": {
-        "type": "bar",
-        "colors": [
-          "white",
-          "black"
-        ]
-      }
+      "bar": "yellow"
     },
     {
-      "label": "coal",
-      "color": "black"
+      "icon": "coal"
     },
     {
-      "label": "coal",
-      "color": "black"
+      "icon": "coal"
     },
     {
-      "label": "coal",
-      "color": "black"
+      "icon": "coal"
     }
   ],
   "ipo": false,
@@ -121,12 +112,10 @@
     {
       "name": "Baltimore & Ohio",
       "abbrev": "B&O",
+      "color": "blue",
       "token": {
-        "type": "quarters",
-        "colors": [
-          "blue",
-          "yellow"
-        ]
+        "bar": true,
+        "quarters": ["yellow", "blue", "blue", "yellow"]
       },
       "tokens": "three"
     },
@@ -139,45 +128,41 @@
     {
       "name": "Canadian Pacific Railway",
       "abbrev": "CPR",
+      "color": "brown",
       "token": {
-        "type": "bar",
-        "colors": [
-          "brown"
-        ]
+        "bar": true
       },
       "tokens": "four"
     },
     {
       "name": "Grand Trunk",
       "abbrev": "GT",
+      "color": "red",
       "token": {
-        "type": "stripe",
-        "colors": [
-          "yellow",
-          "red"
-        ]
+        "color": "yellow",
+        "bar": true,
+        "stripe": "red"
       },
       "tokens": "three"
     },
     {
       "name": "Erie Railroad",
       "abbrev": "ERIE",
+      "color": "yellow",
       "token": {
-        "type": "bar",
-        "colors": [
-          "yellow"
-        ]
+        "bar": true
       },
       "tokens": "three"
     },
     {
       "name": "Illinois Central",
       "abbrev": "IC",
+      "color": "green",
       "token": {
-        "type": "halves",
-        "colors": [
-          "green",
-          "yellow"
+        "bar": true,
+        "halves": [
+          "yellow",
+          "green"
         ]
       },
       "tokens": "four"
@@ -185,48 +170,40 @@
     {
       "name": "Michigan Central Railroad",
       "abbrev": "MC",
+      "color": "yellow",
       "token": {
-        "type": "square",
-        "colors": [
-          "yellow",
-          "black"
-        ]
+        "color": "black",
+        "square": "yellow"
       },
       "tokens": "four"
     },
     {
       "name": "Missouri Pacific Railraod",
       "abbrev": "MP",
+      "color": "red",
       "token": {
-        "type": "target",
-        "colors": [
-          "red",
-          "white"
-        ]
+        "bar": true,
+        "target": "white"
       },
       "tokens": "four"
     },
     {
       "name": "New York Central",
       "abbrev": "NYC",
+      "color": "black",
       "token": {
-        "type": "stripe",
-        "colors": [
-          "black",
-          "white"
-        ]
+        "bar": true,
+        "stripe": "white"
       },
       "tokens": "three"
     },
     {
       "name": "New York, Chicago & St. Louis Railroad",
       "abbrev": "NKP",
+      "color": "cyan",
       "token": {
-        "type": "halves",
-        "colors": [
-          "blue",
-          "cyan"
-        ]
+        "halves": ["cyan", "blue"],
+        "bar": true
       },
       "tokens": "three"
     },
@@ -239,24 +216,20 @@
     {
       "name": "Norfold & Western Railway",
       "abbrev": "NW",
+      "color": "red",
       "token": {
-        "type": "stripes",
-        "colors": [
-          "red",
-          "yellow"
-        ]
+        "bar": true,
+        "stripes": "yellow"
       },
       "tokens": "four"
     },
     {
       "name": "Ontario, Simcoe & Huron",
       "abbrev": "OS&H",
+      "color": "green",
       "token": {
-        "type": "stripe",
-        "colors": [
-          "green",
-          "lightGreen"
-        ]
+        "bar": true,
+        "stripe": "brightGreen"
       },
       "tokens": "four"
     },
@@ -269,13 +242,11 @@
     {
       "name": "Wabash Railroad",
       "abbrev": "WAB",
+      "color": "red",
       "token": {
-        "type": "square",
-        "labelColor": "yellow",
-        "colors": [
-          "blue",
-          "red"
-        ]
+        "color": "red",
+        "square": "blue",
+        "labelColor": "yellow"
       },
       "tokens": "three"
     }
@@ -1058,31 +1029,23 @@
     "hexes": [
       {
         "color": "offboard",
-        "centerTowns": [{
-          "name": {
-            "name": "Copper Country",
-            "reverse": true
-          }
+        "names": [{
+          "percent": 0.4,
+          "name": "Copper Country"
         }],
-        "values": [
-          {
-            "value": 60,
-            "angle": 180,
-            "percent": 0.5
-          }
-        ],
+        "values": [{"value": 60}],
         "track": [
           {
+            "type": "offboard",
             "side": 4
           }
         ],
-        "removeBorders": [4],
         "hexes": [
           "A3"
         ]
       },
       {
-        "color": "offboard",
+        "color": "gray",
         "values": [
           {
             "value": 20,
@@ -1090,7 +1053,6 @@
             "percent": 0.5
           }
         ],
-        "removeBorders": [1],
         "towns": [
           {
             "rotation": 90,
@@ -1106,9 +1068,7 @@
             "side": 1
           }
         ],
-        "hexes": [
-          "A5"
-        ]
+        "hexes": ["A5"]
       },
       {
         "color": "gray",
@@ -1624,12 +1584,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "F12"
         ]
@@ -1698,9 +1652,10 @@
             "name": {
               "name": "Peterborough"
             },
-            "companies": [
-              "C&P"
-            ]
+            "companies": [{
+              "label": "C&P",
+              "bar": "yellow"
+            }]
           }
         ],
         "companies": [
@@ -1722,24 +1677,12 @@
             "side": 6
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "C15"
         ]
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "C17"
         ]
@@ -1837,16 +1780,6 @@
       },
       {
         "color": "plain",
-        "borders": [
-          {
-            "color": "water",
-            "side": 2
-          },
-          {
-            "color": "water",
-            "side": 3
-          }
-        ],
         "hexes": [
           "D16"
         ]
@@ -2080,12 +2013,6 @@
             }
           }
         ],
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "B20"
         ]
@@ -2124,12 +2051,6 @@
         "mountain": {
           "cost": "$120"
         },
-        "borders": [
-          {
-            "side": 2,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "C21"
         ]
@@ -2637,12 +2558,6 @@
         "water": {
           "cost": "$80"
         },
-        "borders": [
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
         "hexes": [
           "E11"
         ]
@@ -2659,8 +2574,7 @@
             },
             "companies": [
               {
-                "label": "coal",
-                "color": "black"
+                "icon": "coal"
               }
             ]
           }
@@ -2801,6 +2715,16 @@
           "K17"
         ]
       }
-    ]
+    ],
+    "borders": [{
+      "color": "water",
+      "coords": ["C21p3", "C21p4"]
+    },{
+      "color": "water",
+      "coords": ["F12p3", "F12p4"]
+    },{
+      "color": "water",
+      "coords": ["D16p3", "D16p4", "D16p5"]
+    }]
   }
 }

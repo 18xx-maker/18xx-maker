@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as R from "ramda";
 import CompanyToken from "./tokens/CompanyToken";
 import Token from "./tokens/Token";
 import Phase from "./Phase";
@@ -9,13 +8,16 @@ import ColorContext from "./context/ColorContext";
 import { unitsToCss } from "./util";
 import Currency from "./util/Currency";
 
-import is from "ramda/src/is";
+import addIndex from "ramda/src/addIndex";
+import chain from "ramda/src/chain";
+import map from "ramda/src/map";
 
 const Charter = ({
   name,
   abbrev,
   logo,
   minor,
+  color,
   token,
   tokens,
   phases,
@@ -28,12 +30,7 @@ const Charter = ({
   backgroundColor,
   variant
 }) => {
-  let color = token;
-  if(is(Object, token)) {
-    color = token.colors[0];
-  }
-
-  let tokenSpots = R.addIndex(R.map)((label, index) => {
+  let tokenSpots = addIndex(map)((label, index) => {
     // Color charters just use empty token circles, carth style uses full
     // company tokens.
     let companyToken = charterStyle === "color" ?
@@ -61,14 +58,14 @@ const Charter = ({
     );
   }, tokens);
 
-  let turnNodes = R.chain(turn => {
-    let steps = R.addIndex(R.map)((step, i) => {
+  let turnNodes = chain(turn => {
+    let steps = addIndex(map)((step, i) => {
       return <li key={i}><span>{step}</span></li>;
     }, turn.steps || []);
 
     let stepsList = turn.ordered ? <ol>{steps}</ol> : <ul>{steps}</ul>;
 
-    let optionals = R.addIndex(R.map)((step, i) => {
+    let optionals = addIndex(map)((step, i) => {
       return <li key={i}><span>{step}</span></li>;
     }, turn.optional || []);
     let optionalList = <ul>{optionals}</ul>;

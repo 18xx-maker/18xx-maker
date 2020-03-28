@@ -152,7 +152,7 @@
         "$40",
         "$100"
       ],
-      "color": "lime"
+      "color": "brightGreen"
     },
     {
       "name": "Southern Excursion Railway",
@@ -351,7 +351,7 @@
       "name": "The Hobbiton Teakettle",
       "price": 20,
       "revenue": 5,
-      "token": { "color": "yellow", "label": "g" },
+      "token": { "circle": "yellow", "label": "g" },
       "description": ""
     },
     {
@@ -546,11 +546,16 @@
     }
   ],
   "stock": {
-    "paginated": true,
-    "orientation": "landscape",
-    "cell": {
-      "width": 0.75,
-      "height": 0.85
+    "display": {
+      "roundTracker": {
+        "type": "col-reverse",
+        "x": 15,
+        "y": 6
+      },
+      "par": {
+        "x": 17,
+        "y": 5
+      }
     },
     "type": "2D",
     "par": {
@@ -1856,12 +1861,7 @@
         "color": "plain",
         "cities": [
           {
-            "companies": [
-              {
-                "label": "O",
-                "color": "lime"
-              }
-            ],
+            "companies": ["O"],
             "name": {
               "name": "Barad-Dur"
             }

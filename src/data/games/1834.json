@@ -58,7 +58,8 @@
         70,
         100
       ],
-      "color": "purple"
+      "token": {"bar":true, "barHeight": 23.5},
+      "color": "violet"
     },
     {
       "name": "Ostend Railway",
@@ -68,7 +69,8 @@
         40,
         100
       ],
-      "color": "blue"
+      "token": {"bar":true, "barHeight": 23.5},
+      "color": "lightBlue"
     },
     {
       "name": "Antwerp Railway",
@@ -77,6 +79,7 @@
         "Home",
         100
       ],
+      "token": {"bar":true, "barHeight": 23.5},
       "color": "yellow"
     },
     {
@@ -87,6 +90,7 @@
         40,
         100
       ],
+      "token": {"bar":true, "barHeight": 23.5},
       "color": "red"
     },
     {
@@ -97,6 +101,7 @@
         40,
         100
       ],
+      "token": {"bar":true, "barHeight": 23.5},
       "color": "green"
     }
   ],
@@ -208,7 +213,7 @@
       "name": "Cockerill Locomotive Company",
       "price": 120,
       "revenue": 20,
-      "icon": "tracks",
+      "token": { "color": "yellow", "iconColor": "map-green", "icon": "train" },
       "description": "Allows owning railroad to purchase a train at half price, closing the private. Can be sold during the YELLOW and GREEN phases."
     },
     {
@@ -723,12 +728,7 @@
             "name": {
               "name": "Ostend"
             },
-            "companies": [
-              {
-                "label": "OST",
-                "color": "blue"
-              }
-            ]
+            "companies": ["OST"]
           }
         ],
         "hexes": [
@@ -742,12 +742,7 @@
             "name": {
               "name": "Mons"
             },
-            "companies": [
-              {
-                "label": "MON",
-                "color": "green"
-              }
-            ]
+            "companies": ["MON"]
           }
         ],
         "hexes": [
@@ -761,12 +756,7 @@
             "name": {
               "name": "Liege"
             },
-            "companies": [
-              {
-                "label": "LIE",
-                "color": "red"
-              }
-            ]
+            "companies": ["LIE"]
           }
         ],
         "hexes": [
@@ -908,12 +898,7 @@
               "name": "Luxembourg",
               "reverse": true
             },
-            "companies": [
-              {
-                "label": "LUX",
-                "color": "purple"
-              }
-            ]
+            "companies": ["LUX"]
           }
         ],
         "hexes": [
@@ -961,12 +946,7 @@
               "name": "Antwerp",
               "rotation": 40
             },
-            "companies": [
-              {
-                "label": "ANT",
-                "color": "yellow"
-              }
-            ]
+            "companies": ["ANT"]
           }
         ],
         "values": [

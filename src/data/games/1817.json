@@ -7,11 +7,15 @@
     "titleY": 620,
     "titleSize": 165,
     "subTitleSize": 17,
-    "currency": "USD"
+    "currency": "USD",
+    "extraStationTokens": 4
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/63170/1817",
     "rules": "https://drive.google.com/file/d/0B1SWz2pNe2eAbnI4NVhpQXV4V0k/view"
+  },
+  "colors": {
+    "short": "pink"
   },
   "wip": true,
   "tokens": [],
@@ -44,7 +48,145 @@
       "capital": 180
     }
   ],
-  "companies": [],
+  "tokenTypes": {
+    "default": ["","","",""]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": "100/20/10",
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": "20/10",
+        "shares": 1
+      },
+      {
+        "quantity": 10,
+        "percent": 10,
+        "shares": 1
+      },
+      {
+        "quantity": 5,
+        "backgroundColor": "short",
+        "subtext": "Short",
+        "percent": "20/10",
+        "shares": 1
+      },
+      {
+        "quantity": 5,
+        "backgroundColor": "short",
+        "subtext": "Short",
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "companies": [
+    {
+      "name": "Alton & Southern Railway",
+      "abbrev": "A&S",
+      "color": "pink"
+    },
+    {
+      "name": "Arcade and Attica",
+      "abbrev": "A&A",
+      "color": "gold"
+    },
+    {
+      "name": "Belt Railway of Chicago",
+      "abbrev": "Belt",
+      "color": "orange"
+    },
+    {
+      "name": "Bessemer and Lake Erie Railroad",
+      "abbrev": "Bess",
+      "color": "black"
+    },
+    {
+      "name": "Boston and Albany Railroad",
+      "abbrev": "B&A",
+      "color": "red"
+    },
+    {
+      "name": "Delaware, Lackawanna and Western Railroad",
+      "abbrev": "DL&W",
+      "color": "brown"
+    },
+    {
+      "name": "Elgin, Joliet and Eastern Railway",
+      "abbrev": "J",
+      "color": "green"
+    },
+    {
+      "name": "Grand Trunk Western Railroad",
+      "abbrev": "GT",
+      "color": "violet"
+    },
+    {
+      "name": "Housatonic Railroad",
+      "abbrev": "H",
+      "color": "lightBlue"
+    },
+    {
+      "name": "Morristown and Erie Railway",
+      "abbrev": "ME",
+      "color": "yellow"
+    },
+    {
+      "name": "New York, Ontaria and Western Railway",
+      "abbrev": "NYOW",
+      "color": "turquoise"
+    },
+    {
+      "name": "New York, Susquehanna and Western Railway",
+      "abbrev": "NYSW",
+      "color": "white"
+    },
+    {
+      "name": "Pittsburg, Shawmut and Northern Railroad",
+      "abbrev": "PSNR",
+      "color": "brightGreen"
+    },
+    {
+      "name": "Pittsburg and Lake Erie Railroad",
+      "abbrev": "PLE",
+      "color": "lime"
+    },
+    {
+      "name": "Providence and Worcester Railroad",
+      "abbrev": "PW",
+      "color": "lightBrown"
+    },
+    {
+      "name": "Rutland Railraod",
+      "abbrev": "R",
+      "color": "blue"
+    },
+    {
+      "name": "Strasburg Railroad",
+      "abbrev": "SR",
+      "color": "natural"
+    },
+    {
+      "name": "Union Railroad",
+      "abbrev": "UR",
+      "color": "navy"
+    },
+    {
+      "name": "Warren & Trumbull Railroad",
+      "abbrev": "WT",
+      "color": "lavender"
+    },
+    {
+      "name": "West Chester Railroad",
+      "abbrev": "WC",
+      "color": "lavender"
+    }
+  ],
   "trains": [
     {
       "name": "2",
@@ -145,9 +287,36 @@
   ],
   "phases": [],
   "pools": [],
-  "rounds": [],
+  "rounds": [
+    {
+      "color": "white",
+      "name": "SR"
+    },
+    {
+      "color": "white",
+      "name": "OR1"
+    },
+    {
+      "color": "gray",
+      "name": "M&A",
+      "small": true
+    },
+    {
+      "color": "white",
+      "name": "OR2"
+    },
+    {
+      "color": "gray",
+      "name": "M&A",
+      "small": true
+    }
+  ],
   "turns": [],
-  "stock": {},
+  "stock": {
+    "type": "1D",
+    "market": [
+    ]
+  },
   "tiles": {
     "5": 6,
     "6": 7,
@@ -182,9 +351,9 @@
       "y": 860
     },
     "roundTracker": {
-      "type": "row",
-      "x": 1700,
-      "y": 600
+      "type": "round",
+      "x": 1930,
+      "y": 1130
     },
     "borders": [
       {

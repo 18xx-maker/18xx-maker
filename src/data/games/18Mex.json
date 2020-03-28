@@ -268,8 +268,7 @@
       "name": "Mexico City-Acapulco Railroad",
       "price": 20,
       "revenue": 5,
-      "icon": "tracks",
-      "description": ""
+      "token": {"iconColor": "green", "icon": "train"}
     },
     {
       "name": "Kansas City, Mexico, & Orient Railroad",

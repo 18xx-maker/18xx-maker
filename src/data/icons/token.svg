@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="-12.5 -12.5 25 25">
+    <g class="color-main color-red color-stroke-black" fill="#dd0030" stroke="#000">
+        <path d="M-9 0v4A9 3 0 009 4V0z"/>
+        <ellipse rx="9" ry="3"/>
+    </g>
+</svg>

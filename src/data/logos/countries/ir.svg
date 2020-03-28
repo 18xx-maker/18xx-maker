@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 630 360">
+    <path fill="#da0000" d="M0 0h630v360H0z"/>
+    <path fill="#fff" d="M0 0h630v240H0z"/>
+    <path fill="#239f40" d="M0 0h630v120H0z"/>
+    <g transform="translate(8.4 100.4)">
+        <g id="tb4">
+            <g id="tb1" fill="none" stroke="#fff" stroke-width="2">
+                <path id="tbp1" d="M0 1h26M1 10V5h8v4h8V5h-5M4 9h2m20 0h-5V5h8m0-5v9h8V0m-4 0v9" transform="scale(1.4)"/>
+                <path id="tbp2" d="M0 7h9m1 0h9" transform="scale(2.8)"/>
+                <use y="120" xlink:href="#tbp2"/>
+                <use y="145.2" xlink:href="#tbp1"/>
+            </g>
+            <g id="tb3">
+                <use x="56" xlink:href="#tb1"/>
+                <use x="112" xlink:href="#tb1"/>
+                <use x="168" xlink:href="#tb1"/>
+            </g>
+        </g>
+        <use x="168" xlink:href="#tb3"/>
+        <use x="392" xlink:href="#tb4"/>
+    </g>
+    <g fill="#da0000" transform="matrix(45 0 0 45 315 180)">
+        <g id="emblem_half">
+            <path d="M-.54815.83638A.912046.912046 0 00.328544-.722384 1 1 0 01-.54815.83638"/>
+            <path d="M.618339.661409A.763932.763932 0 00.421644-.741049 1 1 0 01.618339.661409M0 1l-.05-1L0-.787278a.309995.309995 0 00.118034.099087v.587785L.077809.892905zM-.02-.85L0-.831217a.14431.14431 0 00.252075-.136491A.136408.136408 0 010-.924634"/>
+        </g>
+        <use transform="scale(-1 1)" xlink:href="#emblem_half"/>
+    </g>
+</svg>

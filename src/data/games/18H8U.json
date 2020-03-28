@@ -231,7 +231,7 @@
       "id": "P3",
       "price": 20,
       "revenue": 4,
-      "token": {"color": "black", "label": "Parts"},
+      "token": {"icon": "token", "iconColor": "gray"},
       "description": "May place two extra spare parts tokens on the charter of a Major Company controlled by the owner of this private company. Closes when special ability is used."
     },
     {
@@ -247,7 +247,7 @@
       "id": "P5",
       "price": 72,
       "revenue": 2,
-      "token": {"color": "brown", "label": "1D+1"},
+      "token": {"icon": "train", "color": "brown", "iconColor": "map-brown"},
       "description": "Provides free 1D+1 train which must be assigned to any Major Company upon the purchase of the first 6T."
     },
     {

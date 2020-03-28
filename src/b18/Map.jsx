@@ -35,7 +35,7 @@ const B18Map = ({ coords }) => {
       }}
     >
       <div className="map">
-        <Svg width={data.b18TotalWidth + offset} height={data.b18TotalHeight} viewBox={`${-offset} 0 ${data.totalWidth + offset} ${data.totalHeight}`}>
+        <Svg preserveAspectRatio="none" width={data.b18TotalWidth + offset} height={data.b18TotalHeight} viewBox={`${-offset} 0 ${data.totalWidth + offset} ${data.totalHeight}`}>
           <Map game={game} variation={variation} hexWidth={data.hexWidth} />
         </Svg>
         <style>{`@media print {@page {size: ${data.b18PrintWidth} ${data.b18PrintHeight};}}`}</style>

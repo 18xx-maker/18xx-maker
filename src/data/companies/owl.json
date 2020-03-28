@@ -11,13 +11,13 @@
     {
       "name": "Boston Uprising",
       "abbrev": "BU",
-      "color": "blue",
+      "color": "navy",
       "logo": "owl/boston_uprising"
     },
     {
       "name": "Chengdu Hunters",
       "abbrev": "CH",
-      "color": "tan",
+      "color": "lightBrown",
       "logo": "owl/chengdu_hunters"
     },
     {
@@ -29,7 +29,7 @@
     {
       "name": "Florida Mayhem",
       "abbrev": "FM",
-      "color": "yellow",
+      "color": "lavender",
       "logo": "owl/florida_mayhem"
     },
     {
@@ -47,43 +47,43 @@
     {
       "name": "Houston Outlaws",
       "abbrev": "HO",
-      "color": "lime",
+      "color": "brightGreen",
       "logo": "owl/houston_outlaws"
     },
     {
       "name": "London Spitfire",
       "abbrev": "LS",
-      "color": "cyan",
+      "color": "lightBlue",
       "logo": "owl/london_spitfire"
     },
     {
       "name": "Los Angeles Gladiators",
       "abbrev": "LAG",
-      "color": "purple",
+      "color": "violet",
       "logo": "owl/los_angeles_gladiators"
     },
     {
       "name": "Los Angeles Valiant",
       "abbrev": "LAV",
-      "color": "green",
+      "color": "lime",
       "logo": "owl/los_angeles_valiant"
     },
     {
       "name": "New York Excelsior",
       "abbrev": "NYE",
-      "color": "blue",
+      "color": "white",
       "logo": "owl/new_york_excelsior"
     },
     {
       "name": "Paris Eternal",
       "abbrev": "PE",
-      "color": "red",
+      "color": "brown",
       "logo": "owl/paris_eternal"
     },
     {
       "name": "Philadelphia Fusion",
       "abbrev": "PF",
-      "color": "orange",
+      "color": "gold",
       "logo": "owl/philadelphia_fusion"
     },
     {
@@ -101,13 +101,13 @@
     {
       "name": "Shanghai Dragons",
       "abbrev": "SD",
-      "color": "red",
+      "color": "yellow",
       "logo": "owl/shanghai_dragons"
     },
     {
       "name": "Toronto Defiant",
       "abbrev": "TD",
-      "color": "black",
+      "color": "red",
       "logo": "owl/toronto_defiant"
     },
     {
@@ -119,7 +119,7 @@
     {
       "name": "Washington Justice",
       "abbrev": "WJ",
-      "color": "blue",
+      "color": "natural",
       "logo": "owl/washington_justice"
     }
   ]

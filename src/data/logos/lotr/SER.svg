@@ -7,7 +7,7 @@
         <clipPath id="SVGID_2_">
             <use id="use7" width="100%" height="100%" x="0" y="0" overflow="visible" xlink:href="#SVGID_17_"/>
         </clipPath>
-        <circle id="circle10" class="color-cyan color-main" fill="#34a9e1" cx="21.26" cy="21.352" r="22.677" clip-path="url(#SVGID_2_)"/>
+        <circle id="circle10" class="color-lightBlue color-main" fill="#34a9e1" cx="21.26" cy="21.352" r="22.677" clip-path="url(#SVGID_2_)"/>
         <g id="g30" clip-path="url(#SVGID_2_)">
             <path id="path12" class="color-reserved-white color-red" fill="#e3000b" d="M28.628 9.195c0 .696-3.295 2.322-7.36 2.322s-7.36-1.762-7.36-2.322c0-.233 3.295-2.322 7.36-2.322s7.36 2.224 7.36 2.322z"/>
             <path id="path14" class="color-black" fill="#181716" d="M22.343 9.206c0 1.253-.792 2.316-.839 2.269-.327-.327-.838-1.016-.838-2.269 0-1.253.511-1.941.838-2.269.096-.095.839 1.016.839 2.269z"/>

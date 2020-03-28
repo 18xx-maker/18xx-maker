@@ -401,120 +401,120 @@
       "name": "Buffalo, Brantford, and Goderich",
       "minor": true,
       "abbrev": "BBG",
-      "token": { "type": "bar", "colors": [ "red", "yellow" ] },
+      "token": { "color": "red", "bar": "yellow" },
       "color": "yellow"
     },
     {
       "name": "Brockville and Ottawa",
       "minor": true,
       "abbrev": "BO",
-      "token": { "type": "bar", "colors": [ "red", "yellow" ] },
+      "token": { "color": "red", "bar": "yellow" },
       "color": "yellow"
     },
     {
       "name": "Canada Southern",
       "minor": true,
       "abbrev": "CS",
-      "token": { "type": "bar", "colors": [ "yellow", "yellow" ] },
+      "token": { "bar": "yellow" },
       "color": "yellow"
     },
     {
       "name": "Credit Valley Railway",
       "minor": true,
       "abbrev": "CV",
-      "token": { "type": "bar", "colors": [ "purple", "yellow" ] },
+      "token": { "color": "purple", "bar": "yellow" },
       "color": "yellow"
     },
     {
       "name": "Kingston and Pembroke",
       "minor": true,
       "abbrev": "KP",
-      "token": { "type": "bar", "colors": [ "white", "yellow" ] },
+      "token": { "color": "white", "bar": "yellow" },
       "color": "yellow"
     },
     {
       "name": "London and Port Stanley",
       "minor": true,
       "abbrev": "LPS",
-      "token": { "type": "bar", "colors": [ "blue", "yellow" ] },
+      "token": { "color": "blue", "bar": "yellow" },
       "color": "yellow"
     },
     {
       "name": "Ottawa and Prescott",
       "minor": true,
       "abbrev": "OP",
-      "token": { "type": "bar", "colors": [ "lime", "yellow" ] },
+      "token": { "color": "brightGreen", "bar": "yellow" },
       "color": "yellow"
     },
     {
       "name": "St. Lawrence and Atlantic",
       "minor": true,
       "abbrev": "SLA",
-      "token": { "type": "bar", "colors": [ "brown", "yellow" ] },
+      "token": { "color": "brown", "bar": "yellow" },
       "color": "yellow"
     },
     {
       "name": "Toronto, Grey, and Bruce",
       "minor": true,
       "abbrev": "TGB",
-      "token": { "type": "bar", "colors": [ "gray", "yellow" ] },
+      "token": { "color": "gray", "bar": "yellow" },
       "color": "yellow"
     },
     {
       "name": "Toronto and Nipissing",
       "minor": true,
       "abbrev": "TN",
-      "token": { "type": "bar", "colors": [ "orange", "yellow" ] },
+      "token": { "color": "orange", "bar": "yellow" },
       "color": "yellow"
     },
     {
       "name": "Algoma Eastern Railway",
       "minor": true,
       "abbrev": "TN",
-      "token": { "type": "bar", "colors": [ "orange", "green" ] },
+      "token": { "color": "orange", "bar": "green" },
       "color": "green"
     },
     {
       "name": "Canada Atlantic Railway",
       "minor": true,
       "abbrev": "CA",
-      "token": { "type": "bar", "colors": [ "green", "green" ] },
+      "token": { "color": "green", "bar": "green" },
       "color": "green"
     },
     {
       "name": "New York and Ottawa",
       "minor": true,
       "abbrev": "NYO",
-      "token": { "type": "bar", "colors": [ "cyan", "green" ] },
+      "token": { "color": "cyan", "bar": "green" },
       "color": "green"
     },
     {
       "name": "Pere Marquette Railway",
       "minor": true,
       "abbrev": "PM",
-      "token": { "type": "bar", "colors": [ "blue", "green" ] },
+      "token": { "color": "blue", "bar": "green" },
       "color": "green"
     },
     {
       "name": "Quebec and Lake St. John",
       "minor": true,
       "abbrev": "QLS",
-      "token": { "type": "bar", "colors": [ "brown", "green" ] },
+      "token": { "color": "brown", "bar": "green" },
       "color": "green"
     },
     {
       "name": "Toronto, Hamilton and Buffalo",
       "minor": true,
       "abbrev": "THB",
-      "token": { "type": "bar", "colors": [ "black", "green" ] },
+      "token": { "color": "black", "bar": "green" },
       "color": "green"
     },
     {
       "name": "Canadian National",
       "abbrev": "CN",
       "color": "white",
+      "token": { "target": "red", "bar": true },
       "tokens": ["", "", "", "", "", "", "", ""],
-      "token": { "colors": [ "white", "red"] },
       "shares": []
     }
   ],
@@ -654,13 +654,14 @@
       "price": "Face: $30",
       "revenue": 10,
       "bid": 20,
-      "description": ""
+      "token": {"circle": "yellow", "label": "$" }
     },
     {
       "name": "Niagara Falls Bridge",
       "price": "Face: $45",
       "revenue": 15,
       "bid": 30,
+      "icon": "bridge",
       "description": "+10 Buffalo"
     },
     {
@@ -668,6 +669,7 @@
       "price": "Face: $60",
       "revenue": 20,
       "bid": 40,
+      "hex": "L12",
       "description": "+10 Montreal"
     },
     {
@@ -675,6 +677,7 @@
       "price": "Face: $75",
       "revenue": 25,
       "bid": 50,
+      "hex": "O7",
       "description": "+10 Quebec"
     },
     {
@@ -682,6 +685,7 @@
       "price": "Face: $90",
       "revenue": 30,
       "bid": 60,
+      "icon": "tunnel",
       "description": "+10 Detroit"
     }
   ],
@@ -810,7 +814,17 @@
           "M5",
           "M7",
           "N6",
-          "O11"
+          "O11",
+          "N8",
+          "O9",
+          "N10",
+          "M11",
+          "C9",
+          "D10",
+          "E11",
+          "C11",
+          "D12",
+          "C13"
         ]
       },
       {
@@ -1105,28 +1119,6 @@
       },
       {
         "color": "plain",
-        "bridges": [
-          {
-            "cost": 80,
-            "angle": 0,
-            "percent": 1
-          },
-          {
-            "cost": 80,
-            "angle": 300,
-            "percent": 1
-          }
-        ],
-        "borders": [
-          {
-            "side": 1,
-            "color": "water"
-          },
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
         "cities": [
           {
             "name": {
@@ -1136,109 +1128,6 @@
         ],
         "hexes": [
           "M9"
-        ]
-      },
-      {
-        "color": "plain",
-        "bridges": [
-          {
-            "cost": 80,
-            "angle": 300,
-            "percent": 1
-          },
-          {
-            "cost": 80,
-            "angle": 0,
-            "percent": 1
-          }
-        ],
-        "borders": [
-          {
-            "side": 1,
-            "color": "water"
-          },
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "N8"
-        ]
-      },
-      {
-        "color": "plain",
-        "bridges": [
-          {
-            "cost": 80,
-            "angle": 120,
-            "percent": 1
-          }
-        ],
-        "borders": [
-          {
-            "side": 3,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "O9"
-        ]
-      },
-      {
-        "color": "plain",
-        "bridges": [
-          {
-            "cost": 80,
-            "angle": 180,
-            "percent": 1
-          },
-          {
-            "cost": 80,
-            "angle": 120,
-            "percent": 1
-          }
-        ],
-        "borders": [
-          {
-            "side": 3,
-            "color": "water"
-          },
-          {
-            "side": 4,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "N10"
-        ]
-      },
-      {
-        "color": "plain",
-        "bridges": [
-          {
-            "cost": 80,
-            "angle": 180,
-            "percent": 1
-          },
-          {
-            "cost": 80,
-            "angle": 120,
-            "percent": 1
-          }
-        ],
-        "borders": [
-          {
-            "side": 3,
-            "color": "water"
-          },
-          {
-            "side": 4,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "M11"
         ]
       },
       {
@@ -1341,19 +1230,6 @@
       },
       {
         "color": "plain",
-        "bridges": [
-          {
-            "cost": 80,
-            "angle": 300,
-            "percent": 1
-          }
-        ],
-        "borders": [
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
         "centerTowns": [
           {
             "name": {
@@ -1565,110 +1441,6 @@
         },
         "hexes": [
           "F18"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "water"
-          },
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "C9"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 1,
-            "color": "water"
-          },
-          {
-            "side": 2,
-            "color": "water"
-          },
-          {
-            "side": 3,
-            "color": "water"
-          },
-          {
-            "side": 6,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "D10"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 2,
-            "color": "water"
-          },
-          {
-            "side": 3,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "E11"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 4,
-            "color": "water"
-          },
-          {
-            "side": 1,
-            "color": "water"
-          },
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "C11"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 4,
-            "color": "water"
-          },
-          {
-            "side": 5,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "D12"
-        ]
-      },
-      {
-        "color": "plain",
-        "borders": [
-          {
-            "side": 4,
-            "color": "water"
-          }
-        ],
-        "hexes": [
-          "C13"
         ]
       },
       {
@@ -1889,6 +1661,65 @@
         "hexes": [
           "A19"
         ]
+      }
+    ],
+    "borders": [
+      {
+        "color": "water",
+        "coords": ["C13p2", "C13p3"]
+      },
+      {
+        "color": "water",
+        "coords": ["C11p2", "C11p3", "C11p4", "D12p3", "D12p4"]
+      },
+      {
+        "color": "water",
+        "coords": ["D10p1", "D10p2"]
+      },
+      {
+        "color": "water",
+        "coords": ["E11p1", "E11p2"]
+      },
+      {
+        "color": "water",
+        "coords": ["M11p1", "M11p2", "M11p3", "N10p2", "N10p3", "O9p2"]
+      }
+    ],
+    "borderTexts": [
+      {
+        "cost": 80,
+        "circle": 16,
+        "bgColor": "water",
+        "color": "white",
+        "coord": "M11a180p1"
+      },
+      {
+        "cost": 80,
+        "circle": 16,
+        "bgColor": "water",
+        "color": "white",
+        "coord": "M11a120p1"
+      },
+      {
+        "cost": 80,
+        "circle": 16,
+        "bgColor": "water",
+        "color": "white",
+        "coord": "N10a180p1"
+      },
+      {
+        "cost": 80,
+        "circle": 16,
+        "bgColor": "water",
+        "color": "white",
+        "coord": "N10a120p1"
+      },
+      {
+        "cost": 80,
+        "circle": 16,
+        "bgColor": "water",
+        "color": "white",
+        "coord": "O9a120p1"
       }
     ]
   }

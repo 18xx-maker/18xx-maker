@@ -307,7 +307,7 @@
       "name": "Carolina Stage Coach",
       "price": 20,
       "revenue": 5,
-      "token": { "color": "yellow", "label": "$" }
+      "token": { "circle": "yellow", "label": "$" }
     },
     {
       "id": "P2",

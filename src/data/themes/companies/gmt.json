@@ -1,13 +1,16 @@
 {
-  "black": "#110a0c",
-  "blue": "#025aaa",
-  "brown": "#680b26",
-  "cyan": "#8dd7f6",
-  "green": "#32763f",
-  "lime": "rgb(110,192,55)",
-  "orange": "#f58121",
-  "pink": "rgb(193,60,125)",
-  "purple": "rgb(95,35,132)",
-  "red": "#d1232a",
-  "yellow": "#ffe600"
+  "name": "GMT",
+  "colors": {
+    "black": "#110a0c",
+    "blue": "#025aaa",
+    "brown": "#680b26",
+    "lightBlue": "#8dd7f6",
+    "green": "#32763f",
+    "brightGreen": "rgb(110,192,55)",
+    "orange": "#f58121",
+    "pink": "rgb(193,60,125)",
+    "violet": "rgb(95,35,132)",
+    "red": "#d1232a",
+    "yellow": "#ffe600"
+  }
 }

@@ -80,7 +80,7 @@
       "name": "Chesapeake & Ohio Railroad",
       "abbrev": "C&O",
       "logo": "CO",
-      "color": "cyan"
+      "color": "lightBlue"
     },
     {
       "name": "Erie Railroad",
@@ -92,70 +92,70 @@
       "name": "Cincinnati, Hamilton & Dayton Railway ①",
       "minor": true,
       "abbrev": "CH&D",
-      "token": { "type": "bar", "colors": [ "natural", "white" ] },
+      "token": { "bar": true },
       "color": "natural"
     },
     {
       "name": "Zanesville & Ohio River Railroad ②",
       "minor": true,
       "abbrev": "Z&OR",
-      "token": { "type": "bar", "colors": [ "lime", "white" ] },
-      "color": "lime"
+      "token": { "bar": true },
+      "color": "brightGreen"
     },
     {
       "name": "Columbus, Hocking Valley & Toledo Railway ③",
       "minor": true,
       "abbrev": "CHV&T",
-      "token": { "type": "bar", "colors": [ "red", "white" ] },
+      "token": { "bar": true },
       "color": "red"
     },
     {
       "name": "Columbus, Sandusky & Hocking Railway ④",
       "minor": true,
       "abbrev": "CS&H",
-      "token": { "type": "bar", "colors": [ "orange", "white" ] },
+      "token": { "bar": true },
       "color": "orange"
     },
     {
       "name": "Cleveland, Canton & Southern Railroad ⑤",
       "minor": true,
       "abbrev": "CC&S",
-      "token": { "type": "bar", "colors": [ "brown", "white" ] },
+      "token": { "bar": true },
       "color": "brown"
     },
     {
       "name": "Detroit & Lima Northern Railroad ⑥",
       "minor": true,
       "abbrev": "D&LN",
-      "token": { "type": "bar", "colors": [ "lavender", "white" ] },
+      "token": { "bar": true },
       "color": "lavender"
     },
     {
       "name": "Lake Shore & Michigan Southern Railway ⑦",
       "minor": true,
       "abbrev": "LS&MS",
-      "token": { "type": "bar", "colors": [ "pink", "white" ] },
+      "token": { "bar": true },
       "color": "pink"
     },
     {
       "name": "Cleveland, Lorain & Wheeling Railway ⑧",
       "minor": true,
       "abbrev": "CL&W",
-      "token": { "type": "bar", "colors": [ "turquoise", "white" ] },
+      "token": { "bar": true },
       "color": "turquoise"
     },
     {
       "name": "Cincinnati & Muskingum Valley Railway ⑨",
       "minor": true,
       "abbrev": "C&MV",
-      "token": { "type": "bar", "colors": [ "tan", "white" ] },
+      "token": { "bar": true },
       "color": "tan"
     },
     {
       "name": "Toledo & Ohio Central Railway ⑩",
       "minor": true,
       "abbrev": "T&OC",
-      "token": { "type": "bar", "colors": [ "purple", "white" ] },
+      "token": { "bar": true },
       "color": "purple"
     }
   ],

@@ -32,6 +32,20 @@
   p.note {
     padding: 0.5em;
     border-radius: 0.5em;
+    border-width: 1px;
+    border-style: solid;
+  }
+
+  p.note.warning {
+    background-color: #a00;
+    border-color: #900;
+    color: #fff;
+  }
+
+  p.note.wip {
+    background-color: #ffa;
+    border-color: #dda;
+    color: #000;
   }
 
   li.game a {

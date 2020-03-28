@@ -11,7 +11,7 @@ const RevenueSingle = () => {
   return (
     <Config>
       {(config, game) => {
-        let data = getRevenueData(game.revenue, config.stock, config.paper, config.pagination);
+        let data = getRevenueData(game.revenue, config);
 
         return (
           <React.Fragment>

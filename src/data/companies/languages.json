@@ -11,7 +11,7 @@
     {
       "name": "Python",
       "abbrev": "PY",
-      "color": "green",
+      "color": "gold",
       "logo": "languages/python"
     },
     {
@@ -53,73 +53,73 @@
     {
       "name": "Go",
       "abbrev": "GO",
-      "color": "cyan",
+      "color": "lightBlue",
       "logo": "languages/go"
     },
     {
       "name": "Scala",
       "abbrev": "SC",
-      "color": "red",
+      "color": "pink",
       "logo": "languages/scala"
     },
     {
       "name": "Lua",
       "abbrev": "LUA",
-      "color": "blue",
+      "color": "navy",
       "logo": "languages/lua"
     },
     {
       "name": "Clojure",
       "abbrev": "CLJ",
-      "color": "green",
+      "color": "lightGreen",
       "logo": "languages/clojure"
     },
     {
       "name": "Common Lisp",
       "abbrev": "CL",
-      "color": "gray",
+      "color": "lime",
       "logo": "languages/commonlisp"
     },
     {
       "name": "Erlang",
       "abbrev": "ERL",
-      "color": "red",
+      "color": "brown",
       "logo": "languages/erlang"
     },
     {
       "name": "Swift",
       "abbrev": "SW",
-      "color": "orange",
+      "color": "lightBrown",
       "logo": "languages/swift"
     },
     {
       "name": "Shell",
       "abbrev": "SH",
-      "color": "green",
+      "color": "black",
       "logo": "languages/shell"
     },
     {
       "name": "C",
       "abbrev": "C",
-      "color": "gray",
+      "color": "natural",
       "logo": "languages/c"
     },
     {
       "name": "PHP",
       "abbrev": "PHP",
-      "color": "blue",
+      "color": "lavender",
       "logo": "languages/php"
     },
     {
       "name": "Perl",
       "abbrev": "PL",
-      "color": "blue",
+      "color": "green",
       "logo": "languages/perl"
     },
     {
       "name": "Assembly",
       "abbrev": "ASM",
-      "color": "black"
+      "color": "white"
     }
   ]
 }

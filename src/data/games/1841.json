@@ -19,7 +19,7 @@
   ],
   "ipo": false,
   "wip": true,
-  "bank": 1440,
+  "bank": 14400,
   "players": [
     {
       "number": 3,
@@ -54,51 +54,66 @@
   ],
   "privates": [
     {
-      "id": "Concession #1",
+      "id": "#1",
       "name": "Società della Strada di Ferro da Napoli a Noeera e Castellamunare",
+      "note": "Concession",
+      "bid": 20,
       "price": 50,
-      "revenue": 20,
-      "icon": "tracks"
+      "revenue": 20
     },
     {
-      "id": "Concession #2",
+      "id": "#2",
       "name": "Società della Dtrada Ferrata da Lucca a Pistoia",
+      "note": "Concession",
+      "bid": 20,
       "price": 50,
       "company": "SFLP"
     },
     {
-      "id": "Concession #3",
+      "id": "#3",
       "name": "Strada di Ferro da Torino a Cuneo",
+      "note": "Concession",
+      "bid": 20,
       "price": 50,
       "company": "SFTC"
     },
     {
-      "id": "Concession #4",
+      "id": "#4",
       "name": "Società per la Strada Ferrata Maria Autonia",
+      "note": "Concession",
+      "bid": 20,
       "price": 50,
       "company": "SFMA"
     },
     {
-      "id": "Concession #5",
+      "id": "#5",
       "name": "Strada di Ferro da Torina a Novara",
+      "note": "Concession",
+      "bid": 20,
       "price": 50,
       "company": "SFTN"
     },
     {
-      "id": "Concession #6",
+      "id": "#6",
       "name": "Società per la Strada Ferrata Leopolda",
+      "note": "Concession",
+      "bid": 20,
       "price": 50,
       "company": "SSFL"
     },
     {
-      "id": "Concession #7",
+      "id": "#7",
       "name": "Strada Ferrata da Torino a Genova",
+      "note": "Concession",
+      "bid": 20,
       "price": 50,
       "company": "SFTG"
     },
     {
-      "id": "Concession #8",
+      "id": "#8",
       "name": "Imperial Regia Strada Ferrata Ferdinandea",
+      "note": "Concession",
+      "bid": 20,
       "price": 50,
       "company": "IRSFF"
     }
@@ -202,30 +217,47 @@
       "left": ["Withheld"],
       "right": ["Paid out"]
     },
+    "display": {
+      "legend": {
+        "reverse": true,
+        "x": 16,
+        "y": 3
+      }
+    },
     "ledges": [
       {
+        "color": "water",
+        "border": true,
+        "coords": ["11 0", "11 7"]
+      },
+      {
+        "color": "orange",
+        "border": true,
+        "coords": ["16 0", "16 3"]
+      },
+      {
         "color": "red",
-        "width": 4,
+        "border": true,
         "coords": ["2 4", "2 5", "3 5", "3 4", "2 4"]
       },
       {
         "color": "red",
-        "width": 4,
+        "border": true,
         "coords": ["5 3", "5 4", "6 4", "6 3", "5 3"]
       },
       {
         "color": "red",
-        "width": 4,
+        "border": true,
         "coords": ["8 2", "8 3", "9 3", "9 2", "8 2"]
       },
       {
         "color": "red",
-        "width": 4,
+        "border": true,
         "coords": ["11 1", "11 2", "12 2", "12 1", "11 1"]
       },
       {
         "color": "red",
-        "width": 4,
+        "border": true,
         "coords": ["14 0", "14 1", "15 1", "15 0", "14 0"]
       }
     ],
@@ -295,7 +327,7 @@
         {
           "value": 195,
           "arrow": "up",
-          "arrowColor": "yellow"
+          "arrowColor": "water"
         },
         {
           "value": 216,
@@ -317,7 +349,7 @@
           "value": 328,
           "legend": 0,
           "arrow": "up",
-          "arrowColor": "water"
+          "arrowColor": "orange"
         },
         {
           "value": 365,
@@ -345,12 +377,14 @@
         105,
         117,
         129,
-        144,
+        {
+          "value": 144
+        },
         159,
         {
           "value": 177,
           "arrow": "up",
-          "arrowColor": "yellow"
+          "arrowColor": "water"
         },
         {
           "value": 196,
@@ -372,7 +406,7 @@
           "value": 298,
           "legend": 0,
           "arrow": "up",
-          "arrowColor": "water"
+          "arrowColor": "orange"
         },
         {
           "value": 331,
@@ -397,7 +431,9 @@
         71,
         80,
         90,
-        100,
+        {
+          "value": 100
+        },
         111,
         123,
         137,
@@ -405,7 +441,7 @@
         {
           "value": 169,
           "arrow": "up",
-          "arrowColor": "yellow"
+          "arrowColor": "water"
         },
         {
           "value": 187,
@@ -435,7 +471,9 @@
           "arrow": "down"
         },
         59,
-        68,
+        {
+          "value": 68
+        },
         77,
         86,
         95,
@@ -446,7 +484,7 @@
         {
           "value": 160,
           "arrow": "up",
-          "arrowColor": "yellow"
+          "arrowColor": "water"
         },
         {
           "value": 178,
@@ -479,7 +517,7 @@
         {
           "value": 146,
           "arrow": "up",
-          "arrowColor": "yellow"
+          "arrowColor": "water"
         },
         {
           "value": 162,
@@ -508,7 +546,7 @@
         {
           "value": 127,
           "arrow": "up",
-          "arrowColor": "yellow"
+          "arrowColor": "water"
         },
         {
           "value": 141,
@@ -618,12 +656,12 @@
     ],
     "legend": [
       {
-        "color": "yellow",
+        "color": "water",
         "description": "Major companies only",
         "icon": "certificate"
       },
       {
-        "color": "water",
+        "color": "orange",
         "description": "Phase 8 only"
       }
     ]
@@ -802,7 +840,6 @@
       "limit": "2",
       "number": "6",
       "tiles": "green",
-      "notes": "Tiles may be laid across borders.",
       "price": 200
     },
     {
@@ -810,7 +847,7 @@
       "limit": "4",
       "number": "6",
       "tiles": "green",
-      "notes": "Tiles may be laid across borders. May lay two yellows maximum.",
+      "notes": "May lay two yellows maximum.",
       "price": 200
     },
     {
@@ -820,7 +857,6 @@
       "limit": "2",
       "number": "4",
       "tiles": "green",
-      "notes": "Concessions are removed. Tuscan merge and Ferdinandea secession are performed.",
       "price": 350
     },
     {
@@ -945,6 +981,7 @@
       "name": "Strada Ferrata Maria Antonia",
       "minor": true,
       "abbrev": "SFMA",
+      "token": { "stripes": "white", "bar": true },
       "tokens": [
         "Firenze",
         ""
@@ -955,27 +992,30 @@
       "name": "Strada Ferrata da Lucca a Pistoia",
       "minor": true,
       "abbrev": "SFLP",
+      "token": { "stripes": "white", "bar": true },
       "tokens": [
         "Lucca",
         ""
       ],
-      "color": "lime"
+      "color": "brightGreen"
     },
     {
       "name": "Società per la Strada Ferrata Leopolda",
       "abbrev": "SSFL",
+      "color": "violet",
+      "token": { "bar": true },
       "tokens": [
         "Pisa",
         "",
         "",
         "",
         ""
-      ],
-      "color": "purple"
+      ]
     },
     {
       "name": "Imperial Regia Strada Ferrata Ferdinandea",
       "abbrev": "IRSFF",
+      "token": { "bar": true },
       "tokens": [
         "Milano",
         "Venezia",
@@ -988,6 +1028,7 @@
     {
       "name": "Strada Ferrata da Torina a Genova",
       "abbrev": "SFTG",
+      "token": { "bar": true },
       "tokens": [
         "Torino (S)",
         "Alessandria",
@@ -1000,6 +1041,7 @@
     {
       "name": "Strada di Ferro da Torina a Novara",
       "abbrev": "SFTN",
+      "token": { "bar": true },
       "tokens": [
         "Torino (N)",
         "",
@@ -1007,11 +1049,12 @@
         "",
         ""
       ],
-      "color": "brown"
+      "color": "lightBrown"
     },
     {
       "name": "Strada di Ferro da Torino a Cuneo",
       "abbrev": "SFTC",
+      "token": { "bar": true },
       "variant": "V2",
       "tokens": [
         "Cuneo",
@@ -1023,8 +1066,21 @@
       "color": "yellow"
     },
     {
+      "name": "Strada di Ferro da Torino a Cuneo",
+      "abbrev": "SFTC",
+      "minor": true,
+      "color": "yellow",
+      "variant": "V1",
+      "token": { "bar": true, "stripes": "white" },
+      "tokens": [
+        "Cuneo",
+        ""
+      ]
+    },
+    {
       "name": "Strade Ferrate Livornesi",
       "abbrev": "SFLi",
+      "token": { "bar": true },
       "tokens": [
         "Pisa",
         "Firenze",
@@ -1037,6 +1093,7 @@
     {
       "name": "Strade Ferrate del Sud dell'Austria",
       "abbrev": "SB",
+      "token": { "bar": true },
       "variant": "V2",
       "tokens": [
         "Venezia",
@@ -1045,11 +1102,12 @@
         "",
         ""
       ],
-      "color": "yellow"
+      "color": "gold"
     },
     {
       "name": "Strade Ferrate della Lombardia & dell'Italia Centrale",
       "abbrev": "SFL",
+      "token": { "bar": true },
       "variant": "V2",
       "tokens": [
         "Milano",
@@ -1058,98 +1116,15 @@
         "",
         ""
       ],
-      "color": "cyan"
-    },
-    {
-      "name": "Società Leonardo Da Vinci",
-      "abbrev": "SLDV",
-      "minor": true,
-      "color": "black"
-    },
-    {
-      "name": "Ferrovie Trans Padane",
-      "abbrev": "FTP",
-      "minor": true,
-      "color": "gray"
-    },
-    {
-      "name": "Compagnia Trasporti La Patria",
-      "abbrev": "CTLP",
-      "minor": true,
-      "color": "purple"
-    },
-    {
-      "name": "Compagnia Ferroviaria Conte di Cavour",
-      "abbrev": "CFCC",
-      "color": "green"
-    },
-    {
-      "name": "Compagnia Trasporti Dante Alighieri",
-      "abbrev": "CTDA",
-      "color": "cyan"
-    },
-    {
-      "name": "Impresa Centrale Strade Ferrate",
-      "abbrev": "ICSF",
-      "color": "lime"
-    },
-    {
-      "name": "Reale Società Ferroviaria Sabauda",
-      "abbrev": "RSFS",
-      "color": "purple"
-    },
-    {
-      "name": "Compagnia Garibaldi per i Trasporti Ferroviari",
-      "abbrev": "CGTF",
-      "color": "red"
-    },
-    {
-      "name": "Regia Azienda Trasporti Ferroviari",
-      "abbrev": "RATF",
-      "color": "orange"
-    },
-    {
-      "name": "Compagnia Trasporti Subalpini",
-      "abbrev": "CTS",
-      "color": "gray"
-    },
-    {
-      "name": "Impresa Ferroviaria Alta Italia",
-      "abbrev": "IFAI",
-      "color": "pink"
-    },
-    {
-      "name": "Impresa Latina Trasporti su Ferro",
-      "abbrev": "ILTF",
-      "color": "green"
-    },
-    {
-      "name": "Azienda Trasporti Ferroviari Ausonia",
-      "abbrev": "ATFA",
-      "color": "brown"
-    },
-    {
-      "name": "Azienda Ferroviaria Italica",
-      "abbrev": "AFI",
-      "color": "lavender"
-    },
-    {
-      "name": "Strada di Ferro da Torino a Cuneo",
-      "abbrev": "SFTC",
-      "minor": true,
-      "color": "yellow",
-      "variant": "V1",
-      "tokens": [
-        "Cuneo",
-        ""
-      ]
+      "color": "lightBlue"
     },
     {
       "name": "Strade di Ferro Venete",
       "abbrev": "SFV",
       "minor": true,
-      "color": "yellow",
+      "color": "gold",
       "variant": "V1",
+      "token": { "bar": true, "stripes": "white" },
       "tokens": [
         "Venezia",
         ""
@@ -1159,18 +1134,94 @@
       "name": "Strade Ferrate Lombarde",
       "abbrev": "SFL",
       "minor": true,
-      "color": "cyan",
+      "color": "lightBlue",
       "variant": "V1",
+      "token": { "bar": true, "stripes": "white" },
       "tokens": [
         "Milano",
         ""
       ]
+    },
+    {
+      "name": "Azienda Ferroviaria Italica",
+      "abbrev": "AFI",
+      "color": "red"
+    },
+    {
+      "name": "Azienda Trasporti Ferroviari Ausonia",
+      "abbrev": "ATFA",
+      "color": "orange"
+    },
+    {
+      "name": "Compagnia Ferroviaria Conte di Cavour",
+      "abbrev": "CFCC",
+      "color": "brightGreen"
+    },
+    {
+      "name": "Compagnia Garibaldi per i Trasporti Ferroviari",
+      "abbrev": "CGTF",
+      "color": "green"
+    },
+    {
+      "name": "Compagnia Trasporti Dante Alighieri",
+      "abbrev": "CTDA",
+      "color": "lime"
+    },
+    {
+      "name": "Compagnia Trasporti Subalpini",
+      "abbrev": "CTS",
+      "color": "turquoise"
+    },
+    {
+      "name": "Impresa Centrale Strade Ferrate",
+      "abbrev": "ICSF",
+      "color": "navy"
+    },
+    {
+      "name": "Impresa Ferroviaria Alta Italia",
+      "abbrev": "IFAI",
+      "color": "violet"
+    },
+    {
+      "name": "Impresa Latina Trasporti su Ferro",
+      "abbrev": "ILTF",
+      "color": "pink"
+    },
+    {
+      "name": "Regia Azienda Trasporti Ferroviari",
+      "abbrev": "RATF",
+      "color": "lavender"
+    },
+    {
+      "name": "Reale Società Ferroviaria Sabauda",
+      "abbrev": "RSFS",
+      "color": "natural"
+    },
+    {
+      "name": "Compagnia Trasporti La Patria",
+      "abbrev": "CTLP",
+      "minor": true,
+      "color": "white",
+      "token": { "stripes": "black" }
+    },
+    {
+      "name": "Ferrovie Trans Padane",
+      "abbrev": "FTP",
+      "minor": true,
+      "color": "gray",
+      "token": { "stripes": "white" }
+    },
+    {
+      "name": "Società Leonardo Da Vinci",
+      "abbrev": "SLDV",
+      "minor": true,
+      "color": "black",
+      "token": { "stripes": "white" }
     }
   ],
   "map": [
     {
       "name": "Version 2",
-      "print": "landscape",
       "roundTracker": {
         "x": 700,
         "y": 1500
@@ -1272,7 +1323,7 @@
         {
           "color": "gray",
           "values": [{"value": 10, "angle": 60, "percent": 0.5}],
-          "centerTowns": [{"name": {"name": "Aosta", "rotation": -30}}],
+          "towns": [{"rotation": 240, "name": {"name": "Aosta"}}],
           "track": [{"type": "city", "side": 5}],
           "hexes": ["C6"]
         },
@@ -1286,10 +1337,12 @@
         },
         {
           "color": "gray",
-          "values": [{"value": 20, "angle": 150, "percent": 0.7},
-                     {"value": 10, "angle": 270, "percent": 0.7}],
-          "centerTowns": [{"angle": 90, "percent": 0.6, "name": {"name": "Tirano"}},
-                          {"angle": 330, "percent": 0.6, "name": {"name": "Edolo"}}],
+          "values": [{"value": 20, "angle": 150, "percent": 0.8},
+                     {"value": 10, "angle": 270, "percent": 0.8}],
+          "towns": [{"angle": 90, "percent": 0.6,
+                     "name": {"name": "Tirano", "y": -25, "rotation": -90}},
+                    {"angle": 330, "percent": 0.6, "rotation": 240,
+                     "name": {"name": "Edolo", "y": -25, "rotation": 90}}],
           "track": [{"type": "sharpStop", "side": 2},
                     {"type": "sharpStopRev", "side": 1}],
           "hexes": ["K2"]
@@ -1365,7 +1418,7 @@
           "offBoardRevenue": {
             "angle": 180,
             "percent": 0.2,
-            "name": {"name": "Lausanne / Lotschberg"},
+            "name": {"name": "Lausanne / Lötschberg"},
             "revenues": [
               {
                 "color": "gray",
@@ -1544,14 +1597,14 @@
         },
         {
           "color": "plain",
-          "centerTowns": [{"angle": 60, "percent": 0.5, "name": {"name": "Forli"}},
+          "centerTowns": [{"angle": 60, "percent": 0.5, "name": {"name": "Forlí"}},
                           {"angle": 240, "percent": 0.5, "name": {"name": "Cesena", "reverse": true}}],
           "hexes": ["P15"]
         },
         {
           "color": "plain",
           "centerTowns": [{"angle": 60, "percent": 0.5, "name": {"name": "Vercelli"}},
-                          {"angle": 240, "percent": 0.5, "name": {"name": "Navara", "reverse": true}}],
+                          {"angle": 240, "percent": 0.5, "name": {"name": "Novara", "reverse": true}}],
           "hexes": ["F7"]
         },
         {
@@ -1774,7 +1827,7 @@
         },
         {
           "color": "plain",
-          "cities": [{"name": {"name": "Reggio Emilia"}}],
+          "cities": [{"name": {"name": "Reggio nell'Emilia"}}],
           "hexes": ["L13"]
         },
         {

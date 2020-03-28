@@ -1,0 +1,95 @@
+{
+  "coords": "outside",
+  "font": {
+    "family": "display",
+    "size": "0.15in",
+    "weight": "bold"
+  },
+  "cutlines": 25,
+  "cutlinesOffset": 0,
+  "bleed": 12.5,
+  "margin": 25,
+  "paper": {
+    "width": 850,
+    "height": 1100,
+    "margins": 25
+  },
+  "currency": {
+    "bank": true,
+    "border": true,
+    "capital": true,
+    "market": false,
+    "offboard": false,
+    "par": false,
+    "private": true,
+    "revenue": false,
+    "terrain": true,
+    "token": true,
+    "train": true,
+    "treasury": true,
+    "value": false
+  },
+  "companySvgLogos": "none",
+  "overrideCompanies": "none",
+  "overrideSelection": [],
+  "maps": {
+    "players": true,
+    "roundTracker": true
+  },
+  "plainMapCompanies": false,
+  "straightCityNames": false,
+  "theme": "gmt",
+  "companiesTheme": "rob",
+  "ipo": {
+    "borderRadius": 11.811
+  },
+  "charters": {
+    "style": "color",
+    "cutlines": 25,
+    "bleed": 12.5,
+    "halfWidth": false,
+    "border": 0,
+    "blackBand": false
+  },
+  "cards": {
+    "shareStyle": "gmt",
+    "layout": "miniEuroDie",
+    "width": 265.748,
+    "height":  173.228,
+    "cutlines": 25,
+    "bleed": 12.5,
+    "border": 0,
+    "blackBand": false
+  },
+  "tokens": {
+    "layout": "free",
+    "marketTokenSize": 50,
+    "stationTokenSize": 37.5,
+    "bleed": true,
+    "reverseMarketTokens": "all"
+  },
+  "trains": {
+    "style": "color",
+    "images": false
+  },
+  "tiles": {
+    "layout": "die",
+    "width": 150,
+    "mapWidth": 150,
+    "gaps": true
+  },
+  "stock": {
+    "cell": {
+      "width": 70,
+      "height": 85
+    },
+    "column": 4,
+    "diag": 2,
+    "par": 4,
+    "display": {
+      "legend": true,
+      "par": true,
+      "roundTracker": true
+    }
+  }
+}

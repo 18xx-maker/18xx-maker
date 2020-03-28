@@ -64,7 +64,7 @@ const Track = ({ type, gauge, border, offset, path, color, borderColor, gaugeCol
   case "custom":
     break;
   case "offboard":
-    let end = border ? 30:40;
+    let end = border ? 40 : 48;
     width = border ? 8 : 6;
     path = `M${width} 75 L ${width} 85 L -${width} 85 L -${width} 75 L 0 ${end} Z`;
     break;

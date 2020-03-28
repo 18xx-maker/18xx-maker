@@ -1,6 +1,7 @@
 import React from "react";
 import Color from "../data/Color";
 import PhaseContext from "../context/PhaseContext";
+import Currency from "../util/Currency";
 
 const Bridge = ({ cost }) => {
   return (
@@ -25,7 +26,7 @@ const Bridge = ({ cost }) => {
               x="0"
               y="-7"
             >
-              {cost}
+              <Currency value={cost} type="terrain" />
             </text>
           </g>
         )}

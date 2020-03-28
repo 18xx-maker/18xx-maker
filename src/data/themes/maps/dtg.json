@@ -1,0 +1,29 @@
+{
+  "name": "DTG",
+  "colors": {
+    "plain": "#cfe6c5",
+    "yellow": "#fde900",
+    "green": "#71bf44",
+    "brown": "#cb7745",
+    "gray": "#bcbdc0",
+
+    "offboard": "#ec232a",
+    "mountain": "#cd8c5e",
+    "water": "#147ebe",
+    "land": "#8da98c",
+    "river": "#9ccac3",
+
+    "white": "#fff",
+    "black": "#000",
+
+    "orange": "#f47d20",
+    "red": "#ec232a",
+
+    "track": "#000",
+    "border": "#fff",
+    "town": "#000",
+    "centerTown": "#000",
+    "city": "#fff",
+    "halt": "#666"
+  }
+}

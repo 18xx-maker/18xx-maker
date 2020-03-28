@@ -33,6 +33,9 @@ const Nav = () => {
           <NavLink to="/docs/b18">Board18 Output</NavLink>
         </li>
         <li>
+          <NavLink to="/docs/tokens">Tokens</NavLink>
+        </li>
+        <li>
           <NavLink to="/docs/ellison">Ellison Die Cutter</NavLink>
         </li>
       </ul>

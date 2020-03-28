@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import games from "./data/games";
 
+import intersperse from "ramda/src/intersperse";
 import keys from "ramda/src/keys";
 import map from "ramda/src/map";
 import max from "ramda/src/max";
@@ -34,13 +35,22 @@ const gameRows = map(key => {
   let game = games[key];
 
   let players = reduce(max, 0, map(prop("number"), game.players || []));
+  let links = null;
+
+  if (game.links) {
+    links = intersperse(", ", map(name => {
+      let url = game.links[name];
+      return <a key={name} href={url}>{name}</a>;
+    }, keys(game.links)));
+  }
 
   return (
     <tr key={key}>
       <td>{key}</td>
       <td>
-        <NavLink to={`/${key}`}>{game.info.title}</NavLink><br/>
-        <span>{game.info.subtitle}</span>
+        <NavLink to={`/${key}`}>{game.info.title}</NavLink>
+        {game.info.subtitle && (<><br/><span>{game.info.subtitle}</span></>)}
+        {links && (<><br/><span>{links}</span></>)}
       </td>
       <td>{game.info.designer}</td>
       <td>{players === 0 ? null : players}</td>

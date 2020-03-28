@@ -12,19 +12,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import games from "./games";
-import themes from "./themes";
+import themes from "./themes/maps";
 import companies from "./themes/companies";
 
+const colorAliases = {
+  "cyan": "lightBlue",
+  "grey": "gray",
+  "lightGreen": "brightGreen",
+  "navyBlue": "navy",
+  "purple": "violet",
+  "tan": "lightBrown"
+};
+
 const resolveColor = curry((theme, companiesTheme, phase, context, game, name) => {
-  if (name === "grey") {
-    name = "gray";
+  if (colorAliases[name]) {
+    name = colorAliases[name];
   }
 
-  let colors = themes[theme || "gmt"] || themes["gmt"];
+  let colors = (themes[theme || "gmt"] || themes["gmt"]).colors;
 
   // Add in company colors
-  colors["companies"] = mergeDeepRight(companies["rob"],
-                                       companies[companiesTheme || "rob"] || companies["rob"]);
+  colors["companies"] = mergeDeepRight(companies["rob"].colors,
+                                       (companies[companiesTheme || "rob"] || companies["rob"]).colors);
 
   // Add in game colors
   colors = mergeDeepRight(colors,
@@ -50,7 +59,15 @@ const textColor = curry((theme, companiesTheme, phase, game, color) => {
   return tinycolor.mostReadable(tc, text).toRgbString();
 });
 
-const strokeColor = color => tinycolor(color).darken(10).toString();
+const strokeColor = (color, amount = 20) => {
+  let tc = tinycolor(color);
+
+  if (amount >= 0) {
+    return tc.darken(amount).toString();
+  } else {
+    return tc.lighten(-1 * amount).toString();
+  }
+};
 
 const Color = ({ theme, companiesTheme, context, children }) => {
   return (

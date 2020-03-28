@@ -1,6 +1,7 @@
 import React from "react";
 import Color from "../data/Color";
 import PhaseContext from "../context/PhaseContext";
+import Currency from "../util/Currency";
 
 const Tunnel = ({ cost }) => {
   return (
@@ -25,7 +26,7 @@ const Tunnel = ({ cost }) => {
               x="0"
               y="-3"
             >
-              {cost}
+              <Currency value={cost} type="terrain" />
             </text>
           </g>
         )}

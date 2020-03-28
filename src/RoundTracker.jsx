@@ -1,27 +1,33 @@
 import React from "react";
 import Token from "./tokens/Token";
 
+import Config from "./data/Config";
+
 import addIndex from "ramda/src/addIndex";
 import map from "ramda/src/map";
 
 import { unitsToCss } from "./util";
 
-export const getRoundTrackerData = (rounds, size, type, rotation) => {
+export const getRoundTrackerData = (rounds, size, type, rotation, config) => {
+  let cell = config.stock.cell;
+
   let getI = i => (type === "row-reverse" || type === "col-reverse") ? rounds.length - (i + 1) : i;
 
-  let getX = i => size * 0.75;
-  let getY = i => size * 0.75;
+  let getX = (i, j = 0) => 0;
+  let getY = (i, j = 0) => 0;
   let startX = 0;
   let startY = 0;
 
   switch (type) {
   case "row":
   case "row-reverse":
-    getX = i => (getI(i) * 1.5 * size) + (size * 0.75);
+    getX = (i, j = 0) => (getI(i) + 0.5) * cell.width;
+    getY = (i, j = 0) => (j + 0.5) * cell.height;
     break;
   case "col":
   case "col-reverse":
-    getY = i => (getI(i) * 1.5 * size) + (size * 0.75);
+    getX = (i, j = 0) => (j + 0.5) * cell.width;
+    getY = (i, j = 0) => (getI(i) + 0.5) * cell.height;
     break;
   case "round":
     startX = -2.5 * size;
@@ -88,29 +94,35 @@ export const getRoundTrackerData = (rounds, size, type, rotation) => {
   };
 };
 const RoundTracker = ({ rounds, size, type, rotation }) => {
-  let data = getRoundTrackerData(rounds, size, type, rotation);
+  return (
+    <Config>
+    {config => {
+      let data = getRoundTrackerData(rounds, size, type, rotation, config);
 
-  let roundNodes = addIndex(map)((round, index) => {
-    let arrow = null;
-    if (index >= data.arrow.start) {
-      arrow = <line x1={data.arrow.getX1(index)}
-                    y1={data.arrow.getY1(index)}
-                    x2={data.arrow.getX2(index)}
-                    y2={data.arrow.getY2(index)}
-                    stroke="black"
-                    markerEnd="url(#arrow)" />;
-    }
-    return (
-      <g key={`round-tracker-${index}`}>
-        {arrow}
-        <g transform={`translate(${data.getX(index)} ${data.getY(index)})`}>
-          <Token label={round.name} width={size / 2} color={round.color} labelColor="black" />
-        </g>
-      </g>
-    );
-  }, rounds);
+      let roundNodes = addIndex(map)((round, index) => {
+        let arrow = null;
+        if (index >= data.arrow.start) {
+          arrow = <line x1={data.arrow.getX1(index)}
+          y1={data.arrow.getY1(index)}
+          x2={data.arrow.getX2(index)}
+          y2={data.arrow.getY2(index)}
+          stroke="black"
+          markerEnd="url(#arrow)" />;
+        }
+        return (
+          <g key={`round-tracker-${index}`}>
+            {arrow}
+            <g transform={`translate(${data.getX(index)} ${data.getY(index)})`}>
+              <Token {...round} label={round.name} width={size / (round.small ? 3 : 2)} color={round.color} />
+            </g>
+          </g>
+        );
+      }, rounds);
 
-  return roundNodes;
+      return roundNodes;
+    }}
+    </Config>
+  );
 };
 
 export default RoundTracker;

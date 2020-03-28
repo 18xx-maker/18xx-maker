@@ -50,16 +50,18 @@ const Par = ({data, title}) => {
 
   return (
     <g>
-      <text
-        fontFamily="display"
-        fontStyle="bold"
-        fontSize="25"
-        dominantBaseline="hanging"
-        x="0"
-        y="12.5"
-      >
-        {title} Par
-      </text>
+      {title && (
+        <text
+          fontFamily="display"
+          fontStyle="bold"
+          fontSize="25"
+          dominantBaseline="hanging"
+          x="0"
+          y="12.5"
+        >
+          {title}
+        </text>
+      )}
       {cells}
       <Ledges data={data} />
     </g>

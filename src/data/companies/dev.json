@@ -29,7 +29,7 @@
     {
       "name": "Couchbase",
       "abbrev": "CB",
-      "color": "red",
+      "color": "pink",
       "logo": "dev/couchbase"
     },
     {
@@ -47,61 +47,61 @@
     {
       "name": "Google Cloud",
       "abbrev": "GC",
-      "color": "red",
+      "color": "white",
       "logo": "dev/gcloud"
     },
     {
       "name": "Git",
       "abbrev": "GIT",
-      "color": "orange",
+      "color": "brown",
       "logo": "dev/git"
     },
     {
       "name": "Github",
       "abbrev": "GH",
-      "color": "black",
+      "color": "natural",
       "logo": "dev/github"
     },
     {
       "name": "Kubernetes",
       "abbrev": "K8S",
-      "color": "blue",
+      "color": "lavender",
       "logo": "dev/k8s"
     },
     {
       "name": "Linux",
       "abbrev": "LNX",
-      "color": "orange",
+      "color": "gold",
       "logo": "dev/linux"
     },
     {
       "name": "Microsoft Windows",
       "abbrev": "WIN",
-      "color": "red",
+      "color": "yellow",
       "logo": "dev/microsoft"
     },
     {
       "name": "Mongo DB",
       "abbrev": "MDB",
-      "color": "lime",
+      "color": "lightGreen",
       "logo": "dev/mongodb"
     },
     {
       "name": "MySQL",
       "abbrev": "MY",
-      "color": "blue",
+      "color": "turquoise",
       "logo": "dev/mysql"
     },
     {
       "name": "Nginx",
       "abbrev": "NGX",
-      "color": "green",
+      "color": "lime",
       "logo": "dev/nginx"
     },
     {
       "name": "PostgreSQL",
       "abbrev": "PSQL",
-      "color": "blue",
+      "color": "navy",
       "logo": "dev/postgresql"
     },
     {
@@ -119,7 +119,7 @@
     {
       "name": "Visual Studio Code",
       "abbrev": "VSC",
-      "color": "blue",
+      "color": "gray",
       "logo": "dev/vscode"
     }
   ]

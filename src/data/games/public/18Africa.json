@@ -1,0 +1,1095 @@
+{
+  "info": {
+    "title": "18Africa",
+    "designer": "Jeff Edmunds",
+    "background": "water",
+    "currency": "GBP",
+    "orientation": "horizontal",
+    "titleSize": 120,
+    "titleY": 1200
+  },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/421/1830-railways-robber-barons",
+    "rules": "https://boardgamegeek.com/wiki/page/1830_Rules"
+  },
+  "tokens": [
+    "Round"
+  ],
+  "wip": true,
+  "ipo": true,
+  "bank": 1400,
+  "players": [
+    {
+      "number": 2,
+      "certLimit": 28,
+      "capital": 782
+    },
+    {
+      "number": 3,
+      "certLimit": 24,
+      "capital": 694
+    },
+    {
+      "number": 4,
+      "certLimit": 18,
+      "capital": 606
+    },
+    {
+      "number": 5,
+      "certLimit": 15,
+      "capital": 430
+    },
+    {
+      "number": 6,
+      "certLimit": 12,
+      "capital": 430
+    },
+    {
+      "number": 7,
+      "certLimit": 10,
+      "capital": 342
+    }
+  ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "companies": [
+    {
+      "name": "Congo National Railway",
+      "abbrev": "CNR",
+      "color": "purple",
+      "tokens": [
+        "Brazzaville/Leopoldville",
+        40,
+        100,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "Ugandan Railway",
+      "abbrev": "UR",
+      "color": "red",
+      "tokens": [
+        "Dar es Salaam",
+        40,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "Sudan Railway",
+      "abbrev": "SR",
+      "color": "blue",
+      "tokens": [
+        "Khartoum",
+        40,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "Nigerian Railways",
+      "abbrev": "NR",
+      "color": "pink",
+      "tokens": [
+        "Lagos",
+        40,
+        100
+      ]
+    },
+    {
+      "name": "Timbuktu-Oran Railway",
+      "abbrev": "TO",
+      "color": "lavender",
+      "tokens": [
+        "Timbuktu",
+        40,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "Cape of Good Hope & Western Railway",
+      "abbrev": "CGHW",
+      "color": "black",
+      "tokens": [
+        "Capetown",
+        40,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "Congo Ocean Railway",
+      "abbrev": "COR",
+      "color": "cyan",
+      "tokens": [
+        "Brazzaville/Leopoldville",
+        40,
+        100,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "Kenyan Railway",
+      "abbrev": "KR",
+      "color": "green",
+      "tokens": [
+        "Nairobi",
+        40,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "Egyptian National Railway",
+      "abbrev": "ENR",
+      "color": "yellow",
+      "tokens": [
+        "Cairo",
+        40,
+        100,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "Central South African Railway",
+      "abbrev": "CSAR",
+      "color": "orange",
+      "tokens": [
+        "Johannesburg/Pretoria",
+        40,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "Marrakech-Fez Railway",
+      "abbrev": "MF",
+      "color": "lightBlue",
+      "tokens": [
+        "Marrakesh",
+        40,
+        100
+      ]
+    },
+    {
+      "name": "Alexandria Railway",
+      "abbrev": "AR",
+      "color": "tan",
+      "tokens": [
+        "Alexandria",
+        40,
+        100,
+        100,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "Tangier Casablanca High Speed Line",
+      "abbrev": "TC",
+      "color": "yellow",
+      "tokens": [
+        "Tangier",
+        40,
+        100
+      ]
+    },
+    {
+      "name": "Nederlands Zuid African Railways Co",
+      "abbrev": "NZA",
+      "color": "brown",
+      "tokens": [
+        "Johannesburg/Pretoria",
+        40,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "East African Railroad",
+      "abbrev": "EAR",
+      "color": "mountain",
+      "tokens": [
+        "Mombasa",
+        40,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "Morrocan National Railway",
+      "abbrev": "MNR",
+      "color": "brown",
+      "tokens": [
+        "Casablanca",
+        40,
+        100
+      ]
+    },
+    {
+      "name": "Algiers-Oran Railway",
+      "abbrev": "AO",
+      "color": "lime",
+      "tokens": [
+        "Algiers",
+        40,
+        100
+      ]
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 6,
+      "price": 180,
+      "color": "yellow",
+      "info": [
+        {
+          "color": "green",
+          "note": "Resale: £180"
+        }
+      ]
+    },
+    {
+      "name": "3",
+      "quantity": 4,
+      "price": 300,
+      "color": "green",
+      "info": [
+        {
+          "color": "green",
+          "note": "Resale: £180"
+        }
+      ]
+    },
+    {
+      "name": "4E",
+      "quantity": 3,
+      "price": 450,
+      "color": "green",
+      "info": [
+        {
+          "color": "green",
+          "note": "Resale: £300"
+        }
+      ]
+    },
+    {
+      "name": "Veldt Star",
+      "quantity": 3,
+      "price": 700,
+      "color": "brown",
+      "info": [
+        {
+          "color": "green",
+          "note": "Resale: £500"
+        }
+      ]
+    },
+    {
+      "name": "Empire Freight",
+      "quantity": 3,
+      "price": 850,
+      "color": "brown",
+      "info": [
+        {
+          "color": "green",
+          "note": "Resale: £650"
+        }
+      ]
+    },
+    {
+      "name": "Empires Express",
+      "quantity": 3,
+      "price": 1000,
+      "color": "brown",
+      "info": [
+        {
+          "color": "green",
+          "note": "Resale: £750"
+        }
+      ]
+    },
+    {
+      "name": "Pan Africa Grand Tour",
+      "quantity": 3,
+      "price": 1200,
+      "color": "brown",
+      "info": [
+        {
+          "color": "green",
+          "note": "Resale: £850"
+        }
+      ]
+    }
+  ],
+  "privates": [
+    {
+      "name": "Cape Wine Company",
+      "price": 25,
+      "revenue": 5,
+      "token": {"color": "yellow", "label": "£"}
+    },
+    {
+      "name": "Allen Rock Aggregates",
+      "price": 35,
+      "revenue": 5,
+      "tile": "7",
+      "description": "Build one extra yellow track tile over normal limits."
+    },
+    {
+      "name": "Thompson Wagon Works",
+      "price": 60,
+      "revenue": 10,
+      "tile": "14",
+      "description": "Double upgrade on same hex."
+    },
+    {
+      "name": "Jamieson Tropical Timber",
+      "price": 75,
+      "revenue": 12,
+      "icon": "river",
+      "description": "One free river crossing."
+    },
+    {
+      "name": "George Edmunds' Factors",
+      "price": 115,
+      "revenue": 20,
+      "icon": "home",
+      "description": "One free station marker."
+    },
+    {
+      "name": "Madianos Olive Oil Export Concessions",
+      "price": 220,
+      "revenue": 30,
+      "token": {"color": "black", "label": "PD"},
+      "description": "Owner may claim priority deal."
+    }
+  ],
+  "phases": [
+    {
+      "name": "2",
+      "limit": "4",
+      "number": "6",
+      "tiles": "yellow"
+    },
+    {
+      "name": "3",
+      "limit": "4",
+      "number": "5",
+      "tiles": "green",
+      "notes": "Private companies may be purchased"
+    },
+    {
+      "name": "4",
+      "rust": "2",
+      "limit": "3",
+      "number": "4",
+      "tiles": "green"
+    },
+    {
+      "name": "5",
+      "limit": "2",
+      "number": "3",
+      "tiles": "brown",
+      "notes": "Private companies are closed"
+    },
+    {
+      "name": "6",
+      "limit": "2",
+      "number": "2",
+      "rust": "3",
+      "tiles": "brown",
+      "notes": "D Trains may be purchased"
+    },
+    {
+      "name": "D",
+      "limit": "2",
+      "number": "6",
+      "rust": "4",
+      "tiles": "brown"
+    }
+  ],
+  "pools": [
+    {
+      "name": "Market",
+      "notes": [
+        {
+          "color": "orange",
+          "note": "Shares in the market pay dividends to the corporation"
+        },
+        {
+          "color": "brown",
+          "icon": "exclamation",
+          "note": "No more than 50% of a corporation's shares may be in the market at any time"
+        },
+        {
+          "color": "red",
+          "icon": "times",
+          "note": "Shares cannot be sold during the first stock round"
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "SR",
+      "color": "white"
+    },
+    {
+      "name": "OR1",
+      "color": "gray"
+    },
+    {
+      "name": "OR2",
+      "color": "gray"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": [
+        "Sell any number of shares",
+        "Buy one share",
+        "Sell any number of shares"
+      ],
+      "ordered": true
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Lay or upgrade track",
+        "Purchase a station",
+        "Run trains",
+        "Pay dividends or withhold revenue",
+        "Purchase trains"
+      ],
+      "ordered": true,
+      "optional": [
+        "Purchase private companies"
+      ]
+    }
+  ],
+  "stock": {
+    "type": "1D",
+    "market": [
+      {
+        "value": 0,
+        "color": "black",
+        "sublabel": "Close"
+      },
+      {
+        "value": 5,
+        "legend": 0
+      },
+      {
+        "value": 10,
+        "legend": 0
+      },
+      {
+        "value": 22,
+        "legend": 0
+      },
+      {
+        "value": 34,
+        "legend": 0
+      },
+      {
+        "value": 45,
+        "legend": 0
+      },
+      {
+        "value": 56,
+        "legend": 0
+      },
+      {
+        "value": 58,
+        "legend": 0
+      },
+      {
+        "value": 61,
+        "legend": 0,
+        "companies": [{"abbrev": "CNR"}]
+      },
+      {
+        "value": 64,
+        "companies": [{"abbrev": "UR"}]
+      },
+      {
+        "value": 67,
+        "companies": [{"abbrev": "SR"}]
+      },
+      {
+        "value": 71,
+        "companies": [{"abbrev": "NR"},
+                      {"abbrev": "NZA", "row": 2},
+                      {"abbrev": "TC", "row": 3},
+                      {"abbrev": "TO", "row": 4}]
+      },
+      {
+        "value": 76,
+        "companies": [{"abbrev": "CGHW"},
+                      {"abbrev": "MF", "row": 2},
+                      {"abbrev": "MNR", "row": 3}]
+      },
+      {
+        "value": 82,
+        "companies": [{"abbrev": "COR"},
+                      {"abbrev": "MF", "row": 2},
+                      {"abbrev": "ENR", "row": 3}]
+      },
+      {
+        "value": 90,
+        "companies": [{"abbrev": "AO"},
+                      {"abbrev": "EAR", "row": 2}]
+      },
+      {
+        "value": 100,
+        "companies": [{"abbrev": "AR"},
+                      {"abbrev": "CSAR", "row": 2}]
+      },
+      112,
+      126,
+      142,
+      160,
+      180,
+      205,
+      230,
+      255,
+      280,
+      300,
+      320,
+      340,
+      360,
+      380,
+      {
+        "value": 400,
+        "sublabel": "End Game",
+        "color": "gray"
+      },
+      420,
+      440,
+      460
+    ],
+    "legend": [
+      {
+        "color": "green",
+        "description": "All of these shares in the bank pool may be bought at once",
+        "icon": "money-bill-wave"
+      }
+    ]
+  },
+  "tiles": {
+    "1": 1,
+    "2": 1,
+    "3": 2,
+    "4": 2,
+    "7": 4,
+    "8": 8,
+    "9": 7,
+    "14": 3,
+    "15": 2,
+    "16": 1,
+    "18": 1,
+    "19": 1,
+    "20": 1,
+    "23": 3,
+    "24": 3,
+    "25": 1,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "39": 1,
+    "40": 1,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 1,
+    "45": 2,
+    "46": 2,
+    "47": 1,
+    "53": 2,
+    "54": 1,
+    "55": 1,
+    "56": 1,
+    "57": 4,
+    "58": 2,
+    "59": 2,
+    "61": 2,
+    "62": 1,
+    "63": 3,
+    "64": 1,
+    "65": 1,
+    "66": 1,
+    "67": 1,
+    "68": 1,
+    "69": 1,
+    "70": 1
+  },
+  "map": {
+    "players": {
+      "x": 0,
+      "y": 1500
+    },
+    "roundTracker": {
+      "type": "row",
+      "x": 40,
+      "y": 250
+    },
+    "hexes": [
+      {
+        "color": "gray",
+        "track": [{"type": "gentle", "side": 6}],
+        "removeBorders": [2,6],
+        "hexes": ["G1"]
+      },
+      {
+        "color": "gray",
+        "cities": [{"companies": ["TC"], "name": {"name": "Tangier"}}],
+        "track": [{"side": 2},{"side":1},{"side":6}],
+        "values": [{"angle": 180, "percent": 0.75, "value": "?+00"}],
+        "removeBorders": [2],
+        "hexes": ["D2"]
+      },
+      {
+        "color": "gray",
+        "cities": [{"companies": ["AO"], "name": {"name": "Algiers"}}],
+        "track": [{"side": 2, "type": "straight"}],
+        "values": [{"angle": 180, "percent": 0.75, "value": "?+20"}],
+        "removeBorders": [5],
+        "hexes": ["F2"]
+      },
+      {
+        "color": "gray",
+        "towns": [{"name": {"name": "Tunis"}, "angle": 90, "percent": 0.57735}],
+        "track": [{"side": 2, "type": "sharp"}],
+        "values": [{"angle": 270, "percent": 0.25, "value": 10}],
+        "removeBorders": [3],
+        "hexes": ["H2"]
+      },
+      {
+        "color": "gray",
+        "cities": [{"companies": ["MNR"], "name": {"offset": 25, "name": "Casablanca"}}],
+        "track": [{"side": 1},{"side":6},{"side":5}],
+        "values": [{"angle": 180, "percent": 0.667, "value": "?+20"}],
+        "removeBorders": [5],
+        "hexes": ["C3"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Oran"}}],
+        "hexes": ["E3"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["G3", "F4", "E5", "G5", "I5", "D6", "F6", "H6", "J6", "L6",
+                  "C7", "E7", "I7", "K7",
+                  "B8", "D8", "H8", "J8", "L8",
+                  "A9", "C9", "E9",
+                  "B10", "D10", "F10", "H10", "L10", "N10",
+                  "C11", "G11", "I11", "K11",
+                  "B12", "H12", "J12", "L12",
+                  "C13", "E13", "K13", "M13",
+                  "D14", "H14", "L14",
+                  "C15", "I15", "K15",
+                  "H16", "L16",
+                  "I17", "K17", "Q17",
+                  "N18", "P18",
+                  "O19",
+                  "H20", "J20",
+                  "K21",
+                  "J22", "N22",
+                  "I23", "K23",
+                  "J24",
+                  "I25", "M25", "O25",
+                  "J26", "N26",
+                  "I27", "O27",
+                  "J28",
+                  "K29", "M29",
+                  "J30", "L30",
+                  "J34",
+                  "K35"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"angle":90,"percent":0.4,"name": {"name": "Meknes"}},
+                        {"angle":270,"percent":0.4,"name": {"reverse": true, "name": "Fez"}}],
+        "hexes": ["D4"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Tripoli"}}],
+        "hexes": ["H4"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"companies": ["MF"], "name": {"name": "Marrakech"}}],
+        "hexes": ["C5"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Benghazi"}}],
+        "hexes": ["K5"]
+      },
+      {
+        "color": "gray",
+        "cities": [{"angle":180,"percent":0.4,"companies": ["AR"], "name": {"name": "Alexandria"}}],
+        "values": [{"angle": 270, "percent": 0.667, "value": "?+30"}],
+        "track": [{"side":1,"type":"straightStop"},{"side":2,"type":"gentleStop"}],
+        "hexes": ["M5"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Agadir"}}],
+        "hexes": ["B6"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 30}],
+        "hexes": ["G7", "G9", "I9", "J10", "N16", "P16", "O17"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 20}],
+        "hexes": ["N8", "D12", "M17", "L20"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 50, "percent": 0.5}],
+        "cities": [{"companies": ["ENR"], "name": {"name": "Cairo"}, "angle": 180, "percent": 0.3}],
+        "hexes": ["M7"]
+      },
+      {
+        "color": "plain",
+        "icons": [{"type": "coal", "angle": 180, "percent": 0.5}],
+        "terrain": [{"type": "mountain", "cost": 30, "percent": 0.4}],
+        "hexes": ["F8"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 30}],
+        "hexes": ["M9", "M11", "F12", "N14", "M15", "J18", "K19", "K27", "J32", "K33"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Kufra"}, "percent": 0.4}],
+        "icons": [{"type": "coal", "angle": 180, "percent": 0.5}],
+        "hexes": ["K9"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Dakar"}}],
+        "hexes": ["A11"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 30, "percent": 0.5}],
+        "cities": [{"companies": ["TO"], "name": {"name": "Timbuktu"}, "angle": 180, "percent": 0.3}],
+        "hexes": ["E11"]
+      },
+      {
+        "color": "gray",
+        "values": [{"value": 10, "angle": 240, "percent": 0.2}],
+        "towns": [{"angle": 60, "percent": 0.288675, "rotation": 150, "name": {"name": "Port Sudan", "reverse": true}}],
+        "track": [{"type": "gentle", "side": 1}],
+        "hexes": ["O11"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 30, "percent": 0.5}],
+        "cities": [{"companies": ["SR"], "name": {"name": "Khartoum"}, "angle": 180, "percent": 0.3}],
+        "hexes": ["N12"]
+      },
+      {
+        "color": "gray",
+        "values": [{"value": 10, "angle": 60, "percent": 0.2}],
+        "towns": [{"angle": 240, "percent": 0.288675, "rotation": -30, "name": {"name": "Bissau"}}],
+        "track": [{"type": "gentle", "side": 4}],
+        "hexes": ["A13"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Kano"}}],
+        "hexes": ["G13"]
+      },
+      {
+        "color": "gray",
+        "hexes": ["I13"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Asmara"}, "angle": 180, "percent": 0.4}],
+        "terrain": [{"type": "mountain", "cost": 30, "percent": 0.4}],
+        "hexes": ["O13"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 50}],
+        "hexes": ["F14", "G15", "I19"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Ndjamena"}}],
+        "hexes": ["J14"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Djbouti"}}],
+        "hexes": ["P14"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Labé", "reverse": true}, "angle": 270, "percent": 0.4},
+                        {"name": {"name": "Freetown"}, "angle": 90, "percent": 0.4}],
+        "hexes": ["B14"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Accra"}}],
+        "hexes": ["E15"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Berbera"}}],
+        "hexes": ["Q15"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 30, "percent": 0.5}],
+        "icons": [{"type": "coal", "angle": 240, "percent": 0.5}],
+        "centerTowns": [{"name": {"name": "Addis Ababa", "reverse": true}, "angle": 120, "percent": 0.5}],
+        "hexes": ["O15"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Abidjan"}, "percent": 0.4}],
+        "icons": [{"type": "coal", "angle": 180, "percent": 0.5}],
+        "hexes": ["D16"]
+      },
+      {
+        "color": "gray",
+        "track": [{"type": "straight", "side": 3}],
+        "cities": [{"name": {"name": "Lagos"}, "companies": ["NR"]}],
+        "values": [{"percent": 0.667, "value": "?+20"}],
+        "removeBorders": [6],
+        "hexes": ["F16"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Bangui"}}],
+        "hexes": ["J16"]
+      },
+      {
+        "color": "gray",
+        "track": [{"type": "gentle", "side": 3}],
+        "removeBorders": [1,3],
+        "hexes": ["G17"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Yaounde"}}],
+        "hexes": ["H18"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Juba", "reverse": true}, "angle": 270, "percent": 0.4},
+                        {"name": {"name": "Wau"}, "angle": 90, "percent": 0.4}],
+        "hexes": ["L18"]
+      },
+      {
+        "color": "gray",
+        "towns": [{"name": {"name": "Libreville"}, "rotation": 180, "angle": 270, "percent": 0.57735}],
+        "track": [{"side": 5, "type": "sharp"}],
+        "values": [{"angle": 90, "percent": 0.25, "value": 10}],
+        "removeBorders": [4],
+        "hexes": ["G19"]
+      },
+      {
+        "color": "gray",
+        "removeBorders": [1],
+        "hexes": ["M19"]
+      },
+      {
+        "color": "gray",
+        "towns": [{"name": {"name": "Mogadishu", "reverse": true}, "rotation": 60, "angle": 150, "percent": 0.57735}],
+        "track": [{"side": 3, "type": "sharp"}],
+        "values": [{"angle": 330, "percent": 0.25, "value": 10}],
+        "removeBorders": [2],
+        "hexes": ["Q19"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"companies": ["KR"], "name": {"name": "Nairobi"}}],
+        "hexes": ["N20"]
+      },
+      {
+        "color": "gray",
+        "track": [{"type": "gentle", "side": 2}],
+        "removeBorders": [5],
+        "hexes": ["P20"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"companies": ["COR"], "name": {"name": "Brazzaville", "reverse": true}, "angle": 120, "percent": 0.6},
+                   {"companies": ["CNR"], "name": {"name": "Kinshasa", "reverse": true}, "angle": 240, "percent": 0.6}],
+        "terrain": [{"type": "river", "cost": 60, "percent": 0.5}],
+        "hexes": ["I21"]
+      },
+      {
+        "color": "gray",
+        "removeBorders": [1,2,4],
+        "track": [{"type": "gentle", "side": 3}],
+        "hexes": ["M21"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"companies": ["EAR"], "name": {"name": "Mombasa"}}],
+        "hexes": ["O21"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 80, "percent": 0.5}],
+        "centerTowns": [{"name": {"name": "Luanda"}, "angle": 180, "percent": 0.3}],
+        "hexes": ["H22"]
+      },
+      {
+        "color": "gray",
+        "removeBorders": [5,6],
+        "hexes": ["L22"]
+      },
+      {
+        "color": "gray",
+        "removeBorders": [3,4,6],
+        "track": [{"type": "gentle", "side": 5}],
+        "hexes": ["M23"]
+      },
+      {
+        "color": "gray",
+        "track": [{"type": "straight", "side": 1}],
+        "cities": [{"companies": ["UR"], "name": {"name": "Dar es Salaam", "offset": 75}}],
+        "values": [{"angle": 45, "percent": 0.7, "value": "?+10"}],
+        "removeBorders": [2],
+        "hexes": ["O23"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Lobito"}}],
+        "hexes": ["H24"]
+      },
+      {
+        "color": "plain",
+        "icons": [{"type": "coal"}],
+        "hexes": ["L24"]
+      },
+      {
+        "color": "gray",
+        "removeBorders": [3,5],
+        "hexes": ["N24"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Benguela"}}],
+        "hexes": ["H26"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 20}],
+        "hexes": ["K25"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 30, "percent": 0.5}],
+        "centerTowns": [{"name": {"name": "Lusaka"}, "angle": 180, "percent": 0.3}],
+        "hexes": ["L26"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 30, "percent": 0.5}],
+        "centerTowns": [{"name": {"name": "Salisbury"}, "angle": 180, "percent": 0.3}],
+        "hexes": ["M27"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Bulawayo"}}],
+        "hexes": ["L28"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "river", "cost": 50, "percent": 0.5}],
+        "centerTowns": [{"name": {"name": "Beira"}, "angle": 180, "percent": 0.3}],
+        "hexes": ["N28"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Walvis Bay"}}],
+        "hexes": ["I29"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Lüderitz"}}],
+        "hexes": ["I31"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Mafeking"}}],
+        "hexes": ["K31"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Lourenço Marques"}}],
+        "hexes": ["M31"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"companies": ["CSAR"], "name": {"name": "Pretoria", "reverse": true}, "angle": 120, "percent": 0.6},
+                   {"companies": ["NZA"], "name": {"name": "Johannesburg", "reverse": true}, "angle": 240, "percent": 0.6}],
+        "icons": [{"type": "coal", "percent": 0.5}],
+        "hexes": ["L32"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Durban"}}],
+        "hexes": ["M33"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 30, "percent": 0.5}],
+        "centerTowns": [{"name": {"name": "Port Elizabeth"}, "angle": 180, "percent": 0.3}],
+        "hexes": ["L34"]
+      },
+      {
+        "color": "gray",
+        "track": [{"type": "sharp", "side": 5}],
+        "removeBorders": [6],
+        "hexes": ["I35"]
+      },
+      {
+        "color": "gray",
+        "track": [{"side": 3},{"side": 5}],
+        "cities": [{"companies": ["CGHW"], "name": {"name": "Cape Town", "reverse": true}}],
+        "values": [{"value": "?+40", "angle": 180, "percent": 0.667}],
+        "removeBorders": [3],
+        "hexes": ["J36"]
+      }
+    ],
+    "borders": []
+  }
+}

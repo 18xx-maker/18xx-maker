@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema#",
-  "$id": "https://18xx.kelsin.net/schemas/config.schema.json",
+  "$id": "https://www.18xx-maker.com/schemas/config.schema.json",
 
   "definitions": {
     "font": {
@@ -47,6 +47,7 @@
       "type": "object",
       "properties": {
         "bank": { "type": "boolean" },
+        "border": { "type": "boolean" },
         "capital": { "type": "boolean" },
         "market": { "type": "boolean" },
         "offboard": { "type": "boolean" },
@@ -59,24 +60,34 @@
         "treasury": { "type": "boolean" },
         "value": { "type": "boolean" }
       },
-      "required": ["bank", "capital", "market", "offboard", "par", "private", "revenue", "terrain", "token", "train", "value"],
+      "required": ["bank", "border", "capital", "market", "offboard", "par", "private", "revenue", "terrain", "token", "train", "value"],
       "additionalProperties": false
     },
     "stock": {
       "type": "object",
       "properties": {
         "cell": { "$ref": "#/definitions/dimensions" },
-        "column": { "$ref": "#/definitions/dimensions" },
-        "diag": { "$ref": "#/definitions/dimensions" },
-        "par": { "$ref": "#/definitions/dimensions" }
+        "column": { "type": "number" },
+        "diag": { "type": "number" },
+        "par": { "type": "number" },
+        "display": {
+          "type": "object",
+          "properties": {
+            "legend": { "type": "boolean" },
+            "par": { "type": "boolean" },
+            "roundTracker": { "type": "boolean" }
+          },
+          "required": ["legend", "par", "roundTracker"],
+          "additionalProperties": false
+        }
       },
       "required": ["cell", "column", "diag", "par"],
       "additionalProperties": false
     },
-    "pagination": {
-      "type": "string",
-      "enum": ["equal", "max"]
-    },
+    "cutlines": { "type": "number", "minimum": 0 },
+    "cutlinesOffset": { "type": "number", "minimum": 0 },
+    "bleed": { "type": "number", "minimum": 0 },
+    "margin": { "type": "number", "minimum": 0 },
     "ipo": {
       "type": "object",
       "properties": {
@@ -201,18 +212,21 @@
     "font": { "$ref": "#/definitions/font" }
   },
   "required": [
+    "bleed",
     "companiesTheme",
     "companySvgLogos",
     "coords",
+    "cutlines",
+    "cutlinesOffset",
     "font",
-    "pagination",
+    "margin",
+    "overrideCompanies",
+    "overrideSelection",
     "paper",
     "plainMapCompanies",
     "stock",
     "theme",
-    "tokens",
-    "overrideCompanies",
-    "overrideSelection"
+    "tokens"
   ],
   "additionalProperties": false
 }

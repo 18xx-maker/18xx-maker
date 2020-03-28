@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="-12.5 -12.5 25 25">
+    <g class="color-stroke-black" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+        <path fill="#67a7c4" d="M0-6V8"/>
+        <path fill="#67a7c47" d="M-5-3H5"/>
+        <path d="M-9 5c2 6 16 6 18 0C7 9-7 9-9 5"/>
+        <circle cy="-8" r="2"/>
+    </g>
+    <g class="color-main color-water color-stroke-main color-stroke-water" stroke="#67a7c4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+        <path fill="#67a7c4" d="M0-6V8"/>
+        <path fill="#67a7c47" d="M-5-3H5"/>
+    </g>
+    <g class="color-stroke-main color-stroke-water" fill="none" stroke="#67a7c4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+        <path d="M-9 5c2 6 16 6 18 0C7 9-7 9-9 5"/>
+        <circle cy="-8" r="2"/>
+    </g>
+</svg>

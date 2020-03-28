@@ -11,43 +11,43 @@
     {
       "name": "React JS",
       "abbrev": "R",
-      "color": "cyan",
+      "color": "lightBlue",
       "logo": "webdev/react"
     },
     {
       "name": "Vue JS",
       "abbrev": "V",
-      "color": "green",
+      "color": "brightGreen",
       "logo": "webdev/vue"
     },
     {
       "name": "Ember JS",
       "abbrev": "E",
-      "color": "red",
+      "color": "pink",
       "logo": "webdev/ember"
     },
     {
       "name": "Google Chrome",
       "abbrev": "GC",
-      "color": "blue",
+      "color": "white",
       "logo": "webdev/chrome"
     },
     {
       "name": "Mozilla Firefox",
       "abbrev": "MF",
-      "color": "orange",
+      "color": "gold",
       "logo": "webdev/firefox"
     },
     {
       "name": "Apple Safari",
       "abbrev": "AS",
-      "color": "blue",
+      "color": "turquoise",
       "logo": "webdev/safari"
     },
     {
       "name": "Microsoft Edge",
       "abbrev": "ME",
-      "color": "blue",
+      "color": "navy",
       "logo": "webdev/edge"
     },
     {
@@ -59,7 +59,7 @@
     {
       "name": "Django",
       "abbrev": "DJ",
-      "color": "green",
+      "color": "lime",
       "logo": "webdev/django"
     },
     {
@@ -77,25 +77,25 @@
     {
       "name": "Yarn Package Manager",
       "abbrev": "YARN",
-      "color": "blue",
+      "color": "lavender",
       "logo": "webdev/yarn"
     },
     {
       "name": "Git",
       "abbrev": "GIT",
-      "color": "red",
+      "color": "brown",
       "logo": "dev/git"
     },
     {
       "name": "Hypertext Markup Language",
       "abbrev": "HTML",
-      "color": "red",
+      "color": "lightBrown",
       "logo": "webdev/html5"
     },
     {
       "name": "Cascading Style Sheets",
       "abbrev": "CSS",
-      "color": "blue",
+      "color": "natural",
       "logo": "webdev/css3"
     },
     {
@@ -107,7 +107,7 @@
     {
       "name": "Emacs",
       "abbrev": "E",
-      "color": "purple",
+      "color": "violet",
       "logo": "dev/emacs"
     },
     {
@@ -119,7 +119,7 @@
     {
       "name": "Visual Studio Code",
       "abbrev": "VSC",
-      "color": "blue",
+      "color": "gray",
       "logo": "dev/vscode"
     }
   ]

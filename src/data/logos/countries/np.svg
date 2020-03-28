@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-17.582 -4.664 71.571 87.246">
+    <use stroke="#003893" stroke-width="5.164675" xlink:href="#b"/>
+    <path id="b" fill="#DC143C" d="M-15 37.573593h60L-15 0v80h60l-60-60z"/>
+    <g fill="#fff">
+        <path d="M-11.950277 23.483496a12.840097 12.840097 0 0023.900554 0 11.950277 11.950277 0 01-23.900554 0"/>
+        <g transform="translate(0 29.044556) scale(5.56106)">
+            <circle r="1"/>
+            <g id="jags6">
+                <g id="jags3">
+                    <path id="jag" d="M.19509-.980785L0-1.388785l-.19509.408" transform="rotate(11.25)"/>
+                    <use transform="rotate(22.5)" xlink:href="#jag"/>
+                    <use transform="rotate(45)" xlink:href="#jag"/>
+                </g>
+                <use transform="rotate(67.5)" xlink:href="#jags3"/>
+            </g>
+            <use transform="scale(-1 1)" xlink:href="#jags6"/>
+        </g>
+        <g transform="translate(0 58.786797) scale(8.1434)">
+            <circle r="1"/>
+            <g id="rays4">
+                <g id="rays2">
+                    <path id="ray" d="M.258819.965926L0 1.576749-.258819.965926"/>
+                    <use transform="rotate(180)" xlink:href="#ray"/>
+                </g>
+                <use transform="rotate(90)" xlink:href="#rays2"/>
+            </g>
+            <use transform="rotate(30)" xlink:href="#rays4"/>
+            <use transform="rotate(60)" xlink:href="#rays4"/>
+        </g>
+    </g>
+</svg>

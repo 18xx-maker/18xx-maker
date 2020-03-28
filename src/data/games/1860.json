@@ -186,7 +186,7 @@
     {
       "name": "Ventor, Yarmouth & South Coast",
       "abbrev": "VYSC",
-      "color": "lime"
+      "color": "brightGreen"
     }
   ],
   "trains": [
@@ -555,13 +555,11 @@
         "legend": 0,
         "companies": [
           {
-            "label": "S&C",
-            "color": "purple",
+            "abbrev": "S&C",
             "row": 7
           },
           {
-            "label": "VYSC",
-            "color": "lime",
+            "abbrev": "VYSC",
             "row": 8
           }
         ],

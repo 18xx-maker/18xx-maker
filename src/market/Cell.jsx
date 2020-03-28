@@ -79,6 +79,8 @@ const Cell = ({ cell, data, par }) => {
                     <text
                       key={`arrow-${i}`}
                       fill={arrowColor}
+                      stroke={c("black")}
+                      strokeWidth={0.5}
                       fontFamily="display"
                       fontStyle="bold"
                       fontSize="15"
@@ -96,7 +98,13 @@ const Cell = ({ cell, data, par }) => {
                                                   config.overrideCompanies,
                                                   config.overrideSelection);
 
-                let companyNodes = map(company => {
+                let companyNodes = addIndex(map)((company, index) => {
+                  if (is(String, company)) {
+                    company = {
+                      row: index + 1,
+                      abbrev: company
+                    }
+                  }
 
                   // Look into the original game companies and find this abbrev
                   let companyIndex = findIndex(propEq("abbrev", company.abbrev), (game.companies || []));

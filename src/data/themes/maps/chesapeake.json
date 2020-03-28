@@ -1,0 +1,33 @@
+{
+  "name": "18Chesapeake",
+  "colors": {
+    "plain": "#d1e2c2",
+    "yellow": "#fde900",
+    "green": "#71bf44",
+    "brown": "#cb7745",
+    "gray": "#bcbdc0",
+    "map": {
+      "gray": "#f1f1d9",
+      "water": "#c2dee7"
+    },
+
+    "offboard": "#d6a086",
+    "mountain": "#0d6335",
+    "water": "#445674",
+    "land": "#a8c3a2",
+    "river": "#cde1cc",
+
+    "white": "#f1f1d9",
+    "black": "#000",
+
+    "orange": "#f47d20",
+    "red": "#ec2126",
+
+    "track": "#000",
+    "border": "#f1f1d9",
+    "town": "#000",
+    "centerTown": "#000",
+    "city": "#f1f1d9",
+    "halt": "#666"
+  }
+}

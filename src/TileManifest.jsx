@@ -7,7 +7,7 @@ import tiles from "./data/tiles";
 import Tile from "./Tile";
 import Svg from "./Svg";
 
-import { getTile } from "./TileSheet";
+import { getTile } from "./util";
 
 import games from "./data/games";
 import ColorContext from "./context/ColorContext";

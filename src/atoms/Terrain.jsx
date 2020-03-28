@@ -3,6 +3,8 @@ import Color from "../data/Color";
 
 import Currency from "../util/Currency";
 
+import icons from "../data/icons";
+
 const Terrain = ({ type, size, cost, fontSize, color }) => {
   fontSize = fontSize || 15;
 
@@ -35,15 +37,27 @@ const Terrain = ({ type, size, cost, fontSize, color }) => {
     break;
   }
 
+  let icon = null;
+  let iconSvg = icons[type];
+  if (iconSvg) {
+    let Component = iconSvg.Component;
+    icon = (
+      <g transform={`translate(0 ${translate}) scale(${scale})`}>
+        <Component className={`icon-color-main-${color}`}
+                   width="25" height="25" x="-12.5" y="-12.5" />
+      </g>
+    );
+  }
+
   return (
     <Color>
       {(c,t,s,p) => (
         <g>
-          <g transform={`translate(0 ${translate}) scale(${scale})`}>
-            <use href={`#${type}`} />
-          </g>
+          {icon}
           <text
             fill={p(color || "black")}
+            strokeWidth={(!color || color === "black") ? 0 : 1}
+            stroke={c("black")}
             fontSize={fontSize}
             dominantBaseline="hanging"
             textAnchor="middle"

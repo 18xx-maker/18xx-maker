@@ -9,7 +9,7 @@
     "marketTokens": 2,
     "titleY": -80,
     "titleX": 20,
-    "currency": "Maüse"
+    "currency": "# $"
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/72063/powerrails",
@@ -98,7 +98,7 @@
         "40",
         "100"
       ],
-      "color": "lime",
+      "color": "brightGreen",
       "shares": [
         {
           "quantity": 1,

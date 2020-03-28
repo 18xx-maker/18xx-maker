@@ -1,21 +1,15 @@
 import React from "react";
 import Color from "./data/Color";
 
-import SvgIcon from "./SvgIcon";
-
-const Legend = ({ color, icon, description, right }) => {
+const Legend = ({ color, borderColor, borderWidth, description, right, bottom }) => {
   return (
-    <Color context="companies">
+    <Color>
       {(c,t) => (
         <g>
-          <circle r="15" cx={right ? -15 : 15} cy="0"
-                  stroke="none"
+          <circle r="12" cx={right ? -20 : 20} cy={bottom ? -20 : 20}
+                  stroke={c(borderColor || "black")}
+                  strokeWidth={borderWidth || 2}
                   fill={c(color || "orange")}
-          />
-          <SvgIcon name={icon || "info"}
-                   style={{fill: t(c(color || "orange"))}}
-                   x={right ? -30 : 0}
-                   y={-15}
           />
           <text
             fontFamily="sans-serif"
@@ -25,8 +19,8 @@ const Legend = ({ color, icon, description, right }) => {
             dominantBaseline="middle"
             fill="black"
             stroke="black"
-            x={right ? -34 : 34}
-            y="1"
+            x={right ? -39 : 39}
+            y={bottom ? -20 : 20}
           >
             {description}
           </text>

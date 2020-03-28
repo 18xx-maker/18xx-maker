@@ -1,0 +1,860 @@
+{
+  "info": {
+    "title": "18TN",
+    "subtitle": "The Railroads Comes to Tennessee",
+    "designer": "Mark Derrick",
+    "background": "brown",
+    "currency": "$#"
+  },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/25344/18tn",
+    "rules": "http://dl.deepthoughtgames.com/18TN-Rules.pdf"
+  },
+  "tokens": [
+    "Round"
+  ],
+  "ipo": true,
+  "bank": 8000,
+  "players": [
+    {
+      "number": 3,
+      "certLimit": 16,
+      "capital": 600
+    },
+    {
+      "number": 4,
+      "certLimit": 12,
+      "capital": 450
+    },
+    {
+      "number": 5,
+      "certLimit": 10,
+      "capital": 360
+    }
+  ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "tokenTypes": {
+    "two": [
+      "Home",
+      40
+    ],
+    "three": [
+      "Home",
+      40,
+      100
+    ],
+    "four": [
+      "Home",
+      40,
+      100,
+      100
+    ]
+  },
+  "companies": [
+    {
+      "name": "Southern Railway",
+      "abbrev": "SR",
+      "logo": "SOU",
+      "color": "brightGreen",
+      "token": {"bar": true},
+      "tokens": "four"
+    },
+    {
+      "name": "Gulf, Mobile, and Ohio Railroad",
+      "abbrev": "GMO",
+      "color": "red",
+      "token": {"bar": true},
+      "tokens": "four"
+    },
+    {
+      "name": "Louisville and Nashville Railroad",
+      "abbrev": "L&N",
+      "logo": "LN",
+      "color": "blue",
+      "token": {"bar": true},
+      "tokens": "four"
+    },
+    {
+      "name": "Illinois Central Railroad",
+      "abbrev": "IC",
+      "color": "green",
+      "token": {"bar": true},
+      "tokens": "three",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 30,
+          "shares": 3
+        },
+        {
+          "quantity": 7,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Nashville, Chattanooga, and St. Louis Railroad",
+      "abbrev": "NC&StL",
+      "color": "orange",
+      "token": {"bar": true},
+      "tokens": "two"
+    },
+    {
+      "name": "Tennessee Central Railway",
+      "abbrev": "TC",
+      "color": "black",
+      "token": {"bar": true},
+      "tokens": "two"
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 5,
+      "price": 80,
+      "color": "yellow",
+      "image": "2T",
+      "info": [
+        {
+          "color": "green",
+          "note": "Rusted by 4"
+        }
+      ]
+    },
+    {
+      "name": "3",
+      "quantity": 5,
+      "price": 180,
+      "color": "green",
+      "image": "3T",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Rusted by 6"
+        }
+      ]
+    },
+    {
+      "name": "4",
+      "quantity": 3,
+      "price": 300,
+      "color": "green",
+      "image": "4T",
+      "info": [
+        {
+          "color": "brown",
+          "note": "Obsoleted by 2nd 6"
+        }
+      ]
+    },
+    {
+      "name": "5",
+      "quantity": 2,
+      "price": 450,
+      "color": "brown",
+      "image": "5T",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "6",
+      "quantity": 2,
+      "price": 600,
+      "color": "brown",
+      "image": "6T",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    },
+    {
+      "name": "8",
+      "quantity": 8,
+      "price": 1100,
+      "color": "gray",
+      "image": "Diesel",
+      "info": [
+        {
+          "color": "yellow",
+          "note": "Permanent"
+        }
+      ]
+    }
+  ],
+  "privates": [
+    {
+      "id": "P1",
+      "name": "Tennessee Copper Co.",
+      "price": 20,
+      "revenue": 5,
+      "hex": "H17",
+      "description": "Corporation owner may lay an extra yellow tile in H17 for free."
+    },
+    {
+      "id": "P2",
+      "name": "East Tennessee & Western Carolina Railroad",
+      "price": 40,
+      "revenue": 10,
+      "hex": "F19",
+      "description": "Corporation owner may lay an extra yellow tile in F19 for free."
+    },
+    {
+      "id": "P3",
+      "name": "Memphis & Charleston Railroad",
+      "price": 70,
+      "revenue": 15,
+      "hex": "H3",
+      "description": "Corporation owner may lay an extra yellow tile in H3 for free."
+    },
+    {
+      "id": "P4",
+      "name": "Oneida & Western Railroad",
+      "price": 100,
+      "revenue": 20,
+      "hex": "E16",
+      "description": "Corporation owner may lay an extra yellow tile in E16 for free."
+    },
+    {
+      "id": "P5",
+      "name": "Louisville and Nashville Railroad",
+      "price": 175,
+      "revenue": 0,
+      "company": "L&N",
+      "description": "Closes immediately after purchase."
+    }
+  ],
+  "phases": [
+    {
+      "name": "2",
+      "train": "2",
+      "limit": "4",
+      "number": "5",
+      "tiles": "yellow",
+      "notes": "Only one train per OR"
+    },
+    {
+      "name": "3",
+      "train": "3",
+      "limit": "4",
+      "number": "5",
+      "tiles": "green",
+      "notes": "Private companies may be purchased"
+    },
+    {
+      "name": "3½",
+      "limit": "4",
+      "number": "5",
+      "tiles": "green",
+      "notes": "Triggered by fourth 3, Civil War triggered"
+    },
+    {
+      "name": "4",
+      "train": "4",
+      "rust": "2",
+      "limit": "3",
+      "number": "3",
+      "tiles": "green",
+      "notes": "May buy multiple trains"
+    },
+    {
+      "name": "5",
+      "train": "5",
+      "limit": "2",
+      "number": "2",
+      "tiles": "brown",
+      "notes": "Private companies are closed"
+    },
+    {
+      "name": "6",
+      "train": "6",
+      "limit": "2",
+      "number": "2",
+      "rust": "3",
+      "tiles": "brown"
+    },
+    {
+      "name": "6½",
+      "limit": "2",
+      "number": "2",
+      "rust": "4 obsolete",
+      "tiles": "brown",
+      "notes": "Triggered by second 6"
+    },
+    {
+      "name": "8",
+      "train": "8",
+      "limit": "2",
+      "number": "8",
+      "tiles": "gray"
+    }
+  ],
+  "pools": [
+    {
+      "name": "Market",
+      "notes": [
+        {
+          "color": "orange",
+          "note": "Shares in the market pay dividends to the corporation"
+        },
+        {
+          "color": "brown",
+          "icon": "exclamation",
+          "note": "No more than 50% of a corporation's shares may be in the market at any time"
+        },
+        {
+          "color": "red",
+          "icon": "times",
+          "note": "Shares cannot be sold during the first stock round"
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "OR3",
+      "color": "brown"
+    },
+    {
+      "name": "OR2",
+      "color": "green"
+    },
+    {
+      "name": "OR1",
+      "color": "yellow"
+    },
+    {
+      "name": "SR",
+      "color": "white"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": [
+        "Buy one certificate",
+        "Sell any number of certificates"
+      ],
+      "ordered": false
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Two lays, or one upgrade",
+        "Purchase a station",
+        "Run trains",
+        "Pay dividends or withhold revenue",
+        "Purchase trains"
+      ],
+      "ordered": true,
+      "optional": [
+        "Purchase private companies"
+      ]
+    }
+  ],
+  "stock": {
+    "type": "2D",
+    "display": {
+      "par": {
+        "x": 18,
+        "y": 0
+      },
+      "roundTracker": {
+        "type": "row-reverse",
+        "x": 5,
+        "y": 6
+      },
+      "legend": {
+        "x": 5,
+        "y": 5
+      }
+    },
+    "par": {
+      "values": [
+        90,
+        80,
+        75,
+        70,
+        65
+      ]
+    },
+    "movement": {
+      "up": [
+        "Sold out"
+      ],
+      "down": [
+        "Every share sold"
+      ],
+      "left": [
+        "Revenue withheld"
+      ],
+      "right": [
+        "Revenue paid out"
+      ]
+    },
+    "ledges": [
+      {
+        "color": "red",
+        "coords": ["4 1", "5 1", "5 4", "3 4", "3 2", "4 2", "4 1"]
+      }
+    ],
+
+    "market": [
+      [
+        {
+          "value": 60,
+          "arrow": "down"
+        },
+        70,
+        80,
+        90,
+        100,
+        110,
+        120,
+        130,
+        150,
+        170,
+        190,
+        210,
+        230,
+        250,
+        275,
+        {"value": 300, "width": 2, "color": "orange", "subLabel": "Game End"}
+      ],
+      [
+        {"value": 55, "arrow": "down"},
+        60,
+        70,
+        80,
+        {"value": 90, "par": true},
+        100,
+        110,
+        120,
+        130,
+        150,
+        170,
+        190,
+        210,
+        230,
+        {"value": 250, "arrow": "up"}
+      ],
+      [
+        {"value": 50, "arrow": "down"},
+        55,
+        60,
+        {"value": 70, "par": true},
+        {"value": 80, "par": true},
+        90,
+        100,
+        110,
+        120,
+        130,
+        150,
+        {"value": 170, "arrow": "up"}
+      ],
+      [
+        {"value": 45, "legend": 0, "arrow": "down"},
+        {"value": 50, "legend": 0},
+        55,
+        {"value": 65, "par": true},
+        {"value": 75, "par": true},
+        80,
+        90,
+        {"value": 100, "arrow": "up"}
+      ],
+      [
+        {"value": 40, "legend": 1, "arrow": "down"},
+        {"value": 45, "legend": 0},
+        {"value": 50, "legend": 0},
+        60,
+        70,
+        75,
+        {"value": 80, "arrow": "up"}
+      ],
+      [
+        {"value": 35, "legend": 1, "arrow": "down"},
+        {"value": 40, "legend": 1},
+        {"value": 45, "legend": 0},
+        {"value": 55, "legend": 0},
+        {"value": 65, "legend": 0, "arrow": "up"}
+      ],
+      [
+        {"value": 25, "legend": 1},
+        {"value": 30, "legend": 1},
+        {"value": 40, "legend": 1},
+        {"value": 50, "legend": 0},
+        {"value": 60, "legend": 0, "arrow": "up"}
+      ]
+    ],
+    "legend": [
+      {
+        "color": "yellow",
+        "description": "Shares of this corporation do not count toward the certificate limit"
+      },
+      {
+        "color": "green",
+        "description": "Players may own more than 60% of this corporation"
+      }
+    ]
+  },
+  "tiles": {
+    "3": 2,
+    "4": 3,
+    "5": 3,
+    "6": 3,
+    "7": 4,
+    "8": 13,
+    "9": 12,
+    "57": 4,
+    "58": 4,
+
+    "14": 3,
+    "15": 3,
+    "16": 1,
+    "17": 1,
+    "18": 1,
+    "19": 1,
+    "20": 2,
+    "23": 4,
+    "24": 4,
+    "25": 2,
+    "28": 2,
+    "29": 2,
+    "141": 2,
+    "142": 2,
+    "143": 1,
+    "144": 1,
+    "619": 2,
+
+    "39": 2,
+    "40": 2,
+    "41": 3,
+    "42": 3,
+    "43": 2,
+    "44": 1,
+    "45": 1,
+    "46": 1,
+    "47": 2,
+    "63": 4,
+    "70": 1,
+    "145": 2,
+    "146": 2,
+    "147": 2,
+    "170": 2,
+
+    "TN1": {
+      "color": "green",
+      "values": [{"angle": 210, "percent": 0.8, "value": 40}],
+      "labels": [{"label": "C", "angle": 150, "percent": 0.8}],
+      "cities": [{"size": 2}],
+      "track": [{"side": 1}, {"side": 3}, {"side": 5}]
+    },
+    "TN2": {
+      "color": "green",
+      "values": [{"angle": 210, "percent": 0.8, "value": 40}],
+      "labels": [{"label": "N", "angle": 150, "percent": 0.8}],
+      "cities": [{"size": 2}],
+      "track": [{"side": 1}, {"side": 3}, {"side": 4}, {"side": 5}, {"side": 6}]
+    },
+    "TN3": {
+      "color": "gray",
+      "cities": [
+        {
+          "size": 3
+        }
+      ],
+      "labels": [
+        {
+          "label": "P",
+          "angle": 150,
+          "percent": 0.85
+        }
+      ],
+      "values": [
+        {
+          "angle": 210,
+          "percent": 0.85,
+          "value": 60
+        }
+      ],
+      "track": [
+        {"side": 1},
+        {"side": 2},
+        {"side": 3},
+        {"side": 4},
+        {"side": 5},
+        {"side": 6}
+      ]
+    }
+  },
+  "map": {
+    "players": {
+      "x": 550,
+      "y": 40
+    },
+    "hexes": [
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 5},
+                  {"type": "offboard", "side": 6}],
+        "offBoardRevenue": {
+          "name": {"name": "Cincinnati"},
+          "revenues": [
+            {"color": "yellow", "value": 50},
+            {"color": "brown", "value": 80}
+          ]
+        },
+        "hexes": ["A16"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 4},
+                  {"type": "offboard", "side": 5}],
+        "offBoardRevenue": {
+          "name": {"name": "St. Louis"},
+          "revenues": [
+            {"color": "yellow", "value": 40},
+            {"color": "brown", "value": 60}
+          ]
+        },
+        "hexes": ["C4"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 1},
+                  {"type": "offboard", "side": 6}],
+        "offBoardRevenue": {
+          "name": {"name": "Bristol Coalfields"},
+          "revenues": [
+            {"color": "yellow", "value": 60},
+            {"color": "brown", "value": 40}
+          ]
+        },
+        "hexes": ["E22"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 3},
+                  {"type": "offboard", "side": 4},
+                  {"type": "offboard", "side": 5}],
+        "offBoardRevenue": {
+          "name": {"name": "Little Rock"},
+          "revenues": [
+            {"color": "yellow", "value": 20},
+            {"color": "brown", "value": 40}
+          ]
+        },
+        "hexes": ["H1"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 2},
+                  {"type": "offboard", "side": 3}],
+        "offBoardRevenue": {
+          "name": {"name": "Guld Coast"},
+          "revenues": [
+            {"color": "yellow", "value": 30},
+            {"color": "brown", "value": 50}
+          ]
+        },
+        "hexes": ["J5"]
+      },
+      {
+        "color": "offboard",
+        "track": [{"type": "offboard", "side": 1},
+                  {"type": "offboard", "side": 2}],
+        "offBoardRevenue": {
+          "name": {"name": "Atlanta"},
+          "revenues": [
+            {"color": "yellow", "value": 40},
+            {"color": "brown", "value": 60}
+          ]
+        },
+        "hexes": ["J17"]
+      },
+      {
+        "color": "gray",
+        "cities": [{"companies": ["L&N"], "name": {"name": "Louisville", "offset": 63}, "angle": 150, "percent": 0.5}],
+        "values": [{"value": 30, "angle": 90, "percent": 0.70}],
+        "track": [{"type": "gentle", "side": 4},
+                  {"type": "gentleStopRev", "side": 4},
+                  {"type": "gentleStop", "side": 6}],
+        "hexes": ["B13"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Lexington"}}],
+        "hexes": ["B17"]
+      },
+      {
+        "color": "yellow",
+        "track": [{"type": "straight", "side": 3}],
+        "hexes": ["C12"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Danville"}}],
+        "hexes": ["C16"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Paducah"}, "companies": ["IC"], "angle": 180, "percent": 0.3}],
+        "terrain": [{"type": "water", "cost": 40, "percent": 0.5}],
+        "hexes": ["D7"]
+      },
+      {
+        "color": "yellow",
+        "track": [{"type": "straight", "side": 3}],
+        "values": [{"value": 10, "angle": 300, "percent": 0.5}],
+        "towns": [{"name": {"name": "Bowling Green"}, "rotation": -150}],
+        "hexes": ["D11"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Clarksville"}}],
+        "hexes": ["E10"]
+      },
+      {
+        "color": "plain",
+        "companies": [{"label": "O&W", "angle": 180, "percent": 0.4}],
+        "terrain": [{"type": "mountain", "cost": 60, "percent": 0.4}],
+        "hexes": ["E16"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Dyersburg"}}],
+        "hexes": ["F5"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Nashville"}, "companies": ["TC"], "angle": 180, "percent": 0.3}],
+        "labels": [{"label": "P", "angle": 90, "percent": 0.667}],
+        "terrain": [{"type": "water", "cost": 40, "percent": 0.5}],
+        "hexes": ["F11"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Lebanon"}}],
+        "hexes": ["F13"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Knoxville"}, "companies": ["SR"], "angle": 180, "percent": 0.3}],
+        "terrain": [{"type": "water", "cost": 40, "percent": 0.5}],
+        "hexes": ["F17"]
+      },
+      {
+        "color": "plain",
+        "companies": [{"label": "ET&WNC", "angle": 180, "percent": 0.4}],
+        "terrain": [{"type": "mountain", "cost": 120, "percent": 0.4}],
+        "hexes": ["F19"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{"name": {"name": "Jackson", "offset": 25}, "companies": ["GMO"]}],
+        "track": [{"side": 3},{"side":5}],
+        "values": [{"value": 20, "angle": 270, "percent": 0.667}],
+        "hexes": ["G6"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Murfreesboro"}}],
+        "hexes": ["G12"]
+      },
+      {
+        "color": "plain",
+        "labels": [{"label": "P", "angle": 90, "percent": 0.667}],
+        "companies": [{"label": "M&C", "angle": 270, "percent": 0.667}],
+        "cities": [{"name": {"name": "Memphis"}, "angle": 180, "percent": 0.3}],
+        "terrain": [{"type": "water", "cost": 40, "percent": 0.5}],
+        "hexes": ["H3"]
+      },
+      {
+        "color": "plain",
+        "cities": [{"name": {"name": "Corinth"}, "angle": 180, "percent": 0.3}],
+        "terrain": [{"type": "water", "cost": 40, "percent": 0.5}],
+        "hexes": ["H7"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{"name": {"name": "Chattanooga", "offset": 58.333}, "companies": ["NC&StL"]}],
+        "values": [{"value": 20, "angle": 30, "percent": 0.667}],
+        "labels": [{"label": "P", "angle": 270, "percent": 0.75}],
+        "track": [{"side":1},{"side":5}],
+        "hexes": ["H15"]
+      },
+      {
+        "color": "plain",
+        "companies": [{"label": "TCC", "angle": 180, "percent": 0.4}],
+        "terrain": [{"type": "mountain", "cost": 120, "percent": 0.4}],
+        "hexes": ["H17"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{"name": {"name": "Huntsville"}, "angle": 180, "percent": 0.3}],
+        "terrain": [{"type": "water", "cost": 40, "percent": 0.5}],
+        "hexes": ["I10"]
+      },
+      {
+        "color": "gray",
+        "centerTowns": [{"name": {"reverse": true, "name": "Birmingham"}}],
+        "track": [{"side":2},{"side":3},{"side":4}],
+        "offBoardRevenue": {
+          "percent": 0.6,
+          "revenues": [
+            {"color": "yellow", "value": 30},
+            {"color": "brown", "value": 40}
+          ]
+        },
+        "hexes": ["J11"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 60}],
+        "hexes": ["B15", "C14", "C18", "D15", "D19", "F15", "G14", "H11", "H13", "I14", "I16", "J13"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "mountain", "cost": 120}],
+        "hexes": ["F21", "G18", "G20"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "water", "cost": 40}],
+        "hexes": ["C8", "E8", "F9", "G8", "H9", "I12", "G16"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{"type": "water", "cost": 60}],
+        "hexes": ["D5", "E4", "F3", "G2"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["C6", "D9", "D13", "D17", "E6", "E12", "E14", "E18", "E20",
+                  "F7", "G4", "G10", "H5", "I2", "I4", "I6", "I8", "J15"]
+      }
+    ],
+    "borders": []
+  }
+}

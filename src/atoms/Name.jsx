@@ -1,7 +1,7 @@
 import React from "react";
 import Color from "../data/Color";
 
-const Name = ({ name, color, bgColor, path, rotation, reverse, offset, y, textLength, fontFamily, fontSize, fontStyle, fontWeight }) => {
+const Name = ({ name, strokeColor, strokeWidth, color, bgColor, path, doRotation, rotation, reverse, offset, y, textLength, fontFamily, fontSize, fontStyle, fontWeight }) => {
   fontSize = fontSize || 11;
 
   let nameNode = path ? (
@@ -23,8 +23,10 @@ const Name = ({ name, color, bgColor, path, rotation, reverse, offset, y, textLe
       {(c,t,s,p) => (
         <text
           dy={y}
-          transform={`rotate(${(rotation || 0) + 360})`}
+          transform={`rotate(${((doRotation && rotation) || 0) + 360})`}
           fill={color ? p(color) : (bgColor ? t(c(bgColor)) : p("black"))}
+          strokeWidth={strokeWidth || 0}
+          stroke={c(strokeColor || "black")}
           fontFamily={fontFamily || "sans-serif"}
           fontSize={fontSize || 11}
           fontStyle={fontStyle || "regular"}

@@ -203,7 +203,7 @@
     {
       "name": "London & South Western Railway",
       "abbrev": "LSWR",
-      "color": "lime",
+      "color": "brightGreen",
       "shares": [
         {
           "quantity": 1,

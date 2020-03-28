@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="-12.5 -12.5 25 25">
+    <path class="color-stroke-black" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M-10.5-3Q-5.25-8.6 0-3s5.25 5.6 10.5 0m-21 6Q-5.25-2.6 0 3s5.25 5.6 10.5 0"/>
+    <path class="color-stroke-main color-stroke-water" fill="none" stroke="#67a7c4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M-10.5-3Q-5.25-8.6 0-3s5.25 5.6 10.5 0m-21 6Q-5.25-2.6 0 3s5.25 5.6 10.5 0"/>
+</svg>
