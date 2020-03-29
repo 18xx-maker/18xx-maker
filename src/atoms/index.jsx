@@ -292,6 +292,7 @@ const atoms = [{
   examples: [
     {tunnels: [{cost:40}]},
     {bridges: [{cost:40}]},
+    {diamonds: [{cost:"+20"}]},
     {tunnelEntrances: [{percent:1}]},
     {tunnelEntrances: [{angle:120,percent:1,rotation:-60,color:"red"},
                        {angle:180,percent:1,color:"orange"},
