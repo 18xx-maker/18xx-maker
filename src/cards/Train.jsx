@@ -20,6 +20,7 @@ import fourT from "../images/4T.png";
 import fiveT from "../images/5T.png";
 import sixT from "../images/6T.png";
 import diesel from "../images/Diesel.png";
+import pullman from "../images/Pullman.png";
 
 const images = {
   "2T": twoT,
@@ -27,7 +28,8 @@ const images = {
   "4T": fourT,
   "5T": fiveT,
   "6T": sixT,
-  "Diesel": diesel
+  "Diesel": diesel,
+  "Pullman": pullman
 };
 
 const Train = ({ train, blackBand }) => {
