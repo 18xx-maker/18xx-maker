@@ -73,6 +73,7 @@ const atoms = [{
   group: "Icons",
   examples: [{icons: [{type: "meat"}]},
              {icons: [{type: "coal"}]},
+             {icons: [{type: "coalcar"}]},
              {icons: [{type: "port"}]},
              {icons: [{type: "fish"}]},
              {icons: [{type: "tunnel"}]},
@@ -93,7 +94,10 @@ const atoms = [{
              {icons: [{type: "water"}]},
              {icons: [{type: "river"}]},
              {icons: [{type: "mountain"}]},
-             {icons: [{type: "medium-city"}]}]
+             {icons: [{type: "medium-city"}]},
+             {icons: [{type: "oil-derrick"}]},
+             {icons: [{type: "refinery"}]},
+             {icons: [{type: "steamboat"}]}]
 },{
   group: "Tokens",
   examples: [
