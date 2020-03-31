@@ -2,14 +2,21 @@ import React from "react";
 import Color from "../data/Color";
 import icons from "../data/icons";
 
-const Icon = ({ type, color }) => {
+const Icon = ({ type, color, width, fillColor, strokeColor, strokeWidth }) => {
   let icon;
+  let iconWidth = width || "25";
+  let iconPos = -1 * (width / 2) || "-12.5";
+  let circleR = width - 10 || "15";
+  let fill = fillColor || "white";
+  let stroke = strokeColor || "black";
+  let sWidth = strokeWidth || "2";
 
   if (icons[type]) {
     let iconSvg = icons[type];
     let Component = iconSvg.Component;
     icon = <Component className={`icon-color-main-${color}`}
-                      width="25" height="25" x="-12.5" y="-12.5"/>;
+                      width={iconWidth} height={iconWidth}
+                      x={iconPos} y={iconPos} />;
   }
 
   return (
@@ -17,12 +24,12 @@ const Icon = ({ type, color }) => {
       {(c,t,s,p) => (
         <g>
           <circle
-            fill={p("white")}
-            stroke={p("black")}
-            strokeWidth="2"
+            fill={p(fill)}
+            stroke={p(stroke)}
+            strokeWidth={sWidth}
             cx="0"
             cy="0"
-            r="15"
+            r={circleR}
           />
           {icon}
         </g>
