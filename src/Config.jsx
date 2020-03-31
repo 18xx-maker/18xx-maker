@@ -221,6 +221,8 @@ const Config = ({config, setConfig, resetConfig}) => {
              description="Size of the market tokens. 0.5 inches is the default. 12mm and 10mm are good sizes for the Rails on Boards tokens."/>
       <Input name="tokens.stationTokenSize" label="Station Token Size" dimension={true}
              description="Size of the station tokens. 0.5 inches is the default. 12mm and 10mm are good sizes for the Rails on Boards tokens."/>
+      <Input name="tokens.generalTokenSize" label="General Token Size" dimension={true}
+             description="Size of the tokens specified for the game. 0.5 inches is the default. 12mm and 10mm are good sizes for the Rails on Boards tokens."/>
       <Input name="tokens.reverseMarketTokens" label="Reverse Market Tokens"
              description="Whether to print token stickers for the reverse side of company market tokens. All will print a reverse token for all market tokens (normally 3 or 2 depending on the games settings)."/>
       <h3>Companies</h3>
