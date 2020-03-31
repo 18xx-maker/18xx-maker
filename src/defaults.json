@@ -65,6 +65,7 @@
     "layout": "free",
     "marketTokenSize": 50,
     "stationTokenSize": 37.5,
+    "generalTokenSize": 50,
     "bleed": true,
     "reverseMarketTokens": "all"
   },
