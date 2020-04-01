@@ -125,7 +125,7 @@ const TokenLayout = ({ companies, data, game }) => {
     default:
       break;
     }
-    if (numberMarketTokens == 0) {
+    if (numberMarketTokens === 0) {
       numberReverseMarketTokens = 0;
     }
 
