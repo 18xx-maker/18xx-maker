@@ -93,7 +93,7 @@ const Private = ({
                              </div>}
                   {token && <div className="private__company">
                              <Svg viewBox="-15 -15 30 30">
-                               <Token {...token} outlineWidth={2} width={15} />
+                               <Token {...token} outlineWidth={token.outlineWidth || "2"} width={15} />
                              </Svg>
                            </div>}
                   {icon && <div className="private__icon">
