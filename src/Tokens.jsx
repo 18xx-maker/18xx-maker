@@ -125,6 +125,9 @@ const TokenLayout = ({ companies, data, game }) => {
     default:
       break;
     }
+    if (numberMarketTokens === 0) {
+      numberReverseMarketTokens = 0;
+    }
 
     let reverseMarketTokens = Array(numberReverseMarketTokens).fill(
       <CompanyToken company={company}
