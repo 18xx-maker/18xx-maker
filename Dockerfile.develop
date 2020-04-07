@@ -12,23 +12,22 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /src/*.deb
 
-COPY package.json /home/18xx/
-COPY yarn.lock /home/18xx
-
-WORKDIR /home/18xx
-
-# Install Deps
-RUN yarn
-
-# Copy site code
-COPY . /home/18xx
-VOLUME /home/18xx
-
 RUN groupadd -r 18xx && useradd -r -g 18xx -G audio,video 18xx \
   && mkdir -p /home/18xx/Downloads \
   && chown -R 18xx:18xx /home/18xx
 
 USER 18xx
+WORKDIR /home/18xx
+
+COPY --chown=18xx:18xx package.json /home/18xx/
+COPY --chown=18xx:18xx yarn.lock /home/18xx
+
+# Install Deps
+RUN yarn
+
+# Copy site code
+COPY --chown=18xx:18xx . /home/18xx
+VOLUME /home/18xx
 
 # Command that runs
 ENTRYPOINT ["yarn"]
