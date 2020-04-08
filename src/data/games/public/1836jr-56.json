@@ -218,28 +218,35 @@
   ],
   "privates": [
     {
-      "name": "Amsterdam Canal Company - ACC",
+      "name": "Amsterdam Canal Company",
+      "id": "ACC",
       "price": 20,
       "revenue": 5,
-      "description": "Blocks Hex D6."
+      "description": "No special ability. Blocks hex D6 while owned by player."
     },
     {
-      "name": "Enkhuizen-Stavoren Ferry - E-SF",
+      "name": "Enkhuizen-Stavoren Ferry",
+      "id": "E-SF",
       "price": 40,
       "revenue": 10,
-      "description": "Company may place free tile on B8."
+      "hex": "B8",
+      "description": "Owning corporation may place a free tile on the E-SF hex B8 (the IJsselmeer Causeway) free of cost, in addition to its own tile placement. Blocks hex B8 while owned by player."
     },
     {
-      "name": "Charbonnages du Hainaut - CdH",
+      "name": "Charbonnages du Hainaut",
+      "id": "CdH",
       "price": 50,
       "revenue": 10,
-      "description": "Blocks Hex J8. Company may place tile and token on Hex J8 for F60."
+      "hex": "J8",
+      "description": "Owning corporation may place a tile and station token in the CdH hex J8 for only the F60 cost of the mountain. Blocks hex J8 while owned by player."
     },
     {
-      "name": "Régie des Postes",
+      "name": "Régie des Postes",
+      "id": "RdP",
       "price": 70,
       "revenue": 15,
-      "description": "Owning company may place a +20 token on any city or town."
+      "token": { "label": "+20" },
+      "description": "Owning corporation may place the +20 token on any city or town. The value of that location is increased by F20 for each and every time that corporation’s trains visit it. Once placed, the token cannot be moved."
     }
   ],
   "phases": [
