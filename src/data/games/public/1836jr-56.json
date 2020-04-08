@@ -70,7 +70,7 @@
   },
   "companies": [
     {
-      "name": "Chemins de Fer de L'Etat Belge",
+      "name": "Chemins de Fer de L'État Belge",
       "abbrev": "B",
       "color": "black",
       "tokens": "four"
@@ -278,7 +278,7 @@
   ],
   "pools": [
     {
-      "name": "Market",
+      "name": "Bank Pool",
       "notes": [
         {
           "color": "orange",
