@@ -247,6 +247,14 @@
       "revenue": 15,
       "token": { "label": "+20" },
       "description": "Owning corporation may place the +20 token on any city or town. The value of that location is increased by F20 for each and every time that corporation’s trains visit it. Once placed, the token cannot be moved."
+    },
+    {
+      "name": "Régie des Postes",
+      "id": "RdP",
+      "price": 70,
+      "revenue": 15,
+      "token": { "label": "+20" },
+      "description": "At any time during its operating round, the owning corporation may place the +20 token on any city or town. The value of that location is increased by F20 for each and every time that corporation’s trains visit it. Once placed, the token cannot be moved. Placing the token closes this private company. The token is removed with the purchase of the first 6 Train."
     }
   ],
   "phases": [
