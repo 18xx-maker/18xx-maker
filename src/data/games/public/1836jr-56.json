@@ -51,6 +51,17 @@
       40,
       100,
       100
+    ],
+    "three-cost": [
+      "Free (+ hex)",
+      40,
+      100
+    ],
+    "four-cost": [
+      "Free (+ hex)",
+      40,
+      100,
+      100
     ]
   },
   "shareTypes": {
@@ -79,7 +90,7 @@
       "name": "Grande Compagnie du Luxembourg",
       "abbrev": "GCL",
       "color": "green",
-      "tokens": "four"
+      "tokens": "four-cost"
     },
     {
       "name": "Chemin de Fer du Nord",
@@ -91,7 +102,7 @@
       "name": "Noord-Brabantsch-Duitsche Spoorweg-Maatschappij",
       "abbrev": "NBDS",
       "color": "yellow",
-      "tokens": "three"
+      "tokens": "three-cost"
     },
     {
       "name": "Hollandsche IJzeren Spoorweg Maatschappij",
