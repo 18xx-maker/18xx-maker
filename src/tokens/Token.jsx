@@ -366,6 +366,10 @@ const Token = ({
             fontSize = fontSize * 0.9;
             y = y * 0.9;
           }
+          if (!isNaN(label)) {
+            fontSize *= 1.8;
+            y *= 1.8;
+          }
           content.push(<text
                          key="text"
                          fontFamily="display"
