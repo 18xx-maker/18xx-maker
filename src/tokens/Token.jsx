@@ -21,6 +21,9 @@ const Token = ({
   barHeight, // Height override for white bar
   barBorderColor, // Color of borders
 
+  fontSize, // size of font to use
+  fontFamily, // font family
+
   width, // Set the width directly, overrides the "destination" option
   destination, // Is this a destination token? Sets a smaller default width
   reserved, // Is this a reserved token? Sets it to a gray color
@@ -332,16 +335,24 @@ const Token = ({
             content.push(<Component key="icon" className={classes.join(" ")}
                                     x={x} y={y}
                                     height={size} width={size} />);
+            let fSize = width * 0.48;
+            if (fontSize) {
+              fSize = fontSize;
+              y = fontSize * 11 / 32 + 9;
+            } else if (!isNaN(label)) {
+              fSize *= 1.6;
+              y = fSize * 11 / 32 + 9;
+            }
             content.push(<text
                            key="text"
-                           fontFamily="display"
-                           fontSize={width * 0.48}
+                           fontFamily={fontFamily || "display"}
+                           fontSize={fSize}
                            textAnchor="middle"
                            strokeWidth="0.5"
                            stroke={textStroke}
                            fill={textFill}
                            x="0"
-                           y={(width * 0.12) + 9}
+                           y={y}
                          >
                            {label}
                          </text>
@@ -354,26 +365,27 @@ const Token = ({
                                     height={size} width={size} />);
           }
         } else if (label && label.length > 0) {
-          let fontSize = width * 0.64;
-          let y = width * 0.22;
-          if (label.length > 5) {
-            fontSize = fontSize * 0.7;
-            y = y * 0.7;
-          } else if (label.length > 4) {
-            fontSize = fontSize * 0.8;
-            y = y * 0.8;
-          } else if (label.length > 3) {
-            fontSize = fontSize * 0.9;
-            y = y * 0.9;
+          let fSize;
+          if (fontSize) {
+            fSize = fontSize;
+          } else {
+            fSize = width * 0.64;
+            if (label.length > 5) {
+              fSize = fSize * 0.7;
+            } else if (label.length > 4) {
+              fSize = fSize * 0.8;
+            } else if (label.length > 3) {
+              fSize = fSize * 0.9;
+            }
+            if (!isNaN(label)) {
+              fSize *= 1.6;
+            }
           }
-          if (!isNaN(label)) {
-            fontSize *= 1.8;
-            y *= 1.8;
-          }
+          let y = fSize * 11 / 32;
           content.push(<text
                          key="text"
-                         fontFamily="display"
-                         fontSize={fontSize}
+                         fontFamily={fontFamily || "display"}
+                         fontSize={fSize}
                          textAnchor="middle"
                          strokeWidth="0.5"
                          stroke={textStroke}
