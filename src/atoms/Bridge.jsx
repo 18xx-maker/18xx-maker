@@ -7,7 +7,6 @@ const Bridge = ({ cost, fillColor, strokeColor, strokeWidth, textColor }) => {
   fillColor = fillColor || "water";
   strokeColor = strokeColor || "track";
   strokeWidth = strokeWidth || "2";
-  textColor = textColor || "water";
   return (
     <PhaseContext.Provider value="default">
       <Color context="map">
@@ -23,7 +22,7 @@ const Bridge = ({ cost, fillColor, strokeColor, strokeWidth, textColor }) => {
               y="0"
             />
             <text
-              fill={t(c(textColor))}
+              fill={textColor ? c(textColor) : t(c("water"))}
               fontSize="12"
               dominantBaseline="hanging"
               textAnchor="middle"
