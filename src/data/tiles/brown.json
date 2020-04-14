@@ -4235,6 +4235,7 @@
         "rotate": 180,
         "size": 4,
         "name": {
+          "fontSize": 14,
           "name": "Ipswich",
           "reverse": true
         }
@@ -4307,6 +4308,7 @@
       {
         "size": 2,
         "name": {
+          "fontSize": 14,
           "name": "Harwich"
         }
       }
