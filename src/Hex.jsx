@@ -72,6 +72,12 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
     R.compose(
       R.map(makeTrack),
       R.filter(t => t.cross !== "under")
+    ),R.compose(
+      R.map(makeBorder),
+      R.filter(t => t.cross === "top")
+    ),R.compose(
+      R.map(makeTrack),
+      R.filter(t => t.cross === "top")
     )
   ]);
 
