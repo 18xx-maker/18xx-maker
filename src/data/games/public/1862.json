@@ -373,6 +373,7 @@
     }
   ],
   "stock": {
+    "title": false,
     "type": "1Diag",
     "display": {
       "par": {
@@ -381,6 +382,7 @@
       }
     },
     "par": {
+      "title": false,
       "width": 1,
       "height": 2,
       "values": [
