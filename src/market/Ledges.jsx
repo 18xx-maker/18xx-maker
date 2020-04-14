@@ -10,7 +10,7 @@ const ledgeCoord = (coord, data) => {
   let x = parseInt(coords[0]);
   let y = parseInt(coords[1]);
 
-  return `${x * data.width} ${y * data.height + 50}`;
+  return `${x * data.width} ${y * data.height + (data.stock.title === false ? 0 : 50)}`;
 };
 
 const Ledge = ({ ledge, data }) => {
