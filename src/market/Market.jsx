@@ -152,7 +152,7 @@ const Market = ({data, title}) => {
             <g>
               {addIndex(map)((legend, i) => {
                 let current = left;
-                left += 40 + legend.description.length * 8;
+                left += 100 + legend.description.length * 6.5;
                 return (
                   <g
                     key={`pool-note-${i}`}
@@ -182,7 +182,7 @@ const Market = ({data, title}) => {
             <g>
               {addIndex(map)((legend, i) => {
                 let current = left;
-                left += 40 + legend.description.length * 8;
+                left += 100 + legend.description.length * 6.5;
                 return (
                   <g
                     key={`pool-note-${i}`}
