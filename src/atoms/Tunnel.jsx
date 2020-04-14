@@ -3,10 +3,14 @@ import Color from "../data/Color";
 import PhaseContext from "../context/PhaseContext";
 import Currency from "../util/Currency";
 
-const Tunnel = ({ cost, fillColor, strokeColor, strokeWidth, textColor }) => {
+const Tunnel = ({ cost, fillColor, strokeColor, strokeWidth, textColor, fontFamily, fontSize, fontWeight }) => {
   fillColor = fillColor || "mountain";
   strokeColor = strokeColor || "black";
   strokeWidth = strokeWidth || "2";
+  textColor = textColor || "mountain";
+  fontFamily = fontFamily || "display";
+  fontSize = fontSize || "12";
+  fontWeight = fontWeight || "bold";
   return (
     <PhaseContext.Provider value="default">
       <Color context="map">
@@ -23,7 +27,9 @@ const Tunnel = ({ cost, fillColor, strokeColor, strokeWidth, textColor }) => {
             />
             <text
               fill={textColor ? c(textColor) : t(c("mountain"))}
-              fontSize="12"
+              fontFamily={fontFamily}
+              fontSize={fontSize}
+              fontWeight={fontWeight}
               dominantBaseline="hanging"
               textAnchor="middle"
               x="0"
