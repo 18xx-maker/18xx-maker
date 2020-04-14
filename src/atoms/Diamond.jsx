@@ -3,11 +3,15 @@ import Color from "../data/Color";
 import PhaseContext from "../context/PhaseContext";
 import Currency from "../util/Currency";
 
-const Diamond = ({ cost, fillColor, strokeColor, strokeWidth, textColor }) => {
+const Diamond = ({ cost, fillColor, strokeColor, strokeWidth, textColor, fontFamily, fontSize, fontWeight  }) => {
   fillColor = fillColor || "mountain";
   strokeColor = strokeColor || "black";
   strokeWidth = strokeWidth || "2";
   textColor = textColor || "mountain";
+  fontFamily = fontFamily || "display";
+  fontSize = fontSize || "12";
+  fontWeight = fontWeight || "bold";
+  let texty = -5 - (fontSize-12)/6;
   return (
     <PhaseContext.Provider value="default">
       <Color context="map">
@@ -23,12 +27,14 @@ const Diamond = ({ cost, fillColor, strokeColor, strokeWidth, textColor }) => {
               y="0"
             />
             <text
-              fill={t(c(textColor))}
-              fontSize="12"
+              fill={textColor ? c(textColor) : t(c("mountain"))}
+              fontFamily={fontFamily}
+              fontSize={fontSize}
+              fontWeight={fontWeight}
               dominantBaseline="hanging"
               textAnchor="middle"
               x="-2"
-              y="-5"
+              y={texty}
             >
               <Currency value={cost} type="terrain" />
             </text>
