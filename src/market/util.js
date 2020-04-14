@@ -44,13 +44,13 @@ export const getMarketData = (stock, config) => {
   // Now with width and height set we can figure out total height and total
   // width
   let totalWidth = width * columns;
-  let totalHeight = height * rows + 50; // Add space for the title
+  let totalHeight = height * rows + (stock.title === false ? 0 : 50);
 
   // Are we displaying par, if so does this add to the height or width?
   if (stock.display && stock.display.par) {
     let parData = getParData(stock, config);
     let parTotalWidth = parData.totalWidth + (width * stock.display.par.x);
-    let parTotalHeight = parData.totalHeight + (height * stock.display.par.y);
+    let parTotalHeight = parData.totalHeight + ((stock.type === "1Diag" ? height / 2 : height) * stock.display.par.y);
 
     totalWidth = max(totalWidth, parTotalWidth);
     totalHeight = max(totalHeight, parTotalHeight);
@@ -143,7 +143,7 @@ export const getParData = (stock, config) => {
   let rows = length(stock.par.values);
   let columns = Math.max(1, getMaxLength(stock.par.values));
   let totalWidth = width * columns;
-  let totalHeight = height * rows + 50; // Add space for the title
+  let totalHeight = height * rows + (stock.title === false ? 0 : 50);
 
   return {
     values,
