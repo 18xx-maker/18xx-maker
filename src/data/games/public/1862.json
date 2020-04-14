@@ -22,6 +22,9 @@
     "non-chartered": "#e78a61",
     "ignore-first": "#95b9c7",
     "ignore-two": "#85bb65",
+    "freight": "#aa478d",
+    "local": "#8de0f9",
+    "express": "#ffab90",
     "_dark-blue": "#2b358e",
     "_purple": "#a73082",
     "_light-yellow": "#fff676",
@@ -52,7 +55,181 @@
       ""
     ]
   },
-  "tokens": [],
+  "tokens": [
+    {
+      "label": "A",
+      "color": "freight"
+    },
+    {
+      "label": "A",
+      "color": "local"
+    },
+    {
+      "label": "A",
+      "color": "express"
+    },
+    {
+      "label": "B",
+      "color": "freight"
+    },
+    {
+      "label": "B",
+      "color": "local"
+    },
+    {
+      "label": "B",
+      "color": "express"
+    },
+    {
+      "label": "C",
+      "color": "freight"
+    },
+    {
+      "label": "C",
+      "color": "local"
+    },
+    {
+      "label": "C",
+      "color": "express"
+    },
+    {
+      "label": "WStI",
+      "color": "_dark-yellow",
+      "bar": "_purple"
+    },
+    {
+      "label": "N&E",
+      "color": "_dark-green",
+      "bar": "_dark-gray"
+    },
+    {
+      "label": "L&H",
+      "color": "_red",
+      "bar": "_light-blue-1"
+    },
+    {
+      "label": "L&E",
+      "color": "_dark-yellow",
+      "bar": "_red"
+    },
+    {
+      "label": "E&H",
+      "color": "_light-orange",
+      "bar": "_light-yellow"
+    },
+    {
+      "label": "NGC",
+      "color": "_black",
+      "bar": "_dark-yellow"
+    },
+    {
+      "label": "L&D",
+      "color": "_dark-blue",
+      "bar": "_dark-orange"
+    },
+    {
+      "label": "I&B",
+      "color": "_light-gray",
+      "bar": "_black"
+    },
+    {
+      "label": "SVR",
+      "color": "_dark-green",
+      "bar": "_brown"
+    },
+    {
+      "label": "ECR",
+      "color": "_purple",
+      "bar": "_dark-blue"
+    },
+    {
+      "label": "WNR",
+      "color": "_red",
+      "bar": "_brown"
+    },
+    {
+      "label": "W&F",
+      "color": "_lime",
+      "bar": "_green"
+    },
+    {
+      "label": "N&B",
+      "color": "_dark-orange",
+      "bar": "_light-gray"
+    },
+    {
+      "label": "EUR",
+      "color": "_purple",
+      "bar": "_red"
+    },
+    {
+      "label": "ENR",
+      "color": "_blue",
+      "bar": "_dark-yellow"
+    },
+    {
+      "label": "ESR",
+      "color": "_light-green",
+      "bar": "_dark-green"
+    },
+    {
+      "label": "WVR",
+      "color": "_pink",
+      "bar": "_purple"
+    },
+    {
+      "label": "FDR",
+      "color": "_red",
+      "bar": "_light-orange"
+    },
+    {
+      "label": "Y&N",
+      "color": "_red",
+      "bar": "_black"
+    },
+    {
+      "label": "N&S",
+      "color": "_light-blue-2",
+      "bar": "_blue"
+    }
+  ],
+  "tiles": {
+    "5": 10,
+    "6": 10,
+    "14": 11,
+    "15": 10,
+    "16": 2,
+    "17": 5,
+    "18": 5,
+    "19": 4,
+    "20": 6,
+    "21": 2,
+    "22": 2,
+    "53Y": 4,
+    "57": 12,
+    "61Y": 3,
+    "201": 2,
+    "202": 4,
+    "611": 8,
+    "619": 10,
+    "621": 2,
+    "778": 4,
+    "779": 3,
+    "780": 3,
+    "790": 4,
+    "791": 4,
+    "792": 2,
+    "793": 3,
+    "794": 3,
+    "795": 1,
+    "796": 3,
+    "797": 1,
+    "798": 3,
+    "891Y": 3,
+    "8850": 6,
+    "8851": 8,
+    "8852": 12
+  },
   "companies": [
     {
       "abbrev": "WStI",
@@ -1687,6 +1864,26 @@
             "side": 4
           }
         ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Port of Lowestoft"
+          },
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "60"
+            },
+            {
+              "color": "green",
+              "cost": "C 90"
+            },
+            {
+              "color": "brown",
+              "cost": "E 120"
+            }
+          ]
+        },
         "removeBorders": [
           5
         ],
@@ -1813,26 +2010,6 @@
             "side": 3
           }
         ],
-        "offBoardRevenue": {
-          "name": {
-            "name": "Port of Lowestoft"
-          },
-          "rows": 2,
-          "revenues": [
-            {
-              "color": "yellow",
-              "cost": "60"
-            },
-            {
-              "color": "green",
-              "cost": "C 90"
-            },
-            {
-              "color": "brown",
-              "cost": "E 120"
-            }
-          ]
-        },
         "removeBorders": [
           2,
           4
