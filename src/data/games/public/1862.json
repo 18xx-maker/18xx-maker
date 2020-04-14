@@ -802,7 +802,9 @@
           }
         ],
         "offBoardRevenue": {
+          "x": -5,
           "name": {
+            "fontSize": 14,
             "name": "Midlands"
           },
           "rows": 2,
@@ -867,7 +869,9 @@
           }
         ],
         "offBoardRevenue": {
+          "x": -5,
           "name": {
+            "fontSize": 14,
             "name": "The West"
           },
           "rows": 2,
@@ -949,6 +953,7 @@
         "centerTowns": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Holbeach"
             }
           }
@@ -962,6 +967,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Wisbech"
             },
             "companies": [
@@ -978,6 +984,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "March"
             }
           }
@@ -992,6 +999,7 @@
           {
             "y": -15,
             "name": {
+              "fontSize": 14,
               "name": "Cambridge"
             }
           }
@@ -1011,6 +1019,7 @@
         "centerTowns": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Royston"
             }
           }
@@ -1024,6 +1033,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Bishop's Stortford"
             },
             "companies": [
@@ -1071,6 +1081,7 @@
         ],
         "offBoardRevenue": {
           "name": {
+            "fontSize": 14,
             "name": "King's Lynn Port"
           },
           "rows": 2,
@@ -1099,6 +1110,7 @@
           {
             "y": -15,
             "name": {
+              "fontSize": 14,
               "name": "King's Lynn"
             },
             "companies": [
@@ -1121,6 +1133,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Downham Market"
             },
             "companies": [
@@ -1138,6 +1151,7 @@
           {
             "y": -15,
             "name": {
+              "fontSize": 14,
               "name": "Ely"
             },
             "companies": [
@@ -1160,6 +1174,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Newmarket"
             },
             "companies": [
@@ -1176,6 +1191,7 @@
         "centerTowns": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Great Dunmow"
             }
           }
@@ -1202,6 +1218,7 @@
         ],
         "offBoardRevenue": {
           "name": {
+            "fontSize": 14,
             "name": "London"
           },
           "rows": 2,
@@ -1248,6 +1265,7 @@
         "centerTowns": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Hunstanton"
             }
           }
@@ -1261,6 +1279,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Swaffham"
             },
             "companies": [
@@ -1277,6 +1296,7 @@
         "centerTowns": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Brandon"
             }
           }
@@ -1291,6 +1311,7 @@
           {
             "y": -15,
             "name": {
+              "fontSize": 14,
               "name": "Bury St. Edmunds"
             },
             "companies": [
@@ -1313,6 +1334,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Sudbury"
             },
             "companies": [
@@ -1329,6 +1351,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Witham"
             },
             "companies": [
@@ -1377,6 +1400,7 @@
         ],
         "offBoardRevenue": {
           "name": {
+            "fontSize": 14,
             "name": "Port of Wells"
           },
           "rows": 2,
@@ -1404,6 +1428,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Wells-next-the-Sea"
             },
             "companies": [
@@ -1420,6 +1445,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Fakenham"
             },
             "companies": [
@@ -1436,6 +1462,7 @@
         "centerTowns": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Watton"
             }
           }
@@ -1449,6 +1476,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Thetford"
             },
             "companies": [
@@ -1465,6 +1493,7 @@
         "centerTowns": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Stowmarket"
             }
           }
@@ -1479,6 +1508,7 @@
           {
             "y": -15,
             "name": {
+              "fontSize": 14,
               "name": "Colchester"
             },
             "companies": [
@@ -1501,6 +1531,7 @@
         "centerTowns": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Tiptree"
             }
           }
@@ -1548,6 +1579,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Cromer"
             },
             "companies": [
@@ -1565,6 +1597,7 @@
           {
             "y": -15,
             "name": {
+              "fontSize": 14,
               "name": "Norwich"
             }
           }
@@ -1584,6 +1617,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Diss"
             }
           }
@@ -1597,6 +1631,7 @@
         "centerTowns": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Framlingham"
             }
           }
@@ -1611,6 +1646,7 @@
           {
             "y": -15,
             "name": {
+              "fontSize": 14,
               "name": "Ipswich"
             },
             "companies": [
@@ -1634,6 +1670,7 @@
           {
             "y": -15,
             "name": {
+              "fontSize": 14,
               "name": "Harwich"
             }
           }
@@ -1658,6 +1695,7 @@
         ],
         "offBoardRevenue": {
           "name": {
+            "fontSize": 14,
             "name": "Holland"
           },
           "rows": 2,
@@ -1688,6 +1726,7 @@
         "color": "water",
         "offBoardRevenue": {
           "name": {
+            "fontSize": 14,
             "name": "Cromer Port"
           },
           "rows": 2,
@@ -1719,6 +1758,7 @@
         "centerTowns": [
           {
             "name": {
+              "fontSize": 14,
               "name": "North Walsham"
             }
           }
@@ -1732,6 +1772,7 @@
         "centerTowns": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Acle"
             }
           }
@@ -1745,6 +1786,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Beccles"
             },
             "companies": [
@@ -1761,6 +1803,7 @@
         "centerTowns": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Woodbridge"
             }
           }
@@ -1774,6 +1817,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Felixstowe"
             },
             "companies": [
@@ -1825,6 +1869,7 @@
           {
             "y": -15,
             "name": {
+              "fontSize": 14,
               "name": "Great Yarmouth"
             },
             "companies": [
@@ -1847,6 +1892,7 @@
         "cities": [
           {
             "name": {
+              "fontSize": 14,
               "name": "Lowestoft"
             },
             "companies": [
@@ -1868,6 +1914,7 @@
         ],
         "offBoardRevenue": {
           "name": {
+            "fontSize": 14,
             "name": "Port of Lowestoft"
           },
           "rows": 2,
@@ -1917,7 +1964,9 @@
           }
         ],
         "offBoardRevenue": {
+          "x": 5,
           "name": {
+            "fontSize": 14,
             "name": "Denmark"
           },
           "rows": 2,
@@ -1954,6 +2003,7 @@
         ],
         "offBoardRevenue": {
           "name": {
+            "fontSize": 14,
             "name": "Great Yarmouth Port"
           },
           "rows": 2,
