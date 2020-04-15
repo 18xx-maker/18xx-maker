@@ -97,6 +97,8 @@ const Token = ({
         // token / bar
         let textStroke = "none";
         let textFill = t(c(color) || p("white"));
+        let scaling = width / 25;
+        let numbersOnlyScaling = 1.6;
 
         // Background fill to use for the main token circle object
         let tokenFill = c(color) || p("white");
@@ -323,7 +325,10 @@ const Token = ({
         }
 
         if (shield) {
-            shapes.push(<g width="50" height="50" transform="translate(-24, -24) scale(0.08)">
+            let scale = scaling * 0.08;
+            let trans = scaling * -24;
+            let wh = scaling * 50;
+            shapes.push(<g width={`${wh}`} height={`${wh}`} transform={`translate(${trans}, ${trans}) scale(${scale})`}>
                         <path
                           fill={shield === true ? p("white") : c(shield)}
                           d="M515 314.2c15.1 32.1 18.4 41.5 17.9 70.7-1.5 97.2-76 115.6-117 115-28.6-.4-76.5 2-109.4 32.7h-.8c-32.9-30.7-80.8-33.2-109.4-32.7-41 .6-115.5-17.8-117-115-.5-29.1 2.9-38.7 17.9-70.7 22.9-34.1 15.3-108.1 15.3-108.1h387.2c-8.4 33.9-7.7 74 15.3 108.1z"/>
@@ -343,7 +348,10 @@ const Token = ({
         }
 
         if (shield3) {
-            shapes.push(<g width="50" height="50" transform="translate(-24, -24) scale(0.08)">
+            let scale = scaling * 0.08;
+            let trans = scaling * -24;
+            let wh = scaling * 50;
+            shapes.push(<g width={`${wh}`} height={`${wh}`} transform={`translate(${trans}, ${trans}) scale(${scale})`}>
                         <path
                           fill={shield3 === true ? p("white") : c(shield3)}
                           d="M514.8 313.8c15.1 32 18.4 41.6 17.9 70.7-1.6 97.2-76 115.6-117 115-28.5-.4-76.4 2.1-109.3 32.7h-.9c-32.9-30.7-80.8-33.1-109.3-32.7-41 .6-115.4-17.8-117-115-.4-29.1 2.9-38.7 17.9-70.7 23-34.1 15.4-108 15.4-108h386.9c-8.2 33.8-7.6 73.9 15.4 108z"/>
@@ -386,16 +394,29 @@ const Token = ({
             let x = -0.5 * width;
             let y = -0.75 * width;
             let size = 1 * width;
+            let fSize;
             content.push(<Component key="icon" className={classes.join(" ")}
                                     x={x} y={y}
                                     height={size} width={size} />);
-            let fSize = width * 0.48;
             if (fontSize) {
               fSize = fontSize;
-              y = fontSize * 11 / 32 + 9;
-            } else if (!isNaN(label)) {
-              fSize *= 1.6;
-              y = fSize * 11 / 32 + 9;
+            } else {
+              fSize = width * 0.48;
+              if (label.length > 5) {
+                fSize = fSize * 0.7;
+              } else if (label.length > 4) {
+                fSize = fSize * 0.8;
+              } else if (label.length > 3) {
+                fSize = fSize * 0.9;
+              }
+            }
+            if (!isNaN(label)) {
+              fSize *= numbersOnlyScaling;
+            }
+            y = fSize * 11 / 32 + 9;
+            if (shield || shield3) {
+              fSize *= scaling;
+              y += scaling * 5;
             }
             content.push(<text
                            key="text"
@@ -432,12 +453,13 @@ const Token = ({
               fSize = fSize * 0.9;
             }
             if (!isNaN(label)) {
-              fSize *= 1.6;
+              fSize *= numbersOnlyScaling;
             }
           }
           let y = fSize * 11 / 32;
           if (shield || shield3) {
-            y+=5;
+            fSize *= scaling;
+            y += scaling * 5;
           }
           content.push(<text
                          key="text"
