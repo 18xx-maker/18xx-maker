@@ -191,8 +191,8 @@
     },
     {
       "name": "8",
-      "quantity": 8,
-      "price": 1100,
+      "quantity": 7,
+      "price": 700,
       "color": "gray",
       "image": "Diesel",
       "info": [
@@ -210,7 +210,7 @@
       "price": 20,
       "revenue": 5,
       "hex": "H17",
-      "description": "Corporation owner may lay an extra yellow tile in H17 for free."
+      "description": "Corporation owner may lay a free yellow tile in H17. It need not be connected to an existing station token of the corporation. It does not count toward the corporation's normal limit of two yellow tile lays per turn."
     },
     {
       "id": "P2",
@@ -218,7 +218,7 @@
       "price": 40,
       "revenue": 10,
       "hex": "F19",
-      "description": "Corporation owner may lay an extra yellow tile in F19 for free."
+      "description": "Corporation owner may lay a free yellow tile in F19. It need not be connected to an existing station token of the corporation. It does not count toward the corporation's normal limit of two yellow tile lays per turn."
     },
     {
       "id": "P3",
@@ -226,7 +226,7 @@
       "price": 70,
       "revenue": 15,
       "hex": "H3",
-      "description": "Corporation owner may lay an extra yellow tile in H3 for free."
+      "description": "Corporation owner may lay a free yellow tile in H3. It need not be connected to an existing station token of the corporation. It does not count toward the corporation's normal limit of two yellow tile lays per turn."
     },
     {
       "id": "P4",
@@ -234,7 +234,7 @@
       "price": 100,
       "revenue": 20,
       "hex": "E16",
-      "description": "Corporation owner may lay an extra yellow tile in E16 for free."
+      "description": "Corporation owner may lay a free yellow tile in E16. It need not be connected to an existing station token of the corporation. It does not count toward the corporation's normal limit of two yellow tile lays per turn."
     },
     {
       "id": "P5",
@@ -242,7 +242,7 @@
       "price": 175,
       "revenue": 0,
       "company": "L&N",
-      "description": "Closes immediately after purchase."
+      "description": "The purchaser of this private company reveives the president's certificate of the L&N Railroad and must immediately set its par value. The L&N automatically floats once this private company is purchased and is an exception to the normal rule. This private company closes immediately after the par value is set."
     }
   ],
   "phases": [
@@ -252,7 +252,7 @@
       "limit": "4",
       "number": "5",
       "tiles": "yellow",
-      "notes": "Only one train per OR"
+      "notes": ["Can only buy one train per OR from bank (trains brought from other companies do not count towards this limit)", "Special case: private companies may be purchased during OR1"]
     },
     {
       "name": "3",
@@ -264,10 +264,8 @@
     },
     {
       "name": "3½",
-      "limit": "4",
-      "number": "5",
       "tiles": "green",
-      "notes": "Triggered by fourth 3, Civil War triggered"
+      "notes": "Civil War triggered by fourth 3T"
     },
     {
       "name": "4",
@@ -276,7 +274,7 @@
       "limit": "3",
       "number": "3",
       "tiles": "green",
-      "notes": "May buy multiple trains"
+      "notes": "May buy multiple trains from bank"
     },
     {
       "name": "5",
@@ -296,17 +294,15 @@
     },
     {
       "name": "6½",
-      "limit": "2",
-      "number": "2",
       "rust": "4 obsolete",
       "tiles": "brown",
-      "notes": "Triggered by second 6"
+      "notes": "Triggered by second 6T"
     },
     {
       "name": "8",
       "train": "8",
       "limit": "2",
-      "number": "8",
+      "number": "7",
       "tiles": "gray"
     }
   ],
@@ -353,8 +349,8 @@
     {
       "name": "Stock Round",
       "steps": [
-        "Buy one certificate",
-        "Sell any number of certificates"
+        "Sell any number of certificates",
+        "Buy one certificate"
       ],
       "ordered": false
     },
@@ -672,7 +668,7 @@
         "track": [{"type": "offboard", "side": 2},
                   {"type": "offboard", "side": 3}],
         "offBoardRevenue": {
-          "name": {"name": "Guld Coast"},
+          "name": {"name": "Gulf Coast"},
           "revenues": [
             {"color": "yellow", "value": 30},
             {"color": "brown", "value": 50}
@@ -787,7 +783,7 @@
         "labels": [{"label": "P", "angle": 90, "percent": 0.667}],
         "companies": [{"label": "M&C", "angle": 270, "percent": 0.667}],
         "cities": [{"name": {"name": "Memphis"}, "angle": 180, "percent": 0.3}],
-        "terrain": [{"type": "water", "cost": 40, "percent": 0.5}],
+        "terrain": [{"type": "water", "cost": 60, "percent": 0.5}],
         "hexes": ["H3"]
       },
       {
