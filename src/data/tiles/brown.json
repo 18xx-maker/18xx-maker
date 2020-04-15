@@ -4293,7 +4293,7 @@
     "values": [
       {
         "angle": 270,
-        "percent": 0.9,
+        "percent": 0.85,
         "value": 60
       }
     ],
@@ -4301,11 +4301,12 @@
       {
         "label": "Y",
         "angle": 90,
-        "percent": 0.9
+        "percent": 0.85
       }
     ],
     "cities": [
       {
+        "rotate": 30,
         "size": 2,
         "name": {
           "fontSize": 14,
