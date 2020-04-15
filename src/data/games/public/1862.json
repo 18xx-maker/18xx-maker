@@ -58,139 +58,188 @@
   "tokens": [
     {
       "label": "A",
-      "color": "freight"
+      "color": "freight",
+      "fontSize": 18
     },
     {
       "label": "A",
-      "color": "local"
+      "color": "local",
+      "fontSize": 18
     },
     {
       "label": "A",
-      "color": "express"
+      "color": "express",
+      "fontSize": 18
     },
     {
       "label": "B",
-      "color": "freight"
+      "color": "freight",
+      "fontSize": 18
     },
     {
       "label": "B",
-      "color": "local"
+      "color": "local",
+      "fontSize": 18
     },
     {
       "label": "B",
-      "color": "express"
+      "color": "express",
+      "fontSize": 18
     },
     {
       "label": "C",
-      "color": "freight"
+      "color": "freight",
+      "fontSize": 18
     },
     {
       "label": "C",
-      "color": "local"
+      "color": "local",
+      "fontSize": 18
     },
     {
       "label": "C",
-      "color": "express"
+      "color": "express",
+      "fontSize": 18
     },
     {
       "label": "WStI",
-      "color": "_dark-yellow",
-      "bar": "_purple"
+      "color": "_purple",
+      "fontSize": 18,
+      "bar": "_dark-yellow",
+      "barHeight": 25
     },
     {
       "label": "N&E",
-      "color": "_dark-green",
-      "bar": "_dark-gray"
+      "color": "_dark-gray",
+      "fontSize": 18,
+      "bar": "_dark-green",
+      "barHeight": 25
     },
     {
       "label": "L&H",
-      "color": "_red",
-      "bar": "_light-blue-1"
+      "color": "_light-blue-1",
+      "fontSize": 18,
+      "bar": "_red",
+      "barHeight": 25
     },
     {
       "label": "L&E",
-      "color": "_dark-yellow",
-      "bar": "_red"
+      "color": "_red",
+      "fontSize": 18,
+      "bar": "_dark-yellow",
+      "barHeight": 25
     },
     {
       "label": "E&H",
-      "color": "_light-orange",
-      "bar": "_light-yellow"
+      "color": "_light-yellow",
+      "fontSize": 18,
+      "bar": "_light-orange",
+      "barHeight": 25
     },
     {
       "label": "NGC",
-      "color": "_black",
-      "bar": "_dark-yellow"
+      "color": "_dark-yellow",
+      "fontSize": 18,
+      "bar": "_black",
+      "barHeight": 25
     },
     {
       "label": "L&D",
-      "color": "_dark-blue",
-      "bar": "_dark-orange"
+      "color": "_dark-orange",
+      "fontSize": 18,
+      "bar": "_dark-blue",
+      "barHeight": 25
     },
     {
       "label": "I&B",
-      "color": "_light-gray",
-      "bar": "_black"
+      "color": "_black",
+      "fontSize": 18,
+      "bar": "_light-gray",
+      "barHeight": 25
     },
     {
       "label": "SVR",
-      "color": "_dark-green",
-      "bar": "_brown"
+      "color": "_brown",
+      "fontSize": 18,
+      "bar": "_dark-green",
+      "barHeight": 25
     },
     {
       "label": "ECR",
-      "color": "_purple",
-      "bar": "_dark-blue"
+      "color": "_dark-blue",
+      "fontSize": 18,
+      "bar": "_purple",
+      "barHeight": 25
     },
     {
       "label": "WNR",
-      "color": "_red",
-      "bar": "_brown"
+      "color": "_brown",
+      "fontSize": 18,
+      "bar": "_red",
+      "barHeight": 25
     },
     {
       "label": "W&F",
-      "color": "_lime",
-      "bar": "_green"
+      "color": "_green",
+      "fontSize": 18,
+      "bar": "_lime",
+      "barHeight": 25
     },
     {
       "label": "N&B",
-      "color": "_dark-orange",
-      "bar": "_light-gray"
+      "color": "_light-gray",
+      "fontSize": 18,
+      "bar": "_dark-orange",
+      "barHeight": 25
     },
     {
       "label": "EUR",
-      "color": "_purple",
-      "bar": "_red"
+      "color": "_red",
+      "fontSize": 18,
+      "bar": "_purple",
+      "barHeight": 25
     },
     {
       "label": "ENR",
-      "color": "_blue",
-      "bar": "_dark-yellow"
+      "color": "_dark-yellow",
+      "fontSize": 18,
+      "bar": "_blue",
+      "barHeight": 25
     },
     {
       "label": "ESR",
-      "color": "_light-green",
-      "bar": "_dark-green"
+      "color": "_dark-green",
+      "fontSize": 18,
+      "bar": "_light-green",
+      "barHeight": 25
     },
     {
       "label": "WVR",
-      "color": "_pink",
-      "bar": "_purple"
+      "color": "_purple",
+      "fontSize": 18,
+      "bar": "_pink",
+      "barHeight": 25
     },
     {
       "label": "FDR",
-      "color": "_red",
-      "bar": "_light-orange"
+      "color": "_light-orange",
+      "fontSize": 18,
+      "bar": "_red",
+      "barHeight": 25
     },
     {
       "label": "Y&N",
-      "color": "_red",
-      "bar": "_black"
+      "color": "_black",
+      "fontSize": 18,
+      "bar": "_red",
+      "barHeight": 25
     },
     {
       "label": "N&S",
-      "color": "_light-blue-2",
-      "bar": "_blue"
+      "color": "_blue",
+      "fontSize": 18,
+      "bar": "_light-blue-2",
+      "barHeight": 25
     }
   ],
   "tiles": {
@@ -235,140 +284,160 @@
       "abbrev": "WStI",
       "color": "_purple",
       "token": {
-        "bar": "_dark-yellow"
+        "fontSize": 18,
+        "stripes": "_dark-yellow"
       }
     },
     {
       "abbrev": "N&E",
       "color": "_dark-gray",
       "token": {
-        "bar": "_dark-green"
+        "fontSize": 18,
+        "stripes": "_dark-green"
       }
     },
     {
       "abbrev": "L&H",
       "color": "_light-blue-1",
       "token": {
-        "bar": "_red"
+        "fontSize": 18,
+        "stripes": "_red"
       }
     },
     {
       "abbrev": "L&E",
       "color": "_red",
       "token": {
-        "bar": "_dark-yellow"
+        "fontSize": 18,
+        "stripes": "_dark-yellow"
       }
     },
     {
       "abbrev": "E&H",
       "color": "_light-yellow",
       "token": {
-        "bar": "_light-orange"
+        "fontSize": 18,
+        "stripes": "_light-orange"
       }
     },
     {
       "abbrev": "NGC",
       "color": "_dark-yellow",
       "token": {
-        "bar": "_black"
+        "fontSize": 18,
+        "stripes": "_black"
       }
     },
     {
       "abbrev": "L&D",
       "color": "_dark-orange",
       "token": {
-        "bar": "_dark-blue"
+        "fontSize": 18,
+        "stripes": "_dark-blue"
       }
     },
     {
       "abbrev": "I&B",
       "color": "_black",
       "token": {
-        "bar": "_light-gray"
+        "fontSize": 18,
+        "stripes": "_light-gray"
       }
     },
     {
       "abbrev": "SVR",
       "color": "_brown",
       "token": {
-        "bar": "_dark-green"
+        "fontSize": 18,
+        "stripes": "_dark-green"
       }
     },
     {
       "abbrev": "ECR",
       "color": "_dark-blue",
       "token": {
-        "bar": "_purple"
+        "fontSize": 18,
+        "stripes": "_purple"
       }
     },
     {
       "abbrev": "WNR",
       "color": "_brown",
       "token": {
-        "bar": "_red"
+        "fontSize": 18,
+        "stripes": "_red"
       }
     },
     {
       "abbrev": "W&F",
       "color": "_green",
       "token": {
-        "bar": "_lime"
+        "fontSize": 18,
+        "stripes": "_lime"
       }
     },
     {
       "abbrev": "N&B",
       "color": "_light-gray",
       "token": {
-        "bar": "_dark-orange"
+        "fontSize": 18,
+        "stripes": "_dark-orange"
       }
     },
     {
       "abbrev": "EUR",
       "color": "_red",
       "token": {
-        "bar": "_purple"
+        "fontSize": 18,
+        "stripes": "_purple"
       }
     },
     {
       "abbrev": "ENR",
       "color": "_dark-yellow",
       "token": {
-        "bar": "_blue"
+        "fontSize": 18,
+        "stripes": "_blue"
       }
     },
     {
       "abbrev": "ESR",
       "color": "_dark-green",
       "token": {
-        "bar": "_light-green"
+        "fontSize": 18,
+        "stripes": "_light-green"
       }
     },
     {
       "abbrev": "WVR",
       "color": "_purple",
       "token": {
-        "bar": "_pink"
+        "fontSize": 18,
+        "stripes": "_pink"
       }
     },
     {
       "abbrev": "FDR",
       "color": "_light-orange",
       "token": {
-        "bar": "_red"
+        "fontSize": 18,
+        "stripes": "_red"
       }
     },
     {
       "abbrev": "Y&N",
       "color": "_black",
       "token": {
-        "bar": "_red"
+        "fontSize": 18,
+        "stripes": "_red"
       }
     },
     {
       "abbrev": "N&S",
       "color": "_blue",
       "token": {
-        "bar": "_light-blue-2"
+        "fontSize": 18,
+        "stripes": "_light-blue-2"
       }
     }
   ],
