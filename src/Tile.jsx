@@ -15,6 +15,9 @@ const Tile = ({ id, border, mask, gameTiles }) => {
       if (gameTiles[id].tile) {
         // This is an alias
         hex = tiles[gameTiles[id].tile];
+      } else if (!gameTiles[id].color) {
+        // This is just extra data
+        hex = {...tiles[id], ...gameTiles[id]};
       } else {
         // This is a full tile definition
         hex = gameTiles[id];
