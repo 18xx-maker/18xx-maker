@@ -114,6 +114,10 @@ export const getTile = curry((tileDefs, tiles, id) => {
   let tile = {};
   let quantity = 1;
 
+  if (id === 760) {
+    console.log(tileDefs[760], tiles[760])
+  }
+
   if (is(Object, tiles[id])) {
     quantity = tiles[id].quantity || 1;
     if (tiles[id].tile) {
@@ -123,6 +127,7 @@ export const getTile = curry((tileDefs, tiles, id) => {
     } else if (!tiles[id].color) {
       // This tile might have rotations or other such items but isn't a full tile
       tile = tileDefs[id] || tileDefs[split("|", id)][0];
+      tile = {...tile, ...tiles[id]};
     } else {
       // This is actually the tile object
       tile = tiles[id];
