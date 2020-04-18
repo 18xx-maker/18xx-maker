@@ -328,6 +328,9 @@ const Token = ({
             let scale = scaling * 0.08;
             let trans = scaling * -24;
             let wh = scaling * 50;
+            if ((reserved || inverse) && shieldTop) {
+              textFill = c(shieldTop);
+            }
             shapes.push(<g width={`${wh}`} height={`${wh}`} transform={`translate(${trans}, ${trans}) scale(${scale})`}>
                         <path
                           fill={shield === true ? p("white") : c(shield)}
@@ -338,7 +341,7 @@ const Token = ({
                           stroke-width="20"
                           d="M112.5 206.1s7.6 74-15.3 108.1c-15 32-18.4 41.6-17.9 70.7 1.5 97.2 76 115.6 117 115 28.6-.5 76.5 2 109.4 32.7h.8c32.9-30.7 80.8-33.1 109.4-32.7 41 .6 115.5-17.8 117-115 .5-29.2-2.8-38.6-17.9-70.7-23-34.1-23.7-74.2-15.3-108.1H112.5z"/>
                         <path
-                          fill={shieldTop ? c(shieldTop) : c("blue")}
+                          fill={(reserved || inverse) ? "gray" : (shieldTop ? c(shieldTop) : c("blue"))}
                           d="M527.4 145.7c-26.7 18.6-27.8 60.4-27.8 60.4H112.5s-3.7-44.7-27.8-60.4c26.8-27 64.6-66.3 64.6-66.3s71.1 65.8 156.7 1.3c85.5 64.5 156.7-1.3 156.7-1.3s37.9 39.2 64.7 66.3z"/>
                         <path
                           fill="none"
@@ -351,6 +354,9 @@ const Token = ({
             let scale = scaling * 0.08;
             let trans = scaling * -24;
             let wh = scaling * 50;
+            if ((reserved || inverse) && shield3TopCenter) {
+              textFill = c(shield3TopCenter);
+            }
             shapes.push(<g width={`${wh}`} height={`${wh}`} transform={`translate(${trans}, ${trans}) scale(${scale})`}>
                         <path
                           fill={shield3 === true ? p("white") : c(shield3)}
@@ -361,13 +367,13 @@ const Token = ({
                           stroke-width="20"
                           d="M112.5 205.8s7.6 73.9-15.4 108c-15 32-18.3 41.6-17.9 70.7 1.6 97.2 76 115.6 117 115 28.5-.4 76.4 2 109.3 32.7h.9c32.9-30.6 80.8-33.1 109.3-32.7 41 .6 115.4-17.8 117-115 .5-29.1-2.8-38.7-17.9-70.7-23-34.1-23.6-74.2-15.4-108H112.5z"/>
                         <path
-                          fill={shield3TopLeft ? c(shield3TopLeft) : c("red")}
+                          fill={(reserved || inverse) ? "gray" : (shield3TopLeft ? c(shield3TopLeft) : c("red"))}
                           d="M84.8 148.5c11.2-11.3 64.7-66.2 64.7-66.2s22.8 28.1 87.4 29.3v94.9l-124.4-.7s-3.8-41.7-27.7-57.3z"/>
                         <path
-                          fill={shield3TopCenter ? c(shield3TopCenter) : c("white")}
+                          fill={(reserved || inverse) ? "gray" : (shield3TopCenter ? c(shield3TopCenter) : c("white"))}
                           d="M236.9 111.6s48.6-11.7 69.1-30.4c14.2 10.7 26.9 22.3 70.7 28.1l1 97.2H236.9v-94.9z"/>
                         <path
-                          fill={shield3TopRight ? c(shield3TopRight) : c("blue")}
+                          fill={(reserved || inverse) ? "gray" : (shield3TopRight ? c(shield3TopRight) : c("blue"))}
                             d="M527.2 146c-20.1 21-27.7 60.4-27.7 60.4H377.7l-1-97.2c66.2-2.7 85.9-29.4 85.9-29.4s37.8 39.2 64.6 66.2z"/>
                         <g fill="none" stroke="black" stroke-width="20">
                             <path d="M236.9 206.5l-124.4-.7s-3.8-41.7-27.7-57.3c11.2-11.3 64.7-66.2 64.7-66.2s22.8 28.1 87.4 29.3m139.8-2.4c66.2-2.7 85.9-29.4 85.9-29.4s37.9 39.2 64.7 66.2c-20.1 21-27.7 60.4-27.7 60.4H377.7"/>
