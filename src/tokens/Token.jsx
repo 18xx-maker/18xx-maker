@@ -28,6 +28,7 @@ const Token = ({
   destination, // Is this a destination token? Sets a smaller default width
   reserved, // Is this a reserved token? Sets it to a gray color
   inverse, // Should we render the "inverse" of this token? No logos, only text
+  inverseLabelColor, //What color to use for the label text on "inverse" tokens
 
   bleed, // Should we draw bleed around the token (for printing)
   outline, // What color to use as the outline
@@ -130,8 +131,8 @@ const Token = ({
 
         } else if(inverse) {
           // Inverse tokens are always white with colored text
-          textStroke = s(c(color));
-          textFill = c(color);
+          textStroke = s(c(inverseLabelColor == null ? color : inverseLabelColor));
+          textFill = c(inverseLabelColor == null ? color : inverseLabelColor);
           tokenFill = c("white");
 
         } else if (logo && logos[logo]) {
