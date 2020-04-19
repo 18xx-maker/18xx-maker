@@ -290,7 +290,8 @@
       "color": "_dark-blue",
       "token": {
         "fontSize": 18,
-        "stripes": "_purple"
+        "stripes": "_purple",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -298,7 +299,8 @@
       "color": "_light-yellow",
       "token": {
         "fontSize": 18,
-        "stripes": "_light-orange"
+        "stripes": "_light-orange",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -306,7 +308,8 @@
       "color": "_dark-yellow",
       "token": {
         "fontSize": 18,
-        "stripes": "_blue"
+        "stripes": "_blue",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -314,7 +317,8 @@
       "color": "_dark-green",
       "token": {
         "fontSize": 18,
-        "stripes": "_light-green"
+        "stripes": "_light-green",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -322,7 +326,8 @@
       "color": "_red",
       "token": {
         "fontSize": 18,
-        "stripes": "_purple"
+        "stripes": "_purple",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -330,7 +335,8 @@
       "color": "_light-orange",
       "token": {
         "fontSize": 18,
-        "stripes": "_red"
+        "stripes": "_red",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -338,7 +344,8 @@
       "color": "_black",
       "token": {
         "fontSize": 18,
-        "stripes": "_light-gray"
+        "stripes": "_light-gray",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -346,7 +353,8 @@
       "color": "_dark-orange",
       "token": {
         "fontSize": 18,
-        "stripes": "_dark-blue"
+        "stripes": "_dark-blue",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -354,7 +362,8 @@
       "color": "_red",
       "token": {
         "fontSize": 18,
-        "stripes": "_dark-yellow"
+        "stripes": "_dark-yellow",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -362,7 +371,8 @@
       "color": "_light-blue-1",
       "token": {
         "fontSize": 18,
-        "stripes": "_red"
+        "stripes": "_red",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -370,7 +380,8 @@
       "color": "_light-gray",
       "token": {
         "fontSize": 18,
-        "stripes": "_dark-orange"
+        "stripes": "_dark-orange",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -378,7 +389,8 @@
       "color": "_dark-gray",
       "token": {
         "fontSize": 18,
-        "stripes": "_dark-green"
+        "stripes": "_dark-green",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -386,7 +398,8 @@
       "color": "_dark-yellow",
       "token": {
         "fontSize": 18,
-        "stripes": "_black"
+        "stripes": "_black",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -394,7 +407,8 @@
       "color": "_blue",
       "token": {
         "fontSize": 18,
-        "stripes": "_light-blue-2"
+        "stripes": "_light-blue-2",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -402,7 +416,8 @@
       "color": "_brown",
       "token": {
         "fontSize": 18,
-        "stripes": "_dark-green"
+        "stripes": "_dark-green",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -410,7 +425,8 @@
       "color": "_green",
       "token": {
         "fontSize": 18,
-        "stripes": "_lime"
+        "stripes": "_lime",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -418,7 +434,8 @@
       "color": "_brown",
       "token": {
         "fontSize": 18,
-        "stripes": "_red"
+        "stripes": "_red",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -426,7 +443,8 @@
       "color": "_purple",
       "token": {
         "fontSize": 18,
-        "stripes": "_dark-yellow"
+        "stripes": "_dark-yellow",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -434,7 +452,8 @@
       "color": "_purple",
       "token": {
         "fontSize": 18,
-        "stripes": "_pink"
+        "stripes": "_pink",
+        "inverseLabelColor": "black"
       }
     },
     {
@@ -442,7 +461,8 @@
       "color": "_black",
       "token": {
         "fontSize": 18,
-        "stripes": "_red"
+        "stripes": "_red",
+        "inverseLabelColor": "black"
       }
     }
   ],
