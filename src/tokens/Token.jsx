@@ -399,7 +399,7 @@ const Token = ({
           if (label) {
             // Label and icon, position accordingly
             let x = -0.5 * width;
-            let y = -0.75 * width;
+            let y = -width;
             let size = 1 * width;
             let fSize;
             content.push(<Component key="icon" className={classes.join(" ")}
@@ -420,7 +420,7 @@ const Token = ({
             if (!isNaN(label)) {
               fSize *= numbersOnlyScaling;
             }
-            y = fSize * 11 / 32 + 9;
+            y = fSize * 11 / 32 + 12;
             if (shield || shield3) {
               fSize *= scaling;
               y += scaling * 5;
