@@ -54,8 +54,8 @@ export const sidesFromTile = compose(uniq,
                                      propOr([], "track"),
                                      defaultTo([]));
 
-const Track = ({ type, gauge, border, offset, path, color, borderColor, gaugeColor }) => {
-  let width = border ? 16 : 12;
+const Track = ({ type, gauge, border, width, offset, path, color, borderColor, gaugeColor }) => {
+  let trackWidth = width ? width : (border ? 16 : 12);
   color = color || "track";
   borderColor = borderColor || "border";
   gaugeColor = gaugeColor || "white";
@@ -65,8 +65,8 @@ const Track = ({ type, gauge, border, offset, path, color, borderColor, gaugeCol
     break;
   case "offboard":
     let end = border ? 40 : 48;
-    width = border ? 8 : 6;
-    path = `M${width} 75 L ${width} 85 L -${width} 85 L -${width} 75 L 0 ${end} Z`;
+    trackWidth = border ? 8 : 6;
+    path = `M${trackWidth} 75 L ${trackWidth} 85 L -${trackWidth} 85 L -${trackWidth} 75 L 0 ${end} Z`;
     break;
   case "stub":
     path = "m 0 85 L 0 56.25";
@@ -117,7 +117,7 @@ const Track = ({ type, gauge, border, offset, path, color, borderColor, gaugeCol
   let strokeDashOffset = "none";
   let narrow = null;
   if (!border && (gauge === "narrow" || gauge === "dashed")) {
-    strokeDashArray = `${width * 0.75}`;
+    strokeDashArray = `${trackWidth * 0.75}`;
     if (offset) {
       strokeDashOffset = `${offset}`;
     }
@@ -130,7 +130,7 @@ const Track = ({ type, gauge, border, offset, path, color, borderColor, gaugeCol
             stroke={c(gaugeColor)}
             strokeLinecap="butt"
             strokeLinejoin="miter"
-            strokeWidth={width - 4}
+            strokeWidth={trackWidth - 4}
             strokeDasharray={strokeDashArray}
             strokeDashoffset={strokeDashOffset}
           />
@@ -141,7 +141,7 @@ const Track = ({ type, gauge, border, offset, path, color, borderColor, gaugeCol
 
   // Line Gauge
   if (gauge === "line" || gauge === "dashed") {
-    width = border ? 6 : 2;
+    trackWidth = border ? 6 : 2;
   }
 
   // Double Gauge
@@ -156,7 +156,7 @@ const Track = ({ type, gauge, border, offset, path, color, borderColor, gaugeCol
             stroke={c(gaugeColor)}
             strokeLinecap="butt"
             strokeLinejoin="miter"
-            strokeWidth={width - 4}
+            strokeWidth={trackWidth - 4}
           />
         )}
       </Color>
@@ -176,7 +176,7 @@ const Track = ({ type, gauge, border, offset, path, color, borderColor, gaugeCol
                 stroke={type === "offboard" ? "none" : (c(border ? borderColor : color))}
                 strokeLinecap="butt"
                 strokeLinejoin="miter"
-                strokeWidth={width}
+                strokeWidth={trackWidth}
               />
               {narrow}
               {double}

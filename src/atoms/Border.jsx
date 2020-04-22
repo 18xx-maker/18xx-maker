@@ -5,12 +5,11 @@ import HexContext from "../context/HexContext";
 
 const edge = 150 * 0.57735;
 
-const Border = ({ color, dashed, offset }) => {
+const Border = ({ color, dashed, offset, width }) => {
   let strokeDashArray = "none";
   let strokeDashOffset = "-3";
-  let width = 16;
   if (dashed) {
-    strokeDashArray = `${width}`;
+    strokeDashArray = `${width || 16}`;
     if (offset) {
       strokeDashOffset = `${offset}`;
     }
