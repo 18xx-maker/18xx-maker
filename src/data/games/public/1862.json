@@ -59,52 +59,52 @@
     {
       "label": "A",
       "color": "freight",
-      "fontSize": 18
+      "fontSize": 24
     },
     {
       "label": "A",
       "color": "local",
-      "fontSize": 18
+      "fontSize": 24
     },
     {
       "label": "A",
       "color": "express",
-      "fontSize": 18
+      "fontSize": 24
     },
     {
       "label": "B",
       "color": "freight",
-      "fontSize": 18
+      "fontSize": 24
     },
     {
       "label": "B",
       "color": "local",
-      "fontSize": 18
+      "fontSize": 24
     },
     {
       "label": "B",
       "color": "express",
-      "fontSize": 18
+      "fontSize": 24
     },
     {
       "label": "C",
       "color": "freight",
-      "fontSize": 18
+      "fontSize": 24
     },
     {
       "label": "C",
       "color": "local",
-      "fontSize": 18
+      "fontSize": 24
     },
     {
       "label": "C",
       "color": "express",
-      "fontSize": 18
+      "fontSize": 24
     },
     {
-      "label": "Out",
+      "label": "X",
       "color": "white",
-      "fontSize": 18
+      "fontSize": 24
     },
     {
       "label": "ECR",
