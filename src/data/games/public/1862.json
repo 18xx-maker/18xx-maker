@@ -1,0 +1,2186 @@
+{
+  "info": {
+    "title": "1862",
+    "subtitle": "Railway Mania in the Eastern Counties",
+    "designer": "Mike Hutton",
+    "background": "water",
+    "orientation": "horizontal",
+    "titleX": 840,
+    "titleY": -120,
+    "titleSize": 48,
+    "subTitleSize": 18,
+    "designerSize": 12
+  },
+  "links": {
+    "bgg": "https://boardgamegeek.com/boardgame/66837/1862-railway-mania-eastern-counties",
+    "rules": "https://gmtwebsiteassets.s3-us-west-2.amazonaws.com/1862/1862_TRAIN_RULES-Final.pdf"
+  },
+  "colors": {
+    "bankrupt": "#b6b6b4",
+    "end": "#f75d59",
+    "chartered": "#ffdb58",
+    "non-chartered": "#e78a61",
+    "ignore-first": "#95b9c7",
+    "ignore-two": "#85bb65",
+    "freight": "#aa478d",
+    "local": "#8de0f9",
+    "express": "#ffab90",
+    "_dark-blue": "#2b358e",
+    "_purple": "#a73082",
+    "_light-yellow": "#fff676",
+    "_light-orange": "#fb9b46",
+    "_dark-yellow": "#fff045",
+    "_blue": "#0096d9",
+    "_dark-green": "#31643b",
+    "_light-green": "#97d9a5",
+    "_red": "#f1182e",
+    "_black": "#231f20",
+    "_light-gray": "#bcbcbc",
+    "_dark-orange": "#f8712e",
+    "_light-blue-1": "#95e0f7",
+    "_dark-gray": "#a7a6a6",
+    "_light-blue-2": "#8fd6f6",
+    "_brown": "#a5825f",
+    "_green": "#00a556",
+    "_lime": "#cce779",
+    "_pink": "#fa9aaa"
+  },
+  "tokenTypes": {
+    "default": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "tokens": [
+    {
+      "label": "A",
+      "color": "freight",
+      "fontSize": 18
+    },
+    {
+      "label": "A",
+      "color": "local",
+      "fontSize": 18
+    },
+    {
+      "label": "A",
+      "color": "express",
+      "fontSize": 18
+    },
+    {
+      "label": "B",
+      "color": "freight",
+      "fontSize": 18
+    },
+    {
+      "label": "B",
+      "color": "local",
+      "fontSize": 18
+    },
+    {
+      "label": "B",
+      "color": "express",
+      "fontSize": 18
+    },
+    {
+      "label": "C",
+      "color": "freight",
+      "fontSize": 18
+    },
+    {
+      "label": "C",
+      "color": "local",
+      "fontSize": 18
+    },
+    {
+      "label": "C",
+      "color": "express",
+      "fontSize": 18
+    },
+    {
+      "label": "Out",
+      "color": "white",
+      "fontSize": 18
+    },
+    {
+      "label": "ECR",
+      "color": "_dark-blue",
+      "fontSize": 18,
+      "bar": "_purple",
+      "barHeight": 25
+    },
+    {
+      "label": "E&H",
+      "color": "_light-yellow",
+      "fontSize": 18,
+      "bar": "_light-orange",
+      "barHeight": 25
+    },
+    {
+      "label": "ENR",
+      "color": "_dark-yellow",
+      "fontSize": 18,
+      "bar": "_blue",
+      "barHeight": 25
+    },
+    {
+      "label": "ESR",
+      "color": "_dark-green",
+      "fontSize": 18,
+      "bar": "_light-green",
+      "barHeight": 25
+    },
+    {
+      "label": "EUR",
+      "color": "_red",
+      "fontSize": 18,
+      "bar": "_purple",
+      "barHeight": 25
+    },
+    {
+      "label": "FDR",
+      "color": "_light-orange",
+      "fontSize": 18,
+      "bar": "_red",
+      "barHeight": 25
+    },
+    {
+      "label": "I&B",
+      "color": "_black",
+      "fontSize": 18,
+      "bar": "_light-gray",
+      "barHeight": 25
+    },
+    {
+      "label": "L&D",
+      "color": "_dark-orange",
+      "fontSize": 18,
+      "bar": "_dark-blue",
+      "barHeight": 25
+    },
+    {
+      "label": "L&E",
+      "color": "_red",
+      "fontSize": 18,
+      "bar": "_dark-yellow",
+      "barHeight": 25
+    },
+    {
+      "label": "L&H",
+      "color": "_light-blue-1",
+      "fontSize": 18,
+      "bar": "_red",
+      "barHeight": 25
+    },
+    {
+      "label": "N&B",
+      "color": "_light-gray",
+      "fontSize": 18,
+      "bar": "_dark-orange",
+      "barHeight": 25
+    },
+    {
+      "label": "N&E",
+      "color": "_dark-gray",
+      "fontSize": 18,
+      "bar": "_dark-green",
+      "barHeight": 25
+    },
+    {
+      "label": "NGC",
+      "color": "_dark-yellow",
+      "fontSize": 18,
+      "bar": "_black",
+      "barHeight": 25
+    },
+    {
+      "label": "N&S",
+      "color": "_blue",
+      "fontSize": 18,
+      "bar": "_light-blue-2",
+      "barHeight": 25
+    },
+    {
+      "label": "SVR",
+      "color": "_brown",
+      "fontSize": 18,
+      "bar": "_dark-green",
+      "barHeight": 25
+    },
+    {
+      "label": "W&F",
+      "color": "_green",
+      "fontSize": 18,
+      "bar": "_lime",
+      "barHeight": 25
+    },
+    {
+      "label": "WNR",
+      "color": "_brown",
+      "fontSize": 18,
+      "bar": "_red",
+      "barHeight": 25
+    },
+    {
+      "label": "WStI",
+      "color": "_purple",
+      "fontSize": 18,
+      "bar": "_dark-yellow",
+      "barHeight": 25
+    },
+    {
+      "label": "WVR",
+      "color": "_purple",
+      "fontSize": 18,
+      "bar": "_pink",
+      "barHeight": 25
+    },
+    {
+      "label": "Y&N",
+      "color": "_black",
+      "fontSize": 18,
+      "bar": "_red",
+      "barHeight": 25
+    }
+  ],
+  "tiles": {
+    "5": 10,
+    "6": 10,
+    "14": 11,
+    "15": 10,
+    "16": 2,
+    "17": 5,
+    "18": 5,
+    "19": 4,
+    "20": 6,
+    "21": 2,
+    "22": 2,
+    "53Y": 4,
+    "57": 12,
+    "61Y": 3,
+    "201": 2,
+    "202": 4,
+    "611": 8,
+    "619": 10,
+    "621": 2,
+    "778": 4,
+    "779": 3,
+    "780": 3,
+    "790": 4,
+    "791": 4,
+    "792": 2,
+    "793": 3,
+    "794": 3,
+    "795": 1,
+    "796": 3,
+    "797": 1,
+    "798": 3,
+    "891Y": 3,
+    "8850": 6,
+    "8851": 8,
+    "8852": 12
+  },
+  "companies": [
+    {
+      "abbrev": "ECR",
+      "color": "_dark-blue",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_purple",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "E&H",
+      "color": "_light-yellow",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_light-orange",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "ENR",
+      "color": "_dark-yellow",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_blue",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "ESR",
+      "color": "_dark-green",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_light-green",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "EUR",
+      "color": "_red",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_purple",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "FDR",
+      "color": "_light-orange",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_red",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "I&B",
+      "color": "_black",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_light-gray",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "L&D",
+      "color": "_dark-orange",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_dark-blue",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "L&E",
+      "color": "_red",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_dark-yellow",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "L&H",
+      "color": "_light-blue-1",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_red",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "N&B",
+      "color": "_light-gray",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_dark-orange",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "N&E",
+      "color": "_dark-gray",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_dark-green",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "NGC",
+      "color": "_dark-yellow",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_black",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "N&S",
+      "color": "_blue",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_light-blue-2",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "SVR",
+      "color": "_brown",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_dark-green",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "W&F",
+      "color": "_green",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_lime",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "WNR",
+      "color": "_brown",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_red",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "WStI",
+      "color": "_purple",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_dark-yellow",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "WVR",
+      "color": "_purple",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_pink",
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "abbrev": "Y&N",
+      "color": "_black",
+      "token": {
+        "fontSize": 18,
+        "stripes": "_red",
+        "inverseLabelColor": "black"
+      }
+    }
+  ],
+  "stock": {
+    "title": false,
+    "type": "1Diag",
+    "display": {
+      "par": {
+        "x": 0,
+        "y": 5
+      }
+    },
+    "par": {
+      "title": false,
+      "width": 1,
+      "height": 2,
+      "values": [
+        [
+          {
+            "legend": 0,
+            "value": 54
+          },
+          {
+            "legend": 0,
+            "value": 58
+          },
+          {
+            "legend": 0,
+            "value": 62
+          },
+          {
+            "legend": 0,
+            "value": 68
+          },
+          {
+            "legend": 0,
+            "value": 74
+          },
+          {
+            "legend": 0,
+            "value": 82
+          },
+          {
+            "legend": 0,
+            "value": 90
+          },
+          {
+            "legend": 0,
+            "value": 100
+          }
+        ],
+        [
+          {
+            "legend": 1,
+            "value": 54
+          },
+          {
+            "legend": 1,
+            "value": 58
+          },
+          {
+            "legend": 1,
+            "value": 62
+          },
+          {
+            "legend": 1,
+            "value": 68
+          },
+          {
+            "legend": 1,
+            "value": 74
+          },
+          {
+            "legend": 1,
+            "value": 82
+          },
+          {
+            "legend": 1,
+            "value": 90
+          },
+          {
+            "legend": 1,
+            "value": 100
+          }
+        ]
+      ]
+    },
+    "market": [
+      {
+        "color": "bankrupt",
+        "value": 0,
+        "subLabel": "Bankrupt",
+        "height": 2
+      },
+      {
+        "legend": 2,
+        "value": 7
+      },
+      {
+        "legend": 2,
+        "value": 14
+      },
+      {
+        "legend": 2,
+        "value": 20
+      },
+      {
+        "legend": 2,
+        "value": 26
+      },
+      {
+        "legend": 2,
+        "value": 31
+      },
+      {
+        "legend": 2,
+        "value": 36
+      },
+      {
+        "color": "plain",
+        "value": 40
+      },
+      {
+        "color": "plain",
+        "value": 44
+      },
+      {
+        "color": "plain",
+        "value": 47
+      },
+      {
+        "color": "plain",
+        "value": 50
+      },
+      {
+        "color": "plain",
+        "value": 52
+      },
+      {
+        "legend": 0,
+        "value": 54
+      },
+      {
+        "legend": 1,
+        "value": 56
+      },
+      {
+        "legend": 0,
+        "value": 58
+      },
+      {
+        "legend": 1,
+        "value": 60
+      },
+      {
+        "legend": 0,
+        "value": 62
+      },
+      {
+        "legend": 1,
+        "value": 65
+      },
+      {
+        "legend": 0,
+        "value": 68
+      },
+      {
+        "legend": 1,
+        "value": 71
+      },
+      {
+        "legend": 0,
+        "value": 74
+      },
+      {
+        "legend": 1,
+        "value": 78
+      },
+      {
+        "legend": 0,
+        "value": 82
+      },
+      {
+        "legend": 1,
+        "value": 86
+      },
+      {
+        "legend": 0,
+        "value": 90
+      },
+      {
+        "legend": 1,
+        "value": 95
+      },
+      {
+        "legend": 0,
+        "value": 100
+      },
+      {
+        "legend": 1,
+        "value": 105
+      },
+      {
+        "legend": 1,
+        "value": 110
+      },
+      {
+        "legend": 1,
+        "value": 116
+      },
+      {
+        "legend": 1,
+        "value": 122
+      },
+      {
+        "legend": 1,
+        "value": 128
+      },
+      {
+        "legend": 1,
+        "value": 134
+      },
+      {
+        "legend": 1,
+        "value": 142
+      },
+      {
+        "legend": 1,
+        "value": 150
+      },
+      {
+        "legend": 1,
+        "value": 158
+      },
+      {
+        "legend": 1,
+        "value": 166
+      },
+      {
+        "legend": 1,
+        "value": 174
+      },
+      {
+        "legend": 1,
+        "value": 182
+      },
+      {
+        "legend": 1,
+        "value": 191
+      },
+      {
+        "legend": 1,
+        "value": 200
+      },
+      {
+        "legend": 2,
+        "value": 210
+      },
+      {
+        "legend": 2,
+        "value": 220
+      },
+      {
+        "legend": 2,
+        "value": 232
+      },
+      {
+        "legend": 2,
+        "value": 245
+      },
+      {
+        "legend": 2,
+        "value": 260
+      },
+      {
+        "legend": 2,
+        "value": 275
+      },
+      {
+        "legend": 2,
+        "value": 292
+      },
+      {
+        "legend": 2,
+        "value": 310
+      },
+      {
+        "legend": 2,
+        "value": 330
+      },
+      {
+        "legend": 2,
+        "value": 350
+      },
+      {
+        "legend": 2,
+        "value": 375
+      },
+      {
+        "legend": 3,
+        "value": 400
+      },
+      {
+        "legend": 3,
+        "value": 430
+      },
+      {
+        "legend": 3,
+        "value": 460
+      },
+      {
+        "legend": 3,
+        "value": 495
+      },
+      {
+        "legend": 3,
+        "value": 530
+      },
+      {
+        "legend": 3,
+        "value": 570
+      },
+      {
+        "legend": 3,
+        "value": 610
+      },
+      {
+        "legend": 3,
+        "value": 655
+      },
+      {
+        "legend": 3,
+        "value": 700
+      },
+      {
+        "legend": 3,
+        "value": 750
+      },
+      {
+        "legend": 3,
+        "value": 800
+      },
+      {
+        "legend": 3,
+        "value": 850
+      },
+      {
+        "legend": 3,
+        "value": 900
+      },
+      {
+        "legend": 3,
+        "value": 950
+      },
+      {
+        "value": 1000,
+        "color": "end",
+        "subLabel": "End of Game",
+        "right": true,
+        "bottom": true,
+        "height": 2
+      }
+    ],
+    "legend": [
+      {
+        "color": "chartered",
+        "description": "Chartered par values"
+      },
+      {
+        "color": "non-chartered",
+        "description": "Non-Chartered par values"
+      },
+      {
+        "color": "ignore-first",
+        "description": "Ignore one sale (except director)"
+      },
+      {
+        "color": "ignore-two",
+        "description": "Ignore two sales (except director)"
+      }
+    ]
+  },
+  "map": {
+    "hexes": [
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "removeBorders": [
+          1,
+          5
+        ],
+        "hexes": [
+          "A3"
+        ]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 5
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "removeBorders": [
+          1,
+          4
+        ],
+        "hexes": [
+          "A5"
+        ]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 5
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "offBoardRevenue": {
+          "x": -5,
+          "name": {
+            "fontSize": 14,
+            "name": "Midlands"
+          },
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "40"
+            },
+            {
+              "color": "green",
+              "cost": "C 90"
+            },
+            {
+              "color": "brown",
+              "cost": "E 140"
+            }
+          ]
+        },
+        "removeBorders": [
+          1,
+          4
+        ],
+        "hexes": [
+          "A7"
+        ]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 5
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "divides": [
+          {
+            "side": "2"
+          }
+        ],
+        "removeBorders": [
+          1,
+          4
+        ],
+        "hexes": [
+          "A9"
+        ]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 5
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "offBoardRevenue": {
+          "x": -5,
+          "name": {
+            "fontSize": 14,
+            "name": "The West"
+          },
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "70"
+            },
+            {
+              "color": "green",
+              "cost": "C 100"
+            },
+            {
+              "color": "brown",
+              "cost": "E 120"
+            }
+          ]
+        },
+        "removeBorders": [
+          1,
+          4
+        ],
+        "hexes": [
+          "A11"
+        ]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 5
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "divides": [
+          {
+            "side": "2"
+          }
+        ],
+        "removeBorders": [
+          1,
+          4
+        ],
+        "hexes": [
+          "A13"
+        ]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "removeBorders": [
+          4,
+          6
+        ],
+        "hexes": [
+          "A15"
+        ]
+      },
+      {
+        "color": "offboard",
+        "removeBorders": [
+          2
+        ],
+        "hexes": [
+          "B2"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Holbeach"
+            }
+          }
+        ],
+        "hexes": [
+          "B4"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Wisbech"
+            },
+            "companies": [
+              "WStI"
+            ]
+          }
+        ],
+        "hexes": [
+          "B6"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "March"
+            }
+          }
+        ],
+        "hexes": [
+          "B8"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "y": -15,
+            "name": {
+              "fontSize": 14,
+              "name": "Cambridge"
+            }
+          }
+        ],
+        "labels": [
+          {
+            "y": 30,
+            "label": "N"
+          }
+        ],
+        "hexes": [
+          "B10"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Royston"
+            }
+          }
+        ],
+        "hexes": [
+          "B12"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Bishop's Stortford"
+            },
+            "companies": [
+              "N&E"
+            ]
+          }
+        ],
+        "hexes": [
+          "B14"
+        ]
+      },
+      {
+        "color": "offboard",
+        "cities": [
+          {
+            "x": -30,
+            "y": 15
+          },
+          {
+            "x": 30,
+            "y": 15
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 4
+          }
+        ],
+        "removeBorders": [
+          3,
+          5
+        ],
+        "hexes": [
+          "B16"
+        ]
+      },
+      {
+        "color": "water",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "fontSize": 14,
+            "name": "King's Lynn Port"
+          },
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "80"
+            },
+            {
+              "color": "green",
+              "cost": "C 90"
+            },
+            {
+              "color": "brown",
+              "cost": "E 100"
+            }
+          ]
+        },
+        "hexes": [
+          "C3"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "y": -15,
+            "name": {
+              "fontSize": 14,
+              "name": "King's Lynn"
+            },
+            "companies": [
+              "L&H"
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "y": 30,
+            "label": "Y"
+          }
+        ],
+        "hexes": [
+          "C5"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Downham Market"
+            },
+            "companies": [
+              "L&E"
+            ]
+          }
+        ],
+        "hexes": [
+          "C7"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "y": -15,
+            "name": {
+              "fontSize": 14,
+              "name": "Ely"
+            },
+            "companies": [
+              "E&H"
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "y": 30,
+            "label": "Y"
+          }
+        ],
+        "hexes": [
+          "C9"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Newmarket"
+            },
+            "companies": [
+              "NGC"
+            ]
+          }
+        ],
+        "hexes": [
+          "C11"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Great Dunmow"
+            }
+          }
+        ],
+        "hexes": [
+          "C13"
+        ]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          },
+          {
+            "type": "offboard",
+            "side": 4
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "fontSize": 14,
+            "name": "London"
+          },
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "100"
+            },
+            {
+              "color": "green",
+              "cost": "C 150"
+            },
+            {
+              "color": "brown",
+              "cost": "E 200"
+            }
+          ]
+        },
+        "removeBorders": [
+          2,
+          6
+        ],
+        "hexes": [
+          "C15"
+        ]
+      },
+      {
+        "color": "water",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "removeBorders": [
+          5
+        ],
+        "hexes": [
+          "D2"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Hunstanton"
+            }
+          }
+        ],
+        "hexes": [
+          "D4"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Swaffham"
+            },
+            "companies": [
+              "L&D"
+            ]
+          }
+        ],
+        "hexes": [
+          "D6"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Brandon"
+            }
+          }
+        ],
+        "hexes": [
+          "D8"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "y": -15,
+            "name": {
+              "fontSize": 14,
+              "name": "Bury St. Edmunds"
+            },
+            "companies": [
+              "I&B"
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "y": 30,
+            "label": "Y"
+          }
+        ],
+        "hexes": [
+          "D10"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Sudbury"
+            },
+            "companies": [
+              "SVR"
+            ]
+          }
+        ],
+        "hexes": [
+          "D12"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Witham"
+            },
+            "companies": [
+              "ECR"
+            ]
+          }
+        ],
+        "hexes": [
+          "D14"
+        ]
+      },
+      {
+        "color": "offboard",
+        "cities": [
+          {
+            "x": -30,
+            "y": 15
+          },
+          {
+            "x": 30,
+            "y": 15
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 4
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "removeBorders": [
+          3
+        ],
+        "hexes": [
+          "D16"
+        ]
+      },
+      {
+        "color": "water",
+        "removeBorders": [
+          2,
+          6
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "fontSize": 14,
+            "name": "Port of Wells"
+          },
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "80"
+            },
+            {
+              "color": "green",
+              "cost": "C 90"
+            },
+            {
+              "color": "brown",
+              "cost": "E 100"
+            }
+          ]
+        },
+        "hexes": [
+          "E1"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Wells-next-the-Sea"
+            },
+            "companies": [
+              "WNR"
+            ]
+          }
+        ],
+        "hexes": [
+          "E3"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Fakenham"
+            },
+            "companies": [
+              "W&F"
+            ]
+          }
+        ],
+        "hexes": [
+          "E5"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Watton"
+            }
+          }
+        ],
+        "hexes": [
+          "E7"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Thetford"
+            },
+            "companies": [
+              "N&B"
+            ]
+          }
+        ],
+        "hexes": [
+          "E9"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Stowmarket"
+            }
+          }
+        ],
+        "hexes": [
+          "E11"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "y": -15,
+            "name": {
+              "fontSize": 14,
+              "name": "Colchester"
+            },
+            "companies": [
+              "EUR"
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "y": 30,
+            "label": "N"
+          }
+        ],
+        "hexes": [
+          "E13"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Tiptree"
+            }
+          }
+        ],
+        "hexes": [
+          "E15"
+        ]
+      },
+      {
+        "color": "water",
+        "removeBorders": [
+          5
+        ],
+        "hexes": [
+          "E17"
+        ]
+      },
+      {
+        "color": "water",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ],
+        "removeBorders": [
+          3,
+          6
+        ],
+        "divides": [
+          {
+            "side": "1"
+          }
+        ],
+        "hexes": [
+          "F2"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Cromer"
+            },
+            "companies": [
+              "ENR"
+            ]
+          }
+        ],
+        "hexes": [
+          "F4"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "y": -15,
+            "name": {
+              "fontSize": 14,
+              "name": "Norwich"
+            }
+          }
+        ],
+        "labels": [
+          {
+            "y": 30,
+            "label": "N"
+          }
+        ],
+        "hexes": [
+          "F6"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Diss"
+            }
+          }
+        ],
+        "hexes": [
+          "F8"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Framlingham"
+            }
+          }
+        ],
+        "hexes": [
+          "F10"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "y": -15,
+            "name": {
+              "fontSize": 14,
+              "name": "Ipswich"
+            },
+            "companies": [
+              "ESR"
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "y": 30,
+            "label": "N"
+          }
+        ],
+        "hexes": [
+          "F12"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "y": -15,
+            "name": {
+              "fontSize": 14,
+              "name": "Harwich"
+            }
+          }
+        ],
+        "labels": [
+          {
+            "y": 30,
+            "label": "Y"
+          }
+        ],
+        "hexes": [
+          "F14"
+        ]
+      },
+      {
+        "color": "water",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 4
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "fontSize": 14,
+            "name": "Holland"
+          },
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "70"
+            },
+            {
+              "color": "green",
+              "cost": "C 100"
+            },
+            {
+              "color": "brown",
+              "cost": "E 130"
+            }
+          ]
+        },
+        "removeBorders": [
+          2,
+          5
+        ],
+        "hexes": [
+          "F16"
+        ]
+      },
+      {
+        "color": "water",
+        "offBoardRevenue": {
+          "name": {
+            "fontSize": 14,
+            "name": "Cromer Port"
+          },
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "80"
+            },
+            {
+              "color": "green",
+              "cost": "C 90"
+            },
+            {
+              "color": "brown",
+              "cost": "E 100"
+            }
+          ]
+        },
+        "removeBorders": [
+          3,
+          6
+        ],
+        "hexes": [
+          "G3"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "North Walsham"
+            }
+          }
+        ],
+        "hexes": [
+          "G5"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Acle"
+            }
+          }
+        ],
+        "hexes": [
+          "G7"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Beccles"
+            },
+            "companies": [
+              "WVR"
+            ]
+          }
+        ],
+        "hexes": [
+          "G9"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Woodbridge"
+            }
+          }
+        ],
+        "hexes": [
+          "G11"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Felixstowe"
+            },
+            "companies": [
+              "FDR"
+            ]
+          }
+        ],
+        "hexes": [
+          "G13"
+        ]
+      },
+      {
+        "color": "water",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          },
+          {
+            "type": "offboard",
+            "side": 4
+          }
+        ],
+        "removeBorders": [
+          2,
+          5
+        ],
+        "divides": [
+          {
+            "side": "3"
+          }
+        ],
+        "hexes": [
+          "G15"
+        ]
+      },
+      {
+        "color": "water",
+        "removeBorders": [
+          3
+        ],
+        "hexes": [
+          "H4"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "y": -15,
+            "name": {
+              "fontSize": 14,
+              "name": "Great Yarmouth"
+            },
+            "companies": [
+              "Y&N"
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "y": 30,
+            "label": "Y"
+          }
+        ],
+        "hexes": [
+          "H6"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "fontSize": 14,
+              "name": "Lowestoft"
+            },
+            "companies": [
+              "N&S"
+            ]
+          }
+        ],
+        "hexes": [
+          "H8"
+        ]
+      },
+      {
+        "color": "water",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 4
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "fontSize": 14,
+            "name": "Port of Lowestoft"
+          },
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "60"
+            },
+            {
+              "color": "green",
+              "cost": "C 90"
+            },
+            {
+              "color": "brown",
+              "cost": "E 120"
+            }
+          ]
+        },
+        "removeBorders": [
+          5
+        ],
+        "hexes": [
+          "H10"
+        ]
+      },
+      {
+        "color": "water",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ],
+        "removeBorders": [
+          1
+        ],
+        "hexes": [
+          "H12"
+        ]
+      },
+      {
+        "color": "water",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          }
+        ],
+        "offBoardRevenue": {
+          "x": 5,
+          "name": {
+            "fontSize": 14,
+            "name": "Denmark"
+          },
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "70"
+            },
+            {
+              "color": "green",
+              "cost": "C 100"
+            },
+            {
+              "color": "brown",
+              "cost": "E 130"
+            }
+          ]
+        },
+        "removeBorders": [
+          2,
+          4
+        ],
+        "hexes": [
+          "H14"
+        ]
+      },
+      {
+        "color": "water",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "fontSize": 14,
+            "name": "Great Yarmouth Port"
+          },
+          "rows": 2,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "80"
+            },
+            {
+              "color": "green",
+              "cost": "C 100"
+            },
+            {
+              "color": "brown",
+              "cost": "E 120"
+            }
+          ]
+        },
+        "removeBorders": [
+          1
+        ],
+        "hexes": [
+          "I5"
+        ]
+      },
+      {
+        "color": "water",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 2
+          },
+          {
+            "type": "offboard",
+            "side": 3
+          }
+        ],
+        "removeBorders": [
+          1,
+          4
+        ],
+        "divides": [
+          {
+            "side": "2"
+          }
+        ],
+        "hexes": [
+          "I7"
+        ]
+      },
+      {
+        "color": "water",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          }
+        ],
+        "removeBorders": [
+          2,
+          4
+        ],
+        "hexes": [
+          "I9"
+        ]
+      }
+    ],
+    "borders": [
+      {
+        "color": "water",
+        "coords": [
+          "F14p2",
+          "F14p3",
+          "F14p4"
+        ]
+      },
+      {
+        "color": "water",
+        "coords": [
+          "F14p0",
+          "F14p1"
+        ]
+      }
+    ]
+  }
+}

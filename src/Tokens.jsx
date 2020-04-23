@@ -24,7 +24,7 @@ import Svg from "./Svg";
 //
 // Returns data that's needed to layout a token sheet.
 export const getTokenData = (game, tokens, paper) => {
-  let { marketTokenSize, stationTokenSize, bleed } = tokens;
+  let { marketTokenSize, stationTokenSize, generalTokenSize, bleed } = tokens;
 
   // Extra token counts from config
   let marketTokens = game.info.marketTokens || 3;
@@ -34,10 +34,10 @@ export const getTokenData = (game, tokens, paper) => {
   let layout = tokens.layout;
 
   // Width
-  let width = Math.max(marketTokenSize, stationTokenSize);
+  let width = Math.max(marketTokenSize, stationTokenSize, generalTokenSize);
 
   if (layout === "gsp") {
-    width = marketTokenSize = stationTokenSize = 50;
+    width = marketTokenSize = stationTokenSize = generalTokenSize = 50;
   }
 
   // Bleed
@@ -79,6 +79,7 @@ export const getTokenData = (game, tokens, paper) => {
     totalWidth,
     marketTokenSize,
     stationTokenSize,
+    generalTokenSize,
     bleed,
     bleedWidth,
     layout,
@@ -124,6 +125,9 @@ const TokenLayout = ({ companies, data, game }) => {
     default:
       break;
     }
+    if (numberMarketTokens === 0) {
+      numberReverseMarketTokens = 0;
+    }
 
     let reverseMarketTokens = Array(numberReverseMarketTokens).fill(
       <CompanyToken company={company}
@@ -153,13 +157,13 @@ const TokenLayout = ({ companies, data, game }) => {
       return <Token bleed={true}
                outline="black"
                {...token}
-               width={data.stationTokenSize / 2} />
+               width={data.generalTokenSize / 2} />
     } else {
       return <Token bleed={true}
                outline="black"
                color="white"
                label={token}
-               width={data.stationTokenSize / 2} />
+               width={data.generalTokenSize / 2} />
     }
   }, game.tokens);
 

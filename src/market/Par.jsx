@@ -33,7 +33,7 @@ const Par = ({data, title}) => {
 
     return (
       <g key={`par-${x}-${y}`}
-         transform={`translate(${x * data.width} ${y * data.height + 50})`}
+         transform={`translate(${x * data.width} ${y * data.height + (data.par.title === false ? 0 : 50)})`}
       >
         <ParCell cell={cell} data={data} />
       </g>

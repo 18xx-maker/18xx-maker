@@ -93,7 +93,7 @@ const Private = ({
                              </div>}
                   {token && <div className="private__company">
                              <Svg viewBox="-15 -15 30 30">
-                               <Token {...token} outlineWidth={2} width={15} />
+                               <Token {...token} outlineWidth={token.outlineWidth || "2"} width={15} />
                              </Svg>
                            </div>}
                   {icon && <div className="private__icon">
@@ -105,7 +105,7 @@ const Private = ({
                    ? description.reduce((lines, line) => <>{lines}<br />{line}</>)
                    : description}
                 </div>
-                {bid && <div className="private__bid">Min Bid: {bid}</div>}
+                {bid && <div className="private__bid">Min Bid: <Currency value={bid} type="private"/></div>}
                 <div className="private__price"><Currency value={price} type="private"/></div>
                 {players && <div className="private__players">{players}</div>}
                 {revenueNode && <div className="private__revenue">Revenue: {revenueNode}</div>}

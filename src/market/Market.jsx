@@ -29,13 +29,13 @@ const Market = ({data, title}) => {
     market = map(cell => cell && cell.bottom ? null : cell, data.market || []);
     cells = addIndex(map)((cell, i) => (
       <g key={`cell-bottom-${i}`}
-         transform={`translate(${i * data.width} 50)`}>
+         transform={`translate(${i * data.width} ${(data.stock.title === false ? 0 : 50)})`}>
         <Cell cell={cell} data={data} />
       </g>
     ), bottomMarket);
     cells = concat(cells, addIndex(map)((cell, i) => (
       <g key={`cell-top-${i}`}
-         transform={`translate(${i * data.width} 50)`}>
+         transform={`translate(${i * data.width} ${(data.stock.title === false ? 0 : 50)})`}>
         <Cell cell={cell} data={data} />
       </g>
     ), market));
@@ -45,13 +45,13 @@ const Market = ({data, title}) => {
     market = map(cell => cell && cell.bottom ? null : cell, data.market || []);
     cells = addIndex(map)((cell, i) => (
       <g key={`cell-bottom-${i}`}
-         transform={`translate(${i * 0.5 * data.width} ${i % 2 === 0 ? 50 : 50 + data.height})`}>
+         transform={`translate(${i * 0.5 * data.width} ${i % 2 === 0 ? (data.stock.title === false ? 0 : 50) : (data.stock.title === false ? 0 : 50) + data.height})`}>
         <Cell cell={cell} data={data} />
       </g>
     ), bottomMarket);
     cells = concat(cells, addIndex(map)((cell, i) => (
       <g key={`cell-top-${i}`}
-         transform={`translate(${i * 0.5 * data.width} ${i % 2 === 0 ? 50 : 50 + data.height})`}>
+         transform={`translate(${i * 0.5 * data.width} ${i % 2 === 0 ? (data.stock.title === false ? 0 : 50) : (data.stock.title === false ? 0 : 50) + data.height})`}>
         <Cell cell={cell} data={data} />
       </g>
     ), market));
@@ -63,7 +63,7 @@ const Market = ({data, title}) => {
     cells = addIndex(chain)((row, y) => {
       return addIndex(map)((cell, x) => (
         <g key={`cell-bottom-${x}-${y}`}
-           transform={`translate(${x * data.width} ${y * data.height + 50})`}>
+           transform={`translate(${x * data.width} ${y * data.height + (data.stock.title === false ? 0 : 50)})`}>
           <Cell cell={cell} data={data} />
         </g>
       ), row);
@@ -71,7 +71,7 @@ const Market = ({data, title}) => {
     cells = concat(cells, addIndex(chain)((row, y) => {
       return addIndex(map)((cell, x) => (
         <g key={`cell-top-${x}-${y}`}
-           transform={`translate(${x * data.width} ${y * data.height + 50})`}>
+           transform={`translate(${x * data.width} ${y * data.height + (data.stock.title === false ? 0 : 50)})`}>
           <Cell cell={cell} data={data} />
         </g>
       ), row);
@@ -90,7 +90,7 @@ const Market = ({data, title}) => {
     let x = data.display.par.x * data.config.stock.cell.width;
     let y = data.display.par.y * data.config.stock.cell.height;
     par = (
-      <g transform={`translate(${x} ${y})`}>
+      <g transform={`translate(${x} ${y + (data.stock.title === false ? 0 : 50)})`}>
         <Par title="Par" data={getParData(data.stock, data.config)} />
       </g>
     );
@@ -122,7 +122,7 @@ const Market = ({data, title}) => {
                   {addIndex(map)((legend, i) => (
                     <g
                       key={`pool-note-${i}`}
-                      transform={`translate(${x} ${y + 50 + (i * (game.stock.display.legend.verticalAlign === "bottom" ? -35 : 35))})`}
+                      transform={`translate(${x} ${y + (data.stock.title === false ? 0 : 50) + (i * (game.stock.display.legend.verticalAlign === "bottom" ? -35 : 35))})`}
                     >
                       <Legend right={game.stock.display.legend.align === "right"}
                               bottom={game.stock.display.legend.verticalAlign === "bottom"}
@@ -152,11 +152,11 @@ const Market = ({data, title}) => {
             <g>
               {addIndex(map)((legend, i) => {
                 let current = left;
-                left += 40 + legend.description.length * 8;
+                left += 100 + legend.description.length * 6.5;
                 return (
                   <g
                     key={`pool-note-${i}`}
-                    transform={`translate(${current} ${1 * data.height + 75})`}
+                    transform={`translate(${current} ${1 * data.height + (data.stock.title === false ? 25 : 75)})`}
                   >
                     <Legend {...legend}/>
                   </g>
@@ -182,11 +182,11 @@ const Market = ({data, title}) => {
             <g>
               {addIndex(map)((legend, i) => {
                 let current = left;
-                left += 40 + legend.description.length * 8;
+                left += 100 + legend.description.length * 6.5;
                 return (
                   <g
                     key={`pool-note-${i}`}
-                    transform={`translate(${current} ${2 * data.height + 75})`}
+                    transform={`translate(${current} ${2 * data.height + (data.stock.title === false ? 25 : 75)})`}
                   >
                     <Legend {...legend}/>
                   </g>

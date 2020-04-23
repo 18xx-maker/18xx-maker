@@ -50,6 +50,17 @@
       40,
       100,
       100
+    ],
+    "three-cost": [
+      "Free (+ hex)",
+      40,
+      100
+    ],
+    "four-cost": [
+      "Free (+ hex)",
+      40,
+      100,
+      100
     ]
   },
   "shareTypes": {
@@ -69,7 +80,7 @@
   },
   "companies": [
     {
-      "name": "Chemins de Fer de L'Etat Belge",
+      "name": "Chemins de Fer de L'État Belge",
       "abbrev": "B",
       "color": "black",
       "tokens": "four"
@@ -78,7 +89,7 @@
       "name": "Grande Compagnie du Luxembourg",
       "abbrev": "GCL",
       "color": "green",
-      "tokens": "four"
+      "tokens": "four-cost"
     },
     {
       "name": "Chemin de Fer du Nord",
@@ -90,7 +101,7 @@
       "name": "Noord-Brabantsch-Duitsche Spoorweg-Maatschappij",
       "abbrev": "NBDS",
       "color": "yellow",
-      "tokens": "three"
+      "tokens": "three-cost"
     },
     {
       "name": "Hollandsche IJzeren Spoorweg Maatschappij",
@@ -182,40 +193,51 @@
   ],
   "privates": [
     {
-      "name": "Amsterdam Canal Company - ACC",
+      "name": "Amsterdam Canal Company",
+      "id": "ACC",
       "price": 20,
       "revenue": 5,
-      "description": "Blocks Hex D6."
+      "description": "No special ability. Blocks hex D6 while owned by player."
     },
     {
-      "name": "Enkhuizen-Stavoren Ferry - E-SF",
+      "name": "Enkhuizen-Stavoren Ferry",
+      "id": "E-SF",
       "price": 40,
       "revenue": 10,
-      "description": "Company may place free tile on B8."
+      "hex": "B8",
+      "description": "Owning corporation may place a free tile on the E-SF hex B8 (the IJsselmeer Causeway) free of cost, in addition to its own tile placement. Blocks hex B8 while owned by player."
     },
     {
-      "name": "Charbonnages du Hainaut - CdH",
+      "name": "Charbonnages du Hainaut",
+      "id": "CdH",
       "price": 70,
       "revenue": 15,
-      "description": "Blocks Hex J8. Company may place tile and token on Hex J8 for F60."
+      "hex": "J8",
+      "description": "Owning corporation may place a tile and station token in the CdH hex J8 for only the F60 cost of the mountain. The track is not required to be connected to existing track of this corporation (or any corporation), and can be used as a teleport. This counts as the corporation's track lay for that turn. Blocks hex J8 while owned by player."
     },
     {
-      "name": "Grand Central Belge - GCB",
+      "name": "Grand Central Belge",
+      "id": "GCB",
       "price": 110,
       "revenue": 20,
-      "description": "Blocks Hex G7, G9 and H10. Owner may exchange for a share of the Etat Belge (this closes the private company)."
+      "company": "B",
+      "description": "Owning player may exchange the GCB for a 10% certificate of the Chemins de Fer de L’Etat Belge (B) from the bank or the bank pool, subject to normal certificate limits. This closes the private company. The exchange may be made a) in a stock round, during the player’s turn or between the turns of other players, or b) in an operating round, between the turns of corporations. Blocks hexes G7, G9, & H10 while owned by player."
     },
     {
-      "name": "Chemins de Fer Luxembourgeois - CFL",
+      "name": "Chemins de Fer Luxembourgeois",
+      "id": "CFL",
       "price": 160,
       "revenue": 25,
-      "description": "Blocks Hexes K11 & J12. Player gets a 10% certificate for GCL."
+      "company": "GCL",
+      "description": "Upon purchase, the owning player receives a 10% certificate of the Grande Compagnie du Luxembourg (GCL). This certificate may only be sold once the GCL President’s Certificate has been purchased and a par price set, subject to standard rules. Blocks hexes K11 & J12 while owned by player."
     },
     {
-      "name": "Chemin de Fer de Lille à Valenciennes - CFLV",
+      "name": "Chemin de Fer de Lille à Valenciennes",
+      "id": "CFLV",
       "price": 220,
       "revenue": 30,
-      "description": "Blocks Hexes I3 & J4. Includes president's certificate for the Chemin de Fer du Nord. Closes on first train purchase."
+      "company": "Nord",
+      "description": "Upon purchase, the owning player receives the President’s Certificate of the Chemin de Fer du Nord (Nord) and must immediately set the par price. This private company may not be bought by a corporation, and closes when the Nord buys its first train. Blocks hexes I3 & J4 while owned by player."
     }
   ],
   "phases": [

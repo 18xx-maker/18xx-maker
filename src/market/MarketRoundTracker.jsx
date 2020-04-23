@@ -21,7 +21,7 @@ const MarketRoundTracker = ({roundTracker}) => {
         let rotation = roundTracker.rotation || 0;
 
         let x = config.stock.cell.width * roundTracker.x;
-        let y = config.stock.cell.height * roundTracker.y + 50;
+        let y = config.stock.cell.height * roundTracker.y + (config.stock.title === false ? 0 : 50);
 
         return (
           <g transform={`translate(${x} ${y})`}>

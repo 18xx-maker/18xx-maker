@@ -333,6 +333,7 @@
       "id": "P16",
       "name": "Paris Pullman",
       "price": 80,
+      "image": "Pullman",
       "description": "The owning company receives one Pullman."
     },
     {
@@ -1371,6 +1372,7 @@
       "name": "Pullman",
       "quantity": 1,
       "color": "bg",
+      "image": "Pullman",
       "info": [
         {
           "color": "yellow",
