@@ -4,12 +4,16 @@
     "subtitle": "The Birth of the American Railroads",
     "designer": "Scott Petersen",
     "background": "gray",
-    "titleX": 50,
-    "currency": "USD"
+    "titleY": 1000,
+    "titleX": 1070,
+    "titleSize": 50,
+    "extraTotalWidth": 100,
+    "currency": "USD",
+    "orientation": "horizontal"
   },
   "links": {
-    "bgg": "https://www.boardgamegeek.com/boardgame/421/1830-railways-robber-barons",
-    "rules": "https://boardgamegeek.com/wiki/page/1830_Rules"
+    "bgg": "https://boardgamegeek.com/boardgame/253608/18chesapeake",
+    "rules": "https://www.dropbox.com/s/e38xzaf14meb2tw/18Chesapeake_Rules.pdf"
   },
   "wip": true,
   "tokens": [
@@ -92,22 +96,22 @@
     {
       "name": "Pittsburgh and Lake Erie Railroad",
       "abbrev": "PLE",
-      "color": "black"
+      "color": "white"
     },
     {
       "name": "Strasburg Rail Road",
-      "abbrev": "SR",
+      "abbrev": "SRR",
       "color": "red"
     },
     {
       "name": "Baltimore & Ohio Railroad",
-      "abbrev": "B&O",
+      "abbrev": "BO",
       "color": "blue"
     },
     {
       "name": "Chesapeake & Ohio Railroad",
-      "abbrev": "C&O",
-      "color": "cyan",
+      "abbrev": "CO",
+      "color": "lightBlue",
       "tokens": "four"
     },
     {
@@ -118,13 +122,13 @@
     },
     {
       "name": "Camden & Amboy Railroad",
-      "abbrev": "C&A",
+      "abbrev": "CA",
       "color": "orange",
       "tokens": "two"
     },
     {
       "name": "Norfolk & Western Railway",
-      "abbrev": "N&W",
+      "abbrev": "NW",
       "color": "brown"
     }
   ],
@@ -606,5 +610,922 @@
     "CC7": 2,
     "CC8": 1,
     "CC9": 1
+  },
+  "map": {
+    "print": "landscape",
+    "roundTracker": {
+      "type": "row",
+      "x": 1300,
+      "y": 1000
+    },
+    "hexes": [
+      {
+        "color": "plain",
+        "hexes": [
+          "B6",
+          "B8",
+          "B10",
+          "C3",
+          "C7",
+          "C9",
+          "C11",
+          "E7",
+          "E9",
+          "E13",
+          "F6",
+          "F12",
+          "G7",
+          "I7",
+          "J8",
+          "J10",
+          "L4"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": "$80"
+          }
+        ],
+        "hexes": [
+          "B12",
+          "C13",
+          "D4",
+          "D6",
+          "D10",
+          "E5"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "river",
+            "cost": "$40"
+          }
+        ],
+        "hexes": [
+          "F10",
+          "G9",
+          "G11",
+          "H12"
+        ]
+      },
+      {
+        "color": "offboard",
+        "removeBorders": [
+          1,
+          6
+        ],
+        "hexes": [
+          "A1"
+        ]
+      },
+      {
+        "color": "offboard",
+        "cities": [
+          {
+            "companies": [
+              "PLE"
+            ]
+          }
+        ],
+        "track": [
+          {
+            "side": 6
+          }
+        ],
+        "removeBorders": [
+          4,
+          5
+        ],
+        "hexes": [
+          "A3"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "angle": 90,
+          "percent": 1,
+          "name": {
+            "name": "Pittsburgh"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "40"
+            },
+            {
+              "color": "green",
+              "cost": "50"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            },
+            {
+              "color": "gray",
+              "cost": "80"
+            }
+          ]
+        },
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          }
+        ],
+        "removeBorders": [
+          2,
+          3
+        ],
+        "hexes": [
+          "B2"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Ohio"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "40"
+            },
+            {
+              "color": "green",
+              "cost": "60"
+            },
+            {
+              "color": "brown",
+              "cost": "80"
+            },
+            {
+              "color": "gray",
+              "cost": "100"
+            }
+          ]
+        },
+        "track": [
+          {
+            "type": "offboard",
+            "side": 5
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "A7"
+        ]
+      },
+      {
+        "color": "offboard",
+        "removeBorders": [
+          1,
+          6
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "hexes": [
+          "A13"
+        ]
+      },
+      {
+        "color": "offboard",
+        "removeBorders": [
+          4,
+          5
+        ],
+        "hexes": [
+          "A15"
+        ]
+      },
+      {
+        "color": "offboard",
+        "removeBorders": [
+          2,
+          3
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 4
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "West Virginia Coal"
+          },
+          "angle": 90,
+          "percent": 1,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "40"
+            },
+            {
+              "color": "green",
+              "cost": "50"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            },
+            {
+              "color": "gray",
+              "cost": "80"
+            }
+          ]
+        },
+        "hexes": [
+          "B14"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "x": -30,
+            "name": {
+              "name": "Charleroi",
+              "reverse": true
+            }
+          },
+          {
+            "x": 30,
+            "name": {
+              "name": "Connellsville"
+            }
+          }
+        ],
+        "hexes": [
+          "B4"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Green Spring"
+            }
+          }
+        ],
+        "hexes": [
+          "C5"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": "$80",
+            "x": -30
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Lynchburg"
+            },
+            "x": 30,
+            "companies": [
+              "NW"
+            ]
+          }
+        ],
+        "hexes": [
+          "C13"
+        ]
+      },
+      {
+        "color": "plain",
+        "companies": [
+          {
+            "label": "C&OC",
+            "percent": 0.5,
+            "angle": 150
+          }
+        ],
+        "cities": [
+          {
+            "x": -30,
+            "y": 20,
+            "name": {
+              "name": "Berlin",
+              "reverse": true
+            }
+          }
+        ],
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": "$80",
+            "x": 30
+          }
+        ],
+        "hexes": [
+          "D2"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": "$80",
+            "x": 30
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Leesburg"
+            },
+            "x": -30
+          }
+        ],
+        "hexes": [
+          "D8"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Charlottesville"
+            }
+          }
+        ],
+        "hexes": [
+          "D12"
+        ]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "gentle",
+            "side": 6
+          }
+        ],
+        "hexes": [
+          "E1"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Hagerstown"
+            }
+          }
+        ],
+        "hexes": [
+          "E3"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Fredericksburg"
+            }
+          }
+        ],
+        "hexes": [
+          "E11"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Harrisburg"
+            },
+            "companies": [
+              "PRR"
+            ]
+          }
+        ],
+        "hexes": [
+          "F2"
+        ]
+      },
+      {
+        "color": "plain",
+        "companies": [
+          {
+            "label": "B&S"
+          }
+        ],
+        "hexes": [
+          "F4",
+          "G5"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "x": 15,
+            "name": {
+              "name": "Washington DC"
+            }
+          }
+        ],
+        "labels": [
+          {
+            "label": "DC",
+            "x": -30,
+            "y": 30
+          }
+        ],
+        "hexes": [
+          "F8"
+        ]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 4
+          }
+        ],
+        "hexes": [
+          "F14"
+        ]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "gentle",
+            "side": 6
+          },
+          {
+            "type": "sharp",
+            "side": 1
+          }
+        ],
+        "hexes": [
+          "G1"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Columbia"
+            },
+            "x": -15,
+            "y": -15
+          }
+        ],
+        "terrain": [
+          {
+            "type": "river",
+            "cost": "$40",
+            "x": 15,
+            "y": 30
+          }
+        ],
+        "hexes": [
+          "G3"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Richmond"
+            },
+            "companies": [
+              "CO"
+            ]
+          }
+        ],
+        "hexes": [
+          "G13"
+        ]
+      },
+      {
+        "color": "plain",
+        "companies": [
+          {
+            "label": "C-P"
+          }
+        ],
+        "hexes": [
+          "H2",
+          "I3"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Strasburg"
+            },
+            "x": -30,
+            "companies": [
+              "SRR"
+            ]
+          }
+        ],
+        "terrain": [
+          {
+            "type": "river",
+            "cost": "$40",
+            "x": 30
+          }
+        ],
+        "hexes": [
+          "H4"
+        ]
+      },
+      {
+        "color": "yellow",
+        "values": [
+          {
+            "angle": 180,
+            "percent": 0.76,
+            "value": 30
+          },
+          {
+            "percent": 0.76,
+            "value": 30
+          }
+        ],
+        "cities": [
+          {
+            "angle": 230,
+            "percent": 0.58
+          },
+          {
+            "angle": 50,
+            "percent": 0.58,
+            "name": {
+              "name": "Baltimore"
+            },
+            "companies": [
+              "BO"
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "label": "OO",
+            "angle": 140,
+            "percent": 0.5
+          }
+        ],
+        "terrain": [
+          {
+            "type": "river",
+            "angle": 310,
+            "percent": 0.62,
+            "cost": 80
+          }
+        ],
+        "track": [
+          {
+            "type": "stop",
+            "side": 2
+          },
+          {
+            "type": "stop",
+            "side": 5
+          }
+        ],
+        "hexes": [
+          "H6"
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue":  {
+          "name": {
+            "name": "Norfolk"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            },
+            {
+              "color": "gray",
+              "cost": "60"
+            }
+          ]
+        },
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          }
+        ],
+        "hexes": [
+          "H14"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Wilmington"
+            },
+            "x": -15,
+            "y": -15
+          }
+        ],
+        "terrain": [
+          {
+            "type": "river",
+            "cost": "$40",
+            "x": 15,
+            "y": 30
+          }
+        ],
+        "hexes": [
+          "I5"
+        ]
+      },
+      {
+        "color": "gray",
+        "values": [
+          {
+            "value": 30,
+            "x": -20
+          }
+        ],
+        "towns": [
+          {
+            "rotation": 330,
+            "angle": 240,
+            "percent": 0.26
+          }
+        ],
+        "track": [
+          {
+            "type": "gentle",
+            "side": 4
+          }
+        ],
+        "hexes": [
+          "I9"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Allentown"
+            },
+            "companies": [
+              "LV"
+            ]
+          }
+        ],
+        "hexes": [
+          "J2"
+        ]
+      },
+      {
+        "color": "yellow",
+        "values": [
+          {
+            "angle": 30,
+            "percent": 0.76,
+            "value": 30
+          },
+          {
+            "angle": 210,
+            "percent": 0.76,
+            "value": 30
+          }
+        ],
+        "cities": [
+          {
+            "angle": 160,
+            "percent": 0.58
+          },
+          {
+            "angle": -20,
+            "percent": 0.58,
+            "name": {
+              "name": "Philadelphia"
+            }
+          }
+        ],
+        "labels": [
+          {
+            "label": "OO",
+            "angle": 90,
+            "percent": 0.65
+          }
+        ],
+        "track": [
+          {
+            "type": "stop",
+            "side": 1
+          },
+          {
+            "type": "stop",
+            "side": 4
+          }
+        ],
+        "hexes": [
+          "J4"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Camden"
+            },
+            "x": -30,
+            "companies": [
+              "CA"
+            ]
+          }
+        ],
+        "terrain": [
+          {
+            "type": "river",
+            "cost": "$40",
+            "x": 30
+          }
+        ],
+        "hexes": [
+          "J6"
+        ]
+      },
+      {
+        "color": "gray",
+        "values": [
+          {
+            "value": 30,
+            "angle": 30,
+            "percent": 0.1
+          }
+        ],
+        "track": [
+          {
+            "type": "sharp",
+            "side": 1
+          }
+        ],
+        "towns": [
+          {
+            "angle": 30,
+            "percent": 0.6,
+            "rotation": 300
+          }
+        ],
+        "hexes": [
+          "K1"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "y": -25,
+            "x": -30,
+            "name": {
+              "name": "Trenton"
+            }
+          },
+          {
+            "x": 30,
+            "y": -15,
+            "name": {
+              "name": "Amboy",
+              "reverse": true
+            }
+          }
+        ],
+        "companies": [
+          {
+            "label": "D&R",
+            "angle": 0,
+            "percent": 0.6
+          }
+        ],
+        "hexes": [
+          "K3"
+        ]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": 0,
+            "percent": 0.4,
+            "name": {
+              "name": "Burlington"
+            }
+          },
+          {
+            "angle": 200,
+            "percent": 0.4,
+            "name": {
+              "name": "Princeton"
+            }
+          }
+        ],
+        "hexes": [
+          "K5"
+        ]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 3
+          }
+        ],
+        "hexes": [
+          "K7"
+        ]
+      },
+      {
+        "color": "offboard",
+        "hexes": [
+          "L2"
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "New York"
+          },
+          "revenues": [
+            {
+              "cost": "40",
+              "color": "yellow"
+            },
+            {
+              "cost": "60",
+              "color": "green"
+            },
+            {
+              "cost": "80",
+              "color": "brown"
+            },
+            {
+              "cost": "100",
+              "color": "gray"
+            }
+          ]
+        },
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ]
+      }
+    ]
   }
 }
