@@ -1213,7 +1213,7 @@
             "type": "river",
             "angle": 310,
             "percent": 0.62,
-            "cost": 80
+            "cost": 40
           }
         ],
         "track": [
