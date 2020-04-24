@@ -2,13 +2,14 @@ import React from "react";
 
 import Color from "../data/Color";
 
-const RouteBonus = ({ value, size, fillColor, strokeColor, textColor }) => {
+const RouteBonus = ({ value, size, fillColor, strokeColor, strokeWidth, textColor }) => {
   size = size || 14;
   let width = 5.0 * value.length;
   let height = size + 6;
   fillColor = fillColor || "white";
   strokeColor = strokeColor || "black";
   textColor = textColor || "black";
+  strokeWidth = strokeWidth || 1;
 
   return (
     <Color>
@@ -18,7 +19,7 @@ const RouteBonus = ({ value, size, fillColor, strokeColor, textColor }) => {
             points={`${-width - 10},0 ${-width},${height*0.5} ${width},${height*0.5} ${width+10},0 ${width},${height*-0.5} ${-width},${height*-0.5}`}
             fill={c(fillColor)}
             stroke={c(strokeColor)}
-            strokeWidth="1"
+            strokeWidth={strokeWidth}
           />
           <text
             fontWeight="bold"
