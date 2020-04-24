@@ -211,7 +211,9 @@ const TileSheet = ({ paper, layout, hexWidth, gaps }) => {
             }
           }
 
-          if (pastSides.length > 0) {
+          // No need to line up track for "offset" or "individual"
+          if ((layout === "die" || layout === "smallDie") &&
+              pastSides.length > 0) {
             if (includes(1, pastSides)) {
               // Track above us has track on the bottom, if we have track on the
               // top do nothing
