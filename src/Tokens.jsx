@@ -152,18 +152,20 @@ const TokenLayout = ({ companies, data, game }) => {
     return [...marketTokens, ...reverseMarketTokens, ...stationTokens];
   }, companies);
 
-  let gameTokens = map(token => {
+  let gameTokens = chain((token) => {
+    let count = token.quantity || 1;
     if (is(Object, token)) {
-      return <Token bleed={true}
+      return Array(count).fill(
+               <Token bleed={true}
                outline="black"
                {...token}
-               width={data.generalTokenSize / 2} />
+               width={data.generalTokenSize / 2} />);
     } else {
-      return <Token bleed={true}
+      return [ <Token bleed={true}
                outline="black"
                color="white"
                label={token}
-               width={data.generalTokenSize / 2} />
+               width={data.generalTokenSize / 2} /> ];
     }
   }, game.tokens);
 
