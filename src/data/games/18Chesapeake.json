@@ -52,13 +52,13 @@
     "four": [
       "Free",
       40,
-      100,
-      100
+      60,
+      80
     ],
     "default": [
       "Free",
       40,
-      100
+      60
     ],
     "two": [
       "Free",
@@ -86,6 +86,7 @@
       }
     ]
   },
+  "floatPercent": 60,
   "companies": [
     {
       "name": "Pennsylvania Railroad",
@@ -136,7 +137,9 @@
     {
       "name": "2",
       "quantity": 7,
-      "price": "$80",
+      "rusts_on": "4",
+      "price": 80,
+      "distance": 2,
       "color": "yellow",
       "info": [
         {
@@ -148,7 +151,8 @@
     {
       "name": "3",
       "quantity": 6,
-      "price": "$180",
+      "rusts_on": "6",
+      "price": 180,
       "color": "green",
       "info": [
         {
@@ -160,7 +164,8 @@
     {
       "name": "4",
       "quantity": 5,
-      "price": "$300",
+      "rusts_on": "D",
+      "price": 300,
       "color": "green",
       "info": [
         {
@@ -172,7 +177,7 @@
     {
       "name": "5",
       "quantity": 3,
-      "price": "$500",
+      "price": 500,
       "color": "brown",
       "info": [
         {
@@ -184,7 +189,7 @@
     {
       "name": "6",
       "quantity": 2,
-      "price": "$630",
+      "price": 630,
       "color": "brown",
       "info": [
         {
@@ -196,9 +201,16 @@
     {
       "name": "D",
       "quantity": 6,
-      "price": "$900",
+      "price": 900,
       "color": "brown",
+      "available_on": "6",
       "description": "Cost $700 when trading in a 4T, 5T or 6T",
+      "discount": {
+        "4": 300,
+        "5": 300,
+        "6": 300,
+        "D": 300
+      },
       "info": [
         {
           "color": "yellow",
