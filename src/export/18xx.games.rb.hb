@@ -129,7 +129,7 @@ module Engine
         {{#each game.companies}}
         {
           sym: '{{{abbrev}}}',
-          logo: '{{{logo}}}', # TODO
+          logo: {{#if logo}}'{{{logo}}}',{{else}}'', # TODO{{/if}}
           name: '{{{name}}}',
           tokens: [{{#each tokens}}{{label}}{{#unless @last}}, {{/unless}}{{/each}}],
           float_percent: {{#if floatPercent}}{{floatPercent}},{{else}}60, # TODO{{/if}}

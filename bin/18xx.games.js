@@ -20,9 +20,6 @@ const colors = {
   ...gmt.colors
 };
 
-util.setup();
-util.setup18xxGame(filename);
-
 // Build data
 const template = Handlebars.compile(
   fs.readFileSync("./src/export/18xx.games.rb.hb", { encoding: "UTF8" })
@@ -66,6 +63,29 @@ const findHome = (abbrev, hexes) => {
   return hex && hex.hexes[0];
 };
 
+// Get proper filename
+const match = filename.match(/^([0-9]*)(.*)$/);
+const numbers = match[1];
+const words = match[2].toLowerCase();
+let newFilename = numbers;
+if (words !== '') {
+  newFilename += `_${words}`;
+}
+const exportName = `g_${newFilename}.rb`;
+console.log(`Outputing as ${exportName}`);
+
+util.setup();
+util.setup18xxGame(filename, newFilename);
+
+// Grab logos that we want to copy
+const LOGO_RE = /[& ]/g;
+const logos = R.chain(c => {
+  return c.logo ? [{
+    file: c.logo,
+    name: c.abbrev.replace(LOGO_RE, '')
+  }] : [];
+}, companies);
+
 const game = {
   bank: gameDef.bank,
   currency: gameDef.info.currency.replace('#', '%d'),
@@ -87,10 +107,10 @@ const game = {
     floatPercent: c.floatPercent || gameDef.floatPercent,
     abbrev: c.abbrev,
     name: c.name,
-    logo: c.logo ? `${filename}/${c.logo}` : "",
+    logo: c.logo ? `${newFilename}/${c.abbrev.replace(LOGO_RE, '')}` : "",
     tokens: R.map(t => ({ label: R.is(Number, t) ? t : 0 }), c.tokens),
     home: findHome(c.abbrev, ((gameDef.map || {}).hexes || [])),
-    color: colors[c.color]
+    color: c.color === "white" ? colors["gray"] : colors[c.color]
   }), companies),
   market: R.map(r => ({
     row: R.map(cell => ({
@@ -111,18 +131,11 @@ const game = {
   }), gameDef.trains)
 };
 
-// Get proper filename
-let match = filename.match(/^([0-9]*)(.*)$/);
-let exportName = "g";
-if (match[1] !== '') {
-  exportName += `_${match[1]}`;
-}
-if (match[2] !== '') {
-  exportName += `_${match[2].toLowerCase()}`;
-}
-exportName += '.rb';
-
-console.log(`Outputing as ${exportName}`);
+// Copy logos
+logos.forEach(logo => {
+  fs.copyFileSync(`./src/data/logos/${logo.file}.svg`,
+                  `./build/render/${filename}/18xx.games/${newFilename}/${logo.name}.svg`);
+});
 
 fs.writeFileSync(`./build/render/${filename}/18xx.games/${exportName}`,
                  template({ game, filename }),
