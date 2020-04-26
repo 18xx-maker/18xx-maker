@@ -63,7 +63,7 @@ const game = {
     value: p.price,
     revenue: p.revenue,
     abbrev: p.name.replace(/[^A-Z&]/g, ''),
-    description: p.description
+    description: p.description.replace(/'/g, '\\\'')
   }), gameDef.privates),
   companies: R.map(c => ({
     abbrev: c.abbrev,
