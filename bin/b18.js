@@ -179,7 +179,7 @@ const server = app.listen(9000);
 
   R.map(extra => {
     btok.token.push({
-      dups: 1,
+      dups: (extra.quantity || 1),
       flip: true
     });
   }, game.tokens || []);
