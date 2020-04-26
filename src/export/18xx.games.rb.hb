@@ -80,11 +80,17 @@ module Engine
         {{/each}}
       }.freeze
 
+      PHASES = [
+        {{#each game.phases}}
+        Phase::{{{name}}},
+        {{/each}}
+      ].freeze
+
       TRAINS = [
         {{#each game.trains}}
         {
           name: '{{{name}}}',
-          distance: {{distance}},
+          distance: {{#if distance}}{{distance}},{{else}}999, #TODO{{/if}}
           price: {{price}},
           {{#if rusts_on}}
           rusts_on: '{{rusts_on}}',
@@ -127,7 +133,9 @@ module Engine
           name: '{{{name}}}',
           tokens: [{{#each tokens}}{{label}}{{#unless @last}},{{/unless}}{{/each}}],
           float_percent: {{#if floatPercent}}{{floatPercent}},{{else}}60, # TODO{{/if}}
-          coordinates: 'K8', # TODO
+          {{#if home}}
+          coordinates: '{{home}}',
+          {{/if}}
           color: '{{color}}'
         }{{#unless @last}},{{/unless}}
         {{/each}}

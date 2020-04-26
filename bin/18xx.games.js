@@ -1,5 +1,6 @@
 const Handlebars = require("handlebars");
 const R = require('ramda');
+const converter = require('number-to-words');
 const fs = require("fs");
 const path = require('path');
 
@@ -34,10 +35,8 @@ const findName = hex => {
                    ...hex.towns || [],
                    hex.offBoardRevenue ? [hex.offBoardRevenue] : []
                   ];
-  let named = R.find(p => p.name, possibles);
-  if (named) {
-    return named.name.name;
-  }
+  let names = R.chain(p => p.name ? [p.name.name] : [], possibles);
+  return names.join(" & ");
 };
 
 // Takes a map and returns each name/hex location
@@ -51,6 +50,22 @@ const findNames = hexes => {
   }, [], hexes);
 };
 
+const findHome = (abbrev, hexes) => {
+  let hex = R.find(hex => {
+    let cities = hex.cities;
+
+    if (!cities) {
+      return false;
+    }
+
+    return R.any(city => {
+      return city.companies && city.companies.includes(abbrev);
+    }, cities);
+  }, hexes);
+
+  return hex && hex.hexes[0];
+};
+
 const game = {
   bank: gameDef.bank,
   currency: gameDef.info.currency.replace('#', '%d'),
@@ -58,10 +73,13 @@ const game = {
   starting_cash: R.map(p => ({ player: p.number, cash: (gameDef.capital || p.capital)}), gameDef.players),
   tiles: R.mapObjIndexed((t,id) => ({id, quantity: (t.quantity ? t.quantity : t)}), gameDef.tiles),
   location_names: findNames((gameDef.map || {}).hexes || []),
+  phases: R.map(p => ({
+    name: isNaN(parseInt(p.name)) ? p.name : converter.toWords(parseInt(p.name)).toUpperCase()
+  }), gameDef.phases || []),
   privates: R.map(p => ({
     name: p.name,
     value: p.price,
-    revenue: p.revenue,
+    revenue: R.is(Array, p.revenue) ? p.revenue[0] : p.revenue,
     abbrev: p.name.replace(/[^A-Z&]/g, ''),
     description: (p.description || "").replace(/'/g, '\\\'')
   }), gameDef.privates),
@@ -71,6 +89,7 @@ const game = {
     name: c.name,
     logo: c.logo ? `${filename}/${c.logo}` : "",
     tokens: R.map(t => ({ label: R.is(Number, t) ? t : 0 }), c.tokens),
+    home: findHome(c.abbrev, ((gameDef.map || {}).hexes || [])),
     color: colors[c.color]
   }), companies),
   market: R.map(r => ({
