@@ -20,7 +20,7 @@ const colors = {
 };
 
 util.setup();
-util.setupGame(filename);
+util.setup18xxGame(filename);
 
 // Build data
 const template = Handlebars.compile(
@@ -63,9 +63,10 @@ const game = {
     value: p.price,
     revenue: p.revenue,
     abbrev: p.name.replace(/[^A-Z&]/g, ''),
-    description: p.description.replace(/'/g, '\\\'')
+    description: (p.description || "").replace(/'/g, '\\\'')
   }), gameDef.privates),
   companies: R.map(c => ({
+    floatPercent: c.floatPercent || gameDef.floatPercent,
     abbrev: c.abbrev,
     name: c.name,
     logo: c.logo ? `${filename}/${c.logo}` : "",
@@ -74,11 +75,23 @@ const game = {
   }), companies),
   market: R.map(r => ({
     row: R.map(cell => ({
-      value: cell ? `${cell.value ? cell.value : cell}${cell.par ? 'p' : ''}${cell.legend ? ['y', 'o', 'b'][cell.legend] : ''}` : '-'
+      value: cell ? `${cell.value ? cell.value : cell}${cell.par ? 'p' : ''}${cell.legend ? ['y', 'o', 'b'][cell.legend] : ''}` : '#{}'
     }), r)
-  }), gameDef.stock.market)
+  }), gameDef.stock.market),
+  trains: R.map(t => ({
+    name: t.name,
+    distance: t.distance,
+    price: t.price,
+    rusts_on: t.rusts_on,
+    num: t.quantity === "∞" ? 99 : t.quantity,
+    available_on: t.available_on,
+    discount: t.discount ? R.mapObjIndexed((discount, name) => ({
+      name,
+      discount
+    }), t.discount || {}) : undefined
+  }), gameDef.trains)
 };
 
-fs.writeFileSync(`./build/render/${filename}/g_${filename}.rb`,
+fs.writeFileSync(`./build/render/${filename}/18xx.games/g_${filename}.rb`,
                  template({ game, filename }),
                  { mode: "644" });

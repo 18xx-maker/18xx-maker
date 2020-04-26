@@ -16,6 +16,15 @@ export const setupB18 = (game, version) => {
   }
 };
 
+export const setup18xxGame = game => {
+  setupGame(game);
+  try {
+    fs.mkdirSync(`./build/render/${game}/18xx.games`);
+  } catch (err) {
+    if (err.code !== 'EEXIST') throw err;
+  }
+};
+
 export const setupGame = game => {
   try {
     fs.mkdirSync(`./build/render/${game}`);
