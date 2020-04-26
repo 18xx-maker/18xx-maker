@@ -5,7 +5,7 @@
     "designer": "Francis Tresham",
     "background": "gray",
     "titleX": 50,
-    "currency": "USD"
+    "currency": "$#"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/421/1830-railways-robber-barons",

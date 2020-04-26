@@ -8,7 +8,7 @@
     "titleX": 1070,
     "titleSize": 50,
     "extraTotalWidth": 100,
-    "currency": "USD",
+    "currency": "$#",
     "orientation": "horizontal"
   },
   "links": {
@@ -51,18 +51,18 @@
   "tokenTypes": {
     "four": [
       "Free",
-      "$40",
-      "$100",
-      "$100"
+      40,
+      100,
+      100
     ],
     "default": [
       "Free",
-      "$40",
-      "$100"
+      40,
+      100
     ],
     "two": [
       "Free",
-      "$40"
+      40
     ]
   },
   "shareTypes": {
