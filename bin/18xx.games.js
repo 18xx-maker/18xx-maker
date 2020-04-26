@@ -111,6 +111,17 @@ const game = {
   }), gameDef.trains)
 };
 
-fs.writeFileSync(`./build/render/${filename}/18xx.games/g_${filename}.rb`,
+// Get proper filename
+let match = filename.match(/^([0-9]+)(.*)$/);
+console.log(match);
+let exportName = `g_${match[1]}`;
+if (match[2] !== '') {
+  exportName += `_${match[2].toLowerCase()}`;
+}
+exportName += '.rb';
+
+console.log(`Outputing as ${exportName}`);
+
+fs.writeFileSync(`./build/render/${filename}/18xx.games/${exportName}`,
                  template({ game, filename }),
                  { mode: "644" });
