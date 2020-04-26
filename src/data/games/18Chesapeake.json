@@ -91,45 +91,53 @@
     {
       "name": "Pennsylvania Railroad",
       "abbrev": "PRR",
+      "logo": "PRR",
       "color": "green",
       "tokens": "four"
     },
     {
       "name": "Pittsburgh and Lake Erie Railroad",
       "abbrev": "PLE",
+      "logo": "PLE",
       "color": "white"
     },
     {
       "name": "Strasburg Rail Road",
       "abbrev": "SRR",
+      "logo": "SRR",
       "color": "red"
     },
     {
       "name": "Baltimore & Ohio Railroad",
-      "abbrev": "BO",
+      "abbrev": "B&O",
+      "logo": "BO",
       "color": "blue"
     },
     {
       "name": "Chesapeake & Ohio Railroad",
-      "abbrev": "CO",
+      "abbrev": "C&O",
+      "logo": "CO",
       "color": "lightBlue",
       "tokens": "four"
     },
     {
       "name": "Lehigh Valley Railroad",
       "abbrev": "LV",
+      "logo": "LV",
       "color": "yellow",
       "tokens": "two"
     },
     {
       "name": "Camden & Amboy Railroad",
-      "abbrev": "CA",
+      "abbrev": "C&A",
+      "logo": "CA",
       "color": "orange",
       "tokens": "two"
     },
     {
       "name": "Norfolk & Western Railway",
       "abbrev": "NW",
+      "logo": "NW",
       "color": "brown"
     }
   ],
