@@ -131,7 +131,7 @@ module Engine
           sym: '{{{abbrev}}}',
           logo: '{{{logo}}}', # TODO
           name: '{{{name}}}',
-          tokens: [{{#each tokens}}{{label}}{{#unless @last}},{{/unless}}{{/each}}],
+          tokens: [{{#each tokens}}{{label}}{{#unless @last}}, {{/unless}}{{/each}}],
           float_percent: {{#if floatPercent}}{{floatPercent}},{{else}}60, # TODO{{/if}}
           {{#if home}}
           coordinates: '{{home}}',
