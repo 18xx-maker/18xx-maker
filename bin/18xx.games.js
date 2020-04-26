@@ -112,9 +112,11 @@ const game = {
 };
 
 // Get proper filename
-let match = filename.match(/^([0-9]+)(.*)$/);
-console.log(match);
-let exportName = `g_${match[1]}`;
+let match = filename.match(/^([0-9]*)(.*)$/);
+let exportName = "g";
+if (match[1] !== '') {
+  exportName += `_${match[1]}`;
+}
 if (match[2] !== '') {
   exportName += `_${match[2].toLowerCase()}`;
 }
