@@ -70,6 +70,7 @@
       100
     ]
   },
+  "floatPercent": 60,
   "companies": [
     {
       "name": "Pennsylvania Railroad",
@@ -135,6 +136,8 @@
       "price": 80,
       "color": "yellow",
       "image": "2T",
+      "rusts_on": "4",
+      "distance": 2,
       "info": [
         {
           "color": "green",
@@ -148,6 +151,8 @@
       "price": 180,
       "color": "green",
       "image": "3T",
+      "rusts_on": "6",
+      "distance": 3,
       "info": [
         {
           "color": "brown",
@@ -161,6 +166,8 @@
       "price": 300,
       "color": "green",
       "image": "4T",
+      "rusts_on": "D",
+      "distance": 4,
       "info": [
         {
           "color": "brown",
@@ -174,6 +181,7 @@
       "price": 450,
       "color": "brown",
       "image": "5T",
+      "distance": 5,
       "info": [
         {
           "color": "yellow",
@@ -187,6 +195,7 @@
       "price": 630,
       "color": "brown",
       "image": "6T",
+      "distance": 6,
       "info": [
         {
           "color": "yellow",
@@ -200,6 +209,14 @@
       "price": 1100,
       "color": "brown",
       "image": "Diesel",
+      "available_on": "6",
+      "distance": 999,
+      "discount": {
+        "4": 300,
+        "5": 300,
+        "6": 300,
+        "D": 300
+      },
       "description": "Cost $800 when trading in a 4T, 5T or 6T",
       "info": [
         {
