@@ -99,7 +99,7 @@ const game = {
   }), gameDef.stock.market),
   trains: R.map(t => ({
     name: t.name,
-    distance: t.distance,
+    distance: t.distance || (isNaN(parseInt(t.name)) ? 999 : parseInt(t.name)),
     price: t.price,
     rusts_on: t.rusts_on,
     num: t.quantity === "∞" ? 99 : t.quantity,
