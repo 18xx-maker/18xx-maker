@@ -48,6 +48,7 @@
     "eject": "react-scripts eject",
     "print": "node ./bin/print.js",
     "b18": "node ./bin/b18.js",
+    "18xx.games": "node ./bin/18xx.games.js",
     "svgo": "yarn svgo:icons && yarn svgo:logos",
     "svgo:logos": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/logos",
     "svgo:icons": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/icons",
