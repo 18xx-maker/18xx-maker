@@ -46,7 +46,11 @@ export const compileCities = hex => {
   let values = getValues(hex);
 
   return addIndex(map)((c,i) => {
-    return "c=r:" + (values[i] || values[0] || 0);
+    let city = "c=r:" + (values[i] || values[0] || 0);
+    if (c.size > 1) {
+      city += `,s:${c.size}`;
+    }
+    return city;
   }, hex.cities);
 }
 
@@ -94,7 +98,7 @@ const ab = (a, b) => {
   a = (a - 1) % 6;
 
   if (b === null || b === undefined) {
-    return `p=a:${a},b=_0`;
+    return `p=a:${a},b:_0`;
   }
 
   b = (b - 1) % 6;
