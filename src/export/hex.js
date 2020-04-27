@@ -6,10 +6,8 @@ import chain from "ramda/src/chain";
 import find from "ramda/src/find";
 
 const terrainMapping = {
-  water: "wtr",
-  river: "wtr",
-  stream: "wtr",
-  mountain: "mtn"
+  river: "water",
+  stream: "water"
 };
 
 const getValues = hex => {
@@ -60,23 +58,23 @@ export const compileTerrain = hex => {
   }
 
   let types = chain(t => {
-    if (t.type && terrainMapping[t.type]) {
-      return [terrainMapping[t.type]];
+    if (t.type) {
+      return [terrainMapping[t.type] || t.type]
     }
     return [];
   }, hex.terrain);
 
-  let result = "u=c:";
-  if (types.length > 0) {
-    result = types.join("+");
-  }
-
+  let result = [];
   let cost = find(t => t.cost, hex.terrain);
   if (cost) {
-    result += cost.cost;
+    result.push(`u=c:${cost.cost}`);
   }
 
-  return [result];
+  if (types.length > 0) {
+    result.push(`t:${types.join("+")}`);
+  }
+
+  return [result.join(",")];
 };
 
 export const compileOffboard = hex => {
