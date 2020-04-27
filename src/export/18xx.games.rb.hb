@@ -26,34 +26,13 @@ module Engine
       }.freeze
 
       HEXES = {
-        # TODO
-        {{! white: { }}
-        {{!   %w[B5 C8 D3 D9 E8 H3 I8 I10 J3] => 'blank', }}
-        {{!   %w[B11 G10 I12 J5 J9] => 'town', }}
-        {{!   %w[A10 C10 E2 F3 G4 G12 H7 I2 J11 K8] => 'city', }}
-        {{!   %w[A8 B9 C6 D5 D7 E4 E6 F5 F7 G6 G8 H9 H11 H13] => 'mtn80', }}
-        {{!   %w[K6] => 'wtr80', }}
-        {{!   %w[H5 I6] => 'mtn+wtr80', }}
-        {{!   %w[I4] => 'c=r:0;l=H;u=c:80', }}
-        {{! }, }}
-        {{! yellow: { }}
-        {{!   %w[C4] => 'c=r:20;p=a:2,b:_0', }}
-        {{!   %w[K4] => 'c=r:30;p=a:0,b:_0;p=a:1,b:_0;p=a:2,b:_0;l=T', }}
-        {{! }, }}
-        {{! green: { }}
-        {{!   %w[F9] => 'c=r:30,s:2;p=a:2,b:_0;p=a:3,b:_0;p=a:4,b:_0;p=a:5,b:_0;l=K;u=c:80', }}
-        {{! }, }}
-        {{! gray: { }}
-        {{!   %w[B3] => 't=r:20;p=a:0,b:_0;p=a:_0,b:5', }}
-        {{!   %w[B7] => 'c=r:40,s:2;p=a:1,b:_0;p=a:3,b:_0;p=a:5,b:_0', }}
-        {{!   %w[G14] => 't=r:20;p=a:3,b:_0;p=a:_0,b:4', # TODO?: reference B3 tile, but with rotation }}
-        {{!   %w[J7] => 'p=a:1,b:5', }}
-        {{! }, }}
-        {{! red: { }}
-        {{!   %w[F1] => 'o=r:yellow_30|brown_60|diesel_100;p=a:0,b:_0;p=a:1,b:_0', }}
-        {{!   %w[J1] => 'o=r:yellow_20|brown_40|diesel_80;p=a:0,b:_0;p=a:1,b:_0', }}
-        {{!   %w[L7] => 'o=r:yellow_20|brown_40|diesel_80;p=a:1,b:_0;p=a:2,b:_0', }}
-        {{! } }}
+        {{#each game.hexes}}
+        {{{color}}}: {
+          {{#each hexes}}
+          %w[{{#each hexes as |hex|}}{{hex}}{{#unless @last}} {{/unless}}{{/each}}] => '{{{encoding}}}',
+          {{/each}}
+        }{{#unless @last}},{{/unless}}
+        {{/each}}
       }.freeze
 
       TILES = {

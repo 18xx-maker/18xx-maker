@@ -670,7 +670,7 @@
         "terrain": [
           {
             "type": "mountain",
-            "cost": "$80"
+            "cost": 80
           }
         ],
         "hexes": [
@@ -687,7 +687,7 @@
         "terrain": [
           {
             "type": "river",
-            "cost": "$40"
+            "cost": 40
           }
         ],
         "hexes": [
@@ -919,7 +919,7 @@
         "terrain": [
           {
             "type": "mountain",
-            "cost": "$80",
+            "cost": 80,
             "x": -30
           }
         ],
@@ -960,7 +960,7 @@
         "terrain": [
           {
             "type": "mountain",
-            "cost": "$80",
+            "cost": 80,
             "x": 30
           }
         ],
@@ -973,7 +973,7 @@
         "terrain": [
           {
             "type": "mountain",
-            "cost": "$80",
+            "cost": 80,
             "x": 30
           }
         ],
@@ -1131,7 +1131,7 @@
         "terrain": [
           {
             "type": "river",
-            "cost": "$40",
+            "cost": 40,
             "x": 15,
             "y": 30
           }
@@ -1184,7 +1184,7 @@
         "terrain": [
           {
             "type": "river",
-            "cost": "$40",
+            "cost": 40,
             "x": 30
           }
         ],
@@ -1299,7 +1299,7 @@
         "terrain": [
           {
             "type": "river",
-            "cost": "$40",
+            "cost": 40,
             "x": 15,
             "y": 30
           }
@@ -1413,7 +1413,7 @@
         "terrain": [
           {
             "type": "river",
-            "cost": "$40",
+            "cost": 40,
             "x": 30
           }
         ],

@@ -922,7 +922,7 @@
         "terrain": [
           {
             "type": "river",
-            "cost": "¥80"
+            "cost": 80
           }
         ],
         "hexes": [
@@ -938,7 +938,7 @@
           },
           {
             "type": "mountain",
-            "cost": "¥80",
+            "cost": 80,
             "angle": 180,
             "percent": 0.1
           }
@@ -953,7 +953,7 @@
         "terrain": [
           {
             "type": "mountain",
-            "cost": "¥80"
+            "cost": 80
           }
         ],
         "hexes": [
@@ -989,7 +989,7 @@
           {
             "angle": 270,
             "percent": 0.5,
-            "cost": "¥80"
+            "cost": 80
           }
         ],
         "labels": [
@@ -1291,7 +1291,7 @@
         "terrain": [
           {
             "type": "river",
-            "cost": "¥80",
+            "cost": 80,
             "angle": 90,
             "percent": 0.75
           }
