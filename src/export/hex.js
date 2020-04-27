@@ -148,12 +148,12 @@ export const compileColor = hex => {
 
 export const compileHex = hex => {
   let all = [
-    ...compileLabels(hex),
-    ...compileTerrain(hex),
+    ...compileOffboard(hex),
     ...compileCities(hex),
     ...compileTowns(hex),
-    ...compileOffboard(hex),
-    ...compileTrack(hex)
+    ...compileTrack(hex),
+    ...compileLabels(hex),
+    ...compileTerrain(hex)
   ];
 
   let result = all.join(";");
