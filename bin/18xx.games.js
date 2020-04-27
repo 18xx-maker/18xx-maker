@@ -20,6 +20,8 @@ const colors = {
   ...gmt.colors
 };
 
+const { compileHex, compileColor } = require('../src/export/hex');
+
 // Build data
 const template = Handlebars.compile(
   fs.readFileSync("./src/export/18xx.games.rb.hb", { encoding: "UTF8" })
@@ -63,6 +65,37 @@ const findHome = (abbrev, hexes) => {
   return hex && hex.hexes[0];
 };
 
+
+const compileHexes = hexes => {
+  let compiled = {};
+
+  hexes.forEach(hex => {
+    let color = compileColor(hex);
+    let encoding = compileHex(hex);
+    let locations = hex.hexes;
+
+    if (!compiled[color]) {
+      compiled[color] = {};
+    }
+
+    if (!compiled[color][encoding]) {
+      compiled[color][encoding] = [];
+    }
+
+    compiled[color][encoding] = R.concat(compiled[color][encoding], locations);
+  });
+
+  const templated = R.map(color => ({
+    color,
+    hexes: R.map(encoding => ({
+      encoding,
+      hexes: compiled[color][encoding]
+    }), R.keys(compiled[color]))
+  }), R.keys(compiled));
+
+  return templated;
+};
+
 // Get proper filename
 const match = filename.match(/^([0-9]*)(.*)$/);
 const numbers = match[1];
@@ -93,6 +126,7 @@ const game = {
   starting_cash: R.map(p => ({ player: p.number, cash: (gameDef.capital || p.capital)}), gameDef.players),
   tiles: R.mapObjIndexed((t,id) => ({id, quantity: (t.quantity ? t.quantity : t)}), gameDef.tiles),
   location_names: findNames((gameDef.map || {}).hexes || []),
+  hexes: compileHexes((gameDef.map || {}).hexes || []),
   phases: R.map(p => ({
     name: isNaN(parseInt(p.name)) ? p.name : converter.toWords(parseInt(p.name)).toUpperCase()
   }), gameDef.phases || []),
