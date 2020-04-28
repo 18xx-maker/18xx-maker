@@ -2164,53 +2164,6 @@
       {
         "color": "white",
         "removeBorders": [
-          4,
-          5,
-          6
-        ],
-        "labels": [
-          {
-            "y": -25,
-            "label": "Ö - V"
-          }
-        ],
-        "routeBonus": [
-          {
-            "value": "+120",
-            "size": 16
-          }
-        ],
-        "hexes": [
-          "G16"
-        ]
-      },
-      {
-        "color": "white",
-        "removeBorders": [
-          1,
-          4,
-          5,
-          6
-        ],
-        "labels": [
-          {
-            "y": -25,
-            "label": "Ö - K"
-          }
-        ],
-        "routeBonus": [
-          {
-            "value": "+100",
-            "size": 16
-          }
-        ],
-        "hexes": [
-          "G18"
-        ]
-      },
-      {
-        "color": "white",
-        "removeBorders": [
           1,
           4,
           5,
@@ -2226,28 +2179,24 @@
           {
             "x": -30,
             "fillColor": "yellow",
-            "value": "+50",
-            "size": 16
+            "value": "+50"
           },
           {
             "x": 30,
             "fillColor": "green",
-            "value": "+50",
-            "size": 16
+            "value": "+50"
           },
           {
             "x": -30,
             "y": 30,
             "fillColor": "brown",
-            "value": "+30",
-            "size": 16
+            "value": "+30"
           },
           {
             "x": 30,
             "y": 30,
             "fillColor": "gray",
-            "value": "-",
-            "size": 16
+            "value": "-"
           }
         ],
         "hexes": [
@@ -2270,12 +2219,56 @@
         ],
         "routeBonus": [
           {
-            "value": "+100",
-            "size": 16
+            "value": "+100"
           }
         ],
         "hexes": [
           "G22"
+        ]
+      },
+      {
+        "color": "white",
+        "removeBorders": [
+          4,
+          5,
+          6
+        ],
+        "labels": [
+          {
+            "y": -25,
+            "label": "Ö - V"
+          }
+        ],
+        "routeBonus": [
+          {
+            "value": "+120"
+          }
+        ],
+        "hexes": [
+          "G16"
+        ]
+      },
+      {
+        "color": "white",
+        "removeBorders": [
+          1,
+          4,
+          5,
+          6
+        ],
+        "labels": [
+          {
+            "y": -25,
+            "label": "Ö - K"
+          }
+        ],
+        "routeBonus": [
+          {
+            "value": "+100"
+          }
+        ],
+        "hexes": [
+          "G18"
         ]
       },
       {
@@ -2296,8 +2289,7 @@
         ],
         "routeBonus": [
           {
-            "value": "+50",
-            "size": 16
+            "value": "+50"
           }
         ],
         "hexes": [
@@ -2323,8 +2315,7 @@
         ],
         "routeBonus": [
           {
-            "value": "+75",
-            "size": 16
+            "value": "+75"
           }
         ],
         "hexes": [
@@ -2349,8 +2340,7 @@
         ],
         "routeBonus": [
           {
-            "value": "+50",
-            "size": 16
+            "value": "+50"
           }
         ],
         "hexes": [
@@ -2376,8 +2366,7 @@
         ],
         "routeBonus": [
           {
-            "value": "+100",
-            "size": 16
+            "value": "+100"
           }
         ],
         "hexes": [
