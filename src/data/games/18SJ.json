@@ -2164,71 +2164,6 @@
       {
         "color": "white",
         "removeBorders": [
-          1,
-          4,
-          5,
-          6
-        ],
-        "labels": [
-          {
-            "y": -25,
-            "label": "S - U"
-          }
-        ],
-        "routeBonus": [
-          {
-            "x": -30,
-            "fillColor": "yellow",
-            "value": "+50"
-          },
-          {
-            "x": 30,
-            "fillColor": "green",
-            "value": "+50"
-          },
-          {
-            "x": -30,
-            "y": 30,
-            "fillColor": "brown",
-            "value": "+30"
-          },
-          {
-            "x": 30,
-            "y": 30,
-            "fillColor": "gray",
-            "value": "-"
-          }
-        ],
-        "hexes": [
-          "G20"
-        ]
-      },
-      {
-        "color": "white",
-        "removeBorders": [
-          1,
-          4,
-          5,
-          6
-        ],
-        "labels": [
-          {
-            "y": -25,
-            "label": "S - N"
-          }
-        ],
-        "routeBonus": [
-          {
-            "value": "+100"
-          }
-        ],
-        "hexes": [
-          "G22"
-        ]
-      },
-      {
-        "color": "white",
-        "removeBorders": [
           4,
           5,
           6
@@ -2241,7 +2176,8 @@
         ],
         "routeBonus": [
           {
-            "value": "+120"
+            "value": "+120",
+            "size": 16
           }
         ],
         "hexes": [
@@ -2264,11 +2200,82 @@
         ],
         "routeBonus": [
           {
-            "value": "+100"
+            "value": "+100",
+            "size": 16
           }
         ],
         "hexes": [
           "G18"
+        ]
+      },
+      {
+        "color": "white",
+        "removeBorders": [
+          1,
+          4,
+          5,
+          6
+        ],
+        "labels": [
+          {
+            "y": -25,
+            "label": "S - U"
+          }
+        ],
+        "routeBonus": [
+          {
+            "x": -30,
+            "fillColor": "yellow",
+            "value": "+50",
+            "size": 16
+          },
+          {
+            "x": 30,
+            "fillColor": "green",
+            "value": "+50",
+            "size": 16
+          },
+          {
+            "x": -30,
+            "y": 30,
+            "fillColor": "brown",
+            "value": "+30",
+            "size": 16
+          },
+          {
+            "x": 30,
+            "y": 30,
+            "fillColor": "gray",
+            "value": "-",
+            "size": 16
+          }
+        ],
+        "hexes": [
+          "G20"
+        ]
+      },
+      {
+        "color": "white",
+        "removeBorders": [
+          1,
+          4,
+          5,
+          6
+        ],
+        "labels": [
+          {
+            "y": -25,
+            "label": "S - N"
+          }
+        ],
+        "routeBonus": [
+          {
+            "value": "+100",
+            "size": 16
+          }
+        ],
+        "hexes": [
+          "G22"
         ]
       },
       {
@@ -2289,7 +2296,8 @@
         ],
         "routeBonus": [
           {
-            "value": "+50"
+            "value": "+50",
+            "size": 16
           }
         ],
         "hexes": [
@@ -2315,7 +2323,8 @@
         ],
         "routeBonus": [
           {
-            "value": "+75"
+            "value": "+75",
+            "size": 16
           }
         ],
         "hexes": [
@@ -2340,7 +2349,8 @@
         ],
         "routeBonus": [
           {
-            "value": "+50"
+            "value": "+50",
+            "size": 16
           }
         ],
         "hexes": [
@@ -2366,7 +2376,8 @@
         ],
         "routeBonus": [
           {
-            "value": "+100"
+            "value": "+100",
+            "size": 16
           }
         ],
         "hexes": [
