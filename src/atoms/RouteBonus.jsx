@@ -4,7 +4,7 @@ import Color from "../data/Color";
 
 const RouteBonus = ({ value, size, fillColor, strokeColor, strokeWidth, textColor }) => {
   size = size || 14;
-  let width = 5.0 * value.length;
+  let width = size * 5.0 / 14.0 * value.length;
   let height = size + 6;
   fillColor = fillColor || "white";
   strokeColor = strokeColor || "black";
