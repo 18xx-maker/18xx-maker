@@ -119,7 +119,7 @@ const logos = R.chain(c => {
 }, companies);
 
 const game = {
-  bank: gameDef.bank,
+  bank: gameDef.bank === "∞" ? "99_999" : gameDef.bank,
   currency: gameDef.info.currency.replace('#', '%d'),
   cert_limit: R.map(p => ({ player: p.number, limit: (gameDef.certLimit || p.certLimit)}), gameDef.players),
   starting_cash: R.map(p => ({ player: p.number, cash: (gameDef.capital || p.capital)}), gameDef.players),
