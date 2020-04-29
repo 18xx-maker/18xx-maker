@@ -4,15 +4,14 @@ const converter = require('number-to-words');
 const fs = require("fs");
 const path = require('path');
 
-require("@babel/register");
-
-const gutil = require('../src/util');
 const util = require('../src/render/util');
 
-const gameDefs = require('../src/data/games').default;
 const filename = process.argv[2] || "1830";
-const gameDef = gameDefs[filename];
-const companies = gutil.compileCompanies(gameDef);
+const gamename = path.basename(filename, ".json");
+
+const gameDef = require(path.join("..", filename));
+const companies = util.compileCompanies(gameDef);
+
 const gmt = require('../src/data/themes/companies/gmt.json');
 const rob = require('../src/data/themes/companies/rob.json');
 const colors = {
@@ -97,7 +96,7 @@ const compileHexes = hexes => {
 };
 
 // Get proper filename
-const match = filename.match(/^([0-9]*)(.*)$/);
+const match = gamename.match(/^([0-9]*)(.*)$/);
 const numbers = match[1];
 const words = match[2].toLowerCase();
 let newFilename = numbers;
@@ -108,7 +107,7 @@ const exportName = `g_${newFilename}.rb`;
 console.log(`Outputing as ${exportName}`);
 
 util.setup();
-util.setup18xxGame(filename, newFilename);
+util.setup18xxGame(gamename, newFilename);
 
 // Grab logos that we want to copy
 const LOGO_RE = /[& ]/g;
@@ -136,7 +135,7 @@ const game = {
     revenue: R.is(Array, p.revenue) ? p.revenue[0] : p.revenue,
     abbrev: p.name.replace(/[^A-Z&]/g, ''),
     description: (p.description || "").replace(/'/g, '\\\'')
-  }), gameDef.privates),
+  }), gameDef.privates || []),
   companies: R.map(c => ({
     floatPercent: c.floatPercent || gameDef.floatPercent,
     abbrev: c.abbrev,
@@ -148,7 +147,7 @@ const game = {
   }), companies),
   market: R.map(r => ({
     row: R.map(cell => ({
-      value: cell ? `${cell.value ? cell.value : cell}${cell.par ? 'p' : ''}${cell.legend ? ['y', 'o', 'b'][cell.legend] : ''}` : '#{}'
+      value: cell ? `${cell.value ? cell.value : (cell.label ? cell.label : cell)}${cell.par ? 'p' : ''}${(cell.legend !== undefined) ? ['y', 'o', 'b'][cell.legend] : ''}` : '#{}'
     }), r)
   }), gameDef.stock.market),
   trains: R.map(t => ({
@@ -168,9 +167,9 @@ const game = {
 // Copy logos
 logos.forEach(logo => {
   fs.copyFileSync(`./src/data/logos/${logo.file}.svg`,
-                  `./build/render/${filename}/18xx.games/${newFilename}/${logo.name}.svg`);
+                  `./build/render/${gamename}/18xx.games/${newFilename}/${logo.name}.svg`);
 });
 
-fs.writeFileSync(`./build/render/${filename}/18xx.games/${exportName}`,
-                 template({ game, filename }),
+fs.writeFileSync(`./build/render/${gamename}/18xx.games/${exportName}`,
+                 template({ game, name: gamename }),
                  { mode: "644" });

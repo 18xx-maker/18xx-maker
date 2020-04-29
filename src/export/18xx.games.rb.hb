@@ -9,7 +9,7 @@ require_relative '../tile'
 
 module Engine
   module Game
-    class G{{filename}} < Base
+    class G{{name}} < Base
       BANK_CASH = {{game.bank}}
 
       CURRENCY_FORMAT_STR = '{{{game.currency}}}'

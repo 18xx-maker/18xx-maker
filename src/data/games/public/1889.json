@@ -7,7 +7,7 @@
     "orientation": "horizontal",
     "titleX": 280,
     "titleY": 860,
-    "currency": "JPY"
+    "currency": "¥#"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/23540/1889-history-shikoku-railways",
@@ -700,7 +700,7 @@
         ]
       },
       {
-        "copy": "F3",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -713,7 +713,7 @@
         ]
       },
       {
-        "copy": "F3",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -726,7 +726,7 @@
         ]
       },
       {
-        "copy": "F3",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -739,7 +739,7 @@
         ]
       },
       {
-        "copy": "F3",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -752,7 +752,7 @@
         ]
       },
       {
-        "copy": "F3",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -765,7 +765,7 @@
         ]
       },
       {
-        "copy": "F3",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -781,7 +781,7 @@
         ]
       },
       {
-        "copy": "F3",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -797,7 +797,7 @@
         ]
       },
       {
-        "copy": "F3",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -813,7 +813,7 @@
         ]
       },
       {
-        "copy": "F3",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -1038,7 +1038,7 @@
         ]
       },
       {
-        "copy": "C4",
+        "color": "yellow",
         "labels": [
           {
             "label": "T",
@@ -1078,6 +1078,9 @@
           },
           {
             "side": 2
+          },
+          {
+            "side": 3
           }
         ],
         "hexes": [
@@ -1193,11 +1196,13 @@
       },
       {
         "color": "offboard",
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 1
           },
           {
+            "type": "offboard",
             "side": 2
           }
         ],
@@ -1226,7 +1231,17 @@
         ]
       },
       {
-        "copy": "F1",
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ],
         "offBoardRevenue": {
           "name": {
             "name": "Sakaide & Okayama"
@@ -1253,11 +1268,13 @@
       },
       {
         "color": "offboard",
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 2
           },
           {
+            "type": "offboard",
             "side": 3
           }
         ],

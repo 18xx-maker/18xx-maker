@@ -7,7 +7,7 @@
     "titleY": 620,
     "titleSize": 165,
     "subTitleSize": 17,
-    "currency": "USD",
+    "currency": "$#",
     "extraStationTokens": 4
   },
   "links": {
@@ -17,6 +17,7 @@
   "colors": {
     "short": "pink"
   },
+  "floatPercent": 20,
   "wip": true,
   "tokens": [],
   "ipo": false,
@@ -387,11 +388,13 @@
             }
           ]
         },
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 5
           },
           {
+            "type": "offboard",
             "side": 6
           }
         ],
@@ -424,8 +427,9 @@
             }
           ]
         },
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 6
           }
         ],
@@ -635,11 +639,13 @@
             }
           ]
         },
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 4
           },
           {
+            "type": "offboard",
             "side": 5
           }
         ],
@@ -766,11 +772,13 @@
         "track": [
           {
             "type": "sharpStop",
-            "side": 3
+            "side": 3,
+            "revenue": 0
           },
           {
             "type": "sharpStop",
-            "side": 6
+            "side": 6,
+            "revenue": 1
           }
         ],
         "hexes": [
@@ -779,6 +787,7 @@
       },
       {
         "color": "gray",
+        "encoding": "p=a:3,b:j;p=a:4,b:j;p=a:5,b=j",
         "track": [
           {
             "side": 4
@@ -912,14 +921,17 @@
             }
           ]
         },
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 3
           },
           {
+            "type": "offboard",
             "side": 4
           },
           {
+            "type": "offboard",
             "side": 5
           }
         ],
@@ -1025,11 +1037,13 @@
             }
           ]
         },
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 2
           },
           {
+            "type": "offboard",
             "side": 3
           }
         ],
@@ -1062,11 +1076,13 @@
             }
           ]
         },
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 2
           },
           {
+            "type": "offboard",
             "side": 3
           }
         ],

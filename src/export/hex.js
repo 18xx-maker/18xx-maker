@@ -1,9 +1,9 @@
-import is from "ramda/src/is";
-import addIndex from "ramda/src/addIndex";
-import concat from "ramda/src/concat";
-import map from "ramda/src/map";
-import chain from "ramda/src/chain";
-import find from "ramda/src/find";
+const is = require('ramda/src/is');
+const addIndex = require('ramda/src/addIndex');
+const concat = require('ramda/src/concat');
+const map = require('ramda/src/map');
+const chain = require('ramda/src/chain');
+const find = require('ramda/src/find');
 
 const terrainMapping = {
   river: "water",
@@ -18,13 +18,13 @@ const getValues = hex => {
   return map(v => v.value, hex.values);
 }
 
-export const compileValue = hex => {
+const compileValue = hex => {
   if (!hex.values) {
     return [];
   }
 };
 
-export const compileTowns = hex => {
+const compileTowns = hex => {
   if (!hex.centerTowns && !hex.towns) {
     return [];
   }
@@ -36,7 +36,7 @@ export const compileTowns = hex => {
   }, concat(hex.centerTowns || [], hex.towns || []));
 }
 
-export const compileCities = hex => {
+const compileCities = hex => {
   if (!hex.cities) {
     return [];
   }
@@ -52,7 +52,7 @@ export const compileCities = hex => {
   }, hex.cities);
 }
 
-export const compileTerrain = hex => {
+const compileTerrain = hex => {
   if (!hex.terrain) {
     return [];
   }
@@ -77,7 +77,7 @@ export const compileTerrain = hex => {
   return [result.join(",")];
 };
 
-export const compileOffboard = hex => {
+const compileOffboard = hex => {
   if (!hex.offBoardRevenue) {
     return [];
   }
@@ -92,6 +92,12 @@ export const compileOffboard = hex => {
   return [`o=${colors.join("|")}`];
 };
 
+const arev = (a, rev) => {
+  a = (a - 1) % 6;
+
+  return `p=a:${a},b:_${rev}`;
+};
+
 const ab = (a, b) => {
   a = (a - 1) % 6;
 
@@ -104,7 +110,7 @@ const ab = (a, b) => {
   return `p=a:${Math.min(a,b)},b:${Math.max(a,b)}`;
 };
 
-export const compileLabels = hex => {
+const compileLabels = hex => {
   if (!hex.labels) {
     return [];
   }
@@ -114,27 +120,38 @@ export const compileLabels = hex => {
   }, hex.labels);
 }
 
-export const compileTrack = hex => {
+const compileTrack = hex => {
   if (!hex.track) {
     return [];
   }
 
-  return map(t => {
+  // Hack for now. If there are values on the hex than cut the track in half
+  let hasRevenue = (hex.values || []).length > 0;
+
+  return chain(t => {
     switch (t.type) {
-    case "sharp":
-      return ab(t.side, t.side + 1);
-    case "gentle":
-      return ab(t.side, t.side + 2);
-    case "straight":
-      return ab(t.side, t.side + 3);
-    default:
-      return ab(t.side);
+      case "sharp":
+        return hasRevenue ? [arev(t.side, t.revenue || 0),
+                             arev(t.side + 1, t.revenue || 0)]
+          : [ab(t.side, t.side + 1)];
+      case "gentle":
+        return hasRevenue ? [arev(t.side, t.revenue || 0),
+                             arev(t.side + 2, t.revenue || 0)]
+          : [ab(t.side, t.side + 2)];
+      case "straight":
+        return hasRevenue ? [arev(t.side, t.revenue || 0),
+                             arev(t.side + 3, t.revenue || 0)]
+          : [ab(t.side, t.side + 3)];
+      default:
+        return [arev(t.side, t.revenue || 0)];
     }
   }, hex.track);
 };
 
-export const compileColor = hex => {
+const compileColor = hex => {
   switch(hex.color) {
+  case "water":
+    return "blue";
   case "offboard":
     return "red";
   case "plain":
@@ -144,7 +161,11 @@ export const compileColor = hex => {
   }
 };
 
-export const compileHex = hex => {
+const compileHex = hex => {
+  if (hex.encoding) {
+    return hex.encoding;
+  }
+
   let all = [
     ...compileOffboard(hex),
     ...compileCities(hex),
@@ -169,3 +190,6 @@ export const compileHex = hex => {
 
   return result;
 }
+
+exports.compileColor = compileColor;
+exports.compileHex = compileHex;
