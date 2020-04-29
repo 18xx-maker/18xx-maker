@@ -47,11 +47,13 @@ module Engine
         {{/each}}
       }.freeze
 
+      # rubocop:disable Style/RedundantCapitalW, Lint/EmptyExpression, Lint/EmptyInterpolation
       MARKET = [
         {{#each game.market}}
         %W[{{#each row}}{{{value}}}{{#unless @last}} {{/unless}}{{/each}}],
         {{/each}}
       ].freeze
+      # rubocop:enable Style/RedundantCapitalW, Lint/EmptyExpression, Lint/EmptyInterpolation
 
       STARTING_CASH = {
         {{#each game.starting_cash}}
