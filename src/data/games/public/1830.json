@@ -944,14 +944,17 @@
             }
           ]
         },
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 3
           },
           {
+            "type": "offboard",
             "side": 4
           },
           {
+            "type": "offboard",
             "side": 5
           }
         ],
@@ -1007,48 +1010,68 @@
             }
           }
         ],
-        "water": {
+        "terrain": [{
+          "type": "water",
           "angle": 300,
           "percent": 0.5,
           "cost": 80
-        },
+        }],
         "hexes": [
           "F4"
         ]
       },
       {
-        "copy": "F4",
+        "color": "plain",
         "cities": [
           {
+            "angle": 120,
+            "percent": 0.4,
             "name": {
-              "name": "Washington"
+              "name": "Washington",
+              "rotation": 30
             }
           }
         ],
+        "terrain": [{
+          "type": "water",
+          "angle": 300,
+          "percent": 0.5,
+          "cost": 80
+        }],
         "hexes": [
           "J14"
         ]
       },
       {
-        "copy": "F4",
+        "color": "plain",
         "cities": [
           {
+            "angle": 120,
+            "percent": 0.4,
             "name": {
-              "name": "Providence"
+              "name": "Providence",
+              "rotation": 30
             }
           }
         ],
+        "terrain": [{
+          "type": "water",
+          "angle": 300,
+          "percent": 0.5,
+          "cost": 80
+        }],
         "hexes": [
           "F22"
         ]
       },
       {
         "color": "yellow",
-        "water": {
+        "terrain": [{
+          "type": "water",
           "angle": 180,
           "percent": 0.6,
           "cost": 80
-        },
+        }],
         "labels": [
           {
             "label": "OO",
@@ -1076,14 +1099,30 @@
         ]
       },
       {
-        "copy": "E5",
+        "color": "yellow",
+        "terrain": [{
+          "type": "water",
+          "angle": 180,
+          "percent": 0.6,
+          "cost": 80
+        }],
+        "labels": [
+          {
+            "label": "OO",
+            "percent": 0.667
+          }
+        ],
         "cities": [
           {
+            "angle": 65,
+            "percent": 0.6,
             "name": {
               "name": "Hamilton"
             }
           },
           {
+            "angle": 295,
+            "percent": 0.6,
             "name": {
               "name": "Toronto"
             }
@@ -1094,7 +1133,13 @@
         ]
       },
       {
-        "copy": "A17",
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 5
+          }
+        ],
         "values": [
           {
             "angle": 180,
@@ -1211,11 +1256,13 @@
             }
           ]
         },
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 2
           },
           {
+            "type": "offboard",
             "side": 3
           }
         ],
@@ -1355,10 +1402,11 @@
       },
       {
         "color": "plain",
-        "mountain": {
+        "terrain": [{
+          "type": "mountain",
           "cost": 120,
           "percent": 0.333
-        },
+        }],
         "companies": [
           {
             "label": "SVR",
@@ -1461,11 +1509,12 @@
       },
       {
         "color": "plain",
-        "mountain": {
+        "terrain": [{
+          "type": "mountain",
           "cost": 120,
           "percent": 0.5,
           "angle": 180
-        },
+        }],
         "cities": [
           {
             "angle": -45,
@@ -1546,14 +1595,23 @@
         ]
       },
       {
-        "copy": "F6",
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 5
+          }
+        ],
         "values": [
           {
+            "angle": 180,
+            "percent": 0.333,
             "value": 40
           }
         ],
         "cities": [
           {
+            "percent": 0.5,
             "name": {
               "name": "Montreal"
             },
@@ -1622,11 +1680,12 @@
             "percent": 0.5
           }
         ],
-        "water": {
+        "terrain": [{
+          "type": "water",
           "angle": 310,
           "percent": 0.7,
           "cost": 80
-        },
+        }],
         "track": [
           {
             "type": "stop",
@@ -1672,12 +1731,29 @@
         ]
       },
       {
-        "copy": "I19",
+        "color": "gray",
         "towns": [
           {
+            "angle": 120,
+            "percent": 0.57735,
+            "rotation": 30,
             "name": {
-              "name": "Mansfield"
+              "name": "Mansfield",
+              "reverse": true
             }
+          }
+        ],
+        "track": [
+          {
+            "type": "sharp",
+            "side": 1
+          }
+        ],
+        "values": [
+          {
+            "value": 10,
+            "angle": 300,
+            "percent": 0.2
           }
         ],
         "hexes": [
@@ -1760,11 +1836,13 @@
             }
           ]
         },
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 1
           },
           {
+            "type": "offboard",
             "side": 6
           }
         ],
@@ -1832,14 +1910,17 @@
         ]
       },
       {
-        "copy": "G7",
+        "color": "plain",
         "centerTowns": [
           {
+            "x": -30,
             "name": {
-              "name": "Reading"
+              "name": "Reading",
+              "reverse": true
             }
           },
           {
+            "x": 30,
             "name": {
               "name": "Allentown"
             }
@@ -1850,14 +1931,17 @@
         ]
       },
       {
-        "copy": "G7",
+        "color": "plain",
         "centerTowns": [
           {
+            "x": -30,
             "name": {
-              "name": "New Haven"
+              "name": "New Haven",
+              "reverse": true
             }
           },
           {
+            "x": 30,
             "name": {
               "name": "Hartford"
             }
@@ -1881,7 +1965,7 @@
         ]
       },
       {
-        "copy": "H4",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -1894,7 +1978,7 @@
         ]
       },
       {
-        "copy": "H4",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -1907,7 +1991,7 @@
         ]
       },
       {
-        "copy": "H4",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -1921,9 +2005,10 @@
       },
       {
         "color": "plain",
-        "water": {
+        "terrain": [{
+          "type": "water",
           "cost": 80
-        },
+        }],
         "hexes": [
           "D6",
           "I17",
@@ -1933,9 +2018,10 @@
       },
       {
         "color": "plain",
-        "mountain": {
+        "terrain": [{
+          "type": "mountain",
           "cost": 120
-        },
+        }],
         "hexes": [
           "C17",
           "C21",
