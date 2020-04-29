@@ -89,7 +89,7 @@ const compileOffboard = hex => {
     return `${r.color}_${r.cost}`;
   }, hex.offBoardRevenue.revenues);
 
-  return [`o=${colors.join("|")}`];
+  return [`o=r:${colors.join("|")}`];
 };
 
 const arev = (a, rev) => {

@@ -19,7 +19,9 @@ const colors = {
   ...gmt.colors
 };
 
+const { compileBank, compileCertLimit, compileStartingCash } = require('../src/export/data');
 const { compileHex, compileColor } = require('../src/export/hex');
+const { compileMarket } = require('../src/export/market');
 
 // Build data
 const template = Handlebars.compile(
@@ -31,7 +33,7 @@ const findName = hex => {
   let possibles = [...hex.cities || [],
                    ...hex.centerTowns || [],
                    ...hex.towns || [],
-                   hex.offBoardRevenue ? [hex.offBoardRevenue] : []
+                   ...(hex.offBoardRevenue ? [hex.offBoardRevenue] : [])
                   ];
   let names = R.chain(p => p.name ? [p.name.name] : [], possibles);
   return names.join(" & ");
@@ -119,21 +121,21 @@ const logos = R.chain(c => {
 }, companies);
 
 const game = {
-  bank: gameDef.bank === "∞" ? "99_999" : gameDef.bank,
+  ...compileBank(gameDef),
+  ...compileCertLimit(gameDef),
+  ...compileStartingCash(gameDef),
   currency: gameDef.info.currency.replace('#', '%d'),
-  cert_limit: R.map(p => ({ player: p.number, limit: (gameDef.certLimit || p.certLimit)}), gameDef.players),
-  starting_cash: R.map(p => ({ player: p.number, cash: (gameDef.capital || p.capital)}), gameDef.players),
   tiles: R.mapObjIndexed((t,id) => ({id, quantity: (t.quantity ? t.quantity : t)}), gameDef.tiles),
   location_names: findNames((gameDef.map || {}).hexes || []),
   hexes: compileHexes((gameDef.map || {}).hexes || []),
   phases: R.map(p => ({
-    name: isNaN(parseInt(p.name)) ? p.name : converter.toWords(parseInt(p.name)).toUpperCase()
+    name: isNaN(parseInt(p.name)) ? (p.name || p.phase).toUpperCase() : converter.toWords(parseInt(p.name)).toUpperCase()
   }), gameDef.phases || []),
   privates: R.map(p => ({
     name: p.name,
-    value: p.price,
-    revenue: R.is(Array, p.revenue) ? p.revenue[0] : p.revenue,
-    abbrev: p.name.replace(/[^A-Z&]/g, ''),
+    value: R.is(String, p.price) ? `'${p.price}'` : p.price,
+    revenue: R.is(Array, p.revenue) ? p.revenue[0] : (p.revenue || 0),
+    abbrev: p.name.replace(/[^A-Z0-9&]/g, ''),
     description: (p.description || "").replace(/'/g, '\\\'')
   }), gameDef.privates || []),
   companies: R.map(c => ({
@@ -145,15 +147,11 @@ const game = {
     home: findHome(c.abbrev, ((gameDef.map || {}).hexes || [])),
     color: c.color === "white" ? colors["gray"] : colors[c.color]
   }), companies),
-  market: R.map(r => ({
-    row: R.map(cell => ({
-      value: cell ? `${cell.value ? cell.value : (cell.label ? cell.label : cell)}${cell.par ? 'p' : ''}${(cell.legend !== undefined) ? ['y', 'o', 'b'][cell.legend] : ''}` : '#{}'
-    }), r)
-  }), gameDef.stock.market),
+  market: compileMarket(gameDef.stock),
   trains: R.map(t => ({
     name: t.name,
     distance: t.distance || (isNaN(parseInt(t.name)) ? 999 : parseInt(t.name)),
-    price: t.price,
+    price: t.price || 0,
     rusts_on: t.rusts_on,
     num: t.quantity === "∞" ? 99 : t.quantity,
     available_on: t.available_on,
