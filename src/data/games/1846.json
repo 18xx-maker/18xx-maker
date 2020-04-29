@@ -6,7 +6,7 @@
     "background": "orange",
     "marketTokens": 2,
     "extraStationTokens": 3,
-    "currency": "USD"
+    "currency": "$#"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/17405/1846-race-midwest",
@@ -22,6 +22,7 @@
     "Big 4",
     "MS"
   ],
+  "floatPercent": 20,
   "ipo": false,
   "players": [
     {
@@ -452,17 +453,50 @@
       10,
       20,
       30,
-      40,
-      50,
-      60,
-      70,
-      80,
-      90,
-      100,
-      112,
-      124,
-      137,
-      150,
+      {
+        "value": 40,
+        "par": true
+      },
+      {
+        "value": 50,
+        "par": true
+      },
+      {
+        "value": 60,
+        "par": true
+      },
+      {
+        "value": 70,
+        "par": true
+      },
+      {
+        "value": 80,
+        "par": true
+      },
+      {
+        "value": 90,
+        "par": true
+      },
+      {
+        "value": 100,
+        "par": true
+      },
+      {
+        "value": 112,
+        "par": true
+      },
+      {
+        "value": 124,
+        "par": true
+      },
+      {
+        "value": 137,
+        "par": true
+      },
+      {
+        "value": 150,
+        "par": true
+      },
       165,
       180,
       195,
@@ -646,8 +680,9 @@
             }
           ]
         },
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 4
           }
         ],
@@ -701,8 +736,9 @@
             "percent": 1
           }
         ],
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 1
           }
         ],
@@ -727,8 +763,9 @@
       },
       {
         "color": "offboard",
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 5
           }
         ],
@@ -770,7 +807,13 @@
         ]
       },
       {
-        "copy": "A15",
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 5
+          }
+        ],
         "hexes": [
           "C7"
         ]
@@ -858,8 +901,9 @@
             "percent": 1
           }
         ],
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 1
           }
         ],
@@ -884,6 +928,11 @@
       },
       {
         "color": "yellow",
+        "labels": [{
+          "label": "Chi",
+          "angle": 83,
+          "percent": 0.6
+        }],
         "cities": [
           {
             "angle": 210,
@@ -904,10 +953,6 @@
             ]
           },
           {
-            "name": {
-              "name": "Chicago",
-              "offset": 42
-            },
             "angle": 30,
             "percent": 0.75
           }
@@ -917,6 +962,28 @@
             "type": "meat",
             "angle": 120,
             "percent": 0.75
+          }
+        ],
+        "track": [
+          {
+            "revenue": 0,
+            "side": 3,
+            "type": "stop"
+          },
+          {
+            "revenue": 1,
+            "side": 4,
+            "type": "stop"
+          },
+          {
+            "revenue": 2,
+            "side": 5,
+            "type": "stop"
+          },
+          {
+            "revenue": 3,
+            "side": 6,
+            "type": "stop"
           }
         ],
         "values": [
@@ -929,7 +996,7 @@
         ]
       },
       {
-        "copy": "C9",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -1022,6 +1089,7 @@
         "removeBorders": [
           5
         ],
+        "encoding": "o=yellow_30|brown_60;p=a:5,b:_0;l=E",
         "hexes": [
           "C21"
         ]
@@ -1060,6 +1128,7 @@
         "removeBorders": [
           2
         ],
+        "encoding": "o=yellow_30|brown_60;p=a:0,b:_0;l=E",
         "hexes": [
           "D22"
         ]
@@ -1084,7 +1153,7 @@
         ]
       },
       {
-        "copy": "C9",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -1157,8 +1226,9 @@
             "label": "E"
           }
         ],
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 1
           }
         ],
@@ -1283,12 +1353,13 @@
         "removeBorders": [
           6
         ],
+        "encoding": "o=yellow_30|brown_70;p=a:0,b:_0;l=E",
         "hexes": [
           "F22"
         ]
       },
       {
-        "copy": "C9",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -1301,7 +1372,7 @@
         ]
       },
       {
-        "copy": "C9",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -1314,7 +1385,7 @@
         ]
       },
       {
-        "copy": "C9",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -1333,7 +1404,7 @@
         ]
       },
       {
-        "copy": "C9",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -1346,7 +1417,7 @@
         ]
       },
       {
-        "copy": "C9",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -1453,12 +1524,13 @@
         "removeBorders": [
           3
         ],
+        "encoding": "o=yellow_30|brown_70;p=a:0,b:_0;p=a:1,b:_0;l=E",
         "hexes": [
           "G21"
         ]
       },
       {
-        "copy": "C9",
+        "color": "plain",
         "cities": [
           {
             "name": {
@@ -1496,8 +1568,9 @@
             "label": "E"
           }
         ],
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 2
           }
         ],
@@ -1545,11 +1618,13 @@
             "label": "W"
           }
         ],
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 3
           },
           {
+            "type": "offboard",
             "side": 4
           }
         ],
@@ -1664,8 +1739,9 @@
       },
       {
         "color": "offboard",
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 1
           }
         ],
@@ -1714,11 +1790,13 @@
       },
       {
         "color": "offboard",
-        "offBoardTrack": [
+        "track": [
           {
+            "type": "offboard",
             "side": 2
           },
           {
+            "type": "offboard",
             "side": 3
           }
         ],

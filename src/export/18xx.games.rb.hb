@@ -1,3 +1,5 @@
+# File original exported from 18xx-maker: https://www.18xx-maker.com/
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # frozen_string_literal: true
 
 require_relative '../bank'
@@ -10,20 +12,27 @@ require_relative '../tile'
 module Engine
   module Game
     class G{{name}} < Base
+      {{#if game.bankPerPlayer}}
+      BANK_CASH = {
+        {{#each game.bank}}
+        {{player}} => {{bank}},
+        {{/each}}
+      }.freeze
+      {{else}}
       BANK_CASH = {{game.bank}}
+      {{/if}}
 
       CURRENCY_FORMAT_STR = '{{{game.currency}}}'
 
+      {{#if game.certLimitPerPlayer}}
       CERT_LIMIT = {
-        {{#each game.cert_limit}}
-        {{player}} => {{limit}},
-        {{! 2 => 25, }}
-        {{! 3 => 19, }}
-        {{! 4 => 14, }}
-        {{! 5 => 12, }}
-        {{! 6 => 11, }}
+        {{#each game.certLimit}}
+        {{player}} => {{certLimit}},
         {{/each}}
       }.freeze
+      {{else}}
+      CERT_LIMIT = {{game.certLimit}}
+      {{/if}}
 
       HEXES = {
         {{#each game.hexes}}
@@ -55,11 +64,15 @@ module Engine
       ].freeze
       # rubocop:enable Style/RedundantCapitalW, Lint/EmptyExpression, Lint/EmptyInterpolation
 
+      {{#if game.startingCashPerPlayer}}
       STARTING_CASH = {
-        {{#each game.starting_cash}}
-        {{player}} => {{cash}},
+        {{#each game.startingCash}}
+        {{player}} => {{startingCash}},
         {{/each}}
       }.freeze
+      {{else}}
+      STARTING_CASH = {{game.startingCash}}
+      {{/if}}
 
       PHASES = [
         {{#each game.phases}}
@@ -95,7 +108,7 @@ module Engine
         {{#each game.privates}}
         {
           name: '{{{name}}}',
-          value: {{value}},
+          value: {{{value}}},
           revenue: {{revenue}},
           sym: '{{{abbrev}}}',
           desc: '{{{description}}}',
@@ -124,3 +137,5 @@ module Engine
     end
   end
 end
+
+# rubocop:enable Lint/RedundantCopDisableDirective, Layout/LineLength
