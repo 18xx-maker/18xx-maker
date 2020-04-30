@@ -5,7 +5,7 @@
     "background": "pink",
     "titleSize": 120,
     "titleY": -80,
-    "currency": "USD"
+    "currency": "$#"
   },
   "tokens": [
     "Round"

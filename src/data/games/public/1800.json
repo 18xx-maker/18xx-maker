@@ -10,7 +10,7 @@
     "titleSize": 150,
     "extraTotalWidth": 210,
     "marketTokens": 2,
-    "currency": "USD"
+    "currency": "$#"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/17132/1800",

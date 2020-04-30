@@ -7,7 +7,7 @@
     "titleX": 200,
     "titleY": 3000,
     "extraTotalHeight": 300,
-    "currency": "USD"
+    "currency": "$#"
   },
   "wip": true,
   "links": {
@@ -49,37 +49,37 @@
   "players": [
     {
       "number": 2,
-      "certLimit": "96*",
+      "certLimit": 96,
       "capital": 3600
     },
     {
       "number": 3,
-      "certLimit": "64*",
+      "certLimit": 64,
       "capital": 2400
     },
     {
       "number": 4,
-      "certLimit": "48*",
+      "certLimit": 48,
       "capital": 1800
     },
     {
       "number": 5,
-      "certLimit": "38*",
+      "certLimit": 38,
       "capital": 1440
     },
     {
       "number": 6,
-      "certLimit": "32*",
+      "certLimit": 32,
       "capital": 1200
     },
     {
       "number": 7,
-      "certLimit": "27*",
+      "certLimit": 27,
       "capital": 1028
     },
     {
       "number": 8,
-      "certLimit": "24*",
+      "certLimit": 24,
       "capital": 900
     }
   ],

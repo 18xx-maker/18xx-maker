@@ -77,6 +77,7 @@
   },
   "companies": [
     {
+      "name": "BJ",
       "abbrev": "BJ",
       "color": "_brown",
       "tokens": "three",
@@ -86,6 +87,7 @@
       }
     },
     {
+      "name": "KFJ",
       "abbrev": "KFJ",
       "color": "_pink",
       "tokens": "three",
@@ -95,6 +97,7 @@
       }
     },
     {
+      "name": "MYJ",
       "abbrev": "MYJ",
       "color": "_yellow",
       "tokens": "three",
@@ -104,6 +107,7 @@
       }
     },
     {
+      "name": "MÖJ",
       "abbrev": "MÖJ",
       "color": "_turquoise",
       "tokens": "two",
@@ -113,6 +117,7 @@
       }
     },
     {
+      "name": "SNJ",
       "abbrev": "SNJ",
       "color": "_blue",
       "tokens": "four",
@@ -122,6 +127,7 @@
       }
     },
     {
+      "name": "STJ",
       "abbrev": "STJ",
       "color": "_black",
       "tokens": "four",
@@ -131,6 +137,7 @@
       }
     },
     {
+      "name": "SWB",
       "abbrev": "SWB",
       "color": "_green",
       "tokens": "two",
@@ -140,6 +147,7 @@
       }
     },
     {
+      "name": "TGOJ",
       "abbrev": "TGOJ",
       "color": "_orange",
       "tokens": "four",
@@ -149,6 +157,7 @@
       }
     },
     {
+      "name": "UGJ",
       "abbrev": "UGJ",
       "color": "_lime",
       "tokens": "three",
@@ -158,6 +167,7 @@
       }
     },
     {
+      "name": "ÖKJ",
       "abbrev": "ÖKJ",
       "color": "_purple",
       "tokens": "two",
@@ -167,6 +177,7 @@
       }
     },
     {
+      "name": "ÖSJ",
       "abbrev": "ÖSJ",
       "color": "_red",
       "tokens": "three",
@@ -176,6 +187,7 @@
       }
     },
     {
+      "name": "KHJ",
       "abbrev": "KHJ",
       "color": "white",
       "tokens": "one",

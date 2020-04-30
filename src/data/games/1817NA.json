@@ -8,7 +8,7 @@
     "titleY": 620,
     "titleSize": 165,
     "subTitleSize": 17,
-    "currency": "USD",
+    "currency": "$#",
     "extraStationTokens": 4
   },
   "links": {

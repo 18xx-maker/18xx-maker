@@ -6,7 +6,7 @@
     "background": "gray",
     "titleX": 50,
     "titleY": 1500,
-    "currency": "USD"
+    "currency": "$#"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/23421/1832-south",

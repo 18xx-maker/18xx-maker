@@ -61,7 +61,7 @@
   ],
   "info": {
     "background": "water",
-    "currency": "USD",
+    "currency": "$#",
     "designer": "Marc Voyer",
     "orientation": "horizontal",
     "extraTotalWidth": 40,

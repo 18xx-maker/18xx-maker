@@ -250,8 +250,8 @@ const TileSheet = ({ paper, layout, hexWidth, gaps }) => {
         }
 
         // Overrides from tile definitions
-        if (hex.mask) {
-          mask = hex.mask;
+        if (hex.mask === false) {
+          mask = "hexMask";
         }
 
         if (hex.rotation) {

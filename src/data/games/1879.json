@@ -7,7 +7,7 @@
     "orientation": "horizontal",
     "titleX": 1250,
     "titleY": 1150,
-    "currency": "USD"
+    "currency": "$#"
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/161886/1879"

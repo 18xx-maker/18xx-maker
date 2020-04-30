@@ -7,7 +7,7 @@
     "titleX": 75,
     "titleY": 2000,
     "extraTotalHeight": 300,
-    "currency": "USD"
+    "currency": "$#"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/424/1870-railroading-across-trans-mississippi-1870",

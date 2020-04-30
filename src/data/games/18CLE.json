@@ -5,7 +5,7 @@
     "designer": " Richard McGuire",
     "background": "gray",
     "titleX": 50,
-    "currency": "USD"
+    "currency": "$#"
   },
   "wip": true,
   "links": {

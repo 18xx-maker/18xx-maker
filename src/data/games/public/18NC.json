@@ -7,7 +7,7 @@
     "titleX": 20,
     "titleY": 820,
     "extraStationTokens": 1,
-    "currency": "USD"
+    "currency": "$#"
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/290513/18nc",

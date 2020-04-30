@@ -1,19 +1,17 @@
 {
   "info": {
     "title": "1839",
-    "subTitle": "The Netherlands",
+    "subtitle": "The Netherlands",
     "titleSize": 1,
     "designer": "Paul Stouthard, Rob van Wijngaarden",
     "designerSize": 1,
     "background": "cover_darkBlue",
     "titleY": 1150,
     "titleX": 120,
-    "extraTotalHeight": 0,
-    "currency": "USD"
+    "currency": "$#"
   },
   "links": {
-    "bgg": "https://boardgamegeek.com/boardgame/98736/1839-netherlands",
-    "rules": ""
+    "bgg": "https://boardgamegeek.com/boardgame/98736/1839-netherlands"
   },
   "colors": {
     "cover_lightBlue": "#7499a6",

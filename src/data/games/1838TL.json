@@ -9,12 +9,9 @@
     "extraStationTokens": 2,
     "titleY": -80,
     "titleX": 20,
-    "currency": "T"
+    "currency": "T#"
   },
-  "links": {
-    "bgg": "",
-    "rules": ""
-  },
+  "links": {},
   "colors": {
     "gray": "#888888",
     "rust": "#b7410e",

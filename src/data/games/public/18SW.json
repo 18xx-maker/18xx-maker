@@ -8,7 +8,7 @@
     "titleY": 1150,
     "titleX": 120,
     "extraTotalHeight": 0,
-    "currency": "USD"
+    "currency": "$#"
   },
   "colors": {
     "bg": "#a66258"

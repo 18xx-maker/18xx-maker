@@ -1,19 +1,17 @@
 {
   "info": {
     "title": "18MI",
-    "subTitle": "The Rise and Fall of Michigan's Railroads",
+    "subtitle": "The Rise and Fall of Michigan's Railroads",
     "titleSize": 1,
     "designer": "Robert G. Schroeder",
     "designerSize": 1,
     "background": "red",
     "titleY": 1150,
     "titleX": 120,
-    "extraTotalHeight": 0,
     "currency": "$#"
   },
   "links": {
-    "bgg": "https://boardgamegeek.com/geeklist/50723/item/1769413#item1769413",
-    "rules": ""
+    "bgg": "https://boardgamegeek.com/geeklist/50723/item/1769413#item1769413"
   },
   "bank": 12000,
   "players": [
@@ -82,7 +80,8 @@
       "color": "lightGreen",
       "tokens": [
         "Home",
-        "$40", "$100"
+        "$40",
+        "$100"
       ]
     },
     {
