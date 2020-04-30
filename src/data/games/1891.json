@@ -61,8 +61,76 @@
     "611": 4,
     "622": 2,
     "623": 1,
-    "H902": 1,
-    "H908": 1,
+    "H902": {
+      "color": "green",
+      "values": [
+        {
+          "value": 50,
+          "angle": 90,
+          "percent": 0.85
+        }
+      ],
+      "cities": [
+        {
+          "size": 2,
+          "angle": 90,
+          "percent": 0.3,
+          "rotate": 90
+        },
+        {
+          "size": 2,
+          "angle": 270,
+          "percent": 0.5,
+          "rotate": 90
+        }
+      ],
+      "track": [
+        {
+          "side": 1,
+          "type": "sharpStop"
+        },
+        {
+          "side": 4,
+          "type": "sharpStopRev"
+        },
+        {
+          "side": 5,
+          "type": "stub"
+        },
+        {
+          "side": 6,
+          "type": "stub"
+        }
+      ]
+    },
+    "H908": {
+      "color": "green",
+      "cities": [
+        {
+          "size": 2,
+          "name": {
+            "reverse": true,
+            "name": "Tomo"
+          },
+          "rotate": -90
+        }
+      ],
+      "values": [
+        {
+          "value": 30,
+          "angle": 90,
+          "percent": 0.8
+        }
+      ],
+      "track": [
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        }
+      ]
+    },
     "H901": 1,
     "H903": 1,
     "H905": 3,

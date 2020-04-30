@@ -620,16 +620,410 @@
     "69": 1,
     "70": 1,
     "611": 5,
-    "CC51": 1,
-    "CC1": 1,
-    "CC2": 1,
-    "CC3": 1,
-    "CC4": 1,
-    "CC5": 1,
-    "CC6": 1,
-    "CC7": 2,
-    "CC8": 1,
-    "CC9": 1
+    "CC9": {
+      "color": "gray",
+      "rotations": 1,
+      "cities": [
+        {
+          "size": 3,
+          "rotate": 180
+        }
+      ],
+      "labels": [
+        {
+          "label": "OO",
+          "angle": 180,
+          "percent": 0.78
+        }
+      ],
+      "values": [
+        {
+          "angle": 335,
+          "percent": 0.85,
+          "value": 70
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "CC51": {
+      "color": "gray",
+      "rotations": 1,
+      "cities": [
+        {
+          "size": 3,
+          "rotate": 180
+        }
+      ],
+      "values": [
+        {
+          "angle": 180,
+          "percent": 0.78,
+          "value": 50
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "CC8": {
+      "color": "gray",
+      "values": [
+        {
+          "angle": 270,
+          "percent": 0.87,
+          "value": 100
+        }
+      ],
+      "labels": [
+        {
+          "size": 20,
+          "label": "DC",
+          "angle": 205,
+          "percent": 0.9
+        }
+      ],
+      "cities": [
+        {
+          "size": 4,
+          "percent": 0.1
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "CC1": {
+      "color": "yellow",
+      "values": [
+        {
+          "angle": 210,
+          "percent": 0.75,
+          "value": 30
+        }
+      ],
+      "labels": [
+        {
+          "label": "DC",
+          "angle": 155,
+          "percent": 0.75
+        }
+      ],
+      "cities": [
+        {
+          "size": 1
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 5
+        }
+      ]
+    },
+    "CC3": {
+      "color": "green",
+      "rotations": 3,
+      "values": [
+        {
+          "angle": 265,
+          "percent": 0.7,
+          "value": 40
+        },
+        {
+          "angle": 75,
+          "percent": 0.7,
+          "value": 40
+        }
+      ],
+      "labels": [
+        {
+          "label": "OO",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
+      "cities": [
+        {
+          "angle": 10,
+          "percent": 0.5
+        },
+        {
+          "angle": 200,
+          "percent": 0.5
+        }
+      ],
+      "track": [
+        {
+          "type": "gentle",
+          "side": 1
+        },
+        {
+          "type": "gentle",
+          "side": 4
+        }
+      ]
+    },
+    "CC5": {
+      "color": "green",
+      "values": [
+        {
+          "angle": 50,
+          "percent": 0.8,
+          "value": 40
+        },
+        {
+          "angle": 135,
+          "percent": 0.8,
+          "value": 40
+        }
+      ],
+      "labels": [
+        {
+          "label": "OO",
+          "angle": 90,
+          "percent": 0.6
+        }
+      ],
+      "cities": [
+        {
+          "angle": 190,
+          "percent": 0.5
+        },
+        {
+          "angle": 360,
+          "percent": 0.5
+        }
+      ],
+      "track": [
+        {
+          "type": "gentle",
+          "cross": "over",
+          "side": 4
+        },
+        {
+          "type": "gentle",
+          "cross": "under",
+          "side": 5
+        }
+      ]
+    },
+    "CC2": {
+      "color": "green",
+      "rotations": 2,
+      "values": [
+        {
+          "angle": 330,
+          "percent": 0.8,
+          "value": 40
+        }
+      ],
+      "labels": [
+        {
+          "label": "DC",
+          "angle": 180,
+          "percent": 0.75
+        }
+      ],
+      "cities": [
+        {
+          "size": 2
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "CC4": {
+      "color": "green",
+      "rotations": 2,
+      "values": [
+        {
+          "angle": 210,
+          "percent": 0.7,
+          "value": 40
+        },
+        {
+          "angle": 330,
+          "percent": 0.75,
+          "value": 40
+        }
+      ],
+      "labels": [
+        {
+          "label": "OO",
+          "angle": 260,
+          "percent": 0.5
+        }
+      ],
+      "cities": [
+        {
+          "angle": 30,
+          "percent": 0.5
+        },
+        {
+          "angle": 150,
+          "percent": 0.5
+        }
+      ],
+      "track": [
+        {
+          "type": "sharp",
+          "side": 1
+        },
+        {
+          "type": "sharp",
+          "side": 3
+        }
+      ]
+    },
+    "CC6": {
+      "color": "brown",
+      "rotations": 1,
+      "cities": [
+        {
+          "size": 3,
+          "rotate": 180
+        }
+      ],
+      "labels": [
+        {
+          "size": 20,
+          "label": "DC",
+          "angle": 155,
+          "percent": 0.85
+        }
+      ],
+      "values": [
+        {
+          "angle": 270,
+          "percent": 0.9,
+          "value": 70
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "CC7": {
+      "quantity": 2,
+      "color": "brown",
+      "cities": [
+        {
+          "size": 2
+        }
+      ],
+      "labels": [
+        {
+          "label": "OO",
+          "angle": 180,
+          "percent": 0.7
+        }
+      ],
+      "values": [
+        {
+          "angle": 330,
+          "percent": 0.8,
+          "value": 50
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 6
+        },
+        {
+          "side": 5
+        }
+      ]
+    }
   },
   "map": {
     "print": "landscape",

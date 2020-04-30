@@ -88,12 +88,19 @@
               "companies": {
                 "type": "array",
                 "items": {
-                  "type": "object",
-                  "properties": {
-                    "label": { "type": "string" },
-                    "color": { "type": "string" },
-                    "additionalProperties": false
-                  }
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "label": { "type": "string" },
+                        "color": { "type": "string" },
+                        "additionalProperties": false
+                      }
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
                 }
               }
             }
@@ -236,6 +243,7 @@
       "type": "object",
       "properties": {
         "color": { "type": "string" },
+        "group": { "type": "string" },
         "track": { "$ref": "#/definitions/track" },
         "cities": { "$ref": "#/definitions/cities" },
         "values": { "$ref": "#/definitions/values" },
