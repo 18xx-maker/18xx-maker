@@ -152,6 +152,7 @@
         "reverseMarketTokens": { "type": "string", "enum": ["none", "one", "all"] },
         "marketTokenSize": { "type": "number", "minimum": 1 },
         "stationTokenSize": { "type": "number", "minimum": 1 },
+        "generalTokenSize": { "type": "number", "minimum": 1 },
         "bleed": { "type": "boolean" }
       },
       "additionalProperties": false,

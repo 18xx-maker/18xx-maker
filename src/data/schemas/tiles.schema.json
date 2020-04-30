@@ -275,7 +275,7 @@
 
   "type": "object",
   "propertyNames": {
-    "pattern": "^X?[0-9]+(\\|[0-9a-zA-Z]+)?$"
+    "pattern": "^X?[0-9]+([a-zA-Z]+)?(\\|[0-9a-zA-Z]+)?$"
   },
   "additionalProperties": { "$ref": "#/definitions/tile" }
 }

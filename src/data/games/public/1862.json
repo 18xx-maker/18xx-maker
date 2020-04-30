@@ -259,9 +259,80 @@
     "20": 6,
     "21": 2,
     "22": 2,
-    "53Y": 4,
+    "53Y": {
+      "quantity": 4,
+      "color": "green",
+      "rotations": 2,
+      "values": [
+        {
+          "angle": 210,
+          "percent": 0.8,
+          "value": 50
+        }
+      ],
+      "labels": [
+        {
+          "label": "Y",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
+      "cities": [
+        {
+          "size": 2
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 5
+        }
+      ]
+    },
     "57": 12,
-    "61Y": 3,
+    "61Y": {
+      "quantity": 3,
+      "color": "brown",
+      "rotations": 6,
+      "values": [
+        {
+          "angle": 210,
+          "percent": 0.8,
+          "value": 60
+        }
+      ],
+      "labels": [
+        {
+          "label": "Y",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
+      "cities": [
+        {
+          "size": 2
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        }
+      ]
+    },
     "201": 2,
     "202": 4,
     "611": 8,
@@ -279,7 +350,41 @@
     "796": 3,
     "797": 1,
     "798": 3,
-    "891Y": 3,
+    "891Y": {
+      "quantity": 3,
+      "color": "brown",
+      "rotations": 6,
+      "values": [
+        {
+          "angle": 210,
+          "percent": 0.8,
+          "value": 60
+        }
+      ],
+      "labels": [
+        {
+          "label": "Y",
+          "angle": 150,
+          "percent": 0.8
+        }
+      ],
+      "cities": [
+        {
+          "size": 2
+        }
+      ],
+      "track": [
+        {
+          "type": "straight"
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        }
+      ]
+    },
     "8850": 6,
     "8851": 8,
     "8852": 12
