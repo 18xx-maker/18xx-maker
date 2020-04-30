@@ -131,11 +131,231 @@
         }
       ]
     },
-    "H901": 1,
-    "H903": 1,
-    "H905": 3,
-    "H904": 1,
-    "H906": 1,
-    "H907": 1
+    "H901": {
+      "color": "brown",
+      "cities": [
+        {
+          "size": 2,
+          "name": {
+            "name": "Kure"
+          }
+        }
+      ],
+      "values": [
+        {
+          "value": 50,
+          "angle": 330,
+          "percent": 0.8
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "H903": {
+      "color": "brown",
+      "values": [
+        {
+          "value": 60,
+          "angle": 90,
+          "percent": 0.9
+        }
+      ],
+      "cities": [
+        {
+          "size": 2,
+          "angle": 90,
+          "percent": 0.3,
+          "rotate": 90
+        },
+        {
+          "size": 2,
+          "angle": 270,
+          "percent": 0.5,
+          "rotate": 90
+        }
+      ],
+      "track": [
+        {
+          "side": 1,
+          "type": "sharpStop"
+        },
+        {
+          "side": 4,
+          "type": "sharpStopRev"
+        },
+        {
+          "side": 5,
+          "type": "stub"
+        },
+        {
+          "side": 6,
+          "type": "stub"
+        }
+      ]
+    },
+    "H905": {
+      "quantity": 3,
+      "color": "brown",
+      "cities": [
+        {
+          "size": 2,
+          "rotate": -90
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "angle": 90,
+          "percent": 0.8
+        }
+      ],
+      "track": [
+        {
+          "side": 1,
+          "type": "straight"
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        }
+      ]
+    },
+    "H904": {
+      "color": "gray",
+      "values": [
+        {
+          "value": 80,
+          "angle": 90,
+          "percent": 0.9
+        }
+      ],
+      "names": [
+        {
+          "name": "Hiroshima",
+          "angle": 208,
+          "percent": 0.85,
+          "fontSize": 8
+        }
+      ],
+      "cities": [
+        {
+          "size": 4
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "H906": {
+      "color": "gray",
+      "values": [
+        {
+          "value": 40,
+          "angle": 215,
+          "percent": 0.85
+        }
+      ],
+      "names": [
+        {
+          "name": "Kaidaichi",
+          "angle": 332,
+          "percent": 0.82,
+          "fontSize": 8
+        }
+      ],
+      "cities": [
+        {
+          "size": 3
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    },
+    "H907": {
+      "color": "gray",
+      "values": [
+        {
+          "value": 60,
+          "angle": 215,
+          "percent": 0.85
+        }
+      ],
+      "names": [
+        {
+          "name": "Fukuyama",
+          "angle": 332,
+          "percent": 0.82,
+          "fontSize": 8
+        }
+      ],
+      "cities": [
+        {
+          "size": 3
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
+      ]
+    }
   }
 }
