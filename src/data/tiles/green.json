@@ -6606,7 +6606,7 @@
   "479|a": {
     "color": "green",
     "group": "479",
-    "mask": "hexMask",
+    "mask": false,
     "rotation": 60,
     "rotations": 1,
     "values": [
@@ -6656,7 +6656,7 @@
   "479|b": {
     "color": "green",
     "group": "479",
-    "mask": "hexMask",
+    "mask": false,
     "rotation": 60,
     "rotations": 1,
     "values": [

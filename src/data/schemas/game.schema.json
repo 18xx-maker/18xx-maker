@@ -8,7 +8,7 @@
         { "type": "number", "mimimum": 1},
         {
           "type": "string",
-          "pattern": "^[0-9]+\\ ?/\\ ?[0-9]+$"
+          "pattern": "^[0-9]+\\ ?/\\ ?[0-9]+(\\ ?/\\ ?[0-9]+)*$"
         },
         {
           "type": "string",
@@ -57,7 +57,8 @@
       "items": {
         "oneOf": [
           { "type": "string" },
-          { "type": "number" }
+          { "type": "number" },
+          { "$ref": "#/definitions/token" }
         ]
       }
     },
@@ -75,6 +76,7 @@
         "subtitle": { "type": "string" },
         "designer": { "type": "string" },
         "background": { "type": "string" },
+        "notes": { "type": "string" },
         "extraTotalHeight": { "type": "number", "minimum": 1 },
         "extraTotalWidth": { "type": "number", "minimum": 1 },
         "titleX": { "type": "number" },
@@ -93,7 +95,7 @@
         },
         "marketTokens": { "type": "integer", "minimum": 0 },
         "extraStationTokens": { "type": "integer", "mimimum": 1},
-        "currency": { "type": "string" }
+        "currency": { "type": "string", "pattern": "^(.*)\\#(.*)$" }
       },
       "required": ["title"],
       "additionalProperties": false
@@ -112,6 +114,7 @@
     "bank": { "$ref": "#/definitions/bank" },
     "capital": { "$ref": "#/definitions/capital" },
     "certLimit": { "$ref": "#/definitions/certLimit" },
+    "floatPercent": { "type": "number", "minimum": 0, "maximum": 100 },
     "tokenTypes": {
       "type": "object",
       "additionalProperties": { "$ref" : "#/definitions/tokens" }
@@ -177,6 +180,7 @@
           "hex": { "type": "string" },
           "token": { "$ref": "#/definitions/token" },
           "company": { "type": "string" },
+          "image": { "type": "string" },
           "icon": { "type": "string" },
           "tile": { "type": "string" },
           "id": { "type": "string" },

@@ -5093,7 +5093,7 @@
   "485|a": {
     "color": "brown",
     "group": "485",
-    "mask": "hexMask",
+    "mask": false,
     "rotation": 60,
     "rotations": 1,
     "values": [
@@ -5157,7 +5157,7 @@
   "485|b": {
     "color": "brown",
     "group": "485",
-    "mask": "hexMask",
+    "mask": false,
     "rotation": 60,
     "rotations": 1,
     "values": [
@@ -5200,7 +5200,7 @@
   "486|a": {
     "color": "brown",
     "group": "486",
-    "mask": "hexMask",
+    "mask": false,
     "rotation": 60,
     "rotations": 1,
     "values": [
@@ -5264,7 +5264,7 @@
   "486|b": {
     "color": "brown",
     "group": "486",
-    "mask": "hexMask",
+    "mask": false,
     "rotation": 60,
     "rotations": 1,
     "values": [
@@ -5830,7 +5830,7 @@
       }
     ]
   },
-  "22X9": {
+  "X229": {
     "color": "brown",
     "values": [
       {

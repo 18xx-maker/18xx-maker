@@ -77,6 +77,17 @@
       "items": { "$ref": "#/definitions/name" }
     },
 
+    "goods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "color": { "type": "string" },
+          "width": { "type": "number", "minimum": 1 }
+        }
+      }
+    },
+
     "cities": {
       "type": "array",
       "items": {
@@ -97,9 +108,8 @@
                         "additionalProperties": false
                       }
                     },
-                    {
-                      "type": "string"
-                    }
+                    { "type": "string" },
+                    { "type": "null" }
                   ]
                 }
               }
@@ -244,7 +254,9 @@
       "properties": {
         "color": { "type": "string" },
         "group": { "type": "string" },
+        "mask": { "type": "boolean" },
         "track": { "$ref": "#/definitions/track" },
+        "goods": { "$ref": "#/definitions/goods" },
         "cities": { "$ref": "#/definitions/cities" },
         "values": { "$ref": "#/definitions/values" },
         "labels": { "$ref": "#/definitions/labels" },
@@ -255,6 +267,12 @@
         "names": { "$ref": "#/definitions/names" },
         "borders": { "$ref": "#/definitions/borders" },
         "removeBorders": { "$ref": "#/definitions/removeBorders" },
+        "rotation": {
+          "type": "number",
+          "multipleOf": 60,
+          "minimum": 0,
+          "maximum": 300
+        },
         "rotations": {
           "oneOf": [
             {
