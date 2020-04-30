@@ -879,31 +879,6 @@
     "767": 4,
     "768": 4,
     "769": 4,
-    "20": {
-      "quantity": 4,
-      "color": "green",
-      "track": [
-        {
-          "side": 3
-        },
-        {
-          "side": 4
-        },
-        {
-          "side": 5
-        }
-      ],
-      "values": [
-        {
-          "angle": 60,
-          "percent": 0.667,
-          "value": 20
-        }
-      ],
-      "centerTowns": [
-        {}
-      ]
-    },
     "44": {
       "quantity": 2,
       "color": "green",
@@ -952,7 +927,7 @@
         }
       ]
     },
-    "80C": {
+    "80": {
       "quantity": 2,
       "color": "green",
       "track": [
@@ -970,7 +945,7 @@
         }
       ]
     },
-    "81C": {
+    "81": {
       "quantity": 2,
       "color": "green",
       "track": [
@@ -988,7 +963,7 @@
         }
       ]
     },
-    "82C": {
+    "82": {
       "quantity": 4,
       "color": "green",
       "track": [
@@ -1006,7 +981,7 @@
         }
       ]
     },
-    "83C": {
+    "83": {
       "quantity": 4,
       "color": "green",
       "track": [
@@ -1024,7 +999,7 @@
         }
       ]
     },
-    "185CLE": {
+    "185": {
       "quantity": 4,
       "color": "green",
       "track": [
@@ -1051,7 +1026,7 @@
         }
       ]
     },
-    "186CLE": {
+    "186": {
       "quantity": 4,
       "color": "green",
       "track": [
@@ -1078,7 +1053,7 @@
         }
       ]
     },
-    "187CLE": {
+    "187": {
       "quantity": 2,
       "color": "green",
       "track": [
@@ -1105,7 +1080,7 @@
         }
       ]
     },
-    "758CLE": {
+    "758": {
       "color": "green",
       "labels": [
         {
@@ -1175,6 +1150,31 @@
       "values": [
         {
           "angle": 240,
+          "percent": 0.667,
+          "value": 20
+        }
+      ],
+      "centerTowns": [
+        {}
+      ]
+    },
+    "CLE3": {
+      "quantity": 4,
+      "color": "green",
+      "track": [
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        }
+      ],
+      "values": [
+        {
+          "angle": 60,
           "percent": 0.667,
           "value": 20
         }
