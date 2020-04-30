@@ -1082,13 +1082,6 @@
     },
     "758": {
       "color": "green",
-      "labels": [
-        {
-          "label": "Union Depot",
-          "angle": 0,
-          "percent": 0.5
-        }
-      ],
       "track": [
         {
           "side": 4
@@ -1105,7 +1098,7 @@
         }
       ],
       "cities": [
-        {}
+        { "name": { "name": "Union Depot", "reverse": true }}
       ]
     },
     "CLE1": {
@@ -1480,6 +1473,12 @@
     },
     "CLE15": {
       "color": "gray",
+      "names": [{
+        "name": "The Flats",
+        "fontSize": 8,
+        "percent": 0.9,
+        "angle": 210
+      }],
       "cities": [
         {
           "size": 3,
@@ -1489,14 +1488,6 @@
               "color": "gray"
             }
           ]
-        }
-      ],
-      "labels": [
-        {
-          "label": "The Flats",
-          "angle": 210,
-          "percent": 0.9,
-          "size": 8
         }
       ],
       "values": [
@@ -1546,12 +1537,12 @@
           ]
         }
       ],
-      "labels": [
+      "names": [
         {
-          "label": "Hopkins",
+          "name": "Hopkins",
           "angle": 210,
           "percent": 0.9,
-          "size": 8
+          "fontSize": 8
         }
       ],
       "values": [
