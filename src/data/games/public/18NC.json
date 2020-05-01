@@ -24,7 +24,7 @@
     "Round",
     "DU"
   ],
-  "bank": "unlimited",
+  "bank": "∞",
   "ipo": true,
   "players": [
     {
@@ -245,7 +245,7 @@
   ],
   "privates": [
     {
-      "id": 1,
+      "id": "P1",
       "name": "Warrenton Railroad",
       "price": 20,
       "revenue": 5,
@@ -253,7 +253,7 @@
       "description": "The Warrenton hex (C18) is reserved until this private is purchased by a railroad."
     },
     {
-      "id": 2,
+      "id": "P2",
       "name": "Champion Fibre Company",
       "price": 40,
       "revenue": 10,
@@ -261,7 +261,7 @@
       "description": "The owning player may at the beginning of the Operating Round lay one yellow tile on a mountain hex ignoring the terrain cost and usual connection rules.  This abiility may not be used once purchased by a company."
     },
     {
-      "id": 3,
+      "id": "P3",
       "name": "Wilmington Railway Bridge Company",
       "price": 40,
       "revenue": 15,
@@ -270,7 +270,7 @@
       "description": "The owning railroad may perform an extra tile action when completing a connection across a river hexside once per OR."
     },
     {
-      "id": 4,
+      "id": "P4",
       "name": "Mt. Airy & Ore Knob",
       "price": 65,
       "revenue": 10,
@@ -278,7 +278,7 @@
       "description": "The owning company may place an extra token at no cost in Mt. Airy regardless of track connection."
     },
     {
-      "id": 5,
+      "id": "P5",
       "name": "Durham Union Station Company",
       "price": 65,
       "revenue": 10,
@@ -286,7 +286,7 @@
       "description": "The owning railroad may pllace the Durham Union station token in Durham.  When this private closes, the Durham Uniioin token is removed from the game."
     },
     {
-      "id": 6,
+      "id": "P6",
       "name": "Richmond and Danville",
       "price": 120,
       "revenue": 30,

@@ -10,7 +10,7 @@
     "titleY":-110,
     "titleX":200,
     "extraTotalHeight":10,
-    "currency":"CAD"
+    "currency":"$#"
   },
   "links":{
     "bgg":"https://https://boardgamegeek.com/boardgame/306265/1871-british-columbia",
@@ -32,19 +32,19 @@
       "number":2,
       "capital":"$600",
       "certLimit":19,
-      "bank":"$7,000"
+      "bank":7000
     },
     {
       "number":3,
       "capital":"$400",
       "certLimit":14,
-      "bank":"$6,500"
+      "bank":6500
     },
     {
       "number":4,
       "capital":"$400",
       "certLimit":12,
-      "bank":"$7,500"
+      "bank":7500
     }
   ],
   "companies":[

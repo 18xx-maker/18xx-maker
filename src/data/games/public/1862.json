@@ -391,6 +391,7 @@
   },
   "companies": [
     {
+      "name": "ECR",
       "abbrev": "ECR",
       "color": "_dark-blue",
       "token": {
@@ -400,6 +401,7 @@
       }
     },
     {
+      "name": "E&H",
       "abbrev": "E&H",
       "color": "_light-yellow",
       "token": {
@@ -409,6 +411,7 @@
       }
     },
     {
+      "name": "ENR",
       "abbrev": "ENR",
       "color": "_dark-yellow",
       "token": {
@@ -418,6 +421,7 @@
       }
     },
     {
+      "name": "ESR",
       "abbrev": "ESR",
       "color": "_dark-green",
       "token": {
@@ -427,6 +431,7 @@
       }
     },
     {
+      "name": "EUR",
       "abbrev": "EUR",
       "color": "_red",
       "token": {
@@ -436,6 +441,7 @@
       }
     },
     {
+      "name": "FDR",
       "abbrev": "FDR",
       "color": "_light-orange",
       "token": {
@@ -445,6 +451,7 @@
       }
     },
     {
+      "name": "I&B",
       "abbrev": "I&B",
       "color": "_black",
       "token": {
@@ -454,6 +461,7 @@
       }
     },
     {
+      "name": "L&D",
       "abbrev": "L&D",
       "color": "_dark-orange",
       "token": {
@@ -463,6 +471,7 @@
       }
     },
     {
+      "name": "L&E",
       "abbrev": "L&E",
       "color": "_red",
       "token": {
@@ -472,6 +481,7 @@
       }
     },
     {
+      "name": "L&H",
       "abbrev": "L&H",
       "color": "_light-blue-1",
       "token": {
@@ -481,6 +491,7 @@
       }
     },
     {
+      "name": "N&B",
       "abbrev": "N&B",
       "color": "_light-gray",
       "token": {
@@ -490,6 +501,7 @@
       }
     },
     {
+      "name": "N&E",
       "abbrev": "N&E",
       "color": "_dark-gray",
       "token": {
@@ -499,6 +511,7 @@
       }
     },
     {
+      "name": "NGC",
       "abbrev": "NGC",
       "color": "_dark-yellow",
       "token": {
@@ -508,6 +521,7 @@
       }
     },
     {
+      "name": "N&S",
       "abbrev": "N&S",
       "color": "_blue",
       "token": {
@@ -517,6 +531,7 @@
       }
     },
     {
+      "name": "SVR",
       "abbrev": "SVR",
       "color": "_brown",
       "token": {
@@ -526,6 +541,7 @@
       }
     },
     {
+      "name": "W&F",
       "abbrev": "W&F",
       "color": "_green",
       "token": {
@@ -535,6 +551,7 @@
       }
     },
     {
+      "name": "WNR",
       "abbrev": "WNR",
       "color": "_brown",
       "token": {
@@ -544,6 +561,7 @@
       }
     },
     {
+      "name": "WStI",
       "abbrev": "WStI",
       "color": "_purple",
       "token": {
@@ -553,6 +571,7 @@
       }
     },
     {
+      "name": "WVR",
       "abbrev": "WVR",
       "color": "_purple",
       "token": {
@@ -562,6 +581,7 @@
       }
     },
     {
+      "name": "Y&N",
       "abbrev": "Y&N",
       "color": "_black",
       "token": {

@@ -40,38 +40,41 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "analyze": "yarn generate && react-scripts build && source-map-explorer build/static/js/main.*",
-    "start": "yarn generate && react-scripts start",
-    "build:app": "yarn build",
-    "build": "yarn generate && react-scripts build",
-    "clean": "node ./bin/clean.js",
-    "test": "yarn generate && react-scripts test",
-    "eject": "react-scripts eject",
-    "print": "node ./bin/print.js",
-    "b18": "node ./bin/b18.js",
     "18xx.games": "node ./bin/18xx.games.js",
-    "svgo": "yarn svgo:icons && yarn svgo:logos",
-    "svgo:logos": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/logos",
-    "svgo:icons": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/icons",
+    "analyze": "yarn generate && react-scripts build && source-map-explorer build/static/js/main.*",
+    "b18": "node ./bin/b18.js",
+    "build": "yarn generate && react-scripts build",
+    "build:app": "yarn build",
+    "clean": "node ./bin/clean.js",
+    "eject": "react-scripts eject",
     "generate": "yarn generate:config && yarn generate:games && yarn generate:icons && yarn generate:logos && yarn generate:themes",
     "generate:config": "node ./bin/generateConfigJson.js",
     "generate:games": "node ./bin/generateGameIndex.js",
     "generate:icons": "node ./bin/generateSvgIconIndex.js",
     "generate:logos": "node ./bin/generateSvgLogoIndex.js",
     "generate:themes": "node ./bin/generateThemeIndexes.js",
-    "validate:schemas": "ajv compile -s src/data/schemas/\\*.schema.json -r src/data/schemas/\\*.schema.json",
+    "print": "node ./bin/print.js",
+    "start": "yarn generate && react-scripts start",
+    "svgo": "yarn svgo:icons && yarn svgo:logos",
+    "svgo:icons": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/icons",
+    "svgo:logos": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/logos",
+    "test": "yarn generate && react-scripts test",
+    "validate": "yarn validate:schemas && yarn validate:config && yarn validate:themes && yarn validate:tiles && yarn validate:games",
     "validate:config": "ajv --format=full -s src/data/schemas/config.schema.json -d src/defaults.json",
+    "validate:games": "18xx-schemas src/data/games/\\*\\*/\\*.json",
+    "validate:schemas": "ajv compile -s src/data/schemas/\\*.schema.json -r src/data/schemas/\\*.schema.json",
     "validate:themes": "yarn validate:themes:maps && yarn validate:themes:companies",
-    "validate:themes:maps": "ajv --format=full -s src/data/schemas/theme.schema.json -r src/data/schemas/\\*.schema.json -d src/data/themes/maps/\\*.json",
     "validate:themes:companies": "ajv --format=full -s src/data/schemas/companies.schema.json -r src/data/schemas/\\*.schema.json -d src/data/themes/companies/\\*.json",
-    "validate:tiles": "ajv --format=full -s src/data/schemas/tiles.schema.json -r src/data/schemas/\\*.schema.json -d src/data/tiles/\\*.json",
-    "validate:games": "ajv --format=full -s src/data/schemas/game.schema.json -r src/data/schemas/\\*.schema.json -d src/data/games/\\*.json",
-    "validate": "yarn validate:schemas && yarn validate:config && yarn validate:themes && yarn validate:tiles && yarn validate:games"
+    "validate:themes:maps": "ajv --format=full -s src/data/schemas/theme.schema.json -r src/data/schemas/\\*.schema.json -d src/data/themes/maps/\\*.json",
+    "validate:tiles": "18xx-schemas src/data/tiles/\\*\\*/\\*.json"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "18xx-schemas": "^0.3.0"
+  }
 }
