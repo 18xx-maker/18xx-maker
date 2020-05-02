@@ -59,7 +59,7 @@
     "svgo:icons": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/icons",
     "svgo:logos": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/logos",
     "test": "yarn generate && yarn validate && react-scripts test",
-    "validate": "(yarn validate:config || true) && (yarn validate:themes || true) && (yarn validate:tiles || true) && (yarn validate:games || true)",
+    "validate": "npm-run-all validate:config validate:games validate:themes validate:tiles -c -p --aggregate-output",
     "validate:config": "18xx-schemas src/defaults.json",
     "validate:games": "18xx-schemas src/data/games/*.json src/data/games/**/*.json",
     "validate:themes": "18xx-schemas src/data/themes/**/*.json",
@@ -72,6 +72,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "18xx-schemas": "^0.4.1"
+    "18xx-schemas": "^0.4.1",
+    "npm-run-all": "^4.1.5"
   }
 }
