@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"18xx-schemas@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/18xx-schemas/-/18xx-schemas-0.3.0.tgz#182779dc3c86463296f2b34d64be70c6985cdd83"
-  integrity sha512-yy5kiSGFknhVe4yEBcOa0W1/6dhNhS6w7sd6bkbdP79+inPG7pnHq3uspkXCV2jWoCHWSVNEAXFZIMmJV6aocw==
+"18xx-schemas@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/18xx-schemas/-/18xx-schemas-0.4.0.tgz#378129524190f46e5f6408586cd99d5336d511e1"
+  integrity sha512-0c2gOILf6nCZDBI2ztdoQdpctMyup2o8gc7cAY3REU2L1D59fis2BU5wr9aThbg9TsWz4jKQB7lFF/a8P8447g==
   dependencies:
     ajv "^6.12.2"
     chalk "^4.0.0"
