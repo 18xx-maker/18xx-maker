@@ -51,7 +51,7 @@ const server = app.listen(9000);
   let author = process.argv[4];
 
   let game = gameDefs[bname];
-  let tiles = require('../src/data/tiles').default;
+  let tiles = require('@18xx-maker/games').tiles;
 
   const getTile = gutil.getTile(tiles, game.tiles || {});
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, useParams } from "react-router-dom";
 
 import * as R from "ramda";
-import tiles from "./data/tiles";
+import { tiles } from "@18xx-maker/games";
 
 import Tile from "./Tile";
 import Svg from "./Svg";

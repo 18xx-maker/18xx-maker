@@ -6,7 +6,7 @@ import "./TileSheet.scss";
 
 import { getTile, sortTiles } from "./util";
 import { getTileSheetContext } from "./tilesheet/util";
-import tileDefs from "./data/tiles";
+import { tiles as tileDefs } from "@18xx-maker/games";
 import { sidesFromTile } from "./atoms/Track";
 import Svg from "./Svg";
 import Page from "./util/Page";
