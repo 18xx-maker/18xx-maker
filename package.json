@@ -72,7 +72,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "18xx-schemas": "^0.4.1",
+    "@18xx-maker/schemas": "^0.6.0",
     "npm-run-all": "^4.1.5"
   }
 }
