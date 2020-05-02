@@ -59,14 +59,11 @@
     "svgo:icons": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/icons",
     "svgo:logos": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/logos",
     "test": "yarn generate && react-scripts test",
-    "validate": "yarn validate:schemas && yarn validate:config && yarn validate:themes && yarn validate:tiles && yarn validate:games",
-    "validate:config": "ajv --format=full -s src/data/schemas/config.schema.json -d src/defaults.json",
-    "validate:games": "18xx-schemas src/data/games/\\*\\*/\\*.json",
-    "validate:schemas": "ajv compile -s src/data/schemas/\\*.schema.json -r src/data/schemas/\\*.schema.json",
-    "validate:themes": "yarn validate:themes:maps && yarn validate:themes:companies",
-    "validate:themes:companies": "ajv --format=full -s src/data/schemas/companies.schema.json -r src/data/schemas/\\*.schema.json -d src/data/themes/companies/\\*.json",
-    "validate:themes:maps": "ajv --format=full -s src/data/schemas/theme.schema.json -r src/data/schemas/\\*.schema.json -d src/data/themes/maps/\\*.json",
-    "validate:tiles": "18xx-schemas src/data/tiles/\\*\\*/\\*.json"
+    "validate": "yarn validate:config && yarn validate:themes && yarn validate:tiles && yarn validate:games",
+    "validate:config": "18xx-schemas src/defaults.json",
+    "validate:games": "18xx-schemas src/data/games/*.json src/data/games/**/*.json",
+    "validate:themes": "18xx-schemas src/data/themes/**/*.json",
+    "validate:tiles": "18xx-schemas src/data/tiles/*.json"
   },
   "browserslist": [
     ">0.2%",
@@ -75,6 +72,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "18xx-schemas": "^0.3.0"
+    "18xx-schemas": "^0.4.0"
   }
 }
