@@ -618,6 +618,24 @@
         "color": "brown",
         "description": "Players may purchase any number of shares of this corporation in one stock action"
       }
+    ],
+    "ledges": [
+      {
+        "color": "red",
+        "coords": [
+          "5 0",
+          "5 1",
+          "6 1",
+          "6 2",
+          "7 2",
+          "7 3",
+          "8 3",
+          "8 4",
+          "9 4",
+          "9 5",
+          "10 5"
+        ]
+      }
     ]
   },
   "tiles": {
