@@ -7,7 +7,7 @@ let games = require("@18xx-maker/games");
 if (process.env.REACT_APP_ONLY_PUBLIC_GAMES) {
   games = games.public;
 } else {
-  delete games.public;
+  games = games.games;
 }
 
 {{#each games}}
