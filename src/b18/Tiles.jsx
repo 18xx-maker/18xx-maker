@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import tileDefs from "../data/tiles";
+import { tiles as tileDefs } from "@18xx-maker/games";
 
 import Svg from "../Svg";
 import Tile from "../Tile";

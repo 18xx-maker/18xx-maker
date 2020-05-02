@@ -1,10 +1,11 @@
 import React from "react";
-import tiles from "./data/tiles";
+import { tiles } from "@18xx-maker/games";
 
 import is from "ramda/src/is";
 
 import Hex from "./Hex";
 import Id from "./atoms/Id";
+console.log(tiles);
 
 const Tile = ({ id, border, mask, gameTiles }) => {
   let hex = null;
