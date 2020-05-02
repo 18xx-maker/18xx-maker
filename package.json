@@ -72,6 +72,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "18xx-schemas": "^0.4.0"
+    "18xx-schemas": "^0.4.1"
   }
 }
