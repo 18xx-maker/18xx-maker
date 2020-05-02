@@ -58,7 +58,7 @@
     "svgo": "yarn svgo:icons && yarn svgo:logos",
     "svgo:icons": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/icons",
     "svgo:logos": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/logos",
-    "test": "yarn generate && react-scripts test",
+    "test": "yarn generate && yarn validate && react-scripts test",
     "validate": "yarn validate:config && yarn validate:themes && yarn validate:tiles && yarn validate:games",
     "validate:config": "18xx-schemas src/defaults.json",
     "validate:games": "18xx-schemas src/data/games/*.json src/data/games/**/*.json",

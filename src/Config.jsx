@@ -9,7 +9,7 @@ import ColorContext from "./context/ColorContext";
 
 import defaultConfig from "./defaults.json";
 import customConfig from "./config.json";
-import schema from "./data/schemas/config.schema.json";
+import schema from "18xx-schemas/schemas/config.schema.json";
 
 import Color from "./data/Color";
 
