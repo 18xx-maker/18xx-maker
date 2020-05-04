@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@18xx-maker/games@^0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@18xx-maker/games/-/games-0.4.1.tgz#c02f62d2fc579e4925cf01f2b50a4a1c3e176d2a"
-  integrity sha512-UbK76ERPk9eCVISYtoqxQOZCsX2TITIIREjJrCvvS0/CRe/cVArkNF1B4JGPuLXMEe817Hshz7Ej5Suw7BPFmA==
+"@18xx-maker/games@^0.4.3":
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/@18xx-maker/games/-/games-0.4.3.tgz#db21ba8e70c9c7eacf701d6364e3894812b17957"
+  integrity sha512-Rk8ql/w9v5/RMySiOrriJb5sJ2pTJJL0ETDyxR1bwU2jaLdHig7t1tSqeqZRV3YW+1PzJLC0RKL5VEEGu+z98g==
   dependencies:
     ramda "^0.27.0"
 
