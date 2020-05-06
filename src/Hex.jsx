@@ -215,7 +215,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
     <Position data={hex.industries}>{i => <Industry {...i} />}</Position>
   );
   let bgShapes = <Position data={hex.bgShapes}>{g => <BgShapes {...g} />}</Position>;
-  let goods = <Position data={hex.good}>{g => <Good {...g} />}</Position>;
+  let goods = <Position data={hex.goods}>{g => <Good {...g} />}</Position>;
   let companies = (
     <Position data={hex.companies}>{c => <Company {...c} />}</Position>
   );
