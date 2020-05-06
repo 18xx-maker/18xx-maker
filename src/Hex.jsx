@@ -68,7 +68,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
     ),
     R.compose(
       R.map(makeBorder),
-      R.filter(t => t.cross !== "over")
+      R.filter(t => (t.cross === undefined || t.cross === "under"))
     ),
     R.compose(
       R.map(makeTrack),
@@ -80,7 +80,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
     ),
     R.compose(
       R.map(makeTrack),
-      R.filter(t => t.cross !== "under")
+      R.filter(t => (t.cross === undefined || t.cross === "over"))
     ),
     R.compose(
       R.map(makeBorder),
