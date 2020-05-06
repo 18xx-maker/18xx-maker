@@ -26,9 +26,9 @@ You can also install node directly from [their website](https://nodejs.org/) and
 
 This site is stored as a [git](https://git-scm.com/) repository hosted on
 [github](https://github.com/). You can use any normal git client to get the
-[source code](https://github.com/kelsin/18xx). You can also just download of a
+[source code](https://github.com/18xx-maker/18xx-maker). You can also just download of a
 [zip file of the latest
-code](https://github.com/kelsin/18xx/archive/master.zip).
+code](https://github.com/18xx-maker/18xx-maker/archive/master.zip).
 
 Extract the zip file (or `git clone` the repository) to any directory that you want.
 
