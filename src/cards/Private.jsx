@@ -27,6 +27,8 @@ const Private = ({
   revenue,
   bid,
   players,
+  minPlayers,
+  maxPlayers,
   description,
   icon,
   hex,
@@ -42,6 +44,16 @@ const Private = ({
     revenueNode = intersperse("/", map(r => <Currency value={r} type="private" />, revenue));
   } else if (is(Number, revenue)) {
     revenueNode = <Currency value={revenue} type="private" />;
+  }
+
+  if (players) {
+    players = `${players} Players`;
+  } else if (minPlayers && maxPlayers) {
+    players = `Players: ${minPlayers}-${maxPlayers}`;
+  } else if (minPlayers) {
+    players = `Players: ${minPlayers}+`;
+  } else if (maxPlayers) {
+    players = `Players <= ${maxPlayers}`;
   }
 
   return (
