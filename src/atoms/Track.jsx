@@ -140,10 +140,10 @@ const Track = ({ type, gauge, border, width, offset, path, color, borderColor, g
     trackWidth = border ? 6 : 2;
   }
 
-  // Double Gauge
-  let double = null;
-  if (!border && gauge === "double") {
-    double = (
+  // Dual Gauge
+  let dual = null;
+  if (!border && gauge === "dual") {
+    dual = (
       <Color>
         {c => (
           <path
@@ -175,7 +175,7 @@ const Track = ({ type, gauge, border, width, offset, path, color, borderColor, g
                 strokeWidth={trackWidth}
               />
               {narrow}
-              {double}
+              {dual}
             </g>
           )}
         </HexContext.Consumer>
