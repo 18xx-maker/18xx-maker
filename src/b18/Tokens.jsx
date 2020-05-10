@@ -45,7 +45,6 @@ const Tokens = () => {
   );
 
   let extraTokenNodes = addIndex(map)((extraToken, index) => {
-    console.log(extraToken);
     if (is(Object, extraToken)) {
       return (
         <div className="token" key={index}>

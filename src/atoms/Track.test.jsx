@@ -35,7 +35,6 @@ describe("sidesFromTrack", () => {
       expect(sidesFromTrack(type("gentle"))).toEqual([1,3]);
       expect(sidesFromTrack(type("gentleStop"))).toEqual([1]);
       expect(sidesFromTrack(type("gentleStopRev"))).toEqual([1]);
-      expect(sidesFromTrack(type("lawson"))).toEqual([1,3]);
       expect(sidesFromTrack(type("sharp"))).toEqual([1,2]);
       expect(sidesFromTrack(type("sharpStop"))).toEqual([1]);
       expect(sidesFromTrack(type("sharpStopRev"))).toEqual([1]);
@@ -86,7 +85,6 @@ describe("sidesFromTile", () => {
       expect(sidesFromTile(type("gentle"))).toEqual([1,3]);
       expect(sidesFromTile(type("gentleStop"))).toEqual([1]);
       expect(sidesFromTile(type("gentleStopRev"))).toEqual([1]);
-      expect(sidesFromTile(type("lawson"))).toEqual([1,3]);
       expect(sidesFromTile(type("sharp"))).toEqual([1,2]);
       expect(sidesFromTile(type("sharpStop"))).toEqual([1]);
       expect(sidesFromTile(type("sharpStopRev"))).toEqual([1]);

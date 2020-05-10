@@ -247,6 +247,7 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
         <Color>
           {c => (
             <polygon
+              transform="rotate(-30)"
               points={`0,${-1 * offs2m - 2} ${width},${offs1 + 2} ${-1 * width},${offs1 + 2}`}
               fill={c("border")}
               stroke={c("border")}
@@ -262,7 +263,7 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
       return (
         <Color context="companies">
           {c => (
-            <g>
+            <g transform="rotate(-30)">
               <polygon
                 points=
                 {`${-1 * offs2},${-1 * (offs2m + offs1 + strokeWidth)}
