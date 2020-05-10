@@ -276,7 +276,7 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
                 stroke={c("track")}
                 strokeWidth={strokeWidth}
               />
-              <g transform={`translate(0 ${-1*(offs2m + strokeWidth)})`}>
+              <g transform={`translate(0 ${-1*(offs2m + strokeWidth)}) rotate(30)`}>
                 <circle
                   fill={c(companyColor(0) || "city")}
                   stroke="none"
@@ -291,7 +291,7 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
                   r={width}
                 />
               </g>
-              <g transform={`translate(${-1 * width} ${offs1 + strokeWidth})`}>
+              <g transform={`translate(${-1 * width} ${offs1 + strokeWidth}) rotate(30)`}>
                 <circle
                   fill={c(companyColor(1) || "city")}
                   stroke="none"
@@ -306,7 +306,7 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
                   r={width}
                 />
               </g>
-              <g transform={`translate(${width} ${offs1 + strokeWidth})`}>
+              <g transform={`translate(${width} ${offs1 + strokeWidth}) rotate(30)`}>
                 <circle
                   fill={c(companyColor(2) || "city")}
                   stroke="none"
