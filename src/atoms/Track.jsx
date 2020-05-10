@@ -30,8 +30,7 @@ export const sidesFromTrack = track => {
   case "sharp":
     return [side, sideMod(side + 1)];
   case "gentle":
-  case "lawson":
-       return [side, sideMod(side + 2)];
+    return [side, sideMod(side + 2)];
   case "straight":
   case "bent":
           return [side, sideMod(side + 3)];
@@ -92,9 +91,6 @@ const Track = ({ type, gauge, border, width, offset, path, color, borderColor, g
   case "gentleStopRev":
     path = `m 0 85 L 0 75 A 129.90375 129.90375 0 0 1 38.047927473438027 -16.855822526561973`;
     break;
-  case "lawson":
-    path = "m 0 85 L 0 0 L -73.612125 -42.5";
-    break;
   case "sharp":
     path = `m 0 85 L 0 75 A 43.30125 43.30125 0 0 0 -64.951875 37.5 L -73.612125 42.5`;
     break;
@@ -108,7 +104,7 @@ const Track = ({ type, gauge, border, width, offset, path, color, borderColor, g
     path = "m 0 85 L 0 75 C 0 30, 40 40, 40 0 C 40 -40, 0 -30, 0 -75 L 0 -85";
     break;
   default:
-    path = "m 0 85 L 0 0";
+    path = `m 0 85 L 0 -${(trackWidth / 4) + 0.5}`;
     break;
   }
 

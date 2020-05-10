@@ -228,7 +228,6 @@ const atoms = [{
              {side:3,type:"gentle",cross:"over"}]},
     {track: [{side:4,type:"straightStop",gauge:"line"},
              {side:5,type:"straight",gauge:"dashed"}]},
-    {track: [{side:1,type:"lawson"}]},
     {track: [{side:2,type:"stub"},
              {side:3,type:"stop"},
              {side:4.5,type:"mid"}]},

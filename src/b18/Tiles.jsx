@@ -36,7 +36,6 @@ const Tiles = () => {
                       filter(propEq("color", color)),
                       map(getGameTile))(keys(game.tiles));
 
-  console.log(tiles)
   let height = game.info.orientation === "horizontal" ? 100 : 116;
   let width = game.info.orientation === "horizontal" ? 116 : 100;
 

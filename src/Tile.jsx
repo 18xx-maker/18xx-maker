@@ -5,7 +5,6 @@ import is from "ramda/src/is";
 
 import Hex from "./Hex";
 import Id from "./atoms/Id";
-console.log(tiles);
 
 const Tile = ({ id, border, mask, gameTiles }) => {
   let hex = null;
