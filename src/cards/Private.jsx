@@ -16,6 +16,10 @@ import intersperse from "ramda/src/intersperse";
 import is from "ramda/src/is";
 import map from "ramda/src/map";
 
+import max from "ramda/src/max";
+import min from "ramda/src/min";
+import reduce from "ramda/src/reduce";
+
 import { getMapHex } from "../map/util";
 
 import "./private.scss";
@@ -41,19 +45,24 @@ const Private = ({
 }) => {
   let revenueNode = null;
   if (is(Array, revenue)) {
-    revenueNode = intersperse("/", map(r => <Currency value={r} type="private" />, revenue));
+    revenueNode = intersperse(<span key="span">/</span>, map(r => <Currency key={r} value={r} type="private" />, revenue));
   } else if (is(Number, revenue)) {
     revenueNode = <Currency value={revenue} type="private" />;
   }
 
-  if (players) {
-    players = `${players} Players`;
-  } else if (minPlayers && maxPlayers) {
-    players = `Players: ${minPlayers}-${maxPlayers}`;
-  } else if (minPlayers) {
-    players = `Players: ${minPlayers}+`;
-  } else if (maxPlayers) {
-    players = `Players <= ${maxPlayers}`;
+  let minNumPlayers = reduce(min, 99, map(p => p.number, players))
+  let maxNumPlayers = reduce(max, 0, map(p => p.number, players))
+  minPlayers = minPlayers || minNumPlayers;
+  maxPlayers = maxPlayers || maxNumPlayers;
+
+  let playersNode = null;
+
+  if (minPlayers !== minNumPlayers || maxPlayers !== maxNumPlayers) {
+    if (minPlayers !== maxPlayers) {
+      playersNode = `Players: ${minPlayers}-${maxPlayers}`;
+    } else {
+      playersNode = `Players: ${minPlayers}`;
+    }
   }
 
   return (
@@ -117,9 +126,9 @@ const Private = ({
                    ? description.reduce((lines, line) => <>{lines}<br />{line}</>)
                    : description}
                 </div>
-                {bid && <div className="private__bid">Min Bid: <Currency value={bid} type="private"/></div>}
+                {bid && <div className="private__bid">Min bid: <Currency value={bid} type="private"/></div>}
                 <div className="private__price"><Currency value={price} type="private"/></div>
-                {players && <div className="private__players">{players}</div>}
+                {playersNode && <div className="private__players">{playersNode}</div>}
                 {revenueNode && <div className="private__revenue">Revenue: {revenueNode}</div>}
                 {variant && <div className="private__variant">{variant}</div>}
               </div>

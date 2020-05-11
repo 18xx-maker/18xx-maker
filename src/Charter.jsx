@@ -22,6 +22,7 @@ const Charter = ({
   tokens,
   phases,
   turns,
+  trains,
   charterStyle,
   game,
   halfWidthCharters,
@@ -125,7 +126,10 @@ const Charter = ({
                   <div className="charter__trains">
                     Trains
                     <div className="charter__phase">
-                      <Phase phases={phases} minor={!!minor} company={company.abbrev} />
+                      <Phase phases={phases}
+                             trains={trains}
+                             minor={!!minor}
+                             company={company.abbrev} />
                     </div>
                   </div>
                 )}
