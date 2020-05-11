@@ -167,6 +167,7 @@ const Charters = ({charters, paper, override, selection}) => {
               tokens={company.tokens}
               phases={game.phases}
               turns={game.turns}
+              trains={game.trains}
               minor={!!company.minor}
               company={company}
               variant={company.variant}
