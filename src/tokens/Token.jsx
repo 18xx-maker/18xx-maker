@@ -17,6 +17,9 @@ const Token = ({
   label, // The text label to use on this token
   labelColor, // What color to use for writing the label text
   color, // What color is this token using as a background
+  labelStrokeColor, // What color to use for the stroke of the label
+  labelStrokeWidth, // What width to use for the stroke of the label
+  shapeAngle, // Angle for the shapes, independent of the positioning angle
 
   type, // What special type of token to render (for special shapes and patterns)
   bar, // Do we add a white bar around the text?
@@ -67,7 +70,6 @@ const Token = ({
   halves, // Colors for halves shape
   quarters, // Colors for quarters shape
   square, // Draw a square of a certain color on the token
-  angle // option for some of the token types
 }) => {
   // Set a default width (smaller for destination tokens)
   width = width || (destination ? 15 : 25);
@@ -98,10 +100,11 @@ const Token = ({
       {(c,t,s,p) => {
         // Let the text color be specified, or just use the proper color for the
         // token / bar
-        let textStroke = "none";
+        let textStroke = c(labelStrokeColor) || "none";
         let textFill = t(c(color) || p("white"));
         let scaling = width / 25;
         let numbersOnlyScaling = 1.6;
+        labelStrokeWidth = labelStrokeWidth ? labelStrokeWidth : "0.5";
 
         // Background fill to use for the main token circle object
         let tokenFill = c(color) || p("white");
@@ -164,7 +167,7 @@ const Token = ({
 
           if (square) {
             shapes.push(
-              <g key="square" transform={`rotate(${angle || 0})`}>
+              <g key="square" transform={`rotate(${shapeAngle || 0})`}>
                 <rect rx={width * 0.08} ry={width * 0.08}
                       x={width * -0.75} y={width * -0.75}
                       width={width * 1.5} height={width * 1.5}
@@ -175,7 +178,7 @@ const Token = ({
           }
 
           if (quarters) {
-            shapes.push(<g key="quarters" transform={`rotate(${angle || 0})`}>
+            shapes.push(<g key="quarters" transform={`rotate(${shapeAngle || 0})`}>
                           <rect key="upperLeft" x="-50" y="-50" width="50" height="50"
                                 fill={c(quarters[0])}
                                 clipPath={`url(#${clipId})`}/>
@@ -192,7 +195,7 @@ const Token = ({
           }
 
           if (halves) {
-            shapes.push(<g key="halves" transform={`rotate(${angle || 0})`}>
+            shapes.push(<g key="halves" transform={`rotate(${shapeAngle || 0})`}>
                           <rect key="upper" x="-50" y="-50" width="100" height="50"
                                 fill={c(halves[0])}
                                 clipPath={`url(#${clipId})`}/>
@@ -220,7 +223,7 @@ const Token = ({
               points.push(radius * Math.sin(angle));
             }
 
-            shapes.push(<g key="spiral" transform={`rotate(${angle || 0})`}>
+            shapes.push(<g key="spiral" transform={`rotate(${shapeAngle || 0})`}>
                           <polyline
                             points={points.join(',')}
                             fill="none"
@@ -235,7 +238,7 @@ const Token = ({
           if (curvedStripes) {
             curvedStripesWidth = (width / 25 * curvedStripesWidth) || (width / 4);
             curvedStripesDistance = (width / 25 * curvedStripesDistance) || (width * 0.66);
-            shapes.push(<g key="curvedStripes" transform={`rotate(${angle || 0})`}>
+            shapes.push(<g key="curvedStripes" transform={`rotate(${shapeAngle || 0})`}>
                           <path
                             d={`M ${-curvedStripesDistance} -${width} a ${width} ${1.5 * width} 0 0 1 0 ${2 * width}`}
                             fill="none"
@@ -256,7 +259,7 @@ const Token = ({
           if (stripes) {
             stripesWidth = (width / 25 * stripesWidth) || (width / 4);
             stripesDistance = (width / 25 * stripesDistance) || (width * 0.5);
-            shapes.push(<g key="stripes" transform={`rotate(${angle || 0})`}>
+            shapes.push(<g key="stripes" transform={`rotate(${shapeAngle || 0})`}>
                           <rect key="upper"
                                 x="-50" y={-stripesDistance - stripesWidth}
                                 width="100" height={stripesWidth}
@@ -272,7 +275,7 @@ const Token = ({
 
           if (stripe) {
             stripeWidth = (width / 25 * stripeWidth) || (width / 2);
-            shapes.push(<g key="stripe" transform={`rotate(${angle || 0})`}>
+            shapes.push(<g key="stripe" transform={`rotate(${shapeAngle || 0})`}>
                           <rect key="upper"
                                 x={-0.5 * stripeWidth} y="-50"
                                 width={stripeWidth} height="100"
@@ -328,8 +331,8 @@ const Token = ({
         }
 
         if (shield) {
-            let scale = scaling * 0.08;
-            let trans = scaling * -24;
+            let scale = scaling * 0.09;
+            let trans = scaling * -27;
             let wh = scaling * 50;
             if ((reserved || inverse) && shieldTop) {
               textFill = c(shieldTop);
@@ -354,8 +357,8 @@ const Token = ({
         }
 
         if (shield3) {
-            let scale = scaling * 0.08;
-            let trans = scaling * -24;
+            let scale = scaling * 0.09;
+            let trans = scaling * -27;
             let wh = scaling * 50;
             if ((reserved || inverse) && shield3TopCenter) {
               textFill = c(shield3TopCenter);
@@ -432,7 +435,7 @@ const Token = ({
                            fontFamily={fontFamily || "display"}
                            fontSize={fSize}
                            textAnchor="middle"
-                           strokeWidth="0.5"
+                           strokeWidth={labelStrokeWidth}
                            stroke={textStroke}
                            fill={textFill}
                            x="0"
@@ -475,7 +478,7 @@ const Token = ({
                          fontFamily={fontFamily || "display"}
                          fontSize={fSize}
                          textAnchor="middle"
-                         strokeWidth="0.5"
+                         strokeWidth={labelStrokeWidth}
                          stroke={textStroke}
                          fill={textFill}
                          x="0"
@@ -493,7 +496,7 @@ const Token = ({
           <g>
             {clip}
             <g clipPath={`url(#${clipId})`}>
-              <g transform={`rotate(${angle || 0})`}>
+              <g transform={`rotate(${shapeAngle || 0})`}>
                 <circle
                   cx="0"
                   cy="0"
