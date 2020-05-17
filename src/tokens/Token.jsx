@@ -9,8 +9,10 @@ import icons from "../data/icons";
 import is from "ramda/src/is";
 
 const Token = ({
-  logo, // The SVG logo to display on this token
+  logo, // The SVG logo to display on this token.
+  logoWidth, // Override the default width of the logo.
   icon, // The path-based icon (defined in App.jsx) to display on this token
+  iconWidth, // Override the default width of the icon.
   iconColor, // The color to use for the svg icon
   label, // The text label to use on this token
   labelColor, // What color to use for writing the label text
@@ -137,8 +139,8 @@ const Token = ({
 
         } else if (logo && logos[logo]) {
           let svg = logos[logo];
-          let start = -1 * width;
-          let size = 2 * width;
+          let size = logoWidth || 2 * width;
+          let start = -1/2 * size;
           let Component = svg.Component;
           if (logo.includes("countries")) {
             shapes.push(
@@ -398,9 +400,9 @@ const Token = ({
 
           if (label) {
             // Label and icon, position accordingly
-            let x = -0.5 * width;
-            let y = -width;
-            let size = 1 * width;
+            let size = iconWidth || 1 * width;
+            let x = -0.5 * size;
+            let y = -1 * size;
             let fSize;
             content.push(<Component key="icon" className={classes.join(" ")}
                                     x={x} y={y}
@@ -440,8 +442,8 @@ const Token = ({
                          </text>
                         );
           } else {
-            let start = -0.75 * width;
-            let size = 1.5 * width;
+            let size = iconWidth || 1.5 * width;
+            let start = -0.5 * size;
             content.push(<Component key="icon" className={classes.join(" ")}
                                     x={start} y={start}
                                     height={size} width={size} />);
