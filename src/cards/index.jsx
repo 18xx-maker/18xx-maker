@@ -89,7 +89,7 @@ const Cards = ({ override, selection }) => {
   }, companies);
   let trainNodes = R.addIndex(R.map)(
     (train, index) => (
-      <Train train={train} key={`train-${train.name}-${index}`} />
+      <Train train={train} phases={game.phases} key={`train-${train.name}-${index}`} />
     ),
     trains
   );

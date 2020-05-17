@@ -45,6 +45,10 @@ const trainInclude = (field, trains) => {
 };
 
 const matchTrain = R.curry((phase, train) => {
+  if (train.phase === false) {
+    return false;
+  }
+
   if (phase.name === train.name) {
     return true;
   }
@@ -64,10 +68,10 @@ const Phase = ({ phases, trains, minor, company }) => {
   let includeName = include("name", phases, minor, company);
   let includePhase = include("phase", phases, minor, company);
   let includeTrain = include("train", phases, minor, company);
-  let includeNotes = include("notes", phases, minor, company);
   let includeTiles = include("tiles", phases, minor, company);
   let includeRust = trainInclude("rust", trains);
   let includeObsolete = trainInclude("obsolete", trains);
+  let includePhased = trainInclude("phased", trains);
 
   let phaseRows = R.compose(
     R.map(phase => {
@@ -77,6 +81,9 @@ const Phase = ({ phases, trains, minor, company }) => {
       }
       if ((phase.events || {}).close_companies) {
         notes.push("Private companies close.")
+      }
+      if ((phase.events || {}).remove_tokens) {
+        notes.push("Private tokens removed.")
       }
       notes = R.intersperse(<br/>, notes);
 
@@ -93,16 +100,22 @@ const Phase = ({ phases, trains, minor, company }) => {
       let quantities = R.map(t => <li key={t.name}>{t.quantity}</li>, phaseTrains);
 
       // Get all trains that rust on this phase
-      let rustingTrains = R.filter(t => t.rust === phase.name, trains);
+      let rustingTrains = R.filter(t => t.phase !== false && t.rust === phase.name, trains);
 
       // Which trains rust during this phase
       let rusts = R.map(t => <li key={t.name}>{t.name}</li>, rustingTrains);
 
       // Get all trains that rust on this phase
-      let obsoleteTrains = R.filter(t => t.obsolete === phase.name, trains);
+      let obsoleteTrains = R.filter(t => t.phase !== false && t.obsolete === phase.name, trains);
 
       // Which trains rust during this phase
       let obsoletes = R.map(t => <li key={t.name}>{t.name}</li>, obsoleteTrains);
+
+      // Get all trains that rust on this phase
+      let phasedTrains = R.filter(t => t.phase !== false && t.phased === phase.name, trains);
+
+      // Which trains rust during this phase
+      let phased = R.map(t => <li key={t.name}>{t.name}</li>, phasedTrains);
 
       return (
         <Color key={phase.name}>
@@ -114,10 +127,11 @@ const Phase = ({ phases, trains, minor, company }) => {
               <td><ul>{prices}</ul></td>
               <td><ul>{quantities}</ul></td>
               <td>{phase.limit}</td>
-              {includeRust && <td><ul>{rusts}</ul></td>}
+              {includePhased && <td><ul>{phased}</ul></td>}
               {includeObsolete && <td><ul>{obsoletes}</ul></td>}
+              {includeRust && <td><ul>{rusts}</ul></td>}
               {includeTiles && <td style={{ backgroundColor: c(phase.tiles) }}>&nbsp;</td>}
-              {includeNotes && <td className="phase__notes">{notes}</td>}
+              <td className="phase__notes">{notes}</td>
             </tr>
           )}
         </Color>
@@ -136,10 +150,11 @@ const Phase = ({ phases, trains, minor, company }) => {
           <th>Price</th>
           <th>#</th>
           <th>Limit</th>
-          {includeRust && <th>Rust</th>}
+          {includePhased && <th>Phased</th>}
           {includeObsolete && <th>Obsolete</th>}
+          {includeRust && <th>Rust</th>}
           {includeTiles && <th>Tiles</th>}
-          {includeNotes && <th className="phase__notes">Notes</th>}
+          <th className="phase__notes">Notes</th>
         </tr>
       </thead>
       <tbody>{phaseRows}</tbody>
