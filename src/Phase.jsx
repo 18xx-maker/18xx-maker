@@ -88,7 +88,7 @@ const Phase = ({ phases, trains, minor, company }) => {
       notes = R.intersperse(<br/>, notes);
 
       // Find all trains linked to this phase
-      let phaseTrains = R.filter(matchTrain(phase), trains);
+      let phaseTrains = R.filter(matchTrain(phase), trains || []);
 
       // Get the names for each train
       let trainNames = R.map(t => <li key={t.name}>{t.name}</li>, phaseTrains);
@@ -100,19 +100,19 @@ const Phase = ({ phases, trains, minor, company }) => {
       let quantities = R.map(t => <li key={t.name}>{t.quantity}</li>, phaseTrains);
 
       // Get all trains that rust on this phase
-      let rustingTrains = R.filter(t => t.phase !== false && t.rust === phase.name, trains);
+      let rustingTrains = R.filter(t => t.phase !== false && t.rust === phase.name, trains || []);
 
       // Which trains rust during this phase
       let rusts = R.map(t => <li key={t.name}>{t.name}</li>, rustingTrains);
 
       // Get all trains that rust on this phase
-      let obsoleteTrains = R.filter(t => t.phase !== false && t.obsolete === phase.name, trains);
+      let obsoleteTrains = R.filter(t => t.phase !== false && t.obsolete === phase.name, trains || []);
 
       // Which trains rust during this phase
       let obsoletes = R.map(t => <li key={t.name}>{t.name}</li>, obsoleteTrains);
 
       // Get all trains that rust on this phase
-      let phasedTrains = R.filter(t => t.phase !== false && t.phased === phase.name, trains);
+      let phasedTrains = R.filter(t => t.phase !== false && t.phased === phase.name, trains || []);
 
       // Which trains rust during this phase
       let phased = R.map(t => <li key={t.name}>{t.name}</li>, phasedTrains);
