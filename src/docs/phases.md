@@ -23,10 +23,9 @@ needed for programs like [18xx.games](https://www.18xx.games/).
 * **rounds** How many ORs are played for each set in this phase. Usefull for
   games like 1830 in which the number of rounds change per phase.
 * **on** What train triggers this phase to start, when that train is bought this
-  phase starts.
-* **onIndex** If this stage only starts when the _n_th train is bought, you can
-  specify this here. This is a integer index pointing out which of the **on**
-  train triggers the phase.
+  phase starts. This can be a single train name, or an array of train names. It
+  can also be a single (or array) of objects where each object has an `on` field
+  (train name) and an `index` field specifing which train triggers this phase.
 * **notes** A string or array of strings of notes for this phase. Some notes
   will be added from other fields, this is for custom ones.
 * **buy_companies** A boolean that says if privates can be bought in during this
@@ -35,23 +34,38 @@ needed for programs like [18xx.games](https://www.18xx.games/).
   happen when this phase triggers (such as privates closing or tokens being
   removed).
 
-## Usage
+## Train Fields
 
-Instead of defining tokens and shares for a company you can replace the
-definition with a single string. This string needs to be a reference to one of
-the fields of the `shareTypes` or `tokenTypes` object defined in the file.
-
-The definitions in `shareTypes` and `tokenTypes` work exactly as they did before
-as part of each company.
-
-Special behavior exists for the names `default` and `minor`. If you define a
-token or share type named `minor` and have companies with `"minor": true`
-defined, than xxMaker will use those definitions for any minor that doesn't have
-it's own share or tokens definition. If you define a token or share type named
-`default` than xxMaker will use those definitions for any company that was
-included in the `minor` definitions, and that didn't define it's own definitions
-for shares or tokens.
+* **name*** _required_
+* **quantity** _required_ Either a number or the string "∞" representing the
+  number of available trains.
+* **color** _required_ The color to display for this trains title.
+* **price** The cost of this train.
+* **image** The image to use for this train (See schema, code or 18Test file for
+  available images).
+* **phase** Set this to `false` if you want this train to not appear on phase charts.
+* **print** This is the number of this train to print. Overrides the `quantity`
+  field for printing. Required when quantity is set to "∞".
+* **discount** An object of train names to discount amount.
+* **description** A description string printed on the train card. Useful for
+  random information for play.
+* **available** If this train becomes available when another train is sold you
+  can list that train here as a string. A good example is D trains in 1830
+  become avaialble when the 6 is bought.
+* **variant** If this train is only used on a variant you can list it here.
+* **rust** The name of the train that rusts this one. Can be an array of names.
+  Can also be a single object (or array of objects) where each object as a `on`
+  field and a `index` field representing which train name (`on`) and which index
+  of that train (2 or later) causes the rusting.
+* **phased** Identical to `rust` but specifies that this train is phased out
+  instead of rusted.
+* **obsolete** Identical to `rust` but specifies that this train is now obsolete
+  instead of rusted.
+* **permanent** Set to false if this train is not permenent. Not needed if any
+  of `rust`, `obsolete` or `phased` is set.
+* **players** A number of players that this train is used for _(Might be moving
+  to min/max players like on privates soon)_.
 
 ## Examples
 
-Please look at how it's defined in 1830.
+Please look at the 18Test file to see examples of most of these fields.
