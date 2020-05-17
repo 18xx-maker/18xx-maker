@@ -232,52 +232,34 @@
     {
       "name": "2",
       "quantity": 1,
-      "price": "$80",
+      "price": 80,
       "color": "yellow",
-      "info": [
-        {
-          "color": "green",
-          "note": "Rusted by 4"
-        }
-      ]
+      "rust": "4D"
     },
     {
       "name": "3+1",
       "quantity": 1,
-      "price": "$300",
+      "price": 300,
       "color": "green",
-      "info": [
-        {
-          "color": "brown",
-          "note": "Rusted by 6"
-        }
-      ]
+      "obsolete": "8E"
     },
     {
       "name": "4D",
       "quantity": 1,
-      "price": "$800",
+      "price": 800,
       "color": "brown",
       "variant": "heavy",
-      "info": [
-        {
-          "color": "brown",
-          "note": "Rusted by D"
-        }
-      ]
+      "phased": "8E"
     },
     {
       "name": "8E",
-      "quantity": 2,
-      "price": "$1100",
-      "tradeInPrice": 900,
-      "color": "gray",
-      "info": [
-        {
-          "color": "yellow",
-          "note": "Permanent"
-        }
-      ]
+      "quantity": "∞",
+      "print": 2,
+      "price": 1100,
+      "discount": {
+        "4D": 200
+      },
+      "color": "gray"
     }
   ],
   "privates": [
@@ -332,55 +314,40 @@
     {
       "minor": true,
       "name": "2",
-      "train": "2",
-      "phase": "2",
-      "limit": "4",
-      "number": "1",
+      "limit": 4,
       "tiles": "yellow"
     },
     {
       "minor": true,
       "name": "3",
       "train": "3+1",
-      "phase": "3",
-      "limit": "4",
-      "number": "2",
+      "limit": 4,
       "tiles": "green",
-      "notes": "Private companies may be purchased"
+      "buy_companies": true
     },
     {
       "name": "2",
-      "train": "2",
-      "phase": "2",
-      "limit": "4",
-      "number": "1",
+      "limit": 4,
       "tiles": "yellow"
     },
     {
       "name": "3",
       "train": "3+1",
-      "phase": "3",
-      "limit": "4",
-      "number": "2",
+      "limit": 4,
       "tiles": "green",
-      "notes": "Private companies may be purchased"
+      "buy_companies": true
     },
     {
       "name": "4",
       "train": "4D",
-      "phase": "4",
-      "limit": "2",
-      "number": "3",
+      "limit": 2,
       "tiles": "brown",
-      "notes": "Private companies are closed"
+      "events": { "close_companies": true }
     },
     {
       "name": "8",
       "train": "8E",
-      "phase": "8",
-      "limit": "2",
-      "number": "4",
-      "rust": "4",
+      "limit": 2,
       "tiles": "brown"
     }
   ],

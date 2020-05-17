@@ -46,7 +46,7 @@ const ordinal = (num) => {
   }
 };
 
-const Train = ({ train, phases, blackBand }) => {
+const Train = ({ train, trains, blackBand }) => {
   let {
     name,
     price,
@@ -78,17 +78,17 @@ const Train = ({ train, phases, blackBand }) => {
     let phasedBy = `Phased out by ${events}`;
     let phasedOn = is(Object, phaseds[0]) ? phaseds[0].on : phaseds[0];
 
-    let phase = find(p => {
-      return p.name === phasedOn;
-    }, phases);
+    let eventTrain = find(t => {
+      return t.name === phasedOn;
+    }, trains);
 
     notes.push(
       <Color key="obsolete">
         {(c,t) => (
           <span className="train__info"
                 style={{
-                  backgroundColor: c(phase.tiles),
-                  color: t(c(phase.tiles))
+                  backgroundColor: c(eventTrain.color),
+                  color: t(c(eventTrain.color))
                 }} >{phasedBy}</span>
         )}
       </Color>
@@ -109,17 +109,17 @@ const Train = ({ train, phases, blackBand }) => {
     let obsoleteBy = `Obsoleted by ${events}`;
     let obsoleteOn = is(Object, obsoletes[0]) ? obsoletes[0].on : obsoletes[0];
 
-    let phase = find(p => {
-      return p.name === obsoleteOn;
-    }, phases);
+    let eventTrain = find(t => {
+      return t.name === obsoleteOn;
+    }, trains);
 
     notes.push(
       <Color key="obsolete">
         {(c,t) => (
           <span className="train__info"
                 style={{
-                  backgroundColor: c(phase.tiles),
-                  color: t(c(phase.tiles))
+                  backgroundColor: c(eventTrain.color),
+                  color: t(c(eventTrain.color))
                 }} >{obsoleteBy}</span>
         )}
       </Color>
@@ -140,17 +140,17 @@ const Train = ({ train, phases, blackBand }) => {
     let rustedBy = `Rusted by ${events}`;
     let rustedOn = is(Object, rusts[0]) ? rusts[0].on : rusts[0];
 
-    let phase = find(p => {
-      return p.name === rustedOn;
-    }, phases);
+    let eventTrain = find(t => {
+      return t.name === rustedOn;
+    }, trains);
 
     notes.push(
       <Color key="rust">
         {(c,t) => (
           <span className="train__info"
                 style={{
-                  backgroundColor: c(phase.tiles),
-                  color: t(c(phase.tiles))
+                  backgroundColor: c(eventTrain.color),
+                  color: t(c(eventTrain.color))
                 }} >{rustedBy}</span>
         )}
       </Color>
