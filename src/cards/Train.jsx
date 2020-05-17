@@ -4,7 +4,8 @@ import Color from "../data/Color";
 import Currency from "../util/Currency";
 import Config from "../data/Config";
 
-import addIndex from "ramda/src/addIndex";
+import find from "ramda/src/find";
+import is from "ramda/src/is";
 import map from "ramda/src/map";
 
 import "./train.scss";
@@ -32,37 +33,143 @@ const images = {
   "Pullman": pullman
 };
 
-const Train = ({ train, blackBand }) => {
+const ordinal = (num) => {
+  switch(num) {
+    case 1:
+      return "1st";
+    case 2:
+      return "2nd";
+    case 3:
+      return "3rd";
+    default:
+      return `${num}th`;
+  }
+};
+
+const Train = ({ train, phases, blackBand }) => {
   let {
     name,
     price,
     tradeInPrice,
     color,
-    info,
     description,
     players,
     backgroundColor,
     image,
+    phased,
+    obsolete,
+    rust,
+    permanent,
     variant } = train;
 
-  let notes = addIndex(map)(
-    (i, index) => (
-      <Color key={index}>
+  let notes = [];
+
+  if (phased) {
+    let phaseds = is(Array, phased) ? phased : [phased];
+
+    let events = map(r => {
+      if (is(Object, r)) {
+        return `${ordinal(r.index)} ${r.on}`;
+      }
+
+      return r;
+    }, phaseds).join(", ");
+
+    let phasedBy = `Phased out by ${events}`;
+    let phasedOn = is(Object, phaseds[0]) ? phaseds[0].on : phaseds[0];
+
+    let phase = find(p => {
+      return p.name === phasedOn;
+    }, phases);
+
+    notes.push(
+      <Color key="obsolete">
         {(c,t) => (
-          <span
-            className="train__info"
-            style={{
-              backgroundColor: c(i.color),
-              color: t(c(i.color))
-            }}
-          >
-            {i.note}
-          </span>
+          <span className="train__info"
+                style={{
+                  backgroundColor: c(phase.tiles),
+                  color: t(c(phase.tiles))
+                }} >{phasedBy}</span>
         )}
       </Color>
-    ),
-    info || []
-  );
+    );
+  }
+
+  if (obsolete) {
+    let obsoletes = is(Array, obsolete) ? obsolete : [obsolete];
+
+    let events = map(r => {
+      if (is(Object, r)) {
+        return `${ordinal(r.index)} ${r.on}`;
+      }
+
+      return r;
+    }, obsoletes).join(", ");
+
+    let obsoleteBy = `Obsoleted by ${events}`;
+    let obsoleteOn = is(Object, obsoletes[0]) ? obsoletes[0].on : obsoletes[0];
+
+    let phase = find(p => {
+      return p.name === obsoleteOn;
+    }, phases);
+
+    notes.push(
+      <Color key="obsolete">
+        {(c,t) => (
+          <span className="train__info"
+                style={{
+                  backgroundColor: c(phase.tiles),
+                  color: t(c(phase.tiles))
+                }} >{obsoleteBy}</span>
+        )}
+      </Color>
+    );
+  }
+
+  if (rust) {
+    let rusts = is(Array, rust) ? rust : [rust];
+
+    let events = map(r => {
+      if (is(Object, r)) {
+        return `${ordinal(r.index)} ${r.on}`;
+      }
+
+      return r;
+    }, rusts).join(", ");
+
+    let rustedBy = `Rusted by ${events}`;
+    let rustedOn = is(Object, rusts[0]) ? rusts[0].on : rusts[0];
+
+    let phase = find(p => {
+      return p.name === rustedOn;
+    }, phases);
+
+    notes.push(
+      <Color key="rust">
+        {(c,t) => (
+          <span className="train__info"
+                style={{
+                  backgroundColor: c(phase.tiles),
+                  color: t(c(phase.tiles))
+                }} >{rustedBy}</span>
+        )}
+      </Color>
+    );
+  }
+
+  if (!phased && !obsolete && !rust && permanent !== false) {
+    notes.push(
+      <Color key="rust">
+        {(c,t) => (
+          <span className="train__info"
+                style={{
+                  backgroundColor: c("yellow"),
+                  color: t(c("yellow"))
+                }} >Permanent</span>
+        )}
+      </Color>
+    );
+  }
 
   if (players) {
     notes.unshift(
