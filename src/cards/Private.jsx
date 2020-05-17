@@ -11,6 +11,7 @@ import Tile from "../Tile";
 import Token from "../tokens/Token";
 
 import HexContext from "../context/HexContext";
+import ColorContext from "../context/ColorContext";
 
 import intersperse from "ramda/src/intersperse";
 import is from "ramda/src/is";
@@ -40,6 +41,7 @@ const Private = ({
   token,
   company,
   id,
+  idBackgroundColor,
   backgroundColor,
   variant
 }) => {
@@ -68,6 +70,7 @@ const Private = ({
   return (
     <div className="cutlines">
       <div className="card private">
+        <ColorContext.Provider value="companies">
         <Color>
           {c => (
             <div className="card__bleed"
@@ -76,7 +79,10 @@ const Private = ({
                  }}>
               <div className="card__body">
                 <div className="private__name">
-                  {id && <div className="private__id">{id}</div>}
+                  {id && <div className="private__id"
+                    style={{
+                      backgroundColor: c(idBackgroundColor || "gren")
+                    }}>{id}</div>}
                   {name}
                 </div>
                 {note && <div className="private__note">{note}</div>}
@@ -135,6 +141,7 @@ const Private = ({
             </div>
           )}
         </Color>
+        </ColorContext.Provider>
       </div>
     </div>
   );
