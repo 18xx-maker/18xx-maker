@@ -9,9 +9,9 @@ const Title = ({ game, variation, hexWidth }) => {
   let titleWeight = game.info.titleFontWeight || "bold";
   let titleSize = (game.info.titleSize || 200) * scale;
 
-  let subFont = game.info.subFontFamily || game.info.titleFontFamily || "display";
-  let subWeight = game.info.subFontWeight || game.info.titleFontWeight || "bold";
-  let subSize = (game.info.subTitleSize || 30) * scale;
+  let subtitleFont = game.info.subtitleFontFamily || game.info.titleFontFamily || "display";
+  let subtitleWeight = game.info.subtitleFontWeight || game.info.titleFontWeight || "bold";
+  let subtitleSize = (game.info.subtitleSize || 30) * scale;
 
   let designerFont = game.info.designerFontFamily || game.info.titleFontFamily || "display";
   let designerWeight = game.info.designerFontWeight || game.info.titleFontWeight || "bold";
@@ -48,13 +48,13 @@ const Title = ({ game, variation, hexWidth }) => {
           {game.info.subtitle && (
             <text
               fill={c("black")}
-              fontFamily={subFont}
-              fontWeight={subWeight}
-              fontSize={subSize}
+              fontFamily={subtitleFont}
+              fontWeight={subtitleWeight}
+              fontSize={subtitleSize}
               textAnchor="start"
               lengthAdjust="spacingAndGlyphs"
               x="0"
-              y={subSize + 10}
+              y={subtitleSize + 10}
             >
               {game.info.subtitle}
             </text>
@@ -67,7 +67,7 @@ const Title = ({ game, variation, hexWidth }) => {
             textAnchor="start"
             lengthAdjust="spacingAndGlyphs"
             x="0"
-            y={designerSize + 10 + (game.info.subtitle ? (subSize + 10) : 0)}
+            y={designerSize + 10 + (game.info.subtitle ? (subtitleSize + 10) : 0)}
           >
             by {game.info.designer}
             {mapName && ` ⋯ ${mapName}`}
