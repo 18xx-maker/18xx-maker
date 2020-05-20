@@ -146,7 +146,7 @@ const server = app.listen(9000);
 
       tray.tile.push({
         rots,
-        dups: tile.quantity
+        dups: (tile.quantity === "∞" ? 0 : tile.quantity)
       });
     }, game.tiles);
 
