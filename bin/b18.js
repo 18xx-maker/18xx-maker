@@ -106,6 +106,7 @@ const server = app.listen(9000);
   )(R.keys(game.tiles));
   let colors = R.keys(counts);
 
+  // Tile Trays
   for(let j=0;j<colors.length;j++) {
     let color = colors[j];
 
@@ -152,7 +153,7 @@ const server = app.listen(9000);
     json.tray.push(tray);
   }
 
-  // Tile Trays
+  // Token Trays
   let btok = {
     type: "btok",
     tName: "Tokens",
@@ -177,12 +178,18 @@ const server = app.listen(9000);
     });
   }, gutil.compileCompanies(game) || []);
 
-  R.map(extra => {
-    btok.token.push({
-      dups: (extra.quantity || 1),
-      flip: true
-    });
-  }, game.tokens || []);
+  // "quantity" of 0 mean remove the token entirely from the array
+  // "quantity of "∞" means we put the special value of 0 in for dups
+  // otherwise, "quantity" is the number of dups
+  let tokens = R.compose(
+    R.map(extra => {
+      btok.token.push({
+        dups: (extra.quantity === "∞" ? 0 : (extra.quantity || 1)),
+        flip: true
+      });
+    }),
+    R.reject(R.propEq("quantity", 0))
+  )(game.tokens || []);
 
   json.tray.push(btok);
   json.tray.push(mtok);

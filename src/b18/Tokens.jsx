@@ -11,6 +11,9 @@ import { compileCompanies, overrideCompanies } from "../util";
 import addIndex from "ramda/src/addIndex";
 import is from "ramda/src/is";
 import map from "ramda/src/map";
+import compose from "ramda/src/compose";
+import reject from "ramda/src/reject";
+import propEq from "ramda/src/propEq";
 
 import ColorContext from "../context/ColorContext";
 
@@ -44,31 +47,35 @@ const Tokens = () => {
     </Config>
   );
 
-  let extraTokenNodes = addIndex(map)((extraToken, index) => {
-    if (is(Object, extraToken)) {
-      return (
-        <div className="token" key={index}>
-          <Svg width={30} height={30} viewBox="-26 -26 52 52">
-            <Token color="white" {...extraToken} />
-          </Svg>
-          <Svg width={30} height={30} viewBox="-26 -26 52 52">
-            <Token color="black" {...extraToken} />
-          </Svg>
-        </div>
-      );
-    } else {
-      return (
-        <div className="token" key={index}>
-          <Svg width={30} height={30} viewBox="-26 -26 52 52">
-            <Token label={extraToken} color="white" />
-          </Svg>
-          <Svg width={30} height={30} viewBox="-26 -26 52 52">
-            <Token label={extraToken} color="black" />
-          </Svg>
-        </div>
-      );
-    }
-  }, game.tokens || []);
+  // "quantity" of 0 means remove the token entirely from the array
+  let extraTokenNodes = compose(
+    addIndex(map)((extraToken, index) => {
+      if (is(Object, extraToken)) {
+        return (
+          <div className="token" key={index}>
+            <Svg width={30} height={30} viewBox="-26 -26 52 52">
+              <Token color="white" {...extraToken} />
+            </Svg>
+            <Svg width={30} height={30} viewBox="-26 -26 52 52">
+              <Token color="black" {...extraToken} />
+            </Svg>
+          </div>
+        );
+      } else {
+        return (
+          <div className="token" key={index}>
+            <Svg width={30} height={30} viewBox="-26 -26 52 52">
+              <Token label={extraToken} color="white" />
+            </Svg>
+            <Svg width={30} height={30} viewBox="-26 -26 52 52">
+              <Token label={extraToken} color="black" />
+            </Svg>
+          </div>
+        );
+      }
+    }),
+    reject(propEq("quantity", 0))
+  )(game.tokens || []);
 
   return (
     <ColorContext.Provider value="companies">
