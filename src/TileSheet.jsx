@@ -31,7 +31,9 @@ import includes from "ramda/src/includes";
 import is from "ramda/src/is";
 import keys from "ramda/src/keys";
 import map from "ramda/src/map";
-import propOr from "ramda/src/propOr";
+import pipe from "ramda/src/pipe";
+import prop from "ramda/src/prop";
+import defaultTo from "ramda/src/defaultTo";
 import reduce from "ramda/src/reduce";
 import repeat from "ramda/src/repeat";
 import take from "ramda/src/take";
@@ -40,7 +42,9 @@ import unnest from "ramda/src/unnest";
 const gatherIds = tiles => {
   return compose(unnest,
             map(id => Array((is(Object, tiles[id]) ?
-                            propOr(1, "quantity", tiles[id]) :
+              // like a three-part propOR of "print" || "quantity" || 1
+              pipe(prop("print"), defaultTo(pipe(prop("quantity"),
+                defaultTo(1))(tiles[id])))(tiles[id]) :
                             tiles[id])).fill(id)))(keys(tiles));
 }
 
