@@ -2,17 +2,17 @@
 # yarn lockfile v1
 
 
-"@18xx-maker/games@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@18xx-maker/games/-/games-2.0.2.tgz#57e9ed1079385780d30c3dda77bc221f20580443"
-  integrity sha512-wbajNysvFp1nvfzME+ZIuuOqTLbsTnYnfq3gKbE5WpNZq0NGgxN5bSxE1rpL/NM+0aVR9Cj1cXyNNdjAPNfzVg==
+"@18xx-maker/games@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@18xx-maker/games/-/games-2.0.4.tgz#773cd9d43ad8de4bcefb3abc380e29f9b02a2711"
+  integrity sha512-CrC+OqdRQPUPOItymqfw1EFYyG7nFYj1LFWDalGme94g6kax9/IY1tzA3U9Tu9ExcF0MgWn4MrDxXLQx0Iix/g==
   dependencies:
     ramda "^0.27.0"
 
-"@18xx-maker/schemas@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@18xx-maker/schemas/-/schemas-3.0.0.tgz#c559aadb7c947dc3b33de4814e6887ba31f04205"
-  integrity sha512-mQORR2ZOIIhqlpcZY0r35Y9rLYQI0CV3KP/ybtGZU6he9h7c2grfK0qv6u8aYNzqLbLd/Np3PgaM7LzpVc7L0A==
+"@18xx-maker/schemas@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@18xx-maker/schemas/-/schemas-3.0.1.tgz#fb16612c88a5123f11659bfc8c38c522abaf3033"
+  integrity sha512-RHScl/eXjZJrTtJ+XK2qAaGeoTdpnghRxdq/3hn2lTcbPbI5biwhgZNjX5ePKRwU9IB8kcheB3i45VYCy8xNpA==
   dependencies:
     ajv "^6.12.2"
     chalk "^4.0.0"
