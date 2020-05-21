@@ -25,9 +25,6 @@ const Tokens = () => {
   let params = useParams();
   let game = games[params.game];
 
-  let totalHeight = 30 * ((game.companies || []).length +
-                          (game.tokens || []).length);
-
   let companyTokenNodes = (
     <Config>
       {(config, game) => {
@@ -76,6 +73,9 @@ const Tokens = () => {
     }),
     reject(propEq("quantity", 0))
   )(game.tokens || []);
+
+  let totalHeight = 30 * ((game.companies || []).length +
+                     (reject(propEq("quantity", 0))(game.tokens || [])).length);
 
   return (
     <ColorContext.Provider value="companies">
