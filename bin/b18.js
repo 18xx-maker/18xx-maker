@@ -223,7 +223,7 @@ const server = app.listen(9000);
 
   console.log(`Printing ${bname}/${folder}/${id}/Tokens.png`);
   let tokenHeight = 30 * ((game.companies || []).length +
-                          (game.tokens || []).length);
+                 (R.reject(R.propEq("quantity", 0))(game.tokens || [])).length);
   await page.goto(`http://localhost:9000/${bname}/b18-tokens`, {waitUntil: 'networkidle2'});
   await page.setViewport({ width: 60, height: tokenHeight });
   await page.screenshot({ path: `build/render/${bname}/${folder}/${id}/Tokens.png`, omitBackground: true });
