@@ -1,6 +1,6 @@
 {
   "name": "proto18xx",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "babel": {
     "presets": [
