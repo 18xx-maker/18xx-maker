@@ -74,8 +74,7 @@ const Tokens = () => {
     reject(propEq("quantity", 0))
   )(game.tokens || []);
 
-  let totalHeight = 30 * ((game.companies || []).length +
-                     (reject(propEq("quantity", 0))(game.tokens || [])).length);
+  let totalHeight = 30 * (companyTokenNodes.length + extraTokenNodes.length);
 
   return (
     <ColorContext.Provider value="companies">
