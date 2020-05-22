@@ -11,10 +11,15 @@ import Tile from "../Tile";
 import Token from "../tokens/Token";
 
 import HexContext from "../context/HexContext";
+import ColorContext from "../context/ColorContext";
 
 import intersperse from "ramda/src/intersperse";
 import is from "ramda/src/is";
 import map from "ramda/src/map";
+
+import max from "ramda/src/max";
+import min from "ramda/src/min";
+import reduce from "ramda/src/reduce";
 
 import { getMapHex } from "../map/util";
 
@@ -27,6 +32,8 @@ const Private = ({
   revenue,
   bid,
   players,
+  minPlayers,
+  maxPlayers,
   description,
   icon,
   hex,
@@ -34,19 +41,36 @@ const Private = ({
   token,
   company,
   id,
+  idBackgroundColor,
   backgroundColor,
   variant
 }) => {
   let revenueNode = null;
   if (is(Array, revenue)) {
-    revenueNode = intersperse("/", map(r => <Currency value={r} type="private" />, revenue));
+    revenueNode = intersperse(<span key="span">/</span>, map(r => <Currency key={r} value={r} type="private" />, revenue));
   } else if (is(Number, revenue)) {
     revenueNode = <Currency value={revenue} type="private" />;
+  }
+
+  let minNumPlayers = reduce(min, 99, map(p => p.number, players))
+  let maxNumPlayers = reduce(max, 0, map(p => p.number, players))
+  minPlayers = minPlayers || minNumPlayers;
+  maxPlayers = maxPlayers || maxNumPlayers;
+
+  let playersNode = null;
+
+  if (minPlayers !== minNumPlayers || maxPlayers !== maxNumPlayers) {
+    if (minPlayers !== maxPlayers) {
+      playersNode = `Players: ${minPlayers}-${maxPlayers}`;
+    } else {
+      playersNode = `Players: ${minPlayers}`;
+    }
   }
 
   return (
     <div className="cutlines">
       <div className="card private">
+        <ColorContext.Provider value="companies">
         <Color>
           {c => (
             <div className="card__bleed"
@@ -55,7 +79,10 @@ const Private = ({
                  }}>
               <div className="card__body">
                 <div className="private__name">
-                  {id && <div className="private__id">{id}</div>}
+                  {id && <div className="private__id"
+                    style={{
+                      backgroundColor: c(idBackgroundColor || "gren")
+                    }}>{id}</div>}
                   {name}
                 </div>
                 {note && <div className="private__note">{note}</div>}
@@ -105,15 +132,16 @@ const Private = ({
                    ? description.reduce((lines, line) => <>{lines}<br />{line}</>)
                    : description}
                 </div>
-                {bid && <div className="private__bid">Min Bid: <Currency value={bid} type="private"/></div>}
+                {bid && <div className="private__bid">Min bid: <Currency value={bid} type="private"/></div>}
                 <div className="private__price"><Currency value={price} type="private"/></div>
-                {players && <div className="private__players">{players}</div>}
+                {playersNode && <div className="private__players">{playersNode}</div>}
                 {revenueNode && <div className="private__revenue">Revenue: {revenueNode}</div>}
                 {variant && <div className="private__variant">{variant}</div>}
               </div>
             </div>
           )}
         </Color>
+        </ColorContext.Provider>
       </div>
     </div>
   );

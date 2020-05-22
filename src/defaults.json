@@ -23,6 +23,7 @@
     "par": false,
     "private": true,
     "revenue": false,
+    "share": true,
     "terrain": true,
     "token": true,
     "train": true,

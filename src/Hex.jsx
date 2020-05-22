@@ -15,6 +15,7 @@ import City from "./atoms/City";
 import Company from "./atoms/Company";
 import Divide from "./atoms/Divide";
 import Good from "./atoms/Good";
+import BgShapes from "./atoms/BgShapes";
 import Hex from "./atoms/Hex";
 import HexBorder from "./atoms/HexBorder";
 import Icon from "./atoms/Icon";
@@ -59,7 +60,15 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   let getTracks = R.converge(concat, [
     R.compose(
       R.map(makeBorder),
-      R.filter(t => t.cross !== "over")
+      R.filter(t => t.cross === "bottom")
+    ),
+    R.compose(
+      R.map(makeTrack),
+      R.filter(t => t.cross === "bottom")
+    ),
+    R.compose(
+      R.map(makeBorder),
+      R.filter(t => (t.cross === undefined || t.cross === "under"))
     ),
     R.compose(
       R.map(makeTrack),
@@ -71,11 +80,13 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
     ),
     R.compose(
       R.map(makeTrack),
-      R.filter(t => t.cross !== "under")
-    ),R.compose(
+      R.filter(t => (t.cross === undefined || t.cross === "over"))
+    ),
+    R.compose(
       R.map(makeBorder),
       R.filter(t => t.cross === "top")
-    ),R.compose(
+    ),
+    R.compose(
       R.map(makeTrack),
       R.filter(t => t.cross === "top")
     )
@@ -203,6 +214,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   let industries = (
     <Position data={hex.industries}>{i => <Industry {...i} />}</Position>
   );
+  let bgShapes = <Position data={hex.bgShapes}>{g => <BgShapes {...g} />}</Position>;
   let goods = <Position data={hex.goods}>{g => <Good {...g} />}</Position>;
   let companies = (
     <Position data={hex.companies}>{c => <Company {...c} />}</Position>
@@ -240,6 +252,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
               />
 
               <g transform={`rotate(-${hx.rotation})`}>
+                {bgShapes}
                 {goods}
                 {tunnelEntranceBorders}
                 {cityBorders}

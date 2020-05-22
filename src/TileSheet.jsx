@@ -6,7 +6,7 @@ import "./TileSheet.scss";
 
 import { getTile, sortTiles } from "./util";
 import { getTileSheetContext } from "./tilesheet/util";
-import tileDefs from "./data/tiles";
+import { tiles as tileDefs } from "@18xx-maker/games";
 import { sidesFromTile } from "./atoms/Track";
 import Svg from "./Svg";
 import Page from "./util/Page";
@@ -31,7 +31,9 @@ import includes from "ramda/src/includes";
 import is from "ramda/src/is";
 import keys from "ramda/src/keys";
 import map from "ramda/src/map";
-import propOr from "ramda/src/propOr";
+import pipe from "ramda/src/pipe";
+import prop from "ramda/src/prop";
+import defaultTo from "ramda/src/defaultTo";
 import reduce from "ramda/src/reduce";
 import repeat from "ramda/src/repeat";
 import take from "ramda/src/take";
@@ -40,7 +42,9 @@ import unnest from "ramda/src/unnest";
 const gatherIds = tiles => {
   return compose(unnest,
             map(id => Array((is(Object, tiles[id]) ?
-                            propOr(1, "quantity", tiles[id]) :
+              // like a three-part propOR of "print" || "quantity" || 1
+              pipe(prop("print"), defaultTo(pipe(prop("quantity"),
+                defaultTo(1))(tiles[id])))(tiles[id]) :
                             tiles[id])).fill(id)))(keys(tiles));
 }
 
@@ -211,7 +215,9 @@ const TileSheet = ({ paper, layout, hexWidth, gaps }) => {
             }
           }
 
-          if (pastSides.length > 0) {
+          // No need to line up track for "offset" or "individual"
+          if ((layout === "die" || layout === "smallDie") &&
+              pastSides.length > 0) {
             if (includes(1, pastSides)) {
               // Track above us has track on the bottom, if we have track on the
               // top do nothing
@@ -248,8 +254,8 @@ const TileSheet = ({ paper, layout, hexWidth, gaps }) => {
         }
 
         // Overrides from tile definitions
-        if (hex.mask) {
-          mask = hex.mask;
+        if (hex.mask === false) {
+          mask = "hexMask";
         }
 
         if (hex.rotation) {

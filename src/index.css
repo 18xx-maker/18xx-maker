@@ -345,7 +345,7 @@ svg {
 }
 
 .charter__phase td {
-  padding: 0.03in 0.05in;
+  padding: 0.03in 0.03in;
   border: 1px solid black;
   text-align: center;
   vertical-align: top;
@@ -355,6 +355,12 @@ svg {
 .charter__phase td.phase__notes {
   text-align: left;
   white-space: normal;
+}
+
+.charter .charter__phase ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .charter dl {

@@ -51,7 +51,7 @@ const server = app.listen(9000);
   let author = process.argv[4];
 
   let game = gameDefs[bname];
-  let tiles = require('../src/data/tiles').default;
+  let tiles = require('@18xx-maker/games').tiles;
 
   const getTile = gutil.getTile(tiles, game.tiles || {});
 
@@ -106,6 +106,7 @@ const server = app.listen(9000);
   )(R.keys(game.tiles));
   let colors = R.keys(counts);
 
+  // Tile Trays
   for(let j=0;j<colors.length;j++) {
     let color = colors[j];
 
@@ -145,14 +146,14 @@ const server = app.listen(9000);
 
       tray.tile.push({
         rots,
-        dups: tile.quantity
+        dups: (tile.quantity === "∞" ? 0 : tile.quantity)
       });
     }, game.tiles);
 
     json.tray.push(tray);
   }
 
-  // Tile Trays
+  // Token Trays
   let btok = {
     type: "btok",
     tName: "Tokens",
@@ -177,12 +178,19 @@ const server = app.listen(9000);
     });
   }, gutil.compileCompanies(game) || []);
 
-  R.map(extra => {
-    btok.token.push({
-      dups: 1,
-      flip: true
-    });
-  }, game.tokens || []);
+  // "quantity" of 0 mean remove the token entirely from the array
+  // "quantity of "∞" means we put the special value of 0 in for dups
+  // otherwise, "quantity" is the number of dups
+  let tokens = R.compose(
+    R.map(extra => {
+      btok.token.push({
+        dups: (extra.quantity === "∞" ? 0 : (extra.quantity || 1)),
+        flip: true
+      });
+    }),
+    R.reject(R.propEq("quantity", 0))
+  )(game.tokens || []);
+  let tokenHeight = 30 * ((game.companies || []).length + tokens.length);
 
   json.tray.push(btok);
   json.tray.push(mtok);
@@ -215,8 +223,6 @@ const server = app.listen(9000);
   await page.screenshot({ path: `build/render/${bname}/${folder}/${id}/Market.png`});
 
   console.log(`Printing ${bname}/${folder}/${id}/Tokens.png`);
-  let tokenHeight = 30 * ((game.companies || []).length +
-                          (game.tokens || []).length);
   await page.goto(`http://localhost:9000/${bname}/b18-tokens`, {waitUntil: 'networkidle2'});
   await page.setViewport({ width: 60, height: tokenHeight });
   await page.screenshot({ path: `build/render/${bname}/${folder}/${id}/Tokens.png`, omitBackground: true });

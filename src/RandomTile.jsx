@@ -3,7 +3,7 @@ import {withRouter} from "react-router";
 
 import Svg from "./Svg";
 import Tile from "./Tile";
-import tiles from "./data/tiles";
+import { tiles } from "@18xx-maker/games";
 
 import keys from "ramda/src/keys";
 

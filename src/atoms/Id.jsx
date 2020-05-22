@@ -13,7 +13,7 @@ const Id = ({ id, extra }) => {
         <Color>
           {(c,t,s,p) => (
             <React.Fragment>
-              <g transform={`rotate(${hx.rotation}) translate(-40 70)`}>
+              <g transform={`rotate(${hx.rotation}) translate(40 70)`}>
                 <text
                   fontFamily="sans-serif"
                   fill={p("black")}
@@ -21,7 +21,7 @@ const Id = ({ id, extra }) => {
                   strokeLinecap="round"
                   strokeLinejoin="bevel"
                   dominantBaseline="baseline"
-                  textAnchor="start"
+                  textAnchor="end"
                   fontSize={fontSize}
                   fontWeight="normal"
                   x="0"
@@ -31,7 +31,7 @@ const Id = ({ id, extra }) => {
                 </text>
               </g>
               {extra && (
-                <g transform={`rotate(${hx.rotation}) translate(40 70)`}>
+                <g transform={`rotate(${hx.rotation}) translate(-40 70)`}>
                   <text
                     fontFamily="sans-serif"
                     fill={c("black")}
@@ -39,7 +39,7 @@ const Id = ({ id, extra }) => {
                     strokeLinecap="round"
                     strokeLinejoin="bevel"
                     dominantBaseline="baseline"
-                    textAnchor="end"
+                    textAnchor="start"
                     fontSize={extraFontSize}
                     x="0"
                     y="0"

@@ -52,7 +52,7 @@ const Cards = ({ override, selection }) => {
   let companies = state.displayShares ? overrideCompanies(compileCompanies(game), override, selection) || [] : [];
   let privates = state.displayPrivates ? game.privates || [] : [];
   let trains = fillArray(
-    R.prop("quantity"),
+    t => t.print || t.quantity,
     state.displayTrains ? game.trains || [] : []
   );
   let numbers = state.displayNumbers
@@ -61,7 +61,9 @@ const Cards = ({ override, selection }) => {
 
   let privateNodes = R.addIndex(R.map)(
     (p, i) => (
-      <Private key={`private-${params.game}-${i}`} {...p} />
+      <Private key={`private-${params.game}-${i}`}
+               players={game.players}
+               {...p} />
     ),
     privates
   );
@@ -87,7 +89,7 @@ const Cards = ({ override, selection }) => {
   }, companies);
   let trainNodes = R.addIndex(R.map)(
     (train, index) => (
-      <Train train={train} key={`train-${train.name}-${index}`} />
+      <Train train={train} trains={game.trains} key={`train-${train.name}-${index}`} />
     ),
     trains
   );

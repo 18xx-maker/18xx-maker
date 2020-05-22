@@ -4,6 +4,7 @@ import Color from "../data/Color";
 import ColorContext from "../context/ColorContext";
 
 import Config from "../data/Config";
+import Currency from "../util/Currency";
 
 import is from "ramda/src/is";
 import min from "ramda/src/min";
@@ -99,9 +100,9 @@ const LeftShare = ({
                 {name && <div className="share__name"><div>{name}</div></div>}
                 {subtext && <div className="share__subtext"><div>{subtext}</div></div>}
                 {shares && <div className="share__shares">{count}</div>}
-                {cost && <div className="share__shares">{cost}</div>}
+                {cost && <div className="share__shares"><Currency value={cost} type="share"/></div>}
                 {percent && <div className="share__percent">{percent}%</div>}
-                {revenue && <div className="share__percent">Revenue: {revenue}</div>}
+                {revenue && <div className="share__percent">Revenue: <Currency value={revenue} type="share"/></div>}
                 <div className="share__tokens">
                   <ColorContext.Provider value="companies">
                     {tokens}

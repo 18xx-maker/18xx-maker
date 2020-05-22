@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import tileDefs from "../data/tiles";
+import { tiles as tileDefs } from "@18xx-maker/games";
 
 import Svg from "../Svg";
 import Tile from "../Tile";
@@ -36,7 +36,6 @@ const Tiles = () => {
                       filter(propEq("color", color)),
                       map(getGameTile))(keys(game.tiles));
 
-  console.log(tiles)
   let height = game.info.orientation === "horizontal" ? 100 : 116;
   let width = game.info.orientation === "horizontal" ? 116 : 100;
 
