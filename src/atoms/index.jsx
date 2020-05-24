@@ -315,14 +315,27 @@ const atoms = [{
   examples: [
     {tunnels: [{cost:40}]},
     {bridges: [{cost:40}]},
-    {hexagons: [{cost:"80"}]},
-    {hexagons: [{cost:"threeve",width:44,fillColor:"yellow",strokeWidth:0}]},
-    {diamonds: [{cost:"+20"}]},
     {tunnelEntrances: [{percent:1}]},
     {tunnelEntrances: [{angle:120,percent:1,rotation:-60,color:"red"},
                        {angle:180,percent:1,color:"orange"},
                        {angle:240,percent:1,rotation:60,color:"yellow"}
                       ]}]
+},{
+  group: "Shapes",
+  examples: [
+    {diamonds: [{cost:"+20"}]},
+    {hexagons: [{cost:"80"}]},
+    {hexagons: [{cost:"threeve",width:44,fillColor:"yellow",strokeWidth:0}]},
+    {circles: [{}]},
+    {circles: [{fillColor:"white",width:32,strokeWidth:0},
+               {width:30,fillOpacity:"0",strokeDashArray:"7 7"},
+               {fillColor:"black",width:20}]
+    },
+    {circles: [{width:50,fillColor:"yellow"}],
+     tunnels: [{fillOpacity:0.9,angle:60,percent:0.6}],
+     bridges: [{angle:-60,percent:0.6}],
+     diamonds: [{fillColor:"black",fillOpacity:"0.5",angle:180,percent:0.6}]
+    }]
 },{
   group: "Route Bonuses",
   examples: [
