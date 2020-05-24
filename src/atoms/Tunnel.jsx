@@ -6,8 +6,7 @@ import Currency from "../util/Currency";
 const Tunnel = ({ cost, fillColor, fillOpacity, strokeColor, strokeWidth, textColor, fontFamily, fontSize, fontWeight, width, strokeDashArray }) => {
   fillColor = fillColor || "mountain";
   strokeColor = strokeColor || "black";
-  strokeWidth = strokeWidth || "2";
-  textColor = textColor || "mountain";
+  strokeWidth = strokeWidth >= 0 ? strokeWidth : "1";
   fontFamily = fontFamily || "display";
   fontSize = fontSize || "12";
   fontWeight = fontWeight || "bold";
@@ -33,7 +32,7 @@ const Tunnel = ({ cost, fillColor, fillOpacity, strokeColor, strokeWidth, textCo
               />
             </g>
             <text
-              fill={textColor ? c(textColor) : t(c("mountain"))}
+              fill={textColor ? c(textColor) : t(c(fillColor))}
               fontFamily={fontFamily}
               fontSize={fontSize}
               fontWeight={fontWeight}

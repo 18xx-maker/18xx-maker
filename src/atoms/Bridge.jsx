@@ -6,8 +6,7 @@ import Currency from "../util/Currency";
 const Bridge = ({ cost, fillColor, fillOpacity, strokeColor, strokeWidth, textColor, fontFamily, fontSize, fontWeight, width, strokeDashArray }) => {
   fillColor = fillColor || "water";
   strokeColor = strokeColor || "track";
-  strokeWidth = strokeWidth || "2";
-  textColor = textColor || "water";
+  strokeWidth = strokeWidth >= 0 ? strokeWidth : "1";
   fontFamily = fontFamily || "display";
   fontSize = fontSize || "12";
   fontWeight = fontWeight || "bold";
@@ -33,7 +32,7 @@ const Bridge = ({ cost, fillColor, fillOpacity, strokeColor, strokeWidth, textCo
               />
             </g>
             <text
-              fill={textColor ? c(textColor) : t(c("water"))}
+              fill={textColor ? c(textColor) : t(c(fillColor))}
               fontFamily={fontFamily}
               fontSize={fontSize}
               fontWeight={fontWeight}
