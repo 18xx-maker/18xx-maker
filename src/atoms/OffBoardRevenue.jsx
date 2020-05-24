@@ -46,9 +46,9 @@ const makeNode = (x, y, reverse, revenue, size) => {
     </Color>,
     <Color context="map"
            key={`text-${value}`}>
-      {c => (
+      {(c,t) => (
         <text
-          fill={c(revenue.textColor) || c("black")}
+          fill={c(revenue.textColor) || t(c(revenue.color))}
           fontSize={size}
           dominantBaseline="central"
           textAnchor="middle"
