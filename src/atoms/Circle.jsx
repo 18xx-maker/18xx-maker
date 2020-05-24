@@ -3,7 +3,7 @@ import Color from "../data/Color";
 import PhaseContext from "../context/PhaseContext";
 import Currency from "../util/Currency";
 
-const Diamond = ({ cost, fillColor, fillOpacity, strokeColor, strokeWidth, textColor, fontFamily, fontSize, fontWeight, width, strokeDashArray }) => {
+const Circle = ({ cost, fillColor, fillOpacity, strokeColor, strokeWidth, textColor, fontFamily, fontSize, fontWeight, width, strokeDashArray }) => {
   fillColor = fillColor || "mountain";
   strokeColor = strokeColor || "black";
   strokeWidth = strokeWidth >= 0 ? strokeWidth : "1";
@@ -50,4 +50,4 @@ const Diamond = ({ cost, fillColor, fillOpacity, strokeColor, strokeWidth, textC
   );
 };
 
-export default Diamond;
+export default Circle;
