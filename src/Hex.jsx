@@ -29,6 +29,7 @@ import RouteBonus from "./atoms/RouteBonus";
 import Terrain from "./atoms/Terrain";
 import Town from "./atoms/Town";
 import Track from "./atoms/Track";
+import Circle from "./atoms/Circle";
 import Hexagon from "./atoms/Hexagon";
 import Diamond from "./atoms/Diamond";
 import Tunnel from "./atoms/Tunnel";
@@ -137,7 +138,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   );
   let centerTownBorders = (
     <Position data={hex.centerTowns}>
-      {t => <CenterTown border={true} />}
+      {t => <CenterTown border={true} {...t} />}
     </Position>
   );
 
@@ -187,6 +188,9 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   );
   let bridges = (
     <Position data={hex.bridges}>{b => <Bridge {...b} />}</Position>
+  );
+  let circles = (
+    <Position data={hex.circles}>{t => <Circle {...t} />}</Position>
   );
   let hexagons = (
     <Position data={hex.hexagons}>{t => <Hexagon {...t} />}</Position>
@@ -295,6 +299,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
         {industries}
         {companies}
         {names}
+        {circles}
         {hexagons}
         {diamonds}
         {tunnels}

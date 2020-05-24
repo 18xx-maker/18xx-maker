@@ -3,12 +3,13 @@ import Color from "../data/Color";
 
 import Name from "./Name";
 
-const CenterTown = ({ border, name, color, bgColor }) => {
+const CenterTown = ({ border, name, color, bgColor, width }) => {
+  width = width || 20;
   if (border) {
     return (
       <Color>
         {c => (
-          <circle fill={c("border")} stroke="none" cx="0" cy="0" r="14" />
+          <circle fill={c("border")} stroke="none" cx="0" cy="0" r={width / 2 + 4} />
         )}
       </Color>
     );
@@ -29,10 +30,10 @@ const CenterTown = ({ border, name, color, bgColor }) => {
         {c => (
           <React.Fragment>
             <g key="center-town-outline">
-              <circle fill={c("centerTown")} stroke="none" cx="0" cy="0" r="12" />
+              <circle fill={c("centerTown")} stroke="none" cx="0" cy="0" r={width / 2 + 2} />
             </g>
             <g key="center-town-fill">
-              <circle fill={c(color || "centerTown")} stroke="none" cx="0" cy="0" r="10" />
+              <circle fill={c(color || "centerTown")} stroke="none" cx="0" cy="0" r={width / 2} />
             </g>
             {nameNode}
           </React.Fragment>
