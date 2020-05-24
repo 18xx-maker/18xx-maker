@@ -11,6 +11,7 @@ import ColorContext from "./context/ColorContext";
 import Border from "./atoms/Border";
 import Bridge from "./atoms/Bridge";
 import CenterTown from "./atoms/CenterTown";
+import Boomtown from "./atoms/Boomtown";
 import City from "./atoms/City";
 import Company from "./atoms/Company";
 import Divide from "./atoms/Divide";
@@ -139,6 +140,17 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   let centerTownBorders = (
     <Position data={hex.centerTowns}>
       {t => <CenterTown border={true} {...t} />}
+    </Position>
+  );
+
+  let boomtowns = (
+    <Position data={hex.boomtowns}>
+      {t => <Boomtown bgColor={hex.color} {...t} />}
+    </Position>
+  );
+  let boomtownBorders = (
+    <Position data={hex.boomtown}>
+      {t => <Boomtown border={true} {...t} />}
     </Position>
   );
 
@@ -271,6 +283,8 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
                 {cities}
                 {mediumCities}
                 {towns}
+                {boomtownBorders}
+                {boomtowns}
                 {centerTownBorders}
                 {centerTowns}
                 {values}
