@@ -147,7 +147,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   );
   let mediumCityBorders = (
     <Position data={hex.mediumCities}>
-      {m => <MediumCity border={true} />}
+      {m => <MediumCity border={true} {...m} />}
     </Position>
   );
 

@@ -3,12 +3,23 @@ import React from "react";
 import Color from "../data/Color";
 import Name from "./Name";
 
-const MediumCity = ({ border, name, reverse, color }) => {
+const MediumCity = ({ border, name, reverse, color, fillColor, fillOpacity, strokeColor, strokeWidth, width, strokeDashArray, outlineColor, outlineStroke, outlineStrokeWidth }) => {
+  fillColor = fillColor || color || "track";
+  strokeColor = strokeColor || "black";
+  strokeWidth = strokeWidth >= 0 ? strokeWidth : "1";
+  strokeDashArray = strokeDashArray || "";
+  fillOpacity = fillOpacity || "1";
+  outlineColor = outlineColor || "border";
+  outlineStroke = outlineStroke || "track";
+  outlineStrokeWidth = outlineStrokeWidth || "3";
+  let scale = width !== 0 ? width / 22 : 22;
   if (border) {
     return (
       <Color>
         {c => (
-          <circle fill={c("border")} stroke="none" cx="0" cy="0" r="21" />
+          <g transform={`scale(${scale})`}>
+            <circle fill={c("border")} stroke="none" cx="0" cy="0" r="21" />
+          </g>
         )}
       </Color>
     );
@@ -27,17 +38,21 @@ const MediumCity = ({ border, name, reverse, color }) => {
     return (
       <Color context="companies">
         {c => (
-          <g>
+          <g transform={`scale(${scale})`}>
             <circle
-              fill={c("border")}
-              stroke={c("track")}
-              strokeWidth="3"
+              fill={c(outlineColor)}
+              stroke={c(outlineStroke)}
+              strokeWidth={outlineStrokeWidth}
               cx="0"
               cy="0"
               r="17"
             />
             <circle
-              fill={c(color || "track")}
+              fill={c(fillColor)}
+              fill-opacity={fillOpacity}
+              stroke={c(strokeColor)}
+              strokeWidth={strokeWidth}
+              stroke-dasharray={strokeDashArray}
               cx="0"
               cy="0"
               r="12"
