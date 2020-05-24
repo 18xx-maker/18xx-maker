@@ -196,12 +196,15 @@ const atoms = [{
   group: "Towns",
   examples: [{towns: [{}]},
              {towns: [{name:{name:"Austin"}}]},
-             {towns: [{name:{name:"Boston", reverse: true}}]}]
-},{
-  group: "Center Towns",
-  examples: [{centerTowns: [{}]},
+             {towns: [{name:{name:"Boston", reverse: true}}]},
+             {centerTowns: [{}]},
              {centerTowns: [{color:"orange",name:{name:"Austin"}}]},
-             {centerTowns: [{name:{name:"Boston", reverse: true}}]}]
+             {centerTowns: [{name:{name:"Boston", reverse: true}}]},
+             {boomtowns: [{}]},
+             {boomtowns: [{city:true}]},
+             {boomtowns: [{color:"orange",name:{name:"Denver"}}]},
+             {boomtowns: [{color:"water",angle:-90,percent:0.20 },
+                          {city:true,angle: 90,percent:0.34}]}]
 },{
   group: "Medium Cities",
   examples: [{mediumCities: [{}]},
