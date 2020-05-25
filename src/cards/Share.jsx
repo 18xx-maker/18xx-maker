@@ -34,7 +34,7 @@ const LeftShare = ({
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
   let tokens = [];
-  let sharesLeft = tokenCount || shares;
+  let sharesLeft = tokenCount || shares || 1;
   while(sharesLeft > 0) {
     tokens.push(
       <div key={sharesLeft} className="share__token">
