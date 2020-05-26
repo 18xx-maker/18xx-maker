@@ -3,12 +3,10 @@ import Color from "../data/Color";
 
 import Name from "./Name";
 
-const Boomtown = ({ border, city, name, color, bgColor, width, strokeWidth }) => {
-  width = width || 25;
-  let centerTownWidth = width * 5 / 12;
-  let boomtownBorderWidth = (width + centerTownWidth) / 2;
+const Boomtown = ({ border, city, name, straightCityNames, color, bgColor, width, strokeWidth, strokeDashArray }) => {
+  let cityWidth = width || 25;
+  let centerTownWidth = cityWidth * 5 / 12;
   strokeWidth = strokeWidth || 2;
-  let strokeDashArray = "6 6";
   if (border) {
     return (
       <Color>
@@ -17,7 +15,7 @@ const Boomtown = ({ border, city, name, color, bgColor, width, strokeWidth }) =>
             fill={c("border")}
             stroke="none"
             cx="0" cy="0"
-            r={city ? width + 3 : centerTownWidth + 4 }
+            r={city ? cityWidth + 3 : centerTownWidth + 4 }
           />
         )}
       </Color>
@@ -26,15 +24,35 @@ const Boomtown = ({ border, city, name, color, bgColor, width, strokeWidth }) =>
     let nameNode = null;
 
     if (name) {
+      let path = straightCityNames ? null :
+        (city ? "cityPath" : "boomtownCityPath");
+      if (path && name.reverse) {
+        path = path + "Reverse";
+      }
+      let y = name.y || (name.reverse ? 7 : 0);
+      if (straightCityNames) {
+        y -= name.reverse ? -24 : 32;
+      }
       nameNode = (
         <Name
           bgColor={bgColor}
           {...name}
-          y={name.y || (name.reverse ? 28 : -28)}
-        />
-      );
+          y={y}
+          path={path}
+          doRotation={true}
+        />);
+//      nameNode code for centerTowns
+//      nameNode = (
+//        <Name
+//          bgColor={bgColor}
+//          {...name}
+//          y={name.y || (name.reverse ? 28 : -28)}
+//        />
+//      );
     }
+
     if (city) {
+      strokeDashArray = strokeDashArray || "4 4";
       return (
         <Color context="companies">
           {c => (
@@ -45,7 +63,7 @@ const Boomtown = ({ border, city, name, color, bgColor, width, strokeWidth }) =>
                   stroke="none"
                   cx="0"
                   cy="0"
-                  r={width}
+                  r={cityWidth}
                 />
               </g>
               <g key="city-otherthing">
@@ -55,23 +73,7 @@ const Boomtown = ({ border, city, name, color, bgColor, width, strokeWidth }) =>
                   strokeWidth={strokeWidth}
                   cx="0"
                   cy="0"
-                  r={width}
-                />
-              </g>
-              <g key="center-town-outline">
-                <circle
-                  fill={c("centerTown")}
-                  stroke="none"
-                  cx="0" cy="0"
-                  r={centerTownWidth + 2}
-                />
-              </g>
-              <g key="center-town-fill">
-                <circle
-                  fill={c(color || "centerTown")}
-                  stroke="none"
-                  cx="0" cy="0"
-                  r={centerTownWidth}
+                  r={cityWidth}
                 />
               </g>
               <g key="boomtown-outline">
@@ -81,7 +83,7 @@ const Boomtown = ({ border, city, name, color, bgColor, width, strokeWidth }) =>
                   strokeWidth={strokeWidth}
                   stroke-dasharray={strokeDashArray}
                   cx="0" cy="0"
-                  r={boomtownBorderWidth}
+                  r={centerTownWidth}
                 />
               </g>
               {nameNode}
@@ -90,6 +92,7 @@ const Boomtown = ({ border, city, name, color, bgColor, width, strokeWidth }) =>
         </Color>
       );
     } else {
+      strokeDashArray = strokeDashArray || "6 6";
       return (
         <Color context="companies">
           {c => (
@@ -117,7 +120,7 @@ const Boomtown = ({ border, city, name, color, bgColor, width, strokeWidth }) =>
                   strokeWidth={strokeWidth}
                   stroke-dasharray={strokeDashArray}
                   cx="0" cy="0"
-                  r={boomtownBorderWidth+4}
+                  r={cityWidth}
                 />
               </g>
               {nameNode}
