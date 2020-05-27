@@ -18,7 +18,13 @@ import Game from "./Game";
 
 import Footer from "./Footer";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { isElectron } from "./util";
+
+import { BrowserRouter, HashRouter, Route, Switch } from "react-router-dom";
+
+// Test to see if we're running in electron or not. If so use a hash router
+// since it's based on files
+const Router = isElectron() ? HashRouter : BrowserRouter;
 
 const App = () => (
   <Router>
