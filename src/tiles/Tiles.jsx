@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import * as R from "ramda";
 
 import any from "ramda/src/any";
@@ -31,13 +32,15 @@ const Tiles = ({color}) => {
 
   let tileNodes = R.map(id => {
     return (
-      <Svg key={id}
-           width="200"
-           height="200"
-           viewBox="-100 -100 200 200"
-           transform="rotate(-90)">
-        <Tile id={id} width={150} x={0} y={0} />
-      </Svg>
+      <Link to={`/tile/${id}`}>
+        <Svg key={id}
+             width="200"
+             height="200"
+             viewBox="-100 -100 200 200"
+             transform="rotate(-90)">
+          <Tile id={id} width={150} x={0} y={0} />
+        </Svg>
+      </Link>
     );
   }, ids);
 

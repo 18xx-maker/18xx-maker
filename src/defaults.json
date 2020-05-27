@@ -75,6 +75,7 @@
     "images": false
   },
   "tiles": {
+    "id": "right",
     "layout": "die",
     "width": 150,
     "mapWidth": 150,

@@ -6,9 +6,15 @@ import Svg from "../Svg";
 import HexContext from "../context/HexContext";
 import * as R from "ramda";
 import { Redirect, useParams } from "react-router-dom";
+import { isElectron } from "../util";
 
 import VariationSelect from "../nav/VariationSelect";
 import { getMapData } from "./util";
+
+let ipcRenderer = undefined;
+if (isElectron()) {
+  ipcRenderer = window.require('electron').ipcRenderer;
+}
 
 const MapSingle = ({ coords, hexWidth }) => {
   let params = useParams();
@@ -37,6 +43,12 @@ const MapSingle = ({ coords, hexWidth }) => {
     );
   }
 
+  let handler = () => {
+    if (isElectron()) {
+      ipcRenderer.send('pdf', `/${params.game}/map`);
+    }
+  }
+
   return (
     <HexContext.Provider
       value={{
@@ -49,6 +61,7 @@ const MapSingle = ({ coords, hexWidth }) => {
           {variationSelect}
           <h3>Width: {data.humanWidth}</h3>
           <h3>Height: {data.humanHeight}</h3>
+          {isElectron() && <button onClick={handler}>Print</button>}
         </div>
       </div>
       <div className="map">
