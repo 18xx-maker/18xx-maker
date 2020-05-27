@@ -64,13 +64,16 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
   let nameNode = null;
 
   if (name) {
-    let path = straightCityNames ? null : `city${size > 1 ? size : ""}Path`;
-    if(path && name.reverse) {
-      path = path + "Reverse";
-    }
+    let path = null;
     let y = name.y || (name.reverse ? 7 : 0);
-    if (straightCityNames) {
+    if (straightCityNames || name.straight) {
+      path = null;
       y -= name.reverse ? -24 : 32;
+    } else {
+      path = `city${size > 1 ? size : ""}Path`;
+      if (name.reverse) {
+        path = path + "Reverse";
+      }
     }
     nameNode = <Name bgColor={bgColor} {...name} y={y} path={path} doRotation={true} />;
   }

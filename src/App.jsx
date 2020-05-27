@@ -121,8 +121,6 @@ const App = () => (
             <Color context="companies">
               {(c,t,s,p) => (
                 <React.Fragment>
-                  <path id="boomtownCityPath" d="M 0 26 A 26 26 0 0 1 0 -26 A 26 26 0 0 1 0 26" />
-                  <path id="boomtownCityPathReverse" d="M 0 -26 A 26 26 0 0 0 0 26 A 26 26 0 0 0 0 -26" />
                   <path id="cityPath" d="M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30" />
                   <path id="cityPathReverse" d="M 0 -30 A 30 30 0 0 0 0 30 A 30 30 0 0 0 0 -30" />
                   <path id="city2Path" d="M 0 30 L -25 30 A 30 30 0 0 1 -25 -30 L 25 -30 A 30 30 0 0 1 25 30 L 0 30" />
