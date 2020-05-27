@@ -9,7 +9,6 @@
   "license": "MIT",
   "private": true,
   "main": "electron/index.js",
-  "homepage": ".",
   "scripts": {
     "18xx.games": "node ./bin/18xx.games.js",
     "analyze": "yarn generate && react-scripts build && source-map-explorer build/static/js/main.*",
@@ -24,7 +23,6 @@
     "generate:icons": "node ./bin/generateSvgIconIndex.js",
     "generate:logos": "node ./bin/generateSvgLogoIndex.js",
     "generate:themes": "node ./bin/generateThemeIndexes.js",
-    "preelectron-pack": "yarn build",
     "print": "node ./bin/print.js",
     "start": "yarn generate && react-scripts start",
     "start:app": "run-p start:electron start:nobrowser",
@@ -60,6 +58,7 @@
       "executableName": "18xx-maker"
     },
     "extraMetadata": {
+      "homepage": ".",
       "main": "electron/index.js"
     },
     "files": [
