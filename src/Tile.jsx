@@ -35,11 +35,9 @@ const Tile = ({ id, border, mask, gameTiles }) => {
     }
   }
 
-  if(hex) {
-    return <Hex hex={hex} id={id} mask={mask} border={border} />;
-  } else {
-    return <Id id={idBase} extra={idExtra} />;
-  }
+  return hex
+      ? <Hex hex={hex} id={id} mask={mask} border={border} />
+      : <Id id={idBase} extra={idExtra} />;
 };
 
 export default Tile;
