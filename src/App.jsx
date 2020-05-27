@@ -12,6 +12,7 @@ import Docs from "./docs";
 import Logos from "./Logos";
 
 import Tiles from "./tiles";
+import Tile from "./pages/Tile.jsx";
 
 import Home from "./Home";
 import Game from "./Game";
@@ -51,6 +52,9 @@ const App = () => (
           </Route>
           <Route path="/logos" exact>
             <Logos />
+          </Route>
+          <Route path="/tile/:id">
+            <Tile />
           </Route>
           <Route path="/tiles">
             <Tiles />

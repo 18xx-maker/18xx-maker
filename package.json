@@ -3,6 +3,9 @@
   "version": "1.0.1",
   "author": "Christopher Giroir <kelsin@valefor.com>",
   "description": "18xx Prototyper",
+  "repository": {
+    "url": "git@github.com:18xx-maker/18xx-maker.git"
+  },
   "license": "MIT",
   "private": true,
   "main": "electron/index.js",
@@ -44,8 +47,16 @@
   ],
   "build": {
     "appId": "com.18xx-maker.app",
+    "productName": "18xx Maker",
     "mac": {
       "category": "public.app-category.games"
+    },
+    "win": {},
+    "linux": {
+      "executableName": "18xx-maker"
+    },
+    "extraMetadata": {
+      "main": "electron/index.js"
     },
     "files": [
       "build/**/*",
