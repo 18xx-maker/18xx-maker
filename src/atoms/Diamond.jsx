@@ -13,7 +13,6 @@ const Diamond = ({ cost, fillColor, fillOpacity, strokeColor, strokeWidth, textC
   strokeDashArray = strokeDashArray || "";
   fillOpacity = fillOpacity || "1";
   let scale = width !== 0 ? width / 22 : 22;
-  let texty = -5 - (fontSize-12)/6;
   return (
     <PhaseContext.Provider value="default">
       <Color context="map">
@@ -37,10 +36,10 @@ const Diamond = ({ cost, fillColor, fillOpacity, strokeColor, strokeWidth, textC
               fontFamily={fontFamily}
               fontSize={fontSize}
               fontWeight={fontWeight}
-              dominantBaseline="hanging"
+              dominantBaseline="central"
               textAnchor="middle"
-              x="-2"
-              y={texty}
+              x="0"
+              y="0"
             >
               <Currency value={cost} type="terrain" />
             </text>
