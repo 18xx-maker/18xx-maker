@@ -326,19 +326,20 @@ const atoms = [{
 },{
   group: "Shapes",
   examples: [
-    {diamonds: [{cost:"+20"}]},
-    {hexagons: [{cost:"80"}]},
-    {hexagons: [{cost:"threeve",width:44,fillColor:"yellow",strokeWidth:0}]},
-    {circles: [{}]},
-    {circles: [{fillColor:"white",width:32,strokeWidth:0},
-               {width:30,fillOpacity:"0",strokeDashArray:"7 7"},
-               {fillColor:"black",width:20}]
-    },
-    {circles: [{width:50,fillColor:"yellow"}],
-     tunnels: [{fillOpacity:0.9,angle:60,percent:0.6}],
-     bridges: [{angle:-60,percent:0.6}],
-     diamonds: [{fillColor:"black",fillOpacity:"0.5",angle:180,percent:0.6}]
-    }]
+    {shapes: [{type: "diamond", text: "+20", color: "orange"}]},
+    {shapes: [{type: "triangle", text:"-20",color:"mountain"}]},
+    {shapes: [{type: "triangle", text:"20",color:"water",reverse:true}]},
+    {shapes: [{type: "hexagon", text:"80",color:"mountain"}]},
+    {shapes: [{type: "hexagon", text:"threeve",width:100,color:"yellow",borderWidth:0}]},
+    {shapes: [{color:"red", text:"CG", textColor:"white"}]},
+    {shapes: [{color:"white",width:64,borderWidth:0},
+              {width:60,dashed:true},
+              {color:"black",width:40}]},
+    {shapes: [{width:100,color:"yellow"},
+              {type: "triangle", color: "mountain", opacity:0.9,angle:60,percent:0.6},
+              {type: "triangle", color: "water", reverse: true, angle:-60,percent:0.6},
+              {type: "diamond", color:"black",opacity:"0.5",angle:180,percent:0.6}]}
+  ]
 },{
   group: "Route Bonuses",
   examples: [

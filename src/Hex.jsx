@@ -30,12 +30,11 @@ import RouteBonus from "./atoms/RouteBonus";
 import Terrain from "./atoms/Terrain";
 import Town from "./atoms/Town";
 import Track from "./atoms/Track";
-import Circle from "./atoms/Circle";
-import Hexagon from "./atoms/Hexagon";
-import Diamond from "./atoms/Diamond";
 import Tunnel from "./atoms/Tunnel";
 import TunnelEntrance from "./atoms/TunnelEntrance";
 import Value from "./atoms/Value";
+
+import Shape from "./atoms/shapes/Shape";
 
 import GameMapCompanyToken from "./tokens/GameMapCompanyToken";
 import Token from "./tokens/Token";
@@ -195,20 +194,12 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
       terrainHexes.push({ ...hex.water, type: "water" });
     }
   }
+  let shapes = <Position data={hex.shapes}>{s => <Shape {...s}/>}</Position>;
   let terrain = (
     <Position data={terrainHexes}>{t => <Terrain {...t} />}</Position>
   );
   let bridges = (
     <Position data={hex.bridges}>{b => <Bridge {...b} />}</Position>
-  );
-  let circles = (
-    <Position data={hex.circles}>{t => <Circle {...t} />}</Position>
-  );
-  let hexagons = (
-    <Position data={hex.hexagons}>{t => <Hexagon {...t} />}</Position>
-  );
-  let diamonds = (
-    <Position data={hex.diamonds}>{t => <Diamond {...t} />}</Position>
   );
   let tunnels = (
     <Position data={hex.tunnels}>{t => <Tunnel {...t} />}</Position>
@@ -313,9 +304,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
         {industries}
         {companies}
         {names}
-        {circles}
-        {hexagons}
-        {diamonds}
+        {shapes}
         {tunnels}
         {bridges}
         {offBoardRevenue}

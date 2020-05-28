@@ -16,7 +16,9 @@ import juxt from "ramda/src/juxt";
 import lte from "ramda/src/lte";
 import map from "ramda/src/map";
 import merge from "ramda/src/merge";
+import mergeAll from "ramda/src/mergeAll";
 import nth from "ramda/src/nth";
+import pick from "ramda/src/pick";
 import prop from "ramda/src/prop";
 import propOr from "ramda/src/propOr";
 import reverse from "ramda/src/reverse";
@@ -197,6 +199,20 @@ export const overrideCompanies = (companies, override, selections) => {
 
   }, companies || []);
 }
+
+export const getFontProps = (props, size, weight, family, style) => {
+  return mergeAll([
+    { fontFamily: "display",
+      fontSize: 12,
+      fontStyle: "regular",
+      fontWeight: "bold" },
+    { fontFamily: family,
+      fontSize: size,
+      fontStyle: style,
+      fontWeight: weight },
+    pick(["fontFamily", "fontSize", "fontStyle", "fontWeight"], props)
+  ]);
+};
 
 export const getCharterData = (charters, paper) => {
   let { cutlines, bleed, border } = charters;
