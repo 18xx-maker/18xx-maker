@@ -6,25 +6,18 @@ import Triangle from "./Triangle";
 import Diamond from "./Diamond";
 import Square from "./Square";
 
+const mapping = {
+  circle: Circle,
+  diamond: Diamond,
+  hexagon: Hexagon,
+  square: Square,
+  triangle: Triangle
+}
+
 const Shape = (props) => {
   let { type } = props;
 
-  let Component = Circle;
-
-  switch (type) {
-    case "hexagon":
-      Component = Hexagon;
-      break;
-    case "triangle":
-      Component = Triangle;
-      break;
-    case "diamond":
-      Component = Diamond;
-      break;
-    case "square":
-      Component = Square;
-      break;
-  }
+  let Component = mapping[type] || Circle;
 
   return <Component {...props} />;
 }
