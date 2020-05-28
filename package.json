@@ -14,7 +14,8 @@
     "analyze": "yarn generate && react-scripts build && source-map-explorer build/static/js/main.*",
     "b18": "node ./bin/b18.js",
     "build": "yarn generate && react-scripts build",
-    "build:app": "electron-builder build",
+    "build:electron": "cross-env PUBLIC_URL=. yarn build",
+    "build:app": "yarn build:electron && electron-builder build -mwl",
     "clean": "node ./bin/clean.js",
     "eject": "react-scripts eject",
     "generate": "yarn generate:config && yarn generate:games && yarn generate:icons && yarn generate:logos && yarn generate:themes",
@@ -51,6 +52,9 @@
       "category": "public.app-category.games",
       "icon": "assets/18xx-maker.icns"
     },
+    "dmg": {
+      "background": "assets/background.tiff"
+    },
     "win": {
       "icon": "assets/18xx-maker.ico"
     },
@@ -58,7 +62,6 @@
       "executableName": "18xx-maker"
     },
     "extraMetadata": {
-      "homepage": ".",
       "main": "electron/index.js"
     },
     "files": [
