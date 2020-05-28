@@ -1,9 +1,14 @@
 import React from "react";
-import Color from "../data/Color";
+
+import Text from "./shapes/Text";
 
 import RotateContext from "../context/RotateContext";
 
-const Label = ({ label, size, length, fixed, bgColor, fontFamily, fontWeight }) => {
+import defaultTo from "ramda/src/defaultTo";
+
+const Label = (props) => {
+  let { label, fixed } = props;
+
   let fontSize = label.length > 2 ? 20 : 30;
   if (label.length > 8) {
     fontSize = 18;
@@ -15,32 +20,14 @@ const Label = ({ label, size, length, fixed, bgColor, fontFamily, fontWeight }) 
     fontSize = 12;
   }
 
-  if(size !== undefined) {
-    fontSize = size;
-  }
-
   return (
     <RotateContext.Consumer>
       {rotation => (
-        <Color>
-          {(c,t,s,p) => (
-            <text
-              transform={fixed ? null : `rotate(-${rotation})`}
-              fill={bgColor ? t(c(bgColor)) : p("black")}
-              fontFamily={fontFamily || "display"}
-              fontWeight={fontWeight || "bold"}
-              fontSize={fontSize}
-              dominantBaseline="central"
-              textAnchor="middle"
-              textLength={length}
-              lengthAdjust="spacingAndGlyphs"
-              x="0"
-              y="0"
-            >
-              {label}
-            </text>
-          )}
-        </Color>
+        <g transform={fixed ? null : `rotate(-${rotation})`}>
+          <Text fontSize={fontSize}
+                {...props}
+                text={label}/>
+        </g>
       )}
     </RotateContext.Consumer>
   );
