@@ -7,7 +7,7 @@ import { getFontProps } from "../../util";
 import defaultTo from "ramda/src/defaultTo";
 
 const Text = (props) => {
-  let { text, color, x, y } = props;
+  let { text, color } = props;
   let font = getFontProps(props);
 
   return (

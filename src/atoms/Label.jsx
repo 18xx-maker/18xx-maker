@@ -4,8 +4,6 @@ import Text from "./shapes/Text";
 
 import RotateContext from "../context/RotateContext";
 
-import defaultTo from "ramda/src/defaultTo";
-
 const Label = (props) => {
   let { label, fixed } = props;
 
