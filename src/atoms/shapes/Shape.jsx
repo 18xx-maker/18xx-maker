@@ -9,18 +9,24 @@ import Square from "./Square";
 const Shape = (props) => {
   let { type } = props;
 
+  let Component = Circle;
+
   switch (type) {
     case "hexagon":
-      return <Hexagon {...props} />;
+      Component = Hexagon;
+      break;
     case "triangle":
-      return <Triangle {...props} />;
+      Component = Triangle;
+      break;
     case "diamond":
-      return <Diamond {...props} />;
+      Component = Diamond;
+      break;
     case "square":
-      return <Square {...props} />;
-    default:
-      return <Circle {...props} />;
+      Component = Square;
+      break;
   }
+
+  return <Component {...props} />;
 }
 
 export default Shape;

@@ -15,6 +15,13 @@ me know!
 This project was bootstrapped with [Create React
 App](https://github.com/facebookincubator/create-react-app).
 
+## 2.x
+
+I'm working on version 2.x of the site so we will have a bunch of breaking
+changes (hopefully all documented). If you want a stable workflow until that
+point I recommend checking out the `v1.0.1` tag and sticking to that until 2.0
+is out and you can make changes to any local files.
+
 ## Donation
 
 I've been asked about donation buttons; if you find this software useful to you
