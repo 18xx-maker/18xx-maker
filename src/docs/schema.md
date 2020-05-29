@@ -13,7 +13,7 @@ package](https://www.npmjs.com/package/18xx-schemas) called
 * [game](/schemas/game.schema.json) - **WIP** - Schema to define a game file
 * [config](/schemas/config.schema.json) - Schema to define the `defaults.json`
   format to manage the [config
-  file](https://github.com/kelsin/18xx/blob/master/src/defaults.json) for this
+  file](https://github.com/18xx-maker/18xx-maker/blob/master/src/defaults.json) for this
   tool.
 * [theme](/schemas/theme.schema.json) - Schema to define a color theme file
   (maps or companies)
