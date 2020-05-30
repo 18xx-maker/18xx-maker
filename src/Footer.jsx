@@ -7,7 +7,7 @@ const Footer = () => {
       <a
         target="_blank"
         rel="noopener noreferrer"
-        href="https://github.com/kelsin/18xx"
+        href="https://github.com/18xx-maker/18xx-maker"
       >
         Github
       </a>. Items copyright to their respective creators and publishers. Only

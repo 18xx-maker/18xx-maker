@@ -229,7 +229,7 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="companySvgLogos" label="Company Logos"
              description="This lets you choose to use SVG logos (when available) for companies instead of only colors and text. The different settings are explained on the [logos doc](/docs/logos) page" />
       <Input name="overrideCompanies" label="Override Companies"
-             description="This lets you change the companies for a game to a set list that are defined in [the code](https://github.com/kelsin/18xx/tree/master/src/data/companies)" />
+             description="This lets you change the companies for a game to a set list that are defined in [the code](https://github.com/18xx-maker/18xx-maker/tree/master/src/data/companies)" />
       <h3>Maps</h3>
       <Input name="coords" label="Coordinate Type"
              description="This lets you choose where the coordinates appear on the map (if at all)."/>
