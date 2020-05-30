@@ -56,7 +56,7 @@ relevant `color-stroke-main` as well (for example: `color-stroke-purple`).
 
 Name the logo based on the company abbreviation you want it to be for and drop
 it in the
-[/src/data/logos](https://github.com/kelsin/18xx/tree/master/src/data/logos)
+[/src/data/logos](https://github.com/18xx-maker/18xx-maker/tree/master/src/data/logos)
 folder. Once this is done you should **make sure you have a backup** and run:
 
 ```sh

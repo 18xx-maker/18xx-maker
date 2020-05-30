@@ -46,7 +46,7 @@ const Home = () => {
               <strong>Important:</strong> Please do not use this site to print games that you don't have a license to print. This tool is not meant to enable piracy. Please support our 18xx designers, developers and publishers.
             </p>
             <p className="note wip">
-              <strong>Note:</strong> Some games are still works in progress. Please submit any bugs found as <a href="https://github.com/kelsin/18xx/issues">issues on github</a>!
+              <strong>Note:</strong> Some games are still works in progress. Please submit any bugs found as <a href="https://github.com/18xx-maker/18xx-maker/issues">issues on github</a>!
             </p>
           </React.Fragment>
         )}
@@ -67,7 +67,7 @@ const Home = () => {
       <ul><li><NavLink to="/logos">Logos</NavLink></li></ul>
       <h2>Tiles</h2>
       <p>Tiles are defined separately from each game in (currently){" "}
-        <a href="https://github.com/kelsin/18xx/blob/master/src/data/tiles.js">one giant file</a>.
+        <a href="https://github.com/18xx-maker/18xx-maker/blob/master/src/data/tiles.js">one giant file</a>.
         Tiles are defined with the exactly the same format as map hexes. All available tile/hex elements are
         called atoms and examples of the json required for each is <NavLink to="/tiles/atoms">available</NavLink>.</p>
       <p>If you are just interested in printing games from this site, you don't need to worry about these tiles.
