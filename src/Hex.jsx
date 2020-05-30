@@ -193,7 +193,8 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
       terrainHexes.push({ ...hex.water, type: "water" });
     }
   }
-  let shapes = <Position data={hex.shapes}>{s => <Shape {...s}/>}</Position>;
+  let bgShapes = <Position data={R.filter(s => s.background, hex.shapes || [])}>{s => <Shape {...s}/>}</Position>;
+  let shapes = <Position data={R.reject(s => s.background, hex.shapes || [])}>{s => <Shape {...s}/>}</Position>;
   let terrain = (
     <Position data={terrainHexes}>{t => <Terrain {...t} />}</Position>
   );
@@ -261,6 +262,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
               />
 
               <g transform={`rotate(-${hx.rotation})`}>
+                {bgShapes}
                 {goods}
                 {tunnelEntranceBorders}
                 {cityBorders}
