@@ -5,7 +5,7 @@ const Divide = () => {
   return (
     <Color>
       {(c,t,s,p) => (
-        <path d="M -43.30125,75 L 43.30125,-75"
+        <path d="M 0,-100 L 0,100"
               fill="none"
               stroke={p("black")}
               strokeWidth="2"

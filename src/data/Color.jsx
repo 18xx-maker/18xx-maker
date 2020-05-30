@@ -19,7 +19,7 @@ const colorAliases = {
   "cyan": "lightBlue",
   "grey": "gray",
   "lightGreen": "brightGreen",
-  "navyBlue": "navy",
+  "navy": "navyBlue",
   "purple": "violet",
   "tan": "lightBrown"
 };

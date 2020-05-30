@@ -8,7 +8,9 @@ import { getFontProps  } from "../../util";
 import defaultTo from "ramda/src/defaultTo";
 
 const Diamond = (props) => {
-  let { text, textColor, color, opacity, borderColor, borderWidth, width, dashed } = props;
+  let { text, textColor,
+        color, opacity,
+        borderColor, borderWidth, width, dashed } = props;
 
   let scale = defaultTo(50, width) / 50;
   let x = 25 * scale;
