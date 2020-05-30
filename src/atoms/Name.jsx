@@ -1,22 +1,35 @@
 import React from "react";
 import Color from "../data/Color";
+import * as uuid from "uuid";
 
 import { getFontProps  } from "../util";
 
 import defaultTo from "ramda/src/defaultTo";
 
 const Name = (props) => {
-  let { name, strokeColor, strokeWidth, color, bgColor, path, doRotation, rotation, reverse, offset, y, textLength } = props;
+  let { name, strokeColor, strokeWidth, color, bgColor, path, doRotation, rotation, reverse, offset, x, y, textLength } = props;
 
   let font = getFontProps(props, 11, "bold", "sans-serif");
 
-  let nameNode = path ? (
-    <textPath startOffset={`${defaultTo(50, offset)}%`}
-              href={`#${path}`}
-              xlinkHref={`#${path}`}>
-      {name}
-    </textPath>
-  ) : name;
+  let nameNode;
+
+  if (path) {
+    let id = uuid.v4();
+    nameNode = (
+      <>
+        <defs>
+          <path id={id} d={path} />
+        </defs>
+        <textPath startOffset={`${defaultTo(50, offset)}%`}
+                  href={`#${id}`}
+                  xlinkHref={`#${id}`}>
+          {name}
+        </textPath>
+      </>
+    );
+  } else {
+    nameNode = name;
+  }
 
   y = defaultTo(0, y);
 
@@ -27,7 +40,7 @@ const Name = (props) => {
   return (
     <Color>
       {(c,t,s,p) => (
-        <text dy={y}
+        <text dy={y} dx={x}
               transform={`rotate(${((doRotation && rotation) || 0) + 360})`}
               fill={color ? p(color) : (bgColor ? t(c(bgColor)) : p("black"))}
               strokeWidth={defaultTo(0, strokeWidth)}
