@@ -12,6 +12,17 @@ import GameMapCompanyToken from "../tokens/GameMapCompanyToken";
 import ColorContext from "../context/ColorContext";
 import RotateContext from "../context/RotateContext";
 
+const cityPaths = {
+  cityPath: "M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30",
+  cityPathReverse: "M 0 -30 A 30 30 0 0 0 0 30 A 30 30 0 0 0 0 -30",
+  city2Path: "M 0 30 L -25 30 A 30 30 0 0 1 -25 -30 L 25 -30 A 30 30 0 0 1 25 30 L 0 30",
+  city2PathReverse: "M 0 -30 L -25 -30 A 30 30 0 0 0 -25 30 L 25 30 A 30 30 0 0 0 25 -30 L 0 -30",
+  city3Path: "M 0 44 L -28 44 A 30 30 0 0 1 -50 -1 L -25 -44 A 30 30 0 0 1 25 -44 L 50 -1 A 30 30 0 0 1 28 44 L 0 44",
+  city3PathReverse: "M 0 44 L 28 44 A 30 30 0 0 0 50 -1 L 25 -44 A 30 30 0 0 0 -25 -44 L -50 -1 A 30 30 0 0 0 -28 44 L 0 44",
+  city4Path: "M 0 53 L -25 53 A 30 30 0 0 1 -53 25 L -53 -25 A 30 30 0 0 1 -25 -53 L 25 -53 A 30 30 0 0 1 53 -25 L 53 25 A 30 30 0 0 1 25 53 L 0 53",
+  city4PathReverse: "M 0 53 L 25 53 A 30 30 0 0 0 53 25 L 53 -25 A 30 30 0 0 0 25 -53 L -25 -53 A 30 30 0 0 0 -53 -25 L -53 25 A 30 30 0 0 0 -25 53 L 0 53"
+}
+
 const City = ({ straightCityNames, size, companies, icons, border, name, extend, rotation, pass, bgColor, width, strokeWidth }) => {
   if (size === undefined) {
     size = 1;
@@ -64,13 +75,17 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
   let nameNode = null;
 
   if (name) {
-    let path = straightCityNames ? null : `city${size > 1 ? size : ""}Path`;
-    if(path && name.reverse) {
-      path = path + "Reverse";
-    }
+    let path = null;
     let y = name.y || (name.reverse ? 7 : 0);
-    if (straightCityNames) {
+    if (straightCityNames || name.straight) {
+      path = null;
       y -= name.reverse ? -24 : 32;
+    } else {
+      let pathName = `city${size > 1 ? size : ""}Path`;
+      if (name.reverse) {
+        pathName = pathName + "Reverse";
+      }
+      path = cityPaths[pathName];
     }
     nameNode = <Name bgColor={bgColor} {...name} y={y} path={path} doRotation={true} />;
   }
