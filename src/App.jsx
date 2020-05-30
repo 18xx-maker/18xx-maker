@@ -1,27 +1,20 @@
 import React from "react";
 
-import {Link} from "react-router-dom";
-
 import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from '@material-ui/core/Typography';
 
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 
-import CategoryIcon from '@material-ui/icons/Category';
-import HelpIcon from '@material-ui/icons/Help';
-import HomeIcon from '@material-ui/icons/Home';
-import OpenInBrowserIcon from '@material-ui/icons/OpenInBrowser';
-
 import SetSvgColors from "./data/SetSvgColors";
 import ScrollToTop from "./ScrollToTop";
 
+import AppNav from "./AppNav";
 import Nav from "./nav/Nav";
 
 import CheatSheet from "./CheatSheet.jsx";
-import Config from "./Config.jsx";
+import ConfigDrawer from "./config/ConfigDrawer.jsx";
 import Docs from "./docs";
 import Logos from "./Logos";
 
@@ -52,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2)
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1
   },
   configButton: {
     position: "fixed",
@@ -61,11 +53,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const theme = createMuiTheme({
-  typography: {
-    fontFamily: 'display, sans-serif'
-  }
-});
+const theme = createMuiTheme({});
 
 const App = () => {
   const classes = useStyles();
@@ -79,18 +67,7 @@ const App = () => {
                 <Typography className={classes.title} variant="h4" noWrap>
                   18xx Maker
                 </Typography>
-                <Button color="inherit" startIcon={<HomeIcon/>} component={Link} to="/home">
-                  <Typography noWrap>About</Typography>
-                </Button>
-                <Button color="inherit" startIcon={<OpenInBrowserIcon/>} component={Link} to="/load">
-                  <Typography noWrap>Load Game</Typography>
-                </Button>
-                <Button color="inherit" startIcon={<CategoryIcon/>} component={Link} to="/elements">
-                  <Typography noWrap>Game Elements</Typography>
-                </Button>
-                <Button color="inherit" startIcon={<HelpIcon/>} component={Link} to="/docs">
-                  <Typography noWrap>Documentation</Typography>
-                </Button>
+                <AppNav/>
               </Toolbar>
             </AppBar>
             <Container maxWidth="lg" className={classes.container}>
@@ -184,7 +161,7 @@ const App = () => {
                 <Footer />
               </Route>
             </Container>
-            <Config />
+            <ConfigDrawer/>
           </div>
           <SetSvgColors />
         </ScrollToTop>
