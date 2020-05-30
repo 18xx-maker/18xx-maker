@@ -80,7 +80,7 @@
   },
   "devDependencies": {
     "@18xx-maker/games": "^3.0.0",
-    "@18xx-maker/schemas": "^3.0.1",
+    "@18xx-maker/schemas": "^4.0.1",
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "@babel/register": "^7.0.0",

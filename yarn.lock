@@ -14,10 +14,10 @@
   dependencies:
     ramda "^0.27.0"
 
-"@18xx-maker/schemas@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@18xx-maker/schemas/-/schemas-3.0.1.tgz#fb16612c88a5123f11659bfc8c38c522abaf3033"
-  integrity sha512-RHScl/eXjZJrTtJ+XK2qAaGeoTdpnghRxdq/3hn2lTcbPbI5biwhgZNjX5ePKRwU9IB8kcheB3i45VYCy8xNpA==
+"@18xx-maker/schemas@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@18xx-maker/schemas/-/schemas-4.0.1.tgz#90dc3f356a90504aa46517f728706044e3bcb2d2"
+  integrity sha512-27maIFR2CLnxdAsMmxUQWfOvJEGBSiwLrR1p5Khg6oDYz3q/4n1xcg2ykv7Lvbz7K+tHM/GdiLzWv4Kb8/VkDw==
   dependencies:
     ajv "^6.12.2"
     chalk "^4.0.0"
