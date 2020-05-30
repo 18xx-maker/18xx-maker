@@ -1,4 +1,4 @@
-import { getSchemaPath } from "./Config.jsx";
+import { getSchemaPath } from "./Input.jsx";
 
 describe("getSchemaPath", () => {
   describe("with an empty argument", () => {
