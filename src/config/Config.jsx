@@ -247,7 +247,9 @@ const Config = ({config, setConfig, resetConfig}) => {
 
       <Box className={classes.configSection}>
         <Typography variant="h5">Currency</Typography>
-        <p>This lets you turn on currency symbols for each item individually. Only works if the game file specificies values as numbers and not strings.</p>
+        <Typography variant="body1">
+          This lets you turn on currency symbols for each item individually. Only works if the game file specificies values as numbers and not strings.
+        </Typography>
         <Input name="currency.bank" label="Bank" description="Bank total on revenue page"/>
         <Input name="currency.border" label="Border" description="Costs written on map borders"/>
         <Input name="currency.capital" label="Capital" description="Player capital list on revenue page"/>
@@ -267,11 +269,17 @@ const Config = ({config, setConfig, resetConfig}) => {
 
       <Box className={classes.configSection}>
         <Typography variant="h5">Data</Typography>
-        <p>You can remove any custom settings and revert back to the defaults with this button.</p>
+        <Typography variant="body1">
+          You can remove any custom settings and revert back to the defaults with this button.
+        </Typography>
         <Button onClick={resetConfig} variant="contained" color="secondary">Reset To Defaults</Button>
-        <p>These values are saved on this browser in local storage.</p>
+        <Typography variant="body1">
+          These values are saved on this browser in local storage.
+        </Typography>
         <Typography variant="h5">JSON</Typography>
-        <p>You can copy and paste this json value into the file in src/config.json if you want to apply these settings to command line or local servers.</p>
+        <Typography variant="body1">
+          You can copy and paste this json value into the file in src/config.json if you want to apply these settings to command line or local servers.
+        </Typography>
         <pre>
           <code>
             {JSON.stringify(diff(defaultConfig, config), null, 2)}
