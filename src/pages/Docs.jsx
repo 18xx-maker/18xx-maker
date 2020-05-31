@@ -46,11 +46,13 @@ const Docs = () => {
           </p>
 
           <p>
-            If you download the source of the site you can run it locally.
-            This allows you to develop on the application itself. This will
+            If you download the source of the site you can run it locally as
+            a <A href="https://nodejs.org/">node.js</A> application. This
+            allows you to develop on the application itself. This will
             let you add more features and options but requires knowledge of
             javascript. If you do add more features please consider submitting
-            them back to the project to help the community!
+            them back to the project to help the community. Please note that
+            this path requires development experience or a desire to learn!
           </p>
         </Typography>
         <Typography variant="h5">Goals</Typography>
