@@ -22,7 +22,7 @@ import LoadIcon from '@material-ui/icons/OpenInBrowser';
 import WarningIcon from '@material-ui/icons/Warning';
 
 import { makeStyles } from '@material-ui/core/styles';
-import GameContext from "./context/GameContext";
+import GameContext from "../context/GameContext";
 
 const useStyles = makeStyles((theme) => ({
   warningIcon: {
