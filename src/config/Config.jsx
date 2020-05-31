@@ -5,6 +5,7 @@ import { diff } from "deep-object-diff";
 
 import ThemePreview from "./ThemePreview";
 import Input from "./Input";
+import File from "../util/File";
 
 import { setConfig } from "../store/actions";
 
@@ -35,7 +36,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Typography from "@material-ui/core/Typography";
 
-import DownloadIcon from '@material-ui/icons/GetApp';
 import { makeStyles } from '@material-ui/core/styles';
 
 export const getPath = split('.');
@@ -285,11 +285,10 @@ const Config = ({config, setConfig, resetConfig}) => {
             {JSON.stringify(diff(defaultConfig, config), null, 2)}
           </code>
         </pre>
-        <Button href={`data:application/json,${encodeURIComponent(JSON.stringify(diff(defaultConfig, config), null, 2))}`}
-                startIcon={<DownloadIcon/>}
-                variant="contained"
-                color="primary"
-                download="config.json">Download config.json</Button>
+        <File data={diff(defaultConfig, config)}
+              filename="config.json">
+          Download config.json
+        </File>
       </Box>
     </>
   );

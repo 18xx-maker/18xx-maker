@@ -16,7 +16,6 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    icon: __dirname + '../assets/18xx-maker.icns',
     webPreferences: {
       nodeIntegration: true
     }
