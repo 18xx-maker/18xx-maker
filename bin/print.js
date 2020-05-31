@@ -129,7 +129,7 @@ const server = app.listen(9000);
         `${game}-${item}.pdf`;
       console.log(`Printing ${filename}`);
       await page.goto(`http://localhost:9000/${game}/${item}`, {waitUntil: 'networkidle2'});
-      await page.pdf({path: `build/render/${filename}`, scale: 1.0, preferCSSPageSize: true});
+      await page.pdf({path: `build/render/${game}/${filename}`, scale: 1.0, preferCSSPageSize: true});
     }
   }
 
