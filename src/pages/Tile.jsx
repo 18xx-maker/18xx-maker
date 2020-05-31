@@ -6,7 +6,7 @@ import Svg from "../Svg";
 import Tile from "../Tile";
 
 let ipcRenderer = undefined;
-if (isElectron()) {
+if (isElectron) {
   ipcRenderer = window.require('electron').ipcRenderer;
 }
 
@@ -15,7 +15,7 @@ const TilePage = () => {
   let id = params.id;
 
   let handler = () => {
-    if (isElectron()) {
+    if (isElectron) {
       ipcRenderer.send('screenshot', `/tile/${id}`, 200, 200);
     }
   }

@@ -28,7 +28,7 @@ import tail from "ramda/src/tail";
 import toPairs from "ramda/src/toPairs";
 import toUpper from "ramda/src/toUpper";
 
-export const isElectron = () => /electron/i.test(navigator.userAgent);
+export const isElectron = /electron/i.test(navigator.userAgent);
 
 export const tileColors = ["yellow", "yellow/green", "green", "green/brown", "brown", "brown/gray", "gray", "offboard", "water", "mountain", "tunnel", "other", "none"];
 const idBaseSort = compose(Number, defaultTo(0), nth(0), split("|"), propOr("", "id"));
