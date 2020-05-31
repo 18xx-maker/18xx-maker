@@ -29,7 +29,6 @@ const Boomtown = ({ straightCityNames, border, city, name, x, color, bgColor, wi
   if (name && !straightCityNames && !name.straight) {
     let pathWidth = cityWidth + 5;
     if (name.reverse) {
-      pathWidth -= 7;
       path = `M 0 -${pathWidth} A ${pathWidth} ${pathWidth} 0 0 0 0 ${pathWidth} A ${pathWidth} ${pathWidth} 0 0 0 0 -${pathWidth}`;
     } else {
       path = `M 0 ${pathWidth} A ${pathWidth} ${pathWidth} 0 0 1 0 -${pathWidth} A ${pathWidth} ${pathWidth} 0 0 1 0 ${pathWidth}`;
