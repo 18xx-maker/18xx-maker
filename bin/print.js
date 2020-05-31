@@ -7,6 +7,7 @@ const puppeteer = require('puppeteer');
 require("@babel/register");
 
 const util = require('../src/render/util');
+const config = require('../src/config.json');
 const setup = util.setup;
 
 setup();
@@ -123,9 +124,12 @@ const server = app.listen(9000);
         continue;
       }
 
-      console.log("Printing " + game + "/" + item);
+      let filename = item === "tiles" ?
+        `${game}-${item}-${config.tiles.layout}.pdf` :
+        `${game}-${item}.pdf`;
+      console.log(`Printing ${filename}`);
       await page.goto(`http://localhost:9000/${game}/${item}`, {waitUntil: 'networkidle2'});
-      await page.pdf({path: `build/render/${game}/${item}.pdf`, scale: 1.0, preferCSSPageSize: true});
+      await page.pdf({path: `build/render/${filename}`, scale: 1.0, preferCSSPageSize: true});
     }
   }
 
