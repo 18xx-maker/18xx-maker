@@ -4,8 +4,9 @@ import Color from "../data/Color";
 
 import Name from "./Name";
 
-const Boomtown = ({ straightCityNames, border, city, name, x, color, bgColor, width, strokeWidth, strokeDashArray, offset }) => {
+const Boomtown = ({ straightCityNames, border, city, name, x, color, bgColor, width, strokeWidth, strokeDashArray, dashed, offset }) => {
   let cityWidth = width || 25;
+  let scale = cityWidth / 25;
   let centerTownWidth = cityWidth * 5 / 12;
   let path = null;
   let nameNode = null;
@@ -58,7 +59,9 @@ const Boomtown = ({ straightCityNames, border, city, name, x, color, bgColor, wi
   }
 
   if (city) {
-    strokeDashArray = strokeDashArray || "4 4";
+    // dashed true is default, so false is what to watch for
+    strokeDashArray = strokeDashArray ||
+      dashed === false ? "1 0" : `${scale * 4}`;
     return (
       <Color context="companies">
         {c => (
@@ -98,7 +101,9 @@ const Boomtown = ({ straightCityNames, border, city, name, x, color, bgColor, wi
       </Color>
     );
   } else {
-    strokeDashArray = strokeDashArray || "6 6";
+    // dashed true is default, so false is what to watch for
+    strokeDashArray = strokeDashArray ||
+      dashed === false ? "1 0" : `${scale * 6}`;
     return (
       <Color context="companies">
         {c => (
