@@ -17,7 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   configButton: {
-    zIndex: 1,
+    zIndex: theme.zIndex.modal + 1,
     position: 'fixed',
     bottom: theme.spacing(4),
     right: theme.spacing(4)
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     justiyContent: 'flex-start'
   },
   configDrawer: {
+    zIndex: theme.zIndex.modal + 2,
     [theme.breakpoints.up('sm')]: {
       width: '50vw'
     },

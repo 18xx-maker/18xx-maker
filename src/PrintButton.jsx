@@ -12,7 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   printButton: {
-    zIndex: 1,
+    zIndex: theme.zIndex.modal + 1,
     position: 'fixed',
     bottom: theme.spacing(14),
     right: theme.spacing(4)
