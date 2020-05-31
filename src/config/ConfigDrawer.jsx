@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     justiyContent: 'flex-start'
   },
   configDrawer: {
+    transitionDuration: 1000,
     zIndex: theme.zIndex.modal + 2,
     [theme.breakpoints.up('sm')]: {
       width: '50vw'
@@ -77,6 +78,7 @@ const ConfigDrawer = () => {
         </Tooltip>
       </Slide>
       <Drawer variant="persistent" anchor="right" open={visible}
+              transitionDuration={300}
               PaperProps={{className: classes.configDrawer}}>
         <Toolbar className={classes.configToolbar}>
           <Button startIcon={<ChevronRightIcon/>} onClick={toggleConfig}>Close Config</Button>

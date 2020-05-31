@@ -18,9 +18,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   backgroundBox: {
-    overflow: 'auto',
-    width: '100vw',
-    height: '100vh'
+    overflow: 'auto'
   }
 }));
 

@@ -13,6 +13,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import CloseIcon from "@material-ui/icons/Close";
 import GameIcon from "@material-ui/icons/Train";
 
+import File from "../util/File";
+
 const GameNav = () => {
   const { game, closeGame } = useContext(GameContext);
 
@@ -34,67 +36,60 @@ const GameNav = () => {
           <ListItemIcon>
             <CloseIcon/>
           </ListItemIcon>
-          <ListItemText>Close</ListItemText>
+          <ListItemText>Unload Game</ListItemText>
         </ListItem>
+        <File data={game}
+              filename={`${game.id}.json`}
+              list/>
       </List>
       <Divider/>
       <List>
         <ListItem button
-                  inset
                   component={RouterLink}
                   to={`/games/${game.slug}/background`}>
           <ListItemText>Background</ListItemText>
         </ListItem>
         <ListItem button
-                  inset
                   component={RouterLink}
                   to={`/games/${game.slug}/cards`}>
           <ListItemText>Cards</ListItemText>
         </ListItem>
         <ListItem button
-                  inset
                   component={RouterLink}
                   to={`/games/${game.slug}/charters`}>
           <ListItemText>Charters</ListItemText>
         </ListItem>
         <ListItem button
-                  inset
                   component={RouterLink}
                   to={`/games/${game.slug}/map`}>
           <ListItemText>Map</ListItemText>
         </ListItem>
         <ListItem button
-                  inset
                   component={RouterLink}
                   to={`/games/${game.slug}/market`}>
           <ListItemText primary="Market"/>
         </ListItem>
         <ListItem button
-                  inset
                   component={RouterLink}
                   to={`/games/${game.slug}/par`}>
           <ListItemText primary="Par"/>
         </ListItem>
         <ListItem button
-                  inset
                   component={RouterLink}
                   to={`/games/${game.slug}/revenue`}>
           <ListItemText primary="Revenue"/>
         </ListItem>
         <ListItem button
-                  inset
                   component={RouterLink}
                   to={`/games/${game.slug}/manifest`}>
           <ListItemText primary="Tile Manifest"/>
         </ListItem>
         <ListItem button
-                  inset
                   component={RouterLink}
                   to={`/games/${game.slug}/tiles`}>
           <ListItemText primary="Tiles"/>
         </ListItem>
         <ListItem button
-                  inset
                   component={RouterLink}
                   to={`/games/${game.slug}/tokens`}>
           <ListItemText primary="Tokens"/>

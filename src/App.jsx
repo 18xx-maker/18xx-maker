@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 
+import { Route, Switch } from "react-router";
+import { BrowserRouter, HashRouter } from "react-router-dom";
+
 import AppBar from "@material-ui/core/AppBar";
 import Alert from "@material-ui/lab/Alert";
-import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from '@material-ui/core/Typography';
-
-import MenuIcon from '@material-ui/icons/Menu';
 
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 
@@ -17,13 +16,13 @@ import ScrollToTop from "./ScrollToTop";
 
 import AppNav from "./nav/AppNav";
 import SideNav from "./nav/SideNav";
+import MobileMenuButton from "./nav/MobileMenuButton";
 
 import PrintButton from "./PrintButton.jsx";
 import ConfigDrawer from "./config/ConfigDrawer.jsx";
+import Viewport from "./Viewport";
 
 import { isElectron } from "./util";
-
-import { BrowserRouter, HashRouter, Route, Switch } from "react-router-dom";
 
 import AlertContext, { useAlert } from "./context/AlertContext";
 import GameContext, { useGame } from "./context/GameContext";
@@ -43,11 +42,8 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1
   },
-  menuButton: {
-    marginRight: theme.spacing(2)
-  },
   appBar: {
-    zIndex: theme.zIndex.modal + 1
+    zIndex: theme.zIndex.drawer + 1
   },
   configButton: {
     position: "fixed",
@@ -63,13 +59,14 @@ const App = () => {
 
   // Success, Warning and Error Alerts
   const alertContext = useAlert();
-  const gameContext = useGame();
   const { alert, closeAlert } = alertContext;
-  const [sideNavOpen, setSideNaveOpen] = useState(false);
 
-  const toggleSideNav = () => {
-    setSideNaveOpen(!sideNavOpen);
-  };
+  // What game are we showing
+  const gameContext = useGame();
+
+  // Side panel state
+  const [sideNavOpen, setSideNavOpen] = useState(false);
+  const toggleSideNav = () => setSideNavOpen(!sideNavOpen);
 
   return (
     <ThemeProvider theme={theme}>
@@ -83,14 +80,7 @@ const App = () => {
                   <Route>
                     <AppBar position="sticky" className={classes.appBar}>
                       <Toolbar>
-                        <Hidden mdUp>
-                          <IconButton className={classes.menuButton}
-                                      onClick={toggleSideNav}
-                                      color="inherit"
-                                      edge="start">
-                            <MenuIcon/>
-                          </IconButton>
-                        </Hidden>
+                        <MobileMenuButton onClick={toggleSideNav}/>
                         <Typography className={classes.title} variant="h4" noWrap>
                           18xx Maker
                         </Typography>
@@ -102,19 +92,21 @@ const App = () => {
                     <ConfigDrawer/>
                   </Route>
                 </Switch>
-                <Switch>
-                  <Route path="/" exact>
-                    <Home />
-                  </Route>
-                  <Route path="/elements">
-                  </Route>
-                  <Route path="/docs" exact>
-                    <Docs />
-                  </Route>
-                  <Route path="/games">
-                    <Games />
-                  </Route>
-                </Switch>
+                <Viewport sideNavOpen={sideNavOpen}>
+                  <Switch>
+                    <Route path="/" exact>
+                      <Home />
+                    </Route>
+                    <Route path="/elements">
+                    </Route>
+                    <Route path="/docs">
+                      <Docs />
+                    </Route>
+                    <Route path="/games">
+                      <Games />
+                    </Route>
+                  </Switch>
+                </Viewport>
                 <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
                           open={alert.open}
                           onClose={closeAlert}
