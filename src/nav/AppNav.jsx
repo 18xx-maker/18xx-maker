@@ -6,10 +6,10 @@ import {Link} from "react-router-dom";
 
 import Button from "@material-ui/core/Button";
 import Hidden from "@material-ui/core/Hidden";
-import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
@@ -100,22 +100,21 @@ const NavMenu = () => {
   );
 };
 
-const MenuLink = ({icon, text, to, exact, onClick}) => {
+const MenuLink = React.forwardRef(({icon, text, to, exact, onClick}, ref) => {
   const location = useLocation();
   const active = Boolean(matchPath(location.pathname, { path: to, exact: exact }));
 
   return (
-    <ListItem button
-              onClick={onClick}
+    <MenuItem onClick={onClick}
               component={Link}
+              ref={ref}
               to={to}
-              disabled={active}
               selected={active}>
       <ListItemIcon>{icon}</ListItemIcon>
       <ListItemText primary={text}/>
-    </ListItem>
+    </MenuItem>
   );
-};
+});
 
 const MobileMenu = ({anchor, onClose}) => {
   const open = Boolean(anchor);
