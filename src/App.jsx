@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 import AppBar from "@material-ui/core/AppBar";
 import Alert from "@material-ui/lab/Alert";
+import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -14,7 +15,8 @@ import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/sty
 import SetSvgColors from "./data/SetSvgColors";
 import ScrollToTop from "./ScrollToTop";
 
-import AppNav from "./AppNav";
+import AppNav from "./nav/AppNav";
+import SideNav from "./nav/SideNav";
 
 import PrintButton from "./PrintButton.jsx";
 import ConfigDrawer from "./config/ConfigDrawer.jsx";
@@ -45,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2)
   },
   appBar: {
+    zIndex: theme.zIndex.modal + 1
   },
   configButton: {
     position: "fixed",
@@ -62,6 +65,11 @@ const App = () => {
   const alertContext = useAlert();
   const gameContext = useGame();
   const { alert, closeAlert } = alertContext;
+  const [sideNavOpen, setSideNaveOpen] = useState(false);
+
+  const toggleSideNav = () => {
+    setSideNaveOpen(!sideNavOpen);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -75,17 +83,21 @@ const App = () => {
                   <Route>
                     <AppBar position="sticky" className={classes.appBar}>
                       <Toolbar>
-                        <IconButton className={classes.menuButton}
-                                    color="inherit"
-                                    edge="start">
-                          <MenuIcon/>
-                        </IconButton>
+                        <Hidden mdUp>
+                          <IconButton className={classes.menuButton}
+                                      onClick={toggleSideNav}
+                                      color="inherit"
+                                      edge="start">
+                            <MenuIcon/>
+                          </IconButton>
+                        </Hidden>
                         <Typography className={classes.title} variant="h4" noWrap>
                           18xx Maker
                         </Typography>
                         <AppNav/>
                       </Toolbar>
                     </AppBar>
+                    <SideNav open={sideNavOpen} toggle={toggleSideNav}/>
                     <PrintButton/>
                     <ConfigDrawer/>
                   </Route>

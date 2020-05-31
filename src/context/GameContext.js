@@ -24,6 +24,10 @@ export const useGame = () => {
       }
 
       setGame(game);
+    },
+    closeGame: () => {
+      localStorage.removeItem('game');
+      setGame(null);
     }
   };
 }
