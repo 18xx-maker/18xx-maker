@@ -2,7 +2,6 @@ import React from "react";
 
 import SetSvgColors from "./data/SetSvgColors";
 import ScrollToTop from "./ScrollToTop";
-import Color from "./data/Color";
 
 import Nav from "./nav/Nav";
 

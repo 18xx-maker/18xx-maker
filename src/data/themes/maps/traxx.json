@@ -1,0 +1,29 @@
+{
+  "name": "traxx",
+  "colors": {
+    "plain": "#cfe7c5",
+    "yellow": "#feff00",
+    "green": "#00c700",
+    "brown": "#dd5e04",
+    "gray": "#c8c6c6",
+
+    "offboard": "#ed0000",
+    "mountain": "#dd5e04",
+    "water": "#006fbf",
+    "land": "#8da98c",
+    "river": "#9ccac3",
+
+    "white": "#fff",
+    "black": "#000",
+    "red": "#f00",
+
+    "orange": "#f47d20",
+
+    "track": "#000",
+    "border": "#fff",
+    "town": "#000",
+    "centerTown": "#000",
+    "city": "#fff",
+    "halt": "#666"
+  }
+}
