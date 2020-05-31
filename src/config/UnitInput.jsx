@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import Box from "@material-ui/core/Box";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import MUIInput from "@material-ui/core/FilledInput";
@@ -52,22 +53,25 @@ const UnitInput = ({name, value, label, onChange}) => {
   };
 
   return (
-    <FormControl className={classes.configItem} variant="filled">
-      <InputLabel id={`${name}-label`}>{label}</InputLabel>
-      <MUIInput id={name} name={name}
+    <Box className={classes.configItem}>
+      <FormControl variant="filled">
+        <InputLabel id={`${name}-label`}>{label}</InputLabel>
+        <MUIInput id={name} name={name}
+                  className={classes.configInput}
+                  variant="filled"
+                  inputProps={{type: 'input'}}
+                  value={internalValue}
+                  onChange={handler}/>
+      </FormControl>
+      <FormControl variant="filled">
+        <Select id={`${name}-units`}
                 labelId={`${name}-label`}
-                className={classes.configInput}
-                variant="filled"
-                inputProps={{type: 'input'}}
-                value={internalValue}
-                onChange={handler}/>
-      <Select id={`${name}-units`}
-              labelId={`${name}-label`}
-              className={classes.configUnits}
-              value={units} onChange={unitsHandler}>
-        {map(key => <MenuItem key={key} value={key}>{key}</MenuItem>, keys(allUnits))}
-      </Select>
-    </FormControl>
+                className={classes.configUnits}
+                value={units} onChange={unitsHandler}>
+          {map(key => <MenuItem key={key} value={key}>{key}</MenuItem>, keys(allUnits))}
+        </Select>
+      </FormControl>
+    </Box>
   );
 };
 

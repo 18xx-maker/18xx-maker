@@ -18,7 +18,7 @@ import Paginate from "../util/Paginate";
 import "./MapPaginated.css";
 
 let ipcRenderer = undefined;
-if (isElectron()) {
+if (isElectron) {
   ipcRenderer = window.require('electron').ipcRenderer;
 }
 
@@ -51,7 +51,7 @@ const MapPaginated = ({ coords, paper, hexWidth }) => {
   }
 
   let handler = () => {
-    if (isElectron()) {
+    if (isElectron) {
       ipcRenderer.send('pdf', `/${params.game}/map-paginated`);
     }
   }
@@ -67,7 +67,7 @@ const MapPaginated = ({ coords, paper, hexWidth }) => {
       <Paginate component="Map"
                 notes={<>
                          {variationSelect}
-                         {isElectron() && <button onClick={handler}>Print</button>}
+                         {isElectron && <button onClick={handler}>Print</button>}
                        </>}
                 data={data}>
         <Map name={params.game} game={game} variation={variation} />

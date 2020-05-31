@@ -12,7 +12,7 @@ import VariationSelect from "../nav/VariationSelect";
 import { getMapData } from "./util";
 
 let ipcRenderer = undefined;
-if (isElectron()) {
+if (isElectron) {
   ipcRenderer = window.require('electron').ipcRenderer;
 }
 
@@ -44,7 +44,7 @@ const MapSingle = ({ coords, hexWidth }) => {
   }
 
   let handler = () => {
-    if (isElectron()) {
+    if (isElectron) {
       ipcRenderer.send('pdf', `/${params.game}/map`);
     }
   }
@@ -61,7 +61,7 @@ const MapSingle = ({ coords, hexWidth }) => {
           {variationSelect}
           <h3>Width: {data.humanWidth}</h3>
           <h3>Height: {data.humanHeight}</h3>
-          {isElectron() && <button onClick={handler}>Print</button>}
+          {isElectron && <button onClick={handler}>Print</button>}
         </div>
       </div>
       <div className="map">

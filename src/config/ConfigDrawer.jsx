@@ -17,6 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   configButton: {
+    zIndex: 1,
     position: 'fixed',
     bottom: theme.spacing(4),
     right: theme.spacing(4)
@@ -68,7 +69,7 @@ const ConfigDrawer = () => {
   return (
     <>
       <Slide direction="left" in={true}>
-        <Tooltip title="Config" aria-label="config">
+        <Tooltip title="Config" aria-label="config" placement="left" arrow>
           <Fab position="sticky" className={classes.configButton} color="secondary" onClick={toggleConfig}>
             <ConfigIcon/>
           </Fab>
