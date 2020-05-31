@@ -153,7 +153,8 @@ const TokenLayout = ({ companies, data, game }) => {
   }, companies);
 
   let gameTokens = chain((token) => {
-    let count = token.print || token.quantity || 1;
+    let count = token.print != null ? token.print :
+      (token.quantity != null ? token.quantity : 1);
     if (is(Object, token)) {
       return Array(count).fill(
                <Token bleed={true}
