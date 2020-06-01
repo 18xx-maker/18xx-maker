@@ -3,7 +3,7 @@ const electron = isElectron ? window.require('electron') : null;
 
 function getDefaults(){
   return {
-    loadPath: 'build/locales/{{lng}}/{{ns}}.json'
+    loadPath: 'locales/{{lng}}/{{ns}}.json'
   }
 }
 

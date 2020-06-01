@@ -1,22 +1,55 @@
 import React, { useContext } from "react";
-
+import { useTranslation } from 'react-i18next';
+import { Switch as RouterSwitch, Route } from 'react-router';
 import { Link as RouterLink } from "react-router-dom";
 
 import GameContext from "../context/GameContext";
+import { useBooleanParam, useIntParam } from "../util/query";
+
+import addIndex from "ramda/src/addIndex";
+import isNil from "ramda/src/isNil";
+import map from "ramda/src/map";
 
 import Divider from "@material-ui/core/Divider";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import InputLabel from "@material-ui/core/InputLabel";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import Switch from "@material-ui/core/Switch";
 
 import CloseIcon from "@material-ui/icons/Close";
 import GameIcon from "@material-ui/icons/Train";
+import WarningIcon from "@material-ui/icons/Warning";
 
 import File from "../util/File";
 
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  input: {
+    width: 200
+  }
+}));
+
 const GameNav = () => {
+  const classes = useStyles();
+  const { t } = useTranslation();
   const { game, closeGame } = useContext(GameContext);
+
+  const [hidePrivates, togglePrivates] = useBooleanParam('hidePrivates');
+  const [hideShares, toggleShares] = useBooleanParam('hideShares');
+  const [hideTrains, toggleTrains] = useBooleanParam('hideTrains');
+  const [hideNumbers, toggleNumbers] = useBooleanParam('hideNumbers');
+
+  const [paginated, togglePagination] = useBooleanParam('paginated');
+  const [variation, setVariation] = useIntParam('variation');
+  const handleVariation = (event) => setVariation(event.target.value);
+  const hasVariation = !isNil(variation);
 
   if (!game) {
     return null;
@@ -25,22 +58,82 @@ const GameNav = () => {
   return (
     <>
       <List>
-        <ListItem>
-          <ListItemIcon>
-            <GameIcon/>
-          </ListItemIcon>
+        <ListItem button
+                  component={RouterLink}
+                  to={`/games/${game.slug}/`}>
+          <ListItemIcon><GameIcon/></ListItemIcon>
           <ListItemText primary={game.info.title}
                         secondary={game.info.designer}/>
         </ListItem>
         <ListItem button onClick={closeGame}>
-          <ListItemIcon>
-            <CloseIcon/>
-          </ListItemIcon>
+          <ListItemIcon><CloseIcon/></ListItemIcon>
           <ListItemText>Unload Game</ListItemText>
         </ListItem>
         <File data={game}
               filename={`${game.id}.json`}
               list/>
+        <ListItem>
+          <ListItemIcon><WarningIcon/></ListItemIcon>
+          <ListItemText primary={t('wip.wip')} secondary={t('wip.description')}/>
+        </ListItem>
+      </List>
+      <Divider/>
+      <List>
+        <RouterSwitch>
+          <Route path="/games/:slug/map">
+            <ListItem>
+              <FormControlLabel control={ <Switch checked={paginated}
+                                          onChange={togglePagination}
+                                          color="primary"
+                                          name="pagination"/> }
+                                label={t('game.map.paginated')}/>
+            </ListItem>
+            {hasVariation && (
+              <ListItem>
+                <FormControl className={classes.input} variant="filled">
+                  <InputLabel id="variation-label">{t('game.map.variation')}</InputLabel>
+                  <Select labelId="variation-label"
+                          id="variation"
+                          name="variation"
+                          value={variation}
+                          onChange={handleVariation}>
+                    {addIndex(map)((m,i) => <MenuItem key={`variation-${i}`} value={i}>{m.name}</MenuItem>, game.map)}
+                  </Select>
+                </FormControl>
+              </ListItem>
+            )}
+          </Route>
+          <Route path="/games/:slug/cards">
+            <ListItem>
+              <FormControlLabel control={ <Switch checked={hidePrivates}
+                                          onChange={togglePrivates}
+                                          color="primary"
+                                          name="hidePrivates"/> }
+                                label={t('game.cards.hidePrivates')}/>
+            </ListItem>
+            <ListItem>
+              <FormControlLabel control={ <Switch checked={hideShares}
+                                          onChange={toggleShares}
+                                          color="primary"
+                                          name="hideShares"/> }
+                                label={t('game.cards.hideShares')}/>
+            </ListItem>
+            <ListItem>
+              <FormControlLabel control={ <Switch checked={hideTrains}
+                                          onChange={toggleTrains}
+                                          color="primary"
+                                          name="hideTrains"/> }
+                                label={t('game.cards.hideTrains')}/>
+            </ListItem>
+            <ListItem>
+              <FormControlLabel control={ <Switch checked={hideNumbers}
+                                          onChange={toggleNumbers}
+                                          color="primary"
+                                          name="hideNumbers"/> }
+                                label={t('game.cards.hideNumbers')}/>
+            </ListItem>
+          </Route>
+        </RouterSwitch>
       </List>
       <Divider/>
       <List>

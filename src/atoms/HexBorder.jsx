@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import GameContext from "../context/GameContext";
 import Color from "../data/Color";
-
-import HexContext from "../context/HexContext";
 
 import chain from "ramda/src/chain";
 import includes from "ramda/src/includes";
@@ -20,34 +19,32 @@ const drawLine = (removeBorders, border, side) => {
 };
 
 const HexBorder = ({ removeBorders, border, map }) => {
+  const { rotation } = useContext(GameContext);
+
   return (
-    <HexContext.Consumer>
-      {hx => (
-        <Color context={map ? "map" : "tile"}>
-          {(c,t) => {
-            let lines = chain(side => {
-              if (drawLine(removeBorders, border, side)) {
-                let first = LINES[(side + 3) % 6];
-                let second = LINES[(side + 4) % 6];
-                return [(<path key={`side-${side}`}
+    <Color context={map ? "map" : "tile"}>
+      {(c,t) => {
+        let lines = chain(side => {
+          if (drawLine(removeBorders, border, side)) {
+            let first = LINES[(side + 3) % 6];
+            let second = LINES[(side + 4) % 6];
+            return [(<path key={`side-${side}`}
                           d={`M ${first} L ${second}`}
                           strokeLinecap="round"
                           strokeWidth="2"
                           stroke={c("black")} />)]
-              } else {
-                return [];
-              }
-            }, [1,2,3,4,5,6]);
+          } else {
+            return [];
+          }
+        }, [1,2,3,4,5,6]);
 
-            return (
-              <g transform={`rotate(${hx.rotation})`}>
-                {lines}
-              </g>
-            )
-          }}
-        </Color>
-      )}
-    </HexContext.Consumer>
+        return (
+          <g transform={`rotate(${rotation})`}>
+            {lines}
+          </g>
+        )
+      }}
+    </Color>
   );
 };
 

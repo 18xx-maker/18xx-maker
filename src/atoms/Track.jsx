@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import Color from "../data/Color";
-
-import HexContext from "../context/HexContext";
+import GameContext from "../context/GameContext";
 
 import chain from "ramda/src/chain";
 import compose from "ramda/src/compose";
@@ -54,6 +53,8 @@ export const sidesFromTile = compose(uniq,
                                      defaultTo([]));
 
 const Track = ({ type, gauge, border, width, offset, path, color, borderColor, gaugeColor }) => {
+  const { rotation } = useContext(GameContext);
+
   let trackWidth = width ? width : (border ? 16 : 12);
   color = color || "track";
   borderColor = borderColor || "border";
@@ -163,9 +164,7 @@ const Track = ({ type, gauge, border, width, offset, path, color, borderColor, g
   return (
     <Color>
       {c => (
-        <HexContext.Consumer>
-          {hx => (
-            <g transform={`rotate(${hx.rotation})`}>
+            <g transform={`rotate(${rotation})`}>
               <path
                 d={path}
                 fill={type === "offboard" ? (c(border ? borderColor : color)) : "none"}
@@ -177,8 +176,6 @@ const Track = ({ type, gauge, border, width, offset, path, color, borderColor, g
               {narrow}
               {dual}
             </g>
-          )}
-        </HexContext.Consumer>
       )}
     </Color>
   );

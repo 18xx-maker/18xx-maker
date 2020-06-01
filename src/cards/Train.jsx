@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import ConfigContext from "../context/ConfigContext";
 
 import Color from "../data/Color";
 import Currency from "../util/Currency";
-import Config from "../data/Config";
 
 import find from "ramda/src/find";
 import is from "ramda/src/is";
@@ -24,6 +24,8 @@ const ordinal = (num) => {
 };
 
 const Train = ({ train, trains, blackBand }) => {
+  const { config } = useContext(ConfigContext);
+
   let {
     name,
     price,
@@ -158,18 +160,18 @@ const Train = ({ train, trains, blackBand }) => {
 
   if (!image) {
     switch (color) {
-    case "green":
-      image = "3T";
-      break;
-    case "brown":
-      image = "4T";
-      break;
-    case "gray":
-      image = "6T";
-      break;
-    default:
-      image = "2T";
-      break;
+      case "green":
+        image = "3T";
+        break;
+      case "brown":
+        image = "4T";
+        break;
+      case "gray":
+        image = "6T";
+        break;
+      default:
+        image = "2T";
+        break;
     }
   }
 
@@ -177,42 +179,38 @@ const Train = ({ train, trains, blackBand }) => {
     <div className="cutlines">
       <Color>
         {(c,t) => (
-          <Config>
-            {config => (
-              <div className={`card train card--${config.cards.layout} train--${config.trains.style}`}>
-                <div className="card__bleed"
-                     style={{
-                       backgroundColor: c(backgroundColor || "white")
-                     }}>
-                  {config.trains.style === "color" && (<div className="train__hr"
-                                                         style={{
-                                                           backgroundColor: c(color),
-                                                           borderBottom: (color === "white" || config.cards.blackBand) ? "2px solid black" : null
-                                                         }}
-                                                    />)}
-                  <div className="card__body">
-                    {config.trains.images && (
-                      <div className={`train__image train__image--${image}`}><img alt={`${color} ${name} train`} src={require(`../images/trains/${image}.png`)}/></div>
-                    )}
-                    <div className="train__name" style={{ color: config.trains.style === "color" ? t(c(color)) : c(color) }}>{name}</div>
-                    <div className="train__price"
-                         style={{ backgroundColor: config.trains.style === "color" ? c(color) : null,
-                                  color: config.trains.style === "color" ? t(c(color)) : c(color) }}>
-                      <Currency value={price} type="train"/>
-                      {tradeInPrice && (
-                        <div className="train__trade_in_price">
-                          (<Currency value={tradeInPrice} type="train"/>)
-                        </div>
-                      )}
+          <div className={`card train card--${config.cards.layout} train--${config.trains.style}`}>
+            <div className="card__bleed"
+                 style={{
+                   backgroundColor: c(backgroundColor || "white")
+                 }}>
+              {config.trains.style === "color" && (<div className="train__hr"
+                                                        style={{
+                                                          backgroundColor: c(color),
+                                                          borderBottom: (color === "white" || config.cards.blackBand) ? "2px solid black" : null
+                                                        }}
+                                                   />)}
+              <div className="card__body">
+                {config.trains.images && (
+                  <div className={`train__image train__image--${image}`}><img alt={`${color} ${name} train`} src={require(`../images/trains/${image}.png`)}/></div>
+                )}
+                <div className="train__name" style={{ color: config.trains.style === "color" ? t(c(color)) : c(color) }}>{name}</div>
+                <div className="train__price"
+                     style={{ backgroundColor: config.trains.style === "color" ? c(color) : null,
+                              color: config.trains.style === "color" ? t(c(color)) : c(color) }}>
+                  <Currency value={price} type="train"/>
+                  {tradeInPrice && (
+                    <div className="train__trade_in_price">
+                      (<Currency value={tradeInPrice} type="train"/>)
                     </div>
-                    {description && <div className="train__description">{description}</div>}
-                    <div className="train__notes">{notes}</div>
-                    {variant && <div className="train__variant">{variant}</div>}
-                  </div>
+                  )}
                 </div>
+                {description && <div className="train__description">{description}</div>}
+                <div className="train__notes">{notes}</div>
+                {variant && <div className="train__variant">{variant}</div>}
               </div>
-            )}
-          </Config>
+            </div>
+          </div>
         )}
       </Color>
     </div>

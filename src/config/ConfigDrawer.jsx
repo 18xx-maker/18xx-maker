@@ -17,7 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   configButton: {
-    zIndex: theme.zIndex.modal + 1,
+    zIndex: theme.zIndex.drawer + 1,
     position: 'fixed',
     bottom: theme.spacing(4),
     right: theme.spacing(4)
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   configDrawer: {
     transitionDuration: 1000,
-    zIndex: theme.zIndex.modal + 2,
+    zIndex: theme.zIndex.drawer + 2,
     [theme.breakpoints.up('sm')]: {
       width: '50vw'
     },
