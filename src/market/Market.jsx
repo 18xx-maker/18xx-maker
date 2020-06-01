@@ -1,7 +1,6 @@
 import React from "react";
 
 import Color from "../data/Color";
-import Config from "../data/Config";
 
 import Cell from "./Cell";
 import Ledges from "./Ledges";
@@ -18,10 +17,12 @@ import concat from "ramda/src/concat";
 import map from "ramda/src/map";
 import reverse from "ramda/src/reverse";
 
-const Market = ({data, title}) => {
+const Market = ({data, game, config, title}) => {
   let cells = [];
   let market = [];
   let bottomMarket = [];
+
+  const pass = {game, config, data};
 
   switch (data.type) {
   case "1D":
@@ -30,13 +31,13 @@ const Market = ({data, title}) => {
     cells = addIndex(map)((cell, i) => (
       <g key={`cell-bottom-${i}`}
          transform={`translate(${i * data.width} ${(data.stock.title === false ? 0 : 50)})`}>
-        <Cell cell={cell} data={data} />
+        <Cell cell={cell} {...pass} />
       </g>
     ), bottomMarket);
     cells = concat(cells, addIndex(map)((cell, i) => (
       <g key={`cell-top-${i}`}
          transform={`translate(${i * data.width} ${(data.stock.title === false ? 0 : 50)})`}>
-        <Cell cell={cell} data={data} />
+        <Cell cell={cell} {...pass} />
       </g>
     ), market));
     break;
@@ -46,13 +47,13 @@ const Market = ({data, title}) => {
     cells = addIndex(map)((cell, i) => (
       <g key={`cell-bottom-${i}`}
          transform={`translate(${i * 0.5 * data.width} ${i % 2 === 0 ? (data.stock.title === false ? 0 : 50) : (data.stock.title === false ? 0 : 50) + data.height})`}>
-        <Cell cell={cell} data={data} />
+        <Cell cell={cell} {...pass} />
       </g>
     ), bottomMarket);
     cells = concat(cells, addIndex(map)((cell, i) => (
       <g key={`cell-top-${i}`}
          transform={`translate(${i * 0.5 * data.width} ${i % 2 === 0 ? (data.stock.title === false ? 0 : 50) : (data.stock.title === false ? 0 : 50) + data.height})`}>
-        <Cell cell={cell} data={data} />
+        <Cell cell={cell} {...pass} />
       </g>
     ), market));
     break;
@@ -64,7 +65,7 @@ const Market = ({data, title}) => {
       return addIndex(map)((cell, x) => (
         <g key={`cell-bottom-${x}-${y}`}
            transform={`translate(${x * data.width} ${y * data.height + (data.stock.title === false ? 0 : 50)})`}>
-          <Cell cell={cell} data={data} />
+          <Cell cell={cell} {...pass} />
         </g>
       ), row);
     }, bottomMarket);
@@ -72,7 +73,7 @@ const Market = ({data, title}) => {
       return addIndex(map)((cell, x) => (
         <g key={`cell-top-${x}-${y}`}
            transform={`translate(${x * data.width} ${y * data.height + (data.stock.title === false ? 0 : 50)})`}>
-          <Cell cell={cell} data={data} />
+          <Cell cell={cell} {...pass} />
         </g>
       ), row);
     }, market));
@@ -81,7 +82,9 @@ const Market = ({data, title}) => {
 
   let roundTracker = null;
   if (data.display.roundTracker) {
-    roundTracker = <MarketRoundTracker roundTracker={data.display.roundTracker}/>;
+    roundTracker = <MarketRoundTracker roundTracker={data.display.roundTracker}
+                                       game={game}
+                                       config={config} />;
   }
 
   let par = null;
@@ -99,103 +102,85 @@ const Market = ({data, title}) => {
   let legend = null;
 
   if (data.type === "2D") {
+    if (!config.stock.display.legend ||
+        !game.stock.display ||
+        !game.stock.display.legend) {
+      return null;
+    }
+
+    let legend = (game.stock && game.stock.legend) || [];
+    if (game.stock.display.legend.reverse) {
+      legend = reverse(legend);
+    }
+    let x = game.stock.display.legend.x * config.stock.cell.width;
+    let y = game.stock.display.legend.y * config.stock.cell.height;
+
     legend = (
-      <Config>
-        {(config, game) => {
-          if (!config.stock.display.legend ||
-              !game.stock.display ||
-              !game.stock.display.legend) {
-            return null;
-          }
-
-          let legend = (game.stock && game.stock.legend) || [];
-          if (game.stock.display.legend.reverse) {
-            legend = reverse(legend);
-          }
-          let x = game.stock.display.legend.x * config.stock.cell.width;
-          let y = game.stock.display.legend.y * config.stock.cell.height;
-
-          return (
-            <Color context="companies">
-              {c => (
-                <g>
-                  {addIndex(map)((legend, i) => (
-                    <g
-                      key={`pool-note-${i}`}
-                      transform={`translate(${x} ${y + (data.stock.title === false ? 0 : 50) + (i * (game.stock.display.legend.verticalAlign === "bottom" ? -35 : 35))})`}
-                    >
-                      <Legend right={game.stock.display.legend.align === "right"}
-                              bottom={game.stock.display.legend.verticalAlign === "bottom"}
-                              reverse={game.stock.display.legend.reverse}
-                              {...legend}/>
-                    </g>
-                  ), legend)}
-                </g>
-              )}
-            </Color>
-          );
-        }}
-      </Config>
+      <Color context="companies">
+        {c => (
+          <g>
+            {addIndex(map)((legend, i) => (
+              <g
+                key={`pool-note-${i}`}
+                transform={`translate(${x} ${y + (data.stock.title === false ? 0 : 50) + (i * (game.stock.display.legend.verticalAlign === "bottom" ? -35 : 35))})`}
+              >
+                <Legend right={game.stock.display.legend.align === "right"}
+                        bottom={game.stock.display.legend.verticalAlign === "bottom"}
+                        reverse={game.stock.display.legend.reverse}
+                        {...legend}/>
+              </g>
+            ), legend)}
+          </g>
+        )}
+      </Color>
     );
   } else if (data.type === "1D") {
+    if (!config.stock.display.legend) {
+      return null;
+    }
+
+    let legend = (game.stock && game.stock.legend) || [];
+    let left = 0;
+
     legend = (
-      <Config>
-        {(config, game) => {
-          if (!config.stock.display.legend) {
-            return null;
-          }
-
-          let legend = (game.stock && game.stock.legend) || [];
-          let left = 0;
-
+      <g>
+        {addIndex(map)((legend, i) => {
+          let current = left;
+          left += 100 + legend.description.length * 6.5;
           return (
-            <g>
-              {addIndex(map)((legend, i) => {
-                let current = left;
-                left += 100 + legend.description.length * 6.5;
-                return (
-                  <g
-                    key={`pool-note-${i}`}
-                    transform={`translate(${current} ${1 * data.height + (data.stock.title === false ? 25 : 75)})`}
-                  >
-                    <Legend {...legend}/>
-                  </g>
-                );
-              }, legend)}
+            <g
+              key={`pool-note-${i}`}
+              transform={`translate(${current} ${1 * data.height + (data.stock.title === false ? 25 : 75)})`}
+            >
+              <Legend {...legend}/>
             </g>
           );
-        }}
-      </Config>
+        }, legend)}
+      </g>
     );
   } else if (data.type === "1Diag") {
+    if (!config.stock.display.legend) {
+      return null;
+    }
+
+    let legend = (game.stock && game.stock.legend) || [];
+    let left = 0;
+
     legend = (
-      <Config>
-        {(config, game) => {
-          if (!config.stock.display.legend) {
-            return null;
-          }
-
-          let legend = (game.stock && game.stock.legend) || [];
-          let left = 0;
-
+      <g>
+        {addIndex(map)((legend, i) => {
+          let current = left;
+          left += 100 + legend.description.length * 6.5;
           return (
-            <g>
-              {addIndex(map)((legend, i) => {
-                let current = left;
-                left += 100 + legend.description.length * 6.5;
-                return (
-                  <g
-                    key={`pool-note-${i}`}
-                    transform={`translate(${current} ${2 * data.height + (data.stock.title === false ? 25 : 75)})`}
-                  >
-                    <Legend {...legend}/>
-                  </g>
-                );
-              }, legend)}
+            <g
+              key={`pool-note-${i}`}
+              transform={`translate(${current} ${2 * data.height + (data.stock.title === false ? 25 : 75)})`}
+            >
+              <Legend {...legend}/>
             </g>
           );
-        }}
-      </Config>
+        }, legend)}
+      </g>
     );
   }
 

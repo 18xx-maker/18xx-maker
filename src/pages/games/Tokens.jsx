@@ -1,15 +1,15 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Redirect, useParams } from "react-router-dom";
+import React, { useContext } from "react";
+import { Redirect } from "react-router-dom";
 
-import CompanyToken from "./tokens/CompanyToken";
-import Token from "./tokens/Token";
-import games from "./data/games";
-import ColorContext from "./context/ColorContext";
+import ConfigContext from "../../context/ConfigContext";
+import GameContext from "../../context/GameContext";
 
-import Config from "./data/Config";
+import CompanyToken from "../../tokens/CompanyToken";
+import Token from "../../tokens/Token";
+import games from "../../data/games";
+import ColorContext from "../../context/ColorContext";
 
-import { compileCompanies, overrideCompanies, unitsToCss } from "./util";
+import { compileCompanies, overrideCompanies, unitsToCss } from "../../util";
 
 import addIndex from "ramda/src/addIndex";
 import chain from "ramda/src/chain";
@@ -17,8 +17,8 @@ import is from "ramda/src/is";
 import map from "ramda/src/map";
 import splitEvery from "ramda/src/splitEvery";
 
-import PageSetup from "./PageSetup";
-import Svg from "./Svg";
+import PageSetup from "../../PageSetup";
+import Svg from "../../Svg";
 
 // Takes in a game object, a tokens config object and a paper config object.
 //
@@ -205,30 +205,20 @@ const TokenLayout = ({ companies, data, game }) => {
   ), pageNodes);
 };
 
-const Tokens = ({ override, selection }) => {
-  let params = useParams();
-  let game = games[params.game];
+const Tokens = () => {
+  const { config } = useContext(ConfigContext);
+  const { game } = useContext(GameContext);
 
   if (!game.companies) {
-    return <Redirect to={`/${params.game}/background`} />;
+    return <Redirect to={`/games/${game.slug}/`} />;
   }
 
-  let companies = overrideCompanies(compileCompanies(game), override, selection);
+  const { overrideCompanies: override, overrideSelect: selection } = config;
+  const companies = overrideCompanies(compileCompanies(game), override, selection);
 
-  return (
-    <Config>
-      {config => {
-        let data = getTokenData(game, config.tokens, config.paper);
+  const data = getTokenData(game, config.tokens, config.paper);
 
-        return <TokenLayout companies={companies} data={data} game={game} />;
-      }}
-    </Config>
-  );
+  return <TokenLayout companies={companies} data={data} game={game} />;
 };
 
-const mapStateToProps = state => ({
-  override: state.config.overrideCompanies,
-  selection: state.config.overrideSelection
-});
-
-export default connect(mapStateToProps)(Tokens);
+export default Tokens;
