@@ -10,9 +10,12 @@ import addIndex from "ramda/src/addIndex";
 import isNil from "ramda/src/isNil";
 import map from "ramda/src/map";
 
+import Checkbox from "@material-ui/core/Checkbox";
 import Divider from "@material-ui/core/Divider";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormLabel from "@material-ui/core/FormLabel";
 import InputLabel from "@material-ui/core/InputLabel";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -33,6 +36,9 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   input: {
     width: 200
+  },
+  warning: {
+    color: theme.palette.warning.main
   }
 }));
 
@@ -63,79 +69,85 @@ const GameNav = () => {
                   to={`/games/${game.slug}/`}>
           <ListItemIcon><GameIcon/></ListItemIcon>
           <ListItemText primary={game.info.title}
-                        secondary={game.info.designer}/>
+                        secondary={`${t('game.by')} ${game.info.designer}`}/>
         </ListItem>
         <ListItem button onClick={closeGame}>
-          <ListItemIcon><CloseIcon/></ListItemIcon>
-          <ListItemText>Unload Game</ListItemText>
+          <ListItemIcon><CloseIcon color="secondary"/></ListItemIcon>
+          <ListItemText>{t('game.unload')}</ListItemText>
         </ListItem>
         <File data={game}
               filename={`${game.id}.json`}
               list/>
         <ListItem>
-          <ListItemIcon><WarningIcon/></ListItemIcon>
+          <ListItemIcon>
+            <WarningIcon className={classes.warning}/>
+          </ListItemIcon>
           <ListItemText primary={t('wip.wip')} secondary={t('wip.description')}/>
         </ListItem>
       </List>
       <Divider/>
-      <List>
-        <RouterSwitch>
-          <Route path="/games/:slug/map">
-            <ListItem>
-              <FormControlLabel control={ <Switch checked={paginated}
-                                          onChange={togglePagination}
-                                          color="primary"
-                                          name="pagination"/> }
-                                label={t('game.map.paginated')}/>
-            </ListItem>
-            {hasVariation && (
-              <ListItem>
-                <FormControl className={classes.input} variant="filled">
-                  <InputLabel id="variation-label">{t('game.map.variation')}</InputLabel>
-                  <Select labelId="variation-label"
-                          id="variation"
-                          name="variation"
-                          value={variation}
-                          onChange={handleVariation}>
-                    {addIndex(map)((m,i) => <MenuItem key={`variation-${i}`} value={i}>{m.name}</MenuItem>, game.map)}
-                  </Select>
-                </FormControl>
-              </ListItem>
-            )}
-          </Route>
-          <Route path="/games/:slug/cards">
-            <ListItem>
-              <FormControlLabel control={ <Switch checked={hidePrivates}
-                                          onChange={togglePrivates}
-                                          color="primary"
-                                          name="hidePrivates"/> }
-                                label={t('game.cards.hidePrivates')}/>
-            </ListItem>
-            <ListItem>
-              <FormControlLabel control={ <Switch checked={hideShares}
-                                          onChange={toggleShares}
-                                          color="primary"
-                                          name="hideShares"/> }
-                                label={t('game.cards.hideShares')}/>
-            </ListItem>
-            <ListItem>
-              <FormControlLabel control={ <Switch checked={hideTrains}
-                                          onChange={toggleTrains}
-                                          color="primary"
-                                          name="hideTrains"/> }
-                                label={t('game.cards.hideTrains')}/>
-            </ListItem>
-            <ListItem>
-              <FormControlLabel control={ <Switch checked={hideNumbers}
-                                          onChange={toggleNumbers}
-                                          color="primary"
-                                          name="hideNumbers"/> }
-                                label={t('game.cards.hideNumbers')}/>
-            </ListItem>
-          </Route>
-        </RouterSwitch>
-      </List>
-      <Divider/>
+      <RouterSwitch>
+        <Route path="/games/:slug" exact/>
+        <Route>
+          <List>
+            <RouterSwitch>
+              <Route path="/games/:slug/map">
+                <ListItem>
+                  <FormControlLabel control={ <Switch checked={paginated}
+                                 onChange={togglePagination}
+                                 color="primary"
+                                 name="pagination"/> }
+                                    label={t('game.map.paginated')}/>
+                </ListItem>
+                {hasVariation && (
+                  <ListItem>
+                    <FormControl className={classes.input} variant="filled">
+                      <InputLabel id="variation-label">{t('game.map.variation')}</InputLabel>
+                      <Select labelId="variation-label"
+                              id="variation"
+                              name="variation"
+                              value={variation}
+                              onChange={handleVariation}>
+                        {addIndex(map)((m,i) => <MenuItem key={`variation-${i}`} value={i}>{m.name}</MenuItem>, game.map)}
+                      </Select>
+                    </FormControl>
+                  </ListItem>
+                )}
+              </Route>
+              <Route path="/games/:slug/cards">
+                <ListItem>
+                  <FormControl component="fieldset">
+                    <FormLabel component="legend">{t('show')}</FormLabel>
+                    <FormGroup>
+                      <FormControlLabel control={ <Checkbox checked={!hidePrivates}
+                    onChange={togglePrivates}
+                    color="primary"
+                    name="showPrivates"/> }
+                                        label={t('game.cards.privates')}/>
+                      <FormControlLabel control={ <Checkbox checked={!hideShares}
+                                                                          onChange={toggleShares}
+                                                                          color="primary"
+                                                                          name="showShares"/> }
+                                        label={t('game.cards.shares')}/>
+                      <FormControlLabel control={ <Checkbox checked={!hideTrains}
+                      onChange={toggleTrains}
+                      color="primary"
+                      name="showTrains"/> }
+                                        label={t('game.cards.trains')}/>
+                      <FormControlLabel control={ <Checkbox checked={!hideNumbers}
+                                                        onChange={toggleNumbers}
+                                                        color="primary"
+                                                        name="showNumbers"/> }
+                                        label={t('game.cards.numbers')}/>
+                    </FormGroup>
+                  </FormControl>
+                </ListItem>
+              </Route>
+            </RouterSwitch>
+          </List>
+          <Divider/>
+        </Route>
+      </RouterSwitch>
       <List>
         <ListItem button
                   component={RouterLink}

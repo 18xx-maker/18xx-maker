@@ -14,15 +14,19 @@
   "game": {
     "by": "by",
     "cards": {
-      "hidePrivates": "Hide Privates",
-      "hideShares": "Hide Shares",
-      "hideTrains": "Hide Trains",
-      "hideNumbers": "Hide Number Cards"
+      "privates": "Privates",
+      "shares": "Shares",
+      "trains": "Trains",
+      "numbers": "Number Cards"
     },
     "map": {
       "paginated": "Paginate",
       "variation": "Map Variation"
     },
-    "players": "Players"
-  }
+    "players": "Players",
+    "unload": "Unload Game"
+  },
+  "download": "Download",
+  "save": "Save",
+  "show": "Show"
 }
