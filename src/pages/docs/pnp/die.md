@@ -25,16 +25,15 @@ material you are cutting (You can see this in my album linked above).
 ### Tiles
 
 In order to print tiles from this app that match the die cutter listed above
-make sure to select "die" as the tile layout on the [Config](/Config) page or
-set the `tile.layout` property to `die` in `config.json`.
+make sure to select "die" as the tile layout either in the [settings](?config=true) or set the
+`tile.layout` property to `die` in `config.json`.
 
 When this property is set, the page size for tiles is hardcoded to be 8.5" by
 11".
 
 ### Cards
 
-The default layout for cards on letter paper does work but a full mode that has
-the registration pins included is being worked on currently. ASAP!
+You can set the `cards.layout` property to `dtgDie` or `miniEuroDie` depending on which die layout you have. Just like on tiles setting one of these options overrides a lot of other options.
 
 ## Ordering
 
