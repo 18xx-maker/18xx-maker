@@ -13,7 +13,6 @@ i18n.use(isElectron ? electronBackend : httpBackend)
     .init({
       fallbackLng: 'en',
       load: 'languageOnly',
-      debug: true,
 
       interpolation: {
         escapeValue: false

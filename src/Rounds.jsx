@@ -1,28 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
+import GameContext from "./context/GameContext";
+import ConfigContext from "./context/ConfigContext";
 
 import RoundTracker, { getRoundTrackerData } from "./RoundTracker";
 
-import Config from "./data/Config";
-
 const Rounds = () => {
+  const { game } = useContext(GameContext);
+  const { config } = useContext(ConfigContext);
+
+  const rounds = game.rounds;
+  const size = config.tokens.stationTokenSize;
+  const type = (game.roundTracker && game.roundTracker.type) || "row";
+
+  const data = getRoundTrackerData(rounds, size, type);
+
   return (
-    <div className="rounds">
-      <Config>
-        {(config, game) => {
-          let rounds = game.rounds;
-          let size = config.tokens.stationTokenSize;
-          let type = (game.roundTracker && game.roundTracker.type) || "row";
-
-          let data = getRoundTrackerData(rounds, size, type);
-
-          return (
-            <svg viewBox={`${data.startX} ${data.startY} ${data.width} ${data.height}`} width={data.css.width} height={data.css.height}>
-              <RoundTracker {...{rounds,size,type}} />
-            </svg>
-          );
-        }}
-      </Config>
-    </div>
+    <svg viewBox={`${data.startX} ${data.startY} ${data.width} ${data.height}`} width={data.css.width} height={data.css.height}>
+      <RoundTracker {...{rounds,size,type}} />
+    </svg>
   );
 };
 
