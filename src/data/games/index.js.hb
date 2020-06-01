@@ -1,7 +1,3 @@
-{{#each games}}
-import game_{{#if group}}{{group}}_{{/if}}{{object}} from "./{{file}}";
-{{/each}}
-
 let games = require("@18xx-maker/games");
 
 if (process.env.REACT_APP_ONLY_PUBLIC_GAMES) {
@@ -11,7 +7,32 @@ if (process.env.REACT_APP_ONLY_PUBLIC_GAMES) {
 }
 
 {{#each games}}
-games["{{name}}"] = game_{{#if group}}{{group}}_{{/if}}{{object}};
+games["{{id}}"] = {
+  id: "{{id}}",
+  slug: "{{slug}}",
+  file: "{{file}}",
+  local: true,
+  title: "{{title}}",
+  {{#if subtitle}}
+  subtitle: "{{subtitle}}",
+  {{/if}}
+  designer: "{{designer}}",
+  {{#if publisher}}
+  publisher: "{{publisher}}",
+  {{/if}}
+  {{#if publisherLink}}
+  publisherLink: "{{publisherLink}}",
+  {{/if}}
+  {{#if group}}
+  group: "{{group}}",
+  {{/if}}
+  {{#if minPlayers}}
+  minPlayers: {{minPlayers}},
+  {{/if}}
+  {{#if maxPlayers}}
+  maxPlayers: {{maxPlayers}},
+  {{/if}}
+};
 {{/each}}
 
 export default games;
