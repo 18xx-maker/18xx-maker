@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 
 import Button from "@material-ui/core/Button";
 import DownloadIcon from '@material-ui/icons/GetApp';
@@ -10,8 +11,10 @@ import is from "ramda/src/is";
 import { isElectron } from "../util";
 
 const File = (props) => {
+  const { t } = useTranslation();
+
   const mime = props.mime || "application/json";
-  const verb = isElectron ? "Save" : "Download";
+  const verb = isElectron ? "save" : "download";
 
   let data = props.data;
   if (is(Object, data)) {
@@ -30,9 +33,9 @@ const File = (props) => {
                      download={props.filename}
                      href={`data:${mime};base64,${data}`}>
              <ListItemIcon>
-               <DownloadIcon/>
+               <DownloadIcon color="primary"/>
              </ListItemIcon>
-             <ListItemText primary={verb}
+             <ListItemText primary={t(verb)}
                            secondary={props.filename}/>
            </ListItem>;
   }
@@ -42,7 +45,7 @@ const File = (props) => {
                  variant="contained"
                  color="primary"
                  href={`data:${mime};base64,${data}`}>
-           {verb} {props.filename}
+           {t(verb)} {props.filename}
          </Button>
 };
 

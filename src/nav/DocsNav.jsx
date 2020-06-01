@@ -80,10 +80,10 @@ const DocsNav = () => {
               name="PDF Output"
               desc="Generate pdf documents"
               icon={<PdfIcon/>}/>
-        {/* <Item path="output/png" */}
-        {/*       name="PNG Output" */}
-        {/*       desc="Generate png images" */}
-        {/*       icon={<PngIcon/>}/> */}
+        <Item path="output/png"
+              name="PNG Output"
+              desc="Generate png images"
+              icon={<PngIcon/>}/>
         <Item path="output/b18"
               name="Board18 Output"
               desc="Generate a Board18 gamebox"
