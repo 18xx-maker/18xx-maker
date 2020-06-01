@@ -1,15 +1,20 @@
 import React, {useState, useContext} from "react";
 import { Route, Switch, matchPath } from "react-router";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
+import MobileMenuButton from "./MobileMenuButton";
+
+import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Hidden from "@material-ui/core/Hidden";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
@@ -25,6 +30,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import GameContext from "../context/GameContext";
 
 const useStyles = makeStyles((theme) => ({
+  activeButton: {
+    marginRight: theme.spacing(2),
+    backgroundColor: theme.palette.background.default,
+    "&:hover": {
+      backgroundColor: theme.palette.background.default
+    }
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1
+  },
   warningIcon: {
     color: theme.palette.warning.main
   },
@@ -37,12 +52,8 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2)
   },
-  activeButton: {
-    marginRight: theme.spacing(2),
-    backgroundColor: theme.palette.background.default,
-    "&:hover": {
-      backgroundColor: theme.palette.background.default
-    }
+  title: {
+    flexGrow: 1
   }
 }));
 
@@ -63,19 +74,19 @@ const NavLink = ({to, exact, text, icon}) => {
   );
 }
 
-const getGameItem = (game, tooltip) => {
-  let to = "/games";
+const getGameItem = (game, t) => {
+  let to = "/games/";
   let icon = <LoadIcon/>;
   let text = 'Load Games';
 
   if (game) {
-    to = `${to}/${game.slug}`;
+    to = `${to}/${game.slug}/`;
     icon = <GamesIcon/>;
     text = game.info.title;
 
     if (game.wip) {
-      if (tooltip) {
-        icon = <Tooltip placement="bottom" arrow title="This game is marked as being a work in progress">
+      if (t) {
+        icon = <Tooltip placement="bottom" arrow title={t('wip')}>
                  <WarningIcon/>
                </Tooltip>;
       } else {
@@ -88,14 +99,15 @@ const getGameItem = (game, tooltip) => {
 }
 
 const NavMenu = () => {
+  const { t } = useTranslation();
   const { game } = useContext(GameContext);
 
   return (
     <>
-      <NavLink to="/" exact text="Home" icon={<HomeIcon/>}/>
-      <NavLink {...getGameItem(game, true)}/>
-      <NavLink to="/elements" exact text="Game Elements" icon={<ElementsIcon/>}/>
-      <NavLink to="/docs" exact text="Documentation" icon={<DocumentationIcon/>}/>
+      <NavLink to="/" exact text={t('nav.home')} icon={<HomeIcon/>}/>
+      <NavLink {...getGameItem(game, t)}/>
+      <NavLink to="/elements/" exact text={t('nav.elements')} icon={<ElementsIcon/>}/>
+      <NavLink to="/docs/" exact text={t('nav.documentation')} icon={<DocumentationIcon/>}/>
     </>
   );
 };
@@ -117,6 +129,7 @@ const MenuLink = React.forwardRef(({icon, text, to, exact, onClick}, ref) => {
 });
 
 const MobileMenu = ({anchor, onClose}) => {
+  const { t } = useTranslation('nav');
   const open = Boolean(anchor);
 
   const { game } = useContext(GameContext);
@@ -130,15 +143,16 @@ const MobileMenu = ({anchor, onClose}) => {
           onClose={onClose}
           open={open}
           keepMounted>
-      <MenuLink onClick={onClose} to="/" exact text="Home" icon={<HomeIcon/>}/>
+      <MenuLink onClick={onClose} to="/" exact text={t('home')} icon={<HomeIcon/>}/>
       <MenuLink onClick={onClose} {...item}/>
-      <MenuLink onClick={onClose} to="/elements" exact text="Game Elements" icon={<ElementsIcon/>}/>
-      <MenuLink onClick={onClose} to="/docs" exact text="Documentation" icon={<DocumentationIcon/>}/>
+      <MenuLink onClick={onClose} to="/elements/" exact text={t('elements')} icon={<ElementsIcon/>}/>
+      <MenuLink onClick={onClose} to="/docs/" exact text={t('documentation')} icon={<DocumentationIcon/>}/>
     </Menu>
   );
 };
 
 const MobileButton = ({onClick}) => {
+  const { t } = useTranslation('nav');
   const { game } = useContext(GameContext);
   const item = getGameItem(game);
 
@@ -146,29 +160,31 @@ const MobileButton = ({onClick}) => {
     <Switch>
       <Route path="/" exact>
         <Button color="inherit" startIcon={<HomeIcon/>} onClick={onClick} aria-haspopup="true">
-          <Typography noWrap>Menu</Typography>
+          <Typography noWrap>{t('menu')}</Typography>
         </Button>
       </Route>
       <Route path={item.path}>
         <Button color="inherit" startIcon={item.icon} onClick={onClick} aria-haspopup="true">
-          <Typography noWrap>Menu</Typography>
+          <Typography noWrap>{t('menu')}</Typography>
         </Button>
       </Route>
       <Route path="/elements">
         <Button color="inherit" startIcon={<ElementsIcon/>} onClick={onClick} aria-haspopup="true">
-          <Typography noWrap>Menu</Typography>
+          <Typography noWrap>{t('menu')}</Typography>
         </Button>
       </Route>
       <Route path="/docs">
         <Button color="inherit" startIcon={<DocumentationIcon/>} onClick={onClick} aria-haspopup="true">
-          <Typography noWrap>Menu</Typography>
+          <Typography noWrap>{t('menu')}</Typography>
         </Button>
       </Route>
     </Switch>
   );
 };
 
-const AppNav = () => {
+const AppNav = ({toggleSideNav}) => {
+  const { t } = useTranslation();
+  const classes = useStyles();
   const [menuAnchor, setMenuAnchor] = useState(null);
 
   const handleMenu = (event) => {
@@ -180,15 +196,21 @@ const AppNav = () => {
   }
 
   return (
-    <>
-      <Hidden mdUp>
-        <MobileButton onClick={handleMenu}/>
-        <MobileMenu anchor={menuAnchor} onClose={handleMenuClose}/>
-      </Hidden>
-      <Hidden smDown>
-        <NavMenu/>
-      </Hidden>
-    </>
+    <AppBar position="sticky" className={classes.appBar}>
+      <Toolbar>
+        <MobileMenuButton onClick={toggleSideNav}/>
+        <Typography className={classes.title} variant="h4" noWrap>
+          {t('title')}
+        </Typography>
+        <Hidden mdUp>
+          <MobileButton onClick={handleMenu}/>
+          <MobileMenu anchor={menuAnchor} onClose={handleMenuClose}/>
+        </Hidden>
+        <Hidden smDown>
+          <NavMenu/>
+        </Hidden>
+      </Toolbar>
+    </AppBar>
   );
 }
 

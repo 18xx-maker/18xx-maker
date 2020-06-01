@@ -4,12 +4,23 @@ import { Provider } from "react-redux";
 import store from "./store";
 import "./fonts.css";
 import "./index.css";
-import App from "./App";
 import { unregister } from "./registerServiceWorker";
+
+import './i18n';
+import { BrowserRouter, HashRouter } from "react-router-dom";
+
+import App from "./App";
+import { isElectron } from "./util";
+
+// Test to see if we're running in electron or not. If so use a hash router
+// since it's based on files
+const Router = isElectron ? HashRouter : BrowserRouter;
 
 render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>,
   document.getElementById("root")
 );

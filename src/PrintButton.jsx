@@ -10,6 +10,8 @@ import PrintIcon from '@material-ui/icons/Print';
 
 import { makeStyles } from '@material-ui/core/styles';
 
+import { isElectron } from "./util";
+
 const useStyles = makeStyles((theme) => ({
   printButton: {
     zIndex: theme.zIndex.modal + 1,
@@ -18,6 +20,14 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(4)
   }
 }));
+
+const handler = () => {
+  if (isElectron) {
+
+  }
+
+  window.print();
+};
 
 const PrintButton = () => {
   const classes = useStyles();
@@ -31,7 +41,10 @@ const PrintButton = () => {
     <Route path="/games">
       <Slide direction="left" in={true}>
         <Tooltip title="Print" aria-label="print" placement="left" arrow>
-          <Fab position="sticky" className={classes.printButton} color="primary">
+          <Fab onClick={handler}
+               position="sticky"
+               className={classes.printButton}
+               color="primary">
             <PrintIcon/>
           </Fab>
         </Tooltip>
