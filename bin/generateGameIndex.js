@@ -10,13 +10,34 @@ let files = glob.sync("**/*.json", { cwd: "./src/data/games" });
 
 let public_games = [];
 // Create proper data for template
-let games = map(file => {
+let games = map((file) => {
   let dir = path.dirname(file);
   let group = dir === "." ? undefined : dir;
-  let name = path.basename(file, ".json");
-  let object = name.replace(/[-\.]/g, '_');
 
-  let game = { name, file, dir, object };
+  let id = path.basename(file, ".json");
+  let slug = encodeURIComponent(id);
+
+  // Load json in order to get more data
+  let data = require(`../src/data/games/${file}`);
+  let { title, subtitle, designer, publisher } = data.info;
+
+  let minPlayers = data.players ? data.players[0].number : 0;
+  let maxPlayers = data.players
+    ? data.players[data.players.length - 1].number
+    : 0;
+
+  let game = {
+    id,
+    slug,
+    file,
+    title,
+    subtitle,
+    designer,
+    publisher,
+    publisherLink: data.links && data.links.publisher,
+    minPlayers,
+    maxPlayers,
+  };
 
   if (group) {
     game.group = group;
@@ -33,6 +54,8 @@ const template = Handlebars.compile(
   fs.readFileSync("./src/data/games/index.js.hb", { encoding: "UTF8" })
 );
 
-fs.writeFileSync("./src/data/games/index.js",
-                 template({ games, public_games }),
-                 { mode: "644" });
+fs.writeFileSync(
+  "./src/data/games/index.js",
+  template({ games, public_games }),
+  { mode: "644" }
+);
