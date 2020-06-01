@@ -12,6 +12,7 @@ import ReactMarkdown from "react-markdown";
 import isEmpty from "ramda/src/isEmpty";
 
 import { makeStyles } from '@material-ui/core/styles';
+
 const useStyles = makeStyles((theme) => ({
   page: {
     overflow: 'auto',
