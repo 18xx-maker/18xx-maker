@@ -20,9 +20,9 @@
       "numbers": "Number Cards"
     },
     "map": {
-      "paginated": "Paginate",
       "variation": "Map Variation"
     },
+    "paginated": "Paginate",
     "players": "Players",
     "unload": "Unload Game"
   },

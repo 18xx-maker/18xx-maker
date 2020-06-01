@@ -1,18 +1,23 @@
-import React from "react";
-import { Redirect, useParams } from "react-router-dom";
+import React, { useContext } from "react";
+import GameContext from "../../context/GameContext";
+import { Redirect } from "react-router-dom";
 
-import * as R from "ramda";
 import { tiles } from "@18xx-maker/games";
 
-import Tile from "./Tile";
-import Svg from "./Svg";
+import Tile from "../../Tile";
+import Svg from "../../Svg";
 
-import { getTile } from "./util";
+import { getTile } from "../../util";
 
-import games from "./data/games";
-import ColorContext from "./context/ColorContext";
+import ColorContext from "../../context/ColorContext";
 
-import "./TileManifest.css";
+import addIndex from "ramda/src/addIndex";
+import ascend from "ramda/src/ascend";
+import keys from "ramda/src/keys";
+import map from "ramda/src/map";
+import sortWith from "ramda/src/sortWith";
+
+import "../../TileManifest.css";
 
 const getCol = tile => {
   switch (tile.color) {
@@ -28,22 +33,21 @@ const getCol = tile => {
 };
 
 const TileManifest = () => {
-  let params = useParams();
-  let game = games[params.game];
+  const { game } = useContext(GameContext);
 
   if (!game.tiles) {
-    return <Redirect to={`/${params.game}/background`} />;
+    return <Redirect to={`/games/${game.slug}/`} />;
   }
 
-  let ids = R.sortWith(
+  let ids = sortWith(
     [
-      R.ascend(id => Number(id.split("|")[0] || 0)),
-      R.ascend(id => Number(id.split("|")[1] || 0))
+      ascend(id => Number(id.split("|")[0] || 0)),
+      ascend(id => Number(id.split("|")[1] || 0))
     ],
-    R.keys(game.tiles)
+    keys(game.tiles)
   );
 
-  let tileNodes = R.addIndex(R.map)((id, i) => {
+  let tileNodes = addIndex(map)((id, i) => {
     let [idBase, idExtra] = id.split("|");
     let tile = getTile(tiles, game.tiles, id);
     if (!tile) return null;
@@ -77,9 +81,6 @@ const TileManifest = () => {
 
   return (
     <ColorContext.Provider value="tile">
-      <div className="PrintNotes">
-        <div><p>Tile Manifest is meant to be printed in <b>portait</b> mode</p></div>
-      </div>
       <div className="TileManifest">
         <div className="TileManifest--Title">{game.info.title} Tile Manifest</div>
         {tileNodes}

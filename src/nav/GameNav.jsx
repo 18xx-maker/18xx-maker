@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useTranslation } from 'react-i18next';
-import { Switch as RouterSwitch, Route } from 'react-router';
-import { Link as RouterLink } from "react-router-dom";
+import { Switch as RouterSwitch, Route, matchPath } from 'react-router';
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 import GameContext from "../context/GameContext";
 import { useBooleanParam, useIntParam } from "../util/query";
@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 const GameNav = () => {
   const classes = useStyles();
   const { t } = useTranslation();
+  const location = useLocation();
   const { game, closeGame } = useContext(GameContext);
 
   const [hidePrivates, togglePrivates] = useBooleanParam('hidePrivates');
@@ -91,13 +92,40 @@ const GameNav = () => {
         <Route>
           <List>
             <RouterSwitch>
+              <Route path="/games/:slug/revenue">
+                <ListItem>
+                  <FormControlLabel control={ <Switch checked={paginated}
+                                 onChange={togglePagination}
+                                 color="primary"
+                                 name="pagination"/> }
+                                    label={t('game.paginated')}/>
+                </ListItem>
+              </Route>
+              <Route path="/games/:slug/par">
+                <ListItem>
+                  <FormControlLabel control={ <Switch checked={paginated}
+                                 onChange={togglePagination}
+                                 color="primary"
+                                 name="pagination"/> }
+                                    label={t('game.paginated')}/>
+                </ListItem>
+              </Route>
+              <Route path="/games/:slug/market">
+                <ListItem>
+                  <FormControlLabel control={ <Switch checked={paginated}
+                                 onChange={togglePagination}
+                                 color="primary"
+                                 name="pagination"/> }
+                                    label={t('game.paginated')}/>
+                </ListItem>
+              </Route>
               <Route path="/games/:slug/map">
                 <ListItem>
                   <FormControlLabel control={ <Switch checked={paginated}
                                  onChange={togglePagination}
                                  color="primary"
                                  name="pagination"/> }
-                                    label={t('game.map.paginated')}/>
+                                    label={t('game.paginated')}/>
                 </ListItem>
                 {hasVariation && (
                   <ListItem>
@@ -150,51 +178,69 @@ const GameNav = () => {
       </RouterSwitch>
       <List>
         <ListItem button
+                  selected={matchPath(location.pathname, {path: '/games/:slug/background'})}
                   component={RouterLink}
                   to={`/games/${game.slug}/background`}>
           <ListItemText>Background</ListItemText>
         </ListItem>
         <ListItem button
+                  disabled={!game.companies && !game.privates && !game.trains}
+                  selected={matchPath(location.pathname, {path: '/games/:slug/cards'})}
                   component={RouterLink}
                   to={`/games/${game.slug}/cards`}>
           <ListItemText>Cards</ListItemText>
         </ListItem>
         <ListItem button
+                  disabled={!game.companies}
+                  selected={matchPath(location.pathname, {path: '/games/:slug/charters'})}
                   component={RouterLink}
                   to={`/games/${game.slug}/charters`}>
           <ListItemText>Charters</ListItemText>
         </ListItem>
         <ListItem button
+                  disabled={!game.map}
+                  selected={matchPath(location.pathname, {path: '/games/:slug/map'})}
                   component={RouterLink}
                   to={`/games/${game.slug}/map`}>
           <ListItemText>Map</ListItemText>
         </ListItem>
         <ListItem button
+                  disabled={!game.stock || !game.stock.market}
+                  selected={matchPath(location.pathname, {path: '/games/:slug/market'})}
                   component={RouterLink}
                   to={`/games/${game.slug}/market`}>
           <ListItemText primary="Market"/>
         </ListItem>
         <ListItem button
+                  disabled={!game.stock || !game.stock.par || !game.stock.par.values}
+                  selected={matchPath(location.pathname, {path: '/games/:slug/par'})}
                   component={RouterLink}
                   to={`/games/${game.slug}/par`}>
           <ListItemText primary="Par"/>
         </ListItem>
         <ListItem button
+                  selected={matchPath(location.pathname, {path: '/games/:slug/revenue'})}
                   component={RouterLink}
                   to={`/games/${game.slug}/revenue`}>
           <ListItemText primary="Revenue"/>
         </ListItem>
         <ListItem button
+                  disabled={!game.tiles}
+                  selected={matchPath(location.pathname, {path: '/games/:slug/tile-manifest'})}
                   component={RouterLink}
-                  to={`/games/${game.slug}/manifest`}>
+                  to={`/games/${game.slug}/tile-manifest`}>
           <ListItemText primary="Tile Manifest"/>
         </ListItem>
         <ListItem button
+                  disabled={!game.tiles}
+                  selected={matchPath(location.pathname, {path: '/games/:slug/tiles'})}
                   component={RouterLink}
                   to={`/games/${game.slug}/tiles`}>
           <ListItemText primary="Tiles"/>
         </ListItem>
         <ListItem button
+                  disabled={!game.companies}
+                  selected={matchPath(location.pathname, {path: '/games/:slug/tokens'})}
                   component={RouterLink}
                   to={`/games/${game.slug}/tokens`}>
           <ListItemText primary="Tokens"/>

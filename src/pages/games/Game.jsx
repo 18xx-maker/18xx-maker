@@ -4,7 +4,14 @@ import { useTranslation } from "react-i18next";
 
 import Background from "./Background";
 import Cards from "./Cards";
+import Charters from "./Charters";
 import Map from "./Map";
+import Market from "./Market";
+import Par from "./Par";
+import Revenue from "./Revenue";
+import TileManifest from "./TileManifest";
+import Tiles from "./Tiles";
+import Tokens from "./Tokens";
 
 import Container from "@material-ui/core/Container";
 import List from "@material-ui/core/List";
@@ -36,14 +43,35 @@ const Game = ({game}) => {
 
   return (
     <Switch>
-      <Route path="/games/:slug/map">
-        <Map/>
+      <Route path="/games/:slug/background">
+        <Background/>
       </Route>
       <Route path="/games/:slug/cards">
         <Cards/>
       </Route>
-      <Route path="/games/:slug/background">
-        <Background/>
+      <Route path="/games/:slug/charters">
+        <Charters/>
+      </Route>
+      <Route path="/games/:slug/map">
+        <Map/>
+      </Route>
+      <Route path="/games/:slug/market">
+        <Market/>
+      </Route>
+      <Route path="/games/:slug/par">
+        <Par/>
+      </Route>
+      <Route path="/games/:slug/revenue">
+        <Revenue/>
+      </Route>
+      <Route path="/games/:slug/tile-manifest">
+        <TileManifest/>
+      </Route>
+      <Route path="/games/:slug/tiles">
+        <Tiles/>
+      </Route>
+      <Route path="/games/:slug/tokens">
+        <Tokens/>
       </Route>
       <Route>
         <Container maxWidth="md">
