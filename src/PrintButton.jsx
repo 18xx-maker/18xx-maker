@@ -14,7 +14,7 @@ import { isElectron } from "./util";
 
 const useStyles = makeStyles((theme) => ({
   printButton: {
-    zIndex: theme.zIndex.modal + 1,
+    zIndex: theme.zIndex.drawer + 1,
     position: 'fixed',
     bottom: theme.spacing(14),
     right: theme.spacing(4)

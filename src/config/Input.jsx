@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import ConfigContext from "../context/ConfigContext";
 import ReactMarkdown from "react-markdown";
-import { connect } from "react-redux";
-import { setConfig } from "../store/actions";
 import UnitInput from "./UnitInput";
 
 import schema from "@18xx-maker/schemas/schemas/config.schema.json";
@@ -40,17 +39,11 @@ export const getSchemaPath = compose(chain(n => ['properties', n]),
                                      split('.'));
 export const getSchema = name => path(getSchemaPath(name), schema);
 
-const inputState = (state , {name}) => ({
-  config: state.config,
-  value: path(split('.', name), state.config)
-});
-
-const inputDispatch = dispatch => ({
-  setConfig: config => dispatch(setConfig(config))
-});
-
-const Input = ({name, label, description, config, value, setConfig, dimension}) => {
+const Input = ({name, label, description, dimension}) => {
   const classes = useStyles();
+  const { config, setConfig } = useContext(ConfigContext);
+  const value = path(split('.', name), config);
+
   let valuePath = getPath(name);
   let rawUpdate = value => setConfig(assocPath(valuePath,value,config));
   let update = event => setConfig(assocPath(valuePath,
@@ -120,4 +113,5 @@ const Input = ({name, label, description, config, value, setConfig, dimension}) 
     </>
   );
 };
-export default connect(inputState, inputDispatch)(Input);
+
+export default Input;

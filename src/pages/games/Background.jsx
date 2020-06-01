@@ -31,7 +31,7 @@ const rotatedHeight = (w, h) => Math.abs(h * cos + w * sin);
 const Background = () => {
   const classes = useStyles();
 
-  let { game } = useContext(GameContext);
+  let { game } = useContext(GameContext); 
   let paper = config.paper;
 
   let color = game.info.background;
@@ -50,12 +50,14 @@ const Background = () => {
   let textWidth = BB.width + 12;
   let textHeight = BB.height;
 
-  let cols = Math.ceil(containerWidth / textWidth);
-  let rows = Math.ceil(containerHeight / textHeight);
+  let cols = Math.min(Math.max(Math.ceil(containerWidth / textWidth), 1), 150);
+  let rows = Math.min(Math.max(Math.ceil(containerHeight / textHeight), 1), 150);
 
   let textNodes = flatten(times(x => times(y => <text key={`${title}-${x}-${y}`}
                                                       x={x * textWidth} y={y * textHeight}
-                                                      fill="#fff" opacity="0.2">{title}</text>, rows), cols));
+                                                      fill="#fff" opacity="0.2">{title}</text>,
+                                           rows),
+                                cols));
 
   return (
     <SetFont context="background">

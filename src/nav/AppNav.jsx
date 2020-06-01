@@ -86,7 +86,7 @@ const getGameItem = (game, t) => {
 
     if (game.wip) {
       if (t) {
-        icon = <Tooltip placement="bottom" arrow title={t('wip')}>
+        icon = <Tooltip placement="bottom" arrow title={t('wip.tooltip')}>
                  <WarningIcon/>
                </Tooltip>;
       } else {
@@ -129,7 +129,7 @@ const MenuLink = React.forwardRef(({icon, text, to, exact, onClick}, ref) => {
 });
 
 const MobileMenu = ({anchor, onClose}) => {
-  const { t } = useTranslation('nav');
+  const { t } = useTranslation();
   const open = Boolean(anchor);
 
   const { game } = useContext(GameContext);
@@ -143,16 +143,16 @@ const MobileMenu = ({anchor, onClose}) => {
           onClose={onClose}
           open={open}
           keepMounted>
-      <MenuLink onClick={onClose} to="/" exact text={t('home')} icon={<HomeIcon/>}/>
+      <MenuLink onClick={onClose} to="/" exact text={t('nav.home')} icon={<HomeIcon/>}/>
       <MenuLink onClick={onClose} {...item}/>
-      <MenuLink onClick={onClose} to="/elements/" exact text={t('elements')} icon={<ElementsIcon/>}/>
-      <MenuLink onClick={onClose} to="/docs/" exact text={t('documentation')} icon={<DocumentationIcon/>}/>
+      <MenuLink onClick={onClose} to="/elements/" exact text={t('nav.elements')} icon={<ElementsIcon/>}/>
+      <MenuLink onClick={onClose} to="/docs/" exact text={t('nav.documentation')} icon={<DocumentationIcon/>}/>
     </Menu>
   );
 };
 
 const MobileButton = ({onClick}) => {
-  const { t } = useTranslation('nav');
+  const { t } = useTranslation();
   const { game } = useContext(GameContext);
   const item = getGameItem(game);
 
@@ -160,22 +160,22 @@ const MobileButton = ({onClick}) => {
     <Switch>
       <Route path="/" exact>
         <Button color="inherit" startIcon={<HomeIcon/>} onClick={onClick} aria-haspopup="true">
-          <Typography noWrap>{t('menu')}</Typography>
+          <Typography noWrap>{t('nav.menu')}</Typography>
         </Button>
       </Route>
       <Route path={item.path}>
         <Button color="inherit" startIcon={item.icon} onClick={onClick} aria-haspopup="true">
-          <Typography noWrap>{t('menu')}</Typography>
+          <Typography noWrap>{t('nav.menu')}</Typography>
         </Button>
       </Route>
       <Route path="/elements">
         <Button color="inherit" startIcon={<ElementsIcon/>} onClick={onClick} aria-haspopup="true">
-          <Typography noWrap>{t('menu')}</Typography>
+          <Typography noWrap>{t('nav.menu')}</Typography>
         </Button>
       </Route>
       <Route path="/docs">
         <Button color="inherit" startIcon={<DocumentationIcon/>} onClick={onClick} aria-haspopup="true">
-          <Typography noWrap>{t('menu')}</Typography>
+          <Typography noWrap>{t('nav.menu')}</Typography>
         </Button>
       </Route>
     </Switch>

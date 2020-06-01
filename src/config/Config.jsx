@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useContext } from "react";
+import ConfigContext from "../context/ConfigContext";
 
 import { diff } from "deep-object-diff";
 
@@ -7,10 +7,7 @@ import ThemePreview from "./ThemePreview";
 import Input from "./Input";
 import File from "../util/File";
 
-import { setConfig } from "../store/actions";
-
 import defaultConfig from "../defaults.json";
-import customConfig from "../config.json";
 import schema from "@18xx-maker/schemas/schemas/config.schema.json";
 
 import chain from "ramda/src/chain";
@@ -20,7 +17,6 @@ import filter from "ramda/src/filter";
 import isEmpty from "ramda/src/isEmpty";
 import keys from "ramda/src/keys";
 import map from "ramda/src/map";
-import mergeDeepRight from "ramda/src/mergeDeepRight";
 import path from "ramda/src/path";
 import split from "ramda/src/split";
 
@@ -57,8 +53,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Config = ({config, setConfig, resetConfig}) => {
+const Config = () => {
   const classes = useStyles();
+  const { config, setConfig, resetConfig } = useContext(ConfigContext);
 
   let setOption = event => setConfig({ ...config, [event.target.name]: event.target.value });
 
@@ -68,18 +65,29 @@ const Config = ({config, setConfig, resetConfig}) => {
         <Typography variant="h5">Colors and Companies</Typography>
         <FormControl variant="filled" className={classes.configItem}>
           <InputLabel id="theme-label">Theme</InputLabel>
-          <Select id="theme" name="theme" labelId="theme-label" value={config.theme} onChange={setOption}>
+          <Select id="theme"
+                  name="theme"
+                  labelId="theme-label"
+                  value={config.theme}
+                  onChange={setOption}>
             {map(theme => <MenuItem key={theme} value={theme}>{mapThemes[theme].name}</MenuItem>, keys(mapThemes))}
           </Select>
         </FormControl>
         <ThemePreview/>
-        <Typography variant="caption" display="block" gutterBottom>
+        <Typography variant="caption"
+                    display="block"
+                    gutterBottom>
           The theme determines which colors are used for all of the elements on the maps and tiles.
         </Typography>
 
-        <FormControl variant="filled" className={classes.configItem}>
+        <FormControl variant="filled"
+                     className={classes.configItem}>
           <InputLabel id="companies-theme-label">Companies Theme</InputLabel>
-          <Select id="companies-theme" name="companiesTheme" labelId="companies-theme-label" value={config.companiesTheme} onChange={setOption}>
+          <Select id="companies-theme"
+                  name="companiesTheme"
+                  labelId="companies-theme-label"
+                  value={config.companiesTheme}
+                  onChange={setOption}>
             {map(theme => <MenuItem key={theme} value={theme}>{companyThemes[theme].name}</MenuItem>, keys(companyThemes))}
           </Select>
         </FormControl>
@@ -294,13 +302,4 @@ const Config = ({config, setConfig, resetConfig}) => {
   );
 };
 
-const mapStateToProps = state => ({
-  config: state.config
-});
-
-const mapDispatchToProps = dispatch => ({
-  setConfig: config => dispatch(setConfig(config)),
-  resetConfig: () => dispatch(setConfig(mergeDeepRight(defaultConfig, customConfig)))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Config);
+export default Config;

@@ -140,8 +140,8 @@ ipcMain.on('screenshot', (event, path, width, height) => {
 });
 
 ipcMain.on('i18n', (event, filename) => {
-  fs.readFile(filename, 'utf8', function(err, data){
-    if(err){
+  fs.readFile(path.join(isDev ? 'public' : 'build', filename), 'utf8', (err, data) => {
+    if (err) {
       event.returnValue = { err };
     } else {
       let result;

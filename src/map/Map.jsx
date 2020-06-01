@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import * as R from "ramda";
 
 import Hex from "../Hex";
@@ -15,7 +14,10 @@ import MapRoundTracker from "./MapRoundTracker";
 
 import { getMapData, toAlpha, toCoords } from "./util";
 
-const Map = ({ name, game, coords, variation, hexWidth }) => {
+const Map = ({ name, game, config, variation }) => {
+  const coords = config.coords;
+  const hexWidth = config.tiles.mapWidth;
+
   let data = getMapData(game, coords, hexWidth, variation);
 
   if (!data.map) {
@@ -55,9 +57,4 @@ const Map = ({ name, game, coords, variation, hexWidth }) => {
   );
 };
 
-const mapStateToProps = (state, {hexWidth}) => ({
-  coords: state.config.coords,
-  hexWidth: hexWidth || state.config.tiles.mapWidth
-});
-
-export default connect(mapStateToProps)(Map);
+export default Map;

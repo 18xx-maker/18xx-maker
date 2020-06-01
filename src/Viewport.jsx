@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) => ({
   viewport: {
     transitionProperty: 'width, margin-left, margin-right',
     transitionDuration: theme.transitions.duration.shorter,
-    transitionTimingFunction: theme.transitions.easing.sharp
+    transitionTimingFunction: theme.transitions.easing.sharp,
+    overflow: 'auto'
   }
 }));
 

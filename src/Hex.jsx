@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as R from "ramda";
 import hash from "object-hash";
 
 import Position from "./Position";
 
-import HexContext from "./context/HexContext";
 import PhaseContext from "./context/PhaseContext";
 import ColorContext from "./context/ColorContext";
+import GameContext from "./context/GameContext";
 
 import Border from "./atoms/Border";
 import Bridge from "./atoms/Bridge";
@@ -52,6 +52,8 @@ const makeBorder = track => (
 );
 
 const HexTile = ({ hex, id, mask, border, transparent, map }) => {
+  const { rotation } = useContext(GameContext);
+
   if (hex === undefined || hex === null) {
     return null;
   }
@@ -249,45 +251,41 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   return (
     <g>
       <PhaseContext.Provider value={hex.color || "plain"}>
-        <HexContext.Consumer>
-          {hx => (
-            <g
-              mask={`url(#${mask || "hexMask"})`}
-              transform={`rotate(${hx.rotation || 0})`}
-            >
-              <Hex
-                color={hex.color || "plain"}
-                transparent={transparent}
-                map={map}
-              />
+        <g
+          mask={`url(#${mask || "hexMask"})`}
+          transform={`rotate(${rotation || 0})`}
+        >
+          <Hex
+            color={hex.color || "plain"}
+            transparent={transparent}
+            map={map}
+          />
 
-              <g transform={`rotate(-${hx.rotation})`}>
-                {bgShapes}
-                {goods}
-                {tunnelEntranceBorders}
-                {cityBorders}
-                {mediumCityBorders}
-                {townBorders}
-                {tracks}
-                {tunnelEntrances}
-                {cities}
-                {mediumCities}
-                {towns}
-                {boomtownBorders}
-                {boomtowns}
-                {centerTownBorders}
-                {centerTowns}
-                {values}
-                {labels}
-                {tokens}
-                {terrain}
-                {icons}
-                {divides}
-                {borders}
-              </g>
-            </g>
-          )}
-        </HexContext.Consumer>
+          <g transform={`rotate(-${rotation})`}>
+            {bgShapes}
+            {goods}
+            {tunnelEntranceBorders}
+            {cityBorders}
+            {mediumCityBorders}
+            {townBorders}
+            {tracks}
+            {tunnelEntrances}
+            {cities}
+            {mediumCities}
+            {towns}
+            {boomtownBorders}
+            {boomtowns}
+            {centerTownBorders}
+            {centerTowns}
+            {values}
+            {labels}
+            {tokens}
+            {terrain}
+            {icons}
+            {divides}
+            {borders}
+          </g>
+        </g>
 
         <HexBorder
           removeBorders={hex.removeBorders}

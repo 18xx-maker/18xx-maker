@@ -6,5 +6,23 @@
     "elements": "Game Elements",
     "documentation": "Documentation"
   },
-  "wip": "This game is marked as being a work in progress"
+  "wip": {
+    "wip": "Work in progress",
+    "tooltip": "This game is marked as being a work in progress",
+    "description": "This game might not be complete or accurate"
+  },
+  "game": {
+    "by": "by",
+    "cards": {
+      "hidePrivates": "Hide Privates",
+      "hideShares": "Hide Shares",
+      "hideTrains": "Hide Trains",
+      "hideNumbers": "Hide Number Cards"
+    },
+    "map": {
+      "paginated": "Paginate",
+      "variation": "Map Variation"
+    },
+    "players": "Players"
+  }
 }

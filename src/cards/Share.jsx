@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import ConfigContext from "../context/ConfigContext";
+
 import CompanyToken from "../tokens/CompanyToken";
 import Color from "../data/Color";
 import ColorContext from "../context/ColorContext";
 
-import Config from "../data/Config";
 import Currency from "../util/Currency";
 
 import is from "ramda/src/is";
@@ -31,6 +32,7 @@ const LeftShare = ({
   blackBand,
   variant
 }) => {
+
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
   let tokens = [];
@@ -217,17 +219,16 @@ const CenterShare = ({
   );
 };
 
-const Share = (props) => (
-  <Config>
-    {config => {
-      if(config.cards.shareStyle === "left") {
-        return <LeftShare {...props} blackBand={config.cards.blackBand} shareStyle="left" />;
-      } else if (config.cards.shareStyle === "gmt") {
-        return <LeftShare {...props} blackBand={config.cards.blackBand} shareStyle="gmt" />;
-      } else {
-        return <CenterShare {...props} />;
-      }
-    }}
-  </Config>
-);
+const Share = (props) => {
+  const { config } = useContext(ConfigContext);
+
+  if(config.cards.shareStyle === "left") {
+    return <LeftShare {...props} blackBand={config.cards.blackBand} shareStyle="left" />;
+  } else if (config.cards.shareStyle === "gmt") {
+    return <LeftShare {...props} blackBand={config.cards.blackBand} shareStyle="gmt" />;
+  } else {
+    return <CenterShare {...props} />;
+  }
+};
+
 export default Share;

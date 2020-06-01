@@ -1,17 +1,15 @@
+import React, { useContext } from 'react';
+import ColorContext from '../context/ColorContext';
+import ConfigContext from "../context/ConfigContext";
+import GameContext from '../context/GameContext';
+import PhaseContext from '../context/PhaseContext';
+
 import * as tinycolor from "tinycolor2";
 
 import curry from "ramda/src/curry";
 import is from "ramda/src/is";
 import mergeDeepRight from "ramda/src/mergeDeepRight";
 
-import ColorContext from '../context/ColorContext';
-import GameContext from '../context/GameContext';
-import PhaseContext from '../context/PhaseContext';
-
-import React from 'react';
-import { connect } from 'react-redux';
-
-import games from "./games";
 import themes from "./themes/maps";
 import companies from "./themes/companies";
 
@@ -69,39 +67,31 @@ const strokeColor = (color, amount = 20) => {
   }
 };
 
-const Color = ({ theme, companiesTheme, context, children }) => {
-  return (
-    <GameContext.Consumer>
-      {gameContext => {
-        let game = games[gameContext];
-        return (
-          <ColorContext.Consumer>
-            {colorContext => (
-              <PhaseContext.Consumer>
-                {phase => {
-                  let c = resolveColor(theme, companiesTheme, phase, context || colorContext, game);
-                  let p = resolveColor(theme, companiesTheme, phase, undefined, game);
-                  let t = textColor(theme, companiesTheme, phase, game);
-                  let s = strokeColor;
+const Color = ({ context, children }) => {
+  const { config } = useContext(ConfigContext);
+  const { game } = useContext(GameContext);
+  const { theme, companiesTheme } = config;
 
-                  return (
-                    <React.Fragment>
-                      {children(c, t, s, p)}
-                    </React.Fragment>
-                  );
-                }}
-              </PhaseContext.Consumer>
-            )}
-          </ColorContext.Consumer>
-        );
-      }}
-    </GameContext.Consumer>
+  return (
+    <ColorContext.Consumer>
+      {colorContext => (
+        <PhaseContext.Consumer>
+          {phase => {
+            let c = resolveColor(theme, companiesTheme, phase, context || colorContext, game);
+            let p = resolveColor(theme, companiesTheme, phase, undefined, game);
+            let t = textColor(theme, companiesTheme, phase, game);
+            let s = strokeColor;
+
+            return (
+              <React.Fragment>
+                {children(c, t, s, p)}
+              </React.Fragment>
+            );
+          }}
+        </PhaseContext.Consumer>
+      )}
+    </ColorContext.Consumer>
   );
 };
 
-const mapStateToProps = state => ({
-  theme: state.config.theme,
-  companiesTheme: state.config.companiesTheme
-});
-
-export default connect(mapStateToProps)(Color);
+export default Color;

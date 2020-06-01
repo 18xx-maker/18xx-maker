@@ -1,34 +1,22 @@
-import React from "react";
+import { createContext } from "react";
 
-const GameContext = React.createContext({ game: null });
+import useLocalState from "../util/useLocalState";
+
+const GameContext = createContext({ game: null });
 
 export const useGame = () => {
-  const [game, setGame] = React.useState(() => {
-    try {
-      let game = localStorage.getItem('game');
-      return game ? JSON.parse(game) : null;
-    } catch (error) {
-      console.error(error);
-      localStorage.removeItem('game');
-      return null;
-    }
-  });
+  const [game, setGame] = useLocalState('game', null);
+
+  let rotation = 0;
+  if (game && game.info.orientation !== "horizontal") {
+    rotation = 90;
+  }
 
   return {
     game,
-    loadGame: (game) => {
-      if (game) {
-        localStorage.setItem('game', JSON.stringify(game));
-      } else {
-        localStorage.removeItem('game');
-      }
-
-      setGame(game);
-    },
-    closeGame: () => {
-      localStorage.removeItem('game');
-      setGame(null);
-    }
+    rotation,
+    loadGame: setGame,
+    closeGame: () => setGame(null)
   };
 }
 
