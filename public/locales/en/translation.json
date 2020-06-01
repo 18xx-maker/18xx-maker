@@ -1,0 +1,10 @@
+{
+  "title": "18xx Maker",
+  "nav": {
+    "menu": "Menu",
+    "home": "Home",
+    "elements": "Game Elements",
+    "documentation": "Documentation"
+  },
+  "wip": "This game is marked as being a work in progress"
+}

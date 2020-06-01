@@ -9,6 +9,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
 import HelpIcon from "@material-ui/icons/Help";
+import RunningIcon from "@material-ui/icons/Code";
 
 import LogosIcon from "@material-ui/icons/Security";
 import OverridesIcon from "@material-ui/icons/Autorenew";
@@ -45,6 +46,10 @@ const DocsNav = () => {
         <Item name="Help"
               desc="Using 18xx Maker"
               icon={<HelpIcon/>}/>
+        <Item name="Running Locally"
+              path="running"
+              desc="Developing the base node.js app"
+              icon={<RunningIcon/>}/>
       </List>
       <Divider/>
       <List>
@@ -52,7 +57,7 @@ const DocsNav = () => {
               name="Schemas"
               desc="Validation of game files"
               icon={<SchemasIcon/>}/>
-        <Item path="games/shares"
+        <Item path="games/types"
               name="Share and Token Types"
               desc="Easily describe shares/tokens"
               icon={<SharesIcon/>}/>
@@ -75,10 +80,10 @@ const DocsNav = () => {
               name="PDF Output"
               desc="Generate pdf documents"
               icon={<PdfIcon/>}/>
-        <Item path="output/png"
-              name="PNG Output"
-              desc="Generate png images"
-              icon={<PngIcon/>}/>
+        {/* <Item path="output/png" */}
+        {/*       name="PNG Output" */}
+        {/*       desc="Generate png images" */}
+        {/*       icon={<PngIcon/>}/> */}
         <Item path="output/b18"
               name="Board18 Output"
               desc="Generate a Board18 gamebox"

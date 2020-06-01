@@ -6,7 +6,7 @@ const ScrollToTop = ({location, children}) => {
     if (!window._virtualConsole) {
       window.scrollTo(0, 0);
     }
-  }, [location]);
+  }, [location.pathname]);
 
   return children;
 };
