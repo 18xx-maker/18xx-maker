@@ -1,23 +1,26 @@
-import React from "react";
-import { Redirect, useParams } from "react-router-dom";
-import { connect } from "react-redux";
+import React, { useContext } from "react";
+import { Redirect } from "react-router-dom";
 
-import "./TileSheet.scss";
+import ConfigContext from "../../context/ConfigContext";
+import GameContext from "../../context/GameContext";
 
-import { getTile, sortTiles } from "./util";
-import { getTileSheetContext } from "./tilesheet/util";
+import "../../TileSheet.scss";
+
+import { getTile, sortTiles } from "../../util";
+import { getTileSheetContext } from "../../tilesheet/util";
+
 import { tiles as tileDefs } from "@18xx-maker/games";
-import { sidesFromTile } from "./atoms/Track";
-import Svg from "./Svg";
-import Page from "./util/Page";
-import PageSetup from "./PageSetup";
-import Hex from "./Hex";
 
-import games from "./data/games";
-import ColorContext from "./context/ColorContext";
+import { sidesFromTile } from "../../atoms/Track";
+import Svg from "../../Svg";
+import Page from "../../util/Page";
+import PageSetup from "../../PageSetup";
+import Hex from "../../Hex";
 
-import Cutlines from "./tilesheet/Cutlines";
-import Pins from "./tilesheet/Pins";
+import ColorContext from "../../context/ColorContext";
+
+import Cutlines from "../../tilesheet/Cutlines";
+import Pins from "../../tilesheet/Pins";
 
 import addIndex from "ramda/src/addIndex";
 import append from "ramda/src/append";
@@ -103,12 +106,14 @@ const pageTiles = (perPage, pages, tiles) => {
   return pageTiles(perPage, append(current, pages), rest);
 };
 
-const TileSheet = ({ paper, layout, hexWidth, gaps }) => {
-  let params = useParams();
-  let game = games[params.game];
+const TileSheet = () => {
+  const { config } = useContext(ConfigContext);
+  const { game } = useContext(GameContext);
+  const paper = config.paper;
+  const { layout, width: hexWidth, gaps } = config.tiles;
 
   if (!game.tiles) {
-    return <Redirect to={`/${params.game}/background`} />;
+    return <Redirect to={`/games/${game.slug}/`} />;
   }
 
   let c = getTileSheetContext(layout, paper, hexWidth);
@@ -298,13 +303,6 @@ const TileSheet = ({ paper, layout, hexWidth, gaps }) => {
 
   return (
     <ColorContext.Provider value="tile">
-      <div className="PrintNotes">
-        <div>
-          <p>
-            Tiles are meant to be printed in <b>portait</b> mode
-          </p>
-        </div>
-      </div>
       <div className={`tileSheet tileSheet--${layout}`}>
         {pageNodes}
         <PageSetup paper={c.paper}
@@ -314,11 +312,4 @@ const TileSheet = ({ paper, layout, hexWidth, gaps }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  layout: state.config.tiles.layout,
-  paper: state.config.paper,
-  hexWidth: state.config.tiles.width,
-  gaps: state.config.tiles.gaps
-});
-
-export default connect(mapStateToProps)(TileSheet);
+export default TileSheet;
