@@ -14,8 +14,8 @@ const startUrl = isDev ? "http://localhost:3000" : url.format({
 
 function createWindow () {
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1280,
+    height: 720,
     webPreferences: {
       nodeIntegration: true
     }
@@ -137,4 +137,22 @@ function createScreenshot(path, width, height) {
 
 ipcMain.on('screenshot', (event, path, width, height) => {
   createScreenshot(path, width, height);
+});
+
+ipcMain.on('i18n', (event, filename) => {
+  fs.readFile(filename, 'utf8', function(err, data){
+    if(err){
+      event.returnValue = { err };
+    } else {
+      let result;
+
+      try {
+        result = JSON.parse(data);
+      } catch(err){
+        event.returnValue = { err };
+      }
+
+      event.returnValue = { result };
+    }
+  });
 });
