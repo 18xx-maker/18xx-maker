@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import GameContext from "../context/GameContext";
+import { MapOrientation } from "../context/OrientationContext";
 
 import Color from "../data/Color";
 import Currency from "../util/Currency";
@@ -71,11 +72,13 @@ const Private = ({
   let hexNode = null;
   if (hex) {
     let hexData = getMapHex(game, hex);
-    hexNode = (<div className="private__hex">
-                 <Svg viewBox="-80 -80 160 160">
-                   <Hex hex={hexData} border={true} map={true} />
-                 </Svg>
-               </div>);
+    hexNode = (<MapOrientation>
+                 <div className="private__hex">
+                   <Svg viewBox="-80 -80 160 160">
+                     <Hex hex={hexData} border={true} map={true} />
+                   </Svg>
+                 </div>
+               </MapOrientation>);
   } else if (tile) {
     hexNode = (<div className="private__tile">
                  <Svg viewBox="-80 -80 160 160">

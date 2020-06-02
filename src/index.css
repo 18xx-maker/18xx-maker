@@ -745,8 +745,17 @@ footer a:hover {
   footer,
   .LegalNotes,
   .PrintNotes,
+  .MuiAppBar-root,
+  .MuiDrawer-root,
+  .MuiFab-root,
   .WIP {
-    display: none;
+    display: none !important;
+  }
+
+  .MuiBox-root {
+    width: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   .map {

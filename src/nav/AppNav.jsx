@@ -2,6 +2,7 @@ import React, {useState, useContext} from "react";
 import { Route, Switch, matchPath } from "react-router";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import { useBooleanParam } from "../util/query";
 
 import { Link } from "react-router-dom";
 
@@ -80,7 +81,7 @@ const getGameItem = (game, t) => {
   let text = 'Load Games';
 
   if (game) {
-    to = `${to}/${game.slug}/`;
+    to = `${to}/${game.slug}/map`;
     icon = <GamesIcon/>;
     text = game.info.title;
 
@@ -186,6 +187,11 @@ const AppNav = ({toggleSideNav}) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const [menuAnchor, setMenuAnchor] = useState(null);
+  const [print] = useBooleanParam('print');
+
+  if (print) {
+    return null;
+  }
 
   const handleMenu = (event) => {
     setMenuAnchor(event.currentTarget);
@@ -196,7 +202,7 @@ const AppNav = ({toggleSideNav}) => {
   }
 
   return (
-    <AppBar position="sticky" className={classes.appBar}>
+    <AppBar position="sticky" className={classes.appBar} style={{display: print && "none"}}>
       <Toolbar>
         <MobileMenuButton onClick={toggleSideNav}/>
         <Typography className={classes.title} variant="h4" noWrap>

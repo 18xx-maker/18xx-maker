@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useContext } from "react";
+import ConfigContext from "../context/ConfigContext";
 import Color from "../data/Color";
 import iconSvgs from "../data/icons";
 
@@ -23,7 +23,10 @@ const cityPaths = {
   city4PathReverse: "M 0 53 L 25 53 A 30 30 0 0 0 53 25 L 53 -25 A 30 30 0 0 0 25 -53 L -25 -53 A 30 30 0 0 0 -53 -25 L -53 25 A 30 30 0 0 0 -25 53 L 0 53"
 }
 
-const City = ({ straightCityNames, size, companies, icons, border, name, extend, rotation, pass, bgColor, width, strokeWidth }) => {
+const City = ({ size, companies, icons, border, name, extend, rotation, pass, bgColor, width, strokeWidth }) => {
+  const { config } = useContext(ConfigContext);
+  const straightCityNames = config.straightCityNames;
+
   if (size === undefined) {
     size = 1;
   }
@@ -669,8 +672,4 @@ const City = ({ straightCityNames, size, companies, icons, border, name, extend,
   }
 };
 
-const mapStateToProps = state => ({
-  straightCityNames: state.config.straightCityNames
-});
-
-export default connect(mapStateToProps)(City);
+export default City;

@@ -99,7 +99,7 @@ const Market = ({data, game, config, title}) => {
     );
   }
 
-  let legend = null;
+  let legendNode = null;
 
   if (data.type === "2D") {
     if (!config.stock.display.legend ||
@@ -115,7 +115,7 @@ const Market = ({data, game, config, title}) => {
     let x = game.stock.display.legend.x * config.stock.cell.width;
     let y = game.stock.display.legend.y * config.stock.cell.height;
 
-    legend = (
+    legendNode = (
       <Color context="companies">
         {c => (
           <g>
@@ -142,7 +142,7 @@ const Market = ({data, game, config, title}) => {
     let legend = (game.stock && game.stock.legend) || [];
     let left = 0;
 
-    legend = (
+    legendNode = (
       <g>
         {addIndex(map)((legend, i) => {
           let current = left;
@@ -166,7 +166,7 @@ const Market = ({data, game, config, title}) => {
     let legend = (game.stock && game.stock.legend) || [];
     let left = 0;
 
-    legend = (
+    legendNode = (
       <g>
         {addIndex(map)((legend, i) => {
           let current = left;
@@ -199,7 +199,7 @@ const Market = ({data, game, config, title}) => {
       {roundTracker}
       {cells}
       {par}
-      {legend}
+      {legendNode}
       <Ledges data={data} />
     </g>
   );

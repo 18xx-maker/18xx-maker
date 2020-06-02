@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useBooleanParam, useIntParam } from "../../util/query";
 import GameContext from "../../context/GameContext";
 import ConfigContext from "../../context/ConfigContext";
+import { MapOrientation } from "../../context/OrientationContext";
 
 import MapSingle from "../../games/MapSingle";
 import MapPaginated from "../../games/MapPaginated";
@@ -20,9 +21,11 @@ const Map = () => {
     setVariation(0);
   }
 
-  return (paginated
-          ? <MapPaginated {...{game, config, variation}}/>
-          : <MapSingle {...{game, config, variation}}/>);
+  return <MapOrientation>
+           {paginated
+            ? <MapPaginated {...{game, config, variation}}/>
+            : <MapSingle {...{game, config, variation}}/>}
+         </MapOrientation>;
 };
 
 export default Map;

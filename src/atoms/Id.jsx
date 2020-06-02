@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 
 import ConfigContext from "../context/ConfigContext";
-import GameContext from "../context/GameContext";
+import { useOrientation } from "../context/OrientationContext";
 
 import Color from "../data/Color";
 
 const Id = ({ id, extra }) => {
   const { config } = useContext(ConfigContext);
-  const { rotation } = useContext(GameContext);
+  const rotation = useOrientation();
 
   let fontSize = (id && id.length > 4) ? "9" : (id && id.length > 3) ? "10" : "12";
   let extraFontSize = (extra && extra.length > 4) ? "9" : (extra && extra.length > 3) ? "10" : "12";
