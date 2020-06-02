@@ -79,7 +79,7 @@
     "electron-is-dev": "^1.2.0"
   },
   "devDependencies": {
-    "@18xx-maker/games": "^3.1.1",
+    "@18xx-maker/games": "4.0.0-3",
     "@18xx-maker/schemas": "^4.1.0",
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
