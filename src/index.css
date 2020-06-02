@@ -48,11 +48,9 @@ p {
 
 .map {
   position: relative;
-  padding: 0.0625in;
 }
 
 .map svg {
-  margin: 0 auto;
   display: block;
 }
 
