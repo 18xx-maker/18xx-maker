@@ -39,13 +39,13 @@ const Viewport = ({sideNavOpen, children}) => {
     }
     if (configOpen) {
       if (isLarge) {
-        marginRight = '35vw';
+        marginRight = '35%';
       } else if(isSmall) {
-        marginRight = '50vw';
+        marginRight = '50%';
       }
     }
   }
-  let width = `calc(100vw - ${marginLeft} - ${marginRight})`;
+  let width = `calc(100% - ${marginLeft} - ${marginRight})`;
 
   return <Box className={classes.viewport}
               style={{ width, marginLeft, marginRight }}>

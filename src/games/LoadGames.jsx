@@ -53,7 +53,8 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   games: {
-    maxHeight: '50vh'
+    minHeight: 520,
+    height: 'calc(100vh - 480px)'
   }
 }))
 
