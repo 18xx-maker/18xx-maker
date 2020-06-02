@@ -19,7 +19,7 @@ const MapSingle = ({ game, config, variation }) => {
 
   return (
     <div className="map">
-      <Svg width={data.totalWidth} height={data.totalHeight}>
+      <Svg width={`${data.totalWidth / 100}in`} height={`${data.totalHeight / 100}in`} viewBox={`0 0 ${data.totalWidth} ${data.totalHeight}`}>
         <Map name={game.id}
              game={game}
              config={config}
