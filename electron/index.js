@@ -68,6 +68,7 @@ function createPDF(path) {
     win.webContents.on('did-stop-loading', () => {
       win.webContents.printToPDF({
         marginsType: 0,
+        scaleFactor: 100,
         printBackground: true
       }).then((buffer) => {
         fs.writeFileSync(filePath, buffer);
