@@ -1,6 +1,8 @@
 import React from "react";
 import { Route } from "react-router";
 
+import { useBooleanParam } from "../util/query";
+
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import Toolbar from '@material-ui/core/Toolbar';
@@ -21,6 +23,11 @@ const useStyles = makeStyles((theme) => ({
 
 const SideNav = ({open, toggle}) => {
   const classes = useStyles();
+  const [print] = useBooleanParam('print');
+
+  if (print) {
+    return null;
+  }
 
   const menu = (
     <>

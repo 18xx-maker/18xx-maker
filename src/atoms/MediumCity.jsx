@@ -1,5 +1,7 @@
 import React from "react";
 
+import defaultTo from "ramda/src/defaultTo";
+
 import Color from "../data/Color";
 import Name from "./Name";
 
@@ -12,7 +14,7 @@ const MediumCity = ({ border, name, reverse, color, fillColor, fillOpacity, stro
   outlineColor = outlineColor || "border";
   outlineStroke = outlineStroke || "track";
   outlineStrokeWidth = outlineStrokeWidth || "3";
-  let scale = width !== 0 ? width / 22 : 22;
+  let scale = defaultTo(22, width) / 22;
   if (border) {
     return (
       <Color>
@@ -49,10 +51,10 @@ const MediumCity = ({ border, name, reverse, color, fillColor, fillOpacity, stro
             />
             <circle
               fill={c(fillColor)}
-              fill-opacity={fillOpacity}
+              fillOpacity={fillOpacity}
               stroke={c(strokeColor)}
               strokeWidth={strokeWidth}
-              stroke-dasharray={strokeDashArray}
+              strokeDasharray={strokeDashArray}
               cx="0"
               cy="0"
               r="12"

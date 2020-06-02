@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useContext } from "react";
+import ConfigContext from "../context/ConfigContext";
 
 import curry from "ramda/src/curry";
 import map from "ramda/src/map";
@@ -59,7 +59,12 @@ const BackwardLines = ({ getX, getY, pageHeight, height, width, extraX, extraY, 
                       {...STROKE} />, indexes);
 };
 
-const Cutlines = ({ hexWidth, layout, paper }) => {
+const Cutlines = () => {
+  const { config } = useContext(ConfigContext);
+  const hexWidth = config.tiles.width;
+  const layout = config.tiles.layout;
+  const paper = config.paper;
+
   if (layout !== "offset") {
     return null;
   }
@@ -72,10 +77,4 @@ const Cutlines = ({ hexWidth, layout, paper }) => {
   ];
 };
 
-const mapStateToProps = state => ({
-  hexWidth: state.config.tiles.width,
-  layout: state.config.tiles.layout,
-  paper: state.config.paper,
-});
-
-export default connect(mapStateToProps)(Cutlines);
+export default Cutlines;

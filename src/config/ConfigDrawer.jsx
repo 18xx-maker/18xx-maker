@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation, useHistory } from "react-router-dom";
+import { useBooleanParam } from "../util/query";
 
 import Config from "./Config";
 
@@ -55,8 +56,13 @@ const ConfigDrawer = () => {
   const history = useHistory();
   const location = useLocation();
 
+  const [print] = useBooleanParam('print');
   const searchParams = new URLSearchParams(location.search);
   const visible = searchParams.has('config');
+
+  if (print) {
+    return null;
+  }
 
   const toggleConfig = () => {
     if (visible) {

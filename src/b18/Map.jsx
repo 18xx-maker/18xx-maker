@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useContext } from "react";
+import ConfigContext from "../context/ConfigContext";
 import { useParams } from "react-router-dom";
 import games from "../data/games";
 
@@ -15,6 +15,9 @@ const B18Map = ({ coords }) => {
   let params = useParams();
   let game = games[params.game];
 
+  const { config } = useContext(ConfigContext);
+  const coords = config.coords;
+
   // Get map data
   let variation = Number(params.variation) || 0;
   let data = getMapData(game, coords, 100, variation);
@@ -28,25 +31,19 @@ const B18Map = ({ coords }) => {
 
   return (
     <GameContext.Provider value={params.game}>
-    <HexContext.Provider
-      value={{
+      <HexContext.Provider value={{
         width: 100,
         rotation: data.horizontal ? 0 : 90
-      }}
-    >
-      <div className="map">
-        <Svg preserveAspectRatio="none" width={data.b18TotalWidth + offset} height={data.b18TotalHeight} viewBox={`${-offset} 0 ${data.totalWidth + offset} ${data.totalHeight}`}>
-          <Map game={game} variation={variation} hexWidth={data.hexWidth} />
-        </Svg>
-        <style>{`@media print {@page {size: ${data.b18PrintWidth} ${data.b18PrintHeight};}}`}</style>
-      </div>
-    </HexContext.Provider>
+      }}>
+        <div className="map">
+          <Svg preserveAspectRatio="none" width={data.b18TotalWidth + offset} height={data.b18TotalHeight} viewBox={`${-offset} 0 ${data.totalWidth + offset} ${data.totalHeight}`}>
+            <Map game={game} variation={variation} hexWidth={data.hexWidth} />
+          </Svg>
+          <style>{`@media print {@page {size: ${data.b18PrintWidth} ${data.b18PrintHeight};}}`}</style>
+        </div>
+      </HexContext.Provider>
     </GameContext.Provider>
   );
 };
 
-const mapStateToProps = state => ({
-  coords: state.config.coords
-});
-
-export default connect(mapStateToProps)(B18Map);
+export default B18Map;

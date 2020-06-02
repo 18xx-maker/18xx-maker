@@ -6,7 +6,6 @@ import GameContext from "../../context/GameContext";
 
 import CompanyToken from "../../tokens/CompanyToken";
 import Token from "../../tokens/Token";
-import games from "../../data/games";
 import ColorContext from "../../context/ColorContext";
 
 import { compileCompanies, overrideCompanies, unitsToCss } from "../../util";

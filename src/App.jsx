@@ -1,7 +1,7 @@
 import React, { useState, Suspense } from "react";
 
+import { useBooleanParam } from "./util/query";
 import { Route, Switch } from "react-router";
-import { useHistory } from "react-router-dom";
 
 import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -18,9 +18,9 @@ import PrintButton from "./PrintButton.jsx";
 import ConfigDrawer from "./config/ConfigDrawer.jsx";
 import Viewport from "./Viewport";
 
-import AlertContext, { useAlert } from "./context/AlertContext";
+import AlertContext from "./context/AlertContext";
 import ConfigContext, { useConfig } from "./context/ConfigContext";
-import GameContext, { useGame } from "./context/GameContext";
+import GameContext, { useGameProvider } from "./context/GameContext";
 
 import Loading from "./Loading";
 
@@ -28,7 +28,7 @@ import Home from "./pages/Home";
 import Docs from "./pages/Docs";
 import Games from "./pages/Games";
 
-import assoc from "ramda/src/assoc";
+import curry from "ramda/src/curry";
 const path = require('path');
 
 const useStyles = makeStyles((theme) => ({
@@ -48,35 +48,25 @@ const theme = createMuiTheme({});
 
 const App = () => {
   const classes = useStyles();
-  const history = useHistory();
 
+  // Are we in print mode
+  const [print] = useBooleanParam('print');
+ 
   // Success, Warning and Error Alerts
-  const alertContext = useAlert();
-  const { alert, sendAlert, closeAlert } = alertContext;
+  const [alert, setAlert] = useState({ open: false });
+  const sendAlert = curry((type, message) => setAlert({ open: true, type, message }));
+  const closeAlert = () => setAlert({ open: false });
 
   // What our config looks like
   const configContext = useConfig();
 
   // What game are we showing
-  const gameContext = useGame();
+  const gameContext = useGameProvider();
   const { loadGame } = gameContext;
 
   // Side panel state
   const [sideNavOpen, setSideNavOpen] = useState(false);
   const toggleSideNav = () => setSideNavOpen(!sideNavOpen);
-
-  const loadFile = (file) => {
-    file.text()
-        .then(JSON.parse)
-        .then(assoc('id', path.basename(file.name, '.json')))
-        .then(assoc('slug', encodeURIComponent(path.basename(file.name, '.json'))))
-        .then(game => {
-          sendAlert("success", `${game.info.title} loaded!`);
-          loadGame(game);
-          history.push(`/games/${game.slug}`);
-        })
-        .catch(err => sendAlert("error", err.message));
-  }
 
   const dragOverHandler = (event) => {
     event.preventDefault();
@@ -84,29 +74,27 @@ const App = () => {
   const dropHandler = (event) => {
     event.preventDefault();
 
+    // We only care about the first file dragged, always
     if (event.dataTransfer.items) {
-      for (let i = 0; i < event.dataTransfer.items.length; i++) {
-        if (event.dataTransfer.items[i].kind === 'file') {
-          loadFile(event.dataTransfer.items[i].getAsFile());
-        }
+      if (event.dataTransfer.items[0].kind === 'file') {
+        loadGame(event.dataTransfer.items[0].getAsFile());
       }
     } else {
-      for (let i = 0; i < event.dataTransfer.files.length; i++) {
-        loadFile(event.dataTransfer.files[i]);
-      }
+      loadGame(event.dataTransfer.files[0]);
     }
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <AlertContext.Provider value={alertContext}>
+      <AlertContext.Provider value={sendAlert}>
         <GameContext.Provider value={gameContext}>
           <ConfigContext.Provider value={configContext}>
             <Suspense fallback={<Loading/>}>
               <ScrollToTop>
                 <div onDragOver={dragOverHandler}
                      onDrop={dropHandler}
-                     className={classes.root}>
+                     className={classes.root}
+                     style={{height: print && 'auto'}}>
                   <Switch>
                     <Route path="/render"></Route>
                     <Route>

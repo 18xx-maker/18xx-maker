@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import * as R from "ramda";
 import hash from "object-hash";
 
@@ -6,7 +6,7 @@ import Position from "./Position";
 
 import PhaseContext from "./context/PhaseContext";
 import ColorContext from "./context/ColorContext";
-import GameContext from "./context/GameContext";
+import { useOrientation } from "./context/OrientationContext";
 
 import Border from "./atoms/Border";
 import Bridge from "./atoms/Bridge";
@@ -52,7 +52,7 @@ const makeBorder = track => (
 );
 
 const HexTile = ({ hex, id, mask, border, transparent, map }) => {
-  const { rotation } = useContext(GameContext);
+  const rotation = useOrientation();
 
   if (hex === undefined || hex === null) {
     return null;

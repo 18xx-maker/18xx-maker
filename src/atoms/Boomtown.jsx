@@ -1,10 +1,13 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useContext } from "react";
+import ConfigContext from "../context/ConfigContext";
 import Color from "../data/Color";
 
 import Name from "./Name";
 
-const Boomtown = ({ straightCityNames, border, city, name, x, color, bgColor, width, strokeWidth, strokeDashArray, dashed, offset }) => {
+const Boomtown = ({ border, city, name, x, color, bgColor, width, strokeWidth, strokeDashArray, dashed, offset }) => {
+  const { config } = useContext(ConfigContext);
+  const straightCityNames = config.straightCityNames;
+
   let cityWidth = width || 25;
   let scale = cityWidth / 25;
   let centerTownWidth = cityWidth * 5 / 12;
@@ -141,8 +144,4 @@ const Boomtown = ({ straightCityNames, border, city, name, x, color, bgColor, wi
   }
 };
 
-const mapStateToProps = state => ({
-  straightCityNames: state.config.straightCityNames
-});
-
-export default connect(mapStateToProps)(Boomtown);
+export default Boomtown;

@@ -7,7 +7,6 @@ import ColorContext from "../context/ColorContext";
 
 import Currency from "../util/Currency";
 
-import is from "ramda/src/is";
 import min from "ramda/src/min";
 
 import "./share.scss";
@@ -135,6 +134,7 @@ const LeftShare = ({
 };
 
 const CenterShare = ({
+  color,
   cost,
   revenue,
   shares,
@@ -179,7 +179,7 @@ const CenterShare = ({
                  }}>
               <Color context="companies">
                 {(c,t) => (
-                  <div className="share__hr" style={{ backgroundColor: c(is(Object,token) ? token.colors[0] : token) }} />
+                  <div className="share__hr" style={{ backgroundColor: c(color) }} />
                 )}
               </Color>
               <div className="card__body">

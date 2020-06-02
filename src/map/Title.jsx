@@ -1,8 +1,11 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useContext } from "react";
+import ConfigContext from "../context/ConfigContext";
 import Color from "../data/Color";
 
 const Title = ({ game, variation, hexWidth }) => {
+  const { config } = useContext(ConfigContext);
+  hexWidth = hexWidth || config.tiles.width;
+
   let scale = hexWidth / 150.0;
 
   let titleFont = game.info.titleFontFamily || "display";
@@ -78,7 +81,4 @@ const Title = ({ game, variation, hexWidth }) => {
   );
 };
 
-const mapStateToProps = (state, {hexWidth}) => ({
-  hexWidth: hexWidth || state.config.tiles.width
-});
-export default connect(mapStateToProps)(Title);
+export default Title;

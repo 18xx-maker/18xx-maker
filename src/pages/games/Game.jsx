@@ -1,5 +1,6 @@
 import React from "react";
-import { Switch, Route } from "react-router";
+import { Redirect, Route, Switch } from "react-router";
+import { matchPath, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import Background from "./Background";
@@ -36,9 +37,16 @@ const useStyles = makeStyles((theme) => ({
 const Game = ({game}) => {
   const classes = useStyles();
   const { t } = useTranslation();
- 
+  const location = useLocation();
+
   if (!game) {
     return null;
+  }
+
+  const match = matchPath(location.pathname,
+                          { path: '/games/:slug/:item?' });
+  if (match && (game.id !== match.params.slug)) {
+    return <Redirect to={`/games/${match.params.slug}/${match.params.item}`}/>;
   }
 
   return (
