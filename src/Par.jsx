@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import * as R from "ramda";
 import { unitsToCss } from "./util";
 import Color from "./data/Color";
@@ -8,10 +7,6 @@ import { GetFont, SetFont } from "./context/FontContext";
 import Currency from "./util/Currency";
 
 import "./Par.css";
-
-const mapStateToProps = state => ({
-  stock: state.config.stock
-});
 
 const groupValues = values => {
   return R.reduce(
@@ -28,7 +23,10 @@ const groupValues = values => {
   );
 };
 
-const ParCell = connect(mapStateToProps)(({ value, par, legend, stock }) => {
+const ParCell = ({ value, par, legend }) => {
+  const { config } = useContext(ConfigContext);
+  const stock = config.stock;
+ 
   let color = "gray";
   if (par.color) {
     color = par.color;
@@ -63,7 +61,7 @@ const ParCell = connect(mapStateToProps)(({ value, par, legend, stock }) => {
       )}
     </Color>
   );
-});
+};
 
 const ParDoubleRow = ({ par, legend }) => {
   let rows = R.addIndex(R.map)((value, index) => {

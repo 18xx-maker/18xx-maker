@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import Color from "../data/Color";
-import GameContext from "../context/GameContext";
+import { useOrientation } from "../context/OrientationContext";
 
 import chain from "ramda/src/chain";
 import compose from "ramda/src/compose";
@@ -53,7 +53,7 @@ export const sidesFromTile = compose(uniq,
                                      defaultTo([]));
 
 const Track = ({ type, gauge, border, width, offset, path, color, borderColor, gaugeColor }) => {
-  const { rotation } = useContext(GameContext);
+  const rotation = useOrientation();
 
   let trackWidth = width ? width : (border ? 16 : 12);
   color = color || "track";

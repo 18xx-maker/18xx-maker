@@ -1,17 +1,15 @@
 import { useHistory, useLocation } from "react-router-dom";
 
-import isNil from "ramda/src/isNil";
-
 export const useIntParam = (key) => {
   const history = useHistory();
   const location = useLocation();
 
   const searchParams = new URLSearchParams(location.search);
-  const stringValue = searchParams.get(key);
-  const value = isNil(stringValue) ? stringValue : parseInt(stringValue);
+  const stringValue = searchParams.get(key) || "0";
+  const value = parseInt(stringValue);
 
-  const setValue = (num) => {
-    if (isNil(num)) {
+  const setValue = (num = 0) => {
+    if (!num) {
       searchParams.delete(key);
     } else {
       searchParams.set(key, num.toString());

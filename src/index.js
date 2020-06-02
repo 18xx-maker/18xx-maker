@@ -1,7 +1,5 @@
 import React from "react";
 import { render } from "react-dom";
-import { Provider } from "react-redux";
-import store from "./store";
 import "./fonts.css";
 import "./index.css";
 import { unregister } from "./registerServiceWorker";
@@ -16,12 +14,9 @@ import { isElectron } from "./util";
 // since it's based on files
 const Router = isElectron ? HashRouter : BrowserRouter;
 
-render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>,
-  document.getElementById("root")
-);
+render(<Router>
+         <App />
+       </Router>,
+       document.getElementById("root"));
+
 unregister();

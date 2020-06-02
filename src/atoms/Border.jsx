@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import GameContext from "../context/GameContext";
+import React from "react";
+import { useOrientation } from "../context/OrientationContext";
 import Color from "../data/Color";
 
 const edge = 150 * 0.57735;
 
 const Border = ({ color, dashed, offset, width }) => {
-  const { rotation } = useContext(GameContext);
+  const rotation = useOrientation();
 
   let strokeDashArray = "none";
   let strokeDashOffset = "-3";

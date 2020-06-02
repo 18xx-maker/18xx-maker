@@ -20,9 +20,6 @@ games["{{id}}"] = {
   {{#if publisher}}
   publisher: "{{publisher}}",
   {{/if}}
-  {{#if publisherLink}}
-  publisherLink: "{{publisherLink}}",
-  {{/if}}
   {{#if group}}
   group: "{{group}}",
   {{/if}}

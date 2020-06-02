@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useContext } from "react";
+import ConfigContext from "./ConfigContext";
 
 import { capitalize, mapKeys } from "../util";
 
@@ -49,13 +49,15 @@ export const resolveFont = (contexts, fonts) => {
   font.lineHeight = font.fontSize;
   return font;
 };
-const mapStateToProps = state => ({
-  fonts: state.config.font
-});
-export const GetFont = connect(mapStateToProps)(({fonts, children}) => (
-  <FontContext.Consumer>
-    {context => children(resolveFont(context, fonts))}
-  </FontContext.Consumer>
-));
+
+export const GetFont = ({children}) => {
+  const { config } = useContext(ConfigContext);
+
+  return (
+    <FontContext.Consumer>
+      {context => children(resolveFont(context, config.fonts))}
+    </FontContext.Consumer>
+  );
+};
 
 export default FontContext;

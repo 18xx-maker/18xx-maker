@@ -66,21 +66,21 @@ function createPDF(path) {
     })
 
     win.webContents.on('did-stop-loading', () => {
-      win.webContents.insertCSS('::-webkit-scrollbar { display: none; } nav, footer, .LegalNotes, .PrintNotes, .WIP { display: none; }')
-         .then(() => {
-           setTimeout(() => {
-             win.webContents.printToPDF({
-               marginsType: 0,
-               printBackground: true
-             }).then((buffer) => {
-               fs.writeFileSync(filePath, buffer);
-               shell.openPath(filePath);
-               win.close();
-             });
-           }, 100);
-         });
+      win.webContents.printToPDF({
+        marginsType: 0,
+        printBackground: true
+      }).then((buffer) => {
+        fs.writeFileSync(filePath, buffer);
+        shell.openPath(filePath);
+        win.close();
+      });
     });
 
+    if (path.includes("?")) {
+      path = `${path}&print=true`;
+    } else {
+      path = `${path}?print=true`;
+    }
     win.loadURL(`${startUrl}#${path}`);
   });
 }
@@ -117,20 +117,20 @@ function createScreenshot(path, width, height) {
     })
 
     win.webContents.on('did-stop-loading', () => {
-      win.webContents.insertCSS('::-webkit-scrollbar { display: none; } nav, footer, .LegalNotes, .PrintNotes, .WIP { display: none; }')
-         .then(() => {
-           setTimeout(() => {
-             win.webContents.capturePage()
-                .then((image) => {
-                  let buffer = image.toPNG();
-                  fs.writeFileSync(filePath, buffer);
-                  shell.openPath(filePath);
-                  win.close();
-                });
-           }, 100);
+      win.webContents.capturePage()
+         .then((image) => {
+           let buffer = image.toPNG();
+           fs.writeFileSync(filePath, buffer);
+           shell.openPath(filePath);
+           win.close();
          });
     });
 
+    if (path.includes("?")) {
+      path = `${path}&print=true`;
+    } else {
+      path = `${path}?print=true`;
+    }
     win.loadURL(`${startUrl}#${path}`);
   });
 }

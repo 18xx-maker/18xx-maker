@@ -34,7 +34,6 @@ let games = map((file) => {
     subtitle,
     designer,
     publisher,
-    publisherLink: data.links && data.links.publisher,
     minPlayers,
     maxPlayers,
   };

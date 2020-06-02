@@ -1,10 +1,11 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useContext } from "react";
+import ConfigContext from "./context/ConfigContext";
+import ColorContext from "./context/ColorContext";
+
 import CompanyToken from "./tokens/CompanyToken";
 import Token from "./tokens/Token";
 import Phase from "./Phase";
 import Color from "./data/Color";
-import ColorContext from "./context/ColorContext";
 import { unitsToCss } from "./util";
 import Currency from "./util/Currency";
 
@@ -23,14 +24,16 @@ const Charter = ({
   phases,
   turns,
   trains,
-  charterStyle,
   game,
-  halfWidthCharters,
   company,
-  blackBand,
   backgroundColor,
   variant
 }) => {
+  const { config } = useContext(ConfigContext);
+  const charterStyle = config.charters.style;
+  const halfWidthCharters = config.charters.halfWidth;
+  const blackBand = config.charters.blackBand;
+ 
   let tokenSpots = addIndex(map)((label, index) => {
     // Color charters just use empty token circles, carth style uses full
     // company tokens.
@@ -154,10 +157,4 @@ const Charter = ({
   );
 };
 
-const mapStateToProps = state => ({
-  charterStyle: state.config.charters.style,
-  halfWidthCharters: state.config.charters.halfWidth,
-  blackBand: state.config.charters.blackBand
-});
-
-export default connect(mapStateToProps)(Charter);
+export default Charter;

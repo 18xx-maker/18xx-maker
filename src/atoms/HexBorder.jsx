@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import GameContext from "../context/GameContext";
+import React from "react";
+import { useOrientation } from "../context/OrientationContext";
 import Color from "../data/Color";
 
 import chain from "ramda/src/chain";
@@ -19,7 +19,7 @@ const drawLine = (removeBorders, border, side) => {
 };
 
 const HexBorder = ({ removeBorders, border, map }) => {
-  const { rotation } = useContext(GameContext);
+  const rotation = useOrientation();
 
   return (
     <Color context={map ? "map" : "tile"}>

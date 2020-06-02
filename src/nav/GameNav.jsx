@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from 'react-i18next';
 import { Switch as RouterSwitch, Route, matchPath } from 'react-router';
 import { Link as RouterLink, useLocation } from "react-router-dom";
 
-import GameContext from "../context/GameContext";
+import { useGame } from "../context/GameContext";
 import { useBooleanParam, useIntParam } from "../util/query";
 
 import addIndex from "ramda/src/addIndex";
-import isNil from "ramda/src/isNil";
+import is from "ramda/src/is";
 import map from "ramda/src/map";
 
 import Checkbox from "@material-ui/core/Checkbox";
@@ -45,8 +45,8 @@ const useStyles = makeStyles((theme) => ({
 const GameNav = () => {
   const classes = useStyles();
   const { t } = useTranslation();
+  const { game, closeGame } = useGame();
   const location = useLocation();
-  const { game, closeGame } = useContext(GameContext);
 
   const [hidePrivates, togglePrivates] = useBooleanParam('hidePrivates');
   const [hideShares, toggleShares] = useBooleanParam('hideShares');
@@ -56,11 +56,12 @@ const GameNav = () => {
   const [paginated, togglePagination] = useBooleanParam('paginated');
   const [variation, setVariation] = useIntParam('variation');
   const handleVariation = (event) => setVariation(event.target.value);
-  const hasVariation = !isNil(variation);
 
   if (!game) {
     return null;
   }
+
+  const hasVariation = is(Array, game.map);
 
   return (
     <>

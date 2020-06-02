@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
-import { Route } from "react-router";
+import { Route, useLocation } from "react-router";
 import GameContext from "./context/GameContext";
+import { useBooleanParam } from "./util/query";
 
 import Fab from "@material-ui/core/Fab";
 import Slide from "@material-ui/core/Slide";
@@ -21,21 +22,26 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const handler = () => {
-  if (isElectron) {
-
-  }
-
-  window.print();
-};
-
 const PrintButton = () => {
   const classes = useStyles();
+  const location = useLocation();
   const { game } = useContext(GameContext);
+  const [print] = useBooleanParam('print');
 
-  if (!game) {
+  if (print || !game) {
     return null;
   }
+
+  console.log(location);
+  const handler = () => {
+    if (isElectron) {
+      let ipcRenderer = window.require('electron').ipcRenderer;
+      ipcRenderer.send('pdf', location.pathname + location.search);
+      return;
+    }
+
+    window.print();
+  };
 
   return (
     <Route path="/games">

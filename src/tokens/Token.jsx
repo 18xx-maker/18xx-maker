@@ -125,7 +125,7 @@ const Token = ({
             );
           } else {
             shapes.push(
-              <Component className={`color-main-${color} color-reserved`}
+              <Component key="logo" className={`color-main-${color} color-reserved`}
                          x={start} y={start}
                          height={size} width={size}/>
             );
