@@ -5,7 +5,6 @@ const AlertContext = React.createContext(null);
 
 export const useAlert = () => {
   const sendAlert = useContext(AlertContext);
-  console.log("Context:", sendAlert);
   return sendAlert;
 };
 

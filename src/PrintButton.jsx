@@ -32,7 +32,6 @@ const PrintButton = () => {
     return null;
   }
 
-  console.log(location);
   const handler = () => {
     if (isElectron) {
       let ipcRenderer = window.require('electron').ipcRenderer;

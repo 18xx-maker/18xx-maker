@@ -35,10 +35,7 @@ const theme = createMuiTheme({});
 const App = () => {
   // Success, Warning and Error Alerts
   const [alert, setAlert] = useState({ open: false });
-  const sendAlert = curry((type, message) => {
-    console.log("Set alert", type, message);
-    setAlert({ open: true, type, message });
-  });
+  const sendAlert = curry((type, message) => setAlert({ open: true, type, message }));
   const closeAlert = () => setAlert({ open: false });
 
   // What our config looks like
@@ -51,7 +48,6 @@ const App = () => {
   const [sideNavOpen, setSideNavOpen] = useState(false);
   const toggleSideNav = () => setSideNavOpen(!sideNavOpen);
 
-  console.log(alert);
   return (
     <ThemeProvider theme={theme}>
       <AlertContext.Provider value={sendAlert}>
