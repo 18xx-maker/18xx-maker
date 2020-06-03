@@ -25,8 +25,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Switch from "@material-ui/core/Switch";
 
-import CloseIcon from "@material-ui/icons/Close";
 import GameIcon from "@material-ui/icons/Train";
+import LoadIcon from "@material-ui/icons/Launch";
 import WarningIcon from "@material-ui/icons/Warning";
 
 import File from "../util/File";
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 const GameNav = () => {
   const classes = useStyles();
   const { t } = useTranslation();
-  const { game, closeGame } = useGame();
+  const { game } = useGame();
   const location = useLocation();
 
   const [hidePrivates, togglePrivates] = useBooleanParam('hidePrivates');
@@ -68,14 +68,20 @@ const GameNav = () => {
       <List>
         <ListItem button
                   component={RouterLink}
+                  to={`/games/`}>
+          <ListItemIcon><LoadIcon/></ListItemIcon>
+          <ListItemText primary={t('game.load')}
+                        secondary={t('game.loadDescription')}/>
+        </ListItem>
+      </List>
+      <Divider/>
+      <List>
+        <ListItem button
+                  component={RouterLink}
                   to={`/games/${game.slug}/`}>
           <ListItemIcon><GameIcon/></ListItemIcon>
           <ListItemText primary={game.info.title}
                         secondary={`${t('game.by')} ${game.info.designer}`}/>
-        </ListItem>
-        <ListItem button onClick={closeGame}>
-          <ListItemIcon><CloseIcon color="secondary"/></ListItemIcon>
-          <ListItemText>{t('game.unload')}</ListItemText>
         </ListItem>
         <File data={game}
               filename={`${game.id}.json`}

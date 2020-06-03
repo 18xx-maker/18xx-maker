@@ -1,4 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext } from "react";
+import { Redirect, useLocation, matchPath } from "react-router-dom";
+
 import { useAlert } from "./AlertContext";
 
 import useLocalState from "../util/useLocalState";
@@ -7,16 +9,21 @@ import games from "../data/games";
 
 import assoc from "ramda/src/assoc";
 import is from "ramda/src/is";
+import isNil from "ramda/src/isNil";
+
+const path = require("path");
 
 const GameContext = createContext({ game: null });
 
 // Given a File object returns a promise with the json data
 const loadFile = (file) => {
+  let basename = path.basename(file.name, ".json");
+
   return file
     .text()
     .then(JSON.parse)
-    .then(assoc("id", "local"))
-    .then(assoc("slug", "local"))
+    .then(assoc("id", basename))
+    .then(assoc("slug", encodeURIComponent(basename)))
     .catch((err) => {
       console.error(err);
       return Promise.reject(`Error loading file: ${file.name}`);
@@ -61,49 +68,47 @@ const loadFileOrId = (fileOrId) => {
   return loadBundledGame(fileOrId);
 };
 
-export const useGameProvider = (sendAlert) => {
-  // Current local file that has been loaded
-  const [localGame, setLocalGame] = useLocalState("game", null);
-
-  // Current game that we're editing
-  const [game, setGame] = useState(null);
+export const GameProvider = ({ children }) => {
+  const sendAlert = useAlert();
+  const [game, setGame] = useLocalState("game", null);
+  const location = useLocation();
 
   const loadGame = (fileOrId) => {
     return loadFileOrId(fileOrId)
       .then((game) => {
-        if (game.id === "local") {
-          // This is a local file, so save it
-          setGame(null);
-          setLocalGame(game);
-        } else {
-          setGame(game);
-          setLocalGame(null);
-        }
+        setGame(game);
         sendAlert("success", `${game.info.title} loaded`);
+        return game;
       })
       .catch((err) => {
         sendAlert("error", err);
       });
   };
 
-  const closeGame = () => {
-    if (!game && !localGame) {
-      sendAlert("error", "No game loaded");
-      return;
+  // Now we test to see if the game we have loaded matches any url we are trying to hit and if not, fix it.
+  const match = matchPath(location.pathname, {
+    path: "/games/:slug/:component?",
+  });
+  if (match) {
+    if (isNil(game) || match.params.slug !== game.id) {
+      // Try loading the other game if it's a bundled one
+      if (games[match.params.slug]) {
+        loadGame(match.params.slug);
+      } else {
+        sendAlert(
+          "error",
+          `Unable to load ${match.params.slug}, please load the json file directly if you wish to work on it.`
+        );
+        return <Redirect to="/games/" />;
+      }
     }
+  }
 
-    let name = (game || localGame).info.title;
+  const context = { game, loadGame };
 
-    setLocalGame(null);
-    setGame(null);
-    sendAlert("success", `${name} closed`);
-  };
-
-  return {
-    game: game || localGame,
-    loadGame,
-    closeGame,
-  };
+  return (
+    <GameContext.Provider value={context}>{children}</GameContext.Provider>
+  );
 };
 
 export const useGame = () => {
