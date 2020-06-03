@@ -2,26 +2,29 @@ import React from "react";
 
 import { Link, useLocation, matchPath } from "react-router-dom";
 
-import Divider from "@material-ui/core/Divider";
+import { useTranslation } from "react-i18next";
+
+// import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
-import AtomsIcon from "@material-ui/icons/Category";
-import CheatIcon from "@material-ui/icons/ListAlt";
+import AtomsIcon from "@material-ui/icons/Map";
+// import CheatIcon from "@material-ui/icons/ListAlt";
 import LogosIcon from "@material-ui/icons/Security";
 import TilesIcon from "@material-ui/icons/ViewModule";
 
 const ElementsNav = () => {
+  const { t } = useTranslation();
   const location = useLocation();
 
   const Item = ({path, name, desc, icon}) => (
     <ListItem button
               component={Link}
-              to={`/elements/${path}`}
+              to={`/elements${path}`}
               selected={!!matchPath(location.pathname,
-                                    { path: `/elements/${path}`,
+                                    { path: `/elements${path}`,
                                       exact: true})}>
       <ListItemIcon>{icon}</ListItemIcon>
       <ListItemText primary={name}
@@ -32,29 +35,26 @@ const ElementsNav = () => {
   return (
     <>
       <List>
-        <Item path="tiles"
-              name="Tiles"
-              desc="18xx tiles from all games"
-              icon={<TilesIcon/>}/>
-        <Item path="atoms"
-              name="Map Elements"
-              desc="Basic atoms for maps and tiles"
+        <Item path="/"
+              name={t('elements.atoms.title')}
+              desc={t('elements.atoms.description')}
               icon={<AtomsIcon/>}/>
-      </List>
-      <Divider/>
-      <List>
-        <Item path="logos"
-              name="Company Logos"
-              desc="Included train company logos"
+        <Item path="/tiles"
+              name={t('elements.tiles.title')}
+              desc={t('elements.tiles.description')}
+              icon={<TilesIcon/>}/>
+        <Item path="/logos"
+              name={t('elements.logos.title')}
+              desc={t('elements.logos.description')}
               icon={<LogosIcon/>}/>
       </List>
-      <Divider/>
-      <List>
-        <Item path="cheat"
-              name="Cheat Sheet"
-              desc="Data from included 18xx games"
-              icon={<CheatIcon/>}/>
-      </List>
+      {/* <Divider/> */}
+      {/* <List> */}
+      {/*   <Item path="/cheat" */}
+      {/*         name={t('elements.cheat.title')} */}
+      {/*         desc={t('elements.cheat.description')} */}
+      {/*         icon={<CheatIcon/>}/> */}
+      {/* </List> */}
     </>
   )
 };

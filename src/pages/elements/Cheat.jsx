@@ -1,7 +1,7 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
-import games from "./data/games";
+import games from "../../data/games";
 
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
@@ -20,8 +20,6 @@ import map from "ramda/src/map";
 import max from "ramda/src/max";
 import prop from "ramda/src/prop";
 import reduce from "ramda/src/reduce";
-
-import "./CheatSheet.scss";
 
 const Value = ({game, field}) => {
   if (game[field]) {
@@ -72,7 +70,8 @@ const gameRows = map(key => {
   );
 }, keys(games));
 
-const CheatSheet = () => {
+const Cheat = () => {
+  console.log(games);
   return (
     <Container>
       <Typography component="h1" variant="h4" gutterBottom>
@@ -100,4 +99,4 @@ const CheatSheet = () => {
   );
 };
 
-export default CheatSheet;
+export default Cheat;

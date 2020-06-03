@@ -26,6 +26,7 @@ import Loading from "./Loading";
 
 import Home from "./pages/Home";
 import Docs from "./pages/Docs";
+import Elements from "./pages/Elements";
 import Games from "./pages/Games";
 
 import curry from "ramda/src/curry";
@@ -70,6 +71,7 @@ const App = () => {
                       <Home />
                     </Route>
                     <Route path="/elements">
+                      <Elements />
                     </Route>
                     <Route path="/docs">
                       <Docs />
