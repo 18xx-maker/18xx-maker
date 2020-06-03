@@ -82,9 +82,7 @@ export const useGameProvider = (sendAlert) => {
         sendAlert("success", `${game.info.title} loaded`);
       })
       .catch((err) => {
-        console.log("GOT HERE");
         sendAlert("error", err);
-        console.log("GOT HERE");
       });
   };
 
