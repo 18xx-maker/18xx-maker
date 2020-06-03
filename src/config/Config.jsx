@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'flex-start',
     padding: theme.spacing(3),
+    overflow: 'visible'
   },
   configItem: {
     minWidth: 200,

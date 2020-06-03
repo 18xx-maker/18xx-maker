@@ -1,6 +1,7 @@
 import React, { useState, Suspense } from "react";
 
 import { Route, Switch } from "react-router";
+import { useBooleanParam } from "./util/query";
 
 import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -33,6 +34,8 @@ const path = require('path');
 const theme = createMuiTheme({});
 
 const App = () => {
+  const [print] = useBooleanParam('print');
+
   // Success, Warning and Error Alerts
   const [alert, setAlert] = useState({ open: false });
   const sendAlert = curry((type, message) => setAlert({ open: true, type, message }));
@@ -76,12 +79,12 @@ const App = () => {
                     </Route>
                   </Switch>
                 </Viewport>
-                <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
-                          open={alert.open}
-                          onClose={closeAlert}
-                          autoHideDuration={6000}>
-                  <Alert severity={alert.type}>{alert.message}</Alert>
-                </Snackbar>
+                {print || <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
+                                    open={alert.open}
+                                    onClose={closeAlert}
+                                    autoHideDuration={6000}>
+                            <Alert severity={alert.type}>{alert.message}</Alert>
+                          </Snackbar>}
                 <svg
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
