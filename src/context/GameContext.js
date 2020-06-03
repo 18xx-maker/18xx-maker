@@ -12,14 +12,15 @@ const GameContext = createContext({ game: null });
 
 // Given a File object returns a promise with the json data
 const loadFile = (file) => {
-  return file.text()
-             .then(JSON.parse)
-             .then(assoc('id', 'local'))
-             .then(assoc('slug', 'local'))
-             .catch(err => {
-               console.error(err);
-               throw new Error(`Error loading file: ${file.name}`);
-             });
+  return file
+    .text()
+    .then(JSON.parse)
+    .then(assoc("id", "local"))
+    .then(assoc("slug", "local"))
+    .catch((err) => {
+      console.error(err);
+      return Promise.reject(`Error loading file: ${file.name}`);
+    });
 };
 
 // Give a game id attempts to find it locally or in @18xx-maker/games
@@ -32,17 +33,23 @@ const loadBundledGame = (id) => {
 
   let importPromise;
   if (gameInfo.local) {
-    importPromise = import('../data/games/' + games[id].file);
+    importPromise = import(
+      /* webpackChunkName: "game.[request]" */ "../data/games/" + games[id].file
+    );
   } else {
-    importPromise = import('@18xx-maker/games/games/' + games[id].file);
+    importPromise = import(
+      /* webpackChunkName: "game.[request]" */ "@18xx-maker/games/games/" +
+        games[id].file
+    );
   }
 
-  return importPromise.then(assoc('id', gameInfo.id))
-                      .then(assoc('slug', gameInfo.slug))
-                      .catch(err => {
-                        console.error(err);
-                        throw new Error(`Error loading game: ${id}`);
-                      })
+  return importPromise
+    .then(assoc("id", gameInfo.id))
+    .then(assoc("slug", gameInfo.slug))
+    .catch((err) => {
+      console.error(err);
+      return Promise.reject(`Error loading game: ${id}`);
+    });
 };
 
 const loadFileOrId = (fileOrId) => {
@@ -54,18 +61,16 @@ const loadFileOrId = (fileOrId) => {
   return loadBundledGame(fileOrId);
 };
 
-export const useGameProvider = () => {
-  const sendAlert = useAlert();
-
+export const useGameProvider = (sendAlert) => {
   // Current local file that has been loaded
-  const [localGame, setLocalGame] = useLocalState('game', null);
+  const [localGame, setLocalGame] = useLocalState("game", null);
 
   // Current game that we're editing
   const [game, setGame] = useState(null);
 
   const loadGame = (fileOrId) => {
     return loadFileOrId(fileOrId)
-      .then(game => {
+      .then((game) => {
         if (game.id === "local") {
           // This is a local file, so save it
           setGame(null);
@@ -76,8 +81,12 @@ export const useGameProvider = () => {
         }
         sendAlert("success", `${game.info.title} loaded`);
       })
-      .catch(sendAlert("error"));
-  }
+      .catch((err) => {
+        console.log("GOT HERE");
+        sendAlert("error", err);
+        console.log("GOT HERE");
+      });
+  };
 
   const closeGame = () => {
     if (!game && !localGame) {
@@ -90,17 +99,17 @@ export const useGameProvider = () => {
     setLocalGame(null);
     setGame(null);
     sendAlert("success", `${name} closed`);
-  }
+  };
 
   return {
     game: game || localGame,
     loadGame,
-    closeGame
+    closeGame,
   };
-}
+};
 
 export const useGame = () => {
   return useContext(GameContext);
-}
+};
 
 export default GameContext;

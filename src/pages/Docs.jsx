@@ -82,7 +82,7 @@ const Docs = () => {
   const file = isEmpty(pathname) ? "index" : pathname;
 
   useEffect(() => {
-    import("./docs/" + file + ".md")
+    import(/* webpackChunkName: "doc.[request]" */"./docs/" + file + ".md")
       .then(x => x.default)
       .then(fetch)
       .then(result => result.text())
