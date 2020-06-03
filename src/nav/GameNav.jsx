@@ -26,7 +26,6 @@ import Select from "@material-ui/core/Select";
 import Switch from "@material-ui/core/Switch";
 
 import GameIcon from "@material-ui/icons/Train";
-import LoadIcon from "@material-ui/icons/Launch";
 import WarningIcon from "@material-ui/icons/Warning";
 
 import File from "../util/File";
@@ -65,16 +64,6 @@ const GameNav = () => {
 
   return (
     <>
-      <List>
-        <ListItem button
-                  component={RouterLink}
-                  to={`/games/`}>
-          <ListItemIcon><LoadIcon/></ListItemIcon>
-          <ListItemText primary={t('game.load')}
-                        secondary={t('game.loadDescription')}/>
-        </ListItem>
-      </List>
-      <Divider/>
       <List>
         <ListItem button
                   component={RouterLink}
