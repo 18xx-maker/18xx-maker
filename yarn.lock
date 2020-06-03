@@ -7,10 +7,17 @@
   resolved "https://registry.yarnpkg.com/7zip-bin/-/7zip-bin-5.0.3.tgz#bc5b5532ecafd923a61f2fb097e3b108c0106a3f"
   integrity sha512-GLyWIFBbGvpKPGo55JyRZAo4lVbnBiD52cKlw/0Vt+wnmKvWJkpZvsjVoaIolyBXDeAQKSicRtqFNPem9w0WYA==
 
+<<<<<<< HEAD
 "@18xx-maker/games@4.0.0-3":
   version "4.0.0-3"
   resolved "https://registry.yarnpkg.com/@18xx-maker/games/-/games-4.0.0-3.tgz#d2f8c124bc2d9f03e6d8738fc991e220a696dfcc"
   integrity sha512-gWkKGQehTdmXtvDikDDYYWYkeD+qJ0XZDvFsjJIaDRVUE0KVVBofbhiLD7koPQsExqtk8DbX1Ikit1m6ectNHQ==
+=======
+"@18xx-maker/games@4.0.0-1":
+  version "4.0.0-1"
+  resolved "https://registry.yarnpkg.com/@18xx-maker/games/-/games-4.0.0-1.tgz#845629f7aba2284b0def1bc7598e8cbcadd0e58d"
+  integrity sha512-7DqsqtY633ebBvb9SMwF5RdspWGQ3CaOBSVE7P3FGgJWBnD7DcMfVtgJxW5ZSXZWQhNmu1XfEADICaDeTy3FRA==
+>>>>>>> a5ff154... fix: fixing some logos
   dependencies:
     ramda "^0.27.0"
 
