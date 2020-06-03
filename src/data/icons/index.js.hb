@@ -1,6 +1,4 @@
-{{#each svgs}}
-import icon_{{#if group}}{{group}}_{{/if}}{{object}}, { ReactComponent as icon_{{#if group}}{{group}}_{{/if}}{{object}}_Component } from "./{{file}}";
-{{/each}}
+import { lazy } from "react";
 
 export default {
 {{#each svgs}}
@@ -8,8 +6,7 @@ export default {
     name: "{{name}}",
 {{#if group}}    group: "{{group}}",
 {{/if}}
-    src: icon_{{#if group}}{{group}}_{{/if}}{{object}},
-    Component: icon_{{#if group}}{{group}}_{{/if}}{{object}}_Component
+    Component: lazy(() => import(/* webpackChunkName: "{{{file}}}" */"./{{{name}}}"))
   }{{#unless @last}},{{/unless}}
 {{/each}}
 };

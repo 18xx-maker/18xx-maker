@@ -34,8 +34,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
 
     '& h4': {
-      display: 'block',
-      marginBottom: theme.spacing(4)
+      display: 'block'
     },
 
     '& h6': {
@@ -93,11 +92,29 @@ const LoadGames = () => {
     );
   }, keys(games));
 
+  const dragOverHandler = (event) => {
+    event.preventDefault();
+  };
+  const dropHandler = (event) => {
+    event.preventDefault();
+
+    // We only care about the first file dragged, always
+    if (event.dataTransfer.items) {
+      if (event.dataTransfer.items[0].kind === 'file') {
+        loadGame(event.dataTransfer.items[0].getAsFile());
+      }
+    } else {
+      loadGame(event.dataTransfer.files[0]);
+    }
+  };
+
   return (
     <Container maxWidth="md">
-      <Paper className={classes.DropBox} elevation={10}>
-        <Typography variant="h4" color="textSecondary">Drop any game json into this window to load it.</Typography>
-        <Typography variant="subtitle1">You can do this at any time, not only on this page!</Typography>
+      <Paper className={classes.DropBox}
+             onDragOver={dragOverHandler}
+             onDrop={dropHandler}
+             elevation={10}>
+        <Typography variant="h4" align="center" color="textSecondary">Drop any game json here to load it!</Typography>
       </Paper>
       <Paper className={classes.page} elevation={10}>
         <Typography variant="h3">Bundled Games</Typography>

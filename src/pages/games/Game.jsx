@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Redirect, Route, Switch } from "react-router";
 import { matchPath, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -50,54 +50,56 @@ const Game = ({game}) => {
   }
 
   return (
-    <Switch>
-      <Route path="/games/:slug/background">
-        <Background/>
-      </Route>
-      <Route path="/games/:slug/cards">
-        <Cards/>
-      </Route>
-      <Route path="/games/:slug/charters">
-        <Charters/>
-      </Route>
-      <Route path="/games/:slug/map">
-        <Map/>
-      </Route>
-      <Route path="/games/:slug/market">
-        <Market/>
-      </Route>
-      <Route path="/games/:slug/par">
-        <Par/>
-      </Route>
-      <Route path="/games/:slug/revenue">
-        <Revenue/>
-      </Route>
-      <Route path="/games/:slug/tile-manifest">
-        <TileManifest/>
-      </Route>
-      <Route path="/games/:slug/tiles">
-        <Tiles/>
-      </Route>
-      <Route path="/games/:slug/tokens">
-        <Tokens/>
-      </Route>
-      <Route>
-        <Container maxWidth="md">
-          <Paper elevation={5} className={classes.page}>
-            <Typography variant="h3">{game.info.title}</Typography>
-            {game.info.subtitle && <Typography variant="h5">{game.info.subtitle}</Typography>}
-            <Typography variant="h6">{t('game.by')} {game.info.designer}</Typography>
-            <List>
-              <ListItem>
-                <ListItemIcon><PlayersIcon/></ListItemIcon>
-                <ListItemText primary={`${game.players[0].number} - ${game.players[game.players.length - 1].number}`}
-                              secondary={t('game.players')}/>
-              </ListItem>
-            </List>
-          </Paper>
-        </Container>
-      </Route>
-    </Switch>
+    <Suspense fallback={null}>
+      <Switch>
+        <Route path="/games/:slug/background">
+          <Background/>
+        </Route>
+        <Route path="/games/:slug/cards">
+          <Cards/>
+        </Route>
+        <Route path="/games/:slug/charters">
+          <Charters/>
+        </Route>
+        <Route path="/games/:slug/map">
+          <Map/>
+        </Route>
+        <Route path="/games/:slug/market">
+          <Market/>
+        </Route>
+        <Route path="/games/:slug/par">
+          <Par/>
+        </Route>
+        <Route path="/games/:slug/revenue">
+          <Revenue/>
+        </Route>
+        <Route path="/games/:slug/tile-manifest">
+          <TileManifest/>
+        </Route>
+        <Route path="/games/:slug/tiles">
+          <Tiles/>
+        </Route>
+        <Route path="/games/:slug/tokens">
+          <Tokens/>
+        </Route>
+        <Route>
+          <Container maxWidth="md">
+            <Paper elevation={5} className={classes.page}>
+              <Typography variant="h3">{game.info.title}</Typography>
+              {game.info.subtitle && <Typography variant="h5">{game.info.subtitle}</Typography>}
+              <Typography variant="h6">{t('game.by')} {game.info.designer}</Typography>
+              <List>
+                <ListItem>
+                  <ListItemIcon><PlayersIcon/></ListItemIcon>
+                  <ListItemText primary={`${game.players[0].number} - ${game.players[game.players.length - 1].number}`}
+                                secondary={t('game.players')}/>
+                </ListItem>
+              </List>
+            </Paper>
+          </Container>
+        </Route>
+      </Switch>
+    </Suspense>
   )
 };
 

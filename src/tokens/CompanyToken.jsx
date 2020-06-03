@@ -24,7 +24,7 @@ const CompanyToken = (props) => {
   // Logo is only used if config says we should, and should be looked up
   // from abbrev if the log field isn't present for backwards
   // compatibility
-  passing.logo = config.companySvgLogos === "none" ? null : (company.logo || company.abbrev);
+  passing.logo = config.companySvgLogos === "none" ? null : company.logo;
 
   // Set the main color
   passing.color = props.color || company.color;
