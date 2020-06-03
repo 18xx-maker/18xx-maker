@@ -61,7 +61,7 @@ const Config = () => {
   let setOption = event => setConfig({ ...config, [event.target.name]: event.target.value });
 
   return (
-    <>
+    <Box>
       <Box className={classes.configSection}>
         <Typography variant="h5">Colors and Companies</Typography>
         <FormControl variant="filled" className={classes.configItem}>
@@ -299,7 +299,7 @@ const Config = () => {
           Download config.json
         </File>
       </Box>
-    </>
+    </Box>
   );
 };
 
