@@ -12,6 +12,33 @@
     "tooltip": "This game is marked as being a work in progress",
     "description": "This game might not be complete or accurate"
   },
+  "elements": {
+    "tiles": {
+      "title": "Tiles",
+      "description": "18xx tiles from all games",
+      "page": {
+        "description": "This page shows all tiles that 18xx Maker knows about. This includes all generic tiles, all tiles from bundled games, and any tiles from the current game you have loaded."
+      }
+    },
+    "atoms": {
+      "title": "Map Elements",
+      "description": "Basic atoms for maps and tiles",
+      "page": {
+        "description": "This page shows examples of all items that you can display on either map hexes or tiles. Use these examples to help prototype your game!"
+      }
+    },
+    "logos": {
+      "title": "Company Logos",
+      "description": "Included train company logos",
+      "page": {
+        "description": "Here are all of the SVG logos bundled with 18xx Maker."
+      }
+    },
+    "cheat": {
+      "title": "Cheat Sheet",
+      "description": "Data from included 18xx games"
+    }
+  },
   "game": {
     "by": "by",
     "cards": {
