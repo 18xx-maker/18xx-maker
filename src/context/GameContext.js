@@ -1,9 +1,9 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import { Redirect, useLocation, matchPath } from "react-router-dom";
 
 import { useAlert } from "./AlertContext";
 
-import useLocalState from "../util/useLocalState";
+import useSessionState from "../util/useSessionState";
 
 import games from "../data/games";
 
@@ -11,19 +11,29 @@ import assoc from "ramda/src/assoc";
 import is from "ramda/src/is";
 import isNil from "ramda/src/isNil";
 
+import { isElectron } from "../util";
+
 const path = require("path");
 
 const GameContext = createContext({ game: null });
 
 // Given a File object returns a promise with the json data
 const loadFile = (file) => {
-  let basename = path.basename(file.name, ".json");
+  let id = path.basename(file.name, ".json");
+  let slug = encodeURIComponent(id);
 
   return file
     .text()
     .then(JSON.parse)
-    .then(assoc("id", basename))
-    .then(assoc("slug", encodeURIComponent(basename)))
+    .then(assoc("id", id))
+    .then(assoc("slug", slug))
+    .then((game) => {
+      if (isElectron) {
+        let ipcRenderer = window.require("electron").ipcRenderer;
+        ipcRenderer.send("watch", file.path, id, slug);
+      }
+      return game;
+    })
     .catch((err) => {
       console.error(err);
       return Promise.reject(`Error loading file: ${file.name}`);
@@ -53,6 +63,13 @@ const loadBundledGame = (id) => {
   return importPromise
     .then(assoc("id", gameInfo.id))
     .then(assoc("slug", gameInfo.slug))
+    .then((game) => {
+      if (isElectron) {
+        let ipcRenderer = window.require("electron").ipcRenderer;
+        ipcRenderer.send("watch"); // Not sending a file path to stop watching this file
+      }
+      return game;
+    })
     .catch((err) => {
       console.error(err);
       return Promise.reject(`Error loading game: ${id}`);
@@ -70,7 +87,7 @@ const loadFileOrId = (fileOrId) => {
 
 export const GameProvider = ({ children }) => {
   const sendAlert = useAlert();
-  const [game, setGame] = useLocalState("game", null);
+  const [game, setGame] = useSessionState("game", null);
   const location = useLocation();
 
   const loadGame = (fileOrId) => {
@@ -84,6 +101,21 @@ export const GameProvider = ({ children }) => {
         sendAlert("error", err);
       });
   };
+
+  // If we're running in electron, listen for game updates and load them
+  useEffect(() => {
+    if (isElectron) {
+      let updateGame = (event, game) => {
+        setGame(game);
+        sendAlert("info", `${game.info.title} updated`);
+      };
+
+      let ipcRenderer = window.require("electron").ipcRenderer;
+      ipcRenderer.on("watch", updateGame);
+
+      return () => ipcRenderer.removeListener("watch", updateGame);
+    }
+  });
 
   // Now we test to see if the game we have loaded matches any url we are trying to hit and if not, fix it.
   const match = matchPath(location.pathname, {
