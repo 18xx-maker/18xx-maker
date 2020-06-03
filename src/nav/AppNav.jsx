@@ -16,7 +16,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Toolbar from '@material-ui/core/Toolbar';
-import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import DocumentationIcon from '@material-ui/icons/Help';
@@ -25,7 +24,7 @@ import HomeIcon from '@material-ui/icons/Home';
 
 import GamesIcon from '@material-ui/icons/Train';
 import LoadIcon from '@material-ui/icons/OpenInBrowser';
-import WarningIcon from '@material-ui/icons/Warning';
+import MenuIcon from '@material-ui/icons/KeyboardArrowDown';
 
 import { makeStyles } from '@material-ui/core/styles';
 import GameContext from "../context/GameContext";
@@ -76,28 +75,18 @@ const NavLink = ({to, exact, text, icon}) => {
 }
 
 const getGameItem = (game, t) => {
-  let to = "/games/";
+  let to = "/games";
   let icon = <LoadIcon/>;
   let text = 'Load Games';
 
   if (game) {
     if (game.map) {
-      to = `${to}${game.slug}/map`;
+      to = `${to}/${game.slug}/map`;
     } else {
-      to = `${to}${game.slug}/`;
+      to = `${to}/${game.slug}/`;
     }
     icon = <GamesIcon/>;
     text = game.info.title;
-
-    if (game.wip) {
-      if (t) {
-        icon = <Tooltip placement="bottom" arrow title={t('wip.tooltip')}>
-                 <WarningIcon/>
-               </Tooltip>;
-      } else {
-        icon = <WarningIcon/>;
-      }
-    }
   }
 
   return { to, text, icon };
@@ -161,26 +150,42 @@ const MobileButton = ({onClick}) => {
   const { game } = useContext(GameContext);
   const item = getGameItem(game);
 
+  console.log(item);
   return (
     <Switch>
       <Route path="/" exact>
-        <Button color="inherit" startIcon={<HomeIcon/>} onClick={onClick} aria-haspopup="true">
-          <Typography noWrap>{t('nav.menu')}</Typography>
+        <Button color="inherit"
+                startIcon={<HomeIcon/>}
+                endIcon={<MenuIcon/>}
+                onClick={onClick}
+                aria-haspopup="true">
+          <Typography noWrap>{t('nav.home')}</Typography>
         </Button>
       </Route>
-      <Route path={item.path}>
-        <Button color="inherit" startIcon={item.icon} onClick={onClick} aria-haspopup="true">
-          <Typography noWrap>{t('nav.menu')}</Typography>
+      <Route path={item.to}>
+        <Button color="inherit"
+                startIcon={item.icon}
+                endIcon={<MenuIcon/>}
+                onClick={onClick}
+                aria-haspopup="true">
+          <Typography noWrap>{item.text}</Typography>
         </Button>
       </Route>
       <Route path="/elements">
-        <Button color="inherit" startIcon={<ElementsIcon/>} onClick={onClick} aria-haspopup="true">
-          <Typography noWrap>{t('nav.menu')}</Typography>
+        <Button color="inherit"
+                startIcon={<ElementsIcon/>}
+                endIcon={<MenuIcon/>}
+                onClick={onClick} aria-haspopup="true">
+          <Typography noWrap>{t('nav.elements')}</Typography>
         </Button>
       </Route>
       <Route path="/docs">
-        <Button color="inherit" startIcon={<DocumentationIcon/>} onClick={onClick} aria-haspopup="true">
-          <Typography noWrap>{t('nav.menu')}</Typography>
+        <Button color="inherit"
+                startIcon={<DocumentationIcon/>}
+                endIcon={<MenuIcon/>}
+                onClick={onClick}
+                aria-haspopup="true">
+          <Typography noWrap>{t('nav.documentation')}</Typography>
         </Button>
       </Route>
     </Switch>
