@@ -19,6 +19,8 @@
       "trains": "Trains",
       "numbers": "Number Cards"
     },
+    "load": "Load Game",
+    "loadDescription": "Open another game",
     "map": {
       "variation": "Map Variation"
     },

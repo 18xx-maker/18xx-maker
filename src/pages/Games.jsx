@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import LoadGames from "../games/LoadGames";
 
@@ -13,10 +13,10 @@ const Games = () => {
   return (
     <Switch>
       <Route path="/games" exact>
-        {game ? <Redirect to={`/games/${game.slug}/map`}/> : <LoadGames/>}
+        <LoadGames/>
       </Route>
       <Route>
-        {game ? <Game game={game}/> : <Redirect to="/games"/>}
+        <Game game={game}/>
       </Route>
     </Switch>
   );
