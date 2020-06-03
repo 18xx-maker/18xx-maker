@@ -57,7 +57,6 @@ const Paginate = ({component, data, notes, config, game, children}) => {
 }
 `;
 
-  console.log(paginationData);
   let currentPage = 0;
   let y = -paginationData.margin;
   let pages = map(height => {
