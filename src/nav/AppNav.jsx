@@ -81,7 +81,11 @@ const getGameItem = (game, t) => {
   let text = 'Load Games';
 
   if (game) {
-    to = `${to}/${game.slug}/map`;
+    if (game.map) {
+      to = `${to}${game.slug}/map`;
+    } else {
+      to = `${to}${game.slug}/`;
+    }
     icon = <GamesIcon/>;
     text = game.info.title;
 

@@ -19,7 +19,7 @@ import Viewport from "./Viewport";
 
 import AlertContext from "./context/AlertContext";
 import ConfigContext, { useConfig } from "./context/ConfigContext";
-import GameContext, { useGameProvider } from "./context/GameContext";
+import { GameProvider } from "./context/GameContext";
 
 import Loading from "./Loading";
 
@@ -41,9 +41,6 @@ const App = () => {
   // What our config looks like
   const configContext = useConfig();
 
-  // What game are we showing
-  const gameContext = useGameProvider(sendAlert);
-
   // Side panel state
   const [sideNavOpen, setSideNavOpen] = useState(false);
   const toggleSideNav = () => setSideNavOpen(!sideNavOpen);
@@ -51,7 +48,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <AlertContext.Provider value={sendAlert}>
-        <GameContext.Provider value={gameContext}>
+        <GameProvider>
           <ConfigContext.Provider value={configContext}>
             <Suspense fallback={<Loading/>}>
               <ScrollToTop>
@@ -146,7 +143,7 @@ const App = () => {
               </ScrollToTop>
             </Suspense>
           </ConfigContext.Provider>
-        </GameContext.Provider>
+        </GameProvider>
       </AlertContext.Provider>
     </ThemeProvider>
   );

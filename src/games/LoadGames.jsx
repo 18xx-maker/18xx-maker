@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link as RouterLink, useHistory } from "react-router-dom";
+
 import games from "../data/games";
 import { publishers } from "@18xx-maker/games";
 import { useGame } from "../context/GameContext";
@@ -58,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const LoadGames = () => {
+  const history = useHistory();
   const classes = useStyles();
   const { loadGame } = useGame();
 
@@ -82,7 +85,11 @@ const LoadGames = () => {
     return (
       <TableRow key={id}>
         <TableCell>
-          <Link component="button" variant="h5" onClick={() => loadGame(id)}>{game.title}</Link>
+          <Link component={RouterLink}
+                variant="h5"
+                to={`/games/${game.slug}/map`}>
+            {game.title}
+          </Link>
           {game.subtitle && <><br/>{game.subtitle}</>}
         </TableCell>
         <TableCell>{game.designer}</TableCell>
@@ -92,20 +99,25 @@ const LoadGames = () => {
     );
   }, keys(games));
 
+  const getEventFile = (event) => {
+    if (event.dataTransfer.items) {
+      if (event.dataTransfer.items[0].kind === 'file') {
+        return event.dataTransfer.items[0].getAsFile();
+      }
+    }
+
+    return event.dataTransfer.files[0];
+  };
   const dragOverHandler = (event) => {
     event.preventDefault();
   };
   const dropHandler = (event) => {
     event.preventDefault();
 
-    // We only care about the first file dragged, always
-    if (event.dataTransfer.items) {
-      if (event.dataTransfer.items[0].kind === 'file') {
-        loadGame(event.dataTransfer.items[0].getAsFile());
-      }
-    } else {
-      loadGame(event.dataTransfer.files[0]);
-    }
+    loadGame(getEventFile(event))
+      .then(game => {
+        history.push(`/games/${game.slug}/map`);
+      });
   };
 
   return (
