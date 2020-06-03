@@ -3,8 +3,9 @@
   "nav": {
     "menu": "Menu",
     "home": "Home",
-    "elements": "Game Elements",
-    "documentation": "Documentation"
+    "load": "Load Games",
+    "elements": "Elements",
+    "docs": "Help"
   },
   "wip": {
     "wip": "Work in progress",
