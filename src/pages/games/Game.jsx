@@ -89,11 +89,11 @@ const Game = ({game}) => {
               {game.info.subtitle && <Typography variant="h5">{game.info.subtitle}</Typography>}
               <Typography variant="h6">{t('game.by')} {game.info.designer}</Typography>
               <List>
-                <ListItem>
-                  <ListItemIcon><PlayersIcon/></ListItemIcon>
-                  <ListItemText primary={`${game.players[0].number} - ${game.players[game.players.length - 1].number}`}
-                                secondary={t('game.players')}/>
-                </ListItem>
+                {game.players && <ListItem>
+                                   <ListItemIcon><PlayersIcon/></ListItemIcon>
+                                   <ListItemText primary={`${game.players[0].number} - ${game.players[game.players.length - 1].number}`}
+                                                 secondary={t('game.players')}/>
+                                 </ListItem>}
               </List>
             </Paper>
           </Container>
