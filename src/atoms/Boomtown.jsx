@@ -92,7 +92,7 @@ const Boomtown = ({ border, city, name, x, color, bgColor, width, strokeWidth, s
                 fill="none"
                 stroke="black"
                 strokeWidth={strokeWidth}
-                stroke-dasharray={strokeDashArray}
+                strokeDasharray={strokeDashArray}
                 cx="0" cy="0"
                 r={centerTownWidth}
               />
@@ -131,7 +131,7 @@ const Boomtown = ({ border, city, name, x, color, bgColor, width, strokeWidth, s
                 fill="none"
                 stroke="black"
                 strokeWidth={strokeWidth}
-                stroke-dasharray={strokeDashArray}
+                strokeDasharray={strokeDashArray}
                 cx="0" cy="0"
                 r={cityWidth}
               />
