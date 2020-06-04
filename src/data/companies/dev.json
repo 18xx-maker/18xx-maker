@@ -101,7 +101,7 @@
     {
       "name": "PostgreSQL",
       "abbrev": "PSQL",
-      "color": "navy",
+      "color": "navyBlue",
       "logo": "dev/postgresql"
     },
     {

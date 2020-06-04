@@ -6,6 +6,7 @@ import Map from "./Map";
 import HexContext from "../context/HexContext";
 import GameContext from "../context/GameContext";
 import { Redirect } from "react-router-dom";
+import { isElectron } from "../util";
 
 import VariationSelect from "../nav/VariationSelect";
 import { getMapData } from "./util";
@@ -15,6 +16,11 @@ import prop from "ramda/src/prop";
 
 import Paginate from "../util/Paginate";
 import "./MapPaginated.css";
+
+let ipcRenderer = undefined;
+if (isElectron()) {
+  ipcRenderer = window.require('electron').ipcRenderer;
+}
 
 const MapPaginated = ({ coords, paper, hexWidth }) => {
   let params = useParams();
@@ -44,6 +50,12 @@ const MapPaginated = ({ coords, paper, hexWidth }) => {
     );
   }
 
+  let handler = () => {
+    if (isElectron()) {
+      ipcRenderer.send('pdf', `/${params.game}/map-paginated`);
+    }
+  }
+
   return (
     <GameContext.Provider value={params.game}>
     <HexContext.Provider
@@ -52,7 +64,12 @@ const MapPaginated = ({ coords, paper, hexWidth }) => {
         rotation: game.info.orientation === "horizontal" ? 0 : 90
       }}
     >
-      <Paginate component="Map" notes={variationSelect} data={data}>
+      <Paginate component="Map"
+                notes={<>
+                         {variationSelect}
+                         {isElectron() && <button onClick={handler}>Print</button>}
+                       </>}
+                data={data}>
         <Map name={params.game} game={game} variation={variation} />
       </Paginate>
     </HexContext.Provider>

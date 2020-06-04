@@ -11,11 +11,11 @@ import ColorContext from "./context/ColorContext";
 import Border from "./atoms/Border";
 import Bridge from "./atoms/Bridge";
 import CenterTown from "./atoms/CenterTown";
+import Boomtown from "./atoms/Boomtown";
 import City from "./atoms/City";
 import Company from "./atoms/Company";
 import Divide from "./atoms/Divide";
 import Good from "./atoms/Good";
-import BgShapes from "./atoms/BgShapes";
 import Hex from "./atoms/Hex";
 import HexBorder from "./atoms/HexBorder";
 import Icon from "./atoms/Icon";
@@ -29,10 +29,11 @@ import RouteBonus from "./atoms/RouteBonus";
 import Terrain from "./atoms/Terrain";
 import Town from "./atoms/Town";
 import Track from "./atoms/Track";
-import Diamond from "./atoms/Diamond";
 import Tunnel from "./atoms/Tunnel";
 import TunnelEntrance from "./atoms/TunnelEntrance";
 import Value from "./atoms/Value";
+
+import Shape from "./atoms/shapes/Shape";
 
 import GameMapCompanyToken from "./tokens/GameMapCompanyToken";
 import Token from "./tokens/Token";
@@ -136,7 +137,18 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   );
   let centerTownBorders = (
     <Position data={hex.centerTowns}>
-      {t => <CenterTown border={true} />}
+      {t => <CenterTown border={true} {...t} />}
+    </Position>
+  );
+
+  let boomtowns = (
+    <Position data={hex.boomtowns}>
+      {t => <Boomtown bgColor={hex.color} {...t} />}
+    </Position>
+  );
+  let boomtownBorders = (
+    <Position data={hex.boomtowns}>
+      {t => <Boomtown border={true} {...t} />}
     </Position>
   );
 
@@ -145,7 +157,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   );
   let mediumCityBorders = (
     <Position data={hex.mediumCities}>
-      {m => <MediumCity border={true} />}
+      {m => <MediumCity border={true} {...m} />}
     </Position>
   );
 
@@ -181,14 +193,13 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
       terrainHexes.push({ ...hex.water, type: "water" });
     }
   }
+  let bgShapes = <Position data={R.filter(s => s.background, hex.shapes || [])}>{s => <Shape {...s}/>}</Position>;
+  let shapes = <Position data={R.reject(s => s.background, hex.shapes || [])}>{s => <Shape {...s}/>}</Position>;
   let terrain = (
     <Position data={terrainHexes}>{t => <Terrain {...t} />}</Position>
   );
   let bridges = (
     <Position data={hex.bridges}>{b => <Bridge {...b} />}</Position>
-  );
-  let diamonds = (
-    <Position data={hex.diamonds}>{t => <Diamond {...t} />}</Position>
   );
   let tunnels = (
     <Position data={hex.tunnels}>{t => <Tunnel {...t} />}</Position>
@@ -214,7 +225,6 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
   let industries = (
     <Position data={hex.industries}>{i => <Industry {...i} />}</Position>
   );
-  let bgShapes = <Position data={hex.bgShapes}>{g => <BgShapes {...g} />}</Position>;
   let goods = <Position data={hex.goods}>{g => <Good {...g} />}</Position>;
   let companies = (
     <Position data={hex.companies}>{c => <Company {...c} />}</Position>
@@ -263,6 +273,8 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
                 {cities}
                 {mediumCities}
                 {towns}
+                {boomtownBorders}
+                {boomtowns}
                 {centerTownBorders}
                 {centerTowns}
                 {values}
@@ -291,7 +303,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
         {industries}
         {companies}
         {names}
-        {diamonds}
+        {shapes}
         {tunnels}
         {bridges}
         {offBoardRevenue}

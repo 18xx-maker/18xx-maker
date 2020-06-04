@@ -25,7 +25,7 @@ const height = (size) => {
 }
 
 const makeNode = (x, y, reverse, revenue, size) => {
-  let value = revenue.value || revenue.revenue || revenue.cost || 0;
+  let value = R.defaultTo("", R.defaultTo(revenue.cost, R.defaultTo(revenue.revenue, revenue.value)));
   let length = letter(size) * `${value}`.length;
   let phaseLength = letter(size) * `${revenue.phase}`.length;
   let width = R.max(`${value}`.length, 2) * letter(size) + 5;
@@ -46,9 +46,9 @@ const makeNode = (x, y, reverse, revenue, size) => {
     </Color>,
     <Color context="map"
            key={`text-${value}`}>
-      {c => (
+      {(c,t) => (
         <text
-          fill={c(revenue.textColor) || c("black")}
+          fill={c(revenue.textColor) || t(c(revenue.color))}
           fontSize={size}
           dominantBaseline="central"
           textAnchor="middle"

@@ -10,29 +10,6 @@ import map from "ramda/src/map";
 
 import "./train.scss";
 
-// import yellowTrain from "../images/yellow-train.png";
-// import greenTrain from "../images/green-train.png";
-// import brownTrain from "../images/brown-train.png";
-// import grayTrain from "../images/gray-train.png";
-
-import twoT from "../images/2T.png";
-import threeT from "../images/3T.png";
-import fourT from "../images/4T.png";
-import fiveT from "../images/5T.png";
-import sixT from "../images/6T.png";
-import diesel from "../images/Diesel.png";
-import pullman from "../images/Pullman.png";
-
-const images = {
-  "2T": twoT,
-  "3T": threeT,
-  "4T": fourT,
-  "5T": fiveT,
-  "6T": sixT,
-  "Diesel": diesel,
-  "Pullman": pullman
-};
-
 const ordinal = (num) => {
   switch(num) {
     case 1:
@@ -215,7 +192,7 @@ const Train = ({ train, trains, blackBand }) => {
                                                     />)}
                   <div className="card__body">
                     {config.trains.images && (
-                      <div className={`train__image train__image--${image}`}><img alt={`${color} ${name} train`} src={images[image]}/></div>
+                      <div className={`train__image train__image--${image}`}><img alt={`${color} ${name} train`} src={require(`../images/trains/${image}.png`)}/></div>
                     )}
                     <div className="train__name" style={{ color: config.trains.style === "color" ? t(c(color)) : c(color) }}>{name}</div>
                     <div className="train__price"

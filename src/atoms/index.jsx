@@ -196,12 +196,15 @@ const atoms = [{
   group: "Towns",
   examples: [{towns: [{}]},
              {towns: [{name:{name:"Austin"}}]},
-             {towns: [{name:{name:"Boston", reverse: true}}]}]
-},{
-  group: "Center Towns",
-  examples: [{centerTowns: [{}]},
+             {towns: [{name:{name:"Boston", reverse: true}}]},
+             {centerTowns: [{}]},
              {centerTowns: [{color:"orange",name:{name:"Austin"}}]},
-             {centerTowns: [{name:{name:"Boston", reverse: true}}]}]
+             {centerTowns: [{name:{name:"Boston", reverse: true}}]},
+             {boomtowns: [{}]},
+             {boomtowns: [{city:true}]},
+             {boomtowns: [{color:"orange",name:{name:"Denver"}}]},
+             {boomtowns: [{color:"water",angle:-90,percent:0.20 },
+                          {city:true,angle: 90,percent:0.34}]}]
 },{
   group: "Medium Cities",
   examples: [{mediumCities: [{}]},
@@ -315,12 +318,28 @@ const atoms = [{
   examples: [
     {tunnels: [{cost:40}]},
     {bridges: [{cost:40}]},
-    {diamonds: [{cost:"+20"}]},
     {tunnelEntrances: [{percent:1}]},
     {tunnelEntrances: [{angle:120,percent:1,rotation:-60,color:"red"},
                        {angle:180,percent:1,color:"orange"},
                        {angle:240,percent:1,rotation:60,color:"yellow"}
                       ]}]
+},{
+  group: "Shapes",
+  examples: [
+    {shapes: [{type: "diamond", text: "+20", color: "orange"}]},
+    {shapes: [{type: "triangle", text:"-20",color:"mountain"}]},
+    {shapes: [{type: "triangle", text:"20",color:"water",reverse:true}]},
+    {shapes: [{type: "hexagon", text:"80",color:"mountain"}]},
+    {shapes: [{type: "hexagon", text:"threeve",width:100,color:"yellow",borderWidth:0}]},
+    {shapes: [{color:"red", text:"CG", textColor:"white"}]},
+    {shapes: [{color:"white",width:64,borderWidth:0},
+              {width:60,dashed:true},
+              {color:"black",width:40}]},
+    {shapes: [{width:100,color:"yellow"},
+              {type: "triangle", color: "mountain", opacity:0.9,angle:60,percent:0.6},
+              {type: "triangle", color: "water", reverse: true, angle:-60,percent:0.6},
+              {type: "diamond", color:"black",opacity:"0.5",angle:180,percent:0.6}]}
+  ]
 },{
   group: "Route Bonuses",
   examples: [

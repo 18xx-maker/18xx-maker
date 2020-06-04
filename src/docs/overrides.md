@@ -15,7 +15,7 @@ options as well!
 ## Examples
 
 You can check out the lists of currently [defined
-overrides](https://github.com/kelsin/18xx/tree/master/src/data/companies). To
+overrides](https://github.com/18xx-maker/18xx-maker/tree/master/src/data/companies). To
 create new ones just create the json and then add it to the `index.js` in that
 folder.
 

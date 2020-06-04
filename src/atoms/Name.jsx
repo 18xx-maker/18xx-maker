@@ -1,39 +1,53 @@
 import React from "react";
 import Color from "../data/Color";
+import * as uuid from "uuid";
 
-const Name = ({ name, strokeColor, strokeWidth, color, bgColor, path, doRotation, rotation, reverse, offset, y, textLength, fontFamily, fontSize, fontStyle, fontWeight }) => {
-  fontSize = fontSize || 11;
+import { getFontProps  } from "../util";
 
-  let nameNode = path ? (
-    <textPath startOffset={`${offset || 50}%`}
-              href={`#${path}`}
-              xlinkHref={`#${path}`}>
-      {name}
-    </textPath>
-  ) : name;
+import defaultTo from "ramda/src/defaultTo";
 
-  y = y || 0;
+const Name = (props) => {
+  let { name, strokeColor, strokeWidth, color, bgColor, path, doRotation, rotation, reverse, offset, x, y, textLength } = props;
+
+  let font = getFontProps(props, 11, "bold", "sans-serif");
+
+  let nameNode;
+
+  if (path) {
+    let id = uuid.v4();
+    nameNode = (
+      <>
+        <defs>
+          <path id={id} d={path} />
+        </defs>
+        <textPath startOffset={`${defaultTo(50, offset)}%`}
+                  href={`#${id}`}
+                  xlinkHref={`#${id}`}>
+          {name}
+        </textPath>
+      </>
+    );
+  } else {
+    nameNode = name;
+  }
+
+  y = defaultTo(0, y);
 
   if(!path && reverse) {
-    y += (0.75 * fontSize);
+    y += (0.75 * font.fontSize);
   }
 
   return (
     <Color>
       {(c,t,s,p) => (
-        <text
-          dy={y}
-          transform={`rotate(${((doRotation && rotation) || 0) + 360})`}
-          fill={color ? p(color) : (bgColor ? t(c(bgColor)) : p("black"))}
-          strokeWidth={strokeWidth || 0}
-          stroke={c(strokeColor || "black")}
-          fontFamily={fontFamily || "sans-serif"}
-          fontSize={fontSize || 11}
-          fontStyle={fontStyle || "regular"}
-          fontWeight={fontWeight || "bold"}
-          textLength={textLength}
-          textAnchor="middle"
-        >
+        <text dy={y} dx={x}
+              transform={`rotate(${((doRotation && rotation) || 0) + 360})`}
+              fill={color ? p(color) : (bgColor ? t(c(bgColor)) : p("black"))}
+              strokeWidth={defaultTo(0, strokeWidth)}
+              stroke={c(defaultTo("black", strokeColor))}
+              {...font}
+              textLength={textLength}
+              textAnchor="middle" >
           {nameNode}
         </text>
       )}

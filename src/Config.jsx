@@ -172,9 +172,9 @@ const CompaniesThemePreview = () => {
         <Color>
           {c => map(color => (
             <div key={color} className="preview" style={{backgroundColor: c(color)}}/>
-          ), ["black", "blue", "brightGreen", "brown", "gold", "gray", "green",
-              "lavender", "lightBlue", "lightBrown", "lime", "navy", "natural",
-              "orange", "pink", "red", "turquoise", "violet", "white", "yellow"])}
+          ), ["black", "blue", "brightGreen", "brown", "gold", "gray", "green", "inky",
+              "lavender", "lightBlue", "lightBrown", "lime", "navyBlue", "natural",
+              "orange", "pink", "red", "tan", "turquoise", "violet", "white", "yellow"])}
         </Color>
       </ColorContext.Provider>
     </div>
@@ -229,7 +229,7 @@ const Config = ({config, setConfig, resetConfig}) => {
       <Input name="companySvgLogos" label="Company Logos"
              description="This lets you choose to use SVG logos (when available) for companies instead of only colors and text. The different settings are explained on the [logos doc](/docs/logos) page" />
       <Input name="overrideCompanies" label="Override Companies"
-             description="This lets you change the companies for a game to a set list that are defined in [the code](https://github.com/kelsin/18xx/tree/master/src/data/companies)" />
+             description="This lets you change the companies for a game to a set list that are defined in [the code](https://github.com/18xx-maker/18xx-maker/tree/master/src/data/companies)" />
       <h3>Maps</h3>
       <Input name="coords" label="Coordinate Type"
              description="This lets you choose where the coordinates appear on the map (if at all)."/>
@@ -245,6 +245,8 @@ const Config = ({config, setConfig, resetConfig}) => {
       {/* <Checkbox name="plainMapDestinations" label="Plain Map Destination Spaces" */}
       {/*           description="This sets all destination spots on maps to be empty white cities with black company text:" /> */}
       <h3>Tiles</h3>
+      <Input name="tiles.id" label="Tile ID Location"
+             description="This determines where to render the tile id"/>
       <Input name="tiles.layout" label="Tile Sheet Layout"
              description="This determines how to lay out the tiles on the tile sheet. Offset is the style that tries to make as few cuts as possible. Individual just has each tile separate from the others, and die is meant from the custom die cutters that Deep Thought Games uses. Setting either die option overrides page size and the tile size option below."/>
       <Input name="tiles.width" label="Tile Width" dimension={true}

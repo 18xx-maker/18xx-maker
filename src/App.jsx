@@ -2,7 +2,6 @@ import React from "react";
 
 import SetSvgColors from "./data/SetSvgColors";
 import ScrollToTop from "./ScrollToTop";
-import Color from "./data/Color";
 
 import Nav from "./nav/Nav";
 
@@ -12,13 +11,20 @@ import Docs from "./docs";
 import Logos from "./Logos";
 
 import Tiles from "./tiles";
+import Tile from "./pages/Tile.jsx";
 
 import Home from "./Home";
 import Game from "./Game";
 
 import Footer from "./Footer";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { isElectron } from "./util";
+
+import { BrowserRouter, HashRouter, Route, Switch } from "react-router-dom";
+
+// Test to see if we're running in electron or not. If so use a hash router
+// since it's based on files
+const Router = isElectron() ? HashRouter : BrowserRouter;
 
 const App = () => (
   <Router>
@@ -45,6 +51,9 @@ const App = () => (
           </Route>
           <Route path="/logos" exact>
             <Logos />
+          </Route>
+          <Route path="/tile/:id">
+            <Tile />
           </Route>
           <Route path="/tiles">
             <Tiles />
@@ -108,20 +117,6 @@ const App = () => (
                        stroke="white"
                        strokeWidth="2" />
             </mask>
-            <Color context="companies">
-              {(c,t,s,p) => (
-                <React.Fragment>
-                  <path id="cityPath" d="M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30" />
-                  <path id="cityPathReverse" d="M 0 -30 A 30 30 0 0 0 0 30 A 30 30 0 0 0 0 -30" />
-                  <path id="city2Path" d="M 0 30 L -25 30 A 30 30 0 0 1 -25 -30 L 25 -30 A 30 30 0 0 1 25 30 L 0 30" />
-                  <path id="city2PathReverse" d="M 0 -30 L -25 -30 A 30 30 0 0 0 -25 30 L 25 30 A 30 30 0 0 0 25 -30 L 0 -30" />
-                  <path id="city3Path" d="M 0 44 L -28 44 A 30 30 0 0 1 -50 -1 L -25 -44 A 30 30 0 0 1 25 -44 L 50 -1 A 30 30 0 0 1 28 44 L 0 44" />
-                  <path id="city3PathReverse" d="M 0 44 L 28 44 A 30 30 0 0 0 50 -1 L 25 -44 A 30 30 0 0 0 -25 -44 L -50 -1 A 30 30 0 0 0 -28 44 L 0 44" />
-                  <path id="city4Path" d="M 0 53 L -25 53 A 30 30 0 0 1 -53 25 L -53 -25 A 30 30 0 0 1 -25 -53 L 25 -53 A 30 30 0 0 1 53 -25 L 53 25 A 30 30 0 0 1 25 53 L 0 53" />
-                  <path id="city4PathReverse" d="M 0 53 L 25 53 A 30 30 0 0 0 53 25 L 53 -25 A 30 30 0 0 0 25 -53 L -25 -53 A 30 30 0 0 0 -53 -25 L -53 25 A 30 30 0 0 0 -25 53 L 0 53" />
-                </React.Fragment>
-              )}
-            </Color>
           </defs>
         </svg>
         <Route exact path="/">
