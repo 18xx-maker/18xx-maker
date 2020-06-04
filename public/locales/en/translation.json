@@ -17,7 +17,19 @@
       "title": "Tiles",
       "description": "18xx tiles from all games",
       "page": {
-        "description": "This page shows all tiles that 18xx Maker knows about. This includes all generic tiles, all tiles from bundled games, and any tiles from the current game you have loaded."
+        "description": "This page shows all of the generic tiles that 18xx Maker knows about."
+      },
+      "filter": {
+        "title": "Tile Filter",
+        "all": "All",
+        "none": "None",
+        "color": "Color",
+        "id": "Tile ID",
+        "includes": "Includes",
+        "town": "Town",
+        "city": "City",
+        "halt": "Halt",
+        "revenues": "Revenues"
       }
     },
     "atoms": {
