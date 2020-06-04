@@ -1,4 +1,5 @@
 import React from "react";
+import addIndex from "ramda/src/addIndex";
 import chain from "ramda/src/chain";
 
 const Position = ({ data, children }) => {
@@ -8,7 +9,7 @@ const Position = ({ data, children }) => {
     data = [data];
   }
 
-  return chain(d => {
+  return addIndex(chain)((d, i) => {
     // If this element is hidden, then don't need to render anything
     if (d.hidden) {
       return [];
@@ -32,7 +33,7 @@ const Position = ({ data, children }) => {
 
     return [
       <g
-        key={`position-${angle}-${rotate}-${translate}-${x}-${y}`}
+        key={`position-${i}`}
         transform={`rotate(${angle} ${x} ${y}) translate(0 ${translate}) rotate(${rotate} ${x} ${y}) translate(${x} ${y})`}
       >
         {children(passing)}

@@ -6,8 +6,11 @@ import games from "../data/games";
 import { publishers } from "@18xx-maker/games";
 import { useGame } from "../context/GameContext";
 
+import ascend from "ramda/src/ascend";
+import identity from "ramda/src/identity";
 import keys from "ramda/src/keys";
 import map from "ramda/src/map";
+import sort from "ramda/src/sort";
 
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
@@ -67,20 +70,45 @@ const LoadGames = () => {
   const gameRows = map(id => {
     const game = games[id];
 
-    let publisherNode = null;
+    let linkNode = null;
+    let imageNode = null;
+
     if (game.publisher) {
       let publisher = publishers[game.publisher];
 
       if (publisher.link) {
-        publisherNode = <Link rel="noreferrer"
-                              target="_blank"
-                              href={publishers[game.publisher].link}>
-                          {publishers[game.publisher].name}
-                        </Link>;
+        linkNode = <Link rel="noreferrer"
+                         target="_blank"
+                         href={publishers[game.publisher].link}>
+                     {publishers[game.publisher].name}
+                   </Link>;
       } else {
-        publisherNode = publisher.name;
+        linkNode = publisher.name;
+      }
+
+      if (game.publisher !== "self") {
+        if (publisher.link) {
+          imageNode = <Link rel="noreferrer"
+                            target="_blank"
+                            href={publishers[game.publisher].link}>
+                        <img alt={`${publisher.name} Logo`} src={`/publishers/${game.publisher}.png`}/>
+                      </Link>;
+        } else {
+          imageNode = <img alt={`${publisher.name} Logo`} src={`/publishers/${game.publisher}.png`}/>;
+        }
       }
     }
+
+    let publisherNode = (
+      <>
+        <TableCell>
+          {linkNode}
+        </TableCell>
+        <TableCell style={{textAlign: "center"}}>
+          {imageNode}
+        </TableCell>
+      </>
+    );
 
     return (
       <TableRow key={id}>
@@ -93,11 +121,10 @@ const LoadGames = () => {
           {game.subtitle && <><br/>{game.subtitle}</>}
         </TableCell>
         <TableCell>{game.designer}</TableCell>
-        <TableCell>{publisherNode}</TableCell>
-        <TableCell></TableCell>
+        {publisherNode}
       </TableRow>
     );
-  }, keys(games));
+  }, sort(ascend(identity), keys(games)));
 
   const getEventFile = (event) => {
     if (event.dataTransfer.items) {
@@ -139,8 +166,7 @@ const LoadGames = () => {
               <TableRow>
                 <TableCell>Title</TableCell>
                 <TableCell>Designer</TableCell>
-                <TableCell>Publisher</TableCell>
-                <TableCell>Players</TableCell>
+                <TableCell colSpan={2}>Publisher</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
