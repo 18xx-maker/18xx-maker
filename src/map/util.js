@@ -3,7 +3,6 @@ import chain from "ramda/src/chain";
 import compose from "ramda/src/compose";
 import concat from "ramda/src/concat";
 import curry from "ramda/src/curry";
-import equals from "ramda/src/equals";
 import filter from "ramda/src/filter";
 import find from "ramda/src/find";
 import indexOf from "ramda/src/indexOf";
@@ -155,16 +154,17 @@ const resolveHex = curry((hexes, hex) => {
 const topCoord = curry((hexes, hexWidth, x) => {
   let coords = hexesToCoords(hexes);
   let filtered = filter(c => c[0] === x, coords);
-  let maxHex = reduce((m,x) => min(m, nth(1,x)), 1000, filtered);
+  let minHex = reduce((m,x) => min(m, nth(1,x)), 1000, filtered);
+
+  let allHexesNext = filter(c => c[0] === x - 1 || c[0] === x + 1, coords);
+  let minHexNext = reduce((m,x) => min(m, nth(1,x)), 1000, allHexesNext);
 
   let extra = 0;
-  let hexesAbove = filter(c => equals(c, [x - 1, maxHex - 1]) || equals(c, [x + 1, maxHex - 1]),
-                          coords);
-  if(hexesAbove.length > 0) {
-    extra = hexWidth * HEX_RATIO;
+  if (minHex - minHexNext > 0) {
+    extra = (minHex - minHexNext - 1) * 1.5 * hexWidth * HEX_RATIO + hexWidth * HEX_RATIO;
   }
 
-  let y = (x % 2 === 0 ? 10 : 8) + (1.5 * hexWidth * HEX_RATIO * (maxHex - 1)) - extra;
+  let y = (x % 2 === 0 ? 10 : 8) + (1.5 * hexWidth * HEX_RATIO * (minHex - 1)) - extra;
   return y;
 });
 
@@ -173,11 +173,12 @@ const bottomCoord = curry((hexes, hexWidth, x) => {
   let filtered = filter(c => c[0] === x, coords);
   let maxHex = reduce((m,x) => max(m, nth(1,x)), 1, filtered);
 
+  let allHexesNext = filter(c => c[0] === x - 1 || c[0] === x + 1, coords);
+  let maxHexNext = reduce((m,x) => max(m, nth(1,x)), 1, allHexesNext);
+
   let extra = 0;
-  let hexesAbove = filter(c => equals(c, [x - 1, maxHex + 1]) || equals(c, [x + 1, maxHex + 1]),
-                          coords);
-  if(hexesAbove.length > 0) {
-    extra = hexWidth * HEX_RATIO;
+  if (maxHexNext - maxHex > 0) {
+    extra = (maxHexNext - maxHex - 1) * 1.5 * hexWidth * HEX_RATIO + hexWidth * HEX_RATIO;
   }
 
   let y = (x % 2 === 0 ? -48 : -46) + (1.5 * hexWidth * HEX_RATIO * (maxHex + 1)) + extra;
