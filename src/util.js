@@ -313,8 +313,8 @@ export const addPaginationData = (data, config) => {
         splitPages(contentWidth, usableWidth).length *
         splitPages(contentHeight, usableHeight).length;
   const landscapePages =
-        splitPages(data.totalWidth, usableHeight).length *
-        splitPages(data.totalHeight, usableWidth).length;
+        splitPages(contentWidth, usableHeight).length *
+        splitPages(contentHeight, usableWidth).length;
   const landscape = landscapePages < portraitPages;
   const pages = landscape ? landscapePages : portraitPages;
 
