@@ -8,6 +8,7 @@ require("@babel/register");
 
 const util = require('../src/render/util');
 const config = require('../src/config.json');
+const defaults = require('../src/defaults.json');
 const setup = util.setup;
 
 setup();
@@ -124,9 +125,18 @@ const server = app.listen(9000);
         continue;
       }
 
+      let tilesLayout = config.tiles && config.tiles.layout ?
+        config.tiles.layout :
+        defaults.tiles.layout;
+      let cardsLayout = config.cards && config.cards.layout ?
+        config.cards.layout :
+        defaults.cards.layout;
       let filename = item === "tiles" ?
-        `${game}-${item}-${config.tiles.layout}.pdf` :
-        `${game}-${item}.pdf`;
+        `${game}-${item}-${tilesLayout}.pdf` :
+        (item === "cards" ?
+          `${game}-${item}-${cardsLayout}.pdf` :
+          `${game}-${item}.pdf`);
+
       console.log(`Printing ${filename}`);
       await page.goto(`http://localhost:9000/${game}/${item}`, {waitUntil: 'networkidle2'});
       await page.pdf({path: `build/render/${game}/${filename}`, scale: 1.0, preferCSSPageSize: true});
