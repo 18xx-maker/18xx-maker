@@ -20,41 +20,41 @@ import zipWith from "ramda/src/zipWith";
 export const HEX_RATIO = 0.57735;
 export const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-const radians = degrees => degrees * (Math.PI / 180);
+const radians = (degrees) => degrees * (Math.PI / 180);
 
 // Get amount of space needed for coordinates
-export const getCoordSpace = coords => {
-  switch(coords) {
-  case "outside":
-    return 100;
-  case "edge":
-    return 50;
-  default:
-    return 0;
+export const getCoordSpace = (coords) => {
+  switch (coords) {
+    case "outside":
+      return 100;
+    case "edge":
+      return 50;
+    default:
+      return 0;
   }
 };
 
 // How much should we offset map positioning based on our coordinate choice?
-export const getCoordOffset = coords => {
-  switch(coords) {
-  case "outside":
-    return 50;
-  case "edge":
-    return 25;
-  default:
-    return 0;
+export const getCoordOffset = (coords) => {
+  switch (coords) {
+    case "outside":
+      return 50;
+    case "edge":
+      return 25;
+    default:
+      return 0;
   }
 };
 
 // Convert a number to it's alpha coordinate
-export const toAlpha = num => {
+export const toAlpha = (num) => {
   if (num <= 0) {
     return "";
   } else if (num <= alpha.length) {
     return nth(num - 1, alpha);
   } else {
     let remainder = num % alpha.length;
-    if(remainder === 0) {
+    if (remainder === 0) {
       remainder = alpha.length;
     }
     let quotient = Math.floor((num - 1) / alpha.length);
@@ -73,8 +73,8 @@ export const alphaToInt = compose(
 // Regexp to find coordinates
 export const coordsRegExp = /([a-z]+)([0-9]+)/i;
 
-export const toCoords = str => {
-  if(Array.isArray(str)) {
+export const toCoords = (str) => {
+  if (Array.isArray(str)) {
     return str;
   }
 
@@ -103,12 +103,12 @@ export const maxMapY = compose(
 );
 
 export const getTotalWidth = (maxX, hexWidth, extraWidth, coordSpace) =>
-  ((extraWidth || 0) * hexWidth / 150.0) +
+  ((extraWidth || 0) * hexWidth) / 150.0 +
   coordSpace +
   0.5 * hexWidth * (maxX + 1);
 
 export const getTotalHeight = (maxY, hexWidth, extraHeight, coordSpace) =>
-  ((extraHeight || 0) * hexWidth / 150.0) +
+  ((extraHeight || 0) * hexWidth) / 150.0 +
   coordSpace +
   (1.5 * (maxY - 1) * (HEX_RATIO * hexWidth) + 2 * (HEX_RATIO * hexWidth));
 
@@ -116,27 +116,35 @@ const hexesToCoords = compose(map(toCoords), chain(prop("hexes")));
 
 export const mergeHex = (a, b) => {
   // First check if we need to merge deep!
-  return mergeDeepWithKey((key, da, db) => {
-    if (Array.isArray(da)) {
-      if(key === "track" || key === "offBoardTrack") {
-        // Concat tracks
-        return concat(da, db);
-      } else if(key === "companies" || key === "hexes" || key === "removeBorders") {
-        // New companies and hexes only
-        return da;
+  return mergeDeepWithKey(
+    (key, da, db) => {
+      if (Array.isArray(da)) {
+        if (key === "track" || key === "offBoardTrack") {
+          // Concat tracks
+          return concat(da, db);
+        } else if (
+          key === "companies" ||
+          key === "hexes" ||
+          key === "removeBorders"
+        ) {
+          // New companies and hexes only
+          return da;
+        } else {
+          return zipWith(mergeHex, da, db);
+        }
       } else {
-        return zipWith(mergeHex, da, db);
+        return da;
       }
-    } else {
-      return da;
-    }
-  }, a, b);
+    },
+    a,
+    b
+  );
 };
 
 const resolveHex = curry((hexes, hex) => {
   if (hex.copy) {
     // Find copy
-    let copyHex = find(h => indexOf(hex.copy, h.hexes) > -1, hexes);
+    let copyHex = find((h) => indexOf(hex.copy, h.hexes) > -1, hexes);
 
     if (copyHex) {
       let merged = mergeHex(hex, resolveHex(hexes, copyHex));
@@ -153,49 +161,57 @@ const resolveHex = curry((hexes, hex) => {
 
 const topCoord = curry((hexes, hexWidth, x) => {
   let coords = hexesToCoords(hexes);
-  let filtered = filter(c => c[0] === x, coords);
-  let minHex = reduce((m,x) => min(m, nth(1,x)), 1000, filtered);
+  let filtered = filter((c) => c[0] === x, coords);
+  let minHex = reduce((m, x) => min(m, nth(1, x)), 1000, filtered);
 
-  let allHexesNext = filter(c => c[0] === x - 1 || c[0] === x + 1, coords);
-  let minHexNext = reduce((m,x) => min(m, nth(1,x)), 1000, allHexesNext);
+  let allHexesNext = filter((c) => c[0] === x - 1 || c[0] === x + 1, coords);
+  let minHexNext = reduce((m, x) => min(m, nth(1, x)), 1000, allHexesNext);
 
   let extra = 0;
   if (minHex - minHexNext > 0) {
-    extra = (minHex - minHexNext - 1) * 1.5 * hexWidth * HEX_RATIO + hexWidth * HEX_RATIO;
+    extra =
+      (minHex - minHexNext - 1) * 1.5 * hexWidth * HEX_RATIO +
+      hexWidth * HEX_RATIO;
   }
 
-  let y = (x % 2 === 0 ? 10 : 8) + (1.5 * hexWidth * HEX_RATIO * (minHex - 1)) - extra;
+  let y =
+    (x % 2 === 0 ? 10 : 8) + 1.5 * hexWidth * HEX_RATIO * (minHex - 1) - extra;
   return y;
 });
 
 const bottomCoord = curry((hexes, hexWidth, x) => {
   let coords = hexesToCoords(hexes);
-  let filtered = filter(c => c[0] === x, coords);
-  let maxHex = reduce((m,x) => max(m, nth(1,x)), 1, filtered);
+  let filtered = filter((c) => c[0] === x, coords);
+  let maxHex = reduce((m, x) => max(m, nth(1, x)), 1, filtered);
 
-  let allHexesNext = filter(c => c[0] === x - 1 || c[0] === x + 1, coords);
-  let maxHexNext = reduce((m,x) => max(m, nth(1,x)), 1, allHexesNext);
+  let allHexesNext = filter((c) => c[0] === x - 1 || c[0] === x + 1, coords);
+  let maxHexNext = reduce((m, x) => max(m, nth(1, x)), 1, allHexesNext);
 
   let extra = 0;
   if (maxHexNext - maxHex > 0) {
-    extra = (maxHexNext - maxHex - 1) * 1.5 * hexWidth * HEX_RATIO + hexWidth * HEX_RATIO;
+    extra =
+      (maxHexNext - maxHex - 1) * 1.5 * hexWidth * HEX_RATIO +
+      hexWidth * HEX_RATIO;
   }
 
-  let y = (x % 2 === 0 ? -48 : -46) + (1.5 * hexWidth * HEX_RATIO * (maxHex + 1)) + extra;
+  let y =
+    (x % 2 === 0 ? -48 : -46) +
+    1.5 * hexWidth * HEX_RATIO * (maxHex + 1) +
+    extra;
   return y;
 });
 
 const leftCoord = curry((hexes, hexWidth, y) => {
-  let filtered = filter(c => c[1] === y, hexesToCoords(hexes));
-  let maxHex = reduce((m,x) => min(m, nth(0,x)), 1000, filtered);
-  let x = 10 + (hexWidth * 0.5 * (maxHex - 1));
+  let filtered = filter((c) => c[1] === y, hexesToCoords(hexes));
+  let maxHex = reduce((m, x) => min(m, nth(0, x)), 1000, filtered);
+  let x = 10 + hexWidth * 0.5 * (maxHex - 1);
   return x;
 });
 
 const rightCoord = curry((hexes, hexWidth, y) => {
-  let filtered = filter(c => c[1] === y, hexesToCoords(hexes));
-  let maxHex = reduce((m,x) => max(m, nth(0,x)), 1, filtered);
-  let x = 40 + (hexWidth * 0.5 * (maxHex + 1));
+  let filtered = filter((c) => c[1] === y, hexesToCoords(hexes));
+  let maxHex = reduce((m, x) => max(m, nth(0, x)), 1, filtered);
+  let x = 40 + hexWidth * 0.5 * (maxHex + 1);
   return x;
 });
 
@@ -289,7 +305,7 @@ export const mapCoord = (string, data) => {
     let y = data.hexY(i, j);
 
     let point = pTest[2];
-    let angle = (60 * (point - 1));
+    let angle = 60 * (point - 1);
     let length = 75 * data.scale;
 
     let angleFromFlat = (angle % 60) - 30;
@@ -301,8 +317,8 @@ export const mapCoord = (string, data) => {
     return `${x} ${y}`;
   }
 
-  return string
-}
+  return string;
+};
 
 export const getMapHexes = (game, variation) => {
   variation = variation || 0;
@@ -325,16 +341,15 @@ export const getMapHexes = (game, variation) => {
   hexes = map(resolveHex(hexes), hexes);
 
   return hexes;
-}
+};
 
 export const getMapHex = (game, hex, variation) => {
   let hexes = getMapHexes(game, variation);
 
-  return find(h => h.hexes.includes(hex),
-         hexes);
-}
+  return find((h) => h.hexes.includes(hex), hexes);
+};
 
-const squashRatio = 87/86.6025;
+const squashRatio = 87 / 86.6025;
 
 export const getMapData = (game, coords, hexWidth, variation) => {
   variation = variation || 0;
@@ -357,11 +372,11 @@ export const getMapData = (game, coords, hexWidth, variation) => {
   let halfHexWidth = 0.5 * hexWidth;
 
   let hexX = (x, y) => {
-    return (x * halfHexWidth) + coordOffset;
+    return x * halfHexWidth + coordOffset;
   };
 
   let hexY = (x, y) => {
-    return ((y - 1) * 1.5 * edge + edge) + coordOffset;
+    return (y - 1) * 1.5 * edge + edge + coordOffset;
   };
 
   // Find all hexes
@@ -377,39 +392,41 @@ export const getMapData = (game, coords, hexWidth, variation) => {
 
     // Remove any hexes set to be removed
     if (gameMap.remove !== undefined) {
-      hexes = map(hex => {
-        return assoc("hexes",
-                reject(coord => (gameMap.remove || []).includes(coord),
-                       hex.hexes),
-                hex);
+      hexes = map((hex) => {
+        return assoc(
+          "hexes",
+          reject((coord) => (gameMap.remove || []).includes(coord), hex.hexes),
+          hex
+        );
       }, hexes);
     }
 
-    borderTexts = concat(
-      game.map[gameMap.copy].borderTexts || [],
-      borderTexts
-    );
+    borderTexts = concat(game.map[gameMap.copy].borderTexts || [], borderTexts);
 
-    borders = concat(
-      game.map[gameMap.copy].borders || [],
-      borders
-    );
+    borders = concat(game.map[gameMap.copy].borders || [], borders);
 
-    lines = concat(
-      game.map[gameMap.copy].lines || [],
-      lines
-    );
+    lines = concat(game.map[gameMap.copy].lines || [], lines);
   }
   hexes = map(resolveHex(hexes), hexes);
 
   let maxX = maxMapX(hexes);
   let maxY = maxMapY(hexes);
 
-  let totalWidth = getTotalWidth(maxX, hexWidth, game.info.extraTotalWidth, coordSpace);
-  let totalHeight = getTotalHeight(maxY, hexWidth, game.info.extraTotalHeight, coordSpace);
+  let totalWidth = getTotalWidth(
+    maxX,
+    hexWidth,
+    game.info.extraTotalWidth,
+    coordSpace
+  );
+  let totalHeight = getTotalHeight(
+    maxY,
+    hexWidth,
+    game.info.extraTotalHeight,
+    coordSpace
+  );
   let b18TotalHeight = totalHeight * squashRatio;
-  let printWidth = `${(50 + totalWidth) / 100.0}in`;
-  let printHeight = `${(50 + totalHeight) / 100.0}in`;
+  let printWidth = `${Math.ceil(51.5 + totalWidth) / 100.0}in`;
+  let printHeight = `${Math.ceil(51.5 + totalHeight) / 100.0}in`;
   let b18PrintHeight = `${(50 + b18TotalHeight) / 100.0}in`;
   let humanWidth = `${Math.ceil((50 + totalWidth) / 100.0)}in`;
   let humanHeight = `${Math.ceil((50 + totalHeight) / 100.0)}in`;
@@ -456,8 +473,8 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     // Total height and width in svg units
     totalWidth: horizontal ? totalHeight : totalWidth,
     totalHeight: horizontal ? totalWidth : totalHeight,
-    b18TotalWidth : horizontal ? b18TotalHeight : totalWidth,
-    b18TotalHeight : horizontal ? totalWidth : b18TotalHeight,
+    b18TotalWidth: horizontal ? b18TotalHeight : totalWidth,
+    b18TotalHeight: horizontal ? totalWidth : b18TotalHeight,
 
     // Print height and width in CSS units
     printWidth: horizontal ? printHeight : printWidth,
@@ -474,10 +491,18 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     hexY: horizontal ? hexX : hexY,
 
     // Where to place coordinates
-    topCoord: horizontal ? leftCoord(hexes, hexWidth) : topCoord(hexes, hexWidth),
-    leftCoord: horizontal ? topCoord(hexes, hexWidth) : leftCoord(hexes, hexWidth),
-    bottomCoord: horizontal ? rightCoord(hexes, hexWidth) : bottomCoord(hexes, hexWidth),
-    rightCoord: horizontal ? bottomCoord(hexes, hexWidth) : rightCoord(hexes, hexWidth),
+    topCoord: horizontal
+      ? leftCoord(hexes, hexWidth)
+      : topCoord(hexes, hexWidth),
+    leftCoord: horizontal
+      ? topCoord(hexes, hexWidth)
+      : leftCoord(hexes, hexWidth),
+    bottomCoord: horizontal
+      ? rightCoord(hexes, hexWidth)
+      : bottomCoord(hexes, hexWidth),
+    rightCoord: horizontal
+      ? bottomCoord(hexes, hexWidth)
+      : rightCoord(hexes, hexWidth),
 
     // The resolved map variation
     map: gameMap,
@@ -488,6 +513,6 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     // Borders and Lines
     borderTexts,
     borders,
-    lines
+    lines,
   };
 };
