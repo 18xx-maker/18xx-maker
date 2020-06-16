@@ -1,6 +1,6 @@
 {
   "name": "18xx-maker",
-  "version": "1.0.1",
+  "version": "0.0.0",
   "author": "Christopher Giroir <kelsin@valefor.com>",
   "description": "18xx Prototyper",
   "repository": {
@@ -12,8 +12,7 @@
   "scripts": {
     "b18": "node ./bin/b18.js",
     "build": "yarn generate && react-scripts build",
-    "build:electron": "cross-env PUBLIC_URL=. yarn build",
-    "build:app": "yarn build:electron && electron-builder build -mwl",
+    "build:electron": "cross-env REACT_APP_ONLY_PUBLIC_GAMES=1 PUBLIC_URL=. yarn build",
     "clean": "node ./bin/clean.js",
     "generate": "yarn generate:config && yarn generate:games && yarn generate:icons && yarn generate:logos && yarn generate:themes",
     "generate:config": "node ./bin/generateConfigJson.js",
@@ -21,11 +20,13 @@
     "generate:icons": "node ./bin/generateSvgIconIndex.js",
     "generate:logos": "node ./bin/generateSvgLogoIndex.js",
     "generate:themes": "node ./bin/generateThemeIndexes.js",
+    "package": "electron-builder build -mwl -p onTagOrDraft",
     "print": "node ./bin/print.js",
+    "release": "run-s build:electron package",
     "start": "yarn generate && react-scripts start",
     "start:app": "run-p start:electron start:nobrowser",
-    "start:nobrowser": "cross-env BROWSER=none yarn start",
     "start:electron": "wait-on http://localhost:3000 && electron .",
+    "start:nobrowser": "cross-env BROWSER=none yarn start",
     "svgo": "yarn svgo:icons && yarn svgo:logos",
     "svgo:icons": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/icons",
     "svgo:logos": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/logos",
@@ -55,7 +56,10 @@
     "productName": "18xx Maker",
     "mac": {
       "category": "public.app-category.games",
-      "icon": "assets/18xx-maker.icns"
+      "icon": "assets/18xx-maker.icns",
+      "hardenedRuntime": true,
+      "entitlements": "assets/entitlements.mac.plist",
+      "entitlementsInherit": "assets/entitlements.mac.plist"
     },
     "dmg": {
       "background": "assets/background.tiff"
