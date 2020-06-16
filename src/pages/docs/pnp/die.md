@@ -12,8 +12,8 @@ trying out the machine for the first time on test paper.
 In order to use it you need the machine itself and then cutting dies. I ended up
 order two custom dies for myself:
 
-- [CST25449](/images/CST25449_Hexes_Clear_Crop.jpg) - Acryllic Hexes Die (4 x 6 per sheet)
-- [CST25450](/images/CST25450_Mini_Euro_Cards_Clear_Crop.jpg) - Acryllic Mini Euro Cards Die (9 per sheet)
+- [CST25449](https://imgur.com/cH9WNHP) - Acryllic Hexes Die (4 x 6 per sheet)
+- [CST25450](https://imgur.com/S0ozCYE) - Acryllic Mini Euro Cards Die (9 per sheet)
 
 Those two die numbers can be used to order the same items that I got from their
 custom die department. Acryllic dies mean that the cutting blades are embedded
@@ -41,5 +41,5 @@ In order to order custom dies I would contact Ellison via their [web
 page](https://www.ellisoneducation.com/contact).
 
 In order my order was $770 shipped. The cutter itself is about $400 with both
-dies being about $150 each. Your exact order may very depending on current
+dies being about \$150 each. Your exact order may very depending on current
 prices, what dies you buy, and where it needs to be shipped to.
