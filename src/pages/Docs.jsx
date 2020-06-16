@@ -62,10 +62,10 @@ const Heading = (props) => {
 
 const ElectronImage = (props) => {
   if (isElectron) {
-    return <img {...props} src={`.${props.src}`}/>;
+    return <img alt={props.title || props.src} {...props} src={`.${props.src}`}/>;
   }
 
-  return <img {...props}/>;
+  return <img alt={props.title || props.src} {...props}/>;
 };
 
 const LocalLink = (props) => {

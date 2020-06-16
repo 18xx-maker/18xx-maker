@@ -67,8 +67,8 @@ function createPDF(path) {
       let win = new BrowserWindow({
         x: 0,
         y: 0,
-        show: false,
         enableLargerThanScreen: true,
+        show: false,
         frame: false,
         transparent: true,
         webPreferences: {
@@ -77,17 +77,19 @@ function createPDF(path) {
       });
 
       win.webContents.on("did-stop-loading", () => {
-        win.webContents
-          .printToPDF({
-            marginsType: 0,
-            scaleFactor: 100,
-            printBackground: true,
-          })
-          .then((buffer) => {
-            fs.writeFileSync(filePath, buffer);
-            shell.openPath(filePath);
-            win.close();
-          });
+        setTimeout(() => {
+          win.webContents
+            .printToPDF({
+              marginsType: 0,
+              scaleFactor: 100,
+              printBackground: true,
+            })
+            .then((buffer) => {
+              fs.writeFileSync(filePath, buffer);
+              shell.openPath(filePath);
+              win.close();
+            });
+        }, 500);
       });
 
       if (path.includes("?")) {
