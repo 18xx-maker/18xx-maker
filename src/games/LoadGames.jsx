@@ -87,14 +87,15 @@ const LoadGames = () => {
       }
 
       if (game.publisher !== "self") {
+        let imageUrl = require(`@18xx-maker/games/publishers/${game.publisher}.png`);
         if (publisher.link) {
           imageNode = <Link rel="noreferrer"
                             target="_blank"
                             href={publishers[game.publisher].link}>
-                        <img alt={`${publisher.name} Logo`} src={`/publishers/${game.publisher}.png`}/>
+                        <img alt={`${publisher.name} Logo`} src={imageUrl} />
                       </Link>;
         } else {
-          imageNode = <img alt={`${publisher.name} Logo`} src={`/publishers/${game.publisher}.png`}/>;
+          imageNode = <img alt={`${publisher.name} Logo`} src={imageUrl} />;
         }
       }
     }
