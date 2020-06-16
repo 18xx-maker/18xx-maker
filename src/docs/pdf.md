@@ -22,17 +22,17 @@ This will build the app, then output a bunch of files into the
 
 ```sh
 build/render/1830
-├── background.pdf
-├── cards.pdf
-├── charters.pdf
-├── map-paginated.pdf
-├── map.pdf
-├── market-paginated.pdf
-├── market.pdf
-├── revenue.pdf
-├── tiles.pdf
-├── tile-manifest.pdf
-└── tokens.pdf
+├── 1830-background.pdf
+├── 1830-cards-miniEuroDie.pdf
+├── 1830-charters.pdf
+├── 1830-map-paginated.pdf
+├── 1830-map.pdf
+├── 1830-market-paginated.pdf
+├── 1830-market.pdf
+├── 1830-revenue.pdf
+├── 1830-tiles-offset.pdf
+├── 1830-tile-manifest.pdf
+└── 1830-tokens.pdf
 ```
 
 If you want to build all games at once you can run:
