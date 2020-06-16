@@ -162,6 +162,10 @@ const Phase = ({ phases, trains, minor, company }) => {
     R.filter(filterPhase(minor, company))
   )(phases || []);
 
+  if (phaseRows.length === 0) {
+    return null;
+  }
+
   return (
     <table>
       <thead>
