@@ -15,7 +15,7 @@ const Map = () => {
   const { game } = useContext(GameContext);
 
   const [paginated] = useBooleanParam('paginated');
-  const [variation, setVariation] = useIntParam('variation');
+  const [variation, setVariation] = useIntParam('variation', 0);
 
   if (is(Array, game.map) && isNil(variation)) {
     setVariation(0);

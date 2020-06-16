@@ -53,7 +53,7 @@ const GameNav = () => {
   const [hideNumbers, toggleNumbers] = useBooleanParam('hideNumbers');
 
   const [paginated, togglePagination] = useBooleanParam('paginated');
-  const [variation, setVariation] = useIntParam('variation');
+  const [variation, setVariation] = useIntParam('variation', 0);
   const handleVariation = (event) => setVariation(event.target.value);
 
   if (!game) {
