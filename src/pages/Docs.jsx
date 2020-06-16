@@ -60,6 +60,14 @@ const Heading = (props) => {
   }
 };
 
+const ElectronImage = (props) => {
+  if (isElectron) {
+    return <img {...props} src={`.${props.src}`}/>;
+  }
+
+  return <img {...props}/>;
+};
+
 const LocalLink = (props) => {
   if (startsWith('?', props.href)) {
     return <Link component={RouterLink} to={props.href} {...props}/>;
@@ -81,7 +89,8 @@ const renderers = {
   heading: Heading,
   paragraph: (props) => <Typography variant="body1" {...props}/>,
   listItem: (props) => <li><Typography component="span" children={props.children}/></li>,
-  link: LocalLink
+  link: LocalLink,
+  image: ElectronImage
 };
 
 const Docs = () => {
