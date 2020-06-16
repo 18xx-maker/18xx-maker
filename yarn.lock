@@ -1753,6 +1753,13 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/semver@^7.1.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.2.0.tgz#0d72066965e910531e1db4621c15d0ca36b8d83b"
+  integrity sha512-TbB0A8ACUWZt3Y6bQPstW9QNbhNeebdgLX4T/ZfkrswAfUzRiXrgd9seol+X379Wa589Pu4UEx9Uok0D4RjRCQ==
+  dependencies:
+    "@types/node" "*"
+
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
@@ -2991,6 +2998,14 @@ buffer@^5.1.0, buffer@^5.5.0:
   dependencies:
     base64-js "^1.0.2"
     ieee754 "^1.1.4"
+
+builder-util-runtime@8.7.0:
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/builder-util-runtime/-/builder-util-runtime-8.7.0.tgz#e48ad004835c8284662e8eaf47a53468c66e8e8d"
+  integrity sha512-G1AqqVM2vYTrSFR982c1NNzwXKrGLQjVjaZaWQdn4O6Z3YKjdMDofw88aD9jpyK9ZXkrCxR0tI3Qe9wNbyTlXg==
+  dependencies:
+    debug "^4.1.1"
+    sax "^1.2.4"
 
 builder-util-runtime@8.7.1:
   version "8.7.1"
@@ -4604,6 +4619,19 @@ electron-to-chromium@^1.3.378, electron-to-chromium@^1.3.413:
   version "1.3.473"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.473.tgz#d0cd5fe391046fb70674ec98149f0f97609d29b8"
   integrity sha512-smevlzzMNz3vMz6OLeeCq5HRWEj2AcgccNPYnAx4Usx0IOciq9DU36RJcICcS09hXoY7t7deRfVYKD14IrGb9A==
+
+electron-updater@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-4.3.1.tgz#9d485b6262bc56fcf7ee62b1dc1b3b105a3e96a7"
+  integrity sha512-UDC5AHCgeiHJYDYWZG/rsl1vdAFKqI/Lm7whN57LKAk8EfhTewhcEHzheRcncLgikMcQL8gFo1KeX51tf5a5Wg==
+  dependencies:
+    "@types/semver" "^7.1.0"
+    builder-util-runtime "8.7.0"
+    fs-extra "^9.0.0"
+    js-yaml "^3.13.1"
+    lazy-val "^1.0.4"
+    lodash.isequal "^4.5.0"
+    semver "^7.1.3"
 
 electron@^9.0.0:
   version "9.0.4"
@@ -7967,6 +7995,11 @@ lodash.flatten@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.flatten/-/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
   integrity sha1-8xwiIlqWMtK7+OSt2+8kCqdlph8=
+
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
 
 lodash.isplainobject@^4.0.6:
   version "4.0.6"

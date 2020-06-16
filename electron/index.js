@@ -1,4 +1,6 @@
 const { app, dialog, ipcMain, shell, BrowserWindow } = require("electron");
+const { autoUpdater } = require("electron-updater");
+
 const fs = require("fs");
 const path = require("path");
 const url = require("url");
@@ -27,6 +29,8 @@ function createWindow() {
   mainWindow.on("closed", function () {
     mainWindow = null;
   });
+
+  autoUpdater.checkForUpdatesAndNotify();
 }
 
 app.on("ready", createWindow);
