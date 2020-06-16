@@ -90,12 +90,12 @@
     ]
   },
   "dependencies": {
+    "@18xx-maker/games": "4.0.0-3",
     "chokidar": "^3.4.0",
     "electron-is-dev": "^1.2.0",
     "electron-updater": "^4.3.1"
   },
   "devDependencies": {
-    "@18xx-maker/games": "4.0.0-3",
     "@18xx-maker/schemas": "^4.1.0",
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
