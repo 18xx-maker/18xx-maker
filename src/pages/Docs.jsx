@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import ReactMarkdown from "react-markdown";
 import isEmpty from "ramda/src/isEmpty";
 
+import { isElectron } from "../util";
+
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -63,7 +65,16 @@ const LocalLink = (props) => {
     return <Link component={RouterLink} to={props.href} {...props}/>;
   }
 
-  return <Link {...props}/>;
+  if (startsWith('http', props.href) && isElectron) {
+    let handler = (e) => {
+      e.preventDefault();
+      const { shell } = window.require('electron');
+      shell.openExternal(props.href);
+    };
+    return <Link onClick={handler} {...props}/>;
+  }
+
+  return <Link target="_blank" rel="noreferrer" {...props} />;
 }
 
 const renderers = {
