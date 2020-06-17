@@ -76,6 +76,9 @@ const Track = ({ type, gauge, border, width, offset, path, color, borderColor, g
   case "mid":
     path = "m 0 0 L 0 37.5";
     break;
+  case "straightGentleHalf":
+    path = "m 0 85 L 0 20";
+    break;
   case "straight":
     path = "m 0 85 L 0 -85";
     break;
