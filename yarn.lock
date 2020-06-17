@@ -7,17 +7,17 @@
   resolved "https://registry.yarnpkg.com/7zip-bin/-/7zip-bin-5.0.3.tgz#bc5b5532ecafd923a61f2fb097e3b108c0106a3f"
   integrity sha512-GLyWIFBbGvpKPGo55JyRZAo4lVbnBiD52cKlw/0Vt+wnmKvWJkpZvsjVoaIolyBXDeAQKSicRtqFNPem9w0WYA==
 
-"@18xx-maker/games@4.0.0-3":
-  version "4.0.0-3"
-  resolved "https://registry.yarnpkg.com/@18xx-maker/games/-/games-4.0.0-3.tgz#d2f8c124bc2d9f03e6d8738fc991e220a696dfcc"
-  integrity sha512-gWkKGQehTdmXtvDikDDYYWYkeD+qJ0XZDvFsjJIaDRVUE0KVVBofbhiLD7koPQsExqtk8DbX1Ikit1m6ectNHQ==
+"@18xx-maker/games@4.0.0-4":
+  version "4.0.0-4"
+  resolved "https://registry.yarnpkg.com/@18xx-maker/games/-/games-4.0.0-4.tgz#f16b325771fabe67b00446b54c657f8c46a73573"
+  integrity sha512-1N9YBz/90r32usE9a+82sKx/MBVILZYsqYDS01HutH/dAY74cwQiepkiKp5WA/zRh8EqlWj8htGRnQmFvblf7g==
   dependencies:
     ramda "^0.27.0"
 
-"@18xx-maker/schemas@^4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@18xx-maker/schemas/-/schemas-4.1.0.tgz#e38c7ea046e0a9e4fca12322d6d4f1b2e2319936"
-  integrity sha512-XdUlkY44SrU/eW2AerslC7UjUCjQhCE13m+uevljRv4zPluZbhHp0t9RSQgf75YVBuja4cVrLO3sDIuisBWSkA==
+"@18xx-maker/schemas@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@18xx-maker/schemas/-/schemas-4.3.0.tgz#c381b0d8e86537f97220d3edbb7a0e717443baa1"
+  integrity sha512-JYKDEabGvzmcB32OSLVXrXXAMVSDfsVbSmWad0KnXMMsYc90jGWSd5QPQtMZnW3FvW10MM/d6emIEM79s8CbLA==
   dependencies:
     ajv "^6.12.2"
     chalk "^4.0.0"
