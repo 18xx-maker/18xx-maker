@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { tiles as tileDefs } from "@18xx-maker/games";
 
-import Svg from "../Svg";
-import Tile from "../Tile";
+import Svg from "../../../Svg";
+import Tile from "../../../Tile";
 
 import compose from "ramda/src/compose";
 import filter from "ramda/src/filter";
@@ -14,21 +14,20 @@ import propEq from "ramda/src/propEq";
 import take from "ramda/src/take";
 import uniq from "ramda/src/uniq";
 
-import ColorContext from "../context/ColorContext";
-import RotateContext from "../context/RotateContext";
+import ColorContext from "../../../context/ColorContext";
+import GameContext from "../../../context/GameContext";
+import RotateContext from "../../../context/RotateContext";
 
-import { getTile } from "../util";
+import { getTile } from "../../../util";
 
 import "./b18.scss";
-
-import games from "../data/games";
 
 const ROTATIONS = [0,60,120,180,240,300];
 
 const Tiles = () => {
+  const { game } = useContext(GameContext);
   let params = useParams();
   let color = params.color;
-  let game = games[params.game];
 
   let getGameTile = getTile(tileDefs, game.tiles || {});
 

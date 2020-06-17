@@ -1,12 +1,13 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext } from "react";
 
-import Svg from "../Svg";
-import CompanyToken from "../tokens/CompanyToken";
-import Token from "../tokens/Token";
+import Svg from "../../../Svg";
+import CompanyToken from "../../../tokens/CompanyToken";
+import Token from "../../../tokens/Token";
 
-import Config from "../data/Config";
-import { compileCompanies, overrideCompanies } from "../util";
+import GameContext from "../../../context/GameContext";
+import ConfigContext from "../../../context/ConfigContext";
+
+import { compileCompanies, overrideCompanies } from "../../../util";
 
 import addIndex from "ramda/src/addIndex";
 import is from "ramda/src/is";
@@ -15,34 +16,24 @@ import compose from "ramda/src/compose";
 import reject from "ramda/src/reject";
 import propEq from "ramda/src/propEq";
 
-import ColorContext from "../context/ColorContext";
+import ColorContext from "../../../context/ColorContext";
 
 import "./b18.scss";
 
-import games from "../data/games";
-
 const Tokens = () => {
-  let params = useParams();
-  let game = games[params.game];
+  const { config } = useContext(ConfigContext);
+  const { game } = useContext(GameContext);
 
-  let companyTokenNodes = (
-    <Config>
-      {(config, game) => {
-        return map(company => {
-          return (
-            <div className="token" key={company.abbrev}>
-              <Svg width={30} height={30} viewBox="-26 -26 52 52">
-                <CompanyToken company={company} />
-              </Svg>
-              <Svg width={30} height={30} viewBox="-26 -26 52 52">
-                <CompanyToken company={company} inverse={true} />
-              </Svg>
-            </div>
-          );
-        }, overrideCompanies(compileCompanies(game), config.overrideCompanies, config.overrideSelection));
-      }}
-    </Config>
-  );
+  let companyTokenNodes = map(company => (
+    <div className="token" key={company.abbrev}>
+      <Svg width={30} height={30} viewBox="-26 -26 52 52">
+        <CompanyToken company={company} />
+      </Svg>
+      <Svg width={30} height={30} viewBox="-26 -26 52 52">
+        <CompanyToken company={company} inverse={true} />
+      </Svg>
+    </div>
+  ), overrideCompanies(compileCompanies(game), config.overrideCompanies, config.overrideSelection));
 
   // "quantity" of 0 means remove the token entirely from the array
   let extraTokenNodes = compose(

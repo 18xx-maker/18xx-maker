@@ -746,6 +746,7 @@ footer a:hover {
   .MuiAppBar-root,
   .MuiDrawer-root,
   .MuiFab-root,
+  .MuiTooltip-popper,
   .WIP {
     display: none !important;
   }
