@@ -14,6 +14,10 @@ import TileManifest from "./TileManifest";
 import Tiles from "./Tiles";
 import Tokens from "./Tokens";
 
+import B18Map from "./b18/Map";
+import B18Tiles from "./b18/Tiles";
+import B18Tokens from "./b18/Tokens";
+
 import Container from "@material-ui/core/Container";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -52,6 +56,15 @@ const Game = ({game}) => {
   return (
     <Suspense fallback={null}>
       <Switch>
+        <Route path="/games/:slug/b18/map">
+          <B18Map/>
+        </Route>
+        <Route path="/games/:slug/b18/tiles/:color">
+          <B18Tiles/>
+        </Route>
+        <Route path="/games/:slug/b18/tokens">
+          <B18Tokens/>
+        </Route>
         <Route path="/games/:slug/background">
           <Background/>
         </Route>

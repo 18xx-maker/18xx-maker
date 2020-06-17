@@ -28,7 +28,10 @@ import tail from "ramda/src/tail";
 import toPairs from "ramda/src/toPairs";
 import toUpper from "ramda/src/toUpper";
 
-export const isElectron = /electron/i.test(navigator.userAgent);
+export const isElectron =
+  typeof navigator === "undefined"
+    ? false
+    : /electron/i.test(navigator.userAgent);
 
 export const tileColors = [
   "yellow",
