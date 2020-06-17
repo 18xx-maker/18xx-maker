@@ -85,8 +85,14 @@ const Track = ({ type, gauge, border, width, offset, path, color, borderColor, g
   case "gentle":
     path = `m 0 85 L 0 75 A 129.90375 129.90375 0 0 0 -64.951875 -37.5 L -73.612125 -42.5`;
     break;
+  case "gentleHalf":
+    path = `m 0 85 L 0 75 A 129.90375 129.90375 0 0 0 -15 15`;
+    break;
   case "gentleStop":
     path = `m 0 85 L 0 75 A 129.90375 129.90375 0 0 0 -38.047927473438027 -16.855822526561973`;
+    break;
+  case "gentleHalfRev":
+    path = `m 0 85 L 0 75 A 129.90375 129.90375 0 0 1 15 15`;
     break;
   case "gentleStopRev":
     path = `m 0 85 L 0 75 A 129.90375 129.90375 0 0 1 38.047927473438027 -16.855822526561973`;
