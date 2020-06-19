@@ -15,6 +15,7 @@ import Revenue from "./Revenue";
 import TileManifest from "./TileManifest";
 import Tile from "./Tile";
 import Tiles from "./Tiles";
+import Token from "./Token";
 import Tokens from "./Tokens";
 
 import B18Map from "./b18/Map";
@@ -103,6 +104,9 @@ const Game = ({game}) => {
         </Route>
         <Route path="/games/:slug/tiles">
           <Tiles/>
+        </Route>
+        <Route path="/games/:slug/tokens/:index">
+          <Token/>
         </Route>
         <Route path="/games/:slug/tokens">
           <Tokens/>
