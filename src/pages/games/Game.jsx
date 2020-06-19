@@ -4,13 +4,16 @@ import { matchPath, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import Background from "./Background";
+import Card from "./Card";
 import Cards from "./Cards";
+import Charter from "./Charter";
 import Charters from "./Charters";
 import Map from "./Map";
 import Market from "./Market";
 import Par from "./Par";
 import Revenue from "./Revenue";
 import TileManifest from "./TileManifest";
+import Tile from "./Tile";
 import Tiles from "./Tiles";
 import Tokens from "./Tokens";
 
@@ -68,8 +71,14 @@ const Game = ({game}) => {
         <Route path="/games/:slug/background">
           <Background/>
         </Route>
+        <Route path="/games/:slug/cards/:type/:index">
+          <Card/>
+        </Route>
         <Route path="/games/:slug/cards">
           <Cards/>
+        </Route>
+        <Route path="/games/:slug/charters/:index">
+          <Charter/>
         </Route>
         <Route path="/games/:slug/charters">
           <Charters/>
@@ -88,6 +97,9 @@ const Game = ({game}) => {
         </Route>
         <Route path="/games/:slug/tile-manifest">
           <TileManifest/>
+        </Route>
+        <Route path="/games/:slug/tiles/:id">
+          <Tile/>
         </Route>
         <Route path="/games/:slug/tiles">
           <Tiles/>

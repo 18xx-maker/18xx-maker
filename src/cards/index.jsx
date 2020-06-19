@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Redirect } from "react-router-dom";
 
 import ConfigContext from "../context/ConfigContext";
 import GameContext from "../context/GameContext";
@@ -39,10 +38,6 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
 
   const override = config.overrideCompanies;
   const selection = config.overrideSelection;
-
-  if (!game.companies && !game.privates && !game.trains) {
-    return <Redirect to={`/games/${game.slug}/background`} />;
-  }
 
   let companies = !hideShares ? overrideCompanies(compileCompanies(game), override, selection) || [] : [];
   let privates = !hidePrivates ? game.privates || [] : [];

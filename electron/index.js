@@ -82,6 +82,10 @@ function alert(type, message) {
   mainWindow.webContents.send("alert", type, message);
 }
 
+function progress(progress, message) {
+  mainWindow.webContents.send("progress", progress, message);
+}
+
 // Goes to path in the app, and saves a PDF to filePath
 function createPDF(path, filePath) {
   return new Promise((resolve, reject) => {
@@ -197,35 +201,26 @@ function getPath(game, item) {
   }
 }
 
-ipcMain.on("export-pdf", (event, game) => {
+ipcMain.on("export-pdf", (event, game, items) => {
   return openDirectory().then((directory) => {
     if (directory) {
+      let keys = Object.keys(items);
+      let total = keys.length;
+      let current = 0;
       return Promise.map(
-        [
-          "background",
-          "cards",
-          "charters",
-          "map",
-          "map?paginated=true",
-          "market",
-          "market?paginated=true",
-          "par",
-          "par?paginated=true",
-          "revenue",
-          "revenue?paginated=true",
-          "tile-manifest",
-          "tiles",
-          "tokens",
-        ],
+        keys,
         (item) => {
-          let filename = path.join(directory, getFilename(game, item, "pdf"));
+          let basename = items[item];
+          let filename = path.join(directory, basename);
           return createPDF(getPath(game, item), filename).then((exported) => {
             if (exported) {
-              alert("info", `Exported ${filename}`);
+              current = current + 1;
+              let percent = Math.floor((current / total) * 100);
+              progress(percent, `${current}/${total} - ${basename}`);
             }
           });
         },
-        { concurrency: 1 }
+        { concurrency: 4 }
       )
         .then(() => alert("success", `Exported ${game} to ${directory} as pdf`))
         .then(() => shell.openPath(directory))
@@ -234,33 +229,28 @@ ipcMain.on("export-pdf", (event, game) => {
   });
 });
 
-ipcMain.on("export-png", (event, game) => {
+ipcMain.on("export-png", (event, game, items) => {
   return openDirectory().then((directory) => {
     if (directory) {
+      let keys = Object.keys(items);
+      let total = keys.length;
+      let current = 0;
       return Promise.map(
-        [
-          "background",
-          "cards",
-          "charters",
-          "map",
-          "market",
-          "par",
-          "revenue",
-          "tile-manifest",
-          "tiles",
-          "tokens",
-        ],
+        keys,
         (item) => {
-          let filename = path.join(directory, getFilename(game, item, "png"));
+          let basename = items[item];
+          let filename = path.join(directory, basename);
           return createScreenshot(getPath(game, item), filename).then(
             (exported) => {
               if (exported) {
-                alert("info", `Exported ${filename}`);
+                current = current + 1;
+                let percent = Math.floor((current / total) * 100);
+                progress(percent, `${current}/${total} - ${basename}`);
               }
             }
           );
         },
-        { concurrency: 1 }
+        { concurrency: 8 }
       )
         .then(() => alert("success", `Exported ${game} to ${directory} as png`))
         .then(() => shell.openPath(directory))
