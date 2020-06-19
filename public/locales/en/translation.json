@@ -12,6 +12,12 @@
     "tooltip": "This game is marked as being a work in progress",
     "description": "This game might not be complete or accurate"
   },
+  "export": {
+    "allPdf": "Export game as pdf documents",
+    "allPng": "Export game as png images",
+    "singlePdf": "Export this component as a pdf document",
+    "singlePng": "Export this component as a png image"
+  },
   "elements": {
     "tiles": {
       "title": "Tiles",

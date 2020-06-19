@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
   activeButton: {
     marginRight: theme.spacing(2),
     backgroundColor: theme.palette.background.default,
+    "&.Mui-disabled": {
+      color: theme.palette.primary.main
+    },
     "&:hover": {
       backgroundColor: theme.palette.background.default
     }
@@ -64,6 +67,7 @@ const NavLink = ({to, exact, text, icon, path}) => {
 
   return (
     <Button variant={active && "outlined"}
+            disabled={!!active}
             color={active ? "primary" : "inherit"}
             className={active ? classes.activeButton : classes.menuButton}
             startIcon={icon}

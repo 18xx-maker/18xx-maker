@@ -146,9 +146,9 @@ const GameNav = () => {
                     <FormLabel component="legend">{t('show')}</FormLabel>
                     <FormGroup>
                       <FormControlLabel control={ <Checkbox checked={!hidePrivates}
-                    onChange={togglePrivates}
-                    color="primary"
-                    name="showPrivates"/> }
+                                                            onChange={togglePrivates}
+                                                            color="primary"
+                                                            name="showPrivates"/> }
                                         label={t('game.cards.privates')}/>
                       <FormControlLabel control={ <Checkbox checked={!hideShares}
                                                                           onChange={toggleShares}
@@ -182,7 +182,6 @@ const GameNav = () => {
           <ListItemText>Background</ListItemText>
         </ListItem>
         <ListItem button
-                  disabled={!game.companies && !game.privates && !game.trains}
                   selected={!!matchPath(location.pathname, {path: '/games/:slug/cards'})}
                   component={RouterLink}
                   to={`/games/${game.slug}/cards`}>

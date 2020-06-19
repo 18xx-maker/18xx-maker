@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router";
 import { useBooleanParam } from "./util/query";
 
 import Alert from "@material-ui/lab/Alert";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import Snackbar from "@material-ui/core/Snackbar";
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -43,15 +44,21 @@ const App = () => {
   // Success, Warning and Error Alerts
   const [alert, setAlert] = useState({ open: false });
   const sendAlert = curry((type, message) => setAlert({ open: true, type, message }));
+  const sendProgress = curry((progress, message) => setAlert({ open: true, progress, message }));
   const closeAlert = () => setAlert({ open: false });
 
   useEffect(() => {
     if (isElectron) {
       let ipcAlert = (event, type, message) => sendAlert(type, message);
+      let ipcProgress = (event, progress, message) => sendProgress(progress, message);
       let ipcRenderer = window.require("electron").ipcRenderer;
       ipcRenderer.on("alert", ipcAlert);
+      ipcRenderer.on("progress", ipcProgress);
 
-      return () => ipcRenderer.removeListener("alert", ipcAlert);
+      return () => {
+        ipcRenderer.removeListener("alert", ipcAlert);
+        ipcRenderer.removeListener("progress", ipcProgress);
+      }
     }
   });
 
@@ -98,7 +105,12 @@ const App = () => {
                                     open={alert.open}
                                     onClose={closeAlert}
                                     autoHideDuration={6000}>
-                            <Alert severity={alert.type}>{alert.message}</Alert>
+                            {alert.progress
+                             ? <Alert severity={alert.progress === 100 ? "success" : "info"}>
+                                 <LinearProgress variant="determinate" value={alert.progress}/>
+                                 {alert.message}
+                               </Alert>
+                             : <Alert severity={alert.type}>{alert.message}</Alert>}
                           </Snackbar>}
                 <svg
                   version="1.1"

@@ -106,6 +106,14 @@ const Config = () => {
       <Divider/>
 
       <Box className={classes.configSection}>
+        <Typography variant="h5">Export</Typography>
+        <Input name="export.allLayouts" label="Export all layout options"
+               description="When exporting pdf components with multiple layout options, should we just export all of them?" />
+      </Box>
+
+      <Divider/>
+
+      <Box className={classes.configSection}>
         <Typography variant="h5">Layout</Typography>
         <Input name="margin" label="Margin Size" dimension={true}
                description="How much of a margin exists around the printed item."/>
