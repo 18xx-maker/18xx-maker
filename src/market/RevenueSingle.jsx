@@ -17,8 +17,8 @@ const RevenueSingle = () => {
   let paperHeight = unitsToCss(data.totalHeight + 5 + (2 * config.paper.margins));
 
   return (
-    <React.Fragment>
-      <div className="stock">
+    <div className="printElement" style={{display:'inline-block'}}>
+      <div className="stock" style={{display:'inline-block'}}>
         <Svg
           width={data.css.totalWidth}
           height={data.css.totalHeight}
@@ -29,7 +29,7 @@ const RevenueSingle = () => {
         </Svg>
         <style>{`@media print {@page {size: ${paperWidth} ${paperHeight}; margin: ${unitsToCss(config.paper.margins)}}}`}</style>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

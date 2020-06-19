@@ -66,7 +66,7 @@ const Background = () => {
           <GetFont>
             {font => (
               <Box className={classes.backgroundBox}>
-                <div className="background"
+                <div className="background printElement"
                      style={{ width: unitsToCss(pageWidth),
                               height: unitsToCss(pageHeight),
                               backgroundColor: c(color) }}>

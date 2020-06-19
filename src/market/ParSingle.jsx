@@ -13,12 +13,14 @@ const ParSingle = ({ config, game }) => {
   }
   let data = getParData(game.stock, config);
 
-  let paperWidth = unitsToCss(data.totalWidth + 5 + (2 * config.paper.margins));
-  let paperHeight = unitsToCss(data.totalHeight + 5 + (2 * config.paper.margins));
+  let paperWidth = data.totalWidth + 5 + (2 * config.paper.margins);
+  let paperHeight = data.totalHeight + 5 + (2 * config.paper.margins);
+  let cssPaperWidth = unitsToCss(paperWidth);
+  let cssPaperHeight = unitsToCss(paperHeight);
 
   return (
-    <React.Fragment>
-      <div className="stock">
+    <div className="printElement" style={{display:'inline-block'}}>
+      <div className="stock" style={{display:'inline-block'}}>
         <Svg
           width={data.css.totalWidth}
           height={data.css.totalHeight}
@@ -26,9 +28,9 @@ const ParSingle = ({ config, game }) => {
           <Par data={data}
                title={`${game.info.title} Par`} />
         </Svg>
-        <style>{`@media print {@page {size: ${paperWidth} ${paperHeight}; margin: ${unitsToCss(config.paper.margins)}}}`}</style>
+        <style>{`@media print {@page {size: ${cssPaperWidth} ${cssPaperHeight}; margin: ${unitsToCss(config.paper.margins)}}}`}</style>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

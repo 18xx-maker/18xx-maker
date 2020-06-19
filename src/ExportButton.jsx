@@ -32,8 +32,9 @@ const ExportButton = () => {
 
   const handler = () => {
     let ipcRenderer = window.require('electron').ipcRenderer;
-    ipcRenderer.send('pdf', location.pathname + location.search);
-    // ipcRenderer.send('screenshot', location.pathname + location.search, 2000, 2000);
+    // ipcRenderer.send('pdf', location.pathname + location.search);
+    // ipcRenderer.send('screenshot', location.pathname + location.search);
+    ipcRenderer.send('export-pdf', game.slug);
     return;
   };
 
