@@ -91,6 +91,7 @@
   },
   "dependencies": {
     "@18xx-maker/games": "4.0.0-4",
+    "bluebird": "^3.7.2",
     "chokidar": "^3.4.0",
     "electron-is-dev": "^1.2.0",
     "electron-updater": "^4.3.1"

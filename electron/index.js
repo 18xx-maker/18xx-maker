@@ -6,6 +6,7 @@ const path = require("path");
 const url = require("url");
 const isDev = require("electron-is-dev");
 const chokidar = require("chokidar");
+const Promise = require("bluebird");
 
 let mainWindow;
 
@@ -47,8 +48,54 @@ app.on("activate", function () {
   }
 });
 
-// PDF
-function createPDF(path) {
+// Opens a new browser window suitable for image/pdf capturing/printing
+function captureWindow(width, height) {
+  return new BrowserWindow({
+    x: 0,
+    y: 0,
+    width,
+    height,
+    enableLargerThanScreen: true,
+    show: false,
+    frame: false,
+    transparent: true,
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  });
+}
+
+// Goes to path in the app, and saves a PDF to filePath
+function createPDF(path, filePath) {
+  return new Promise((resolve, reject) => {
+    let win = captureWindow();
+
+    win.webContents.on("did-stop-loading", () => {
+      setTimeout(() => {
+        win.webContents
+          .printToPDF({
+            marginsType: 0,
+            scaleFactor: 100,
+            printBackground: true,
+          })
+          .then((buffer) => {
+            fs.writeFileSync(filePath, buffer);
+            win.close();
+            resolve(filePath);
+          });
+      }, 500);
+    });
+
+    if (path.includes("?")) {
+      path = `${path}&print=true`;
+    } else {
+      path = `${path}?print=true`;
+    }
+    win.loadURL(`${startUrl}#${path}`);
+  });
+}
+
+ipcMain.on("pdf", (event, path) => {
   dialog
     .showSaveDialog(mainWindow, {
       title: "Save PDF",
@@ -64,49 +111,36 @@ function createPDF(path) {
         return false;
       }
 
-      let win = new BrowserWindow({
-        x: 0,
-        y: 0,
-        enableLargerThanScreen: true,
-        show: false,
-        frame: false,
-        transparent: true,
-        webPreferences: {
-          nodeIntegration: true,
-        },
-      });
-
-      win.webContents.on("did-stop-loading", () => {
-        setTimeout(() => {
-          win.webContents
-            .printToPDF({
-              marginsType: 0,
-              scaleFactor: 100,
-              printBackground: true,
-            })
-            .then((buffer) => {
-              fs.writeFileSync(filePath, buffer);
-              shell.openPath(filePath);
-              win.close();
-            });
-        }, 500);
-      });
-
-      if (path.includes("?")) {
-        path = `${path}&print=true`;
-      } else {
-        path = `${path}?print=true`;
-      }
-      win.loadURL(`${startUrl}#${path}`);
+      createPDF(path, filePath).then(shell.openPath);
     });
-}
-
-ipcMain.on("pdf", (event, path) => {
-  createPDF(path);
 });
 
-// Screenshots
-function createScreenshot(path, width, height) {
+// Goes to path in the app, and saves a PNG to filePath of width x height
+function createScreenshot(path, filePath, width, height) {
+  return new Promise((resolve, reject) => {
+    let win = captureWindow(width, height);
+
+    win.webContents.on("did-stop-loading", () => {
+      setTimeout(() => {
+        win.webContents.capturePage().then((image) => {
+          let buffer = image.toPNG();
+          fs.writeFileSync(filePath, buffer);
+          win.close();
+          resolve(filePath);
+        });
+      }, 500);
+    });
+
+    if (path.includes("?")) {
+      path = `${path}&print=true`;
+    } else {
+      path = `${path}?print=true`;
+    }
+    win.loadURL(`${startUrl}#${path}`);
+  });
+}
+
+ipcMain.on("screenshot", (event, path, width, height) => {
   dialog
     .showSaveDialog(mainWindow, {
       title: "Save Screenshot",
@@ -122,40 +156,8 @@ function createScreenshot(path, width, height) {
         return false;
       }
 
-      let win = new BrowserWindow({
-        x: 0,
-        y: 0,
-        width,
-        height,
-        show: false,
-        enableLargerThanScreen: true,
-        frame: false,
-        transparent: true,
-        webPreferences: {
-          nodeIntegration: true,
-        },
-      });
-
-      win.webContents.on("did-stop-loading", () => {
-        win.webContents.capturePage().then((image) => {
-          let buffer = image.toPNG();
-          fs.writeFileSync(filePath, buffer);
-          shell.openPath(filePath);
-          win.close();
-        });
-      });
-
-      if (path.includes("?")) {
-        path = `${path}&print=true`;
-      } else {
-        path = `${path}?print=true`;
-      }
-      win.loadURL(`${startUrl}#${path}`);
+      createScreenshot(path, filePath, width, height).then(shell.openPath);
     });
-}
-
-ipcMain.on("screenshot", (event, path, width, height) => {
-  createScreenshot(path, width, height);
 });
 
 ipcMain.on("i18n", (event, filename) => {

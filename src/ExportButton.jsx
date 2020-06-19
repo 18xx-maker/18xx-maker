@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Route } from "react-router";
+import { Route, useLocation } from "react-router";
 import GameContext from "./context/GameContext";
 import { useBooleanParam } from "./util/query";
 
@@ -7,12 +7,12 @@ import Fab from "@material-ui/core/Fab";
 import Slide from "@material-ui/core/Slide";
 import Tooltip from "@material-ui/core/Tooltip";
 
-import PrintIcon from '@material-ui/icons/Print';
+import ExportIcon from '@material-ui/icons/Collections';
 
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  printButton: {
+  exportButton: {
     zIndex: theme.zIndex.drawer + 1,
     position: 'fixed',
     bottom: theme.spacing(14),
@@ -20,8 +20,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const PrintButton = () => {
+const ExportButton = () => {
   const classes = useStyles();
+  const location = useLocation();
   const { game } = useContext(GameContext);
   const [print] = useBooleanParam('print');
 
@@ -30,18 +31,21 @@ const PrintButton = () => {
   }
 
   const handler = () => {
-    window.print();
+    let ipcRenderer = window.require('electron').ipcRenderer;
+    ipcRenderer.send('pdf', location.pathname + location.search);
+    // ipcRenderer.send('screenshot', location.pathname + location.search, 2000, 2000);
+    return;
   };
 
   return (
     <Route path="/games">
       <Slide direction="left" in={true}>
-        <Tooltip title="Print" aria-label="print" placement="left" arrow>
+        <Tooltip title="Export" aria-label="export" placement="left" arrow>
           <Fab onClick={handler}
                position="sticky"
-               className={classes.printButton}
+               className={classes.exportButton}
                color="primary">
-            <PrintIcon/>
+            <ExportIcon/>
           </Fab>
         </Tooltip>
       </Slide>
@@ -49,4 +53,4 @@ const PrintButton = () => {
   );
 };
 
-export default PrintButton;
+export default ExportButton;
