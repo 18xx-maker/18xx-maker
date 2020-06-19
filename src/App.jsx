@@ -14,13 +14,16 @@ import ScrollToTop from "./ScrollToTop";
 import AppNav from "./nav/AppNav";
 import SideNav from "./nav/SideNav";
 
-import PrintButton from "./PrintButton.jsx";
 import ConfigDrawer from "./config/ConfigDrawer.jsx";
+import ExportButton from "./ExportButton.jsx";
+import PrintButton from "./PrintButton.jsx";
 import Viewport from "./Viewport";
 
 import AlertContext from "./context/AlertContext";
 import ConfigContext, { useConfig } from "./context/ConfigContext";
 import { GameProvider } from "./context/GameContext";
+
+import { isElectron } from "./util";
 
 import Loading from "./Loading";
 
@@ -61,7 +64,7 @@ const App = () => {
                   <Route>
                     <AppNav toggleSideNav={toggleSideNav}/>
                     <SideNav open={sideNavOpen} toggle={toggleSideNav}/>
-                    <PrintButton/>
+                    {isElectron ? <ExportButton/> : <PrintButton/>}
                     <ConfigDrawer/>
                   </Route>
                 </Switch>
