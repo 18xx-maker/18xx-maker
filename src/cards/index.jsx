@@ -217,11 +217,11 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
 `;
 
   return (
-    <React.Fragment>
+    <div>
       <style>{css}</style>
       {pageNodes}
       <PageSetup landscape={data.layout.landscape} />
-    </React.Fragment>
+    </div>
   );
 };
 

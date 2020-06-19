@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 
 import { Route, Switch } from "react-router";
 import { useBooleanParam } from "./util/query";
@@ -44,6 +44,16 @@ const App = () => {
   const [alert, setAlert] = useState({ open: false });
   const sendAlert = curry((type, message) => setAlert({ open: true, type, message }));
   const closeAlert = () => setAlert({ open: false });
+
+  useEffect(() => {
+    if (isElectron) {
+      let ipcAlert = (event, type, message) => sendAlert(type, message);
+      let ipcRenderer = window.require("electron").ipcRenderer;
+      ipcRenderer.on("alert", ipcAlert);
+
+      return () => ipcRenderer.removeListener("alert", ipcAlert);
+    }
+  });
 
   // What our config looks like
   const configContext = useConfig();

@@ -49,12 +49,10 @@ app.on("activate", function () {
 });
 
 // Opens a new browser window suitable for image/pdf capturing/printing
-function captureWindow(width, height) {
+function captureWindow() {
   return new BrowserWindow({
     x: 0,
     y: 0,
-    width,
-    height,
     enableLargerThanScreen: true,
     show: false,
     frame: false,
@@ -63,6 +61,25 @@ function captureWindow(width, height) {
       nodeIntegration: true,
     },
   });
+}
+
+function openDirectory() {
+  return dialog
+    .showOpenDialog(mainWindow, {
+      title: "Select directory",
+      properties: ["openDirectory", "createDirectory"],
+    })
+    .then(({ canceled, filePaths }) => {
+      if (canceled) {
+        return undefined;
+      } else {
+        return filePaths[0];
+      }
+    });
+}
+
+function alert(type, message) {
+  mainWindow.webContents.send("alert", type, message);
 }
 
 // Goes to path in the app, and saves a PDF to filePath
@@ -111,23 +128,48 @@ ipcMain.on("pdf", (event, path) => {
         return false;
       }
 
-      createPDF(path, filePath).then(shell.openPath);
+      createPDF(path, filePath).then((filePath) => {
+        shell.openPath(filePath);
+        alert("success", `${filePath} saved`);
+      });
     });
 });
 
 // Goes to path in the app, and saves a PNG to filePath of width x height
-function createScreenshot(path, filePath, width, height) {
+function createScreenshot(path, filePath) {
   return new Promise((resolve, reject) => {
-    let win = captureWindow(width, height);
+    let win = captureWindow();
+
+    win.webContents.on("will-redirect", () => {
+      win.close();
+      resolve();
+    });
 
     win.webContents.on("did-stop-loading", () => {
       setTimeout(() => {
-        win.webContents.capturePage().then((image) => {
-          let buffer = image.toPNG();
-          fs.writeFileSync(filePath, buffer);
-          win.close();
-          resolve(filePath);
-        });
+        win.webContents
+          .executeJavaScript(
+            'document.getElementsByClassName("printElement")[0].getBoundingClientRect().toJSON()'
+          )
+          .then(({ x, y, width, height }) => {
+            win.setBounds({
+              x: 0,
+              y: 0,
+              width: Math.ceil(width),
+              height: Math.ceil(height),
+            });
+            return win.webContents.capturePage().then((image) => {
+              let buffer = image.toPNG();
+              fs.writeFileSync(filePath, buffer);
+              win.close();
+              resolve(filePath);
+            });
+          })
+          .catch((err) => {
+            // Game doesn't include this item
+            win.close();
+            resolve();
+          });
       }, 500);
     });
 
@@ -140,7 +182,94 @@ function createScreenshot(path, filePath, width, height) {
   });
 }
 
-ipcMain.on("screenshot", (event, path, width, height) => {
+function getFilename(game, item, extension) {
+  return `${game}-${item.replace(
+    "?paginated=true",
+    "-paginated"
+  )}.${extension}`;
+}
+
+function getPath(game, item) {
+  if (item.includes("?")) {
+    return `/games/${game}/${item}&print=true`;
+  } else {
+    return `/games/${game}/${item}?print=true`;
+  }
+}
+
+ipcMain.on("export-pdf", (event, game) => {
+  return openDirectory().then((directory) => {
+    if (directory) {
+      return Promise.map(
+        [
+          "background",
+          "cards",
+          "charters",
+          "map",
+          "map?paginated=true",
+          "market",
+          "market?paginated=true",
+          "par",
+          "par?paginated=true",
+          "revenue",
+          "revenue?paginated=true",
+          "tile-manifest",
+          "tiles",
+          "tokens",
+        ],
+        (item) => {
+          let filename = path.join(directory, getFilename(game, item, "pdf"));
+          return createPDF(getPath(game, item), filename).then((exported) => {
+            if (exported) {
+              alert("info", `Exported ${filename}`);
+            }
+          });
+        },
+        { concurrency: 1 }
+      )
+        .then(() => alert("success", `Exported ${game} to ${directory} as pdf`))
+        .then(() => shell.openPath(directory))
+        .catch(console.error.bind(console));
+    }
+  });
+});
+
+ipcMain.on("export-png", (event, game) => {
+  return openDirectory().then((directory) => {
+    if (directory) {
+      return Promise.map(
+        [
+          "background",
+          "cards",
+          "charters",
+          "map",
+          "market",
+          "par",
+          "revenue",
+          "tile-manifest",
+          "tiles",
+          "tokens",
+        ],
+        (item) => {
+          let filename = path.join(directory, getFilename(game, item, "png"));
+          return createScreenshot(getPath(game, item), filename).then(
+            (exported) => {
+              if (exported) {
+                alert("info", `Exported ${filename}`);
+              }
+            }
+          );
+        },
+        { concurrency: 1 }
+      )
+        .then(() => alert("success", `Exported ${game} to ${directory} as png`))
+        .then(() => shell.openPath(directory))
+        .catch(console.error.bind(console));
+    }
+  });
+});
+
+ipcMain.on("screenshot", (event, path) => {
   dialog
     .showSaveDialog(mainWindow, {
       title: "Save Screenshot",
@@ -156,7 +285,10 @@ ipcMain.on("screenshot", (event, path, width, height) => {
         return false;
       }
 
-      createScreenshot(path, filePath, width, height).then(shell.openPath);
+      createScreenshot(path, filePath).then((filePath) => {
+        shell.openPath(filePath);
+        alert("success", `${filePath} saved`);
+      });
     });
 });
 
