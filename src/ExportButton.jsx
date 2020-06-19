@@ -84,6 +84,14 @@ const pngItems = (game, config) => {
     items[`charters/${i}`] = `${game.id}-charter-${i+1}-${companies[i].abbrev}.png`;
   }
 
+  for(let i=0; i<companies.length; i++) {
+    items[`tokens/${i}`] = `${game.id}-token-${i+1}-${companies[i].abbrev}.png`
+  }
+
+  for(let i=0; i<(game.tokens || []).length; i++) {
+    items[`tokens/${i + companies.length}`] = `${game.id}-token-${i+1+companies.length}.png`
+  }
+
   if (game.map) {
     if (is(Array, game.map)) {
       for(let i=0; i<game.map.length; i++) {
