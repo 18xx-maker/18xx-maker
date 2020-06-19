@@ -41,6 +41,12 @@ const theme = createMuiTheme({});
 const App = () => {
   const [print] = useBooleanParam('print');
 
+  const printCss = print ? `
+body {
+  overflow: hidden;
+}
+` : null;
+
   // Success, Warning and Error Alerts
   const [alert, setAlert] = useState({ open: false });
   const sendAlert = curry((type, message) => setAlert({ open: true, type, message }));
@@ -172,6 +178,7 @@ const App = () => {
                 <SetSvgColors />
               </ScrollToTop>
             </Suspense>
+            <style>{printCss}</style>
           </ConfigContext.Provider>
         </GameProvider>
       </AlertContext.Provider>
