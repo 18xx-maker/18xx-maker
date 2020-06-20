@@ -8,8 +8,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { isElectron } from "../util";
-
 const useStyles = makeStyles((theme) => ({
   page: {
     margin: theme.spacing(2, 0),

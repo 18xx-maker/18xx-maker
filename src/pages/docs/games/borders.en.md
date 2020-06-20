@@ -10,11 +10,11 @@ used for rivers and other things.
 
 You can specify each coordinate in the following ways:
 
-* `A5x10y20` - X and Y coordinate (10, 20) from the center of hex A5.
-* `A5a30p0.5` - Half of the way (0.5) from the center to the side at angle 30 of
+- `A5x10y20` - X and Y coordinate (10, 20) from the center of hex A5.
+- `A5a30p0.5` - Half of the way (0.5) from the center to the side at angle 30 of
   hex A5. This is simular to most tile positioning.
-* `A5s1` - Middle of side 1 from hex A5.
-* `A5p2` - Second point of hex A5.
+- `A5s1` - Middle of side 1 from hex A5.
+- `A5p2` - Second point of hex A5.
 
 Borders can be drawn easily by using the point coordinates
 
@@ -25,16 +25,20 @@ Here are the borders from 1830:
 ```json
 {
   "map": {
-    "borders": [{
-      "color": "water",
-      "coords": ["F8p3", "F8p4"]
-    },{
-      "color": "water",
-      "coords": ["D12p3", "D12p4", "D12p5"]
-    },{
-      "color": "water",
-      "coords": ["C17p3", "C17p4"]
-    }]
+    "borders": [
+      {
+        "color": "water",
+        "coords": ["F8p3", "F8p4"]
+      },
+      {
+        "color": "water",
+        "coords": ["D12p3", "D12p4", "D12p5"]
+      },
+      {
+        "color": "water",
+        "coords": ["C17p3", "C17p4"]
+      }
+    ]
   }
 }
 ```
