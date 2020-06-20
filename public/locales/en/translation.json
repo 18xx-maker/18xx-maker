@@ -1,6 +1,14 @@
 {
   "title": "18xx Maker",
   "about": "This app can take 18xx game definitions written in json, display them, and render them for printing. The original intent of this site was for personal PnP projects, but the purpose has shifted over time to prototyping new games.",
+  "browser": "Browser",
+  "app": "App",
+  "important": "Important",
+  "note": "Note",
+  "piracy": "Do not use this site to print games that you don't have a license to print. Please support our 18xx designers, developers, and publishers.",
+  "download": "Download",
+  "save": "Save",
+  "show": "Show",
   "nav": {
     "menu": "Menu",
     "home": "Home",
@@ -19,6 +27,66 @@
     "allPng": "Export game as png images",
     "singlePdf": "Export this component as a pdf document",
     "singlePng": "Export this component as a png image"
+  },
+  "docs": {
+    "help": {
+      "title": "Help",
+      "description": "18xx Maker Goals and Links"
+    },
+    "developing": {
+      "title": "Developing",
+      "description": "Programming with 18xx Maker"
+    },
+    "translation": {
+      "title": "Translation",
+      "description": "Help translate 18xx Maker"
+    },
+    "output": {
+      "pdf": {
+        "title": "PDF Output",
+        "description": "Generate PDF documents"
+      },
+      "png": {
+        "title": "PNG Output",
+        "description": "Generate PNG images"
+      },
+      "b18": {
+        "title": "Board18 Output",
+        "description": "Generate Board18 game boxes"
+      }
+    },
+    "games": {
+      "schemas": {
+        "title": "JSON Schemas",
+        "description": "Validation of game files"
+      },
+      "types": {
+        "title": "Share & Token Types",
+        "description": "Easily describe shares and tokens"
+      },
+      "trains": {
+        "title": "Phases and Trains",
+        "description": "How to describe game phases"
+      },
+      "logos": {
+        "title": "Logos",
+        "description": "Train company logos"
+      },
+      "overrides": {
+        "title": "Company Overrides",
+        "desc": "Swap companies!"
+      }
+    },
+    "pnp": {
+      "tokens": {
+        "title": "Tokens",
+        "description": "Info about token output"
+      },
+      "die": {
+        "title": "Die Cutter",
+        "description": "Info about the Ellison die cutter"
+      }
+    }
   },
   "elements": {
     "tiles": {
@@ -98,13 +166,5 @@
   "donations": {
     "title": "Donations",
     "description": "I've been asked about donation buttons; if you find this software useful to you and would like to donate money towards its development you can do so via <paypal>Paypal</paypal> or <cash>Square Cash</cash>."
-  },
-  "browser": "Browser",
-  "app": "App",
-  "important": "Important",
-  "note": "Note",
-  "piracy": "Do not use this site to print games that you don't have a license to print. Please support our 18xx designers, developers, and publishers.",
-  "download": "Download",
-  "save": "Save",
-  "show": "Show"
+  }
 }

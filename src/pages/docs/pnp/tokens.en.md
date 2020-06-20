@@ -1,13 +1,14 @@
 # Tokens
 
 18xx Maker has a lot of custom abilities that you can set on the [config
-page](/config) for tokens. This page should help explain them.
+page](?config) for tokens. This page should help explain them.
 
 ## Definitions
 
 This tool calls tokens "Market Tokens" or "Station Tokens". Market tokens are
 used on stock markets, par charts and race tracks (to track revenue). Station
-tokens are used for stations on the map.
+tokens are used for stations on the map. "General Tokens" are any tokens defined
+at the game level used for privates or other generic uses.
 
 ## Game File Options
 
