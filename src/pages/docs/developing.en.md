@@ -1,6 +1,10 @@
 # Running Locally
 
-If you want to run this site locally either for development this is how to do so.
+**Note:** the easiest way to start using 18xx-maker is by using the [app
+version](https://github.com/18xx-maker/18xx-maker/releases). Just download the
+app and you're good to load in a game JSON file and start editing using your
+favorite JSON editor. These instructions are ONLY if you want to develop on 18xx
+Maker itself.
 
 If you have experience with [Docker](https://www.docker.com/) and already have
 it installed you can skip to the [Using Docker](#using-docker) section.
@@ -49,6 +53,9 @@ yarn start
 to run the site! This will open up a browser pointing to your locally run
 site. You can now edit game files and see the updates in the browser
 immediately.
+
+**Important:** Anytime you update the site's code (from git or from downloading
+a new zip) you should run `yarn` again to update your dependencies.
 
 ## Using Docker
 

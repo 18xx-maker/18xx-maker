@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Link, useLocation, matchPath } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
@@ -9,7 +10,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
 import HelpIcon from "@material-ui/icons/Help";
-import RunningIcon from "@material-ui/icons/Code";
+import DevelopingIcon from "@material-ui/icons/Code";
+import TranslationIcon from "@material-ui/icons/Language";
 
 import LogosIcon from "@material-ui/icons/Security";
 import OverridesIcon from "@material-ui/icons/Autorenew";
@@ -25,6 +27,7 @@ import DieIcon from "@material-ui/icons/Filter";
 import TokensIcon from "@material-ui/icons/Stars";
 
 const DocsNav = () => {
+  const { t } = useTranslation();
   const location = useLocation();
 
   const Item = ({path = "", name, desc, icon}) => (
@@ -43,61 +46,65 @@ const DocsNav = () => {
   return (
     <>
       <List>
-        <Item name="Help"
-              desc="Using 18xx Maker"
+        <Item name={t("docs.help.title")}
+              desc={t("docs.help.description")}
               icon={<HelpIcon/>}/>
-        <Item name="Running Locally"
-              path="running"
-              desc="Developing the base node.js app"
-              icon={<RunningIcon/>}/>
-      </List>
-      <Divider/>
-      <List>
-        <Item path="games/schemas"
-              name="Schemas"
-              desc="Validation of game files"
-              icon={<SchemasIcon/>}/>
-        <Item path="games/types"
-              name="Share and Token Types"
-              desc="Easily describe shares/tokens"
-              icon={<SharesIcon/>}/>
-        <Item path="games/trains"
-              name="Phases and Trains"
-              desc="How to describe game phases"
-              icon={<TrainsIcon/>}/>
-        <Item path="games/logos"
-              name="Logos"
-              desc="Train company logos"
-              icon={<LogosIcon/>}/>
-        <Item path="games/overrides"
-              name="Company Overrides"
-              desc="Swap companies!"
-              icon={<OverridesIcon/>}/>
+        <Item name={t("docs.developing.title")}
+              desc={t("docs.developing.description")}
+              path="developing"
+              icon={<DevelopingIcon/>}/>
+        <Item name={t("docs.translation.title")}
+              desc={t("docs.translation.description")}
+              path="translation"
+              icon={<TranslationIcon/>}/>
       </List>
       <Divider/>
       <List>
         <Item path="output/pdf"
-              name="PDF Output"
-              desc="Generate pdf documents"
+              name={t("docs.output.pdf.title")}
+              desc={t("docs.output.pdf.description")}
               icon={<PdfIcon/>}/>
         <Item path="output/png"
-              name="PNG Output"
-              desc="Generate png images"
+              name={t("docs.output.png.title")}
+              desc={t("docs.output.png.description")}
               icon={<PngIcon/>}/>
         <Item path="output/b18"
-              name="Board18 Output"
-              desc="Generate a Board18 gamebox"
+              name={t("docs.output.b18.title")}
+              desc={t("docs.output.b18.description")}
               icon={<B18Icon/>}/>
       </List>
       <Divider/>
       <List>
+        <Item path="games/schemas"
+              name={t("docs.games.schemas.title")}
+              desc={t("docs.games.schemas.description")}
+              icon={<SchemasIcon/>}/>
+        <Item path="games/types"
+              name={t("docs.games.types.title")}
+              desc={t("docs.games.types.description")}
+              icon={<SharesIcon/>}/>
+        <Item path="games/trains"
+              name={t("docs.games.trains.title")}
+              desc={t("docs.games.trains.description")}
+              icon={<TrainsIcon/>}/>
+        <Item path="games/logos"
+              name={t("docs.games.logos.title")}
+              desc={t("docs.games.logos.description")}
+              icon={<LogosIcon/>}/>
+        <Item path="games/overrides"
+              name={t("docs.games.overrides.title")}
+              desc={t("docs.games.overrides.description")}
+              icon={<OverridesIcon/>}/>
+      </List>
+      <Divider/>
+      <List>
         <Item path="pnp/tokens"
-              name="Tokens"
-              desc="Info about token output"
+              name={t("docs.pnp.tokens.title")}
+              desc={t("docs.pnp.tokens.description")}
               icon={<TokensIcon/>}/>
         <Item path="pnp/die"
-              name="Die Cutter"
-              desc="Info about the Ellison die cutter"
+              name={t("docs.pnp.die.title")}
+              desc={t("docs.pnp.die.description")}
               icon={<DieIcon/>}/>
       </List>
     </>

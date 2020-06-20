@@ -31,9 +31,15 @@ make sure to select "die" as the tile layout either in the [settings](?config=tr
 When this property is set, the page size for tiles is hardcoded to be 8.5" by
 11".
 
+There is also a `smallDie` option that is setup to print on a die created to
+make small 1" (flat to flat) tiles. I do not own this die so I haven't been able
+to fully test it.
+
 ### Cards
 
-You can set the `cards.layout` property to `dtgDie` or `miniEuroDie` depending on which die layout you have. Just like on tiles setting one of these options overrides a lot of other options.
+You can set the `cards.layout` property to `dtgDie` or `miniEuroDie` depending
+on which die layout you have. Just like on tiles setting one of these options
+overrides a lot of other options.
 
 ## Ordering
 
@@ -42,4 +48,6 @@ page](https://www.ellisoneducation.com/contact).
 
 In order my order was $770 shipped. The cutter itself is about $400 with both
 dies being about \$150 each. Your exact order may very depending on current
-prices, what dies you buy, and where it needs to be shipped to.
+prices, what dies you buy, and where it needs to be shipped to. You can also
+check on the public 18xx slack group since often people form group buys there to
+get a huge discount on the price on individual dies.

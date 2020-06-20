@@ -32,11 +32,12 @@ needed for programs like [18xx.games](https://www.18xx.games/).
   phase.
 - **events** An object full of boolean fields that state that other events
   happen when this phase triggers (such as privates closing or tokens being
-  removed).
+  removed). The exact format of these events is tied to the implementation of
+  games on [18xx.games](https://18xx.games).
 
 ## Train Fields
 
-- **name\*** _required_
+- **name** _required_
 - **quantity** _required_ Either a number or the string "∞" representing the
   number of available trains.
 - **color** _required_ The color to display for this trains title.

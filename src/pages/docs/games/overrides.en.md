@@ -12,6 +12,10 @@ config page. Once you do that every game you look at and print will use those
 overrides. If you want to see picture logos make sure you select one of the logo
 options as well!
 
+Companies will override 1 for 1 in the order that they are defined in the game
+file and in the overrides file. If the game file has more companies than the
+overrides files, they will be left in their default state.
+
 ## Examples
 
 You can check out the lists of currently [defined
