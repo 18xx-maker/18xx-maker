@@ -8,6 +8,8 @@ const isDev = require("electron-is-dev");
 const chokidar = require("chokidar");
 const Promise = require("bluebird");
 
+const setMenu = require("./menu");
+
 let mainWindow;
 
 const startUrl = isDev
@@ -30,6 +32,8 @@ function createWindow() {
   mainWindow.on("closed", function () {
     mainWindow = null;
   });
+
+  setMenu(mainWindow);
 
   autoUpdater.checkForUpdatesAndNotify();
 }

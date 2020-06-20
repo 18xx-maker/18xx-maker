@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Suspense } from "react";
 
-import { Route, Switch } from "react-router";
+import { Route, Switch, useHistory } from "react-router-dom";
 import { useBooleanParam } from "./util/query";
 
 import Alert from "@material-ui/lab/Alert";
@@ -40,6 +40,7 @@ const theme = createMuiTheme({});
 
 const App = () => {
   const [print] = useBooleanParam('print');
+  const history = useHistory();
 
   const printCss = print ? `
 body {
@@ -58,12 +59,15 @@ body {
       let ipcAlert = (event, type, message) => sendAlert(type, message);
       let ipcProgress = (event, progress, message) => sendProgress(progress, message);
       let ipcRenderer = window.require("electron").ipcRenderer;
+      let redirect = (event, path) => history.push(path);
       ipcRenderer.on("alert", ipcAlert);
       ipcRenderer.on("progress", ipcProgress);
+      ipcRenderer.on("redirect", redirect);
 
       return () => {
         ipcRenderer.removeListener("alert", ipcAlert);
         ipcRenderer.removeListener("progress", ipcProgress);
+        ipcRenderer.removeListener("redirect", redirect);
       }
     }
   });
