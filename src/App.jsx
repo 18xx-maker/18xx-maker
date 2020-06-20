@@ -8,6 +8,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import Snackbar from "@material-ui/core/Snackbar";
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { orange, deepPurple } from '@material-ui/core/colors';
 
 import SetSvgColors from "./data/SetSvgColors";
 import ScrollToTop from "./ScrollToTop";
@@ -36,7 +37,16 @@ import Games from "./pages/Games";
 import curry from "ramda/src/curry";
 const path = require('path');
 
-const theme = createMuiTheme({});
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: deepPurple[600]
+    },
+    secondary: {
+      main: orange[400]
+    }
+  }
+});
 
 const App = () => {
   const [print] = useBooleanParam('print');
