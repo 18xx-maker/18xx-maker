@@ -1,4 +1,5 @@
 import React from "react";
+import { Trans, useTranslation } from "react-i18next";
 
 import Alert from '@material-ui/lab/Alert';
 import Container from '@material-ui/core/Container';
@@ -11,55 +12,69 @@ import { isElectron } from "../util";
 
 const useStyles = makeStyles((theme) => ({
   page: {
-    margin: theme.spacing(4, 0),
-    padding: theme.spacing(2)
-  },
-  About: {
-    margin: theme.spacing(0, 0, 4, 0)
+    margin: theme.spacing(2, 0),
+    padding: theme.spacing(2),
+
+    "& h5": {
+      padding: theme.spacing(0, 0, 2, 0)
+    },
+
+    "& ul": {
+      margin: theme.spacing(0, 0, 2, 0)
+    },
+   
+    "& p": {
+      padding: theme.spacing(0, 0, 2, 0),
+      "&:last-child": {
+        padding: 0
+      }
+    }
   },
   Alert: {
-    margin: theme.spacing(4, 0)
+    margin: theme.spacing(0, 0, 2, 0)
   }
 }));
 
 const Home = () => {
   const classes = useStyles();
+  const { t } = useTranslation();
   return (
     <Container maxWidth="md">
       <Paper elevation={5} className={classes.page}>
-        <Typography variant="body1" className={classes.About}>
-          This {isElectron ? "site" : "app"} can take 18xx game
-          definitions written in json display them {!isElectron && "in your browser "}ready for
-          printing. The original purpose of this site was for personal pnp
-          projects, but the purpose has shifted over time into the prototyping
-          of new games.
-        </Typography>
+        <Typography variant="body1">{t('about')}</Typography>
         <Alert severity="warning" className={classes.Alert}>
-          <strong>Important:</strong> do not use this {isElectron ? "app" : "site"} to
-          print games that you don't have a license to print. This tool is not meant to
-          enable piracy. Please support our 18xx designers, developers and publishers.
+          <strong>{t('important')}: </strong>
+          {t('piracy')}
         </Alert>
         <Alert severity="info" className={classes.Alert}>
-          <strong>Note:</strong> Some games are still works in progress. Please submit
-          any bugs found as <Link target="_blank" rel="noreferrer" href="https://github.com/18xx-maker/18xx-maker/issues">issues on github</Link>!
+          <strong>{t('note')}: </strong>
+          <Trans i18nKey="wip.note"
+                 components={{github: <Link target="_blank" rel="noreferrer" href="https://github.com/18xx-maker/18xx-maker/issues" /> }} />
         </Alert>
-        <Typography variant="h5">Features</Typography>
+        <Typography variant="h5">{t('usage.title')}</Typography>
+        <Typography variant="body1">
+          <Trans i18nKey="usage.description"
+                 components={{public: <Link target="_blank" rel="noreferrer" href="https://18xx-maker.com" />,
+                              app: <Link target="_blank" rel="noreferrer" href="https://github.com/18xx-maker/18xx-maker/releases"/> }} />
+        </Typography>
+        <Typography variant="h5">{t('features.title')}</Typography>
         <Typography variant="body1" component="div">
           <ul>
-            <li>Load a 18xx-maker json game file in order to render it.</li>
-            <li>Inspect generic 18xx tiles.</li>
-            <li>Change themes/options and render the games with design choices that your game group prefers.</li>
-            {!isElectron && <li>Print components directly from your browser.</li>}
-            {isElectron && <li>Let the app live reload as you edit your game file locally</li>}
-            {isElectron && <li>Export components or full games as pdfs documents or png images.</li>}
-            {isElectron && <li>Export games as Board18 game boxes.</li>}
+            <li>{t('features.1')}</li>
+            <li>{t('features.2')}</li>
+            <li>{t('features.3')}</li>
+            <li>{t('features.4')}</li>
+            <li><strong>{t('browser')}:</strong> {t('features.browser.1')}</li>
+            <li><strong>{t('app')}:</strong> {t('features.app.1')}</li>
+            <li><strong>{t('app')}:</strong> {t('features.app.2')}</li>
+            <li><strong>{t('app')}:</strong> {t('features.app.3')}</li>
           </ul>
         </Typography>
-        <Typography variant="h5">Donations</Typography>
+        <Typography variant="h5">{t('donations.title')}</Typography>
         <Typography variant="body1">
-          I've been asked about donation buttons; if you find this software
-          useful to you and would like to donate money towards its development
-          you can do so via <Link rel="noreferrer" target="_blank" href="https://paypal.me/kelsin">paypal</Link> or <Link rel="noreferrer" target="_blank" href="https://cash.me/$kelsin">square cash</Link>.
+          <Trans i18nKey="donations.description"
+                 components={{ paypal: <Link rel="noreferrer" target="_blank" href="https://paypal.me/kelsin" />,
+                               cash: <Link rel="noreferrer" target="_blank" href="https://cash.app/$kelsin" /> }} />
         </Typography>
       </Paper>
     </Container>
