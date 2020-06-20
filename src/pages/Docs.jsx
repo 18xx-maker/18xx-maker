@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import startsWith from "ramda/src/startsWith";
 
@@ -94,21 +95,24 @@ const renderers = {
 };
 
 const Docs = () => {
+  const { i18n } = useTranslation();
   const classes = useStyles();
   const location = useLocation();
   const [source, setSource] = useState(null);
+
+  const language = i18n.languages[0];
 
   const pathname = location.pathname.replace(/\/docs\/?/, '');
   const file = isEmpty(pathname) ? "index" : pathname;
 
   useEffect(() => {
-    import(/* webpackChunkName: "doc.[request]" */"./docs/" + file + ".md")
+    import(/* webpackChunkName: "doc.[request]" */"./docs/" + file + "." + language + ".md")
       .then(x => x.default)
       .then(fetch)
       .then(result => result.text())
       .then(setSource)
       .catch(err => console.log(file, err))
-  }, [file])
+  }, [file, language])
 
   return (
     <Container maxWidth="md">
