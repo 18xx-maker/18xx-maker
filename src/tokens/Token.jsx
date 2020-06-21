@@ -405,7 +405,7 @@ const Token = ({
             // Label and icon, position accordingly
             let size = iconWidth || 1 * width;
             let x = -0.5 * size;
-            let y = -1 * size;
+            let y = -0.75 * size;
             let fSize;
             content.push(<Component key="icon" className={classes.join(" ")}
                                     x={x} y={y}
