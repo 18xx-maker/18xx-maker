@@ -3,6 +3,17 @@
 Our schemas are defined in [JSON Schema](https://json-schema.org/) version
 draft-07.
 
+## Usage
+
+One of the main ways we use schemas is for deprecating features. When changing a
+feature we'll commonly make the old syntax not validate. That way it becomes
+obvious where the uses of the old feature exist. Then on the next release of a
+major (breaking) version number we'll remove the code that supports the old way.
+
+In this way game files will continue to work but won't validate. Hopefully users
+can fix their files and then eventually upgrade to the next major version easily
+as long as their game files validate.
+
 ## Current Schemas
 
 Schemas are held in a [separate npm
