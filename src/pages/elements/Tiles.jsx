@@ -188,9 +188,8 @@ const Tiles = () => {
       </Paper>
       <Grid container spacing={2}>
         {map(t => (
-          <Grid item xs={6} sm={4} md={4} lg={3}>
-            <Svg key={t.id}
-                 width="200"
+          <Grid key={t.id} item xs={6} sm={4} md={4} lg={3}>
+            <Svg width="200"
                  height="200"
                  viewBox="-100 -100 200 200"
                  transform="rotate(-90)">
