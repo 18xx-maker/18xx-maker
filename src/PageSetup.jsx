@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useContext } from "react";
+import ConfigContext from "./context/ConfigContext";
 
 import { unitsToCss } from "./util";
 
@@ -28,6 +28,9 @@ export const paperToCssMargins = (paper, landscape) => {
 };
 
 const PageSetup = ({paper, landscape}) => {
+  const { config } = useContext(ConfigContext);
+  paper = paper || config.paper;
+
   let css = `@media print {
     @page {
         ${paperToCssSize(paper, landscape)}
@@ -38,8 +41,4 @@ const PageSetup = ({paper, landscape}) => {
   return <style>{css}</style>;
 };
 
-const mapStateToProps = (state, {paper}) => ({
-  paper: paper || state.config.paper
-});
-
-export default connect(mapStateToProps)(PageSetup);
+export default PageSetup;

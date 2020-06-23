@@ -48,11 +48,9 @@ p {
 
 .map {
   position: relative;
-  padding: 0.0625in;
 }
 
 .map svg {
-  margin: 0 auto;
   display: block;
 }
 
@@ -745,8 +743,19 @@ footer a:hover {
   footer,
   .LegalNotes,
   .PrintNotes,
+  .MuiAppBar-root,
+  .MuiDrawer-root,
+  .MuiSnackbar-root,
+  .MuiFab-root,
+  .MuiTooltip-popper,
   .WIP {
-    display: none;
+    display: none !important;
+  }
+
+  .MuiBox-root {
+    width: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   .map {

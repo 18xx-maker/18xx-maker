@@ -44,6 +44,9 @@
   "ipo": {
     "borderRadius": 11.811
   },
+  "export": {
+    "allLayouts": false
+  },
   "charters": {
     "style": "color",
     "cutlines": 25,
@@ -56,7 +59,7 @@
     "shareStyle": "gmt",
     "layout": "miniEuroDie",
     "width": 265.748,
-    "height":  173.228,
+    "height": 173.228,
     "cutlines": 25,
     "bleed": 12.5,
     "border": 0,

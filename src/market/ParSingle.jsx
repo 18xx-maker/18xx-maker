@@ -1,44 +1,36 @@
 import React from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import Par from "./Par";
-import Config from "../data/Config";
 import Svg from "../Svg";
 
 import { getParData } from "./util";
+import { unitsToCss } from "../util";
 
-const ParSingle = () => {
-  let params = useParams();
+const ParSingle = ({ config, game }) => {
+  if (!game.stock || !game.stock.par || !game.stock.par.values) {
+    return <Redirect to={`/games/${game.slug}/`} />;
+  }
+  let data = getParData(game.stock, config);
+
+  let paperWidth = data.totalWidth + 5 + (2 * config.paper.margins);
+  let paperHeight = data.totalHeight + 5 + (2 * config.paper.margins);
+  let cssPaperWidth = unitsToCss(paperWidth);
+  let cssPaperHeight = unitsToCss(paperHeight);
+
   return (
-    <Config>
-      {(config, game) => {
-
-        if (!game.stock || !game.stock.par || !game.stock.par.values) {
-          return <Redirect to={`/${params.game}/background`} />;
-        }
-        let data = getParData(game.stock, config);
-
-        return (
-          <React.Fragment>
-            <div className="PrintNotes">
-              <div>
-                <h3>Width: {data.humanWidth}</h3>
-                <h3>Height: {data.humanHeight}</h3>
-              </div>
-            </div>
-            <div className="stock">
-              <Svg
-                width={data.css.totalWidth}
-                height={data.css.totalHeight}
-                viewBox={`0 0 ${data.totalWidth} ${data.totalHeight}`}>
-                <Par data={data} title={`${game.info.title} Par`} />
-              </Svg>
-              <style>{`@media print {@page {size: ${data.css.printWidth} ${data.css.printHeight};}}`}</style>
-            </div>
-          </React.Fragment>
-        );
-      }}
-    </Config>
+    <div className="printElement" style={{display:'inline-block'}}>
+      <div className="stock" style={{display:'inline-block'}}>
+        <Svg
+          width={data.css.totalWidth}
+          height={data.css.totalHeight}
+          viewBox={`0 0 ${data.totalWidth} ${data.totalHeight}`}>
+          <Par data={data}
+               title={`${game.info.title} Par`} />
+        </Svg>
+        <style>{`@media print {@page {size: ${cssPaperWidth} ${cssPaperHeight}; margin: ${unitsToCss(config.paper.margins)}}}`}</style>
+      </div>
+    </div>
   );
 };
 

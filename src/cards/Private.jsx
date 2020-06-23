@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import GameContext from "../context/GameContext";
+import { MapOrientation } from "../context/OrientationContext";
 
 import Color from "../data/Color";
-import Config from "../data/Config";
 import Currency from "../util/Currency";
 import GameCompanyToken from "../tokens/GameCompanyToken";
 import Hex from "../Hex";
@@ -10,7 +11,6 @@ import Svg from "../Svg";
 import Tile from "../Tile";
 import Token from "../tokens/Token";
 
-import HexContext from "../context/HexContext";
 import ColorContext from "../context/ColorContext";
 
 import intersperse from "ramda/src/intersperse";
@@ -45,6 +45,8 @@ const Private = ({
   backgroundColor,
   variant
 }) => {
+  const { game } = useContext(GameContext);
+
   let revenueNode = null;
   if (is(Array, revenue)) {
     revenueNode = intersperse(<span key="span">/</span>, map(r => <Currency key={r} value={r} type="private" />, revenue));
@@ -67,6 +69,24 @@ const Private = ({
     }
   }
 
+  let hexNode = null;
+  if (hex) {
+    let hexData = getMapHex(game, hex);
+    hexNode = (<MapOrientation>
+                 <div className="private__hex">
+                   <Svg viewBox="-80 -80 160 160">
+                     <Hex hex={hexData} border={true} map={true} />
+                   </Svg>
+                 </div>
+               </MapOrientation>);
+  } else if (tile) {
+    hexNode = (<div className="private__tile">
+                 <Svg viewBox="-80 -80 160 160">
+                   <Tile id={tile} border={true} gameTiles={game.tiles} />
+                 </Svg>
+               </div>);
+  }
+
   return (
     <div className="cutlines">
       <div className="card private">
@@ -87,32 +107,7 @@ const Private = ({
                 </div>
                 {note && <div className="private__note">{note}</div>}
                 <div className="private__description">
-                  <Config>
-                    {(config, game) => {
-                      if (hex) {
-                        let hexData = getMapHex(game, hex);
-                        return (<div className="private__hex">
-                             <HexContext.Provider
-                               value={{
-                                 width: 100,
-                                 rotation: game.info.orientation === "horizontal" ? 0 : 90
-                               }}>
-                               <Svg viewBox="-80 -80 160 160">
-                                 <Hex hex={hexData} border={true} map={true} />
-                               </Svg>
-                             </HexContext.Provider>
-                           </div>);
-                      } else if (tile) {
-                        return (<div className="private__tile">
-                             <Svg viewBox="-80 -80 160 160">
-                               <Tile id={tile} border={true} gameTiles={game.tiles} />
-                             </Svg>
-                           </div>);
-                      } else {
-                        return null;
-                      }
-                    }}
-                  </Config>
+                  {hexNode}
                   {company && <div className="private__company">
                                <Svg viewBox="-15 -15 30 30">
                                  <GameCompanyToken abbrev={company} outlineWidth={15/25} width={15} />

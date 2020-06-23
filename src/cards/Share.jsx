@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import ConfigContext from "../context/ConfigContext";
+
 import CompanyToken from "../tokens/CompanyToken";
 import Color from "../data/Color";
 import ColorContext from "../context/ColorContext";
 
-import Config from "../data/Config";
 import Currency from "../util/Currency";
 
-import is from "ramda/src/is";
 import min from "ramda/src/min";
 
 import "./share.scss";
@@ -31,6 +31,7 @@ const LeftShare = ({
   blackBand,
   variant
 }) => {
+
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
   let tokens = [];
@@ -133,6 +134,7 @@ const LeftShare = ({
 };
 
 const CenterShare = ({
+  color,
   cost,
   revenue,
   shares,
@@ -177,7 +179,7 @@ const CenterShare = ({
                  }}>
               <Color context="companies">
                 {(c,t) => (
-                  <div className="share__hr" style={{ backgroundColor: c(is(Object,token) ? token.colors[0] : token) }} />
+                  <div className="share__hr" style={{ backgroundColor: c(color) }} />
                 )}
               </Color>
               <div className="card__body">
@@ -217,17 +219,16 @@ const CenterShare = ({
   );
 };
 
-const Share = (props) => (
-  <Config>
-    {config => {
-      if(config.cards.shareStyle === "left") {
-        return <LeftShare {...props} blackBand={config.cards.blackBand} shareStyle="left" />;
-      } else if (config.cards.shareStyle === "gmt") {
-        return <LeftShare {...props} blackBand={config.cards.blackBand} shareStyle="gmt" />;
-      } else {
-        return <CenterShare {...props} />;
-      }
-    }}
-  </Config>
-);
+const Share = (props) => {
+  const { config } = useContext(ConfigContext);
+
+  if(config.cards.shareStyle === "left") {
+    return <LeftShare {...props} blackBand={config.cards.blackBand} shareStyle="left" />;
+  } else if (config.cards.shareStyle === "gmt") {
+    return <LeftShare {...props} blackBand={config.cards.blackBand} shareStyle="gmt" />;
+  } else {
+    return <CenterShare {...props} />;
+  }
+};
+
 export default Share;

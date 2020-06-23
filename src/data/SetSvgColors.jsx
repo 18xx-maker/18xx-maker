@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useContext } from "react";
+import ConfigContext from "../context/ConfigContext";
 
 import ColorContext from "../context/ColorContext";
 import Color from "./Color";
@@ -12,7 +12,10 @@ import keys from "ramda/src/keys";
 const colors = keys(require("./themes/companies/rob.json").colors);
 const mapColors = keys(require("./themes/maps/gmt.json").colors);
 
-const SetSvgColors = ({ companySvgLogos }) => {
+const SetSvgColors = () => {
+  const { config } = useContext(ConfigContext);
+  const companySvgLogos = config.companySvgLogos;
+
   return (
     <ColorContext.Provider value="companies">
       <Color>
@@ -71,8 +74,4 @@ const SetSvgColors = ({ companySvgLogos }) => {
   );
 }
 
-const mapStateToProps = state => ({
-  companySvgLogos: state.config.companySvgLogos
-});
-
-export default connect(mapStateToProps)(SetSvgColors);
+export default SetSvgColors;

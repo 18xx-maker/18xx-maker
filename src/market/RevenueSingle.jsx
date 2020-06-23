@@ -1,39 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
+import ConfigContext from "../context/ConfigContext";
+import GameContext from "../context/GameContext";
 
-import Config from "../data/Config";
 import Svg from "../Svg";
 
 import { getRevenueData } from "./util";
+import { unitsToCss } from "../util";
 
 import Revenue from "./Revenue";
 
 const RevenueSingle = () => {
-  return (
-    <Config>
-      {(config, game) => {
-        let data = getRevenueData(game.revenue, config);
+  const { config } = useContext(ConfigContext);
+  const { game } = useContext(GameContext);
+  let data = getRevenueData(game.revenue, config);
+  let paperWidth = unitsToCss(data.totalWidth + 5 + (2 * config.paper.margins));
+  let paperHeight = unitsToCss(data.totalHeight + 5 + (2 * config.paper.margins));
 
-        return (
-          <React.Fragment>
-            <div className="PrintNotes">
-              <div>
-                <h3>Width: {data.humanWidth}</h3>
-                <h3>Height: {data.humanHeight}</h3>
-              </div>
-            </div>
-            <div className="stock">
-              <Svg
-                width={data.css.totalWidth}
-                height={data.css.totalHeight}
-                viewBox={`0 0 ${data.totalWidth} ${data.totalHeight}`}>
-                <Revenue data={data} title={game.info.title} />
-              </Svg>
-              <style>{`@media print {@page {size: ${data.css.printWidth} ${data.css.printHeight};}}`}</style>
-            </div>
-          </React.Fragment>
-        );
-      }}
-    </Config>
+  return (
+    <div className="printElement" style={{display:'inline-block'}}>
+      <div className="stock" style={{display:'inline-block'}}>
+        <Svg
+          width={data.css.totalWidth}
+          height={data.css.totalHeight}
+          viewBox={`0 0 ${data.totalWidth} ${data.totalHeight}`}>
+          <Revenue data={data}
+                   config={config}
+                   game={game}/>
+        </Svg>
+        <style>{`@media print {@page {size: ${paperWidth} ${paperHeight}; margin: ${unitsToCss(config.paper.margins)}}}`}</style>
+      </div>
+    </div>
   );
 };
 

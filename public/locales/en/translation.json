@@ -1,0 +1,170 @@
+{
+  "title": "18xx Maker",
+  "about": "This app can take 18xx game definitions written in json, display them, and render them for printing. The original intent of this site was for personal PnP projects, but the purpose has shifted over time to prototyping new games.",
+  "browser": "Browser",
+  "app": "App",
+  "important": "Important",
+  "note": "Note",
+  "piracy": "Do not use this site to print games that you don't have a license to print. Please support our 18xx designers, developers, and publishers.",
+  "download": "Download",
+  "save": "Save",
+  "show": "Show",
+  "nav": {
+    "menu": "Menu",
+    "home": "Home",
+    "load": "Load Games",
+    "elements": "Elements",
+    "docs": "Help"
+  },
+  "wip": {
+    "wip": "Work in progress",
+    "note": "Some games are still works in progress. Please submit any bugs found as <github>issues on Github</github>!",
+    "tooltip": "This game is marked as being a work in progress",
+    "description": "This game might not be complete or accurate"
+  },
+  "export": {
+    "allPdf": "Export game as pdf documents",
+    "allPng": "Export game as png images",
+    "singlePdf": "Export this component as a pdf document",
+    "singlePng": "Export this component as a png image"
+  },
+  "docs": {
+    "help": {
+      "title": "Help",
+      "description": "18xx Maker Goals and Links"
+    },
+    "developing": {
+      "title": "Developing",
+      "description": "Programming with 18xx Maker"
+    },
+    "translation": {
+      "title": "Translation",
+      "description": "Help translate 18xx Maker"
+    },
+    "output": {
+      "pdf": {
+        "title": "PDF Output",
+        "description": "Generate PDF documents"
+      },
+      "png": {
+        "title": "PNG Output",
+        "description": "Generate PNG images"
+      },
+      "b18": {
+        "title": "Board18 Output",
+        "description": "Generate Board18 game boxes"
+      }
+    },
+    "games": {
+      "schemas": {
+        "title": "JSON Schemas",
+        "description": "Validation of game files"
+      },
+      "types": {
+        "title": "Share & Token Types",
+        "description": "Easily describe shares and tokens"
+      },
+      "trains": {
+        "title": "Phases and Trains",
+        "description": "How to describe game phases"
+      },
+      "logos": {
+        "title": "Logos",
+        "description": "Train company logos"
+      },
+      "overrides": {
+        "title": "Company Overrides",
+        "desc": "Swap companies!"
+      }
+    },
+    "pnp": {
+      "tokens": {
+        "title": "Tokens",
+        "description": "Info about token output"
+      },
+      "die": {
+        "title": "Die Cutter",
+        "description": "Info about the Ellison die cutter"
+      }
+    }
+  },
+  "elements": {
+    "tiles": {
+      "title": "Tiles",
+      "description": "18xx tiles from all games",
+      "page": {
+        "description": "This page shows all of the generic tiles that 18xx Maker knows about."
+      },
+      "filter": {
+        "title": "Tile Filter",
+        "all": "All",
+        "none": "None",
+        "color": "Color",
+        "id": "Tile ID",
+        "includes": "Includes",
+        "town": "Town",
+        "city": "City",
+        "halt": "Halt",
+        "revenues": "Revenues"
+      }
+    },
+    "atoms": {
+      "title": "Map Elements",
+      "description": "Basic atoms for maps and tiles",
+      "page": {
+        "description": "This page shows examples of all items that you can display on either map hexes or tiles. Use these examples to help prototype your game!"
+      }
+    },
+    "logos": {
+      "title": "Company Logos",
+      "description": "Included train company logos",
+      "page": {
+        "description": "Here are all of the SVG logos bundled with 18xx Maker."
+      }
+    },
+    "cheat": {
+      "title": "Cheat Sheet",
+      "description": "Data from included 18xx games"
+    }
+  },
+  "game": {
+    "by": "by",
+    "cards": {
+      "privates": "Privates",
+      "shares": "Shares",
+      "trains": "Trains",
+      "numbers": "Number Cards"
+    },
+    "load": "Load Game",
+    "loadDescription": "Open another game",
+    "map": {
+      "variation": "Map Variation"
+    },
+    "paginated": "Paginate",
+    "players": "Players",
+    "unload": "Unload Game"
+  },
+  "usage": {
+    "title": "Usage",
+    "description": "You can use this app in your browser at it's <public>main website</public> or <app>download it as an app</app> to use some of it's more advanced features. If you are working on prototyping your own game we highly recommend you download the app."
+  },
+  "features": {
+    "title": "Features",
+    "1": "Load an 18xx Maker game file and display it.",
+    "2": "Inspect our database of 18xx tiles.",
+    "3": "Render games with your own design choices with themes and configuration options.",
+    "4": "Quickly design new games making use of our extensive set of elements and logos.",
+    "browser": {
+      "1": "Print components directly from your web browser."
+    },
+    "app": {
+      "1": "Live reloading of games as you edit definition files.",
+      "2": "Export full games or individual components as PDF documents or PNG images.",
+      "3": "Export games as Board18 game boxes."
+    }
+  },
+  "donations": {
+    "title": "Donations",
+    "description": "I've been asked about donation buttons; if you find this software useful to you and would like to donate money towards its development you can do so via <paypal>Paypal</paypal> or <cash>Square Cash</cash>."
+  }
+}

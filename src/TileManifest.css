@@ -26,6 +26,7 @@
   line-height: 0.5in;
   box-sizing: border-box;
   box-shadow: 0 0 0 1px #999;
+  page-break-inside: avoid;
 }
 
 .TileManifest--Image {

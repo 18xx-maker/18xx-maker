@@ -1,22 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
+import ConfigContext from "../context/ConfigContext";
+import GameContext from "../context/GameContext";
 
-import Config from "../data/Config";
 import Paginate from "../util/Paginate";
 
 import { getRevenueData } from "./util";
 
 import Revenue from "./Revenue";
 
-const RevenuePaginated = () => (
-  <Config>
-    {(config, game) => {
-      let data = getRevenueData(game.revenue, config);
+const RevenuePaginated = () => {
+  const { config } = useContext(ConfigContext);
+  const { game } = useContext(GameContext);
+  let data = getRevenueData(game.revenue, config);
 
-      return <Paginate component="Revenue" data={data}>
-          <Revenue data={data} title={game.info.title} />
-        </Paginate>;
-    }}
-  </Config>
-);
+  return <Paginate component="Revenue"
+                   config={config}
+                   game={game}
+                   data={data}>
+           <Revenue data={data}
+                    config={config}
+                    game={game}/>
+         </Paginate>;
+};
 
 export default RevenuePaginated;
