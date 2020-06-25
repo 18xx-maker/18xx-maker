@@ -6,6 +6,8 @@ import Color from "../data/Color";
 import Currency, { format } from "../util/Currency";
 import RotateContext from "../context/RotateContext";
 
+import defaultTo from "ramda/src/defaultTo";
+
 const Value = ({ value, shape, fixed, outerBorderColor }) => {
   const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
@@ -61,7 +63,7 @@ const Value = ({ value, shape, fixed, outerBorderColor }) => {
                   transform={fixed ? null : `rotate(-${rotation})`}
                   fontWeight="bold"
                   fontSize={size}
-                  fontFamily="sans-serif"
+                  fontFamily={defaultTo("sans-serif", game.info.valueFontFamily)}
                   fill={p("black")}
                   dominantBaseline="central"
                   textAnchor="middle"
