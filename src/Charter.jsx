@@ -34,33 +34,38 @@ const Charter = ({
   const halfWidthCharters = config.charters.halfWidth;
   const blackBand = config.charters.blackBand;
  
-  let tokenSpots = addIndex(map)((label, index) => {
-    // Color charters just use empty token circles, carth style uses full
-    // company tokens.
-    let companyToken = charterStyle === "color" ?
-        <Token outline="black" /> :
-        <CompanyToken company={company} />;
+  let tokenSpots = [];
+  if (tokens) {
+    tokenSpots = addIndex(map)((label, index) => {
+      // Color charters just use empty token circles, carth style uses full
+      // company tokens.
+      let companyToken = charterStyle === "color" ?
+          <Token outline="black" /> :
+          <CompanyToken company={company} />;
 
-    return (
-      <svg key={`token-${index}`}>
-        <g transform={`translate(25 25)`}>
-          <ColorContext.Provider value="companies">
-            {companyToken}
-          </ColorContext.Provider>
-          <g transform={`${halfWidthCharters ? "rotate(-90) " : ""}translate(0 39)`}>
-            <Color context="companies">
-              {(c, t) => (
-                <text fill={(charterStyle === "color" && !halfWidthCharters) ? t(c(color)) : c("black")}
-                      fontSize="11" fontWeight="normal" textAnchor="middle">
-                  <Currency value={label} type="token"/>
-                </text>
-              )}
-            </Color>
+      return (
+        <svg key={`token-${index}`}>
+          <g transform={`translate(25 25)`}>
+            <ColorContext.Provider value="companies">
+              {companyToken}
+            </ColorContext.Provider>
+            <g transform={`${halfWidthCharters ? "rotate(-90) " : ""}translate(0 39)`}>
+              <Color context="companies">
+                {(c, t) => (
+                  <text fill={(charterStyle === "color" && !halfWidthCharters) ? t(c(color)) : c("black")}
+                        fontSize="11" fontWeight="normal" textAnchor="middle">
+                    <Currency value={label} type="token"/>
+                  </text>
+                )}
+              </Color>
+            </g>
           </g>
-        </g>
-      </svg>
-    );
-  }, tokens);
+        </svg>
+      );
+    }, tokens);
+  } else {
+    tokens = [];
+  }
 
   let turnNodes = chain(turn => {
     let steps = addIndex(map)((step, i) => {
