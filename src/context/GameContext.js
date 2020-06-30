@@ -61,6 +61,13 @@ const loadBundledGame = (id) => {
   }
 
   return importPromise
+    .then((game) => {
+      if (game.default) {
+        return game.default;
+      }
+
+      return game;
+    })
     .then(assoc("id", gameInfo.id))
     .then(assoc("slug", gameInfo.slug))
     .then((game) => {
