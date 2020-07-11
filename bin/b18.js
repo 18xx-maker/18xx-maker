@@ -69,7 +69,7 @@ const server = app.listen(9000);
     author,
     board: {
       imgLoc: `images/${id}/Map.png`,
-      xStart: data.horizontal && mapData.a1Valid === false ? 0 : 50,
+      xStart: mapData.horizontal && mapData.a1Valid === false ? 0 : 50,
       orientation: game.info.orientation === "horizontal" ? "F" : "P",
       xStep: game.info.orientation === "horizontal" ? 87 : 50,
       yStart: 50,
