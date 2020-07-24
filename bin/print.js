@@ -74,7 +74,7 @@ const server = app.listen(9000);
     let gameIndex = gameDefs[game];
     let gameDef;
     if (gameIndex.local) {
-      gameDef = require("../data/games/" + gameIndex.file);
+      gameDef = require("../src/data/games/" + gameIndex.file);
     } else {
       gameDef = require("@18xx-maker/games/games/" + gameIndex.file);
     }
