@@ -53,7 +53,7 @@ const server = app.listen(9000);
   let gameDef = gameDefs[bname];
   let game;
   if (gameDef.local) {
-    game = require("../data/games/" + gameDef.file);
+    game = require("../src/data/games/" + gameDef.file);
   } else {
     game = require("@18xx-maker/games/games/" + gameDef.file);
   }
