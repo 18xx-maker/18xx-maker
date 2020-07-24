@@ -36,6 +36,7 @@ const Private = ({
   maxPlayers,
   description,
   icon,
+  iconColor,
   hex,
   tile,
   token,
@@ -120,7 +121,7 @@ const Private = ({
                            </div>}
                   {icon && <div className="private__icon">
                             <Svg viewBox="-15 -15 30 30">
-                              <Icon type={icon} />
+                              <Icon type={icon} color={iconColor} />
                             </Svg>
                           </div>}
                   {Array.isArray(description)
