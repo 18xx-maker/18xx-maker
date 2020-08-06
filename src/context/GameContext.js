@@ -3,7 +3,8 @@ import { Redirect, useLocation, matchPath } from "react-router-dom";
 
 import { useAlert } from "./AlertContext";
 
-import useSessionState from "../util/useSessionState";
+// import useSessionState from "../util/useSessionState";
+import useLocalState from "../util/useLocalState";
 
 import games from "../data/games";
 
@@ -94,7 +95,7 @@ const loadFileOrId = (fileOrId) => {
 
 export const GameProvider = ({ children }) => {
   const sendAlert = useAlert();
-  const [game, setGame] = useSessionState("game", null);
+  const [game, setGame] = useLocalState("game", null);
   const location = useLocation();
 
   const loadGame = (fileOrId) => {
