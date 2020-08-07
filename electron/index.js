@@ -108,7 +108,7 @@ function createPDF(path, filePath) {
             win.close();
             resolve(filePath);
           });
-      }, 500);
+      }, 1000);
     });
 
     if (path.includes("?")) {
@@ -178,7 +178,7 @@ function createScreenshot(path, filePath) {
             win.close();
             resolve();
           });
-      }, 500);
+      }, 1000);
     });
 
     if (path.includes("?")) {
