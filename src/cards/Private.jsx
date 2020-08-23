@@ -16,6 +16,7 @@ import ColorContext from "../context/ColorContext";
 import intersperse from "ramda/src/intersperse";
 import is from "ramda/src/is";
 import map from "ramda/src/map";
+import defaultTo from "ramda/src/defaultTo";
 
 import max from "ramda/src/max";
 import min from "ramda/src/min";
@@ -27,7 +28,9 @@ import "./private.scss";
 
 const Private = ({
   name,
+  nameFontSize,
   note,
+  noteFontSize,
   price,
   revenue,
   bid,
@@ -35,6 +38,7 @@ const Private = ({
   minPlayers,
   maxPlayers,
   description,
+  descFontSize,
   icon,
   iconColor,
   hex,
@@ -42,11 +46,18 @@ const Private = ({
   token,
   company,
   id,
+  idFontSize,
   idBackgroundColor,
   backgroundColor,
   variant
 }) => {
   const { game } = useContext(GameContext);
+  let descFontSizeInch = defaultTo(0.085, descFontSize / 72);
+  let noteFontSizeInch = defaultTo(0.12, noteFontSize / 72);
+  let nameFontSizeInch = defaultTo(0.18, nameFontSize / 72);
+  let idFontSizeInch = defaultTo(0.13, idFontSize / 72);
+  backgroundColor = defaultTo("white", backgroundColor);
+  idBackgroundColor = defaultTo("white", idBackgroundColor);
 
   let revenueNode = null;
   if (is(Array, revenue)) {
@@ -96,18 +107,35 @@ const Private = ({
           {c => (
             <div className="card__bleed"
                  style={{
-                   backgroundColor: c(backgroundColor || "white")
+                   backgroundColor: c(backgroundColor)
                  }}>
               <div className="card__body">
-                <div className="private__name">
+                <div className="private__name"
+                  style={{
+                    fontSize: `${nameFontSizeInch}in`,
+                    lineHeight: `${nameFontSizeInch + 0.02}in`
+                  }}>
                   {id && <div className="private__id"
                     style={{
-                      backgroundColor: c(idBackgroundColor || "gren")
+                      backgroundColor: c(idBackgroundColor),
+                      fontSize: `${idFontSizeInch}in`,
+                      lineHeight: `${idFontSizeInch + 0.02}in`
                     }}>{id}</div>}
                   {name}
                 </div>
-                {note && <div className="private__note">{note}</div>}
-                <div className="private__description">
+                {note && <div className="private__note"
+                    style={{
+                      fontSize: `${noteFontSizeInch}in`,
+                      lineHeight: `${noteFontSizeInch + 0.02}in`
+                    }}>
+                  {Array.isArray(note)
+                   ? note.reduce((lines, line) => <>{lines}<br />{line}</>)
+                   : note}</div>}
+                <div className="private__description"
+                    style={{
+                      fontSize: `${descFontSizeInch}in`,
+                      lineHeight: `${descFontSizeInch + 0.02}in`
+                    }}>
                   {hexNode}
                   {company && <div className="private__company">
                                <Svg viewBox="-15 -15 30 30">
