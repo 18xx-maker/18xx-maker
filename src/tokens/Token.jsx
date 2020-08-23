@@ -456,13 +456,13 @@ const Token = ({
           if (fontSize) {
             fSize = fontSize;
           } else {
-            fSize = width * 0.64;
+            fSize = width * .9;
             if (label.length > 5) {
-              fSize = fSize * 0.7;
+              fSize = fSize * 0.6;
             } else if (label.length > 4) {
-              fSize = fSize * 0.8;
+              fSize = fSize * 0.7;
             } else if (label.length > 3) {
-              fSize = fSize * 0.9;
+              fSize = fSize * 0.8;
             }
             if (!isNaN(label)) {
               fSize *= numbersOnlyScaling;

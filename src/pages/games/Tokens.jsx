@@ -154,18 +154,19 @@ const TokenLayout = ({ companies, data, game }) => {
   let gameTokens = chain((token) => {
     let count = token.print != null ? token.print :
       (token.quantity != null ? token.quantity : 1);
+    let tokenWidth = token.width || data.generalTokenSize / 2;
     if (is(Object, token)) {
       return Array(count).fill(
                <Token bleed={true}
                outline="black"
                {...token}
-               width={data.generalTokenSize / 2} />);
+               width={tokenWidth} />);
     } else {
       return [ <Token bleed={true}
                outline="black"
                color="white"
                label={token}
-               width={data.generalTokenSize / 2} /> ];
+               width={tokenWidth} /> ];
     }
   }, game.tokens);
 
