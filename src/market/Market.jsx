@@ -102,86 +102,82 @@ const Market = ({data, game, config, title}) => {
   let legendNode = null;
 
   if (data.type === "2D") {
-    if (!config.stock.display.legend ||
-        !game.stock.display ||
-        !game.stock.display.legend) {
-      return null;
+    if (config.stock.display.legend &&
+        game.stock.display &&
+        game.stock.display.legend) {
+      let legend = (game.stock && game.stock.legend) || [];
+      if (game.stock.display.legend.reverse) {
+        legend = reverse(legend);
+      }
+      let x = game.stock.display.legend.x * config.stock.cell.width;
+      let y = game.stock.display.legend.y * config.stock.cell.height;
+
+      legendNode = (
+        <Color context="companies">
+          {c => (
+            <g>
+              {addIndex(map)((legend, i) => (
+                <g
+                  key={`pool-note-${i}`}
+                  transform={`translate(${x} ${y + (data.stock.title === false ? 0 : 50) + (i * (game.stock.display.legend.verticalAlign === "bottom" ? -35 : 35))})`}
+                >
+                  <Legend right={game.stock.display.legend.align === "right"}
+                          bottom={game.stock.display.legend.verticalAlign === "bottom"}
+                          reverse={game.stock.display.legend.reverse}
+                          {...legend}/>
+                </g>
+              ), legend)}
+            </g>
+          )}
+        </Color>
+      );
     }
 
-    let legend = (game.stock && game.stock.legend) || [];
-    if (game.stock.display.legend.reverse) {
-      legend = reverse(legend);
-    }
-    let x = game.stock.display.legend.x * config.stock.cell.width;
-    let y = game.stock.display.legend.y * config.stock.cell.height;
+  } else if (data.type === "1D") {
+    if (config.stock.display.legend) {
+      let legend = (game.stock && game.stock.legend) || [];
+      let left = 0;
 
-    legendNode = (
-      <Color context="companies">
-        {c => (
-          <g>
-            {addIndex(map)((legend, i) => (
+      legendNode = (
+        <g>
+          {addIndex(map)((legend, i) => {
+            let current = left;
+            left += 100 + legend.description.length * 6.5;
+            return (
               <g
                 key={`pool-note-${i}`}
-                transform={`translate(${x} ${y + (data.stock.title === false ? 0 : 50) + (i * (game.stock.display.legend.verticalAlign === "bottom" ? -35 : 35))})`}
+                transform={`translate(${current} ${1 * data.height + (data.stock.title === false ? 25 : 75)})`}
               >
-                <Legend right={game.stock.display.legend.align === "right"}
-                        bottom={game.stock.display.legend.verticalAlign === "bottom"}
-                        reverse={game.stock.display.legend.reverse}
-                        {...legend}/>
+                <Legend {...legend}/>
               </g>
-            ), legend)}
-          </g>
-        )}
-      </Color>
-    );
-  } else if (data.type === "1D") {
-    if (!config.stock.display.legend) {
-      return null;
+            );
+          }, legend)}
+        </g>
+      );
     }
 
-    let legend = (game.stock && game.stock.legend) || [];
-    let left = 0;
-
-    legendNode = (
-      <g>
-        {addIndex(map)((legend, i) => {
-          let current = left;
-          left += 100 + legend.description.length * 6.5;
-          return (
-            <g
-              key={`pool-note-${i}`}
-              transform={`translate(${current} ${1 * data.height + (data.stock.title === false ? 25 : 75)})`}
-            >
-              <Legend {...legend}/>
-            </g>
-          );
-        }, legend)}
-      </g>
-    );
   } else if (data.type === "1Diag") {
     if (!config.stock.display.legend) {
-      return null;
+      let legend = (game.stock && game.stock.legend) || [];
+      let left = 0;
+
+      legendNode = (
+        <g>
+          {addIndex(map)((legend, i) => {
+            let current = left;
+            left += 100 + legend.description.length * 6.5;
+            return (
+              <g
+                key={`pool-note-${i}`}
+                transform={`translate(${current} ${2 * data.height + (data.stock.title === false ? 25 : 75)})`}
+              >
+                <Legend {...legend}/>
+              </g>
+            );
+          }, legend)}
+        </g>
+      );
     }
-
-    let legend = (game.stock && game.stock.legend) || [];
-    let left = 0;
-
-    legendNode = (
-      <g>
-        {addIndex(map)((legend, i) => {
-          let current = left;
-          left += 100 + legend.description.length * 6.5;
-          return (
-            <g
-              key={`pool-note-${i}`}
-              transform={`translate(${current} ${2 * data.height + (data.stock.title === false ? 25 : 75)})`}
-            >
-              <Legend {...legend}/>
-            </g>
-          );
-        }, legend)}
-      </g>
-    );
   }
 
   return (
