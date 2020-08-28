@@ -1,12 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import Color from "../data/Color";
-
+import GameContext from "../context/GameContext";
 import Currency from "../util/Currency";
-
+import defaultTo from "ramda/src/defaultTo";
 import icons from "../data/icons";
 
 const Terrain = ({ type, size, cost, fontSize, color }) => {
-  fontSize = fontSize || 15;
+  const { game } = useContext(GameContext);
+  fontSize = defaultTo(15, fontSize);
+  let fontFamily = defaultTo("display", game.info.valueFontFamily);
 
   let translate = 0;
   let scale = 1;
@@ -59,6 +61,7 @@ const Terrain = ({ type, size, cost, fontSize, color }) => {
             strokeWidth={(!color || color === "black") ? 0 : 1}
             stroke={c("black")}
             fontSize={fontSize}
+            fontFamily={fontFamily}
             dominantBaseline="hanging"
             textAnchor="middle"
             x="0"

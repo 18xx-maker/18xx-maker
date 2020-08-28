@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as R from "ramda";
+
+import GameContext from "../context/GameContext";
 
 import Name from "./Name";
 import Currency from "../util/Currency";
 
 import Color from "../data/Color";
+
+import defaultTo from "ramda/src/defaultTo";
 
 const splitRevenues = (rows, revenues) => {
   if(!rows || rows < 2 || revenues.length < 2) {
@@ -24,7 +28,7 @@ const height = (size) => {
   return size + 6;
 }
 
-const makeNode = (x, y, reverse, revenue, size) => {
+const makeNode = (x, y, reverse, revenue, size, fontFamily) => {
   let value = R.defaultTo("", R.defaultTo(revenue.cost, R.defaultTo(revenue.revenue, revenue.value)));
   let length = letter(size) * `${value}`.length;
   let phaseLength = letter(size) * `${revenue.phase}`.length;
@@ -50,6 +54,7 @@ const makeNode = (x, y, reverse, revenue, size) => {
         <text
           fill={c(revenue.textColor) || t(c(revenue.color))}
           fontSize={size}
+          fontFamily={fontFamily}
           dominantBaseline="central"
           textAnchor="middle"
           textLength={length}
@@ -73,6 +78,7 @@ const makeNode = (x, y, reverse, revenue, size) => {
             strokeWidth="0.5"
             stroke={c("black")}
             fontSize={size}
+            fontFamily={fontFamily}
             dominantBaseline="central"
             textAnchor="middle"
             textLength={phaseLength}
@@ -92,14 +98,14 @@ const makeNode = (x, y, reverse, revenue, size) => {
 
 const getWidth = (r, size) => R.max(`${r.value || r.revenue || r.cost || 0}`.length, 2) * letter(size) + 5;
 
-const makeNodes = (y, reverse, revenues, size) => {
+const makeNodes = (y, reverse, revenues, size, fontFamily) => {
   let totalWidth = R.sum(R.map(r => 5 + letter(size) * R.max(`${r.value || r.revenue || r.cost || 0}`.length, 2),
                                revenues));
   let bx = -0.5 * totalWidth; // Starting x for border box
   let x = bx;
 
   return R.concat(R.map(r => {
-    let result = makeNode(x, y, reverse, r, size);
+    let result = makeNode(x, y, reverse, r, size, fontFamily);
     x = x + getWidth(r, size);
     return result;
   }, revenues),[
@@ -118,6 +124,7 @@ const makeNodes = (y, reverse, revenues, size) => {
 };
 
 const OffBoardRevenue = ({ name, revenues, reverse, rows, size}) => {
+  const { game } = useContext(GameContext);
   let nameNode = null;
   if (name) {
     nameNode = <Name {...name}
@@ -128,14 +135,12 @@ const OffBoardRevenue = ({ name, revenues, reverse, rows, size}) => {
 
   let split = splitRevenues(rows, revenues);
 
-  let fontSize = DEFAULT_FONTSIZE;
-	if (size !== undefined) {
-  		fontSize = size;
-	}
+  let fontSize = defaultTo(DEFAULT_FONTSIZE, size);
+  let fontFamily = defaultTo("display", game.info.valueFontFamily);
 
   let nodes = R.addIndex(R.chain)((revenues, row) => {
     let y = row * height(fontSize) * (reverse ? -1 : 1);
-    return makeNodes(y, reverse, revenues, fontSize);
+    return makeNodes(y, reverse, revenues, fontSize, fontFamily);
   }, split);
   // let nodes = makeNodes(-10, reverse, revenues);
 
