@@ -159,7 +159,7 @@ const Token = ({
                          height={size} width={size}/>
             );
           }
-          tokenFill = c("white");
+          tokenFill = c(color) || p("white");
           textStroke = "none";
           textFill = "none";
 
