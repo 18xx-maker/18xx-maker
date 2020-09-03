@@ -25,7 +25,9 @@ export const getMarketData = (stock, config) => {
       width =
         (stock.cell && stock.cell.width ? stock.cell.width : 1) * cell.width;
       height =
-        (stock.cell && stock.cell.height ? stock.cell.height : 1) * cell.height;
+        diag *
+        (stock.cell && stock.cell.height ? stock.cell.height : 1) *
+        cell.height;
       rows = 2;
       columns = Math.ceil(length(stock.market) / 2);
       break;
@@ -33,7 +35,9 @@ export const getMarketData = (stock, config) => {
       width =
         (stock.cell && stock.cell.width ? stock.cell.width : 1) * cell.width;
       height =
-        (stock.cell && stock.cell.height ? stock.cell.height : 1) * cell.height;
+        column *
+        (stock.cell && stock.cell.height ? stock.cell.height : 1) *
+        cell.height;
       rows = 1;
       columns = length(stock.market);
       break;
