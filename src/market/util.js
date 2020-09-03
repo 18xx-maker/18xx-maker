@@ -19,33 +19,27 @@ export const getMarketData = (stock, config) => {
   let height = 0;
   let rows = 0;
   let columns = 0;
+  let cellWidth =
+    (stock.cell && stock.cell.width ? stock.cell.width : 1) * cell.width;
+  let cellHeight =
+    (stock.cell && stock.cell.height ? stock.cell.height : 1) * cell.height;
 
   switch (stock.type) {
     case "1Diag":
-      width =
-        (stock.cell && stock.cell.width ? stock.cell.width : 1) * cell.width;
-      height =
-        diag *
-        (stock.cell && stock.cell.height ? stock.cell.height : 1) *
-        cell.height;
+      width = cellWidth;
+      height = diag * cellHeight;
       rows = 2;
       columns = Math.ceil(length(stock.market) / 2);
       break;
     case "1D":
-      width =
-        (stock.cell && stock.cell.width ? stock.cell.width : 1) * cell.width;
-      height =
-        column *
-        (stock.cell && stock.cell.height ? stock.cell.height : 1) *
-        cell.height;
+      width = cellWidth;
+      height = column * cellHeight;
       rows = 1;
       columns = length(stock.market);
       break;
     case "2D":
-      width =
-        (stock.cell && stock.cell.width ? stock.cell.width : 1) * cell.width;
-      height =
-        (stock.cell && stock.cell.height ? stock.cell.height : 1) * cell.height;
+      width = cellWidth;
+      height = cellHeight;
       rows = length(stock.market);
       columns = getMaxLength(stock.market);
       break;
