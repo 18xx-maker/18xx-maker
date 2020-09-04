@@ -73,7 +73,7 @@ const LoadGames = () => {
     let linkNode = null;
     let imageNode = null;
 
-    if (game.publisher) {
+    if (game.publisher && publishers[game.publisher]) {
       let publisher = publishers[game.publisher];
 
       if (publisher.link) {
