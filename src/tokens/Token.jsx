@@ -13,7 +13,7 @@ const Token = ({
   logoWidth, // Override the default width of the logo.
   icon, // The path-based icon (defined in App.jsx) to display on this token
   iconWidth, // Override the default width of the icon.
-  iconColor, // The color to use for the svg icon
+  iconColor, // The color to use for the svg icon or logo
   label, // The text label to use on this token
   labelColor, // What color to use for writing the label text
   color, // What color is this token using as a background
@@ -159,7 +159,7 @@ const Token = ({
                          height={size} width={size}/>
             );
           }
-          tokenFill = c(color) || p("white");
+          tokenFill = c(iconColor) || p("white");
           textStroke = "none";
           textFill = "none";
 
