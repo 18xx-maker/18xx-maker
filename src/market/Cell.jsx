@@ -42,7 +42,8 @@ const Cell = ({ cell, par, game, config, data }) => {
           {(c,t) => {
 
             // Standard colors
-            let color = cell.color ? c(cell.color) : c("plain");
+            let color = cell.color ? c(cell.color) : ((data.cell && data.cell.color) ? c(data.cell.color) : c("plain"));
+
             let arrowColor = cell.arrowColor ? c(cell.arrowColor) : c("black");
 
             // Check if legend is used

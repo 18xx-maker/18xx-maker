@@ -122,7 +122,7 @@ const Charters = () => {
     top: calc(1.125in + ${data.css.bleed});
 }
 
-.charter--carth.harter--minor .charter__hr,
+.charter--carth.charter--minor .charter__hr,
 .charter--carth.charter--half .charter__hr {
     top: calc(0.875in + ${data.css.bleed});
 }

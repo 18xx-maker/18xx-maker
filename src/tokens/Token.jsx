@@ -13,7 +13,7 @@ const Token = ({
   logoWidth, // Override the default width of the logo.
   icon, // The path-based icon (defined in App.jsx) to display on this token
   iconWidth, // Override the default width of the icon.
-  iconColor, // The color to use for the svg icon
+  iconColor, // The color to use for the svg icon or logo
   label, // The text label to use on this token
   labelColor, // What color to use for writing the label text
   color, // What color is this token using as a background
@@ -107,7 +107,7 @@ const Token = ({
         labelStrokeWidth = labelStrokeWidth ? labelStrokeWidth : "0.5";
 
         // Background fill to use for the main token circle object
-        let tokenFill = c(color) || p("white");
+        let tokenFill = c(color) || c("white");
 
         if(inverse && logo && logos[logo]) {
           // Draw inversed logos same as reserved
@@ -159,7 +159,7 @@ const Token = ({
                          height={size} width={size}/>
             );
           }
-          tokenFill = c("white");
+          tokenFill = c(iconColor) || p("white");
           textStroke = "none";
           textFill = "none";
 
@@ -415,11 +415,11 @@ const Token = ({
             } else {
               fSize = width * 0.48;
               if (label.length > 5) {
-                fSize = fSize * 0.7;
+                fSize *= 0.7;
               } else if (label.length > 4) {
-                fSize = fSize * 0.8;
+                fSize *= 0.8;
               } else if (label.length > 3) {
-                fSize = fSize * 0.9;
+                fSize *= 0.9;
               }
             }
             if (!isNaN(label)) {
@@ -458,15 +458,24 @@ const Token = ({
           } else {
             fSize = width * .9;
             if (label.length > 5) {
-              fSize = fSize * 0.6;
+              fSize *= 0.6;
             } else if (label.length > 4) {
-              fSize = fSize * 0.7;
+              fSize *= 0.7;
             } else if (label.length > 3) {
-              fSize = fSize * 0.8;
+              fSize *= 0.8;
             }
             if (!isNaN(label)) {
               fSize *= numbersOnlyScaling;
             }
+          }
+          if (label.indexOf("W") !== -1) {
+            fSize *= 0.85;
+          }
+          if (label.indexOf("M") !== -1) {
+            fSize *= 0.9;
+          }
+          if (label.indexOf("N") !== -1) {
+            fSize *= 0.95;
           }
           let y = fSize * 11 / 32;
           if (shield || shield3) {
