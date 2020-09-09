@@ -7,6 +7,7 @@ import Currency from "../util/Currency";
 import find from "ramda/src/find";
 import is from "ramda/src/is";
 import map from "ramda/src/map";
+import defaultTo from "ramda/src/defaultTo";
 
 import "./train.scss";
 
@@ -28,7 +29,11 @@ const Train = ({ train, trains, blackBand }) => {
 
   let {
     name,
+    nameFontSize,
+    nameFontFamily,
     price,
+    priceFontSize,
+    priceFontFamily,
     tradeInPrice,
     color,
     description,
@@ -36,12 +41,33 @@ const Train = ({ train, trains, blackBand }) => {
     backgroundColor,
     image,
     phased,
+    phasedText,
     obsolete,
+    obsoletedText,
     rust,
+    rustedText,
     permanent,
+    permanentText,
+    permanentColor,
+    longevityFontFamily,
+    longevityFontSize,
     variant } = train;
 
   let notes = [];
+
+  nameFontFamily = defaultTo("display", nameFontFamily);
+  let nameFontSizeInch = defaultTo(0.6875, nameFontSize / 72);
+
+  priceFontFamily = defaultTo("display", priceFontFamily);
+  let priceFontSizeInch = defaultTo( 0.25, priceFontSize / 72);
+
+  phasedText = defaultTo("Phased out by", phasedText);
+  obsoletedText = defaultTo("Obsoleted by", obsoletedText);
+  rustedText = defaultTo("Rusted by", rustedText);
+  permanentText = defaultTo("Permanent", permanentText);
+
+  longevityFontFamily = defaultTo("display", longevityFontFamily);
+  let longevityFontSizeInch = defaultTo(0.18, longevityFontSize / 72);
 
   if (phased) {
     let phaseds = is(Array, phased) ? phased : [phased];
@@ -54,7 +80,7 @@ const Train = ({ train, trains, blackBand }) => {
       return r;
     }, phaseds).join(", ");
 
-    let phasedBy = `Phased out by ${events}`;
+    let phasedBy = `${phasedText} ${events}`;
     let phasedOn = is(Object, phaseds[0]) ? phaseds[0].on : phaseds[0];
 
     let eventTrain = find(t => {
@@ -67,7 +93,9 @@ const Train = ({ train, trains, blackBand }) => {
           <span className="train__info"
                 style={{
                   backgroundColor: c(eventTrain.color),
-                  color: t(c(eventTrain.color))
+                  color: t(c(eventTrain.color)),
+                  fontSize: `${longevityFontSizeInch}in`,
+                  fontFamily: `${longevityFontFamily}`
                 }} >{phasedBy}</span>
         )}
       </Color>
@@ -85,7 +113,7 @@ const Train = ({ train, trains, blackBand }) => {
       return r;
     }, obsoletes).join(", ");
 
-    let obsoleteBy = `Obsoleted by ${events}`;
+    let obsoleteBy = `${obsoletedText} ${events}`;
     let obsoleteOn = is(Object, obsoletes[0]) ? obsoletes[0].on : obsoletes[0];
 
     let eventTrain = find(t => {
@@ -98,7 +126,9 @@ const Train = ({ train, trains, blackBand }) => {
           <span className="train__info"
                 style={{
                   backgroundColor: c(eventTrain.color),
-                  color: t(c(eventTrain.color))
+                  color: t(c(eventTrain.color)),
+                  fontSize: `${longevityFontSizeInch}in`,
+                  fontFamily: `${longevityFontFamily}`
                 }} >{obsoleteBy}</span>
         )}
       </Color>
@@ -116,7 +146,7 @@ const Train = ({ train, trains, blackBand }) => {
       return r;
     }, rusts).join(", ");
 
-    let rustedBy = `Rusted by ${events}`;
+    let rustedBy = `${rustedText} ${events}`;
     let rustedOn = is(Object, rusts[0]) ? rusts[0].on : rusts[0];
 
     let eventTrain = find(t => {
@@ -129,7 +159,9 @@ const Train = ({ train, trains, blackBand }) => {
           <span className="train__info"
                 style={{
                   backgroundColor: c(eventTrain.color),
-                  color: t(c(eventTrain.color))
+                  color: t(c(eventTrain.color)),
+                  fontSize: `${longevityFontSizeInch}in`,
+                  fontFamily: `${longevityFontFamily}`
                 }} >{rustedBy}</span>
         )}
       </Color>
@@ -142,9 +174,11 @@ const Train = ({ train, trains, blackBand }) => {
         {(c,t) => (
           <span className="train__info"
                 style={{
-                  backgroundColor: c("yellow"),
-                  color: t(c("yellow"))
-                }} >Permanent</span>
+                  backgroundColor: permanentColor ? c(permanentColor) : c("yellow"),
+                  color: permanentColor ? t(c(permanentColor)) : t(c("yellow")),
+                  fontSize: `${longevityFontSizeInch}in`,
+                  fontFamily: `${longevityFontFamily}`
+                }} >{permanentText}</span>
         )}
       </Color>
     );
@@ -194,10 +228,20 @@ const Train = ({ train, trains, blackBand }) => {
                 {config.trains.images && (
                   <div className={`train__image train__image--${image}`}><img alt={`${color} ${name} train`} src={require(`../images/trains/${image}.png`)}/></div>
                 )}
-                <div className="train__name" style={{ color: config.trains.style === "color" ? t(c(color)) : c(color) }}>{name}</div>
+                <div className="train__name"
+                  style={{
+                    color: config.trains.style === "color" ? t(c(color)) : c(color),
+                    fontSize: `${nameFontSizeInch}in`,
+                    fontFamily: `${nameFontFamily}`
+                  }}>{name}
+                </div>
                 <div className="train__price"
-                     style={{ backgroundColor: config.trains.style === "color" ? c(color) : null,
-                              color: config.trains.style === "color" ? t(c(color)) : c(color) }}>
+                  style={{
+                    backgroundColor: config.trains.style === "color" ? c(color) : null,
+                    color: config.trains.style === "color" ? t(c(color)) : c(color),
+                    fontSize: `${priceFontSizeInch}in`,
+                    fontFamily: `${priceFontFamily}`
+                  }}>
                   <Currency value={price} type="train"/>
                   {tradeInPrice && (
                     <div className="train__trade_in_price">

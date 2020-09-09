@@ -431,7 +431,11 @@ export const getMapData = (game, coords, hexWidth, variation) => {
   let humanWidth = `${Math.ceil((50 + totalWidth) / 100.0)}in`;
   let humanHeight = `${Math.ceil((50 + totalHeight) / 100.0)}in`;
 
+  // which orientation for the hexes:
+  //   default is points up/down
+  //   "horizontal" is flats up/down
   let horizontal = game.info.orientation === "horizontal";
+  let mapCoordinates = game.info.mapCoordinates;
 
   let a1Valid = true;
   let expCoord = toCoords(hexes[0].hexes[0]);
@@ -459,8 +463,14 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     // Title options
     title: gameMap.title,
 
-    // Coords choice
+    // Coords choice: "edge" or "outside"
     coords,
+
+    // Which axis to put the letters and numbers on:
+    //   "reversed" flips normal behavior.
+    //   "lettersHorizontal" == "numbersVertical"
+    //   "lettersVertical" == "numbersHorizontal"
+    mapCoordinates,
 
     // How much space and offset to use due to coordinate choice
     coordSpace,
