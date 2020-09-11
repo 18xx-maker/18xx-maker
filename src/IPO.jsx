@@ -1,6 +1,6 @@
 import React from "react";
 import Config from "./data/Config";
-import Color from "./data/Color";
+import Color from "./util/Color";
 import ColorContext from "./context/ColorContext";
 
 import GameCompanyToken from "./tokens/GameCompanyToken";

@@ -1,5 +1,5 @@
 import React from "react";
-import Color from "../data/Color";
+import Color from "../util/Color";
 
 const stripeWidth = 28.8675
 const Hex = ({ color, border, transparent, map }) => {

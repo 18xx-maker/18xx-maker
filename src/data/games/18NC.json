@@ -1,0 +1,1427 @@
+{
+  "info": {
+    "title": "18NC",
+    "subtitle": "Railroads of the Tar Heel State",
+    "designer": "Matt Wilson",
+    "publisher": "self",
+    "background": "nc_green",
+    "titleX": 20,
+    "titleY": 820,
+    "extraStationTokens": 1,
+    "currency": "$#"
+  },
+  "links": {
+    "bgg": "https://boardgamegeek.com/boardgame/290513/18nc",
+    "rules": "https://boardgamegeek.com/boardgame/290513/18nc/files"
+  },
+  "colors": {
+    "nc_green": "#79b092",
+    "ncrr_green": "#10a9aa",
+    "wnc_yellow": "#febf10",
+    "wcr_green": "#aad08e",
+    "anc_blue": "#5f9cd1"
+  },
+  "tokens": ["Round", "DU"],
+  "bank": "∞",
+  "ipo": true,
+  "players": [
+    {
+      "number": 3,
+      "certLimit": 16,
+      "capital": 420
+    },
+    {
+      "number": 4,
+      "certLimit": 14,
+      "capital": 320
+    },
+    {
+      "number": 5,
+      "certLimit": 12,
+      "capital": 260
+    }
+  ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "Director's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "tokenTypes": {
+    "two": ["Home", 40],
+    "three": ["Home", 40, 80],
+    "four": ["Home", 40, 100, 100]
+  },
+  "companies": [
+    {
+      "name": "Wilmington & Weldon",
+      "abbrev": "W&W",
+      "color": "purple",
+      "tokens": ["G18", "40", "80"]
+    },
+    {
+      "name": "Wilmington, Charlotte & Rutherford",
+      "abbrev": "WCR",
+      "color": "wcr_green",
+      "tokens": ["G18", "40", "80"]
+    },
+    {
+      "name": "Atlantic & North Carolina",
+      "abbrev": "ANC",
+      "color": "anc_blue",
+      "tokens": ["E22", "40", "80", "100"]
+    },
+    {
+      "name": "Raleigh & Gaston",
+      "abbrev": "R&G",
+      "color": "red",
+      "tokens": ["C16", "80", "80"]
+    },
+    {
+      "name": "North Carolina Railroad",
+      "abbrev": "NCRR",
+      "color": "ncrr_green",
+      "tokens": ["C12", "40", "40", "80"]
+    },
+    {
+      "name": "Western North Carolina",
+      "abbrev": "WNC",
+      "color": "wnc_yellow",
+      "tokens": ["D11", "40", "40", "80"]
+    },
+    {
+      "name": "Cape Fear & Yadkin Valley",
+      "abbrev": "CFYV",
+      "color": "black",
+      "tokens": ["E16", "80", "80"]
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 5,
+      "price": 80,
+      "color": "yellow",
+      "image": "2T",
+      "rust": "4"
+    },
+    {
+      "name": "3",
+      "quantity": 4,
+      "price": 180,
+      "color": "green",
+      "image": "3T",
+      "rust": "6"
+    },
+    {
+      "name": "4",
+      "quantity": 2,
+      "price": 400,
+      "color": "green",
+      "image": "4T",
+      "rust": "8E"
+    },
+    {
+      "name": "4E",
+      "quantity": 2,
+      "price": 400,
+      "color": "green",
+      "image": "4T",
+      "rust": "8E"
+    },
+    {
+      "name": "5",
+      "quantity": 2,
+      "price": 550,
+      "color": "brown",
+      "image": "5T"
+    },
+    {
+      "name": "6",
+      "quantity": 2,
+      "price": 800,
+      "color": "brown",
+      "image": "6T"
+    },
+    {
+      "name": "8E",
+      "quantity": 4,
+      "price": 1000,
+      "color": "brown",
+      "image": "Diesel"
+    }
+  ],
+  "privates": [
+    {
+      "id": "P1",
+      "name": "Warrenton Railroad",
+      "price": 20,
+      "revenue": 5,
+      "hex": "C18",
+      "description": "The Warrenton hex (C18) is reserved until this private is purchased by a railroad."
+    },
+    {
+      "id": "P2",
+      "name": "Champion Fibre Company",
+      "price": 40,
+      "revenue": 10,
+      "hex": "B7",
+      "description": "The owning player may at the beginning of the Operating Round lay one yellow tile on a mountain hex ignoring the terrain cost and usual connection rules.  This abiility may not be used once purchased by a company."
+    },
+    {
+      "id": "P3",
+      "name": "Wilmington Railway Bridge Company",
+      "price": 40,
+      "revenue": 15,
+      "token": {
+        "icon": "bridge"
+      },
+      "hex": "F17",
+      "description": "The owning railroad may perform an extra tile action when completing a connection across a river hexside once per OR."
+    },
+    {
+      "id": "P4",
+      "name": "Mt. Airy & Ore Knob",
+      "price": 65,
+      "revenue": 10,
+      "token": {
+        "icon": "token",
+        "color": "white",
+        "iconColor": "white"
+      },
+      "description": "The owning company may place an extra token at no cost in Mt. Airy regardless of track connection."
+    },
+    {
+      "id": "P5",
+      "name": "Durham Union Station Company",
+      "price": 65,
+      "revenue": 10,
+      "token": {
+        "icon": "token",
+        "label": "DU",
+        "color": "white",
+        "iconColor": "white"
+      },
+      "description": "The owning railroad may pllace the Durham Union station token in Durham.  When this private closes, the Durham Uniioin token is removed from the game."
+    },
+    {
+      "id": "P6",
+      "name": "Richmond and Danville",
+      "price": 120,
+      "revenue": 30,
+      "icon": "charter",
+      "description": "Once this private has been acquired, the owning player immediately takes the director's certificate oof their choice and sets the stock price.  The private is removed once the associated railroad purchases a train."
+    }
+  ],
+  "phases": [
+    {
+      "name": "2",
+      "limit": 4,
+      "tiles": "yellow",
+      "notes": "companies' last train unsellable"
+    },
+    {
+      "name": "3",
+      "limit": 4,
+      "tiles": "green",
+      "notes": "companies' last train unsellable"
+    },
+    {
+      "name": "4/4E",
+      "limit": 3,
+      "tiles": "green"
+    },
+    {
+      "name": "5",
+      "limit": 2,
+      "tiles": "brown",
+      "notes": "privates removed from game"
+    },
+    {
+      "name": "6",
+      "limit": 2,
+      "tiles": "brown"
+    },
+    {
+      "name": "8E",
+      "limit": 2,
+      "tiles": "brown"
+    }
+  ],
+  "pools": [
+    {
+      "name": "Open Market",
+      "notes": [
+        {
+          "color": "orange",
+          "note": "Shares in the market pay dividends to the corporation"
+        },
+        {
+          "color": "brown",
+          "icon": "exclamation",
+          "note": "No more than 50% of a corporation's shares may be in the market at any time"
+        },
+        {
+          "color": "red",
+          "icon": "times",
+          "note": "Shares cannot be sold during the first stock round"
+        }
+      ]
+    },
+    {
+      "name": "State Treasury",
+      "notes": [
+        {
+          "note": "Once per turn, during Stock Round, a player may act on behalf of the State to purchase a share from the treasury of a coompany for which player is Director."
+        },
+        {
+          "note": "If the State owns the majority of a company's sharees, the State is liable for emergency train purchases."
+        },
+        {
+          "note": "1. Contribute all cash in company treasury to State Treasury."
+        },
+        {
+          "note": "2. If funds are insufficient, sell shares from the State Treasury to the Open Market, beginning with the highest-priced shares (usual Market limitation of 50% applies).  Stop executing share sales when there is enough cash to purchase a train."
+        },
+        {
+          "note": "3.  If, in the course of selling shares, the liability shifts from the State to the Director of the company needing a train, stop the share-selling process.  The Director must make up any shortfall with personal cash or by selling shares."
+        },
+        {
+          "note": "Initial Treasury: $600"
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "OR3",
+      "color": "brown"
+    },
+    {
+      "name": "OR2",
+      "color": "green"
+    },
+    {
+      "name": "OR1",
+      "color": "yellow"
+    },
+    {
+      "name": "SR",
+      "color": "white"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": [
+        "sell any number of shares",
+        "buy 1 share from treasury or open market",
+        "act on behalf of company as Director and redeem or sell a share"
+      ],
+      "ordered": true
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "issue shares to Open Market",
+        "lay or upgrade track",
+        "place token",
+        "run trains, withhold or pay dividends, and adjust share price",
+        "purchase train"
+      ],
+      "ordered": true,
+      "optional": ["purchase private companies"]
+    }
+  ],
+  "stock": {
+    "type": "2D",
+    "display": {
+      "par": {
+        "x": 15,
+        "y": 5
+      }
+    },
+    "par": {
+      "values": [100, 90, 80, 71, 62, 55]
+    },
+    "movement": {
+      "up": ["Fully owned by players and/or State at end of Stock Round"],
+      "down": ["For each share sold or issued to Open Market"],
+      "left": ["Withhold or pay dividends less than half the share price"],
+      "right": ["Pay dividends equal or greater than share price"]
+    },
+    "market": [
+      [
+        {
+          "value": 89,
+          "label": 89,
+          "arrow": "down"
+        },
+        96,
+        103,
+        110,
+        118,
+        126,
+        136,
+        147,
+        159,
+        173,
+        188,
+        204,
+        220,
+        235,
+        251
+      ],
+      [
+        {
+          "value": 80,
+          "label": 80,
+          "arrow": "down"
+        },
+        86,
+        93,
+        {
+          "value": 100,
+          "label": 100,
+          "par": true
+        },
+        106,
+        112,
+        120,
+        129,
+        139,
+        150,
+        162,
+        177,
+        193,
+        212,
+        {
+          "value": 231,
+          "label": 231,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 69,
+          "label": 69,
+          "arrow": "down"
+        },
+        86,
+        93,
+        {
+          "value": 90,
+          "label": 90,
+          "par": true
+        },
+        96,
+        103,
+        111,
+        120,
+        130,
+        141,
+        154,
+        168,
+        185,
+        203,
+        {
+          "value": 222,
+          "label": 222,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 62,
+          "label": 62,
+          "arrow": "down"
+        },
+        68,
+        74,
+        {
+          "value": 80,
+          "label": 80,
+          "par": true
+        },
+        86,
+        93,
+        102,
+        111,
+        121,
+        132,
+        145,
+        159,
+        175,
+        {
+          "value": 193,
+          "label": 193,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 55,
+          "label": 55,
+          "arrow": "down"
+        },
+        68,
+        74,
+        {
+          "value": 71,
+          "label": 71,
+          "par": true
+        },
+        86,
+        93,
+        102,
+        111,
+        121,
+        132,
+        145,
+        159,
+        175,
+        {
+          "value": 119,
+          "label": 119,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 48,
+          "label": 48,
+          "arrow": "down"
+        },
+        62,
+        62,
+        {
+          "value": 62,
+          "label": 62,
+          "par": true
+        },
+        67,
+        72,
+        79,
+        87,
+        95,
+        {
+          "value": 105,
+          "label": 105,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 42,
+          "label": 42,
+          "arrow": "down"
+        },
+        47,
+        51,
+        {
+          "value": 55,
+          "label": 55,
+          "par": true
+        },
+        59,
+        64,
+        70,
+        {
+          "value": 77,
+          "label": 77,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 35,
+          "label": 35,
+          "arrow": "down"
+        },
+        39,
+        43,
+        47,
+        51,
+        55,
+        60,
+        {
+          "value": 65,
+          "label": 65,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 28,
+          "label": 28,
+          "arrow": "down"
+        },
+        32,
+        35,
+        39,
+        43,
+        {
+          "value": 46,
+          "label": 46,
+          "arrow": "up"
+        }
+      ],
+      [
+        22,
+        25,
+        28,
+        32,
+        35,
+        {
+          "value": 38,
+          "label": 38,
+          "arrow": "up"
+        }
+      ]
+    ]
+  },
+  "tiles": {
+    "1": 1,
+    "2": 1,
+    "3": 2,
+    "4": 2,
+    "7": 4,
+    "8": 8,
+    "9": 7,
+    "14": 3,
+    "15": 2,
+    "16": 1,
+    "18": 1,
+    "19": 1,
+    "20": 1,
+    "23": 3,
+    "24": 3,
+    "25": 1,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "39": 1,
+    "40": 1,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 1,
+    "45": 2,
+    "46": 2,
+    "47": 1,
+    "53": 2,
+    "54": 1,
+    "55": 1,
+    "56": 1,
+    "57": 4,
+    "58": 2,
+    "59": 2,
+    "61": 2,
+    "62": 1,
+    "63": 3,
+    "64": 1,
+    "65": 1,
+    "66": 1,
+    "67": 1,
+    "68": 1,
+    "69": 1,
+    "70": 1
+  },
+  "map": {
+    "players": {
+      "x": 1500,
+      "y": 900
+    },
+    "roundTracker": {
+      "type": "row",
+      "x": 1270,
+      "y": 40
+    },
+    "hexes": [
+      {
+        "color": "white",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "removeBorders": [1, 2, 3, 4],
+        "hexes": ["A8"]
+      },
+      {
+        "color": "white",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          }
+        ],
+        "removeBorders": [4, 5, 6],
+        "hexes": ["G20"]
+      },
+      {
+        "color": "white",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          }
+        ],
+        "removeBorders": [1, 4, 5, 6],
+        "hexes": ["H17"]
+      },
+      {
+        "color": "white",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ],
+        "removeBorders": [1, 3, 4, 5, 6],
+        "hexes": ["H19"]
+      },
+      {
+        "color": "white",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "removeBorders": [1, 2, 3, 4],
+        "hexes": ["A10"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Mt. Airy"
+            },
+            "angle": -60,
+            "percent": 0.2
+          }
+        ],
+        "tokens": [
+          {
+            "label": "MAOK",
+            "angle": -60,
+            "percent": 0.2
+          }
+        ],
+        "hexes": ["B9"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Greensboro",
+              "offset": 50,
+              "reverse": true
+            },
+            "angle": -100,
+            "percent": 0.5
+          }
+        ],
+        "tokens": [
+          {
+            "label": "NCRR",
+            "color": "ncrr_green",
+            "angle": -100,
+            "percent": 0.5
+          }
+        ],
+        "hexes": ["C12"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "name": {
+              "name": "Durham",
+              "offset": 40,
+              "reverse": true
+            },
+            "angle": 150,
+            "percent": 0.5
+          },
+          {
+            "name": {
+              "name": "Raleigh",
+              "offset": 60
+            },
+            "angle": -30,
+            "percent": 0.5
+          }
+        ],
+        "tokens": [
+          {
+            "label": "DUR",
+            "color": "gray",
+            "angle": 150,
+            "percent": 0.5
+          },
+          {
+            "label": "R&G",
+            "color": "red",
+            "angle": -30,
+            "percent": 0.5
+          }
+        ],
+        "track": [
+          {
+            "side": 5,
+            "type": "straight",
+            "end": 0.125
+          }
+        ],
+        "labels": [
+          {
+            "label": "NY",
+            "angle": 60,
+            "percent": 0.7
+          }
+        ],
+        "values": [
+          {
+            "value": 40,
+            "angle": -120,
+            "percent": 0.7
+          }
+        ],
+        "hexes": ["C16"]
+      },
+      {
+        "color": "plain",
+        "companies": [
+          {
+            "label": "Warrenton",
+            "left": 2,
+            "right": 2,
+            "angle": 180,
+            "percent": 0.6,
+            "rotation": -30,
+            "bottom": true
+          }
+        ],
+        "names": [
+          {
+            "name": "Railroad",
+            "fontSize": 13,
+            "angle": -150,
+            "percent": 0.38,
+            "rotation": -30
+          }
+        ],
+        "hexes": ["C18"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "name": {
+              "name": "New Bern",
+              "offset": 60
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "label": "ANC",
+            "color": "anc_blue"
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 5
+          }
+        ],
+        "values": [
+          {
+            "value": 20,
+            "angle": 30,
+            "percent": 0.7
+          }
+        ],
+        "hexes": ["E22"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "name": {
+              "name": "Charlotte",
+              "offset": 50,
+              "reverse": true
+            }
+          }
+        ],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 4
+          }
+        ],
+        "labels": [
+          {
+            "label": "B",
+            "angle": 90,
+            "percent": 0.7
+          }
+        ],
+        "values": [
+          {
+            "value": 30,
+            "angle": -150,
+            "percent": 0.7
+          }
+        ],
+        "hexes": ["E10"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": 120,
+            "percent": 0.6
+          },
+          {
+            "angle": -60,
+            "percent": 0.6
+          }
+        ],
+        "hexes": ["C14", "C20", "F19"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Gaston"
+            },
+            "angle": 0,
+            "percent": 0.5
+          }
+        ],
+        "hexes": ["B19"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Edenton"
+            },
+            "angle": 0,
+            "percent": 0.5
+          }
+        ],
+        "hexes": ["B23"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Goldsboro"
+            },
+            "angle": 0,
+            "percent": 0.5
+          }
+        ],
+        "hexes": ["D19"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": 30,
+            "percent": 0.5
+          }
+        ],
+        "hexes": ["D15"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Fayetteville"
+            },
+            "angle": -30,
+            "percent": 0.6
+          }
+        ],
+        "tokens": [
+          {
+            "label": "CFYV",
+            "color": "black",
+            "angle": -30,
+            "percent": 0.6
+          }
+        ],
+        "bridges": [
+          {
+            "cost": 40,
+            "angle": 150,
+            "percent": 1
+          }
+        ],
+        "hexes": ["E16"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": -20,
+            "percent": 0.6
+          }
+        ],
+        "bridges": [
+          {
+            "cost": 40,
+            "angle": -150,
+            "percent": 1
+          }
+        ],
+        "hexes": ["F15"]
+      },
+      {
+        "color": "plain",
+        "bridges": [
+          {
+            "cost": 40,
+            "angle": 90,
+            "percent": 1
+          }
+        ],
+        "hexes": ["F17"]
+      },
+      {
+        "color": "yellow",
+        "track": [
+          {
+            "side": 1,
+            "type": "straight",
+            "end": 0.125
+          },
+          {
+            "side": 3,
+            "type": "straight",
+            "end": 0.125
+          }
+        ],
+        "cities": [
+          {
+            "angle": 90,
+            "percent": 0.5
+          },
+          {
+            "angle": -150,
+            "percent": 0.5
+          }
+        ],
+        "tokens": [
+          {
+            "label": "W&W",
+            "color": "purple",
+            "angle": 90,
+            "percent": 0.5
+          },
+          {
+            "label": "WCR",
+            "color": "wcr_green",
+            "angle": -150,
+            "percent": 0.5
+          }
+        ],
+        "values": [
+          {
+            "value": 30,
+            "angle": -30,
+            "percent": 0.2
+          }
+        ],
+        "bridges": [
+          {
+            "cost": 40,
+            "angle": 150,
+            "percent": 1
+          }
+        ],
+        "names": [
+          {
+            "name": "Wilmington",
+            "angle": 0,
+            "percent": 0.5
+          }
+        ],
+        "labels": [
+          {
+            "label": "OO",
+            "angle": 0,
+            "percent": 0.7
+          }
+        ],
+        "hexes": ["G18"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": 90,
+            "percent": 0.6
+          }
+        ],
+        "hexes": ["B21"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": 120,
+            "percent": 0.6
+          },
+          {
+            "angle": -60,
+            "percent": 0.6
+          }
+        ],
+        "hexes": ["C14"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Salisbury"
+            },
+            "angle": -40,
+            "percent": 0.5
+          }
+        ],
+        "tokens": [
+          {
+            "label": "WNC",
+            "color": "wnc_yellow",
+            "angle": -40,
+            "percent": 0.5
+          }
+        ],
+        "hexes": ["D11"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Winston",
+              "offset": 50,
+              "reverse": true
+            },
+            "angle": 100,
+            "percent": 0.5
+          },
+          {
+            "name": {
+              "name": "Salem"
+            },
+            "angle": -80,
+            "percent": 0.5
+          }
+        ],
+        "values": [
+          {
+            "value": 30,
+            "angle": 180,
+            "percent": 0.7
+          }
+        ],
+        "labels": [
+          {
+            "label": "OO",
+            "angle": 0,
+            "percent": 0.7
+          }
+        ],
+        "hexes": ["C8"]
+      },
+      {
+        "color": "yellow",
+        "track": [
+          {
+            "side": 2,
+            "type": "gentle"
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Asheville",
+              "offset": 58
+            },
+            "angle": -150,
+            "percent": 0.2
+          }
+        ],
+        "labels": [
+          {
+            "label": "B",
+            "angle": 90,
+            "percent": 0.7
+          }
+        ],
+        "values": [
+          {
+            "value": 30,
+            "angle": -60,
+            "percent": 0.6
+          }
+        ],
+        "hexes": ["D3"],
+        "terrain": [
+          {
+            "size": "medium",
+            "cost": 60,
+            "angle": 2,
+            "percent": 0.7,
+            "type": "mountain"
+          }
+        ]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 2
+          },
+          {
+            "type": "offboard",
+            "side": 3
+          },
+          {
+            "type": "offboard",
+            "side": 4
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Georgia"
+          },
+          "angle": 0,
+          "revenues": [
+            {
+              "color": "green",
+              "cost": "50"
+            },
+            {
+              "color": "brown",
+              "cost": "70"
+            }
+          ]
+        },
+        "hexes": ["E2"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 5
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Danville"
+          },
+          "angle": 0,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            }
+          ]
+        },
+        "hexes": ["A14"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Norfolk"
+          },
+          "angle": 0,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "10"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            }
+          ]
+        },
+        "hexes": ["A24"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          }
+        ],
+        "removeBorders": [4],
+        "hexes": ["F9"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 2
+          },
+          {
+            "type": "offboard",
+            "side": 3
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Columbia"
+          },
+          "angle": 90,
+          "percent": 1,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            }
+          ]
+        },
+        "removeBorders": [1],
+        "hexes": ["F11"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Morehead City"
+          },
+          "angle": 0,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "10"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            }
+          ]
+        },
+        "hexes": ["F23"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": 150,
+            "percent": 0.6
+          }
+        ],
+        "hexes": ["D5"],
+        "terrain": [
+          {
+            "size": "medium",
+            "cost": 60,
+            "type": "mountain"
+          }
+        ]
+      },
+      {
+        "color": "mountain",
+        "hexes": ["B7", "C2", "C4", "C6", "D1", "E4"],
+        "terrain": [
+          {
+            "size": "medium",
+            "cost": 60,
+            "type": "mountain"
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "hexes": [
+          "B11",
+          "B13",
+          "B15",
+          "B17",
+          "C10",
+          "C22",
+          "D7",
+          "D9",
+          "D13",
+          "D17",
+          "D21",
+          "E6",
+          "E8",
+          "E12",
+          "E14",
+          "E18",
+          "E20",
+          "F21",
+          "G16"
+        ]
+      }
+    ]
+  }
+}

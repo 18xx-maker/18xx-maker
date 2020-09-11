@@ -6,7 +6,7 @@ import GameContext from "../context/GameContext";
 import Name from "./Name";
 import Currency from "../util/Currency";
 
-import Color from "../data/Color";
+import Color from "../util/Color";
 
 import defaultTo from "ramda/src/defaultTo";
 

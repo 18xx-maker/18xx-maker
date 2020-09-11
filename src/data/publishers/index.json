@@ -1,0 +1,45 @@
+{
+  "aag": {
+    "name": "All-Aboard Games",
+    "link": "https://all-aboardgames.com/"
+  },
+  "dtg": {
+    "name": "Deep Thought Games",
+    "link": "http://www.deepthoughtgames.com/"
+  },
+  "gmt": {
+    "name": "GMT Games",
+    "link": "https://www.gmtgames.com/"
+  },
+  "gtg": {
+    "name": "Grand Trunk Games",
+    "link": "https://www.grandtrunkgames.com/"
+  },
+  "hans": {
+    "name": "Hans im Glück",
+    "link": "https://www.hans-im-glueck.de/"
+  },
+  "lookout": {
+    "name": "Lookout",
+    "link": "https://lookout-spiele.de/"
+  },
+  "marflow": {
+    "name": "Marflow Games",
+    "link": "https://18xx-marflow-games.de/"
+  },
+  "mayfair": {
+    "name": "Mayfair Games",
+    "link": "https://en.wikipedia.org/wiki/Mayfair_Games"
+  },
+  "self": {
+    "name": "Self Published"
+  },
+  "winsome": {
+    "name": "Winsome Games",
+    "link": "https://boardgamegeek.com/boardgamepublisher/65/winsome-games"
+  },
+  "zman": {
+    "name": "Z-Man Games",
+    "link": "https://www.zmangames.com/"
+  }
+}

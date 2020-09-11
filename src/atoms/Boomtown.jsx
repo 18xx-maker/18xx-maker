@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
-import Color from "../data/Color";
+import Color from "../util/Color";
 
 import Name from "./Name";
 

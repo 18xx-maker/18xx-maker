@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import GameContext from "../../context/GameContext";
 import Text from "./Text";
-import Color from "../../data/Color";
+import Color from "../../util/Color";
 
 import { getFontProps } from "../../util";
 

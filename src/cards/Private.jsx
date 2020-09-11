@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import GameContext from "../context/GameContext";
 import { MapOrientation } from "../context/OrientationContext";
 
-import Color from "../data/Color";
+import Color from "../util/Color";
 import Currency from "../util/Currency";
 import GameCompanyToken from "../tokens/GameCompanyToken";
 import Hex from "../Hex";

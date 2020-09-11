@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import Color from "../data/Color";
+import Color from "../util/Color";
 import GameContext from "../context/GameContext";
 import Currency from "../util/Currency";
 import defaultTo from "ramda/src/defaultTo";

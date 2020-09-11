@@ -1,6 +1,6 @@
 import React from "react";
 import { useOrientation } from "../context/OrientationContext";
-import Color from "../data/Color";
+import Color from "../util/Color";
 
 import chain from "ramda/src/chain";
 import includes from "ramda/src/includes";

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612">
+    <path class="color-black" d="M82.8 87.7h446.5v436.7H82.8V87.7z"/>
+    <path fill="none" stroke="#000" stroke-width="12" d="M82.8 87.7h446.5v436.7H82.8V87.7z"/>
+    <path fill="#fff" d="M529.2 87.7v436.7H82.8V87.7h446.4m2.9-2.8H79.9v442.3H532V84.9h.1z"/>
+    <text fill="#fff" font-family="LabSansPro-Medium" font-size="140.5848" letter-spacing="13.8" transform="matrix(.8 0 0 1 150.1885 218.0469)">
+        Rapid
+    </text>
+    <text fill="#fff" font-family="LabSansPro-Medium" font-size="140.5848" letter-spacing="13.8" transform="matrix(.8 0 0 1 98.1729 353.0078)">
+        Canyon
+    </text>
+    <text fill="#fff" font-family="LabSansPro-Medium" font-size="140.5848" letter-spacing="13.8" transform="matrix(.8 0 0 1 190.1143 487.9688)">
+        Line
+    </text>
+</svg>

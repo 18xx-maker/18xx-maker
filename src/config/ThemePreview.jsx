@@ -5,7 +5,7 @@ import Avatar from "@material-ui/core/Avatar";
 import AvatarGroup from "@material-ui/lab/AvatarGroup";
 
 import ColorContext from "../context/ColorContext";
-import Color from "../data/Color";
+import Color from "../util/Color";
 
 import map from "ramda/src/map";
 

@@ -17,6 +17,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormLabel from "@material-ui/core/FormLabel";
 import InputLabel from "@material-ui/core/InputLabel";
+import Link from "@material-ui/core/Link";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -25,7 +26,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Switch from "@material-ui/core/Switch";
 
+import BGGIcon from "@material-ui/icons/Storage";
 import GameIcon from "@material-ui/icons/Train";
+import LicenseIcon from "@material-ui/icons/Lock";
+import PurchaseIcon from "@material-ui/icons/MonetizationOn";
+import RulesIcon from "@material-ui/icons/Gavel";
 import WarningIcon from "@material-ui/icons/Warning";
 
 import File from "../util/File";
@@ -72,6 +77,50 @@ const GameNav = () => {
           <ListItemText primary={game.info.title}
                         secondary={`${t('game.by')} ${game.info.designer}`}/>
         </ListItem>
+        {game.links && game.links.license && (
+          <ListItem button
+                    component={Link}
+                    color="inherit"
+                    underline="none"
+                    target="_blank"
+                    href={game.links.license}>
+            <ListItemIcon><LicenseIcon color="error" /></ListItemIcon>
+            <ListItemText primary={t('game.license.primary')} secondary={t('game.license.secondary')} />
+          </ListItem>
+        )}
+        {game.links && game.links.purchase && (
+          <ListItem button
+                    component={Link}
+                    color="inherit"
+                    underline="none"
+                    target="_blank"
+                    href={game.links.purchase}>
+            <ListItemIcon><PurchaseIcon /></ListItemIcon>
+            <ListItemText primary={t('game.purchase.primary')} secondary={t('game.purchase.secondary')} />
+          </ListItem>
+        )}
+        {game.links && game.links.bgg && (
+          <ListItem button
+                    component={Link}
+                    color="inherit"
+                    underline="none"
+                    target="_blank"
+                    href={game.links.bgg}>
+            <ListItemIcon><BGGIcon/></ListItemIcon>
+            <ListItemText>{t('game.bgg')}</ListItemText>
+          </ListItem>
+        )}
+        {game.links && game.links.rules && (
+          <ListItem button
+                    component={Link}
+                    color="inherit"
+                    underline="none"
+                    target="_blank"
+                    href={game.links.rules}>
+            <ListItemIcon><RulesIcon/></ListItemIcon>
+            <ListItemText primary={t('game.rules')} />
+          </ListItem>
+        )}
         <File data={game}
               filename={`${game.id}.json`}
               list/>

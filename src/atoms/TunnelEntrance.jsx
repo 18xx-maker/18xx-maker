@@ -1,5 +1,5 @@
 import React from "react";
-import Color from "../data/Color";
+import Color from "../util/Color";
 
 const TunnelEntrance = ({ border, borderColor, trackColor, color, size }) => {
   size = size || 15;

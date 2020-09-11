@@ -3,7 +3,7 @@ import React from "react";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 
 import games from "../data/games";
-import { publishers } from "@18xx-maker/games";
+import publishers from "../data/publishers/index.json";
 import { useGame } from "../context/GameContext";
 
 import ascend from "ramda/src/ascend";
@@ -87,7 +87,7 @@ const LoadGames = () => {
       }
 
       if (game.publisher !== "self") {
-        let imageUrl = require(`@18xx-maker/games/publishers/${game.publisher}.png`);
+        let imageUrl = require(`../data/publishers/${game.publisher}.png`);
         if (publisher.link) {
           imageNode = <Link rel="noreferrer"
                             target="_blank"

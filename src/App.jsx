@@ -10,7 +10,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { orange, deepPurple } from '@material-ui/core/colors';
 
-import SetSvgColors from "./data/SetSvgColors";
+import SetSvgColors from "./util/SetSvgColors";
 import ScrollToTop from "./ScrollToTop";
 
 import AppNav from "./nav/AppNav";

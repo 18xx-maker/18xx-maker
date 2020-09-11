@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 import GameContext from "../context/GameContext";
 
-import Color from "../data/Color";
+import Color from "../util/Color";
 import Currency from "../util/Currency";
 
 import addIndex from "ramda/src/addIndex";

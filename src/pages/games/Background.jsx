@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { unitsToCss, printableWidth, printableHeight } from "../../util";
 import { GetFont, SetFont } from "../../context/FontContext";
-import Color from "../../data/Color";
+import Color from "../../util/Color";
 
 import GameContext from "../../context/GameContext";
 

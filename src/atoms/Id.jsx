@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 import { useOrientation } from "../context/OrientationContext";
 
-import Color from "../data/Color";
+import Color from "../util/Color";
 
 const Id = ({ id, extra }) => {
   const { config } = useContext(ConfigContext);

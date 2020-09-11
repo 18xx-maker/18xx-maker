@@ -6,7 +6,7 @@ import GameContext from "../../context/GameContext";
 
 import { getTile } from "../../util";
 
-import { tiles as tileDefs } from "@18xx-maker/games";
+import tileDefs from "../../data/tiles";
 
 import Svg from "../../Svg";
 import Hex from "../../Hex";

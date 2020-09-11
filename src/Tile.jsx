@@ -1,5 +1,5 @@
 import React from "react";
-import { tiles } from "@18xx-maker/games";
+import tiles from "./data/tiles";
 
 import is from "ramda/src/is";
 

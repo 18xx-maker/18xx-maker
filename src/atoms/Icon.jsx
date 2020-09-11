@@ -1,5 +1,5 @@
 import React from "react";
-import Color from "../data/Color";
+import Color from "../util/Color";
 import icons from "../data/icons";
 
 const Icon = ({ type, color, width, fillColor, strokeColor, strokeWidth }) => {
