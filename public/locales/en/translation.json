@@ -128,12 +128,17 @@
     }
   },
   "game": {
+    "bgg": "Board Game Geek",
     "by": "by",
     "cards": {
       "privates": "Privates",
       "shares": "Shares",
       "trains": "Trains",
       "numbers": "Number Cards"
+    },
+    "license": {
+      "primary": "License Information",
+      "secondary": "Please read before printing"
     },
     "load": "Load Game",
     "loadDescription": "Open another game",
@@ -142,6 +147,11 @@
     },
     "paginated": "Paginate",
     "players": "Players",
+    "purchase": {
+      "primary": "Purchase",
+      "secondary": "Where to buy this game"
+    },
+    "rules": "Rules",
     "unload": "Unload Game"
   },
   "usage": {
