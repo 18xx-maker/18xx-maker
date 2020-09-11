@@ -9,6 +9,7 @@ import useLocalState from "../util/useLocalState";
 import games from "../data/games";
 
 import assoc from "ramda/src/assoc";
+import equals from "ramda/src/equals";
 import is from "ramda/src/is";
 import isNil from "ramda/src/isNil";
 
@@ -100,6 +101,20 @@ export const GameProvider = ({ children }) => {
       });
   };
 
+  const checkForChanges = (id) => {
+    return loadBundledGame(id)
+      .then((loadedGame) => {
+        if (!equals(game, loadedGame)) {
+          setGame(loadedGame);
+          sendAlert("success", `${loadedGame.info.title} reloaded`);
+          return loadedGame;
+        }
+      })
+      .catch((err) => {
+        sendAlert("error", err);
+      });
+  };
+
   // If we're running in electron, listen for game updates and load them
   useEffect(() => {
     if (isElectron) {
@@ -131,6 +146,8 @@ export const GameProvider = ({ children }) => {
         );
         return <Redirect to="/games/" />;
       }
+    } else if (!isNil(game) && match.params.slug === game.id) {
+      checkForChanges(match.params.slug);
     }
   }
 
