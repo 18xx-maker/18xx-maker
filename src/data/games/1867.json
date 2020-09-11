@@ -13,7 +13,8 @@
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/227143/1867-railways-canada",
-    "rules": "http://www.all-aboardgames.com/home/ian-wilson-s-1867"
+    "rules": "http://www.all-aboardgames.com/home/ian-wilson-s-1867",
+    "purchase": "https://app.crowdox.com/projects/joshuastarr/1861-russia-1867-canada"
   },
   "wip": true,
   "tokens": ["Round"],
