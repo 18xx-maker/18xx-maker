@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 
 import CompanyToken from "../tokens/CompanyToken";
-import Color from "../data/Color";
+import Color from "../util/Color";
 import ColorContext from "../context/ColorContext";
 
 import Currency from "../util/Currency";

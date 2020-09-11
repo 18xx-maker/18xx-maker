@@ -1,7 +1,7 @@
 import React from "react";
 
 import { GetFont } from "../context/FontContext";
-import Color from "../data/Color";
+import Color from "../util/Color";
 import Currency from "../util/Currency";
 
 import is from "ramda/src/is";

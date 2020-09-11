@@ -10,8 +10,8 @@ import curry from "ramda/src/curry";
 import is from "ramda/src/is";
 import mergeDeepRight from "ramda/src/mergeDeepRight";
 
-import themes from "./themes/maps";
-import companies from "./themes/companies";
+import themes from "../data/themes/maps";
+import companies from "../data/themes/companies";
 
 const colorAliases = {
   "cyan": "lightBlue",

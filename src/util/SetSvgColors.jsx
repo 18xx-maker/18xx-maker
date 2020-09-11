@@ -9,8 +9,8 @@ import concat from "ramda/src/concat";
 import join from "ramda/src/join";
 import keys from "ramda/src/keys";
 
-const colors = keys(require("./themes/companies/rob.json").colors);
-const mapColors = keys(require("./themes/maps/gmt.json").colors);
+const colors = keys(require("../data/themes/companies/rob.json").colors);
+const mapColors = keys(require("../data/themes/maps/gmt.json").colors);
 
 const SetSvgColors = () => {
   const { config } = useContext(ConfigContext);

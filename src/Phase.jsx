@@ -1,5 +1,5 @@
 import React from "react";
-import Color from "./data/Color";
+import Color from "./util/Color";
 import * as R from "ramda";
 
 import Currency from "./util/Currency";

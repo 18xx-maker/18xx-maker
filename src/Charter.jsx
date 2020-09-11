@@ -5,7 +5,7 @@ import ColorContext from "./context/ColorContext";
 import CompanyToken from "./tokens/CompanyToken";
 import Token from "./tokens/Token";
 import Phase from "./Phase";
-import Color from "./data/Color";
+import Color from "./util/Color";
 import { unitsToCss } from "./util";
 import Currency from "./util/Currency";
 

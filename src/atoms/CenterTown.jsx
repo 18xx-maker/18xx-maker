@@ -1,5 +1,5 @@
 import React from "react";
-import Color from "../data/Color";
+import Color from "../util/Color";
 
 import Name from "./Name";
 

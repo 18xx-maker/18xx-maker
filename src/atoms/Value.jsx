@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 import GameContext from "../context/GameContext";
 
-import Color from "../data/Color";
+import Color from "../util/Color";
 import Currency, { format } from "../util/Currency";
 import RotateContext from "../context/RotateContext";
 

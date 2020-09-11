@@ -1,6 +1,6 @@
 import React from "react";
 import { useOrientation } from "../context/OrientationContext";
-import Color from "../data/Color";
+import Color from "../util/Color";
 
 const edge = 150 * 0.57735;
 

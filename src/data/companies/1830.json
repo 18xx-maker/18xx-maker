@@ -1,0 +1,54 @@
+{
+  "name": "1830 Companies",
+  "abbrev": "1830",
+  "companies": [
+    {
+      "name": "Pennsylvania Railroad",
+      "abbrev": "PRR",
+      "logo": "1830/PRR",
+      "color": "green"
+    },
+    {
+      "name": "New York Central Railroad",
+      "abbrev": "NYC",
+      "logo": "1830/NYC",
+      "color": "black"
+    },
+    {
+      "name": "Canadian Pacific Railroad",
+      "abbrev": "CPR",
+      "logo": "1830/CPR",
+      "color": "red"
+    },
+    {
+      "name": "Baltimore & Ohio Railroad",
+      "abbrev": "B&O",
+      "logo": "1830/BO",
+      "color": "blue"
+    },
+    {
+      "name": "Chesapeake & Ohio Railroad",
+      "abbrev": "C&O",
+      "logo": "1830/CO",
+      "color": "cyan"
+    },
+    {
+      "name": "Erie Railroad",
+      "abbrev": "ERIE",
+      "logo": "1830/ERIE",
+      "color": "yellow"
+    },
+    {
+      "name": "New York, New Haven & Hartford Railroad",
+      "abbrev": "NYNH",
+      "logo": "1830/NYNH",
+      "color": "orange"
+    },
+    {
+      "name": "Boston & Maine Railroad",
+      "abbrev": "B&M",
+      "logo": "1830/BM",
+      "color": "brightGreen"
+    }
+  ]
+}

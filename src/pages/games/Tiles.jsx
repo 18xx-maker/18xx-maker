@@ -9,7 +9,7 @@ import "../../TileSheet.scss";
 import { getTile, sortTiles } from "../../util";
 import { getTileSheetContext } from "../../tilesheet/util";
 
-import { tiles as tileDefs } from "@18xx-maker/games";
+import tileDefs from "../../data/tiles";
 
 import { sidesFromTile } from "../../atoms/Track";
 import Svg from "../../Svg";

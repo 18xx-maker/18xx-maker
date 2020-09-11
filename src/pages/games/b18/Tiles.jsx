@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { tiles as tileDefs } from "@18xx-maker/games";
+import tileDefs from "../../../data/tiles";
 
 import Svg from "../../../Svg";
 import Tile from "../../../Tile";

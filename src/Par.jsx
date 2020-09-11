@@ -1,7 +1,7 @@
 import React from "react";
 import * as R from "ramda";
 import { unitsToCss } from "./util";
-import Color from "./data/Color";
+import Color from "./util/Color";
 import { GetFont, SetFont } from "./context/FontContext";
 
 import Currency from "./util/Currency";

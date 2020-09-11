@@ -2,7 +2,7 @@ import React from "react";
 
 import defaultTo from "ramda/src/defaultTo";
 
-import Color from "../data/Color";
+import Color from "../util/Color";
 import Name from "./Name";
 
 const MediumCity = ({ border, name, reverse, color, fillColor, fillOpacity, strokeColor, strokeWidth, width, strokeDashArray, outlineColor, outlineStroke, outlineStrokeWidth }) => {

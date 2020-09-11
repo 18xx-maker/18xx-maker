@@ -5,7 +5,7 @@ import Atoms from "./elements/Atoms";
 import Logos from "./elements/Logos";
 import Tiles from "./elements/Tiles";
 
-import defaultGame from "@18xx-maker/games/games/public/1830.json";
+import defaultGame from "../data/games/1889.json";
 import GameContext from "../context/GameContext";
 
 const Elements = () => {

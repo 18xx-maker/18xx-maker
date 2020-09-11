@@ -1,17 +1,10 @@
-let games = require("@18xx-maker/games");
-
-if (process.env.REACT_APP_ONLY_PUBLIC_GAMES) {
-  games = games.public;
-} else {
-  games = games.games;
-}
+let games = {};
 
 {{#each games}}
 games["{{id}}"] = {
   id: "{{id}}",
   slug: "{{slug}}",
   file: "{{file}}",
-  local: true,
   title: "{{title}}",
   {{#if subtitle}}
   subtitle: "{{subtitle}}",

@@ -4,7 +4,7 @@ import addIndex from "ramda/src/addIndex";
 import concat from "ramda/src/concat";
 import map from "ramda/src/map";
 
-import Color from "../data/Color";
+import Color from "../util/Color";
 
 import { mapCoord } from "./util";
 

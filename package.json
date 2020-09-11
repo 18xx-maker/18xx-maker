@@ -12,9 +12,9 @@
   "scripts": {
     "b18": "node ./bin/b18.js",
     "build": "yarn generate && react-scripts build",
-    "build:electron": "cross-env REACT_APP_ONLY_PUBLIC_GAMES=1 PUBLIC_URL=. yarn build",
+    "build:electron": "cross-env PUBLIC_URL=. yarn build",
     "clean": "node ./bin/clean.js",
-    "generate": "yarn generate:config && yarn generate:games && yarn generate:icons && yarn generate:logos && yarn generate:themes",
+    "generate": "run-p generate:config generate:games generate:icons generate:logos generate:themes",
     "generate:config": "node ./bin/generateConfigJson.js",
     "generate:games": "node ./bin/generateGameIndex.js",
     "generate:icons": "node ./bin/generateSvgIconIndex.js",
@@ -23,7 +23,8 @@
     "package": "electron-builder build -mwl -p onTagOrDraft",
     "print": "node ./bin/print.js",
     "release": "run-s build:electron package",
-    "start": "yarn generate && react-scripts start",
+    "start": "run-p generate:config watch:games watch:icons watch:logos watch:themes start:react",
+    "start:react": "react-scripts start",
     "start:app": "run-p start:electron start:nobrowser",
     "start:electron": "wait-on http://localhost:3000 && electron .",
     "start:nobrowser": "cross-env BROWSER=none yarn start",
@@ -35,7 +36,11 @@
     "validate:config": "18xx-schemas src/defaults.json",
     "validate:games": "18xx-schemas src/data/games/**/*.json",
     "validate:themes": "18xx-schemas src/data/themes/**/*.json",
-    "validate:tiles": "18xx-schemas src/data/tiles/*.json"
+    "validate:tiles": "18xx-schemas src/data/tiles/*.json",
+    "watch:games": "onchange -i 'src/data/games/*.json' -- yarn generate:games",
+    "watch:icons": "onchange -i 'src/data/icons/*.svg' -- yarn generate:icons",
+    "watch:logos": "onchange -i 'src/data/logos/**/*.svg' -- yarn generate:logos",
+    "watch:themes": "onchange -i 'src/data/themes/**/*.json' -- yarn generate:themes"
   },
   "husky": {
     "hooks": {
@@ -90,11 +95,11 @@
     ]
   },
   "dependencies": {
-    "@18xx-maker/games": "4.1.0",
     "bluebird": "^3.7.2",
     "chokidar": "^3.4.0",
     "electron-is-dev": "^1.2.0",
-    "electron-updater": "^4.3.1"
+    "electron-updater": "^4.3.1",
+    "onchange": "^7.0.2"
   },
   "devDependencies": {
     "@18xx-maker/schemas": "^5.0.0",

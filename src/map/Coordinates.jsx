@@ -1,5 +1,5 @@
 import React from "react";
-import Color from "../data/Color";
+import Color from "../util/Color";
 
 import chain from "ramda/src/chain";
 import concat from "ramda/src/concat";

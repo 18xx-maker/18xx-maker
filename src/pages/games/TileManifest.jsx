@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import GameContext from "../../context/GameContext";
 import { Redirect } from "react-router-dom";
 
-import { tiles } from "@18xx-maker/games";
+import tiles from "../../data/tiles";
 
 import Tile from "../../Tile";
 import Svg from "../../Svg";

@@ -49,19 +49,9 @@ const loadBundledGame = (id) => {
     return Promise.reject(`Game not found: ${id}`);
   }
 
-  let importPromise;
-  if (gameInfo.local) {
-    importPromise = import(
-      /* webpackChunkName: "game.[request]" */ "../data/games/" + games[id].file
-    );
-  } else {
-    importPromise = import(
-      /* webpackChunkName: "game.[request]" */ "@18xx-maker/games/games/" +
-        games[id].file
-    );
-  }
-
-  return importPromise
+  return import(
+    /* webpackChunkName: "game.[request]" */ "../data/games/" + games[id].file
+  )
     .then((game) => {
       if (game.default) {
         return game.default;
