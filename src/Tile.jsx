@@ -1,5 +1,5 @@
 import React from "react";
-import * as tiles from "./data/tiles";
+import tiles from "./data/tiles";
 
 import is from "ramda/src/is";
 
