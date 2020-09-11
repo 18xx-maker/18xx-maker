@@ -1,0 +1,1511 @@
+{
+  "info": {
+    "title": "1871: British Columbia",
+    "subtitle": "Confederation Railways",
+    "designer": "Brennan Sheremeto",
+    "publisher": "self",
+    "background": "PGER_orange",
+    "titleSize": 90,
+    "marketTokens": 2,
+    "extraStationTokens": 7,
+    "titleY": -110,
+    "titleX": 200,
+    "extraTotalHeight": 10,
+    "currency": "$#"
+  },
+  "links": {
+    "bgg": "https://https://boardgamegeek.com/boardgame/306265/1871-british-columbia",
+    "rules": "https://s3-us-west-2.amazonaws.com/gmtwebsiteassets/1846/1846-RULES-GMT.pdf"
+  },
+  "colors": {
+    "PGER_orange": "#cc6433",
+    "PGER_green": "#1d4922"
+  },
+  "tokens": ["Round", "Phase", "+30", "KVR"],
+  "ipo": false,
+  "players": [
+    {
+      "number": 2,
+      "capital": 600,
+      "certLimit": 19,
+      "bank": 7000
+    },
+    {
+      "number": 3,
+      "capital": 400,
+      "certLimit": 14,
+      "bank": 6500
+    },
+    {
+      "number": 4,
+      "capital": 400,
+      "certLimit": 12,
+      "bank": 7500
+    }
+  ],
+  "companies": [
+    {
+      "name": "Canadian Pacific Railway",
+      "abbrev": "CPR",
+      "logo": "1871BC/CPR",
+      "tokens": ["Free", 80, 80, 80],
+      "color": "red",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Northern Pacific Railway",
+      "abbrev": "NPR",
+      "logo": "1871BC/NORPAC",
+      "tokens": ["Free", 80, 80, 80],
+      "color": "white",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Seattle, Lake Shore and Eastern Railway",
+      "abbrev": "SLS&E",
+      "token": {
+        "bar": true
+      },
+      "tokens": ["Free", 100],
+      "color": "blue",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Pacific Great Eastern Railway",
+      "abbrev": "PGER",
+      "logo": "1871BC/PGER",
+      "color": "PGER_green",
+      "tokens": ["Free", 80, 80, 80],
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Grand Trunk Pacific",
+      "abbrev": "GTP",
+      "logo": "1871BC/GTP",
+      "tokens": ["Free", 80, 80],
+      "color": "black",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Canadian Northern Railway",
+      "abbrev": "CNR",
+      "logo": "1871BC/CNOR",
+      "tokens": ["Free", 80, 80, "$80*"],
+      "color": "yellow",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "description": "KVR",
+      "phase": false,
+      "quantity": 1,
+      "color": "yellow",
+      "phased": ["4/6", "5"],
+      "rust": ["6", "7/8"]
+    },
+    {
+      "name": "2",
+      "quantity": 7,
+      "price": 80,
+      "color": "yellow",
+      "phased": ["4/6", "5"],
+      "rust": ["6", "7/8"]
+    },
+    {
+      "name": "3/5",
+      "quantity": 6,
+      "price": 160,
+      "color": "green",
+      "phased": ["6", "7/8"]
+    },
+    {
+      "name": "4",
+      "quantity": 6,
+      "price": 180,
+      "color": "green",
+      "phased": ["6", "7/8"]
+    },
+    {
+      "name": "4/6",
+      "quantity": 5,
+      "price": 450,
+      "color": "brown"
+    },
+    {
+      "name": "5",
+      "quantity": 5,
+      "price": 500,
+      "color": "brown"
+    },
+    {
+      "name": "6",
+      "quantity": 9,
+      "price": 800,
+      "color": "gray"
+    },
+    {
+      "name": "7/8",
+      "quantity": 9,
+      "price": 900,
+      "color": "gray"
+    }
+  ],
+  "privates": [
+    {
+      "name": "BC Electric Railway",
+      "price": 120,
+      "revenue": 20,
+      "description": "Counts as a 2 train when purchased into a corporation"
+    },
+    {
+      "name": "BC Connection Charter",
+      "price": 100,
+      "revenue": 0,
+      "description": "Never closes once purchased by a corporation, when owning corporation connects an eastern off board to vancouver, pays $200 to the owning corporation and closes. If owned by a player and a corporation that player is president of connects an eastern off board to vancouver, pays $200 to the player and closes"
+    },
+    {
+      "name": "BC Ferries",
+      "price": 90,
+      "revenue": 0,
+      "icon": "boat",
+      "description": "Sea Dits visitied by any railway pay to the owning player or corporation. Never closes if owned by a corporation."
+    },
+    {
+      "name": "Mail Contract",
+      "price": 80,
+      "icon": "mail",
+      "revenue": 0,
+      "description": "Adds $10 per location visited by any one train of the owning corporation. Never closes once purchased by a corporation."
+    },
+    {
+      "name": "Kettle Valley Railway",
+      "price": 60,
+      "debt": 80,
+      "description": "Starts with $60 in treasury, a 2 train, and a token in Kelowna (C15). Splits revenue evenly with owner."
+    },
+    {
+      "name": "Okanagen Land Grant",
+      "price": 80,
+      "revenue": 20,
+      "hex": "G15",
+      "description": "If hex G15 is connected to an east off board when private is sold to a company, the private can be sold for an extra $50"
+    },
+    {
+      "name": "Outsourced Labour",
+      "price": 40,
+      "revenue": 10,
+      "description": "Owning corporation can do two upgrades on a single turn once per game"
+    },
+    {
+      "name": "Survey Party",
+      "price": 60,
+      "revenue": 20,
+      "icon": "mountain",
+      "description": "Reduces the cost of building on mountain tiles by $20"
+    },
+    {
+      "name": "Chilkoot Railroad and Transport Company",
+      "price": 40,
+      "revenue": 15,
+      "description": "+10 revenue to Yukon off board location"
+    }
+  ],
+  "phases": [
+    {
+      "name": "1",
+      "train": "2",
+      "limit": 4,
+      "tiles": "yellow"
+    },
+    {
+      "name": "2",
+      "train": ["3/5", "4"],
+      "limit": 4,
+      "tiles": "green"
+    },
+    {
+      "name": "3",
+      "train": ["4/6", "5"],
+      "limit": 3,
+      "tiles": "brown",
+      "events": {
+        "close_companies": true
+      }
+    },
+    {
+      "name": "4",
+      "train": ["6", "7/8"],
+      "limit": 2,
+      "tiles": "gray",
+      "events": {
+        "remove_tokens": true
+      }
+    }
+  ],
+  "pools": [
+    {
+      "name": "Stock Market",
+      "notes": [
+        {
+          "color": "orange",
+          "note": "Corporations issue/redeem stock at one value lower/higher"
+        },
+        {
+          "color": "brown",
+          "icon": "exclamation",
+          "note": "Corporations may not issue more stock than the amount held by players, less the number already in the stock market"
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "OR2",
+      "color": "gray"
+    },
+    {
+      "name": "OR1",
+      "color": "gray"
+    },
+    {
+      "name": "SR",
+      "color": "gray"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": ["Sell any number of shares", "Buy one share"],
+      "ordered": true
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Issue or redeem shares",
+        "Lay or upgrade track and/or purchase a station",
+        "Run trains",
+        "Pay dividends, half dividends or retain revenue",
+        "Purchase trains"
+      ],
+      "ordered": true,
+      "optional": ["Purchase private companies"]
+    }
+  ],
+  "stock": {
+    "type": "1D",
+    "par": {
+      "color": "orange"
+    },
+    "movement": {
+      "left": [
+        "President sold shares",
+        "Stock has shares in the market",
+        "Dividend less than 1/2 the current price"
+      ],
+      "right": [
+        "Stock is 100% held by players",
+        "Dividend at least stock price, but less than double",
+        "[Double] Dividend two times or more its current price",
+        "[Triple] Dividend three times or more its current price (when $165 or more)"
+      ]
+    },
+    "market": [
+      {
+        "label": "Closed",
+        "color": "black",
+        "textColor": "white"
+      },
+      10,
+      20,
+      30,
+      {
+        "label": "40",
+        "par": true
+      },
+      {
+        "label": "50",
+        "par": true
+      },
+      {
+        "label": "60",
+        "par": true
+      },
+      {
+        "label": "70",
+        "par": true
+      },
+      {
+        "label": "80",
+        "par": true
+      },
+      {
+        "label": "90",
+        "par": true
+      },
+      {
+        "label": "100",
+        "par": true
+      },
+      {
+        "label": "112",
+        "par": true
+      },
+      {
+        "label": "124",
+        "par": true
+      },
+      {
+        "label": "137",
+        "par": true
+      },
+      {
+        "label": "150",
+        "par": true
+      },
+      165,
+      180,
+      195,
+      212,
+      230,
+      250,
+      270,
+      295,
+      320,
+      345,
+      375,
+      405,
+      440,
+      475,
+      510,
+      550
+    ],
+    "limits": [
+      {
+        "color": "orange",
+        "description": "Allowed par values",
+        "min": 40,
+        "max": 150
+      }
+    ]
+  },
+  "tiles": {
+    "5": 3,
+    "6": 4,
+    "7": 5,
+    "8": 16,
+    "9": 16,
+    "14": 4,
+    "15": 5,
+    "16": 2,
+    "17": 1,
+    "18": 1,
+    "19": 2,
+    "20": 2,
+    "21": 1,
+    "22": 1,
+    "23": 4,
+    "24": 4,
+    "25": 2,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "30": 1,
+    "31": 1,
+    "39": 1,
+    "40": 1,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 1,
+    "45": 2,
+    "46": 2,
+    "47": 2,
+    "51": 2,
+    "57": 4,
+    "70": 1,
+    "206": 1,
+    "290": 1,
+    "291": 1,
+    "292": 1,
+    "293": 1,
+    "294": 2,
+    "295": 2,
+    "296": 1,
+    "297": 2,
+    "611": 4,
+    "619": 3,
+    "BS01": {
+      "color": "green",
+      "cities": [
+        {
+          "angle": 180,
+          "percent": 0.75
+        },
+        {
+          "angle": 300,
+          "percent": 0.75
+        },
+        {
+          "angle": 120,
+          "percent": 0.75
+        },
+        {
+          "angle": 240,
+          "percent": 0.75,
+          "companies": [
+            {
+              "label": "CPR",
+              "color": "white"
+            }
+          ]
+        }
+      ],
+      "values": [
+        {
+          "value": 30,
+          "angle": 75,
+          "percent": 0.75
+        }
+      ],
+      "track": [
+        {
+          "side": 5,
+          "type": "gentle"
+        },
+        {
+          "side": 6,
+          "type": "sharp"
+        },
+        {
+          "side": 1,
+          "type": "gentle"
+        },
+        {
+          "side": 1,
+          "type": "straight"
+        }
+      ],
+      "labels": [
+        {
+          "label": "Van",
+          "angle": 45,
+          "percent": 0.8
+        }
+      ]
+    },
+    "BS02": {
+      "color": "brown",
+      "cities": [
+        {
+          "angle": 180,
+          "percent": 0.75
+        },
+        {
+          "angle": 300,
+          "percent": 0.75
+        },
+        {
+          "angle": 120,
+          "percent": 0.75
+        },
+        {
+          "angle": 240,
+          "percent": 0.75,
+          "companies": [
+            {
+              "label": "CPR",
+              "color": "white"
+            }
+          ]
+        }
+      ],
+      "values": [
+        {
+          "value": 50,
+          "angle": 75,
+          "percent": 0.75
+        }
+      ],
+      "track": [
+        {
+          "side": 5,
+          "type": "gentle"
+        },
+        {
+          "side": 6,
+          "type": "sharp"
+        },
+        {
+          "side": 1,
+          "type": "gentle"
+        },
+        {
+          "side": 1,
+          "type": "straight"
+        }
+      ],
+      "labels": [
+        {
+          "label": "Van",
+          "angle": 45,
+          "percent": 0.8
+        }
+      ]
+    },
+    "BS03": {
+      "color": "gray",
+      "cities": [
+        {
+          "angle": 180,
+          "percent": 0.75
+        },
+        {
+          "angle": 300,
+          "percent": 0.75
+        },
+        {
+          "angle": 120,
+          "percent": 0.75
+        },
+        {
+          "angle": 240,
+          "percent": 0.75
+        }
+      ],
+      "values": [
+        {
+          "value": 70,
+          "angle": 75,
+          "percent": 0.75
+        }
+      ],
+      "track": [
+        {
+          "side": 5,
+          "type": "gentle"
+        },
+        {
+          "side": 6,
+          "type": "sharp"
+        },
+        {
+          "side": 1,
+          "type": "gentle"
+        },
+        {
+          "side": 1,
+          "type": "straight"
+        }
+      ],
+      "labels": [
+        {
+          "label": "Van",
+          "angle": 45,
+          "percent": 0.8
+        }
+      ]
+    }
+  },
+  "map": {
+    "hexes": [
+      {
+        "color": "offboard",
+        "labels": [
+          {
+            "label": "W",
+            "angle": 180,
+            "percent": 0.7
+          }
+        ],
+        "routeBonuses": [
+          {
+            "value": "+30",
+            "percent": 0.3
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Yukon"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": 40
+            },
+            {
+              "color": "brown",
+              "cost": 70
+            }
+          ]
+        },
+        "hexes": ["A1"],
+        "track": [
+          {
+            "side": 5,
+            "type": "offboard"
+          }
+        ]
+      },
+      {
+        "color": "offboard",
+        "routeBonuses": [
+          {
+            "value": "+30",
+            "percent": 0.3
+          }
+        ],
+        "labels": [
+          {
+            "label": "E",
+            "angle": 180,
+            "percent": 0.7
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Calgary"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            }
+          ]
+        },
+        "hexes": ["G23"],
+        "track": [
+          {
+            "side": 1,
+            "type": "offboard"
+          }
+        ]
+      },
+      {
+        "color": "offboard",
+        "routeBonuses": [
+          {
+            "value": "+30",
+            "percent": 0.3
+          }
+        ],
+        "labels": [
+          {
+            "label": "E",
+            "angle": 180,
+            "percent": 0.7
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Edmonton"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            }
+          ]
+        },
+        "hexes": ["C19"],
+        "track": [
+          {
+            "side": 1,
+            "type": "offboard"
+          },
+          {
+            "side": 6,
+            "type": "offboard"
+          }
+        ]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "angle": 0,
+          "percent": 0.75,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            }
+          ]
+        },
+        "cities": [
+          {
+            "size": 2,
+            "name": {
+              "name": "Seattle",
+              "reverse": true,
+              "offset": 50
+            },
+            "companies": [
+              {
+                "label": "SLS&E",
+                "color": "blue"
+              },
+              {
+                "color": "gray"
+              }
+            ]
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 3
+          }
+        ],
+        "hexes": ["J12"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "angle": 0,
+          "percent": 0.75,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "70"
+            }
+          ]
+        },
+        "labels": [
+          {
+            "label": "E",
+            "angle": 180,
+            "percent": 0.7
+          }
+        ],
+        "routeBonuses": [
+          {
+            "value": "+30",
+            "angle": 235,
+            "percent": 0.7
+          }
+        ],
+        "cities": [
+          {
+            "size": 1,
+            "name": {
+              "name": "Paradise",
+              "reverse": true,
+              "offset": 50
+            },
+            "companies": [
+              {
+                "label": "NPR",
+                "color": "black"
+              }
+            ]
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          }
+        ],
+        "hexes": ["J24"]
+      },
+      {
+        "color": "offboard",
+        "removeBorders": [5],
+        "hexes": ["H6"]
+      },
+      {
+        "color": "offboard",
+        "removeBorders": [2],
+        "labels": [
+          {
+            "label": "W",
+            "angle": 180,
+            "percent": 0.7
+          }
+        ],
+        "routeBonuses": [
+          {
+            "value": "+30",
+            "percent": 0.3
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Victoria"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            }
+          ]
+        },
+        "hexes": ["I7"],
+        "track": [
+          {
+            "side": 4,
+            "type": "offboard"
+          },
+          {
+            "side": 5,
+            "type": "offboard"
+          }
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Williams Lake"
+            }
+          }
+        ],
+        "hexes": ["D14"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Prince Rupert"
+            }
+          }
+        ],
+        "hexes": ["B2"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Penticton"
+            }
+          }
+        ],
+        "hexes": ["I17"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Prince George"
+            }
+          }
+        ],
+        "labels": [
+          {
+            "label": "Z",
+            "angle": 270,
+            "percent": 0.667
+          }
+        ],
+        "hexes": ["B10"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "name": {
+              "name": "Pemberton",
+              "offset": 20
+            },
+            "companies": [
+              {
+                "label": "PGER",
+                "color": "cyan"
+              }
+            ]
+          }
+        ],
+        "values": [
+          {
+            "value": 30,
+            "angle": 90,
+            "percent": 0.75
+          }
+        ],
+        "track": [
+          {
+            "side": 2,
+            "type": "straight"
+          },
+          {
+            "side": 3
+          }
+        ],
+        "hexes": ["E7"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Kelowna"
+            }
+          }
+        ],
+        "hexes": ["H16"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Canmore"
+            },
+            "companies": [
+              {
+                "label": "CPR",
+                "color": "red"
+              }
+            ]
+          }
+        ],
+        "hexes": ["G21"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Edson"
+            },
+            "companies": [
+              {
+                "label": "GTP"
+              }
+            ]
+          }
+        ],
+        "hexes": ["D18"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Hinton"
+            },
+            "companies": [
+              {
+                "label": "CNR",
+                "color": "yellow"
+              }
+            ]
+          }
+        ],
+        "hexes": ["C17"]
+      },
+      {
+        "color": "plain",
+        "tokens": [
+          {
+            "angle": 180,
+            "percent": 0.75,
+            "color": "pink",
+            "outline": "black",
+            "width": 10
+          }
+        ],
+        "hexes": ["E15"]
+      },
+      {
+        "color": "plain",
+        "tokens": [
+          {
+            "angle": 180,
+            "percent": 0.75,
+            "color": "pink",
+            "outline": "black",
+            "width": 10
+          }
+        ],
+        "hexes": ["G13"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Kamloops"
+            }
+          }
+        ],
+        "labels": [
+          {
+            "label": "Z",
+            "angle": 270,
+            "percent": 0.667
+          }
+        ],
+        "hexes": ["F14"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Spokane"
+            }
+          }
+        ],
+        "hexes": ["J20"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 40
+          }
+        ],
+        "tokens": [
+          {
+            "angle": 180,
+            "percent": 0.75,
+            "color": "pink",
+            "outline": "black",
+            "width": 10
+          }
+        ],
+        "hexes": ["G11"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 40
+          }
+        ],
+        "hexes": ["F10"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 60
+          }
+        ],
+        "hexes": ["E9"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 40
+          }
+        ],
+        "tokens": [
+          {
+            "angle": 180,
+            "percent": 0.75,
+            "color": "pink",
+            "outline": "black",
+            "width": 10
+          }
+        ],
+        "hexes": ["E13"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 40
+          }
+        ],
+        "tokens": [
+          {
+            "angle": 180,
+            "percent": 0.75,
+            "color": "pink",
+            "outline": "black",
+            "width": 10
+          }
+        ],
+        "hexes": ["F12"]
+      },
+      {
+        "color": "plain",
+        "tokens": [
+          {
+            "company": "CPR",
+            "destination": true,
+            "angle": 180,
+            "percent": 0.75,
+            "width": 18
+          }
+        ],
+        "hexes": ["H12"]
+      },
+      {
+        "color": "water",
+        "removeBorders": [2, 5, 6],
+        "centerTowns": [
+          {
+            "angle": 150,
+            "percent": 0.26
+          }
+        ],
+        "track": [
+          {
+            "type": "gentle",
+            "side": 1
+          }
+        ],
+        "hexes": ["I9"]
+      },
+      {
+        "color": "water",
+        "removeBorders": [3, 4],
+        "centerTowns": [
+          {
+            "angle": 210,
+            "percent": 0.26
+          }
+        ],
+        "track": [
+          {
+            "type": "gentle",
+            "side": 2
+          }
+        ],
+        "hexes": ["J8"]
+      },
+      {
+        "color": "water",
+        "removeBorders": [2, 1],
+        "centerTowns": [{}],
+        "track": [
+          {
+            "type": "straight",
+            "side": 1
+          }
+        ],
+        "hexes": ["J10"]
+      },
+      {
+        "color": "water",
+        "removeBorders": [5],
+        "hexes": ["H8"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "angle": 210,
+            "percent": 0.75
+          },
+          {
+            "angle": 330,
+            "percent": 0.75
+          },
+          {
+            "angle": 150,
+            "percent": 0.75
+          },
+          {
+            "angle": 270,
+            "percent": 0.75,
+            "companies": [
+              {
+                "label": "CPR",
+                "color": "white"
+              }
+            ]
+          }
+        ],
+        "values": [
+          {
+            "value": 10,
+            "angle": 90,
+            "percent": 0.75
+          }
+        ],
+        "track": [
+          {
+            "side": 6,
+            "type": "gentle"
+          },
+          {
+            "side": 5,
+            "type": "sharp"
+          },
+          {
+            "side": 4,
+            "type": "gentle"
+          },
+          {
+            "side": 3,
+            "type": "straight"
+          }
+        ],
+        "labels": [
+          {
+            "label": "Van",
+            "angle": 60,
+            "percent": 0.8
+          }
+        ],
+        "hexes": ["H10"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Sumas"
+            }
+          }
+        ],
+        "labels": [
+          {
+            "label": "Z",
+            "angle": 270,
+            "percent": 0.667
+          }
+        ],
+        "hexes": ["I13"]
+      },
+      {
+        "color": "plain",
+        "companies": [
+          {
+            "label": "OLG",
+            "angle": 0,
+            "percent": 0.6,
+            "left": 10,
+            "right": 10
+          }
+        ],
+        "hexes": ["G15"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 40
+          }
+        ],
+        "hexes": ["B16", "C9", "D16", "E19", "F10", "F16", "G9", "H22", "I23"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 60
+          }
+        ],
+        "hexes": [
+          "B14",
+          "C15",
+          "D10",
+          "D12",
+          "E11",
+          "E17",
+          "F18",
+          "F20",
+          "H14",
+          "I21",
+          "I15",
+          "J22",
+          "J16"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 80
+          }
+        ],
+        "hexes": ["G19", "H20"]
+      },
+      {
+        "color": "plain",
+        "hexes": [
+          "B4",
+          "B6",
+          "B8",
+          "B12",
+          "C5",
+          "C7",
+          "C11",
+          "C13",
+          "D4",
+          "D6",
+          "D8",
+          "E5",
+          "F6",
+          "F8",
+          "G7",
+          "G17",
+          "H18",
+          "C3",
+          "I11",
+          "I19",
+          "J14",
+          "J18"
+        ]
+      }
+    ],
+    "borders": [
+      {
+        "color": "water",
+        "coords": [
+          "B10p5",
+          "B10p6",
+          "B10p1",
+          "D10p4",
+          "D10p5",
+          "D10p6",
+          "D10p1",
+          "F10p4",
+          "F10p5",
+          "F10p6",
+          "G11p5",
+          "G11p6",
+          "G11p1"
+        ]
+      },
+      {
+        "color": "water",
+        "coords": ["E13p5", "E13p6", "E13p1", "F12p6", "F12p1"]
+      },
+      {
+        "color": "orange",
+        "dashed": true,
+        "width": 4,
+        "dashArray": "16",
+        "coords": [
+          "J12p3",
+          "J12p4",
+          "J12p5",
+          "J14p3",
+          "J14p4",
+          "J14p5",
+          "J16p3",
+          "J16p4",
+          "J16p5",
+          "J18p3",
+          "J18p4",
+          "J18p5",
+          "J20p3",
+          "J20p4",
+          "J20p5",
+          "J22p3",
+          "J22p4",
+          "J22p5",
+          "J24p3",
+          "J24p4"
+        ]
+      }
+    ]
+  }
+}

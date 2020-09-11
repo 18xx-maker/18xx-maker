@@ -1,0 +1,1293 @@
+{
+  "info": {
+    "title": "1889",
+    "subtitle": "History of Shikoku Railways",
+    "designer": "Yasutaka Ikeda",
+    "publisher": "gtg",
+    "background": "water",
+    "orientation": "horizontal",
+    "titleX": 280,
+    "titleY": 860,
+    "mustSellInBlocks": true,
+    "currency": "¥#"
+  },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/23540/1889-history-shikoku-railways",
+    "rules": "http://dl.deepthoughtgames.com/1889-Rules.pdf"
+  },
+  "tokens": ["Round"],
+  "ipo": true,
+  "bank": 7000,
+  "players": [
+    {
+      "number": 2,
+      "certLimit": 25,
+      "capital": 420
+    },
+    {
+      "number": 3,
+      "certLimit": 19,
+      "capital": 420
+    },
+    {
+      "number": 4,
+      "certLimit": 14,
+      "capital": 420
+    },
+    {
+      "number": 5,
+      "certLimit": 12,
+      "capital": 390
+    },
+    {
+      "number": 6,
+      "certLimit": 11,
+      "capital": 390
+    }
+  ],
+  "pools": [
+    {
+      "name": "Bank Pool",
+      "notes": [
+        {
+          "color": "blue",
+          "note": "Shares in the market pay dividends to the corporation"
+        },
+        {
+          "color": "purple",
+          "icon": "exclamation",
+          "note": "No more than 50% of a corporation's shares may be in the market at any time"
+        },
+        {
+          "color": "red",
+          "icon": "times",
+          "note": "Shares cannot be sold during the first stock round"
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "OR3",
+      "color": "brown"
+    },
+    {
+      "name": "OR2",
+      "color": "green"
+    },
+    {
+      "name": "OR1",
+      "color": "yellow"
+    },
+    {
+      "name": "SR",
+      "color": "white"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": ["Buy one certificate", "Sell any number of certificates"],
+      "ordered": false
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Lay or upgrade track",
+        "Purchase a station",
+        "Run trains",
+        "Pay dividends or withhold revenue",
+        "Purchase trains"
+      ],
+      "ordered": true
+    }
+  ],
+  "stock": {
+    "type": "2D",
+    "par": {
+      "values": [100, 90, 80, 75, 70, 65]
+    },
+    "movement": {
+      "up": ["Sold out"],
+      "down": ["Every share sold"],
+      "left": ["Withheld revenue"],
+      "right": ["Paid dividends"]
+    },
+    "market": [
+      [
+        {
+          "label": "75",
+          "arrow": "down"
+        },
+        80,
+        90,
+        {
+          "label": "100",
+          "par": true
+        },
+        110,
+        125,
+        140,
+        155,
+        175,
+        200,
+        225,
+        255,
+        285,
+        315,
+        350
+      ],
+      [
+        {
+          "label": "70",
+          "arrow": "down"
+        },
+        75,
+        80,
+        {
+          "label": "90",
+          "par": true
+        },
+        100,
+        110,
+        125,
+        140,
+        155,
+        175,
+        200,
+        225,
+        255,
+        285,
+        {
+          "label": "315",
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "label": "65",
+          "arrow": "down"
+        },
+        70,
+        75,
+        {
+          "label": "80",
+          "par": true
+        },
+        90,
+        100,
+        110,
+        125,
+        140,
+        155,
+        175,
+        {
+          "label": "200",
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "label": "60",
+          "arrow": "down"
+        },
+        65,
+        70,
+        {
+          "label": "75",
+          "par": true
+        },
+        80,
+        90,
+        100,
+        110,
+        125,
+        {
+          "label": "140",
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "label": "55",
+          "arrow": "down"
+        },
+        60,
+        65,
+        {
+          "label": "70",
+          "par": true
+        },
+        75,
+        80,
+        90,
+        {
+          "label": "100",
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "label": "50",
+          "legend": 0,
+          "arrow": "down"
+        },
+        55,
+        60,
+        {
+          "label": "65",
+          "par": true
+        },
+        70,
+        75,
+        {
+          "label": "80",
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "label": "45",
+          "legend": 0,
+          "arrow": "down"
+        },
+        {
+          "label": "50",
+          "legend": 0
+        },
+        55,
+        60,
+        65,
+        {
+          "label": "70",
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "label": "40",
+          "legend": 0,
+          "arrow": "down"
+        },
+        {
+          "label": "45",
+          "legend": 0
+        },
+        {
+          "label": "50",
+          "legend": 0
+        },
+        55,
+        {
+          "label": "60",
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "label": "30",
+          "legend": 1,
+          "arrow": "down"
+        },
+        {
+          "label": "40",
+          "legend": 0
+        },
+        {
+          "label": "45",
+          "legend": 0
+        },
+        {
+          "label": "50",
+          "legend": 0,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "label": "20",
+          "legend": 1,
+          "arrow": "down"
+        },
+        {
+          "label": "30",
+          "legend": 1
+        },
+        {
+          "label": "40",
+          "legend": 0
+        },
+        {
+          "label": "45",
+          "legend": 0,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "label": "10",
+          "legend": 1
+        },
+        {
+          "label": "20",
+          "legend": 1
+        },
+        {
+          "label": "30",
+          "legend": 1
+        },
+        {
+          "label": "40",
+          "legend": 0,
+          "arrow": "up"
+        }
+      ]
+    ],
+    "legend": [
+      {
+        "color": "yellow",
+        "description": "Shares of this corporation do not count toward the certificate limit",
+        "icon": "certificate"
+      },
+      {
+        "color": "orange",
+        "description": "Players may own more than 60% of this corporation",
+        "icon": "percentage"
+      }
+    ]
+  },
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 6,
+      "price": 80,
+      "rust": "4",
+      "color": "yellow"
+    },
+    {
+      "name": "3",
+      "quantity": 5,
+      "price": 180,
+      "rust": "6",
+      "color": "green"
+    },
+    {
+      "name": "4",
+      "quantity": 4,
+      "price": 300,
+      "rust": "D",
+      "color": "green"
+    },
+    {
+      "name": "5",
+      "quantity": 3,
+      "price": 450,
+      "color": "brown"
+    },
+    {
+      "name": "6",
+      "quantity": 2,
+      "price": 630,
+      "color": "brown"
+    },
+    {
+      "name": "D",
+      "quantity": "∞",
+      "print": 9,
+      "price": 1100,
+      "color": "brown",
+      "description": "Cost ¥800 when trading in a 4T, 5T or 6T",
+      "available": "6",
+      "discount": {
+        "4": 300,
+        "5": 300,
+        "6": 300
+      }
+    }
+  ],
+  "tokenTypes": {
+    "default": ["Free", 40],
+    "three": ["Free", 40, 40],
+    "one": ["Free"]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "floatPercent": 50,
+  "companies": [
+    {
+      "name": "Awa Railroad",
+      "abbrev": "AR",
+      "logo": "1889/AR",
+      "color": "black"
+    },
+    {
+      "name": "Iyo Railway",
+      "abbrev": "IR",
+      "logo": "1889/IR",
+      "color": "orange"
+    },
+    {
+      "name": "Sanuki Railway",
+      "abbrev": "SR",
+      "logo": "1889/SR",
+      "color": "brightGreen"
+    },
+    {
+      "name": "Takamatsu & Kotohira Electric Railway",
+      "abbrev": "KO",
+      "logo": "1889/KO",
+      "color": "red"
+    },
+    {
+      "name": "Tosa Electric Railway",
+      "abbrev": "TR",
+      "logo": "1889/TR",
+      "color": "turquoise",
+      "tokens": "three"
+    },
+    {
+      "name": "Tosa Kuroshio Railway",
+      "abbrev": "KU",
+      "logo": "1889/KU",
+      "color": "blue",
+      "tokens": "one"
+    },
+    {
+      "name": "Uwajima Railway",
+      "abbrev": "UR",
+      "logo": "1889/UR",
+      "color": "brown",
+      "tokens": "three"
+    }
+  ],
+  "phases": [
+    {
+      "name": "2",
+      "limit": 4,
+      "rounds": 1,
+      "tiles": "yellow"
+    },
+    {
+      "name": "3",
+      "limit": 4,
+      "rounds": 2,
+      "tiles": "green",
+      "on": "3",
+      "buy_companies": true
+    },
+    {
+      "name": "4",
+      "limit": 3,
+      "rounds": 2,
+      "on": "4",
+      "tiles": "green",
+      "buy_companies": true
+    },
+    {
+      "name": "5",
+      "limit": 2,
+      "rounds": 3,
+      "tiles": "brown",
+      "on": "5",
+      "events": {
+        "close_companies": true
+      }
+    },
+    {
+      "name": "6",
+      "limit": 2,
+      "rounds": 3,
+      "on": "6",
+      "tiles": "brown",
+      "notes": "D Trains available for purchase"
+    },
+    {
+      "name": "D",
+      "limit": 2,
+      "rounds": 3,
+      "on": "D",
+      "tiles": "brown"
+    }
+  ],
+  "privates": [
+    {
+      "name": "Takamatsu E-Railroad",
+      "price": 20,
+      "revenue": 5,
+      "hex": "K4",
+      "description": "Blocks Takamatsu (K4).",
+      "sym": "TR",
+      "abilities": [
+        {
+          "type": "blocks_hexes",
+          "hexes": ["K4"]
+        }
+      ]
+    },
+    {
+      "name": "Mitsubishi Ferry",
+      "price": 30,
+      "revenue": 5,
+      "tile": "437",
+      "description": "Player owner may place the port tile on a coastal town (B11, G10, I12, or J9) without a tile on it already, outside of the operating rounds of a corporation controlled by another player. The player need not control a corporation or have connectivity to the placed tile from one of their corporations. This does not close the company.",
+      "sym": "MF",
+      "abilities": [
+        {
+          "type": "tile_lay",
+          "hexes": ["B11", "G10", "I12", "J9"],
+          "tiles": ["437"],
+          "owner_type": "player"
+        }
+      ]
+    },
+    {
+      "name": "Ehime Railway",
+      "price": 40,
+      "revenue": 10,
+      "hex": "C4",
+      "description": "When this company is sold to a corporation, the selling player may immediately place a green tile on Ohzu (C4), in addition to any tile which it may lay during the same operating round. This does not close the company.",
+      "sym": "ER",
+      "abilities": [
+        {
+          "type": "blocks_hexes",
+          "hexes": ["C4"]
+        },
+        {
+          "type": "tile_lay",
+          "hexes": ["C4"],
+          "tiles": ["12", "13", "14", "15", "205", "206"],
+          "when": "sold",
+          "owner_type": "corporation"
+        }
+      ]
+    },
+    {
+      "name": "Sumitomo Mines Railway",
+      "price": 50,
+      "revenue": 15,
+      "icon": "mountain",
+      "description": "Owning corporation may ignore building cost for mountain hexes which do not also contain rivers. This does not close the company.",
+      "abilities": [
+        {
+          "type": "ignore_terrain",
+          "terrain": "mountain",
+          "owner_type": "corporation"
+        }
+      ]
+    },
+    {
+      "name": "Dougo Railway",
+      "price": 60,
+      "revenue": 15,
+      "company": "IR",
+      "description": "Owning player may exchange this private company for a 10% share of Iyo Railway from the initial offering.",
+      "abilities": [
+        {
+          "type": "exchange",
+          "corporation": "IR",
+          "owner_type": "player"
+        }
+      ]
+    },
+    {
+      "name": "South Iyo Railway",
+      "price": 80,
+      "revenue": 20,
+      "token": {
+        "color": "orange",
+        "icon": "train",
+        "iconColor": "orange"
+      },
+      "minPlayers": 3
+    },
+    {
+      "name": "Uno-Takamatsu Ferry",
+      "price": 150,
+      "revenue": [30, 50],
+      "minPlayers": 4,
+      "icon": "boat",
+      "description": "Does not close while owned by a player. If owned by a player when the first 5-train is purchased it may no longer be sold to a public company and the revenue is increased to 50.",
+      "abilities": [
+        {
+          "type": "never_closes",
+          "owner_type": "player"
+        },
+        {
+          "type": "revenue_change",
+          "revenue": 50,
+          "when": "5",
+          "owner_type": "player"
+        }
+      ]
+    }
+  ],
+  "tiles": {
+    "3": 2,
+    "5": 2,
+    "6": 2,
+    "7": 2,
+    "8": 5,
+    "9": 5,
+    "12": 1,
+    "13": 1,
+    "14": 1,
+    "15": 3,
+    "16": 1,
+    "19": 1,
+    "20": 1,
+    "23": 2,
+    "24": 2,
+    "25": 1,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "39": 1,
+    "40": 1,
+    "41": 1,
+    "42": 1,
+    "45": 1,
+    "46": 1,
+    "47": 1,
+    "57": 2,
+    "58": 3,
+    "205": 1,
+    "206": 1,
+    "437": 1,
+    "438": 1,
+    "439": 1,
+    "440": 1,
+    "448": 4,
+    "465": 1,
+    "466": 1,
+    "492": 1,
+    "611": 2
+  },
+  "map": {
+    "roundTracker": {
+      "type": "row",
+      "x": 457,
+      "y": 790
+    },
+    "hexes": [
+      {
+        "color": "plain",
+        "hexes": ["D3", "H3", "J3", "B5", "C8", "E8", "I8", "D9", "I10"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Saijou"
+            }
+          }
+        ],
+        "hexes": ["F3"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Niihama"
+            }
+          }
+        ],
+        "hexes": ["G4"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Ikeda"
+            }
+          }
+        ],
+        "hexes": ["H7"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Sukumo"
+            }
+          }
+        ],
+        "hexes": ["A10"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Anan"
+            }
+          }
+        ],
+        "hexes": ["J11"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Nahari"
+            }
+          }
+        ],
+        "hexes": ["G12"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Matsuyama"
+            },
+            "companies": ["IR"]
+          }
+        ],
+        "hexes": ["E2"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Marugame"
+            },
+            "companies": ["SR"]
+          }
+        ],
+        "hexes": ["I2"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Tokushima"
+            },
+            "companies": ["AR"]
+          }
+        ],
+        "hexes": ["K8"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Kubokawa"
+            },
+            "companies": ["KU"]
+          }
+        ],
+        "hexes": ["C10"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Ritsurin Kouen"
+            }
+          }
+        ],
+        "hexes": ["J5"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "port",
+            "percent": 0.5
+          }
+        ],
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Nangoku"
+            }
+          }
+        ],
+        "hexes": ["G10"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "port",
+            "percent": 0.5
+          }
+        ],
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Komatsujima"
+            }
+          }
+        ],
+        "hexes": ["J9"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "port",
+            "percent": 0.5
+          }
+        ],
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Muki"
+            }
+          }
+        ],
+        "hexes": ["I12"]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "port",
+            "percent": 0.5
+          }
+        ],
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Nakamura"
+            }
+          }
+        ],
+        "hexes": ["B11"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "river",
+            "cost": 80
+          }
+        ],
+        "hexes": ["K6"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "river",
+            "percent": 0.38
+          },
+          {
+            "type": "mountain",
+            "cost": 80,
+            "angle": 180,
+            "percent": 0.1
+          }
+        ],
+        "hexes": ["H5", "I6"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 80
+          }
+        ],
+        "hexes": [
+          "E4",
+          "D5",
+          "F5",
+          "C6",
+          "E6",
+          "G6",
+          "D7",
+          "F7",
+          "A8",
+          "G8",
+          "B9",
+          "H9",
+          "H11",
+          "H13"
+        ]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "angle": 120,
+            "percent": 0.4,
+            "name": {
+              "name": "Kotohira",
+              "rotation": 30
+            }
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 270,
+            "percent": 0.5,
+            "cost": 80
+          }
+        ],
+        "labels": [
+          {
+            "label": "H",
+            "angle": 330,
+            "percent": 0.8
+          }
+        ],
+        "hexes": ["I4"]
+      },
+      {
+        "color": "yellow",
+        "values": [
+          {
+            "value": 20,
+            "angle": 180,
+            "percent": 0.667
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Ohzu",
+              "reverse": true
+            }
+          }
+        ],
+        "companies": [
+          {
+            "label": "ER",
+            "bottom": true,
+            "angle": 270,
+            "percent": 0.667
+          }
+        ],
+        "track": [
+          {
+            "side": 3
+          }
+        ],
+        "hexes": ["C4"]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "T",
+            "angle": 330,
+            "percent": 0.8
+          }
+        ],
+        "cities": [
+          {
+            "name": {
+              "name": "Takamatsu",
+              "rotation": 60
+            },
+            "companies": ["KO"]
+          }
+        ],
+        "values": [
+          {
+            "value": 30,
+            "angle": 150,
+            "percent": 0.8
+          }
+        ],
+        "companies": [
+          {
+            "label": "TR",
+            "angle": 30,
+            "percent": 0.75
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          }
+        ],
+        "hexes": ["K4"]
+      },
+      {
+        "color": "gray",
+        "values": [
+          {
+            "angle": 210,
+            "percent": 0.8,
+            "value": 40
+          }
+        ],
+        "cities": [
+          {
+            "size": 2,
+            "name": {
+              "name": "Uwajima",
+              "reverse": true
+            },
+            "companies": ["UR"]
+          }
+        ],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": ["B7"]
+      },
+      {
+        "color": "gray",
+        "towns": [
+          {
+            "angle": -30,
+            "percent": 0.57735,
+            "rotation": -120,
+            "name": {
+              "name": "Yawatahama"
+            }
+          }
+        ],
+        "track": [
+          {
+            "type": "sharp",
+            "side": 6
+          }
+        ],
+        "values": [
+          {
+            "value": 20,
+            "angle": 150,
+            "percent": 0.2
+          }
+        ],
+        "hexes": ["B3"]
+      },
+      {
+        "color": "gray",
+        "towns": [
+          {
+            "angle": -150,
+            "percent": 0.57735,
+            "rotation": 120,
+            "name": {
+              "name": "Muroto",
+              "reverse": true
+            }
+          }
+        ],
+        "track": [
+          {
+            "type": "sharp",
+            "side": 4
+          }
+        ],
+        "values": [
+          {
+            "value": 20,
+            "angle": 30,
+            "percent": 0.2
+          }
+        ],
+        "hexes": ["G14"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "gentle",
+            "side": 6
+          }
+        ],
+        "hexes": ["J7"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Imabari"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": "D100"
+            }
+          ]
+        },
+        "hexes": ["F1"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Sakaide & Okayama"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": "D80"
+            }
+          ]
+        },
+        "hexes": ["J1"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 2
+          },
+          {
+            "type": "offboard",
+            "side": 3
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Naruto & Awaji"
+          },
+          "x": 20,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            },
+            {
+              "color": "black",
+              "textColor": "white",
+              "cost": "D80"
+            }
+          ]
+        },
+        "hexes": ["L7"]
+      },
+      {
+        "color": "green",
+        "terrain": [
+          {
+            "type": "river",
+            "cost": 80,
+            "angle": 90,
+            "percent": 0.75
+          }
+        ],
+        "values": [
+          {
+            "angle": 150,
+            "percent": 0.82,
+            "value": 30
+          }
+        ],
+        "labels": [
+          {
+            "label": "K",
+            "angle": 270,
+            "percent": 0.82
+          }
+        ],
+        "cities": [
+          {
+            "size": 2,
+            "rotation": -60,
+            "name": {
+              "name": "Kouchi",
+              "reverse": true,
+              "offset": 31
+            },
+            "companies": ["TR"]
+          }
+        ],
+        "track": [
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": ["F9"]
+      }
+    ]
+  }
+}
