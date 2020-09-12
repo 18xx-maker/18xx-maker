@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/7zip-bin/-/7zip-bin-5.0.3.tgz#bc5b5532ecafd923a61f2fb097e3b108c0106a3f"
   integrity sha512-GLyWIFBbGvpKPGo55JyRZAo4lVbnBiD52cKlw/0Vt+wnmKvWJkpZvsjVoaIolyBXDeAQKSicRtqFNPem9w0WYA==
 
-"@18xx-maker/schemas@^5.2.0":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@18xx-maker/schemas/-/schemas-5.2.0.tgz#04e82ddaf5e91815c42d2dab74c5b03bf48040bc"
-  integrity sha512-5ejaCapCRxvT8IKb8+HRmNOW7XbSbwrsUgej9BVK3PYBIOGpjU0ILuNp23/lc1qzWxYeJdMq1gJ7rbFWY0iwjQ==
+"@18xx-maker/schemas@^5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@18xx-maker/schemas/-/schemas-5.5.0.tgz#93211eda4a6c0c02d7fff4589847887429912f79"
+  integrity sha512-r3mQ4ef7Kx8YOHAvq6vn92U8dJ6mmKkxNJAcEhZKgdOOl3cWEgEEdDXmCZX0aNhvHkhLsG72RnIqCkBkxxtpAg==
   dependencies:
     ajv "^6.12.2"
     chalk "^4.0.0"

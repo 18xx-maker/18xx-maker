@@ -138,8 +138,9 @@
           "rotation": -20
         }
       ],
-      "diamonds": [
+      "shapes": [
         {
+          "type": "diamond",
           "cost": "40",
           "angle": 140,
           "percent": 0.7,
@@ -184,8 +185,9 @@
           "rotation": -60
         }
       ],
-      "diamonds": [
+      "shapes": [
         {
+          "type": "diamond",
           "cost": "40",
           "angle": -150,
           "percent": 0.7,
@@ -230,8 +232,9 @@
           "rotation": 90
         }
       ],
-      "diamonds": [
+      "shapes": [
         {
+          "type": "diamond",
           "cost": "40",
           "angle": -148,
           "percent": 0.8,
@@ -276,8 +279,9 @@
           "rotation": -60
         }
       ],
-      "diamonds": [
+      "shapes": [
         {
+          "type": "diamond",
           "cost": "40",
           "fillColor": "water",
           "textColor": "white",
@@ -322,8 +326,9 @@
           "rotation": 90
         }
       ],
-      "diamonds": [
+      "shapes": [
         {
+          "type": "diamond",
           "cost": "40",
           "angle": -155,
           "percent": 0.7,
