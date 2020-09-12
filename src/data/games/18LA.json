@@ -1,0 +1,126 @@
+{
+  "info": {
+    "title": "18 Los Angeles",
+    "designer": "Tony Fryer",
+    "background": "orange",
+    "marketTokens": 2,
+    "extraStationTokens": 3,
+    "currency": "$#"
+  },
+  "links": {
+    "bgg": "https://boardgamegeek.com/boardgame/306257/18-los-angeles",
+    "rules": "https://drive.google.com/file/d/1G_fLbak96VWQ0Vfvg7-Qh2gXgv7r0BQi/view?usp=sharing",
+    "purchase": "https://traxx-denver.com/games/"
+  },
+  "wip": true,
+  "tiles": {
+    "5": 3,
+    "6": 4,
+    "7": 5,
+    "8": 16,
+    "9": 16,
+    "14": 4,
+    "15": 5,
+    "16": 2,
+    "17": 1,
+    "18": 1,
+    "19": 2,
+    "20": 2,
+    "21": 1,
+    "22": 1,
+    "23": 4,
+    "24": 4,
+    "25": 2,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "30": 1,
+    "31": 1,
+    "39": 1,
+    "40": 1,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 1,
+    "45": 2,
+    "46": 2,
+    "47": 2,
+    "51": 2,
+    "57": 4,
+    "70": 1,
+    "290": 1,
+    "291": 1,
+    "292": 1,
+    "293": 1,
+    "294": 2,
+    "295": 2,
+    "296": 1,
+    "297": 2,
+    "298|LA": {
+      "color": "green",
+      "labels": [{ "angle": 287, "percent": 0.7, "label": "LB" }],
+      "values": [{ "angle": 323, "percent": 0.75, "value": 40 }],
+      "cities": [
+        { "angle": 60, "percent": 0.75 },
+        { "angle": 120, "percent": 0.75 },
+        {
+          "angle": 180,
+          "percent": 0.75,
+          "companies": [{ "label": "PMC", "color": "white" }]
+        },
+        { "angle": 240, "percent": 0.75 }
+      ],
+      "track": [
+        { "type": "sharp", "side": 1 },
+        { "type": "gentle", "side": 1 },
+        { "type": "straight", "side": 1 },
+        { "type": "gentle", "side": 5 }
+      ]
+    },
+    "299|LA": {
+      "color": "brown",
+      "labels": [{ "angle": 287, "percent": 0.7, "label": "LB" }],
+      "values": [{ "angle": 323, "percent": 0.75, "value": 70 }],
+      "cities": [
+        { "angle": 60, "percent": 0.75 },
+        { "angle": 120, "percent": 0.75 },
+        {
+          "angle": 180,
+          "percent": 0.75,
+          "companies": [{ "label": "PMC", "color": "white" }]
+        },
+        { "angle": 240, "percent": 0.75 }
+      ],
+      "track": [
+        { "type": "sharp", "side": 1 },
+        { "type": "gentle", "side": 1 },
+        { "type": "straight", "side": 1 },
+        { "type": "gentle", "side": 5 }
+      ]
+    },
+    "300|LA": {
+      "color": "gray",
+      "labels": [{ "angle": 287, "percent": 0.7, "label": "LB" }],
+      "values": [{ "angle": 323, "percent": 0.75, "value": 90 }],
+      "cities": [
+        { "angle": 60, "percent": 0.75 },
+        { "angle": 120, "percent": 0.75 },
+        {
+          "angle": 180,
+          "percent": 0.75,
+          "companies": [{ "label": "PMC", "color": "white" }]
+        },
+        { "angle": 240, "percent": 0.75 }
+      ],
+      "track": [
+        { "type": "sharp", "side": 1 },
+        { "type": "gentle", "side": 1 },
+        { "type": "straight", "side": 1 },
+        { "type": "gentle", "side": 5 }
+      ]
+    },
+    "611": 4,
+    "619": 3
+  }
+}

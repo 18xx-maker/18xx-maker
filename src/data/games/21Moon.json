@@ -1,0 +1,2416 @@
+{
+  "info": {
+    "title": "21Moon",
+    "designer": "Jonas Jones",
+    "background": "gray",
+    "orientation": "horizontal",
+    "titleSize": 100,
+    "titleX": 0,
+    "titleY": -80,
+    "currency": "#c"
+  },
+  "links": {
+    "bgg": "https://boardgamegeek.com/boardgame/308305/21moon",
+    "rules": "https://boardgamegeek.com/filepage/200309/rules-version-2020-04-28"
+  },
+  "colors": {
+    "lightlightGray": "#dddddd",
+    "lightGray": "#b2b2b2",
+    "darkGray": "#808080",
+    "mineralRed": "#cc0000",
+    "borderRed": "#fe0000",
+    "borderDarkRed": "#990031",
+    "borderBlue": "#4d4dff",
+    "borderGreen": "#88ff88",
+    "borderOrange": "#ff8300",
+    "spacePort": "#feff99",
+    "spacePortOutline": "#f4d759",
+    "spacePortTile": "#ffc004",
+    "MV_brown": "#843c0b",
+    "ME_gray": "#999999",
+    "MA_blue": "#02b0f0",
+    "DSE_green": "#016600",
+    "SM_peach": "#f5b183",
+    "I_purple": "#6f30a0",
+    "LP_lavender": "#cc66ff",
+    "train_yellow": "#ffcc01",
+    "train_light_green": "#66ca00",
+    "train_green": "#016600",
+    "train_orange": "#fe9a02",
+    "train_brown": "#811a00",
+    "train_gray": "#808080"
+  },
+  "ipo": false,
+  "bank": 12000,
+  "tokens": [
+    "Round",
+    { "icon": "rocket" },
+    { "color": "black", "label": "SD", "fontSize": 24 },
+    { "color": "black", "label": "+20" },
+    { "color": "black", "label": "N/A", "fontSize": 20 },
+    {
+      "quantity": 3,
+      "circle": "black",
+      "color": "yellow",
+      "label": "20c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 3,
+      "circle": "black",
+      "color": "green",
+      "label": "40c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 3,
+      "circle": "black",
+      "color": "brown",
+      "label": "60c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 3,
+      "circle": "black",
+      "color": "gray",
+      "label": "80c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 4,
+      "circle": "red",
+      "color": "yellow",
+      "label": "30c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 4,
+      "circle": "red",
+      "color": "green",
+      "label": "40c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 4,
+      "circle": "red",
+      "color": "brown",
+      "label": "50c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 4,
+      "circle": "red",
+      "color": "gray",
+      "label": "60c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 4,
+      "circle": "orange",
+      "color": "yellow",
+      "label": "20c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 4,
+      "circle": "orange",
+      "color": "green",
+      "label": "20c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 4,
+      "circle": "orange",
+      "color": "brown",
+      "label": "40c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 4,
+      "circle": "orange",
+      "color": "gray",
+      "label": "50c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 4,
+      "circle": "yellow",
+      "color": "yellow",
+      "label": "40c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 4,
+      "circle": "yellow",
+      "color": "green",
+      "label": "30c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 4,
+      "circle": "yellow",
+      "color": "brown",
+      "label": "30c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 4,
+      "circle": "yellow",
+      "color": "gray",
+      "label": "20c",
+      "circleRadius": 16
+    },
+    {
+      "quantity": 2,
+      "color": "white",
+      "label": "10c",
+      "circle": "white",
+      "circleRadius": 20,
+      "quarters": ["yellow", "green", "gray", "brown"]
+    },
+    {
+      "quantity": 7,
+      "color": "yellow",
+      "label": "30c"
+    },
+    {
+      "quantity": 7,
+      "color": "green",
+      "label": "30c"
+    },
+    {
+      "quantity": 7,
+      "color": "brown",
+      "label": "20c"
+    },
+    {
+      "quantity": 7,
+      "color": "gray",
+      "label": "10c"
+    }
+  ],
+  "players": [
+    {
+      "number": 3,
+      "certLimit": 20,
+      "capital": 800
+    },
+    {
+      "number": 4,
+      "certLimit": 16,
+      "capital": 600
+    },
+    {
+      "number": 5,
+      "certLimit": 13,
+      "capital": 480
+    },
+    {
+      "number": 6,
+      "certLimit": 11,
+      "capital": 400
+    }
+  ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Share",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "tokenTypes": {
+    "four": ["Free", 25, 50, 75]
+  },
+  "companies": [
+    {
+      "name": "Moon Venture Corporation",
+      "abbrev": "MV",
+      "color": "MV_brown",
+      "tokens": "four"
+    },
+    {
+      "name": "Minerals Express Corporation",
+      "abbrev": "ME",
+      "color": "ME_gray",
+      "tokens": "four"
+    },
+    {
+      "name": "Mining Alliance Corporation",
+      "abbrev": "MA",
+      "color": "MA_blue",
+      "tokens": "four"
+    },
+    {
+      "name": "Deep Space Explorers Corporation",
+      "abbrev": "DSE",
+      "color": "DSE_green",
+      "tokens": "four"
+    },
+    {
+      "name": "Space Mining Corporation",
+      "abbrev": "SM",
+      "color": "SM_peach",
+      "tokens": "four"
+    },
+    {
+      "name": "Intergalactic Corporation",
+      "abbrev": "I",
+      "color": "I_purple",
+      "tokens": "four"
+    },
+    {
+      "name": "Lunar Power Corporation",
+      "abbrev": "LP",
+      "color": "LP_lavender",
+      "tokens": "four"
+    }
+  ],
+  "privates": [
+    {
+      "id": "1",
+      "name": "Old Landing Site",
+      "price": 20,
+      "revenue": 0,
+      "description": "When buying the Private, the investor must immediately place the black \"SD\" token on any \"Mineral\" hex on the board.  The token blocks an SD slot when roads are built in the hex.  If sold to a Corporation, the black SD token will function as a fourth Supply Depot for that Corporation.  The purchaser of the Old Landing Site Private Company automatically gets last place in SR 5 turn order."
+    },
+    {
+      "id": "2",
+      "name": "UN Contract",
+      "price": 25,
+      "revenue": 5,
+      "description": "Sell for 1-50c.  The President gets a personal one-time bonus of 80c when connecting a road to an off-map location (arrows in the four corners of the map).  If this is done, the UN project starts, which results in a UN transport purchase at the start of OR5.  Discard this private at the end of OR6 or when the bonus is collected."
+    },
+    {
+      "id": "3",
+      "name": "Space Bridge Company",
+      "price": 40,
+      "revenue": 10,
+      "description": "Sell for 1-80c.  The Corporation owning the Space Bridge Company can build and upgrade road tiles crossing the rift as normal during the game.  All other Corporations can also run their transports over completed roads across the rift."
+    },
+    {
+      "id": "4",
+      "name": "Research Lab",
+      "price": 60,
+      "revenue": 10,
+      "description": "Sell for 1-120c.  At the start of an OR, the owner may place a \"+20c\" marker in any resource hex on the map.  The new value of the resource hex will last until the end of the game.  Discard this Private once the +20 marker is placed on the board."
+    },
+    {
+      "id": "5",
+      "name": "Space Port",
+      "price": 80,
+      "revenue": 15,
+      "description": "Sell for 1-160c.  The Corporation owning the Space Port Private can place the Space Port tile for free in addition to building regular road tiles.  The Corporation may also place its cheapest SD token on the tile for free at the same time. Placed Space Port tile discards this private"
+    },
+    {
+      "id": "6",
+      "name": "Tunnel Company",
+      "price": 100,
+      "revenue": 15,
+      "description": "Sell for 1-200c.  When sold to a Corporation, if any 10% shares remain, the bank pays the Corporation for a 10% share that is given to the Investor without cost."
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 5,
+      "price": 100,
+      "color": "train_yellow",
+      "rust": "5"
+    },
+    {
+      "name": "3",
+      "quantity": 4,
+      "price": 150,
+      "color": "train_light_green",
+      "rust": "6"
+    },
+    {
+      "name": "4",
+      "quantity": 3,
+      "price": 240,
+      "color": "train_green",
+      "rust": "10"
+    },
+    {
+      "name": "5",
+      "quantity": 2,
+      "price": 370,
+      "color": "train_orange"
+    },
+    {
+      "name": "6",
+      "quantity": 2,
+      "price": 540,
+      "color": "train_brown"
+    },
+    {
+      "name": "10",
+      "quantity": 5,
+      "price": 730,
+      "color": "train_gray"
+    }
+  ],
+  "phases": [
+    {
+      "name": "2",
+      "limit": 4,
+      "tiles": "train_yellow"
+    },
+    {
+      "name": "3",
+      "limit": 4,
+      "tiles": "train_light_reen"
+    },
+    {
+      "name": "4",
+      "limit": 4,
+      "tiles": "train_green"
+    },
+    {
+      "name": "5",
+      "limit": 2,
+      "tiles": "train_orange"
+    },
+    {
+      "name": "6",
+      "limit": 2,
+      "tiles": "train_brown"
+    },
+    {
+      "name": "10",
+      "limit": 2,
+      "tiles": "train_gray"
+    }
+  ],
+  "stock": {
+    "type": "2D",
+    "display": {
+      "par": {
+        "x": 15,
+        "y": 5
+      },
+      "roundTracker": {
+        "type": "col-reverse",
+        "x": 13,
+        "y": 5
+      },
+      "legend": {
+        "reverse": true,
+        "verticalAlign": "bottom",
+        "x": 7,
+        "y": 11
+      }
+    },
+    "par": {
+      "values": [100, 90, 82, 76, 71, 67]
+    },
+    "movement": {
+      "up": ["Sold out"],
+      "down": ["Every share sold"],
+      "left": ["Revenue withheld"],
+      "right": ["Revenue paid out"]
+    },
+    "market": [
+      [
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0,
+          "arrow": "down"
+        },
+        67,
+        71,
+        76,
+        82,
+        90,
+        {
+          "value": 100,
+          "label": 100,
+          "par": true
+        },
+        112,
+        126,
+        142,
+        160,
+        180,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350
+      ],
+      [
+        {
+          "value": 53,
+          "label": 53,
+          "legend": 0,
+          "arrow": "down"
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        66,
+        70,
+        76,
+        82,
+        {
+          "value": 90,
+          "label": 90,
+          "par": true
+        },
+        100,
+        112,
+        126,
+        142,
+        160,
+        180,
+        200,
+        220,
+        240,
+        260,
+        280,
+        {
+          "value": 300,
+          "label": 300,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 46,
+          "label": 46,
+          "legend": 0,
+          "arrow": "down"
+        },
+        {
+          "value": 55,
+          "label": 55,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        65,
+        70,
+        76,
+        {
+          "value": 82,
+          "label": 82,
+          "par": true
+        },
+        90,
+        100,
+        111,
+        125,
+        140,
+        155,
+        170,
+        185,
+        {
+          "value": 200,
+          "label": 200,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 39,
+          "label": 39,
+          "legend": 1,
+          "arrow": "down"
+        },
+        {
+          "value": 48,
+          "label": 48,
+          "legend": 0
+        },
+        {
+          "value": 54,
+          "label": 54,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        66,
+        71,
+        {
+          "value": 76,
+          "label": 76,
+          "par": true
+        },
+        82,
+        90,
+        100,
+        110,
+        120,
+        {
+          "value": 130,
+          "label": 130,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 32,
+          "label": 32,
+          "legend": 1,
+          "arrow": "down"
+        },
+        {
+          "value": 41,
+          "label": 41,
+          "legend": 1
+        },
+        {
+          "value": 48,
+          "label": 48,
+          "legend": 0
+        },
+        {
+          "value": 55,
+          "label": 55,
+          "legend": 0
+        },
+        62,
+        67,
+        {
+          "value": 71,
+          "label": 71,
+          "par": true
+        },
+        76,
+        82,
+        90,
+        {
+          "value": 100,
+          "label": 100,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 25,
+          "label": 25,
+          "legend": 2,
+          "arrow": "down"
+        },
+        {
+          "value": 34,
+          "label": 34,
+          "legend": 1
+        },
+        {
+          "value": 42,
+          "label": 42,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0
+        },
+        {
+          "value": 58,
+          "label": 58,
+          "legend": 0
+        },
+        65,
+        {
+          "value": 67,
+          "label": 67,
+          "par": true
+        },
+        71,
+        75,
+        {
+          "value": 80,
+          "label": 80,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 18,
+          "label": 18,
+          "legend": 2,
+          "arrow": "down"
+        },
+        {
+          "value": 27,
+          "label": 27,
+          "legend": 2
+        },
+        {
+          "value": 36,
+          "label": 36,
+          "legend": 1
+        },
+        {
+          "value": 45,
+          "label": 45,
+          "legend": 1
+        },
+        {
+          "value": 54,
+          "label": 54,
+          "legend": 0
+        },
+        63,
+        67,
+        69,
+        {
+          "value": 70,
+          "label": 70,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 12,
+          "label": 12,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        67,
+        {
+          "value": 68,
+          "label": 68,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        null,
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        null,
+        null,
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1,
+          "arrow": "up"
+        }
+      ]
+    ],
+    "legend": [
+      {
+        "color": "yellow",
+        "description": "Shares of this corporation do not count toward the certificate limit",
+        "icon": "certificate"
+      },
+      {
+        "color": "orange",
+        "description": "Players may own more than 60% of this corporation",
+        "icon": "percentage"
+      },
+      {
+        "color": "brown",
+        "description": "Players may purchase any number of shares of this corporation in one stock action",
+        "icon": "money-bill-wave"
+      }
+    ]
+  },
+  "stock": {
+    "type": "2D",
+    "movement": {
+      "up": [
+        "all shares owned by Investors and Corporations, or when should move right but cannot"
+      ],
+      "down": ["per share sold or when should move left but cannot"],
+      "right": [
+        "pay dividend at least half of current share price, but less than two times current share price"
+      ],
+      "2x right": ["pay dividend at least two times current share price"],
+      "left": ["if dividend withheld"]
+    },
+    "market": [
+      [
+        null,
+        null,
+        null,
+        100,
+        110,
+        120,
+        130,
+        140,
+        150,
+        165,
+        180,
+        200,
+        220,
+        245,
+        270
+      ],
+      [
+        null,
+        70,
+        80,
+        {
+          "value": 90,
+          "label": 90,
+          "par": true
+        },
+        100,
+        110,
+        120,
+        130,
+        140,
+        150,
+        165,
+        180,
+        195,
+        210,
+        230
+      ],
+      [
+        50,
+        60,
+        70,
+        {
+          "value": 80,
+          "label": 80,
+          "par": true
+        },
+        90,
+        100,
+        110,
+        120,
+        130,
+        140,
+        150,
+        160,
+        170,
+        185
+      ],
+      [
+        40,
+        50,
+        60,
+        {
+          "value": 70,
+          "label": 70,
+          "par": true
+        },
+        80,
+        90,
+        100,
+        110,
+        120,
+        130,
+        140,
+        150,
+        160
+      ],
+      [
+        30,
+        40,
+        50,
+        {
+          "value": 60,
+          "label": 60,
+          "par": true
+        },
+        70,
+        80,
+        90,
+        100,
+        110,
+        120,
+        130,
+        140
+      ],
+      [20, 30, 40, 50, 60, 70, 80, 90, 100, 110],
+      [10, 20, 30, 40, 50, 60, 70, 80],
+      [{ "legend": 0 }, 10, 20, 30, 40]
+    ],
+    "legend": [
+      {
+        "color": "black",
+        "description": "Corporation bankrupt and removed from game"
+      }
+    ],
+    "display": {
+      "legend": {
+        "reverse": true,
+        "verticalAlign": "bottom",
+        "x": 6,
+        "y": 8
+      }
+    }
+  },
+  "tiles": {
+    "RLP|OR6": {
+      "color": "lightlightGray",
+      "track": [
+        { "side": 1, "type": "straight", "width": 6 },
+        { "side": 2, "type": "straight", "width": 6 },
+        { "side": 3, "type": "straight", "width": 6 }
+      ],
+      "tokens": [
+        {
+          "color": "lightBlue",
+          "outline": "black",
+          "outlineWidth": 2,
+          "width": 60
+        }
+      ],
+      "icons": [{ "type": "rocket", "width": 40, "strokeWidth": 1 }],
+      "names": [
+        {
+          "name": "Rocket",
+          "fontFamily": "Elegante",
+          "fontSize": 12,
+          "color": "white",
+          "angle": 180,
+          "percent": 0.62
+        },
+        {
+          "name": "Launch Pad",
+          "fontFamily": "Elegante",
+          "fontSize": 12,
+          "fontWeight": "bold",
+          "color": "white",
+          "angle": 180,
+          "percent": 0.44
+        },
+        {
+          "name": "40c",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "fontStyle": "italic",
+          "color": "white",
+          "angle": 0,
+          "percent": 0.65
+        }
+      ]
+    },
+    "RLP|OR3": {
+      "color": "lightlightGray",
+      "track": [
+        { "side": 1, "type": "straight", "width": 6 },
+        { "side": 2, "type": "straight", "width": 6 },
+        { "side": 3, "type": "straight", "width": 6 }
+      ],
+      "tokens": [
+        {
+          "color": "blue",
+          "outline": "black",
+          "outlineWidth": 2,
+          "width": 60
+        }
+      ],
+      "icons": [{ "type": "rocket", "width": 40, "strokeWidth": 1 }],
+      "names": [
+        {
+          "name": "Rocket",
+          "fontFamily": "Elegante",
+          "fontSize": 12,
+          "color": "white",
+          "angle": 180,
+          "percent": 0.62
+        },
+        {
+          "name": "Launch Pad",
+          "fontFamily": "Elegante",
+          "fontSize": 12,
+          "fontWeight": "bold",
+          "color": "white",
+          "angle": 180,
+          "percent": 0.44
+        },
+        {
+          "name": "60c",
+          "fontSize": 16,
+          "fontWeight": "bold",
+          "fontStyle": "italic",
+          "color": "white",
+          "angle": 0,
+          "percent": 0.65
+        }
+      ]
+    },
+    "M|1": {
+      "color": "yellow",
+      "quantity": 5,
+      "cities": [{}],
+      "names": [{ "name": "BC/SD", "angle": 0, "percent": 0.05 }],
+      "track": [{ "side": 1, "type": "straight", "width": 7 }]
+    },
+    "M|2": {
+      "color": "yellow",
+      "quantity": 5,
+      "cities": [{ "angle": -60, "percent": 0.3 }],
+      "names": [{ "name": "BC/SD", "angle": -54, "percent": 0.33 }],
+      "track": [{ "side": 5, "type": "gentle", "width": 7 }]
+    },
+    "M|3": {
+      "color": "yellow",
+      "quantity": 4,
+      "cities": [{ "angle": -30, "percent": 0.5 }],
+      "names": [{ "name": "BC/SD", "angle": -28, "percent": 0.55 }],
+      "track": [{ "side": 6, "type": "sharp", "width": 7 }]
+    },
+    "M|4": {
+      "color": "yellow",
+      "cities": [
+        { "angle": -30, "percent": 0.5 },
+        { "angle": -150, "percent": 0.5 }
+      ],
+      "names": [
+        { "name": "SD", "angle": -30, "percent": 0.5 },
+        { "name": "SD", "angle": -150, "percent": 0.5 }
+      ],
+      "track": [
+        { "side": 5, "type": "sharpStopRev", "width": 7 },
+        { "side": 6, "type": "sharpStop", "width": 7 }
+      ],
+      "tokens": [
+        { "width": 6, "color": "black", "angle": 75, "percent": 0.7 },
+        { "width": 6, "color": "black", "angle": 105, "percent": 0.7 }
+      ]
+    },
+    "M|5": {
+      "color": "yellow",
+      "cities": [
+        { "angle": 0, "percent": 0.4 },
+        { "angle": 180, "percent": 0.4 }
+      ],
+      "names": [
+        { "name": "SD", "angle": 0, "percent": 0.4 },
+        { "name": "SD", "angle": 180, "percent": 0.4 }
+      ],
+      "track": [
+        { "side": 1, "type": "stub", "width": 7 },
+        { "side": 4, "type": "stub", "width": 7 }
+      ],
+      "tokens": [
+        { "width": 6, "color": "black", "angle": 75, "percent": 0.7 },
+        { "width": 6, "color": "black", "angle": 105, "percent": 0.7 }
+      ]
+    },
+    "M|6": {
+      "color": "yellow",
+      "cities": [
+        { "angle": 0, "percent": 0.45 },
+        { "angle": -120, "percent": 0.45 }
+      ],
+      "names": [
+        { "name": "SD", "angle": 0, "percent": 0.45 },
+        { "name": "SD", "angle": -120, "percent": 0.45 }
+      ],
+      "track": [
+        { "side": 1, "type": "stub", "width": 7 },
+        { "side": 5, "type": "stub", "width": 7 }
+      ],
+      "tokens": [
+        { "width": 6, "color": "black", "angle": 105, "percent": 0.7 },
+        { "width": 6, "color": "black", "angle": 135, "percent": 0.7 }
+      ]
+    },
+    "M|7": {
+      "color": "yellow",
+      "quantity": 3,
+      "track": [{ "side": 6, "type": "sharp", "width": 7 }]
+    },
+    "M|8": {
+      "color": "yellow",
+      "quantity": 9,
+      "track": [{ "side": 5, "type": "gentle", "width": 7 }]
+    },
+    "M|9": {
+      "color": "yellow",
+      "quantity": 7,
+      "track": [{ "side": 1, "type": "straight", "width": 7 }]
+    },
+    "M|19": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "straight", "cross": "over", "width": 7 },
+        { "side": 6, "type": "gentle", "cross": "under", "width": 7 }
+      ]
+    },
+    "M|20": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "straight", "cross": "over", "width": 7 },
+        { "side": 2, "type": "straight", "cross": "under", "width": 7 }
+      ]
+    },
+    "M|23": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "straight", "width": 7 },
+        { "side": 5, "type": "gentle", "width": 7 }
+      ]
+    },
+    "M|24": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "straight", "width": 7 },
+        { "side": 1, "type": "gentle", "width": 7 }
+      ]
+    },
+    "M|25": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "gentle", "width": 7 },
+        { "side": 5, "type": "gentle", "width": 7 }
+      ]
+    },
+    "M|26": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "straight", "width": 7 },
+        { "side": 6, "type": "sharp", "width": 7 }
+      ]
+    },
+    "M|27": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "straight", "width": 7 },
+        { "side": 1, "type": "sharp", "width": 7 }
+      ]
+    },
+    "M|28": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 5, "type": "gentle", "width": 7 },
+        { "side": 6, "type": "sharp", "width": 7 }
+      ]
+    },
+    "M|29": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "gentle", "width": 7 },
+        { "side": 1, "type": "sharp", "width": 7 }
+      ]
+    },
+    "M|30": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "sharp", "width": 7 },
+        { "side": 5, "type": "gentle", "width": 7 }
+      ]
+    },
+    "M|31": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "gentle", "width": 7 },
+        { "side": 6, "type": "sharp", "width": 7 }
+      ]
+    },
+    "M|39": {
+      "color": "brown",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "sharp", "width": 7 },
+        { "side": 6, "type": "sharp", "width": 7 },
+        { "side": 6, "type": "gentle", "width": 7 }
+      ]
+    },
+    "M|40": {
+      "color": "brown",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "gentle", "width": 7 },
+        { "side": 3, "type": "gentle", "width": 7 },
+        { "side": 5, "type": "gentle", "width": 7 }
+      ]
+    },
+    "M|41": {
+      "color": "brown",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "straight", "width": 7 },
+        { "side": 5, "type": "gentle", "width": 7 },
+        { "side": 4, "type": "sharp", "width": 7 }
+      ]
+    },
+    "M|42": {
+      "color": "brown",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "straight", "width": 7 },
+        { "side": 1, "type": "gentle", "width": 7 },
+        { "side": 3, "type": "sharp", "width": 7 }
+      ]
+    },
+    "M|43m": {
+      "color": "brown",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "straight", "width": 7 },
+        { "side": 1, "type": "gentle", "width": 7 },
+        { "side": 2, "type": "gentle", "width": 7 }
+      ]
+    },
+    "M|44m": {
+      "color": "brown",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "straight", "width": 7 },
+        { "side": 2, "type": "straight", "width": 7 },
+        { "side": 4, "type": "sharp", "width": 7 }
+      ]
+    },
+    "M|47m1": {
+      "color": "brown",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "straight", "width": 7 },
+        { "side": 2, "type": "straight", "width": 7 },
+        { "side": 5, "type": "gentle", "width": 7 }
+      ]
+    },
+    "M|47m2": {
+      "color": "brown",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "straight", "width": 7 },
+        { "side": 1, "type": "gentle", "width": 7 },
+        { "side": 4, "type": "gentle", "width": 7 }
+      ]
+    },
+    "M|47m3": {
+      "color": "brown",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "straight", "width": 7 },
+        { "side": 2, "type": "gentle", "width": 7 },
+        { "side": 5, "type": "gentle", "width": 7 }
+      ]
+    },
+    "M|187": {
+      "color": "green",
+      "quantity": 1,
+      "cities": [{ "size": 2, "rotation": 90 }],
+      "names": [
+        { "name": "BC/SD", "angle": 0, "percent": 0.4 },
+        { "name": "BC/SD", "angle": 180, "percent": 0.3 }
+      ],
+      "track": [
+        { "side": 1, "width": 7 },
+        { "side": 3, "width": 7 },
+        { "side": 5, "width": 7 }
+      ]
+    },
+    "M|188": {
+      "color": "green",
+      "quantity": 3,
+      "cities": [{ "size": 2, "rotation": 90 }],
+      "names": [
+        { "name": "BC/SD", "angle": 0, "percent": 0.4 },
+        { "name": "BC/SD", "angle": 180, "percent": 0.3 }
+      ],
+      "track": [
+        { "side": 3, "width": 7 },
+        { "side": 4, "width": 7 },
+        { "side": 5, "width": 6 }
+      ]
+    },
+    "M|b4tX2c": {
+      "color": "brown",
+      "quantity": 1,
+      "cities": [{ "size": 2, "width": 22, "rotation": 90 }],
+      "names": [
+        { "name": "BC/SD", "angle": 0, "percent": 0.35 },
+        { "name": "BC/SD", "angle": 180, "percent": 0.25 }
+      ],
+      "track": [
+        { "side": 1, "width": 7 },
+        { "side": 2, "width": 7 },
+        { "side": 4, "width": 7 },
+        { "side": 5, "width": 7 }
+      ]
+    },
+    "M|b4tX3c": {
+      "color": "brown",
+      "quantity": 1,
+      "cities": [{ "size": 3, "width": 22, "rotation": 30 }],
+      "names": [
+        { "name": "BC/SD", "angle": 180, "percent": 0.3 },
+        { "name": "BC/SD", "angle": 55, "percent": 0.37 },
+        { "name": "BC/SD", "angle": -55, "percent": 0.37 }
+      ],
+      "track": [
+        { "side": 1, "width": 7 },
+        { "side": 2, "width": 7 },
+        { "side": 4, "width": 7 },
+        { "side": 5, "width": 7 }
+      ]
+    },
+    "M|b3tW2c": {
+      "color": "brown",
+      "quantity": 1,
+      "cities": [{ "size": 2, "width": 22, "rotation": 90 }],
+      "names": [
+        { "name": "BC/SD", "angle": 0, "percent": 0.35 },
+        { "name": "BC/SD", "angle": 180, "percent": 0.25 }
+      ],
+      "track": [
+        { "side": 3, "width": 7 },
+        { "side": 4, "width": 7 },
+        { "side": 5, "width": 7 }
+      ]
+    },
+    "M|b3tW3c": {
+      "color": "brown",
+      "quantity": 2,
+      "cities": [{ "size": 3, "width": 22, "rotation": 30 }],
+      "names": [
+        { "name": "BC/SD", "angle": 180, "percent": 0.3 },
+        { "name": "BC/SD", "angle": 55, "percent": 0.37 },
+        { "name": "BC/SD", "angle": -55, "percent": 0.37 }
+      ],
+      "track": [
+        { "side": 3, "width": 7 },
+        { "side": 4, "width": 7 },
+        { "side": 5, "width": 7 }
+      ]
+    },
+    "M|b4tC3c": {
+      "color": "brown",
+      "quantity": 1,
+      "cities": [{ "size": 3, "width": 22, "rotation": 30 }],
+      "names": [
+        { "name": "BC/SD", "angle": 180, "percent": 0.3 },
+        { "name": "BC/SD", "angle": 55, "percent": 0.37 },
+        { "name": "BC/SD", "angle": -55, "percent": 0.37 }
+      ],
+      "track": [
+        { "side": 1, "width": 7 },
+        { "side": 3, "width": 7 },
+        { "side": 4, "width": 7 },
+        { "side": 5, "width": 7 }
+      ]
+    },
+    "M|b4tK2c": {
+      "color": "brown",
+      "quantity": 1,
+      "cities": [{ "size": 2, "rotation": 90 }],
+      "names": [
+        { "name": "BC/SD", "angle": 0, "percent": 0.4 },
+        { "name": "BC/SD", "angle": 180, "percent": 0.3 }
+      ],
+      "track": [
+        { "side": 3, "width": 7 },
+        { "side": 4, "width": 7 },
+        { "side": 5, "width": 7 },
+        { "side": 6, "width": 7 }
+      ]
+    },
+    "M|b4tK3c": {
+      "color": "brown",
+      "quantity": 1,
+      "cities": [{ "size": 3, "width": 22, "rotation": 30 }],
+      "names": [
+        { "name": "BC/SD", "angle": 180, "percent": 0.3 },
+        { "name": "BC/SD", "angle": 55, "percent": 0.37 },
+        { "name": "BC/SD", "angle": -55, "percent": 0.37 }
+      ],
+      "track": [
+        { "side": 3, "width": 7 },
+        { "side": 4, "width": 7 },
+        { "side": 5, "width": 7 },
+        { "side": 6, "width": 7 }
+      ]
+    },
+    "M|g3tW3c": {
+      "color": "gray",
+      "quantity": 2,
+      "cities": [{ "size": 3, "width": 22, "rotation": 30 }],
+      "names": [
+        { "name": "BC/SD", "angle": 180, "percent": 0.3 },
+        { "name": "BC/SD", "angle": 55, "percent": 0.37 },
+        { "name": "BC/SD", "angle": -55, "percent": 0.37 }
+      ],
+      "track": [
+        { "side": 3, "width": 7 },
+        { "side": 4, "width": 7 },
+        { "side": 5, "width": 7 }
+      ]
+    },
+    "M|g4tC3c": {
+      "color": "gray",
+      "quantity": 1,
+      "cities": [{ "size": 3, "width": 22, "rotation": 30 }],
+      "names": [
+        { "name": "BC/SD", "angle": 180, "percent": 0.3 },
+        { "name": "BC/SD", "angle": 55, "percent": 0.37 },
+        { "name": "BC/SD", "angle": -55, "percent": 0.37 }
+      ],
+      "track": [
+        { "side": 1, "width": 7 },
+        { "side": 3, "width": 7 },
+        { "side": 4, "width": 7 },
+        { "side": 5, "width": 7 }
+      ]
+    },
+    "M|g4tK3c": {
+      "color": "gray",
+      "quantity": 1,
+      "cities": [{ "size": 3, "width": 22, "rotation": 30 }],
+      "names": [
+        { "name": "BC/SD", "angle": 180, "percent": 0.3 },
+        { "name": "BC/SD", "angle": 55, "percent": 0.37 },
+        { "name": "BC/SD", "angle": -55, "percent": 0.37 }
+      ],
+      "track": [
+        { "side": 3, "width": 7 },
+        { "side": 4, "width": 7 },
+        { "side": 5, "width": 7 },
+        { "side": 6, "width": 7 }
+      ]
+    },
+    "M|g5t3c": {
+      "color": "gray",
+      "quantity": 2,
+      "cities": [{ "size": 3, "width": 22, "rotation": 30 }],
+      "names": [
+        { "name": "BC/SD", "angle": 180, "percent": 0.3 },
+        { "name": "BC/SD", "angle": 55, "percent": 0.37 },
+        { "name": "BC/SD", "angle": -55, "percent": 0.37 }
+      ],
+      "track": [
+        { "side": 1, "width": 7 },
+        { "side": 3, "width": 7 },
+        { "side": 4, "width": 7 },
+        { "side": 5, "width": 7 },
+        { "side": 6, "width": 7 }
+      ]
+    },
+    "M|189": {
+      "color": "green",
+      "quantity": 3,
+      "cities": [{ "size": 2, "rotation": 90 }],
+      "names": [
+        { "name": "BC/SD", "angle": 0, "percent": 0.4 },
+        { "name": "BC/SD", "angle": 180, "percent": 0.3 }
+      ],
+      "track": [
+        { "side": 1, "width": 7 },
+        { "side": 3, "width": 7 },
+        { "side": 4, "width": 7 }
+      ]
+    },
+    "M|194": {
+      "color": "green",
+      "quantity": 3,
+      "cities": [{ "size": 2, "rotation": 90 }],
+      "names": [
+        { "name": "BC/SD", "angle": 0, "percent": 0.4 },
+        { "name": "BC/SD", "angle": 180, "percent": 0.3 }
+      ],
+      "track": [
+        { "side": 1, "width": 7 },
+        { "side": 4, "width": 7 },
+        { "side": 5, "width": 7 }
+      ]
+    },
+    "M|322": {
+      "color": "green",
+      "quantity": 1,
+      "cities": [
+        { "angle": -10, "percent": 0.5 },
+        { "angle": 170, "percent": 0.5 }
+      ],
+      "names": [
+        { "name": "SD", "angle": -9, "percent": 0.55 },
+        { "name": "SD", "angle": 170, "percent": 0.45 }
+      ],
+      "track": [
+        { "side": 2, "type": "gentle", "width": 7 },
+        { "side": 5, "type": "gentle", "width": 7 }
+      ],
+      "tokens": [
+        { "width": 6, "color": "black", "angle": 105, "percent": 0.8 },
+        { "width": 6, "color": "black", "angle": 135, "percent": 0.8 }
+      ]
+    },
+    "M|320": {
+      "color": "green",
+      "quantity": 1,
+      "cities": [
+        { "angle": -170, "percent": 0.5 },
+        { "angle": -10, "percent": 0.5 }
+      ],
+      "names": [
+        { "name": "SD", "angle": -9, "percent": 0.55 },
+        { "name": "SD", "angle": -168, "percent": 0.45 }
+      ],
+      "track": [
+        { "side": 4, "type": "gentle", "width": 7 },
+        { "side": 5, "type": "gentle", "width": 7 }
+      ],
+      "tokens": [
+        { "width": 6, "color": "black", "angle": 75, "percent": 0.7 },
+        { "width": 6, "color": "black", "angle": 105, "percent": 0.7 }
+      ]
+    },
+    "M|325": {
+      "color": "green",
+      "quantity": 1,
+      "cities": [
+        { "angle": -30, "percent": 0.5 },
+        { "angle": -150, "percent": 0.5 }
+      ],
+      "names": [
+        { "name": "SD", "angle": -28, "percent": 0.54 },
+        { "name": "SD", "angle": -148, "percent": 0.47 }
+      ],
+      "track": [
+        { "side": 4, "type": "sharp", "width": 7 },
+        { "side": 6, "type": "sharp", "width": 7 }
+      ],
+      "tokens": [
+        { "width": 6, "color": "black", "angle": 75, "percent": 0.7 },
+        { "width": 6, "color": "black", "angle": 105, "percent": 0.7 }
+      ]
+    },
+    "M|317": {
+      "color": "green",
+      "quantity": 1,
+      "cities": [
+        { "angle": -30, "percent": 0.5 },
+        { "angle": -120, "percent": 0.5 }
+      ],
+      "names": [
+        { "name": "SD", "angle": -28, "percent": 0.55 },
+        { "name": "SD", "angle": -115, "percent": 0.48 }
+      ],
+      "track": [
+        { "side": 2, "type": "straight", "width": 7 },
+        { "side": 6, "type": "sharp", "width": 7 }
+      ],
+      "tokens": [
+        { "width": 6, "color": "black", "angle": 135, "percent": 0.7 },
+        { "width": 6, "color": "black", "angle": 165, "percent": 0.7 }
+      ]
+    },
+    "M|624": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "sharp", "width": 7 },
+        { "side": 6, "type": "sharp", "width": 7 }
+      ]
+    },
+    "M|b70": {
+      "color": "brown",
+      "quantity": 1,
+      "cities": [
+        { "angle": -170, "width": 22, "percent": 0.5 },
+        { "angle": -10, "width": 22, "percent": 0.5 }
+      ],
+      "names": [
+        { "name": "SD", "angle": -170, "percent": 0.45 },
+        { "name": "SD", "angle": -10, "percent": 0.55 }
+      ],
+      "track": [
+        { "side": 6, "type": "sharp", "width": 7 },
+        { "side": 4, "type": "sharp", "width": 7 },
+        { "side": 4, "type": "gentle", "width": 7 },
+        { "side": 5, "type": "gentle", "width": 7 }
+      ],
+      "tokens": [
+        { "width": 6, "color": "black", "angle": 75, "percent": 0.7 },
+        { "width": 6, "color": "black", "angle": 105, "percent": 0.7 }
+      ]
+    },
+    "M|b322": {
+      "color": "brown",
+      "quantity": 1,
+      "cities": [
+        { "angle": -10, "width": 22, "percent": 0.5 },
+        {
+          "size": 2,
+          "width": 22,
+          "angle": 120,
+          "percent": 0.3,
+          "rotation": -60
+        }
+      ],
+      "names": [
+        { "name": "SD", "angle": -9, "percent": 0.55 },
+        { "name": "SD", "angle": 162, "percent": 0.38 },
+        { "name": "SD", "angle": 70, "percent": 0.45 }
+      ],
+      "track": [
+        { "side": 2, "type": "gentle", "width": 7 },
+        { "side": 5, "type": "gentle", "width": 7 }
+      ],
+      "tokens": [
+        { "width": 6, "color": "black", "angle": 105, "percent": 0.8 },
+        { "width": 6, "color": "black", "angle": 135, "percent": 0.8 }
+      ]
+    },
+    "M|b325": {
+      "color": "brown",
+      "quantity": 1,
+      "cities": [
+        { "size": 2, "width": 22, "angle": -20, "percent": 0.42 },
+        { "size": 2, "width": 22, "angle": -160, "percent": 0.42 }
+      ],
+      "names": [
+        { "name": "SD", "angle": -45, "percent": 0.63 },
+        { "name": "SD", "angle": -127, "percent": 0.56 },
+        { "name": "SD", "angle": 20, "percent": 0.48 },
+        { "name": "SD", "angle": 154, "percent": 0.38 }
+      ],
+      "track": [
+        { "side": 4, "type": "sharp", "width": 7 },
+        { "side": 6, "type": "sharp", "width": 7 }
+      ],
+      "tokens": [
+        { "width": 6, "color": "black", "angle": 75, "percent": 0.7 },
+        { "width": 6, "color": "black", "angle": 105, "percent": 0.7 }
+      ]
+    },
+    "M|b317": {
+      "color": "brown",
+      "quantity": 1,
+      "cities": [
+        { "angle": -30, "width": 22, "percent": 0.6 },
+        {
+          "size": 2,
+          "width": 22,
+          "angle": 150,
+          "percent": 0.1,
+          "rotation": -30
+        }
+      ],
+      "names": [
+        { "name": "SD", "angle": -28, "percent": 0.65 },
+        { "name": "SD", "angle": 70, "percent": 0.33 },
+        { "name": "SD", "angle": -130, "percent": 0.28 }
+      ],
+      "track": [
+        { "side": 2, "type": "straight", "width": 7 },
+        { "side": 6, "type": "sharp", "width": 7 }
+      ],
+      "tokens": [
+        { "width": 6, "color": "black", "angle": 135, "percent": 0.7 },
+        { "width": 6, "color": "black", "angle": 165, "percent": 0.7 }
+      ]
+    },
+    "M|5t4c": {
+      "color": "gray",
+      "quantity": 1,
+      "cities": [
+        { "size": 2, "width": 22, "angle": -25, "percent": 0.52 },
+        { "size": 2, "width": 22, "angle": -180, "percent": 0.3 }
+      ],
+      "names": [
+        { "name": "SD", "angle": 9, "percent": 0.53 },
+        { "name": "SD", "angle": -45, "percent": 0.74 },
+        { "name": "SD", "angle": 130, "percent": 0.38 },
+        { "name": "SD", "angle": -130, "percent": 0.38 }
+      ],
+      "track": [
+        { "side": 1, "type": "stub", "width": 7 },
+        { "type": "custom", "path": "M 0 -100 L 0 -20", "width": 7 },
+        { "side": 2, "type": "straight", "width": 7 },
+        { "side": 6, "type": "gentle", "width": 7 }
+      ],
+      "tokens": [
+        { "width": 6, "color": "black", "angle": 75, "percent": 0.8 },
+        { "width": 6, "color": "black", "angle": 105, "percent": 0.8 }
+      ]
+    },
+    "M|6t4c": {
+      "color": "gray",
+      "quantity": 1,
+      "cities": [
+        { "size": 2, "width": 22, "angle": 0, "percent": 0.35 },
+        { "size": 2, "width": 22, "angle": -180, "percent": 0.35 }
+      ],
+      "names": [
+        { "name": "SD", "angle": 38, "percent": 0.5 },
+        { "name": "SD", "angle": -38, "percent": 0.5 },
+        { "name": "SD", "angle": 135, "percent": 0.43 },
+        { "name": "SD", "angle": -135, "percent": 0.43 }
+      ],
+      "track": [
+        { "type": "custom", "path": "M 0 100 L 0 20", "width": 7 },
+        { "type": "custom", "path": "M 0 -100 L 0 -20", "width": 7 },
+        { "side": 3, "type": "gentle", "width": 7 },
+        { "side": 6, "type": "gentle", "width": 7 }
+      ],
+      "tokens": [
+        { "width": 6, "color": "black", "angle": 75, "percent": 0.8 },
+        { "width": 6, "color": "black", "angle": 105, "percent": 0.8 }
+      ]
+    },
+    "M|SP": {
+      "color": "gray",
+      "quantity": 1,
+      "shapes": [
+        {
+          "type": "circle",
+          "background": true,
+          "color": "spacePortTile",
+          "outlineColor": "black",
+          "outlineWidth": 2,
+          "width": 100
+        }
+      ],
+      "cities": [{ "size": 2, "width": 22 }],
+      "names": [
+        { "name": "SD", "angle": 80, "percent": 0.3 },
+        { "name": "SD", "angle": -80, "percent": 0.3 },
+        { "name": "Space", "fontSize": 14, "angle": 153, "percent": 0.8 },
+        { "name": "Port", "fontSize": 14, "angle": -159, "percent": 0.76 }
+      ],
+      "track": [
+        { "side": 1, "width": 7 },
+        { "side": 3, "width": 7 },
+        { "side": 4, "width": 7 },
+        { "side": 5, "width": 7 }
+      ],
+      "offBoardRevenue": {
+        "angle": 0,
+        "percent": 0.55,
+        "revenues": [
+          {
+            "color": "yellow",
+            "cost": 20
+          },
+          {
+            "color": "green",
+            "cost": 40
+          },
+          {
+            "color": "brown",
+            "textColor": "white",
+            "cost": 50
+          },
+          {
+            "color": "gray",
+            "cost": 10
+          }
+        ]
+      }
+    }
+  },
+  "map": {
+    "hexes": [
+      {
+        "color": "white",
+        "labels": [{ "label": "20c", "fontSize": 24 }],
+        "track": [{ "type": "offboard", "side": 1 }],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "hexes": ["B2"]
+      },
+      {
+        "color": "white",
+        "labels": [{ "label": "20c", "fontSize": 24 }],
+        "track": [{ "type": "offboard", "side": 6 }],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "hexes": ["A3"]
+      },
+      {
+        "color": "white",
+        "labels": [{ "label": "0c", "fontSize": 24 }],
+        "track": [
+          { "type": "offboard", "side": 1 },
+          { "type": "offboard", "side": 5 },
+          { "type": "offboard", "side": 6 }
+        ],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "hexes": ["A5"]
+      },
+      {
+        "color": "white",
+        "labels": [{ "label": "0c", "fontSize": 24 }],
+        "track": [{ "type": "offboard", "side": 5 }],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "hexes": ["B14"]
+      },
+      {
+        "color": "white",
+        "labels": [{ "label": "20c", "fontSize": 24 }],
+        "track": [
+          { "type": "offboard", "side": 4 },
+          { "type": "offboard", "side": 5 }
+        ],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "hexes": ["C15"]
+      },
+      {
+        "color": "white",
+        "labels": [{ "label": "0c", "fontSize": 24 }],
+        "track": [{ "type": "offboard", "side": 1 }],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "hexes": ["K1"]
+      },
+      {
+        "color": "white",
+        "labels": [{ "label": "20c", "fontSize": 24 }],
+        "track": [{ "type": "offboard", "side": 2 }],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "hexes": ["L2"]
+      },
+      {
+        "color": "white",
+        "labels": [{ "label": "0c", "fontSize": 24 }],
+        "track": [{ "type": "offboard", "side": 3 }],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "hexes": ["L4"]
+      },
+      {
+        "color": "white",
+        "labels": [{ "label": "0c", "fontSize": 24 }],
+        "track": [{ "type": "offboard", "side": 2 }],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "hexes": ["M11"]
+      },
+      {
+        "color": "white",
+        "labels": [{ "label": "20c", "fontSize": 24 }],
+        "track": [{ "type": "offboard", "side": 3 }],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "hexes": ["M13"]
+      },
+      {
+        "color": "white",
+        "labels": [{ "label": "0c", "fontSize": 24 }],
+        "track": [
+          { "type": "offboard", "side": 3 },
+          { "type": "offboard", "side": 4 }
+        ],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "hexes": ["L14"]
+      },
+      {
+        "color": "lightlightGray",
+        "tokens": [
+          {
+            "company": "MA"
+          }
+        ],
+        "hexes": ["D2"]
+      },
+      {
+        "color": "lightlightGray",
+        "tokens": [
+          {
+            "company": "ME"
+          }
+        ],
+        "hexes": ["C7"]
+      },
+      {
+        "color": "lightlightGray",
+        "tokens": [
+          {
+            "company": "MV"
+          }
+        ],
+        "hexes": ["D12"]
+      },
+      {
+        "color": "lightlightGray",
+        "tokens": [
+          {
+            "company": "DSE"
+          }
+        ],
+        "hexes": ["G7"]
+      },
+      {
+        "color": "lightlightGray",
+        "tokens": [
+          {
+            "company": "SM"
+          }
+        ],
+        "hexes": ["I5"]
+      },
+      {
+        "color": "lightlightGray",
+        "tokens": [
+          {
+            "company": "I"
+          }
+        ],
+        "hexes": ["I11"]
+      },
+      {
+        "color": "lightlightGray",
+        "tokens": [
+          {
+            "company": "LP"
+          }
+        ],
+        "hexes": ["K9"]
+      },
+      {
+        "color": "lightlightGray",
+        "bgShapes": [
+          {
+            "type": "circle",
+            "color": "spacePort",
+            "outlineColor": "spacePortOutline",
+            "outlineWidth": 2,
+            "width": 50
+          }
+        ],
+        "names": [
+          {
+            "name": "Space",
+            "fontFamily": "Elegante",
+            "fontSize": 12,
+            "fontStyle": "italic",
+            "angle": 180,
+            "percent": 0.1
+          },
+          {
+            "name": "Port",
+            "fontFamily": "Elegante",
+            "fontSize": 12,
+            "fontStyle": "italic",
+            "angle": 0,
+            "percent": 0.2
+          }
+        ],
+        "hexes": ["F8"]
+      },
+      {
+        "color": "white",
+        "labels": [
+          {
+            "label": "Rift",
+            "angle": 150,
+            "percent": 0.4
+          }
+        ],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "hexes": ["H1"]
+      },
+      {
+        "color": "lightlightGray",
+        "tokens": [
+          {
+            "color": "black",
+            "outline": "white",
+            "outlineWidth": 2,
+            "width": 60
+          }
+        ],
+        "names": [
+          {
+            "name": "Rocket",
+            "fontFamily": "Elegante",
+            "fontSize": 12,
+            "color": "white",
+            "angle": 180,
+            "percent": 0.4
+          },
+          {
+            "name": "Launch Pad",
+            "fontFamily": "Elegante",
+            "fontSize": 12,
+            "fontWeight": "bold",
+            "color": "white",
+            "angle": 180,
+            "percent": 0.2
+          },
+          {
+            "name": "BLOCKED",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "color": "white",
+            "angle": 0,
+            "percent": 0.25
+          },
+          {
+            "name": "until OR6",
+            "fontSize": 12,
+            "fontWeight": "bold",
+            "color": "white",
+            "angle": 0,
+            "percent": 0.45
+          }
+        ],
+        "hexes": ["E9"]
+      },
+      {
+        "color": "lightlightGray",
+        "hexes": [
+          "C3",
+          "C5",
+          "C9",
+          "C13",
+          "D8",
+          "D14",
+          "E1",
+          "E7",
+          "F4",
+          "F10",
+          "F14",
+          "G1",
+          "G3",
+          "G5",
+          "G11",
+          "G15",
+          "H8",
+          "H12",
+          "H14",
+          "I9",
+          "J4",
+          "J6",
+          "K3",
+          "L12"
+        ]
+      },
+      {
+        "color": "lightGray",
+        "names": [
+          {
+            "name": "10c",
+            "fontSize": 12,
+            "color": "white"
+          }
+        ],
+        "hexes": ["B6", "C11", "F12", "H4", "H6", "J8", "J12"]
+      },
+      {
+        "color": "darkGray",
+        "names": [
+          {
+            "name": "40c",
+            "fontSize": 12,
+            "color": "white"
+          }
+        ],
+        "hexes": [
+          "B8",
+          "B10",
+          "D4",
+          "D6",
+          "E3",
+          "E11",
+          "E13",
+          "F6",
+          "G9",
+          "I3",
+          "K7",
+          "K11"
+        ]
+      },
+      {
+        "color": "mineralRed",
+        "names": [
+          {
+            "name": "Mineral",
+            "fontFamily": "Elegante",
+            "fontSize": 12,
+            "color": "white",
+            "angle": 180,
+            "percent": 0.2
+          },
+          {
+            "name": "Resource",
+            "fontFamily": "Elegante",
+            "fontSize": 12,
+            "color": "white"
+          },
+          {
+            "name": "20c",
+            "fontSize": 12,
+            "color": "white",
+            "angle": 0,
+            "percent": 0.2
+          }
+        ],
+        "tokens": [
+          { "width": 6, "color": "black", "angle": 105, "percent": 0.7 },
+          { "width": 6, "color": "black", "angle": 135, "percent": 0.7 }
+        ],
+        "hexes": ["E5"]
+      },
+      {
+        "color": "mineralRed",
+        "names": [
+          {
+            "name": "Mineral",
+            "fontFamily": "Elegante",
+            "fontSize": 12,
+            "color": "white",
+            "angle": 180,
+            "percent": 0.2
+          },
+          {
+            "name": "Resource",
+            "fontFamily": "Elegante",
+            "fontSize": 12,
+            "color": "white"
+          },
+          {
+            "name": "20c",
+            "fontSize": 12,
+            "color": "white",
+            "angle": 0,
+            "percent": 0.2
+          }
+        ],
+        "tokens": [
+          { "width": 6, "color": "black", "angle": 105, "percent": 0.7 },
+          { "width": 6, "color": "black", "angle": 135, "percent": 0.7 }
+        ],
+        "hexes": ["G13"]
+      },
+      {
+        "color": "mineralRed",
+        "names": [
+          {
+            "name": "Mineral",
+            "fontFamily": "Elegante",
+            "fontSize": 12,
+            "color": "white",
+            "angle": 180,
+            "percent": 0.2
+          },
+          {
+            "name": "Resource",
+            "fontFamily": "Elegante",
+            "fontSize": 12,
+            "color": "white"
+          },
+          {
+            "name": "20c",
+            "fontSize": 12,
+            "color": "white",
+            "angle": 0,
+            "percent": 0.2
+          }
+        ],
+        "hexes": [
+          "A7",
+          "A9",
+          "B4",
+          "B12",
+          "D10",
+          "E15",
+          "F2",
+          "H2",
+          "H10",
+          "I7",
+          "J2",
+          "J10",
+          "K5",
+          "K13",
+          "L10"
+        ]
+      },
+      {
+        "color": "white",
+        "hexes": ["M2"],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "shapes": [
+          {
+            "type": "hexagon",
+            "color": "brown",
+            "text": "+90",
+            "width": 80,
+            "angle": 180,
+            "percent": 0.5
+          }
+        ]
+      },
+      {
+        "color": "white",
+        "hexes": ["M3"],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "shapes": [
+          {
+            "type": "hexagon",
+            "color": "brown",
+            "text": "+100",
+            "width": 80,
+            "angle": 0,
+            "percent": 0.5
+          }
+        ]
+      },
+      {
+        "color": "white",
+        "hexes": ["N2"],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "shapes": [
+          {
+            "type": "hexagon",
+            "color": "gray",
+            "text": "+100",
+            "width": 80,
+            "angle": 180,
+            "percent": 0.5
+          }
+        ]
+      },
+      {
+        "color": "white",
+        "hexes": ["N3"],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "shapes": [
+          {
+            "type": "hexagon",
+            "color": "gray",
+            "text": "+120",
+            "width": 80,
+            "angle": 0,
+            "percent": 0.5
+          }
+        ]
+      },
+      {
+        "color": "white",
+        "hexes": ["M6"],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "shapes": [
+          {
+            "type": "hexagon",
+            "color": "brown",
+            "text": "+90",
+            "width": 80,
+            "angle": 180,
+            "percent": 0.5
+          }
+        ]
+      },
+      {
+        "color": "white",
+        "hexes": ["M7"],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "shapes": [
+          {
+            "type": "hexagon",
+            "color": "brown",
+            "text": "+80",
+            "width": 80,
+            "angle": 0,
+            "percent": 0.5
+          }
+        ]
+      },
+      {
+        "color": "white",
+        "hexes": ["N6"],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "shapes": [
+          {
+            "type": "hexagon",
+            "color": "gray",
+            "text": "+110",
+            "width": 80,
+            "angle": 180,
+            "percent": 0.5
+          }
+        ]
+      },
+      {
+        "color": "white",
+        "hexes": ["N7"],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "shapes": [
+          {
+            "type": "hexagon",
+            "color": "gray",
+            "text": "+100",
+            "width": 80,
+            "angle": 0,
+            "percent": 0.5
+          }
+        ]
+      }
+    ],
+    "borders": [
+      {
+        "color": "borderGreen",
+        "coords": ["K3p2", "K3p3", "K3p4", "K3p5"]
+      },
+      {
+        "color": "black",
+        "coords": ["G1p4", "G1p5", "G3p4", "G3p5", "G3p6", "G5p1", "G5p6"]
+      },
+      {
+        "color": "borderBlue",
+        "coords": ["A7p2", "A7p3", "B4p6", "B4p1", "B4p2", "B4p3"]
+      },
+      {
+        "color": "borderRed",
+        "coords": ["C13p1", "C13p6", "C13p5", "D14p6"]
+      },
+      {
+        "color": "borderOrange",
+        "coords": ["K13p5", "K13p4", "L12p5", "L12p4", "L12p3"]
+      },
+      {
+        "color": "black",
+        "width": 1,
+        "coords": ["E9p1", "E9p2", "E9p3", "E9p4", "E9p5", "E9p6", "E9p1"]
+      },
+      {
+        "color": "borderBlue",
+        "coords": ["M2p1", "M2p2"]
+      },
+      {
+        "color": "borderGreen",
+        "coords": ["N2p3", "N2p4"]
+      },
+      {
+        "color": "borderBlue",
+        "coords": ["M4p1", "M4p2"]
+      },
+      {
+        "color": "borderOrange",
+        "coords": ["N3p4", "N3p5"]
+      },
+      {
+        "color": "borderRed",
+        "coords": ["M5p6", "M5p1"]
+      },
+      {
+        "color": "borderGreen",
+        "coords": ["N6p3", "N6p4"]
+      },
+      {
+        "color": "borderRed",
+        "coords": ["M7p6", "M7p1"]
+      },
+      {
+        "color": "borderOrange",
+        "coords": ["N7p4", "N7p5"]
+      }
+    ]
+  }
+}

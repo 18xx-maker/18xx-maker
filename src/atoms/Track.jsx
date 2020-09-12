@@ -122,7 +122,7 @@ const Track = ({ type, gauge, border, width, offset, path, color,
                  borderColor, gaugeColor }) => {
   const rotation = useOrientation();
 
-  let trackWidth = width ? width : (border ? 16 : 12);
+  let trackWidth = width ? (border ? width + 4 : width) : (border ? 16 : 12);
   color = color || "track";
   borderColor = borderColor || "border";
   gaugeColor = gaugeColor || "white";
