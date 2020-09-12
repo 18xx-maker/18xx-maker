@@ -5,13 +5,13 @@ games["{{id}}"] = {
   id: "{{id}}",
   slug: "{{slug}}",
   file: "{{file}}",
-  title: "{{title}}",
+  title: "{{{title}}}",
   {{#if subtitle}}
-  subtitle: "{{subtitle}}",
+  subtitle: "{{{subtitle}}}",
   {{/if}}
-  designer: "{{designer}}",
+  designer: "{{{designer}}}",
   {{#if publisher}}
-  publisher: "{{publisher}}",
+  publisher: "{{{publisher}}}",
   {{/if}}
   {{#if group}}
   group: "{{group}}",

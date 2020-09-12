@@ -8,6 +8,7 @@
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/17405/1846-race-midwest",
     "rules": "https://s3-us-west-2.amazonaws.com/gmtwebsiteassets/1846/1846-RULES-GMT.pdf",
+    "license": "https://traxx-denver.com/games/",
     "purchase": "https://traxx-denver.com/games/"
   },
   "wip": true,
