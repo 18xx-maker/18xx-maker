@@ -91,7 +91,7 @@ const Tiles = () => {
       return false;
     }
 
-    if (id !== "" && t.id !== id) {
+    if (id !== "" && !t.id.startsWith(id)) {
       return false;
     }
 

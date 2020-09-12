@@ -1,4 +1,96 @@
 {
+  "HEXY": {
+    "color": "green",
+    "cities": [{ "size": 2 }],
+    "shapes": [
+      {
+        "type": "ellipse",
+        "width": 20,
+        "height": 22,
+        "color": "black",
+        "angle": 90,
+        "percent": 0.333,
+        "y": 10
+      },
+      {
+        "type": "ellipse",
+        "width": 20,
+        "height": 22,
+        "color": "black",
+        "angle": 270,
+        "percent": 0.333,
+        "y": 10
+      },
+      {
+        "type": "ellipse",
+        "width": 6,
+        "height": 8,
+        "color": "white",
+        "angle": 90,
+        "percent": 0.333,
+        "x": 3,
+        "y": 5
+      },
+      {
+        "type": "ellipse",
+        "width": 6,
+        "height": 8,
+        "color": "white",
+        "angle": 270,
+        "percent": 0.333,
+        "x": 3,
+        "y": 5
+      }
+    ],
+    "towns": [{ "percent": 0.667 }],
+    "track": [{ "side": 1 }, { "side": 3 }, { "side": 4 }, { "side": 5 }]
+  },
+  "HEXO": {
+    "color": "green",
+    "cities": [{ "size": 2 }],
+    "shapes": [
+      {
+        "type": "ellipse",
+        "width": 20,
+        "height": 22,
+        "color": "black",
+        "angle": 90,
+        "percent": 0.333,
+        "y": 10
+      },
+      {
+        "type": "ellipse",
+        "width": 20,
+        "height": 22,
+        "color": "black",
+        "angle": 270,
+        "percent": 0.333,
+        "y": 10
+      },
+      {
+        "type": "ellipse",
+        "width": 6,
+        "height": 8,
+        "color": "white",
+        "angle": 90,
+        "percent": 0.333,
+        "x": 3,
+        "y": 5
+      },
+      {
+        "type": "ellipse",
+        "width": 6,
+        "height": 8,
+        "color": "white",
+        "angle": 270,
+        "percent": 0.333,
+        "x": 3,
+        "y": 5
+      }
+    ],
+    "centerTowns": [{ "percent": 0.667 }],
+    "track": [{ "side": 1 }, { "side": 3 }, { "side": 4 }, { "side": 5 }]
+  },
   "10": {
     "color": "green",
     "values": [
