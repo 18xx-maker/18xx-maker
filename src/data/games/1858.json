@@ -1,6 +1,8 @@
 {
   "info": {
     "title": "1858",
+    "titleX": 1650,
+    "titleY": 1400,
     "subtitle": "The Railways of Iberia",
     "designer": "Ian Wilson",
     "publisher": "aag",
@@ -654,8 +656,8 @@
   "map": {
     "roundTracker": {
       "type": "row",
-      "x": 457,
-      "y": 790
+      "x": 1650,
+      "y": 1308
     },
     "hexes": [
       {
@@ -693,6 +695,50 @@
           }
         ],
         "hexes": ["D5", "D7", "E2", "E4", "E6", "E16", "G2", "I18", "M6"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 80
+          }
+        ],
+        "hexes": ["H9", "I6", "I8", "I16", "K10", "L5", "L11", "O6"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 120
+          }
+        ],
+        "hexes": ["I20", "M4", "N5"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 20
+          }
+        ],
+        "hexes": [
+          "C8",
+          "C12",
+          "C16",
+          "C18",
+          "D9",
+          "E8",
+          "E12",
+          "E14",
+          "F7",
+          "F15",
+          "G14",
+          "K6",
+          "M8"
+        ]
       },
       {
         "color": "gray",
