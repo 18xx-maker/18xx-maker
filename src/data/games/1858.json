@@ -1750,6 +1750,10 @@
     ],
     "borders": [
       {
+        "color": "water",
+        "coords": ["A14p4", "A14p5"]
+      },
+      {
         "color": "orange",
         "dashed": true,
         "dashArray": "12 24",
