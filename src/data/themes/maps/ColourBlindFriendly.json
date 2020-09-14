@@ -2,10 +2,10 @@
   "name": "Colour Blind Friendly",
   "colors": {
     "plain": "#cfe6c5",
-    "yellow": "#FFFF00",
+    "yellow": "#ffff00",
     "green": "#71c844",
-    "brown": "#7A75B5",
-    "gray": "#FF8DA1",
+    "brown": "#7a75b5",
+    "gray": "#ff8da1",
 
     "offboard": "#ec232a",
     "mountain": "#cd8c5e",
@@ -13,17 +13,17 @@
     "land": "#8da98c",
     "river": "#9ccac3",
 
-    "white": "#fff",
-    "black": "#000",
+    "white": "#ffffff",
+    "black": "#000000",
 
     "orange": "#f47d20",
     "red": "#ec232a",
 
-    "track": "#000",
-    "border": "#fff",
-    "town": "#000",
-    "centerTown": "#000",
-    "city": "#fff",
-    "halt": "#666"
+    "track": "#000000",
+    "border": "#ffffff",
+    "town": "#000000",
+    "centerTown": "#000000",
+    "city": "#ffffff",
+    "halt": "#666666"
   }
 }
