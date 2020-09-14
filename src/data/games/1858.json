@@ -391,6 +391,7 @@
     {
       "name": "Havana & Güines Railway",
       "id": "P1",
+      "token": { "color": "yellow" },
       "bid": 30,
       "price": 30,
       "revenue": 10
@@ -398,6 +399,7 @@
     {
       "name": "Barcelona & Mataró Railway",
       "id": "P2",
+      "token": { "color": "yellow" },
       "bid": 90,
       "price": 115,
       "revenue": [23, 35]
@@ -405,6 +407,7 @@
     {
       "name": "Madrid & Aranjuez Railway",
       "id": "P3",
+      "token": { "color": "yellow" },
       "bid": 100,
       "price": 125,
       "revenue": [25, 38]
@@ -412,6 +415,7 @@
     {
       "name": "Porto & Lisbon Railway",
       "id": "P4",
+      "token": { "color": "yellow" },
       "bid": 90,
       "price": 110,
       "revenue": [22, 33]
@@ -419,6 +423,7 @@
     {
       "name": "Valencia & Jativa Railway",
       "id": "P5",
+      "token": { "color": "yellow" },
       "bid": 80,
       "price": 100,
       "revenue": [20, 30]
@@ -426,6 +431,7 @@
     {
       "name": "Reus & Tarragona Railway",
       "id": "P6",
+      "token": { "color": "yellow" },
       "bid": 50,
       "price": 60,
       "revenue": [12, 18]
@@ -433,6 +439,7 @@
     {
       "name": "Lisbon & Carregado Railway",
       "id": "P7",
+      "token": { "color": "yellow" },
       "bid": 70,
       "price": 90,
       "revenue": [18, 27]
@@ -440,6 +447,7 @@
     {
       "name": "Madrid & Valladolid Railway",
       "id": "P8",
+      "token": { "color": "yellow" },
       "bid": 95,
       "price": 120,
       "revenue": [24, 36]
@@ -447,6 +455,7 @@
     {
       "name": "Madrid & Zaragoza Railway",
       "id": "P9",
+      "token": { "color": "yellow" },
       "bid": 75,
       "price": 95,
       "revenue": [19, 29]
@@ -454,6 +463,7 @@
     {
       "name": "Córdoba & Seville Railway",
       "id": "P10",
+      "token": { "color": "yellow" },
       "bid": 85,
       "price": 105,
       "revenue": [21, 32]
@@ -461,6 +471,7 @@
     {
       "name": "Seville, Jerez, & Cadiz Railway",
       "id": "P11",
+      "token": { "color": "yellow" },
       "bid": 55,
       "price": 70,
       "revenue": [14, 21]
@@ -468,6 +479,7 @@
     {
       "name": "Zaragoza & Pamplona Railway",
       "id": "P12",
+      "token": { "color": "yellow" },
       "bid": 65,
       "price": 80,
       "revenue": [16, 24]
@@ -475,6 +487,7 @@
     {
       "name": "Castejón & Bilbao Railway",
       "id": "P13",
+      "token": { "color": "yellow" },
       "bid": 60,
       "price": 75,
       "revenue": [15, 23]
@@ -482,6 +495,8 @@
     {
       "name": "Córdoba & Málaga Railway",
       "id": "P14",
+      "token": { "color": "yellow" },
+      "token": { "color": "yellow" },
       "bid": 70,
       "price": 85,
       "revenue": [17, 26]
@@ -489,6 +504,7 @@
     {
       "name": "Murcia & Cartagena Railway",
       "id": "P15",
+      "token": { "color": "yellow" },
       "bid": 55,
       "price": 70,
       "revenue": [14, 21]
@@ -496,6 +512,7 @@
     {
       "name": "Alar & Santander Railway",
       "id": "P16",
+      "token": { "color": "yellow" },
       "bid": 65,
       "price": 80,
       "revenue": [16, 24]
@@ -503,6 +520,7 @@
     {
       "name": "Badajoz & Ciudad Real Railway",
       "id": "P17",
+      "token": { "color": "yellow" },
       "bid": 50,
       "price": 65,
       "revenue": [13, 20]
@@ -510,6 +528,7 @@
     {
       "name": "Santiago & La Coruña Railway",
       "id": "P18",
+      "token": { "color": "green" },
       "bid": 100,
       "price": 100,
       "revenue": 30
@@ -517,6 +536,7 @@
     {
       "name": "Medina & Salamanca Railway",
       "id": "P19",
+      "token": { "color": "green" },
       "bid": 90,
       "price": 90,
       "revenue": 27
@@ -524,6 +544,7 @@
     {
       "name": "Cáceres, Madrid, & Portugal Railway",
       "id": "P20",
+      "token": { "color": "green" },
       "bid": 165,
       "price": 135,
       "revenue": 40
@@ -531,6 +552,7 @@
     {
       "name": "Orense & Vigo Railway",
       "id": "P21",
+      "token": { "color": "green" },
       "bid": 110,
       "price": 110,
       "revenue": 33
@@ -538,6 +560,7 @@
     {
       "name": "León & Gijón Railway",
       "id": "P22",
+      "token": { "color": "green" },
       "bid": 120,
       "price": 120,
       "revenue": 36
@@ -667,18 +690,24 @@
           "B3",
           "B17",
           "B19",
+          "C6",
           "C10",
           "C14",
           "D11",
           "D17",
           "E10",
+          "F17",
+          "G4",
+          "G16",
           "H7",
           "I12",
           "J7",
+          "J9",
           "J11",
           "J13",
           "J17",
           "J19",
+          "K8",
           "K12",
           "K14",
           "K16",
@@ -704,7 +733,18 @@
             "cost": 80
           }
         ],
-        "hexes": ["H9", "I6", "I8", "I16", "K10", "L5", "L11", "O6"]
+        "hexes": [
+          "F3",
+          "F11",
+          "H9",
+          "I6",
+          "I8",
+          "I16",
+          "K10",
+          "L5",
+          "L11",
+          "O6"
+        ]
       },
       {
         "color": "plain",
@@ -734,6 +774,7 @@
           "E12",
           "E14",
           "F7",
+          "F13",
           "F15",
           "G14",
           "K6",
@@ -913,6 +954,611 @@
           }
         ],
         "hexes": ["L19"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": { "name": "Vigo" }
+          }
+        ],
+        "hexes": ["B5"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Braga" }
+          }
+        ],
+        "hexes": ["B7"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "angle": 90,
+            "percent": 0.8,
+            "label": "P"
+          },
+          {
+            "angle": 150,
+            "percent": 0.8,
+            "label": "Y"
+          }
+        ],
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 20,
+            "angle": 270,
+            "percent": 0.667
+          }
+        ],
+        "cities": [
+          {
+            "name": { "name": "Porto" }
+          }
+        ],
+        "hexes": ["B9"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Coimbra" }
+          }
+        ],
+        "hexes": ["B11"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Santarém" },
+            "angle": 180,
+            "percent": 0.333
+          }
+        ],
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 20,
+            "percent": 0.5
+          }
+        ],
+        "hexes": ["B13"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Setúbal" }
+          }
+        ],
+        "hexes": ["B15"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": { "name": "La Coruña" }
+          }
+        ],
+        "hexes": ["C2"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Santiago" },
+            "angle": 120,
+            "percent": 0.5
+          },
+          {
+            "name": { "name": "Orense" },
+            "angle": 240,
+            "percent": 0.5
+          }
+        ],
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 40,
+            "percent": 0.5
+          }
+        ],
+        "hexes": ["C4"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Faro" },
+            "angle": 180,
+            "percent": 0.333
+          }
+        ],
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 20,
+            "percent": 0.5
+          }
+        ],
+        "hexes": ["C20"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Lugo" }
+          }
+        ],
+        "hexes": ["D3"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Cáceres" },
+            "angle": 180,
+            "percent": 0.333
+          }
+        ],
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 20,
+            "percent": 0.5
+          }
+        ],
+        "hexes": ["D13"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Badajoz" },
+            "angle": 180,
+            "percent": 0.333
+          }
+        ],
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 20,
+            "percent": 0.5
+          }
+        ],
+        "hexes": ["D15"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Huelva" }
+          }
+        ],
+        "hexes": ["D19"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "Y",
+            "angle": 150,
+            "percent": 0.8
+          }
+        ],
+        "terrain": [
+          {
+            "type": "water",
+            "angle": 330,
+            "cost": 20,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": { "name": "Sevilla" }
+          }
+        ],
+        "hexes": ["E18"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "angle": 210,
+            "cost": 20,
+            "percent": 0.7
+          }
+        ],
+        "cities": [
+          {
+            "name": { "name": "Cádiz", "reverse": true }
+          }
+        ],
+        "hexes": ["E20"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "León" }
+          }
+        ],
+        "hexes": ["F5"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Salamanca" }
+          }
+        ],
+        "hexes": ["F9"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Marchena" },
+            "angle": 180,
+            "percent": 0.333
+          }
+        ],
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 20,
+            "percent": 0.5
+          }
+        ],
+        "hexes": ["F19"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Palencia" }
+          }
+        ],
+        "hexes": ["G6"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": { "name": "Valladolid" }
+          }
+        ],
+        "hexes": ["G8"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Ávila" }
+          }
+        ],
+        "hexes": ["G10"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Talavera" },
+            "angle": 180,
+            "percent": 0.333
+          }
+        ],
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 20,
+            "percent": 0.5
+          }
+        ],
+        "hexes": ["G12"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 20,
+            "percent": 0.5
+          }
+        ],
+        "cities": [
+          {
+            "angle": 180,
+            "percent": 0.3,
+            "name": { "name": "Córdoba" }
+          }
+        ],
+        "hexes": ["G18"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "angle": 150,
+            "label": "Y",
+            "percent": 0.8
+          }
+        ],
+        "terrain": [
+          {
+            "type": "water",
+            "angle": 210,
+            "cost": 20,
+            "percent": 0.667
+          }
+        ],
+        "cities": [
+          {
+            "percent": 0.3,
+            "name": { "name": "Málaga" }
+          }
+        ],
+        "hexes": ["G20"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 40,
+            "percent": 0.5
+          }
+        ],
+        "cities": [
+          {
+            "angle": 180,
+            "percent": 0.3,
+            "name": { "name": "Santander" }
+          }
+        ],
+        "hexes": ["H3"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Burgos" }
+          }
+        ],
+        "hexes": ["H5"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Ciudad Real" }
+          }
+        ],
+        "hexes": ["H15"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": 90,
+            "percent": 0.4,
+            "name": {
+              "name": "Jaén",
+              "reverse": true
+            }
+          },
+          {
+            "angle": 270,
+            "percent": 0.4,
+            "name": {
+              "name": "Linares"
+            }
+          }
+        ],
+        "hexes": ["H17"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": { "name": "Granada" }
+          }
+        ],
+        "hexes": ["H19"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": { "name": "Bilbao" }
+          }
+        ],
+        "hexes": ["I2"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Vitoria" }
+          }
+        ],
+        "hexes": ["I4"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Guadalajara" }
+          }
+        ],
+        "hexes": ["I10"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "San Sebastián" }
+          }
+        ],
+        "hexes": ["J3"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Logroño" }
+          }
+        ],
+        "hexes": ["J5"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Albacete" }
+          }
+        ],
+        "hexes": ["J15"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Pamplona" }
+          }
+        ],
+        "hexes": ["K4"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 20,
+            "percent": 0.5
+          }
+        ],
+        "cities": [
+          {
+            "angle": 180,
+            "percent": 0.3,
+            "name": { "name": "Murcia" }
+          }
+        ],
+        "hexes": ["K18"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "Y",
+            "angle": 150,
+            "percent": 0.8
+          }
+        ],
+        "terrain": [
+          {
+            "type": "water",
+            "angle": 330,
+            "cost": 20,
+            "percent": 0.75
+          }
+        ],
+        "cities": [
+          {
+            "name": { "name": "Valencia" }
+          }
+        ],
+        "hexes": ["L13"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Tortosa" }
+          }
+        ],
+        "hexes": ["M10"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Castellón" }
+          }
+        ],
+        "hexes": ["M12"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Lérida" }
+          }
+        ],
+        "hexes": ["N7"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": 90,
+            "percent": 0.4,
+            "name": {
+              "name": "Reus",
+              "reverse": true
+            }
+          },
+          {
+            "angle": 270,
+            "percent": 0.4,
+            "name": {
+              "name": "Tarragona"
+            }
+          }
+        ],
+        "hexes": ["N9"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "B",
+            "angle": 150,
+            "percent": 0.8
+          }
+        ],
+        "cities": [
+          {
+            "name": { "name": "Barcelona" }
+          }
+        ],
+        "hexes": ["O8"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "name": { "name": "Gerona" },
+            "angle": 180,
+            "percent": 0.333
+          }
+        ],
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 40,
+            "percent": 0.5
+          }
+        ],
+        "hexes": ["P7"]
       },
       {
         "color": "yellow",
@@ -1100,6 +1746,215 @@
         ],
         "removeBorders": [3],
         "hexes": ["P5"]
+      }
+    ],
+    "borders": [
+      {
+        "color": "orange",
+        "dashed": true,
+        "dashArray": "12 24",
+        "offset": 0,
+        "width": 4,
+        "coords": [
+          "B5p6",
+          "B5p5",
+          "C6p6",
+          "C6p5",
+          "D5p6",
+          "D5p5",
+          "D5p4",
+          "D5p3",
+          "D3p4",
+          "D3p3"
+        ]
+      },
+      {
+        "color": "orange",
+        "dashed": true,
+        "dashArray": "12 24",
+        "offset": 0,
+        "width": 4,
+        "coords": ["E2p6", "E2p5", "F3p6", "F3p5", "G2p6", "G2p5", "G2p4"]
+      },
+      {
+        "color": "orange",
+        "dashed": true,
+        "dashArray": "12 24",
+        "offset": 0,
+        "width": 4,
+        "coords": ["H3p1", "H3p6", "H3p5", "H3p4", "H3p3"]
+      },
+      {
+        "color": "orange",
+        "dashed": true,
+        "dashArray": "12 24",
+        "offset": 0,
+        "width": 4,
+        "coords": [
+          "I4p1",
+          "I4p6",
+          "I4p5",
+          "J5p6",
+          "J5p5",
+          "K4p6",
+          "K4p5",
+          "K4p4"
+        ]
+      },
+      {
+        "color": "orange",
+        "dashed": true,
+        "dashArray": "12 24",
+        "offset": 0,
+        "width": 4,
+        "coords": [
+          "E6p1",
+          "E8p2",
+          "E8p3",
+          "E8p4",
+          "E8p5",
+          "E8p6",
+          "E10p1",
+          "E10p6"
+        ]
+      },
+      {
+        "color": "orange",
+        "dashed": true,
+        "dashArray": "12 24",
+        "offset": 0,
+        "width": 4,
+        "coords": ["D13p1", "D13p6", "D15p1", "D15p6", "D17p1", "D17p6"]
+      },
+      {
+        "color": "orange",
+        "dashed": true,
+        "dashArray": "12 24",
+        "offset": 0,
+        "width": 4,
+        "coords": ["G12p1", "G12p6", "G14p1", "G14p6"]
+      },
+      {
+        "color": "orange",
+        "dashed": true,
+        "dashArray": "12 24",
+        "offset": 0,
+        "width": 4,
+        "coords": ["J17p1", "J17p6", "J19p1", "J19p6"]
+      },
+      {
+        "color": "orange",
+        "dashed": true,
+        "dashArray": "12 24",
+        "offset": 0,
+        "width": 4,
+        "coords": ["K12p2", "K12p1", "K12p6", "K14p1", "K14p6"]
+      },
+      {
+        "color": "orange",
+        "dashed": true,
+        "dashArray": "12 24",
+        "offset": 0,
+        "width": 4,
+        "coords": ["M10p1", "M10p6", "M10p5"]
+      },
+      {
+        "color": "orange",
+        "dashed": true,
+        "dashArray": "12 24",
+        "offset": 0,
+        "width": 4,
+        "coords": [
+          "B11p1",
+          "B11p6",
+          "B11p5",
+          "C12p6",
+          "C12p5",
+          "C12p4",
+          "D11p5",
+          "D11p4",
+          "E10p5",
+          "F11p6",
+          "F11p5",
+          "F11p4",
+          "G10p5",
+          "G10p4",
+          "H9p5",
+          "H9p4",
+          "I8p5",
+          "I8p4",
+          "J7p5",
+          "J7p4",
+          "J7p3"
+        ]
+      },
+      {
+        "color": "orange",
+        "dashed": true,
+        "dashArray": "12 24",
+        "offset": 0,
+        "width": 4,
+        "coords": [
+          "K8p1",
+          "K8p6",
+          "K10p1",
+          "K10p6",
+          "K10p5",
+          "K10p4",
+          "L9p5",
+          "L9p4",
+          "M8p5",
+          "M8p4",
+          "M8p3",
+          "M6p4",
+          "M6p3",
+          "M4p4"
+        ]
+      },
+      {
+        "color": "orange",
+        "dashed": true,
+        "dashArray": "12 24",
+        "offset": 0,
+        "width": 4,
+        "coords": [
+          "G4p1",
+          "G4p6",
+          "G6p1",
+          "G6p6",
+          "G8p1",
+          "G8p6",
+          "G10p1",
+          "G10p6"
+        ]
+      },
+      {
+        "color": "orange",
+        "dashed": true,
+        "dashArray": "12 24",
+        "offset": 0,
+        "width": 4,
+        "coords": [
+          "D19p6",
+          "D19p1",
+          "D19p2",
+          "D19p3",
+          "E18p2",
+          "E18p3",
+          "F17p2",
+          "F17p3",
+          "G16p2",
+          "G16p3",
+          "G16p4",
+          "H17p3",
+          "H17p4",
+          "I18p3",
+          "J17p2",
+          "J17p3",
+          "K16p2",
+          "K16p3",
+          "K16p4"
+        ]
       }
     ]
   }
