@@ -9,6 +9,7 @@
     "extraStationTokens": 1,
     "currency": "# kr"
   },
+  "prototype": true,
   "links": {
     "rules": "https://drive.google.com/file/d/1zhyEpSErVc2Qyd8AJusbltVE70FL24oh/view"
   },

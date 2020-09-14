@@ -36,7 +36,7 @@ import WarningIcon from "@material-ui/icons/Warning";
 import File from "../util/File";
 
 import { makeStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
+import { green, blue } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -125,11 +125,15 @@ const GameNav = () => {
         <File data={game}
               filename={`${game.id}.json`}
               list/>
+        {game.prototype && (
+          <ListItem>
+            <ListItemIcon><WarningIcon style={{color: blue[500]}}/></ListItemIcon>
+            <ListItemText primary={t('prototype.prototype')} secondary={t('prototype.description')}/>
+          </ListItem>
+        )}
         {game.wip && (
           <ListItem>
-            <ListItemIcon>
-              <WarningIcon className={classes.warning}/>
-            </ListItemIcon>
+            <ListItemIcon><WarningIcon className={classes.warning}/></ListItemIcon>
             <ListItemText primary={t('wip.wip')} secondary={t('wip.description')}/>
           </ListItem>
         )}
