@@ -8,7 +8,7 @@ import RotateContext from "../context/RotateContext";
 
 import defaultTo from "ramda/src/defaultTo";
 
-const Value = ({ value, shape, fixed, outerBorderColor }) => {
+const Value = ({ value, color, textColor, shape, fixed, outerBorderColor }) => {
   const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
 
@@ -16,6 +16,8 @@ const Value = ({ value, shape, fixed, outerBorderColor }) => {
   let size = 15;
   let ry = 14;
   let rx = length > 2 ? length * 6 : 14;
+  color = color || "white";
+  textColor = textColor || "black";
 
   return (
     <RotateContext.Consumer>
@@ -34,7 +36,7 @@ const Value = ({ value, shape, fixed, outerBorderColor }) => {
               }
 
               bg = (
-                <rect fill={p("white")} stroke={p("black")} strokeWidth="2"
+                <rect fill={p(color)} stroke={p("black")} strokeWidth="2"
                       x={-rx} y={-ry}
                       width={2*rx} height={2*ry} />
               );
@@ -48,7 +50,7 @@ const Value = ({ value, shape, fixed, outerBorderColor }) => {
               }
 
               bg = (
-                <ellipse fill={p("white")} stroke={p("black")} strokeWidth="2"
+                <ellipse fill={p(color)} stroke={p("black")} strokeWidth="2"
                          cx="0" cy="0"
                          rx={rx} ry={ry}
                 />
@@ -64,7 +66,7 @@ const Value = ({ value, shape, fixed, outerBorderColor }) => {
                   fontWeight="bold"
                   fontSize={size}
                   fontFamily={defaultTo("sans-serif", game.info.valueFontFamily)}
-                  fill={p("black")}
+                  fill={c(textColor) || t(c(color))}
                   dominantBaseline="central"
                   textAnchor="middle"
                   textLength={length > 2 ? (rx + 6) : null}
