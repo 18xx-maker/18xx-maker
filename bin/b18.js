@@ -51,13 +51,8 @@ const server = app.listen(9000);
   let author = process.argv[4];
 
   let gameDef = gameDefs[bname];
-  let game;
-  if (gameDef.local) {
-    game = require("../src/data/games/" + gameDef.file);
-  } else {
-    game = require("@18xx-maker/games/games/" + gameDef.file);
-  }
-  let tiles = require("@18xx-maker/games").tiles;
+  let game = require("../src/data/games/" + gameDef.file);
+  let tiles = require("../src/data/tiles/");
 
   const getTile = gutil.getTile(tiles, game.tiles || {});
 

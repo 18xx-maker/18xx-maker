@@ -2111,10 +2111,12 @@
         "value": 10
       }
     ],
-    "towns": [{
+    "towns": [
+      {
         "angle": 180,
         "percent": 0.4
-        }],
+      }
+    ],
     "track": [
       {
         "type": "straight",
@@ -2136,10 +2138,12 @@
         "value": 10
       }
     ],
-    "towns": [{
+    "towns": [
+      {
         "angle": 180,
         "percent": 0.4
-        }],
+      }
+    ],
     "track": [
       {
         "type": "straight",
@@ -2161,11 +2165,13 @@
         "value": 10
       }
     ],
-    "towns": [{
+    "towns": [
+      {
         "rotate": -45,
         "x": -34,
         "y": -13
-        }],
+      }
+    ],
     "track": [
       {
         "type": "straight",
@@ -2187,11 +2193,13 @@
         "value": 10
       }
     ],
-    "towns": [{
+    "towns": [
+      {
         "rotate": 45,
         "x": 34,
         "y": -13
-        }],
+      }
+    ],
     "track": [
       {
         "type": "straight",
@@ -2213,10 +2221,12 @@
         "value": 10
       }
     ],
-    "towns": [{
+    "towns": [
+      {
         "angle": 180,
         "percent": 0.3
-        }],
+      }
+    ],
     "track": [
       {
         "type": "straight",
@@ -2238,10 +2248,12 @@
         "value": 10
       }
     ],
-    "towns": [{
+    "towns": [
+      {
         "angle": 180,
         "percent": 0.3
-        }],
+      }
+    ],
     "track": [
       {
         "type": "straight",
@@ -2263,11 +2275,13 @@
         "value": 10
       }
     ],
-    "towns": [{
+    "towns": [
+      {
         "rotate": -75,
         "x": -34,
         "y": 33
-        }],
+      }
+    ],
     "track": [
       {
         "type": "straight",
@@ -2289,11 +2303,13 @@
         "value": 10
       }
     ],
-    "towns": [{
+    "towns": [
+      {
         "rotate": 75,
         "x": 34,
         "y": 33
-        }],
+      }
+    ],
     "track": [
       {
         "type": "straight",
@@ -2315,11 +2331,13 @@
         "value": 10
       }
     ],
-    "towns": [{
+    "towns": [
+      {
         "rotate": -45,
         "x": -34,
         "y": -13
-        }],
+      }
+    ],
     "track": [
       {
         "type": "gentle",
@@ -2341,11 +2359,13 @@
         "value": 10
       }
     ],
-    "towns": [{
+    "towns": [
+      {
         "rotate": 45,
         "x": 34,
         "y": -13
-        }],
+      }
+    ],
     "track": [
       {
         "type": "gentle",
@@ -2367,11 +2387,13 @@
         "value": 10
       }
     ],
-    "towns": [{
+    "towns": [
+      {
         "rotate": 45,
         "x": 34,
         "y": -13
-        }],
+      }
+    ],
     "track": [
       {
         "type": "gentle",
@@ -2393,11 +2415,13 @@
         "value": 10
       }
     ],
-    "towns": [{
+    "towns": [
+      {
         "rotate": -45,
         "x": -34,
         "y": -13
-        }],
+      }
+    ],
     "track": [
       {
         "type": "gentle",
@@ -2419,11 +2443,13 @@
         "value": 10
       }
     ],
-    "towns": [{
+    "towns": [
+      {
         "rotate": 75,
         "x": 34,
         "y": 33
-        }],
+      }
+    ],
     "track": [
       {
         "type": "gentle",
@@ -2445,11 +2471,13 @@
         "value": 10
       }
     ],
-    "towns": [{
+    "towns": [
+      {
         "rotate": -75,
         "x": -34,
         "y": 33
-        }],
+      }
+    ],
     "track": [
       {
         "type": "gentle",
@@ -2505,12 +2533,14 @@
         "rotate": -30
       }
     ],
-    "labels": [{
+    "labels": [
+      {
         "label": "Bu",
         "angle": 210,
         "percent": 0.78,
         "rotate": -30
-        }],
+      }
+    ],
     "cities": [
       {
         "rotation": 300,
@@ -2538,28 +2568,25 @@
     ]
   },
   "426": {
-      "color": "green",
-      "values": [
-          {
-              "value": 30,
-              "angle": 210,
-              "percent": 0.82,
-              "rotate": -30
-          }
-      ],
-      "labels": [
-          {
-              "label": "Bo",
-              "angle": 60,
-              "percent": 0.68,
-              "rotate": -30
-          }
-      ],
-      "cities": [{}],
-      "track": [
-          {"side": 3},
-          {"side": 4}
-      ]
+    "color": "green",
+    "values": [
+      {
+        "value": 30,
+        "angle": 210,
+        "percent": 0.82,
+        "rotate": -30
+      }
+    ],
+    "labels": [
+      {
+        "label": "Bo",
+        "angle": 60,
+        "percent": 0.68,
+        "rotate": -30
+      }
+    ],
+    "cities": [{}],
+    "track": [{ "side": 3 }, { "side": 4 }]
   },
   "427": {
     "color": "green",
