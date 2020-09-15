@@ -1,0 +1,171 @@
+{
+  "info": {
+    "title": "1888",
+    "designer": "Anthony Fryer",
+    "background": "gray",
+    "currency": "$#"
+  },
+  "links": {
+    "bgg": "https://boardgamegeek.com/boardgame/306259/1888",
+    "rules": "https://drive.google.com/file/d/1oaaEtpR5mXjLDTG_M5NJefoTpeRJbFCc/view",
+    "license": "https://traxx-denver.com/games/",
+    "purchase": "https://traxx-denver.com/games/"
+  },
+  "wip": true,
+  "tokens": ["Round"],
+  "ipo": true,
+  "bank": 12000,
+  "tiles": {
+    "1": 1,
+    "2": 1,
+    "3": 2,
+    "4": 2,
+    "7": 4,
+    "8": 8,
+    "9": 7,
+    "14": 3,
+    "15": 2,
+    "16": 1,
+    "18": 1,
+    "19": 1,
+    "20": 1,
+    "23": 3,
+    "24": 3,
+    "25": 1,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "39": 1,
+    "40": 1,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 1,
+    "45": 2,
+    "46": 2,
+    "47": 1,
+    "53": 2,
+    "54": 1,
+    "55": 1,
+    "56": 1,
+    "57": 4,
+    "58": 2,
+    "59": 2,
+    "61": 2,
+    "62": 1,
+    "63": 3,
+    "64": 1,
+    "65": 1,
+    "66": 1,
+    "67": 1,
+    "68": 1,
+    "69": 1,
+    "70": 1,
+    "88|OO1": {
+      "color": "gray",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "straight" },
+        { "side": 2, "type": "straight" },
+        { "side": 3, "type": "straight" }
+      ],
+      "cities": [{ "size": 3, "rotation": 30 }],
+      "labels": [
+        {
+          "label": "OO",
+          "rotation": 30,
+          "angle": -95,
+          "percent": 0.8,
+          "size": 20
+        }
+      ],
+      "values": [
+        {
+          "value": 70,
+          "rotation": 30,
+          "angle": -150,
+          "percent": 0.85
+        }
+      ]
+    },
+    "88|OO2": {
+      "color": "gray",
+      "quantity": 1,
+      "track": [
+        { "side": 2, "type": "sharp" },
+        { "side": 3, "type": "gentle", "cross": "under" },
+        { "side": 4, "type": "gentle", "cross": "over" },
+        { "side": 6, "type": "sharp" }
+      ],
+      "cities": [
+        {
+          "size": 2,
+          "angle": 90,
+          "rotation": 90,
+          "percent": 0.4
+        },
+        {
+          "angle": -55,
+          "percent": 0.6
+        }
+      ],
+      "labels": [
+        {
+          "label": "OO",
+          "rotation": 30,
+          "angle": -95,
+          "percent": 0.8,
+          "size": 20
+        }
+      ],
+      "values": [
+        {
+          "value": 70,
+          "rotation": 30,
+          "angle": -150,
+          "percent": 0.85
+        }
+      ]
+    },
+    "88|OO3": {
+      "color": "gray",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "sharp" },
+        { "side": 3, "type": "sharp" },
+        { "side": 4, "type": "gentle", "cross": "over" },
+        { "side": 5, "type": "gentle", "cross": "under" }
+      ],
+      "cities": [
+        {
+          "size": 2,
+          "rotation": 30,
+          "angle": 30,
+          "percent": 0.4
+        },
+        {
+          "angle": 170,
+          "percent": 0.5
+        }
+      ],
+      "labels": [
+        {
+          "label": "OO",
+          "rotation": 30,
+          "angle": -95,
+          "percent": 0.8,
+          "size": 20
+        }
+      ],
+      "values": [
+        {
+          "value": 70,
+          "rotation": 30,
+          "angle": -150,
+          "percent": 0.85
+        }
+      ]
+    }
+  }
+}

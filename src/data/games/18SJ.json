@@ -1,0 +1,2446 @@
+{
+  "info": {
+    "title": "18SJ",
+    "subtitle": "Let there be rail",
+    "designer": "Örjan Wennman",
+    "background": "_pink",
+    "titleX": 50,
+    "titleY": 600,
+    "extraStationTokens": 1,
+    "currency": "# kr"
+  },
+  "prototype": true,
+  "links": {
+    "rules": "https://drive.google.com/file/d/1zhyEpSErVc2Qyd8AJusbltVE70FL24oh/view"
+  },
+  "tokens": [
+    {
+      "label": "Round",
+      "quantity": 0,
+      "print": 1
+    },
+    {
+      "label": "20",
+      "quantity": 0,
+      "print": 1
+    },
+    {
+      "label": "30",
+      "quantity": 0,
+      "print": 1
+    },
+    {
+      "label": "50",
+      "quantity": 0,
+      "print": 1
+    },
+    {
+      "label": "KHJ",
+      "fontSize": 24
+    },
+    {
+      "color": "white",
+      "label": "+30",
+      "icon": "port"
+    },
+    {
+      "color": "white",
+      "icon": "steamboat",
+      "quantity": 3,
+      "iconWidth": 50
+    },
+    {
+      "color": "white",
+      "label": "B",
+      "fontSize": 24
+    },
+    {
+      "color": "white",
+      "label": "M",
+      "fontSize": 24
+    },
+    {
+      "logo": "SJ",
+      "logoWidth": 100,
+      "quantity": "∞",
+      "print": 13
+    }
+  ],
+  "bank": 12000,
+  "tokenTypes": {
+    "one": ["Home"],
+    "two": ["Home", 40],
+    "three": ["Home", 40, 100],
+    "four": ["Home", 40, 100, 100]
+  },
+  "colors": {
+    "mainline": "#98ff98",
+    "_blue": "#4472c4",
+    "_red": "#ff0000",
+    "_green": "#548135",
+    "_yellow": "#ffff00",
+    "_lime": "#52d017",
+    "_black": "#0c0c0c",
+    "_purple": "#7030a0",
+    "_brown": "#6f4e37",
+    "_pink": "#f52887",
+    "_orange": "#ff6600",
+    "_turquoise": "#43c6db"
+  },
+  "players": [
+    {
+      "number": 2,
+      "certLimit": 28,
+      "capital": 1200
+    },
+    {
+      "number": 3,
+      "certLimit": 20,
+      "capital": 800
+    },
+    {
+      "number": 4,
+      "certLimit": 16,
+      "capital": 600
+    },
+    {
+      "number": 5,
+      "certLimit": 13,
+      "capital": 480
+    },
+    {
+      "number": 6,
+      "certLimit": 11,
+      "capital": 400
+    }
+  ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "floatPercent": 60,
+  "companies": [
+    {
+      "name": "Bergslagernas järnvägar AB",
+      "abbrev": "BJ",
+      "color": "_brown",
+      "tokens": "three",
+      "token": {
+        "fontSize": 18,
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "name": "Kil-Fryksdalens Järnväg",
+      "abbrev": "KFJ",
+      "color": "_pink",
+      "tokens": "three",
+      "token": {
+        "fontSize": 18,
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "name": "Malmö-Ystads järnväg",
+      "abbrev": "MYJ",
+      "color": "_yellow",
+      "tokens": "three",
+      "token": {
+        "fontSize": 18,
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "name": "Mellersta Östergötlands Järnvägar",
+      "abbrev": "MÖJ",
+      "color": "_turquoise",
+      "tokens": "two",
+      "token": {
+        "fontSize": 18,
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "name": "The Swedish-Norwegian Railroad Company ltd",
+      "abbrev": "SNJ",
+      "color": "_blue",
+      "tokens": "four",
+      "token": {
+        "fontSize": 18,
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "name": "Sundsvall-Torphammars järnväg",
+      "abbrev": "STJ",
+      "color": "_black",
+      "tokens": "four",
+      "token": {
+        "fontSize": 18,
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "name": "Stockholm-Västerås-Bergslagens Järnvägar",
+      "abbrev": "SWB",
+      "color": "_green",
+      "tokens": "two",
+      "token": {
+        "fontSize": 18,
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "name": "Trafikaktiebolaget Grängesberg-Oxelösunds järnvägar",
+      "abbrev": "TGOJ",
+      "color": "_orange",
+      "tokens": "four",
+      "token": {
+        "fontSize": 18,
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "name": "Uppsala-Gävle järnväg",
+      "abbrev": "UGJ",
+      "color": "_lime",
+      "tokens": "three",
+      "token": {
+        "fontSize": 18,
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "name": "Örebro-Köpings järnvägsaktiebolag",
+      "abbrev": "ÖKJ",
+      "color": "_purple",
+      "tokens": "two",
+      "token": {
+        "fontSize": 18,
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "name": "Östra Skånes Järnvägsaktiebolag",
+      "abbrev": "ÖSJ",
+      "color": "_red",
+      "tokens": "three",
+      "token": {
+        "fontSize": 18,
+        "inverseLabelColor": "black"
+      }
+    },
+    {
+      "name": "Köping-Hults järnväg",
+      "abbrev": "KHJ",
+      "color": "white",
+      "tokens": "one",
+      "marketTokens": 0,
+      "token": {
+        "fontSize": 18
+      }
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 6,
+      "price": 80,
+      "color": "yellow",
+      "image": "2T",
+      "rust": "4"
+    },
+    {
+      "name": "3",
+      "quantity": 5,
+      "price": 180,
+      "color": "green",
+      "image": "3T",
+      "rust": "6"
+    },
+    {
+      "name": "4",
+      "quantity": 4,
+      "price": 300,
+      "color": "green",
+      "image": "4T",
+      "rust": "D"
+    },
+    {
+      "name": "5",
+      "quantity": 3,
+      "price": 450,
+      "color": "brown",
+      "image": "5T"
+    },
+    {
+      "name": "6",
+      "quantity": 2,
+      "price": 630,
+      "color": "gray",
+      "image": "6T"
+    },
+    {
+      "name": "D",
+      "quantity": "∞",
+      "print": 6,
+      "price": 1100,
+      "color": "gray",
+      "description": "Cost 800 kr when trading in a 4T, 5T or 6T",
+      "discount": {
+        "4": 300,
+        "5": 300,
+        "6": 300
+      }
+    },
+    {
+      "name": "E",
+      "quantity": "∞",
+      "print": 6,
+      "price": 1300,
+      "color": "gray",
+      "description": "Cost 1000 kr when trading in a 4T, 5T or 6T",
+      "available": "6",
+      "discount": {
+        "4": 300,
+        "5": 300,
+        "6": 300
+      }
+    }
+  ],
+  "privates": [
+    {
+      "name": "Frykstadsbanan",
+      "price": 20,
+      "revenue": 5,
+      "description": "Blocks hex B17 if owned by a player."
+    },
+    {
+      "name": "Nässjö-Oskarshamns järnväg (NOJ)",
+      "price": 20,
+      "revenue": 5,
+      "description": "Blocks hex D9 if owned by a player."
+    },
+    {
+      "name": "Göta kanalbolag",
+      "price": 40,
+      "revenue": 10,
+      "description": "Owning corporation may add +50/30/20 to train runs in hex E8, C8 and C16 in three different ORs"
+    },
+    {
+      "name": "Sveabolaget",
+      "price": 45,
+      "revenue": 15,
+      "description": "May lay or shift port token in hexes A6, D5, F19, F23, and G26.  Add 25 kr/symbol to all routes run to this location by owning company."
+    },
+    {
+      "name": "The Gellivare Company",
+      "price": 70,
+      "revenue": 30,
+      "description": "Two extra track lays in hex E28 and F27.  Blocks hexes E28 and F27 if owned by a player."
+    },
+    {
+      "name": "Motala Verkstad",
+      "price": 90,
+      "revenue": 15,
+      "description": "Owning corporation may buy trains at any time during operating rounds."
+    },
+    {
+      "name": "Nydqvist och Holm AB (NOHAB)",
+      "price": 90,
+      "revenue": 20,
+      "description": "May buy one train at half price (one time during the game)."
+    },
+    {
+      "name": "Köping-Hults järnväg (KHJ)",
+      "price": 140,
+      "description": "Owner receives a 50 kr loan.  Owner must pay loan back if hexes F13, E14 and C16 do not have tiles at the start of phase 4.  Private receives a 2T and a token.  Splits revenue evenly with owner."
+    },
+    {
+      "name": "Nils Ericson",
+      "price": 220,
+      "revenue": 25,
+      "description": "Receive presidents share in a corporation randomly determined before auction.  Owning player may take the priority deal at the beginning of one stock round."
+    },
+    {
+      "name": "Adolf Eugene von Rosen",
+      "price": 220,
+      "revenue": 30,
+      "company": "ÖKJ",
+      "description": "Receive presidents share in ÖKJ."
+    }
+  ],
+  "phases": [
+    {
+      "name": "2",
+      "limit": 4,
+      "rounds": 1,
+      "tiles": "yellow"
+    },
+    {
+      "name": "3",
+      "limit": 4,
+      "rounds": 2,
+      "tiles": "green",
+      "notes": ["Private companies may be purchased."]
+    },
+    {
+      "name": "4",
+      "limit": 3,
+      "rounds": 2,
+      "tiles": "green"
+    },
+    {
+      "name": "5",
+      "limit": 2,
+      "rounds": 3,
+      "tiles": "brown",
+      "notes": ["Private companies are closed.  Full cap"]
+    },
+    {
+      "name": "6",
+      "limit": 2,
+      "rounds": 3,
+      "tiles": "gray",
+      "notes": ["D/E Trains may be purchased."]
+    },
+    {
+      "name": "D",
+      "limit": 2,
+      "rounds": 3,
+      "tiles": "gray"
+    },
+    {
+      "name": "E",
+      "limit": 2,
+      "rounds": 3,
+      "tiles": "gray"
+    }
+  ],
+  "pools": [
+    {
+      "name": "Market",
+      "notes": [
+        {
+          "color": "orange",
+          "note": "Shares in the IPO or market pay dividends to the bank."
+        },
+        {
+          "color": "orange",
+          "note": "Shares on the corporation's charter pay dividends to the corporation."
+        },
+        {
+          "color": "brown",
+          "icon": "exclamation",
+          "note": "No more than 50% of a corporation's shares may be in the market at any time."
+        },
+        {
+          "color": "red",
+          "icon": "times",
+          "note": "Shares cannot be sold during the first stock round."
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "OR3",
+      "color": "brown"
+    },
+    {
+      "name": "OR2",
+      "color": "green"
+    },
+    {
+      "name": "OR1",
+      "color": "yellow"
+    },
+    {
+      "name": "SR",
+      "color": "white"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": [
+        "Sell any number of shares",
+        "Buy one share",
+        "Sell any number of shares"
+      ],
+      "ordered": true
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Lay or upgrade track",
+        "Purchase a station",
+        "Run trains",
+        "Pay dividends or withhold revenue",
+        "Purchase trains"
+      ],
+      "ordered": true,
+      "optional": ["Purchase private companies"]
+    }
+  ],
+  "stock": {
+    "type": "2D",
+    "title": false,
+    "display": {
+      "legend": {
+        "reverse": true,
+        "verticalAlign": "bottom",
+        "x": 7,
+        "y": 11
+      }
+    },
+    "market": [
+      [
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0,
+          "arrow": "down"
+        },
+        67,
+        71,
+        76,
+        82,
+        90,
+        {
+          "value": 100,
+          "label": 100,
+          "par": true
+        },
+        112,
+        126,
+        142,
+        160,
+        180,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        {
+          "value": 350,
+          "color": "red"
+        },
+        375,
+        400
+      ],
+      [
+        {
+          "value": 53,
+          "label": 53,
+          "legend": 0,
+          "arrow": "down"
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        66,
+        70,
+        76,
+        82,
+        {
+          "value": 90,
+          "label": 90,
+          "par": true
+        },
+        100,
+        112,
+        126,
+        142,
+        160,
+        180,
+        200,
+        220,
+        240,
+        260,
+        280,
+        {
+          "value": 300,
+          "label": 300,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 46,
+          "label": 46,
+          "legend": 0,
+          "arrow": "down"
+        },
+        {
+          "value": 55,
+          "label": 55,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        65,
+        70,
+        76,
+        {
+          "value": 82,
+          "label": 82,
+          "par": true
+        },
+        90,
+        100,
+        111,
+        125,
+        140,
+        155,
+        170,
+        185,
+        {
+          "value": 200,
+          "label": 200,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 39,
+          "label": 39,
+          "legend": 1,
+          "arrow": "down"
+        },
+        {
+          "value": 48,
+          "label": 48,
+          "legend": 0
+        },
+        {
+          "value": 54,
+          "label": 54,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        66,
+        71,
+        {
+          "value": 76,
+          "label": 76,
+          "par": true
+        },
+        82,
+        90,
+        100,
+        110,
+        120,
+        {
+          "value": 130,
+          "label": 130,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 32,
+          "label": 32,
+          "legend": 1,
+          "arrow": "down"
+        },
+        {
+          "value": 41,
+          "label": 41,
+          "legend": 1
+        },
+        {
+          "value": 48,
+          "label": 48,
+          "legend": 0
+        },
+        {
+          "value": 55,
+          "label": 55,
+          "legend": 0
+        },
+        62,
+        67,
+        {
+          "value": 71,
+          "label": 71,
+          "par": true
+        },
+        76,
+        82,
+        90,
+        {
+          "value": 100,
+          "label": 100,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 25,
+          "label": 25,
+          "legend": 2,
+          "arrow": "down"
+        },
+        {
+          "value": 34,
+          "label": 34,
+          "legend": 1
+        },
+        {
+          "value": 42,
+          "label": 42,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0
+        },
+        {
+          "value": 58,
+          "label": 58,
+          "legend": 0
+        },
+        65,
+        {
+          "value": 67,
+          "label": 67,
+          "par": true
+        },
+        71,
+        75,
+        {
+          "value": 80,
+          "label": 80,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 18,
+          "label": 18,
+          "legend": 2,
+          "arrow": "down"
+        },
+        {
+          "value": 27,
+          "label": 27,
+          "legend": 2
+        },
+        {
+          "value": 36,
+          "label": 36,
+          "legend": 1
+        },
+        {
+          "value": 45,
+          "label": 45,
+          "legend": 1
+        },
+        {
+          "value": 54,
+          "label": 54,
+          "legend": 0
+        },
+        63,
+        67,
+        69,
+        {
+          "value": 70,
+          "label": 70,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 12,
+          "label": 12,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0
+        },
+        67,
+        {
+          "value": 68,
+          "label": 68,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "legend": 0,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        null,
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "legend": 0,
+          "arrow": "up"
+        }
+      ],
+      [
+        null,
+        null,
+        null,
+        {
+          "value": 10,
+          "label": 10,
+          "legend": 2
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "legend": 2
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "legend": 2
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "legend": 1,
+          "arrow": "up"
+        }
+      ]
+    ],
+    "legend": [
+      {
+        "color": "yellow",
+        "description": "Shares of this corporation do not count toward the certificate limit"
+      },
+      {
+        "color": "orange",
+        "description": "Players may own more than 60% of this corporation"
+      },
+      {
+        "color": "brown",
+        "description": "Players may purchase any number of shares of this corporation in one stock action"
+      }
+    ],
+    "ledges": [
+      {
+        "color": "red",
+        "coords": [
+          "5 0",
+          "5 1",
+          "6 1",
+          "6 2",
+          "7 2",
+          "7 3",
+          "8 3",
+          "8 4",
+          "9 4",
+          "9 5",
+          "10 5"
+        ]
+      }
+    ]
+  },
+  "tiles": {
+    "5": 4,
+    "6": 4,
+    "7": {
+      "quantity": "∞",
+      "print": 10
+    },
+    "8": {
+      "quantity": "∞",
+      "print": 10
+    },
+    "9": {
+      "quantity": "∞",
+      "print": 11
+    },
+    "14": 4,
+    "15": 4,
+    "16": 2,
+    "17": 1,
+    "18": 1,
+    "19": 2,
+    "20": 2,
+    "21": 1,
+    "22": 1,
+    "23": 3,
+    "24": 3,
+    "25": 2,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "30": 1,
+    "31": 1,
+    "39": 1,
+    "40": 1,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 1,
+    "45": 2,
+    "46": 2,
+    "47": 2,
+    "57": 5,
+    "63": 2,
+    "70": 1,
+    "131": {
+      "color": "gray",
+      "rotations": 1,
+      "values": [
+        {
+          "value": 90,
+          "angle": 270,
+          "percent": 0.9
+        }
+      ],
+      "labels": [
+        {
+          "label": "S",
+          "angle": 90,
+          "percent": 0.9
+        }
+      ],
+      "cities": [
+        {
+          "size": 4,
+          "companies": ["SWB"]
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        }
+      ]
+    },
+    "172": 2,
+    "298": {
+      "color": "green",
+      "rotations": 1,
+      "values": [
+        {
+          "angle": -70,
+          "percent": 0.7,
+          "value": 40
+        }
+      ],
+      "labels": [
+        {
+          "angle": -35,
+          "percent": 0.7,
+          "label": "S"
+        }
+      ],
+      "cities": [
+        {
+          "angle": 60,
+          "percent": 0.75
+        },
+        {
+          "angle": 120,
+          "percent": 0.75
+        },
+        {
+          "angle": 180,
+          "percent": 0.75,
+          "rotation": -90,
+          "companies": ["SWB"]
+        },
+        {
+          "angle": 240,
+          "percent": 0.75
+        }
+      ],
+      "track": [
+        {
+          "type": "sharp",
+          "side": 1
+        },
+        {
+          "type": "gentle",
+          "side": 1
+        },
+        {
+          "type": "straight",
+          "side": 1
+        },
+        {
+          "type": "gentle",
+          "side": 5
+        }
+      ]
+    },
+    "299": {
+      "color": "brown",
+      "rotations": 1,
+      "values": [
+        {
+          "angle": -70,
+          "percent": 0.7,
+          "value": 70
+        }
+      ],
+      "labels": [
+        {
+          "angle": -35,
+          "percent": 0.7,
+          "label": "S"
+        }
+      ],
+      "cities": [
+        {
+          "angle": 60,
+          "percent": 0.75
+        },
+        {
+          "angle": 120,
+          "percent": 0.75
+        },
+        {
+          "angle": 180,
+          "percent": 0.75,
+          "rotation": -90,
+          "companies": ["SWB"]
+        },
+        {
+          "angle": 240,
+          "percent": 0.75
+        }
+      ],
+      "track": [
+        {
+          "type": "sharp",
+          "side": 1
+        },
+        {
+          "type": "gentle",
+          "side": 1
+        },
+        {
+          "type": "straight",
+          "side": 1
+        },
+        {
+          "type": "gentle",
+          "side": 5
+        }
+      ]
+    },
+    "440": {
+      "color": "green",
+      "rotations": 1,
+      "values": [
+        {
+          "angle": 210,
+          "percent": 0.8,
+          "value": 40
+        }
+      ],
+      "labels": [
+        {
+          "angle": 150,
+          "percent": 0.8,
+          "label": "Y"
+        }
+      ],
+      "cities": [
+        {
+          "size": 2,
+          "companies": ["ÖSJ"]
+        }
+      ],
+      "icons": [
+        {
+          "percent": 0.6,
+          "type": "port"
+        }
+      ],
+      "track": [
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        }
+      ]
+    },
+    "466": {
+      "color": "brown",
+      "rotations": 1,
+      "values": [
+        {
+          "angle": 210,
+          "percent": 0.8,
+          "value": 60
+        }
+      ],
+      "labels": [
+        {
+          "angle": 150,
+          "percent": 0.8,
+          "label": "Y"
+        }
+      ],
+      "cities": [
+        {
+          "size": 2,
+          "companies": ["ÖSJ"]
+        }
+      ],
+      "track": [
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        }
+      ]
+    },
+    "611": 2,
+    "619": 3
+  },
+  "map": {
+    "hexes": [
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 4
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "labels": [
+          {
+            "angle": 240,
+            "percent": 0.8,
+            "label": "K"
+          }
+        ],
+        "cities": [
+          {
+            "companies": ["MYJ"]
+          }
+        ],
+        "names": [
+          {
+            "y": -20,
+            "name": "Malmö",
+            "fontSize": 14
+          }
+        ],
+        "offBoardRevenue": {
+          "x": -45,
+          "y": -20,
+          "rows": 3,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            }
+          ]
+        },
+        "hexes": ["A2"]
+      },
+      {
+        "color": "gray",
+        "values": [
+          {
+            "angle": 270,
+            "percent": 0.7,
+            "value": 20
+          }
+        ],
+        "cities": [{}],
+        "names": [
+          {
+            "y": -20,
+            "name": "Halmstad",
+            "fontSize": 14
+          }
+        ],
+        "icons": [
+          {
+            "angle": 110,
+            "percent": 0.75,
+            "type": "port"
+          },
+          {
+            "angle": 70,
+            "percent": 0.75,
+            "type": "port"
+          }
+        ],
+        "track": [
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": ["A6"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 4
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "labels": [
+          {
+            "angle": 240,
+            "percent": 0.8,
+            "label": "V"
+          },
+          {
+            "angle": 300,
+            "percent": 0.8,
+            "label": "b"
+          }
+        ],
+        "cities": [
+          {
+            "companies": ["BJ"]
+          }
+        ],
+        "names": [
+          {
+            "y": -20,
+            "name": "Göteborg",
+            "fontSize": 14
+          }
+        ],
+        "offBoardRevenue": {
+          "x": -45,
+          "y": -20,
+          "rows": 3,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "70"
+            }
+          ]
+        },
+        "hexes": ["A10"]
+      },
+      {
+        "color": "gray",
+        "cities": [{}],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "names": [
+          {
+            "y": -20,
+            "name": "Oslo",
+            "fontSize": 14
+          }
+        ],
+        "offBoardRevenue": {
+          "x": 45,
+          "y": -20,
+          "rows": 3,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "50"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "20"
+            }
+          ]
+        },
+        "hexes": ["A16"]
+      },
+      {
+        "color": "water",
+        "track": [
+          {
+            "side": 4,
+            "type": "sharp"
+          }
+        ],
+        "hexes": ["B1"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "names": [
+          {
+            "y": -15,
+            "name": "Hässleholm",
+            "fontSize": 14
+          }
+        ],
+        "track": [
+          {
+            "side": 2,
+            "type": "straight",
+            "color": "mainline"
+          }
+        ],
+        "hexes": ["B5"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "names": [
+          {
+            "y": -15,
+            "name": "Skövde",
+            "fontSize": 14
+          }
+        ],
+        "track": [
+          {
+            "side": 2,
+            "type": "straight",
+            "color": "mainline"
+          }
+        ],
+        "hexes": ["B11"]
+      },
+      {
+        "color": "plain",
+        "companies": [
+          {
+            "label": "FB",
+            "left": 25,
+            "right": 25
+          }
+        ],
+        "hexes": ["B17"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "labels": [
+          {
+            "angle": 240,
+            "percent": 0.8,
+            "label": "N"
+          },
+          {
+            "angle": 300,
+            "percent": 0.8,
+            "label": "m"
+          }
+        ],
+        "names": [
+          {
+            "y": -10,
+            "name": "Narvik",
+            "fontSize": 14
+          }
+        ],
+        "offBoardRevenue": {
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "70"
+            }
+          ]
+        },
+        "hexes": ["B31"]
+      },
+      {
+        "color": "yellow",
+        "values": [
+          {
+            "angle": 240,
+            "percent": 0.8,
+            "value": 20
+          }
+        ],
+        "labels": [
+          {
+            "angle": 180,
+            "percent": 0.8,
+            "label": "Y"
+          }
+        ],
+        "cities": [
+          {
+            "companies": ["ÖSJ"]
+          }
+        ],
+        "names": [
+          {
+            "y": 25,
+            "name": "Ystad",
+            "fontSize": 14
+          }
+        ],
+        "icons": [
+          {
+            "angle": 90,
+            "percent": 0.7,
+            "type": "port"
+          }
+        ],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          }
+        ],
+        "hexes": ["C2"]
+      },
+      {
+        "color": "yellow",
+        "values": [
+          {
+            "angle": 180,
+            "percent": 0.8,
+            "value": 20
+          }
+        ],
+        "cities": [{}],
+        "names": [
+          {
+            "y": 25,
+            "name": "Jönköping",
+            "fontSize": 14
+          }
+        ],
+        "icons": [
+          {
+            "angle": 270,
+            "percent": 0.7,
+            "type": "steamboat"
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          }
+        ],
+        "hexes": ["C8"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "companies": ["ÖKJ"]
+          }
+        ],
+        "names": [
+          {
+            "y": -15,
+            "name": "Örebro",
+            "fontSize": 14
+          }
+        ],
+        "track": [
+          {
+            "side": 2,
+            "type": "straight",
+            "color": "mainline"
+          }
+        ],
+        "tunnels": [
+          {
+            "rotate": -30,
+            "angle": 150,
+            "percent": 1
+          }
+        ],
+        "hexes": ["C12"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "companies": ["KFJ"]
+          }
+        ],
+        "names": [
+          {
+            "y": -15,
+            "name": "Karlstad",
+            "fontSize": 14
+          },
+          {
+            "percent": 0.7,
+            "name": "KHJ"
+          }
+        ],
+        "icons": [
+          {
+            "angle": 270,
+            "percent": 0.7,
+            "type": "steamboat"
+          }
+        ],
+        "hexes": ["C16"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "names": [
+          {
+            "y": -15,
+            "name": "Östersund",
+            "fontSize": 14
+          }
+        ],
+        "hexes": ["C24"]
+      },
+      {
+        "color": "plain",
+        "tunnels": [
+          {},
+          {
+            "rotate": 30,
+            "angle": 190,
+            "percent": 1
+          },
+          {
+            "rotate": 30,
+            "angle": 230,
+            "percent": 1
+          }
+        ],
+        "hexes": ["C30"]
+      },
+      {
+        "color": "gray",
+        "values": [
+          {
+            "angle": 240,
+            "percent": 0.8,
+            "value": 20
+          }
+        ],
+        "cities": [{}],
+        "names": [
+          {
+            "y": 25,
+            "name": "Kalmar",
+            "fontSize": 14
+          }
+        ],
+        "icons": [
+          {
+            "angle": 90,
+            "percent": 0.7,
+            "type": "port"
+          }
+        ],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          }
+        ],
+        "hexes": ["D5"]
+      },
+      {
+        "color": "plain",
+        "companies": [
+          {
+            "label": "NOJ",
+            "left": 25,
+            "right": 25
+          }
+        ],
+        "hexes": ["D9"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "names": [
+          {
+            "y": -15,
+            "name": "Katrineholm",
+            "fontSize": 14
+          }
+        ],
+        "hexes": ["D11"]
+      },
+      {
+        "track": [
+          {
+            "side": 6,
+            "type": "gentle",
+            "color": "mainline"
+          }
+        ],
+        "hexes": ["D13"]
+      },
+      {
+        "color": "yellow",
+        "values": [
+          {
+            "angle": 270,
+            "percent": 0.7,
+            "value": 20
+          }
+        ],
+        "cities": [
+          {
+            "companies": ["KHJ"]
+          }
+        ],
+        "names": [
+          {
+            "y": -20,
+            "name": "Köping",
+            "fontSize": 14
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 5
+          }
+        ],
+        "hexes": ["D15"]
+      },
+      {
+        "color": "yellow",
+        "values": [
+          {
+            "angle": 270,
+            "percent": 0.7,
+            "value": 20
+          }
+        ],
+        "labels": [
+          {
+            "angle": 90,
+            "percent": 0.7,
+            "label": "B"
+          }
+        ],
+        "cities": [
+          {
+            "companies": ["TGOJ"]
+          }
+        ],
+        "names": [
+          {
+            "y": -20,
+            "name": "Bergslagen",
+            "fontSize": 14
+          }
+        ],
+        "track": [
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": ["D19"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "names": [
+          {
+            "y": -15,
+            "name": "Sveg",
+            "fontSize": 14
+          }
+        ],
+        "hexes": ["D21"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "angle": 90,
+            "percent": 0.7,
+            "label": "M"
+          }
+        ],
+        "cities": [
+          {
+            "y": -20
+          }
+        ],
+        "names": [
+          {
+            "y": -25,
+            "name": "Gällivare",
+            "fontSize": 14
+          }
+        ],
+        "tunnels": [
+          {
+            "y": 35
+          }
+        ],
+        "hexes": ["D29"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "companies": ["MÖJ"]
+          }
+        ],
+        "names": [
+          {
+            "y": -15,
+            "name": "Norrköping",
+            "fontSize": 14
+          }
+        ],
+        "icons": [
+          {
+            "angle": 270,
+            "percent": 0.7,
+            "type": "steamboat"
+          }
+        ],
+        "track": [
+          {
+            "side": 2,
+            "type": "straight",
+            "color": "mainline"
+          }
+        ],
+        "hexes": ["E8"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "names": [
+          {
+            "y": -15,
+            "name": "Västerås",
+            "fontSize": 14
+          }
+        ],
+        "track": [
+          {
+            "side": 3,
+            "type": "straight",
+            "color": "mainline"
+          }
+        ],
+        "hexes": ["E12"]
+      },
+      {
+        "track": [
+          {
+            "side": 4,
+            "type": "gentle",
+            "color": "mainline"
+          }
+        ],
+        "names": [
+          {
+            "name": "KHJ"
+          }
+        ],
+        "hexes": ["E14"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "names": [
+          {
+            "y": -15,
+            "name": "Ånge",
+            "fontSize": 14
+          }
+        ],
+        "track": [
+          {
+            "side": 1,
+            "type": "straight",
+            "color": "mainline"
+          }
+        ],
+        "hexes": ["E20"]
+      },
+      {
+        "color": "plain",
+        "track": [
+          {
+            "side": 2,
+            "type": "straight",
+            "color": "mainline"
+          }
+        ],
+        "tunnels": [
+          {
+            "angle": 90,
+            "percent": 0.35
+          },
+          {
+            "angle": 270,
+            "percent": 0.35
+          }
+        ],
+        "hexes": ["F9"]
+      },
+      {
+        "color": "plain",
+        "track": [
+          {
+            "side": 3,
+            "type": "straight",
+            "color": "mainline"
+          }
+        ],
+        "tunnels": [{}],
+        "hexes": ["F11"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "companies": ["UGJ"]
+          }
+        ],
+        "names": [
+          {
+            "y": -15,
+            "name": "Uppsala",
+            "fontSize": 14
+          },
+          {
+            "percent": 0.7,
+            "name": "KHJ"
+          }
+        ],
+        "track": [
+          {
+            "side": 3,
+            "type": "straight",
+            "color": "mainline"
+          }
+        ],
+        "hexes": ["F13"]
+      },
+      {
+        "color": "gray",
+        "values": [
+          {
+            "angle": 240,
+            "percent": 0.8,
+            "value": 20
+          }
+        ],
+        "cities": [
+          {
+            "companies": ["STJ"]
+          }
+        ],
+        "names": [
+          {
+            "y": 25,
+            "name": "Sundsvall",
+            "fontSize": 14
+          }
+        ],
+        "icons": [
+          {
+            "angle": 90,
+            "percent": 0.7,
+            "type": "port"
+          }
+        ],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          }
+        ],
+        "hexes": ["F19"]
+      },
+      {
+        "color": "gray",
+        "values": [
+          {
+            "angle": 240,
+            "percent": 0.8,
+            "value": 20
+          }
+        ],
+        "cities": [{}],
+        "names": [
+          {
+            "y": 25,
+            "name": "Umeå",
+            "fontSize": 14
+          }
+        ],
+        "icons": [
+          {
+            "angle": 70,
+            "percent": 0.75,
+            "type": "port"
+          },
+          {
+            "angle": 110,
+            "percent": 0.75,
+            "type": "port"
+          }
+        ],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          }
+        ],
+        "hexes": ["F23"]
+      },
+      {
+        "color": "water",
+        "track": [
+          {
+            "side": 3,
+            "type": "sharp"
+          }
+        ],
+        "hexes": ["G8"]
+      },
+      {
+        "color": "yellow",
+        "values": [
+          {
+            "percent": 0.85,
+            "value": 20
+          }
+        ],
+        "labels": [
+          {
+            "label": "S"
+          }
+        ],
+        "names": [
+          {
+            "y": 20,
+            "name": "Stockholm",
+            "fontSize": 14
+          }
+        ],
+        "cities": [
+          {
+            "angle": 90,
+            "percent": 0.75
+          },
+          {
+            "angle": 150,
+            "percent": 0.75
+          },
+          {
+            "angle": 210,
+            "percent": 0.75,
+            "rotation": -90,
+            "companies": ["SWB"]
+          },
+          {
+            "angle": 270,
+            "percent": 0.75
+          }
+        ],
+        "hexes": ["G10"]
+      },
+      {
+        "track": [
+          {
+            "side": 1,
+            "type": "gentle",
+            "color": "mainline"
+          }
+        ],
+        "hexes": ["G12"]
+      },
+      {
+        "color": "gray",
+        "values": [
+          {
+            "angle": 240,
+            "percent": 0.85,
+            "value": 20
+          }
+        ],
+        "labels": [
+          {
+            "angle": 300,
+            "percent": 0.8,
+            "label": "m"
+          }
+        ],
+        "cities": [
+          {
+            "size": 2,
+            "companies": ["SNJ"]
+          }
+        ],
+        "names": [
+          {
+            "y": 25,
+            "name": "Luleå",
+            "fontSize": 14
+          }
+        ],
+        "icons": [
+          {
+            "angle": 120,
+            "percent": 0.85,
+            "type": "port"
+          }
+        ],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          }
+        ],
+        "hexes": ["G26"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          }
+        ],
+        "labels": [
+          {
+            "angle": 180,
+            "percent": 0.8,
+            "label": "Ö"
+          },
+          {
+            "angle": 300,
+            "percent": 0.8,
+            "label": "b"
+          }
+        ],
+        "names": [
+          {
+            "y": -10,
+            "name": "Stockholms hamn",
+            "fontSize": 14
+          }
+        ],
+        "offBoardRevenue": {
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "0"
+            },
+            {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            }
+          ]
+        },
+        "hexes": ["H9"]
+      },
+      {
+        "color": "plain",
+        "track": [
+          {
+            "side": 2,
+            "type": "straight",
+            "color": "mainline"
+          }
+        ],
+        "hexes": ["C6", "D7", "F25"]
+      },
+      {
+        "color": "plain",
+        "track": [
+          {
+            "side": 1,
+            "type": "straight",
+            "color": "mainline"
+          }
+        ],
+        "hexes": ["E16", "E18", "E22"]
+      },
+      {
+        "track": [
+          {
+            "side": 5,
+            "type": "gentle",
+            "color": "mainline"
+          }
+        ],
+        "hexes": ["A4", "E24"]
+      },
+      {
+        "color": "plain",
+        "tunnels": [{}],
+        "hexes": ["A12", "B19", "B21", "B23", "B25", "B27", "B29"]
+      },
+      {
+        "color": "plain",
+        "hexes": [
+          "A8",
+          "A14",
+          "B3",
+          "B7",
+          "B9",
+          "B15",
+          "C4",
+          "C10",
+          "C18",
+          "C20",
+          "C22",
+          "C26",
+          "C28",
+          "D17",
+          "D23",
+          "D25",
+          "D27",
+          "D31",
+          "E10",
+          "E26",
+          "E28",
+          "E30",
+          "F15",
+          "F17",
+          "F21",
+          "F29",
+          "G14",
+          "G28"
+        ]
+      },
+      {
+        "color": "plain",
+        "companies": [
+          {
+            "label": "GC",
+            "angle": 210,
+            "rotate": -60,
+            "percent": 0.6,
+            "left": 30,
+            "right": 90
+          }
+        ],
+        "hexes": ["F27"]
+      },
+      {
+        "color": "water",
+        "hexes": ["B13", "C14"]
+      },
+      {
+        "color": "white",
+        "removeBorders": [1, 4, 5, 6],
+        "labels": [
+          {
+            "y": -25,
+            "label": "Ö - V"
+          }
+        ],
+        "routeBonuses": [
+          {
+            "value": "+120"
+          }
+        ],
+        "hexes": ["G18"]
+      },
+      {
+        "color": "white",
+        "removeBorders": [1, 4, 5, 6],
+        "labels": [
+          {
+            "y": -25,
+            "label": "Ö - K"
+          }
+        ],
+        "routeBonuses": [
+          {
+            "value": "+100"
+          }
+        ],
+        "hexes": ["G20"]
+      },
+      {
+        "color": "white",
+        "removeBorders": [1, 4, 5, 6],
+        "labels": [
+          {
+            "y": -25,
+            "label": "S - N"
+          }
+        ],
+        "routeBonuses": [
+          {
+            "value": "+100"
+          }
+        ],
+        "hexes": ["G22"]
+      },
+      {
+        "color": "white",
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "labels": [
+          {
+            "y": -25,
+            "label": "B - b"
+          }
+        ],
+        "routeBonuses": [
+          {
+            "value": "+50"
+          }
+        ],
+        "hexes": ["H17"]
+      },
+      {
+        "color": "white",
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "labels": [
+          {
+            "y": -25,
+            "label": "B - b - b",
+            "size": 20
+          }
+        ],
+        "routeBonuses": [
+          {
+            "value": "+80"
+          }
+        ],
+        "hexes": ["H19"]
+      },
+      {
+        "color": "white",
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "labels": [
+          {
+            "y": -25,
+            "label": "M - m"
+          }
+        ],
+        "routeBonuses": [
+          {
+            "value": "+50"
+          }
+        ],
+        "hexes": ["H21"]
+      },
+      {
+        "color": "white",
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "labels": [
+          {
+            "y": -25,
+            "label": "M - m - m",
+            "size": 20
+          }
+        ],
+        "routeBonuses": [
+          {
+            "value": "+100"
+          }
+        ],
+        "hexes": ["H23"]
+      }
+    ],
+    "borders": [
+      {
+        "color": "water",
+        "coords": ["C8p1", "C8p6", "C10p1", "C10p6"]
+      }
+    ]
+  }
+}

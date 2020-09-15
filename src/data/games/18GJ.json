@@ -1,0 +1,143 @@
+{
+  "info": {
+    "title": "18 Grand Junction",
+    "designer": "Anthony Fryer",
+    "background": "orange",
+    "currency": "$#"
+  },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/17405/1846-race-midwest",
+    "rules": "https://s3-us-west-2.amazonaws.com/gmtwebsiteassets/1846/1846-RULES-GMT.pdf",
+    "license": "https://traxx-denver.com/games/",
+    "purchase": "https://traxx-denver.com/games/"
+  },
+  "wip": true,
+  "companies": [
+    {
+      "name": "Denver, South Park, & Pacific Railroad",
+      "abbrev": "DSPP",
+      "tokens": ["Free", 80, 80, 80, 80],
+      "token": {
+        "width": 20,
+        "rotation": -90,
+        "shield": true,
+        "shieldTop": "blue",
+        "color": "white"
+      },
+      "color": "blue"
+    }
+  ],
+  "tiles": {
+    "5": 3,
+    "6": 4,
+    "7": 5,
+    "8": 16,
+    "9": 16,
+    "14": 4,
+    "15": 5,
+    "16": 2,
+    "17": 1,
+    "18": 1,
+    "19": 2,
+    "20": 2,
+    "21": 1,
+    "22": 1,
+    "23": 4,
+    "24": 4,
+    "25": 2,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "30": 1,
+    "31": 1,
+    "39": 1,
+    "40": 1,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 1,
+    "45": 2,
+    "46": 2,
+    "47": 2,
+    "51": 2,
+    "57": 4,
+    "70": 1,
+    "290": 1,
+    "291": 1,
+    "292": 1,
+    "293": 1,
+    "294": 2,
+    "295": 2,
+    "296": 1,
+    "297": 2,
+    "298|GJ": {
+      "quantity": 1,
+      "color": "green",
+      "labels": [{ "angle": 287, "percent": 0.7, "label": "GJ" }],
+      "values": [{ "angle": 323, "percent": 0.75, "value": 40 }],
+      "cities": [
+        { "angle": 60, "percent": 0.75 },
+        { "angle": 120, "percent": 0.75 },
+        { "angle": 180, "percent": 0.75 },
+        {
+          "angle": 240,
+          "percent": 0.75,
+          "companies": [{ "abbrev": "DSPP", "rotation": -90 }]
+        }
+      ],
+      "track": [
+        { "type": "sharp", "side": 1 },
+        { "type": "gentle", "side": 1 },
+        { "type": "straight", "side": 1 },
+        { "type": "gentle", "side": 5 }
+      ]
+    },
+    "299|GJ": {
+      "quantity": 1,
+      "color": "brown",
+      "labels": [{ "angle": 287, "percent": 0.7, "label": "GJ" }],
+      "values": [{ "angle": 323, "percent": 0.75, "value": 70 }],
+      "cities": [
+        { "angle": 60, "percent": 0.75 },
+        { "angle": 120, "percent": 0.75 },
+        { "angle": 180, "percent": 0.75 },
+        {
+          "angle": 240,
+          "percent": 0.75,
+          "companies": [{ "abbrev": "DSPP", "rotation": -90 }]
+        }
+      ],
+      "track": [
+        { "type": "sharp", "side": 1 },
+        { "type": "gentle", "side": 1 },
+        { "type": "straight", "side": 1 },
+        { "type": "gentle", "side": 5 }
+      ]
+    },
+    "300|GJ": {
+      "quantity": 1,
+      "color": "gray",
+      "labels": [{ "angle": 287, "percent": 0.7, "label": "GJ" }],
+      "values": [{ "angle": 323, "percent": 0.75, "value": 90 }],
+      "cities": [
+        { "angle": 60, "percent": 0.75 },
+        { "angle": 120, "percent": 0.75 },
+        { "angle": 180, "percent": 0.75 },
+        {
+          "angle": 240,
+          "percent": 0.75,
+          "companies": [{ "abbrev": "DSPP", "rotation": -90 }]
+        }
+      ],
+      "track": [
+        { "type": "sharp", "side": 1 },
+        { "type": "gentle", "side": 1 },
+        { "type": "straight", "side": 1 },
+        { "type": "gentle", "side": 5 }
+      ]
+    },
+    "611": 4,
+    "619": 3
+  }
+}

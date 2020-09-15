@@ -146,7 +146,11 @@ export const GameProvider = ({ children }) => {
         );
         return <Redirect to="/games/" />;
       }
-    } else if (!isNil(game) && match.params.slug === game.id) {
+    } else if (
+      !isNil(game) &&
+      games[match.params.slug] &&
+      match.params.slug === game.id
+    ) {
       checkForChanges(match.params.slug);
     }
   }

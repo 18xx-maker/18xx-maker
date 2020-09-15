@@ -1,14 +1,16 @@
 import React from "react";
 
 import Circle from "./Circle";
-import Hexagon from "./Hexagon";
-import Triangle from "./Triangle";
 import Diamond from "./Diamond";
+import Ellipse from "./Ellipse";
+import Hexagon from "./Hexagon";
 import Square from "./Square";
+import Triangle from "./Triangle";
 
 const mapping = {
   circle: Circle,
   diamond: Diamond,
+  ellipse: Ellipse,
   hexagon: Hexagon,
   square: Square,
   triangle: Triangle

@@ -1,0 +1,86 @@
+{
+  "name": "Moon",
+  "colors": {
+    "yellow": "#fdcb09",
+    "green": "#0aa99e",
+    "brown": "#cc6b2d",
+    "gray": "#c1c5c6",
+
+    "plain": "#f2f4e8",
+    "offboard": "#dc8281",
+    "mountain": "#997749",
+    "water": "#4cb2d7",
+    "land": "#dfe2c7",
+    "river": "#c5e2e3",
+
+    "brightGreen": "#7bb137",
+    "orange": "#f48221",
+    "red": "#dc8281",
+
+    "white": "#fefffe",
+    "black": "#37383a",
+
+    "halt": "rgb(102,102,102)",
+
+    "border": {
+      "plain": "#f2f4e8",
+      "yellow": "#fdcb09",
+      "green": "#0aa99e",
+      "brown": "#cc6b2d",
+      "gray": "#c1c5c6",
+      "offboard": "#dc8281",
+      "mountain": "#997749",
+      "water": "#4cb2d7"
+    },
+
+    "tile": {
+      "default": "#37383a",
+      "plain": "#d9d9d9",
+      "yellow": "#d9d9d9",
+      "green": "#d9d9d9",
+      "brown": "#d9d9d9",
+      "gray": "#d9d9d9",
+
+      "border": {
+        "yellow": "#d9d9d9",
+        "green": "#d9d9d9",
+        "brown": "#d9d9d9",
+        "gray": "#d9d9d9"
+      }
+    },
+
+    "track": {
+      "default": "#656565",
+      "plain": "#d9d9d9",
+      "yellow": "#ffc004",
+      "green": "#92d051",
+      "brown": "#7f6000",
+      "gray": "#7f7f7f",
+      "border": "#ffffff"
+    },
+
+    "town": {
+      "default": "#e8e8e8",
+      "offboard": "#37383a",
+      "yellow": "#ffc004",
+      "green": "#92d051",
+      "brown": "#7f6000",
+      "gray": "#7f7f7f"
+    },
+
+    "centertown": {
+      "plain": "#b9bf81",
+      "default": "#37383a",
+      "offboard": "#37383a",
+      "yellow": "#ffc004",
+      "green": "#92d051",
+      "brown": "#7f6000",
+      "gray": "#7f7f7f"
+    },
+
+    "city": {
+      "default": "#e8e8e8",
+      "offboard": "#37383a"
+    }
+  }
+}

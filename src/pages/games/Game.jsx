@@ -40,6 +40,7 @@ import RulesIcon from "@material-ui/icons/Gavel";
 import WarningIcon from "@material-ui/icons/Warning";
 
 import { makeStyles } from '@material-ui/core/styles';
+import { green, blue } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -151,7 +152,7 @@ const Game = ({game}) => {
                             underline="none"
                             target="_blank"
                             href={game.links.purchase}>
-                    <ListItemIcon><PurchaseIcon /></ListItemIcon>
+                    <ListItemIcon><PurchaseIcon style={{color: green[500]}}/></ListItemIcon>
                     <ListItemText primary={t('game.purchase.primary')} secondary={t('game.purchase.secondary')} />
                   </ListItem>
                 )}
@@ -177,11 +178,15 @@ const Game = ({game}) => {
                     <ListItemText primary={t('game.rules')} />
                   </ListItem>
                 )}
+                {game.prototype && (
+                  <ListItem>
+                    <ListItemIcon><WarningIcon style={{color: blue[500]}}/></ListItemIcon>
+                    <ListItemText primary={t('prototype.prototype')} secondary={t('prototype.description')}/>
+                  </ListItem>
+                )}
                 {game.wip && (
                   <ListItem>
-                    <ListItemIcon>
-                      <WarningIcon className={classes.warning}/>
-                    </ListItemIcon>
+                    <ListItemIcon><WarningIcon className={classes.warning}/></ListItemIcon>
                     <ListItemText primary={t('wip.wip')} secondary={t('wip.description')}/>
                   </ListItem>
                 )}

@@ -16,6 +16,10 @@
     "elements": "Elements",
     "docs": "Help"
   },
+  "prototype": {
+    "prototype": "Prototype",
+    "description": "This game is still being developed"
+  },
   "wip": {
     "wip": "Work in progress",
     "note": "Some games are still works in progress. Please submit any bugs found as <github>issues on Github</github>!",

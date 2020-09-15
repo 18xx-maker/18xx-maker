@@ -1,0 +1,536 @@
+{
+  "info": {
+    "title": "1883 Express d'Orient",
+    "designer": "Anthony Fryer",
+    "background": "gray",
+    "currency": "K #"
+  },
+  "links": {
+    "bgg": "https://boardgamegeek.com/boardgame/306260/1883-express-dorient",
+    "rules": "https://drive.google.com/file/d/1AbWFIOWpZLBunaX4AfUXRy2q1GFMIU7n/view",
+    "license": "https://traxx-denver.com/games/",
+    "purchase": "https://traxx-denver.com/games/"
+  },
+  "wip": true,
+  "colors": {
+    "CFR_red": "#ce1227",
+    "CFR_yellow": "#fbd117",
+    "CFR_blue": "#012d81"
+  },
+  "tokens": ["Round"],
+  "tokenTypes": {
+    "default": ["Free", 40, 60, 80]
+  },
+  "companies": [
+    {
+      "name": "Caile Ferate Române",
+      "abbrev": "CFR",
+      "token": {
+        "label": "CFR",
+        "shield3": "white",
+        "shield3TopLeft": "CFR_red",
+        "shield3TopCenter": "CFR_yellow",
+        "shield3TopRight": "CFR_blue",
+        "color": "white",
+        "labelColor": "black",
+        "fontSize": 16
+      },
+      "color": "CFR_blue"
+    },
+    {
+      "name": "Beograd i Zagreb Železnice",
+      "abbrev": "BZZ",
+      "token": {
+        "shield": true,
+        "shieldTop": "yellow",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "yellow"
+    }
+  ],
+  "ipo": true,
+  "bank": 12000,
+  "tiles": {
+    "1": 1,
+    "2": 1,
+    "3": 2,
+    "4": 2,
+    "7": 4,
+    "8": 8,
+    "9": 7,
+    "14": 3,
+    "15": 2,
+    "16": 1,
+    "17": 2,
+    "18": 1,
+    "19": 1,
+    "20": 1,
+    "21": 2,
+    "22": 2,
+    "23": 3,
+    "24": 3,
+    "25": 1,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "39": 1,
+    "40": 1,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 1,
+    "45": 2,
+    "46": 2,
+    "47": 1,
+    "53": 2,
+    "54": 1,
+    "55": 1,
+    "56": 1,
+    "57": 4,
+    "58": 2,
+    "59": 2,
+    "61": 2,
+    "62": 1,
+    "63": 3,
+    "64": 1,
+    "65": 1,
+    "66": 1,
+    "67": 1,
+    "68": 1,
+    "69": 1,
+    "70": 1,
+    "141": 2,
+    "142": 2,
+    "143": 2,
+    "144": 2,
+    "52a": {
+      "color": "green",
+      "quantity": 2,
+      "rotations": 3,
+      "values": [
+        {
+          "angle": 210,
+          "percent": 0.8,
+          "value": 30
+        }
+      ],
+      "cities": [{ "size": 2 }],
+      "track": [{ "side": 1 }, { "side": 2 }, { "side": 4 }, { "side": 6 }]
+    },
+    "BUDG1": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 1, "type": "straight", "cross": "under" },
+        { "side": 2, "type": "straight", "cross": "over" }
+      ],
+      "cities": [
+        {
+          "angle": -120,
+          "percent": 0.7
+        },
+        {
+          "size": 2,
+          "angle": -30,
+          "percent": 0.52,
+          "rotation": -20
+        }
+      ],
+      "shapes": [
+        {
+          "type": "diamond",
+          "cost": "40",
+          "angle": 140,
+          "percent": 0.7,
+          "fillColor": "water",
+          "textColor": "white",
+          "fontSize": 16,
+          "fontWeight": "normal"
+        }
+      ],
+      "labels": [
+        {
+          "label": "BUD",
+          "angle": -158,
+          "percent": 0.84,
+          "size": 14
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "angle": 90,
+          "percent": 0.8
+        }
+      ]
+    },
+    "BUDG2": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 5, "type": "gentle" },
+        { "side": 2, "type": "sharp" }
+      ],
+      "cities": [
+        {
+          "angle": -60,
+          "percent": 0.3
+        },
+        {
+          "size": 2,
+          "angle": 120,
+          "percent": 0.6,
+          "rotation": -60
+        }
+      ],
+      "shapes": [
+        {
+          "type": "diamond",
+          "cost": "40",
+          "angle": -150,
+          "percent": 0.7,
+          "fillColor": "water",
+          "textColor": "white",
+          "fontSize": 16,
+          "fontWeight": "normal"
+        }
+      ],
+      "labels": [
+        {
+          "label": "BUD",
+          "angle": -30,
+          "percent": 0.8,
+          "size": 16
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "angle": 32,
+          "percent": 0.65
+        }
+      ]
+    },
+    "BUDG3": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 4, "type": "gentle", "cross": "over" },
+        { "side": 2, "type": "straight", "cross": "under" }
+      ],
+      "cities": [
+        {
+          "angle": -60,
+          "percent": 0.6
+        },
+        {
+          "size": 2,
+          "angle": 85,
+          "percent": 0.5,
+          "rotation": 90
+        }
+      ],
+      "shapes": [
+        {
+          "type": "diamond",
+          "cost": "40",
+          "angle": -148,
+          "percent": 0.8,
+          "fillColor": "water",
+          "textColor": "white",
+          "fontSize": 16,
+          "fontWeight": "normal"
+        }
+      ],
+      "labels": [
+        {
+          "label": "BUD",
+          "angle": 158,
+          "percent": 0.84,
+          "size": 16
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "angle": -3,
+          "percent": 0.6
+        }
+      ]
+    },
+    "BUDG4": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 3, "type": "sharp" },
+        { "side": 5, "type": "gentle" }
+      ],
+      "cities": [
+        {
+          "angle": -60,
+          "percent": 0.3
+        },
+        {
+          "size": 2,
+          "angle": 120,
+          "percent": 0.6,
+          "rotation": -60
+        }
+      ],
+      "shapes": [
+        {
+          "type": "diamond",
+          "cost": "40",
+          "fillColor": "water",
+          "textColor": "white",
+          "fontSize": 16,
+          "fontWeight": "normal",
+          "angle": -150,
+          "percent": 0.7
+        }
+      ],
+      "labels": [
+        {
+          "label": "BUD",
+          "angle": -30,
+          "percent": 0.8,
+          "size": 16
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "angle": 35,
+          "percent": 0.7
+        }
+      ]
+    },
+    "BUDG5": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 2, "type": "straight" },
+        { "side": 6, "type": "sharp" }
+      ],
+      "cities": [
+        {
+          "angle": -30,
+          "percent": 0.6
+        },
+        {
+          "size": 2,
+          "angle": 85,
+          "percent": 0.5,
+          "rotation": 90
+        }
+      ],
+      "shapes": [
+        {
+          "type": "diamond",
+          "cost": "40",
+          "angle": -155,
+          "percent": 0.7,
+          "fillColor": "water",
+          "textColor": "white",
+          "fontSize": 16,
+          "fontWeight": "normal"
+        }
+      ],
+      "labels": [
+        {
+          "label": "BUD",
+          "angle": 162,
+          "percent": 0.82,
+          "size": 16
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "angle": -90,
+          "percent": 0.7
+        }
+      ]
+    },
+    "BUDB": {
+      "color": "brown",
+      "quantity": 1,
+      "track": [
+        { "side": 1 },
+        { "side": 2 },
+        { "side": 3 },
+        { "side": 4 },
+        { "side": 5 },
+        { "side": 6 }
+      ],
+      "cities": [{ "size": 3, "angle": 0, "percent": 0.1, "rotation": 30 }],
+      "labels": [
+        {
+          "label": "BUD",
+          "angle": 155,
+          "percent": 0.87,
+          "size": 14
+        }
+      ],
+      "values": [
+        {
+          "value": 50,
+          "angle": -145,
+          "percent": 0.82
+        }
+      ]
+    },
+    "BUCHG": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 1 },
+        { "side": 3 },
+        { "side": 4 },
+        { "side": 5 },
+        { "side": 6 }
+      ],
+      "cities": [{ "size": 3, "angle": 0, "percent": 0.1, "rotation": 60 }],
+      "labels": [
+        {
+          "label": "BUCH",
+          "angle": 153,
+          "percent": 0.85,
+          "size": 14
+        }
+      ],
+      "values": [
+        {
+          "value": 60,
+          "angle": -145,
+          "percent": 0.82
+        }
+      ]
+    },
+    "BUCHB": {
+      "color": "brown",
+      "quantity": 1,
+      "track": [
+        { "side": 1 },
+        { "side": 3 },
+        { "side": 4 },
+        { "side": 5 },
+        { "side": 6 }
+      ],
+      "cities": [{ "size": 4 }],
+      "labels": [
+        {
+          "label": "BUCH",
+          "angle": 155,
+          "percent": 0.87,
+          "size": 12
+        }
+      ],
+      "tokens": [
+        {
+          "label": "CFR",
+          "shield3": "white",
+          "shield3TopLeft": "CFR_red",
+          "shield3TopCenter": "CFR_yellow",
+          "shield3TopRight": "CFR_blue",
+          "angle": -135,
+          "percent": 0.47
+        }
+      ],
+      "values": [
+        {
+          "value": 80,
+          "angle": 90,
+          "percent": 0.82
+        }
+      ]
+    },
+    "BELG": {
+      "color": "green",
+      "quantity": 1,
+      "track": [
+        { "side": 1 },
+        { "side": 2 },
+        { "side": 3 },
+        { "side": 4 },
+        { "side": 5 },
+        { "side": 6 }
+      ],
+      "cities": [
+        {
+          "size": 2
+        }
+      ],
+      "tokens": [
+        {
+          "label": "BZZ",
+          "shield": "white",
+          "shieldTop": "yellow",
+          "angle": -90,
+          "percent": 0.33
+        }
+      ],
+      "labels": [
+        {
+          "label": "BEL",
+          "angle": 150,
+          "percent": 0.75,
+          "size": 16
+        }
+      ],
+      "values": [
+        {
+          "value": 30,
+          "angle": -150,
+          "percent": 0.7
+        }
+      ]
+    },
+    "BELB": {
+      "color": "brown",
+      "quantity": 1,
+      "track": [
+        { "side": 1 },
+        { "side": 2 },
+        { "side": 3 },
+        { "side": 4 },
+        { "side": 5 },
+        { "side": 6 }
+      ],
+      "cities": [
+        {
+          "size": 3,
+          "angle": 0,
+          "percent": 0.1,
+          "rotation": 30
+        }
+      ],
+      "tokens": [
+        {
+          "label": "BZZ",
+          "shield": "white",
+          "shieldTop": "yellow",
+          "angle": 180,
+          "percent": 0.28
+        }
+      ],
+      "labels": [
+        {
+          "label": "BEL",
+          "angle": 155,
+          "percent": 0.87,
+          "size": 14
+        }
+      ],
+      "values": [
+        {
+          "value": 50,
+          "angle": -145,
+          "percent": 0.82
+        }
+      ]
+    }
+  }
+}
