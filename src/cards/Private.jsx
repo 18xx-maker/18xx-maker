@@ -66,18 +66,19 @@ const Private = ({
     revenueNode = <Currency value={revenue} type="private" />;
   }
 
-  let minNumPlayers = reduce(min, 99, map(p => p.number, players))
-  let maxNumPlayers = reduce(max, 0, map(p => p.number, players))
-  minPlayers = minPlayers || minNumPlayers;
-  maxPlayers = maxPlayers || maxNumPlayers;
-
   let playersNode = null;
+  if (players) {
+    let minNumPlayers = reduce(min, 99, map(p => p.number, players))
+    let maxNumPlayers = reduce(max, 0, map(p => p.number, players))
+    minPlayers = minPlayers || minNumPlayers;
+    maxPlayers = maxPlayers || maxNumPlayers;
 
-  if (minPlayers !== minNumPlayers || maxPlayers !== maxNumPlayers) {
-    if (minPlayers !== maxPlayers) {
-      playersNode = `Players: ${minPlayers}-${maxPlayers}`;
-    } else {
-      playersNode = `Players: ${minPlayers}`;
+    if (minPlayers !== minNumPlayers || maxPlayers !== maxNumPlayers) {
+      if (minPlayers !== maxPlayers) {
+        playersNode = `Players: ${minPlayers}-${maxPlayers}`;
+      } else {
+        playersNode = `Players: ${minPlayers}`;
+      }
     }
   }
 

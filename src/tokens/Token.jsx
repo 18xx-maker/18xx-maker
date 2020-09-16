@@ -14,6 +14,7 @@ const Token = ({
   icon, // The path-based icon (defined in App.jsx) to display on this token
   iconWidth, // Override the default width of the icon.
   iconColor, // The color to use for the svg icon or logo
+  iconY, // The vertical position of the icon
   label, // The text label to use on this token
   labelColor, // What color to use for writing the label text
   color, // What color is this token using as a background
@@ -107,7 +108,7 @@ const Token = ({
         labelStrokeWidth = labelStrokeWidth ? labelStrokeWidth : "0.5";
 
         // Background fill to use for the main token circle object
-        let tokenFill = c(color) || c("white");
+        let tokenFill = c(color) || p("white");
 
         if(inverse && logo && logos[logo]) {
           // Draw inversed logos same as reserved
@@ -130,7 +131,7 @@ const Token = ({
                          height={size} width={size}/>
             );
           }
-          tokenFill = c("white");
+          tokenFill = c(iconColor) || c("white");
           textStroke = "none";
           textFill = "none";
 
@@ -403,9 +404,9 @@ const Token = ({
 
           if (label) {
             // Label and icon, position accordingly
-            let size = iconWidth || 1 * width;
+            let size = iconWidth || width;
             let x = -0.5 * size;
-            let y = -0.75 * size;
+            let y = iconY || -0.95 * size;
             let fSize;
             content.push(<Component key="icon" className={classes.join(" ")}
                                     x={x} y={y}

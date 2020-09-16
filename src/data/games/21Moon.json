@@ -19,7 +19,7 @@
     "darkGray": "#808080",
     "mineralRed": "#cc0000",
     "borderRed": "#fe0000",
-    "borderDarkRed": "#990031",
+    "borderDarkRed": "#bb0031",
     "borderBlue": "#4d4dff",
     "borderGreen": "#88ff88",
     "borderOrange": "#ff8300",
@@ -2235,6 +2235,30 @@
       },
       {
         "color": "white",
+        "hexes": ["M1"],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "labels": [
+          {
+            "label": "in Brown",
+            "angle": 180,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "white",
+        "hexes": ["N1"],
+        "removeBorders": [1, 2, 3, 4, 5, 6],
+        "labels": [
+          {
+            "label": "in Gray",
+            "angle": 180,
+            "percent": 0.4
+          }
+        ]
+      },
+      {
+        "color": "white",
         "hexes": ["M2"],
         "removeBorders": [1, 2, 3, 4, 5, 6],
         "shapes": [
@@ -2368,7 +2392,7 @@
         "coords": ["A7p2", "A7p3", "B4p6", "B4p1", "B4p2", "B4p3"]
       },
       {
-        "color": "borderRed",
+        "color": "borderDarkRed",
         "coords": ["C13p1", "C13p6", "C13p5", "D14p6"]
       },
       {
@@ -2397,7 +2421,7 @@
         "coords": ["N3p4", "N3p5"]
       },
       {
-        "color": "borderRed",
+        "color": "borderDarkRed",
         "coords": ["M5p6", "M5p1"]
       },
       {
@@ -2405,7 +2429,7 @@
         "coords": ["N6p3", "N6p4"]
       },
       {
-        "color": "borderRed",
+        "color": "borderDarkRed",
         "coords": ["M7p6", "M7p1"]
       },
       {
