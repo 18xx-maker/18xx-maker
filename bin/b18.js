@@ -52,7 +52,7 @@ const server = app.listen(9000);
 
   let gameDef = gameDefs[bname];
   let game = require("../src/data/games/" + gameDef.file);
-  let tiles = require("../src/data/tiles/");
+  let tiles = require("../src/data/tiles/").default;
 
   const getTile = gutil.getTile(tiles, game.tiles || {});
 
