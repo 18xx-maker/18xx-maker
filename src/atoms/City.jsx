@@ -23,7 +23,7 @@ const cityPaths = {
   city4PathReverse: "M 0 53 L 25 53 A 30 30 0 0 0 53 25 L 53 -25 A 30 30 0 0 0 25 -53 L -25 -53 A 30 30 0 0 0 -53 -25 L -53 25 A 30 30 0 0 0 -25 53 L 0 53"
 }
 
-const City = ({ size, companies, icons, border, name, extend, rotation, pass, bgColor, width, strokeWidth }) => {
+const City = ({ size, companies, icons, border, name, extend, rotation, pass, fixed, bgColor, width, strokeWidth }) => {
   const { config } = useContext(ConfigContext);
   const straightCityNames = config.straightCityNames;
 
@@ -62,11 +62,10 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
       return (
         <RotateContext.Consumer>
         {rotateContext => (
-          <g transform={`rotate(${-(rotateContext || 0) - (rotation || 0)})`}>
-            <ColorContext.Provider value="companies">
-              {companyToken}
-            </ColorContext.Provider>
-          </g>
+          <ColorContext.Provider value="companies">
+            transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}
+            {companyToken}
+          </ColorContext.Provider>
         )}
         </RotateContext.Consumer>
       );
