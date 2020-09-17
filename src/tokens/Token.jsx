@@ -1,5 +1,6 @@
 import React from "react";
 import Color from "../util/Color";
+import RotateContext from "../context/RotateContext";
 
 import * as uuid from "uuid";
 
@@ -71,6 +72,9 @@ const Token = ({
   halves, // Colors for halves shape
   quarters, // Colors for quarters shape
   square, // Draw a square of a certain color on the token
+
+  rotation, // Rotation of the token
+  fixed, // Cancels the rotation
 }) => {
   // Set a default width (smaller for destination tokens)
   width = width || (destination ? 15 : 25);
@@ -503,7 +507,9 @@ const Token = ({
           ((inverse && inverseLabelColor != null) ? (inverseLabelColor === "black" ? s(c(inverseLabelColor), -40) : s(c(inverseLabelColor))) : 
                                                     (color === "black" ? s(c(color), -40) : s(c(color))));
         return (
-          <g>
+          <RotateContext.Consumer>
+          {rotateContext => (
+          <g transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}>
             {clip}
             <g clipPath={`url(#${clipId})`}>
               <g transform={`rotate(${shapeAngle || 0})`}>
@@ -527,6 +533,8 @@ const Token = ({
               strokeWidth={outlineWidth || 1}
             />
           </g>
+          )}
+          </RotateContext.Consumer>
         );
       }}
     </Color>

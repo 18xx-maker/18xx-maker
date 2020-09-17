@@ -10,7 +10,6 @@ import is from "ramda/src/is";
 import GameMapCompanyToken from "../tokens/GameMapCompanyToken";
 
 import ColorContext from "../context/ColorContext";
-import RotateContext from "../context/RotateContext";
 
 const cityPaths = {
   cityPath: "M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30",
@@ -60,14 +59,11 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, fi
           <GameMapCompanyToken abbrev={companies[num]} />;
 
       return (
-        <RotateContext.Consumer>
-        {rotateContext => (
-          <ColorContext.Provider value="companies">
-            transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}
-            {companyToken}
-          </ColorContext.Provider>
-        )}
-        </RotateContext.Consumer>
+          <g>
+            <ColorContext.Provider value="companies">
+              {companyToken}
+            </ColorContext.Provider>
+          </g>
       );
     }
 
