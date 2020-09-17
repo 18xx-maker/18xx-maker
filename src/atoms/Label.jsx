@@ -2,10 +2,8 @@ import React from "react";
 
 import Text from "./shapes/Text";
 
-import RotateContext from "../context/RotateContext";
-
 const Label = (props, rotation, fontSize) => {
-  let { label, fixed } = props;
+  let { label } = props;
 
   if (!fontSize) {
     fontSize = label.length > 2 ? 20 : 30;
@@ -21,16 +19,10 @@ const Label = (props, rotation, fontSize) => {
   }
 
   return (
-    <RotateContext.Consumer>
-      {rotateContext => (
-        <g transform={(fixed || rotateContext.fixed) ? null : `rotate(15-${rotateContext.angle - (rotation || 0)})`}>
           <Text
                 fontSize={fontSize}
                 {...props}
                 text={label}/>
-        </g>
-      )}
-    </RotateContext.Consumer>
   );
 };
 
