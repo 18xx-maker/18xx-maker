@@ -10,6 +10,7 @@ import is from "ramda/src/is";
 import GameMapCompanyToken from "../tokens/GameMapCompanyToken";
 
 import ColorContext from "../context/ColorContext";
+import CityRotateContext from "../context/CityRotateContext";
 
 const cityPaths = {
   cityPath: "M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30",
@@ -39,7 +40,13 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, fi
     if (icons && icons[num]) {
       let iconSvg = iconSvgs[icons[num]];
       let Component = iconSvg.Component;
-      return <g transform="scale(1.4)"><Component x={-12.5} y={-12.5} height={width} width={width}/></g>;
+      return (
+          <CityRotateContext.Provider value={rotation}>
+          <g transform="scale(1.4)">
+            <Component x={-12.5} y={-12.5} height={width} width={width}/>
+          </g>
+          </CityRotateContext.Provider>
+      );
     }
 
     return null;
@@ -59,11 +66,13 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, fi
           <GameMapCompanyToken abbrev={companies[num]} />;
 
       return (
+          <CityRotateContext.Provider value={rotation}>
           <g>
             <ColorContext.Provider value="companies">
               {companyToken}
             </ColorContext.Provider>
           </g>
+          </CityRotateContext.Provider>
       );
     }
 

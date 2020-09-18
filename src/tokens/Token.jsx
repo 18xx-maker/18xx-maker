@@ -1,6 +1,7 @@
 import React from "react";
 import Color from "../util/Color";
 import RotateContext from "../context/RotateContext";
+import CityRotateContext from "../context/CityRotateContext";
 
 import * as uuid from "uuid";
 
@@ -74,7 +75,7 @@ const Token = ({
   square, // Draw a square of a certain color on the token
 
   rotation, // Rotation of the token
-  fixed, // Cancels the rotation
+  fixed, // Cancels all rotation
 }) => {
   // Set a default width (smaller for destination tokens)
   width = width || (destination ? 15 : 25);
@@ -509,7 +510,9 @@ const Token = ({
         return (
           <RotateContext.Consumer>
           {rotateContext => (
-          <g transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}>
+          <CityRotateContext.Consumer>
+          {cityRotateContext => (
+          <g transform={`rotate(${fixed ? 0 : (rotateContext.fixed ? 0 : -rotateContext.angle - (rotation || 0)) - (cityRotateContext || 0)})`}>
             {clip}
             <g clipPath={`url(#${clipId})`}>
               <g transform={`rotate(${shapeAngle || 0})`}>
@@ -533,6 +536,8 @@ const Token = ({
               strokeWidth={outlineWidth || 1}
             />
           </g>
+          )}
+          </CityRotateContext.Consumer>
           )}
           </RotateContext.Consumer>
         );
