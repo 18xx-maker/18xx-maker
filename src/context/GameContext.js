@@ -42,7 +42,7 @@ const loadFile = (file) => {
     });
 };
 
-// Give a game id attempts to find it locally or in @18xx-maker/games
+// Given a game id, attempts to find it locally
 const loadBundledGame = (id) => {
   let gameInfo = games[id];
 
