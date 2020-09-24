@@ -66,6 +66,17 @@ const CenterTown = ({ border, name, color, outlineColor, bgColor, width, size })
       );
     } else {
       let outlineWidth = width + borderWidth;
+      let nameNode = null;
+
+      if (name) {
+        nameNode = (
+          <Name
+            bgColor={bgColor}
+            {...name}
+            y={name.y || (name.reverse ? 20 : -20)}
+          />
+        );
+      }
               //<path d={`M-${width/2-1},${width/2-1} L${width/2-1},${width/2-1} M${width/2-1},-${width/2-1} L-${width/2-1},-${width/2-1}`}
               //fill={c("white")}
               //stroke={c(outlineColor || "track")}
@@ -82,6 +93,7 @@ const CenterTown = ({ border, name, color, outlineColor, bgColor, width, size })
               />
               <circle fill={c(color || "centerTown")} stroke="none" cx={`-${width/2+borderWidth/2-1}`} cy="0" r={width / 2} />
               <circle fill={c(color || "centerTown")} stroke="none" cx={`${width/2+borderWidth/2-1}`} cy="0" r={width / 2} />
+            {nameNode}
             </g>
           )}
         </Color>
