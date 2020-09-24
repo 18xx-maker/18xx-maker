@@ -30,7 +30,7 @@ const Boomtown = ({ border, city, size, name, x, color, bgColor, width, strokeWi
   let nameNode = null;
   strokeWidth = strokeWidth || 2;
 
-  if (size == 1) {
+  if (size === 1) {
     if (border) {
       return (
         <Color>
@@ -159,7 +159,7 @@ const Boomtown = ({ border, city, size, name, x, color, bgColor, width, strokeWi
         </Color>
       );
     }
-  } else if (size == 2) {
+  } else if (size === 2) {
     if (border) {
       let borderWidth = city ? cityWidth + 2 : centerTownWidth + 6;
       return (
