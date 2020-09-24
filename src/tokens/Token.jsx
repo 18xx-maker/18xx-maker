@@ -417,7 +417,7 @@ const Token = ({
                                     x={x} y={y}
                                     height={size} width={size} />);
             if (fontSize) {
-              fSize = fontSize;
+              fSize = fontSize * scaling;
             } else {
               fSize = width * 0.48;
               if (label.length > 5) {
@@ -460,7 +460,7 @@ const Token = ({
         } else if (label && label.length > 0) {
           let fSize;
           if (fontSize) {
-            fSize = fontSize;
+            fSize = fontSize * scaling;
           } else {
             fSize = width * .9;
             if (label.length > 5) {
