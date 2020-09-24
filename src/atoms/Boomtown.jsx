@@ -161,7 +161,7 @@ const Boomtown = ({ border, city, size, name, x, color, bgColor, width, strokeWi
     }
   } else if (size == 2) {
     if (border) {
-      let borderWidth = city ? cityWidth + 3 : centerTownWidth + 6;
+      let borderWidth = city ? cityWidth + 2 : centerTownWidth + 6;
       return (
         <Color>
           {c => (
