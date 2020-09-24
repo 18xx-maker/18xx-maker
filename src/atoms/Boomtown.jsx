@@ -166,7 +166,7 @@ const Boomtown = ({ border, city, size, name, x, color, bgColor, width, strokeWi
         <Color>
           {c => (
           <g>
-            <path d={`M${borderWidth-1},${borderWidth} A${borderWidth},${borderWidth} 0 1,0 ${borderWidth-1},-${borderWidth} L-${borderWidth-1},-${borderWidth} A${borderWidth},${borderWidth} 0 1,0 -${borderWidth-1},${borderWidth} L${borderWidth-1},${borderWidth}`}
+            <path d={`M${borderWidth-1},${borderWidth+1} A${borderWidth},${borderWidth+1} 0 1,0 ${borderWidth-1},-${borderWidth+1} L-${borderWidth-1},-${borderWidth+1} A${borderWidth},${borderWidth+1} 0 1,0 -${borderWidth-1},${borderWidth+1} L${borderWidth-1},${borderWidth+1}`}
               fill={c("border")}
               stroke="none"
             />
