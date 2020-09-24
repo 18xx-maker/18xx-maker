@@ -5,7 +5,6 @@ import * as R from "ramda";
 import any from "ramda/src/any";
 import filter from "ramda/src/filter";
 
-import { tiles } from "@18xx-maker/games";
 import Tile from "../Tile";
 
 import Svg from "../Svg";

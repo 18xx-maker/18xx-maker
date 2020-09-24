@@ -232,7 +232,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
     <Position data={hex.companies}>{c => <Company {...c} />}</Position>
   );
   let bonus = (
-    <Position data={hex.routeBonus}>{b => <RouteBonus {...b} />}</Position>
+    <Position data={hex.routeBonuses || hex.routeBonus}>{b => <RouteBonus {...b} />}</Position>
   );
   let tokens = (
     <ColorContext.Provider value="companies">

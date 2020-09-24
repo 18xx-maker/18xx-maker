@@ -10,7 +10,7 @@ import is from "ramda/src/is";
 import GameMapCompanyToken from "../tokens/GameMapCompanyToken";
 
 import ColorContext from "../context/ColorContext";
-import RotateContext from "../context/RotateContext";
+import CityRotateContext from "../context/CityRotateContext";
 
 const cityPaths = {
   cityPath: "M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30",
@@ -23,7 +23,7 @@ const cityPaths = {
   city4PathReverse: "M 0 53 L 25 53 A 30 30 0 0 0 53 25 L 53 -25 A 30 30 0 0 0 25 -53 L -25 -53 A 30 30 0 0 0 -53 -25 L -53 25 A 30 30 0 0 0 -25 53 L 0 53"
 }
 
-const City = ({ size, companies, icons, border, name, extend, rotation, pass, bgColor, width, strokeWidth }) => {
+const City = ({ size, companies, icons, border, name, extend, rotation, pass, fixed, bgColor, width, strokeWidth }) => {
   const { config } = useContext(ConfigContext);
   const straightCityNames = config.straightCityNames;
 
@@ -40,7 +40,13 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
     if (icons && icons[num]) {
       let iconSvg = iconSvgs[icons[num]];
       let Component = iconSvg.Component;
-      return <g transform="scale(1.4)"><Component x={-12.5} y={-12.5} height={width} width={width}/></g>;
+      return (
+          <CityRotateContext.Provider value={rotation}>
+          <g transform="scale(1.4)">
+            <Component x={-12.5} y={-12.5} height={width} width={width}/>
+          </g>
+          </CityRotateContext.Provider>
+      );
     }
 
     return null;
@@ -60,15 +66,13 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
           <GameMapCompanyToken abbrev={companies[num]} />;
 
       return (
-        <RotateContext.Consumer>
-        {rotateContext => (
-          <g transform={`rotate(${-(rotateContext || 0) - (rotation || 0)})`}>
+          <CityRotateContext.Provider value={rotation}>
+          <g>
             <ColorContext.Provider value="companies">
               {companyToken}
             </ColorContext.Provider>
           </g>
-        )}
-        </RotateContext.Consumer>
+          </CityRotateContext.Provider>
       );
     }
 
