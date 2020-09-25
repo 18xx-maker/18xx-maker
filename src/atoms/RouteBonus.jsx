@@ -1,11 +1,11 @@
 import React, {useContext} from "react";
 import GameContext from "../context/GameContext";
 import Color from "../util/Color";
-import defaultTo from "ramda/src/defaultTo";
+import { multiDefaultTo } from "../util";
 
-const RouteBonus = ({ value, size, fillColor, strokeColor, strokeWidth, textColor }) => {
+const RouteBonus = ({ value, size, fontFamily, fillColor, strokeColor, strokeWidth, textColor }) => {
   const { game } = useContext(GameContext);
-  let fontFamily = defaultTo("sans-serif", game.info.valueFontFamily);
+  fontFamily = multiDefaultTo("sans-serif", game.info.valueFontFamily, fontFamily);
   size = size || 14;
   let width = size * 5.0 / 14.0 * value.length;
   let height = size + 6;

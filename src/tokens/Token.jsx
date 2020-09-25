@@ -417,7 +417,7 @@ const Token = ({
                                     x={x} y={y}
                                     height={size} width={size} />);
             if (fontSize) {
-              fSize = fontSize;
+              fSize = fontSize * scaling;
             } else {
               fSize = width * 0.48;
               if (label.length > 5) {
@@ -460,7 +460,7 @@ const Token = ({
         } else if (label && label.length > 0) {
           let fSize;
           if (fontSize) {
-            fSize = fontSize;
+            fSize = fontSize * scaling;
           } else {
             fSize = width * .9;
             if (label.length > 5) {
@@ -474,15 +474,12 @@ const Token = ({
               fSize *= numbersOnlyScaling;
             }
           }
-          if (label.indexOf("W") !== -1) {
-            fSize *= 0.85;
-          }
-          if (label.indexOf("M") !== -1) {
-            fSize *= 0.9;
-          }
-          if (label.indexOf("N") !== -1) {
-            fSize *= 0.95;
-          }
+
+          /* W, M, and N are wider than average, so shrink to accomodate */
+          fSize *= 0.85 ** (label.match(/W/g)||[]).length;
+          fSize *= 0.9 ** (label.match(/M/g)||[]).length;
+          fSize *= 0.95 ** (label.match(/N/g)||[]).length;
+
           let y = fSize * 11 / 32;
           if (shield || shield3) {
             fSize *= scaling;

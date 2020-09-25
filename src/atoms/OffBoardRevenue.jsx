@@ -8,7 +8,7 @@ import Currency from "../util/Currency";
 
 import Color from "../util/Color";
 
-import defaultTo from "ramda/src/defaultTo";
+import { multiDefaultTo } from "../util";
 
 const splitRevenues = (rows, revenues) => {
   if(!rows || rows < 2 || revenues.length < 2) {
@@ -29,7 +29,7 @@ const height = (size) => {
 }
 
 const makeNode = (x, y, reverse, revenue, size, fontFamily) => {
-  let value = R.defaultTo("", R.defaultTo(revenue.cost, R.defaultTo(revenue.revenue, revenue.value)));
+  let value = multiDefaultTo("", revenue.cost, revenue.revenue, revenue.value);
   let length = letter(size) * `${value}`.length;
   let phaseLength = letter(size) * `${revenue.phase}`.length;
   let width = R.max(`${value}`.length, 2) * letter(size) + 5;
@@ -123,7 +123,7 @@ const makeNodes = (y, reverse, revenues, size, fontFamily) => {
   ]);
 };
 
-const OffBoardRevenue = ({ name, revenues, reverse, rows, size}) => {
+const OffBoardRevenue = ({ name, revenues, fontFamily, reverse, rows, size}) => {
   const { game } = useContext(GameContext);
   let nameNode = null;
   if (name) {
@@ -135,8 +135,8 @@ const OffBoardRevenue = ({ name, revenues, reverse, rows, size}) => {
 
   let split = splitRevenues(rows, revenues);
 
-  let fontSize = defaultTo(DEFAULT_FONTSIZE, size);
-  let fontFamily = defaultTo("display", game.info.valueFontFamily);
+  let fontSize = multiDefaultTo(DEFAULT_FONTSIZE, size);
+  fontFamily = multiDefaultTo("display", game.info.valueFontFamily, fontFamily);
 
   let nodes = R.addIndex(R.chain)((revenues, row) => {
     let y = row * height(fontSize) * (reverse ? -1 : 1);

@@ -6,9 +6,9 @@ import Color from "../util/Color";
 import Currency, { format } from "../util/Currency";
 import RotateContext from "../context/RotateContext";
 
-import defaultTo from "ramda/src/defaultTo";
+import { multiDefaultTo } from "../util";
 
-const Value = ({ value, color, textColor, shape, fixed, outerBorderColor, rotation }) => {
+const Value = ({ value, fontFamily, color, textColor, shape, fixed, outerBorderColor, rotation }) => {
   const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
 
@@ -73,7 +73,7 @@ const Value = ({ value, color, textColor, shape, fixed, outerBorderColor, rotati
                   transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}
                   fontWeight="bold"
                   fontSize={size}
-                  fontFamily={defaultTo("sans-serif", game.info.valueFontFamily)}
+                  fontFamily={multiDefaultTo("sans-serif", game.info.valueFontFamily, fontFamily)}
                   fill={c(textColor) || t(c(color))}
                   dominantBaseline="central"
                   textAnchor="middle"

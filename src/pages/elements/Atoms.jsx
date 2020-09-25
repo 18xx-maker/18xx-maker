@@ -206,10 +206,13 @@ const atoms = [{
              {towns: [{name:{name:"Austin"}}]},
              {towns: [{name:{name:"Boston", reverse: true}}]},
              {centerTowns: [{}]},
+             {centerTowns: [{size:2}]},
              {centerTowns: [{color:"orange",name:{name:"Austin"}}]},
              {centerTowns: [{name:{name:"Boston", reverse: true}}]},
              {boomtowns: [{}]},
              {boomtowns: [{city:true}]},
+             {boomtowns: [{city:false,size:2}]},
+             {boomtowns: [{city:true,size:2}]},
              {boomtowns: [{color:"orange",name:{name:"Denver"}}]},
              {boomtowns: [{color:"water",angle:-90,percent:0.20 },
                           {city:true,angle: 90,percent:0.34}]}]
