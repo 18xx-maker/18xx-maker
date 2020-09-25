@@ -6,7 +6,7 @@ import CompanyToken from "./tokens/CompanyToken";
 import Token from "./tokens/Token";
 import Phase from "./Phase";
 import Color from "./util/Color";
-import { unitsToCss } from "./util";
+import { unitsToCss, multiDefaultTo } from "./util";
 import Currency from "./util/Currency";
 
 import addIndex from "ramda/src/addIndex";
@@ -27,12 +27,14 @@ const Charter = ({
   game,
   company,
   backgroundColor,
-  variant
+  variant,
+  fontFamily
 }) => {
   const { config } = useContext(ConfigContext);
   const charterStyle = config.charters.style;
   const halfWidthCharters = config.charters.halfWidth;
   const blackBand = config.charters.blackBand;
+  fontFamily = multiDefaultTo("display", fontFamily);
  
   let tokenSpots = [];
   if (tokens) {
@@ -107,7 +109,11 @@ const Charter = ({
               <div className="charter__body">
                 <div style={{ color: t(c(charterStyle === "color" ? color : "white")),
                               paddingRight: halfWidthCharters ? null : unitsToCss(12.5 + (65 * tokens.length)) }}
-                     className="charter__name"><div>{name}</div></div>
+                     className="charter__name">
+                     <div style={{ fontFamily: `${fontFamily}` }}>
+                       {name}
+                     </div>
+                </div>
                 {charterStyle === "color" && (
                   <div className="charter__logo">
                     <svg viewBox="-37.5 -37.5 75 75">
