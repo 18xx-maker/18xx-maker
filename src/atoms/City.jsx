@@ -62,8 +62,8 @@ const City = ({ size, outlineColor, color, companies, icons, border, name, exten
     if(companies && companies[num]) {
 
       let companyToken = is(Object, companies[num]) ?
-          <GameMapCompanyToken {...companies[num]} abbrev={companies[num].abbrev || companies[num].label} /> :
-          <GameMapCompanyToken abbrev={companies[num]} />;
+          <GameMapCompanyToken {...companies[num]} abbrev={companies[num].abbrev || companies[num].label} width={width} /> :
+          <GameMapCompanyToken abbrev={companies[num]} width={width} />;
 
       return (
           <CityRotateContext.Provider value={rotation}>
