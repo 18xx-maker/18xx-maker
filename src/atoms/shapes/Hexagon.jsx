@@ -9,7 +9,7 @@ import { getFontProps  } from "../../util";
 import defaultTo from "ramda/src/defaultTo";
 
 const Hexagon = (props) => {
-  let { text, textColor, color, opacity, borderColor, borderWidth, width, dashed } = props;
+  let { text, textColor, fontFamily, color, opacity, borderColor, borderWidth, width, dashed } = props;
   const { game } = useContext(GameContext);
 
   let scale = defaultTo(50, width) / 50;
@@ -31,7 +31,7 @@ const Hexagon = (props) => {
                 strokeWidth={defaultTo(2, borderWidth)}
                 strokeDasharray={strokeDashArray}
                 strokeLinecap="round" />
-          <Text {...font} text={text} color={textColor}/>
+          <Text {...font} text={text} color={textColor} fontFamily={fontFamily}/>
         </g>
       )}
     </Color>

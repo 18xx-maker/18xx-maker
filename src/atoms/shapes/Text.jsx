@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Color from "../../util/Color";
 import RotateContext from "../../context/RotateContext";
+import GameContext from "../../context/GameContext";
 
 import { getFontProps } from "../../util";
 
 import defaultTo from "ramda/src/defaultTo";
 
 const Text = (props) => {
-  let { text, color, rotation, fixed } = props;
-  let font = getFontProps(props);
+  const { game } = useContext(GameContext);
+  let { text, fontFamily, color, rotation, fixed } = props;
+  fontFamily = defaultTo(game.info.valueFontFamily, fontFamily);
+  let font = getFontProps(props, null, null, fontFamily);
 
   return (
     <RotateContext.Consumer>
