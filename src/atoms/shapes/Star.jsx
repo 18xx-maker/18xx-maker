@@ -14,7 +14,7 @@ const Star = (props) => {
   const { game } = useContext(GameContext);
 
   let scale = defaultTo(50, width) / 50;
-  let x = 25 * scale;
+  //let x = 25 * scale;
 
   let font = getFontProps(props, 14 * scale, undefined,
     defaultTo(undefined, game.info.valueFontFamily));
