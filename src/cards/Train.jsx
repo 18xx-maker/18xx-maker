@@ -56,7 +56,7 @@ const Train = ({ train, trains, blackBand }) => {
   let notes = [];
 
   nameFontFamily = defaultTo("display", nameFontFamily);
-  let nameFontSizeInch = defaultTo(0.6875, nameFontSize / 72);
+  let nameFontSizeInch = defaultTo(0.5, nameFontSize / 72);
 
   priceFontFamily = defaultTo("display", priceFontFamily);
   let priceFontSizeInch = defaultTo( 0.25, priceFontSize / 72);
