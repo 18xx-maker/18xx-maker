@@ -1,0 +1,507 @@
+{
+  "info": {
+    "title": "18 Los Angeles",
+    "designer": "Tony Fryer",
+    "background": "orange",
+    "marketTokens": 2,
+    "extraStationTokens": 3,
+    "currency": "$#"
+  },
+  "links": {
+    "bgg": "https://boardgamegeek.com/boardgame/306257/18-los-angeles",
+    "rules": "https://drive.google.com/file/d/1G_fLbak96VWQ0Vfvg7-Qh2gXgv7r0BQi/view?usp=sharing",
+    "license": "https://traxx-denver.com/games/",
+    "purchase": "https://traxx-denver.com/games/"
+  },
+  "wip": true,
+  "colors": {
+    "UP": "#727272",
+    "LAIR": "#03E0E0",
+    "SP": "#0026FF",
+    "LA": "#00830E",
+    "ELA": "#FF0000",
+    "SF": "#FF7FED",
+    "PER": "#FF6A00"
+  },
+  "tokens": ["Round"],
+  "tokenTypes": {
+    "default": ["Free", 80, 80, 80, 80]
+  },
+  "players": [
+    {
+      "number": 2,
+      "capital": 600,
+      "certLimit": 19,
+      "bank": 7000
+    },
+    {
+      "number": 3,
+      "capital": 400,
+      "certLimit": 14,
+      "bank": 6500
+    },
+    {
+      "number": 4,
+      "capital": 400,
+      "certLimit": 12,
+      "bank": 7500
+    }
+  ],
+  "companies": [
+    {
+      "name": "Union Pacific Railroad",
+      "abbrev": "UP",
+      "token": {
+        "shield": true,
+        "shieldTop": "UP",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "UP",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Los Angeles and Independence Railroad",
+      "abbrev": "LAIR",
+      "token": {
+        "shield": true,
+        "shieldTop": "LAIR",
+        "color": "white",
+        "fontSize": 14
+      },
+      "color": "LAIR",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Southern Pacific Railroad",
+      "abbrev": "SP",
+      "tokens": ["Free", 80, 80, 80, "$80*"],
+      "token": {
+        "shield": true,
+        "shieldTop": "SP",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "SP",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Los Angeles Railway",
+      "abbrev": "LA",
+      "tokens": ["Free", 80, 80, 80, "$80*"],
+      "token": {
+        "shield": true,
+        "shieldTop": "LA",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "LA",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "East Los Angeles & San Pedro Railroad",
+      "abbrev": "ELA",
+      "tokens": ["Free", 80, 80, 80, 80, 80],
+      "token": {
+        "shield": true,
+        "shieldTop": "ELA",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "ELA",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Santa Fe Railroad",
+      "abbrev": "SF",
+      "tokens": ["Free", 80, 80, 80, "$80*"],
+      "token": {
+        "shield": true,
+        "shieldTop": "SF",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "SF"
+    },
+    {
+      "name": "Pacific Electric Railway",
+      "abbrev": "PER",
+      "tokens": ["Free", 80, 80, 80],
+      "token": {
+        "shield": true,
+        "shieldTop": "PER",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "PER",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "description": "GT",
+      "price": "GT",
+      "phase": false,
+      "quantity": 1,
+      "color": "yellow",
+      "phased": ["4/6", "5"],
+      "rust": ["6", "7/8"]
+    },
+    {
+      "name": "2",
+      "price": "OCR",
+      "phase": false,
+      "quantity": 1,
+      "color": "yellow",
+      "phased": ["4/6", "5"],
+      "rust": ["6", "7/8"]
+    },
+    {
+      "name": "2",
+      "quantity": 7,
+      "price": 80,
+      "color": "yellow",
+      "phased": ["4/6", "5"],
+      "rust": ["6", "7/8"]
+    },
+    {
+      "name": "3/5",
+      "quantity": 6,
+      "price": 160,
+      "color": "green",
+      "phased": ["6", "7/8"]
+    },
+    {
+      "name": "4",
+      "quantity": 6,
+      "price": 180,
+      "color": "green",
+      "phased": ["6", "7/8"]
+    },
+    {
+      "name": "4/6",
+      "quantity": 5,
+      "price": 450,
+      "color": "brown"
+    },
+    {
+      "name": "5",
+      "quantity": 5,
+      "price": 500,
+      "color": "brown"
+    },
+    {
+      "name": "6",
+      "quantity": 9,
+      "price": 800,
+      "color": "gray"
+    },
+    {
+      "name": "7/8",
+      "quantity": 9,
+      "price": 900,
+      "color": "gray"
+    }
+  ],
+  "privates": [
+    {
+      "name": "South Bay Line",
+      "price": 40,
+      "revenue": 15,
+      "icon": "steamboat",
+      "description": "Extra $0 upgrade to either Redondo Beach or Torrance"
+    },
+    {
+      "name": "Los Angeles Citrus",
+      "price": 60,
+      "revenue": 15,
+      "icon": "steamboat",
+      "description": "Add a $30 marker in either Riverside or Port of Long Beach"
+    },
+    {
+      "name": "United States Mail Contract",
+      "price": 80,
+      "revenue": 0,
+      "icon": "mail",
+      "description": "Adds $10, per location visited to the revenue of one train"
+    },
+    {
+      "name": "Puente Trolley",
+      "price": 40,
+      "revenue": 15,
+      "icon": "steamboat",
+      "description": "Extra $0 yellow tile lay in Puente (C10)"
+    },
+    {
+      "name": "Chino Hills Excavation",
+      "price": 60,
+      "revenue": 20,
+      "icon": "tunnel",
+      "description": "All hill and tunnel tile laying costs are reduced by $20"
+    },
+    {
+      "name": "Pacific Maritime",
+      "price": 60,
+      "revenue": 10,
+      "icon": "token",
+      "description": "Reserves location in longbeach for an extra token at $0"
+    },
+    {
+      "name": "Beverly Hills Carriage",
+      "price": 40,
+      "revenue": 15,
+      "icon": "steamboat",
+      "description": "Extra $0 yellow tile lay in Beverly Hills (B3)"
+    },
+    {
+      "name": "Los Angeles Steamship",
+      "price": 40,
+      "revenue": 10,
+      "icon": "steamboat",
+      "description": "Owning company may place or shift $20 marker indicated locations"
+    },
+    {
+      "name": "Los Angeles Title",
+      "price": 40,
+      "revenue": 10,
+      "token": { "color": "white", "label": "OPEN" },
+      "description": "Open token in any unreserved place (cannot use in Long Beach)"
+    },
+    {
+      "name": "Dewey, Cheatham & Howe",
+      "price": 40,
+      "revenue": 10,
+      "icon": "token",
+      "description": "Place token in a location without a space (cannot use in Long Beach)"
+    },
+    {
+      "name": "Gardena Tramway",
+      "price": 140,
+      "token": { "color": "brown", "label": "GT" },
+      "description": "Starts with $60 Treasury and a 2T; Operates first in each OR; Lays or upgrades 1 tile; Splits revenue 50/50 with owner"
+    },
+    {
+      "name": "Orange County Railroad",
+      "price": 100,
+      "token": { "color": "purple", "label": "OCR" },
+      "description": "Starts with $40 Treasury and a 2T; Operates second in each OR; Lays or upgrades 1 tile; Splits revenue 50/50 with owner"
+    }
+  ],
+  "phases": [
+    {
+      "name": "1",
+      "train": "2",
+      "limit": 4,
+      "tiles": "yellow"
+    },
+    {
+      "name": "2",
+      "train": ["3/5", "4"],
+      "limit": 4,
+      "tiles": "green"
+    },
+    {
+      "name": "3",
+      "train": ["4/6", "5"],
+      "limit": 3,
+      "tiles": "brown",
+      "events": {
+        "close_companies": true
+      }
+    },
+    {
+      "name": "4",
+      "train": ["6", "7/8"],
+      "limit": 2,
+      "tiles": "gray",
+      "events": {
+        "remove_tokens": true
+      }
+    }
+  ],
+  "ipo": true,
+  "bank": 12000,
+  "tiles": {
+    "5": 3,
+    "6": 4,
+    "7": 5,
+    "8": 16,
+    "9": 16,
+    "14": 4,
+    "15": 5,
+    "16": 2,
+    "17": 1,
+    "18": 1,
+    "19": 2,
+    "20": 2,
+    "21": 1,
+    "22": 1,
+    "23": 4,
+    "24": 4,
+    "25": 2,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "30": 1,
+    "31": 1,
+    "39": 1,
+    "40": 1,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 1,
+    "45": 2,
+    "46": 2,
+    "47": 2,
+    "51": 2,
+    "57": 4,
+    "70": 1,
+    "290": 1,
+    "291": 1,
+    "292": 1,
+    "293": 1,
+    "294": 2,
+    "295": 2,
+    "296": 1,
+    "297": 2,
+    "298|LA": {
+      "color": "green",
+      "labels": [{ "angle": 287, "percent": 0.7, "label": "LB" }],
+      "values": [{ "angle": 323, "percent": 0.75, "value": 40 }],
+      "cities": [
+        { "angle": 60, "percent": 0.75 },
+        { "angle": 120, "percent": 0.75 },
+        {
+          "angle": 180,
+          "percent": 0.75,
+          "companies": [{ "label": "PMC", "color": "white" }]
+        },
+        { "angle": 240, "percent": 0.75 }
+      ],
+      "track": [
+        { "type": "sharp", "side": 1 },
+        { "type": "gentle", "side": 1 },
+        { "type": "straight", "side": 1 },
+        { "type": "gentle", "side": 5 }
+      ]
+    },
+    "299|LA": {
+      "color": "brown",
+      "labels": [{ "angle": 287, "percent": 0.7, "label": "LB" }],
+      "values": [{ "angle": 323, "percent": 0.75, "value": 70 }],
+      "cities": [
+        { "angle": 60, "percent": 0.75 },
+        { "angle": 120, "percent": 0.75 },
+        {
+          "angle": 180,
+          "percent": 0.75,
+          "companies": [{ "label": "PMC", "color": "white" }]
+        },
+        { "angle": 240, "percent": 0.75 }
+      ],
+      "track": [
+        { "type": "sharp", "side": 1 },
+        { "type": "gentle", "side": 1 },
+        { "type": "straight", "side": 1 },
+        { "type": "gentle", "side": 5 }
+      ]
+    },
+    "300|LA": {
+      "color": "gray",
+      "labels": [{ "angle": 287, "percent": 0.7, "label": "LB" }],
+      "values": [{ "angle": 323, "percent": 0.75, "value": 90 }],
+      "cities": [
+        { "angle": 60, "percent": 0.75 },
+        { "angle": 120, "percent": 0.75 },
+        {
+          "angle": 180,
+          "percent": 0.75,
+          "companies": [{ "label": "PMC", "color": "white" }]
+        },
+        { "angle": 240, "percent": 0.75 }
+      ],
+      "track": [
+        { "type": "sharp", "side": 1 },
+        { "type": "gentle", "side": 1 },
+        { "type": "straight", "side": 1 },
+        { "type": "gentle", "side": 5 }
+      ]
+    },
+    "611": 4,
+    "619": 3
+  }
+}
