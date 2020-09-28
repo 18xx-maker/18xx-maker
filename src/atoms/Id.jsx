@@ -5,7 +5,7 @@ import { useOrientation } from "../context/OrientationContext";
 
 import Color from "../util/Color";
 
-const Id = ({ id, extra }) => {
+const Id = ({ id, extra, bgColor }) => {
   const { config } = useContext(ConfigContext);
   const rotation = useOrientation();
 
@@ -35,7 +35,7 @@ const Id = ({ id, extra }) => {
           <g transform={`rotate(${rotation}) translate(${idX} 70)`}>
             <text
               fontFamily="sans-serif"
-              fill={p("black")}
+              fill={t(c(bgColor))}
               stroke="none"
               strokeLinecap="round"
               strokeLinejoin="bevel"
