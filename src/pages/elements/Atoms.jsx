@@ -357,7 +357,59 @@ const atoms = [{
     {shapes: [{width:100,color:"yellow"},
               {type: "triangle", color: "mountain", opacity:0.9,angle:60,percent:0.6},
               {type: "triangle", color: "water", reverse: true, angle:-60,percent:0.6},
-              {type: "diamond", color:"black",opacity:"0.5",angle:180,percent:0.6}]}
+              {type: "diamond", color:"black",opacity:"0.5",angle:180,percent:0.6}]},
+    {color: "white",
+     cities: [ { size: 6, width: 22, color: "blue" } ],
+     track: [
+        { side: 1, color: "red" }, { side: 2, color: "red" }, { side: 3, color: "red" },
+        { side: 4, color: "red" }, { side: 5, color: "red" }, { side: 6, color: "red" }
+      ],
+      values: [ { value: 1776 } ],
+      shapes: [
+        {
+          type: "star",
+          color: "white",
+          angle: 180,
+          percent: 0.60,
+          width: 12
+        },
+        {
+          type: "star",
+          color: "white",
+          angle: 120,
+          percent: 0.60,
+          width: 12
+        },
+        {
+          type: "star",
+          color: "white",
+          angle: -120,
+          percent: 0.60,
+          width: 12
+        },
+        {
+          type: "star",
+          color: "white",
+          angle: -60,
+          percent: 0.60,
+          width: 12
+        },
+        {
+          type: "star",
+          color: "white",
+          angle: 60,
+          percent: 0.60,
+          width: 12
+        },
+        {
+          type: "star",
+          color: "white",
+          angle: 0,
+          percent: 0.60,
+          width: 12
+        }
+      ]
+    }
   ]
 },{
   group: "Route Bonuses",
