@@ -23,7 +23,7 @@ const cityPaths = {
   city4PathReverse: "M 0 53 L 25 53 A 30 30 0 0 0 53 25 L 53 -25 A 30 30 0 0 0 25 -53 L -25 -53 A 30 30 0 0 0 -53 -25 L -53 25 A 30 30 0 0 0 -25 53 L 0 53"
 }
 
-const City = ({ size, outlineColor, color, companies, icons, border, name, extend, rotation, pass, fixed, bgColor, width, strokeWidth }) => {
+const City = ({ size, outlineColor, color, companies, icons, border, borderColor, name, extend, rotation, pass, fixed, bgColor, width, strokeWidth }) => {
   const { config } = useContext(ConfigContext);
   const straightCityNames = config.straightCityNames;
 
@@ -115,7 +115,7 @@ const City = ({ size, outlineColor, color, companies, icons, border, name, exten
                           stroke="none"
                           points={`${pass_p1x},${pass_p1y} ${pass_p2x},${pass_p2y} ${pass_p3x},${pass_p3y}`}
                           />}
-              <circle fill={c("border")} stroke="none" cx="0" cy="0" r={`${width + borderW}`} />
+              <circle fill={c(borderColor || "border")} stroke="none" cx="0" cy="0" r={`${width + borderW}`} />
             </g>
           )}
         </Color>
@@ -189,8 +189,8 @@ const City = ({ size, outlineColor, color, companies, icons, border, name, exten
                     />}
               <polygon
                 points={`${leftBorder},0 ${rightBorder},0`}
-                fill={c("border")}
-                stroke={c("border")}
+                fill={c(borderColor || "border")}
+                stroke={c(borderColor || "border")}
                 strokeWidth={`${2 * width + 2 * borderW}`}
                 strokeLinejoin="round"
                 strokeLinecap="round"
@@ -271,8 +271,8 @@ const City = ({ size, outlineColor, color, companies, icons, border, name, exten
             <polygon
               transform="rotate(-30)"
               points={`0,${-1 * offs2m - 2} ${width},${offs1 + 2} ${-1 * width},${offs1 + 2}`}
-              fill={c("border")}
-              stroke={c("border")}
+              fill={c(borderColor || "border")}
+              stroke={c(borderColor || "border")}
               strokeWidth={`${2 * width + 2 * borderW}`}
               strokeLinejoin="round"
               strokeLinecap="round"
@@ -360,8 +360,8 @@ const City = ({ size, outlineColor, color, companies, icons, border, name, exten
                 ${width},${-1 * width}
                 ${width},${width}
                 ${-1 * width},${width}`}
-              fill={c("border")}
-              stroke={c("border")}
+              fill={c(borderColor || "border")}
+              stroke={c(borderColor || "border")}
               strokeWidth={`${width * 2 + 6}`}
               strokeLinejoin="round"
               strokeLinecap="round"
@@ -459,7 +459,7 @@ const City = ({ size, outlineColor, color, companies, icons, border, name, exten
         <Color>
           {c => (
             <circle cx="0" cy="0" r={`${2 * width + 11.5}`}
-                    fill={c("border")}
+                    fill={c(borderColor || "border")}
                     stroke="none" />
           )}
         </Color>
@@ -561,7 +561,7 @@ const City = ({ size, outlineColor, color, companies, icons, border, name, exten
         <Color>
           {c => (
             <circle cx="0" cy="0" r={`${width * 2 + 17}`}
-                    fill={c("border")}
+                    fill={c(borderColor || "border")}
                     stroke="none" />
           )}
         </Color>
