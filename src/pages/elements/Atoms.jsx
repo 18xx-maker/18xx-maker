@@ -361,8 +361,9 @@ const atoms = [{
     {color: "white",
      cities: [ { size: 6, width: 22, color: "blue" } ],
      track: [
-        { side: 1, color: "red" }, { side: 2, color: "red" }, { side: 3, color: "red" },
-        { side: 4, color: "red" }, { side: 5, color: "red" }, { side: 6, color: "red" }
+        { side: 1, color: "red", "type": "straight" },
+        { side: 2, color: "red", "type": "straight" },
+        { side: 3, color: "red", "type": "straight" }
       ],
       values: [ { value: 1776 } ],
       shapes: [
