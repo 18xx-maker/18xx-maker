@@ -185,7 +185,7 @@ const Config = () => {
       <Divider/>
 
       <Box className={classes.configSection}>
-        <Typography variant="h5">Tiles</Typography>
+        <Typography variant="h5">Market</Typography>
         <Input name="stock.cell.width" label="Cell Width" dimension={true}
                description="This determines the default width of one stock market cell."/>
         <Input name="stock.cell.height" label="Cell Height" dimension={true}

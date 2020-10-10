@@ -56,7 +56,9 @@ const Cards = () => {
                     token={company.token || company.color}
                     {...share}
                     subtext={company.subtext || share.subtext}
-                    variant={company.variant || share.variant} />
+                    variant={company.variant || share.variant}
+                    fontFamily={company.fontFamily || game.info.companyFontFamily}
+             />
       break;
     default:
       // Make a number card from this number

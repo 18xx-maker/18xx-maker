@@ -8,7 +8,7 @@ import { getFontProps  } from "../../util";
 import defaultTo from "ramda/src/defaultTo";
 
 const Diamond = (props) => {
-  let { text, textColor,
+  let { text, textColor, fontFamily,
         color, opacity,
         borderColor, borderWidth, width, dashed } = props;
   const { game } = useContext(GameContext);
@@ -31,7 +31,7 @@ const Diamond = (props) => {
                 strokeWidth={defaultTo(2, borderWidth)}
                 strokeDasharray={strokeDashArray}
                 strokeLinecap="round" />
-          <Text {...font} text={text} color={textColor}/>
+          <Text {...font} text={text} fontFamily={fontFamily} color={textColor}/>
         </g>
       )}
     </Color>

@@ -1,5 +1,8 @@
 import React from "react";
 import Color from "../util/Color";
+import RotateContext from "../context/RotateContext";
+import CityRotateContext from "../context/CityRotateContext";
+import defaultTo from "ramda/src/defaultTo";
 
 import * as uuid from "uuid";
 
@@ -71,6 +74,9 @@ const Token = ({
   halves, // Colors for halves shape
   quarters, // Colors for quarters shape
   square, // Draw a square of a certain color on the token
+
+  rotation, // Rotation of the token
+  fixed, // Cancels all rotation
 }) => {
   // Set a default width (smaller for destination tokens)
   width = width || (destination ? 15 : 25);
@@ -95,6 +101,7 @@ const Token = ({
       <circle cx="0" cy="0" r={width + (bleed ? 5 : 0)} />
     </clipPath>
   );
+  let shapeMult = 1;
 
   return (
     <Color>
@@ -335,12 +342,16 @@ const Token = ({
             let scale = scaling * 0.09;
             let trans = scaling * -27;
             let wh = scaling * 50;
+            let fillColor = shield === true ? p("white") : c(shield);
             if ((reserved || inverse) && shieldTop) {
               textFill = c(shieldTop);
+            } else {
+              textFill = defaultTo(t(fillColor), labelColor);
             }
+            shapeMult = 0.5;
           shapes.push(<g key="shield" width={`${wh}`} height={`${wh}`} transform={`translate(${trans}, ${trans}) scale(${scale})`}>
                           <path
-                            fill={shield === true ? p("white") : c(shield)}
+                            fill={fillColor}
                             d="M515 314.2c15.1 32.1 18.4 41.5 17.9 70.7-1.5 97.2-76 115.6-117 115-28.6-.4-76.5 2-109.4 32.7h-.8c-32.9-30.7-80.8-33.2-109.4-32.7-41 .6-115.5-17.8-117-115-.5-29.1 2.9-38.7 17.9-70.7 22.9-34.1 15.3-108.1 15.3-108.1h387.2c-8.4 33.9-7.7 74 15.3 108.1z"/>
                           <path
                             fill="none"
@@ -361,12 +372,16 @@ const Token = ({
             let scale = scaling * 0.09;
             let trans = scaling * -27;
             let wh = scaling * 50;
+            let fillColor = shield3 === true ? p("white") : c(shield3);
             if ((reserved || inverse) && shield3TopCenter) {
               textFill = c(shield3TopCenter);
+            } else {
+              textFill = defaultTo(t(fillColor), labelColor);
             }
+            shapeMult = 0.8;
             shapes.push(<g key="shield3" width={`${wh}`} height={`${wh}`} transform={`translate(${trans}, ${trans}) scale(${scale})`}>
                           <path
-                            fill={shield3 === true ? p("white") : c(shield3)}
+                            fill={fillColor}
                             d="M514.8 313.8c15.1 32 18.4 41.6 17.9 70.7-1.6 97.2-76 115.6-117 115-28.5-.4-76.4 2.1-109.3 32.7h-.9c-32.9-30.7-80.8-33.1-109.3-32.7-41 .6-115.4-17.8-117-115-.4-29.1 2.9-38.7 17.9-70.7 23-34.1 15.4-108 15.4-108h386.9c-8.2 33.8-7.6 73.9 15.4 108z"/>
                           <path
                             fill="none"
@@ -412,7 +427,7 @@ const Token = ({
                                     x={x} y={y}
                                     height={size} width={size} />);
             if (fontSize) {
-              fSize = fontSize;
+              fSize = fontSize * scaling;
             } else {
               fSize = width * 0.48;
               if (label.length > 5) {
@@ -455,9 +470,9 @@ const Token = ({
         } else if (label && label.length > 0) {
           let fSize;
           if (fontSize) {
-            fSize = fontSize;
+            fSize = fontSize * scaling;
           } else {
-            fSize = width * .9;
+            fSize = width * .9 * shapeMult;
             if (label.length > 5) {
               fSize *= 0.6;
             } else if (label.length > 4) {
@@ -469,15 +484,12 @@ const Token = ({
               fSize *= numbersOnlyScaling;
             }
           }
-          if (label.indexOf("W") !== -1) {
-            fSize *= 0.85;
-          }
-          if (label.indexOf("M") !== -1) {
-            fSize *= 0.9;
-          }
-          if (label.indexOf("N") !== -1) {
-            fSize *= 0.95;
-          }
+
+          /* W, M, and N are wider than average, so shrink to accomodate */
+          fSize *= 0.85 ** (label.match(/W/g)||[]).length;
+          fSize *= 0.9 ** (label.match(/M/g)||[]).length;
+          fSize *= 0.95 ** (label.match(/N/g)||[]).length;
+
           let y = fSize * 11 / 32;
           if (shield || shield3) {
             fSize *= scaling;
@@ -503,7 +515,11 @@ const Token = ({
           ((inverse && inverseLabelColor != null) ? (inverseLabelColor === "black" ? s(c(inverseLabelColor), -40) : s(c(inverseLabelColor))) : 
                                                     (color === "black" ? s(c(color), -40) : s(c(color))));
         return (
-          <g>
+          <RotateContext.Consumer>
+          {rotateContext => (
+          <CityRotateContext.Consumer>
+          {cityRotateContext => (
+          <g transform={`rotate(${fixed ? 0 : (rotateContext.fixed ? 0 : -rotateContext.angle - (rotation || 0)) - (cityRotateContext || 0)})`}>
             {clip}
             <g clipPath={`url(#${clipId})`}>
               <g transform={`rotate(${shapeAngle || 0})`}>
@@ -527,6 +543,10 @@ const Token = ({
               strokeWidth={outlineWidth || 1}
             />
           </g>
+          )}
+          </CityRotateContext.Consumer>
+          )}
+          </RotateContext.Consumer>
         );
       }}
     </Color>

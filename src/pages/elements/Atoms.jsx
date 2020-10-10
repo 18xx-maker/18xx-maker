@@ -206,10 +206,13 @@ const atoms = [{
              {towns: [{name:{name:"Austin"}}]},
              {towns: [{name:{name:"Boston", reverse: true}}]},
              {centerTowns: [{}]},
+             {centerTowns: [{size:2}]},
              {centerTowns: [{color:"orange",name:{name:"Austin"}}]},
              {centerTowns: [{name:{name:"Boston", reverse: true}}]},
              {boomtowns: [{}]},
              {boomtowns: [{city:true}]},
+             {boomtowns: [{city:false,size:2}]},
+             {boomtowns: [{city:true,size:2}]},
              {boomtowns: [{color:"orange",name:{name:"Denver"}}]},
              {boomtowns: [{color:"water",angle:-90,percent:0.20 },
                           {city:true,angle: 90,percent:0.34}]}]
@@ -354,7 +357,60 @@ const atoms = [{
     {shapes: [{width:100,color:"yellow"},
               {type: "triangle", color: "mountain", opacity:0.9,angle:60,percent:0.6},
               {type: "triangle", color: "water", reverse: true, angle:-60,percent:0.6},
-              {type: "diamond", color:"black",opacity:"0.5",angle:180,percent:0.6}]}
+              {type: "diamond", color:"black",opacity:"0.5",angle:180,percent:0.6}]},
+    {color: "white",
+     cities: [ { size: 6, width: 22, color: "blue" } ],
+     track: [
+        { side: 1, color: "red", "type": "straight" },
+        { side: 2, color: "red", "type": "straight" },
+        { side: 3, color: "red", "type": "straight" }
+      ],
+      values: [ { value: 1776 } ],
+      shapes: [
+        {
+          type: "star",
+          color: "white",
+          angle: 180,
+          percent: 0.60,
+          width: 12
+        },
+        {
+          type: "star",
+          color: "white",
+          angle: 120,
+          percent: 0.60,
+          width: 12
+        },
+        {
+          type: "star",
+          color: "white",
+          angle: -120,
+          percent: 0.60,
+          width: 12
+        },
+        {
+          type: "star",
+          color: "white",
+          angle: -60,
+          percent: 0.60,
+          width: 12
+        },
+        {
+          type: "star",
+          color: "white",
+          angle: 60,
+          percent: 0.60,
+          width: 12
+        },
+        {
+          type: "star",
+          color: "white",
+          angle: 0,
+          percent: 0.60,
+          width: 12
+        }
+      ]
+    }
   ]
 },{
   group: "Route Bonuses",

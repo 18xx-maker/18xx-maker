@@ -6,9 +6,9 @@ import Color from "../util/Color";
 import Currency, { format } from "../util/Currency";
 import RotateContext from "../context/RotateContext";
 
-import defaultTo from "ramda/src/defaultTo";
+import { multiDefaultTo } from "../util";
 
-const Value = ({ value, color, textColor, shape, fixed, outerBorderColor }) => {
+const Value = ({ value, fontFamily, color, textColor, shape, fixed, outerBorderColor, rotation }) => {
   const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
 
@@ -21,7 +21,7 @@ const Value = ({ value, color, textColor, shape, fixed, outerBorderColor }) => {
 
   return (
     <RotateContext.Consumer>
-      {rotation => (
+      {rotateContext => (
         <Color>
           {(c,t,s,p) => {
             let outline = null;
@@ -29,28 +29,36 @@ const Value = ({ value, color, textColor, shape, fixed, outerBorderColor }) => {
             if (shape === "square") {
               if (outerBorderColor) {
                 outline = (
-                  <rect stroke={p(outerBorderColor)} strokeWidth="7"
+                  <rect
+                        transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}
+                        stroke={p(outerBorderColor)} strokeWidth="7"
                         x={-rx} y={-ry}
                         width={2*rx} height={2*ry} />
                 );
               }
 
               bg = (
-                <rect fill={p(color)} stroke={p("black")} strokeWidth="2"
+                <rect
+                      transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}
+                      fill={p(color)} stroke={p("black")} strokeWidth="2"
                       x={-rx} y={-ry}
                       width={2*rx} height={2*ry} />
               );
             } else {
               if (outerBorderColor) {
                 outline = (
-                  <ellipse stroke={p(outerBorderColor)} strokeWidth="7"
+                  <ellipse
+                           transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}
+                           stroke={p(outerBorderColor)} strokeWidth="7"
                            cx="0" cy="0"
                            rx={rx} ry={ry} />
                 );
               }
 
               bg = (
-                <ellipse fill={p(color)} stroke={p("black")} strokeWidth="2"
+                <ellipse
+                         transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}
+                         fill={p(color)} stroke={p("black")} strokeWidth="2"
                          cx="0" cy="0"
                          rx={rx} ry={ry}
                 />
@@ -62,10 +70,10 @@ const Value = ({ value, color, textColor, shape, fixed, outerBorderColor }) => {
                 {outline}
                 {bg}
                 <text
-                  transform={fixed ? null : `rotate(-${rotation})`}
+                  transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}
                   fontWeight="bold"
                   fontSize={size}
-                  fontFamily={defaultTo("sans-serif", game.info.valueFontFamily)}
+                  fontFamily={multiDefaultTo("sans-serif", game.info.valueFontFamily, fontFamily)}
                   fill={c(textColor) || t(c(color))}
                   dominantBaseline="central"
                   textAnchor="middle"

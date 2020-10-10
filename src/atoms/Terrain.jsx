@@ -2,13 +2,13 @@ import React, {useContext} from "react";
 import Color from "../util/Color";
 import GameContext from "../context/GameContext";
 import Currency from "../util/Currency";
-import defaultTo from "ramda/src/defaultTo";
+import { multiDefaultTo } from "../util";
 import icons from "../data/icons";
 
-const Terrain = ({ type, size, cost, fontSize, color }) => {
+const Terrain = ({ type, size, cost, fontFamily, fontSize, color }) => {
   const { game } = useContext(GameContext);
-  fontSize = defaultTo(15, fontSize);
-  let fontFamily = defaultTo("display", game.info.valueFontFamily);
+  fontSize = multiDefaultTo(15, fontSize);
+  fontFamily = multiDefaultTo("display", game.info.valueFontFamily, fontFamily);
 
   let translate = 0;
   let scale = 1;

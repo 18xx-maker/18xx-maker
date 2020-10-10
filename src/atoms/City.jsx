@@ -10,7 +10,7 @@ import is from "ramda/src/is";
 import GameMapCompanyToken from "../tokens/GameMapCompanyToken";
 
 import ColorContext from "../context/ColorContext";
-import RotateContext from "../context/RotateContext";
+import CityRotateContext from "../context/CityRotateContext";
 
 const cityPaths = {
   cityPath: "M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30",
@@ -23,7 +23,7 @@ const cityPaths = {
   city4PathReverse: "M 0 53 L 25 53 A 30 30 0 0 0 53 25 L 53 -25 A 30 30 0 0 0 25 -53 L -25 -53 A 30 30 0 0 0 -53 -25 L -53 25 A 30 30 0 0 0 -25 53 L 0 53"
 }
 
-const City = ({ size, companies, icons, border, name, extend, rotation, pass, bgColor, width, strokeWidth }) => {
+const City = ({ size, outlineColor, color, companies, icons, border, borderColor, name, extend, rotation, pass, fixed, bgColor, width, strokeWidth }) => {
   const { config } = useContext(ConfigContext);
   const straightCityNames = config.straightCityNames;
 
@@ -40,7 +40,13 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
     if (icons && icons[num]) {
       let iconSvg = iconSvgs[icons[num]];
       let Component = iconSvg.Component;
-      return <g transform="scale(1.4)"><Component x={-12.5} y={-12.5} height={width} width={width}/></g>;
+      return (
+          <CityRotateContext.Provider value={rotation}>
+          <g transform="scale(1.4)">
+            <Component x={-12.5} y={-12.5} height={width} width={width}/>
+          </g>
+          </CityRotateContext.Provider>
+      );
     }
 
     return null;
@@ -56,19 +62,17 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
     if(companies && companies[num]) {
 
       let companyToken = is(Object, companies[num]) ?
-          <GameMapCompanyToken {...companies[num]} abbrev={companies[num].abbrev || companies[num].label} /> :
-          <GameMapCompanyToken abbrev={companies[num]} />;
+          <GameMapCompanyToken {...companies[num]} abbrev={companies[num].abbrev || companies[num].label} width={width} /> :
+          <GameMapCompanyToken abbrev={companies[num]} width={width} />;
 
       return (
-        <RotateContext.Consumer>
-        {rotateContext => (
-          <g transform={`rotate(${-(rotateContext || 0) - (rotation || 0)})`}>
+          <CityRotateContext.Provider value={rotation}>
+          <g>
             <ColorContext.Provider value="companies">
               {companyToken}
             </ColorContext.Provider>
           </g>
-        )}
-        </RotateContext.Consumer>
+          </CityRotateContext.Provider>
       );
     }
 
@@ -111,7 +115,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
                           stroke="none"
                           points={`${pass_p1x},${pass_p1y} ${pass_p2x},${pass_p2y} ${pass_p3x},${pass_p3y}`}
                           />}
-              <circle fill={c("border")} stroke="none" cx="0" cy="0" r={`${width + borderW}`} />
+              <circle fill={c(borderColor || "border")} stroke="none" cx="0" cy="0" r={`${width + borderW}`} />
             </g>
           )}
         </Color>
@@ -136,7 +140,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
                           points={`${pass_p1x},${pass_p1y} ${pass_p2x},${pass_p2y} ${pass_p3x},${pass_p3y}`}
                         />}
                 <circle
-                  fill={c(companyColor(0) || "city")}
+                  fill={c(color || companyColor(0) || "city")}
                   stroke="none"
                   cx="0"
                   cy="0"
@@ -151,7 +155,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
             {c => (
               <circle
                 fill="none"
-                stroke={c("track")}
+                stroke={c(outlineColor || "track")}
                 strokeWidth={strokeWidth}
                 cx="0"
                 cy="0"
@@ -185,8 +189,8 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
                     />}
               <polygon
                 points={`${leftBorder},0 ${rightBorder},0`}
-                fill={c("border")}
-                stroke={c("border")}
+                fill={c(borderColor || "border")}
+                stroke={c(borderColor || "border")}
                 strokeWidth={`${2 * width + 2 * borderW}`}
                 strokeLinejoin="round"
                 strokeLinecap="round"
@@ -216,12 +220,12 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
               <polygon
                 points={`${leftBorder},${-1*width}, ${rightBorder},${-1*width} ${rightBorder},${width} ${leftBorder},${width}`}
                 fill={c("city")}
-                stroke={c("track")}
+                stroke={c(outlineColor || "track")}
                 strokeWidth={strokeWidth}
               />
               <g transform={`translate(${-1*width} 0)`}>
                 <circle
-                  fill={c(companyColor(0) || "city")}
+                  fill={c(color || companyColor(0) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -229,14 +233,14 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
                 {companyLabel(0)}
                 <circle
                   fill="none"
-                  stroke={c("track")}
+                  stroke={c(outlineColor || "track")}
                   strokeWidth={strokeWidth}
                   r={width}
                 />
               </g>
               <g transform={`translate(${width} 0)`}>
                 <circle
-                  fill={c(companyColor(1) || "city")}
+                  fill={c(color || companyColor(1) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -244,7 +248,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
                 {companyLabel(1)}
                 <circle
                   fill="none"
-                  stroke={c("track")}
+                  stroke={c(outlineColor || "track")}
                   strokeWidth={strokeWidth}
                   r={width}
                 />
@@ -267,8 +271,8 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
             <polygon
               transform="rotate(-30)"
               points={`0,${-1 * offs2m - 2} ${width},${offs1 + 2} ${-1 * width},${offs1 + 2}`}
-              fill={c("border")}
-              stroke={c("border")}
+              fill={c(borderColor || "border")}
+              stroke={c(borderColor || "border")}
               strokeWidth={`${2 * width + 2 * borderW}`}
               strokeLinejoin="round"
               strokeLinecap="round"
@@ -291,12 +295,12 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
                   ${-1 * width},${width + offs1 + strokeWidth}
                   ${-1 * (width + offs2)},${strokeWidth - 1}`}
                 fill={c("city")}
-                stroke={c("track")}
+                stroke={c(outlineColor || "track")}
                 strokeWidth={strokeWidth}
               />
               <g transform={`translate(0 ${-1*(offs2m + strokeWidth)}) rotate(30)`}>
                 <circle
-                  fill={c(companyColor(0) || "city")}
+                  fill={c(color || companyColor(0) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -311,7 +315,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
               </g>
               <g transform={`translate(${-1 * width} ${offs1 + strokeWidth}) rotate(30)`}>
                 <circle
-                  fill={c(companyColor(1) || "city")}
+                  fill={c(color || companyColor(1) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -326,7 +330,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
               </g>
               <g transform={`translate(${width} ${offs1 + strokeWidth}) rotate(30)`}>
                 <circle
-                  fill={c(companyColor(2) || "city")}
+                  fill={c(color || companyColor(2) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -356,8 +360,8 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
                 ${width},${-1 * width}
                 ${width},${width}
                 ${-1 * width},${width}`}
-              fill={c("border")}
-              stroke={c("border")}
+              fill={c(borderColor || "border")}
+              stroke={c(borderColor || "border")}
               strokeWidth={`${width * 2 + 6}`}
               strokeLinejoin="round"
               strokeLinecap="round"
@@ -380,12 +384,12 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
                    ${-2 * width},${width}
                    ${-2 * width},${-1*width}`}
                 fill={c("city")}
-                stroke={c("track")}
+                stroke={c(outlineColor || "track")}
                 strokeWidth={strokeWidth}
               />
               <g transform={`translate(${-1 * width} ${-1 * width})`}>
                 <circle
-                  fill={c(companyColor(0) || "city")}
+                  fill={c(color || companyColor(0) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -400,7 +404,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
               </g>
               <g transform={`translate(${width} ${-1 * width})`}>
                 <circle
-                  fill={c(companyColor(1) || "city")}
+                  fill={c(color || companyColor(1) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -415,7 +419,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
               </g>
               <g transform={`translate(${width} ${width})`}>
                 <circle
-                  fill={c(companyColor(3) || "city")}
+                  fill={c(color || companyColor(3) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -430,7 +434,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
               </g>
               <g transform={`translate(${-1 * width} ${width})`}>
                 <circle
-                  fill={c(companyColor(2) || "city")}
+                  fill={c(color || companyColor(2) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -455,7 +459,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
         <Color>
           {c => (
             <circle cx="0" cy="0" r={`${2 * width + 11.5}`}
-                    fill={c("border")}
+                    fill={c(borderColor || "border")}
                     stroke="none" />
           )}
         </Color>
@@ -469,11 +473,11 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
             <g>
               <circle cx="0" cy="0" r={`${width * 2 + 8.5} `}
                       fill={c("city")}
-                      stroke={c("track")}
+                      stroke={c(outlineColor || "track")}
                       strokeWidth={strokeWidth} />
               <g transform={`translate(${-radius * Math.sin(180 * Math.PI / 180)} ${radius * Math.cos(180 * Math.PI / 180)})`}>
                 <circle
-                  fill={c(companyColor(0) || "city")}
+                  fill={c(color || companyColor(0) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -488,7 +492,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
               </g>
               <g transform={`translate(${-radius * Math.sin(252 * Math.PI / 180)} ${radius * Math.cos(252 * Math.PI / 180)})`}>
                 <circle
-                  fill={c(companyColor(1) || "city")}
+                  fill={c(color || companyColor(1) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -503,7 +507,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
               </g>
               <g transform={`translate(${-radius * Math.sin(324 * Math.PI / 180)} ${radius * Math.cos(324 * Math.PI / 180)})`}>
                 <circle
-                  fill={c(companyColor(2) || "city")}
+                  fill={c(color || companyColor(2) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -518,7 +522,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
               </g>
               <g transform={`translate(${-radius * Math.sin(36 * Math.PI / 180)} ${radius * Math.cos(36 * Math.PI / 180)})`}>
                 <circle
-                  fill={c(companyColor(3) || "city")}
+                  fill={c(color || companyColor(3) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -533,7 +537,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
               </g>
               <g transform={`translate(${-radius * Math.sin(108 * Math.PI / 180)} ${radius * Math.cos(108 * Math.PI / 180)})`}>
                 <circle
-                  fill={c(companyColor(4) || "city")}
+                  fill={c(color || companyColor(4) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -557,7 +561,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
         <Color>
           {c => (
             <circle cx="0" cy="0" r={`${width * 2 + 17}`}
-                    fill={c("border")}
+                    fill={c(borderColor || "border")}
                     stroke="none" />
           )}
         </Color>
@@ -570,11 +574,11 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
             <g>
               <circle cx="0" cy="0" r={`${width * 2 + 14}`}
                       fill={c("city")}
-                      stroke={c("track")}
+                      stroke={c(outlineColor || "track")}
                       strokeWidth={strokeWidth} />
               <g transform={`translate(${-radius * Math.sin(180 * Math.PI / 180)} ${radius * Math.cos(180 * Math.PI / 180)})`}>
                 <circle
-                  fill={c(companyColor(0) || "city")}
+                  fill={c(color || companyColor(0) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -589,7 +593,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
               </g>
               <g transform={`translate(${-radius * Math.sin(240 * Math.PI / 180)} ${radius * Math.cos(240 * Math.PI / 180)})`}>
                 <circle
-                  fill={c(companyColor(1) || "city")}
+                  fill={c(color || companyColor(1) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -604,7 +608,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
               </g>
               <g transform={`translate(${-radius * Math.sin(300 * Math.PI / 180)} ${radius * Math.cos(300 * Math.PI / 180)})`}>
                 <circle
-                  fill={c(companyColor(2) || "city")}
+                  fill={c(color || companyColor(2) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -619,7 +623,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
               </g>
               <g transform={`translate(${-radius * Math.sin(0 * Math.PI / 180)} ${radius * Math.cos(0 * Math.PI / 180)})`}>
                 <circle
-                  fill={c(companyColor(3) || "city")}
+                  fill={c(color || companyColor(3) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -634,7 +638,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
               </g>
               <g transform={`translate(${-radius * Math.sin(60 * Math.PI / 180)} ${radius * Math.cos(60 * Math.PI / 180)})`}>
                 <circle
-                  fill={c(companyColor(4) || "city")}
+                  fill={c(color || companyColor(4) || "city")}
                   stroke="none"
                   r={width}
                 />
@@ -649,7 +653,7 @@ const City = ({ size, companies, icons, border, name, extend, rotation, pass, bg
               </g>
               <g transform={`translate(${-radius * Math.sin(120 * Math.PI / 180)} ${radius * Math.cos(120 * Math.PI / 180)})`}>
                 <circle
-                  fill={c(companyColor(5) || "city")}
+                  fill={c(color || companyColor(5) || "city")}
                   stroke="none"
                   r={width}
                 />
