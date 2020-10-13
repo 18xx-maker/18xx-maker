@@ -168,7 +168,7 @@ const TokenLayout = ({ companies, data, game }) => {
                label={token}
                width={tokenWidth} /> ];
     }
-  }, game.tokens);
+  }, game.tokens || []);
 
   // Combine all tokens
   let tokens = [...companyTokens, ...gameTokens];
