@@ -138,7 +138,7 @@ const Token = ({
                          height={size} width={size}/>
             );
           }
-          tokenFill = c(iconColor) || c("white");
+          tokenFill = c("white");
           textStroke = "none";
           textFill = "none";
 
