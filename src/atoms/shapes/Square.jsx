@@ -3,7 +3,7 @@ import GameContext from "../../context/GameContext";
 import Text from "./Text";
 import Color from "../../util/Color";
 
-import { getFontProps  } from "../../util";
+import { getFontProps, multiDefaultTo } from "../../util";
 
 import defaultTo from "ramda/src/defaultTo";
 
@@ -15,7 +15,7 @@ const Square = (props) => {
   let x = 50 * scale;
 
   let font = getFontProps(props, 16 * scale, undefined,
-    defaultTo(undefined, game.info.valueFontFamily));
+    multiDefaultTo(undefined, game.info.valueFontFamily, fontFamily));
   let strokeDashArray = dashed ? `${width / 7.142857143} ${width / 7.142857143}` : undefined;
 
   return (
