@@ -44,7 +44,7 @@ const UnitInput = ({name, value, label, onChange}) => {
 
   let handler = event => {
     setInternalValue(event.target.value);
-    onChange(event.target.value * allUnits[units]);
+    onChange(event.target.value === "" ? 0 : event.target.value * allUnits[units]);
   };
 
   let unitsHandler = event => {

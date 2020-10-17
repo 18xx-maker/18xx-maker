@@ -74,7 +74,7 @@ const Input = ({name, label, description, dimension}) => {
       inputNode = (
         <FormControl className={classes.configItem} variant="filled">
           <MUIInput value={tempValue}
-                    onChange={event => setTempValue(event.target.value)}
+                    onChange={event => setTempValue(event.target.value === "" ? 0 : event.target.value)}
                     onBlur={update}
                     id={name}
                     name={name}
