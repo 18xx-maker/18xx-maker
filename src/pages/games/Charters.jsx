@@ -169,6 +169,7 @@ const Charters = () => {
             company={company}
             variant={company.variant}
             fontFamily={company.fontFamily || game.info.companyFontFamily}
+            fontSize={company.fontSize || game.info.companyFontSize}
           /> : <div key="spacer" className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}><div className={`charter${charters.halfWidth ? " charter--half" : ""}`}></div></div>
       ), companies)}
       <PageSetup landscape={false}/>
