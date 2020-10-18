@@ -22,7 +22,10 @@ const cityPaths = {
   city4Path: "M 0 53 L -25 53 A 30 30 0 0 1 -53 25 L -53 -25 A 30 30 0 0 1 -25 -53 L 25 -53 A 30 30 0 0 1 53 -25 L 53 25 A 30 30 0 0 1 25 53 L 0 53",
   city4PathReverse: "M 0 53 L 25 53 A 30 30 0 0 0 53 25 L 53 -25 A 30 30 0 0 0 25 -53 L -25 -53 A 30 30 0 0 0 -53 -25 L -53 25 A 30 30 0 0 0 -25 53 L 0 53",
   city5Path: "M 0 65 A 65 65 0 0 1 0 -65 A 65 65 0 0 1 0 65",
-  city5PathReverse: "M 0 -65 A 65 65 0 0 0 0 65 A 65 65 0 0 0 0 -65"
+  city5PathReverse: "M 0 -65 A 65 65 0 0 0 0 65 A 65 65 0 0 0 0 -65",
+  // same as city6, but there's no more room to push it outward
+  city6Path: "M 0 65 A 65 65 0 0 1 0 -65 A 65 65 0 0 1 0 65",
+  city6PathReverse: "M 0 -65 A 65 65 0 0 0 0 65 A 65 65 0 0 0 0 -65"
 }
 
 const City = ({ size, outlineColor, color, companies, icons, border, borderColor, name, extend, rotation, pass, fixed, bgColor, width, strokeWidth }) => {
@@ -669,6 +672,7 @@ const City = ({ size, outlineColor, color, companies, icons, border, borderColor
                   r={width}
                 />
               </g>
+              {nameNode}
             </g>
           )}
         </Color>
