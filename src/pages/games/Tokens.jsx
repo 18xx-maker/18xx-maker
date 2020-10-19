@@ -149,7 +149,7 @@ const TokenLayout = ({ companies, data, game }) => {
     );
 
     return [...marketTokens, ...reverseMarketTokens, ...stationTokens];
-  }, companies);
+  }, companies || []);
 
   let gameTokens = chain((token) => {
     let count = token.print != null ? token.print :
@@ -168,7 +168,7 @@ const TokenLayout = ({ companies, data, game }) => {
                label={token}
                width={tokenWidth} /> ];
     }
-  }, game.tokens);
+  }, game.tokens || []);
 
   // Combine all tokens
   let tokens = [...companyTokens, ...gameTokens];

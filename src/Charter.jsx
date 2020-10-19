@@ -28,13 +28,16 @@ const Charter = ({
   company,
   backgroundColor,
   variant,
-  fontFamily
+  fontFamily,
+  fontSize
 }) => {
   const { config } = useContext(ConfigContext);
   const charterStyle = config.charters.style;
   const halfWidthCharters = config.charters.halfWidth;
   const blackBand = config.charters.blackBand;
   fontFamily = multiDefaultTo("display", fontFamily);
+  fontSize = multiDefaultTo(20, fontSize);
+  let lineHeight = fontSize * 1.1;
  
   let tokenSpots = [];
   if (tokens) {
@@ -110,7 +113,7 @@ const Charter = ({
                 <div style={{ color: t(c(charterStyle === "color" ? color : "white")),
                               paddingRight: halfWidthCharters ? null : unitsToCss(12.5 + (65 * tokens.length)) }}
                      className="charter__name">
-                     <div style={{ fontFamily: `${fontFamily}` }}>
+                     <div style={{ fontFamily:`${fontFamily}`, fontSize:`${fontSize}pt`, lineHeight:`${lineHeight}pt` }}>
                        {name}
                      </div>
                 </div>

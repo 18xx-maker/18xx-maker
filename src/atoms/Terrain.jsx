@@ -20,6 +20,9 @@ const Terrain = ({ type, size, cost, fontFamily, fontSize, color }) => {
   case "mountain":
     translate = -8;
     break;
+  case "cow-skull":
+    translate = -16;
+    break;
   default:
     translate = -12;
     break;

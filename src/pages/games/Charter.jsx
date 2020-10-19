@@ -146,6 +146,7 @@ const Charters = () => {
         company={company}
         variant={company.variant}
         fontFamily={company.fontFamily || game.info.companyFontFamily}
+        fontSize={company.fontSize || game.info.companyFontSize}
       />
       <PageSetup landscape={false}/>
     </div>

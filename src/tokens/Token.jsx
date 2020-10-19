@@ -20,6 +20,7 @@ const Token = ({
   iconY, // The vertical position of the icon
   label, // The text label to use on this token
   labelColor, // What color to use for writing the label text
+  labelY, // Override the calculated vertical position of the label
   color, // What color is this token using as a background
   labelStrokeColor, // What color to use for the stroke of the label
   labelStrokeWidth, // What width to use for the stroke of the label
@@ -138,7 +139,7 @@ const Token = ({
                          height={size} width={size}/>
             );
           }
-          tokenFill = c(iconColor) || c("white");
+          tokenFill = c("white");
           textStroke = "none";
           textFill = "none";
 
@@ -441,10 +442,14 @@ const Token = ({
             if (!isNaN(label)) {
               fSize *= numbersOnlyScaling;
             }
-            y = fSize * 11 / 32 + 12;
-            if (shield || shield3) {
-              fSize *= scaling;
-              y += scaling * 5;
+            if (labelY) {
+              y = labelY;
+            } else {
+              y = fSize * 11 / 32 + 12;
+              if (shield || shield3) {
+                fSize *= scaling;
+                y += scaling * 5;
+              }
             }
             content.push(<text
                            key="text"
@@ -494,6 +499,9 @@ const Token = ({
           if (shield || shield3) {
             fSize *= scaling;
             y += scaling * 5;
+          }
+          if (labelY) {
+            y = labelY;
           }
           content.push(<text
                          key="text"
