@@ -9,8 +9,6 @@ import * as uuid from "uuid";
 import logos from "../data/logos";
 import icons from "../data/icons";
 
-import is from "ramda/src/is";
-
 const Token = ({
   logo, // The SVG logo to display on this token.
   logoWidth, // Override the default width of the logo.
@@ -518,10 +516,6 @@ const Token = ({
                        </text>
                       );
         }
-
-        let outlineColor = is(String, outline) ? c(outline) : 
-          ((inverse && inverseLabelColor != null) ? (inverseLabelColor === "black" ? s(c(inverseLabelColor), -40) : s(c(inverseLabelColor))) : 
-                                                    (color === "black" ? s(c(color), -40) : s(c(color))));
         return (
           <RotateContext.Consumer>
           {rotateContext => (
@@ -547,7 +541,7 @@ const Token = ({
               cy="0"
               r={width + (bleed ? 5 : 0)}
               fill="none"
-              stroke={outlineColor}
+              stroke={"black"}
               strokeWidth={outlineWidth || 1}
             />
           </g>

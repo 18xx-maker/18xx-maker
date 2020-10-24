@@ -38,6 +38,7 @@ const City = ({ size, outlineColor, color, companies, icons, border, borderColor
   width = width || 25;
   strokeWidth = strokeWidth || 2;
   let borderW = 3;
+  let sqrt2 = Math.sqrt(2);
   let sqrt5 = Math.sqrt(5);
   let scale = width / 25;
 
@@ -264,6 +265,144 @@ const City = ({ size, outlineColor, color, companies, icons, border, borderColor
         </Color>
       );
     }
+  } else if (size === "2Y") {
+    if (border) {
+      return (
+        <Color>
+          {c => (
+            <g>
+              <polygon
+                points={`${2 * width},${width} ${-2 * width},${width} ${-2 * width},${-1 * width} ${2 * width},${-1 * width}`}
+                fill={c(borderColor || "border")}
+                stroke={c(borderColor || "border")}
+                strokeWidth={`${2 * borderW}`}
+                strokeLinejoin="butt"
+                strokeLinecap="butt"
+              />
+            </g>
+          )}
+        </Color>
+      );
+    } else {
+      return (
+        <Color context="companies">
+          {c => (
+            <g>
+              <polygon
+                points={`${2 * width},${width} ${-2 * width},${width} ${-2 * width},${-1 * width} ${2 * width},${-1 * width}`}
+                fill={c("city")}
+                stroke={c(outlineColor || "track")}
+                strokeWidth={strokeWidth}
+              />
+              <g transform={`translate(${-1*width} 0)`}>
+                <polygon
+                  points={`${width},${width} ${-1 * width},${width} ${-1 * width},${-1 * width} ${width},${-1 * width}`}
+                 fill={c(color || companyColor(0) || "city")}
+                  stroke="none"
+                />
+                {icon(0)}
+                {companyLabel(0)}
+                <polygon
+                  points={`${width},${width} ${-1 * width},${width} ${-1 * width},${-1 * width} ${width},${-1 * width}`}
+                  fill="none"
+                  stroke={c(outlineColor || "track")}
+                  strokeWidth={strokeWidth}
+                />
+              </g>
+              <g transform={`translate(${width} 0)`}>
+                <polygon
+                  points={`${width},${width} ${-1 * width},${width} ${-1 * width},${-1 * width} ${width},${-1 * width}`}
+                  fill={c(color || companyColor(1) || "city")}
+                  stroke="none"
+                />
+                {icon(1)}
+                {companyLabel(1)}
+                <polygon
+                  points={`${width},${width} ${-1 * width},${width} ${-1 * width},${-1 * width} ${width},${-1 * width}`}
+                  fill="none"
+                  stroke={c(outlineColor || "track")}
+                  strokeWidth={strokeWidth}
+                />
+              </g>
+              {nameNode}
+            </g>
+          )}
+        </Color>
+      );
+    }
+  } else if (size === "1S1Y") {
+    if (border) {
+      return (
+        <Color>
+          {c => (
+            <g>
+              <polygon
+                points={`${-1*width},0 0,0`}
+                fill={c(borderColor || "border")}
+                stroke={c(borderColor || "border")}
+                strokeWidth={`${2 * width + 2 * borderW}`}
+                strokeLinejoin="round"
+                strokeLinecap="round"
+              />
+              <polygon
+                points={`${2 * width},${width} 0,${width} 0,${-1 * width} ${2 * width},${-1 * width}`}
+                fill={c(borderColor || "border")}
+                stroke={c(borderColor || "border")}
+                strokeWidth={`${2 * borderW}`}
+                strokeLinejoin="butt"
+                strokeLinecap="butt"
+              />
+            </g>
+          )}
+        </Color>
+      );
+    } else {
+      return (
+        <Color context="companies">
+          {c => (
+            <g>
+              <polygon
+                points={`${2 * width},${width} ${-1 * width},${width} ${-1 * width},${-1 * width} ${2 * width},${-1 * width}`}
+                fill={c("city")}
+                stroke={c(outlineColor || "track")}
+                strokeWidth={strokeWidth}
+              />
+              <g transform={`translate(${-1*width} 0)`}>
+                <circle
+                  fill={c(color || companyColor(0) || "city")}
+                  stroke="none"
+                  r={width}
+                />
+                {icon(0)}
+                {companyLabel(0)}
+                <circle
+                  fill="none"
+                  stroke={c(outlineColor || "track")}
+                  strokeWidth={strokeWidth}
+                  r={width}
+                />
+              </g>
+              <g transform={`translate(${width} 0)`}>
+                <polygon
+                  points={`${width},${width} ${-1 * width},${width} ${-1 * width},${-1 * width} ${width},${-1 * width}`}
+                  fill={c(color || companyColor(1) || "city")}
+                  stroke="none"
+                />
+                {icon(1)}
+                {companyLabel(1)}
+                <polygon
+                  points={`${width},${width} ${-1 * width},${width} ${-1 * width},${-1 * width} ${width},${-1 * width}`}
+                  fill="none"
+                  stroke={c(outlineColor || "track")}
+                  strokeWidth={strokeWidth}
+                />
+              </g>
+              {nameNode}
+            </g>
+          )}
+        </Color>
+      );
+    }
   } else if (size === 3) {
     let offs1 = width / sqrt5;
     let offs2 = 2 * width / sqrt5;
@@ -334,6 +473,100 @@ const City = ({ size, outlineColor, color, companies, icons, border, borderColor
                 />
               </g>
               <g transform={`translate(${width} ${offs1 + strokeWidth}) rotate(30)`}>
+                <circle
+                  fill={c(color || companyColor(2) || "city")}
+                  stroke="none"
+                  r={width}
+                />
+                {icon(2)}
+                {companyLabel(2)}
+                <circle
+                  fill="none"
+                  stroke={c("track")}
+                  strokeWidth={strokeWidth}
+                  r={width}
+                />
+              </g>
+              {nameNode}
+            </g>
+          )}
+        </Color>
+      );
+    }
+  } else if (size === "2S1Y") {
+    if (border) {
+      return (
+        <Color>
+          {c => (
+            <g>
+              <polygon
+                points={`${-1 * width},${-1 * width} ${-1 * width},${width}`}
+                fill={c(borderColor || "border")}
+                stroke={c(borderColor || "border")}
+                strokeWidth={`${2 * width + 2 * borderW}`}
+                strokeLinejoin="round"
+                strokeLinecap="round"
+              />
+              <polygon
+                points={`${2 * width},${width} ${2 * width},${-1 * width} ${-2 / 3 * width},${-2 / 3 *sqrt2 * width - width},${-2 / 3 * width},${2 / 3 *sqrt2 * width + width}`}
+                fill={c(borderColor || "border")}
+                stroke={c(borderColor || "border")}
+                strokeWidth={`${2 * borderW}`}
+                strokeLinejoin="butt"
+                strokeLinecap="butt"
+              />
+            </g>
+          )}
+        </Color>
+      );
+    } else {
+      return (
+        <Color context="companies">
+          {c => (
+            <g>
+              <polygon
+                points={`${2 * width},${width} ${2 * width},${-1 * width} ${-2 / 3 * width},${-2 / 3 *sqrt2 * width - width} ${-2 / 3 * width},${2 / 3 *sqrt2 * width + width}`}
+                fill={c("city")}
+                stroke={c(outlineColor || "track")}
+                strokeWidth={strokeWidth}
+              />
+              <polygon
+                points={`${-2 * width},${-1 * width} ${-2 * width},${width} 0,${-1 * width} 0,${width}`}
+                fill={c("city")}
+                stroke={c(outlineColor || "track")}
+                strokeWidth={strokeWidth}
+              />
+              <g transform={`translate(${-1*width} ${-1*width})`}>
+                <circle
+                  fill={c(color || companyColor(0) || "city")}
+                  stroke="none"
+                  r={width}
+                />
+                {icon(0)}
+                {companyLabel(0)}
+                <circle
+                  fill="none"
+                  stroke={c(outlineColor || "track")}
+                  strokeWidth={strokeWidth}
+                  r={width}
+                />
+              </g>
+              <g transform={`translate(${width} 0)`}>
+                <polygon
+                  points={`${width},${width} ${-1 * width},${width} ${-1 * width},${-1 * width} ${width},${-1 * width}`}
+                  fill={c(color || companyColor(1) || "city")}
+                  stroke="none"
+                />
+                {icon(1)}
+                {companyLabel(1)}
+                <polygon
+                  points={`${width},${width} ${-1 * width},${width} ${-1 * width},${-1 * width} ${width},${-1 * width}`}
+                  fill="none"
+                  stroke={c(outlineColor || "track")}
+                  strokeWidth={strokeWidth}
+                />
+              </g>
+              <g transform={`translate(${-1*width} ${width})`}>
                 <circle
                   fill={c(color || companyColor(2) || "city")}
                   stroke="none"
@@ -672,6 +905,110 @@ const City = ({ size, outlineColor, color, companies, icons, border, borderColor
                   r={width}
                 />
               </g>
+              {nameNode}
+            </g>
+          )}
+        </Color>
+      );
+    }
+  } else if (size === "3Ferry") {
+    if (border) {
+      return (
+        <Color>
+          {c => (
+            <polygon
+              points={`${-1 * width},${-1 * sqrt2 * width} ${width},${-1 * sqrt2 * width} 0,${sqrt2 * width}`}
+              fill={c(borderColor || "border")}
+              stroke={c(borderColor || "border")}
+              strokeWidth={`${2 * width + 2 * borderW}`}
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            />
+          )}
+        </Color>
+      );
+    } else {
+      return (
+        <Color context="companies">
+          {c => (
+            <g>
+              <polygon
+                points={`${-2 / 3 * sqrt2 * width - width},${-1 * sqrt2 * width + 1 / 3 * width}
+                         ${2 / 3 * sqrt2 * width + width},${-1 * sqrt2 * width + 1 / 3 * width}
+                         ${2 / 3 * sqrt2 * width},${sqrt2 * width + 1 / 3 * width}
+                         ${-2 / 3 * sqrt2 * width},${sqrt2 * width + 1 / 3 * width}`}
+                fill={c("city")}
+                stroke={c(outlineColor || "track")}
+                strokeWidth="2"
+              />
+              <polygon
+                points={`${-1 * width},${-1 * sqrt2 * width - width} ${width},${-1 * sqrt2 * width - width} ${width},${-1 * sqrt2 * width} ${-1 * width},${-1 * sqrt2 * width}`}
+                fill={c("city")}
+                stroke={c(outlineColor || "track")}
+                strokeWidth="2"
+              />
+              <g transform={`translate(0,${sqrt2 * width})`}>
+                <circle
+                  fill={c(color || companyColor(0) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {companyLabel(0)}
+                <circle
+                  fill="none"
+                  stroke={c("track")}
+                  strokeWidth="2"
+                  r="25"
+                />
+              </g>
+              <g transform={`translate(${-1 * width},${-1 * sqrt2 * width})`}>
+                <circle
+                  fill={c(color || companyColor(1) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {companyLabel(1)}
+                <circle
+                  fill="none"
+                  stroke={c(outlineColor || "track")}
+                  strokeWidth="2"
+                  r="25"
+                />
+              </g>
+              <g transform={`translate(${width},${-1 * sqrt2 * width})`}>
+                <circle
+                  fill={c(color || companyColor(2) || "city")}
+                  stroke="none"
+                  r="25"
+                />
+                {companyLabel(2)}
+                <circle
+                  fill="none"
+                  stroke={c(outlineColor || "track")}
+                  strokeWidth="2"
+                  r="25"
+                />
+              </g>
+              <polygon
+                points={`${-1 * width / 5},${width / 5} ${width / 5},${width / 5}`}
+                stroke={c(outlineColor || "track")}
+                strokeWidth="2"
+              />
+              <polygon
+                points={`${-1 * width / 5},0 ${width / 5},0`}
+                stroke={c(outlineColor || "track")}
+                strokeWidth="2"
+              />
+              <polygon
+                points={`${-1 * width / 5},${-1 * width / 5} ${width / 5},${-1 * width / 5}`}
+                stroke={c(outlineColor || "track")}
+                strokeWidth="2"
+              />
+              <polygon
+                points={`${-1 * width / 5},${-2 * width / 5} ${width / 5},${-2 * width / 5}`}
+                stroke={c(outlineColor || "track")}
+                strokeWidth="2"
+              />
               {nameNode}
             </g>
           )}
