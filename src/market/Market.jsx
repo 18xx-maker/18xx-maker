@@ -10,6 +10,7 @@ import MarketRoundTracker from "./MarketRoundTracker";
 import Legend from "../Legend";
 
 import { getParData } from "./util";
+import { multiDefaultTo } from "../util";
 
 import addIndex from "ramda/src/addIndex";
 import chain from "ramda/src/chain";
@@ -157,9 +158,19 @@ const Market = ({data, game, config, title}) => {
     }
 
   } else if (data.type === "1Diag") {
-    if (!config.stock.display.legend) {
+    if (config.stock.display.legend) {
       let legend = (game.stock && game.stock.legend) || [];
       let left = 0;
+      let y = 2 * data.height + (data.stock.title === false ? 25 : 75);
+
+      if (game.stock.display && game.stock.display.legend) {
+        if (game.stock.display.legend.x) {
+          left = game.stock.display.legend.x;
+        }
+        if (game.stock.display.legend.y) {
+          y = game.stock.display.legend.y;
+        }
+      }
 
       legendNode = (
         <g>
@@ -169,7 +180,7 @@ const Market = ({data, game, config, title}) => {
             return (
               <g
                 key={`pool-note-${i}`}
-                transform={`translate(${current} ${2 * data.height + (data.stock.title === false ? 25 : 75)})`}
+                transform={`translate(${current} ${y})`}
               >
                 <Legend {...legend}/>
               </g>
