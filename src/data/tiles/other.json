@@ -1,0 +1,296 @@
+{
+  "119": {
+    "color": "green/brown",
+    "group": "individual",
+    "rotations": 3,
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 30
+      }
+    ],
+    "cities": [
+      {
+        "size": 2
+      }
+    ],
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
+  "241": {
+    "color": "water",
+    "values": [
+      {
+        "angle": 210,
+        "percent": 0.8,
+        "value": 50
+      }
+    ],
+    "icons": [
+      {
+        "type": "port",
+        "angle": 150,
+        "percent": 0.4
+      }
+    ],
+    "labels": [
+      {
+        "label": "Tasmania",
+        "percent": 0.05
+      }
+    ],
+    "track": [
+      {
+        "type": "offboard",
+        "side": 3
+      },
+      {
+        "type": "offboard",
+        "side": 4
+      }
+    ]
+  },
+  "340": {
+    "color": "green/brown",
+    "group": "individual",
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 4
+      }
+    ]
+  },
+  "341": {
+    "color": "green/brown",
+    "group": "individual",
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 4
+      },
+      {
+        "side": 6
+      }
+    ]
+  },
+  "342": {
+    "color": "green/brown",
+    "group": "individual",
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 2
+      },
+      {
+        "side": 3
+      }
+    ]
+  },
+  "343": {
+    "color": "green/brown",
+    "group": "individual",
+    "track": [
+      {
+        "side": 1
+      },
+      {
+        "side": 3
+      },
+      {
+        "side": 5
+      }
+    ]
+  },
+  "399": {
+    "color": "offboard",
+    "offBoardRevenue": {
+      "percent": 0.15,
+      "reverse": true,
+      "name": {
+        "name": "Salzburg-Österreich"
+      },
+      "revenues": [
+        {
+          "color": "white",
+          "cost": " 30",
+          "phaseColor": "black",
+          "phase": "3H"
+        },
+        {
+          "color": "white",
+          "cost": " 60",
+          "phaseColor": "black",
+          "phase": "2x4"
+        },
+        {
+          "color": "white",
+          "cost": " 90",
+          "phaseColor": "black",
+          "phase": "17H"
+        },
+        {
+          "color": "white",
+          "cost": " 120",
+          "phaseColor": "black",
+          "phase": "30H"
+        }
+      ]
+    },
+    "labels": [
+      {
+        "label": "A",
+        "angle": 210,
+        "percent": 0.8
+      }
+    ],
+    "track": [
+      {
+        "type": "offboard",
+        "side": 3
+      }
+    ]
+  },
+  "400": {
+    "color": "offboard",
+    "offBoardRevenue": {
+      "percent": 0.15,
+      "reverse": true,
+      "name": {
+        "name": "Basel-Schweiz"
+      },
+      "revenues": [
+        {
+          "color": "white",
+          "cost": " 40",
+          "phaseColor": "black",
+          "phase": "3H"
+        },
+        {
+          "color": "white",
+          "cost": " 70",
+          "phaseColor": "black",
+          "phase": "2x4"
+        },
+        {
+          "color": "white",
+          "cost": " 90",
+          "phaseColor": "black",
+          "phase": "17H"
+        },
+        {
+          "color": "white",
+          "cost": " 100",
+          "phaseColor": "black",
+          "phase": "30H"
+        }
+      ]
+    },
+    "labels": [
+      {
+        "label": "CH",
+        "angle": 210,
+        "percent": 0.8
+      }
+    ],
+    "track": [
+      {
+        "type": "offboard",
+        "side": 5
+      },
+      {
+        "type": "offboard",
+        "side": 4
+      },
+      {
+        "type": "offboard",
+        "side": 3.75
+      }
+    ]
+  },
+  "721": {
+    "color": "water",
+    "track": [
+      {
+        "type": "straight",
+        "side": 1,
+        "gauge": "narrow",
+        "color": "water",
+        "borderColor": "water",
+        "gaugeColor": "red"
+      }
+    ]
+  },
+  "722": {
+    "color": "water",
+    "track": [
+      {
+        "type": "gentle",
+        "side": 1,
+        "gauge": "narrow",
+        "color": "water",
+        "borderColor": "water",
+        "gaugeColor": "red"
+      }
+    ]
+  },
+  "723": {
+    "color": "water",
+    "track": [
+      {
+        "type": "sharp",
+        "side": 1,
+        "gauge": "narrow",
+        "color": "water",
+        "borderColor": "water",
+        "gaugeColor": "red"
+      }
+    ]
+  },
+  "Irish Mail": {
+    "color": "offboard",
+    "offBoardRevenue": {
+    "revenues": [
+      {
+        "color": "green",
+        "cost": "20"
+      },
+      {
+        "color": "brown",
+        "cost": "50"
+      },
+      {
+        "color": "gray",
+        "cost": "0"
+      }
+    ]
+    },
+    "track": [
+      {
+        "type": "offboard",
+        "side": 6
+      }
+    ]
+  }
+}
