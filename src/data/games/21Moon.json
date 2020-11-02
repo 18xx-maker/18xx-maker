@@ -46,13 +46,14 @@
     "Round",
     { "icon": "rocket" },
     { "color": "black", "label": "SD", "fontSize": 24 },
-    { "color": "black", "label": "+20" },
+    { "color": "black", "label": "+20", "fontSize": 24 },
     { "color": "black", "label": "N/A", "fontSize": 20 },
     {
       "quantity": 3,
       "circle": "black",
       "color": "yellow",
       "label": "20c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
@@ -60,6 +61,7 @@
       "circle": "black",
       "color": "green",
       "label": "40c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
@@ -67,6 +69,7 @@
       "circle": "black",
       "color": "brown",
       "label": "60c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
@@ -74,6 +77,7 @@
       "circle": "black",
       "color": "gray",
       "label": "80c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
@@ -81,6 +85,7 @@
       "circle": "red",
       "color": "yellow",
       "label": "30c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
@@ -88,6 +93,7 @@
       "circle": "red",
       "color": "green",
       "label": "40c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
@@ -95,6 +101,7 @@
       "circle": "red",
       "color": "brown",
       "label": "50c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
@@ -102,6 +109,7 @@
       "circle": "red",
       "color": "gray",
       "label": "60c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
@@ -109,6 +117,7 @@
       "circle": "orange",
       "color": "yellow",
       "label": "20c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
@@ -116,6 +125,7 @@
       "circle": "orange",
       "color": "green",
       "label": "20c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
@@ -123,6 +133,7 @@
       "circle": "orange",
       "color": "brown",
       "label": "40c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
@@ -130,6 +141,7 @@
       "circle": "orange",
       "color": "gray",
       "label": "50c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
@@ -137,6 +149,7 @@
       "circle": "yellow",
       "color": "yellow",
       "label": "40c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
@@ -144,6 +157,7 @@
       "circle": "yellow",
       "color": "green",
       "label": "30c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
@@ -151,6 +165,7 @@
       "circle": "yellow",
       "color": "brown",
       "label": "30c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
@@ -158,35 +173,41 @@
       "circle": "yellow",
       "color": "gray",
       "label": "20c",
+      "fontSize": 16,
       "circleRadius": 16
     },
     {
       "quantity": 2,
       "color": "white",
       "label": "10c",
+      "fontSize": 17,
       "circle": "white",
-      "circleRadius": 20,
+      "circleRadius": 16,
       "quarters": ["yellow", "green", "gray", "brown"]
     },
     {
       "quantity": 7,
       "color": "yellow",
-      "label": "30c"
+      "label": "30c",
+      "fontSize": 18
     },
     {
       "quantity": 7,
       "color": "green",
-      "label": "30c"
+      "label": "30c",
+      "fontSize": 18
     },
     {
       "quantity": 7,
       "color": "brown",
-      "label": "20c"
+      "label": "20c",
+      "fontSize": 18
     },
     {
       "quantity": 7,
       "color": "gray",
-      "label": "10c"
+      "label": "10c",
+      "fontSize": 18
     }
   ],
   "players": [
