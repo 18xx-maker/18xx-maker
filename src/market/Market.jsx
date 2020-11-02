@@ -160,9 +160,17 @@ const Market = ({data, game, config, title}) => {
   } else if (data.type === "1Diag") {
     if (config.stock.display.legend) {
       let legend = (game.stock && game.stock.legend) || [];
-      let left = multiDefaultTo(0, game.stock.display.legend.x);
-      let y = multiDefaultTo(2 * data.height + (data.stock.title === false ? 25 : 75),
-          game.stock.display.legend.y);
+      let left = 0;
+      let y = 2 * data.height + (data.stock.title === false ? 25 : 75);
+
+      if (game.stock.display && game.stock.display.legend) {
+        if (game.stock.display.legend.x) {
+          left = game.stock.display.legend.x;
+        }
+        if (game.stock.display.legend.y) {
+          y = game.stock.display.legend.y;
+        }
+      }
 
       legendNode = (
         <g>
@@ -174,10 +182,7 @@ const Market = ({data, game, config, title}) => {
                 key={`pool-note-${i}`}
                 transform={`translate(${current} ${y})`}
               >
-                <Legend right={game.stock.display.legend.align === "right"}
-                        bottom={game.stock.display.legend.verticalAlign === "bottom"}
-                        reverse={game.stock.display.legend.reverse}
-                        {...legend}/>
+                <Legend {...legend}/>
               </g>
             );
           }, legend)}
