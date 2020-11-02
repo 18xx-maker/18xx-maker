@@ -10,7 +10,6 @@ import MarketRoundTracker from "./MarketRoundTracker";
 import Legend from "../Legend";
 
 import { getParData } from "./util";
-import { multiDefaultTo } from "../util";
 
 import addIndex from "ramda/src/addIndex";
 import chain from "ramda/src/chain";
