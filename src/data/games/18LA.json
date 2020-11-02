@@ -350,13 +350,13 @@
     {
       "name": "Gardena Tramway",
       "price": 140,
-      "token": { "color": "brown", "label": "GT" },
+      "token": { "color": "brown", "label": "GT", "logo": "18LA/GT" },
       "description": "Starts with $60 Treasury and a 2T; Operates first in each OR; Lays or upgrades 1 tile; Splits revenue 50/50 with owner"
     },
     {
       "name": "Orange County Railroad",
       "price": 100,
-      "token": { "color": "purple", "label": "OCR" },
+      "token": { "color": "purple", "label": "OCR", "logo": "18LA/OCR" },
       "description": "Starts with $40 Treasury and a 2T; Operates second in each OR; Lays or upgrades 1 tile; Splits revenue 50/50 with owner"
     }
   ],
