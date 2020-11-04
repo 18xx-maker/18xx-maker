@@ -28,6 +28,28 @@ const capitalize = R.compose(
   R.juxt([R.compose(R.toUpper, R.head), R.tail])
 );
 
+const tileColors = [
+  "yellow",
+  "yellow/green",
+  "green",
+  "green/brown",
+  "brown",
+  "brown/gray",
+  "gray",
+  "offboard",
+  "water",
+  "mountain",
+  "tunnel",
+  "other",
+  "none",
+];
+const colorSort = R.compose(
+  tileColors.indexOf.bind(tileColors),
+  R.prop("color"),
+  R.defaultTo({ color: "other" })
+);
+const sortTiles = R.sortWith([R.ascend(colorSort)]);
+
 setup();
 
 // Startup server
@@ -105,6 +127,7 @@ const server = app.listen(9000);
   let counts = R.compose(
     R.countBy(R.identity),
     R.map(R.prop("color")),
+    sortTiles,
     R.uniq,
     R.map(getTile)
   )(R.keys(game.tiles));
