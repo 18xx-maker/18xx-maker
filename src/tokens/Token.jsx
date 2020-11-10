@@ -443,7 +443,7 @@ const Token = ({
                   fill="none"
                   stroke="black"
                   strokeWidth="10"
-                  d="st1" d="M553.5,132.8c1.2,56.6-4.1,154.6-44.4,250.5"/>
+                  d="M553.5,132.8c1.2,56.6-4.1,154.6-44.4,250.5"/>
                 <path
                   fill="none"
                   stroke="black"
