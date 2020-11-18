@@ -70,6 +70,8 @@ const Token = ({
   shield3TopCenter, // Color of the top of the shield
   shield3TopRight, // Color of the top of the shield
 
+  kiteshield, // color of the top and bottom of the kite shield
+  
   halves, // Colors for halves shape
   quarters, // Colors for quarters shape
   square, // Draw a square of a certain color on the token
@@ -401,6 +403,54 @@ const Token = ({
                             <path d="M376.7 109.2c-43.8-5.8-56.4-17.4-70.7-28.1-20.5 18.7-69.1 30.4-69.1 30.4v94.9h140.8l-1-97.2z"/>
                           </g>
                         </g>);
+        }
+
+        if (kiteshield) {
+            let scale = scaling * 0.076;
+            let transX = scaling * -23.5;
+            let transY = scaling * -21.5;
+            let wh = scaling * 50;
+            let fillColor = kiteshield === true ? p("white") : c(kiteshield);
+            if ((reserved || inverse) && kiteshield) {
+              textFill = c(kiteshield);
+            } else {
+              textFill = defaultTo(t(fillColor), labelColor);
+            }
+            shapeMult = 0.75;
+            shapes.push(<g key="kiteshield" width={`${wh}`} height={`${wh}`} transform={`translate(${transX}, ${transY}) scale(${scale})`}>
+              <g>
+                <path fill={fillColor}
+                  stroke="black"
+                  strokeWidth="10"
+                  d="M509.1,383.3c-35.1,83.4-96.7,165.2-203.8,216.5c-106.6-51.6-168-133.5-202.8-217"/>
+                <path fill={fillColor}
+                  stroke="black"
+                  strokeWidth="10"
+                  d="M58.5,132.9c0.7-29.8,3.1-47.9,3.1-47.9s177.8-17,244.3-72.8c66.5,55.7,244.4,72.1,244.4,72.1 s2.5,18.4,3.1,48.5"/>
+              </g>
+              <g>
+                <path 
+                  fill="none"
+                  stroke="black"
+                  strokeWidth="10"
+                  d="M509.1,383.3c-147.8,0.6-258.4-0.4-406.6-0.4"/>
+                <path
+                  fill="none"
+                  stroke="black"
+                  strokeWidth="10"
+                  d="M58.5,132.9c180.3-0.3,314.6,0.3,494.9,0"/>
+                <path
+                  fill="none"
+                  stroke="black"
+                  strokeWidth="10"
+                  d="M553.5,132.8c1.2,56.6-4.1,154.6-44.4,250.5"/>
+                <path
+                  fill="none"
+                  stroke="black"
+                  strokeWidth="10"
+                  d="M58.5,132.9c-1.3,56.3,3.9,154.1,43.9,250"/>
+              </g>
+             </g>);
         }
 
         let content = [];

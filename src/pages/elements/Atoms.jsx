@@ -151,6 +151,7 @@ const atoms = [{
     {tokens: [{label:"xyzzy", shield: "yellow", shieldTop: "orange"}]},
     {tokens: [{label:"USA", shield3: true}]},
     {tokens: [{label:"CFR", shield3: "white", shield3TopLeft: "red", shield3TopCenter: "yellow", shield3TopRight: "blue"}]},
+    {tokens: [{label:"JWO", kiteshield:"yellow"}]},
     {tokens: [{label:"KO", color: "purple"}]},
     {tokens: [{company:"CPR"}]},
     {tokens: [{company:"PRR", destination: true}]},
