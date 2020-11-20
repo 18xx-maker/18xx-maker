@@ -201,6 +201,24 @@ const Track = ({ type, gauge, border, width, offset, path, color,
       startEndDeprecated("sharpStopRev", "sharp", 1, 0.5);
       path = `m 0 85 L 0 75 A 43.30125 43.30125 0 0 1 21.650625 37.5`;
       break;
+    case "gentleInner":
+      path = `m -17.5  85 L -17.5 75 A 112.75375 112.75375 0 0 0 -73.701905283833 -22.344555433772 L -82.362159321677 -27.344555433772`;
+      break;
+    case "gentleOuter":
+      path = `m 17.5  85 L 17.5 75 A 147.05375 147.05375 0 0 0 -56.201905283833 -52.655444566228 L -64.862159321677 -57.655444566228`;
+      break;
+    case "sharpInner":
+      path = `m -17.5  85 L -17.5 75 A 25.80125 25.80125 0 0 0 -56.201905283833 52.655444566228 L -64.862159321677 57.655444566228`;
+      break;
+    case "sharpOuter":
+      path = `m 17.5  85 L 17.5 75 A 60.80125 60.80125 0 0 0 -73.701905283833 22.344555433772 L -82.362159321677 27.344555433772`;
+      break;
+    case "straightLeft":
+      path = `M -17.15 85 L -17.15 -85`;
+      break;
+    case "straightRight":
+      path = `m  17.15 85 L 17.15 -85`;
+      break;
     case "bent":
       path = "m 0 85 L 0 75 C 0 30, 40 40, 40 0 C 40 -40, 0 -30, 0 -75 L 0 -85";
       break;
