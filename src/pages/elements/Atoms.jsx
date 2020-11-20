@@ -352,6 +352,7 @@ const atoms = [{
     {terrain: [{type:"water",cost:40}]},
     {terrain: [{type:"river",cost:20}]},
     {terrain: [{type:"cactus",cost:20}]},
+    {terrain: [{type:"cow-skull",cost:10}]},
     {terrain: [{type:"tree",cost:20,color:"green"}]},
     {terrain: [{size:"tiny",type:"river",cost:10}]},
     {terrain: [{size:"large",type:"swamp",cost:120}]}
