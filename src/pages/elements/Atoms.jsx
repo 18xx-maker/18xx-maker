@@ -275,7 +275,15 @@ const atoms = [{
              { type:"straightRight", side:1 }]},
     {track: [{ type:"straightLeft", side:1 },
              { type:"straightRight", side:1 },
-             { type:"straight", side:1 }]}
+             { type:"straight", side:1 }]},
+    {track: [{ type:"gentleInner", side:1 },
+             { type:"gentleInner", side:4 },
+             { type:"sharpOuter", side:3 },
+             { type:"sharp", side:3 },
+             { type:"sharpInner", side:3 },
+             { type:"sharpOuter", side:6 },
+             { type:"sharp", side:6 },
+             { type:"sharpInner", side:6 }]}
   ]
 },{
   group: "Offboard Revenues",
