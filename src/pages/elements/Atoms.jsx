@@ -260,7 +260,22 @@ const atoms = [{
     {track: [{side:1,type:"gentle",cross:"under",color:"water"},
              {side:2,type:"gentle",cross:"over",color:"mountain"}]},
     {track: [{side:3,type:"gentle",gauge:"narrow",color:"mountain",borderColor:"black",gaugeColor:"yellow"},
-             {side:4,type:"gentle",gauge:"dual",color:"water",borderColor:"black",gaugeColor:"green"}]}
+             {side:4,type:"gentle",gauge:"dual",color:"water",borderColor:"black",gaugeColor:"green"}]},
+    {track: [{ type:"sharpInner", side:1 },
+             { type:"sharpOuter", side:1 }]},
+    {track: [{ type:"sharpInner", side:1 },
+             { type:"sharpOuter", side:1 },
+             { type:"sharp", side:1 }]},
+    {track: [{ type:"gentleInner", side:1 },
+             { type:"gentleOuter", side:1 }]},
+    {track: [{ type:"gentleInner", side:1 },
+             { type:"gentleOuter", side:1 },
+             { type:"gentle", side:1 }]},
+    {track: [{ type:"straightLeft", side:1 },
+             { type:"straightRight", side:1 }]},
+    {track: [{ type:"straightLeft", side:1 },
+             { type:"straightRight", side:1 },
+             { type:"straight", side:1 }]}
   ]
 },{
   group: "Offboard Revenues",
