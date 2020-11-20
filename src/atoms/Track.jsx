@@ -59,68 +59,121 @@ const startEndDeprecated = (type, replace, end, start) => {
 const SIXTY_DEGREES = 60 * Math.PI / 180; // Into Radians
 const ONE_TWENTY_DEGREES = 120 * Math.PI / 180; // Into Radians
 
-const sharpPosition = (percent) => {
+// the distance between two opposing gentle arc's midpoints at a 60° angle
+// important for angled hex sides track hitting those midpoints
+const PATH_OFFSET_UNIT = 17.5;
+
+const sharpPosition = (percent, radius) => {
   let angle = percent * ONE_TWENTY_DEGREES;
-  let x = -43.30125 + (43.31025 * Math.cos(angle));
-  let y = 75 - (43.31025 * Math.sin(angle));
+  let x = -radius + (radius * Math.cos(angle));
+  let y = 75 - (radius * Math.sin(angle));
   return [x, y];
 }
 
-const sharpPath = (start, end) => {
-  let pathStart = "m 0 85 L 0 75";
+const sharpPath = (start, end, radius, pathStart, pathEnd) => {
   if (start > 0) {
-    let [startX, startY] = sharpPosition(start);
+    let [startX, startY] = sharpPosition(start, radius);
     pathStart = `m ${startX} ${startY}`;
   }
-  let pathEnd = "-64.951875 37.5 L -73.612125 42.5";
   if (end < 1) {
-    let [endX, endY] = sharpPosition(end);
+    let [endX, endY] = sharpPosition(end, radius);
     pathEnd = `${endX} ${endY}`
   }
 
-  return `${pathStart} A 43.30125 43.30125 0 0 0 ${pathEnd}`;
-  // `m 0 85 L 0 75 A 43.30125 43.30125 0 0 0 -64.951875 37.5 L -73.612125 42.5`;
+  return `${pathStart} A ${radius} ${radius} 0 0 0 ${pathEnd}`;
 };
 
-const gentlePosition = (percent) => {
+const sharpMidPath = (start, end) => {
+  let radius = 43.31025;
+  let pathStart = "m 0 85 L 0 75";
+  let pathEnd = "-64.951875 37.5 L -73.612125 42.5";
+  return sharpPath(start, end, radius, pathStart, pathEnd);
+  // `m 0 85 L 0 75 A 43.30125 43.30125 0 0 0 -64.951875 37.5 L -73.612125 42.5`;
+}
+
+const sharpInnerPath = (start, end) => {
+  let radius = 25.80125;
+  let pathStart = `m -${PATH_OFFSET_UNIT} 85 L -${PATH_OFFSET_UNIT} 75`;
+  let pathEnd = "-56.201905283833 52.655444566228 L -64.862159321677 57.655444566228";
+  return sharpPath(start, end, radius, pathStart, pathEnd);
+  //path = `m -17.5  85 L -17.5 75 A 25.80125 25.80125 0 0 0 -56.201905283833 52.655444566228 L -64.862159321677 57.655444566228`;
+}
+
+const sharpOuterPath = (start, end) => {
+  let radius = 60.80125;
+  let pathStart = `m ${PATH_OFFSET_UNIT} 85 L ${PATH_OFFSET_UNIT} 75`;
+  let pathEnd = "-73.701905283833 22.344555433772 L -82.362159321677 27.344555433772";
+  return sharpPath(start, end, radius, pathStart, pathEnd);
+  //path = `m 17.5  85 L 17.5 75 A 60.80125 60.80125 0 0 0 -73.701905283833 22.344555433772 L -82.362159321677 27.344555433772`;
+}
+
+const gentlePosition = (percent, radius) => {
   let angle = percent * SIXTY_DEGREES
-  let x = -129.90375 + (129.90375 * Math.cos(angle));
-  let y = 75 - (129.90375 * Math.sin(angle));
+  let x = -radius + (radius * Math.cos(angle));
+  let y = 75 - (radius * Math.sin(angle));
   return [x, y];
 };
 
-const gentlePath = (start, end) => {
-  let pathStart = "m 0 85 L 0 75";
+const gentlePath = (start, end, radius, pathStart, pathEnd) => {
   if (start > 0) {
-    let [startX, startY] = gentlePosition(start);
+    let [startX, startY] = gentlePosition(start, radius);
     pathStart = `m ${startX} ${startY}`;
   }
-  let pathEnd = "-64.951875 -37.5 L -73.612125 -42.5";
   if (end < 1) {
-    let [endX, endY] = gentlePosition(end);
+    let [endX, endY] = gentlePosition(end, radius);
     pathEnd = `${endX} ${endY}`
   }
 
-  return `${pathStart} A 129.90375 129.90375 0 0 0 ${pathEnd}`;
+  return `${pathStart} A ${radius} ${radius} 0 0 0 ${pathEnd}`;
 };
 
-const straightPath = (start, end) => {
+const gentleMidPath = (start, end) => {
+  let radius = 129.90375;
   let pathStart = "m 0 85 L 0 75";
+  let pathEnd = "-64.951875 -37.5 L -73.612125 -42.5";
+  return gentlePath(start, end, radius, pathStart, pathEnd);
+}
+
+const gentleInnerPath = (start, end) => {
+  let radius = 112.75375;
+  let pathStart = `m -${PATH_OFFSET_UNIT}  85 L -${PATH_OFFSET_UNIT} 75`;
+  let pathEnd = "-73.701905283833 -22.344555433772 L -82.362159321677 -27.344555433772";
+  return gentlePath(start, end, radius, pathStart, pathEnd);
+  //path = `m -17.5  85 L -17.5 75 A 112.75375 112.75375 0 0 0 -73.701905283833 -22.344555433772 L -82.362159321677 -27.344555433772`;
+}
+
+const gentleOuterPath = (start, end) => {
+  let radius = 147.05375;
+  let pathStart = `m ${PATH_OFFSET_UNIT}  85 L ${PATH_OFFSET_UNIT} 75`;
+  let pathEnd = "-56.201905283833 -52.655444566228 L -64.862159321677 -57.655444566228";
+  return gentlePath(start, end, radius, pathStart, pathEnd);
+  //path = `m 17.5  85 L 17.5 75 A 147.05375 147.05375 0 0 0 -56.201905283833 -52.655444566228 L -64.862159321677 -57.655444566228`;
+}
+
+const straightPath = (start, end, xOffset) => {
+  let pathStart = `m ${xOffset} 85 L ${xOffset} 75`;
   if (start > 0) {
-    pathStart = `m 0 ${75 - (start * 150)}`;
+    pathStart = `m ${xOffset} ${75 - (start * 150)}`;
   }
-  let pathEnd = "L 0 -75 L 0 -85";
+  let pathEnd = `L ${xOffset} -75 L ${xOffset} -85`;
   if (end < 1) {
-    pathEnd = `L 0 ${-75 + ((1 - end) * 150)}`
+    pathEnd = `L ${xOffset} ${-75 + ((1 - end) * 150)}`
   }
   return `${pathStart} ${pathEnd}`;
 };
 
 const Track = ({ type, gauge, border, width, offset, path, color,
-                 start = 0,
-                 end = 1,
+                 start = 0, begin = 0,
+                 end = 1, stop = 1,
                  borderColor, gaugeColor }) => {
   const rotation = useOrientation();
+
+  // aliases - uses start/end, but the pairs start/stop and begin/end are more logical
+  // leading to hard-to-find mistakes.  This just lets any of 'em work.
+  if (start === 0 && begin !== 0)
+    start = begin;
+  if (end === 1 && stop !== 1)
+    end = stop;
 
   let trackWidth = defaultTo(12, width);
   if (border)
@@ -158,7 +211,15 @@ const Track = ({ type, gauge, border, width, offset, path, color,
       path = "m 0 85 L 0 20";
       break;
     case "straight":
-      path = straightPath(start, end);
+      path = straightPath(start, end, 0);
+      break;
+    case "straightLeft":
+      //path = `m -17.15 85 L -17.15 -85`;
+      path = straightPath(start, end, -PATH_OFFSET_UNIT);
+      break;
+    case "straightRight":
+      //path = `m  17.15 85 L 17.15 -85`;
+      path = straightPath(start, end, PATH_OFFSET_UNIT);
       break;
     case "straightStop":
       // deprecated
@@ -166,7 +227,13 @@ const Track = ({ type, gauge, border, width, offset, path, color,
       path = "m 0 85 L 0 -37.5";
       break;
     case "gentle":
-      path = gentlePath(start, end);
+      path = gentleMidPath(start, end);
+      break;
+    case "gentleInner":
+      path = gentleInnerPath(start, end);
+      break;
+    case "gentleOuter":
+      path = gentleOuterPath(start, end);
       break;
     case "gentleHalf":
       // deprecated
@@ -189,7 +256,13 @@ const Track = ({ type, gauge, border, width, offset, path, color,
       path = `m 0 85 L 0 75 A 129.90375 129.90375 0 0 1 38.047927473438027 -16.855822526561973`;
       break;
     case "sharp":
-      path = sharpPath(start, end);
+      path = sharpMidPath(start, end);
+      break;
+    case "sharpInner":
+      path = sharpInnerPath(start, end);
+      break;
+    case "sharpOuter":
+      path = sharpOuterPath(start, end);
       break;
     case "sharpStop":
       // deprecated
@@ -200,24 +273,6 @@ const Track = ({ type, gauge, border, width, offset, path, color,
       // deprecated
       startEndDeprecated("sharpStopRev", "sharp", 1, 0.5);
       path = `m 0 85 L 0 75 A 43.30125 43.30125 0 0 1 21.650625 37.5`;
-      break;
-    case "gentleInner":
-      path = `m -17.5  85 L -17.5 75 A 112.75375 112.75375 0 0 0 -73.701905283833 -22.344555433772 L -82.362159321677 -27.344555433772`;
-      break;
-    case "gentleOuter":
-      path = `m 17.5  85 L 17.5 75 A 147.05375 147.05375 0 0 0 -56.201905283833 -52.655444566228 L -64.862159321677 -57.655444566228`;
-      break;
-    case "sharpInner":
-      path = `m -17.5  85 L -17.5 75 A 25.80125 25.80125 0 0 0 -56.201905283833 52.655444566228 L -64.862159321677 57.655444566228`;
-      break;
-    case "sharpOuter":
-      path = `m 17.5  85 L 17.5 75 A 60.80125 60.80125 0 0 0 -73.701905283833 22.344555433772 L -82.362159321677 27.344555433772`;
-      break;
-    case "straightLeft":
-      path = `M -17.15 85 L -17.15 -85`;
-      break;
-    case "straightRight":
-      path = `m  17.15 85 L 17.15 -85`;
       break;
     case "bent":
       path = "m 0 85 L 0 75 C 0 30, 40 40, 40 0 C 40 -40, 0 -30, 0 -75 L 0 -85";
