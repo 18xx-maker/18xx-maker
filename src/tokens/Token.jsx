@@ -71,6 +71,8 @@ const Token = ({
   shield3TopRight, // Color of the top of the shield
 
   kiteshield, // color of the top and bottom of the kite shield
+
+  star5, // color of the 5-pointed star
   
   halves, // Colors for halves shape
   quarters, // Colors for quarters shape
@@ -411,13 +413,16 @@ const Token = ({
             let transY = scaling * -21.5;
             let wh = scaling * 50;
             let fillColor = kiteshield === true ? p("white") : c(kiteshield);
+            labelY -= scaling * 1.8;
             if ((reserved || inverse) && kiteshield) {
               textFill = c(kiteshield);
             } else {
               textFill = defaultTo(t(fillColor), labelColor);
             }
             shapeMult = 0.75;
-            shapes.push(<g key="kiteshield" width={`${wh}`} height={`${wh}`} transform={`translate(${transX}, ${transY}) scale(${scale})`}>
+            shapes.push(
+            <g key="kiteshield" width={`${wh}`} height={`${wh}`}
+               transform={`translate(${transX}, ${transY}) scale(${scale})`}>
               <g>
                 <path fill={fillColor}
                   stroke="black"
@@ -451,6 +456,31 @@ const Token = ({
                   d="M58.5,132.9c-1.3,56.3,3.9,154.1,43.9,250"/>
               </g>
              </g>);
+        }
+
+        if (star5) {
+          let scale = 1 * scaling;
+          let transX = scale * -25;
+          let transY = scale * -25;
+          let wh = scale * 50;
+          let fillColor = star5 === true ? p("white") : c(star5);
+          labelY += scale * 3;
+          if ((reserved || inverse) && star5) {
+            textFill = "gray";
+          } else {
+            textFill = defaultTo(t(fillColor), labelColor);
+          }
+          shapeMult = 0.75;
+          shapes.push(
+            <g key="star5" width={`${wh}`} height={`${wh}`}
+              transform={`translate(${transX}, ${transY}) scale(${scale})`}>
+              <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
+                fill="red"
+                stroke={outline || "black"}
+                strokeWidth={outlineWidth || 1}
+              />
+            </g>
+          );
         }
 
         let content = [];
