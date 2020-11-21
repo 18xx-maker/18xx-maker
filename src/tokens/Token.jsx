@@ -408,9 +408,9 @@ const Token = ({
         }
 
         if (kiteshield) {
-            let scale = scaling * 0.09;
-            let transX = scaling * -27.5;
-            let transY = scaling * -24.5;
+            let scale = scaling * 0.076;
+            let transX = scaling * -23.5;
+            let transY = scaling * -21.5;
             let wh = scaling * 50;
             let fillColor = kiteshield === true ? p("white") : c(kiteshield);
             labelY -= scaling * 1.8;
@@ -419,7 +419,7 @@ const Token = ({
             } else {
               textFill = defaultTo(t(fillColor), labelColor);
             }
-            shapeMult = 0.9;
+            shapeMult = 0.75;
             shapes.push(
             <g key="kiteshield" width={`${wh}`} height={`${wh}`}
                transform={`translate(${transX}, ${transY}) scale(${scale})`}>
@@ -459,12 +459,12 @@ const Token = ({
         }
 
         if (star5) {
-          let scale = 1.2 * scaling;
+          let scale = 1 * scaling;
           let transX = scale * -25;
           let transY = scale * -25;
           let wh = scale * 50;
           let fillColor = star5 === true ? p("white") : c(star5);
-          labelY += scale * 2;
+          labelY += scale * 3;
           if ((reserved || inverse) && star5) {
             textFill = "gray";
           } else {
