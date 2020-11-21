@@ -284,7 +284,13 @@ const atoms = [{
              { type:"sharpInner", side:3 },
              { type:"sharpOuter", side:6 },
              { type:"sharp", side:6 },
-             { type:"sharpInner", side:6 }]}
+             { type:"sharpInner", side:6 }]},
+    {track: [{ type:"sharpInner", side:1, "end": 0.333 },
+             { type:"sharp", side:1, "begin": 0.333, "end": 0.666 },
+             { type:"sharpOuter", side:1, "begin": 0.666 }]},
+    {track: [{ type:"gentleInner", side:1, "end": 0.333 },
+             { type:"gentle", side:1, "begin": 0.333, "end": 0.666 },
+             { type:"gentleOuter", side:1, "begin": 0.666 }]},
   ]
 },{
   group: "Offboard Revenues",
