@@ -152,6 +152,7 @@ const atoms = [{
     {tokens: [{label:"USA", shield3: true}]},
     {tokens: [{label:"CFR", shield3: "white", shield3TopLeft: "red", shield3TopCenter: "yellow", shield3TopRight: "blue"}]},
     {tokens: [{label:"JWO", kiteshield:"yellow"}]},
+    {tokens: [{label:"SY", star5:"red"}]},
     {tokens: [{label:"KO", color: "purple"}]},
     {tokens: [{company:"CPR"}]},
     {tokens: [{company:"PRR", destination: true}]},
@@ -283,7 +284,13 @@ const atoms = [{
              { type:"sharpInner", side:3 },
              { type:"sharpOuter", side:6 },
              { type:"sharp", side:6 },
-             { type:"sharpInner", side:6 }]}
+             { type:"sharpInner", side:6 }]},
+    {track: [{ type:"sharpInner", side:1, "end": 0.333 },
+             { type:"sharp", side:1, "begin": 0.333, "end": 0.666 },
+             { type:"sharpOuter", side:1, "begin": 0.666 }]},
+    {track: [{ type:"gentleInner", side:1, "end": 0.333 },
+             { type:"gentle", side:1, "begin": 0.333, "end": 0.666 },
+             { type:"gentleOuter", side:1, "begin": 0.666 }]},
   ]
 },{
   group: "Offboard Revenues",

@@ -201,6 +201,7 @@ const Train = ({ train, trains, blackBand }) => {
         image = "4T";
         break;
       case "gray":
+      case "grey":
         image = "6T";
         break;
       default:
