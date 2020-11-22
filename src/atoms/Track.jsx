@@ -106,16 +106,16 @@ const arcPath = (start, end, xOffset, arcRadius, arcAngle, hexAngle) => {
 };
 
 
-const sharpPath = (start, end, xOffset) => {
-  return arcPath(start, end, xOffset, SHARP_RADIUS, ONE_TWENTY_DEGREES, SIXTY_DEGREES);
+const sharpPath = (start, end, xOffset, radiusOffset) => {
+  return arcPath(start, end, xOffset, SHARP_RADIUS + radiusOffset, ONE_TWENTY_DEGREES, SIXTY_DEGREES);
 };
 // mid    `m 0 85 L 0 75 A 43.30125 43.30125 0 0 0 -64.951875 37.5 L -73.612125 42.5`;
 // inner: `m -17.5  85 L -17.5 75 A 25.80125 25.80125 0 0 0 -56.201905283833 52.655444566228 L -64.862159321677 57.655444566228`;
 // outer: `m 17.5  85 L 17.5 75 A 60.80125 60.80125 0 0 0 -73.701905283833 22.344555433772 L -82.362159321677 27.344555433772`;
 
 
-const gentlePath = (start, end, xOffset) => {
-  return arcPath(start, end, xOffset, GENTLE_RADIUS, SIXTY_DEGREES, ONE_TWENTY_DEGREES);
+const gentlePath = (start, end, xOffset, radiusOffset) => {
+  return arcPath(start, end, xOffset, GENTLE_RADIUS + radiusOffset, SIXTY_DEGREES, ONE_TWENTY_DEGREES);
 };
 // inner: path = `m -17.5  85 L -17.5 75 A 112.75375 112.75375 0 0 0 -73.701905283833 -22.344555433772 L -82.362159321677 -27.344555433772`;
 // outer: path = `m 17.5  85 L 17.5 75 A 147.05375 147.05375 0 0 0 -56.201905283833 -52.655444566228 L -64.862159321677 -57.655444566228`;
@@ -132,7 +132,7 @@ const straightPath = (start, end, xOffset) => {
   return `${pathStart} ${pathEnd}`;
 };
 
-const Track = ({ type, gauge, border, width, offset, path, color,
+const Track = ({ type, gauge, border, width, offset, path, color, trackOffset, radiusOffset,
                  start = 0, begin = 0,
                  end = 1, stop = 1,
                  borderColor, gaugeColor }) => {
@@ -146,6 +146,8 @@ const Track = ({ type, gauge, border, width, offset, path, color,
     end = stop;
 
   let trackWidth = defaultTo(12, width);
+  trackOffset = defaultTo(0, trackOffset);
+  radiusOffset = defaultTo(0, radiusOffset);
   if (border)
     trackWidth += 4;
   color = color || "track";
@@ -181,7 +183,7 @@ const Track = ({ type, gauge, border, width, offset, path, color,
       path = "m 0 85 L 0 20";
       break;
     case "straight":
-      path = straightPath(start, end, 0);
+      path = straightPath(start, end, trackOffset);
       break;
     case "straightLeft":
       //path = `m -17.15 85 L -17.15 -85`;
@@ -197,13 +199,13 @@ const Track = ({ type, gauge, border, width, offset, path, color,
       path = "m 0 85 L 0 -37.5";
       break;
     case "gentle":
-      path = gentlePath(start, end, 0);
+      path = gentlePath(start, end, trackOffset, radiusOffset);
       break;
     case "gentleInner":
-      path = gentlePath(start, end, -PATH_OFFSET_UNIT);
+      path = gentlePath(start, end, -PATH_OFFSET_UNIT, radiusOffset);
       break;
     case "gentleOuter":
-      path = gentlePath(start, end, PATH_OFFSET_UNIT);
+      path = gentlePath(start, end, PATH_OFFSET_UNIT, radiusOffset);
       break;
     case "gentleHalf":
       // deprecated
@@ -226,13 +228,13 @@ const Track = ({ type, gauge, border, width, offset, path, color,
       path = `m 0 85 L 0 75 A 129.90375 129.90375 0 0 1 38.047927473438027 -16.855822526561973`;
       break;
     case "sharp":
-      path = sharpPath(start, end, 0);
+      path = sharpPath(start, end, trackOffset, radiusOffset);
       break;
     case "sharpInner":
-      path = sharpPath(start, end, -PATH_OFFSET_UNIT);
+      path = sharpPath(start, end, -PATH_OFFSET_UNIT, radiusOffset);
       break;
     case "sharpOuter":
-      path = sharpPath(start, end, PATH_OFFSET_UNIT);
+      path = sharpPath(start, end, PATH_OFFSET_UNIT, radiusOffset);
       break;
     case "sharpStop":
       // deprecated
