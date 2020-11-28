@@ -38,7 +38,7 @@ const atoms = [{
 },{
   group: "Values",
   examples: [{values: [{value: 20}]},
-             {values: [{value: 60}]},
+             {values: [{value: 60, color:"orange", fontFamily:"Elegante"}]},
              {values: [{value: 60, shape: "square"}]},
              {values: [{
                outerBorderColor: "green",
@@ -51,7 +51,7 @@ const atoms = [{
              }]},
              {values: [{value: 1024}]},
              {values: [{value: "60/60"}]},
-             {values: [{value: "Longer"}]}
+             {values: [{value: "Longer"}]},
             ]
 },{
   group: "Names",
