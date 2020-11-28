@@ -8,12 +8,16 @@ import RotateContext from "../context/RotateContext";
 
 import { multiDefaultTo } from "../util";
 
-const Value = ({ value, fontFamily, color, textColor, shape, fixed, outerBorderColor, rotation }) => {
+const Value = ({ value, fontSize, fontWeight, fontFamily, color, textColor, shape, fixed, outerBorderColor, rotation }) => {
   const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
 
   let length = format(value, game, config.currency["value"]).length;
-  let size = 15;
+
+  fontSize = multiDefaultTo(15, game.info.valueFontSize, fontSize);
+  fontWeight = multiDefaultTo("bold", game.info.valueFontWeight, fontWeight);
+  fontFamily = multiDefaultTo("sans-serif", game.info.valueFontFamily, fontFamily);
+
   let ry = 14;
   let rx = length > 2 ? length * 6 : 14;
   color = color || "white";
@@ -71,9 +75,9 @@ const Value = ({ value, fontFamily, color, textColor, shape, fixed, outerBorderC
                 {bg}
                 <text
                   transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}
-                  fontWeight="bold"
-                  fontSize={size}
-                  fontFamily={multiDefaultTo("sans-serif", game.info.valueFontFamily, fontFamily)}
+                  fontSize={fontSize}
+                  fontWeight={fontWeight}
+                  fontFamily={fontFamily}
                   fill={c(textColor) || t(c(color))}
                   dominantBaseline="central"
                   textAnchor="middle"
