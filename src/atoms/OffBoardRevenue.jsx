@@ -135,7 +135,7 @@ const OffBoardRevenue = ({ name, revenues, fontFamily, reverse, rows, size}) => 
 
   let split = splitRevenues(rows, revenues);
 
-  let fontSize = multiDefaultTo(DEFAULT_FONTSIZE, size);
+  let fontSize = multiDefaultTo(DEFAULT_FONTSIZE, game.info.valueFontSize, size);
   fontFamily = multiDefaultTo("display", game.info.valueFontFamily, fontFamily);
 
   let nodes = R.addIndex(R.chain)((revenues, row) => {
