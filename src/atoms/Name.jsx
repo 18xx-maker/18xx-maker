@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useContext} from "react";
+import GameContext from "../context/GameContext";
 import Color from "../util/Color";
 import * as uuid from "uuid";
 
-import { getFontProps  } from "../util";
+import { getFontProps, multiDefaultTo } from "../util";
 
 import defaultTo from "ramda/src/defaultTo";
 
 const Name = (props) => {
-  let { name, strokeColor, strokeWidth, color, bgColor, path, doRotation, rotation, reverse, offset, x, y, textLength } = props;
+  const { game } = useContext(GameContext);
+  let { name, fontSize, fontWeight, fontFamily, fontStyle, strokeColor, strokeWidth, color, bgColor, path, doRotation, rotation, reverse, offset, x, y, textLength } = props;
 
-  let font = getFontProps(props, 11, "bold", "sans-serif");
+  let font = getFontProps(props,
+    multiDefaultTo(11, game.info.nameFontSize, fontSize),
+    multiDefaultTo("bold", game.info.nameFontWeight, fontWeight),
+    multiDefaultTo("sans-serif", game.info.nameFontFamily, fontFamily));
 
   let nameNode;
 
