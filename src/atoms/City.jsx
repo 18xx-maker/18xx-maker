@@ -14,7 +14,7 @@ import CityRotateContext from "../context/CityRotateContext";
 
 const cityPaths = {
   cityPath: "M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30",
-  cityPathReverse: "M 0 -30 A 30 30 0 0 0 0 30 A 30 30 0 0 0 0 -30",
+  cityPathReverse: "M 0 -32 A 32 32 0 0 0 0 32 A 32 32 0 0 0 0 -32",
   city2Path: "M 0 30 L -25 30 A 30 30 0 0 1 -25 -30 L 25 -30 A 30 30 0 0 1 25 30 L 0 30",
   city2PathReverse: "M 0 -30 L -25 -30 A 30 30 0 0 0 -25 30 L 25 30 A 30 30 0 0 0 25 -30 L 0 -30",
   city3Path: "M 0 44 L -28 44 A 30 30 0 0 1 -50 -1 L -25 -44 A 30 30 0 0 1 25 -44 L 50 -1 A 30 30 0 0 1 28 44 L 0 44",
