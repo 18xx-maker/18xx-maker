@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import GameContext from "../context/GameContext";
 import { MapOrientation } from "../context/OrientationContext";
 
+import { getFontProps } from "../util";
 import Color from "../util/Color";
 import Currency from "../util/Currency";
 import GameCompanyToken from "../tokens/GameCompanyToken";
@@ -26,36 +27,99 @@ import { getMapHex } from "../map/util";
 
 import "./private.scss";
 
-const Private = ({
-  name,
-  nameFontSize,
-  note,
-  noteFontSize,
-  price,
-  revenue,
-  bid,
-  players,
-  minPlayers,
-  maxPlayers,
-  description,
-  descFontSize,
-  icon,
-  iconColor,
-  hex,
-  tile,
-  token,
-  company,
-  id,
-  idFontSize,
-  idBackgroundColor,
-  backgroundColor,
-  variant
-}) => {
+const Private = (props) => {
+  let { name, nameFontSize, nameFontFamily, nameFontWeight, nameFontStyle, nameColor,
+        id, idFontSize, idFontFamily, idFontWeight, idFontStyle, idColor, idBackgroundColor,
+        note, noteFontSize, noteFontFamily, noteFontWeight, noteFontStyle, noteColor,
+        description, descFontSize, descFontFamily, descFontWeight, descFontStyle, descColor,
+        price, priceFontSize, priceFontFamily, priceFontWeight, priceFontStyle, priceColor,
+        revenue, revenueFontSize, revenueFontFamily, revenueFontWeight, revenueFontStyle,
+            revenueColor,
+        bid, bidFontSize, bidFontFamily, bidFontWeight, bidFontStyle,  bidColor,
+        variant, variantFontSize, variantFontFamily, variantFontWeight, variantFontStyle,
+            variantColor,
+        players, playersFontFamily, playersFontSize, playersFontWeight, playersFontStyle,
+            playersColor,
+        minPlayers, maxPlayers,
+        icon, iconColor,
+        hex, tile, token, company,
+        backgroundColor } = props;
   const { game } = useContext(GameContext);
-  let descFontSizeInch = defaultTo(0.085, descFontSize / 72);
-  let noteFontSizeInch = defaultTo(0.12, noteFontSize / 72);
-  let nameFontSizeInch = defaultTo(0.18, nameFontSize / 72);
-  let idFontSizeInch = defaultTo(0.13, idFontSize / 72);
+
+  const px2pt = 0.75;
+  const in2pt = 72;
+  const lineHeightAdd = 0.02 * in2pt / px2pt;
+
+  // Optimallly, these *Font css blocks would work with points directly without the units
+  // contortions, calculate the lineHeight at 1.2 * the font size, and incluude the color
+  // as well.  getFontProps() is along the lines of what's needed, but doesn't do any of
+  // the magic to make it elegant.  The default it's all using is px, which is about as
+  // inconvenient as it gets.
+
+  // default font sizes come from the css
+  //let idFontSizeInch = defaultTo(0.13, idFontSize / 72);
+  let idFS = defaultTo(12.48, idFontSize / px2pt); // 0.13" == 9.36pt == 12.48px
+  let idFont = getFontProps(props,
+      idFS, idFontWeight, idFontFamily, idFontStyle);
+  let idLineHeight = idFS + lineHeightAdd;
+  idColor = defaultTo("black", idColor);
+
+  //let nameFontSizeInch = defaultTo(0.18, nameFontSize / 72);
+  let nameFS = defaultTo(17.28, nameFontSize / px2pt); // 0.18" == 12.96pt == 17.28px
+  let nameFont = getFontProps(props,
+      nameFS, nameFontWeight, nameFontFamily, nameFontStyle);
+  let nameLineHeight = nameFS + lineHeightAdd;
+  nameColor = defaultTo("black", nameColor);
+
+  // let descFontSizeInch = defaultTo(0.085, descFontSize / 72);
+  let descFS = defaultTo(8.16, descFontSize / px2pt); // 0.085" == 6.12pt == 8.16px
+  let descFont = getFontProps(props,
+      descFS, descFontWeight, descFontFamily, descFontStyle);
+  let descLineHeight = descFS + lineHeightAdd;
+  descColor = defaultTo("black", descColor);
+
+  // let noteFontSizeInch = defaultTo(0.12, noteFontSize / 72);
+  let noteFS = defaultTo(11.52, noteFontSize / px2pt); // 0.12" == 9.36pt == 11.52px
+  let noteFont = getFontProps(props,
+      noteFS, noteFontWeight, noteFontFamily, noteFontStyle);
+  let noteLineHeight = noteFS + lineHeightAdd;
+  noteColor = defaultTo("black", noteColor);
+
+  // let revenueFontSizeInch = defaultTo(0.18, idFontSize / 72);
+  let revenueFS = defaultTo(17.28, revenueFontSize / px2pt);
+  let revenueFont = getFontProps(props,
+      revenueFS, revenueFontWeight, revenueFontFamily, revenueFontStyle);
+  let revenueLineHeight = revenueFS + lineHeightAdd;
+  revenueColor = defaultTo("black", revenueColor);
+
+  // let bidFontSizeInch = defaultTo(0.14, nameFontSize / 72);
+  let bidFS = defaultTo(13.44, bidFontSize / px2pt); // 0.14" == ??pt == 13.44px
+  let bidFont = getFontProps(props,
+      bidFS, bidFontWeight, bidFontFamily, bidFontStyle);
+  let bidLineHeight = bidFS + lineHeightAdd;
+  bidColor = defaultTo("black", bidColor);
+
+  // let priceFontSizeInch = defaultTo(0.18, descFontSize / 72);
+  let priceFS = defaultTo(17.28, priceFontSize / px2pt);
+  let priceFont = getFontProps(props,
+      priceFS, priceFontWeight, priceFontFamily, priceFontStyle);
+  let priceLineHeight = priceFS + lineHeightAdd;
+  priceColor = defaultTo("black", priceColor);
+
+  // let variantFontSizeInch = defaultTo(0.5em, variantFontSize / 72);
+  let variantFS = defaultTo(8, variantFontSize / px2pt);
+  let variantFont = getFontProps(props,
+      variantFS, variantFontWeight, variantFontFamily, variantFontStyle);
+  let variantLineHeight = variantFS + lineHeightAdd;
+  variantColor = defaultTo("black", variantColor);
+
+  // let playersFontSizeInch = defaultTo(0.14, playersFontSize / 72);
+  let playersFS = defaultTo(13.44, playersFontSize / px2pt);
+  let playersFont = getFontProps(props,
+      playersFS, playersFontWeight, playersFontFamily, playersFontStyle);
+  let playersLineHeight = playersFS + lineHeightAdd;
+  playersColor = defaultTo("black", playersColor);
+
   backgroundColor = defaultTo("white", backgroundColor);
   idBackgroundColor = defaultTo("white", idBackgroundColor);
 
@@ -113,29 +177,35 @@ const Private = ({
               <div className="card__body">
                 <div className="private__name"
                   style={{
-                    fontSize: `${nameFontSizeInch}in`,
-                    lineHeight: `${nameFontSizeInch + 0.02}in`
+                    color: c(nameColor),
+                    lineHeight: `${nameLineHeight}px`,
+                    ...nameFont
                   }}>
                   {id && <div className="private__id"
                     style={{
                       backgroundColor: c(idBackgroundColor),
-                      fontSize: `${idFontSizeInch}in`,
-                      lineHeight: `${idFontSizeInch + 0.02}in`
-                    }}>{id}</div>}
+                      color: c(idColor),
+                      lineHeight: `${idLineHeight}px`,
+                      ...idFont
+                    }}>
+                    {id}
+                  </div>}
                   {name}
                 </div>
                 {note && <div className="private__note"
                     style={{
-                      fontSize: `${noteFontSizeInch}in`,
-                      lineHeight: `${noteFontSizeInch + 0.02}in`
+                      color: c(noteColor),
+                      lineHeight: `${noteLineHeight}px`,
+                      ...noteFont
                     }}>
                   {Array.isArray(note)
                    ? note.reduce((lines, line) => <>{lines}<br />{line}</>)
                    : note}</div>}
                 <div className="private__description"
                     style={{
-                      fontSize: `${descFontSizeInch}in`,
-                      lineHeight: `${descFontSizeInch + 0.02}in`
+                      color: c(descColor),
+                      lineHeight: `${descLineHeight}px`,
+                      ...descFont
                     }}>
                   {hexNode}
                   {company && <div className="private__company">
@@ -157,11 +227,46 @@ const Private = ({
                    ? description.reduce((lines, line) => <>{lines}<br />{line}</>)
                    : description}
                 </div>
-                {bid && <div className="private__bid">Min bid: <Currency value={bid} type="private"/></div>}
-                <div className="private__price"><Currency value={price} type="private"/></div>
-                {playersNode && <div className="private__players">{playersNode}</div>}
-                {revenueNode && <div className="private__revenue">Revenue: {revenueNode}</div>}
-                {variant && <div className="private__variant">{variant}</div>}
+                {bid && <div className="private__bid"
+                    style={{
+                      color: c(bidColor),
+                      lineHeight: `${bidLineHeight}px`,
+                      ...bidFont
+                    }}>
+                  Min bid: <Currency value={bid} type="private"/>
+                </div>}
+                <div className="private__price"
+                    style={{
+                      color: c(priceColor),
+                      lineHeight: `${priceLineHeight}px`,
+                      ...priceFont
+                    }}>
+                  <Currency value={price} type="private"/>
+                </div>
+                {playersNode && <div className="private__players"
+                    style={{
+                      color: c(playersColor),
+                      lineHeight: `${playersLineHeight}px`,
+                      ...playersFont
+                    }}>
+                  {playersNode}
+                </div>}
+                {revenueNode && <div className="private__revenue"
+                    style={{
+                      color: c(revenueColor),
+                      lineHeight: `${revenueLineHeight}px`,
+                      ...revenueFont
+                    }}>
+                  Revenue: {revenueNode}
+                </div>}
+                {variant && <div className="private__variant"
+                    style={{
+                      color: c(variantColor),
+                      lineHeight: `${variantLineHeight}px`,
+                      ...variantFont
+                    }}>
+                  {variant}
+                </div>}
               </div>
             </div>
           )}
