@@ -25,7 +25,7 @@ const Boomtown = ({ border, city, size, name, x, color, bgColor, width, strokeWi
 
   let cityWidth = width || 25;
   let scale = cityWidth / 25;
-  let centerTownWidth = cityWidth * 5 / 12;
+  let centerTownWidth = cityWidth * 2 / 5;
   let path = null;
   let nameNode = null;
   strokeWidth = strokeWidth || 2;

@@ -6,7 +6,7 @@ import { multiDefaultTo } from "../util";
 const RouteBonus = ({ value, size, fontFamily, fillColor, strokeColor, strokeWidth, textColor }) => {
   const { game } = useContext(GameContext);
   fontFamily = multiDefaultTo("sans-serif", game.info.valueFontFamily, fontFamily);
-  size = size || 14;
+  size = multiDefaultTo(14, game.info.valueFontSize, size);
   let width = size * 5.0 / 14.0 * value.length;
   let height = size + 6;
   fillColor = fillColor || "white";
