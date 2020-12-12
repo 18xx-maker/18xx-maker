@@ -51,7 +51,7 @@ const makeBorder = track => (
   </Position>
 );
 
-const HexTile = ({ hex, id, mask, border, transparent, map }) => {
+const HexTile = ({ hex, id, mask, border, transparent, map, opacity }) => {
   const rotation = useOrientation();
 
   if (hex === undefined || hex === null) {
@@ -259,6 +259,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map }) => {
             color={hex.color || "plain"}
             transparent={transparent}
             map={map}
+            opacity={opacity}
           />
 
           <g transform={`rotate(-${rotation})`}>

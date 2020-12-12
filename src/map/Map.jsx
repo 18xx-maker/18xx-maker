@@ -13,6 +13,7 @@ import MapPlayers from "./MapPlayers";
 import MapRoundTracker from "./MapRoundTracker";
 
 import { getMapData, toAlpha, toCoords } from "./util";
+import { multiDefaultTo } from "../util";
 
 const Map = ({ name, game, config, variation }) => {
   const coords = config.coords;
@@ -29,13 +30,14 @@ const Map = ({ name, game, config, variation }) => {
       let translate = `translate(${data.hexX(x, y)} ${data.hexY(x, y)})`;
       let scale = `scale(${data.scale})`;
       let coord = `${toAlpha(y)}${x}`;
+      let opacity = multiDefaultTo("1.0", hex.opacity, data.map.opacity);
       return (
         <g
           transform={`${translate} ${scale}`}
           key={`hex-${name}-${hex.variation}-${coord}`}
         >
           <Hex hex={hex} border={true} transparent={game.info.transparent}
-               map={true} id={coords === "inside" && coord} />
+               map={true} id={coords === "inside" && coord} opacity={opacity} />
         </g>
       );
     }, R.map(toCoords, hex.hexes || []));
