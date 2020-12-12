@@ -23,7 +23,7 @@ const Triangle = (props) => {
   // let y2 = -25 * scale * (reverse ? -1 : 1);
 
   let font = getFontProps(props, 16 * scale, undefined,
-    multiDefaultTo(undefined, game.info.valueFontFamily, fontFamily));
+    multiDefaultTo(undefined, fontFamily, game.info.valueFontFamily));
   let strokeDashArray = dashed ? `${width / 7.142857143} ${width / 7.142857143}` : undefined;
 
   return (

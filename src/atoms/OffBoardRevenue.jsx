@@ -29,7 +29,7 @@ const height = (size) => {
 }
 
 const makeNode = (x, y, reverse, revenue, size, fontFamily) => {
-  let value = multiDefaultTo("", revenue.cost, revenue.revenue, revenue.value);
+  let value = multiDefaultTo("", revenue.value, revenue.revenue, revenue.cost);
   let length = letter(size) * `${value}`.length;
   let phaseLength = letter(size) * `${revenue.phase}`.length;
   let width = R.max(`${value}`.length, 2) * letter(size) + 5;
@@ -135,8 +135,8 @@ const OffBoardRevenue = ({ name, revenues, fontFamily, reverse, rows, size}) => 
 
   let split = splitRevenues(rows, revenues);
 
-  let fontSize = multiDefaultTo(DEFAULT_FONTSIZE, game.info.valueFontSize, size);
-  fontFamily = multiDefaultTo("display", game.info.valueFontFamily, fontFamily);
+  let fontSize = multiDefaultTo(DEFAULT_FONTSIZE, size, game.info.valueFontSize);
+  fontFamily = multiDefaultTo("display", fontFamily, game.info.valueFontFamily);
 
   let nodes = R.addIndex(R.chain)((revenues, row) => {
     let y = row * height(fontSize) * (reverse ? -1 : 1);
