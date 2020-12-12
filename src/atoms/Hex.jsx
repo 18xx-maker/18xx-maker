@@ -2,7 +2,7 @@ import React from "react";
 import Color from "../util/Color";
 
 const stripeWidth = 28.8675
-const Hex = ({ color, border, transparent, map }) => {
+const Hex = ({ color, border, transparent, map, opacity }) => {
   let points = "-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 49.07475,85 -49.07475,85";
 
   return (
@@ -36,6 +36,7 @@ const Hex = ({ color, border, transparent, map }) => {
               strokeLinejoin="bevel"
               strokeWidth="1"
               stroke={fill}
+              opacity={opacity}
             />
             {stripe && (
               <g transform={`rotate(${stripeRotation})`}>
