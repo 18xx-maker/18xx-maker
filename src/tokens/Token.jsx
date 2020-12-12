@@ -546,8 +546,9 @@ const Token = ({
           } else {
             let size = iconWidth || 1.5 * width;
             let start = -0.5 * size;
+            let y = iconY || start;
             content.push(<Component key="icon" className={classes.join(" ")}
-                                    x={start} y={start}
+                                    x={start} y={y}
                                     height={size} width={size} />);
           }
         } else if (label && label.length > 0) {
@@ -621,7 +622,7 @@ const Token = ({
               cy="0"
               r={width + (bleed ? 5 : 0)}
               fill="none"
-              stroke={"black"}
+              stroke={outline || "black"}
               strokeWidth={outlineWidth || 1}
             />
           </g>
