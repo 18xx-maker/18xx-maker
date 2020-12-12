@@ -9,7 +9,7 @@ import defaultTo from "ramda/src/defaultTo";
 
 const Name = (props) => {
   const { game } = useContext(GameContext);
-  let { name, fontSize, fontWeight, fontFamily, fontStyle, strokeColor, strokeWidth, color, bgColor, path, doRotation, rotation, reverse, offset, x, y, textLength } = props;
+  let { name, fontSize, fontWeight, fontFamily, strokeColor, strokeWidth, color, bgColor, path, doRotation, rotation, reverse, offset, x, y, textLength } = props;
 
   let font = getFontProps(props,
     multiDefaultTo(11, game.info.nameFontSize, fontSize),

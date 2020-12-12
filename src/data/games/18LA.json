@@ -1,10 +1,17 @@
 {
   "info": {
     "title": "18 Los Angeles",
+    "subtitle": "Railroading in the City of Angels",
     "designer": "Tony Fryer",
     "background": "orange",
     "marketTokens": 2,
     "extraStationTokens": 3,
+    "capitalization": "incremental",
+    "titleX": 10,
+    "titleY": 650,
+    "titleSize": 40,
+    "subTitleSize": 12,
+    "extraTotalHeight": 60,
     "currency": "$#"
   },
   "links": {
@@ -288,7 +295,7 @@
       "name": "Los Angeles Citrus",
       "price": 60,
       "revenue": 15,
-      "icon": "steamboat",
+      "icon": "orange",
       "description": "Add a $30 marker in either Riverside or Port of Long Beach"
     },
     {
@@ -392,6 +399,155 @@
       }
     }
   ],
+  "pools": [
+    {
+      "name": "Stock Market",
+      "notes": [
+        {
+          "color": "orange",
+          "note": "Corporations issue/redeem stock at one value lower/higher"
+        },
+        {
+          "color": "brown",
+          "icon": "exclamation",
+          "note": "Corporations may not issue more stock than the amount held by players, less the number already in the stock market"
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "SR",
+      "color": "white"
+    },
+    {
+      "name": "OR1",
+      "color": "yellow"
+    },
+    {
+      "name": "OR2",
+      "color": "yellow"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": ["Sell any number of shares", "Buy one share"],
+      "ordered": true
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Issue or redeem shares",
+        "Lay or upgrade track and/or purchase a station",
+        "Run trains",
+        "Pay dividends, half dividends or retain revenue",
+        "Purchase trains"
+      ],
+      "ordered": true,
+      "optional": ["Purchase private companies"]
+    }
+  ],
+  "stock": {
+    "type": "1D",
+    "movement": {
+      "left": [
+        "President sold shares",
+        "Stock has shares in the market",
+        "Dividend less than 1/2 the current price"
+      ],
+      "right": [
+        "Stock is 100% held by players",
+        "Dividend at least stock price, but less than double",
+        "[Double] Dividend two times or more its current price",
+        "[Triple] Dividend three times or more its current price (when $165 or more)"
+      ]
+    },
+    "ledges": [
+      {
+        "color": "orange",
+        "coords": ["4 0", "4 1", "15 1", "15 0", "4 0"]
+      }
+    ],
+    "market": [
+      {
+        "label": "Closed",
+        "color": "black",
+        "textColor": "white"
+      },
+      10,
+      20,
+      30,
+      {
+        "value": 40,
+        "par": true
+      },
+      {
+        "value": 50,
+        "par": true
+      },
+      {
+        "value": 60,
+        "par": true
+      },
+      {
+        "value": 70,
+        "par": true
+      },
+      {
+        "value": 80,
+        "par": true
+      },
+      {
+        "value": 90,
+        "par": true
+      },
+      {
+        "value": 100,
+        "par": true
+      },
+      {
+        "value": 112,
+        "par": true
+      },
+      {
+        "value": 124,
+        "par": true
+      },
+      {
+        "value": 137,
+        "par": true
+      },
+      {
+        "value": 150,
+        "par": true
+      },
+      165,
+      180,
+      195,
+      212,
+      230,
+      250,
+      270,
+      295,
+      320,
+      345,
+      375,
+      405,
+      440,
+      475,
+      510,
+      550
+    ],
+    "limits": [
+      {
+        "color": "orange",
+        "description": "Allowed par values",
+        "min": 40,
+        "max": 150
+      }
+    ]
+  },
   "ipo": true,
   "bank": 12000,
   "tiles": {
@@ -503,5 +659,1321 @@
     },
     "611": 4,
     "619": 3
+  },
+  "map": {
+    "players": {
+      "x": 900,
+      "y": 1260,
+      "cellWidth": 80
+    },
+    "hexes": [
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Van Nuys"
+            }
+          }
+        ],
+        "hexes": ["A4"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Burbank"
+            }
+          }
+        ],
+        "hexes": ["A6"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "South Pasadena"
+            }
+          }
+        ],
+        "hexes": ["B7"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Compton"
+            }
+          }
+        ],
+        "track": [
+          {
+            "side": 5,
+            "type": "stub"
+          }
+        ],
+        "hexes": ["D7"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Norwalk"
+            }
+          }
+        ],
+        "track": [
+          {
+            "side": 6,
+            "type": "stub"
+          }
+        ],
+        "hexes": ["D9"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "La Habra"
+            }
+          }
+        ],
+        "bridges": [
+          {
+            "cost": 40,
+            "angle": 90,
+            "percent": 1
+          }
+        ],
+        "hexes": ["D11"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Garden Grove"
+            }
+          }
+        ],
+        "hexes": ["F11"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "San Dimas"
+            }
+          }
+        ],
+        "labels": [
+          {
+            "label": "Z",
+            "percent": 0.75,
+            "angle": 60
+          }
+        ],
+        "hexes": ["B13"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Anaheim"
+            }
+          }
+        ],
+        "labels": [
+          {
+            "label": "Z",
+            "percent": 0.75,
+            "angle": 60
+          }
+        ],
+        "hexes": ["E12"]
+      },
+      {
+        "color": "plain",
+        "names": [
+          {
+            "name": "El Segundo",
+            "percent": -0.5
+          }
+        ],
+        "terrain": [
+          {
+            "type": "river",
+            "cost": 40
+          }
+        ],
+        "hexes": ["D3"]
+      },
+      {
+        "color": "plain",
+        "names": [
+          {
+            "name": "Alta Vista",
+            "percent": -0.5
+          }
+        ],
+        "terrain": [
+          {
+            "type": "mountain",
+            "size": "small",
+            "cost": 40
+          }
+        ],
+        "hexes": ["E14"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Alhambra"
+            },
+            "companies": [
+              {
+                "abbrev": "LA",
+                "reserved": true
+              }
+            ]
+          }
+        ],
+        "bridges": [
+          {
+            "cost": 40,
+            "angle": 90,
+            "percent": 1
+          }
+        ],
+        "hexes": ["B9"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Culver City"
+            },
+            "companies": [
+              {
+                "abbrev": "ELA",
+                "reserved": true
+              }
+            ]
+          }
+        ],
+        "hexes": ["C4"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Montebello"
+            },
+            "companies": [
+              {
+                "abbrev": "SF",
+                "reserved": true
+              }
+            ]
+          }
+        ],
+        "bridges": [
+          {
+            "cost": 40,
+            "angle": 150,
+            "percent": 1
+          }
+        ],
+        "hexes": ["C8"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Walnut"
+            },
+            "companies": ["ELA"]
+          }
+        ],
+        "terrain": [
+          {
+            "type": "mountain",
+            "size": "small",
+            "cost": 40,
+            "percent": 0.75
+          }
+        ],
+        "hexes": ["C12"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Gardena"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "logo": "18LA/GT"
+          }
+        ],
+        "hexes": ["D5"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Cypress"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "logo": "18LA/OCR"
+          }
+        ],
+        "track": [
+          {
+            "side": 1,
+            "type": "stub"
+          }
+        ],
+        "hexes": ["E10"]
+      },
+      {
+        "color": "plain",
+        "names": [
+          {
+            "name": "Beverly Hills",
+            "percent": -0.5
+          }
+        ],
+        "companies": [
+          {
+            "label": "BHC",
+            "percent": 0.25,
+            "color": "orange"
+          }
+        ],
+        "tunnels": [
+          {
+            "cost": 20,
+            "angle": 210,
+            "percent": 1
+          }
+        ],
+        "hexes": ["B3"]
+      },
+      {
+        "color": "plain",
+        "names": [
+          {
+            "name": "Puente",
+            "percent": -0.5
+          }
+        ],
+        "companies": [
+          {
+            "label": "PT",
+            "percent": 0.25,
+            "color": "orange"
+          }
+        ],
+        "hexes": ["C10"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Redondo Beach"
+            }
+          }
+        ],
+        "names": [
+          {
+            "name": "SBL",
+            "fontStyle": "italic",
+            "percent": 0.75
+          }
+        ],
+        "hexes": ["E4"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Torrance"
+            }
+          }
+        ],
+        "names": [
+          {
+            "name": "SBL",
+            "fontStyle": "italic",
+            "percent": 0.75
+          }
+        ],
+        "track": [
+          {
+            "side": 4,
+            "type": "stub"
+          }
+        ],
+        "hexes": ["E6"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "name": {
+              "name": "Pasadena"
+            },
+            "companies": ["LA"]
+          }
+        ],
+        "values": [
+          {
+            "value": 20,
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 5
+          }
+        ],
+        "hexes": ["A8"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "name": {
+              "name": "Azusa"
+            },
+            "companies": ["UP"]
+          }
+        ],
+        "values": [
+          {
+            "value": 20,
+            "angle": 180,
+            "percent": -0.75
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 4
+          }
+        ],
+        "hexes": ["B11"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "name": {
+              "name": "Los Angeles"
+            },
+            "size": 2,
+            "companies": [
+              {
+                "abbrev": "SP",
+                "reserved": true
+              }
+            ]
+          }
+        ],
+        "values": [
+          {
+            "value": 40,
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "bridges": [
+          {
+            "cost": 40,
+            "angle": 30,
+            "percent": 1
+          }
+        ],
+        "track": [
+          {
+            "side": 4
+          },
+          {
+            "side": 6
+          }
+        ],
+        "labels": [
+          {
+            "label": "Z",
+            "percent": 0.75,
+            "angle": -30
+          }
+        ],
+        "hexes": ["C6"]
+      },
+      {
+        "color": "yellow",
+        "labels": [
+          {
+            "label": "LB"
+          }
+        ],
+        "cities": [
+          {
+            "angle": 90,
+            "percent": 0.75
+          },
+          {
+            "angle": 150,
+            "percent": 0.75
+          },
+          {
+            "angle": 210,
+            "percent": 0.75,
+            "companies": [
+              {
+                "label": "PMC",
+                "color": "white"
+              }
+            ]
+          },
+          {
+            "angle": 270,
+            "percent": 0.75
+          }
+        ],
+        "names": [
+          {
+            "name": "Long",
+            "angle": -30,
+            "percent": 0.5
+          },
+          {
+            "name": "Beach",
+            "angle": -22,
+            "percent": 0.7
+          }
+        ],
+        "values": [
+          {
+            "value": 10,
+            "angle": 30,
+            "percent": 0.75
+          }
+        ],
+        "hexes": ["E8"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "name": {
+              "name": "Santa Ana",
+              "reverse": true
+            },
+            "size": 2,
+            "companies": ["PER"]
+          }
+        ],
+        "values": [
+          {
+            "value": 20,
+            "angle": 180,
+            "percent": -0.75
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 3
+          }
+        ],
+        "hexes": ["F13"]
+      },
+      {
+        "color": "gray",
+        "cities": [{}],
+        "values": [
+          {
+            "value": 20,
+            "angle": 30,
+            "percent": 0.6
+          }
+        ],
+        "names": [
+          {
+            "name": "Hollywood",
+            "angle": 210,
+            "percent": 0.6
+          }
+        ],
+        "tunnels": [
+          {
+            "cost": 20,
+            "angle": 90,
+            "percent": 1
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          }
+        ],
+        "hexes": ["B5"]
+      },
+      {
+        "color": "gray",
+        "cities": [
+          {
+            "companies": ["SP"]
+          }
+        ],
+        "values": [
+          {
+            "value": 10,
+            "percent": 0.6
+          }
+        ],
+        "names": [
+          {
+            "name": "Santa",
+            "angle": 210,
+            "percent": 0.7
+          },
+          {
+            "name": "Monica",
+            "angle": 217,
+            "percent": 0.6
+          }
+        ],
+        "icons": [
+          {
+            "type": "steamboat",
+            "angle": 110,
+            "percent": 0.6
+          },
+          {
+            "type": "steamboat",
+            "angle": 70,
+            "percent": 0.6
+          }
+        ],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          }
+        ],
+        "hexes": ["C2"]
+      },
+      {
+        "color": "gray",
+        "cities": [
+          {
+            "size": 2,
+            "companies": ["SF"]
+          }
+        ],
+        "values": [
+          {
+            "value": 20,
+            "angle": 30,
+            "percent": 0.7
+          }
+        ],
+        "names": [
+          {
+            "name": "Yorba",
+            "angle": 210,
+            "percent": 0.7
+          },
+          {
+            "name": "Linda",
+            "angle": 217,
+            "percent": 0.6
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          }
+        ],
+        "hexes": ["D13"]
+      },
+      {
+        "color": "gray",
+        "names": [
+          {
+            "name": "San Pedro",
+            "percent": 0.25
+          }
+        ],
+        "track": [
+          {
+            "side": 2,
+            "type": "sharp"
+          }
+        ],
+        "hexes": ["F5"]
+      },
+      {
+        "color": "gray",
+        "cities": [
+          {
+            "name": {
+              "name": "Westminster",
+              "reverse": true,
+              "rotation": 30
+            }
+          }
+        ],
+        "values": [
+          {
+            "value": 10,
+            "angle": 120,
+            "percent": 0.7
+          }
+        ],
+        "icons": [
+          {
+            "type": "steamboat",
+            "angle": 15,
+            "percent": 0.8
+          },
+          {
+            "type": "steamboat",
+            "angle": -15,
+            "percent": 0.8
+          }
+        ],
+        "bridges": [
+          {
+            "cost": 40,
+            "angle": 210,
+            "percent": 1
+          }
+        ],
+        "track": [
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          }
+        ],
+        "hexes": ["F9"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Reseda"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            }
+          ],
+          "angle": 115,
+          "percent": 0.5
+        },
+        "routeBonus": [
+          {
+            "value": "+$20",
+            "angle": 65,
+            "percent": 0.5
+          }
+        ],
+        "labels": [
+          {
+            "label": "N/W",
+            "percent": 0.6,
+            "angle": 210
+          }
+        ],
+        "tokens": [
+          {
+            "label": "LAIR",
+            "shield": true,
+            "angle": 270,
+            "percent": 0.25
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 4
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "hexes": ["A2"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Lancaster"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            }
+          ],
+          "angle": -115,
+          "percent": 0.5
+        },
+        "routeBonus": [
+          {
+            "value": "+$30",
+            "angle": -65,
+            "percent": 0.5
+          }
+        ],
+        "labels": [
+          {
+            "label": "N",
+            "percent": 0.6,
+            "angle": -210
+          }
+        ],
+        "tunnels": [
+          {
+            "cost": 20,
+            "angle": 30,
+            "percent": 1
+          },
+          {
+            "cost": 20,
+            "angle": 90,
+            "percent": 1
+          },
+          {
+            "cost": 20,
+            "angle": 330,
+            "percent": 1
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "hexes": ["A10"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Victorville"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            }
+          ],
+          "angle": -115,
+          "percent": 0.5
+        },
+        "routeBonus": [
+          {
+            "value": "+$20",
+            "angle": -65,
+            "percent": 0.5
+          }
+        ],
+        "labels": [
+          {
+            "label": "N",
+            "percent": 0.6,
+            "angle": -210
+          }
+        ],
+        "tunnels": [
+          {
+            "cost": 20,
+            "angle": 30,
+            "percent": 1
+          },
+          {
+            "cost": 20,
+            "angle": 330,
+            "percent": 1
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 5
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "hexes": ["A12"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "San Bernardino"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            }
+          ],
+          "angle": -115,
+          "percent": 0.5
+        },
+        "routeBonus": [
+          {
+            "value": "+$20",
+            "angle": -65,
+            "percent": 0.5
+          }
+        ],
+        "labels": [
+          {
+            "label": "N/E",
+            "percent": 0.6,
+            "angle": -240
+          }
+        ],
+        "tunnels": [
+          {
+            "cost": 20,
+            "angle": 30,
+            "percent": 1
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "hexes": ["A14"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Oxnard"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "10"
+            }
+          ],
+          "angle": 115,
+          "percent": 0.5
+        },
+        "routeBonus": [
+          {
+            "value": "+$30",
+            "angle": 65,
+            "percent": 0.5
+          }
+        ],
+        "labels": [
+          {
+            "label": "W",
+            "percent": 0.6,
+            "angle": 240
+          }
+        ],
+        "icons": [
+          {
+            "type": "steamboat",
+            "angle": 300,
+            "percent": 0.6
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 4
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "hexes": ["B1"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Pomona"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            }
+          ],
+          "angle": -115,
+          "percent": 0.5
+        },
+        "routeBonus": [
+          {
+            "value": "+$30",
+            "angle": -65,
+            "percent": 0.5
+          }
+        ],
+        "labels": [
+          {
+            "label": "E",
+            "percent": 0.6,
+            "angle": -240
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          }
+        ],
+        "hexes": ["B15"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Riverside"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "70"
+            }
+          ],
+          "angle": -115,
+          "percent": 0.5
+        },
+        "routeBonus": [
+          {
+            "value": "+$30",
+            "angle": -65,
+            "percent": 0.5
+          }
+        ],
+        "labels": [
+          {
+            "label": "E",
+            "percent": 0.6,
+            "angle": -240
+          }
+        ],
+        "icons": [
+          {
+            "type": "orange",
+            "angle": 60,
+            "percent": 0.6
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ],
+        "hexes": ["C14"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Palm Springs"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            }
+          ],
+          "angle": -115,
+          "percent": 0.5
+        },
+        "routeBonus": [
+          {
+            "value": "+$30",
+            "angle": -65,
+            "percent": 0.5
+          }
+        ],
+        "labels": [
+          {
+            "label": "E",
+            "percent": 0.6,
+            "angle": -240
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "hexes": ["D15"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Corona"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            }
+          ],
+          "angle": -115,
+          "percent": 0.5
+        },
+        "routeBonus": [
+          {
+            "value": "+$20",
+            "angle": -65,
+            "percent": 0.5
+          }
+        ],
+        "labels": [
+          {
+            "label": "S/E",
+            "percent": 0.6,
+            "angle": -240
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          }
+        ],
+        "hexes": ["E16"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Port of Long Beach"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            }
+          ],
+          "percent": 0.25
+        },
+        "routeBonus": [
+          {
+            "value": "+$50",
+            "percent": 0.6
+          }
+        ],
+        "labels": [
+          {
+            "label": "S",
+            "percent": 0.75,
+            "angle": 150
+          }
+        ],
+        "icons": [
+          {
+            "type": "orange",
+            "angle": 185,
+            "percent": 0.75
+          },
+          {
+            "type": "steamboat",
+            "angle": 235,
+            "percent": 0.75
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          }
+        ],
+        "hexes": ["F7"]
+      },
+      {
+        "color": "offboard",
+        "offBoardRevenue": {
+          "name": {
+            "name": "Irvine"
+          },
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            }
+          ],
+          "angle": -115,
+          "percent": 0.5
+        },
+        "routeBonus": [
+          {
+            "value": "+$20",
+            "angle": -65,
+            "percent": 0.5
+          }
+        ],
+        "labels": [
+          {
+            "label": "S/E",
+            "percent": 0.6,
+            "angle": -240
+          }
+        ],
+        "tunnels": [
+          {
+            "cost": 20,
+            "angle": 150,
+            "percent": 1
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ],
+        "hexes": ["F15"]
+      }
+    ]
   }
 }
