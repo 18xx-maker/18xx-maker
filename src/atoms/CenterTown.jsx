@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import GameContext from "../context/GameContext";
+import { multiDefaultTo } from "../util";
 import Color from "../util/Color";
 
 import Name from "./Name";
 
 const CenterTown = ({ border, name, color, outlineColor, bgColor, width, size }) => {
-  width = width || 20;
-  let borderWidth = 4;
+  const { game } = useContext(GameContext);
+  width = multiDefaultTo(20, width, game.info.townWidth);
+  let scale = width / 20;
+  let borderWidth = 3 * scale;
 
   if (size === undefined) {
     size = 1;
@@ -28,7 +32,7 @@ const CenterTown = ({ border, name, color, outlineColor, bgColor, width, size })
           <Name
             bgColor={bgColor}
             {...name}
-            y={name.y || (name.reverse ? 18 : -18)}
+            y={name.y || (name.reverse ? 18 : -18) * scale}
           />
         );
       }

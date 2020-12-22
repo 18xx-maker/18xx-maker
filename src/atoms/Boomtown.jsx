@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
+import GameContext from "../context/GameContext";
 import ConfigContext from "../context/ConfigContext";
+import { multiDefaultTo } from "../util";
 import Color from "../util/Color";
 
 import Name from "./Name";
@@ -15,7 +17,8 @@ const cityPaths = {
   city4PathReverse: "M 0 53 L 25 53 A 30 30 0 0 0 53 25 L 53 -25 A 30 30 0 0 0 25 -53 L -25 -53 A 30 30 0 0 0 -53 -25 L -53 25 A 30 30 0 0 0 -25 53 L 0 53"
 }
 
-const Boomtown = ({ border, city, size, name, x, color, bgColor, width, strokeWidth, strokeDashArray, dashed, offset }) => {
+const Boomtown = ({ border, city, size, name, x, color, bgColor, width, townWidth, strokeWidth, strokeDashArray, dashed, offset }) => {
+  const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
   const straightCityNames = config.straightCityNames;
 
@@ -23,9 +26,11 @@ const Boomtown = ({ border, city, size, name, x, color, bgColor, width, strokeWi
     size = 1;
   }
 
-  let cityWidth = width || 25;
+  let cityWidth = multiDefaultTo(25, width, game.info.cityWidth/2);
   let scale = cityWidth / 25;
-  let centerTownWidth = cityWidth * 2 / 5;
+  let centerTownWidth = multiDefaultTo(cityWidth * 2 / 5, townWidth, game.info.townWidth/2);
+  let borderWidth = 3 * scale;
+
   let path = null;
   let nameNode = null;
   strokeWidth = strokeWidth || 2;
@@ -39,7 +44,7 @@ const Boomtown = ({ border, city, size, name, x, color, bgColor, width, strokeWi
               fill={c("border")}
               stroke="none"
               cx="0" cy="0"
-              r={city ? cityWidth + 3 : centerTownWidth + 4 }
+              r={(city ? cityWidth : centerTownWidth + 1) + borderWidth }
             />
           )}
         </Color>
