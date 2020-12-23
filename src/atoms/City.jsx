@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
+import GameContext from "../context/GameContext";
+import { multiDefaultTo } from "../util";
 import Color from "../util/Color";
 import iconSvgs from "../data/icons";
 
@@ -28,19 +30,20 @@ const cityPaths = {
   city6PathReverse: "M 0 -65 A 65 65 0 0 0 0 65 A 65 65 0 0 0 0 -65"
 }
 
-const City = ({ size, outlineColor, color, companies, icons, border, borderColor, name, extend, rotation, pass, fixed, bgColor, width, strokeWidth }) => {
+const City = ({ size, outlineColor, color, companies, icons, border, borderWidth, borderColor, name, extend, rotation, pass, fixed, bgColor, width, strokeWidth }) => {
+  const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
   const straightCityNames = config.straightCityNames;
 
   if (size === undefined) {
     size = 1;
   }
-  width = width || 25;
+  width = multiDefaultTo(25, width, game.info.cityWidth);
   strokeWidth = strokeWidth || 2;
-  let borderW = 3;
+  let scale = width / 25;
+  let borderW = multiDefaultTo(3, borderWidth, game.info.borderWidth) * scale;
   let sqrt2 = Math.sqrt(2);
   let sqrt5 = Math.sqrt(5);
-  let scale = width / 25;
 
   let icon = num => {
     if (icons && icons[num]) {

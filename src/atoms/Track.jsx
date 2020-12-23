@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import Color from "../util/Color";
 import { useOrientation } from "../context/OrientationContext";
+import GameContext from "../context/GameContext";
+import { multiDefaultTo } from "../util";
 
 import chain from "ramda/src/chain";
 import compose from "ramda/src/compose";
@@ -132,11 +134,12 @@ const straightPath = (start, end, xOffset) => {
   return `${pathStart} ${pathEnd}`;
 };
 
-const Track = ({ type, gauge, border, width, offset, path, color, trackOffset, radiusOffset,
+const Track = ({ type, gauge, border, borderWidth, width, offset, path, color, trackOffset, radiusOffset,
                  start = 0, begin = 0,
                  end = 1, stop = 1,
                  borderColor, gaugeColor }) => {
   const rotation = useOrientation();
+  const { game } = useContext(GameContext);
 
   // aliases - uses start/end, but the pairs start/stop and begin/end are more logical
   // leading to hard-to-find mistakes.  This just lets any of 'em work.
@@ -145,11 +148,13 @@ const Track = ({ type, gauge, border, width, offset, path, color, trackOffset, r
   if (end === 1 && stop !== 1)
     end = stop;
 
-  let trackWidth = defaultTo(12, width);
+  let trackWidth = multiDefaultTo(12, width, game.info.trackWidth);
+  borderWidth = multiDefaultTo(4, borderWidth, game.info.borderWidth);
+  if (border)
+    trackWidth += borderWidth;
+
   trackOffset = defaultTo(0, trackOffset);
   radiusOffset = defaultTo(0, radiusOffset);
-  if (border)
-    trackWidth += 4;
   color = color || "track";
   borderColor = borderColor || "border";
   gaugeColor = gaugeColor || "white";

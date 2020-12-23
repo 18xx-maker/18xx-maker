@@ -7,8 +7,8 @@ import icons from "../data/icons";
 
 const Terrain = ({ type, size, cost, fontFamily, fontSize, color }) => {
   const { game } = useContext(GameContext);
-  fontSize = multiDefaultTo(15, game.info.valueFontSize, fontSize);
-  fontFamily = multiDefaultTo("display", game.info.valueFontFamily, fontFamily);
+  fontSize = multiDefaultTo(15, fontSize, game.info.valueFontSize);
+  fontFamily = multiDefaultTo("display", fontFamily, game.info.valueFontFamily);
 
   let translate = 0;
   let scale = 1;
@@ -21,7 +21,7 @@ const Terrain = ({ type, size, cost, fontFamily, fontSize, color }) => {
     translate = -8;
     break;
   case "cow-skull":
-    translate = -16;
+    translate = -18;
     break;
   default:
     translate = -12;

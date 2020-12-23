@@ -17,7 +17,7 @@ const Star = (props) => {
   //let x = 25 * scale;
 
   let font = getFontProps(props, 14 * scale, undefined,
-    multiDefaultTo(undefined, game.info.valueFontFamily, fontFamily));
+    multiDefaultTo(undefined, fontFamily, game.info.valueFontFamily));
   let strokeDashArray = dashed ? `${width / 7.142857143} ${width / 7.142857143}` : undefined;
 
   return (

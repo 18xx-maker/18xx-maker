@@ -14,12 +14,12 @@ const Value = ({ value, fontSize, fontWeight, fontFamily, color, textColor, shap
 
   let length = format(value, game, config.currency["value"]).length;
 
-  fontSize = multiDefaultTo(15, game.info.valueFontSize, fontSize);
-  fontWeight = multiDefaultTo("bold", game.info.valueFontWeight, fontWeight);
-  fontFamily = multiDefaultTo("sans-serif", game.info.valueFontFamily, fontFamily);
+  fontSize = multiDefaultTo(15, fontSize, game.info.valueFontSize);
+  fontWeight = multiDefaultTo("bold", fontWeight, game.info.valueFontWeight);
+  fontFamily = multiDefaultTo("sans-serif", fontFamily, game.info.valueFontFamily);
 
-  let ry = 14;
-  let rx = length > 2 ? length * 6 : 14;
+  let ry = fontSize * 3 / 4;
+  let rx = length > 2 ? length * ry * 3 / 5 : ry;
   color = color || "white";
   textColor = textColor || "black";
 
@@ -81,8 +81,6 @@ const Value = ({ value, fontSize, fontWeight, fontFamily, color, textColor, shap
                   fill={c(textColor) || t(c(color))}
                   dominantBaseline="central"
                   textAnchor="middle"
-                  textLength={length > 2 ? (rx + 6) : null}
-                  lengthAdjust="spacingAndGlyphs"
                   x="0"
                   y="0"
                 >

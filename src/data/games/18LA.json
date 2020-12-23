@@ -1452,6 +1452,7 @@
         "tokens": [
           {
             "label": "LAIR",
+            "fontSize": 14,
             "shield": true,
             "angle": 270,
             "percent": 0.25

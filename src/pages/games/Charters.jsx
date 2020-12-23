@@ -170,6 +170,8 @@ const Charters = () => {
             variant={company.variant}
             fontFamily={company.fontFamily || game.info.companyFontFamily}
             fontSize={company.fontSize || game.info.companyFontSize}
+            fontWeight={company.fontWeight || game.info.companyFontWeight}
+            fontStyle={company.fontStyle || game.info.companyFontStyle}
           /> : <div key="spacer" className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}><div className={`charter${charters.halfWidth ? " charter--half" : ""}`}></div></div>
       ), companies)}
       <PageSetup landscape={false}/>

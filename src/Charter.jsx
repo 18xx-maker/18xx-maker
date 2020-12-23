@@ -29,7 +29,9 @@ const Charter = ({
   backgroundColor,
   variant,
   fontFamily,
-  fontSize
+  fontSize,
+  fontStyle,
+  fontWeight
 }) => {
   const { config } = useContext(ConfigContext);
   const charterStyle = config.charters.style;
@@ -37,6 +39,8 @@ const Charter = ({
   const blackBand = config.charters.blackBand;
   fontFamily = multiDefaultTo("display", fontFamily);
   fontSize = multiDefaultTo(20, fontSize);
+  fontWeight = multiDefaultTo("bold", fontWeight);
+  fontStyle = multiDefaultTo("normal", fontStyle);
   let lineHeight = fontSize * 1.1;
  
   let tokenSpots = [];
@@ -113,7 +117,12 @@ const Charter = ({
                 <div style={{ color: t(c(charterStyle === "color" ? color : "white")),
                               paddingRight: halfWidthCharters ? null : unitsToCss(12.5 + (65 * tokens.length)) }}
                      className="charter__name">
-                     <div style={{ fontFamily:`${fontFamily}`, fontSize:`${fontSize}pt`, lineHeight:`${lineHeight}pt` }}>
+                     <div style={{ fontFamily:`${fontFamily}`,
+                                   fontSize:`${fontSize}pt`,
+                                   lineHeight:`${lineHeight}pt`,
+                                   fontWeight:`${fontWeight}`,
+                                   fontStyle:`${fontStyle}`
+                     }}>
                        {name}
                      </div>
                 </div>
