@@ -5,11 +5,11 @@ import Color from "../util/Color";
 
 import Name from "./Name";
 
-const CenterTown = ({ border, name, color, outlineColor, bgColor, width, size }) => {
+const CenterTown = ({ border, borderWidth, name, color, outlineColor, bgColor, width, size }) => {
   const { game } = useContext(GameContext);
   width = multiDefaultTo(20, width, game.info.townWidth);
   let scale = width / 20;
-  let borderWidth = 3 * scale;
+  borderWidth = multiDefaultTo(3, borderWidth, game.info.borderWidth) * scale;
 
   if (size === undefined) {
     size = 1;
@@ -81,11 +81,6 @@ const CenterTown = ({ border, name, color, outlineColor, bgColor, width, size })
           />
         );
       }
-              //<path d={`M-${width/2-1},${width/2-1} L${width/2-1},${width/2-1} M${width/2-1},-${width/2-1} L-${width/2-1},-${width/2-1}`}
-              //fill={c("white")}
-              //stroke={c(outlineColor || "track")}
-              //strokeWidth={`${borderWidth/2}`}
-              ///>
       return (
         <Color>
           {c => (

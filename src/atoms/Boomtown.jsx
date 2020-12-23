@@ -17,7 +17,7 @@ const cityPaths = {
   city4PathReverse: "M 0 53 L 25 53 A 30 30 0 0 0 53 25 L 53 -25 A 30 30 0 0 0 25 -53 L -25 -53 A 30 30 0 0 0 -53 -25 L -53 25 A 30 30 0 0 0 -25 53 L 0 53"
 }
 
-const Boomtown = ({ border, city, size, name, x, color, bgColor, width, townWidth, strokeWidth, strokeDashArray, dashed, offset }) => {
+const Boomtown = ({ border, borderWidth, city, size, name, x, color, bgColor, width, townWidth, strokeWidth, strokeDashArray, dashed, offset }) => {
   const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
   const straightCityNames = config.straightCityNames;
@@ -29,7 +29,7 @@ const Boomtown = ({ border, city, size, name, x, color, bgColor, width, townWidt
   let cityWidth = multiDefaultTo(25, width, game.info.cityWidth/2);
   let scale = cityWidth / 25;
   let centerTownWidth = multiDefaultTo(cityWidth * 2 / 5, townWidth, game.info.townWidth/2);
-  let borderWidth = 3 * scale;
+  borderWidth = multiDefaultTo(3, borderWidth, game.info.borderWidth) * scale;
 
   let path = null;
   let nameNode = null;

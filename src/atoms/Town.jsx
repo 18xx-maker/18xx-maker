@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useContext }  from "react";
+import GameContext from "../context/GameContext";
 import Color from "../util/Color";
+import { multiDefaultTo } from "../util";
 
 import Name from "./Name";
 
-const Town = ({ border, name, color, bgColor }) => {
+const Town = ({ border, borderWidth, name, color, bgColor }) => {
+  const { game } = useContext(GameContext);
+  const defaultWidth = 28;
+  const defaultHeight = 14;
+  borderWidth = multiDefaultTo(2, borderWidth, game.info.townBorderWidth);
   if (border) {
     return (
       <Color>
         {c => (
-          <rect width="32" height="18" x="-16" y="-9" fill={c("border")} />
+          <rect width={defaultWidth + borderWidth * 2}
+                height={defaultHeight + borderWidth * 2}
+                x={-0.5 * defaultWidth + borderWidth}
+                y={-0.5 * defaultHeight + borderWidth}
+                fill={c("border")} />
         )}
       </Color>
     );
@@ -31,7 +41,11 @@ const Town = ({ border, name, color, bgColor }) => {
       <Color>
         {c => (
           <g>
-            <rect width="28" height="14" x="-14" y="-7" fill={c(color || "town")} />
+            <rect width={defaultWidth}
+                  height={defaultHeight}
+                  x={-0.5 * defaultWidth}
+                  y={-0.5 * defaultHeight}
+                  fill={c(color || "town")} />
             {nameNode}
           </g>
         )}

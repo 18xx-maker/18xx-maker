@@ -30,7 +30,7 @@ const cityPaths = {
   city6PathReverse: "M 0 -65 A 65 65 0 0 0 0 65 A 65 65 0 0 0 0 -65"
 }
 
-const City = ({ size, outlineColor, color, companies, icons, border, borderColor, name, extend, rotation, pass, fixed, bgColor, width, strokeWidth }) => {
+const City = ({ size, outlineColor, color, companies, icons, border, borderWidth, borderColor, name, extend, rotation, pass, fixed, bgColor, width, strokeWidth }) => {
   const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
   const straightCityNames = config.straightCityNames;
@@ -41,7 +41,7 @@ const City = ({ size, outlineColor, color, companies, icons, border, borderColor
   width = multiDefaultTo(25, width, game.info.cityWidth);
   strokeWidth = strokeWidth || 2;
   let scale = width / 25;
-  let borderW = 3 * scale;
+  let borderW = multiDefaultTo(3, borderWidth, game.info.borderWidth) * scale;
   let sqrt2 = Math.sqrt(2);
   let sqrt5 = Math.sqrt(5);
 
