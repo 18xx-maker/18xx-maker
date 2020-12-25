@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import GameContext from "../context/GameContext";
 import { MapOrientation } from "../context/OrientationContext";
 
-import { getFontProps } from "../util";
+import { getFontProps, multiDefaultTo } from "../util";
 import Color from "../util/Color";
 import Currency from "../util/Currency";
 import GameCompanyToken from "../tokens/GameCompanyToken";
@@ -43,7 +43,7 @@ const Private = (props) => {
         minPlayers, maxPlayers,
         icon, iconColor,
         hex, tile, token, company,
-        backgroundColor } = props;
+        fontColor, backgroundColor } = props;
   const { game } = useContext(GameContext);
 
   const px2pt = 0.75;
@@ -62,63 +62,63 @@ const Private = (props) => {
   let idFont = getFontProps(props,
       idFS, idFontWeight, idFontFamily, idFontStyle);
   let idLineHeight = idFS + lineHeightAdd;
-  idColor = defaultTo("black", idColor);
+  idColor = multiDefaultTo("black", idColor, fontColor);
 
   //let nameFontSizeInch = defaultTo(0.18, nameFontSize / 72);
   let nameFS = defaultTo(17.28, nameFontSize / px2pt); // 0.18" == 12.96pt == 17.28px
   let nameFont = getFontProps(props,
       nameFS, nameFontWeight, nameFontFamily, nameFontStyle);
   let nameLineHeight = nameFS + lineHeightAdd;
-  nameColor = defaultTo("black", nameColor);
+  nameColor = multiDefaultTo("black", nameColor, fontColor);
 
   // let descFontSizeInch = defaultTo(0.085, descFontSize / 72);
   let descFS = defaultTo(8.16, descFontSize / px2pt); // 0.085" == 6.12pt == 8.16px
   let descFont = getFontProps(props,
       descFS, descFontWeight, descFontFamily, descFontStyle);
   let descLineHeight = descFS + lineHeightAdd;
-  descColor = defaultTo("black", descColor);
+  descColor = multiDefaultTo("black", descColor, fontColor);
 
   // let noteFontSizeInch = defaultTo(0.12, noteFontSize / 72);
   let noteFS = defaultTo(11.52, noteFontSize / px2pt); // 0.12" == 9.36pt == 11.52px
   let noteFont = getFontProps(props,
       noteFS, noteFontWeight, noteFontFamily, noteFontStyle);
   let noteLineHeight = noteFS + lineHeightAdd;
-  noteColor = defaultTo("black", noteColor);
+  noteColor = multiDefaultTo("black", noteColor, fontColor);
 
   // let revenueFontSizeInch = defaultTo(0.18, idFontSize / 72);
   let revenueFS = defaultTo(17.28, revenueFontSize / px2pt);
   let revenueFont = getFontProps(props,
       revenueFS, revenueFontWeight, revenueFontFamily, revenueFontStyle);
   let revenueLineHeight = revenueFS + lineHeightAdd;
-  revenueColor = defaultTo("black", revenueColor);
+  revenueColor = multiDefaultTo("black", revenueColor, fontColor);
 
   // let bidFontSizeInch = defaultTo(0.14, nameFontSize / 72);
   let bidFS = defaultTo(13.44, bidFontSize / px2pt); // 0.14" == ??pt == 13.44px
   let bidFont = getFontProps(props,
       bidFS, bidFontWeight, bidFontFamily, bidFontStyle);
   let bidLineHeight = bidFS + lineHeightAdd;
-  bidColor = defaultTo("black", bidColor);
+  bidColor = multiDefaultTo("black", bidColor, fontColor);
 
   // let priceFontSizeInch = defaultTo(0.18, descFontSize / 72);
   let priceFS = defaultTo(17.28, priceFontSize / px2pt);
   let priceFont = getFontProps(props,
       priceFS, priceFontWeight, priceFontFamily, priceFontStyle);
   let priceLineHeight = priceFS + lineHeightAdd;
-  priceColor = defaultTo("black", priceColor);
+  priceColor = multiDefaultTo("black", priceColor, fontColor);
 
   // let variantFontSizeInch = defaultTo(0.5em, variantFontSize / 72);
   let variantFS = defaultTo(8, variantFontSize / px2pt);
   let variantFont = getFontProps(props,
       variantFS, variantFontWeight, variantFontFamily, variantFontStyle);
   let variantLineHeight = variantFS + lineHeightAdd;
-  variantColor = defaultTo("black", variantColor);
+  variantColor = multiDefaultTo("black", variantColor, fontColor);
 
   // let playersFontSizeInch = defaultTo(0.14, playersFontSize / 72);
   let playersFS = defaultTo(13.44, playersFontSize / px2pt);
   let playersFont = getFontProps(props,
       playersFS, playersFontWeight, playersFontFamily, playersFontStyle);
   let playersLineHeight = playersFS + lineHeightAdd;
-  playersColor = defaultTo("black", playersColor);
+  playersColor = multiDefaultTo("black", playersColor, fontColor);
 
   backgroundColor = defaultTo("white", backgroundColor);
   idBackgroundColor = defaultTo("white", idBackgroundColor);
