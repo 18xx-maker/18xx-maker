@@ -31,11 +31,15 @@ const LeftShare = ({
   tokenCount,
   blackBand,
   variant,
-  fontFamily
+  fontFamily,
+  fontWeight,
+  fontStyle
 }) => {
 
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
   fontFamily = multiDefaultTo("display", fontFamily);
+  fontWeight = multiDefaultTo("bold", fontWeight);
+  fontStyle = multiDefaultTo("normal", fontStyle);
 
   let tokens = [];
   let sharesLeft = tokenCount || shares || 1;
@@ -101,7 +105,14 @@ const LeftShare = ({
                 )}
               </Color>
               <div className="card__body">
-                {name && <div className="share__name"><div style={{ fontFamily: `${fontFamily}` }}>{name}</div></div>}
+                {name && <div className="share__name"> <div
+                  style={{
+                    fontFamily: `${fontFamily}`,
+                    fontWeight:`${fontWeight}`,
+                   fontStyle:`${fontStyle}`
+                  }}>
+                  {name}
+                  </div></div>}
                 {subtext && <div className="share__subtext"><div>{subtext}</div></div>}
                 {shares && <div className="share__shares">{count}</div>}
                 {cost && <div className="share__shares"><Currency value={cost} type="share"/></div>}
