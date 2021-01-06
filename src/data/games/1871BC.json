@@ -69,7 +69,7 @@
       "abbrev": "NPR",
       "logo": "1871BC/NORPAC",
       "tokens": ["Free", 80, 80, 80],
-      "color": "white",
+      "color": "grey",
       "shares": [
         {
           "quantity": 1,
@@ -227,60 +227,78 @@
   "privates": [
     {
       "name": "BC Electric Railway",
+      "nameFontSize": 14,
       "price": 120,
       "revenue": 20,
+      "descFontSize": 10,
       "description": "Counts as a 2 train when purchased into a corporation"
     },
     {
       "name": "BC Connection Charter",
+      "nameFontSize": 14,
       "price": 100,
       "revenue": 0,
+      "descFontSize": 8,
       "description": "Never closes once purchased by a corporation, when owning corporation connects an eastern off board to vancouver, pays $200 to the owning corporation and closes. If owned by a player and a corporation that player is president of connects an eastern off board to vancouver, pays $200 to the player and closes"
     },
     {
       "name": "BC Ferries",
+      "nameFontSize": 14,
       "price": 90,
       "revenue": 0,
       "icon": "boat",
+      "descFontSize": 10,
       "description": "Sea Dits visitied by any railway pay to the owning player or corporation. Never closes if owned by a corporation."
     },
     {
       "name": "Mail Contract",
+      "nameFontSize": 14,
       "price": 80,
       "icon": "mail",
       "revenue": 0,
+      "descFontSize": 10,
       "description": "Adds $10 per location visited by any one train of the owning corporation. Never closes once purchased by a corporation."
     },
     {
       "name": "Kettle Valley Railway",
-      "price": 60,
+      "nameFontSize": 14,
+      "price": "$60 + $40 debt",
       "debt": 80,
+      "descFontSize": 10,
       "description": "Starts with $60 in treasury, a 2 train, and a token in Kelowna (C15). Splits revenue evenly with owner."
     },
     {
       "name": "Okanagen Land Grant",
+      "nameFontSize": 14,
       "price": 80,
       "revenue": 20,
       "hex": "G15",
+      "descFontSize": 10,
       "description": "If hex G15 is connected to an east off board when private is sold to a company, the private can be sold for an extra $50"
     },
     {
       "name": "Outsourced Labour",
+      "nameFontSize": 14,
       "price": 40,
       "revenue": 10,
+      "descFontSize": 10,
       "description": "Owning corporation can do two upgrades on a single turn once per game"
     },
     {
       "name": "Survey Party",
+      "nameFontSize": 14,
       "price": 60,
       "revenue": 20,
       "icon": "mountain",
+      "descFontSize": 10,
       "description": "Reduces the cost of building on mountain tiles by $20"
     },
     {
       "name": "Chilkoot Railroad and Transport Company",
+      "nameFontSize": 14,
       "price": 40,
       "revenue": 15,
+      "descFontSize": 10,
       "description": "+10 revenue to Yukon off board location"
     }
   ],
@@ -692,7 +710,7 @@
             "percent": 0.7
           }
         ],
-        "routeBonuses": [
+        "routeBonus": [
           {
             "value": "+30",
             "percent": 0.3
@@ -723,7 +741,7 @@
       },
       {
         "color": "offboard",
-        "routeBonuses": [
+        "routeBonus": [
           {
             "value": "+30",
             "percent": 0.3
@@ -761,7 +779,7 @@
       },
       {
         "color": "offboard",
-        "routeBonuses": [
+        "routeBonus": [
           {
             "value": "+30",
             "percent": 0.3
@@ -827,8 +845,7 @@
             },
             "companies": [
               {
-                "label": "SLS&E",
-                "color": "blue"
+                "label": "SLS&E"
               },
               {
                 "color": "gray"
@@ -872,7 +889,7 @@
             "percent": 0.7
           }
         ],
-        "routeBonuses": [
+        "routeBonus": [
           {
             "value": "+30",
             "angle": 235,
@@ -889,8 +906,7 @@
             },
             "companies": [
               {
-                "label": "NPR",
-                "color": "black"
+                "label": "NPR"
               }
             ]
           }
@@ -917,9 +933,9 @@
             "percent": 0.7
           }
         ],
-        "routeBonuses": [
+        "routeBonus": [
           {
-            "value": "+30",
+            "value": "+50",
             "percent": 0.3
           }
         ],
@@ -1055,8 +1071,7 @@
             },
             "companies": [
               {
-                "label": "CPR",
-                "color": "red"
+                "label": "CPR"
               }
             ]
           }

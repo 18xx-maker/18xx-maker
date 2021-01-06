@@ -16,8 +16,8 @@ const Town = ({ border, borderWidth, name, color, bgColor }) => {
         {c => (
           <rect width={defaultWidth + borderWidth * 2}
                 height={defaultHeight + borderWidth * 2}
-                x={-0.5 * defaultWidth + borderWidth}
-                y={-0.5 * defaultHeight + borderWidth}
+                x={-0.5 * (defaultWidth + borderWidth * 2)}
+                y={-0.5 * (defaultHeight + borderWidth * 2)}
                 fill={c("border")} />
         )}
       </Color>

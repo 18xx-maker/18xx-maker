@@ -7,11 +7,10 @@
     "titleX": 50,
     "titleY": 600,
     "extraStationTokens": 1,
-    "currency": "# kr"
+    "currency": "#kr"
   },
-  "prototype": true,
   "links": {
-    "rules": "https://drive.google.com/file/d/1zhyEpSErVc2Qyd8AJusbltVE70FL24oh/view"
+    "rules": "https://drive.google.com/open?id=1y9b9o7WL1Pt7ArqC7Nf5656hzTZWD4-9"
   },
   "tokens": [
     {
@@ -22,21 +21,20 @@
     {
       "label": "20",
       "quantity": 0,
-      "print": 1
+      "print": 1,
+      "fontSize": 30
     },
     {
       "label": "30",
       "quantity": 0,
-      "print": 1
+      "print": 1,
+      "fontSize": 30
     },
     {
       "label": "50",
       "quantity": 0,
-      "print": 1
-    },
-    {
-      "label": "KHJ",
-      "fontSize": 24
+      "print": 1,
+      "fontSize": 30
     },
     {
       "color": "white",
@@ -52,12 +50,12 @@
     {
       "color": "white",
       "label": "B",
-      "fontSize": 24
+      "fontSize": 30
     },
     {
       "color": "white",
       "label": "M",
-      "fontSize": 24
+      "fontSize": 30
     },
     {
       "logo": "SJ",
@@ -127,135 +125,91 @@
         "percent": 10,
         "shares": 1
       }
-    ]
+    ],
+    "none": [{ "quantity": 0 }]
   },
   "floatPercent": 60,
   "companies": [
     {
       "name": "Bergslagernas järnvägar AB",
       "abbrev": "BJ",
-      "color": "_brown",
-      "tokens": "three",
-      "token": {
-        "fontSize": 18,
-        "inverseLabelColor": "black"
-      }
+      "color": "brown",
+      "tokens": "three"
     },
     {
       "name": "Kil-Fryksdalens Järnväg",
       "abbrev": "KFJ",
-      "color": "_pink",
-      "tokens": "three",
-      "token": {
-        "fontSize": 18,
-        "inverseLabelColor": "black"
-      }
+      "color": "white",
+      "tokens": "three"
     },
     {
       "name": "Malmö-Ystads järnväg",
       "abbrev": "MYJ",
-      "color": "_yellow",
-      "tokens": "three",
-      "token": {
-        "fontSize": 18,
-        "inverseLabelColor": "black"
-      }
+      "color": "yellow",
+      "tokens": "three"
     },
     {
       "name": "Mellersta Östergötlands Järnvägar",
       "abbrev": "MÖJ",
-      "color": "_turquoise",
-      "tokens": "two",
-      "token": {
-        "fontSize": 18,
-        "inverseLabelColor": "black"
-      }
+      "color": "gold",
+      "tokens": "two"
     },
     {
       "name": "The Swedish-Norwegian Railroad Company ltd",
       "abbrev": "SNJ",
-      "color": "_blue",
-      "tokens": "four",
-      "token": {
-        "fontSize": 18,
-        "inverseLabelColor": "black"
-      }
+      "color": "blue",
+      "tokens": "four"
     },
     {
       "name": "Sundsvall-Torphammars järnväg",
       "abbrev": "STJ",
-      "color": "_black",
-      "tokens": "four",
-      "token": {
-        "fontSize": 18,
-        "inverseLabelColor": "black"
-      }
+      "color": "black",
+      "tokens": "four"
     },
     {
       "name": "Stockholm-Västerås-Bergslagens Järnvägar",
       "abbrev": "SWB",
-      "color": "_green",
-      "tokens": "two",
-      "token": {
-        "fontSize": 18,
-        "inverseLabelColor": "black"
-      }
+      "color": "green",
+      "tokens": "two"
     },
     {
       "name": "Trafikaktiebolaget Grängesberg-Oxelösunds järnvägar",
       "abbrev": "TGOJ",
-      "color": "_orange",
-      "tokens": "four",
-      "token": {
-        "fontSize": 18,
-        "inverseLabelColor": "black"
-      }
+      "color": "orange",
+      "tokens": "four"
     },
     {
       "name": "Uppsala-Gävle järnväg",
       "abbrev": "UGJ",
-      "color": "_lime",
-      "tokens": "three",
-      "token": {
-        "fontSize": 18,
-        "inverseLabelColor": "black"
-      }
+      "color": "brightGreen",
+      "tokens": "three"
     },
     {
       "name": "Örebro-Köpings järnvägsaktiebolag",
       "abbrev": "ÖKJ",
-      "color": "_purple",
-      "tokens": "two",
-      "token": {
-        "fontSize": 18,
-        "inverseLabelColor": "black"
-      }
+      "color": "violet",
+      "tokens": "two"
     },
     {
       "name": "Östra Skånes Järnvägsaktiebolag",
       "abbrev": "ÖSJ",
-      "color": "_red",
-      "tokens": "three",
-      "token": {
-        "fontSize": 18,
-        "inverseLabelColor": "black"
-      }
+      "color": "red",
+      "tokens": "three"
     },
     {
       "name": "Köping-Hults järnväg",
       "abbrev": "KHJ",
-      "color": "white",
+      "color": "lavender",
       "tokens": "one",
-      "marketTokens": 0,
-      "token": {
-        "fontSize": 18
-      }
+      "shares": "none",
+      "minor": true,
+      "marketTokens": 0
     }
   ],
   "trains": [
     {
       "name": "2",
-      "quantity": 6,
+      "quantity": "6+1",
       "price": 80,
       "color": "yellow",
       "image": "2T",
@@ -347,8 +301,8 @@
     {
       "name": "The Gellivare Company",
       "price": 70,
-      "revenue": 30,
-      "description": "Two extra track lays in hex E28 and F27.  Blocks hexes E28 and F27 if owned by a player."
+      "revenue": 15,
+      "description": "Two extra connected track lays in hex E28 and F27. May reduce terrain cost in hexes D29 and C30 by 50 kr/terrain symbol. Blocks hex F27 and E28 if owned by a player."
     },
     {
       "name": "Motala Verkstad",
@@ -365,13 +319,13 @@
     {
       "name": "Köping-Hults järnväg (KHJ)",
       "price": 140,
-      "description": "Owner receives a 50 kr loan.  Owner must pay loan back if hexes F13, E14 and C16 do not have tiles at the start of phase 4.  Private receives a 2T and a token.  Splits revenue evenly with owner."
+      "description": "Private receives a 2T and a token. Splits revenue evenly with owner. KHJ cannot purchase a train and pays no revenue when the 2T are rusted."
     },
     {
       "name": "Nils Ericson",
       "price": 220,
       "revenue": 25,
-      "description": "Receive presidents share in a corporation randomly determined before auction.  Owning player may take the priority deal at the beginning of one stock round."
+      "description": "Receive presidents share in a corporation randomly determined before auction. Player may take the priority deal at the beginning of any one stock round."
     },
     {
       "name": "Adolf Eugene von Rosen",
@@ -484,6 +438,7 @@
     {
       "name": "Operating Round",
       "steps": [
+        "Redeem one share (only corporations started before phase 5",
         "Lay or upgrade track",
         "Purchase a station",
         "Run trains",
@@ -1444,7 +1399,7 @@
         "names": [
           {
             "y": -15,
-            "name": "Skövde",
+            "name": "Alingsås",
             "fontSize": 14
           }
         ],
@@ -1605,7 +1560,7 @@
         "names": [
           {
             "y": -15,
-            "name": "Örebro",
+            "name": "Skövde",
             "fontSize": 14
           }
         ],
@@ -1618,6 +1573,7 @@
         ],
         "tunnels": [
           {
+            "cost": 75,
             "rotate": -30,
             "angle": 150,
             "percent": 1
@@ -1637,10 +1593,6 @@
             "y": -15,
             "name": "Karlstad",
             "fontSize": 14
-          },
-          {
-            "percent": 0.7,
-            "name": "KHJ"
           }
         ],
         "icons": [
@@ -1667,13 +1619,15 @@
       {
         "color": "plain",
         "tunnels": [
-          {},
+          { "cost": 75 },
           {
+            "cost": 75,
             "rotate": 30,
             "angle": 190,
             "percent": 1
           },
           {
+            "cost": 75,
             "rotate": 30,
             "angle": 230,
             "percent": 1
@@ -1855,6 +1809,7 @@
         ],
         "tunnels": [
           {
+            "cost": 75,
             "y": 35
           }
         ],
@@ -1917,11 +1872,6 @@
             "color": "mainline"
           }
         ],
-        "names": [
-          {
-            "name": "KHJ"
-          }
-        ],
         "hexes": ["E14"]
       },
       {
@@ -1954,10 +1904,12 @@
         ],
         "tunnels": [
           {
+            "cost": 75,
             "angle": 90,
             "percent": 0.35
           },
           {
+            "cost": 75,
             "angle": 270,
             "percent": 0.35
           }
@@ -1973,7 +1925,7 @@
             "color": "mainline"
           }
         ],
-        "tunnels": [{}],
+        "tunnels": [{ "cost": 75 }],
         "hexes": ["F11"]
       },
       {
@@ -1988,10 +1940,6 @@
             "y": -15,
             "name": "Uppsala",
             "fontSize": 14
-          },
-          {
-            "percent": 0.7,
-            "name": "KHJ"
           }
         ],
         "track": [
@@ -2267,7 +2215,7 @@
       },
       {
         "color": "plain",
-        "tunnels": [{}],
+        "tunnels": [{ "cost": 75 }],
         "hexes": ["A12", "B19", "B21", "B23", "B25", "B27", "B29"]
       },
       {
@@ -2330,7 +2278,7 @@
             "label": "Ö - V"
           }
         ],
-        "routeBonuses": [
+        "routeBonus": [
           {
             "value": "+120"
           }
@@ -2346,7 +2294,7 @@
             "label": "Ö - K"
           }
         ],
-        "routeBonuses": [
+        "routeBonus": [
           {
             "value": "+100"
           }
@@ -2362,7 +2310,7 @@
             "label": "S - N"
           }
         ],
-        "routeBonuses": [
+        "routeBonus": [
           {
             "value": "+100"
           }
@@ -2378,7 +2326,7 @@
             "label": "B - b"
           }
         ],
-        "routeBonuses": [
+        "routeBonus": [
           {
             "value": "+50"
           }
@@ -2395,7 +2343,7 @@
             "size": 20
           }
         ],
-        "routeBonuses": [
+        "routeBonus": [
           {
             "value": "+80"
           }
@@ -2411,7 +2359,7 @@
             "label": "M - m"
           }
         ],
-        "routeBonuses": [
+        "routeBonus": [
           {
             "value": "+50"
           }
@@ -2428,7 +2376,7 @@
             "size": 20
           }
         ],
-        "routeBonuses": [
+        "routeBonus": [
           {
             "value": "+100"
           }
