@@ -29,7 +29,7 @@ const Boomtown = ({ border, borderWidth, city, size, name, x, color, bgColor, wi
   let cityWidth = multiDefaultTo(25, width, game.info.cityWidth/2);
   let scale = cityWidth / 25;
   let centerTownWidth = multiDefaultTo(cityWidth * 2 / 5, townWidth, game.info.townWidth/2);
-  borderWidth = multiDefaultTo(3, borderWidth, game.info.borderWidth) * scale;
+  borderWidth = multiDefaultTo(4, borderWidth, game.info.borderWidth) * scale;
 
   let path = null;
   let nameNode = null;
@@ -44,7 +44,7 @@ const Boomtown = ({ border, borderWidth, city, size, name, x, color, bgColor, wi
               fill={c("border")}
               stroke="none"
               cx="0" cy="0"
-              r={(city ? cityWidth : centerTownWidth + 1) + borderWidth }
+              r={(city ? cityWidth : centerTownWidth) + borderWidth }
             />
           )}
         </Color>
