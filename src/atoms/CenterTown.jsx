@@ -9,7 +9,7 @@ const CenterTown = ({ border, borderWidth, name, color, outlineColor, bgColor, w
   const { game } = useContext(GameContext);
   width = multiDefaultTo(20, width, game.info.townWidth);
   let scale = width / 20;
-  borderWidth = multiDefaultTo(3, borderWidth, game.info.borderWidth) * scale;
+  borderWidth = multiDefaultTo(4, borderWidth, game.info.borderWidth) * scale;
 
   if (size === undefined) {
     size = 1;
