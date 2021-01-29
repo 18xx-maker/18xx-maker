@@ -13,7 +13,7 @@ const Value = ({ value, fontSize, fontWeight, fontFamily, color, textColor, shap
   const { config } = useContext(ConfigContext);
 
   let length = format(value, game, config.currency["value"]).length;
-  let ry_default = (fontSize == undefined);
+  let ry_default = (fontSize === undefined);
 
   fontSize = multiDefaultTo(15, fontSize, game.info.valueFontSize);
   fontWeight = multiDefaultTo("bold", fontWeight, game.info.valueFontWeight);
