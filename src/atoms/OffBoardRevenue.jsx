@@ -52,7 +52,7 @@ const makeNode = (x, y, reverse, revenue, size, fontFamily) => {
            key={`text-${value}`}>
       {(c,t) => (
         <text
-          fill={c(revenue.textColor) || t(c(revenue.color))}
+          fill={c(revenue.textColor) || c("black")}
           fontSize={size}
           fontFamily={fontFamily}
           dominantBaseline="central"

@@ -309,7 +309,7 @@ const Token = ({
 
           if (bar) {
             barBorderColor = barBorderColor || "black";
-            let height = (width / 25 * barHeight) || (width * 0.72);
+            let height = (width / 25 * barHeight) || (width * 0.90);
             let y = height * -0.5;
 
             shapes.push(

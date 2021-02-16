@@ -2277,7 +2277,7 @@
         "side": 4
       },
       {
-      "type": "custom",
+        "type": "custom",
         "path": "m 73.612 -42.5 C 73.612 -42.5, 35 -15, 0 -45"
       },
       {
@@ -4614,17 +4614,7 @@
         "percent": 0.8
       }
     ],
-    "cities": [
-      {
-        "size": 3,
-        "companies": [
-          {
-            "label": "RSR",
-            "color": "white"
-          }
-        ]
-      }
-    ],
+    "cities": [{ "size": 3 }],
     "track": [
       {
         "side": 1
@@ -6815,9 +6805,7 @@
         "value": 30
       }
     ],
-    "centerTowns": [
-      {}
-    ],
+    "centerTowns": [{}],
     "track": [
       {
         "side": 1
@@ -6845,9 +6833,7 @@
         "value": 30
       }
     ],
-    "centerTowns": [
-      {}
-    ],
+    "centerTowns": [{}],
     "borders": [
       {
         "side": 1,

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-name="Layer 1" viewBox="0 0 288 288">
+    <defs>
+        <clipPath id="clip-path">
+            <path fill="none" d="M51 25.51A25.51 25.51 0 1125.51 0 25.52 25.52 0 0151 25.51z"/>
+        </clipPath>
+        <clipPath id="clip-path-2">
+            <path fill="none" stroke="#231f20" stroke-miterlimit="10" stroke-width=".5" d="M279.29 144A135.29 135.29 0 11144 8.71 135.29 135.29 0 01279.29 144z"/>
+        </clipPath>
+        <symbol id="Nouveau_symbole_1" data-name="Nouveau symbole 1" viewBox="0 0 51.02 51.02">
+            <path class="color-main color-darkBlue" fill="#1b2c5d" d="M51 25.51A25.51 25.51 0 1125.51 0 25.52 25.52 0 0151 25.51z"/>
+            <g clip-path="url(#clip-path)">
+                <path fill="#657695" d="M25.51 22.68L24.09 0h2.84zM19 .81l-2.7.88 8.36 21.13zM11.66 4L9.37 5.71l14.48 17.51zM5.71 9.37L4 11.66l19.22 12.19zm-4 6.91L.81 19l22 5.66zM0 24.1v2.83l22.68-1.42zm.81 7.95l.88 2.69 21.13-8.35zM4 39.36l1.67 2.29 17.55-14.47zm5.33 6L11.66 47l12.19-19.19zm6.91 4l2.7.87 5.66-22zM24.09 51h2.84l-1.42-22.65zm8-.81l2.69-.87-8.39-21.11zM39.36 47l2.29-1.66-14.47-17.53zm6-5.33L47 39.36 27.8 27.18zm4-6.91l.87-2.69-22-5.66zM51 26.93V24.1l-22.65 1.41zM50.21 19l-.87-2.7-21.13 8.34zM47 11.66l-1.68-2.29L27.8 23.85zm-5.35-5.95L39.36 4 27.18 23.22zm-6.91-4l-2.69-.9-5.66 22z"/>
+            </g>
+            <path class="color-main color-darkBlue" fill="#1b2c5d" d="M34 25.51A8.51 8.51 0 1125.51 17 8.51 8.51 0 0134 25.51z"/>
+            <text class="color-white" fill="#fff" font-family="BodoniMTBlack,Bodoni MT" font-size="9.24" transform="translate(21.78 25.23)">
+                N<tspan x="-1.66" y="6.85">W</tspan>
+            </text>
+        </symbol>
+    </defs>
+    <g clip-path="url(#clip-path-2)">
+        <use width="51.02" height="51.03" transform="matrix(8.84 0 0 8.84 -81.48 -81.49)" xlink:href="#Nouveau_symbole_1"/>
+    </g>
+    <path fill="none" stroke="#231f20" stroke-miterlimit="10" stroke-width=".5" d="M279.29 144A135.29 135.29 0 11144 8.71 135.29 135.29 0 01279.29 144z"/>
+</svg>

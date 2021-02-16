@@ -1,0 +1,34 @@
+{
+  "name": "GTG - 1861/67",
+  "colors": {
+    "yellow": "#ffea00",
+    "green": "#009248",
+    "brown": "#a85f34",
+    "gray": "#7d7c7c",
+
+    "plain": "#dde4bc",
+    "offboard": "#c1575e",
+    "mountain": "#d3bb98",
+    "water": "#4e9084",
+    "land": "#dcd8ba",
+    "river": "#68B2D8",
+
+    "orange": "#faac51",
+    "red": "#ef7895",
+
+    "hl1": "#faac51",
+    "hl2": "#ef7895",
+    "hl3": "#52b994",
+    "hl4": "#2992d3",
+
+    "white": "#fff",
+    "black": "#000",
+
+    "track": "#000",
+    "border": "#fff",
+    "city": "#fff",
+    "town": "#000",
+    "centerTown": "#000",
+    "halt": "#7a8e56"
+  }
+}

@@ -95,6 +95,8 @@ const atoms = [{
              {icons: [{type: "fish", "color": "lightBlue"}]},
              {icons: [{type: "home"}]},
              {icons: [{type: "home", "color": "orange"}]},
+             {icons: [{type: "lock"}]},
+             {icons: [{type: "lock", "color": "violet", "label": "3"}]},
              {icons: [{type: "mail"}]},
              {icons: [{type: "mail", "color": "orange"}]},
              {icons: [{type: "meat"}]},

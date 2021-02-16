@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="10 10 31.02 31.02">
+    <circle class="color-green" fill="#009a54" cx="25.51" cy="25.51" r="25.51"/>
+    <path class="color-main color-tan" fill="#f3716d" d="M25.51 34a8.49 8.49 0 00-8.5 8.5v7a25.67 25.67 0 0017 0v-7a8.5 8.5 0 00-8.5-8.5zm0-17A8.51 8.51 0 0034 8.5v-7a25.5 25.5 0 00-17 0v7a8.5 8.5 0 008.51 8.5z"/>
+    <path class="color-white" fill="#fff" d="M21.47 19.6h4.08v.32h-.86l1.91 5.52 1.57-4.74a1.21 1.21 0 00.07-.43c0-.25-.14-.37-.42-.37h-.31v-.3h2v.32a1 1 0 00-.67.19 1.51 1.51 0 00-.36.61L26.77 26v5.11h.85v.3h-4v-.3h.84v-5.03l-2.14-6.16h-.85z"/>
+    <path fill="none" stroke="#f3eebf" stroke-miterlimit="10" d="M286 144A142 142 0 11144 2a142 142 0 01142 142z"/>
+</svg>

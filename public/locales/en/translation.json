@@ -82,7 +82,11 @@
       },
       "overrides": {
         "title": "Company Overrides",
-        "desc": "Swap companies!"
+        "description": "Swap companies!"
+      },
+      "positioning": {
+        "title": "Auto Positioning",
+        "description": "Easier map creation"
       }
     },
     "pnp": {

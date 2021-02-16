@@ -18,8 +18,7 @@ const colorAliases = {
   "grey": "gray",
   "lightGreen": "brightGreen",
   "navy": "navyBlue",
-  "purple": "violet",
-  "tan": "lightBrown"
+  "purple": "violet"
 };
 
 const resolveColor = curry((theme, companiesTheme, phase, context, game, name) => {

@@ -1,0 +1,1438 @@
+{
+  "info": {
+    "title": "1861",
+    "subtitle": "The Railways of the Russian Empire",
+    "designer": "Ian Wilson",
+    "publisher": "gtg",
+    "background": "water",
+    "marketTokens": 2,
+    "orientation": "horizontal",
+    "titleX": 1630,
+    "titleY": 1000,
+    "currency": "₽#"
+  },
+  "links": {
+    "bgg": "https://www.boardgamegeek.com/boardgame/292187/18611867",
+    "rules": "https://www.boardgamegeek.com/filepage/212807/18611867-rulebook",
+    "purchase": "https://app.crowdox.com/projects/joshuastarr/1861-russia-1867-canada"
+  },
+  "wip": true,
+  "tokens": ["Round"],
+  "ipo": false,
+  "bank": 15000,
+  "players": [
+    {
+      "number": 3,
+      "certLimit": 21,
+      "capital": 420
+    },
+    {
+      "number": 4,
+      "certLimit": 16,
+      "capital": 315
+    },
+    {
+      "number": 5,
+      "certLimit": 13,
+      "capital": 252
+    },
+    {
+      "number": 6,
+      "certLimit": 11,
+      "capital": 210
+    }
+  ],
+  "pools": [
+    {
+      "name": "Bank Pool",
+      "notes": [
+        {
+          "color": "purple",
+          "icon": "exclamation",
+          "note": "No more than 50% of a corporation's shares may be in the market at any time"
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "SR",
+      "color": "white"
+    },
+    {
+      "name": "MR",
+      "color": "gray"
+    },
+    {
+      "name": "OR1",
+      "color": "water"
+    },
+    {
+      "name": "MR",
+      "color": "gray"
+    },
+    {
+      "name": "OR2",
+      "color": "water"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": [
+        "Sell any number of certificates",
+        "Buy one certificate",
+        "OR Auction a minor company",
+        "OR Start a public company (starting in phase 4)"
+      ],
+      "ordered": true
+    },
+    {
+      "name": "Merge Round",
+      "steps": [
+        "Convert a minor company to a major",
+        "Merge two or more minor companies to form a major company"
+      ],
+      "ordered": true
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Redeem Shares",
+        "Lay Tile",
+        "Place Token",
+        "Run Trains",
+        "Revenue and Dividends",
+        "Pay Interests and Redeem Loans",
+        "Purchase Train"
+      ],
+      "ordered": true
+    }
+  ],
+  "stock": {
+    "type": "2D",
+    "par": {},
+    "movement": {
+      "up": ["All Shares Held"],
+      "left": ["No Dividends"],
+      "right": ["Distribute Dividends"],
+      "down": ["Shares Sold"]
+    },
+    "ledges": [
+      {
+        "color": "hl4",
+        "dashed": true,
+        "width": 6,
+        "offset": -7,
+        "coords": ["6 0", "7 0", "7 6", "6 6", "6 0"]
+      },
+      {
+        "color": "black",
+        "width": 6,
+        "coords": ["7 0", "7 6"]
+      }
+    ],
+    "market": [
+      [
+        null,
+        null,
+        null,
+        null,
+        135,
+        150,
+        165,
+        180,
+        { "value": 200, "color": "hl3" },
+        220,
+        245,
+        270,
+        300,
+        330,
+        360,
+        400,
+        440,
+        490,
+        540
+      ],
+      [
+        null,
+        null,
+        null,
+        110,
+        120,
+        135,
+        150,
+        { "value": 165, "color": "hl3" },
+        { "value": 180, "color": "hl3" },
+        200,
+        220,
+        245,
+        270,
+        300,
+        330,
+        360,
+        400,
+        440,
+        490
+      ],
+      [
+        null,
+        null,
+        90,
+        100,
+        110,
+        120,
+        { "value": 135, "color": "hl2" },
+        { "value": 150, "color": "hl3" },
+        165,
+        180,
+        200,
+        220,
+        245,
+        270,
+        300,
+        330,
+        360,
+        400,
+        440
+      ],
+      [
+        null,
+        70,
+        80,
+        90,
+        100,
+        { "value": 110, "color": "hl2" },
+        { "value": 120, "color": "hl2" },
+        135,
+        150,
+        165,
+        180,
+        200
+      ],
+      [
+        60,
+        65,
+        70,
+        80,
+        { "value": 90, "color": "hl2" },
+        { "value": 100, "color": "hl2" },
+        110,
+        120,
+        135,
+        150
+      ],
+      [
+        55,
+        60,
+        65,
+        { "value": 70, "color": "hl2" },
+        { "value": 80, "color": "hl2" },
+        90,
+        100,
+        110
+      ],
+      [
+        50,
+        55,
+        { "value": 60, "color": "hl1" },
+        { "value": 65, "color": "hl1" },
+        70,
+        80
+      ],
+      [
+        45,
+        { "value": 50, "color": "hl1" },
+        { "value": 55, "color": "hl1" },
+        60,
+        65
+      ],
+      [40, 45, 50, 55],
+      [35, 40, 45]
+    ],
+    "legend": [
+      {
+        "color": "yellow",
+        "description": "Minor companies may convert here",
+        "icon": "info"
+      },
+      {
+        "color": "brown",
+        "description": "Minor companies may start here",
+        "icon": "certificate"
+      },
+      {
+        "color": "red",
+        "description": "Any company may start here",
+        "icon": "certificate"
+      },
+      {
+        "color": "purple",
+        "description": "Only Public Companies may start here",
+        "icon": "certificate"
+      }
+    ]
+  },
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 10,
+      "price": 100,
+      "color": "yellow",
+      "rust": "4"
+    },
+    {
+      "name": "3",
+      "quantity": 7,
+      "price": 225,
+      "color": "green",
+      "rust": "6"
+    },
+    {
+      "name": "4",
+      "quantity": 4,
+      "price": 350,
+      "color": "green",
+      "rust": "8"
+    },
+    {
+      "name": "5",
+      "quantity": 4,
+      "price": 550,
+      "color": "brown"
+    },
+    {
+      "name": "6",
+      "quantity": 2,
+      "price": 650,
+      "color": "brown"
+    },
+    {
+      "name": "7",
+      "quantity": 2,
+      "price": 800,
+      "color": "brown"
+    },
+    {
+      "name": "8",
+      "quantity": 6,
+      "price": 1000,
+      "color": "gray"
+    },
+    {
+      "name": "2+2",
+      "quantity": 6,
+      "price": 600,
+      "color": "gray"
+    },
+    {
+      "name": "5+5E",
+      "quantity": 7,
+      "price": 1500,
+      "color": "gray"
+    }
+  ],
+  "tokenTypes": {
+    "minor": [""],
+    "default": ["Free", "$20/hex", "$40/hex"]
+  },
+  "shareTypes": {
+    "minor": [],
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "companies": [
+    {
+      "name": "Southwestern Railway",
+      "abbrev": "SW",
+      "logo": "1861/SW",
+      "color": "darkGold"
+    },
+    {
+      "name": "Moskow & Kazan Railway",
+      "abbrev": "MK",
+      "logo": "1861/MK",
+      "color": "brown"
+    },
+    {
+      "name": "Grand Russian Railway",
+      "abbrev": "GR",
+      "logo": "1861/GR",
+      "color": "red"
+    },
+    {
+      "name": "Southeastern Railway",
+      "abbrev": "SE",
+      "logo": "1861/SE",
+      "color": "darkViolet"
+    },
+    {
+      "name": "Northwestern Railway",
+      "abbrev": "NW",
+      "logo": "1861/NW",
+      "color": "darkBlue"
+    },
+    {
+      "name": "Moskow, Kursk & Nizhnii Novgorod",
+      "abbrev": "MKN",
+      "logo": "1861/MKN",
+      "color": "darkTurquoise"
+    },
+    {
+      "name": "Moskow, Vindava & Rybinsk Railway",
+      "abbrev": "MVR",
+      "logo": "1861/MVR",
+      "color": "darkLime"
+    },
+    {
+      "name": "Moskow, Kiev & Voronezh Railway",
+      "abbrev": "MKV",
+      "logo": "1861/MKV",
+      "color": "darkGreen"
+    },
+    {
+      "name": "Russian State Railway",
+      "abbrev": "RSR",
+      "logo": "1861/RSR",
+      "color": "gold",
+      "token": {
+        "target": "gold",
+        "bar": true
+      },
+      "tokens": ["", "", "", "", "", "", "", ""],
+      "shares": []
+    },
+    {
+      "name": "Riga-Orel Railway",
+      "minor": true,
+      "abbrev": "RO",
+      "logo": "1861/RO",
+      "token": {
+        "color": "turquoise",
+        "bar": "yellow"
+      },
+      "color": "turquoise"
+    },
+    {
+      "name": "Kiev-Brest Railway",
+      "minor": true,
+      "abbrev": "KB",
+      "logo": "1861/KB",
+      "token": {
+        "color": "lime",
+        "bar": "yellow"
+      },
+      "color": "lime"
+    },
+    {
+      "name": "Odessa-Kiev Railway",
+      "minor": true,
+      "abbrev": "OK",
+      "logo": "1861/OK",
+      "token": {
+        "color": "lightBlue",
+        "bar": "yellow"
+      },
+      "color": "lightBlue"
+    },
+    {
+      "name": "Kiev-Kursk Railway",
+      "minor": true,
+      "abbrev": "KK",
+      "logo": "1861/KK",
+      "token": {
+        "color": "blue",
+        "bar": "yellow"
+      },
+      "color": "blue"
+    },
+    {
+      "name": "St. Petersburg-Warsaw",
+      "minor": true,
+      "abbrev": "SPW",
+      "logo": "1861/SPW",
+      "token": {
+        "color": "navyBlue",
+        "bar": "yellow"
+      },
+      "color": "navyBlue"
+    },
+    {
+      "name": "Moskow-Brest Ry.",
+      "minor": true,
+      "abbrev": "MB",
+      "logo": "1861/MB",
+      "token": {
+        "color": "inky",
+        "bar": "green"
+      },
+      "color": "inky"
+    },
+    {
+      "name": "Kharkov-Rostov Ry.",
+      "minor": true,
+      "abbrev": "KR",
+      "logo": "1861/KR",
+      "token": {
+        "color": "violet",
+        "bar": "yellow"
+      },
+      "color": "violet"
+    },
+    {
+      "name": "Nikolaev Railway",
+      "minor": true,
+      "abbrev": "N",
+      "logo": "1861/N",
+      "token": {
+        "color": "pink",
+        "bar": "yellow"
+      },
+      "color": "pink"
+    },
+    {
+      "name": "Yuzovka Railway",
+      "minor": true,
+      "abbrev": "Y",
+      "logo": "1861/Y",
+      "token": {
+        "color": "tan",
+        "bar": "green"
+      },
+      "color": "tan"
+    },
+    {
+      "name": "Moskow-Kursk Ry.",
+      "minor": true,
+      "abbrev": "M-K",
+      "logo": "1861/M-K",
+      "token": {
+        "color": "orange",
+        "bar": "yellow"
+      },
+      "color": "orange"
+    },
+    {
+      "name": "Moskow-Nizhnii Novgorod",
+      "minor": true,
+      "abbrev": "MNN",
+      "logo": "1861/MNN",
+      "token": {
+        "color": "lightRed",
+        "bar": "yellow"
+      },
+      "color": "lightRed"
+    },
+    {
+      "name": "Moskow-Voronezh Ry.",
+      "minor": true,
+      "abbrev": "MV",
+      "logo": "1861/MV",
+      "token": {
+        "color": "darkRed",
+        "bar": "yellow"
+      },
+      "color": "darkRed"
+    },
+    {
+      "name": "Vladikavkaz Railway",
+      "minor": true,
+      "abbrev": "V",
+      "logo": "1861/V",
+      "token": {
+        "color": "natural",
+        "bar": "green"
+      },
+      "color": "natural"
+    },
+    {
+      "name": "Tsaritsyn-Riga Ry.",
+      "minor": true,
+      "abbrev": "TR",
+      "logo": "1861/TR",
+      "token": {
+        "color": "gray",
+        "bar": "green"
+      },
+      "color": "gray"
+    },
+    {
+      "name": "Samara-Vyazma Ry.",
+      "minor": true,
+      "abbrev": "SV",
+      "logo": "1861/SV",
+      "token": {
+        "color": "lavender",
+        "bar": "green"
+      },
+      "color": "lavender"
+    },
+    {
+      "name": "Ekaterinin Railway",
+      "minor": true,
+      "abbrev": "E",
+      "logo": "1861/E",
+      "token": {
+        "color": "lightBrown",
+        "bar": "green"
+      },
+      "color": "lightBrown"
+    }
+  ],
+  "phases": [
+    {
+      "name": "3",
+      "limit": 4,
+      "tiles": "green",
+      "notes": "May purchase privates"
+    },
+    {
+      "name": "4",
+      "limit": 3,
+      "tiles": "green",
+      "notes": "Public companies may be started"
+    },
+    {
+      "name": "5",
+      "limit": 3,
+      "tiles": "brown",
+      "notes": "Remove unstarted Minor Companies"
+    },
+    {
+      "name": "6",
+      "limit": 2,
+      "tiles": "brown",
+      "notes": "Remaining Private Companies are nationalized"
+    },
+    {
+      "name": "7",
+      "limit": 2,
+      "tiles": "gray"
+    },
+    {
+      "name": "8",
+      "limit": 2,
+      "tiles": "gray",
+      "notes": [
+        "5+5E and 2+2 are available",
+        "Remaining Minor Companies are nationalized"
+      ]
+    },
+    {
+      "name": "2+2",
+      "limit": 2,
+      "tiles": "gray"
+    },
+    {
+      "name": "5+5E",
+      "limit": 2,
+      "tiles": "gray"
+    },
+    {
+      "minor": true,
+      "name": "2",
+      "limit": 2,
+      "tiles": "yellow"
+    },
+    {
+      "minor": true,
+      "name": "3",
+      "limit": 2,
+      "tiles": "green",
+      "notes": "May purchase privates"
+    },
+    {
+      "minor": true,
+      "name": "4",
+      "limit": 1,
+      "tiles": "green",
+      "notes": "Public companies may be started"
+    },
+    {
+      "minor": true,
+      "name": "5",
+      "limit": 1,
+      "tiles": "brown",
+      "notes": "Remove unstarted Minor Companies"
+    },
+    {
+      "minor": true,
+      "name": "6",
+      "limit": 1,
+      "tiles": "brown",
+      "notes": "Remaining Private Companies are nationalized"
+    },
+    {
+      "minor": true,
+      "name": "7",
+      "limit": 1,
+      "tiles": "gray"
+    }
+  ],
+  "privates": [
+    {
+      "id": "P1",
+      "name": "Tsarskoye Selo Railway",
+      "price": 30,
+      "revenue": 10,
+      "bid": 20,
+      "token": {
+        "circle": "yellow",
+        "label": "$"
+      }
+    },
+    {
+      "name": "Black Sea Shipping Company",
+      "price": 45,
+      "revenue": 15,
+      "bid": 30,
+      "hex": "D20",
+      "description": "+10 Odessa"
+    },
+    {
+      "name": "Moscow-Yaroslavl Railway",
+      "price": 60,
+      "revenue": 20,
+      "bid": 40,
+      "hex": "H8",
+      "description": "+10 Moscow"
+    },
+    {
+      "name": "Moscow-Ryazan Railway",
+      "price": 75,
+      "revenue": 25,
+      "bid": 50,
+      "hex": "H8",
+      "description": "+10 Moscow"
+    },
+    {
+      "name": "Warsaw-Vienna Railway",
+      "price": 90,
+      "revenue": 30,
+      "bid": 60,
+      "hex": "A11",
+      "description": "+10 Poland"
+    }
+  ],
+  "tiles": {
+    "3": 2,
+    "4": 4,
+    "5": 2,
+    "6": 2,
+    "7": 3,
+    "8": 19,
+    "9": 24,
+    "57": 2,
+    "58": 4,
+    "201": 3,
+    "202": 3,
+    "621": 2,
+
+    "14": 2,
+    "15": 2,
+    "16": 2,
+    "17": 2,
+    "18": 2,
+    "19": 2,
+    "20": 2,
+    "21": 2,
+    "22": 2,
+    "23": 5,
+    "24": 5,
+    "25": 4,
+    "26": 2,
+    "27": 2,
+    "28": 2,
+    "29": 2,
+    "30": 2,
+    "31": 2,
+    "87": 2,
+    "88": 2,
+    "204": 2,
+    "207": 5,
+    "208": 2,
+    "619": 2,
+    "622": 2,
+    "624": 1,
+    "625": 1,
+    "626": 1,
+    "635": {
+      "color": "green",
+      "rotations": 2,
+      "icons": [{ "type": "1861", "noCircle": true, "angle": 0, "width": 15 }],
+      "terrain": [
+        { "angle": 322.5, "percent": 0.75, "cost": "R40", "size": "tiny" }
+      ],
+      "values": [{ "angle": 210, "percent": 0.8, "value": 50 }],
+      "labels": [{ "angle": 90, "percent": 0.8, "label": "K" }],
+      "cities": [
+        { "angle": 30, "percent": 0.5 },
+        { "angle": 150, "percent": 0.5 },
+        { "angle": 270, "percent": 0.5 }
+      ],
+      "track": [
+        { "type": "sharp", "side": 1, "cross": "over" },
+        { "type": "sharp", "side": 5, "cross": "under" },
+        { "type": "sharp", "side": 3, "cross": "under" }
+      ]
+    },
+    "637": 1,
+
+    "39": 2,
+    "40": 2,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 2,
+    "45": 2,
+    "46": 2,
+    "47": 2,
+    "63": 3,
+    "611": 3,
+    "623": 3,
+    "636": {
+      "color": "brown",
+      "icons": [
+        {
+          "type": "1861",
+          "width": 15,
+          "noCircle": true,
+          "angle": 270,
+          "percent": 0.9
+        }
+      ],
+      "values": [{ "value": 50, "angle": 210, "percent": 0.8 }],
+      "labels": [{ "label": "K", "angle": 90, "percent": 0.8 }],
+      "cities": [{ "size": 3 }],
+      "track": [
+        { "side": 1 },
+        { "side": 2 },
+        { "side": 3 },
+        { "side": 4 },
+        { "side": 5 },
+        { "side": 6 }
+      ]
+    },
+    "638": {
+      "color": "brown",
+      "icons": [
+        {
+          "type": "1861",
+          "width": 15,
+          "noCircle": true,
+          "angle": 270,
+          "percent": 0.9
+        }
+      ],
+      "values": [{ "value": 50, "angle": 210, "percent": 0.8 }],
+      "labels": [{ "label": "M", "angle": 90, "percent": 0.8 }],
+      "cities": [{ "size": 3 }],
+      "track": [
+        { "side": 1 },
+        { "side": 2 },
+        { "side": 3 },
+        { "side": 4 },
+        { "side": 5 },
+        { "side": 6 }
+      ]
+    },
+    "641": {
+      "color": "brown",
+      "icons": [
+        {
+          "type": "1861",
+          "width": 15,
+          "noCircle": true,
+          "angle": 270,
+          "percent": 0.9
+        }
+      ],
+      "values": [{ "value": 50, "angle": 210, "percent": 0.8 }],
+      "labels": [{ "label": "StP", "angle": 90, "percent": 0.8 }],
+      "cities": [{ "size": 3 }],
+      "track": [{ "side": 1 }, { "side": 2 }, { "side": 3 }]
+    },
+    "801": 2,
+    "911": 3,
+
+    "639": 1,
+    "640": {
+      "color": "gray",
+      "icons": [
+        {
+          "type": "1861",
+          "width": 15,
+          "noCircle": true,
+          "angle": 270,
+          "percent": 0.9
+        }
+      ],
+      "values": [{ "value": 60, "angle": 210, "percent": 0.8 }],
+      "labels": [{ "label": "Y", "angle": 90, "percent": 0.8 }],
+      "cities": [{ "size": 3 }],
+      "track": [
+        { "side": 1 },
+        { "side": 2 },
+        { "side": 3 },
+        { "side": 4 },
+        { "side": 5 },
+        { "side": 6 }
+      ]
+    },
+    "642": {
+      "color": "gray",
+      "icons": [
+        {
+          "type": "1861",
+          "width": 15,
+          "noCircle": true,
+          "angle": 270,
+          "percent": 0.9
+        }
+      ],
+      "values": [{ "value": 60, "angle": 210, "percent": 0.85 }],
+      "labels": [{ "label": "StP", "angle": 90, "percent": 0.85 }],
+      "cities": [{ "size": 3 }],
+      "track": [{ "side": 1 }, { "side": 2 }, { "side": 3 }]
+    }
+  },
+  "map": {
+    "players": {
+      "x": 1825,
+      "y": 1490
+    },
+    "roundTracker": {
+      "type": "round",
+      "x": 1960,
+      "y": 1350
+    },
+    "hexes": [
+      {
+        "color": "plain",
+        "hexes": [
+          "B6",
+          "B10",
+          "B12",
+          "B14",
+          "B16",
+          "C3",
+          "C13",
+          "C15",
+          "D6",
+          "D8",
+          "D16",
+          "D18",
+          "E5",
+          "E7",
+          "E17",
+          "F6",
+          "F8",
+          "F10",
+          "F12",
+          "F14",
+          "F20",
+          "G3",
+          "G9",
+          "G11",
+          "G17",
+          "H2",
+          "H4",
+          "H12",
+          "H14",
+          "H16",
+          "H20",
+          "I3",
+          "I7",
+          "I11",
+          "J2",
+          "J4",
+          "J8",
+          "J12",
+          "J14",
+          "K3",
+          "K5",
+          "K9",
+          "K13",
+          "K15",
+          "K19",
+          "L2",
+          "L4",
+          "L8",
+          "L10",
+          "L14",
+          "L18",
+          "L20",
+          "M3",
+          "M5",
+          "N2",
+          "N4",
+          "N8",
+          "N12",
+          "O1",
+          "O3",
+          "O7",
+          "O9",
+          "O11",
+          "P6",
+          "P10",
+          "P12"
+        ]
+      },
+      {
+        "color": "plain",
+        "names": [{ "name": "3", "color": "white", "y": "5" }],
+        "icons": [{ "type": "lock", "noCircle": true, "width": 35 }],
+        "hexes": ["E3", "H6", "I9", "J10"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{ "type": "river", "cost": 20 }],
+        "names": [
+          {
+            "name": "3",
+            "color": "white",
+            "angle": 30,
+            "percent": 0.6,
+            "y": "5"
+          }
+        ],
+        "icons": [{ "type": "lock", "noCircle": true, "width": 35 }],
+        "centerTowns": [{}],
+        "hexes": ["I5"]
+      },
+      {
+        "color": "plain",
+        "terrain": [{ "type": "river", "cost": 20 }],
+        "hexes": ["C17", "C19", "D10", "J6", "L6", "N6", "O5", "P4"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "terrain": [{ "type": "river", "cost": 20 }],
+        "hexes": ["P2"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "river",
+            "cost": 40
+          }
+        ],
+        "hexes": ["E15", "E19", "F16", "I15", "J16", "J18"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "terrain": [
+          {
+            "type": "river",
+            "cost": 40
+          }
+        ],
+        "hexes": ["F18", "M7"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "river",
+            "cost": 80
+          }
+        ],
+        "hexes": ["C11", "D12", "M11"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "terrain": [
+          {
+            "type": "river",
+            "cost": 80
+          }
+        ],
+        "hexes": ["M9"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{}],
+        "hexes": ["B8", "C9", "E11", "E13", "G13", "G19", "H10", "I17", "K11"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["L12", "P8"]
+      },
+      {
+        "color": "plain",
+        "cities": [{ "companies": ["MV"] }],
+        "hexes": ["I13"]
+      },
+      {
+        "color": "plain",
+        "cities": [{ "companies": ["MB"] }],
+        "hexes": ["E9"]
+      },
+      {
+        "color": "plain",
+        "cities": [{ "companies": ["Y"] }],
+        "hexes": ["H18"]
+      },
+      {
+        "color": "plain",
+        "cities": [{ "companies": ["V"] }],
+        "hexes": ["I19"]
+      },
+      {
+        "color": "plain",
+        "cities": [{ "companies": ["TR"] }],
+        "hexes": ["K17"]
+      },
+      {
+        "color": "gray",
+        "track": [{ "type": "sharp", "side": 5 }],
+        "hexes": ["A5"]
+      },
+      {
+        "color": "gray",
+        "track": [{ "type": "sharp", "side": 3 }],
+        "hexes": ["M21"]
+      },
+      {
+        "color": "gray",
+        "track": [{ "type": "sharp", "side": 1 }],
+        "hexes": ["P0"]
+      },
+      {
+        "color": "gray",
+        "cities": [{ "companies": ["E"] }],
+        "values": [
+          { "value": 40, "angle": 300, "percent": 0.67 },
+          { "value": 80, "angle": 150, "percent": 0.7 }
+        ],
+        "names": [{ "name": "To Moscow", "x": 10, "y": -21 }],
+        "track": [{ "side": 1 }, { "side": 2 }, { "side": 3 }],
+        "removeBorders": [1],
+        "hexes": ["Q3"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          { "type": "sharp", "side": 3 },
+          { "type": "gentle", "side": 2 }
+        ],
+        "removeBorders": [1, 4],
+        "hexes": ["Q5"]
+      },
+      {
+        "color": "gray",
+        "track": [{ "type": "sharp", "side": 2 }],
+        "removeBorders": [4],
+        "hexes": ["Q7"]
+      },
+      {
+        "color": "gray",
+        "values": [
+          {
+            "value": 10,
+            "angle": 150,
+            "percent": 0.7
+          }
+        ],
+        "towns": [
+          {
+            "angle": 120,
+            "percent": 0.33,
+            "rotate": -60,
+            "name": {
+              "rotation": 180,
+              "reverse": true
+            }
+          }
+        ],
+        "track": [
+          { "type": "straight", "side": 3, "cross": "under" },
+          { "type": "gentle", "side": 5, "cross": "over" }
+        ],
+        "hexes": ["C5"]
+      },
+      {
+        "color": "yellow",
+        "track": [
+          {
+            "type": "gentle",
+            "side": 5
+          }
+        ],
+        "hexes": ["D2"]
+      },
+      {
+        "color": "yellow",
+        "track": [
+          {
+            "type": "gentle",
+            "side": 2
+          }
+        ],
+        "hexes": ["C7", "D4"]
+      },
+      {
+        "color": "yellow",
+        "track": [
+          {
+            "type": "gentle",
+            "side": 1
+          }
+        ],
+        "hexes": ["F2"]
+      },
+      {
+        "color": "yellow",
+        "track": [
+          {
+            "type": "gentle",
+            "side": 4
+          }
+        ],
+        "hexes": ["F4", "G7"]
+      },
+      {
+        "color": "yellow",
+        "track": [
+          {
+            "type": "gentle",
+            "side": 1
+          }
+        ],
+        "towns": [
+          {
+            "rotate": -30,
+            "angle": 60,
+            "percent": 0.288675
+          }
+        ],
+        "hexes": ["G5"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          { "type": "offboard", "side": 5 },
+          { "type": "offboard", "side": 6 }
+        ],
+        "removeBorders": [1],
+        "hexes": ["A9"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          { "type": "offboard", "side": 5 },
+          { "type": "offboard", "side": 6 }
+        ],
+        "offBoardRevenue": {
+          "revenues": [
+            { "color": "yellow", "cost": 30 },
+            { "color": "green", "cost": 40 },
+            { "color": "brown", "cost": 50 },
+            { "color": "gray", "cost": 70 }
+          ]
+        },
+        "removeBorders": [1, 4],
+        "hexes": ["A11"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          { "type": "offboard", "side": 5 },
+          { "type": "offboard", "side": 6 }
+        ],
+        "removeBorders": [1, 4],
+        "hexes": ["A13"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          { "type": "offboard", "side": 5 },
+          { "type": "offboard", "side": 6 }
+        ],
+        "removeBorders": [4],
+        "hexes": ["A15"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          { "type": "offboard", "side": 4 },
+          { "type": "offboard", "side": 5 },
+          { "type": "offboard", "side": 6 }
+        ],
+        "offBoardRevenue": {
+          "revenues": [
+            { "color": "yellow", "cost": 10 },
+            { "color": "green", "cost": 20 },
+            { "color": "brown", "cost": 30 },
+            { "color": "gray", "cost": 30 }
+          ]
+        },
+        "removeBorders": [1],
+        "hexes": ["B18"]
+      },
+      {
+        "color": "offboard",
+        "track": [{ "type": "offboard", "side": 5 }],
+        "removeBorders": [4],
+        "hexes": ["B20"]
+      },
+      {
+        "color": "offboard",
+        "track": [{ "type": "offboard", "side": 4 }],
+        "removeBorders": [5],
+        "hexes": ["I21"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          { "type": "offboard", "side": 3 },
+          { "type": "offboard", "side": 4 },
+          { "type": "offboard", "side": 5 }
+        ],
+        "offBoardRevenue": {
+          "revenues": [
+            { "color": "yellow", "cost": 10 },
+            { "color": "green", "cost": 20 },
+            { "color": "brown", "cost": 40 },
+            { "color": "gray", "cost": 60 }
+          ]
+        },
+        "removeBorders": [2, 6],
+        "hexes": ["J20"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          { "type": "offboard", "side": 4 },
+          { "type": "offboard", "side": 5 }
+        ],
+        "removeBorders": [3],
+        "hexes": ["K21"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          { "type": "offboard", "side": 2 },
+          { "type": "offboard", "side": 3 }
+        ],
+        "offBoardRevenue": {
+          "revenues": [
+            { "color": "yellow", "cost": 10 },
+            { "color": "green", "cost": 20 },
+            { "color": "brown", "cost": 30 },
+            { "color": "gray", "cost": 40 }
+          ]
+        },
+        "removeBorders": [1],
+        "hexes": ["Q11"]
+      },
+      {
+        "color": "offboard",
+        "track": [{ "type": "offboard", "side": 3 }],
+        "removeBorders": [4],
+        "hexes": ["Q13"]
+      },
+      {
+        "color": "plain",
+        "labels": [{ "label": "Y" }],
+        "cities": [{}],
+        "hexes": ["M19"]
+      },
+      {
+        "color": "plain",
+        "labels": [{ "label": "Y" }],
+        "cities": [{ "companies": ["OK"] }],
+        "hexes": ["D20"]
+      },
+      {
+        "color": "plain",
+        "labels": [{ "label": "Y" }],
+        "cities": [{ "companies": ["RO"] }],
+        "hexes": ["B4"]
+      },
+      {
+        "color": "plain",
+        "labels": [{ "label": "Y" }],
+        "cities": [{ "companies": ["SV"] }],
+        "hexes": ["N10"]
+      },
+      {
+        "color": "plain",
+        "labels": [{ "label": "Y" }, { "label": "KH" }],
+        "cities": [{ "companies": ["KR"] }],
+        "hexes": ["G15"]
+      },
+      {
+        "color": "yellow",
+        "values": [{ "value": 30, "angle": 300, "percent": 0.7 }],
+        "labels": [{ "label": "K", "angle": 60, "percent": 0.7 }],
+        "cities": [
+          { "angle": 0, "percent": 0.5 },
+          { "angle": 120, "percent": 0.5, "companies": ["KB"] },
+          { "angle": 240, "percent": 0.5, "companies": ["KK"] }
+        ],
+        "track": [
+          { "side": 1, "end": 0.25, "type": "straight" },
+          { "side": 3, "end": 0.25, "type": "straight" },
+          { "side": 5, "end": 0.25, "type": "straight" }
+        ],
+        "hexes": ["D14"]
+      },
+      {
+        "color": "yellow",
+        "values": [{ "value": 40, "angle": 300, "percent": 0.7 }],
+        "labels": [{ "label": "M", "angle": 60, "percent": 0.7 }],
+        "cities": [
+          { "angle": 0, "percent": 0.5, "companies": ["M-K"] },
+          { "angle": 120, "percent": 0.5, "companies": ["N"] },
+          { "angle": 240, "percent": 0.5, "companies": ["MNN"] }
+        ],
+        "track": [
+          { "side": 1, "end": 0.25, "type": "straight" },
+          { "side": 3, "end": 0.25, "type": "straight" },
+          { "side": 5, "end": 0.25, "type": "straight" }
+        ],
+        "hexes": ["H8"]
+      },
+      {
+        "color": "yellow",
+        "values": [{ "value": 30 }],
+        "labels": [{ "label": "Y" }],
+        "cities": [{}],
+        "terrain": [{ "type": "river", "cost": 20 }],
+        "track": [{ "side": 2 }, { "side": 6 }],
+        "hexes": ["K7"]
+      },
+      {
+        "color": "green",
+        "values": [{ "value": 40 }],
+        "labels": [{ "label": "S" }],
+        "cities": [
+          { "angle": 60, "percent": 0.5, "companies": ["SPW"] },
+          { "angle": 300, "percent": 0.5, "companies": ["RSR"] }
+        ],
+        "track": [
+          { "side": 2, "end": 0.25, "type": "straight" },
+          { "side": 6, "end": 0.25, "type": "straight" }
+        ],
+        "hexes": ["E1"]
+      }
+    ]
+  }
+}

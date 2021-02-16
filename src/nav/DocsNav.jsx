@@ -19,6 +19,7 @@ import OverridesIcon from "@material-ui/icons/Autorenew";
 import TrainsIcon from "@material-ui/icons/Train";
 import SchemasIcon from "@material-ui/icons/Check";
 import SharesIcon from "@material-ui/icons/Note";
+import AutoPositioningIcon from "@material-ui/icons/CenterFocusStrong";
 
 import PdfIcon from "@material-ui/icons/PictureAsPdf";
 import PngIcon from "@material-ui/icons/PhotoLibrary";
@@ -100,6 +101,10 @@ const DocsNav = () => {
               name={t("docs.games.overrides.title")}
               desc={t("docs.games.overrides.description")}
               icon={<OverridesIcon/>}/>
+        <Item path="games/positioning"
+              name={t("docs.games.positioning.title")}
+              desc={t("docs.games.positioning.description")}
+              icon={<AutoPositioningIcon/>}/>
       </List>
       <Divider/>
       <List>

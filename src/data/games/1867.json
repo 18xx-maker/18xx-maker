@@ -12,8 +12,8 @@
     "currency": "$#"
   },
   "links": {
-    "bgg": "https://www.boardgamegeek.com/boardgame/227143/1867-railways-canada",
-    "rules": "http://www.all-aboardgames.com/home/ian-wilson-s-1867",
+    "bgg": "https://www.boardgamegeek.com/boardgame/292187/18611867",
+    "rules": "https://www.boardgamegeek.com/filepage/212807/18611867-rulebook",
     "purchase": "https://app.crowdox.com/projects/joshuastarr/1861-russia-1867-canada"
   },
   "wip": true,
@@ -98,11 +98,13 @@
     {
       "name": "Operating Round",
       "steps": [
-        "Lay or upgrade track",
-        "Purchase a station",
-        "Run trains",
-        "Pay dividends or withhold revenue",
-        "Purchase trains"
+        "Redeem Shares",
+        "Lay Tile",
+        "Place Token",
+        "Run Trains",
+        "Revenue and Dividends",
+        "Pay Interests and Redeem Loans",
+        "Purchase Train"
       ],
       "ordered": true
     }
@@ -116,26 +118,15 @@
     },
     "ledges": [
       {
-        "color": "red",
+        "color": "hl4",
         "dashed": true,
         "width": 6,
-        "offset": -3,
+        "coords": ["10 0", "10 1", "16 1", "16 0", "10 0"]
+      },
+      {
+        "color": "black",
+        "width": 6,
         "coords": ["16 0", "16 1"]
-      },
-      {
-        "color": "brown",
-        "width": 6,
-        "coords": ["3 0", "3 1", "7 1", "7 0", "3 0"]
-      },
-      {
-        "color": "purple",
-        "width": 6,
-        "coords": ["14 0", "14 1", "18 1", "18 0", "14 0"]
-      },
-      {
-        "color": "red",
-        "width": 6,
-        "coords": ["7 0", "7 1", "14 1", "14 0", "7 0"]
       }
     ],
     "market": [
@@ -144,63 +135,63 @@
       45,
       {
         "value": 50,
-        "par": true
+        "legend": 0
       },
       {
         "value": 55,
-        "par": true
+        "legend": 0
       },
       {
         "value": 60,
-        "par": true
+        "legend": 0
       },
       {
         "value": 65,
-        "par": true
+        "legend": 0
       },
       {
         "value": 70,
-        "par": true
+        "legend": 1
       },
       {
         "value": 80,
-        "par": true
+        "legend": 1
       },
       {
         "value": 90,
-        "par": true
+        "legend": 1
       },
       {
         "value": 100,
-        "legend": 0
+        "legend": 1
       },
       {
         "value": 110,
-        "legend": 0
+        "legend": 1
       },
       {
         "value": 120,
-        "legend": 0
+        "legend": 1
       },
       {
         "value": 135,
-        "legend": 0
+        "legend": 1
       },
       {
         "value": 150,
-        "legend": 0
+        "legend": 2
       },
       {
         "value": 165,
-        "legend": 0
+        "legend": 2
       },
       {
         "value": 180,
-        "legend": 0
+        "legend": 2
       },
       {
         "value": 200,
-        "legend": 0
+        "legend": 2
       },
       220,
       245,
@@ -213,52 +204,26 @@
       490,
       540
     ],
-    "limits": [
-      {
-        "color": "brown",
-        "description": "Minor companies may start here",
-        "min": 50,
-        "max": 135
-      },
-      {
-        "color": "red",
-        "description": "Any company may start here",
-        "min": 70,
-        "max": 135
-      },
-      {
-        "color": "yellow",
-        "description": "Minor companies may convert here",
-        "min": 70,
-        "max": 135
-      },
-      {
-        "color": "purple",
-        "description": "Only Public Companies may start here",
-        "min": 150,
-        "max": 200
-      }
-    ],
     "legend": [
       {
-        "color": "yellow",
-        "description": "Minor companies may convert here",
-        "icon": "info"
-      },
-      {
-        "color": "brown",
-        "description": "Minor companies may start here",
+        "color": "hl1",
+        "description": "Minor Companies may start here",
         "icon": "certificate"
       },
       {
-        "color": "red",
+        "color": "hl2",
         "description": "Any company may start here",
         "icon": "certificate"
       },
       {
-        "color": "purple",
-        "description": "Only Public Companies may start here",
+        "color": "hl3",
+        "description": "Major Companies may start here",
         "icon": "certificate"
+      },
+      {
+        "color": "hl4",
+        "description": "Minor Companies may convert here",
+        "icon": "info"
       }
     ]
   },
@@ -322,7 +287,7 @@
     }
   ],
   "tokenTypes": {
-    "minor": [""],
+    "minor": ["Free"],
     "default": ["Free", "$20/hex", "$40/hex"]
   },
   "shareTypes": {
@@ -345,212 +310,238 @@
     {
       "name": "Canadian Northern Railway",
       "abbrev": "CNR",
-      "color": "green"
+      "logo": "1867/CNR",
+      "color": "darkGreen"
     },
     {
       "name": "Canadian Pacific Railway",
       "abbrev": "CPR",
+      "logo": "1867/CPR",
       "color": "red"
     },
     {
       "name": "Chesapeake and Ohio Railway",
       "abbrev": "C&O",
-      "color": "cyan"
+      "logo": "1867/CO",
+      "color": "darkBlue"
     },
     {
       "name": "Grand Trunk Railway",
       "abbrev": "GTR",
-      "color": "orange"
+      "logo": "1867/GTR",
+      "color": "brown"
     },
     {
       "name": "Great Western Railway",
       "abbrev": "GWR",
-      "color": "brown"
+      "logo": "1867/GWR",
+      "color": "darkTurquoise"
     },
     {
       "name": "Intercolonial Railway",
       "abbrev": "ICR",
-      "color": "yellow"
+      "logo": "1867/ICR",
+      "color": "darkGold"
     },
     {
       "name": "National Transcontinental Railway",
       "abbrev": "NTR",
-      "color": "tan"
+      "logo": "1867/NTR",
+      "color": "darkLime"
     },
     {
       "name": "New York Central Railroad",
       "abbrev": "NYC",
-      "color": "black"
+      "logo": "1867/NYC",
+      "color": "darkViolet"
     },
     {
-      "name": "Buffalo, Brantford, and Goderich",
-      "minor": true,
-      "abbrev": "BBG",
+      "name": "Canadian National",
+      "abbrev": "CN",
+      "logo": "1867/CN",
+      "color": "brightRed",
       "token": {
-        "color": "red",
-        "bar": "yellow"
+        "target": "brightRed",
+        "bar": true
       },
-      "color": "yellow"
+      "tokens": ["", "", "", "", "", "", "", ""],
+      "shares": []
     },
     {
       "name": "Brockville and Ottawa",
       "minor": true,
       "abbrev": "BO",
+      "logo": "1867/BO",
       "token": {
-        "color": "red",
+        "color": "turquoise",
         "bar": "yellow"
       },
-      "color": "yellow"
-    },
-    {
-      "name": "Canada Southern",
-      "minor": true,
-      "abbrev": "CS",
-      "token": {
-        "bar": "yellow"
-      },
-      "color": "yellow"
-    },
-    {
-      "name": "Credit Valley Railway",
-      "minor": true,
-      "abbrev": "CV",
-      "token": {
-        "color": "purple",
-        "bar": "yellow"
-      },
-      "color": "yellow"
-    },
-    {
-      "name": "Kingston and Pembroke",
-      "minor": true,
-      "abbrev": "KP",
-      "token": {
-        "color": "white",
-        "bar": "yellow"
-      },
-      "color": "yellow"
-    },
-    {
-      "name": "London and Port Stanley",
-      "minor": true,
-      "abbrev": "LPS",
-      "token": {
-        "color": "blue",
-        "bar": "yellow"
-      },
-      "color": "yellow"
-    },
-    {
-      "name": "Ottawa and Prescott",
-      "minor": true,
-      "abbrev": "OP",
-      "token": {
-        "color": "brightGreen",
-        "bar": "yellow"
-      },
-      "color": "yellow"
-    },
-    {
-      "name": "St. Lawrence and Atlantic",
-      "minor": true,
-      "abbrev": "SLA",
-      "token": {
-        "color": "brown",
-        "bar": "yellow"
-      },
-      "color": "yellow"
-    },
-    {
-      "name": "Toronto, Grey, and Bruce",
-      "minor": true,
-      "abbrev": "TGB",
-      "token": {
-        "color": "gray",
-        "bar": "yellow"
-      },
-      "color": "yellow"
-    },
-    {
-      "name": "Toronto and Nipissing",
-      "minor": true,
-      "abbrev": "TN",
-      "token": {
-        "color": "orange",
-        "bar": "yellow"
-      },
-      "color": "yellow"
-    },
-    {
-      "name": "Algoma Eastern Railway",
-      "minor": true,
-      "abbrev": "TN",
-      "token": {
-        "color": "orange",
-        "bar": "green"
-      },
-      "color": "green"
-    },
-    {
-      "name": "Canada Atlantic Railway",
-      "minor": true,
-      "abbrev": "CA",
-      "token": {
-        "color": "green",
-        "bar": "green"
-      },
-      "color": "green"
-    },
-    {
-      "name": "New York and Ottawa",
-      "minor": true,
-      "abbrev": "NYO",
-      "token": {
-        "color": "cyan",
-        "bar": "green"
-      },
-      "color": "green"
+      "color": "turquoise"
     },
     {
       "name": "Pere Marquette Railway",
       "minor": true,
       "abbrev": "PM",
+      "logo": "1867/PM",
+      "token": {
+        "color": "lime",
+        "bar": "yellow"
+      },
+      "color": "lime"
+    },
+    {
+      "name": "Canada Southern",
+      "minor": true,
+      "abbrev": "CS",
+      "logo": "1867/CS",
+      "token": {
+        "color": "lightBlue",
+        "bar": "yellow"
+      },
+      "color": "lightBlue"
+    },
+    {
+      "name": "Credit Valley Railway",
+      "minor": true,
+      "abbrev": "CV",
+      "logo": "1867/CV",
       "token": {
         "color": "blue",
-        "bar": "green"
+        "bar": "yellow"
       },
-      "color": "green"
+      "color": "blue"
+    },
+    {
+      "name": "Kingston and Pembroke",
+      "minor": true,
+      "abbrev": "KP",
+      "logo": "1867/KP",
+      "token": {
+        "color": "navyBlue",
+        "bar": "yellow"
+      },
+      "color": "navyBlue"
     },
     {
       "name": "Quebec and Lake St. John",
       "minor": true,
       "abbrev": "QLS",
+      "logo": "1867/QLS",
       "token": {
-        "color": "brown",
+        "color": "inky",
         "bar": "green"
       },
-      "color": "green"
+      "color": "inky"
+    },
+    {
+      "name": "Canada Atlantic Railway",
+      "minor": true,
+      "abbrev": "CA",
+      "logo": "1867/CA",
+      "token": {
+        "color": "violet",
+        "bar": "green"
+      },
+      "color": "violet"
+    },
+    {
+      "name": "Ottawa and Prescott",
+      "minor": true,
+      "abbrev": "OP",
+      "logo": "1867/OP",
+      "token": {
+        "color": "pink",
+        "bar": "yellow"
+      },
+      "color": "pink"
     },
     {
       "name": "Toronto, Hamilton and Buffalo",
       "minor": true,
       "abbrev": "THB",
+      "logo": "1867/THB",
       "token": {
-        "color": "black",
+        "color": "tan",
         "bar": "green"
       },
-      "color": "green"
+      "color": "tan"
     },
     {
-      "name": "Canadian National",
-      "abbrev": "CN",
-      "color": "white",
+      "name": "Algoma Eastern",
+      "minor": true,
+      "abbrev": "AE",
+      "logo": "1867/AE",
       "token": {
-        "target": "red",
-        "bar": true
+        "color": "orange",
+        "bar": "green"
       },
-      "tokens": ["", "", "", "", "", "", "", ""],
-      "shares": []
+      "color": "orange"
+    },
+    {
+      "name": "New York and Ottawa",
+      "minor": true,
+      "abbrev": "NO",
+      "logo": "1867/NO",
+      "token": {
+        "color": "lightRed",
+        "bar": "yellow"
+      },
+      "color": "lightRed"
+    },
+    {
+      "name": "Toronto and Nipissing",
+      "minor": true,
+      "abbrev": "TN",
+      "logo": "1867/TN",
+      "token": {
+        "color": "darkRed",
+        "bar": "yellow"
+      },
+      "color": "darkRed"
+    },
+    {
+      "name": "London and Port Stanley",
+      "minor": true,
+      "abbrev": "LPS",
+      "logo": "1867/LPS",
+      "token": {
+        "color": "natural",
+        "bar": "green"
+      },
+      "color": "natural"
+    },
+    {
+      "name": "Buffalo, Brantford, and Goderich",
+      "minor": true,
+      "abbrev": "BBG",
+      "logo": "1867/BBG",
+      "token": {
+        "color": "gray",
+        "bar": "green"
+      },
+      "color": "gray"
+    },
+    {
+      "name": "St. Lawrence and Atlantic",
+      "minor": true,
+      "abbrev": "SLA",
+      "logo": "1867/SLA",
+      "token": {
+        "color": "lavender",
+        "bar": "green"
+      },
+      "color": "lavender"
+    },
+    {
+      "name": "Toronto, Grey, and Bruce",
+      "minor": true,
+      "abbrev": "TGB",
+      "logo": "1867/TGB",
+      "token": {
+        "color": "lightBrown",
+        "bar": "green"
+      },
+      "color": "lightBrown"
     }
   ],
   "phases": [

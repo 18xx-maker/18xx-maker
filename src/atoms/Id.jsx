@@ -35,7 +35,7 @@ const Id = ({ id, extra, bgColor, noID }) => {
           <g transform={`rotate(${rotation}) translate(${idX} 70)`}>
             <text
               fontFamily="sans-serif"
-              fill={bgColor ? t(c(bgColor)) : c("black")}
+              fill={c("black")}
               stroke="none"
               strokeLinecap="round"
               strokeLinejoin="bevel"
