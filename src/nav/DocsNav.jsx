@@ -14,6 +14,7 @@ import DevelopingIcon from "@material-ui/icons/Code";
 import TranslationIcon from "@material-ui/icons/Language";
 
 import LogosIcon from "@material-ui/icons/Security";
+import BordersIcon from "@material-ui/icons/Timeline";
 import OverridesIcon from "@material-ui/icons/Autorenew";
 import TrainsIcon from "@material-ui/icons/Train";
 import SchemasIcon from "@material-ui/icons/Check";
@@ -79,6 +80,10 @@ const DocsNav = () => {
               name={t("docs.games.schemas.title")}
               desc={t("docs.games.schemas.description")}
               icon={<SchemasIcon/>}/>
+        <Item path="games/borders"
+              name={t("docs.games.borders.title")}
+              desc={t("docs.games.borders.description")}
+              icon={<BordersIcon/>}/>
         <Item path="games/types"
               name={t("docs.games.types.title")}
               desc={t("docs.games.types.description")}

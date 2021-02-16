@@ -64,6 +64,10 @@
         "title": "JSON Schemas",
         "description": "Validation of game files"
       },
+      "borders": {
+        "title": "Map Borders & Lines",
+        "description": "Draw map borders and lines"
+      },
       "types": {
         "title": "Share & Token Types",
         "description": "Easily describe shares and tokens"
