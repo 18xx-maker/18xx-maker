@@ -134,10 +134,10 @@ const straightPath = (start, end, xOffset) => {
   return `${pathStart} ${pathEnd}`;
 };
 
-const Track = ({ type, gauge, border, borderWidth, width, offset, path, color, trackOffset, radiusOffset,
+const Track = ({ type, gauge, border, borderWidth, width, offset, path, trackOffset, radiusOffset,
                  start = 0, begin = 0,
                  end = 1, stop = 1,
-                 borderColor, gaugeColor }) => {
+                 color, bgColor, borderColor, gaugeColor }) => {
   const rotation = useOrientation();
   const { game } = useContext(GameContext);
 
@@ -148,16 +148,22 @@ const Track = ({ type, gauge, border, borderWidth, width, offset, path, color, t
   if (end === 1 && stop !== 1)
     end = stop;
 
-  let trackWidth = multiDefaultTo(12, width, game.info.trackWidth);
-  borderWidth = multiDefaultTo(4, borderWidth, game.info.borderWidth);
-  if (border)
-    trackWidth += borderWidth;
-
   trackOffset = defaultTo(0, trackOffset);
   radiusOffset = defaultTo(0, radiusOffset);
-  color = color || "track";
-  borderColor = borderColor || "border";
-  gaugeColor = gaugeColor || "white";
+
+  // check for global overrides
+  borderWidth = multiDefaultTo(4, borderWidth, game.info.borderWidth);
+  let trackWidth = multiDefaultTo(12, width, game.info.trackWidth)
+  if (border)
+    trackWidth += borderWidth;
+  gauge = game.info.trackGauge || gauge;
+  // and any "match" colors which uses the hex color instead
+  color = multiDefaultTo("track", color === "match" ? bgColor : color,
+    game.info.trackColor === "match" ? bgColor : game.info.trackColor);
+  borderColor = multiDefaultTo("border", borderColor === "match" ? bgColor : borderColor,
+    game.info.trackBorderColor === "match" ? bgColor : game.info.trackBorderColor);
+  gaugeColor = multiDefaultTo("white", gaugeColor === "match" ? bgColor : gaugeColor,
+    game.info.trackGaugeColor === "match" ? bgColor : game.info.trackGaugeColor);
 
   switch (type) {
     case "custom":

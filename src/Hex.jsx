@@ -96,8 +96,8 @@ const HexTile = ({ hex, id, mask, border, transparent, map, opacity }) => {
   ]);
 
   let allTracks = [
-    ...(hex.track || []),
-    ...R.map(obt => ({ ...obt, type: "offboard" }), hex.offBoardTrack || [])
+    ...R.map(obt => ({ ...obt, bgColor: `${hex.color}` }), hex.track || []),
+    ...R.map(obt => ({ ...obt, bgColor: `${hex.color}`, type: "offboard" }), hex.offBoardTrack || [])
   ];
   let tracks = getTracks(allTracks);
 
