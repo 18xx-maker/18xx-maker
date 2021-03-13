@@ -54,7 +54,7 @@ const Value = ({ value, fontSize, fontWeight, fontFamily, color, textColor, shap
                       x={-rx} y={-ry}
                       width={2*rx} height={2*ry} />
               );
-            } else {
+            } else if (shape !== "none") {
               if (outerBorderColor) {
                 outline = (
                   <ellipse
