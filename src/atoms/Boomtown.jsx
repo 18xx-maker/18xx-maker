@@ -284,6 +284,28 @@ const Boomtown = ({ border, borderWidth, city, size, name, x, color, bgColor, wi
         <Color context="companies">
           {c => (
             <React.Fragment>
+              <g key="boomtown-outline">
+                <circle
+                  fill="none"
+                  stroke="black"
+                  strokeWidth={strokeWidth}
+                  strokeDasharray={strokeDashArray}
+                  cx={`-${centerTownWidth+3}`}
+                  cy="0"
+                  r={cityWidth}
+                />
+              </g>
+              <g key="boomtown2-outline">
+                <circle
+                  fill="none"
+                  stroke="black"
+                  strokeWidth={strokeWidth}
+                  strokeDasharray={strokeDashArray}
+                  cx={`${centerTownWidth+3}`}
+                  cy="0"
+                  r={cityWidth}
+                />
+              </g>
               <g key="outline">
                 <path d={`M${centerTownWidth+4},${centerTownWidth+4} A${centerTownWidth+4},${centerTownWidth+4} 0 1,0 ${centerTownWidth+4},-${centerTownWidth+4} L-${centerTownWidth+4},-${centerTownWidth+4} A${centerTownWidth+4},${centerTownWidth+4} 0 1,0 -${centerTownWidth+4},${centerTownWidth+4} L${centerTownWidth+4},${centerTownWidth+4}`}
                 fill={c("white")}
@@ -309,17 +331,6 @@ const Boomtown = ({ border, borderWidth, city, size, name, x, color, bgColor, wi
                   r={centerTownWidth}
                 />
               </g>
-              <g key="boomtown-outline">
-                <circle
-                  fill="none"
-                  stroke="black"
-                  strokeWidth={strokeWidth}
-                  strokeDasharray={strokeDashArray}
-                  cx={`-${centerTownWidth+3}`}
-                  cy="0"
-                  r={cityWidth}
-                />
-              </g>
               <g key="center-town2-outline">
                 <circle
                   fill={c("centerTown")}
@@ -336,17 +347,6 @@ const Boomtown = ({ border, borderWidth, city, size, name, x, color, bgColor, wi
                   cx={`${centerTownWidth+3}`}
                   cy="0"
                   r={centerTownWidth}
-                />
-              </g>
-              <g key="boomtown2-outline">
-                <circle
-                  fill="none"
-                  stroke="black"
-                  strokeWidth={strokeWidth}
-                  strokeDasharray={strokeDashArray}
-                  cx={`${centerTownWidth+3}`}
-                  cy="0"
-                  r={cityWidth}
                 />
               </g>
               {nameNode}
