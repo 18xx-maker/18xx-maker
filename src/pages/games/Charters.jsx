@@ -5,6 +5,7 @@ import GameContext from "../../context/GameContext";
 import { Redirect } from "react-router-dom";
 import { getCharterData, compileCompanies, overrideCompanies } from "../../util";
 import Charter from "../../Charter";
+import Svg from "../../Svg";
 
 import PageSetup from "../../PageSetup";
 
@@ -13,9 +14,11 @@ import chain from "ramda/src/chain";
 import compose from "ramda/src/compose";
 import concat from "ramda/src/concat";
 import filter from "ramda/src/filter";
+import map from "ramda/src/map";
 import not from "ramda/src/not";
 import prop from "ramda/src/prop";
 import repeat from "ramda/src/repeat";
+import splitEvery from "ramda/src/splitEvery";
 
 const isMinor = prop("minor");
 const isMajor = compose(not, prop("minor"));
@@ -34,19 +37,21 @@ const Charters = () => {
 
   let gameCompanies = overrideCompanies(compileCompanies(game), override, selection);
 
+  // Computer layout data
+  let data = getCharterData(charters, paper);
   let majors = filter(isMajor, gameCompanies);
+  let minors = filter(isMinor, gameCompanies);
 
-  let extra = majors.length % (charters.halfWidth ? 4 : 2);
+  // Now figure out how many spacers we need
+  let leftOver = majors.length % data.perPage;
   let padding = 0;
-  if (extra > 0) {
-    padding = (charters.halfWidth ? 4 : 2) - extra;
+  if (leftOver > 0) {
+    padding = data.perPage - leftOver;
   }
 
-  let companies = concat(filter(isMajor, gameCompanies),
+  let companies = concat(majors,
                          concat(repeat(null, padding),
-                                filter(isMinor, gameCompanies)));
-
-  let data = getCharterData(charters, paper);
+                                minors));
 
   let css = `
 .cutlines {
@@ -148,11 +153,88 @@ const Charters = () => {
 }
 `;
 
-  return (
-    <div className="charters">
-      <style>{css}</style>
-      {addIndex(chain)((company, index) => (
-        company ?
+  let pages = null;
+  if (data.layout === "free") {
+    // No pages, easy
+    pages = addIndex(chain)((company, index) => (
+      company ?
+        <Charter
+          game={game.info.title}
+          key={`${index}-${company.abbrev}`}
+          name={company.name}
+          abbrev={company.abbrev}
+          logo={company.logo}
+          color={company.color}
+          token={company.token}
+          tokens={company.tokens}
+          phases={game.phases}
+          turns={game.turns}
+          trains={game.trains}
+          minor={!!company.minor}
+          company={company}
+          variant={company.variant}
+          fontFamily={company.fontFamily || game.info.companyFontFamily}
+          fontSize={company.fontSize || game.info.companyFontSize}
+          fontWeight={company.fontWeight || game.info.companyFontWeight}
+          fontStyle={company.fontStyle || game.info.companyFontStyle}
+          halfWidth={charters.halfWidth}
+        /> : <div key="spacer" className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}><div className={`charter${charters.halfWidth ? " charter--half" : ""}`}></div></div>
+    ), companies);
+  } else {
+    let majorsAndSpacers = concat(majors, repeat(null, padding));
+    let splitMajorNodes = splitEvery(data.perPage, majorsAndSpacers);
+    let splitMinorNodes = splitEvery(data.minorsPerPage, minors);
+    let pins = (
+      <Svg className="pins"
+           viewBox="0 0 750 50"
+           style={{width: "7.5in", height: "0.5in", float: "left"}}>
+        <circle r="12.5" cx="75" cy="25" fill="gray" strokeWidth="1" stroke="black" />
+        <circle r="12.5" cx="675" cy="25" fill="gray" strokeWidth="1" stroke="black" />
+        <circle r="6.25" cx="75" cy="25" fill="white" strokeWidth="1" stroke="black" />
+        <circle r="6.25" cx="675" cy="25" fill="white" strokeWidth="1" stroke="black" />
+      </Svg>
+    );
+
+    let majorPages = addIndex(map)((majorCompanies, index) => (
+      <div className={`charters charters--${data.layout}`}
+           key={`charters-page-${index}`}
+           style={{width: data.css.usableWidth,
+                   height: data.css.usableHeight}}>
+        {pins}
+        {addIndex(map)((company, companyIndex) => (
+          company ?
+            <Charter
+              game={game.info.title}
+              key={`${index}-${company.abbrev}`}
+              name={company.name}
+              abbrev={company.abbrev}
+              logo={company.logo}
+              color={company.color}
+              token={company.token}
+              tokens={company.tokens}
+              phases={game.phases}
+              turns={game.turns}
+              trains={game.trains}
+              minor={!!company.minor}
+              company={company}
+              variant={company.variant}
+              fontFamily={company.fontFamily || game.info.companyFontFamily}
+              fontSize={company.fontSize || game.info.companyFontSize}
+              fontWeight={company.fontWeight || game.info.companyFontWeight}
+              fontStyle={company.fontStyle || game.info.companyFontStyle}
+              halfWidth={data.layout === "3x2"}
+            /> : <div key="spacer" className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}><div className={`charter${charters.halfWidth ? " charter--half" : ""}`}></div></div>
+        ), majorCompanies)}
+      </div>
+    ), splitMajorNodes);
+
+    let minorPages = addIndex(map)((minorCompanies, index) => (
+      <div className={`charters charters--${data.layout}`}
+           key={`charters-minors-page-${index}`}
+           style={{width: data.css.usableWidth,
+                   height: data.css.usableHeight}}>
+        {pins}
+        {addIndex(map)((company, companyIndex) => (
           <Charter
             game={game.info.title}
             key={`${index}-${company.abbrev}`}
@@ -172,8 +254,19 @@ const Charters = () => {
             fontSize={company.fontSize || game.info.companyFontSize}
             fontWeight={company.fontWeight || game.info.companyFontWeight}
             fontStyle={company.fontStyle || game.info.companyFontStyle}
-          /> : <div key="spacer" className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}><div className={`charter${charters.halfWidth ? " charter--half" : ""}`}></div></div>
-      ), companies)}
+            halfWidth={data.layout !== "3x1"}
+          />
+        ), minorCompanies)}
+      </div>
+    ), splitMinorNodes);
+
+    pages = concat(majorPages, minorPages);
+  }
+
+  return (
+    <div className="charters">
+      <style>{css}</style>
+      {pages}
       <PageSetup landscape={false}/>
     </div>
   );

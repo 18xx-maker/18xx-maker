@@ -210,14 +210,22 @@ const Config = () => {
         <Typography variant="h5">Charters</Typography>
         <Input name="charters.style" label="Charter Style"
                description="This lets you choose between two styles for charters. One is simular to Carth's style while the other includes more color at the top."/>
+        <Input name="charters.layout" label="Charter Layout"
+               description="Free tries to fill your page with two charters per page (by default, half width charters will change this). 3x1 and 3x2 are both designs that fit common die layouts. Either die option overrides the page size as well as the width, height and cutlines option below."/>
         <Input name="charters.halfWidth" label="Half Width Charters"
                description="This draws all charters (major and minor) as half width. They will take up half of the width of your page (minus cutlines)."/>
+        <Input name="charters.smallerMinors" label="Smaller Minors"
+               description="This draws minor charters smaller (height wise)."/>
         <Input name="charters.cutlines" label="Charter Cutlines Size" dimension={true}
                description="Set to 0 to disable any cutlines and have the charters next to each other"/>
         <Input name="charters.bleed" label="Charter Bleed Size" dimension={true}
                description="Set to 0 to disable any bleed, or set to a value to have a margin of this amount used as the bleed amount for printing."/>
         <Input name="charters.border" label="Charter Border Size"
                description="Set to 0 to disable any border, or set to a value to have a border of that many pixels drawn around the charter."/>
+        <Input name="charters.showPhaseChart" label="Show Phase Chart"
+               description="Whether or not to show the phase chart on charters."/>
+        <Input name="charters.showTurnOrder" label="Show Turn Order"
+               description="Whether or not to show the turn order on charters."/>
         <Input name="charters.blackBand" label="Charter Black Band"
                description="Whether or not to put a black border against the color section of the charter. Only relevent to &quot;color&quot; charters. Always put on white color charters."/>
       </Box>

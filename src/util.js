@@ -268,7 +268,14 @@ export const getFontProps = (props, size, weight, family, style) => {
 };
 
 export const getCharterData = (charters, paper) => {
-  let { cutlines, bleed, border } = charters;
+  let {
+    layout,
+    halfWidth: useHalfWidth,
+    smallerMinors,
+    cutlines,
+    bleed,
+    border,
+  } = charters;
   let { margins, width: pageWidth, height: pageHeight } = paper;
 
   let cutlinesAndBleed = cutlines + bleed;
@@ -276,10 +283,69 @@ export const getCharterData = (charters, paper) => {
   let usableWidth = pageWidth - 2.0 * margins;
   let usableHeight = pageHeight - 2.0 * margins;
 
-  let totalWidth = usableWidth;
+  let totalWidth = usableWidth / (useHalfWidth ? 2 : 1);
   let totalHalfWidth = usableWidth / 2;
   let totalHeight = usableHeight / 2;
-  let totalMinorHeight = usableHeight / 3;
+  let totalMinorHeight = usableHeight / (smallerMinors ? 3 : 2);
+
+  let perPage = useHalfWidth ? 4 : 2;
+  let minorsPerPage = smallerMinors
+    ? useHalfWidth
+      ? 6
+      : 3
+    : useHalfWidth
+    ? 4
+    : 2;
+
+  // Setup actual variables based on die choices
+  switch (layout) {
+    case "3x1":
+      cutlines = 0;
+      bleed = 0;
+      cutlinesAndBleed = 0;
+      usableWidth = 750;
+      usableHeight = 1000;
+      totalWidth = usableWidth;
+      totalHalfWidth = usableWidth; // No half height option
+      totalHeight = Math.floor(usableHeight / 3);
+      totalMinorHeight = Math.floor(usableHeight / 3);
+      usableHeight = usableHeight + 50; // add pins
+      perPage = 3;
+      minorsPerPage = 3;
+      break;
+    case "3x2":
+      cutlines = 0;
+      bleed = 0;
+      cutlinesAndBleed = 0;
+      usableWidth = 750;
+      usableHeight = 1000;
+      totalWidth = usableWidth / 2;
+      totalHalfWidth = totalWidth; // No half height option
+      totalHeight = Math.floor(usableHeight / 3);
+      totalMinorHeight = Math.floor(usableHeight / 3);
+      usableHeight = usableHeight + 50; // add pins
+      perPage = 6;
+      minorsPerPage = 6;
+      break;
+    case "3x1minors":
+      cutlines = 0;
+      bleed = 0;
+      cutlinesAndBleed = 0;
+      usableWidth = 750;
+      usableHeight = 1000;
+      totalWidth = usableWidth;
+      totalHalfWidth = totalWidth / 2;
+      totalHeight = Math.floor(usableHeight / 3);
+      totalMinorHeight = Math.floor(usableHeight / 3);
+      usableHeight = usableHeight + 50; // add pins
+      perPage = 3;
+      minorsPerPage = 6;
+      break;
+    case "free":
+    default:
+      // Variables already setup for this layout
+      break;
+  }
 
   let width = totalWidth - 2.0 * cutlinesAndBleed;
   let halfWidth = totalHalfWidth - 2.0 * cutlinesAndBleed;
@@ -292,6 +358,7 @@ export const getCharterData = (charters, paper) => {
   let bleedMinorHeight = minorHeight + 2.0 * bleed;
 
   return {
+    layout,
     width,
     halfWidth,
     height,
@@ -308,6 +375,9 @@ export const getCharterData = (charters, paper) => {
     totalHalfWidth,
     totalHeight,
     totalMinorHeight,
+
+    perPage,
+    minorsPerPage,
 
     margins,
     pageWidth,

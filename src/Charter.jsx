@@ -31,11 +31,13 @@ const Charter = ({
   fontFamily,
   fontSize,
   fontStyle,
-  fontWeight
+  fontWeight,
+  halfWidth
 }) => {
   const { config } = useContext(ConfigContext);
   const charterStyle = config.charters.style;
-  const halfWidthCharters = config.charters.halfWidth;
+  const showPhaseChart = config.charters.showPhaseChart;
+  const showTurnOrder = config.charters.showTurnOrder;
   const blackBand = config.charters.blackBand;
   fontFamily = multiDefaultTo("display", fontFamily);
   fontSize = multiDefaultTo(20, fontSize);
@@ -58,10 +60,10 @@ const Charter = ({
             <ColorContext.Provider value="companies">
               {companyToken}
             </ColorContext.Provider>
-            <g transform={`${halfWidthCharters ? "rotate(-90) " : ""}translate(0 39)`}>
+            <g transform={`${halfWidth ? "rotate(-90) " : ""}translate(0 39)`}>
               <Color context="companies">
                 {(c, t) => (
-                  <text fill={(charterStyle === "color" && !halfWidthCharters) ? t(c(color)) : c("black")}
+                  <text fill={(charterStyle === "color" && !halfWidth) ? t(c(color)) : c("black")}
                         fontSize="11" fontWeight="normal" textAnchor="middle">
                     <Currency value={label} type="token"/>
                   </text>
@@ -100,8 +102,8 @@ const Charter = ({
   return (
     <Color context="companies">
       {(c, t, _, p) => (
-        <div className={`cutlines${minor ? " cutlines--minor" : ""}${halfWidthCharters ? " cutlines--half" : ""}`}>
-          <div className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidthCharters ? " charter--half" : ""}`}>
+        <div className={`cutlines${minor ? " cutlines--minor" : ""}${halfWidth ? " cutlines--half" : ""}`}>
+          <div className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidth ? " charter--half" : ""}`}>
             <div className="charter__bleed"
                  style={{
                    backgroundColor: p(backgroundColor || "white")
@@ -115,7 +117,7 @@ const Charter = ({
               />
               <div className="charter__body">
                 <div style={{ color: t(c(charterStyle === "color" ? color : "white")),
-                              paddingRight: halfWidthCharters ? null : unitsToCss(12.5 + (65 * tokens.length)) }}
+                              paddingRight: halfWidth ? null : unitsToCss(12.5 + (65 * tokens.length)) }}
                      className="charter__name">
                      <div style={{ fontFamily:`${fontFamily}`,
                                    fontSize:`${fontSize}pt`,
@@ -139,27 +141,31 @@ const Charter = ({
                 )}
                 {false && <div className="charter__game">{game}</div>}
                 <div className="charter__tokens">
-                  {halfWidthCharters && "Tokens"}
+                  {halfWidth && "Tokens"}
                   {tokenSpots}
                 </div>
-                {halfWidthCharters && (
+                {halfWidth && (
                   <div className="charter__assets">
                     Assets
-                    <dl>{minor || turnNodes}</dl>
+                    {showTurnOrder && (
+                      <dl>{minor || turnNodes}</dl>
+                    )}
                   </div>
                 )}
-                {halfWidthCharters || (
+                {halfWidth || (
                   <div className="charter__trains">
                     Trains
-                    <div className="charter__phase">
-                      <Phase phases={phases}
-                             trains={trains}
-                             minor={!!minor}
-                             company={company.abbrev} />
-                    </div>
+                    {showPhaseChart && (
+                      <div className="charter__phase">
+                        <Phase phases={phases}
+                               trains={trains}
+                               minor={!!minor}
+                               company={company.abbrev} />
+                      </div>
+                    )}
                   </div>
                 )}
-                {halfWidthCharters || (
+                {halfWidth || (
                   <div className="charter__treasury">
                     Treasury
                     {company.capital && (
@@ -167,7 +173,9 @@ const Charter = ({
                         <Currency value={company.capital} type="treasury"/>
                       </div>
                     )}
-                    <dl>{minor || turnNodes}</dl>
+                    {showTurnOrder && (
+                      <dl>{minor || turnNodes}</dl>
+                    )}
                   </div>
                 )}
                 {variant && <div className="charter__variant">{variant}</div>}

@@ -49,11 +49,15 @@
   },
   "charters": {
     "style": "color",
+    "layout": "free",
     "cutlines": 25,
     "bleed": 12.5,
     "halfWidth": false,
+    "smallerMinors": true,
     "border": 0,
-    "blackBand": false
+    "blackBand": false,
+    "showPhaseChart": true,
+    "showTurnOrder": true
   },
   "cards": {
     "shareStyle": "gmt",
