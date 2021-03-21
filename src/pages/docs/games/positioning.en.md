@@ -11,6 +11,11 @@ there is no other positioning data on the hex. If you want to position your
 elements custom, go right ahead, this should only provide sane defaults for when
 you don't.
 
+If you did want to turn off auto positioning for an element just add a single
+positioning field to that element. For example adding `"angle": 0` will
+effectively turn off auto positioning while leaving the element in the middle of
+the hex.
+
 ## Rules
 
 ### Icons

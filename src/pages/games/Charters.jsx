@@ -178,7 +178,7 @@ const Charters = () => {
           fontWeight={company.fontWeight || game.info.companyFontWeight}
           fontStyle={company.fontStyle || game.info.companyFontStyle}
           halfWidth={charters.halfWidth}
-        /> : <div key="spacer" className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}><div className={`charter${charters.halfWidth ? " charter--half" : ""}`}></div></div>
+        /> : <div key={`spacer-${index}`} className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}><div className={`charter${charters.halfWidth ? " charter--half" : ""}`}></div></div>
     ), companies);
   } else {
     let majorsAndSpacers = concat(majors, repeat(null, padding));
