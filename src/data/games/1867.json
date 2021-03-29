@@ -1400,6 +1400,7 @@
             }
           }
         ],
+        "track": [{ "side": 2, "type": "offboard", "color": "yellow" }],
         "hexes": ["G15"]
       },
       {
@@ -1537,6 +1538,7 @@
             }
           }
         ],
+        "track": [{ "side": 5, "type": "offboard", "color": "yellow" }],
         "hexes": ["K13"]
       },
       {
@@ -1548,16 +1550,13 @@
             }
           }
         ],
+        "track": [{ "side": 1, "type": "offboard", "color": "yellow" }],
         "hexes": ["L10"]
       },
       {
         "color": "plain",
-        "companies": [
-          {
-            "label": "C&StL",
-            "percent": 0.5
-          }
-        ],
+        "icons": [{ "type": "lock", "noCircle": true, "width": 35 }],
+        "names": [{ "name": "3", "color": "white", "y": "27" }],
         "centerTowns": [
           {
             "name": {

@@ -60,20 +60,22 @@
       "color": "white"
     },
     {
-      "name": "MR",
-      "color": "gray"
-    },
-    {
       "name": "OR1",
       "color": "water"
     },
     {
       "name": "MR",
-      "color": "gray"
+      "color": "gray",
+      "small": true
     },
     {
       "name": "OR2",
       "color": "water"
+    },
+    {
+      "name": "MR",
+      "color": "gray",
+      "small": true
     }
   ],
   "turns": [
@@ -879,7 +881,9 @@
         }
       ],
       "values": [{ "value": 60, "angle": 210, "percent": 0.8 }],
-      "labels": [{ "label": "Y", "angle": 90, "percent": 0.8 }],
+      "labels": [
+        { "label": "Kh", "fontSize": 18, "angle": 90, "percent": 0.8 }
+      ],
       "cities": [{ "size": 3 }],
       "track": [
         { "side": 1 },
@@ -1215,6 +1219,7 @@
             "side": 1
           }
         ],
+        "values": [{ "value": 10, "angle": 240, "percent": 0.2 }],
         "towns": [
           {
             "rotate": -30,
@@ -1374,7 +1379,7 @@
       },
       {
         "color": "plain",
-        "labels": [{ "label": "Y" }, { "label": "KH" }],
+        "labels": [{ "label": "Y" }, { "label": "Kh" }],
         "cities": [{ "companies": ["KR"] }],
         "hexes": ["G15"]
       },
