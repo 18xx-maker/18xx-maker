@@ -691,7 +691,7 @@
       "bid": 20,
       "token": {
         "circle": "yellow",
-        "label": "$"
+        "label": "₽"
       }
     },
     {
