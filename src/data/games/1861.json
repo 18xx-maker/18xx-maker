@@ -517,8 +517,8 @@
     {
       "name": "Moskow-Kursk Ry.",
       "minor": true,
-      "abbrev": "M-K",
-      "logo": "1861/M-K",
+      "abbrev": "MKu",
+      "logo": "1861/MKu",
       "token": {
         "color": "orange",
         "bar": "yellow"
@@ -1426,7 +1426,7 @@
         "values": [{ "value": 40, "angle": 300, "percent": 0.7 }],
         "labels": [{ "label": "M", "angle": 60, "percent": 0.7 }],
         "cities": [
-          { "angle": 0, "percent": 0.5, "companies": ["M-K"] },
+          { "angle": 0, "percent": 0.5, "companies": ["MKu"] },
           { "angle": 120, "percent": 0.5, "companies": ["N"] },
           { "angle": 240, "percent": 0.5, "companies": ["MNN"] }
         ],
