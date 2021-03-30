@@ -1033,7 +1033,7 @@
           }
         ],
         "icons": [{ "type": "lock", "noCircle": true, "width": 35 }],
-        "centerTowns": [{}],
+        "centerTowns": [{ "name": { "name": "Yaroslavl" } }],
         "hexes": ["I5"]
       },
       {
@@ -1043,7 +1043,7 @@
       },
       {
         "color": "plain",
-        "cities": [{}],
+        "cities": [{ "name": { "name": "Perm" } }],
         "terrain": [{ "type": "river", "cost": 20 }],
         "hexes": ["P2"]
       },
@@ -1059,14 +1059,25 @@
       },
       {
         "color": "plain",
-        "cities": [{}],
+        "cities": [{ "name": { "name": "Ekaterinoslav" } }],
         "terrain": [
           {
             "type": "river",
             "cost": 40
           }
         ],
-        "hexes": ["F18", "M7"]
+        "hexes": ["F18"]
+      },
+      {
+        "color": "plain",
+        "cities": [{ "name": { "name": "Kazan" } }],
+        "terrain": [
+          {
+            "type": "river",
+            "cost": 40
+          }
+        ],
+        "hexes": ["M7"]
       },
       {
         "color": "plain",
@@ -1080,48 +1091,88 @@
       },
       {
         "color": "plain",
-        "centerTowns": [{}],
-        "terrain": [
-          {
-            "type": "river",
-            "cost": 80
-          }
-        ],
+        "centerTowns": [{ "name": { "name": "Simbirsk" } }],
+        "terrain": [{ "type": "river", "cost": 80 }],
         "hexes": ["M9"]
       },
       {
         "color": "plain",
-        "centerTowns": [{}],
-        "hexes": ["B8", "C9", "E11", "E13", "G13", "G19", "H10", "I17", "K11"]
+        "centerTowns": [{ "name": { "name": "Vilna" } }],
+        "hexes": ["B8"]
       },
       {
         "color": "plain",
-        "cities": [{}],
-        "hexes": ["L12", "P8"]
+        "centerTowns": [{ "name": { "name": "Minsk" } }],
+        "hexes": ["C9"]
       },
       {
         "color": "plain",
-        "cities": [{ "companies": ["MV"] }],
+        "centerTowns": [{ "name": { "name": "Gomel" } }],
+        "hexes": ["E11"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{ "name": { "name": "Chernigov" } }],
+        "hexes": ["E13"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{ "name": { "name": "Kursk" } }],
+        "hexes": ["G13"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{ "name": { "name": "Alexandrovsk" } }],
+        "hexes": ["G19"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{ "name": { "name": "Tula" } }],
+        "hexes": ["H10"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{ "name": { "name": "Lugansk" } }],
+        "hexes": ["I17"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [{ "name": { "name": "Tula" } }],
+        "hexes": ["K11"]
+      },
+      {
+        "color": "plain",
+        "cities": [{ "name": { "name": "Saratov" } }],
+        "hexes": ["L12"]
+      },
+      {
+        "color": "plain",
+        "cities": [{ "name": { "name": "Ufa" } }],
+        "hexes": ["P8"]
+      },
+      {
+        "color": "plain",
+        "cities": [{ "companies": ["MV"], "name": { "name": "Voronezh" } }],
         "hexes": ["I13"]
       },
       {
         "color": "plain",
-        "cities": [{ "companies": ["MB"] }],
+        "cities": [{ "companies": ["MB"], "name": { "name": "Smolensk" } }],
         "hexes": ["E9"]
       },
       {
         "color": "plain",
-        "cities": [{ "companies": ["Y"] }],
+        "cities": [{ "companies": ["Y"], "name": { "name": "Yuzovka" } }],
         "hexes": ["H18"]
       },
       {
         "color": "plain",
-        "cities": [{ "companies": ["V"] }],
+        "cities": [{ "companies": ["V"], "name": { "name": "Rostov" } }],
         "hexes": ["I19"]
       },
       {
         "color": "plain",
-        "cities": [{ "companies": ["TR"] }],
+        "cities": [{ "companies": ["TR"], "name": { "name": "Tsaritsyn" } }],
         "hexes": ["K17"]
       },
       {
@@ -1141,12 +1192,17 @@
       },
       {
         "color": "gray",
-        "cities": [{ "companies": ["E"] }],
+        "cities": [
+          {
+            "companies": ["E"],
+            "name": { "name": "Ekaterinburg", "offset": 60 }
+          }
+        ],
         "values": [
           { "value": 40, "angle": 300, "percent": 0.67 },
-          { "value": 80, "angle": 150, "percent": 0.7 }
+          { "value": 80, "angle": 150, "percent": 0.8 }
         ],
-        "names": [{ "name": "To Moscow", "x": 10, "y": -21 }],
+        "names": [{ "name": "To Moscow", "x": 9, "y": -24 }],
         "track": [{ "side": 1 }, { "side": 2 }, { "side": 3 }],
         "removeBorders": [1],
         "hexes": ["Q3"]
@@ -1182,7 +1238,8 @@
             "rotate": -60,
             "name": {
               "rotation": 180,
-              "reverse": true
+              "reverse": true,
+              "name": "Dünaburg"
             }
           }
         ],
@@ -1234,18 +1291,14 @@
       },
       {
         "color": "yellow",
-        "track": [
-          {
-            "type": "gentle",
-            "side": 1
-          }
-        ],
+        "track": [{ "type": "gentle", "side": 1 }],
         "values": [{ "value": 10, "angle": 240, "percent": 0.2 }],
         "towns": [
           {
             "rotate": -30,
             "angle": 60,
-            "percent": 0.288675
+            "percent": 0.288675,
+            "name": { "name": "Tver", "reverse": true, "rotation": 180 }
           }
         ],
         "hexes": ["G5"]
@@ -1266,6 +1319,7 @@
           { "type": "offboard", "side": 6 }
         ],
         "offBoardRevenue": {
+          "name": { "name": "Poland" },
           "revenues": [
             { "color": "yellow", "cost": 30 },
             { "color": "green", "cost": 40 },
@@ -1302,6 +1356,7 @@
           { "type": "offboard", "side": 6 }
         ],
         "offBoardRevenue": {
+          "name": { "name": "Romania" },
           "revenues": [
             { "color": "yellow", "cost": 10 },
             { "color": "green", "cost": 20 },
@@ -1332,6 +1387,7 @@
           { "type": "offboard", "side": 5 }
         ],
         "offBoardRevenue": {
+          "name": { "name": "Caucasus" },
           "revenues": [
             { "color": "yellow", "cost": 10 },
             { "color": "green", "cost": 20 },
@@ -1358,6 +1414,7 @@
           { "type": "offboard", "side": 3 }
         ],
         "offBoardRevenue": {
+          "name": { "name": "Central Asia" },
           "revenues": [
             { "color": "yellow", "cost": 10 },
             { "color": "green", "cost": 20 },
@@ -1377,37 +1434,47 @@
       {
         "color": "plain",
         "labels": [{ "label": "Y" }],
-        "cities": [{}],
+        "cities": [{ "name": { "name": "Astrakhan", "reverse": true } }],
         "hexes": ["M19"]
       },
       {
         "color": "plain",
         "labels": [{ "label": "Y" }],
-        "cities": [{ "companies": ["OK"] }],
+        "cities": [
+          { "companies": ["OK"], "name": { "name": "Odessa", "reverse": true } }
+        ],
         "hexes": ["D20"]
       },
       {
         "color": "plain",
         "labels": [{ "label": "Y" }],
-        "cities": [{ "companies": ["RO"] }],
+        "cities": [{ "companies": ["RO"], "name": { "name": "Riga" } }],
         "hexes": ["B4"]
       },
       {
         "color": "plain",
         "labels": [{ "label": "Y" }],
-        "cities": [{ "companies": ["SV"] }],
+        "cities": [
+          { "companies": ["SV"], "name": { "name": "Samara", "reverse": true } }
+        ],
         "hexes": ["N10"]
       },
       {
         "color": "plain",
         "labels": [{ "label": "Y" }, { "label": "Kh" }],
-        "cities": [{ "companies": ["KR"] }],
+        "cities": [
+          {
+            "companies": ["KR"],
+            "name": { "name": "Kharkov", "reverse": true }
+          }
+        ],
         "hexes": ["G15"]
       },
       {
         "color": "yellow",
         "values": [{ "value": 30, "angle": 300, "percent": 0.7 }],
         "labels": [{ "label": "K", "angle": 60, "percent": 0.7 }],
+        "names": [{ "name": "Kiev", "angle": 180, "percent": 0.7 }],
         "cities": [
           { "angle": 0, "percent": 0.5 },
           { "angle": 120, "percent": 0.5, "companies": ["KB"] },
@@ -1424,6 +1491,7 @@
         "color": "yellow",
         "values": [{ "value": 40, "angle": 300, "percent": 0.7 }],
         "labels": [{ "label": "M", "angle": 60, "percent": 0.7 }],
+        "names": [{ "name": "Moskow", "angle": 180, "percent": 0.7 }],
         "cities": [
           { "angle": 0, "percent": 0.5, "companies": ["MKu"] },
           { "angle": 120, "percent": 0.5, "companies": ["N"] },
@@ -1438,9 +1506,9 @@
       },
       {
         "color": "yellow",
-        "values": [{ "value": 30 }],
-        "labels": [{ "label": "Y" }],
-        "cities": [{}],
+        "values": [{ "value": 30, "angle": 210, "percent": 0.8 }],
+        "labels": [{ "label": "Y", "angle": 150, "percent": 0.8 }],
+        "cities": [{ "name": { "name": "Nizhnii Novgorod" } }],
         "terrain": [{ "type": "river", "cost": 20 }],
         "track": [{ "side": 2 }, { "side": 6 }],
         "hexes": ["K7"]
@@ -1450,8 +1518,13 @@
         "values": [{ "value": 40 }],
         "labels": [{ "label": "S" }],
         "cities": [
-          { "angle": 60, "percent": 0.5, "companies": ["SPW"] },
-          { "angle": 300, "percent": 0.5, "companies": ["RSR"] }
+          { "angle": 60, "percent": 0.55, "companies": ["SPW"] },
+          {
+            "angle": 300,
+            "percent": 0.55,
+            "companies": ["RSR"],
+            "name": { "name": "Saint Petersburg" }
+          }
         ],
         "track": [
           { "side": 2, "end": 0.25, "type": "straight" },
