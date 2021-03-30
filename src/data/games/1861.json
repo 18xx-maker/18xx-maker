@@ -861,14 +861,36 @@
         }
       ],
       "values": [{ "value": 50, "angle": 210, "percent": 0.8 }],
-      "labels": [{ "label": "StP", "angle": 90, "percent": 0.8 }],
-      "cities": [{ "size": 3 }],
+      "labels": [{ "label": "S", "angle": 90, "percent": 0.8 }],
+      "cities": [{ "size": 3, "companies": ["RSR"] }],
       "track": [{ "side": 1 }, { "side": 2 }, { "side": 3 }]
     },
     "801": 2,
     "911": 3,
 
-    "639": 1,
+    "639": {
+      "color": "gray",
+      "icons": [
+        {
+          "type": "1861",
+          "noCircle": true,
+          "angle": 150,
+          "percent": 0.95,
+          "width": 15
+        }
+      ],
+      "values": [{ "angle": 270, "percent": 0.9, "value": 100 }],
+      "labels": [{ "label": "M", "angle": 90, "percent": 0.9 }],
+      "cities": [{ "size": 4, "companies": ["RSR"] }],
+      "track": [
+        { "side": 1 },
+        { "side": 2 },
+        { "side": 3 },
+        { "side": 4 },
+        { "side": 5 },
+        { "side": 6 }
+      ]
+    },
     "640": {
       "color": "gray",
       "icons": [
@@ -906,8 +928,8 @@
         }
       ],
       "values": [{ "value": 60, "angle": 210, "percent": 0.85 }],
-      "labels": [{ "label": "StP", "angle": 90, "percent": 0.85 }],
-      "cities": [{ "size": 3 }],
+      "labels": [{ "label": "S", "angle": 90, "percent": 0.85 }],
+      "cities": [{ "size": 3, "companies": ["RSR"] }],
       "track": [{ "side": 1 }, { "side": 2 }, { "side": 3 }]
     }
   },

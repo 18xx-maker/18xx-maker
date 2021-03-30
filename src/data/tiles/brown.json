@@ -833,24 +833,10 @@
   "70": {
     "color": "brown",
     "track": [
-      {
-        "type": "sharp",
-        "side": 1
-      },
-      {
-        "type": "gentle",
-        "side": 1,
-        "cross": "under"
-      },
-      {
-        "type": "gentle",
-        "side": 2,
-        "cross": "over"
-      },
-      {
-        "type": "sharp",
-        "side": 3
-      }
+      { "type": "sharp", "side": 1 },
+      { "type": "gentle", "side": 1, "cross": "under" },
+      { "type": "gentle", "side": 2, "cross": "over" },
+      { "type": "sharp", "side": 3 }
     ]
   },
   "102": {
@@ -1143,41 +1129,15 @@
   },
   "122": {
     "color": "brown",
-    "values": [
-      {
-        "angle": 270,
-        "percent": 0.85,
-        "value": 80
-      }
-    ],
-    "labels": [
-      {
-        "label": "T",
-        "angle": 90,
-        "percent": 0.85
-      }
-    ],
+    "values": [{ "angle": 270, "percent": 0.85, "value": 80 }],
+    "labels": [{ "label": "T", "angle": 90, "percent": 0.85 }],
     "cities": [
-      {
-        "angle": 0,
-        "percent": 0.39,
-        "size": 2
-      },
-      {
-        "angle": 180,
-        "percent": 0.39,
-        "size": 2
-      }
+      { "angle": 0, "percent": 0.39, "size": 2 },
+      { "angle": 180, "percent": 0.39, "size": 2 }
     ],
     "track": [
-      {
-        "type": "sharp",
-        "side": 1
-      },
-      {
-        "type": "sharp",
-        "side": 3
-      }
+      { "type": "sharp", "side": 1 },
+      { "type": "sharp", "side": 3 }
     ]
   },
   "125": {
@@ -4600,32 +4560,10 @@
   },
   "641": {
     "color": "brown",
-    "values": [
-      {
-        "value": 50,
-        "angle": 210,
-        "percent": 0.8
-      }
-    ],
-    "labels": [
-      {
-        "label": "StP",
-        "angle": 90,
-        "percent": 0.8
-      }
-    ],
+    "values": [{ "value": 50, "angle": 210, "percent": 0.8 }],
+    "labels": [{ "label": "StP", "angle": 90, "percent": 0.8 }],
     "cities": [{ "size": 3 }],
-    "track": [
-      {
-        "side": 1
-      },
-      {
-        "side": 2
-      },
-      {
-        "side": 3
-      }
-    ]
+    "track": [{ "side": 1 }, { "side": 2 }, { "side": 3 }]
   },
   "646": {
     "color": "brown",

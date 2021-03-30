@@ -172,6 +172,8 @@ const Config = () => {
         <Typography variant="h5">Tiles</Typography>
         <Input name="tiles.id" label="Tile ID Location"
                description="This determines where to render the tile id"/>
+        <Input name="tiles.colorblind" label="Colorblind IDs"
+               description="This adds a colorblind safe shape indicating the tile color to the ID section of the tile" />
         <Input name="tiles.layout" label="Tile Sheet Layout"
                description="This determines how to lay out the tiles on the tile sheet. Offset is the style that tries to make as few cuts as possible. Individual just has each tile separate from the others, and die is meant from the custom die cutters that Deep Thought Games uses. Setting either die option overrides page size and the tile size option below."/>
         <Input name="tiles.width" label="Tile Width" dimension={true}

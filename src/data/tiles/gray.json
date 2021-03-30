@@ -432,39 +432,10 @@
   },
   "124": {
     "color": "gray",
-    "labels": [
-      {
-        "label": "T",
-        "angle": 90,
-        "percent": 0.9
-      }
-    ],
-    "values": [
-      {
-        "angle": 270,
-        "percent": 0.9,
-        "value": 100
-      }
-    ],
-    "cities": [
-      {
-        "size": 4
-      }
-    ],
-    "track": [
-      {
-        "side": 1
-      },
-      {
-        "side": 2
-      },
-      {
-        "side": 3
-      },
-      {
-        "side": 4
-      }
-    ]
+    "labels": [{ "label": "T", "angle": 90, "percent": 0.9 }],
+    "values": [{ "angle": 270, "percent": 0.9, "value": 100 }],
+    "cities": [{ "size": 4 }],
+    "track": [{ "side": 1 }, { "side": 2 }, { "side": 3 }, { "side": 4 }]
   },
   "131": {
     "color": "gray",

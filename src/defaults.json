@@ -30,7 +30,7 @@
     "treasury": true,
     "value": false
   },
-  "companySvgLogos": "none",
+  "companySvgLogos": "main",
   "overrideCompanies": "none",
   "overrideSelection": [],
   "maps": {
@@ -83,6 +83,7 @@
   },
   "tiles": {
     "id": "right",
+    "colorblind": false,
     "layout": "die",
     "width": 150,
     "mapWidth": 150,

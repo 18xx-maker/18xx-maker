@@ -5,16 +5,27 @@ import { useOrientation } from "../context/OrientationContext";
 
 import Color from "../util/Color";
 
+const colorblindSymbols = {
+  "yellow": "▼",
+  "green": "◼",
+  "brown": "●",
+  "gray": "✱"
+}
+
 const Id = ({ id, extra, bgColor, noID }) => {
   const { config } = useContext(ConfigContext);
   const rotation = useOrientation();
 
-  let fontSize = (id && id.length > 4) ? "9" : (id && id.length > 3) ? "10" : "12";
-  let extraFontSize = (extra && extra.length > 4) ? "9" : (extra && extra.length > 3) ? "10" : "12";
-
   if (noID || config.tiles.id === "none") {
     return null;
   }
+
+  if (config.tiles.colorblind) {
+    id = id + colorblindSymbols[bgColor];
+  }
+
+  let fontSize = (id && id.length > 4) ? "9" : (id && id.length > 3) ? "10" : "12";
+  let extraFontSize = (extra && extra.length > 4) ? "9" : (extra && extra.length > 3) ? "10" : "12";
 
   // Otherwise it's right or left
   let idAnchor = "end";
