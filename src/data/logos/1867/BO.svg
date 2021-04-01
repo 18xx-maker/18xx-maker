@@ -8,7 +8,7 @@
         <path id="BO-1867-a" d="M280.6 141.7c0 76.7-62.2 138.9-138.9 138.9S2.8 218.4 2.8 141.7 65 2.8 141.7 2.8 280.6 65 280.6 141.7z"/>
     </defs>
     <clipPath id="BO-1867-b">
-        <use overflow="visible" xlink:href="#a"/>
+        <use overflow="visible" xlink:href="#BO-1867-a"/>
     </clipPath>
     <g clip-path="url(#BO-1867-b)">
         <use width="51" height="51" x="-25.5" y="-25.5" overflow="visible" transform="matrix(7.7777 0 0 -7.7777 139.516 139.779)" xlink:href="#BO-1867-c"/>
