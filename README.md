@@ -15,6 +15,16 @@ App](https://github.com/facebookincubator/create-react-app). The application
 version is created using [Electron](https://www.electronjs.org/). The ui was
 made with [Material-UI](https://material-ui.com/).
 
+## License
+
+The code of this project is licensed under the [MIT License](LICENSE) but the
+games contained within are not covered by this. The games are presented with no
+license from 18xx-Maker with the permission of the publisher/designers. They
+have given us permission to include their game in this repo so that you can make
+print and play copies for your own personal use. If you need to inquire about
+the license for a particular game you need to get in contact with the publisher
+and/or designer.
+
 ## Chat
 
 We have an #18xx-maker channel in the [public 18xx
