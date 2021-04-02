@@ -166,6 +166,10 @@
     "rules": "Rules",
     "unload": "Unload Game"
   },
+  "gtg": {
+    "title": "Partnership with Grand Trunk Games",
+    "description": "<gtg>Grand Trunk Games</gtg> is a new publisher and a big supporter of print and play. They have decided to make all of their games available on 18xx-maker as the official print and play provider! If you are able to we highly recommend supporting this publisher by purchasing their excellent production of 1861/67 and the upcoming 1889!"
+  },
   "usage": {
     "title": "Usage",
     "description": "You can use this app in your browser at it's <public>main website</public> or <app>download it as an app</app> to use some of it's more advanced features. If you are working on prototyping your own game we highly recommend you download the app."

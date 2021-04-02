@@ -8,6 +8,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
+const gtgLogo = require(`../data/publishers/gtg.png`);
+
 const useStyles = makeStyles((theme) => ({
   page: {
     margin: theme.spacing(2, 0),
@@ -49,6 +51,12 @@ const Home = () => {
           <Trans i18nKey="wip.note"
                  components={{github: <Link target="_blank" rel="noreferrer" href="https://github.com/18xx-maker/18xx-maker/issues" /> }} />
         </Alert>
+        <Typography variant="h5">{t('gtg.title')}</Typography>
+        <Typography variant="body1">
+          <img alt={`Grand Trunk Games Logo`} src={gtgLogo} style={{"float": "left", "padding": "0.5em 1em 1em 0"}} />
+          <Trans i18nKey="gtg.description"
+                 components={{gtg: <Link target="_blank" rel="noreferrer" href="https://www.grandtrunkgames.com/" />}} />
+        </Typography>
         <Typography variant="h5">{t('usage.title')}</Typography>
         <Typography variant="body1">
           <Trans i18nKey="usage.description"
