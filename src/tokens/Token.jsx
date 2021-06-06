@@ -105,6 +105,7 @@ const Token = ({
     </clipPath>
   );
   let shapeMult = 1;
+  let scaling = width / 25;
 
   return (
     <Color>
@@ -113,7 +114,6 @@ const Token = ({
         // token / bar
         let textStroke = c(labelStrokeColor) || "none";
         let textFill = t(c(color) || p("white"));
-        let scaling = width / 25;
         let numbersOnlyScaling = 1.6;
         labelStrokeWidth = labelStrokeWidth ? labelStrokeWidth : "0.5";
 
@@ -124,8 +124,8 @@ const Token = ({
           // Draw inversed logos same as reserved
           color = "gray";
           let svg = logos[logo];
-          let start = -1 * width;
-          let size = 2 * width;
+          let size = defaultTo(width * 2, logoWidth * scaling);
+          let start = -1/2 * size;
           let Component = svg.Component;
           if (logo.includes("countries")) {
             shapes.push(
@@ -153,7 +153,7 @@ const Token = ({
 
         } else if (logo && logos[logo]) {
           let svg = logos[logo];
-          let size = logoWidth || 2 * width;
+          let size = defaultTo(width * 2, logoWidth * scaling);
           let start = -1/2 * size;
           let Component = svg.Component;
           if (logo.includes("countries")) {
@@ -498,7 +498,7 @@ const Token = ({
 
           if (label) {
             // Label and icon, position accordingly
-            let size = iconWidth || width;
+            let size = defaultTo(width * 2, iconWidth * scaling);
             let x = -0.5 * size;
             let y = iconY || -0.95 * size;
             let fSize;
@@ -544,7 +544,7 @@ const Token = ({
                          </text>
                         );
           } else {
-            let size = iconWidth || 1.5 * width;
+            let size = defaultTo(width * 2, logoWidth * scaling) * 0.75;
             let start = -0.5 * size;
             let y = iconY || start;
             content.push(<Component key="icon" className={classes.join(" ")}
