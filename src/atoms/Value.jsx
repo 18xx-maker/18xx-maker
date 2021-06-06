@@ -8,7 +8,7 @@ import RotateContext from "../context/RotateContext";
 
 import { multiDefaultTo } from "../util";
 
-const Value = ({ value, fontSize, fontWeight, fontFamily, color, textColor, shape, fixed, outerBorderColor, rotation }) => {
+const Value = ({ value, fontSize, fontWeight, fontFamily, color, textColor, shape, fixed, outerBorderColor, rotation, height, width }) => {
   const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
 
@@ -19,13 +19,20 @@ const Value = ({ value, fontSize, fontWeight, fontFamily, color, textColor, shap
   fontWeight = multiDefaultTo("bold", fontWeight, game.info.valueFontWeight);
   fontFamily = multiDefaultTo("sans-serif", fontFamily, game.info.valueFontFamily);
 
-  let ry;
-  if (ry_default) {
+  let rx, ry;
+  if (height !== undefined) {
+    ry = height/2;
+  } else if (ry_default) {
     ry = 14;
   } else {
     ry = fontSize * 3 / 4;
   }
-  let rx = length > 2 ? length * ry * 3 / 5 : ry;
+  if (width !== undefined)
+    rx = width/2;
+  else
+    rx = length > 2 ? length * ry * 3 / 5 : ry;
+  height = multiDefaultTo(ry*2, height);
+  width = multiDefaultTo(rx*2, width);
   color = color || "white";
   textColor = textColor || "black";
 
@@ -43,7 +50,7 @@ const Value = ({ value, fontSize, fontWeight, fontFamily, color, textColor, shap
                         transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}
                         stroke={p(outerBorderColor)} strokeWidth="7"
                         x={-rx} y={-ry}
-                        width={2*rx} height={2*ry} />
+                        width={width} height={height} />
                 );
               }
 
@@ -52,7 +59,7 @@ const Value = ({ value, fontSize, fontWeight, fontFamily, color, textColor, shap
                       transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}
                       fill={p(color)} stroke={p("black")} strokeWidth="2"
                       x={-rx} y={-ry}
-                      width={2*rx} height={2*ry} />
+                      width={width} height={height} />
               );
             } else if (shape !== "none") {
               if (outerBorderColor) {
