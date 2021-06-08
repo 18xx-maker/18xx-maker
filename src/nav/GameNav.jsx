@@ -290,7 +290,7 @@ const GameNav = () => {
           <ListItemText primary="Tiles"/>
         </ListItem>
         <ListItem button
-                  disabled={!game.companies}
+                  disabled={!game.companies && !game.tokens}
                   selected={!!matchPath(location.pathname, {path: '/games/:slug/tokens'})}
                   component={RouterLink}
                   to={`/games/${game.slug}/tokens`}>

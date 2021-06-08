@@ -209,7 +209,7 @@ const Tokens = () => {
   const { config } = useContext(ConfigContext);
   const { game } = useContext(GameContext);
 
-  if (!game.companies) {
+  if (!game.companies && !game.tokens) {
     return <Redirect to={`/games/${game.slug}/`} />;
   }
 

@@ -80,6 +80,8 @@ const Token = ({
 
   rotation, // Rotation of the token
   fixed, // Cancels all rotation
+
+  tokenShape, // main token shape - square or anything else is circle
 }) => {
   // Set a default width (smaller for destination tokens)
   width = width || (destination ? 15 : 25);
@@ -97,14 +99,27 @@ const Token = ({
   // Array of svg elements to add to the token
   let shapes = [];
 
+  let tokClip;
+  if (tokenShape === "square") {
+    let sqWidth = width * 2 + (bleed ? 10 : 0);
+    tokClip=(<rect
+      x={-0.5 * sqWidth} y={-0.5 * sqWidth}
+      width={sqWidth} height={sqWidth}
+    />);
+  } else {
+    tokClip=(<circle
+      cx="0" cy="0" r={width + (bleed ? 5 : 0)}
+    />);
+  }
   // Create a clipping object for this token
   let clipId = uuid.v4();
   let clip = (
     <clipPath id={clipId}>
-      <circle cx="0" cy="0" r={width + (bleed ? 5 : 0)} />
+      {tokClip}
     </clipPath>
   );
   let shapeMult = 1;
+  let scaling = width / 25;
 
   return (
     <Color>
@@ -113,19 +128,51 @@ const Token = ({
         // token / bar
         let textStroke = c(labelStrokeColor) || "none";
         let textFill = t(c(color) || p("white"));
-        let scaling = width / 25;
         let numbersOnlyScaling = 1.6;
         labelStrokeWidth = labelStrokeWidth ? labelStrokeWidth : "0.5";
 
         // Background fill to use for the main token circle object
-        let tokenFill = c(color) || p("white");
+        let tokenFill;
+        if(inverse) {
+          tokenFill = c("white");
+        } else if (logo && logos[logo]) {
+          tokenFill = c(iconColor) || p("white");
+        } else {
+          tokenFill = c(color) || p("white");
+        }
+
+        let tokInner, tokOuter;
+        if (tokenShape === "square") {
+          let sqWidth = width * 2 + (bleed ? 10 : 0);
+          tokInner=(<rect
+            x={-0.5 * sqWidth} y={-0.5 * sqWidth}
+            width={sqWidth} height={sqWidth}
+            fill={tokenFill} stroke="none"
+          />);
+          tokOuter=(<rect
+            x={-0.5 * sqWidth} y={-0.5 * sqWidth}
+            width={sqWidth} height={sqWidth}
+            fill="none" stroke={outline || "black"}
+            strokeWidth={outlineWidth || 1}
+          />);
+        } else {
+          tokInner=(<circle
+            cx="0" cy="0" r={width + (bleed ? 5 : 0)}
+            fill={tokenFill} stroke="none"
+          />);
+          tokOuter=(<circle
+            cx="0" cy="0" r={width + (bleed ? 5 : 0)}
+            fill="none" stroke={outline || "black"}
+            strokeWidth={outlineWidth || 1}
+          />);
+        }
 
         if(inverse && logo && logos[logo]) {
           // Draw inversed logos same as reserved
           color = "gray";
           let svg = logos[logo];
-          let start = -1 * width;
-          let size = 2 * width;
+          let size = defaultTo(width * 2, logoWidth * scaling);
+          let start = -1/2 * size;
           let Component = svg.Component;
           if (logo.includes("countries")) {
             shapes.push(
@@ -141,7 +188,6 @@ const Token = ({
                          height={size} width={size}/>
             );
           }
-          tokenFill = c("white");
           textStroke = "none";
           textFill = "none";
 
@@ -149,11 +195,10 @@ const Token = ({
           // Inverse tokens are always white with colored text
           textStroke = s(c(inverseLabelColor == null ? color : inverseLabelColor));
           textFill = c(inverseLabelColor == null ? color : inverseLabelColor);
-          tokenFill = c("white");
 
         } else if (logo && logos[logo]) {
           let svg = logos[logo];
-          let size = logoWidth || 2 * width;
+          let size = defaultTo(width * 2, logoWidth * scaling);
           let start = -1/2 * size;
           let Component = svg.Component;
           if (logo.includes("countries")) {
@@ -170,7 +215,6 @@ const Token = ({
                          height={size} width={size}/>
             );
           }
-          tokenFill = c(iconColor) || p("white");
           textStroke = "none";
           textFill = "none";
 
@@ -498,7 +542,7 @@ const Token = ({
 
           if (label) {
             // Label and icon, position accordingly
-            let size = iconWidth || width;
+            let size = defaultTo(width * 2, iconWidth * scaling);
             let x = -0.5 * size;
             let y = iconY || -0.95 * size;
             let fSize;
@@ -544,7 +588,7 @@ const Token = ({
                          </text>
                         );
           } else {
-            let size = iconWidth || 1.5 * width;
+            let size = defaultTo(width * 2, logoWidth * scaling) * 0.75;
             let start = -0.5 * size;
             let y = iconY || start;
             content.push(<Component key="icon" className={classes.join(" ")}
@@ -606,25 +650,12 @@ const Token = ({
             {clip}
             <g clipPath={`url(#${clipId})`}>
               <g transform={`rotate(${shapeAngle || 0})`}>
-                <circle
-                  cx="0"
-                  cy="0"
-                  r={width + (bleed ? 5 : 0)}
-                  fill={tokenFill}
-                  stroke="none"
-                />
+                {tokInner}
               </g>
               {shapes}
               {content}
             </g>
-            <circle
-              cx="0"
-              cy="0"
-              r={width + (bleed ? 5 : 0)}
-              fill="none"
-              stroke={outline || "black"}
-              strokeWidth={outlineWidth || 1}
-            />
+            {tokOuter}
           </g>
           )}
           </CityRotateContext.Consumer>
