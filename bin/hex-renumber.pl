@@ -16,13 +16,18 @@ use Getopt::Std;
 # This has all the good intentions of caring about command line options,
 # but it really only cares about -l or not.
 %options = ();
-getopts("ln", \%options);
+getopts("lnd", \%options);
 
 # For the magic increment to work, it needs to do the increment
 # outside of the regex's arithmetic context.
 sub succ {
   $str = @_[0];
   return ++$str;
+}
+
+sub dec {
+  $str = @_[0];
+  return --$str;
 }
 
 while (<>) {
@@ -33,12 +38,22 @@ while (<>) {
 
   if ($inmap) {
     if ($options{l}) {
-      # increment the letter in "A12" to "B12"
-      $_ =~ s/"([A-Z]+)(\d+)"/'"' . succ($1) . $2 . '"'/ge;
+      if ($options{d}) {
+        # decrement the letter in "B12" to "A12"
+        $_ =~ s/"([A-Z]+)(\d+)"/'"' . dec($1) . $2 . '"'/ge;
+      } else {
+        # increment the letter in "A12" to "B12"
+        $_ =~ s/"([A-Z]+)(\d+)"/'"' . succ($1) . $2 . '"'/ge;
+      }
     } else {
-      # increment the number in "A12" to "A13"
-      # note that the increment operator ++ on either side of the $2 doesn't work here
-      $_ =~ s/"([A-Z]+)(\d+)"/'"' . $1 . ($2+1) . '"'/ge;
+      if ($options{d}) {
+        # decrement the number in "A12" to "A11"
+        $_ =~ s/"([A-Z]+)(\d+)"/'"' . $1 . ($2-1) . '"'/ge;
+      } else {
+        # increment the number in "A12" to "A13"
+        # note that the increment operator ++ on either side of the $2 doesn't work here
+        $_ =~ s/"([A-Z]+)(\d+)"/'"' . $1 . ($2+1) . '"'/ge;
+      }
     }
 
     # crudely try and determine where the "map" block ends
