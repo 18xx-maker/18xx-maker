@@ -80,17 +80,23 @@ const server = app.listen(9000);
 
   let mapData = getMapData(game, config.coords, 100, 0);
 
+  // Test games:
+  // 1861: Horizontal with valid A1
+  // 1858: Horizontal with invalid A1
+  // 1871BC: Veritcal with valid A1
+  // 18LA: Veritical with invalid A1
+
   let json = {
     bname,
     version,
     author,
     board: {
       imgLoc: `images/${id}/Map.png`,
-      xStart: mapData.horizontal && mapData.a1Valid === false ? 0 : 50,
-      orientation: game.info.orientation === "horizontal" ? "F" : "P",
-      xStep: game.info.orientation === "horizontal" ? 87 : 50,
+      xStart: mapData.horizontal ? 50 : mapData.a1Valid === false ? 0 : 50,
+      orientation: mapData.horizontal ? "F" : "P",
+      xStep: mapData.horizontal ? 87 : 50,
       yStart: 50,
-      yStep: game.info.orientation === "horizontal" ? 50 : 87,
+      yStep: mapData.horizontal ? 50 : 87,
     },
     market: {
       imgLoc: `images/${id}/Market.png`,
