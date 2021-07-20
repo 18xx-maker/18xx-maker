@@ -134,6 +134,7 @@ const Charters = () => {
       <Charter
         game={game.info.title}
         name={company.name}
+        subName={company.subName}
         abbrev={company.abbrev}
         logo={company.logo}
         color={company.color}

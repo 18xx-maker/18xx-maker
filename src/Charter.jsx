@@ -15,6 +15,7 @@ import map from "ramda/src/map";
 
 const Charter = ({
   name,
+  subtext,
   abbrev,
   logo,
   minor,
@@ -44,7 +45,11 @@ const Charter = ({
   fontWeight = multiDefaultTo("bold", fontWeight);
   fontStyle = multiDefaultTo("normal", fontStyle);
   let lineHeight = fontSize * 1.1;
- 
+
+  // Hide section labels for things we don't want on a company
+  const showTrains = company.trains !== false;
+  const showTreasury = company.treasury !== false;
+
   let tokenSpots = [];
   if (tokens) {
     tokenSpots = addIndex(map)((label, index) => {
@@ -127,6 +132,16 @@ const Charter = ({
                      }}>
                        {name}
                      </div>
+                     {subtext && (
+                       <div style={{ fontFamily:`${fontFamily}`,
+                                     fontSize:`${fontSize/2}pt`,
+                                     lineHeight:`${lineHeight}pt`,
+                                     fontWeight:`${fontWeight}`,
+                                     fontStyle:`${fontStyle}`
+                                   }}>
+                         {subtext}
+                       </div>
+                     )}
                 </div>
                 {charterStyle === "color" && (
                   <div className="charter__logo">
@@ -140,10 +155,12 @@ const Charter = ({
                   </div>
                 )}
                 {false && <div className="charter__game">{game}</div>}
-                <div className="charter__tokens">
-                  {halfWidth && "Tokens"}
-                  {tokenSpots}
-                </div>
+                {(tokenSpots.length > 0) && (
+                  <div className="charter__tokens">
+                    {halfWidth && "Tokens"}
+                    {tokenSpots}
+                  </div>
+                )}
                 {halfWidth && (
                   <div className="charter__assets">
                     Assets
@@ -154,7 +171,7 @@ const Charter = ({
                 )}
                 {halfWidth || (
                   <div className="charter__trains">
-                    Trains
+                    {showTrains && "Trains"}
                     {showPhaseChart && (
                       <div className="charter__phase">
                         <Phase phases={phases}
@@ -167,7 +184,7 @@ const Charter = ({
                 )}
                 {halfWidth || (
                   <div className="charter__treasury">
-                    Treasury
+                    {showTreasury && "Treasury"}
                     {company.capital && (
                       <div className="charter__capital">
                         <Currency value={company.capital} type="treasury"/>

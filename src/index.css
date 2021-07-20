@@ -350,6 +350,14 @@ svg {
   white-space: nowrap;
 }
 
+.charter__phase td.phase__list {
+  padding: 0
+}
+
+.charter__phase td.phase__list li {
+  padding: 0.03in 0.03in;
+}
+
 .charter__phase td.phase__notes {
   text-align: left;
   white-space: normal;

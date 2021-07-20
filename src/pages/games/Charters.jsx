@@ -162,6 +162,7 @@ const Charters = () => {
           game={game.info.title}
           key={`${index}-${company.abbrev}`}
           name={company.name}
+          subtext={company.subtext}
           abbrev={company.abbrev}
           logo={company.logo}
           color={company.color}
@@ -207,6 +208,7 @@ const Charters = () => {
               game={game.info.title}
               key={`${index}-${company.abbrev}`}
               name={company.name}
+              subtext={company.subtext}
               abbrev={company.abbrev}
               logo={company.logo}
               color={company.color}
@@ -239,6 +241,7 @@ const Charters = () => {
             game={game.info.title}
             key={`${index}-${company.abbrev}`}
             name={company.name}
+            subtext={company.subtext}
             abbrev={company.abbrev}
             logo={company.logo}
             color={company.color}

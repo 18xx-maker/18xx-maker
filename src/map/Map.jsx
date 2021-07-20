@@ -9,6 +9,7 @@ import Borders from "./Borders";
 import Lines from "./Lines";
 import Title from "./Title";
 
+import MapMarket from "./MapMarket";
 import MapPlayers from "./MapPlayers";
 import MapRoundTracker from "./MapRoundTracker";
 
@@ -50,6 +51,7 @@ const Map = ({ name, game, config, variation }) => {
       {mapHexes}
       <Coordinates {...data}/>
       {showTitle && <Title game={game} variation={variation} hexWidth={hexWidth} />}
+      <MapMarket mapMarket={data.map.market} hexWidth={hexWidth} />
       <MapRoundTracker roundTracker={data.map.roundTracker} hexWidth={hexWidth} />
       <MapPlayers players={data.map.players} hexWidth={hexWidth} />
       <Lines data={data} />
