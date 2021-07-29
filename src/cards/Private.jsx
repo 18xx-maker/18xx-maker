@@ -126,7 +126,7 @@ const Private = (props) => {
   let revenueNode = null;
   if (is(Array, revenue)) {
     revenueNode = intersperse(<span key="span">/</span>, map(r => <Currency key={r} value={r} type="private" />, revenue));
-  } else if (is(Number, revenue)) {
+  } else {
     revenueNode = <Currency value={revenue} type="private" />;
   }
 
