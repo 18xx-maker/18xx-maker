@@ -76,7 +76,11 @@ const Token = ({
   
   halves, // Colors for halves shape
   quarters, // Colors for quarters shape
+  sexies, // Colors for sexies shape
+  sunrise, // Colors for sunrise shape
   square, // Draw a square of a certain color on the token
+  hexagram, // Colors for dual triangle hexagram shape
+
 
   rotation, // Rotation of the token
   fixed, // Cancels all rotation
@@ -260,6 +264,57 @@ const Token = ({
                         </g>);
           }
 
+          if (sunrise) {
+            shapes.push(<g key="sunrise" transform={`rotate(${shapeAngle || 0})`}>
+                          <rect key="upper" x="-50" y="-50" width="100" height="50"
+                                fill={c(sunrise[1])}
+                                clipPath={`url(#${clipId})`}/>
+                          <rect key="lower" x="-50" y="0" width="100" height="50"
+                                fill={c(sunrise[0])}
+                                clipPath={`url(#${clipId})`}/>
+                          <polygon key="sunrise-1" points="0 0 35.35534 -35.35534 12.94095 -49.29629"
+                                fill={c(sunrise[2])}
+                                clipPath={`url(#${clipId})`}/>
+                          <polygon key="sunrise-2" points="0 0 -35.35534 -35.35534 -12.94095 -49.29629"
+                                fill={c(sunrise[2])}
+                                clipPath={`url(#${clipId})`}/>
+                        </g>);
+          }
+
+          if (sexies) {
+            shapes.push(<g key="sexies" transform={`rotate(${shapeAngle || 0})`}>
+                          <polygon key="sexies-1" points="0 0 50 0 25 43.30127"
+                                fill={c(sexies[0])}
+                                clipPath={`url(#${clipId})`}/>
+                          <polygon key="sexies-2" points="0 0 25 43.30127 -25 43.30127"
+                                fill={c(sexies[1])}
+                                clipPath={`url(#${clipId})`}/>
+                          <polygon key="sexies-3" points="0 0 -25 43.30127 -50 0"
+                                fill={c(sexies[0])}
+                                clipPath={`url(#${clipId})`}/>
+                          <polygon key="sexies-4" points="0 0 -50 0 -25 -43.30127"
+                                fill={c(sexies[1])}
+                                clipPath={`url(#${clipId})`}/>
+                          <polygon key="sexies-5" points="0 0 -25 -43.30127 25 -43.30127"
+                                fill={c(sexies[0])}
+                                clipPath={`url(#${clipId})`}/>
+                          <polygon key="sexies-6" points="0 0 25 -43.30127 50 0"
+                                fill={c(sexies[1])}
+                                clipPath={`url(#${clipId})`}/>
+                        </g>);
+          }
+
+          if (hexagram) {
+            shapes.push(<g key="hexagram" transform={`rotate(${shapeAngle || 0})`}>
+                          <polygon points="19.91858 -11.5 -19.91858 -11.5 0 23"
+                                fill={c(hexagram[1])}
+                                clipPath={`url(#${clipId})`}/>
+                          <polygon points="19.91858 11.5 -19.91858 11.5 0 -23"
+                                fill={c(hexagram[0])}
+                                clipPath={`url(#${clipId})`}/>
+                        </g>);
+          }
+
           if (spiral) {
             spiralWidth = (width / 25 * spiralWidth) || (width / 8);
             spiralDistance = (width / 25 * spiralDistance) || (width * 0.33);
@@ -353,7 +408,7 @@ const Token = ({
 
           if (bar) {
             barBorderColor = barBorderColor || "black";
-            let height = (width / 25 * barHeight) || (width * 0.90);
+            let height = (width / 25 * barHeight) || (width * 0.75);
             let y = height * -0.5;
 
             shapes.push(
@@ -600,7 +655,7 @@ const Token = ({
           if (fontSize) {
             fSize = fontSize * scaling;
           } else {
-            fSize = width * .9 * shapeMult;
+            fSize = width * .7 * shapeMult;
             if (label.length > 5) {
               fSize *= 0.6;
             } else if (label.length > 4) {
