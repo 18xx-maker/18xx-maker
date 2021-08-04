@@ -3,22 +3,22 @@
     <path fill="#fff" d="M0 150h510v75H0z"/>
     <path fill="#cf2027" d="M0 175h510v25H0z"/>
     <g fill="#f7d116" transform="translate(191.25 187.5)">
-        <g id="s2">
-            <g id="s" transform="translate(0 -75)">
-                <g id="c">
-                    <path id="t" d="M0-15V0h7.5" transform="rotate(18 0 -15)"/>
-                    <use transform="scale(-1 1)" xlink:href="#t"/>
+        <g id="countries-cv-s2">
+            <g id="countries-cv-s" transform="translate(0 -75)">
+                <g id="countries-cv-c">
+                    <path id="countries-cv-t" d="M0-15V0h7.5" transform="rotate(18 0 -15)"/>
+                    <use transform="scale(-1 1)" xlink:href="#countries-cv-t"/>
                 </g>
-                <use transform="rotate(72)" xlink:href="#c"/>
-                <use transform="rotate(144)" xlink:href="#c"/>
-                <use transform="rotate(216)" xlink:href="#c"/>
-                <use transform="rotate(288)" xlink:href="#c"/>
+                <use transform="rotate(72)" xlink:href="#countries-cv-c"/>
+                <use transform="rotate(144)" xlink:href="#countries-cv-c"/>
+                <use transform="rotate(216)" xlink:href="#countries-cv-c"/>
+                <use transform="rotate(288)" xlink:href="#countries-cv-c"/>
             </g>
-            <use y="150" xlink:href="#s"/>
+            <use y="150" xlink:href="#countries-cv-s"/>
         </g>
-        <use transform="rotate(72)" xlink:href="#s2"/>
-        <use transform="rotate(144)" xlink:href="#s2"/>
-        <use transform="rotate(216)" xlink:href="#s2"/>
-        <use transform="rotate(288)" xlink:href="#s2"/>
+        <use transform="rotate(72)" xlink:href="#countries-cv-s2"/>
+        <use transform="rotate(144)" xlink:href="#countries-cv-s2"/>
+        <use transform="rotate(216)" xlink:href="#countries-cv-s2"/>
+        <use transform="rotate(288)" xlink:href="#countries-cv-s2"/>
     </g>
 </svg>

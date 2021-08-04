@@ -3,13 +3,13 @@
     <path fill="#ce1126" d="M30 0h30v60H30z"/>
     <path fill="#fcd116" d="M60 0h30v60H60z"/>
     <g fill="#fcd116" transform="translate(45 30)">
-        <g id="c">
-            <path id="t" d="M0-8v8h4z" transform="rotate(18 0 -8)"/>
-            <use transform="scale(-1 1)" xlink:href="#t"/>
+        <g id="countries-cm-c">
+            <path id="countries-cm-t" d="M0-8v8h4z" transform="rotate(18 0 -8)"/>
+            <use transform="scale(-1 1)" xlink:href="#countries-cm-t"/>
         </g>
-        <use transform="rotate(72)" xlink:href="#c"/>
-        <use transform="rotate(144)" xlink:href="#c"/>
-        <use transform="rotate(216)" xlink:href="#c"/>
-        <use transform="rotate(288)" xlink:href="#c"/>
+        <use transform="rotate(72)" xlink:href="#countries-cm-c"/>
+        <use transform="rotate(144)" xlink:href="#countries-cm-c"/>
+        <use transform="rotate(216)" xlink:href="#countries-cm-c"/>
+        <use transform="rotate(288)" xlink:href="#countries-cm-c"/>
     </g>
 </svg>

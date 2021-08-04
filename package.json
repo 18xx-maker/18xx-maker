@@ -145,8 +145,7 @@
     "sass": "^1.43.4",
     "sass-loader": "^8.0.2",
     "sharp": "^0.29.2",
-    "svgo": "^1.2.2",
-    "svgo-unique-id": "^1.0.0",
+    "svgo": "^2.3.1",
     "tinycolor2": "^1.4.1",
     "uuid": "^3.3.2",
     "wait-on": "^5.0.0"
