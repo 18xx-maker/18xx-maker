@@ -27,7 +27,7 @@
   box-sizing: border-box;
   position: relative;
   width: 100%;
-  padding: 0 0.125in;
+  padding: 0 1in 0 0.125in;
   text-align: left;
   left: 0;
   line-height: 0.105in;
@@ -71,7 +71,7 @@
 
 .private__players {
   position: absolute;
-  bottom: 0.25in;
+  bottom: 0.16in;
   right: 0;
   padding: 0.125in;
   line-height: 0.25in;
@@ -93,14 +93,16 @@
 .private__tile,
 .private__icon,
 .private__company {
-  float: left;
-  padding: 0 1em 7em 0;
-  width: 0.3in;
-  height: 0.3in;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.40in 0.125in 1em 0.5em;
+  width: 0.75in;
+  height: 0.75in;
 
   svg {
-    width: 0.3in;
-    height: 0.3in;
+    width: 0.75in;
+    height: 0.75in;
   }
 }
 
