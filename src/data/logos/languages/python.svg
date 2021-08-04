@@ -1,18 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="290.00031" height="288.95874" version="1.0" viewBox="0 0 290 290">
-    <defs>
-        <linearGradient id="linearGradient11301">
-            <stop offset="0" stop-color="#ffe052"/>
-            <stop offset="1" stop-color="#ffc331"/>
-        </linearGradient>
-        <linearGradient id="linearGradient11307" x1="89.136749" x2="147.77737" y1="111.92053" y2="168.1012" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient11301"/>
-        <linearGradient id="linearGradient9515">
-            <stop offset="0" stop-color="#387eb8"/>
-            <stop offset="1" stop-color="#366994"/>
-        </linearGradient>
-        <linearGradient id="linearGradient9521" x1="55.549179" x2="110.14919" y1="77.070274" y2="131.85291" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient9515"/>
-    </defs>
-    <g color="#000">
-        <path fill="url(#linearGradient9521)" d="M99.75 67.46875C71.718268 67.468752 73.46875 79.625 73.46875 79.625L73.5 92.21875h26.75V96H62.875s-17.9375-2.034276-17.9375 26.25c-.000002 28.28427 15.65625 27.28125 15.65625 27.28125h9.34375v-13.125S69.433848 120.75 85.34375 120.75H111.875s14.90625.24096 14.90625-14.40625V82.125c0-.000002 2.26318-14.65625-27.03125-14.65625zM85 75.9375c2.661429-.000002 4.8125 2.151071 4.8125 4.8125.000002 2.661429-2.151071 4.8125-4.8125 4.8125-2.661429.000002-4.8125-2.151071-4.8125-4.8125-.000002-2.661429 2.151071-4.8125 4.8125-4.8125z" overflow="visible" transform="translate(-36.393047 -77.202773) scale(1.81125)" style="marker:none"/>
-        <path fill="url(#linearGradient11307)" d="M100.5461 177.31485c28.03174 0 26.28125-12.15625 26.28125-12.15625l-.0312-12.59375h-26.75v-3.78125h37.375s17.9375 2.03427 17.9375-26.25001c.00001-28.284267-15.65625-27.281247-15.65625-27.281247h-9.34375v13.124997s.50366 15.65625-15.40625 15.65625H88.421098s-14.90625-.24096-14.90625 14.40626v24.21875s-2.26318 14.65625 27.031252 14.65625zm14.75-8.46875c-2.66143 0-4.8125-2.15107-4.8125-4.8125s2.15107-4.8125 4.8125-4.8125 4.8125 2.15107 4.8125 4.8125c.00001 2.66143-2.15107 4.8125-4.8125 4.8125z" overflow="visible" transform="translate(-36.393047 -77.202773) scale(1.81125)" style="marker:none"/>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="290" height="288.959" version="1.0" viewBox="0 0 290 290">
+  <defs>
+    <linearGradient id="linearGradient11301">
+      <stop offset="0" stop-color="#ffe052"/>
+      <stop offset="1" stop-color="#ffc331"/>
+    </linearGradient>
+    <linearGradient id="linearGradient11307" x1="89.137" x2="147.777" y1="111.921" y2="168.101" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient11301"/>
+    <linearGradient id="linearGradient9515">
+      <stop offset="0" stop-color="#387eb8"/>
+      <stop offset="1" stop-color="#366994"/>
+    </linearGradient>
+    <linearGradient id="linearGradient9521" x1="55.549" x2="110.149" y1="77.07" y2="131.853" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient9515"/>
+  </defs>
+  <g color="#000">
+    <path fill="url(#linearGradient9521)" style="marker:none" d="M99.75 67.469c-28.032 0-26.281 12.156-26.281 12.156l.031 12.594h26.75V96H62.875s-17.938-2.034-17.938 26.25 15.657 27.281 15.657 27.281h9.343v-13.125s-.503-15.656 15.407-15.656h26.531s14.906.241 14.906-14.406V82.125s2.263-14.656-27.031-14.656zM85 75.938a4.808 4.808 0 0 1 4.813 4.812A4.808 4.808 0 0 1 85 85.563a4.808 4.808 0 0 1-4.813-4.813A4.808 4.808 0 0 1 85 75.937z" overflow="visible" transform="translate(-36.393 -77.203) scale(1.81125)"/>
+    <path fill="url(#linearGradient11307)" style="marker:none" d="M100.546 177.315c28.032 0 26.281-12.156 26.281-12.156l-.03-12.594h-26.75v-3.781h37.374s17.938 2.034 17.938-26.25c0-28.285-15.657-27.282-15.657-27.282h-9.343v13.125s.503 15.657-15.407 15.657h-26.53s-14.907-.241-14.907 14.406v24.219s-2.263 14.656 27.031 14.656zm14.75-8.469c-2.661 0-4.812-2.151-4.812-4.812s2.15-4.813 4.812-4.813 4.813 2.151 4.813 4.813a4.808 4.808 0 0 1-4.813 4.812z" overflow="visible" transform="translate(-36.393 -77.203) scale(1.81125)"/>
+  </g>
 </svg>
