@@ -305,9 +305,9 @@ const Token = ({
           }
 
           if (hexagram) {
-            let hexagramTop = width * 0.92
-            let hexagramSide = width * 0.7967432
-            let hexagramBottom = width * 0.46
+            let hexagramTop = scaling * 23
+            let hexagramSide = scaling * 19.91858
+            let hexagramBottom = scaling * 11.5
 
             shapes.push(<g key="hexagram" transform={`rotate(${shapeAngle || 0})`}>
                           <polygon points={`${hexagramSide} -${hexagramBottom} -${hexagramSide} -${hexagramBottom} 0 ${hexagramTop}`}
