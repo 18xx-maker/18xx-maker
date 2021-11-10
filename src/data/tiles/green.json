@@ -3566,9 +3566,7 @@
         "percent": 0.75
       }
     ],
-    "cities": [
-      {}
-    ],
+    "cities": [{}],
     "track": [
       {
         "path": "m -73.6121593217 -42.5 L -10 -42.5",
@@ -3920,7 +3918,7 @@
         "value": 20
       }
     ],
-      "labels": [
+    "labels": [
       {
         "label": "YY",
         "angle": 90,
@@ -3962,7 +3960,7 @@
         "value": 20
       }
     ],
-      "labels": [
+    "labels": [
       {
         "label": "YY",
         "angle": 70,
@@ -3999,7 +3997,7 @@
         "value": 80
       }
     ],
-      "labels": [
+    "labels": [
       {
         "label": "P",
         "angle": 150,
@@ -5471,12 +5469,9 @@
       }
     ],
     "cities": [
-      {"angle": -30,
-       "percent": 0.5},
-       {"angle": 60,
-       "percent": 0.575},
-      {"angle": 150,
-       "percent": 0.5}
+      { "angle": -30, "percent": 0.5 },
+      { "angle": 60, "percent": 0.575 },
+      { "angle": 150, "percent": 0.5 }
     ],
     "track": [
       {
@@ -6156,9 +6151,7 @@
         "percent": 0.8
       }
     ],
-    "cities": [
-      {}
-    ],
+    "cities": [{}],
     "track": [
       {
         "side": 1
@@ -6412,7 +6405,7 @@
       {
         "angle": 322.5,
         "percent": 0.75,
-        "cost": "R40",
+        "cost": 40,
         "size": "tiny"
       }
     ],
@@ -9409,9 +9402,7 @@
         "value": 20
       }
     ],
-    "centerTowns": [
-      {}
-    ],
+    "centerTowns": [{}],
     "borders": [
       {
         "side": 1,
@@ -9494,9 +9485,7 @@
         "value": 20
       }
     ],
-    "centerTowns": [
-      {}
-    ],
+    "centerTowns": [{}],
     "borders": [
       {
         "side": 1,

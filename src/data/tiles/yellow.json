@@ -601,9 +601,7 @@
   },
   "148": {
     "color": "yellow",
-    "cities": [
-      {}
-    ],
+    "cities": [{}],
     "labels": [
       {
         "label": "X",
@@ -659,9 +657,7 @@
   },
   "150": {
     "color": "yellow",
-    "cities": [
-      {}
-    ],
+    "cities": [{}],
     "labels": [
       {
         "label": "X",
@@ -714,7 +710,7 @@
     ],
     "towns": [
       {
-       "percent": 0.2
+        "percent": 0.2
       }
     ],
     "track": [
@@ -759,7 +755,7 @@
     "towns": [
       {
         "angle": 180,
-       "percent": 0.2
+        "percent": 0.2
       }
     ],
     "track": [
@@ -1526,7 +1522,7 @@
     ],
     "cities": [
       {
-       "percent": 0.55
+        "percent": 0.55
       },
       {
         "angle": 150,
@@ -1572,8 +1568,8 @@
     ],
     "cities": [
       {
-       "angle": 60,
-       "percent": 0.55
+        "angle": 60,
+        "percent": 0.55
       },
       {
         "angle": 150,
@@ -1630,9 +1626,7 @@
         "rotation": 30
       }
     ],
-     "centerTowns": [
-      {}   
-    ],
+    "centerTowns": [{}],
     "icons": [
       {
         "type": "port",
@@ -1902,7 +1896,7 @@
     ],
     "terrain": [
       {
-        "cost": "K40",
+        "cost": 40,
         "size": "tiny",
         "x": -50,
         "y": -20
@@ -2110,7 +2104,7 @@
         "value": 30
       }
     ],
-      "labels": [
+    "labels": [
       {
         "label": "Bu",
         "angle": 210,
@@ -2188,7 +2182,6 @@
   "581|L": {
     "color": "yellow",
     "values": [
-               
       {
         "angle": -120,
         "percent": 0.2,
@@ -3044,7 +3037,6 @@
         "side": 2,
         "type": "straight",
         "end": 0.25
-        
       },
       {
         "side": 3,
@@ -3224,9 +3216,7 @@
         "value": 20
       }
     ],
-    "centerTowns": [
-      {}
-    ],
+    "centerTowns": [{}],
     "track": [
       {
         "type": "straight",

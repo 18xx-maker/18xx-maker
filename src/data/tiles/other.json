@@ -267,30 +267,5 @@
         "gaugeColor": "red"
       }
     ]
-  },
-  "Irish Mail": {
-    "color": "offboard",
-    "offBoardRevenue": {
-    "revenues": [
-      {
-        "color": "green",
-        "cost": "20"
-      },
-      {
-        "color": "brown",
-        "cost": "50"
-      },
-      {
-        "color": "gray",
-        "cost": "0"
-      }
-    ]
-    },
-    "track": [
-      {
-        "type": "offboard",
-        "side": 6
-      }
-    ]
   }
 }
