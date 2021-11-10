@@ -1,0 +1,44 @@
+on: [pull_request]
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        node_version:
+          - 12
+          - 14
+          - 16
+        architecture:
+          - x64
+    name: Test - Node v${{ matrix.node_version }} on ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup node
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node_version }}
+        architecture: ${{ matrix.architecture }}
+        cache: 'yarn'
+    - run: yarn
+    - run: yarn generate
+    - run: yarn validate
+      continue-on-error: true
+    - run: yarn react:test
+  build:
+    needs: test
+    runs-on: macos-latest
+    name: Build webapp
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16
+        cache: 'yarn'
+    - run: yarn
+    - run: yarn generate
+    - run: yarn react:build

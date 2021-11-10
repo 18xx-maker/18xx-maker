@@ -11,7 +11,7 @@
   "main": "electron/index.js",
   "scripts": {
     "b18": "node ./bin/b18.js",
-    "build": "yarn generate && react-scripts build",
+    "build": "run-s generate react:build",
     "build:electron": "cross-env PUBLIC_URL=. yarn build",
     "clean": "node ./bin/clean.js",
     "generate": "run-p generate:config generate:games generate:icons generate:logos generate:themes",
@@ -22,6 +22,8 @@
     "generate:themes": "node ./bin/generateThemeIndexes.js",
     "package": "electron-builder build -mwl -p onTagOrDraft",
     "print": "node ./bin/print.js",
+    "react:build": "react-scripts build",
+    "react:test": "react-scripts test",
     "release": "run-s build:electron package",
     "start": "run-p generate:config watch:games watch:icons watch:logos watch:themes start:react",
     "start:react": "react-scripts start",
@@ -31,7 +33,7 @@
     "svgo": "yarn svgo:icons && yarn svgo:logos",
     "svgo:icons": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/icons",
     "svgo:logos": "svgo --config=./.svgo.yml --pretty --multipass -p 6 -r -f src/data/logos",
-    "test": "yarn generate && yarn validate && react-scripts test",
+    "test": "run-s generate validate react:test",
     "validate": "npm-run-all validate:config validate:games validate:themes validate:tiles -c -p --aggregate-output",
     "validate:config": "18xx-schemas src/defaults.json",
     "validate:games": "18xx-schemas src/data/games/**/*.json",
@@ -99,7 +101,8 @@
     "chokidar": "^3.4.0",
     "electron-is-dev": "^1.2.0",
     "electron-updater": "^4.3.1",
-    "onchange": "^7.0.2"
+    "onchange": "^7.0.2",
+    "sass": "^1.43.4"
   },
   "devDependencies": {
     "@18xx-maker/schemas": "^5.8.0",
@@ -124,7 +127,6 @@
     "i18next-browser-languagedetector": "^4.2.0",
     "i18next-http-backend": "^1.0.13",
     "lint-staged": "^10.2.7",
-    "node-sass": "^4.13.0",
     "npm-run-all": "^4.1.5",
     "number-to-words": "^1.2.4",
     "object-hash": "^1.3.1",
@@ -142,7 +144,7 @@
     "redux": "^4.0.0",
     "redux-localstorage": "^0.4.1",
     "sass-loader": "^8.0.2",
-    "sharp": "^0.24.0",
+    "sharp": "^0.29.2",
     "svgo": "^1.2.2",
     "svgo-unique-id": "^1.0.0",
     "tinycolor2": "^1.4.1",
