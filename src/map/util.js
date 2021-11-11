@@ -15,6 +15,7 @@ import prop from "ramda/src/prop";
 import reduce from "ramda/src/reduce";
 import reject from "ramda/src/reject";
 import splitEvery from "ramda/src/splitEvery";
+import without from "ramda/src/without";
 import zipWith from "ramda/src/zipWith";
 
 export const HEX_RATIO = 0.57735;
@@ -403,7 +404,11 @@ export const getMapData = (game, coords, hexWidth, variation) => {
 
     borderTexts = concat(game.map[gameMap.copy].borderTexts || [], borderTexts);
 
-    borders = concat(game.map[gameMap.copy].borders || [], borders);
+    let copyBorders = game.map[gameMap.copy].borders || [];
+    borders = concat(
+      without(gameMap.removeBorders || [], copyBorders),
+      borders
+    );
 
     lines = concat(game.map[gameMap.copy].lines || [], lines);
   }
