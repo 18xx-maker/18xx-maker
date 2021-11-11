@@ -23,6 +23,10 @@ jobs:
         node-version: ${{ matrix.node_version }}
         architecture: ${{ matrix.architecture }}
         cache: 'yarn'
+    - uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: ${{ matrix.os }}-${{ matrix.node_version }}-modules-${{ hashFiles('**/yarn.lock') }}
     - run: yarn
     - run: yarn generate
     - run: yarn validate
@@ -39,6 +43,10 @@ jobs:
       with:
         node-version: 16
         cache: 'yarn'
+    - uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: macos-latest-16-modules-${{ hashFiles('**/yarn.lock') }}
     - run: yarn
     - run: yarn generate
     - run: yarn react:build
