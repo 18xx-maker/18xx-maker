@@ -117,7 +117,7 @@
     "archiver": "^3.0.0",
     "cross-env": "^7.0.2",
     "deep-object-diff": "^1.1.0",
-    "electron": "^9.0.0",
+    "electron": "^11.5.0",
     "electron-builder": "^22.6.1",
     "electron-notarize": "^1.0.0",
     "glob": "^7.1.6",
