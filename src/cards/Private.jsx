@@ -34,12 +34,12 @@ const Private = (props) => {
         description, descFontSize, descFontFamily, descFontWeight, descFontStyle, descColor,
         price, priceFontSize, priceFontFamily, priceFontWeight, priceFontStyle, priceColor,
         revenue, revenueFontSize, revenueFontFamily, revenueFontWeight, revenueFontStyle,
-            revenueColor,
+        revenueColor,
         bid, bidFontSize, bidFontFamily, bidFontWeight, bidFontStyle,  bidColor,
         variant, variantFontSize, variantFontFamily, variantFontWeight, variantFontStyle,
-            variantColor,
+        variantColor,
         players, playersFontFamily, playersFontSize, playersFontWeight, playersFontStyle,
-            playersColor,
+        playersColor,
         minPlayers, maxPlayers,
         icon, iconColor,
         hex, tile, token, company,
@@ -60,63 +60,63 @@ const Private = (props) => {
   //let idFontSizeInch = defaultTo(0.13, idFontSize / 72);
   let idFS = defaultTo(12.48, idFontSize / px2pt); // 0.13" == 9.36pt == 12.48px
   let idFont = getFontProps(props,
-      idFS, idFontWeight, idFontFamily, idFontStyle);
+                            idFS, idFontWeight, idFontFamily, idFontStyle);
   let idLineHeight = idFS + lineHeightAdd;
   idColor = multiDefaultTo("black", idColor, fontColor);
 
   //let nameFontSizeInch = defaultTo(0.18, nameFontSize / 72);
   let nameFS = defaultTo(17.28, nameFontSize / px2pt); // 0.18" == 12.96pt == 17.28px
   let nameFont = getFontProps(props,
-      nameFS, nameFontWeight, nameFontFamily, nameFontStyle);
+                              nameFS, nameFontWeight, nameFontFamily, nameFontStyle);
   let nameLineHeight = nameFS + lineHeightAdd;
   nameColor = multiDefaultTo("black", nameColor, fontColor);
 
   // let descFontSizeInch = defaultTo(0.085, descFontSize / 72);
   let descFS = defaultTo(11, descFontSize / px2pt); // 0.085" == 6.12pt == 8.16px
   let descFont = getFontProps(props,
-      descFS, descFontWeight, descFontFamily, descFontStyle);
+                              descFS, descFontWeight, descFontFamily, descFontStyle);
   let descLineHeight = descFS + lineHeightAdd;
   descColor = multiDefaultTo("black", descColor, fontColor);
 
   // let noteFontSizeInch = defaultTo(0.12, noteFontSize / 72);
   let noteFS = defaultTo(11.52, noteFontSize / px2pt); // 0.12" == 9.36pt == 11.52px
   let noteFont = getFontProps(props,
-      noteFS, noteFontWeight, noteFontFamily, noteFontStyle);
+                              noteFS, noteFontWeight, noteFontFamily, noteFontStyle);
   let noteLineHeight = noteFS + lineHeightAdd;
   noteColor = multiDefaultTo("black", noteColor, fontColor);
 
   // let revenueFontSizeInch = defaultTo(0.18, idFontSize / 72);
   let revenueFS = defaultTo(17.28, revenueFontSize / px2pt);
   let revenueFont = getFontProps(props,
-      revenueFS, revenueFontWeight, revenueFontFamily, revenueFontStyle);
+                                 revenueFS, revenueFontWeight, revenueFontFamily, revenueFontStyle);
   let revenueLineHeight = revenueFS + lineHeightAdd;
   revenueColor = multiDefaultTo("black", revenueColor, fontColor);
 
   // let bidFontSizeInch = defaultTo(0.14, nameFontSize / 72);
   let bidFS = defaultTo(13.44, bidFontSize / px2pt); // 0.14" == ??pt == 13.44px
   let bidFont = getFontProps(props,
-      bidFS, bidFontWeight, bidFontFamily, bidFontStyle);
+                             bidFS, bidFontWeight, bidFontFamily, bidFontStyle);
   let bidLineHeight = bidFS + lineHeightAdd;
   bidColor = multiDefaultTo("black", bidColor, fontColor);
 
   // let priceFontSizeInch = defaultTo(0.18, descFontSize / 72);
   let priceFS = defaultTo(17.28, priceFontSize / px2pt);
   let priceFont = getFontProps(props,
-      priceFS, priceFontWeight, priceFontFamily, priceFontStyle);
+                               priceFS, priceFontWeight, priceFontFamily, priceFontStyle);
   let priceLineHeight = priceFS + lineHeightAdd;
   priceColor = multiDefaultTo("black", priceColor, fontColor);
 
   // let variantFontSizeInch = defaultTo(0.5em, variantFontSize / 72);
   let variantFS = defaultTo(8, variantFontSize / px2pt);
   let variantFont = getFontProps(props,
-      variantFS, variantFontWeight, variantFontFamily, variantFontStyle);
+                                 variantFS, variantFontWeight, variantFontFamily, variantFontStyle);
   let variantLineHeight = variantFS + lineHeightAdd;
   variantColor = multiDefaultTo("black", variantColor, fontColor);
 
   // let playersFontSizeInch = defaultTo(0.14, playersFontSize / 72);
   let playersFS = defaultTo(13.44, playersFontSize / px2pt);
   let playersFont = getFontProps(props,
-      playersFS, playersFontWeight, playersFontFamily, playersFontStyle);
+                                 playersFS, playersFontWeight, playersFontFamily, playersFontStyle);
   let playersLineHeight = playersFS + lineHeightAdd;
   playersColor = multiDefaultTo("black", playersColor, fontColor);
 
@@ -168,109 +168,109 @@ const Private = (props) => {
     <div className="cutlines">
       <div className="card private">
         <ColorContext.Provider value="companies">
-        <Color>
-          {c => (
-            <div className="card__bleed"
-                 style={{
-                   backgroundColor: c(backgroundColor)
-                 }}>
-              <div className="card__body">
-                <div className="private__name"
+          <Color>
+            {c => (
+              <div className="card__bleed"
+                   style={{
+                     backgroundColor: c(backgroundColor)
+                   }}>
+                <div className="card__body">
+                  <div className="private__name"
+                       style={{
+                         color: c(nameColor),
+                         lineHeight: `${nameLineHeight}px`,
+                         ...nameFont
+                       }}>
+                    {id && <div className="private__id"
+                                style={{
+                                  backgroundColor: c(idBackgroundColor),
+                                  color: c(idColor),
+                                  lineHeight: `${idLineHeight}px`,
+                                  ...idFont
+                                }}>
+                             {id}
+                           </div>}
+                    {name}
+                  </div>
+                  {note && <div className="private__note"
+                                style={{
+                                  color: c(noteColor),
+                                  lineHeight: `${noteLineHeight}px`,
+                                  ...noteFont
+                                }}>
+                             {Array.isArray(note)
+                              ? note.reduce((lines, line) => <>{lines}<br />{line}</>)
+                              : note}</div>}
+                  {hexNode}
+                  {company && <div className="private__company">
+                                <Svg viewBox="-15 -15 30 30">
+                                  <GameCompanyToken abbrev={company} outlineWidth={company.outlineWidth || 1} width={15} />
+                                </Svg>
+                              </div>}
+                  {token && <div className="private__company">
+                              <Svg viewBox="-15 -15 30 30">
+                                <Token {...token} outlineWidth={token.outlineWidth || 1} width={15} />
+                              </Svg>
+                            </div>}
+                  {icon && <div className="private__icon">
+                             <Svg viewBox="-15 -15 30 30">
+                               <Icon type={icon} color={iconColor} strokeWidth={1} />
+                             </Svg>
+                           </div>}
+                  <div className="private__description"
+                       style={{
+                         color: c(descColor),
+                         lineHeight: `${descLineHeight}px`,
+                         ...descFont
+                       }}>
+                    {Array.isArray(description)
+                     ? description.reduce((lines, line) => <>{lines}<br />{line}</>)
+                     : description}
+                  </div>
+                  {bid && <div className="private__bid"
+                               style={{
+                                 color: c(bidColor),
+                                 lineHeight: `${bidLineHeight}px`,
+                                 ...bidFont
+                               }}>
+                            Min bid: <Currency value={bid} type="private"/>
+                          </div>}
+                  <div className="private__price"
+                       style={{
+                         color: c(priceColor),
+                         lineHeight: `${priceLineHeight}px`,
+                         ...priceFont
+                       }}>
+                    <Currency value={price} type="private"/>
+                  </div>
+                  {playersNode && <div className="private__players"
                   style={{
-                    color: c(nameColor),
-                    lineHeight: `${nameLineHeight}px`,
-                    ...nameFont
+                    color: c(playersColor),
+                    lineHeight: `${playersLineHeight}px`,
+                    ...playersFont
                   }}>
-                  {id && <div className="private__id"
-                    style={{
-                      backgroundColor: c(idBackgroundColor),
-                      color: c(idColor),
-                      lineHeight: `${idLineHeight}px`,
-                      ...idFont
-                    }}>
-                    {id}
-                  </div>}
-                  {name}
+             {playersNode}
+           </div>}
+                  {revenueNode && <div className="private__revenue"
+                                       style={{
+                                         color: c(revenueColor),
+                                         lineHeight: `${revenueLineHeight}px`,
+                                         ...revenueFont
+                                       }}>
+                                    Revenue: {revenueNode}
+                                  </div>}
+                  {variant && <div className="private__variant"
+                                   style={{
+                                     color: c(variantColor),
+                                     lineHeight: `${variantLineHeight}px`,
+                                     ...variantFont
+                                   }}>
+                                {variant}
+                              </div>}
                 </div>
-                {note && <div className="private__note"
-                    style={{
-                      color: c(noteColor),
-                      lineHeight: `${noteLineHeight}px`,
-                      ...noteFont
-                    }}>
-                  {Array.isArray(note)
-                   ? note.reduce((lines, line) => <>{lines}<br />{line}</>)
-                   : note}</div>}
-                {hexNode}
-                {company && <div className="private__company">
-                                  <Svg viewBox="-15 -15 30 30">
-                                    <GameCompanyToken abbrev={company} outlineWidth={company.outlineWidth || 1} width={15} />
-                                  </Svg>
-                                </div>}
-                {token && <div className="private__company">
-                      <Svg viewBox="-15 -15 30 30">
-                        <Token {...token} outlineWidth={token.outlineWidth || 1} width={15} />
-                      </Svg>
-                    </div>}
-                {icon && <div className="private__icon">
-                                                   <Svg viewBox="-15 -15 30 30">
-                                                     <Icon type={icon} color={iconColor} strokeWidth={1} />
-                                                   </Svg>
-                                                 </div>}
-                <div className="private__description"
-                    style={{
-                      color: c(descColor),
-                      lineHeight: `${descLineHeight}px`,
-                      ...descFont
-                    }}>
-                  {Array.isArray(description)
-                   ? description.reduce((lines, line) => <>{lines}<br />{line}</>)
-                   : description}
-                </div>
-                {bid && <div className="private__bid"
-                    style={{
-                      color: c(bidColor),
-                      lineHeight: `${bidLineHeight}px`,
-                      ...bidFont
-                    }}>
-                  Min bid: <Currency value={bid} type="private"/>
-                </div>}
-                <div className="private__price"
-                    style={{
-                      color: c(priceColor),
-                      lineHeight: `${priceLineHeight}px`,
-                      ...priceFont
-                    }}>
-                  <Currency value={price} type="private"/>
-                </div>
-                {playersNode && <div className="private__players"
-                    style={{
-                      color: c(playersColor),
-                      lineHeight: `${playersLineHeight}px`,
-                      ...playersFont
-                    }}>
-                  {playersNode}
-                </div>}
-                {revenueNode && <div className="private__revenue"
-                    style={{
-                      color: c(revenueColor),
-                      lineHeight: `${revenueLineHeight}px`,
-                      ...revenueFont
-                    }}>
-                  Revenue: {revenueNode}
-                </div>}
-                {variant && <div className="private__variant"
-                    style={{
-                      color: c(variantColor),
-                      lineHeight: `${variantLineHeight}px`,
-                      ...variantFont
-                    }}>
-                  {variant}
-                </div>}
               </div>
-            </div>
-          )}
-        </Color>
+            )}
+          </Color>
         </ColorContext.Provider>
       </div>
     </div>

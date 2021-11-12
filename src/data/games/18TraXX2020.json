@@ -316,11 +316,6 @@
     {
       "id": "4",
       "name": "Antioch Potash Railway",
-      "token": {
-        "logo": "APRR",
-        "quantity": 0,
-        "print": 2
-      },
       "price": 110,
       "revenue": 20,
       "tile": "ABT9",

@@ -607,9 +607,9 @@
       "price": 80,
       "revenue": 20,
       "token": {
-        "color": "orange",
+        "color": "lightBlue",
         "icon": "train",
-        "iconColor": "orange"
+        "iconColor": "yellow"
       },
       "minPlayers": 3
     },
@@ -619,6 +619,7 @@
       "revenue": [30, 50],
       "minPlayers": 4,
       "icon": "boat",
+      "iconColor": "violet",
       "description": "Does not close while owned by a player. If owned by a player when the first 5-train is purchased it may no longer be sold to a public company and the revenue is increased to 50.",
       "abilities": [
         {
