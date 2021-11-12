@@ -44,8 +44,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        body: Release ${{ github.ref }}
+        release_name: 18xx Maker ${{ github.ref }}
+        body: 18xx Maker ${{ github.ref }}
         draft: true
         prerelease: true
     - run: yarn release
