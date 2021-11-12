@@ -4,7 +4,6 @@ on:
       - '*'
 jobs:
   app:
-    needs: test
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
