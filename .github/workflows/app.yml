@@ -36,7 +36,6 @@ jobs:
         APP_CERTIFICATE_PWD: ${{ secrets.APP_CERTIFICATE_PWD }}
         KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
     - run: yarn
-    - run: yarn generate
     - uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
