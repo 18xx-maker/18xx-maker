@@ -52,6 +52,7 @@ jobs:
       name: build and release app
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
     - name: publish release
       uses: StuYarrow/publish-release@v1
       env:
