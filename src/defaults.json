@@ -95,6 +95,8 @@
       "width": 70,
       "height": 85
     },
+    "value": "top",
+    "arrows": "bottom",
     "column": 4,
     "diag": 2,
     "par": 4,

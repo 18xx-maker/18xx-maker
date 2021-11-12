@@ -194,6 +194,10 @@ const Config = () => {
                description="This determines the default width of one stock market cell."/>
         <Input name="stock.cell.height" label="Cell Height" dimension={true}
                description="This determines the default height of one stock market cell."/>
+        <Input name="stock.value" label="Value Location"
+               description="This determines if the value of a cell is drawn at the top of borrom."/>
+        <Input name="stock.arrows" label="Arrow Location"
+               description="This determines if the arrows in a cell are positioned at the top, middle or bottom."/>
         <Input name="stock.column" label="Column Height"
                description="This determines how many cells make up a 1D market column height. The default is 4. Decimals are allowed."/>
         <Input name="stock.diag" label="Diag Height"
