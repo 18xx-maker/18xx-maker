@@ -46,3 +46,5 @@ jobs:
         draft: true
         prerelease: true
     - run: yarn release
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
