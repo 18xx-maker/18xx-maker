@@ -9,8 +9,6 @@ jobs:
       matrix:
         os:
           - macos-latest
-          - ubuntu-latest
-          - windows-latest
         node_version:
           - 16
     name: Build app on ${{ matrix.os }}
