@@ -36,7 +36,10 @@ jobs:
         APP_CERTIFICATE_PWD: ${{ secrets.APP_CERTIFICATE_PWD }}
         KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
     - run: yarn
-    - uses: actions/create-release@v1
+      name: install deps
+    - name: create release
+      id: create_release
+      uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -46,5 +49,12 @@ jobs:
         draft: true
         prerelease: true
     - run: yarn release
+      name: build and release app
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: publish release
+      uses: StuYarrow/publish-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        id: ${{ steps.create_release.outputs.id }}
