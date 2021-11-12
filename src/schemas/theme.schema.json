@@ -1,0 +1,254 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "https://18xx-maker.com/schemas/theme.schema.json",
+  "definitions": {
+    "colorName": {
+      "oneOf": [
+        { "$ref": "#/definitions/genericColorName" },
+        { "$ref": "#/definitions/mapColorName" }
+      ]
+    },
+
+    "genericColorName": {
+      "type": "string",
+      "description": "The names of the theme colors that we support. These come from the tokens that Rails on Board sells.",
+      "enum": [
+        "black",
+        "blue",
+        "brightGreen",
+        "brown",
+        "cherry",
+        "fuchsia",
+        "gold",
+        "gray",
+        "green",
+        "inky",
+        "lavender",
+        "lightBlue",
+        "lightBrown",
+        "lightGrey",
+        "lime",
+        "natural",
+        "navyBlue",
+        "orange",
+        "pink",
+        "red",
+        "skyBlue",
+        "tan",
+        "turquoise",
+        "violet",
+        "white",
+        "yellow"
+      ]
+    },
+
+    "mapColorName": {
+      "type": "string",
+      "description": "The names of the theme colors that we support on a map.",
+      "default": "plain",
+      "enum": [
+        "none",
+        "plain",
+        "offboard",
+        "mountain",
+        "water",
+        "land",
+        "river",
+        "track",
+        "border",
+        "city",
+        "town",
+        "centerTown",
+        "halt",
+        "yellow",
+        "green",
+        "brown",
+        "gray",
+        "yellow/green",
+        "green/brown",
+        "brown/gray"
+      ]
+    },
+    "color": {
+      "type": "string",
+      "description": "A individual hex or rgb encoded color string",
+      "pattern": "(#[0-9a-f]{3}([0-9a-f]{3})?([0-9a-f]{2})?)|(rgb\\([0-9]+,[0-9]+,[0-9]+\\))"
+    },
+    "themeColor": {
+      "description": "Either a color, or a subgrouping of colors in a certain context",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/color"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "default": {
+              "$ref": "#/definitions/color"
+            },
+            "yellow": {
+              "$ref": "#/definitions/color"
+            },
+            "green": {
+              "$ref": "#/definitions/color"
+            },
+            "brown": {
+              "$ref": "#/definitions/color"
+            },
+            "gray": {
+              "$ref": "#/definitions/color"
+            },
+            "plain": {
+              "$ref": "#/definitions/color"
+            },
+            "offboard": {
+              "$ref": "#/definitions/color"
+            },
+            "mountain": {
+              "$ref": "#/definitions/color"
+            },
+            "water": {
+              "$ref": "#/definitions/color"
+            },
+            "land": {
+              "$ref": "#/definitions/color"
+            },
+            "river": {
+              "$ref": "#/definitions/color"
+            },
+            "border": {
+              "$ref": "#/definitions/color"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "companiesTheme": {
+      "type": "object",
+      "description": "Theme that defines the colors of companies",
+      "properties": {
+        "black": {"$ref": "#/definitions/color"},
+        "blue": {"$ref": "#/definitions/color"},
+        "brightGreen": {"$ref": "#/definitions/color"},
+        "brown": {"$ref": "#/definitions/color"},
+        "cherry": {"$ref": "#/definitions/color"},
+        "fuchsia": {"$ref": "#/definitions/color"},
+        "gold": {"$ref": "#/definitions/color"},
+        "gray": {"$ref": "#/definitions/color"},
+        "green": {"$ref": "#/definitions/color"},
+        "inky": {"$ref": "#/definitions/color"},
+        "lavender": {"$ref": "#/definitions/color"},
+        "lightBlue": {"$ref": "#/definitions/color"},
+        "lightBrown": {"$ref": "#/definitions/color"},
+        "lightGrey": {"$ref": "#/definitions/color"},
+        "lime": {"$ref": "#/definitions/color"},
+        "natural": {"$ref": "#/definitions/color"},
+        "navyBlue": {"$ref": "#/definitions/color"},
+        "orange": {"$ref": "#/definitions/color"},
+        "pink": {"$ref": "#/definitions/color"},
+        "red": {"$ref": "#/definitions/color"},
+        "skyBlue": {"$ref": "#/definitions/color"},
+        "tan": {"$ref": "#/definitions/color"},
+        "turquoise": {"$ref": "#/definitions/color"},
+        "violet": {"$ref": "#/definitions/color"},
+        "white": {"$ref": "#/definitions/color"},
+        "yellow": {"$ref": "#/definitions/color"}
+      },
+      "additionalProperties": false
+    },
+    "mapTheme": {
+      "type": "object",
+      "description": "Theme that defines the colors used in 18xx-maker maps and tiles",
+      "properties": {
+        "default": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "yellow": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "green": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "brown": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "gray": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "plain": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "offboard": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "mountain": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "water": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "river": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "land": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "brightGreen": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "orange": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "red": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "white": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "black": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "track": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "border": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "city": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "town": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "centerTown": {
+          "$ref": "#/definitions/themeColor"
+        },
+        "halt": {
+          "$ref": "#/definitions/themeColor"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/mapTheme"
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "colors": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/companiesTheme"
+        },
+        {
+          "$ref": "#/definitions/mapTheme"
+        }
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": ["name", "colors"]
+}

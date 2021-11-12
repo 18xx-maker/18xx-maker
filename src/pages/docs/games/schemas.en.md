@@ -39,9 +39,3 @@ yarn validate
 
 in the root folder of your code checkout. This will validate all relevant json
 files in your local checkout.
-
-If you have a need to check files that aren't part of the 18xx Maker code then
-you can run the
-[@18xx-maker/schemas](https://www.npmjs.com/package/@18xx-maker/schemas) package
-directly (either from javascript code, or on the command line) by following it's
-[documentation](https://github.com/18xx-maker/schemas)

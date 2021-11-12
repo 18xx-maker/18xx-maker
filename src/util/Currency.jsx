@@ -12,7 +12,7 @@ export const format = (value, game, doCurrencyFormat) => {
   } else if (doCurrencyFormat) {
     let currency = (game && game.info.currency) || "$#";
 
-    return currency.replace("#", Number(value).toLocaleString([], { mimimumFractionDigits: 0 }));
+    return currency.replace("#", Number(value).toLocaleString([], { minimumFractionDigits: 0 }));
   } else {
     return `${value}`;
   }

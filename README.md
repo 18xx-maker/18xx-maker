@@ -32,7 +32,7 @@ slack](https://join.slack.com/t/18xxgames/shared_invite/zt-8ksy028m-CSZC~G5QtiFv
 
 ## Usage and Documentation
 
-Please check out the [documentation](https://www.18xx-maker.com/docs/) for
+Please check out the [documentation](https://18xx-maker.com/docs/) for
 information about how to use this app to prototype your own 18xx games.
 
 ## Donation
@@ -40,3 +40,33 @@ information about how to use this app to prototype your own 18xx games.
 I've been asked about donation buttons; if you find this software useful to you
 and would like to donate money towards its development you can do so via
 [paypal](https://paypal.me/kelsin) or [square cash](https://cash.me/$kelsin).
+
+## Schemas
+
+### CLI Usage
+
+Install this package gives you a `18xx-schemas` binary that takes in any number
+of globs and validates each file it can find. If a file doesn't exist it just
+ignores it. It then pretty prints the validation output using ansi colors on the
+terminal.
+
+```shell
+# Validate some files
+18xx-schemas games/*.json tiles/**/*.json config.json
+
+# Display all options
+18xx-schemas -h
+
+# Output version
+18xx-schemas -v
+```
+
+Be warned that if you pass a json that doesn't conform to any of the 18xx-maker
+json schemas it will be validated against the tiles schema.
+
+From this repo you can run this with `yarn schemas` like the following:
+
+```shell
+# Display all options
+yarn schemas -h
+```

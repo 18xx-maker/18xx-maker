@@ -9,7 +9,7 @@ import Color from "../util/Color";
 
 import map from "ramda/src/map";
 
-import themeSchema from "@18xx-maker/schemas/schemas/theme.schema.json";
+import themeSchema from "../schemas/theme.schema.json";
 
 const useStyles = makeStyles((theme) => ({
   themeGroup: {

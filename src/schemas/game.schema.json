@@ -1,0 +1,449 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "https://18xx-maker.com/schemas/game.schema.json",
+
+  "definitions": {
+    "numberOrSlash": {
+      "oneOf": [
+        { "type": "number", "minimum": 1 },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+ ?/ ?[0-9]+( ?/ ?[0-9]+)*$"
+        },
+        {
+          "type": "string",
+          "pattern": "^∞$"
+        }
+      ]
+    },
+    "bank": {
+      "oneOf": [
+        { "type": "number", "minimum": 1 },
+        {
+          "type": "string",
+          "pattern": "^∞$"
+        }
+      ]
+    },
+    "capital": {
+      "oneOf": [{ "type": "number", "minimum": 0 }, { "type": "string" }]
+    },
+    "certLimit": { "$ref": "#/definitions/numberOrSlash" },
+    "link": {
+      "type": "string",
+      "pattern": "(mailto|https?):.*"
+    },
+    "map": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "copy": { "type": "integer", "minimum": 0 },
+        "title": { "type": "boolean", "enum": [false] },
+        "remove": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z]+[0-9]+$"
+          }
+        },
+        "hexes": {
+          "type": "array",
+          "items": { "$ref": "tiles.schema.json#/definitions/hex" }
+        },
+        "roundTracker": {
+          "type": "object",
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" },
+            "rotation": {
+              "type": "number",
+              "exclusiveMinimum": -360,
+              "exclusiveMaximum": 360
+            },
+            "type": {
+              "type": "string",
+              "enum": ["row", "row-reverse", "col", "col-reverse", "round"]
+            }
+          },
+          "additionalProperties": false
+        },
+        "players": {
+          "type": "object",
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" },
+            "cellWidth": { "type": "number", "exclusiveMinimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "borderTexts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "cost": { "type": "number" },
+              "circle": { "type": "number" },
+              "color": { "type": "string" },
+              "bgColor": { "type": "string" },
+              "coord": {
+                "type": "string",
+                "pattern": "^[A-Z]+[0-9]+(s[1-6])|(p[1-6])|(a[0-9]+p[0-9]+)|(x[0-9]+y[0-9]+)"
+              }
+            }
+          }
+        },
+        "borders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "color": { "type": "string" },
+              "coords": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Z]+[0-9]+(s[1-6])|(p[1-6])|(a[0-9]+p[0-9]+)|(x[0-9]+y[0-9]+)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": ["hexes"],
+      "additionalProperties": false
+    },
+    "trainItem": {
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "on": { "type": "string" },
+            "index": { "type": "integer", "minimum": 2 }
+          }
+        }
+      ]
+    },
+    "trainEvent": {
+      "oneOf": [
+        { "$ref": "#/definitions/trainItem" },
+        { "type": "array", "items": { "$ref": "#/definitions/trainItem" } }
+      ]
+    },
+    "shares": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "quantity": { "type": "number", "minimum": 1 },
+          "label": { "type": "string" },
+          "cost": { "type": "number", "minimum": 0 },
+          "percent": { "$ref": "#/definitions/numberOrSlash" },
+          "revenue": { "$ref": "#/definitions/numberOrSlash" },
+          "shares": { "$ref": "#/definitions/numberOrSlash" },
+          "variant": { "type": "string" }
+        },
+        "required": ["quantity"]
+      }
+    },
+    "tokens": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "type": "string" },
+          { "type": "number" },
+          { "$ref": "#/definitions/token" }
+        ]
+      }
+    },
+    "token": {
+      "type": "object"
+    }
+  },
+
+  "type": "object",
+  "properties": {
+    "info": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "designer": { "type": "string" },
+        "background": { "type": "string" },
+        "notes": { "type": "string" },
+        "publisher": { "type": "string" },
+        "extraTotalHeight": { "type": "number", "minimum": 1 },
+        "extraTotalWidth": { "type": "number", "minimum": 1 },
+        "titleX": { "type": "number" },
+        "titleY": { "type": "number" },
+        "titleRotate": {
+          "type": "number",
+          "minimum": -360,
+          "maximum": 360
+        },
+        "titleSize": { "type": "number" },
+        "subtitleSize": { "type": "number" },
+        "designerSize": { "type": "number" },
+        "titleFontFamily": { "type": "string" },
+        "subtitleFontFamily": { "type": "string" },
+        "designerFontFamily": { "type": "string" },
+        "orientation": {
+          "type": "string",
+          "enum": ["horizontal", "vertical"]
+        },
+        "capitalization": {
+          "type": "string",
+          "description": "Full cap is the default and doesn't need to be specified.",
+          "enum": ["incremental"]
+        },
+        "mustSellInBlocks": { "type": "boolean", "enum": [true] },
+        "marketTokens": { "type": "integer", "minimum": 0 },
+        "extraStationTokens": { "type": "integer", "minimum": 1 },
+        "mustSellInBlocks": { "type": "boolean" },
+        "capitalization": {
+          "type": "string",
+          "enum": ["full", "incremental"]
+        },
+        "currency": {
+          "description": "The currency format string must contain a # character",
+          "type": "string",
+          "pattern": "^(.*)#(.*)$"
+        }
+      },
+      "required": ["title"],
+      "additionalProperties": false
+    },
+    "colors": {
+      "type": "object"
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "bgg": { "$ref": "#/definitions/link" },
+        "license": { "$ref": "#/definitions/link" },
+        "purchase": { "$ref": "#/definitions/link" },
+        "rules": { "$ref": "#/definitions/link" }
+      },
+      "additionalProperties": false
+    },
+    "bank": { "$ref": "#/definitions/bank" },
+    "capital": { "$ref": "#/definitions/capital" },
+    "certLimit": { "$ref": "#/definitions/certLimit" },
+    "floatPercent": { "type": "number", "minimum": 0, "maximum": 100 },
+    "tokenTypes": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/definitions/tokens" }
+    },
+    "shareTypes": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/definitions/shares" }
+    },
+    "companies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "abbrev"],
+        "properties": {
+          "name": { "type": "string" },
+          "variant": { "type": "string" },
+          "shares": {
+            "oneOf": [{ "$ref": "#/definitions/shares" }, { "type": "string" }]
+          },
+          "tokens": {
+            "oneOf": [{ "$ref": "#/definitions/tokens" }, { "type": "string" }]
+          }
+        }
+      }
+    },
+    "ipo": {
+      "oneOf": [
+        { "type": "boolean" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "map": {
+      "oneOf": [
+        { "$ref": "#/definitions/map" },
+        { "type": "array", "items": { "$ref": "#/definitions/map" } }
+      ]
+    },
+    "phases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "minor": { "type": "boolean" },
+          "company": { "type": "string" },
+          "train": {
+            "oneOf": [
+              { "type": "array", "items": { "type": "string" } },
+              { "type": "string" }
+            ]
+          },
+          "limit": {
+            "oneOf": [
+              { "type": "integer", "minimum": 1 },
+              {
+                "type": "string",
+                "pattern": "^∞$"
+              }
+            ]
+          },
+          "rounds": { "type": "integer", "minimum": 1 },
+          "tiles": { "type": "string" },
+          "on": { "$ref": "#/definitions/trainEvent" },
+          "notes": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            ]
+          },
+          "buy_companies": { "type": "boolean" },
+          "events": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "boolean"
+            }
+          }
+        },
+        "required": ["name", "limit", "tiles"],
+        "additionalProperties": false
+      }
+    },
+    "players": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "bank": { "$ref": "#/definitions/bank" },
+          "capital": { "$ref": "#/definitions/capital" },
+          "certLimit": { "$ref": "#/definitions/certLimit" },
+          "number": { "type": "number", "minimum": 1 }
+        },
+        "required": ["number"]
+      }
+    },
+    "pools": {},
+    "privates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "note": { "type": "string" },
+          "minPlayers": { "type": "integer", "minimum": 1 },
+          "maxPlayers": { "type": "integer", "minimum": 1 },
+          "description": { "type": "string" },
+          "hex": { "type": "string" },
+          "token": { "$ref": "#/definitions/token" },
+          "company": { "type": "string" },
+          "image": { "type": "string" },
+          "icon": { "type": "string" },
+          "iconColor": { "type": "string" },
+          "tile": { "type": "string" },
+          "id": { "type": "string" },
+          "idBackgroundColor": { "type": "string" },
+          "variant": { "type": "string" },
+          "sym": { "type": "string" },
+          "abilities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": { "type": "string" }
+              }
+            }
+          },
+          "bid": { "type": "number", "minimum": 0 },
+          "price": { "type": "number", "minimum": 0 },
+          "debt": { "type": "number", "minimum": 0 },
+          "revenue": {
+            "oneOf": [
+              { "type": "number", "minimum": 0 },
+              {
+                "type": "array",
+                "items": { "type": "number", "minimum": 0 }
+              },
+              {
+                "type": "string",
+                "pattern": "^.?.?[0-9].?%? ?/ ?.?.?[0-9].?%?$"
+              }
+            ]
+          }
+        },
+        "required": ["name"],
+        "additionalProperties": false
+      }
+    },
+    "rounds": {},
+    "stock": {},
+    "tiles": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "integer",
+            "minimum": 1
+          },
+          {
+            "$ref": "tiles.schema.json#/definitions/hex"
+          }
+        ]
+      }
+    },
+    "tokens": {},
+    "turns": {},
+    "trains": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "price": { "type": "integer", "minimum": 0 },
+          "color": { "type": "string" },
+          "image": {
+            "type": "string"
+          },
+          "phase": { "type": "boolean" },
+          "quantity": {
+            "oneOf": [
+              { "type": "integer", "minimum": 1 },
+              { "type": "string", "enum": ["∞"] }
+            ]
+          },
+          "print": { "type": "integer", "minimum": 0 },
+          "discount": { "type": "object" },
+          "description": { "type": "string" },
+          "available": { "type": "string" },
+          "variant": { "type": "string" },
+          "rust": { "$ref": "#/definitions/trainEvent" },
+          "phased": { "$ref": "#/definitions/trainEvent" },
+          "obsolete": { "$ref": "#/definitions/trainEvent" },
+          "permanent": { "type": "boolean" },
+          "players": { "type": "integer" }
+        },
+        "required": ["name", "quantity", "color"],
+        "additionalProperties": false
+      }
+    },
+    "upgrades": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "minItems": 1,
+        "uniqueItems": true
+      }
+    },
+    "wip": { "type": "boolean" },
+    "prototype": { "type": "boolean" }
+  },
+  "additionalProperties": false,
+  "required": ["info"]
+}

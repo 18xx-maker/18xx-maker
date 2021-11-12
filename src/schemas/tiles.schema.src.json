@@ -1,0 +1,572 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://18xx-maker.com/schemas/tiles.schema.json",
+
+  "definitions": {
+    "side": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 6
+    },
+    "rotation": {
+      "type": "integer",
+      "multipleOf": 60,
+      "minimum": 0,
+      "maximum": 300
+    },
+
+    "removeBorders": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          }
+        },
+        {
+          "type": "boolean",
+          "enum": [true]
+        }
+      ]
+    },
+
+    "borders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "side": { "$ref": "#/definitions/side" },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "color": { "type": "string" },
+          "width": { "type": "number" }
+        },
+        "additionalProperties": false,
+        "required": ["color"]
+      }
+    },
+
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": { "type": "string" },
+          "size": { "type": "number" },
+          "color": { "type": "string" }
+        },
+        "additionalProperties": false,
+        "required": ["label"]
+      }
+    },
+
+    "name": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "reverse": { "type": "boolean", "enum": [true] },
+        "straight": { "type": "boolean", "enum": [true] },
+        "color": { "type": "string" },
+        "bgColor": { "type": "string" },
+        "offset": {
+          "type": "number",
+          "default": 50,
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "additionalProperties": false,
+      "required": ["name"]
+    },
+
+    "names": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/name" }
+    },
+
+    "goods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "color": { "type": "string" },
+          "width": { "type": "number", "minimum": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "companies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "color": { "type": "string" },
+          "label": { "type": "string" },
+          "left": { "type": "number" },
+          "right": { "type": "number" },
+          "bottom": { "type": "boolean", "enum": [true] },
+          "reverse": { "type": "boolean", "enum": [true] },
+          "radius": { "type": "number", "exclusiveMinimum": 0 }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "divides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "side": { "type": "integer", "minimum": 1, "maximum": 6 }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "companyToken": {
+      "type": "object",
+      "properties": {
+        "company": { "type": "string" },
+        "destination": { "type": "boolean", "enum": [true] },
+        "width": { "type": "integer", "minimum": 1 },
+        "bgFill": { "type": "string" }
+      },
+      "required": ["company"],
+      "additionalProperties": false
+    },
+
+    "genericToken": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "color": { "type": "string" },
+        "bgFill": { "type": "string" },
+        "iconColor": { "type": "string" },
+        "outline": { "type": "string" },
+        "outlineWidth": { "type": "integer", "minimum": 1 },
+
+        "circle": { "type": "string" },
+        "shield": { "type": "string" },
+        "shieldTop": { "type": "string" },
+        "shield3": { "type": "string" },
+        "shield3TopLeft": { "type": "string" },
+        "shield3TopCenter": { "type": "string" },
+        "shield3TopRight": { "type": "string" },
+        "square": { "type": "string" },
+        "spiral": { "type": "string" },
+
+        "target": { "type": "array", "items": { "type": "string" } },
+        "stripe": { "type": "array", "items": { "type": "string" } },
+        "stripes": { "type": "array", "items": { "type": "string" } },
+        "curvedStripes": { "type": "array", "items": { "type": "string" } },
+        "halves": { "type": "array", "items": { "type": "string" } },
+        "quarters": { "type": "array", "items": { "type": "string" } },
+
+        "destination": { "type": "boolean", "enum": [true] },
+        "reserved": { "type": "boolean", "enum": [true] },
+        "inverse": { "type": "boolean", "enum": [true] },
+        "inverseTextColor": { "type": "string" },
+        "angle": { "type": "number", "minimum": 0, "exclusiveMaximum": 360 },
+        "percent": { "type": "number", "minimum": 0 },
+        "width": { "type": "integer", "minimum": 1 }
+      },
+      "additionalProperties": false
+    },
+
+    "tokens": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "$ref": "#/definitions/companyToken" },
+          { "$ref": "#/definitions/genericToken" }
+        ]
+      }
+    },
+
+    "industries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "top": { "type": "string" },
+          "bottom": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "offBoardRevenue": {
+      "type": "object",
+      "properties": {
+        "name": { "$ref": "#/definitions/name" },
+        "reverse": { "type": "boolean", "enum": [true] },
+        "rows": { "type": "integer", "minimum": 1 },
+        "name": { "$ref": "#/definitions/name" },
+        "groups": { "type": "array", "items": { "type": "string" } },
+        "revenues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "color": { "type": "string" },
+              "value": {
+                "oneOf": [{ "type": "string" }, { "type": "number" }]
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "boomtowns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "city": { "type": "boolean", "enum": [true] },
+          "dashed": { "type": "boolean", "enum": [false] },
+          "width": { "type": "integer", "minimum": 1 },
+          "color": { "type": "string" },
+          "bgColor": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "cities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 6,
+            "default": 1
+          },
+          "width": { "type": "integer", "minimum": 1 },
+          "extend": { "type": "string", "enum": ["left", "right"] },
+          "pass": { "type": "boolean", "enum": [true] },
+          "outside": { "type": "boolean", "enum": [true] },
+          "name": { "$ref": "#/definitions/name" },
+          "color": { "type": "string" },
+          "groups": { "type": "array", "items": { "type": "string" } },
+          "companies": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "label": { "type": "string" },
+                    "color": { "type": "string" },
+                    "additionalProperties": false
+                  }
+                },
+                { "type": "string" },
+                { "type": "null" }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "mediumCities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "color": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "centerTowns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "groups": { "type": "array", "items": { "type": "string" } },
+          "width": { "type": "number", "exclusiveMinimum": 0 },
+          "color": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "towns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "groups": { "type": "array", "items": { "type": "string" } },
+          "color": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "bridges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "textColor": { "type": "string" },
+          "cost": { "type": "number" }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "tunnels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "textColor": { "type": "string" },
+          "cost": { "type": "number" }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "routeBonuses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "shapes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "background": { "type": "boolean", "enum": [true] },
+          "type": {
+            "type": "string",
+            "enum": [
+              "circle",
+              "diamond",
+              "ellipse",
+              "hexagon",
+              "square",
+              "triangle"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "terrain": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "cost": { "type": "number" },
+          "size": {
+            "type": "string",
+            "enum": ["tiny", "small", "medium", "large"]
+          },
+          "type": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "icons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": { "type": "string" },
+          "width": { "type": "integer", "minimum": 1 },
+          "stroke": { "type": "string" },
+          "strokeWidth": { "type": "integer", "minimum": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "track": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sides": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 6
+            }
+          },
+          "width": { "type": "integer", "minimum": 1 },
+          "color": { "type": "string" },
+          "borderColor": { "type": "string" },
+          "gaugeColor": { "type": "string" },
+          "revenue": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "gauge": {
+            "type": "string",
+            "enum": ["narrow", "dual", "dashed", "line"]
+          },
+          "offset": {
+            "type": "number"
+          },
+          "cross": {
+            "type": "string",
+            "enum": ["over", "under", "top", "bottom"]
+          },
+          "path": { "type": "string" },
+          "start": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "exclusiveMaximum": 1
+          },
+          "end": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "exclusiveMaximum": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "custom",
+              "offboard",
+              "straight",
+              "gentle",
+              "sharp",
+              "bent",
+              "city"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "tunnelEntrances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "oneOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "outerBorderColor": { "type": "string" }
+        },
+        "additionalProperties": false,
+        "required": ["value"]
+      }
+    },
+
+    "hex": {
+      "type": "object",
+      "properties": {
+        "print": { "type": "integer", "minimum": 0 },
+        "quantity": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "string", "enum": ["∞"] }
+          ]
+        },
+        "tile": { "type": "string" },
+        "color": { "type": "string" },
+        "encoding": { "type": "string" },
+        "group": {
+          "type": "string",
+          "pattern": "^[0-9a-z]+$",
+          "description": "Tiles are naturually sorted into groups based on color for printing. This overrides that grouping. Useful for tiles with fancy borders or other bleed issues."
+        },
+        "broken": {
+          "type": "boolean",
+          "enum": [true],
+          "description": "Marks this tile as being broken and not ready for exporting."
+        },
+        "mask": {
+          "type": "boolean",
+          "enum": [false],
+          "description": "Remove the special bleed mask when printing these tiles. They will always be printed with no bleed."
+        },
+        "borders": { "$ref": "#/definitions/borders" },
+        "centerTowns": { "$ref": "#/definitions/centerTowns" },
+        "cities": { "$ref": "#/definitions/cities" },
+        "boomtowns": { "$ref": "#/definitions/boomtowns" },
+        "mediumCities": { "$ref": "#/definitions/mediumCities" },
+        "companies": { "$ref": "#/definitions/companies" },
+        "divides": { "$ref": "#/definitions/divides" },
+        "goods": { "$ref": "#/definitions/goods" },
+        "icons": { "$ref": "#/definitions/icons" },
+        "industries": { "$ref": "#/definitions/industries" },
+        "labels": { "$ref": "#/definitions/labels" },
+        "names": { "$ref": "#/definitions/names" },
+        "offBoardRevenue": { "$ref": "#/definitions/offBoardRevenue" },
+        "removeBorders": { "$ref": "#/definitions/removeBorders" },
+        "rotation": { "$ref": "#/definitions/rotation" },
+        "rotations": {
+          "oneOf": [
+            { "$ref": "#/definitions/side" },
+            { "type": "array", "items": { "$ref": "#/definitions/rotation" } }
+          ]
+        },
+        "bridges": { "$ref": "#/definitions/bridges" },
+        "tunnels": { "$ref": "#/definitions/tunnels" },
+        "routeBonuses": { "$ref": "#/definitions/routeBonuses" },
+        "shapes": { "$ref": "#/definitions/shapes" },
+        "terrain": { "$ref": "#/definitions/terrain" },
+        "tokens": { "$ref": "#/definitions/tokens" },
+        "towns": { "$ref": "#/definitions/towns" },
+        "track": { "$ref": "#/definitions/track" },
+        "tunnelEntrances": { "$ref": "#/definitions/tunnelEntrances" },
+        "values": { "$ref": "#/definitions/values" },
+        "hexes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z]+[0-9]+$"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+
+  "type": "object",
+  "propertyNames": {
+    "pattern": "^[0-9a-zA-Z]+(\\|[0-9a-zA-Z]+)?$"
+  },
+  "additionalProperties": { "$ref": "#/definitions/hex" }
+}

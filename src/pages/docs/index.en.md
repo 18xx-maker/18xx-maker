@@ -26,8 +26,7 @@ requires development experience or a desire to learn!
 # Goals
 
 - Create a [json schema](https://json-schema.org/) for 18xx games. These exist
-  in the [@18xx-maker/schemas](https://github.com/18xx-maker/schemas) npm
-  package.
+  in the `src/schemas` folder in this repo.
 - Allow for rapid creation of a new game map and components.
 - Disconnect tiles from individual games to make prototyping new games using
   existing tiles easy.

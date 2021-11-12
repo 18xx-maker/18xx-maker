@@ -8,7 +8,7 @@ import Input from "./Input";
 import File from "../util/File";
 
 import defaultConfig from "../defaults.json";
-import schema from "@18xx-maker/schemas/schemas/config.schema.json";
+import schema from "./../schemas/config.schema.json";
 
 import chain from "ramda/src/chain";
 import compose from "ramda/src/compose";

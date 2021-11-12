@@ -7,7 +7,7 @@ import { useBooleanParam } from "./util/query";
 
 import { compileCompanies, overrideCompanies } from "./util";
 
-import schema from "@18xx-maker/schemas/schemas/config.schema.json";
+import schema from "./schemas/config.schema.json";
 
 import Divider from "@material-ui/core/Divider";
 import Fab from "@material-ui/core/Fab";

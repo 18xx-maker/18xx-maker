@@ -3,7 +3,7 @@ import ConfigContext from "../context/ConfigContext";
 import ReactMarkdown from "react-markdown";
 import UnitInput from "./UnitInput";
 
-import schema from "@18xx-maker/schemas/schemas/config.schema.json";
+import schema from "../schemas/config.schema.json";
 
 import assocPath from "ramda/src/assocPath";
 import chain from "ramda/src/chain";
