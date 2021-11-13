@@ -255,6 +255,7 @@ const Private = (props) => {
                   {revenueNode && <div className="private__revenue"
                                        style={{
                                          color: c(revenueColor),
+                                         background: c(revenueBackgroundColor),
                                          lineHeight: `${revenueLineHeight}px`,
                                          ...revenueFont
                                        }}>
