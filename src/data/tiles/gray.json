@@ -1373,7 +1373,7 @@
       }
     ]
   },
-  "307": {
+  "308": {
     "color": "gray",
     "cities": [
       {
@@ -1406,14 +1406,14 @@
         "side": 3
       },
       {
-        "side": 4
+        "side": 5
       },
       {
-        "side": 5
+        "side": 6
       }
     ]
   },
-  "308": {
+  "309": {
     "color": "gray",
     "cities": [
       {
@@ -1424,12 +1424,12 @@
       {
         "angle": 210,
         "percent": 0.8,
-        "value": 50
+        "value": 60
       }
     ],
     "labels": [
       {
-        "label": "XY",
+        "label": "XX",
         "fontSize": 24,
         "angle": 90,
         "percent": 0.825

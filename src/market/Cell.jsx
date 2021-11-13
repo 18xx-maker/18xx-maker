@@ -12,6 +12,11 @@ import is from "ramda/src/is";
 import map from "ramda/src/map";
 import propEq from "ramda/src/propEq";
 
+import Position from "../Position";
+import ColorContext from "../context/ColorContext";
+import GameMapCompanyToken from "../tokens/GameMapCompanyToken";
+import Token from "../tokens/Token";
+
 const arrows = {
   up: "↑",
   down: "↓",
@@ -197,6 +202,29 @@ const Cell = ({ cell, par, game, config, data }) => {
               }
             }
 
+            if (cell.tokens) {
+              for (var i = 0; i < cell.tokens.length; i++) {
+                if (cell.tokens[i].x === undefined)
+                  cell.tokens[i].x = width / 2;
+                if (cell.tokens[i].y === undefined)
+                  cell.tokens[i].y = height / 2 + 2;
+              }
+            }
+
+            let tokens = (
+              <ColorContext.Provider value="companies">
+                <Position data={cell.tokens}>
+                {t => {
+                  if (t.company) {
+                    return <GameMapCompanyToken {...t} abbrev={t.company} />;
+                  } else {
+                    return <Token {...t} />;
+                  }
+                }}
+                </Position>
+              </ColorContext.Provider>
+            );
+
             return (
               <g>
                 <rect x="0"
@@ -240,6 +268,7 @@ const Cell = ({ cell, par, game, config, data }) => {
                 )}
                 {arrowNodes}
                 {companyNodes}
+                {tokens}
               </g>
             );
           }}

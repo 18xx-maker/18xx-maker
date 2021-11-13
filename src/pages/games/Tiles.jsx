@@ -280,6 +280,15 @@ const TileSheet = () => {
       page
     );
 
+    let widthIn, viewBoxStr;
+    if (layout === "smallDie") {
+        widthIn = (c.pageWidth+20) * 0.01;
+        viewBoxStr = "-10 0 " + (c.pageWidth+20) + " " + c.pageHeight;
+    } else {
+        widthIn = c.pageWidth * 0.01;
+        viewBoxStr = "0 0 " + c.pageWidth + " " + c.pageHeight;
+    }
+
     let pins = (layout === "die" || layout === "smallDie") ? <Pins/> : null;
 
     return (
@@ -288,10 +297,10 @@ const TileSheet = () => {
         <Page title={game.info.title} component="Tiles" current={pageIndex + 1} total={pagedTiles.length} />
         <Svg
           style={{
-            width: `${c.pageWidth * 0.01}in`,
+            width: `${widthIn}in`,
             height: `${c.pageHeight * 0.01}in`,
           }}
-          viewBox={`0 0 ${c.pageWidth} ${c.pageHeight}`}
+          viewBox={`${viewBoxStr}`}
         >
           <Cutlines/>
           {pins}

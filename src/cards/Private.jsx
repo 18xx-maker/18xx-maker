@@ -34,7 +34,7 @@ const Private = (props) => {
         description, descFontSize, descFontFamily, descFontWeight, descFontStyle, descColor,
         price, priceFontSize, priceFontFamily, priceFontWeight, priceFontStyle, priceColor,
         revenue, revenueFontSize, revenueFontFamily, revenueFontWeight, revenueFontStyle,
-        revenueColor,
+        revenueColor, revenueBackgroundColor,
         bid, bidFontSize, bidFontFamily, bidFontWeight, bidFontStyle,  bidColor,
         variant, variantFontSize, variantFontFamily, variantFontWeight, variantFontStyle,
         variantColor,
@@ -91,6 +91,7 @@ const Private = (props) => {
                                  revenueFS, revenueFontWeight, revenueFontFamily, revenueFontStyle);
   let revenueLineHeight = revenueFS + lineHeightAdd;
   revenueColor = multiDefaultTo("black", revenueColor, fontColor);
+  revenueBackgroundColor = ("white", revenueBackgroundColor);
 
   // let bidFontSizeInch = defaultTo(0.14, nameFontSize / 72);
   let bidFS = defaultTo(13.44, bidFontSize / px2pt); // 0.14" == ??pt == 13.44px

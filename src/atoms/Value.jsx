@@ -8,7 +8,7 @@ import RotateContext from "../context/RotateContext";
 
 import { multiDefaultTo } from "../util";
 
-const Value = ({ value, fontSize, fontWeight, fontFamily, color, textColor, shape, fixed, outerBorderColor, rotation, height, width }) => {
+const Value = ({ value, fontSize, fontWeight, fontFamily, color, textColor, shape, fixed, outerBorderColor, rotation, height, width, borderWidth }) => {
   const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
 
@@ -35,6 +35,7 @@ const Value = ({ value, fontSize, fontWeight, fontFamily, color, textColor, shap
   width = multiDefaultTo(rx*2, width);
   color = color || "white";
   textColor = textColor || "black";
+  borderWidth = borderWidth || 2;
 
   return (
     <RotateContext.Consumer>
@@ -57,7 +58,7 @@ const Value = ({ value, fontSize, fontWeight, fontFamily, color, textColor, shap
               bg = (
                 <rect
                       transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}
-                      fill={p(color)} stroke={p("black")} strokeWidth="2"
+                      fill={p(color)} stroke={p("black")} strokeWidth={borderWidth}
                       x={-rx} y={-ry}
                       width={width} height={height} />
               );
@@ -75,7 +76,7 @@ const Value = ({ value, fontSize, fontWeight, fontFamily, color, textColor, shap
               bg = (
                 <ellipse
                          transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}
-                         fill={p(color)} stroke={p("black")} strokeWidth="2"
+                         fill={p(color)} stroke={p("black")} strokeWidth={borderWidth}
                          cx="0" cy="0"
                          rx={rx} ry={ry}
                 />
