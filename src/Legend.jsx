@@ -1,7 +1,11 @@
 import React from "react";
 import Color from "./util/Color";
+import { multiDefaultTo } from "./util";
 
-const Legend = ({ color, borderColor, borderWidth, description, right, bottom }) => {
+const Legend = ({ game, color, borderColor, borderWidth, description, right, bottom, fontFamily, fontSize, fontWeight }) => {
+  fontFamily = multiDefaultTo("sans-serif", fontFamily);
+  fontSize = multiDefaultTo("14", fontSize);
+  fontWeight = multiDefaultTo("normal", fontWeight);
   return (
     <Color>
       {(c,t) => (
@@ -12,9 +16,9 @@ const Legend = ({ color, borderColor, borderWidth, description, right, bottom })
                   fill={c(color || "orange")}
           />
           <text
-            fontFamily="sans-serif"
-            fontSize="14"
-            fontWeight="normal"
+            fontFamily={fontFamily}
+            fontSize={fontSize}
+            fontWeight={fontWeight}
             textAnchor={right ? "end" : "start"}
             dominantBaseline="middle"
             fill="black"
