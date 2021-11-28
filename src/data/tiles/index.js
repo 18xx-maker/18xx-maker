@@ -2,6 +2,7 @@ const yellow = require("./yellow");
 const green = require("./green");
 const brown = require("./brown");
 const gray = require("./gray");
+const other = require("./other");
 
 const assoc = require("ramda/src/assoc");
 const clone = require("ramda/src/clone");
@@ -22,12 +23,14 @@ gatherAliases(yellow);
 gatherAliases(green);
 gatherAliases(brown);
 gatherAliases(gray);
+gatherAliases(other);
 
 const allTiles = {
   ...yellow,
   ...green,
   ...brown,
   ...gray,
+  ...other,
   ...aliases,
 };
 
