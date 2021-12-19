@@ -72,7 +72,7 @@ const Private = (props) => {
   nameColor = multiDefaultTo("black", nameColor, fontColor);
 
   // let descFontSizeInch = defaultTo(0.085, descFontSize / 72);
-  let descFS = defaultTo(11, descFontSize / px2pt); // 0.085" == 6.12pt == 8.16px
+  let descFS = defaultTo(8.16, descFontSize / px2pt); // 0.085" == 6.12pt == 8.16px
   let descFont = getFontProps(props,
                               descFS, descFontWeight, descFontFamily, descFontStyle);
   let descLineHeight = descFS + lineHeightAdd;
@@ -202,28 +202,28 @@ const Private = (props) => {
                              {Array.isArray(note)
                               ? note.reduce((lines, line) => <>{lines}<br />{line}</>)
                               : note}</div>}
-                  {hexNode}
-                  {company && <div className="private__company">
-                                <Svg viewBox="-15 -15 30 30">
-                                  <GameCompanyToken abbrev={company} outlineWidth={company.outlineWidth || 1} width={15} />
-                                </Svg>
-                              </div>}
-                  {token && <div className="private__company">
-                              <Svg viewBox="-15 -15 30 30">
-                                <Token {...token} outlineWidth={token.outlineWidth || 1} width={15} />
-                              </Svg>
-                            </div>}
-                  {icon && <div className="private__icon">
-                             <Svg viewBox="-15 -15 30 30">
-                               <Icon type={icon} color={iconColor} strokeWidth={1} />
-                             </Svg>
-                           </div>}
                   <div className="private__description"
                        style={{
                          color: c(descColor),
                          lineHeight: `${descLineHeight}px`,
                          ...descFont
                        }}>
+                    {hexNode}
+                    {company && <div className="private__company">
+                                  <Svg viewBox="-15 -15 30 30">
+                                    <GameCompanyToken abbrev={company} outlineWidth={15/25} width={15} />
+                                  </Svg>
+                                </div>}
+                    {token && <div className="private__company">
+                                <Svg viewBox="-15 -15 30 30">
+                                  <Token {...token} outlineWidth={token.outlineWidth || "2"} width={15} />
+                                </Svg>
+                              </div>}
+                    {icon && <div className="private__icon">
+                               <Svg viewBox="-15 -15 30 30">
+                                 <Icon type={icon} color={iconColor} />
+                               </Svg>
+                             </div>}
                     {Array.isArray(description)
                      ? description.reduce((lines, line) => <>{lines}<br />{line}</>)
                      : description}
