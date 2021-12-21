@@ -12,7 +12,7 @@ const colorblindSymbols = {
   "gray": "✱"
 }
 
-const Id = ({ id, extra, bgColor, noID }) => {
+const Id = ({ id, displayID, extra, bgColor, noID }) => {
   const { config } = useContext(ConfigContext);
   const rotation = useOrientation();
 
@@ -57,7 +57,7 @@ const Id = ({ id, extra, bgColor, noID }) => {
               x="0"
               y="0"
             >
-              {id}
+              {displayID || id}
             </text>
           </g>
           {extra && (
