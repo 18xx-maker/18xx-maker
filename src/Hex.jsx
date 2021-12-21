@@ -297,7 +297,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map, opacity }) => {
           />
           {outsideCityBorders}
 
-          {id && <Id id={idBase} extra={idExtra} bgColor={hex.color} noID={hex.noID }/>}
+          {id && <Id id={idBase} extra={idExtra} bgColor={hex.color} displayID={hex.displayID} noID={hex.noID }/>}
 
           {outsideCities}
           {bonus}
