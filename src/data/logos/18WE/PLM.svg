@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+  <g fill="none" fill-rule="evenodd">
+    <path fill="#6000A0" stroke="#6000A0" stroke-width="1.25" d="M447.493 225.154c0 76.576-47.983 139.849-55.91 149.78V75.374c7.927 9.931 55.91 73.204 55.91 149.78z"/>
+    <path fill="#6000A0" stroke="#6000A0" stroke-width="1.25" d="M55.497 107.025h338.775v229.63H55.497z"/>
+    <path fill="#6000A0" stroke="#6000A0" stroke-width="1.25" d="M4.992 225.314c0-78.17 47.97-142.763 55.911-152.92v305.838c-7.94-10.156-55.911-74.748-55.911-152.918z"/>
+    <path fill="#6000A0" stroke="#6000A0" stroke-width="1.25" d="M226.473 449.256c-100.577 0-183.14-100.393-192.01-111.558h384.02c-8.87 11.165-91.434 111.558-192.01 111.558z"/>
+    <path fill="#A000A0" stroke="#A000A0" stroke-width="1.25" d="M226.473.778c100.576 0 183.14 100.394 192.01 111.558H34.463C43.333 101.172 125.896.778 226.473.778z"/>
+    <ellipse stroke="#000" stroke-width="7.5" cx="224.884" cy="224.864" rx="221.134" ry="221.114"/>
+    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="195" font-weight="bold">
+                <tspan x="19.309" y="293.096">PLM</tspan>
+            </text>
+    <path stroke="#000" stroke-linecap="square" stroke-width="15" d="M41.125 113.08h366.283"/>
+    <path fill="#000" stroke="#000" stroke-width="1.25" d="M224.642 449.375c-97.93 0-178.378-91.803-187.447-102.533H412.09c-9.069 10.73-89.517 102.533-187.448 102.533z"/>
+  </g>
+</svg>

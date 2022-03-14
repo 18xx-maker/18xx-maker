@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+  <g fill="none" fill-rule="evenodd">
+    <ellipse fill="#FF0" stroke="#000" stroke-width="7.5" cx="225.149" cy="225" rx="221.101" ry="221.25"/>
+    <path fill="#FFF" stroke="#000" stroke-width="7.5" d="m224.907 12.415 212.717 212.858L224.907 438.13 12.191 225.273 224.907 12.415z"/>
+    <path fill="gray" stroke="#000" stroke-width="7.5" d="M74.495 74.758h300.824v301.028H74.495z"/>
+    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="168.75" font-weight="bold">
+                <tspan x="112.414" y="212.262">KF</tspan>
+            </text>
+    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="168.75" font-weight="bold">
+                <tspan x="96.483" y="357.012">NB</tspan>
+            </text>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+  <g fill="none" fill-rule="evenodd">
+    <path fill="#900000" stroke="#900000" stroke-width="1.25" d="M447.493 225.214c0 76.596-47.983 139.885-55.91 149.82V75.393c7.927 9.934 55.91 73.223 55.91 149.82z"/>
+    <path fill="#900000" stroke="#900000" stroke-width="1.25" d="M55.497 107.054h338.775v229.691H55.497z"/>
+    <path fill="#900000" stroke="#900000" stroke-width="1.25" d="M4.992 225.373c0-78.19 47.97-142.8 55.911-152.96v305.92c-7.94-10.16-55.911-74.77-55.911-152.96z"/>
+    <path fill="#A000A0" stroke="#A000A0" stroke-width="1.25" d="M224.417 449.375c-100.943 0-183.807-100.417-192.712-111.588h385.424c-8.905 11.17-91.77 111.588-192.712 111.588z"/>
+    <path fill="#900000" stroke="#900000" stroke-width="1.25" d="M224.592.778c101.552 0 184.918 100.41 193.883 111.588H30.71C39.675 101.188 123.04.778 224.592.778z"/>
+    <path fill="#FFF" stroke="#FFF" stroke-width="1.25" d="M224.642.897c97.932 0 178.38 91.83 187.448 102.561H37.195C46.262 92.727 126.711.898 224.642.898z"/>
+    <ellipse stroke="#000" stroke-width="7.5" cx="224.884" cy="224.923" rx="221.134" ry="221.173"/>
+    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="262.5" font-weight="bold">
+                <tspan x="28.241" y="315.39">GC</tspan>
+            </text>
+    <path stroke="#000" stroke-linecap="square" stroke-width="15" d="M42.5 339.5h365"/>
+  </g>
+</svg>

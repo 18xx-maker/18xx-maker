@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+  <g fill="none" fill-rule="evenodd">
+    <path fill="#FF60B0" stroke="#FF60B0" stroke-width="1.25" d="M447.731 225.214c0 76.58-47.772 139.858-55.684 149.814V75.4c7.912 9.955 55.684 73.234 55.684 149.814z"/>
+    <path fill="#FF60B0" stroke="#FF60B0" stroke-width="1.25" d="M57.296 107.054h337.425v229.691H57.296z"/>
+    <path fill="#FF60B0" stroke="#FF60B0" stroke-width="1.25" d="M4.746 225.371c0-77.043 47.765-140.706 55.68-150.727v301.454c-7.915-10.021-55.68-73.684-55.68-150.727z"/>
+    <path fill="#A000A0" stroke="#A000A0" stroke-width="1.25" d="M225.718 449.375c-101.15 0-184.185-100.415-193.111-111.588h386.222c-8.926 11.173-91.961 111.588-193.111 111.588zm0-448.597c101.15 0 184.185 100.415 193.111 111.588H32.607C41.533 101.193 124.567.778 225.717.778z"/>
+    <ellipse stroke="#000" stroke-width="7.5" cx="226.008" cy="224.923" rx="220.242" ry="221.173"/>
+    <text fill="#000" font-family="Arial-BoldMT, Arial" font-size="150" font-weight="bold">
+                <tspan x="11.443" y="274.646">Ouest</tspan>
+            </text>
+    <path stroke="#000" stroke-linecap="square" stroke-width="22.5" d="M49.5 113.5h353M49.721 339.538h352.843"/>
+  </g>
+</svg>

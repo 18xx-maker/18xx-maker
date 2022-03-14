@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+  <g fill="none" fill-rule="evenodd">
+    <path fill="#FF4545" stroke="#FF4545" stroke-width="1.25" d="M446 225.59c0 75.258-47.816 137.441-55.72 147.206V78.384C398.184 88.148 446 150.332 446 225.59z"/>
+    <path fill="#FF4545" stroke="#FF4545" stroke-width="1.25" d="M55.314 107.054h337.642v229.691H55.314z"/>
+    <path fill="#FF4545" stroke="#FF4545" stroke-width="1.25" d="M4.977 225.214c0-76.583 47.806-139.863 55.721-149.815v299.63c-7.915-9.952-55.72-73.233-55.72-149.815z"/>
+    <path fill="#A000A0" stroke="#A000A0" stroke-width="1.25" d="M224.219 449.375c-99.467 0-181.116-100.435-189.876-111.588h379.752c-8.76 11.153-90.409 111.588-189.876 111.588zm0-448.597c99.467 0 181.116 100.436 189.876 111.588H34.343C43.103 101.214 124.752.778 224.219.778z"/>
+    <ellipse stroke="#000" stroke-width="7.5" cx="224.135" cy="224.923" rx="220.385" ry="221.173"/>
+    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="146.25" font-weight="bold">
+                <tspan x="10.56" y="273.648">NORD</tspan>
+            </text>
+    <path stroke="#000" stroke-linecap="square" stroke-width="15" d="M40.988 112.991H406.8M43.237 339.419h362.064"/>
+    <path fill="#000" stroke="#000" stroke-width="1.25" d="M224.269.778c101.215 0 184.303 100.414 193.235 111.588H31.034C39.965 101.192 123.053.778 224.268.778z"/>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+  <g fill="none" fill-rule="evenodd">
+    <path fill="#452545" stroke="#452545" stroke-width="1.25" d="M447.742 225.214c0 76.553-47.422 139.814-55.307 149.804V75.41c7.885 9.99 55.307 73.252 55.307 149.805z"/>
+    <path fill="#452545" stroke="#452545" stroke-width="1.25" d="M59.898 107.054h335.185v229.691H59.898z"/>
+    <path fill="#452545" stroke="#452545" stroke-width="1.25" d="M59.898 107.054h335.185v229.691H59.898z"/>
+    <path fill="#452545" stroke="#452545" stroke-width="1.25" d="M9.926 225.373c0-78.146 47.41-142.727 55.308-152.944v305.888C57.335 368.1 9.926 303.52 9.926 225.373z"/>
+    <path fill="#A000A0" stroke="#A000A0" stroke-width="1.25" d="M227.201 449.375c-100.484 0-182.97-100.423-191.83-111.588h383.661c-8.86 11.165-91.347 111.588-191.83 111.588zm0-448.597c100.484 0 182.97 100.423 191.831 111.588H35.371C44.23 101.201 126.717.778 227.2.778z"/>
+    <ellipse stroke="#000" stroke-width="7.5" cx="227.49" cy="224.923" rx="218.76" ry="221.173"/>
+    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="210" font-weight="bold">
+                <tspan x="18.303" y="298.656">EST</tspan>
+            </text>
+    <path stroke="#000" stroke-linecap="square" stroke-width="22.5" d="M52.369 113.11h350.508M52.369 339.538h350.508"/>
+  </g>
+</svg>

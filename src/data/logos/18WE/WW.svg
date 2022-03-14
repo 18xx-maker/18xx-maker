@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+  <g fill="none" fill-rule="evenodd">
+    <ellipse fill="#FF0" stroke="#000" stroke-width="7.5" cx="225.262" cy="225" rx="220.988" ry="221.25"/>
+    <path fill="#FFF" stroke="#000" stroke-width="7.5" d="M74.686 74.758h300.669v301.028H74.686z"/>
+    <path fill="#FFF" stroke="#000" stroke-width="7.5" d="m225.02 12.416 212.61 212.857-212.61 212.856L12.413 225.273 225.02 12.416z"/>
+    <text fill="#000" font-family="Arial-BoldMT, Arial" font-size="150" font-weight="bold">
+                <tspan x="83.161" y="277.762">WW</tspan>
+            </text>
+  </g>
+</svg>

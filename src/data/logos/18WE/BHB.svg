@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+  <g fill="none" fill-rule="evenodd">
+    <ellipse fill="#A0FFA0" stroke="#000" stroke-width="7.5" cx="225.005" cy="225.24" rx="221.014" ry="221.01"/>
+    <path fill="#0060D0" stroke="#000" stroke-width="7.5" d="m224.764 4.33 190.9 110.215v220.43l-190.9 110.215L33.863 334.975v-220.43L224.763 4.33z"/>
+    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="165" font-weight="bold">
+                    <tspan x="46.5" y="281.218">BHB</tspan>
+                </text>
+    <path fill="#FFF" stroke="#FFF" stroke-width="1.25" d="M224.764 438.799 34.654 328.893h380.22l-190.11 109.906z"/>
+  </g>
+</svg>

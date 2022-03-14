@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+  <g fill="none" fill-rule="evenodd">
+    <ellipse fill="#A0FFA0" stroke="#000" stroke-width="7.5" cx="225.26" cy="225.24" rx="220.99" ry="221.01"/>
+    <path fill="#40FF40" stroke="#000" stroke-width="7.5" d="m225.018 4.33 190.88 110.215v220.43L225.019 445.19 34.138 334.975v-220.43L225.018 4.33z"/>
+    <text fill="#000" font-family="Arial-BoldMT, Arial" font-size="195" font-weight="bold">
+                    <tspan x="35.072" y="292.72">DSJ</tspan>
+                </text>
+    <path fill="#000" stroke="#000" stroke-width="1.25" d="M225.018 448.799 34.928 338.893h380.18l-190.09 109.906z"/>
+  </g>
+</svg>
