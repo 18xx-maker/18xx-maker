@@ -84,15 +84,19 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
     ),
     trains
   );
+  let numberColors = game.number_cards || [game.info.background]
   let numberNodes = map(
-    n => (
-      <Number
-        number={n}
-        background={game.info.background}
-        key={`number=${n}`}
-      />
+    color => map(
+      n => (
+        <Number
+          number={n}
+          background={color}
+          key={`number=${n}`}
+        />
+      ),
+      numbers
     ),
-    numbers
+    numberColors
   );
 
   let cardNodes = [...privateNodes, ...shareNodes, ...trainNodes, ...numberNodes];
