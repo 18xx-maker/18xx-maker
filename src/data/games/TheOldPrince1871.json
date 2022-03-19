@@ -325,7 +325,9 @@
     "PEI15": {
       "color": "gray",
       "values": [{ "value": 80, "angle": 210, "percent": 0.8 }],
-      "labels": [{ "label": "CX", "angle": 90, "percent": 0.8 }],
+      "labels": [
+        { "fontSize": 18, "label": "CX", "angle": 90, "percent": 0.8 }
+      ],
       "cities": [{ "size": 3 }],
       "track": [
         { "side": 2 },
