@@ -151,6 +151,14 @@
       ],
       "additionalProperties": false
     },
+    "privates": {
+      "type": "object",
+      "properties": {
+        "style": { "type": "string", "enum": ["small", "big"] }
+      },
+      "additionalProperties": false,
+      "required": ["style"]
+    },
     "trains": {
       "type": "object",
       "properties": {

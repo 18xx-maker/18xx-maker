@@ -261,6 +261,14 @@ const Config = () => {
       <Divider/>
 
       <Box className={classes.configSection}>
+        <Typography variant="h5">Privates</Typography>
+        <Input name="privates.style" label="Private Style"
+               description="Different styles of private cards. Small uses small icons while big uses bigger ones." />
+      </Box>
+
+      <Divider/>
+
+      <Box className={classes.configSection}>
         <Typography variant="h5">Trains</Typography>
         <Input name="trains.style" label="Train Style"
                description="Different styles of train cards. Color uses a large color band, while the number style uses a colored number for the train name." />

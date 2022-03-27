@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import ConfigContext from "../context/ConfigContext";
 import GameContext from "../context/GameContext";
 import { MapOrientation } from "../context/OrientationContext";
 
@@ -45,6 +46,9 @@ const Private = (props) => {
         hex, tile, token, company,
         fontColor, backgroundColor } = props;
   const { game } = useContext(GameContext);
+  const { config } = useContext(ConfigContext);
+  const style = config.privates.style;
+  console.log(style)
 
   const px2pt = 0.75;
   const in2pt = 72;
@@ -72,7 +76,7 @@ const Private = (props) => {
   nameColor = multiDefaultTo("black", nameColor, fontColor);
 
   // let descFontSizeInch = defaultTo(0.085, descFontSize / 72);
-  let descFS = defaultTo(8.16, descFontSize / px2pt); // 0.085" == 6.12pt == 8.16px
+  let descFS = defaultTo(style === "small" ? 8.16 : 11, descFontSize / px2pt); // 0.085" == 6.12pt == 8.16px
   let descFont = getFontProps(props,
                               descFS, descFontWeight, descFontFamily, descFontStyle);
   let descLineHeight = descFS + lineHeightAdd;
@@ -165,6 +169,31 @@ const Private = (props) => {
                </div>);
   }
 
+  const icons = (
+    <>
+      {hexNode}
+      {company && <div className="private__company">
+                   <Svg viewBox="-15 -15 30 30">
+                     <GameCompanyToken abbrev={company}
+                                       width={15}
+                                       outlineWidth={style === "big" ? (company.outlineWidth || 1) : 15/25} />
+                   </Svg>
+                 </div>}
+      {token && <div className="private__company">
+                 <Svg viewBox="-15 -15 30 30">
+                   <Token {...token}
+                          width={15}
+                          outlineWidth={token.outlineWidth || (style === "big" ? 1 : "2")} />
+                 </Svg>
+               </div>}
+      {icon && <div className="private__icon">
+                <Svg viewBox="-15 -15 30 30">
+                  <Icon type={icon} color={iconColor} strokeWidth={style === "big" ? 1 : 2}/>
+                </Svg>
+              </div>}
+    </>
+  );
+
   return (
     <div className="cutlines">
       <div className="card private">
@@ -202,28 +231,14 @@ const Private = (props) => {
                              {Array.isArray(note)
                               ? note.reduce((lines, line) => <>{lines}<br />{line}</>)
                               : note}</div>}
+                  {style === "big" && icons}
                   <div className="private__description"
                        style={{
                          color: c(descColor),
                          lineHeight: `${descLineHeight}px`,
                          ...descFont
                        }}>
-                    {hexNode}
-                    {company && <div className="private__company">
-                                  <Svg viewBox="-15 -15 30 30">
-                                    <GameCompanyToken abbrev={company} outlineWidth={15/25} width={15} />
-                                  </Svg>
-                                </div>}
-                    {token && <div className="private__company">
-                                <Svg viewBox="-15 -15 30 30">
-                                  <Token {...token} outlineWidth={token.outlineWidth || "2"} width={15} />
-                                </Svg>
-                              </div>}
-                    {icon && <div className="private__icon">
-                               <Svg viewBox="-15 -15 30 30">
-                                 <Icon type={icon} color={iconColor} />
-                               </Svg>
-                             </div>}
+                    {style === "small" && icons}
                     {Array.isArray(description)
                      ? description.reduce((lines, line) => <>{lines}<br />{line}</>)
                      : description}

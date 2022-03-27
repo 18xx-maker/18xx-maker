@@ -78,6 +78,9 @@
     "bleed": true,
     "reverseMarketTokens": "all"
   },
+  "privates": {
+    "style": "small"
+  },
   "trains": {
     "style": "color",
     "images": false
