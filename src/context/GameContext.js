@@ -13,8 +13,6 @@ import equals from "ramda/src/equals";
 import is from "ramda/src/is";
 import isNil from "ramda/src/isNil";
 
-import { isElectron } from "../util";
-
 const path = require("path");
 
 const GameContext = createContext({ game: null });
@@ -30,9 +28,8 @@ const loadFile = (file) => {
     .then(assoc("id", id))
     .then(assoc("slug", slug))
     .then((game) => {
-      if (isElectron) {
-        let ipcRenderer = window.require("electron").ipcRenderer;
-        ipcRenderer.send("watch", file.path, id, slug);
+      if (window.isElectron) {
+        window.ipc.watchGame(file.path, id, slug);
       }
       return game;
     })
@@ -63,9 +60,8 @@ const loadBundledGame = (id) => {
     .then(assoc("id", gameInfo.id))
     .then(assoc("slug", gameInfo.slug))
     .then((game) => {
-      if (isElectron) {
-        let ipcRenderer = window.require("electron").ipcRenderer;
-        ipcRenderer.send("watch"); // Not sending a file path to stop watching this file
+      if (window.isElectron) {
+        window.ipc.removeWatch();
       }
       return game;
     })
@@ -117,16 +113,14 @@ export const GameProvider = ({ children }) => {
 
   // If we're running in electron, listen for game updates and load them
   useEffect(() => {
-    if (isElectron) {
+    if (window.isElectron) {
       let updateGame = (event, game) => {
         setGame(game);
         sendAlert("info", `${game.info.title} updated`);
       };
 
-      let ipcRenderer = window.require("electron").ipcRenderer;
-      ipcRenderer.on("watch", updateGame);
-
-      return () => ipcRenderer.removeListener("watch", updateGame);
+      window.ipc.addGameListener(updateGame);
+      return () => window.ipc.removeGameListener(updateGame);
     }
   });
 
