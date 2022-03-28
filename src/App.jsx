@@ -25,8 +25,6 @@ import AlertContext from "./context/AlertContext";
 import ConfigContext, { useConfig } from "./context/ConfigContext";
 import { GameProvider } from "./context/GameContext";
 
-import { isElectron } from "./util";
-
 import Loading from "./Loading";
 
 import Home from "./pages/Home";
@@ -65,19 +63,14 @@ body {
   const closeAlert = () => setAlert({ open: false });
 
   useEffect(() => {
-    if (isElectron) {
+    if (window.isElectron) {
       let ipcAlert = (event, type, message) => sendAlert(type, message);
       let ipcProgress = (event, progress, message) => sendProgress(progress, message);
-      let ipcRenderer = window.require("electron").ipcRenderer;
       let redirect = (event, path) => history.push(path);
-      ipcRenderer.on("alert", ipcAlert);
-      ipcRenderer.on("progress", ipcProgress);
-      ipcRenderer.on("redirect", redirect);
+      window.ipc.addListeners(ipcAlert, ipcProgress, redirect);
 
       return () => {
-        ipcRenderer.removeListener("alert", ipcAlert);
-        ipcRenderer.removeListener("progress", ipcProgress);
-        ipcRenderer.removeListener("redirect", redirect);
+        window.ipc.removeListeners(ipcAlert, ipcProgress, redirect);
       }
     }
   });
@@ -101,7 +94,7 @@ body {
                   <Route>
                     <AppNav toggleSideNav={toggleSideNav}/>
                     <SideNav open={sideNavOpen} toggle={toggleSideNav}/>
-                    {isElectron ? <ExportButton/> : <PrintButton/>}
+                    {window.isElectron ? <ExportButton/> : <PrintButton/>}
                     <ConfigDrawer/>
                   </Route>
                 </Switch>
