@@ -19,12 +19,7 @@ const File = (props) => {
   if (is(Object, data)) {
     data = JSON.stringify(data, null, 2);
   }
-  if (is(String, data)) {
-    data = new Buffer(data);
-  }
-  if (is(Buffer, data)) {
-    data = data.toString('base64');
-  }
+  data = window.btoa(encodeURIComponent(data));
 
   if (props.list) {
     return <ListItem button

@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useBooleanParam } from "../util/query";
 
 import Config from "./Config";
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ConfigDrawer = () => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const [print] = useBooleanParam('print');
@@ -71,7 +71,7 @@ const ConfigDrawer = () => {
       searchParams.set('config', true);
     }
 
-    history.push({search: searchParams.toString()});
+    navigate({search: searchParams.toString()});
   }
 
   return (

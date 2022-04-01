@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link, useLocation, matchPath } from "react-router-dom";
+import { Link, useLocation, useMatch } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import Divider from "@material-ui/core/Divider";
@@ -36,9 +36,7 @@ const DocsNav = () => {
     <ListItem button
               component={Link}
               to={`/docs/${path}`}
-              selected={!!matchPath(location.pathname,
-                                    { path: `/docs/${path}`,
-                                      exact: true})}>
+              selected={!!useMatch(`/docs/${path}`)}>
       <ListItemIcon>{icon}</ListItemIcon>
       <ListItemText primary={name}
                     secondary={desc}/>

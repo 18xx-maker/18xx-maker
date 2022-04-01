@@ -108,7 +108,7 @@ const Input = ({name, label, description, dimension}) => {
     <>
       {inputNode}
       <Typography variant="caption" display="block" gutterBottom>
-        <ReactMarkdown source={description}/>
+        <ReactMarkdown children={description}/>
       </Typography>
     </>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import TileNav from "../nav/Tiles";
 import Tiles from "./Tiles";
@@ -15,17 +15,11 @@ const TilesIndex = () => {
           <TileNav/>
         </div>
       </div>
-      <Switch>
-        <Route path="/tiles" exact>
-          <Tiles />
-        </Route>
-        <Route path="/tiles/atoms">
-          <Atoms />
-        </Route>
-        <Route path="/tiles/positioning">
-          <Positioning />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/tiles" element={<Tiles />}/>
+        <Route path="/tiles/atoms" element={<Atoms />}/>
+        <Route path="/tiles/positioning" element={<Positioning />}/>
+      </Routes>
     </>
   );
 };

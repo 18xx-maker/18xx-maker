@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect } from "react";
-import { Redirect, useLocation, matchPath } from "react-router-dom";
+import { Navigate, useMatch } from "react-router-dom";
 
 import { useAlert } from "./AlertContext";
 
@@ -13,7 +13,7 @@ import equals from "ramda/src/equals";
 import is from "ramda/src/is";
 import isNil from "ramda/src/isNil";
 
-const path = require("path");
+const path = require("path-browserify");
 
 const GameContext = createContext({ game: null });
 
@@ -83,7 +83,6 @@ const loadFileOrId = (fileOrId) => {
 export const GameProvider = ({ children }) => {
   const sendAlert = useAlert();
   const [game, setGame] = useLocalState("game", null);
-  const location = useLocation();
 
   const loadGame = (fileOrId) => {
     return loadFileOrId(fileOrId)
@@ -125,9 +124,7 @@ export const GameProvider = ({ children }) => {
   });
 
   // Now we test to see if the game we have loaded matches any url we are trying to hit and if not, fix it.
-  const match = matchPath(location.pathname, {
-    path: "/games/:slug/:component?",
-  });
+  const match = useMatch("/games/:slug/*");
   if (match) {
     if (isNil(game) || match.params.slug !== game.id) {
       // Try loading the other game if it's a bundled one
@@ -138,7 +135,7 @@ export const GameProvider = ({ children }) => {
           "error",
           `Unable to load ${match.params.slug}, please load the json file directly if you wish to work on it.`
         );
-        return <Redirect to="/games/" />;
+        return <Navigate to="/games/" />;
       }
     } else if (
       !isNil(game) &&

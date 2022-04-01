@@ -1,7 +1,7 @@
 import React from "react";
 import Map from "../map/Map";
 import Svg from "../Svg";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import { getMapData } from "../map/util";
 
@@ -11,7 +11,7 @@ const MapSingle = ({ game, config, variation }) => {
 
   // Do redirects if we need or do not need a variation in the url
   if (!game.map) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Navigate to={`/games/${game.slug}/`} />;
   }
 
   // Get map data

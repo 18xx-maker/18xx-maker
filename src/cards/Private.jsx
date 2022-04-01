@@ -48,7 +48,6 @@ const Private = (props) => {
   const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
   const style = config.privates.style;
-  console.log(style)
 
   const px2pt = 0.75;
   const in2pt = 72;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router";
+import { Routes, Route } from "react-router";
 
 import { useBooleanParam } from "../util/query";
 
@@ -32,15 +32,11 @@ const SideNav = ({open, toggle}) => {
   const menu = (
     <>
       <Toolbar/>
-      <Route path="/games">
-        <GameNav/>
-      </Route>
-      <Route path="/elements">
-        <ElementsNav/>
-      </Route>
-      <Route path="/docs">
-        <DocsNav/>
-      </Route>
+      <Routes>
+        <Route path="/games/:slug/*" element={<GameNav/>}/>
+        <Route path="/elements/*" element={<ElementsNav/>}/>
+        <Route path="/docs/*" element={<DocsNav/>}/>
+      </Routes>
     </>
   );
 

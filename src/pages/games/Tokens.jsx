@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import ConfigContext from "../../context/ConfigContext";
 import GameContext from "../../context/GameContext";
@@ -210,7 +210,7 @@ const Tokens = () => {
   const { game } = useContext(GameContext);
 
   if (!game.companies && !game.tokens) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Navigate to={`/games/${game.slug}/`} />;
   }
 
   const { overrideCompanies: override, overrideSelect: selection } = config;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, Route, Switch, useParams } from "react-router-dom";
+import { Navigate, Route, Routes, useParams } from "react-router-dom";
 
 import GameContext from "./context/GameContext";
 
@@ -35,7 +35,7 @@ const Game = () => {
   let game = games[params.game];
 
   if (!game) {
-    return <Redirect to="/" />;
+    return <Navigate to="/" />;
   }
 
   return (
@@ -47,74 +47,30 @@ const Game = () => {
           </div>
         </div>
       )}
-      <Switch>
-        <Route path="/:game/background">
-          <Background />
-        </Route>
-        <Route path="/:game/bankpool">
-          <BankPool />
-        </Route>
-        <Route path="/:game/cards">
-          <Cards />
-        </Route>
-        <Route path="/:game/charters">
-          <Charters />
-        </Route>
-        <Route path="/:game/ipo">
-          <IPO />
-        </Route>
-        <Route path="/:game/map" exact>
-          <MapSingle />
-        </Route>
-        <Route path="/:game/map-paginated" exact>
-          <MapPaginated />
-        </Route>
-        <Route path="/:game/map/:variation">
-          <MapSingle />
-        </Route>
-        <Route path="/:game/map-paginated/:variation">
-          <MapPaginated />
-        </Route>
-        <Route path="/:game/market" exact>
-         <MarketSingle />
-        </Route>
-        <Route path="/:game/market-paginated">
-          <MarketPaginated />
-        </Route>
-        <Route path="/:game/revenue">
-          <RevenueSingle />
-        </Route>
-        <Route path="/:game/revenue-paginated">
-          <RevenuePaginated />
-        </Route>
-        <Route path="/:game/par">
-          <ParSingle />
-        </Route>
-        <Route path="/:game/par-paginated">
-          <ParPaginated />
-        </Route>
-        <Route path="/:game/tile-manifest">
-          <TileManifest />
-        </Route>
-        <Route path="/:game/tiles">
-          <TileSheet />
-        </Route>
-        <Route path="/:game/tokens">
-          <Tokens />
-        </Route>
-        <Route path="/:game/b18-map">
-          <B18Map />
-        </Route>
-        <Route path="/:game/b18-tiles-:color">
-          <B18Tiles />
-        </Route>
-        <Route path="/:game/b18-tokens">
-          <B18Tokens />
-        </Route>
-        <Route>
-          <About />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/:game/background" element={<Background />}/>
+        <Route path="/:game/bankpool" element={<BankPool />}/>
+        <Route path="/:game/cards" element={<Cards />}/>
+        <Route path="/:game/charters" element={<Charters />}/>
+        <Route path="/:game/ipo" element={<IPO />}/>
+        <Route path="/:game/map" element={<MapSingle />}/>
+        <Route path="/:game/map-paginated" element={<MapPaginated />}/>
+        <Route path="/:game/map/:variation" element={<MapSingle />}/>
+        <Route path="/:game/map-paginated/:variation" element={<MapPaginated />}/>
+        <Route path="/:game/market" element={<MarketSingle />}/>
+        <Route path="/:game/market-paginated" element={<MarketPaginated />}/>
+        <Route path="/:game/revenue" element={<RevenueSingle />}/>
+        <Route path="/:game/revenue-paginated" element={<RevenuePaginated />}/>
+        <Route path="/:game/par" element={<ParSingle />}/>
+        <Route path="/:game/par-paginated" element={<ParPaginated />}/>
+        <Route path="/:game/tile-manifest" element={<TileManifest />}/>
+        <Route path="/:game/tiles" element={<TileSheet/>}/>
+        <Route path="/:game/tokens" element={<Tokens />}/>
+        <Route path="/:game/b18-map" element={<B18Map />}/>
+        <Route path="/:game/b18-tiles-:color" element={<B18Tiles />}/>
+        <Route path="/:game/b18-tokens" element={<B18Tokens />}/>
+        <Route path="*" element={<About/>}/>
+      </Routes>
     </GameContext.Provider>
   );
 };

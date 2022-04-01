@@ -15,7 +15,6 @@ import join from "ramda/src/join";
 import juxt from "ramda/src/juxt";
 import lte from "ramda/src/lte";
 import map from "ramda/src/map";
-import merge from "ramda/src/merge";
 import mergeAll from "ramda/src/mergeAll";
 import nth from "ramda/src/nth";
 import pick from "ramda/src/pick";
@@ -233,7 +232,7 @@ export const overrideCompanies = (companies, override, selections) => {
 
     // If we have a valid override for the index, merge!
     if (overrideCompanies[index]) {
-      company = merge(company, overrideCompanies[index]);
+      company = mergeAll([company, overrideCompanies[index]]);
 
       // Remove some fields if they don't exist on the override company
       company.logo = overrideCompanies[index].logo;

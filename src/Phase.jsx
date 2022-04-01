@@ -149,7 +149,7 @@ const Phase = ({ phases, trains, minor, company }) => {
       let phased = R.map(t => <li key={t.name}>{t.name}</li>, phasedTrains);
 
       return (
-        <Color key={phase.name}>
+        <Color key={phase.name || R.map(t => t.name, phaseTrains).join("_")}>
           {c => (
             <tr key={phase.name}>
               {includeName && <td>{phase.name}</td>}

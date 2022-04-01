@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import ConfigContext from "../../context/ConfigContext";
 import GameContext from "../../context/GameContext";
 
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { getCharterData, compileCompanies, overrideCompanies } from "../../util";
 import Charter from "../../Charter";
 import Svg from "../../Svg";
@@ -32,7 +32,7 @@ const Charters = () => {
   const { game } = useContext(GameContext);
 
   if (!game.companies) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Navigate to={`/games/${game.slug}/`} />;
   }
 
   let gameCompanies = overrideCompanies(compileCompanies(game), override, selection);

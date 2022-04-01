@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Route } from "react-router";
+import { Routes, Route } from "react-router";
 import GameContext from "./context/GameContext";
 import { useBooleanParam } from "./util/query";
 
@@ -33,19 +33,23 @@ const PrintButton = () => {
     window.print();
   };
 
+  const button = (
+    <Slide direction="left" in={true}>
+      <Tooltip title="Print" aria-label="print" placement="left" arrow>
+        <Fab onClick={handler}
+             position="sticky"
+             className={classes.printButton}
+             color="primary">
+          <PrintIcon/>
+        </Fab>
+      </Tooltip>
+    </Slide>
+  );
+
   return (
-    <Route path="/games">
-      <Slide direction="left" in={true}>
-        <Tooltip title="Print" aria-label="print" placement="left" arrow>
-          <Fab onClick={handler}
-               position="sticky"
-               className={classes.printButton}
-               color="primary">
-            <PrintIcon/>
-          </Fab>
-        </Tooltip>
-      </Slide>
-    </Route>
+    <Routes>
+      <Route path="/games/*" element={button}/>
+    </Routes>
   );
 };
 

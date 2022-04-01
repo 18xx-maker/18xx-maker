@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import Paginate from "../util/Paginate";
 
@@ -9,7 +9,7 @@ import Market from "./Market";
 
 const MarketPaginated = ({ config, game }) => {
   if (!game.stock || !game.stock.market) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Navigate to={`/games/${game.slug}/`} />;
   }
 
   let data = getMarketData(game.stock, config);

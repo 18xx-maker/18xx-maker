@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import Par from "./Par";
 import Svg from "../Svg";
@@ -9,7 +9,7 @@ import { unitsToCss } from "../util";
 
 const ParSingle = ({ config, game }) => {
   if (!game.stock || !game.stock.par || !game.stock.par.values) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Navigate to={`/games/${game.slug}/`} />;
   }
   let data = getParData(game.stock, config);
 

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Route, useLocation } from "react-router";
+import { Routes, Route, useLocation } from "react-router";
 import { useTranslation } from 'react-i18next';
 import GameContext from "./context/GameContext";
 import ConfigContext from "./context/ConfigContext";
@@ -232,8 +232,8 @@ const ExportButton = () => {
     handleMenuClose();
   };
 
-  return (
-    <Route path="/games">
+  const button = (
+    <>
       <Slide direction="left" in={true}>
         <Tooltip title="Export" aria-label="export" placement="left" arrow>
           <Fab onClick={handleMenu}
@@ -269,7 +269,13 @@ const ExportButton = () => {
           <ListItemText primary={t('export.singlePng')}/>
         </MenuItem>
       </Menu>
-    </Route>
+    </>
+  );
+
+  return (
+    <Routes>
+      <Route path="/games/*" element={button}/>
+    </Routes>
   );
 };
 

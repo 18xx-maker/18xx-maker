@@ -1,13 +1,13 @@
 import React, { useEffect, useState, Suspense } from "react";
 
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useBooleanParam } from "./util/query";
 
 import Alert from "@material-ui/lab/Alert";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Snackbar from "@material-ui/core/Snackbar";
 
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { orange, deepPurple } from '@material-ui/core/colors';
 
 import SetSvgColors from "./util/SetSvgColors";
@@ -33,9 +33,9 @@ import Elements from "./pages/Elements";
 import Games from "./pages/Games";
 
 import curry from "ramda/src/curry";
-const path = require('path');
+const path = require('path-browserify');
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: deepPurple[600]
@@ -48,7 +48,7 @@ const theme = createMuiTheme({
 
 const App = () => {
   const [print] = useBooleanParam('print');
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const printCss = print ? `
 body {
@@ -66,7 +66,7 @@ body {
     if (window.isElectron) {
       let ipcAlert = (event, type, message) => sendAlert(type, message);
       let ipcProgress = (event, progress, message) => sendProgress(progress, message);
-      let redirect = (event, path) => history.push(path);
+      let redirect = (event, path) => navigate(path);
       window.ipc.addListeners(ipcAlert, ipcProgress, redirect);
 
       return () => {
@@ -82,6 +82,15 @@ body {
   const [sideNavOpen, setSideNavOpen] = useState(false);
   const toggleSideNav = () => setSideNavOpen(!sideNavOpen);
 
+  const config = (
+    <>
+      <AppNav toggleSideNav={toggleSideNav}/>
+      <SideNav open={sideNavOpen} toggle={toggleSideNav}/>
+      {window.isElectron ? <ExportButton/> : <PrintButton/>}
+      <ConfigDrawer/>
+    </>
+  );
+
   return (
     <ThemeProvider theme={theme}>
       <AlertContext.Provider value={sendAlert}>
@@ -89,30 +98,17 @@ body {
           <ConfigContext.Provider value={configContext}>
             <Suspense fallback={<Loading/>}>
               <ScrollToTop>
-                <Switch>
-                  <Route path="/render"></Route>
-                  <Route>
-                    <AppNav toggleSideNav={toggleSideNav}/>
-                    <SideNav open={sideNavOpen} toggle={toggleSideNav}/>
-                    {window.isElectron ? <ExportButton/> : <PrintButton/>}
-                    <ConfigDrawer/>
-                  </Route>
-                </Switch>
+                <Routes>
+                  <Route path="/render/*" element={null}/>
+                  <Route path="*" element={config}/>
+                </Routes>
                 <Viewport sideNavOpen={sideNavOpen}>
-                  <Switch>
-                    <Route path="/" exact>
-                      <Home />
-                    </Route>
-                    <Route path="/elements">
-                      <Elements />
-                    </Route>
-                    <Route path="/docs">
-                      <Docs />
-                    </Route>
-                    <Route path="/games">
-                      <Games />
-                    </Route>
-                  </Switch>
+                  <Routes>
+                    <Route path="/" element={<Home />}/>
+                    <Route path="/elements/*" element={<Elements />}/>
+                    <Route path="/docs/*" element={<Docs />}/>
+                    <Route path="/games/*" element={<Games />}/>
+                  </Routes>
                 </Viewport>
                 {print || <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
                                     open={alert.open}

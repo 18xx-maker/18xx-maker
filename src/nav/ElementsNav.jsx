@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link, useLocation, matchPath } from "react-router-dom";
+import { Link, useLocation, useMatch } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
@@ -23,9 +23,7 @@ const ElementsNav = () => {
     <ListItem button
               component={Link}
               to={`/elements${path}`}
-              selected={!!matchPath(location.pathname,
-                                    { path: `/elements${path}`,
-                                      exact: true})}>
+              selected={!!useMatch(`/elements${path}`)}>
       <ListItemIcon>{icon}</ListItemIcon>
       <ListItemText primary={name}
                     secondary={desc}/>

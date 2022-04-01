@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link as RouterLink, useHistory } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 import games from "../data/games";
 import publishers from "../data/publishers/index.json";
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const LoadGames = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const classes = useStyles();
   const { loadGame } = useGame();
 
@@ -144,7 +144,7 @@ const LoadGames = () => {
 
     loadGame(getEventFile(event))
       .then(game => {
-        history.push(`/games/${game.slug}/map`);
+        navigate(`/games/${game.slug}/map`);
       });
   };
 

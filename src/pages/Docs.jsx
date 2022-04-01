@@ -84,11 +84,16 @@ const LocalLink = (props) => {
 }
 
 const renderers = {
-  heading: Heading,
-  paragraph: (props) => <Typography variant="body1" {...props}/>,
-  listItem: (props) => <li><Typography component="span" children={props.children}/></li>,
-  link: LocalLink,
-  image: ElectronImage
+  h1: Heading,
+  h2: Heading,
+  h3: Heading,
+  h4: Heading,
+  h5: Heading,
+  h6: Heading,
+  p: (props) => <Typography variant="body1" {...props}/>,
+  li: (props) => <li><Typography component="span" children={props.children}/></li>,
+  a: LocalLink,
+  img: ElectronImage
 };
 
 const Docs = () => {
@@ -114,7 +119,7 @@ const Docs = () => {
   return (
     <Container maxWidth="md">
       <Paper elevation={5} className={classes.page}>
-        <ReactMarkdown source={source} renderers={renderers}/>
+        <ReactMarkdown children={source} components={renderers}/>
       </Paper>
     </Container>
   );

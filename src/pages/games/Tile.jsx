@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 import ConfigContext from "../../context/ConfigContext";
 import GameContext from "../../context/GameContext";
@@ -20,7 +20,7 @@ const TileSheet = () => {
   const { width: hexWidth } = config.tiles;
 
   if (!game.tiles) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Navigate to={`/games/${game.slug}/`} />;
   }
 
   let tile = getTile(tileDefs, game.tiles, id);
