@@ -212,23 +212,25 @@ const ExportButton = () => {
     setMenuAnchor(null);
   }
 
+  const ipcRenderer = window.require('electron').ipcRenderer;
+
   const handleAllPdf = () => {
-    window.ipc.exportPDF(game.slug, pdfItems(game, config));
+    ipcRenderer.send('export-pdf', game.slug, pdfItems(game, config));
     handleMenuClose();
   }
 
   const handleAllPng = () => {
-    window.ipc.exportPNG(game.slug, pngItems(game, config));
+    ipcRenderer.send('export-png', game.slug, pngItems(game, config));
     handleMenuClose();
   }
 
   const handleSinglePdf = () => {
-    window.ipc.pdf(location.pathname + location.search);
+    ipcRenderer.send('pdf', location.pathname + location.search);
     handleMenuClose();
   };
 
   const handleSinglePng = () => {
-    window.ipc.png(location.pathname + location.search);
+    ipcRenderer.send('screenshot', location.pathname + location.search);
     handleMenuClose();
   };
 

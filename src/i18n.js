@@ -1,21 +1,22 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
 import electronBackend from "./i18next-electron-backend";
-import httpBackend from "i18next-http-backend";
-import LanguageDetector from "i18next-browser-languagedetector";
+import httpBackend from 'i18next-http-backend';
+import LanguageDetector from 'i18next-browser-languagedetector';
 
-i18n
-  .use(window.isElectron ? electronBackend : httpBackend)
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
-    fallbackLng: "en",
-    load: "languageOnly",
+import { isElectron } from './util';
 
-    interpolation: {
-      escapeValue: false,
-    },
-  });
+i18n.use(isElectron ? electronBackend : httpBackend)
+    .use(LanguageDetector)
+    .use(initReactI18next)
+    .init({
+      fallbackLng: 'en',
+      load: 'languageOnly',
+
+      interpolation: {
+        escapeValue: false
+      }
+    });
 
 export default i18n;

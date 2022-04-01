@@ -25,7 +25,7 @@ function createWindow() {
     width: 1280,
     height: 720,
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+      nodeIntegration: true,
     },
   });
   mainWindow.loadURL(startUrl);
@@ -62,7 +62,7 @@ function captureWindow() {
     frame: false,
     transparent: true,
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+      nodeIntegration: true,
     },
   });
 }
@@ -263,7 +263,7 @@ ipcMain.on("export-png", (event, game, items) => {
   });
 });
 
-ipcMain.on("png", (event, path) => {
+ipcMain.on("screenshot", (event, path) => {
   dialog
     .showSaveDialog(mainWindow, {
       title: "Save Screenshot",

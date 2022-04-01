@@ -8,12 +8,13 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
 import is from "ramda/src/is";
+import { isElectron } from "../util";
 
 const File = (props) => {
   const { t } = useTranslation();
 
   const mime = props.mime || "application/json";
-  const verb = window.isElectron ? "save" : "download";
+  const verb = isElectron ? "save" : "download";
 
   let data = props.data;
   if (is(Object, data)) {
