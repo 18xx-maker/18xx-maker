@@ -142,11 +142,12 @@ const server = app.listen(9000);
   // Tile Trays
   for (let j = 0; j < colors.length; j++) {
     let color = colors[j];
+    let color_filename = color.replace("/", "_");
 
     let tray = {
       type: "tile",
       tName: `${capitalize(color)} Tiles`,
-      imgLoc: `images/${id}/${capitalize(color)}.png`,
+      imgLoc: `images/${id}/${capitalize(color_filename)}.png`,
       xStart: 24,
       yStart: 24,
       xStep: 150,
@@ -285,18 +286,19 @@ const server = app.listen(9000);
   // Board18 Tiles
   for (let j = 0; j < colors.length; j++) {
     let color = colors[j];
+    let color_filename = color.replace("/", "_");
 
     let width = counts[color] * 150;
     let height = 900;
 
-    console.log(`Printing ${bname}/${folder}/${id}/${capitalize(color)}.png`);
+    console.log(`Printing ${bname}/${folder}/${id}/${capitalize(color_filename)}.png`);
     await page.goto(
       `http://localhost:9000/games/${bname}/b18/tiles/${color}?print=true`,
       { waitUntil: "networkidle2" }
     );
     await page.setViewport({ width, height });
     await page.screenshot({
-      path: `build/render/${bname}/${folder}/${id}/${capitalize(color)}.png`,
+      path: `build/render/${bname}/${folder}/${id}/${capitalize(color_filename)}.png`,
       omitBackground: true,
     });
   }

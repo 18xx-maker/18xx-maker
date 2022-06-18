@@ -74,7 +74,7 @@ const Game = ({game}) => {
         <Route path="/games/:slug/b18/map">
           <B18Map/>
         </Route>
-        <Route path="/games/:slug/b18/tiles/:color">
+        <Route path="/games/:slug/b18/tiles/:color*">
           <B18Tiles/>
         </Route>
         <Route path="/games/:slug/b18/tokens">
