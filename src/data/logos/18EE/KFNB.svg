@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="600" viewBox="0 0 600 600">
+  <defs>
+    <circle id="path-1" cx="250" cy="250" r="250"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(50 50)">
+    <mask id="mask-2" fill="#fff">
+      <use xlink:href="#path-1"/>
+    </mask>
+    <circle stroke="#979797" cx="250" cy="250" r="249.5"/>
+    <path fill="#FF0" stroke="#979797" d="M-49.5-50.5h599v599h-599z" mask="url(#mask-2)"/>
+    <path fill="gray" stroke="#000" stroke-width="6.75" d="m96.585 95.585 304.186 3.644 3.644 304.186-304.186-3.644-3.644-304.186z" mask="url(#mask-2)" transform="rotate(45 250.5 249.5)"/>
+    <path fill="gray" stroke="#000" stroke-width="6.75" d="M95.437 95.544H403.35v307.913H95.437z" mask="url(#mask-2)"/>
+    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="171" font-weight="bold" mask="url(#mask-2)">
+                <tspan x="135.729" y="246.711">KF</tspan>
+            </text>
+    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="171" font-weight="bold" mask="url(#mask-2)">
+                <tspan x="125.74" y="391.623">NB</tspan>
+            </text>
+  </g>
+</svg>

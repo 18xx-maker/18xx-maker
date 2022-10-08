@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="600" viewBox="0 0 600 600">
+  <defs>
+    <ellipse id="path-2" cx="250.129" cy="250.21" rx="249.871" ry="249.79"/>
+    <filter id="filter-1" width="100%" height="100%" x="0%" y="0%" filterUnits="objectBoundingBox">
+      <feGaussianBlur in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(50 50)">
+    <ellipse fill="#FFF" stroke="#FFF" stroke-width="4.716" cx="249.871" cy="249.79" filter="url(#filter-1)" opacity=".685" rx="247.513" ry="247.432"/>
+    <mask id="mask-3" fill="#fff">
+      <use xlink:href="#path-2"/>
+    </mask>
+    <use fill="#C0A000" xlink:href="#path-2"/>
+    <path fill="#BB062E" stroke="#979797" stroke-width=".999" d="M-49.216-49.038h598.691v598.496H-49.216z" mask="url(#mask-3)"/>
+    <path fill="#000" d="M72.174 72.747H427.95v355.661H72.174z" mask="url(#mask-3)"/>
+    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="165.477" font-weight="bold" mask="url(#mask-3)">
+                <tspan x="67.99" y="309.745">MAV</tspan>
+            </text>
+  </g>
+</svg>

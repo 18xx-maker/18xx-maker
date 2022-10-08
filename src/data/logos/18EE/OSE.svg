@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="601" height="600" viewBox="0 0 601 600">
+  <defs>
+    <circle id="path-1" cx="250" cy="250" r="250"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(53 50)">
+    <mask id="mask-2" fill="#fff">
+      <use xlink:href="#path-1"/>
+    </mask>
+    <path fill="#A000A0" d="M0 3h494.801v123.2H0z" mask="url(#mask-2)"/>
+    <path fill="#A000A0" d="M-53.199-49.8h600v176h-600z" mask="url(#mask-2)"/>
+    <path fill="#000" d="M-53.199 374.2h600v176h-600z" mask="url(#mask-2)"/>
+    <path fill="#FFA0FF" stroke="#FFA0FF" stroke-width="1.375" d="M64.1 120.759h371.018v252.66H64.1z" mask="url(#mask-2)"/>
+    <path fill="#FFA0FF" stroke="#FFA0FF" stroke-width="1.38" d="M-52.228 115.461h598.62v263.62h-598.62z" mask="url(#mask-2)"/>
+    <text fill="#000" font-family="Arial-BoldMT, Arial" font-size="230" font-weight="bold" mask="url(#mask-2)">
+                <tspan x="3.824" y="157.72">OSE</tspan>
+            </text>
+    <path stroke="#000" stroke-linecap="square" stroke-width="25" d="M-40.23 114.421h575" mask="url(#mask-2)"/>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="600" viewBox="0 0 600 600">
+  <defs>
+    <circle id="path-1" cx="250" cy="250" r="250"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(50 54)">
+    <mask id="mask-2" fill="#fff">
+      <use xlink:href="#path-1"/>
+    </mask>
+    <circle stroke="#979797" cx="250" cy="250" r="249.5"/>
+    <path fill="#D86D29" stroke="#979797" d="M-49.5-53.5h599v599h-599z" mask="url(#mask-2)"/>
+    <ellipse fill="#FFF" stroke="#000" stroke-width="6.75" cx="250.056" cy="250.089" mask="url(#mask-2)" rx="198.672" ry="198.908"/>
+    <text fill="#000" font-family="Arial-BoldMT, Arial" font-size="180" font-weight="bold" mask="url(#mask-2)">
+                <tspan x="65.517" y="312.178">BDŽ</tspan>
+            </text>
+  </g>
+</svg>

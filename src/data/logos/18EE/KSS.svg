@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="600" viewBox="0 0 600 600">
+  <defs>
+    <circle id="path-1" cx="250" cy="250" r="250"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(50 50)">
+    <mask id="mask-2" fill="#fff">
+      <use xlink:href="#path-1"/>
+    </mask>
+    <path fill="#A000A0" d="M-50-50h599.422v600H-50z" mask="url(#mask-2)"/>
+    <path fill="#452545" stroke="#452545" stroke-width="1.375" d="M-49.734 116.294h598.625v263.725H-49.734z" mask="url(#mask-2)"/>
+    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="231" font-weight="bold" mask="url(#mask-2)">
+                <tspan x="12.415" y="158.522">KSS</tspan>
+            </text>
+    <path stroke="#000" stroke-linecap="square" stroke-width="25" d="M-37.5 115.5h575m-575.012 265 574.986 3.962" mask="url(#mask-2)"/>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="600" viewBox="0 0 600 600">
+  <defs>
+    <circle id="path-1" cx="250" cy="250" r="250"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(50 53)">
+    <mask id="mask-2" fill="#fff">
+      <use xlink:href="#path-1"/>
+    </mask>
+    <path fill="#A000A0" d="M-50-53h600v600H-50z" mask="url(#mask-2)"/>
+    <path fill="#FF60B0" stroke="#FF60B0" stroke-width="1.375" d="M-49.313 120.688h598.625v252.625H-49.313z" mask="url(#mask-2)"/>
+    <text fill="#000" font-family="Arial-BoldMT, Arial" font-size="231" font-weight="bold" mask="url(#mask-2)">
+                <tspan x="-.288" y="156">POB</tspan>
+            </text>
+    <path stroke="#000" stroke-linecap="square" stroke-width="25" d="M-37.441 119.362h575m-575 255h575" mask="url(#mask-2)"/>
+  </g>
+</svg>
