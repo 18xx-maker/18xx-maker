@@ -1,16 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="600" viewBox="0 0 600 600">
-  <defs>
-    <circle id="path-1" cx="250" cy="250" r="250"/>
-  </defs>
-  <g fill="none" fill-rule="evenodd" transform="translate(50 50)">
-    <mask id="mask-2" fill="#fff">
-      <use xlink:href="#path-1"/>
-    </mask>
-    <path fill="#A000A0" d="M-50-50h599.422v600H-50z" mask="url(#mask-2)"/>
-    <path fill="#452545" stroke="#452545" stroke-width="1.375" d="M-49.734 116.294h598.625v263.725H-49.734z" mask="url(#mask-2)"/>
-    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="231" font-weight="bold" mask="url(#mask-2)">
-                <tspan x="12.415" y="158.522">KSS</tspan>
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+  <g fill="none" fill-rule="evenodd" transform="translate(-1)">
+    <path fill="#452545" stroke="#452545" stroke-width="1.25" d="M446.742 225.214c0 76.553-47.422 139.814-55.307 149.804V75.41c7.885 9.99 55.307 73.252 55.307 149.805z"/>
+    <path fill="#452545" d="M58.273 106.429h336.435V337.37H58.273z"/>
+    <path fill="#452545" stroke="#452545" stroke-width="1.25" d="M8.926 225.373c0-78.146 47.41-142.727 55.308-152.944v305.888C56.335 368.1 8.926 303.52 8.926 225.373z"/>
+    <path fill="#A000A0" stroke="#A000A0" stroke-width="1.25" d="M226.201 449.375c-100.484 0-182.97-100.423-191.83-111.588h383.661c-8.86 11.165-91.347 111.588-191.83 111.588zm0-448.597c100.484 0 182.97 100.423 191.831 111.588H34.371C43.23 101.201 125.717.778 226.2.778z"/>
+    <ellipse stroke="#000" stroke-width="7.5" cx="226.49" cy="224.923" rx="218.76" ry="221.173"/>
+    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="210" font-weight="bold">
+                <tspan x="6.614" y="298.656">KSS</tspan>
             </text>
-    <path stroke="#000" stroke-linecap="square" stroke-width="25" d="M-37.5 115.5h575m-575.012 265 574.986 3.962" mask="url(#mask-2)"/>
+    <path stroke="#000" stroke-linecap="square" stroke-width="22.5" d="M51.369 113.11h350.508M51.369 339.538h350.508"/>
   </g>
 </svg>

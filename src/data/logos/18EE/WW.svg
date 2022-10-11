@@ -1,16 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="600" viewBox="0 0 600 600">
-  <defs>
-    <circle id="path-1" cx="250" cy="250" r="250"/>
-  </defs>
-  <g fill="none" fill-rule="evenodd" transform="translate(50 53)">
-    <mask id="mask-2" fill="#fff">
-      <use xlink:href="#path-1"/>
-    </mask>
-    <path fill="#A000A0" d="M-50-53h599.422v600H-50z" mask="url(#mask-2)"/>
-    <path fill="#B060FF" stroke="#452545" stroke-width="1.375" d="M-49.734 113.294h598.625v263.725H-49.734z" mask="url(#mask-2)"/>
-    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="250" font-weight="bold" mask="url(#mask-2)">
-                <tspan x="13.938" y="171.522">WW</tspan>
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+  <g fill="none" fill-rule="evenodd" transform="translate(-1)">
+    <path fill="#B060FF" stroke="#B060FF" stroke-width="1.25" d="M448.726 225.214c0 76.593-47.95 139.88-55.875 149.818V75.395c7.926 9.937 55.875 73.225 55.875 149.819z"/>
+    <path fill="#B060FF" stroke="#B060FF" stroke-width="1.25" d="M56.982 107.054h338.557v229.691H56.982z"/>
+    <path fill="#B060FF" stroke="#B060FF" stroke-width="1.25" d="M6.51 225.373c0-78.188 47.936-142.796 55.874-152.958v305.917c-7.938-10.163-55.875-74.77-55.875-152.959z"/>
+    <path fill="#A000A0" stroke="#A000A0" stroke-width="1.25" d="M225.969 449.375c-101.487 0-184.8-100.41-193.758-111.588h387.516c-8.96 11.177-92.272 111.588-193.758 111.588zm0-448.597c101.486 0 184.798 100.411 193.758 111.588H32.21C41.17 101.19 124.48.778 225.969.778z"/>
+    <ellipse stroke="#000" stroke-width="7.5" cx="226.26" cy="224.923" rx="220.99" ry="221.173"/>
+    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="210" font-weight="bold">
+                <tspan x="26.532" y="303.665">WW</tspan>
             </text>
-    <path stroke="#000" stroke-linecap="square" stroke-width="25" d="M-37.5 104.5h575m-575.012 281 574.986 3.962" mask="url(#mask-2)"/>
+    <path stroke="#000" stroke-linecap="square" stroke-width="15" d="M42.5 113.5h366m-364 226h364"/>
   </g>
 </svg>

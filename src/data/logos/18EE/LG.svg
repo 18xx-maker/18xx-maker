@@ -1,17 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="600" viewBox="0 0 600 600">
-  <defs>
-    <circle id="path-1" cx="250" cy="250" r="250"/>
-  </defs>
-  <g fill="none" fill-rule="evenodd" transform="translate(50 53)">
-    <mask id="mask-2" fill="#fff">
-      <use xlink:href="#path-1"/>
-    </mask>
-    <path fill="#A000A0" d="M-50-53h600v600H-50z" mask="url(#mask-2)"/>
-    <path fill="#FFF" d="M-50 372.6h600v174H-50z" mask="url(#mask-2)"/>
-    <path fill="#6000A0" stroke="#6000A0" stroke-width="1.375" d="M-48.926 119.728h598.625v252.593H-48.926z" mask="url(#mask-2)"/>
-    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="300" font-weight="bold" mask="url(#mask-2)">
-                <tspan x="41.699" y="218.706">LG</tspan>
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+  <g fill="none" fill-rule="evenodd" transform="translate(1)">
+    <path fill="#6000A0" d="M54.671 106.429h338.675v240H54.671z"/>
+    <path fill="#6000A0" d="M389.422 376.792s56.934-67.864 56.934-151.578c0-83.715-56.934-151.58-56.934-151.58v303.158zM61.3 70.626S4.367 139.909 4.367 225.373c0 85.465 56.935 154.747 56.935 154.747V70.626z"/>
+    <path fill="#A000A0" stroke="#A000A0" stroke-width="1.25" d="M223.718.778c101.15 0 184.185 100.415 193.111 111.588H30.607C39.533 101.193 122.567.778 223.717.778z"/>
+    <path fill="#FFF" d="M34.985 346.19S119.171 450 223.018 450c103.848 0 188.033-103.81 188.033-103.81H34.985z"/>
+    <ellipse stroke="#000" stroke-width="7.5" cx="224.008" cy="224.923" rx="220.242" ry="221.173"/>
+    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="270" font-weight="bold">
+                <tspan x="36.521" y="323.654">LG</tspan>
             </text>
-    <path stroke="#000" stroke-linecap="square" stroke-width="25" d="M-36.763 106.388h575" mask="url(#mask-2)"/>
+    <path stroke="#000" stroke-linecap="square" stroke-width="15" d="M41.5 113.5h364"/>
   </g>
 </svg>

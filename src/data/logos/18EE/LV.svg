@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="600" viewBox="0 0 600 600">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="500" viewBox="0 0 500 500">
   <defs>
     <circle id="path-1" cx="250" cy="250" r="250"/>
   </defs>
-  <g fill="none" fill-rule="evenodd" transform="translate(55 48)">
+  <g fill="none" fill-rule="evenodd" transform="translate(1)">
     <mask id="mask-2" fill="#fff">
       <use xlink:href="#path-1"/>
     </mask>

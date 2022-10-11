@@ -1,15 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="600" viewBox="0 0 600 600">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="500" viewBox="0 0 500 500">
   <defs>
     <circle id="path-1" cx="250" cy="250" r="250"/>
   </defs>
-  <g fill="none" fill-rule="evenodd" transform="translate(50 50)">
+  <g fill="none" fill-rule="evenodd">
     <mask id="mask-2" fill="#fff">
       <use xlink:href="#path-1"/>
     </mask>
     <use fill="#C0A000" xlink:href="#path-1"/>
     <path fill="#D86D29" d="M-50-50h600v600H-50z" mask="url(#mask-2)"/>
     <ellipse fill="#C0A000" stroke="#000" stroke-width="5" cx="250.056" cy="254.089" mask="url(#mask-2)" rx="199.547" ry="199.783"/>
-    <text fill="#000" font-family="Arial-BoldMT, Arial" font-size="250" font-weight="bold" mask="url(#mask-2)">
+    <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="250" font-weight="bold" mask="url(#mask-2)">
                 <tspan x="62.983" y="340.178">CO</tspan>
             </text>
   </g>
