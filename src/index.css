@@ -354,7 +354,7 @@ svg {
   padding: 0
 }
 
-.charter__phase td.phase__list li {
+.charter__phase td.phase__list ul {
   padding: 0.03in 0.03in;
 }
 
