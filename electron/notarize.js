@@ -14,6 +14,7 @@ exports.default = async function notarizing(context) {
   const appName = context.packager.appInfo.productFilename;
 
   return await notarize({
+    tool: "notarytool",
     appBundleId: "com.18xx-maker.app",
     appPath: `${appOutDir}/${appName}.app`,
     appleId: "kelsin@valefor.com",
