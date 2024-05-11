@@ -214,7 +214,8 @@
       "additionalProperties": false
     },
     "colors": {
-      "type": "object"
+      "type": "object",
+      "additionalProperties": true
     },
     "links": {
       "type": "object",
@@ -287,6 +288,10 @@
               {
                 "type": "string",
                 "pattern": "^∞$"
+              },
+              {
+                "type": "string",
+                "pattern": "^[0-9]/[0-9]$"
               }
             ]
           },
@@ -337,6 +342,8 @@
           "note": { "type": "string" },
           "minPlayers": { "type": "integer", "minimum": 1 },
           "maxPlayers": { "type": "integer", "minimum": 1 },
+          "nameFontSize": { "type": "integer", "minimum": 1 },
+          "descFontSize": { "type": "integer", "minimum": 1 },
           "description": { "type": "string" },
           "hex": { "type": "string" },
           "token": { "$ref": "#/definitions/token" },

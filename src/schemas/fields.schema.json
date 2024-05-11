@@ -44,6 +44,7 @@
         "borderWidth": { "type": "number", "minimum": 0 },
 
         "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
 
         "dashed": { "type": "boolean", "enum": [true] }
       }

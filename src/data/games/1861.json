@@ -773,7 +773,7 @@
       "rotations": 2,
       "icons": [{ "type": "1861", "noCircle": true, "angle": 0, "width": 15 }],
       "terrain": [
-        { "angle": 322.5, "percent": 0.75, "cost": "R40", "size": "tiny" }
+        { "angle": 322.5, "percent": 0.75, "cost": 40, "size": "tiny" }
       ],
       "values": [{ "angle": 210, "percent": 0.8, "value": 50 }],
       "labels": [{ "angle": 90, "percent": 0.8, "label": "K" }],
@@ -1016,7 +1016,7 @@
       },
       {
         "color": "plain",
-        "names": [{ "name": "3", "color": "white", "y": "5" }],
+        "names": [{ "name": "3", "color": "white", "y": 5 }],
         "icons": [{ "type": "lock", "noCircle": true, "width": 35 }],
         "hexes": ["E3", "H6", "I9", "J10"]
       },
@@ -1029,7 +1029,7 @@
             "color": "white",
             "angle": 30,
             "percent": 0.6,
-            "y": "5"
+            "y": 5
           }
         ],
         "icons": [{ "type": "lock", "noCircle": true, "width": 35 }],

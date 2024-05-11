@@ -243,10 +243,18 @@
         "type": "object",
         "properties": {
           "size": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 6,
-            "default": 1
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 6,
+                "default": 1
+              },
+              {
+                "type": "string",
+                "enum": ["2Y", "1S1Y", "2S1Y", "3Ferry"]
+              }
+            ]
           },
           "width": { "type": "integer", "minimum": 1 },
           "extend": { "type": "string", "enum": ["left", "right"] },
@@ -393,6 +401,7 @@
       "items": {
         "type": "object",
         "properties": {
+          "noCircle": { "type": "boolean" },
           "type": { "type": "string" },
           "width": { "type": "integer", "minimum": 1 },
           "stroke": { "type": "string" },

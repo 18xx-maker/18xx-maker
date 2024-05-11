@@ -710,7 +710,7 @@
             "percent": 0.7
           }
         ],
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+30",
             "percent": 0.3
@@ -741,7 +741,7 @@
       },
       {
         "color": "offboard",
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+30",
             "percent": 0.3
@@ -779,7 +779,7 @@
       },
       {
         "color": "offboard",
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+30",
             "percent": 0.3
@@ -889,7 +889,7 @@
             "percent": 0.7
           }
         ],
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+30",
             "angle": 235,
@@ -933,7 +933,7 @@
             "percent": 0.7
           }
         ],
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+50",
             "percent": 0.3

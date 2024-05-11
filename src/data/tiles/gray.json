@@ -1683,15 +1683,12 @@
     "color": "gray",
     "track": [
       {
-        "type": "",
         "side": 1
       },
       {
-        "type": "",
         "side": 2
       },
       {
-        "type": "",
         "side": 3
       },
       {
@@ -1699,7 +1696,6 @@
         "side": 4
       },
       {
-        "type": "",
         "side": 6
       }
     ]

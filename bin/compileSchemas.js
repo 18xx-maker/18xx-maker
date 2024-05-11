@@ -25,7 +25,7 @@ const elements = {
   "definitions.bridges.items.properties": ["svg", "font", "position"],
   "definitions.tunnels.items.properties": ["svg", "font", "position"],
   "definitions.terrain.items.properties": ["position"],
-  "definitions.routeBonus.items.properties": ["position"],
+  "definitions.routeBonuses.items.properties": ["position"],
   "definitions.icons.items.properties": ["position"],
   "definitions.track.items.properties": ["position"],
   "definitions.tunnelEntrances.items.properties": ["position"],
