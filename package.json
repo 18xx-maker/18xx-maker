@@ -135,7 +135,7 @@
     "cross-env": "^7.0.2",
     "deep-object-diff": "^1.1.0",
     "electron": "^11.5.0",
-    "electron-builder": "^22.13.1",
+    "electron-builder": "23.0.2",
     "electron-notarize": "^1.1.1",
     "glob": "^7.1.6",
     "handlebars": "^4.5.3",
