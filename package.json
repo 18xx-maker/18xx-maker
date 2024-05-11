@@ -112,7 +112,7 @@
   },
   "dependencies": {
     "bluebird": "^3.7.2",
-    "caniuse-lite": "^1.0.30001418",
+    "caniuse-lite": "^1.0.30001617",
     "chokidar": "^3.4.0",
     "electron-is-dev": "^1.2.0",
     "electron-updater": "^4.3.1",
