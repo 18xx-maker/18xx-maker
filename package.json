@@ -81,16 +81,25 @@
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
       "entitlements": "assets/entitlements.mac.plist",
-      "entitlementsInherit": "assets/entitlements.mac.plist"
+      "entitlementsInherit": "assets/entitlements.mac.plist",
+      "publish": [
+        "github"
+      ]
     },
     "dmg": {
       "background": "assets/background.tiff"
     },
     "win": {
-      "icon": "assets/18xx-maker.ico"
+      "icon": "assets/18xx-maker.ico",
+      "publish": [
+        "github"
+      ]
     },
     "linux": {
-      "executableName": "18xx-maker"
+      "executableName": "18xx-maker",
+      "publish": [
+        "github"
+      ]
     },
     "extraMetadata": {
       "main": "electron/index.js"
