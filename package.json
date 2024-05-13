@@ -96,6 +96,7 @@
       ]
     },
     "linux": {
+      "icon": "assets/18xx-maker.png",
       "executableName": "18xx-maker",
       "publish": [
         "github"
