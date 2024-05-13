@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-const gtgLogo = require(`../data/publishers/gtg.png`);
+const gtgLogo = require(`../data/publishers/gtg.png`).default;
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     "& ul": {
       margin: theme.spacing(0, 0, 2, 0)
     },
-   
+
     "& p": {
       padding: theme.spacing(0, 0, 2, 0),
       "&:last-child": {

@@ -87,7 +87,7 @@ const LoadGames = () => {
       }
 
       if (game.publisher !== "self") {
-        let imageUrl = require(`../data/publishers/${game.publisher}.png`);
+        let imageUrl = require(`../data/publishers/${game.publisher}.png`).default;
         if (publisher.link) {
           imageNode = <Link rel="noreferrer"
                             target="_blank"
