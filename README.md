@@ -1,6 +1,6 @@
 # 18xx Maker
 
-[![build](https://travis-ci.org/18xx-maker/18xx-maker.svg?branch=master)](https://travis-ci.org/18xx-maker/18xx-maker)
+![build](https://img.shields.io/github/actions/workflow/status/18xx-maker/18xx-maker/pr.yml)
 ![version](https://img.shields.io/github/v/release/18xx-maker/18xx-maker?sort=semver)
 ![downloads](https://img.shields.io/github/downloads/18xx-maker/18xx-maker/total)
 ![license](https://img.shields.io/github/license/18xx-maker/18xx-maker)
