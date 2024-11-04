@@ -236,7 +236,7 @@ const Train = ({ train, trains, blackBand }) => {
                             paddingTop: `${imagePaddingTop}`,
                             width: `${imageWidth}`
                          }}
-                         src={require(`../images/trains/${image}.png`)}/>
+                         src={require(`../images/trains/${image}.png`).default}/>
                   </div>
                 )}
                 <div className="train__name"
