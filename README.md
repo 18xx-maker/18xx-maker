@@ -27,8 +27,8 @@ and/or designer.
 
 ## Chat
 
-We have an #18xx-maker channel in the [public 18xx
-slack](https://join.slack.com/t/18xxgames/shared_invite/zt-8ksy028m-CSZC~G5QtiFv60_jdqqulQ).
+We have a [discord for 18xx-Maker](https://discord.gg/gcYvAjYYfw). Please use it
+for any development chat or support!
 
 ## Usage and Documentation
 
