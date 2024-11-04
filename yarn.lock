@@ -1954,9 +1954,9 @@
   integrity sha512-6xnwtvp9DY1EINIKdTfvfeAtCYw4OqBZJhtiqkT3ivjnEfa25VQ3TsKvaFfKm8MyGIEfE95qLe+bNEt3nB0Ylg==
 
 "@blakeembrey/template@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@blakeembrey/template/-/template-1.0.0.tgz#bf8828bc3ae8004d97904d78f64e3cc2cd216438"
-  integrity sha512-J6WGZqCLdRMHUkyRG6fBSIFJ0rL60/nsQNh5rQvsYZ5u0PsKw6XQcJcA3DWvd9cN3j/IQx5yB1fexhCafwwUUw==
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@blakeembrey/template/-/template-1.2.0.tgz#acd948eb29334e882019e8876b42ff6da1dcf528"
+  integrity sha512-w/63nURdkRPpg3AXbNr7lPv6HgOuVDyefTumiXsbXxtIwcuk5EXayWR5OpSwDjsQPgaYsfUSedMduaNOjAYY8A==
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
