@@ -7,19 +7,19 @@
       <stop offset=".99" stop-color="#900"/>
       <stop offset="1" stop-color="#900"/>
     </linearGradient>
-    <linearGradient id="XMLID_18_-7" x1="194.895" x2="141.028" y1="153.558" y2="117.409" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+    <linearGradient id="XMLID_18_-7" x1="194.895" x2="141.028" y1="153.558" y2="117.409" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#871101"/>
       <stop offset="0" stop-color="#871101"/>
       <stop offset=".99" stop-color="#911209"/>
       <stop offset="1" stop-color="#911209"/>
     </linearGradient>
-    <linearGradient id="XMLID_19_-4" x1="151.795" x2="97.93" y1="217.785" y2="181.638" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+    <linearGradient id="XMLID_19_-4" x1="151.795" x2="97.93" y1="217.785" y2="181.638" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#871101"/>
       <stop offset="0" stop-color="#871101"/>
       <stop offset=".99" stop-color="#911209"/>
       <stop offset="1" stop-color="#911209"/>
     </linearGradient>
-    <linearGradient id="XMLID_20_-9" x1="38.696" x2="47.047" y1="127.391" y2="181.661" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+    <linearGradient id="XMLID_20_-9" x1="38.696" x2="47.047" y1="127.391" y2="181.661" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#fff"/>
       <stop offset="0" stop-color="#fff"/>
       <stop offset=".23" stop-color="#e57252"/>
@@ -27,7 +27,7 @@
       <stop offset=".99" stop-color="#a60003"/>
       <stop offset="1" stop-color="#a60003"/>
     </linearGradient>
-    <linearGradient id="XMLID_21_-3" x1="96.133" x2="99.21" y1="76.715" y2="132.102" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+    <linearGradient id="XMLID_21_-3" x1="96.133" x2="99.21" y1="76.715" y2="132.102" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#fff"/>
       <stop offset="0" stop-color="#fff"/>
       <stop offset=".23" stop-color="#e4714e"/>
@@ -35,7 +35,7 @@
       <stop offset=".99" stop-color="#a80d00"/>
       <stop offset="1" stop-color="#a80d00"/>
     </linearGradient>
-    <linearGradient id="XMLID_22_-7" x1="147.103" x2="156.314" y1="25.521" y2="65.216" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+    <linearGradient id="XMLID_22_-7" x1="147.103" x2="156.314" y1="25.521" y2="65.216" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#fff"/>
       <stop offset="0" stop-color="#fff"/>
       <stop offset=".18" stop-color="#e46342"/>
@@ -43,21 +43,21 @@
       <stop offset=".99" stop-color="#a80d00"/>
       <stop offset="1" stop-color="#a80d00"/>
     </linearGradient>
-    <linearGradient id="XMLID_23_-9" x1="118.976" x2="158.669" y1="11.541" y2="-8.305" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+    <linearGradient id="XMLID_23_-9" x1="118.976" x2="158.669" y1="11.541" y2="-8.305" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#fff"/>
       <stop offset="0" stop-color="#fff"/>
       <stop offset=".54" stop-color="#c81f11"/>
       <stop offset=".99" stop-color="#bf0905"/>
       <stop offset="1" stop-color="#bf0905"/>
     </linearGradient>
-    <linearGradient id="XMLID_24_-3" x1="3.903" x2="7.17" y1="113.555" y2="146.263" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+    <linearGradient id="XMLID_24_-3" x1="3.903" x2="7.17" y1="113.555" y2="146.263" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#fff"/>
       <stop offset="0" stop-color="#fff"/>
       <stop offset=".31" stop-color="#de4024"/>
       <stop offset=".99" stop-color="#bf190b"/>
       <stop offset="1" stop-color="#bf190b"/>
     </linearGradient>
-    <linearGradient id="XMLID_25_-9" x1="-18.556" x2="135.015" y1="155.105" y2="-2.809" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+    <linearGradient id="XMLID_25_-9" x1="-18.556" x2="135.015" y1="155.105" y2="-2.809" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#bd0012"/>
       <stop offset="0" stop-color="#bd0012"/>
       <stop offset=".07" stop-color="#fff"/>
@@ -69,47 +69,47 @@
       <stop offset=".99" stop-color="#e82609"/>
       <stop offset="1" stop-color="#e82609"/>
     </linearGradient>
-    <linearGradient id="XMLID_26_-2" x1="99.075" x2="52.818" y1="171.033" y2="159.617" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+    <linearGradient id="XMLID_26_-2" x1="99.075" x2="52.818" y1="171.033" y2="159.617" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#8c0c01"/>
       <stop offset="0" stop-color="#8c0c01"/>
       <stop offset=".54" stop-color="#990c00"/>
       <stop offset=".99" stop-color="#a80d0e"/>
       <stop offset="1" stop-color="#a80d0e"/>
     </linearGradient>
-    <linearGradient id="XMLID_27_-1" x1="178.526" x2="137.433" y1="115.515" y2="78.684" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+    <linearGradient id="XMLID_27_-1" x1="178.526" x2="137.433" y1="115.515" y2="78.684" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#7e110b"/>
       <stop offset="0" stop-color="#7e110b"/>
       <stop offset=".99" stop-color="#9e0c00"/>
       <stop offset="1" stop-color="#9e0c00"/>
     </linearGradient>
-    <linearGradient id="XMLID_28_-1" x1="193.624" x2="173.154" y1="47.937" y2="26.054" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+    <linearGradient id="XMLID_28_-1" x1="193.624" x2="173.154" y1="47.937" y2="26.054" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#79130d"/>
       <stop offset="0" stop-color="#79130d"/>
       <stop offset=".99" stop-color="#9e120b"/>
       <stop offset="1" stop-color="#9e120b"/>
     </linearGradient>
-    <linearGradient id="XMLID_32_-0" x1="154.641" x2="192.039" y1="9.798" y2="26.306" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+    <linearGradient id="XMLID_32_-0" x1="154.641" x2="192.039" y1="9.798" y2="26.306" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#b31000"/>
       <stop offset="0" stop-color="#b31000"/>
       <stop offset=".44" stop-color="#910f08"/>
       <stop offset=".99" stop-color="#791c12"/>
       <stop offset="1" stop-color="#791c12"/>
     </linearGradient>
-    <linearGradient id="XMLID_31_-6" x1="26.67" x2="9.989" y1="197.336" y2="140.742" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+    <linearGradient id="XMLID_31_-6" x1="26.67" x2="9.989" y1="197.336" y2="140.742" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#8b2114"/>
       <stop offset="0" stop-color="#8b2114"/>
       <stop offset=".43" stop-color="#9e100a"/>
       <stop offset=".99" stop-color="#b3100c"/>
       <stop offset="1" stop-color="#b3100c"/>
     </linearGradient>
-    <linearGradient id="linearGradient3448" x1="174.074" x2="132.276" y1="215.549" y2="141.753" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse" xlink:href="#XMLID_17_-9"/>
-    <radialGradient id="XMLID_30_-6" cx="74.092" cy="145.751" r="66.944" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+    <linearGradient xlink:href="#XMLID_17_-9" id="linearGradient3448" x1="174.074" x2="132.276" y1="215.549" y2="141.753" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse"/>
+    <radialGradient id="XMLID_30_-6" cx="74.092" cy="145.751" r="66.944" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#a30c00"/>
       <stop offset="0" stop-color="#a30c00"/>
       <stop offset=".99" stop-color="#800e08"/>
       <stop offset="1" stop-color="#800e08"/>
     </radialGradient>
-    <radialGradient id="XMLID_29_-4" cx="143.832" cy="79.388" r="50.358" gradientTransform="translate(50 50) scale(1.00944)" gradientUnits="userSpaceOnUse">
+    <radialGradient id="XMLID_29_-4" cx="143.832" cy="79.388" r="50.358" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#a80d00"/>
       <stop offset="0" stop-color="#a80d00"/>
       <stop offset=".99" stop-color="#7e0e08"/>
@@ -124,14 +124,14 @@
   <path fill="url(#XMLID_22_-7)" fill-rule="evenodd" d="m245.145 114.917-57.892-47.282-16.12 52.117z" clip-rule="evenodd"/>
   <path fill="url(#XMLID_23_-9)" fill-rule="evenodd" d="m218.071 50.777-34.048 18.816-21.48-19.068z" clip-rule="evenodd"/>
   <path fill="url(#XMLID_24_-3)" fill-rule="evenodd" d="m50 209.582 14.263-26.013-11.538-30.99z" clip-rule="evenodd"/>
-  <path fill="#fff" fill-rule="evenodd" d="m51.958 151.6 11.609 32.928 50.441-11.317 57.589-53.52 16.252-51.622L162.259 50l-43.507 16.282c-13.707 12.75-40.306 37.975-41.265 38.45-.949.484-17.564 31.888-25.529 46.868z" clip-rule="evenodd"/>
+  <path fill="#fff" fill-rule="evenodd" d="m51.958 151.6 11.609 32.928 50.441-11.317 57.589-53.52 16.252-51.622L162.259 50l-43.507 16.282c-13.707 12.75-40.306 37.975-41.265 38.45-.949.484-17.564 31.888-25.529 46.868" clip-rule="evenodd"/>
   <path fill="url(#XMLID_25_-9)" fill-rule="evenodd" d="M92.72 92.447c29.707-29.456 68.005-46.858 82.703-32.03 14.688 14.829-.889 50.866-30.596 80.311s-67.532 47.807-82.22 32.979c-14.697-14.819.405-51.815 30.112-81.26z" clip-rule="evenodd"/>
-  <path fill="url(#XMLID_26_-2)" fill-rule="evenodd" d="m91.387 249.243 23.076-76.435 76.636 24.62c-27.709 25.983-58.527 47.949-99.712 51.815z" clip-rule="evenodd"/>
+  <path fill="url(#XMLID_26_-2)" fill-rule="evenodd" d="m91.387 249.243 23.076-76.435 76.636 24.62c-27.709 25.983-58.527 47.949-99.712 51.815" clip-rule="evenodd"/>
   <path fill="url(#XMLID_27_-1)" fill-rule="evenodd" d="m171.698 119.54 19.674 77.929c23.146-24.338 43.92-50.502 54.095-82.865z" clip-rule="evenodd"/>
   <path fill="url(#XMLID_28_-1)" fill-rule="evenodd" d="M245.266 114.998c7.873-23.762 9.69-57.851-27.438-64.18l-30.465 16.827z" clip-rule="evenodd"/>
   <path fill="#9e1209" fill-rule="evenodd" d="M50 209.239c1.09 39.218 29.385 39.802 41.437 40.146l-27.84-65.019z" clip-rule="evenodd"/>
   <path fill="url(#XMLID_29_-4)" fill-rule="evenodd" d="M171.808 119.661c17.786 10.933 53.632 32.888 54.36 33.292 1.129.636 15.454-24.156 18.704-38.167z" clip-rule="evenodd"/>
   <path fill="url(#XMLID_30_-6)" fill-rule="evenodd" d="m114.432 172.808 30.849 59.517c18.24-9.893 32.524-21.945 45.606-34.856z" clip-rule="evenodd"/>
-  <path fill="url(#XMLID_31_-6)" fill-rule="evenodd" d="m63.476 184.447-4.37 52.047c8.246 11.265 19.592 12.244 31.494 11.366-8.61-21.43-25.812-64.281-27.124-63.413z" clip-rule="evenodd"/>
+  <path fill="url(#XMLID_31_-6)" fill-rule="evenodd" d="m63.476 184.447-4.37 52.047c8.246 11.265 19.592 12.244 31.494 11.366-8.61-21.43-25.812-64.281-27.124-63.413" clip-rule="evenodd"/>
   <path fill="url(#XMLID_32_-0)" fill-rule="evenodd" d="m187.183 67.776 61.283 8.6c-3.27-13.859-13.315-22.803-30.435-25.599z" clip-rule="evenodd"/>
 </svg>

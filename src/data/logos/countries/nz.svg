@@ -8,13 +8,13 @@
     </clipPath>
     <g id="Pentagram">
       <g id="Arm">
-        <path d="M0 0v.5L1 0z" transform="translate(0 -.325)"/>
-        <path d="M0 0v-.5L1 0z" transform="rotate(-36 .5 -.162)"/>
+        <path d="M0-.325v.5l1-.5z"/>
+        <path d="m.19.263-.293-.405L1-.325z"/>
       </g>
-      <use transform="scale(-1 1)" xlink:href="#Arm"/>
-      <use transform="rotate(72 0 0)" xlink:href="#Arm"/>
-      <use transform="rotate(-72 0 0)" xlink:href="#Arm"/>
-      <use transform="scale(-1 1) rotate(72)" xlink:href="#Arm"/>
+      <use xlink:href="#Arm" transform="scale(-1 1)"/>
+      <use xlink:href="#Arm" transform="rotate(72 0 0)"/>
+      <use xlink:href="#Arm" transform="rotate(-72 0 0)"/>
+      <use xlink:href="#Arm" transform="scale(-1 1)rotate(72)"/>
     </g>
   </defs>
   <path fill="#00247d" d="M0 0h1200v600H0z"/>
@@ -22,16 +22,16 @@
   <path stroke="#cc142b" stroke-width="40" d="m0 0 600 300M0 300 600 0" clip-path="url(#Diagonals)"/>
   <path stroke="#fff" stroke-width="100" d="M300 0v300M0 150h600" clip-path="url(#Canton)"/>
   <path stroke="#cc142b" stroke-width="60" d="M300 0v300M0 150h600" clip-path="url(#Canton)"/>
-  <use fill="#fff" transform="matrix(45.4 0 0 45.4 900 120)" xlink:href="#Pentagram"/>
-  <use fill="#cc142b" transform="matrix(30 0 0 30 900 120)" xlink:href="#Pentagram"/>
+  <use xlink:href="#Pentagram" fill="#fff" transform="translate(900 120)scale(45.4)"/>
+  <use xlink:href="#Pentagram" fill="#cc142b" transform="matrix(30 0 0 30 900 120)"/>
   <g transform="rotate(82 900 240)">
-    <use fill="#fff" transform="rotate(-82 519.022 -457.666) scale(40.4)" xlink:href="#Pentagram"/>
-    <use fill="#cc142b" transform="rotate(-82 519.022 -457.666) scale(25)" xlink:href="#Pentagram"/>
+    <use xlink:href="#Pentagram" fill="#fff" transform="rotate(-82 519.022 -457.666)scale(40.4)"/>
+    <use xlink:href="#Pentagram" fill="#cc142b" transform="rotate(-82 519.022 -457.666)scale(25)"/>
   </g>
   <g transform="rotate(82 900 240)">
-    <use fill="#fff" transform="rotate(-82 668.57 -327.666) scale(45.4)" xlink:href="#Pentagram"/>
-    <use fill="#cc142b" transform="rotate(-82 668.57 -327.666) scale(30)" xlink:href="#Pentagram"/>
+    <use xlink:href="#Pentagram" fill="#fff" transform="rotate(-82 668.57 -327.666)scale(45.4)"/>
+    <use xlink:href="#Pentagram" fill="#cc142b" transform="rotate(-82 668.57 -327.666)scale(30)"/>
   </g>
-  <use fill="#fff" transform="matrix(50.4 0 0 50.4 900 480)" xlink:href="#Pentagram"/>
-  <use fill="#cc142b" transform="matrix(35 0 0 35 900 480)" xlink:href="#Pentagram"/>
+  <use xlink:href="#Pentagram" fill="#fff" transform="translate(900 480)scale(50.4)"/>
+  <use xlink:href="#Pentagram" fill="#cc142b" transform="matrix(35 0 0 35 900 480)"/>
 </svg>

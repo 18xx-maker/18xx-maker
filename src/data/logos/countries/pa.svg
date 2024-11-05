@@ -4,17 +4,17 @@
     <g id="star" transform="translate(9 6)">
       <g id="c">
         <path id="t" d="M0-3v3h1.5z" transform="rotate(18 0 -3)"/>
-        <use transform="scale(-1 1)" xlink:href="#t"/>
+        <use xlink:href="#t" transform="scale(-1 1)"/>
       </g>
-      <use transform="rotate(72)" xlink:href="#c"/>
-      <use transform="rotate(144)" xlink:href="#c"/>
-      <use transform="rotate(216)" xlink:href="#c"/>
-      <use transform="rotate(288)" xlink:href="#c"/>
+      <use xlink:href="#c" transform="rotate(72)"/>
+      <use xlink:href="#c" transform="rotate(144)"/>
+      <use xlink:href="#c" transform="rotate(216)"/>
+      <use xlink:href="#c" transform="rotate(288)"/>
     </g>
     <path d="M0 12h18v12H0z"/>
   </g>
   <g fill="#d21034">
     <path d="M18 0h18v12H18z"/>
-    <use x="18" y="12" xlink:href="#star"/>
+    <use xlink:href="#star" x="18" y="12"/>
   </g>
 </svg>

@@ -5,12 +5,12 @@
     <g id="countries-cw-f">
       <g id="countries-cw-t">
         <path id="countries-cw-o" d="M12 8v4h2z" transform="rotate(18 12 8)"/>
-        <use x="-24" transform="scale(-1 1)" xlink:href="#countries-cw-o"/>
+        <use xlink:href="#countries-cw-o" x="-24" transform="scale(-1 1)"/>
       </g>
-      <use transform="rotate(72 12 12)" xlink:href="#countries-cw-t"/>
+      <use xlink:href="#countries-cw-t" transform="rotate(72 12 12)"/>
     </g>
-    <use transform="rotate(-72 12 12)" xlink:href="#countries-cw-t"/>
-    <use transform="rotate(144 12 12)" xlink:href="#countries-cw-f"/>
+    <use xlink:href="#countries-cw-t" transform="rotate(-72 12 12)"/>
+    <use xlink:href="#countries-cw-f" transform="rotate(144 12 12)"/>
   </g>
-  <use x="-4" y="-4" transform="scale(.75)" xlink:href="#countries-cw-s"/>
+  <use xlink:href="#countries-cw-s" x="-4" y="-4" transform="scale(.75)"/>
 </svg>

@@ -8,15 +8,15 @@
         <g id="r4">
           <g id="r2">
             <path id="r" d="M0-102c-2.2 0-3 3.3-3 6.5 0 8 1 12 3 23.5 2.04-11.5 3-15.6 3-23.5 0-3.3-1-6.5-3-6.5"/>
-            <use transform="rotate(5)" xlink:href="#r"/>
+            <use xlink:href="#r" transform="rotate(5)"/>
           </g>
-          <use transform="rotate(10)" xlink:href="#r2"/>
+          <use xlink:href="#r2" transform="rotate(10)"/>
         </g>
-        <use transform="rotate(20)" xlink:href="#r4"/>
+        <use xlink:href="#r4" transform="rotate(20)"/>
       </g>
-      <use transform="rotate(40)" xlink:href="#r8"/>
+      <use xlink:href="#r8" transform="rotate(40)"/>
     </g>
-    <use transform="rotate(-80)" xlink:href="#r16"/>
+    <use xlink:href="#r16" transform="rotate(-80)"/>
   </g>
   <path d="M-225-21.5h450v7.5h-450z"/>
   <path fill="#339E35" d="M-225 86h450v100h-450z"/>

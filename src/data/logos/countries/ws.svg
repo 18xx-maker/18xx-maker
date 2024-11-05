@@ -5,10 +5,10 @@
   <path fill="#ce1126" d="M0 0h2880v1440H0z"/>
   <path fill="#002b7f" d="M0 0h1440v720H0z"/>
   <g fill="#fff">
-    <use transform="matrix(160 0 0 160 720 30)" xlink:href="#s"/>
-    <use transform="matrix(160 0 0 160 500 210)" xlink:href="#s"/>
-    <use transform="matrix(150 0 0 150 945 180)" xlink:href="#s"/>
-    <use transform="matrix(100 0 0 100 830 364.894)" xlink:href="#s"/>
-    <use transform="matrix(200 0 0 200 720 499.789)" xlink:href="#s"/>
+    <use xlink:href="#s" transform="matrix(160 0 0 160 720 30)"/>
+    <use xlink:href="#s" transform="matrix(160 0 0 160 500 210)"/>
+    <use xlink:href="#s" transform="matrix(150 0 0 150 945 180)"/>
+    <use xlink:href="#s" transform="matrix(100 0 0 100 830 364.894)"/>
+    <use xlink:href="#s" transform="matrix(200 0 0 200 720 499.789)"/>
   </g>
 </svg>

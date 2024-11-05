@@ -7,18 +7,18 @@
       <g id="countries-cv-s" transform="translate(0 -75)">
         <g id="countries-cv-c">
           <path id="countries-cv-t" d="M0-15V0h7.5" transform="rotate(18 0 -15)"/>
-          <use transform="scale(-1 1)" xlink:href="#countries-cv-t"/>
+          <use xlink:href="#countries-cv-t" transform="scale(-1 1)"/>
         </g>
-        <use transform="rotate(72)" xlink:href="#countries-cv-c"/>
-        <use transform="rotate(144)" xlink:href="#countries-cv-c"/>
-        <use transform="rotate(216)" xlink:href="#countries-cv-c"/>
-        <use transform="rotate(288)" xlink:href="#countries-cv-c"/>
+        <use xlink:href="#countries-cv-c" transform="rotate(72)"/>
+        <use xlink:href="#countries-cv-c" transform="rotate(144)"/>
+        <use xlink:href="#countries-cv-c" transform="rotate(216)"/>
+        <use xlink:href="#countries-cv-c" transform="rotate(288)"/>
       </g>
-      <use y="150" xlink:href="#countries-cv-s"/>
+      <use xlink:href="#countries-cv-s" y="150"/>
     </g>
-    <use transform="rotate(72)" xlink:href="#countries-cv-s2"/>
-    <use transform="rotate(144)" xlink:href="#countries-cv-s2"/>
-    <use transform="rotate(216)" xlink:href="#countries-cv-s2"/>
-    <use transform="rotate(288)" xlink:href="#countries-cv-s2"/>
+    <use xlink:href="#countries-cv-s2" transform="rotate(72)"/>
+    <use xlink:href="#countries-cv-s2" transform="rotate(144)"/>
+    <use xlink:href="#countries-cv-s2" transform="rotate(216)"/>
+    <use xlink:href="#countries-cv-s2" transform="rotate(288)"/>
   </g>
 </svg>

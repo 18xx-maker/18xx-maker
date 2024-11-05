@@ -2,11 +2,11 @@
   <path fill="#DA251d" d="M-20-15h40v30h-40z"/>
   <g id="g" transform="translate(0 -6)">
     <path id="g1" fill="#FF0" d="M0 0v6h4" transform="rotate(18)"/>
-    <use transform="scale(-1 1)" xlink:href="#g1"/>
+    <use xlink:href="#g1" transform="scale(-1 1)"/>
   </g>
   <g id="g2" transform="rotate(72)">
     <use xlink:href="#g"/>
-    <use transform="rotate(72)" xlink:href="#g"/>
+    <use xlink:href="#g" transform="rotate(72)"/>
   </g>
-  <use transform="scale(-1 1)" xlink:href="#g2"/>
+  <use xlink:href="#g2" transform="scale(-1 1)"/>
 </svg>

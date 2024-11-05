@@ -7,10 +7,10 @@
       <use xlink:href="#path-1"/>
     </mask>
     <path fill="#A0FFA0" d="M-50-50h600v600H-50z" mask="url(#mask-2)"/>
-    <path fill="#0060D0" stroke="#000" stroke-width="10" d="M250.737 30.822 434.295 140.34v219.322L250.737 469.178 67.178 359.66V140.339L250.737 30.822z" mask="url(#mask-2)"/>
+    <path fill="#0060D0" stroke="#000" stroke-width="10" d="M250.737 30.822 434.295 140.34v219.322L250.737 469.178 67.178 359.66V140.339z" mask="url(#mask-2)"/>
     <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="165" font-weight="bold" mask="url(#mask-2)">
                 <tspan x="71.777" y="307.226">CFM</tspan>
             </text>
-    <path fill="#FFF" stroke="#FFF" stroke-width="1.25" d="m250.44 357.8 176.9 104.41H73.54l176.9-104.41z" mask="url(#mask-2)" transform="rotate(180 250.44 409.955)"/>
+    <path fill="#FFF" stroke="#FFF" stroke-width="1.25" d="m250.44 357.8 176.9 104.41H73.54z" mask="url(#mask-2)" transform="rotate(180 250.44 409.955)"/>
   </g>
 </svg>

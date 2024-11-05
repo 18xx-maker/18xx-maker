@@ -2,8 +2,8 @@
   <rect fill="#fe0000" width="100%" height="100%" x="-60" y="-40"/>
   <rect fill="#000095" width="50%" height="50%" x="-60" y="-40"/>
   <path id="four_rays" fill="#fff" d="M8 0 0 30-8 0l8-30M0 8l30-8L0-8l-30 8"/>
-  <use transform="rotate(30)" xlink:href="#four_rays"/>
-  <use transform="rotate(60)" xlink:href="#four_rays"/>
+  <use xlink:href="#four_rays" transform="rotate(30)"/>
+  <use xlink:href="#four_rays" transform="rotate(60)"/>
   <circle fill="#000095" r="17"/>
   <circle fill="#fff" r="15"/>
 </svg>
