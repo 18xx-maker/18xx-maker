@@ -10,7 +10,7 @@
     "titleX": 10,
     "titleY": 650,
     "titleSize": 40,
-    "subTitleSize": 12,
+    "subtitleSize": 12,
     "extraTotalHeight": 60,
     "currency": "$#"
   },
@@ -804,7 +804,8 @@
         "names": [
           {
             "name": "El Segundo",
-            "percent": -0.5
+            "percent": 0.5,
+            "angle": 180
           }
         ],
         "terrain": [
@@ -820,7 +821,8 @@
         "names": [
           {
             "name": "Alta Vista",
-            "percent": -0.5
+            "percent": 0.5,
+            "angle": 180
           }
         ],
         "terrain": [
@@ -960,7 +962,8 @@
         "names": [
           {
             "name": "Beverly Hills",
-            "percent": -0.5
+            "percent": 0.5,
+            "angle": 180
           }
         ],
         "companies": [
@@ -984,7 +987,8 @@
         "names": [
           {
             "name": "Puente",
-            "percent": -0.5
+            "percent": 0.5,
+            "angle": 180
           }
         ],
         "companies": [
@@ -1078,8 +1082,7 @@
         "values": [
           {
             "value": 20,
-            "angle": 180,
-            "percent": -0.75
+            "percent": 0.75
           }
         ],
         "track": [
@@ -1206,8 +1209,7 @@
         "values": [
           {
             "value": 20,
-            "angle": 180,
-            "percent": -0.75
+            "percent": 0.75
           }
         ],
         "track": [
@@ -1435,7 +1437,7 @@
           "angle": 115,
           "percent": 0.5
         },
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+$20",
             "angle": 65,
@@ -1489,7 +1491,7 @@
           "angle": -115,
           "percent": 0.5
         },
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+$30",
             "angle": -65,
@@ -1555,7 +1557,7 @@
           "angle": -115,
           "percent": 0.5
         },
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+$20",
             "angle": -65,
@@ -1612,7 +1614,7 @@
           "angle": -115,
           "percent": 0.5
         },
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+$20",
             "angle": -65,
@@ -1660,7 +1662,7 @@
           "angle": 115,
           "percent": 0.5
         },
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+$30",
             "angle": 65,
@@ -1712,7 +1714,7 @@
           "angle": -115,
           "percent": 0.5
         },
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+$30",
             "angle": -65,
@@ -1753,7 +1755,7 @@
           "angle": -115,
           "percent": 0.5
         },
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+$30",
             "angle": -65,
@@ -1805,7 +1807,7 @@
           "angle": -115,
           "percent": 0.5
         },
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+$30",
             "angle": -65,
@@ -1850,7 +1852,7 @@
           "angle": -115,
           "percent": 0.5
         },
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+$20",
             "angle": -65,
@@ -1890,7 +1892,7 @@
           ],
           "percent": 0.25
         },
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+$50",
             "percent": 0.6
@@ -1942,7 +1944,7 @@
           "angle": -115,
           "percent": 0.5
         },
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+$20",
             "angle": -65,

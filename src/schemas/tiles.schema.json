@@ -555,6 +555,9 @@
     "genericToken": {
       "type": "object",
       "properties": {
+        "logo": {
+          "type": "string"
+        },
         "label": {
           "type": "string",
           "minLength": 1
@@ -579,12 +582,45 @@
           "type": "string"
         },
         "shield": {
-          "type": "string"
-        },
-        "shieldTop": {
-          "type": "string"
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean",
+              "enum": [
+                true
+              ]
+            }
+          ]
         },
         "shield3": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean",
+              "enum": [
+                true
+              ]
+            }
+          ]
+        },
+        "kiteshield": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean",
+              "enum": [
+                true
+              ]
+            }
+          ]
+        },
+        "shieldTop": {
           "type": "string"
         },
         "shield3TopLeft": {
@@ -1862,11 +1898,19 @@
             "type": "string",
             "enum": [
               "custom",
-              "offboard",
-              "straight",
-              "gentle",
+              "mid",
               "sharp",
+              "gentle",
+              "straight",
               "bent",
+              "offboard",
+              "stub",
+              "stop",
+              "straightStop",
+              "gentleStop",
+              "gentleStopRev",
+              "sharpStop",
+              "sharpStopRev",
               "city"
             ]
           },

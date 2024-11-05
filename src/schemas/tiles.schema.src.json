@@ -140,6 +140,7 @@
     "genericToken": {
       "type": "object",
       "properties": {
+        "logo": { "type": "string" },
         "label": { "type": "string", "minLength": 1 },
         "color": { "type": "string" },
         "bgFill": { "type": "string" },
@@ -148,9 +149,25 @@
         "outlineWidth": { "type": "integer", "minimum": 1 },
 
         "circle": { "type": "string" },
-        "shield": { "type": "string" },
+        "shield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ]
+        },
+        "shield3": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ]
+        },
+        "kiteshield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ]
+        },
         "shieldTop": { "type": "string" },
-        "shield3": { "type": "string" },
         "shield3TopLeft": { "type": "string" },
         "shield3TopCenter": { "type": "string" },
         "shield3TopRight": { "type": "string" },
@@ -458,11 +475,19 @@
             "type": "string",
             "enum": [
               "custom",
-              "offboard",
-              "straight",
-              "gentle",
+              "mid",
               "sharp",
+              "gentle",
+              "straight",
               "bent",
+              "offboard",
+              "stub",
+              "stop",
+              "straightStop",
+              "gentleStop",
+              "gentleStopRev",
+              "sharpStop",
+              "sharpStopRev",
               "city"
             ]
           }

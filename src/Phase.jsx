@@ -123,7 +123,7 @@ const Phase = ({ phases, trains, minor, company }) => {
       let prices = R.map(t => <li key={t.name}>{formatCell(t.price)}</li>, phaseTrains);
 
       // Quantities for each train
-      let quantities = R.map(t => <li key={t.name}>{t.quantity}</li>, phaseTrains);
+      let quantities = R.map(t => <li key={t.name}>{t.quantity_label || t.quantity}</li>, phaseTrains);
 
       // Get all trains that rust on this phase
       let rustingTrains = R.filter(matchEvent(phaseTrains, "rust"), trains || []);

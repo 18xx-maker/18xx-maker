@@ -10,7 +10,6 @@
     "titleSize": 140,
     "subtitleSize": 80,
     "designerSize": 40,
-    "extraTokens": 2,
     "currency": "$#"
   },
   "prototype": true,
@@ -38,12 +37,12 @@
   "players": [
     {
       "number": 3,
-      "certLimit": "20",
+      "certLimit": 20,
       "capital": 580
     },
     {
       "number": 4,
-      "certLimit": "16",
+      "certLimit": 16,
       "capital": 460
     }
   ],
@@ -682,54 +681,54 @@
   "phases": [
     {
       "train": "2H",
-      "limit": "4",
+      "limit": 4,
       "tiles": "yellow"
     },
     {
       "train": "3H",
-      "limit": "4",
+      "limit": 4,
       "tiles": "yellow"
     },
     {
       "train": "4H",
-      "limit": "4",
+      "limit": 4,
       "tiles": "green",
       "notes": "Hunslet can be bought"
     },
     {
       "train": "5H",
-      "limit": "4",
+      "limit": 4,
       "tiles": "green"
     },
     {
       "train": "6H",
-      "limit": "4",
+      "limit": 4,
       "tiles": "green"
     },
     {
       "train": "2+",
-      "limit": "3",
+      "limit": 3,
       "tiles": "green"
     },
     {
       "train": "3+",
-      "limit": "3",
+      "limit": 3,
       "tiles": "green"
     },
     {
       "train": "4+",
-      "limit": "3",
+      "limit": 3,
       "tiles": "brown",
       "notes": "Privates close"
     },
     {
       "train": "7",
-      "limit": "2",
+      "limit": 2,
       "tiles": "brown"
     },
     {
       "train": "D",
-      "limit": "2",
+      "limit": 2,
       "tiles": "gray"
     }
   ],
@@ -1459,7 +1458,6 @@
             "angle": 150,
             "name": {
               "name": "North River",
-              "rotation": 360,
               "reverse": true
             },
             "percent": 0.57,
@@ -2046,8 +2044,7 @@
             "angle": 0,
             "name": {
               "name": "Beach Point",
-              "rotation": 180,
-              "reverse": false
+              "rotation": 180
             },
             "percent": 0.275,
             "rotation": 90
