@@ -25,6 +25,8 @@ import Typography from "@material-ui/core/Typography";
 
 import { makeStyles } from '@material-ui/core/styles';
 
+const publisherImageUrls = import.meta.glob('../data/publishers/*.png', { eager: true, import: 'default' });
+
 const useStyles = makeStyles((theme) => ({
   DropBox: {
     borderStyle: 'dashed',
@@ -87,7 +89,7 @@ const LoadGames = () => {
       }
 
       if (game.publisher !== "self") {
-        let imageUrl = require(`../data/publishers/${game.publisher}.png`).default;
+        let imageUrl = publisherImageUrls[`../data/publishers/${game.publisher}.png`];
         if (publisher.link) {
           imageNode = <Link rel="noreferrer"
                             target="_blank"

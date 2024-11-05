@@ -6,8 +6,12 @@ import assocPath from "ramda/src/assocPath";
 import defaultTo from "ramda/src/defaultTo";
 import mergeDeepRight from "ramda/src/mergeDeepRight";
 
-import defaultConfig from "../defaults.json";
-import userConfig from "../config.json";
+const configs = import.meta.glob("../*.json", {
+  eager: true,
+  import: "default",
+});
+const defaultConfig = configs["../defaults.json"];
+const userConfig = configs["../user.json"] || {};
 
 import useLocalState from "../util/useLocalState";
 import { diff } from "deep-object-diff";

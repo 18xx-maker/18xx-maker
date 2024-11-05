@@ -21,10 +21,9 @@ const File = (props) => {
     data = JSON.stringify(data, null, 2);
   }
   if (is(String, data)) {
-    data = new Buffer(data);
-  }
-  if (is(Buffer, data)) {
-    data = data.toString('base64');
+    const encoder = new TextEncoder();
+    const bytes = encoder.encode(data);
+    data = btoa(String.fromCharCode(...bytes));
   }
 
   if (props.list) {

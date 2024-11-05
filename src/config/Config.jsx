@@ -6,6 +6,7 @@ import { diff } from "deep-object-diff";
 import ThemePreview from "./ThemePreview";
 import Input from "./Input";
 import File from "../util/File";
+import { mapKeys } from "../util.js";
 
 import defaultConfig from "../defaults.json";
 import schema from "./../schemas/config.schema.json";
@@ -20,8 +21,11 @@ import map from "ramda/src/map";
 import path from "ramda/src/path";
 import split from "ramda/src/split";
 
-import mapThemes from "../data/themes/maps";
-import companyThemes from "../data/themes/companies";
+const getThemeName = (file) => file.replace(/^.*\/([^\/]+)\.json$/, (_,x) => x);
+const rawMapThemes = import.meta.glob("../data/themes/maps/*.json", { eager: true, import: "default" });
+const rawCompanyThemes = import.meta.glob("../data/themes/companies/*.json", { eager: true, import: "default" });
+const mapThemes = mapKeys(getThemeName, rawMapThemes);
+const companyThemes = mapKeys(getThemeName, rawCompanyThemes);
 
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";

@@ -2,8 +2,6 @@ import React, { Suspense } from "react";
 
 import { useTranslation } from "react-i18next";
 
-import logos from "../../data/logos";
-
 import ascend from "ramda/src/ascend";
 import groupBy from "ramda/src/groupBy";
 import keys from "ramda/src/keys";
@@ -19,6 +17,8 @@ import Typography from '@material-ui/core/Typography';
 
 import { makeStyles } from '@material-ui/core/styles';
 
+const logoComponents = import.meta.glob("../../data/logos/**/*.svg", { eager: true, query: '?react', import: 'default' });
+
 const useStyles = makeStyles((theme) => ({
   page: {
     overflow: 'auto',
@@ -31,26 +31,41 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const groupFor = (file) => {
+  let match = file.match(/^\.\.\/\.\.\/data\/logos\/([^\/]+)\/.+\.svg$/);
+  return match ? match[1] : "";
+};
+
+const nameFor = (file) => {
+  let match = file.match(/\/([^\/]+)\.svg$/);
+  return match ? match[1] : "";
+};
+
+const fullNameFor = (file) => {
+  let match = file.match(/^\.\.\/\.\.\/data\/logos\/(.+)\.svg$/);
+  return match ? match[1] : "";
+};
+
+const groups = groupBy(groupFor, keys(logoComponents));
+
 const Logos = () => {
   const { t } = useTranslation();
   const classes = useStyles();
 
-  const groups = groupBy(prop('group'), values(logos));
-
   const groupNodes = map(group => {
     const groupLogos = groups[group];
 
-    const logoNodes = map(logo => {
-      let Component = logo.Component;
+    const logoNodes = map(file => {
+      let name = nameFor(file);
+      let fullName = fullNameFor(file);
+      let Component = logoComponents[file];
       return (
-        <Grid key={`logo-${logo.group}-${logo.name}`} item
+        <Grid key={`logo-${group}-${name}`} item
               xs={6} sm={4} lg={2}
               style={{overflow: 'hidden'}}>
-          <Suspense fallback={null}>
-            <Component width="100%" height="100px"/>
-          </Suspense>
+          <Component width="100%" height="100px"/>
           <Typography variant="subtitle1" align="center">
-            {`${logo.group === undefined ? "" : `${logo.group}/`}${logo.name}`}
+            {fullName}
           </Typography>
         </Grid>
       )

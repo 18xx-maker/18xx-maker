@@ -15,7 +15,7 @@ import isNil from "ramda/src/isNil";
 
 import { isElectron } from "../util";
 
-const path = require("path");
+import path from "path-browserify"
 
 const GameContext = createContext({ game: null });
 
@@ -50,9 +50,8 @@ const loadBundledGame = (id) => {
     return Promise.reject(`Game not found: ${id}`);
   }
 
-  return import(
-    /* webpackChunkName: "game.[request]" */ "../data/games/" + games[id].file
-  )
+  let filename = gameInfo.file;
+  return import(`../data/games/${id}.json`)
     .then((game) => {
       if (game.default) {
         return game.default;

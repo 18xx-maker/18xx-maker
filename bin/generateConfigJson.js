@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-
-const fs = require("fs");
+import fs from "fs";
 
 if (!fs.existsSync("./src/config.json")) {
   // Create it with an empty object

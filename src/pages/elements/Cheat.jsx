@@ -71,7 +71,6 @@ const gameRows = map(key => {
 }, keys(games));
 
 const Cheat = () => {
-  console.log(games);
   return (
     <Container>
       <Typography component="h1" variant="h4" gutterBottom>

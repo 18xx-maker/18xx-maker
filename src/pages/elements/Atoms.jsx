@@ -522,7 +522,7 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: theme.shape.borderRadius
     }
   },
- 
+
   page: {
     overflow: 'auto',
     margin: theme.spacing(4, 0),

@@ -11,6 +11,8 @@ import defaultTo from "ramda/src/defaultTo";
 
 import "./train.scss";
 
+const trainImages = import.meta.glob("../images/trains/*.png", { eager: true, import: "default" });
+
 const ordinal = (num) => {
   switch(num) {
     case 1:
@@ -236,7 +238,7 @@ const Train = ({ train, trains, blackBand }) => {
                             paddingTop: `${imagePaddingTop}`,
                             width: `${imageWidth}`
                          }}
-                         src={require(`../images/trains/${image}.png`).default}/>
+                         src={trainImages[`../images/trains/${image}.png`]}/>
                   </div>
                 )}
                 <div className="train__name"
