@@ -9,17 +9,15 @@
   },
   "license": "MIT",
   "private": true,
-  "main": "electron/index.js",
+  "main": "electron/index.cjs",
   "bin": {
     "18xx-schemas": "bin/schemas.js"
   },
   "scripts": {
     "b18": "node ./bin/b18.js",
-    "build": "run-s generate react:build",
+    "build": "run-s schemas:prepare react:build",
     "build:electron": "cross-env PUBLIC_URL=. yarn build",
     "clean": "node ./bin/clean.js",
-    "generate": "run-p schemas:prepare generate:config",
-    "generate:config": "node ./bin/generateConfigJson.js",
     "prepare": "run-s schemas:prepare",
     "package": "electron-builder build -mwl -p onTagOrDraft",
     "print": "node ./bin/print.js",
@@ -30,15 +28,14 @@
     "schemas:prepare": "run-s schemas:compile schemas:copy",
     "schemas:compile": "node ./bin/compileSchemas.js",
     "schemas:copy": "copyfiles -f ./src/schemas/\\*.schema.json ./public/schemas",
-    "start": "run-p generate:config start:react",
-    "start:react": "vite",
+    "start": "vite",
     "start:app": "run-p start:electron start:nobrowser",
     "start:electron": "wait-on http://localhost:3000 && electron .",
     "start:nobrowser": "cross-env BROWSER=none yarn start",
     "svgo": "yarn svgo:icons && yarn svgo:logos",
     "svgo:icons": "svgo --pretty -f src/data/icons",
     "svgo:logos": "svgo --pretty -f src/data/logos",
-    "test": "run-s generate validate react:test",
+    "test": "run-s schemas:prepare validate react:test",
     "validate": "npm-run-all validate:schemas validate:config validate:games validate:themes validate:tiles -c -p --aggregate-output",
     "validate:schemas:config": "ajv compile -s src/schemas/config.schema.json",
     "validate:schemas:fields": "ajv compile -s src/schemas/fields.schema.json",
@@ -105,7 +102,7 @@
       ]
     },
     "extraMetadata": {
-      "main": "electron/index.js"
+      "main": "electron/index.cjs"
     },
     "files": [
       "build/**/*",
@@ -115,7 +112,7 @@
     "directories": {
       "buildResources": "assets"
     },
-    "afterSign": "electron/notarize.js"
+    "afterSign": "electron/notarize.cjs"
   },
   "babel": {
     "presets": [
