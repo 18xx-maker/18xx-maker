@@ -130,7 +130,7 @@
     "@material-ui/lab": "^4.0.0-alpha.54",
     "@vitejs/plugin-react": "^4.3.3",
     "@vitejs/plugin-react-swc": "^3.7.1",
-    "ajv": "^6.12.2",
+    "ajv": "^8.17.1",
     "ajv-cli": "^5.0.0",
     "archiver": "^3.0.0",
     "browserslist-to-esbuild": "^2.1.1",
