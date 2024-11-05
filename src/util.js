@@ -1,6 +1,6 @@
 import overrides from "./data/companies";
 
-import { addIndex, adjust, ascend, chain, compose, curry, defaultTo, find, head, is, join, juxt, lte, map, mergeAll, mergeLeft, nth, pick, prop, propOr, reverse, sortWith, split, tail, toPairs, toUpper } from "ramda";
+import { addIndex, adjust, ascend, chain, compose, curry, defaultTo, find, fromPairs, head, is, join, juxt, lte, map, mergeAll, mergeLeft, nth, pick, prop, propOr, reverse, sortWith, split, tail, toPairs, toUpper } from "ramda";
 
 export const isElectron =
   typeof navigator === "undefined"
