@@ -5,7 +5,7 @@ import GameContext from "./context/GameContext";
 import ConfigContext from "./context/ConfigContext";
 import { useBooleanParam } from "./util/query";
 
-import { compileCompanies, overrideCompanies } from "./util";
+import { maxPlayers, compileCompanies, overrideCompanies } from "./util";
 
 import schema from "./schemas/config.schema.json";
 
@@ -22,17 +22,7 @@ import ExportIcon from '@material-ui/icons/Collections';
 import PdfIcon from "@material-ui/icons/PictureAsPdf";
 import PngIcon from "@material-ui/icons/PhotoLibrary";
 
-import assoc from "ramda/src/assoc";
-import compose from "ramda/src/compose";
-import flatten from "ramda/src/flatten";
-import forEach from "ramda/src/forEach";
-import is from "ramda/src/is";
-import keys from "ramda/src/keys";
-import map from "ramda/src/map";
-import max from "ramda/src/max";
-import prop from "ramda/src/prop";
-import range from "ramda/src/range";
-import reduce from "ramda/src/reduce";
+import { assoc, compose, flatten, forEach, is, keys, map, max, prop, range, reduce } from "ramda";
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -44,11 +34,6 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(4)
   }
 }));
-
-export const maxPlayers = compose(
-  reduce(max, 0),
-  map(prop("number"))
-);
 
 const pngItems = (game, config) => {
   let items = {

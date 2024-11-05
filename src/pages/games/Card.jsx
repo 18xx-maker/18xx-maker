@@ -9,24 +9,12 @@ import Private from "../../cards/Private";
 import Share from "../../cards/Share";
 import Train from "../../cards/Train";
 
-import { compileCompanies, overrideCompanies } from "../../util";
+import { maxPlayers, compileCompanies, overrideCompanies } from "../../util";
 import { getCardData } from "../../cards/util";
 
-import assoc from "ramda/src/assoc";
-import clone from "ramda/src/clone";
-import compose from "ramda/src/compose";
-import flatten from "ramda/src/flatten";
-import map from "ramda/src/map";
-import max from "ramda/src/max";
-import prop from "ramda/src/prop";
-import reduce from "ramda/src/reduce";
+import { assoc, clone, flatten, map, reduce } from "ramda";
 
 import "../../cards/card.scss";
-
-export const maxPlayers = compose(
-  reduce(max, 0),
-  map(prop("number"))
-);
 
 const Cards = () => {
   const { config } = useContext(ConfigContext);
