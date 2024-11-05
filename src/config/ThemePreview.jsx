@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useContext } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 
 import Avatar from "@material-ui/core/Avatar";
 import AvatarGroup from "@material-ui/lab/AvatarGroup";
 
 import ColorContext from "../context/ColorContext";
+import ConfigContext from "../context/ConfigContext";
 import Color from "../util/Color";
 
-import map from "ramda/src/map";
+import tinycolor from "tinycolor2";
 
-import themeSchema from "../schemas/theme.schema.json";
+import { filter, is, keys, map, sortBy, uniqBy } from "ramda";
+import { mapKeys } from "../util";
 
 const useStyles = makeStyles((theme) => ({
   themeGroup: {
@@ -22,10 +24,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const mapColors = themeSchema.definitions.mapColorName.enum;
-const companyColors = themeSchema.definitions.genericColorName.enum;
+const getThemeName = (file) => file.replace(/^.*\/([^\/]+)\.json$/, (_,x) => x);
+
+const rawMapThemes = import.meta.glob("../data/themes/maps/*.json", { eager: true, import: "default" });
+const mapThemes = mapKeys(getThemeName, rawMapThemes);
+
+const rawCompanyThemes = import.meta.glob("../data/themes/companies/*.json", { eager: true, import: "default" });
+const companyThemes = mapKeys(getThemeName, rawCompanyThemes);
 
 const ThemePreview = ({companies}) => {
+  const { config } = useContext(ConfigContext);
+  const { theme, companiesTheme } = config;
+
+  // Just use the base color names that don't have crazy options
+  const colors = companies ? companyThemes[companiesTheme].colors : mapThemes[theme].colors;
+  const colorNames = sortBy(name => tinycolor(colors[name]).getBrightness(),
+                            uniqBy(name => colors[name],
+                                   filter(name => is(String, colors[name]),
+                                          keys(colors))));
 
   const classes = useStyles();
 
@@ -45,7 +61,7 @@ const ThemePreview = ({companies}) => {
                   &nbsp;
                 </Avatar>
               ),
-              companies ? companyColors : mapColors
+              colorNames
             )
           }
         </Color>
