@@ -3,13 +3,7 @@ import ConfigContext from "./ConfigContext";
 
 import { capitalize, mapKeys } from "../util";
 
-import append from "ramda/src/append";
-import compose from "ramda/src/compose";
-import concat from "ramda/src/concat";
-import merge from "ramda/src/merge";
-import pick from "ramda/src/pick";
-import prop from "ramda/src/prop";
-import reduce from "ramda/src/reduce";
+import { append, compose, concat, mergeLeft, pick, prop, reduce } from "ramda";
 
 const FontContext = React.createContext([]);
 
@@ -35,7 +29,7 @@ export const resolveFont = (contexts, fonts) => {
 
     if (newFonts) {
       return {
-        font: merge(result.font, fontPick(newFonts)),
+        font: mergeLeft(result.font, fontPick(newFonts)),
         fonts: newFonts
       };
     } else {

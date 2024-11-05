@@ -11,7 +11,7 @@
   "private": true,
   "main": "electron/index.cjs",
   "bin": {
-    "18xx-schemas": "bin/schemas.js"
+    "18xx-schemas": "bin/schemas.cjs"
   },
   "scripts": {
     "b18": "node ./bin/b18.js",
@@ -20,11 +20,12 @@
     "clean": "node ./bin/clean.js",
     "prepare": "run-s schemas:prepare",
     "package": "electron-builder build -mwl -p onTagOrDraft",
+    "preview": "vite preview",
     "print": "node ./bin/print.js",
     "react:build": "vite build",
     "react:test": "jest",
     "release": "run-s build:electron package",
-    "schemas": "node ./bin/schemas.js",
+    "schemas": "node ./bin/schemas.cjs",
     "schemas:prepare": "run-s schemas:compile schemas:copy",
     "schemas:compile": "node ./bin/compileSchemas.js",
     "schemas:copy": "copyfiles -f ./src/schemas/\\*.schema.json ./public/schemas",
@@ -47,14 +48,6 @@
     "validate:games": "yarn schemas src/data/games/**/*.json",
     "validate:themes": "yarn schemas src/data/themes/**/*.json",
     "validate:tiles": "yarn schemas src/data/tiles/*.json"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,json,md}": "prettier --write"
   },
   "browserslist": [
     ">0.2%",
@@ -140,6 +133,7 @@
     "ajv": "^6.12.2",
     "ajv-cli": "^5.0.0",
     "archiver": "^3.0.0",
+    "browserslist-to-esbuild": "^2.1.1",
     "chalk": "^4.0.0",
     "commander": "^5.1.0",
     "copyfiles": "^2.4.1",
@@ -150,20 +144,18 @@
     "electron-notarize": "^1.1.1",
     "glob": "^7.1.6",
     "handlebars": "^4.5.3",
-    "husky": "^4.2.5",
     "i18next": "^19.4.5",
     "i18next-browser-languagedetector": "^4.2.0",
     "i18next-http-backend": "^1.0.13",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "lint-staged": "^10.2.7",
     "npm-run-all": "^4.1.5",
     "number-to-words": "^1.2.4",
     "object-hash": "^3.0.0",
     "path-browserify": "^1.0.1",
     "prettier": "^2.0.5",
     "puppeteer": "1.16.0",
-    "ramda": "^0.27.0",
+    "ramda": "^0.30.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-i18next": "^11.5.0",

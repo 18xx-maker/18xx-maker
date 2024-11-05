@@ -1,32 +1,6 @@
 import overrides from "./data/companies";
 
-import addIndex from "ramda/src/addIndex";
-import adjust from "ramda/src/adjust";
-import ascend from "ramda/src/ascend";
-import chain from "ramda/src/chain";
-import compose from "ramda/src/compose";
-import curry from "ramda/src/curry";
-import defaultTo from "ramda/src/defaultTo";
-import find from "ramda/src/find";
-import fromPairs from "ramda/src/fromPairs";
-import head from "ramda/src/head";
-import is from "ramda/src/is";
-import join from "ramda/src/join";
-import juxt from "ramda/src/juxt";
-import lte from "ramda/src/lte";
-import map from "ramda/src/map";
-import merge from "ramda/src/merge";
-import mergeAll from "ramda/src/mergeAll";
-import nth from "ramda/src/nth";
-import pick from "ramda/src/pick";
-import prop from "ramda/src/prop";
-import propOr from "ramda/src/propOr";
-import reverse from "ramda/src/reverse";
-import sortWith from "ramda/src/sortWith";
-import split from "ramda/src/split";
-import tail from "ramda/src/tail";
-import toPairs from "ramda/src/toPairs";
-import toUpper from "ramda/src/toUpper";
+import { addIndex, adjust, ascend, chain, compose, curry, defaultTo, find, head, is, join, juxt, lte, map, mergeAll, mergeLeft, nth, pick, prop, propOr, reverse, sortWith, split, tail, toPairs, toUpper } from "ramda";
 
 export const isElectron =
   typeof navigator === "undefined"
@@ -238,7 +212,7 @@ export const overrideCompanies = (companies, override, selections) => {
 
     // If we have a valid override for the index, merge!
     if (overrideCompanies[index]) {
-      company = merge(company, overrideCompanies[index]);
+      company = mergeLeft(company, overrideCompanies[index]);
 
       // Remove some fields if they don't exist on the override company
       company.logo = overrideCompanies[index].logo;

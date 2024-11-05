@@ -5,7 +5,7 @@ const path = require("path");
 const util = require("util");
 const pkg = require("../package.json");
 const { program } = require("commander");
-const validate = require("../src/schemas/index");
+const validate = require("../src/schemas/index.cjs");
 
 const getShortSchemaName = (id) => {
   let results = id.match(/([a-z]+)\.schema\.json$/);
