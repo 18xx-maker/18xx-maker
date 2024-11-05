@@ -4,7 +4,7 @@ export default {
   recursive: true,
   precision: 6,
   js2svg: {
-    pretty: false,
+    pretty: true,
     indent: 2
   },
   plugins: [
