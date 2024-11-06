@@ -1,7 +1,8 @@
 import React from "react";
-import tiles from "./data/tiles";
 
-import is from "ramda/src/is";
+import { tiles } from "./data";
+
+import { is } from "ramda";
 
 import Hex from "./Hex";
 import Id from "./atoms/Id";

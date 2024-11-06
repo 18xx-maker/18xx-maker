@@ -2,7 +2,7 @@ import React from "react";
 import Color from "../util/Color";
 import defaultTo from "ramda/src/defaultTo";
 
-const icons = import.meta.glob("../data/icons/*.svg", { eager: true, import: "default", query: '?react' });
+import { icons } from "../data";
 
 const Icon = ({ type, color, width, noCircle, fillColor, strokeColor, strokeWidth }) => {
   let icon;
@@ -13,9 +13,8 @@ const Icon = ({ type, color, width, noCircle, fillColor, strokeColor, strokeWidt
   strokeColor = defaultTo("black", strokeColor);
   strokeWidth = defaultTo("2", strokeWidth);
 
-  let iconFile = `../data/icons/${type}.svg`;
-  if (icons[iconFile]) {
-    let Component = icons[iconFile];
+  if (icons[type]) {
+    let Component = icons[type];
     icon = <Component className={`icon-color-main-${color}`}
                       width={iconWidth} height={iconWidth}
                       x={iconPos} y={iconPos} />;

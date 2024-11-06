@@ -10,7 +10,8 @@ import Train from "./Train";
 
 import PageSetup from "../PageSetup";
 
-import { compileCompanies, overrideCompanies, fillArray } from "../util";
+import { fillArray } from "../util";
+import { compileCompanies, overrideCompanies } from "../util/companies";
 import { getCardData } from "./util";
 import Svg from "../Svg";
 
@@ -37,7 +38,7 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
 
   let privateNodes = addIndex(map)(
     (p, i) => (
-      <Private key={`private-${game.id}-${i}`}
+      <Private key={`private-${game.meta.id}-${i}`}
                players={game.players}
                {...p} />
     ),

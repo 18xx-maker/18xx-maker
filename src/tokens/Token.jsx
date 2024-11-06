@@ -6,8 +6,7 @@ import defaultTo from "ramda/src/defaultTo";
 
 import * as uuid from "uuid";
 
-const logoComponents = import.meta.glob("../data/logos/**/*.svg", { eager: true, query: '?react', import: 'default' });
-const iconComponents = import.meta.glob("../data/icons/*.svg", { eager: true, query: '?react', import: 'default' });
+import { icons, logos } from "../data";
 
 const Token = ({
   logo, // The SVG logo to display on this token.
@@ -139,7 +138,7 @@ const Token = ({
         let tokenFill;
         if(inverse) {
           tokenFill = c("white");
-        } else if (logo && logoComponents[`../data/logos/${logo}.svg`]) {
+        } else if (logo && logos[logo]) {
           tokenFill = c(iconColor) || p("white");
         } else {
           tokenFill = c(color) || p("white");
@@ -171,10 +170,10 @@ const Token = ({
           />);
         }
 
-        if(inverse && logo && logoComponents[`../data/logos/${logo}.svg`]) {
+        if(inverse && logo && logos[logo]) {
           // Draw inversed logos same as reserved
           color = "gray";
-          let Component = logoComponents[`../data/logos/${logo}.svg`];
+          let Component = logos[logo];
           let size = defaultTo(width * 2, logoWidth * scaling);
           let start = -1/2 * size;
           if (logo.includes("countries")) {
@@ -199,8 +198,8 @@ const Token = ({
           textStroke = s(c(inverseLabelColor == null ? color : inverseLabelColor));
           textFill = c(inverseLabelColor == null ? color : inverseLabelColor);
 
-        } else if (logo && logoComponents[`../data/logos/${logo}.svg`]) {
-          let Component = logoComponents[`../data/logos/${logo}.svg`];
+        } else if (logo && logos[logo]) {
+          let Component = logos[logo];
           let size = defaultTo(width * 2, logoWidth * scaling);
           let start = -1/2 * size;
           if (logo.includes("countries")) {
@@ -586,7 +585,7 @@ const Token = ({
 
         let content = [];
         if (icon) {
-          let Component = iconComponents[`../data/icons/${icon}.svg`];
+          let Component = icons[icon];
 
           let classes = [];
           if (iconColor) {

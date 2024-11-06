@@ -3,22 +3,14 @@ import ConfigContext from "../../context/ConfigContext";
 import GameContext from "../../context/GameContext";
 
 import { Redirect } from "react-router-dom";
-import { getCharterData, compileCompanies, overrideCompanies } from "../../util";
+import { getCharterData } from "../../util";
+import { compileCompanies, overrideCompanies } from "../../util/companies";
 import Charter from "../../Charter";
 import Svg from "../../Svg";
 
 import PageSetup from "../../PageSetup";
 
-import addIndex from "ramda/src/addIndex";
-import chain from "ramda/src/chain";
-import compose from "ramda/src/compose";
-import concat from "ramda/src/concat";
-import filter from "ramda/src/filter";
-import map from "ramda/src/map";
-import not from "ramda/src/not";
-import prop from "ramda/src/prop";
-import repeat from "ramda/src/repeat";
-import splitEvery from "ramda/src/splitEvery";
+import { addIndex, chain, compose, concat, filter, map, not, prop, repeat, splitEvery } from "ramda";
 
 const isMinor = prop("minor");
 const isMajor = compose(not, prop("minor"));
@@ -32,7 +24,7 @@ const Charters = () => {
   const { game } = useContext(GameContext);
 
   if (!game.companies) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Redirect to={`/games/${game.meta.slug}/`} />;
   }
 
   let gameCompanies = overrideCompanies(compileCompanies(game), override, selection);

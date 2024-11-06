@@ -6,12 +6,9 @@ import { useAlert } from "./AlertContext";
 // import useSessionState from "../util/useSessionState";
 import useLocalState from "../util/useLocalState";
 
-import games from "../data/games";
+import { games } from "../data";
 
-import assoc from "ramda/src/assoc";
-import equals from "ramda/src/equals";
-import is from "ramda/src/is";
-import isNil from "ramda/src/isNil";
+import { assoc, equals, is, isNil } from "ramda";
 
 import { isElectron } from "../util";
 
@@ -44,34 +41,18 @@ const loadFile = (file) => {
 
 // Given a game id, attempts to find it locally
 const loadBundledGame = (id) => {
-  let gameInfo = games[id];
+  let game = games[id];
 
-  if (!gameInfo) {
+  if (!game) {
     return Promise.reject(`Game not found: ${id}`);
   }
 
-  let filename = gameInfo.file;
-  return import(`../data/games/${id}.json`)
-    .then((game) => {
-      if (game.default) {
-        return game.default;
-      }
+  if (game && isElectron) {
+    let ipcRenderer = window.require("electron").ipcRenderer;
+    ipcRenderer.send("watch"); // Not sending a file path to stop watching this file
+  }
 
-      return game;
-    })
-    .then(assoc("id", gameInfo.id))
-    .then(assoc("slug", gameInfo.slug))
-    .then((game) => {
-      if (isElectron) {
-        let ipcRenderer = window.require("electron").ipcRenderer;
-        ipcRenderer.send("watch"); // Not sending a file path to stop watching this file
-      }
-      return game;
-    })
-    .catch((err) => {
-      console.error(err);
-      return Promise.reject(`Error loading game: ${id}`);
-    });
+  return Promise.resolve(game);
 };
 
 const loadFileOrId = (fileOrId) => {
@@ -134,7 +115,7 @@ export const GameProvider = ({ children }) => {
     path: "/games/:slug/:component?",
   });
   if (match) {
-    if (isNil(game) || match.params.slug !== game.id) {
+    if (isNil(game) || match.params.slug !== game.meta.id) {
       // Try loading the other game if it's a bundled one
       if (games[match.params.slug]) {
         loadGame(match.params.slug);
@@ -148,7 +129,7 @@ export const GameProvider = ({ children }) => {
     } else if (
       !isNil(game) &&
       games[match.params.slug] &&
-      match.params.slug === game.id
+      match.params.slug === game.meta.id
     ) {
       checkForChanges(match.params.slug);
     }

@@ -73,7 +73,7 @@ const GameNav = () => {
       <List>
         <ListItem button
                   component={RouterLink}
-                  to={`/games/${game.slug}/`}>
+                  to={`/games/${game.meta.slug}/`}>
           <ListItemIcon><GameIcon/></ListItemIcon>
           <ListItemText primary={game.info.title}
                         secondary={`${t('game.by')} ${game.info.designer}`}/>
@@ -123,7 +123,7 @@ const GameNav = () => {
           </ListItem>
         )}
         <File data={game}
-              filename={`${game.id}.json`}
+              filename={`${game.meta.id}.json`}
               list/>
         {game.prototype && (
           <ListItem>
@@ -232,68 +232,68 @@ const GameNav = () => {
         <ListItem button
                   selected={!!matchPath(location.pathname, {path: '/games/:slug/background'})}
                   component={RouterLink}
-                  to={`/games/${game.slug}/background`}>
+                  to={`/games/${game.meta.slug}/background`}>
           <ListItemText>Background</ListItemText>
         </ListItem>
         <ListItem button
                   selected={!!matchPath(location.pathname, {path: '/games/:slug/cards'})}
                   component={RouterLink}
-                  to={`/games/${game.slug}/cards`}>
+                  to={`/games/${game.meta.slug}/cards`}>
           <ListItemText>Cards</ListItemText>
         </ListItem>
         <ListItem button
                   disabled={!game.companies}
                   selected={!!matchPath(location.pathname, {path: '/games/:slug/charters'})}
                   component={RouterLink}
-                  to={`/games/${game.slug}/charters`}>
+                  to={`/games/${game.meta.slug}/charters`}>
           <ListItemText>Charters</ListItemText>
         </ListItem>
         <ListItem button
                   disabled={!game.map}
                   selected={!!matchPath(location.pathname, {path: '/games/:slug/map'})}
                   component={RouterLink}
-                  to={`/games/${game.slug}/map`}>
+                  to={`/games/${game.meta.slug}/map`}>
           <ListItemText>Map</ListItemText>
         </ListItem>
         <ListItem button
                   disabled={!game.stock || !game.stock.market}
                   selected={!!matchPath(location.pathname, {path: '/games/:slug/market'})}
                   component={RouterLink}
-                  to={`/games/${game.slug}/market`}>
+                  to={`/games/${game.meta.slug}/market`}>
           <ListItemText primary="Market"/>
         </ListItem>
         <ListItem button
                   disabled={!game.stock || !game.stock.par || !game.stock.par.values}
                   selected={!!matchPath(location.pathname, {path: '/games/:slug/par'})}
                   component={RouterLink}
-                  to={`/games/${game.slug}/par`}>
+                  to={`/games/${game.meta.slug}/par`}>
           <ListItemText primary="Par"/>
         </ListItem>
         <ListItem button
                   selected={!!matchPath(location.pathname, {path: '/games/:slug/revenue'})}
                   component={RouterLink}
-                  to={`/games/${game.slug}/revenue`}>
+                  to={`/games/${game.meta.slug}/revenue`}>
           <ListItemText primary="Revenue"/>
         </ListItem>
         <ListItem button
                   disabled={!game.tiles}
                   selected={!!matchPath(location.pathname, {path: '/games/:slug/tile-manifest'})}
                   component={RouterLink}
-                  to={`/games/${game.slug}/tile-manifest`}>
+                  to={`/games/${game.meta.slug}/tile-manifest`}>
           <ListItemText primary="Tile Manifest"/>
         </ListItem>
         <ListItem button
                   disabled={!game.tiles}
                   selected={!!matchPath(location.pathname, {path: '/games/:slug/tiles'})}
                   component={RouterLink}
-                  to={`/games/${game.slug}/tiles`}>
+                  to={`/games/${game.meta.slug}/tiles`}>
           <ListItemText primary="Tiles"/>
         </ListItem>
         <ListItem button
                   disabled={!game.companies && !game.tokens}
                   selected={!!matchPath(location.pathname, {path: '/games/:slug/tokens'})}
                   component={RouterLink}
-                  to={`/games/${game.slug}/tokens`}>
+                  to={`/games/${game.meta.slug}/tokens`}>
           <ListItemText primary="Tokens"/>
         </ListItem>
       </List>

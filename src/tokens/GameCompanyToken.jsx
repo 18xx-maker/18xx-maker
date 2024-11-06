@@ -5,7 +5,7 @@ import GameContext from "../context/GameContext";
 import Token from "./Token";
 import CompanyToken from "./CompanyToken";
 
-import { overrideCompanies, compileCompanies } from "../util";
+import { overrideCompanies, compileCompanies } from "../util/companies.js";
 
 import findIndex from "ramda/src/findIndex";
 import propEq from "ramda/src/propEq";

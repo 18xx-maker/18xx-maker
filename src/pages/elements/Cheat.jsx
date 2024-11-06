@@ -1,7 +1,7 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
-import games from "../../data/games";
+import { games } from "../../data";
 
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';

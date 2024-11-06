@@ -9,7 +9,8 @@ import Private from "../../cards/Private";
 import Share from "../../cards/Share";
 import Train from "../../cards/Train";
 
-import { maxPlayers, compileCompanies, overrideCompanies } from "../../util";
+import { maxPlayers } from "../../util";
+import { compileCompanies, overrideCompanies } from "../../util/companies.js";
 import { getCardData } from "../../cards/util";
 
 import { assoc, clone, flatten, map, reduce } from "ramda";

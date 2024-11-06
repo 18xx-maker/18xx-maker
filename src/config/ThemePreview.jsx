@@ -24,13 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const getThemeName = (file) => file.replace(/^.*\/([^\/]+)\.json$/, (_,x) => x);
-
-const rawMapThemes = import.meta.glob("../data/themes/maps/*.json", { eager: true, import: "default" });
-const mapThemes = mapKeys(getThemeName, rawMapThemes);
-
-const rawCompanyThemes = import.meta.glob("../data/themes/companies/*.json", { eager: true, import: "default" });
-const companyThemes = mapKeys(getThemeName, rawCompanyThemes);
+import { mapThemes, companyThemes } from "../data";
 
 const ThemePreview = ({companies}) => {
   const { config } = useContext(ConfigContext);

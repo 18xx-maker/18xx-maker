@@ -3,7 +3,8 @@ import Color from "../util/Color";
 import GameContext from "../context/GameContext";
 import Currency from "../util/Currency";
 import { multiDefaultTo } from "../util";
-const iconComponents = import.meta.glob("../data/icons/*.svg", { eager: true, query: '?react', import: 'default' });
+
+import { icons } from "../data";
 
 const Terrain = ({ type, size, cost, fontFamily, fontSize, color }) => {
   const { game } = useContext(GameContext);
@@ -46,7 +47,7 @@ const Terrain = ({ type, size, cost, fontFamily, fontSize, color }) => {
   }
 
   let icon = null;
-  let Component = iconComponents[`../data/icons/${type}.svg`];
+  let Component = icons[type];
   if (Component) {
     icon = (
       <g transform={`translate(0 ${translate}) scale(${scale})`}>

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import GameContext from "../../context/GameContext";
 import { Redirect } from "react-router-dom";
 
-import tiles from "../../data/tiles";
+import { tiles } from "../../data";
 
 import Tile from "../../Tile";
 import Svg from "../../Svg";
@@ -36,7 +36,7 @@ const TileManifest = () => {
   const { game } = useContext(GameContext);
 
   if (!game.tiles) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Redirect to={`/games/${game.meta.slug}/`} />;
   }
 
   let ids = sortWith(

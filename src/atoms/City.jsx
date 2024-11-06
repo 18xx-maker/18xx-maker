@@ -13,7 +13,7 @@ import GameMapCompanyToken from "../tokens/GameMapCompanyToken";
 import ColorContext from "../context/ColorContext";
 import CityRotateContext from "../context/CityRotateContext";
 
-const iconComponents = import.meta.glob("../data/icons/*.svg", { eager: true, query: '?react', import: 'default' });
+import { icons as iconComponents } from "../data";
 
 const cityPaths = {
   cityPath: "M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30",
@@ -48,7 +48,7 @@ const City = ({ size, outlineColor, color, companies, icons, border, borderWidth
 
   let icon = num => {
     if (icons && icons[num]) {
-      let Component = iconComponents[`../data/icons/${icons[num]}.svg`];
+      let Component = iconComponents[icons[num]];
       return (
           <CityRotateContext.Provider value={rotation}>
           <g transform="scale(1.4)">

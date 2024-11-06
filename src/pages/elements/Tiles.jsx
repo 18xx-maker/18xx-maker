@@ -2,7 +2,7 @@ import React from "react";
 
 import { useTranslation } from "react-i18next";
 
-import tiles from "../../data/tiles";
+import { tiles } from "../../data";
 
 import { useRangeParam, useStringParam } from "../../util/query";
 
@@ -29,8 +29,6 @@ import min from "ramda/src/min";
 import reduce from "ramda/src/reduce";
 import uniq from "ramda/src/uniq";
 import values from "ramda/src/values";
-
-// import tiles from "../../data/tiles";
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -60,11 +58,11 @@ const colors = uniq(values(map(t => t.color, tiles)));
 const revenues = reduce(([minRevenue, maxRevenue], tile) => {
   if (!tile.values) {
     // No values on this tile, just return
-    return [min(minRevenue, 0), max(maxRevenue, 0)];
+    return [minRevenue, maxRevenue];
   }
 
   let [minTile, maxTile] = reduce(([minRevenue, maxRevenue], value) => {
-    return [min(minRevenue, value.value), max(maxRevenue, value.value)];
+    return [min(minRevenue, parseInt(value.value)), max(maxRevenue, parseInt(value.value))];
   }, [Number.MAX_SAFE_INTEGER, 0], tile.values);
 
   return [min(minRevenue, minTile), max(maxRevenue, maxTile)];

@@ -64,7 +64,7 @@ const Game = ({game}) => {
 
   const match = matchPath(location.pathname,
                           { path: '/games/:slug/:item?' });
-  if (match && (game.id !== match.params.slug)) {
+  if (match && (game.meta.id !== match.params.slug)) {
     return <Redirect to={`/games/${match.params.slug}/${match.params.item}`}/>;
   }
 

@@ -7,7 +7,7 @@ import Token from "../../../tokens/Token";
 import GameContext from "../../../context/GameContext";
 import ConfigContext from "../../../context/ConfigContext";
 
-import { compileCompanies, overrideCompanies } from "../../../util";
+import { compileCompanies, overrideCompanies } from "../../../util/companies";
 
 import addIndex from "ramda/src/addIndex";
 import is from "ramda/src/is";

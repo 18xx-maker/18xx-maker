@@ -6,19 +6,11 @@ import PhaseContext from '../context/PhaseContext';
 
 import tinycolor from "tinycolor2";
 
-import curry from "ramda/src/curry";
-import is from "ramda/src/is";
-import mergeDeepRight from "ramda/src/mergeDeepRight";
+import { curry, defaultTo, is, mergeDeepRight, prop } from "ramda";
 
 import { mapKeys } from "../util.js";
 
-const getThemeName = (file) => file.replace(/^.*\/([^\/]+)\.json$/, (_,x) => x);
-
-const rawMapThemes = import.meta.glob("../data/themes/maps/*.json", { eager: true, import: "default" });
-const mapThemes = mapKeys(getThemeName, rawMapThemes);
-
-const rawCompanyThemes = import.meta.glob("../data/themes/companies/*.json", { eager: true, import: "default" });
-const companyThemes = mapKeys(getThemeName, rawCompanyThemes);
+import { companyThemes, mapThemes } from "../data";
 
 const colorAliases = {
   "cyan": "lightBlue",
@@ -33,11 +25,12 @@ const resolveColor = curry((theme, companiesTheme, phase, context, game, name) =
     name = colorAliases[name];
   }
 
-  let colors = (mapThemes[theme || "gmt"] || mapThemes["gmt"]).colors;
+  let colors = prop("colors", defaultTo(prop("gmt", mapThemes), prop(theme, mapThemes)));
 
   // Add in company colors
-  colors["companies"] = mergeDeepRight(companyThemes["rob"].colors,
-                                       (companyThemes[companiesTheme || "rob"] || companyThemes["rob"]).colors);
+  colors["companies"] = mergeDeepRight(prop("colors", prop("rob", companyThemes)),
+                                       prop("colors", defaultTo(prop("rob", companyThemes),
+                                                                prop(companiesTheme, companyThemes))));
 
   // Add in game colors
   colors = mergeDeepRight(colors,

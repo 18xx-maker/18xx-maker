@@ -2,13 +2,7 @@ import React, { Suspense } from "react";
 
 import { useTranslation } from "react-i18next";
 
-import ascend from "ramda/src/ascend";
-import groupBy from "ramda/src/groupBy";
-import keys from "ramda/src/keys";
-import map from "ramda/src/map";
-import prop from "ramda/src/prop";
-import sort from "ramda/src/sort";
-import values from "ramda/src/values";
+import { ascend, compose, groupBy, keys, map, nth, prop, sort, split, values } from "ramda";
 
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -17,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-const logoComponents = import.meta.glob("../../data/logos/**/*.svg", { eager: true, query: '?react', import: 'default' });
+import { logos } from "../../data";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -31,22 +25,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const groupFor = (file) => {
-  let match = file.match(/^\.\.\/\.\.\/data\/logos\/([^\/]+)\/.+\.svg$/);
-  return match ? match[1] : "";
-};
-
-const nameFor = (file) => {
-  let match = file.match(/\/([^\/]+)\.svg$/);
-  return match ? match[1] : "";
-};
-
-const fullNameFor = (file) => {
-  let match = file.match(/^\.\.\/\.\.\/data\/logos\/(.+)\.svg$/);
-  return match ? match[1] : "";
-};
-
-const groups = groupBy(groupFor, keys(logoComponents));
+const groupFor = compose(nth(0), split("/"));
+const nameFor = compose(nth(1), split("/"));
+const groups = groupBy(groupFor, keys(logos));
 
 const Logos = () => {
   const { t } = useTranslation();
@@ -55,17 +36,16 @@ const Logos = () => {
   const groupNodes = map(group => {
     const groupLogos = groups[group];
 
-    const logoNodes = map(file => {
-      let name = nameFor(file);
-      let fullName = fullNameFor(file);
-      let Component = logoComponents[file];
+    const logoNodes = map(logo => {
+      let name = nameFor(logo);
+      let Component = logos[logo];
       return (
         <Grid key={`logo-${group}-${name}`} item
               xs={6} sm={4} lg={2}
               style={{overflow: 'hidden'}}>
           <Component width="100%" height="100px"/>
           <Typography variant="subtitle1" align="center">
-            {fullName}
+            {logo}
           </Typography>
         </Grid>
       )
