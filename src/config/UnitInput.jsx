@@ -64,10 +64,13 @@ const UnitInput = ({name, value, label, onChange}) => {
                   onChange={handler}/>
       </FormControl>
       <FormControl variant="filled">
-        <Select id={`${name}-units`}
-                labelId={`${name}-label`}
-                className={classes.configUnits}
-                value={units} onChange={unitsHandler}>
+        <Select
+          variant="standard"
+          id={`${name}-units`}
+          labelId={`${name}-label`}
+          className={classes.configUnits}
+          value={units}
+          onChange={unitsHandler}>
           {map(key => <MenuItem key={key} value={key}>{key}</MenuItem>, keys(allUnits))}
         </Select>
       </FormControl>

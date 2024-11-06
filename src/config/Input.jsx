@@ -51,7 +51,13 @@ const Input = ({name, label, description, dimension}) => {
       inputNode = (
         <FormControl className={classes.configItem} variant="filled">
           <InputLabel id={`${name}-label`}>{label}</InputLabel>
-          <Select id={name} name={name} labelId={`${name}-label`} value={value} onChange={update}>
+          <Select
+            variant="standard"
+            id={name}
+            name={name}
+            labelId={`${name}-label`}
+            value={value}
+            onChange={update}>
             {map(opt => <MenuItem key={opt} value={opt}>{opt}</MenuItem>, inputSchema.enum)}
           </Select>
         </FormControl>

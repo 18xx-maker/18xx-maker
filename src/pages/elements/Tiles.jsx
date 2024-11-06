@@ -138,11 +138,13 @@ const Tiles = () => {
         <Box className={classes.filter}>
           <FormControl variant="filled">
             <InputLabel id="filter-color-label">{t('elements.tiles.filter.color')}</InputLabel>
-            <Select labelId="filter-color-label"
-                    id="filter-color"
-                    style={{width: 150}}
-                    value={color}
-                    onChange={handleColor}>
+            <Select
+              variant="standard"
+              labelId="filter-color-label"
+              id="filter-color"
+              style={{width: 150}}
+              value={color}
+              onChange={handleColor}>
               <MenuItem value="all">{t('elements.tiles.filter.all')}</MenuItem>
               {map(c => <MenuItem key={c} value={c}>{c}</MenuItem>, colors)}
             </Select>
@@ -155,18 +157,20 @@ const Tiles = () => {
                      variant="filled" />
           <FormControl variant="filled">
             <InputLabel id="filter-includes-label">{t('elements.tiles.filter.includes')}</InputLabel>
-            <Select labelId="filter-includes-label"
-                    id="filter-color"
-                    style={{width: 150}}
-                    value={includes}
-                    onChange={handleIncludes}>
+            <Select
+              variant="standard"
+              labelId="filter-includes-label"
+              id="filter-color"
+              style={{width: 150}}
+              value={includes}
+              onChange={handleIncludes}>
               <MenuItem value="all">{t('elements.tiles.filter.all')}</MenuItem>
               <MenuItem value="none">{t('elements.tiles.filter.none')}</MenuItem>
               <MenuItem value="town">{t('elements.tiles.filter.town')}</MenuItem>
               <MenuItem value="city">{t('elements.tiles.filter.city')}</MenuItem>
             </Select>
           </FormControl>
-          <FormControl>
+          <FormControl variant="standard">
             <InputLabel id="filter-revenue-label">{t('elements.tiles.filter.revenues')}</InputLabel>
             <Slider
               style={{width: '200px'}}
