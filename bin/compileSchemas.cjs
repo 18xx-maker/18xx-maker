@@ -1,11 +1,11 @@
-import fs from "fs";
-import path from "path";
+const fs = require('fs');
+const path = require('path');
 
-import { assocPath, forEach, forEachObjIndexed, keys } from "ramda";
+const { assocPath, forEach, forEachObjIndexed, keys } = require('ramda');
 
-import fields from "../src/schemas/fields.schema.json" with { type: "json" };
-import tilesSrc from "../src/schemas/tiles.schema.src.json" with { type: "json" };
-let tiles = {...tilesSrc};
+const fields = require('../src/schemas/fields.schema.json');
+const tilesSrc = require('../src/schemas/tiles.schema.src.json');
+let tiles = { ...tilesSrc };
 
 const elements = {
   "definitions.goods.items.properties": ["text", "svg", "font", "position"],

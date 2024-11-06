@@ -27,7 +27,7 @@
     "release": "run-s build:electron package",
     "schemas": "node ./bin/schemas.cjs",
     "schemas:prepare": "run-s schemas:compile schemas:copy",
-    "schemas:compile": "node ./bin/compileSchemas.js",
+    "schemas:compile": "node ./bin/compileSchemas.cjs",
     "schemas:copy": "copyfiles -f ./src/schemas/\\*.schema.json ./public/schemas",
     "start": "vite",
     "start:app": "run-p start:electron start:nobrowser",
