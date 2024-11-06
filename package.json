@@ -107,11 +107,6 @@
     },
     "afterSign": "electron/notarize.cjs"
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
-  },
   "dependencies": {
     "ajv": "^8.17.1",
     "ajv-cli": "^5.0.0",
@@ -129,10 +124,6 @@
     "sharp": "^0.32.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@babel/preset-env": "^7.3.1",
-    "@babel/register": "^7.0.0",
     "@electron/notarize": "^2.3.0",
     "@material-ui/core": "^4.10.0",
     "@material-ui/icons": "^4.9.1",
@@ -153,13 +144,13 @@
     "jest-environment-jsdom": "^29.7.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
     "react-i18next": "^11.5.0",
     "react-markdown": "^8.0.7",
     "react-redux": "5.1.1",
-    "react-router": "^5.1.0",
-    "react-router-dom": "^5.1.0",
+    "react-router": "^5.3.4",
+    "react-router-dom": "^5.3.4",
     "redux": "^4.0.0",
     "redux-localstorage": "^0.4.1",
     "sass-embedded": "^1.80.6",
