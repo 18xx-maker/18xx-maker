@@ -16,11 +16,6 @@ export default defineConfig({
     svgr(),
   ],
   assetsInclude: ["**/*.md"],
-  resolve: {
-    alias: {
-      "object-hash": "object-hash/dist/object_hash.js",
-    },
-  },
   server: {
     // this ensures that the browser opens upon server start
     open: true,
