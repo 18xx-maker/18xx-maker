@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const chalk = require("chalk");
-const glob = require("glob");
+const { globSync } = require("glob");
 const path = require("path");
 const util = require("util");
 const pkg = require("../package.json");
@@ -50,8 +50,7 @@ const processFiles = compose(
   all(identity),
   map(displayResult),
   map(validate.file),
-  chain((file) => glob.sync(file)),
-  map((f) => path.join(process.cwd(), f))
+  chain((file) => globSync(file, {posix: true, absolute: true}))
 );
 
 // Global program options
