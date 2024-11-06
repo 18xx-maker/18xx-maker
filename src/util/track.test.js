@@ -1,4 +1,4 @@
-import { sidesFromTrack, sidesFromTile } from "./Track.jsx";
+import { sidesFromTrack, sidesFromTile } from "./track";
 
 describe("sidesFromTrack", () => {
   let type = type => ({

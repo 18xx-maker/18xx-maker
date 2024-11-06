@@ -10,8 +10,8 @@ import { getTile, sortTiles } from "../../util";
 import { getTileSheetContext } from "../../tilesheet/util";
 
 import { tiles as tileDefs } from "../../data";
+import { sidesFromTile } from "../../util/track";
 
-import { sidesFromTile } from "../../atoms/Track";
 import Svg from "../../Svg";
 import Page from "../../util/Page";
 import PageSetup from "../../PageSetup";

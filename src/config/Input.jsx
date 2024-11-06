@@ -3,17 +3,7 @@ import ConfigContext from "../context/ConfigContext";
 import ReactMarkdown from "react-markdown";
 import UnitInput from "./UnitInput";
 
-import schema from "../schemas/config.schema.json";
-
-import assocPath from "ramda/src/assocPath";
-import chain from "ramda/src/chain";
-import compose from "ramda/src/compose";
-import complement from "ramda/src/complement";
-import filter from "ramda/src/filter";
-import isEmpty from "ramda/src/isEmpty";
-import map from "ramda/src/map";
-import path from "ramda/src/path";
-import split from "ramda/src/split";
+import { assocPath, map, path, split } from "ramda";
 
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControl from "@material-ui/core/FormControl";
@@ -33,11 +23,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export const getPath = split('.');
-export const getSchemaPath = compose(chain(n => ['properties', n]),
-                                     filter(complement(isEmpty)),
-                                     split('.'));
-export const getSchema = name => path(getSchemaPath(name), schema);
+import { getPath, getSchema } from "../util/input";
 
 const Input = ({name, label, description, dimension}) => {
   const classes = useStyles();
