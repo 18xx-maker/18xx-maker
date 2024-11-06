@@ -7,7 +7,7 @@ import Alert from "@material-ui/lab/Alert";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Snackbar from "@material-ui/core/Snackbar";
 
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { orange, deepPurple } from '@material-ui/core/colors';
 
 import SetSvgColors from "./util/SetSvgColors";
@@ -36,7 +36,7 @@ import Games from "./pages/Games";
 
 import { curry } from "ramda";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: deepPurple[600]

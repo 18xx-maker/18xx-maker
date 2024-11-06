@@ -125,9 +125,9 @@
   },
   "devDependencies": {
     "@electron/notarize": "^2.3.0",
-    "@material-ui/core": "^4.10.0",
-    "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.54",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@material-ui/lab": "^4.0.0-alpha.61",
     "@vitejs/plugin-react-swc": "^3.7.1",
     "browserslist": "^4.24.2",
     "browserslist-to-esbuild": "^2.1.1",
