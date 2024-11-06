@@ -8,25 +8,24 @@ import useLocalState from "../util/useLocalState";
 
 import { games } from "../data";
 
-import { assoc, equals, is, isNil } from "ramda";
+import { assoc, equals, is, isNil, replace } from "ramda";
 
 import { isElectron } from "../util";
-
-import path from "path-browserify"
 
 const GameContext = createContext({ game: null });
 
 // Given a File object returns a promise with the json data
 const loadFile = (file) => {
-  let id = path.basename(file.name, ".json");
+  let id = replace(/\.json$/, "", file.name.split('/').pop());
   let slug = encodeURIComponent(id);
 
   return file
     .text()
     .then(JSON.parse)
-    .then(assoc("id", id))
-    .then(assoc("slug", slug))
+    .then(assoc("meta", { id, slug, filename: file.name }))
     .then((game) => {
+      game.meta.minPlayers = game.players ? game.players[0].number : 0;
+      game.meta.maxPlayers = game.players ? game.players[game.players.length - 1].number : 0;
       if (isElectron) {
         let ipcRenderer = window.require("electron").ipcRenderer;
         ipcRenderer.send("watch", file.path, id, slug);

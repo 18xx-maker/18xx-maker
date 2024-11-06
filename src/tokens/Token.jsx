@@ -1,10 +1,9 @@
 import React from "react";
+import { defaultTo } from "ramda";
+
 import Color from "../util/Color";
 import RotateContext from "../context/RotateContext";
 import CityRotateContext from "../context/CityRotateContext";
-import defaultTo from "ramda/src/defaultTo";
-
-import * as uuid from "uuid";
 
 import { icons, logos } from "../data";
 
@@ -115,7 +114,7 @@ const Token = ({
     />);
   }
   // Create a clipping object for this token
-  let clipId = uuid.v4();
+  let clipId = crypto.randomUUID();
   let clip = (
     <clipPath id={clipId}>
       {tokClip}

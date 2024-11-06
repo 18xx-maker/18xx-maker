@@ -34,8 +34,7 @@ import Docs from "./pages/Docs";
 import Elements from "./pages/Elements";
 import Games from "./pages/Games";
 
-import curry from "ramda/src/curry";
-import path from "path-browserify";
+import { curry } from "ramda";
 
 const theme = createMuiTheme({
   palette: {

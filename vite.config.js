@@ -9,6 +9,13 @@ export default defineConfig({
   build: {
     target: browserslistToEsbuild(),
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler'
+      }
+    }
+  },
   plugins: [
     react({
       jsxRuntime: "classic",

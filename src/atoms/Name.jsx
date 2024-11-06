@@ -1,11 +1,10 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
+import { defaultTo } from "ramda";
+
 import GameContext from "../context/GameContext";
 import Color from "../util/Color";
-import * as uuid from "uuid";
 
 import { getFontProps, multiDefaultTo } from "../util";
-
-import defaultTo from "ramda/src/defaultTo";
 
 const Name = (props) => {
   const { game } = useContext(GameContext);
@@ -19,7 +18,7 @@ const Name = (props) => {
   let nameNode;
 
   if (path) {
-    let id = uuid.v4();
+    let id = crypto.randomUUID();
     nameNode = (
       <>
         <defs>

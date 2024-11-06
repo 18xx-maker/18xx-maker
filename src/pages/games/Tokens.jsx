@@ -23,7 +23,7 @@ import Svg from "../../Svg";
 // Takes in a game object, a tokens config object and a paper config object.
 //
 // Returns data that's needed to layout a token sheet.
-export const getTokenData = (game, tokens, paper) => {
+const getTokenData = (game, tokens, paper) => {
   let { marketTokenSize, stationTokenSize, generalTokenSize, bleed } = tokens;
 
   // Extra token counts from config
