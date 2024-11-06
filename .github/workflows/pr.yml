@@ -37,7 +37,6 @@ jobs:
     - run: yarn
     - run: yarn test
   build:
-    needs: test
     runs-on: macos-latest
     name: Build webapp
     steps:
