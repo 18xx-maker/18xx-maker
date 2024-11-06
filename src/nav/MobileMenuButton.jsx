@@ -1,6 +1,5 @@
 import React from "react";
 
-import Hidden from "@mui/material/Hidden";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -18,16 +17,14 @@ const MobileMenuButton = ({onClick}) => {
 
   return (
     <IfSideMenu>
-      <Hidden mdUp>
-        <IconButton
-          className={classes.menuButton}
-          onClick={onClick}
-          color="inherit"
-          edge="start"
-          size="large">
-          <MenuIcon/>
-        </IconButton>
-      </Hidden>
+      <IconButton
+        className={classes.menuButton}
+        sx={{ display: { md: 'none', xs: 'block' } }}
+        onClick={onClick}
+        color="inherit"
+        edge="start">
+        <MenuIcon/>
+      </IconButton>
     </IfSideMenu>
   );
 };

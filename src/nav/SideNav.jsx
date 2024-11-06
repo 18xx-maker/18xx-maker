@@ -4,7 +4,6 @@ import { Route } from "react-router";
 import { useBooleanParam } from "../util/query";
 
 import Drawer from "@mui/material/Drawer";
-import Hidden from "@mui/material/Hidden";
 import Toolbar from '@mui/material/Toolbar';
 
 import IfSideMenu from "./IfSideMenu";
@@ -46,24 +45,22 @@ const SideNav = ({open, toggle}) => {
 
   return (
     <IfSideMenu>
-      <Hidden mdUp>
-        <Drawer variant="temporary"
-                open={open}
-                onClose={toggle}
-                anchor="left"
-                style={{zIndex:1200}}
-                transitionDuration={200}
-                ModalProps={{keepMounted: true}}
-                PaperProps={{className: classes.sideNav}}>
-          {menu}
-        </Drawer>
-      </Hidden>
-      <Hidden mdDown>
-        <Drawer variant="permanent"
-                PaperProps={{className: classes.sideNav}}>
-          {menu}
-        </Drawer>
-      </Hidden>
+      <Drawer variant="temporary"
+              sx={{ display: { md: 'none', xs: 'block' } }}
+              open={open}
+              onClose={toggle}
+              anchor="left"
+              style={{zIndex:1200}}
+              transitionDuration={200}
+              ModalProps={{keepMounted: true}}
+              PaperProps={{className: classes.sideNav}}>
+        {menu}
+      </Drawer>
+      <Drawer variant="permanent"
+              sx={{ display: { xs: 'none', md: 'block' } }}
+              PaperProps={{className: classes.sideNav}}>
+        {menu}
+      </Drawer>
     </IfSideMenu>
   );
 }

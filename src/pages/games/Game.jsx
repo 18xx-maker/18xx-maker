@@ -26,6 +26,7 @@ import B18Tokens from "./b18/Tokens";
 import Container from "@mui/material/Container";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
@@ -134,48 +135,44 @@ const Game = ({game}) => {
                                                 secondary={t('game.players')}/>
                                 </ListItem>}
               {game.links && game.links.license && (
-                <ListItem button
-                          component={Link}
-                          color="inherit"
-                          underline="none"
-                          target="_blank"
-                          href={game.links.license}>
+                <ListItemButton component={Link}
+                                color="inherit"
+                                underline="none"
+                                target="_blank"
+                                href={game.links.license}>
                   <ListItemIcon><LicenseIcon color="error" /></ListItemIcon>
                   <ListItemText primary={t('game.license.primary')} secondary={t('game.license.secondary')} />
-                </ListItem>
+                </ListItemButton>
               )}
               {game.links && game.links.purchase && (
-                <ListItem button
-                          component={Link}
-                          color="inherit"
-                          underline="none"
-                          target="_blank"
-                          href={game.links.purchase}>
+                <ListItemButton component={Link}
+                                color="inherit"
+                                underline="none"
+                                target="_blank"
+                                href={game.links.purchase}>
                   <ListItemIcon><PurchaseIcon style={{color: green[500]}}/></ListItemIcon>
                   <ListItemText primary={t('game.purchase.primary')} secondary={t('game.purchase.secondary')} />
-                </ListItem>
+                </ListItemButton>
               )}
               {game.links && game.links.bgg && (
-                <ListItem button
-                          component={Link}
-                          color="inherit"
-                          underline="none"
-                          target="_blank"
-                          href={game.links.bgg}>
+                <ListItemButton component={Link}
+                                color="inherit"
+                                underline="none"
+                                target="_blank"
+                                href={game.links.bgg}>
                   <ListItemIcon><BGGIcon/></ListItemIcon>
                   <ListItemText>{t('game.bgg')}</ListItemText>
-                </ListItem>
+                </ListItemButton>
               )}
               {game.links && game.links.rules && (
-                <ListItem button
-                          component={Link}
-                          color="inherit"
-                          underline="none"
-                          target="_blank"
-                          href={game.links.rules}>
+                <ListItemButton component={Link}
+                                color="inherit"
+                                underline="none"
+                                target="_blank"
+                                href={game.links.rules}>
                   <ListItemIcon><RulesIcon/></ListItemIcon>
                   <ListItemText primary={t('game.rules')} />
-                </ListItem>
+                </ListItemButton>
               )}
               {game.prototype && (
                 <ListItem>

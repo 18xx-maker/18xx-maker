@@ -19,7 +19,7 @@ import FormLabel from "@mui/material/FormLabel";
 import InputLabel from "@mui/material/InputLabel";
 import Link from "@mui/material/Link";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
@@ -70,15 +70,15 @@ const GameNav = () => {
 
   return <>
     <List>
-      <ListItem button
+      <ListItemButton
                 component={RouterLink}
                 to={`/games/${game.meta.slug}/`}>
         <ListItemIcon><GameIcon/></ListItemIcon>
         <ListItemText primary={game.info.title}
                       secondary={`${t('game.by')} ${game.info.designer}`}/>
-      </ListItem>
+      </ListItemButton>
       {game.links && game.links.license && (
-        <ListItem button
+        <ListItemButton
                   component={Link}
                   color="inherit"
                   underline="none"
@@ -86,10 +86,10 @@ const GameNav = () => {
                   href={game.links.license}>
           <ListItemIcon><LicenseIcon color="error" /></ListItemIcon>
           <ListItemText primary={t('game.license.primary')} secondary={t('game.license.secondary')} />
-        </ListItem>
+        </ListItemButton>
       )}
       {game.links && game.links.purchase && (
-        <ListItem button
+        <ListItemButton
                   component={Link}
                   color="inherit"
                   underline="none"
@@ -97,10 +97,10 @@ const GameNav = () => {
                   href={game.links.purchase}>
           <ListItemIcon><PurchaseIcon style={{color: green[500]}}/></ListItemIcon>
           <ListItemText primary={t('game.purchase.primary')} secondary={t('game.purchase.secondary')} />
-        </ListItem>
+        </ListItemButton>
       )}
       {game.links && game.links.bgg && (
-        <ListItem button
+        <ListItemButton
                   component={Link}
                   color="inherit"
                   underline="none"
@@ -108,10 +108,10 @@ const GameNav = () => {
                   href={game.links.bgg}>
           <ListItemIcon><BGGIcon/></ListItemIcon>
           <ListItemText>{t('game.bgg')}</ListItemText>
-        </ListItem>
+        </ListItemButton>
       )}
       {game.links && game.links.rules && (
-        <ListItem button
+        <ListItemButton
                   component={Link}
                   color="inherit"
                   underline="none"
@@ -119,22 +119,22 @@ const GameNav = () => {
                   href={game.links.rules}>
           <ListItemIcon><RulesIcon/></ListItemIcon>
           <ListItemText primary={t('game.rules')} />
-        </ListItem>
+        </ListItemButton>
       )}
       <File data={game}
             filename={`${game.meta.id}.json`}
             list/>
       {game.prototype && (
-        <ListItem>
+        <ListItemButton>
           <ListItemIcon><WarningIcon style={{color: blue[500]}}/></ListItemIcon>
           <ListItemText primary={t('prototype.prototype')} secondary={t('prototype.description')}/>
-        </ListItem>
+        </ListItemButton>
       )}
       {game.wip && (
-        <ListItem>
+        <ListItemButton>
           <ListItemIcon><WarningIcon className={classes.warning}/></ListItemIcon>
           <ListItemText primary={t('wip.wip')} secondary={t('wip.description')}/>
-        </ListItem>
+        </ListItemButton>
       )}
     </List>
     <Divider/>
@@ -144,42 +144,42 @@ const GameNav = () => {
         <List>
           <RouterSwitch>
             <Route path="/games/:slug/revenue">
-              <ListItem>
+              <ListItemButton>
                 <FormControlLabel control={ <Switch checked={paginated}
                                onChange={togglePagination}
                                color="primary"
                                name="pagination"/> }
                                   label={t('game.paginated')}/>
-              </ListItem>
+              </ListItemButton>
             </Route>
             <Route path="/games/:slug/par">
-              <ListItem>
+              <ListItemButton>
                 <FormControlLabel control={ <Switch checked={paginated}
                                onChange={togglePagination}
                                color="primary"
                                name="pagination"/> }
                                   label={t('game.paginated')}/>
-              </ListItem>
+              </ListItemButton>
             </Route>
             <Route path="/games/:slug/market">
-              <ListItem>
+              <ListItemButton>
                 <FormControlLabel control={ <Switch checked={paginated}
                                onChange={togglePagination}
                                color="primary"
                                name="pagination"/> }
                                   label={t('game.paginated')}/>
-              </ListItem>
+              </ListItemButton>
             </Route>
             <Route path="/games/:slug/map">
-              <ListItem>
+              <ListItemButton>
                 <FormControlLabel control={ <Switch checked={paginated}
                                onChange={togglePagination}
                                color="primary"
                                name="pagination"/> }
                                   label={t('game.paginated')}/>
-              </ListItem>
+              </ListItemButton>
               {hasVariation && (
-                <ListItem>
+                <ListItemButton>
                   <FormControl className={classes.input} variant="filled">
                     <InputLabel id="variation-label">{t('game.map.variation')}</InputLabel>
                     <Select
@@ -192,11 +192,11 @@ const GameNav = () => {
                       {addIndex(map)((m,i) => <MenuItem key={`variation-${i}`} value={i}>{m.name}</MenuItem>, game.map)}
                     </Select>
                   </FormControl>
-                </ListItem>
+                </ListItemButton>
               )}
             </Route>
             <Route path="/games/:slug/cards">
-              <ListItem>
+              <ListItemButton>
                 <FormControl variant="standard" component="fieldset">
                   <FormLabel component="legend">{t('show')}</FormLabel>
                   <FormGroup>
@@ -222,7 +222,7 @@ const GameNav = () => {
                                       label={t('game.cards.numbers')}/>
                   </FormGroup>
                 </FormControl>
-              </ListItem>
+              </ListItemButton>
             </Route>
           </RouterSwitch>
         </List>
@@ -230,73 +230,73 @@ const GameNav = () => {
       </Route>
     </RouterSwitch>
     <List>
-      <ListItem button
+      <ListItemButton
                 selected={!!matchPath(location.pathname, {path: '/games/:slug/background'})}
                 component={RouterLink}
                 to={`/games/${game.meta.slug}/background`}>
         <ListItemText>Background</ListItemText>
-      </ListItem>
-      <ListItem button
+      </ListItemButton>
+      <ListItemButton
                 selected={!!matchPath(location.pathname, {path: '/games/:slug/cards'})}
                 component={RouterLink}
                 to={`/games/${game.meta.slug}/cards`}>
         <ListItemText>Cards</ListItemText>
-      </ListItem>
-      <ListItem button
+      </ListItemButton>
+      <ListItemButton
                 disabled={!game.companies}
                 selected={!!matchPath(location.pathname, {path: '/games/:slug/charters'})}
                 component={RouterLink}
                 to={`/games/${game.meta.slug}/charters`}>
         <ListItemText>Charters</ListItemText>
-      </ListItem>
-      <ListItem button
+      </ListItemButton>
+      <ListItemButton
                 disabled={!game.map}
                 selected={!!matchPath(location.pathname, {path: '/games/:slug/map'})}
                 component={RouterLink}
                 to={`/games/${game.meta.slug}/map`}>
         <ListItemText>Map</ListItemText>
-      </ListItem>
-      <ListItem button
+      </ListItemButton>
+      <ListItemButton
                 disabled={!game.stock || !game.stock.market}
                 selected={!!matchPath(location.pathname, {path: '/games/:slug/market'})}
                 component={RouterLink}
                 to={`/games/${game.meta.slug}/market`}>
         <ListItemText primary="Market"/>
-      </ListItem>
-      <ListItem button
+      </ListItemButton>
+      <ListItemButton
                 disabled={!game.stock || !game.stock.par || !game.stock.par.values}
                 selected={!!matchPath(location.pathname, {path: '/games/:slug/par'})}
                 component={RouterLink}
                 to={`/games/${game.meta.slug}/par`}>
         <ListItemText primary="Par"/>
-      </ListItem>
-      <ListItem button
+      </ListItemButton>
+      <ListItemButton
                 selected={!!matchPath(location.pathname, {path: '/games/:slug/revenue'})}
                 component={RouterLink}
                 to={`/games/${game.meta.slug}/revenue`}>
         <ListItemText primary="Revenue"/>
-      </ListItem>
-      <ListItem button
+      </ListItemButton>
+      <ListItemButton
                 disabled={!game.tiles}
                 selected={!!matchPath(location.pathname, {path: '/games/:slug/tile-manifest'})}
                 component={RouterLink}
                 to={`/games/${game.meta.slug}/tile-manifest`}>
         <ListItemText primary="Tile Manifest"/>
-      </ListItem>
-      <ListItem button
+      </ListItemButton>
+      <ListItemButton
                 disabled={!game.tiles}
                 selected={!!matchPath(location.pathname, {path: '/games/:slug/tiles'})}
                 component={RouterLink}
                 to={`/games/${game.meta.slug}/tiles`}>
         <ListItemText primary="Tiles"/>
-      </ListItem>
-      <ListItem button
+      </ListItemButton>
+      <ListItemButton
                 disabled={!game.companies && !game.tokens}
                 selected={!!matchPath(location.pathname, {path: '/games/:slug/tokens'})}
                 component={RouterLink}
                 to={`/games/${game.meta.slug}/tokens`}>
         <ListItemText primary="Tokens"/>
-      </ListItem>
+      </ListItemButton>
     </List>
   </>;
 };

@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
 import MobileMenuButton from "./MobileMenuButton";
 
 import AppBar from "@mui/material/AppBar";
+import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
-import Hidden from "@mui/material/Hidden";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Menu from "@mui/material/Menu";
@@ -31,7 +31,6 @@ import GameContext from "../context/GameContext";
 
 const useStyles = makeStyles((theme) => ({
   activeButton: {
-    marginRight: theme.spacing(2),
     backgroundColor: theme.palette.background.default,
     "&.Mui-disabled": {
       color: theme.palette.primary.main
@@ -50,9 +49,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.error.main
   },
   menuIcon: {
-    marginRight: theme.spacing(2)
-  },
-  menuButton: {
     marginRight: theme.spacing(2)
   },
   title: {
@@ -220,13 +216,14 @@ const AppNav = ({toggleSideNav}) => {
         <Typography className={classes.title} variant="h4" noWrap>
           {t('title')}
         </Typography>
-        <Hidden mdUp>
-          <MobileButton onClick={handleMenu}/>
-          <MobileMenu anchor={menuAnchor} onClose={handleMenuClose}/>
-        </Hidden>
-        <Hidden mdDown>
+        <Box sx={{ display: { md: 'none', xs: 'block' } }}>
+          <MobileButton onClick={handleMenu} />
+          <MobileMenu anchor={menuAnchor}
+                      onClose={handleMenuClose} />
+        </Box>
+        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
           <NavMenu/>
-        </Hidden>
+        </Box>
       </Toolbar>
     </AppBar>
   );

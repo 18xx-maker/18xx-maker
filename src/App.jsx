@@ -37,6 +37,15 @@ import Games from "./pages/Games";
 import { curry } from "ramda";
 
 const theme = createTheme(adaptV4Theme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920
+    }
+  },
   palette: {
     primary: {
       main: deepPurple[600]

@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
@@ -33,16 +33,15 @@ const DocsNav = () => {
   const location = useLocation();
 
   const Item = ({path = "", name, desc, icon}) => (
-    <ListItem button
-              component={Link}
-              to={`/docs/${path}`}
-              selected={!!matchPath(location.pathname,
-                                    { path: `/docs/${path}`,
-                                      exact: true})}>
+    <ListItemButton component={Link}
+                    to={`/docs/${path}`}
+                    selected={!!matchPath(location.pathname,
+                                          { path: `/docs/${path}`,
+                                            exact: true})}>
       <ListItemIcon>{icon}</ListItemIcon>
       <ListItemText primary={name}
                     secondary={desc}/>
-    </ListItem>
+    </ListItemButton>
   );
 
   return (
