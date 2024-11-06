@@ -13,7 +13,6 @@ for (let [filename, game] of Object.entries(gameImports)) {
     meta: {
       id,
       slug,
-      filename,
       minPlayers,
       maxPlayers
     },

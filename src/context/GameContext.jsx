@@ -22,7 +22,7 @@ const loadFile = (file) => {
   return file
     .text()
     .then(JSON.parse)
-    .then(assoc("meta", { id, slug, filename: file.name }))
+    .then(assoc("meta", { id, slug }))
     .then((game) => {
       game.meta.minPlayers = game.players ? game.players[0].number : 0;
       game.meta.maxPlayers = game.players ? game.players[game.players.length - 1].number : 0;
@@ -66,6 +66,20 @@ const loadFileOrId = (fileOrId) => {
 export const GameProvider = ({ children }) => {
   const sendAlert = useAlert();
   const [game, setGame] = useLocalState("game", null);
+
+  // Update game format
+  if (!game.meta && game.id) {
+    game.meta = {
+      id: game.id,
+      slug: encodeURIComponent(game.id),
+      minPlayers: game.players ? game.players[0].number : 0,
+      maxPlayers: game.players ? game.players[game.players.length - 1].number : 0,
+    };
+    delete game.id;
+    delete game.slug;
+    setGame(game);
+  }
+
   const location = useLocation();
 
   const loadGame = (fileOrId) => {
