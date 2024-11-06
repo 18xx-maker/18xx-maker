@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-name="Layer 1" viewBox="0 0 288 288">
+<svg viewBox="0 0 288 288">
   <defs>
     <clipPath id="clip-path">
       <path fill="none" stroke="#f3eebf" stroke-miterlimit="10" d="M589.63 144a142 142 0 1 1-142-142 142 142 0 0 1 142 142z"/>
     </clipPath>
-    <symbol id="Nouveau_symbole_28" data-name="Nouveau symbole 28" viewBox="0 0 51.02 51.02">
+    <symbol id="Nouveau_symbole_28" viewBox="0 0 51.02 51.02">
       <circle fill="#009a54" cx="25.51" cy="25.51" r="25.51"/>
       <path fill="#f3716d" d="M25.51 34a8.49 8.49 0 0 0-8.5 8.5v7a25.67 25.67 0 0 0 17 0v-7a8.5 8.5 0 0 0-8.5-8.5m0-17A8.51 8.51 0 0 0 34 8.5v-7a25.5 25.5 0 0 0-17 0v7a8.5 8.5 0 0 0 8.51 8.5"/>
       <path fill="#fff" d="M21.47 19.6h4.08v.32h-.86l1.91 5.52 1.57-4.74a1.2 1.2 0 0 0 .07-.43c0-.25-.14-.37-.42-.37h-.31v-.3h2v.32a1 1 0 0 0-.67.19 1.5 1.5 0 0 0-.36.61L26.77 26v5.11h.85v.3h-4v-.3h.84v-5.03l-2.14-6.16h-.85z"/>
@@ -15,7 +15,7 @@
   <path class="color-black color-reserved-white" fill="#231f20" d="M166.78 100.67h3.58c1.73 0 2.6.73 2.6 2.18a3.8 3.8 0 0 1-.24 1.34q-.24.63-7.28 13.35L151.81 142h-.27v1.9h.27L167 187.33h-5.1v2.46h28.68v-2.46h-4.92L164 125.7l11.83-21.23q2.19-3.8 7.17-3.8v-2.46h-16.22z"/>
   <path fill="none" stroke="#f3eebf" stroke-miterlimit="10" d="M286 144A142 142 0 1 1 144 2a142 142 0 0 1 142 142z"/>
   <g clip-path="url(#clip-path)">
-    <use xlink:href="#Nouveau_symbole_28" width="51.02" height="51.02" transform="translate(265.06 -38.57)scale(7.16)"/>
+    <use width="51.02" height="51.02" href="#Nouveau_symbole_28" transform="translate(265.06 -38.57)scale(7.16)"/>
   </g>
   <path fill="none" stroke="#f3eebf" stroke-miterlimit="10" d="M589.63 144a142 142 0 1 1-142-142 142 142 0 0 1 142 142z"/>
 </svg>

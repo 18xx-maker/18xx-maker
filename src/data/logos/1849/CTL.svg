@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50mm" height="80.958" viewBox="-8 -21 65 65">
+<svg width="50mm" height="80.958" viewBox="-8 -21 65 65">
   <defs>
     <path id="ctl_a" fill="none" stroke="none" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1" stroke-width=".265" d="M76.395 85.832s6.813-2.689 15.763-2.641c8.411.044 15.331 2.598 15.331 2.598"/>
     <path id="ctl_b" fill="none" stroke="none" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1" stroke-width=".265" d="M76.193 98.861s6.814 2.69 15.764 2.642c8.41-.044 15.331-2.598 15.331-2.598"/>
@@ -12,10 +12,10 @@
             <tspan style="-inkscape-font-specification:&quot;Bodoni MT&quot;" x="74.272" y="95.564">L</tspan>
         </text>
     <text stroke-width=".241" style="line-height:1.25;-inkscape-font-specification:&quot;Bodoni MT&quot;;text-align:end" x="-17.471" y=".043" font-family="Bodoni MT" font-size="3.175" font-weight="400" letter-spacing="0" text-anchor="end" transform="translate(0 2.684)" word-spacing="0">
-            <textPath xlink:href="#ctl_a" startOffset="100%">AL CENTRO DEL</textPath>
+            <textPath href="#ctl_a" startOffset="100%">AL CENTRO DEL</textPath>
         </text>
     <text stroke-width=".241" style="line-height:1.25;-inkscape-font-specification:&quot;Bodoni MT&quot;" font-family="Bodoni MT" font-size="3.175" font-weight="400" letter-spacing="0" word-spacing="0">
-            <textPath xlink:href="#ctl_b"><tspan style="-inkscape-font-specification:&quot;Bodoni MT&quot;">MEDITERRANEO</tspan></textPath>
+            <textPath href="#ctl_b"><tspan style="-inkscape-font-specification:&quot;Bodoni MT&quot;">MEDITERRANEO</tspan></textPath>
         </text>
     <path fill="none" d="M76.395 85.832s6.813-2.689 15.763-2.641c8.411.044 15.331 2.598 15.331 2.598M76.193 98.861s6.814 2.69 15.764 2.642c8.41-.044 15.331-2.598 15.331-2.598"/>
   </g>

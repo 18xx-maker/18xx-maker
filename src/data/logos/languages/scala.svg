@@ -1,17 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="281.385" height="280" viewBox="0 0 281.385 280">
+<svg width="281.385" height="280" viewBox="0 0 281.385 280">
   <linearGradient id="scala_a">
     <stop offset="0" stop-color="#656565"/>
     <stop offset="1" stop-color="#010101"/>
   </linearGradient>
-  <linearGradient xlink:href="#scala_a" id="scala_b" x1="13.528" x2="88.264" y1="-36.176" y2="-36.176" gradientTransform="translate(62.385 164.615)scale(1.53846)" gradientUnits="userSpaceOnUse"/>
-  <linearGradient xlink:href="#scala_a" id="scala_c" x1="13.528" x2="88.264" y1="3.91" y2="3.91" gradientTransform="translate(62.385 164.615)scale(1.53846)" gradientUnits="userSpaceOnUse"/>
+  <linearGradient id="scala_b" x1="13.528" x2="88.264" y1="-36.176" y2="-36.176" gradientTransform="translate(62.385 164.615)scale(1.53846)" gradientUnits="userSpaceOnUse" href="#scala_a"/>
+  <linearGradient id="scala_c" x1="13.528" x2="88.264" y1="3.91" y2="3.91" gradientTransform="translate(62.385 164.615)scale(1.53846)" gradientUnits="userSpaceOnUse" href="#scala_a"/>
   <linearGradient id="scala_d">
     <stop offset="0" stop-color="#9f1c20"/>
     <stop offset="1" stop-color="#ed2224"/>
   </linearGradient>
-  <linearGradient xlink:href="#scala_d" id="scala_e" x1="13.528" x2="88.264" y1="-55.974" y2="-55.974" gradientTransform="translate(62.385 164.615)scale(1.53846)" gradientUnits="userSpaceOnUse"/>
-  <linearGradient xlink:href="#scala_d" id="scala_f" x1="13.528" x2="88.264" y1="-15.87" y2="-15.87" gradientTransform="translate(62.385 164.615)scale(1.53846)" gradientUnits="userSpaceOnUse"/>
-  <linearGradient xlink:href="#scala_d" id="scala_g" x1="13.528" x2="88.264" y1="24.22" y2="24.22" gradientTransform="translate(62.385 164.615)scale(1.53846)" gradientUnits="userSpaceOnUse"/>
+  <linearGradient id="scala_e" x1="13.528" x2="88.264" y1="-55.974" y2="-55.974" gradientTransform="translate(62.385 164.615)scale(1.53846)" gradientUnits="userSpaceOnUse" href="#scala_d"/>
+  <linearGradient id="scala_f" x1="13.528" x2="88.264" y1="-15.87" y2="-15.87" gradientTransform="translate(62.385 164.615)scale(1.53846)" gradientUnits="userSpaceOnUse" href="#scala_d"/>
+  <linearGradient id="scala_g" x1="13.528" x2="88.264" y1="24.22" y2="24.22" gradientTransform="translate(62.385 164.615)scale(1.53846)" gradientUnits="userSpaceOnUse" href="#scala_d"/>
   <path fill="url(#scala_b)" d="M83 116.923s115.385 11.539 115.385 30.77v-46.155s0-19.23-115.385-30.769z"/>
   <path fill="url(#scala_c)" d="M83 178.462S198.385 190 198.385 209.23v-46.154s0-19.23-115.385-30.77z"/>
   <path fill="url(#scala_e)" d="M198.385 40v46.154s0 19.23-115.385 30.77V70.768S198.385 59.231 198.385 40"/>

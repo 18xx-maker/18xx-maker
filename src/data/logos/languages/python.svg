@@ -1,15 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="290" height="288.959" version="1.0" viewBox="0 0 290 290">
+<svg width="290" height="288.959" version="1.0" viewBox="0 0 290 290">
   <defs>
     <linearGradient id="linearGradient11301">
       <stop offset="0" stop-color="#ffe052"/>
       <stop offset="1" stop-color="#ffc331"/>
     </linearGradient>
-    <linearGradient xlink:href="#linearGradient11301" id="linearGradient11307" x1="89.137" x2="147.777" y1="111.921" y2="168.101" gradientUnits="userSpaceOnUse"/>
+    <linearGradient id="linearGradient11307" x1="89.137" x2="147.777" y1="111.921" y2="168.101" gradientUnits="userSpaceOnUse" href="#linearGradient11301"/>
     <linearGradient id="linearGradient9515">
       <stop offset="0" stop-color="#387eb8"/>
       <stop offset="1" stop-color="#366994"/>
     </linearGradient>
-    <linearGradient xlink:href="#linearGradient9515" id="linearGradient9521" x1="55.549" x2="110.149" y1="77.07" y2="131.853" gradientUnits="userSpaceOnUse"/>
+    <linearGradient id="linearGradient9521" x1="55.549" x2="110.149" y1="77.07" y2="131.853" gradientUnits="userSpaceOnUse" href="#linearGradient9515"/>
   </defs>
   <g color="#000">
     <path fill="url(#linearGradient9521)" style="marker:none" d="M99.75 67.469c-28.032 0-26.281 12.156-26.281 12.156l.031 12.594h26.75V96H62.875s-17.938-2.034-17.938 26.25 15.657 27.281 15.657 27.281h9.343v-13.125s-.503-15.656 15.407-15.656h26.531s14.906.241 14.906-14.406V82.125s2.263-14.656-27.031-14.656M85 75.938a4.81 4.81 0 0 1 4.813 4.812A4.81 4.81 0 0 1 85 85.563a4.81 4.81 0 0 1-4.813-4.813A4.81 4.81 0 0 1 85 75.937z" overflow="visible" transform="translate(-36.393 -77.203)scale(1.81125)"/>

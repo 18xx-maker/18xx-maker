@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 283.5 283.5">
+<svg viewBox="0 0 283.5 283.5">
   <symbol id="SLA-1867-c" viewBox="-25.5 -25.5 51 51">
     <circle fill="#009a54" r="25.5" transform="rotate(-67.5 0 .001)"/>
     <path fill="#4c626e" d="M-4.3 7.3-19 17c4.7 5.2 11.5 8.5 19 8.5 7.6 0 14.3-3.3 19-8.5L4.3 7.3 5 18.7-.1 8.5-5 18.3zM0-25.5c7.6 0 14.3 3.3 19 8.5L4.3-7.3 5-18.7-.1-8.5-5-18.3l.7 11L-19-17c4.7-5.2 11.5-8.5 19-8.5"/>
@@ -8,10 +8,10 @@
     <path id="SLA-1867-a" d="M280.6 141.7c0 76.7-62.2 138.9-138.9 138.9S2.8 218.4 2.8 141.7 65 2.8 141.7 2.8 280.6 65 280.6 141.7"/>
   </defs>
   <clipPath id="SLA-1867-b">
-    <use xlink:href="#SLA-1867-a" overflow="visible"/>
+    <use href="#SLA-1867-a" overflow="visible"/>
   </clipPath>
   <g clip-path="url(#SLA-1867-b)">
-    <use xlink:href="#SLA-1867-c" width="51" height="51" x="-25.5" y="-25.5" overflow="visible" transform="matrix(7.7777 0 0 -7.7777 139.52 139.781)"/>
+    <use width="51" height="51" x="-25.5" y="-25.5" href="#SLA-1867-c" overflow="visible" transform="matrix(7.7777 0 0 -7.7777 139.52 139.781)"/>
   </g>
-  <use xlink:href="#SLA-1867-a" fill="none" stroke="#f3eebf" stroke-miterlimit="10" overflow="visible"/>
+  <use fill="none" stroke="#f3eebf" stroke-miterlimit="10" href="#SLA-1867-a" overflow="visible"/>
 </svg>

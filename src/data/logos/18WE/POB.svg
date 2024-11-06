@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+<svg width="450" height="450" viewBox="0 0 450 450">
   <g fill="none" fill-rule="evenodd">
     <ellipse fill="#A0FFA0" stroke="#000" stroke-width="7.5" cx="225.26" cy="225.24" rx="220.99" ry="221.01"/>
     <path fill="#20B020" stroke="#000" stroke-width="7.5" d="m225.018 4.33 190.88 110.215v220.43L225.019 445.19 34.138 334.975v-220.43z"/>

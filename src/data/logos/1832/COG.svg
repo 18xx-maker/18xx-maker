@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+<svg viewBox="0 0 144 144">
   <circle class="color-main color-lightBlue" fill="#39b9c6" cx="72" cy="72" r="70.2"/>
   <path class="color-red" fill="#8b191b" d="M18.5 30.4h107.1v83.2H18.5z"/>
   <path class="color-white" fill="#fff" d="M123.1 110.4H20.7v-77h102.5zM23 108h97.7V35.8H23z"/>

@@ -20,6 +20,10 @@ export default {
             onlyMatchedOnce: false,
             removeMatchedSelectors: true
           },
+          removeUnknownsAndDefaults: {
+            keepDataAttrs: false,
+            keepAriaAttrs: false
+          },
           sortAttrs: {
             order: [
               "id",
@@ -46,6 +50,8 @@ export default {
           }
         }
       }
-    }
+    },
+    "removeXMLNS",
+    "removeXlink"
   ]
 };

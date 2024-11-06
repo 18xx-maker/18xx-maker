@@ -1,15 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 180 120">
+<svg viewBox="0 0 180 120">
   <defs>
     <g id="s" transform="translate(0 -36)">
       <g id="f">
         <g id="t">
           <path id="o" fill="#fff" d="M0-5v5h3z" transform="rotate(18 0 -5)"/>
-          <use xlink:href="#o" transform="scale(-1 1)"/>
+          <use href="#o" transform="scale(-1 1)"/>
         </g>
-        <use xlink:href="#t" transform="rotate(72)"/>
+        <use href="#t" transform="rotate(72)"/>
       </g>
-      <use xlink:href="#t" transform="rotate(-72)"/>
-      <use xlink:href="#f" transform="rotate(144)"/>
+      <use href="#t" transform="rotate(-72)"/>
+      <use href="#f" transform="rotate(144)"/>
     </g>
   </defs>
   <path fill="#cf142b" d="M0 0h180v120H0z"/>
@@ -18,11 +18,11 @@
   <g transform="translate(90 84)">
     <g id="s4">
       <g id="s2">
-        <use xlink:href="#s" transform="rotate(10)"/>
-        <use xlink:href="#s" transform="rotate(30)"/>
+        <use href="#s" transform="rotate(10)"/>
+        <use href="#s" transform="rotate(30)"/>
       </g>
-      <use xlink:href="#s2" transform="rotate(40)"/>
+      <use href="#s2" transform="rotate(40)"/>
     </g>
-    <use xlink:href="#s4" transform="rotate(-80)"/>
+    <use href="#s4" transform="rotate(-80)"/>
   </g>
 </svg>

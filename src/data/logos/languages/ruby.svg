@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="299.445" overflow="visible" viewBox="0 0 300 299.445">
+<svg width="300" height="299.445" overflow="visible" viewBox="0 0 300 299.445">
   <defs>
     <linearGradient id="XMLID_17_-9" x1="174.074" x2="132.276" y1="215.549" y2="141.753" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#fb7655"/>
@@ -102,7 +102,7 @@
       <stop offset=".99" stop-color="#b3100c"/>
       <stop offset="1" stop-color="#b3100c"/>
     </linearGradient>
-    <linearGradient xlink:href="#XMLID_17_-9" id="linearGradient3448" x1="174.074" x2="132.276" y1="215.549" y2="141.753" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse"/>
+    <linearGradient id="linearGradient3448" x1="174.074" x2="132.276" y1="215.549" y2="141.753" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse" href="#XMLID_17_-9"/>
     <radialGradient id="XMLID_30_-6" cx="74.092" cy="145.751" r="66.944" gradientTransform="translate(50 50)scale(1.00944)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#a30c00"/>
       <stop offset="0" stop-color="#a30c00"/>

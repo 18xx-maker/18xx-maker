@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 1.5 1.5">
+<svg width="144" height="144" viewBox="0 0 1.5 1.5">
   <g transform="translate(-8.083 -19.973)">
     <circle class="color-main color-blue" fill="#025aaa" cx="8.833" cy="20.723" r=".731"/>
     <path class="color-reserved-gray" fill="#00008B" d="M8.312 20.376v.695h1.042v-.695z"/>

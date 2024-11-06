@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-name="Layer 1" viewBox="0 0 288 288">
+<svg viewBox="0 0 288 288">
   <defs>
     <clipPath id="clip-path">
       <path fill="none" stroke="#f3eebf" stroke-miterlimit="10" d="M589.63-161.42a142 142 0 0 1-142 142 142 142 0 0 1-142-142 142 142 0 0 1 142-142 142 142 0 0 1 142 142z"/>
     </clipPath>
-    <symbol id="Nouveau_symbole_28" data-name="Nouveau symbole 28" viewBox="0 0 51.02 51.02">
+    <symbol id="Nouveau_symbole_28" viewBox="0 0 51.02 51.02">
       <circle fill="#009a54" cx="25.51" cy="25.51" r="25.51"/>
       <path fill="#f3716d" d="M25.51 34a8.49 8.49 0 0 0-8.5 8.5v7a25.67 25.67 0 0 0 17 0v-7a8.5 8.5 0 0 0-8.5-8.5m0-17A8.51 8.51 0 0 0 34 8.5v-7a25.5 25.5 0 0 0-17 0v7a8.5 8.5 0 0 0 8.51 8.5"/>
       <path fill="#fff" d="M21.47 19.6h4.08v.32h-.86l1.91 5.52 1.57-4.74a1.2 1.2 0 0 0 .07-.43c0-.25-.14-.37-.42-.37h-.31v-.3h2v.32a1 1 0 0 0-.67.19 1.5 1.5 0 0 0-.36.61L26.77 26v5.11h.85v.3h-4v-.3h.84v-5.03l-2.14-6.16h-.85z"/>
@@ -19,7 +19,7 @@
   <path class="color-black color-reserved-white" fill="#231f20" d="M190.39 165.17q0-18.57-19.64-22v-.28c.72.05 2.93-.82 6.65-2.59a20.13 20.13 0 0 0 11.71-18.41q0-9.78-6.45-15.83t-16.91-6H135.9v2.36h3.44c1.66 0 2.5.7 2.5 2.09a3.5 3.5 0 0 1-.24 1.29q-.24.6-7 12.83l-13.09 23.5h-.27v-39.76h6.21V100h-29.7v2.36h6.34v83.26h-6.48V188h28v-2.22h-4.39V143.9h.27l14.55 41.73h-4.9V188h36.67q10.33 0 16.44-6.17t6.14-16.66m-19 12q0 8.44-6.48 8.44H154l-20.76-59.22L144.61 106c1.4-2.43 3.69-3.65 6.89-3.65h13.71c2.07 0 3.53.67 4.39 2s1.28 3.53 1.28 6.55V135q0 6.76-6.62 6.76h-13.49v2.36h14q6.62 0 6.62 8.85z"/>
   <path fill="none" stroke="#f3eebf" stroke-miterlimit="10" d="M286 144A142 142 0 1 1 144 2a142 142 0 0 1 142 142z"/>
   <g clip-path="url(#clip-path)">
-    <use xlink:href="#Nouveau_symbole_28" width="51.02" height="51.02" transform="translate(265.06 -343.98)scale(7.16)"/>
+    <use width="51.02" height="51.02" href="#Nouveau_symbole_28" transform="translate(265.06 -343.98)scale(7.16)"/>
   </g>
   <path fill="none" stroke="#f3eebf" stroke-miterlimit="10" d="M589.63-161.42a142 142 0 0 1-142 142 142 142 0 0 1-142-142 142 142 0 0 1 142-142 142 142 0 0 1 142 142z"/>
 </svg>

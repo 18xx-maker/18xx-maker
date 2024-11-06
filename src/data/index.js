@@ -24,11 +24,11 @@ const companyFiles = import.meta.glob("./companies/*.json", { eager: true, impor
 export const companies = mapKeys(getID, companyFiles);
 
 // Logos
-const logoFiles = import.meta.glob("./logos/*/*.svg", { eager: true, query: '?react', import: 'default' });
+const logoFiles = import.meta.glob("./logos/*/*.svg", { eager: true, import: 'default' });
 export const logos = mapKeys(getID, logoFiles);
 
 // Icons
-const iconFiles = import.meta.glob("./icons/*.svg", { eager: true, query: '?react', import: 'default' });
+const iconFiles = import.meta.glob("./icons/*.svg", { eager: true, import: 'default' });
 export const icons = mapKeys(getID, iconFiles);
 
 // Themes
