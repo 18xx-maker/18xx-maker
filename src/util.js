@@ -1,4 +1,4 @@
-import { addIndex, adjust, ascend, chain, compose, curry, defaultTo, find, fromPairs, head, is, join, juxt, lte, map, max, mergeAll, mergeLeft, nth, pick, prop, propOr, reduce, reverse, sortWith, split, tail, toPairs, toUpper } from "ramda";
+import { addIndex, adjust, ascend, chain, compose, curry, defaultTo, find, fromPairs, head, is, join, juxt, lte, map, max, mergeAll, nth, pick, prop, propOr, reduce, reverse, sortWith, split, tail, toPairs, toUpper } from "ramda";
 
 export const maxPlayers = compose(
   reduce(max, 0),

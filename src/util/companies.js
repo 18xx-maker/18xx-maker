@@ -1,4 +1,4 @@
-import { addIndex, is, map, mergeLeft, prop } from "ramda";
+import { addIndex, is, map, mergeRight, prop } from "ramda";
 
 import { companies as overrides } from "../data";
 
@@ -66,7 +66,7 @@ export const overrideCompanies = (companies, override, selections) => {
 
     // If we have a valid override for the index, merge!
     if (overrideCompanies[index]) {
-      company = mergeLeft(company, overrideCompanies[index]);
+      company = mergeRight(company, overrideCompanies[index]);
 
       // Remove some fields if they don't exist on the override company
       company.logo = overrideCompanies[index].logo;
