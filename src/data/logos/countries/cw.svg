@@ -1,16 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 54 36">
+<svg viewBox="0 0 54 36">
   <path fill="#002b7f" d="M0 0h54v36H0z"/>
   <path fill="#f9e814" d="M0 22.5h54V27H0z"/>
   <g id="countries-cw-s" fill="#fff">
     <g id="countries-cw-f">
       <g id="countries-cw-t">
         <path id="countries-cw-o" d="M12 8v4h2z" transform="rotate(18 12 8)"/>
-        <use xlink:href="#countries-cw-o" x="-24" transform="scale(-1 1)"/>
+        <use x="-24" href="#countries-cw-o" transform="scale(-1 1)"/>
       </g>
-      <use xlink:href="#countries-cw-t" transform="rotate(72 12 12)"/>
+      <use href="#countries-cw-t" transform="rotate(72 12 12)"/>
     </g>
-    <use xlink:href="#countries-cw-t" transform="rotate(-72 12 12)"/>
-    <use xlink:href="#countries-cw-f" transform="rotate(144 12 12)"/>
+    <use href="#countries-cw-t" transform="rotate(-72 12 12)"/>
+    <use href="#countries-cw-f" transform="rotate(144 12 12)"/>
   </g>
-  <use xlink:href="#countries-cw-s" x="-4" y="-4" transform="scale(.75)"/>
+  <use x="-4" y="-4" href="#countries-cw-s" transform="scale(.75)"/>
 </svg>

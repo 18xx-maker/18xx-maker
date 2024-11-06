@@ -7,18 +7,18 @@ import { useGame } from "../context/GameContext";
 
 import { ascend, identity, keys, map, sort } from "ramda";
 
-import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
-import Paper from "@material-ui/core/Paper";
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Typography from "@material-ui/core/Typography";
+import Container from "@mui/material/Container";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Typography from "@mui/material/Typography";
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   DropBox: {
@@ -72,9 +72,7 @@ const LoadGames = () => {
       let publisher = publishers[game.info.publisher];
 
       if (publisher.link) {
-        linkNode = <Link rel="noreferrer"
-                         target="_blank"
-                         href={publisher.link}>
+        linkNode = <Link rel="noreferrer" target="_blank" href={publisher.link} underline="hover">
                      {publisher.name}
                    </Link>;
       } else {
@@ -83,9 +81,7 @@ const LoadGames = () => {
 
       if (game.info.publisher !== "self") {
         if (publisher.link) {
-          imageNode = <Link rel="noreferrer"
-                            target="_blank"
-                            href={publisher.link}>
+          imageNode = <Link rel="noreferrer" target="_blank" href={publisher.link} underline="hover">
                         <img alt={`${publisher.name} Logo`} src={publisher.imageUrl} />
                       </Link>;
         } else {
@@ -108,9 +104,11 @@ const LoadGames = () => {
     return (
       <TableRow key={id}>
         <TableCell>
-          <Link component={RouterLink}
-                variant="h5"
-                to={`/games/${game.meta.slug}/map`}>
+          <Link
+            component={RouterLink}
+            variant="h5"
+            to={`/games/${game.meta.slug}/map`}
+            underline="hover">
             {game.info.title}
           </Link>
           {game.info.subtitle && <><br/>{game.info.subtitle}</>}

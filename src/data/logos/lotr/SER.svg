@@ -1,13 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" width="192.005" height="191.616" viewBox="0 0 192.005 191.616">
+<svg xml:space="preserve" width="192.005" height="191.616" viewBox="0 0 192.005 191.616">
   <g transform="translate(5.999 5.61)scale(4.23348)">
     <defs>
-      <circle id="SVGID_17_" cx="21.26" cy="21.26" r="22.677"/>
+      <circle id="SVG_LOTR_SER_1" cx="21.26" cy="21.26" r="22.677"/>
     </defs>
-    <clipPath id="SVGID_2_">
-      <use xlink:href="#SVGID_17_" width="100%" height="100%" overflow="visible"/>
+    <clipPath id="SVG_LOTR_SER_2">
+      <use width="100%" height="100%" href="#SVG_LOTR_SER_1" overflow="visible"/>
     </clipPath>
-    <circle class="color-lightBlue color-main" fill="#34a9e1" cx="21.26" cy="21.352" r="22.677" clip-path="url(#SVGID_2_)"/>
-    <g clip-path="url(#SVGID_2_)">
+    <circle class="color-lightBlue color-main" fill="#34a9e1" cx="21.26" cy="21.352" r="22.677" clip-path="url(#SVG_LOTR_SER_2)"/>
+    <g clip-path="url(#SVG_LOTR_SER_2)">
       <path class="color-reserved-white color-red" fill="#e3000b" d="M28.628 9.195c0 .696-3.295 2.322-7.36 2.322s-7.36-1.762-7.36-2.322c0-.233 3.295-2.322 7.36-2.322s7.36 2.224 7.36 2.322"/>
       <path class="color-black" fill="#181716" d="M22.343 9.206c0 1.253-.792 2.316-.839 2.269-.327-.327-.838-1.016-.838-2.269s.511-1.941.838-2.269c.096-.095.839 1.016.839 2.269"/>
       <path class="color-red" fill="#e3000b" d="M17.293 26.944H25.4V45.52h-8.107z"/>

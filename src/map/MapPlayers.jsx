@@ -8,10 +8,10 @@ import Currency from "../util/Currency";
 import addIndex from "ramda/src/addIndex";
 import map from "ramda/src/map";
 
-import certLimit from "../images/icons/certificate.svg?react";
-import bank from "../images/icons/university.svg?react";
-import number from "../images/icons/user-friends.svg?react";
-import capital from "../images/icons/coins.svg?react";
+import certLimit from "../images/icons/certificate.svg";
+import bank from "../images/icons/university.svg";
+import number from "../images/icons/user-friends.svg";
+import capital from "../images/icons/coins.svg";
 
 const icons = {
   certLimit,

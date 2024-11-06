@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 750 500">
+<svg viewBox="0 0 750 500">
   <path fill="#fff" d="M0 0h750v500H0z"/>
   <path fill="#002d62" d="M0 0h325v200H0z"/>
   <path fill="#ce1126" d="M0 300h325v200H0z"/>
@@ -29,7 +29,7 @@
         <path d="M478.88 286.03c-.14-.16-.01-.52.29-.8.3-.29.66-.39.8-.23.15.16.02.52-.28.8-.3.29-.67.39-.81.23z"/>
       </g>
     </g>
-    <use xlink:href="#a" transform="matrix(-1 0 0 1 998.26 0)"/>
+    <use href="#a" transform="matrix(-1 0 0 1 998.26 0)"/>
     <g stroke="#000" stroke-width=".24">
       <path fill="#ce1126" d="m496.73 314.54-.63 10.1c-.64-.05-1.88-.16-1.97-.98-.06-.46 1.26-8.73 1.3-9.53.45.12.9.32 1.3.41z"/>
       <path fill="#002d62" d="M495.77 314.12c-.06.4-.28 2.8-.22 3.1.19.97 1.38.82 2.04.86l.13-5.18c-.22.21-1.7 1.11-1.95 1.22z"/>
@@ -84,13 +84,13 @@
     <g transform="translate(442.05 224.22)scale(.1567)">
       <path id="b" fill="red" stroke-width="2" d="M91.38 425.97a5.97 5.97 0 1 1-11.95 0 5.97 5.97 0 0 1 11.95 0z"/>
     </g>
-    <use xlink:href="#b" transform="matrix(.1567 0 0 .18128 444.57 235.35)"/>
-    <use xlink:href="#b" transform="translate(443.69 248.32)scale(.1567)"/>
-    <use xlink:href="#b" transform="translate(440 252.04)scale(.16899)"/>
-    <use xlink:href="#b" transform="translate(438.74 256.23)scale(.16899)"/>
-    <use xlink:href="#b" transform="translate(440.29 257.84)scale(.16899)"/>
-    <use xlink:href="#b" transform="translate(463.22 286.05)scale(.12289)"/>
-    <use xlink:href="#b" transform="translate(464.3 287.3)scale(.12289)"/>
+    <use href="#b" transform="matrix(.1567 0 0 .18128 444.57 235.35)"/>
+    <use href="#b" transform="translate(443.69 248.32)scale(.1567)"/>
+    <use href="#b" transform="translate(440 252.04)scale(.16899)"/>
+    <use href="#b" transform="translate(438.74 256.23)scale(.16899)"/>
+    <use href="#b" transform="translate(440.29 257.84)scale(.16899)"/>
+    <use href="#b" transform="translate(463.22 286.05)scale(.12289)"/>
+    <use href="#b" transform="translate(464.3 287.3)scale(.12289)"/>
     <path d="M458.76 316.61a1.8 1.8 0 0 0-1.1-1.25m14.74 24.17c1.6 1.16 2.08.43 2.08.43"/>
   </g>
   <g fill="#006300">

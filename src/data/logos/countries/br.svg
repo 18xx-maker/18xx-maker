@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-2100 -1470 4200 2940">
+<svg viewBox="-2100 -1470 4200 2940">
   <defs>
     <path id="countries-br-D" fill-rule="evenodd" d="M-31.5 0h33a30 30 0 0 0 30-30v-10a30 30 0 0 0-30-30h-33zm13-13h19a19 19 0 0 0 19-19v-6a19 19 0 0 0-19-19h-19z"/>
     <path id="countries-br-E" d="M0 0h63v-13H12v-18h40v-12H12v-14h48v-13H0z" transform="translate(-31.5)"/>
@@ -7,32 +7,32 @@
     <path id="countries-br-O" fill-rule="evenodd" d="M0 0a31.5 35 0 0 0 0-70A31.5 35 0 0 0 0 0m0-13a18.5 22 0 0 0 0-44 18.5 22 0 0 0 0 44"/>
     <path id="countries-br-P" fill-rule="evenodd" d="M-31.5 0h13v-26h28a22 22 0 0 0 0-44h-40zm13-39h27a9 9 0 0 0 0-18h-27z"/>
     <path id="countries-br-S" d="M-15.75-22C-15.75-15-9-11.5 1-11.5s14.74-3.25 14.75-7.75c0-14.25-46.75-5.25-46.5-30.25C-30.5-71-6-70 3-70s26 4 25.75 21.25H13.5c0-7.5-7-10.25-15-10.25-7.75 0-13.25 1.25-13.25 8.5-.25 11.75 46.25 4 46.25 28.75C31.5-3.5 13.5 0 0 0c-11.5 0-31.55-4.5-31.5-22z"/>
-    <use xlink:href="#countries-br-star" id="countries-br-star1" transform="scale(31.5)"/>
-    <use xlink:href="#countries-br-star" id="countries-br-star2" transform="scale(26.25)"/>
-    <use xlink:href="#countries-br-star" id="countries-br-star3" transform="scale(21)"/>
-    <use xlink:href="#countries-br-star" id="countries-br-star4" transform="scale(15)"/>
-    <use xlink:href="#countries-br-star" id="countries-br-star5" transform="scale(10.5)"/>
+    <use id="countries-br-star1" href="#countries-br-star" transform="scale(31.5)"/>
+    <use id="countries-br-star2" href="#countries-br-star" transform="scale(26.25)"/>
+    <use id="countries-br-star3" href="#countries-br-star" transform="scale(21)"/>
+    <use id="countries-br-star4" href="#countries-br-star" transform="scale(15)"/>
+    <use id="countries-br-star5" href="#countries-br-star" transform="scale(10.5)"/>
     <g id="countries-br-G">
       <clipPath id="countries-br-gcut">
         <path d="M-31.5 0v-70h63V0zM0-47v12h31.5v-12z"/>
       </clipPath>
-      <use xlink:href="#countries-br-O" clip-path="url(#countries-br-gcut)"/>
+      <use clip-path="url(#countries-br-gcut)" href="#countries-br-O"/>
       <path d="M5-35h26.5v10H5z"/>
       <path d="M21.5-35h10V0h-10z"/>
     </g>
     <g id="countries-br-R">
-      <use xlink:href="#countries-br-P"/>
+      <use href="#countries-br-P"/>
       <path d="M28 0c0-10 0-32-15-32H-6c22 0 22 22 22 32"/>
     </g>
     <g id="countries-br-star" fill="#fff">
       <g id="countries-br-c">
         <path id="countries-br-t" d="M0-1v1h.5" transform="rotate(18 0 -1)"/>
-        <use xlink:href="#countries-br-t" transform="scale(-1 1)"/>
+        <use href="#countries-br-t" transform="scale(-1 1)"/>
       </g>
-      <use xlink:href="#countries-br-c" transform="rotate(72)"/>
-      <use xlink:href="#countries-br-c" transform="rotate(-72)"/>
-      <use xlink:href="#countries-br-c" transform="rotate(144)"/>
-      <use xlink:href="#countries-br-c" transform="rotate(216)"/>
+      <use href="#countries-br-c" transform="rotate(72)"/>
+      <use href="#countries-br-c" transform="rotate(-72)"/>
+      <use href="#countries-br-c" transform="rotate(144)"/>
+      <use href="#countries-br-c" transform="rotate(216)"/>
     </g>
   </defs>
   <rect fill="#009b3a" width="100%" height="100%" x="-50%" y="-50%"/>
@@ -43,47 +43,47 @@
   </clipPath>
   <path fill="#fff" d="M-2205 1470a1785 1785 0 0 1 3570 0h-105a1680 1680 0 1 0-3360 0z" clip-path="url(#countries-br-band)"/>
   <g fill="#009b3a" transform="translate(-420 1470)">
-    <use xlink:href="#countries-br-O" y="-1697.5" transform="rotate(-7)"/>
-    <use xlink:href="#countries-br-R" y="-1697.5" transform="rotate(-4)"/>
-    <use xlink:href="#countries-br-D" y="-1697.5" transform="rotate(-1)"/>
-    <use xlink:href="#countries-br-E" y="-1697.5" transform="rotate(2)"/>
-    <use xlink:href="#countries-br-M" y="-1697.5" transform="rotate(5)"/>
-    <use xlink:href="#countries-br-e" y="-1697.5" transform="rotate(9.75)"/>
-    <use xlink:href="#countries-br-P" y="-1697.5" transform="rotate(14.5)"/>
-    <use xlink:href="#countries-br-R" y="-1697.5" transform="rotate(17.5)"/>
-    <use xlink:href="#countries-br-O" y="-1697.5" transform="rotate(20.5)"/>
-    <use xlink:href="#countries-br-G" y="-1697.5" transform="rotate(23.5)"/>
-    <use xlink:href="#countries-br-R" y="-1697.5" transform="rotate(26.5)"/>
-    <use xlink:href="#countries-br-E" y="-1697.5" transform="rotate(29.5)"/>
-    <use xlink:href="#countries-br-S" y="-1697.5" transform="rotate(32.5)"/>
-    <use xlink:href="#countries-br-S" y="-1697.5" transform="rotate(35.5)"/>
-    <use xlink:href="#countries-br-O" y="-1697.5" transform="rotate(38.5)"/>
+    <use y="-1697.5" href="#countries-br-O" transform="rotate(-7)"/>
+    <use y="-1697.5" href="#countries-br-R" transform="rotate(-4)"/>
+    <use y="-1697.5" href="#countries-br-D" transform="rotate(-1)"/>
+    <use y="-1697.5" href="#countries-br-E" transform="rotate(2)"/>
+    <use y="-1697.5" href="#countries-br-M" transform="rotate(5)"/>
+    <use y="-1697.5" href="#countries-br-e" transform="rotate(9.75)"/>
+    <use y="-1697.5" href="#countries-br-P" transform="rotate(14.5)"/>
+    <use y="-1697.5" href="#countries-br-R" transform="rotate(17.5)"/>
+    <use y="-1697.5" href="#countries-br-O" transform="rotate(20.5)"/>
+    <use y="-1697.5" href="#countries-br-G" transform="rotate(23.5)"/>
+    <use y="-1697.5" href="#countries-br-R" transform="rotate(26.5)"/>
+    <use y="-1697.5" href="#countries-br-E" transform="rotate(29.5)"/>
+    <use y="-1697.5" href="#countries-br-S" transform="rotate(32.5)"/>
+    <use y="-1697.5" href="#countries-br-S" transform="rotate(35.5)"/>
+    <use y="-1697.5" href="#countries-br-O" transform="rotate(38.5)"/>
   </g>
-  <use xlink:href="#countries-br-star1" x="-600" y="-132"/>
-  <use xlink:href="#countries-br-star1" x="-535" y="177"/>
-  <use xlink:href="#countries-br-star2" x="-625" y="243"/>
-  <use xlink:href="#countries-br-star4" x="-463" y="132"/>
-  <use xlink:href="#countries-br-star2" x="-382" y="250"/>
-  <use xlink:href="#countries-br-star3" x="-404" y="323"/>
-  <use xlink:href="#countries-br-star1" x="228" y="-228"/>
-  <use xlink:href="#countries-br-star1" x="515" y="258"/>
-  <use xlink:href="#countries-br-star3" x="617" y="265"/>
-  <use xlink:href="#countries-br-star2" x="545" y="323"/>
-  <use xlink:href="#countries-br-star2" x="368" y="477"/>
-  <use xlink:href="#countries-br-star3" x="367" y="551"/>
-  <use xlink:href="#countries-br-star3" x="441" y="419"/>
-  <use xlink:href="#countries-br-star2" x="500" y="382"/>
-  <use xlink:href="#countries-br-star3" x="365" y="405"/>
-  <use xlink:href="#countries-br-star2" x="-280" y="30"/>
-  <use xlink:href="#countries-br-star3" x="200" y="-37"/>
-  <use xlink:href="#countries-br-star1" y="330"/>
-  <use xlink:href="#countries-br-star2" x="85" y="184"/>
-  <use xlink:href="#countries-br-star2" y="118"/>
-  <use xlink:href="#countries-br-star3" x="-74" y="184"/>
-  <use xlink:href="#countries-br-star4" x="-37" y="235"/>
-  <use xlink:href="#countries-br-star2" x="220" y="495"/>
-  <use xlink:href="#countries-br-star3" x="283" y="430"/>
-  <use xlink:href="#countries-br-star3" x="162" y="412"/>
-  <use xlink:href="#countries-br-star1" x="-295" y="390"/>
-  <use xlink:href="#countries-br-star5" y="575"/>
+  <use x="-600" y="-132" href="#countries-br-star1"/>
+  <use x="-535" y="177" href="#countries-br-star1"/>
+  <use x="-625" y="243" href="#countries-br-star2"/>
+  <use x="-463" y="132" href="#countries-br-star4"/>
+  <use x="-382" y="250" href="#countries-br-star2"/>
+  <use x="-404" y="323" href="#countries-br-star3"/>
+  <use x="228" y="-228" href="#countries-br-star1"/>
+  <use x="515" y="258" href="#countries-br-star1"/>
+  <use x="617" y="265" href="#countries-br-star3"/>
+  <use x="545" y="323" href="#countries-br-star2"/>
+  <use x="368" y="477" href="#countries-br-star2"/>
+  <use x="367" y="551" href="#countries-br-star3"/>
+  <use x="441" y="419" href="#countries-br-star3"/>
+  <use x="500" y="382" href="#countries-br-star2"/>
+  <use x="365" y="405" href="#countries-br-star3"/>
+  <use x="-280" y="30" href="#countries-br-star2"/>
+  <use x="200" y="-37" href="#countries-br-star3"/>
+  <use y="330" href="#countries-br-star1"/>
+  <use x="85" y="184" href="#countries-br-star2"/>
+  <use y="118" href="#countries-br-star2"/>
+  <use x="-74" y="184" href="#countries-br-star3"/>
+  <use x="-37" y="235" href="#countries-br-star4"/>
+  <use x="220" y="495" href="#countries-br-star2"/>
+  <use x="283" y="430" href="#countries-br-star3"/>
+  <use x="162" y="412" href="#countries-br-star3"/>
+  <use x="-295" y="390" href="#countries-br-star1"/>
+  <use y="575" href="#countries-br-star5"/>
 </svg>

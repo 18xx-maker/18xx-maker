@@ -9,18 +9,18 @@ import { useRangeParam, useStringParam } from "../../util/query";
 import Svg from "../../Svg";
 import Tile from "../../Tile";
 
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import Slider from '@material-ui/core/Slider';
-import TextField from '@material-ui/core/TextField';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Slider from '@mui/material/Slider';
+import TextField from '@mui/material/TextField';
 
 import filter from "ramda/src/filter";
 import map from "ramda/src/map";
@@ -30,7 +30,7 @@ import reduce from "ramda/src/reduce";
 import uniq from "ramda/src/uniq";
 import values from "ramda/src/values";
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -138,11 +138,13 @@ const Tiles = () => {
         <Box className={classes.filter}>
           <FormControl variant="filled">
             <InputLabel id="filter-color-label">{t('elements.tiles.filter.color')}</InputLabel>
-            <Select labelId="filter-color-label"
-                    id="filter-color"
-                    style={{width: 150}}
-                    value={color}
-                    onChange={handleColor}>
+            <Select
+              variant="standard"
+              labelId="filter-color-label"
+              id="filter-color"
+              style={{width: 150}}
+              value={color}
+              onChange={handleColor}>
               <MenuItem value="all">{t('elements.tiles.filter.all')}</MenuItem>
               {map(c => <MenuItem key={c} value={c}>{c}</MenuItem>, colors)}
             </Select>
@@ -155,18 +157,20 @@ const Tiles = () => {
                      variant="filled" />
           <FormControl variant="filled">
             <InputLabel id="filter-includes-label">{t('elements.tiles.filter.includes')}</InputLabel>
-            <Select labelId="filter-includes-label"
-                    id="filter-color"
-                    style={{width: 150}}
-                    value={includes}
-                    onChange={handleIncludes}>
+            <Select
+              variant="standard"
+              labelId="filter-includes-label"
+              id="filter-color"
+              style={{width: 150}}
+              value={includes}
+              onChange={handleIncludes}>
               <MenuItem value="all">{t('elements.tiles.filter.all')}</MenuItem>
               <MenuItem value="none">{t('elements.tiles.filter.none')}</MenuItem>
               <MenuItem value="town">{t('elements.tiles.filter.town')}</MenuItem>
               <MenuItem value="city">{t('elements.tiles.filter.city')}</MenuItem>
             </Select>
           </FormControl>
-          <FormControl>
+          <FormControl variant="standard">
             <InputLabel id="filter-revenue-label">{t('elements.tiles.filter.revenues')}</InputLabel>
             <Slider
               style={{width: '200px'}}

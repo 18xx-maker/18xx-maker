@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 
-import Avatar from "@material-ui/core/Avatar";
-import AvatarGroup from "@material-ui/lab/AvatarGroup";
+import Avatar from "@mui/material/Avatar";
+import AvatarGroup from '@mui/material/AvatarGroup';
 
 import ColorContext from "../context/ColorContext";
 import ConfigContext from "../context/ConfigContext";

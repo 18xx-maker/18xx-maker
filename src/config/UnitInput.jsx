@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 
-import Box from "@material-ui/core/Box";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import MUIInput from "@material-ui/core/FilledInput";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
+import Box from "@mui/material/Box";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MUIInput from "@mui/material/FilledInput";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 import keys from "ramda/src/keys";
 import map from "ramda/src/map";
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   configItem: {
@@ -64,10 +64,13 @@ const UnitInput = ({name, value, label, onChange}) => {
                   onChange={handler}/>
       </FormControl>
       <FormControl variant="filled">
-        <Select id={`${name}-units`}
-                labelId={`${name}-label`}
-                className={classes.configUnits}
-                value={units} onChange={unitsHandler}>
+        <Select
+          variant="standard"
+          id={`${name}-units`}
+          labelId={`${name}-label`}
+          className={classes.configUnits}
+          value={units}
+          onChange={unitsHandler}>
           {map(key => <MenuItem key={key} value={key}>{key}</MenuItem>, keys(allUnits))}
         </Select>
       </FormControl>

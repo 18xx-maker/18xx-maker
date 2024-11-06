@@ -4,17 +4,17 @@ import { useTranslation } from "react-i18next";
 
 import startsWith from "ramda/src/startsWith";
 
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 
 import ReactMarkdown from "react-markdown";
 import isEmpty from "ramda/src/isEmpty";
 
 import { isElectron } from "../util";
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -71,7 +71,7 @@ const ElectronImage = (props) => {
 
 const LocalLink = (props) => {
   if (startsWith('?', props.href)) {
-    return <Link component={RouterLink} to={props.href} {...props}/>;
+    return <Link component={RouterLink} to={props.href} {...props} underline="hover" />;
   }
 
   if (startsWith('http', props.href) && isElectron) {
@@ -80,10 +80,10 @@ const LocalLink = (props) => {
       const { shell } = window.require('electron');
       shell.openExternal(props.href);
     };
-    return <Link onClick={handler} {...props}/>;
+    return <Link onClick={handler} {...props} underline="hover" />;
   }
 
-  return <Link target="_blank" rel="noreferrer" {...props} />;
+  return <Link target="_blank" rel="noreferrer" {...props} underline="hover" />;
 }
 
 const components = {

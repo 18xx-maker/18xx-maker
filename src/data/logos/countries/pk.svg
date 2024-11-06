@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-75 -40 120 80">
+<svg viewBox="-75 -40 120 80">
   <path fill="#fff" d="M-75-40H45v80H-75z"/>
   <path fill="#01411C" d="M-45-40h90v80h-90z"/>
   <circle fill="#fff" r="24"/>

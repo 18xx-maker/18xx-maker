@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 600 400">
+<svg viewBox="0 0 600 400">
   <clipPath id="c">
     <ellipse cx="300" cy="201" rx="85.849" ry="88.189"/>
   </clipPath>
@@ -14,10 +14,10 @@
     <g fill="#630810" stroke="#630810" stroke-linecap="round" stroke-width="2.792">
       <path d="M281.66 223.73c2.672-1.442 5.101-2.88 6.802-6.243l-10.446.24s-4.856 2.882-7.287 6.003zm33.76 0c-2.672-1.442-5.1-2.88-6.801-6.243l10.445.24s4.857 2.882 7.286 6.003zm-52.71-10.08 71.903.24"/>
       <path id="x" d="m266.11 196.61 8.502 11.284m-8.502-.004 9.232-11.043m-4.372-.967-.243 6.962"/>
-      <use xlink:href="#x" x="13.604"/>
-      <use xlink:href="#x" x="27.45"/>
-      <use xlink:href="#x" x="41.782"/>
-      <use xlink:href="#x" x="55.628"/>
+      <use x="13.604" href="#x"/>
+      <use x="27.45" href="#x"/>
+      <use x="41.782" href="#x"/>
+      <use x="55.628" href="#x"/>
     </g>
   </g>
 </svg>

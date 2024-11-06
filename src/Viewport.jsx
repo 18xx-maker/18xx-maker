@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import Box from "@material-ui/core/Box";
+import Box from "@mui/material/Box";
 import { needSideMenu } from "./nav/IfSideMenu";
 import { useLocation } from "react-router-dom";
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@mui/material/styles';
 import { useBooleanParam } from "./util/query";
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import GameContext from "./context/GameContext";
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   viewport: {

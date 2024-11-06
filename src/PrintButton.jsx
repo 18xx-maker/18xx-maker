@@ -3,13 +3,13 @@ import { Route } from "react-router";
 import GameContext from "./context/GameContext";
 import { useBooleanParam } from "./util/query";
 
-import Fab from "@material-ui/core/Fab";
-import Slide from "@material-ui/core/Slide";
-import Tooltip from "@material-ui/core/Tooltip";
+import Fab from "@mui/material/Fab";
+import Slide from "@mui/material/Slide";
+import Tooltip from "@mui/material/Tooltip";
 
-import PrintIcon from '@material-ui/icons/Print';
+import PrintIcon from '@mui/icons-material/Print';
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   printButton: {

@@ -4,17 +4,17 @@ import { useBooleanParam } from "../util/query";
 
 import Config from "./Config";
 
-import Button from "@material-ui/core/Button";
-import Drawer from "@material-ui/core/Drawer";
-import Fab from "@material-ui/core/Fab";
-import Slide from "@material-ui/core/Slide";
-import Toolbar from "@material-ui/core/Toolbar";
-import Tooltip from "@material-ui/core/Tooltip";
+import Button from "@mui/material/Button";
+import Drawer from "@mui/material/Drawer";
+import Fab from "@mui/material/Fab";
+import Slide from "@mui/material/Slide";
+import Toolbar from "@mui/material/Toolbar";
+import Tooltip from "@mui/material/Tooltip";
 
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ConfigIcon from '@material-ui/icons/Settings';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ConfigIcon from '@mui/icons-material/Settings';
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   configButton: {

@@ -12,9 +12,9 @@ import PageSetup from "../../PageSetup";
 
 import config from "../../defaults.json";
 
-import Box from "@material-ui/core/Box";
+import Box from "@mui/material/Box";
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   backgroundBox: {

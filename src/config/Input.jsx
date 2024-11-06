@@ -5,16 +5,16 @@ import UnitInput from "./UnitInput";
 
 import { assocPath, map, path, split } from "ramda";
 
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import InputLabel from "@material-ui/core/InputLabel";
-import MUIInput from "@material-ui/core/FilledInput";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import Typography from "@material-ui/core/Typography";
+import Checkbox from "@mui/material/Checkbox";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import InputLabel from "@mui/material/InputLabel";
+import MUIInput from "@mui/material/FilledInput";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Typography from "@mui/material/Typography";
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   configItem: {
@@ -51,7 +51,13 @@ const Input = ({name, label, description, dimension}) => {
       inputNode = (
         <FormControl className={classes.configItem} variant="filled">
           <InputLabel id={`${name}-label`}>{label}</InputLabel>
-          <Select id={name} name={name} labelId={`${name}-label`} value={value} onChange={update}>
+          <Select
+            variant="standard"
+            id={name}
+            name={name}
+            labelId={`${name}-label`}
+            value={value}
+            onChange={update}>
             {map(opt => <MenuItem key={opt} value={opt}>{opt}</MenuItem>, inputSchema.enum)}
           </Select>
         </FormControl>

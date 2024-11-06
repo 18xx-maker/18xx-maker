@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 250 150">
+<svg viewBox="0 0 250 150">
   <clipPath id="c">
     <circle r="25"/>
   </clipPath>
@@ -7,16 +7,16 @@
     <g id="r20" transform="scale(.25)">
       <g id="r4">
         <path id="r1" fill="#ffef00" d="M-8.4 108C0 130-18 164 0 180c-6-24 14-50 8.4-72s-25.2-22-16.8 0"/>
-        <use xlink:href="#r1" transform="rotate(90)"/>
-        <use xlink:href="#r1" transform="rotate(180)"/>
-        <use xlink:href="#r1" transform="rotate(270)"/>
+        <use href="#r1" transform="rotate(90)"/>
+        <use href="#r1" transform="rotate(180)"/>
+        <use href="#r1" transform="rotate(270)"/>
       </g>
-      <use xlink:href="#r4" transform="rotate(18)"/>
-      <use xlink:href="#r4" transform="rotate(36)"/>
-      <use xlink:href="#r4" transform="rotate(54)"/>
-      <use xlink:href="#r4" transform="rotate(72)"/>
+      <use href="#r4" transform="rotate(18)"/>
+      <use href="#r4" transform="rotate(36)"/>
+      <use href="#r4" transform="rotate(54)"/>
+      <use href="#r4" transform="rotate(72)"/>
     </g>
-    <use xlink:href="#r20" transform="rotate(9)"/>
+    <use href="#r20" transform="rotate(9)"/>
     <circle fill="#e8112d" r="27"/>
     <circle fill="#ffef00" cy="-1.5" r="22.5"/>
     <g id="x" fill="#e8112d" clip-path="url(#c)">
@@ -24,6 +24,6 @@
       <path d="M-17.601 18A35.301 35.301 0 1 1 53 18h.424a33.925 33.925 0 1 0-67.85 0z"/>
       <path d="M20.7-15.052a33.052 33.052 0 1 0 0 66.104l1.8-1.232a31.82 31.82 0 1 1 0-63.64z"/>
     </g>
-    <use xlink:href="#x" transform="scale(-1 1)"/>
+    <use href="#x" transform="scale(-1 1)"/>
   </g>
 </svg>

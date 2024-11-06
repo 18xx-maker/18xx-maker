@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 500">
+<svg viewBox="0 0 1000 500">
   <path fill="#0021ad" d="M0 0h1000v500H0z"/>
   <path fill="#1c8a42" d="M0 0h1000v500z"/>
   <circle fill="#ffc639" cx="500" cy="250" r="90.32"/>
@@ -8,8 +8,8 @@
   <g fill="#fff">
     <path id="countries-cx-s" d="m188.16 190.94-12.751-11.936-12.904 11.77 1.383-17.405-17.249-2.753 14.475-9.774-8.606-15.197 16.668 5.22 6.518-16.205 6.31 16.287 16.734-5.007-8.8 15.086 14.348 9.96-17.283 2.53 1.158 17.424z"/>
     <path d="m233.39 335.53-13.752-9.167-13.391 9.664 4.712-15.568-13.582-9.415 16.667-.446 4.988-15.496 5.595 15.3 16.667-.156-13.21 9.902z"/>
-    <use xlink:href="#countries-cx-s" x="2.522" y="269.061"/>
-    <use xlink:href="#countries-cx-s" x="-112.066" y="123.223"/>
-    <use xlink:href="#countries-cx-s" x="108.427" y="85.027"/>
+    <use x="2.522" y="269.061" href="#countries-cx-s"/>
+    <use x="-112.066" y="123.223" href="#countries-cx-s"/>
+    <use x="108.427" y="85.027" href="#countries-cx-s"/>
   </g>
 </svg>

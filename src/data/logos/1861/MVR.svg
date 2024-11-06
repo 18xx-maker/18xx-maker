@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-name="Layer 1" viewBox="0 0 288 288">
+<svg viewBox="0 0 288 288">
   <defs>
     <clipPath id="clip-path">
       <circle fill="none" cx="25.51" cy="25.51" r="25.51"/>
@@ -6,7 +6,7 @@
     <clipPath id="clip-path-2">
       <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".5" d="M279.29 144A135.29 135.29 0 1 1 144 8.71 135.29 135.29 0 0 1 279.29 144z"/>
     </clipPath>
-    <symbol id="Nouveau_symbole_4" data-name="Nouveau symbole 4" viewBox="0 0 51.02 51.02">
+    <symbol id="Nouveau_symbole_4" viewBox="0 0 51.02 51.02">
       <circle fill="#4d5613" cx="25.51" cy="25.51" r="25.51"/>
       <g clip-path="url(#clip-path)">
         <path fill="#100d0f" d="M25.51 22.68 24.09 0h2.84zM19 .81l-2.7.88 8.36 21.13zM11.66 4 9.37 5.71l14.48 17.51zM5.71 9.37 4 11.66l19.22 12.18zm-4 6.91L.81 19l22 5.66zM0 24.09v2.84l22.68-1.42zm.81 8 .88 2.69 21.13-8.35zM4 39.36l1.67 2.29 17.55-14.47zm5.33 6L11.66 47l12.19-19.2zm6.91 4 2.7.87 5.66-22zM24.09 51h2.84l-1.42-22.65zm8-.81 2.69-.87-8.39-21.11zM39.36 47l2.29-1.66L27.18 27.8zm6-5.33L47 39.36 27.8 27.18zm4-6.91.87-2.69-22-5.66zM51 26.93v-2.84l-22.65 1.42zM50.21 19l-.87-2.7-21.13 8.34zM47 11.66l-1.68-2.29L27.8 23.84zm-5.35-5.95L39.36 4 27.18 23.22zm-6.91-4-2.69-.9-5.66 22z"/>
@@ -16,7 +16,7 @@
     </symbol>
   </defs>
   <g clip-path="url(#clip-path-2)">
-    <use xlink:href="#Nouveau_symbole_4" width="51.02" height="51.02" transform="translate(-81.48 -81.48)scale(8.84)"/>
+    <use width="51.02" height="51.02" href="#Nouveau_symbole_4" transform="translate(-81.48 -81.48)scale(8.84)"/>
   </g>
   <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width=".5" d="M279.29 144A135.29 135.29 0 1 1 144 8.71 135.29 135.29 0 0 1 279.29 144z"/>
 </svg>

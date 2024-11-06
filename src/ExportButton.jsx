@@ -10,22 +10,22 @@ import { compileCompanies, overrideCompanies } from "./util/companies.js";
 
 import schema from "./schemas/config.schema.json";
 
-import Divider from "@material-ui/core/Divider";
-import Fab from "@material-ui/core/Fab";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Slide from "@material-ui/core/Slide";
-import Tooltip from "@material-ui/core/Tooltip";
+import Divider from "@mui/material/Divider";
+import Fab from "@mui/material/Fab";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Slide from "@mui/material/Slide";
+import Tooltip from "@mui/material/Tooltip";
 
-import ExportIcon from '@material-ui/icons/Collections';
-import PdfIcon from "@material-ui/icons/PictureAsPdf";
-import PngIcon from "@material-ui/icons/PhotoLibrary";
+import ExportIcon from '@mui/icons-material/Collections';
+import PdfIcon from "@mui/icons-material/PictureAsPdf";
+import PngIcon from "@mui/icons-material/PhotoLibrary";
 
 import { assoc, compose, flatten, forEach, is, keys, map, max, prop, range, reduce } from "ramda";
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   exportButton: {

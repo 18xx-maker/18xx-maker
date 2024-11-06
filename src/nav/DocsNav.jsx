@@ -3,46 +3,45 @@ import React from "react";
 import { Link, useLocation, matchPath } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import Divider from "@material-ui/core/Divider";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
-import HelpIcon from "@material-ui/icons/Help";
-import DevelopingIcon from "@material-ui/icons/Code";
-import TranslationIcon from "@material-ui/icons/Language";
+import HelpIcon from "@mui/icons-material/Help";
+import DevelopingIcon from "@mui/icons-material/Code";
+import TranslationIcon from "@mui/icons-material/Language";
 
-import LogosIcon from "@material-ui/icons/Security";
-import BordersIcon from "@material-ui/icons/Timeline";
-import OverridesIcon from "@material-ui/icons/Autorenew";
-import TrainsIcon from "@material-ui/icons/Train";
-import SchemasIcon from "@material-ui/icons/Check";
-import SharesIcon from "@material-ui/icons/Note";
-import AutoPositioningIcon from "@material-ui/icons/CenterFocusStrong";
+import LogosIcon from "@mui/icons-material/Security";
+import BordersIcon from "@mui/icons-material/Timeline";
+import OverridesIcon from "@mui/icons-material/Autorenew";
+import TrainsIcon from "@mui/icons-material/Train";
+import SchemasIcon from "@mui/icons-material/Check";
+import SharesIcon from "@mui/icons-material/Note";
+import AutoPositioningIcon from "@mui/icons-material/CenterFocusStrong";
 
-import PdfIcon from "@material-ui/icons/PictureAsPdf";
-import PngIcon from "@material-ui/icons/PhotoLibrary";
-import B18Icon from "@material-ui/icons/PermMedia";
+import PdfIcon from "@mui/icons-material/PictureAsPdf";
+import PngIcon from "@mui/icons-material/PhotoLibrary";
+import B18Icon from "@mui/icons-material/PermMedia";
 
-import DieIcon from "@material-ui/icons/Filter";
-import TokensIcon from "@material-ui/icons/Stars";
+import DieIcon from "@mui/icons-material/Filter";
+import TokensIcon from "@mui/icons-material/Stars";
 
 const DocsNav = () => {
   const { t } = useTranslation();
   const location = useLocation();
 
   const Item = ({path = "", name, desc, icon}) => (
-    <ListItem button
-              component={Link}
-              to={`/docs/${path}`}
-              selected={!!matchPath(location.pathname,
-                                    { path: `/docs/${path}`,
-                                      exact: true})}>
+    <ListItemButton component={Link}
+                    to={`/docs/${path}`}
+                    selected={!!matchPath(location.pathname,
+                                          { path: `/docs/${path}`,
+                                            exact: true})}>
       <ListItemIcon>{icon}</ListItemIcon>
       <ListItemText primary={name}
                     secondary={desc}/>
-    </ListItem>
+    </ListItemButton>
   );
 
   return (
