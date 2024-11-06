@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import react from "@vitejs/plugin-react-swc";
 import svgr from "vite-plugin-svgr";
 import browserslistToEsbuild from 'browserslist-to-esbuild'
 
@@ -17,9 +17,7 @@ export default defineConfig({
     }
   },
   plugins: [
-    react({
-      jsxRuntime: "classic",
-    }),
+    react(),
     svgr(),
   ],
   assetsInclude: ["**/*.md"],
