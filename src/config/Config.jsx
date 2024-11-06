@@ -23,16 +23,16 @@ import split from "ramda/src/split";
 import { binary, flip, pickBy, startsWith } from "ramda";
 import { mapThemes, companyThemes } from "../data";
 
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import Typography from "@material-ui/core/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Typography from "@mui/material/Typography";
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 export const getPath = split('.');
 export const getSchemaPath = compose(chain(n => ['properties', n]),

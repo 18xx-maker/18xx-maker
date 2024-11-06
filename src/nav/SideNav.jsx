@@ -3,13 +3,13 @@ import { Route } from "react-router";
 
 import { useBooleanParam } from "../util/query";
 
-import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
-import Toolbar from '@material-ui/core/Toolbar';
+import Drawer from "@mui/material/Drawer";
+import Hidden from "@mui/material/Hidden";
+import Toolbar from '@mui/material/Toolbar';
 
 import IfSideMenu from "./IfSideMenu";
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 import DocsNav from "./DocsNav";
 import ElementsNav from "./ElementsNav";
@@ -58,7 +58,7 @@ const SideNav = ({open, toggle}) => {
           {menu}
         </Drawer>
       </Hidden>
-      <Hidden smDown>
+      <Hidden mdDown>
         <Drawer variant="permanent"
                 PaperProps={{className: classes.sideNav}}>
           {menu}

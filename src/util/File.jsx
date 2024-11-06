@@ -1,11 +1,11 @@
 import React from "react";
 import { useTranslation } from 'react-i18next';
 
-import Button from "@material-ui/core/Button";
-import DownloadIcon from '@material-ui/icons/GetApp';
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+import Button from "@mui/material/Button";
+import DownloadIcon from '@mui/icons-material/GetApp';
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
 import is from "ramda/src/is";
 import { isElectron } from "../util";

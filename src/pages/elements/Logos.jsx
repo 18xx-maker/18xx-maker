@@ -4,12 +4,12 @@ import { useTranslation } from "react-i18next";
 
 import { ascend, compose, groupBy, keys, map, nth, prop, sort, split, values } from "ramda";
 
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 import { logos } from "../../data";
 

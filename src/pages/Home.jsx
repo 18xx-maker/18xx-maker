@@ -1,12 +1,12 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import Alert from '@material-ui/lab/Alert';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Alert from '@mui/material/Alert';
+import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 
 import gtgLogo from "../data/publishers/gtg.png";
 

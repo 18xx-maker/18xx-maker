@@ -8,7 +8,7 @@ import Card from "./Card";
 import Cards from "./Cards";
 import Charter from "./Charter";
 import Charters from "./Charters";
-import Link from "@material-ui/core/Link";
+import Link from "@mui/material/Link";
 import Map from "./Map";
 import Market from "./Market";
 import Par from "./Par";
@@ -23,24 +23,24 @@ import B18Map from "./b18/Map";
 import B18Tiles from "./b18/Tiles";
 import B18Tokens from "./b18/Tokens";
 
-import Container from "@material-ui/core/Container";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
+import Container from "@mui/material/Container";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 
-import PlayersIcon from "@material-ui/icons/People";
+import PlayersIcon from "@mui/icons-material/People";
 
-import BGGIcon from "@material-ui/icons/Storage";
-import LicenseIcon from "@material-ui/icons/Lock";
-import PurchaseIcon from "@material-ui/icons/MonetizationOn";
-import RulesIcon from "@material-ui/icons/Gavel";
-import WarningIcon from "@material-ui/icons/Warning";
+import BGGIcon from "@mui/icons-material/Storage";
+import LicenseIcon from "@mui/icons-material/Lock";
+import PurchaseIcon from "@mui/icons-material/MonetizationOn";
+import RulesIcon from "@mui/icons-material/Gavel";
+import WarningIcon from "@mui/icons-material/Warning";
 
-import { makeStyles } from '@material-ui/core/styles';
-import { green, blue } from '@material-ui/core/colors';
+import makeStyles from '@mui/styles/makeStyles';
+import { green, blue } from '@mui/material/colors';
 
 const useStyles = makeStyles((theme) => ({
   page: {

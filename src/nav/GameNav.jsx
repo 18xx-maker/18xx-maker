@@ -10,33 +10,33 @@ import addIndex from "ramda/src/addIndex";
 import is from "ramda/src/is";
 import map from "ramda/src/map";
 
-import Checkbox from "@material-ui/core/Checkbox";
-import Divider from "@material-ui/core/Divider";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormLabel from "@material-ui/core/FormLabel";
-import InputLabel from "@material-ui/core/InputLabel";
-import Link from "@material-ui/core/Link";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import Switch from "@material-ui/core/Switch";
+import Checkbox from "@mui/material/Checkbox";
+import Divider from "@mui/material/Divider";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import FormLabel from "@mui/material/FormLabel";
+import InputLabel from "@mui/material/InputLabel";
+import Link from "@mui/material/Link";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Switch from "@mui/material/Switch";
 
-import BGGIcon from "@material-ui/icons/Storage";
-import GameIcon from "@material-ui/icons/Train";
-import LicenseIcon from "@material-ui/icons/Lock";
-import PurchaseIcon from "@material-ui/icons/MonetizationOn";
-import RulesIcon from "@material-ui/icons/Gavel";
-import WarningIcon from "@material-ui/icons/Warning";
+import BGGIcon from "@mui/icons-material/Storage";
+import GameIcon from "@mui/icons-material/Train";
+import LicenseIcon from "@mui/icons-material/Lock";
+import PurchaseIcon from "@mui/icons-material/MonetizationOn";
+import RulesIcon from "@mui/icons-material/Gavel";
+import WarningIcon from "@mui/icons-material/Warning";
 
 import File from "../util/File";
 
-import { makeStyles } from '@material-ui/core/styles';
-import { green, blue } from '@material-ui/core/colors';
+import makeStyles from '@mui/styles/makeStyles';
+import { green, blue } from '@mui/material/colors';
 
 const useStyles = makeStyles((theme) => ({
   input: {

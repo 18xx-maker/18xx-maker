@@ -8,25 +8,25 @@ import { Link } from "react-router-dom";
 
 import MobileMenuButton from "./MobileMenuButton";
 
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
-import Hidden from "@material-ui/core/Hidden";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import AppBar from "@mui/material/AppBar";
+import Button from "@mui/material/Button";
+import Hidden from "@mui/material/Hidden";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 
-import DocumentationIcon from '@material-ui/icons/Help';
-import ElementsIcon from '@material-ui/icons/Category';
-import HomeIcon from '@material-ui/icons/Home';
+import DocumentationIcon from '@mui/icons-material/Help';
+import ElementsIcon from '@mui/icons-material/Category';
+import HomeIcon from '@mui/icons-material/Home';
 
-import GamesIcon from '@material-ui/icons/Train';
-import LoadIcon from '@material-ui/icons/OpenInBrowser';
-import MenuIcon from '@material-ui/icons/KeyboardArrowDown';
+import GamesIcon from '@mui/icons-material/Train';
+import LoadIcon from '@mui/icons-material/OpenInBrowser';
+import MenuIcon from '@mui/icons-material/KeyboardArrowDown';
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import GameContext from "../context/GameContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -224,7 +224,7 @@ const AppNav = ({toggleSideNav}) => {
           <MobileButton onClick={handleMenu}/>
           <MobileMenu anchor={menuAnchor} onClose={handleMenuClose}/>
         </Hidden>
-        <Hidden smDown>
+        <Hidden mdDown>
           <NavMenu/>
         </Hidden>
       </Toolbar>

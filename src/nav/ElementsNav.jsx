@@ -4,16 +4,16 @@ import { Link, useLocation, matchPath } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
-// import Divider from "@material-ui/core/Divider";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+// import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
-import AtomsIcon from "@material-ui/icons/Map";
-// import CheatIcon from "@material-ui/icons/ListAlt";
-import LogosIcon from "@material-ui/icons/Security";
-import TilesIcon from "@material-ui/icons/ViewModule";
+import AtomsIcon from "@mui/icons-material/Map";
+// import CheatIcon from "@mui/icons-material/ListAlt";
+import LogosIcon from "@mui/icons-material/Security";
+import TilesIcon from "@mui/icons-material/ViewModule";
 
 const ElementsNav = () => {
   const { t } = useTranslation();
