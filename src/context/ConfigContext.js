@@ -11,7 +11,7 @@ const configs = import.meta.glob("../*.json", {
   import: "default",
 });
 const defaultConfig = configs["../defaults.json"];
-const userConfig = configs["../user.json"] || {};
+const userConfig = configs["../config.json"] || {};
 
 import useLocalState from "../util/useLocalState";
 import { diff } from "deep-object-diff";
