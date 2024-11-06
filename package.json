@@ -112,7 +112,7 @@
     "ajv-cli": "^5.0.0",
     "archiver": "^7.0.1",
     "bluebird": "^3.7.2",
-    "chalk": "^5.3.0",
+    "chalk": "^4.1.2",
     "chokidar": "^3.4.0",
     "commander": "^12.1.0",
     "electron-is-dev": "^3.0.1",
