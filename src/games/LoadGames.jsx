@@ -72,9 +72,7 @@ const LoadGames = () => {
       let publisher = publishers[game.info.publisher];
 
       if (publisher.link) {
-        linkNode = <Link rel="noreferrer"
-                         target="_blank"
-                         href={publisher.link}>
+        linkNode = <Link rel="noreferrer" target="_blank" href={publisher.link} underline="hover">
                      {publisher.name}
                    </Link>;
       } else {
@@ -83,9 +81,7 @@ const LoadGames = () => {
 
       if (game.info.publisher !== "self") {
         if (publisher.link) {
-          imageNode = <Link rel="noreferrer"
-                            target="_blank"
-                            href={publisher.link}>
+          imageNode = <Link rel="noreferrer" target="_blank" href={publisher.link} underline="hover">
                         <img alt={`${publisher.name} Logo`} src={publisher.imageUrl} />
                       </Link>;
         } else {
@@ -108,9 +104,11 @@ const LoadGames = () => {
     return (
       <TableRow key={id}>
         <TableCell>
-          <Link component={RouterLink}
-                variant="h5"
-                to={`/games/${game.meta.slug}/map`}>
+          <Link
+            component={RouterLink}
+            variant="h5"
+            to={`/games/${game.meta.slug}/map`}
+            underline="hover">
             {game.info.title}
           </Link>
           {game.info.subtitle && <><br/>{game.info.subtitle}</>}

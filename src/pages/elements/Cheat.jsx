@@ -49,7 +49,7 @@ const gameRows = map(key => {
   if (game.links) {
     links = intersperse(", ", map(name => {
       let url = game.links[name];
-      return <Link key={name} variant="caption" href={url}>{name}</Link>;
+      return <Link key={name} variant="caption" href={url} underline="hover">{name}</Link>;
     }, keys(game.links)));
   }
 
@@ -57,7 +57,7 @@ const gameRows = map(key => {
     <TableRow key={key}>
       <TableCell>{key}</TableCell>
       <TableCell>
-        <Link variant="h6" component={RouterLink} to={`/${key}`}>{game.info.title}</Link>
+        <Link variant="h6" component={RouterLink} to={`/${key}`} underline="hover">{game.info.title}</Link>
         {game.info.subtitle && <Typography variant="subtitle1">{game.info.subtitle}</Typography>}
         {links && <Typography>{links}</Typography>}
       </TableCell>

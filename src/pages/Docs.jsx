@@ -71,7 +71,7 @@ const ElectronImage = (props) => {
 
 const LocalLink = (props) => {
   if (startsWith('?', props.href)) {
-    return <Link component={RouterLink} to={props.href} {...props}/>;
+    return <Link component={RouterLink} to={props.href} {...props} underline="hover" />;
   }
 
   if (startsWith('http', props.href) && isElectron) {
@@ -80,10 +80,10 @@ const LocalLink = (props) => {
       const { shell } = window.require('electron');
       shell.openExternal(props.href);
     };
-    return <Link onClick={handler} {...props}/>;
+    return <Link onClick={handler} {...props} underline="hover" />;
   }
 
-  return <Link target="_blank" rel="noreferrer" {...props} />;
+  return <Link target="_blank" rel="noreferrer" {...props} underline="hover" />;
 }
 
 const components = {
