@@ -10,7 +10,7 @@
     <mask id="mask-3" fill="#fff">
       <use xlink:href="#path-2"/>
     </mask>
-    <use fill="#C0A000" xlink:href="#path-2"/>
+    <use xlink:href="#path-2" fill="#C0A000"/>
     <path fill="#BB062E" stroke="#979797" stroke-width=".999" d="M-49.216-49.038h598.691v598.496H-49.216z" mask="url(#mask-3)"/>
     <path fill="#000" d="M72.174 72.747H427.95v355.661H72.174z" mask="url(#mask-3)"/>
     <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="165.477" font-weight="bold" mask="url(#mask-3)">

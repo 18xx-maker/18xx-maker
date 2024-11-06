@@ -67,6 +67,14 @@
           },
           "additionalProperties": false
         },
+        "market": {
+          "type": "object",
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" }
+          },
+          "additionalProperties": false
+        },
         "players": {
           "type": "object",
           "properties": {
@@ -135,7 +143,7 @@
       "items": {
         "type": "object",
         "properties": {
-          "quantity": { "type": "number", "minimum": 1 },
+          "quantity": { "type": "number", "minimum": 0 },
           "label": { "type": "string" },
           "cost": { "type": "number", "minimum": 0 },
           "percent": { "$ref": "#/definitions/numberOrSlash" },
@@ -235,6 +243,10 @@
       "type": "object",
       "additionalProperties": { "$ref": "#/definitions/tokens" }
     },
+    "number_cards": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
     "shareTypes": {
       "type": "object",
       "additionalProperties": { "$ref": "#/definitions/shares" }
@@ -315,7 +327,10 @@
             }
           }
         },
-        "required": ["name", "limit", "tiles"],
+        "anyOf": [
+          {"required": ["name", "limit", "tiles"]},
+          {"required": ["train", "limit", "tiles"]}
+        ],
         "additionalProperties": false
       }
     },
@@ -366,7 +381,12 @@
             }
           },
           "bid": { "type": "number", "minimum": 0 },
-          "price": { "type": "number", "minimum": 0 },
+          "price": {
+            "oneOf": [
+              { "type": "number", "minimum": 0 },
+              { "type": "string" }
+            ]
+          },
           "debt": { "type": "number", "minimum": 0 },
           "revenue": {
             "oneOf": [
@@ -410,7 +430,12 @@
         "type": "object",
         "properties": {
           "name": { "type": "string" },
-          "price": { "type": "integer", "minimum": 0 },
+          "price": {
+            "oneOf": [
+              { "type": "number", "minimum": 0 },
+              { "type": "string" }
+            ]
+          },
           "color": { "type": "string" },
           "image": {
             "type": "string"
@@ -422,6 +447,7 @@
               { "type": "string", "enum": ["∞"] }
             ]
           },
+          "quantity_label": { "type": "string" },
           "print": { "type": "integer", "minimum": 0 },
           "discount": { "type": "object" },
           "description": { "type": "string" },

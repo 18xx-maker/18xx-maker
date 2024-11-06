@@ -2912,7 +2912,6 @@
       "shapes": [
         {
           "type": "circle",
-          "fill": "none",
           "width": 24,
           "dashed": true
         }
@@ -2957,7 +2956,6 @@
       "shapes": [
         {
           "type": "circle",
-          "fill": "none",
           "width": 24,
           "dashed": true
         }
@@ -3002,7 +3000,6 @@
       "shapes": [
         {
           "type": "circle",
-          "fill": "none",
           "width": 24,
           "dashed": true
         }

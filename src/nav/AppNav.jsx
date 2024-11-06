@@ -85,8 +85,8 @@ const NavMenu = () => {
   return (
     <>
       <NavLink to="/" exact text={t('nav.home')} icon={<HomeIcon/>}/>
-      {game && <NavLink to={`/games/${game.slug}/map`}
-                        path={`/games/${game.slug}`}
+      {game && <NavLink to={`/games/${game.meta.slug}/map`}
+                        path={`/games/${game.meta.slug}`}
                         text={game.info.title}
                         icon={<GamesIcon/>}/>}
       <NavLink to="/games/" exact text={t('nav.load')} icon={<LoadIcon/>}/>
@@ -130,8 +130,8 @@ const MobileMenu = ({anchor, onClose}) => {
           keepMounted>
       <MenuLink onClick={onClose} to="/" exact text={t('nav.home')} icon={<HomeIcon/>}/>
       {game && <MenuLink onClick={onClose}
-                         to={`/games/${game.slug}/map`}
-                         path={`/games/${game.slug}/`}
+                         to={`/games/${game.meta.slug}/map`}
+                         path={`/games/${game.meta.slug}/`}
                          text={game.info.title}
                          icon={<GamesIcon/>}/>}
       <MenuLink onClick={onClose} to="/games/" exact text={t('nav.load')} icon={<LoadIcon/>}/>
@@ -156,7 +156,7 @@ const MobileButton = ({onClick}) => {
           <Typography noWrap>{t('nav.home')}</Typography>
         </Button>
       </Route>
-      {game && <Route path={`/games/${game.slug}/`}>
+      {game && <Route path={`/games/${game.meta.slug}/`}>
                  <Button color="inherit"
                          startIcon={<GamesIcon/>}
                          endIcon={<MenuIcon/>}

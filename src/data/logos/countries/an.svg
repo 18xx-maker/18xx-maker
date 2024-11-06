@@ -5,16 +5,16 @@
   <g id="star" fill="#fff" transform="scale(1.5)">
     <g id="cone">
       <path id="triangle" d="M0 0v1h.5z" transform="rotate(18 3.157 -.5)"/>
-      <use transform="scale(-1 1)" xlink:href="#triangle"/>
+      <use xlink:href="#triangle" transform="scale(-1 1)"/>
     </g>
-    <use transform="rotate(72)" xlink:href="#cone"/>
-    <use transform="rotate(-72)" xlink:href="#cone"/>
-    <use transform="rotate(144)" xlink:href="#cone"/>
-    <use transform="rotate(-144)" xlink:href="#cone"/>
+    <use xlink:href="#cone" transform="rotate(72)"/>
+    <use xlink:href="#cone" transform="rotate(-72)"/>
+    <use xlink:href="#cone" transform="rotate(144)"/>
+    <use xlink:href="#cone" transform="rotate(-144)"/>
   </g>
   <g id="2stars">
-    <use transform="translate(8 3.314)" xlink:href="#star"/>
-    <use transform="translate(3.314 8)" xlink:href="#star"/>
+    <use xlink:href="#star" transform="translate(8 3.314)"/>
+    <use xlink:href="#star" transform="translate(3.314 8)"/>
   </g>
-  <use transform="scale(-1 1)" xlink:href="#2stars"/>
+  <use xlink:href="#2stars" transform="scale(-1 1)"/>
 </svg>

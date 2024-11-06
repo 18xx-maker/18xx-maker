@@ -12,22 +12,22 @@
     <g id="countries-ck-s1" fill="#fff" transform="translate(0 -102)">
       <g id="countries-ck-c">
         <path id="countries-ck-t" d="M0-22.5V0h12" transform="rotate(18 0 -22.5)"/>
-        <use transform="scale(-1 1)" xlink:href="#countries-ck-t"/>
+        <use xlink:href="#countries-ck-t" transform="scale(-1 1)"/>
       </g>
-      <use transform="rotate(72)" xlink:href="#countries-ck-c"/>
-      <use transform="rotate(144)" xlink:href="#countries-ck-c"/>
-      <use transform="rotate(216)" xlink:href="#countries-ck-c"/>
-      <use transform="rotate(288)" xlink:href="#countries-ck-c"/>
+      <use xlink:href="#countries-ck-c" transform="rotate(72)"/>
+      <use xlink:href="#countries-ck-c" transform="rotate(144)"/>
+      <use xlink:href="#countries-ck-c" transform="rotate(216)"/>
+      <use xlink:href="#countries-ck-c" transform="rotate(288)"/>
     </g>
     <g id="countries-ck-s7">
-      <use transform="rotate(24)" xlink:href="#countries-ck-s1"/>
-      <use transform="rotate(48)" xlink:href="#countries-ck-s1"/>
-      <use transform="rotate(72)" xlink:href="#countries-ck-s1"/>
-      <use transform="rotate(96)" xlink:href="#countries-ck-s1"/>
-      <use transform="rotate(120)" xlink:href="#countries-ck-s1"/>
-      <use transform="rotate(144)" xlink:href="#countries-ck-s1"/>
-      <use transform="rotate(168)" xlink:href="#countries-ck-s1"/>
+      <use xlink:href="#countries-ck-s1" transform="rotate(24)"/>
+      <use xlink:href="#countries-ck-s1" transform="rotate(48)"/>
+      <use xlink:href="#countries-ck-s1" transform="rotate(72)"/>
+      <use xlink:href="#countries-ck-s1" transform="rotate(96)"/>
+      <use xlink:href="#countries-ck-s1" transform="rotate(120)"/>
+      <use xlink:href="#countries-ck-s1" transform="rotate(144)"/>
+      <use xlink:href="#countries-ck-s1" transform="rotate(168)"/>
     </g>
-    <use transform="rotate(168)" xlink:href="#countries-ck-s7"/>
+    <use xlink:href="#countries-ck-s7" transform="rotate(168)"/>
   </g>
 </svg>

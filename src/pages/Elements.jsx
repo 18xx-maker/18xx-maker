@@ -5,8 +5,10 @@ import Atoms from "./elements/Atoms";
 import Logos from "./elements/Logos";
 import Tiles from "./elements/Tiles";
 
-import defaultGame from "../data/games/1889.json";
+import { games } from "../data";
 import GameContext from "../context/GameContext";
+
+const defaultGame = games["1889"];
 
 const Elements = () => {
   return (

@@ -9,9 +9,9 @@ import "../../TileSheet.scss";
 import { getTile, sortTiles } from "../../util";
 import { getTileSheetContext } from "../../tilesheet/util";
 
-import tileDefs from "../../data/tiles";
+import { tiles as tileDefs } from "../../data";
+import { sidesFromTile } from "../../util/track";
 
-import { sidesFromTile } from "../../atoms/Track";
 import Svg from "../../Svg";
 import Page from "../../util/Page";
 import PageSetup from "../../PageSetup";
@@ -113,7 +113,7 @@ const TileSheet = () => {
   const { layout, width: hexWidth, gaps } = config.tiles;
 
   if (!game.tiles) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Redirect to={`/games/${game.meta.slug}/`} />;
   }
 
   let c = getTileSheetContext(layout, paper, hexWidth);

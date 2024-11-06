@@ -6,12 +6,12 @@
   <g fill="#ffce00" transform="translate(18 16.341)">
     <g id="r4">
       <path id="r" d="m0 10 1.553-4.204h-3.106z"/>
-      <use transform="rotate(90)" xlink:href="#r"/>
-      <use transform="rotate(180)" xlink:href="#r"/>
-      <use transform="rotate(270)" xlink:href="#r"/>
+      <use xlink:href="#r" transform="rotate(90)"/>
+      <use xlink:href="#r" transform="rotate(180)"/>
+      <use xlink:href="#r" transform="rotate(270)"/>
     </g>
-    <use transform="rotate(30)" xlink:href="#r4"/>
-    <use transform="rotate(60)" xlink:href="#r4"/>
+    <use xlink:href="#r4" transform="rotate(30)"/>
+    <use xlink:href="#r4" transform="rotate(60)"/>
     <circle stroke="#003580" r="5.5"/>
   </g>
 </svg>

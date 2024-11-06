@@ -9,14 +9,7 @@ import Currency from "../util/Currency";
 import Color from "../util/Color";
 
 import { multiDefaultTo } from "../util";
-
-const splitRevenues = (rows, revenues) => {
-  if(!rows || rows < 2 || revenues.length < 2) {
-    return [revenues];
-  } else {
-    return R.splitEvery(Math.ceil(revenues.length / rows), revenues);
-  }
-};
+import { splitRevenues } from "../util/revenue";
 
 const DEFAULT_FONTSIZE = 14;
 

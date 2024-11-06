@@ -6,7 +6,7 @@
     <mask id="mask-2" fill="#fff">
       <use xlink:href="#path-1"/>
     </mask>
-    <use fill="#C0A000" xlink:href="#path-1"/>
+    <use xlink:href="#path-1" fill="#C0A000"/>
     <path fill="#D86D29" stroke="#979797" d="M-49.5-49.5h599v599h-599z" mask="url(#mask-2)"/>
     <ellipse fill="#900000" stroke="#000" stroke-width="6.75" cx="250.056" cy="254.089" mask="url(#mask-2)" rx="198.672" ry="198.908"/>
     <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="135" font-weight="bold" mask="url(#mask-2)">

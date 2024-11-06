@@ -86,38 +86,36 @@ const LocalLink = (props) => {
   return <Link target="_blank" rel="noreferrer" {...props} />;
 }
 
-const renderers = {
-  heading: Heading,
-  paragraph: (props) => <Typography variant="body1" {...props}/>,
-  listItem: (props) => <li><Typography component="span" children={props.children}/></li>,
-  link: LocalLink,
-  image: ElectronImage
+const components = {
+  h1: (props) => Heading({ level: 1, ...props }),
+  h2: (props) => Heading({ level: 2, ...props }),
+  h3: (props) => Heading({ level: 3, ...props }),
+  h4: (props) => Heading({ level: 4, ...props }),
+  h5: (props) => Heading({ level: 5, ...props }),
+  h6: (props) => Heading({ level: 6, ...props }),
+  p: (props) => <Typography variant="body1" {...props}/>,
+  li: (props) => <li><Typography component="span" children={props.children}/></li>,
+  a: LocalLink,
+  img: ElectronImage
 };
+
+const mds = import.meta.glob('./docs/**/*.md', { eager: true, import: 'default', query: '?raw' });
 
 const Docs = () => {
   const { i18n } = useTranslation();
   const classes = useStyles();
   const location = useLocation();
-  const [source, setSource] = useState(null);
 
   const language = i18n.languages[0];
 
   const pathname = location.pathname.replace(/\/docs\/?/, '');
   const file = isEmpty(pathname) ? "index" : pathname;
-
-  useEffect(() => {
-    import(/* webpackChunkName: "doc.[request]" */"./docs/" + file + "." + language + ".md")
-      .then(x => x.default)
-      .then(fetch)
-      .then(result => result.text())
-      .then(setSource)
-      .catch(err => console.log(file, err))
-  }, [file, language])
+  const source = mds[`./docs/${file}.${language}.md`];
 
   return (
     <Container maxWidth="md">
       <Paper elevation={5} className={classes.page}>
-        <ReactMarkdown source={source} renderers={renderers}/>
+        <ReactMarkdown components={components}>{source}</ReactMarkdown>
       </Paper>
     </Container>
   );

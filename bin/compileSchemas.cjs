@@ -1,10 +1,11 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
-const { assocPath, forEach, forEachObjIndexed, keys } = require("ramda");
+const { assocPath, forEach, forEachObjIndexed, keys } = require('ramda');
 
-const fields = require("../src/schemas/fields.schema.json");
-let tiles = require("../src/schemas/tiles.schema.src.json");
+const fields = require('../src/schemas/fields.schema.json');
+const tilesSrc = require('../src/schemas/tiles.schema.src.json');
+let tiles = { ...tilesSrc };
 
 const elements = {
   "definitions.goods.items.properties": ["text", "svg", "font", "position"],
@@ -33,7 +34,7 @@ const elements = {
 };
 
 forEach((path) => {
-  arrayPath = path.split(".");
+  let arrayPath = path.split(".");
 
   forEach((type) => {
     forEachObjIndexed((field, name) => {

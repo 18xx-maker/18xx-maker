@@ -2,15 +2,10 @@ import React from "react";
 
 import { Link as RouterLink, useHistory } from "react-router-dom";
 
-import games from "../data/games";
-import publishers from "../data/publishers/index.json";
+import { games, publishers } from "../data";
 import { useGame } from "../context/GameContext";
 
-import ascend from "ramda/src/ascend";
-import identity from "ramda/src/identity";
-import keys from "ramda/src/keys";
-import map from "ramda/src/map";
-import sort from "ramda/src/sort";
+import { ascend, identity, keys, map, sort } from "ramda";
 
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
@@ -73,29 +68,28 @@ const LoadGames = () => {
     let linkNode = null;
     let imageNode = null;
 
-    if (game.publisher && publishers[game.publisher]) {
-      let publisher = publishers[game.publisher];
+    if (game.info.publisher && publishers[game.info.publisher]) {
+      let publisher = publishers[game.info.publisher];
 
       if (publisher.link) {
         linkNode = <Link rel="noreferrer"
                          target="_blank"
-                         href={publishers[game.publisher].link}>
-                     {publishers[game.publisher].name}
+                         href={publisher.link}>
+                     {publisher.name}
                    </Link>;
       } else {
         linkNode = publisher.name;
       }
 
-      if (game.publisher !== "self") {
-        let imageUrl = require(`../data/publishers/${game.publisher}.png`).default;
+      if (game.info.publisher !== "self") {
         if (publisher.link) {
           imageNode = <Link rel="noreferrer"
                             target="_blank"
-                            href={publishers[game.publisher].link}>
-                        <img alt={`${publisher.name} Logo`} src={imageUrl} />
+                            href={publisher.link}>
+                        <img alt={`${publisher.name} Logo`} src={publisher.imageUrl} />
                       </Link>;
         } else {
-          imageNode = <img alt={`${publisher.name} Logo`} src={imageUrl} />;
+          imageNode = <img alt={`${publisher.name} Logo`} src={publisher.imageUrl} />;
         }
       }
     }
@@ -116,12 +110,12 @@ const LoadGames = () => {
         <TableCell>
           <Link component={RouterLink}
                 variant="h5"
-                to={`/games/${game.slug}/map`}>
-            {game.title}
+                to={`/games/${game.meta.slug}/map`}>
+            {game.info.title}
           </Link>
-          {game.subtitle && <><br/>{game.subtitle}</>}
+          {game.info.subtitle && <><br/>{game.info.subtitle}</>}
         </TableCell>
-        <TableCell>{game.designer}</TableCell>
+        <TableCell>{game.info.designer}</TableCell>
         {publisherNode}
       </TableRow>
     );
@@ -144,7 +138,7 @@ const LoadGames = () => {
 
     loadGame(getEventFile(event))
       .then(game => {
-        history.push(`/games/${game.slug}/map`);
+        history.push(`/games/${game.meta.slug}/map`);
       });
   };
 

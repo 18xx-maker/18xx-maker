@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-const gtgLogo = require(`../data/publishers/gtg.png`).default;
+import gtgLogo from "../data/publishers/gtg.png";
 
 const useStyles = makeStyles((theme) => ({
   page: {

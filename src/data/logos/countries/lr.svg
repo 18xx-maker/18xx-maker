@@ -5,11 +5,11 @@
   <g transform="matrix(15 0 0 15 25 25)">
     <g id="B">
       <path id="A" fill="#fff" d="M0 0v1h.5z" transform="rotate(18 3.157 -.5)"/>
-      <use transform="scale(-1 1)" xlink:href="#A"/>
+      <use xlink:href="#A" transform="scale(-1 1)"/>
     </g>
-    <use transform="rotate(72)" xlink:href="#B"/>
-    <use transform="rotate(-72)" xlink:href="#B"/>
-    <use transform="rotate(144)" xlink:href="#B"/>
-    <use transform="rotate(-144)" xlink:href="#B"/>
+    <use xlink:href="#B" transform="rotate(72)"/>
+    <use xlink:href="#B" transform="rotate(-72)"/>
+    <use xlink:href="#B" transform="rotate(144)"/>
+    <use xlink:href="#B" transform="rotate(-144)"/>
   </g>
 </svg>

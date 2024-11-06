@@ -5,7 +5,7 @@ import ConfigContext from "../context/ConfigContext";
 import Token from "./Token";
 import MapCompanyToken from "./MapCompanyToken";
 
-import { overrideCompanies, compileCompanies } from "../util";
+import { overrideCompanies, compileCompanies } from "../util/companies.js";
 
 import findIndex from "ramda/src/findIndex";
 import propEq from "ramda/src/propEq";

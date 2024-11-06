@@ -4,7 +4,7 @@ import { GetFont } from "../context/FontContext";
 import Color from "../util/Color";
 import Currency from "../util/Currency";
 
-import { compileCompanies, overrideCompanies } from "../util";
+import { compileCompanies, overrideCompanies } from "../util/companies";
 
 import addIndex from "ramda/src/addIndex";
 import findIndex from "ramda/src/findIndex";

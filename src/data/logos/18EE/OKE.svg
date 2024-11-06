@@ -6,10 +6,10 @@
     <mask id="mask-2" fill="#fff">
       <use xlink:href="#path-1"/>
     </mask>
-    <use fill="#FF0" xlink:href="#path-1"/>
+    <use xlink:href="#path-1" fill="#FF0"/>
     <path fill="#FF0" stroke="#979797" d="M-49.5-49.5h599v599h-599z" mask="url(#mask-2)"/>
     <path fill="#707040" stroke="#000" stroke-width="6.75" d="M96.705 96.544H404.62v307.915H96.705z" mask="url(#mask-2)"/>
-    <path fill="#707040" stroke="#000" stroke-width="6.75" d="m96.546 96.546 307.728.179.18 307.728-307.729-.18-.18-307.727z" mask="url(#mask-2)" transform="rotate(45 250.5 250.5)"/>
+    <path fill="#707040" stroke="#000" stroke-width="6.75" d="m96.546 96.546 307.728.179.18 307.728-307.729-.18z" mask="url(#mask-2)" transform="rotate(45 250.5 250.5)"/>
     <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="157.5" font-weight="bold" mask="url(#mask-2)">
                 <tspan x="79.832" y="305.977">OKE</tspan>
             </text>

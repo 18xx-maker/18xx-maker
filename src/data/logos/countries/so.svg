@@ -3,11 +3,11 @@
   <g transform="matrix(13 0 0 13 40.5 27)">
     <g id="t">
       <path id="w" fill="#FFF" d="M0 0v1h.5z" transform="rotate(18 3.157 -.5)"/>
-      <use transform="scale(-1 1)" xlink:href="#w"/>
+      <use xlink:href="#w" transform="scale(-1 1)"/>
     </g>
-    <use transform="rotate(72)" xlink:href="#t"/>
-    <use transform="rotate(-72)" xlink:href="#t"/>
-    <use transform="rotate(144)" xlink:href="#t"/>
-    <use transform="rotate(-144)" xlink:href="#t"/>
+    <use xlink:href="#t" transform="rotate(72)"/>
+    <use xlink:href="#t" transform="rotate(-72)"/>
+    <use xlink:href="#t" transform="rotate(144)"/>
+    <use xlink:href="#t" transform="rotate(-144)"/>
   </g>
 </svg>

@@ -10,27 +10,16 @@ import Train from "./Train";
 
 import PageSetup from "../PageSetup";
 
-import { compileCompanies, overrideCompanies, fillArray } from "../util";
+import { fillArray } from "../util";
+import { compileCompanies, overrideCompanies } from "../util/companies";
 import { getCardData } from "./util";
 import Svg from "../Svg";
 
-import addIndex from "ramda/src/addIndex";
-import chain from "ramda/src/chain";
-import clone from "ramda/src/clone";
-import compose from "ramda/src/compose";
-import reduce from "ramda/src/reduce";
-import map from "ramda/src/map";
-import max from "ramda/src/max";
-import prop from "ramda/src/prop";
-import range from "ramda/src/range";
-import splitEvery from "ramda/src/splitEvery";
+import { maxPlayers } from "../util.js";
+
+import { addIndex, chain, clone, compose, reduce, map, max, prop, range, splitEvery } from "ramda";
 
 import "./card.scss";
-
-export const maxPlayers = compose(
-  reduce(max, 0),
-  map(prop("number"))
-);
 
 const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
   const { config } = useContext(ConfigContext);
@@ -49,7 +38,7 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
 
   let privateNodes = addIndex(map)(
     (p, i) => (
-      <Private key={`private-${game.id}-${i}`}
+      <Private key={`private-${game.meta.id}-${i}`}
                players={game.players}
                {...p} />
     ),

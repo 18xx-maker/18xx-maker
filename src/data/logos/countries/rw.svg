@@ -5,9 +5,9 @@
   <g transform="translate(886.5 188.1)">
     <g id="h">
       <path id="q" fill="#E5BE01" d="M116.1 0 35.692 4.699l76.452 25.35L33.26 13.777l67.286 44.273L28.56 21.915l53.534 60.18-60.18-53.534 36.135 71.985L13.777 33.26l16.272 78.884-25.35-76.452L0 116.1-1-1z"/>
-      <use transform="scale(1 -1)" xlink:href="#q"/>
+      <use xlink:href="#q" transform="scale(1 -1)"/>
     </g>
-    <use transform="scale(-1 1)" xlink:href="#h"/>
+    <use xlink:href="#h" transform="scale(-1 1)"/>
     <circle fill="#E5BE01" stroke="#00A1DE" stroke-width="3.4" r="34.3"/>
   </g>
 </svg>

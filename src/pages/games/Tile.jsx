@@ -6,7 +6,7 @@ import GameContext from "../../context/GameContext";
 
 import { getTile } from "../../util";
 
-import tileDefs from "../../data/tiles";
+import { tiles as tileDefs } from "../../data";
 
 import Svg from "../../Svg";
 import Hex from "../../Hex";
@@ -20,7 +20,7 @@ const TileSheet = () => {
   const { width: hexWidth } = config.tiles;
 
   if (!game.tiles) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Redirect to={`/games/${game.meta.slug}/`} />;
   }
 
   let tile = getTile(tileDefs, game.tiles, id);

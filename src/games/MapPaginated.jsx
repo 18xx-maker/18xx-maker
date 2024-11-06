@@ -12,14 +12,14 @@ const MapPaginated = ({ game, config, variation }) => {
   const hexWidth = config.tiles.mapWidth;
 
   if (!game.map) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Redirect to={`/games/${game.meta.slug}/`} />;
   }
 
   let data = getMapData(game, coords, hexWidth, variation);
 
   return (
     <Paginate component="Map" {...{data, config, game}}>
-      <Map name={game.id}
+      <Map name={game.meta.id}
            game={game}
            config={config}
            variation={variation} />

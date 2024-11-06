@@ -8,7 +8,8 @@ import CompanyToken from "../../tokens/CompanyToken";
 import Token from "../../tokens/Token";
 import ColorContext from "../../context/ColorContext";
 
-import { compileCompanies, overrideCompanies, unitsToCss } from "../../util";
+import { unitsToCss } from "../../util";
+import { compileCompanies, overrideCompanies } from "../../util/companies";
 
 import addIndex from "ramda/src/addIndex";
 import chain from "ramda/src/chain";
@@ -22,7 +23,7 @@ import Svg from "../../Svg";
 // Takes in a game object, a tokens config object and a paper config object.
 //
 // Returns data that's needed to layout a token sheet.
-export const getTokenData = (game, tokens, paper) => {
+const getTokenData = (game, tokens, paper) => {
   let { marketTokenSize, stationTokenSize, generalTokenSize, bleed } = tokens;
 
   // Extra token counts from config
@@ -210,7 +211,7 @@ const Tokens = () => {
   const { game } = useContext(GameContext);
 
   if (!game.companies && !game.tokens) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Redirect to={`/games/${game.meta.slug}/`} />;
   }
 
   const { overrideCompanies: override, overrideSelect: selection } = config;

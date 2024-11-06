@@ -38,7 +38,7 @@ const B18Map = () => {
   return <MapOrientation>
            <div className="map">
              <Svg preserveAspectRatio="none" width={data.b18TotalWidth + offset} height={data.b18TotalHeight} viewBox={`${-offset} 0 ${data.totalWidth + offset} ${data.totalHeight}`}>
-               <Map name={game.id}
+               <Map name={game.meta.id}
                     game={game}
                     config={assocPath(['tiles', 'mapWidth'], 100, config)}
                     variation={variation} />

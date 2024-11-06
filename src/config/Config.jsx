@@ -20,8 +20,8 @@ import map from "ramda/src/map";
 import path from "ramda/src/path";
 import split from "ramda/src/split";
 
-import mapThemes from "../data/themes/maps";
-import companyThemes from "../data/themes/companies";
+import { binary, flip, pickBy, startsWith } from "ramda";
+import { mapThemes, companyThemes } from "../data";
 
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";

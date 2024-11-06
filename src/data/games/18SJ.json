@@ -209,7 +209,8 @@
   "trains": [
     {
       "name": "2",
-      "quantity": "6+1",
+      "quantity": 7,
+      "quantity_label": "6+1",
       "price": 80,
       "color": "yellow",
       "image": "2T",
@@ -2278,7 +2279,7 @@
             "label": "Ö - V"
           }
         ],
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+120"
           }
@@ -2294,7 +2295,7 @@
             "label": "Ö - K"
           }
         ],
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+100"
           }
@@ -2310,7 +2311,7 @@
             "label": "S - N"
           }
         ],
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+100"
           }
@@ -2326,7 +2327,7 @@
             "label": "B - b"
           }
         ],
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+50"
           }
@@ -2343,7 +2344,7 @@
             "size": 20
           }
         ],
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+80"
           }
@@ -2359,7 +2360,7 @@
             "label": "M - m"
           }
         ],
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+50"
           }
@@ -2376,7 +2377,7 @@
             "size": 20
           }
         ],
-        "routeBonus": [
+        "routeBonuses": [
           {
             "value": "+100"
           }

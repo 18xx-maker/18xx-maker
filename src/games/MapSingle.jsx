@@ -11,7 +11,7 @@ const MapSingle = ({ game, config, variation }) => {
 
   // Do redirects if we need or do not need a variation in the url
   if (!game.map) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Redirect to={`/games/${game.meta.slug}/`} />;
   }
 
   // Get map data
@@ -20,7 +20,7 @@ const MapSingle = ({ game, config, variation }) => {
   return (
     <div className="map">
       <Svg className="printElement" width={`${data.totalWidth / 100}in`} height={`${data.totalHeight / 100}in`} viewBox={`0 0 ${data.totalWidth} ${data.totalHeight}`}>
-        <Map name={game.id}
+        <Map name={game.meta.id}
              game={game}
              config={config}
              variation={variation} />

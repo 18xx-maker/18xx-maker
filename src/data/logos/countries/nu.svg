@@ -15,9 +15,9 @@
       <circle fill="#002868" r="1"/>
       <path id="s" fill="#fcd116" d="m0-513674 301930 929245-790463-574305h977066l-790463 574305" transform="scale(0)"/>
     </g>
-    <use transform="matrix(3 0 0 3 -17.5 .29)" xlink:href="#s"/>
-    <use transform="matrix(3 0 0 3 17.5 .29)" xlink:href="#s"/>
-    <use transform="matrix(3 0 0 3 0 10.29)" xlink:href="#s"/>
-    <use transform="matrix(3 0 0 3 0 -9.71)" xlink:href="#s"/>
+    <use xlink:href="#s" transform="matrix(3 0 0 3 -17.5 .29)"/>
+    <use xlink:href="#s" transform="matrix(3 0 0 3 17.5 .29)"/>
+    <use xlink:href="#s" transform="matrix(3 0 0 3 0 10.29)"/>
+    <use xlink:href="#s" transform="matrix(3 0 0 3 0 -9.71)"/>
   </g>
 </svg>

@@ -4,55 +4,8 @@ import { useOrientation } from "../context/OrientationContext";
 import GameContext from "../context/GameContext";
 import { multiDefaultTo } from "../util";
 
-import chain from "ramda/src/chain";
-import compose from "ramda/src/compose";
-import defaultTo from "ramda/src/defaultTo";
-import propOr from "ramda/src/propOr";
-import sort from "ramda/src/sort";
-import subtract from "ramda/src/subtract";
-import uniq from "ramda/src/uniq";
+import { defaultTo } from "ramda";
 
-const sideMod = side => {
-  return side > 6 ? side - 6 : side;
-};
-
-export const sidesFromTrack = track => {
-  if (!track) {
-    return [];
-  }
-
-  let side = track.side || 1;
-
-  switch(track.type) {
-    case "custom":
-      return propOr([], "sides", track);
-    case "mid":
-      return [];
-    case "sharp":
-      return [side, sideMod(side + 1)];
-    case "gentle":
-      return [side, sideMod(side + 2)];
-    case "straight":
-    case "bent":
-      return [side, sideMod(side + 3)];
-    case "offboard":
-    case "stub":
-    case "stop":
-    case "straightStop":
-    case "gentleStop":
-    case "gentleStopRev":
-    case "sharpStop":
-    case "sharpStopRev":
-    default:
-      return [side];
-  }
-};
-
-export const sidesFromTile = compose(uniq,
-                                     sort(subtract),
-                                     chain(sidesFromTrack),
-                                     propOr([], "track"),
-                                     defaultTo([]));
 
 const startEndDeprecated = (type, replace, end, start) => {
   console.log(`Track type "${type}" is currently deprecated. The same effect can be made with the new "start" and "end" fields on track: {"type": "${replace}"${start ? `, "start": ${start}` : ""}${end ? `, "end": ${end}` : ""}}`);

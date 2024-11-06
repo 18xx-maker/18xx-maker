@@ -1,13 +1,11 @@
 import React from "react";
+import { defaultTo } from "ramda";
+
 import Color from "../util/Color";
 import RotateContext from "../context/RotateContext";
 import CityRotateContext from "../context/CityRotateContext";
-import defaultTo from "ramda/src/defaultTo";
 
-import * as uuid from "uuid";
-
-import logos from "../data/logos";
-import icons from "../data/icons";
+import { icons, logos } from "../data";
 
 const Token = ({
   logo, // The SVG logo to display on this token.
@@ -73,7 +71,7 @@ const Token = ({
   kiteshield, // color of the top and bottom of the kite shield
 
   star5, // color of the 5-pointed star
-  
+
   halves, // Colors for halves shape
   quarters, // Colors for quarters shape
   sexies, // Colors for sexies shape
@@ -116,7 +114,7 @@ const Token = ({
     />);
   }
   // Create a clipping object for this token
-  let clipId = uuid.v4();
+  let clipId = crypto.randomUUID();
   let clip = (
     <clipPath id={clipId}>
       {tokClip}
@@ -174,10 +172,9 @@ const Token = ({
         if(inverse && logo && logos[logo]) {
           // Draw inversed logos same as reserved
           color = "gray";
-          let svg = logos[logo];
+          let Component = logos[logo];
           let size = defaultTo(width * 2, logoWidth * scaling);
           let start = -1/2 * size;
-          let Component = svg.Component;
           if (logo.includes("countries")) {
             shapes.push(
               <Component key="logo" className={`color-main-${color} color-reserved`}
@@ -201,10 +198,9 @@ const Token = ({
           textFill = c(inverseLabelColor == null ? color : inverseLabelColor);
 
         } else if (logo && logos[logo]) {
-          let svg = logos[logo];
+          let Component = logos[logo];
           let size = defaultTo(width * 2, logoWidth * scaling);
           let start = -1/2 * size;
-          let Component = svg.Component;
           if (logo.includes("countries")) {
             shapes.push(
               <Component key="logo" className={`color-main-${color}${reserved ? " color-reserved" : ""}`}
@@ -537,7 +533,7 @@ const Token = ({
                   d="M58.5,132.9c0.7-29.8,3.1-47.9,3.1-47.9s177.8-17,244.3-72.8c66.5,55.7,244.4,72.1,244.4,72.1 s2.5,18.4,3.1,48.5"/>
               </g>
               <g>
-                <path 
+                <path
                   fill="none"
                   stroke="black"
                   strokeWidth="10"
@@ -588,8 +584,7 @@ const Token = ({
 
         let content = [];
         if (icon) {
-          let iconSvg = icons[icon];
-          let Component = iconSvg.Component;
+          let Component = icons[icon];
 
           let classes = [];
           if (iconColor) {

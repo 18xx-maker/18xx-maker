@@ -35,10 +35,7 @@ jobs:
         path: '**/node_modules'
         key: ${{ matrix.os }}-${{ matrix.node_version }}-modules-${{ hashFiles('**/yarn.lock') }}
     - run: yarn
-    - run: yarn generate
-    - run: yarn validate
-      continue-on-error: true
-    - run: yarn react:test
+    - run: yarn test
   build:
     needs: test
     runs-on: macos-latest
@@ -55,5 +52,4 @@ jobs:
         path: '**/node_modules'
         key: macos-latest-22-modules-${{ hashFiles('**/yarn.lock') }}
     - run: yarn
-    - run: yarn generate
-    - run: yarn react:build
+    - run: yarn build

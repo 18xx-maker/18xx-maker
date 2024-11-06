@@ -1,14 +1,10 @@
-const yellow = require("./yellow");
-const green = require("./green");
-const brown = require("./brown");
-const gray = require("./gray");
-const other = require("./other");
+import yellow from "./yellow";
+import green from "./green";
+import brown from "./brown";
+import gray from "./gray";
+import other from "./other";
 
-const assoc = require("ramda/src/assoc");
-const clone = require("ramda/src/clone");
-const mapObjIndexed = require("ramda/src/mapObjIndexed");
-const forEach = require("ramda/src/forEach");
-const forEachObjIndexed = require("ramda/src/forEachObjIndexed");
+import { assoc, clone, mapObjIndexed, forEach, forEachObjIndexed } from "ramda";
 
 let aliases = {};
 const gatherAliases = (tiles) => {

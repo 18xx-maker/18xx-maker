@@ -3,7 +3,6 @@ import ConfigContext from "../context/ConfigContext";
 import GameContext from "../context/GameContext";
 import { multiDefaultTo } from "../util";
 import Color from "../util/Color";
-import iconSvgs from "../data/icons";
 
 import Name from "./Name";
 
@@ -13,6 +12,8 @@ import GameMapCompanyToken from "../tokens/GameMapCompanyToken";
 
 import ColorContext from "../context/ColorContext";
 import CityRotateContext from "../context/CityRotateContext";
+
+import { icons as iconComponents } from "../data";
 
 const cityPaths = {
   cityPath: "M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30",
@@ -47,8 +48,7 @@ const City = ({ size, outlineColor, color, companies, icons, border, borderWidth
 
   let icon = num => {
     if (icons && icons[num]) {
-      let iconSvg = iconSvgs[icons[num]];
-      let Component = iconSvg.Component;
+      let Component = iconComponents[icons[num]];
       return (
           <CityRotateContext.Provider value={rotation}>
           <g transform="scale(1.4)">

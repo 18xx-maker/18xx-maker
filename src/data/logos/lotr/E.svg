@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2in" height="2in" viewBox="0 0 192 192" xml:space="preserve">
-  <g stroke-miterlimit="10" transform="translate(7.045 7.045) scale(4.18416)">
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2in" height="2in" viewBox="0 0 192 192">
+  <g stroke-miterlimit="10" transform="translate(7.045 7.045)scale(4.18416)">
     <circle class="color-pink color-main color-stroke-pink color-stroke-main" fill="#e8358c" stroke="#e8358c" stroke-width=".533" cx="21.26" cy="21.26" r="22.677"/>
     <g class="color-stroke-white" fill="none" stroke="#fff">
       <circle stroke-width=".45" cx="21.26" cy="21.985" r="12.754"/>
-      <path stroke-width=".45" d="M21.249 33.373c-6.33 0-11.479-5.149-11.479-11.479 0-6.33 5.149-11.479 11.479-11.479 6.33 0 11.479 5.149 11.479 11.479 0 6.33-5.15 11.479-11.479 11.479z"/>
+      <path stroke-width=".45" d="M21.249 33.373c-6.33 0-11.479-5.149-11.479-11.479s5.149-11.479 11.479-11.479 11.479 5.149 11.479 11.479-5.15 11.479-11.479 11.479z"/>
       <path stroke-width=".75" d="M21.26 5.781 7.087 30.33h28.346z"/>
       <g stroke-width=".25">
         <circle cx="21.26" cy="28.697" r="3.826"/>

@@ -5,6 +5,6 @@
     <text fill="#FFF" font-family="Arial-BoldMT, Arial" font-size="165" font-weight="bold">
                     <tspan x="46.5" y="281.218">BHB</tspan>
                 </text>
-    <path fill="#FFF" stroke="#FFF" stroke-width="1.25" d="M224.764 438.799 34.654 328.893h380.22l-190.11 109.906z"/>
+    <path fill="#FFF" stroke="#FFF" stroke-width="1.25" d="M224.764 438.799 34.654 328.893h380.22z"/>
   </g>
 </svg>

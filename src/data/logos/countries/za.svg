@@ -10,8 +10,8 @@
     <path fill="#de3831" d="M0 0v3h9V0z"/>
     <g stroke="#fff" stroke-width="2">
       <path id="W" d="m0 0 4.5 3L0 6m4.5-3H9"/>
-      <use stroke="#ffb612" clip-path="url(#Z)" xlink:href="#X"/>
+      <use xlink:href="#X" stroke="#ffb612" clip-path="url(#Z)"/>
     </g>
-    <use fill="none" stroke="#007a4d" stroke-width="1.2" xlink:href="#W"/>
+    <use xlink:href="#W" fill="none" stroke="#007a4d" stroke-width="1.2"/>
   </g>
 </svg>

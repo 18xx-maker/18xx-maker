@@ -1,7 +1,8 @@
 import React from "react";
 import Color from "../util/Color";
-import icons from "../data/icons";
 import defaultTo from "ramda/src/defaultTo";
+
+import { icons } from "../data";
 
 const Icon = ({ type, color, width, noCircle, fillColor, strokeColor, strokeWidth }) => {
   let icon;
@@ -13,8 +14,7 @@ const Icon = ({ type, color, width, noCircle, fillColor, strokeColor, strokeWidt
   strokeWidth = defaultTo("2", strokeWidth);
 
   if (icons[type]) {
-    let iconSvg = icons[type];
-    let Component = iconSvg.Component;
+    let Component = icons[type];
     icon = <Component className={`icon-color-main-${color}`}
                       width={iconWidth} height={iconWidth}
                       x={iconPos} y={iconPos} />;

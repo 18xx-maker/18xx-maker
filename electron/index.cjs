@@ -8,7 +8,7 @@ const isDev = require("electron-is-dev");
 const chokidar = require("chokidar");
 const Promise = require("bluebird");
 
-const setMenu = require("./menu");
+const setMenu = require("./menu.cjs");
 
 let mainWindow;
 

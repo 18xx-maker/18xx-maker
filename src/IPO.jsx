@@ -7,7 +7,8 @@ import GameCompanyToken from "./tokens/GameCompanyToken";
 import Svg from "./Svg";
 import PageSetup from "./PageSetup";
 
-import { compileCompanies, unitsToCss } from "./util";
+import { unitsToCss } from "./util";
+import { compileCompanies } from "./util/companies";
 
 import filter from "ramda/src/filter";
 import is from "ramda/src/is";

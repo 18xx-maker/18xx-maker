@@ -9,7 +9,7 @@ import { unitsToCss } from "../util";
 
 const ParSingle = ({ config, game }) => {
   if (!game.stock || !game.stock.par || !game.stock.par.values) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Redirect to={`/games/${game.meta.slug}/`} />;
   }
   let data = getParData(game.stock, config);
 

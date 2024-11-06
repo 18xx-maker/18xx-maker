@@ -6,18 +6,18 @@
   <path d="M-120-80h240v48h-240z"/>
   <path fill="#060" d="M-120 32h240v48h-240z"/>
   <g id="spear">
-    <use stroke="#000" xlink:href="#spearshape"/>
-    <use fill="#fff" xlink:href="#spearshape"/>
+    <use xlink:href="#spearshape" stroke="#000"/>
+    <use xlink:href="#spearshape" fill="#fff"/>
   </g>
-  <use transform="scale(-1 1)" xlink:href="#spear"/>
+  <use xlink:href="#spear" transform="scale(-1 1)"/>
   <path fill="#b00" d="M-120-24v48h101c3 8 13 24 19 24s16-16 19-24h101v-48H19C16-32 6-48 0-48s-16 16-19 24z"/>
   <path id="deco_r" d="M19 24c3-8 5-16 5-24s-2-16-5-24c-3 8-5 16-5 24s2 16 5 24"/>
-  <use transform="scale(-1 1)" xlink:href="#deco_r"/>
+  <use xlink:href="#deco_r" transform="scale(-1 1)"/>
   <g fill="#fff">
     <ellipse rx="4" ry="6"/>
     <path id="deco_br" d="M1 5.85s4 8 4 21-4 21-4 21z"/>
-    <use transform="scale(-1)" xlink:href="#deco_br"/>
-    <use transform="scale(-1 1)" xlink:href="#deco_br"/>
-    <use transform="scale(1 -1)" xlink:href="#deco_br"/>
+    <use xlink:href="#deco_br" transform="scale(-1)"/>
+    <use xlink:href="#deco_br" transform="scale(-1 1)"/>
+    <use xlink:href="#deco_br" transform="scale(1 -1)"/>
   </g>
 </svg>

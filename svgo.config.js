@@ -1,57 +1,51 @@
-const { extendDefaultPlugins } = require("svgo");
-module.exports = {
+export default {
   full: false,
   multipass: true,
   recursive: true,
   precision: 6,
   js2svg: {
     pretty: true,
-    indent: 2,
+    indent: 2
   },
-  plugins: extendDefaultPlugins([
+  plugins: [
     {
-      name: "removeViewBox",
-      active: false,
-    },
-    {
-      name: "cleanupIDs",
+      name: 'preset-default',
       params: {
-        minify: false,
-      },
-    },
-    {
-      name: "sortAttrs",
-      params: {
-        order: [
-          "id",
-          "class",
-          "fill",
-          "stroke",
-          "stroke-width",
-          "style",
-          "width",
-          "height",
-          "x",
-          "x1",
-          "x2",
-          "y",
-          "y1",
-          "y2",
-          "cx",
-          "cy",
-          "r",
-          "market",
-          "d",
-          "points",
-        ],
-      },
-    },
-    {
-      name: "inlineStyles",
-      params: {
-        onlyMatchedOnce: false,
-        removeMatchedSelectors: true,
-      },
-    },
-  ]),
+        overrides: {
+          removeViewBox: false,
+          cleanupIds: {
+            minify: false
+          },
+          inlineStyles: {
+            onlyMatchedOnce: false,
+            removeMatchedSelectors: true
+          },
+          sortAttrs: {
+            order: [
+              "id",
+              "class",
+              "fill",
+              "stroke",
+              "stroke-width",
+              "style",
+              "width",
+              "height",
+              "x",
+              "x1",
+              "x2",
+              "y",
+              "y1",
+              "y2",
+              "cx",
+              "cy",
+              "r",
+              "market",
+              "d",
+              "points",
+            ]
+          }
+        }
+      }
+    }
+  ]
 };

@@ -123,7 +123,7 @@ const Phase = ({ phases, trains, minor, company }) => {
       let prices = R.map(t => <li key={t.name}>{formatCell(t.price)}</li>, phaseTrains);
 
       // Quantities for each train
-      let quantities = R.map(t => <li key={t.name}>{t.quantity}</li>, phaseTrains);
+      let quantities = R.map(t => <li key={t.name}>{t.quantity_label || t.quantity}</li>, phaseTrains);
 
       // Get all trains that rust on this phase
       let rustingTrains = R.filter(matchEvent(phaseTrains, "rust"), trains || []);
@@ -148,10 +148,12 @@ const Phase = ({ phases, trains, minor, company }) => {
       // Which trains rust during this phase
       let phased = R.map(t => <li key={t.name}>{t.name}</li>, phasedTrains);
 
+      let key = phase.name || phase.train;
+
       return (
-        <Color key={phase.name}>
+        <Color key={key}>
           {c => (
-            <tr key={phase.name}>
+            <tr>
               {includeName && <td>{phase.name}</td>}
               {includePhase && <td>{phase.phase}</td>}
               {includeTrain && <td className="phase__list" style={{ backgroundColor: (phaseTrains.length > 0 && phaseTrains[0].color ? c(phaseTrains[0].color) : c('white'))}}><ul>{trainNodes}</ul></td>}

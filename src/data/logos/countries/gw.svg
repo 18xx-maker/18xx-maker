@@ -4,10 +4,10 @@
   <path fill="#009e49" d="M2 0h8v3H2z"/>
   <g id="c">
     <path id="t" fill="#000" d="M0-1v1h.5" transform="rotate(18 0 -1)"/>
-    <use transform="scale(-1 1)" xlink:href="#t"/>
+    <use xlink:href="#t" transform="scale(-1 1)"/>
   </g>
-  <use transform="rotate(72)" xlink:href="#c"/>
-  <use transform="rotate(144)" xlink:href="#c"/>
-  <use transform="rotate(216)" xlink:href="#c"/>
-  <use transform="rotate(288)" xlink:href="#c"/>
+  <use xlink:href="#c" transform="rotate(72)"/>
+  <use xlink:href="#c" transform="rotate(144)"/>
+  <use xlink:href="#c" transform="rotate(216)"/>
+  <use xlink:href="#c" transform="rotate(288)"/>
 </svg>

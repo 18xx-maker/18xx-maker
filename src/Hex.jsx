@@ -1,6 +1,5 @@
 import React from "react";
 import * as R from "ramda";
-import hash from "object-hash";
 
 import Position from "./Position";
 
@@ -42,12 +41,12 @@ import Token from "./tokens/Token";
 const concat = R.unapply(R.reduce(R.concat, []));
 
 const makeTrack = track => (
-  <Position key={`track-${hash(track)}`} data={track}>
+  <Position key={`track-${track.id}`} data={track}>
     {t => <Track {...t} />}
   </Position>
 );
 const makeBorder = track => (
-  <Position key={`track-border-${hash(track)}`} data={track}>
+  <Position key={`track-border-${track.id}`} data={track}>
     {t => <Track {...t} border={true} />}
   </Position>
 );
@@ -97,8 +96,8 @@ const HexTile = ({ hex, id, mask, border, transparent, map, opacity }) => {
   ]);
 
   let allTracks = [
-    ...R.map(obt => ({ ...obt, bgColor: `${hex.color}` }), hex.track || []),
-    ...R.map(obt => ({ ...obt, bgColor: `${hex.color}`, type: "offboard" }), hex.offBoardTrack || [])
+    ...R.addIndex(R.map)((obt, id) => ({ ...obt, id, bgColor: `${hex.color}` }), hex.track || []),
+    ...R.addIndex(R.map)((obt, id) => ({ ...obt, id, bgColor: `${hex.color}`, type: "offboard" }), hex.offBoardTrack || [])
   ];
   let tracks = getTracks(allTracks);
 

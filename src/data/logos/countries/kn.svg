@@ -6,12 +6,12 @@
   <g id="star" fill="#fff" transform="rotate(-33.69 514.716 -777.095)">
     <g id="c">
       <path id="t" d="M0-70V0h35" transform="rotate(18 0 -70)"/>
-      <use transform="scale(-1 1)" xlink:href="#t"/>
+      <use xlink:href="#t" transform="scale(-1 1)"/>
     </g>
-    <use transform="rotate(72)" xlink:href="#c"/>
-    <use transform="rotate(144)" xlink:href="#c"/>
-    <use transform="rotate(216)" xlink:href="#c"/>
-    <use transform="rotate(288)" xlink:href="#c"/>
+    <use xlink:href="#c" transform="rotate(72)"/>
+    <use xlink:href="#c" transform="rotate(144)"/>
+    <use xlink:href="#c" transform="rotate(216)"/>
+    <use xlink:href="#c" transform="rotate(288)"/>
   </g>
-  <use transform="translate(-285 190)" xlink:href="#star"/>
+  <use xlink:href="#star" transform="translate(-285 190)"/>
 </svg>

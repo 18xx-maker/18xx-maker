@@ -2,15 +2,7 @@ import React, { Suspense } from "react";
 
 import { useTranslation } from "react-i18next";
 
-import logos from "../../data/logos";
-
-import ascend from "ramda/src/ascend";
-import groupBy from "ramda/src/groupBy";
-import keys from "ramda/src/keys";
-import map from "ramda/src/map";
-import prop from "ramda/src/prop";
-import sort from "ramda/src/sort";
-import values from "ramda/src/values";
+import { ascend, compose, groupBy, keys, map, nth, prop, sort, split, values } from "ramda";
 
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -18,6 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import { makeStyles } from '@material-ui/core/styles';
+
+import { logos } from "../../data";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -31,26 +25,27 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const groupFor = compose(nth(0), split("/"));
+const nameFor = compose(nth(1), split("/"));
+const groups = groupBy(groupFor, keys(logos));
+
 const Logos = () => {
   const { t } = useTranslation();
   const classes = useStyles();
-
-  const groups = groupBy(prop('group'), values(logos));
 
   const groupNodes = map(group => {
     const groupLogos = groups[group];
 
     const logoNodes = map(logo => {
-      let Component = logo.Component;
+      let name = nameFor(logo);
+      let Component = logos[logo];
       return (
-        <Grid key={`logo-${logo.group}-${logo.name}`} item
+        <Grid key={`logo-${group}-${name}`} item
               xs={6} sm={4} lg={2}
               style={{overflow: 'hidden'}}>
-          <Suspense fallback={null}>
-            <Component width="100%" height="100px"/>
-          </Suspense>
+          <Component width="100%" height="100px"/>
           <Typography variant="subtitle1" align="center">
-            {`${logo.group === undefined ? "" : `${logo.group}/`}${logo.name}`}
+            {logo}
           </Typography>
         </Grid>
       )

@@ -3,7 +3,8 @@ import ConfigContext from "../../context/ConfigContext";
 import GameContext from "../../context/GameContext";
 
 import { Redirect, useParams } from "react-router-dom";
-import { getCharterData, compileCompanies, overrideCompanies } from "../../util";
+import { getCharterData } from "../../util";
+import { compileCompanies, overrideCompanies } from "../../util/companies.js";
 import Charter from "../../Charter";
 
 import PageSetup from "../../PageSetup";
@@ -18,7 +19,7 @@ const Charters = () => {
   const { index } = useParams();
 
   if (!game.companies) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Redirect to={`/games/${game.meta.slug}/`} />;
   }
 
   let gameCompanies = overrideCompanies(compileCompanies(game), override, selection);

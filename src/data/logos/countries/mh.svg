@@ -6,13 +6,13 @@
     <g id="r6">
       <path d="M0-93 5.59 0H-5.59z"/>
       <path id="r1" d="M0-66.588 6.824 0H-6.824z" transform="rotate(15)"/>
-      <use transform="rotate(15)" xlink:href="#r1"/>
-      <use transform="rotate(30)" xlink:href="#r1"/>
-      <use transform="rotate(45)" xlink:href="#r1"/>
-      <use transform="rotate(60)" xlink:href="#r1"/>
+      <use xlink:href="#r1" transform="rotate(15)"/>
+      <use xlink:href="#r1" transform="rotate(30)"/>
+      <use xlink:href="#r1" transform="rotate(45)"/>
+      <use xlink:href="#r1" transform="rotate(60)"/>
     </g>
-    <use transform="rotate(90)" xlink:href="#r6"/>
-    <use transform="rotate(180)" xlink:href="#r6"/>
-    <use transform="rotate(270)" xlink:href="#r6"/>
+    <use xlink:href="#r6" transform="rotate(90)"/>
+    <use xlink:href="#r6" transform="rotate(180)"/>
+    <use xlink:href="#r6" transform="rotate(270)"/>
   </g>
 </svg>

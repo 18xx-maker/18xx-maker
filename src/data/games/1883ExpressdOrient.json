@@ -141,10 +141,10 @@
       "shapes": [
         {
           "type": "diamond",
-          "cost": "40",
+          "text": "40",
           "angle": 140,
           "percent": 0.7,
-          "fillColor": "water",
+          "color": "water",
           "textColor": "white",
           "fontSize": 16,
           "fontWeight": "normal"
@@ -188,10 +188,10 @@
       "shapes": [
         {
           "type": "diamond",
-          "cost": "40",
+          "text": "40",
           "angle": -150,
           "percent": 0.7,
-          "fillColor": "water",
+          "color": "water",
           "textColor": "white",
           "fontSize": 16,
           "fontWeight": "normal"
@@ -235,10 +235,10 @@
       "shapes": [
         {
           "type": "diamond",
-          "cost": "40",
+          "text": "40",
           "angle": -148,
           "percent": 0.8,
-          "fillColor": "water",
+          "color": "water",
           "textColor": "white",
           "fontSize": 16,
           "fontWeight": "normal"
@@ -282,8 +282,8 @@
       "shapes": [
         {
           "type": "diamond",
-          "cost": "40",
-          "fillColor": "water",
+          "text": "40",
+          "color": "water",
           "textColor": "white",
           "fontSize": 16,
           "fontWeight": "normal",
@@ -329,10 +329,10 @@
       "shapes": [
         {
           "type": "diamond",
-          "cost": "40",
+          "text": "40",
           "angle": -155,
           "percent": 0.7,
-          "fillColor": "water",
+          "color": "water",
           "textColor": "white",
           "fontSize": 16,
           "fontWeight": "normal"

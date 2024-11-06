@@ -10,7 +10,7 @@ import Market from "./Market";
 
 const MarketSingle = ({ config, game }) => {
   if (!game.stock || !game.stock.market) {
-    return <Redirect to={`/games/${game.slug}/`} />;
+    return <Redirect to={`/games/${game.meta.slug}/`} />;
   }
 
   let data = getMarketData(game.stock, config);

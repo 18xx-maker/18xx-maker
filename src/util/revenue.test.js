@@ -1,4 +1,4 @@
-import { splitRevenues } from "./OffBoardRevenue";
+import { splitRevenues } from "./revenue";
 
 describe("splitRevenues", () => {
   it("Should not split if rows < 2", () => {

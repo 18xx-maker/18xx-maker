@@ -4,11 +4,11 @@
   <g fill="#fcd116" transform="translate(450 300)">
     <g id="countries-bf-c">
       <path id="countries-bf-t" d="M0-100V0h50" transform="rotate(18 0 -100)"/>
-      <use transform="scale(-1 1)" xlink:href="#countries-bf-t"/>
+      <use xlink:href="#countries-bf-t" transform="scale(-1 1)"/>
     </g>
-    <use transform="rotate(72)" xlink:href="#countries-bf-c"/>
-    <use transform="rotate(144)" xlink:href="#countries-bf-c"/>
-    <use transform="rotate(216)" xlink:href="#countries-bf-c"/>
-    <use transform="rotate(288)" xlink:href="#countries-bf-c"/>
+    <use xlink:href="#countries-bf-c" transform="rotate(72)"/>
+    <use xlink:href="#countries-bf-c" transform="rotate(144)"/>
+    <use xlink:href="#countries-bf-c" transform="rotate(216)"/>
+    <use xlink:href="#countries-bf-c" transform="rotate(288)"/>
   </g>
 </svg>

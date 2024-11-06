@@ -3,11 +3,11 @@
   <path fill="#CE1126" d="M0 0h500v225H0z"/>
   <path fill="#FFF" d="M0 0h500v150H0z"/>
   <path fill="#FFC61E" d="M0 0h500v75H0z"/>
-  <path fill="#3D8E33" d="m0 300 250-150L0 0v300z"/>
+  <path fill="#3D8E33" d="m0 300 250-150L0 0z"/>
   <circle fill="#FFF" cx="85" cy="150" r="67.5"/>
   <circle fill="#3D8E33" cx="115" cy="150" r="67.5"/>
-  <path id="star" fill="#FFF" d="m100.01 89.2 7.36 22.588-19.258-13.949h23.776L92.63 111.788l7.38-22.588z"/>
-  <use y="32.208" xlink:href="#star"/>
-  <use y="64.417" xlink:href="#star"/>
-  <use y="96.625" xlink:href="#star"/>
+  <path id="star" fill="#FFF" d="m100.01 89.2 7.36 22.588-19.258-13.949h23.776L92.63 111.788z"/>
+  <use xlink:href="#star" y="32.208"/>
+  <use xlink:href="#star" y="64.417"/>
+  <use xlink:href="#star" y="96.625"/>
 </svg>

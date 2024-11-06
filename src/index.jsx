@@ -2,7 +2,6 @@ import React from "react";
 import { render } from "react-dom";
 import "./fonts.css";
 import "./index.css";
-import { unregister } from "./registerServiceWorker";
 
 import './i18n';
 import { BrowserRouter, HashRouter } from "react-router-dom";
@@ -18,5 +17,3 @@ render(<Router>
          <App />
        </Router>,
        document.getElementById("root"));
-
-unregister();

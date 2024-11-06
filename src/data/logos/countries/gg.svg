@@ -2,7 +2,7 @@
   <path fill="#fff" d="M-18-12h36v24h-36z"/>
   <path fill="none" stroke="#e8112d" stroke-width="6" d="M0-12v24M-18 0h36"/>
   <path id="arm" fill="#f9dd16" d="m-9 2 1-1h9v-2h-9l-1-1z"/>
-  <use transform="rotate(90)" xlink:href="#arm"/>
-  <use transform="rotate(-90)" xlink:href="#arm"/>
-  <use transform="rotate(180)" xlink:href="#arm"/>
+  <use xlink:href="#arm" transform="rotate(90)"/>
+  <use xlink:href="#arm" transform="rotate(-90)"/>
+  <use xlink:href="#arm" transform="rotate(180)"/>
 </svg>

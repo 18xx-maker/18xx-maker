@@ -1,32 +1,9 @@
-import overrides from "./data/companies";
+import { addIndex, adjust, ascend, chain, compose, curry, defaultTo, find, fromPairs, head, is, join, juxt, lte, map, max, mergeAll, nth, pick, prop, propOr, reduce, reverse, sortWith, split, tail, toPairs, toUpper } from "ramda";
 
-import addIndex from "ramda/src/addIndex";
-import adjust from "ramda/src/adjust";
-import ascend from "ramda/src/ascend";
-import chain from "ramda/src/chain";
-import compose from "ramda/src/compose";
-import curry from "ramda/src/curry";
-import defaultTo from "ramda/src/defaultTo";
-import find from "ramda/src/find";
-import fromPairs from "ramda/src/fromPairs";
-import head from "ramda/src/head";
-import is from "ramda/src/is";
-import join from "ramda/src/join";
-import juxt from "ramda/src/juxt";
-import lte from "ramda/src/lte";
-import map from "ramda/src/map";
-import merge from "ramda/src/merge";
-import mergeAll from "ramda/src/mergeAll";
-import nth from "ramda/src/nth";
-import pick from "ramda/src/pick";
-import prop from "ramda/src/prop";
-import propOr from "ramda/src/propOr";
-import reverse from "ramda/src/reverse";
-import sortWith from "ramda/src/sortWith";
-import split from "ramda/src/split";
-import tail from "ramda/src/tail";
-import toPairs from "ramda/src/toPairs";
-import toUpper from "ramda/src/toUpper";
+export const maxPlayers = compose(
+  reduce(max, 0),
+  map(prop("number"))
+);
 
 export const isElectron =
   typeof navigator === "undefined"
@@ -173,81 +150,6 @@ export const getTile = curry((tileDefs, tiles, id) => {
     quantity,
   };
 });
-
-export const compileCompanies = (game) => {
-  return map((company) => {
-    if (
-      company.minor &&
-      !company.tokens &&
-      game.tokenTypes &&
-      game.tokenTypes["minor"]
-    ) {
-      company.tokenType = "minor";
-      company.tokens = game.tokenTypes["minor"];
-    } else if (
-      !company.tokens &&
-      game.tokenTypes &&
-      game.tokenTypes["default"]
-    ) {
-      company.tokenType = "default";
-      company.tokens = game.tokenTypes["default"];
-    } else if (is(String, company.tokens)) {
-      company.tokenType = company.tokens;
-      company.tokens = game.tokenTypes[company.tokens];
-    }
-
-    if (
-      company.minor &&
-      !company.shares &&
-      game.shareTypes &&
-      game.shareTypes["minor"]
-    ) {
-      company.shareType = "minor";
-      company.shares = game.shareTypes["minor"];
-    } else if (
-      !company.shares &&
-      game.shareTypes &&
-      game.shareTypes["default"]
-    ) {
-      company.shareType = "default";
-      company.shares = game.shareTypes["default"];
-    } else if (is(String, company.shares)) {
-      company.shareType = company.shares;
-      company.shares = game.shareTypes[company.shares];
-    }
-
-    return company;
-  }, (game && game.companies) || []);
-};
-
-export const overrideCompanies = (companies, override, selections) => {
-  if (override === "none" || !overrides[override]) {
-    return companies;
-  }
-
-  let overrideCompanies = overrides[override].companies;
-
-  return addIndex(map)((company, index) => {
-    // If we have selections, filter/select our overrides with them
-    if ((selections || []).length > 0) {
-      overrideCompanies = map(
-        (index) => prop(index, overrideCompanies),
-        selections
-      );
-    }
-
-    // If we have a valid override for the index, merge!
-    if (overrideCompanies[index]) {
-      company = merge(company, overrideCompanies[index]);
-
-      // Remove some fields if they don't exist on the override company
-      company.logo = overrideCompanies[index].logo;
-      company.token = overrideCompanies[index].token;
-    }
-
-    return company;
-  }, companies || []);
-};
 
 export const getFontProps = (props, size, weight, family, style) => {
   return mergeAll([

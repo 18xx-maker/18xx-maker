@@ -1799,8 +1799,8 @@
           "type": "circle",
           "background": true,
           "color": "spacePortTile",
-          "outlineColor": "black",
-          "outlineWidth": 2,
+          "borderColor": "black",
+          "borderWidth": 2,
           "width": 100
         }
       ],
@@ -2001,8 +2001,8 @@
             "type": "circle",
             "background": true,
             "color": "spacePort",
-            "outlineColor": "spacePortOutline",
-            "outlineWidth": 2,
+            "borderColor": "spacePortOutline",
+            "borderWidth": 2,
             "width": 50
           }
         ],

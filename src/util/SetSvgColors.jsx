@@ -4,13 +4,12 @@ import ConfigContext from "../context/ConfigContext";
 import ColorContext from "../context/ColorContext";
 import Color from "./Color";
 
-import chain from "ramda/src/chain";
-import concat from "ramda/src/concat";
-import join from "ramda/src/join";
-import keys from "ramda/src/keys";
+import { chain, concat, join, keys } from "ramda";
 
-const colors = keys(require("../data/themes/companies/rob.json").colors);
-const mapColors = keys(require("../data/themes/maps/gmt.json").colors);
+import { themes } from "../data";
+
+const colors = keys(themes["companies/rob"].colors);
+const mapColors = keys(themes["maps/gmt"].colors);
 
 const SetSvgColors = () => {
   const { config } = useContext(ConfigContext);

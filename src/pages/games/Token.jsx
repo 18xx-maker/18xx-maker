@@ -8,7 +8,7 @@ import Token from "../../tokens/Token";
 import GameContext from "../../context/GameContext";
 import ConfigContext from "../../context/ConfigContext";
 
-import { compileCompanies, overrideCompanies } from "../../util";
+import { compileCompanies, overrideCompanies } from "../../util/companies.js";
 
 import addIndex from "ramda/src/addIndex";
 import concat from "ramda/src/concat";
