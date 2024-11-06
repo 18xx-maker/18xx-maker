@@ -1,5 +1,5 @@
-import React from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
+
 import "./fonts.css";
 import "./index.css";
 
@@ -13,7 +13,6 @@ import { isElectron } from "./util";
 // since it's based on files
 const Router = isElectron ? HashRouter : BrowserRouter;
 
-render(<Router>
-         <App />
-       </Router>,
-       document.getElementById("root"));
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(<Router><App /></Router>);
