@@ -1,6 +1,6 @@
 .PHONY: all clean
 
-schemas := config fields game theme tiles
+schemas := config game theme tiles
 
 all: $(patsubst %,public/schemas/%.schema.json,$(schemas))
 
