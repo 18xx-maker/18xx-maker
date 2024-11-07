@@ -17,7 +17,6 @@
     "b18": "node ./bin/b18.js",
     "build": "vite build",
     "build:electron": "cross-env PUBLIC_URL=. yarn build",
-    "clean": "node ./bin/clean.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "package": "electron-builder build -mwl -p onTagOrDraft",
