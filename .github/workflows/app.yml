@@ -1,7 +1,7 @@
 on:
   push:
     tags:
-      - '*'
+      - "*"
 jobs:
   app:
     runs-on: ${{ matrix.os }}
@@ -13,45 +13,45 @@ jobs:
           - 22
     name: Build app on ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node_version }}
-        cache: 'yarn'
-    - uses: actions/cache@v4
-      with:
-        path: '**/node_modules'
-        key: ${{ matrix.os }}-${{ matrix.node_version }}-modules-${{ hashFiles('**/yarn.lock') }}
-    - run: |
-        echo $APP_CERTIFICATE | base64 --decode > certificate.p12
-        security create-keychain -p $KEYCHAIN_PASSWORD build.keychain
-        security default-keychain -s build.keychain
-        security unlock-keychain -p $KEYCHAIN_PASSWORD build.keychain
-        security import certificate.p12 -k build.keychain -P $APP_CERTIFICATE_PWD -T /usr/bin/codesign
-        security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $KEYCHAIN_PASSWORD build.keychain
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
-        APP_CERTIFICATE: ${{ secrets.APP_CERTIFICATE }}
-        APP_CERTIFICATE_PWD: ${{ secrets.APP_CERTIFICATE_PWD }}
-        KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-    - run: yarn
-    - id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: 18xx Maker ${{ github.ref }}
-        body: 18xx Maker ${{ github.ref }}
-        draft: true
-        prerelease: true
-    - run: yarn release
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
-    - uses: StuYarrow/publish-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        id: ${{ steps.create_release.outputs.id }}
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node_version }}
+          cache: "yarn"
+      - uses: actions/cache@v4
+        with:
+          path: "**/node_modules"
+          key: ${{ matrix.os }}-${{ matrix.node_version }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - run: |
+          echo $APP_CERTIFICATE | base64 --decode > certificate.p12
+          security create-keychain -p $KEYCHAIN_PASSWORD build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p $KEYCHAIN_PASSWORD build.keychain
+          security import certificate.p12 -k build.keychain -P $APP_CERTIFICATE_PWD -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $KEYCHAIN_PASSWORD build.keychain
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
+          APP_CERTIFICATE: ${{ secrets.APP_CERTIFICATE }}
+          APP_CERTIFICATE_PWD: ${{ secrets.APP_CERTIFICATE_PWD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+      - run: yarn
+      - id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: 18xx Maker ${{ github.ref }}
+          body: 18xx Maker ${{ github.ref }}
+          draft: true
+          prerelease: true
+      - run: yarn release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
+      - uses: StuYarrow/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          id: ${{ steps.create_release.outputs.id }}

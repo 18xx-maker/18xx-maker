@@ -23,7 +23,7 @@ const displayResult = ({ valid, error, validationErrors, file, id }) => {
   const dirname = path.relative(process.cwd(), path.dirname(file));
 
   process.stdout.write(
-    `${chalk.gray(name)} ${color(result)} ${basename} ${chalk.gray(dirname)}\n`
+    `${chalk.gray(name)} ${color(result)} ${basename} ${chalk.gray(dirname)}\n`,
   );
 
   if (error || validationErrors) {
@@ -50,7 +50,7 @@ const processFiles = compose(
   all(identity),
   map(displayResult),
   map(validate.file),
-  chain((file) => globSync(file, {posix: true, absolute: true}))
+  chain((file) => globSync(file, { posix: true, absolute: true })),
 );
 
 // Global program options

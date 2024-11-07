@@ -1,10 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const { assocPath, forEach, forEachObjIndexed, keys } = require('ramda');
+const { assocPath, forEach, forEachObjIndexed, keys } = require("ramda");
 
-const fields = require('../src/schemas/fields.schema.json');
-const tilesSrc = require('../src/schemas/tiles.schema.src.json');
+const fields = require("../src/schemas/fields.schema.json");
+const tilesSrc = require("../src/schemas/tiles.schema.src.json");
 let tiles = { ...tilesSrc };
 
 const elements = {
@@ -45,5 +45,5 @@ forEach((path) => {
 
 fs.writeFileSync(
   path.join("src", "schemas", "tiles.schema.json"),
-  JSON.stringify(tiles, null, 2)
+  JSON.stringify(tiles, null, 2),
 );
