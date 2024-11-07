@@ -15,9 +15,6 @@
 # electron
 /dist
 
-# generated public files
-/public/schemas
-
 # misc
 .DS_Store
 .env.local
