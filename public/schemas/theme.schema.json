@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "https://18xx-maker.com/schemas/theme.schema.json",
+  "definitions": {
+    "color": {
+      "type": "string",
+      "description": "A individual hex or rgb encoded color string",
+      "pattern": "(#[0-9a-f]{3}([0-9a-f]{3})?([0-9a-f]{2})?)|(rgb\\([0-9]+,[0-9]+,[0-9]+\\))"
+    },
+    "themeColor": {
+      "description": "Either a color, or a subgrouping of colors in a certain context",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/color"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/themeColor"
+          }
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "colors": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/themeColor"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": ["name", "colors"]
+}
