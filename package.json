@@ -161,6 +161,7 @@
     "react-router-dom": "^5.3.4",
     "redux": "^4.0.0",
     "redux-localstorage": "^0.4.1",
+    "rollup-plugin-visualizer": "^5.12.0",
     "sass-embedded": "^1.80.6",
     "svgo": "^3.3.2",
     "tinycolor2": "^1.6.0",

@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import { svgPlugin } from "vite-plugin-fast-react-svg";
+import { visualizer } from "rollup-plugin-visualizer";
 import browserslistToEsbuild from "browserslist-to-esbuild";
 
 export default defineConfig({
@@ -29,7 +30,7 @@ export default defineConfig({
       },
     },
   },
-  plugins: [react(), svgPlugin()],
+  plugins: [react(), svgPlugin(), visualizer()],
   assetsInclude: ["**/*.md"],
   server: {
     open: true,
