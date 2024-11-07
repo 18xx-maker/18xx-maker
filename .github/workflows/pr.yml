@@ -35,8 +35,6 @@ jobs:
           cache-dependency-path: yarn.lock
       - run: yarn
         name: Dependencies
-      - name: Schemas
-        run: yarn schemas:prepare
       - run: yarn pretty
         name: Pretty
       - run: yarn lint
