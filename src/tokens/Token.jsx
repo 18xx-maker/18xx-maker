@@ -21,7 +21,6 @@ const Token = ({
   labelStrokeWidth, // What width to use for the stroke of the label
   shapeAngle, // Angle for the shapes, independent of the positioning angle
 
-  type, // What special type of token to render (for special shapes and patterns)
   bar, // Do we add a white bar around the text?
   barHeight, // Height override for white bar
   barBorderColor, // Color of borders

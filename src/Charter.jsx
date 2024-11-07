@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import ConfigContext from "./context/ConfigContext";
 import ColorContext from "./context/ColorContext";
 
@@ -16,16 +16,12 @@ import map from "ramda/src/map";
 const Charter = ({
   name,
   subtext,
-  abbrev,
-  logo,
   minor,
   color,
-  token,
   tokens,
   phases,
   turns,
   trains,
-  game,
   company,
   backgroundColor,
   variant,

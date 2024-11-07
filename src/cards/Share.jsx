@@ -18,11 +18,8 @@ const LeftShare = ({
   shares,
   percent,
   label,
-  logo,
   name,
   subtext,
-  abbrev,
-  token,
   color,
   backgroundColor,
   labelColor,
@@ -179,20 +176,14 @@ const CenterShare = ({
   shares,
   percent,
   label,
-  logo,
-  name,
   subtext,
-  abbrev,
-  token,
   company,
   tokenCount,
   backgroundColor,
   labelColor,
   variant,
-  fontFamily,
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
-  fontFamily = multiDefaultTo("display", fontFamily);
 
   let tokens = [];
   let sharesLeft = tokenCount || shares;

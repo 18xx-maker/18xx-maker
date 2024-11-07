@@ -22,7 +22,7 @@ const arrows = {
   right: "→",
 };
 
-const Cell = ({ cell, par, game, config, data }) => {
+const Cell = ({ cell, game, config, data }) => {
   if (is(String, cell)) {
     cell = {
       label: cell,
@@ -40,7 +40,7 @@ const Cell = ({ cell, par, game, config, data }) => {
 
   return (
     <GetFont>
-      {(font) => (
+      {() => (
         <Color>
           {(c, t) => {
             // Standard colors

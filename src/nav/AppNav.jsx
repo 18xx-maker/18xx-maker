@@ -126,6 +126,7 @@ const MenuLink = React.forwardRef(
     );
   },
 );
+MenuLink.displayName = "MenuLink";
 
 const MobileMenu = ({ anchor, onClose }) => {
   const { t } = useTranslation();

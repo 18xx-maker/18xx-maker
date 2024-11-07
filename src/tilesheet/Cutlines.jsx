@@ -17,16 +17,7 @@ const getLineX = curry((slope, x1, y1, y2) => {
   return (y2 - y1) / slope + x1;
 });
 
-const HorizontalLines = ({
-  getY,
-  perRow,
-  pageWidth,
-  width,
-  height,
-  extraY,
-  rowsPerPage,
-  tileOffsetY,
-}) => {
+const HorizontalLines = ({ getY, perRow, pageWidth, height, rowsPerPage }) => {
   let indexes = range(0, rowsPerPage + 1);
   let y = (index) => getY(index * perRow) - height / 2;
 
@@ -45,18 +36,7 @@ const HorizontalLines = ({
   );
 };
 
-const ForwardLines = ({
-  perPage,
-  getX,
-  getY,
-  height,
-  width,
-  extraX,
-  extraY,
-  pageHeight,
-  perRow,
-  rowsPerPage,
-}) => {
+const ForwardLines = ({ perPage, getX, getY, width, pageHeight }) => {
   let indexes = range(0, 2 * perPage);
 
   let x = (i) =>
@@ -81,18 +61,7 @@ const ForwardLines = ({
   );
 };
 
-const BackwardLines = ({
-  getX,
-  getY,
-  pageHeight,
-  height,
-  width,
-  extraX,
-  extraY,
-  perPage,
-  perRow,
-  rowsPerPage,
-}) => {
+const BackwardLines = ({ getX, getY, pageHeight, width, perPage }) => {
   let indexes = range(0, 2 * perPage);
 
   let x = (i) =>

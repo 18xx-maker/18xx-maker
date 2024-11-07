@@ -6,7 +6,6 @@ import Name from "./Name";
 const MediumCity = ({
   border,
   name,
-  reverse,
   color,
   fillColor,
   fillOpacity,
