@@ -1,4 +1,3 @@
-import React from "react";
 import { useOrientation } from "../context/OrientationContext";
 import Color from "../util/Color";
 
@@ -23,7 +22,7 @@ const HexBorder = ({ removeBorders, border, map }) => {
 
   return (
     <Color context={map ? "map" : "tile"}>
-      {(c, t) => {
+      {(c) => {
         let lines = chain(
           (side) => {
             if (drawLine(removeBorders, border, side)) {

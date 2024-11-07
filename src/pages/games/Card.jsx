@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import ConfigContext from "../../context/ConfigContext";
@@ -9,11 +9,10 @@ import Private from "../../cards/Private";
 import Share from "../../cards/Share";
 import Train from "../../cards/Train";
 
-import { maxPlayers } from "../../util";
 import { compileCompanies, overrideCompanies } from "../../util/companies.js";
 import { getCardData } from "../../cards/util";
 
-import { assoc, clone, flatten, map, reduce } from "ramda";
+import { assoc, clone, flatten, map } from "ramda";
 
 import "../../cards/card.scss";
 

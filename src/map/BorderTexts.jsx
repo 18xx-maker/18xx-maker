@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import GameContext from "../context/GameContext";
 
 import addIndex from "ramda/src/addIndex";

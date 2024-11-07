@@ -1,5 +1,3 @@
-import React from "react";
-
 import Color from "../util/Color";
 
 import Cell from "./Cell";
@@ -180,7 +178,7 @@ const Market = ({ data, game, config, title, displayTitle }) => {
 
       legendNode = (
         <Color context="companies">
-          {(c) => (
+          {() => (
             <g>
               {addIndex(map)(
                 (legend, i) => (

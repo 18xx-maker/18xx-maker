@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ConfigContext from "../../context/ConfigContext";
 import GameContext from "../../context/GameContext";
 
@@ -251,8 +251,8 @@ const Charters = () => {
           style={{ width: data.css.usableWidth, height: data.css.usableHeight }}
         >
           {pins}
-          {addIndex(map)(
-            (company, companyIndex) =>
+          {map(
+            (company) =>
               company ? (
                 <Charter
                   game={game.info.title}
@@ -301,8 +301,8 @@ const Charters = () => {
           style={{ width: data.css.usableWidth, height: data.css.usableHeight }}
         >
           {pins}
-          {addIndex(map)(
-            (company, companyIndex) => (
+          {map(
+            (company) => (
               <Charter
                 game={game.info.title}
                 key={`${index}-${company.abbrev}`}

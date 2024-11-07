@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import GameContext from "../../context/GameContext";
 
 import Text from "./Text";
@@ -38,7 +38,7 @@ const Hexagon = (props) => {
 
   return (
     <Color>
-      {(c, t) => (
+      {(c) => (
         <g>
           <path
             d={`M -${x} 0 L -${x / 2} -${y} L ${x / 2} -${y} L ${x} 0 L ${x / 2} ${y} L -${x / 2} ${y} z`}

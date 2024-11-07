@@ -1,5 +1,3 @@
-import React from "react";
-
 import { GetFont } from "../context/FontContext";
 import Color from "../util/Color";
 import Currency from "../util/Currency";
@@ -24,7 +22,7 @@ const ParCell = ({ cell, data }) => {
 
   return (
     <GetFont>
-      {(font) => (
+      {() => (
         <Color>
           {(c, t) => {
             // Standard colors

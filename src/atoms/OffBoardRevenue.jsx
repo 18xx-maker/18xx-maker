@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import * as R from "ramda";
 
 import GameContext from "../context/GameContext";
@@ -41,7 +41,7 @@ const makeNode = (x, y, reverse, revenue, size, fontFamily) => {
       )}
     </Color>,
     <Color context="map" key={`text-${value}`}>
-      {(c, t) => (
+      {(c) => (
         <text
           fill={c(revenue.textColor) || c("black")}
           fontSize={size}

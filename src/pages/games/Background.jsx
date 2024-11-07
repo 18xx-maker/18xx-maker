@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { unitsToCss, printableWidth, printableHeight } from "../../util";
 import { GetFont, SetFont } from "../../context/FontContext";
 import Color from "../../util/Color";
@@ -16,7 +16,7 @@ import Box from "@mui/material/Box";
 
 import makeStyles from "@mui/styles/makeStyles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   backgroundBox: {
     overflow: "auto",
   },

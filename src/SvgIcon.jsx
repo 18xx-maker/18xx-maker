@@ -1,5 +1,3 @@
-import React from "react";
-
 import { ReactComponent as certLimit } from "./images/icons/certificate.svg";
 import { ReactComponent as bank } from "./images/icons/university.svg";
 import { ReactComponent as number } from "./images/icons/user-friends.svg";

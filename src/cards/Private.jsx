@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 import GameContext from "../context/GameContext";
 import { MapOrientation } from "../context/OrientationContext";
@@ -15,14 +15,7 @@ import Token from "../tokens/Token";
 
 import ColorContext from "../context/ColorContext";
 
-import intersperse from "ramda/src/intersperse";
-import is from "ramda/src/is";
-import map from "ramda/src/map";
-import defaultTo from "ramda/src/defaultTo";
-
-import max from "ramda/src/max";
-import min from "ramda/src/min";
-import reduce from "ramda/src/reduce";
+import { intersperse, is, map, defaultTo, max, min, reduce } from "ramda";
 
 import { getMapHex } from "../map/util";
 

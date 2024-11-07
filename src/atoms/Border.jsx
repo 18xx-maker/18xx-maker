@@ -1,4 +1,3 @@
-import React from "react";
 import { useOrientation } from "../context/OrientationContext";
 import Color from "../util/Color";
 

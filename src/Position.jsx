@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import addIndex from "ramda/src/addIndex";
 import any from "ramda/src/any";
 import chain from "ramda/src/chain";
@@ -61,7 +61,7 @@ const autoPositionIcon = (d, i, hex) => {
   };
 };
 
-const autoPositionValue = (d, i, hex) => {
+const autoPositionValue = (d, i) => {
   if (i >= 1) {
     return d;
   }
@@ -73,7 +73,7 @@ const autoPositionValue = (d, i, hex) => {
   };
 };
 
-const autoPositionLabel = (d, i, hex) => {
+const autoPositionLabel = (d, i) => {
   switch (i) {
     case 0:
       return {

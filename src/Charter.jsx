@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ConfigContext from "./context/ConfigContext";
 import ColorContext from "./context/ColorContext";
 
@@ -202,7 +202,6 @@ const Charter = ({
                     </svg>
                   </div>
                 )}
-                {false && <div className="charter__game">{game}</div>}
                 {tokenSpots.length > 0 && (
                   <div className="charter__tokens">
                     {halfWidth && "Tokens"}

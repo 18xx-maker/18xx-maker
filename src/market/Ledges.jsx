@@ -1,5 +1,3 @@
-import React from "react";
-
 import addIndex from "ramda/src/addIndex";
 import map from "ramda/src/map";
 

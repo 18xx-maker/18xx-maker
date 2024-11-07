@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 
 import CompanyToken from "../tokens/CompanyToken";
@@ -54,7 +54,7 @@ const LeftShare = ({
             viewBox="-26 -26 52 52"
           >
             <Color context="companies">
-              {(c, t, s) => <CompanyToken company={company} />}
+              {() => <CompanyToken company={company} />}
             </Color>
           </svg>
         </div>
@@ -89,7 +89,7 @@ const LeftShare = ({
     <div className="cutlines">
       <div className={`card share share--${shareStyle || "left"}`}>
         <Color context="map">
-          {(c, t) => (
+          {(c) => (
             <div
               className="card__bleed"
               style={{
@@ -97,7 +97,7 @@ const LeftShare = ({
               }}
             >
               <Color context="companies">
-                {(c, t) => (
+                {(c) => (
                   <div
                     className="share__hr"
                     style={{
@@ -219,7 +219,7 @@ const CenterShare = ({
     <div className="cutlines">
       <div className="card share share--center">
         <Color context="map">
-          {(c, t) => (
+          {(c) => (
             <div
               className="card__bleed"
               style={{
@@ -227,7 +227,7 @@ const CenterShare = ({
               }}
             >
               <Color context="companies">
-                {(c, t) => (
+                {(c) => (
                   <div
                     className="share__hr"
                     style={{ backgroundColor: c(color) }}

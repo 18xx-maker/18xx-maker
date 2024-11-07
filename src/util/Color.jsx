@@ -8,8 +8,6 @@ import tinycolor from "tinycolor2";
 
 import { curry, defaultTo, is, mergeDeepRight, prop } from "ramda";
 
-import { mapKeys } from "../util.js";
-
 import { companyThemes, mapThemes } from "../data";
 
 const colorAliases = {

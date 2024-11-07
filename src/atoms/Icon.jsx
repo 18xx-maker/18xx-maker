@@ -1,4 +1,3 @@
-import React from "react";
 import Color from "../util/Color";
 import defaultTo from "ramda/src/defaultTo";
 
@@ -35,7 +34,7 @@ const Icon = ({
   }
 
   if (noCircle) {
-    return <Color>{(c, t, s, p) => <g>{icon}</g>}</Color>;
+    return <Color>{() => <g>{icon}</g>}</Color>;
   } else {
     return (
       <Color>

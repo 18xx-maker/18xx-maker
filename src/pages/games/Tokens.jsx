@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Redirect } from "react-router-dom";
 
 import ConfigContext from "../../context/ConfigContext";
@@ -177,6 +177,7 @@ const TokenLayout = ({ companies, data, game }) => {
     } else {
       return [
         <Token
+          key={token}
           bleed={true}
           outline="black"
           color="white"

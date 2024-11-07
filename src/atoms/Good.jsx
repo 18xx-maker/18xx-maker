@@ -1,5 +1,3 @@
-import React from "react";
-
 import Square from "./shapes/Square";
 
 const Good = (props) => (

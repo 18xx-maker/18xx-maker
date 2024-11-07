@@ -1,5 +1,3 @@
-import React from "react";
-
 import defaultTo from "ramda/src/defaultTo";
 
 import Color from "../util/Color";

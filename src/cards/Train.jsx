@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 
 import Color from "../util/Color";
@@ -29,7 +29,7 @@ const ordinal = (num) => {
   }
 };
 
-const Train = ({ train, trains, blackBand }) => {
+const Train = ({ train, trains }) => {
   const { config } = useContext(ConfigContext);
 
   let {

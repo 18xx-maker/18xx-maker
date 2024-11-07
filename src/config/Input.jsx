@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ConfigContext from "../context/ConfigContext";
 import ReactMarkdown from "react-markdown";
 import UnitInput from "./UnitInput";

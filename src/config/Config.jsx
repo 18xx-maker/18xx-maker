@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 
 import { diff } from "deep-object-diff";
@@ -20,7 +20,6 @@ import map from "ramda/src/map";
 import path from "ramda/src/path";
 import split from "ramda/src/split";
 
-import { binary, flip, pickBy, startsWith } from "ramda";
 import { mapThemes, companyThemes } from "../data";
 
 import Box from "@mui/material/Box";

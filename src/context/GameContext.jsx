@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { Redirect, useLocation, matchPath } from "react-router-dom";
 
 import { useAlert } from "./AlertContext";

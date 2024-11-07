@@ -1,5 +1,3 @@
-import React from "react";
-
 import { tiles } from "./data";
 
 import { is } from "ramda";

@@ -1,5 +1,4 @@
 import {
-  addIndex,
   adjust,
   ascend,
   chain,

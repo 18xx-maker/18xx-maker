@@ -1,14 +1,13 @@
-import React from "react";
 import Color from "../util/Color";
 
 const stripeWidth = 28.8675;
-const Hex = ({ color, border, transparent, map, opacity }) => {
+const Hex = ({ color, transparent, map, opacity }) => {
   let points =
     "-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 49.07475,85 -49.07475,85";
 
   return (
     <Color context={map ? "map" : "tile"}>
-      {(c, t) => {
+      {(c) => {
         let background = color;
         let stripe = null;
         let stripeRotation = 0;

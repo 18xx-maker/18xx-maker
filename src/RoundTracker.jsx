@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ConfigContext from "./context/ConfigContext";
 
 import Token from "./tokens/Token";
@@ -16,21 +16,21 @@ export const getRoundTrackerData = (rounds, size, type, rotation, config) => {
       ? rounds.length - (i + 1)
       : i;
 
-  let getX = (i, j = 0) => 0;
-  let getY = (i, j = 0) => 0;
+  let getX = () => 0;
+  let getY = () => 0;
   let startX = 0;
   let startY = 0;
 
   switch (type) {
     case "row":
     case "row-reverse":
-      getX = (i, j = 0) => (getI(i) + 0.5) * cell.width;
+      getX = (i) => (getI(i) + 0.5) * cell.width;
       getY = (i, j = 0) => (j + 0.5) * cell.height;
       break;
     case "col":
     case "col-reverse":
       getX = (i, j = 0) => (j + 0.5) * cell.width;
-      getY = (i, j = 0) => (getI(i) + 0.5) * cell.height;
+      getY = (i) => (getI(i) + 0.5) * cell.height;
       break;
     case "round":
       startX = -2.5 * size;

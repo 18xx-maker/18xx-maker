@@ -1,4 +1,3 @@
-import React from "react";
 import Color from "../util/Color";
 
 const Industry = ({ top, bottom }) => {

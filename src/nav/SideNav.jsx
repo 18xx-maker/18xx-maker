@@ -1,4 +1,3 @@
-import React from "react";
 import { Route } from "react-router";
 
 import { useBooleanParam } from "../util/query";
@@ -14,7 +13,7 @@ import DocsNav from "./DocsNav";
 import ElementsNav from "./ElementsNav";
 import GameNav from "./GameNav";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   sideNav: {
     width: 300,
   },

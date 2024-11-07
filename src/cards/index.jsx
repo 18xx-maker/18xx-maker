@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 import ConfigContext from "../context/ConfigContext";
 import GameContext from "../context/GameContext";
@@ -17,18 +17,7 @@ import Svg from "../Svg";
 
 import { maxPlayers } from "../util.js";
 
-import {
-  addIndex,
-  chain,
-  clone,
-  compose,
-  reduce,
-  map,
-  max,
-  prop,
-  range,
-  splitEvery,
-} from "ramda";
+import { addIndex, chain, clone, map, prop, range, splitEvery } from "ramda";
 
 import "./card.scss";
 

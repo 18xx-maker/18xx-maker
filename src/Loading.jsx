@@ -1,5 +1,3 @@
-import React from "react";
-
 import Backdrop from "@mui/material/Backdrop";
 import Paper from "@mui/material/Paper";
 import CircularProgress from "@mui/material/CircularProgress";

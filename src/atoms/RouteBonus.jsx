@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import GameContext from "../context/GameContext";
 import Color from "../util/Color";
 import { multiDefaultTo } from "../util";
@@ -28,7 +28,7 @@ const RouteBonus = ({
 
   return (
     <Color>
-      {(c, t, s, p) => (
+      {(c) => (
         <g>
           <polygon
             points={`${-width - 10},0 ${-width},${height * 0.5} ${width},${height * 0.5} ${width + 10},0 ${width},${height * -0.5} ${-width},${height * -0.5}`}

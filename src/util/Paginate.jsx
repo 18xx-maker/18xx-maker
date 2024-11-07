@@ -5,7 +5,7 @@ import Page from "../util/Page";
 import PageSetup from "../PageSetup";
 import Svg from "../Svg";
 
-const Paginate = ({ component, data, notes, config, game, children }) => {
+const Paginate = ({ component, data, config, game, children }) => {
   // Generate an ID to use for svg content
   const contentId = crypto.randomUUID();
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import { Switch as RouterSwitch, Route, matchPath } from "react-router";
 import { Link as RouterLink, useLocation } from "react-router-dom";

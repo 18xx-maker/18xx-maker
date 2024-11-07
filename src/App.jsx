@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, Suspense } from "react";
 
 import { Route, Switch, useHistory } from "react-router-dom";
 import { useBooleanParam } from "./util/query";

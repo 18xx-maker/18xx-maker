@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -105,7 +104,7 @@ const components = {
   p: (props) => <Typography variant="body1" {...props} />,
   li: (props) => (
     <li>
-      <Typography component="span" children={props.children} />
+      <Typography component="span">{props.children}</Typography>
     </li>
   ),
   a: LocalLink,

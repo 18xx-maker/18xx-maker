@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Route, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import GameContext from "./context/GameContext";
@@ -23,19 +23,7 @@ import ExportIcon from "@mui/icons-material/Collections";
 import PdfIcon from "@mui/icons-material/PictureAsPdf";
 import PngIcon from "@mui/icons-material/PhotoLibrary";
 
-import {
-  assoc,
-  compose,
-  flatten,
-  forEach,
-  is,
-  keys,
-  map,
-  max,
-  prop,
-  range,
-  reduce,
-} from "ramda";
+import { assoc, flatten, forEach, is, keys, map, range } from "ramda";
 
 import makeStyles from "@mui/styles/makeStyles";
 

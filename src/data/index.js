@@ -10,7 +10,7 @@ import {
 
 import { mapKeys } from "../util.js";
 
-export const getID = replace(/^\.\/[^\/]+\/([^\.]+)\.[a-z]+$/, "$1");
+export const getID = replace(/^\.\/[^/]+\/([^.]+)\.[a-z]+$/, "$1");
 
 // Games
 export { default as games } from "./games";

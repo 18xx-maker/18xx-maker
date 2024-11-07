@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 import GameContext from "../context/GameContext";
 
@@ -70,7 +70,7 @@ const MapPlayers = ({ players, hexWidth }) => {
         let playersWidth = game.players.length * cellWidth;
         let totalWidth = iconsWidth + playersWidth;
 
-        const GameValue = ({ game, field, currency, row }) => {
+        const GameValue = ({ game, field, currency }) => {
           let value = game[field];
           return (
             <g key={`game-value-${field}`}>
@@ -90,7 +90,7 @@ const MapPlayers = ({ players, hexWidth }) => {
           );
         };
 
-        const PlayerValue = ({ players, field, currency, row }) => {
+        const PlayerValue = ({ players, field, currency }) => {
           return addIndex(map)((p, i) => {
             return (
               <g

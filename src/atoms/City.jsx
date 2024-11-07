@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 import GameContext from "../context/GameContext";
 import { multiDefaultTo } from "../util";
@@ -50,7 +50,6 @@ const City = ({
   extend,
   rotation,
   pass,
-  fixed,
   bgColor,
   width,
   strokeWidth,

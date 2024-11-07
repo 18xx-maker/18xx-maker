@@ -1,5 +1,3 @@
-import React from "react";
-
 import Circle from "./Circle";
 import Diamond from "./Diamond";
 import Ellipse from "./Ellipse";

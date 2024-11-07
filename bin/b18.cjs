@@ -5,7 +5,6 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const puppeteer = require("puppeteer");
-const sharp = require("sharp");
 const archiver = require("archiver");
 
 const { getMapData } = require("../src/map/util");
@@ -25,7 +24,7 @@ const gameDefs = require("../src/data/games").default;
 
 const capitalize = R.compose(
   R.join(""),
-  R.juxt([R.compose(R.toUpper, R.head), R.tail])
+  R.juxt([R.compose(R.toUpper, R.head), R.tail]),
 );
 
 const tileColors = [
@@ -46,7 +45,7 @@ const tileColors = [
 const colorSort = R.compose(
   tileColors.indexOf.bind(tileColors),
   R.prop("color"),
-  R.defaultTo({ color: "other" })
+  R.defaultTo({ color: "other" }),
 );
 const sortTiles = R.sortWith([R.ascend(colorSort)]);
 
@@ -107,8 +106,8 @@ const server = app.listen(9000);
         (game.stock.type === "2D"
           ? config.stock.cell.height
           : game.stock.type === "1Diag"
-          ? (config.stock.cell.height * config.stock.column) / 2
-          : config.stock.cell.height * config.stock.column) * 0.96,
+            ? (config.stock.cell.height * config.stock.column) / 2
+            : config.stock.cell.height * config.stock.column) * 0.96,
     },
     tray: [],
     links: [],
@@ -135,7 +134,7 @@ const server = app.listen(9000);
     R.map(R.prop("color")),
     sortTiles,
     R.uniq,
-    R.map(getTile)
+    R.map(getTile),
   )(R.keys(game.tiles));
   let colors = R.keys(counts);
 
@@ -157,11 +156,11 @@ const server = app.listen(9000);
       tile: [],
     };
 
-    let tiles = R.compose(
-      R.uniq,
-      R.filter(R.propEq("color", color)),
-      R.map(getTile)
-    )(R.keys(game.tiles));
+    // let tiles = R.compose(
+    //   R.uniq,
+    //   R.filter(R.propEq("color", color)),
+    //   R.map(getTile)
+    // )(R.keys(game.tiles));
 
     R.mapObjIndexed((dups, id) => {
       let tile = getTile(id);
@@ -204,15 +203,18 @@ const server = app.listen(9000);
   };
   let mtok = { ...btok, type: "mtok", token: [] };
 
-  R.map((company) => {
-    btok.token.push({
-      dups: company.tokens.length + (game.info.extraStationTokens || 0),
-      flip: true,
-    });
-    mtok.token.push({
-      flip: true,
-    });
-  }, gutil.compileCompanies(game) || []);
+  R.map(
+    (company) => {
+      btok.token.push({
+        dups: company.tokens.length + (game.info.extraStationTokens || 0),
+        flip: true,
+      });
+      mtok.token.push({
+        flip: true,
+      });
+    },
+    gutil.compileCompanies(game) || [],
+  );
 
   // "quantity" of 0 mean remove the token entirely from the array
   // "quantity of "∞" means we put the special value of 0 in for dups
@@ -224,7 +226,7 @@ const server = app.listen(9000);
         flip: true,
       });
     }),
-    R.reject(R.propEq("quantity", 0))
+    R.reject(R.propEq("quantity", 0)),
   )(game.tokens || []);
   let tokenHeight = 30 * ((game.companies || []).length + tokens.length);
 
@@ -275,7 +277,7 @@ const server = app.listen(9000);
   console.log(`Printing ${bname}/${folder}/${id}/Tokens.png`);
   await page.goto(
     `http://localhost:9000/games/${bname}/b18/tokens?print=true`,
-    { waitUntil: "networkidle2" }
+    { waitUntil: "networkidle2" },
   );
   await page.setViewport({ width: 60, height: tokenHeight });
   await page.screenshot({
@@ -291,10 +293,12 @@ const server = app.listen(9000);
     let width = counts[color] * 150;
     let height = 900;
 
-    console.log(`Printing ${bname}/${folder}/${id}/${capitalize(color_filename)}.png`);
+    console.log(
+      `Printing ${bname}/${folder}/${id}/${capitalize(color_filename)}.png`,
+    );
     await page.goto(
       `http://localhost:9000/games/${bname}/b18/tiles/${color}?print=true`,
-      { waitUntil: "networkidle2" }
+      { waitUntil: "networkidle2" },
     );
     await page.setViewport({ width, height });
     await page.screenshot({
@@ -309,7 +313,7 @@ const server = app.listen(9000);
   console.log(`Writing  ${bname}/${folder}/${id}.json`);
   fs.writeFileSync(
     `build/render/${bname}/${folder}/${id}.json`,
-    JSON.stringify(json, null, 2)
+    JSON.stringify(json, null, 2),
   );
 
   console.log(`Creating ${bname}/${folder}.zip`);

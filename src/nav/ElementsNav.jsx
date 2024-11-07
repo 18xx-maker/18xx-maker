@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Link, useLocation, matchPath } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import GameContext from "../../context/GameContext";
 import Text from "./Text";
 import Color from "../../util/Color";
@@ -36,7 +36,7 @@ const Diamond = (props) => {
 
   return (
     <Color>
-      {(c, t) => (
+      {(c) => (
         <g>
           <path
             d={`M -${x} 0 L 0 -${x} L ${x} 0 L 0 ${x} z`}

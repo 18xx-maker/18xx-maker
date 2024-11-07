@@ -1,9 +1,6 @@
-import React from "react";
 import Color from "../util/Color";
 
-import chain from "ramda/src/chain";
-import concat from "ramda/src/concat";
-import range from "ramda/src/range";
+import { chain, concat, range } from "ramda";
 
 import { toAlpha } from "./util";
 

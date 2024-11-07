@@ -2,18 +2,7 @@ import React from "react";
 
 import { useTranslation } from "react-i18next";
 
-import {
-  ascend,
-  compose,
-  groupBy,
-  keys,
-  map,
-  nth,
-  prop,
-  sort,
-  split,
-  values,
-} from "ramda";
+import { ascend, compose, groupBy, keys, map, nth, sort, split } from "ramda";
 
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";

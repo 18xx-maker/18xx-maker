@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import Color from "../util/Color";
 import GameContext from "../context/GameContext";
 import Currency from "../util/Currency";

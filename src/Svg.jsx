@@ -1,4 +1,3 @@
-import React from "react";
 import Color from "./util/Color";
 
 const Svg = ({
@@ -18,7 +17,7 @@ const Svg = ({
 
   return (
     <Color>
-      {(c) => (
+      {() => (
         <svg
           version="1.1"
           preserveAspectRatio={preserveAspectRatio}

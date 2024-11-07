@@ -42,7 +42,7 @@ const Id = ({ id, displayID, extra, bgColor, noID }) => {
 
   return (
     <Color>
-      {(c, t, s, p) => (
+      {(c) => (
         <React.Fragment>
           <g transform={`rotate(${rotation}) translate(${idX} 70)`}>
             <text

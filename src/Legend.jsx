@@ -1,9 +1,7 @@
-import React from "react";
 import Color from "./util/Color";
 import { multiDefaultTo } from "./util";
 
 const Legend = ({
-  game,
   color,
   borderColor,
   borderWidth,
@@ -19,7 +17,7 @@ const Legend = ({
   fontWeight = multiDefaultTo("normal", fontWeight);
   return (
     <Color>
-      {(c, t) => (
+      {(c) => (
         <g>
           <circle
             r="12"

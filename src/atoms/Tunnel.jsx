@@ -1,4 +1,3 @@
-import React from "react";
 import PhaseContext from "../context/PhaseContext";
 import Currency from "../util/Currency";
 import Triangle from "./shapes/Triangle";

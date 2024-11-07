@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Route } from "react-router";
 import GameContext from "./context/GameContext";
 import { useBooleanParam } from "./util/query";

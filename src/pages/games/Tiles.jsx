@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Redirect } from "react-router-dom";
 
 import ConfigContext from "../../context/ConfigContext";
@@ -147,17 +147,16 @@ const TileSheet = () => {
 
       switch (layout) {
         case "offset":
-          let odd =
-            Math.ceil(((tiles.length + 1) % c.perPage) / c.perRow) % 2 !== 0;
-
-          if (odd) {
+          if (
+            Math.ceil(((tiles.length + 1) % c.perPage) / c.perRow) % 2 !==
+            0
+          ) {
             return concat(tiles, concat(repeat(null, c.perRow), color));
           } else {
             return concat(tiles, concat(repeat(null, c.perRow + 1), color));
           }
         case "smallDie":
-          let offset = tiles.length % 60;
-          if ([0, 9, 17, 26, 34, 43, 51].includes(offset)) {
+          if ([0, 9, 17, 26, 34, 43, 51].includes(tiles.length % 60)) {
             return concat(tiles, color);
           } else {
             return concat(tiles, concat([null], color));

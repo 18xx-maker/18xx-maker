@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Redirect, useParams } from "react-router-dom";
 
 import ConfigContext from "../../context/ConfigContext";

@@ -29,7 +29,6 @@ const Boomtown = ({
   city,
   size,
   name,
-  x,
   color,
   bgColor,
   width,
@@ -37,7 +36,6 @@ const Boomtown = ({
   strokeWidth,
   strokeDashArray,
   dashed,
-  offset,
 }) => {
   const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);

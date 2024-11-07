@@ -1,4 +1,3 @@
-import React from "react";
 import Map from "../map/Map";
 import { Redirect } from "react-router-dom";
 

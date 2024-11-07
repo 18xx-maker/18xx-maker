@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import makeStyles from "@mui/styles/makeStyles";
 
 import Avatar from "@mui/material/Avatar";
@@ -11,7 +11,6 @@ import Color from "../util/Color";
 import tinycolor from "tinycolor2";
 
 import { filter, is, keys, map, sortBy, uniqBy } from "ramda";
-import { mapKeys } from "../util";
 
 const useStyles = makeStyles((theme) => ({
   themeGroup: {

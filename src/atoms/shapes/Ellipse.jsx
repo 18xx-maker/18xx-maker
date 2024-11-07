@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import GameContext from "../../context/GameContext";
 import Text from "./Text";
 import Color from "../../util/Color";
@@ -39,7 +39,7 @@ const Ellipse = (props) => {
 
   return (
     <Color>
-      {(c, t) => (
+      {(c) => (
         <g>
           <ellipse
             rx={rx}

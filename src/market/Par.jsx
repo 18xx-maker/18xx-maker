@@ -1,5 +1,3 @@
-import React from "react";
-
 import ParCell from "./ParCell";
 import Ledges from "./Ledges";
 

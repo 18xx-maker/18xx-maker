@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import GameContext from "../../context/GameContext";
 
 import Text from "./Text";
@@ -45,7 +45,7 @@ const Triangle = (props) => {
 
   return (
     <Color>
-      {(c, t) => (
+      {(c) => (
         <g>
           <path
             d={`M -${x} ${y1} L 0 ${y2} L ${x} ${y1} z`}

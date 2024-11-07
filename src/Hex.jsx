@@ -1,4 +1,3 @@
-import React from "react";
 import * as R from "ramda";
 
 import Position from "./Position";
@@ -236,7 +235,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map, opacity }) => {
       {(t) => <TunnelEntrance {...t} />}
     </Position>
   );
-  let divides = <Position data={hex.divides}>{(t) => <Divide />}</Position>;
+  let divides = <Position data={hex.divides}>{() => <Divide />}</Position>;
 
   let offBoardRevenue = (
     <Position data={hex.offBoardRevenue}>

@@ -1,4 +1,3 @@
-import React from "react";
 import Color from "../util/Color";
 
 const Company = ({ label, reverse, bottom, left, right, radius, color }) => {

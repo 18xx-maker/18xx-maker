@@ -372,7 +372,7 @@ export const getMapData = (game, coords, hexWidth, variation) => {
   let edge = hexWidth * HEX_RATIO;
   let halfHexWidth = 0.5 * hexWidth;
 
-  let hexX = (x, y) => {
+  let hexX = (x) => {
     return x * halfHexWidth + coordOffset;
   };
 

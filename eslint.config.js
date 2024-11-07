@@ -5,6 +5,7 @@ import vitest from "eslint-plugin-vitest";
 
 export default [
   { files: ["**/*.{js,mjs,cjs,jsx}"] },
+  { ignores: ["dist/", "public/"] },
   { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
   js.configs.recommended,
   {
@@ -29,6 +30,12 @@ export default [
   {
     rules: {
       "react/prop-types": "off",
+    },
+  },
+  {
+    files: ["bin/print.cjs"],
+    rules: {
+      "no-fallthrough": "off",
     },
   },
 ];

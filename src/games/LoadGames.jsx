@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Link as RouterLink, useHistory } from "react-router-dom";
 
 import { games, publishers } from "../data";

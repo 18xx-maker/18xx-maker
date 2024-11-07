@@ -1,5 +1,3 @@
-import React from "react";
-
 import RoundTracker from "../RoundTracker";
 
 const MarketRoundTracker = ({ roundTracker, game, config }) => {
