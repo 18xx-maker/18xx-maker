@@ -8,6 +8,19 @@ export default defineConfig({
   base: "",
   build: {
     target: browserslistToEsbuild(),
+    rollupOptions: {
+      onwarn: () => {},
+      output: {
+        manualChunks: {
+          mui: [
+            "@mui/material",
+            "@mui/icons-material",
+            "@mui/lab",
+            "@mui/styles",
+          ],
+        },
+      },
+    },
   },
   css: {
     preprocessorOptions: {
