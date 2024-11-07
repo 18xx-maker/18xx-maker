@@ -2,11 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://18xx-maker.com/schemas/tiles.schema.json",
   "definitions": {
-    "side": {
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 6
-    },
+    "side": { "type": "integer", "minimum": 1, "maximum": 6 },
     "rotation": {
       "type": "integer",
       "multipleOf": 60,
@@ -17,16 +13,9 @@
       "oneOf": [
         {
           "type": "array",
-          "items": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          }
+          "items": { "type": "number", "minimum": 1, "maximum": 6 }
         },
-        {
-          "type": "boolean",
-          "enum": [true]
-        }
+        { "type": "boolean", "enum": [true] }
       ]
     },
     "borders": {
@@ -34,19 +23,10 @@
       "items": {
         "type": "object",
         "properties": {
-          "side": {
-            "$ref": "#/definitions/side"
-          },
-          "dashed": {
-            "type": "boolean",
-            "enum": [true]
-          },
-          "color": {
-            "type": "string"
-          },
-          "width": {
-            "type": "number"
-          }
+          "side": { "$ref": "#/definitions/side" },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "color": { "type": "string" },
+          "width": { "type": "number" }
         },
         "additionalProperties": false,
         "required": ["color"]
@@ -57,15 +37,9 @@
       "items": {
         "type": "object",
         "properties": {
-          "label": {
-            "type": "string"
-          },
-          "size": {
-            "type": "number"
-          },
-          "color": {
-            "type": "string"
-          },
+          "label": { "type": "string" },
+          "size": { "type": "number" },
+          "color": { "type": "string" },
           "fontStyle": {
             "type": "string",
             "enum": ["normal", "italic", "oblique"]
@@ -76,22 +50,12 @@
                 "type": "string",
                 "enum": ["normal", "bold", "bolder", "lighter"]
               },
-              {
-                "type": "number"
-              }
+              { "type": "number" }
             ]
           },
-          "fontFamily": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "integer",
-            "minimum": 4
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -107,21 +71,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false,
         "required": ["label"]
@@ -130,23 +83,11 @@
     "name": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string"
-        },
-        "reverse": {
-          "type": "boolean",
-          "enum": [true]
-        },
-        "straight": {
-          "type": "boolean",
-          "enum": [true]
-        },
-        "color": {
-          "type": "string"
-        },
-        "bgColor": {
-          "type": "string"
-        },
+        "name": { "type": "string" },
+        "reverse": { "type": "boolean", "enum": [true] },
+        "straight": { "type": "boolean", "enum": [true] },
+        "color": { "type": "string" },
+        "bgColor": { "type": "string" },
         "offset": {
           "type": "number",
           "default": 50,
@@ -163,22 +104,12 @@
               "type": "string",
               "enum": ["normal", "bold", "bolder", "lighter"]
             },
-            {
-              "type": "number"
-            }
+            { "type": "number" }
           ]
         },
-        "fontFamily": {
-          "type": "string"
-        },
-        "fontSize": {
-          "type": "integer",
-          "minimum": 4
-        },
-        "hidden": {
-          "type": "boolean",
-          "enum": [true]
-        },
+        "fontFamily": { "type": "string" },
+        "fontSize": { "type": "integer", "minimum": 4 },
+        "hidden": { "type": "boolean", "enum": [true] },
         "angle": {
           "type": "number",
           "exclusiveMinimum": -360,
@@ -194,76 +125,31 @@
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
-        "side": {
-          "type": "number",
-          "minimum": 1,
-          "maximum": 6
-        },
-        "x": {
-          "type": "number"
-        },
-        "y": {
-          "type": "number"
-        },
-        "percent": {
-          "type": "number",
-          "minimum": 0
-        }
+        "side": { "type": "number", "minimum": 1, "maximum": 6 },
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "percent": { "type": "number", "minimum": 0 }
       },
       "additionalProperties": false,
       "required": ["name"]
     },
-    "names": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/name"
-      }
-    },
+    "names": { "type": "array", "items": { "$ref": "#/definitions/name" } },
     "goods": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
-          "color": {
-            "type": "string"
-          },
-          "width": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "text": {
-            "type": "string"
-          },
-          "textColor": {
-            "type": "string"
-          },
-          "textBorderWidth": {
-            "type": "number",
-            "minimum": 0
-          },
-          "textBorderColor": {
-            "type": "string"
-          },
-          "opacity": {
-            "type": "number",
-            "minimum": 0,
-            "maximum": 1
-          },
-          "borderColor": {
-            "type": "string"
-          },
-          "borderWidth": {
-            "type": "number",
-            "minimum": 0
-          },
-          "height": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "dashed": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "color": { "type": "string" },
+          "width": { "type": "integer", "minimum": 1 },
+          "text": { "type": "string" },
+          "textColor": { "type": "string" },
+          "textBorderWidth": { "type": "number", "minimum": 0 },
+          "textBorderColor": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
           "fontStyle": {
             "type": "string",
             "enum": ["normal", "italic", "oblique"]
@@ -274,22 +160,12 @@
                 "type": "string",
                 "enum": ["normal", "bold", "bolder", "lighter"]
               },
-              {
-                "type": "number"
-              }
+              { "type": "number" }
             ]
           },
-          "fontFamily": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "integer",
-            "minimum": 4
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -305,21 +181,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false
       }
@@ -329,34 +194,14 @@
       "items": {
         "type": "object",
         "properties": {
-          "color": {
-            "type": "string"
-          },
-          "label": {
-            "type": "string"
-          },
-          "left": {
-            "type": "number"
-          },
-          "right": {
-            "type": "number"
-          },
-          "bottom": {
-            "type": "boolean",
-            "enum": [true]
-          },
-          "reverse": {
-            "type": "boolean",
-            "enum": [true]
-          },
-          "radius": {
-            "type": "number",
-            "exclusiveMinimum": 0
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "color": { "type": "string" },
+          "label": { "type": "string" },
+          "left": { "type": "number" },
+          "right": { "type": "number" },
+          "bottom": { "type": "boolean", "enum": [true] },
+          "reverse": { "type": "boolean", "enum": [true] },
+          "radius": { "type": "number", "exclusiveMinimum": 0 },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -372,21 +217,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false
       }
@@ -396,15 +230,8 @@
       "items": {
         "type": "object",
         "properties": {
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -420,16 +247,9 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false
       }
@@ -437,24 +257,11 @@
     "companyToken": {
       "type": "object",
       "properties": {
-        "company": {
-          "type": "string"
-        },
-        "destination": {
-          "type": "boolean",
-          "enum": [true]
-        },
-        "width": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "bgFill": {
-          "type": "string"
-        },
-        "hidden": {
-          "type": "boolean",
-          "enum": [true]
-        },
+        "company": { "type": "string" },
+        "destination": { "type": "boolean", "enum": [true] },
+        "width": { "type": "integer", "minimum": 1 },
+        "bgFill": { "type": "string" },
+        "hidden": { "type": "boolean", "enum": [true] },
         "angle": {
           "type": "number",
           "exclusiveMinimum": -360,
@@ -470,21 +277,10 @@
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
-        "side": {
-          "type": "number",
-          "minimum": 1,
-          "maximum": 6
-        },
-        "x": {
-          "type": "number"
-        },
-        "y": {
-          "type": "number"
-        },
-        "percent": {
-          "type": "number",
-          "minimum": 0
-        }
+        "side": { "type": "number", "minimum": 1, "maximum": 6 },
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "percent": { "type": "number", "minimum": 0 }
       },
       "required": ["company"],
       "additionalProperties": false
@@ -492,164 +288,51 @@
     "genericToken": {
       "type": "object",
       "properties": {
-        "logo": {
-          "type": "string"
-        },
-        "label": {
-          "type": "string",
-          "minLength": 1
-        },
-        "color": {
-          "type": "string"
-        },
-        "bgFill": {
-          "type": "string"
-        },
-        "iconColor": {
-          "type": "string"
-        },
-        "outline": {
-          "type": "string"
-        },
-        "outlineWidth": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "circle": {
-          "type": "string"
-        },
+        "logo": { "type": "string" },
+        "label": { "type": "string", "minLength": 1 },
+        "color": { "type": "string" },
+        "bgFill": { "type": "string" },
+        "iconColor": { "type": "string" },
+        "outline": { "type": "string" },
+        "outlineWidth": { "type": "integer", "minimum": 1 },
+        "circle": { "type": "string" },
         "shield": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean",
-              "enum": [true]
-            }
-          ]
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
         },
         "shield3": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean",
-              "enum": [true]
-            }
-          ]
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
         },
         "kiteshield": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "boolean",
-              "enum": [true]
-            }
-          ]
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
         },
-        "shieldTop": {
-          "type": "string"
-        },
-        "shield3TopLeft": {
-          "type": "string"
-        },
-        "shield3TopCenter": {
-          "type": "string"
-        },
-        "shield3TopRight": {
-          "type": "string"
-        },
-        "square": {
-          "type": "string"
-        },
-        "spiral": {
-          "type": "string"
-        },
-        "target": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "stripe": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "stripes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "curvedStripes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "halves": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "quarters": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "destination": {
-          "type": "boolean",
-          "enum": [true]
-        },
-        "reserved": {
-          "type": "boolean",
-          "enum": [true]
-        },
-        "inverse": {
-          "type": "boolean",
-          "enum": [true]
-        },
-        "inverseTextColor": {
-          "type": "string"
-        },
+        "shieldTop": { "type": "string" },
+        "shield3TopLeft": { "type": "string" },
+        "shield3TopCenter": { "type": "string" },
+        "shield3TopRight": { "type": "string" },
+        "square": { "type": "string" },
+        "spiral": { "type": "string" },
+        "target": { "type": "array", "items": { "type": "string" } },
+        "stripe": { "type": "array", "items": { "type": "string" } },
+        "stripes": { "type": "array", "items": { "type": "string" } },
+        "curvedStripes": { "type": "array", "items": { "type": "string" } },
+        "halves": { "type": "array", "items": { "type": "string" } },
+        "quarters": { "type": "array", "items": { "type": "string" } },
+        "destination": { "type": "boolean", "enum": [true] },
+        "reserved": { "type": "boolean", "enum": [true] },
+        "inverse": { "type": "boolean", "enum": [true] },
+        "inverseTextColor": { "type": "string" },
         "angle": {
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
-        "percent": {
-          "type": "number",
-          "minimum": 0
-        },
-        "width": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "text": {
-          "type": "string"
-        },
-        "textColor": {
-          "type": "string"
-        },
-        "textBorderWidth": {
-          "type": "number",
-          "minimum": 0
-        },
-        "textBorderColor": {
-          "type": "string"
-        },
-        "hidden": {
-          "type": "boolean",
-          "enum": [true]
-        },
+        "percent": { "type": "number", "minimum": 0 },
+        "width": { "type": "integer", "minimum": 1 },
+        "text": { "type": "string" },
+        "textColor": { "type": "string" },
+        "textBorderWidth": { "type": "number", "minimum": 0 },
+        "textBorderColor": { "type": "string" },
+        "hidden": { "type": "boolean", "enum": [true] },
         "rotate": {
           "type": "number",
           "exclusiveMinimum": -360,
@@ -660,17 +343,9 @@
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
-        "side": {
-          "type": "number",
-          "minimum": 1,
-          "maximum": 6
-        },
-        "x": {
-          "type": "number"
-        },
-        "y": {
-          "type": "number"
-        },
+        "side": { "type": "number", "minimum": 1, "maximum": 6 },
+        "x": { "type": "number" },
+        "y": { "type": "number" },
         "fontStyle": {
           "type": "string",
           "enum": ["normal", "italic", "oblique"]
@@ -681,18 +356,11 @@
               "type": "string",
               "enum": ["normal", "bold", "bolder", "lighter"]
             },
-            {
-              "type": "number"
-            }
+            { "type": "number" }
           ]
         },
-        "fontFamily": {
-          "type": "string"
-        },
-        "fontSize": {
-          "type": "integer",
-          "minimum": 4
-        }
+        "fontFamily": { "type": "string" },
+        "fontSize": { "type": "integer", "minimum": 4 }
       },
       "additionalProperties": false
     },
@@ -700,12 +368,8 @@
       "type": "array",
       "items": {
         "oneOf": [
-          {
-            "$ref": "#/definitions/companyToken"
-          },
-          {
-            "$ref": "#/definitions/genericToken"
-          }
+          { "$ref": "#/definitions/companyToken" },
+          { "$ref": "#/definitions/genericToken" }
         ]
       }
     },
@@ -714,16 +378,9 @@
       "items": {
         "type": "object",
         "properties": {
-          "top": {
-            "type": "string"
-          },
-          "bottom": {
-            "type": "string"
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "top": { "type": "string" },
+          "bottom": { "type": "string" },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -739,21 +396,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false
       }
@@ -761,48 +407,21 @@
     "offBoardRevenue": {
       "type": "object",
       "properties": {
-        "name": {
-          "$ref": "#/definitions/name"
-        },
-        "reverse": {
-          "type": "boolean",
-          "enum": [true]
-        },
-        "rows": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "groups": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
+        "name": { "$ref": "#/definitions/name" },
+        "reverse": { "type": "boolean", "enum": [true] },
+        "rows": { "type": "integer", "minimum": 1 },
+        "groups": { "type": "array", "items": { "type": "string" } },
         "revenues": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "color": {
-                "type": "string"
-              },
-              "value": {
-                "oneOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "number"
-                  }
-                ]
-              }
+              "color": { "type": "string" },
+              "value": { "oneOf": [{ "type": "string" }, { "type": "number" }] }
             }
           }
         },
-        "hidden": {
-          "type": "boolean",
-          "enum": [true]
-        },
+        "hidden": { "type": "boolean", "enum": [true] },
         "angle": {
           "type": "number",
           "exclusiveMinimum": -360,
@@ -818,21 +437,10 @@
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
-        "side": {
-          "type": "number",
-          "minimum": 1,
-          "maximum": 6
-        },
-        "x": {
-          "type": "number"
-        },
-        "y": {
-          "type": "number"
-        },
-        "percent": {
-          "type": "number",
-          "minimum": 0
-        }
+        "side": { "type": "number", "minimum": 1, "maximum": 6 },
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "percent": { "type": "number", "minimum": 0 }
       },
       "additionalProperties": false
     },
@@ -841,31 +449,13 @@
       "items": {
         "type": "object",
         "properties": {
-          "name": {
-            "$ref": "#/definitions/name"
-          },
-          "city": {
-            "type": "boolean",
-            "enum": [true]
-          },
-          "dashed": {
-            "type": "boolean",
-            "enum": [false]
-          },
-          "width": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "color": {
-            "type": "string"
-          },
-          "bgColor": {
-            "type": "string"
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "name": { "$ref": "#/definitions/name" },
+          "city": { "type": "boolean", "enum": [true] },
+          "dashed": { "type": "boolean", "enum": [false] },
+          "width": { "type": "integer", "minimum": 1 },
+          "color": { "type": "string" },
+          "bgColor": { "type": "string" },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -881,27 +471,11 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 },
+          "groups": { "type": "array", "items": { "type": "string" } }
         },
         "additionalProperties": false
       }
@@ -913,46 +487,17 @@
         "properties": {
           "size": {
             "oneOf": [
-              {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 6,
-                "default": 1
-              },
-              {
-                "type": "string",
-                "enum": ["2Y", "1S1Y", "2S1Y", "3Ferry"]
-              }
+              { "type": "integer", "minimum": 1, "maximum": 6, "default": 1 },
+              { "type": "string", "enum": ["2Y", "1S1Y", "2S1Y", "3Ferry"] }
             ]
           },
-          "width": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "extend": {
-            "type": "string",
-            "enum": ["left", "right"]
-          },
-          "pass": {
-            "type": "boolean",
-            "enum": [true]
-          },
-          "outside": {
-            "type": "boolean",
-            "enum": [true]
-          },
-          "name": {
-            "$ref": "#/definitions/name"
-          },
-          "color": {
-            "type": "string"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
+          "width": { "type": "integer", "minimum": 1 },
+          "extend": { "type": "string", "enum": ["left", "right"] },
+          "pass": { "type": "boolean", "enum": [true] },
+          "outside": { "type": "boolean", "enum": [true] },
+          "name": { "$ref": "#/definitions/name" },
+          "color": { "type": "string" },
+          "groups": { "type": "array", "items": { "type": "string" } },
           "companies": {
             "type": "array",
             "items": {
@@ -960,28 +505,17 @@
                 {
                   "type": "object",
                   "properties": {
-                    "label": {
-                      "type": "string"
-                    },
-                    "color": {
-                      "type": "string"
-                    },
+                    "label": { "type": "string" },
+                    "color": { "type": "string" },
                     "additionalProperties": false
                   }
                 },
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
+                { "type": "string" },
+                { "type": "null" }
               ]
             }
           },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -997,21 +531,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false
       }
@@ -1021,16 +544,9 @@
       "items": {
         "type": "object",
         "properties": {
-          "name": {
-            "$ref": "#/definitions/name"
-          },
-          "color": {
-            "type": "string"
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "name": { "$ref": "#/definitions/name" },
+          "color": { "type": "string" },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -1046,27 +562,11 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 },
+          "groups": { "type": "array", "items": { "type": "string" } }
         },
         "additionalProperties": false
       }
@@ -1076,26 +576,11 @@
       "items": {
         "type": "object",
         "properties": {
-          "name": {
-            "$ref": "#/definitions/name"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "width": {
-            "type": "number",
-            "exclusiveMinimum": 0
-          },
-          "color": {
-            "type": "string"
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "name": { "$ref": "#/definitions/name" },
+          "groups": { "type": "array", "items": { "type": "string" } },
+          "width": { "type": "number", "exclusiveMinimum": 0 },
+          "color": { "type": "string" },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -1111,21 +596,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false
       }
@@ -1135,22 +609,10 @@
       "items": {
         "type": "object",
         "properties": {
-          "name": {
-            "$ref": "#/definitions/name"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "color": {
-            "type": "string"
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "name": { "$ref": "#/definitions/name" },
+          "groups": { "type": "array", "items": { "type": "string" } },
+          "color": { "type": "string" },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -1166,21 +628,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false
       }
@@ -1190,39 +641,15 @@
       "items": {
         "type": "object",
         "properties": {
-          "textColor": {
-            "type": "string"
-          },
-          "cost": {
-            "type": "number"
-          },
-          "color": {
-            "type": "string"
-          },
-          "opacity": {
-            "type": "number",
-            "minimum": 0,
-            "maximum": 1
-          },
-          "borderColor": {
-            "type": "string"
-          },
-          "borderWidth": {
-            "type": "number",
-            "minimum": 0
-          },
-          "width": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "height": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "dashed": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "textColor": { "type": "string" },
+          "cost": { "type": "number" },
+          "color": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
           "fontStyle": {
             "type": "string",
             "enum": ["normal", "italic", "oblique"]
@@ -1233,22 +660,12 @@
                 "type": "string",
                 "enum": ["normal", "bold", "bolder", "lighter"]
               },
-              {
-                "type": "number"
-              }
+              { "type": "number" }
             ]
           },
-          "fontFamily": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "integer",
-            "minimum": 4
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -1264,21 +681,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false
       }
@@ -1288,39 +694,15 @@
       "items": {
         "type": "object",
         "properties": {
-          "textColor": {
-            "type": "string"
-          },
-          "cost": {
-            "type": "number"
-          },
-          "color": {
-            "type": "string"
-          },
-          "opacity": {
-            "type": "number",
-            "minimum": 0,
-            "maximum": 1
-          },
-          "borderColor": {
-            "type": "string"
-          },
-          "borderWidth": {
-            "type": "number",
-            "minimum": 0
-          },
-          "width": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "height": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "dashed": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "textColor": { "type": "string" },
+          "cost": { "type": "number" },
+          "color": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
           "fontStyle": {
             "type": "string",
             "enum": ["normal", "italic", "oblique"]
@@ -1331,22 +713,12 @@
                 "type": "string",
                 "enum": ["normal", "bold", "bolder", "lighter"]
               },
-              {
-                "type": "number"
-              }
+              { "type": "number" }
             ]
           },
-          "fontFamily": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "integer",
-            "minimum": 4
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -1362,21 +734,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false
       }
@@ -1386,13 +747,8 @@
       "items": {
         "type": "object",
         "properties": {
-          "value": {
-            "type": "string"
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "value": { "type": "string" },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -1408,21 +764,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false
       }
@@ -1432,10 +777,7 @@
       "items": {
         "type": "object",
         "properties": {
-          "background": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "background": { "type": "boolean", "enum": [true] },
           "type": {
             "type": "string",
             "enum": [
@@ -1447,46 +789,17 @@
               "triangle"
             ]
           },
-          "text": {
-            "type": "string"
-          },
-          "textColor": {
-            "type": "string"
-          },
-          "textBorderWidth": {
-            "type": "number",
-            "minimum": 0
-          },
-          "textBorderColor": {
-            "type": "string"
-          },
-          "color": {
-            "type": "string"
-          },
-          "opacity": {
-            "type": "number",
-            "minimum": 0,
-            "maximum": 1
-          },
-          "borderColor": {
-            "type": "string"
-          },
-          "borderWidth": {
-            "type": "number",
-            "minimum": 0
-          },
-          "width": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "height": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "dashed": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "text": { "type": "string" },
+          "textColor": { "type": "string" },
+          "textBorderWidth": { "type": "number", "minimum": 0 },
+          "textBorderColor": { "type": "string" },
+          "color": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
           "fontStyle": {
             "type": "string",
             "enum": ["normal", "italic", "oblique"]
@@ -1497,22 +810,12 @@
                 "type": "string",
                 "enum": ["normal", "bold", "bolder", "lighter"]
               },
-              {
-                "type": "number"
-              }
+              { "type": "number" }
             ]
           },
-          "fontFamily": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "integer",
-            "minimum": 4
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -1528,21 +831,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false
       }
@@ -1552,20 +844,13 @@
       "items": {
         "type": "object",
         "properties": {
-          "cost": {
-            "type": "number"
-          },
+          "cost": { "type": "number" },
           "size": {
             "type": "string",
             "enum": ["tiny", "small", "medium", "large"]
           },
-          "type": {
-            "type": "string"
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "type": { "type": "string" },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -1581,21 +866,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false
       }
@@ -1605,27 +879,12 @@
       "items": {
         "type": "object",
         "properties": {
-          "noCircle": {
-            "type": "boolean"
-          },
-          "type": {
-            "type": "string"
-          },
-          "width": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "stroke": {
-            "type": "string"
-          },
-          "strokeWidth": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "noCircle": { "type": "boolean" },
+          "type": { "type": "string" },
+          "width": { "type": "integer", "minimum": 1 },
+          "stroke": { "type": "string" },
+          "strokeWidth": { "type": "integer", "minimum": 1 },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -1641,21 +900,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false
       }
@@ -1667,43 +915,23 @@
         "properties": {
           "sides": {
             "type": "array",
-            "items": {
-              "type": "number",
-              "minimum": 1,
-              "maximum": 6
-            }
+            "items": { "type": "number", "minimum": 1, "maximum": 6 }
           },
-          "width": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "color": {
-            "type": "string"
-          },
-          "borderColor": {
-            "type": "string"
-          },
-          "gaugeColor": {
-            "type": "string"
-          },
-          "revenue": {
-            "type": "integer",
-            "minimum": 0
-          },
+          "width": { "type": "integer", "minimum": 1 },
+          "color": { "type": "string" },
+          "borderColor": { "type": "string" },
+          "gaugeColor": { "type": "string" },
+          "revenue": { "type": "integer", "minimum": 0 },
           "gauge": {
             "type": "string",
             "enum": ["narrow", "dual", "dashed", "line"]
           },
-          "offset": {
-            "type": "number"
-          },
+          "offset": { "type": "number" },
           "cross": {
             "type": "string",
             "enum": ["over", "under", "top", "bottom"]
           },
-          "path": {
-            "type": "string"
-          },
+          "path": { "type": "string" },
           "start": {
             "type": "number",
             "exclusiveMinimum": 0,
@@ -1734,10 +962,7 @@
               "city"
             ]
           },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -1753,21 +978,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false
       }
@@ -1777,10 +991,7 @@
       "items": {
         "type": "object",
         "properties": {
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -1796,21 +1007,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false
       }
@@ -1820,23 +1020,9 @@
       "items": {
         "type": "object",
         "properties": {
-          "value": {
-            "oneOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "string"
-              }
-            ]
-          },
-          "outerBorderColor": {
-            "type": "string"
-          },
-          "hidden": {
-            "type": "boolean",
-            "enum": [true]
-          },
+          "value": { "oneOf": [{ "type": "number" }, { "type": "string" }] },
+          "outerBorderColor": { "type": "string" },
+          "hidden": { "type": "boolean", "enum": [true] },
           "angle": {
             "type": "number",
             "exclusiveMinimum": -360,
@@ -1852,21 +1038,10 @@
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
-          "side": {
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6
-          },
-          "x": {
-            "type": "number"
-          },
-          "y": {
-            "type": "number"
-          },
-          "percent": {
-            "type": "number",
-            "minimum": 0
-          }
+          "side": { "type": "number", "minimum": 1, "maximum": 6 },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "percent": { "type": "number", "minimum": 0 }
         },
         "additionalProperties": false,
         "required": ["value"]
@@ -1875,31 +1050,16 @@
     "hex": {
       "type": "object",
       "properties": {
-        "print": {
-          "type": "integer",
-          "minimum": 0
-        },
+        "print": { "type": "integer", "minimum": 0 },
         "quantity": {
           "oneOf": [
-            {
-              "type": "integer",
-              "minimum": 1
-            },
-            {
-              "type": "string",
-              "enum": ["∞"]
-            }
+            { "type": "integer", "minimum": 1 },
+            { "type": "string", "enum": ["∞"] }
           ]
         },
-        "tile": {
-          "type": "string"
-        },
-        "color": {
-          "type": "string"
-        },
-        "encoding": {
-          "type": "string"
-        },
+        "tile": { "type": "string" },
+        "color": { "type": "string" },
+        "encoding": { "type": "string" },
         "group": {
           "type": "string",
           "pattern": "^[0-9a-z]+$",
@@ -1915,110 +1075,46 @@
           "enum": [false],
           "description": "Remove the special bleed mask when printing these tiles. They will always be printed with no bleed."
         },
-        "borders": {
-          "$ref": "#/definitions/borders"
-        },
-        "centerTowns": {
-          "$ref": "#/definitions/centerTowns"
-        },
-        "cities": {
-          "$ref": "#/definitions/cities"
-        },
-        "boomtowns": {
-          "$ref": "#/definitions/boomtowns"
-        },
-        "mediumCities": {
-          "$ref": "#/definitions/mediumCities"
-        },
-        "companies": {
-          "$ref": "#/definitions/companies"
-        },
-        "divides": {
-          "$ref": "#/definitions/divides"
-        },
-        "goods": {
-          "$ref": "#/definitions/goods"
-        },
-        "icons": {
-          "$ref": "#/definitions/icons"
-        },
-        "industries": {
-          "$ref": "#/definitions/industries"
-        },
-        "labels": {
-          "$ref": "#/definitions/labels"
-        },
-        "names": {
-          "$ref": "#/definitions/names"
-        },
-        "offBoardRevenue": {
-          "$ref": "#/definitions/offBoardRevenue"
-        },
-        "removeBorders": {
-          "$ref": "#/definitions/removeBorders"
-        },
-        "rotation": {
-          "$ref": "#/definitions/rotation"
-        },
+        "borders": { "$ref": "#/definitions/borders" },
+        "centerTowns": { "$ref": "#/definitions/centerTowns" },
+        "cities": { "$ref": "#/definitions/cities" },
+        "boomtowns": { "$ref": "#/definitions/boomtowns" },
+        "mediumCities": { "$ref": "#/definitions/mediumCities" },
+        "companies": { "$ref": "#/definitions/companies" },
+        "divides": { "$ref": "#/definitions/divides" },
+        "goods": { "$ref": "#/definitions/goods" },
+        "icons": { "$ref": "#/definitions/icons" },
+        "industries": { "$ref": "#/definitions/industries" },
+        "labels": { "$ref": "#/definitions/labels" },
+        "names": { "$ref": "#/definitions/names" },
+        "offBoardRevenue": { "$ref": "#/definitions/offBoardRevenue" },
+        "removeBorders": { "$ref": "#/definitions/removeBorders" },
+        "rotation": { "$ref": "#/definitions/rotation" },
         "rotations": {
           "oneOf": [
-            {
-              "$ref": "#/definitions/side"
-            },
-            {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/rotation"
-              }
-            }
+            { "$ref": "#/definitions/side" },
+            { "type": "array", "items": { "$ref": "#/definitions/rotation" } }
           ]
         },
-        "bridges": {
-          "$ref": "#/definitions/bridges"
-        },
-        "tunnels": {
-          "$ref": "#/definitions/tunnels"
-        },
-        "routeBonuses": {
-          "$ref": "#/definitions/routeBonuses"
-        },
-        "shapes": {
-          "$ref": "#/definitions/shapes"
-        },
-        "terrain": {
-          "$ref": "#/definitions/terrain"
-        },
-        "tokens": {
-          "$ref": "#/definitions/tokens"
-        },
-        "towns": {
-          "$ref": "#/definitions/towns"
-        },
-        "track": {
-          "$ref": "#/definitions/track"
-        },
-        "tunnelEntrances": {
-          "$ref": "#/definitions/tunnelEntrances"
-        },
-        "values": {
-          "$ref": "#/definitions/values"
-        },
+        "bridges": { "$ref": "#/definitions/bridges" },
+        "tunnels": { "$ref": "#/definitions/tunnels" },
+        "routeBonuses": { "$ref": "#/definitions/routeBonuses" },
+        "shapes": { "$ref": "#/definitions/shapes" },
+        "terrain": { "$ref": "#/definitions/terrain" },
+        "tokens": { "$ref": "#/definitions/tokens" },
+        "towns": { "$ref": "#/definitions/towns" },
+        "track": { "$ref": "#/definitions/track" },
+        "tunnelEntrances": { "$ref": "#/definitions/tunnelEntrances" },
+        "values": { "$ref": "#/definitions/values" },
         "hexes": {
           "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^[A-Z]+[0-9]+$"
-          }
+          "items": { "type": "string", "pattern": "^[A-Z]+[0-9]+$" }
         }
       },
       "additionalProperties": false
     }
   },
   "type": "object",
-  "propertyNames": {
-    "pattern": "^[0-9a-zA-Z]+(\\|[0-9a-zA-Z]+)?$"
-  },
-  "additionalProperties": {
-    "$ref": "#/definitions/hex"
-  }
+  "propertyNames": { "pattern": "^[0-9a-zA-Z]+(\\|[0-9a-zA-Z]+)?$" },
+  "additionalProperties": { "$ref": "#/definitions/hex" }
 }
