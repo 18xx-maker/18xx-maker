@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 import Svg from "../../../Svg";
 import CompanyToken from "../../../tokens/CompanyToken";
@@ -24,16 +24,23 @@ const Tokens = () => {
   const { config } = useContext(ConfigContext);
   const { game } = useContext(GameContext);
 
-  let companyTokenNodes = map(company => (
-    <div className="token" key={company.abbrev}>
-      <Svg width={30} height={30} viewBox="-26 -26 52 52">
-        <CompanyToken company={company} />
-      </Svg>
-      <Svg width={30} height={30} viewBox="-26 -26 52 52">
-        <CompanyToken company={company} inverse={true} />
-      </Svg>
-    </div>
-  ), overrideCompanies(compileCompanies(game), config.overrideCompanies, config.overrideSelection));
+  let companyTokenNodes = map(
+    (company) => (
+      <div className="token" key={company.abbrev}>
+        <Svg width={30} height={30} viewBox="-26 -26 52 52">
+          <CompanyToken company={company} />
+        </Svg>
+        <Svg width={30} height={30} viewBox="-26 -26 52 52">
+          <CompanyToken company={company} inverse={true} />
+        </Svg>
+      </div>
+    ),
+    overrideCompanies(
+      compileCompanies(game),
+      config.overrideCompanies,
+      config.overrideSelection,
+    ),
+  );
 
   // "quantity" of 0 means remove the token entirely from the array
   let extraTokenNodes = compose(
@@ -62,15 +69,14 @@ const Tokens = () => {
         );
       }
     }),
-    reject(propEq("quantity", 0))
+    reject(propEq("quantity", 0)),
   )(game.tokens || []);
 
   let totalHeight = 30 * (companyTokenNodes.length + extraTokenNodes.length);
 
   return (
     <ColorContext.Provider value="companies">
-      <div className="b18"
-           style={{width: `60px`}}>
+      <div className="b18" style={{ width: `60px` }}>
         <div className="tokens">
           {companyTokenNodes}
           {extraTokenNodes}

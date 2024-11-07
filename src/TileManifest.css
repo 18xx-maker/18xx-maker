@@ -36,7 +36,7 @@
 }
 
 .TileManifest--Id {
-  width: calc(((8in - 5px) / 4) - 1.0in);
+  width: calc(((8in - 5px) / 4) - 1in);
   font-size: 0.16in;
   text-align: right;
   padding-right: 0.1in;

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 import Color from "../util/Color";
 
@@ -12,12 +12,16 @@ const Title = ({ game, variation, hexWidth }) => {
   let titleWeight = game.info.titleFontWeight || "bold";
   let titleSize = (game.info.titleSize || 200) * scale;
 
-  let subtitleFont = game.info.subtitleFontFamily || game.info.titleFontFamily || "display";
-  let subtitleWeight = game.info.subtitleFontWeight || game.info.titleFontWeight || "bold";
+  let subtitleFont =
+    game.info.subtitleFontFamily || game.info.titleFontFamily || "display";
+  let subtitleWeight =
+    game.info.subtitleFontWeight || game.info.titleFontWeight || "bold";
   let subtitleSize = (game.info.subtitleSize || 30) * scale;
 
-  let designerFont = game.info.designerFontFamily || game.info.titleFontFamily || "display";
-  let designerWeight = game.info.designerFontWeight || game.info.titleFontWeight || "bold";
+  let designerFont =
+    game.info.designerFontFamily || game.info.titleFontFamily || "display";
+  let designerWeight =
+    game.info.designerFontWeight || game.info.titleFontWeight || "bold";
   let designerSize = (game.info.designerSize || 20) * scale;
 
   let mapName = null;
@@ -28,14 +32,12 @@ const Title = ({ game, variation, hexWidth }) => {
 
   let x = (game.info.titleX || 0) * scale + 50;
   let y = ((game.info.titleY || 0) + 170) * scale + 50;
-  let rotate = (game.info.titleRotate || 0);
+  let rotate = game.info.titleRotate || 0;
 
   return (
     <Color>
-      {c => (
-        <g
-          transform={`translate(${x} ${y}) rotate(${rotate})`}
-        >
+      {(c) => (
+        <g transform={`translate(${x} ${y}) rotate(${rotate})`}>
           <text
             fill={c("black")}
             fontFamily={titleFont}
@@ -70,7 +72,7 @@ const Title = ({ game, variation, hexWidth }) => {
             textAnchor="start"
             lengthAdjust="spacingAndGlyphs"
             x="0"
-            y={designerSize + 10 + (game.info.subtitle ? (subtitleSize + 10) : 0)}
+            y={designerSize + 10 + (game.info.subtitle ? subtitleSize + 10 : 0)}
           >
             by {game.info.designer}
             {mapName && ` ⋯ ${mapName}`}

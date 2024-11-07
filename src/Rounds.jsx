@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import GameContext from "./context/GameContext";
 import ConfigContext from "./context/ConfigContext";
 
@@ -15,8 +15,12 @@ const Rounds = () => {
   const data = getRoundTrackerData(rounds, size, type);
 
   return (
-    <svg viewBox={`${data.startX} ${data.startY} ${data.width} ${data.height}`} width={data.css.width} height={data.css.height}>
-      <RoundTracker {...{rounds,size,type}} />
+    <svg
+      viewBox={`${data.startX} ${data.startY} ${data.width} ${data.height}`}
+      width={data.css.width}
+      height={data.css.height}
+    >
+      <RoundTracker {...{ rounds, size, type }} />
     </svg>
   );
 };

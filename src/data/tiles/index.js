@@ -8,7 +8,7 @@ import { assoc, clone, mapObjIndexed, forEach, forEachObjIndexed } from "ramda";
 
 let aliases = {};
 const gatherAliases = (tiles) => {
-  forEachObjIndexed((tile, id) => {
+  forEachObjIndexed((tile) => {
     forEach((alias) => {
       aliases[alias] = clone(tile);
     }, tile.aliases || []);

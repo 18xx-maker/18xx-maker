@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import GameContext from "../context/GameContext";
 import ConfigContext from "../context/ConfigContext";
 
@@ -20,14 +20,21 @@ const GameMapCompanyToken = (props) => {
   let passing = { ...props };
   delete passing.abbrev;
 
-  let companies = overrideCompanies(compileCompanies(game), config.overrideCompanies, config.overrideSelection);
+  let companies = overrideCompanies(
+    compileCompanies(game),
+    config.overrideCompanies,
+    config.overrideSelection,
+  );
 
   // Look into the original game companies and find this abbrev
-  let companyIndex = findIndex(propEq("abbrev", abbrev), ((game && game.companies) || []));
+  let companyIndex = findIndex(
+    propEq("abbrev", abbrev),
+    (game && game.companies) || [],
+  );
 
   if (companyIndex === -1) {
     // We are dealing with a raw token
-    return <Token {...props} />
+    return <Token {...props} />;
   }
 
   // Look up that index in the final company list

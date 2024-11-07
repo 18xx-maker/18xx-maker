@@ -12,17 +12,20 @@ export const format = (value, game, doCurrencyFormat) => {
   } else if (doCurrencyFormat) {
     let currency = (game && game.info.currency) || "$#";
 
-    return currency.replace("#", Number(value).toLocaleString([], { minimumFractionDigits: 0 }));
+    return currency.replace(
+      "#",
+      Number(value).toLocaleString([], { minimumFractionDigits: 0 }),
+    );
   } else {
     return `${value}`;
   }
-}
+};
 
-const Currency = ({value, type}) => {
+const Currency = ({ value, type }) => {
   const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
 
   return format(value, game, config.currency[type]);
-}
+};
 
 export default Currency;

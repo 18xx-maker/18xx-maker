@@ -1,10 +1,17 @@
-import React from "react";
 import Color from "../util/Color";
 import defaultTo from "ramda/src/defaultTo";
 
 import { icons } from "../data";
 
-const Icon = ({ type, color, width, noCircle, fillColor, strokeColor, strokeWidth }) => {
+const Icon = ({
+  type,
+  color,
+  width,
+  noCircle,
+  fillColor,
+  strokeColor,
+  strokeWidth,
+}) => {
   let icon;
   let iconWidth = width || "25";
   let iconPos = -1 * (width / 2) || "-12.5";
@@ -15,25 +22,23 @@ const Icon = ({ type, color, width, noCircle, fillColor, strokeColor, strokeWidt
 
   if (icons[type]) {
     let Component = icons[type];
-    icon = <Component className={`icon-color-main-${color}`}
-                      width={iconWidth} height={iconWidth}
-                      x={iconPos} y={iconPos} />;
+    icon = (
+      <Component
+        className={`icon-color-main-${color}`}
+        width={iconWidth}
+        height={iconWidth}
+        x={iconPos}
+        y={iconPos}
+      />
+    );
   }
 
   if (noCircle) {
-    return (
-      <Color>
-        {(c,t,s,p) => (
-          <g>
-            {icon}
-          </g>
-        )}
-      </Color>
-    );
+    return <Color>{() => <g>{icon}</g>}</Color>;
   } else {
     return (
       <Color>
-        {(c,t,s,p) => (
+        {(c, t, s, p) => (
           <g>
             <circle
               fill={p(fillColor)}

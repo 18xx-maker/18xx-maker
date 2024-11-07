@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useBooleanParam } from "../../util/query";
 import GameContext from "../../context/GameContext";
 import ConfigContext from "../../context/ConfigContext";
@@ -10,11 +10,13 @@ const Market = () => {
   const { config } = useContext(ConfigContext);
   const { game } = useContext(GameContext);
 
-  const [paginated] = useBooleanParam('paginated');
+  const [paginated] = useBooleanParam("paginated");
 
-  return (paginated
-          ? <MarketPaginated {...{game, config}}/>
-          : <MarketSingle {...{game, config}}/>);
+  return paginated ? (
+    <MarketPaginated {...{ game, config }} />
+  ) : (
+    <MarketSingle {...{ game, config }} />
+  );
 };
 
 export default Market;

@@ -9,7 +9,7 @@ on:
     types:
       - checks_requested
 jobs:
-  test:
+  ci:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -23,32 +23,27 @@ jobs:
           - x64
     name: Test - Node v${{ matrix.node_version }} on ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup node
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node_version }}
-        architecture: ${{ matrix.architecture }}
-        cache: 'yarn'
-    - uses: actions/cache@v4
-      with:
-        path: '**/node_modules'
-        key: ${{ matrix.os }}-${{ matrix.node_version }}-modules-${{ hashFiles('**/yarn.lock') }}
-    - run: yarn
-    - run: yarn test
-  build:
-    runs-on: macos-latest
-    name: Build webapp
-    steps:
-    - uses: actions/checkout@v4
-    - name: Setup node
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22
-        cache: 'yarn'
-    - uses: actions/cache@v4
-      with:
-        path: '**/node_modules'
-        key: macos-latest-22-modules-${{ hashFiles('**/yarn.lock') }}
-    - run: yarn
-    - run: yarn build
+      - uses: actions/checkout@v4
+        name: Checkout
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          architecture: ${{ matrix.architecture }}
+          node-version: ${{ matrix.node_version }}
+          check-latest: true
+          cache: yarn
+          cache-dependency-path: yarn.lock
+      - run: yarn
+        name: Dependencies
+      - name: Schemas
+        run: yarn schemas:prepare
+      - run: yarn pretty
+        name: Pretty
+      - run: yarn lint
+        name: Lint
+      - run: yarn validate
+        name: Validate
+      - run: yarn test
+        name: Test
+      - run: yarn build
+        name: Build

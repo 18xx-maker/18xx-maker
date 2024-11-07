@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import LoadGames from "../games/LoadGames";
@@ -13,10 +12,10 @@ const Games = () => {
   return (
     <Switch>
       <Route path="/games" exact>
-        <LoadGames/>
+        <LoadGames />
       </Route>
       <Route>
-        <Game game={game}/>
+        <Game game={game} />
       </Route>
     </Switch>
   );

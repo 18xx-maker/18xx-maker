@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 
 import Color from "../util/Color";
@@ -11,10 +11,13 @@ import defaultTo from "ramda/src/defaultTo";
 
 import "./train.scss";
 
-const trainImages = import.meta.glob("../images/trains/*.png", { eager: true, import: "default" });
+const trainImages = import.meta.glob("../images/trains/*.png", {
+  eager: true,
+  import: "default",
+});
 
 const ordinal = (num) => {
-  switch(num) {
+  switch (num) {
     case 1:
       return "1st";
     case 2:
@@ -26,7 +29,7 @@ const ordinal = (num) => {
   }
 };
 
-const Train = ({ train, trains, blackBand }) => {
+const Train = ({ train, trains }) => {
   const { config } = useContext(ConfigContext);
 
   let {
@@ -55,7 +58,8 @@ const Train = ({ train, trains, blackBand }) => {
     permanentColor,
     longevityFontFamily,
     longevityFontSize,
-    variant } = train;
+    variant,
+  } = train;
 
   let notes = [];
 
@@ -63,7 +67,7 @@ const Train = ({ train, trains, blackBand }) => {
   let nameFontSizeInch = defaultTo(0.5, nameFontSize / 72);
 
   priceFontFamily = defaultTo("display", priceFontFamily);
-  let priceFontSizeInch = defaultTo( 0.25, priceFontSize / 72);
+  let priceFontSizeInch = defaultTo(0.25, priceFontSize / 72);
 
   phasedText = defaultTo("Phased out by", phasedText);
   obsoletedText = defaultTo("Obsoleted by", obsoletedText);
@@ -76,7 +80,7 @@ const Train = ({ train, trains, blackBand }) => {
   if (phased) {
     let phaseds = is(Array, phased) ? phased : [phased];
 
-    let events = map(r => {
+    let events = map((r) => {
       if (is(Object, r)) {
         return `${ordinal(r.index)} ${r.on}`;
       }
@@ -87,29 +91,33 @@ const Train = ({ train, trains, blackBand }) => {
     let phasedBy = `${phasedText} ${events}`;
     let phasedOn = is(Object, phaseds[0]) ? phaseds[0].on : phaseds[0];
 
-    let eventTrain = find(t => {
+    let eventTrain = find((t) => {
       return t.name === phasedOn;
     }, trains);
 
     notes.push(
       <Color key="obsolete">
-        {(c,t) => (
-          <span className="train__info"
-                style={{
-                  backgroundColor: c(eventTrain.color),
-                  color: t(c(eventTrain.color)),
-                  fontSize: `${longevityFontSizeInch}in`,
-                  fontFamily: `${longevityFontFamily}`
-                }} >{phasedBy}</span>
+        {(c, t) => (
+          <span
+            className="train__info"
+            style={{
+              backgroundColor: c(eventTrain.color),
+              color: t(c(eventTrain.color)),
+              fontSize: `${longevityFontSizeInch}in`,
+              fontFamily: `${longevityFontFamily}`,
+            }}
+          >
+            {phasedBy}
+          </span>
         )}
-      </Color>
+      </Color>,
     );
   }
 
   if (obsolete) {
     let obsoletes = is(Array, obsolete) ? obsolete : [obsolete];
 
-    let events = map(r => {
+    let events = map((r) => {
       if (is(Object, r)) {
         return `${ordinal(r.index)} ${r.on}`;
       }
@@ -120,29 +128,33 @@ const Train = ({ train, trains, blackBand }) => {
     let obsoleteBy = `${obsoletedText} ${events}`;
     let obsoleteOn = is(Object, obsoletes[0]) ? obsoletes[0].on : obsoletes[0];
 
-    let eventTrain = find(t => {
+    let eventTrain = find((t) => {
       return t.name === obsoleteOn;
     }, trains);
 
     notes.push(
       <Color key="obsolete">
-        {(c,t) => (
-          <span className="train__info"
-                style={{
-                  backgroundColor: c(eventTrain.color),
-                  color: t(c(eventTrain.color)),
-                  fontSize: `${longevityFontSizeInch}in`,
-                  fontFamily: `${longevityFontFamily}`
-                }} >{obsoleteBy}</span>
+        {(c, t) => (
+          <span
+            className="train__info"
+            style={{
+              backgroundColor: c(eventTrain.color),
+              color: t(c(eventTrain.color)),
+              fontSize: `${longevityFontSizeInch}in`,
+              fontFamily: `${longevityFontFamily}`,
+            }}
+          >
+            {obsoleteBy}
+          </span>
         )}
-      </Color>
+      </Color>,
     );
   }
 
   if (rust) {
     let rusts = is(Array, rust) ? rust : [rust];
 
-    let events = map(r => {
+    let events = map((r) => {
       if (is(Object, r)) {
         return `${ordinal(r.index)} ${r.on}`;
       }
@@ -153,38 +165,46 @@ const Train = ({ train, trains, blackBand }) => {
     let rustedBy = `${rustedText} ${events}`;
     let rustedOn = is(Object, rusts[0]) ? rusts[0].on : rusts[0];
 
-    let eventTrain = find(t => {
+    let eventTrain = find((t) => {
       return t.name === rustedOn;
     }, trains);
 
     notes.push(
       <Color key="rust">
-        {(c,t) => (
-          <span className="train__info"
-                style={{
-                  backgroundColor: c(eventTrain.color),
-                  color: t(c(eventTrain.color)),
-                  fontSize: `${longevityFontSizeInch}in`,
-                  fontFamily: `${longevityFontFamily}`
-                }} >{rustedBy}</span>
+        {(c, t) => (
+          <span
+            className="train__info"
+            style={{
+              backgroundColor: c(eventTrain.color),
+              color: t(c(eventTrain.color)),
+              fontSize: `${longevityFontSizeInch}in`,
+              fontFamily: `${longevityFontFamily}`,
+            }}
+          >
+            {rustedBy}
+          </span>
         )}
-      </Color>
+      </Color>,
     );
   }
 
   if (!phased && !obsolete && !rust && permanent !== false) {
     notes.push(
       <Color key="rust">
-        {(c,t) => (
-          <span className="train__info"
-                style={{
-                  backgroundColor: permanentColor ? c(permanentColor) : c("yellow"),
-                  color: permanentColor ? t(c(permanentColor)) : t(c("yellow")),
-                  fontSize: `${longevityFontSizeInch}in`,
-                  fontFamily: `${longevityFontFamily}`
-                }} >{permanentText}</span>
+        {(c, t) => (
+          <span
+            className="train__info"
+            style={{
+              backgroundColor: permanentColor ? c(permanentColor) : c("yellow"),
+              color: permanentColor ? t(c(permanentColor)) : t(c("yellow")),
+              fontSize: `${longevityFontSizeInch}in`,
+              fontFamily: `${longevityFontFamily}`,
+            }}
+          >
+            {permanentText}
+          </span>
         )}
-      </Color>
+      </Color>,
     );
   }
 
@@ -192,7 +212,7 @@ const Train = ({ train, trains, blackBand }) => {
     notes.unshift(
       <span key="players" className="train__players">
         {players}
-      </span>
+      </span>,
     );
   }
 
@@ -217,51 +237,71 @@ const Train = ({ train, trains, blackBand }) => {
   return (
     <div className="cutlines">
       <Color>
-        {(c,t) => (
-          <div className={`card train card--${config.cards.layout} train--${config.trains.style}`}>
-            <div className="card__bleed"
-                 style={{
-                   backgroundColor: c(backgroundColor || "white")
-                 }}>
-              {config.trains.style === "color" && (<div className="train__hr"
-                style={{
-                  backgroundColor: c(color),
-                  borderBottom: (color === "white" || config.cards.blackBand) ?
-                                "2px solid black" : null
-                }}
-              />)}
+        {(c, t) => (
+          <div
+            className={`card train card--${config.cards.layout} train--${config.trains.style}`}
+          >
+            <div
+              className="card__bleed"
+              style={{
+                backgroundColor: c(backgroundColor || "white"),
+              }}
+            >
+              {config.trains.style === "color" && (
+                <div
+                  className="train__hr"
+                  style={{
+                    backgroundColor: c(color),
+                    borderBottom:
+                      color === "white" || config.cards.blackBand
+                        ? "2px solid black"
+                        : null,
+                  }}
+                />
+              )}
               <div className="card__body">
                 {config.trains.images && (
                   <div className={`train__image train__image--${image}`}>
-                    <img alt={`${color} ${name} train`}
-                         style={{
-                            paddingTop: `${imagePaddingTop}`,
-                            width: `${imageWidth}`
-                         }}
-                         src={trainImages[`../images/trains/${image}.png`]}/>
+                    <img
+                      alt={`${color} ${name} train`}
+                      style={{
+                        paddingTop: `${imagePaddingTop}`,
+                        width: `${imageWidth}`,
+                      }}
+                      src={trainImages[`../images/trains/${image}.png`]}
+                    />
                   </div>
                 )}
-                <div className="train__name"
+                <div
+                  className="train__name"
                   style={{
-                    color: config.trains.style === "color" ? t(c(color)) : c(color),
+                    color:
+                      config.trains.style === "color" ? t(c(color)) : c(color),
                     fontSize: `${nameFontSizeInch}in`,
-                    fontFamily: `${nameFontFamily}`
-                  }}>{name}
+                    fontFamily: `${nameFontFamily}`,
+                  }}
+                >
+                  {name}
                 </div>
-                <div className="train__price"
+                <div
+                  className="train__price"
                   style={{
-                    color: config.trains.style === "color" ? t(c(color)) : c(color),
+                    color:
+                      config.trains.style === "color" ? t(c(color)) : c(color),
                     fontSize: `${priceFontSizeInch}in`,
-                    fontFamily: `${priceFontFamily}`
-                  }}>
-                  <Currency value={price} type="train"/>
+                    fontFamily: `${priceFontFamily}`,
+                  }}
+                >
+                  <Currency value={price} type="train" />
                   {tradeInPrice && (
                     <div className="train__trade_in_price">
-                      (<Currency value={tradeInPrice} type="train"/>)
+                      (<Currency value={tradeInPrice} type="train" />)
                     </div>
                   )}
                 </div>
-                {description && <div className="train__description">{description}</div>}
+                {description && (
+                  <div className="train__description">{description}</div>
+                )}
                 <div className="train__notes">{notes}</div>
                 {variant && <div className="train__variant">{variant}</div>}
               </div>

@@ -1,4 +1,3 @@
-import React from "react";
 import Color from "../util/Color";
 
 const Company = ({ label, reverse, bottom, left, right, radius, color }) => {
@@ -6,11 +5,10 @@ const Company = ({ label, reverse, bottom, left, right, radius, color }) => {
   radius = radius || 6;
 
   let y = bottom ? radius : -radius;
-  let ty = reverse ? (5*y) : -y;
+  let ty = reverse ? 5 * y : -y;
 
   let x = label.length * 3 + 5;
   let r = (x + (right || 0) + (x + (left || 0))) * 2;
-
 
   return (
     <Color context="companies">

@@ -68,7 +68,7 @@ export const alphaToInt = compose(
   reduce((total, c) => {
     return total * alpha.length + (indexOf(c, alpha) + 1);
   }, 0),
-  splitEvery(1)
+  splitEvery(1),
 );
 
 // Regexp to find coordinates
@@ -93,14 +93,14 @@ export const maxMapX = compose(
   reduce(max, 1), // Find the max
   map(nth(0)), // Grab the X coordinate
   map(toCoords), // Convert to coordinate arrays
-  chain(prop("hexes")) // Grab all hexes
+  chain(prop("hexes")), // Grab all hexes
 );
 
 export const maxMapY = compose(
   reduce(max, 1), // Find the max
   map(nth(1)), // Grab the Y coordinate
   map(toCoords), // Convert to coordinate arrays
-  chain(prop("hexes")) // Grab all hexes
+  chain(prop("hexes")), // Grab all hexes
 );
 
 export const getTotalWidth = (maxX, hexWidth, extraWidth, coordSpace) =>
@@ -138,7 +138,7 @@ export const mergeHex = (a, b) => {
       }
     },
     a,
-    b
+    b,
   );
 };
 
@@ -336,7 +336,7 @@ export const getMapHexes = (game, variation) => {
   if (gameMap.copy !== undefined) {
     hexes = concat(
       map(assoc("variation", gameMap.copy), game.map[gameMap.copy].hexes),
-      hexes
+      hexes,
     );
   }
   hexes = map(resolveHex(hexes), hexes);
@@ -372,7 +372,7 @@ export const getMapData = (game, coords, hexWidth, variation) => {
   let edge = hexWidth * HEX_RATIO;
   let halfHexWidth = 0.5 * hexWidth;
 
-  let hexX = (x, y) => {
+  let hexX = (x) => {
     return x * halfHexWidth + coordOffset;
   };
 
@@ -388,7 +388,7 @@ export const getMapData = (game, coords, hexWidth, variation) => {
   if (gameMap.copy !== undefined) {
     hexes = concat(
       map(assoc("variation", gameMap.copy), game.map[gameMap.copy].hexes),
-      hexes
+      hexes,
     );
 
     // Remove any hexes set to be removed
@@ -397,7 +397,7 @@ export const getMapData = (game, coords, hexWidth, variation) => {
         return assoc(
           "hexes",
           reject((coord) => (gameMap.remove || []).includes(coord), hex.hexes),
-          hex
+          hex,
         );
       }, hexes);
     }
@@ -407,7 +407,7 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     let copyBorders = game.map[gameMap.copy].borders || [];
     borders = concat(
       without(gameMap.removeBorders || [], copyBorders),
-      borders
+      borders,
     );
 
     lines = concat(game.map[gameMap.copy].lines || [], lines);
@@ -421,13 +421,13 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     maxX,
     hexWidth,
     game.info.extraTotalWidth,
-    coordSpace
+    coordSpace,
   );
   let totalHeight = getTotalHeight(
     maxY,
     hexWidth,
     game.info.extraTotalHeight,
-    coordSpace
+    coordSpace,
   );
   let b18TotalHeight = totalHeight * squashRatio;
   let printWidth = `${Math.ceil(51.5 + totalWidth) / 100.0}in`;

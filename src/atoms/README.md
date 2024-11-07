@@ -8,7 +8,7 @@ The components in this folder should all conform to the following rules:
 
 ## Folders
 
-* **shapes** - Components in this folder are meant to be generic shapes with
+- **shapes** - Components in this folder are meant to be generic shapes with
   text in them. All props should follow the same standard and there should be no
   behavior associated with them. They should be used in other atoms to make
   meaningful items. For example a `shapes/Square.jsx` can be used to render a

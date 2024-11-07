@@ -1,4 +1,3 @@
-import React from "react";
 import * as R from "ramda";
 
 const Movement = ({ movement }) => {
@@ -16,7 +15,7 @@ const Movement = ({ movement }) => {
                 {i}
               </div>
             ),
-            movement.up
+            movement.up,
           )}
         </div>
       )}
@@ -28,39 +27,39 @@ const Movement = ({ movement }) => {
                 {i}
               </div>
             ),
-            movement.down
+            movement.down,
           )}
         </div>
       )}
       {movement.left && (
-      <div className="Movement__left">
-        {R.addIndex(R.map)(
-          (i, index) => (
-            <div key={`movement-left-${index}`} className="Movement--item">
-              {i}
-            </div>
-          ),
-          movement.left
-        )}
-      </div>
+        <div className="Movement__left">
+          {R.addIndex(R.map)(
+            (i, index) => (
+              <div key={`movement-left-${index}`} className="Movement--item">
+                {i}
+              </div>
+            ),
+            movement.left,
+          )}
+        </div>
       )}
       {movement.right && (
-      <div className="Movement__right">
-        {R.addIndex(R.map)(
-          (i, index) => (
-            <div key={`movement-right-${index}`} className="Movement--item">
-              {i}
-            </div>
-          ),
-          movement.right
-        )}
-      </div>
+        <div className="Movement__right">
+          {R.addIndex(R.map)(
+            (i, index) => (
+              <div key={`movement-right-${index}`} className="Movement--item">
+                {i}
+              </div>
+            ),
+            movement.right,
+          )}
+        </div>
       )}
       <div className="Movement__center">
-      {movement.up && <i className="fal fa-long-arrow-up" />}
-    {movement.down && <i className="fal fa-long-arrow-down" />}
-    {movement.right && <i className="fal fa-long-arrow-right" />}
-    {movement.left && <i className="fal fa-long-arrow-left" />}
+        {movement.up && <i className="fal fa-long-arrow-up" />}
+        {movement.down && <i className="fal fa-long-arrow-down" />}
+        {movement.right && <i className="fal fa-long-arrow-right" />}
+        {movement.left && <i className="fal fa-long-arrow-left" />}
       </div>
     </div>
   );

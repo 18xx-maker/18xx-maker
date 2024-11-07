@@ -92,7 +92,7 @@ function progress(progress, message) {
 
 // Goes to path in the app, and saves a PDF to filePath
 function createPDF(path, filePath) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     let win = captureWindow();
 
     win.webContents.on("did-stop-loading", () => {
@@ -145,7 +145,7 @@ ipcMain.on("pdf", (event, path) => {
 
 // Goes to path in the app, and saves a PNG to filePath of width x height
 function createScreenshot(path, filePath) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     let win = captureWindow();
 
     win.webContents.on("will-redirect", () => {
@@ -157,9 +157,9 @@ function createScreenshot(path, filePath) {
       setTimeout(() => {
         win.webContents
           .executeJavaScript(
-            'document.getElementsByClassName("printElement")[0].getBoundingClientRect().toJSON()'
+            'document.getElementsByClassName("printElement")[0].getBoundingClientRect().toJSON()',
           )
-          .then(({ x, y, width, height }) => {
+          .then(({ width, height }) => {
             win.setBounds({
               x: 0,
               y: 0,
@@ -173,7 +173,7 @@ function createScreenshot(path, filePath) {
               resolve(filePath);
             });
           })
-          .catch((err) => {
+          .catch(() => {
             // Game doesn't include this item
             win.close();
             resolve();
@@ -188,13 +188,6 @@ function createScreenshot(path, filePath) {
     }
     win.loadURL(`${startUrl}#${path}`);
   });
-}
-
-function getFilename(game, item, extension) {
-  return `${game}-${item.replace(
-    "?paginated=true",
-    "-paginated"
-  )}.${extension}`;
 }
 
 function getPath(game, item) {
@@ -224,7 +217,7 @@ ipcMain.on("export-pdf", (event, game, items) => {
             }
           });
         },
-        { concurrency: 4 }
+        { concurrency: 4 },
       )
         .then(() => alert("success", `Exported ${game} to ${directory} as pdf`))
         .then(() => shell.openPath(directory))
@@ -251,10 +244,10 @@ ipcMain.on("export-png", (event, game, items) => {
                 let percent = Math.floor((current / total) * 100);
                 progress(percent, `${current}/${total} - ${basename}`);
               }
-            }
+            },
           );
         },
-        { concurrency: 8 }
+        { concurrency: 8 },
       )
         .then(() => alert("success", `Exported ${game} to ${directory} as png`))
         .then(() => shell.openPath(directory))

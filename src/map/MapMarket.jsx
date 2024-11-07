@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 import GameContext from "../context/GameContext";
 
 import { getMarketData } from "../market/util";
 import Market from "../market/Market";
 
-const MapMarket = ({mapMarket, hexWidth}) => {
+const MapMarket = ({ mapMarket, hexWidth }) => {
   const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
 
@@ -26,7 +26,7 @@ const MapMarket = ({mapMarket, hexWidth}) => {
 
   return (
     <g transform={`translate(${x} ${y}) scale(${scale})`}>
-      <Market {...{data, game, config, displayTitle}}/>
+      <Market {...{ data, game, config, displayTitle }} />
     </g>
   );
 };

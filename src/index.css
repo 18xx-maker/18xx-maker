@@ -1,5 +1,5 @@
 html {
-  margin: 0px;  /* this affects the margin on the html before sending to printer */
+  margin: 0px; /* this affects the margin on the html before sending to printer */
   -webkit-print-color-adjust: exact;
 }
 
@@ -43,7 +43,7 @@ p {
   float: left;
   margin: 0 0.0625in 0 0;
   color: #fff;
-  opacity: 0.20;
+  opacity: 0.2;
 }
 
 .map {
@@ -67,7 +67,7 @@ p {
 }
 
 .tileSheet--offset div.row:nth-child(even) {
-    padding-left: 1.73205in;
+  padding-left: 1.73205in;
 }
 
 .tileSheet--individual div.row svg {
@@ -351,7 +351,7 @@ svg {
 }
 
 .charter__phase td.phase__list {
-  padding: 0
+  padding: 0;
 }
 
 .charter__phase td.phase__list ul {
@@ -563,7 +563,7 @@ ul.notes li i {
 
 ul.notes li span {
   display: inline-block;
-  font-size: 0.10in;
+  font-size: 0.1in;
   line-height: 0.24in;
   height: 0.15in;
   width: 0.15in;
@@ -601,7 +601,7 @@ ul.notes li span {
 }
 
 .cutlines:before {
-  content: '';
+  content: "";
   width: 0.25in;
   height: calc(100% - 0.75in);
   position: absolute;
@@ -614,7 +614,7 @@ ul.notes li span {
 }
 
 .cutlines:after {
-  content: '';
+  content: "";
   width: 0.25in;
   height: calc(100% - 0.75in);
   position: absolute;
@@ -627,7 +627,7 @@ ul.notes li span {
 }
 
 .cutlines > div:before {
-  content: '';
+  content: "";
   width: calc(100% - 0.25in);
   height: 0.25in;
   position: absolute;
@@ -640,7 +640,7 @@ ul.notes li span {
 }
 
 .cutlines > div:after {
-  content: '';
+  content: "";
   width: calc(100% - 0.25in);
   height: 0.25in;
   position: absolute;
@@ -667,7 +667,7 @@ footer a {
 }
 
 footer a:hover {
-  color: rgb(95,35,132);
+  color: rgb(95, 35, 132);
 }
 
 .LegalNotes {

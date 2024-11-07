@@ -1,5 +1,3 @@
-import React from "react";
-
 import { tiles } from "./data";
 
 import { is } from "ramda";
@@ -18,7 +16,7 @@ const Tile = ({ id, border, mask, gameTiles }) => {
         hex = tiles[gameTiles[id].tile];
       } else if (!gameTiles[id].color) {
         // This is just extra data
-        hex = {...tiles[id], ...gameTiles[id]};
+        hex = { ...tiles[id], ...gameTiles[id] };
       } else {
         // This is a full tile definition
         hex = gameTiles[id];
@@ -31,14 +29,16 @@ const Tile = ({ id, border, mask, gameTiles }) => {
   if (!hex) {
     hex = tiles[id];
 
-    if(!hex) {
+    if (!hex) {
       hex = tiles[idBase];
     }
   }
 
-  return hex
-      ? <Hex hex={hex} id={id} mask={mask} border={border} />
-      : <Id id={idBase} extra={idExtra} />;
+  return hex ? (
+    <Hex hex={hex} id={id} mask={mask} border={border} />
+  ) : (
+    <Id id={idBase} extra={idExtra} />
+  );
 };
 
 export default Tile;

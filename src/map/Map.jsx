@@ -26,22 +26,31 @@ const Map = ({ name, game, config, variation }) => {
     return null;
   }
 
-  let mapHexes = R.chain(hex => {
-    return R.map(([x, y]) => {
-      let translate = `translate(${data.hexX(x, y)} ${data.hexY(x, y)})`;
-      let scale = `scale(${data.scale})`;
-      let coord = `${toAlpha(y)}${x}`;
-      let opacity = multiDefaultTo("1.0", hex.opacity, data.map.opacity);
-      return (
-        <g
-          transform={`${translate} ${scale}`}
-          key={`hex-${name}-${hex.variation}-${coord}`}
-        >
-          <Hex hex={hex} border={true} transparent={game.info.transparent}
-               map={true} id={coords === "inside" && coord} opacity={opacity} />
-        </g>
-      );
-    }, R.map(toCoords, hex.hexes || []));
+  let mapHexes = R.chain((hex) => {
+    return R.map(
+      ([x, y]) => {
+        let translate = `translate(${data.hexX(x, y)} ${data.hexY(x, y)})`;
+        let scale = `scale(${data.scale})`;
+        let coord = `${toAlpha(y)}${x}`;
+        let opacity = multiDefaultTo("1.0", hex.opacity, data.map.opacity);
+        return (
+          <g
+            transform={`${translate} ${scale}`}
+            key={`hex-${name}-${hex.variation}-${coord}`}
+          >
+            <Hex
+              hex={hex}
+              border={true}
+              transparent={game.info.transparent}
+              map={true}
+              id={coords === "inside" && coord}
+              opacity={opacity}
+            />
+          </g>
+        );
+      },
+      R.map(toCoords, hex.hexes || []),
+    );
   }, data.hexes);
 
   let showTitle = data.title !== false;
@@ -49,10 +58,15 @@ const Map = ({ name, game, config, variation }) => {
   return (
     <React.Fragment>
       {mapHexes}
-      <Coordinates {...data}/>
-      {showTitle && <Title game={game} variation={variation} hexWidth={hexWidth} />}
+      <Coordinates {...data} />
+      {showTitle && (
+        <Title game={game} variation={variation} hexWidth={hexWidth} />
+      )}
       <MapMarket mapMarket={data.map.market} hexWidth={hexWidth} />
-      <MapRoundTracker roundTracker={data.map.roundTracker} hexWidth={hexWidth} />
+      <MapRoundTracker
+        roundTracker={data.map.roundTracker}
+        hexWidth={hexWidth}
+      />
       <MapPlayers players={data.map.players} hexWidth={hexWidth} />
       <Lines data={data} />
       <Borders data={data} />

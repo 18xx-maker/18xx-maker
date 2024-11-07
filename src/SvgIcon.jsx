@@ -1,5 +1,3 @@
-import React from "react";
-
 import { ReactComponent as certLimit } from "./images/icons/certificate.svg";
 import { ReactComponent as bank } from "./images/icons/university.svg";
 import { ReactComponent as number } from "./images/icons/user-friends.svg";
@@ -30,17 +28,20 @@ const icons = {
   percentage,
   plus,
   stop,
-  times
+  times,
 };
 
-const SvgIcon = ({name, size, x, y, scale, fill, stroke, style}) => {
+const SvgIcon = ({ name, size, x, y, scale, fill, stroke, style }) => {
   let Tag = icons[name];
-  return <Tag width={size || 15}
-         height={size || 15}
-         x={((x || 0) + 7.5) * (scale || 1)}
-         y={((y || 0) + 7.5) * (scale || 1)}
-         {...{fill, stroke, style}}
+  return (
+    <Tag
+      width={size || 15}
+      height={size || 15}
+      x={((x || 0) + 7.5) * (scale || 1)}
+      y={((y || 0) + 7.5) * (scale || 1)}
+      {...{ fill, stroke, style }}
     />
+  );
 };
 
 export default SvgIcon;

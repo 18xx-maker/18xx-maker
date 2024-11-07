@@ -1,4 +1,3 @@
-import React from "react";
 import { map } from "ramda";
 
 import { unitsToCss, addPaginationData } from "../util";
@@ -6,16 +5,11 @@ import Page from "../util/Page";
 import PageSetup from "../PageSetup";
 import Svg from "../Svg";
 
-
-const Paginate = ({component, data, notes, config, game, children}) => {
+const Paginate = ({ component, data, config, game, children }) => {
   // Generate an ID to use for svg content
   const contentId = crypto.randomUUID();
 
-  const defs = (
-    <g id={contentId}>
-      {children}
-    </g>
-  );
+  const defs = <g id={contentId}>{children}</g>;
 
   let paginationData = addPaginationData(data, config);
   let title = game.info.title;
@@ -23,8 +17,8 @@ const Paginate = ({component, data, notes, config, game, children}) => {
   let css = `
 .cutlines {
     padding: ${paginationData.css.cutlines};
-    width: ${unitsToCss(paginationData.xPages[0] + (2.0 * paginationData.cutlinesAndBleed))};
-    height: ${unitsToCss(paginationData.yPages[0] + (2.0 * paginationData.cutlinesAndBleed))};
+    width: ${unitsToCss(paginationData.xPages[0] + 2.0 * paginationData.cutlinesAndBleed)};
+    height: ${unitsToCss(paginationData.yPages[0] + 2.0 * paginationData.cutlinesAndBleed)};
 }
 
 .cutlines__page {
@@ -36,13 +30,13 @@ const Paginate = ({component, data, notes, config, game, children}) => {
 .cutlines:after,
 .cutlines:before {
     width: ${paginationData.css.cutlines};
-    height: ${unitsToCss(paginationData.yPages[0] - (2.0 * paginationData.cutlinesOffset))};
+    height: ${unitsToCss(paginationData.yPages[0] - 2.0 * paginationData.cutlinesOffset)};
     top: ${unitsToCss(paginationData.cutlinesAndBleed + paginationData.cutlinesOffset)};
 }
 
 .cutlines > div:after,
 .cutlines > div:before {
-    width: ${unitsToCss(paginationData.xPages[0] - (2.0 * paginationData.cutlinesOffset))};
+    width: ${unitsToCss(paginationData.xPages[0] - 2.0 * paginationData.cutlinesOffset)};
     height: ${paginationData.css.cutlines};
     left: ${unitsToCss(paginationData.bleed + paginationData.cutlinesOffset)};
 }
@@ -58,13 +52,13 @@ const Paginate = ({component, data, notes, config, game, children}) => {
 
   let currentPage = 0;
   let y = -paginationData.margin;
-  let pages = map(height => {
+  let pages = map((height) => {
     let x = -paginationData.margin;
-    let row = map(width => {
+    let row = map((width) => {
       currentPage++;
 
-      let cssWidth = unitsToCss(width + (2.0 * paginationData.bleed));
-      let cssHeight = unitsToCss(height + (2.0 * paginationData.bleed));
+      let cssWidth = unitsToCss(width + 2.0 * paginationData.bleed);
+      let cssHeight = unitsToCss(height + 2.0 * paginationData.bleed);
 
       let page = (
         <div
@@ -75,17 +69,22 @@ const Paginate = ({component, data, notes, config, game, children}) => {
             height: cssHeight,
             float: "none",
             margin: "auto auto",
-            boxSizing: "content-box"
+            boxSizing: "content-box",
           }}
         >
           <div className="paginated__page">
-            <Page title={title} component={component} current={currentPage} total={paginationData.pages} />
+            <Page
+              title={title}
+              component={component}
+              current={currentPage}
+              total={paginationData.pages}
+            />
             <svg
               style={{
                 width: cssWidth,
-                height: cssHeight
+                height: cssHeight,
               }}
-              viewBox={`${x - paginationData.bleed} ${y - paginationData.bleed} ${width + (2.0 * paginationData.bleed)} ${height + (2.0 * paginationData.bleed)}`}
+              viewBox={`${x - paginationData.bleed} ${y - paginationData.bleed} ${width + 2.0 * paginationData.bleed} ${height + 2.0 * paginationData.bleed}`}
             >
               <use href={`#${contentId}`} />
             </svg>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useIntParam } from "../../../util/query";
 import GameContext from "../../../context/GameContext";
 import ConfigContext from "../../../context/ConfigContext";
@@ -17,7 +17,7 @@ const B18Map = () => {
   const { config } = useContext(ConfigContext);
   const { game } = useContext(GameContext);
 
-  const [variation, setVariation] = useIntParam('variation', 0);
+  const [variation, setVariation] = useIntParam("variation", 0);
 
   if (is(Array, game.map) && isNil(variation)) {
     setVariation(0);
@@ -35,17 +35,26 @@ const B18Map = () => {
     offset = 87;
   }
 
-  return <MapOrientation>
-           <div className="map">
-             <Svg preserveAspectRatio="none" width={data.b18TotalWidth + offset} height={data.b18TotalHeight} viewBox={`${-offset} 0 ${data.totalWidth + offset} ${data.totalHeight}`}>
-               <Map name={game.meta.id}
-                    game={game}
-                    config={assocPath(['tiles', 'mapWidth'], 100, config)}
-                    variation={variation} />
-             </Svg>
-             <style>{`@media print {@page {size: ${data.b18PrintWidth} ${data.b18PrintHeight}; margin: 0; }}`}</style>
-           </div>
-         </MapOrientation>;
+  return (
+    <MapOrientation>
+      <div className="map">
+        <Svg
+          preserveAspectRatio="none"
+          width={data.b18TotalWidth + offset}
+          height={data.b18TotalHeight}
+          viewBox={`${-offset} 0 ${data.totalWidth + offset} ${data.totalHeight}`}
+        >
+          <Map
+            name={game.meta.id}
+            game={game}
+            config={assocPath(["tiles", "mapWidth"], 100, config)}
+            variation={variation}
+          />
+        </Svg>
+        <style>{`@media print {@page {size: ${data.b18PrintWidth} ${data.b18PrintHeight}; margin: 0; }}`}</style>
+      </div>
+    </MapOrientation>
+  );
 };
 
 export default B18Map;

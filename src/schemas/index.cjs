@@ -2,8 +2,7 @@
 const Ajv = require("ajv");
 const ajv = new Ajv({ allErrors: true });
 
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
 
 // Load Schemas
 const gameSchema = require("./game.schema.json");

@@ -25,6 +25,10 @@
 .env.test.local
 .env.production.local
 
+# package manager logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# rollup visualizer
+stats.html

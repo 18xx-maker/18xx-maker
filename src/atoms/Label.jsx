@@ -1,5 +1,3 @@
-import React from "react";
-
 import Text from "./shapes/Text";
 
 const Label = (props, rotation, fontSize) => {
@@ -18,12 +16,7 @@ const Label = (props, rotation, fontSize) => {
     }
   }
 
-  return (
-          <Text
-                fontSize={fontSize}
-                {...props}
-                text={label}/>
-  );
+  return <Text fontSize={fontSize} {...props} text={label} />;
 };
 
 export default Label;

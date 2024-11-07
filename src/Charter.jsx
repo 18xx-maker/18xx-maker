@@ -16,16 +16,12 @@ import map from "ramda/src/map";
 const Charter = ({
   name,
   subtext,
-  abbrev,
-  logo,
   minor,
   color,
-  token,
   tokens,
   phases,
   turns,
   trains,
-  game,
   company,
   backgroundColor,
   variant,
@@ -33,7 +29,7 @@ const Charter = ({
   fontSize,
   fontStyle,
   fontWeight,
-  halfWidth
+  halfWidth,
 }) => {
   const { config } = useContext(ConfigContext);
   const charterStyle = config.charters.style;
@@ -55,9 +51,12 @@ const Charter = ({
     tokenSpots = addIndex(map)((label, index) => {
       // Color charters just use empty token circles, carth style uses full
       // company tokens.
-      let companyToken = charterStyle === "color" ?
-          <Token outline="black" /> :
-          <CompanyToken company={company} />;
+      let companyToken =
+        charterStyle === "color" ? (
+          <Token outline="black" />
+        ) : (
+          <CompanyToken company={company} />
+        );
 
       return (
         <svg key={`token-${index}`}>
@@ -68,9 +67,17 @@ const Charter = ({
             <g transform={`${halfWidth ? "rotate(-90) " : ""}translate(0 39)`}>
               <Color context="companies">
                 {(c, t) => (
-                  <text fill={(charterStyle === "color" && !halfWidth) ? t(c(color)) : c("black")}
-                        fontSize="11" fontWeight="normal" textAnchor="middle">
-                    <Currency value={label} type="token"/>
+                  <text
+                    fill={
+                      charterStyle === "color" && !halfWidth
+                        ? t(c(color))
+                        : c("black")
+                    }
+                    fontSize="11"
+                    fontWeight="normal"
+                    textAnchor="middle"
+                  >
+                    <Currency value={label} type="token" />
                   </text>
                 )}
               </Color>
@@ -83,15 +90,23 @@ const Charter = ({
     tokens = [];
   }
 
-  let turnNodes = chain(turn => {
+  let turnNodes = chain((turn) => {
     let steps = addIndex(map)((step, i) => {
-      return <li key={i}><span>{step}</span></li>;
+      return (
+        <li key={i}>
+          <span>{step}</span>
+        </li>
+      );
     }, turn.steps || []);
 
     let stepsList = turn.ordered ? <ol>{steps}</ol> : <ul>{steps}</ul>;
 
     let optionals = addIndex(map)((step, i) => {
-      return <li key={i}><span>{step}</span></li>;
+      return (
+        <li key={i}>
+          <span>{step}</span>
+        </li>
+      );
     }, turn.optional || []);
     let optionalList = <ul>{optionals}</ul>;
 
@@ -107,55 +122,83 @@ const Charter = ({
   return (
     <Color context="companies">
       {(c, t, _, p) => (
-        <div className={`cutlines${minor ? " cutlines--minor" : ""}${halfWidth ? " cutlines--half" : ""}`}>
-          <div className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidth ? " charter--half" : ""}`}>
-            <div className="charter__bleed"
-                 style={{
-                   backgroundColor: p(backgroundColor || "white")
-                 }}>
+        <div
+          className={`cutlines${minor ? " cutlines--minor" : ""}${halfWidth ? " cutlines--half" : ""}`}
+        >
+          <div
+            className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidth ? " charter--half" : ""}`}
+          >
+            <div
+              className="charter__bleed"
+              style={{
+                backgroundColor: p(backgroundColor || "white"),
+              }}
+            >
               <div
                 className="charter__hr"
                 style={{
-                  backgroundColor: c(charterStyle === "color" ? color : (color === "white" ? "black" : color)),
-                  borderBottom: ((charterStyle === "color" && (color === "white" || blackBand)) ? "2px solid black" : null)
+                  backgroundColor: c(
+                    charterStyle === "color"
+                      ? color
+                      : color === "white"
+                        ? "black"
+                        : color,
+                  ),
+                  borderBottom:
+                    charterStyle === "color" && (color === "white" || blackBand)
+                      ? "2px solid black"
+                      : null,
                 }}
               />
               <div className="charter__body">
-                <div style={{ color: t(c(charterStyle === "color" ? color : "white")),
-                              paddingRight: halfWidth ? null : unitsToCss(12.5 + (65 * tokens.length)) }}
-                     className="charter__name">
-                     <div style={{ fontFamily:`${fontFamily}`,
-                                   fontSize:`${fontSize}pt`,
-                                   lineHeight:`${lineHeight}pt`,
-                                   fontWeight:`${fontWeight}`,
-                                   fontStyle:`${fontStyle}`
-                     }}>
-                       {name}
-                     </div>
-                     {subtext && (
-                       <div style={{ fontFamily:`${fontFamily}`,
-                                     fontSize:`${fontSize/2}pt`,
-                                     lineHeight:`${lineHeight}pt`,
-                                     fontWeight:`${fontWeight}`,
-                                     fontStyle:`${fontStyle}`
-                                   }}>
-                         {subtext}
-                       </div>
-                     )}
+                <div
+                  style={{
+                    color: t(c(charterStyle === "color" ? color : "white")),
+                    paddingRight: halfWidth
+                      ? null
+                      : unitsToCss(12.5 + 65 * tokens.length),
+                  }}
+                  className="charter__name"
+                >
+                  <div
+                    style={{
+                      fontFamily: `${fontFamily}`,
+                      fontSize: `${fontSize}pt`,
+                      lineHeight: `${lineHeight}pt`,
+                      fontWeight: `${fontWeight}`,
+                      fontStyle: `${fontStyle}`,
+                    }}
+                  >
+                    {name}
+                  </div>
+                  {subtext && (
+                    <div
+                      style={{
+                        fontFamily: `${fontFamily}`,
+                        fontSize: `${fontSize / 2}pt`,
+                        lineHeight: `${lineHeight}pt`,
+                        fontWeight: `${fontWeight}`,
+                        fontStyle: `${fontStyle}`,
+                      }}
+                    >
+                      {subtext}
+                    </div>
+                  )}
                 </div>
                 {charterStyle === "color" && (
                   <div className="charter__logo">
                     <svg viewBox="-37.5 -37.5 75 75">
                       <ColorContext.Provider value="companies">
-                        <CompanyToken outline={color === "white" ? "black" : "white"}
-                                      company={company}
-                                      width={37.5} />
+                        <CompanyToken
+                          outline={color === "white" ? "black" : "white"}
+                          company={company}
+                          width={37.5}
+                        />
                       </ColorContext.Provider>
                     </svg>
                   </div>
                 )}
-                {false && <div className="charter__game">{game}</div>}
-                {(tokenSpots.length > 0) && (
+                {tokenSpots.length > 0 && (
                   <div className="charter__tokens">
                     {halfWidth && "Tokens"}
                     {tokenSpots}
@@ -164,9 +207,7 @@ const Charter = ({
                 {halfWidth && (
                   <div className="charter__assets">
                     Assets
-                    {showTurnOrder && (
-                      <dl>{minor || turnNodes}</dl>
-                    )}
+                    {showTurnOrder && <dl>{minor || turnNodes}</dl>}
                   </div>
                 )}
                 {halfWidth || (
@@ -174,10 +215,12 @@ const Charter = ({
                     {showTrains && "Trains"}
                     {showPhaseChart && (
                       <div className="charter__phase">
-                        <Phase phases={phases}
-                               trains={trains}
-                               minor={!!minor}
-                               company={company.abbrev} />
+                        <Phase
+                          phases={phases}
+                          trains={trains}
+                          minor={!!minor}
+                          company={company.abbrev}
+                        />
                       </div>
                     )}
                   </div>
@@ -187,12 +230,10 @@ const Charter = ({
                     {showTreasury && "Treasury"}
                     {company.capital && (
                       <div className="charter__capital">
-                        <Currency value={company.capital} type="treasury"/>
+                        <Currency value={company.capital} type="treasury" />
                       </div>
                     )}
-                    {showTurnOrder && (
-                      <dl>{minor || turnNodes}</dl>
-                    )}
+                    {showTurnOrder && <dl>{minor || turnNodes}</dl>}
                   </div>
                 )}
                 {variant && <div className="charter__variant">{variant}</div>}

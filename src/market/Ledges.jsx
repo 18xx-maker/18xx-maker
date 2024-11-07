@@ -1,5 +1,3 @@
-import React from "react";
-
 import addIndex from "ramda/src/addIndex";
 import map from "ramda/src/map";
 
@@ -14,10 +12,11 @@ const ledgeCoord = (coord, data) => {
 };
 
 const Ledge = ({ ledge, data }) => {
-  let path = "M " + map(coord => ledgeCoord(coord, data), ledge.coords).join(" L ");
+  let path =
+    "M " + map((coord) => ledgeCoord(coord, data), ledge.coords).join(" L ");
 
-  let width = (ledge.width || 3);
-  let borderWidth = ledge.borderWidth || (width + 2);
+  let width = ledge.width || 3;
+  let borderWidth = ledge.borderWidth || width + 2;
 
   let linecap = "round";
   let linejoin = "round";
@@ -26,7 +25,7 @@ const Ledge = ({ ledge, data }) => {
   let strokeDashArray = "none";
 
   if (ledge.dashed) {
-    strokeDashArray = ledge.dashArray || (width * 2.5);
+    strokeDashArray = ledge.dashArray || width * 2.5;
     if (ledge.offset) {
       strokeDashOffset = ledge.offset;
     }
@@ -34,36 +33,41 @@ const Ledge = ({ ledge, data }) => {
 
   return (
     <Color context="companies">
-      {c => (
+      {(c) => (
         <g>
           {ledge.border === true && (
-            <path d={path}
-                  fill="none"
-                  stroke={c("track")}
-                  strokeWidth={borderWidth}
-                  strokeLinecap={linecap}
-                  strokeLinejoin={linejoin}
-                  strokeDasharray={strokeDashArray}
-                  strokeDashoffset={strokeDashOffset}
+            <path
+              d={path}
+              fill="none"
+              stroke={c("track")}
+              strokeWidth={borderWidth}
+              strokeLinecap={linecap}
+              strokeLinejoin={linejoin}
+              strokeDasharray={strokeDashArray}
+              strokeDashoffset={strokeDashOffset}
             />
           )}
-          <path d={path}
-                fill="none"
-                stroke={c(ledge.color)}
-                strokeWidth={width}
-                strokeLinecap={linecap}
-                strokeLinejoin={linejoin}
-                strokeDasharray={strokeDashArray}
-                strokeDashoffset={strokeDashOffset}
+          <path
+            d={path}
+            fill="none"
+            stroke={c(ledge.color)}
+            strokeWidth={width}
+            strokeLinecap={linecap}
+            strokeLinejoin={linejoin}
+            strokeDasharray={strokeDashArray}
+            strokeDashoffset={strokeDashOffset}
           />
         </g>
       )}
     </Color>
   );
-}
+};
 
 const Ledges = ({ data }) => {
-  return addIndex(map)((l, i) => <Ledge key={`ledge-${i}`} ledge={l} data={data}/>, data.ledges || []);
-}
+  return addIndex(map)(
+    (l, i) => <Ledge key={`ledge-${i}`} ledge={l} data={data} />,
+    data.ledges || [],
+  );
+};
 
 export default Ledges;

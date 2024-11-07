@@ -1,5 +1,3 @@
-import React from "react";
-
 import ParCell from "./ParCell";
 import Ledges from "./Ledges";
 
@@ -8,32 +6,33 @@ import chain from "ramda/src/chain";
 import is from "ramda/src/is";
 import map from "ramda/src/map";
 
-const Par = ({data, title}) => {
+const Par = ({ data, title }) => {
   let values = data.values;
 
   let makeCell = (cell, x, y) => {
     if (is(String, cell)) {
       cell = {
         label: cell,
-        par: true
-      }
+        par: true,
+      };
     } else if (is(Number, cell)) {
       cell = {
         value: cell,
-        par: true
-      }
+        par: true,
+      };
     } else if (is(Object, cell)) {
       cell = {
         ...cell,
-        par: true
-      }
+        par: true,
+      };
     } else {
       return null;
     }
 
     return (
-      <g key={`par-${x}-${y}`}
-         transform={`translate(${x * data.width} ${y * data.height + (data.par.title === false ? 0 : 50)})`}
+      <g
+        key={`par-${x}-${y}`}
+        transform={`translate(${x * data.width} ${y * data.height + (data.par.title === false ? 0 : 50)})`}
       >
         <ParCell cell={cell} data={data} />
       </g>

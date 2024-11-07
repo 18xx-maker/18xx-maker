@@ -1,4 +1,3 @@
-import React from "react";
 import Map from "../map/Map";
 import Svg from "../Svg";
 import { Redirect } from "react-router-dom";
@@ -19,11 +18,18 @@ const MapSingle = ({ game, config, variation }) => {
 
   return (
     <div className="map">
-      <Svg className="printElement" width={`${data.totalWidth / 100}in`} height={`${data.totalHeight / 100}in`} viewBox={`0 0 ${data.totalWidth} ${data.totalHeight}`}>
-        <Map name={game.meta.id}
-             game={game}
-             config={config}
-             variation={variation} />
+      <Svg
+        className="printElement"
+        width={`${data.totalWidth / 100}in`}
+        height={`${data.totalHeight / 100}in`}
+        viewBox={`0 0 ${data.totalWidth} ${data.totalHeight}`}
+      >
+        <Map
+          name={game.meta.id}
+          game={game}
+          config={config}
+          variation={variation}
+        />
       </Svg>
       <style>{`@media print {@page {size: ${data.printWidth} ${data.printHeight}; margin: 0.25in 0.25in 0.25in 0.25in; }}`}</style>
     </div>

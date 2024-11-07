@@ -1,4 +1,3 @@
-import React from "react";
 import { Redirect } from "react-router-dom";
 
 import Paginate from "../util/Paginate";
@@ -14,15 +13,11 @@ const MarketPaginated = ({ config, game }) => {
 
   let data = getMarketData(game.stock, config);
 
-  return <Paginate component="Market"
-                   game={game}
-                   config={config}
-                   data={data}>
-           <Market data={data}
-                   game={game}
-                   config={config}
-                   title={game.info.title} />
-         </Paginate>;
+  return (
+    <Paginate component="Market" game={game} config={config} data={data}>
+      <Market data={data} game={game} config={config} title={game.info.title} />
+    </Paginate>
+  );
 };
 
 export default MarketPaginated;

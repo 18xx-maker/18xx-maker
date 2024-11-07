@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 
 import Token from "./Token";
@@ -10,12 +10,12 @@ const CompanyToken = (props) => {
   const { config } = useContext(ConfigContext);
 
   // Pass down all props that we don't use to look up the company
-  let passing = {...props};
+  let passing = { ...props };
   delete passing.company;
 
   if (!company) {
     // No company, just pass everything we know to token
-    return <Token {...passing} />
+    return <Token {...passing} />;
   }
 
   // Always want the label
@@ -34,7 +34,7 @@ const CompanyToken = (props) => {
 
   return (
     <ColorContext.Provider value="companies">
-      <Token {...passing}/>
+      <Token {...passing} />
     </ColorContext.Provider>
   );
 };

@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Route, useLocation } from "react-router";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import GameContext from "./context/GameContext";
 import ConfigContext from "./context/ConfigContext";
 import { useBooleanParam } from "./util/query";
@@ -19,68 +19,79 @@ import MenuItem from "@mui/material/MenuItem";
 import Slide from "@mui/material/Slide";
 import Tooltip from "@mui/material/Tooltip";
 
-import ExportIcon from '@mui/icons-material/Collections';
+import ExportIcon from "@mui/icons-material/Collections";
 import PdfIcon from "@mui/icons-material/PictureAsPdf";
 import PngIcon from "@mui/icons-material/PhotoLibrary";
 
-import { assoc, compose, flatten, forEach, is, keys, map, max, prop, range, reduce } from "ramda";
+import { assoc, flatten, forEach, is, keys, map, range } from "ramda";
 
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
   exportButton: {
     zIndex: theme.zIndex.drawer + 1,
-    position: 'fixed',
+    position: "fixed",
     bottom: theme.spacing(14),
-    right: theme.spacing(4)
-  }
+    right: theme.spacing(4),
+  },
 }));
 
 const pngItems = (game, config) => {
   let items = {
-    "background": `${game.meta.id}-background.png`,
-    "revenue": `${game.meta.id}-revenue.png`,
+    background: `${game.meta.id}-background.png`,
+    revenue: `${game.meta.id}-revenue.png`,
   };
 
   // Number Cards
-  forEach(n => {
-    items[`cards/number/${n}`] = `${game.meta.id}-card-number-${n}.png`;
-  }, range(1, maxPlayers(game.players || []) + 1))
+  forEach(
+    (n) => {
+      items[`cards/number/${n}`] = `${game.meta.id}-card-number-${n}.png`;
+    },
+    range(1, maxPlayers(game.players || []) + 1),
+  );
 
   // Privates
-  for(let i=0; i<(game.privates || []).length; i++) {
-    items[`cards/private/${i}`] = `${game.meta.id}-card-private-${i+1}.png`;
+  for (let i = 0; i < (game.privates || []).length; i++) {
+    items[`cards/private/${i}`] = `${game.meta.id}-card-private-${i + 1}.png`;
   }
 
   // Trains
-  for(let i=0; i<(game.trains || []).length; i++) {
-    items[`cards/train/${i}`] = `${game.meta.id}-card-train-${i+1}-${game.trains[i].name.replace(" ", "_")}.png`;
+  for (let i = 0; i < (game.trains || []).length; i++) {
+    items[`cards/train/${i}`] =
+      `${game.meta.id}-card-train-${i + 1}-${game.trains[i].name.replace(" ", "_")}.png`;
   }
 
   // Shares
   const override = config.overrideCompanies;
   const selection = config.overrideSelection;
-  let companies = overrideCompanies(compileCompanies(game), override, selection) || [];
-  let shares = flatten(map(c => map(s => assoc('company', c, s), c.shares || []), companies))
-  for(let i=0; i<shares.length; i++) {
-    items[`cards/share/${i}`] = `${game.meta.id}-card-share-${i+1}-${shares[i].company.abbrev}.png`;
+  let companies =
+    overrideCompanies(compileCompanies(game), override, selection) || [];
+  let shares = flatten(
+    map((c) => map((s) => assoc("company", c, s), c.shares || []), companies),
+  );
+  for (let i = 0; i < shares.length; i++) {
+    items[`cards/share/${i}`] =
+      `${game.meta.id}-card-share-${i + 1}-${shares[i].company.abbrev}.png`;
   }
 
-  for(let i=0; i<companies.length; i++) {
-    items[`charters/${i}`] = `${game.meta.id}-charter-${i+1}-${companies[i].abbrev}.png`;
+  for (let i = 0; i < companies.length; i++) {
+    items[`charters/${i}`] =
+      `${game.meta.id}-charter-${i + 1}-${companies[i].abbrev}.png`;
   }
 
-  for(let i=0; i<companies.length; i++) {
-    items[`tokens/${i}`] = `${game.meta.id}-token-${i+1}-${companies[i].abbrev}.png`
+  for (let i = 0; i < companies.length; i++) {
+    items[`tokens/${i}`] =
+      `${game.meta.id}-token-${i + 1}-${companies[i].abbrev}.png`;
   }
 
-  for(let i=0; i<(game.tokens || []).length; i++) {
-    items[`tokens/${i + companies.length}`] = `${game.meta.id}-token-${i+1+companies.length}.png`
+  for (let i = 0; i < (game.tokens || []).length; i++) {
+    items[`tokens/${i + companies.length}`] =
+      `${game.meta.id}-token-${i + 1 + companies.length}.png`;
   }
 
   if (game.map) {
     if (is(Array, game.map)) {
-      for(let i=0; i<game.map.length; i++) {
+      for (let i = 0; i < game.map.length; i++) {
         items[`map?variation=${i}`] = `${game.meta.id}-map-${i}.png`;
       }
     } else {
@@ -101,7 +112,7 @@ const pngItems = (game, config) => {
   if (game.tiles) {
     items["tile-manifest"] = `${game.meta.id}-tile-manifest.png`;
 
-    forEach(id => {
+    forEach((id) => {
       items[`tiles/${id}`] = `${game.meta.id}-tile-${id}.png`;
     }, keys(game.tiles));
   }
@@ -111,14 +122,15 @@ const pngItems = (game, config) => {
 
 const pdfItems = (game, config) => {
   let items = {
-    "background": `${game.meta.id}-background.pdf`,
-    "revenue": `${game.meta.id}-revenue.pdf`,
+    background: `${game.meta.id}-background.pdf`,
+    revenue: `${game.meta.id}-revenue.pdf`,
     "revenue?paginated=true": `${game.meta.id}-revenue-paginated.pdf`,
   };
 
   if (config.export.allLayouts) {
-    forEach(layout => {
-      items[`cards?config.cards.layout=${layout}`] = `${game.meta.id}-cards-${layout}.pdf`;
+    forEach((layout) => {
+      items[`cards?config.cards.layout=${layout}`] =
+        `${game.meta.id}-cards-${layout}.pdf`;
     }, schema.properties.cards.properties.layout.enum);
   } else {
     items["cards"] = `${game.meta.id}-cards.pdf`;
@@ -126,8 +138,9 @@ const pdfItems = (game, config) => {
 
   if (game.companies || game.tokens) {
     if (config.export.allLayouts) {
-      forEach(layout => {
-        items[`tokens?config.tokens.layout=${layout}`] = `${game.meta.id}-tokens-${layout}.pdf`;
+      forEach((layout) => {
+        items[`tokens?config.tokens.layout=${layout}`] =
+          `${game.meta.id}-tokens-${layout}.pdf`;
       }, schema.properties.tokens.properties.layout.enum);
     } else {
       items["tokens"] = `${game.meta.id}-tokens.pdf`;
@@ -140,9 +153,10 @@ const pdfItems = (game, config) => {
 
   if (game.map) {
     if (is(Array, game.map)) {
-      for(let i=0; i<game.map.length; i++) {
+      for (let i = 0; i < game.map.length; i++) {
         items[`map?variation=${i}`] = `${game.meta.id}-map-${i}.pdf`;
-        items[`map?paginated=true&variation=${i}`] = `${game.meta.id}-map-${i}-paginated.pdf`;
+        items[`map?paginated=true&variation=${i}`] =
+          `${game.meta.id}-map-${i}-paginated.pdf`;
       }
     } else {
       items["map"] = `${game.meta.id}-map.pdf`;
@@ -166,8 +180,9 @@ const pdfItems = (game, config) => {
     items["tile-manifest"] = `${game.meta.id}-tile-manifest.pdf`;
 
     if (config.export.allLayouts) {
-      forEach(layout => {
-        items[`tiles?config.tiles.layout=${layout}`] = `${game.meta.id}-tiles-${layout}.pdf`;
+      forEach((layout) => {
+        items[`tiles?config.tiles.layout=${layout}`] =
+          `${game.meta.id}-tiles-${layout}.pdf`;
       }, schema.properties.tiles.properties.layout.enum);
     } else {
       items["tiles"] = `${game.meta.id}-tiles.pdf`;
@@ -183,7 +198,7 @@ const ExportButton = () => {
   const location = useLocation();
   const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
-  const [print] = useBooleanParam('print');
+  const [print] = useBooleanParam("print");
   const [menuAnchor, setMenuAnchor] = useState(null);
 
   if (print || !game) {
@@ -192,31 +207,31 @@ const ExportButton = () => {
 
   const handleMenu = (event) => {
     setMenuAnchor(event.currentTarget);
-  }
+  };
 
   const handleMenuClose = () => {
     setMenuAnchor(null);
-  }
+  };
 
-  const ipcRenderer = window.require('electron').ipcRenderer;
+  const ipcRenderer = window.require("electron").ipcRenderer;
 
   const handleAllPdf = () => {
-    ipcRenderer.send('export-pdf', game.meta.slug, pdfItems(game, config));
+    ipcRenderer.send("export-pdf", game.meta.slug, pdfItems(game, config));
     handleMenuClose();
-  }
+  };
 
   const handleAllPng = () => {
-    ipcRenderer.send('export-png', game.meta.slug, pngItems(game, config));
+    ipcRenderer.send("export-png", game.meta.slug, pngItems(game, config));
     handleMenuClose();
-  }
+  };
 
   const handleSinglePdf = () => {
-    ipcRenderer.send('pdf', location.pathname + location.search);
+    ipcRenderer.send("pdf", location.pathname + location.search);
     handleMenuClose();
   };
 
   const handleSinglePng = () => {
-    ipcRenderer.send('screenshot', location.pathname + location.search);
+    ipcRenderer.send("screenshot", location.pathname + location.search);
     handleMenuClose();
   };
 
@@ -224,37 +239,49 @@ const ExportButton = () => {
     <Route path="/games">
       <Slide direction="left" in={true}>
         <Tooltip title="Export" aria-label="export" placement="left" arrow>
-          <Fab onClick={handleMenu}
-               position="sticky"
-               className={classes.exportButton}
-               color="primary">
-            <ExportIcon/>
+          <Fab
+            onClick={handleMenu}
+            position="sticky"
+            className={classes.exportButton}
+            color="primary"
+          >
+            <ExportIcon />
           </Fab>
         </Tooltip>
       </Slide>
-      <Menu id="export-menu"
-            anchorEl={menuAnchor}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-            onClose={handleMenuClose}
-            open={Boolean(menuAnchor)}
-            keepMounted>
+      <Menu
+        id="export-menu"
+        anchorEl={menuAnchor}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
+        onClose={handleMenuClose}
+        open={Boolean(menuAnchor)}
+        keepMounted
+      >
         <MenuItem onClick={handleAllPdf}>
-          <ListItemIcon><PdfIcon/></ListItemIcon>
-          <ListItemText primary={t('export.allPdf')}/>
+          <ListItemIcon>
+            <PdfIcon />
+          </ListItemIcon>
+          <ListItemText primary={t("export.allPdf")} />
         </MenuItem>
         <MenuItem onClick={handleAllPng}>
-          <ListItemIcon><PngIcon/></ListItemIcon>
-          <ListItemText primary={t('export.allPng')}/>
+          <ListItemIcon>
+            <PngIcon />
+          </ListItemIcon>
+          <ListItemText primary={t("export.allPng")} />
         </MenuItem>
-        <Divider/>
+        <Divider />
         <MenuItem onClick={handleSinglePdf}>
-          <ListItemIcon><PdfIcon/></ListItemIcon>
-          <ListItemText primary={t('export.singlePdf')}/>
+          <ListItemIcon>
+            <PdfIcon />
+          </ListItemIcon>
+          <ListItemText primary={t("export.singlePdf")} />
         </MenuItem>
         <MenuItem onClick={handleSinglePng}>
-          <ListItemIcon><PngIcon/></ListItemIcon>
-          <ListItemText primary={t('export.singlePng')}/>
+          <ListItemIcon>
+            <PngIcon />
+          </ListItemIcon>
+          <ListItemText primary={t("export.singlePng")} />
         </MenuItem>
       </Menu>
     </Route>

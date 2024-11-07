@@ -8,9 +8,9 @@ import { resolveFont } from "../util/font";
 const FontContext = React.createContext([]);
 
 // Takes in a new font string, and will add it to current context
-export const SetFont = ({context, children}) => (
+export const SetFont = ({ context, children }) => (
   <FontContext.Consumer>
-    {prev => {
+    {(prev) => {
       return (
         <FontContext.Provider value={append(context, prev)}>
           {children}
@@ -20,12 +20,12 @@ export const SetFont = ({context, children}) => (
   </FontContext.Consumer>
 );
 
-export const GetFont = ({children}) => {
+export const GetFont = ({ children }) => {
   const { config } = useContext(ConfigContext);
 
   return (
     <FontContext.Consumer>
-      {context => children(resolveFont(context, config.fonts))}
+      {(context) => children(resolveFont(context, config.fonts))}
     </FontContext.Consumer>
   );
 };

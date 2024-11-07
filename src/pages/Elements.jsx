@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Atoms from "./elements/Atoms";
@@ -12,16 +11,16 @@ const defaultGame = games["1889"];
 
 const Elements = () => {
   return (
-    <GameContext.Provider value={{game: defaultGame}}>
+    <GameContext.Provider value={{ game: defaultGame }}>
       <Switch>
         <Route path="/elements/tiles" exact>
-          <Tiles/>
+          <Tiles />
         </Route>
         <Route path="/elements/logos" exact>
-          <Logos/>
+          <Logos />
         </Route>
         <Route>
-          <Atoms/>
+          <Atoms />
         </Route>
       </Switch>
     </GameContext.Provider>

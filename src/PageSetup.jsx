@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ConfigContext from "./context/ConfigContext";
 
 import { unitsToCss } from "./util";
@@ -27,7 +27,7 @@ export const paperToCssMargins = (paper, landscape) => {
   return `margin: ${top} ${right} ${bottom} ${left};`;
 };
 
-const PageSetup = ({paper, landscape}) => {
+const PageSetup = ({ paper, landscape }) => {
   const { config } = useContext(ConfigContext);
   paper = paper || config.paper;
 

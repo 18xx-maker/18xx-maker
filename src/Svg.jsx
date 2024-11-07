@@ -1,15 +1,23 @@
-import React from "react";
 import Color from "./util/Color";
 
-const Svg = ({ className, width, height, viewBox, style, defs, children, preserveAspectRatio }) => {
+const Svg = ({
+  className,
+  width,
+  height,
+  viewBox,
+  style,
+  defs,
+  children,
+  preserveAspectRatio,
+}) => {
   const namespaces = {
-    "xmlns": "http://www.w3.org/2000/svg",
-    "xmlns:xhtml": "http://www.w3.org/1999/xhtml"
+    xmlns: "http://www.w3.org/2000/svg",
+    "xmlns:xhtml": "http://www.w3.org/1999/xhtml",
   };
 
   return (
     <Color>
-      {c => (
+      {() => (
         <svg
           version="1.1"
           preserveAspectRatio={preserveAspectRatio}
@@ -20,9 +28,7 @@ const Svg = ({ className, width, height, viewBox, style, defs, children, preserv
           className={className}
           {...namespaces}
         >
-          <defs>
-            {defs}
-          </defs>
+          <defs>{defs}</defs>
           {children}
         </svg>
       )}

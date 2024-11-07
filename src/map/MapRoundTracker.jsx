@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 import GameContext from "../context/GameContext";
 
 import RoundTracker from "../RoundTracker";
 
-const MapRoundTracker = ({roundTracker, hexWidth}) => {
+const MapRoundTracker = ({ roundTracker, hexWidth }) => {
   const { game } = useContext(GameContext);
   const { config } = useContext(ConfigContext);
 
@@ -27,7 +27,7 @@ const MapRoundTracker = ({roundTracker, hexWidth}) => {
 
   return (
     <g transform={`translate(${x} ${y}) scale(${scale})`}>
-      <RoundTracker {...{rounds, size, type, rotation}} />
+      <RoundTracker {...{ rounds, size, type, rotation }} />
     </g>
   );
 };

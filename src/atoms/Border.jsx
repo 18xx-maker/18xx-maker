@@ -1,4 +1,3 @@
-import React from "react";
 import { useOrientation } from "../context/OrientationContext";
 import Color from "../util/Color";
 
@@ -17,7 +16,7 @@ const Border = ({ color, dashed, offset, width }) => {
   }
   return (
     <Color context="companies">
-      {c => (
+      {(c) => (
         <path
           d={`m ${0.5 * edge} 75 L ${-0.5 * edge} 75`}
           fill="none"
