@@ -39,7 +39,7 @@ const manualChunks = (id) => {
 
 export default defineConfig({
   // depending on your application, base can also be "/"
-  base: "",
+  base: "/",
   build: {
     target: browserslistToEsbuild(),
     rollupOptions: {
