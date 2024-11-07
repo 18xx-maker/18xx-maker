@@ -19,16 +19,16 @@ import sortWith from "ramda/src/sortWith";
 
 import "../../TileManifest.css";
 
-const getCol = tile => {
+const getCol = (tile) => {
   switch (tile.color) {
-  case "yellow":
-    return 1;
-  case "green":
-    return 2;
-  case "brown":
-    return 3;
-  default:
-    return 4;
+    case "yellow":
+      return 1;
+    case "green":
+      return 2;
+    case "brown":
+      return 3;
+    default:
+      return 4;
   }
 };
 
@@ -41,10 +41,10 @@ const TileManifest = () => {
 
   let ids = sortWith(
     [
-      ascend(id => Number(id.split("|")[0] || 0)),
-      ascend(id => Number(id.split("|")[1] || 0))
+      ascend((id) => Number(id.split("|")[0] || 0)),
+      ascend((id) => Number(id.split("|")[1] || 0)),
     ],
-    keys(game.tiles)
+    keys(game.tiles),
   );
 
   let tileNodes = addIndex(map)((id, i) => {
@@ -67,7 +67,7 @@ const TileManifest = () => {
             key={`${id}-${i}`}
             style={{
               height: "0.5in",
-              width: "0.5in"
+              width: "0.5in",
             }}
             viewBox={`-86.6025 -86.6025 173.205 173.205`}
           >
@@ -82,7 +82,9 @@ const TileManifest = () => {
   return (
     <ColorContext.Provider value="tile">
       <div className="TileManifest printElement">
-        <div className="TileManifest--Title">{game.info.title} Tile Manifest</div>
+        <div className="TileManifest--Title">
+          {game.info.title} Tile Manifest
+        </div>
         {tileNodes}
       </div>
     </ColorContext.Provider>

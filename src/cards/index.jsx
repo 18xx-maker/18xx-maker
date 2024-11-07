@@ -17,7 +17,18 @@ import Svg from "../Svg";
 
 import { maxPlayers } from "../util.js";
 
-import { addIndex, chain, clone, compose, reduce, map, max, prop, range, splitEvery } from "ramda";
+import {
+  addIndex,
+  chain,
+  clone,
+  compose,
+  reduce,
+  map,
+  max,
+  prop,
+  range,
+  splitEvery,
+} from "ramda";
 
 import "./card.scss";
 
@@ -28,21 +39,25 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
   const override = config.overrideCompanies;
   const selection = config.overrideSelection;
 
-  let companies = !hideShares ? overrideCompanies(compileCompanies(game), override, selection) || [] : [];
+  let companies = !hideShares
+    ? overrideCompanies(compileCompanies(game), override, selection) || []
+    : [];
   let privates = !hidePrivates ? game.privates || [] : [];
   let trains = fillArray(
-    t => t.print || t.quantity,
-    !hideTrains ? game.trains || [] : []
+    (t) => t.print || t.quantity,
+    !hideTrains ? game.trains || [] : [],
   );
   let numbers = hideNumbers ? [] : range(1, maxPlayers(game.players || []) + 1);
 
   let privateNodes = addIndex(map)(
     (p, i) => (
-      <Private key={`private-${game.meta.id}-${i}`}
-               players={game.players}
-               {...p} />
+      <Private
+        key={`private-${game.meta.id}-${i}`}
+        players={game.players}
+        {...p}
+      />
     ),
-    privates
+    privates,
   );
   let shareNodes = addIndex(chain)((company, index) => {
     let shares = fillArray(prop("quantity"), company.shares || []);
@@ -64,36 +79,40 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
           fontStyle={company.fontStyle || game.info.companyFontStyle}
         />
       ),
-      shares
+      shares,
     );
   }, companies);
   let trainNodes = addIndex(map)(
     (train, index) => (
-      <Train train={train} trains={game.trains} key={`train-${train.name}-${index}`} />
+      <Train
+        train={train}
+        trains={game.trains}
+        key={`train-${train.name}-${index}`}
+      />
     ),
-    trains
+    trains,
   );
-  let numberColors = game.number_cards || [game.info.background]
+  let numberColors = game.number_cards || [game.info.background];
   let numberNodes = map(
-    color => map(
-      n => (
-        <Number
-          number={n}
-          background={color}
-          key={`number=${n}`}
-        />
+    (color) =>
+      map(
+        (n) => <Number number={n} background={color} key={`number=${n}`} />,
+        numbers,
       ),
-      numbers
-    ),
-    numberColors
+    numberColors,
   );
 
-  let cardNodes = [...privateNodes, ...shareNodes, ...trainNodes, ...numberNodes];
+  let cardNodes = [
+    ...privateNodes,
+    ...shareNodes,
+    ...trainNodes,
+    ...numberNodes,
+  ];
 
   let cardConfig = clone(config.cards);
   let paperConfig = clone(config.paper);
 
-  switch(config.cards.layout) {
+  switch (config.cards.layout) {
     case "miniEuroDie":
       paperConfig.width = 850;
       paperConfig.height = 1100;
@@ -128,25 +147,62 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
   let pins = null;
 
   if (config.cards.layout !== "free") {
-    pins = (<Svg className="pins" viewBox="0 0 50 800">
-              <circle r="12.5" cy="100" cx="25" fill="gray" strokeWidth="1" stroke="black" />
-              <circle r="12.5" cy="700" cx="25" fill="gray" strokeWidth="1" stroke="black" />
-              <circle r="6.25" cy="100" cx="25" fill="white" strokeWidth="1" stroke="black" />
-              <circle r="6.25" cy="700" cx="25" fill="white" strokeWidth="1" stroke="black" />
-            </Svg>);
+    pins = (
+      <Svg className="pins" viewBox="0 0 50 800">
+        <circle
+          r="12.5"
+          cy="100"
+          cx="25"
+          fill="gray"
+          strokeWidth="1"
+          stroke="black"
+        />
+        <circle
+          r="12.5"
+          cy="700"
+          cx="25"
+          fill="gray"
+          strokeWidth="1"
+          stroke="black"
+        />
+        <circle
+          r="6.25"
+          cy="100"
+          cx="25"
+          fill="white"
+          strokeWidth="1"
+          stroke="black"
+        />
+        <circle
+          r="6.25"
+          cy="700"
+          cx="25"
+          fill="white"
+          strokeWidth="1"
+          stroke="black"
+        />
+      </Svg>
+    );
   }
 
   let splitCardNodes = splitEvery(data.layout.perPage, cardNodes);
 
-  let pageNodes = addIndex(map)((cardNodes, i) => (
-    <div className={`cards cards--${config.cards.layout}`}
-         key={`cards-page-${i}`}
-         style={{width: data.css.printableWidth,
-                 height: data.css.printableHeight}}>
-      {cardNodes}
-      {pins}
-    </div>
-  ), splitCardNodes);
+  let pageNodes = addIndex(map)(
+    (cardNodes, i) => (
+      <div
+        className={`cards cards--${config.cards.layout}`}
+        key={`cards-page-${i}`}
+        style={{
+          width: data.css.printableWidth,
+          height: data.css.printableHeight,
+        }}
+      >
+        {cardNodes}
+        {pins}
+      </div>
+    ),
+    splitCardNodes,
+  );
 
   let css = `
 .cutlines {

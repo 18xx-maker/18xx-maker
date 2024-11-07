@@ -16,7 +16,9 @@ const Players = ({ players, bank, capital }) => {
                 <th>
                   <i className="fas fa-university" />
                 </th>
-                <td><Currency value={bank} type="bank"/></td>
+                <td>
+                  <Currency value={bank} type="bank" />
+                </td>
               </tr>
             )}
             {capital && (
@@ -24,7 +26,9 @@ const Players = ({ players, bank, capital }) => {
                 <th>
                   <i className="fas fa-coins" />
                 </th>
-                <td><Currency value={capital} type="capital"/></td>
+                <td>
+                  <Currency value={capital} type="capital" />
+                </td>
               </tr>
             )}
           </thead>
@@ -57,15 +61,23 @@ const Players = ({ players, bank, capital }) => {
         </thead>
         <tbody>
           {R.map(
-            p => (
+            (p) => (
               <tr key={p.number}>
                 <td>{p.number}</td>
                 {p.certLimit && <td>{p.certLimit}</td>}
-                {p.capital && <td><Currency value={p.capital} type="capital"/></td>}
-                {p.bank && <td><Currency value={p.bank} type="bank"/></td>}
+                {p.capital && (
+                  <td>
+                    <Currency value={p.capital} type="capital" />
+                  </td>
+                )}
+                {p.bank && (
+                  <td>
+                    <Currency value={p.bank} type="bank" />
+                  </td>
+                )}
               </tr>
             ),
-            players || []
+            players || [],
           )}
         </tbody>
       </table>

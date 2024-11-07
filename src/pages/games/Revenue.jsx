@@ -10,11 +10,13 @@ const Revenue = () => {
   const { config } = useContext(ConfigContext);
   const { game } = useContext(GameContext);
 
-  const [paginated] = useBooleanParam('paginated');
+  const [paginated] = useBooleanParam("paginated");
 
-  return (paginated
-          ? <RevenuePaginated {...{game, config}}/>
-          : <RevenueSingle {...{game, config}}/>);
+  return paginated ? (
+    <RevenuePaginated {...{ game, config }} />
+  ) : (
+    <RevenueSingle {...{ game, config }} />
+  );
 };
 
 export default Revenue;

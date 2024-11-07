@@ -12,7 +12,7 @@ const TilesIndex = () => {
     <>
       <div className="PrintNotes">
         <div>
-          <TileNav/>
+          <TileNav />
         </div>
       </div>
       <Switch>

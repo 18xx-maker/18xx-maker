@@ -9,9 +9,9 @@ const fonts = {
     bar: {
       size: "size-03",
       weight: "weight-03",
-      family: "family-03"
-    }
-  }
+      family: "family-03",
+    },
+  },
 };
 
 describe("resolveFont", () => {
@@ -21,7 +21,7 @@ describe("resolveFont", () => {
         fontSize: "size-01",
         fontWeight: "weight-01",
         fontFamily: "family-01",
-        lineHeight: "size-01"
+        lineHeight: "size-01",
       });
     });
   });
@@ -32,7 +32,7 @@ describe("resolveFont", () => {
         fontSize: "size-02",
         fontWeight: "weight-01",
         fontFamily: "family-01",
-        lineHeight: "size-02"
+        lineHeight: "size-02",
       });
     });
   });
@@ -43,7 +43,7 @@ describe("resolveFont", () => {
         fontSize: "size-03",
         fontWeight: "weight-03",
         fontFamily: "family-03",
-        lineHeight: "size-03"
+        lineHeight: "size-03",
       });
     });
   });
@@ -54,16 +54,18 @@ describe("resolveFont", () => {
         fontSize: "size-03",
         fontWeight: "weight-03",
         fontFamily: "family-03",
-        lineHeight: "size-03"
+        lineHeight: "size-03",
       });
     });
+  });
 
+  describe("with two unknown contexts", () => {
     it("should properly merge the fonts", () => {
       expect(resolveFont(["foo", "bar", "unknown", "bar"], fonts)).toEqual({
         fontSize: "size-03",
         fontWeight: "weight-03",
         fontFamily: "family-03",
-        lineHeight: "size-03"
+        lineHeight: "size-03",
       });
     });
   });

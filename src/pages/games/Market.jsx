@@ -10,11 +10,13 @@ const Market = () => {
   const { config } = useContext(ConfigContext);
   const { game } = useContext(GameContext);
 
-  const [paginated] = useBooleanParam('paginated');
+  const [paginated] = useBooleanParam("paginated");
 
-  return (paginated
-          ? <MarketPaginated {...{game, config}}/>
-          : <MarketSingle {...{game, config}}/>);
+  return paginated ? (
+    <MarketPaginated {...{ game, config }} />
+  ) : (
+    <MarketSingle {...{ game, config }} />
+  );
 };
 
 export default Market;

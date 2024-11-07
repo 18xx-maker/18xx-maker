@@ -157,7 +157,7 @@ function createScreenshot(path, filePath) {
       setTimeout(() => {
         win.webContents
           .executeJavaScript(
-            'document.getElementsByClassName("printElement")[0].getBoundingClientRect().toJSON()'
+            'document.getElementsByClassName("printElement")[0].getBoundingClientRect().toJSON()',
           )
           .then(({ x, y, width, height }) => {
             win.setBounds({
@@ -193,7 +193,7 @@ function createScreenshot(path, filePath) {
 function getFilename(game, item, extension) {
   return `${game}-${item.replace(
     "?paginated=true",
-    "-paginated"
+    "-paginated",
   )}.${extension}`;
 }
 
@@ -224,7 +224,7 @@ ipcMain.on("export-pdf", (event, game, items) => {
             }
           });
         },
-        { concurrency: 4 }
+        { concurrency: 4 },
       )
         .then(() => alert("success", `Exported ${game} to ${directory} as pdf`))
         .then(() => shell.openPath(directory))
@@ -251,10 +251,10 @@ ipcMain.on("export-png", (event, game, items) => {
                 let percent = Math.floor((current / total) * 100);
                 progress(percent, `${current}/${total} - ${basename}`);
               }
-            }
+            },
           );
         },
-        { concurrency: 8 }
+        { concurrency: 8 },
       )
         .then(() => alert("success", `Exported ${game} to ${directory} as png`))
         .then(() => shell.openPath(directory))

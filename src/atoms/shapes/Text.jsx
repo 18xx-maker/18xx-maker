@@ -13,20 +13,24 @@ const Text = (props) => {
 
   return (
     <RotateContext.Consumer>
-      {rotateContext => (
-
-    <Color context="map">
-      {c => (
-        <text
-              transform={(fixed || rotateContext.fixed) ? null : `rotate(${-rotateContext.angle - (rotation || 0)})`}
+      {(rotateContext) => (
+        <Color context="map">
+          {(c) => (
+            <text
+              transform={
+                fixed || rotateContext.fixed
+                  ? null
+                  : `rotate(${-rotateContext.angle - (rotation || 0)})`
+              }
               fill={c(defaultTo("black", color))}
               {...font}
               dominantBaseline="central"
-              textAnchor="middle">
-          {text}
-        </text>
-      )}
-    </Color>
+              textAnchor="middle"
+            >
+              {text}
+            </text>
+          )}
+        </Color>
       )}
     </RotateContext.Consumer>
   );

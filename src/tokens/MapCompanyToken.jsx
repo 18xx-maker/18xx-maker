@@ -10,7 +10,7 @@ const MapCompanyToken = (props) => {
   const { config } = useContext(ConfigContext);
 
   // Pass down all props that we don't use to look up the company
-  let passing = {...props};
+  let passing = { ...props };
   delete passing.company;
 
   if (config.plainMapCompanies) {
@@ -18,9 +18,9 @@ const MapCompanyToken = (props) => {
     passing.color = "white";
     passing.labelColor = props.color || "black";
     passing.logo = undefined;
-    return <Token {...passing} />
+    return <Token {...passing} />;
   } else {
-    return <CompanyToken {...props} />
+    return <CompanyToken {...props} />;
   }
 };
 export default MapCompanyToken;

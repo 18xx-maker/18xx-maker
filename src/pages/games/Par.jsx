@@ -10,11 +10,13 @@ const Par = () => {
   const { config } = useContext(ConfigContext);
   const { game } = useContext(GameContext);
 
-  const [paginated] = useBooleanParam('paginated');
+  const [paginated] = useBooleanParam("paginated");
 
-  return (paginated
-          ? <ParPaginated {...{game, config}}/>
-          : <ParSingle {...{game, config}}/>);
+  return paginated ? (
+    <ParPaginated {...{ game, config }} />
+  ) : (
+    <ParSingle {...{ game, config }} />
+  );
 };
 
 export default Par;

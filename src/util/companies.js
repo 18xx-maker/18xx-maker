@@ -3,49 +3,52 @@ import { addIndex, is, map, mergeRight, prop } from "ramda";
 import { companies as overrides } from "../data";
 
 export const compileCompanies = (game) => {
-  return map((company) => {
-    if (
-      company.minor &&
-      !company.tokens &&
-      game.tokenTypes &&
-      game.tokenTypes["minor"]
-    ) {
-      company.tokenType = "minor";
-      company.tokens = game.tokenTypes["minor"];
-    } else if (
-      !company.tokens &&
-      game.tokenTypes &&
-      game.tokenTypes["default"]
-    ) {
-      company.tokenType = "default";
-      company.tokens = game.tokenTypes["default"];
-    } else if (is(String, company.tokens)) {
-      company.tokenType = company.tokens;
-      company.tokens = game.tokenTypes[company.tokens];
-    }
+  return map(
+    (company) => {
+      if (
+        company.minor &&
+        !company.tokens &&
+        game.tokenTypes &&
+        game.tokenTypes["minor"]
+      ) {
+        company.tokenType = "minor";
+        company.tokens = game.tokenTypes["minor"];
+      } else if (
+        !company.tokens &&
+        game.tokenTypes &&
+        game.tokenTypes["default"]
+      ) {
+        company.tokenType = "default";
+        company.tokens = game.tokenTypes["default"];
+      } else if (is(String, company.tokens)) {
+        company.tokenType = company.tokens;
+        company.tokens = game.tokenTypes[company.tokens];
+      }
 
-    if (
-      company.minor &&
-      !company.shares &&
-      game.shareTypes &&
-      game.shareTypes["minor"]
-    ) {
-      company.shareType = "minor";
-      company.shares = game.shareTypes["minor"];
-    } else if (
-      !company.shares &&
-      game.shareTypes &&
-      game.shareTypes["default"]
-    ) {
-      company.shareType = "default";
-      company.shares = game.shareTypes["default"];
-    } else if (is(String, company.shares)) {
-      company.shareType = company.shares;
-      company.shares = game.shareTypes[company.shares];
-    }
+      if (
+        company.minor &&
+        !company.shares &&
+        game.shareTypes &&
+        game.shareTypes["minor"]
+      ) {
+        company.shareType = "minor";
+        company.shares = game.shareTypes["minor"];
+      } else if (
+        !company.shares &&
+        game.shareTypes &&
+        game.shareTypes["default"]
+      ) {
+        company.shareType = "default";
+        company.shares = game.shareTypes["default"];
+      } else if (is(String, company.shares)) {
+        company.shareType = company.shares;
+        company.shares = game.shareTypes[company.shares];
+      }
 
-    return company;
-  }, (game && game.companies) || []);
+      return company;
+    },
+    (game && game.companies) || [],
+  );
 };
 
 export const overrideCompanies = (companies, override, selections) => {
@@ -60,7 +63,7 @@ export const overrideCompanies = (companies, override, selections) => {
     if ((selections || []).length > 0) {
       overrideCompanies = map(
         (index) => prop(index, overrideCompanies),
-        selections
+        selections,
       );
     }
 

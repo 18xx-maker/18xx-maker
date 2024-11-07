@@ -14,18 +14,22 @@ const Map = () => {
   const { config } = useContext(ConfigContext);
   const { game } = useContext(GameContext);
 
-  const [paginated] = useBooleanParam('paginated');
-  const [variation, setVariation] = useIntParam('variation', 0);
+  const [paginated] = useBooleanParam("paginated");
+  const [variation, setVariation] = useIntParam("variation", 0);
 
   if (is(Array, game.map) && isNil(variation)) {
     setVariation(0);
   }
 
-  return <MapOrientation>
-           {paginated
-            ? <MapPaginated {...{game, config, variation}}/>
-            : <MapSingle {...{game, config, variation}}/>}
-         </MapOrientation>;
+  return (
+    <MapOrientation>
+      {paginated ? (
+        <MapPaginated {...{ game, config, variation }} />
+      ) : (
+        <MapSingle {...{ game, config, variation }} />
+      )}
+    </MapOrientation>
+  );
 };
 
 export default Map;

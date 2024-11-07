@@ -28,8 +28,11 @@ const TokenSingle = () => {
   const { game } = useContext(GameContext);
   const { index } = useParams();
 
-  let grid = max(max(config.tokens.marketTokenSize, config.tokens.stationTokenSize),
-                 config.tokens.generalTokenSize) + 10;
+  let grid =
+    max(
+      max(config.tokens.marketTokenSize, config.tokens.stationTokenSize),
+      config.tokens.generalTokenSize,
+    ) + 10;
   let gridCss = `${grid / 100.0}in`;
 
   let marketViewBox = `-${config.tokens.marketTokenSize / 2} -${config.tokens.marketTokenSize / 2} ${config.tokens.marketTokenSize} ${config.tokens.marketTokenSize}`;
@@ -40,42 +43,76 @@ const TokenSingle = () => {
   let stationPadding = `${(grid - config.tokens.stationTokenSize) / 200.0}in`;
   let generalPadding = `${(grid - config.tokens.generalTokenSize) / 200.0}in`;
 
-  let companyTokenNodes = map(company => (
-    <div className="token" key={company.abbrev}>
-      <div className="printElement" style={{height: gridCss, display: 'inline-block'}}>
-        <Svg viewBox={marketViewBox}
-             style={{width: `${config.tokens.marketTokenSize / 100}in`,
-                     height: `${config.tokens.marketTokenSize / 100}in`,
-                     padding: marketPadding }}>
-          <CompanyToken width={config.tokens.marketTokenSize / 2}
-                        company={company} />
-        </Svg>
-        <Svg viewBox={marketViewBox}
-             style={{width: `${config.tokens.marketTokenSize / 100}in`,
-                     height: `${config.tokens.marketTokenSize / 100}in`,
-                     padding: marketPadding }}>
-          <CompanyToken width={config.tokens.marketTokenSize / 2}
-                        company={company}
-                        inverse={true} />
-        </Svg>
-        <Svg viewBox={stationViewBox}
-             style={{width: `${config.tokens.stationTokenSize / 100}in`,
-                     height: `${config.tokens.stationTokenSize / 100}in`,
-                     padding: stationPadding }}>
-          <CompanyToken width={config.tokens.stationTokenSize / 2}
-                        company={company} />
-        </Svg>
-        <Svg viewBox={stationViewBox}
-             style={{width: `${config.tokens.stationTokenSize / 100}in`,
-                     height: `${config.tokens.stationTokenSize / 100}in`,
-                     padding: stationPadding }}>
-          <CompanyToken width={config.tokens.stationTokenSize / 2}
-                        company={company}
-                        inverse={true} />
-        </Svg>
+  let companyTokenNodes = map(
+    (company) => (
+      <div className="token" key={company.abbrev}>
+        <div
+          className="printElement"
+          style={{ height: gridCss, display: "inline-block" }}
+        >
+          <Svg
+            viewBox={marketViewBox}
+            style={{
+              width: `${config.tokens.marketTokenSize / 100}in`,
+              height: `${config.tokens.marketTokenSize / 100}in`,
+              padding: marketPadding,
+            }}
+          >
+            <CompanyToken
+              width={config.tokens.marketTokenSize / 2}
+              company={company}
+            />
+          </Svg>
+          <Svg
+            viewBox={marketViewBox}
+            style={{
+              width: `${config.tokens.marketTokenSize / 100}in`,
+              height: `${config.tokens.marketTokenSize / 100}in`,
+              padding: marketPadding,
+            }}
+          >
+            <CompanyToken
+              width={config.tokens.marketTokenSize / 2}
+              company={company}
+              inverse={true}
+            />
+          </Svg>
+          <Svg
+            viewBox={stationViewBox}
+            style={{
+              width: `${config.tokens.stationTokenSize / 100}in`,
+              height: `${config.tokens.stationTokenSize / 100}in`,
+              padding: stationPadding,
+            }}
+          >
+            <CompanyToken
+              width={config.tokens.stationTokenSize / 2}
+              company={company}
+            />
+          </Svg>
+          <Svg
+            viewBox={stationViewBox}
+            style={{
+              width: `${config.tokens.stationTokenSize / 100}in`,
+              height: `${config.tokens.stationTokenSize / 100}in`,
+              padding: stationPadding,
+            }}
+          >
+            <CompanyToken
+              width={config.tokens.stationTokenSize / 2}
+              company={company}
+              inverse={true}
+            />
+          </Svg>
+        </div>
       </div>
-    </div>
-  ), overrideCompanies(compileCompanies(game), config.overrideCompanies, config.overrideSelection));
+    ),
+    overrideCompanies(
+      compileCompanies(game),
+      config.overrideCompanies,
+      config.overrideSelection,
+    ),
+  );
 
   // "quantity" of 0 means remove the token entirely from the array
   let extraTokenNodes = compose(
@@ -83,22 +120,37 @@ const TokenSingle = () => {
       if (is(Object, extraToken)) {
         return (
           <div className="token" key={index}>
-            <div className="printElement" style={{height: gridCss, display: 'inline-block'}}>
-              <Svg viewBox={generalViewBox}
-                   style={{width: `${config.tokens.generalTokenSize / 100}in`,
-                           height: `${config.tokens.generalTokenSize / 100}in`,
-                           padding: generalPadding }}>
-                <Token width={config.tokens.generalTokenSize / 2}
-                       color="white"
-                       {...extraToken} />
+            <div
+              className="printElement"
+              style={{ height: gridCss, display: "inline-block" }}
+            >
+              <Svg
+                viewBox={generalViewBox}
+                style={{
+                  width: `${config.tokens.generalTokenSize / 100}in`,
+                  height: `${config.tokens.generalTokenSize / 100}in`,
+                  padding: generalPadding,
+                }}
+              >
+                <Token
+                  width={config.tokens.generalTokenSize / 2}
+                  color="white"
+                  {...extraToken}
+                />
               </Svg>
-              <Svg viewBox={generalViewBox}
-                   style={{width: `${config.tokens.generalTokenSize / 100}in`,
-                           height: `${config.tokens.generalTokenSize / 100}in`,
-                           padding: generalPadding }}>
-                <Token width={config.tokens.generalTokenSize / 2}
-                       color="black"
-                       {...extraToken} />
+              <Svg
+                viewBox={generalViewBox}
+                style={{
+                  width: `${config.tokens.generalTokenSize / 100}in`,
+                  height: `${config.tokens.generalTokenSize / 100}in`,
+                  padding: generalPadding,
+                }}
+              >
+                <Token
+                  width={config.tokens.generalTokenSize / 2}
+                  color="black"
+                  {...extraToken}
+                />
               </Svg>
             </div>
           </div>
@@ -106,37 +158,50 @@ const TokenSingle = () => {
       } else {
         return (
           <div className="token" key={index}>
-            <div className="printElement" style={{height: gridCss, display: 'inline-block'}}>
-              <Svg viewBox={generalViewBox}
-                   style={{width: `${config.tokens.generalTokenSize / 100}in`,
-                           height: `${config.tokens.generalTokenSize / 100}in`,
-                           padding: generalPadding }}>
-                <Token width={config.tokens.generalTokenSize / 2}
-                       label={extraToken}
-                       color="white" />
+            <div
+              className="printElement"
+              style={{ height: gridCss, display: "inline-block" }}
+            >
+              <Svg
+                viewBox={generalViewBox}
+                style={{
+                  width: `${config.tokens.generalTokenSize / 100}in`,
+                  height: `${config.tokens.generalTokenSize / 100}in`,
+                  padding: generalPadding,
+                }}
+              >
+                <Token
+                  width={config.tokens.generalTokenSize / 2}
+                  label={extraToken}
+                  color="white"
+                />
               </Svg>
-              <Svg viewBox={generalViewBox}
-                   style={{width: `${config.tokens.generalTokenSize / 100}in`,
-                           height: `${config.tokens.generalTokenSize / 100}in`,
-                           padding: generalPadding }}>
-                <Token width={config.tokens.generalTokenSize / 2}
-                       label={extraToken}
-                       color="black" />
+              <Svg
+                viewBox={generalViewBox}
+                style={{
+                  width: `${config.tokens.generalTokenSize / 100}in`,
+                  height: `${config.tokens.generalTokenSize / 100}in`,
+                  padding: generalPadding,
+                }}
+              >
+                <Token
+                  width={config.tokens.generalTokenSize / 2}
+                  label={extraToken}
+                  color="black"
+                />
               </Svg>
             </div>
           </div>
         );
       }
     }),
-    reject(propEq("quantity", 0))
+    reject(propEq("quantity", 0)),
   )(game.tokens || []);
 
   let tokenNode = concat(companyTokenNodes, extraTokenNodes)[index];
 
   return (
-    <ColorContext.Provider value="companies">
-      {tokenNode}
-    </ColorContext.Provider>
+    <ColorContext.Provider value="companies">{tokenNode}</ColorContext.Provider>
   );
 };
 

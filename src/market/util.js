@@ -77,10 +77,14 @@ export const getMarketData = (stock, config) => {
       totalHeight += 50;
     }
   }
-  totalHeight += stock.display && stock.display.extraTotalHeight ?
-    stock.display.extraTotalHeight : 0;
-  totalWidth += stock.display && stock.display.extraTotalWidth ?
-    stock.display.extraTotalHeight : 0;
+  totalHeight +=
+    stock.display && stock.display.extraTotalHeight
+      ? stock.display.extraTotalHeight
+      : 0;
+  totalWidth +=
+    stock.display && stock.display.extraTotalWidth
+      ? stock.display.extraTotalHeight
+      : 0;
 
   return {
     type: stock.type || "2D",

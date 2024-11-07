@@ -4,14 +4,9 @@ import Color from "../util/Color";
 const Industry = ({ top, bottom }) => {
   return (
     <Color context="companies">
-      {(c,t,s,p) => (
+      {(c, t, s, p) => (
         <g>
-          <circle
-            fill={p("white")}
-            stroke="none"
-            r="18"
-            cx="0"
-            cy="0" />
+          <circle fill={p("white")} stroke="none" r="18" cx="0" cy="0" />
           <path
             d="M -18 0 A 18 18 0 0 1 18 0 Z"
             fill={c("pink")}

@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import addIndex from "ramda/src/addIndex";
 import any from "ramda/src/any";
 import chain from "ramda/src/chain";
@@ -10,12 +10,23 @@ import map from "ramda/src/map";
 import HexContext from "./context/HexContext";
 
 const autoPositionTypes = ["icon", "label", "terrain", "value"];
-const positionNames = ["angle", "percent", "rotate", "rotation", "side", "x", "y"];
+const positionNames = [
+  "angle",
+  "percent",
+  "rotate",
+  "rotation",
+  "side",
+  "x",
+  "y",
+];
 
-const hasPositioning = element => {
-  return any(identity, map(name => {
-    return has(name, element);
-  }, positionNames));
+const hasPositioning = (element) => {
+  return any(
+    identity,
+    map((name) => {
+      return has(name, element);
+    }, positionNames),
+  );
 };
 
 const countElement = (hex, element) => {
@@ -26,7 +37,7 @@ const hasElement = (hex, element) => {
   return countElement(hex, element) > 0;
 };
 
-const hasCenterElement = hex => {
+const hasCenterElement = (hex) => {
   return hasElement(hex, "cities") || hasElement(hex, "centerTowns");
 };
 
@@ -39,17 +50,16 @@ const autoPositionIcon = (d, i, hex) => {
     return {
       ...d,
       angle: 30,
-      percent: 0.6
+      percent: 0.6,
     };
   }
 
   return {
     ...d,
     angle: 0,
-    percent: 0.6
+    percent: 0.6,
   };
-
-}
+};
 
 const autoPositionValue = (d, i, hex) => {
   if (i >= 1) {
@@ -59,7 +69,7 @@ const autoPositionValue = (d, i, hex) => {
   return {
     ...d,
     angle: 210,
-    percent: 0.7
+    percent: 0.7,
   };
 };
 
@@ -69,13 +79,13 @@ const autoPositionLabel = (d, i, hex) => {
       return {
         ...d,
         angle: 150,
-        percent: 0.7
+        percent: 0.7,
       };
     case 1:
       return {
         ...d,
         angle: 270,
-        percent: 0.7
+        percent: 0.7,
       };
     default:
       return d;
@@ -91,19 +101,19 @@ const autoPositionTerrain = (d, i, hex) => {
     return {
       ...d,
       angle: 330,
-      percent: 0.7
+      percent: 0.7,
     };
   }
 
   return {
     ...d,
     angle: 0,
-    percent: 0.7
+    percent: 0.7,
   };
-}
+};
 
 const autoPosition = (d, i, hex, type) => {
-  switch(type) {
+  switch (type) {
     case "icon":
       return autoPositionIcon(d, i, hex);
     case "label":
@@ -115,7 +125,7 @@ const autoPosition = (d, i, hex, type) => {
     default:
       return d;
   }
-}
+};
 
 const Position = ({ data, type, children }) => {
   const hex = useContext(HexContext);
@@ -151,7 +161,7 @@ const Position = ({ data, type, children }) => {
     let translate = 75 * (d.percent || 0);
     let rotate = -(d.angle || 0) + (rotation || 0);
 
-    let passing = {...d};
+    let passing = { ...d };
 
     return [
       <g
@@ -159,7 +169,7 @@ const Position = ({ data, type, children }) => {
         transform={`rotate(${angle} ${x} ${y}) translate(0 ${translate}) rotate(${rotate} ${x} ${y}) translate(${x} ${y})`}
       >
         {children(passing)}
-      </g>
+      </g>,
     ];
   }, data);
 };

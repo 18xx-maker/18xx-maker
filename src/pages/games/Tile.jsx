@@ -36,7 +36,8 @@ const TileSheet = () => {
             width: `${scale * 200 * 0.01}in`,
             height: `${scale * 200 * 0.01}in`,
           }}
-          viewBox={`-100 -100 200 200`} >
+          viewBox={`-100 -100 200 200`}
+        >
           <g mask={`url(#hexMask)`}>
             <Hex hex={tile} id={tile.id} mask="hexBleedMask" />
           </g>

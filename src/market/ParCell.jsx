@@ -9,11 +9,11 @@ import is from "ramda/src/is";
 const ParCell = ({ cell, data }) => {
   if (is(String, cell)) {
     cell = {
-      label: cell
+      label: cell,
     };
   } else if (is(Number, cell)) {
     cell = {
-      value: cell
+      value: cell,
     };
   } else if (is(Object, cell)) {
     // Nothing to do, just assume we have a valid object
@@ -24,19 +24,21 @@ const ParCell = ({ cell, data }) => {
 
   return (
     <GetFont>
-      {font => (
+      {(font) => (
         <Color>
-          {(c,t) => {
-
+          {(c, t) => {
             // Standard colors
-            let color = cell.color ?
-                c(cell.color) :
-                (data.par && data.par.color ?
-                 c(data.par.color)
-                 : c("gray"));
+            let color = cell.color
+              ? c(cell.color)
+              : data.par && data.par.color
+                ? c(data.par.color)
+                : c("gray");
 
             // Check if legend is used
-            if (Number.isInteger(cell.legend) && cell.legend < data.legend.length) {
+            if (
+              Number.isInteger(cell.legend) &&
+              cell.legend < data.legend.length
+            ) {
               color = c(data.legend[cell.legend].color);
             }
 
@@ -46,17 +48,23 @@ const ParCell = ({ cell, data }) => {
             let rotated = false;
             let subRotated = false;
 
-            let text = "value" in cell ? <Currency value={cell.value} type="market"/> : cell.label;
+            let text =
+              "value" in cell ? (
+                <Currency value={cell.value} type="market" />
+              ) : (
+                cell.label
+              );
 
             return (
               <g>
-                <rect x="0"
-                      y="0"
-                      width={data.width}
-                      height={data.height}
-                      stroke={c("black")}
-                      strokeWidth="1"
-                      fill={color}
+                <rect
+                  x="0"
+                  y="0"
+                  width={data.width}
+                  height={data.height}
+                  stroke={c("black")}
+                  strokeWidth="1"
+                  fill={color}
                 />
                 {text && (
                   <text
@@ -83,8 +91,8 @@ const ParCell = ({ cell, data }) => {
                     fontSize="15"
                     textAnchor="start"
                     dominantBaseline={subRotated ? "hanging" : "baseline"}
-                    x={subRotated ? (-data.height + 5) : 5}
-                    y={subRotated ? 5 : (data.height - 5)}
+                    x={subRotated ? -data.height + 5 : 5}
+                    y={subRotated ? 5 : data.height - 5}
                   >
                     {cell.subLabel}
                   </text>

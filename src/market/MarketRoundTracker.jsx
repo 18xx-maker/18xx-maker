@@ -2,7 +2,7 @@ import React from "react";
 
 import RoundTracker from "../RoundTracker";
 
-const MarketRoundTracker = ({roundTracker, game, config}) => {
+const MarketRoundTracker = ({ roundTracker, game, config }) => {
   if (!roundTracker) {
     return null;
   }
@@ -17,11 +17,13 @@ const MarketRoundTracker = ({roundTracker, game, config}) => {
   let rotation = roundTracker.rotation || 0;
 
   let x = config.stock.cell.width * roundTracker.x;
-  let y = config.stock.cell.height * roundTracker.y + (config.stock.title === false ? 0 : 50);
+  let y =
+    config.stock.cell.height * roundTracker.y +
+    (config.stock.title === false ? 0 : 50);
 
   return (
     <g transform={`translate(${x} ${y})`}>
-      <RoundTracker {...{rounds, size, type, rotation}} />
+      <RoundTracker {...{ rounds, size, type, rotation }} />
     </g>
   );
 };

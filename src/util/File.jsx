@@ -1,8 +1,7 @@
-import React from "react";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 import Button from "@mui/material/Button";
-import DownloadIcon from '@mui/icons-material/GetApp';
+import DownloadIcon from "@mui/icons-material/GetApp";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -27,24 +26,31 @@ const File = (props) => {
   }
 
   if (props.list) {
-    return <ListItemButton component="a"
-                           download={props.filename}
-                           href={`data:${mime};base64,${data}`}>
-             <ListItemIcon>
-               <DownloadIcon color="primary"/>
-             </ListItemIcon>
-             <ListItemText primary={t(verb)}
-                           secondary={props.filename}/>
-           </ListItemButton>;
+    return (
+      <ListItemButton
+        component="a"
+        download={props.filename}
+        href={`data:${mime};base64,${data}`}
+      >
+        <ListItemIcon>
+          <DownloadIcon color="primary" />
+        </ListItemIcon>
+        <ListItemText primary={t(verb)} secondary={props.filename} />
+      </ListItemButton>
+    );
   }
 
-  return <Button download={props.filename}
-                 startIcon={<DownloadIcon/>}
-                 variant="contained"
-                 color="primary"
-                 href={`data:${mime};base64,${data}`}>
-           {t(verb)} {props.filename}
-         </Button>
+  return (
+    <Button
+      download={props.filename}
+      startIcon={<DownloadIcon />}
+      variant="contained"
+      color="primary"
+      href={`data:${mime};base64,${data}`}
+    >
+      {t(verb)} {props.filename}
+    </Button>
+  );
 };
 
 export default File;

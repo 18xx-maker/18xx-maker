@@ -13,10 +13,10 @@ const Games = () => {
   return (
     <Switch>
       <Route path="/games" exact>
-        <LoadGames/>
+        <LoadGames />
       </Route>
       <Route>
-        <Game game={game}/>
+        <Game game={game} />
       </Route>
     </Switch>
   );

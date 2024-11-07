@@ -6,7 +6,7 @@ import "./number.scss";
 const Number = ({ number, background }) => {
   return (
     <Color context="companies">
-      {c => (
+      {(c) => (
         <div className="cutlines">
           <div
             className="card number"

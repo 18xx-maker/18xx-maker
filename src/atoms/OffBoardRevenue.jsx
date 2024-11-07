@@ -14,12 +14,12 @@ import { splitRevenues } from "../util/revenue";
 const DEFAULT_FONTSIZE = 14;
 
 const letter = (size) => {
-  return size * (5/7.0);
+  return size * (5 / 7.0);
 };
 
 const height = (size) => {
   return size + 6;
-}
+};
 
 const makeNode = (x, y, reverse, revenue, size, fontFamily) => {
   let value = multiDefaultTo("", revenue.value, revenue.revenue, revenue.cost);
@@ -28,9 +28,8 @@ const makeNode = (x, y, reverse, revenue, size, fontFamily) => {
   let width = R.max(`${value}`.length, 2) * letter(size) + 5;
 
   let nodes = [
-    <Color context="map"
-           key={`rect-${value}`}>
-      {c => (
+    <Color context="map" key={`rect-${value}`}>
+      {(c) => (
         <rect
           width={width}
           height={height(size)}
@@ -41,9 +40,8 @@ const makeNode = (x, y, reverse, revenue, size, fontFamily) => {
         />
       )}
     </Color>,
-    <Color context="map"
-           key={`text-${value}`}>
-      {(c,t) => (
+    <Color context="map" key={`text-${value}`}>
+      {(c, t) => (
         <text
           fill={c(revenue.textColor) || c("black")}
           fontSize={size}
@@ -53,19 +51,18 @@ const makeNode = (x, y, reverse, revenue, size, fontFamily) => {
           textLength={length}
           lengthAdjust="spacingAndGlyphs"
           x={x + 0.5 * width}
-          y={y - 10 + (size / 2) + 2}
+          y={y - 10 + size / 2 + 2}
         >
           <Currency value={value} type="offboard" />
         </text>
       )}
-    </Color>
+    </Color>,
   ];
 
-  if(revenue.phase) {
+  if (revenue.phase) {
     nodes.push([
-      <Color key={`phase-${revenue.phase}`}
-             context="map">
-        {c => (
+      <Color key={`phase-${revenue.phase}`} context="map">
+        {(c) => (
           <text
             fill={c(revenue.phaseColor) || c(revenue.color) || c("white")}
             strokeWidth="0.5"
@@ -82,53 +79,81 @@ const makeNode = (x, y, reverse, revenue, size, fontFamily) => {
             {revenue.phase}
           </text>
         )}
-      </Color>
+      </Color>,
     ]);
-  };
+  }
 
   return nodes;
 };
 
-const getWidth = (r, size) => R.max(`${r.value || r.revenue || r.cost || 0}`.length, 2) * letter(size) + 5;
+const getWidth = (r, size) =>
+  R.max(`${r.value || r.revenue || r.cost || 0}`.length, 2) * letter(size) + 5;
 
 const makeNodes = (y, reverse, revenues, size, fontFamily) => {
-  let totalWidth = R.sum(R.map(r => 5 + letter(size) * R.max(`${r.value || r.revenue || r.cost || 0}`.length, 2),
-                               revenues));
+  let totalWidth = R.sum(
+    R.map(
+      (r) =>
+        5 +
+        letter(size) *
+          R.max(`${r.value || r.revenue || r.cost || 0}`.length, 2),
+      revenues,
+    ),
+  );
   let bx = -0.5 * totalWidth; // Starting x for border box
   let x = bx;
 
-  return R.concat(R.map(r => {
-    let result = makeNode(x, y, reverse, r, size, fontFamily);
-    x = x + getWidth(r, size);
-    return result;
-  }, revenues),[
-    <Color key={`rect-border-${y}`} context="map">
-      {c => (
-        <rect width={totalWidth}
-              height={height(size)}
-              y={y - 10}
-              x={bx}
-              fill="none"
-              strokeWidth="1"
-              stroke={c("black")} />
-      )}
-    </Color>
-  ]);
+  return R.concat(
+    R.map((r) => {
+      let result = makeNode(x, y, reverse, r, size, fontFamily);
+      x = x + getWidth(r, size);
+      return result;
+    }, revenues),
+    [
+      <Color key={`rect-border-${y}`} context="map">
+        {(c) => (
+          <rect
+            width={totalWidth}
+            height={height(size)}
+            y={y - 10}
+            x={bx}
+            fill="none"
+            strokeWidth="1"
+            stroke={c("black")}
+          />
+        )}
+      </Color>,
+    ],
+  );
 };
 
-const OffBoardRevenue = ({ name, revenues, fontFamily, reverse, rows, size}) => {
+const OffBoardRevenue = ({
+  name,
+  revenues,
+  fontFamily,
+  reverse,
+  rows,
+  size,
+}) => {
   const { game } = useContext(GameContext);
   let nameNode = null;
   if (name) {
-    nameNode = <Name {...name}
-                               y={name.y || (reverse ? 16 : -16)}
-                               reverse={reverse}
-                               bgColor={name.bgColor || "offboard"} />;
+    nameNode = (
+      <Name
+        {...name}
+        y={name.y || (reverse ? 16 : -16)}
+        reverse={reverse}
+        bgColor={name.bgColor || "offboard"}
+      />
+    );
   }
 
   let split = splitRevenues(rows, revenues);
 
-  let fontSize = multiDefaultTo(DEFAULT_FONTSIZE, size, game.info.valueFontSize);
+  let fontSize = multiDefaultTo(
+    DEFAULT_FONTSIZE,
+    size,
+    game.info.valueFontSize,
+  );
   fontFamily = multiDefaultTo("display", fontFamily, game.info.valueFontFamily);
 
   let nodes = R.addIndex(R.chain)((revenues, row) => {

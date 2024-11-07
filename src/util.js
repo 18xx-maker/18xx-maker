@@ -1,9 +1,35 @@
-import { addIndex, adjust, ascend, chain, compose, curry, defaultTo, find, fromPairs, head, is, join, juxt, lte, map, max, mergeAll, nth, pick, prop, propOr, reduce, reverse, sortWith, split, tail, toPairs, toUpper } from "ramda";
+import {
+  addIndex,
+  adjust,
+  ascend,
+  chain,
+  compose,
+  curry,
+  defaultTo,
+  find,
+  fromPairs,
+  head,
+  is,
+  join,
+  juxt,
+  lte,
+  map,
+  max,
+  mergeAll,
+  nth,
+  pick,
+  prop,
+  propOr,
+  reduce,
+  reverse,
+  sortWith,
+  split,
+  tail,
+  toPairs,
+  toUpper,
+} from "ramda";
 
-export const maxPlayers = compose(
-  reduce(max, 0),
-  map(prop("number"))
-);
+export const maxPlayers = compose(reduce(max, 0), map(prop("number")));
 
 export const isElectron =
   typeof navigator === "undefined"
@@ -30,19 +56,19 @@ const idBaseSort = compose(
   defaultTo(0),
   nth(0),
   split("|"),
-  propOr("", "id")
+  propOr("", "id"),
 );
 const idExtraSort = compose(
   Number,
   defaultTo(0),
   nth(1),
   split("|"),
-  propOr("", "id")
+  propOr("", "id"),
 );
 const colorSort = compose(
   tileColors.indexOf.bind(tileColors),
   prop("color"),
-  defaultTo({ color: "other" })
+  defaultTo({ color: "other" }),
 );
 export const sortTiles = sortWith([
   ascend(colorSort),
@@ -52,11 +78,11 @@ export const sortTiles = sortWith([
 
 export const capitalize = compose(
   join(""),
-  juxt([compose(toUpper, head), tail])
+  juxt([compose(toUpper, head), tail]),
 );
 
 export const mapKeys = curry((fn, obj) =>
-  fromPairs(map(adjust(0, fn), toPairs(obj)))
+  fromPairs(map(adjust(0, fn), toPairs(obj))),
 );
 
 export const linear = curry((percent, p1, p2) => [
@@ -105,7 +131,7 @@ export const marketColor = curry((limits, value) => {
   return propOr(
     "plain",
     "color",
-    find((limit) => lte(value, limit.value), reverse(limits))
+    find((limit) => lte(value, limit.value), reverse(limits)),
   );
 });
 
@@ -196,8 +222,8 @@ export const getCharterData = (charters, paper) => {
       ? 6
       : 3
     : useHalfWidth
-    ? 4
-    : 2;
+      ? 4
+      : 2;
 
   // Setup actual variables based on die choices
   switch (layout) {

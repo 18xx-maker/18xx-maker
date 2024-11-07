@@ -5,7 +5,21 @@ import defaultTo from "ramda/src/defaultTo";
 import Color from "../util/Color";
 import Name from "./Name";
 
-const MediumCity = ({ border, name, reverse, color, fillColor, fillOpacity, strokeColor, strokeWidth, width, strokeDashArray, outlineColor, outlineStroke, outlineStrokeWidth }) => {
+const MediumCity = ({
+  border,
+  name,
+  reverse,
+  color,
+  fillColor,
+  fillOpacity,
+  strokeColor,
+  strokeWidth,
+  width,
+  strokeDashArray,
+  outlineColor,
+  outlineStroke,
+  outlineStrokeWidth,
+}) => {
   fillColor = fillColor || color || "track";
   strokeColor = strokeColor || "black";
   strokeWidth = strokeWidth >= 0 ? strokeWidth : "1";
@@ -18,7 +32,7 @@ const MediumCity = ({ border, name, reverse, color, fillColor, fillOpacity, stro
   if (border) {
     return (
       <Color>
-        {c => (
+        {(c) => (
           <g transform={`scale(${scale})`}>
             <circle fill={c("border")} stroke="none" cx="0" cy="0" r="21" />
           </g>
@@ -29,17 +43,12 @@ const MediumCity = ({ border, name, reverse, color, fillColor, fillOpacity, stro
     let nameNode = null;
 
     if (name) {
-      nameNode = (
-        <Name
-          {...name}
-          y={name.y || (name.reverse ? 25 : -25)}
-        />
-      );
+      nameNode = <Name {...name} y={name.y || (name.reverse ? 25 : -25)} />;
     }
 
     return (
       <Color context="companies">
-        {c => (
+        {(c) => (
           <g transform={`scale(${scale})`}>
             <circle
               fill={c(outlineColor)}

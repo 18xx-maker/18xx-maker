@@ -45,11 +45,13 @@
     margin: 0;
 
     span {
-      font-size: .4em;
+      font-size: 0.4em;
     }
   }
 
-  p, ul, label {
+  p,
+  ul,
+  label {
     font-family: sans-serif;
     font-weight: normal;
     line-height: 1.3em;
@@ -71,7 +73,8 @@
     }
   }
 
-  pre, code {
+  pre,
+  code {
     background-color: #eee;
     padding: 0.2em 0.5em;
     border-radius: 3px;
@@ -88,4 +91,4 @@
     background-color: inherit;
     border-radius: inherit;
   }
-};
+}

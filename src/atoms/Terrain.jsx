@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import Color from "../util/Color";
 import GameContext from "../context/GameContext";
 import Currency from "../util/Currency";
@@ -14,36 +14,36 @@ const Terrain = ({ type, size, cost, fontFamily, fontSize, color }) => {
   let translate = 0;
   let scale = 1;
 
-  switch(type) {
-  case "swamp":
-    translate = -10;
-    break;
-  case "mountain":
-    translate = -8;
-    break;
-  case "cow-skull":
-    translate = -18;
-    break;
-  case "wheat":
-    translate = -18;
-    break;
-  default:
-    translate = -12;
-    break;
+  switch (type) {
+    case "swamp":
+      translate = -10;
+      break;
+    case "mountain":
+      translate = -8;
+      break;
+    case "cow-skull":
+      translate = -18;
+      break;
+    case "wheat":
+      translate = -18;
+      break;
+    default:
+      translate = -12;
+      break;
   }
 
-  switch(size) {
-  case "tiny":
-    scale = 0.75;
-    break;
-  case "medium":
-    scale = 1.5;
-    break;
-  case "large":
-    scale = 2;
-    break;
-  default:
-    break;
+  switch (size) {
+    case "tiny":
+      scale = 0.75;
+      break;
+    case "medium":
+      scale = 1.5;
+      break;
+    case "large":
+      scale = 2;
+      break;
+    default:
+      break;
   }
 
   let icon = null;
@@ -51,20 +51,25 @@ const Terrain = ({ type, size, cost, fontFamily, fontSize, color }) => {
   if (Component) {
     icon = (
       <g transform={`translate(0 ${translate}) scale(${scale})`}>
-        <Component className={`icon-color-main-${color}`}
-                   width="25" height="25" x="-12.5" y="-12.5" />
+        <Component
+          className={`icon-color-main-${color}`}
+          width="25"
+          height="25"
+          x="-12.5"
+          y="-12.5"
+        />
       </g>
     );
   }
 
   return (
     <Color>
-      {(c,t,s,p) => (
+      {(c, t, s, p) => (
         <g>
           {icon}
           <text
             fill={p(color || "black")}
-            strokeWidth={(!color || color === "black") ? 0 : 1}
+            strokeWidth={!color || color === "black" ? 0 : 1}
             stroke={c("black")}
             fontSize={fontSize}
             fontFamily={fontFamily}

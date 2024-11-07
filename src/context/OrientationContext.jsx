@@ -5,18 +5,18 @@ const OrientationContext = createContext(0);
 
 export const useOrientation = () => {
   return useContext(OrientationContext);
-}
+};
 
 export const MapOrientation = ({ children }) => {
   const { game } = useGame();
 
-  const rotation = (game && game.info.orientation === "horizontal")
-        ? 0
-        : 90;
+  const rotation = game && game.info.orientation === "horizontal" ? 0 : 90;
 
-  return <OrientationContext.Provider value={rotation}>
-           {children}
-         </OrientationContext.Provider>;
-}
+  return (
+    <OrientationContext.Provider value={rotation}>
+      {children}
+    </OrientationContext.Provider>
+  );
+};
 
 export default OrientationContext;

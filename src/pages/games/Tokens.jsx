@@ -42,11 +42,11 @@ const getTokenData = (game, tokens, paper) => {
 
   // Bleed
   let bleedWidth = bleed ? 5 : 0;
-  let totalWidth = width + (2 * bleedWidth);
+  let totalWidth = width + 2 * bleedWidth;
 
   // Paper setup
-  let usableWidth = paper.width - (2 * paper.margins);
-  let usableHeight = paper.height - (2 * paper.margins);
+  let usableWidth = paper.width - 2 * paper.margins;
+  let usableHeight = paper.height - 2 * paper.margins;
 
   // Page row and column settings
   let perRow = Math.floor(usableWidth / totalWidth);
@@ -61,13 +61,15 @@ const getTokenData = (game, tokens, paper) => {
     offsetY = 60;
   }
 
-  let rowWidth = (perRow * offsetX) - (offsetX - totalWidth);
-  let columnHeight = (perColumn * offsetY) - (offsetY - totalWidth);
+  let rowWidth = perRow * offsetX - (offsetX - totalWidth);
+  let columnHeight = perColumn * offsetY - (offsetY - totalWidth);
   let extraX = (usableWidth - rowWidth) / 2;
   let extraY = (usableHeight - columnHeight) / 2;
 
-  let getX = i => extraX + (((i % perPage) % perRow) * offsetX) + (0.5 * totalWidth);
-  let getY = i => extraY + (Math.floor((i % perPage) / perRow) * offsetY) + (0.5 *  totalWidth);
+  let getX = (i) =>
+    extraX + ((i % perPage) % perRow) * offsetX + 0.5 * totalWidth;
+  let getY = (i) =>
+    extraY + Math.floor((i % perPage) / perRow) * offsetY + 0.5 * totalWidth;
 
   let perPage = perRow * perColumn;
 
@@ -96,12 +98,12 @@ const getTokenData = (game, tokens, paper) => {
     offsetX,
     offsetY,
     getX,
-    getY
+    getY,
   };
 };
 
 const TokenLayout = ({ companies, data, game }) => {
-  let companyTokens = chain(company => {
+  let companyTokens = chain((company) => {
     let numberMarketTokens = data.marketTokens;
     if (is(Number, company.marketTokens)) {
       numberMarketTokens = company.marketTokens;
@@ -109,31 +111,35 @@ const TokenLayout = ({ companies, data, game }) => {
 
     // Market tokens
     let marketTokens = Array(numberMarketTokens).fill(
-      <CompanyToken company={company}
-                    width={data.marketTokenSize / 2}
-                    bleed={data.bleed} />
+      <CompanyToken
+        company={company}
+        width={data.marketTokenSize / 2}
+        bleed={data.bleed}
+      />,
     );
 
     let numberReverseMarketTokens = numberMarketTokens;
     switch (data.tokens.reverseMarketTokens) {
-    case "none":
-      numberReverseMarketTokens = 0;
-      break;
-    case "one":
-      numberReverseMarketTokens = 1;
-      break;
-    default:
-      break;
+      case "none":
+        numberReverseMarketTokens = 0;
+        break;
+      case "one":
+        numberReverseMarketTokens = 1;
+        break;
+      default:
+        break;
     }
     if (numberMarketTokens === 0) {
       numberReverseMarketTokens = 0;
     }
 
     let reverseMarketTokens = Array(numberReverseMarketTokens).fill(
-      <CompanyToken company={company}
-                    width={data.marketTokenSize / 2}
-                    bleed={data.bleed}
-                    inverse={true} />
+      <CompanyToken
+        company={company}
+        width={data.marketTokenSize / 2}
+        bleed={data.bleed}
+        inverse={true}
+      />,
     );
 
     let numberExtraStationTokens = 0;
@@ -143,67 +149,87 @@ const TokenLayout = ({ companies, data, game }) => {
       numberExtraStationTokens = data.extraStationTokens;
     }
 
-    let stationTokens = Array(company.tokens.length + numberExtraStationTokens).fill(
-      <CompanyToken company={company}
-                    width={data.stationTokenSize / 2}
-                    bleed={data.bleed} />
+    let stationTokens = Array(
+      company.tokens.length + numberExtraStationTokens,
+    ).fill(
+      <CompanyToken
+        company={company}
+        width={data.stationTokenSize / 2}
+        bleed={data.bleed}
+      />,
     );
 
     return [...marketTokens, ...reverseMarketTokens, ...stationTokens];
   }, companies || []);
 
   let gameTokens = chain((token) => {
-    let count = token.print != null ? token.print :
-      (token.quantity != null ? token.quantity : 1);
+    let count =
+      token.print != null
+        ? token.print
+        : token.quantity != null
+          ? token.quantity
+          : 1;
     let tokenWidth = token.width || data.generalTokenSize / 2;
     if (is(Object, token)) {
       return Array(count).fill(
-               <Token bleed={true}
-               outline="black"
-               {...token}
-               width={tokenWidth} />);
+        <Token bleed={true} outline="black" {...token} width={tokenWidth} />,
+      );
     } else {
-      return [ <Token bleed={true}
-               outline="black"
-               color="white"
-               label={token}
-               width={tokenWidth} /> ];
+      return [
+        <Token
+          bleed={true}
+          outline="black"
+          color="white"
+          label={token}
+          width={tokenWidth}
+        />,
+      ];
     }
   }, game.tokens || []);
 
   // Combine all tokens
   let tokens = [...companyTokens, ...gameTokens];
 
-  let nodes = addIndex(map)((token, index) => (
-    <g
-      key={`token-${index}`}
-      transform={`translate(${data.getX(index)} ${data.getY(index)})`} >
-      {token}
-    </g>
-  ), tokens);
+  let nodes = addIndex(map)(
+    (token, index) => (
+      <g
+        key={`token-${index}`}
+        transform={`translate(${data.getX(index)} ${data.getY(index)})`}
+      >
+        {token}
+      </g>
+    ),
+    tokens,
+  );
 
   let pageNodes = splitEvery(data.perPage, nodes);
 
-  return addIndex(map)((nodes, i) => (
-    <div
-      key={`tokens-page-${i}`}
-      className="tokens"
-      style={{ width: unitsToCss(data.usableWidth),
-               height: unitsToCss(data.usableHeight) }}>
-      <ColorContext.Provider value="companies">
-        <Svg
-          viewBox={`0 0 ${data.usableWidth} ${data.usableHeight}`}
-          style={{ width: unitsToCss(data.usableWidth),
-                   height: unitsToCss(data.usableHeight) }}>
-          {nodes}
-        </Svg>
-        <PageSetup
-          paper={data.paper}
-          landscape={false}
-        />
-      </ColorContext.Provider>
-    </div>
-  ), pageNodes);
+  return addIndex(map)(
+    (nodes, i) => (
+      <div
+        key={`tokens-page-${i}`}
+        className="tokens"
+        style={{
+          width: unitsToCss(data.usableWidth),
+          height: unitsToCss(data.usableHeight),
+        }}
+      >
+        <ColorContext.Provider value="companies">
+          <Svg
+            viewBox={`0 0 ${data.usableWidth} ${data.usableHeight}`}
+            style={{
+              width: unitsToCss(data.usableWidth),
+              height: unitsToCss(data.usableHeight),
+            }}
+          >
+            {nodes}
+          </Svg>
+          <PageSetup paper={data.paper} landscape={false} />
+        </ColorContext.Provider>
+      </div>
+    ),
+    pageNodes,
+  );
 };
 
 const Tokens = () => {
@@ -215,7 +241,11 @@ const Tokens = () => {
   }
 
   const { overrideCompanies: override, overrideSelect: selection } = config;
-  const companies = overrideCompanies(compileCompanies(game), override, selection);
+  const companies = overrideCompanies(
+    compileCompanies(game),
+    override,
+    selection,
+  );
 
   const data = getTokenData(game, config.tokens, config.paper);
 

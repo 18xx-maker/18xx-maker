@@ -25,34 +25,42 @@ const Cards = () => {
   let node = null;
   switch (type) {
     case "private":
-      node = <Private players={game.players} {...game.privates[index]}/>;
+      node = <Private players={game.players} {...game.privates[index]} />;
       break;
     case "train":
-      node = <Train train={game.trains[index]} trains={game.trains}/>;
+      node = <Train train={game.trains[index]} trains={game.trains} />;
       break;
     case "share":
       const override = config.overrideCompanies;
       const selection = config.overrideSelection;
-      let companies = overrideCompanies(compileCompanies(game), override, selection) || [];
-      let shares = flatten(map(c => map(s => assoc('company', c, s), c.shares || []), companies))
+      let companies =
+        overrideCompanies(compileCompanies(game), override, selection) || [];
+      let shares = flatten(
+        map(
+          (c) => map((s) => assoc("company", c, s), c.shares || []),
+          companies,
+        ),
+      );
 
       let share = shares[index];
       let company = share.company;
-      node = <Share name={company.name}
-                    abbrev={company.abbrev}
-                    logo={company.logo}
-                    color={company.color}
-                    token={company.token || company.color}
-                    {...share}
-                    subtext={company.subtext || share.subtext}
-                    variant={company.variant || share.variant}
-                    fontFamily={company.fontFamily || game.info.companyFontFamily}
-             />
+      node = (
+        <Share
+          name={company.name}
+          abbrev={company.abbrev}
+          logo={company.logo}
+          color={company.color}
+          token={company.token || company.color}
+          {...share}
+          subtext={company.subtext || share.subtext}
+          variant={company.variant || share.variant}
+          fontFamily={company.fontFamily || game.info.companyFontFamily}
+        />
+      );
       break;
     default:
       // Make a number card from this number
-      node = <Number number={index}
-                     background={game.info.background} />
+      node = <Number number={index} background={game.info.background} />;
       break;
   }
 
@@ -63,7 +71,7 @@ const Cards = () => {
   cardConfig.bleed = 0;
   cardConfig.border = 0;
 
-  switch(config.cards.layout) {
+  switch (config.cards.layout) {
     case "miniEuroDie":
       cardConfig.width = 265.748;
       cardConfig.height = 173.228;
@@ -143,7 +151,10 @@ const Cards = () => {
   return (
     <div>
       <style>{css}</style>
-      <div className="printElement" style={{overflow:'auto', display:'inline-block'}}>
+      <div
+        className="printElement"
+        style={{ overflow: "auto", display: "inline-block" }}
+      >
         {node}
       </div>
     </div>

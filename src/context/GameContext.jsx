@@ -16,7 +16,7 @@ const GameContext = createContext({ game: null });
 
 // Given a File object returns a promise with the json data
 const loadFile = (file) => {
-  let id = replace(/\.json$/, "", file.name.split('/').pop());
+  let id = replace(/\.json$/, "", file.name.split("/").pop());
   let slug = encodeURIComponent(id);
 
   return file
@@ -25,7 +25,9 @@ const loadFile = (file) => {
     .then(assoc("meta", { id, slug }))
     .then((game) => {
       game.meta.minPlayers = game.players ? game.players[0].number : 0;
-      game.meta.maxPlayers = game.players ? game.players[game.players.length - 1].number : 0;
+      game.meta.maxPlayers = game.players
+        ? game.players[game.players.length - 1].number
+        : 0;
       if (isElectron) {
         let ipcRenderer = window.require("electron").ipcRenderer;
         ipcRenderer.send("watch", file.path, id, slug);
@@ -73,7 +75,9 @@ export const GameProvider = ({ children }) => {
       id: game.id,
       slug: encodeURIComponent(game.id),
       minPlayers: game.players ? game.players[0].number : 0,
-      maxPlayers: game.players ? game.players[game.players.length - 1].number : 0,
+      maxPlayers: game.players
+        ? game.players[game.players.length - 1].number
+        : 0,
     };
     delete game.id;
     delete game.slug;
@@ -135,7 +139,7 @@ export const GameProvider = ({ children }) => {
       } else {
         sendAlert(
           "error",
-          `Unable to load ${match.params.slug}, please load the json file directly if you wish to work on it.`
+          `Unable to load ${match.params.slug}, please load the json file directly if you wish to work on it.`,
         );
         return <Redirect to="/games/" />;
       }

@@ -7,15 +7,15 @@ export const getCardData = (cards, paper) => {
   let cutlinesAndBleed = cutlines + bleed;
 
   // Compute the size of each card with bleed
-  let bleedWidth = (2.0 * bleed) + width;
-  let bleedHeight = (2.0 * bleed) + height;
+  let bleedWidth = 2.0 * bleed + width;
+  let bleedHeight = 2.0 * bleed + height;
 
   // Compute the size of each card with bleed and cutlines
-  let totalWidth = (2.0 * cutlinesAndBleed) + width;
-  let totalHeight = (2.0 * cutlinesAndBleed) + height;
+  let totalWidth = 2.0 * cutlinesAndBleed + width;
+  let totalHeight = 2.0 * cutlinesAndBleed + height;
 
-  let printableWidth = pageWidth - (2.0 * margins);
-  let printableHeight = pageHeight - (2.0 * margins);
+  let printableWidth = pageWidth - 2.0 * margins;
+  let printableHeight = pageHeight - 2.0 * margins;
 
   let usableWidth = printableWidth;
   let usableHeight = printableHeight - (layout === "free" ? 0 : 25);
@@ -23,14 +23,14 @@ export const getCardData = (cards, paper) => {
   // Calculate how many in portait
   let portrait = {
     perRow: Math.floor(usableWidth / totalWidth),
-    perColumn: Math.floor(usableHeight / totalHeight)
+    perColumn: Math.floor(usableHeight / totalHeight),
   };
   portrait.perPage = portrait.perRow * portrait.perColumn;
 
   let landscape = {
     perRow: Math.floor(usableHeight / totalWidth),
-    perColumn: Math.floor(usableWidth / totalHeight)
-  }
+    perColumn: Math.floor(usableWidth / totalHeight),
+  };
   landscape.perPage = landscape.perRow * landscape.perColumn;
 
   // Use portrait if it's more or equal to landscape
@@ -40,7 +40,7 @@ export const getCardData = (cards, paper) => {
     perPage: usePortrait ? portrait.perPage : landscape.perPage,
     perRow: usePortrait ? portrait.perRow : landscape.perRow,
     perColumn: usePortrait ? portrait.perColumn : landscape.perColumn,
-    landscape: !usePortrait
+    landscape: !usePortrait,
   };
 
   // Return all data and some
@@ -80,12 +80,24 @@ export const getCardData = (cards, paper) => {
       totalHeight: unitsToCss(totalHeight),
 
       margins: unitsToCss(margins),
-      pageWidth: cardLayout.landscape ? unitsToCss(pageHeight) : unitsToCss(pageWidth),
-      pageHeight: cardLayout.landscape ? unitsToCss(pageWidth) : unitsToCss(pageHeight),
-      printableWidth: cardLayout.landscape ? unitsToCss(printableHeight) : unitsToCss(printableWidth),
-      printableHeight: cardLayout.landscape ? unitsToCss(printableWidth) : unitsToCss(printableHeight),
-      usableWidth: cardLayout.landscape ? unitsToCss(usableHeight) : unitsToCss(usableWidth),
-      usableHeight: cardLayout.landscape ? unitsToCss(usableWidth) : unitsToCss(usableHeight)
-    }
+      pageWidth: cardLayout.landscape
+        ? unitsToCss(pageHeight)
+        : unitsToCss(pageWidth),
+      pageHeight: cardLayout.landscape
+        ? unitsToCss(pageWidth)
+        : unitsToCss(pageHeight),
+      printableWidth: cardLayout.landscape
+        ? unitsToCss(printableHeight)
+        : unitsToCss(printableWidth),
+      printableHeight: cardLayout.landscape
+        ? unitsToCss(printableWidth)
+        : unitsToCss(printableHeight),
+      usableWidth: cardLayout.landscape
+        ? unitsToCss(usableHeight)
+        : unitsToCss(usableWidth),
+      usableHeight: cardLayout.landscape
+        ? unitsToCss(usableWidth)
+        : unitsToCss(usableHeight),
+    },
   };
-}
+};

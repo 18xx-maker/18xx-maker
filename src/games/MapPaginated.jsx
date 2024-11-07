@@ -18,11 +18,13 @@ const MapPaginated = ({ game, config, variation }) => {
   let data = getMapData(game, coords, hexWidth, variation);
 
   return (
-    <Paginate component="Map" {...{data, config, game}}>
-      <Map name={game.meta.id}
-           game={game}
-           config={config}
-           variation={variation} />
+    <Paginate component="Map" {...{ data, config, game }}>
+      <Map
+        name={game.meta.id}
+        game={game}
+        config={config}
+        variation={variation}
+      />
     </Paginate>
   );
 };

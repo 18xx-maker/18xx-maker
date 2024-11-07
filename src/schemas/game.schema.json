@@ -328,8 +328,8 @@
           }
         },
         "anyOf": [
-          {"required": ["name", "limit", "tiles"]},
-          {"required": ["train", "limit", "tiles"]}
+          { "required": ["name", "limit", "tiles"] },
+          { "required": ["train", "limit", "tiles"] }
         ],
         "additionalProperties": false
       }
@@ -382,10 +382,7 @@
           },
           "bid": { "type": "number", "minimum": 0 },
           "price": {
-            "oneOf": [
-              { "type": "number", "minimum": 0 },
-              { "type": "string" }
-            ]
+            "oneOf": [{ "type": "number", "minimum": 0 }, { "type": "string" }]
           },
           "debt": { "type": "number", "minimum": 0 },
           "revenue": {
@@ -431,10 +428,7 @@
         "properties": {
           "name": { "type": "string" },
           "price": {
-            "oneOf": [
-              { "type": "number", "minimum": 0 },
-              { "type": "string" }
-            ]
+            "oneOf": [{ "type": "number", "minimum": 0 }, { "type": "string" }]
           },
           "color": { "type": "string" },
           "image": {

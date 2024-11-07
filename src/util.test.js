@@ -32,19 +32,19 @@ describe("equalPages", () => {
   });
 
   it("handle < double pages", () => {
-    expect(util.equalPages(190, 100)).toEqual([95,95]);
+    expect(util.equalPages(190, 100)).toEqual([95, 95]);
   });
 
   it("handle double pages", () => {
-    expect(util.equalPages(200, 100)).toEqual([100,100]);
+    expect(util.equalPages(200, 100)).toEqual([100, 100]);
   });
 
   it("handle > double pages", () => {
-    expect(util.equalPages(210, 100)).toEqual([70,70,70]);
+    expect(util.equalPages(210, 100)).toEqual([70, 70, 70]);
   });
 
   it("handle triple pages", () => {
-    expect(util.equalPages(300, 100)).toEqual([100,100,100]);
+    expect(util.equalPages(300, 100)).toEqual([100, 100, 100]);
   });
 });
 
@@ -57,16 +57,16 @@ describe("marketColor", () => {
     let limits = [
       {
         color: "yellow",
-        value: 60
+        value: 60,
       },
       {
         color: "orange",
-        value: 45
+        value: 45,
       },
       {
         color: "brown",
-        value: 30
-      }
+        value: 30,
+      },
     ];
     expect(util.marketColor(limits, 80)).toEqual("plain");
     expect(util.marketColor(limits, 60)).toEqual("yellow");
@@ -82,8 +82,8 @@ describe("addPaginationData", () => {
       totalHeight: 2050,
       css: {
         totalWidth: "30.5in",
-        totalHeight: "20.5in"
-      }
+        totalHeight: "20.5in",
+      },
     };
 
     const output = {
@@ -128,10 +128,10 @@ describe("addPaginationData", () => {
         printableWidth: "10.5in",
         printableHeight: "8in",
         usableWidth: "9.75in",
-        usableHeight: "7.25in"
-      }
+        usableHeight: "7.25in",
+      },
     };
 
     expect(util.addPaginationData(input, config)).toEqual(output);
-  })
+  });
 });

@@ -8,12 +8,14 @@ const Bridge = (props) => {
 
   return (
     <PhaseContext.Provider value="default">
-      <Triangle color="water"
-                width={44}
-                fontSize={11}
-                reverse={true}
-                {...props}
-                text={<Currency value={cost} type="terrain"/>} />
+      <Triangle
+        color="water"
+        width={44}
+        fontSize={11}
+        reverse={true}
+        {...props}
+        text={<Currency value={cost} type="terrain" />}
+      />
     </PhaseContext.Provider>
   );
 };

@@ -14,12 +14,34 @@ describe("maxMapX", () => {
   });
 
   it("should handle double hexes", () => {
-    expect(util.maxMapX([{ hexes: [[5, 4], [10, 3]] }])).toEqual(10);
+    expect(
+      util.maxMapX([
+        {
+          hexes: [
+            [5, 4],
+            [10, 3],
+          ],
+        },
+      ]),
+    ).toEqual(10);
   });
 
   it("should handle multiple double hexes", () => {
     expect(
-      util.maxMapX([{ hexes: [[6, 5], [15, 7]] }, { hexes: [[5, 4], [10, 3]] }])
+      util.maxMapX([
+        {
+          hexes: [
+            [6, 5],
+            [15, 7],
+          ],
+        },
+        {
+          hexes: [
+            [5, 4],
+            [10, 3],
+          ],
+        },
+      ]),
     ).toEqual(15);
   });
 });
@@ -38,12 +60,34 @@ describe("maxMapY", () => {
   });
 
   it("should handle double hexes", () => {
-    expect(util.maxMapY([{ hexes: [[5, 4], [10, 3]] }])).toEqual(4);
+    expect(
+      util.maxMapY([
+        {
+          hexes: [
+            [5, 4],
+            [10, 3],
+          ],
+        },
+      ]),
+    ).toEqual(4);
   });
 
   it("should handle multiple double hexes", () => {
     expect(
-      util.maxMapY([{ hexes: [[6, 5], [15, 7]] }, { hexes: [[5, 4], [10, 3]] }])
+      util.maxMapY([
+        {
+          hexes: [
+            [6, 5],
+            [15, 7],
+          ],
+        },
+        {
+          hexes: [
+            [5, 4],
+            [10, 3],
+          ],
+        },
+      ]),
     ).toEqual(7);
   });
 });
@@ -95,7 +139,7 @@ describe("mergeHex", () => {
     let copyHex = { color: "yellow" };
     expect(util.mergeHex(hex, copyHex)).toEqual({
       copy: "A5",
-      color: "yellow"
+      color: "yellow",
     });
   });
 
@@ -104,29 +148,29 @@ describe("mergeHex", () => {
       copy: "A5",
       track: [
         {
-          side: 3
-        }
-      ]
+          side: 3,
+        },
+      ],
     };
     let copyHex = {
       color: "yellow",
       track: [
         {
-          side: 4
-        }
-      ]
+          side: 4,
+        },
+      ],
     };
     expect(util.mergeHex(hex, copyHex)).toEqual({
       copy: "A5",
       color: "yellow",
       track: [
         {
-          side: 3
+          side: 3,
         },
         {
-          side: 4
-        }
-      ]
+          side: 4,
+        },
+      ],
     });
   });
 
@@ -136,15 +180,15 @@ describe("mergeHex", () => {
       cities: [
         {
           name: {
-            name: "Original1"
-          }
+            name: "Original1",
+          },
         },
         {
           name: {
-            name: "Original2"
-          }
-        }
-      ]
+            name: "Original2",
+          },
+        },
+      ],
     };
     let copyHex = {
       color: "yellow",
@@ -153,17 +197,17 @@ describe("mergeHex", () => {
           x: 5,
           y: 10,
           name: {
-            name: "Copy1"
-          }
+            name: "Copy1",
+          },
         },
         {
           x: 6,
           y: 11,
           name: {
-            name: "Copy2"
-          }
-        }
-      ]
+            name: "Copy2",
+          },
+        },
+      ],
     };
     expect(util.mergeHex(hex, copyHex)).toEqual({
       copy: "A5",
@@ -173,17 +217,17 @@ describe("mergeHex", () => {
           x: 5,
           y: 10,
           name: {
-            name: "Original1"
-          }
+            name: "Original1",
+          },
         },
         {
           x: 6,
           y: 11,
           name: {
-            name: "Original2"
-          }
-        }
-      ]
+            name: "Original2",
+          },
+        },
+      ],
     });
   });
 });

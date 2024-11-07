@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {withRouter} from "react-router";
+import { withRouter } from "react-router";
 
 import Svg from "./Svg";
 import Tile from "./Tile";
@@ -7,7 +7,8 @@ import Tile from "./Tile";
 import { keys } from "ramda";
 import { tiles } from "./data";
 
-const randomTile = () => keys(tiles)[Math.floor(Math.random() * keys(tiles).length)];
+const randomTile = () =>
+  keys(tiles)[Math.floor(Math.random() * keys(tiles).length)];
 
 const RandomTile = ({ history }) => {
   let [tile, setTile] = useState(randomTile());

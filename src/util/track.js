@@ -1,17 +1,17 @@
 import { compose, sort, chain, propOr, defaultTo, uniq, subtract } from "ramda";
 
-const sideMod = side => {
+const sideMod = (side) => {
   return side > 6 ? side - 6 : side;
 };
 
-export const sidesFromTrack = track => {
+export const sidesFromTrack = (track) => {
   if (!track) {
     return [];
   }
 
   let side = track.side || 1;
 
-  switch(track.type) {
+  switch (track.type) {
     case "custom":
       return propOr([], "sides", track);
     case "mid":
@@ -36,8 +36,10 @@ export const sidesFromTrack = track => {
   }
 };
 
-export const sidesFromTile = compose(uniq,
-                                     sort(subtract),
-                                     chain(sidesFromTrack),
-                                     propOr([], "track"),
-                                     defaultTo([]));
+export const sidesFromTile = compose(
+  uniq,
+  sort(subtract),
+  chain(sidesFromTrack),
+  propOr([], "track"),
+  defaultTo([]),
+);

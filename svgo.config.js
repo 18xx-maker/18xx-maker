@@ -5,24 +5,24 @@ export default {
   precision: 6,
   js2svg: {
     pretty: true,
-    indent: 2
+    indent: 2,
   },
   plugins: [
     {
-      name: 'preset-default',
+      name: "preset-default",
       params: {
         overrides: {
           removeViewBox: false,
           cleanupIds: {
-            minify: false
+            minify: false,
           },
           inlineStyles: {
             onlyMatchedOnce: false,
-            removeMatchedSelectors: true
+            removeMatchedSelectors: true,
           },
           removeUnknownsAndDefaults: {
             keepDataAttrs: false,
-            keepAriaAttrs: false
+            keepAriaAttrs: false,
           },
           sortAttrs: {
             order: [
@@ -46,12 +46,12 @@ export default {
               "market",
               "d",
               "points",
-            ]
-          }
-        }
-      }
+            ],
+          },
+        },
+      },
     },
     "removeXMLNS",
-    "removeXlink"
-  ]
+    "removeXlink",
+  ],
 };

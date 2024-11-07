@@ -7,23 +7,23 @@ import Fab from "@mui/material/Fab";
 import Slide from "@mui/material/Slide";
 import Tooltip from "@mui/material/Tooltip";
 
-import PrintIcon from '@mui/icons-material/Print';
+import PrintIcon from "@mui/icons-material/Print";
 
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
   printButton: {
     zIndex: theme.zIndex.drawer + 1,
-    position: 'fixed',
+    position: "fixed",
     bottom: theme.spacing(14),
-    right: theme.spacing(4)
-  }
+    right: theme.spacing(4),
+  },
 }));
 
 const PrintButton = () => {
   const classes = useStyles();
   const { game } = useContext(GameContext);
-  const [print] = useBooleanParam('print');
+  const [print] = useBooleanParam("print");
 
   if (print || !game) {
     return null;
@@ -37,11 +37,13 @@ const PrintButton = () => {
     <Route path="/games">
       <Slide direction="left" in={true}>
         <Tooltip title="Print" aria-label="print" placement="left" arrow>
-          <Fab onClick={handler}
-               position="sticky"
-               className={classes.printButton}
-               color="primary">
-            <PrintIcon/>
+          <Fab
+            onClick={handler}
+            position="sticky"
+            className={classes.printButton}
+            color="primary"
+          >
+            <PrintIcon />
           </Fab>
         </Tooltip>
       </Slide>

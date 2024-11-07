@@ -2,18 +2,32 @@ import React from "react";
 import Color from "./util/Color";
 import { multiDefaultTo } from "./util";
 
-const Legend = ({ game, color, borderColor, borderWidth, description, right, bottom, fontFamily, fontSize, fontWeight }) => {
+const Legend = ({
+  game,
+  color,
+  borderColor,
+  borderWidth,
+  description,
+  right,
+  bottom,
+  fontFamily,
+  fontSize,
+  fontWeight,
+}) => {
   fontFamily = multiDefaultTo("sans-serif", fontFamily);
   fontSize = multiDefaultTo("14", fontSize);
   fontWeight = multiDefaultTo("normal", fontWeight);
   return (
     <Color>
-      {(c,t) => (
+      {(c, t) => (
         <g>
-          <circle r="12" cx={right ? -20 : 20} cy={bottom ? -20 : 20}
-                  stroke={c(borderColor || "black")}
-                  strokeWidth={borderWidth || 2}
-                  fill={c(color || "orange")}
+          <circle
+            r="12"
+            cx={right ? -20 : 20}
+            cy={bottom ? -20 : 20}
+            stroke={c(borderColor || "black")}
+            strokeWidth={borderWidth || 2}
+            fill={c(color || "orange")}
           />
           <text
             fontFamily={fontFamily}

@@ -10,7 +10,18 @@ import Svg from "../../Svg";
 
 import PageSetup from "../../PageSetup";
 
-import { addIndex, chain, compose, concat, filter, map, not, prop, repeat, splitEvery } from "ramda";
+import {
+  addIndex,
+  chain,
+  compose,
+  concat,
+  filter,
+  map,
+  not,
+  prop,
+  repeat,
+  splitEvery,
+} from "ramda";
 
 const isMinor = prop("minor");
 const isMajor = compose(not, prop("minor"));
@@ -27,7 +38,11 @@ const Charters = () => {
     return <Redirect to={`/games/${game.meta.slug}/`} />;
   }
 
-  let gameCompanies = overrideCompanies(compileCompanies(game), override, selection);
+  let gameCompanies = overrideCompanies(
+    compileCompanies(game),
+    override,
+    selection,
+  );
 
   // Computer layout data
   let data = getCharterData(charters, paper);
@@ -41,9 +56,7 @@ const Charters = () => {
     padding = data.perPage - leftOver;
   }
 
-  let companies = concat(majors,
-                         concat(repeat(null, padding),
-                                minors));
+  let companies = concat(majors, concat(repeat(null, padding), minors));
 
   let css = `
 .cutlines {
@@ -148,87 +161,9 @@ const Charters = () => {
   let pages = null;
   if (data.layout === "free") {
     // No pages, easy
-    pages = addIndex(chain)((company, index) => (
-      company ?
-        <Charter
-          game={game.info.title}
-          key={`${index}-${company.abbrev}`}
-          name={company.name}
-          subtext={company.subtext}
-          abbrev={company.abbrev}
-          logo={company.logo}
-          color={company.color}
-          token={company.token}
-          tokens={company.tokens}
-          phases={game.phases}
-          turns={game.turns}
-          trains={game.trains}
-          minor={!!company.minor}
-          company={company}
-          variant={company.variant}
-          fontFamily={company.fontFamily || game.info.companyFontFamily}
-          fontSize={company.fontSize || game.info.companyFontSize}
-          fontWeight={company.fontWeight || game.info.companyFontWeight}
-          fontStyle={company.fontStyle || game.info.companyFontStyle}
-          halfWidth={charters.halfWidth}
-        /> : <div key={`spacer-${index}`} className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}><div className={`charter${charters.halfWidth ? " charter--half" : ""}`}></div></div>
-    ), companies);
-  } else {
-    let majorsAndSpacers = concat(majors, repeat(null, padding));
-    let splitMajorNodes = splitEvery(data.perPage, majorsAndSpacers);
-    let splitMinorNodes = splitEvery(data.minorsPerPage, minors);
-    let pins = (
-      <Svg className="pins"
-           viewBox="0 0 750 50"
-           style={{width: "7.5in", height: "0.5in", float: "left"}}>
-        <circle r="12.5" cx="75" cy="25" fill="gray" strokeWidth="1" stroke="black" />
-        <circle r="12.5" cx="675" cy="25" fill="gray" strokeWidth="1" stroke="black" />
-        <circle r="6.25" cx="75" cy="25" fill="white" strokeWidth="1" stroke="black" />
-        <circle r="6.25" cx="675" cy="25" fill="white" strokeWidth="1" stroke="black" />
-      </Svg>
-    );
-
-    let majorPages = addIndex(map)((majorCompanies, index) => (
-      <div className={`charters charters--${data.layout}`}
-           key={`charters-page-${index}`}
-           style={{width: data.css.usableWidth,
-                   height: data.css.usableHeight}}>
-        {pins}
-        {addIndex(map)((company, companyIndex) => (
-          company ?
-            <Charter
-              game={game.info.title}
-              key={`${index}-${company.abbrev}`}
-              name={company.name}
-              subtext={company.subtext}
-              abbrev={company.abbrev}
-              logo={company.logo}
-              color={company.color}
-              token={company.token}
-              tokens={company.tokens}
-              phases={game.phases}
-              turns={game.turns}
-              trains={game.trains}
-              minor={!!company.minor}
-              company={company}
-              variant={company.variant}
-              fontFamily={company.fontFamily || game.info.companyFontFamily}
-              fontSize={company.fontSize || game.info.companyFontSize}
-              fontWeight={company.fontWeight || game.info.companyFontWeight}
-              fontStyle={company.fontStyle || game.info.companyFontStyle}
-              halfWidth={data.layout === "3x2"}
-            /> : <div key="spacer" className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}><div className={`charter${charters.halfWidth ? " charter--half" : ""}`}></div></div>
-        ), majorCompanies)}
-      </div>
-    ), splitMajorNodes);
-
-    let minorPages = addIndex(map)((minorCompanies, index) => (
-      <div className={`charters charters--${data.layout}`}
-           key={`charters-minors-page-${index}`}
-           style={{width: data.css.usableWidth,
-                   height: data.css.usableHeight}}>
-        {pins}
-        {addIndex(map)((company, companyIndex) => (
+    pages = addIndex(chain)(
+      (company, index) =>
+        company ? (
           <Charter
             game={game.info.title}
             key={`${index}-${company.abbrev}`}
@@ -249,11 +184,154 @@ const Charters = () => {
             fontSize={company.fontSize || game.info.companyFontSize}
             fontWeight={company.fontWeight || game.info.companyFontWeight}
             fontStyle={company.fontStyle || game.info.companyFontStyle}
-            halfWidth={data.layout !== "3x1"}
+            halfWidth={charters.halfWidth}
           />
-        ), minorCompanies)}
-      </div>
-    ), splitMinorNodes);
+        ) : (
+          <div
+            key={`spacer-${index}`}
+            className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}
+          >
+            <div
+              className={`charter${charters.halfWidth ? " charter--half" : ""}`}
+            ></div>
+          </div>
+        ),
+      companies,
+    );
+  } else {
+    let majorsAndSpacers = concat(majors, repeat(null, padding));
+    let splitMajorNodes = splitEvery(data.perPage, majorsAndSpacers);
+    let splitMinorNodes = splitEvery(data.minorsPerPage, minors);
+    let pins = (
+      <Svg
+        className="pins"
+        viewBox="0 0 750 50"
+        style={{ width: "7.5in", height: "0.5in", float: "left" }}
+      >
+        <circle
+          r="12.5"
+          cx="75"
+          cy="25"
+          fill="gray"
+          strokeWidth="1"
+          stroke="black"
+        />
+        <circle
+          r="12.5"
+          cx="675"
+          cy="25"
+          fill="gray"
+          strokeWidth="1"
+          stroke="black"
+        />
+        <circle
+          r="6.25"
+          cx="75"
+          cy="25"
+          fill="white"
+          strokeWidth="1"
+          stroke="black"
+        />
+        <circle
+          r="6.25"
+          cx="675"
+          cy="25"
+          fill="white"
+          strokeWidth="1"
+          stroke="black"
+        />
+      </Svg>
+    );
+
+    let majorPages = addIndex(map)(
+      (majorCompanies, index) => (
+        <div
+          className={`charters charters--${data.layout}`}
+          key={`charters-page-${index}`}
+          style={{ width: data.css.usableWidth, height: data.css.usableHeight }}
+        >
+          {pins}
+          {addIndex(map)(
+            (company, companyIndex) =>
+              company ? (
+                <Charter
+                  game={game.info.title}
+                  key={`${index}-${company.abbrev}`}
+                  name={company.name}
+                  subtext={company.subtext}
+                  abbrev={company.abbrev}
+                  logo={company.logo}
+                  color={company.color}
+                  token={company.token}
+                  tokens={company.tokens}
+                  phases={game.phases}
+                  turns={game.turns}
+                  trains={game.trains}
+                  minor={!!company.minor}
+                  company={company}
+                  variant={company.variant}
+                  fontFamily={company.fontFamily || game.info.companyFontFamily}
+                  fontSize={company.fontSize || game.info.companyFontSize}
+                  fontWeight={company.fontWeight || game.info.companyFontWeight}
+                  fontStyle={company.fontStyle || game.info.companyFontStyle}
+                  halfWidth={data.layout === "3x2"}
+                />
+              ) : (
+                <div
+                  key="spacer"
+                  className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}
+                >
+                  <div
+                    className={`charter${charters.halfWidth ? " charter--half" : ""}`}
+                  ></div>
+                </div>
+              ),
+            majorCompanies,
+          )}
+        </div>
+      ),
+      splitMajorNodes,
+    );
+
+    let minorPages = addIndex(map)(
+      (minorCompanies, index) => (
+        <div
+          className={`charters charters--${data.layout}`}
+          key={`charters-minors-page-${index}`}
+          style={{ width: data.css.usableWidth, height: data.css.usableHeight }}
+        >
+          {pins}
+          {addIndex(map)(
+            (company, companyIndex) => (
+              <Charter
+                game={game.info.title}
+                key={`${index}-${company.abbrev}`}
+                name={company.name}
+                subtext={company.subtext}
+                abbrev={company.abbrev}
+                logo={company.logo}
+                color={company.color}
+                token={company.token}
+                tokens={company.tokens}
+                phases={game.phases}
+                turns={game.turns}
+                trains={game.trains}
+                minor={!!company.minor}
+                company={company}
+                variant={company.variant}
+                fontFamily={company.fontFamily || game.info.companyFontFamily}
+                fontSize={company.fontSize || game.info.companyFontSize}
+                fontWeight={company.fontWeight || game.info.companyFontWeight}
+                fontStyle={company.fontStyle || game.info.companyFontStyle}
+                halfWidth={data.layout !== "3x1"}
+              />
+            ),
+            minorCompanies,
+          )}
+        </div>
+      ),
+      splitMinorNodes,
+    );
 
     pages = concat(majorPages, minorPages);
   }
@@ -262,7 +340,7 @@ const Charters = () => {
     <div className="charters">
       <style>{css}</style>
       {pages}
-      <PageSetup landscape={false}/>
+      <PageSetup landscape={false} />
     </div>
   );
 };

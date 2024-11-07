@@ -22,7 +22,11 @@ const Charters = () => {
     return <Redirect to={`/games/${game.meta.slug}/`} />;
   }
 
-  let gameCompanies = overrideCompanies(compileCompanies(game), override, selection);
+  let gameCompanies = overrideCompanies(
+    compileCompanies(game),
+    override,
+    selection,
+  );
   charters["cutlines"] = 0;
   charters["bleed"] = 0;
   charters["border"] = 0;
@@ -130,7 +134,7 @@ const Charters = () => {
 `;
 
   return (
-    <div className="charters printElement" style={{display: 'inline-block'}}>
+    <div className="charters printElement" style={{ display: "inline-block" }}>
       <style>{css}</style>
       <Charter
         game={game.info.title}
@@ -152,7 +156,7 @@ const Charters = () => {
         fontWeight={company.fontWeight || game.info.companyFontWeight}
         fontStyle={company.fontStyle || game.info.companyFontStyle}
       />
-      <PageSetup landscape={false}/>
+      <PageSetup landscape={false} />
     </div>
   );
 };

@@ -10,30 +10,30 @@ import MenuItem from "@mui/material/MenuItem";
 import keys from "ramda/src/keys";
 import map from "ramda/src/map";
 
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
   configItem: {
     minWidth: 300,
-    margin: theme.spacing(3,0,0,0),
-    flexDirection: "row"
+    margin: theme.spacing(3, 0, 0, 0),
+    flexDirection: "row",
   },
   configInput: {
-    width: 200
+    width: 200,
   },
   configUnits: {
     width: 100,
-    marginLeft: theme.spacing(1)
-  }
+    marginLeft: theme.spacing(1),
+  },
 }));
 
 const allUnits = {
   inches: 100.0,
-  mm: 3.937007874
+  mm: 3.937007874,
 };
 
 // Component to help input units
-const UnitInput = ({name, value, label, onChange}) => {
+const UnitInput = ({ name, value, label, onChange }) => {
   const classes = useStyles();
   let [units, setUnits] = useState("inches");
   let [internalValue, setInternalValue] = useState(value / allUnits[units]);
@@ -42,12 +42,14 @@ const UnitInput = ({name, value, label, onChange}) => {
     setInternalValue(value / allUnits[units]);
   }, [value, units]);
 
-  let handler = event => {
+  let handler = (event) => {
     setInternalValue(event.target.value);
-    onChange(event.target.value === "" ? 0 : event.target.value * allUnits[units]);
+    onChange(
+      event.target.value === "" ? 0 : event.target.value * allUnits[units],
+    );
   };
 
-  let unitsHandler = event => {
+  let unitsHandler = (event) => {
     setUnits(event.target.value);
     setInternalValue(value / allUnits[event.target.value]);
   };
@@ -56,12 +58,15 @@ const UnitInput = ({name, value, label, onChange}) => {
     <Box className={classes.configItem}>
       <FormControl variant="filled">
         <InputLabel id={`${name}-label`}>{label}</InputLabel>
-        <MUIInput id={name} name={name}
-                  className={classes.configInput}
-                  variant="filled"
-                  inputProps={{type: 'input'}}
-                  value={internalValue}
-                  onChange={handler}/>
+        <MUIInput
+          id={name}
+          name={name}
+          className={classes.configInput}
+          variant="filled"
+          inputProps={{ type: "input" }}
+          value={internalValue}
+          onChange={handler}
+        />
       </FormControl>
       <FormControl variant="filled">
         <Select
@@ -70,8 +75,16 @@ const UnitInput = ({name, value, label, onChange}) => {
           labelId={`${name}-label`}
           className={classes.configUnits}
           value={units}
-          onChange={unitsHandler}>
-          {map(key => <MenuItem key={key} value={key}>{key}</MenuItem>, keys(allUnits))}
+          onChange={unitsHandler}
+        >
+          {map(
+            (key) => (
+              <MenuItem key={key} value={key}>
+                {key}
+              </MenuItem>
+            ),
+            keys(allUnits),
+          )}
         </Select>
       </FormControl>
     </Box>
