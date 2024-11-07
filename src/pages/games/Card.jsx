@@ -29,7 +29,7 @@ const Cards = () => {
     case "train":
       node = <Train train={game.trains[index]} trains={game.trains} />;
       break;
-    case "share":
+    case "share": {
       const override = config.overrideCompanies;
       const selection = config.overrideSelection;
       let companies =
@@ -57,6 +57,7 @@ const Cards = () => {
         />
       );
       break;
+    }
     default:
       // Make a number card from this number
       node = <Number number={index} background={game.info.background} />;

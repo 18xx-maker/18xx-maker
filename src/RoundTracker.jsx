@@ -32,7 +32,7 @@ export const getRoundTrackerData = (rounds, size, type, rotation, config) => {
       getX = (i, j = 0) => (j + 0.5) * cell.width;
       getY = (i) => (getI(i) + 0.5) * cell.height;
       break;
-    case "round":
+    case "round": {
       startX = -2.5 * size;
       startY = -2.5 * size;
       let angle = 360 / rounds.length;
@@ -41,6 +41,7 @@ export const getRoundTrackerData = (rounds, size, type, rotation, config) => {
       getX = (i) => Math.sin(i * radians + radianRotation) * (size * 1.5);
       getY = (i) => Math.cos(i * radians + radianRotation) * (size * -1.5);
       break;
+    }
     default:
       break;
   }

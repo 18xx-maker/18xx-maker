@@ -163,9 +163,8 @@ const Track = ({
     case "custom":
       break;
     case "offboard":
-      let offboardEnd = border ? 40 : 48;
       trackWidth = border ? 8 : 6;
-      path = `M${trackWidth} 75 L ${trackWidth} 85 L -${trackWidth} 85 L -${trackWidth} 75 L 0 ${offboardEnd} Z`;
+      path = `M${trackWidth} 75 L ${trackWidth} 85 L -${trackWidth} 85 L -${trackWidth} 75 L 0 ${border ? 40 : 48} Z`;
       break;
     case "stub":
       // deprecated
