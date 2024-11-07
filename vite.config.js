@@ -5,14 +5,9 @@ import { visualizer } from "rollup-plugin-visualizer";
 import browserslistToEsbuild from "browserslist-to-esbuild";
 
 const manualChunks = (id) => {
-  // First group @mui packages
-  if (id.includes("@mui")) {
-    return "mui";
-  }
-
-  // Group all react packages
-  if (id.includes("react")) {
-    return "react";
+  // Setup ramda
+  if (id.includes("ramda")) {
+    return "ramda";
   }
 
   // All other vendor packages
