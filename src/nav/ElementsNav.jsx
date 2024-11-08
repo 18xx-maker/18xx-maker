@@ -1,4 +1,4 @@
-import { Link, useLocation, matchPath } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
@@ -15,23 +15,21 @@ import TilesIcon from "@mui/icons-material/ViewModule";
 
 const ElementsNav = () => {
   const { t } = useTranslation();
-  const location = useLocation();
 
-  const Item = ({ path, name, desc, icon }) => (
-    <ListItemButton
-      component={Link}
-      to={`/elements${path}`}
-      selected={
-        !!matchPath(location.pathname, {
-          path: `/elements${path}`,
-          exact: true,
-        })
-      }
-    >
-      <ListItemIcon>{icon}</ListItemIcon>
-      <ListItemText primary={name} secondary={desc} />
-    </ListItemButton>
-  );
+  const Item = ({ path, name, desc, icon }) => {
+    const selected = !!useMatch({ path: `/elements${path}`, end: true });
+
+    return (
+      <ListItemButton
+        component={Link}
+        to={`/elements${path}`}
+        selected={selected}
+      >
+        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemText primary={name} secondary={desc} />
+      </ListItemButton>
+    );
+  };
 
   return (
     <>

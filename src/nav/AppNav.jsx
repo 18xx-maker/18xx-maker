@@ -1,10 +1,8 @@
-import React, { useState, useContext } from "react";
-import { Route, Switch, matchPath } from "react-router";
-import { useLocation } from "react-router-dom";
+import { forwardRef, useState, useContext } from "react";
+import { useMatch } from "react-router";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useBooleanParam } from "../util/query";
-
-import { Link } from "react-router-dom";
 
 import MobileMenuButton from "./MobileMenuButton";
 
@@ -56,17 +54,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavLink = ({ to, exact, text, icon, path }) => {
+const NavLink = ({ to, end, text, icon }) => {
+  const active = !!useMatch({ path: to, end });
   const classes = useStyles();
-  const location = useLocation();
-  const active = matchPath(location.pathname, {
-    path: path || to,
-    exact: exact,
-  });
 
   return (
     <Button
-      variant={active && "outlined"}
+      variant={active ? "outlined" : null}
       disabled={!!active}
       color={active ? "primary" : "inherit"}
       className={active ? classes.activeButton : classes.menuButton}
@@ -85,16 +79,15 @@ const NavMenu = () => {
 
   return (
     <>
-      <NavLink to="/" exact text={t("nav.home")} icon={<HomeIcon />} />
+      <NavLink to="/" end text={t("nav.home")} icon={<HomeIcon />} />
       {game && (
         <NavLink
           to={`/games/${game.meta.slug}/map`}
-          path={`/games/${game.meta.slug}`}
           text={game.info.title}
           icon={<GamesIcon />}
         />
       )}
-      <NavLink to="/games/" exact text={t("nav.load")} icon={<LoadIcon />} />
+      <NavLink to="/games/" end text={t("nav.load")} icon={<LoadIcon />} />
       <NavLink
         to="/elements/"
         text={t("nav.elements")}
@@ -105,27 +98,22 @@ const NavMenu = () => {
   );
 };
 
-const MenuLink = React.forwardRef(
-  ({ icon, text, to, path, exact, onClick }, ref) => {
-    const location = useLocation();
-    const active = Boolean(
-      matchPath(location.pathname, { path: path || to, exact: exact }),
-    );
+const MenuLink = forwardRef(({ to, end, icon, text, onClick }, ref) => {
+  const active = !!useMatch({ path: to, end });
 
-    return (
-      <MenuItem
-        onClick={onClick}
-        component={Link}
-        ref={ref}
-        to={to}
-        selected={active}
-      >
-        <ListItemIcon>{icon}</ListItemIcon>
-        <ListItemText primary={text} />
-      </MenuItem>
-    );
-  },
-);
+  return (
+    <MenuItem
+      onClick={onClick}
+      component={Link}
+      ref={ref}
+      to={to}
+      selected={active}
+    >
+      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemText primary={text} />
+    </MenuItem>
+  );
+});
 MenuLink.displayName = "MenuLink";
 
 const MobileMenu = ({ anchor, onClose }) => {
@@ -186,67 +174,43 @@ const MobileMenu = ({ anchor, onClose }) => {
 const MobileButton = ({ onClick }) => {
   const { t } = useTranslation();
   const { game } = useContext(GameContext);
+  const match = useMatch("/:section/*");
+
+  let icon = <HomeIcon />;
+  let text = t("nav.home");
+
+  if (match) {
+    switch (match.params.section) {
+      case "games":
+        if (match.isExact) {
+          icon = <LoadIcon />;
+          text = t("nav.load");
+        } else {
+          icon = <GamesIcon />;
+          text = game.info.title;
+        }
+        break;
+      case "elements":
+        icon = <ElementsIcon />;
+        text = t("nav.elements");
+        break;
+      case "docs":
+        icon = <DocumentationIcon />;
+        text = t("nav.docs");
+        break;
+    }
+  }
 
   return (
-    <Switch>
-      <Route path="/" exact>
-        <Button
-          color="inherit"
-          startIcon={<HomeIcon />}
-          endIcon={<MenuIcon />}
-          onClick={onClick}
-          aria-haspopup="true"
-        >
-          <Typography noWrap>{t("nav.home")}</Typography>
-        </Button>
-      </Route>
-      {game && (
-        <Route path={`/games/${game.meta.slug}/`}>
-          <Button
-            color="inherit"
-            startIcon={<GamesIcon />}
-            endIcon={<MenuIcon />}
-            onClick={onClick}
-            aria-haspopup="true"
-          >
-            <Typography noWrap>{game.info.title}</Typography>
-          </Button>
-        </Route>
-      )}
-      <Route path="/games/" exact>
-        <Button
-          color="inherit"
-          startIcon={<LoadIcon />}
-          endIcon={<MenuIcon />}
-          onClick={onClick}
-          aria-haspopup="true"
-        >
-          <Typography noWrap>{t("nav.load")}</Typography>
-        </Button>
-      </Route>
-      <Route path="/elements">
-        <Button
-          color="inherit"
-          startIcon={<ElementsIcon />}
-          endIcon={<MenuIcon />}
-          onClick={onClick}
-          aria-haspopup="true"
-        >
-          <Typography noWrap>{t("nav.elements")}</Typography>
-        </Button>
-      </Route>
-      <Route path="/docs">
-        <Button
-          color="inherit"
-          startIcon={<DocumentationIcon />}
-          endIcon={<MenuIcon />}
-          onClick={onClick}
-          aria-haspopup="true"
-        >
-          <Typography noWrap>{t("nav.docs")}</Typography>
-        </Button>
-      </Route>
-    </Switch>
+    <Button
+      color="inherit"
+      startIcon={icon}
+      endIcon={<MenuIcon />}
+      onClick={onClick}
+      aria-haspopup="true"
+    >
+      <Typography noWrap>{text}</Typography>
+    </Button>
   );
 };
 

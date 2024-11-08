@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 import ConfigContext from "../context/ConfigContext";
 import { useOrientation } from "../context/OrientationContext";
@@ -43,7 +43,7 @@ const Id = ({ id, displayID, extra, bgColor, noID }) => {
   return (
     <Color>
       {(c) => (
-        <React.Fragment>
+        <>
           <g transform={`rotate(${rotation}) translate(${idX} 70)`}>
             <text
               fontFamily="sans-serif"
@@ -79,7 +79,7 @@ const Id = ({ id, displayID, extra, bgColor, noID }) => {
               </text>
             </g>
           )}
-        </React.Fragment>
+        </>
       )}
     </Color>
   );

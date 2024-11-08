@@ -1,4 +1,3 @@
-import React from "react";
 import * as R from "ramda";
 
 import Hex from "../Hex";
@@ -56,7 +55,7 @@ const Map = ({ name, game, config, variation }) => {
   let showTitle = data.title !== false;
 
   return (
-    <React.Fragment>
+    <>
       {mapHexes}
       <Coordinates {...data} />
       {showTitle && (
@@ -71,7 +70,7 @@ const Map = ({ name, game, config, variation }) => {
       <Lines data={data} />
       <Borders data={data} />
       <BorderTexts data={data} />
-    </React.Fragment>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { Fragment, useContext } from "react";
 import ConfigContext from "./context/ConfigContext";
 import ColorContext from "./context/ColorContext";
 
@@ -111,11 +111,11 @@ const Charter = ({
     let optionalList = <ul>{optionals}</ul>;
 
     return (
-      <React.Fragment key={`turn-${turn.name}`}>
+      <Fragment key={`turn-${turn.name}`}>
         <dt>{turn.name}</dt>
         <dd>{stepsList}</dd>
         {turn.optional && <dd>{optionalList}</dd>}
-      </React.Fragment>
+      </Fragment>
     );
   }, turns || []);
 

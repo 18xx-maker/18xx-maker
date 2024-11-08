@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ColorContext from "../context/ColorContext";
 import ConfigContext from "../context/ConfigContext";
 import GameContext from "../context/GameContext";
@@ -98,7 +98,7 @@ const Color = ({ context, children }) => {
             let t = textColor(theme, companiesTheme, phase, game);
             let s = strokeColor;
 
-            return <React.Fragment>{children(c, t, s, p)}</React.Fragment>;
+            return <>{children(c, t, s, p)}</>;
           }}
         </PhaseContext.Consumer>
       )}

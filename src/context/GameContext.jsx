@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect } from "react";
-import { Redirect, useLocation, matchPath } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
 
 import { useAlert } from "./AlertContext";
 
@@ -66,6 +66,7 @@ const loadFileOrId = (fileOrId) => {
 };
 
 export const GameProvider = ({ children }) => {
+  const navigate = useNavigate();
   const sendAlert = useAlert();
   const [game, setGame] = useLocalState("game", null);
 
@@ -83,8 +84,6 @@ export const GameProvider = ({ children }) => {
     delete game.slug;
     setGame(game);
   }
-
-  const location = useLocation();
 
   const loadGame = (fileOrId) => {
     return loadFileOrId(fileOrId)
@@ -128,11 +127,9 @@ export const GameProvider = ({ children }) => {
   });
 
   // Now we test to see if the game we have loaded matches any url we are trying to hit and if not, fix it.
-  const match = matchPath(location.pathname, {
-    path: "/games/:slug/:component?",
-  });
+  const match = useMatch("/games/:slug/*");
   if (match) {
-    if (isNil(game) || match.params.slug !== game.meta.id) {
+    if (isNil(game) || match.params.slug !== game.meta.slug) {
       // Try loading the other game if it's a bundled one
       if (games[match.params.slug]) {
         loadGame(match.params.slug);
@@ -141,7 +138,7 @@ export const GameProvider = ({ children }) => {
           "error",
           `Unable to load ${match.params.slug}, please load the json file directly if you wish to work on it.`,
         );
-        return <Redirect to="/games/" />;
+        navigate("/games/");
       }
     } else if (
       !isNil(game) &&

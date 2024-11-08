@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import GameContext from "../context/GameContext";
 import ConfigContext from "../context/ConfigContext";
 import { multiDefaultTo } from "../util";
@@ -113,7 +113,7 @@ const Boomtown = ({
       return (
         <Color context="companies">
           {(c) => (
-            <React.Fragment>
+            <>
               <g key="city">
                 <circle
                   fill={c("city")}
@@ -145,7 +145,7 @@ const Boomtown = ({
                 />
               </g>
               {nameNode}
-            </React.Fragment>
+            </>
           )}
         </Color>
       );
@@ -156,7 +156,7 @@ const Boomtown = ({
       return (
         <Color context="companies">
           {(c) => (
-            <React.Fragment>
+            <>
               <g key="center-town-outline">
                 <circle
                   fill={c("centerTown")}
@@ -187,7 +187,7 @@ const Boomtown = ({
                 />
               </g>
               {nameNode}
-            </React.Fragment>
+            </>
           )}
         </Color>
       );
@@ -237,7 +237,7 @@ const Boomtown = ({
       return (
         <Color context="companies">
           {(c) => (
-            <React.Fragment>
+            <>
               <g key="city">
                 <circle
                   fill={c("city")}
@@ -311,7 +311,7 @@ const Boomtown = ({
                 />
               </g>
               {nameNode}
-            </React.Fragment>
+            </>
           )}
         </Color>
       );
@@ -322,7 +322,7 @@ const Boomtown = ({
       return (
         <Color context="companies">
           {(c) => (
-            <React.Fragment>
+            <>
               <g key="boomtown-outline">
                 <circle
                   fill="none"
@@ -390,7 +390,7 @@ const Boomtown = ({
                 />
               </g>
               {nameNode}
-            </React.Fragment>
+            </>
           )}
         </Color>
       );

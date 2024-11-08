@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { Switch as RouterSwitch, Route, matchPath } from "react-router";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import { useMatch } from "react-router";
+import { Link as RouterLink } from "react-router-dom";
 
 import { useGame } from "../context/GameContext";
 import { useBooleanParam, useIntParam } from "../util/query";
@@ -46,11 +46,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const GameSectionButton = ({ section, disabled }) => {
+  const { game } = useGame();
+  const { t } = useTranslation();
+  const to = `/games/${game.meta.slug}/${section}`;
+  const selected = !!useMatch(to);
+
+  return (
+    <ListItemButton
+      selected={selected}
+      component={RouterLink}
+      to={to}
+      disabled={disabled}
+    >
+      <ListItemText>{t(`game.nav.${section}`)}</ListItemText>
+    </ListItemButton>
+  );
+};
+
 const GameNav = () => {
   const classes = useStyles();
   const { t } = useTranslation();
   const { game } = useGame();
-  const location = useLocation();
+  const match = useMatch("/games/:slug/:tab");
+
+  const needsPagination = match
+    ? ["map", "revenue", "par", "market"].includes(match.params.tab)
+    : false;
 
   const [hidePrivates, togglePrivates] = useBooleanParam("hidePrivates");
   const [hideShares, toggleShares] = useBooleanParam("hideShares");
@@ -65,7 +87,11 @@ const GameNav = () => {
     return null;
   }
 
-  const hasVariation = is(Array, game.map);
+  const hasVariation = match
+    ? match.params.tab === "map" && is(Array, game.map)
+    : false;
+
+  const isCards = match ? match.params.tab === "cards" : false;
 
   return (
     <>
@@ -166,255 +192,127 @@ const GameNav = () => {
         )}
       </List>
       <Divider />
-      <RouterSwitch>
-        <Route path="/games/:slug" exact />
-        <Route>
+      {(needsPagination || hasVariation || isCards) && (
+        <>
           <List>
-            <RouterSwitch>
-              <Route path="/games/:slug/revenue">
-                <ListItemButton>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={paginated}
-                        onChange={togglePagination}
-                        color="primary"
-                        name="pagination"
-                      />
-                    }
-                    label={t("game.paginated")}
-                  />
-                </ListItemButton>
-              </Route>
-              <Route path="/games/:slug/par">
-                <ListItemButton>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={paginated}
-                        onChange={togglePagination}
-                        color="primary"
-                        name="pagination"
-                      />
-                    }
-                    label={t("game.paginated")}
-                  />
-                </ListItemButton>
-              </Route>
-              <Route path="/games/:slug/market">
-                <ListItemButton>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={paginated}
-                        onChange={togglePagination}
-                        color="primary"
-                        name="pagination"
-                      />
-                    }
-                    label={t("game.paginated")}
-                  />
-                </ListItemButton>
-              </Route>
-              <Route path="/games/:slug/map">
-                <ListItemButton>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={paginated}
-                        onChange={togglePagination}
-                        color="primary"
-                        name="pagination"
-                      />
-                    }
-                    label={t("game.paginated")}
-                  />
-                </ListItemButton>
-                {hasVariation && (
-                  <ListItemButton>
-                    <FormControl className={classes.input} variant="filled">
-                      <InputLabel id="variation-label">
-                        {t("game.map.variation")}
-                      </InputLabel>
-                      <Select
-                        variant="standard"
-                        labelId="variation-label"
-                        id="variation"
-                        name="variation"
-                        value={variation}
-                        onChange={handleVariation}
-                      >
-                        {addIndex(map)(
-                          (m, i) => (
-                            <MenuItem key={`variation-${i}`} value={i}>
-                              {m.name}
-                            </MenuItem>
-                          ),
-                          game.map,
-                        )}
-                      </Select>
-                    </FormControl>
-                  </ListItemButton>
-                )}
-              </Route>
-              <Route path="/games/:slug/cards">
-                <ListItemButton>
-                  <FormControl variant="standard" component="fieldset">
-                    <FormLabel component="legend">{t("show")}</FormLabel>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={!hidePrivates}
-                            onChange={togglePrivates}
-                            color="primary"
-                            name="showPrivates"
-                          />
-                        }
-                        label={t("game.cards.privates")}
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={!hideShares}
-                            onChange={toggleShares}
-                            color="primary"
-                            name="showShares"
-                          />
-                        }
-                        label={t("game.cards.shares")}
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={!hideTrains}
-                            onChange={toggleTrains}
-                            color="primary"
-                            name="showTrains"
-                          />
-                        }
-                        label={t("game.cards.trains")}
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={!hideNumbers}
-                            onChange={toggleNumbers}
-                            color="primary"
-                            name="showNumbers"
-                          />
-                        }
-                        label={t("game.cards.numbers")}
-                      />
-                    </FormGroup>
-                  </FormControl>
-                </ListItemButton>
-              </Route>
-            </RouterSwitch>
+            {needsPagination && (
+              <ListItemButton>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={paginated}
+                      onChange={togglePagination}
+                      color="primary"
+                      name="pagination"
+                    />
+                  }
+                  label={t("game.paginated")}
+                />
+              </ListItemButton>
+            )}
+            {hasVariation && (
+              <ListItemButton>
+                <FormControl className={classes.input} variant="filled">
+                  <InputLabel id="variation-label">
+                    {t("game.map.variation")}
+                  </InputLabel>
+                  <Select
+                    variant="standard"
+                    labelId="variation-label"
+                    id="variation"
+                    name="variation"
+                    value={variation}
+                    onChange={handleVariation}
+                  >
+                    {addIndex(map)(
+                      (m, i) => (
+                        <MenuItem key={`variation-${i}`} value={i}>
+                          {m.name}
+                        </MenuItem>
+                      ),
+                      game.map,
+                    )}
+                  </Select>
+                </FormControl>
+              </ListItemButton>
+            )}
+            {isCards && (
+              <ListItemButton>
+                <FormControl variant="standard" component="fieldset">
+                  <FormLabel component="legend">{t("show")}</FormLabel>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={!hidePrivates}
+                          onChange={togglePrivates}
+                          color="primary"
+                          name="showPrivates"
+                        />
+                      }
+                      label={t("game.cards.privates")}
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={!hideShares}
+                          onChange={toggleShares}
+                          color="primary"
+                          name="showShares"
+                        />
+                      }
+                      label={t("game.cards.shares")}
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={!hideTrains}
+                          onChange={toggleTrains}
+                          color="primary"
+                          name="showTrains"
+                        />
+                      }
+                      label={t("game.cards.trains")}
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={!hideNumbers}
+                          onChange={toggleNumbers}
+                          color="primary"
+                          name="showNumbers"
+                        />
+                      }
+                      label={t("game.cards.numbers")}
+                    />
+                  </FormGroup>
+                </FormControl>
+              </ListItemButton>
+            )}
           </List>
           <Divider />
-        </Route>
-      </RouterSwitch>
+        </>
+      )}
       <List>
-        <ListItemButton
-          selected={
-            !!matchPath(location.pathname, { path: "/games/:slug/background" })
-          }
-          component={RouterLink}
-          to={`/games/${game.meta.slug}/background`}
-        >
-          <ListItemText>Background</ListItemText>
-        </ListItemButton>
-        <ListItemButton
-          selected={
-            !!matchPath(location.pathname, { path: "/games/:slug/cards" })
-          }
-          component={RouterLink}
-          to={`/games/${game.meta.slug}/cards`}
-        >
-          <ListItemText>Cards</ListItemText>
-        </ListItemButton>
-        <ListItemButton
-          disabled={!game.companies}
-          selected={
-            !!matchPath(location.pathname, { path: "/games/:slug/charters" })
-          }
-          component={RouterLink}
-          to={`/games/${game.meta.slug}/charters`}
-        >
-          <ListItemText>Charters</ListItemText>
-        </ListItemButton>
-        <ListItemButton
-          disabled={!game.map}
-          selected={
-            !!matchPath(location.pathname, { path: "/games/:slug/map" })
-          }
-          component={RouterLink}
-          to={`/games/${game.meta.slug}/map`}
-        >
-          <ListItemText>Map</ListItemText>
-        </ListItemButton>
-        <ListItemButton
+        <GameSectionButton section="background" />
+        <GameSectionButton section="cards" />
+        <GameSectionButton section="charters" disabled={!game.companies} />
+        <GameSectionButton section="map" disabled={!game.map} />
+        <GameSectionButton
+          section="market"
           disabled={!game.stock || !game.stock.market}
-          selected={
-            !!matchPath(location.pathname, { path: "/games/:slug/market" })
-          }
-          component={RouterLink}
-          to={`/games/${game.meta.slug}/market`}
-        >
-          <ListItemText primary="Market" />
-        </ListItemButton>
-        <ListItemButton
+        />
+        <GameSectionButton
+          section="par"
           disabled={!game.stock || !game.stock.par || !game.stock.par.values}
-          selected={
-            !!matchPath(location.pathname, { path: "/games/:slug/par" })
-          }
-          component={RouterLink}
-          to={`/games/${game.meta.slug}/par`}
-        >
-          <ListItemText primary="Par" />
-        </ListItemButton>
-        <ListItemButton
-          selected={
-            !!matchPath(location.pathname, { path: "/games/:slug/revenue" })
-          }
-          component={RouterLink}
-          to={`/games/${game.meta.slug}/revenue`}
-        >
-          <ListItemText primary="Revenue" />
-        </ListItemButton>
-        <ListItemButton
-          disabled={!game.tiles}
-          selected={
-            !!matchPath(location.pathname, {
-              path: "/games/:slug/tile-manifest",
-            })
-          }
-          component={RouterLink}
-          to={`/games/${game.meta.slug}/tile-manifest`}
-        >
-          <ListItemText primary="Tile Manifest" />
-        </ListItemButton>
-        <ListItemButton
-          disabled={!game.tiles}
-          selected={
-            !!matchPath(location.pathname, { path: "/games/:slug/tiles" })
-          }
-          component={RouterLink}
-          to={`/games/${game.meta.slug}/tiles`}
-        >
-          <ListItemText primary="Tiles" />
-        </ListItemButton>
-        <ListItemButton
+        />
+        <GameSectionButton section="revenue" />
+        <GameSectionButton section="tile-manifest" disabled={!game.tiles} />
+        <GameSectionButton section="tiles" disabled={!game.tiles} />
+        <GameSectionButton
+          section="tokens"
           disabled={!game.companies && !game.tokens}
-          selected={
-            !!matchPath(location.pathname, { path: "/games/:slug/tokens" })
-          }
-          component={RouterLink}
-          to={`/games/${game.meta.slug}/tokens`}
-        >
-          <ListItemText primary="Tokens" />
-        </ListItemButton>
+        />
       </List>
     </>
   );

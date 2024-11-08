@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import Atoms from "./elements/Atoms";
 import Logos from "./elements/Logos";
@@ -12,17 +12,11 @@ const defaultGame = games["1889"];
 const Elements = () => {
   return (
     <GameContext.Provider value={{ game: defaultGame }}>
-      <Switch>
-        <Route path="/elements/tiles" exact>
-          <Tiles />
-        </Route>
-        <Route path="/elements/logos" exact>
-          <Logos />
-        </Route>
-        <Route>
-          <Atoms />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="" element={<Atoms />} />
+        <Route path="tiles" element={<Tiles />} />
+        <Route path="logos" element={<Logos />} />
+      </Routes>
     </GameContext.Provider>
   );
 };

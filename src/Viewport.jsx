@@ -1,11 +1,9 @@
-import { useContext } from "react";
 import Box from "@mui/material/Box";
-import { needSideMenu } from "./nav/IfSideMenu";
+import { useSideMenu } from "./hooks/useSideMenu";
 import { useLocation } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import { useBooleanParam } from "./util/query";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import GameContext from "./context/GameContext";
 
 import makeStyles from "@mui/styles/makeStyles";
 
@@ -19,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Viewport = ({ sideNavOpen, children }) => {
+  const needsSideMenu = useSideMenu();
   const classes = useStyles();
   const [print] = useBooleanParam("print");
-  const { game } = useContext(GameContext);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const configOpen = searchParams.has("config");
@@ -34,7 +32,7 @@ const Viewport = ({ sideNavOpen, children }) => {
   let marginLeft = "0px";
   let marginRight = "0px";
   if (!print) {
-    if (needSideMenu(location, game) && (isMedium || sideNavOpen)) {
+    if (needsSideMenu && (isMedium || sideNavOpen)) {
       marginLeft = "300px";
     }
     if (configOpen) {

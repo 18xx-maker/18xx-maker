@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import LoadGames from "../games/LoadGames";
 
@@ -10,14 +10,10 @@ const Games = () => {
   const { game } = useGame();
 
   return (
-    <Switch>
-      <Route path="/games" exact>
-        <LoadGames />
-      </Route>
-      <Route>
-        <Game game={game} />
-      </Route>
-    </Switch>
+    <Routes>
+      <Route path="" element={<LoadGames />} />
+      <Route path=":slug/*" element={<Game game={game} />} />
+    </Routes>
   );
 };
 
