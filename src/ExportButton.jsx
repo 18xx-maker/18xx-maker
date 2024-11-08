@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Route, useLocation } from "react-router";
+import { useLocation, useMatch } from "react-router";
 import { useTranslation } from "react-i18next";
 import GameContext from "./context/GameContext";
 import ConfigContext from "./context/ConfigContext";
@@ -201,7 +201,9 @@ const ExportButton = () => {
   const [print] = useBooleanParam("print");
   const [menuAnchor, setMenuAnchor] = useState(null);
 
-  if (print || !game) {
+  const notOnGames = !useMatch("/games");
+
+  if ((notOnGames, print || !game)) {
     return null;
   }
 
@@ -213,30 +215,28 @@ const ExportButton = () => {
     setMenuAnchor(null);
   };
 
-  const ipcRenderer = window.require("electron").ipcRenderer;
-
   const handleAllPdf = () => {
-    ipcRenderer.send("export-pdf", game.meta.slug, pdfItems(game, config));
+    window.electronAPI.export_pdf(game.meta.slug, pdfItems(game, config));
     handleMenuClose();
   };
 
   const handleAllPng = () => {
-    ipcRenderer.send("export-png", game.meta.slug, pngItems(game, config));
+    window.electronAPI.export_png(game.meta.slug, pngItems(game, config));
     handleMenuClose();
   };
 
   const handleSinglePdf = () => {
-    ipcRenderer.send("pdf", location.pathname + location.search);
+    window.electronAPI.pdf(location.pathname + location.search);
     handleMenuClose();
   };
 
   const handleSinglePng = () => {
-    ipcRenderer.send("screenshot", location.pathname + location.search);
+    window.electronAPI.screenshot(location.pathname + location.search);
     handleMenuClose();
   };
 
   return (
-    <Route path="/games">
+    <>
       <Slide direction="left" in={true}>
         <Tooltip title="Export" aria-label="export" placement="left" arrow>
           <Fab
@@ -284,7 +284,7 @@ const ExportButton = () => {
           <ListItemText primary={t("export.singlePng")} />
         </MenuItem>
       </Menu>
-    </Route>
+    </>
   );
 };
 

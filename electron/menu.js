@@ -1,4 +1,4 @@
-const { app, Menu } = require("electron");
+import { app, Menu } from "electron";
 
 const isMac = process.platform === "darwin";
 
@@ -82,4 +82,4 @@ const setMenu = (mainWindow) => {
   Menu.setApplicationMenu(menu);
 };
 
-module.exports = setMenu;
+export default setMenu;

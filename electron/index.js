@@ -1,14 +1,15 @@
-const { app, dialog, ipcMain, shell, BrowserWindow } = require("electron");
-const { autoUpdater } = require("electron-updater");
+import { app, dialog, ipcMain, shell, BrowserWindow } from "electron";
+import updater from "electron-updater";
+const { autoUpdater } = updater;
 
-const fs = require("fs");
-const path = require("path");
-const url = require("url");
-const isDev = require("electron-is-dev");
-const chokidar = require("chokidar");
-const Promise = require("bluebird");
+import fs from "node:fs";
+import path from "node:path";
+import url from "node:url";
 
-const setMenu = require("./menu.cjs");
+import isDev from "electron-is-dev";
+import chokidar from "chokidar";
+import Promise from "bluebird";
+import setMenu from "./menu.js";
 
 let mainWindow;
 
@@ -22,16 +23,15 @@ const startUrl = isDev
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1280,
-    height: 720,
     webPreferences: {
-      nodeIntegration: true,
+      preload: path.join(import.meta.dirname, "preload.js"),
     },
   });
   mainWindow.loadURL(startUrl);
   mainWindow.on("closed", function () {
     mainWindow = null;
   });
+  mainWindow.webContents.setWindowOpenHandler(() => ({ action: "allow" }));
 
   setMenu(mainWindow);
 
@@ -59,10 +59,8 @@ function captureWindow() {
     y: 0,
     enableLargerThanScreen: true,
     show: false,
-    frame: false,
-    transparent: true,
     webPreferences: {
-      nodeIntegration: true,
+      preload: path.join(import.meta.dirname, "preload.js"),
     },
   });
 }
@@ -277,25 +275,6 @@ ipcMain.on("screenshot", (event, path) => {
         alert("success", `${filePath} saved`);
       });
     });
-});
-
-ipcMain.on("i18n", (event, filename) => {
-  const file = `${app.getAppPath()}/${isDev ? "public" : "dist"}/${filename}`;
-  fs.readFile(file, "utf8", (err, data) => {
-    if (err) {
-      event.returnValue = { err };
-    } else {
-      let result;
-
-      try {
-        result = JSON.parse(data);
-      } catch (err) {
-        event.returnValue = { err };
-      }
-
-      event.returnValue = { result };
-    }
-  });
 });
 
 // File watching when games are loaded

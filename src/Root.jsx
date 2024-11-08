@@ -79,19 +79,18 @@ body {
 
   useEffect(() => {
     if (isElectron) {
-      let ipcAlert = (event, type, message) => sendAlert(type, message);
-      let ipcProgress = (event, progress, message) =>
-        sendProgress(progress, message);
-      let ipcRenderer = window.require("electron").ipcRenderer;
-      let redirect = (event, path) => navigate(path);
-      ipcRenderer.on("alert", ipcAlert);
-      ipcRenderer.on("progress", ipcProgress);
-      ipcRenderer.on("redirect", redirect);
+      let alert = (type, message) => sendAlert(type, message);
+      let progress = (progress, message) => sendProgress(progress, message);
+      let redirect = (path) => navigate(path);
+
+      window.electronAPI.onAlert(alert);
+      window.electronAPI.onProgress(progress);
+      window.electronAPI.onRedirect(redirect);
 
       return () => {
-        ipcRenderer.removeListener("alert", ipcAlert);
-        ipcRenderer.removeListener("progress", ipcProgress);
-        ipcRenderer.removeListener("redirect", redirect);
+        window.electronAPI.offAlert(alert);
+        window.electronAPI.offProgress(progress);
+        window.electronAPI.offRedirect(redirect);
       };
     }
   });

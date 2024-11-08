@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "private": true,
-  "main": "electron/index.cjs",
+  "main": "electron/index.js",
   "bin": {
     "18xx-schemas": "bin/schemas.cjs"
   },
@@ -92,7 +92,7 @@
       ]
     },
     "extraMetadata": {
-      "main": "electron/index.cjs"
+      "main": "electron/index.js"
     },
     "files": [
       "dist/**/*",
@@ -100,7 +100,8 @@
       "node_modules/**/*"
     ],
     "directories": {
-      "buildResources": "assets"
+      "buildResources": "assets",
+      "output": "out"
     },
     "afterSign": "electron/notarize.cjs"
   },
@@ -113,7 +114,7 @@
     "chokidar": "^3.4.0",
     "commander": "^12.1.0",
     "electron-is-dev": "^3.0.1",
-    "electron-updater": "^4.3.1",
+    "electron-updater": "^6.3.9",
     "express": "^4.21.1",
     "glob": "^11.0.0",
     "puppeteer": "23.7.0",
@@ -135,15 +136,14 @@
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.2",
     "deep-object-diff": "^1.1.9",
-    "electron": "^11.5.0",
-    "electron-builder": "^24.13.3",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
     "eslint": "^9.14.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-vitest": "^0.5.4",
     "globals": "^15.12.0",
     "i18next": "^23.16.4",
     "i18next-browser-languagedetector": "^8.0.0",
-    "i18next-http-backend": "^2.6.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.3.3",
     "react": "18.3.1",
