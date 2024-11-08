@@ -7,9 +7,7 @@ import Toolbar from "@mui/material/Toolbar";
 import makeStyles from "@mui/styles/makeStyles";
 
 import useSideMenu from "../hooks/useSideMenu";
-import DocsNav from "./DocsNav";
-import ElementsNav from "./ElementsNav";
-import GameNav from "./GameNav";
+import { sideRoutes } from "../routes";
 
 const useStyles = makeStyles(() => ({
   sideNav: {
@@ -21,11 +19,7 @@ const SideNav = ({ open, toggle }) => {
   const needsSideMenu = useSideMenu();
   const classes = useStyles();
   const [print] = useBooleanParam("print");
-  const element = useRoutes([
-    { path: "games/*", element: <GameNav /> },
-    { path: "elements/*", element: <ElementsNav /> },
-    { path: "docs/*", element: <DocsNav /> },
-  ]);
+  const element = useRoutes(sideRoutes);
 
   if (print || !needsSideMenu) {
     return null;
