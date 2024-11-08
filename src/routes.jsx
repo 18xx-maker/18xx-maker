@@ -7,7 +7,7 @@ import Elements from "./pages/Elements";
 // Elements Routes
 import Atoms from "./pages/elements/Atoms";
 import Logos from "./pages/elements/Logos";
-import Tiles from "./pages/elements/Tiles";
+import AllTiles from "./pages/elements/Tiles";
 
 // Games Routes
 import LoadGames from "./games/LoadGames";
@@ -26,7 +26,7 @@ import Par from "./pages/games/Par";
 import Revenue from "./pages/games/Revenue";
 import TileManifest from "./pages/games/TileManifest";
 import Tile from "./pages/games/Tile";
-import GameTiles from "./pages/games/Tiles";
+import Tiles from "./pages/games/Tiles";
 import Token from "./pages/games/Token";
 import Tokens from "./pages/games/Tokens";
 
@@ -50,7 +50,7 @@ export const rootRoutes = [
         element: <Elements />,
         children: [
           { index: true, element: <Atoms /> },
-          { path: "tiles", element: <Tiles /> },
+          { path: "tiles", element: <AllTiles /> },
           { path: "logos", element: <Logos /> },
         ],
       },
@@ -76,7 +76,7 @@ export const rootRoutes = [
               { path: "par", element: <Par /> },
               { path: "revenue", element: <Revenue /> },
               { path: "tile-manifest", element: <TileManifest /> },
-              { path: "tiles", element: <GameTiles /> },
+              { path: "tiles", element: <Tiles /> },
               { path: "tiles/:id", element: <Tile /> },
               { path: "tokens", element: <Tokens /> },
               { path: "tokens/:index", element: <Token /> },
