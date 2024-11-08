@@ -29,8 +29,7 @@ const loadFile = (file) => {
         ? game.players[game.players.length - 1].number
         : 0;
       if (isElectron) {
-        let ipcRenderer = window.require("electron").ipcRenderer;
-        ipcRenderer.send("watch", file.path, id, slug);
+        window.electronAPI.watch(file.path, id, slug);
       }
       return game;
     })
@@ -49,8 +48,7 @@ const loadBundledGame = (id) => {
   }
 
   if (game && isElectron) {
-    let ipcRenderer = window.require("electron").ipcRenderer;
-    ipcRenderer.send("watch"); // Not sending a file path to stop watching this file
+    window.electronAPI.watch(); // Stop watching any files
   }
 
   return Promise.resolve(game);
@@ -119,10 +117,9 @@ export const GameProvider = ({ children }) => {
         sendAlert("info", `${game.info.title} updated`);
       };
 
-      let ipcRenderer = window.require("electron").ipcRenderer;
-      ipcRenderer.on("watch", updateGame);
+      window.electronAPI.onWatch(updateGame);
 
-      return () => ipcRenderer.removeListener("watch", updateGame);
+      return () => window.electronAPI.offWatch(updateGame);
     }
   });
 

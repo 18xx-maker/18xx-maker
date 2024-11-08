@@ -74,21 +74,12 @@ const LocalLink = (props) => {
   if (startsWith("?", props.href)) {
     return (
       <Link
-        component={RouterLink}
+        component={isElectron || RouterLink}
         to={props.href}
         {...props}
         underline="hover"
       />
     );
-  }
-
-  if (startsWith("http", props.href) && isElectron) {
-    let handler = (e) => {
-      e.preventDefault();
-      const { shell } = window.require("electron");
-      shell.openExternal(props.href);
-    };
-    return <Link onClick={handler} {...props} underline="hover" />;
   }
 
   return <Link target="_blank" rel="noreferrer" {...props} underline="hover" />;

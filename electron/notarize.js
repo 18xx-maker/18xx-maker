@@ -1,6 +1,6 @@
-const { notarize } = require("electron-notarize");
+import { notarize } from "electron-notarize";
 
-exports.default = async function notarizing(context) {
+async function notarizing(context) {
   const { electronPlatformName, appOutDir } = context;
 
   if (electronPlatformName !== "darwin") {
@@ -21,4 +21,6 @@ exports.default = async function notarizing(context) {
     appleIdPassword: process.env.APPLEIDPASS,
     teamId: "4A6F4V2PM5",
   });
-};
+}
+
+export default notarizing;

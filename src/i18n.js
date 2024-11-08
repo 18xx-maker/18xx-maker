@@ -1,14 +1,10 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-import electronBackend from "./i18next-electron-backend";
-import httpBackend from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
-
-import { isElectron } from "./util";
+import en from "./locales/en.json";
 
 i18n
-  .use(isElectron ? electronBackend : httpBackend)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
@@ -17,6 +13,12 @@ i18n
 
     interpolation: {
       escapeValue: false,
+    },
+
+    resources: {
+      en: {
+        translation: en,
+      },
     },
   });
 

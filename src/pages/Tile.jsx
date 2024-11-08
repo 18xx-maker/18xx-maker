@@ -4,18 +4,13 @@ import { isElectron } from "../util";
 import Svg from "../Svg";
 import Tile from "../Tile";
 
-let ipcRenderer = undefined;
-if (isElectron) {
-  ipcRenderer = window.require("electron").ipcRenderer;
-}
-
 const TilePage = () => {
   let params = useParams();
   let id = params.id;
 
   let handler = () => {
     if (isElectron) {
-      ipcRenderer.send("screenshot", `/tile/${id}`, 200, 200);
+      window.electronAPI.screenshot(`/tile/${id}`);
     }
   };
 
