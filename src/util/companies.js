@@ -1,6 +1,6 @@
 import { addIndex, is, map, mergeRight, prop } from "ramda";
 
-import { companies as overrides } from "../data";
+import { companies as overrides } from "../data/index.js";
 
 export const compileCompanies = (game) => {
   return map(
