@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import ConfigContext from "../../context/ConfigContext";
 import GameContext from "../../context/GameContext";
@@ -14,13 +14,14 @@ import Hex from "../../Hex";
 import ColorContext from "../../context/ColorContext";
 
 const TileSheet = () => {
+  const navigate = useNavigate();
   const { config } = useContext(ConfigContext);
   const { game } = useContext(GameContext);
   const { id } = useParams();
   const { width: hexWidth } = config.tiles;
 
   if (!game.tiles) {
-    return <Redirect to={`/games/${game.meta.slug}/`} />;
+    navigate(`/games/${game.meta.slug}/`);
   }
 
   let tile = getTile(tileDefs, game.tiles, id);

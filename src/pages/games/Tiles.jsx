@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import ConfigContext from "../../context/ConfigContext";
 import GameContext from "../../context/GameContext";
@@ -114,13 +114,14 @@ const pageTiles = (perPage, pages, tiles) => {
 };
 
 const TileSheet = () => {
+  const navigate = useNavigate();
   const { config } = useContext(ConfigContext);
   const { game } = useContext(GameContext);
   const paper = config.paper;
   const { layout, width: hexWidth, gaps } = config.tiles;
 
   if (!game.tiles) {
-    return <Redirect to={`/games/${game.meta.slug}/`} />;
+    navigate(`/games/${game.meta.slug}/`);
   }
 
   let c = getTileSheetContext(layout, paper, hexWidth);

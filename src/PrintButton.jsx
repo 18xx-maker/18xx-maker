@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Route } from "react-router";
+import { useMatch } from "react-router";
 import GameContext from "./context/GameContext";
 import { useBooleanParam } from "./util/query";
 
@@ -22,10 +22,11 @@ const useStyles = makeStyles((theme) => ({
 
 const PrintButton = () => {
   const classes = useStyles();
+  const match = useMatch("/games/*");
   const { game } = useContext(GameContext);
   const [print] = useBooleanParam("print");
 
-  if (print || !game) {
+  if (print || !game || !match) {
     return null;
   }
 
@@ -34,20 +35,18 @@ const PrintButton = () => {
   };
 
   return (
-    <Route path="/games">
-      <Slide direction="left" in={true}>
-        <Tooltip title="Print" aria-label="print" placement="left" arrow>
-          <Fab
-            onClick={handler}
-            position="sticky"
-            className={classes.printButton}
-            color="primary"
-          >
-            <PrintIcon />
-          </Fab>
-        </Tooltip>
-      </Slide>
-    </Route>
+    <Slide direction="left" in={true}>
+      <Tooltip title="Print" aria-label="print" placement="left" arrow>
+        <Fab
+          onClick={handler}
+          position="sticky"
+          className={classes.printButton}
+          color="primary"
+        >
+          <PrintIcon />
+        </Fab>
+      </Tooltip>
+    </Slide>
   );
 };
 

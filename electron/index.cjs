@@ -15,7 +15,7 @@ let mainWindow;
 const startUrl = isDev
   ? "http://localhost:3000"
   : url.format({
-      pathname: path.join(__dirname, "..", "build", "index.html"),
+      pathname: path.join(__dirname, "..", "dist", "index.html"),
       protocol: "file:",
       slashes: true,
     });
@@ -280,7 +280,7 @@ ipcMain.on("screenshot", (event, path) => {
 });
 
 ipcMain.on("i18n", (event, filename) => {
-  const file = `${app.getAppPath()}/${isDev ? "public" : "build"}/${filename}`;
+  const file = `${app.getAppPath()}/${isDev ? "public" : "dist"}/${filename}`;
   fs.readFile(file, "utf8", (err, data) => {
     if (err) {
       event.returnValue = { err };

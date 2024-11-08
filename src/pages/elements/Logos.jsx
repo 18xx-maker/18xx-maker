@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 
 import { useTranslation } from "react-i18next";
 
@@ -58,7 +58,7 @@ const Logos = () => {
       }, groupLogos);
 
       return (
-        <React.Fragment key={`group-${group}`}>
+        <Fragment key={`group-${group}`}>
           {group === "undefined" || (
             <Grid item xs={12}>
               <Typography variant="h5" gutterBottom>
@@ -67,7 +67,7 @@ const Logos = () => {
             </Grid>
           )}
           {logoNodes}
-        </React.Fragment>
+        </Fragment>
       );
     },
     sort(

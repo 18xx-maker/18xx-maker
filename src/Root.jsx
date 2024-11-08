@@ -1,6 +1,6 @@
 import { useEffect, useState, Suspense } from "react";
 
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useBooleanParam } from "./util/query";
 
 import Alert from "@mui/material/Alert";
@@ -11,7 +11,6 @@ import {
   createTheme,
   ThemeProvider,
   StyledEngineProvider,
-  adaptV4Theme,
 } from "@mui/material/styles";
 import { orange, deepPurple } from "@mui/material/colors";
 
@@ -34,38 +33,31 @@ import { isElectron } from "./util";
 
 import Loading from "./Loading";
 
-import Home from "./pages/Home";
-import Docs from "./pages/Docs";
-import Elements from "./pages/Elements";
-import Games from "./pages/Games";
-
 import { curry } from "ramda";
 
-const theme = createTheme(
-  adaptV4Theme({
-    breakpoints: {
-      values: {
-        xs: 0,
-        sm: 600,
-        md: 960,
-        lg: 1280,
-        xl: 1920,
-      },
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
     },
-    palette: {
-      primary: {
-        main: deepPurple[600],
-      },
-      secondary: {
-        main: orange[400],
-      },
+  },
+  palette: {
+    primary: {
+      main: deepPurple[600],
     },
-  }),
-);
+    secondary: {
+      main: orange[400],
+    },
+  },
+});
 
-const App = () => {
+const Root = () => {
   const [print] = useBooleanParam("print");
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const printCss = print
     ? `
@@ -91,7 +83,7 @@ body {
       let ipcProgress = (event, progress, message) =>
         sendProgress(progress, message);
       let ipcRenderer = window.require("electron").ipcRenderer;
-      let redirect = (event, path) => history.push(path);
+      let redirect = (event, path) => navigate(path);
       ipcRenderer.on("alert", ipcAlert);
       ipcRenderer.on("progress", ipcProgress);
       ipcRenderer.on("redirect", redirect);
@@ -119,30 +111,12 @@ body {
             <ConfigContext.Provider value={configContext}>
               <Suspense fallback={<Loading />}>
                 <ScrollToTop>
-                  <Switch>
-                    <Route path="/render"></Route>
-                    <Route>
-                      <AppNav toggleSideNav={toggleSideNav} />
-                      <SideNav open={sideNavOpen} toggle={toggleSideNav} />
-                      {isElectron ? <ExportButton /> : <PrintButton />}
-                      <ConfigDrawer />
-                    </Route>
-                  </Switch>
+                  <AppNav toggleSideNav={toggleSideNav} />
+                  <SideNav open={sideNavOpen} toggle={toggleSideNav} />
+                  {isElectron ? <ExportButton /> : <PrintButton />}
+                  <ConfigDrawer />
                   <Viewport sideNavOpen={sideNavOpen}>
-                    <Switch>
-                      <Route path="/" exact>
-                        <Home />
-                      </Route>
-                      <Route path="/elements">
-                        <Elements />
-                      </Route>
-                      <Route path="/docs">
-                        <Docs />
-                      </Route>
-                      <Route path="/games">
-                        <Games />
-                      </Route>
-                    </Switch>
+                    <Outlet />
                   </Viewport>
                   {print || (
                     <Snackbar
@@ -292,4 +266,4 @@ body {
   );
 };
 
-export default App;
+export default Root;

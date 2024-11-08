@@ -2,7 +2,7 @@ import { useContext } from "react";
 import ConfigContext from "../../context/ConfigContext";
 import GameContext from "../../context/GameContext";
 
-import { Redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getCharterData } from "../../util";
 import { compileCompanies, overrideCompanies } from "../../util/companies";
 import Charter from "../../Charter";
@@ -27,6 +27,7 @@ const isMinor = prop("minor");
 const isMajor = compose(not, prop("minor"));
 
 const Charters = () => {
+  const navigate = useNavigate();
   const { config } = useContext(ConfigContext);
   const charters = config.charters;
   const paper = config.paper;
@@ -35,7 +36,7 @@ const Charters = () => {
   const { game } = useContext(GameContext);
 
   if (!game.companies) {
-    return <Redirect to={`/games/${game.meta.slug}/`} />;
+    navigate(`/games/${game.meta.slug}/`);
   }
 
   let gameCompanies = overrideCompanies(

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import ConfigContext from "../../context/ConfigContext";
 import GameContext from "../../context/GameContext";
 
-import { Redirect, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getCharterData } from "../../util";
 import { compileCompanies, overrideCompanies } from "../../util/companies.js";
 import Charter from "../../Charter";
@@ -10,6 +10,7 @@ import Charter from "../../Charter";
 import PageSetup from "../../PageSetup";
 
 const Charters = () => {
+  const navigate = useNavigate();
   const { config } = useContext(ConfigContext);
   const charters = config.charters;
   const paper = config.paper;
@@ -19,7 +20,7 @@ const Charters = () => {
   const { index } = useParams();
 
   if (!game.companies) {
-    return <Redirect to={`/games/${game.meta.slug}/`} />;
+    navigate(`/games/${game.meta.slug}/`);
   }
 
   let gameCompanies = overrideCompanies(

@@ -1,4 +1,4 @@
-import { Link, useLocation, matchPath } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import Divider from "@mui/material/Divider";
@@ -28,20 +28,16 @@ import TokensIcon from "@mui/icons-material/Stars";
 
 const DocsNav = () => {
   const { t } = useTranslation();
-  const location = useLocation();
 
-  const Item = ({ path = "", name, desc, icon }) => (
-    <ListItemButton
-      component={Link}
-      to={`/docs/${path}`}
-      selected={
-        !!matchPath(location.pathname, { path: `/docs/${path}`, exact: true })
-      }
-    >
-      <ListItemIcon>{icon}</ListItemIcon>
-      <ListItemText primary={name} secondary={desc} />
-    </ListItemButton>
-  );
+  const Item = ({ path = "", name, desc, icon }) => {
+    const selected = !!useMatch(`/docs/${path}`);
+    return (
+      <ListItemButton component={Link} to={`/docs/${path}`} selected={selected}>
+        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemText primary={name} secondary={desc} />
+      </ListItemButton>
+    );
+  };
 
   return (
     <>

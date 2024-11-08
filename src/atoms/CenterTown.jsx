@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import GameContext from "../context/GameContext";
 import { multiDefaultTo } from "../util";
 import Color from "../util/Color";
@@ -54,7 +54,7 @@ const CenterTown = ({
       return (
         <Color context="companies">
           {(c) => (
-            <React.Fragment>
+            <>
               <g key="center-town-outline">
                 <circle
                   fill={c("centerTown")}
@@ -74,7 +74,7 @@ const CenterTown = ({
                 />
               </g>
               {nameNode}
-            </React.Fragment>
+            </>
           )}
         </Color>
       );

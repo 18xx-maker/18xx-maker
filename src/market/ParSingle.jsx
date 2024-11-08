@@ -1,4 +1,4 @@
-import { Redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Par from "./Par";
 import Svg from "../Svg";
@@ -7,9 +7,12 @@ import { getParData } from "./util";
 import { unitsToCss } from "../util";
 
 const ParSingle = ({ config, game }) => {
+  const navigate = useNavigate();
+
   if (!game.stock || !game.stock.par || !game.stock.par.values) {
-    return <Redirect to={`/games/${game.meta.slug}/`} />;
+    navigate(`/games/${game.meta.slug}/`);
   }
+
   let data = getParData(game.stock, config);
 
   let paperWidth = data.totalWidth + 5 + 2 * config.paper.margins;

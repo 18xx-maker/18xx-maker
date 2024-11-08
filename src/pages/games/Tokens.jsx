@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import ConfigContext from "../../context/ConfigContext";
 import GameContext from "../../context/GameContext";
@@ -234,11 +234,12 @@ const TokenLayout = ({ companies, data, game }) => {
 };
 
 const Tokens = () => {
+  const navigate = useNavigate();
   const { config } = useContext(ConfigContext);
   const { game } = useContext(GameContext);
 
   if (!game.companies && !game.tokens) {
-    return <Redirect to={`/games/${game.meta.slug}/`} />;
+    navigate(`/games/${game.meta.slug}/`);
   }
 
   const { overrideCompanies: override, overrideSelect: selection } = config;

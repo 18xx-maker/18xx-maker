@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 
 import { useTranslation } from "react-i18next";
 
@@ -1032,14 +1032,14 @@ const Atoms = () => {
 
   const groups = addIndex(chain)((g, id) => {
     return (
-      <React.Fragment key={`group-${id}`}>
+      <Fragment key={`group-${id}`}>
         <Grid item xs={12}>
           <Typography variant="h5" gutterBottom>
             {g.group}
           </Typography>
         </Grid>
         {examples(g.examples)}
-      </React.Fragment>
+      </Fragment>
     );
   });
 

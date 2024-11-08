@@ -1,26 +1,21 @@
-require("@babel/register");
-
 const R = require("ramda");
 const express = require("express");
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 const puppeteer = require("puppeteer");
 const archiver = require("archiver");
 
-const { getMapData } = require("../src/map/util");
-const gutil = require("../src/util");
-const util = require("../src/render/util");
+const util = require("../src/render/util.cjs");
 const setup = util.setup;
 const setupB18 = util.setupB18;
 
 const defaultConfig = require("../src/defaults.json");
-const customConfig = require("../src/config.json");
+let customConfig = {};
+if (fs.existsSync(path.resolve("../src/config.json"))) {
+  customConfig = require("../src/config.json");
+}
 
 const config = R.mergeDeepRight(defaultConfig, customConfig);
-
-const mutil = require("../src/market/util");
-
-const gameDefs = require("../src/data/games").default;
 
 const capitalize = R.compose(
   R.join(""),
@@ -71,12 +66,13 @@ const server = app.listen(9000);
   let folder = `board18-${id}`;
   let author = process.argv[4];
 
-  let gameDef = gameDefs[bname];
-  let game = require("../src/data/games/" + gameDef.file);
-  let tiles = require("../src/data/tiles/").default;
+  let game = require(`../src/data/games/${bname}.json`);
+  let tiles = await import("../src/data/tiles/index.js");
 
+  const gutil = await import("../src/util.js");
   const getTile = gutil.getTile(tiles, game.tiles || {});
 
+  const { getMapData } = await import("../src/map/util.js");
   let mapData = getMapData(game, config.coords, 100, 0);
 
   // Test games:
@@ -203,6 +199,7 @@ const server = app.listen(9000);
   };
   let mtok = { ...btok, type: "mtok", token: [] };
 
+  const cutil = await import("../src/util/companies.js");
   R.map(
     (company) => {
       btok.token.push({
@@ -213,7 +210,7 @@ const server = app.listen(9000);
         flip: true,
       });
     },
-    gutil.compileCompanies(game) || [],
+    cutil.compileCompanies(game) || [],
   );
 
   // "quantity" of 0 mean remove the token entirely from the array
@@ -263,6 +260,7 @@ const server = app.listen(9000);
   });
 
   console.log(`Printing ${bname}/${folder}/${id}/Market.png`);
+  const mutil = await import("../src/market/util");
   let marketData = mutil.getMarketData(game.stock, config);
   let marketWidth = Math.ceil((marketData.totalWidth + 50) * 0.96);
   let marketHeight = Math.ceil((marketData.totalHeight + 50) * 0.96);

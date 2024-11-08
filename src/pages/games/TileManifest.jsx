@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import GameContext from "../../context/GameContext";
-import { Redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { tiles } from "../../data";
 
@@ -33,10 +33,11 @@ const getCol = (tile) => {
 };
 
 const TileManifest = () => {
+  const navigate = useNavigate();
   const { game } = useContext(GameContext);
 
   if (!game.tiles) {
-    return <Redirect to={`/games/${game.meta.slug}/`} />;
+    navigate(`/games/${game.meta.slug}/`);
   }
 
   let ids = sortWith(

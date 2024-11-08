@@ -1,17 +1,13 @@
-import { Route } from "react-router";
+import { useRoutes } from "react-router";
 
 import { useBooleanParam } from "../util/query";
 
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
-
-import IfSideMenu from "./IfSideMenu";
-
 import makeStyles from "@mui/styles/makeStyles";
 
-import DocsNav from "./DocsNav";
-import ElementsNav from "./ElementsNav";
-import GameNav from "./GameNav";
+import useSideMenu from "../hooks/useSideMenu";
+import { sideRoutes } from "../routes";
 
 const useStyles = makeStyles(() => ({
   sideNav: {
@@ -20,30 +16,24 @@ const useStyles = makeStyles(() => ({
 }));
 
 const SideNav = ({ open, toggle }) => {
+  const needsSideMenu = useSideMenu();
   const classes = useStyles();
   const [print] = useBooleanParam("print");
+  const element = useRoutes(sideRoutes);
 
-  if (print) {
+  if (print || !needsSideMenu) {
     return null;
   }
 
   const menu = (
     <>
       <Toolbar />
-      <Route path="/games">
-        <GameNav />
-      </Route>
-      <Route path="/elements">
-        <ElementsNav />
-      </Route>
-      <Route path="/docs">
-        <DocsNav />
-      </Route>
+      {element}
     </>
   );
 
   return (
-    <IfSideMenu>
+    <>
       <Drawer
         variant="temporary"
         sx={{ display: { md: "none", xs: "block" } }}
@@ -64,7 +54,7 @@ const SideNav = ({ open, toggle }) => {
       >
         {menu}
       </Drawer>
-    </IfSideMenu>
+    </>
   );
 };
 

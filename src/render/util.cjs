@@ -53,12 +53,12 @@ const setupB18 = (game, version) => {
   let id = `${game}-${version}`;
   let folder = `board18-${id}`;
   try {
-    fs.mkdirSync(`./build/render/${game}/${folder}`);
+    fs.mkdirSync(`./render/${game}/${folder}`);
   } catch (err) {
     if (err.code !== "EEXIST") throw err;
   }
   try {
-    fs.mkdirSync(`./build/render/${game}/${folder}/${id}`);
+    fs.mkdirSync(`./render/${game}/${folder}/${id}`);
   } catch (err) {
     if (err.code !== "EEXIST") throw err;
   }
@@ -67,12 +67,12 @@ const setupB18 = (game, version) => {
 const setup18xxGame = (filename, newFilename) => {
   setupGame(filename);
   try {
-    fs.mkdirSync(`./build/render/${filename}/18xx.games`);
+    fs.mkdirSync(`./render/${filename}/18xx.games`);
   } catch (err) {
     if (err.code !== "EEXIST") throw err;
   }
   try {
-    fs.mkdirSync(`./build/render/${filename}/18xx.games/${newFilename}`);
+    fs.mkdirSync(`./render/${filename}/18xx.games/${newFilename}`);
   } catch (err) {
     if (err.code !== "EEXIST") throw err;
   }
@@ -80,7 +80,7 @@ const setup18xxGame = (filename, newFilename) => {
 
 const setupGame = (game) => {
   try {
-    fs.mkdirSync(`./build/render/${game}`);
+    fs.mkdirSync(`./render/${game}`);
   } catch (err) {
     if (err.code !== "EEXIST") throw err;
   }
@@ -88,13 +88,7 @@ const setupGame = (game) => {
 
 const setup = () => {
   try {
-    fs.mkdirSync(`./build`);
-  } catch (err) {
-    if (err.code !== "EEXIST") throw err;
-  }
-
-  try {
-    fs.mkdirSync(`./build/render`);
+    fs.mkdirSync(`./render`);
   } catch (err) {
     if (err.code !== "EEXIST") throw err;
   }

@@ -140,6 +140,18 @@
     }
   },
   "game": {
+    "nav": {
+      "background": "Background",
+      "cards": "Cards",
+      "charters": "Charters",
+      "map": "Map",
+      "market": "Market",
+      "par": "Par",
+      "revenue": "Revenue",
+      "tile-manifest": "Tile Manifest",
+      "tiles": "Tiles",
+      "tokens": "Tokens"
+    },
     "bgg": "Board Game Geek",
     "by": "by",
     "cards": {

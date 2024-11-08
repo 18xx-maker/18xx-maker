@@ -1,8 +1,8 @@
-import yellow from "./yellow";
-import green from "./green";
-import brown from "./brown";
-import gray from "./gray";
-import other from "./other";
+import yellow from "./yellow.json" with { type: "json" };
+import green from "./green.json" with { type: "json" };
+import brown from "./brown.json" with { type: "json" };
+import gray from "./gray.json" with { type: "json" };
+import other from "./other.json" with { type: "json" };
 
 import { assoc, clone, mapObjIndexed, forEach, forEachObjIndexed } from "ramda";
 

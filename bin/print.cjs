@@ -1,55 +1,76 @@
 const R = require("ramda");
 const express = require("express");
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 const puppeteer = require("puppeteer");
 
-require("@babel/register");
+const util = require("../src/render/util.cjs");
 
-const util = require("../src/render/util");
-const config = require("../src/config.json");
+let config = {};
+if (fs.existsSync(path.resolve("../src/config.json"))) {
+  config = require("../src/config.json");
+}
+
 const defaults = require("../src/defaults.json");
 const setup = util.setup;
 
+// Setup folders
 setup();
 
-const gameDefs = require("../src/data/games").default;
-let games = [process.argv[2] || "1830"];
-if (process.argv[2] === "all") {
-  games = R.keys(gameDefs);
-}
-
+// Start up the server
 const app = express();
 
-app.use(express.static(path.join(process.cwd(), "build")));
+app.use(express.static(path.join(process.cwd(), "dist")));
 
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(process.cwd(), "build", "index.html"));
+  res.sendFile(path.join(process.cwd(), "dist", "index.html"));
 });
 
 const server = app.listen(9000);
 
-(async () => {
-  if (process.argv[2] === "debug") return;
+if (process.argv[2] === "debug") return;
 
+let games = [process.argv[2] || "1889"];
+if (process.argv[2] === "all") {
+  // Read all games from directory
+  const gameFiles = fs.readdirSync("./src/data/games");
+  games = R.compose(
+    R.map((name) => name.replace(/\.json$/, "")),
+    R.filter((name) => name.endsWith(".json")),
+  )(gameFiles);
+} else {
+  // Check if the game exists
+  if (!fs.existsSync(`./src/data/games/${games[0]}.json`)) {
+    console.error(`Game ${games[0]} not found`);
+    process.exit(1);
+  }
+}
+console.log(`Games: ${games.join(", ")}`);
+
+// Start processing
+(async () => {
+  console.log("Starting Puppeteer");
   const browser = await puppeteer.launch({
     args: [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
+      //   "--no-sandbox",
+      //   "--disable-setuid-sandbox",
       "--force-color-profile",
       "srgb",
-      "--force-raster-color-profile",
-      "srgb",
+      // "--force-raster-color-profile",
+      // "srgb",
     ],
   });
+
+  console.log("New Page");
   const page = await browser.newPage();
 
+  console.log("Looping over games");
   for (let g = 0; g < games.length; g++) {
     let game = games[g];
 
     // Create the output folder
     try {
-      fs.mkdirSync(`./build/render/${game}`);
+      fs.mkdirSync(`./render/${game}`);
     } catch (err) {
       if (err.code !== "EEXIST") throw err;
     }
@@ -71,8 +92,7 @@ const server = app.listen(9000);
       "tokens",
     ];
 
-    let gameIndex = gameDefs[game];
-    let gameDef = require("../src/data/games/" + gameIndex.file);
+    let gameDef = require(`../src/data/games/${game}.json`);
 
     for (let i = 0; i < items.length; i++) {
       let item = items[i];
@@ -155,7 +175,7 @@ const server = app.listen(9000);
         waitUntil: "networkidle2",
       });
       await page.pdf({
-        path: `build/render/${game}/${filename}`,
+        path: `render/${game}/${filename}`,
         scale: 1.0,
         preferCSSPageSize: true,
       });
