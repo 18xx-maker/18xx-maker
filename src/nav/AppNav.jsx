@@ -54,8 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavLink = ({ to, end, text, icon }) => {
-  const active = !!useMatch({ path: to, end });
+const NavLink = ({ active, to, text, icon }) => {
   const classes = useStyles();
 
   return (
@@ -76,30 +75,58 @@ const NavLink = ({ to, end, text, icon }) => {
 const NavMenu = () => {
   const { t } = useTranslation();
   const { game } = useContext(GameContext);
+  const match = useMatch("/:section/*");
 
   return (
     <>
-      <NavLink to="/" end text={t("nav.home")} icon={<HomeIcon />} />
+      <NavLink
+        to="/"
+        active={!match}
+        text={t("nav.home")}
+        icon={<HomeIcon />}
+      />
       {game && (
         <NavLink
           to={`/games/${game.meta.slug}/map`}
+          active={
+            match &&
+            match.params.section === "games" &&
+            match.params["*"] !== ""
+          }
           text={game.info.title}
           icon={<GamesIcon />}
         />
       )}
-      <NavLink to="/games/" end text={t("nav.load")} icon={<LoadIcon />} />
+      <NavLink
+        to="/games/"
+        active={
+          match && match.params.section === "games" && match.params["*"] === ""
+        }
+        text={t("nav.load")}
+        icon={<LoadIcon />}
+      />
       <NavLink
         to="/elements/"
+        active={match && match.params.section === "elements"}
         text={t("nav.elements")}
         icon={<ElementsIcon />}
       />
-      <NavLink to="/docs/" text={t("nav.docs")} icon={<DocumentationIcon />} />
+      <NavLink
+        to="/docs/"
+        active={match && match.params.section === "docs"}
+        text={t("nav.docs")}
+        icon={<DocumentationIcon />}
+      />
     </>
   );
 };
 
-const MenuLink = forwardRef(({ to, end, icon, text, onClick }, ref) => {
-  const active = !!useMatch({ path: to, end });
+const MenuLink = forwardRef(({ to, end = false, icon, text, onClick }, ref) => {
+  const match = useMatch({ path: to, end });
+
+  if (match) {
+    to = match.pathname;
+  }
 
   return (
     <MenuItem
@@ -107,7 +134,7 @@ const MenuLink = forwardRef(({ to, end, icon, text, onClick }, ref) => {
       component={Link}
       ref={ref}
       to={to}
-      selected={active}
+      selected={!!match}
     >
       <ListItemIcon>{icon}</ListItemIcon>
       <ListItemText primary={text} />
@@ -135,7 +162,7 @@ const MobileMenu = ({ anchor, onClose }) => {
       <MenuLink
         onClick={onClose}
         to="/"
-        exact
+        end
         text={t("nav.home")}
         icon={<HomeIcon />}
       />
@@ -143,7 +170,6 @@ const MobileMenu = ({ anchor, onClose }) => {
         <MenuLink
           onClick={onClose}
           to={`/games/${game.meta.slug}/map`}
-          path={`/games/${game.meta.slug}/`}
           text={game.info.title}
           icon={<GamesIcon />}
         />
@@ -151,7 +177,7 @@ const MobileMenu = ({ anchor, onClose }) => {
       <MenuLink
         onClick={onClose}
         to="/games/"
-        exact
+        end
         text={t("nav.load")}
         icon={<LoadIcon />}
       />
@@ -182,7 +208,7 @@ const MobileButton = ({ onClick }) => {
   if (match) {
     switch (match.params.section) {
       case "games":
-        if (match.isExact) {
+        if (match.params["*"] === "") {
           icon = <LoadIcon />;
           text = t("nav.load");
         } else {

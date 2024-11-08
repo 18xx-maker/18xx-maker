@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useGame } from "../../context/GameContext";
 
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
@@ -32,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Info = ({ game }) => {
+const Info = () => {
+  const game = useGame();
   const classes = useStyles();
   const { t } = useTranslation();
 

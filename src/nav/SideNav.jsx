@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { useRoutes } from "react-router";
 
 import { useBooleanParam } from "../util/query";
 
@@ -21,6 +21,11 @@ const SideNav = ({ open, toggle }) => {
   const needsSideMenu = useSideMenu();
   const classes = useStyles();
   const [print] = useBooleanParam("print");
+  const element = useRoutes([
+    { path: "games/*", element: <GameNav /> },
+    { path: "elements/*", element: <ElementsNav /> },
+    { path: "docs/*", element: <DocsNav /> },
+  ]);
 
   if (print || !needsSideMenu) {
     return null;
@@ -29,11 +34,7 @@ const SideNav = ({ open, toggle }) => {
   const menu = (
     <>
       <Toolbar />
-      <Routes>
-        <Route path="/games/*" element={<GameNav />} />
-        <Route path="/elements/*" element={<ElementsNav />} />
-        <Route path="/docs/*" element={<DocsNav />} />
-      </Routes>
+      {element}
     </>
   );
 

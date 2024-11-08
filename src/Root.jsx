@@ -1,6 +1,6 @@
 import { useEffect, useState, Suspense } from "react";
 
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useBooleanParam } from "./util/query";
 
 import Alert from "@mui/material/Alert";
@@ -33,11 +33,6 @@ import { isElectron } from "./util";
 
 import Loading from "./Loading";
 
-import Home from "./pages/Home";
-import Docs from "./pages/Docs";
-import Elements from "./pages/Elements";
-import Games from "./pages/Games";
-
 import { curry } from "ramda";
 
 const theme = createTheme({
@@ -60,7 +55,7 @@ const theme = createTheme({
   },
 });
 
-const App = () => {
+const Root = () => {
   const [print] = useBooleanParam("print");
   const navigate = useNavigate();
 
@@ -121,12 +116,7 @@ body {
                   {isElectron ? <ExportButton /> : <PrintButton />}
                   <ConfigDrawer />
                   <Viewport sideNavOpen={sideNavOpen}>
-                    <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route path="/elements/*" element={<Elements />} />
-                      <Route path="/docs/*" element={<Docs />} />
-                      <Route path="/games/*" element={<Games />} />
-                    </Routes>
+                    <Outlet />
                   </Viewport>
                   {print || (
                     <Snackbar
@@ -276,4 +266,4 @@ body {
   );
 };
 
-export default App;
+export default Root;
