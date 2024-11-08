@@ -14,7 +14,7 @@
     "18xx-schemas": "bin/schemas.cjs"
   },
   "scripts": {
-    "b18": "node ./bin/b18.js",
+    "b18": "node ./bin/b18.cjs",
     "build": "vite build",
     "build:electron": "cross-env PUBLIC_URL=. yarn build",
     "lint": "eslint .",
@@ -23,7 +23,7 @@
     "pretty": "yarn prettier -c .",
     "pretty:fix": "yarn prettier --write .",
     "preview": "vite preview",
-    "print": "node ./bin/print.js",
+    "print": "node ./bin/print.cjs",
     "release": "run-s build:electron package",
     "schemas": "node ./bin/schemas.cjs",
     "start": "vite",
@@ -95,7 +95,7 @@
       "main": "electron/index.cjs"
     },
     "files": [
-      "build/**/*",
+      "dist/**/*",
       "electron/**/*",
       "node_modules/**/*"
     ],

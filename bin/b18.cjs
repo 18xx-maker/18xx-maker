@@ -1,5 +1,3 @@
-require("@babel/register");
-
 const R = require("ramda");
 const express = require("express");
 const fs = require("fs");

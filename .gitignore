@@ -9,8 +9,9 @@
 # testing
 /coverage
 
-# production
-/build
+# renders
+/render
+!/src/render
 
 # electron
 /dist

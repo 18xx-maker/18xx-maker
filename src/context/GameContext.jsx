@@ -71,7 +71,7 @@ export const GameProvider = ({ children }) => {
   const [game, setGame] = useLocalState("game", null);
 
   // Update game format
-  if (!game.meta && game.id) {
+  if (game && !game.meta && game.id) {
     game.meta = {
       id: game.id,
       slug: encodeURIComponent(game.id),
