@@ -51,14 +51,14 @@ console.log(`Games: ${games.join(", ")}`);
 (async () => {
   console.log("Starting Puppeteer");
   const browser = await puppeteer.launch({
-    // args: [
-    //   "--no-sandbox",
-    //   "--disable-setuid-sandbox",
-    //   "--force-color-profile",
-    //   "srgb",
-    //   "--force-raster-color-profile",
-    //   "srgb",
-    // ],
+    args: [
+      //   "--no-sandbox",
+      //   "--disable-setuid-sandbox",
+      "--force-color-profile",
+      "srgb",
+      // "--force-raster-color-profile",
+      // "srgb",
+    ],
   });
 
   console.log("New Page");
