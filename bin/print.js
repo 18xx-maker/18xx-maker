@@ -52,22 +52,12 @@ console.log(`Games: ${games.join(", ")}`);
 
 // Start processing
 (async () => {
-  console.log("Starting Puppeteer");
   const browser = await puppeteer.launch({
-    args: [
-      //   "--no-sandbox",
-      //   "--disable-setuid-sandbox",
-      "--force-color-profile",
-      "srgb",
-      // "--force-raster-color-profile",
-      // "srgb",
-    ],
+    args: ["--force-color-profile", "srgb"],
   });
 
-  console.log("New Page");
   const page = await browser.newPage();
 
-  console.log("Looping over games");
   for (let g = 0; g < games.length; g++) {
     let game = games[g];
 
