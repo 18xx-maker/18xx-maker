@@ -6,7 +6,7 @@ import { tiles as tileDefs } from "../../../data";
 import Svg from "../../../Svg";
 import Tile from "../../../Tile";
 
-import { compose, filter, is, keys, map, propEq, take, tap, uniq } from "ramda";
+import { compose, filter, is, keys, map, propEq, take, uniq } from "ramda";
 
 import ColorContext from "../../../context/ColorContext";
 import GameContext from "../../../context/GameContext";

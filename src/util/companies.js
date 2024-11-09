@@ -1,4 +1,4 @@
-import { addIndex, is, map, mergeRight, prop } from "ramda";
+import { addIndex, map, mergeRight, prop } from "ramda";
 
 import { companies as overrides } from "../data/index.js";
 
