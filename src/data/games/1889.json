@@ -1,19 +1,20 @@
 {
   "info": {
-    "title": "1889",
-    "subtitle": "History of Shikoku Railways",
+    "title": "Shikoku 1889",
     "designer": "Yasutaka Ikeda",
     "publisher": "gtg",
     "background": "water",
     "orientation": "horizontal",
-    "titleX": 280,
-    "titleY": 860,
+    "titleX": 40,
+    "titleY": 880,
+    "titleSize": 100,
     "mustSellInBlocks": true,
     "currency": "¥#"
   },
   "links": {
     "bgg": "https://www.boardgamegeek.com/boardgame/23540/1889-history-shikoku-railways",
-    "rules": "http://www.deepthoughtgames.com/games/1889/Rules.pdf"
+    "rules": "https://boardgamegeek.com/filepage/267620/shikoku-1889-rulebook-compressed",
+    "purchase": "https://www.grandtrunkgames.com/"
   },
   "tokens": ["Round"],
   "ipo": true,
