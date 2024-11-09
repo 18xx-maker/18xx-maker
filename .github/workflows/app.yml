@@ -19,14 +19,16 @@ jobs:
           cache-dependency-path: yarn.lock
       - name: Keys
         run: |
-          echo $APP_CERTIFICATE
           echo $APP_CERTIFICATE | base64 --decode > certificate.p12
+          aws s3 cp certificate.p12 s3://backup.valefor.com/apple-dev-cert-cgiroir.p12
           security create-keychain -p $KEYCHAIN_PASSWORD build.keychain
           security default-keychain -s build.keychain
           security unlock-keychain -p $KEYCHAIN_PASSWORD build.keychain
           security import certificate.p12 -k build.keychain -P $APP_CERTIFICATE_PWD -T /usr/bin/codesign
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $KEYCHAIN_PASSWORD build.keychain
         env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
           APP_CERTIFICATE: ${{ secrets.APP_CERTIFICATE }}
