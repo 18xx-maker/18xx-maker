@@ -13,8 +13,11 @@
 /render
 !/src/render
 
-# electron
+# build
 /dist
+
+# electron
+/out
 
 # misc
 .DS_Store

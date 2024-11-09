@@ -16,7 +16,7 @@ let mainWindow;
 const startUrl = isDev
   ? "http://localhost:3000"
   : url.format({
-      pathname: path.join(__dirname, "..", "dist", "index.html"),
+      pathname: path.join(import.meta.dirname, "..", "dist", "index.html"),
       protocol: "file:",
       slashes: true,
     });
