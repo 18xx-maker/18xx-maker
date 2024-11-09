@@ -1,22 +1,24 @@
-import assoc from "ramda/src/assoc";
-import chain from "ramda/src/chain";
-import compose from "ramda/src/compose";
-import concat from "ramda/src/concat";
-import curry from "ramda/src/curry";
-import filter from "ramda/src/filter";
-import find from "ramda/src/find";
-import indexOf from "ramda/src/indexOf";
-import map from "ramda/src/map";
-import max from "ramda/src/max";
-import mergeDeepWithKey from "ramda/src/mergeDeepWithKey";
-import min from "ramda/src/min";
-import nth from "ramda/src/nth";
-import prop from "ramda/src/prop";
-import reduce from "ramda/src/reduce";
-import reject from "ramda/src/reject";
-import splitEvery from "ramda/src/splitEvery";
-import without from "ramda/src/without";
-import zipWith from "ramda/src/zipWith";
+import {
+  assoc,
+  chain,
+  compose,
+  concat,
+  curry,
+  filter,
+  find,
+  indexOf,
+  map,
+  max,
+  mergeDeepWithKey,
+  min,
+  nth,
+  prop,
+  reduce,
+  reject,
+  splitEvery,
+  without,
+  zipWith,
+} from "ramda";
 
 export const HEX_RATIO = 0.57735;
 export const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

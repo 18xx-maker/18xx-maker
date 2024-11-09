@@ -13,13 +13,13 @@ import { mapKeys } from "../util.js";
 export const getID = replace(/^\.\/[^/]+\/([^.]+)\.[a-z]+$/, "$1");
 
 // Games
-export { default as games } from "./games";
+export { default as games } from "./games/index.js";
 
 // Tiles
-export { default as tiles } from "./tiles";
+export { default as tiles } from "./tiles/index.js";
 
 // Publishers
-import publishersJson from "./publishers/index.json";
+import publishersJson from "./publishers/index.json" with { type: "json" };
 const publisherImageFiles = import.meta.glob("./publishers/*.png", {
   eager: true,
   import: "default",
