@@ -6,14 +6,7 @@ import { tiles as tileDefs } from "../../../data";
 import Svg from "../../../Svg";
 import Tile from "../../../Tile";
 
-import compose from "ramda/src/compose";
-import filter from "ramda/src/filter";
-import is from "ramda/src/is";
-import keys from "ramda/src/keys";
-import map from "ramda/src/map";
-import propEq from "ramda/src/propEq";
-import take from "ramda/src/take";
-import uniq from "ramda/src/uniq";
+import { compose, filter, is, keys, map, propEq, take, uniq } from "ramda";
 
 import ColorContext from "../../../context/ColorContext";
 import GameContext from "../../../context/GameContext";
@@ -34,7 +27,7 @@ const Tiles = () => {
 
   let tiles = compose(
     uniq,
-    filter(propEq("color", color)),
+    filter(propEq(color, "color")),
     map(getGameTile),
   )(keys(game.tiles));
 

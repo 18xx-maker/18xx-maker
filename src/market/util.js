@@ -2,7 +2,7 @@ import length from "ramda/src/length";
 import max from "ramda/src/max";
 import reduce from "ramda/src/reduce";
 
-import { unitsToCss } from "../util";
+import { unitsToCss } from "../util.js";
 
 export const getMaxLength = reduce((acc, row) => {
   return max(acc, length(row));

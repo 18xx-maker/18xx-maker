@@ -1,26 +1,42 @@
-const R = require("ramda");
-const express = require("express");
-const fs = require("node:fs");
-const path = require("node:path");
-const puppeteer = require("puppeteer");
-const archiver = require("archiver");
+import express from "express";
+import fs from "node:fs";
+import path from "node:path";
+import puppeteer from "puppeteer";
+import archiver from "archiver";
+import { setup, setupB18 } from "../src/render/util.js";
 
-const util = require("../src/render/util.cjs");
-const setup = util.setup;
-const setupB18 = util.setupB18;
+import {
+  ascend,
+  compose,
+  countBy,
+  defaultTo,
+  head,
+  identity,
+  is,
+  join,
+  juxt,
+  keys,
+  map,
+  mapObjIndexed,
+  mergeDeepRight,
+  prop,
+  propEq,
+  reject,
+  sortWith,
+  tail,
+  toUpper,
+  uniq,
+} from "ramda";
 
-const defaultConfig = require("../src/defaults.json");
+import defaultConfig from "../src/defaults.json" with { type: "json" };
 let customConfig = {};
 if (fs.existsSync(path.resolve("../src/config.json"))) {
-  customConfig = require("../src/config.json");
+  customConfig = await import("../src/config.json", { with: { type: "json" } });
 }
 
-const config = R.mergeDeepRight(defaultConfig, customConfig);
+const config = mergeDeepRight(defaultConfig, customConfig);
 
-const capitalize = R.compose(
-  R.join(""),
-  R.juxt([R.compose(R.toUpper, R.head), R.tail]),
-);
+const capitalize = compose(join(""), juxt([compose(toUpper, head), tail]));
 
 const tileColors = [
   "yellow",
@@ -37,22 +53,22 @@ const tileColors = [
   "other",
   "none",
 ];
-const colorSort = R.compose(
+const colorSort = compose(
   tileColors.indexOf.bind(tileColors),
-  R.prop("color"),
-  R.defaultTo({ color: "other" }),
+  prop("color"),
+  defaultTo({ color: "other" }),
 );
-const sortTiles = R.sortWith([R.ascend(colorSort)]);
+const sortTiles = sortWith([ascend(colorSort)]);
 
 setup();
 
 // Startup server
 const app = express();
 
-app.use(express.static(path.join(process.cwd(), "build")));
+app.use(express.static(path.join(process.cwd(), "dist")));
 
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(process.cwd(), "build", "index.html"));
+  res.sendFile(path.join(process.cwd(), "dist", "index.html"));
 });
 
 const server = app.listen(9000);
@@ -66,8 +82,12 @@ const server = app.listen(9000);
   let folder = `board18-${id}`;
   let author = process.argv[4];
 
-  let game = require(`../src/data/games/${bname}.json`);
-  let tiles = await import("../src/data/tiles/index.js");
+  let game = await import(`../src/data/games/${bname}.json`, {
+    with: { type: "json" },
+  }).then((mod) => mod.default);
+  let tiles = await import("../src/data/tiles/index.js").then(
+    (mod) => mod.default,
+  );
 
   const gutil = await import("../src/util.js");
   const getTile = gutil.getTile(tiles, game.tiles || {});
@@ -125,14 +145,14 @@ const server = app.listen(9000);
   }
 
   setupB18(bname, version);
-  let counts = R.compose(
-    R.countBy(R.identity),
-    R.map(R.prop("color")),
+  let counts = compose(
+    countBy(identity),
+    map(prop("color")),
     sortTiles,
-    R.uniq,
-    R.map(getTile),
-  )(R.keys(game.tiles));
-  let colors = R.keys(counts);
+    uniq,
+    map(getTile),
+  )(keys(game.tiles));
+  let colors = keys(counts);
 
   // Tile Trays
   for (let j = 0; j < colors.length; j++) {
@@ -152,26 +172,26 @@ const server = app.listen(9000);
       tile: [],
     };
 
-    // let tiles = R.compose(
-    //   R.uniq,
-    //   R.filter(R.propEq("color", color)),
-    //   R.map(getTile)
-    // )(R.keys(game.tiles));
+    // let tiles = compose(
+    //   uniq,
+    //   filter(propEq("color", color)),
+    //   map(getTile)
+    // )(keys(game.tiles));
 
-    R.mapObjIndexed((dups, id) => {
+    mapObjIndexed((dups, id) => {
       let tile = getTile(id);
       if (tile.color !== color) return;
 
       // Merge tile with game tile
-      if (R.is(Object, game.tiles[id])) {
+      if (is(Object, game.tiles[id])) {
         tile = { ...tile, ...game.tiles[id] };
       }
 
       // Figure out rotations
       let rots = 6;
-      if (R.is(Number, tile.rotations)) {
+      if (is(Number, tile.rotations)) {
         rots = tile.rotations;
-      } else if (R.is(Array, tile.rotations)) {
+      } else if (is(Array, tile.rotations)) {
         rots = tile.rotations.length;
       }
 
@@ -199,8 +219,7 @@ const server = app.listen(9000);
   };
   let mtok = { ...btok, type: "mtok", token: [] };
 
-  const cutil = await import("../src/util/companies.js");
-  R.map(
+  map(
     (company) => {
       btok.token.push({
         dups: company.tokens.length + (game.info.extraStationTokens || 0),
@@ -210,20 +229,20 @@ const server = app.listen(9000);
         flip: true,
       });
     },
-    cutil.compileCompanies(game) || [],
+    gutil.compileCompanies(game) || [],
   );
 
   // "quantity" of 0 mean remove the token entirely from the array
   // "quantity of "∞" means we put the special value of 0 in for dups
   // otherwise, "quantity" is the number of dups
-  let tokens = R.compose(
-    R.map((extra) => {
+  let tokens = compose(
+    map((extra) => {
       btok.token.push({
         dups: extra.quantity === "∞" ? 0 : extra.quantity || 1,
         flip: true,
       });
     }),
-    R.reject(R.propEq("quantity", 0)),
+    reject(propEq("quantity", 0)),
   )(game.tokens || []);
   let tokenHeight = 30 * ((game.companies || []).length + tokens.length);
 
@@ -231,14 +250,7 @@ const server = app.listen(9000);
   json.tray.push(mtok);
 
   const browser = await puppeteer.launch({
-    args: [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--force-color-profile",
-      "srgb",
-      "--force-raster-color-profile",
-      "srgb",
-    ],
+    args: ["--force-color-profile", "srgb"],
   });
   const page = await browser.newPage();
 
@@ -256,11 +268,11 @@ const server = app.listen(9000);
   });
   await page.setViewport({ width: printWidth + offset, height: printHeight });
   await page.screenshot({
-    path: `build/render/${bname}/${folder}/${id}/Map.png`,
+    path: `render/${bname}/${folder}/${id}/Map.png`,
   });
 
   console.log(`Printing ${bname}/${folder}/${id}/Market.png`);
-  const mutil = await import("../src/market/util");
+  const mutil = await import("../src/market/util.js");
   let marketData = mutil.getMarketData(game.stock, config);
   let marketWidth = Math.ceil((marketData.totalWidth + 50) * 0.96);
   let marketHeight = Math.ceil((marketData.totalHeight + 50) * 0.96);
@@ -269,7 +281,7 @@ const server = app.listen(9000);
   });
   await page.setViewport({ width: marketWidth + 1, height: marketHeight + 1 });
   await page.screenshot({
-    path: `build/render/${bname}/${folder}/${id}/Market.png`,
+    path: `render/${bname}/${folder}/${id}/Market.png`,
   });
 
   console.log(`Printing ${bname}/${folder}/${id}/Tokens.png`);
@@ -279,7 +291,7 @@ const server = app.listen(9000);
   );
   await page.setViewport({ width: 60, height: tokenHeight });
   await page.screenshot({
-    path: `build/render/${bname}/${folder}/${id}/Tokens.png`,
+    path: `render/${bname}/${folder}/${id}/Tokens.png`,
     omitBackground: true,
   });
 
@@ -300,7 +312,7 @@ const server = app.listen(9000);
     );
     await page.setViewport({ width, height });
     await page.screenshot({
-      path: `build/render/${bname}/${folder}/${id}/${capitalize(color_filename)}.png`,
+      path: `render/${bname}/${folder}/${id}/${capitalize(color_filename)}.png`,
       omitBackground: true,
     });
   }
@@ -310,17 +322,17 @@ const server = app.listen(9000);
 
   console.log(`Writing  ${bname}/${folder}/${id}.json`);
   fs.writeFileSync(
-    `build/render/${bname}/${folder}/${id}.json`,
+    `render/${bname}/${folder}/${id}.json`,
     JSON.stringify(json, null, 2),
   );
 
   console.log(`Creating ${bname}/${folder}.zip`);
 
-  const output = fs.createWriteStream(`build/render/${bname}/${folder}.zip`);
+  const output = fs.createWriteStream(`render/${bname}/${folder}.zip`);
   const archive = archiver("zip", {
     zlib: { level: 9 },
   });
   archive.pipe(output);
-  archive.directory(`build/render/${bname}/${folder}`, `${folder}`);
+  archive.directory(`render/${bname}/${folder}`, `${folder}`);
   archive.finalize();
 })();
