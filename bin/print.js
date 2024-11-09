@@ -1,18 +1,21 @@
-const R = require("ramda");
-const express = require("express");
-const fs = require("node:fs");
-const path = require("node:path");
-const puppeteer = require("puppeteer");
+/* eslint no-fallthrough: "off" */
 
-const util = require("../src/render/util.cjs");
+import express from "express";
+import puppeteer from "puppeteer";
+
+import fs from "node:fs";
+import path from "node:path";
+
+import { compose, map, filter } from "ramda";
+
+import { setup } from "../src/render/util.js";
 
 let config = {};
 if (fs.existsSync(path.resolve("../src/config.json"))) {
-  config = require("../src/config.json");
+  config = await import("../src/config.json", { with: { type: "json" } });
 }
 
-const defaults = require("../src/defaults.json");
-const setup = util.setup;
+import defaults from "../src/defaults.json" with { type: "json" };
 
 // Setup folders
 setup();
@@ -28,15 +31,15 @@ app.get("/*", function (req, res) {
 
 const server = app.listen(9000);
 
-if (process.argv[2] === "debug") return;
+if (process.argv[2] === "debug") process.exit(0);
 
 let games = [process.argv[2] || "1889"];
 if (process.argv[2] === "all") {
   // Read all games from directory
   const gameFiles = fs.readdirSync("./src/data/games");
-  games = R.compose(
-    R.map((name) => name.replace(/\.json$/, "")),
-    R.filter((name) => name.endsWith(".json")),
+  games = compose(
+    map((name) => name.replace(/\.json$/, "")),
+    filter((name) => name.endsWith(".json")),
   )(gameFiles);
 } else {
   // Check if the game exists
@@ -92,7 +95,9 @@ console.log(`Games: ${games.join(", ")}`);
       "tokens",
     ];
 
-    let gameDef = require(`../src/data/games/${game}.json`);
+    let gameDef = await import(`../src/data/games/${game}.json`, {
+      with: { type: "json" },
+    }).then((module) => module.default);
 
     for (let i = 0; i < items.length; i++) {
       let item = items[i];

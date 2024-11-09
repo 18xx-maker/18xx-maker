@@ -1,8 +1,7 @@
-const map = require("ramda/src/map");
-const is = require("ramda/src/is");
-const fs = require("fs");
+import fs from "node:fs";
+import { map, is } from "ramda";
 
-const compileCompanies = (game) => {
+export const compileCompanies = (game) => {
   return map((company) => {
     if (
       company.minor &&
@@ -48,7 +47,7 @@ const compileCompanies = (game) => {
   }, game.companies || []);
 };
 
-const setupB18 = (game, version) => {
+export const setupB18 = (game, version) => {
   setupGame(game);
   let id = `${game}-${version}`;
   let folder = `board18-${id}`;
@@ -64,7 +63,7 @@ const setupB18 = (game, version) => {
   }
 };
 
-const setup18xxGame = (filename, newFilename) => {
+export const setup18xxGame = (filename, newFilename) => {
   setupGame(filename);
   try {
     fs.mkdirSync(`./render/${filename}/18xx.games`);
@@ -78,7 +77,7 @@ const setup18xxGame = (filename, newFilename) => {
   }
 };
 
-const setupGame = (game) => {
+export const setupGame = (game) => {
   try {
     fs.mkdirSync(`./render/${game}`);
   } catch (err) {
@@ -86,16 +85,10 @@ const setupGame = (game) => {
   }
 };
 
-const setup = () => {
+export const setup = () => {
   try {
     fs.mkdirSync(`./render`);
   } catch (err) {
     if (err.code !== "EEXIST") throw err;
   }
 };
-
-exports.compileCompanies = compileCompanies;
-exports.setupB18 = setupB18;
-exports.setup18xxGame = setup18xxGame;
-exports.setupGame = setupGame;
-exports.setup = setup;
