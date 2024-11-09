@@ -59,6 +59,8 @@ function captureWindow() {
     y: 0,
     enableLargerThanScreen: true,
     show: false,
+    transparent: true,
+    frame: false,
     webPreferences: {
       preload: path.join(import.meta.dirname, "preload.js"),
     },
@@ -164,12 +166,24 @@ function createScreenshot(path, filePath) {
               width: Math.ceil(width),
               height: Math.ceil(height),
             });
-            return win.webContents.capturePage().then((image) => {
-              let buffer = image.toPNG();
-              fs.writeFileSync(filePath, buffer);
-              win.close();
-              resolve(filePath);
-            });
+            return win.webContents
+              .capturePage(
+                {
+                  x: 0,
+                  y: 0,
+                  width: Math.ceil(width),
+                  height: Math.ceil(height),
+                },
+                {
+                  stayHidden: true,
+                },
+              )
+              .then((image) => {
+                let buffer = image.toPNG();
+                fs.writeFileSync(filePath, buffer);
+                win.close();
+                resolve(filePath);
+              });
           })
           .catch(() => {
             // Game doesn't include this item

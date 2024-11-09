@@ -211,9 +211,12 @@ const MobileButton = ({ onClick }) => {
         if (match.params["*"] === "") {
           icon = <LoadIcon />;
           text = t("nav.load");
-        } else {
+        } else if (game) {
           icon = <GamesIcon />;
           text = game.info.title;
+        } else {
+          icon = <LoadIcon />;
+          text = t("nav.load");
         }
         break;
       case "elements":

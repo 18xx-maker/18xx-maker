@@ -1,4 +1,5 @@
 html {
+  background: transparent;
   margin: 0px; /* this affects the margin on the html before sending to printer */
   -webkit-print-color-adjust: exact;
 }
