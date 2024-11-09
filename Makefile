@@ -7,6 +7,8 @@ all: $(patsubst %,public/schemas/%.schema.json,$(schemas))
 clean:
 	rm -rf public/schemas/*.json
 	rm -rf src/schemas/tiles.schema.json
+	rm -rf dist
+	rm -rf out
 
 public/schemas/%.json: src/schemas/%.json
 	cp $< $@

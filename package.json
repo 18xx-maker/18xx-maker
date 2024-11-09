@@ -16,7 +16,7 @@
   "scripts": {
     "b18": "node --disable-warning=ExperimentalWarning ./bin/b18.js",
     "build": "vite build",
-    "build:electron": "cross-env PUBLIC_URL=. yarn build",
+    "build:electron": "vite build --base=./",
     "fix": "run-s pretty:fix lint:fix",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
