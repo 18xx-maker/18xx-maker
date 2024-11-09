@@ -5,6 +5,7 @@ on:
 jobs:
   app:
     runs-on: macos-latest
+    permissions: write-all
     name: Build App
     steps:
       - uses: actions/checkout@v4
