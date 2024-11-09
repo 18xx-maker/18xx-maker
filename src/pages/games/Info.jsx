@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Info = () => {
-  const game = useGame();
+  const { game } = useGame();
   const classes = useStyles();
   const { t } = useTranslation();
 

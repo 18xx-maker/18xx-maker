@@ -104,7 +104,7 @@
       "buildResources": "assets",
       "output": "out"
     },
-    "afterSign": "electron/notarize.cjs"
+    "afterSign": "electron/notarize.js"
   },
   "dependencies": {
     "ajv": "^8.17.1",
