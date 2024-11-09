@@ -1,4 +1,4 @@
-const { notarize } = require("@electron/notarize");
+import { notarize } from "@electron/notarize";
 
 async function notarizing(context) {
   const { electronPlatformName, appOutDir } = context;
