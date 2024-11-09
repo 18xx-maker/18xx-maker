@@ -4,25 +4,21 @@ on:
       - "*"
 jobs:
   app:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os:
-          - macos-latest
-        node_version:
-          - 22
-    name: Build app on ${{ matrix.os }}
+    runs-on: macos-latest
+    name: Build App
     steps:
       - uses: actions/checkout@v4
+        name: Checkout
       - uses: actions/setup-node@v4
+        name: Node
         with:
-          node-version: ${{ matrix.node_version }}
-          cache: "yarn"
-      - uses: actions/cache@v4
-        with:
-          path: "**/node_modules"
-          key: ${{ matrix.os }}-${{ matrix.node_version }}-modules-${{ hashFiles('**/yarn.lock') }}
-      - run: |
+          architecture: x64
+          check-latest: true
+          node-version: 22
+          cache: yarn
+          cache-dependency-path: yarn.lock
+      - name: Keys
+        run: |
           echo $APP_CERTIFICATE | base64 --decode > certificate.p12
           security create-keychain -p $KEYCHAIN_PASSWORD build.keychain
           security default-keychain -s build.keychain
@@ -36,7 +32,9 @@ jobs:
           APP_CERTIFICATE_PWD: ${{ secrets.APP_CERTIFICATE_PWD }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
       - run: yarn
+        name: Dependencies
       - id: create_release
+        name: Draft Release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -47,10 +45,12 @@ jobs:
           draft: true
           prerelease: true
       - run: yarn release
+        name: Build Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
       - uses: StuYarrow/publish-release@v1
+        name: Publish Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
