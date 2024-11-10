@@ -11,9 +11,8 @@
 .ipo__companies {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
   align-items: center;
-  align-content: flex-start;
+  place-content: flex-start flex-start;
   height: calc(100% - 0.5in);
   margin: 0;
 }

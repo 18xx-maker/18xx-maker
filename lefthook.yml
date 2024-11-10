@@ -1,0 +1,29 @@
+commit-msg:
+  commands:
+    commitlint:
+      run: yarn -s commitlint --edit {1}
+
+pre-commit:
+  parallel: true
+  commands:
+    test:
+      run: yarn -s test:run
+    schemas:
+      run: make all
+      stage_fixed: true
+    svgo:
+      glob: "*.svg"
+      run: yarn -s svgo -f {staged_files}
+      stage_fixed: true
+    prettier:
+      glob: "*.{css,scss,js,mjs,cjs,jsx,json,yml,yaml}"
+      run: yarn -s prettier --write {staged_files}
+      stage_fixed: true
+    eslint:
+      glob: "*.{js,mjs,cjs,jsx}"
+      run: yarn -s eslint --fix {staged_files}
+      stage_fixed: true
+    stylelint:
+      glob: "*.{css,scss}"
+      run: yarn -s stylelint --fix {staged_files}
+      stage_fixed: true

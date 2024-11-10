@@ -1,6 +1,6 @@
 html {
   background: transparent;
-  margin: 0px; /* this affects the margin on the html before sending to printer */
+  margin: 0; /* this affects the margin on the html before sending to printer */
   -webkit-print-color-adjust: exact;
 }
 
@@ -47,6 +47,10 @@ p {
   opacity: 0.2;
 }
 
+svg {
+  overflow: visible;
+}
+
 .map {
   position: relative;
 }
@@ -67,33 +71,12 @@ p {
   margin: auto;
 }
 
-.tileSheet--offset div.row:nth-child(even) {
-  padding-left: 1.73205in;
-}
-
-.tileSheet--individual div.row svg {
-  margin: 0 0.125in 0.125in 0;
-}
-
-.tileSheet--individual div.row svg:last-child {
-  margin: 0 0 0.125in 0;
-}
-
 .tileSheet--die div.row {
   overflow: hidden;
 }
 
-.tileSheet--die div.row:first-child,
-.tileSheet--die div.row:last-child {
-  overflow: visible;
-}
-
-.tileSheet--die div.row svg {
-  margin: 0 0.05in 0 0;
-}
-
-.tileSheet--die div.row svg:last-child {
-  margin: 0;
+.tileSheet--offset div.row:nth-child(even) {
+  padding-left: 1.73205in;
 }
 
 .tileSheet svg {
@@ -101,12 +84,29 @@ p {
   position: relative;
 }
 
-a {
-  text-decoration: none;
+.tileSheet--individual div.row svg {
+  margin: 0 0.125in 0.125in 0;
 }
 
-svg {
+.tileSheet--die div.row svg {
+  margin: 0 0.05in 0 0;
+}
+
+.tileSheet--individual div.row svg:last-child {
+  margin: 0 0 0.125in;
+}
+
+.tileSheet--die div.row:first-child,
+.tileSheet--die div.row:last-child {
   overflow: visible;
+}
+
+.tileSheet--die div.row svg:last-child {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
 }
 
 .charters {
@@ -175,15 +175,9 @@ svg {
   box-sizing: border-box;
   width: 100%;
   text-align: left;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.charter--carth.charter--half .charter__name,
-.charter--minor .charter__name {
-  height: 0.875in;
 }
 
 .charter--half .charter__name {
@@ -193,6 +187,11 @@ svg {
 
 .charter--color .charter__name {
   padding-left: 1in;
+}
+
+.charter--minor .charter__name,
+.charter--carth.charter--half .charter__name {
+  height: 0.875in;
 }
 
 .charter--minor.charter--color .charter__name {
@@ -208,6 +207,7 @@ svg {
   top: 0;
   left: 0;
 }
+
 .charter__logo > svg {
   height: 0.75in;
   width: 0.75in;
@@ -344,7 +344,7 @@ svg {
 }
 
 .charter__phase td {
-  padding: 0.03in 0.03in;
+  padding: 0.03in;
   border: 1px solid black;
   text-align: center;
   vertical-align: top;
@@ -356,7 +356,7 @@ svg {
 }
 
 .charter__phase td.phase__list ul {
-  padding: 0.03in 0.03in;
+  padding: 0.03in;
 }
 
 .charter__phase td.phase__notes {
@@ -389,7 +389,7 @@ svg {
 }
 
 .charter dt {
-  margin: 0.125in 0 0 0;
+  margin: 0.125in 0 0;
   font-size: 0.13in;
 }
 
@@ -424,7 +424,7 @@ svg {
   position: absolute;
   top: 0;
   right: 0;
-  padding: 0.26in 0.125in 0.125in 0.125in;
+  padding: 0.26in 0.125in 0.125in;
   height: 1in;
   box-sizing: border-box;
   line-height: normal;
@@ -462,7 +462,7 @@ svg {
 
 .charter--half .charter__tokens svg {
   height: 0.5in;
-  padding: 0.05in 0 0 0;
+  padding: 0.05in 0 0;
 }
 
 .prices {
@@ -585,7 +585,7 @@ ul.notes li span {
 }
 
 .cutlines__page {
-  font-family: "sans-serif";
+  font-family: sans-serif;
   font-size: 0.15in;
   position: absolute;
   width: 100%;
@@ -601,7 +601,7 @@ ul.notes li span {
   position: relative;
 }
 
-.cutlines:before {
+.cutlines::before {
   content: "";
   width: 0.25in;
   height: calc(100% - 0.75in);
@@ -614,7 +614,7 @@ ul.notes li span {
   border-bottom: 1px solid black;
 }
 
-.cutlines:after {
+.cutlines::after {
   content: "";
   width: 0.25in;
   height: calc(100% - 0.75in);
@@ -627,7 +627,7 @@ ul.notes li span {
   border-bottom: 1px solid black;
 }
 
-.cutlines > div:before {
+.cutlines > div::before {
   content: "";
   width: calc(100% - 0.25in);
   height: 0.25in;
@@ -640,7 +640,7 @@ ul.notes li span {
   border-right: 1px solid black;
 }
 
-.cutlines > div:after {
+.cutlines > div::after {
   content: "";
   width: calc(100% - 0.25in);
   height: 0.25in;
@@ -668,7 +668,7 @@ footer a {
 }
 
 footer a:hover {
-  color: rgb(95, 35, 132);
+  color: rgb(95 35 132);
 }
 
 .LegalNotes {
@@ -701,7 +701,7 @@ footer a:hover {
 .PrintNotes > div {
   width: 800px;
   margin: 0 auto;
-  padding: 0 0 2px 0;
+  padding: 0 0 2px;
 }
 
 .PrintNotes h3 {

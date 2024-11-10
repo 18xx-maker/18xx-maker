@@ -5,10 +5,9 @@ schemas := config game theme tiles
 all: $(patsubst %,public/schemas/%.schema.json,$(schemas))
 
 clean:
-	rm -rf public/schemas/*.json
-	rm -rf src/schemas/tiles.schema.json
 	rm -rf dist
 	rm -rf out
+	rm -rf stats.html
 
 public/schemas/%.json: src/schemas/%.json
 	cp $< $@

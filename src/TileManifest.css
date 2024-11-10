@@ -1,11 +1,12 @@
 .TileManifest {
   display: grid;
-  grid-template-columns: repeat(4, calc((8in - 5px) / 4));
-  grid-template-rows: 0.5in;
   grid-auto-rows: 0.5in;
   grid-auto-flow: row dense;
   gap: 1px;
-  grid-template-areas: "title title title title";
+  grid-template: "title title title title" 0.5in / repeat(
+      4,
+      calc((8in - 5px) / 4)
+    );
   text-align: left;
   width: 768px;
   margin: 0 auto 0.5in;

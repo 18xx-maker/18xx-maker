@@ -27,11 +27,10 @@
   top: 0;
   right: 0;
   width: 100%;
-  padding: 0.125in 0.125in 0 0.125in;
+  padding: 0.125in 0.125in 0;
   line-height: 0.2in;
   font-size: 0.16in;
   text-align: center;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -43,13 +42,12 @@
   top: 0;
   right: 0;
   width: 100%;
-  padding: 0.0625in 0.125in 0 0.125in;
+  padding: 0.0625in 0.125in 0;
   line-height: 0.2in;
   text-align: center;
   font-size: 0.12in;
   font-weight: bold;
   font-family: sans-serif;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -112,7 +110,7 @@
 }
 
 .share__token {
-  height: 0px;
+  height: 0;
   width: 0.52in;
 }
 
@@ -126,6 +124,7 @@
   width: 100%;
   box-sizing: border-box;
 }
+
 .share__label__text {
   font-size: 0.12in;
   height: 0.25in;
@@ -143,6 +142,7 @@
   height: 0.5in;
   padding: 0.125in;
 }
+
 .share--left .share__label {
   bottom: 0.375in;
   right: 0;
@@ -151,6 +151,7 @@
   height: 0.5in;
   padding: 0.125in;
 }
+
 .share__percent {
   position: absolute;
   bottom: 0;
