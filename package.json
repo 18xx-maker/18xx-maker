@@ -15,13 +15,13 @@
     "18xx-schemas": "bin/schemas.cjs"
   },
   "scripts": {
-    "all": "run-s pretty lint validate test:run",
+    "all": "run-s -s pretty lint validate test:run",
     "b18": "node --disable-warning=ExperimentalWarning ./bin/b18.js",
     "build": "vite build",
     "build:app": "electron-vite build",
-    "fix": "run-s pretty:fix lint:fix",
-    "lint": "run-s lint:js lint:css lint:scss",
-    "lint:fix": "run-s lint:js:fix lint:css:fix lint:scss:fix",
+    "fix": "run-s -s pretty:fix lint:fix",
+    "lint": "run-s -s lint:js lint:css lint:scss",
+    "lint:fix": "run-s -s lint:js:fix lint:css:fix lint:scss:fix",
     "lint:js": "eslint .",
     "lint:js:fix": "eslint --fix .",
     "lint:css": "stylelint '**/*.css'",
@@ -29,31 +29,31 @@
     "lint:scss": "stylelint '**/*.scss'",
     "lint:scss:fix": "stylelint '**/*.scss' --fix",
     "package:app": "electron-builder build -mwl -p onTagOrDraft",
-    "pretty": "yarn prettier -c .",
-    "pretty:fix": "yarn prettier --write .",
+    "pretty": "prettier -c .",
+    "pretty:fix": "prettier --write .",
     "preview": "vite preview",
     "preview:app": "electron-vite preview",
     "print": "node --disable-warning=ExperimentalWarning ./bin/print.js",
-    "release": "run-s build:app package:app",
+    "release": "run-s -s build:app package:app",
     "schemas": "node ./bin/schemas.cjs",
     "start": "vite",
     "start:app": "electron-vite dev",
-    "svgo": "run-p svgo:icons svgo:logos",
+    "svgo": "run-p -s svgo:icons svgo:logos",
     "svgo:icons": "svgo -f src/data/icons",
     "svgo:logos": "svgo -f src/data/logos",
     "test": "vitest",
     "test:run": "vitest run",
-    "validate": "npm-run-all validate:schemas validate:config validate:games validate:themes validate:tiles -c -p --aggregate-output",
-    "validate:config": "yarn schemas src/defaults.json",
-    "validate:games": "yarn schemas src/data/games/**/*.json",
-    "validate:schemas": "run-p validate:schemas:*",
+    "validate": "npm-run-all --silent validate:schemas validate:config validate:games validate:themes validate:tiles -c -p --aggregate-output",
+    "validate:config": "run-s -s \"schemas src/defaults.json\"",
+    "validate:games": "run-s -s \"schemas src/data/games/**/*.json\"",
+    "validate:schemas": "run-p -s validate:schemas:*",
     "validate:schemas:config": "ajv compile -s src/schemas/config.schema.json",
     "validate:schemas:fields": "ajv compile -s src/schemas/fields.schema.json",
     "validate:schemas:game": "ajv compile -r src/schemas/tiles.schema.json -s src/schemas/game.schema.json",
     "validate:schemas:theme": "ajv compile -s src/schemas/theme.schema.json",
     "validate:schemas:tile": "ajv compile -s src/schemas/tiles.schema.json",
-    "validate:themes": "yarn schemas src/data/themes/**/*.json",
-    "validate:tiles": "yarn schemas src/data/tiles/*.json"
+    "validate:themes": "run-s -s \"schemas src/data/themes/**/*.json\"",
+    "validate:tiles": "run-s -s \"schemas src/data/tiles/*.json\""
   },
   "browserslist": [
     ">0.2%",
@@ -61,6 +61,11 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "stylelint": {
     "extends": [
       "stylelint-config-standard",
@@ -142,6 +147,8 @@
     "ramda": "^0.30.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@eslint/js": "^9.14.0",
@@ -162,6 +169,7 @@
     "globals": "^15.12.0",
     "i18next": "^23.16.4",
     "i18next-browser-languagedetector": "^8.0.0",
+    "lefthook": "^1.8.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.3.3",
     "react": "18.3.1",

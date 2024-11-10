@@ -1,0 +1,20 @@
+commit-msg:
+  commands:
+    commitlint:
+      run: yarn -s commitlint --edit
+
+pre-commit:
+  parallel: true
+  commands:
+    prettier:
+      glob: "*.{css,scss,js,mjs,cjs,jsx,json,yml,yaml}"
+      run: yarn -s prettier --write {staged_files}
+      stage_fixed: true
+    eslint:
+      glob: "*.{js,mjs,cjs,jsx}"
+      run: yarn -s eslint --fix {staged_files}
+      stage_fixed: true
+    stylelint:
+      glob: "*.{css,scss}"
+      run: yarn -s stylelint --fix {staged_files}
+      stage_fixed: true
