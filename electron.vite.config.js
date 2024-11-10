@@ -1,4 +1,6 @@
 import { defineConfig, externalizeDepsPlugin } from "electron-vite";
+import postcssNesting from "postcss-nesting";
+import postcssPresetEnv from "postcss-preset-env";
 import react from "@vitejs/plugin-react-swc";
 import { svgPlugin } from "vite-plugin-fast-react-svg";
 
@@ -29,6 +31,9 @@ export default defineConfig({
       },
     },
     css: {
+      postcss: {
+        plugins: [postcssNesting(), postcssPresetEnv({ env: "app" })],
+      },
       preprocessorOptions: {
         scss: {
           api: "modern-compiler",
