@@ -7,8 +7,7 @@ pre-commit:
   commands:
     schemas:
       run: make && yarn -s validate:schemas
-      glob: "*.json"
-      files: git diff --name-only main -- public/schemas src/schemas
+      glob: "{public,src}/schemas/*.json"
       stage_fixed: true
       priority: 10
     validate:
