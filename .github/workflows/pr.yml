@@ -23,8 +23,8 @@ jobs:
           - x64
     name: Test - Node v${{ matrix.node_version }} on ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
-        name: Checkout
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Node
         uses: actions/setup-node@v4
         with:
@@ -33,15 +33,18 @@ jobs:
           check-latest: true
           cache: yarn
           cache-dependency-path: yarn.lock
-      - run: yarn
-        name: Dependencies
-      - run: yarn pretty
-        name: Pretty
-      - run: yarn lint
-        name: Lint
-      - run: yarn validate
-        name: Validate
-      - run: yarn test
-        name: Test
-      - run: yarn build
-        name: Build
+      - name: Dependencies
+        run: yarn
+      - name: Commits
+        if: matrix.os == 'ubuntu-latest'
+        uses: wagoid/commitlint-github-action@v6
+      - name: Pretty
+        run: yarn pretty
+      - name: Lint
+        run: yarn lint
+      - name: Validate
+        run: yarn validate
+      - name: Test
+        run: yarn test
+      - name: Build
+        run: yarn build
