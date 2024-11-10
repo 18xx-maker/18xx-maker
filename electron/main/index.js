@@ -12,6 +12,11 @@ import setMenu from "./menu.js";
 
 let mainWindow;
 
+const startUrl =
+  isDev && process.env["ELECTRON_RENDERER_URL"]
+    ? process.env["ELECTRON_RENDERER_URL"]
+    : `file://${path.join(__dirname, "../renderer/index.html")}`;
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     webPreferences: {
@@ -26,11 +31,7 @@ function createWindow() {
 
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
-  if (isDev && process.env["ELECTRON_RENDERER_URL"]) {
-    mainWindow.loadURL(process.env["ELECTRON_RENDERER_URL"]);
-  } else {
-    mainWindow.loadFile(path.join(__dirname, "../renderer/index.html"));
-  }
+  mainWindow.loadURL(startUrl);
 
   setMenu(mainWindow);
 
