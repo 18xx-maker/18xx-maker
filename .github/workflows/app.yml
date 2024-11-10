@@ -37,11 +37,8 @@ jobs:
         name: Dependencies
       - id: create_release
         name: Draft Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ github.ref }}
           release_name: 18xx Maker ${{ github.ref }}
           body: 18xx Maker ${{ github.ref }}
           draft: true

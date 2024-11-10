@@ -10,7 +10,7 @@ const TilePage = () => {
 
   let handler = () => {
     if (isElectron) {
-      window.electronAPI.screenshot(`/tile/${id}`);
+      window.api.screenshot(`/tile/${id}`);
     }
   };
 

@@ -83,14 +83,14 @@ body {
       let progress = (progress, message) => sendProgress(progress, message);
       let redirect = (path) => navigate(path);
 
-      window.electronAPI.onAlert(alert);
-      window.electronAPI.onProgress(progress);
-      window.electronAPI.onRedirect(redirect);
+      window.api.onAlert(alert);
+      window.api.onProgress(progress);
+      window.api.onRedirect(redirect);
 
       return () => {
-        window.electronAPI.offAlert(alert);
-        window.electronAPI.offProgress(progress);
-        window.electronAPI.offRedirect(redirect);
+        window.api.offAlert(alert);
+        window.api.offProgress(progress);
+        window.api.offRedirect(redirect);
       };
     }
   });

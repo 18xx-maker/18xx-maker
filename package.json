@@ -10,7 +10,7 @@
   },
   "license": "MIT",
   "private": true,
-  "main": "electron/index.js",
+  "main": "./out/main/index.js",
   "bin": {
     "18xx-schemas": "bin/schemas.cjs"
   },
@@ -18,21 +18,20 @@
     "all": "run-s pretty lint validate test:run",
     "b18": "node --disable-warning=ExperimentalWarning ./bin/b18.js",
     "build": "vite build",
-    "build:electron": "vite build --base=./",
+    "build:app": "electron-vite build",
     "fix": "run-s pretty:fix lint:fix",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "package": "electron-builder build -mwl -p onTagOrDraft",
+    "package:app": "electron-builder build -mwl -p onTagOrDraft",
     "pretty": "yarn prettier -c .",
     "pretty:fix": "yarn prettier --write .",
     "preview": "vite preview",
+    "preview:app": "electron-vite preview",
     "print": "node --disable-warning=ExperimentalWarning ./bin/print.js",
-    "release": "run-s build:electron package",
+    "release": "run-s build:app package:app",
     "schemas": "node ./bin/schemas.cjs",
     "start": "vite",
-    "start:app": "run-p start:electron start:nobrowser",
-    "start:electron": "wait-on http://localhost:3000 && electron .",
-    "start:nobrowser": "cross-env BROWSER=none yarn start",
+    "start:app": "electron-vite dev",
     "svgo": "run-p svgo:icons svgo:logos",
     "svgo:icons": "svgo -f src/data/icons",
     "svgo:logos": "svgo -f src/data/logos",
@@ -59,6 +58,10 @@
   "build": {
     "appId": "com.18xx-maker.app",
     "productName": "18xx Maker",
+    "directories": {
+      "buildResources": "assets"
+    },
+    "afterSign": "electron/notarize.js",
     "mac": {
       "category": "public.app-category.games",
       "icon": "assets/18xx-maker.icns",
@@ -95,16 +98,7 @@
       "publish": [
         "github"
       ]
-    },
-    "files": [
-      "dist/**/*",
-      "electron/**/*"
-    ],
-    "directories": {
-      "buildResources": "assets",
-      "output": "out"
-    },
-    "afterSign": "electron/notarize.js"
+    }
   },
   "dependencies": {
     "ajv": "^8.17.1",
@@ -135,6 +129,7 @@
     "deep-object-diff": "^1.1.9",
     "electron": "^33.2.0",
     "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
     "eslint": "^9.14.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-vitest": "^0.5.4",

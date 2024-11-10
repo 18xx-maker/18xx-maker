@@ -216,22 +216,22 @@ const ExportButton = () => {
   };
 
   const handleAllPdf = () => {
-    window.electronAPI.export_pdf(game.meta.slug, pdfItems(game, config));
+    window.api.export_pdf(game.meta.slug, pdfItems(game, config));
     handleMenuClose();
   };
 
   const handleAllPng = () => {
-    window.electronAPI.export_png(game.meta.slug, pngItems(game, config));
+    window.api.export_png(game.meta.slug, pngItems(game, config));
     handleMenuClose();
   };
 
   const handleSinglePdf = () => {
-    window.electronAPI.pdf(location.pathname + location.search);
+    window.api.pdf(location.pathname + location.search);
     handleMenuClose();
   };
 
   const handleSinglePng = () => {
-    window.electronAPI.screenshot(location.pathname + location.search);
+    window.api.screenshot(location.pathname + location.search);
     handleMenuClose();
   };
 

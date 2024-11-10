@@ -29,7 +29,7 @@ const loadFile = (file) => {
         ? game.players[game.players.length - 1].number
         : 0;
       if (isElectron) {
-        window.electronAPI.watch(file.path, id, slug);
+        window.api.watch(file.path, id, slug);
       }
       return game;
     })
@@ -48,7 +48,7 @@ const loadBundledGame = (id) => {
   }
 
   if (game && isElectron) {
-    window.electronAPI.watch(); // Stop watching any files
+    window.api.watch(); // Stop watching any files
   }
 
   return Promise.resolve(game);
@@ -117,9 +117,9 @@ export const GameProvider = ({ children }) => {
         sendAlert("info", `${game.info.title} updated`);
       };
 
-      window.electronAPI.onWatch(updateGame);
+      window.api.onWatch(updateGame);
 
-      return () => window.electronAPI.offWatch(updateGame);
+      return () => window.api.offWatch(updateGame);
     }
   });
 
