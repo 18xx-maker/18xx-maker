@@ -96,9 +96,6 @@
         "github"
       ]
     },
-    "extraMetadata": {
-      "main": "electron/index.js"
-    },
     "files": [
       "dist/**/*",
       "electron/**/*"
