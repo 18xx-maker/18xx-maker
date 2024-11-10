@@ -28,8 +28,6 @@ jobs:
           security import certificate.p12 -k build.keychain -P $APP_CERTIFICATE_PWD -T /usr/bin/codesign
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $KEYCHAIN_PASSWORD build.keychain
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
           APP_CERTIFICATE: ${{ secrets.APP_CERTIFICATE }}
           APP_CERTIFICATE_PWD: ${{ secrets.APP_CERTIFICATE_PWD }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
@@ -47,7 +45,9 @@ jobs:
         name: Build Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
+          APPLE_ID: ${{ vars.APPLE_ID }}
+          APPLE_TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
       - uses: StuYarrow/publish-release@v1
         name: Publish Release
         env:
