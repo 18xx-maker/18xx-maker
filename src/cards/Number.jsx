@@ -1,6 +1,6 @@
 import Color from "../util/Color";
 
-import "./number.scss";
+import "./number.css";
 
 const Number = ({ number, background }) => {
   return (

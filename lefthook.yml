@@ -25,7 +25,7 @@ pre-commit:
       stage_fixed: true
       priority: 40
     prettier:
-      glob: "*.{css,scss,js,mjs,cjs,jsx,json,yml,yaml}"
+      glob: "*.{css,js,mjs,cjs,jsx,json,yml,yaml}"
       run: yarn prettier --write {staged_files}
       stage_fixed: true
       priority: 20
@@ -35,7 +35,7 @@ pre-commit:
       stage_fixed: true
       priority: 30
     stylelint:
-      glob: "*.{css,scss}"
+      glob: "*.css"
       run: yarn stylelint --fix {staged_files}
       stage_fixed: true
       priority: 30

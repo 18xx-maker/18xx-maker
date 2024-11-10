@@ -19,7 +19,7 @@ import { maxPlayers } from "../util.js";
 
 import { addIndex, chain, clone, map, prop, range, splitEvery } from "ramda";
 
-import "./card.scss";
+import "./card.css";
 
 const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
   const { config } = useContext(ConfigContext);

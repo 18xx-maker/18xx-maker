@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ConfigContext from "../../context/ConfigContext";
 import GameContext from "../../context/GameContext";
 
-import "../../TileSheet.scss";
+import "./Tiles.css";
 
 import { getTile, sortTiles } from "../../util";
 import { getTileSheetContext } from "../../tilesheet/util";

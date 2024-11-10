@@ -115,43 +115,43 @@
     margin: auto;
     display: block;
   }
+}
 
-  &--2T {
-    img {
-      width: 50%;
-    }
+.train__image--2T {
+  img {
+    width: 50%;
   }
+}
 
-  &--3T {
-    img {
-      width: 60%;
-    }
+.train__image--3T {
+  img {
+    width: 60%;
   }
+}
 
-  &--4T {
-    img {
-      padding-top: 7%;
-      width: 64%;
-    }
+.train__image--4T {
+  img {
+    padding-top: 7%;
+    width: 64%;
   }
+}
 
-  &--5T {
-    img {
-      width: 64%;
-    }
+.train__image--5T {
+  img {
+    width: 64%;
   }
+}
 
-  &--6T {
-    img {
-      padding-top: 10%;
-      width: 80%;
-    }
+.train__image--6T {
+  img {
+    padding-top: 10%;
+    width: 80%;
   }
+}
 
-  &--Diesel {
-    img {
-      width: 70%;
-    }
+.train__image--Diesel {
+  img {
+    width: 70%;
   }
 }
 

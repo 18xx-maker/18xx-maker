@@ -14,7 +14,7 @@ import RotateContext from "../../../context/RotateContext";
 
 import { getTile } from "../../../util";
 
-import "./b18.scss";
+import "./b18.css";
 
 const ROTATIONS = [0, 60, 120, 180, 240, 300];
 

@@ -14,7 +14,7 @@ import { getCardData } from "../../cards/util";
 
 import { assoc, clone, flatten, map } from "ramda";
 
-import "../../cards/card.scss";
+import "../../cards/card.css";
 
 const Cards = () => {
   const { config } = useContext(ConfigContext);
