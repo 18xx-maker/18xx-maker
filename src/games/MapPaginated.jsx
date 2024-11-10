@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getMapData } from "../map/util";
 
 import Paginate from "../util/Paginate";
-import "../map/MapPaginated.css";
+import "./MapPaginated.css";
 
 const MapPaginated = ({ game, config, variation }) => {
   const navigate = useNavigate();
