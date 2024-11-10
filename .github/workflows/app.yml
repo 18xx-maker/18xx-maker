@@ -37,8 +37,8 @@ jobs:
         name: Draft Release
         uses: ncipollo/release-action@v1
         with:
-          release_name: 18xx Maker ${{ github.ref }}
-          body: 18xx Maker ${{ github.ref }}
+          name: 18xx Maker ${{ github.ref_name }}
+          body: 18xx Maker ${{ github.ref_name }}
           draft: true
           prerelease: true
       - run: yarn release
