@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://18xx-maker.com/schemas/companies.schema.json",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "abbrev": { "type": "string" },
+    "companies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "abbrev": { "type": "string" },
+          "logo": { "type": "string" },
+          "color": { "type": "string" }
+        },
+        "required": ["name", "abbrev", "color"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["name", "abbrev", "companies"],
+  "additionalProperties": false
+}

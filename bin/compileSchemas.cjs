@@ -4,7 +4,7 @@ const { format } = require("prettier");
 const { assocPath, forEach, forEachObjIndexed, keys } = require("ramda");
 
 const fields = require("../src/schemas/fields.schema.json");
-const tilesSrc = require("../src/schemas/tiles.schema.src.json");
+const tilesSrc = require("../src/schemas/tiles.src.json");
 let tiles = { ...tilesSrc };
 
 const elements = {
@@ -44,9 +44,6 @@ forEach((path) => {
 }, keys(elements));
 
 const json = JSON.stringify(tiles);
-format(json, { filepath: "tiles.schema.json" }).then((prettyJson) => {
-  fs.writeFileSync(
-    path.join("src", "schemas", "tiles.schema.json"),
-    prettyJson,
-  );
+format(json, { filepath: "tiles.defs.json" }).then((prettyJson) => {
+  fs.writeFileSync(path.join("src", "schemas", "tiles.defs.json"), prettyJson);
 });

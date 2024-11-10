@@ -1,16 +1,25 @@
 .PHONY: all clean
+.DEFAULT_GOAL: all
+$(V).SILENT:
 
-schemas := config game theme tiles
+schemas := companies config game publishers theme tiles
+defs := tiles
 
-all: $(patsubst %,public/schemas/%.schema.json,$(schemas))
+all: $(patsubst %,public/schemas/%.schema.json,$(schemas)) $(patsubst %,public/schemas/%.defs.json,$(defs))
 
 clean:
 	rm -rf dist
 	rm -rf out
 	rm -rf stats.html
 
-public/schemas/%.json: src/schemas/%.json
+public/schemas/%.defs.json: src/schemas/%.defs.json
+	@echo "Copying $< to $@"
 	cp $< $@
 
-src/schemas/tiles.schema.json: src/schemas/tiles.schema.src.json src/schemas/fields.schema.json
+public/schemas/%.schema.json: src/schemas/%.schema.json
+	@echo "Copying $< to $@"
+	cp $< $@
+
+src/schemas/tiles.defs.json: src/schemas/fields.schema.json src/schemas/tiles.src.json
+	@echo "Compiling $@"
 	node ./bin/compileSchemas.cjs
