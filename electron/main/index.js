@@ -4,7 +4,6 @@ const { autoUpdater } = updater;
 
 import fs from "node:fs";
 import path from "node:path";
-import url from "node:url";
 
 import isDev from "electron-is-dev";
 import chokidar from "chokidar";
@@ -13,25 +12,26 @@ import setMenu from "./menu.js";
 
 let mainWindow;
 
-const startUrl = isDev
-  ? "http://localhost:3000"
-  : url.format({
-      pathname: path.join(import.meta.dirname, "..", "dist", "index.html"),
-      protocol: "file:",
-      slashes: true,
-    });
+const startUrl =
+  isDev && process.env["ELECTRON_RENDERER_URL"]
+    ? process.env["ELECTRON_RENDERER_URL"]
+    : `file://${path.join(__dirname, "../renderer/index.html")}`;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
     webPreferences: {
-      preload: path.join(import.meta.dirname, "preload.js"),
+      preload: path.join(import.meta.dirname, "../preload/preload.mjs"),
+      sandbox: false,
     },
   });
-  mainWindow.loadURL(startUrl);
   mainWindow.on("closed", function () {
     mainWindow = null;
   });
   mainWindow.webContents.setWindowOpenHandler(() => ({ action: "allow" }));
+
+  // HMR for renderer base on electron-vite cli.
+  // Load the remote URL for development or the local html file for production.
+  mainWindow.loadURL(startUrl);
 
   setMenu(mainWindow);
 

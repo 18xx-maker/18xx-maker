@@ -26,10 +26,10 @@ const manualChunks = (id) => {
 };
 
 export default defineConfig({
-  // depending on your application, base can also be "/"
   base: "/",
   build: {
     target: browserslistToEsbuild(),
+    reportCompressedSize: false,
     rollupOptions: {
       onwarn: () => {},
       output: {
