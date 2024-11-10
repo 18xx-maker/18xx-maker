@@ -59,7 +59,8 @@
     "appId": "com.18xx-maker.app",
     "productName": "18xx Maker",
     "directories": {
-      "buildResources": "assets"
+      "buildResources": "assets",
+      "output": "out/app"
     },
     "afterSign": "electron/notarize.js",
     "mac": {
