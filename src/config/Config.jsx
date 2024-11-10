@@ -477,18 +477,6 @@ const Config = () => {
       <Divider />
 
       <Box className={classes.configSection}>
-        <Typography variant="h5">IPO</Typography>
-        <Input
-          name="ipo.borderRadius"
-          label="IPO Border Radius"
-          dimension={true}
-          description="How much to round the corners, zero will disable rounded corners on the IPO cards"
-        />
-      </Box>
-
-      <Divider />
-
-      <Box className={classes.configSection}>
         <Typography variant="h5">Currency</Typography>
         <Typography variant="body1">
           This lets you turn on currency symbols for each item individually.
