@@ -6,6 +6,13 @@ commit-msg:
 pre-commit:
   parallel: true
   commands:
+    schemas:
+      run: make all
+      stage_fixed: true
+    svgo:
+      glob: "*.svg"
+      run: yarn -s svgo -f {staged_files}
+      stage_fixed: true
     prettier:
       glob: "*.{css,scss,js,mjs,cjs,jsx,json,yml,yaml}"
       run: yarn -s prettier --write {staged_files}
