@@ -20,8 +20,14 @@
     "build": "vite build",
     "build:app": "electron-vite build",
     "fix": "run-s pretty:fix lint:fix",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "lint": "run-s lint:js lint:css lint:scss",
+    "lint:fix": "run-s lint:js:fix lint:css:fix lint:scss:fix",
+    "lint:js": "eslint .",
+    "lint:js:fix": "eslint --fix .",
+    "lint:css": "stylelint '**/*.css'",
+    "lint:css:fix": "stylelint '**/*.css' --fix",
+    "lint:scss": "stylelint '**/*.scss'",
+    "lint:scss:fix": "stylelint '**/*.scss' --fix",
     "package:app": "electron-builder build -mwl -p onTagOrDraft",
     "pretty": "yarn prettier -c .",
     "pretty:fix": "yarn prettier --write .",
@@ -55,6 +61,25 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-standard-scss"
+    ],
+    "ignoreFiles": [
+      "node_modules/**/*",
+      "out/**/*",
+      "dist/**/*",
+      "public/**/*",
+      "src/fonts.css"
+    ],
+    "rules": {
+      "font-family-no-missing-generic-family-keyword": null,
+      "no-descending-specificity": null,
+      "number-max-precision": null,
+      "selector-class-pattern": null
+    }
+  },
   "build": {
     "appId": "com.18xx-maker.app",
     "productName": "18xx Maker",
@@ -147,6 +172,9 @@
     "react-router-dom": "^6.28.0",
     "rollup-plugin-visualizer": "^5.12.0",
     "sass-embedded": "^1.80.6",
+    "stylelint": "^16.10.0",
+    "stylelint-config-standard": "^36.0.1",
+    "stylelint-config-standard-scss": "^13.1.0",
     "svgo": "^3.3.2",
     "tinycolor2": "^1.6.0",
     "vite": "^5.4.10",
