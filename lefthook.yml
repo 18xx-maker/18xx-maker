@@ -4,26 +4,42 @@ commit-msg:
       run: yarn -s commitlint --edit {1}
 
 pre-commit:
-  parallel: true
   commands:
-    test:
-      run: yarn -s test:run
     schemas:
-      run: make all
+      run: make && yarn -s validate:schemas
+      glob: "{public,src}/schemas/*.json"
       stage_fixed: true
+      priority: 10
+    validate:
+      glob: "*.json"
+      exclude:
+        - "package.json"
+        - "public/*"
+        - "src/locales/*"
+        - "src/schemas/*"
+      run: node ./bin/schemas.cjs {staged_files}
+      priority: 40
     svgo:
       glob: "*.svg"
       run: yarn -s svgo -f {staged_files}
       stage_fixed: true
+      priority: 40
     prettier:
       glob: "*.{css,scss,js,mjs,cjs,jsx,json,yml,yaml}"
       run: yarn -s prettier --write {staged_files}
       stage_fixed: true
+      priority: 20
     eslint:
       glob: "*.{js,mjs,cjs,jsx}"
       run: yarn -s eslint --fix {staged_files}
       stage_fixed: true
+      priority: 30
     stylelint:
       glob: "*.{css,scss}"
       run: yarn -s stylelint --fix {staged_files}
       stage_fixed: true
+      priority: 30
+    test:
+      glob: "*.{js,mjs,cjs,jsx,json}"
+      run: yarn -s vitest related --run {staged_files}
+      priority: 50
