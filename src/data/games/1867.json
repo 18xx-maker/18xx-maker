@@ -17,7 +17,6 @@
     "purchase": "https://www.grandtrunkgames.com/"
   },
   "tokens": ["Round"],
-  "ipo": false,
   "bank": 15000,
   "players": [
     {

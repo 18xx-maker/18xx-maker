@@ -268,12 +268,6 @@
         }
       }
     },
-    "ipo": {
-      "oneOf": [
-        { "type": "boolean" },
-        { "type": "array", "items": { "type": "string" } }
-      ]
-    },
     "map": {
       "oneOf": [
         { "$ref": "#/definitions/map" },

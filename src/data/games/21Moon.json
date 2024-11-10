@@ -40,7 +40,6 @@
     "train_brown": "#811a00",
     "train_gray": "#808080"
   },
-  "ipo": false,
   "bank": 12000,
   "tokens": [
     "Round",

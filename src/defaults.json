@@ -42,9 +42,6 @@
   "straightCityNames": false,
   "theme": "gmt",
   "companiesTheme": "rob",
-  "ipo": {
-    "borderRadius": 11.811
-  },
   "export": {
     "allLayouts": false
   },

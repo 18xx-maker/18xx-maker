@@ -43,11 +43,6 @@ export default defineConfig({
     postcss: {
       plugins: [postcssNesting(), postcssPresetEnv({ env: "production" })],
     },
-    preprocessorOptions: {
-      scss: {
-        api: "modern-compiler",
-      },
-    },
   },
   plugins: [react(), svgPlugin(), visualizer()],
   assetsInclude: ["**/*.md"],

@@ -6,7 +6,7 @@ import Currency from "../util/Currency";
 
 import { find, is, map, defaultTo } from "ramda";
 
-import "./train.scss";
+import "./train.css";
 
 const trainImages = import.meta.glob("../images/trains/*.png", {
   eager: true,

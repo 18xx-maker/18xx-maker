@@ -22,7 +22,6 @@
     "PGER_green": "#1d4922"
   },
   "tokens": ["Round", "Phase", "+30", "KVR"],
-  "ipo": false,
   "players": [
     {
       "number": 2,

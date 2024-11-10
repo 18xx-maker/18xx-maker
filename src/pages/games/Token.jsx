@@ -14,7 +14,7 @@ import { addIndex, concat, is, map, max, compose, reject, propEq } from "ramda";
 
 import ColorContext from "../../context/ColorContext";
 
-import "./b18/b18.scss";
+import "./b18/b18.css";
 
 const TokenSingle = () => {
   const { config } = useContext(ConfigContext);

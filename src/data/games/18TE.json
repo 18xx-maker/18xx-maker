@@ -18,7 +18,6 @@
     "rules": "https://www.boardgamegeek.com/filepage/191151/rules"
   },
   "tokens": ["Round"],
-  "ipo": true,
   "bank": 4000,
   "rounds": [
     {

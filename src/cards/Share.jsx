@@ -10,7 +10,7 @@ import Currency from "../util/Currency";
 
 import { min } from "ramda";
 
-import "./share.scss";
+import "./share.css";
 
 const LeftShare = ({
   cost,

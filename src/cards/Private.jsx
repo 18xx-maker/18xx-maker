@@ -19,7 +19,7 @@ import { intersperse, is, map, defaultTo, max, min, reduce } from "ramda";
 
 import { getMapHex } from "../map/util";
 
-import "./private.scss";
+import "./private.css";
 
 const Private = (props) => {
   let {

@@ -13,7 +13,7 @@ import { addIndex, is, map, compose, reject, propEq } from "ramda";
 
 import ColorContext from "../../../context/ColorContext";
 
-import "./b18.scss";
+import "./b18.css";
 
 const Tokens = () => {
   const { config } = useContext(ConfigContext);

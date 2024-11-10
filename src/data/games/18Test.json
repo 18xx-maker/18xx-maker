@@ -33,7 +33,6 @@
     { "icon": "river" },
     { "icon": "mountain" }
   ],
-  "ipo": true,
   "bank": 12345,
   "players": [
     {

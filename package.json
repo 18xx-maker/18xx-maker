@@ -18,14 +18,12 @@
     "build": "vite build",
     "build:app": "electron-vite build",
     "fix": "run-s pretty:fix lint:fix",
-    "lint": "run-s lint:js lint:css lint:scss",
-    "lint:fix": "run-s lint:js:fix lint:css:fix lint:scss:fix",
+    "lint": "run-s lint:js lint:css",
+    "lint:fix": "run-s lint:js:fix lint:css:fix",
     "lint:js": "eslint .",
     "lint:js:fix": "eslint --fix .",
     "lint:css": "stylelint \"**/*.css\"",
     "lint:css:fix": "stylelint \"**/*.css\" --fix",
-    "lint:scss": "stylelint \"**/*.scss\"",
-    "lint:scss:fix": "stylelint \"**/*.scss\" --fix",
     "package:app": "electron-builder build -mwl -p onTagOrDraft",
     "pretty": "prettier -c .",
     "pretty:fix": "prettier --write .",
@@ -65,8 +63,7 @@
   },
   "stylelint": {
     "extends": [
-      "stylelint-config-standard",
-      "stylelint-config-standard-scss"
+      "stylelint-config-standard"
     ],
     "ignoreFiles": [
       "node_modules/**/*",
@@ -191,10 +188,8 @@
     "react-router": "^6.28.0",
     "react-router-dom": "^6.28.0",
     "rollup-plugin-visualizer": "^5.12.0",
-    "sass-embedded": "^1.80.6",
     "stylelint": "^16.10.0",
     "stylelint-config-standard": "^36.0.1",
-    "stylelint-config-standard-scss": "^13.1.0",
     "svgo": "^3.3.2",
     "tinycolor2": "^1.6.0",
     "vite": "^5.4.10",
