@@ -15,6 +15,7 @@
     "18xx-schemas": "bin/schemas.cjs"
   },
   "scripts": {
+    "all": "run-s pretty lint validate test:run",
     "b18": "node --disable-warning=ExperimentalWarning ./bin/b18.js",
     "build": "vite build",
     "build:electron": "vite build --base=./",
@@ -36,6 +37,7 @@
     "svgo:icons": "svgo -f src/data/icons",
     "svgo:logos": "svgo -f src/data/logos",
     "test": "vitest",
+    "test:run": "vitest run",
     "validate": "npm-run-all validate:schemas validate:config validate:games validate:themes validate:tiles -c -p --aggregate-output",
     "validate:config": "yarn schemas src/defaults.json",
     "validate:games": "yarn schemas src/data/games/**/*.json",

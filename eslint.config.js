@@ -5,7 +5,7 @@ import vitest from "eslint-plugin-vitest";
 
 export default [
   { files: ["**/*.{js,mjs,cjs,jsx}"] },
-  { ignores: ["dist/", "public/"] },
+  { ignores: ["dist/", "out/", "public/"] },
   { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
   js.configs.recommended,
   {
