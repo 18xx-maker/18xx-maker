@@ -1,4 +1,4 @@
-import { execSync } from "node:child-process";
+import { execSync } from "node:child_process";
 
 async function notarizing(context) {
   const { electronPlatformName, appOutDir } = context;
@@ -19,20 +19,20 @@ async function notarizing(context) {
   const teamId = "4A6F4V2PM5";
 
   console.log(
-    execSync(`ditto -c -k --keepParent ${appPath} ${zipPath}`, {
+    execSync(`ditto -c -k --keepParent "${appPath}" "${zipPath}"`, {
       encoding: "utf8",
     }),
   );
 
   console.log(
     execSync(
-      `xcrun notarytool submit ${zipPath} --team-id "${teamId}" --apple-id "${appleId}" --password "${appleIdPassword}" --wait`,
+      `xcrun notarytool submit "${zipPath}" --team-id "${teamId}" --apple-id "${appleId}" --password "${appleIdPassword}" --wait`,
       { encoding: "utf8" },
     ),
   );
 
   console.log(
-    execSync(`xcrun stapler staple ${appPath}`, { encoding: "utf8" }),
+    execSync(`xcrun stapler staple "${appPath}"`, { encoding: "utf8" }),
   );
 }
 
