@@ -6,6 +6,8 @@ commit-msg:
 pre-commit:
   parallel: true
   commands:
+    test:
+      run: yarn -s test:run
     schemas:
       run: make all
       stage_fixed: true
