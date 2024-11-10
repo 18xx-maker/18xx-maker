@@ -1,0 +1,22 @@
+{
+  "short_name": "18xx Maker",
+  "name": "18xx Maker",
+  "description": "18xx Game Prototyper",
+  "categories": ["entertainment", "games"],
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "256x256 128x128 64x64 32x32 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#5e35b1",
+  "background_color": "#ffffff"
+}
