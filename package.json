@@ -63,6 +63,7 @@
       "gatekeeperAssess": false,
       "entitlements": "assets/entitlements.mac.plist",
       "entitlementsInherit": "assets/entitlements.mac.plist",
+      "notarize": false,
       "publish": [
         "github"
       ]
@@ -97,8 +98,7 @@
     },
     "files": [
       "dist/**/*",
-      "electron/**/*",
-      "node_modules/**/*"
+      "electron/**/*"
     ],
     "directories": {
       "buildResources": "assets",
