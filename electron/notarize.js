@@ -1,39 +1,51 @@
 import { execSync } from "node:child_process";
 
-async function notarizing(context) {
+const run = (command) => {
+  try {
+    execSync(command, {
+      stdio: "pipe",
+      encoding: "utf8",
+    });
+  } catch (err) {
+    if (err.code) {
+      // Error spawning the process at all
+      throw err;
+    } else {
+      // Child process ran fine but exited with a non-zero exit code
+      const { stdout, stderr } = err;
+      console.error({ stdout, stderr });
+    }
+  }
+};
+
+const notarizing = async (context) => {
   const { electronPlatformName, appOutDir } = context;
 
   if (electronPlatformName !== "darwin") {
     return;
   }
 
-  if (!process.env.APPLEIDPASS) {
-    return;
-  }
-
   const appName = context.packager.appInfo.productFilename;
   const appPath = `${appOutDir}/${appName}.app`;
   const zipPath = `${appOutDir}/${appName}.zip`;
-  const appleId = "kelsin@valefor.com";
-  const appleIdPassword = process.env.APPLEIDPASS;
-  const teamId = "4A6F4V2PM5";
+  const appleId = process.env.APPLE_ID;
+  const appleTeamId = process.env.APPLE_TEAM_ID;
+  const applePassword = process.env.APPLE_APP_SPECIFIC_PASSWORD;
 
-  console.log(
-    execSync(`ditto -c -k --keepParent "${appPath}" "${zipPath}"`, {
-      encoding: "utf8",
-    }),
+  if (!appleId || !appleTeamId || !applePassword) {
+    return;
+  }
+
+  console.log(`Creating ${zipPath} from ${appPath}`);
+  run(`ditto -c -k --keepParent "${appPath}" "${zipPath}"`);
+
+  console.log(`Submitting ${zipPath} for notarizing`);
+  run(
+    `xcrun notarytool submit "${zipPath}" --team-id "${appleTeamId}" --apple-id "${appleId}" --password "${applePassword}" --wait`,
   );
 
-  console.log(
-    execSync(
-      `xcrun notarytool submit "${zipPath}" --team-id "${teamId}" --apple-id "${appleId}" --password "${appleIdPassword}" --wait`,
-      { encoding: "utf8" },
-    ),
-  );
-
-  console.log(
-    execSync(`xcrun stapler staple "${appPath}"`, { encoding: "utf8" }),
-  );
-}
+  console.log(`Stapling ticket to ${appPath}`);
+  run(`xcrun stapler staple "${appPath}"`);
+};
 
 export default notarizing;
