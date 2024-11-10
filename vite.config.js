@@ -17,19 +17,7 @@ const manualChunks = (id) => {
 
   // Group all logos by their group
   if (id.includes("src/data/logos")) {
-    let match = id.match(/src\/data\/logos\/(.*)\.svg/);
-    if (match) {
-      return `logo-${match[1].replace("/", "-")}`;
-    }
     return "logos";
-  }
-
-  if (id.includes("src/data/games")) {
-    let match = id.match(/src\/data\/games\/(.*)\.json/);
-    if (match) {
-      return `game-${match[1]}`;
-    }
-    return "games";
   }
 
   if (id.includes("src/data")) {

@@ -1,9 +1,7 @@
 import { useContext } from "react";
 import ConfigContext from "../context/ConfigContext";
 
-import curry from "ramda/src/curry";
-import map from "ramda/src/map";
-import range from "ramda/src/range";
+import { curry, map, range } from "ramda";
 
 import { getTileSheetContext } from "./util";
 

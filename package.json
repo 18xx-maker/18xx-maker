@@ -4,6 +4,7 @@
   "author": "Christopher Giroir <kelsin@valefor.com>",
   "description": "18xx Prototyper",
   "type": "module",
+  "homepage": "https://www.18xx-maker.com",
   "repository": {
     "url": "git@github.com:18xx-maker/18xx-maker.git"
   },

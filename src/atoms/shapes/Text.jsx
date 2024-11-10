@@ -3,7 +3,7 @@ import RotateContext from "../../context/RotateContext";
 
 import { getFontProps } from "../../util";
 
-import defaultTo from "ramda/src/defaultTo";
+import { defaultTo } from "ramda";
 
 const Text = (props) => {
   let { text, fontFamily, color, rotation, fixed } = props;

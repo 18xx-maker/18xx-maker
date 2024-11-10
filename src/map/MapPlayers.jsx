@@ -5,8 +5,7 @@ import GameContext from "../context/GameContext";
 import Color from "../util/Color";
 import Currency from "../util/Currency";
 
-import addIndex from "ramda/src/addIndex";
-import map from "ramda/src/map";
+import { addIndex, map } from "ramda";
 
 import certLimit from "../images/icons/certificate.svg";
 import bank from "../images/icons/university.svg";

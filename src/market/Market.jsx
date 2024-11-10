@@ -10,11 +10,7 @@ import Legend from "../Legend";
 import { getParData } from "./util";
 import { multiDefaultTo } from "../util";
 
-import addIndex from "ramda/src/addIndex";
-import chain from "ramda/src/chain";
-import concat from "ramda/src/concat";
-import map from "ramda/src/map";
-import reverse from "ramda/src/reverse";
+import { addIndex, chain, concat, map, reverse } from "ramda";
 
 const Market = ({ data, game, config, title, displayTitle }) => {
   let cells = [];

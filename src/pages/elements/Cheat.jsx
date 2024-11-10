@@ -13,12 +13,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 
-import intersperse from "ramda/src/intersperse";
-import keys from "ramda/src/keys";
-import map from "ramda/src/map";
-import max from "ramda/src/max";
-import prop from "ramda/src/prop";
-import reduce from "ramda/src/reduce";
+import { intersperse, keys, map, max, prop, reduce } from "ramda";
 
 const Value = ({ game, field }) => {
   if (game[field]) {

@@ -2,9 +2,7 @@ import { createContext, useContext } from "react";
 import GameContext from "./GameContext";
 import { useLocation } from "react-router-dom";
 
-import assocPath from "ramda/src/assocPath";
-import defaultTo from "ramda/src/defaultTo";
-import mergeDeepRight from "ramda/src/mergeDeepRight";
+import { assocPath, defaultTo, mergeDeepRight } from "ramda";
 
 const configs = import.meta.glob("../*.json", {
   eager: true,

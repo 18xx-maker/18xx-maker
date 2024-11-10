@@ -5,8 +5,7 @@ import { useTranslation } from "react-i18next";
 import Svg from "../../Svg";
 import Hex from "../../Hex";
 
-import addIndex from "ramda/src/addIndex";
-import chain from "ramda/src/chain";
+import { addIndex, chain } from "ramda";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";

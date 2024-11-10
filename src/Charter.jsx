@@ -9,9 +9,7 @@ import Color from "./util/Color";
 import { unitsToCss, multiDefaultTo } from "./util";
 import Currency from "./util/Currency";
 
-import addIndex from "ramda/src/addIndex";
-import chain from "ramda/src/chain";
-import map from "ramda/src/map";
+import { addIndex, chain, map } from "ramda";
 
 const Charter = ({
   name,

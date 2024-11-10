@@ -1,5 +1,4 @@
-import addIndex from "ramda/src/addIndex";
-import map from "ramda/src/map";
+import { addIndex, map } from "ramda";
 
 import Color from "../util/Color";
 

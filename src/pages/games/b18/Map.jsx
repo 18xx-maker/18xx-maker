@@ -9,9 +9,7 @@ import Svg from "../../../Svg";
 
 import { getMapData } from "../../../map/util";
 
-import assocPath from "ramda/src/assocPath";
-import is from "ramda/src/is";
-import isNil from "ramda/src/isNil";
+import { assocPath, is, isNil } from "ramda";
 
 const B18Map = () => {
   const { config } = useContext(ConfigContext);

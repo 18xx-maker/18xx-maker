@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import is from "ramda/src/is";
+import { is } from "ramda";
 
 import GameContext from "../context/GameContext";
 import ConfigContext from "../context/ConfigContext";

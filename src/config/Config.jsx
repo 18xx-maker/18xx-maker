@@ -10,15 +10,17 @@ import File from "../util/File";
 import defaultConfig from "../defaults.json";
 import schema from "./../schemas/config.schema.json";
 
-import chain from "ramda/src/chain";
-import compose from "ramda/src/compose";
-import complement from "ramda/src/complement";
-import filter from "ramda/src/filter";
-import isEmpty from "ramda/src/isEmpty";
-import keys from "ramda/src/keys";
-import map from "ramda/src/map";
-import path from "ramda/src/path";
-import split from "ramda/src/split";
+import {
+  chain,
+  compose,
+  complement,
+  filter,
+  isEmpty,
+  keys,
+  map,
+  path,
+  split,
+} from "ramda";
 
 import { mapThemes, companyThemes } from "../data";
 

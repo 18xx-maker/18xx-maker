@@ -6,7 +6,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
-import is from "ramda/src/is";
+import { is } from "ramda";
 import { isElectron } from "../util";
 
 const File = (props) => {

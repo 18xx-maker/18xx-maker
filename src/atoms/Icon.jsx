@@ -1,5 +1,5 @@
 import Color from "../util/Color";
-import defaultTo from "ramda/src/defaultTo";
+import { defaultTo } from "ramda";
 
 import { icons } from "../data";
 

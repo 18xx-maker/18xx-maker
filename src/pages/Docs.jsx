@@ -1,7 +1,7 @@
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import startsWith from "ramda/src/startsWith";
+import { startsWith, isEmpty } from "ramda";
 
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
@@ -9,7 +9,6 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
 import ReactMarkdown from "react-markdown";
-import isEmpty from "ramda/src/isEmpty";
 
 import { isElectron } from "../util";
 

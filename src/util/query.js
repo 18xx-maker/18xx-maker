@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import equals from "ramda/src/equals";
-import map from "ramda/src/map";
-import split from "ramda/src/split";
+import { equals, map, split } from "ramda";
 
 export const useRangeParam = (key, initial) => {
   const navigate = useNavigate();

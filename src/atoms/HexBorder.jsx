@@ -1,8 +1,7 @@
 import { useOrientation } from "../context/OrientationContext";
 import Color from "../util/Color";
 
-import chain from "ramda/src/chain";
-import includes from "ramda/src/includes";
+import { chain, includes } from "ramda";
 
 const LINES = [
   "-86.6025 0",

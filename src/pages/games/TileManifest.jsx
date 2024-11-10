@@ -11,11 +11,7 @@ import { getTile } from "../../util";
 
 import ColorContext from "../../context/ColorContext";
 
-import addIndex from "ramda/src/addIndex";
-import ascend from "ramda/src/ascend";
-import keys from "ramda/src/keys";
-import map from "ramda/src/map";
-import sortWith from "ramda/src/sortWith";
+import { addIndex, ascend, keys, map, sortWith } from "ramda";
 
 import "../../TileManifest.css";
 

@@ -4,11 +4,7 @@ import Currency from "../util/Currency";
 
 import { compileCompanies, overrideCompanies } from "../util/companies";
 
-import addIndex from "ramda/src/addIndex";
-import findIndex from "ramda/src/findIndex";
-import is from "ramda/src/is";
-import map from "ramda/src/map";
-import propEq from "ramda/src/propEq";
+import { addIndex, findIndex, is, map, propEq } from "ramda";
 
 import Position from "../Position";
 import ColorContext from "../context/ColorContext";

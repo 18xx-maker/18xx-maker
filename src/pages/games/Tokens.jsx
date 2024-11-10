@@ -11,11 +11,7 @@ import ColorContext from "../../context/ColorContext";
 import { unitsToCss } from "../../util";
 import { compileCompanies, overrideCompanies } from "../../util/companies";
 
-import addIndex from "ramda/src/addIndex";
-import chain from "ramda/src/chain";
-import is from "ramda/src/is";
-import map from "ramda/src/map";
-import splitEvery from "ramda/src/splitEvery";
+import { addIndex, chain, is, map, splitEvery } from "ramda";
 
 import PageSetup from "../../PageSetup";
 import Svg from "../../Svg";

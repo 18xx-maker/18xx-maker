@@ -1,4 +1,4 @@
-import defaultTo from "ramda/src/defaultTo";
+import { defaultTo } from "ramda";
 
 import Color from "../util/Color";
 import Name from "./Name";

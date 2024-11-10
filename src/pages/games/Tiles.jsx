@@ -22,25 +22,27 @@ import ColorContext from "../../context/ColorContext";
 import Cutlines from "../../tilesheet/Cutlines";
 import Pins from "../../tilesheet/Pins";
 
-import addIndex from "ramda/src/addIndex";
-import append from "ramda/src/append";
-import clone from "ramda/src/clone";
-import compose from "ramda/src/compose";
-import concat from "ramda/src/concat";
-import drop from "ramda/src/drop";
-import filter from "ramda/src/filter";
-import groupBy from "ramda/src/groupBy";
-import includes from "ramda/src/includes";
-import is from "ramda/src/is";
-import keys from "ramda/src/keys";
-import map from "ramda/src/map";
-import pipe from "ramda/src/pipe";
-import prop from "ramda/src/prop";
-import defaultTo from "ramda/src/defaultTo";
-import reduce from "ramda/src/reduce";
-import repeat from "ramda/src/repeat";
-import take from "ramda/src/take";
-import unnest from "ramda/src/unnest";
+import {
+  addIndex,
+  append,
+  clone,
+  compose,
+  concat,
+  drop,
+  filter,
+  groupBy,
+  includes,
+  is,
+  keys,
+  map,
+  pipe,
+  prop,
+  defaultTo,
+  reduce,
+  repeat,
+  take,
+  unnest,
+} from "ramda";
 
 const gatherIds = (tiles) => {
   return compose(

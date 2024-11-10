@@ -6,7 +6,7 @@ import Color from "../../util/Color";
 
 import { getFontProps, multiDefaultTo } from "../../util";
 
-import defaultTo from "ramda/src/defaultTo";
+import { defaultTo } from "ramda";
 
 const Triangle = (props) => {
   let {

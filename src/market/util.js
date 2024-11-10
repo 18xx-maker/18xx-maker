@@ -1,6 +1,4 @@
-import length from "ramda/src/length";
-import max from "ramda/src/max";
-import reduce from "ramda/src/reduce";
+import { length, max, reduce } from "ramda";
 
 import { unitsToCss } from "../util.js";
 

@@ -1,8 +1,7 @@
 import { GetFont } from "../context/FontContext";
 import Color from "../util/Color";
 import Currency from "../util/Currency";
-
-import is from "ramda/src/is";
+import { is } from "ramda";
 
 const ParCell = ({ cell, data }) => {
   if (is(String, cell)) {

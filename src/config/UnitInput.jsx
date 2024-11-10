@@ -7,8 +7,7 @@ import MUIInput from "@mui/material/FilledInput";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
-import keys from "ramda/src/keys";
-import map from "ramda/src/map";
+import { keys, map } from "ramda";
 
 import makeStyles from "@mui/styles/makeStyles";
 

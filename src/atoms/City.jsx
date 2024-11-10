@@ -6,7 +6,7 @@ import Color from "../util/Color";
 
 import Name from "./Name";
 
-import is from "ramda/src/is";
+import { is } from "ramda";
 
 import GameMapCompanyToken from "../tokens/GameMapCompanyToken";
 

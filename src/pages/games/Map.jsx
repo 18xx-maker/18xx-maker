@@ -7,8 +7,7 @@ import { MapOrientation } from "../../context/OrientationContext";
 import MapSingle from "../../games/MapSingle";
 import MapPaginated from "../../games/MapPaginated";
 
-import is from "ramda/src/is";
-import isNil from "ramda/src/isNil";
+import { is, isNil } from "ramda";
 
 const Map = () => {
   const { config } = useContext(ConfigContext);

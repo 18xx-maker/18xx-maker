@@ -1,11 +1,6 @@
 import { useContext } from "react";
-import addIndex from "ramda/src/addIndex";
-import any from "ramda/src/any";
-import chain from "ramda/src/chain";
-import has from "ramda/src/has";
-import identity from "ramda/src/identity";
-import includes from "ramda/src/includes";
-import map from "ramda/src/map";
+
+import { addIndex, any, chain, has, identity, includes, map } from "ramda";
 
 import HexContext from "./context/HexContext";
 

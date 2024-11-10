@@ -5,8 +5,7 @@ import Color from "../../util/Color";
 
 import GameContext from "../../context/GameContext";
 
-import flatten from "ramda/src/flatten";
-import times from "ramda/src/times";
+import { flatten, times } from "ramda";
 
 import PageSetup from "../../PageSetup";
 

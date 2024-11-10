@@ -3,11 +3,9 @@ import { useMatch } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
 
 import { useGame } from "../context/GameContext";
-import { useBooleanParam, useIntParam } from "../util/query";
+import { useBooleanParam, useIntParam } from "../util/query.js";
 
-import addIndex from "ramda/src/addIndex";
-import is from "ramda/src/is";
-import map from "ramda/src/map";
+import { addIndex, is, map } from "ramda";
 
 import Checkbox from "@mui/material/Checkbox";
 import Divider from "@mui/material/Divider";

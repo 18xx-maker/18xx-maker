@@ -9,12 +9,7 @@ import ConfigContext from "../../../context/ConfigContext";
 
 import { compileCompanies, overrideCompanies } from "../../../util/companies";
 
-import addIndex from "ramda/src/addIndex";
-import is from "ramda/src/is";
-import map from "ramda/src/map";
-import compose from "ramda/src/compose";
-import reject from "ramda/src/reject";
-import propEq from "ramda/src/propEq";
+import { addIndex, is, map, compose, reject, propEq } from "ramda";
 
 import ColorContext from "../../../context/ColorContext";
 

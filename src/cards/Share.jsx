@@ -8,7 +8,7 @@ import ColorContext from "../context/ColorContext";
 import { multiDefaultTo } from "../util";
 import Currency from "../util/Currency";
 
-import min from "ramda/src/min";
+import { min } from "ramda";
 
 import "./share.scss";
 

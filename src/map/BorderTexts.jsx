@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import GameContext from "../context/GameContext";
 
-import addIndex from "ramda/src/addIndex";
-import map from "ramda/src/map";
+import { addIndex, map } from "ramda";
 
 import { mapCoord } from "./util";
 import { multiDefaultTo } from "../util";

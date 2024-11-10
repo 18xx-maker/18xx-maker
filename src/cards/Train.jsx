@@ -4,10 +4,7 @@ import ConfigContext from "../context/ConfigContext";
 import Color from "../util/Color";
 import Currency from "../util/Currency";
 
-import find from "ramda/src/find";
-import is from "ramda/src/is";
-import map from "ramda/src/map";
-import defaultTo from "ramda/src/defaultTo";
+import { find, is, map, defaultTo } from "ramda";
 
 import "./train.scss";
 

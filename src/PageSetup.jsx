@@ -3,7 +3,7 @@ import ConfigContext from "./context/ConfigContext";
 
 import { unitsToCss } from "./util";
 
-import is from "ramda/src/is";
+import { is } from "ramda";
 
 export const paperToCssSize = (paper, landscape) => {
   let width = unitsToCss(landscape ? paper.height : paper.width);

@@ -20,13 +20,7 @@ import Select from "@mui/material/Select";
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
 
-import filter from "ramda/src/filter";
-import map from "ramda/src/map";
-import max from "ramda/src/max";
-import min from "ramda/src/min";
-import reduce from "ramda/src/reduce";
-import uniq from "ramda/src/uniq";
-import values from "ramda/src/values";
+import { filter, map, max, min, reduce, uniq, values } from "ramda";
 
 import makeStyles from "@mui/styles/makeStyles";
 

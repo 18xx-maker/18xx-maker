@@ -9,9 +9,7 @@ import PageSetup from "./PageSetup";
 import { unitsToCss } from "./util";
 import { compileCompanies } from "./util/companies";
 
-import filter from "ramda/src/filter";
-import is from "ramda/src/is";
-import map from "ramda/src/map";
+import { filter, is, map } from "ramda";
 
 require("./IPO.scss");
 
