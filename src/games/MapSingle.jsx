@@ -1,17 +1,16 @@
 import Map from "../map/Map";
 import Svg from "../Svg";
-import { useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 
 import { getMapData } from "../map/util";
 
 const MapSingle = ({ game, config, variation }) => {
-  const navigate = useNavigate();
   const coords = config.coords;
   const hexWidth = config.tiles.mapWidth;
 
   // Do redirects if we need or do not need a variation in the url
   if (!game.map) {
-    navigate(`/games/${game.meta.slug}/`);
+    redirect(`/games/${game.meta.slug}/`);
   }
 
   // Get map data

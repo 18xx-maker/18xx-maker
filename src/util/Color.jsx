@@ -1,10 +1,8 @@
-import { useContext } from "react";
-import ColorContext from "../context/ColorContext";
-import ConfigContext from "../context/ConfigContext";
-import GameContext from "../context/GameContext";
-import PhaseContext from "../context/PhaseContext";
-
 import tinycolor from "tinycolor2";
+
+import ColorContext from "@/context/ColorContext";
+import PhaseContext from "@/context/PhaseContext";
+import { useConfig, useGame } from "@/hooks";
 
 import { curry, defaultTo, is, mergeDeepRight, prop } from "ramda";
 
@@ -78,8 +76,8 @@ const strokeColor = (color, amount = 20) => {
 };
 
 const Color = ({ context, children }) => {
-  const { config } = useContext(ConfigContext);
-  const { game } = useContext(GameContext);
+  const { config } = useConfig();
+  const game = useGame();
   const { theme, companiesTheme } = config;
 
   return (

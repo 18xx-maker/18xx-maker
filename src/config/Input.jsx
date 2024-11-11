@@ -1,7 +1,8 @@
-import { useContext, useEffect, useState } from "react";
-import ConfigContext from "../context/ConfigContext";
 import ReactMarkdown from "react-markdown";
-import UnitInput from "./UnitInput";
+import { useEffect, useState } from "react";
+
+import UnitInput from "@/config/UnitInput";
+import { useConfig } from "@/hooks";
 
 import { assocPath, map, path, split } from "ramda";
 
@@ -23,11 +24,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-import { getPath, getSchema } from "../util/input";
+import { getPath, getSchema } from "@/util/input";
 
 const Input = ({ name, label, description, dimension }) => {
   const classes = useStyles();
-  const { config, setConfig } = useContext(ConfigContext);
+  const { config, setConfig } = useConfig();
   const value = path(split(".", name), config);
 
   let valuePath = getPath(name);

@@ -1,16 +1,23 @@
 import {
   adjust,
   ascend,
+  assoc,
   chain,
+  complement,
   compose,
   curry,
   defaultTo,
+  equals,
+  filter,
   find,
   fromPairs,
   head,
+  ifElse,
   is,
+  isNil,
   join,
   juxt,
+  length,
   lte,
   map,
   max,
@@ -24,16 +31,26 @@ import {
   sortWith,
   split,
   tail,
+  tap,
   toPairs,
   toUpper,
+  zipObj,
 } from "ramda";
 
-export const maxPlayers = compose(reduce(max, 0), map(prop("number")));
+export const parseSlug = compose(
+  ifElse(
+    compose(equals(1), length),
+    compose(assoc("type", "bundled"), zipObj(["id"])),
+    zipObj(["type", "id"]),
+  ),
+  split(":"),
+);
 
-export const isElectron =
-  typeof navigator === "undefined"
-    ? false
-    : /electron/i.test(navigator.userAgent);
+export const log = tap(console.log.bind(console));
+
+export const compact = filter(complement(isNil));
+
+export const maxPlayers = compose(reduce(max, 0), map(prop("number")));
 
 export const tileColors = [
   "yellow",
@@ -460,51 +477,76 @@ export function multiDefaultTo(defaultArgument, ...inputArguments) {
   return holder === undefined ? defaultArgument : holder;
 }
 
-export const compileCompanies = (game) => {
-  return map(
-    (company) => {
-      if (
-        company.minor &&
-        !company.tokens &&
-        game.tokenTypes &&
-        game.tokenTypes["minor"]
-      ) {
-        company.tokenType = "minor";
-        company.tokens = game.tokenTypes["minor"];
-      } else if (
-        !company.tokens &&
-        game.tokenTypes &&
-        game.tokenTypes["default"]
-      ) {
-        company.tokenType = "default";
-        company.tokens = game.tokenTypes["default"];
-      } else if (is(String, company.tokens)) {
-        company.tokenType = company.tokens;
-        company.tokens = game.tokenTypes[company.tokens];
-      }
-
-      if (
-        company.minor &&
-        !company.shares &&
-        game.shareTypes &&
-        game.shareTypes["minor"]
-      ) {
-        company.shareType = "minor";
-        company.shares = game.shareTypes["minor"];
-      } else if (
-        !company.shares &&
-        game.shareTypes &&
-        game.shareTypes["default"]
-      ) {
-        company.shareType = "default";
-        company.shares = game.shareTypes["default"];
-      } else if (is(String, company.shares)) {
-        company.shareType = company.shares;
-        company.shares = game.shareTypes[company.shares];
-      }
-
+export const compileCompanyTokens = (game, companies) => {
+  return map((company) => {
+    if (
+      company.minor &&
+      !company.tokens &&
+      game.tokenTypes &&
+      game.tokenTypes["minor"]
+    ) {
+      return {
+        ...company,
+        tokenType: "minor",
+        tokens: [...game.tokenTypes["minor"]],
+      };
+    } else if (
+      !company.tokens &&
+      game.tokenTypes &&
+      game.tokenTypes["default"]
+    ) {
+      return {
+        ...company,
+        tokenType: "default",
+        tokens: [...game.tokenTypes["default"]],
+      };
+    } else if (is(String, company.tokens)) {
+      return {
+        ...company,
+        tokenType: company.tokens,
+        tokens: [...game.tokenTypes[company.tokens]],
+      };
+    } else {
       return company;
-    },
-    (game && game.companies) || [],
-  );
+    }
+  }, companies || []);
+};
+
+export const compileCompanyShares = (game, companies) => {
+  return map((company) => {
+    if (
+      company.minor &&
+      !company.shares &&
+      game.shareTypes &&
+      game.shareTypes["minor"]
+    ) {
+      return {
+        ...company,
+        shareType: "minor",
+        shares: [...game.shareTypes["minor"]],
+      };
+    } else if (
+      !company.shares &&
+      game.shareTypes &&
+      game.shareTypes["default"]
+    ) {
+      return {
+        ...company,
+        shareType: "default",
+        shares: [...game.shareTypes["default"]],
+      };
+    } else if (is(String, company.shares)) {
+      return {
+        ...company,
+        shareType: company.shares,
+        shares: [...game.shareTypes[company.shares]],
+      };
+    } else {
+      return company;
+    }
+  }, companies || []);
+};
+
+export const compileCompanies = (game) => {
+  return compileCompanyTokens(game, compileCompanyShares(game, game.companies));
 };

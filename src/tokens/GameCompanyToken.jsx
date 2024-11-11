@@ -1,19 +1,15 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-import GameContext from "../context/GameContext";
-
-import Token from "./Token";
-import CompanyToken from "./CompanyToken";
-
-import { overrideCompanies, compileCompanies } from "../util/companies.js";
-
 import { findIndex, propEq } from "ramda";
+
+import CompanyToken from "@/tokens/CompanyToken";
+import Token from "@/tokens/Token";
+import { overrideCompanies, compileCompanies } from "@/util/companies";
+import { useConfig, useGame } from "@/hooks";
 
 // This component is in charge of loading the proper company data from the
 // current game from an abbrev and then rendering a token
 const GameCompanyToken = (props) => {
-  const { game } = useContext(GameContext);
-  const { config } = useContext(ConfigContext);
+  const game = useGame();
+  const { config } = useConfig();
 
   let { abbrev } = props;
   let passing = { ...props };

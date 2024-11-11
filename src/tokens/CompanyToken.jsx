@@ -1,13 +1,11 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-
-import Token from "./Token";
-import ColorContext from "../context/ColorContext";
+import Token from "@/tokens/Token";
+import ColorContext from "@/context/ColorContext";
+import { useConfig } from "@/hooks";
 
 const CompanyToken = (props) => {
   let { company } = props;
 
-  const { config } = useContext(ConfigContext);
+  const { config } = useConfig();
 
   // Pass down all props that we don't use to look up the company
   let passing = { ...props };

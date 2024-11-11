@@ -1,23 +1,16 @@
-import { useContext } from "react";
-
-import Svg from "../../../Svg";
-import CompanyToken from "../../../tokens/CompanyToken";
-import Token from "../../../tokens/Token";
-
-import GameContext from "../../../context/GameContext";
-import ConfigContext from "../../../context/ConfigContext";
-
-import { compileCompanies, overrideCompanies } from "../../../util/companies";
+import "@/pages/games/b18/b18.css";
+import ColorContext from "@/context/ColorContext";
+import CompanyToken from "@/tokens/CompanyToken";
+import Svg from "@/Svg";
+import Token from "@/tokens/Token";
+import { compileCompanies, overrideCompanies } from "@/util/companies";
+import { useConfig, useGame } from "@/hooks";
 
 import { addIndex, is, map, compose, reject, propEq } from "ramda";
 
-import ColorContext from "../../../context/ColorContext";
-
-import "./b18.css";
-
 const Tokens = () => {
-  const { config } = useContext(ConfigContext);
-  const { game } = useContext(GameContext);
+  const { config } = useConfig();
+  const game = useGame();
 
   let companyTokenNodes = map(
     (company) => (

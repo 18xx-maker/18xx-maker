@@ -1,7 +1,6 @@
-import { useContext } from "react";
 import Color from "../util/Color";
 import { useOrientation } from "../context/OrientationContext";
-import GameContext from "../context/GameContext";
+import { useGame } from "../hooks";
 import { multiDefaultTo } from "../util";
 
 import { defaultTo } from "ramda";
@@ -125,7 +124,7 @@ const Track = ({
   gaugeColor,
 }) => {
   const rotation = useOrientation();
-  const { game } = useContext(GameContext);
+  const game = useGame();
 
   // aliases - uses start/end, but the pairs start/stop and begin/end are more logical
   // leading to hard-to-find mistakes.  This just lets any of 'em work.

@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { useGame } from "./GameContext";
+import { useGame } from "../hooks/game.js";
 
 const OrientationContext = createContext(0);
 
@@ -8,7 +8,7 @@ export const useOrientation = () => {
 };
 
 export const MapOrientation = ({ children }) => {
-  const { game } = useGame();
+  const game = useGame();
 
   const rotation = game && game.info.orientation === "horizontal" ? 0 : 90;
 

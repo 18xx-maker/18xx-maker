@@ -1,14 +1,12 @@
-import { useContext } from "react";
-import { useBooleanParam } from "../../util/query";
-import GameContext from "../../context/GameContext";
-import ConfigContext from "../../context/ConfigContext";
+import { useConfig, useGame } from "@/hooks";
+import { useBooleanParam } from "@/util/query";
 
-import ParSingle from "../../market/ParSingle";
-import ParPaginated from "../../market/ParPaginated";
+import ParSingle from "@/market/ParSingle";
+import ParPaginated from "@/market/ParPaginated";
 
 const Par = () => {
-  const { config } = useContext(ConfigContext);
-  const { game } = useContext(GameContext);
+  const { config } = useConfig();
+  const game = useGame();
 
   const [paginated] = useBooleanParam("paginated");
 

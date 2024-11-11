@@ -2,6 +2,22 @@ import * as util from "./util";
 
 import config from "./defaults.json";
 
+describe("parseSlug", () => {
+  it("should parse a bundled game", () => {
+    expect(util.parseSlug("18xx-1830")).toEqual({
+      id: "18xx-1830",
+      type: "bundled",
+    });
+  });
+
+  it("should parse a system game", () => {
+    expect(util.parseSlug("system:18xx-1830")).toEqual({
+      id: "18xx-1830",
+      type: "system",
+    });
+  });
+});
+
 describe("inchesToCss", () => {
   it("should format a number to css inches", () => {
     expect(util.inchesToCss(5)).toEqual("5in");

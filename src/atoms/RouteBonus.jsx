@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import GameContext from "../context/GameContext";
+import { useGame } from "../hooks";
 import Color from "../util/Color";
 import { multiDefaultTo } from "../util";
 
@@ -12,7 +11,7 @@ const RouteBonus = ({
   strokeWidth,
   textColor,
 }) => {
-  const { game } = useContext(GameContext);
+  const game = useGame();
   fontFamily = multiDefaultTo(
     "sans-serif",
     fontFamily,

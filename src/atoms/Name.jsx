@@ -1,13 +1,12 @@
-import { useContext } from "react";
 import { defaultTo } from "ramda";
 
-import GameContext from "../context/GameContext";
+import { useGame } from "../hooks";
 import Color from "../util/Color";
 
 import { getFontProps, multiDefaultTo } from "../util";
 
 const Name = (props) => {
-  const { game } = useContext(GameContext);
+  const game = useGame();
   let {
     name,
     fontSize,

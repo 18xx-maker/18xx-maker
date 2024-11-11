@@ -1,26 +1,24 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import ConfigContext from "../../context/ConfigContext";
-import GameContext from "../../context/GameContext";
+import { useConfig, useGame } from "@/hooks";
 
-import "./Tiles.css";
+import "@/pages/games/Tiles.css";
 
-import { getTile, sortTiles } from "../../util";
-import { getTileSheetContext } from "../../tilesheet/util";
+import { getTile, sortTiles } from "@/util";
+import { getTileSheetContext } from "@/tilesheet/util";
 
-import { tiles as tileDefs } from "../../data";
-import { sidesFromTile } from "../../util/track";
+import { tiles as tileDefs } from "@/data";
+import { sidesFromTile } from "@/util/track";
 
-import Svg from "../../Svg";
-import Page from "../../util/Page";
-import PageSetup from "../../PageSetup";
-import Hex from "../../Hex";
+import Svg from "@/Svg";
+import Page from "@/util/Page";
+import PageSetup from "@/PageSetup";
+import Hex from "@/Hex";
 
-import ColorContext from "../../context/ColorContext";
+import ColorContext from "@/context/ColorContext";
 
-import Cutlines from "../../tilesheet/Cutlines";
-import Pins from "../../Pins";
+import Cutlines from "@/tilesheet/Cutlines";
+import Pins from "@/Pins";
 
 import {
   addIndex,
@@ -117,8 +115,8 @@ const pageTiles = (perPage, pages, tiles) => {
 
 const TileSheet = () => {
   const navigate = useNavigate();
-  const { config } = useContext(ConfigContext);
-  const { game } = useContext(GameContext);
+  const { config } = useConfig();
+  const game = useGame();
   const paper = config.paper;
   const { layout, width: hexWidth, gaps } = config.tiles;
 

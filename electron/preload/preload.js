@@ -1,37 +1,55 @@
 const { contextBridge, ipcRenderer } = require("electron/renderer");
 const { webUtils } = require("electron");
 
-ipcRenderer.setMaxListeners(25);
+ipcRenderer.setMaxListeners(50);
 
 const api = {
+  // PDF/PNG Exporting
+  exportPDF: (game, items) => ipcRenderer.send("exportPDF", game, items),
+  exportPNG: (game, items) => ipcRenderer.send("exportPNG", game, items),
   pdf: (path) => ipcRenderer.send("pdf", path),
-  export_pdf: (game, items) => ipcRenderer.send("export-pdf", game, items),
-  export_png: (game, items) => ipcRenderer.send("export-png", game, items),
-  screenshot: (path) => ipcRenderer.send("screenshot", path),
-  watch: (file, id, slug) =>
-    ipcRenderer.send(
-      "watch",
-      file ? webUtils.getPathForFile(file) : undefined,
-      id,
-      slug,
-    ),
+  png: (path) => ipcRenderer.send("png", path),
 
+  saveGamePath: (file) =>
+    ipcRenderer
+      .invoke("saveGamePath", webUtils.getPathForFile(file))
+      .catch((e) => {
+        console.error(e);
+        throw new Error("File was not a valid 18xx-maker game");
+      }),
+  loadGame: (id) =>
+    ipcRenderer.invoke("loadGame", id).catch((e) => {
+      console.error(e);
+      throw new Error(
+        `Electron game ${id} not found or was not a valid 18xx-maker game`,
+      );
+    }),
+  loadSummaries: () => ipcRenderer.invoke("loadSummaries"),
+  openGame: () =>
+    ipcRenderer.invoke("openGame").catch((e) => {
+      console.error(e);
+      throw new Error("File was not a valid 18xx-maker game");
+    }),
+
+  addRecent: (title, slug) => ipcRenderer.send("addRecent", title, slug),
+  deleteGame: (id) => ipcRenderer.send("deleteGame", id),
+
+  // Alerts and Redirects
   onAlert: (callback) =>
-    ipcRenderer.on("alert", (_event, type, message) => callback(type, message)),
+    ipcRenderer.on("alert", (_event, title, message, type) =>
+      callback(title, message, type),
+    ),
   onProgress: (callback) =>
-    ipcRenderer.on("progress", (_event, progress, message) =>
-      callback(progress, message),
+    ipcRenderer.on("progress", (_event, title, message, progress) =>
+      callback(title, message, progress),
     ),
   onRedirect: (callback) =>
     ipcRenderer.on("redirect", (_event, path) => callback(path)),
 
-  offAlert: (callback) => ipcRenderer.removeListener("alert", callback),
-  offProgress: (callback) => ipcRenderer.removeListener("progress", callback),
-  offRedirect: (callback) => ipcRenderer.removeListener("redirect", callback),
+  onGame: (callback) =>
+    ipcRenderer.on("game", (_event, game) => callback(game)),
 
-  onWatch: (callback) =>
-    ipcRenderer.on("watch", (_event, game) => callback(game)),
-  offWatch: (callback) => ipcRenderer.removeListener("watch", callback),
+  off: () => ipcRenderer.removeAllListeners(),
 };
 
 // Use `contextBridge` APIs to expose Electron APIs to

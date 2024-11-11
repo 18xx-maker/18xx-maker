@@ -1,12 +1,10 @@
-import { useContext } from "react";
-import GameContext from "./context/GameContext";
-import ConfigContext from "./context/ConfigContext";
+import { useConfig, useGame } from "@/hooks";
 
 import RoundTracker, { getRoundTrackerData } from "./RoundTracker";
 
 const Rounds = () => {
-  const { game } = useContext(GameContext);
-  const { config } = useContext(ConfigContext);
+  const game = useGame();
+  const { config } = useConfig();
 
   const rounds = game.rounds;
   const size = config.tokens.stationTokenSize;

@@ -1,8 +1,10 @@
-import { createContext, useContext } from "react";
-import GameContext from "./GameContext";
+import { assocPath, defaultTo, mergeDeepRight } from "ramda";
+import { diff } from "deep-object-diff";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-import { assocPath, defaultTo, mergeDeepRight } from "ramda";
+import { createSetConfig, createResetConfig } from "@/state";
+import { useGame } from "@/hooks";
 
 const configs = import.meta.glob("../*.json", {
   eager: true,
@@ -10,23 +12,15 @@ const configs = import.meta.glob("../*.json", {
 });
 const defaultConfig = configs["../defaults.json"];
 const userConfig = configs["../config.json"] || {};
-
-import useLocalState from "../util/useLocalState";
-import { diff } from "deep-object-diff";
-
-const ConfigContext = createContext({ config: {} });
+const initialConfig = mergeDeepRight(defaultConfig, userConfig);
 
 export const useConfig = () => {
-  const { game } = useContext(GameContext);
+  const dispatch = useDispatch();
+  const game = useGame();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
 
-  const gameConfig = defaultTo({}, game && game.config);
-
-  const [storedConfig, setStoredConfig] = useLocalState("config", {});
-
-  const initialConfig = mergeDeepRight(defaultConfig, userConfig);
-
+  const storedConfig = useSelector((state) => state.config);
   const preSearchConfig = mergeDeepRight(initialConfig, storedConfig);
 
   // Add Search config in
@@ -40,11 +34,13 @@ export const useConfig = () => {
   const preGameConfig = mergeDeepRight(preSearchConfig, searchConfig);
 
   // Add Game config in
+  const gameConfig = defaultTo({}, game && game.config);
   const config = mergeDeepRight(preGameConfig, gameConfig);
 
   return {
-    setConfig: (config) => setStoredConfig(diff(initialConfig, config)),
-    resetConfig: () => setStoredConfig({}),
+    setConfig: (config) =>
+      dispatch(createSetConfig(diff(initialConfig, config))),
+    resetConfig: () => dispatch(createResetConfig()),
     config,
     defaultConfig,
     userConfig,
@@ -53,5 +49,3 @@ export const useConfig = () => {
     storedConfig,
   };
 };
-
-export default ConfigContext;

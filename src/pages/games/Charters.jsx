@@ -1,15 +1,12 @@
-import { useContext } from "react";
-import ConfigContext from "../../context/ConfigContext";
-import GameContext from "../../context/GameContext";
-
 import { useNavigate } from "react-router-dom";
-import { getCharterData } from "../../util";
-import { compileCompanies, overrideCompanies } from "../../util/companies";
-import Charter from "../../Charter";
-import Svg from "../../Svg";
-import Pins from "../../Pins";
 
-import PageSetup from "../../PageSetup";
+import Charter from "@/Charter";
+import PageSetup from "@/PageSetup";
+import Pins from "@/Pins";
+import Svg from "@/Svg";
+import { compileCompanies, overrideCompanies } from "@/util/companies";
+import { getCharterData } from "@/util";
+import { useConfig, useGame } from "@/hooks";
 
 import {
   addIndex,
@@ -29,12 +26,12 @@ const isMajor = compose(not, prop("minor"));
 
 const Charters = () => {
   const navigate = useNavigate();
-  const { config } = useContext(ConfigContext);
+  const { config } = useConfig();
   const charters = config.charters;
   const paper = config.paper;
   const override = config.overrideCompanies;
   const selection = config.overrideSelection;
-  const { game } = useContext(GameContext);
+  const game = useGame();
 
   if (!game.companies) {
     navigate(`/games/${game.meta.slug}/`);

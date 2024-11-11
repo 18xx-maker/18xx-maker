@@ -2,6 +2,9 @@ html {
   background: transparent;
   margin: 0; /* this affects the margin on the html before sending to printer */
   -webkit-print-color-adjust: exact;
+  height: -moz-available;
+  height: -webkit-fill-available;
+  height: stretch;
 }
 
 body {
@@ -10,6 +13,16 @@ body {
   -webkit-print-color-adjust: exact;
   font-family: display;
   font-weight: bold;
+  height: -moz-available;
+  height: -webkit-fill-available;
+  height: stretch;
+}
+
+#root,
+#dropzone {
+  height: -moz-available;
+  height: -webkit-fill-available;
+  height: stretch;
 }
 
 p {

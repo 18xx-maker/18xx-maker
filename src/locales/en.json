@@ -16,6 +16,10 @@
     "elements": "Elements",
     "docs": "Help"
   },
+  "refresh": {
+    "refresh": "Refresh",
+    "description": "Reload the latest version of this file"
+  },
   "prototype": {
     "prototype": "Prototype",
     "description": "This game is still being developed"
@@ -36,6 +40,10 @@
     "help": {
       "title": "Help",
       "description": "18xx Maker Goals and Links"
+    },
+    "files": {
+      "title": "Files",
+      "description": "How 18xx Maker uses files"
     },
     "developing": {
       "title": "Developing",
@@ -169,6 +177,7 @@
     "map": {
       "variation": "Map Variation"
     },
+    "open": "Open File",
     "paginated": "Paginate",
     "players": "Players",
     "purchase": {

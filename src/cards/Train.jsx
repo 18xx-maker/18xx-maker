@@ -1,12 +1,9 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-
-import Color from "../util/Color";
-import Currency from "../util/Currency";
+import "@/cards/train.css";
+import Color from "@/util/Color";
+import Currency from "@/util/Currency";
+import { useConfig } from "@/hooks";
 
 import { find, is, map, defaultTo } from "ramda";
-
-import "./train.css";
 
 const trainImages = import.meta.glob("../images/trains/*.png", {
   eager: true,
@@ -27,7 +24,7 @@ const ordinal = (num) => {
 };
 
 const Train = ({ train, trains }) => {
-  const { config } = useContext(ConfigContext);
+  const { config } = useConfig();
 
   let {
     name,

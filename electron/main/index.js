@@ -1,321 +1,62 @@
-import { app, dialog, ipcMain, shell, BrowserWindow } from "electron";
-import updater from "electron-updater";
-const { autoUpdater } = updater;
-
-import fs from "node:fs";
-import path from "node:path";
-
-import isDev from "electron-is-dev";
-import chokidar from "chokidar";
 import Promise from "bluebird";
-import setMenu from "./menu.js";
+import { app, ipcMain } from "electron";
+import { objOf } from "ramda";
 
-let mainWindow;
-
-const startUrl =
-  isDev && process.env["ELECTRON_RENDERER_URL"]
-    ? process.env["ELECTRON_RENDERER_URL"]
-    : `file://${path.join(__dirname, "../renderer/index.html")}`;
-
-function createWindow() {
-  mainWindow = new BrowserWindow({
-    webPreferences: {
-      preload: path.join(import.meta.dirname, "../preload/preload.mjs"),
-      sandbox: false,
-    },
-  });
-  mainWindow.on("closed", function () {
-    mainWindow = null;
-  });
-  mainWindow.webContents.setWindowOpenHandler(() => ({ action: "allow" }));
-
-  // HMR for renderer base on electron-vite cli.
-  // Load the remote URL for development or the local html file for production.
-  mainWindow.loadURL(startUrl);
-
-  setMenu(mainWindow);
-
-  autoUpdater.checkForUpdatesAndNotify();
-}
+import {
+  addRecent,
+  deleteGame,
+  getConfig,
+  getSummaries,
+  getSummary,
+} from "./config.js";
+import { exportPDF, exportPNG, pdf, png } from "./export.js";
+import { createWindow } from "./window.js";
+import { TYPE, loadGame, openGame, saveGamePath } from "./game.js";
+import { setMenu } from "./menu.js";
+import { stopWatching, watch } from "./watch.js";
 
 app.on("ready", createWindow);
-
-app.on("window-all-closed", function () {
+app.on("activate", createWindow);
+app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
 });
 
-app.on("activate", function () {
-  if (mainWindow === null) {
-    createWindow();
+ipcMain.on("deleteGame", (event, id) => {
+  stopWatching(getSummary(id).path);
+  deleteGame(id);
+});
+
+ipcMain.handle("saveGamePath", (event, path) => saveGamePath(path));
+
+ipcMain.handle("loadSummaries", () =>
+  Promise.resolve(objOf(TYPE, getSummaries())),
+);
+
+ipcMain.handle("loadGame", (event, id) => {
+  let config = getConfig();
+  let summary = config.summaries[id];
+
+  if (!summary) {
+    return Promise.reject(new Error(`Electron game ${id} not found`));
   }
-});
 
-// Opens a new browser window suitable for image/pdf capturing/printing
-function captureWindow() {
-  return new BrowserWindow({
-    x: 0,
-    y: 0,
-    enableLargerThanScreen: true,
-    show: false,
-    transparent: true,
-    frame: false,
-    webPreferences: {
-      preload: path.join(import.meta.dirname, "../preload/preload.mjs"),
-      sandbox: false,
-    },
-  });
-}
-
-function openDirectory() {
-  return dialog
-    .showOpenDialog(mainWindow, {
-      title: "Select directory",
-      properties: ["openDirectory", "createDirectory"],
-    })
-    .then(({ canceled, filePaths }) => {
-      if (canceled) {
-        return undefined;
-      } else {
-        return filePaths[0];
-      }
-    });
-}
-
-function alert(type, message) {
-  mainWindow.webContents.send("alert", type, message);
-}
-
-function progress(progress, message) {
-  mainWindow.webContents.send("progress", progress, message);
-}
-
-// Goes to path in the app, and saves a PDF to filePath
-function createPDF(path, filePath) {
-  return new Promise((resolve) => {
-    let win = captureWindow();
-
-    win.webContents.on("did-stop-loading", () => {
-      setTimeout(() => {
-        win.webContents
-          .printToPDF({
-            marginsType: 0,
-            scaleFactor: 100,
-            printBackground: true,
-          })
-          .then((buffer) => {
-            fs.writeFileSync(filePath, buffer);
-            win.close();
-            resolve(filePath);
-          });
-      }, 1000);
-    });
-
-    if (path.includes("?")) {
-      path = `${path}&print=true`;
-    } else {
-      path = `${path}?print=true`;
-    }
-    win.loadURL(`${startUrl}#${path}`);
-  });
-}
-
-ipcMain.on("pdf", (event, path) => {
-  dialog
-    .showSaveDialog(mainWindow, {
-      title: "Save PDF",
-      filters: [
-        {
-          name: "PDF Document",
-          extensions: ["pdf"],
-        },
-      ],
-    })
-    .then(({ filePath, canceled }) => {
-      if (canceled) {
-        return false;
-      }
-
-      createPDF(path, filePath).then((filePath) => {
-        shell.openPath(filePath);
-        alert("success", `${filePath} saved`);
-      });
-    });
-});
-
-// Goes to path in the app, and saves a PNG to filePath of width x height
-function createScreenshot(path, filePath) {
-  return new Promise((resolve) => {
-    let win = captureWindow();
-
-    win.webContents.on("will-redirect", () => {
-      win.close();
-      resolve();
-    });
-
-    win.webContents.on("did-stop-loading", () => {
-      setTimeout(() => {
-        win.webContents
-          .executeJavaScript(
-            'document.getElementsByClassName("printElement")[0].getBoundingClientRect().toJSON()',
-          )
-          .then(({ width, height }) => {
-            win.setBounds({
-              x: 0,
-              y: 0,
-              width: Math.ceil(width),
-              height: Math.ceil(height),
-            });
-            return win.webContents
-              .capturePage(
-                {
-                  x: 0,
-                  y: 0,
-                  width: Math.ceil(width),
-                  height: Math.ceil(height),
-                },
-                {
-                  stayHidden: true,
-                },
-              )
-              .then((image) => {
-                let buffer = image.toPNG();
-                fs.writeFileSync(filePath, buffer);
-                win.close();
-                resolve(filePath);
-              });
-          })
-          .catch(() => {
-            // Game doesn't include this item
-            win.close();
-            resolve();
-          });
-      }, 1000);
-    });
-
-    if (path.includes("?")) {
-      path = `${path}&print=true`;
-    } else {
-      path = `${path}?print=true`;
-    }
-    win.loadURL(`${startUrl}#${path}`);
-  });
-}
-
-function getPath(game, item) {
-  if (item.includes("?")) {
-    return `/games/${game}/${item}&print=true`;
-  } else {
-    return `/games/${game}/${item}?print=true`;
-  }
-}
-
-ipcMain.on("export-pdf", (event, game, items) => {
-  return openDirectory().then((directory) => {
-    if (directory) {
-      let keys = Object.keys(items);
-      let total = keys.length;
-      let current = 0;
-      return Promise.map(
-        keys,
-        (item) => {
-          let basename = items[item];
-          let filename = path.join(directory, basename);
-          return createPDF(getPath(game, item), filename).then((exported) => {
-            if (exported) {
-              current = current + 1;
-              let percent = Math.floor((current / total) * 100);
-              progress(percent, `${current}/${total} - ${basename}`);
-            }
-          });
-        },
-        { concurrency: 4 },
-      )
-        .then(() => alert("success", `Exported ${game} to ${directory} as pdf`))
-        .then(() => shell.openPath(directory))
-        .catch(console.error.bind(console));
-    }
+  watch(summary.path);
+  return loadGame(summary.path).catch((e) => {
+    deleteGame(id);
+    throw e;
   });
 });
 
-ipcMain.on("export-png", (event, game, items) => {
-  return openDirectory().then((directory) => {
-    if (directory) {
-      let keys = Object.keys(items);
-      let total = keys.length;
-      let current = 0;
-      return Promise.map(
-        keys,
-        (item) => {
-          let basename = items[item];
-          let filename = path.join(directory, basename);
-          return createScreenshot(getPath(game, item), filename).then(
-            (exported) => {
-              if (exported) {
-                current = current + 1;
-                let percent = Math.floor((current / total) * 100);
-                progress(percent, `${current}/${total} - ${basename}`);
-              }
-            },
-          );
-        },
-        { concurrency: 8 },
-      )
-        .then(() => alert("success", `Exported ${game} to ${directory} as png`))
-        .then(() => shell.openPath(directory))
-        .catch(console.error.bind(console));
-    }
-  });
+ipcMain.handle("openGame", openGame);
+
+ipcMain.on("addRecent", (event, title, slug) => {
+  addRecent(title, slug);
+  setMenu();
 });
 
-ipcMain.on("screenshot", (event, path) => {
-  dialog
-    .showSaveDialog(mainWindow, {
-      title: "Save Screenshot",
-      filters: [
-        {
-          name: "PNG Image",
-          extensions: ["png"],
-        },
-      ],
-    })
-    .then(({ filePath, canceled }) => {
-      if (canceled) {
-        return false;
-      }
-
-      createScreenshot(path, filePath).then((filePath) => {
-        shell.openPath(filePath);
-        alert("success", `${filePath} saved`);
-      });
-    });
-});
-
-// File watching when games are loaded
-let watcher;
-ipcMain.on("watch", (event, path, id, slug) => {
-  if (path) {
-    if (watcher) {
-      watcher.close();
-    }
-
-    watcher = chokidar.watch(path);
-    watcher.on("change", (path) => {
-      let json = fs.readFileSync(path);
-
-      try {
-        let game = JSON.parse(json);
-        game.meta = { id, slug };
-        mainWindow.webContents.send("watch", game);
-      } catch (e) {
-        console.error(e);
-      }
-    });
-  } else {
-    if (watcher) {
-      watcher.close();
-      watcher = null;
-    }
-  }
-});
+ipcMain.on("exportPDF", (event, game, items) => exportPDF(game, items));
+ipcMain.on("exportPNG", (event, game, items) => exportPNG(game, items));
+ipcMain.on("pdf", (event, path) => pdf(path));
+ipcMain.on("png", (event, path) => png(path));

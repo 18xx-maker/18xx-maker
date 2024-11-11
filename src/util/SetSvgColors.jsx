@@ -1,18 +1,15 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-
-import ColorContext from "../context/ColorContext";
-import Color from "./Color";
+import ColorContext from "@/context/ColorContext";
+import Color from "@/util/Color";
+import { themes } from "@/data";
+import { useConfig } from "@/hooks";
 
 import { chain, concat, join, keys } from "ramda";
-
-import { themes } from "../data";
 
 const colors = keys(themes["companies/rob"].colors);
 const mapColors = keys(themes["maps/gmt"].colors);
 
 const SetSvgColors = () => {
-  const { config } = useContext(ConfigContext);
+  const { config } = useConfig();
   const companySvgLogos = config.companySvgLogos;
 
   return (

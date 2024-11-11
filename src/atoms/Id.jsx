@@ -1,9 +1,6 @@
-import { useContext } from "react";
-
-import ConfigContext from "../context/ConfigContext";
-import { useOrientation } from "../context/OrientationContext";
-
-import Color from "../util/Color";
+import Color from "@/util/Color";
+import { useConfig } from "@/hooks";
+import { useOrientation } from "@/context/OrientationContext";
 
 const colorblindSymbols = {
   yellow: "▼",
@@ -13,7 +10,7 @@ const colorblindSymbols = {
 };
 
 const Id = ({ id, displayID, extra, bgColor, noID }) => {
-  const { config } = useContext(ConfigContext);
+  const { config } = useConfig();
   const rotation = useOrientation();
 
   if (noID || config.tiles.id === "none") {

@@ -1,9 +1,7 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-
 import { curry, map, range } from "ramda";
 
-import { getTileSheetContext } from "./util";
+import { getTileSheetContext } from "@/tilesheet/util";
+import { useConfig } from "@/hooks";
 
 const STROKE = {
   stroke: "gray",
@@ -85,7 +83,7 @@ const BackwardLines = ({ getX, getY, pageHeight, width, perPage }) => {
 };
 
 const Cutlines = () => {
-  const { config } = useContext(ConfigContext);
+  const { config } = useConfig();
   const hexWidth = config.tiles.width;
   const layout = config.tiles.layout;
   const paper = config.paper;

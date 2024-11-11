@@ -1,25 +1,19 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-import GameContext from "../context/GameContext";
-import { MapOrientation } from "../context/OrientationContext";
-
-import { getFontProps, multiDefaultTo } from "../util";
-import Color from "../util/Color";
-import Currency from "../util/Currency";
-import GameCompanyToken from "../tokens/GameCompanyToken";
-import Hex from "../Hex";
-import Icon from "../atoms/Icon";
-import Svg from "../Svg";
-import Tile from "../Tile";
-import Token from "../tokens/Token";
-
-import ColorContext from "../context/ColorContext";
+import "@/cards/private.css";
+import Color from "@/util/Color";
+import ColorContext from "@/context/ColorContext";
+import Currency from "@/util/Currency";
+import GameCompanyToken from "@/tokens/GameCompanyToken";
+import Hex from "@/Hex";
+import Icon from "@/atoms/Icon";
+import Svg from "@/Svg";
+import Tile from "@/Tile";
+import Token from "@/tokens/Token";
+import { MapOrientation } from "@/context/OrientationContext";
+import { getFontProps, multiDefaultTo } from "@/util";
+import { getMapHex } from "@/map/util";
+import { useConfig, useGame } from "@/hooks";
 
 import { intersperse, is, map, defaultTo, max, min, reduce } from "ramda";
-
-import { getMapHex } from "../map/util";
-
-import "./private.css";
 
 const Private = (props) => {
   let {
@@ -90,8 +84,8 @@ const Private = (props) => {
     fontColor,
     backgroundColor,
   } = props;
-  const { game } = useContext(GameContext);
-  const { config } = useContext(ConfigContext);
+  const game = useGame();
+  const { config } = useConfig();
   const style = config.privates.style;
 
   const px2pt = 0.75;

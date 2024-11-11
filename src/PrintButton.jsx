@@ -1,6 +1,5 @@
-import { useContext } from "react";
 import { useMatch } from "react-router";
-import GameContext from "./context/GameContext";
+import { useGame } from "./hooks";
 import { useBooleanParam } from "./util/query";
 
 import Fab from "@mui/material/Fab";
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 const PrintButton = () => {
   const classes = useStyles();
   const match = useMatch("/games/*");
-  const { game } = useContext(GameContext);
+  const game = useGame();
   const [print] = useBooleanParam("print");
 
   if (print || !game || !match) {

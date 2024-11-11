@@ -1,14 +1,14 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useLocation, useMatch } from "react-router";
 import { useTranslation } from "react-i18next";
-import GameContext from "./context/GameContext";
-import ConfigContext from "./context/ConfigContext";
-import { useBooleanParam } from "./util/query";
 
-import { maxPlayers } from "./util";
-import { compileCompanies, overrideCompanies } from "./util/companies.js";
+import { useConfig, useGame } from "@/hooks";
+import { useBooleanParam } from "@/util/query";
 
-import schema from "./schemas/config.schema.json";
+import { maxPlayers } from "@/util";
+import { compileCompanies, overrideCompanies } from "@/util/companies";
+
+import schema from "@/schemas/config.schema.json";
 
 import Divider from "@mui/material/Divider";
 import Fab from "@mui/material/Fab";
@@ -196,8 +196,8 @@ const ExportButton = () => {
   const { t } = useTranslation();
   const classes = useStyles();
   const location = useLocation();
-  const { game } = useContext(GameContext);
-  const { config } = useContext(ConfigContext);
+  const game = useGame();
+  const { config } = useConfig();
   const [print] = useBooleanParam("print");
   const [menuAnchor, setMenuAnchor] = useState(null);
 
@@ -216,12 +216,12 @@ const ExportButton = () => {
   };
 
   const handleAllPdf = () => {
-    window.api.export_pdf(game.meta.slug, pdfItems(game, config));
+    window.api.exportPDF(game.meta.slug, pdfItems(game, config));
     handleMenuClose();
   };
 
   const handleAllPng = () => {
-    window.api.export_png(game.meta.slug, pngItems(game, config));
+    window.api.exportPNG(game.meta.slug, pngItems(game, config));
     handleMenuClose();
   };
 
@@ -231,7 +231,7 @@ const ExportButton = () => {
   };
 
   const handleSinglePng = () => {
-    window.api.screenshot(location.pathname + location.search);
+    window.api.png(location.pathname + location.search);
     handleMenuClose();
   };
 

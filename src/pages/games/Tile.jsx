@@ -1,22 +1,20 @@
-import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import ConfigContext from "../../context/ConfigContext";
-import GameContext from "../../context/GameContext";
+import { useConfig, useGame } from "@/hooks";
 
-import { getTile } from "../../util";
+import { getTile } from "@/util";
 
-import { tiles as tileDefs } from "../../data";
+import { tiles as tileDefs } from "@/data";
 
-import Svg from "../../Svg";
-import Hex from "../../Hex";
+import Svg from "@/Svg";
+import Hex from "@/Hex";
 
-import ColorContext from "../../context/ColorContext";
+import ColorContext from "@/context/ColorContext";
 
 const TileSheet = () => {
   const navigate = useNavigate();
-  const { config } = useContext(ConfigContext);
-  const { game } = useContext(GameContext);
+  const { config } = useConfig();
+  const game = useGame();
   const { id } = useParams();
   const { width: hexWidth } = config.tiles;
 
