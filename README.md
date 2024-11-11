@@ -1,9 +1,10 @@
 # 18xx Maker
 
-![build](https://img.shields.io/github/actions/workflow/status/18xx-maker/18xx-maker/pr.yml)
-![version](https://img.shields.io/github/v/release/18xx-maker/18xx-maker?sort=semver)
-![downloads](https://img.shields.io/github/downloads/18xx-maker/18xx-maker/total)
-![license](https://img.shields.io/github/license/18xx-maker/18xx-maker)
+[![site](https://img.shields.io/netlify/725d9a0f-9db9-457c-a8d0-6bf78140020b?logo=netlify&logoColor=%23fff&color=%2300C7B7)](https://18xx-maker.com)
+[![version](https://img.shields.io/github/package-json/v/18xx-maker/18xx-maker?logo=github&color=%23181717)](https://github.com/18xx-maker/18xx-maker/releases)
+[![build](https://img.shields.io/github/check-runs/18xx-maker/18xx-maker/main?logo=githubactions&logoColor=%23fff&color=%232088FF)](https://github.com/18xx-maker/18xx-maker/actions/workflows/pr.yml?query=branch%3Amain)
+[![chat](https://img.shields.io/discord/1302895372749770752?logo=discord&logoColor=%23fff&color=%235865F2)](https://discord.gg/gcYvAjYYfw)
+[![license](https://img.shields.io/github/license/18xx-maker/18xx-maker)](https://github.com/18xx-maker/18xx-maker?tab=MIT-1-ov-file#readme)
 
 This app can take [18xx](https://en.wikipedia.org/wiki/18XX) game definitions
 written in json, display them, and render them for printing. The original intent
