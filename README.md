@@ -4,7 +4,7 @@
 [![version](https://img.shields.io/github/package-json/v/18xx-maker/18xx-maker?logo=github&color=%23181717)](https://github.com/18xx-maker/18xx-maker/releases)
 [![build](https://img.shields.io/github/check-runs/18xx-maker/18xx-maker/main?logo=githubactions&logoColor=%23fff&color=%232088FF)](https://github.com/18xx-maker/18xx-maker/actions/workflows/pr.yml?query=branch%3Amain)
 [![chat](https://img.shields.io/discord/1302895372749770752?logo=discord&logoColor=%23fff&color=%235865F2)](https://discord.gg/gcYvAjYYfw)
-[![license](https://img.shields.io/github/license/18xx-maker/18xx-maker)](https://github.com/18xx-maker/18xx-maker?tab=MIT-1-ov-file#readme)
+[![license](https://img.shields.io/github/license/18xx-maker/18xx-maker?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNyAyMGwxMCAwIi8%2BPHBhdGggZD0iTTYgNmw2IC0xbDYgMSIvPjxwYXRoIGQ9Ik0xMiAzbDAgMTciLz48cGF0aCBkPSJNOSAxMmwtMyAtNmwtMyA2YTMgMyAwIDAgMCA2IDAiLz48cGF0aCBkPSJNMjEgMTJsLTMgLTZsLTMgNmEzIDMgMCAwIDAgNiAwIi8%2BPC9zdmc%2B&logoColor=%23fff)](https://github.com/18xx-maker/18xx-maker?tab=MIT-1-ov-file#readme)
 
 This app can take [18xx](https://en.wikipedia.org/wiki/18XX) game definitions
 written in json, display them, and render them for printing. The original intent
