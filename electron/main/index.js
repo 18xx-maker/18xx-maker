@@ -62,7 +62,8 @@ function captureWindow() {
     transparent: true,
     frame: false,
     webPreferences: {
-      preload: path.join(import.meta.dirname, "preload.js"),
+      preload: path.join(import.meta.dirname, "../preload/preload.mjs"),
+      sandbox: false,
     },
   });
 }
