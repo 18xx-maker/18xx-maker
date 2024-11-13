@@ -1,7 +1,8 @@
 import { useMatch } from "react-router";
 
 export const useSideMenu = () => {
-  const needsGameMenu = !!useMatch("/games/*");
+  const gameMatch = useMatch("/games/*");
+  const needsGameMenu = gameMatch && gameMatch.params["*"] != "";
   const needsDocsMenu = !!useMatch("/docs/*");
   const needsElementsMenu = !!useMatch("/elements/*");
 
