@@ -26,7 +26,7 @@ const GameCompanyToken = (props) => {
   );
 
   // Look into the original game companies and find this abbrev
-  let companyIndex = findIndex(propEq("abbrev", abbrev), game.companies);
+  let companyIndex = findIndex(propEq(abbrev, "abbrev"), game.companies);
 
   if (companyIndex === -1) {
     // We are dealing with a raw token

@@ -282,9 +282,7 @@ const Private = (props) => {
             <GameCompanyToken
               abbrev={company}
               width={15}
-              outlineWidth={
-                style === "big" ? company.outlineWidth || 1 : 15 / 25
-              }
+              outlineWidth={style === "big" ? company.outlineWidth || 1 : 2}
             />
           </Svg>
         </div>
@@ -295,7 +293,7 @@ const Private = (props) => {
             <Token
               {...token}
               width={15}
-              outlineWidth={token.outlineWidth || (style === "big" ? 1 : "2")}
+              outlineWidth={token.outlineWidth || (style === "big" ? 1 : 2)}
             />
           </Svg>
         </div>
