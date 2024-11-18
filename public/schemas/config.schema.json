@@ -141,6 +141,7 @@
         "height": { "type": "number", "minimum": 1 },
         "cutlines": { "type": "number", "minimum": 0 },
         "bleed": { "type": "number", "minimum": 0 },
+        "dtgPadding": { "type": "number", "minimum": 0 },
         "border": { "type": "number", "minimum": 0 },
         "blackBand": { "type": "boolean" },
         "pins": { "$ref": "#/definitions/pins" }
@@ -152,6 +153,7 @@
         "height",
         "cutlines",
         "bleed",
+        "dtgPadding",
         "blackBand",
         "pins"
       ],
