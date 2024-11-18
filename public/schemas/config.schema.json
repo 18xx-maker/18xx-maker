@@ -26,6 +26,18 @@
     },
     "margins": {
       "$ref": "#/definitions/dimension"
+    },
+    "pins": {
+      "type": "object",
+      "properties": {
+        "innerRadius": { "type": "number", "minimum": 0 },
+        "outerRadius": { "type": "number", "minimum": 0 },
+        "y": { "type": "number", "minimum": 0 },
+        "x1": { "type": "number", "minimum": 0 },
+        "x2": { "type": "number", "minimum": 0 }
+      },
+      "required": ["innerRadius", "outerRadius", "y", "x1", "x2"],
+      "additionalProperties": false
     }
   },
 
@@ -130,7 +142,8 @@
         "cutlines": { "type": "number", "minimum": 0 },
         "bleed": { "type": "number", "minimum": 0 },
         "border": { "type": "number", "minimum": 0 },
-        "blackBand": { "type": "boolean" }
+        "blackBand": { "type": "boolean" },
+        "pins": { "$ref": "#/definitions/pins" }
       },
       "required": [
         "shareStyle",
@@ -139,7 +152,8 @@
         "height",
         "cutlines",
         "bleed",
-        "blackBand"
+        "blackBand",
+        "pins"
       ],
       "additionalProperties": false
     },
@@ -178,7 +192,8 @@
         "smallerMinors": { "type": "boolean" },
         "blackBand": { "type": "boolean" },
         "showPhaseChart": { "type": "boolean" },
-        "showTurnOrder": { "type": "boolean" }
+        "showTurnOrder": { "type": "boolean" },
+        "pins": { "$ref": "#/definitions/pins" }
       },
       "required": ["style", "halfWidth", "cutlines", "border", "blackBand"],
       "additionalProperties": false
@@ -226,7 +241,8 @@
           "type": "number",
           "exclusiveMinimum": 0
         },
-        "gaps": { "type": "boolean" }
+        "gaps": { "type": "boolean" },
+        "pins": { "$ref": "#/definitions/pins" }
       },
       "required": ["layout", "width", "mapWidth", "gaps"],
       "additionalProperties": false

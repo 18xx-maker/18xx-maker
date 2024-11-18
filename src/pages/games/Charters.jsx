@@ -7,6 +7,7 @@ import { getCharterData } from "../../util";
 import { compileCompanies, overrideCompanies } from "../../util/companies";
 import Charter from "../../Charter";
 import Svg from "../../Svg";
+import Pins from "../../Pins";
 
 import PageSetup from "../../PageSetup";
 
@@ -189,7 +190,7 @@ const Charters = () => {
           />
         ) : (
           <div
-            key={`spacer-${index}`}
+            key={`spacer-free-${index}`}
             className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}
           >
             <div
@@ -209,38 +210,7 @@ const Charters = () => {
         viewBox="0 0 750 50"
         style={{ width: "7.5in", height: "0.5in", float: "left" }}
       >
-        <circle
-          r="12.5"
-          cx="75"
-          cy="25"
-          fill="gray"
-          strokeWidth="1"
-          stroke="black"
-        />
-        <circle
-          r="12.5"
-          cx="675"
-          cy="25"
-          fill="gray"
-          strokeWidth="1"
-          stroke="black"
-        />
-        <circle
-          r="6.25"
-          cx="75"
-          cy="25"
-          fill="white"
-          strokeWidth="1"
-          stroke="black"
-        />
-        <circle
-          r="6.25"
-          cx="675"
-          cy="25"
-          fill="white"
-          strokeWidth="1"
-          stroke="black"
-        />
+        <Pins config={charters.pins} />
       </Svg>
     );
 
@@ -252,8 +222,8 @@ const Charters = () => {
           style={{ width: data.css.usableWidth, height: data.css.usableHeight }}
         >
           {pins}
-          {map(
-            (company) =>
+          {addIndex(map)(
+            (company, index) =>
               company ? (
                 <Charter
                   game={game.info.title}
@@ -279,7 +249,7 @@ const Charters = () => {
                 />
               ) : (
                 <div
-                  key="spacer"
+                  key={`spacer-major-${index}`}
                   className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}
                 >
                   <div

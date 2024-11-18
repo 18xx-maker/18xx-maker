@@ -20,7 +20,7 @@ import Hex from "../../Hex";
 import ColorContext from "../../context/ColorContext";
 
 import Cutlines from "../../tilesheet/Cutlines";
-import Pins from "../../tilesheet/Pins";
+import Pins from "../../Pins";
 
 import {
   addIndex,
@@ -310,7 +310,10 @@ const TileSheet = () => {
       viewBoxStr = "0 0 " + c.pageWidth + " " + c.pageHeight;
     }
 
-    let pins = layout === "die" || layout === "smallDie" ? <Pins /> : null;
+    let pins =
+      layout === "die" || layout === "smallDie" ? (
+        <Pins config={config.tiles.pins} />
+      ) : null;
 
     return (
       <div className="TileSheet--Page" key={`page-${pageIndex}`}>

@@ -14,6 +14,7 @@ import { fillArray } from "../util";
 import { compileCompanies, overrideCompanies } from "../util/companies";
 import { getCardData } from "./util";
 import Svg from "../Svg";
+import Pins from "../Pins";
 
 import { maxPlayers } from "../util.js";
 
@@ -138,38 +139,7 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
   if (config.cards.layout !== "free") {
     pins = (
       <Svg className="pins" viewBox="0 0 50 800">
-        <circle
-          r="12.5"
-          cy="100"
-          cx="25"
-          fill="gray"
-          strokeWidth="1"
-          stroke="black"
-        />
-        <circle
-          r="12.5"
-          cy="700"
-          cx="25"
-          fill="gray"
-          strokeWidth="1"
-          stroke="black"
-        />
-        <circle
-          r="6.25"
-          cy="100"
-          cx="25"
-          fill="white"
-          strokeWidth="1"
-          stroke="black"
-        />
-        <circle
-          r="6.25"
-          cy="700"
-          cx="25"
-          fill="white"
-          strokeWidth="1"
-          stroke="black"
-        />
+        <Pins landscape={true} config={cardConfig.pins} />
       </Svg>
     );
   }

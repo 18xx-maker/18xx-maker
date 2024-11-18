@@ -57,6 +57,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const PinConfig = ({ prefix }) => (
+  <>
+    <Input
+      name={`${prefix}.pins.innerRadius`}
+      label="Pins Inner Radius"
+      dimension={true}
+      description="How big should the inner radius of the pin markers be."
+    />
+    <Input
+      name={`${prefix}.pins.outerRadius`}
+      label="Pins Outer Radius"
+      dimension={true}
+      description="How big should the outer radius of the pin markers be."
+    />
+    <Input
+      name={`${prefix}.pins.y`}
+      label="Pin Y Location"
+      dimension={true}
+      description="How far from the edge of the paper should both pins be placed."
+    />
+    <Input
+      name={`${prefix}.pins.x1`}
+      label="Pins X1 Location"
+      dimension={true}
+      description="How far from the edge of the paper should the first pin be placed."
+    />
+    <Input
+      name={`${prefix}.pins.x2`}
+      label="Pins X2 Location"
+      dimension={true}
+      description="How far from the edge of the paper should the second pin be placed."
+    />
+  </>
+);
+
 const Config = () => {
   const classes = useStyles();
   const { config, setConfig, resetConfig } = useContext(ConfigContext);
@@ -289,6 +324,7 @@ const Config = () => {
           label="Tile Gaps"
           description="This says whether to separate different colors with spaces needed to prevent bleed crossover. Leave on unless you really know you want it."
         />
+        <PinConfig prefix="tiles" />
       </Box>
 
       <Divider />
@@ -405,6 +441,7 @@ const Config = () => {
           label="Charter Black Band"
           description='Whether or not to put a black border against the color section of the charter. Only relevent to "color" charters. Always put on white color charters.'
         />
+        <PinConfig prefix="charters" />
       </Box>
 
       <Divider />
@@ -445,6 +482,7 @@ const Config = () => {
           label="Card Black Band"
           description='Whether or not to put a black border against the color section of the share. Only relevent to "gmt" and "left" shares as well as trains. Always put on white color cards.'
         />
+        <PinConfig prefix="cards" />
       </Box>
 
       <Divider />
