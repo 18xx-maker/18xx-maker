@@ -29,7 +29,7 @@ const loadFile = (file) => {
         ? game.players[game.players.length - 1].number
         : 0;
       if (isElectron) {
-        window.api.watch(file.path, id, slug);
+        window.api.watch(file, id, slug);
       }
       return game;
     })
@@ -112,7 +112,7 @@ export const GameProvider = ({ children }) => {
   // If we're running in electron, listen for game updates and load them
   useEffect(() => {
     if (isElectron) {
-      let updateGame = (event, game) => {
+      let updateGame = (game) => {
         setGame(game);
         sendAlert("info", `${game.info.title} updated`);
       };

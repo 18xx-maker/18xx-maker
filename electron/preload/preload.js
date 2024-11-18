@@ -1,4 +1,5 @@
 const { contextBridge, ipcRenderer } = require("electron/renderer");
+const { webUtils } = require("electron");
 
 ipcRenderer.setMaxListeners(25);
 
@@ -7,7 +8,13 @@ const api = {
   export_pdf: (game, items) => ipcRenderer.send("export-pdf", game, items),
   export_png: (game, items) => ipcRenderer.send("export-png", game, items),
   screenshot: (path) => ipcRenderer.send("screenshot", path),
-  watch: (path, id, slug) => ipcRenderer.send("watch", path, id, slug),
+  watch: (file, id, slug) =>
+    ipcRenderer.send(
+      "watch",
+      file ? webUtils.getPathForFile(file) : undefined,
+      id,
+      slug,
+    ),
 
   onAlert: (callback) =>
     ipcRenderer.on("alert", (_event, type, message) => callback(type, message)),

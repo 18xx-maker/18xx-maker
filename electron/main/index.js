@@ -306,8 +306,7 @@ ipcMain.on("watch", (event, path, id, slug) => {
 
       try {
         let game = JSON.parse(json);
-        game.id = id;
-        game.slug = slug;
+        game.meta = { id, slug };
         mainWindow.webContents.send("watch", game);
       } catch (e) {
         console.error(e);
