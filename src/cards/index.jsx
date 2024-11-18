@@ -101,6 +101,7 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
 
   let cardConfig = clone(config.cards);
   let paperConfig = clone(config.paper);
+  let dtgPadding = cardConfig.dtgPadding;
 
   switch (config.cards.layout) {
     case "miniEuroDie":
@@ -120,9 +121,9 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
       paperConfig.height = 1100;
       paperConfig.margins = 25;
 
-      cardConfig.width = 250;
-      cardConfig.height = 150;
-      cardConfig.cutlines = 0;
+      cardConfig.width = 250 - 2 * dtgPadding;
+      cardConfig.height = 150 - 2 * dtgPadding;
+      cardConfig.cutlines = dtgPadding;
       cardConfig.bleed = 0;
       cardConfig.border = 0;
 

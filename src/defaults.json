@@ -71,6 +71,7 @@
     "height": 173.228,
     "cutlines": 25,
     "bleed": 12.5,
+    "dtgPadding": 0,
     "border": 0,
     "blackBand": false,
     "pins": {

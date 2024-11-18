@@ -653,6 +653,13 @@ ul.notes li span {
   border-right: 1px solid black;
 }
 
+.cards--dtgDie .cutlines::before,
+.cards--dtgDie .cutlines::after,
+.cards--dtgDie .cutlines > div::before,
+.cards--dtgDie .cutlines > div::after {
+  border: 0;
+}
+
 footer {
   width: 800px;
   margin: 0 auto;

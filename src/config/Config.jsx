@@ -473,6 +473,12 @@ const Config = () => {
           description="Set to 0 to disable any bleed, or set to a value to have a margin of this amount used as the bleed amount for printing."
         />
         <Input
+          name="cards.dtgPadding"
+          label="DTG Die Padding Size"
+          dimension={true}
+          description="Set to 0 to disable any padding, or set to a value to have a margin of this amount used as the padding amount per card for printing on the DTG die layout."
+        />
+        <Input
           name="cards.border"
           label="Card Border Size"
           description="Set to 0 to disable any border, or set to a value to have a border of that many pixels drawn around the card."
