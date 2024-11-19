@@ -64,7 +64,7 @@ const Tokens = () => {
         );
       }
     }),
-    reject(propEq("quantity", 0)),
+    reject(propEq(0, "quantity")),
   )(game.tokens || []);
 
   let totalHeight = 30 * (companyTokenNodes.length + extraTokenNodes.length);

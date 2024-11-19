@@ -25,9 +25,11 @@ const GameMapCompanyToken = (props) => {
     config.overrideSelection,
   );
 
+  console.log({ abbrev, companies });
+
   // Look into the original game companies and find this abbrev
   let companyIndex = findIndex(
-    propEq("abbrev", abbrev),
+    propEq(abbrev, "abbrev"),
     (game && game.companies) || [],
   );
 

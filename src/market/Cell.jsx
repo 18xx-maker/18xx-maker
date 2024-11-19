@@ -133,7 +133,7 @@ const Cell = ({ cell, game, config, data }) => {
 
               // Look into the original game companies and find this abbrev
               let companyIndex = findIndex(
-                propEq("abbrev", company.abbrev),
+                propEq(company.abbrev, "abbrev"),
                 game.companies || [],
               );
               if (companyIndex === -1) {

@@ -188,7 +188,7 @@ const TokenSingle = () => {
         );
       }
     }),
-    reject(propEq("quantity", 0)),
+    reject(propEq(0, "quantity")),
   )(game.tokens || []);
 
   let tokenNode = concat(companyTokenNodes, extraTokenNodes)[index];

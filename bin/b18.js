@@ -172,12 +172,6 @@ const server = app.listen(9000);
       tile: [],
     };
 
-    // let tiles = compose(
-    //   uniq,
-    //   filter(propEq("color", color)),
-    //   map(getTile)
-    // )(keys(game.tiles));
-
     mapObjIndexed((dups, id) => {
       let tile = getTile(id);
       if (tile.color !== color) return;
@@ -242,7 +236,7 @@ const server = app.listen(9000);
         flip: true,
       });
     }),
-    reject(propEq("quantity", 0)),
+    reject(propEq(0, "quantity")),
   )(game.tokens || []);
   let tokenHeight = 30 * ((game.companies || []).length + tokens.length);
 
