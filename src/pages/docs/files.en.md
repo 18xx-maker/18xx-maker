@@ -77,14 +77,15 @@ from your file system.
 Even if your browser doesn't support the File System API we will try to use the
 [Origin Private File
 System](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API/Origin_private_file_system)
-instead. When you are using this type of browser the only way to load a file
-into the web browser is to drag it onto the window. I plan on adding the ability
-to select a file from your hard disk soon.
+instead. You can open files in one of two ways:
+
+1. Click on the "Open File" button from the [Load Games](/games) page.
+1. Drag a valid JSON file into the browser window
 
 Once you do this the contents of this file are saved to your local computer in a
 separate place that only the browser can view. Games will appear on the [Load
 Games](/games) page. Clicking on the trash icon on this page **WILL NOT** delete
 the file from your computer, but will make the browser forget about this game.
 
-The only way to refresh the file from the data on your computer is to drag it
-into the browser window again.
+The only way to refresh the file from the data on your computer is to open it
+again using one of the methods above.
