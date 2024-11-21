@@ -1,10 +1,18 @@
 # 18xx Maker
 
-[![site](https://img.shields.io/netlify/725d9a0f-9db9-457c-a8d0-6bf78140020b?logo=netlify&logoColor=%23fff&color=%2300C7B7)](https://18xx-maker.com)
-[![version](https://img.shields.io/github/package-json/v/18xx-maker/18xx-maker?logo=github&color=%23181717)](https://github.com/18xx-maker/18xx-maker/releases)
-[![build](https://img.shields.io/github/check-runs/18xx-maker/18xx-maker/main?logo=githubactions&logoColor=%23fff&color=%232088FF)](https://github.com/18xx-maker/18xx-maker/actions/workflows/pr.yml?query=branch%3Amain)
 [![chat](https://img.shields.io/discord/1302895372749770752?logo=discord&logoColor=%23fff&color=%235865F2)](https://discord.gg/gcYvAjYYfw)
-[![license](https://img.shields.io/github/license/18xx-maker/18xx-maker?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNyAyMGwxMCAwIi8%2BPHBhdGggZD0iTTYgNmw2IC0xbDYgMSIvPjxwYXRoIGQ9Ik0xMiAzbDAgMTciLz48cGF0aCBkPSJNOSAxMmwtMyAtNmwtMyA2YTMgMyAwIDAgMCA2IDAiLz48cGF0aCBkPSJNMjEgMTJsLTMgLTZsLTMgNmEzIDMgMCAwIDAgNiAwIi8%2BPC9zdmc%2B&color=%23750014)](https://github.com/18xx-maker/18xx-maker?tab=MIT-1-ov-file#readme)
+[![license](https://img.shields.io/github/license/18xx-maker/18xx-maker?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNyAyMGwxMCAwIi8%2BPHBhdGggZD0iTTYgNmw2IC0xbDYgMSIvPjxwYXRoIGQ9Ik0xMiAzbDAgMTciLz48cGF0aCBkPSJNOSAxMmwtMyAtNmwtMyA2YTMgMyAwIDAgMCA2IDAiLz48cGF0aCBkPSJNMjEgMTJsLTMgLTZsLTMgNmEzIDMgMCAwIDAgNiAwIi8%2BPC9zdmc%2B&logoColor=%23fff&color=%23750014)](https://github.com/18xx-maker/18xx-maker?tab=MIT-1-ov-file#readme)
+
+[![build](https://img.shields.io/github/check-runs/18xx-maker/18xx-maker/main?logo=github&logoColor=%23fff&label=build)](https://github.com/18xx-maker/18xx-maker/actions/workflows/pr.yml?query=branch%3Amain)
+[![app](https://img.shields.io/github/package-json/v/18xx-maker/18xx-maker?logo=electron&logoColor=%23fff&label=app)](https://github.com/18xx-maker/18xx-maker/releases)
+[![site](https://img.shields.io/netlify/725d9a0f-9db9-457c-a8d0-6bf78140020b?logo=netlify&logoColor=%23fff&label=site)](https://18xx-maker.com)
+
+[![coveralls](https://img.shields.io/coverallsCoverage/github/18xx-maker/18xx-maker?logo=coveralls&logoColor=%23fff)](https://coveralls.io/github/18xx-maker/18xx-maker)
+[![codecov](https://img.shields.io/codecov/c/github/18xx-maker/18xx-maker?logo=codecov&logoColor=%23fff)](https://app.codecov.io/gh/18xx-maker/18xx-maker/)
+[![codeclimate-coverage](https://img.shields.io/codeclimate/coverage/18xx-maker/18xx-maker?logo=codeclimate&logoColor=%23fff)](https://codeclimate.com/github/18xx-maker/18xx-maker)
+[![codeclimate-maintainability](https://img.shields.io/codeclimate/maintainability/18xx-maker/18xx-maker?logo=codeclimate&logoColor=%23fff)](https://codeclimate.com/github/18xx-maker/18xx-maker/progress/maintainability)
+[![codeclimate-tech-debt](https://img.shields.io/codeclimate/tech-debt/18xx-maker/18xx-maker?logo=codeclimate&logoColor=%23fff)](https://codeclimate.com/github/18xx-maker/18xx-maker/trends/technical_debt)
+[![codeclimate-issues](https://img.shields.io/codeclimate/issues/18xx-maker/18xx-maker?logo=codeclimate&logoColor=%23fff)](https://codeclimate.com/github/18xx-maker/18xx-maker/issues)
 
 This app can take [18xx](https://en.wikipedia.org/wiki/18XX) game definitions
 written in json, display them, and render them for printing. The original intent
