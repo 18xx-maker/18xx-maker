@@ -151,4 +151,11 @@ export const openFilePicker = () =>
       if (handles.length === 1) {
         return saveGameHandle(handles[0]);
       }
+    })
+    .catch((e) => {
+      if (e.name === "AbortError") {
+        return;
+      }
+
+      throw e;
     });

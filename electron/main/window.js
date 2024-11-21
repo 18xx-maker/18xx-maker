@@ -33,7 +33,10 @@ export const createWindow = () => {
   mainWindow.on("closed", function () {
     mainWindow = null;
   });
-  mainWindow.once("ready-to-show", () => mainWindow.maximize());
+  mainWindow.once("ready-to-show", () => {
+    mainWindow.maximize();
+    mainWindow.show();
+  });
   mainWindow.webContents.setWindowOpenHandler(() => ({ action: "allow" }));
   mainWindow.loadURL(startUrl);
 
