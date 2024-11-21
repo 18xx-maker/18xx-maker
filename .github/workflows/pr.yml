@@ -73,3 +73,5 @@ jobs:
           coverageLocations: ${{github.workspace}}/coverage/clover.xml:clover
       - name: Build
         run: yarn build
+        env:
+          CODECOV_TOKEN: ${{ matrix.os == 'ubuntu-latest' && secrets.CODECOV_TOKEN || '' }}
