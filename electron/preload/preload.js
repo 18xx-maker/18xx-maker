@@ -26,10 +26,18 @@ const api = {
     }),
   loadSummaries: () => ipcRenderer.invoke("loadSummaries"),
   openGame: () =>
-    ipcRenderer.invoke("openGame").catch((e) => {
-      console.error(e);
-      throw new Error("File was not a valid 18xx-maker game");
-    }),
+    ipcRenderer
+      .invoke("openGame")
+      .catch((e) => {
+        console.error(e);
+        throw new Error("File was not a valid 18xx-maker game");
+      })
+      .then((slug) => {
+        if (slug === "undefined") {
+          return;
+        }
+        return slug;
+      }),
 
   addRecent: (title, slug) => ipcRenderer.send("addRecent", title, slug),
   deleteGame: (id) => ipcRenderer.send("deleteGame", id),

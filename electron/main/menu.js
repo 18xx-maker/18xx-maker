@@ -7,6 +7,9 @@ import { send } from "./util.js";
 
 const isMac = process.platform === "darwin";
 
+const openGameAndRedirect = () =>
+  openGame().then((slug) => slug && send("redirect", `/games/${slug}/map`));
+
 export const setMenu = () => {
   const recents = map(
     ({ title, slug }) => ({
@@ -41,7 +44,7 @@ export const setMenu = () => {
         {
           label: "Open",
           accelerator: "CmdOrCtrl+O",
-          click: openGame,
+          click: openGameAndRedirect,
         },
         {
           label: "Open Recents",

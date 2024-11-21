@@ -69,19 +69,19 @@ const LoadGames = () => {
     if (capability.electron) {
       return window.api
         .openGame()
-        .then((slug) => navigate(`/games/${slug}/map`));
+        .then((slug) => slug && navigate(`/games/${slug}/map`));
     }
 
     if (capability.system) {
       return idb
         .openFilePicker()
-        .then((slug) => navigate(`/games/${slug}/map`));
+        .then((slug) => slug && navigate(`/games/${slug}/map`));
     }
 
     if (capability.internal) {
       return opfs
         .saveGameFile(event.target.files[0])
-        .then((slug) => navigate(`/games/${slug}/map`))
+        .then((slug) => slug && navigate(`/games/${slug}/map`))
         .catch((e) => dispatch(createAlert("Error", e.message, "error")));
     }
   };

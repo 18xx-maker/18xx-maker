@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
-import { refreshGame } from "@/state";
+import { createAlert, refreshGame } from "@/state";
 import { useLoadedGame } from "@/hooks/game";
 
 export const useBindings = () => {
@@ -33,9 +33,15 @@ export const useBindings = () => {
         break;
       case "o":
         if (capability.electron) {
-          window.api.openGame().then((slug) => navigate(`/games/${slug}/map`));
+          window.api
+            .openGame()
+            .then((slug) => slug && navigate(`/games/${slug}/map`))
+            .catch((e) => dispatch(createAlert(e.name, e.message, "error")));
         } else if (capability.system) {
-          idb.openFilePicker().then((slug) => navigate(`/games/${slug}/map`));
+          idb
+            .openFilePicker()
+            .then((slug) => slug && navigate(`/games/${slug}/map`))
+            .catch((e) => dispatch(createAlert(e.name, e.message, "error")));
         }
         break;
       case "r":
