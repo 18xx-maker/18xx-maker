@@ -3,8 +3,9 @@ import path from "node:path";
 import postcssNesting from "postcss-nesting";
 import postcssPresetEnv from "postcss-preset-env";
 import react from "@vitejs/plugin-react-swc";
+import { codecovVitePlugin as codecov } from "@codecov/vite-plugin";
 import { defineConfig } from "vite";
-import { svgPlugin } from "vite-plugin-fast-react-svg";
+import { svgPlugin as svg } from "vite-plugin-fast-react-svg";
 import { visualizer } from "rollup-plugin-visualizer";
 
 const manualChunks = (id) => {
@@ -49,7 +50,18 @@ export default defineConfig({
   json: {
     stringify: true,
   },
-  plugins: [react(), svgPlugin(), visualizer()],
+  plugins: [
+    react(),
+    svg(),
+    visualizer(),
+    codecov({
+      enableBundleAnalysis:
+        process.env.CODECOV_TOKEN !== undefined &&
+        process.env.CODECOV_TOKEN !== "",
+      bundleName: "18xx-maker",
+      uploadToken: process.env.CODECOV_TOKEN,
+    }),
+  ],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),

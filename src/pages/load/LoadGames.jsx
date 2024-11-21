@@ -21,9 +21,10 @@ import OpenIcon from "@mui/icons-material/FileOpen";
 import makeStyles from "@mui/styles/makeStyles";
 
 import * as idb from "@/util/idb";
+import * as opfs from "@/util/opfs";
 import GameRow from "@/pages/load/GameRow";
 import capability from "@/util/capability";
-import { deleteGame, loadSummaries } from "@/state";
+import { createAlert, deleteGame, loadSummaries } from "@/state";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -76,6 +77,13 @@ const LoadGames = () => {
         .openFilePicker()
         .then((slug) => navigate(`/games/${slug}/map`));
     }
+
+    if (capability.internal) {
+      return opfs
+        .saveGameFile(event.target.files[0])
+        .then((slug) => navigate(`/games/${slug}/map`))
+        .catch((e) => dispatch(createAlert("Error", e.message, "error")));
+    }
   };
 
   return (
@@ -92,6 +100,32 @@ const LoadGames = () => {
             startIcon={<OpenIcon />}
           >
             {t("game.open")}
+          </Button>
+        )}
+        {!capability.electron && !capability.system && capability.internal && (
+          <Button
+            variant="contained"
+            component="label"
+            role={undefined}
+            startIcon={<OpenIcon />}
+          >
+            {t("game.open")}
+            <input
+              style={{
+                bottom: 0,
+                clip: "rect(0 0 0 0)",
+                clipPath: "inset(50%)",
+                height: 1,
+                left: 0,
+                overflow: "hidden",
+                position: "absolute",
+                whiteSpace: "nowrap",
+                width: 1,
+              }}
+              type="file"
+              onChange={openGame}
+              multiple
+            />
           </Button>
         )}
         <TableContainer>
