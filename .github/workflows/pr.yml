@@ -71,7 +71,11 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageLocations: ${{github.workspace}}/coverage/clover.xml:clover
-      - name: Build
+      - name: Build Web
         run: yarn build
+        env:
+          CODECOV_TOKEN: ${{ matrix.os == 'ubuntu-latest' && secrets.CODECOV_TOKEN || '' }}
+      - name: Build App
+        run: yarn build:app
         env:
           CODECOV_TOKEN: ${{ matrix.os == 'ubuntu-latest' && secrets.CODECOV_TOKEN || '' }}
