@@ -10,7 +10,7 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     globals: true,
-    reporters: ["junit", "default"],
+    reporters: process.env.CI ? ["junit", "default"] : ["default"],
     outputFile: "./junit.xml",
   },
 });
