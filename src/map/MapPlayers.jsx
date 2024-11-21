@@ -1,16 +1,13 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-import GameContext from "../context/GameContext";
+import Color from "@/util/Color";
+import Currency from "@/util/Currency";
+import { useConfig, useGame } from "@/hooks";
 
-import Color from "../util/Color";
-import Currency from "../util/Currency";
+import certLimit from "@/images/icons/certificate.svg";
+import bank from "@/images/icons/university.svg";
+import number from "@/images/icons/user-friends.svg";
+import capital from "@/images/icons/coins.svg";
 
 import { addIndex, map } from "ramda";
-
-import certLimit from "../images/icons/certificate.svg";
-import bank from "../images/icons/university.svg";
-import number from "../images/icons/user-friends.svg";
-import capital from "../images/icons/coins.svg";
 
 const icons = {
   certLimit,
@@ -20,8 +17,8 @@ const icons = {
 };
 
 const MapPlayers = ({ players, hexWidth }) => {
-  const { game } = useContext(GameContext);
-  const { config } = useContext(ConfigContext);
+  const game = useGame();
+  const { config } = useConfig();
 
   if (!players) {
     return null;

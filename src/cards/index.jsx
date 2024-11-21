@@ -1,30 +1,22 @@
-import { useContext } from "react";
-
-import ConfigContext from "../context/ConfigContext";
-import GameContext from "../context/GameContext";
-
-import Number from "./Number";
-import Private from "./Private";
-import Share from "./Share";
-import Train from "./Train";
-
-import PageSetup from "../PageSetup";
-
-import { fillArray } from "../util";
-import { compileCompanies, overrideCompanies } from "../util/companies";
-import { getCardData } from "./util";
-import Svg from "../Svg";
-import Pins from "../Pins";
-
-import { maxPlayers } from "../util.js";
+import "@/cards/card.css";
+import Number from "@/cards/Number";
+import PageSetup from "@/PageSetup";
+import Pins from "@/Pins";
+import Private from "@/cards/Private";
+import Share from "@/cards/Share";
+import Svg from "@/Svg";
+import Train from "@/cards/Train";
+import { compileCompanies, overrideCompanies } from "@/util/companies";
+import { fillArray } from "@/util";
+import { getCardData } from "@/cards/util";
+import { maxPlayers } from "@/util.js";
+import { useConfig, useGame } from "@/hooks";
 
 import { addIndex, chain, clone, map, prop, range, splitEvery } from "ramda";
 
-import "./card.css";
-
 const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
-  const { config } = useContext(ConfigContext);
-  const { game } = useContext(GameContext);
+  const { config } = useConfig();
+  const game = useGame();
 
   const override = config.overrideCompanies;
   const selection = config.overrideSelection;

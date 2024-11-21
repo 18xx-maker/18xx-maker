@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 
 import ReactMarkdown from "react-markdown";
 
-import { isElectron } from "../util";
+import capability from "@/util/capability";
 
 import makeStyles from "@mui/styles/makeStyles";
 
@@ -60,7 +60,7 @@ const Heading = (props) => {
 };
 
 const ElectronImage = (props) => {
-  if (isElectron) {
+  if (capability.electron) {
     return (
       <img alt={props.title || props.src} {...props} src={`.${props.src}`} />
     );
@@ -73,7 +73,7 @@ const LocalLink = (props) => {
   if (startsWith("?", props.href)) {
     return (
       <Link
-        component={isElectron || RouterLink}
+        component={capability.electron || RouterLink}
         to={props.href}
         {...props}
         underline="hover"

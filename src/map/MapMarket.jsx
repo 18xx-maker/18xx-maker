@@ -1,13 +1,11 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-import GameContext from "../context/GameContext";
+import { useConfig, useGame } from "@/hooks";
 
-import { getMarketData } from "../market/util";
-import Market from "../market/Market";
+import { getMarketData } from "@/market/util";
+import Market from "@/market/Market";
 
 const MapMarket = ({ mapMarket, hexWidth }) => {
-  const { game } = useContext(GameContext);
-  const { config } = useContext(ConfigContext);
+  const game = useGame();
+  const { config } = useConfig();
 
   if (!mapMarket) {
     return null;

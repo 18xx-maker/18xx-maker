@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import { tiles as tileDefs } from "../../../data";
@@ -9,7 +8,7 @@ import Tile from "../../../Tile";
 import { compose, filter, is, keys, map, propEq, take, uniq } from "ramda";
 
 import ColorContext from "../../../context/ColorContext";
-import GameContext from "../../../context/GameContext";
+import { useGame } from "../../../hooks";
 import RotateContext from "../../../context/RotateContext";
 
 import { getTile } from "../../../util";
@@ -19,7 +18,7 @@ import "./b18.css";
 const ROTATIONS = [0, 60, 120, 180, 240, 300];
 
 const Tiles = () => {
-  const { game } = useContext(GameContext);
+  const game = useGame();
   let params = useParams();
   let color = params.color;
 

@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import GameContext from "../context/GameContext";
+import { useGame } from "../hooks";
 import { multiDefaultTo } from "../util";
 import Color from "../util/Color";
 
@@ -15,7 +14,7 @@ const CenterTown = ({
   width,
   size,
 }) => {
-  const { game } = useContext(GameContext);
+  const game = useGame();
   width = multiDefaultTo(20, width, game.info.townWidth);
   let scale = width / 20;
   borderWidth = multiDefaultTo(4, borderWidth, game.info.borderWidth) * scale;

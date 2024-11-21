@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { isElectron } from "../util";
+import capability from "@/util/capability";
 
 import Svg from "../Svg";
 import Tile from "../Tile";
@@ -9,8 +9,8 @@ const TilePage = () => {
   let id = params.id;
 
   let handler = () => {
-    if (isElectron) {
-      window.api.screenshot(`/tile/${id}`);
+    if (capability.electron) {
+      window.api.png(`/tile/${id}`);
     }
   };
 

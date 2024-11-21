@@ -1,7 +1,5 @@
-import { useContext } from "react";
-import ConfigContext from "./context/ConfigContext";
-
-import { unitsToCss } from "./util";
+import { unitsToCss } from "@/util";
+import { useConfig } from "@/hooks";
 
 import { is } from "ramda";
 
@@ -28,7 +26,7 @@ export const paperToCssMargins = (paper, landscape) => {
 };
 
 const PageSetup = ({ paper, landscape }) => {
-  const { config } = useContext(ConfigContext);
+  const { config } = useConfig();
   paper = paper || config.paper;
 
   let css = `@media print {

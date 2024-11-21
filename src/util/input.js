@@ -8,7 +8,7 @@ import {
   isEmpty,
 } from "ramda";
 
-import schema from "../schemas/config.schema.json";
+import schema from "@/schemas/config.schema.json";
 
 export const getPath = split(".");
 export const getSchemaPath = compose(

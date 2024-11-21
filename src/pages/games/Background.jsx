@@ -1,13 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { unitsToCss, printableWidth, printableHeight } from "../../util";
-import { GetFont, SetFont } from "../../context/FontContext";
-import Color from "../../util/Color";
-
-import GameContext from "../../context/GameContext";
-
+import { useEffect, useState } from "react";
 import { flatten, times } from "ramda";
 
+import Color from "../../util/Color";
 import PageSetup from "../../PageSetup";
+import { GetFont, SetFont } from "../../context/FontContext";
+import { unitsToCss, printableWidth, printableHeight } from "../../util";
+import { useGame } from "../../hooks/game.js";
 
 import config from "../../defaults.json";
 
@@ -30,7 +28,7 @@ const rotatedHeight = (w, h) => Math.abs(h * cos + w * sin);
 const Background = () => {
   const classes = useStyles();
 
-  let { game } = useContext(GameContext);
+  let game = useGame();
   let paper = config.paper;
 
   let color = game.info.background;

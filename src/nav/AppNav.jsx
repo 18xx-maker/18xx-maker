@@ -1,8 +1,9 @@
-import { forwardRef, useState, useContext } from "react";
+import { forwardRef, useState } from "react";
 import { useMatch } from "react-router";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useBooleanParam } from "../util/query";
+import { useLoadedGame } from "../hooks/game.js";
 
 import MobileMenuButton from "./MobileMenuButton";
 
@@ -25,7 +26,6 @@ import LoadIcon from "@mui/icons-material/OpenInBrowser";
 import MenuIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import makeStyles from "@mui/styles/makeStyles";
-import GameContext from "../context/GameContext";
 
 const useStyles = makeStyles((theme) => ({
   activeButton: {
@@ -74,7 +74,7 @@ const NavLink = ({ active, to, text, icon }) => {
 
 const NavMenu = () => {
   const { t } = useTranslation();
-  const { game } = useContext(GameContext);
+  const game = useLoadedGame();
   const match = useMatch("/:section/*");
 
   return (
@@ -87,13 +87,13 @@ const NavMenu = () => {
       />
       {game && (
         <NavLink
-          to={`/games/${game.meta.slug}/map`}
+          to={`/games/${game.slug}/map`}
           active={
             match &&
             match.params.section === "games" &&
             match.params["*"] !== ""
           }
-          text={game.info.title}
+          text={game.title}
           icon={<GamesIcon />}
         />
       )}
@@ -147,7 +147,7 @@ const MobileMenu = ({ anchor, onClose }) => {
   const { t } = useTranslation();
   const open = Boolean(anchor);
 
-  const { game } = useContext(GameContext);
+  const game = useLoadedGame();
 
   return (
     <Menu
@@ -169,8 +169,8 @@ const MobileMenu = ({ anchor, onClose }) => {
       {game && (
         <MenuLink
           onClick={onClose}
-          to={`/games/${game.meta.slug}/map`}
-          text={game.info.title}
+          to={`/games/${game.slug}/map`}
+          text={game.title}
           icon={<GamesIcon />}
         />
       )}
@@ -199,7 +199,7 @@ const MobileMenu = ({ anchor, onClose }) => {
 
 const MobileButton = ({ onClick }) => {
   const { t } = useTranslation();
-  const { game } = useContext(GameContext);
+  const game = useLoadedGame();
   const match = useMatch("/:section/*");
 
   let icon = <HomeIcon />;
@@ -213,7 +213,7 @@ const MobileButton = ({ onClick }) => {
           text = t("nav.load");
         } else if (game) {
           icon = <GamesIcon />;
-          text = game.info.title;
+          text = game.title;
         } else {
           icon = <LoadIcon />;
           text = t("nav.load");

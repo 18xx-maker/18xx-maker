@@ -1,13 +1,12 @@
-import { useContext } from "react";
 import Color from "../util/Color";
-import GameContext from "../context/GameContext";
+import { useGame } from "../hooks";
 import Currency from "../util/Currency";
 import { multiDefaultTo } from "../util";
 
 import { icons } from "../data";
 
 const Terrain = ({ type, size, cost, fontFamily, fontSize, color }) => {
-  const { game } = useContext(GameContext);
+  const game = useGame();
   fontSize = multiDefaultTo(15, fontSize, game.info.valueFontSize);
   fontFamily = multiDefaultTo("display", fontFamily, game.info.valueFontFamily);
 

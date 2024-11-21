@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import ConfigContext from "./ConfigContext";
+import { createContext } from "react";
+
+import { resolveFont } from "@/util/font";
+import { useConfig } from "@/hooks";
 
 import { append } from "ramda";
 
-import { resolveFont } from "../util/font";
-
-const FontContext = React.createContext([]);
+const FontContext = createContext([]);
 
 // Takes in a new font string, and will add it to current context
 export const SetFont = ({ context, children }) => (
@@ -21,7 +21,7 @@ export const SetFont = ({ context, children }) => (
 );
 
 export const GetFont = ({ children }) => {
-  const { config } = useContext(ConfigContext);
+  const { config } = useConfig();
 
   return (
     <FontContext.Consumer>

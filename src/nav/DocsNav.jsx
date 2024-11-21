@@ -8,6 +8,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
 import HelpIcon from "@mui/icons-material/Help";
+import FilesIcon from "@mui/icons-material/FileOpen";
 import DevelopingIcon from "@mui/icons-material/Code";
 import TranslationIcon from "@mui/icons-material/Language";
 
@@ -46,6 +47,12 @@ const DocsNav = () => {
           name={t("docs.help.title")}
           desc={t("docs.help.description")}
           icon={<HelpIcon />}
+        />
+        <Item
+          name={t("docs.files.title")}
+          desc={t("docs.files.description")}
+          path="files"
+          icon={<FilesIcon />}
         />
         <Item
           name={t("docs.developing.title")}

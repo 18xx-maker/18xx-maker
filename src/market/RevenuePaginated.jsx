@@ -1,16 +1,14 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-import GameContext from "../context/GameContext";
+import { useConfig, useGame } from "@/hooks";
 
-import Paginate from "../util/Paginate";
+import Paginate from "@/util/Paginate";
 
-import { getRevenueData } from "./util";
+import { getRevenueData } from "@/market/util";
 
-import Revenue from "./Revenue";
+import Revenue from "@/market/Revenue";
 
 const RevenuePaginated = () => {
-  const { config } = useContext(ConfigContext);
-  const { game } = useContext(GameContext);
+  const { config } = useConfig();
+  const game = useGame();
   let data = getRevenueData(game.revenue, config);
 
   return (

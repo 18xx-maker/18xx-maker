@@ -1,12 +1,9 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-import GameContext from "../context/GameContext";
-
-import RoundTracker from "../RoundTracker";
+import RoundTracker from "@/RoundTracker";
+import { useConfig, useGame } from "@/hooks";
 
 const MapRoundTracker = ({ roundTracker, hexWidth }) => {
-  const { game } = useContext(GameContext);
-  const { config } = useContext(ConfigContext);
+  const game = useGame();
+  const { config } = useConfig();
 
   if (!roundTracker) {
     return null;

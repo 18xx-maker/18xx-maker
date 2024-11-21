@@ -34,7 +34,7 @@ jobs:
           cache: yarn
           cache-dependency-path: yarn.lock
       - name: Dependencies
-        run: yarn
+        run: yarn --frozen-lockfile
       - name: Commits
         if: matrix.os == 'ubuntu-latest'
         uses: wagoid/commitlint-github-action@v6

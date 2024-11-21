@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import GameContext from "../../context/GameContext";
+import { useGame } from "../../hooks";
 
 import Text from "./Text";
 import Color from "../../util/Color";
@@ -21,7 +20,7 @@ const Triangle = (props) => {
     dashed,
     reverse,
   } = props;
-  const { game } = useContext(GameContext);
+  const game = useGame();
 
   let scale = defaultTo(50, width) / 50;
   let x = 25 * scale;

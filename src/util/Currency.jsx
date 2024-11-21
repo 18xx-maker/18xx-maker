@@ -1,8 +1,6 @@
-import { useContext } from "react";
-import { is } from "ramda";
+import { useConfig, useGame } from "@/hooks";
 
-import GameContext from "../context/GameContext";
-import ConfigContext from "../context/ConfigContext";
+import { is } from "ramda";
 
 export const format = (value, game, doCurrencyFormat) => {
   if (value === null || value === undefined) {
@@ -22,8 +20,8 @@ export const format = (value, game, doCurrencyFormat) => {
 };
 
 const Currency = ({ value, type }) => {
-  const { game } = useContext(GameContext);
-  const { config } = useContext(ConfigContext);
+  const game = useGame();
+  const { config } = useConfig();
 
   return format(value, game, config.currency[type]);
 };

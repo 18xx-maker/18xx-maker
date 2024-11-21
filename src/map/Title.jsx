@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-import Color from "../util/Color";
+import Color from "@/util/Color";
+import { useConfig } from "@/hooks";
 
 const Title = ({ game, variation, hexWidth }) => {
-  const { config } = useContext(ConfigContext);
+  const { config } = useConfig();
   hexWidth = hexWidth || config.tiles.width;
 
   let scale = hexWidth / 150.0;

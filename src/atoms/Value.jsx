@@ -1,12 +1,8 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-import GameContext from "../context/GameContext";
-
-import Color from "../util/Color";
-import Currency, { format } from "../util/Currency";
-import RotateContext from "../context/RotateContext";
-
-import { multiDefaultTo } from "../util";
+import Color from "@/util/Color";
+import Currency, { format } from "@/util/Currency";
+import RotateContext from "@/context/RotateContext";
+import { multiDefaultTo } from "@/util";
+import { useConfig, useGame } from "@/hooks";
 
 const Value = ({
   value,
@@ -23,8 +19,8 @@ const Value = ({
   width,
   borderWidth,
 }) => {
-  const { game } = useContext(GameContext);
-  const { config } = useContext(ConfigContext);
+  const game = useGame();
+  const { config } = useConfig();
 
   let length = format(value, game, config.currency["value"]).length;
   let ry_default = fontSize === undefined;

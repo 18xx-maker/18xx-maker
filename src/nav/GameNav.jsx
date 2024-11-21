@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useMatch } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
 
-import { useGame } from "../context/GameContext";
+import { useGame } from "../hooks/game.js";
 import { useBooleanParam, useIntParam } from "../util/query.js";
 
 import { addIndex, is, map } from "ramda";
@@ -27,13 +28,16 @@ import BGGIcon from "@mui/icons-material/Storage";
 import GameIcon from "@mui/icons-material/Train";
 import LicenseIcon from "@mui/icons-material/Lock";
 import PurchaseIcon from "@mui/icons-material/MonetizationOn";
+import RefreshIcon from "@mui/icons-material/Refresh";
 import RulesIcon from "@mui/icons-material/Gavel";
 import WarningIcon from "@mui/icons-material/Warning";
 
-import File from "../util/File";
+import File from "@/util/File";
+import capability from "@/util/capability";
+import { refreshGame } from "@/state";
 
 import makeStyles from "@mui/styles/makeStyles";
-import { green, blue } from "@mui/material/colors";
+import { green, blue, red } from "@mui/material/colors";
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -45,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const GameSectionButton = ({ section, disabled }) => {
-  const { game } = useGame();
+  const game = useGame();
   const { t } = useTranslation();
   const to = `/games/${game.meta.slug}/${section}`;
   const selected = !!useMatch(to);
@@ -65,7 +69,8 @@ const GameSectionButton = ({ section, disabled }) => {
 const GameNav = () => {
   const classes = useStyles();
   const { t } = useTranslation();
-  const { game } = useGame();
+  const game = useGame();
+  const dispatch = useDispatch();
   const match = useMatch("/games/:slug/:tab");
 
   const needsPagination = match
@@ -84,6 +89,11 @@ const GameNav = () => {
   if (!game) {
     return null;
   }
+
+  const refreshHandler = (event) => {
+    event.preventDefault();
+    dispatch(refreshGame());
+  };
 
   const hasVariation = match
     ? match.params.tab === "map" && is(Array, game.map)
@@ -166,6 +176,17 @@ const GameNav = () => {
           </ListItemButton>
         )}
         <File data={game} filename={`${game.meta.id}.json`} list />
+        {!capability.electron && game.meta.type === "system" && (
+          <ListItemButton onClick={refreshHandler}>
+            <ListItemIcon>
+              <RefreshIcon style={{ color: red[500] }} />
+            </ListItemIcon>
+            <ListItemText
+              primary={t("refresh.refresh")}
+              secondary={t("refresh.description")}
+            />
+          </ListItemButton>
+        )}
         {game.prototype && (
           <ListItemButton>
             <ListItemIcon>

@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import GameContext from "../context/GameContext";
+import { useGame } from "../hooks";
 
 import { addIndex, map } from "ramda";
 
@@ -9,7 +8,7 @@ import Color from "../util/Color";
 import Currency from "../util/Currency";
 
 const BorderText = ({ text, data }) => {
-  const { game } = useContext(GameContext);
+  const game = useGame();
 
   let coord = mapCoord(text.coord, data);
   let color = text.color || "black";

@@ -1,14 +1,10 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-
+import File from "@/util/File";
+import Input from "@/config/Input";
+import ThemePreview from "@/config/ThemePreview";
+import defaultConfig from "@/defaults.json";
+import schema from "@/schemas/config.schema.json";
 import { diff } from "deep-object-diff";
-
-import ThemePreview from "./ThemePreview";
-import Input from "./Input";
-import File from "../util/File";
-
-import defaultConfig from "../defaults.json";
-import schema from "./../schemas/config.schema.json";
+import { useConfig } from "@/hooks";
 
 import {
   chain,
@@ -22,7 +18,7 @@ import {
   split,
 } from "ramda";
 
-import { mapThemes, companyThemes } from "../data";
+import { mapThemes, companyThemes } from "@/data";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -94,7 +90,7 @@ const PinConfig = ({ prefix }) => (
 
 const Config = () => {
   const classes = useStyles();
-  const { config, setConfig, resetConfig } = useContext(ConfigContext);
+  const { config, setConfig, resetConfig } = useConfig();
 
   let setOption = (event) =>
     setConfig({ ...config, [event.target.name]: event.target.value });

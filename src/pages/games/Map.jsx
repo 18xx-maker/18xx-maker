@@ -1,17 +1,15 @@
-import { useContext } from "react";
-import { useBooleanParam, useIntParam } from "../../util/query";
-import GameContext from "../../context/GameContext";
-import ConfigContext from "../../context/ConfigContext";
-import { MapOrientation } from "../../context/OrientationContext";
+import { useBooleanParam, useIntParam } from "@/util/query";
+import { MapOrientation } from "@/context/OrientationContext";
 
-import MapSingle from "../../games/MapSingle";
-import MapPaginated from "../../games/MapPaginated";
+import { useConfig, useGame } from "@/hooks";
+import MapSingle from "@/games/MapSingle";
+import MapPaginated from "@/games/MapPaginated";
 
 import { is, isNil } from "ramda";
 
 const Map = () => {
-  const { config } = useContext(ConfigContext);
-  const { game } = useContext(GameContext);
+  const { config } = useConfig();
+  const game = useGame();
 
   const [paginated] = useBooleanParam("paginated");
   const [variation, setVariation] = useIntParam("variation", 0);

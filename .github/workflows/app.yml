@@ -31,7 +31,7 @@ jobs:
           APP_CERTIFICATE: ${{ secrets.APP_CERTIFICATE }}
           APP_CERTIFICATE_PWD: ${{ secrets.APP_CERTIFICATE_PWD }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-      - run: yarn
+      - run: yarn --frozen-lockfile
         name: Dependencies
       - id: create_release
         name: Draft Release

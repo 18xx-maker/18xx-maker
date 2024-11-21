@@ -1,7 +1,6 @@
-import { useContext } from "react";
-import * as R from "ramda";
+import { addIndex, chain, concat, map, max, sum } from "ramda";
 
-import GameContext from "../context/GameContext";
+import { useGame } from "../hooks";
 
 import Name from "./Name";
 import Currency from "../util/Currency";
@@ -25,7 +24,7 @@ const makeNode = (x, y, reverse, revenue, size, fontFamily) => {
   let value = multiDefaultTo("", revenue.value, revenue.revenue, revenue.cost);
   let length = letter(size) * `${value}`.length;
   let phaseLength = letter(size) * `${revenue.phase}`.length;
-  let width = R.max(`${value}`.length, 2) * letter(size) + 5;
+  let width = max(`${value}`.length, 2) * letter(size) + 5;
 
   let nodes = [
     <Color context="map" key={`rect-${value}`}>
@@ -87,23 +86,22 @@ const makeNode = (x, y, reverse, revenue, size, fontFamily) => {
 };
 
 const getWidth = (r, size) =>
-  R.max(`${r.value || r.revenue || r.cost || 0}`.length, 2) * letter(size) + 5;
+  max(`${r.value || r.revenue || r.cost || 0}`.length, 2) * letter(size) + 5;
 
 const makeNodes = (y, reverse, revenues, size, fontFamily) => {
-  let totalWidth = R.sum(
-    R.map(
+  let totalWidth = sum(
+    map(
       (r) =>
         5 +
-        letter(size) *
-          R.max(`${r.value || r.revenue || r.cost || 0}`.length, 2),
+        letter(size) * max(`${r.value || r.revenue || r.cost || 0}`.length, 2),
       revenues,
     ),
   );
   let bx = -0.5 * totalWidth; // Starting x for border box
   let x = bx;
 
-  return R.concat(
-    R.map((r) => {
+  return concat(
+    map((r) => {
       let result = makeNode(x, y, reverse, r, size, fontFamily);
       x = x + getWidth(r, size);
       return result;
@@ -134,7 +132,7 @@ const OffBoardRevenue = ({
   rows,
   size,
 }) => {
-  const { game } = useContext(GameContext);
+  const game = useGame();
   let nameNode = null;
   if (name) {
     nameNode = (
@@ -156,7 +154,7 @@ const OffBoardRevenue = ({
   );
   fontFamily = multiDefaultTo("display", fontFamily, game.info.valueFontFamily);
 
-  let nodes = R.addIndex(R.chain)((revenues, row) => {
+  let nodes = addIndex(chain)((revenues, row) => {
     let y = row * height(fontSize) * (reverse ? -1 : 1);
     return makeNodes(y, reverse, revenues, fontSize, fontFamily);
   }, split);

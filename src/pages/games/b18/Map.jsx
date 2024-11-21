@@ -1,19 +1,15 @@
-import { useContext } from "react";
-import { useIntParam } from "../../../util/query";
-import GameContext from "../../../context/GameContext";
-import ConfigContext from "../../../context/ConfigContext";
-import { MapOrientation } from "../../../context/OrientationContext";
-
-import Map from "../../../map/Map";
-import Svg from "../../../Svg";
-
-import { getMapData } from "../../../map/util";
+import Map from "@/map/Map";
+import Svg from "@/Svg";
+import { MapOrientation } from "@/context/OrientationContext";
+import { getMapData } from "@/map/util";
+import { useConfig, useGame } from "@/hooks";
+import { useIntParam } from "@/util/query";
 
 import { assocPath, is, isNil } from "ramda";
 
 const B18Map = () => {
-  const { config } = useContext(ConfigContext);
-  const { game } = useContext(GameContext);
+  const { config } = useConfig();
+  const game = useGame();
 
   const [variation, setVariation] = useIntParam("variation", 0);
 

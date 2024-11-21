@@ -1,12 +1,11 @@
-import { useContext } from "react";
-import GameContext from "../context/GameContext";
+import { useGame } from "../hooks";
 import Color from "../util/Color";
 import { multiDefaultTo } from "../util";
 
 import Name from "./Name";
 
 const Town = ({ border, borderWidth, name, color, bgColor }) => {
-  const { game } = useContext(GameContext);
+  const game = useGame();
   const defaultWidth = 28;
   const defaultHeight = 14;
   borderWidth = multiDefaultTo(2, borderWidth, game.info.townBorderWidth);

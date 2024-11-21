@@ -1,13 +1,13 @@
-import { Fragment, useContext } from "react";
-import ConfigContext from "./context/ConfigContext";
-import ColorContext from "./context/ColorContext";
+import { Fragment } from "react";
 
-import CompanyToken from "./tokens/CompanyToken";
-import Token from "./tokens/Token";
-import Phase from "./Phase";
-import Color from "./util/Color";
-import { unitsToCss, multiDefaultTo } from "./util";
-import Currency from "./util/Currency";
+import Color from "@/util/Color";
+import ColorContext from "@/context/ColorContext";
+import CompanyToken from "@/tokens/CompanyToken";
+import Currency from "@/util/Currency";
+import Phase from "@/Phase";
+import Token from "@/tokens/Token";
+import { useConfig } from "@/hooks";
+import { unitsToCss, multiDefaultTo } from "@/util";
 
 import { addIndex, chain, map } from "ramda";
 
@@ -29,7 +29,7 @@ const Charter = ({
   fontWeight,
   halfWidth,
 }) => {
-  const { config } = useContext(ConfigContext);
+  const { config } = useConfig();
   const charterStyle = config.charters.style;
   const showPhaseChart = config.charters.showPhaseChart;
   const showTurnOrder = config.charters.showTurnOrder;

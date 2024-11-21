@@ -1,17 +1,16 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-import GameContext from "../context/GameContext";
+import { useConfig, useGame } from "@/hooks";
 
-import Svg from "../Svg";
+import Svg from "@/Svg";
 
-import { getRevenueData } from "./util";
-import { unitsToCss } from "../util";
+import { getRevenueData } from "@/market/util";
+import { unitsToCss } from "@/util";
 
-import Revenue from "./Revenue";
+import Revenue from "@/market/Revenue";
 
 const RevenueSingle = () => {
-  const { config } = useContext(ConfigContext);
-  const { game } = useContext(GameContext);
+  const { config } = useConfig();
+  const game = useGame();
+
   let data = getRevenueData(game.revenue, config);
   let paperWidth = unitsToCss(data.totalWidth + 5 + 2 * config.paper.margins);
   let paperHeight = unitsToCss(data.totalHeight + 5 + 2 * config.paper.margins);

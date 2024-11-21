@@ -1,22 +1,20 @@
-import { useContext } from "react";
-import ConfigContext from "../../context/ConfigContext";
-import GameContext from "../../context/GameContext";
-
 import { useNavigate, useParams } from "react-router-dom";
-import { getCharterData } from "../../util";
-import { compileCompanies, overrideCompanies } from "../../util/companies.js";
-import Charter from "../../Charter";
 
-import PageSetup from "../../PageSetup";
+import { useConfig, useGame } from "@/hooks";
+import { getCharterData } from "@/util";
+import { compileCompanies, overrideCompanies } from "@/util/companies";
+import Charter from "@/Charter";
+
+import PageSetup from "@/PageSetup";
 
 const Charters = () => {
   const navigate = useNavigate();
-  const { config } = useContext(ConfigContext);
+  const { config } = useConfig();
   const charters = config.charters;
   const paper = config.paper;
   const override = config.overrideCompanies;
   const selection = config.overrideSelection;
-  const { game } = useContext(GameContext);
+  const game = useGame();
   const { index } = useParams();
 
   if (!game.companies) {

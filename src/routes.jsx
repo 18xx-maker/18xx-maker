@@ -10,7 +10,7 @@ import Logos from "./pages/elements/Logos";
 import AllTiles from "./pages/elements/Tiles";
 
 // Games Routes
-import LoadGames from "./games/LoadGames";
+import LoadGames from "./pages/load/LoadGames";
 import Game from "./pages/games/Game";
 
 // Game Routes

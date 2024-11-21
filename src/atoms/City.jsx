@@ -1,19 +1,13 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-import GameContext from "../context/GameContext";
-import { multiDefaultTo } from "../util";
-import Color from "../util/Color";
-
-import Name from "./Name";
+import CityRotateContext from "@/context/CityRotateContext";
+import Color from "@/util/Color";
+import ColorContext from "@/context/ColorContext";
+import GameMapCompanyToken from "@/tokens/GameMapCompanyToken";
+import Name from "@/atoms/Name";
+import { icons as iconComponents } from "@/data";
+import { multiDefaultTo } from "@/util";
+import { useConfig, useGame } from "@/hooks";
 
 import { is } from "ramda";
-
-import GameMapCompanyToken from "../tokens/GameMapCompanyToken";
-
-import ColorContext from "../context/ColorContext";
-import CityRotateContext from "../context/CityRotateContext";
-
-import { icons as iconComponents } from "../data";
 
 const cityPaths = {
   cityPath: "M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30",
@@ -54,8 +48,8 @@ const City = ({
   width,
   strokeWidth,
 }) => {
-  const { game } = useContext(GameContext);
-  const { config } = useContext(ConfigContext);
+  const game = useGame();
+  const { config } = useConfig();
   const straightCityNames = config.straightCityNames;
 
   if (size === undefined) {

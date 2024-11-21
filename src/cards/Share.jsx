@@ -1,16 +1,12 @@
-import { useContext } from "react";
-import ConfigContext from "../context/ConfigContext";
-
-import CompanyToken from "../tokens/CompanyToken";
-import Color from "../util/Color";
-import ColorContext from "../context/ColorContext";
-
-import { multiDefaultTo } from "../util";
-import Currency from "../util/Currency";
+import "@/cards/share.css";
+import Color from "@/util/Color";
+import ColorContext from "@/context/ColorContext";
+import CompanyToken from "@/tokens/CompanyToken";
+import Currency from "@/util/Currency";
+import { multiDefaultTo } from "@/util";
+import { useConfig } from "@/hooks";
 
 import { min } from "ramda";
-
-import "./share.css";
 
 const LeftShare = ({
   cost,
@@ -270,7 +266,7 @@ const CenterShare = ({
 };
 
 const Share = (props) => {
-  const { config } = useContext(ConfigContext);
+  const { config } = useConfig();
 
   if (config.cards.shareStyle === "left") {
     return (

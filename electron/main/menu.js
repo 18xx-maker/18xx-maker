@@ -1,8 +1,21 @@
 import { app, Menu } from "electron";
+import { map } from "ramda";
+
+import { openGame } from "./game.js";
+import { getRecents } from "./config.js";
+import { send } from "./util.js";
 
 const isMac = process.platform === "darwin";
 
-const setMenu = (mainWindow) => {
+export const setMenu = () => {
+  const recents = map(
+    ({ title, slug }) => ({
+      label: title,
+      click: () => send("redirect", `/games/${slug}/map`),
+    }),
+    getRecents(),
+  );
+
   const template = [
     ...(isMac
       ? [
@@ -28,12 +41,14 @@ const setMenu = (mainWindow) => {
         {
           label: "Open",
           accelerator: "CmdOrCtrl+O",
-          click: () => {
-            mainWindow.webContents.send("redirect", "/games/");
-          },
+          click: openGame,
+        },
+        {
+          label: "Open Recents",
+          submenu: recents,
         },
         { type: "separator" },
-        isMac ? { role: "close" } : { role: "quit" },
+        { role: "quit" },
       ],
     },
     {
@@ -63,16 +78,12 @@ const setMenu = (mainWindow) => {
         {
           label: "Documentation",
           accelerator: "CmdOrCtrl+D",
-          click: () => {
-            mainWindow.webContents.send("redirect", "/docs/");
-          },
+          click: () => send("redirect", "/docs/"),
         },
         {
           label: "Elements",
           accelerator: "CmdOrCtrl+E",
-          click: () => {
-            mainWindow.webContents.send("redirect", "/elements/");
-          },
+          click: () => send("redirect", "/elements/"),
         },
       ],
     },
@@ -81,5 +92,3 @@ const setMenu = (mainWindow) => {
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 };
-
-export default setMenu;

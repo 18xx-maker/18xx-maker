@@ -1,24 +1,21 @@
-import { useContext } from "react";
 import { useParams } from "react-router-dom";
 
-import ConfigContext from "../../context/ConfigContext";
-import GameContext from "../../context/GameContext";
+import { useConfig, useGame } from "@/hooks";
+import Number from "@/cards/Number";
+import Private from "@/cards/Private";
+import Share from "@/cards/Share";
+import Train from "@/cards/Train";
 
-import Number from "../../cards/Number";
-import Private from "../../cards/Private";
-import Share from "../../cards/Share";
-import Train from "../../cards/Train";
-
-import { compileCompanies, overrideCompanies } from "../../util/companies.js";
-import { getCardData } from "../../cards/util";
+import { compileCompanies, overrideCompanies } from "@/util/companies";
+import { getCardData } from "@/cards/util";
 
 import { assoc, clone, flatten, map } from "ramda";
 
-import "../../cards/card.css";
+import "@/cards/card.css";
 
 const Cards = () => {
-  const { config } = useContext(ConfigContext);
-  const { game } = useContext(GameContext);
+  const { config } = useConfig();
+  const game = useGame();
   const { type, index } = useParams();
 
   let node = null;

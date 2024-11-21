@@ -1,11 +1,8 @@
-import { useContext } from "react";
-import ConfigContext from "./context/ConfigContext";
-
-import Token from "./tokens/Token";
+import Token from "@/tokens/Token";
+import { useConfig } from "@/hooks";
+import { unitsToCss } from "@/util";
 
 import { addIndex, map } from "ramda";
-
-import { unitsToCss } from "./util";
 
 export const getRoundTrackerData = (rounds, size, type, rotation, config) => {
   let cell = config.stock.cell;
@@ -97,7 +94,7 @@ export const getRoundTrackerData = (rounds, size, type, rotation, config) => {
   };
 };
 const RoundTracker = ({ rounds, size, type, rotation }) => {
-  const { config } = useContext(ConfigContext);
+  const { config } = useConfig();
 
   let data = getRoundTrackerData(rounds, size, type, rotation, config);
 

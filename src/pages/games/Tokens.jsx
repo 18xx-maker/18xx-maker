@@ -1,20 +1,15 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import ConfigContext from "../../context/ConfigContext";
-import GameContext from "../../context/GameContext";
-
-import CompanyToken from "../../tokens/CompanyToken";
-import Token from "../../tokens/Token";
-import ColorContext from "../../context/ColorContext";
-
-import { unitsToCss } from "../../util";
-import { compileCompanies, overrideCompanies } from "../../util/companies";
+import ColorContext from "@/context/ColorContext";
+import CompanyToken from "@/tokens/CompanyToken";
+import PageSetup from "@/PageSetup";
+import Svg from "@/Svg";
+import Token from "@/tokens/Token";
+import { compileCompanies, overrideCompanies } from "@/util/companies";
+import { unitsToCss } from "@/util";
+import { useConfig, useGame } from "@/hooks";
 
 import { addIndex, chain, is, map, splitEvery } from "ramda";
-
-import PageSetup from "../../PageSetup";
-import Svg from "../../Svg";
 
 // Takes in a game object, a tokens config object and a paper config object.
 //
@@ -231,8 +226,8 @@ const TokenLayout = ({ companies, data, game }) => {
 
 const Tokens = () => {
   const navigate = useNavigate();
-  const { config } = useContext(ConfigContext);
-  const { game } = useContext(GameContext);
+  const { config } = useConfig();
+  const game = useGame();
 
   if (!game.companies && !game.tokens) {
     navigate(`/games/${game.meta.slug}/`);

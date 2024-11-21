@@ -1,14 +1,12 @@
-import { useContext } from "react";
-import makeStyles from "@mui/styles/makeStyles";
+import tinycolor from "tinycolor2";
 
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
+import makeStyles from "@mui/styles/makeStyles";
 
-import ColorContext from "../context/ColorContext";
-import ConfigContext from "../context/ConfigContext";
-import Color from "../util/Color";
-
-import tinycolor from "tinycolor2";
+import ColorContext from "@/context/ColorContext";
+import Color from "@/util/Color";
+import { useConfig } from "@/hooks";
 
 import { filter, is, keys, map, sortBy, uniqBy } from "ramda";
 
@@ -26,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 import { mapThemes, companyThemes } from "../data";
 
 const ThemePreview = ({ companies }) => {
-  const { config } = useContext(ConfigContext);
+  const { config } = useConfig();
   const { theme, companiesTheme } = config;
 
   // Just use the base color names that don't have crazy options

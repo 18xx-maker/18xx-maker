@@ -852,6 +852,13 @@
     "DB801": 1
   },
   "map": {
+    "borders": [
+      {
+        "color": "white",
+        "coords": ["B16p4", "B16p5"],
+        "width": 6
+      }
+    ],
     "roundTracker": {
       "type": "row",
       "x": 500,

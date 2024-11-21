@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import GameContext from "../../context/GameContext";
+import { useGame } from "../../hooks";
 import { useNavigate } from "react-router-dom";
 
 import { tiles } from "../../data";
@@ -30,7 +29,7 @@ const getCol = (tile) => {
 
 const TileManifest = () => {
   const navigate = useNavigate();
-  const { game } = useContext(GameContext);
+  const game = useGame();
 
   if (!game.tiles) {
     navigate(`/games/${game.meta.slug}/`);
