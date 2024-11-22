@@ -1,10 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
 import Paginate from "../util/Paginate";
-
-import { getParData } from "./util";
-
 import Par from "./Par";
+import { getParData } from "./util";
 
 const ParPaginated = ({ config, game }) => {
   const navigate = useNavigate();

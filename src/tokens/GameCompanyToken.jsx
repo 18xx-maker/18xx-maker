@@ -1,9 +1,9 @@
 import { findIndex, propEq } from "ramda";
 
+import { useConfig, useGame } from "@/hooks";
 import CompanyToken from "@/tokens/CompanyToken";
 import Token from "@/tokens/Token";
-import { overrideCompanies, compileCompanies } from "@/util/companies";
-import { useConfig, useGame } from "@/hooks";
+import { compileCompanies, overrideCompanies } from "@/util/companies";
 
 // This component is in charge of loading the proper company data from the
 // current game from an abbrev and then rendering a token

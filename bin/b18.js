@@ -1,9 +1,9 @@
-import express from "express";
 import fs from "node:fs";
 import path from "node:path";
-import puppeteer from "puppeteer";
+
 import archiver from "archiver";
-import { setup, setupB18 } from "../src/render/util.js";
+import express from "express";
+import puppeteer from "puppeteer";
 
 import {
   ascend,
@@ -29,6 +29,8 @@ import {
 } from "ramda";
 
 import defaultConfig from "../src/defaults.json" with { type: "json" };
+import { setup, setupB18 } from "../src/render/util.js";
+
 let customConfig = {};
 if (fs.existsSync(path.resolve("../src/config.json"))) {
   customConfig = await import("../src/config.json", { with: { type: "json" } });

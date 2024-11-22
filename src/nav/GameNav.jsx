@@ -3,11 +3,13 @@ import { useDispatch } from "react-redux";
 import { useMatch } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
 
-import { useGame } from "../hooks/game.js";
-import { useBooleanParam, useIntParam } from "../util/query.js";
-
-import { addIndex, is, map } from "ramda";
-
+import RulesIcon from "@mui/icons-material/Gavel";
+import LicenseIcon from "@mui/icons-material/Lock";
+import PurchaseIcon from "@mui/icons-material/MonetizationOn";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import BGGIcon from "@mui/icons-material/Storage";
+import GameIcon from "@mui/icons-material/Train";
+import WarningIcon from "@mui/icons-material/Warning";
 import Checkbox from "@mui/material/Checkbox";
 import Divider from "@mui/material/Divider";
 import FormControl from "@mui/material/FormControl";
@@ -23,21 +25,16 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Switch from "@mui/material/Switch";
+import { blue, green, red } from "@mui/material/colors";
+import makeStyles from "@mui/styles/makeStyles";
 
-import BGGIcon from "@mui/icons-material/Storage";
-import GameIcon from "@mui/icons-material/Train";
-import LicenseIcon from "@mui/icons-material/Lock";
-import PurchaseIcon from "@mui/icons-material/MonetizationOn";
-import RefreshIcon from "@mui/icons-material/Refresh";
-import RulesIcon from "@mui/icons-material/Gavel";
-import WarningIcon from "@mui/icons-material/Warning";
+import { addIndex, is, map } from "ramda";
 
+import { refreshGame } from "@/state";
 import File from "@/util/File";
 import capability from "@/util/capability";
-import { refreshGame } from "@/state";
-
-import makeStyles from "@mui/styles/makeStyles";
-import { green, blue, red } from "@mui/material/colors";
+import { useGame } from "../hooks/game.js";
+import { useBooleanParam, useIntParam } from "../util/query.js";
 
 const useStyles = makeStyles((theme) => ({
   input: {

@@ -1,15 +1,16 @@
-import Promise from "bluebird";
 import fs from "node:fs";
 import { join } from "node:path";
+
+import Promise from "bluebird";
 import { dialog, shell } from "electron";
 
+import { send } from "./util.js";
 import {
   captureWindow,
   getMainWindow,
   selectDirectory,
   startUrl,
 } from "./window.js";
-import { send } from "./util.js";
 
 const getPath = (game, item) => {
   if (item.includes("?")) {

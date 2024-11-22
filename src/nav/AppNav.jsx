@@ -1,12 +1,14 @@
 import { forwardRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useMatch } from "react-router";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { useBooleanParam } from "../util/query";
-import { useLoadedGame } from "../hooks/game.js";
 
-import MobileMenuButton from "./MobileMenuButton";
-
+import ElementsIcon from "@mui/icons-material/Category";
+import DocumentationIcon from "@mui/icons-material/Help";
+import HomeIcon from "@mui/icons-material/Home";
+import MenuIcon from "@mui/icons-material/KeyboardArrowDown";
+import LoadIcon from "@mui/icons-material/OpenInBrowser";
+import GamesIcon from "@mui/icons-material/Train";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -16,16 +18,11 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-
-import DocumentationIcon from "@mui/icons-material/Help";
-import ElementsIcon from "@mui/icons-material/Category";
-import HomeIcon from "@mui/icons-material/Home";
-
-import GamesIcon from "@mui/icons-material/Train";
-import LoadIcon from "@mui/icons-material/OpenInBrowser";
-import MenuIcon from "@mui/icons-material/KeyboardArrowDown";
-
 import makeStyles from "@mui/styles/makeStyles";
+
+import { useLoadedGame } from "../hooks/game.js";
+import { useBooleanParam } from "../util/query";
+import MobileMenuButton from "./MobileMenuButton";
 
 const useStyles = makeStyles((theme) => ({
   activeButton: {

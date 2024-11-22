@@ -1,19 +1,17 @@
 import { Fragment } from "react";
-
 import { useTranslation } from "react-i18next";
-
-import Svg from "../../Svg";
-import Hex from "../../Hex";
-
-import { addIndex, chain } from "ramda";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-
 import makeStyles from "@mui/styles/makeStyles";
+
+import { addIndex, chain } from "ramda";
+
+import Hex from "../../Hex";
+import Svg from "../../Svg";
 
 const atoms = [
   {

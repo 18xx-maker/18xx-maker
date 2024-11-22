@@ -1,10 +1,9 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import { chain, compose, map, prop, sortBy, values } from "ramda";
-
+import OpenIcon from "@mui/icons-material/FileOpen";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
@@ -15,16 +14,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-
-import OpenIcon from "@mui/icons-material/FileOpen";
-
 import makeStyles from "@mui/styles/makeStyles";
 
+import { chain, compose, map, prop, sortBy, values } from "ramda";
+
+import GameRow from "@/pages/load/GameRow";
+import { createAlert, deleteGame, loadSummaries } from "@/state";
+import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import * as opfs from "@/util/opfs";
-import GameRow from "@/pages/load/GameRow";
-import capability from "@/util/capability";
-import { createAlert, deleteGame, loadSummaries } from "@/state";
 
 const useStyles = makeStyles((theme) => ({
   page: {

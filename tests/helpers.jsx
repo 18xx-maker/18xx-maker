@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
+import { RouterProvider, createMemoryRouter } from "react-router-dom";
 
 import { rootRoutes } from "@/routes";
-import { rootReducer, initialState } from "@/state";
+import { initialState, rootReducer } from "@/state";
 
 export const renderApp = (route = "/") => {
   const store = configureStore({

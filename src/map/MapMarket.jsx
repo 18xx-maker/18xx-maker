@@ -1,7 +1,6 @@
 import { useConfig, useGame } from "@/hooks";
-
-import { getMarketData } from "@/market/util";
 import Market from "@/market/Market";
+import { getMarketData } from "@/market/util";
 
 const MapMarket = ({ mapMarket, hexWidth }) => {
   const game = useGame();

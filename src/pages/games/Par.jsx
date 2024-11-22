@@ -1,8 +1,7 @@
 import { useConfig, useGame } from "@/hooks";
-import { useBooleanParam } from "@/util/query";
-
-import ParSingle from "@/market/ParSingle";
 import ParPaginated from "@/market/ParPaginated";
+import ParSingle from "@/market/ParSingle";
+import { useBooleanParam } from "@/util/query";
 
 const Par = () => {
   const { config } = useConfig();

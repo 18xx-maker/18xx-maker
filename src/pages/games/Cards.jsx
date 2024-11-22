@@ -1,6 +1,5 @@
-import { useBooleanParam } from "../../util/query";
-
 import CardsComponent from "../../cards";
+import { useBooleanParam } from "../../util/query";
 
 const Cards = () => {
   const [hidePrivates] = useBooleanParam("hidePrivates");

@@ -1,11 +1,11 @@
-import Map from "@/map/Map";
+import { assocPath, is, isNil } from "ramda";
+
 import Svg from "@/Svg";
 import { MapOrientation } from "@/context/OrientationContext";
-import { getMapData } from "@/map/util";
 import { useConfig, useGame } from "@/hooks";
+import Map from "@/map/Map";
+import { getMapData } from "@/map/util";
 import { useIntParam } from "@/util/query";
-
-import { assocPath, is, isNil } from "ramda";
 
 const B18Map = () => {
   const { config } = useConfig();

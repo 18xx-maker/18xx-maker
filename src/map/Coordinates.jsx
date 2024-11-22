@@ -1,7 +1,6 @@
-import Color from "../util/Color";
-
 import { chain, concat, range } from "ramda";
 
+import Color from "../util/Color";
 import { toAlpha } from "./util";
 
 export const Coordinate = ({ x, y, label }) => (

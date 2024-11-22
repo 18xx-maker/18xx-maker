@@ -1,43 +1,38 @@
 // Root Routes
 import Root from "./Root";
-import Home from "./pages/Home";
+// Side Routes
+import DocsNav from "./nav/DocsNav";
+import ElementsNav from "./nav/ElementsNav";
+import GameNav from "./nav/GameNav";
 import Docs from "./pages/Docs";
 import Elements from "./pages/Elements";
-
+import Home from "./pages/Home";
 // Elements Routes
 import Atoms from "./pages/elements/Atoms";
 import Logos from "./pages/elements/Logos";
 import AllTiles from "./pages/elements/Tiles";
-
-// Games Routes
-import LoadGames from "./pages/load/LoadGames";
-import Game from "./pages/games/Game";
-
 // Game Routes
 import Background from "./pages/games/Background";
 import Card from "./pages/games/Card";
 import Cards from "./pages/games/Cards";
 import Charter from "./pages/games/Charter";
 import Charters from "./pages/games/Charters";
+import Game from "./pages/games/Game";
 import Info from "./pages/games/Info";
 import Map from "./pages/games/Map";
 import Market from "./pages/games/Market";
 import Par from "./pages/games/Par";
 import Revenue from "./pages/games/Revenue";
-import TileManifest from "./pages/games/TileManifest";
 import Tile from "./pages/games/Tile";
+import TileManifest from "./pages/games/TileManifest";
 import Tiles from "./pages/games/Tiles";
 import Token from "./pages/games/Token";
 import Tokens from "./pages/games/Tokens";
-
 import B18Map from "./pages/games/b18/Map";
 import B18Tiles from "./pages/games/b18/Tiles";
 import B18Tokens from "./pages/games/b18/Tokens";
-
-// Side Routes
-import DocsNav from "./nav/DocsNav";
-import ElementsNav from "./nav/ElementsNav";
-import GameNav from "./nav/GameNav";
+// Games Routes
+import LoadGames from "./pages/load/LoadGames";
 
 export const rootRoutes = [
   {

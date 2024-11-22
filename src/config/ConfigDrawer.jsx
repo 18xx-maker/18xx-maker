@@ -1,19 +1,17 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useBooleanParam } from "../util/query";
 
-import Config from "./Config";
-
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ConfigIcon from "@mui/icons-material/Settings";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import Fab from "@mui/material/Fab";
 import Slide from "@mui/material/Slide";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
-
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ConfigIcon from "@mui/icons-material/Settings";
-
 import makeStyles from "@mui/styles/makeStyles";
+
+import { useBooleanParam } from "../util/query";
+import Config from "./Config";
 
 const useStyles = makeStyles((theme) => ({
   configButton: {

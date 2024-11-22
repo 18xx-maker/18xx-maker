@@ -1,9 +1,9 @@
-import globals from "globals";
 import js from "@eslint/js";
-import react from "eslint-plugin-react";
-import vitest from "eslint-plugin-vitest";
 import jestDom from "eslint-plugin-jest-dom";
+import react from "eslint-plugin-react";
 import testingLibrary from "eslint-plugin-testing-library";
+import vitest from "eslint-plugin-vitest";
+import globals from "globals";
 
 export default [
   { files: ["**/*.{js,mjs,cjs,jsx}"] },

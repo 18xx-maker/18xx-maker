@@ -1,7 +1,7 @@
-import { unitsToCss } from "@/util";
-import { useConfig } from "@/hooks";
-
 import { is } from "ramda";
+
+import { useConfig } from "@/hooks";
+import { unitsToCss } from "@/util";
 
 export const paperToCssSize = (paper, landscape) => {
   let width = unitsToCss(landscape ? paper.height : paper.width);

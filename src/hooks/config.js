@@ -1,10 +1,11 @@
-import { assocPath, defaultTo, mergeDeepRight } from "ramda";
 import { diff } from "deep-object-diff";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-import { createSetConfig, createResetConfig } from "@/state";
+import { assocPath, defaultTo, mergeDeepRight } from "ramda";
+
 import { useGame } from "@/hooks";
+import { createResetConfig, createSetConfig } from "@/state";
 
 const configs = import.meta.glob("../*.json", {
   eager: true,

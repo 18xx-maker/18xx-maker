@@ -1,10 +1,9 @@
 import { Link as RouterLink } from "react-router-dom";
 
+import DeleteIcon from "@mui/icons-material/Delete";
 import Link from "@mui/material/Link";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-
-import DeleteIcon from "@mui/icons-material/Delete";
 
 import { publishers } from "@/data";
 

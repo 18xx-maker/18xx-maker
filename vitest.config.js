@@ -1,4 +1,5 @@
 import path from "node:path";
+
 import react from "@vitejs/plugin-react-swc";
 import { svgPlugin as svg } from "vite-plugin-fast-react-svg";
 import { coverageConfigDefaults, defineConfig } from "vitest/config";

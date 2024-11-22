@@ -1,8 +1,9 @@
-import { app, Menu } from "electron";
+import { Menu, app } from "electron";
+
 import { map } from "ramda";
 
-import { openGame } from "./game.js";
 import { getRecents } from "./config.js";
+import { openGame } from "./game.js";
 import { send } from "./util.js";
 
 const isMac = process.platform === "darwin";

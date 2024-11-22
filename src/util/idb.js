@@ -1,4 +1,5 @@
 import { indexBy, map, omit, prop } from "ramda";
+
 import { getGameSummary, loadFile } from "@/util/loading";
 
 export const TYPE = "system";

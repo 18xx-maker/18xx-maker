@@ -1,8 +1,7 @@
-import { useBooleanParam } from "@/util/query";
 import { useConfig, useGame } from "@/hooks";
-
-import MarketSingle from "@/market/MarketSingle";
 import MarketPaginated from "@/market/MarketPaginated";
+import MarketSingle from "@/market/MarketSingle";
+import { useBooleanParam } from "@/util/query";
 
 const Market = () => {
   const { config } = useConfig();

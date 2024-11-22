@@ -1,4 +1,8 @@
+import fs from "node:fs";
+import { join } from "node:path";
+
 import { app } from "electron";
+
 import {
   assocPath,
   dissocPath,
@@ -9,9 +13,6 @@ import {
   pick,
   prop,
 } from "ramda";
-
-import fs from "node:fs";
-import { join } from "node:path";
 
 import { getGameSummary } from "../../src/util/loading.js";
 

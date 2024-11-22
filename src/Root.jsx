@@ -1,38 +1,38 @@
-import { Outlet, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { compose } from "ramda";
+import { useDispatch } from "react-redux";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import LinearProgress from "@mui/material/LinearProgress";
 import Snackbar from "@mui/material/Snackbar";
-
+import { deepPurple, orange } from "@mui/material/colors";
 import {
-  createTheme,
-  ThemeProvider,
   StyledEngineProvider,
+  ThemeProvider,
+  createTheme,
 } from "@mui/material/styles";
-import { orange, deepPurple } from "@mui/material/colors";
 
-import AppNav from "@/nav/AppNav";
-import ConfigDrawer from "@/config/ConfigDrawer.jsx";
+import { compose } from "ramda";
+
 import ExportButton from "@/ExportButton.jsx";
 import PrintButton from "@/PrintButton.jsx";
 import ScrollToTop from "@/ScrollToTop";
-import SetSvgColors from "@/util/SetSvgColors";
-import SideNav from "@/nav/SideNav";
 import Viewport from "@/Viewport";
-import capability from "@/util/capability";
-import * as opfs from "@/util/opfs";
-import * as idb from "@/util/idb";
+import ConfigDrawer from "@/config/ConfigDrawer.jsx";
+import { useAlert, useBindings } from "@/hooks";
+import AppNav from "@/nav/AppNav";
+import SideNav from "@/nav/SideNav";
 import {
   clearAlert,
   createAlert,
   createProgressAlert,
   createSetGame,
 } from "@/state";
-import { useAlert, useBindings } from "@/hooks";
+import SetSvgColors from "@/util/SetSvgColors";
+import capability from "@/util/capability";
+import * as idb from "@/util/idb";
+import * as opfs from "@/util/opfs";
 import { useBooleanParam } from "@/util/query";
 
 const theme = createTheme({

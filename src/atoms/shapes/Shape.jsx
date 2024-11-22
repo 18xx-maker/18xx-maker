@@ -3,8 +3,8 @@ import Diamond from "./Diamond";
 import Ellipse from "./Ellipse";
 import Hexagon from "./Hexagon";
 import Square from "./Square";
-import Triangle from "./Triangle";
 import Star from "./Star";
+import Triangle from "./Triangle";
 
 const mapping = {
   circle: Circle,

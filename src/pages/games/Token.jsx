@@ -1,14 +1,15 @@
 import { useParams } from "react-router-dom";
 
 import "@/pages/games/b18/b18.css";
-import ColorContext from "@/context/ColorContext";
-import CompanyToken from "@/tokens/CompanyToken";
+
+import { addIndex, compose, concat, is, map, max, propEq, reject } from "ramda";
+
 import Svg from "@/Svg";
+import ColorContext from "@/context/ColorContext";
+import { useConfig, useGame } from "@/hooks";
+import CompanyToken from "@/tokens/CompanyToken";
 import Token from "@/tokens/Token";
 import { compileCompanies, overrideCompanies } from "@/util/companies.js";
-import { useConfig, useGame } from "@/hooks";
-
-import { addIndex, concat, is, map, max, compose, reject, propEq } from "ramda";
 
 const TokenSingle = () => {
   const { config } = useConfig();

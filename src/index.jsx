@@ -1,9 +1,9 @@
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import {
+  RouterProvider,
   createBrowserRouter,
   createHashRouter,
-  RouterProvider,
 } from "react-router-dom";
 
 import "./i18n";

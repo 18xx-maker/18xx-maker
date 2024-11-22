@@ -1,19 +1,16 @@
 import * as R from "ramda";
 
 import Hex from "../Hex";
-
-import Coordinates from "./Coordinates";
+import { multiDefaultTo } from "../util";
 import BorderTexts from "./BorderTexts";
 import Borders from "./Borders";
+import Coordinates from "./Coordinates";
 import Lines from "./Lines";
-import Title from "./Title";
-
 import MapMarket from "./MapMarket";
 import MapPlayers from "./MapPlayers";
 import MapRoundTracker from "./MapRoundTracker";
-
+import Title from "./Title";
 import { getMapData, toAlpha, toCoords } from "./util";
-import { multiDefaultTo } from "../util";
 
 const Map = ({ name, game, config, variation }) => {
   const coords = config.coords;

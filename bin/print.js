@@ -1,21 +1,20 @@
 /* eslint no-fallthrough: "off" */
 
-import express from "express";
-import puppeteer from "puppeteer";
-
 import fs from "node:fs";
 import path from "node:path";
 
-import { compose, map, filter } from "ramda";
+import express from "express";
+import puppeteer from "puppeteer";
 
+import { compose, filter, map } from "ramda";
+
+import defaults from "../src/defaults.json" with { type: "json" };
 import { setup } from "../src/render/util.js";
 
 let config = {};
 if (fs.existsSync(path.resolve("../src/config.json"))) {
   config = await import("../src/config.json", { with: { type: "json" } });
 }
-
-import defaults from "../src/defaults.json" with { type: "json" };
 
 // Setup folders
 setup();

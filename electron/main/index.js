@@ -1,5 +1,6 @@
 import Promise from "bluebird";
 import { app, ipcMain } from "electron";
+
 import { objOf } from "ramda";
 
 import {
@@ -10,10 +11,10 @@ import {
   getSummary,
 } from "./config.js";
 import { exportPDF, exportPNG, pdf, png } from "./export.js";
-import { createWindow } from "./window.js";
 import { TYPE, loadGame, openGame, saveGamePath } from "./game.js";
 import { setMenu } from "./menu.js";
 import { stopWatching, watch } from "./watch.js";
+import { createWindow } from "./window.js";
 
 app.on("ready", createWindow);
 app.on("activate", createWindow);

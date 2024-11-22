@@ -1,13 +1,13 @@
-import CityRotateContext from "@/context/CityRotateContext";
-import Color from "@/util/Color";
-import ColorContext from "@/context/ColorContext";
-import GameMapCompanyToken from "@/tokens/GameMapCompanyToken";
-import Name from "@/atoms/Name";
-import { icons as iconComponents } from "@/data";
-import { multiDefaultTo } from "@/util";
-import { useConfig, useGame } from "@/hooks";
-
 import { is } from "ramda";
+
+import Name from "@/atoms/Name";
+import CityRotateContext from "@/context/CityRotateContext";
+import ColorContext from "@/context/ColorContext";
+import { icons as iconComponents } from "@/data";
+import { useConfig, useGame } from "@/hooks";
+import GameMapCompanyToken from "@/tokens/GameMapCompanyToken";
+import { multiDefaultTo } from "@/util";
+import Color from "@/util/Color";
 
 const cityPaths = {
   cityPath: "M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30",

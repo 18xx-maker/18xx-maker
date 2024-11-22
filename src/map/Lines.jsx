@@ -1,7 +1,6 @@
 import { addIndex, concat, map } from "ramda";
 
 import Color from "../util/Color";
-
 import { mapCoord } from "./util";
 
 const Line = ({ line, data, bg }) => {

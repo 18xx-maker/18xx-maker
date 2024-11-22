@@ -1,24 +1,4 @@
-import File from "@/util/File";
-import Input from "@/config/Input";
-import ThemePreview from "@/config/ThemePreview";
-import defaultConfig from "@/defaults.json";
-import schema from "@/schemas/config.schema.json";
 import { diff } from "deep-object-diff";
-import { useConfig } from "@/hooks";
-
-import {
-  chain,
-  compose,
-  complement,
-  filter,
-  isEmpty,
-  keys,
-  map,
-  path,
-  split,
-} from "ramda";
-
-import { mapThemes, companyThemes } from "@/data";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -28,8 +8,27 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
-
 import makeStyles from "@mui/styles/makeStyles";
+
+import {
+  chain,
+  complement,
+  compose,
+  filter,
+  isEmpty,
+  keys,
+  map,
+  path,
+  split,
+} from "ramda";
+
+import Input from "@/config/Input";
+import ThemePreview from "@/config/ThemePreview";
+import { companyThemes, mapThemes } from "@/data";
+import defaultConfig from "@/defaults.json";
+import { useConfig } from "@/hooks";
+import schema from "@/schemas/config.schema.json";
+import File from "@/util/File";
 
 export const getPath = split(".");
 export const getSchemaPath = compose(

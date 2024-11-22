@@ -1,16 +1,13 @@
-import Color from "../util/Color";
-
-import Cell from "./Cell";
-import Ledges from "./Ledges";
-import Par from "./Par";
-import MarketRoundTracker from "./MarketRoundTracker";
+import { addIndex, chain, concat, map, reverse } from "ramda";
 
 import Legend from "../Legend";
-
-import { getParData } from "./util";
 import { multiDefaultTo } from "../util";
-
-import { addIndex, chain, concat, map, reverse } from "ramda";
+import Color from "../util/Color";
+import Cell from "./Cell";
+import Ledges from "./Ledges";
+import MarketRoundTracker from "./MarketRoundTracker";
+import Par from "./Par";
+import { getParData } from "./util";
 
 const Market = ({ data, game, config, title, displayTitle }) => {
   let cells = [];

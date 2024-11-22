@@ -1,15 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import { mapObjIndexed, mergeDeepRight } from "ramda";
 
-import { combineReducers } from "@/state/helpers";
 import { games } from "@/data";
-import { getGameSummary } from "@/util/loading.js";
-
 import { ALERT_DEFAULT, alertReducer } from "@/state/alerts";
 import { configReducer } from "@/state/config";
 import { gameReducer, loadedGameReducer } from "@/state/game";
-import { summariesReducer } from "@/state/summaries";
+import { combineReducers } from "@/state/helpers";
 import storage from "@/state/storage";
+import { summariesReducer } from "@/state/summaries";
+import { getGameSummary } from "@/util/loading.js";
 
 const summaries = { bundled: mapObjIndexed(getGameSummary, games) };
 

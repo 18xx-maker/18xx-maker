@@ -1,10 +1,10 @@
-import yellow from "./yellow.json" with { type: "json" };
-import green from "./green.json" with { type: "json" };
+import { assoc, clone, forEach, forEachObjIndexed, mapObjIndexed } from "ramda";
+
 import brown from "./brown.json" with { type: "json" };
 import gray from "./gray.json" with { type: "json" };
+import green from "./green.json" with { type: "json" };
 import other from "./other.json" with { type: "json" };
-
-import { assoc, clone, mapObjIndexed, forEach, forEachObjIndexed } from "ramda";
+import yellow from "./yellow.json" with { type: "json" };
 
 let aliases = {};
 const gatherAliases = (tiles) => {

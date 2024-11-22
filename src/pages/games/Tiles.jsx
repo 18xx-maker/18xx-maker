@@ -4,28 +4,13 @@ import { useConfig, useGame } from "@/hooks";
 
 import "@/pages/games/Tiles.css";
 
-import { getTile, sortTiles } from "@/util";
-import { getTileSheetContext } from "@/tilesheet/util";
-
-import { tiles as tileDefs } from "@/data";
-import { sidesFromTile } from "@/util/track";
-
-import Svg from "@/Svg";
-import Page from "@/util/Page";
-import PageSetup from "@/PageSetup";
-import Hex from "@/Hex";
-
-import ColorContext from "@/context/ColorContext";
-
-import Cutlines from "@/tilesheet/Cutlines";
-import Pins from "@/Pins";
-
 import {
   addIndex,
   append,
   clone,
   compose,
   concat,
+  defaultTo,
   drop,
   filter,
   groupBy,
@@ -35,12 +20,23 @@ import {
   map,
   pipe,
   prop,
-  defaultTo,
   reduce,
   repeat,
   take,
   unnest,
 } from "ramda";
+
+import Hex from "@/Hex";
+import PageSetup from "@/PageSetup";
+import Pins from "@/Pins";
+import Svg from "@/Svg";
+import ColorContext from "@/context/ColorContext";
+import { tiles as tileDefs } from "@/data";
+import Cutlines from "@/tilesheet/Cutlines";
+import { getTileSheetContext } from "@/tilesheet/util";
+import { getTile, sortTiles } from "@/util";
+import Page from "@/util/Page";
+import { sidesFromTile } from "@/util/track";
 
 const gatherIds = (tiles) => {
   return compose(

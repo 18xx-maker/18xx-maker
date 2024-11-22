@@ -1,11 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 
+import Charter from "@/Charter";
+import PageSetup from "@/PageSetup";
 import { useConfig, useGame } from "@/hooks";
 import { getCharterData } from "@/util";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
-import Charter from "@/Charter";
-
-import PageSetup from "@/PageSetup";
 
 const Charters = () => {
   const navigate = useNavigate();

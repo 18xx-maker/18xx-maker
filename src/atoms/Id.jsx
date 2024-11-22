@@ -1,6 +1,6 @@
-import Color from "@/util/Color";
-import { useConfig } from "@/hooks";
 import { useOrientation } from "@/context/OrientationContext";
+import { useConfig } from "@/hooks";
+import Color from "@/util/Color";
 
 const colorblindSymbols = {
   yellow: "▼",

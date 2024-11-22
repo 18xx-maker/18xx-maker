@@ -1,11 +1,11 @@
 import {
-  split,
-  compose,
   chain,
-  filter,
   complement,
-  path,
+  compose,
+  filter,
   isEmpty,
+  path,
+  split,
 } from "ramda";
 
 import schema from "@/schemas/config.schema.json";

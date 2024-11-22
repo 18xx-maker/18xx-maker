@@ -1,16 +1,13 @@
 import { useParams } from "react-router-dom";
 
-import { tiles as tileDefs } from "../../../data";
+import { compose, filter, is, keys, map, propEq, take, uniq } from "ramda";
 
 import Svg from "../../../Svg";
 import Tile from "../../../Tile";
-
-import { compose, filter, is, keys, map, propEq, take, uniq } from "ramda";
-
 import ColorContext from "../../../context/ColorContext";
-import { useGame } from "../../../hooks";
 import RotateContext from "../../../context/RotateContext";
-
+import { tiles as tileDefs } from "../../../data";
+import { useGame } from "../../../hooks";
 import { getTile } from "../../../util";
 
 import "./b18.css";

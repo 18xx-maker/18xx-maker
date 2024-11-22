@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom";
 
-import ColorContext from "@/context/ColorContext";
-import CompanyToken from "@/tokens/CompanyToken";
+import { addIndex, chain, is, map, splitEvery } from "ramda";
+
 import PageSetup from "@/PageSetup";
 import Svg from "@/Svg";
-import Token from "@/tokens/Token";
-import { compileCompanies, overrideCompanies } from "@/util/companies";
-import { unitsToCss } from "@/util";
+import ColorContext from "@/context/ColorContext";
 import { useConfig, useGame } from "@/hooks";
-
-import { addIndex, chain, is, map, splitEvery } from "ramda";
+import CompanyToken from "@/tokens/CompanyToken";
+import Token from "@/tokens/Token";
+import { unitsToCss } from "@/util";
+import { compileCompanies, overrideCompanies } from "@/util/companies";
 
 // Takes in a game object, a tokens config object and a paper config object.
 //
