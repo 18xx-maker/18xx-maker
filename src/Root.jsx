@@ -143,6 +143,8 @@ body {
   const [sideNavOpen, setSideNavOpen] = useState(false);
   const toggleSideNav = () => setSideNavOpen(!sideNavOpen);
 
+  const alertKey = alert.progress ? alert.name : alert.message;
+
   return (
     <div id="dropzone" onDragOver={dragOverHandler} onDrop={dropHandler}>
       <StyledEngineProvider injectFirst>
@@ -160,10 +162,10 @@ body {
                 <Snackbar
                   anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                   open={alert.open}
-                  key={alert.message}
+                  key={alertKey}
                   onClose={() => dispatch(clearAlert())}
                   disableWindowBlurListener={true}
-                  autoHideDuration={4000}
+                  autoHideDuration={alert.progress ? undefined : 4000}
                 >
                   {alert.progress ? (
                     <Alert
