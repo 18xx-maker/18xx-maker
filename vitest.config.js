@@ -12,5 +12,6 @@ export default defineConfig({
     globals: true,
     reporters: process.env.CI ? ["junit", "default"] : ["default"],
     outputFile: "./junit.xml",
+    setupFiles: "./setup-tests.js",
   },
 });
