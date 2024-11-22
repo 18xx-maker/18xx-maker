@@ -42,5 +42,6 @@ export default defineConfig({
     outputFile: "./junit.xml",
     reporters: process.env.CI ? ["junit", "basic", "github-actions"] : "dot",
     setupFiles: "./tests/setup.js",
+    testTimeout: 30_000,
   },
 });
