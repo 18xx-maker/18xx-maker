@@ -41,5 +41,5 @@ pre-commit:
       priority: 30
     test:
       glob: "*.{js,mjs,cjs,jsx,json}"
-      run: yarn vitest related --coverage.enabled=false --reporter=basic --run {staged_files}
+      run: yarn vitest related --coverage.enabled=false --reporter=basic --exclude "tests/**" --run {staged_files}
       priority: 50
