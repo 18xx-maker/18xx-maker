@@ -63,5 +63,5 @@ export const useBindings = () => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [loadedGame]);
 };

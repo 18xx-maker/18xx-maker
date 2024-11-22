@@ -1,3 +1,5 @@
+// @vitest-environment happy-dom
+
 import storage from "@/state/storage";
 
 describe("storage", () => {

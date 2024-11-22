@@ -7,6 +7,7 @@
     "currency": "$#",
     "marketTokens": 1
   },
+  "prototype": true,
   "wip": true,
   "colors": {
     "short": "pink"
@@ -99,7 +100,7 @@
   "companies": [
     {
       "name": "Black Railroad",
-      "abbrev": "BRR",
+      "abbrev": "BLRR",
       "color": "black",
       "shares": [
         {
@@ -131,27 +132,27 @@
     },
     {
       "name": "Navy Railroad",
-      "abbrev": "NRR",
+      "abbrev": "NVRR",
       "color": "navy"
     },
     {
       "name": "Brown Railroad",
-      "abbrev": "BRR",
+      "abbrev": "BWRR",
       "color": "brown"
     },
     {
       "name": "Gray Railroad",
-      "abbrev": "GRR",
+      "abbrev": "GRRR",
       "color": "gray"
     },
     {
       "name": "Green Railroad",
-      "abbrev": "GRR",
+      "abbrev": "GERR",
       "color": "green"
     },
     {
       "name": "Lavender Railroad",
-      "abbrev": "LRR",
+      "abbrev": "LVRR",
       "color": "lavender"
     },
     {
@@ -166,7 +167,7 @@
     },
     {
       "name": "Gold Railroad",
-      "abbrev": "GRR",
+      "abbrev": "GORR",
       "color": "gold"
     },
     {
@@ -205,7 +206,7 @@
     },
     {
       "name": "Light Brown Railroad",
-      "abbrev": "LBRR",
+      "abbrev": "LBRRR",
       "color": "lightBrown",
       "minor": true
     },
@@ -857,6 +858,21 @@
         "color": "white",
         "coords": ["B16p4", "B16p5"],
         "width": 6
+      }
+    ],
+    "borderTexts": [
+      {
+        "cost": 80,
+        "circle": 16,
+        "bgColor": "water",
+        "color": "white",
+        "coord": "A17a30p0.6"
+      }
+    ],
+    "lines": [
+      {
+        "color": "mountain",
+        "coords": ["A15p1", "A15p4"]
       }
     ],
     "roundTracker": {

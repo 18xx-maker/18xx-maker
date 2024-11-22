@@ -13,7 +13,7 @@ import { assoc, clone, flatten, map } from "ramda";
 
 import "@/cards/card.css";
 
-const Cards = () => {
+const Card = () => {
   const { config } = useConfig();
   const game = useGame();
   const { type, index } = useParams();
@@ -158,4 +158,4 @@ const Cards = () => {
   );
 };
 
-export default Cards;
+export default Card;

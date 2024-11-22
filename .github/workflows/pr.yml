@@ -51,9 +51,6 @@ jobs:
         uses: codecov/test-results-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-      - name: Coverage
-        if: matrix.os == 'ubuntu-latest'
-        run: yarn test:coverage
       - name: Upload Coverage - Coveralls
         if: matrix.os == 'ubuntu-latest'
         uses: coverallsapp/github-action@v2
