@@ -1,3 +1,7 @@
-build
+assets
+coverage
 dist
+electron
 node_modules
+out
+render

@@ -1,9 +1,9 @@
+import { chain, concat, join, keys } from "ramda";
+
 import ColorContext from "@/context/ColorContext";
-import Color from "@/util/Color";
 import { themes } from "@/data";
 import { useConfig } from "@/hooks";
-
-import { chain, concat, join, keys } from "ramda";
+import Color from "@/util/Color";
 
 const colors = keys(themes["companies/rob"].colors);
 const mapColors = keys(themes["maps/gmt"].colors);

@@ -1,15 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
 
-import { useConfig, useGame } from "@/hooks";
-
-import { getTile } from "@/util";
-
-import { tiles as tileDefs } from "@/data";
-
-import Svg from "@/Svg";
 import Hex from "@/Hex";
-
+import Svg from "@/Svg";
 import ColorContext from "@/context/ColorContext";
+import { tiles as tileDefs } from "@/data";
+import { useConfig, useGame } from "@/hooks";
+import { getTile } from "@/util";
 
 const TileSheet = () => {
   const navigate = useNavigate();

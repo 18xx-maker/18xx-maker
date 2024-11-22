@@ -1,9 +1,10 @@
 import path from "node:path";
-import postcssNesting from "postcss-nesting";
-import postcssPresetEnv from "postcss-preset-env";
+
+import { codecovVitePlugin as codecov } from "@codecov/vite-plugin";
 import react from "@vitejs/plugin-react-swc";
 import { defineConfig, externalizeDepsPlugin } from "electron-vite";
-import { codecovVitePlugin as codecov } from "@codecov/vite-plugin";
+import postcssNesting from "postcss-nesting";
+import postcssPresetEnv from "postcss-preset-env";
 import { svgPlugin as svg } from "vite-plugin-fast-react-svg";
 
 export default defineConfig({

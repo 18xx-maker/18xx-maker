@@ -1,8 +1,8 @@
-import Token from "@/tokens/Token";
-import { useConfig } from "@/hooks";
-import { unitsToCss } from "@/util";
-
 import { addIndex, map } from "ramda";
+
+import { useConfig } from "@/hooks";
+import Token from "@/tokens/Token";
+import { unitsToCss } from "@/util";
 
 export const getRoundTrackerData = (rounds, size, type, rotation, config) => {
   let cell = config.stock.cell;

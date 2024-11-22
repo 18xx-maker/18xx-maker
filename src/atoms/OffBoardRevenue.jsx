@@ -1,14 +1,11 @@
 import { addIndex, chain, concat, map, max, sum } from "ramda";
 
 import { useGame } from "../hooks";
-
-import Name from "./Name";
-import Currency from "../util/Currency";
-
-import Color from "../util/Color";
-
 import { multiDefaultTo } from "../util";
+import Color from "../util/Color";
+import Currency from "../util/Currency";
 import { splitRevenues } from "../util/revenue";
+import Name from "./Name";
 
 const DEFAULT_FONTSIZE = 14;
 

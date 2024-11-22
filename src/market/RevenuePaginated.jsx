@@ -1,10 +1,7 @@
 import { useConfig, useGame } from "@/hooks";
-
-import Paginate from "@/util/Paginate";
-
-import { getRevenueData } from "@/market/util";
-
 import Revenue from "@/market/Revenue";
+import { getRevenueData } from "@/market/util";
+import Paginate from "@/util/Paginate";
 
 const RevenuePaginated = () => {
   const { config } = useConfig();

@@ -4,11 +4,12 @@ import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import makeStyles from "@mui/styles/makeStyles";
 
-import ColorContext from "@/context/ColorContext";
-import Color from "@/util/Color";
-import { useConfig } from "@/hooks";
-
 import { filter, is, keys, map, sortBy, uniqBy } from "ramda";
+
+import ColorContext from "@/context/ColorContext";
+import { useConfig } from "@/hooks";
+import Color from "@/util/Color";
+import { companyThemes, mapThemes } from "../data";
 
 const useStyles = makeStyles((theme) => ({
   themeGroup: {
@@ -20,8 +21,6 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(3),
   },
 }));
-
-import { mapThemes, companyThemes } from "../data";
 
 const ThemePreview = ({ companies }) => {
   const { config } = useConfig();

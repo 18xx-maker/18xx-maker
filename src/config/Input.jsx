@@ -1,21 +1,21 @@
-import ReactMarkdown from "react-markdown";
 import { useEffect, useState } from "react";
-
-import UnitInput from "@/config/UnitInput";
-import { useConfig } from "@/hooks";
-
-import { assocPath, map, path, split } from "ramda";
+import ReactMarkdown from "react-markdown";
 
 import Checkbox from "@mui/material/Checkbox";
+import MUIInput from "@mui/material/FilledInput";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import InputLabel from "@mui/material/InputLabel";
-import MUIInput from "@mui/material/FilledInput";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
-
 import makeStyles from "@mui/styles/makeStyles";
+
+import { assocPath, map, path, split } from "ramda";
+
+import UnitInput from "@/config/UnitInput";
+import { useConfig } from "@/hooks";
+import { getPath, getSchema } from "@/util/input";
 
 const useStyles = makeStyles((theme) => ({
   configItem: {
@@ -23,8 +23,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 0, 0),
   },
 }));
-
-import { getPath, getSchema } from "@/util/input";
 
 const Input = ({ name, label, description, dimension }) => {
   const classes = useStyles();

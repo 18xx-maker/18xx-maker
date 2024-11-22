@@ -1,4 +1,4 @@
-import { compose, sort, chain, propOr, defaultTo, uniq, subtract } from "ramda";
+import { chain, compose, defaultTo, propOr, sort, subtract, uniq } from "ramda";
 
 const sideMod = (side) => {
   return side > 6 ? side - 6 : side;

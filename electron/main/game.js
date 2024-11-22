@@ -1,11 +1,13 @@
-import Promise from "bluebird";
 import fs from "node:fs";
-import { assocPath } from "ramda";
+
+import Promise from "bluebird";
 import { dialog } from "electron";
 
-import { getID, addMeta, getGameSummary } from "../../src/util/loading.js";
-import { getMainWindow } from "./window.js";
+import { assocPath } from "ramda";
+
+import { addMeta, getGameSummary, getID } from "../../src/util/loading.js";
 import { updateConfig, updateSummaries } from "./config.js";
+import { getMainWindow } from "./window.js";
 
 export const TYPE = "electron";
 

@@ -1,9 +1,9 @@
 import { createContext } from "react";
 
-import { resolveFont } from "@/util/font";
-import { useConfig } from "@/hooks";
-
 import { append } from "ramda";
+
+import { useConfig } from "@/hooks";
+import { resolveFont } from "@/util/font";
 
 const FontContext = createContext([]);
 

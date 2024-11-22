@@ -1,4 +1,4 @@
-import { concat, compose, pick, prop, reduce, mergeRight } from "ramda";
+import { compose, concat, mergeRight, pick, prop, reduce } from "ramda";
 
 import { capitalize, mapKeys } from "../util";
 

@@ -1,12 +1,13 @@
 import "@/cards/share.css";
-import Color from "@/util/Color";
-import ColorContext from "@/context/ColorContext";
-import CompanyToken from "@/tokens/CompanyToken";
-import Currency from "@/util/Currency";
-import { multiDefaultTo } from "@/util";
-import { useConfig } from "@/hooks";
 
 import { min } from "ramda";
+
+import ColorContext from "@/context/ColorContext";
+import { useConfig } from "@/hooks";
+import CompanyToken from "@/tokens/CompanyToken";
+import { multiDefaultTo } from "@/util";
+import Color from "@/util/Color";
+import Currency from "@/util/Currency";
 
 const LeftShare = ({
   cost,

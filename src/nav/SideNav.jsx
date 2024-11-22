@@ -1,13 +1,12 @@
 import { useRoutes } from "react-router";
 
-import { useBooleanParam } from "../util/query";
-
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import makeStyles from "@mui/styles/makeStyles";
 
 import useSideMenu from "../hooks/useSideMenu";
 import { sideRoutes } from "../routes";
+import { useBooleanParam } from "../util/query";
 
 const useStyles = makeStyles(() => ({
   sideNav: {

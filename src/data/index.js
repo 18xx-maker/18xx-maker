@@ -2,13 +2,15 @@ import {
   binary,
   compose,
   flip,
+  mapObjIndexed,
+  pickBy,
   replace,
   startsWith,
-  pickBy,
-  mapObjIndexed,
 } from "ramda";
 
 import { mapKeys } from "../util.js";
+// Publishers
+import publishersJson from "./publishers/index.json" with { type: "json" };
 
 export const getID = replace(/^\.\/[^/]+\/([^.]+)\.[a-z]+$/, "$1");
 
@@ -18,8 +20,6 @@ export { default as games } from "./games/index.js";
 // Tiles
 export { default as tiles } from "./tiles/index.js";
 
-// Publishers
-import publishersJson from "./publishers/index.json" with { type: "json" };
 const publisherImageFiles = import.meta.glob("./publishers/*.png", {
   eager: true,
   import: "default",

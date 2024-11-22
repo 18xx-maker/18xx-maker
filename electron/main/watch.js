@@ -1,10 +1,11 @@
-import chokidar from "chokidar";
 import fs from "node:fs";
+
+import chokidar from "chokidar";
 
 import { addRecent } from "./config.js";
 import { loadGame } from "./game.js";
-import { send } from "./util.js";
 import { setMenu } from "./menu.js";
+import { send } from "./util.js";
 
 let watching = null;
 let watcher = null;

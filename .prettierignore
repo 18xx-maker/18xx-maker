@@ -1,15 +1,2 @@
-# Ignore builds and assets
-assets
-dist
-
 # Ignore all HTML files
 **/*.html
-
-# Ignore source control and node_modules
-**/.git
-**/node_modules
-
-# Ignore font awesome
-public/css
-public/fa
-public/favicon.ico

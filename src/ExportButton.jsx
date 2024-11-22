@@ -1,15 +1,10 @@
 import { useState } from "react";
-import { useLocation, useMatch } from "react-router";
 import { useTranslation } from "react-i18next";
+import { useLocation, useMatch } from "react-router";
 
-import { useConfig, useGame } from "@/hooks";
-import { useBooleanParam } from "@/util/query";
-
-import { maxPlayers } from "@/util";
-import { compileCompanies, overrideCompanies } from "@/util/companies";
-
-import schema from "@/schemas/config.schema.json";
-
+import ExportIcon from "@mui/icons-material/Collections";
+import PngIcon from "@mui/icons-material/PhotoLibrary";
+import PdfIcon from "@mui/icons-material/PictureAsPdf";
 import Divider from "@mui/material/Divider";
 import Fab from "@mui/material/Fab";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -18,14 +13,15 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Slide from "@mui/material/Slide";
 import Tooltip from "@mui/material/Tooltip";
-
-import ExportIcon from "@mui/icons-material/Collections";
-import PdfIcon from "@mui/icons-material/PictureAsPdf";
-import PngIcon from "@mui/icons-material/PhotoLibrary";
+import makeStyles from "@mui/styles/makeStyles";
 
 import { assoc, flatten, forEach, is, keys, map, range } from "ramda";
 
-import makeStyles from "@mui/styles/makeStyles";
+import { useConfig, useGame } from "@/hooks";
+import schema from "@/schemas/config.schema.json";
+import { maxPlayers } from "@/util";
+import { compileCompanies, overrideCompanies } from "@/util/companies";
+import { useBooleanParam } from "@/util/query";
 
 const useStyles = makeStyles((theme) => ({
   exportButton: {

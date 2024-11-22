@@ -1,6 +1,6 @@
-import { useConfig, useGame } from "@/hooks";
-
 import { is } from "ramda";
+
+import { useConfig, useGame } from "@/hooks";
 
 export const format = (value, game, doCurrencyFormat) => {
   if (value === null || value === undefined) {

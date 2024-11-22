@@ -1,11 +1,12 @@
-import Box from "@mui/material/Box";
-import { useSideMenu } from "./hooks/useSideMenu";
 import { useLocation } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
-import { useBooleanParam } from "./util/query";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import makeStyles from "@mui/styles/makeStyles";
+
+import { useSideMenu } from "./hooks/useSideMenu";
+import { useBooleanParam } from "./util/query";
 
 const useStyles = makeStyles((theme) => ({
   viewport: {

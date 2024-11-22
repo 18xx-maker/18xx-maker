@@ -1,16 +1,10 @@
 import * as R from "ramda";
 
 import Position from "./Position";
-
-import HexContext from "./context/HexContext";
-import PhaseContext from "./context/PhaseContext";
-import ColorContext from "./context/ColorContext";
-import { useOrientation } from "./context/OrientationContext";
-
+import Boomtown from "./atoms/Boomtown";
 import Border from "./atoms/Border";
 import Bridge from "./atoms/Bridge";
 import CenterTown from "./atoms/CenterTown";
-import Boomtown from "./atoms/Boomtown";
 import City from "./atoms/City";
 import Company from "./atoms/Company";
 import Divide from "./atoms/Divide";
@@ -31,9 +25,11 @@ import Track from "./atoms/Track";
 import Tunnel from "./atoms/Tunnel";
 import TunnelEntrance from "./atoms/TunnelEntrance";
 import Value from "./atoms/Value";
-
 import Shape from "./atoms/shapes/Shape";
-
+import ColorContext from "./context/ColorContext";
+import HexContext from "./context/HexContext";
+import { useOrientation } from "./context/OrientationContext";
+import PhaseContext from "./context/PhaseContext";
 import GameMapCompanyToken from "./tokens/GameMapCompanyToken";
 import Token from "./tokens/Token";
 

@@ -1,6 +1,6 @@
-import Token from "@/tokens/Token";
 import ColorContext from "@/context/ColorContext";
 import { useConfig } from "@/hooks";
+import Token from "@/tokens/Token";
 
 const CompanyToken = (props) => {
   let { company } = props;

@@ -1,6 +1,6 @@
-import Color from "./util/Color";
 import * as R from "ramda";
 
+import Color from "./util/Color";
 import Currency from "./util/Currency";
 
 const formatCell = (value) => {

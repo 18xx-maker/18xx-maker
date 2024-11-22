@@ -1,16 +1,13 @@
-import { useGame } from "../../hooks";
 import { useNavigate } from "react-router-dom";
 
-import { tiles } from "../../data";
-
-import Tile from "../../Tile";
-import Svg from "../../Svg";
-
-import { getTile } from "../../util";
-
-import ColorContext from "../../context/ColorContext";
-
 import { addIndex, ascend, keys, map, sortWith } from "ramda";
+
+import Svg from "../../Svg";
+import Tile from "../../Tile";
+import ColorContext from "../../context/ColorContext";
+import { tiles } from "../../data";
+import { useGame } from "../../hooks";
+import { getTile } from "../../util";
 
 import "../../TileManifest.css";
 

@@ -1,39 +1,38 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useEffect, useState, Suspense } from "react";
-import { compose } from "ramda";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import LinearProgress from "@mui/material/LinearProgress";
 import Snackbar from "@mui/material/Snackbar";
-
+import { deepPurple, orange } from "@mui/material/colors";
 import {
-  createTheme,
-  ThemeProvider,
   StyledEngineProvider,
+  ThemeProvider,
+  createTheme,
 } from "@mui/material/styles";
-import { orange, deepPurple } from "@mui/material/colors";
 
-import AppNav from "@/nav/AppNav";
-import ConfigDrawer from "@/config/ConfigDrawer.jsx";
+import { compose } from "ramda";
+
 import ExportButton from "@/ExportButton.jsx";
-import Loading from "@/Loading";
 import PrintButton from "@/PrintButton.jsx";
 import ScrollToTop from "@/ScrollToTop";
-import SetSvgColors from "@/util/SetSvgColors";
-import SideNav from "@/nav/SideNav";
 import Viewport from "@/Viewport";
-import capability from "@/util/capability";
-import * as opfs from "@/util/opfs";
-import * as idb from "@/util/idb";
+import ConfigDrawer from "@/config/ConfigDrawer.jsx";
+import { useAlert, useBindings } from "@/hooks";
+import AppNav from "@/nav/AppNav";
+import SideNav from "@/nav/SideNav";
 import {
   clearAlert,
   createAlert,
   createProgressAlert,
   createSetGame,
 } from "@/state";
-import { useAlert, useBindings } from "@/hooks";
+import SetSvgColors from "@/util/SetSvgColors";
+import capability from "@/util/capability";
+import * as idb from "@/util/idb";
+import * as opfs from "@/util/opfs";
 import { useBooleanParam } from "@/util/query";
 
 const theme = createTheme({
@@ -149,160 +148,156 @@ body {
     <div id="dropzone" onDragOver={dragOverHandler} onDrop={dropHandler}>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
-          <Suspense fallback={<Loading />}>
-            <ScrollToTop>
-              <AppNav toggleSideNav={toggleSideNav} />
-              <SideNav open={sideNavOpen} toggle={toggleSideNav} />
-              {capability.electron ? <ExportButton /> : <PrintButton />}
-              <ConfigDrawer />
-              <Viewport sideNavOpen={sideNavOpen}>
-                <Outlet />
-              </Viewport>
-              {print || (
-                <Snackbar
-                  anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                  open={alert.open}
-                  key={alertKey}
-                  onClose={() => dispatch(clearAlert())}
-                  disableWindowBlurListener={true}
-                  autoHideDuration={alert.progress ? undefined : 4000}
-                >
-                  {alert.progress ? (
-                    <Alert
-                      severity={alert.progress === 100 ? "success" : "info"}
-                    >
-                      <AlertTitle>{alert.title}</AlertTitle>
-                      <LinearProgress
-                        variant="determinate"
-                        value={alert.progress}
-                      />
-                      {alert.message}
-                    </Alert>
-                  ) : alert.type ? (
-                    <Alert severity={alert.type}>
-                      <AlertTitle>{alert.title}</AlertTitle>
-                      {alert.message}
-                    </Alert>
-                  ) : null}
-                </Snackbar>
-              )}
-              <svg
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ height: 0, width: 0, position: "absolute" }}
+          <ScrollToTop>
+            <AppNav toggleSideNav={toggleSideNav} />
+            <SideNav open={sideNavOpen} toggle={toggleSideNav} />
+            {capability.electron ? <ExportButton /> : <PrintButton />}
+            <ConfigDrawer />
+            <Viewport sideNavOpen={sideNavOpen}>
+              <Outlet />
+            </Viewport>
+            {print || (
+              <Snackbar
+                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                open={alert.open}
+                key={alertKey}
+                onClose={() => dispatch(clearAlert())}
+                disableWindowBlurListener={true}
+                autoHideDuration={alert.progress ? undefined : 4000}
               >
-                <defs>
-                  <marker
-                    id="arrow"
-                    viewBox="0 0 10 10"
-                    refX="8"
-                    refY="5"
-                    markerWidth="5"
-                    markerHeight="5"
-                    markerUnits="strokeWidth"
-                    orient="auto-start-reverse"
-                  >
-                    <path
-                      d="M 0 0 L 8 4 L 8 6 L 0 10 z"
-                      strokeLinejoin="round"
-                      strokeLinecap="round"
+                {alert.progress ? (
+                  <Alert severity={alert.progress === 100 ? "success" : "info"}>
+                    <AlertTitle>{alert.title}</AlertTitle>
+                    <LinearProgress
+                      variant="determinate"
+                      value={alert.progress}
                     />
-                  </marker>
-                  <mask id="hexMask">
-                    <rect
-                      x="-100"
-                      y="-100"
-                      width="200"
-                      height="200"
-                      fill="black"
-                    />
-                    <polygon
-                      points="-86.0252,0 -43.0126,-74.5 43.0126,-74.5 86.0252,0 43.0126,74.5 -43.0126,74.5"
-                      fill="white"
-                      stroke="white"
-                      strokeWidth="2"
-                    />
-                  </mask>
-                  <mask id="hexBleedMask">
-                    <rect
-                      x="-100"
-                      y="-100"
-                      width="200"
-                      height="200"
-                      fill="black"
-                    />
-                    <polygon
-                      points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 49.07475,85 -49.07475,85"
-                      fill="white"
-                      stroke="white"
-                      strokeWidth="2"
-                    />
-                  </mask>
-                  <mask id="hexBleedMaskOffset">
-                    <rect
-                      x="-100"
-                      y="-100"
-                      width="200"
-                      height="200"
-                      fill="black"
-                    />
-                    <polygon
-                      points="-86.6025,0 -92.376,-9.999995337 -54.84825,-75 -43.30125,-75 -37.52775,-85 37.52775,-85 43.30125,-75 54.84825,-75 92.376,-9.999995337 86.6025,0 92.376,9.999995337 54.84825,75 43.30125,75 37.52775,85 -37.52775,85 -43.30125,75 -54.84825,75 -92.376,9.999995337"
-                      fill="white"
-                      stroke="white"
-                      strokeWidth="2"
-                    />
-                  </mask>
-                  <mask id="hexBleedMaskDie">
-                    <rect
-                      x="-100"
-                      y="-100"
-                      width="200"
-                      height="200"
-                      fill="black"
-                    />
-                    <polygon
-                      points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 54.84825,75 -54.84825,75"
-                      fill="white"
-                      stroke="white"
-                      strokeWidth="2"
-                    />
-                  </mask>
-                  <mask id="hexBleedMaskDieTop">
-                    <rect
-                      x="-100"
-                      y="-100"
-                      width="200"
-                      height="200"
-                      fill="black"
-                    />
-                    <polygon
-                      points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 54.84825,75 -54.84825,75"
-                      fill="white"
-                      stroke="white"
-                      strokeWidth="2"
-                    />
-                  </mask>
-                  <mask id="hexBleedMaskDieBottom">
-                    <rect
-                      x="-100"
-                      y="-100"
-                      width="200"
-                      height="200"
-                      fill="black"
-                    />
-                    <polygon
-                      points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 49.07475,85 -49.07475,85"
-                      fill="white"
-                      stroke="white"
-                      strokeWidth="2"
-                    />
-                  </mask>
-                </defs>
-              </svg>
-              <SetSvgColors />
-            </ScrollToTop>
-          </Suspense>
+                    {alert.message}
+                  </Alert>
+                ) : alert.type ? (
+                  <Alert severity={alert.type}>
+                    <AlertTitle>{alert.title}</AlertTitle>
+                    {alert.message}
+                  </Alert>
+                ) : null}
+              </Snackbar>
+            )}
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ height: 0, width: 0, position: "absolute" }}
+            >
+              <defs>
+                <marker
+                  id="arrow"
+                  viewBox="0 0 10 10"
+                  refX="8"
+                  refY="5"
+                  markerWidth="5"
+                  markerHeight="5"
+                  markerUnits="strokeWidth"
+                  orient="auto-start-reverse"
+                >
+                  <path
+                    d="M 0 0 L 8 4 L 8 6 L 0 10 z"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                  />
+                </marker>
+                <mask id="hexMask">
+                  <rect
+                    x="-100"
+                    y="-100"
+                    width="200"
+                    height="200"
+                    fill="black"
+                  />
+                  <polygon
+                    points="-86.0252,0 -43.0126,-74.5 43.0126,-74.5 86.0252,0 43.0126,74.5 -43.0126,74.5"
+                    fill="white"
+                    stroke="white"
+                    strokeWidth="2"
+                  />
+                </mask>
+                <mask id="hexBleedMask">
+                  <rect
+                    x="-100"
+                    y="-100"
+                    width="200"
+                    height="200"
+                    fill="black"
+                  />
+                  <polygon
+                    points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 49.07475,85 -49.07475,85"
+                    fill="white"
+                    stroke="white"
+                    strokeWidth="2"
+                  />
+                </mask>
+                <mask id="hexBleedMaskOffset">
+                  <rect
+                    x="-100"
+                    y="-100"
+                    width="200"
+                    height="200"
+                    fill="black"
+                  />
+                  <polygon
+                    points="-86.6025,0 -92.376,-9.999995337 -54.84825,-75 -43.30125,-75 -37.52775,-85 37.52775,-85 43.30125,-75 54.84825,-75 92.376,-9.999995337 86.6025,0 92.376,9.999995337 54.84825,75 43.30125,75 37.52775,85 -37.52775,85 -43.30125,75 -54.84825,75 -92.376,9.999995337"
+                    fill="white"
+                    stroke="white"
+                    strokeWidth="2"
+                  />
+                </mask>
+                <mask id="hexBleedMaskDie">
+                  <rect
+                    x="-100"
+                    y="-100"
+                    width="200"
+                    height="200"
+                    fill="black"
+                  />
+                  <polygon
+                    points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 54.84825,75 -54.84825,75"
+                    fill="white"
+                    stroke="white"
+                    strokeWidth="2"
+                  />
+                </mask>
+                <mask id="hexBleedMaskDieTop">
+                  <rect
+                    x="-100"
+                    y="-100"
+                    width="200"
+                    height="200"
+                    fill="black"
+                  />
+                  <polygon
+                    points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 54.84825,75 -54.84825,75"
+                    fill="white"
+                    stroke="white"
+                    strokeWidth="2"
+                  />
+                </mask>
+                <mask id="hexBleedMaskDieBottom">
+                  <rect
+                    x="-100"
+                    y="-100"
+                    width="200"
+                    height="200"
+                    fill="black"
+                  />
+                  <polygon
+                    points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 49.07475,85 -49.07475,85"
+                    fill="white"
+                    stroke="white"
+                    strokeWidth="2"
+                  />
+                </mask>
+              </defs>
+            </svg>
+            <SetSvgColors />
+          </ScrollToTop>
           <style>{printCss}</style>
         </ThemeProvider>
       </StyledEngineProvider>

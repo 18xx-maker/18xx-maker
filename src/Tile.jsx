@@ -1,9 +1,8 @@
-import { tiles } from "./data";
-
 import { is } from "ramda";
 
 import Hex from "./Hex";
 import Id from "./atoms/Id";
+import { tiles } from "./data";
 
 const Tile = ({ id, border, mask, gameTiles }) => {
   let hex = null;

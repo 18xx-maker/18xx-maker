@@ -1,11 +1,11 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Outlet, useMatch } from "react-router";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
-import capability from "@/util/capability";
-import { loadGame } from "@/state";
 import { useGame } from "@/hooks";
+import { loadGame } from "@/state";
+import capability from "@/util/capability";
 
 const addRecent = (game) => {
   if (game && capability.electron) {

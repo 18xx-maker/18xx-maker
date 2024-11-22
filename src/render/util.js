@@ -1,5 +1,6 @@
 import fs from "node:fs";
-import { map, is } from "ramda";
+
+import { is, map } from "ramda";
 
 export const compileCompanyTokens = (game, companies) => {
   return map((company) => {

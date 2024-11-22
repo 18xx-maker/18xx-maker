@@ -1,18 +1,19 @@
 import "@/cards/card.css";
-import Number from "@/cards/Number";
-import PageSetup from "@/PageSetup";
-import Pins from "@/Pins";
-import Private from "@/cards/Private";
-import Share from "@/cards/Share";
-import Svg from "@/Svg";
-import Train from "@/cards/Train";
-import { compileCompanies, overrideCompanies } from "@/util/companies";
-import { fillArray } from "@/util";
-import { getCardData } from "@/cards/util";
-import { maxPlayers } from "@/util.js";
-import { useConfig, useGame } from "@/hooks";
 
 import { addIndex, chain, clone, map, prop, range, splitEvery } from "ramda";
+
+import PageSetup from "@/PageSetup";
+import Pins from "@/Pins";
+import Svg from "@/Svg";
+import Number from "@/cards/Number";
+import Private from "@/cards/Private";
+import Share from "@/cards/Share";
+import Train from "@/cards/Train";
+import { getCardData } from "@/cards/util";
+import { useConfig, useGame } from "@/hooks";
+import { fillArray } from "@/util";
+import { maxPlayers } from "@/util.js";
+import { compileCompanies, overrideCompanies } from "@/util/companies";
 
 const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
   const { config } = useConfig();

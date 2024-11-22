@@ -1,9 +1,8 @@
-import Color from "../util/Color";
-import { useGame } from "../hooks";
-import Currency from "../util/Currency";
-import { multiDefaultTo } from "../util";
-
 import { icons } from "../data";
+import { useGame } from "../hooks";
+import { multiDefaultTo } from "../util";
+import Color from "../util/Color";
+import Currency from "../util/Currency";
 
 const Terrain = ({ type, size, cost, fontFamily, fontSize, color }) => {
   const game = useGame();

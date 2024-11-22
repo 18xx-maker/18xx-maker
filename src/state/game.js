@@ -1,10 +1,10 @@
-import capability from "@/util/capability";
-import * as opfs from "@/util/opfs";
-import * as idb from "@/util/idb";
 import { games } from "@/data";
 import { createAlert } from "@/state/alerts";
 import { parseSlug } from "@/util";
+import capability from "@/util/capability";
+import * as idb from "@/util/idb";
 import { getGameSummary } from "@/util/loading.js";
+import * as opfs from "@/util/opfs";
 
 export const SET_GAME = "SET_GAME";
 export const DELETE_GAME = "DELETE_GAME";

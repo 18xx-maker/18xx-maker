@@ -1,7 +1,7 @@
 import { curry, map, range } from "ramda";
 
-import { getTileSheetContext } from "@/tilesheet/util";
 import { useConfig } from "@/hooks";
+import { getTileSheetContext } from "@/tilesheet/util";
 
 const STROKE = {
   stroke: "gray",

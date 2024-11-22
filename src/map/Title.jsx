@@ -1,5 +1,5 @@
-import Color from "@/util/Color";
 import { useConfig } from "@/hooks";
+import Color from "@/util/Color";
 
 const Title = ({ game, variation, hexWidth }) => {
   const { config } = useConfig();

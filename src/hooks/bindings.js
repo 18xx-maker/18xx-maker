@@ -1,11 +1,11 @@
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import { useLoadedGame } from "@/hooks/game";
+import { createAlert, refreshGame } from "@/state";
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
-import { createAlert, refreshGame } from "@/state";
-import { useLoadedGame } from "@/hooks/game";
 
 export const useBindings = () => {
   const dispatch = useDispatch();
@@ -63,5 +63,5 @@ export const useBindings = () => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [loadedGame]);
 };

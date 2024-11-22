@@ -1,11 +1,13 @@
-import globals from "globals";
 import js from "@eslint/js";
+import jestDom from "eslint-plugin-jest-dom";
 import react from "eslint-plugin-react";
+import testingLibrary from "eslint-plugin-testing-library";
 import vitest from "eslint-plugin-vitest";
+import globals from "globals";
 
 export default [
   { files: ["**/*.{js,mjs,cjs,jsx}"] },
-  { ignores: ["dist/", "out/", "public/"] },
+  { ignores: ["coverage/", "dist/", "out/", "public/"] },
   { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
   js.configs.recommended,
   {
@@ -18,7 +20,7 @@ export default [
   },
   react.configs.flat["jsx-runtime"],
   {
-    files: ["**/*.test.js"],
+    files: ["**/*.test.{js,jsx}"],
     plugins: { vitest },
     rules: vitest.configs.recommended.rules,
     languageOptions: {
@@ -26,6 +28,14 @@ export default [
         ...vitest.environments.env.globals,
       },
     },
+  },
+  {
+    files: ["**/*.test.{js,jsx}"],
+    ...testingLibrary.configs["flat/react"],
+  },
+  {
+    files: ["**/*.test.{js,jsx}"],
+    ...jestDom.configs["flat/recommended"],
   },
   {
     rules: {

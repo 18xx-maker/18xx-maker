@@ -1,12 +1,13 @@
-import browserslistToEsbuild from "browserslist-to-esbuild";
 import path from "node:path";
+
+import { codecovVitePlugin as codecov } from "@codecov/vite-plugin";
+import react from "@vitejs/plugin-react-swc";
+import browserslistToEsbuild from "browserslist-to-esbuild";
 import postcssNesting from "postcss-nesting";
 import postcssPresetEnv from "postcss-preset-env";
-import react from "@vitejs/plugin-react-swc";
-import { codecovVitePlugin as codecov } from "@codecov/vite-plugin";
+import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
 import { svgPlugin as svg } from "vite-plugin-fast-react-svg";
-import { visualizer } from "rollup-plugin-visualizer";
 
 const manualChunks = (id) => {
   // Setup ramda

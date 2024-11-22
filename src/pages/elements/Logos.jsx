@@ -1,15 +1,13 @@
 import { Fragment } from "react";
-
 import { useTranslation } from "react-i18next";
-
-import { ascend, compose, groupBy, keys, map, nth, sort, split } from "ramda";
 
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-
 import makeStyles from "@mui/styles/makeStyles";
+
+import { ascend, compose, groupBy, keys, map, nth, sort, split } from "ramda";
 
 import { logos } from "../../data";
 

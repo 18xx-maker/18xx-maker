@@ -1,7 +1,7 @@
 import { addIndex, concat, map } from "ramda";
 
-import { mapCoord } from "./util";
 import Color from "../util/Color";
+import { mapCoord } from "./util";
 
 const Border = ({ border, data, bg }) => {
   let path =

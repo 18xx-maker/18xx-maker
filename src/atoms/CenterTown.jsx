@@ -1,7 +1,6 @@
 import { useGame } from "../hooks";
 import { multiDefaultTo } from "../util";
 import Color from "../util/Color";
-
 import Name from "./Name";
 
 const CenterTown = ({

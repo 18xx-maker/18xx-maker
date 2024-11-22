@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import capability from "@/util/capability";
 
+import capability from "@/util/capability";
 import Svg from "../Svg";
 import Tile from "../Tile";
 

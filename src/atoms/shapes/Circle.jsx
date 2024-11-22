@@ -1,10 +1,9 @@
-import { useGame } from "../../hooks";
-import Text from "./Text";
-import Color from "../../util/Color";
-
-import { getFontProps, multiDefaultTo } from "../../util";
-
 import { defaultTo } from "ramda";
+
+import { useGame } from "../../hooks";
+import { getFontProps, multiDefaultTo } from "../../util";
+import Color from "../../util/Color";
+import Text from "./Text";
 
 const Circle = (props) => {
   let {

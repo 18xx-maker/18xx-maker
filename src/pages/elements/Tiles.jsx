@@ -1,28 +1,24 @@
 import { useTranslation } from "react-i18next";
 
-import { tiles } from "../../data";
-
-import { useRangeParam, useStringParam } from "../../util/query";
-
-import Svg from "../../Svg";
-import Tile from "../../Tile";
-
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-
 import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import Paper from "@mui/material/Paper";
 import Select from "@mui/material/Select";
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import makeStyles from "@mui/styles/makeStyles";
 
 import { filter, map, max, min, reduce, uniq, values } from "ramda";
 
-import makeStyles from "@mui/styles/makeStyles";
+import Svg from "../../Svg";
+import Tile from "../../Tile";
+import { tiles } from "../../data";
+import { useRangeParam, useStringParam } from "../../util/query";
 
 const useStyles = makeStyles((theme) => ({
   page: {

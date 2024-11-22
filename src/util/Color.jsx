@@ -1,11 +1,10 @@
 import tinycolor from "tinycolor2";
 
+import { curry, defaultTo, is, mergeDeepRight, prop } from "ramda";
+
 import ColorContext from "@/context/ColorContext";
 import PhaseContext from "@/context/PhaseContext";
 import { useConfig, useGame } from "@/hooks";
-
-import { curry, defaultTo, is, mergeDeepRight, prop } from "ramda";
-
 import { companyThemes, mapThemes } from "../data";
 
 const colorAliases = {

@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
-import { flatten, times } from "ramda";
-
-import Color from "../../util/Color";
-import PageSetup from "../../PageSetup";
-import { GetFont, SetFont } from "../../context/FontContext";
-import { unitsToCss, printableWidth, printableHeight } from "../../util";
-import { useGame } from "../../hooks/game.js";
-
-import config from "../../defaults.json";
 
 import Box from "@mui/material/Box";
-
 import makeStyles from "@mui/styles/makeStyles";
+
+import { flatten, times } from "ramda";
+
+import PageSetup from "../../PageSetup";
+import { GetFont, SetFont } from "../../context/FontContext";
+import config from "../../defaults.json";
+import { useGame } from "../../hooks/game.js";
+import { printableHeight, printableWidth, unitsToCss } from "../../util";
+import Color from "../../util/Color";
 
 const useStyles = makeStyles(() => ({
   backgroundBox: {

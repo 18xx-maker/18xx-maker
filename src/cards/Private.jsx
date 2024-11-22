@@ -1,19 +1,20 @@
 import "@/cards/private.css";
-import Color from "@/util/Color";
-import ColorContext from "@/context/ColorContext";
-import Currency from "@/util/Currency";
-import GameCompanyToken from "@/tokens/GameCompanyToken";
+
+import { defaultTo, intersperse, is, map, max, min, reduce } from "ramda";
+
 import Hex from "@/Hex";
-import Icon from "@/atoms/Icon";
 import Svg from "@/Svg";
 import Tile from "@/Tile";
-import Token from "@/tokens/Token";
+import Icon from "@/atoms/Icon";
+import ColorContext from "@/context/ColorContext";
 import { MapOrientation } from "@/context/OrientationContext";
-import { getFontProps, multiDefaultTo } from "@/util";
-import { getMapHex } from "@/map/util";
 import { useConfig, useGame } from "@/hooks";
-
-import { intersperse, is, map, defaultTo, max, min, reduce } from "ramda";
+import { getMapHex } from "@/map/util";
+import GameCompanyToken from "@/tokens/GameCompanyToken";
+import Token from "@/tokens/Token";
+import { getFontProps, multiDefaultTo } from "@/util";
+import Color from "@/util/Color";
+import Currency from "@/util/Currency";
 
 const Private = (props) => {
   let {

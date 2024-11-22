@@ -1,19 +1,18 @@
 import { useParams } from "react-router-dom";
 
-import { useConfig, useGame } from "@/hooks";
+import { assoc, clone, flatten, map } from "ramda";
+
 import Number from "@/cards/Number";
 import Private from "@/cards/Private";
 import Share from "@/cards/Share";
 import Train from "@/cards/Train";
-
-import { compileCompanies, overrideCompanies } from "@/util/companies";
 import { getCardData } from "@/cards/util";
-
-import { assoc, clone, flatten, map } from "ramda";
+import { useConfig, useGame } from "@/hooks";
+import { compileCompanies, overrideCompanies } from "@/util/companies";
 
 import "@/cards/card.css";
 
-const Cards = () => {
+const Card = () => {
   const { config } = useConfig();
   const game = useGame();
   const { type, index } = useParams();
@@ -158,4 +157,4 @@ const Cards = () => {
   );
 };
 
-export default Cards;
+export default Card;

@@ -1,10 +1,9 @@
-import { useConfig, useGame } from "@/hooks";
-import Token from "@/tokens/Token";
-import MapCompanyToken from "@/tokens/MapCompanyToken";
-
-import { overrideCompanies, compileCompanies } from "@/util/companies.js";
-
 import { findIndex, propEq } from "ramda";
+
+import { useConfig, useGame } from "@/hooks";
+import MapCompanyToken from "@/tokens/MapCompanyToken";
+import Token from "@/tokens/Token";
+import { compileCompanies, overrideCompanies } from "@/util/companies.js";
 
 // This component is in charge of loading the proper company data from the
 // current game from an abbrev and then rendering a token

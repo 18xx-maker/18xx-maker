@@ -1,6 +1,7 @@
-import updater from "electron-updater";
-import { app, dialog, BrowserWindow } from "electron";
 import { join } from "node:path";
+
+import { BrowserWindow, app, dialog } from "electron";
+import updater from "electron-updater";
 
 import { setMenu } from "./menu.js";
 

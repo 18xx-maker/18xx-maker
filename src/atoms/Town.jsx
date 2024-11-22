@@ -1,7 +1,6 @@
 import { useGame } from "../hooks";
-import Color from "../util/Color";
 import { multiDefaultTo } from "../util";
-
+import Color from "../util/Color";
 import Name from "./Name";
 
 const Town = ({ border, borderWidth, name, color, bgColor }) => {

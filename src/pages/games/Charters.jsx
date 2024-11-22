@@ -1,13 +1,5 @@
 import { useNavigate } from "react-router-dom";
 
-import Charter from "@/Charter";
-import PageSetup from "@/PageSetup";
-import Pins from "@/Pins";
-import Svg from "@/Svg";
-import { compileCompanies, overrideCompanies } from "@/util/companies";
-import { getCharterData } from "@/util";
-import { useConfig, useGame } from "@/hooks";
-
 import {
   addIndex,
   chain,
@@ -20,6 +12,14 @@ import {
   repeat,
   splitEvery,
 } from "ramda";
+
+import Charter from "@/Charter";
+import PageSetup from "@/PageSetup";
+import Pins from "@/Pins";
+import Svg from "@/Svg";
+import { useConfig, useGame } from "@/hooks";
+import { getCharterData } from "@/util";
+import { compileCompanies, overrideCompanies } from "@/util/companies";
 
 const isMinor = prop("minor");
 const isMajor = compose(not, prop("minor"));

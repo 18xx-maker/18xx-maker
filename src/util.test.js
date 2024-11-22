@@ -1,6 +1,5 @@
-import * as util from "./util";
-
 import config from "./defaults.json";
+import * as util from "./util";
 
 describe("parseSlug", () => {
   it("should parse a bundled game", () => {

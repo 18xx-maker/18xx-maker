@@ -1,13 +1,12 @@
-import Color from "@/util/Color";
-import Currency from "@/util/Currency";
-import { useConfig, useGame } from "@/hooks";
+import { addIndex, map } from "ramda";
 
+import { useConfig, useGame } from "@/hooks";
 import certLimit from "@/images/icons/certificate.svg";
+import capital from "@/images/icons/coins.svg";
 import bank from "@/images/icons/university.svg";
 import number from "@/images/icons/user-friends.svg";
-import capital from "@/images/icons/coins.svg";
-
-import { addIndex, map } from "ramda";
+import Color from "@/util/Color";
+import Currency from "@/util/Currency";
 
 const icons = {
   certLimit,

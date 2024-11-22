@@ -1,6 +1,11 @@
 import { useTranslation } from "react-i18next";
-import { useGame } from "../../hooks/game.js";
 
+import RulesIcon from "@mui/icons-material/Gavel";
+import LicenseIcon from "@mui/icons-material/Lock";
+import PurchaseIcon from "@mui/icons-material/MonetizationOn";
+import PlayersIcon from "@mui/icons-material/People";
+import BGGIcon from "@mui/icons-material/Storage";
+import WarningIcon from "@mui/icons-material/Warning";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import List from "@mui/material/List";
@@ -10,17 +15,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-
-import PlayersIcon from "@mui/icons-material/People";
-
-import BGGIcon from "@mui/icons-material/Storage";
-import LicenseIcon from "@mui/icons-material/Lock";
-import PurchaseIcon from "@mui/icons-material/MonetizationOn";
-import RulesIcon from "@mui/icons-material/Gavel";
-import WarningIcon from "@mui/icons-material/Warning";
-
+import { blue, green } from "@mui/material/colors";
 import makeStyles from "@mui/styles/makeStyles";
-import { green, blue } from "@mui/material/colors";
+
+import { useGame } from "../../hooks/game.js";
 
 const useStyles = makeStyles((theme) => ({
   page: {

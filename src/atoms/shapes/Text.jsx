@@ -1,9 +1,8 @@
-import Color from "../../util/Color";
-import RotateContext from "../../context/RotateContext";
-
-import { getFontProps } from "../../util";
-
 import { defaultTo } from "ramda";
+
+import RotateContext from "../../context/RotateContext";
+import { getFontProps } from "../../util";
+import Color from "../../util/Color";
 
 const Text = (props) => {
   let { text, fontFamily, color, rotation, fixed } = props;

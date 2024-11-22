@@ -1,11 +1,10 @@
-import { useBooleanParam, useIntParam } from "@/util/query";
-import { MapOrientation } from "@/context/OrientationContext";
-
-import { useConfig, useGame } from "@/hooks";
-import MapSingle from "@/games/MapSingle";
-import MapPaginated from "@/games/MapPaginated";
-
 import { is, isNil } from "ramda";
+
+import { MapOrientation } from "@/context/OrientationContext";
+import MapPaginated from "@/games/MapPaginated";
+import MapSingle from "@/games/MapSingle";
+import { useConfig, useGame } from "@/hooks";
+import { useBooleanParam, useIntParam } from "@/util/query";
 
 const Map = () => {
   const { config } = useConfig();
