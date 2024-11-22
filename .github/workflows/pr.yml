@@ -51,16 +51,16 @@ jobs:
         uses: codecov/test-results-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-      - name: Upload Coverage - Coveralls
-        if: matrix.os == 'ubuntu-latest'
-        uses: coverallsapp/github-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Coverage - Codecov
         if: matrix.os == 'ubuntu-latest'
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload Coverage - Coveralls
+        if: matrix.os == 'ubuntu-latest'
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Coverage - CodeClimate
         if: matrix.os == 'ubuntu-latest'
         uses: paambaati/codeclimate-action@v9
