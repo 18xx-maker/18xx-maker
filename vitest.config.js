@@ -8,6 +8,10 @@ export default defineConfig({
     },
   },
   test: {
+    coverage: {
+      include: ["electron/main/**", "electron/preload/**", "src/**"],
+      reporter: ["text", process.env.CI ? "clover" : "html"],
+    },
     environment: "jsdom",
     globals: true,
     reporters: process.env.CI ? ["junit", "default"] : ["default"],
