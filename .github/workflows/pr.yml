@@ -68,6 +68,12 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageLocations: ${{github.workspace}}/coverage/clover.xml:clover
+      - name: Upload Coverage - Codacy
+        if: matrix.os == 'ubuntu-latest'
+        uses: codacy/codacy-coverage-reporter-action@v1
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: ${{github.workspace}}/coverage/clover.xml
       - name: Build Web
         run: yarn build
         env:
