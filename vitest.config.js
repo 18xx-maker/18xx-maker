@@ -40,7 +40,7 @@ export default defineConfig({
     ],
     globals: true,
     outputFile: "./junit.xml",
-    reporters: process.env.CI ? ["junit", "github-actions"] : "dot",
+    reporters: process.env.CI ? ["junit", "basic", "github-actions"] : "dot",
     setupFiles: "./tests/setup.js",
   },
 });
