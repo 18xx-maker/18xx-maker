@@ -23,6 +23,7 @@ export default defineConfig({
       cleanOnRerun: false,
       enabled: true,
       exclude: [
+        "src/**/*.stories.*",
         "src/i18n.js",
         "src/index.jsx",
         "src/render/util.js",
