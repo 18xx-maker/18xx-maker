@@ -107,6 +107,7 @@
   },
   "build": {
     "appId": "com.18xx-maker.app",
+    "electronUpdaterCompatibility": ">= 2.16",
     "productName": "18xx Maker",
     "directories": {
       "buildResources": "assets",

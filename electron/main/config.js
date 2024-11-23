@@ -4,10 +4,10 @@ import { join } from "node:path";
 import { app } from "electron";
 
 import {
+  assoc,
   assocPath,
   dissocPath,
   equals,
-  keys,
   mergeDeepRight,
   path,
   pick,
@@ -15,15 +15,23 @@ import {
 } from "ramda";
 
 import { getGameSummary } from "../../src/util/loading.js";
+import { isDev } from "./dev.js";
 
-export const DEFAULT_CONFIG = { summaries: {}, recents: [] };
-export const CONFIG_FILE = join(app.getPath("userData"), "config.json");
+export const SUMMARIES = "summaries";
+export const RECENTS = "recents";
+export const LAST_ROUTE = "lastRoute";
+export const CONFIG_KEYS = [SUMMARIES, RECENTS, LAST_ROUTE];
+export const DEFAULT_CONFIG = { [SUMMARIES]: {}, [RECENTS]: [] };
+
+export const CONFIG_FILE = isDev
+  ? join(import.meta.dirname, "../config.json")
+  : join(app.getPath("userData"), "config.json");
 
 let config = null;
 
 export const loadConfig = () =>
   (config = pick(
-    keys(DEFAULT_CONFIG),
+    CONFIG_KEYS,
     mergeDeepRight(
       DEFAULT_CONFIG,
       fs.existsSync(CONFIG_FILE)
@@ -44,20 +52,23 @@ export const updateConfig = (op) => {
   return config;
 };
 
-export const deleteGame = (id) => updateConfig(dissocPath(["summaries", id]));
-export const getSummaries = () => prop("summaries", getConfig());
-export const getSummary = (id) => path(["summaries", id], getConfig());
+export const getLastRoute = () => prop(LAST_ROUTE, getConfig());
+export const setLastRoute = (url) => updateConfig(assoc(LAST_ROUTE, url));
+
+export const deleteGame = (id) => updateConfig(dissocPath([SUMMARIES, id]));
+export const getSummaries = () => prop(SUMMARIES, getConfig());
+export const getSummary = (id) => path([SUMMARIES, id], getConfig());
 export const updateSummaries = (game) =>
   updateConfig(
     assocPath(
-      ["summaries", game.meta.id],
+      [SUMMARIES, game.meta.id],
       mergeDeepRight(getSummary(game.meta.id), getGameSummary(game)),
     ),
   );
-export const getRecents = () => prop("recents", getConfig());
+export const getRecents = () => prop(RECENTS, getConfig());
 export const addRecent = (title, slug) => {
   return updateConfig((config) => {
-    let recents = config.recents || [];
+    let recents = config[RECENTS] || [];
     recents = recents.filter((r) => r.slug !== slug);
     recents.unshift({ title, slug });
     recents = recents.slice(0, 10);
