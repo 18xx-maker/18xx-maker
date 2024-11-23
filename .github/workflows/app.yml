@@ -15,10 +15,8 @@ jobs:
         name: Node
         with:
           architecture: x64
-          check-latest: true
           node-version: 22
-          cache: yarn
-          cache-dependency-path: yarn.lock
+          check-latest: true
       - name: Keys
         run: |
           echo $APP_CERTIFICATE | base64 --decode > certificate.p12
@@ -31,6 +29,11 @@ jobs:
           APP_CERTIFICATE: ${{ secrets.APP_CERTIFICATE }}
           APP_CERTIFICATE_PWD: ${{ secrets.APP_CERTIFICATE_PWD }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: "**/node_modules"
+          key: macos-latest-node-modules-${{ hashFiles('**/yarn.lock') }}
       - run: yarn --frozen-lockfile
         name: Dependencies
       - id: create_release
