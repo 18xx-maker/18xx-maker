@@ -34,6 +34,19 @@ import B18Tokens from "./pages/games/b18/Tokens";
 // Games Routes
 import LoadGames from "./pages/load/LoadGames";
 
+export const routerFuture = {
+  v7_relativeSplatPath: true,
+  v7_fetcherPersist: true,
+  v7_normalizeFormMethod: true,
+  v7_partialHydration: true,
+  v7_skipActionStatusRevalidation: true,
+  v7_skipActionErrorRevalidation: true,
+};
+
+export const providerFuture = {
+  v7_startTransition: true,
+};
+
 export const rootRoutes = [
   {
     path: "*",
