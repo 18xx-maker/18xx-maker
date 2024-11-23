@@ -5,8 +5,6 @@ import { mapThemes } from "@/data";
 
 const colors = sort(ascend(identity), keys(path(["gmt", "colors"], mapThemes)));
 
-console.log(colors);
-
 export default {
   title: "Atoms/Tunnel",
   component: Tunnel,
