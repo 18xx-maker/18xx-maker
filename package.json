@@ -16,8 +16,8 @@
     "all": "run-s pretty lint validate test:run",
     "b18": "node --disable-warning=ExperimentalWarning ./bin/b18.js",
     "build": "vite build",
-    "build:sb": "storybook build -o dist-sb",
     "build:app": "electron-vite build",
+    "build:sb": "storybook build -o dist-sb",
     "fix": "run-s pretty:fix lint:fix",
     "lint": "run-s lint:js lint:css",
     "lint:css": "stylelint \"**/*.css\"",
@@ -37,6 +37,7 @@
     "start": "vite",
     "start:app": "electron-vite dev",
     "svgo": "run-p svgo:icons svgo:logos",
+    "svgo:check": "svgo",
     "svgo:icons": "svgo -f src/data/icons",
     "svgo:logos": "svgo -f src/data/logos",
     "test": "vitest --ui",
@@ -107,6 +108,7 @@
   },
   "build": {
     "appId": "com.18xx-maker.app",
+    "electronUpdaterCompatibility": ">= 2.16",
     "productName": "18xx Maker",
     "directories": {
       "buildResources": "assets",

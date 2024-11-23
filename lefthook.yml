@@ -21,7 +21,7 @@ pre-commit:
       priority: 40
     svgo:
       glob: "*.svg"
-      run: yarn svgo -f {staged_files}
+      run: yarn svgo:check {staged_files}
       stage_fixed: true
       priority: 40
     prettier:

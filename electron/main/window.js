@@ -1,19 +1,22 @@
 import { join } from "node:path";
 
-import { BrowserWindow, app, dialog } from "electron";
-import updater from "electron-updater";
+import { BrowserWindow, dialog } from "electron";
 
+import { nth, split } from "ramda";
+
+import { getLastRoute, setLastRoute } from "./config.js";
+import { isDev } from "./dev.js";
 import { setMenu } from "./menu.js";
 
-const { autoUpdater } = updater;
-
-export const isDev =
-  Number.parseInt(process.env.ELECTRON_IS_DEV, 10) === 1 || !app.isPackaged;
-
-export const startUrl =
+export const lastRoute = getLastRoute();
+export const rootUrl = `file://${join(__dirname, "../renderer/index.html")}`;
+export const startBaseUrl =
   isDev && process.env["ELECTRON_RENDERER_URL"]
     ? process.env["ELECTRON_RENDERER_URL"]
-    : `file://${join(__dirname, "../renderer/index.html")}`;
+    : rootUrl;
+export const startUrl = lastRoute
+  ? `${startBaseUrl}#${lastRoute}`
+  : startBaseUrl;
 
 let mainWindow = null;
 
@@ -31,7 +34,10 @@ export const createWindow = () => {
       sandbox: false,
     },
   });
-  mainWindow.on("closed", function () {
+  mainWindow.on("close", () =>
+    setLastRoute(nth(1, split("#", mainWindow.webContents.getURL()))),
+  );
+  mainWindow.on("closed", () => {
     mainWindow = null;
   });
   mainWindow.once("ready-to-show", () => {
@@ -42,7 +48,6 @@ export const createWindow = () => {
   mainWindow.loadURL(startUrl);
 
   setMenu(mainWindow);
-  autoUpdater.checkForUpdatesAndNotify();
 
   return mainWindow;
 };
