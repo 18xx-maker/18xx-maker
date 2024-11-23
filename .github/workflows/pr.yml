@@ -31,8 +31,11 @@ jobs:
           architecture: ${{ matrix.architecture }}
           node-version: ${{ matrix.node_version }}
           check-latest: true
-          cache: yarn
-          cache-dependency-path: yarn.lock
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: "**/node_modules"
+          key: ${{ matrix.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Dependencies
         run: yarn --frozen-lockfile
       - name: Commits
