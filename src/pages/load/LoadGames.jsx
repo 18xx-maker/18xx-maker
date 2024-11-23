@@ -48,7 +48,7 @@ const LoadGames = () => {
   // Load all summaries
   useEffect(() => {
     dispatch(loadSummaries());
-  }, []);
+  }, [dispatch]);
 
   const deleteHandler = (slug) => {
     dispatch(deleteGame(slug))

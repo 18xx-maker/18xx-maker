@@ -134,7 +134,7 @@ body {
         window.api.off();
       };
     }
-  }, []);
+  }, [dispatch, navigate]);
 
   useBindings();
 

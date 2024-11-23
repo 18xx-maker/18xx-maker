@@ -25,7 +25,7 @@ const File = ({ data, mime, list, filename }) => {
     reader.onload = () => setDataURL(reader.result);
     reader.onerror = () => console.error(reader.error);
     reader.readAsDataURL(new window.File([bytes], "", { type }));
-  }, [data]);
+  }, [data, type]);
 
   if (!dataURL) {
     return null;

@@ -1,6 +1,7 @@
 import js from "@eslint/js";
 import jestDom from "eslint-plugin-jest-dom";
 import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
 import testingLibrary from "eslint-plugin-testing-library";
 import vitest from "eslint-plugin-vitest";
 import globals from "globals";
@@ -19,6 +20,12 @@ export default [
     },
   },
   react.configs.flat["jsx-runtime"],
+  {
+    plugins: {
+      "react-hooks": reactHooks,
+    },
+    rules: reactHooks.configs.recommended.rules,
+  },
   {
     files: ["**/*.test.{js,jsx}"],
     plugins: { vitest },

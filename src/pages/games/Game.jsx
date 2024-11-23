@@ -26,7 +26,7 @@ const Game = () => {
         .then(addRecent)
         .catch(() => navigate("/games/"));
     }
-  }, [match]);
+  }, [dispatch, game, navigate, match]);
 
   if (!game) {
     return null;
