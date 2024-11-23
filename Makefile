@@ -8,7 +8,9 @@ defs := tiles
 all: $(patsubst %,public/schemas/%.schema.json,$(schemas)) $(patsubst %,public/schemas/%.defs.json,$(defs))
 
 clean:
+	rm -rf coverage
 	rm -rf dist
+	rm -rf dist-sb
 	rm -rf out
 	rm -rf stats.html
 

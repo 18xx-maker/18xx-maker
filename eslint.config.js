@@ -2,13 +2,23 @@ import js from "@eslint/js";
 import jestDom from "eslint-plugin-jest-dom";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
+import storybook from "eslint-plugin-storybook";
 import testingLibrary from "eslint-plugin-testing-library";
 import vitest from "eslint-plugin-vitest";
 import globals from "globals";
 
 export default [
   { files: ["**/*.{js,mjs,cjs,jsx}"] },
-  { ignores: ["coverage/", "dist/", "out/", "public/"] },
+  {
+    ignores: [
+      "!.storybook",
+      "coverage/",
+      "dist/",
+      "dist-sb/",
+      "out/",
+      "public/",
+    ],
+  },
   { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
   js.configs.recommended,
   {
@@ -44,6 +54,7 @@ export default [
     files: ["**/*.test.{js,jsx}"],
     ...jestDom.configs["flat/recommended"],
   },
+  ...storybook.configs["flat/recommended"],
   {
     rules: {
       "react/prop-types": "off",

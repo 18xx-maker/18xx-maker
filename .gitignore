@@ -16,6 +16,7 @@
 
 # build
 /dist
+/dist-sb
 
 # electron
 /out
@@ -34,3 +35,5 @@ yarn-error.log*
 
 # rollup visualizer
 stats.html
+
+*storybook.log
