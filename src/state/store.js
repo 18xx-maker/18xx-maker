@@ -9,6 +9,7 @@ import { gameReducer, loadedGameReducer } from "@/state/game";
 import { combineReducers } from "@/state/helpers";
 import storage from "@/state/storage";
 import { summariesReducer } from "@/state/summaries";
+import { updateReducer } from "@/state/update";
 import { getGameSummary } from "@/util/loading.js";
 
 const summaries = { bundled: mapObjIndexed(getGameSummary, games) };
@@ -25,6 +26,7 @@ storage.init("config", "loadedGame");
 export const rootReducer = combineReducers({
   alert: alertReducer,
   loadedGame: loadedGameReducer,
+  update: updateReducer,
   summaries: summariesReducer,
   config: configReducer,
   game: gameReducer,

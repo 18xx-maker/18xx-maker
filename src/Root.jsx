@@ -26,8 +26,10 @@ import SideNav from "@/nav/SideNav";
 import {
   clearAlert,
   createAlert,
+  createDownloadPercent,
   createProgressAlert,
   createSetGame,
+  createUpdate,
 } from "@/state";
 import SetSvgColors from "@/util/SetSvgColors";
 import capability from "@/util/capability";
@@ -103,6 +105,15 @@ const Root = () => {
   const dropHandler = (event) => {
     event.preventDefault();
 
+    // Do nothing if this isn't a file drop
+    if (
+      !event.dataTransfer ||
+      (event.dataTransfer.items && event.dataTransfer.items.length === 0) ||
+      (event.dataTransfer.files && event.dataTransfer.files.length === 0)
+    ) {
+      return;
+    }
+
     return fileHandler(event)
       .then((slug) => navigate(`/games/${slug}/map`))
       .catch((e) => dispatch(createAlert("Error", e.message, "error")));
@@ -129,6 +140,8 @@ body {
       window.api.onGame(onGame);
       window.api.onProgress(compose(dispatch, createProgressAlert));
       window.api.onRedirect(navigate);
+      window.api.onUpdate(compose(dispatch, createUpdate));
+      window.api.onDownloadProgress(compose(dispatch, createDownloadPercent));
 
       return () => {
         window.api.off();

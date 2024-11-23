@@ -1,38 +1,38 @@
-// Root Routes
-import Root from "./Root";
-// Side Routes
-import DocsNav from "./nav/DocsNav";
-import ElementsNav from "./nav/ElementsNav";
-import GameNav from "./nav/GameNav";
-import Docs from "./pages/Docs";
-import Elements from "./pages/Elements";
-import Home from "./pages/Home";
-// Elements Routes
-import Atoms from "./pages/elements/Atoms";
-import Logos from "./pages/elements/Logos";
-import AllTiles from "./pages/elements/Tiles";
-// Game Routes
-import Background from "./pages/games/Background";
-import Card from "./pages/games/Card";
-import Cards from "./pages/games/Cards";
-import Charter from "./pages/games/Charter";
-import Charters from "./pages/games/Charters";
-import Game from "./pages/games/Game";
-import Info from "./pages/games/Info";
-import Map from "./pages/games/Map";
-import Market from "./pages/games/Market";
-import Par from "./pages/games/Par";
-import Revenue from "./pages/games/Revenue";
-import Tile from "./pages/games/Tile";
-import TileManifest from "./pages/games/TileManifest";
-import Tiles from "./pages/games/Tiles";
-import Token from "./pages/games/Token";
-import Tokens from "./pages/games/Tokens";
-import B18Map from "./pages/games/b18/Map";
-import B18Tiles from "./pages/games/b18/Tiles";
-import B18Tokens from "./pages/games/b18/Tokens";
+import { Navigate } from "react-router-dom";
+
+import DocsNav from "@/nav/DocsNav";
+import ElementsNav from "@/nav/ElementsNav";
+import GameNav from "@/nav/GameNav";
+import App from "@/pages/App";
+import Docs from "@/pages/Docs";
+import Elements from "@/pages/Elements";
+import Home from "@/pages/Home";
+import Atoms from "@/pages/elements/Atoms";
+import Logos from "@/pages/elements/Logos";
+import AllTiles from "@/pages/elements/Tiles";
+import Background from "@/pages/games/Background";
+import Card from "@/pages/games/Card";
+import Cards from "@/pages/games/Cards";
+import Charter from "@/pages/games/Charter";
+import Charters from "@/pages/games/Charters";
+import Game from "@/pages/games/Game";
+import Info from "@/pages/games/Info";
+import Map from "@/pages/games/Map";
+import Market from "@/pages/games/Market";
+import Par from "@/pages/games/Par";
+import Revenue from "@/pages/games/Revenue";
+import Tile from "@/pages/games/Tile";
+import TileManifest from "@/pages/games/TileManifest";
+import Tiles from "@/pages/games/Tiles";
+import Token from "@/pages/games/Token";
+import Tokens from "@/pages/games/Tokens";
+import B18Map from "@/pages/games/b18/Map";
+import B18Tiles from "@/pages/games/b18/Tiles";
+import B18Tokens from "@/pages/games/b18/Tokens";
 // Games Routes
-import LoadGames from "./pages/load/LoadGames";
+import LoadGames from "@/pages/load/LoadGames";
+import capability from "@/util/capability";
+import Root from "./Root";
 
 export const routerFuture = {
   v7_relativeSplatPath: true,
@@ -53,6 +53,10 @@ export const rootRoutes = [
     element: <Root />,
     children: [
       { index: true, element: <Home /> },
+      {
+        path: "app",
+        element: capability.electron ? <App /> : <Navigate to="/" />,
+      },
       {
         path: "elements/*",
         element: <Elements />,

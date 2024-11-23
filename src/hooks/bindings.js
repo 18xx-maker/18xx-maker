@@ -51,6 +51,11 @@ export const useBindings = () => {
         case "t":
           navigate("/elements/tiles");
           break;
+        case "u":
+          if (capability.electron) {
+            navigate("/app");
+          }
+          break;
         case "?":
           navigate("/docs");
           break;

@@ -1,9 +1,11 @@
 import { forwardRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { useMatch } from "react-router";
 import { Link } from "react-router-dom";
 
 import ElementsIcon from "@mui/icons-material/Category";
+import DownloadIcon from "@mui/icons-material/Download";
 import DocumentationIcon from "@mui/icons-material/Help";
 import HomeIcon from "@mui/icons-material/Home";
 import MenuIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -19,6 +21,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
+
+import { prop } from "ramda";
 
 import { useLoadedGame } from "../hooks/game.js";
 import { useBooleanParam } from "../util/query";
@@ -73,9 +77,18 @@ const NavMenu = () => {
   const { t } = useTranslation();
   const game = useLoadedGame();
   const match = useMatch("/:section/*");
+  const update = useSelector(prop("update"));
 
   return (
     <>
+      {update && update.available && (
+        <NavLink
+          to="/app"
+          active={match && match.params.section === "app"}
+          text={t("nav.update")}
+          icon={<DownloadIcon color="secondary" />}
+        />
+      )}
       <NavLink
         to="/"
         active={!match}
@@ -143,6 +156,7 @@ MenuLink.displayName = "MenuLink";
 const MobileMenu = ({ anchor, onClose }) => {
   const { t } = useTranslation();
   const open = Boolean(anchor);
+  const update = useSelector(prop("update"));
 
   const game = useLoadedGame();
 
@@ -156,6 +170,14 @@ const MobileMenu = ({ anchor, onClose }) => {
       open={open}
       keepMounted
     >
+      {update && update.available && (
+        <MenuLink
+          onClick={onClose}
+          to="/app"
+          text={t("nav.update")}
+          icon={<DownloadIcon color="secondary" />}
+        />
+      )}
       <MenuLink
         onClick={onClose}
         to="/"
@@ -215,6 +237,10 @@ const MobileButton = ({ onClick }) => {
           icon = <LoadIcon />;
           text = t("nav.load");
         }
+        break;
+      case "app":
+        icon = <DownloadIcon color="secondary" />;
+        text = t("nav.update");
         break;
       case "elements":
         icon = <ElementsIcon />;

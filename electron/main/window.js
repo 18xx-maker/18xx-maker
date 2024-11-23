@@ -1,15 +1,12 @@
 import { join } from "node:path";
 
 import { BrowserWindow, dialog } from "electron";
-import updater from "electron-updater";
 
 import { nth, split } from "ramda";
 
 import { getLastRoute, setLastRoute } from "./config.js";
 import { isDev } from "./dev.js";
 import { setMenu } from "./menu.js";
-
-const { autoUpdater } = updater;
 
 export const lastRoute = getLastRoute();
 export const rootUrl = `file://${join(__dirname, "../renderer/index.html")}`;
@@ -51,7 +48,6 @@ export const createWindow = () => {
   mainWindow.loadURL(startUrl);
 
   setMenu(mainWindow);
-  autoUpdater.checkForUpdatesAndNotify();
 
   return mainWindow;
 };

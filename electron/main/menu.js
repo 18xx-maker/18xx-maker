@@ -8,14 +8,16 @@ import { send } from "./util.js";
 
 const isMac = process.platform === "darwin";
 
+const redirect = (route) => send("redirect", route);
+
 const openGameAndRedirect = () =>
-  openGame().then((slug) => slug && send("redirect", `/games/${slug}/map`));
+  openGame().then((slug) => slug && redirect(`/games/${slug}/map`));
 
 export const setMenu = () => {
   const recents = map(
     ({ title, slug }) => ({
       label: title,
-      click: () => send("redirect", `/games/${slug}/map`),
+      click: () => redirect(`/games/${slug}/map`),
     }),
     getRecents(),
   );
@@ -65,6 +67,12 @@ export const setMenu = () => {
         { role: "forcereload" },
         { role: "toggledevtools" },
         { type: "separator" },
+        {
+          label: "App Info",
+          accelerator: "CmdOrCtrl+U",
+          click: () => redirect("/app"),
+        },
+        { type: "separator" },
         { role: "resetzoom" },
         { role: "zoomin" },
         { role: "zoomout" },
@@ -82,12 +90,12 @@ export const setMenu = () => {
         {
           label: "Documentation",
           accelerator: "CmdOrCtrl+D",
-          click: () => send("redirect", "/docs/"),
+          click: () => redirect("/docs"),
         },
         {
           label: "Elements",
           accelerator: "CmdOrCtrl+E",
-          click: () => send("redirect", "/elements/"),
+          click: () => redirect("/elements"),
         },
       ],
     },

@@ -38,6 +38,7 @@ const api = {
         }
         return slug;
       }),
+  loadConfig: () => ipcRenderer.invoke("loadConfig"),
 
   addRecent: (title, slug) => ipcRenderer.send("addRecent", title, slug),
   deleteGame: (id) => ipcRenderer.send("deleteGame", id),
@@ -56,6 +57,12 @@ const api = {
 
   onGame: (callback) =>
     ipcRenderer.on("game", (_event, game) => callback(game)),
+
+  onUpdate: (callback) =>
+    ipcRenderer.on("update", (_event, update) => callback(update)),
+  onDownloadProgress: (callback) =>
+    ipcRenderer.on("downloadProgress", (_event, percent) => callback(percent)),
+  downloadUpdate: () => ipcRenderer.send("downloadUpdate"),
 
   off: () => ipcRenderer.removeAllListeners(),
 };
