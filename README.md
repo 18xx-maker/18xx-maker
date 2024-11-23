@@ -13,6 +13,8 @@
 [![codeclimate-maintainability](https://img.shields.io/codeclimate/maintainability/18xx-maker/18xx-maker?logo=codeclimate&logoColor=%23fff)](https://codeclimate.com/github/18xx-maker/18xx-maker/progress/maintainability)
 [![codeclimate-tech-debt](https://img.shields.io/codeclimate/tech-debt/18xx-maker/18xx-maker?logo=codeclimate&logoColor=%23fff)](https://codeclimate.com/github/18xx-maker/18xx-maker/trends/technical_debt)
 [![codeclimate-issues](https://img.shields.io/codeclimate/issues/18xx-maker/18xx-maker?logo=codeclimate&logoColor=%23fff)](https://codeclimate.com/github/18xx-maker/18xx-maker/issues)
+[![codacy-coverage](https://img.shields.io/codacy/coverage/38dbb02a490d4c40b34ce2042a3cb6b7?logo=codacy&logoColor=%23fff)](https://app.codacy.com/gh/18xx-maker/18xx-maker/coverage)
+[![codacy-grade](https://img.shields.io/codacy/grade/38dbb02a490d4c40b34ce2042a3cb6b7?logo=codacy&logoColor=%23fff)](https://app.codacy.com/gh/18xx-maker/18xx-maker/dashboard)
 
 This app can take [18xx](https://en.wikipedia.org/wiki/18XX) game definitions
 written in json, display them, and render them for printing. The original intent
