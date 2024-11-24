@@ -38,7 +38,11 @@ const Info = () => {
 
   return (
     <Container maxWidth="md">
-      <Paper elevation={5} className={classes.page}>
+      <Paper
+        data-testid={`game-${game.meta.slug}`}
+        elevation={5}
+        className={classes.page}
+      >
         <Typography variant="h3">{game.info.title}</Typography>
         {game.info.subtitle && (
           <Typography variant="h5">{game.info.subtitle}</Typography>

@@ -250,7 +250,7 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
   }
 
   return (
-    <div>
+    <div data-testid={`game-${game.meta.slug}-cards`}>
       <style>{css}</style>
       {pageNodes}
       <PageSetup landscape={data.layout.landscape} />

@@ -18,7 +18,11 @@ const MarketSingle = ({ config, game }) => {
 
   return (
     <div className="printElement" style={{ display: "inline-block" }}>
-      <div className="stock" style={{ display: "inline-block" }}>
+      <div
+        className="stock"
+        data-testid={`game-${game.meta.slug}-market`}
+        style={{ display: "inline-block" }}
+      >
         <Svg
           width={data.css.totalWidth}
           height={data.css.totalHeight}

@@ -18,7 +18,7 @@ const MapPaginated = ({ game, config, variation }) => {
   let data = getMapData(game, coords, hexWidth, variation);
 
   return (
-    <div className="map" data-testid={`game-${game.meta.slug}-map`}>
+    <div className="map" data-testid={`game-${game.meta.slug}-map-paginated`}>
       <Paginate component="Map" {...{ data, config, game }}>
         <Map
           name={game.meta.id}

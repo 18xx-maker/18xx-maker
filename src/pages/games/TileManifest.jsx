@@ -74,7 +74,10 @@ const TileManifest = () => {
 
   return (
     <ColorContext.Provider value="tile">
-      <div className="TileManifest printElement">
+      <div
+        className="TileManifest printElement"
+        data-testid={`game-${game.meta.slug}-tile-manifest`}
+      >
         <div className="TileManifest--Title">
           {game.info.title} Tile Manifest
         </div>

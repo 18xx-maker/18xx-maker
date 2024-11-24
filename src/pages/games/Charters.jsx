@@ -305,7 +305,7 @@ const Charters = () => {
   }
 
   return (
-    <div className="charters">
+    <div className="charters" data-testid={`game-${game.meta.slug}-charters`}>
       <style>{css}</style>
       {pages}
       <PageSetup landscape={false} />

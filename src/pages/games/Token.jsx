@@ -189,7 +189,14 @@ const TokenSingle = () => {
   let tokenNode = concat(companyTokenNodes, extraTokenNodes)[index];
 
   return (
-    <ColorContext.Provider value="companies">{tokenNode}</ColorContext.Provider>
+    <div
+      className="token printElement"
+      data-testid={`game-${game.meta.slug}-token`}
+    >
+      <ColorContext.Provider value="companies">
+        {tokenNode}
+      </ColorContext.Provider>
+    </div>
   );
 };
 
