@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid2";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
@@ -41,10 +41,7 @@ const Logos = () => {
         return (
           <Grid
             key={`logo-${group}-${name}`}
-            item
-            xs={6}
-            sm={4}
-            lg={2}
+            size={{ xs: 6, sm: 4, lg: 2 }}
             style={{ overflow: "hidden" }}
           >
             <Component width="100%" height="100px" />
@@ -58,7 +55,7 @@ const Logos = () => {
       return (
         <Fragment key={`group-${group}`}>
           {group === "undefined" || (
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <Typography variant="h5" gutterBottom>
                 {group}
               </Typography>

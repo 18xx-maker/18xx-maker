@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid2";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
@@ -1009,11 +1009,8 @@ const Atoms = () => {
     return (
       <Grid
         key={`example-${id}`}
-        item
         className={classes.atom}
-        xs={12}
-        sm={6}
-        lg={4}
+        size={{ xs: 12, sm: 6, lg: 4 }}
       >
         <Box className={classes.hex}>
           <Svg width="175.205" height="152" viewBox="-87.6025 -76 175.205 152">
@@ -1030,7 +1027,7 @@ const Atoms = () => {
   const groups = addIndex(chain)((g, id) => {
     return (
       <Fragment key={`group-${id}`}>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Typography variant="h5" gutterBottom>
             {g.group}
           </Typography>

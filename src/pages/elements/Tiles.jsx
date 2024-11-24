@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import FormControl from "@mui/material/FormControl";
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid2";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Paper from "@mui/material/Paper";
@@ -219,7 +219,7 @@ const Tiles = () => {
       <Grid container spacing={2}>
         {map(
           (t) => (
-            <Grid key={t.id} item xs={6} sm={4} md={4} lg={3}>
+            <Grid key={t.id} size={{ xs: 6, sm: 4, md: 4, lg: 3 }}>
               <Svg
                 width="200"
                 height="200"
