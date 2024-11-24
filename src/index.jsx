@@ -18,26 +18,12 @@ import "./index.css";
 const createRouter = capability.electron
   ? createHashRouter
   : createBrowserRouter;
-const router = createRouter(rootRoutes, {
-  future: {
-    v7_relativeSplatPath: true,
-    v7_fetcherPersist: true,
-    v7_normalizeFormMethod: true,
-    v7_partialHydration: true,
-    v7_skipActionStatusRevalidation: true,
-    v7_skipActionErrorRevalidation: true,
-  },
-});
+const router = createRouter(rootRoutes);
 
 const App = () => (
   <StrictMode>
     <Provider store={store}>
-      <RouterProvider
-        router={router}
-        future={{
-          v7_startTransition: true,
-        }}
-      />
+      <RouterProvider router={router} />
     </Provider>
   </StrictMode>
 );
