@@ -23,7 +23,6 @@ import { createWindow } from "./window.js";
 
 const { autoUpdater } = updater;
 autoUpdater.autoDownload = false;
-autoUpdater.forceDevUpdateConfig = true;
 
 app.on("ready", () => {
   const mainWindow = createWindow();

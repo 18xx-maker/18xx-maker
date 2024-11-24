@@ -17,6 +17,6 @@ FROM nginx:alpine
 LABEL maintainer="kelsin@valefor.com"
 WORKDIR /usr/share/nginx/html
 
-COPY default.conf /etc/nginx/conf.d/default.conf
+COPY docker/default.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build /18xx/dist /usr/share/nginx/html

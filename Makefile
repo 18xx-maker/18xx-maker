@@ -32,7 +32,7 @@ release:
 	git push --tags
 
 docker/build:
-	@docker build -t "kelsin/18xx:local" -f Dockerfile.develop .
+	@docker build -t "kelsin/18xx:local" -f docker/Dockerfile.develop .
 
 docker/run:
 	@docker run -it --rm --name 18xx -v "18xx:/18xx" "kelsin/18xx:local"

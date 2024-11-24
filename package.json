@@ -93,10 +93,11 @@
     ],
     "ignoreFiles": [
       "coverage/**/*",
+      "dist-sb/**/*",
+      "dist/**/*",
+      "docker/**/*",
       "node_modules/**/*",
       "out/**/*",
-      "dist/**/*",
-      "dist-sb/**/*",
       "public/**/*",
       "src/fonts.css"
     ],

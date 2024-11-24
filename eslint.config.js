@@ -13,6 +13,7 @@ export default [
     ignores: [
       "!.storybook",
       "coverage/",
+      "docker/",
       "dist/",
       "dist-sb/",
       "out/",
