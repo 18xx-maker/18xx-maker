@@ -2,8 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
-import { createMemoryRouter } from "react-router";
-import { RouterProvider } from "react-router/dom";
+import { RouterProvider, createMemoryRouter } from "react-router";
 
 import { rootRoutes } from "@/routes";
 import { initialState, rootReducer } from "@/state";
