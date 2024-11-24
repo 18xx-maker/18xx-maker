@@ -17,7 +17,7 @@ const MapSingle = ({ game, config, variation }) => {
   let data = getMapData(game, coords, hexWidth, variation);
 
   return (
-    <div className="map">
+    <div className="map" data-testid={`game-${game.meta.slug}-map`}>
       <Svg
         className="printElement"
         width={`${data.totalWidth / 100}in`}

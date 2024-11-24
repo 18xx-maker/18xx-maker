@@ -4,16 +4,15 @@ import { renderApp } from "@tests/helpers.jsx";
 
 describe("bindings", () => {
   it.for([
-    ["?", "Help"],
-    ["l", "Games"],
-    ["e", "Map Elements"],
-    ["c", "Company Logos"],
-    ["t", "Tiles"],
-    ["?", "Help"],
-  ])("pressing %s brings you to %s", async ([key, header]) => {
+    ["?", "docs"],
+    ["l", "games"],
+    ["e", "atoms"],
+    ["c", "logos"],
+    ["t", "tiles"],
+  ])("pressing %s brings you to %s", async ([key, id]) => {
     const { user } = renderApp();
 
     await user.keyboard(key);
-    expect(screen.getByRole("heading", { name: header })).toBeInTheDocument();
+    expect(screen.getByTestId(id)).toBeInTheDocument();
   });
 });

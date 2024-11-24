@@ -118,7 +118,7 @@ const Docs = () => {
 
   return (
     <Container maxWidth="md">
-      <Paper elevation={5} className={classes.page}>
+      <Paper data-testid="docs" elevation={5} className={classes.page}>
         <ReactMarkdown components={components}>{source}</ReactMarkdown>
       </Paper>
     </Container>

@@ -201,6 +201,7 @@ const TokenLayout = ({ companies, data, game }) => {
       <div
         key={`tokens-page-${i}`}
         className="tokens"
+        data-testid={`game-${game.meta.slug}-tokens`}
         style={{
           width: unitsToCss(data.usableWidth),
           height: unitsToCss(data.usableHeight),
