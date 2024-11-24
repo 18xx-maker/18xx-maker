@@ -6,14 +6,14 @@ commit-msg:
 pre-commit:
   commands:
     schemas:
-      run: make && yarn validate
+      run: make && yarn validate:schemas
       glob: "{public,src}/schemas/*.json"
       stage_fixed: true
       priority: 10
     validate:
       glob: "*.json"
       exclude:
-        - "package.json"
+        - "./*.json"
         - "public/*"
         - "src/locales/*"
         - "src/schemas/*"
