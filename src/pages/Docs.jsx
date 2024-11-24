@@ -8,10 +8,12 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
 
-import { isEmpty, startsWith } from "ramda";
+import { dissoc, isEmpty, startsWith } from "ramda";
 
 import { SyntaxHighlighter, style } from "@/SyntaxHighlighter";
 import capability from "@/util/capability";
+
+const removeNode = dissoc("node");
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -74,51 +76,71 @@ const useStyles = makeStyles((theme) => ({
 const Heading = (props) => {
   switch (props.level) {
     case 1:
-      return <Typography variant="h4" gutterBottom {...props} />;
+      return <Typography variant="h4" gutterBottom {...removeNode(props)} />;
     case 2:
-      return <Typography variant="h5" gutterBottom {...props} />;
+      return <Typography variant="h5" gutterBottom {...removeNode(props)} />;
     case 3:
-      return <Typography variant="h6" gutterBottom {...props} />;
+      return <Typography variant="h6" gutterBottom {...removeNode(props)} />;
     case 4:
-      return <Typography variant="subtitle1" gutterBottom {...props} />;
+      return (
+        <Typography variant="subtitle1" gutterBottom {...removeNode(props)} />
+      );
     default:
-      return <Typography variant="caption" gutterBottom paragraph {...props} />;
+      return (
+        <Typography
+          variant="caption"
+          gutterBottom
+          paragraph
+          {...removeNode(props)}
+        />
+      );
   }
 };
 
 const ElectronImage = (props) => {
   if (capability.electron) {
     return (
-      <img alt={props.title || props.src} {...props} src={`.${props.src}`} />
+      <img
+        alt={props.title || props.src}
+        {...removeNode(props)}
+        src={`.${props.src}`}
+      />
     );
   }
 
-  return <img alt={props.title || props.src} {...props} />;
+  return <img alt={props.title || props.src} {...removeNode(props)} />;
 };
 
 const LocalLink = (props) => {
-  if (startsWith("?", props.href)) {
+  if (startsWith("#", props.href) || startsWith("?", props.href)) {
     return (
       <Link
         component={capability.electron || RouterLink}
         to={props.href}
-        {...props}
+        {...removeNode(props)}
         underline="hover"
       />
     );
   }
 
-  return <Link target="_blank" rel="noreferrer" {...props} underline="hover" />;
+  return (
+    <Link
+      target="_blank"
+      rel="noreferrer"
+      {...removeNode(props)}
+      underline="hover"
+    />
+  );
 };
 
 const components = {
-  h1: (props) => Heading({ level: 1, ...props }),
-  h2: (props) => Heading({ level: 2, ...props }),
-  h3: (props) => Heading({ level: 3, ...props }),
-  h4: (props) => Heading({ level: 4, ...props }),
-  h5: (props) => Heading({ level: 5, ...props }),
-  h6: (props) => Heading({ level: 6, ...props }),
-  p: (props) => <Typography variant="body1" {...props} />,
+  h1: (props) => Heading({ level: 1, ...removeNode(props) }),
+  h2: (props) => Heading({ level: 2, ...removeNode(props) }),
+  h3: (props) => Heading({ level: 3, ...removeNode(props) }),
+  h4: (props) => Heading({ level: 4, ...removeNode(props) }),
+  h5: (props) => Heading({ level: 5, ...removeNode(props) }),
+  h6: (props) => Heading({ level: 6, ...removeNode(props) }),
+  p: (props) => <Typography variant="body1" {...removeNode(props)} />,
   li: (props) => (
     <li>
       <Typography component="span">{props.children}</Typography>
@@ -129,10 +151,9 @@ const components = {
   code: (props) => {
     const { children, className, ...rest } = props;
     const match = /language-(\w+)/.exec(className || "");
-    const pass = { ...rest, node: undefined };
     return match ? (
       <SyntaxHighlighter
-        {...pass}
+        {...removeNode(rest)}
         PreTag="div"
         style={style}
         language={match[1]}
@@ -140,7 +161,7 @@ const components = {
         {String(children).replace(/\n$/, "")}
       </SyntaxHighlighter>
     ) : (
-      <code {...pass} className={className}>
+      <code {...removeNode(rest)} className={className}>
         {children}
       </code>
     );
