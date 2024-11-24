@@ -132,18 +132,18 @@
         }
       ],
       "category": "public.app-category.games",
-      "icon": "assets/18xx-maker.icns",
+      "icon": "electron/assets/18xx-maker.icns",
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
-      "entitlements": "assets/entitlements.mac.plist",
-      "entitlementsInherit": "assets/entitlements.mac.plist",
+      "entitlements": "electron/assets/entitlements.mac.plist",
+      "entitlementsInherit": "electron/assets/entitlements.mac.plist",
       "notarize": false,
       "publish": [
         "github"
       ]
     },
     "dmg": {
-      "background": "assets/background.tiff"
+      "background": "electron/assets/background.tiff"
     },
     "win": {
       "target": [
@@ -152,14 +152,14 @@
           "arch": "ia32"
         }
       ],
-      "icon": "assets/18xx-maker.ico",
+      "icon": "electron/assets/18xx-maker.ico",
       "publish": [
         "github"
       ]
     },
     "linux": {
       "target": "AppImage",
-      "icon": "assets/18xx-maker.png",
+      "icon": "electron/assets/18xx-maker.png",
       "executableName": "18xx-maker",
       "publish": [
         "github"

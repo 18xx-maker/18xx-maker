@@ -60,9 +60,10 @@ a new zip) you should run `yarn` again to update your dependencies.
 ## Using Docker
 
 If you have docker installed (or available) you can run a [public docker
-image](https://hub.docker.com/r/kelsin/18xx) that includes all games. Run the
-following command and the site should be available at http://localhost (you
-might need to edit the port depending on your OS and other running apps):
+image](https://hub.docker.com/r/kelsin/18xx) that includes a copy of the site as
+it exists on 18xx-maker.com. Run the following command and the site should be
+available at http://localhost (you might need to edit the port depending on your
+OS and other running apps):
 
 ```sh
 docker run -it --rm -p 80:80 --name 18xx kelsin/18xx
@@ -72,7 +73,8 @@ docker run -it --rm -p 80:80 --name 18xx kelsin/18xx
 
 If you want to use docker to hack on the site, you can use a docker volume to
 keep a persistant image of the game code. Knowledge of how to manage docker
-volumes is important to use this properly.
+volumes is important to use this properly. This docker version is capable of
+running all of the scripts (using puppeteer) as well.
 
 ```sh
 docker run -it --rm -p 3000:3000 \
@@ -81,6 +83,16 @@ docker run -it --rm -p 3000:3000 \
        kelsin/18xx:develop
 ```
 
-This will run the react-development server that will live update if you edit
+This will run the vite development server that will live update if you edit
 files, and store anything edited (starting with the current code) on the volume
 named `18xx`.
+
+You can run other yarn commands as well:
+
+```sh
+docker run -it --rm -p 3000:3000 \
+       --name 18xx-develop \
+       -v 18xx:/home/18xx \
+       kelsin/18xx:develop
+       b18 1889 CGG01 "Christopher Giroir"
+```
