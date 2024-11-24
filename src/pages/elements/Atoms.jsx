@@ -1053,7 +1053,7 @@ const Atoms = () => {
 
   return (
     <Container maxWidth="lg">
-      <Paper elevation={5} className={classes.page}>
+      <Paper data-testid="atoms" elevation={5} className={classes.page}>
         <Typography variant="h4" gutterBottom>
           {t("elements.atoms.title")}
         </Typography>

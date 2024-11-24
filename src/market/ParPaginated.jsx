@@ -14,9 +14,11 @@ const ParPaginated = ({ config, game }) => {
   let data = getParData(game.stock, config);
 
   return (
-    <Paginate component="Par" game={game} config={config} data={data}>
-      <Par data={data} title={game.info.title} />
-    </Paginate>
+    <div className="stock" data-testid={`game-${game.meta.slug}-par-paginated`}>
+      <Paginate component="Par" game={game} config={config} data={data}>
+        <Par data={data} title={game.info.title} />
+      </Paginate>
+    </div>
   );
 };
 

@@ -6,7 +6,7 @@ describe("the app", () => {
   it("renders without crashing", () => {
     renderApp();
 
-    expect(screen.getByText("18xx Maker")).toBeInTheDocument();
+    expect(screen.getByTestId("home")).toBeInTheDocument();
   });
 
   it("can navigate to the elements page", async () => {
@@ -14,8 +14,6 @@ describe("the app", () => {
 
     await user.click(screen.getByRole("link", { name: "Elements" }));
 
-    expect(
-      screen.getByRole("heading", { name: "Map Elements" }),
-    ).toBeInTheDocument();
+    expect(screen.getByTestId("atoms")).toBeInTheDocument();
   });
 });

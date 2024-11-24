@@ -149,6 +149,7 @@ const Card = () => {
       <style>{css}</style>
       <div
         className="printElement"
+        data-testid={`game-${game.meta.slug}-card`}
         style={{ overflow: "auto", display: "inline-block" }}
       >
         {node}

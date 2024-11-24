@@ -165,6 +165,10 @@
       "description": "Data from included 18xx games"
     }
   },
+  "games": {
+    "title": "Games",
+    "description": "These are the games that you have loaded into 18xx Maker"
+  },
   "game": {
     "nav": {
       "background": "Background",

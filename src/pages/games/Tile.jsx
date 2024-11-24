@@ -24,7 +24,7 @@ const TileSheet = () => {
 
   return (
     <ColorContext.Provider value="tile">
-      <div className="tile">
+      <div className="tile" data-testid={`game-${game.meta.slug}-tile`}>
         <Svg
           className="printElement"
           style={{

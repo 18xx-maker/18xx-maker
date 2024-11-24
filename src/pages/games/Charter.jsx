@@ -132,7 +132,11 @@ const Charters = () => {
 `;
 
   return (
-    <div className="charters printElement" style={{ display: "inline-block" }}>
+    <div
+      className="charters printElement"
+      data-testid={`game-${game.meta.slug}-charter`}
+      style={{ display: "inline-block" }}
+    >
       <style>{css}</style>
       <Charter
         game={game.info.title}

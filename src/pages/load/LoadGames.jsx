@@ -86,11 +86,9 @@ const LoadGames = () => {
 
   return (
     <Container maxWidth="md">
-      <Paper className={classes.page} elevation={10}>
-        <Typography variant="h3">Games</Typography>
-        <Typography variant="body1">
-          These are games that you have loaded into 18xx Maker previously.
-        </Typography>
+      <Paper data-testid="games" className={classes.page} elevation={10}>
+        <Typography variant="h3">{t("games.title")}</Typography>
+        <Typography variant="body1">{t("games.description")}</Typography>
         {(capability.electron || capability.system) && (
           <Button
             variant="contained"

@@ -39,7 +39,7 @@ const Home = () => {
   const { t } = useTranslation();
   return (
     <Container maxWidth="md">
-      <Paper elevation={5} className={classes.page}>
+      <Paper data-testid="home" elevation={5} className={classes.page}>
         <Typography variant="body1">{t("about")}</Typography>
         <Alert severity="warning" className={classes.Alert}>
           <strong>{t("important")}: </strong>

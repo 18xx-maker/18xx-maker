@@ -8,7 +8,7 @@ describe("game charters", () => {
     async (layout) => {
       renderApp(`/games/18Test/charters?config.charters.layout=${layout}`);
       expect(
-        await screen.findByRole("link", { name: /by Christopher Giroir/i }),
+        await screen.findByTestId("game-18Test-charters"),
       ).toBeInTheDocument();
     },
   );

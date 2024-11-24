@@ -87,6 +87,7 @@ const Background = () => {
               <Box className={classes.backgroundBox}>
                 <div
                   className="background printElement"
+                  data-testid={`game-${game.meta.slug}-background`}
                   style={{
                     width: unitsToCss(pageWidth),
                     height: unitsToCss(pageHeight),

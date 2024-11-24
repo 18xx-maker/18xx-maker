@@ -334,7 +334,10 @@ const TileSheet = () => {
 
   return (
     <ColorContext.Provider value="tile">
-      <div className={`tileSheet tileSheet--${layout}`}>
+      <div
+        data-testid={`game-${game.meta.slug}-tiles`}
+        className={`tileSheet tileSheet--${layout}`}
+      >
         {pageNodes}
         <PageSetup paper={c.paper} landscape={false} />
       </div>

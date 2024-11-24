@@ -7,16 +7,12 @@ describe("game configs", () => {
     "can display the %s coord option",
     async (coords) => {
       renderApp(`/games/18Test/map?config.coords=${coords}`);
-      expect(
-        await screen.findByRole("link", { name: /by Christopher Giroir/i }),
-      ).toBeInTheDocument();
+      expect(await screen.findByTestId("game-18Test-map")).toBeInTheDocument();
     },
   );
 
   it("can display company overrides", async () => {
     renderApp("/games/18Test/tokens?config.overrideCompanies=webdev");
-    expect(
-      await screen.findByRole("link", { name: /by Christopher Giroir/i }),
-    ).toBeInTheDocument();
+    expect(await screen.findByTestId("game-18Test-tokens")).toBeInTheDocument();
   });
 });
