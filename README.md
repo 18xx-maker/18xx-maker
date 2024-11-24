@@ -24,10 +24,13 @@ written in json, display them, and render them for printing. The original intent
 of this site was for personal PnP projects, but the purpose has shifted over
 time to prototyping new games.
 
-This project was bootstrapped with [Create React
-App](https://github.com/facebookincubator/create-react-app). The application
-version is created using [Electron](https://www.electronjs.org/). The ui was
-made with [Material-UI](https://material-ui.com/).
+This project is written in [React](https://react.dev/) with
+[Redux](https://redux.js.org/) and [React Router](https://reactrouter.com/). It
+uses [Vite](https://vite.dev/) as a build framework and
+[Vitest](https://vitest.dev/) as a testing framework. The application version is
+created using [Electron](https://www.electronjs.org/). The ui was made with
+[Material-UI](https://mui.com/material-ui/) and developed with
+[Storybook](https://storybook.js.org/).
 
 ## License
 
