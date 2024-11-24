@@ -195,7 +195,7 @@ const App = () => {
               </TableRow>
               <TableRow>
                 <TableCell align="right">
-                  <img src="/logo.png" width="24" height="24" />
+                  <img src="./logo.png" width="24" height="24" />
                 </TableCell>
                 <TableCell>{data.versions.app}</TableCell>
               </TableRow>
