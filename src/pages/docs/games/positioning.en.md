@@ -22,19 +22,19 @@ the hex.
 
 Icons (when on a tile with a single city of centerTown) are moved to:
 
-```
+```json
 {
-    "angle": 0,
-    "percent": 0.6
+  "angle": 0,
+  "percent": 0.6
 }
 ```
 
 If there is also a terrain cost than the terrain is shifted left to:
 
-```
+```json
 {
-    "angle": 30,
-    "percent": 0.6
+  "angle": 30,
+  "percent": 0.6
 }
 ```
 
@@ -42,10 +42,10 @@ If there is also a terrain cost than the terrain is shifted left to:
 
 The first value of every tile is auto positioned to the upper right corner:
 
-```
+```json
 {
-    "angle": 210,
-    "percent": 0.7
+  "angle": 210,
+  "percent": 0.7
 }
 ```
 
@@ -53,19 +53,19 @@ The first value of every tile is auto positioned to the upper right corner:
 
 The first label on a tile is auto positioned to the upper left corner:
 
-```
+```json
 {
-    "angle": 150,
-    "percent": 0.7
+  "angle": 150,
+  "percent": 0.7
 }
 ```
 
 The second label on a tile is auto positioned to the right side:
 
-```
+```json
 {
-    "angle": 270,
-    "percent": 0.7
+  "angle": 270,
+  "percent": 0.7
 }
 ```
 
@@ -73,18 +73,18 @@ The second label on a tile is auto positioned to the right side:
 
 Terrain costs (when on a tile with a single city or centerTown) are moved to:
 
-```
+```json
 {
-    "angle": 0,
-    "percent": 0.7
+  "angle": 0,
+  "percent": 0.7
 }
 ```
 
 If there is also an icon than the terrain is shifted right to:
 
-```
+```json
 {
-    "angle": 330,
-    "percent": 0.7
+  "angle": 330,
+  "percent": 0.7
 }
 ```

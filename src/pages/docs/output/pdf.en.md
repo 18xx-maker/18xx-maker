@@ -37,14 +37,14 @@ touch.
 
 You can output straight to PDF files by running:
 
-```sh
+```bash
 yarn build && yarn print <game>
 ```
 
 where `<game>` is which game to build. Game defaults to `1889`. For example,
 here is me printing 1889 explicitly:
 
-```sh
+```bash
 yarn build && yarn print 1889
 ```
 
@@ -56,7 +56,7 @@ to the [config](/config) page and copy the json found at the bottom into
 This will build the app, then output a bunch of files into the
 `render/1889` folder:
 
-```sh
+```
 render
 └── 1889
     ├── 1889-background.pdf
@@ -77,6 +77,6 @@ render
 
 If you want to build all games at once you can run:
 
-```sh
+```bash
 yarn build && yarn print all
 ```

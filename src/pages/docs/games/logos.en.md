@@ -59,7 +59,7 @@ it in the
 [/src/data/logos](https://github.com/18xx-maker/18xx-maker/tree/master/src/data/logos)
 folder. Once this is done you should **make sure you have a backup** and run:
 
-```sh
+```bash
 yarn svgo
 ```
 

@@ -14,6 +14,7 @@ import { addIndex, chain, find, map, propEq } from "ramda";
 
 import Hex from "@/Hex";
 import Svg from "@/Svg";
+import { SyntaxHighlighter, style } from "@/SyntaxHighlighter";
 import { useStringParam } from "@/util/query";
 
 const atoms = [
@@ -1037,9 +1038,13 @@ const Atoms = () => {
                 <Hex hex={h} id={`${id}`} border={true} bleed={true} />
               </Svg>
             </Box>
-            <pre>
-              <code>{JSON.stringify(h, null, 2)}</code>
-            </pre>
+            <SyntaxHighlighter
+              style={style}
+              customStyle={{ margin: "1em 0" }}
+              language="json"
+            >
+              {JSON.stringify(h, null, 2)}
+            </SyntaxHighlighter>
           </Grid>
         );
       }),

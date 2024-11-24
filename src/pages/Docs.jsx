@@ -10,6 +10,7 @@ import makeStyles from "@mui/styles/makeStyles";
 
 import { isEmpty, startsWith } from "ramda";
 
+import { SyntaxHighlighter, style } from "@/SyntaxHighlighter";
 import capability from "@/util/capability";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,21 +23,49 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(2),
     },
 
+    "& p a": {
+      textDecoration: "underline",
+    },
+    "& p a:visited": {
+      color: theme.palette.primary.main,
+    },
+
     "& code": {
+      padding: theme.spacing(0.4, 0.8, 0.3, 0.8),
+
       borderRadius: theme.shape.borderRadius,
-      padding: theme.spacing(0.5, 1),
-      backgroundColor: theme.palette.grey[300],
       whiteSpace: "pre",
-      fontFamily: "monospace",
+      background: "rgb(245, 242, 240)",
+      textShadow: "white 0px 1px",
+      fontFamily: "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
+      color: "black",
+      fontSize: "1em",
+      fontWeight: "bold",
     },
 
     "& pre": {
       whiteSpace: "pre",
 
+      "& div": {
+        borderRadius: theme.shape.borderRadius,
+      },
+
+      "& code": {
+        padding: 0,
+      },
+
       "& > code": {
         display: "block",
-        padding: theme.spacing(1, 2),
-        marginBottom: theme.spacing(2),
+        margin: "0.5em 0px",
+        overflow: "auto",
+        padding: "1em",
+        textAlign: "left",
+        wordSpacing: "normal",
+        wordBreak: "normal",
+        overflowWrap: "normal",
+        lineHeight: 1.5,
+        tabSize: 4,
+        hyphens: "none",
       },
     },
   },
@@ -97,6 +126,25 @@ const components = {
   ),
   a: LocalLink,
   img: ElectronImage,
+  code: (props) => {
+    const { children, className, ...rest } = props;
+    const match = /language-(\w+)/.exec(className || "");
+    const pass = { ...rest, node: undefined };
+    return match ? (
+      <SyntaxHighlighter
+        {...pass}
+        PreTag="div"
+        style={style}
+        language={match[1]}
+      >
+        {String(children).replace(/\n$/, "")}
+      </SyntaxHighlighter>
+    ) : (
+      <code {...pass} className={className}>
+        {children}
+      </code>
+    );
+  },
 };
 
 const mds = import.meta.glob("./docs/**/*.md", {
