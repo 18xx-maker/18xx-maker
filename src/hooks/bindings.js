@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { useLoadedGame } from "@/hooks/game";
 import { createAlert, refreshGame } from "@/state";

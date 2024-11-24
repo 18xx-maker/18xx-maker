@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Link, useMatch } from "react-router-dom";
+import { Link, useMatch } from "react-router";
 
 import OverridesIcon from "@mui/icons-material/Autorenew";
 import AutoPositioningIcon from "@mui/icons-material/CenterFocusStrong";

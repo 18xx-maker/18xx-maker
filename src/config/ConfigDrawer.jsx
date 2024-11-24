@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ConfigIcon from "@mui/icons-material/Settings";

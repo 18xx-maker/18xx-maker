@@ -1,11 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import {
-  RouterProvider,
-  createBrowserRouter,
-  createHashRouter,
-} from "react-router-dom";
+import { createBrowserRouter, createHashRouter } from "react-router";
+import { RouterProvider } from "react-router/dom";
 
 import "./i18n";
 
@@ -21,26 +18,12 @@ import "./index.css";
 const createRouter = capability.electron
   ? createHashRouter
   : createBrowserRouter;
-const router = createRouter(rootRoutes, {
-  future: {
-    v7_relativeSplatPath: true,
-    v7_fetcherPersist: true,
-    v7_normalizeFormMethod: true,
-    v7_partialHydration: true,
-    v7_skipActionStatusRevalidation: true,
-    v7_skipActionErrorRevalidation: true,
-  },
-});
+const router = createRouter(rootRoutes);
 
 const App = () => (
   <StrictMode>
     <Provider store={store}>
-      <RouterProvider
-        router={router}
-        future={{
-          v7_startTransition: true,
-        }}
-      />
+      <RouterProvider router={router} />
     </Provider>
   </StrictMode>
 );

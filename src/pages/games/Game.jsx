@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Outlet, useMatch } from "react-router";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useMatch, useNavigate } from "react-router";
 
 import { useGame } from "@/hooks";
 import { loadGame } from "@/state";

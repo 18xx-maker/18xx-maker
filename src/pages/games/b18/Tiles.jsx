@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
 import { compose, filter, is, keys, map, propEq, take, uniq } from "ramda";
 

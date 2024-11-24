@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";

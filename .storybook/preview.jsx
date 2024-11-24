@@ -1,12 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import { RouterProvider, createMemoryRouter } from "react-router-dom";
+import { RouterProvider, createMemoryRouter } from "react-router";
 
 import { keys, map, sortBy } from "ramda";
 
 import Svg from "@/Svg";
 import { companyThemes, mapThemes } from "@/data";
-import { providerFuture, routerFuture } from "@/routes";
 import { initialState, rootReducer } from "@/state";
 
 import "@/index.css";
@@ -71,11 +70,11 @@ const preview = {
         },
       });
       const routes = [{ path: "/", element }];
-      const router = createMemoryRouter(routes, { future: routerFuture });
+      const router = createMemoryRouter(routes);
 
       return (
         <Provider store={store}>
-          <RouterProvider router={router} future={providerFuture} />
+          <RouterProvider router={router} />
         </Provider>
       );
     },

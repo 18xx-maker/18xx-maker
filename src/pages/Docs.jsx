@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router";
 
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
