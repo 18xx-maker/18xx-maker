@@ -57,4 +57,5 @@ information about how to use this app to prototype your own 18xx games.
 
 I've been asked about donation buttons; if you find this software useful to you
 and would like to donate money towards its development you can do so via
-[paypal](https://paypal.me/kelsin) or [square cash](https://cash.me/$kelsin).
+[paypal](https://paypal.me/kelsin), [square cash](https://cash.me/$kelsin), or
+[venmo](https://account.venmo.com/u/kelsin13).
