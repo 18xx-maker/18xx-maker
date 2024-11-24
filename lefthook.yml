@@ -13,7 +13,9 @@ pre-commit:
     validate:
       glob: "*.json"
       exclude:
-        - "./*.json"
+        - "package.json"
+        - "release-please-config.json"
+        - ".release-please-manifest.json"
         - "public/*"
         - "src/locales/*"
         - "src/schemas/*"
