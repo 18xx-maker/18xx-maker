@@ -1,6 +1,5 @@
 .PHONY: all clean release
 .DEFAULT_GOAL: all
-$(V).SILENT:
 
 schemas := companies config game publishers theme tiles
 defs := tiles
@@ -8,11 +7,12 @@ defs := tiles
 all: $(patsubst %,public/schemas/%.schema.json,$(schemas)) $(patsubst %,public/schemas/%.defs.json,$(defs))
 
 clean:
-	rm -rf coverage
-	rm -rf dist
-	rm -rf dist-sb
-	rm -rf out
-	rm -rf stats.html
+	@echo "Removing output folders"
+	@rm -rf coverage
+	@rm -rf dist
+	@rm -rf dist-sb
+	@rm -rf out
+	@rm -rf stats.html
 
 public/schemas/%.defs.json: src/schemas/%.defs.json
 	@echo "Copying $< to $@"
@@ -30,3 +30,19 @@ release:
 	yarn version --prerelease
 	git push
 	git push --tags
+
+docker/build:
+	@docker build -t "kelsin/18xx:local" -f docker/Dockerfile.develop .
+
+docker/run:
+	@docker run -it --rm --name 18xx -v "18xx:/18xx" "kelsin/18xx:local"
+
+docker/clean:
+	@echo "Removing docker image"
+	@docker image rm -f "kelsin/18xx:local"
+	@echo "Removing docker volume"
+	@docker volume rm -f 18xx
+
+docker/prune:
+	@echo "Running system prune"
+	@docker system prune -f --volumes

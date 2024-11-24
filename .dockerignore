@@ -1,5 +1,6 @@
 coverage
 dist
+dist-sb
 electron
 node_modules
 out

@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import express from "express";
-import puppeteer from "puppeteer";
+import { chromium } from "playwright";
 
 import { compose, filter, map } from "ramda";
 
@@ -51,8 +51,8 @@ console.log(`Games: ${games.join(", ")}`);
 
 // Start processing
 (async () => {
-  const browser = await puppeteer.launch({
-    args: ["--force-color-profile", "srgb"],
+  const browser = await chromium.launch({
+    args: ["--force-color-profile srgb"],
   });
 
   const page = await browser.newPage();
@@ -166,7 +166,7 @@ console.log(`Games: ${games.join(", ")}`);
 
       console.log(`Printing ${filename}`);
       await page.goto(`http://localhost:9000/games/${game}/${item}`, {
-        waitUntil: "networkidle2",
+        waitUntil: "networkidle",
       });
       await page.pdf({
         path: `render/${game}/${filename}`,

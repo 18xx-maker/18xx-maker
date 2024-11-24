@@ -93,10 +93,11 @@
     ],
     "ignoreFiles": [
       "coverage/**/*",
+      "dist-sb/**/*",
+      "dist/**/*",
+      "docker/**/*",
       "node_modules/**/*",
       "out/**/*",
-      "dist/**/*",
-      "dist-sb/**/*",
       "public/**/*",
       "src/fonts.css"
     ],
@@ -177,7 +178,6 @@
     "electron-updater": "^6.3.9",
     "express": "^4.21.1",
     "glob": "^11.0.0",
-    "puppeteer": "23.7.0",
     "ramda": "^0.30.1"
   },
   "devDependencies": {
@@ -192,6 +192,7 @@
     "@mui/icons-material": "^6.1.6",
     "@mui/material": "^6.1.6",
     "@mui/styles": "^6.1.6",
+    "@playwright/test": "^1.49.0",
     "@reduxjs/toolkit": "^2.3.0",
     "@storybook/addon-essentials": "^8.4.5",
     "@storybook/addon-interactions": "^8.4.5",
