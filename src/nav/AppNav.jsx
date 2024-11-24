@@ -10,6 +10,7 @@ import DocumentationIcon from "@mui/icons-material/Help";
 import HomeIcon from "@mui/icons-material/Home";
 import MenuIcon from "@mui/icons-material/KeyboardArrowDown";
 import LoadIcon from "@mui/icons-material/OpenInBrowser";
+import AppIcon from "@mui/icons-material/Settings";
 import GamesIcon from "@mui/icons-material/Train";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -220,6 +221,7 @@ const MobileButton = ({ onClick }) => {
   const { t } = useTranslation();
   const game = useLoadedGame();
   const match = useMatch("/:section/*");
+  const update = useSelector(prop("update"));
 
   let icon = <HomeIcon />;
   let text = t("nav.home");
@@ -239,8 +241,8 @@ const MobileButton = ({ onClick }) => {
         }
         break;
       case "app":
-        icon = <DownloadIcon color="secondary" />;
-        text = t("nav.update");
+        icon = update && update.available ? <DownloadIcon /> : <AppIcon />;
+        text = t(update && update.available ? "nav.update" : "nav.app");
         break;
       case "elements":
         icon = <ElementsIcon />;
