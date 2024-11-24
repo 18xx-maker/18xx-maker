@@ -7,7 +7,7 @@
 [![app](https://img.shields.io/github/package-json/v/18xx-maker/18xx-maker?logo=electron&logoColor=%23fff&label=app)](https://github.com/18xx-maker/18xx-maker/releases)
 [![site](https://img.shields.io/netlify/725d9a0f-9db9-457c-a8d0-6bf78140020b?logo=netlify&logoColor=%23fff&label=site)](https://18xx-maker.com)
 [![storybook](https://img.shields.io/netlify/3ccc6fb4-1994-4479-81ea-8cd0a61c0c21?logo=netlify&logoColor=%23fff&label=storybook)](https://storybook.18xx-maker.com)
-[![docker](https://img.shields.io/docker/v/kelsin/18xx/latest?logo=docker&logoColor=%23fff&label=docker)](https://hub.docker.com/r/kelsin/18xx)
+[![docker](https://img.shields.io/docker/v/kelsin/18xx/latest?logo=docker&logoColor=%23fff&color=%232496ED&label=docker)](https://hub.docker.com/r/kelsin/18xx)
 
 [![coveralls](https://img.shields.io/coverallsCoverage/github/18xx-maker/18xx-maker?logo=coveralls&logoColor=%23fff)](https://coveralls.io/github/18xx-maker/18xx-maker)
 [![codecov](https://img.shields.io/codecov/c/github/18xx-maker/18xx-maker?logo=codecov&logoColor=%23fff)](https://app.codecov.io/gh/18xx-maker/18xx-maker/)
@@ -31,7 +31,8 @@ made with [Material-UI](https://material-ui.com/).
 
 ## License
 
-The code of this project is licensed under the [MIT License](LICENSE) but the
+The code of this project is licensed under the [MIT
+License](https://github.com/18xx-maker/18xx-maker/blob/main/LICENSE) but the
 games contained within are not covered by this. The games are presented with no
 license from 18xx-Maker with the permission of the publisher/designers. They
 have given us permission to include their game in this repo so that you can make
@@ -54,33 +55,3 @@ information about how to use this app to prototype your own 18xx games.
 I've been asked about donation buttons; if you find this software useful to you
 and would like to donate money towards its development you can do so via
 [paypal](https://paypal.me/kelsin) or [square cash](https://cash.me/$kelsin).
-
-## Schemas
-
-### CLI Usage
-
-Install this package gives you a `18xx-schemas` binary that takes in any number
-of globs and validates each file it can find. If a file doesn't exist it just
-ignores it. It then pretty prints the validation output using ansi colors on the
-terminal.
-
-```shell
-# Validate some files
-18xx-schemas games/*.json tiles/**/*.json config.json
-
-# Display all options
-18xx-schemas -h
-
-# Output version
-18xx-schemas -v
-```
-
-Be warned that if you pass a json that doesn't conform to any of the 18xx-maker
-json schemas it will be validated against the tiles schema.
-
-From this repo you can run this with `yarn schemas` like the following:
-
-```shell
-# Display all options
-yarn schemas -h
-```
