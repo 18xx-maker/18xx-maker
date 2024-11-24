@@ -234,6 +234,6 @@
   },
   "donations": {
     "title": "Donations",
-    "description": "I've been asked about donation buttons; if you find this software useful to you and would like to donate money towards its development you can do so via <paypal>Paypal</paypal> or <cash>Square Cash</cash>."
+    "description": "I've been asked about donation buttons; if you find this software useful to you and would like to donate money towards its development you can do so via <paypal>Paypal</paypal>, <cash>Square Cash</cash>, or <venmo>Venmo</venmo>."
   }
 }

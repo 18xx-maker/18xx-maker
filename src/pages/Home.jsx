@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
         padding: 0,
       },
     },
+
+    "& a": {
+      textDecoration: "underline",
+    },
   },
   Alert: {
     margin: theme.spacing(0, 0, 2, 0),
@@ -137,7 +141,6 @@ const Home = () => {
                   rel="noreferrer"
                   target="_blank"
                   href="https://paypal.me/kelsin"
-                  underline="hover"
                 />
               ),
               cash: (
@@ -145,7 +148,13 @@ const Home = () => {
                   rel="noreferrer"
                   target="_blank"
                   href="https://cash.app/$kelsin"
-                  underline="hover"
+                />
+              ),
+              venmo: (
+                <Link
+                  rel="noreferrer"
+                  target="_blank"
+                  href="https://account.venmo.com/u/kelsin13"
                 />
               ),
             }}
