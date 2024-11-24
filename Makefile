@@ -1,4 +1,4 @@
-.PHONY: all clean
+.PHONY: all clean release
 .DEFAULT_GOAL: all
 $(V).SILENT:
 
@@ -25,3 +25,8 @@ public/schemas/%.schema.json: src/schemas/%.schema.json
 src/schemas/tiles.defs.json: src/schemas/fields.schema.json src/schemas/tiles.src.json
 	@echo "Compiling $@"
 	node ./bin/compileSchemas.cjs
+
+release:
+	yarn version --prerelease
+	git push
+	git push --tags
