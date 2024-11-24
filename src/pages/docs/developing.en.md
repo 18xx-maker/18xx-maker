@@ -7,7 +7,7 @@ favorite JSON editor. These instructions are ONLY if you want to develop on 18xx
 Maker itself.
 
 If you have experience with [Docker](https://www.docker.com/) and already have
-it installed you can skip to the [Using Docker](#using-docker) section.
+it installed you can skip to the **Using Docker** section.
 
 ## Node.js and Yarn
 
