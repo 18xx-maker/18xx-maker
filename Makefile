@@ -1,4 +1,4 @@
-.PHONY: all clean release
+.PHONY: all clean docker/build docker/run docker/clean docker/prune
 .DEFAULT_GOAL: all
 
 schemas := companies config game publishers theme tiles
@@ -25,11 +25,6 @@ public/schemas/%.schema.json: src/schemas/%.schema.json
 src/schemas/tiles.defs.json: src/schemas/fields.schema.json src/schemas/tiles.src.json
 	@echo "Compiling $@"
 	node ./bin/compileSchemas.cjs
-
-release:
-	yarn version --prerelease
-	git push
-	git push --tags
 
 docker/build:
 	@docker build -t "kelsin/18xx:local" -f docker/Dockerfile.develop .
