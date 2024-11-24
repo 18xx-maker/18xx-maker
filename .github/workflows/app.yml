@@ -10,10 +10,10 @@ jobs:
       contents: write
     name: Build App
     steps:
-      - uses: actions/checkout@v4
-        name: Checkout
-      - uses: actions/setup-node@v4
-        name: Node
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node
+        uses: actions/setup-node@v4
         with:
           architecture: x64
           node-version: 22
@@ -35,26 +35,26 @@ jobs:
         with:
           path: "**/node_modules"
           key: macos-latest-node-modules-${{ hashFiles('**/yarn.lock') }}
-      - run: yarn --frozen-lockfile
-        name: Dependencies
-      - id: create_release
-        name: Draft Release
+      - name: Dependencies
+        run: yarn --frozen-lockfile
+      - name: Draft
+        id: create_release
         uses: ncipollo/release-action@v1
         with:
           name: 18xx Maker ${{ github.ref_name }}
           body: 18xx Maker ${{ github.ref_name }}
           draft: true
           prerelease: true
-      - run: yarn release
-        name: Build Release
+      - name: Build
+        run: yarn release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APPLE_ID: ${{ vars.APPLE_ID }}
           APPLE_TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
           APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
-      - uses: StuYarrow/publish-release@v1
-        name: Publish Release
+      - name: Publish
+        uses: eregon/publish-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          id: ${{ steps.create_release.outputs.id }}
+          release_id: ${{ steps.create_release.outputs.id }}
