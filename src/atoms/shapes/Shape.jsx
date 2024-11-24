@@ -1,10 +1,10 @@
-import Circle from "./Circle";
-import Diamond from "./Diamond";
-import Ellipse from "./Ellipse";
-import Hexagon from "./Hexagon";
-import Square from "./Square";
-import Star from "./Star";
-import Triangle from "./Triangle";
+import Circle from "@/atoms/shapes/Circle";
+import Diamond from "@/atoms/shapes/Diamond";
+import Ellipse from "@/atoms/shapes/Ellipse";
+import Hexagon from "@/atoms/shapes/Hexagon";
+import Square from "@/atoms/shapes/Square";
+import Star from "@/atoms/shapes/Star";
+import Triangle from "@/atoms/shapes/Triangle";
 
 const mapping = {
   circle: Circle,

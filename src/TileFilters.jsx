@@ -60,14 +60,10 @@ const TileFilters = ({
   const handleId = (e) => setId(e.target.value);
   const handleIncludes = (e) => setIncludes(e.target.value);
   const handleRevenueCommit = (_, values) => {
-    console.log("OnChangeCommited");
     setRevenueSlider(values);
     setRevenue(values);
   };
-  const handleRevenue = (_, values) => {
-    console.log("OnChange");
-    setRevenueSlider(values);
-  };
+  const handleRevenue = (_, values) => setRevenueSlider(values);
 
   return (
     <Paper elevation={5} className={classes.page}>

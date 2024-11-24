@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 import * as R from "ramda";
 
 import Position from "./Position";
@@ -346,4 +348,4 @@ const HexTile = ({ hex, id, mask, border, transparent, map, opacity }) => {
   );
 };
 
-export default HexTile;
+export default memo(HexTile);

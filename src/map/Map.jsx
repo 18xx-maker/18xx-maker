@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import * as R from "ramda";
 
 import Hex from "../Hex";
@@ -16,7 +18,10 @@ const Map = ({ name, game, config, variation }) => {
   const coords = config.coords;
   const hexWidth = config.tiles.mapWidth;
 
-  let data = getMapData(game, coords, hexWidth, variation);
+  let data = useMemo(
+    () => getMapData(game, coords, hexWidth, variation),
+    [game, coords, hexWidth, variation],
+  );
 
   if (!data.map) {
     return null;

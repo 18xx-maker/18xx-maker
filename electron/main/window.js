@@ -1,6 +1,6 @@
 import { join } from "node:path";
 
-import { BrowserWindow, dialog } from "electron";
+import { BrowserWindow } from "electron";
 
 import { nth, split } from "ramda";
 
@@ -65,19 +65,4 @@ export const captureWindow = () => {
       sandbox: false,
     },
   });
-};
-
-export const selectDirectory = (title = "Select directory") => {
-  return dialog
-    .showOpenDialog(mainWindow, {
-      title,
-      properties: ["openDirectory", "createDirectory"],
-    })
-    .then(({ canceled, filePaths }) => {
-      if (canceled) {
-        return undefined;
-      } else {
-        return filePaths[0];
-      }
-    });
 };

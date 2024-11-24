@@ -41,6 +41,7 @@
     "svgo:icons": "svgo -f src/data/icons",
     "svgo:logos": "svgo -f src/data/logos",
     "test": "vitest --ui",
+    "test:run": "vitest run",
     "validate": "run-s validate:schemas validate:*",
     "validate:companies": "node ./bin/schemas.cjs src/data/companies/*.json",
     "validate:config": "node ./bin/schemas.cjs src/*.json",
