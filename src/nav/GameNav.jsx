@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { useMatch } from "react-router";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useMatch } from "react-router";
 
 import RulesIcon from "@mui/icons-material/Gavel";
 import LicenseIcon from "@mui/icons-material/Lock";

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import Svg from "../Svg";
 import { unitsToCss } from "../util";

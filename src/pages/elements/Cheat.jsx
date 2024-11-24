@@ -1,4 +1,4 @@
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router";
 
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";

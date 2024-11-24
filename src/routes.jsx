@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 
 import DocsNav from "@/nav/DocsNav";
 import ElementsNav from "@/nav/ElementsNav";

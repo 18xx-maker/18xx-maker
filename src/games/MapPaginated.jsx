@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import Map from "../map/Map";
 import { getMapData } from "../map/util";

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { addIndex, ascend, keys, map, sortWith } from "ramda";
 

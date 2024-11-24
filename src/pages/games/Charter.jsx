@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 
 import Charter from "@/Charter";
 import PageSetup from "@/PageSetup";

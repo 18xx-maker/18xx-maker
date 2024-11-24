@@ -1,4 +1,4 @@
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import Link from "@mui/material/Link";
