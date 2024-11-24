@@ -5,7 +5,7 @@ import Promise from "bluebird";
 import { dialog, shell } from "electron";
 
 import { send } from "./util.js";
-import { captureWindow, getMainWindow, startUrl } from "./window.js";
+import { captureWindow, getMainWindow, startBaseUrl } from "./window.js";
 
 const getPath = (game, item) => {
   if (item.includes("?")) {
@@ -56,7 +56,7 @@ const createPDF = (path, filePath) => {
     } else {
       path = `${path}?print=true`;
     }
-    win.loadURL(`${startUrl}#${path}`);
+    win.loadURL(`${startBaseUrl}#${path}`);
   });
 };
 
@@ -128,6 +128,12 @@ const createScreenshot = (path, filePath) => {
           .catch(() => {
             // Game doesn't include this item
             win.close();
+            send(
+              "alert",
+              "Error",
+              "This page doesn't support single PNG export",
+              "error",
+            );
             resolve();
           });
       }, 1000);
@@ -138,7 +144,7 @@ const createScreenshot = (path, filePath) => {
     } else {
       path = `${path}?print=true`;
     }
-    win.loadURL(`${startUrl}#${path}`);
+    win.loadURL(`${startBaseUrl}#${path}`);
   });
 };
 
@@ -242,7 +248,7 @@ export const png = (path) => {
 
       createScreenshot(path, filePath).then((filePath) => {
         shell.openPath(filePath);
-        send("alert", "PNG Created", `${filePath} saved`, "success");
+        send("alert", "PNG Created", filePath, "success");
       });
     });
 };
