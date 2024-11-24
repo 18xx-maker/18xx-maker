@@ -32,7 +32,7 @@ jobs:
       - name: Readme
         uses: peter-evans/dockerhub-description@v4
         with:
-          username: ${{ var.DOCKERHUB_USERNAME }}
+          username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           repository: kelsin/18xx
           short-description: Prototype 18xx React Library
