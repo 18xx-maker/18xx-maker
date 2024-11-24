@@ -42,7 +42,8 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           name: 18xx Maker ${{ github.ref_name }}
-          body: 18xx Maker ${{ github.ref_name }}
+          generateReleaseNotes: true
+          artifacts: "README.md,LICENSE"
           draft: true
           prerelease: true
       - name: Build
