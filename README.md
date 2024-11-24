@@ -7,6 +7,7 @@
 [![app](https://img.shields.io/github/package-json/v/18xx-maker/18xx-maker?logo=electron&logoColor=%23fff&label=app)](https://github.com/18xx-maker/18xx-maker/releases)
 [![site](https://img.shields.io/netlify/725d9a0f-9db9-457c-a8d0-6bf78140020b?logo=netlify&logoColor=%23fff&label=site)](https://18xx-maker.com)
 [![storybook](https://img.shields.io/netlify/3ccc6fb4-1994-4479-81ea-8cd0a61c0c21?logo=netlify&logoColor=%23fff&label=storybook)](https://storybook.18xx-maker.com)
+[![docker](https://img.shields.io/docker/v/kelsin/18xx/latest?logo=docker&logoColor=%23fff&label=docker)](https://hub.docker.com/r/kelsin/18xx)
 
 [![coveralls](https://img.shields.io/coverallsCoverage/github/18xx-maker/18xx-maker?logo=coveralls&logoColor=%23fff)](https://coveralls.io/github/18xx-maker/18xx-maker)
 [![codecov](https://img.shields.io/codecov/c/github/18xx-maker/18xx-maker?logo=codecov&logoColor=%23fff)](https://app.codecov.io/gh/18xx-maker/18xx-maker/)
