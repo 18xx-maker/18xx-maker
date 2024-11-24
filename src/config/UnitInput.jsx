@@ -68,7 +68,6 @@ const UnitInput = ({ name, value, label, onChange }) => {
       </FormControl>
       <FormControl variant="filled">
         <Select
-          variant="standard"
           id={`${name}-units`}
           labelId={`${name}-label`}
           className={classes.configUnits}
