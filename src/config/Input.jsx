@@ -56,7 +56,6 @@ const Input = ({ name, label, description, dimension }) => {
         <FormControl className={classes.configItem} variant="filled">
           <InputLabel id={`${name}-label`}>{label}</InputLabel>
           <Select
-            variant="standard"
             id={name}
             name={name}
             labelId={`${name}-label`}

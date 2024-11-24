@@ -101,7 +101,6 @@ const Config = () => {
         <FormControl variant="filled" className={classes.configItem}>
           <InputLabel id="theme-label">Theme</InputLabel>
           <Select
-            variant="standard"
             id="theme"
             name="theme"
             labelId="theme-label"
@@ -127,7 +126,6 @@ const Config = () => {
         <FormControl variant="filled" className={classes.configItem}>
           <InputLabel id="companies-theme-label">Companies Theme</InputLabel>
           <Select
-            variant="standard"
             id="companies-theme"
             name="companiesTheme"
             labelId="companies-theme-label"

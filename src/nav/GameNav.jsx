@@ -233,7 +233,6 @@ const GameNav = () => {
                     {t("game.map.variation")}
                   </InputLabel>
                   <Select
-                    variant="standard"
                     labelId="variation-label"
                     id="variation"
                     name="variation"
@@ -254,7 +253,7 @@ const GameNav = () => {
             )}
             {isCards && (
               <ListItemButton>
-                <FormControl variant="standard" component="fieldset">
+                <FormControl component="fieldset">
                   <FormLabel component="legend">{t("show")}</FormLabel>
                   <FormGroup>
                     <FormControlLabel

@@ -1,17 +1,20 @@
-import { Fragment } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid2";
+import MenuItem from "@mui/material/MenuItem";
 import Paper from "@mui/material/Paper";
+import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
 
-import { addIndex, chain } from "ramda";
+import { addIndex, chain, find, map, propEq } from "ramda";
 
-import Hex from "../../Hex";
-import Svg from "../../Svg";
+import Hex from "@/Hex";
+import Svg from "@/Svg";
+import { useStringParam } from "@/util/query";
 
 const atoms = [
   {
@@ -1001,41 +1004,52 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const groupItems = map(
+  (atom) => (
+    <MenuItem key={atom.group} value={atom.group}>
+      {atom.group}
+    </MenuItem>
+  ),
+  atoms,
+);
+
 const Atoms = () => {
   const { t } = useTranslation();
   const classes = useStyles();
 
-  const examples = addIndex(chain)((h, id) => {
-    return (
-      <Grid
-        key={`example-${id}`}
-        className={classes.atom}
-        size={{ xs: 12, sm: 6, lg: 4 }}
-      >
-        <Box className={classes.hex}>
-          <Svg width="175.205" height="152" viewBox="-87.6025 -76 175.205 152">
-            <Hex hex={h} id={`${id}`} border={true} bleed={true} />
-          </Svg>
-        </Box>
-        <pre>
-          <code>{JSON.stringify(h, null, 2)}</code>
-        </pre>
-      </Grid>
-    );
-  });
+  const [group, setGroup] = useStringParam("group", atoms[0].group);
 
-  const groups = addIndex(chain)((g, id) => {
-    return (
-      <Fragment key={`group-${id}`}>
-        <Grid size={{ xs: 12 }}>
-          <Typography variant="h5" gutterBottom>
-            {g.group}
-          </Typography>
-        </Grid>
-        {examples(g.examples)}
-      </Fragment>
-    );
-  });
+  const examples = useMemo(
+    () =>
+      addIndex(chain)((h, id) => {
+        return (
+          <Grid
+            key={`example-${id}`}
+            className={classes.atom}
+            size={{ xs: 12, sm: 6, lg: 4 }}
+          >
+            <Box className={classes.hex}>
+              <Svg
+                width="175.205"
+                height="152"
+                viewBox="-87.6025 -76 175.205 152"
+              >
+                <Hex hex={h} id={`${id}`} border={true} bleed={true} />
+              </Svg>
+            </Box>
+            <pre>
+              <code>{JSON.stringify(h, null, 2)}</code>
+            </pre>
+          </Grid>
+        );
+      }),
+    [classes],
+  );
+
+  const hexes = useMemo(
+    () => find(propEq(group, "group"), atoms).examples,
+    [group],
+  );
 
   return (
     <Container maxWidth="lg">
@@ -1047,8 +1061,15 @@ const Atoms = () => {
           {t("elements.atoms.page.description")}
         </Typography>
       </Paper>
+      <Container
+        sx={{ paddingBottom: 2, display: "flex", justifyContent: "center" }}
+      >
+        <Select value={group} onChange={(e) => setGroup(e.target.value)}>
+          {groupItems}
+        </Select>
+      </Container>
       <Grid container spacing={2}>
-        {groups(atoms)}
+        {examples(hexes)}
       </Grid>
     </Container>
   );
