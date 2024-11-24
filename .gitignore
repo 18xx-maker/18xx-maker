@@ -36,4 +36,11 @@ yarn-error.log*
 # rollup visualizer
 stats.html
 
+# storybook
 *storybook.log
+
+# playwrite
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

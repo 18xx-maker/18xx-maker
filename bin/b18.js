@@ -3,7 +3,7 @@ import path from "node:path";
 
 import archiver from "archiver";
 import express from "express";
-import puppeteer from "puppeteer";
+import { chromium } from "playwright";
 
 import {
   ascend,
@@ -245,8 +245,8 @@ const server = app.listen(9000);
   json.tray.push(btok);
   json.tray.push(mtok);
 
-  const browser = await puppeteer.launch({
-    args: ["--force-color-profile", "srgb"],
+  const browser = await chromium.launch({
+    args: ["--force-color-profile srgb"],
   });
   const page = await browser.newPage();
 
@@ -260,9 +260,12 @@ const server = app.listen(9000);
 
   console.log(`Printing ${bname}/${folder}/${id}/Map.png`);
   await page.goto(`http://localhost:9000/games/${bname}/b18/map?print=true`, {
-    waitUntil: "networkidle2",
+    waitUntil: "networkidle",
   });
-  await page.setViewport({ width: printWidth + offset, height: printHeight });
+  await page.setViewportSize({
+    width: printWidth + offset,
+    height: printHeight,
+  });
   await page.screenshot({
     path: `render/${bname}/${folder}/${id}/Map.png`,
   });
@@ -273,9 +276,12 @@ const server = app.listen(9000);
   let marketWidth = Math.ceil((marketData.totalWidth + 50) * 0.96);
   let marketHeight = Math.ceil((marketData.totalHeight + 50) * 0.96);
   await page.goto(`http://localhost:9000/games/${bname}/market?print=true`, {
-    waitUntil: "networkidle2",
+    waitUntil: "networkidle",
   });
-  await page.setViewport({ width: marketWidth + 1, height: marketHeight + 1 });
+  await page.setViewportSize({
+    width: marketWidth + 1,
+    height: marketHeight + 1,
+  });
   await page.screenshot({
     path: `render/${bname}/${folder}/${id}/Market.png`,
   });
@@ -283,9 +289,9 @@ const server = app.listen(9000);
   console.log(`Printing ${bname}/${folder}/${id}/Tokens.png`);
   await page.goto(
     `http://localhost:9000/games/${bname}/b18/tokens?print=true`,
-    { waitUntil: "networkidle2" },
+    { waitUntil: "networkidle" },
   );
-  await page.setViewport({ width: 60, height: tokenHeight });
+  await page.setViewportSize({ width: 60, height: tokenHeight });
   await page.screenshot({
     path: `render/${bname}/${folder}/${id}/Tokens.png`,
     omitBackground: true,
@@ -304,9 +310,9 @@ const server = app.listen(9000);
     );
     await page.goto(
       `http://localhost:9000/games/${bname}/b18/tiles/${color}?print=true`,
-      { waitUntil: "networkidle2" },
+      { waitUntil: "networkidle" },
     );
-    await page.setViewport({ width, height });
+    await page.setViewportSize({ width, height });
     await page.screenshot({
       path: `render/${bname}/${folder}/${id}/${capitalize(color_filename)}.png`,
       omitBackground: true,

@@ -1,35 +1,18 @@
-FROM node:22 AS build
+FROM node:22 AS develop
 EXPOSE 3000
 
-# We don't need the standalone Chromium
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
-ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
+RUN mkdir -p /root/Downloads /18xx
+WORKDIR /18xx
 
-# Install Google Chrome Stable and fonts
-# Note: this installs the necessary libs to make the browser work with Puppeteer.
-RUN apt-get update && apt-get install gnupg wget -y && \
-  wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \
-  sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
-  apt-get update && \
-  apt-get install google-chrome-stable -y --no-install-recommends && \
-  rm -rf /var/lib/apt/lists/*
+COPY package.json /18xx/
+COPY yarn.lock /18xx
 
-RUN groupadd -r 18xx && useradd -r -g 18xx -G audio,video 18xx \
-  && mkdir -p /home/18xx/Downloads \
-  && chown -R 18xx:18xx /home/18xx
-
-USER 18xx
-WORKDIR /home/18xx
-
-COPY --chown=18xx:18xx package.json /home/18xx/
-COPY --chown=18xx:18xx yarn.lock /home/18xx
-
-# Install Deps
-RUN yarn
+# Install deps and browsers for playwrite
+RUN yarn && yarn playwright install chromium --only-shell --with-deps
 
 # Copy site code
-COPY --chown=18xx:18xx . /home/18xx
-VOLUME /home/18xx
+COPY . /18xx
+VOLUME /18xx
 
 # Command that runs
 ENTRYPOINT ["yarn"]
