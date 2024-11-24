@@ -1,3 +1,4 @@
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import {
@@ -32,14 +33,16 @@ const router = createRouter(rootRoutes, {
 });
 
 const App = () => (
-  <Provider store={store}>
-    <RouterProvider
-      router={router}
-      future={{
-        v7_startTransition: true,
-      }}
-    />
-  </Provider>
+  <StrictMode>
+    <Provider store={store}>
+      <RouterProvider
+        router={router}
+        future={{
+          v7_startTransition: true,
+        }}
+      />
+    </Provider>
+  </StrictMode>
 );
 
 const container = document.getElementById("root");
