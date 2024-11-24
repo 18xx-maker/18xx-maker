@@ -112,7 +112,7 @@
     "electronUpdaterCompatibility": ">= 2.16",
     "productName": "18xx Maker",
     "directories": {
-      "buildResources": "assets",
+      "buildResources": "electron/assets",
       "output": "out/app"
     },
     "afterSign": "electron/notarize.js",
