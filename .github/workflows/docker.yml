@@ -32,13 +32,6 @@ jobs:
           file: docker/Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      - name: Readme
-        uses: peter-evans/dockerhub-description@v4
-        with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: kelsin/18xx
-          short-description: Prototype 18xx React Library
   develop:
     runs-on: ubuntu-latest
     name: 18xx:develop
