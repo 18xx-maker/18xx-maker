@@ -33,7 +33,7 @@ package](https://www.npmjs.com/package/18xx-schemas) called
 
 To validate all files you can run:
 
-```sh
+```bash
 yarn validate
 ```
 

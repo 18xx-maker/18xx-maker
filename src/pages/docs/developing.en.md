@@ -19,7 +19,7 @@ On a mac I would recommend using the [homebrew package
 manager](https://brew.sh/) to do this. Once homebrew is installed (you can
 follow directions on their site) you can run:
 
-```sh
+```bash
 brew install yarn
 ```
 
@@ -47,7 +47,7 @@ Once you have the site in a folder, and yarn installed you need to open a
 command prompt (on Windows) or a Terminal (on Mac) to the site folder and you
 can use the following commands:
 
-```sh
+```bash
 # Install all dependencies
 yarn
 
@@ -75,7 +75,7 @@ is available as `kelsin/18xx:latest` or by git tag (something like
 
 You can run this version locally with a command like:
 
-```sh
+```bash
 docker run -it --rm -p 3000:80 --name 18xx kelsin/18xx
 ```
 
@@ -91,21 +91,24 @@ is available as `kelsin/18xx:develop`.
 I recommend creating an alias like (rename to something other than `18xx` if
 you'd like):
 
-```sh
+```bash
 alias 18xx="docker run -it --rm -p 3000:3000 --name 18xx-develop -v 18xx:/18xx kelsin/18xx:develop"
 ```
 
 Once you do this you can run the development version of the site by just running
 `18xx`. You can also run any other yarn script:
 
-```sh
+```bash
+# Build the site
 18xx build
+
+# Print 1889
 18xx print
 ```
 
 Running these commands without an alias can be done as well:
 
-```sh
+```bash
 docker run -it --rm -p 3000:3000 \
        --name 18xx-develop \
        -v 18xx:/18xx \
@@ -125,7 +128,7 @@ There are [make](https://www.gnu.org/software/make/) goals for building,
 running, and cleaning up a local develop docker image. These create the
 `kelsin/18xx:local` image and use the `18xx` volume.
 
-```sh
+```bash
 make docker/build
 make docker/run
 make docker/clean

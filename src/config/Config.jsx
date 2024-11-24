@@ -22,6 +22,7 @@ import {
   split,
 } from "ramda";
 
+import { SyntaxHighlighter, style } from "@/SyntaxHighlighter";
 import Input from "@/config/Input";
 import ThemePreview from "@/config/ThemePreview";
 import { companyThemes, mapThemes } from "@/data";
@@ -45,6 +46,19 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "flex-start",
     padding: theme.spacing(3),
     overflow: "visible",
+
+    "& p": {
+      margin: "0",
+    },
+    "& > p": {
+      margin: "1em 0",
+    },
+    "& pre + a": {
+      margin: "1em 0 0 0",
+    },
+    "& pre": {
+      margin: "0 !important",
+    },
   },
   configItem: {
     minWidth: 200,
@@ -607,9 +621,9 @@ const Config = () => {
           src/config.json if you want to apply these settings to command line or
           local servers.
         </Typography>
-        <pre>
-          <code>{JSON.stringify(diff(defaultConfig, config), null, 2)}</code>
-        </pre>
+        <SyntaxHighlighter style={style} language="json">
+          {JSON.stringify(diff(defaultConfig, config), null, 2)}
+        </SyntaxHighlighter>
         <File data={diff(defaultConfig, config)} filename="config.json">
           Download config.json
         </File>
