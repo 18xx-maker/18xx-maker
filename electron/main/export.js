@@ -5,12 +5,7 @@ import Promise from "bluebird";
 import { dialog, shell } from "electron";
 
 import { send } from "./util.js";
-import {
-  captureWindow,
-  getMainWindow,
-  selectDirectory,
-  startUrl,
-} from "./window.js";
+import { captureWindow, getMainWindow, startUrl } from "./window.js";
 
 const getPath = (game, item) => {
   if (item.includes("?")) {
@@ -18,6 +13,21 @@ const getPath = (game, item) => {
   } else {
     return `/games/${game}/${item}?print=true`;
   }
+};
+
+const selectDirectory = (title = "Select directory") => {
+  return dialog
+    .showOpenDialog(getMainWindow(), {
+      title,
+      properties: ["openDirectory", "createDirectory"],
+    })
+    .then(({ canceled, filePaths }) => {
+      if (canceled) {
+        return undefined;
+      } else {
+        return filePaths[0];
+      }
+    });
 };
 
 // Goes to path in the app, and saves a PDF to filePath
