@@ -1,9 +1,9 @@
 import { defaultTo } from "ramda";
 
-import { useGame } from "../../hooks";
-import { getFontProps, multiDefaultTo } from "../../util";
-import Color from "../../util/Color";
-import Text from "./Text";
+import Text from "@/atoms/shapes/Text";
+import { useGame } from "@/hooks";
+import { getFontProps, multiDefaultTo } from "@/util";
+import Color from "@/util/Color";
 
 const Star = (props) => {
   let {
