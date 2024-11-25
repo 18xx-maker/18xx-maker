@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.0.0-beta.91](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.90...v1.0.0-beta.91) (2024-11-25)
+
+
+### :book: Documentation
+
+* add links to ghcr.io docker repositories to developing docs ([#566](https://github.com/18xx-maker/18xx-maker/issues/566)) ([c2020f0](https://github.com/18xx-maker/18xx-maker/commit/c2020f03a6baeaeab6833ee815efd9699cbde293))
+* update docker link in readme ([#567](https://github.com/18xx-maker/18xx-maker/issues/567)) ([12a6e05](https://github.com/18xx-maker/18xx-maker/commit/12a6e0516b7b7dcbc6d31d0b15721f214818544c))
+
+
+### :package: Build System
+
+* fix docker latest tags and better image title ([#564](https://github.com/18xx-maker/18xx-maker/issues/564)) ([f894a3b](https://github.com/18xx-maker/18xx-maker/commit/f894a3b12dab5b77c306f7e9f002627c2d86fed3))
+
+
+### :octocat: Continuous Integration
+
+* fix the variable that we write our artifacts to ([#563](https://github.com/18xx-maker/18xx-maker/issues/563)) ([577a94e](https://github.com/18xx-maker/18xx-maker/commit/577a94e9893e5b697e8287cfd719381b7ce69d98))
+
 ## [1.0.0-beta.90](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.89...v1.0.0-beta.90) (2024-11-25)
 
 
