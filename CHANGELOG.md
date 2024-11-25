@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0-beta.90](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.89...v1.0.0-beta.90) (2024-11-25)
+
+
+### :octocat: Continuous Integration
+
+* add summaries for the test jobs ([#561](https://github.com/18xx-maker/18xx-maker/issues/561)) ([83ac5f0](https://github.com/18xx-maker/18xx-maker/commit/83ac5f0daf8581f8545192f00f3a74e273978d27))
+* better release tagging and set prerelease to true ([83ac5f0](https://github.com/18xx-maker/18xx-maker/commit/83ac5f0daf8581f8545192f00f3a74e273978d27))
+* cleaner release title ([83ac5f0](https://github.com/18xx-maker/18xx-maker/commit/83ac5f0daf8581f8545192f00f3a74e273978d27))
+* fix issues in docker, app and release jobs ([#560](https://github.com/18xx-maker/18xx-maker/issues/560)) ([f042324](https://github.com/18xx-maker/18xx-maker/commit/f042324dce72494fd5c23dffb7dca2b08c096c12))
+* fix windows summary ([83ac5f0](https://github.com/18xx-maker/18xx-maker/commit/83ac5f0daf8581f8545192f00f3a74e273978d27))
+
 ## [1.0.0-beta.89](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.88...v1.0.0-beta.89) (2024-11-25)
 
 
