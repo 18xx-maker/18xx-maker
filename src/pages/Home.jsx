@@ -118,16 +118,17 @@ const Home = () => {
             <li>{t("features.3")}</li>
             <li>{t("features.4")}</li>
             <li>
-              <strong>{t("browser")}:</strong> {t("features.browser.1")}
+              <strong>{t("features.browser.label")}:</strong>{" "}
+              {t("features.browser.1")}
             </li>
             <li>
-              <strong>{t("app")}:</strong> {t("features.app.1")}
+              <strong>{t("features.app.label")}:</strong> {t("features.app.1")}
             </li>
             <li>
-              <strong>{t("app")}:</strong> {t("features.app.2")}
+              <strong>{t("features.app.label")}:</strong> {t("features.app.2")}
             </li>
             <li>
-              <strong>{t("app")}:</strong> {t("features.app.3")}
+              <strong>{t("features.app.label")}:</strong> {t("features.app.3")}
             </li>
           </ul>
         </Typography>
