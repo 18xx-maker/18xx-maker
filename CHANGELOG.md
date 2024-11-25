@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.0.0-beta.92](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.91...v1.0.0-beta.92) (2024-11-25)
+
+
+### :sheep: Reverts
+
+* will test docker builds without extra annotation config ([#574](https://github.com/18xx-maker/18xx-maker/issues/574)) ([5832deb](https://github.com/18xx-maker/18xx-maker/commit/5832deb64868303b9b335b7917792e9c0a1550b3))
+
+
+### :package: Build System
+
+* add annotations to build action ([#573](https://github.com/18xx-maker/18xx-maker/issues/573)) ([5a56067](https://github.com/18xx-maker/18xx-maker/commit/5a560671bd0c9acc5c0019b4edfd6c4ef36021bc))
+* attempt to add better annotations to the docker images ([#571](https://github.com/18xx-maker/18xx-maker/issues/571)) ([5bafd4b](https://github.com/18xx-maker/18xx-maker/commit/5bafd4ba768b7f0476afead75195cb6c44832e25))
+
+
+### :octocat: Continuous Integration
+
+* do not upload docker build records to github ([#572](https://github.com/18xx-maker/18xx-maker/issues/572)) ([6ce3198](https://github.com/18xx-maker/18xx-maker/commit/6ce3198298f909dc9e9a86751d870de49bea44ce))
+* only run commitlint on PRs ([#568](https://github.com/18xx-maker/18xx-maker/issues/568)) ([3f9c320](https://github.com/18xx-maker/18xx-maker/commit/3f9c320cf7818194bed2908c988bd42e626c396c))
+* properly quote artifact files for gh release ([#569](https://github.com/18xx-maker/18xx-maker/issues/569)) ([9f4e8da](https://github.com/18xx-maker/18xx-maker/commit/9f4e8da0678fdda21857659e5af31aae42858839))
+
 ## [1.0.0-beta.91](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.90...v1.0.0-beta.91) (2024-11-25)
 
 
