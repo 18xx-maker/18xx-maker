@@ -3,6 +3,7 @@ export default {
   multipass: true,
   recursive: true,
   precision: 6,
+  quiet: true,
   js2svg: {
     pretty: true,
     indent: 2,

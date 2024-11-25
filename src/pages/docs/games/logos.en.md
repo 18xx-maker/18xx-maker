@@ -60,7 +60,7 @@ it in the
 folder. Once this is done you should **make sure you have a backup** and run:
 
 ```bash
-yarn svgo
+pnpm svgo
 ```
 
 This will optimize the SVG and remove anything unnessecary from it. This is

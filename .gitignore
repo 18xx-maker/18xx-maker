@@ -17,6 +17,7 @@
 # build
 /dist
 /dist-sb
+/browsers
 
 # electron
 /out

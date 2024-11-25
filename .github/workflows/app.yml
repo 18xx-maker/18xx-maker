@@ -16,9 +16,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
       - name: Node
         uses: actions/setup-node@v4
         with:
+          cache: "pnpm"
           node-version: 22
       - name: Keys
         run: |
@@ -32,18 +37,13 @@ jobs:
           APP_CERTIFICATE: ${{ secrets.APP_CERTIFICATE }}
           APP_CERTIFICATE_PWD: ${{ secrets.APP_CERTIFICATE_PWD }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-      - name: Cache
-        uses: actions/cache@v4
-        with:
-          path: "**/node_modules"
-          key: mac-node-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Dependencies
-        run: yarn --frozen-lockfile
+        run: pnpm install
       - name: Build
         id: build
         run: |
-          yarn build:app
-          yarn package:app
+          pnpm build:app
+          pnpm package:app
           {
             echo 'ARTIFACTS<<EOF'
             ls out/app/{latest,18xx-maker}*

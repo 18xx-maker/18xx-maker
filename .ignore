@@ -1,2 +1,4 @@
 *.svg
 src/fonts.css
+!.github
+pnpm-lock.yaml

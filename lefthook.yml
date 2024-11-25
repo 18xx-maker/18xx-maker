@@ -1,12 +1,12 @@
 commit-msg:
   commands:
     commitlint:
-      run: yarn commitlint --edit {1}
+      run: pnpm commitlint --edit {1}
 
 pre-commit:
   commands:
     schemas:
-      run: make && yarn validate:schemas
+      run: make && pnpm validate:schemas
       glob: "{public,src}/schemas/*.json"
       stage_fixed: true
       priority: 10
@@ -23,25 +23,25 @@ pre-commit:
       priority: 40
     svgo:
       glob: "*.svg"
-      run: yarn svgo:check {staged_files}
+      run: pnpm exec svgo {staged_files}
       stage_fixed: true
       priority: 40
     prettier:
       glob: "*.{css,js,mjs,cjs,jsx,json,yml,yaml,md}"
-      run: yarn prettier --write {staged_files}
+      run: pnpm prettier --write {staged_files}
       stage_fixed: true
       priority: 20
     eslint:
       glob: "*.{js,mjs,cjs,jsx}"
-      run: yarn eslint --fix {staged_files}
+      run: pnpm eslint --fix {staged_files}
       stage_fixed: true
       priority: 30
     stylelint:
       glob: "*.css"
-      run: yarn stylelint --fix {staged_files}
+      run: pnpm stylelint --fix {staged_files}
       stage_fixed: true
       priority: 30
     test:
       glob: "*.{js,mjs,cjs,jsx,json}"
-      run: yarn vitest related --coverage.enabled=false --reporter=basic --exclude "tests/**" --run {staged_files}
+      run: pnpm vitest related --coverage.enabled=false --reporter=basic --exclude "tests/**" --run {staged_files}
       priority: 50

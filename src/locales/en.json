@@ -1,8 +1,6 @@
 {
   "title": "18xx Maker",
   "about": "This app can take 18xx game definitions written in json, display them, and render them for printing. The original intent of this site was for personal PnP projects, but the purpose has shifted over time to prototyping new games.",
-  "browser": "Browser",
-  "app": "App",
   "important": "Important",
   "note": "Note",
   "piracy": "Do not use this app to print games that you don't have a license to print. Please support our 18xx designers, developers, and publishers.",
@@ -214,7 +212,7 @@
   },
   "gtg": {
     "title": "Partnership with Grand Trunk Games",
-    "description": "<gtg>Grand Trunk Games</gtg> is a new publisher and a big supporter of print and play. They have decided to make all of their games available on 18xx-maker as the official print and play provider! If you are able to we highly recommend supporting this publisher by purchasing their excellent production of 1861/67 and the upcoming 1889!"
+    "description": "<gtg>Grand Trunk Games</gtg> is a new publisher and a big supporter of print and play. They have decided to make all of their games available on 18xx-maker as the official print and play provider! If you are able to we highly recommend supporting this publisher by purchasing their excellent productions of 1861/67 and Shikoku 1889!"
   },
   "usage": {
     "title": "Usage",
@@ -227,9 +225,11 @@
     "3": "Render games with your own design choices with themes and configuration options.",
     "4": "Quickly design new games making use of our extensive set of elements and logos.",
     "browser": {
+      "label": "Browser",
       "1": "Print components directly from your web browser."
     },
     "app": {
+      "label": "App",
       "1": "Live reloading of games as you edit definition files.",
       "2": "Export full games or individual components as PDF documents or PNG images.",
       "3": "Export games as Board18 game boxes."
