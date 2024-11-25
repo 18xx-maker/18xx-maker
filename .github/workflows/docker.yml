@@ -33,10 +33,13 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/18xx-maker/${{ matrix.image }}
+          flavor: latest=true
           tags: |
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
+          labels: |
+            org.opencontainers.image.title=18xx-maker/${{ matrix.image }}
       - name: Build
         id: build
         uses: docker/build-push-action@v6
