@@ -2,22 +2,22 @@ on:
   push:
     tags:
       - "*"
+
 name: App
+
 jobs:
   app:
+    name: App
     runs-on: macos-latest
     permissions:
       contents: write
-    name: Build App
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Node
         uses: actions/setup-node@v4
         with:
-          architecture: x64
           node-version: 22
-          check-latest: true
       - name: Keys
         run: |
           echo $APP_CERTIFICATE | base64 --decode > certificate.p12
@@ -34,18 +34,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: "**/node_modules"
-          key: macos-latest-node-modules-${{ hashFiles('**/yarn.lock') }}
+          key: mac-node-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Dependencies
         run: yarn --frozen-lockfile
-      - name: Draft
-        id: create_release
-        uses: ncipollo/release-action@v1
-        with:
-          name: 18xx Maker ${{ github.ref_name }}
-          generateReleaseNotes: true
-          artifacts: "README.md,LICENSE"
-          draft: true
-          prerelease: true
       - name: Build
         run: yarn release
         env:
@@ -53,9 +44,3 @@ jobs:
           APPLE_ID: ${{ vars.APPLE_ID }}
           APPLE_TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
           APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
-      - name: Publish
-        uses: eregon/publish-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ steps.create_release.outputs.id }}
