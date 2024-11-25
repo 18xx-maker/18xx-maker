@@ -8,7 +8,7 @@
 [![app](https://img.shields.io/github/v/release/18xx-maker/18xx-maker?include_prereleases&sort=semver&display_name=tag&logo=electron&logoColor=%23fff&label=app&color=%2347848F)](https://github.com/18xx-maker/18xx-maker/releases)
 [![site](https://img.shields.io/netlify/725d9a0f-9db9-457c-a8d0-6bf78140020b?logo=netlify&logoColor=%23fff&label=site)](https://18xx-maker.com)
 [![storybook](https://img.shields.io/netlify/3ccc6fb4-1994-4479-81ea-8cd0a61c0c21?logo=netlify&logoColor=%23fff&label=storybook)](https://storybook.18xx-maker.com)
-[![docker](https://img.shields.io/github/v/release/18xx-maker/18xx-maker?include_prereleases&sort=semver&display_name=tag&logo=docker&logoColor=%23fff&label=docker&color=%232496ED)](https://github.com/18xx-maker/18xx-maker/releases)
+[![docker](https://img.shields.io/github/v/release/18xx-maker/18xx-maker?include_prereleases&sort=semver&display_name=tag&logo=docker&logoColor=%23fff&label=docker&color=%232496ED)](https://github.com/orgs/18xx-maker/packages?ecosystem=container)
 
 This app can take [18xx](https://en.wikipedia.org/wiki/18XX) game definitions
 written in json, display them, and render them for printing. The original intent
@@ -46,10 +46,13 @@ for any development chat or support!
 Please check out the [documentation](https://18xx-maker.com/docs/) for
 information about how to use this app to prototype your own 18xx games.
 
-## Docker
+## [Docker](https://github.com/orgs/18xx-maker/packages?ecosystem=container)
 
-We create two docker images of the production site and a development build. You
-can read more about how to use them in the [developing
+We create two docker images of the [production
+site](https://github.com/18xx-maker/18xx-maker/pkgs/container/site) and a
+[development
+build](https://github.com/18xx-maker/18xx-maker/pkgs/container/develop). You can
+read more about how to use them in the [developing
 documentation](https://18xx-maker.com/docs/developing).
 
 ## Donation
