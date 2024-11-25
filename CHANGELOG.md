@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.0.0-beta.95](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.94...v1.0.0-beta.95) (2024-11-25)
+
+
+### :bug: Bug Fixes
+
+* use node:path.basename to load ID ([#585](https://github.com/18xx-maker/18xx-maker/issues/585)) ([42b8b8f](https://github.com/18xx-maker/18xx-maker/commit/42b8b8f9153b4729deabd89ec5c3c798c44353e6))
+
+
+### :traffic_light: Tests
+
+* move to playwright for jsx tests ([#586](https://github.com/18xx-maker/18xx-maker/issues/586)) ([7decf7e](https://github.com/18xx-maker/18xx-maker/commit/7decf7ef2d7c6eb74555ec12b3171ff5e5899466))
+
+
+### :package: Build System
+
+* adding docker cache to build workflow ([#584](https://github.com/18xx-maker/18xx-maker/issues/584)) ([8707fa6](https://github.com/18xx-maker/18xx-maker/commit/8707fa69bb9d5ff588ef1452b225e0321e740ee8))
+* attempt to fix ghcr display by removing manifest annotations ([#582](https://github.com/18xx-maker/18xx-maker/issues/582)) ([99ea4ab](https://github.com/18xx-maker/18xx-maker/commit/99ea4abb29f92ae635eeeae57087edf4327095cb))
+
 ## [1.0.0-beta.94](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.93...v1.0.0-beta.94) (2024-11-25)
 
 
