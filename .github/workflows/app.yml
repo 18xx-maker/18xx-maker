@@ -46,7 +46,7 @@ jobs:
           yarn package:app
           {
             echo 'ARTIFACTS<<EOF'
-            basename -a out/app/{latest,18xx-maker}*
+            ls out/app/{latest,18xx-maker}*
             echo EOF
           } >> "$GITHUB_OUTPUT"
           echo "### :electron: Created the following artifacts" >> $GITHUB_STEP_SUMMARY
