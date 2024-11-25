@@ -82,4 +82,5 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Summary
+        shell: bash
         run: "echo :${{ matrix.os.emoji }}: ${{ matrix.os.name }} tests succeeded >> $GITHUB_STEP_SUMMARY"
