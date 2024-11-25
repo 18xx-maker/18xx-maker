@@ -60,11 +60,6 @@
       "type": "ci",
       "section": ":octocat: Continuous Integration",
       "hidden": false
-    },
-    {
-      "type": "deps",
-      "section": ":rock: Dependencies",
-      "hidden": false
     }
   ],
   "packages": {
