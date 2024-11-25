@@ -1,6 +1,5 @@
 import path from "node:path";
 
-import { codecovVitePlugin as codecov } from "@codecov/vite-plugin";
 import react from "@vitejs/plugin-react-swc";
 import browserslistToEsbuild from "browserslist-to-esbuild";
 import postcssNesting from "postcss-nesting";
@@ -51,18 +50,7 @@ export default defineConfig({
   json: {
     stringify: true,
   },
-  plugins: [
-    react(),
-    svg(),
-    visualizer(),
-    codecov({
-      enableBundleAnalysis:
-        process.env.CODECOV_TOKEN !== undefined &&
-        process.env.CODECOV_TOKEN !== "",
-      bundleName: "18xx-maker",
-      uploadToken: process.env.CODECOV_TOKEN,
-    }),
-  ],
+  plugins: [react(), svg(), visualizer()],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),

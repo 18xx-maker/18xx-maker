@@ -182,7 +182,6 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.2",
-    "@codecov/vite-plugin": "^1.4.0",
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
     "@emotion/react": "^11.13.3",

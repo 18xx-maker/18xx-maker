@@ -1,6 +1,5 @@
 import path from "node:path";
 
-import { codecovVitePlugin as codecov } from "@codecov/vite-plugin";
 import react from "@vitejs/plugin-react-swc";
 import { defineConfig, externalizeDepsPlugin } from "electron-vite";
 import postcssNesting from "postcss-nesting";
@@ -15,16 +14,7 @@ export default defineConfig({
         format: "es",
       },
     },
-    plugins: [
-      externalizeDepsPlugin(),
-      codecov({
-        enableBundleAnalysis:
-          process.env.CODECOV_TOKEN !== undefined &&
-          process.env.CODECOV_TOKEN !== "",
-        bundleName: "18xx-maker-main",
-        uploadToken: process.env.CODECOV_TOKEN,
-      }),
-    ],
+    plugins: [externalizeDepsPlugin()],
     resolve: {
       alias: {
         "@": path.resolve(import.meta.dirname, "src"),
@@ -38,16 +28,7 @@ export default defineConfig({
         format: "es",
       },
     },
-    plugins: [
-      externalizeDepsPlugin(),
-      codecov({
-        enableBundleAnalysis:
-          process.env.CODECOV_TOKEN !== undefined &&
-          process.env.CODECOV_TOKEN !== "",
-        bundleName: "18xx-maker-preload",
-        uploadToken: process.env.CODECOV_TOKEN,
-      }),
-    ],
+    plugins: [externalizeDepsPlugin()],
     resolve: {
       alias: {
         "@": path.resolve(import.meta.dirname, "src"),
@@ -69,17 +50,7 @@ export default defineConfig({
     json: {
       stringify: true,
     },
-    plugins: [
-      react(),
-      svg(),
-      codecov({
-        enableBundleAnalysis:
-          process.env.CODECOV_TOKEN !== undefined &&
-          process.env.CODECOV_TOKEN !== "",
-        bundleName: "18xx-maker-renderer",
-        uploadToken: process.env.CODECOV_TOKEN,
-      }),
-    ],
+    plugins: [react(), svg()],
     resolve: {
       alias: {
         "@": path.resolve(import.meta.dirname, "src"),
