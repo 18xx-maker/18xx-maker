@@ -35,6 +35,7 @@ jobs:
         run: yarn build:app
   linux:
     name: Linux
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

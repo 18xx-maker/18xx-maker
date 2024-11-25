@@ -5,37 +5,67 @@
   "include-v-in-tag": true,
   "include-component-in-tag": false,
   "pull-request-title-pattern": "chore(release): v${version}",
+  "pull-request-header": ":steam_locomotive: The next 18xx Maker release",
   "changelog-sections": [
     {
       "type": "feat",
-      "section": "Features",
+      "section": ":tada: Features",
       "hidden": false
     },
     {
       "type": "fix",
-      "section": "Fixes",
+      "section": ":bug: Bug Fixes",
       "hidden": false
     },
     {
-      "type": "docs",
-      "section": "Documentation",
+      "type": "perf",
+      "section": ":racing_car: Performance Improvements",
+      "hidden": false
+    },
+    {
+      "type": "revert",
+      "section": ":sheep: Reverts",
       "hidden": false
     },
     {
       "type": "chore",
-      "section": "Chores",
+      "section": ":broom: Chores",
       "hidden": false
     },
     {
-      "type": "deps",
-      "section": "Dependencies",
+      "type": "docs",
+      "section": ":book: Documentation",
+      "hidden": false
+    },
+    {
+      "type": "style",
+      "section": ":shopping: Styles",
+      "hidden": false
+    },
+    {
+      "type": "refactor",
+      "section": ":hammer_and_wrench: Code Refactoring",
+      "hidden": false
+    },
+    {
+      "type": "test",
+      "section": ":traffic_light: Tests",
+      "hidden": false
+    },
+    {
+      "type": "build",
+      "section": ":package: Build System",
+      "hidden": false
+    },
+    {
+      "type": "ci",
+      "section": ":octocat: Continuous Integration",
       "hidden": false
     }
   ],
   "packages": {
     ".": {
-      "release-type": "node",
-      "skip-github-release": true
+      "release-type": "node"
     }
   },
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
