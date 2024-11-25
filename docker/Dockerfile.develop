@@ -5,16 +5,15 @@ RUN mkdir -p /root/Downloads /app
 WORKDIR /app
 
 COPY package.json /app
-COPY yarn.lock /app
-COPY .yarnrc /app
+COPY pnpm-lock.yaml /app
 
 # Install deps and browsers for playwrite
-RUN yarn && yarn playwright install chromium --only-shell --with-deps
+RUN pnpm install && pnpm playwright install chromium --only-shell --with-deps
 
 # Copy site code
 COPY . /app
 VOLUME /app
 
 # Command that runs
-ENTRYPOINT ["yarn"]
+ENTRYPOINT ["pnpm"]
 CMD ["start", "--host", "--no-open"]

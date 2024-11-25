@@ -34,7 +34,7 @@ package](https://www.npmjs.com/package/18xx-schemas) called
 To validate all files you can run:
 
 ```bash
-yarn validate
+pnpm validate
 ```
 
 in the root folder of your code checkout. This will validate all relevant json

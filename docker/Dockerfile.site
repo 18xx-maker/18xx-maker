@@ -4,15 +4,14 @@ RUN mkdir -p /app
 WORKDIR /app
 
 COPY package.json /app
-COPY yarn.lock /app
-COPY .yarnrc /app
+COPY pnpm-lock.yaml /app
 
 # Install Deps
-RUN yarn
+RUN pnpm install
 
 # Build site
 COPY . /app
-RUN yarn build
+RUN pnpm build
 
 FROM nginx:alpine
 LABEL maintainer="kelsin@valefor.com"

@@ -9,26 +9,25 @@ Maker itself.
 If you have experience with [Docker](https://www.docker.com/) and already have
 it installed you can skip to the **Using Docker** section.
 
-## Node.js and Yarn
+## Node.js and PNPM
 
 ### Dependencies
 
-First you need to install node.js and yarn.
+First you need to install node.js and pnpm.
 
 On a mac I would recommend using the [homebrew package
 manager](https://brew.sh/) to do this. Once homebrew is installed (you can
 follow directions on their site) you can run:
 
 ```bash
-brew install yarn
+brew install pnpm node
 ```
 
-This will install [node](https://nodejs.org/) and [yarn](https://yarnpkg.com/)
-for you.
+This will install [node](https://nodejs.org/) and [pnpm](https://pnpm.io/) for
+you.
 
 You can also install node directly from [their website](https://nodejs.org/) and
-yarn using one of their [installation
-methods](https://yarnpkg.com/docs/install).
+pnpm using one of their [installation methods](https://pnpm.io/installation).
 
 ### Getting the site code
 
@@ -43,23 +42,23 @@ want.
 
 ### Running the site
 
-Once you have the site in a folder, and yarn installed you need to open a
+Once you have the site in a folder, and pnpm installed you need to open a
 command prompt (on Windows) or a Terminal (on Mac) to the site folder and you
 can use the following commands:
 
 ```bash
 # Install all dependencies
-yarn
+pnpm install
 
 # Run the development version of the site
-yarn start
+pnpm start
 
 # Run (and watch) tests
-yarn test
+pnpm test
 ```
 
 **Important:** Anytime you update the site's code (from git or from downloading
-a new zip) you should run `yarn` again to update your dependencies.
+a new zip) you should run `pnpm install` again to update your dependencies.
 
 ## Using Docker
 
@@ -93,7 +92,7 @@ alias maker="docker run -it --rm -p 3000:3000 --name 18xx-maker -v 18xx-maker:/a
 ```
 
 Once you do this you can run the development version of the site by just running
-`maker`. You can also run any other yarn script:
+`maker`. You can also run any other pnpm script:
 
 ```bash
 # Build the site
