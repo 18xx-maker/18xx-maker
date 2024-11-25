@@ -6,6 +6,7 @@ WORKDIR /app
 
 COPY package.json /app
 COPY yarn.lock /app
+COPY .yarnrc /app
 
 # Install deps and browsers for playwrite
 RUN yarn && yarn playwright install chromium --only-shell --with-deps

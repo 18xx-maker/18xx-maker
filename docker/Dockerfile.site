@@ -5,6 +5,7 @@ WORKDIR /app
 
 COPY package.json /app
 COPY yarn.lock /app
+COPY .yarnrc /app
 
 # Install Deps
 RUN yarn

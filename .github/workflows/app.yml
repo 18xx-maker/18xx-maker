@@ -40,16 +40,29 @@ jobs:
       - name: Dependencies
         run: yarn --frozen-lockfile
       - name: Build
-        run: yarn release
+        id: build
+        run: |
+          yarn build:app
+          yarn package:app
+          {
+            echo 'ARTIFACTS<<EOF'
+            basename -a out/app/{latest,18xx-maker}*
+            echo EOF
+          } >> "$GITHUB_ENV"
+          echo "### :electron: Created the following artifacts" >> $GITHUB_STEP_SUMMARY
+          basename -a out/app/{latest,18xx-maker}* >> $GITHUB_STEP_SUMMARY
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APPLE_ID: ${{ vars.APPLE_ID }}
           APPLE_TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
           APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+      - name: Upload
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${{ github.ref_name }} $(echo ${{ steps.build.outputs.ARTIFACTS }} | xargs) ./README.md ./LICENSE
       - name: Attest
         uses: actions/attest-build-provenance@v1
         id: attest
         with:
-          subject-path: |
-            out/app/18xx-maker-*
-            out/app/latest*
+          subject-path: ${{ steps.build.outputs.ARTIFACTS }}
