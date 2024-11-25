@@ -217,96 +217,24 @@ body {
                     strokeLinecap="round"
                   />
                 </marker>
-                <mask id="hexMask">
-                  <rect
-                    x="-100"
-                    y="-100"
-                    width="200"
-                    height="200"
-                    fill="black"
-                  />
-                  <polygon
-                    points="-86.0252,0 -43.0126,-74.5 43.0126,-74.5 86.0252,0 43.0126,74.5 -43.0126,74.5"
-                    fill="white"
-                    stroke="white"
-                    strokeWidth="2"
-                  />
-                </mask>
-                <mask id="hexBleedMask">
-                  <rect
-                    x="-100"
-                    y="-100"
-                    width="200"
-                    height="200"
-                    fill="black"
-                  />
-                  <polygon
-                    points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 49.07475,85 -49.07475,85"
-                    fill="white"
-                    stroke="white"
-                    strokeWidth="2"
-                  />
-                </mask>
-                <mask id="hexBleedMaskOffset">
-                  <rect
-                    x="-100"
-                    y="-100"
-                    width="200"
-                    height="200"
-                    fill="black"
-                  />
-                  <polygon
-                    points="-86.6025,0 -92.376,-9.999995337 -54.84825,-75 -43.30125,-75 -37.52775,-85 37.52775,-85 43.30125,-75 54.84825,-75 92.376,-9.999995337 86.6025,0 92.376,9.999995337 54.84825,75 43.30125,75 37.52775,85 -37.52775,85 -43.30125,75 -54.84825,75 -92.376,9.999995337"
-                    fill="white"
-                    stroke="white"
-                    strokeWidth="2"
-                  />
-                </mask>
-                <mask id="hexBleedMaskDie">
-                  <rect
-                    x="-100"
-                    y="-100"
-                    width="200"
-                    height="200"
-                    fill="black"
-                  />
-                  <polygon
-                    points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 54.84825,75 -54.84825,75"
-                    fill="white"
-                    stroke="white"
-                    strokeWidth="2"
-                  />
-                </mask>
-                <mask id="hexBleedMaskDieTop">
-                  <rect
-                    x="-100"
-                    y="-100"
-                    width="200"
-                    height="200"
-                    fill="black"
-                  />
-                  <polygon
-                    points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 54.84825,75 -54.84825,75"
-                    fill="white"
-                    stroke="white"
-                    strokeWidth="2"
-                  />
-                </mask>
-                <mask id="hexBleedMaskDieBottom">
-                  <rect
-                    x="-100"
-                    y="-100"
-                    width="200"
-                    height="200"
-                    fill="black"
-                  />
-                  <polygon
-                    points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 49.07475,85 -49.07475,85"
-                    fill="white"
-                    stroke="white"
-                    strokeWidth="2"
-                  />
-                </mask>
+                <clipPath id="hexClipPath">
+                  <polygon points="-86.0252,0 -43.0126,-74.5 43.0126,-74.5 86.0252,0 43.0126,74.5 -43.0126,74.5" />
+                </clipPath>
+                <clipPath id="hexBleedClipPath">
+                  <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 49.07475,85 -49.07475,85" />
+                </clipPath>
+                <clipPath id="hexBleedClipPathOffset">
+                  <polygon points="-86.6025,0 -92.376,-9.999995337 -54.84825,-75 -43.30125,-75 -37.52775,-85 37.52775,-85 43.30125,-75 54.84825,-75 92.376,-9.999995337 86.6025,0 92.376,9.999995337 54.84825,75 43.30125,75 37.52775,85 -37.52775,85 -43.30125,75 -54.84825,75 -92.376,9.999995337" />
+                </clipPath>
+                <clipPath id="hexBleedClipPathDie">
+                  <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 54.84825,75 -54.84825,75" />
+                </clipPath>
+                <clipPath id="hexBleedClipPathDieTop">
+                  <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 54.84825,75 -54.84825,75" />
+                </clipPath>
+                <clipPath id="hexBleedClipPathDieBottom">
+                  <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 49.07475,85 -49.07475,85" />
+                </clipPath>
               </defs>
             </svg>
             <SetSvgColors />

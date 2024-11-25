@@ -48,7 +48,7 @@ const makeBorder = (track) => (
   </Position>
 );
 
-const HexTile = ({ hex, id, mask, border, transparent, map, opacity }) => {
+const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
   const rotation = useOrientation();
 
   if (hex === undefined || hex === null) {
@@ -280,7 +280,7 @@ const HexTile = ({ hex, id, mask, border, transparent, map, opacity }) => {
       <PhaseContext.Provider value={hex.color || "plain"}>
         <HexContext.Provider value={hex}>
           <g
-            mask={`url(#${mask || "hexMask"})`}
+            clipPath={`url(#${clipPath || "hexClipPath"})`}
             transform={`rotate(${rotation || 0})`}
           >
             <Hex
