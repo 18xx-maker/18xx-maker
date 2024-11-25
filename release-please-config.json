@@ -8,27 +8,57 @@
   "changelog-sections": [
     {
       "type": "feat",
-      "section": "Features",
+      "section": ":star: New Features",
       "hidden": false
     },
     {
       "type": "fix",
-      "section": "Fixes",
+      "section": ":bug: Bug Fixes",
       "hidden": false
     },
     {
       "type": "docs",
-      "section": "Documentation",
+      "section": ":book: Documentation",
+      "hidden": false
+    },
+    {
+      "type": "refactor",
+      "section": ":hammer_and_wrench: Refactors",
+      "hidden": false
+    },
+    {
+      "type": "style",
+      "section": ":shopping: Style Changes",
+      "hidden": false
+    },
+    {
+      "type": "perf",
+      "section": ":racing_car: Performance Improvements",
+      "hidden": false
+    },
+    {
+      "type": "revert",
+      "section": ":sheep: Reverts",
+      "hidden": false
+    },
+    {
+      "type": "test",
+      "section": ":traffic_light: Testing Changes",
+      "hidden": false
+    },
+    {
+      "type": "build",
+      "section": ":octocat: CI Updates",
+      "hidden": false
+    },
+    {
+      "type": "ci",
+      "section": ":octocat: CI Updates",
       "hidden": false
     },
     {
       "type": "chore",
-      "section": "Chores",
-      "hidden": false
-    },
-    {
-      "type": "deps",
-      "section": "Dependencies",
+      "section": ":broom: Chores",
       "hidden": false
     }
   ],
