@@ -4,14 +4,21 @@ import { join } from "node:path";
 import { app } from "electron";
 
 import {
+  apply,
   assoc,
   assocPath,
+  compose,
   dissocPath,
   equals,
+  filter,
+  fromPairs,
+  lensProp,
   mergeDeepRight,
+  over,
   path,
   pick,
   prop,
+  toPairs,
 } from "ramda";
 
 import { getGameSummary } from "../../src/util/loading.js";
@@ -29,14 +36,40 @@ export const CONFIG_FILE = isDev
 
 let config = null;
 
+// This removes any summaries where the id/type/slug relationship doesn't
+// work. When this happens the electron main process can't communicate properly
+// with the client. The client might ask for a game that doesn't exist and the
+// backend can't find it to fix.
+export const cleanInvalidSummarySlugs = over(
+  lensProp("summaries"),
+  compose(
+    fromPairs,
+    filter(([id, summary]) => {
+      if (`${summary.type}:${id}` !== summary.slug) {
+        return false;
+      }
+
+      if (`${summary.type}:${summary.id}` !== summary.slug) {
+        return false;
+      }
+
+      return true;
+    }),
+    toPairs,
+  ),
+);
+export const cleanConfig = apply(compose, [cleanInvalidSummarySlugs]);
+
 export const loadConfig = () =>
-  (config = pick(
-    CONFIG_KEYS,
-    mergeDeepRight(
-      DEFAULT_CONFIG,
-      fs.existsSync(CONFIG_FILE)
-        ? JSON.parse(fs.readFileSync(CONFIG_FILE))
-        : {},
+  (config = cleanConfig(
+    pick(
+      CONFIG_KEYS,
+      mergeDeepRight(
+        DEFAULT_CONFIG,
+        fs.existsSync(CONFIG_FILE)
+          ? JSON.parse(fs.readFileSync(CONFIG_FILE))
+          : {},
+      ),
     ),
   ));
 
