@@ -41,4 +41,4 @@ requires development experience or a desire to learn!
   site
 - [App Releases](https://github.com/18xx-maker/18xx-maker/releases) - Latest
   releases of the 18xx Maker app
-- [Board 18](https://www.board18.org) - Remote play rool for 18xx games
+- [Board 18](https://www.board18.org) - Remote play tool for 18xx games
