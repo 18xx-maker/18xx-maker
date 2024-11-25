@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.0-beta.94](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.93...v1.0.0-beta.94) (2024-11-25)
+
+
+### :package: Build System
+
+* set annotations at the index level as well as manifest ([#580](https://github.com/18xx-maker/18xx-maker/issues/580)) ([d27094a](https://github.com/18xx-maker/18xx-maker/commit/d27094aa739a4fb7c73cc751ecb7e40474f60d57))
+
+
+### :octocat: Continuous Integration
+
+* do not run tests again on main branch ([#579](https://github.com/18xx-maker/18xx-maker/issues/579)) ([d29a0fc](https://github.com/18xx-maker/18xx-maker/commit/d29a0fcce7cc8bf8bb253e656b78bd7d40c12ac7))
+
 ## [1.0.0-beta.93](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.92...v1.0.0-beta.93) (2024-11-25)
 
 
