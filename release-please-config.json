@@ -8,27 +8,12 @@
   "changelog-sections": [
     {
       "type": "feat",
-      "section": ":star: New Features",
+      "section": ":star: Features",
       "hidden": false
     },
     {
       "type": "fix",
       "section": ":bug: Bug Fixes",
-      "hidden": false
-    },
-    {
-      "type": "docs",
-      "section": ":book: Documentation",
-      "hidden": false
-    },
-    {
-      "type": "refactor",
-      "section": ":hammer_and_wrench: Refactors",
-      "hidden": false
-    },
-    {
-      "type": "style",
-      "section": ":shopping: Style Changes",
       "hidden": false
     },
     {
@@ -42,23 +27,43 @@
       "hidden": false
     },
     {
+      "type": "chore",
+      "section": ":broom: Chores",
+      "hidden": false
+    },
+    {
+      "type": "docs",
+      "section": ":book: Documentation",
+      "hidden": false
+    },
+    {
+      "type": "style",
+      "section": ":shopping: Styles",
+      "hidden": false
+    },
+    {
+      "type": "refactor",
+      "section": ":hammer_and_wrench: Code Refactoring",
+      "hidden": false
+    },
+    {
       "type": "test",
-      "section": ":traffic_light: Testing Changes",
+      "section": ":traffic_light: Tests",
       "hidden": false
     },
     {
       "type": "build",
-      "section": ":octocat: CI Updates",
+      "section": ":package: Build System",
       "hidden": false
     },
     {
       "type": "ci",
-      "section": ":octocat: CI Updates",
+      "section": ":octocat: Continuous Integration",
       "hidden": false
     },
     {
-      "type": "chore",
-      "section": ":broom: Chores",
+      "type": "deps",
+      "section": ":rock: Dependencies",
       "hidden": false
     }
   ],
