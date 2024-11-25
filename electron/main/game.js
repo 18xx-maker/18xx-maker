@@ -1,15 +1,19 @@
 import fs from "node:fs";
+import { basename } from "node:path";
 
 import Promise from "bluebird";
 import { dialog } from "electron";
 
 import { assocPath } from "ramda";
 
-import { addMeta, getGameSummary, getID } from "../../src/util/loading.js";
+import { addMeta, getGameSummary } from "../../src/util/loading.js";
 import { updateConfig, updateSummaries } from "./config.js";
 import { getMainWindow } from "./window.js";
 
 export const TYPE = "electron";
+
+// Need to redefine this using basename to work on windows machines
+export const getID = (filename) => basename(filename, ".json");
 
 export const loadGame = (path) => {
   return new Promise((resolve) => {
