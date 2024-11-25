@@ -5,10 +5,11 @@
   "include-v-in-tag": true,
   "include-component-in-tag": false,
   "pull-request-title-pattern": "chore(release): v${version}",
+  "pull-request-header": ":steam_locomotive: The next 18xx Maker release",
   "changelog-sections": [
     {
       "type": "feat",
-      "section": ":star: Features",
+      "section": ":tada: Features",
       "hidden": false
     },
     {
