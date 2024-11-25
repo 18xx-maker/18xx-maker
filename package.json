@@ -110,6 +110,7 @@
   },
   "build": {
     "appId": "com.18xx-maker.app",
+    "artifactName": "18xx-maker-${version}-${os}-${arch}.${ext}",
     "electronUpdaterCompatibility": ">= 2.16",
     "productName": "18xx Maker",
     "directories": {

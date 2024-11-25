@@ -1,4 +1,4 @@
-.PHONY: all clean docker/build docker/run docker/clean docker/prune
+.PHONY: all clean docker/site docker/serve docker/develop docker/start docker/clean docker/prune
 .DEFAULT_GOAL: all
 
 schemas := companies config game publishers theme tiles
@@ -26,17 +26,24 @@ src/schemas/tiles.defs.json: src/schemas/fields.schema.json src/schemas/tiles.sr
 	@echo "Compiling $@"
 	node ./bin/compileSchemas.cjs
 
-docker/build:
-	@docker build -t "kelsin/18xx:local" -f docker/Dockerfile.develop .
+docker/site:
+	@docker build -t "18xx-maker/site" -f docker/Dockerfile.site .
 
-docker/run:
-	@docker run -it --rm --name 18xx -v "18xx:/18xx" "kelsin/18xx:local"
+docker/develop:
+	@docker build -t "18xx-maker/develop" -f docker/Dockerfile.develop .
+
+docker/serve:
+	@docker run -it --rm --name 18xx-maker -p 3000:80 -v "18xx-maker:/app" "18xx-maker/site"
+
+docker/start:
+	@docker run -it --rm --name 18xx-maker -p 3000:3000 -v "18xx-maker:/app" "18xx-maker/develop"
 
 docker/clean:
-	@echo "Removing docker image"
-	@docker image rm -f "kelsin/18xx:local"
+	@echo "Removing docker images"
+	@docker image rm -f "18xx-maker/site"
+	@docker image rm -f "18xx-maker/develop"
 	@echo "Removing docker volume"
-	@docker volume rm -f 18xx
+	@docker volume rm -f 18xx-maker
 
 docker/prune:
 	@echo "Running system prune"

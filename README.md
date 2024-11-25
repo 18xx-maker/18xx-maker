@@ -5,10 +5,10 @@
 [![coveralls](https://img.shields.io/coverallsCoverage/github/18xx-maker/18xx-maker?logo=coveralls&logoColor=%23fff)](https://coveralls.io/github/18xx-maker/18xx-maker)
 [![license](https://img.shields.io/github/license/18xx-maker/18xx-maker?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNyAyMGwxMCAwIi8%2BPHBhdGggZD0iTTYgNmw2IC0xbDYgMSIvPjxwYXRoIGQ9Ik0xMiAzbDAgMTciLz48cGF0aCBkPSJNOSAxMmwtMyAtNmwtMyA2YTMgMyAwIDAgMCA2IDAiLz48cGF0aCBkPSJNMjEgMTJsLTMgLTZsLTMgNmEzIDMgMCAwIDAgNiAwIi8%2BPC9zdmc%2B&logoColor=%23fff&color=%23750014)](https://github.com/18xx-maker/18xx-maker?tab=MIT-1-ov-file#readme)
 
-[![app](https://img.shields.io/github/package-json/v/18xx-maker/18xx-maker?logo=electron&logoColor=%23fff&label=app)](https://github.com/18xx-maker/18xx-maker/releases)
+[![app](https://img.shields.io/github/v/release/18xx-maker/18xx-maker?include_prereleases&sort=semver&display_name=tag&logo=electron&logoColor=%23fff&label=app&color=%2347848F)](https://github.com/18xx-maker/18xx-maker/releases)
 [![site](https://img.shields.io/netlify/725d9a0f-9db9-457c-a8d0-6bf78140020b?logo=netlify&logoColor=%23fff&label=site)](https://18xx-maker.com)
 [![storybook](https://img.shields.io/netlify/3ccc6fb4-1994-4479-81ea-8cd0a61c0c21?logo=netlify&logoColor=%23fff&label=storybook)](https://storybook.18xx-maker.com)
-[![docker](https://img.shields.io/docker/v/kelsin/18xx/latest?logo=docker&logoColor=%23fff&color=%232496ED&label=docker)](https://hub.docker.com/r/kelsin/18xx)
+[![docker](https://img.shields.io/github/v/release/18xx-maker/18xx-maker?include_prereleases&sort=semver&display_name=tag&logo=docker&logoColor=%23fff&label=docker&color=%232496ED)](https://github.com/18xx-maker/18xx-maker/releases)
 
 This app can take [18xx](https://en.wikipedia.org/wiki/18XX) game definitions
 written in json, display them, and render them for printing. The original intent
@@ -45,6 +45,12 @@ for any development chat or support!
 
 Please check out the [documentation](https://18xx-maker.com/docs/) for
 information about how to use this app to prototype your own 18xx games.
+
+## Docker
+
+We create two docker images of the production site and a development build. You
+can read more about how to use them in the [developing
+documentation](https://18xx-maker.com/docs/developing).
 
 ## Donation
 
