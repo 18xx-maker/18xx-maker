@@ -1,0 +1,121 @@
+env:
+  NODE_VERSION: 22
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  merge_group:
+    types:
+      - checks_requested
+name: Test
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: "**/node_modules"
+          key: linux-node-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Dependencies
+        run: yarn --frozen-lockfile
+      - name: Build Web
+        run: yarn build
+      - name: Build App
+        run: yarn build:app
+  linux:
+    name: Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Commits
+        uses: wagoid/commitlint-github-action@v6
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: "**/node_modules"
+          key: linux-node-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Dependencies
+        run: yarn --frozen-lockfile
+      - name: Pretty
+        run: yarn pretty
+      - name: Lint
+        run: yarn lint
+      - name: Validate
+        run: yarn validate
+      - name: Test
+        run: yarn test
+      - name: Upload Coverage - Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Coverage - Codacy
+        uses: codacy/codacy-coverage-reporter-action@v1
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: ${{github.workspace}}/coverage/clover.xml
+  mac:
+    name: Mac
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: "**/node_modules"
+          key: mac-node-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Dependencies
+        run: yarn --frozen-lockfile
+      - name: Pretty
+        run: yarn pretty
+      - name: Lint
+        run: yarn lint
+      - name: Validate
+        run: yarn validate
+      - name: Test
+        run: yarn test
+  windows:
+    name: Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: "**/node_modules"
+          key: windows-node-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Dependencies
+        run: yarn --frozen-lockfile
+      - name: Pretty
+        run: yarn pretty
+      - name: Lint
+        run: yarn lint
+      - name: Validate
+        run: yarn validate
+      - name: Test
+        run: yarn test

@@ -25,7 +25,7 @@
     "lint:fix": "run-s lint:js:fix lint:css:fix",
     "lint:js": "eslint .",
     "lint:js:fix": "eslint --fix .",
-    "package:app": "electron-builder build -mwl -p onTagOrDraft",
+    "package:app": "electron-builder build -mwl -p onTag",
     "pretty": "prettier -c .",
     "pretty:fix": "prettier --write .",
     "preview": "vite preview",
