@@ -36,7 +36,6 @@
     "start": "vite",
     "start:app": "electron-vite dev",
     "svgo": "run-p svgo:icons svgo:logos",
-    "svgo:check": "svgo",
     "svgo:icons": "svgo -f src/data/icons",
     "svgo:logos": "svgo -f src/data/logos",
     "test": "vitest --ui",

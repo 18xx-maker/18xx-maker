@@ -23,7 +23,7 @@ pre-commit:
       priority: 40
     svgo:
       glob: "*.svg"
-      run: pnpm svgo:check {staged_files}
+      run: pnpm exec svgo {staged_files}
       stage_fixed: true
       priority: 40
     prettier:
