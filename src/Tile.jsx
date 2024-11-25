@@ -4,7 +4,7 @@ import Hex from "./Hex";
 import Id from "./atoms/Id";
 import { tiles } from "./data";
 
-const Tile = ({ id, border, mask, gameTiles }) => {
+const Tile = ({ id, border, clipPath, gameTiles }) => {
   let hex = null;
 
   if (gameTiles) {
@@ -34,7 +34,7 @@ const Tile = ({ id, border, mask, gameTiles }) => {
   }
 
   return hex ? (
-    <Hex hex={hex} id={id} mask={mask} border={border} />
+    <Hex hex={hex} id={id} clipPath={clipPath} border={border} />
   ) : (
     <Id id={idBase} extra={idExtra} />
   );

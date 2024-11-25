@@ -541,10 +541,10 @@
           "enum": [true],
           "description": "Marks this tile as being broken and not ready for exporting."
         },
-        "mask": {
+        "clipPath": {
           "type": "boolean",
           "enum": [false],
-          "description": "Remove the special bleed mask when printing these tiles. They will always be printed with no bleed."
+          "description": "Remove the special bleed clipPath when printing these tiles. They will always be printed with no bleed."
         },
         "borders": { "$ref": "#/definitions/borders" },
         "centerTowns": { "$ref": "#/definitions/centerTowns" },

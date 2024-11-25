@@ -194,7 +194,7 @@ const TileSheet = () => {
       }
 
       let rotation = 0;
-      let mask = c.mask;
+      let clipPath = c.clipPath;
 
       if (
         layout === "smallDie" ||
@@ -211,25 +211,25 @@ const TileSheet = () => {
 
         if (layout === "smallDie") {
           if (tileAboveSmall(page, i) && tileBelowSmall(page, i)) {
-            mask = "hexBleedMaskDie";
+            clipPath = "hexBleedClipPathDie";
           } else if (tileAboveSmall(page, i)) {
-            mask = "hexBleedMaskDieBottom";
+            clipPath = "hexBleedClipPathDieBottom";
           } else if (tileBelowSmall(page, i)) {
-            mask = "hexBleedMaskDieTop";
+            clipPath = "hexBleedClipPathDieTop";
           } else {
-            mask = "hexBleedMask";
+            clipPath = "hexBleedClipPath";
           }
         }
 
         if (layout === "die") {
           if (tileAbove(page, i) && tileBelow(page, i)) {
-            mask = "hexBleedMaskDie";
+            clipPath = "hexBleedClipPathDie";
           } else if (tileAbove(page, i)) {
-            mask = "hexBleedMaskDieBottom";
+            clipPath = "hexBleedClipPathDieBottom";
           } else if (tileBelow(page, i)) {
-            mask = "hexBleedMaskDieTop";
+            clipPath = "hexBleedClipPathDieTop";
           } else {
-            mask = "hexBleedMask";
+            clipPath = "hexBleedClipPath";
           }
         }
 
@@ -274,8 +274,8 @@ const TileSheet = () => {
       }
 
       // Overrides from tile definitions
-      if (hex.mask === false) {
-        mask = "hexMask";
+      if (hex.clipPath === false) {
+        clipPath = "hexClipPath";
       }
 
       if (hex.rotation) {
@@ -284,12 +284,12 @@ const TileSheet = () => {
 
       return (
         <g
-          mask={`url(#${mask})`}
+          clipPath={`url(#${clipPath})`}
           transform={`translate(${c.getX(i)} ${c.getY(i)}) scale(${c.hexWidth / 150})`}
           key={`${hex.id}-${i}`}
         >
           <g transform={`rotate(${rotation})`}>
-            <Hex hex={hex} id={hex.id} mask="hexBleedMask" />
+            <Hex hex={hex} id={hex.id} clipPath="hexBleedClipPath" />
           </g>
         </g>
       );

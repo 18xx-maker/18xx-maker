@@ -44,7 +44,7 @@ export const getTileSheetContext = (layout, paper, hexWidth) => {
       c.perPage = c.perRow * c.rowsPerPage;
       c.pageWidth = 800;
       c.pageHeight = 1050;
-      c.mask = "hexBleedMask";
+      c.clipPath = "hexBleedClipPath";
 
       // The die spaces columns apart by 0.25 inches
       c.tileOffsetX = c.width + 25;
@@ -68,7 +68,7 @@ export const getTileSheetContext = (layout, paper, hexWidth) => {
       c.perPage = 60;
       c.pageWidth = 800;
       c.pageHeight = 1050;
-      c.mask = "hexBleedMask";
+      c.clipPath = "hexBleedClipPath";
 
       // The die spaces columns apart by -0.0994 inches
       c.tileOffsetX = c.width - 9.94;
@@ -113,7 +113,7 @@ export const getTileSheetContext = (layout, paper, hexWidth) => {
       c.perRow = Math.floor((c.pageWidth + 12.5) / (c.width + 12.5));
       c.rowsPerPage = Math.floor((c.pageHeight + 12.5) / (c.height + 12.5));
       c.perPage = c.perRow * c.rowsPerPage;
-      c.mask = "hexMask";
+      c.clipPath = "hexClipPath";
 
       c.gapX = 12.5;
       c.gapY = 12.5;
@@ -139,7 +139,7 @@ export const getTileSheetContext = (layout, paper, hexWidth) => {
       c.perRow = Math.floor((c.pageWidth - 20 - c.width / 2) / c.width);
       c.rowsPerPage = Math.floor((c.pageHeight - 20) / c.height);
       c.perPage = c.perRow * c.rowsPerPage;
-      c.mask = "hexBleedMaskOffset";
+      c.clipPath = "hexBleedClipPathOffset";
 
       // Offset tiles are always offset by their plain width and height, regardless of bleed
       c.tileOffsetX = c.width;

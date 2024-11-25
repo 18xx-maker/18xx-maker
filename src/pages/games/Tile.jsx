@@ -33,8 +33,8 @@ const TileSheet = () => {
           }}
           viewBox={`-100 -100 200 200`}
         >
-          <g mask={`url(#hexMask)`}>
-            <Hex hex={tile} id={tile.id} mask="hexBleedMask" />
+          <g clipPath={`url(#hexClipPath)`}>
+            <Hex hex={tile} id={tile.id} clipPath="hexBleedClipPath" />
           </g>
         </Svg>
       </div>
