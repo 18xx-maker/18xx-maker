@@ -13,24 +13,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
       - name: Node
         uses: actions/setup-node@v4
         with:
+          cache: "pnpm"
           node-version: 22
-      - name: Cache
-        uses: actions/cache@v4
-        with:
-          path: "**/node_modules"
-          key: linux-node-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Commits
         uses: wagoid/commitlint-github-action@v6
         if: github.event_name == 'pull_request'
       - name: Dependencies
-        run: yarn --frozen-lockfile
+        run: pnpm install
       - name: Build Web
-        run: yarn build
+        run: pnpm build
       - name: Build App
-        run: yarn build:app
+        run: pnpm build:app
       - name: Summary
         run: "echo :package: Build tests succeeded >> $GITHUB_STEP_SUMMARY"
   test:
@@ -55,27 +55,27 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
       - name: Node
         uses: actions/setup-node@v4
         with:
+          cache: "pnpm"
           node-version: ${{ matrix.node }}
-      - name: Cache
-        uses: actions/cache@v4
-        with:
-          path: "**/node_modules"
-          key: ${{ matrix.os.slug }}-node-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Dependencies
         run: |
-          yarn --frozen-lockfile
-          yarn playwright install chromium --only-shell --with-deps
+          pnpm install
+          pnpm playwright install chromium --only-shell --with-deps
       - name: Pretty
-        run: yarn pretty
+        run: pnpm pretty
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
       - name: Validate
-        run: yarn validate
+        run: pnpm validate
       - name: Test
-        run: yarn test
+        run: pnpm test
       - name: Coverage
         uses: coverallsapp/github-action@v2
         if: matrix.os.slug == 'linux'
