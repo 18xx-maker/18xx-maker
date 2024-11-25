@@ -41,8 +41,6 @@ jobs:
             type=semver,pattern={{major}}
           labels: |
             org.opencontainers.image.title=18xx-maker/${{ matrix.image }}
-          annotations: |
-            org.opencontainers.image.title=18xx-maker/${{ matrix.image }}
       - name: Build
         id: build
         uses: docker/build-push-action@v6
