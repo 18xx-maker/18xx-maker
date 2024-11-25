@@ -63,7 +63,7 @@ a new zip) you should run `yarn` again to update your dependencies.
 
 ## Using Docker
 
-### Production Site
+### [Production Site](https://github.com/18xx-maker/18xx-maker/pkgs/container/site)
 
 The first docker image we maintain is a [nginx](https://hub.docker.com/_/nginx)
 image with the full running site the way it appears on
@@ -76,7 +76,7 @@ You can run this version locally with a command like:
 docker run -it --rm -p 3000:80 --name 18xx-maker ghcr.io/18xx-maker/site
 ```
 
-### Developer Image
+### [Developer Image](https://github.com/18xx-maker/18xx-maker/pkgs/container/develop)
 
 The second image is a [node](https://hub.docker.com/_/node) image and contains
 the development version of the site that you can run against a local volume to
