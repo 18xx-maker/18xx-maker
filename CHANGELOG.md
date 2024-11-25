@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.0-beta.96](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.95...v1.0.0-beta.96) (2024-11-25)
+
+
+### :tada: Features
+
+* add ability to check for updates in the app ([#591](https://github.com/18xx-maker/18xx-maker/issues/591)) ([333c05b](https://github.com/18xx-maker/18xx-maker/commit/333c05b363eaaeabd0fa3d47f11ab6efd9bb0a3a))
+* updating 1858 to latest version from Ian ([#592](https://github.com/18xx-maker/18xx-maker/issues/592)) ([8f63cd8](https://github.com/18xx-maker/18xx-maker/commit/8f63cd8f18480ec2cab0d9085ff7ed9904ace98e))
+
+
+### :bug: Bug Fixes
+
+* **electron:** clean the summary list on loading ([#589](https://github.com/18xx-maker/18xx-maker/issues/589)) ([8749585](https://github.com/18xx-maker/18xx-maker/commit/874958521fde20a5cf26b89c9576cdac30a4d6e3))
+
 ## [1.0.0-beta.95](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.94...v1.0.0-beta.95) (2024-11-25)
 
 
