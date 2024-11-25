@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
 import DownloadIcon from "@mui/icons-material/Download";
+import CheckIcon from "@mui/icons-material/Replay";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
@@ -110,6 +111,15 @@ const Update = () => {
   const dispatch = useDispatch();
   const update = useSelector(prop("update"));
 
+  const checkForUpdates = () => {
+    window.api.checkForUpdates();
+  };
+
+  const quitAndInstall = () => {
+    dispatch(createDownloadPercent(0));
+    window.api.downloadUpdate();
+  };
+
   if (!update) {
     return null;
   }
@@ -122,18 +132,30 @@ const Update = () => {
     return <LinearProgress variant="determinate" value={update.downloading} />;
   }
 
-  if (!update.available) {
-    return (
-      <Typography variant="body1">
-        {t("app.updates.latest", { version: update.info.version })}
-      </Typography>
-    );
+  if (!update.available && update.dev) {
+    return <Typography variant="body1">{t("app.updates.dev")}</Typography>;
   }
 
-  const quitAndInstall = () => {
-    dispatch(createDownloadPercent(0));
-    window.api.downloadUpdate();
-  };
+  if (!update.available) {
+    return (
+      <>
+        <Typography variant="body1">
+          {update.error
+            ? t("app.updates.error")
+            : t("app.updates.latest", { version: update.info.version })}
+        </Typography>
+        <Typography variant="body1">
+          <Button
+            startIcon={<CheckIcon />}
+            variant="contained"
+            onClick={checkForUpdates}
+          >
+            {t("app.updates.check")}
+          </Button>
+        </Typography>
+      </>
+    );
+  }
 
   return (
     <>

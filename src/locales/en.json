@@ -49,9 +49,12 @@
     },
     "updates": {
       "title": "Updates",
+      "error": "No updates found. Latest version unknown.",
+      "dev": "Updates are disabled in dev mode.",
       "latest": "No updates found. {{version}} is the latest version!",
       "available": "{{version}} is available!",
-      "update": "Download and Install Update"
+      "check": "Check for updates",
+      "update": "Download and install update"
     }
   },
   "docs": {
