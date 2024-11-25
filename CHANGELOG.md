@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.0-beta.93](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.92...v1.0.0-beta.93) (2024-11-25)
+
+
+### :package: Build System
+
+* add explicit title update to docker annotations ([#578](https://github.com/18xx-maker/18xx-maker/issues/578)) ([81ac2ad](https://github.com/18xx-maker/18xx-maker/commit/81ac2adfe09f403ec94795f591897c98258d8de6))
+* make sure electron-builder does not publish ([#576](https://github.com/18xx-maker/18xx-maker/issues/576)) ([86fa3c2](https://github.com/18xx-maker/18xx-maker/commit/86fa3c2cbdf195fadcb7e3db4b660df447549464))
+
+
+### :octocat: Continuous Integration
+
+* fix the artifact paths in the app workflow ([#575](https://github.com/18xx-maker/18xx-maker/issues/575)) ([a1da73b](https://github.com/18xx-maker/18xx-maker/commit/a1da73bff5352233ddcd4eceb98fbc8d5be4dc47))
+
 ## [1.0.0-beta.92](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.91...v1.0.0-beta.92) (2024-11-25)
 
 
