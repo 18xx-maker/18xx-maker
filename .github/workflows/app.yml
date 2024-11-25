@@ -48,7 +48,7 @@ jobs:
             echo 'ARTIFACTS<<EOF'
             basename -a out/app/{latest,18xx-maker}*
             echo EOF
-          } >> "$GITHUB_ENV"
+          } >> "$GITHUB_OUTPUT"
           echo "### :electron: Created the following artifacts" >> $GITHUB_STEP_SUMMARY
           basename -a out/app/{latest,18xx-maker}* >> $GITHUB_STEP_SUMMARY
         env:
