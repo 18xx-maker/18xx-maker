@@ -122,4 +122,5 @@ jobs:
       - name: Test
         run: yarn test
       - name: Summary
+        shell: bash
         run: "echo :window: Windows tests succeeded >> $GITHUB_STEP_SUMMARY"
