@@ -1,3 +1,5 @@
+env:
+  NODE_VERSION: 22
 on:
   push:
     branches:
@@ -10,38 +12,46 @@ on:
       - checks_requested
 name: Push
 jobs:
-  ci:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os:
-          - ubuntu-latest
-          - macos-latest
-          - windows-latest
-        node_version:
-          - 22
-        architecture:
-          - x64
-    name: Test - Node v${{ matrix.node_version }} on ${{ matrix.os }}
+  build:
+    name: Build
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Node
         uses: actions/setup-node@v4
         with:
-          architecture: ${{ matrix.architecture }}
-          node-version: ${{ matrix.node_version }}
-          check-latest: true
+          node-version: ${{ env.NODE_VERSION }}
       - name: Cache
         uses: actions/cache@v4
         with:
           path: "**/node_modules"
-          key: ${{ matrix.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+          key: linux-node-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Dependencies
         run: yarn --frozen-lockfile
+      - name: Build Web
+        run: yarn build
+      - name: Build App
+        run: yarn build:app
+  linux:
+    name: Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Commits
-        if: matrix.os == 'ubuntu-latest'
         uses: wagoid/commitlint-github-action@v6
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: "**/node_modules"
+          key: linux-node-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Dependencies
+        run: yarn --frozen-lockfile
       - name: Pretty
         run: yarn pretty
       - name: Lint
@@ -51,17 +61,61 @@ jobs:
       - name: Test
         run: yarn test
       - name: Upload Coverage - Coveralls
-        if: matrix.os == 'ubuntu-latest'
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Coverage - Codacy
-        if: matrix.os == 'ubuntu-latest'
         uses: codacy/codacy-coverage-reporter-action@v1
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           coverage-reports: ${{github.workspace}}/coverage/clover.xml
-      - name: Build Web
-        run: yarn build
-      - name: Build App
-        run: yarn build:app
+  mac:
+    name: Mac
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: "**/node_modules"
+          key: mac-node-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Dependencies
+        run: yarn --frozen-lockfile
+      - name: Pretty
+        run: yarn pretty
+      - name: Lint
+        run: yarn lint
+      - name: Validate
+        run: yarn validate
+      - name: Test
+        run: yarn test
+  windows:
+    name: Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: "**/node_modules"
+          key: windows-node-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Dependencies
+        run: yarn --frozen-lockfile
+      - name: Pretty
+        run: yarn pretty
+      - name: Lint
+        run: yarn lint
+      - name: Validate
+        run: yarn validate
+      - name: Test
+        run: yarn test
