@@ -57,10 +57,9 @@ jobs:
           APPLE_TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
           APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
       - name: Upload
-        if: ${{ steps.release.outputs.release_created }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ github.ref_name }} $(echo ${{ steps.build.outputs.ARTIFACTS }} | xargs) ./README.md ./LICENSE
+        run: gh release upload ${{ github.ref_name }} $(echo ${{ steps.build.outputs.ARTIFACTS }} | xargs)
       - name: Attest
         uses: actions/attest-build-provenance@v1
         id: attest
