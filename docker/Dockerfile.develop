@@ -1,18 +1,18 @@
 FROM node:22 AS develop
 EXPOSE 3000
 
-RUN mkdir -p /root/Downloads /18xx
-WORKDIR /18xx
+RUN mkdir -p /root/Downloads /app
+WORKDIR /app
 
-COPY package.json /18xx/
-COPY yarn.lock /18xx
+COPY package.json /app
+COPY yarn.lock /app
 
 # Install deps and browsers for playwrite
 RUN yarn && yarn playwright install chromium --only-shell --with-deps
 
 # Copy site code
-COPY . /18xx
-VOLUME /18xx
+COPY . /app
+VOLUME /app
 
 # Command that runs
 ENTRYPOINT ["yarn"]

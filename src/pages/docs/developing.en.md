@@ -63,20 +63,17 @@ a new zip) you should run `yarn` again to update your dependencies.
 
 ## Using Docker
 
-We publish two docker images to
-[dockerhub](https://hub.docker.com/r/kelsin/18xx).
-
 ### Production Site
 
-The first is a [nginx](https://hub.docker.com/_/nginx) image with the full
-running site the way it appears on [18xx-maker.com](https://18xx-maker.com) and
-is available as `kelsin/18xx:latest` or by git tag (something like
-`kelsin/18xx:v1.0.0-beta.88`).
+The first docker image we maintain is a [nginx](https://hub.docker.com/_/nginx)
+image with the full running site the way it appears on
+[18xx-maker.com](https://18xx-maker.com) and is available as
+`ghcr.io/18xx-maker/site`.
 
 You can run this version locally with a command like:
 
 ```bash
-docker run -it --rm -p 3000:80 --name 18xx kelsin/18xx
+docker run -it --rm -p 3000:80 --name 18xx-maker ghcr.io/18xx-maker/site
 ```
 
 ### Developer Image
@@ -86,51 +83,62 @@ the development version of the site that you can run against a local volume to
 keep changes. Knowledge of how to manage docker volumes is important to use this
 properly. This docker version is capable of running all of the scripts (using
 playwright) as well and comes with the headless chromium installed. This version
-is available as `kelsin/18xx:develop`.
+is available as `ghcr.io/18xx-maker/develop`.
 
-I recommend creating an alias like (rename to something other than `18xx` if
+I recommend creating an alias like (rename to something other than `maker` if
 you'd like):
 
 ```bash
-alias 18xx="docker run -it --rm -p 3000:3000 --name 18xx-develop -v 18xx:/18xx kelsin/18xx:develop"
+alias maker="docker run -it --rm -p 3000:3000 --name 18xx-maker -v 18xx-maker:/app ghcr.io/18xx-maker/develop"
 ```
 
 Once you do this you can run the development version of the site by just running
-`18xx`. You can also run any other yarn script:
+`maker`. You can also run any other yarn script:
 
 ```bash
 # Build the site
-18xx build
+maker build
 
 # Print 1889
-18xx print
+maker print
 ```
 
 Running these commands without an alias can be done as well:
 
 ```bash
 docker run -it --rm -p 3000:3000 \
-       --name 18xx-develop \
-       -v 18xx:/18xx \
-       kelsin/18xx:develop \
+       --name 18xx-maker \
+       -v 18xx-maker:/app \
+       ghcr.io/18xx-maker/develop \
        build
 
 docker run -it --rm -p 3000:3000 \
-       --name 18xx-develop \
-       -v 18xx:/18xx \
-       kelsin/18xx:develop \
+       --name 18xx-maker \
+       -v 18xx-maker:/app \
+       ghcr.io/18xx-maker/develop \
        b18 1889 CGG01 "Christopher Giroir"
 ```
 
 ### Local Builds
 
 There are [make](https://www.gnu.org/software/make/) goals for building,
-running, and cleaning up a local develop docker image. These create the
-`kelsin/18xx:local` image and use the `18xx` volume.
+running, and cleaning up the docker images locally. The develop image uses a
+volume named `18xx-maker`.
 
 ```bash
-make docker/build
-make docker/run
+# Build the site image
+make docker/site
+
+# Run the site image
+make docker/serve
+
+# Build the develop image
+make docker/develop
+
+# Run the develop image
+make docker/start
+
+# Clean both images
 make docker/clean
 
 # The following command runs:
