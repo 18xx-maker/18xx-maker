@@ -24,11 +24,24 @@ import { createWindow } from "./window.js";
 const { autoUpdater } = updater;
 autoUpdater.autoDownload = false;
 
+// To test updating in dev uncomment this line:
+// autoUpdater.forceDevUpdateConfig = true;
+
+// You will also need a file in the repo root called dev-app-update.yml with the
+// following content:
+// owner: 18xx-maker
+// repo: 18xx-maker
+// provider: github
+// updaterCacheDirName: 18xx-maker-updater
+
 app.on("ready", () => {
   const mainWindow = createWindow();
 
   autoUpdater.on("checking-for-update", () => {
     send("update", { checking: true });
+  });
+  autoUpdater.on("error", (error) => {
+    send("update", { checking: false, available: false, error });
   });
   autoUpdater.on("update-not-available", (info) => {
     send("update", { checking: false, available: false, info });
@@ -43,7 +56,15 @@ app.on("ready", () => {
     autoUpdater.quitAndInstall();
   });
 
-  mainWindow.on("ready-to-show", () => autoUpdater.checkForUpdates());
+  mainWindow.on("ready-to-show", () =>
+    autoUpdater.checkForUpdates().then((result) => {
+      if (!result) {
+        send("update", { checking: false, available: false, dev: true });
+      }
+
+      return result;
+    }),
+  );
 });
 app.on("activate", createWindow);
 app.on("window-all-closed", () => {
@@ -52,6 +73,7 @@ app.on("window-all-closed", () => {
   }
 });
 
+ipcMain.on("checkForUpdates", () => autoUpdater.checkForUpdates());
 ipcMain.on("downloadUpdate", () => autoUpdater.downloadUpdate());
 ipcMain.on("deleteGame", (event, id) => {
   stopWatching(getSummary(id).path);

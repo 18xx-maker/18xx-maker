@@ -62,7 +62,9 @@ const api = {
     ipcRenderer.on("update", (_event, update) => callback(update)),
   onDownloadProgress: (callback) =>
     ipcRenderer.on("downloadProgress", (_event, percent) => callback(percent)),
+
   downloadUpdate: () => ipcRenderer.send("downloadUpdate"),
+  checkForUpdates: () => ipcRenderer.send("checkForUpdates"),
 
   off: () => ipcRenderer.removeAllListeners(),
 };
