@@ -18,7 +18,7 @@ jobs:
       - name: Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version-file: ".node-version"
       - name: Cache
         uses: actions/cache@v4
         with:
@@ -38,7 +38,6 @@ jobs:
   test:
     strategy:
       matrix:
-        node: [22]
         os:
           - name: Linux
             slug: linux
@@ -62,7 +61,7 @@ jobs:
       - name: Node
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node }}
+          node-version-file: ".node-version"
       - name: Cache
         uses: actions/cache@v4
         with:
