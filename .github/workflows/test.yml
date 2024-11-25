@@ -1,5 +1,3 @@
-env:
-  NODE_VERSION: 22
 on:
   pull_request:
     branches:
@@ -18,12 +16,15 @@ jobs:
       - name: Node
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: 22
       - name: Cache
         uses: actions/cache@v4
         with:
           path: "**/node_modules"
           key: linux-node-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Commits
+        uses: wagoid/commitlint-github-action@v6
+        if: github.event_name == 'pull_request'
       - name: Dependencies
         run: yarn --frozen-lockfile
       - name: Build Web
@@ -32,27 +33,41 @@ jobs:
         run: yarn build:app
       - name: Summary
         run: "echo :package: Build tests succeeded >> $GITHUB_STEP_SUMMARY"
-  linux:
-    name: Linux
-    needs: build
-    runs-on: ubuntu-latest
+  test:
+    strategy:
+      matrix:
+        node: [22]
+        os:
+          - name: Linux
+            slug: linux
+            image: ubuntu-latest
+            emoji: penguin
+          - name: Mac
+            slug: mac
+            image: macos-latest
+            emoji: apple
+          - name: Windows
+            slug: windows
+            image: windows-latest
+            emoji: window
+    name: ${{ matrix.os.name }}
+    runs-on: ${{ matrix.os.image }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Commits
-        uses: wagoid/commitlint-github-action@v6
-        if: github.event_name == 'pull_request'
       - name: Node
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: ${{ matrix.node }}
       - name: Cache
         uses: actions/cache@v4
         with:
           path: "**/node_modules"
-          key: linux-node-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ matrix.os.slug }}-node-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Dependencies
-        run: yarn --frozen-lockfile
+        run: |
+          yarn --frozen-lockfile
+          yarn playwright install chromium --only-shell --with-deps
       - name: Pretty
         run: yarn pretty
       - name: Lint
@@ -63,62 +78,9 @@ jobs:
         run: yarn test
       - name: Coverage
         uses: coverallsapp/github-action@v2
+        if: matrix.os.slug == 'linux'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Summary
-        run: "echo :penguin: Linux tests succeeded >> $GITHUB_STEP_SUMMARY"
-  mac:
-    name: Mac
-    runs-on: macos-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Cache
-        uses: actions/cache@v4
-        with:
-          path: "**/node_modules"
-          key: mac-node-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: Dependencies
-        run: yarn --frozen-lockfile
-      - name: Pretty
-        run: yarn pretty
-      - name: Lint
-        run: yarn lint
-      - name: Validate
-        run: yarn validate
-      - name: Test
-        run: yarn test
-      - name: Summary
-        run: "echo :apple: MacOS tests succeeded >> $GITHUB_STEP_SUMMARY"
-  windows:
-    name: Windows
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Cache
-        uses: actions/cache@v4
-        with:
-          path: "**/node_modules"
-          key: windows-node-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: Dependencies
-        run: yarn --frozen-lockfile
-      - name: Pretty
-        run: yarn pretty
-      - name: Lint
-        run: yarn lint
-      - name: Validate
-        run: yarn validate
-      - name: Test
-        run: yarn test
-      - name: Summary
         shell: bash
-        run: "echo :window: Windows tests succeeded >> $GITHUB_STEP_SUMMARY"
+        run: "echo :${{ matrix.os.emoji }}: ${{ matrix.os.name }} tests succeeded >> $GITHUB_STEP_SUMMARY"

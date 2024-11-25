@@ -19,6 +19,12 @@ export default defineConfig({
     alias: {
       "@tests": path.resolve(import.meta.dirname, "tests"),
     },
+    browser: {
+      enabled: true,
+      headless: true,
+      name: "chromium",
+      provider: "playwright",
+    },
     coverage: {
       cleanOnRerun: false,
       enabled: true,
@@ -36,7 +42,8 @@ export default defineConfig({
     css: false,
     environmentMatchGlobs: [
       ["electron/**", "node"],
-      ["**/*.jsx", "happy-dom"],
+      ["tests/**/*.jsx", "browser"],
+      ["**/*.jsx", "browser"],
       ["**", "node"],
     ],
     globals: true,
