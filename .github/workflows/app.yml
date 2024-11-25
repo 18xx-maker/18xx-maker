@@ -18,6 +18,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Corepack
         run: corepack enable
+        shell: bash
       - name: Node
         uses: actions/setup-node@v4
         with:
