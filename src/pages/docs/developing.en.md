@@ -48,6 +48,10 @@ command prompt (on Windows) or a Terminal (on Mac) to the site folder and you
 can use the following commands:
 
 ```bash
+# Make sure you're on the right version of yarn
+# You should only have to do this once on your machine
+corepack enable
+
 # Install all dependencies
 yarn
 
