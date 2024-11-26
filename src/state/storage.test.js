@@ -24,6 +24,10 @@ describe("storage", () => {
   });
 
   describe("initialState", () => {
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
     it("should return an empty object", () => {
       expect(storage.initialState()).toEqual({});
     });
@@ -38,6 +42,71 @@ describe("storage", () => {
       window.localStorage.setItem("test", JSON.stringify(value));
       storage.init("test");
       expect(storage.initialState()).toEqual({ test: value });
+    });
+
+    it("should log an error if local storage throws", () => {
+      // Mock local storage to throw an error
+      const localStorage = { getItem: vi.fn(window.localStorage.getItem) };
+      localStorage.getItem.mockImplementation(() => {
+        throw new Error("test");
+      });
+      vi.stubGlobal("localStorage", localStorage);
+
+      // Mock console
+      const error = vi.fn(() => {});
+      vi.stubGlobal("console", { error });
+
+      storage.init("test");
+      expect(storage.initialState()).toEqual({});
+      expect(localStorage.getItem).toHaveBeenCalledOnce();
+      expect(error).toHaveBeenCalledOnce();
+    });
+  });
+
+  describe("listen", () => {
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
+    it("should subscribe to a store", () => {
+      // List for these keys
+      storage.init("foo", "bar");
+
+      // Mock a redux store
+      const subscribe = vi.fn(() => {});
+      const getState = vi.fn(() => {});
+      const store = { subscribe, getState };
+      const state1 = { foo: "1", bar: "2", baz: "3" };
+      const state2 = { foo: "2", baz: "3" };
+
+      const localStorage = {
+        removeItem: vi.fn(() => {}),
+        setItem: vi.fn(() => {}),
+      };
+      vi.stubGlobal("localStorage", localStorage);
+
+      // Listen to the store
+      storage.listen(store);
+      expect(subscribe).toHaveBeenCalledTimes(1);
+      expect(getState).toHaveBeenCalledTimes(0);
+
+      // Grab the callback and call it
+      const callback = subscribe.mock.calls[0][0];
+      getState.mockReturnValueOnce(state1);
+      callback();
+
+      expect(subscribe).toHaveBeenCalledTimes(1);
+      expect(getState).toHaveBeenCalledTimes(1);
+
+      getState.mockReturnValueOnce(state2);
+      callback();
+
+      expect(subscribe).toHaveBeenCalledTimes(1);
+      expect(getState).toHaveBeenCalledTimes(2);
+
+      // Check that we removed and added the right items
+      expect(localStorage.removeItem).toHaveBeenLastCalledWith("bar");
+      expect(localStorage.setItem).toHaveBeenLastCalledWith("foo", '"2"');
     });
   });
 });
