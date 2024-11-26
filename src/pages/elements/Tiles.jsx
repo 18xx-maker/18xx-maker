@@ -8,7 +8,17 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
 
-import { filter, map, max, min, reduce, splitEvery, values } from "ramda";
+import {
+  filter,
+  is,
+  map,
+  max,
+  min,
+  reduce,
+  split,
+  splitEvery,
+  values,
+} from "ramda";
 
 import Svg from "@/Svg";
 import Tile from "@/Tile";
@@ -105,10 +115,17 @@ const Tiles = () => {
           }
 
           for (let i = 0; i < (t.values || []).length; i++) {
-            let value = t.values[i].value;
+            let rawValue = t.values[i].value;
+            let splitValues = split(
+              /\D+/,
+              is(String, rawValue) ? rawValue : rawValue.toString(),
+            );
+            for (let j = 0; j < splitValues.length; j++) {
+              let value = parseInt(splitValues[j]);
 
-            if (value >= revenue[0] && value <= revenue[1]) {
-              return true;
+              if (value >= revenue[0] && value <= revenue[1]) {
+                return true;
+              }
             }
           }
 
@@ -123,11 +140,8 @@ const Tiles = () => {
   );
 
   const pageCount = filteredTiles.length;
-  if (page > pageCount) {
-    setPage(pageCount);
-  }
   const effectivePage = min(pageCount, page);
-  const pagedTiles = filteredTiles[effectivePage - 1];
+  const pagedTiles = filteredTiles[effectivePage - 1] || [];
 
   return (
     <Container maxWidth="lg">
@@ -158,7 +172,7 @@ const Tiles = () => {
           size="large"
           color="primary"
           page={effectivePage}
-          count={filteredTiles.length}
+          count={pageCount}
           onChange={(_, value) => setPage(value)}
         />
       </Container>
