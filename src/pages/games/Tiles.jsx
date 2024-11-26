@@ -23,6 +23,7 @@ import {
   reduce,
   repeat,
   take,
+  uniq,
   unnest,
 } from "ramda";
 
@@ -124,13 +125,18 @@ const TileSheet = () => {
 
   let tiles = gatherTiles(game.tiles);
 
-  // Let's group by color OR a group field you can provide
+  // Let's group by color/gauge OR a group field you can provide
   let groupedByColor = addIndex(groupBy)((tile, i) => {
     if (tile.group === "individual") {
       return `z-${i}`;
     }
 
-    return tile.group || tile.color;
+    let gauges = uniq(map((track) => track.gauge || "normal", tile.track));
+    if (gauges.length > 1) {
+      return `z-${i}`;
+    }
+
+    return tile.group || `${tile.color}-${gauges[0]}`;
   }, tiles);
 
   let separatedTiles = compose(
