@@ -6,7 +6,6 @@ import makeStyles from "@mui/styles/makeStyles";
 import { flatten, times } from "ramda";
 
 import PageSetup from "../../PageSetup";
-import { GetFont, SetFont } from "../../context/FontContext";
 import config from "../../defaults.json";
 import { useGame } from "../../hooks/game.js";
 import { printableHeight, printableWidth, unitsToCss } from "../../util";
@@ -79,52 +78,41 @@ const Background = () => {
   );
 
   return (
-    <SetFont context="background">
-      <Color context="companies">
-        {(c) => (
-          <GetFont>
-            {(font) => (
-              <Box className={classes.backgroundBox}>
-                <div
-                  className="background printElement"
-                  data-testid={`game-${game.meta.slug}-background`}
-                  style={{
-                    width: unitsToCss(pageWidth),
-                    height: unitsToCss(pageHeight),
-                    backgroundColor: c(color),
-                  }}
-                >
-                  <svg
-                    viewBox={`0 0 ${pageWidth} ${pageHeight}`}
-                    fontFamily={font.fontFamily}
-                    fontWeight={font.fontWeight}
-                    fontSize="20"
-                    style={{
-                      width: unitsToCss(pageWidth),
-                      height: unitsToCss(pageHeight),
-                    }}
-                  >
-                    <text
-                      style={{ visibility: "hidden" }}
-                      ref={(r) => (text = r)}
-                    >
-                      {title}
-                    </text>
-                    <g
-                      transform={`translate(${(containerWidth - pageWidth) / -2.0} ${(containerHeight - pageHeight) / -2.0}) rotate(-30 ${containerWidth / 2} ${containerHeight / 2})`}
-                    >
-                      {textNodes}
-                    </g>
-                  </svg>
-                  {/* <div className="text">{text}</div> */}
-                  <PageSetup landscape={false} />
-                </div>
-              </Box>
-            )}
-          </GetFont>
-        )}
-      </Color>
-    </SetFont>
+    <Color context="companies">
+      {(c) => (
+        <Box className={classes.backgroundBox}>
+          <div
+            className="background printElement"
+            data-testid={`game-${game.meta.slug}-background`}
+            style={{
+              width: unitsToCss(pageWidth),
+              height: unitsToCss(pageHeight),
+              backgroundColor: c(color),
+            }}
+          >
+            <svg
+              viewBox={`0 0 ${pageWidth} ${pageHeight}`}
+              fontSize="20"
+              style={{
+                width: unitsToCss(pageWidth),
+                height: unitsToCss(pageHeight),
+              }}
+            >
+              <text style={{ visibility: "hidden" }} ref={(r) => (text = r)}>
+                {title}
+              </text>
+              <g
+                transform={`translate(${(containerWidth - pageWidth) / -2.0} ${(containerHeight - pageHeight) / -2.0}) rotate(-30 ${containerWidth / 2} ${containerHeight / 2})`}
+              >
+                {textNodes}
+              </g>
+            </svg>
+            {/* <div className="text">{text}</div> */}
+            <PageSetup landscape={false} />
+          </div>
+        </Box>
+      )}
+    </Color>
   );
 };
 
