@@ -835,7 +835,7 @@
           "percent": 0.9
         }
       ],
-      "values": [{ "value": 50, "angle": 210, "percent": 0.8 }],
+      "values": [{ "value": 70, "angle": 210, "percent": 0.8 }],
       "labels": [{ "label": "M", "angle": 90, "percent": 0.8 }],
       "cities": [{ "size": 3 }],
       "track": [
@@ -925,7 +925,7 @@
           "percent": 0.9
         }
       ],
-      "values": [{ "value": 60, "angle": 210, "percent": 0.85 }],
+      "values": [{ "value": 70, "angle": 210, "percent": 0.85 }],
       "labels": [{ "label": "S", "angle": 90, "percent": 0.85 }],
       "cities": [{ "size": 3, "companies": ["RSR"] }],
       "track": [{ "side": 1 }, { "side": 2 }, { "side": 3 }]
