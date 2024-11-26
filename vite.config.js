@@ -4,7 +4,6 @@ import react from "@vitejs/plugin-react-swc";
 import browserslistToEsbuild from "browserslist-to-esbuild";
 import postcssNesting from "postcss-nesting";
 import postcssPresetEnv from "postcss-preset-env";
-import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
 import { svgPlugin as svg } from "vite-plugin-fast-react-svg";
 
@@ -33,6 +32,7 @@ export default defineConfig({
   assetsInclude: ["**/*.md"],
   base: "/",
   build: {
+    outDir: "dist/site",
     target: browserslistToEsbuild(),
     reportCompressedSize: false,
     rollupOptions: {
@@ -50,7 +50,7 @@ export default defineConfig({
   json: {
     stringify: true,
   },
-  plugins: [react(), svg(), visualizer()],
+  plugins: [react(), svg()],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),

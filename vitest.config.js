@@ -19,12 +19,6 @@ export default defineConfig({
     alias: {
       "@tests": path.resolve(import.meta.dirname, "tests"),
     },
-    browser: {
-      enabled: true,
-      headless: true,
-      name: "chromium",
-      provider: "playwright",
-    },
     coverage: {
       cleanOnRerun: false,
       enabled: true,
@@ -40,16 +34,14 @@ export default defineConfig({
       reporter: process.env.CI ? "clover" : ["text-summary", "html"],
     },
     css: false,
+    dir: "src",
     environmentMatchGlobs: [
-      ["electron/**", "node"],
-      ["tests/**/*.jsx", "browser"],
-      ["**/*.jsx", "browser"],
-      ["**", "node"],
+      ["**/*.jsx", "jsdom"],
+      ["**/*.js", "node"],
     ],
     globals: true,
     outputFile: "./junit.xml",
-    reporters: process.env.CI ? ["junit", "basic", "github-actions"] : "dot",
-    setupFiles: "./tests/setup.js",
+    reporters: process.env.CI ? ["junit", "default"] : "default",
     testTimeout: 30_000,
   },
 });

@@ -67,10 +67,10 @@ setup();
 // Startup server
 const app = express();
 
-app.use(express.static(path.join(process.cwd(), "dist")));
+app.use(express.static(path.join(process.cwd(), "dist/site")));
 
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(process.cwd(), "dist", "index.html"));
+  res.sendFile(path.join(process.cwd(), "dist/site", "index.html"));
 });
 
 const server = app.listen(9000);

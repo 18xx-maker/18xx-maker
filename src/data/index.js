@@ -13,6 +13,7 @@ import { mapKeys } from "../util.js";
 import publishersJson from "./publishers/index.json" with { type: "json" };
 
 export const getID = replace(/^\.\/[^/]+\/([^.]+)\.[a-z]+$/, "$1");
+export const getBasename = replace(/\..*\/([^/]+)\.[a-z]+$/, "$1");
 
 // Games
 export { default as games } from "./games/index.js";
@@ -20,6 +21,20 @@ export { default as games } from "./games/index.js";
 // Tiles
 export { default as tiles } from "./tiles/index.js";
 
+// Images
+const trainImageFiles = import.meta.glob("./images/trains/*.png", {
+  eager: true,
+  import: "default",
+});
+export const trainImages = mapKeys(getBasename, trainImageFiles);
+
+const iconImageFiles = import.meta.glob("./images/icons/*.svg", {
+  eager: true,
+  import: "default",
+});
+export const iconImages = mapKeys(getBasename, iconImageFiles);
+
+// Publisher Information
 const publisherImageFiles = import.meta.glob("./publishers/*.png", {
   eager: true,
   import: "default",

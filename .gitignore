@@ -16,11 +16,9 @@
 
 # build
 /dist
-/dist-sb
-/browsers
 
-# electron
-/out
+# CI browser install directory
+/browsers
 
 # misc
 .DS_Store
@@ -34,9 +32,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# rollup visualizer
-stats.html
-
 # storybook
 *storybook.log
 
@@ -45,3 +40,4 @@ stats.html
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+*__screenshots__*
