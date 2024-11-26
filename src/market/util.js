@@ -56,7 +56,8 @@ export const getMarketData = (stock, config) => {
     let parTotalWidth = parData.totalWidth + width * stock.display.par.x;
     let parTotalHeight =
       parData.totalHeight +
-      (stock.type === "1Diag" ? height / 2 : height) * stock.display.par.y;
+      (stock.type === "1Diag" ? height / 2 : height) * stock.display.par.y +
+      50;
 
     totalWidth = max(totalWidth, parTotalWidth);
     totalHeight = max(totalHeight, parTotalHeight);
@@ -164,7 +165,7 @@ export const getParData = (stock, config) => {
   let width = (stock.par.width || par) * cell.width;
   let height = (stock.par.height || 1) * cell.height;
   let rows = length(stock.par.values);
-  let columns = Math.max(1, getMaxLength(stock.par.values));
+  let columns = getMaxLength(stock.par.values) || 1;
   let totalWidth = width * columns;
   let totalHeight = height * rows + (stock.title === false ? 0 : 50);
 
