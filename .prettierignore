@@ -3,3 +3,6 @@ CHANGELOG.md
 
 # Ignore all HTML files
 **/*.html
+
+# pnpm
+pnpm-lock.yaml
