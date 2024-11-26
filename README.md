@@ -109,3 +109,46 @@ pnpm build
 pnpm build:app
 pnpm build:sb
 ```
+
+### File Layout
+
+At a high level the folder structure looks like:
+
+```shell
+.
+├── bin             # CLI scripts
+├── dist            # All built sites / apps end up in here
+│   ├── app         # The built electron apps
+│   ├── main        # The built esbuild for the main electron process
+│   ├── preload     # The built esbuild for the preload file
+│   ├── site        # The built esbuild for the main 18xx Maker site
+│   ├── sb          # The built esbuild for the storybook site
+│   └── renderer    # The built esbuild for the preload file
+├── docker          # Stuff only related to docker builds
+├── electron        # Electron related src files
+│   ├── assets      # Files that we need when building electorn
+│   ├── main        # The src for the electron main process
+│   └── preload     # The preload file injected into the render process
+├── public          # Files that are just served statically
+├── src
+│   ├── atoms
+│   │   └── shapes
+│   ├── cards
+│   ├── config
+│   ├── context
+│   ├── data        # Data files that are built into the app (games, icons, logos, etc)
+│   ├── games
+│   ├── hooks       # React hooks
+│   ├── locales     # Localization files
+│   ├── map
+│   ├── market
+│   ├── nav
+│   ├── pages       # Top level routing components
+│   ├── render
+│   ├── schemas     # JSON schemas for all 18xx Maker data files
+│   ├── state       # Redux state store related files
+│   ├── tilesheet
+│   ├── tokens
+│   └── util        # Utility helpers
+└── tests           # Any e2e testing or test helper files
+```
