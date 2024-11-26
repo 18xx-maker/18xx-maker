@@ -2,14 +2,10 @@ import "@/cards/train.css";
 
 import { defaultTo, find, is, map } from "ramda";
 
+import { trainImages } from "@/data";
 import { useConfig } from "@/hooks";
 import Color from "@/util/Color";
 import Currency from "@/util/Currency";
-
-const trainImages = import.meta.glob("../images/trains/*.png", {
-  eager: true,
-  import: "default",
-});
 
 const ordinal = (num) => {
   switch (num) {
@@ -263,7 +259,7 @@ const Train = ({ train, trains }) => {
                         paddingTop: `${imagePaddingTop}`,
                         width: `${imageWidth}`,
                       }}
-                      src={trainImages[`../images/trains/${image}.png`]}
+                      src={trainImages[image]}
                     />
                   </div>
                 )}

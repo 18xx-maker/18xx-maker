@@ -1,18 +1,15 @@
 import { addIndex, map } from "ramda";
 
+import { iconImages } from "@/data";
 import { useConfig, useGame } from "@/hooks";
-import certLimit from "@/images/icons/certificate.svg";
-import capital from "@/images/icons/coins.svg";
-import bank from "@/images/icons/university.svg";
-import number from "@/images/icons/user-friends.svg";
 import Color from "@/util/Color";
 import Currency from "@/util/Currency";
 
 const icons = {
-  certLimit,
-  bank,
-  number,
-  capital,
+  certLimit: iconImages["certificate"],
+  bank: iconImages["university"],
+  number: iconImages["user-friends"],
+  capital: iconImages["coins"],
 };
 
 const MapPlayers = ({ players, hexWidth }) => {
