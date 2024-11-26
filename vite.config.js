@@ -33,6 +33,7 @@ export default defineConfig({
   assetsInclude: ["**/*.md"],
   base: "/",
   build: {
+    outDir: "dist/site",
     target: browserslistToEsbuild(),
     reportCompressedSize: false,
     rollupOptions: {

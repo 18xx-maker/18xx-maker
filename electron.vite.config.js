@@ -9,6 +9,7 @@ import { svgPlugin as svg } from "vite-plugin-fast-react-svg";
 export default defineConfig({
   main: {
     build: {
+      outDir: "dist/main",
       lib: {
         entry: "./electron/main/index.js",
         format: "es",
@@ -23,6 +24,7 @@ export default defineConfig({
   },
   preload: {
     build: {
+      outDir: "dist/preload",
       lib: {
         entry: "./electron/preload/preload.js",
         format: "es",
@@ -38,6 +40,7 @@ export default defineConfig({
   renderer: {
     assetsInclude: ["**/*.md"],
     build: {
+      outDir: "dist/renderer",
       rollupOptions: {
         input: "index.html",
       },

@@ -46,11 +46,11 @@ jobs:
           pnpm package:app
           {
             echo 'ARTIFACTS<<EOF'
-            ls out/app/{latest,18xx-maker}*
+            ls dist/app/{latest,18xx-maker}*
             echo EOF
           } >> "$GITHUB_OUTPUT"
           echo "### :electron: Created the following artifacts" >> $GITHUB_STEP_SUMMARY
-          basename -a out/app/{latest,18xx-maker}* >> $GITHUB_STEP_SUMMARY
+          basename -a dist/app/{latest,18xx-maker}* >> $GITHUB_STEP_SUMMARY
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APPLE_ID: ${{ vars.APPLE_ID }}

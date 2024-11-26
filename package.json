@@ -8,7 +8,7 @@
   "repository": "github:18xx-maker/18xx-maker",
   "license": "MIT",
   "private": true,
-  "main": "./out/main/index.js",
+  "main": "./dist/main/index.js",
   "bin": {
     "18xx-schemas": "bin/schemas.cjs"
   },
@@ -16,7 +16,7 @@
     "b18": "node --disable-warning=ExperimentalWarning ./bin/b18.js",
     "build": "vite build",
     "build:app": "electron-vite build",
-    "build:sb": "storybook build -o dist-sb",
+    "build:sb": "storybook build -o dist/sb",
     "fix": "run-s pretty:fix lint:fix",
     "lint": "run-s lint:js lint:css",
     "lint:css": "stylelint \"**/*.css\"",
@@ -104,11 +104,9 @@
     ],
     "ignoreFiles": [
       "coverage/**/*",
-      "dist-sb/**/*",
       "dist/**/*",
       "docker/**/*",
       "node_modules/**/*",
-      "out/**/*",
       "public/**/*",
       "src/fonts.css"
     ],
@@ -126,8 +124,34 @@
     "productName": "18xx Maker",
     "directories": {
       "buildResources": "electron/assets",
-      "output": "out/app"
+      "output": "dist/app"
     },
+    "files": [
+      "!.*",
+      "!bin${/*}",
+      "!dist/app${/*}",
+      "!dist/sb${/*}",
+      "!dist/site${/*}",
+      "!docker${/*}",
+      "!electron${/*}",
+      "!electron.vite.config.js",
+      "!eslint.config.js",
+      "!index.html",
+      "!junit.xml",
+      "!lefthook.yml",
+      "!Makefile",
+      "!out${/*}",
+      "!pnpm-lock.yaml",
+      "!public${/*}",
+      "!release-please-config.json",
+      "!render${/*}",
+      "!src${/*}",
+      "!stats.html",
+      "!svgo.config.js",
+      "!tests${/*}",
+      "!vite.config.js",
+      "!vitest.config.js"
+    ],
     "afterSign": "electron/notarize.js",
     "mac": {
       "target": [
@@ -150,10 +174,7 @@
       "gatekeeperAssess": false,
       "entitlements": "electron/assets/entitlements.mac.plist",
       "entitlementsInherit": "electron/assets/entitlements.mac.plist",
-      "notarize": false,
-      "publish": [
-        "github"
-      ]
+      "notarize": false
     },
     "dmg": {
       "background": "electron/assets/background.tiff"
@@ -165,18 +186,12 @@
           "arch": "ia32"
         }
       ],
-      "icon": "electron/assets/18xx-maker.ico",
-      "publish": [
-        "github"
-      ]
+      "icon": "electron/assets/18xx-maker.ico"
     },
     "linux": {
       "target": "AppImage",
       "icon": "electron/assets/18xx-maker.png",
-      "executableName": "18xx-maker",
-      "publish": [
-        "github"
-      ]
+      "executableName": "18xx-maker"
     }
   },
   "dependencies": {

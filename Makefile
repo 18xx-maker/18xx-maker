@@ -10,8 +10,6 @@ clean:
 	@echo "Removing output folders"
 	@rm -rf coverage
 	@rm -rf dist
-	@rm -rf dist-sb
-	@rm -rf out
 	@rm -rf stats.html
 
 public/schemas/%.defs.json: src/schemas/%.defs.json

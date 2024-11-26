@@ -16,11 +16,9 @@
 
 # build
 /dist
-/dist-sb
-/browsers
 
-# electron
-/out
+# CI browser install directory
+/browsers
 
 # misc
 .DS_Store
