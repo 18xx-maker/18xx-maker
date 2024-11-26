@@ -84,12 +84,17 @@ const matchEvent = R.curry((phaseTrains, event, train) => {
 const Phase = ({ phases, trains, minor, company }) => {
   let includeName = include("name", phases, minor, company);
   let includePhase = include("phase", phases, minor, company);
-  let includeTrain = include("train", phases, minor, company);
+  let includeTrain =
+    trains.length > 0 && include("train", phases, minor, company);
   let includeTiles = include("tiles", phases, minor, company);
+  let includeLimit = include("limit", phases, minor, company);
+  let includeNotes = include("notes", phases, minor, company);
+
+  let includePrice = trainInclude("price", trains);
+  let includeQuantity = trainInclude("quantity", trains);
   let includeRust = trainInclude("rust", trains);
   let includeObsolete = trainInclude("obsolete", trains);
   let includePhased = trainInclude("phased", trains);
-  let includeNotes = include("notes", phases, minor, company);
 
   let phaseRows = R.compose(
     R.map((phase) => {
@@ -206,13 +211,17 @@ const Phase = ({ phases, trains, minor, company }) => {
                   <ul>{trainNodes}</ul>
                 </td>
               )}
-              <td>
-                <ul>{prices}</ul>
-              </td>
-              <td>
-                <ul>{quantities}</ul>
-              </td>
-              <td>{phase.limit}</td>
+              {includePrice && (
+                <td>
+                  <ul>{prices}</ul>
+                </td>
+              )}
+              {includeQuantity && (
+                <td>
+                  <ul>{quantities}</ul>
+                </td>
+              )}
+              {includeLimit && <td>{phase.limit}</td>}
               {includePhased && (
                 <td>
                   <ul>{phased}</ul>
@@ -263,9 +272,9 @@ const Phase = ({ phases, trains, minor, company }) => {
           {includeName && <th>Name</th>}
           {includePhase && <th>Phase</th>}
           {includeTrain && <th>Train</th>}
-          <th>Price</th>
-          <th>#</th>
-          <th>Limit</th>
+          {includePrice && <th>Price</th>}
+          {includeQuantity && <th>#</th>}
+          {includeLimit && <th>Limit</th>}
           {includePhased && <th>Phased</th>}
           {includeObsolete && <th>Obsolete</th>}
           {includeRust && <th>Rust</th>}
