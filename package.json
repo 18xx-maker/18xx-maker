@@ -130,6 +130,7 @@
     "files": [
       "!.*",
       "!bin${/*}",
+      "!certificate.p12",
       "!dist/app${/*}",
       "!dist/sb${/*}",
       "!dist/site${/*}",
