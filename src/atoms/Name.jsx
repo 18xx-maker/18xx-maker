@@ -1,5 +1,6 @@
 import { defaultTo } from "ramda";
 
+import CityRotateContext from "@/context/CityRotateContext";
 import { useGame } from "@/hooks";
 import { getFontProps, multiDefaultTo } from "@/util";
 import Color from "@/util/Color";
@@ -61,23 +62,27 @@ const Name = (props) => {
   }
 
   return (
-    <Color>
-      {(c, t, s, p) => (
-        <text
-          dy={y}
-          dx={x}
-          transform={`rotate(${((doRotation && rotation) || 0) + 360})`}
-          fill={color ? p(color) : bgColor ? t(c(bgColor)) : p("black")}
-          strokeWidth={defaultTo(0, strokeWidth)}
-          stroke={c(defaultTo("black", strokeColor))}
-          {...font}
-          textLength={textLength}
-          textAnchor="middle"
-        >
-          {nameNode}
-        </text>
+    <CityRotateContext.Consumer>
+      {(cityRotateContext) => (
+        <Color>
+          {(c, t, s, p) => (
+            <text
+              dy={y}
+              dx={x}
+              transform={`rotate(${((doRotation && rotation) || 0) + 360 - (cityRotateContext || 0)})`}
+              fill={color ? p(color) : bgColor ? t(c(bgColor)) : p("black")}
+              strokeWidth={defaultTo(0, strokeWidth)}
+              stroke={c(defaultTo("black", strokeColor))}
+              {...font}
+              textLength={textLength}
+              textAnchor="middle"
+            >
+              {nameNode}
+            </text>
+          )}
+        </Color>
       )}
-    </Color>
+    </CityRotateContext.Consumer>
   );
 };
 

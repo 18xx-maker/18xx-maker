@@ -941,7 +941,7 @@ const Token = ({
               <CityRotateContext.Consumer>
                 {(cityRotateContext) => (
                   <g
-                    transform={`rotate(${fixed ? 0 : (rotateContext.fixed ? 0 : -rotateContext.angle - (rotation || 0)) - (cityRotateContext || 0)})`}
+                    transform={`rotate(${fixed ? 0 : (rotateContext.fixed ? 0 : -rotateContext.angle + (rotation || 0)) - (cityRotateContext || 0)})`}
                   >
                     {clip}
                     <g clipPath={`url(#${clipId})`}>

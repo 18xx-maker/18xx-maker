@@ -90,7 +90,11 @@ const City = ({
           width={width}
         />
       ) : (
-        <GameMapCompanyToken abbrev={companies[num]} width={width} />
+        <GameMapCompanyToken
+          abbrev={companies[num]}
+          width={width}
+          rotation={rotation}
+        />
       );
 
       return (
