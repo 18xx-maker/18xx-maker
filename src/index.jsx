@@ -8,7 +8,7 @@ import { rootRoutes } from "@/routes";
 import { store } from "@/state";
 import capability from "@/util/capability";
 
-import "@/i18n";
+import "@/locales/i18n";
 import "@/fonts.css";
 import "@/index.css";
 
