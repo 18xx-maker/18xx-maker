@@ -8,18 +8,18 @@ import {
   startsWith,
 } from "ramda";
 
-import { mapKeys } from "../util.js";
 // Publishers
-import publishersJson from "./publishers/index.json" with { type: "json" };
+import publishersJson from "@/data/publishers/index.json" with { type: "json" };
+import { mapKeys } from "@/util";
 
 export const getID = replace(/^\.\/[^/]+\/([^.]+)\.[a-z]+$/, "$1");
 export const getBasename = replace(/\..*\/([^/]+)\.[a-z]+$/, "$1");
 
 // Games
-export { default as games } from "./games/index.js";
+export { default as games } from "@/data/games/index.js";
 
 // Tiles
-export { default as tiles } from "./tiles/index.js";
+export { default as tiles } from "@/data/tiles/index.js";
 
 // Images
 const trainImageFiles = import.meta.glob("./images/trains/*.png", {

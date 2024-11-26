@@ -1,4 +1,4 @@
-import { resolveFont } from "./font";
+import { resolveFont } from "@/util/font";
 
 const fonts = {
   size: "size-01",

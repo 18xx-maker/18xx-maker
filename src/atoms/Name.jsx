@@ -1,8 +1,8 @@
 import { defaultTo } from "ramda";
 
-import { useGame } from "../hooks";
-import { getFontProps, multiDefaultTo } from "../util";
-import Color from "../util/Color";
+import { useGame } from "@/hooks";
+import { getFontProps, multiDefaultTo } from "@/util";
+import Color from "@/util/Color";
 
 const Name = (props) => {
   const game = useGame();

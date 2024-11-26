@@ -1,7 +1,7 @@
 import * as R from "ramda";
 
-import Color from "./util/Color";
-import Currency from "./util/Currency";
+import Color from "@/util/Color";
+import Currency from "@/util/Currency";
 
 const formatCell = (value) => {
   if (Array.isArray(value)) {

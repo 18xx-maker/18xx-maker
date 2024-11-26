@@ -1,4 +1,4 @@
-import { splitRevenues } from "./revenue";
+import { splitRevenues } from "@/util/revenue";
 
 describe("splitRevenues", () => {
   it("Should not split if rows < 2", () => {

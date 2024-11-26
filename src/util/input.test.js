@@ -1,4 +1,4 @@
-import { getSchemaPath } from "./input";
+import { getSchemaPath } from "@/util/input";
 
 describe("getSchemaPath", () => {
   describe("with an empty argument", () => {

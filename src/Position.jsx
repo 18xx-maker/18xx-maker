@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import { addIndex, any, chain, has, identity, includes, map } from "ramda";
 
-import HexContext from "./context/HexContext";
+import HexContext from "@/context/HexContext";
 
 const autoPositionTypes = ["icon", "label", "terrain", "value"];
 const positionNames = [

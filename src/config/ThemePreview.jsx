@@ -7,9 +7,9 @@ import makeStyles from "@mui/styles/makeStyles";
 import { filter, is, keys, map, sortBy, uniqBy } from "ramda";
 
 import ColorContext from "@/context/ColorContext";
+import { companyThemes, mapThemes } from "@/data";
 import { useConfig } from "@/hooks";
 import Color from "@/util/Color";
-import { companyThemes, mapThemes } from "../data";
 
 const useStyles = makeStyles((theme) => ({
   themeGroup: {

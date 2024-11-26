@@ -1,7 +1,7 @@
 import { is } from "ramda";
 
-import Color from "../util/Color";
-import Currency from "../util/Currency";
+import Color from "@/util/Color";
+import Currency from "@/util/Currency";
 
 const ParCell = ({ cell, data }) => {
   if (is(String, cell)) {

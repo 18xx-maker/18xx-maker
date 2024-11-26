@@ -2,15 +2,15 @@ import { useParams } from "react-router";
 
 import { compose, filter, is, keys, map, propEq, take, uniq } from "ramda";
 
-import Svg from "../../../Svg";
-import Tile from "../../../Tile";
-import ColorContext from "../../../context/ColorContext";
-import RotateContext from "../../../context/RotateContext";
-import { tiles as tileDefs } from "../../../data";
-import { useGame } from "../../../hooks";
-import { getTile } from "../../../util";
+import Svg from "@/Svg";
+import Tile from "@/Tile";
+import ColorContext from "@/context/ColorContext";
+import RotateContext from "@/context/RotateContext";
+import { tiles as tileDefs } from "@/data";
+import { useGame } from "@/hooks";
+import { getTile } from "@/util";
 
-import "./b18.css";
+import "@/pages/games/b18/b18.css";
 
 const ROTATIONS = [0, 60, 120, 180, 240, 300];
 

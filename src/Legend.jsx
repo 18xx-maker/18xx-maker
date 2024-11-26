@@ -1,5 +1,5 @@
-import { multiDefaultTo } from "./util";
-import Color from "./util/Color";
+import { multiDefaultTo } from "@/util";
+import Color from "@/util/Color";
 
 const Legend = ({
   color,

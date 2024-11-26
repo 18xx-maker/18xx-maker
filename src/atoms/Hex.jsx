@@ -1,4 +1,4 @@
-import Color from "../util/Color";
+import Color from "@/util/Color";
 
 const stripeWidth = 28.8675;
 const Hex = ({ color, transparent, map, opacity }) => {

@@ -1,7 +1,7 @@
 import { defaultTo } from "ramda";
 
-import { icons } from "../data";
-import Color from "../util/Color";
+import { icons } from "@/data";
+import Color from "@/util/Color";
 
 const Icon = ({
   type,

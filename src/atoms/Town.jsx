@@ -1,7 +1,7 @@
-import { useGame } from "../hooks";
-import { multiDefaultTo } from "../util";
-import Color from "../util/Color";
-import Name from "./Name";
+import Name from "@/atoms/Name";
+import { useGame } from "@/hooks";
+import { multiDefaultTo } from "@/util";
+import Color from "@/util/Color";
 
 const Town = ({ border, borderWidth, name, color, bgColor }) => {
   const game = useGame();

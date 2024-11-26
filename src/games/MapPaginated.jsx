@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router";
 
-import Map from "../map/Map";
-import { getMapData } from "../map/util";
-import Paginate from "../util/Paginate";
+import Map from "@/map/Map";
+import { getMapData } from "@/map/util";
+import Paginate from "@/util/Paginate";
 
-import "./MapPaginated.css";
+import "@/games/MapPaginated.css";
 
 const MapPaginated = ({ game, config, variation }) => {
   const navigate = useNavigate();

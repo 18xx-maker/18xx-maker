@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-import { useGame } from "../hooks/game.js";
+import { useGame } from "@/hooks/game.js";
 
 const OrientationContext = createContext(0);
 

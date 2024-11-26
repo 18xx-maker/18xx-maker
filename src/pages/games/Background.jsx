@@ -5,11 +5,11 @@ import makeStyles from "@mui/styles/makeStyles";
 
 import { flatten, times } from "ramda";
 
-import PageSetup from "../../PageSetup";
-import config from "../../defaults.json";
-import { useGame } from "../../hooks/game.js";
-import { printableHeight, printableWidth, unitsToCss } from "../../util";
-import Color from "../../util/Color";
+import PageSetup from "@/PageSetup";
+import config from "@/defaults.json";
+import { useGame } from "@/hooks/game.js";
+import { printableHeight, printableWidth, unitsToCss } from "@/util";
+import Color from "@/util/Color";
 
 const useStyles = makeStyles(() => ({
   backgroundBox: {

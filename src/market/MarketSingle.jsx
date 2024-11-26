@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router";
 
-import Svg from "../Svg";
-import { unitsToCss } from "../util";
-import Market from "./Market";
-import { getMarketData } from "./util";
+import Svg from "@/Svg";
+import Market from "@/market/Market";
+import { getMarketData } from "@/market/util";
+import { unitsToCss } from "@/util";
 
 const MarketSingle = ({ config, game }) => {
   const navigate = useNavigate();

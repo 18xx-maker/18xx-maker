@@ -1,4 +1,4 @@
-import Color from "./util/Color";
+import Color from "@/util/Color";
 
 const Svg = ({
   className,
