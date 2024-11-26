@@ -1,6 +1,9 @@
 env:
   PLAYWRIGHT_BROWSERS_PATH: browsers
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
