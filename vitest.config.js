@@ -20,7 +20,6 @@ export default defineConfig({
       "@tests": path.resolve(import.meta.dirname, "tests"),
     },
     coverage: {
-      cleanOnRerun: false,
       enabled: true,
       exclude: [
         "src/**/*.stories.*",
