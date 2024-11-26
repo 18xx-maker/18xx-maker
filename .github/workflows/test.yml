@@ -55,6 +55,8 @@ jobs:
         run: pnpm build
       - name: Build App
         run: pnpm build:app
+      - name: Build Storybook
+        run: pnpm build:sb
   test:
     strategy:
       matrix:
