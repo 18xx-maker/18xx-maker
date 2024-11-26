@@ -32,9 +32,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# rollup visualizer
-stats.html
-
 # storybook
 *storybook.log
 
