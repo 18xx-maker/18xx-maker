@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.0.0-beta.98](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.97...v1.0.0-beta.98) (2024-11-26)
+
+
+### :broom: Chores
+
+* **deps:** pnpm update ([#606](https://github.com/18xx-maker/18xx-maker/issues/606)) ([81f9e3b](https://github.com/18xx-maker/18xx-maker/commit/81f9e3bf59e21bee213597f841c21a303ecfa412))
+* **imports:** move to absolute imports everywhere ([#609](https://github.com/18xx-maker/18xx-maker/issues/609)) ([2162627](https://github.com/18xx-maker/18xx-maker/commit/2162627531b5819f11bc3ed6574a44f1f622a7d5))
+
+
+### :book: Documentation
+
+* **readme:** adding developer information ([#608](https://github.com/18xx-maker/18xx-maker/issues/608)) ([1debb15](https://github.com/18xx-maker/18xx-maker/commit/1debb150d2fe94439544bfc067d57c6977aede6c))
+
+
+### :traffic_light: Tests
+
+* **cleanup:** simplifying tests until I'm ready to go bigger ([1debb15](https://github.com/18xx-maker/18xx-maker/commit/1debb150d2fe94439544bfc067d57c6977aede6c))
+
+
+### :package: Build System
+
+* **app:** clean up electron build ([1debb15](https://github.com/18xx-maker/18xx-maker/commit/1debb150d2fe94439544bfc067d57c6977aede6c))
+
+
+### :octocat: Continuous Integration
+
+* **storybook:** add storybook to build CI job ([#610](https://github.com/18xx-maker/18xx-maker/issues/610)) ([d684496](https://github.com/18xx-maker/18xx-maker/commit/d684496f3d4da97e2934e575e1b9861876db10d1))
+
 ## [1.0.0-beta.97](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.96...v1.0.0-beta.97) (2024-11-26)
 
 
