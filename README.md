@@ -61,3 +61,51 @@ I've been asked about donation buttons; if you find this software useful to you
 and would like to donate money towards its development you can do so via
 [paypal](https://paypal.me/kelsin), [square cash](https://cash.me/$kelsin), or
 [venmo](https://account.venmo.com/u/kelsin13).
+
+## Development
+
+### Scripts
+
+These are the package.json scripts that you should know:
+
+```shell
+# Start the development versions of the site, app, or storybook site:
+pnpm start
+pnpm start:app
+pnpm start:sb
+
+# CLI to print a game and create a b18 box
+pnpm print
+pnpm b18
+```
+
+The following are all run for you on relevant files as part of git commit hooks,
+and in CI. They are here if you want or need to run them manually:
+
+```shell
+# Run the tests in watch mode
+pnpm test
+
+# Run all fixing linters
+pnpm fix
+
+# Run schema validation on all data json files:
+pnpm validate
+
+# Optimize SVGs
+pnpm svgo
+```
+
+Finally there are the commands to preview and build the production versions of
+the site, app and storybook site:
+
+```shell
+# Preview the production builds
+pnpm preview
+pnpm preview:app
+
+# Build the production site, electron app, or storybook site:
+pnpm build
+pnpm build:app
+pnpm build:sb
+```

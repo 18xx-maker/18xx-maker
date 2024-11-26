@@ -13,7 +13,6 @@
     "18xx-schemas": "bin/schemas.cjs"
   },
   "scripts": {
-    "all": "run-s pretty lint validate test:run",
     "b18": "node --disable-warning=ExperimentalWarning ./bin/b18.js",
     "build": "vite build",
     "build:app": "electron-vite build",
@@ -31,10 +30,10 @@
     "preview": "vite preview",
     "preview:app": "electron-vite preview",
     "print": "node --disable-warning=ExperimentalWarning ./bin/print.js",
-    "sb": "storybook dev -p 6006",
     "schemas": "node ./bin/schemas.cjs",
     "start": "vite",
     "start:app": "electron-vite dev",
+    "start:sb": "storybook dev -p 6006",
     "svgo": "run-p svgo:icons svgo:logos",
     "svgo:icons": "svgo -f src/data/icons",
     "svgo:logos": "svgo -f src/data/logos",
