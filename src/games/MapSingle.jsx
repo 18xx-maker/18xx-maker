@@ -1,8 +1,8 @@
 import { redirect } from "react-router";
 
-import Svg from "../Svg";
-import Map from "../map/Map";
-import { getMapData } from "../map/util";
+import Svg from "@/Svg";
+import Map from "@/map/Map";
+import { getMapData } from "@/map/util";
 
 const MapSingle = ({ game, config, variation }) => {
   const coords = config.coords;

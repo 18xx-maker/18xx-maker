@@ -1,6 +1,6 @@
-import PhaseContext from "../context/PhaseContext";
-import Currency from "../util/Currency";
-import Triangle from "./shapes/Triangle";
+import Triangle from "@/atoms/shapes/Triangle";
+import PhaseContext from "@/context/PhaseContext";
+import Currency from "@/util/Currency";
 
 const Bridge = (props) => {
   let { cost } = props;

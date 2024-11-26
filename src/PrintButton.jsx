@@ -6,8 +6,8 @@ import Slide from "@mui/material/Slide";
 import Tooltip from "@mui/material/Tooltip";
 import makeStyles from "@mui/styles/makeStyles";
 
-import { useGame } from "./hooks";
-import { useBooleanParam } from "./util/query";
+import { useGame } from "@/hooks";
+import { useBooleanParam } from "@/util/query";
 
 const useStyles = makeStyles((theme) => ({
   printButton: {

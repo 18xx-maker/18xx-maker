@@ -7,7 +7,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
 
-import gtgLogo from "../data/publishers/gtg.png";
+import gtgLogo from "@/data/publishers/gtg.png";
 
 const useStyles = makeStyles((theme) => ({
   page: {

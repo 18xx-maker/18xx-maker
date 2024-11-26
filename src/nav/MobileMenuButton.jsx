@@ -2,7 +2,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import makeStyles from "@mui/styles/makeStyles";
 
-import useSideMenu from "../hooks/useSideMenu";
+import useSideMenu from "@/hooks/useSideMenu";
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {

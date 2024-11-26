@@ -1,5 +1,6 @@
 import { Navigate } from "react-router";
 
+import Root from "@/Root";
 import DocsNav from "@/nav/DocsNav";
 import ElementsNav from "@/nav/ElementsNav";
 import GameNav from "@/nav/GameNav";
@@ -32,7 +33,6 @@ import B18Tokens from "@/pages/games/b18/Tokens";
 // Games Routes
 import LoadGames from "@/pages/load/LoadGames";
 import capability from "@/util/capability";
-import Root from "./Root";
 
 export const rootRoutes = [
   {

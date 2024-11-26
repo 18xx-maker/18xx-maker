@@ -1,6 +1,6 @@
 import { addIndex, map } from "ramda";
 
-import Color from "../util/Color";
+import Color from "@/util/Color";
 
 const ledgeCoord = (coord, data) => {
   let coords = coord.split(" ");

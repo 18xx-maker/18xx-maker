@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 
 import { intersperse, keys, map, max, prop, reduce } from "ramda";
 
-import { games } from "../../data";
+import { games } from "@/data";
 
 const Value = ({ game, field }) => {
   if (game[field]) {

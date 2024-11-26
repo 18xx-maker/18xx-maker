@@ -1,6 +1,6 @@
 import { compose, concat, mergeRight, pick, prop, reduce } from "ramda";
 
-import { capitalize, mapKeys } from "../util";
+import { capitalize, mapKeys } from "@/util";
 
 const fixFontKeys = mapKeys(compose(concat("font"), capitalize));
 

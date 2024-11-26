@@ -10,8 +10,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import makeStyles from "@mui/styles/makeStyles";
 
-import { useBooleanParam } from "../util/query";
-import Config from "./Config";
+import Config from "@/config/Config";
+import { useBooleanParam } from "@/util/query";
 
 const useStyles = makeStyles((theme) => ({
   configButton: {

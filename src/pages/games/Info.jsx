@@ -18,7 +18,7 @@ import Typography from "@mui/material/Typography";
 import { blue, green } from "@mui/material/colors";
 import makeStyles from "@mui/styles/makeStyles";
 
-import { useGame } from "../../hooks/game.js";
+import { useGame } from "@/hooks/game.js";
 
 const useStyles = makeStyles((theme) => ({
   page: {

@@ -1,4 +1,4 @@
-import { unitsToCss } from "../util";
+import { unitsToCss } from "@/util";
 
 export const getCardData = (cards, paper) => {
   let { layout, width, height, cutlines, bleed, border } = cards;

@@ -1,4 +1,4 @@
-import Color from "../util/Color";
+import Color from "@/util/Color";
 
 const Company = ({ label, reverse, bottom, left, right, radius, color }) => {
   let size = 13;

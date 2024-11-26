@@ -5,8 +5,8 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import makeStyles from "@mui/styles/makeStyles";
 
-import { useSideMenu } from "./hooks/useSideMenu";
-import { useBooleanParam } from "./util/query";
+import { useSideMenu } from "@/hooks/useSideMenu";
+import { useBooleanParam } from "@/util/query";
 
 const useStyles = makeStyles((theme) => ({
   viewport: {

@@ -4,14 +4,13 @@ import { Provider } from "react-redux";
 import { createBrowserRouter, createHashRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
 
-import "./i18n";
-
+import { rootRoutes } from "@/routes";
+import { store } from "@/state";
 import capability from "@/util/capability";
-import { rootRoutes } from "./routes";
-import { store } from "./state";
 
-import "./fonts.css";
-import "./index.css";
+import "@/i18n";
+import "@/fonts.css";
+import "@/index.css";
 
 // Test to see if we're running in electron or not. If so use a hash router
 // since it's based on files

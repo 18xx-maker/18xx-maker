@@ -1,6 +1,6 @@
-import Color from "../util/Color";
+import Color from "@/util/Color";
 
-import "./number.css";
+import "@/cards/number.css";
 
 const Number = ({ number, background }) => {
   return (

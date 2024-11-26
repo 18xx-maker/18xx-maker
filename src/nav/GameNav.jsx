@@ -29,11 +29,11 @@ import makeStyles from "@mui/styles/makeStyles";
 
 import { addIndex, is, map } from "ramda";
 
+import { useGame } from "@/hooks/game.js";
 import { refreshGame } from "@/state";
 import File from "@/util/File";
 import capability from "@/util/capability";
-import { useGame } from "../hooks/game.js";
-import { useBooleanParam, useIntParam } from "../util/query.js";
+import { useBooleanParam, useIntParam } from "@/util/query.js";
 
 const useStyles = makeStyles((theme) => ({
   input: {

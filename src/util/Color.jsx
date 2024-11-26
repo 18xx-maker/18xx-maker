@@ -4,8 +4,8 @@ import { curry, defaultTo, is, mergeDeepRight, prop } from "ramda";
 
 import ColorContext from "@/context/ColorContext";
 import PhaseContext from "@/context/PhaseContext";
+import { companyThemes, mapThemes } from "@/data";
 import { useConfig, useGame } from "@/hooks";
-import { companyThemes, mapThemes } from "../data";
 
 const colorAliases = {
   cyan: "lightBlue",

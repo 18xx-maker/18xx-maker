@@ -2,17 +2,17 @@ import { useMemo } from "react";
 
 import * as R from "ramda";
 
-import Hex from "../Hex";
-import { multiDefaultTo } from "../util";
-import BorderTexts from "./BorderTexts";
-import Borders from "./Borders";
-import Coordinates from "./Coordinates";
-import Lines from "./Lines";
-import MapMarket from "./MapMarket";
-import MapPlayers from "./MapPlayers";
-import MapRoundTracker from "./MapRoundTracker";
-import Title from "./Title";
-import { getMapData, toAlpha, toCoords } from "./util";
+import Hex from "@/Hex";
+import BorderTexts from "@/map/BorderTexts";
+import Borders from "@/map/Borders";
+import Coordinates from "@/map/Coordinates";
+import Lines from "@/map/Lines";
+import MapMarket from "@/map/MapMarket";
+import MapPlayers from "@/map/MapPlayers";
+import MapRoundTracker from "@/map/MapRoundTracker";
+import Title from "@/map/Title";
+import { getMapData, toAlpha, toCoords } from "@/map/util";
+import { multiDefaultTo } from "@/util";
 
 const Map = ({ name, game, config, variation }) => {
   const coords = config.coords;

@@ -1,10 +1,10 @@
 import { addIndex, map } from "ramda";
 
-import { useGame } from "../hooks";
-import { multiDefaultTo } from "../util";
-import Color from "../util/Color";
-import Currency from "../util/Currency";
-import { mapCoord } from "./util";
+import { useGame } from "@/hooks";
+import { mapCoord } from "@/map/util";
+import { multiDefaultTo } from "@/util";
+import Color from "@/util/Color";
+import Currency from "@/util/Currency";
 
 const BorderText = ({ text, data }) => {
   const game = useGame();

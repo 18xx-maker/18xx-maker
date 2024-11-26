@@ -1,5 +1,5 @@
-import { useOrientation } from "../context/OrientationContext";
-import Color from "../util/Color";
+import { useOrientation } from "@/context/OrientationContext";
+import Color from "@/util/Color";
 
 const edge = 150 * 0.57735;
 

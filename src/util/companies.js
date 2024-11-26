@@ -1,8 +1,8 @@
 import { addIndex, map, mergeRight, prop } from "ramda";
 
-import { companies as overrides } from "../data/index.js";
+import { companies as overrides } from "@/data/index.js";
 
-export { compileCompanies } from "../util.js";
+export { compileCompanies } from "@/util";
 
 export const overrideCompanies = (companies, override, selections) => {
   if (override === "none" || !overrides[override]) {

@@ -1,9 +1,9 @@
 import { defaultTo } from "ramda";
 
-import { useOrientation } from "../context/OrientationContext";
-import { useGame } from "../hooks";
-import { multiDefaultTo } from "../util";
-import Color from "../util/Color";
+import { useOrientation } from "@/context/OrientationContext";
+import { useGame } from "@/hooks";
+import { multiDefaultTo } from "@/util";
+import Color from "@/util/Color";
 
 const startEndDeprecated = (type, replace, end, start) => {
   console.log(

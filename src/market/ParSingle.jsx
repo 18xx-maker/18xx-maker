@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router";
 
-import Svg from "../Svg";
-import { unitsToCss } from "../util";
-import Par from "./Par";
-import { getParData } from "./util";
+import Svg from "@/Svg";
+import Par from "@/market/Par";
+import { getParData } from "@/market/util";
+import { unitsToCss } from "@/util";
 
 const ParSingle = ({ config, game }) => {
   const navigate = useNavigate();
