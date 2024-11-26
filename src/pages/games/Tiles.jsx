@@ -131,12 +131,23 @@ const TileSheet = () => {
       return `z-${i}`;
     }
 
+    if (tile.group) {
+      return tile.group;
+    }
+
+    // Group by guages, but individual if a tile has multiple
     let gauges = uniq(map((track) => track.gauge || "normal", tile.track));
     if (gauges.length > 1) {
       return `z-${i}`;
     }
 
-    return tile.group || `${tile.color}-${gauges[0]}`;
+    // Group grey and gray together
+    let color = tile.color;
+    if (color === "grey") {
+      color = "gray";
+    }
+
+    return `${color}-${gauges[0]}`;
   }, tiles);
 
   let separatedTiles = compose(
