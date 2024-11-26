@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.0.0-beta.99](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.98...v1.0.0-beta.99) (2024-11-26)
+
+
+### :bug: Bug Fixes
+
+* **docker:** update docker images to enable pnpm ([#611](https://github.com/18xx-maker/18xx-maker/issues/611)) ([f4ccaee](https://github.com/18xx-maker/18xx-maker/commit/f4ccaee0ca73f33c73085e130736272577895c54))
+
+
+### :traffic_light: Tests
+
+* **state:** add testing for the storage adapator ([#616](https://github.com/18xx-maker/18xx-maker/issues/616)) ([6f72ea5](https://github.com/18xx-maker/18xx-maker/commit/6f72ea5213c097a23aee43d9461c0150edd6f595))
+* **vitest:** removing the ui from pnpm test ([#614](https://github.com/18xx-maker/18xx-maker/issues/614)) ([9e56d0a](https://github.com/18xx-maker/18xx-maker/commit/9e56d0a33bdeba555d2002b6c31170e5dff95dce))
+
+
+### :package: Build System
+
+* **electron:** cleaning up electron build ([#612](https://github.com/18xx-maker/18xx-maker/issues/612)) ([d72ed84](https://github.com/18xx-maker/18xx-maker/commit/d72ed848a6c53a58a31e5786fae2332390dbacf7))
+
+
+### :octocat: Continuous Integration
+
+* **actions:** renable running test.yml on merge queues in case ([#613](https://github.com/18xx-maker/18xx-maker/issues/613)) ([cbd7aff](https://github.com/18xx-maker/18xx-maker/commit/cbd7aff6906c1c33475a73e2f684fe04bc3b6c09))
+
 ## [1.0.0-beta.98](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.97...v1.0.0-beta.98) (2024-11-26)
 
 
