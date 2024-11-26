@@ -9,6 +9,35 @@ on:
       - checks_requested
 name: Test
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: $((1 + ${{ github.event.pull_request.commits }}))
+      - name: PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          cache: "pnpm"
+          node-version: 22
+      - name: Dependencies
+        run: pnpm install
+      - name: Commitlint
+        run: pnpm commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
+      - name: Prettier
+        run: pnpm pretty
+      - name: ESLint and Stylelint
+        run: pnpm lint
+      - name: 18xx Maker Validate
+        run: pnpm validate
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -24,9 +53,6 @@ jobs:
         with:
           cache: "pnpm"
           node-version: 22
-      - name: Commits
-        uses: wagoid/commitlint-github-action@v6
-        if: github.event_name == 'pull_request'
       - name: Dependencies
         run: pnpm install
       - name: Build Web
@@ -43,15 +69,12 @@ jobs:
           - name: Linux
             slug: linux
             image: ubuntu-latest
-            emoji: penguin
           - name: Mac
             slug: mac
             image: macos-latest
-            emoji: apple
           - name: Windows
             slug: windows
             image: windows-latest
-            emoji: window
     name: ${{ matrix.os.name }}
     runs-on: ${{ matrix.os.image }}
     steps:
@@ -81,12 +104,6 @@ jobs:
       - name: Playwright Install
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: pnpm playwright install chromium --only-shell --with-deps
-      - name: Pretty
-        run: pnpm pretty
-      - name: Lint
-        run: pnpm lint
-      - name: Validate
-        run: pnpm validate
       - name: Test
         run: pnpm test
       - name: Coverage
@@ -94,6 +111,3 @@ jobs:
         if: matrix.os.slug == 'linux'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Summary
-        shell: bash
-        run: "echo :${{ matrix.os.emoji }}: ${{ matrix.os.name }} tests succeeded >> $GITHUB_STEP_SUMMARY"
