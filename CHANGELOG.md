@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.0.0-beta.97](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.96...v1.0.0-beta.97) (2024-11-26)
+
+
+### :tada: Features
+
+* replace svg masks with clipPaths ([#593](https://github.com/18xx-maker/18xx-maker/issues/593)) ([4132876](https://github.com/18xx-maker/18xx-maker/commit/4132876a26858ad8792f17bd0c61a3ebf3b28b47))
+
+
+### :broom: Chores
+
+* migrate from yarn to pnpm ([#595](https://github.com/18xx-maker/18xx-maker/issues/595)) ([e7ef691](https://github.com/18xx-maker/18xx-maker/commit/e7ef691a635f29fab891bd01ab44bc8a719c1899))
+* remove unused font context ([#599](https://github.com/18xx-maker/18xx-maker/issues/599)) ([b50adf0](https://github.com/18xx-maker/18xx-maker/commit/b50adf00f995a7752325dc9121071fdf4c2b16e3))
+
+
+### :package: Build System
+
+* **deps:** bump cross-spawn from 6.0.5 to 6.0.6 in the npm_and_yarn group ([#600](https://github.com/18xx-maker/18xx-maker/issues/600)) ([601aba6](https://github.com/18xx-maker/18xx-maker/commit/601aba6a37ea4b5d8c498f80671f34beda6e8f0b))
+
+
+### :octocat: Continuous Integration
+
+* allow prettier to ignore pnpm-lock.yaml ([#601](https://github.com/18xx-maker/18xx-maker/issues/601)) ([e18c96e](https://github.com/18xx-maker/18xx-maker/commit/e18c96e82b9201a345a5dcf4e119c945a0a3875d))
+* always run commitlint on latest commit ([#605](https://github.com/18xx-maker/18xx-maker/issues/605)) ([67a5525](https://github.com/18xx-maker/18xx-maker/commit/67a55250d2875ec2c7c377ebf5810bcccfdfe898))
+* move all linting to a separate task ([#602](https://github.com/18xx-maker/18xx-maker/issues/602)) ([af050d1](https://github.com/18xx-maker/18xx-maker/commit/af050d14d562b0df930b585aada06ee48b96a9ec))
+* run test.yaml on main pushes ([#603](https://github.com/18xx-maker/18xx-maker/issues/603)) ([3f53aa6](https://github.com/18xx-maker/18xx-maker/commit/3f53aa624cdc81bbfe2e7be88a3cb9aba9c42618))
+* turn off some linting rules to allow dependabot to work ([#604](https://github.com/18xx-maker/18xx-maker/issues/604)) ([970d083](https://github.com/18xx-maker/18xx-maker/commit/970d083cfc9b8280719264fc65287b4728b93e43))
+
 ## [1.0.0-beta.96](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.95...v1.0.0-beta.96) (2024-11-25)
 
 
