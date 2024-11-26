@@ -15,13 +15,9 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: $((1 + ${{ github.event.pull_request.commits }}))
       - name: PNPM
         uses: pnpm/action-setup@v4
         with:
@@ -34,7 +30,7 @@ jobs:
       - name: Dependencies
         run: pnpm install
       - name: Commitlint
-        run: pnpm commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
+        run: pnpm commitlint -l
       - name: Prettier
         run: pnpm pretty
       - name: ESLint and Stylelint
