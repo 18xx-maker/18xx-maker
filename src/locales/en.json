@@ -218,6 +218,10 @@
     "title": "Usage",
     "description": "You can use this app in your browser at it's <public>main website</public> or <app>download it as an app</app> to use some of it's more advanced features. If you are working on prototyping your own game we highly recommend you download the app."
   },
+  "oss": {
+    "title": "Open Source",
+    "description": "This software is released under the <license>MIT</license> open source software license. The code is <code>available</code> on <github>GitHub</github>. We use GitHub actions, releases, and packages to handle CI, app hosting, and docker image hosting. We use <netlify>Netlify</netlify> to build and serve the <site>website</site> and the <sb>storybook</sb>."
+  },
   "features": {
     "title": "Features",
     "1": "Load an 18xx Maker game file and display it.",
