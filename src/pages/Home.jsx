@@ -70,7 +70,7 @@ const Home = () => {
           <img
             alt={`Grand Trunk Games Logo`}
             src={gtgLogo}
-            style={{ float: "left", padding: "0.5em 1em 1em 0" }}
+            style={{ float: "right", padding: "0 0 0 1em" }}
           />
           <Trans
             i18nKey="gtg.description"
@@ -104,6 +104,62 @@ const Home = () => {
                   target="_blank"
                   rel="noreferrer"
                   href="https://github.com/18xx-maker/18xx-maker/releases"
+                  underline="hover"
+                />
+              ),
+            }}
+          />
+        </Typography>
+        <Typography variant="h5">{t("oss.title")}</Typography>
+        <Typography variant="body1">
+          <Trans
+            i18nKey="oss.description"
+            components={{
+              license: (
+                <Link
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://github.com/18xx-maker/18xx-maker?tab=MIT-1-ov-file#readme"
+                  underline="hover"
+                />
+              ),
+              code: (
+                <Link
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://github.com/18xx-maker/18xx-maker"
+                  underline="hover"
+                />
+              ),
+              github: (
+                <Link
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://github.com/"
+                  underline="hover"
+                />
+              ),
+              netlify: (
+                <Link
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://netlify.com/"
+                  underline="hover"
+                />
+              ),
+              site: (
+                <Link
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://18xx-maker.com/"
+                  underline="hover"
+                />
+              ),
+              sb: (
+                <Link
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://storybook.18xx-maker.com/"
                   underline="hover"
                 />
               ),

@@ -25,6 +25,15 @@ created using [Electron](https://www.electronjs.org/). The ui was made with
 [Playwright](https://playwright.dev/) for both testing and running a headlines
 chrome in scripts.
 
+This software is released under the
+[MIT](https://github.com/18xx-maker/18xx-maker?tab=MIT-1-ov-file#readme) open
+source software license. The code is available on
+[GitHub](https://github.com). We use GitHub actions, releases, and packages to
+handle CI, app hosting, and docker image hosting. We use
+[Netlify](https://netlify.com) to build and serve the
+[website](https://18xx-maker.com) and the
+[storybook](https://storybook.18xx-maker.com).
+
 ## License
 
 The code of this project is licensed under the [MIT
