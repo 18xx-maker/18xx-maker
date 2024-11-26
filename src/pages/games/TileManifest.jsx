@@ -81,7 +81,9 @@ const TileManifest = () => {
         <div className="TileManifest--Title">
           {game.info.title} Tile Manifest
         </div>
-        {tileNodes}
+        <div className="TileManifest--Grid">
+          {tileNodes}
+        </div>
       </div>
     </ColorContext.Provider>
   );

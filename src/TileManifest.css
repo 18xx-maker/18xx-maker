@@ -1,13 +1,4 @@
 .TileManifest {
-  display: grid;
-  grid-auto-rows: 0.5in;
-  grid-auto-flow: row dense;
-  gap: 1px;
-  grid-template: "title title title title" 0.5in / repeat(
-      4,
-      calc((8in - 5px) / 4)
-    );
-  text-align: left;
   width: 768px;
   margin: 0 auto 0.5in;
   font-family: sans-serif;
@@ -15,10 +6,16 @@
 }
 
 .TileManifest--Title {
-  grid-area: title;
   line-height: 0.5in;
   font-size: 0.25in;
   text-align: center;
+}
+
+.TileManifest--Grid {
+  display: grid;
+  grid-auto-rows: 0.5in;
+  grid-auto-flow: row dense;
+  gap: 1px;
 }
 
 .TileManifest--Tile {
