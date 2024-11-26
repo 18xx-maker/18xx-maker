@@ -89,6 +89,7 @@ const Phase = ({ phases, trains, minor, company }) => {
   let includeRust = trainInclude("rust", trains);
   let includeObsolete = trainInclude("obsolete", trains);
   let includePhased = trainInclude("phased", trains);
+  let includeNotes = include("notes", phases, minor, company);
 
   let phaseRows = R.compose(
     R.map((phase) => {
@@ -238,9 +239,11 @@ const Phase = ({ phases, trains, minor, company }) => {
               {includeTiles && (
                 <td style={{ backgroundColor: c(phase.tiles) }}>&nbsp;</td>
               )}
-              <td className="phase__notes">
-                <ul>{noteNodes}</ul>
-              </td>
+              {includeNotes && (
+                <td className="phase__notes">
+                  <ul>{noteNodes}</ul>
+                </td>
+              )}
             </tr>
           )}
         </Color>
@@ -267,7 +270,7 @@ const Phase = ({ phases, trains, minor, company }) => {
           {includeObsolete && <th>Obsolete</th>}
           {includeRust && <th>Rust</th>}
           {includeTiles && <th>Tiles</th>}
-          <th className="phase__notes">Notes</th>
+          {includeNotes && <th className="phase__notes">Notes</th>}
         </tr>
       </thead>
       <tbody>{phaseRows}</tbody>
