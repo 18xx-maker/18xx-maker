@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.0-beta.104](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.103...v1.0.0-beta.104) (2024-11-27)
+
+
+### :bug: Bug Fixes
+
+* **analytics:** proper connect-src setting for electron ([#636](https://github.com/18xx-maker/18xx-maker/issues/636)) ([c01abde](https://github.com/18xx-maker/18xx-maker/commit/c01abde84a0c72bed1e1ec8d5295fa591ff65d10))
+
+
+### :broom: Chores
+
+* **analytics:** simplify some analytics for the app ([#638](https://github.com/18xx-maker/18xx-maker/issues/638)) ([9692e31](https://github.com/18xx-maker/18xx-maker/commit/9692e31a6e4cfca2069dee5985c211b782711f2b))
+
 ## [1.0.0-beta.103](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.102...v1.0.0-beta.103) (2024-11-27)
 
 
