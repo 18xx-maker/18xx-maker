@@ -1,6 +1,6 @@
 # 18xx Maker
 
-[![analytics](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fanalytics.18xx-maker.com%2Fvisitors&query=%24.results%5B0%5D.metrics%5B0%5D&logo=plausibleanalytics&logoColor=%23fff&label=analytics&color=%235850EC)](https://analytics.18xx-maker.com/)
+[![analytics](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fanalytics.18xx-maker.com%2Fvisitors&query=%24.results%5B0%5D.metrics%5B0%5D&suffix=%20UV&logo=plausibleanalytics&logoColor=%23fff&label=analytics&color=%235850EC)](https://analytics.18xx-maker.com/)
 [![build](https://img.shields.io/github/check-runs/18xx-maker/18xx-maker/main?logo=github&logoColor=%23fff&label=build)](https://github.com/18xx-maker/18xx-maker/actions/workflows/test.yml?query=branch%3Amain)
 [![coveralls](https://img.shields.io/coverallsCoverage/github/18xx-maker/18xx-maker?logo=coveralls&logoColor=%23fff)](https://coveralls.io/github/18xx-maker/18xx-maker)
 [![chat](https://img.shields.io/discord/1302895372749770752?logo=discord&logoColor=%23fff&color=%235865F2)](https://discord.gg/gcYvAjYYfw)
