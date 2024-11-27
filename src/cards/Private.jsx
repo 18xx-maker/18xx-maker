@@ -11,10 +11,10 @@ import Tile from "@/components/Tile";
 import ColorContext from "@/context/ColorContext";
 import { MapOrientation } from "@/context/OrientationContext";
 import { useConfig, useGame } from "@/hooks";
-import { getMapHex } from "@/map/util";
 import GameCompanyToken from "@/tokens/GameCompanyToken";
 import Token from "@/tokens/Token";
 import { getFontProps, multiDefaultTo } from "@/util";
+import { getMapHex } from "@/util/map";
 
 const Private = (props) => {
   let {

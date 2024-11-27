@@ -4,7 +4,7 @@ import Svg from "@/components/Svg";
 import { MapOrientation } from "@/context/OrientationContext";
 import { useConfig, useGame } from "@/hooks";
 import Map from "@/map/Map";
-import { getMapData } from "@/map/util";
+import { getMapData } from "@/util/map";
 import { useIntParam } from "@/util/query";
 
 const B18Map = () => {

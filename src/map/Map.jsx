@@ -11,8 +11,8 @@ import MapMarket from "@/map/MapMarket";
 import MapPlayers from "@/map/MapPlayers";
 import MapRoundTracker from "@/map/MapRoundTracker";
 import Title from "@/map/Title";
-import { getMapData, toAlpha, toCoords } from "@/map/util";
 import { multiDefaultTo } from "@/util";
+import { getMapData, toAlpha, toCoords } from "@/util/map";
 
 const Map = ({ name, game, config, variation }) => {
   const coords = config.coords;

@@ -1,4 +1,4 @@
-import { HEX_RATIO } from "@/map/util";
+import { HEX_RATIO } from "@/util/map";
 
 export const getTileSheetContext = (layout, paper, hexWidth) => {
   let c = { layout, paper, hexWidth };

@@ -1,4 +1,4 @@
-import * as util from "@/map/util";
+import * as util from "@/util/map";
 
 describe("maxMapX", () => {
   it("should handle empty lists", () => {
