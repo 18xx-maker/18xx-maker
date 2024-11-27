@@ -1,6 +1,6 @@
+import RevenuePaginated from "@/components/market/RevenuePaginated";
+import RevenueSingle from "@/components/market/RevenueSingle";
 import { useConfig, useGame } from "@/hooks";
-import RevenuePaginated from "@/market/RevenuePaginated";
-import RevenueSingle from "@/market/RevenueSingle";
 import { useBooleanParam } from "@/util/query";
 
 const Revenue = () => {

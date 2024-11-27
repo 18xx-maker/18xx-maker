@@ -1,6 +1,6 @@
+import ParPaginated from "@/components/market/ParPaginated";
+import ParSingle from "@/components/market/ParSingle";
 import { useConfig, useGame } from "@/hooks";
-import ParPaginated from "@/market/ParPaginated";
-import ParSingle from "@/market/ParSingle";
 import { useBooleanParam } from "@/util/query";
 
 const Par = () => {

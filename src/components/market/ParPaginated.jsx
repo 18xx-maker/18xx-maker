@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 
 import Paginate from "@/components/Paginate";
-import Par from "@/market/Par";
+import Par from "@/components/market/Par";
 import { getParData } from "@/util/market";
 
 const ParPaginated = ({ config, game }) => {

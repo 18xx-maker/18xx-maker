@@ -1,6 +1,6 @@
 import { addIndex, chain, map, range, splitEvery } from "ramda";
 
-import Cell from "@/market/Cell";
+import Cell from "@/components/market/Cell";
 
 const Revenue = ({ data, game, config }) => {
   let { min, max, perRow } = data;

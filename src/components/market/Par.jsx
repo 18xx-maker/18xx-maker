@@ -1,7 +1,7 @@
 import { addIndex, chain, is, map } from "ramda";
 
-import Ledges from "@/market/Ledges";
-import ParCell from "@/market/ParCell";
+import Ledges from "@/components/market/Ledges";
+import ParCell from "@/components/market/ParCell";
 
 const Par = ({ data, title }) => {
   let values = data.values;

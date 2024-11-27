@@ -1,6 +1,6 @@
+import MarketPaginated from "@/components/market/MarketPaginated";
+import MarketSingle from "@/components/market/MarketSingle";
 import { useConfig, useGame } from "@/hooks";
-import MarketPaginated from "@/market/MarketPaginated";
-import MarketSingle from "@/market/MarketSingle";
 import { useBooleanParam } from "@/util/query";
 
 const Market = () => {

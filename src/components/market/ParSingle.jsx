@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 
 import Svg from "@/components/Svg";
-import Par from "@/market/Par";
+import Par from "@/components/market/Par";
 import { unitsToCss } from "@/util";
 import { getParData } from "@/util/market";
 

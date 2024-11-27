@@ -1,6 +1,6 @@
 import Svg from "@/components/Svg";
+import Revenue from "@/components/market/Revenue";
 import { useConfig, useGame } from "@/hooks";
-import Revenue from "@/market/Revenue";
 import { unitsToCss } from "@/util";
 import { getRevenueData } from "@/util/market";
 

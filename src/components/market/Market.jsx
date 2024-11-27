@@ -2,10 +2,10 @@ import { addIndex, chain, concat, map, reverse } from "ramda";
 
 import Color from "@/components/Color";
 import Legend from "@/components/Legend";
-import Cell from "@/market/Cell";
-import Ledges from "@/market/Ledges";
-import MarketRoundTracker from "@/market/MarketRoundTracker";
-import Par from "@/market/Par";
+import Cell from "@/components/market/Cell";
+import Ledges from "@/components/market/Ledges";
+import MarketRoundTracker from "@/components/market/MarketRoundTracker";
+import Par from "@/components/market/Par";
 import { multiDefaultTo } from "@/util";
 import { getParData } from "@/util/market";
 
