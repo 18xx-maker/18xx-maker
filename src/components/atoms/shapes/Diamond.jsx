@@ -1,7 +1,7 @@
 import { defaultTo } from "ramda";
 
-import Text from "@/atoms/shapes/Text";
 import Color from "@/components/Color";
+import Text from "@/components/atoms/shapes/Text";
 import { useGame } from "@/hooks";
 import { getFontProps, multiDefaultTo } from "@/util";
 

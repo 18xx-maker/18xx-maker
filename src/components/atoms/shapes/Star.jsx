@@ -1,11 +1,11 @@
 import { defaultTo } from "ramda";
 
-import Text from "@/atoms/shapes/Text";
 import Color from "@/components/Color";
+import Text from "@/components/atoms/shapes/Text";
 import { useGame } from "@/hooks";
 import { getFontProps, multiDefaultTo } from "@/util";
 
-const Hexagon = (props) => {
+const Star = (props) => {
   let {
     text,
     textColor,
@@ -20,12 +20,11 @@ const Hexagon = (props) => {
   const game = useGame();
 
   let scale = defaultTo(50, width) / 50;
-  let x = 25 * scale;
-  let y = 21.650625 * scale;
+  //let x = 25 * scale;
 
   let font = getFontProps(
     props,
-    16 * scale,
+    14 * scale,
     undefined,
     multiDefaultTo(undefined, fontFamily, game.info.valueFontFamily),
   );
@@ -36,9 +35,9 @@ const Hexagon = (props) => {
   return (
     <Color>
       {(c) => (
-        <g>
+        <g transform={`scale(${scale * 2}) translate(-25 -25)`}>
           <path
-            d={`M -${x} 0 L -${x / 2} -${y} L ${x / 2} -${y} L ${x} 0 L ${x / 2} ${y} L -${x / 2} ${y} z`}
+            d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
             fill={defaultTo("none", c(color))}
             fillOpacity={defaultTo(1, opacity)}
             stroke={c(defaultTo("black", borderColor))}
@@ -49,8 +48,8 @@ const Hexagon = (props) => {
           <Text
             {...font}
             text={text}
-            color={textColor}
             fontFamily={fontFamily}
+            color={textColor}
           />
         </g>
       )}
@@ -58,4 +57,4 @@ const Hexagon = (props) => {
   );
 };
 
-export default Hexagon;
+export default Star;

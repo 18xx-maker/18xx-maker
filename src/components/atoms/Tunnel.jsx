@@ -1,17 +1,16 @@
-import Triangle from "@/atoms/shapes/Triangle";
 import Currency from "@/components/Currency";
+import Triangle from "@/components/atoms/shapes/Triangle";
 import PhaseContext from "@/context/PhaseContext";
 
-const Bridge = (props) => {
+const Tunnel = (props) => {
   let { cost } = props;
 
   return (
     <PhaseContext.Provider value="default">
       <Triangle
-        color="water"
+        color="mountain"
         width={44}
         fontSize={11}
-        reverse={true}
         {...props}
         text={<Currency value={cost} type="terrain" />}
       />
@@ -19,4 +18,4 @@ const Bridge = (props) => {
   );
 };
 
-export default Bridge;
+export default Tunnel;

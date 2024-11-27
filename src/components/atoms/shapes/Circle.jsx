@@ -1,11 +1,11 @@
 import { defaultTo } from "ramda";
 
-import Text from "@/atoms/shapes/Text";
 import Color from "@/components/Color";
+import Text from "@/components/atoms/shapes/Text";
 import { useGame } from "@/hooks";
 import { getFontProps, multiDefaultTo } from "@/util";
 
-const Square = (props) => {
+const Circle = (props) => {
   let {
     text,
     textColor,
@@ -20,27 +20,24 @@ const Square = (props) => {
   const game = useGame();
 
   let scale = defaultTo(50, width) / 50;
-  let x = 50 * scale;
-
   let font = getFontProps(
     props,
     16 * scale,
     undefined,
     multiDefaultTo(undefined, fontFamily, game.info.valueFontFamily),
   );
+
   let strokeDashArray = dashed
     ? `${width / 7.142857143} ${width / 7.142857143}`
     : undefined;
+  let r = 25 * scale;
 
   return (
     <Color>
       {(c) => (
         <g>
-          <rect
-            x={-x / 2}
-            y={-x / 2}
-            width={x}
-            height={x}
+          <circle
+            r={r}
             fill={defaultTo("none", c(color))}
             fillOpacity={defaultTo(1, opacity)}
             stroke={c(defaultTo("black", borderColor))}
@@ -51,8 +48,8 @@ const Square = (props) => {
           <Text
             {...font}
             text={text}
-            color={textColor}
             fontFamily={fontFamily}
+            color={textColor}
           />
         </g>
       )}
@@ -60,4 +57,4 @@ const Square = (props) => {
   );
 };
 
-export default Square;
+export default Circle;

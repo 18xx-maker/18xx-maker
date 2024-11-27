@@ -1,7 +1,7 @@
 import { is } from "ramda";
 
-import Id from "@/atoms/Id";
 import Hex from "@/components/Hex";
+import Id from "@/components/atoms/Id";
 import { tiles } from "@/data";
 
 const Tile = ({ id, border, clipPath, gameTiles }) => {

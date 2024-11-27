@@ -1,11 +1,11 @@
 import { defaultTo } from "ramda";
 
-import Text from "@/atoms/shapes/Text";
 import Color from "@/components/Color";
+import Text from "@/components/atoms/shapes/Text";
 import { useGame } from "@/hooks";
 import { getFontProps, multiDefaultTo } from "@/util";
 
-const Triangle = (props) => {
+const Square = (props) => {
   let {
     text,
     textColor,
@@ -16,19 +16,11 @@ const Triangle = (props) => {
     borderWidth,
     width,
     dashed,
-    reverse,
   } = props;
   const game = useGame();
 
   let scale = defaultTo(50, width) / 50;
-  let x = 25 * scale;
-  let y1 = 14.43375673 * scale * (reverse ? -1 : 1);
-  let y2 = -28.86751346 * scale * (reverse ? -1 : 1);
-
-  // These values are for a triangle inscribed IN a circle of r = width
-  // let x = 21.6506351 * scale;
-  // let y1 = 12.5 * scale * (reverse ? -1 : 1);
-  // let y2 = -25 * scale * (reverse ? -1 : 1);
+  let x = 50 * scale;
 
   let font = getFontProps(
     props,
@@ -44,8 +36,11 @@ const Triangle = (props) => {
     <Color>
       {(c) => (
         <g>
-          <path
-            d={`M -${x} ${y1} L 0 ${y2} L ${x} ${y1} z`}
+          <rect
+            x={-x / 2}
+            y={-x / 2}
+            width={x}
+            height={x}
             fill={defaultTo("none", c(color))}
             fillOpacity={defaultTo(1, opacity)}
             stroke={c(defaultTo("black", borderColor))}
@@ -65,4 +60,4 @@ const Triangle = (props) => {
   );
 };
 
-export default Triangle;
+export default Square;

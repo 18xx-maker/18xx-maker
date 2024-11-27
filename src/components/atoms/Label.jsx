@@ -1,4 +1,4 @@
-import Text from "@/atoms/shapes/Text";
+import Text from "@/components/atoms/shapes/Text";
 
 const Label = (props, rotation, fontSize) => {
   let { label } = props;

@@ -1,8 +1,8 @@
 import { addIndex, chain, concat, map, max, sum } from "ramda";
 
-import Name from "@/atoms/Name";
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
+import Name from "@/components/atoms/Name";
 import { useGame } from "@/hooks";
 import { multiDefaultTo } from "@/util";
 import { splitRevenues } from "@/util/revenue";

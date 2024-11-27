@@ -1,6 +1,6 @@
 import { ascend, identity, keys, path, sort } from "ramda";
 
-import Tunnel from "@/atoms/Tunnel";
+import Tunnel from "@/components/atoms/Tunnel";
 import { mapThemes } from "@/data";
 
 const colors = sort(ascend(identity), keys(path(["gmt", "colors"], mapThemes)));

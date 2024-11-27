@@ -1,11 +1,11 @@
 import { defaultTo } from "ramda";
 
-import Text from "@/atoms/shapes/Text";
 import Color from "@/components/Color";
+import Text from "@/components/atoms/shapes/Text";
 import { useGame } from "@/hooks";
 import { getFontProps, multiDefaultTo } from "@/util";
 
-const Circle = (props) => {
+const Triangle = (props) => {
   let {
     text,
     textColor,
@@ -16,28 +16,36 @@ const Circle = (props) => {
     borderWidth,
     width,
     dashed,
+    reverse,
   } = props;
   const game = useGame();
 
   let scale = defaultTo(50, width) / 50;
+  let x = 25 * scale;
+  let y1 = 14.43375673 * scale * (reverse ? -1 : 1);
+  let y2 = -28.86751346 * scale * (reverse ? -1 : 1);
+
+  // These values are for a triangle inscribed IN a circle of r = width
+  // let x = 21.6506351 * scale;
+  // let y1 = 12.5 * scale * (reverse ? -1 : 1);
+  // let y2 = -25 * scale * (reverse ? -1 : 1);
+
   let font = getFontProps(
     props,
     16 * scale,
     undefined,
     multiDefaultTo(undefined, fontFamily, game.info.valueFontFamily),
   );
-
   let strokeDashArray = dashed
     ? `${width / 7.142857143} ${width / 7.142857143}`
     : undefined;
-  let r = 25 * scale;
 
   return (
     <Color>
       {(c) => (
         <g>
-          <circle
-            r={r}
+          <path
+            d={`M -${x} ${y1} L 0 ${y2} L ${x} ${y1} z`}
             fill={defaultTo("none", c(color))}
             fillOpacity={defaultTo(1, opacity)}
             stroke={c(defaultTo("black", borderColor))}
@@ -48,8 +56,8 @@ const Circle = (props) => {
           <Text
             {...font}
             text={text}
-            fontFamily={fontFamily}
             color={textColor}
+            fontFamily={fontFamily}
           />
         </g>
       )}
@@ -57,4 +65,4 @@ const Circle = (props) => {
   );
 };
 
-export default Circle;
+export default Triangle;

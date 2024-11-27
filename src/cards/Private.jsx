@@ -2,12 +2,12 @@ import "@/cards/private.css";
 
 import { defaultTo, intersperse, is, map, max, min, reduce } from "ramda";
 
-import Icon from "@/atoms/Icon";
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
 import Hex from "@/components/Hex";
 import Svg from "@/components/Svg";
 import Tile from "@/components/Tile";
+import Icon from "@/components/atoms/Icon";
 import GameCompanyToken from "@/components/tokens/GameCompanyToken";
 import Token from "@/components/tokens/Token";
 import ColorContext from "@/context/ColorContext";
