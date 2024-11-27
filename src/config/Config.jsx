@@ -22,7 +22,7 @@ import {
   split,
 } from "ramda";
 
-import { SyntaxHighlighter, style } from "@/SyntaxHighlighter";
+import { SyntaxHighlighter, style } from "@/components/SyntaxHighlighter";
 import Input from "@/config/Input";
 import ThemePreview from "@/config/ThemePreview";
 import { companyThemes, mapThemes } from "@/data";

@@ -1,7 +1,7 @@
 import { map } from "ramda";
 
-import Svg from "@/Svg";
 import PageSetup from "@/components/PageSetup";
+import Svg from "@/components/Svg";
 import { addPaginationData, unitsToCss } from "@/util";
 import Page from "@/util/Page";
 

@@ -1,4 +1,4 @@
-import RoundTracker, { getRoundTrackerData } from "@/RoundTracker";
+import RoundTracker, { getRoundTrackerData } from "@/components/RoundTracker";
 import { useConfig, useGame } from "@/hooks";
 
 const Rounds = () => {

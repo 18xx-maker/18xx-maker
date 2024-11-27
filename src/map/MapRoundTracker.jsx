@@ -1,4 +1,4 @@
-import RoundTracker from "@/RoundTracker";
+import RoundTracker from "@/components/RoundTracker";
 import { useConfig, useGame } from "@/hooks";
 
 const MapRoundTracker = ({ roundTracker, hexWidth }) => {

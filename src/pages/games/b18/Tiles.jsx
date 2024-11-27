@@ -2,8 +2,8 @@ import { useParams } from "react-router";
 
 import { compose, filter, is, keys, map, propEq, take, uniq } from "ramda";
 
-import Svg from "@/Svg";
 import Tile from "@/Tile";
+import Svg from "@/components/Svg";
 import ColorContext from "@/context/ColorContext";
 import RotateContext from "@/context/RotateContext";
 import { tiles as tileDefs } from "@/data";

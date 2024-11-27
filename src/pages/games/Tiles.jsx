@@ -27,10 +27,10 @@ import {
   unnest,
 } from "ramda";
 
-import Svg from "@/Svg";
 import Hex from "@/components/Hex";
 import PageSetup from "@/components/PageSetup";
 import Pins from "@/components/Pins";
+import Svg from "@/components/Svg";
 import ColorContext from "@/context/ColorContext";
 import { tiles as tileDefs } from "@/data";
 import Cutlines from "@/tilesheet/Cutlines";

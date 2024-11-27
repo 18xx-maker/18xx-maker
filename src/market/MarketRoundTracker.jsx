@@ -1,4 +1,4 @@
-import RoundTracker from "@/RoundTracker";
+import RoundTracker from "@/components/RoundTracker";
 
 const MarketRoundTracker = ({ roundTracker, game, config }) => {
   if (!roundTracker) {

@@ -2,8 +2,8 @@ import { useNavigate } from "react-router";
 
 import { addIndex, ascend, keys, map, sortWith } from "ramda";
 
-import Svg from "@/Svg";
 import Tile from "@/Tile";
+import Svg from "@/components/Svg";
 import ColorContext from "@/context/ColorContext";
 import { tiles } from "@/data";
 import { useGame } from "@/hooks";

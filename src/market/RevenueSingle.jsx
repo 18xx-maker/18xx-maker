@@ -1,4 +1,4 @@
-import Svg from "@/Svg";
+import Svg from "@/components/Svg";
 import { useConfig, useGame } from "@/hooks";
 import Revenue from "@/market/Revenue";
 import { getRevenueData } from "@/market/util";

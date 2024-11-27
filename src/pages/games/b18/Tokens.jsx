@@ -2,7 +2,7 @@ import "@/pages/games/b18/b18.css";
 
 import { addIndex, compose, is, map, propEq, reject } from "ramda";
 
-import Svg from "@/Svg";
+import Svg from "@/components/Svg";
 import ColorContext from "@/context/ColorContext";
 import { useConfig, useGame } from "@/hooks";
 import CompanyToken from "@/tokens/CompanyToken";

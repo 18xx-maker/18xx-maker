@@ -10,7 +10,7 @@ import makeStyles from "@mui/styles/makeStyles";
 
 import { dissoc, isEmpty, startsWith } from "ramda";
 
-import { SyntaxHighlighter, style } from "@/SyntaxHighlighter";
+import { SyntaxHighlighter, style } from "@/components/SyntaxHighlighter";
 import capability from "@/util/capability";
 
 const removeNode = dissoc("node");

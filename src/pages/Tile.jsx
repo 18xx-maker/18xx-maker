@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 
-import Svg from "@/Svg";
 import Tile from "@/Tile";
+import Svg from "@/components/Svg";
 import capability from "@/util/capability";
 
 const TilePage = () => {

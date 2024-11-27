@@ -1,6 +1,6 @@
 import { redirect } from "react-router";
 
-import Svg from "@/Svg";
+import Svg from "@/components/Svg";
 import Map from "@/map/Map";
 import { getMapData } from "@/map/util";
 

@@ -2,8 +2,8 @@ import { useNavigate } from "react-router";
 
 import { addIndex, chain, is, map, splitEvery } from "ramda";
 
-import Svg from "@/Svg";
 import PageSetup from "@/components/PageSetup";
+import Svg from "@/components/Svg";
 import ColorContext from "@/context/ColorContext";
 import { useConfig, useGame } from "@/hooks";
 import CompanyToken from "@/tokens/CompanyToken";
