@@ -61,7 +61,7 @@ const props = capability.electron
 export const trackEvent = (eventName, location, eventOptions = {}) => {
   const eventData = gatherPageviewData(location);
   const options = { props: { ...props, ...eventOptions } };
-  if (!prod) {
+  if (!prod || window.location.hostname === "localhost") {
     if (DEVLOG) {
       console.log("trackEvent", eventName, options, eventData);
     }
@@ -76,7 +76,7 @@ export const trackPageview = (location) => {
   const eventData = gatherPageviewData(location);
   const options = { props };
 
-  if (!prod) {
+  if (!prod || window.location.hostname === "localhost") {
     if (DEVLOG) {
       console.log("trackPageview", eventData, options);
     }
