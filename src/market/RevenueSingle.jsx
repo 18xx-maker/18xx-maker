@@ -1,8 +1,8 @@
 import Svg from "@/components/Svg";
 import { useConfig, useGame } from "@/hooks";
 import Revenue from "@/market/Revenue";
-import { getRevenueData } from "@/market/util";
 import { unitsToCss } from "@/util";
+import { getRevenueData } from "@/util/market";
 
 const RevenueSingle = () => {
   const { config } = useConfig();

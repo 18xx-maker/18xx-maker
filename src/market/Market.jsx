@@ -6,8 +6,8 @@ import Cell from "@/market/Cell";
 import Ledges from "@/market/Ledges";
 import MarketRoundTracker from "@/market/MarketRoundTracker";
 import Par from "@/market/Par";
-import { getParData } from "@/market/util";
 import { multiDefaultTo } from "@/util";
+import { getParData } from "@/util/market";
 
 const Market = ({ data, game, config, title, displayTitle }) => {
   let cells = [];
