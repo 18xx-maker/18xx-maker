@@ -1,6 +1,6 @@
 import { Navigate } from "react-router";
 
-import Root from "@/Root";
+import Root from "@/components/Root";
 import DocsNav from "@/components/nav/DocsNav";
 import ElementsNav from "@/components/nav/ElementsNav";
 import GameNav from "@/components/nav/GameNav";
