@@ -15,13 +15,14 @@ import { getGameSummary } from "@/util/loading.js";
 const summaries = { bundled: mapObjIndexed(getGameSummary, games) };
 
 export const initialState = { alert: ALERT_DEFAULT, summaries, config: {} };
+
+// Pick which top level fields we want to keep in local storage
+storage.init("config", "loadedGame");
+
 export const preloadedState = mergeDeepRight(
   initialState,
   storage.initialState(),
 );
-
-// Pick which top level fields we want to keep in local storage
-storage.init("config", "loadedGame");
 
 export const rootReducer = combineReducers({
   alert: alertReducer,
