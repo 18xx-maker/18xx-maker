@@ -2,10 +2,10 @@ import { useParams } from "react-router";
 
 import { assoc, clone, flatten, map } from "ramda";
 
-import Number from "@/cards/Number";
-import Private from "@/cards/Private";
-import Share from "@/cards/Share";
-import Train from "@/cards/Train";
+import Number from "@/components/cards/Number";
+import Private from "@/components/cards/Private";
+import Share from "@/components/cards/Share";
+import Train from "@/components/cards/Train";
 import { useConfig, useGame } from "@/hooks";
 import { getCardData } from "@/util/cards";
 import { compileCompanies, overrideCompanies } from "@/util/companies";

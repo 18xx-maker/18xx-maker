@@ -1,4 +1,4 @@
-import CardsComponent from "@/cards";
+import CardsComponent from "@/components/cards";
 import { useBooleanParam } from "@/util/query";
 
 const Cards = () => {

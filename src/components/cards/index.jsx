@@ -1,12 +1,12 @@
 import { addIndex, chain, clone, map, prop, range, splitEvery } from "ramda";
 
-import Number from "@/cards/Number";
-import Private from "@/cards/Private";
-import Share from "@/cards/Share";
-import Train from "@/cards/Train";
 import PageSetup from "@/components/PageSetup";
 import Pins from "@/components/Pins";
 import Svg from "@/components/Svg";
+import Number from "@/components/cards/Number";
+import Private from "@/components/cards/Private";
+import Share from "@/components/cards/Share";
+import Train from "@/components/cards/Train";
 import { useConfig, useGame } from "@/hooks";
 import { fillArray, maxPlayers } from "@/util";
 import { getCardData } from "@/util/cards";
