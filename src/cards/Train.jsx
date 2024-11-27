@@ -1,5 +1,3 @@
-import "@/cards/train.css";
-
 import { defaultTo, find, is, map } from "ramda";
 
 import Color from "@/components/Color";

@@ -1,7 +1,5 @@
 import Color from "@/components/Color";
 
-import "@/cards/number.css";
-
 const Number = ({ number, background }) => {
   return (
     <Color context="companies">

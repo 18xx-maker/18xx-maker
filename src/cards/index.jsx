@@ -1,5 +1,3 @@
-import "@/cards/card.css";
-
 import { addIndex, chain, clone, map, prop, range, splitEvery } from "ramda";
 
 import Number from "@/cards/Number";

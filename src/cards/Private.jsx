@@ -1,5 +1,3 @@
-import "@/cards/private.css";
-
 import { defaultTo, intersperse, is, map, max, min, reduce } from "ramda";
 
 import Color from "@/components/Color";

@@ -1,5 +1,3 @@
-import "@/cards/share.css";
-
 import { min } from "ramda";
 
 import Color from "@/components/Color";

@@ -10,8 +10,6 @@ import { useConfig, useGame } from "@/hooks";
 import { getCardData } from "@/util/cards";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
 
-import "@/cards/card.css";
-
 const Card = () => {
   const { config } = useConfig();
   const game = useGame();
