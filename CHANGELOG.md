@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.0.0-beta.100](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.99...v1.0.0-beta.100) (2024-11-27)
+
+
+### :bug: Bug Fixes
+
+* **colors:** update to latest cube 4 me colors ([#622](https://github.com/18xx-maker/18xx-maker/issues/622)) ([0c34862](https://github.com/18xx-maker/18xx-maker/commit/0c34862b87fd3ee5cd47719158ef5b1d59064ed3)), closes [#487](https://github.com/18xx-maker/18xx-maker/issues/487)
+* **elements:** improve tiles page to show more tiles and not error ([#617](https://github.com/18xx-maker/18xx-maker/issues/617)) ([049bef2](https://github.com/18xx-maker/18xx-maker/commit/049bef2f88cfdb8391f95e74e98391a2efb02c12)), closes [#378](https://github.com/18xx-maker/18xx-maker/issues/378)
+* scrollbar visible while printing token pages and tile manifests ([#624](https://github.com/18xx-maker/18xx-maker/issues/624)) ([ba8d948](https://github.com/18xx-maker/18xx-maker/commit/ba8d948cd246c88fffb6cc588a90b2727e1d7ba0))
+* tiles 638 and 642 values to 70 ([#479](https://github.com/18xx-maker/18xx-maker/issues/479)) ([#621](https://github.com/18xx-maker/18xx-maker/issues/621)) ([dd574bf](https://github.com/18xx-maker/18xx-maker/commit/dd574bf53c84b45d9344a7b9ad1a9fe1d6924724))
+
+
+### :broom: Chores
+
+* lots of file layout changes and fixes ([#627](https://github.com/18xx-maker/18xx-maker/issues/627)) ([7c25435](https://github.com/18xx-maker/18xx-maker/commit/7c25435866b7b8836e1c3e673a9f35dd3dd11c8e))
+
+
+### :book: Documentation
+
+* **coc:** create CODE_OF_CONDUCT.md ([#619](https://github.com/18xx-maker/18xx-maker/issues/619)) ([35cbece](https://github.com/18xx-maker/18xx-maker/commit/35cbece20abbfa5d6aca3e57bf6d111361a102f0))
+* **home:** updating homepage to reference open source projects ([#620](https://github.com/18xx-maker/18xx-maker/issues/620)) ([cd29273](https://github.com/18xx-maker/18xx-maker/commit/cd292735e88258e3405e17a416010f06a2ed0de6))
+
 ## [1.0.0-beta.99](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.98...v1.0.0-beta.99) (2024-11-26)
 
 
