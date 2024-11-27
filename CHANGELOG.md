@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.103](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.102...v1.0.0-beta.103) (2024-11-27)
+
+
+### :bug: Bug Fixes
+
+* **analytics:** allow analytics to work from the app ([#634](https://github.com/18xx-maker/18xx-maker/issues/634)) ([4d6a831](https://github.com/18xx-maker/18xx-maker/commit/4d6a8311359f599b99e68e93caa76bbd4c429b43))
+
 ## [1.0.0-beta.102](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.101...v1.0.0-beta.102) (2024-11-27)
 
 
