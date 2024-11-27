@@ -24,8 +24,8 @@ import makeStyles from "@mui/styles/makeStyles";
 
 import { prop } from "ramda";
 
+import MobileMenuButton from "@/components/nav/MobileMenuButton";
 import { useLoadedGame } from "@/hooks/game.js";
-import MobileMenuButton from "@/nav/MobileMenuButton";
 import { useBooleanParam } from "@/util/query";
 
 const useStyles = makeStyles((theme) => ({

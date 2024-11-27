@@ -21,9 +21,9 @@ import ScrollToTop from "@/components/ScrollToTop";
 import SetSvgColors from "@/components/SetSvgColors";
 import Viewport from "@/components/Viewport";
 import ConfigDrawer from "@/components/config/ConfigDrawer.jsx";
+import AppNav from "@/components/nav/AppNav";
+import SideNav from "@/components/nav/SideNav";
 import { useAlert, useBindings } from "@/hooks";
-import AppNav from "@/nav/AppNav";
-import SideNav from "@/nav/SideNav";
 import {
   clearAlert,
   createAlert,
