@@ -27,6 +27,7 @@ import {
   unnest,
 } from "ramda";
 
+import Cutlines from "@/components/Cutlines";
 import Hex from "@/components/Hex";
 import Page from "@/components/Page";
 import PageSetup from "@/components/PageSetup";
@@ -34,9 +35,8 @@ import Pins from "@/components/Pins";
 import Svg from "@/components/Svg";
 import ColorContext from "@/context/ColorContext";
 import { tiles as tileDefs } from "@/data";
-import Cutlines from "@/tilesheet/Cutlines";
-import { getTileSheetContext } from "@/tilesheet/util";
 import { getTile, sortTiles } from "@/util";
+import { getTileSheetContext } from "@/util/tilesheet";
 import { sidesFromTile } from "@/util/track";
 
 const gatherIds = (tiles) => {
