@@ -33,6 +33,7 @@ const allUnits = {
 // Component to help input units
 const UnitInput = ({ name, value, label, onChange }) => {
   const classes = useStyles();
+  let [error, setError] = useState(false);
   let [units, setUnits] = useState("inches");
   let [internalValue, setInternalValue] = useState(value / allUnits[units]);
 
@@ -42,9 +43,20 @@ const UnitInput = ({ name, value, label, onChange }) => {
 
   let handler = (event) => {
     setInternalValue(event.target.value);
-    onChange(
-      event.target.value === "" ? 0 : event.target.value * allUnits[units],
-    );
+
+    let numberValue = Number(event.target.value);
+    if (Number.isNaN(numberValue)) {
+      if (!error) {
+        setError(true);
+      }
+      return;
+    } else {
+      if (error) {
+        setError(false);
+      }
+    }
+
+    onChange(numberValue * allUnits[units]);
   };
 
   let unitsHandler = (event) => {
@@ -54,7 +66,7 @@ const UnitInput = ({ name, value, label, onChange }) => {
 
   return (
     <Box className={classes.configItem}>
-      <FormControl variant="filled">
+      <FormControl variant="filled" error={error}>
         <InputLabel id={`${name}-label`}>{label}</InputLabel>
         <MUIInput
           id={name}
