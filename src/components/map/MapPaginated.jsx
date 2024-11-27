@@ -4,8 +4,6 @@ import Paginate from "@/components/Paginate";
 import Map from "@/components/map/Map";
 import { getMapData } from "@/util/map";
 
-import "@/games/MapPaginated.css";
-
 const MapPaginated = ({ game, config, variation }) => {
   const navigate = useNavigate();
   const coords = config.coords;
