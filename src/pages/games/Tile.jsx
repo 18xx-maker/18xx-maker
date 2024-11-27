@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router";
 
-import Hex from "@/Hex";
 import Svg from "@/Svg";
+import Hex from "@/components/Hex";
 import ColorContext from "@/context/ColorContext";
 import { tiles as tileDefs } from "@/data";
 import { useConfig, useGame } from "@/hooks";

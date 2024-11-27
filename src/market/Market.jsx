@@ -1,6 +1,6 @@
 import { addIndex, chain, concat, map, reverse } from "ramda";
 
-import Legend from "@/Legend";
+import Legend from "@/components/Legend";
 import Cell from "@/market/Cell";
 import Ledges from "@/market/Ledges";
 import MarketRoundTracker from "@/market/MarketRoundTracker";

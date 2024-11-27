@@ -12,9 +12,9 @@ import makeStyles from "@mui/styles/makeStyles";
 
 import { addIndex, chain, find, map, propEq } from "ramda";
 
-import Hex from "@/Hex";
 import Svg from "@/Svg";
 import { SyntaxHighlighter, style } from "@/SyntaxHighlighter";
+import Hex from "@/components/Hex";
 import { useStringParam } from "@/util/query";
 
 const atoms = [

@@ -13,10 +13,10 @@ import {
   splitEvery,
 } from "ramda";
 
-import Charter from "@/Charter";
 import PageSetup from "@/PageSetup";
 import Pins from "@/Pins";
 import Svg from "@/Svg";
+import Charter from "@/components/Charter";
 import { useConfig, useGame } from "@/hooks";
 import { getCharterData } from "@/util";
 import { compileCompanies, overrideCompanies } from "@/util/companies";

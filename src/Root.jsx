@@ -15,10 +15,10 @@ import {
 
 import { compose } from "ramda";
 
-import ExportButton from "@/ExportButton.jsx";
 import PrintButton from "@/PrintButton.jsx";
 import ScrollToTop from "@/ScrollToTop";
 import Viewport from "@/Viewport";
+import ExportButton from "@/components/ExportButton.jsx";
 import ConfigDrawer from "@/config/ConfigDrawer.jsx";
 import { useAlert, useBindings } from "@/hooks";
 import AppNav from "@/nav/AppNav";

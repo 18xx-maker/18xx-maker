@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import * as R from "ramda";
 
-import Hex from "@/Hex";
+import Hex from "@/components/Hex";
 import BorderTexts from "@/map/BorderTexts";
 import Borders from "@/map/Borders";
 import Coordinates from "@/map/Coordinates";
