@@ -53,8 +53,6 @@ const props = capability.electron
   ? {
       interface: source,
       appVersion: system.versions.app,
-      chromeVersion: system.versions.chrome,
-      electronVersion: system.versions.electron,
       osVersion: system.versions.system,
       os: system.platform,
     }

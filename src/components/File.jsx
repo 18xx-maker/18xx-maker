@@ -34,7 +34,7 @@ const File = ({ data, mime, list, filename }) => {
     return null;
   }
 
-  const eventHandler = () => trackEvent(verb, location);
+  const eventHandler = () => trackEvent("download", location);
   if (list) {
     return (
       <ListItemButton
