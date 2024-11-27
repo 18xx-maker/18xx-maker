@@ -214,25 +214,25 @@ const ExportButton = () => {
   };
 
   const handleAllPdf = () => {
-    trackEvent("exportPDF", location);
+    trackEvent("exportGame", location, { media: "pdf" });
     window.api.exportPDF(game.meta.slug, pdfItems(game, config));
     handleMenuClose();
   };
 
   const handleAllPng = () => {
-    trackEvent("exportPNG", location);
+    trackEvent("exportGame", location, { media: "png" });
     window.api.exportPNG(game.meta.slug, pngItems(game, config));
     handleMenuClose();
   };
 
   const handleSinglePdf = () => {
-    trackEvent("pdf", location);
+    trackEvent("exportComponent", location, { media: "pdf" });
     window.api.pdf(location.pathname + location.search);
     handleMenuClose();
   };
 
   const handleSinglePng = () => {
-    trackEvent("png", location);
+    trackEvent("exportComponent", location, { media: "png" });
     window.api.png(location.pathname + location.search);
     handleMenuClose();
   };
