@@ -2,7 +2,6 @@ import { memo } from "react";
 
 import * as R from "ramda";
 
-import Position from "@/Position";
 import Boomtown from "@/atoms/Boomtown";
 import Border from "@/atoms/Border";
 import Bridge from "@/atoms/Bridge";
@@ -28,6 +27,7 @@ import Tunnel from "@/atoms/Tunnel";
 import TunnelEntrance from "@/atoms/TunnelEntrance";
 import Value from "@/atoms/Value";
 import Shape from "@/atoms/shapes/Shape";
+import Position from "@/components/Position";
 import ColorContext from "@/context/ColorContext";
 import HexContext from "@/context/HexContext";
 import { useOrientation } from "@/context/OrientationContext";

@@ -1,6 +1,6 @@
 import { addIndex, findIndex, is, map, propEq } from "ramda";
 
-import Position from "@/Position";
+import Position from "@/components/Position";
 import ColorContext from "@/context/ColorContext";
 import GameMapCompanyToken from "@/tokens/GameMapCompanyToken";
 import Token from "@/tokens/Token";

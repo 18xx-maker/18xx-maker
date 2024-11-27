@@ -2,7 +2,7 @@ import { Fragment } from "react";
 
 import { addIndex, chain, map } from "ramda";
 
-import Phase from "@/Phase";
+import Phase from "@/components/Phase";
 import ColorContext from "@/context/ColorContext";
 import { useConfig } from "@/hooks";
 import CompanyToken from "@/tokens/CompanyToken";
