@@ -62,7 +62,7 @@ const getTokenData = (game, tokens, paper) => {
   let getY = (i) =>
     extraY + Math.floor((i % perPage) / perRow) * offsetY + 0.5 * totalWidth;
 
-  let perPageCalculations = perRow * perColumn;
+  const perPageCalculations = perRow * perColumn;
   let perPage = perPageCalculations > 1 ? perPageCalculations : 1;
 
   return {
@@ -79,7 +79,6 @@ const getTokenData = (game, tokens, paper) => {
     layout,
     perRow,
     perColumn,
-    perPageCalculations,
     perPage,
     rowWidth,
     columnHeight,
