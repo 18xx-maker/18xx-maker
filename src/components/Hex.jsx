@@ -28,12 +28,12 @@ import TunnelEntrance from "@/atoms/TunnelEntrance";
 import Value from "@/atoms/Value";
 import Shape from "@/atoms/shapes/Shape";
 import Position from "@/components/Position";
+import GameMapCompanyToken from "@/components/tokens/GameMapCompanyToken";
+import Token from "@/components/tokens/Token";
 import ColorContext from "@/context/ColorContext";
 import HexContext from "@/context/HexContext";
 import { useOrientation } from "@/context/OrientationContext";
 import PhaseContext from "@/context/PhaseContext";
-import GameMapCompanyToken from "@/tokens/GameMapCompanyToken";
-import Token from "@/tokens/Token";
 
 const concat = R.unapply(R.reduce(R.concat, []));
 

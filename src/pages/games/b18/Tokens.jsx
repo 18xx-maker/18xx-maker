@@ -3,10 +3,10 @@ import "@/pages/games/b18/b18.css";
 import { addIndex, compose, is, map, propEq, reject } from "ramda";
 
 import Svg from "@/components/Svg";
+import CompanyToken from "@/components/tokens/CompanyToken";
+import Token from "@/components/tokens/Token";
 import ColorContext from "@/context/ColorContext";
 import { useConfig, useGame } from "@/hooks";
-import CompanyToken from "@/tokens/CompanyToken";
-import Token from "@/tokens/Token";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
 
 const Tokens = () => {

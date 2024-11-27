@@ -1,7 +1,7 @@
 import { addIndex, map } from "ramda";
 
+import Token from "@/components/tokens/Token";
 import { useConfig } from "@/hooks";
-import Token from "@/tokens/Token";
 import { unitsToCss } from "@/util";
 
 export const getRoundTrackerData = (rounds, size, type, rotation, config) => {

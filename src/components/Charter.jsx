@@ -5,10 +5,10 @@ import { addIndex, chain, map } from "ramda";
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
 import Phase from "@/components/Phase";
+import CompanyToken from "@/components/tokens/CompanyToken";
+import Token from "@/components/tokens/Token";
 import ColorContext from "@/context/ColorContext";
 import { useConfig } from "@/hooks";
-import CompanyToken from "@/tokens/CompanyToken";
-import Token from "@/tokens/Token";
 import { multiDefaultTo, unitsToCss } from "@/util";
 
 const Charter = ({

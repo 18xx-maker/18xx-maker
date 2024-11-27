@@ -1,8 +1,8 @@
 import { findIndex, propEq } from "ramda";
 
+import MapCompanyToken from "@/components/tokens/MapCompanyToken";
+import Token from "@/components/tokens/Token";
 import { useConfig, useGame } from "@/hooks";
-import MapCompanyToken from "@/tokens/MapCompanyToken";
-import Token from "@/tokens/Token";
 import { compileCompanies, overrideCompanies } from "@/util/companies.js";
 
 // This component is in charge of loading the proper company data from the

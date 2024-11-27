@@ -8,11 +8,11 @@ import Currency from "@/components/Currency";
 import Hex from "@/components/Hex";
 import Svg from "@/components/Svg";
 import Tile from "@/components/Tile";
+import GameCompanyToken from "@/components/tokens/GameCompanyToken";
+import Token from "@/components/tokens/Token";
 import ColorContext from "@/context/ColorContext";
 import { MapOrientation } from "@/context/OrientationContext";
 import { useConfig, useGame } from "@/hooks";
-import GameCompanyToken from "@/tokens/GameCompanyToken";
-import Token from "@/tokens/Token";
 import { getFontProps, multiDefaultTo } from "@/util";
 import { getMapHex } from "@/util/map";
 

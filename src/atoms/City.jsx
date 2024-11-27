@@ -2,11 +2,11 @@ import { is } from "ramda";
 
 import Name from "@/atoms/Name";
 import Color from "@/components/Color";
+import GameMapCompanyToken from "@/components/tokens/GameMapCompanyToken";
 import CityRotateContext from "@/context/CityRotateContext";
 import ColorContext from "@/context/ColorContext";
 import { icons as iconComponents } from "@/data";
 import { useConfig, useGame } from "@/hooks";
-import GameMapCompanyToken from "@/tokens/GameMapCompanyToken";
 import { multiDefaultTo } from "@/util";
 
 const cityPaths = {

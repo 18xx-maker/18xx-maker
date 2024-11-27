@@ -1,6 +1,6 @@
+import CompanyToken from "@/components/tokens/CompanyToken";
+import Token from "@/components/tokens/Token";
 import { useConfig } from "@/hooks";
-import CompanyToken from "@/tokens/CompanyToken";
-import Token from "@/tokens/Token";
 
 const MapCompanyToken = (props) => {
   let { company } = props;
