@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.0-beta.101](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.100...v1.0.0-beta.101) (2024-11-27)
+
+
+### :tada: Features
+
+* **analytics:** add self hosted plausible analytics ([#630](https://github.com/18xx-maker/18xx-maker/issues/630)) ([7f3540b](https://github.com/18xx-maker/18xx-maker/commit/7f3540b45bac054d8730fc45e2f7b4dea9c88c41)), closes [#625](https://github.com/18xx-maker/18xx-maker/issues/625)
+
+
+### :bug: Bug Fixes
+
+* **analytics:** adding connect-src to CSP ([#631](https://github.com/18xx-maker/18xx-maker/issues/631)) ([083cd1b](https://github.com/18xx-maker/18xx-maker/commit/083cd1b12948f3b3971e4cea5cc0f68372eac79b))
+* **state:** fix the ability for the site to remember your loaded game ([#628](https://github.com/18xx-maker/18xx-maker/issues/628)) ([6a1867e](https://github.com/18xx-maker/18xx-maker/commit/6a1867ec113d57b72941b33c4bf336a3f91ee5d1))
+
 ## [1.0.0-beta.100](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.99...v1.0.0-beta.100) (2024-11-27)
 
 
