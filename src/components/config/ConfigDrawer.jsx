@@ -10,7 +10,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import makeStyles from "@mui/styles/makeStyles";
 
-import Config from "@/config/Config";
+import Config from "@/components/config/Config";
 import { useBooleanParam } from "@/util/query";
 
 const useStyles = makeStyles((theme) => ({

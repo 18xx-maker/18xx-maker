@@ -20,7 +20,7 @@ import PrintButton from "@/components/PrintButton.jsx";
 import ScrollToTop from "@/components/ScrollToTop";
 import SetSvgColors from "@/components/SetSvgColors";
 import Viewport from "@/components/Viewport";
-import ConfigDrawer from "@/config/ConfigDrawer.jsx";
+import ConfigDrawer from "@/components/config/ConfigDrawer.jsx";
 import { useAlert, useBindings } from "@/hooks";
 import AppNav from "@/nav/AppNav";
 import SideNav from "@/nav/SideNav";

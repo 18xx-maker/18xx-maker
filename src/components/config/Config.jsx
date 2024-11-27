@@ -24,8 +24,8 @@ import {
 
 import File from "@/components/File";
 import { SyntaxHighlighter, style } from "@/components/SyntaxHighlighter";
-import Input from "@/config/Input";
-import ThemePreview from "@/config/ThemePreview";
+import Input from "@/components/config/Input";
+import ThemePreview from "@/components/config/ThemePreview";
 import { companyThemes, mapThemes } from "@/data";
 import defaultConfig from "@/defaults.json";
 import { useConfig } from "@/hooks";

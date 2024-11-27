@@ -13,7 +13,7 @@ import makeStyles from "@mui/styles/makeStyles";
 
 import { assocPath, map, path, split } from "ramda";
 
-import UnitInput from "@/config/UnitInput";
+import UnitInput from "@/components/config/UnitInput";
 import { useConfig } from "@/hooks";
 import { getPath, getSchema } from "@/util/input";
 
