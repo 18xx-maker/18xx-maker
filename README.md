@@ -1,8 +1,9 @@
 # 18xx Maker
 
-[![chat](https://img.shields.io/discord/1302895372749770752?logo=discord&logoColor=%23fff&color=%235865F2)](https://discord.gg/gcYvAjYYfw)
+[![analytics](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fanalytics.18xx-maker.com%2Fvisitors&query=%24.results%5B0%5D.metrics%5B0%5D&logo=plausibleanalytics&logoColor=%23fff&label=analytics&color=%235850EC)](https://analytics.18xx-maker.com/)
 [![build](https://img.shields.io/github/check-runs/18xx-maker/18xx-maker/main?logo=github&logoColor=%23fff&label=build)](https://github.com/18xx-maker/18xx-maker/actions/workflows/test.yml?query=branch%3Amain)
 [![coveralls](https://img.shields.io/coverallsCoverage/github/18xx-maker/18xx-maker?logo=coveralls&logoColor=%23fff)](https://coveralls.io/github/18xx-maker/18xx-maker)
+[![chat](https://img.shields.io/discord/1302895372749770752?logo=discord&logoColor=%23fff&color=%235865F2)](https://discord.gg/gcYvAjYYfw)
 [![license](https://img.shields.io/github/license/18xx-maker/18xx-maker?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNyAyMGwxMCAwIi8%2BPHBhdGggZD0iTTYgNmw2IC0xbDYgMSIvPjxwYXRoIGQ9Ik0xMiAzbDAgMTciLz48cGF0aCBkPSJNOSAxMmwtMyAtNmwtMyA2YTMgMyAwIDAgMCA2IDAiLz48cGF0aCBkPSJNMjEgMTJsLTMgLTZsLTMgNmEzIDMgMCAwIDAgNiAwIi8%2BPC9zdmc%2B&logoColor=%23fff&color=%23750014)](https://github.com/18xx-maker/18xx-maker?tab=MIT-1-ov-file#readme)
 
 [![app](https://img.shields.io/github/v/release/18xx-maker/18xx-maker?include_prereleases&sort=semver&display_name=tag&logo=electron&logoColor=%23fff&label=app&color=%2347848F)](https://github.com/18xx-maker/18xx-maker/releases)
