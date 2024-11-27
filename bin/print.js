@@ -8,8 +8,8 @@ import { chromium } from "playwright";
 
 import { compose, filter, map } from "ramda";
 
+import { setup } from "../src/cli/util.js";
 import defaults from "../src/defaults.json" with { type: "json" };
-import { setup } from "../src/render/util.js";
 
 let config = {};
 if (fs.existsSync(path.resolve("../src/config.json"))) {

@@ -28,8 +28,8 @@ import {
   uniq,
 } from "ramda";
 
+import { setup, setupB18 } from "../src/cli/util.js";
 import defaultConfig from "../src/defaults.json" with { type: "json" };
-import { setup, setupB18 } from "../src/render/util.js";
 
 let customConfig = {};
 if (fs.existsSync(path.resolve("../src/config.json"))) {
@@ -91,10 +91,10 @@ const server = app.listen(9000);
     (mod) => mod.default,
   );
 
-  const gutil = await import("../src/util.js");
+  const gutil = await import("../src/util/index.js");
   const getTile = gutil.getTile(tiles, game.tiles || {});
 
-  const { getMapData } = await import("../src/map/util.js");
+  const { getMapData } = await import("../src/util/map.js");
   let mapData = getMapData(game, config.coords, 100, 0);
 
   // Test games:
@@ -271,7 +271,7 @@ const server = app.listen(9000);
   });
 
   console.log(`Printing ${bname}/${folder}/${id}/Market.png`);
-  const mutil = await import("../src/market/util.js");
+  const mutil = await import("../src/util/market.js");
   let marketData = mutil.getMarketData(game.stock, config);
   let marketWidth = Math.ceil((marketData.totalWidth + 50) * 0.96);
   let marketHeight = Math.ceil((marketData.totalHeight + 50) * 0.96);

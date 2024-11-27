@@ -1,6 +1,7 @@
 import { length, max, reduce } from "ramda";
 
-import { unitsToCss } from "@/util";
+// TODO: Relative import since this is used in the CLI
+import { unitsToCss } from "./index.js";
 
 export const getMaxLength = reduce((acc, row) => {
   return max(acc, length(row));
