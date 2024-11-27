@@ -1,4 +1,4 @@
-import "@/pages/games/b18/b18.css";
+import "@/components/pages/games/b18/b18.css";
 
 import { addIndex, compose, is, map, propEq, reject } from "ramda";
 

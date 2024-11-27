@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 
 import { useConfig, useGame } from "@/hooks";
 
-import "@/pages/games/Tiles.css";
+import "@/components/pages/games/Tiles.css";
 
 import {
   addIndex,

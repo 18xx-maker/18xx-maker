@@ -18,7 +18,7 @@ import makeStyles from "@mui/styles/makeStyles";
 
 import { chain, compose, map, prop, sortBy, values } from "ramda";
 
-import GameRow from "@/pages/load/GameRow";
+import GameRow from "@/components/pages/load/GameRow";
 import { createAlert, deleteGame, loadSummaries } from "@/state";
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
