@@ -1,7 +1,7 @@
 import { redirect } from "react-router";
 
 import Svg from "@/components/Svg";
-import Map from "@/map/Map";
+import Map from "@/components/map/Map";
 import { getMapData } from "@/util/map";
 
 const MapSingle = ({ game, config, variation }) => {

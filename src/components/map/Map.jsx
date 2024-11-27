@@ -3,14 +3,14 @@ import { useMemo } from "react";
 import * as R from "ramda";
 
 import Hex from "@/components/Hex";
-import BorderTexts from "@/map/BorderTexts";
-import Borders from "@/map/Borders";
-import Coordinates from "@/map/Coordinates";
-import Lines from "@/map/Lines";
-import MapMarket from "@/map/MapMarket";
-import MapPlayers from "@/map/MapPlayers";
-import MapRoundTracker from "@/map/MapRoundTracker";
-import Title from "@/map/Title";
+import BorderTexts from "@/components/map/BorderTexts";
+import Borders from "@/components/map/Borders";
+import Coordinates from "@/components/map/Coordinates";
+import Lines from "@/components/map/Lines";
+import MapMarket from "@/components/map/MapMarket";
+import MapPlayers from "@/components/map/MapPlayers";
+import MapRoundTracker from "@/components/map/MapRoundTracker";
+import Title from "@/components/map/Title";
 import { multiDefaultTo } from "@/util";
 import { getMapData, toAlpha, toCoords } from "@/util/map";
 
