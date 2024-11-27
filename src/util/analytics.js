@@ -8,6 +8,8 @@ const DEVLOG = false;
 const initOptions = {
   domain: "18xx-maker.com",
   apiHost: "https://analytics.18xx-maker.com",
+  // We need this to allow plausible to accept our events in the app
+  trackLocalhost: true,
 };
 
 const plausible = Plausible(initOptions);
