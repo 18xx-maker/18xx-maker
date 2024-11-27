@@ -168,7 +168,7 @@ const components = {
   },
 };
 
-const mds = import.meta.glob("./docs/**/*.md", {
+const mds = import.meta.glob("../../docs/**/*.md", {
   eager: true,
   import: "default",
   query: "?raw",
@@ -183,7 +183,7 @@ const Docs = () => {
 
   const pathname = location.pathname.replace(/\/docs\/?/, "");
   const file = isEmpty(pathname) ? "index" : pathname;
-  const source = mds[`./docs/${file}.${language}.md`];
+  const source = mds[`../../docs/${file}.${language}.md`];
 
   return (
     <Container maxWidth="md">
