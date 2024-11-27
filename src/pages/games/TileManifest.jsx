@@ -2,14 +2,14 @@ import { useNavigate } from "react-router";
 
 import { addIndex, ascend, keys, map, sortWith } from "ramda";
 
-import Tile from "@/Tile";
 import Svg from "@/components/Svg";
+import Tile from "@/components/Tile";
 import ColorContext from "@/context/ColorContext";
 import { tiles } from "@/data";
 import { useGame } from "@/hooks";
 import { getTile } from "@/util";
 
-import "@/TileManifest.css";
+import "@/components/TileManifest.css";
 
 const getCol = (tile) => {
   switch (tile.color) {

@@ -2,10 +2,10 @@ import "@/cards/private.css";
 
 import { defaultTo, intersperse, is, map, max, min, reduce } from "ramda";
 
-import Tile from "@/Tile";
 import Icon from "@/atoms/Icon";
 import Hex from "@/components/Hex";
 import Svg from "@/components/Svg";
+import Tile from "@/components/Tile";
 import ColorContext from "@/context/ColorContext";
 import { MapOrientation } from "@/context/OrientationContext";
 import { useConfig, useGame } from "@/hooks";

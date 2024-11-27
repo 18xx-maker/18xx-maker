@@ -20,9 +20,9 @@ import {
   values,
 } from "ramda";
 
-import Tile from "@/Tile";
-import TileFilters from "@/TileFilters";
 import Svg from "@/components/Svg";
+import Tile from "@/components/Tile";
+import TileFilters from "@/components/TileFilters";
 import { tiles } from "@/data";
 import { useIntParam, useRangeParam, useStringParam } from "@/util/query";
 
