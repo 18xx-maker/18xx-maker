@@ -10,8 +10,6 @@ import { tiles as tileDefs } from "@/data";
 import { useGame } from "@/hooks";
 import { getTile } from "@/util";
 
-import "@/components/pages/games/b18/b18.css";
-
 const ROTATIONS = [0, 60, 120, 180, 240, 300];
 
 const Tiles = () => {

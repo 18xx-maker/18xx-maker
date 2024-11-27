@@ -1,7 +1,5 @@
 import { useParams } from "react-router";
 
-import "@/components/pages/games/b18/b18.css";
-
 import { addIndex, compose, concat, is, map, max, propEq, reject } from "ramda";
 
 import Svg from "@/components/Svg";
