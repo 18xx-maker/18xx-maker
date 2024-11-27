@@ -80,7 +80,7 @@ const Tiles = () => {
   const [color, setColor] = useStringParam("color", "all");
   const [id, setId] = useStringParam("id", "");
   const [includes, setIncludes] = useStringParam("includes", "all");
-  const [revenue, setRevenue, blurRevenue] = useRangeParam("revenue", revenues);
+  const [revenue, setRevenue] = useRangeParam("revenue", revenues);
 
   const filteredTiles = useMemo(
     () =>
@@ -163,7 +163,6 @@ const Tiles = () => {
           setIncludes,
           revenue,
           setRevenue,
-          blurRevenue,
           revenues,
         }}
       />

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { Link as RouterLink, useMatch } from "react-router";
+import { Link as RouterLink, useLocation, useMatch } from "react-router";
 
 import RulesIcon from "@mui/icons-material/Gavel";
 import LicenseIcon from "@mui/icons-material/Lock";
@@ -32,6 +32,7 @@ import { addIndex, is, map } from "ramda";
 import File from "@/components/File";
 import { useGame } from "@/hooks/game.js";
 import { refreshGame } from "@/state";
+import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
 import { useBooleanParam, useIntParam } from "@/util/query.js";
 
@@ -65,6 +66,7 @@ const GameSectionButton = ({ section, disabled }) => {
 const GameNav = () => {
   const classes = useStyles();
   const { t } = useTranslation();
+  const location = useLocation();
   const game = useGame();
   const dispatch = useDispatch();
   const match = useMatch("/games/:slug/:tab");
@@ -88,6 +90,7 @@ const GameNav = () => {
 
   const refreshHandler = (event) => {
     event.preventDefault();
+    trackEvent("refresh", location);
     dispatch(refreshGame());
   };
 

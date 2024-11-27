@@ -15,6 +15,7 @@ import {
 
 import { compose } from "ramda";
 
+import Analytics from "@/components/Analytics";
 import ExportButton from "@/components/ExportButton.jsx";
 import PrintButton from "@/components/PrintButton.jsx";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -242,6 +243,7 @@ body {
           <style>{printCss}</style>
         </ThemeProvider>
       </StyledEngineProvider>
+      <Analytics />
     </div>
   );
 };

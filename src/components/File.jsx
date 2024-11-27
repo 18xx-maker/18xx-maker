@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router";
 
 import DownloadIcon from "@mui/icons-material/GetApp";
 import Button from "@mui/material/Button";
@@ -7,10 +8,12 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
+import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
 
 const File = ({ data, mime, list, filename }) => {
   const { t } = useTranslation();
+  const location = useLocation();
   const [dataURL, setDataURL] = useState(null);
 
   const verb = capability.electron ? "save" : "download";
@@ -31,9 +34,15 @@ const File = ({ data, mime, list, filename }) => {
     return null;
   }
 
+  const eventHandler = () => trackEvent(verb, location);
   if (list) {
     return (
-      <ListItemButton component="a" download={filename} href={dataURL}>
+      <ListItemButton
+        onClick={eventHandler}
+        component="a"
+        download={filename}
+        href={dataURL}
+      >
         <ListItemIcon>
           <DownloadIcon color="primary" />
         </ListItemIcon>
@@ -45,6 +54,7 @@ const File = ({ data, mime, list, filename }) => {
   return (
     <Button
       download={filename}
+      onClick={eventHandler}
       startIcon={<DownloadIcon />}
       variant="contained"
       color="primary"
