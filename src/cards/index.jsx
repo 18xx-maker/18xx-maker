@@ -2,7 +2,6 @@ import "@/cards/card.css";
 
 import { addIndex, chain, clone, map, prop, range, splitEvery } from "ramda";
 
-import PageSetup from "@/PageSetup";
 import Pins from "@/Pins";
 import Svg from "@/Svg";
 import Number from "@/cards/Number";
@@ -10,6 +9,7 @@ import Private from "@/cards/Private";
 import Share from "@/cards/Share";
 import Train from "@/cards/Train";
 import { getCardData } from "@/cards/util";
+import PageSetup from "@/components/PageSetup";
 import { useConfig, useGame } from "@/hooks";
 import { fillArray } from "@/util";
 import { maxPlayers } from "@/util.js";

@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router";
 
-import PageSetup from "@/PageSetup";
 import Charter from "@/components/Charter";
+import PageSetup from "@/components/PageSetup";
 import { useConfig, useGame } from "@/hooks";
 import { getCharterData } from "@/util";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
