@@ -4,12 +4,11 @@ import { RouterProvider, createMemoryRouter } from "react-router";
 
 import { keys, map, sortBy } from "ramda";
 
-import Svg from "@/Svg";
+import Svg from "@/components/Svg";
 import { companyThemes, mapThemes } from "@/data";
 import { initialState, rootReducer } from "@/state";
 
-import "@/index.css";
-import "@/fonts.css";
+import "@/styles/index.css";
 
 const createItems = (themes) =>
   map(
