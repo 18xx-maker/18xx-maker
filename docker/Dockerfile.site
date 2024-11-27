@@ -22,4 +22,4 @@ WORKDIR /usr/share/nginx/html
 
 COPY docker/default.conf /etc/nginx/conf.d/default.conf
 
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist/site /usr/share/nginx/html
