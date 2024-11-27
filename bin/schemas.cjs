@@ -5,7 +5,7 @@ const path = require("path");
 const util = require("util");
 const pkg = require("../package.json");
 const { program } = require("commander");
-const validate = require("../src/schemas/index.cjs");
+const validate = require("../src/cli/validate.cjs");
 
 const getShortSchemaName = (id) => {
   let results = id.match(/([a-z]+)\.schema\.json$/);
@@ -23,7 +23,7 @@ const displayResult = ({ valid, error, validationErrors, file, id }) => {
   const dirname = path.relative(process.cwd(), path.dirname(file));
 
   process.stdout.write(
-    `${chalk.gray(name)} ${color(result)} ${basename} ${chalk.gray(dirname)}\n`,
+    `${color(result)} ${chalk.cyan(name)} ${basename} ${chalk.gray(dirname)}\n`,
   );
 
   if (error || validationErrors) {

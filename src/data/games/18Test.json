@@ -925,9 +925,17 @@
         "color": "plain",
         "cities": [
           {
+            "rotation": 45,
             "name": {
+              "rotation": 45,
               "name": "Boston"
-            }
+            },
+            "companies": [
+              {
+                "rotation": 45,
+                "label": "BLRR"
+              }
+            ]
           }
         ],
         "hexes": ["B12"]

@@ -14,6 +14,8 @@ export const useBindings = () => {
 
   const handleKeyDown = useCallback(
     (event) => {
+      const tag = event.target.tagName;
+      if (tag === "TEXTAREA" || tag === "INPUT") return;
       if (event.altKey || event.ctrlKey || event.metaKey) return;
 
       switch (event.key) {

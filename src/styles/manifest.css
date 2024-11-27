@@ -1,0 +1,56 @@
+.TileManifest {
+  display: grid;
+  grid-auto-rows: 0.5in;
+  grid-auto-flow: row dense;
+
+  /* stylelint-disable declaration-block-no-redundant-longhand-properties */
+  grid-template-areas: "title title title title";
+  grid-template-rows: 0.5in;
+  grid-template-columns: repeat(auto-fill, calc((8in - 5px) / 4));
+  /* stylelint-enable declaration-block-no-redundant-longhand-properties */
+
+  text-align: left;
+  width: 768px;
+  margin: 0 auto 0.5in;
+  font-family: sans-serif;
+  font-weight: normal;
+}
+
+.TileManifest--Title {
+  grid-area: title;
+  line-height: 0.5in;
+  font-size: 0.25in;
+  text-align: center;
+}
+
+.TileManifest--Tile {
+  display: flex;
+  justify-content: center;
+  line-height: 0.5in;
+  box-sizing: border-box;
+  page-break-inside: avoid;
+  border-width: 1px 0 0;
+  border-color: #999;
+  border-style: solid;
+}
+
+.TileManifest--Image {
+  height: 0.5in;
+  width: 0.5in;
+  box-sizing: border-box;
+}
+
+.TileManifest--Id {
+  width: calc(((8in - 5px) / 4) - 1in);
+  font-size: 0.16in;
+  text-align: right;
+  padding-right: 0.1in;
+  box-sizing: border-box;
+}
+
+.TileManifest--Quantity {
+  width: 0.5in;
+  padding-left: 0.1in;
+  font-size: 0.16in;
+  box-sizing: border-box;
+}
