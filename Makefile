@@ -40,6 +40,8 @@ docker/clean:
 	@echo "Removing docker images"
 	@docker image rm -f "18xx-maker/site"
 	@docker image rm -f "18xx-maker/develop"
+
+docker/rm:
 	@echo "Removing docker volume"
 	@docker volume rm -f 18xx-maker
 

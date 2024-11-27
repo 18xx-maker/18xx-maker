@@ -4,7 +4,6 @@ import { Link, useMatch } from "react-router";
 import OverridesIcon from "@mui/icons-material/Autorenew";
 import AutoPositioningIcon from "@mui/icons-material/CenterFocusStrong";
 import SchemasIcon from "@mui/icons-material/Check";
-import DevelopingIcon from "@mui/icons-material/Code";
 import FilesIcon from "@mui/icons-material/FileOpen";
 import DieIcon from "@mui/icons-material/Filter";
 import HelpIcon from "@mui/icons-material/Help";
@@ -49,12 +48,6 @@ const DocsNav = () => {
           desc={t("docs.files.description")}
           path="files"
           icon={<FilesIcon />}
-        />
-        <Item
-          name={t("docs.developing.title")}
-          desc={t("docs.developing.description")}
-          path="developing"
-          icon={<DevelopingIcon />}
         />
         <Item
           name={t("docs.translation.title")}
