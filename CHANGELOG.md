@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.105](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.104...v1.0.0-beta.105) (2024-11-27)
+
+
+### :bug: Bug Fixes
+
+* **docker:** proper directory to copy site from ([#639](https://github.com/18xx-maker/18xx-maker/issues/639)) ([3e85dea](https://github.com/18xx-maker/18xx-maker/commit/3e85deab9655a8e02963c8e30fac987cf6a0df30))
+
 ## [1.0.0-beta.104](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.103...v1.0.0-beta.104) (2024-11-27)
 
 
