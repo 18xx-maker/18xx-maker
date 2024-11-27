@@ -1,19 +1,18 @@
-#!/usr/bin/env node
 const Ajv = require("ajv");
 const ajv = new Ajv({ allErrors: true });
 
 const fs = require("node:fs");
 
 // Load Defs
-const tileDefs = require("./tiles.defs.json");
+const tileDefs = require("../schemas/tiles.defs.json");
 
 // Load Schemas
-const companiesSchema = require("./companies.schema.json");
-const configSchema = require("./config.schema.json");
-const gameSchema = require("./game.schema.json");
-const publishersSchema = require("./publishers.schema.json");
-const themeSchema = require("./theme.schema.json");
-const tilesSchema = require("./tiles.schema.json");
+const companiesSchema = require("../schemas/companies.schema.json");
+const configSchema = require("../schemas/config.schema.json");
+const gameSchema = require("../schemas/game.schema.json");
+const publishersSchema = require("../schemas/publishers.schema.json");
+const themeSchema = require("../schemas/theme.schema.json");
+const tilesSchema = require("../schemas/tiles.schema.json");
 
 // Validate and load schemas
 ajv.addSchema([
