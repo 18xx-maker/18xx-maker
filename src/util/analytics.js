@@ -49,14 +49,14 @@ export const gatherPageviewData = (location) => {
 const system = capability.electron ? window.api.loadPlatformAndVersions() : {};
 const props = capability.electron
   ? {
-      source,
+      interface: source,
       appVersion: system.versions.app,
       chromeVersion: system.versions.chrome,
       electronVersion: system.versions.electron,
       osVersion: system.versions.system,
       os: system.platform,
     }
-  : { source };
+  : { interface: source };
 
 export const trackEvent = (eventName, location, eventOptions = {}) => {
   const eventData = gatherPageviewData(location);
