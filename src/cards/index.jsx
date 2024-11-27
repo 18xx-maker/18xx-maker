@@ -6,12 +6,12 @@ import Number from "@/cards/Number";
 import Private from "@/cards/Private";
 import Share from "@/cards/Share";
 import Train from "@/cards/Train";
-import { getCardData } from "@/cards/util";
 import PageSetup from "@/components/PageSetup";
 import Pins from "@/components/Pins";
 import Svg from "@/components/Svg";
 import { useConfig, useGame } from "@/hooks";
 import { fillArray, maxPlayers } from "@/util";
+import { getCardData } from "@/util/cards";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
 
 const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {

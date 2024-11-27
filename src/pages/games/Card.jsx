@@ -6,8 +6,8 @@ import Number from "@/cards/Number";
 import Private from "@/cards/Private";
 import Share from "@/cards/Share";
 import Train from "@/cards/Train";
-import { getCardData } from "@/cards/util";
 import { useConfig, useGame } from "@/hooks";
+import { getCardData } from "@/util/cards";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
 
 import "@/cards/card.css";
