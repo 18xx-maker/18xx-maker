@@ -16,6 +16,15 @@ written in json, display them, and render them for printing. The original intent
 of this site was for personal PnP projects, but the purpose has shifted over
 time to prototyping new games.
 
+This software is released under the
+[MIT](https://github.com/18xx-maker/18xx-maker?tab=MIT-1-ov-file#readme) open
+source software license. The code is available on
+[GitHub](https://github.com). We use GitHub actions, releases, and packages to
+handle CI, app hosting, and docker image hosting. We use
+[Netlify](https://netlify.com) to build and serve the
+[website](https://18xx-maker.com) and the
+[storybook](https://storybook.18xx-maker.com).
+
 This project is written in [React](https://react.dev/) with
 [Redux](https://redux.js.org/) and [React Router](https://reactrouter.com/). It
 uses [Vite](https://vite.dev/) as a build framework and
@@ -26,44 +35,40 @@ created using [Electron](https://www.electronjs.org/). The ui was made with
 [Playwright](https://playwright.dev/) for both testing and running a headlines
 chrome in scripts.
 
-This software is released under the
-[MIT](https://github.com/18xx-maker/18xx-maker?tab=MIT-1-ov-file#readme) open
-source software license. The code is available on
-[GitHub](https://github.com). We use GitHub actions, releases, and packages to
-handle CI, app hosting, and docker image hosting. We use
-[Netlify](https://netlify.com) to build and serve the
-[website](https://18xx-maker.com) and the
-[storybook](https://storybook.18xx-maker.com).
+## Discord
+
+We have a [discord for 18xx-Maker](https://discord.gg/gcYvAjYYfw). Please use it
+for any development chat or support!
 
 ## License
 
 The code of this project is licensed under the [MIT
 License](https://github.com/18xx-maker/18xx-maker/blob/main/LICENSE) but the
 games contained within are not covered by this. The games are presented with no
-license from 18xx-Maker with the permission of the publisher/designers. They
-have given us permission to include their game in this repo so that you can make
-print and play copies for your own personal use. If you need to inquire about
-the license for a particular game you need to get in contact with the publisher
-and/or designer.
+license from 18xx-Maker with the permission of the publisher/designers.
 
-## Chat
+> [!IMPORTANT]
+> Do not use this app to print games that you don't have a license to
+> print. Please support our 18xx designers, developers, and publishers.
 
-We have a [discord for 18xx-Maker](https://discord.gg/gcYvAjYYfw). Please use it
-for any development chat or support!
+All games included in this repository are included with permission from the
+publisher and/or designer. You can make print and play copies for your own
+personal use. Please thank them for their support of Print and Play! If you need
+to inquire about the license for a particular game you need to get in contact
+with the publisher and/or designer.
 
-## Usage and Documentation
+## Documentation
 
-Please check out the [documentation](https://18xx-maker.com/docs/) for
-information about how to use this app to prototype your own 18xx games.
+Documentation for how to use 18xx Maker to print or develop new games is
+available on the [main site](https://18xx-maker.com/docs).
 
-## [Docker](https://github.com/orgs/18xx-maker/packages?ecosystem=container)
+## Development
 
-We create two docker images of the [production
-site](https://github.com/18xx-maker/18xx-maker/pkgs/container/site) and a
-[development
-build](https://github.com/18xx-maker/18xx-maker/pkgs/container/develop). You can
-read more about how to use them in the [developing
-documentation](https://18xx-maker.com/docs/developing).
+Please check out
+[DEVELOPMENT.md](https://github.com/18xx-maker/18xx-maker/blob/main/DEVELOPMENT.md)
+for information on developing and contributing to this application! The
+[discord](https://discord.gg/gcYvAjYYfw) is also a great place to come if you
+need advice or help.
 
 ## Donation
 
@@ -71,89 +76,3 @@ I've been asked about donation buttons; if you find this software useful to you
 and would like to donate money towards its development you can do so via
 [paypal](https://paypal.me/kelsin), [square cash](https://cash.me/$kelsin), or
 [venmo](https://account.venmo.com/u/kelsin13).
-
-## Development
-
-### Scripts
-
-These are the package.json scripts that you should know:
-
-```shell
-# Start the development versions of the site, app, or storybook site:
-pnpm start
-pnpm start:app
-pnpm start:sb
-
-# CLI to print a game and create a b18 box
-pnpm print
-pnpm b18
-```
-
-The following are all run for you on relevant files as part of git commit hooks,
-and in CI. They are here if you want or need to run them manually:
-
-```shell
-# Run the tests in watch mode
-pnpm test
-
-# Run all fixing linters
-pnpm fix
-
-# Run schema validation on all data json files:
-pnpm validate
-
-# Optimize SVGs
-pnpm svgo
-```
-
-Finally there are the commands to preview and build the production versions of
-the site, app and storybook site:
-
-```shell
-# Preview the production builds
-pnpm preview
-pnpm preview:app
-
-# Build the production site, electron app, or storybook site:
-pnpm build
-pnpm build:app
-pnpm build:sb
-```
-
-### File Layout
-
-At a high level the folder structure looks like:
-
-```shell
-.
-├── bin               # CLI scripts
-├── dist              # All built sites / apps end up in here
-│   ├── app           # The built electron apps
-│   ├── main          # The built esbuild for the main electron process
-│   ├── preload       # The built esbuild for the preload file
-│   ├── site          # The built esbuild for the main 18xx Maker site
-│   ├── sb            # The built esbuild for the storybook site
-│   └── renderer      # The built esbuild for the preload file
-├── docker            # Stuff only related to docker builds
-├── electron          # Electron related src files
-│   ├── assets        # Files that we need when building electorn
-│   ├── main          # The src for the electron main process
-│   └── preload       # The preload file injected into the render process
-├── public            # Files that are just served statically
-├── src
-│   ├── cli           # CLI related files
-│   ├── components    # React Components
-│   ├── context       # React Contexts
-│   ├── data          # Data files that are built into the app (games, icons, logos, etc)
-│   ├── defaults.json # Default config file values
-│   ├── docs          # All help page markdowns
-│   ├── hooks         # React hooks
-│   ├── index.jsx     # React root of the project
-│   ├── locales       # Localization files
-│   ├── routes.jsx    # React Router route definitions
-│   ├── schemas       # JSON schemas for all 18xx Maker data files
-│   ├── state         # Redux state store related files
-│   ├── styles        # All css files
-│   └── util          # Utility helpers
-└── tests             # Any e2e testing or test helper files
-```

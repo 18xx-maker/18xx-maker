@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import ReactMarkdown from "react-markdown";
 import { Link as RouterLink, useLocation } from "react-router";
 
 import Container from "@mui/material/Container";
@@ -10,6 +9,7 @@ import makeStyles from "@mui/styles/makeStyles";
 
 import { dissoc, isEmpty, startsWith } from "ramda";
 
+import Markdown from "@/components/Markdown";
 import { SyntaxHighlighter, style } from "@/components/SyntaxHighlighter";
 import capability from "@/util/capability";
 
@@ -188,7 +188,7 @@ const Docs = () => {
   return (
     <Container maxWidth="md">
       <Paper data-testid="docs" elevation={5} className={classes.page}>
-        <ReactMarkdown components={components}>{source}</ReactMarkdown>
+        <Markdown components={components}>{source}</Markdown>
       </Paper>
     </Container>
   );
