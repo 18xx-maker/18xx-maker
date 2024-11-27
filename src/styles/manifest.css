@@ -2,13 +2,13 @@
   display: grid;
   grid-auto-rows: 0.5in;
   grid-auto-flow: row dense;
-  /* stylelint-disable declaration-block-no-redundant-longhand-properties */
 
-  /* grid-templte doesn't support repeat */
+  /* stylelint-disable declaration-block-no-redundant-longhand-properties */
   grid-template-areas: "title title title title";
   grid-template-rows: 0.5in;
   grid-template-columns: repeat(auto-fill, calc((8in - 5px) / 4));
   /* stylelint-enable declaration-block-no-redundant-longhand-properties */
+
   text-align: left;
   width: 768px;
   margin: 0 auto 0.5in;
