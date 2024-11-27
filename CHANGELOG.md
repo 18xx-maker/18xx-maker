@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.102](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.101...v1.0.0-beta.102) (2024-11-27)
+
+
+### :bug: Bug Fixes
+
+* **analytics:** source doesn't work with plausible, change to interface ([#632](https://github.com/18xx-maker/18xx-maker/issues/632)) ([770c88a](https://github.com/18xx-maker/18xx-maker/commit/770c88a5f6ae313a83f0760afbb9ffd8b931e223))
+
 ## [1.0.0-beta.101](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.100...v1.0.0-beta.101) (2024-11-27)
 
 
