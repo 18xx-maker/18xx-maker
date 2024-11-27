@@ -22,6 +22,7 @@ import {
   split,
 } from "ramda";
 
+import File from "@/components/File";
 import { SyntaxHighlighter, style } from "@/components/SyntaxHighlighter";
 import Input from "@/config/Input";
 import ThemePreview from "@/config/ThemePreview";
@@ -29,7 +30,6 @@ import { companyThemes, mapThemes } from "@/data";
 import defaultConfig from "@/defaults.json";
 import { useConfig } from "@/hooks";
 import schema from "@/schemas/config.schema.json";
-import File from "@/util/File";
 
 export const getPath = split(".");
 export const getSchemaPath = compose(

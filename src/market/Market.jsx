@@ -1,5 +1,6 @@
 import { addIndex, chain, concat, map, reverse } from "ramda";
 
+import Color from "@/components/Color";
 import Legend from "@/components/Legend";
 import Cell from "@/market/Cell";
 import Ledges from "@/market/Ledges";
@@ -7,7 +8,6 @@ import MarketRoundTracker from "@/market/MarketRoundTracker";
 import Par from "@/market/Par";
 import { getParData } from "@/market/util";
 import { multiDefaultTo } from "@/util";
-import Color from "@/util/Color";
 
 const Market = ({ data, game, config, title, displayTitle }) => {
   let cells = [];

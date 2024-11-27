@@ -2,10 +2,10 @@ import "@/cards/train.css";
 
 import { defaultTo, find, is, map } from "ramda";
 
+import Color from "@/components/Color";
+import Currency from "@/components/Currency";
 import { trainImages } from "@/data";
 import { useConfig } from "@/hooks";
-import Color from "@/util/Color";
-import Currency from "@/util/Currency";
 
 const ordinal = (num) => {
   switch (num) {

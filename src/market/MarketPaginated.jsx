@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router";
 
+import Paginate from "@/components/Paginate";
 import Market from "@/market/Market";
 import { getMarketData } from "@/market/util";
-import Paginate from "@/util/Paginate";
 
 const MarketPaginated = ({ config, game }) => {
   const navigate = useNavigate();

@@ -2,14 +2,14 @@ import { Fragment } from "react";
 
 import { addIndex, chain, map } from "ramda";
 
+import Color from "@/components/Color";
+import Currency from "@/components/Currency";
 import Phase from "@/components/Phase";
 import ColorContext from "@/context/ColorContext";
 import { useConfig } from "@/hooks";
 import CompanyToken from "@/tokens/CompanyToken";
 import Token from "@/tokens/Token";
 import { multiDefaultTo, unitsToCss } from "@/util";
-import Color from "@/util/Color";
-import Currency from "@/util/Currency";
 
 const Charter = ({
   name,

@@ -29,9 +29,9 @@ import makeStyles from "@mui/styles/makeStyles";
 
 import { addIndex, is, map } from "ramda";
 
+import File from "@/components/File";
 import { useGame } from "@/hooks/game.js";
 import { refreshGame } from "@/state";
-import File from "@/util/File";
 import capability from "@/util/capability";
 import { useBooleanParam, useIntParam } from "@/util/query.js";
 

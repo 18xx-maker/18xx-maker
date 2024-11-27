@@ -1,11 +1,11 @@
 import { addIndex, findIndex, is, map, propEq } from "ramda";
 
+import Color from "@/components/Color";
+import Currency from "@/components/Currency";
 import Position from "@/components/Position";
 import ColorContext from "@/context/ColorContext";
 import GameMapCompanyToken from "@/tokens/GameMapCompanyToken";
 import Token from "@/tokens/Token";
-import Color from "@/util/Color";
-import Currency from "@/util/Currency";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
 
 const arrows = {

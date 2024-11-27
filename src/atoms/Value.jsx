@@ -1,8 +1,8 @@
+import Color from "@/components/Color";
+import Currency, { format } from "@/components/Currency";
 import RotateContext from "@/context/RotateContext";
 import { useConfig, useGame } from "@/hooks";
 import { multiDefaultTo } from "@/util";
-import Color from "@/util/Color";
-import Currency, { format } from "@/util/Currency";
 
 const Value = ({
   value,

@@ -1,9 +1,9 @@
 import { defaultTo } from "ramda";
 
 import Text from "@/atoms/shapes/Text";
+import Color from "@/components/Color";
 import { useGame } from "@/hooks";
 import { getFontProps, multiDefaultTo } from "@/util";
-import Color from "@/util/Color";
 
 const Circle = (props) => {
   let {

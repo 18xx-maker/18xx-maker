@@ -1,6 +1,6 @@
+import Color from "@/components/Color";
 import { useGame } from "@/hooks";
 import { multiDefaultTo } from "@/util";
-import Color from "@/util/Color";
 
 const RouteBonus = ({
   value,

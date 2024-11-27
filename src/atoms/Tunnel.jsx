@@ -1,6 +1,6 @@
 import Triangle from "@/atoms/shapes/Triangle";
+import Currency from "@/components/Currency";
 import PhaseContext from "@/context/PhaseContext";
-import Currency from "@/util/Currency";
 
 const Tunnel = (props) => {
   let { cost } = props;

@@ -18,6 +18,7 @@ import { compose } from "ramda";
 import ExportButton from "@/components/ExportButton.jsx";
 import PrintButton from "@/components/PrintButton.jsx";
 import ScrollToTop from "@/components/ScrollToTop";
+import SetSvgColors from "@/components/SetSvgColors";
 import Viewport from "@/components/Viewport";
 import ConfigDrawer from "@/config/ConfigDrawer.jsx";
 import { useAlert, useBindings } from "@/hooks";
@@ -31,7 +32,6 @@ import {
   createSetGame,
   createUpdate,
 } from "@/state";
-import SetSvgColors from "@/util/SetSvgColors";
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import * as opfs from "@/util/opfs";

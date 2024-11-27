@@ -1,9 +1,9 @@
 import { defaultTo } from "ramda";
 
+import Color from "@/components/Color";
 import CityRotateContext from "@/context/CityRotateContext";
 import RotateContext from "@/context/RotateContext";
 import { icons, logos } from "@/data";
-import Color from "@/util/Color";
 
 const Token = ({
   logo, // The SVG logo to display on this token.

@@ -1,7 +1,7 @@
 import Name from "@/atoms/Name";
+import Color from "@/components/Color";
 import { useConfig, useGame } from "@/hooks";
 import { multiDefaultTo } from "@/util";
-import Color from "@/util/Color";
 
 const cityPaths = {
   cityPath: "M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30",

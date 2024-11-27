@@ -1,7 +1,7 @@
 import { defaultTo } from "ramda";
 
 import Name from "@/atoms/Name";
-import Color from "@/util/Color";
+import Color from "@/components/Color";
 
 const MediumCity = ({
   border,
