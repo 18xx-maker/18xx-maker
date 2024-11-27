@@ -239,6 +239,10 @@
       "3": "Export games as Board18 game boxes."
     }
   },
+  "analytics": {
+    "title": "Analytics",
+    "description": "18xx Maker uses a self hosted version of <plausible>Plausible</plausible> to gather some analytics. No personal data is gathered and no data is gathered about what games or files you are using and editing. The only purpose is to to know how users are accessing 18xx Maker and what features are being used so we can better focus our efforts."
+  },
   "donations": {
     "title": "Donations",
     "description": "I've been asked about donation buttons; if you find this software useful to you and would like to donate money towards its development you can do so via <paypal>Paypal</paypal>, <cash>Square Cash</cash>, or <venmo>Venmo</venmo>."

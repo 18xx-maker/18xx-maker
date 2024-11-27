@@ -217,6 +217,21 @@ const Home = () => {
             }}
           />
         </Typography>
+        <Typography variant="h5">{t("analytics.title")}</Typography>
+        <Typography variant="body1">
+          <Trans
+            i18nKey="analytics.description"
+            components={{
+              plausible: (
+                <Link
+                  rel="noreferrer"
+                  target="_blank"
+                  href="https://plausible.io/"
+                />
+              ),
+            }}
+          />
+        </Typography>
       </Paper>
     </Container>
   );

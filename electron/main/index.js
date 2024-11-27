@@ -81,19 +81,27 @@ ipcMain.on("deleteGame", (event, id) => {
 });
 
 ipcMain.handle("saveGamePath", (event, path) => saveGamePath(path));
+
+const getPlatformAndVersions = () => ({
+  platform: os.platform(),
+  versions: {
+    app: app.getVersion(),
+    chrome: process.versions.chrome,
+    electron: process.versions.electron,
+    system: process.getSystemVersion(),
+  },
+});
+ipcMain.on("loadPlatformAndVersions", (event) => {
+  event.returnValue = getPlatformAndVersions();
+});
 ipcMain.handle("loadConfig", () =>
   Promise.resolve({
     config: getConfig(),
     path: CONFIG_FILE,
-    platform: os.platform(),
-    versions: {
-      app: app.getVersion(),
-      chrome: process.versions.chrome,
-      electron: process.versions.electron,
-      system: process.getSystemVersion(),
-    },
+    ...getPlatformAndVersions(),
   }),
 );
+
 ipcMain.handle("loadSummaries", () =>
   Promise.resolve(objOf(TYPE, getSummaries())),
 );

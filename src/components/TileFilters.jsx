@@ -48,7 +48,6 @@ const TileFilters = ({
   setIncludes,
   revenue,
   setRevenue,
-  blurRevenue,
   revenues,
 }) => {
   const { t } = useTranslation();
@@ -124,7 +123,6 @@ const TileFilters = ({
             value={revenueSlider}
             onChange={handleRevenue}
             onChangeCommitted={handleRevenueCommit}
-            onBlur={blurRevenue}
             step={10}
             min={revenues[0]}
             max={revenues[1]}

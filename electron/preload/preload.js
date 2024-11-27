@@ -39,6 +39,8 @@ const api = {
         return slug;
       }),
   loadConfig: () => ipcRenderer.invoke("loadConfig"),
+  loadPlatformAndVersions: () =>
+    ipcRenderer.sendSync("loadPlatformAndVersions"),
 
   addRecent: (title, slug) => ipcRenderer.send("addRecent", title, slug),
   deleteGame: (id) => ipcRenderer.send("deleteGame", id),

@@ -20,6 +20,7 @@ import { assoc, flatten, forEach, is, keys, map, range } from "ramda";
 import { useConfig, useGame } from "@/hooks";
 import schema from "@/schemas/config.schema.json";
 import { maxPlayers } from "@/util";
+import { trackEvent } from "@/util/analytics";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
 import { useBooleanParam } from "@/util/query";
 
@@ -197,9 +198,10 @@ const ExportButton = () => {
   const [print] = useBooleanParam("print");
   const [menuAnchor, setMenuAnchor] = useState(null);
 
-  const notOnGames = !useMatch("/games");
+  const match = useMatch("/games/:slug/*");
+  const notOnGames = !match || match.params["*"] === "";
 
-  if ((notOnGames, print || !game)) {
+  if (notOnGames || print || !game) {
     return null;
   }
 
@@ -212,21 +214,25 @@ const ExportButton = () => {
   };
 
   const handleAllPdf = () => {
+    trackEvent("exportPDF", location);
     window.api.exportPDF(game.meta.slug, pdfItems(game, config));
     handleMenuClose();
   };
 
   const handleAllPng = () => {
+    trackEvent("exportPNG", location);
     window.api.exportPNG(game.meta.slug, pngItems(game, config));
     handleMenuClose();
   };
 
   const handleSinglePdf = () => {
+    trackEvent("pdf", location);
     window.api.pdf(location.pathname + location.search);
     handleMenuClose();
   };
 
   const handleSinglePng = () => {
+    trackEvent("png", location);
     window.api.png(location.pathname + location.search);
     handleMenuClose();
   };
