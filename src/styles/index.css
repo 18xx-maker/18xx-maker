@@ -3,6 +3,7 @@
 
 /* Component css files */
 @import url("card.css");
+@import url("manifest.css");
 @import url("number.css");
 @import url("private.css");
 @import url("share.css");

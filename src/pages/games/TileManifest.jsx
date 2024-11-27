@@ -9,8 +9,6 @@ import { tiles } from "@/data";
 import { useGame } from "@/hooks";
 import { getTile } from "@/util";
 
-import "@/components/TileManifest.css";
-
 const getCol = (tile) => {
   switch (tile.color) {
     case "yellow":
