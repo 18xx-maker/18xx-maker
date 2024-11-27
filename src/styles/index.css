@@ -1,3 +1,5 @@
+@import url("fonts.css");
+
 html {
   background: transparent;
   margin: 0; /* this affects the margin on the html before sending to printer */

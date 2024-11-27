@@ -9,8 +9,7 @@ import { store } from "@/state";
 import capability from "@/util/capability";
 
 import "@/locales/i18n";
-import "@/fonts.css";
-import "@/index.css";
+import "@/styles/index.css";
 
 // Test to see if we're running in electron or not. If so use a hash router
 // since it's based on files
