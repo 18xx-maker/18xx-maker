@@ -41,9 +41,7 @@
     "versions": "Current Versions",
     "config": {
       "what": "The app stores information that it needs to function in a config file on your local computer. This file stores information about local files you've edited using the app, the list of recent files you've edited as well as the last page you've used so we can return to it next time we launch the app.",
-      "tamper": "You should not edit this file or mess with it's contents.",
-      "file": "Your configuration file is located here:",
-      "current": "Your current config is set to the following"
+      "file": "Your configuration file is located here:"
     },
     "updates": {
       "title": "Updates",
