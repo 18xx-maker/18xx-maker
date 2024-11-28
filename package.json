@@ -43,7 +43,8 @@
     "svgo:logos": "svgo -f src/data/logos",
     "test": "vitest",
     "test:run": "vitest run",
-    "validate": "node ./bin/maker.js validate \"src/schemas/*.schema.json\" \"src/*.json\" \"src/data/**/*.json\""
+    "validate": "node ./bin/maker.js validate \"src/schemas/*.schema.json\" \"src/*.json\" \"src/data/**/*.json\"",
+    "validate:schemas": "node ./bin/maker.js validate \"src/schemas/*.schema.json\""
   },
   "browserslist": {
     "production": [
