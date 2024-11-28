@@ -100,19 +100,14 @@ const createScreenshot = (path, filePath) => {
             'document.getElementsByClassName("printElement")[0].getBoundingClientRect().toJSON()',
           )
           .then(({ width, height }) => {
-            win.setBounds({
-              x: 0,
-              y: 0,
-              width: Math.ceil(width),
-              height: Math.ceil(height),
-            });
+            win.setContentSize(Math.floor(width), Math.floor(height), false);
             return win.webContents
               .capturePage(
                 {
                   x: 0,
                   y: 0,
-                  width: Math.ceil(width),
-                  height: Math.ceil(height),
+                  width: Math.floor(width),
+                  height: Math.floor(height),
                 },
                 {
                   stayHidden: true,

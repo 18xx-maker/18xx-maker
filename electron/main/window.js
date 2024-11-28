@@ -58,11 +58,10 @@ export const captureWindow = () => {
     y: 0,
     enableLargerThanScreen: true,
     show: false,
-    transparent: true,
-    frame: false,
     webPreferences: {
       preload: join(import.meta.dirname, "../preload/preload.mjs"),
       sandbox: false,
+      transparent: true,
     },
   });
 };
