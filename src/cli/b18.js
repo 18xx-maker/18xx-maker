@@ -63,14 +63,13 @@ const command = async (bname, version, author, opts) => {
     return;
   }
 
+  let game = loadGame(bname);
   let id = `${bname}-${version}`;
   let folder = `board18-${id}`;
 
-  let game = loadGame(bname);
+  let mapData = getMapData(game, config.coords, 100, 0);
 
   const getTile = gutil.getTile(tiles, game.tiles || {});
-
-  let mapData = getMapData(game, config.coords, 100, 0);
 
   // Test games:
   // 1861: Horizontal with valid A1
@@ -220,58 +219,56 @@ const command = async (bname, version, author, opts) => {
   json.tray.push(btok);
   json.tray.push(mtok);
 
+  // Output main JSON file
+  console.log(`Writing  ${bname}/${folder}/${id}.json`);
+  writeFileSync(
+    `render/${bname}/${folder}/${id}.json`,
+    JSON.stringify(json, null, 2),
+  );
+
+  // Open browser and create takeScreenshot function
   const browser = await chromium.launch({
     args: ["--force-color-profile srgb"],
   });
   const page = await browser.newPage();
+  const takeScreenshot = async (
+    urlPath,
+    width,
+    height,
+    filename,
+    omitBackground = false,
+  ) => {
+    console.log(`Printing ${bname}/${folder}/${id}/${filename}.png`);
+    await page.goto(
+      `http://localhost:9000/games/${bname}/${urlPath}?print=true`,
+      {
+        waitUntil: "networkidle",
+      },
+    );
+    await page.setViewportSize({ width, height });
+    await page.screenshot({
+      path: `render/${bname}/${folder}/${id}/${filename}.png`,
+      omitBackground,
+    });
+  };
 
-  let printWidth = Math.ceil(mapData.b18TotalWidth);
-  let printHeight = Math.ceil(mapData.b18TotalHeight);
-  let offset = 0;
+  // Map
+  let mapWidth =
+    Math.ceil(mapData.b18TotalWidth) +
+    (mapData.horizontal && mapData.a1Valid === false ? 87 : 0);
+  let mapHeight = Math.ceil(mapData.b18TotalHeight);
+  await takeScreenshot("b18/map", mapWidth, mapHeight, "Map");
 
-  if (mapData.horizontal && mapData.a1Valid === false) {
-    offset = 87;
-  }
-
-  console.log(`Printing ${bname}/${folder}/${id}/Map.png`);
-  await page.goto(`http://localhost:9000/games/${bname}/b18/map?print=true`, {
-    waitUntil: "networkidle",
-  });
-  await page.setViewportSize({
-    width: printWidth + offset,
-    height: printHeight,
-  });
-  await page.screenshot({
-    path: `render/${bname}/${folder}/${id}/Map.png`,
-  });
-
-  console.log(`Printing ${bname}/${folder}/${id}/Market.png`);
+  // Market
   let marketData = getMarketData(game.stock, config);
-  let marketWidth = Math.ceil((marketData.totalWidth + 50) * 0.96);
-  let marketHeight = Math.ceil((marketData.totalHeight + 50) * 0.96);
-  await page.goto(`http://localhost:9000/games/${bname}/market?print=true`, {
-    waitUntil: "networkidle",
-  });
-  await page.setViewportSize({
-    width: marketWidth + 1,
-    height: marketHeight + 1,
-  });
-  await page.screenshot({
-    path: `render/${bname}/${folder}/${id}/Market.png`,
-  });
+  let marketWidth = Math.ceil((marketData.totalWidth + 50) * 0.96) + 1;
+  let marketHeight = Math.ceil((marketData.totalHeight + 50) * 0.96) + 1;
+  await takeScreenshot("market", marketWidth, marketHeight, "Market");
 
-  console.log(`Printing ${bname}/${folder}/${id}/Tokens.png`);
-  await page.goto(
-    `http://localhost:9000/games/${bname}/b18/tokens?print=true`,
-    { waitUntil: "networkidle" },
-  );
-  await page.setViewportSize({ width: 60, height: tokenHeight });
-  await page.screenshot({
-    path: `render/${bname}/${folder}/${id}/Tokens.png`,
-    omitBackground: true,
-  });
+  // Tokens
+  await takeScreenshot("b18/tokens", 60, tokenHeight, "Tokens", true);
 
-  // Board18 Tiles
+  // Tiles
   for (let j = 0; j < colors.length; j++) {
     let color = colors[j];
     let color_filename = color.replace("/", "_");
@@ -279,31 +276,21 @@ const command = async (bname, version, author, opts) => {
     let width = counts[color] * 150;
     let height = 900;
 
-    console.log(
-      `Printing ${bname}/${folder}/${id}/${capitalize(color_filename)}.png`,
+    await takeScreenshot(
+      `b18/tiles/${color}`,
+      width,
+      height,
+      capitalize(color_filename),
+      true,
     );
-    await page.goto(
-      `http://localhost:9000/games/${bname}/b18/tiles/${color}?print=true`,
-      { waitUntil: "networkidle" },
-    );
-    await page.setViewportSize({ width, height });
-    await page.screenshot({
-      path: `render/${bname}/${folder}/${id}/${capitalize(color_filename)}.png`,
-      omitBackground: true,
-    });
   }
-  await browser.close();
 
+  // Close out our services
+  await browser.close();
   await server.close();
 
-  console.log(`Writing  ${bname}/${folder}/${id}.json`);
-  writeFileSync(
-    `render/${bname}/${folder}/${id}.json`,
-    JSON.stringify(json, null, 2),
-  );
-
+  // Output zip file
   console.log(`Creating ${bname}/${folder}.zip`);
-
   const output = createWriteStream(`render/${bname}/${folder}.zip`);
   const archive = archiver("zip", {
     zlib: { level: 9 },
