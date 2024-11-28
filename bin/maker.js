@@ -6,6 +6,7 @@ import b18 from "#cli/b18";
 import compile from "#cli/compile-schemas";
 import config from "#cli/config";
 import print from "#cli/print";
+import validate from "#cli/validate";
 import version from "#cli/version";
 
 const { username } = userInfo();
@@ -40,6 +41,12 @@ const compileCommand = program
   .command("compile")
   .description("compile 18xx Maker assets");
 compileCommand.command("schemas", { isDefault: true }).action(compile);
+
+program
+  .command("validate")
+  .description("validate any 18xx Maker json file")
+  .arguments("<files...>")
+  .action(validate);
 
 program
   .command("b18")

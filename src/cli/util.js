@@ -134,14 +134,10 @@ if (fs.existsSync(path.join(import.meta.dirname, "../config.json"))) {
   );
 }
 
+export const loadJSON = (file) => JSON.parse(fs.readFileSync(file));
+
 export const loadGame = (game) =>
-  JSON.parse(
-    fs.readFileSync(
-      path.join(import.meta.dirname, `../data/games/${game}.json`),
-    ),
-  );
+  loadJSON(path.join(import.meta.dirname, `../data/games/${game}.json`));
 
 export const loadSchema = (schema) =>
-  JSON.parse(
-    fs.readFileSync(path.join(import.meta.dirname, `../schemas/${schema}`)),
-  );
+  loadJSON(path.join(import.meta.dirname, `../schemas/${schema}`));

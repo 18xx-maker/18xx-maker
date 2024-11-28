@@ -35,7 +35,6 @@
     "preview": "vite preview",
     "preview:app": "electron-vite preview",
     "print": "node --disable-warning=ExperimentalWarning ./bin/print.js",
-    "schemas": "node ./bin/schemas.cjs",
     "start": "vite",
     "start:app": "electron-vite dev",
     "start:sb": "storybook dev -p 6006",
@@ -45,13 +44,13 @@
     "test": "vitest",
     "test:run": "vitest run",
     "validate": "run-s validate:schemas validate:*",
-    "validate:companies": "node ./bin/schemas.cjs src/data/companies/*.json",
-    "validate:config": "node ./bin/schemas.cjs src/*.json",
-    "validate:games": "node ./bin/schemas.cjs src/data/games/**/*.json",
-    "validate:publishers": "node ./bin/schemas.cjs src/data/publishers/index.json",
+    "validate:companies": "node ./bin/maker.js validate src/data/companies/*.json",
+    "validate:config": "node ./bin/maker.js validate src/*.json",
+    "validate:games": "node ./bin/maker.js validate src/data/games/**/*.json",
+    "validate:publishers": "node ./bin/maker.js validate src/data/publishers/index.json",
     "validate:schemas": "ajv compile -r src/schemas/tiles.defs.json -s \"src/schemas/*.schema.json\"",
-    "validate:themes": "node ./bin/schemas.cjs src/data/themes/**/*.json",
-    "validate:tiles": "node ./bin/schemas.cjs src/data/tiles/*.json"
+    "validate:themes": "node ./bin/maker.js validate src/data/themes/**/*.json",
+    "validate:tiles": "node ./bin/maker.js validate src/data/tiles/*.json"
   },
   "browserslist": {
     "production": [
