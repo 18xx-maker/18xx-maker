@@ -1,6 +1,6 @@
 {
   "title": "18xx Maker",
-  "about": "This app can take 18xx game definitions written in json, display them, and render them for printing. The original intent of this site was for personal PnP projects, but the purpose has shifted over time to prototyping new games.",
+  "about": "18xx Maker can take 18xx game definitions written in json, display them, and render them for printing. The original intent of this site was for personal PnP projects, but the purpose has shifted over time to prototyping new games.",
   "important": "Important",
   "note": "Note",
   "piracy": "Do not use this app to print games that you don't have a license to print. Please support our 18xx designers, developers, and publishers.",
@@ -26,8 +26,6 @@
   },
   "wip": {
     "wip": "Work in progress",
-    "note": "Some games are still works in progress. Please submit any bugs found as <github>issues on Github</github>!",
-    "tooltip": "This game is marked as being a work in progress",
     "description": "This game might not be complete or accurate"
   },
   "export": {
@@ -204,34 +202,26 @@
     "rules": "Rules",
     "unload": "Unload Game"
   },
+  "discord": {
+    "title": "Discord",
+    "description": "We have a <discord>discord for 18xx-Maker</discord>. Please use it for any development chat or support!"
+  },
   "gtg": {
     "title": "Partnership with Grand Trunk Games",
-    "description": "<gtg>Grand Trunk Games</gtg> is a new publisher and a big supporter of print and play. They have decided to make all of their games available on 18xx-maker as the official print and play provider! If you are able to we highly recommend supporting this publisher by purchasing their excellent productions of 1861/67 and Shikoku 1889!"
+    "description": "<gtg>Grand Trunk Games</gtg> is a great publisher and a big supporter of print and play. They have decided to make all of their games available on 18xx Maker as the official print and play provider! If you are able to we highly recommend supporting this publisher by purchasing their excellent productions of 1861/67 and Shikoku 1889!"
   },
-  "usage": {
-    "title": "Usage",
-    "description": "You can use this app in your browser at it's <public>main website</public> or <app>download it as an app</app> to use some of it's more advanced features. If you are working on prototyping your own game we highly recommend you download the app."
+  "app": {
+    "title": "The 18xx Maker Application",
+    "description": "We have a version of <app>18xx Maker bundled as a desktop application</app>. The interface is the same but there is better support for file editing and more exporting options. If you are working on prototyping your own game we highly recommend you download the app."
   },
-  "oss": {
-    "title": "Open Source",
-    "description": "This software is released under the <license>MIT</license> open source software license. The code is <code>available</code> on <github>GitHub</github>. We use GitHub actions, releases, and packages to handle CI, app hosting, and docker image hosting. We use <netlify>Netlify</netlify> to build and serve the <site>website</site> and the <sb>storybook</sb>."
+  "credits": {
+    "title": "Credits",
+    "description": "The code is <code>available</code> on <github>GitHub</github>. We use GitHub actions, releases, and packages to handle CI, app hosting, and docker image hosting. We use <netlify>Netlify</netlify> to build and serve the <site>website</site> and the <sb>storybook</sb>."
   },
-  "features": {
-    "title": "Features",
-    "1": "Load an 18xx Maker game file and display it.",
-    "2": "Inspect our database of 18xx tiles.",
-    "3": "Render games with your own design choices with themes and configuration options.",
-    "4": "Quickly design new games making use of our extensive set of elements and logos.",
-    "browser": {
-      "label": "Browser",
-      "1": "Print components directly from your web browser."
-    },
-    "app": {
-      "label": "App",
-      "1": "Live reloading of games as you edit definition files.",
-      "2": "Export full games or individual components as PDF documents or PNG images.",
-      "3": "Export games as Board18 game boxes."
-    }
+  "license": {
+    "title": "License",
+    "description": "The code of this project is licensed under the <license>MIT License</license> but the games contained within are not covered by this. The games are presented with no license from 18xx Maker with the permission of the publishers and/or designers.",
+    "permission": "All games included in this repository are included with permission from the publisher and/or designer. You can make print and play copies for your own personal use. Please thank them for their support of Print and Play! If you need to inquire about the license for a game you should contact the publisher and/or designer."
   },
   "analytics": {
     "title": "Analytics",

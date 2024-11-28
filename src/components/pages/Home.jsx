@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
 
 import gtgLogo from "@/data/publishers/gtg.png";
+import capability from "@/util/capability";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
 
     "& h5": {
-      padding: theme.spacing(0, 0, 2, 0),
+      padding: theme.spacing(1, 0, 0.5, 0),
     },
 
     "& ul": {
@@ -45,26 +46,42 @@ const Home = () => {
     <Container maxWidth="md">
       <Paper data-testid="home" elevation={5} className={classes.page}>
         <Typography variant="body1">{t("about")}</Typography>
-        <Alert severity="warning" className={classes.Alert}>
-          <strong>{t("important")}: </strong>
-          {t("piracy")}
-        </Alert>
-        <Alert severity="info" className={classes.Alert}>
-          <strong>{t("note")}: </strong>
+        {capability.electron || (
+          <>
+            <Typography variant="h5">{t("app.title")}</Typography>
+            <Typography variant="body1">
+              <Trans
+                i18nKey="app.description"
+                components={{
+                  app: (
+                    <Link
+                      target="_blank"
+                      rel="noreferrer"
+                      href="https://github.com/18xx-maker/18xx-maker/releases"
+                      underline="hover"
+                    />
+                  ),
+                }}
+              />
+            </Typography>
+          </>
+        )}
+        <Typography variant="h5">{t("discord.title")}</Typography>
+        <Typography variant="body1">
           <Trans
-            i18nKey="wip.note"
+            i18nKey="discord.description"
             components={{
-              github: (
+              discord: (
                 <Link
                   target="_blank"
                   rel="noreferrer"
-                  href="https://github.com/18xx-maker/18xx-maker/issues"
+                  href="https://discord.gg/gcYvAjYYfw"
                   underline="hover"
                 />
               ),
             }}
           />
-        </Alert>
+        </Typography>
         <Typography variant="h5">{t("gtg.title")}</Typography>
         <Typography variant="body1">
           <img
@@ -86,43 +103,40 @@ const Home = () => {
             }}
           />
         </Typography>
-        <Typography variant="h5">{t("usage.title")}</Typography>
+        <Typography variant="h5">{t("donations.title")}</Typography>
         <Typography variant="body1">
           <Trans
-            i18nKey="usage.description"
+            i18nKey="donations.description"
             components={{
-              public: (
+              paypal: (
                 <Link
-                  target="_blank"
                   rel="noreferrer"
-                  href="https://18xx-maker.com"
-                  underline="hover"
+                  target="_blank"
+                  href="https://paypal.me/kelsin"
                 />
               ),
-              app: (
+              cash: (
                 <Link
-                  target="_blank"
                   rel="noreferrer"
-                  href="https://github.com/18xx-maker/18xx-maker/releases"
-                  underline="hover"
+                  target="_blank"
+                  href="https://cash.app/$kelsin"
+                />
+              ),
+              venmo: (
+                <Link
+                  rel="noreferrer"
+                  target="_blank"
+                  href="https://account.venmo.com/u/kelsin13"
                 />
               ),
             }}
           />
         </Typography>
-        <Typography variant="h5">{t("oss.title")}</Typography>
+        <Typography variant="h5">{t("credits.title")}</Typography>
         <Typography variant="body1">
           <Trans
-            i18nKey="oss.description"
+            i18nKey="credits.description"
             components={{
-              license: (
-                <Link
-                  target="_blank"
-                  rel="noreferrer"
-                  href="https://github.com/18xx-maker/18xx-maker?tab=MIT-1-ov-file#readme"
-                  underline="hover"
-                />
-              ),
               code: (
                 <Link
                   target="_blank"
@@ -166,57 +180,27 @@ const Home = () => {
             }}
           />
         </Typography>
-        <Typography variant="h5">{t("features.title")}</Typography>
-        <Typography variant="body1" component="div">
-          <ul>
-            <li>{t("features.1")}</li>
-            <li>{t("features.2")}</li>
-            <li>{t("features.3")}</li>
-            <li>{t("features.4")}</li>
-            <li>
-              <strong>{t("features.browser.label")}:</strong>{" "}
-              {t("features.browser.1")}
-            </li>
-            <li>
-              <strong>{t("features.app.label")}:</strong> {t("features.app.1")}
-            </li>
-            <li>
-              <strong>{t("features.app.label")}:</strong> {t("features.app.2")}
-            </li>
-            <li>
-              <strong>{t("features.app.label")}:</strong> {t("features.app.3")}
-            </li>
-          </ul>
-        </Typography>
-        <Typography variant="h5">{t("donations.title")}</Typography>
+        <Typography variant="h5">{t("license.title")}</Typography>
         <Typography variant="body1">
           <Trans
-            i18nKey="donations.description"
+            i18nKey="license.description"
             components={{
-              paypal: (
+              license: (
                 <Link
-                  rel="noreferrer"
                   target="_blank"
-                  href="https://paypal.me/kelsin"
-                />
-              ),
-              cash: (
-                <Link
                   rel="noreferrer"
-                  target="_blank"
-                  href="https://cash.app/$kelsin"
-                />
-              ),
-              venmo: (
-                <Link
-                  rel="noreferrer"
-                  target="_blank"
-                  href="https://account.venmo.com/u/kelsin13"
+                  href="https://github.com/18xx-maker/18xx-maker?tab=MIT-1-ov-file#readme"
+                  underline="hover"
                 />
               ),
             }}
           />
         </Typography>
+        <Alert severity="warning" className={classes.Alert}>
+          <strong>{t("important")}: </strong>
+          {t("piracy")}
+        </Alert>
+        <Typography variant="body1">{t("license.permission")}</Typography>
         <Typography variant="h5">{t("analytics.title")}</Typography>
         <Typography variant="body1">
           <Trans
