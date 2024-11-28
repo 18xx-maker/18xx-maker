@@ -1,9 +1,7 @@
 /* eslint no-fallthrough: "off" */
 
 import { existsSync, mkdirSync, readdirSync } from "node:fs";
-import { join } from "node:path";
 
-import express from "express";
 import { chromium } from "playwright";
 
 import { compose, filter, map } from "ramda";
@@ -13,24 +11,21 @@ import {
   defaultConfig as defaults,
   loadGame,
   setup,
+  startExpress,
 } from "#cli/util";
 
 const command = async (game, opts) => {
   // Setup folders
   setup();
 
-  // Start up the server
-  const app = express();
+  const server = startExpress();
 
-  app.use(express.static(join(import.meta.dirname, "../../dist/site")));
-
-  app.get("/*", function (req, res) {
-    res.sendFile(join(import.meta.dirname, "../../dist/site/index.html"));
-  });
-
-  const server = app.listen(9000);
-
-  if (opts.debug) process.exit(0);
+  if (opts.debug) {
+    console.log("Debug Mode");
+    console.log("Starting the express server on http://localhost:9000");
+    console.log("\nCtrl-C when done");
+    return;
+  }
 
   let games = [game];
   if (opts.all) {

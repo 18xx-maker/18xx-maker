@@ -1,8 +1,6 @@
 import { createWriteStream, writeFileSync } from "node:fs";
-import path from "node:path";
 
 import archiver from "archiver";
-import express from "express";
 import { chromium } from "playwright";
 
 import {
@@ -34,6 +32,7 @@ import {
   loadGame,
   setup,
   setupB18,
+  startExpress,
 } from "#cli/util";
 
 const command = async (bname, version, author, opts) => {
@@ -65,22 +64,16 @@ const command = async (bname, version, author, opts) => {
 
   setup();
 
-  // Startup server
-  const app = express();
+  const server = startExpress();
 
-  app.use(express.static(path.join(import.meta.dirname, "../../dist/site")));
-
-  app.get("/*", function (req, res) {
-    res.sendFile(
-      path.join(import.meta.dirname, "../../dist/site", "index.html"),
-    );
-  });
-
-  const server = app.listen(9000);
+  if (opts.debug) {
+    console.log("Debug Mode");
+    console.log("Starting the express server on http://localhost:9000");
+    console.log("\nCtrl-C when done");
+    return;
+  }
 
   (async () => {
-    if (opts.debug) return;
-
     let id = `${bname}-${version}`;
     let folder = `board18-${id}`;
 
