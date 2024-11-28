@@ -1,10 +1,20 @@
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
+import RotateContext from "@/context/RotateContext";
 import { icons } from "@/data";
 import { useGame } from "@/hooks";
 import { multiDefaultTo } from "@/util";
 
-const Terrain = ({ type, size, cost, fontFamily, fontSize, color }) => {
+const Terrain = ({
+  type,
+  size,
+  cost,
+  fontFamily,
+  fontSize,
+  color,
+  fixed,
+  rotation,
+}) => {
   const game = useGame();
   fontSize = multiDefaultTo(15, fontSize, game.info.valueFontSize);
   fontFamily = multiDefaultTo("display", fontFamily, game.info.valueFontFamily);
@@ -61,26 +71,37 @@ const Terrain = ({ type, size, cost, fontFamily, fontSize, color }) => {
   }
 
   return (
-    <Color>
-      {(c, t, s, p) => (
-        <g>
-          {icon}
-          <text
-            fill={p(color || "black")}
-            strokeWidth={!color || color === "black" ? 0 : 1}
-            stroke={c("black")}
-            fontSize={fontSize}
-            fontFamily={fontFamily}
-            dominantBaseline="hanging"
-            textAnchor="middle"
-            x="0"
-            y="0"
-          >
-            <Currency value={cost} type="terrain" />
-          </text>
-        </g>
+    <RotateContext.Consumer>
+      {(rotateContext) => (
+        <Color>
+          {(c, t, s, p) => (
+            <g
+              style={{ transformBox: "fill-box", transformOrigin: "center" }}
+              transform={
+                fixed || rotateContext.fixed
+                  ? null
+                  : `rotate(${-rotateContext.angle - (rotation || 0)})`
+              }
+            >
+              {icon}
+              <text
+                fill={p(color || "black")}
+                strokeWidth={!color || color === "black" ? 0 : 1}
+                stroke={c("black")}
+                fontSize={fontSize}
+                fontFamily={fontFamily}
+                dominantBaseline="hanging"
+                textAnchor="middle"
+                x="0"
+                y="0"
+              >
+                <Currency value={cost} type="terrain" />
+              </text>
+            </g>
+          )}
+        </Color>
       )}
-    </Color>
+    </RotateContext.Consumer>
   );
 };
 
