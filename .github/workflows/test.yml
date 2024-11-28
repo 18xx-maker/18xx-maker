@@ -30,13 +30,15 @@ jobs:
       - name: Dependencies
         run: pnpm install
       - name: Commitlint
-        run: pnpm commitlint -l
+        run: pnpm --silent commitlint -l
       - name: Prettier
-        run: pnpm pretty
+        run: pnpm --silent pretty
       - name: ESLint and Stylelint
-        run: pnpm lint
+        run: pnpm --silent lint
       - name: 18xx Maker Validate
-        run: pnpm validate
+        run: pnpm --silent validate
+        env:
+          FORCE_COLOR: 3
   build:
     name: Build
     runs-on: ubuntu-latest
