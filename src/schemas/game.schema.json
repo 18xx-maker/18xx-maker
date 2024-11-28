@@ -38,7 +38,7 @@
       "properties": {
         "name": { "type": "string" },
         "copy": { "type": "integer", "minimum": 0 },
-        "title": { "type": "boolean", "enum": [false] },
+        "title": { "type": "boolean", "const": false },
         "remove": {
           "type": "array",
           "items": {

@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import path from "node:path";
 
 import { is, map } from "ramda";
 
@@ -121,3 +122,22 @@ export const setup = () => {
     if (err.code !== "EEXIST") throw err;
   }
 };
+
+export const defaultConfig = JSON.parse(
+  fs.readFileSync(path.join(import.meta.dirname, "../defaults.json"), "utf-8"),
+);
+
+export let customConfig = {};
+if (fs.existsSync(path.join(import.meta.dirname, "../config.json"))) {
+  customConfig = JSON.parse(
+    fs.readFileSync(path.join(import.meta.dirname, "../config.json"), "utf-8"),
+  );
+}
+
+export const loadJSON = (file) => JSON.parse(fs.readFileSync(file));
+
+export const loadGame = (game) =>
+  loadJSON(path.join(import.meta.dirname, `../data/games/${game}.json`));
+
+export const loadSchema = (schema) =>
+  loadJSON(path.join(import.meta.dirname, `../schemas/${schema}`));

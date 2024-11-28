@@ -7,9 +7,10 @@ click on the export button:
 
 ![export button](/images/export-button.png)
 
-_Note:_ if you are using 18xx Maker in a web browser please note that this
-button doesn't exist and instead shows a print icon. It only opens your
-browser's print menu.
+> [!NOTE]
+> If you are using 18xx Maker in a web browser please note that this button
+> doesn't exist and instead shows a print icon. It only opens your browser's
+> print menu.
 
 This will expose a menu with export options. You can either export a full game
 to PDF documents or the individual component that you are on. Exporting this way
@@ -27,25 +28,22 @@ will open the resulting PDF.
 
 ## Command Line
 
-**Important:** This workflow requires you to have the source code for the app
-and have followed the instructions for local development.
-
-_Note:_ Right now the code path for command line print is done in a slightly
-different way than app printing. I hope to combine these into the same code path
-eventually but if you have any problems or thoughts on the matter please get in
-touch.
+> [!IMPORTANT]
+> This workflow requires you to have the source code for the app and have
+> followed the instructions for [local
+> development](https://github.com/18xx-maker/18xx-maker/blob/main/DEVELOPMENT.md).
 
 You can output straight to PDF files by running:
 
 ```bash
-pnpm build && pnpm print <game>
+pnpm build && pnpm maker print <game>
 ```
 
 where `<game>` is which game to build. Game defaults to `1889`. For example,
 here is me printing 1889 explicitly:
 
 ```bash
-pnpm build && pnpm print 1889
+pnpm build && pnpm maker print 1889
 ```
 
 Remember that this will not use the options setup in the browser config page. In
@@ -78,5 +76,5 @@ render
 If you want to build all games at once you can run:
 
 ```bash
-pnpm build && pnpm print all
+pnpm build && pnpm maker print --all
 ```

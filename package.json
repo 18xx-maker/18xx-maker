@@ -10,7 +10,10 @@
   "private": true,
   "main": "./dist/main/index.cjs",
   "bin": {
-    "18xx-schemas": "bin/schemas.cjs"
+    "maker": "bin/maker.js"
+  },
+  "imports": {
+    "#cli/*": "./src/cli/*.js"
   },
   "scripts": {
     "b18": "node --disable-warning=ExperimentalWarning ./bin/b18.js",
@@ -25,13 +28,13 @@
     "lint:fix": "run-s lint:js:fix lint:css:fix",
     "lint:js": "eslint .",
     "lint:js:fix": "eslint --fix .",
+    "maker": "node bin/maker.js",
     "package:app": "electron-builder build -mwl -p never",
     "pretty": "prettier -c .",
     "pretty:fix": "prettier --write .",
     "preview": "vite preview",
     "preview:app": "electron-vite preview",
     "print": "node --disable-warning=ExperimentalWarning ./bin/print.js",
-    "schemas": "node ./bin/schemas.cjs",
     "start": "vite",
     "start:app": "electron-vite dev",
     "start:sb": "storybook dev -p 6006",
@@ -40,14 +43,7 @@
     "svgo:logos": "svgo -f src/data/logos",
     "test": "vitest",
     "test:run": "vitest run",
-    "validate": "run-s validate:schemas validate:*",
-    "validate:companies": "node ./bin/schemas.cjs src/data/companies/*.json",
-    "validate:config": "node ./bin/schemas.cjs src/*.json",
-    "validate:games": "node ./bin/schemas.cjs src/data/games/**/*.json",
-    "validate:publishers": "node ./bin/schemas.cjs src/data/publishers/index.json",
-    "validate:schemas": "ajv compile -r src/schemas/tiles.defs.json -s \"src/schemas/*.schema.json\"",
-    "validate:themes": "node ./bin/schemas.cjs src/data/themes/**/*.json",
-    "validate:tiles": "node ./bin/schemas.cjs src/data/tiles/*.json"
+    "validate": "node ./bin/maker.js validate \"src/schemas/*.schema.json\" \"src/*.json\" \"src/data/**/*.json\""
   },
   "browserslist": {
     "production": [
@@ -90,6 +86,7 @@
       "^ramda$",
       "",
       "^@(/.*)$",
+      "^#(.*)$",
       "^[.]",
       "",
       "^@tests(/.*)$",
@@ -198,16 +195,16 @@
     }
   },
   "dependencies": {
-    "ajv": "^8.17.1",
-    "ajv-cli": "^5.0.0",
     "archiver": "^7.0.1",
     "bluebird": "^3.7.2",
     "chalk": "^4.1.2",
     "chokidar": "^3.6.0",
     "commander": "^12.1.0",
     "electron-updater": "^6.3.9",
+    "env-paths": "^3.0.0",
     "express": "^4.21.1",
     "glob": "^11.0.0",
+    "json-schema-library": "10.0.0-rc2",
     "ramda": "^0.30.1"
   },
   "devDependencies": {

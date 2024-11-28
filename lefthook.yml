@@ -19,7 +19,7 @@ pre-commit:
         - "public/*"
         - "src/locales/*"
         - "src/schemas/*"
-      run: node ./bin/schemas.cjs {staged_files}
+      run: node ./bin/maker.js validate {staged_files}
       priority: 40
     svgo:
       glob: "*.svg"

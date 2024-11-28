@@ -6,23 +6,23 @@ defs := tiles
 
 all: $(patsubst %,public/schemas/%.schema.json,$(schemas)) $(patsubst %,public/schemas/%.defs.json,$(defs))
 
+public/schemas/%.defs.json: src/schemas/%.defs.json
+	@echo "Copying $< to $@"
+	@cp $< $@
+
+public/schemas/%.schema.json: src/schemas/%.schema.json
+	@echo "Copying $< to $@"
+	@cp $< $@
+
+src/schemas/tiles.defs.json: src/schemas/fields.schema.json src/schemas/tiles.src.json
+	@echo "Compiling $@"
+	@node ./bin/maker.js compile
+
 clean:
 	@echo "Removing output folders"
 	@rm -rf coverage
 	@rm -rf dist
 	@rm -rf stats.html
-
-public/schemas/%.defs.json: src/schemas/%.defs.json
-	@echo "Copying $< to $@"
-	cp $< $@
-
-public/schemas/%.schema.json: src/schemas/%.schema.json
-	@echo "Copying $< to $@"
-	cp $< $@
-
-src/schemas/tiles.defs.json: src/schemas/fields.schema.json src/schemas/tiles.src.json
-	@echo "Compiling $@"
-	node ./bin/compileSchemas.cjs
 
 docker/site:
 	@docker build -t "18xx-maker/site" -f docker/Dockerfile.site .
