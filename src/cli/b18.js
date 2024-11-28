@@ -63,14 +63,13 @@ const command = async (bname, version, author, opts) => {
     return;
   }
 
+  let game = loadGame(bname);
   let id = `${bname}-${version}`;
   let folder = `board18-${id}`;
 
-  let game = loadGame(bname);
+  let mapData = getMapData(game, config.coords, 100, 0);
 
   const getTile = gutil.getTile(tiles, game.tiles || {});
-
-  let mapData = getMapData(game, config.coords, 100, 0);
 
   // Test games:
   // 1861: Horizontal with valid A1
@@ -220,6 +219,14 @@ const command = async (bname, version, author, opts) => {
   json.tray.push(btok);
   json.tray.push(mtok);
 
+  // Output main JSON file
+  console.log(`Writing  ${bname}/${folder}/${id}.json`);
+  writeFileSync(
+    `render/${bname}/${folder}/${id}.json`,
+    JSON.stringify(json, null, 2),
+  );
+
+  // Open browser and create takeScreenshot function
   const browser = await chromium.launch({
     args: ["--force-color-profile srgb"],
   });
@@ -245,24 +252,23 @@ const command = async (bname, version, author, opts) => {
     });
   };
 
-  let printWidth = Math.ceil(mapData.b18TotalWidth);
-  let printHeight = Math.ceil(mapData.b18TotalHeight);
-  let offset = 0;
+  // Map
+  let mapWidth =
+    Math.ceil(mapData.b18TotalWidth) +
+    (mapData.horizontal && mapData.a1Valid === false ? 87 : 0);
+  let mapHeight = Math.ceil(mapData.b18TotalHeight);
+  await takeScreenshot("b18/map", mapWidth, mapHeight, "Map");
 
-  if (mapData.horizontal && mapData.a1Valid === false) {
-    offset = 87;
-  }
-
-  await takeScreenshot("b18/map", printWidth + offset, printHeight, "Map");
-
+  // Market
   let marketData = getMarketData(game.stock, config);
-  let marketWidth = Math.ceil((marketData.totalWidth + 50) * 0.96);
-  let marketHeight = Math.ceil((marketData.totalHeight + 50) * 0.96);
-  await takeScreenshot("market", marketWidth + 1, marketHeight + 1, "Market");
+  let marketWidth = Math.ceil((marketData.totalWidth + 50) * 0.96) + 1;
+  let marketHeight = Math.ceil((marketData.totalHeight + 50) * 0.96) + 1;
+  await takeScreenshot("market", marketWidth, marketHeight, "Market");
 
+  // Tokens
   await takeScreenshot("b18/tokens", 60, tokenHeight, "Tokens", true);
 
-  // Board18 Tiles
+  // Tiles
   for (let j = 0; j < colors.length; j++) {
     let color = colors[j];
     let color_filename = color.replace("/", "_");
@@ -283,12 +289,7 @@ const command = async (bname, version, author, opts) => {
   await browser.close();
   await server.close();
 
-  console.log(`Writing  ${bname}/${folder}/${id}.json`);
-  writeFileSync(
-    `render/${bname}/${folder}/${id}.json`,
-    JSON.stringify(json, null, 2),
-  );
-
+  // Output zip file
   console.log(`Creating ${bname}/${folder}.zip`);
   const output = createWriteStream(`render/${bname}/${folder}.zip`);
   const archive = archiver("zip", {
