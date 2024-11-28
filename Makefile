@@ -19,10 +19,15 @@ src/schemas/tiles.defs.json: src/schemas/fields.schema.json src/schemas/tiles.sr
 	@node ./bin/maker.js compile
 
 clean:
-	@echo "Removing output folders"
+	@echo "Removing generated output"
 	@rm -rf coverage
 	@rm -rf dist
 	@rm -rf stats.html
+
+clean/render:
+	@echo "Removing CLI output"
+	@rm -rf render
+
 
 docker/site:
 	@docker build -t "18xx-maker/site" -f docker/Dockerfile.site .

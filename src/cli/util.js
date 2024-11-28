@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import express from "express";
+
 import { is, map } from "ramda";
 
 export const compileCompanyTokens = (game, companies) => {
@@ -141,3 +143,19 @@ export const loadGame = (game) =>
 
 export const loadSchema = (schema) =>
   loadJSON(path.join(import.meta.dirname, `../schemas/${schema}`));
+
+export const loadTiles = () =>
+  map(
+    (name) =>
+      loadJSON(path.join(import.meta.dirname, `../data/tiles/${name}.json`)),
+    ["yellow", "green", "brown", "gray", "other"],
+  );
+
+export const startExpress = (port = 9000) => {
+  const app = express();
+  app.use(express.static(path.join(import.meta.dirname, "../../dist/site")));
+  app.get("/*", function (req, res) {
+    res.sendFile(path.join(import.meta.dirname, "../../dist/site/index.html"));
+  });
+  return app.listen(port);
+};

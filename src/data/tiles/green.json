@@ -4859,7 +4859,7 @@
     "terrain": [
       {
         "angle": 40,
-        "percent": 0.65,
+        "percent": 0.7,
         "cost": 80,
         "size": "tiny"
       }
