@@ -45,7 +45,7 @@ for any development chat or support!
 The code of this project is licensed under the [MIT
 License](https://github.com/18xx-maker/18xx-maker/blob/main/LICENSE) but the
 games contained within are not covered by this. The games are presented with no
-license from 18xx-Maker with the permission of the publisher/designers.
+license from 18xx Maker with the permission of the publishers and/or designers.
 
 > [!IMPORTANT]
 > Do not use this app to print games that you don't have a license to
@@ -54,8 +54,8 @@ license from 18xx-Maker with the permission of the publisher/designers.
 All games included in this repository are included with permission from the
 publisher and/or designer. You can make print and play copies for your own
 personal use. Please thank them for their support of Print and Play! If you need
-to inquire about the license for a particular game you need to get in contact
-with the publisher and/or designer.
+to inquire about the license for a game you should contact the publisher and/or
+designer.
 
 ## Documentation
 
