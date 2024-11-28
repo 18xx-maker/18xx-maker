@@ -6,7 +6,7 @@ commit-msg:
 pre-commit:
   commands:
     schemas:
-      run: make && pnpm validate:schemas
+      run: make && pnpm validate
       glob: "{public,src}/schemas/*.json"
       stage_fixed: true
       priority: 10
