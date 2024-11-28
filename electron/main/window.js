@@ -9,7 +9,7 @@ import { isDev } from "./dev.js";
 import { setMenu } from "./menu.js";
 
 export const lastRoute = getLastRoute();
-export const rootUrl = `file://${join(__dirname, "../renderer/index.html")}`;
+export const rootUrl = `file://${join(import.meta.dirname, "../renderer/index.html")}`;
 export const startBaseUrl =
   isDev && process.env["ELECTRON_RENDERER_URL"]
     ? process.env["ELECTRON_RENDERER_URL"]
@@ -30,8 +30,7 @@ export const createWindow = () => {
   mainWindow = new BrowserWindow({
     show: false,
     webPreferences: {
-      preload: join(import.meta.dirname, "../preload/preload.mjs"),
-      sandbox: false,
+      preload: join(import.meta.dirname, "../preload/preload.cjs"),
     },
   });
   mainWindow.on("close", () =>
@@ -59,8 +58,7 @@ export const captureWindow = () => {
     enableLargerThanScreen: true,
     show: false,
     webPreferences: {
-      preload: join(import.meta.dirname, "../preload/preload.mjs"),
-      sandbox: false,
+      preload: join(import.meta.dirname, "../preload/preload.cjs"),
       transparent: true,
     },
   });

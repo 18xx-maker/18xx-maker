@@ -8,7 +8,7 @@
   "repository": "github:18xx-maker/18xx-maker",
   "license": "MIT",
   "private": true,
-  "main": "./dist/main/index.js",
+  "main": "./dist/main/index.cjs",
   "bin": {
     "18xx-schemas": "bin/schemas.cjs"
   },
