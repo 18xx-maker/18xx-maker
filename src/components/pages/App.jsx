@@ -19,6 +19,7 @@ import makeStyles from "@mui/styles/makeStyles";
 
 import { prop } from "ramda";
 
+import { SyntaxHighlighter, style } from "@/components/SyntaxHighlighter";
 import { logos } from "@/data";
 import { createDownloadPercent } from "@/state";
 
@@ -58,9 +59,17 @@ const useStyles = makeStyles((theme) => ({
       },
     },
 
-    "& p > code": {
-      fontSize: "0.9rem",
-      display: "block",
+    "& code": {
+      padding: theme.spacing(0.4, 0.8, 0.3, 0.8),
+
+      borderRadius: theme.shape.borderRadius,
+      whiteSpace: "pre",
+      background: "rgb(245, 242, 240)",
+      textShadow: "white 0px 1px",
+      fontFamily: "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
+      color: "black",
+      fontSize: "1em",
+      fontWeight: "bold",
     },
 
     "& p:has(+ pre)": {
@@ -69,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
 
     "& pre": {
       padding: theme.spacing(0, 0, 2, 0),
-      margin: 0,
+      marginBottom: "0 !important",
       "&:last-child": {
         padding: 0,
       },
@@ -231,16 +240,17 @@ const App = () => {
       </Paper>
       {data && (
         <Paper elevation={5} className={classes.page}>
-          <Typography variant="body1">
-            {t("app.config.what")} <strong>{t("app.config.tamper")}</strong>
-          </Typography>
+          <Typography variant="body1">{t("app.config.what")}</Typography>
           <Typography variant="body1">
             {t("app.config.file")} <code>{data.path}</code>
           </Typography>
-          <Typography variant="body1">{t("app.config.current")}</Typography>
-          <pre>
-            <code>{JSON.stringify(data.config, null, 2)}</code>
-          </pre>
+          <SyntaxHighlighter
+            style={style}
+            customStyle={{ margin: "1em 0" }}
+            language="json"
+          >
+            {JSON.stringify(data.config, null, 2)}
+          </SyntaxHighlighter>
         </Paper>
       )}
     </Container>
