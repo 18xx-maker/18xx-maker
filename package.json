@@ -43,14 +43,7 @@
     "svgo:logos": "svgo -f src/data/logos",
     "test": "vitest",
     "test:run": "vitest run",
-    "validate": "run-s validate:*",
-    "validate:companies": "node ./bin/maker.js validate src/data/companies/*.json",
-    "validate:config": "node ./bin/maker.js validate src/*.json",
-    "validate:games": "node ./bin/maker.js validate src/data/games/**/*.json",
-    "validate:publishers": "node ./bin/maker.js validate src/data/publishers/index.json",
-    "validate:schemas": "node ./bin/maker.js validate src/schemas/*.schema.json",
-    "validate:themes": "node ./bin/maker.js validate src/data/themes/**/*.json",
-    "validate:tiles": "node ./bin/maker.js validate src/data/tiles/*.json"
+    "validate": "node ./bin/maker.js validate \"src/schemas/*.schema.json\" \"src/*.json\" \"src/data/**/*.json\""
   },
   "browserslist": {
     "production": [
