@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { userInfo } from "node:os";
 
 import { program } from "commander";

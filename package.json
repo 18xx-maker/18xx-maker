@@ -43,12 +43,12 @@
     "svgo:logos": "svgo -f src/data/logos",
     "test": "vitest",
     "test:run": "vitest run",
-    "validate": "run-s validate:schemas validate:*",
+    "validate": "run-s validate:*",
     "validate:companies": "node ./bin/maker.js validate src/data/companies/*.json",
     "validate:config": "node ./bin/maker.js validate src/*.json",
     "validate:games": "node ./bin/maker.js validate src/data/games/**/*.json",
     "validate:publishers": "node ./bin/maker.js validate src/data/publishers/index.json",
-    "validate:schemas": "ajv compile -r src/schemas/tiles.defs.json -s \"src/schemas/*.schema.json\"",
+    "validate:schemas": "node ./bin/maker.js validate src/schemas/*.schema.json",
     "validate:themes": "node ./bin/maker.js validate src/data/themes/**/*.json",
     "validate:tiles": "node ./bin/maker.js validate src/data/tiles/*.json"
   },
@@ -202,8 +202,6 @@
     }
   },
   "dependencies": {
-    "ajv": "^8.17.1",
-    "ajv-cli": "^5.0.0",
     "archiver": "^7.0.1",
     "bluebird": "^3.7.2",
     "chalk": "^4.1.2",
@@ -213,6 +211,7 @@
     "env-paths": "^3.0.0",
     "express": "^4.21.1",
     "glob": "^11.0.0",
+    "json-schema-library": "10.0.0-rc2",
     "ramda": "^0.30.1"
   },
   "devDependencies": {
