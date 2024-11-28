@@ -1,6 +1,6 @@
 import { join } from "node:path";
 
-import { BrowserWindow } from "electron";
+import { BrowserWindow, shell } from "electron";
 
 import { nth, split } from "ramda";
 
@@ -43,7 +43,14 @@ export const createWindow = () => {
     mainWindow.maximize();
     mainWindow.show();
   });
-  mainWindow.webContents.setWindowOpenHandler(() => ({ action: "allow" }));
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    if (url.startsWith("http")) {
+      shell.openExternal(url);
+      return { action: "deny" };
+    }
+
+    return { action: "allow" };
+  });
   mainWindow.loadURL(startUrl);
 
   setMenu(mainWindow);

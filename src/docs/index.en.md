@@ -18,10 +18,9 @@ print on the website and then printing the page right from the browser. The page
 will print with all current config settings and options.
 
 For example, if you want to print a paginated map for [Shikoku
-1889](https://18xx-maker.com/games/1889), you should browse to the [map
-page](https://18xx-maker.com/games/1889/map), and then select the
-[Paginate](https://18xx-maker.com/games/1889/map?paginated=true) open in the
-left hand game menu. Then you can select "Print" from your browsers menu.
+1889](/games/1889), you should browse to the [map page](/games/1889/map), and
+then select the [Paginate](/games/1889/map?paginated=true) open in the left hand
+game menu. Then you can select "Print" from your browsers menu.
 
 The game will print without any UI elements from the page. You can use your
 systems ability to print directly to a PDF file as well. The defaults for the
@@ -32,10 +31,8 @@ system's print dialog properly to fit. Otherwise this printing will be paginated
 by your operating system (with bad results).
 
 > [!TIP]
-> Make sure to explore the [config
-> panel](https://18xx-maker.com/games/1889/map?config=true). It lets you
-> customize how a game is displayed and printed. We have many color themes
-> available!
+> Make sure to explore the [config panel](?config=true). It lets you customize
+> how a game is displayed and printed. We have many color themes available!
 
 ### Exporting from the 18xx Maker app
 

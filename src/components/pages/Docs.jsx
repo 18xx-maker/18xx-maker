@@ -127,10 +127,10 @@ const ElectronImage = (props) => {
 };
 
 const LocalLink = (props) => {
-  if (startsWith("#", props.href) || startsWith("?", props.href)) {
+  if (startsWith("/", props.href) || startsWith("?", props.href)) {
     return (
       <Link
-        component={capability.electron || RouterLink}
+        component={RouterLink}
         to={props.href}
         {...removeNode(props)}
         underline="hover"
