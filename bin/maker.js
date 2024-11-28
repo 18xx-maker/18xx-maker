@@ -3,7 +3,7 @@ import { userInfo } from "node:os";
 import { program } from "commander";
 
 import b18 from "#cli/b18";
-import compile from "#cli/compile";
+import compile from "#cli/compile-schemas";
 import config from "#cli/config";
 import print from "#cli/print";
 import version from "#cli/version";

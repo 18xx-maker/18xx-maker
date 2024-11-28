@@ -140,3 +140,8 @@ export const loadGame = (game) =>
       path.join(import.meta.dirname, `../data/games/${game}.json`),
     ),
   );
+
+export const loadSchema = (schema) =>
+  JSON.parse(
+    fs.readFileSync(path.join(import.meta.dirname, `../schemas/${schema}`)),
+  );
