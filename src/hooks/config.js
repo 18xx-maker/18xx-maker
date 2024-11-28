@@ -1,5 +1,6 @@
 import { diff } from "deep-object-diff";
 import { Draft07, validateAsync } from "json-schema-library";
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 
@@ -42,20 +43,23 @@ export const useConfig = () => {
   const gameConfig = defaultTo({}, game && game.config);
   const config = mergeDeepRight(preGameConfig, gameConfig);
 
-  const setConfig = async (config) => {
-    const errors = await validateAsync(configSchema, config, {
-      onError: (err) => console.log(err),
-      schema: configSchema.getSchema(),
-    });
+  const setConfig = useCallback(
+    async (config) => {
+      const errors = await validateAsync(configSchema, config, {
+        onError: (err) => console.log(err),
+        schema: configSchema.getSchema(),
+      });
 
-    if (!errors.length) {
-      return dispatch(createSetConfig(diff(initialConfig, config)));
-    }
-  };
+      if (!errors.length) {
+        return dispatch(createSetConfig(diff(initialConfig, config)));
+      }
+    },
+    [dispatch],
+  );
 
   return {
     setConfig,
-    resetConfig: () => dispatch(createResetConfig()),
+    resetConfig: useCallback(() => dispatch(createResetConfig()), [dispatch]),
     config,
     defaultConfig,
     userConfig,
