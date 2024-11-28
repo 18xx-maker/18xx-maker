@@ -34,6 +34,9 @@ import {
   setupB18,
   startExpress,
 } from "#cli/util";
+import * as gutil from "#util/index";
+import { getMapData } from "#util/map";
+import { getMarketData } from "#util/market";
 
 const command = async (bname, version, author, opts) => {
   const config = mergeDeepRight(defaultConfig, customConfig);
@@ -82,10 +85,8 @@ const command = async (bname, version, author, opts) => {
       (mod) => mod.default,
     );
 
-    const gutil = await import("../util/index.js");
     const getTile = gutil.getTile(tiles, game.tiles || {});
 
-    const { getMapData } = await import("../util/map.js");
     let mapData = getMapData(game, config.coords, 100, 0);
 
     // Test games:
@@ -262,8 +263,7 @@ const command = async (bname, version, author, opts) => {
     });
 
     console.log(`Printing ${bname}/${folder}/${id}/Market.png`);
-    const mutil = await import("../util/market.js");
-    let marketData = mutil.getMarketData(game.stock, config);
+    let marketData = getMarketData(game.stock, config);
     let marketWidth = Math.ceil((marketData.totalWidth + 50) * 0.96);
     let marketHeight = Math.ceil((marketData.totalHeight + 50) * 0.96);
     await page.goto(`http://localhost:9000/games/${bname}/market?print=true`, {
