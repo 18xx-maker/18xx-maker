@@ -13,7 +13,8 @@
     "maker": "bin/maker.js"
   },
   "imports": {
-    "#cli/*": "./src/cli/*.js"
+    "#cli/*": "./src/cli/*.js",
+    "#util/*": "./src/util/*.js"
   },
   "scripts": {
     "b18": "node --disable-warning=ExperimentalWarning ./bin/b18.js",
