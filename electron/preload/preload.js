@@ -1,7 +1,4 @@
-const { contextBridge, ipcRenderer } = require("electron/renderer");
-const { webUtils } = require("electron");
-
-ipcRenderer.setMaxListeners(50);
+const { contextBridge, ipcRenderer, webUtils } = require("electron/renderer");
 
 const api = {
   // PDF/PNG Exporting
@@ -71,15 +68,4 @@ const api = {
   off: () => ipcRenderer.removeAllListeners(),
 };
 
-// Use `contextBridge` APIs to expose Electron APIs to
-// renderer only if context isolation is enabled, otherwise
-// just add to the DOM global.
-if (process.contextIsolated) {
-  try {
-    contextBridge.exposeInMainWorld("api", api);
-  } catch (error) {
-    console.error(error);
-  }
-} else {
-  window.api = api;
-}
+contextBridge.exposeInMainWorld("api", api);

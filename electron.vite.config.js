@@ -14,6 +14,11 @@ export default defineConfig({
         entry: "./electron/main/index.js",
         format: "es",
       },
+      rollupOptions: {
+        output: {
+          format: "cjs",
+        },
+      },
     },
     plugins: [externalizeDepsPlugin()],
     resolve: {
@@ -27,15 +32,15 @@ export default defineConfig({
       outDir: "dist/preload",
       lib: {
         entry: "./electron/preload/preload.js",
-        format: "es",
+        format: "cjs",
+      },
+      rollupOptions: {
+        output: {
+          format: "cjs",
+        },
       },
     },
     plugins: [externalizeDepsPlugin()],
-    resolve: {
-      alias: {
-        "@": path.resolve(import.meta.dirname, "src"),
-      },
-    },
   },
   renderer: {
     assetsInclude: ["**/*.md"],
