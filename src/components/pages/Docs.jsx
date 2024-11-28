@@ -23,7 +23,7 @@ const removeNode = dissoc("node");
 const useStyles = makeStyles((theme) => ({
   page: {
     overflow: "auto",
-    margin: theme.spacing(4, 0),
+    margin: theme.spacing(2, 0),
     padding: theme.spacing(2, 2, 0, 2),
 
     "& p": {

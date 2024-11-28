@@ -1,4 +1,5 @@
 import { Trans, useTranslation } from "react-i18next";
+import { Link as RouterLink } from "react-router";
 
 import Alert from "@mui/material/Alert";
 import Container from "@mui/material/Container";
@@ -66,6 +67,22 @@ const Home = () => {
             </Typography>
           </>
         )}
+        <Typography variant="h5">{t("started.title")}</Typography>
+        <Typography variant="body1">
+          <Trans
+            i18nKey="started.description"
+            components={{
+              started: (
+                <RouterLink
+                  component={Link}
+                  to="/docs"
+                  href="/docs"
+                  underline="hover"
+                />
+              ),
+            }}
+          />
+        </Typography>
         <Typography variant="h5">{t("discord.title")}</Typography>
         <Typography variant="body1">
           <Trans
