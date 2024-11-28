@@ -4,6 +4,11 @@ import { Link as RouterLink, useLocation } from "react-router";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
 
@@ -70,6 +75,16 @@ const useStyles = makeStyles((theme) => ({
         hyphens: "none",
       },
     },
+
+    "& table": {
+      marginBottom: theme.spacing(3),
+      "& th": {
+        fontWeight: "bold",
+      },
+      "& td, & th": {
+        textAlign: "left",
+      },
+    },
   },
 }));
 
@@ -133,6 +148,13 @@ const LocalLink = (props) => {
   );
 };
 
+const prepareForMD = (Component, extraProps = {}) => {
+  const wrapper = (props) => (
+    <Component {...{ ...extraProps, ...removeNode(props) }} />
+  );
+  return wrapper;
+};
+
 const components = {
   h1: (props) => Heading({ level: 1, ...removeNode(props) }),
   h2: (props) => Heading({ level: 2, ...removeNode(props) }),
@@ -148,6 +170,12 @@ const components = {
   ),
   a: LocalLink,
   img: ElectronImage,
+  table: prepareForMD(Table, { size: "small" }),
+  thead: prepareForMD(TableHead),
+  tbody: prepareForMD(TableBody),
+  th: prepareForMD(TableCell),
+  tr: prepareForMD(TableRow),
+  td: prepareForMD(TableCell),
   code: (props) => {
     const { children, className, ...rest } = props;
     const match = /language-(\w+)/.exec(className || "");
