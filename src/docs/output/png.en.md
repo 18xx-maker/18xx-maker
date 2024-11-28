@@ -1,16 +1,18 @@
 # PNG Output
 
-_Note:_ Currently there is no ability to generate PNG images on the command line
-without running the app.
+> [!WARNING]
+> Currently there is no ability to generate PNG images on the command line
+> without running the app.
 
 On the 18xx Maker application you can browse to any game component and then
 click on the export button:
 
 ![export button](/images/export-button.png)
 
-_Note:_ if you are using 18xx Maker in a web browser please note that this
-button doesn't exist and instead shows a print icon. It only opens your
-browser's print menu.
+> [!NOTE]
+> If you are using 18xx Maker in a web browser please note that this button
+> doesn't exist and instead shows a print icon. It only opens your browser's
+> print menu.
 
 This will expose a menu with export options. You can either export a full game
 to PNG images or the individual component that you are on. Exporting this way

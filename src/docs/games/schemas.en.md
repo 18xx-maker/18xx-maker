@@ -16,11 +16,15 @@ as long as their game files validate.
 
 ## Current Schemas
 
-Schemas are held in a [separate npm
-package](https://www.npmjs.com/package/18xx-schemas) called
-[18xx-schemas](https://github.com/18xx-maker/18xx-schemas):
+Schemas are in the
+[src/schemas](https://github.com/18xx-maker/18xx-maker/tree/main/src/schemas)
+directory of the source repository.
 
-- [game](/schemas/game.schema.json) **WIP** defines a game file
+- [companies](/schemas/companies.schema.json) defines the companies files for
+  overriding companies
+- [publishers](/schemas/publishers.schemas.json) defines the publishers file
+- [game](/schemas/game.schema.json) defines a game file - _this is currently a
+  work in progress and isn't complete_
 - [tiles](/schemas/tiles.schema.json) defines a tiles file and what the hex definitions in game files look like
 - [config](/schemas/config.schema.json) - defines the `defaults.json` format to
   manage the [config
@@ -28,6 +32,10 @@ package](https://www.npmjs.com/package/18xx-schemas) called
   for 18xx Maker and it's other tools.
 - [theme](/schemas/theme.schema.json) - Schema to define a color theme file
   (maps or companies)
+
+The game and tiles schemas both reference
+[tiles.defs.json](/schemas/tiles.defs.json) which is shared and defines all of
+the json that can go into a map/tile hex.
 
 ## Validation
 
@@ -38,4 +46,4 @@ pnpm validate
 ```
 
 in the root folder of your code checkout. This will validate all relevant json
-files in your local checkout.
+files including the schemas themselves.

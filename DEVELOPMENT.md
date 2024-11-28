@@ -86,10 +86,6 @@ These are the package.json scripts that you should know:
 pnpm start
 pnpm start:app
 pnpm start:sb
-
-# CLI to print a game and create a b18 box
-pnpm print
-pnpm b18
 ```
 
 The following scripts are all run for you on relevant files as part of git
