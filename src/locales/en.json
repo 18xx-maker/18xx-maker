@@ -202,6 +202,10 @@
     "rules": "Rules",
     "unload": "Unload Game"
   },
+  "started": {
+    "title": "Getting Started",
+    "description": "If you want to jump right in to printing an existing game or creating a new one, check out our <started>Getting Started</started> page to get up and running fast."
+  },
   "discord": {
     "title": "Discord",
     "description": "We have a <discord>discord for 18xx-Maker</discord>. Please use it for any development chat or support!"
