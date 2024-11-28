@@ -1,5 +1,35 @@
 # Changelog
 
+## [1.0.0-beta.106](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.105...v1.0.0-beta.106) (2024-11-28)
+
+
+### :tada: Features
+
+* **cli:** consolidated cli into one command: maker ([#653](https://github.com/18xx-maker/18xx-maker/issues/653)) ([0f9e194](https://github.com/18xx-maker/18xx-maker/commit/0f9e194c4f050d8ccf4fe3a201a3af021ac83af8))
+* validate config schema before updating store. ([#647](https://github.com/18xx-maker/18xx-maker/issues/647)) ([e64e0ea](https://github.com/18xx-maker/18xx-maker/commit/e64e0ea07a3bff6380b0a1d688bd11c280872122))
+
+
+### :bug: Bug Fixes
+
+* **app:** properly make windows transparent without deprecation warnings ([#651](https://github.com/18xx-maker/18xx-maker/issues/651)) ([1cc77a0](https://github.com/18xx-maker/18xx-maker/commit/1cc77a07877917ac1d92e9470f04a869d5e83d41))
+* **cli:** validate:schemas is still needed ([#655](https://github.com/18xx-maker/18xx-maker/issues/655)) ([98593a1](https://github.com/18xx-maker/18xx-maker/commit/98593a14ec9512123c69167605116f3ffb19784d))
+* **docs:** table display is now working in markdown docs ([#648](https://github.com/18xx-maker/18xx-maker/issues/648)) ([4cf794c](https://github.com/18xx-maker/18xx-maker/commit/4cf794c9dc48796edd9e726b8e39d308d3fe1350))
+* **elements:** print at least one token on a page ([#645](https://github.com/18xx-maker/18xx-maker/issues/645)). ([#646](https://github.com/18xx-maker/18xx-maker/issues/646)) ([ae5509f](https://github.com/18xx-maker/18xx-maker/commit/ae5509f1eff5325903898b219b68688e8b000c89))
+
+
+### :broom: Chores
+
+* **app:** improve the app info page a bit ([#649](https://github.com/18xx-maker/18xx-maker/issues/649)) ([d14d6aa](https://github.com/18xx-maker/18xx-maker/commit/d14d6aaf075b2d520812d6aa24abbbe4edf94637))
+* **app:** turn sandbox mode on ([#652](https://github.com/18xx-maker/18xx-maker/issues/652)) ([364d33d](https://github.com/18xx-maker/18xx-maker/commit/364d33d463ef87ada34a1baf55b575c63ca34cde))
+* **cli:** replaced ajv with json-schema-library ([0f9e194](https://github.com/18xx-maker/18xx-maker/commit/0f9e194c4f050d8ccf4fe3a201a3af021ac83af8))
+
+
+### :book: Documentation
+
+* **github:** rearrangement of doc files and adding GFM ([#644](https://github.com/18xx-maker/18xx-maker/issues/644)) ([e100067](https://github.com/18xx-maker/18xx-maker/commit/e100067ae485d8b601f6ad6ad75940965e523397))
+* **readme:** adding analytics badge ([#641](https://github.com/18xx-maker/18xx-maker/issues/641)) ([549abf8](https://github.com/18xx-maker/18xx-maker/commit/549abf84c1ab0207953efc5b4b70b1d3bf1f00cc))
+* **readme:** adding UV label to metric ([#643](https://github.com/18xx-maker/18xx-maker/issues/643)) ([4992365](https://github.com/18xx-maker/18xx-maker/commit/4992365b6b6c448afa402672f9d19182ac0574fc))
+
 ## [1.0.0-beta.105](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.104...v1.0.0-beta.105) (2024-11-27)
 
 
