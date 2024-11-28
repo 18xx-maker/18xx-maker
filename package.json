@@ -10,7 +10,10 @@
   "private": true,
   "main": "./dist/main/index.cjs",
   "bin": {
-    "18xx-schemas": "bin/schemas.cjs"
+    "maker": "bin/maker.js"
+  },
+  "imports": {
+    "#cli/*": "./src/cli/*.js"
   },
   "scripts": {
     "b18": "node --disable-warning=ExperimentalWarning ./bin/b18.js",
@@ -25,6 +28,7 @@
     "lint:fix": "run-s lint:js:fix lint:css:fix",
     "lint:js": "eslint .",
     "lint:js:fix": "eslint --fix .",
+    "maker": "node bin/maker.js",
     "package:app": "electron-builder build -mwl -p never",
     "pretty": "prettier -c .",
     "pretty:fix": "prettier --write .",
@@ -90,6 +94,7 @@
       "^ramda$",
       "",
       "^@(/.*)$",
+      "^#(.*)$",
       "^[.]",
       "",
       "^@tests(/.*)$",
@@ -206,6 +211,7 @@
     "chokidar": "^3.6.0",
     "commander": "^12.1.0",
     "electron-updater": "^6.3.9",
+    "env-paths": "^3.0.0",
     "express": "^4.21.1",
     "glob": "^11.0.0",
     "ramda": "^0.30.1"
