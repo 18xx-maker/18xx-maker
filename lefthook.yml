@@ -13,6 +13,8 @@ pre-commit:
     validate:
       glob: "*.json"
       exclude:
+        - "components.json"
+        - "jsconfig.json"
         - "package.json"
         - "release-please-config.json"
         - ".release-please-manifest.json"
