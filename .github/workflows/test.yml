@@ -33,7 +33,7 @@ jobs:
         run: pnpm --silent commitlint -l
       - name: Prettier
         run: pnpm --silent pretty
-      - name: ESLint and Stylelint
+      - name: ESLint
         run: pnpm --silent lint
       - name: 18xx Maker Validate
         run: pnpm --silent validate
