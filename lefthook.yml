@@ -36,11 +36,6 @@ pre-commit:
       run: pnpm eslint --fix {staged_files}
       stage_fixed: true
       priority: 30
-    stylelint:
-      glob: "*.css"
-      run: pnpm stylelint --fix {staged_files}
-      stage_fixed: true
-      priority: 30
     test:
       glob: "*.{js,mjs,cjs,jsx,json}"
       run: pnpm vitest related --coverage.enabled=false --reporter=basic --exclude "tests/**" --run {staged_files}
