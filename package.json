@@ -177,6 +177,8 @@
     "bluebird": "^3.7.2",
     "chalk": "^4.1.2",
     "chokidar": "^3.6.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "commander": "^12.1.0",
     "electron-updater": "^6.3.9",
     "env-paths": "^3.0.0",
@@ -184,7 +186,10 @@
     "glob": "^11.0.0",
     "json-schema-library": "10.0.0-rc2",
     "lodash.debounce": "^4.0.8",
-    "ramda": "^0.30.1"
+    "lucide-react": "^0.462.0",
+    "ramda": "^0.30.1",
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.2",
