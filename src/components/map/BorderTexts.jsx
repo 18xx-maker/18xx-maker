@@ -2,6 +2,7 @@ import { addIndex, map } from "ramda";
 
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
+
 import { useGame } from "@/hooks";
 import { multiDefaultTo } from "@/util";
 import { mapCoord } from "@/util/map";

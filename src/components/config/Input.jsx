@@ -2,6 +2,8 @@ import debounce from "lodash.debounce";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
+import { assocPath, map, path, split } from "ramda";
+
 import Checkbox from "@mui/material/Checkbox";
 import MUIInput from "@mui/material/FilledInput";
 import FormControl from "@mui/material/FormControl";
@@ -12,9 +14,8 @@ import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
 
-import { assocPath, map, path, split } from "ramda";
-
 import UnitInput from "@/components/config/UnitInput";
+
 import { useConfig, useValidation } from "@/hooks";
 import { getPath, getSchema } from "@/util/input";
 

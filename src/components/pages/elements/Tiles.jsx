@@ -1,13 +1,6 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid2";
-import Pagination from "@mui/material/Pagination";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
-
 import {
   filter,
   is,
@@ -20,9 +13,18 @@ import {
   values,
 } from "ramda";
 
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
 import Svg from "@/components/Svg";
 import Tile from "@/components/Tile";
 import TileFilters from "@/components/TileFilters";
+
 import { tiles } from "@/data";
 import { useIntParam, useRangeParam, useStringParam } from "@/util/query";
 
@@ -51,30 +53,8 @@ const revenues = reduce(
   values(tiles),
 );
 
-const useStyles = makeStyles((theme) => ({
-  page: {
-    overflow: "auto",
-    margin: theme.spacing(2, 0),
-    padding: theme.spacing(2, 2, 0, 2),
-
-    "& p": {
-      marginBottom: theme.spacing(2),
-    },
-  },
-  filter: {
-    display: "flex",
-    flexDirection: "row",
-    paddingBottom: theme.spacing(2),
-
-    "& > div": {
-      marginRight: theme.spacing(2),
-    },
-  },
-}));
-
 const Tiles = () => {
   const { t } = useTranslation();
-  const classes = useStyles();
 
   const [page, setPage] = useIntParam("page", 1);
   const [color, setColor] = useStringParam("color", "all");
@@ -142,46 +122,49 @@ const Tiles = () => {
   const pageCount = filteredTiles.length;
   const effectivePage = min(pageCount, page);
   const pagedTiles = filteredTiles[effectivePage - 1] || [];
+  const prevPage = max(1, effectivePage - 1);
+  const nextPage = min(pageCount, effectivePage + 1);
 
   return (
-    <Container maxWidth="lg">
-      <Paper data-testid="tiles" elevation={5} className={classes.page}>
-        <Typography variant="h4" gutterBottom>
-          {t("elements.tiles.title")}
-        </Typography>
-        <Typography variant="body1">
-          {t("elements.tiles.page.description")}
-        </Typography>
-      </Paper>
-      <TileFilters
-        {...{
-          color,
-          setColor,
-          id,
-          setId,
-          includes,
-          setIncludes,
-          revenue,
-          setRevenue,
-          revenues,
-        }}
-      />
-      <Container sx={{ display: "flex", justifyContent: "center" }}>
-        <Pagination
-          size="large"
-          color="primary"
-          page={effectivePage}
-          count={pageCount}
-          onChange={(_, value) => setPage(value)}
+    <div className="p-4">
+      <h1 className="text-4xl font-extrabold">{t("elements.tiles.title")}</h1>
+      <p className="leading-7 my-4 text-wrap">
+        {t("elements.tiles.page.description")}
+      </p>
+      <div className="grid place-content-center grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 max-w-7xl">
+        <TileFilters
+          {...{
+            color,
+            setColor,
+            id,
+            setId,
+            includes,
+            setIncludes,
+            revenue,
+            setRevenue,
+            revenues,
+          }}
         />
-      </Container>
-      <Grid container spacing={2}>
+        <div className="col-span-2 lg:col-span-3 xl:col-span-4 2xl:col-span-5 bg-muted flex flex-rows place-items-center rounded-xl border px-4 py-2">
+          <Pagination>
+            <PaginationContent className="w-full">
+              <PaginationItem>
+                <PaginationPrevious onClick={() => setPage(prevPage)} />
+              </PaginationItem>
+              <PaginationItem className="flex-grow text-center">
+                Page {effectivePage} of {pageCount}
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationNext onClick={() => setPage(nextPage)} />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
         {map(
           (t) => (
-            <Grid
+            <div
               key={t.id}
-              size={{ xs: 6, sm: 4, md: 4, lg: 3 }}
-              sx={{ display: "flex", justifyContent: "center" }}
+              className="checkered border rounded-xl flex flex-col items-center"
             >
               <Svg
                 width="200"
@@ -191,12 +174,12 @@ const Tiles = () => {
               >
                 <Tile id={t.id} width={150} x={0} y={0} />
               </Svg>
-            </Grid>
+            </div>
           ),
           pagedTiles,
         )}
-      </Grid>
-    </Container>
+      </div>
+    </div>
   );
 };
 

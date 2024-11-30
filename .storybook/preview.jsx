@@ -5,6 +5,7 @@ import { RouterProvider, createMemoryRouter } from "react-router";
 import { keys, map, sortBy } from "ramda";
 
 import Svg from "@/components/Svg";
+
 import { companyThemes, mapThemes } from "@/data";
 import { initialState, rootReducer } from "@/state";
 

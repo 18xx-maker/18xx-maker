@@ -1,5 +1,6 @@
 import MarketPaginated from "@/components/market/MarketPaginated";
 import MarketSingle from "@/components/market/MarketSingle";
+
 import { useConfig, useGame } from "@/hooks";
 import { useBooleanParam } from "@/util/query";
 

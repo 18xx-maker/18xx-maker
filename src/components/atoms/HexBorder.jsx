@@ -1,6 +1,7 @@
 import { chain, includes } from "ramda";
 
 import Color from "@/components/Color";
+
 import { useOrientation } from "@/context/OrientationContext";
 
 const LINES = [

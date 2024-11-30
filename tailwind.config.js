@@ -1,7 +1,14 @@
+import plugin from "tailwindcss/plugin";
+
 export default {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
+    fontFamily: {
+      display: ["display"],
+      serif: ["serif"],
+      "sans-serif": ["sans-serif"],
+    },
     extend: {
       borderRadius: {
         lg: "var(--radius)",
@@ -9,6 +16,10 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        success: "hsl(var(--success-foreground))",
+        info: "hsl(var(--info-foreground))",
+        warning: "hsl(var(--warning-foreground))",
+        error: "hsl(var(--error-foreground))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -62,5 +73,10 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    plugin(({ addVariant }) => {
+      addVariant("electron", ".electron &");
+    }),
+  ],
 };

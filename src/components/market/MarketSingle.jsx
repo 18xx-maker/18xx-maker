@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 
 import Svg from "@/components/Svg";
 import Market from "@/components/market/Market";
+
 import { unitsToCss } from "@/util";
 import { getMarketData } from "@/util/market";
 

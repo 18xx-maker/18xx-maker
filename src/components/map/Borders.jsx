@@ -1,6 +1,7 @@
 import { addIndex, concat, map } from "ramda";
 
 import Color from "@/components/Color";
+
 import { mapCoord } from "@/util/map";
 
 const Border = ({ border, data, bg }) => {

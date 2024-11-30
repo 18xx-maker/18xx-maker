@@ -30,7 +30,7 @@ This project is written in [React](https://react.dev/) with
 uses [Vite](https://vite.dev/) as a build framework and
 [Vitest](https://vitest.dev/) as a testing framework. The application version is
 created using [Electron](https://www.electronjs.org/). The ui was made with
-[Material-UI](https://mui.com/material-ui/) and developed with
+[shadcn/ui](https://ui.shadcn.com/) and developed with
 [Storybook](https://storybook.js.org/). It uses
 [Playwright](https://playwright.dev/) for both testing and running a headlines
 chrome in scripts.

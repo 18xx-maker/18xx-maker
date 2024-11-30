@@ -3,6 +3,7 @@ import { min } from "ramda";
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
 import CompanyToken from "@/components/tokens/CompanyToken";
+
 import ColorContext from "@/context/ColorContext";
 import { useConfig } from "@/hooks";
 import { multiDefaultTo } from "@/util";

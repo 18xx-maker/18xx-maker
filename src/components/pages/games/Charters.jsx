@@ -17,6 +17,7 @@ import Charter from "@/components/Charter";
 import PageSetup from "@/components/PageSetup";
 import Pins from "@/components/Pins";
 import Svg from "@/components/Svg";
+
 import { useConfig, useGame } from "@/hooks";
 import { getCharterData } from "@/util";
 import { compileCompanies, overrideCompanies } from "@/util/companies";

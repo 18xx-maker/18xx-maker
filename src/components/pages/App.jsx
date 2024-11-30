@@ -2,89 +2,17 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
-import DownloadIcon from "@mui/icons-material/Download";
-import CheckIcon from "@mui/icons-material/Replay";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
-import Container from "@mui/material/Container";
-import LinearProgress from "@mui/material/LinearProgress";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
-
 import { prop } from "ramda";
 
-import { SyntaxHighlighter, style } from "@/components/SyntaxHighlighter";
+import { Check, Download, LoaderCircle } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+
+import Code from "@/components/Code";
+
 import { logos } from "@/data";
 import { createDownloadPercent } from "@/state";
-
-const useStyles = makeStyles((theme) => ({
-  versions: {
-    width: "inherit",
-    "& svg, & img": {
-      display: "block",
-    },
-    "& td": {
-      padding: theme.spacing(0.5),
-
-      "&:first-child": {
-        paddingLeft: theme.spacing(2),
-      },
-    },
-    "& th": {
-      fontWeight: "bold",
-    },
-  },
-  page: {
-    margin: theme.spacing(2, 0),
-    padding: theme.spacing(2),
-
-    "& h4": {
-      padding: theme.spacing(0, 0, 2, 0),
-    },
-
-    "& h5": {
-      padding: theme.spacing(0, 0, 2, 0),
-    },
-
-    "& p": {
-      padding: theme.spacing(0, 0, 2, 0),
-      "&:last-child": {
-        padding: 0,
-      },
-    },
-
-    "& code": {
-      padding: theme.spacing(0.4, 0.8, 0.3, 0.8),
-
-      borderRadius: theme.shape.borderRadius,
-      whiteSpace: "pre",
-      background: "rgb(245, 242, 240)",
-      textShadow: "white 0px 1px",
-      fontFamily: "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
-      color: "black",
-      fontSize: "1em",
-      fontWeight: "bold",
-    },
-
-    "& p:has(+ pre)": {
-      padding: 0,
-    },
-
-    "& pre": {
-      padding: theme.spacing(0, 0, 2, 0),
-      marginBottom: "0 !important",
-      "&:last-child": {
-        padding: 0,
-      },
-    },
-  },
-}));
 
 const ChromeIcon = () => {
   const Component = logos["webdev/chrome"];
@@ -96,7 +24,7 @@ const ElectronIcon = () => {
   return <Component width="24" height="24" />;
 };
 
-const PlatformIcon = ({ platform }) => {
+const PlatformIcon = ({ platform, ...pass }) => {
   let Component;
   switch (platform) {
     case "darwin":
@@ -112,7 +40,7 @@ const PlatformIcon = ({ platform }) => {
       return null;
   }
 
-  return <Component width="24" height="24" />;
+  return <Component width="24" height="24" {...pass} />;
 };
 
 const Update = () => {
@@ -134,58 +62,49 @@ const Update = () => {
   }
 
   if (update.checking) {
-    return <CircularProgress />;
+    return <LoaderCircle className="animate-spin" />;
   }
 
   if (update.downloading !== undefined) {
-    return <LinearProgress variant="determinate" value={update.downloading} />;
+    return <Progress value={update.downloading} />;
   }
 
   if (!update.available && update.dev) {
-    return <Typography variant="body1">{t("app.updates.dev")}</Typography>;
+    return <p>{t("app.updates.dev")}</p>;
   }
 
   if (!update.available) {
     return (
       <>
-        <Typography variant="body1">
+        <p>
           {update.error
             ? t("app.updates.error")
             : t("app.updates.latest", { version: update.info.version })}
-        </Typography>
-        <Typography variant="body1">
-          <Button
-            startIcon={<CheckIcon />}
-            variant="contained"
-            onClick={checkForUpdates}
-          >
+        </p>
+        <p>
+          <Button variant="outline" onClick={checkForUpdates}>
+            <Check />
             {t("app.updates.check")}
           </Button>
-        </Typography>
+        </p>
       </>
     );
   }
 
   return (
-    <>
-      <Typography variant="body1">
-        {t("app.updates.available", { version: update.info.version })}
-      </Typography>
-      <Typography variant="body1">
-        <Button
-          startIcon={<DownloadIcon />}
-          variant="contained"
-          onClick={quitAndInstall}
-        >
+    <div>
+      <p>{t("app.updates.available", { version: update.info.version })}</p>
+      <p>
+        <Button variant="outline" onClick={quitAndInstall}>
+          <Download />
           {t("app.updates.update")}
         </Button>
-      </Typography>
-    </>
+      </p>
+    </div>
   );
 };
 
 const App = () => {
-  const classes = useStyles();
   const { t } = useTranslation();
 
   const [data, setData] = useState();
@@ -195,65 +114,46 @@ const App = () => {
   }, []);
 
   return (
-    <Container maxWidth="md">
-      <Paper elevation={5} className={classes.page}>
-        <Typography variant="h4">{t("app.title")}</Typography>
-        {data && (
-          <Table size="small" className={classes.versions}>
-            <TableHead>
-              <TableRow>
-                <TableCell colSpan="2">{t("app.versions")}</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell align="right">
-                  <PlatformIcon platform={data.platform} />
-                </TableCell>
-                <TableCell>{data.versions.system}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell align="right">
-                  <ElectronIcon />
-                </TableCell>
-                <TableCell>{data.versions.electron}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell align="right">
-                  <ChromeIcon />
-                </TableCell>
-                <TableCell>{data.versions.chrome}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell align="right">
-                  <img src="./logo.png" width="24" height="24" />
-                </TableCell>
-                <TableCell>{data.versions.app}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        )}
-      </Paper>
-      <Paper elevation={5} className={classes.page}>
-        <Typography variant="h4">{t("app.updates.title")}</Typography>
-        <Update />
-      </Paper>
+    <div className="p-4">
+      <h1 className="text-4xl font-extrabold">{t("app.title")}</h1>
       {data && (
-        <Paper elevation={5} className={classes.page}>
-          <Typography variant="body1">{t("app.config.what")}</Typography>
-          <Typography variant="body1">
-            {t("app.config.file")} <code>{data.path}</code>
-          </Typography>
-          <SyntaxHighlighter
-            style={style}
-            customStyle={{ margin: "1em 0" }}
-            language="json"
-          >
-            {JSON.stringify(data.config, null, 2)}
-          </SyntaxHighlighter>
-        </Paper>
+        <div className="p-4 border rounded-xl my-4">
+          <h2 className="text-2xl font-bold">{t("app.versions")}</h2>
+          <div className="flex flex-row gap-4 mt-4">
+            <PlatformIcon
+              platform={data.platform}
+              className="fill-white stroke-white"
+            />
+            {data.versions.system}
+          </div>
+          <div className="flex flex-row gap-4 mt-4">
+            <ElectronIcon />
+            {data.versions.electron}
+          </div>
+          <div className="flex flex-row gap-4 mt-4">
+            <ChromeIcon />
+            {data.versions.chrome}
+          </div>
+          <div className="flex flex-row gap-4 mt-4">
+            <img src="./logo.png" width="24" height="24" />
+            {data.versions.app}
+          </div>
+        </div>
       )}
-    </Container>
+      <div className="p-4 border rounded-xl mb-4">
+        <h2 className="text-2xl font-bold mb-4">{t("app.updates.title")}</h2>
+        <Update />
+      </div>
+      {data && (
+        <div className="border rounded-xl overflow-hidden">
+          <p className="p-4">{t("app.config.what")}</p>
+          <p className="px-4 pb-4">
+            {t("app.config.file")} <code>{data.path}</code>
+          </p>
+          <Code language="json">{JSON.stringify(data.config, null, 2)}</Code>
+        </div>
+      )}
+    </div>
   );
 };
 export default App;
