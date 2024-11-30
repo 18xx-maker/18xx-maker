@@ -1,16 +1,12 @@
 import { diff } from "deep-object-diff";
-import { Draft07, validateAsync } from "json-schema-library";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 
 import { assocPath, defaultTo, mergeDeepRight } from "ramda";
 
-import { useGame } from "@/hooks";
-import configSchemaJSON from "@/schemas/config.schema.json";
+import { useGame, useValidation } from "@/hooks";
 import { createResetConfig, createSetConfig } from "@/state";
-
-const configSchema = new Draft07(configSchemaJSON);
 
 const configs = import.meta.glob("../*.json", {
   eager: true,
@@ -24,6 +20,8 @@ export const useConfig = () => {
   const dispatch = useDispatch();
   const game = useGame();
   const location = useLocation();
+  const { validateConfigSchema } = useValidation();
+
   const searchParams = new URLSearchParams(location.search);
 
   const storedConfig = useSelector((state) => state.config);
@@ -45,10 +43,7 @@ export const useConfig = () => {
 
   const setConfig = useCallback(
     async (config) => {
-      const errors = await validateAsync(configSchema, config, {
-        onError: (err) => console.log(err),
-        schema: configSchema.getSchema(),
-      });
+      const errors = await validateConfigSchema(config);
 
       if (!errors.length) {
         return dispatch(createSetConfig(diff(initialConfig, config)));
