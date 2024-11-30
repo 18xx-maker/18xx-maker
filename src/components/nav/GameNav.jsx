@@ -2,6 +2,8 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Link as RouterLink, useLocation, useMatch } from "react-router";
 
+import { addIndex, is, map } from "ramda";
+
 import RulesIcon from "@mui/icons-material/Gavel";
 import LicenseIcon from "@mui/icons-material/Lock";
 import PurchaseIcon from "@mui/icons-material/MonetizationOn";
@@ -27,9 +29,8 @@ import Switch from "@mui/material/Switch";
 import { blue, green, red } from "@mui/material/colors";
 import makeStyles from "@mui/styles/makeStyles";
 
-import { addIndex, is, map } from "ramda";
-
 import File from "@/components/File";
+
 import { useGame } from "@/hooks/game.js";
 import { refreshGame } from "@/state";
 import { trackEvent } from "@/util/analytics";

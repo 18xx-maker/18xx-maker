@@ -2,6 +2,7 @@ import { defaultTo, find, is, map } from "ramda";
 
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
+
 import { trainImages } from "@/data";
 import { useConfig } from "@/hooks";
 

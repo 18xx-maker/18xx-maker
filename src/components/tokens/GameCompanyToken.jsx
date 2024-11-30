@@ -2,6 +2,7 @@ import { findIndex, propEq } from "ramda";
 
 import CompanyToken from "@/components/tokens/CompanyToken";
 import Token from "@/components/tokens/Token";
+
 import { useConfig, useGame } from "@/hooks";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
 

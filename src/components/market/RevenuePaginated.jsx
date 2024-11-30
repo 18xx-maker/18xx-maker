@@ -1,5 +1,6 @@
 import Paginate from "@/components/Paginate";
 import Revenue from "@/components/market/Revenue";
+
 import { useConfig, useGame } from "@/hooks";
 import { getRevenueData } from "@/util/market";
 

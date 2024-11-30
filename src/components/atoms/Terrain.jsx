@@ -1,5 +1,6 @@
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
+
 import RotateContext from "@/context/RotateContext";
 import { icons } from "@/data";
 import { useGame } from "@/hooks";

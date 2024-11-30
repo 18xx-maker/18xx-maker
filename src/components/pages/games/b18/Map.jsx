@@ -2,6 +2,7 @@ import { assocPath, is, isNil } from "ramda";
 
 import Svg from "@/components/Svg";
 import Map from "@/components/map/Map";
+
 import { MapOrientation } from "@/context/OrientationContext";
 import { useConfig, useGame } from "@/hooks";
 import { getMapData } from "@/util/map";

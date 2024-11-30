@@ -140,7 +140,7 @@
       }
     },
     "atoms": {
-      "title": "Map Elements",
+      "title": "Atoms",
       "description": "Basic atoms for maps and tiles",
       "page": {
         "description": "This page shows examples of all items that you can display on either map hexes or tiles. Use these examples to help prototype your game!"
@@ -163,6 +163,10 @@
     "description": "These are the games that you have loaded into 18xx Maker"
   },
   "game": {
+    "type": {
+      "bundled": "Bundled",
+      "system": "System"
+    },
     "nav": {
       "background": "Background",
       "cards": "Cards",
@@ -213,10 +217,6 @@
   "gtg": {
     "title": "Partnership with Grand Trunk Games",
     "description": "<gtg>Grand Trunk Games</gtg> is a great publisher and a big supporter of print and play. They have decided to make all of their games available on 18xx Maker as the official print and play provider! If you are able to we highly recommend supporting this publisher by purchasing their excellent productions of 1861/67 and Shikoku 1889!"
-  },
-  "app": {
-    "title": "The 18xx Maker Application",
-    "description": "We have a version of <app>18xx Maker bundled as a desktop application</app>. The interface is the same but there is better support for file editing and more exporting options. If you are working on prototyping your own game we highly recommend you download the app."
   },
   "credits": {
     "title": "Credits",
