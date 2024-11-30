@@ -3,6 +3,7 @@ import path from "node:path";
 import react from "@vitejs/plugin-react-swc";
 import autoprefixer from "autoprefixer";
 import browserslistToEsbuild from "browserslist-to-esbuild";
+import postcssImport from "postcss-import";
 import tailwindcss from "tailwindcss";
 import { defineConfig } from "vite";
 import { svgPlugin as svg } from "vite-plugin-fast-react-svg";
@@ -44,7 +45,11 @@ export default defineConfig({
   },
   css: {
     postcss: {
-      plugins: [tailwindcss(), autoprefixer({ end: "production" })],
+      plugins: [
+        postcssImport(),
+        tailwindcss(),
+        autoprefixer({ end: "production" }),
+      ],
     },
   },
   json: {

@@ -1,4 +1,5 @@
 import Color from "@/components/Color";
+
 import { multiDefaultTo } from "@/util";
 
 const Legend = ({

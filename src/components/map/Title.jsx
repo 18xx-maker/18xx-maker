@@ -1,4 +1,5 @@
 import Color from "@/components/Color";
+
 import { useConfig } from "@/hooks";
 
 const Title = ({ game, variation, hexWidth }) => {

@@ -1,4 +1,5 @@
 import Color from "@/components/Color";
+
 import { useOrientation } from "@/context/OrientationContext";
 import { useConfig } from "@/hooks";
 

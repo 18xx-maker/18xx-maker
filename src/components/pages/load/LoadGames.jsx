@@ -3,44 +3,23 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
-import OpenIcon from "@mui/icons-material/FileOpen";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
-
 import { chain, compose, map, prop, sortBy, values } from "ramda";
 
+import { FolderOpen } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+
 import GameRow from "@/components/pages/load/GameRow";
-import { createAlert, deleteGame, loadSummaries } from "@/state";
+
+import { createAlert, loadSummaries } from "@/state";
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import * as opfs from "@/util/opfs";
-
-const useStyles = makeStyles((theme) => ({
-  page: {
-    overflow: "auto",
-    margin: theme.spacing(2, 0),
-    padding: theme.spacing(2, 2, 0, 2),
-
-    "& p": {
-      marginBottom: theme.spacing(2),
-    },
-  },
-}));
 
 const sortSummaries = compose(sortBy(prop("title")), chain(values), values);
 
 const LoadGames = () => {
   const { t } = useTranslation();
-  const classes = useStyles();
   const dispatch = useDispatch();
   const summaries = useSelector((state) => state.summaries);
   const navigate = useNavigate();
@@ -50,14 +29,8 @@ const LoadGames = () => {
     dispatch(loadSummaries());
   }, [dispatch]);
 
-  const deleteHandler = (slug, title) => {
-    dispatch(deleteGame(slug, title))
-      .then(() => dispatch(loadSummaries()))
-      .catch(() => {});
-  };
-
   const gameRows = map(
-    (game) => <GameRow game={game} key={game.slug} onDelete={deleteHandler} />,
+    (game) => <GameRow game={game} key={game.slug} />,
     sortSummaries(summaries),
   );
 
@@ -85,61 +58,41 @@ const LoadGames = () => {
   };
 
   return (
-    <Container maxWidth="md">
-      <Paper data-testid="games" className={classes.page} elevation={10}>
-        <Typography variant="h3">{t("games.title")}</Typography>
-        <Typography variant="body1">{t("games.description")}</Typography>
-        {(capability.electron || capability.system) && (
-          <Button
-            variant="contained"
-            onClick={openGame}
-            startIcon={<OpenIcon />}
-          >
-            {t("game.open")}
-          </Button>
-        )}
-        {!capability.electron && !capability.system && capability.internal && (
-          <Button
-            variant="contained"
-            component="label"
-            role={undefined}
-            startIcon={<OpenIcon />}
-          >
-            {t("game.open")}
-            <input
-              style={{
-                bottom: 0,
-                clip: "rect(0 0 0 0)",
-                clipPath: "inset(50%)",
-                height: 1,
-                left: 0,
-                overflow: "hidden",
-                position: "absolute",
-                whiteSpace: "nowrap",
-                width: 1,
-              }}
-              type="file"
-              onChange={openGame}
-              multiple
-            />
-          </Button>
-        )}
-        <TableContainer>
-          <Table stickyHeader>
-            <TableHead>
-              <TableRow>
-                <TableCell>Title</TableCell>
-                <TableCell>Designer</TableCell>
-                <TableCell colSpan={2}>Publisher</TableCell>
-                <TableCell>Type</TableCell>
-                <TableCell></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>{gameRows}</TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-    </Container>
+    <div className="p-4">
+      <h1 className="text-4xl font-extrabold">{t("games.title")}</h1>
+      <p className="leading-7 my-4 text-wrap">{t("games.description")}</p>
+      {(capability.electron || capability.system) && (
+        <Button variant="outline" onClick={openGame}>
+          <FolderOpen />
+          {t("game.open")}
+        </Button>
+      )}
+      {!capability.electron && !capability.system && capability.internal && (
+        <Button variant="outline">
+          <FolderOpen />
+          {t("game.open")}
+          <input
+            style={{
+              bottom: 0,
+              clip: "rect(0 0 0 0)",
+              clipPath: "inset(50%)",
+              height: 1,
+              left: 0,
+              overflow: "hidden",
+              position: "absolute",
+              whiteSpace: "nowrap",
+              width: 1,
+            }}
+            type="file"
+            onChange={openGame}
+            multiple
+          />
+        </Button>
+      )}
+      <div className="flex flex-col gap-6 mt-6 flex-wrap max-w-2xl">
+        {gameRows}
+      </div>
+    </div>
   );
 };
 

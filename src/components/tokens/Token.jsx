@@ -3,6 +3,7 @@ import { useId } from "react";
 import { defaultTo } from "ramda";
 
 import Color from "@/components/Color";
+
 import CityRotateContext from "@/context/CityRotateContext";
 import RotateContext from "@/context/RotateContext";
 import { icons, logos } from "@/data";

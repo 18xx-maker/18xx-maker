@@ -5,6 +5,7 @@ import { addIndex, compose, concat, is, map, max, propEq, reject } from "ramda";
 import Svg from "@/components/Svg";
 import CompanyToken from "@/components/tokens/CompanyToken";
 import Token from "@/components/tokens/Token";
+
 import ColorContext from "@/context/ColorContext";
 import { useConfig, useGame } from "@/hooks";
 import { compileCompanies, overrideCompanies } from "@/util/companies.js";
