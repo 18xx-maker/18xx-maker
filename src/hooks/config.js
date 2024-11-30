@@ -49,7 +49,7 @@ export const useConfig = () => {
         return dispatch(createSetConfig(diff(initialConfig, config)));
       }
     },
-    [dispatch],
+    [dispatch, validateConfigSchema],
   );
 
   return {
