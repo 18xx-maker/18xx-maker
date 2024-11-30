@@ -2,9 +2,11 @@ import {
   chain,
   complement,
   compose,
+  concat,
   filter,
   isEmpty,
   path,
+  replace,
   split,
 } from "ramda";
 
@@ -17,3 +19,4 @@ export const getSchemaPath = compose(
   split("."),
 );
 export const getSchema = (name) => path(getSchemaPath(name), schema);
+export const getValidationPath = compose(concat("#/"), replace(/\./g, "/"));

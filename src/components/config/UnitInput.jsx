@@ -31,11 +31,13 @@ const allUnits = {
 };
 
 // Component to help input units
-const UnitInput = ({ name, value, label, onChange }) => {
+const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
   const classes = useStyles();
   let [error, setError] = useState(false);
   let [units, setUnits] = useState("inches");
   let [internalValue, setInternalValue] = useState(value / allUnits[units]);
+
+  const isError = error || errorValidation;
 
   useEffect(() => {
     setInternalValue(value / allUnits[units]);
@@ -66,7 +68,7 @@ const UnitInput = ({ name, value, label, onChange }) => {
 
   return (
     <Box className={classes.configItem}>
-      <FormControl variant="filled" error={error}>
+      <FormControl variant="filled" error={isError}>
         <InputLabel id={`${name}-label`}>{label}</InputLabel>
         <MUIInput
           id={name}

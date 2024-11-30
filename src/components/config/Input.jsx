@@ -14,7 +14,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import { assocPath, map, path, split } from "ramda";
 
 import UnitInput from "@/components/config/UnitInput";
-import { useConfig } from "@/hooks";
+import { useConfig, useValidation } from "@/hooks";
 import { getPath, getSchema } from "@/util/input";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +27,10 @@ const useStyles = makeStyles((theme) => ({
 const Input = ({ name, label, description, dimension }) => {
   const classes = useStyles();
   const { config, setConfig } = useConfig();
+  const { isValidByInputName } = useValidation();
   const value = path(split(".", name), config);
+
+  const error = !isValidByInputName(name);
 
   let valuePath = getPath(name);
   let rawUpdate = (value) => setConfig(assocPath(valuePath, value, config));
@@ -61,6 +64,7 @@ const Input = ({ name, label, description, dimension }) => {
             labelId={`${name}-label`}
             value={value}
             onChange={update}
+            error={error}
           >
             {map(
               (opt) => (
@@ -85,6 +89,7 @@ const Input = ({ name, label, description, dimension }) => {
             id={name}
             name={name}
             label={label}
+            error={error}
           />
         </FormControl>
       );
@@ -109,6 +114,7 @@ const Input = ({ name, label, description, dimension }) => {
             value={value}
             label={label}
             onChange={rawUpdate}
+            errorValidation={error}
           />
         ) : (
           <FormControl className={classes.configItem} variant="filled">
@@ -120,6 +126,7 @@ const Input = ({ name, label, description, dimension }) => {
               value={value}
               onChange={update}
               inputProps={{ type: "number" }}
+              error={error}
             />
           </FormControl>
         )}
