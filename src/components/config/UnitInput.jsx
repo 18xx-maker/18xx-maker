@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { keys, map } from "ramda";
+
 import Box from "@mui/material/Box";
 import MUIInput from "@mui/material/FilledInput";
 import FormControl from "@mui/material/FormControl";
@@ -7,8 +9,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import makeStyles from "@mui/styles/makeStyles";
-
-import { keys, map } from "ramda";
 
 const useStyles = makeStyles((theme) => ({
   configItem: {

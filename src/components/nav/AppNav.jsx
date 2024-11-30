@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Link, useMatch } from "react-router";
 
+import { prop } from "ramda";
+
 import ElementsIcon from "@mui/icons-material/Category";
 import DownloadIcon from "@mui/icons-material/Download";
 import DocumentationIcon from "@mui/icons-material/Help";
@@ -22,9 +24,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import makeStyles from "@mui/styles/makeStyles";
 
-import { prop } from "ramda";
-
 import MobileMenuButton from "@/components/nav/MobileMenuButton";
+
 import { useLoadedGame } from "@/hooks/game.js";
 import { useBooleanParam } from "@/util/query";
 

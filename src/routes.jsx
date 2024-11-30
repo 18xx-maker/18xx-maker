@@ -32,6 +32,7 @@ import B18Tiles from "@/components/pages/games/b18/Tiles";
 import B18Tokens from "@/components/pages/games/b18/Tokens";
 // Games Routes
 import LoadGames from "@/components/pages/load/LoadGames";
+
 import capability from "@/util/capability";
 
 export const rootRoutes = [

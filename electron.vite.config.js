@@ -3,6 +3,7 @@ import path from "node:path";
 import react from "@vitejs/plugin-react-swc";
 import autoprefixer from "autoprefixer";
 import { defineConfig, externalizeDepsPlugin } from "electron-vite";
+import postcssImport from "postcss-import";
 import tailwindcss from "tailwindcss";
 import { svgPlugin as svg } from "vite-plugin-fast-react-svg";
 
@@ -52,7 +53,7 @@ export default defineConfig({
     },
     css: {
       postcss: {
-        plugins: [tailwindcss(), autoprefixer({ env: "app" })],
+        plugins: [postcssImport(), tailwindcss(), autoprefixer({ env: "app" })],
       },
     },
     json: {

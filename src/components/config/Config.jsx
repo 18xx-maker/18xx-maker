@@ -1,15 +1,5 @@
 import { diff } from "deep-object-diff";
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
-
 import {
   chain,
   complement,
@@ -22,10 +12,21 @@ import {
   split,
 } from "ramda";
 
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Typography from "@mui/material/Typography";
+import makeStyles from "@mui/styles/makeStyles";
+
+import Code from "@/components/Code";
 import File from "@/components/File";
-import { SyntaxHighlighter, style } from "@/components/SyntaxHighlighter";
 import Input from "@/components/config/Input";
 import ThemePreview from "@/components/config/ThemePreview";
+
 import { companyThemes, mapThemes } from "@/data";
 import defaultConfig from "@/defaults.json";
 import { useConfig } from "@/hooks";
@@ -621,9 +622,9 @@ const Config = () => {
           src/config.json if you want to apply these settings to command line or
           local servers.
         </Typography>
-        <SyntaxHighlighter style={style} language="json">
+        <Code language="json">
           {JSON.stringify(diff(defaultConfig, config), null, 2)}
-        </SyntaxHighlighter>
+        </Code>
         <File data={diff(defaultConfig, config)} filename="config.json">
           Download config.json
         </File>

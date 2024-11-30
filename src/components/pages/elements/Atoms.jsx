@@ -1,20 +1,21 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid2";
-import MenuItem from "@mui/material/MenuItem";
-import Paper from "@mui/material/Paper";
-import Select from "@mui/material/Select";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
-
 import { addIndex, chain, find, map, propEq } from "ramda";
 
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import Code from "@/components/Code";
 import Hex from "@/components/Hex";
 import Svg from "@/components/Svg";
-import { SyntaxHighlighter, style } from "@/components/SyntaxHighlighter";
+
 import { useStringParam } from "@/util/query";
 
 const atoms = [
@@ -976,79 +977,49 @@ const atoms = [
   },
 ];
 
-const useStyles = makeStyles((theme) => ({
-  hex: {
-    display: "flex",
-    justifyContent: "center",
-  },
-
-  atom: {
-    padding: theme.spacing(2, 2, 0, 2),
-
-    "& pre": {
-      overflow: "auto",
-      maxHeight: 300,
-      padding: theme.spacing(1),
-      backgroundColor: theme.palette.grey[300],
-      borderRadius: theme.shape.borderRadius,
-    },
-  },
-
-  page: {
-    overflow: "auto",
-    margin: theme.spacing(2, 0),
-    padding: theme.spacing(2, 2, 0, 2),
-
-    "& p": {
-      marginBottom: theme.spacing(2),
-    },
-  },
-}));
-
 const groupItems = map(
   (atom) => (
-    <MenuItem key={atom.group} value={atom.group}>
+    <SelectItem key={atom.group} value={atom.group}>
       {atom.group}
-    </MenuItem>
+    </SelectItem>
   ),
   atoms,
 );
 
 const Atoms = () => {
   const { t } = useTranslation();
-  const classes = useStyles();
 
   const [group, setGroup] = useStringParam("group", atoms[0].group);
 
   const examples = useMemo(
     () =>
       addIndex(chain)((h, id) => {
+        const { comment, ...atom } = h;
         return (
-          <Grid
+          <div
             key={`example-${id}`}
-            className={classes.atom}
-            size={{ xs: 12, sm: 6, lg: 4 }}
+            className="checkered border border-solid flex flex-col rounded-xl overflow-hidden items-center"
           >
-            <Box className={classes.hex}>
-              <Svg
-                width="175.205"
-                height="152"
-                viewBox="-87.6025 -76 175.205 152"
-              >
-                <Hex hex={h} id={`${id}`} border={true} bleed={true} />
-              </Svg>
-            </Box>
-            <SyntaxHighlighter
-              style={style}
-              customStyle={{ margin: "1em 0" }}
-              language="json"
+            <Svg
+              width="175.205"
+              height="152"
+              viewBox="-87.6025 -76 175.205 152"
+              className="m-4"
             >
-              {JSON.stringify(h, null, 2)}
-            </SyntaxHighlighter>
-          </Grid>
+              <Hex hex={h} id={`${id}`} border={true} bleed={true} />
+            </Svg>
+            {comment && (
+              <div className="p-4 text-wrap border-t bg-background w-full">
+                {comment}
+              </div>
+            )}
+            <Code className="m-0 w-full grow border-t" language="json">
+              {JSON.stringify(atom, null, 2)}
+            </Code>
+          </div>
         );
       }),
-    [classes],
+    [],
   );
 
   const hexes = useMemo(
@@ -1057,26 +1028,28 @@ const Atoms = () => {
   );
 
   return (
-    <Container maxWidth="lg">
-      <Paper data-testid="atoms" elevation={5} className={classes.page}>
-        <Typography variant="h4" gutterBottom>
-          {t("elements.atoms.title")}
-        </Typography>
-        <Typography variant="body1">
-          {t("elements.atoms.page.description")}
-        </Typography>
-      </Paper>
-      <Container
-        sx={{ paddingBottom: 2, display: "flex", justifyContent: "center" }}
-      >
-        <Select value={group} onChange={(e) => setGroup(e.target.value)}>
-          {groupItems}
-        </Select>
-      </Container>
-      <Grid container spacing={2}>
+    <div className="p-4">
+      <h1 className="text-4xl font-extrabold">{t("elements.atoms.title")}</h1>
+      <p className="leading-7 mt-6 text-wrap">
+        {t("elements.atoms.page.description")}
+      </p>
+      <div className="bg-muted flex flex-rows place-items-center rounded-xl border px-4 py-2 my-4">
+        <Label htmlFor="atom-group" className="mr-2">
+          Category:
+        </Label>
+        <div className="w-min">
+          <Select id="atom-group" defaultValue={group} onValueChange={setGroup}>
+            <SelectTrigger>
+              <SelectValue value={group} />
+            </SelectTrigger>
+            <SelectContent>{groupItems}</SelectContent>
+          </Select>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 max-w-7xl">
         {examples(hexes)}
-      </Grid>
-    </Container>
+      </div>
+    </div>
   );
 };
 

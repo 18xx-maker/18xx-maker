@@ -1,12 +1,13 @@
 import tinycolor from "tinycolor2";
 
+import { filter, is, keys, map, sortBy, uniqBy } from "ramda";
+
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import makeStyles from "@mui/styles/makeStyles";
 
-import { filter, is, keys, map, sortBy, uniqBy } from "ramda";
-
 import Color from "@/components/Color";
+
 import ColorContext from "@/context/ColorContext";
 import { companyThemes, mapThemes } from "@/data";
 import { useConfig } from "@/hooks";

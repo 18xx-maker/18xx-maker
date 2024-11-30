@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useMatch } from "react-router";
 
+import { assoc, flatten, forEach, is, keys, map, range } from "ramda";
+
 import ExportIcon from "@mui/icons-material/Collections";
 import PngIcon from "@mui/icons-material/PhotoLibrary";
 import PdfIcon from "@mui/icons-material/PictureAsPdf";
@@ -14,8 +16,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Slide from "@mui/material/Slide";
 import Tooltip from "@mui/material/Tooltip";
 import makeStyles from "@mui/styles/makeStyles";
-
-import { assoc, flatten, forEach, is, keys, map, range } from "ramda";
 
 import { useConfig, useGame } from "@/hooks";
 import schema from "@/schemas/config.schema.json";
