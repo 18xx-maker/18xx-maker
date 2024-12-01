@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.0.0-beta.107](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.106...v1.0.0-beta.107) (2024-12-01)
+
+
+### :tada: Features
+
+* **app:** add debounce to config unit input update ([#663](https://github.com/18xx-maker/18xx-maker/issues/663)) ([2a65970](https://github.com/18xx-maker/18xx-maker/commit/2a65970697fdb9d62089bd84c023e5fcbc929290))
+* **validation:** add error state to config input field ([#662](https://github.com/18xx-maker/18xx-maker/issues/662)) ([e187cbf](https://github.com/18xx-maker/18xx-maker/commit/e187cbf602c79cdc59854d26501db41c015fae79))
+
+
+### :bug: Bug Fixes
+
+* **app:** fix electron url links ([#660](https://github.com/18xx-maker/18xx-maker/issues/660)) ([0eb636a](https://github.com/18xx-maker/18xx-maker/commit/0eb636a90f5effb65f2ea6cb9497d2f628b5ecab))
+
+
+### :broom: Chores
+
+* **b18:** abstract out takeScreenshot ([#661](https://github.com/18xx-maker/18xx-maker/issues/661)) ([58cf2b5](https://github.com/18xx-maker/18xx-maker/commit/58cf2b5793188de7e7400925ca7eda005fd7d634))
+
+
+### :book: Documentation
+
+* **cli:** adding cli README.md ([#659](https://github.com/18xx-maker/18xx-maker/issues/659)) ([2b01404](https://github.com/18xx-maker/18xx-maker/commit/2b01404716693ab4fd8a7cd60ca485b0bccd44e6))
+* **home:** add getting started section ([#658](https://github.com/18xx-maker/18xx-maker/issues/658)) ([ff09002](https://github.com/18xx-maker/18xx-maker/commit/ff0900223908539245400ff5572c763d91781f7e))
+* **home:** update the home page ([#656](https://github.com/18xx-maker/18xx-maker/issues/656)) ([dedb0a8](https://github.com/18xx-maker/18xx-maker/commit/dedb0a87665227d44422f3b3dfc7389a0ef3414a))
+
 ## [1.0.0-beta.106](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.105...v1.0.0-beta.106) (2024-11-28)
 
 
