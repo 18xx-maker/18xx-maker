@@ -1,3 +1,4 @@
+import debounce from "lodash.debounce";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
@@ -33,7 +34,10 @@ const Input = ({ name, label, description, dimension }) => {
   const error = !isValidByInputName(name);
 
   let valuePath = getPath(name);
-  let rawUpdate = (value) => setConfig(assocPath(valuePath, value, config));
+  let rawUpdateDebounced = debounce(
+    (value) => setConfig(assocPath(valuePath, value, config)),
+    800,
+  );
   let update = (event) =>
     setConfig(
       assocPath(
@@ -113,7 +117,7 @@ const Input = ({ name, label, description, dimension }) => {
             name={name}
             value={value}
             label={label}
-            onChange={rawUpdate}
+            onChange={rawUpdateDebounced}
             errorValidation={error}
           />
         ) : (
