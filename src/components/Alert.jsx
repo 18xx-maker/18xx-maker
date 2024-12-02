@@ -36,7 +36,7 @@ const Alert = () => {
   return (
     <div
       className={clsx(
-        "fixed z-50 bottom-0 left-0 md:left-auto right-0 border rounded-xl m-8 py-2 px-4 bg-muted md:w-96",
+        "print:hidden fixed z-50 bottom-0 left-0 md:left-auto right-0 border rounded-xl m-8 py-2 px-4 bg-muted md:w-96",
         {
           "border-success": type === "success",
           "border-info": type === "info",
