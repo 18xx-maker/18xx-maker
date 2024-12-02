@@ -101,4 +101,12 @@
     );
     background-size: 24px 24px;
   }
+
+  .editor-checkered {
+    background-image: repeating-conic-gradient(
+      hsl(0 0% 100%) 0% 25%,
+      hsl(0 0% 98%) 0% 50%
+    );
+    background-size: 48px 48px;
+  }
 }

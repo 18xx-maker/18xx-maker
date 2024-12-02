@@ -7,7 +7,9 @@ import { Badge } from "@/components/ui/badge";
 const GameType = ({ type, ...pass }) => {
   const { t } = useTranslation();
   const label =
-    type === "bundled" ? t("game.type.bundled") : t("game.type.system");
+    type === "bundled"
+      ? t("game.type.bundled.label")
+      : t("game.type.system.label");
   const icon =
     type === "bundled" ? (
       <Package className="w-3 h-3 mr-1" />

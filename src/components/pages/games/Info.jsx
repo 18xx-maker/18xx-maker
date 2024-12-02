@@ -1,154 +1,154 @@
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router";
 
-import RulesIcon from "@mui/icons-material/Gavel";
-import LicenseIcon from "@mui/icons-material/Lock";
-import PurchaseIcon from "@mui/icons-material/MonetizationOn";
-import PlayersIcon from "@mui/icons-material/People";
-import BGGIcon from "@mui/icons-material/Storage";
-import WarningIcon from "@mui/icons-material/Warning";
-import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import { blue, green } from "@mui/material/colors";
-import makeStyles from "@mui/styles/makeStyles";
+import {
+  ArrowBigRight,
+  Copyright,
+  Dices,
+  Gavel,
+  HardDrive,
+  Info as InfoIcon,
+  Package,
+  RefreshCw,
+  Trash,
+  Users,
+  Wallet,
+} from "lucide-react";
 
-import { useGame } from "@/hooks/game.js";
+import { Button } from "@/components/ui/button";
 
-const useStyles = makeStyles((theme) => ({
-  page: {
-    overflow: "auto",
-    margin: theme.spacing(4, 0),
-    padding: theme.spacing(2, 2, 0, 2),
-  },
-  warning: {
-    color: theme.palette.warning.main,
-  },
-}));
+import { useGame } from "@/hooks";
+import { deleteGame, refreshGame } from "@/state";
+import { trackEvent } from "@/util/analytics";
+import capability from "@/util/capability";
 
 const Info = () => {
   const game = useGame();
-  const classes = useStyles();
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onRefresh = (event) => {
+    event.preventDefault();
+    trackEvent("refresh", location);
+    dispatch(refreshGame());
+  };
+
+  const onDelete = (event) => {
+    event.preventDefault();
+    dispatch(deleteGame(game.meta.slug));
+    navigate("/games");
+  };
+
+  const typeDescription =
+    game.meta.type === "bundled"
+      ? t("game.type.bundled.description")
+      : t("game.type.system.description");
+  const TypeIcon = game.meta.type === "bundled" ? Package : HardDrive;
 
   return (
-    <Container maxWidth="md">
-      <Paper
-        data-testid={`game-${game.meta.slug}`}
-        elevation={5}
-        className={classes.page}
-      >
-        <Typography variant="h3">{game.info.title}</Typography>
-        {game.info.subtitle && (
-          <Typography variant="h5">{game.info.subtitle}</Typography>
+    <div className="p-4">
+      <h1 className="text-4xl font-extrabold">{game.info.title}</h1>
+      {game.info.subtitle && (
+        <h2 className="text-2xl font-extrabold">{game.info.subtitle}</h2>
+      )}
+      <h3 className="text-1xl font-bold">
+        {t("game.by")} {game.info.designer}
+      </h3>
+      <div className="px-4 border rounded-xl my-4 max-w-lg">
+        {game.players && (
+          <div className="flex flex-row gap-4 my-4">
+            <Users className="text-info" />
+            <p>{`${game.players[0].number} - ${game.players[game.players.length - 1].number} ${t("game.players")}`}</p>
+          </div>
         )}
-        <Typography variant="h6">
-          {t("game.by")} {game.info.designer}
-        </Typography>
-        <List>
-          {game.players && (
-            <ListItem>
-              <ListItemIcon>
-                <PlayersIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary={`${game.players[0].number} - ${game.players[game.players.length - 1].number}`}
-                secondary={t("game.players")}
-              />
-            </ListItem>
-          )}
-          {game.links && game.links.license && (
-            <ListItemButton
-              component={Link}
-              color="inherit"
-              underline="none"
-              target="_blank"
-              href={game.links.license}
-            >
-              <ListItemIcon>
-                <LicenseIcon color="error" />
-              </ListItemIcon>
-              <ListItemText
-                primary={t("game.license.primary")}
-                secondary={t("game.license.secondary")}
-              />
-            </ListItemButton>
-          )}
-          {game.links && game.links.purchase && (
-            <ListItemButton
-              component={Link}
-              color="inherit"
-              underline="none"
-              target="_blank"
-              href={game.links.purchase}
-            >
-              <ListItemIcon>
-                <PurchaseIcon style={{ color: green[500] }} />
-              </ListItemIcon>
-              <ListItemText
-                primary={t("game.purchase.primary")}
-                secondary={t("game.purchase.secondary")}
-              />
-            </ListItemButton>
-          )}
-          {game.links && game.links.bgg && (
-            <ListItemButton
-              component={Link}
-              color="inherit"
-              underline="none"
-              target="_blank"
-              href={game.links.bgg}
-            >
-              <ListItemIcon>
-                <BGGIcon />
-              </ListItemIcon>
-              <ListItemText>{t("game.bgg")}</ListItemText>
-            </ListItemButton>
-          )}
-          {game.links && game.links.rules && (
-            <ListItemButton
-              component={Link}
-              color="inherit"
-              underline="none"
-              target="_blank"
-              href={game.links.rules}
-            >
-              <ListItemIcon>
-                <RulesIcon />
-              </ListItemIcon>
-              <ListItemText primary={t("game.rules")} />
-            </ListItemButton>
-          )}
-          {game.prototype && (
-            <ListItem>
-              <ListItemIcon>
-                <WarningIcon style={{ color: blue[500] }} />
-              </ListItemIcon>
-              <ListItemText
-                primary={t("prototype.prototype")}
-                secondary={t("prototype.description")}
-              />
-            </ListItem>
-          )}
-          {game.wip && (
-            <ListItem>
-              <ListItemIcon>
-                <WarningIcon className={classes.warning} />
-              </ListItemIcon>
-              <ListItemText
-                primary={t("wip.wip")}
-                secondary={t("wip.description")}
-              />
-            </ListItem>
-          )}
-        </List>
-      </Paper>
-    </Container>
+        {game.links && game.links.license && (
+          <a
+            href={game.links.license}
+            target="_blank"
+            rel="noreferrer"
+            className="block flex flex-row gap-4 my-4 justify-start items-center"
+          >
+            <Copyright className="text-warning" />
+            <p>{t("game.license.primary")}</p>
+            <p>{t("game.license.secondary")}</p>
+          </a>
+        )}
+        {game.links && game.links.purchase && (
+          <a
+            href={game.links.purchase}
+            target="_blank"
+            rel="noreferrer"
+            className="block flex flex-row gap-4 my-4 hover:underline justify-start items-center"
+          >
+            <Wallet className="text-error" />
+            <p>{t("game.purchase.primary")}</p>
+            <p>{t("game.purchase.secondary")}</p>
+          </a>
+        )}
+        {game.links && game.links.bgg && (
+          <a
+            href={game.links.bgg}
+            target="_blank"
+            rel="noreferrer"
+            className="block flex flex-row gap-4 my-4 hover:underline justify-start items-center"
+          >
+            <Dices className="text-success" />
+            {t("game.bgg")}
+          </a>
+        )}
+        {game.links && game.links.rules && (
+          <a
+            href={game.links.rules}
+            target="_blank"
+            rel="noreferrer"
+            className="block flex flex-row gap-4 my-4 hover:underline justify-start items-center"
+          >
+            <Gavel className="text-success" />
+            {t("game.rules")}
+          </a>
+        )}
+        {game.prototype && (
+          <div className="flex flex-row gap-4 my-4 justify-start items-center">
+            <InfoIcon className="text-info" />
+            <p>{t("prototype.prototype")}</p>
+            <p>{t("prototype.description")}</p>
+          </div>
+        )}
+        {game.wip && (
+          <div className="flex flex-row gap-4 my-4 justify-start items-center">
+            <InfoIcon className="text-warning" />
+            <p>{t("wip.wip")}</p>
+            <p>{t("wip.description")}</p>
+          </div>
+        )}
+      </div>
+      <div className="flex flex-row justify-start items-center gap-4">
+        <Button variant="outline" asChild>
+          <Link to={`/games/${game.meta.slug}/map`}>
+            <ArrowBigRight />
+            {t("nav.edit")}
+          </Link>
+        </Button>
+        {!capability.electron && game.meta.type === "system" && (
+          <Button variant="outline" onClick={onRefresh}>
+            <RefreshCw />
+            {t("refresh.refresh")}
+          </Button>
+        )}
+      </div>
+      <div className="flex flex-row gap-4 mt-16 mb-4">
+        <TypeIcon />
+        <p>{typeDescription}</p>
+      </div>
+      {game.meta.type !== "bundled" && (
+        <Button variant="destructive" onClick={onDelete}>
+          <Trash />
+          {t("game.type.system.forget")}
+        </Button>
+      )}
+    </div>
   );
 };
 
