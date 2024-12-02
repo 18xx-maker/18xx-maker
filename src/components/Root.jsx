@@ -138,7 +138,7 @@ body {
     >
       <StyledEngineProvider injectFirst>
         <MUIThemeProvider theme={theme}>
-          <ThemeProvider>
+          <ThemeProvider delayDuration={500}>
             <ScrollToTop>
               {inEditor ? (
                 <Outlet />

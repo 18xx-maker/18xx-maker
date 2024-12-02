@@ -2,6 +2,8 @@ import { useLocation, useMatch } from "react-router";
 
 import { assoc, chain, pick, prop, reduce } from "ramda";
 
+import { Settings } from "lucide-react";
+
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
@@ -30,7 +32,11 @@ const Header = () => {
   const { pathname } = useLocation();
   const match = useMatch("/games/:slug");
 
-  const page = pages[pathname];
+  const page =
+    pathname === "/settings"
+      ? { icon: Settings, label: "settings.title" }
+      : pages[pathname];
+
   const titleNode = match ? (
     <HeaderGame />
   ) : (
