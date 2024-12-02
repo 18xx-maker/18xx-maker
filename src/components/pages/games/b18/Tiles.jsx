@@ -52,11 +52,18 @@ const Tiles = () => {
     );
 
     return (
-      <div key={tile.id} className={`tile tile-${tile.id}`}>
+      <div
+        key={tile.id}
+        className={`tile tile-${tile.id} w-[150px] h-[900px] flex flex-col last:m-0`}
+      >
         {map(
           (rotation) => (
-            <div key={`tile-${tile.id}-${rotation}`} className="tile-rotation">
+            <div
+              key={`tile-${tile.id}-${rotation}`}
+              className="tile-rotation w-[150px] h-[150px]"
+            >
               <Svg
+                className="mt-0 mx-0 mb-[10px] last:m-0"
                 preserveAspectRatio="none"
                 style={{ width: `${width}px`, height: `${height}px` }}
                 viewBox={viewBox}
@@ -79,8 +86,8 @@ const Tiles = () => {
 
   return (
     <ColorContext.Provider value="tile">
-      <div className="b18" style={{ width: `${totalWidth}px` }}>
-        <div className={`tiles ${color}`}>{tileNodes}</div>
+      <div className="relative text-left" style={{ width: `${totalWidth}px` }}>
+        <div className="m-0 flex flex-nowrap h-[900px]">{tileNodes}</div>
       </div>
       <style>{`@media print {@page {size: ${totalWidth}px 900px;}}`}</style>
     </ColorContext.Provider>

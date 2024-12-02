@@ -202,7 +202,7 @@ const TokenLayout = ({ companies, data, game }) => {
     (nodes, i) => (
       <div
         key={`tokens-page-${i}`}
-        className="tokens"
+        className="tokens relative break-inside-avoid mx-auto my-8 print:m-0"
         data-testid={`game-${game.meta.slug}-tokens`}
         style={{
           width: unitsToCss(data.usableWidth),

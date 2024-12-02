@@ -5,7 +5,7 @@ import { Link, useMatch, useNavigate } from "react-router";
 
 import { find, map, propEq } from "ramda";
 
-import { ArrowBigLeft, RefreshCw, Settings } from "lucide-react";
+import { ArrowBigLeft, Bolt, RefreshCw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -68,7 +68,7 @@ const Toolbar = () => {
   const game = useGame();
   const slug = game.meta.slug;
 
-  const match = useMatch("/games/:slug/:section");
+  const match = useMatch("/games/:slug/:section/*");
   const item = find(propEq(match.params.section, "section"), gameNav);
 
   const handleKeyDown = useCallback(
@@ -95,6 +95,10 @@ const Toolbar = () => {
     };
   }, [handleKeyDown]);
 
+  if (match.params.section === "b18") {
+    return null;
+  }
+
   const onRefresh = (event) => {
     event.preventDefault();
     trackEvent("refresh", location);
@@ -114,7 +118,7 @@ const Toolbar = () => {
       </Button>
       <Separator orientation="vertical" />
       <Button variant="outline" className="border rounded-sm p-2 w-8 h-8 m-0">
-        <Settings className="w-6 h-6" />
+        <Bolt className="w-6 h-6" />
       </Button>
       {!capability.electron && game.meta.type === "system" && (
         <>
