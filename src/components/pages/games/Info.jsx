@@ -72,7 +72,7 @@ const Info = () => {
           >
             <Copyright className="text-warning" />
             <p>{t("game.license.primary")}</p>
-            <p>{t("game.license.secondary")}</p>
+            <p className="italic">{t("game.license.secondary")}</p>
           </a>
         )}
         {game.links && game.links.purchase && (
@@ -84,7 +84,7 @@ const Info = () => {
           >
             <Wallet className="text-error" />
             <p>{t("game.purchase.primary")}</p>
-            <p>{t("game.purchase.secondary")}</p>
+            <p className="italic">{t("game.purchase.secondary")}</p>
           </a>
         )}
         {game.links && game.links.bgg && (
