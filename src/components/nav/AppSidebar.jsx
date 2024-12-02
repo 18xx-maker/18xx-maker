@@ -2,12 +2,13 @@ import { useTranslation } from "react-i18next";
 
 import { addIndex, chain } from "ramda";
 
-import { ArrowBigRight } from "lucide-react";
+import { ArrowBigRight, Settings } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -94,6 +95,11 @@ const AppSidebar = (props) => {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>{renderItems(mainMenu)}</SidebarContent>
+      <SidebarFooter>
+        <SidebarMenu>
+          <Item to="/settings" label={t("settings.title")} icon={Settings} />
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   );
 };

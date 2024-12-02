@@ -35,6 +35,15 @@
     "singlePdf": "Export this component as a pdf document",
     "singlePng": "Export this component as a png image"
   },
+  "settings": {
+    "title": "Settings",
+    "theme": {
+      "title": "Theme",
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    }
+  },
   "app": {
     "title": "App Information",
     "versions": "Current Versions",

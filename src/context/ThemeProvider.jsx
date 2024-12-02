@@ -1,22 +1,38 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { useSelector } from "react-redux";
 
 const ThemeProviderContext = createContext({ theme: "light" });
 
 export const ThemeProvider = ({ children, ...props }) => {
+  const settings = useSelector((state) => state.settings);
   const [theme, setTheme] = useState("light");
 
-  const updateTheme = () => {
+  const updateTheme = useCallback(() => {
     const root = window.document.documentElement;
 
     root.classList.remove("light", "dark");
+
     const media = window.matchMedia("(prefers-color-scheme: dark)");
-    const style = media.matches ? "dark" : "light";
+
+    let style = settings.theme;
+
+    // If there is no setting, that means use the system one
+    if (!style) {
+      style = media.matches ? "dark" : "light";
+    }
+
     root.classList.add(style);
     root.style.setProperty("color-scheme", style);
     setTheme(style);
 
     return media;
-  };
+  }, [settings.theme]);
 
   useEffect(() => {
     const media = updateTheme();
@@ -26,7 +42,7 @@ export const ThemeProvider = ({ children, ...props }) => {
     return () => {
       media.removeEventListener("change", updateTheme);
     };
-  }, []);
+  }, [updateTheme]);
 
   return (
     <ThemeProviderContext.Provider {...props} value={theme}>

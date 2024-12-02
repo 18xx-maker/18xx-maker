@@ -8,6 +8,7 @@ import App from "@/components/pages/App";
 import Docs from "@/components/pages/Docs";
 import Elements from "@/components/pages/Elements";
 import Home from "@/components/pages/Home";
+import Settings from "@/components/pages/Settings";
 import Atoms from "@/components/pages/elements/Atoms";
 import Logos from "@/components/pages/elements/Logos";
 import AllTiles from "@/components/pages/elements/Tiles";
@@ -85,6 +86,7 @@ export const rootRoutes = [
         ],
       },
       { path: "docs/*", element: <Docs /> },
+      { path: "settings", element: <Settings /> },
     ],
   },
 ];
