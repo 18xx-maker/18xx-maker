@@ -91,6 +91,7 @@
   svg {
     font-family: "display";
     font-weight: 700;
+    overflow: visible;
   }
 }
 @layer utilities {

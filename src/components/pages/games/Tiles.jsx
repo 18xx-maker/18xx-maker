@@ -1,9 +1,5 @@
 import { useNavigate } from "react-router";
 
-import { useConfig, useGame } from "@/hooks";
-
-import "@/components/pages/games/Tiles.css";
-
 import {
   addIndex,
   append,
@@ -36,6 +32,7 @@ import Svg from "@/components/Svg";
 
 import ColorContext from "@/context/ColorContext";
 import { tiles as tileDefs } from "@/data";
+import { useConfig, useGame } from "@/hooks";
 import { getTile, sortTiles } from "@/util";
 import { getTileSheetContext } from "@/util/tilesheet";
 import { sidesFromTile } from "@/util/track";
@@ -330,7 +327,10 @@ const TileSheet = () => {
       ) : null;
 
     return (
-      <div className="TileSheet--Page" key={`page-${pageIndex}`}>
+      <div
+        key={`page-${pageIndex}`}
+        className="break-inside-avoid overflow-auto relative"
+      >
         <Page
           title={game.info.title}
           component="Tiles"
@@ -344,7 +344,7 @@ const TileSheet = () => {
           }}
           viewBox={`${viewBoxStr}`}
         >
-          <Cutlines />
+          <Cutlines className="absolute top-0" />
           {pins}
           {tileNodes}
         </Svg>
@@ -355,8 +355,9 @@ const TileSheet = () => {
   return (
     <ColorContext.Provider value="tile">
       <div
+        style={{ width: `${c.pageWidth * 0.01}in` }}
         data-testid={`game-${game.meta.slug}-tiles`}
-        className={`tileSheet tileSheet--${layout}`}
+        className="m-auto"
       >
         {pageNodes}
         <PageSetup paper={c.paper} landscape={false} />
