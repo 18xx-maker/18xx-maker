@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 
-import Svg from "@/components/Svg";
+import Editor from "@/components/Editor";
 import Market from "@/components/market/Market";
 
 import { unitsToCss } from "@/util";
@@ -24,18 +24,14 @@ const MarketSingle = ({ config, game }) => {
         data-testid={`game-${game.meta.slug}-market`}
         style={{ display: "inline-block" }}
       >
-        <Svg
-          width={data.css.totalWidth}
-          height={data.css.totalHeight}
-          viewBox={`0 0 ${data.totalWidth} ${data.totalHeight}`}
-        >
+        <Editor width={data.totalWidth} height={data.totalHeight}>
           <Market
             data={data}
             game={game}
             config={config}
             title={game.info.title}
           />
-        </Svg>
+        </Editor>
         <style>{`@media print {@page {size: ${paperWidth} ${paperHeight}; margin: ${unitsToCss(config.paper.margins)}}}`}</style>
       </div>
     </div>

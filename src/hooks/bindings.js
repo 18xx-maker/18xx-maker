@@ -38,12 +38,12 @@ export const useBindings = () => {
           if (capability.electron) {
             window.api
               .openGame()
-              .then((slug) => slug && navigate(`/games/${slug}/map`))
+              .then((slug) => slug && navigate(`/games/${slug}`))
               .catch((e) => dispatch(createAlert(e.name, e.message, "error")));
           } else if (capability.system) {
             idb
               .openFilePicker()
-              .then((slug) => slug && navigate(`/games/${slug}/map`))
+              .then((slug) => slug && navigate(`/games/${slug}`))
               .catch((e) => dispatch(createAlert(e.name, e.message, "error")));
           }
           break;

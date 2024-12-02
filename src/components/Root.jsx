@@ -21,7 +21,7 @@ import AppSidebar from "@/components/nav/AppSidebar";
 import Header from "@/components/nav/Header";
 
 import { ThemeProvider } from "@/context/ThemeProvider";
-import { useBindings } from "@/hooks";
+import { useBindings, useEditor } from "@/hooks";
 import {
   createAlert,
   createDownloadPercent,
@@ -127,6 +127,7 @@ body {
   }, [dispatch, navigate]);
 
   useBindings();
+  const inEditor = useEditor();
 
   return (
     <div
@@ -139,13 +140,17 @@ body {
         <MUIThemeProvider theme={theme}>
           <ThemeProvider>
             <ScrollToTop>
-              <SidebarProvider>
-                <AppSidebar />
-                <SidebarInset className="w-full h-screen overflow-auto">
-                  <Header />
-                  <Outlet />
-                </SidebarInset>
-              </SidebarProvider>
+              {inEditor ? (
+                <Outlet />
+              ) : (
+                <SidebarProvider>
+                  <AppSidebar />
+                  <SidebarInset className="w-full h-screen overflow-auto">
+                    <Header />
+                    <Outlet />
+                  </SidebarInset>
+                </SidebarProvider>
+              )}
               <svg
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"

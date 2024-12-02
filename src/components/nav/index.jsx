@@ -19,6 +19,7 @@ import {
   SquareDashed,
   SwatchBook,
   TrainFront,
+  TrainTrack,
 } from "lucide-react";
 
 export const mainMenu = [
@@ -33,6 +34,10 @@ export const mainMenu = [
         icon: FolderOpen,
         label: "nav.load",
         to: "/games",
+      },
+      {
+        icon: TrainTrack,
+        game: true,
       },
     ],
   },

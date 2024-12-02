@@ -14,7 +14,8 @@
     "home": "Home",
     "load": "Load Games",
     "elements": "Elements",
-    "docs": "Help"
+    "docs": "Help",
+    "edit": "Edit Game"
   },
   "refresh": {
     "refresh": "Refresh",
@@ -164,8 +165,15 @@
   },
   "game": {
     "type": {
-      "bundled": "Bundled",
-      "system": "System"
+      "bundled": {
+        "label": "Bundled",
+        "description": "This game is bundled with 18xx Maker"
+      },
+      "system": {
+        "label": "System",
+        "description": "This game has been loaded from your computer",
+        "forget": "Forget"
+      }
     },
     "nav": {
       "background": "Background",
