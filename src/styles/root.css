@@ -29,12 +29,6 @@ p {
   font-weight: normal;
 }
 
-.tokens {
-  position: relative;
-  margin: 2em auto;
-  page-break-inside: avoid;
-}
-
 .background {
   height: 10.25in;
   width: 8in;
@@ -709,94 +703,12 @@ footer a:hover {
   font-weight: normal;
 }
 
-.PrintNotes {
-  background-color: #ddd;
-  border-bottom: 2px solid #bbb;
-  font-family: sans-serif;
-  font-weight: normal;
-}
-
-.WIP > div,
-.LegalNotes > div,
-.PrintNotes > div {
-  width: 800px;
-  margin: 0 auto;
-  padding: 0 0 2px;
-}
-
-.PrintNotes h3 {
-  display: inline-block;
-  font-size: 0.8em;
-}
-
-.PrintNotes .select,
-.PrintNotes > div > h3 {
-  display: inline-block;
-  margin-right: 2em;
-}
-
-.PrintNotes label {
-  display: inline-block;
-  margin-right: 1em;
-}
-
-.WIP p,
-.LegalNotes p,
-.PrintNotes p {
-  margin: 0.5em 0 0.4em;
-  display: inline-block;
-}
-
-.PrintNotes b {
-  font-weight: bold;
-}
-
-.PrintNotes ul {
-  padding: 0;
-  list-style: none;
-  text-align: left;
-  margin-top: 8px;
-  margin-bottom: 0;
-}
-
-.PrintNotes li a {
-  color: black;
-}
-
-.PrintNotes li a.active {
-  font-weight: bold;
-}
-
 @media print {
-  nav,
-  footer,
-  .LegalNotes,
-  .PrintNotes,
-  .MuiAppBar-root,
-  .MuiDrawer-root,
-  .MuiSnackbar-root,
-  .MuiFab-root,
-  .MuiTooltip-popper,
-  .WIP {
-    display: none !important;
-  }
-
-  .MuiBox-root {
-    width: auto !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    overflow: visible !important;
-  }
-
   .map {
     padding: 0;
   }
 
   .stock {
-    margin: 0;
-  }
-
-  .tokens {
     margin: 0;
   }
 

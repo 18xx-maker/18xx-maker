@@ -245,6 +245,7 @@ const command = async (bname, version, author, opts) => {
         waitUntil: "networkidle",
       },
     );
+    await page.emulateMedia({ media: "print" });
     await page.setViewportSize({ width, height });
     await page.screenshot({
       path: `render/${bname}/${folder}/${id}/${filename}.png`,
