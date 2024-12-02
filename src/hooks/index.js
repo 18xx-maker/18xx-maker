@@ -3,4 +3,5 @@ export * from "@/hooks/bindings";
 export * from "@/hooks/config";
 export * from "@/hooks/game";
 export * from "@/hooks/validation";
-export * from "@/hooks/useSideMenu";
+export * from "@/hooks/use-editor";
+export * from "@/hooks/use-print";

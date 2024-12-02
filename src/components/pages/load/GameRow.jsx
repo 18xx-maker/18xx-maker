@@ -47,7 +47,7 @@ const GameRow = ({ game }) => {
   return (
     <div className="relative border-b pb-8">
       <div className="text-3xl font-bold">
-        <Link className="hover:underline" to={`/games/${game.slug}/map`}>
+        <Link className="hover:underline" to={`/games/${game.slug}`}>
           {game.title}
         </Link>
       </div>
