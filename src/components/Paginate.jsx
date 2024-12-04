@@ -1,3 +1,5 @@
+import { useId } from "react";
+
 import { map } from "ramda";
 
 import Page from "@/components/Page";
@@ -7,7 +9,7 @@ import { addPaginationData, unitsToCss } from "@/util";
 
 const Paginate = ({ component, data, config, game, children }) => {
   // Generate an ID to use for svg content
-  const contentId = crypto.randomUUID();
+  const contentId = useId();
 
   const defs = <g id={contentId}>{children}</g>;
 

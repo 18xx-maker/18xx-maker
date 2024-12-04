@@ -1,3 +1,5 @@
+import { useId } from "react";
+
 import { defaultTo } from "ramda";
 
 import Color from "@/components/Color";
@@ -6,6 +8,7 @@ import { useGame } from "@/hooks";
 import { getFontProps, multiDefaultTo } from "@/util";
 
 const Name = (props) => {
+  const id = useId();
   const game = useGame();
   let {
     name,
@@ -36,7 +39,6 @@ const Name = (props) => {
   let nameNode;
 
   if (path) {
-    let id = crypto.randomUUID();
     nameNode = (
       <>
         <defs>

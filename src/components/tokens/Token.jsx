@@ -1,3 +1,5 @@
+import { useId } from "react";
+
 import { defaultTo } from "ramda";
 
 import Color from "@/components/Color";
@@ -81,6 +83,8 @@ const Token = ({
 
   tokenShape, // main token shape - square or anything else is circle
 }) => {
+  const clipId = useId();
+
   // Set a default width (smaller for destination tokens)
   width = width || (destination ? 15 : 25);
 
@@ -112,7 +116,6 @@ const Token = ({
     tokClip = <circle cx="0" cy="0" r={width + (bleed ? 5 : 0)} />;
   }
   // Create a clipping object for this token
-  let clipId = crypto.randomUUID();
   let clip = <clipPath id={clipId}>{tokClip}</clipPath>;
   let shapeMult = 1;
   let scaling = width / 25;
