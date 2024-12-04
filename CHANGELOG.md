@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.108](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.107...v1.0.0-beta.108) (2024-12-04)
+
+
+### :bug: Bug Fixes
+
+* allow charters with no trains and non-https contexts to work ([#666](https://github.com/18xx-maker/18xx-maker/issues/666)) ([cf5fa8f](https://github.com/18xx-maker/18xx-maker/commit/cf5fa8fb8930a5a33ca54d369717a434f134ced8)), closes [#665](https://github.com/18xx-maker/18xx-maker/issues/665)
+
 ## [1.0.0-beta.107](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.106...v1.0.0-beta.107) (2024-12-01)
 
 
