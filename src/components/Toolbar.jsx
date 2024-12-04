@@ -64,6 +64,7 @@ const Toolbar = () => {
   const navigate = useNavigate();
 
   const [paginated, togglePagination] = useBooleanParam("paginated");
+  const [, toggleConfig] = useBooleanParam("config");
 
   const game = useGame();
   const slug = game.meta.slug;
@@ -106,7 +107,7 @@ const Toolbar = () => {
   };
 
   return (
-    <div className="z-50 print:hidden fixed top-4 left-4 rounded-sm border p-1 flex flex-row gap-0.5 bg-background justify-start items-center">
+    <div className="z-40 print:hidden fixed top-4 left-4 rounded-sm border p-1 flex flex-row gap-0.5 bg-background justify-start items-center">
       <Button
         asChild
         variant="outline"
@@ -117,7 +118,11 @@ const Toolbar = () => {
         </Link>
       </Button>
       <Separator orientation="vertical" />
-      <Button variant="outline" className="border rounded-sm p-2 w-8 h-8 m-0">
+      <Button
+        onClick={toggleConfig}
+        variant="outline"
+        className="border rounded-sm p-2 w-8 h-8 m-0"
+      >
         <Bolt className="w-6 h-6" />
       </Button>
       {!capability.electron && game.meta.type === "system" && (
