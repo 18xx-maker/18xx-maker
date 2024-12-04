@@ -85,7 +85,7 @@ const Phase = ({ phases, trains, minor, company }) => {
   let includeName = include("name", phases, minor, company);
   let includePhase = include("phase", phases, minor, company);
   let includeTrain =
-    trains.length > 0 && include("train", phases, minor, company);
+    trains && trains.length > 0 && include("train", phases, minor, company);
   let includeTiles = include("tiles", phases, minor, company);
   let includeLimit = include("limit", phases, minor, company);
   let includeNotes = include("notes", phases, minor, company);
