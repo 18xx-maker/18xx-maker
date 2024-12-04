@@ -126,7 +126,7 @@ const SvgEditor = ({ width, height, children }) => {
   return (
     <div
       id="editor"
-      className="overflow-hidden w-screen h-screen print:w-auto print:h-auto touch-none select-none overscroll-none"
+      className="overflow-hidden w-screen h-screen print:w-auto print:h-auto touch-none"
     >
       <Svg
         ref={svg}
