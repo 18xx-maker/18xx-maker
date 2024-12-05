@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
+import { Toggle } from "@/components/ui/toggle";
 
 import { useGame } from "@/hooks";
 import { refreshGame } from "@/state";
@@ -64,7 +65,7 @@ const Toolbar = () => {
   const navigate = useNavigate();
 
   const [paginated, togglePagination] = useBooleanParam("paginated");
-  const [, toggleConfig] = useBooleanParam("config");
+  const [config, toggleConfig] = useBooleanParam("config");
 
   const game = useGame();
   const slug = game.meta.slug;
@@ -108,23 +109,20 @@ const Toolbar = () => {
 
   return (
     <div className="z-40 print:hidden fixed top-4 left-4 rounded-sm border p-1 flex flex-row gap-0.5 bg-background justify-start items-center">
-      <Button
-        asChild
-        variant="outline"
-        className="border rounded-sm p-2-px w-8 h-8 m-0"
-      >
+      <Button asChild variant="outline" className="p-2-px w-8 h-8 m-0">
         <Link to={`/games/${slug}`}>
           <ArrowBigLeft width="24" height="24" />
         </Link>
       </Button>
       <Separator orientation="vertical" />
-      <Button
-        onClick={toggleConfig}
+      <Toggle
+        onPressedChange={toggleConfig}
+        pressed={config}
         variant="outline"
-        className="border rounded-sm p-2 w-8 h-8 m-0"
+        className="rounded-sm p-2 w-8 h-8 m-0"
       >
         <Bolt className="w-6 h-6" />
-      </Button>
+      </Toggle>
       {!capability.electron && game.meta.type === "system" && (
         <>
           <Separator orientation="vertical" />
