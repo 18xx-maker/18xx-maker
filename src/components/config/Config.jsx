@@ -29,9 +29,7 @@ import { Separator } from "@/components/ui/separator";
 import Code from "@/components/Code";
 import File from "@/components/File";
 import { sections } from "@/components/config";
-import Input from "@/components/config/Input";
-import PinConfig from "@/components/config/PinConfig";
-import ThemePreview from "@/components/config/ThemePreview";
+import Items from "@/components/config/Items";
 
 import defaultConfig from "@/defaults.json";
 import { useConfig } from "@/hooks";
@@ -60,7 +58,7 @@ const Config = () => {
   };
 
   return (
-    <div className="z-50 absolute top-0 left-0 right-0 min-h-screen bg-background p-2 overscroll-contain overscroll-none">
+    <div className="print:hidden z-50 absolute top-0 left-0 md:left-auto md:max-w-md md:bottom-0 md:overflow-scroll md:border right-0 min-h-screen bg-background p-4 overscroll-contain overscroll-none">
       <h1 className="text-4xl font-bold">{t("config.title")}</h1>
       <button onClick={onClose}>Close</button>
       <Separator orientation="horizontal" className="my-4" />
@@ -80,80 +78,45 @@ const Config = () => {
           </SelectGroup>
         </SelectContent>
       </Select>
-      {chain((item) => {
-        if (item.pins) {
-          return [<PinConfig key={`${section}.pins`} prefix={section} />];
-        }
-
-        if (item.note) {
-          return [
-            <p key={`${section}.${item.note}`} className="text-sm mt-1 mb-4">
-              {t(`config.${section}.${item.note}`)}
-            </p>,
-          ];
-        }
-
-        const preview = item.themePreview ? (
-          <ThemePreview
-            key={`theme-preview-${item.themePreview}`}
-            companies={item.themePreview === "companies"}
-          />
-        ) : null;
-
-        const path =
-          item.path || (item.root ? item.name : `${section}.${item.name}`);
-
-        return [
-          <Input
-            key={path}
-            name={path}
-            options={item.options}
-            dimension={item.dimension}
-            label={t(`config.${section}.${item.name}.label`)}
-            description={
-              item.description !== false &&
-              t(`config.${section}.${item.name}.description`)
-            }
-          />,
-          preview,
-        ];
-      }, items)}
-      {section === "data" && [
-        <p key="reset-p" className="my-4">
-          You can remove any custom settings and revert back to the defaults
-          with this button.
-        </p>,
-        <Button
-          key="reset-button"
-          variant="outline"
-          onClick={resetConfig}
-          className="mb-4"
-        >
-          Reset To Defaults
-        </Button>,
-        <p key="local-p" className="mb-4">
-          These values are saved on this browser in local storage.
-        </p>,
-        <h3 key="json-header" className="text-xl mb-2">
-          JSON
-        </h3>,
-        <p key="file-p" className="mb-4">
-          You can copy and paste this json value into the file in
-          src/config.json if you want to apply these settings to command line or
-          local servers.
-        </p>,
-        <Code key="config-diff" language="json">
-          {JSON.stringify(diff(defaultConfig, config), null, 2)}
-        </Code>,
-        <File
-          key="config-file"
-          data={diff(defaultConfig, config)}
-          filename="config.json"
-          className="my-5"
-        >
-          Download config.json
-        </File>,
-      ]}
+      <div className="flex flex-row flex-wrap gap-4">
+        <Items section={section} items={items} />
+        {section === "data" && [
+          <p key="reset-p" className="my-4">
+            You can remove any custom settings and revert back to the defaults
+            with this button.
+          </p>,
+          <Button
+            key="reset-button"
+            variant="outline"
+            onClick={resetConfig}
+            className="mb-4"
+          >
+            Reset To Defaults
+          </Button>,
+          <p key="local-p" className="mb-4">
+            These values are saved on this browser in local storage.
+          </p>,
+          <h3 key="json-header" className="text-xl mb-2">
+            JSON
+          </h3>,
+          <p key="file-p" className="mb-4">
+            You can copy and paste this json value into the file in
+            src/config.json if you want to apply these settings to command line
+            or local servers.
+          </p>,
+          <Code key="config-diff" language="json" className="w-full">
+            {JSON.stringify(diff(defaultConfig, config), null, 2)}
+          </Code>,
+          <File
+            key="config-file"
+            data={diff(defaultConfig, config)}
+            filename="config.json"
+            className="my-5"
+          >
+            Download config.json
+          </File>,
+        ]}
+      </div>
     </div>
   );
 };

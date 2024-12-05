@@ -28,12 +28,16 @@ export const sections = [
         themePreview: "companies",
       },
       {
-        name: "companySvgLogos",
-        root: true,
-      },
-      {
-        name: "overrideCompanies",
-        root: true,
+        group: [
+          {
+            name: "companySvgLogos",
+            root: true,
+          },
+          {
+            name: "overrideCompanies",
+            root: true,
+          },
+        ],
       },
     ],
   },
@@ -49,36 +53,48 @@ export const sections = [
     section: "layout",
     items: [
       {
-        name: "margin",
-        root: true,
-        dimension: true,
+        group: [
+          {
+            name: "cutlines",
+            root: true,
+            dimension: true,
+          },
+          {
+            name: "cutlinesOffset",
+            root: true,
+            dimension: true,
+          },
+        ],
       },
       {
-        name: "cutlines",
-        root: true,
-        dimension: true,
+        group: [
+          {
+            name: "margin",
+            root: true,
+            dimension: true,
+          },
+          {
+            name: "bleed",
+            root: true,
+            dimension: true,
+          },
+        ],
       },
       {
-        name: "cutlinesOffset",
-        root: true,
-        dimension: true,
-      },
-      {
-        name: "bleed",
-        root: true,
-        dimension: true,
-      },
-      {
-        name: "paperWidth",
-        path: "paper.width",
-        dimension: true,
-        description: false,
-      },
-      {
-        name: "paperHeight",
-        path: "paper.height",
-        dimension: true,
-        description: false,
+        group: [
+          {
+            name: "paperWidth",
+            path: "paper.width",
+            dimension: true,
+            description: false,
+          },
+          {
+            name: "paperHeight",
+            path: "paper.height",
+            dimension: true,
+            description: false,
+          },
+        ],
       },
       {
         name: "paperMargins",
@@ -95,22 +111,30 @@ export const sections = [
     section: "tokens",
     items: [
       {
-        name: "layout",
+        group: [
+          {
+            name: "layout",
+          },
+          {
+            name: "reverseMarketTokens",
+          },
+        ],
       },
       {
-        name: "marketTokenSize",
-        dimension: true,
-      },
-      {
-        name: "stationTokenSize",
-        dimension: true,
+        group: [
+          {
+            name: "marketTokenSize",
+            dimension: true,
+          },
+          {
+            name: "stationTokenSize",
+            dimension: true,
+          },
+        ],
       },
       {
         name: "generalTokenSize",
         dimension: true,
-      },
-      {
-        name: "reverseMarketTokens",
       },
     ],
   },
@@ -144,21 +168,29 @@ export const sections = [
     section: "tiles",
     items: [
       {
-        name: "id",
+        group: [
+          {
+            name: "layout",
+          },
+          {
+            name: "id",
+          },
+        ],
+      },
+      {
+        group: [
+          {
+            name: "width",
+            dimension: true,
+          },
+          {
+            name: "mapWidth",
+            dimension: true,
+          },
+        ],
       },
       {
         name: "colorblind",
-      },
-      {
-        name: "layout",
-      },
-      {
-        name: "width",
-        dimension: true,
-      },
-      {
-        name: "mapWidth",
-        dimension: true,
       },
       {
         name: "gaps",
@@ -172,26 +204,38 @@ export const sections = [
     section: "stock",
     items: [
       {
-        name: "cellWidth",
-        path: "stock.cell.width",
-        dimension: true,
+        group: [
+          {
+            name: "cellWidth",
+            path: "stock.cell.width",
+            dimension: true,
+          },
+          {
+            name: "cellHeight",
+            path: "stock.cell.height",
+            dimension: true,
+          },
+        ],
       },
       {
-        name: "cellHeight",
-        path: "stock.cell.height",
-        dimension: true,
+        group: [
+          {
+            name: "value",
+          },
+          {
+            name: "arrows",
+          },
+        ],
       },
       {
-        name: "value",
-      },
-      {
-        name: "arrows",
-      },
-      {
-        name: "column",
-      },
-      {
-        name: "diag",
+        group: [
+          {
+            name: "column",
+          },
+          {
+            name: "diag",
+          },
+        ],
       },
       {
         name: "par",
@@ -214,10 +258,14 @@ export const sections = [
     section: "charters",
     items: [
       {
-        name: "style",
-      },
-      {
-        name: "layout",
+        group: [
+          {
+            name: "style",
+          },
+          {
+            name: "layout",
+          },
+        ],
       },
       {
         name: "halfWidth",
@@ -226,12 +274,16 @@ export const sections = [
         name: "smallerMinors",
       },
       {
-        name: "cutlines",
-        dimension: true,
-      },
-      {
-        name: "bleed",
-        dimension: true,
+        group: [
+          {
+            name: "cutlines",
+            dimension: true,
+          },
+          {
+            name: "bleed",
+            dimension: true,
+          },
+        ],
       },
       {
         name: "border",
@@ -254,35 +306,51 @@ export const sections = [
     section: "cards",
     items: [
       {
-        name: "shareStyle",
+        group: [
+          {
+            name: "shareStyle",
+          },
+          {
+            name: "layout",
+          },
+        ],
       },
       {
-        name: "layout",
+        group: [
+          {
+            name: "width",
+            dimension: true,
+            description: false,
+          },
+          {
+            name: "height",
+            dimension: true,
+            description: false,
+          },
+        ],
       },
       {
-        name: "width",
-        dimension: true,
-        description: false,
+        group: [
+          {
+            name: "cutlines",
+            dimension: true,
+          },
+          {
+            name: "bleed",
+            dimension: true,
+          },
+        ],
       },
       {
-        name: "height",
-        dimension: true,
-        description: false,
-      },
-      {
-        name: "cutlines",
-        dimension: true,
-      },
-      {
-        name: "bleed",
-        dimension: true,
-      },
-      {
-        name: "dtgPadding",
-        dimension: true,
-      },
-      {
-        name: "border",
+        group: [
+          {
+            name: "dtgPadding",
+            dimension: true,
+          },
+          {
+            name: "border",
+          },
+        ],
       },
       {
         name: "blackBand",
