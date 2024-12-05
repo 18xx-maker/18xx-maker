@@ -1,9 +1,8 @@
 import clsx from "clsx";
 import debounce from "lodash.debounce";
-import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
-import { assocPath, length, map, path, split } from "ramda";
+import { assocPath, map, path, split } from "ramda";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input as FormInput } from "@/components/ui/input";
@@ -33,88 +32,61 @@ const Input = ({ name, label, options = [], description, dimension }) => {
   let rawUpdateDebounced = debounce(
     (value) => setConfig(assocPath(valuePath, value, config)),
     800,
+    { leading: true },
   );
-  let update = (event) =>
-    setConfig(
-      assocPath(
-        valuePath,
-        event.target.type === "checkbox"
-          ? event.target.checked
-          : event.target.value,
-        config,
-      ),
-    );
+  let update = (value) => {
+    setConfig(assocPath(valuePath, value, config));
+  };
 
   let inputSchema = getSchema(name);
   let inputNode = null;
 
-  let [tempValue, setTempValue] = useState(value);
-  useEffect(() => {
-    setTempValue(value);
-  }, [value]); // Only re-run the effect if value changes
-
   if (inputSchema && inputSchema.type === "string") {
-    if (inputSchema.enum || length(options) > 0) {
-      const selectOptions = inputSchema.enum
-        ? map(
-            (value) => ({
-              value,
-              label: value,
-            }),
-            inputSchema.enum,
-          )
-        : options;
+    const selectOptions = inputSchema.enum
+      ? map(
+          (value) => ({
+            value,
+            label: value,
+          }),
+          inputSchema.enum,
+        )
+      : options;
 
-      inputNode = (
-        <div className="mt-4">
-          <Label htmlFor={name} className="text-lg">
-            {label}
-          </Label>
-          <Select id={name} name={name} onChange={update} value={value}>
-            <SelectTrigger className={className}>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {map(
-                (opt) => (
-                  <SelectItem key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </SelectItem>
-                ),
-                selectOptions,
-              )}
-            </SelectContent>
-          </Select>
-        </div>
-      );
-    } else {
-      inputNode = (
-        <div className="mt-4">
-          <Label htmlFor={name} className="text-lg">
-            {label}
-          </Label>
-          <FormInput
-            value={tempValue}
-            onChange={(event) =>
-              setTempValue(event.target.value === "" ? 0 : event.target.value)
-            }
-            onBlur={update}
+    inputNode = (
+      <div className="">
+        <Label htmlFor={name} className="text-lg">
+          {label}
+        </Label>
+        <Select onValueChange={update} value={value}>
+          <SelectTrigger
             id={name}
             name={name}
-            className={className}
-          />
-        </div>
-      );
-    }
+            className={clsx("w-32", className)}
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {map(
+              (opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ),
+              selectOptions,
+            )}
+          </SelectContent>
+        </Select>
+      </div>
+    );
   } else if (inputSchema && inputSchema.type === "boolean") {
     const checkClasses = clsx(className, "data-[state=checked]:bg-background");
     inputNode = (
-      <div className="mt-4 flex flex-row justify-start items-center">
+      <div className="flex flex-row justify-start items-center">
         <Checkbox
           id={name}
           name={name}
           checked={value}
-          onChange={update}
+          onCheckedChange={update}
           className={checkClasses}
           variant="outline"
         />
@@ -124,7 +96,7 @@ const Input = ({ name, label, options = [], description, dimension }) => {
       </div>
     );
   } else {
-    const numberClasses = clsx(className, "w-24");
+    const numberClasses = clsx(className, "w-20");
     inputNode = dimension ? (
       <UnitInput
         name={name}
@@ -134,7 +106,7 @@ const Input = ({ name, label, options = [], description, dimension }) => {
         errorValidation={error}
       />
     ) : (
-      <div className="mt-4">
+      <div className="">
         <Label htmlFor={name} className="text-lg">
           {label}
         </Label>
@@ -142,7 +114,7 @@ const Input = ({ name, label, options = [], description, dimension }) => {
           id={name}
           name={name}
           value={value}
-          onChange={update}
+          onChange={(e) => rawUpdateDebounced(Number(e.target.value))}
           className={numberClasses}
         />
       </div>
@@ -150,9 +122,11 @@ const Input = ({ name, label, options = [], description, dimension }) => {
   }
 
   return (
-    <div>
+    <div className="mt-8">
       {inputNode}
-      <ReactMarkdown className="text-sm mb-4 mt-1">{description}</ReactMarkdown>
+      <ReactMarkdown className="text-sm mb-4 mt-1 text-muted-foreground">
+        {description}
+      </ReactMarkdown>
     </div>
   );
 };
