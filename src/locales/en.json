@@ -533,7 +533,59 @@
     },
     "currency": {
       "title": "Currency",
-      "description": "This lets you turn on currency symbols for each item individually. Only works if the game file specificies values as numbers and not strings."
+      "description": "This lets you turn on currency symbols for each item individually. Only works if the game file specificies values as numbers and not strings.",
+      "bank": {
+        "label": "Bank",
+        "description": "Bank total on revenue page"
+      },
+      "border": {
+        "label": "Border",
+        "description": "Costs written on map borders"
+      },
+      "capital": {
+        "label": "Capital",
+        "description": "Player capital list on revenue page"
+      },
+      "market": {
+        "label": "Market",
+        "description": "Stock market cells"
+      },
+      "offboard": {
+        "label": "Offboard",
+        "description": "Offboard values on maps"
+      },
+      "par": {
+        "label": "Par",
+        "description": "Stock market par boxes"
+      },
+      "private": {
+        "label": "Private",
+        "description": "Private costs and revenue on cards"
+      },
+      "revenue": {
+        "label": "Revenue",
+        "description": "Revenue tracker cells"
+      },
+      "terrain": {
+        "label": "Terrain",
+        "description": "Terrain costs on maps and track tiles"
+      },
+      "token": {
+        "label": "Token",
+        "description": "Token costs on charters"
+      },
+      "train": {
+        "label": "Train",
+        "description": "Train costs on cards and charters"
+      },
+      "treasury": {
+        "label": "Treasury",
+        "description": "Companies starting capital on charters"
+      },
+      "value": {
+        "label": "Value",
+        "description": "Values on maps and track tiles"
+      }
     },
     "data": {
       "title": "Data"

@@ -54,10 +54,11 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
   };
 
   const className = clsx({ "border-error": isError });
-  const numberClassName = clsx(className, "w-24");
+  const numberClassName = clsx(className, "w-20");
+  const unitClassName = clsx(className, "w-24");
 
   return (
-    <div className="mt-4">
+    <div className="">
       <Label className="w-min text-lg" htmlFor={name}>
         {label}
       </Label>
@@ -70,7 +71,7 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
           className={numberClassName}
         />
         <Select onValueChange={unitsHandler} value={units}>
-          <SelectTrigger className={className}>
+          <SelectTrigger className={unitClassName}>
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
