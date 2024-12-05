@@ -28,7 +28,7 @@ const SvgEditor = ({ width, height, children }) => {
 
   const zoom = useCallback(
     (amount) => {
-      const mult = amount < 0 ? 0.75 : 1.25;
+      const mult = 1.0 + amount / 800.0;
       const width = state.viewbox.width * mult;
       const height = state.viewbox.height * mult;
       const dw = state.viewbox.width - width;
