@@ -12,7 +12,7 @@ const Viewport = ({ children }) => {
     >
       <Toolbar />
       {config && <Config />}
-      {children}
+      <div id="viewport-children">{children}</div>
     </div>
   );
 };
