@@ -37,8 +37,9 @@ const Info = () => {
 
   const onDelete = (event) => {
     event.preventDefault();
-    dispatch(deleteGame(game.meta.slug));
-    navigate("/games");
+    dispatch(deleteGame(game.meta.slug, game.info.title)).then(() =>
+      navigate("/games"),
+    );
   };
 
   const typeDescription =
