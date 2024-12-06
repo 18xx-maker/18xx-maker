@@ -20,7 +20,14 @@ import UnitInput from "@/components/config/UnitInput";
 import { useConfig, useValidation } from "@/hooks";
 import { getPath, getSchema } from "@/util/input";
 
-const Input = ({ name, label, options = [], description, dimension }) => {
+const Input = ({
+  name,
+  label,
+  options = [],
+  description,
+  dimension,
+  large = false,
+}) => {
   const { config, setConfig } = useConfig();
   const { isValidByInputName } = useValidation();
   const value = path(split(".", name), config);
@@ -61,7 +68,7 @@ const Input = ({ name, label, options = [], description, dimension }) => {
           <SelectTrigger
             id={name}
             name={name}
-            className={clsx("w-32", className)}
+            className={clsx(large ? "w-48" : "w-32", className)}
           >
             <SelectValue />
           </SelectTrigger>
