@@ -1,30 +1,19 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid2";
-import MenuItem from "@mui/material/MenuItem";
-import Paper from "@mui/material/Paper";
-import Select from "@mui/material/Select";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
-
 import { ascend, compose, groupBy, keys, map, nth, sort, split } from "ramda";
+
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 import { logos } from "@/data";
 import { useStringParam } from "@/util/query";
-
-const useStyles = makeStyles((theme) => ({
-  page: {
-    overflow: "auto",
-    margin: theme.spacing(2, 0),
-    padding: theme.spacing(2, 2, 0, 2),
-
-    "& p": {
-      marginBottom: theme.spacing(2),
-    },
-  },
-}));
 
 const groupFor = compose(nth(0), split("/"));
 const nameFor = compose(nth(1), split("/"));
@@ -36,16 +25,15 @@ const groupNames = sort(
 
 const groupItems = map(
   (group) => (
-    <MenuItem key={group} value={group}>
+    <SelectItem key={group} value={group}>
       {group}
-    </MenuItem>
+    </SelectItem>
   ),
   groupNames,
 );
 
 const Logos = () => {
   const { t } = useTranslation();
-  const classes = useStyles();
   const [group, setGroup] = useStringParam("group", groupNames[0]);
 
   const logoNodes = useMemo(
@@ -54,42 +42,45 @@ const Logos = () => {
         let name = nameFor(logo);
         let Component = logos[logo];
         return (
-          <Grid
+          <div
             key={`logo-${group}-${name}`}
-            size={{ xs: 6, sm: 4, lg: 2 }}
-            style={{ overflow: "hidden" }}
+            className="border rounded-lg checkered overflow-hidden"
           >
-            <Component width="100%" height="100px" />
-            <Typography variant="subtitle1" align="center">
+            <div className="m-4">
+              <Component width="100%" height="100%" />
+            </div>
+            <div className="border-t center p-4 bg-background text-center">
               {logo}
-            </Typography>
-          </Grid>
+            </div>
+          </div>
         );
       }, groups[group]),
     [group],
   );
 
   return (
-    <Container maxWidth="lg">
-      <Paper data-testid="logos" elevation={5} className={classes.page}>
-        <Typography variant="h4" gutterBottom>
-          {t("elements.logos.title")}
-        </Typography>
-        <Typography variant="body1">
-          {t("elements.logos.page.description")}
-        </Typography>
-      </Paper>
-      <Container
-        sx={{ paddingBottom: 2, display: "flex", justifyContent: "center" }}
-      >
-        <Select value={group} onChange={(e) => setGroup(e.target.value)}>
-          {groupItems}
-        </Select>
-      </Container>
-      <Grid container spacing={2}>
+    <div className="p-4">
+      <h1 className="text-4xl font-extrabold">{t("elements.logos.title")}</h1>
+      <p className="leading-7 mt-6 text-wrap">
+        {t("elements.logos.page.description")}
+      </p>
+      <div className="bg-muted flex flex-rows place-items-center rounded-xl border px-4 py-2 my-4">
+        <Label htmlFor="logo-set" className="mr-2">
+          Logo Set:
+        </Label>
+        <div className="w-min">
+          <Select id="logo-set" defaultValue={group} onValueChange={setGroup}>
+            <SelectTrigger>
+              <SelectValue value={group} />
+            </SelectTrigger>
+            <SelectContent>{groupItems}</SelectContent>
+          </Select>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-10 gap-4">
         {logoNodes}
-      </Grid>
-    </Container>
+      </div>
+    </div>
   );
 };
 

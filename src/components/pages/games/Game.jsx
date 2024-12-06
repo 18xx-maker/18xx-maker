@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useMatch, useNavigate } from "react-router";
 
-import { useGame } from "@/hooks";
+import Viewport from "@/components/Viewport";
+
+import { useEditor, useGame } from "@/hooks";
 import { loadGame } from "@/state";
 import capability from "@/util/capability";
 
@@ -18,6 +20,7 @@ const Game = () => {
   const match = useMatch("/games/:slug/*");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const inEditor = useEditor();
 
   useEffect(() => {
     if (!game || match.params.slug !== game.meta.slug) {
@@ -29,6 +32,14 @@ const Game = () => {
 
   if (!game) {
     return null;
+  }
+
+  if (inEditor) {
+    return (
+      <Viewport>
+        <Outlet />
+      </Viewport>
+    );
   }
 
   return <Outlet />;

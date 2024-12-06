@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 
 import Paginate from "@/components/Paginate";
 import Map from "@/components/map/Map";
+
 import { getMapData } from "@/util/map";
 
 const MapPaginated = ({ game, config, variation }) => {

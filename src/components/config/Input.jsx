@@ -1,150 +1,140 @@
+import clsx from "clsx";
 import debounce from "lodash.debounce";
-import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-
-import Checkbox from "@mui/material/Checkbox";
-import MUIInput from "@mui/material/FilledInput";
-import FormControl from "@mui/material/FormControl";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
 
 import { assocPath, map, path, split } from "ramda";
 
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input as FormInput } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 import UnitInput from "@/components/config/UnitInput";
+
 import { useConfig, useValidation } from "@/hooks";
 import { getPath, getSchema } from "@/util/input";
 
-const useStyles = makeStyles((theme) => ({
-  configItem: {
-    minWidth: 200,
-    margin: theme.spacing(3, 0, 0, 0),
-  },
-}));
-
-const Input = ({ name, label, description, dimension }) => {
-  const classes = useStyles();
+const Input = ({
+  name,
+  label,
+  options = [],
+  description,
+  dimension,
+  large = false,
+}) => {
   const { config, setConfig } = useConfig();
   const { isValidByInputName } = useValidation();
   const value = path(split(".", name), config);
 
   const error = !isValidByInputName(name);
+  const className = clsx({ "border-error": error });
 
   let valuePath = getPath(name);
   let rawUpdateDebounced = debounce(
     (value) => setConfig(assocPath(valuePath, value, config)),
     800,
+    { leading: true },
   );
-  let update = (event) =>
-    setConfig(
-      assocPath(
-        valuePath,
-        event.target.type === "checkbox"
-          ? event.target.checked
-          : event.target.value,
-        config,
-      ),
-    );
+  let update = (value) => {
+    setConfig(assocPath(valuePath, value, config));
+  };
 
   let inputSchema = getSchema(name);
   let inputNode = null;
 
-  let [tempValue, setTempValue] = useState(value);
-  useEffect(() => {
-    setTempValue(value);
-  }, [value]); // Only re-run the effect if value changes
-
   if (inputSchema && inputSchema.type === "string") {
-    if (inputSchema.enum) {
-      inputNode = (
-        <FormControl className={classes.configItem} variant="filled">
-          <InputLabel id={`${name}-label`}>{label}</InputLabel>
-          <Select
+    const selectOptions = inputSchema.enum
+      ? map(
+          (value) => ({
+            value,
+            label: value,
+          }),
+          inputSchema.enum,
+        )
+      : options;
+
+    inputNode = (
+      <div className="">
+        <Label htmlFor={name} className="text-lg">
+          {label}
+        </Label>
+        <Select onValueChange={update} value={value}>
+          <SelectTrigger
             id={name}
             name={name}
-            labelId={`${name}-label`}
-            value={value}
-            onChange={update}
-            error={error}
+            className={clsx(large ? "w-48" : "w-32", className)}
           >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
             {map(
               (opt) => (
-                <MenuItem key={opt} value={opt}>
-                  {opt}
-                </MenuItem>
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
               ),
-              inputSchema.enum,
+              selectOptions,
             )}
-          </Select>
-        </FormControl>
-      );
-    } else {
-      inputNode = (
-        <FormControl className={classes.configItem} variant="filled">
-          <MUIInput
-            value={tempValue}
-            onChange={(event) =>
-              setTempValue(event.target.value === "" ? 0 : event.target.value)
-            }
-            onBlur={update}
-            id={name}
-            name={name}
-            label={label}
-            error={error}
-          />
-        </FormControl>
-      );
-    }
+          </SelectContent>
+        </Select>
+      </div>
+    );
   } else if (inputSchema && inputSchema.type === "boolean") {
+    const checkClasses = clsx(className, "data-[state=checked]:bg-background");
     inputNode = (
-      <FormControl className={classes.configItem} variant="filled">
-        <FormControlLabel
-          label={label}
-          control={
-            <Checkbox checked={value} onChange={update} name={name} id={name} />
-          }
+      <div className="flex flex-row justify-start items-center">
+        <Checkbox
+          id={name}
+          name={name}
+          checked={value}
+          onCheckedChange={update}
+          className={checkClasses}
+          variant="outline"
         />
-      </FormControl>
+        <Label htmlFor={name} className="ml-2 text-lg">
+          {label}
+        </Label>
+      </div>
     );
   } else {
-    inputNode = (
-      <>
-        {dimension ? (
-          <UnitInput
-            name={name}
-            value={value}
-            label={label}
-            onChange={rawUpdateDebounced}
-            errorValidation={error}
-          />
-        ) : (
-          <FormControl className={classes.configItem} variant="filled">
-            <InputLabel id={`${name}-label`}>{label}</InputLabel>
-            <MUIInput
-              variant="filled"
-              name={name}
-              id={name}
-              value={value}
-              onChange={update}
-              inputProps={{ type: "number" }}
-              error={error}
-            />
-          </FormControl>
-        )}
-      </>
+    const numberClasses = clsx(className, "w-20");
+    inputNode = dimension ? (
+      <UnitInput
+        name={name}
+        value={value}
+        label={label}
+        onChange={rawUpdateDebounced}
+        errorValidation={error}
+      />
+    ) : (
+      <div className="">
+        <Label htmlFor={name} className="text-lg">
+          {label}
+        </Label>
+        <FormInput
+          id={name}
+          name={name}
+          value={value}
+          onChange={(e) => rawUpdateDebounced(Number(e.target.value))}
+          className={numberClasses}
+        />
+      </div>
     );
   }
 
   return (
-    <>
+    <div className="mt-8">
       {inputNode}
-      <Typography variant="caption" display="block" gutterBottom>
-        <ReactMarkdown>{description}</ReactMarkdown>
-      </Typography>
-    </>
+      <ReactMarkdown className="text-sm mb-4 mt-1 text-muted-foreground">
+        {description}
+      </ReactMarkdown>
+    </div>
   );
 };
 

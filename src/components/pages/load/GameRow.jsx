@@ -1,88 +1,61 @@
-import { Link as RouterLink } from "react-router";
+import { Link } from "react-router";
 
-import DeleteIcon from "@mui/icons-material/Delete";
-import Link from "@mui/material/Link";
-import TableCell from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
+import GameType from "@/components/pages/load/GameType";
 
 import { publishers } from "@/data";
 
-const GameRow = ({ game, onDelete }) => {
-  let linkNode = null;
+const GameRow = ({ game }) => {
   let imageNode = null;
 
   if (game.publisher && publishers[game.publisher]) {
     let publisher = publishers[game.publisher];
 
-    if (publisher.link) {
-      linkNode = (
-        <Link
-          rel="noreferrer"
-          target="_blank"
-          href={publisher.link}
-          underline="hover"
-        >
-          {publisher.name}
-        </Link>
-      );
-    } else {
-      linkNode = publisher.name;
-    }
-
     if (game.publisher !== "self") {
       if (publisher.link) {
         imageNode = (
-          <Link
-            rel="noreferrer"
-            target="_blank"
-            href={publisher.link}
-            underline="hover"
-          >
-            <img alt={`${publisher.name} Logo`} src={publisher.imageUrl} />
-          </Link>
+          <div className="flex flex-row place-content-center p-1 border rounded-lg w-16 h-16 overflow-hidden bg-white">
+            <a
+              className="block h-full"
+              rel="noreferrer"
+              target="_blank"
+              href={publisher.link}
+            >
+              <img
+                className="block h-full"
+                alt={`${publisher.name} Logo`}
+                src={publisher.imageUrl}
+              />
+            </a>
+          </div>
         );
       } else {
         imageNode = (
-          <img alt={`${publisher.name} Logo`} src={publisher.imageUrl} />
+          <div className="border rounded-lg w-16 h-16 overflow-hidden bg-white">
+            <img
+              className="block h-full"
+              alt={`${publisher.name} Logo`}
+              src={publisher.imageUrl}
+            />
+          </div>
         );
       }
     }
   }
 
-  let publisherNode = (
-    <>
-      <TableCell>{linkNode}</TableCell>
-      <TableCell style={{ textAlign: "center" }}>{imageNode}</TableCell>
-    </>
-  );
+  let publisherNode = <div className="absolute top-7 right-0">{imageNode}</div>;
 
   return (
-    <TableRow>
-      <TableCell>
-        <Link
-          component={RouterLink}
-          variant="h5"
-          to={`/games/${game.slug}/map`}
-          underline="hover"
-        >
+    <div className="relative border-b pb-8">
+      <div className="text-3xl font-bold">
+        <Link className="hover:underline" to={`/games/${game.slug}`}>
           {game.title}
         </Link>
-        {game.subtitle && (
-          <>
-            <br />
-            {game.subtitle}
-          </>
-        )}
-      </TableCell>
-      <TableCell>{game.designer}</TableCell>
+      </div>
+      {game.subtitle && <div className="text-xl">{game.subtitle}</div>}
+      <div className="italic text-sm mt-1">by {game.designer}</div>
+      <GameType type={game.type} className="right-0 top-0 absolute" />
       {publisherNode}
-      <TableCell>{game.type}</TableCell>
-      <TableCell>
-        {onDelete && game.type !== "bundled" && (
-          <DeleteIcon onClick={() => onDelete(game.slug)} />
-        )}
-      </TableCell>
-    </TableRow>
+    </div>
   );
 };
 

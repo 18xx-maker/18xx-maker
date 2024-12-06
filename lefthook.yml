@@ -13,6 +13,8 @@ pre-commit:
     validate:
       glob: "*.json"
       exclude:
+        - "components.json"
+        - "jsconfig.json"
         - "package.json"
         - "release-please-config.json"
         - ".release-please-manifest.json"
@@ -34,11 +36,6 @@ pre-commit:
     eslint:
       glob: "*.{js,mjs,cjs,jsx}"
       run: pnpm eslint --fix {staged_files}
-      stage_fixed: true
-      priority: 30
-    stylelint:
-      glob: "*.css"
-      run: pnpm stylelint --fix {staged_files}
       stage_fixed: true
       priority: 30
     test:

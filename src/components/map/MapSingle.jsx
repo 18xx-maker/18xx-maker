@@ -1,7 +1,8 @@
 import { redirect } from "react-router";
 
-import Svg from "@/components/Svg";
+import Editor from "@/components/Editor";
 import Map from "@/components/map/Map";
+
 import { getMapData } from "@/util/map";
 
 const MapSingle = ({ game, config, variation }) => {
@@ -17,20 +18,15 @@ const MapSingle = ({ game, config, variation }) => {
   let data = getMapData(game, coords, hexWidth, variation);
 
   return (
-    <div className="map" data-testid={`game-${game.meta.slug}-map`}>
-      <Svg
-        className="printElement"
-        width={`${data.totalWidth / 100}in`}
-        height={`${data.totalHeight / 100}in`}
-        viewBox={`0 0 ${data.totalWidth} ${data.totalHeight}`}
-      >
+    <div data-testid={`game-${game.meta.slug}-map`} className="map w-max h-max">
+      <Editor width={data.totalWidth} height={data.totalHeight}>
         <Map
           name={game.meta.id}
           game={game}
           config={config}
           variation={variation}
         />
-      </Svg>
+      </Editor>
       <style>{`@media print {@page {size: ${data.printWidth} ${data.printHeight}; margin: 0.25in 0.25in 0.25in 0.25in; }}`}</style>
     </div>
   );
