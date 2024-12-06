@@ -55,6 +55,7 @@ const Items = ({ section, items }) => {
           item.description !== false &&
           t(`config.${section}.${item.name}.description`)
         }
+        large={!!item.themePreview}
       />,
       preview,
     ];

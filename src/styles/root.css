@@ -11,11 +11,23 @@ body {
   margin: 0;
   padding: 0;
   -webkit-print-color-adjust: exact;
-  font-family: display;
-  font-weight: bold;
   height: -moz-available;
   height: -webkit-fill-available;
   height: stretch;
+}
+
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6 {
+  font-family: display;
+}
+
+#viewport-children {
+  font-family: display;
+  font-weight: bold;
 }
 
 #root,
@@ -446,6 +458,8 @@ a {
   width: 0.5in;
   height: 0.7in;
   padding: 0 0 0 0.15in;
+  display: inline;
+  box-sizing: content-box;
 }
 
 .charter--half .charter__tokens {
@@ -613,7 +627,6 @@ ul.notes li span {
   width: 0.25in;
   height: calc(100% - 0.75in);
   position: absolute;
-  z-index: -1;
   box-sizing: border-box;
   left: 0;
   top: 0.375in;
@@ -626,7 +639,6 @@ ul.notes li span {
   width: 0.25in;
   height: calc(100% - 0.75in);
   position: absolute;
-  z-index: -1;
   box-sizing: border-box;
   right: 0;
   top: 0.375in;
@@ -639,7 +651,6 @@ ul.notes li span {
   width: calc(100% - 0.25in);
   height: 0.25in;
   position: absolute;
-  z-index: -1;
   box-sizing: border-box;
   top: -0.25in;
   left: 0.125in;
@@ -652,7 +663,6 @@ ul.notes li span {
   width: calc(100% - 0.25in);
   height: 0.25in;
   position: absolute;
-  z-index: -1;
   box-sizing: border-box;
   bottom: -0.25in;
   left: 0.125in;
