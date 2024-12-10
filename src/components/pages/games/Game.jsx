@@ -20,7 +20,7 @@ const Game = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!game || match.params.slug !== game.meta.slug) {
+    if (!game || match.params.slug !== decodeURIComponent(game.meta.slug)) {
       dispatch(loadGame(match.params.slug))
         .then(addRecent)
         .catch(() => navigate("/games/"));
