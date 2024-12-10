@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.109](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.108...v1.0.0-beta.109) (2024-12-10)
+
+
+### :bug: Bug Fixes
+
+* **game:** match params slug with decoded meta slug ([#668](https://github.com/18xx-maker/18xx-maker/issues/668)) ([82a66cf](https://github.com/18xx-maker/18xx-maker/commit/82a66cf35d8cc56e8d05c06a89c6504d2eb5f742))
+
 ## [1.0.0-beta.108](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.107...v1.0.0-beta.108) (2024-12-04)
 
 
