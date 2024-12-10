@@ -3,6 +3,7 @@ import { addIndex, compose, is, map, propEq, reject } from "ramda";
 import Svg from "@/components/Svg";
 import CompanyToken from "@/components/tokens/CompanyToken";
 import Token from "@/components/tokens/Token";
+
 import ColorContext from "@/context/ColorContext";
 import { useConfig, useGame } from "@/hooks";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
@@ -13,7 +14,10 @@ const Tokens = () => {
 
   let companyTokenNodes = map(
     (company) => (
-      <div className="token" key={company.abbrev}>
+      <div
+        className="token w-[90px] h-[30px] m-0 p-0 flex flex-row"
+        key={company.abbrev}
+      >
         <Svg width={30} height={30} viewBox="-26 -26 52 52">
           <CompanyToken company={company} />
         </Svg>
@@ -34,7 +38,10 @@ const Tokens = () => {
     addIndex(map)((extraToken, index) => {
       if (is(Object, extraToken)) {
         return (
-          <div className="token" key={index}>
+          <div
+            className="token w-[90px] h-[30px] m-0 p-0 flex flex-row"
+            key={index}
+          >
             <Svg width={30} height={30} viewBox="-26 -26 52 52">
               <Token color="white" {...extraToken} />
             </Svg>
@@ -45,7 +52,10 @@ const Tokens = () => {
         );
       } else {
         return (
-          <div className="token" key={index}>
+          <div
+            className="token w-[90px] h-[30px] m-0 p-0 flex flew-row"
+            key={index}
+          >
             <Svg width={30} height={30} viewBox="-26 -26 52 52">
               <Token label={extraToken} color="white" />
             </Svg>
@@ -63,8 +73,8 @@ const Tokens = () => {
 
   return (
     <ColorContext.Provider value="companies">
-      <div className="b18" style={{ width: `60px` }}>
-        <div className="tokens">
+      <div className="b18 relative text-left" style={{ width: `60px` }}>
+        <div className="tokens m-0 p-0">
           {companyTokenNodes}
           {extraTokenNodes}
         </div>

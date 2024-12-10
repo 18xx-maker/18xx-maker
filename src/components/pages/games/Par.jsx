@@ -1,5 +1,6 @@
 import ParPaginated from "@/components/market/ParPaginated";
 import ParSingle from "@/components/market/ParSingle";
+
 import { useConfig, useGame } from "@/hooks";
 import { useBooleanParam } from "@/util/query";
 

@@ -3,6 +3,7 @@ import { is } from "ramda";
 import Color from "@/components/Color";
 import Name from "@/components/atoms/Name";
 import GameMapCompanyToken from "@/components/tokens/GameMapCompanyToken";
+
 import CityRotateContext from "@/context/CityRotateContext";
 import ColorContext from "@/context/ColorContext";
 import { icons as iconComponents } from "@/data";

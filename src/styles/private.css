@@ -93,6 +93,7 @@
 .private__icon,
 .private__company {
   float: left;
+  box-sizing: content-box;
   padding: 0 1em 7em 0;
   width: 0.3in;
   height: 0.3in;

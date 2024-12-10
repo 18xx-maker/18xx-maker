@@ -14,7 +14,8 @@
     "home": "Home",
     "load": "Load Games",
     "elements": "Elements",
-    "docs": "Help"
+    "docs": "Help",
+    "edit": "Edit Game"
   },
   "refresh": {
     "refresh": "Refresh",
@@ -33,6 +34,15 @@
     "allPng": "Export game as png images",
     "singlePdf": "Export this component as a pdf document",
     "singlePng": "Export this component as a png image"
+  },
+  "settings": {
+    "title": "Settings",
+    "theme": {
+      "title": "Theme",
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    }
   },
   "app": {
     "title": "App Information",
@@ -140,7 +150,7 @@
       }
     },
     "atoms": {
-      "title": "Map Elements",
+      "title": "Atoms",
       "description": "Basic atoms for maps and tiles",
       "page": {
         "description": "This page shows examples of all items that you can display on either map hexes or tiles. Use these examples to help prototype your game!"
@@ -163,6 +173,17 @@
     "description": "These are the games that you have loaded into 18xx Maker"
   },
   "game": {
+    "type": {
+      "bundled": {
+        "label": "Bundled",
+        "description": "This game is bundled with 18xx Maker"
+      },
+      "system": {
+        "label": "System",
+        "description": "This game has been loaded from your computer",
+        "forget": "Forget"
+      }
+    },
     "nav": {
       "background": "Background",
       "cards": "Cards",
@@ -214,10 +235,6 @@
     "title": "Partnership with Grand Trunk Games",
     "description": "<gtg>Grand Trunk Games</gtg> is a great publisher and a big supporter of print and play. They have decided to make all of their games available on 18xx Maker as the official print and play provider! If you are able to we highly recommend supporting this publisher by purchasing their excellent productions of 1861/67 and Shikoku 1889!"
   },
-  "app": {
-    "title": "The 18xx Maker Application",
-    "description": "We have a version of <app>18xx Maker bundled as a desktop application</app>. The interface is the same but there is better support for file editing and more exporting options. If you are working on prototyping your own game we highly recommend you download the app."
-  },
   "credits": {
     "title": "Credits",
     "description": "The code is <code>available</code> on <github>GitHub</github>. We use GitHub actions, releases, and packages to handle CI, app hosting, and docker image hosting. We use <netlify>Netlify</netlify> to build and serve the <site>website</site> and the <sb>storybook</sb>."
@@ -234,5 +251,344 @@
   "donations": {
     "title": "Donations",
     "description": "I've been asked about donation buttons; if you find this software useful to you and would like to donate money towards its development you can do so via <paypal>Paypal</paypal>, <cash>Square Cash</cash>, or <venmo>Venmo</venmo>."
+  },
+  "config": {
+    "title": "Configuration",
+    "colors": {
+      "title": "Colors and Companies",
+      "theme": {
+        "label": "Theme",
+        "description": "The theme determines which colors are used for all of the elements on the maps and tiles."
+      },
+      "companiesTheme": {
+        "label": "Companies Theme",
+        "description": "The company theme determines which colors are used for all of the elements on the maps and tiles."
+      },
+      "companySvgLogos": {
+        "label": "Company Logos",
+        "description": "This lets you choose to use SVG logos (when available) for companies instead of only colors and text. The different settings are explained on the [logos doc](/docs/games/logos) page."
+      },
+      "overrideCompanies": {
+        "label": "Override Companies",
+        "description": "This lets you change the companies for a game to a set list that are defined in [the code](https://github.com/18xx-maker/18xx-maker/tree/master/src/data/companies)."
+      }
+    },
+    "export": {
+      "title": "Export",
+      "allLayouts": {
+        "label": "Export all layout options",
+        "description": "When exporting pdf components with multiple layout options, should we just export all of them?"
+      }
+    },
+    "layout": {
+      "title": "Layout",
+      "paperSize": "For reference US Letter size would be 8.5in by 11in. A4 is 210mm by 297mm.",
+      "margin": {
+        "label": "Margin Size",
+        "description": "How much of a margin exists around the printed item."
+      },
+      "cutlines": {
+        "label": "Pagination Cutlines Size",
+        "description": "Set to 0 to disable any cutlines."
+      },
+      "cutlinesOffset": {
+        "label": "Pagination Cutlines Offset",
+        "description": "If your method of cutting has a guide that is slightly off from where it cuts, you can adjust an offset here. Leave at 0 otherwise."
+      },
+      "bleed": {
+        "label": "Pagination Bleed Size",
+        "description": "Set to 0 to disable any bleed. For paginated items this detemines how much map pages overlap to help with cutting errors."
+      },
+      "paperWidth": {
+        "label": "Paper Width"
+      },
+      "paperHeight": {
+        "label": "Paper Height"
+      },
+      "paperMargins": {
+        "label": "Paper Margins"
+      }
+    },
+    "tokens": {
+      "title": "Tokens",
+      "layout": {
+        "label": "Token Layout",
+        "description": "This lets you choose between different layouts when printing tokens. GSP matches the GarageSalePup AWE label sheets and overrides the values below."
+      },
+      "marketTokenSize": {
+        "label": "Market Token Size",
+        "description": "Size of the market tokens. 0.5 inches is the default. 12mm and 10mm are good sizes for the Rails on Boards tokens."
+      },
+      "stationTokenSize": {
+        "label": "Station Token Size",
+        "description": "Size of the station tokens. 0.5 inches is the default. 12mm and 10mm are good sizes for the Rails on Boards tokens."
+      },
+      "generalTokenSize": {
+        "label": "General Token Size",
+        "description": "Size of the tokens specified for the game. 0.5 inches is the default. 12mm and 10mm are good sizes for the Rails on Boards tokens."
+      },
+      "reverseMarketTokens": {
+        "label": "Reverse Market Tokens",
+        "description": "Whether to print token stickers for the reverse side of company market tokens. All will print a reverse token for all market tokens (normally 3 or 2 depending on the games settings)."
+      }
+    },
+    "maps": {
+      "title": "Maps",
+      "coords": {
+        "label": "Coordinate Type",
+        "description": "This lets you choose where the coordinates appear on the map (if at all)."
+      },
+      "straightCityNames": {
+        "label": "Straight City Names",
+        "description": "Draw city names straight instead of curved along the city. None of the games included with this tool are meant to be drawn this way so layout issues might be present."
+      },
+      "plainMapCompanies": {
+        "label": "Plain Map Company Spaces",
+        "description": "This sets all home/destination/token spots on maps to be empty white cities with black company text instead of colored or using logos."
+      },
+      "plainMapDestinations": {
+        "label": "Plain Map Destination Spaces",
+        "description": "This sets all destination spots on maps to be empty white cities with black company text."
+      },
+      "market": {
+        "label": "Display Map Market",
+        "description": "Whether or not to show the market on the map. Requires the game file to specify the location."
+      },
+      "players": {
+        "label": "Display Map Players Table",
+        "description": "Whether or not to show the player information table on maps. This includes bank and certificate limit information. Requires the game file to specify the location."
+      },
+      "roundTracker": {
+        "label": "Display Map Round Tracker",
+        "description": "Whether or not to show the round tracker on maps. Requires the game file to specify the location."
+      }
+    },
+    "tiles": {
+      "title": "Tiles",
+      "id": {
+        "label": "Tile ID Location",
+        "description": "This determines where to render the tile id."
+      },
+      "colorblind": {
+        "label": "Colorblind IDs",
+        "description": "This adds a colorblind safe shape indicating the tile color to the ID section of the tile."
+      },
+      "layout": {
+        "label": "Tile Sheet Layout",
+        "description": "This determines how to lay out the tiles on the tile sheet. Offset is the style that tries to make as few cuts as possible. Individual just has each tile separate from the others, and die is meant from the custom die cutters that Deep Thought Games uses. Setting either die option overrides page size and the tile size option below."
+      },
+      "width": {
+        "label": "Tile Width",
+        "description": "This determines the default size of tiles. It defines the distance from flat to flat. 1.5in would be standard 18xx size. 1.0625in is small (1822 / 18OE) size. GMT uses 1.75in."
+      },
+      "mapWidth": {
+        "label": "Map Tile Width",
+        "description": "This determines the default size of map hexes. This is if you want your maps drawn bigger than your tiles. Depending on how you cut your tiles this can help a lot."
+      },
+      "gaps": {
+        "label": "Tile Gaps",
+        "description": "This says whether to separate different colors with spaces needed to prevent bleed crossover. Leave on unless you really know you want it."
+      }
+    },
+    "stock": {
+      "title": "Market",
+      "cellWidth": {
+        "label": "Cell Width",
+        "description": "This determines the default width of one stock market cell."
+      },
+      "cellHeight": {
+        "label": "Cell Height",
+        "description": "This determines the default height of one stock market cell."
+      },
+      "value": {
+        "label": "Value Location",
+        "description": "This determines if the value of a cell is drawn at the top of borrom."
+      },
+      "arrows": {
+        "label": "Arrow Location",
+        "description": "This determines if the arrows in a cell are positioned at the top, middle or bottom."
+      },
+      "column": {
+        "label": "Column Height",
+        "description": "This determines how many cells make up a 1D market column height. The default is 4. Decimals are allowed."
+      },
+      "diag": {
+        "label": "Diag Height",
+        "description": "This determines how many cells make up a 1Diag market cell height. The default is 2. Decimals are allowed."
+      },
+      "par": {
+        "label": "Par Width",
+        "description": "This determines how many cells make up a par market cell width. The default is 4. Decimals are allowed."
+      },
+      "displayLegend": {
+        "label": "Display Market Legend",
+        "description": "Whether or not to show the legend on markets. Requires the game file to specify the location for 2D market legends."
+      },
+      "displayPar": {
+        "label": "Display Market Par Chart",
+        "description": "Whether or not to show the par chart on markets. Requires the game file to specify the location."
+      },
+      "displayRoundTracker": {
+        "label": "Display Market Round Tracker",
+        "description": "Whether or not to show the round tracker on markets. Requires the game file to specify the location."
+      }
+    },
+    "charters": {
+      "title": "Charters",
+      "style": {
+        "label": "Charter Style",
+        "description": "This lets you choose between two styles for charters. One is simular to Carth's style while the other includes more color at the top."
+      },
+      "layout": {
+        "label": "Charter Layout",
+        "description": "Free tries to fill your page with two charters per page (by default, half width charters will change this). 3x1 and 3x2 are both designs that fit common die layouts. Either die option overrides the page size as well as the width, height and cutlines option below."
+      },
+      "halfWidth": {
+        "label": "Half Width Charters",
+        "description": "This draws all charters (major and minor) as half width. They will take up half of the width of your page (minus cutlines)."
+      },
+      "smallerMinors": {
+        "label": "Smaller Minors",
+        "description": "This draws minor charters smaller (height wise)."
+      },
+      "cutlines": {
+        "label": "Charter Cutlines Size",
+        "description": "Set to 0 to disable any cutlines and have the charters next to each other"
+      },
+      "bleed": {
+        "label": "Charter Bleed Size",
+        "description": "Set to 0 to disable any bleed, or set to a value to have a margin of this amount used as the bleed amount for printing."
+      },
+      "border": {
+        "label": "Charter Border Size",
+        "description": "Set to 0 to disable any border, or set to a value to have a border of that many pixels drawn around the charter."
+      },
+      "showPhaseChart": {
+        "label": "Show Phase Chart",
+        "description": "Whether or not to show the phase chart on charters."
+      },
+      "showTurnOrder": {
+        "label": "Show Turn Order",
+        "description": "Whether or not to show the phase chart on charters."
+      },
+      "blackBand": {
+        "label": "Charter Black Band",
+        "description": "Whether or not to put a black border against the color section of the charter. Only relevent to \"color\" charters. Always put on white color charters."
+      }
+    },
+    "cards": {
+      "title": "Cards",
+      "shareStyle": {
+        "label": "Share Style",
+        "description": "This lets you choose between two styles for shares. One keeps the token in the center of the card, the other puts the tokens on the let (Simular to All Aboard Games and Deep Thought Games)."
+      },
+      "layout": {
+        "label": "Cards Layout",
+        "description": "Free allows cards to free flow and uses the other options below. Mini euro is for my custom die that cuts mini-euro sized cards and dtgDie uses the standard Deep Thought Games asset die. Either die option overrides the page size as well as the width, height and cutlines option below."
+      },
+      "width": {
+        "label": "Card Width"
+      },
+      "height": {
+        "label": "Card Height"
+      },
+      "cutlines": {
+        "label": "Card Cutlines Size",
+        "description": "Set to 0 to disable any cutlines and have the cards next to each other"
+      },
+      "bleed": {
+        "label": "Card Bleed Size",
+        "description": "Set to 0 to disable any bleed, or set to a value to have a margin of this amount used as the bleed amount for printing."
+      },
+      "dtgPadding": {
+        "label": "DTG Die Padding Size",
+        "description": "Set to 0 to disable any padding, or set to a value to have a margin of this amount used as the padding amount per card for printing on the DTG die layout."
+      },
+      "border": {
+        "label": "Card Border Size",
+        "description": "Set to 0 to disable any border, or set to a value to have a border of that many pixels drawn around the card."
+      },
+      "blackBand": {
+        "label": "Card Black Band",
+        "description": "Whether or not to put a black border against the color section of the share. Only relevent to \"gmt\" and \"left\" shares as well as trains. Always put on white color cards."
+      }
+    },
+    "privates": {
+      "title": "Privates",
+      "style": {
+        "label": "Private Style",
+        "description": "Different styles of private cards. Small uses small icons while big uses bigger ones."
+      }
+    },
+    "trains": {
+      "title": "Trains",
+      "style": {
+        "label": "Train Style",
+        "description": "Different styles of train cards. Color uses a large color band, while the number style uses a colored number for the train name."
+      },
+      "images": {
+        "label": "Train Images",
+        "description": "Whether or not to put some train images on the cards."
+      }
+    },
+    "currency": {
+      "title": "Currency",
+      "description": "This lets you turn on currency symbols for each item individually. Only works if the game file specificies values as numbers and not strings.",
+      "bank": {
+        "label": "Bank",
+        "description": "Bank total on revenue page"
+      },
+      "border": {
+        "label": "Border",
+        "description": "Costs written on map borders"
+      },
+      "capital": {
+        "label": "Capital",
+        "description": "Player capital list on revenue page"
+      },
+      "market": {
+        "label": "Market",
+        "description": "Stock market cells"
+      },
+      "offboard": {
+        "label": "Offboard",
+        "description": "Offboard values on maps"
+      },
+      "par": {
+        "label": "Par",
+        "description": "Stock market par boxes"
+      },
+      "private": {
+        "label": "Private",
+        "description": "Private costs and revenue on cards"
+      },
+      "revenue": {
+        "label": "Revenue",
+        "description": "Revenue tracker cells"
+      },
+      "terrain": {
+        "label": "Terrain",
+        "description": "Terrain costs on maps and track tiles"
+      },
+      "token": {
+        "label": "Token",
+        "description": "Token costs on charters"
+      },
+      "train": {
+        "label": "Train",
+        "description": "Train costs on cards and charters"
+      },
+      "treasury": {
+        "label": "Treasury",
+        "description": "Companies starting capital on charters"
+      },
+      "value": {
+        "label": "Value",
+        "description": "Values on maps and track tiles"
+      }
+    },
+    "data": {
+      "title": "Data"
+    }
   }
 }

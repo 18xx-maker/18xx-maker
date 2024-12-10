@@ -1,5 +1,6 @@
 import Color from "@/components/Color";
 import Name from "@/components/atoms/Name";
+
 import { useGame } from "@/hooks";
 import { multiDefaultTo } from "@/util";
 
