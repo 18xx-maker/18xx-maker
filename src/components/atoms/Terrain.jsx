@@ -35,6 +35,9 @@ const Terrain = ({
     case "wheat":
       translate = -18;
       break;
+    case "noenter":
+      translate = -18;
+      break;
     default:
       translate = -12;
       break;
