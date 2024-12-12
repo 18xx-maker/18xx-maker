@@ -3447,7 +3447,7 @@
     "color": "yellow",
     "values": [
       {
-        "angle": 90,
+        "angle": 270,
         "percent": 0.85,
         "value": 30
       }
@@ -3455,38 +3455,38 @@
     "labels": [
       {
         "label": "P",
-        "angle": 55,
+        "angle": 235,
         "percent": 0.6
       }
     ],
     "cities": [
       {
-        "angle": 135,
+        "angle": 315,
         "percent": 0.5
       },
       {
-        "angle": 345,
+        "angle": 164,
         "percent": 0.5
       },
       {
-        "angle": 240,
+        "angle": 60,
         "percent": 0.5
       }
     ],
     "track": [
       {
         "type": "sharp",
-        "side": 3,
+        "side": 6,
         "start": 0.5
       },
       {
         "type": "straight",
-        "side": 5,
+        "side": 2,
         "end": 0.25
       },
       {
         "type": "sharp",
-        "side": 6,
+        "side": 3,
         "end": 0.5
       }
     ]
