@@ -5,3 +5,4 @@ export * from "@/state/game";
 export * from "@/state/store";
 export * from "@/state/summaries";
 export * from "@/state/update";
+export * from "@/state/settings";

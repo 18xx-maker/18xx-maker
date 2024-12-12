@@ -1,5 +1,6 @@
 import Currency from "@/components/Currency";
 import Triangle from "@/components/atoms/shapes/Triangle";
+
 import PhaseContext from "@/context/PhaseContext";
 
 const Bridge = (props) => {

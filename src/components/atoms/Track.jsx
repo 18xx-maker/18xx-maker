@@ -1,6 +1,7 @@
 import { defaultTo } from "ramda";
 
 import Color from "@/components/Color";
+
 import { useOrientation } from "@/context/OrientationContext";
 import { useGame } from "@/hooks";
 import { multiDefaultTo } from "@/util";
