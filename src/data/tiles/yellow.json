@@ -3448,7 +3448,7 @@
     "values": [
       {
         "angle": 90,
-        "percent": 0.9,
+        "percent": 0.85,
         "value": 30
       }
     ],
@@ -3469,8 +3469,8 @@
         "percent": 0.5
       },
       {
-        "angle": 300,
-        "percent": 0.55
+        "angle": 240,
+        "percent": 0.5
       }
     ],
     "track": [
