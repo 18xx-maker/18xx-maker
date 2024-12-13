@@ -2,26 +2,33 @@ import fs from "node:fs";
 import { join } from "node:path";
 
 import { app } from "electron";
+import { v4 as uuidv4, validate } from "uuid";
 
 import {
   apply,
   assoc,
   assocPath,
+  chain,
   compose,
-  dissocPath,
+  dissoc,
   equals,
   filter,
+  find,
+  forEach,
   fromPairs,
+  keys,
   lensProp,
   mergeDeepRight,
+  nth,
   over,
   path,
   pick,
   prop,
+  propEq,
+  reject,
   toPairs,
 } from "ramda";
 
-import { getGameSummary } from "../../src/util/loading.js";
 import { isDev } from "./dev.js";
 
 export const SUMMARIES = "summaries";
@@ -34,13 +41,18 @@ export const CONFIG_FILE = isDev
   ? join(import.meta.dirname, "../config.json")
   : join(app.getPath("userData"), "config.json");
 
+export const info = compose(
+  pick(["title", "subtitle", "designer", "publisher"]),
+  prop("info"),
+);
+
 let config = null;
 
 // This removes any summaries where the id/type/slug relationship doesn't
 // work. When this happens the electron main process can't communicate properly
 // with the client. The client might ask for a game that doesn't exist and the
 // backend can't find it to fix.
-export const cleanInvalidSummarySlugs = over(
+const cleanInvalidSummarySlugs = over(
   lensProp("summaries"),
   compose(
     fromPairs,
@@ -58,20 +70,75 @@ export const cleanInvalidSummarySlugs = over(
     toPairs,
   ),
 );
-export const cleanConfig = apply(compose, [cleanInvalidSummarySlugs]);
 
-export const loadConfig = () =>
-  (config = cleanConfig(
-    pick(
-      CONFIG_KEYS,
-      mergeDeepRight(
-        DEFAULT_CONFIG,
-        fs.existsSync(CONFIG_FILE)
-          ? JSON.parse(fs.readFileSync(CONFIG_FILE))
-          : {},
-      ),
+const convertToUUID = (config) => {
+  const oldIds = keys(config.summaries);
+
+  const summaries = {};
+  forEach((oldId) => {
+    if (validate(oldId)) {
+      // Already good!
+      summaries[oldId] = config.summaries[oldId];
+      return;
+    }
+
+    // Needs a new id
+    const id = uuidv4();
+    summaries[id] = {
+      ...config.summaries[oldId],
+      id,
+      slug: `electron:${id}`,
+    };
+  }, oldIds);
+
+  return {
+    ...config,
+    summaries,
+  };
+};
+
+const fixRecents = (config) => ({
+  ...config,
+  recents: chain((recent) => {
+    if (recent.slug && !recent.slug.startsWith("electron:")) {
+      return [recent];
+    }
+
+    const summary = find(
+      compose(propEq(recent.title, "title"), nth(1)),
+      toPairs(config.summaries),
+    );
+
+    // Nothing found, bad recent
+    if (!summary) {
+      return [];
+    }
+
+    return {
+      title: recent.title,
+      slug: summary[1].slug,
+    };
+  }, config.recents),
+});
+
+const cleanConfig = apply(compose, [
+  fixRecents,
+  cleanInvalidSummarySlugs,
+  convertToUUID,
+]);
+
+export const loadConfig = () => {
+  config = pick(
+    CONFIG_KEYS,
+    mergeDeepRight(
+      DEFAULT_CONFIG,
+      fs.existsSync(CONFIG_FILE)
+        ? JSON.parse(fs.readFileSync(CONFIG_FILE))
+        : {},
     ),
-  ));
+  );
+  return updateConfig(cleanConfig);
+};
 
 export const getConfig = () => config || loadConfig();
 export const updateConfig = (op) => {
@@ -88,14 +155,24 @@ export const updateConfig = (op) => {
 export const getLastRoute = () => prop(LAST_ROUTE, getConfig());
 export const setLastRoute = (url) => updateConfig(assoc(LAST_ROUTE, url));
 
-export const deleteGame = (id) => updateConfig(dissocPath([SUMMARIES, id]));
+export const deleteGame = (id) =>
+  updateConfig((config) => {
+    return {
+      ...config,
+      summaries: dissoc(id, config.summaries),
+      recents: reject(propEq(`electron:${id}`, "slug"), config.recents),
+    };
+  });
 export const getSummaries = () => prop(SUMMARIES, getConfig());
 export const getSummary = (id) => path([SUMMARIES, id], getConfig());
 export const updateSummaries = (game) =>
   updateConfig(
     assocPath(
       [SUMMARIES, game.meta.id],
-      mergeDeepRight(getSummary(game.meta.id), getGameSummary(game)),
+      mergeDeepRight(getSummary(game.meta.id), {
+        ...info(game),
+        ...game.meta,
+      }),
     ),
   );
 export const getRecents = () => prop(RECENTS, getConfig());

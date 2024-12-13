@@ -79,7 +79,7 @@ const GameRow = ({ game, onDelete }) => {
       <TableCell>{game.type}</TableCell>
       <TableCell>
         {onDelete && game.type !== "bundled" && (
-          <DeleteIcon onClick={() => onDelete(game.slug)} />
+          <DeleteIcon onClick={() => onDelete(game.slug, game.title)} />
         )}
       </TableCell>
     </TableRow>

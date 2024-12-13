@@ -1,12 +1,35 @@
-import { indexBy, map, omit, prop } from "ramda";
+import { v4 as uuidv4 } from "uuid";
+
+import { assoc, compose, indexBy, map, omit, prop } from "ramda";
 
 import { getGameSummary, loadFile } from "@/util/loading";
 
 export const TYPE = "system";
+const slug = (id) => `${TYPE}:${id}`;
+const meta = (id) => ({
+  id,
+  type: TYPE,
+  slug: slug(id),
+});
 const GAME_DIRECTORY_STORE = "game_directory_handles";
 const GAME_FILE_STORE = "game_file_handles";
 const NAME = "18xx-maker";
-const VERSION = 1;
+const VERSION = 2;
+
+export const migrateSummary = (summary) => {
+  if (!summary.version) {
+    // Unversioned summary, this means prior to our first migration. We need to
+    // generate a UUID as the id and then remove the slug and add a version
+    const id = uuidv4();
+    return compose(
+      (summary) => assoc("id", id, summary),
+      assoc("version", 1),
+      assoc("slug", slug(id)),
+    )(summary);
+  }
+
+  return summary;
+};
 
 const openDB = () => {
   return new Promise((resolve, reject) => {
@@ -20,10 +43,29 @@ const openDB = () => {
       resolve(request.result);
     };
 
-    request.onupgradeneeded = () => {
+    request.onupgradeneeded = (event) => {
       const db = request.result;
-      db.createObjectStore(GAME_DIRECTORY_STORE, { keyPath: "id" });
-      db.createObjectStore(GAME_FILE_STORE, { keyPath: "id" });
+
+      if (event.oldVersion === 0) {
+        // New DB
+        db.createObjectStore(GAME_DIRECTORY_STORE, { keyPath: "id" });
+        db.createObjectStore(GAME_FILE_STORE, { keyPath: "id" });
+      }
+
+      if (event.oldVersion === 1) {
+        // Upgrading from 1
+        const store = request.transaction.objectStore(GAME_FILE_STORE);
+        store.openCursor().onsuccess = (event) => {
+          const cursor = event.target.result;
+          if (cursor) {
+            const migrated = migrateSummary(cursor.value);
+            cursor.update(migrated);
+            cursor.continue();
+          } else {
+            // Upgraded from version 1
+          }
+        };
+      }
     };
   });
 };
@@ -53,8 +95,8 @@ const loadGameSummary = (id) =>
     return summary;
   });
 
-const loadFileFromHandle = (handle) => {
-  return handle.queryPermission().then((permission) => {
+const loadFileFromHandle = (handle) =>
+  handle.queryPermission().then((permission) => {
     if (permission === "granted") {
       return handle.getFile();
     }
@@ -67,7 +109,6 @@ const loadFileFromHandle = (handle) => {
       throw new Error("Permission denied");
     });
   });
-};
 
 export const loadSummaries = () =>
   op(GAME_FILE_STORE, (store) => store.getAll())
@@ -104,7 +145,8 @@ export const loadGame = (id) =>
 
       throw e;
     })
-    .then(loadFile(TYPE))
+    .then(loadFile)
+    .then(assoc("meta", meta(id)))
     .then(updateSummary);
 
 export const saveGameHandle = (handle) => {
@@ -114,18 +156,15 @@ export const saveGameHandle = (handle) => {
   // Load this game in order to save the data we need
   return handle
     .getFile()
-    .then(loadFile(TYPE))
+    .then(loadFile)
     .catch(() => {
       throw new Error("File was not a valid 18xx-maker game");
     })
+    .then(assoc("meta", meta(uuidv4())))
     .then((game) => {
       return op(
         store_name,
-        (store) =>
-          store.put({
-            ...getGameSummary(game),
-            handle,
-          }),
+        (store) => store.put(getGameSummary(game, { handle })),
         true,
       ).then(() => game.meta.slug);
     });
