@@ -3,7 +3,7 @@ import { createAlert } from "@/state/alerts";
 import { parseSlug } from "@/util";
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
-import { getGameSummary } from "@/util/loading.js";
+import { BUNDLED, ELECTRON, getGameSummary } from "@/util/loading.js";
 import * as opfs from "@/util/opfs";
 
 export const SET_GAME = "SET_GAME";
@@ -51,7 +51,7 @@ export const loadGame = (slug) => (dispatch) => {
   const { type, id } = parseSlug(slug);
 
   return new Promise((resolve, reject) => {
-    if (type === "bundled") {
+    if (type === BUNDLED) {
       if (!games[id]) {
         return reject(new Error(`Bundled game ${id} not found`));
       }
@@ -59,7 +59,7 @@ export const loadGame = (slug) => (dispatch) => {
       return resolve(games[id]);
     }
 
-    if (type === "system") {
+    if (type === idb.TYPE) {
       if (!capability.system) {
         return reject(
           new Error(
@@ -71,7 +71,7 @@ export const loadGame = (slug) => (dispatch) => {
       return resolve(idb.loadGame(id));
     }
 
-    if (type === "internal") {
+    if (type === opfs.TYPE) {
       if (!capability.internal) {
         return reject(
           new Error(
@@ -83,7 +83,7 @@ export const loadGame = (slug) => (dispatch) => {
       return resolve(opfs.loadGame(id));
     }
 
-    if (type === "electron") {
+    if (type === ELECTRON) {
       if (!capability.electron) {
         return reject(
           new Error(
@@ -114,15 +114,15 @@ export const loadGame = (slug) => (dispatch) => {
     });
 };
 
-export const deleteGame = (slug) => (dispatch) => {
+export const deleteGame = (slug, title) => (dispatch) => {
   const { type, id } = parseSlug(slug);
 
   return new Promise((resolve, reject) => {
-    if (type === "bundled") {
-      return reject(new Error(`Cannot delete bundled game ${id}`));
+    if (type === BUNDLED) {
+      return reject(new Error(`Cannot delete bundled game: ${title}`));
     }
 
-    if (type === "system") {
+    if (type === idb.TYPE) {
       if (!capability.system) {
         return reject(
           new Error(
@@ -134,7 +134,7 @@ export const deleteGame = (slug) => (dispatch) => {
       return resolve(idb.deleteGame(id));
     }
 
-    if (type === "internal") {
+    if (type === opfs.TYPE) {
       if (!capability.internal) {
         return reject(
           new Error(
@@ -146,7 +146,7 @@ export const deleteGame = (slug) => (dispatch) => {
       return resolve(opfs.deleteGame(id));
     }
 
-    if (type === "electron") {
+    if (type === ELECTRON) {
       if (!capability.electron) {
         return reject(
           new Error(
@@ -166,7 +166,7 @@ export const deleteGame = (slug) => (dispatch) => {
       dispatch(
         createAlert(
           "Game Deleted",
-          `${typeLabel} game ${id} deleted`,
+          `${typeLabel} game ${title} deleted`,
           "success",
         ),
       );

@@ -1,9 +1,16 @@
-import { indexBy, prop } from "ramda";
+import { v4 as uuidv4 } from "uuid";
 
-import { getID, getSlug, loadFile, loadSummary } from "@/util/loading";
+import { assoc, indexBy, prop } from "ramda";
+
+import { info, loadFile } from "@/util/loading";
 
 export const TYPE = "internal";
-
+const slug = (id) => `${TYPE}:${id}`;
+const meta = (id) => ({
+  id,
+  type: TYPE,
+  slug: slug(id),
+});
 const name = (id) => `${id}.json`;
 
 const getGamesDirectory = () =>
@@ -20,34 +27,44 @@ export const loadSummaries = async () => {
   const summaries = [];
   for await (const handle of dir.values()) {
     const file = await handle.getFile();
+    const id = file.name.replace(/\.json$/, "");
+
     try {
-      const summary = await loadSummary(TYPE, file);
+      const game = await loadFile(file);
+      const summary = {
+        ...info(game),
+        ...meta(id),
+      };
       summaries.push(summary);
     } catch {
-      await deleteGame(getID(file.name));
+      await deleteGame(id);
     }
   }
 
   return indexBy(prop("slug"), summaries);
 };
 
-export const loadGame = (id) =>
-  getGamesDirectory()
-    .then((dir) => dir.getFileHandle(name(id)))
-    .then((handle) => handle.getFile())
-    .then(loadFile(TYPE))
-    .catch(() => {
-      return deleteGame(id).then(() => {
-        throw new Error("File was not a valid 18xx-maker game");
-      });
-    });
+export const loadGame = async (id) => {
+  try {
+    const dir = await getGamesDirectory();
+    const handle = await dir.getFileHandle(name(id));
+    const file = await handle.getFile();
+    const game = await loadFile(file);
+    return assoc("meta", meta(id), game);
+  } catch {
+    await deleteGame(id);
+    throw new Error("File was not a valid 18xx-maker game");
+  }
+};
 
 export const saveGameFile = async (file) => {
+  const id = uuidv4();
+  const filename = `${id}.json`;
   const dir = await getGamesDirectory();
-  const handle = await dir.getFileHandle(file.name, { create: true });
+  const handle = await dir.getFileHandle(filename, { create: true });
   const writable = await handle.createWritable();
   await writable.write(file);
   await writable.close();
 
-  return getSlug(TYPE, getID(file.name));
+  return slug(id);
 };

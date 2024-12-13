@@ -12,7 +12,6 @@ import {
   deleteGame,
   getConfig,
   getSummaries,
-  getSummary,
 } from "./config.js";
 import { exportPDF, exportPNG, pdf, png } from "./export.js";
 import { TYPE, loadGame, openGame, saveGamePath } from "./game.js";
@@ -76,8 +75,9 @@ app.on("window-all-closed", () => {
 ipcMain.on("checkForUpdates", () => autoUpdater.checkForUpdates());
 ipcMain.on("downloadUpdate", () => autoUpdater.downloadUpdate());
 ipcMain.on("deleteGame", (event, id) => {
-  stopWatching(getSummary(id).path);
+  stopWatching(id);
   deleteGame(id);
+  setMenu();
 });
 
 ipcMain.handle("saveGamePath", (event, path) => saveGamePath(path));
@@ -113,8 +113,8 @@ ipcMain.handle("loadGame", (event, id) => {
     return Promise.reject(new Error(`Electron game ${id} not found`));
   }
 
-  watch(summary.path);
-  return loadGame(summary.path).catch((e) => {
+  watch(id);
+  return loadGame(id).catch((e) => {
     deleteGame(id);
     throw e;
   });

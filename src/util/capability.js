@@ -8,8 +8,11 @@ const electron =
 // What APIs are available?
 const storage =
   typeof navigator === "object" && typeof navigator.storage === "object";
-const idb = typeof indexedDB === "object";
-const opfs = storage && typeof navigator.storage.getDirectory === "function";
+const idb = typeof indexedDB === "object" && !import.meta.env.VITE_NO_IDB;
+const opfs =
+  storage &&
+  typeof navigator.storage.getDirectory === "function" &&
+  !import.meta.env.VITE_NO_OPFS;
 const file_system_api = typeof window.showOpenFilePicker === "function";
 
 // Full game capabilities

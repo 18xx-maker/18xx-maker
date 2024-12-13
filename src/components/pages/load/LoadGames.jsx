@@ -50,8 +50,8 @@ const LoadGames = () => {
     dispatch(loadSummaries());
   }, [dispatch]);
 
-  const deleteHandler = (slug) => {
-    dispatch(deleteGame(slug))
+  const deleteHandler = (slug, title) => {
+    dispatch(deleteGame(slug, title))
       .then(() => dispatch(loadSummaries()))
       .catch(() => {});
   };
