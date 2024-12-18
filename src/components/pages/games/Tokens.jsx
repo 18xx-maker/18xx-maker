@@ -142,7 +142,7 @@ const TokenLayout = ({ companies, data, game }) => {
     }
 
     let stationTokens = Array(
-      company.tokens.length + numberExtraStationTokens,
+      (company.tokens || []).length + numberExtraStationTokens,
     ).fill(
       <CompanyToken
         company={company}

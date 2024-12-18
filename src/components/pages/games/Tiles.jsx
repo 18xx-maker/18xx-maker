@@ -136,7 +136,9 @@ const TileSheet = () => {
     }
 
     // Group by guages, but individual if a tile has multiple
-    let gauges = uniq(map((track) => track.gauge || "normal", tile.track));
+    let gauges = uniq(
+      map((track) => track.gauge || "normal", tile.track || []),
+    );
     if (gauges.length > 1) {
       return `z-${i}`;
     }
