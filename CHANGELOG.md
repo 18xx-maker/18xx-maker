@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.0.0-beta.109](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.108...v1.0.0-beta.109) (2024-12-18)
+
+
+### :tada: Features
+
+* **icons:** add no enter icon ([#670](https://github.com/18xx-maker/18xx-maker/issues/670)) ([02f9f93](https://github.com/18xx-maker/18xx-maker/commit/02f9f93d56b4e9201d3c1bf8f42ce0c9e5842dc8))
+
+
+### :bug: Bug Fixes
+
+* **bug:** prevent crashes in Tokens and Tiles ([#675](https://github.com/18xx-maker/18xx-maker/issues/675)) ([1d9bf64](https://github.com/18xx-maker/18xx-maker/commit/1d9bf64954a7d55e9457d94a2d4d07bc6728d304))
+* **files:** use UUIDv4's for all internal, system and electron games to avoid path manipulation ([#673](https://github.com/18xx-maker/18xx-maker/issues/673)) ([8b91531](https://github.com/18xx-maker/18xx-maker/commit/8b9153152c3d8159f28643a9685f42e869cf32c9))
+* **game:** match params slug with decoded meta slug ([#668](https://github.com/18xx-maker/18xx-maker/issues/668)) ([82a66cf](https://github.com/18xx-maker/18xx-maker/commit/82a66cf35d8cc56e8d05c06a89c6504d2eb5f742))
+* **tiles:** fix tile 8889 ([#671](https://github.com/18xx-maker/18xx-maker/issues/671)) ([b10fa1f](https://github.com/18xx-maker/18xx-maker/commit/b10fa1fe3ddd0c1b3975113874d2f42c37f6486a))
+* **tiles:** fix tile 8889 to align with tile rules ([#672](https://github.com/18xx-maker/18xx-maker/issues/672)) ([9f8e7cb](https://github.com/18xx-maker/18xx-maker/commit/9f8e7cbac158e5ddb36294fdace366aab4d5b59c))
+
+
+### :package: Build System
+
+* **deps:** bump nanoid from 3.3.7 to 3.3.8 in the npm_and_yarn group ([#674](https://github.com/18xx-maker/18xx-maker/issues/674)) ([71ed79f](https://github.com/18xx-maker/18xx-maker/commit/71ed79f692f79afb34c5fd2ee68a58b7d5e5a7db))
+
 ## [1.0.0-beta.108](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.107...v1.0.0-beta.108) (2024-12-04)
 
 
