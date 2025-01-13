@@ -32,6 +32,7 @@ import { addIndex, is, map, omit } from "ramda";
 import File from "@/components/File";
 import { useGame } from "@/hooks/game.js";
 import { refreshGame } from "@/state";
+import { titleToFilename } from "@/util";
 import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
 import { useBooleanParam, useIntParam } from "@/util/query.js";
@@ -89,8 +90,7 @@ const GameNav = () => {
   }
 
   const downloadGame = omit(["meta"], game);
-  const filename =
-    game.info.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") + ".json";
+  const filename = titleToFilename(game.info.title) + ".json";
 
   const refreshHandler = (event) => {
     event.preventDefault();

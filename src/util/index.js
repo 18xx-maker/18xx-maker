@@ -37,6 +37,9 @@ import {
   zipObj,
 } from "ramda";
 
+export const titleToFilename = (title) =>
+  title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
 export const parseSlug = compose(
   ifElse(
     compose(equals(1), length),
