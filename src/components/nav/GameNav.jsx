@@ -27,7 +27,7 @@ import Switch from "@mui/material/Switch";
 import { blue, green, red } from "@mui/material/colors";
 import makeStyles from "@mui/styles/makeStyles";
 
-import { addIndex, is, map } from "ramda";
+import { addIndex, is, map, omit } from "ramda";
 
 import File from "@/components/File";
 import { useGame } from "@/hooks/game.js";
@@ -87,6 +87,10 @@ const GameNav = () => {
   if (!game) {
     return null;
   }
+
+  const downloadGame = omit(["meta"], game);
+  const filename =
+    game.info.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") + ".json";
 
   const refreshHandler = (event) => {
     event.preventDefault();
@@ -174,7 +178,7 @@ const GameNav = () => {
             <ListItemText primary={t("game.rules")} />
           </ListItemButton>
         )}
-        <File data={game} filename={`${game.meta.id}.json`} list />
+        <File data={downloadGame} filename={filename} list />
         {!capability.electron && game.meta.type === "system" && (
           <ListItemButton onClick={refreshHandler}>
             <ListItemIcon>
