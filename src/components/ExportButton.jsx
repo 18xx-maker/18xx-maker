@@ -19,7 +19,7 @@ import { assoc, flatten, forEach, is, keys, map, range } from "ramda";
 
 import { useConfig, useGame } from "@/hooks";
 import schema from "@/schemas/config.schema.json";
-import { maxPlayers } from "@/util";
+import { maxPlayers, titleToFilename } from "@/util";
 import { trackEvent } from "@/util/analytics";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
 import { useBooleanParam } from "@/util/query";
@@ -34,28 +34,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const pngItems = (game, config) => {
+  const filename = titleToFilename(game.info.title);
   let items = {
-    background: `${game.meta.id}-background.png`,
-    revenue: `${game.meta.id}-revenue.png`,
+    background: `${filename}-background.png`,
+    revenue: `${filename}-revenue.png`,
   };
 
   // Number Cards
   forEach(
     (n) => {
-      items[`cards/number/${n}`] = `${game.meta.id}-card-number-${n}.png`;
+      items[`cards/number/${n}`] = `${filename}-card-number-${n}.png`;
     },
     range(1, maxPlayers(game.players || []) + 1),
   );
 
   // Privates
   for (let i = 0; i < (game.privates || []).length; i++) {
-    items[`cards/private/${i}`] = `${game.meta.id}-card-private-${i + 1}.png`;
+    items[`cards/private/${i}`] = `${filename}-card-private-${i + 1}.png`;
   }
 
   // Trains
   for (let i = 0; i < (game.trains || []).length; i++) {
     items[`cards/train/${i}`] =
-      `${game.meta.id}-card-train-${i + 1}-${game.trains[i].name.replace(" ", "_")}.png`;
+      `${filename}-card-train-${i + 1}-${game.trains[i].name.replace(" ", "_")}.png`;
   }
 
   // Shares
@@ -68,49 +69,49 @@ const pngItems = (game, config) => {
   );
   for (let i = 0; i < shares.length; i++) {
     items[`cards/share/${i}`] =
-      `${game.meta.id}-card-share-${i + 1}-${shares[i].company.abbrev}.png`;
+      `${filename}-card-share-${i + 1}-${shares[i].company.abbrev}.png`;
   }
 
   for (let i = 0; i < companies.length; i++) {
     items[`charters/${i}`] =
-      `${game.meta.id}-charter-${i + 1}-${companies[i].abbrev}.png`;
+      `${filename}-charter-${i + 1}-${companies[i].abbrev}.png`;
   }
 
   for (let i = 0; i < companies.length; i++) {
     items[`tokens/${i}`] =
-      `${game.meta.id}-token-${i + 1}-${companies[i].abbrev}.png`;
+      `${filename}-token-${i + 1}-${companies[i].abbrev}.png`;
   }
 
   for (let i = 0; i < (game.tokens || []).length; i++) {
     items[`tokens/${i + companies.length}`] =
-      `${game.meta.id}-token-${i + 1 + companies.length}.png`;
+      `${filename}-token-${i + 1 + companies.length}.png`;
   }
 
   if (game.map) {
     if (is(Array, game.map)) {
       for (let i = 0; i < game.map.length; i++) {
-        items[`map?variation=${i}`] = `${game.meta.id}-map-${i}.png`;
+        items[`map?variation=${i}`] = `${filename}-map-${i}.png`;
       }
     } else {
-      items["map"] = `${game.meta.id}-map.png`;
+      items["map"] = `${filename}-map.png`;
     }
   }
 
   if (game.stock) {
     if (game.stock.market) {
-      items["market"] = `${game.meta.id}-market.png`;
+      items["market"] = `${filename}-market.png`;
     }
 
     if (game.stock.par && game.stock.par.values) {
-      items["par"] = `${game.meta.id}-par.png`;
+      items["par"] = `${filename}-par.png`;
     }
   }
 
   if (game.tiles) {
-    items["tile-manifest"] = `${game.meta.id}-tile-manifest.png`;
+    items["tile-manifest"] = `${filename}-tile-manifest.png`;
 
     forEach((id) => {
-      items[`tiles/${id}`] = `${game.meta.id}-tile-${id}.png`;
+      items[`tiles/${id}`] = `${filename}-tile-${id}.png`;
     }, keys(game.tiles));
   }
 
@@ -118,71 +119,72 @@ const pngItems = (game, config) => {
 };
 
 const pdfItems = (game, config) => {
+  const filename = titleToFilename(game.info.title);
   let items = {
-    background: `${game.meta.id}-background.pdf`,
-    revenue: `${game.meta.id}-revenue.pdf`,
-    "revenue?paginated=true": `${game.meta.id}-revenue-paginated.pdf`,
+    background: `${filename}-background.pdf`,
+    revenue: `${filename}-revenue.pdf`,
+    "revenue?paginated=true": `${filename}-revenue-paginated.pdf`,
   };
 
   if (config.export.allLayouts) {
     forEach((layout) => {
       items[`cards?config.cards.layout=${layout}`] =
-        `${game.meta.id}-cards-${layout}.pdf`;
+        `${filename}-cards-${layout}.pdf`;
     }, schema.properties.cards.properties.layout.enum);
   } else {
-    items["cards"] = `${game.meta.id}-cards.pdf`;
+    items["cards"] = `${filename}-cards.pdf`;
   }
 
   if (game.companies || game.tokens) {
     if (config.export.allLayouts) {
       forEach((layout) => {
         items[`tokens?config.tokens.layout=${layout}`] =
-          `${game.meta.id}-tokens-${layout}.pdf`;
+          `${filename}-tokens-${layout}.pdf`;
       }, schema.properties.tokens.properties.layout.enum);
     } else {
-      items["tokens"] = `${game.meta.id}-tokens.pdf`;
+      items["tokens"] = `${filename}-tokens.pdf`;
     }
   }
 
   if (game.companies) {
-    items["charters"] = `${game.meta.id}-charters.pdf`;
+    items["charters"] = `${filename}-charters.pdf`;
   }
 
   if (game.map) {
     if (is(Array, game.map)) {
       for (let i = 0; i < game.map.length; i++) {
-        items[`map?variation=${i}`] = `${game.meta.id}-map-${i}.pdf`;
+        items[`map?variation=${i}`] = `${filename}-map-${i}.pdf`;
         items[`map?paginated=true&variation=${i}`] =
-          `${game.meta.id}-map-${i}-paginated.pdf`;
+          `${filename}-map-${i}-paginated.pdf`;
       }
     } else {
-      items["map"] = `${game.meta.id}-map.pdf`;
-      items["map?paginated=true"] = `${game.meta.id}-map-paginated.pdf`;
+      items["map"] = `${filename}-map.pdf`;
+      items["map?paginated=true"] = `${filename}-map-paginated.pdf`;
     }
   }
 
   if (game.stock) {
     if (game.stock.market) {
-      items["market"] = `${game.meta.id}-market.pdf`;
-      items["market?paginated=true"] = `${game.meta.id}-market-paginated.pdf`;
+      items["market"] = `${filename}-market.pdf`;
+      items["market?paginated=true"] = `${filename}-market-paginated.pdf`;
     }
 
     if (game.stock.par && game.stock.par.values) {
-      items["par"] = `${game.meta.id}-par.pdf`;
-      items["par?paginated=true"] = `${game.meta.id}-par-paginated.pdf`;
+      items["par"] = `${filename}-par.pdf`;
+      items["par?paginated=true"] = `${filename}-par-paginated.pdf`;
     }
   }
 
   if (game.tiles) {
-    items["tile-manifest"] = `${game.meta.id}-tile-manifest.pdf`;
+    items["tile-manifest"] = `${filename}-tile-manifest.pdf`;
 
     if (config.export.allLayouts) {
       forEach((layout) => {
         items[`tiles?config.tiles.layout=${layout}`] =
-          `${game.meta.id}-tiles-${layout}.pdf`;
+          `${filename}-tiles-${layout}.pdf`;
       }, schema.properties.tiles.properties.layout.enum);
     } else {
-      items["tiles"] = `${game.meta.id}-tiles.pdf`;
+      items["tiles"] = `${filename}-tiles.pdf`;
     }
   }
 
