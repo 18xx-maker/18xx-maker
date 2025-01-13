@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.0-beta.110](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.109...v1.0.0-beta.110) (2025-01-13)
+
+
+### :bug: Bug Fixes
+
+* **download:** make sure to use a sanitized filename instead of id ([#677](https://github.com/18xx-maker/18xx-maker/issues/677)) ([46b4303](https://github.com/18xx-maker/18xx-maker/commit/46b43037d12d277523070440f25b2f4c4b8a563e))
+* **export:** export uses pretty filename too ([#679](https://github.com/18xx-maker/18xx-maker/issues/679)) ([7ed3fcd](https://github.com/18xx-maker/18xx-maker/commit/7ed3fcd5567c87e1a262ec30f86b12a494fac7f5))
+
 ## [1.0.0-beta.109](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.108...v1.0.0-beta.109) (2024-12-18)
 
 
