@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.112](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.111...v1.0.0-beta.112) (2025-01-16)
+
+
+### :bug: Bug Fixes
+
+* remove id spacing for symbols ([#684](https://github.com/18xx-maker/18xx-maker/issues/684)) ([d45c9c3](https://github.com/18xx-maker/18xx-maker/commit/d45c9c3af791bea2acf755744bdc446005fcab1d))
+
 ## [1.0.0-beta.111](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.110...v1.0.0-beta.111) (2025-01-16)
 
 
