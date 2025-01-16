@@ -33,9 +33,9 @@ const Id = ({ id, displayID, extra, bgColor, noID }) => {
     const [background, stripe] = bgColor.split("/");
 
     if (stripe) {
-      id = `${symbol(background)} ${symbol(stripe)} ${id}`;
+      id = `${symbol(background)}${symbol(stripe)}${id}`;
     } else {
-      id = `${symbol(background)} ${id}`;
+      id = `${symbol(background)}${id}`;
     }
   }
 
