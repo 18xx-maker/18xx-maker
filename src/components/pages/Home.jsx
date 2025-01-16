@@ -49,10 +49,10 @@ const Home = () => {
         <Typography variant="body1">{t("about")}</Typography>
         {capability.electron || (
           <>
-            <Typography variant="h5">{t("app.title")}</Typography>
+            <Typography variant="h5">{t("electron.title")}</Typography>
             <Typography variant="body1">
               <Trans
-                i18nKey="app.description"
+                i18nKey="electron.description"
                 components={{
                   app: (
                     <Link
