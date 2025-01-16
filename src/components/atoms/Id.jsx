@@ -3,10 +3,22 @@ import { useOrientation } from "@/context/OrientationContext";
 import { useConfig } from "@/hooks";
 
 const colorblindSymbols = {
-  yellow: "▼",
-  green: "◼",
-  brown: "●",
+  plain: "",
+  yellow: "⏷",
+  green: "⏹",
+  land: "⏹",
+  brown: "⏺",
   gray: "✱",
+  grey: "✱",
+  orange: "★",
+  red: "⨉",
+  offboard: "⨉",
+  mountain: "⏶",
+  water: "〜",
+};
+
+const symbol = (color) => {
+  return colorblindSymbols[color] || "";
 };
 
 const Id = ({ id, displayID, extra, bgColor, noID }) => {
@@ -18,7 +30,13 @@ const Id = ({ id, displayID, extra, bgColor, noID }) => {
   }
 
   if (config.tiles.colorblind) {
-    id = id + colorblindSymbols[bgColor];
+    const [background, stripe] = bgColor.split("/");
+
+    if (stripe) {
+      id = `${symbol(background)} ${symbol(stripe)} ${id}`;
+    } else {
+      id = `${symbol(background)} ${id}`;
+    }
   }
 
   let fontSize = id && id.length > 4 ? "9" : id && id.length > 3 ? "10" : "12";

@@ -21,6 +21,12 @@ const Hex = ({ color, transparent, map, opacity }) => {
             case "green":
               stripeRotation = 60;
               break;
+            case "red":
+              stripeRotation = -60;
+              break;
+            case "orange":
+              stripeRotation = 60;
+              break;
             default:
               break;
           }
