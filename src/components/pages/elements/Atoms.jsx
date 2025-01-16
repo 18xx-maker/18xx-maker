@@ -35,6 +35,7 @@ const atoms = [
       { color: "yellow/green" },
       { color: "green/brown" },
       { color: "brown/gray" },
+      { color: "red/yellow" },
       { color: "mountain", removeBorders: [1, 4] },
       { color: "water", removeBorders: [1, 3, 5] },
     ],
