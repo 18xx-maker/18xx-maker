@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.0-beta.111](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.110...v1.0.0-beta.111) (2025-01-16)
+
+
+### :bug: Bug Fixes
+
+* more support for color blind symbols on all tiles ([#683](https://github.com/18xx-maker/18xx-maker/issues/683)) ([cea5a92](https://github.com/18xx-maker/18xx-maker/commit/cea5a922c0d4795d9a2d9d0a40289f63ded10772))
+* translations on update page ([#681](https://github.com/18xx-maker/18xx-maker/issues/681)) ([310509a](https://github.com/18xx-maker/18xx-maker/commit/310509afee12a8ec9c1bba893e1944f298a1a7c9))
+
 ## [1.0.0-beta.110](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.109...v1.0.0-beta.110) (2025-01-13)
 
 
