@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.113](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.112...v1.0.0-beta.113) (2025-02-12)
+
+
+### :package: Build System
+
+* **deps-dev:** bump vite from 5.4.11 to 5.4.12 in the npm_and_yarn group ([#686](https://github.com/18xx-maker/18xx-maker/issues/686)) ([3adfa18](https://github.com/18xx-maker/18xx-maker/commit/3adfa18bbbef884d0a70cc724318be8307005671))
+
 ## [1.0.0-beta.112](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.111...v1.0.0-beta.112) (2025-01-16)
 
 
