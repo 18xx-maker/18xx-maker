@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.116](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.115...v1.0.0-beta.116) (2025-11-09)
+
+
+### :bug: Bug Fixes
+
+* back to manual notarization ([9f72dbf](https://github.com/18xx-maker/18xx-maker/commit/9f72dbf8ba1f4640933cd8965a802726164272c2))
+
 ## [1.0.0-beta.115](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.114...v1.0.0-beta.115) (2025-11-09)
 
 
