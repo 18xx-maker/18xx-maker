@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.114](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.113...v1.0.0-beta.114) (2025-11-09)
+
+
+### :package: Build System
+
+* **deps:** bump the npm_and_yarn group across 1 directory with 3 updates ([#691](https://github.com/18xx-maker/18xx-maker/issues/691)) ([5e2dc3f](https://github.com/18xx-maker/18xx-maker/commit/5e2dc3f901b20b25c867bc25bbbe89afba0a6ad5))
+
 ## [1.0.0-beta.113](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.112...v1.0.0-beta.113) (2025-11-09)
 
 
