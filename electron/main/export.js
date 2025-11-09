@@ -39,9 +39,10 @@ const createPDF = (path, filePath) => {
       setTimeout(() => {
         win.webContents
           .printToPDF({
-            marginsType: 0,
-            scaleFactor: 100,
             printBackground: true,
+            displayHeaderFooter: false,
+            scale: 1,
+            preferCSSPageSize: true,
           })
           .then((buffer) => {
             fs.writeFileSync(filePath, buffer);
