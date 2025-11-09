@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.115](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.114...v1.0.0-beta.115) (2025-11-09)
+
+
+### :bug: Bug Fixes
+
+* attempt to notarize with @electron/notarize ([f14e2cd](https://github.com/18xx-maker/18xx-maker/commit/f14e2cdb6791360a374951a56892d365be08dd65))
+
 ## [1.0.0-beta.114](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.113...v1.0.0-beta.114) (2025-11-09)
 
 
