@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.117](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.116...v1.0.0-beta.117) (2025-11-25)
+
+
+### :bug: Bug Fixes
+
+* small fix for 18EB ([34509d4](https://github.com/18xx-maker/18xx-maker/commit/34509d44646480429902ea624385cec4825a8e27))
+
 ## [1.0.0-beta.116](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.115...v1.0.0-beta.116) (2025-11-09)
 
 
