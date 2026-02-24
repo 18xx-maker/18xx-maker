@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.118](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.117...v1.0.0-beta.118) (2026-02-24)
+
+
+### :tada: Features
+
+* add 1878 logos ([#698](https://github.com/18xx-maker/18xx-maker/issues/698)) ([5dc672f](https://github.com/18xx-maker/18xx-maker/commit/5dc672f99117881eb40fc0eddaa1801e9b017832))
+
 ## [1.0.0-beta.117](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.116...v1.0.0-beta.117) (2025-11-25)
 
 
