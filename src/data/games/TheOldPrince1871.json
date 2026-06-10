@@ -1,19 +1,17 @@
 {
   "info": {
     "title": "The Old Prince 1871",
-    "subtitle": "Prototype",
     "designer": "Lucas Boyd",
     "publisher": "gtg",
     "background": "shortline",
     "orientation": "horizontal",
-    "titleY": 1640,
+    "titleY": 1700,
     "titleX": 60,
-    "titleSize": 140,
+    "titleSize": 160,
     "subtitleSize": 80,
-    "designerSize": 40,
+    "designerSize": 60,
     "currency": "$#"
   },
-  "prototype": true,
   "links": {
     "rules": "https://s3.amazonaws.com/public.valefor.com/TOP71_RULES_PROTOTYPE.pdf"
   },
