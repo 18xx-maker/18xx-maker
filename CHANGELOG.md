@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.120](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.119...v1.0.0-beta.120) (2026-06-10)
+
+
+### :broom: Chores
+
+* removed prototype ([#705](https://github.com/18xx-maker/18xx-maker/issues/705)) ([b79d459](https://github.com/18xx-maker/18xx-maker/commit/b79d4590d8d07fa4af29d2d06a1774c693aeaaa5))
+
 ## [1.0.0-beta.119](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.118...v1.0.0-beta.119) (2026-06-10)
 
 
