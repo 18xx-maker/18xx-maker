@@ -43,14 +43,14 @@
     {
       "number": 4,
       "certLimit": 16,
-      "capital": 460
+      "capital": 480
     }
   ],
   "privates": [
     {
       "name": "The King's Mail",
       "id": "P",
-      "revenue": 60,
+      "revenue": 80,
       "icon": "mail",
       "iconColor": "pink",
       "description": "Always assigned to the PEIR company. The PEIR starts with $200 in its treasury. Closes with other privates on the 4+."
@@ -95,7 +95,7 @@
       "name": "Railcar Ferry",
       "note": "the Prince Edward Island",
       "id": "5",
-      "price": 140,
+      "price": 120,
       "revenue": 15,
       "icon": "ferry",
       "iconColor": "violet",
@@ -104,7 +104,7 @@
     {
       "name": "Shipbuilding",
       "id": "6",
-      "price": 70,
+      "price": 90,
       "revenue": 15,
       "icon": "tree",
       "description": "May be exchanged for an exchange share of the Shortline during the stock round."
@@ -112,7 +112,7 @@
     {
       "name": "Hunslet Steam Engine",
       "id": "7",
-      "price": 130,
+      "price": 110,
       "revenue": 20,
       "icon": "train",
       "iconColor": "red",
@@ -132,7 +132,7 @@
     {
       "name": "Schreiber and Burpee Construction",
       "id": "9",
-      "price": 120,
+      "price": 100,
       "revenue": 30,
       "tile": "9",
       "description": "Comes with yellow straight tile. Placement counts as normal tile lay. Must follow all normal track laying rules."
@@ -151,7 +151,7 @@
     {
       "name": "Union Bank",
       "id": "11",
-      "price": 140,
+      "price": 120,
       "revenue": 0,
       "company": "UB",
       "description": "Comes with one Mainline share and one random (not Mainline or Shortline) share. Does not close. Owning player may buy 1 share per stock round for the bank combining the bank's treasury with their own."
