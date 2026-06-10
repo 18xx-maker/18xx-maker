@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.0-beta.119](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.118...v1.0.0-beta.119) (2026-06-10)
+
+
+### :broom: Chores
+
+* update publisher data for GTG ([#702](https://github.com/18xx-maker/18xx-maker/issues/702)) ([8589268](https://github.com/18xx-maker/18xx-maker/commit/85892687c8eb23c1e6e233d62e2d79e358802088))
+* updating some 1871 data ([#704](https://github.com/18xx-maker/18xx-maker/issues/704)) ([639af92](https://github.com/18xx-maker/18xx-maker/commit/639af92bcb4904dcf0620150fbdc8bd008d94e53)), closes [#687](https://github.com/18xx-maker/18xx-maker/issues/687)
+
 ## [1.0.0-beta.118](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.117...v1.0.0-beta.118) (2026-02-24)
 
 
