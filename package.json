@@ -12,15 +12,6 @@
   "bin": {
     "maker": "bin/maker.js"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@swc/core",
-      "electron",
-      "esbuild",
-      "lefthook",
-      "msw"
-    ]
-  },
   "imports": {
     "#cli/*": "./src/cli/*.js",
     "#util/*": "./src/util/*.js"

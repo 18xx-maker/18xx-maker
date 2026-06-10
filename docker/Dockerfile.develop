@@ -9,6 +9,7 @@ WORKDIR /app
 
 COPY package.json /app
 COPY pnpm-lock.yaml /app
+COPY pnpm-workspace.yaml /app
 
 # Install deps and browsers for playwrite
 RUN pnpm install --frozen-lockfile && pnpm playwright install chromium --only-shell --with-deps

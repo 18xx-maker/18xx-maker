@@ -1,0 +1,9 @@
+packages:
+  - "."
+
+onlyBuiltDependencies:
+  - "@swc/core"
+  - electron
+  - esbuild
+  - lefthook
+  - msw
