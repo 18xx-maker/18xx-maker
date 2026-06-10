@@ -26,7 +26,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           cache: "pnpm"
-          node-version: 22
+          node-version: 24
       - name: Dependencies
         run: pnpm install
       - name: Commitlint
@@ -53,7 +53,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           cache: "pnpm"
-          node-version: 22
+          node-version: 24
       - name: Dependencies
         run: pnpm install
       - name: Build Web
@@ -65,7 +65,7 @@ jobs:
   test:
     strategy:
       matrix:
-        node: [22]
+        node: [24]
         os:
           - name: Linux
             slug: linux

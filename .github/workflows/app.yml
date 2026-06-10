@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           cache: "pnpm"
-          node-version: 22
+          node-version: 24
       - name: Keys
         run: |
           echo $APP_CERTIFICATE | base64 --decode > certificate.p12
