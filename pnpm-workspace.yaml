@@ -1,9 +1,9 @@
 packages:
   - "."
 
-onlyBuiltDependencies:
-  - "@swc/core"
-  - electron
-  - esbuild
-  - lefthook
-  - msw
+allowBuilds:
+  "@swc/core": true
+  electron: true
+  esbuild: true
+  lefthook: true
+  msw: true
