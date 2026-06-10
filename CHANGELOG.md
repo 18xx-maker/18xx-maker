@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.121](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.120...v1.0.0-beta.121) (2026-06-10)
+
+
+### :broom: Chores
+
+* update to node 24 ([#707](https://github.com/18xx-maker/18xx-maker/issues/707)) ([acc2711](https://github.com/18xx-maker/18xx-maker/commit/acc2711ec0afb6e93a8a521529deb09396dfe14b))
+
 ## [1.0.0-beta.120](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.119...v1.0.0-beta.120) (2026-06-10)
 
 
