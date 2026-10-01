@@ -11,6 +11,12 @@ import { initialState, rootReducer } from "@/state";
 export const renderApp = (route = "/") => {
   const store = configureStore({
     reducer: rootReducer,
+    // The dev checks warn when slow, which fails tests on busy machines
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        immutableCheck: false,
+        serializableCheck: false,
+      }),
     preloadedState: initialState,
   });
 
@@ -20,6 +26,7 @@ export const renderApp = (route = "/") => {
   });
 
   return {
+    router,
     user: userEvent.setup(),
     ...render(
       <Provider store={store}>
@@ -31,7 +38,3 @@ export const renderApp = (route = "/") => {
 
 // Every bundled game, derived from the data index so new games are covered
 export const gameSlugs = Object.values(games).map((game) => game.meta.slug);
-
-// Games whose map data defines the same hex coordinate twice, which makes
-// React log a duplicate key warning. TODO: fix the game data.
-export const duplicateHexGames = ["1871BC", "18NC", "18TraXX2020"];

@@ -1,6 +1,8 @@
 import { configure } from "@testing-library/dom";
 import * as matchers from "@testing-library/jest-dom/matchers";
-import { afterEach, beforeEach, expect, vi } from "vitest";
+import { afterAll, afterEach, beforeAll, expect, vi } from "vitest";
+
+import { checkConsole } from "@tests/console.js";
 
 import "@tests/i18n";
 
@@ -10,28 +12,35 @@ expect.extend(matchers);
 configure({ asyncUtilTimeout: 5000, defaultHidden: true });
 
 // React and library problems surface as console errors/warnings. Fail the
-// test that triggered them. Add known-harmless noise here, with a reason.
-const allowed = [];
+// test that triggered them. Expected output is allowed per test with
+// allowConsole from @tests/console.js.
+const spies = [];
 
-let spies = [];
-
-beforeEach(() => {
-  spies = ["error", "warn"].map((level) =>
-    vi.spyOn(console, level).mockImplementation(() => {}),
-  );
-});
-
-afterEach(() => {
-  const calls = spies
+const check = () => {
+  const messages = spies
     .flatMap((spy) => spy.mock.calls)
     .map((args) => args.join(" "));
-  spies.forEach((spy) => spy.mockRestore());
-  const unexpected = calls.filter(
-    (message) => !allowed.some((pattern) => pattern.test(message)),
+  spies.forEach((spy) => spy.mockClear());
+  const problem = checkConsole(messages);
+  if (problem) {
+    throw new Error(problem);
+  }
+};
+
+beforeAll(() => {
+  ["error", "warn"].forEach((level) =>
+    spies.push(vi.spyOn(console, level).mockImplementation(() => {})),
   );
-  if (unexpected.length > 0) {
-    throw new Error(
-      `Unexpected console.error/console.warn:\n${unexpected.join("\n")}`,
-    );
+});
+
+// Late calls (after the last test) fail the file instead of vanishing
+afterAll(() => {
+  try {
+    check();
+  } finally {
+    spies.forEach((spy) => spy.mockRestore());
+    spies.length = 0;
   }
 });
+
+afterEach(check);

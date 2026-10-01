@@ -1,3 +1,5 @@
+import { Navigate } from "react-router";
+
 import { assocPath, is, isNil } from "ramda";
 
 import Svg from "@/components/Svg";
@@ -12,6 +14,10 @@ const B18Map = () => {
   const game = useGame();
 
   const [variation, setVariation] = useIntParam("variation", 0);
+
+  if (!game.map) {
+    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
+  }
 
   if (is(Array, game.map) && isNil(variation)) {
     setVariation(0);

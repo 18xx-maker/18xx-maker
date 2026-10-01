@@ -1,28 +1,18 @@
 import { screen } from "@testing-library/react";
 
 import { renderApp } from "@tests/helpers.jsx";
-import { coveredRoutes, routePatterns } from "@tests/routes.js";
-
-const docs = Object.keys(
-  import.meta.glob("../src/docs/**/*.en.md", { eager: false }),
-).map((file) => file.replace("../src/docs/", "").replace(/\.en\.md$/, ""));
+import { matchedPattern, routePatterns } from "@tests/routes.js";
+import { docs, docsUrl, routes, visitedUrls } from "@tests/smoke.js";
 
 describe("route table", () => {
-  it("has a smoke test for every route", () => {
-    expect(routePatterns().sort()).toEqual(Object.keys(coveredRoutes).sort());
+  it("has a smoke test URL for every route", () => {
+    const visited = new Set(visitedUrls().map((url) => matchedPattern(url)));
+    expect([...visited].sort()).toEqual(routePatterns().sort());
   });
 });
 
 describe("routes", () => {
-  it.for([
-    ["/", "home"],
-    ["/elements", "atoms"],
-    ["/elements/tiles", "tiles"],
-    ["/elements/logos", "logos"],
-    ["/games", "games"],
-    // The app page is electron only, everyone else goes home
-    ["/app", "home"],
-  ])("%s renders its page", async ([route, testId]) => {
+  it.for(routes)("%s renders its page", async ([route, testId]) => {
     renderApp(route);
     expect(await screen.findByTestId(testId)).toBeInTheDocument();
   });
@@ -39,7 +29,7 @@ describe("routes", () => {
   it.for(["index", ...docs.filter((doc) => doc !== "index")])(
     "renders the %s docs page",
     async (doc) => {
-      renderApp(doc === "index" ? "/docs" : `/docs/${doc}`);
+      renderApp(docsUrl(doc));
       const page = await screen.findByTestId(`docs-${doc}`);
       expect(page).toBeInTheDocument();
       // A missing markdown file would render an empty page
