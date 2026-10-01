@@ -92,6 +92,12 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Dependencies
         run: pnpm install
+      - name: Playwright (Linux)
+        if: matrix.os.slug == 'linux'
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Playwright
+        if: matrix.os.slug != 'linux'
+        run: pnpm exec playwright install chromium
       - name: Test
         run: pnpm test
       - name: Coverage
