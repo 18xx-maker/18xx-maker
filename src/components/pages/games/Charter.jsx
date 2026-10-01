@@ -9,7 +9,12 @@ import { compileCompanies, overrideCompanies } from "@/util/companies";
 const Charters = () => {
   const navigate = useNavigate();
   const { config } = useConfig();
-  const charters = config.charters;
+  const charters = {
+    ...config.charters,
+    cutlines: 0,
+    bleed: 0,
+    border: 0,
+  };
   const paper = config.paper;
   const override = config.overrideCompanies;
   const selection = config.overrideSelection;
@@ -25,9 +30,6 @@ const Charters = () => {
     override,
     selection,
   );
-  charters["cutlines"] = 0;
-  charters["bleed"] = 0;
-  charters["border"] = 0;
   let data = getCharterData(charters, paper);
   let company = gameCompanies[index];
 
@@ -157,6 +159,9 @@ const Charters = () => {
         fontSize={company.fontSize || game.info.companyFontSize}
         fontWeight={company.fontWeight || game.info.companyFontWeight}
         fontStyle={company.fontStyle || game.info.companyFontStyle}
+        showPhaseChart={game.info.charterShowPhaseChart}
+        showTurnOrder={game.info.charterShowTurnOrder}
+        showTreasury={game.info.charterShowTreasury}
       />
       <PageSetup landscape={false} />
     </div>

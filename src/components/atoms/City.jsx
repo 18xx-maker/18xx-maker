@@ -46,16 +46,20 @@ const City = ({
   pass,
   bgColor,
   width,
+  renderWidth,
   strokeWidth,
 }) => {
   const game = useGame();
   const { config } = useConfig();
-  const straightCityNames = config.straightCityNames;
+  const straightCityNames =
+    config.straightCityNames || game.info.straightCityNames;
 
   if (size === undefined) {
     size = 1;
   }
-  width = multiDefaultTo(25, width, game.info.cityWidth);
+  const stationTokenRadius =
+    (config.tokens.stationTokenSize / (renderWidth || 150)) * 75;
+  width = multiDefaultTo(stationTokenRadius, width, game.info.cityWidth);
   strokeWidth = strokeWidth || 2;
   let scale = width / 25;
   let borderW = multiDefaultTo(3, borderWidth, game.info.borderWidth) * scale;

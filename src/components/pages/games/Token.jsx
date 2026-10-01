@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 
-import { addIndex, compose, concat, is, map, max, propEq, reject } from "ramda";
+import { addIndex, compose, concat, is, map, max, reject } from "ramda";
 
 import Svg from "@/components/Svg";
 import CompanyToken from "@/components/tokens/CompanyToken";
@@ -100,7 +100,7 @@ const TokenSingle = () => {
     ),
   );
 
-  // "quantity" of 0 means remove the token entirely from the array
+  // "print" overrides "quantity", matching the full token-sheet behavior.
   let extraTokenNodes = compose(
     addIndex(map)((extraToken, index) => {
       if (is(Object, extraToken)) {
@@ -181,7 +181,10 @@ const TokenSingle = () => {
         );
       }
     }),
-    reject(propEq(0, "quantity")),
+    reject(
+      (token) =>
+        is(Object, token) && (token.print ?? token.quantity ?? 1) === 0,
+    ),
   )(game.tokens || []);
 
   let tokenNode = concat(companyTokenNodes, extraTokenNodes)[index];

@@ -165,6 +165,13 @@
           "percent": { "$ref": "#/definitions/numberOrSlash" },
           "revenue": { "$ref": "#/definitions/numberOrSlash" },
           "shares": { "$ref": "#/definitions/numberOrSlash" },
+          "bandCount": { "type": "integer", "minimum": 1 },
+          "tokenCount": { "type": "number", "minimum": 0 },
+          "tokenScale": { "type": "number", "exclusiveMinimum": 0 },
+          "hideShareCount": { "type": "boolean" },
+          "showCompanyName": { "type": "boolean" },
+          "hideCenterPercent": { "type": "boolean" },
+          "centerBandBottom": { "type": "number", "minimum": 0 },
           "variant": { "type": "string" }
         },
         "required": ["quantity"]
@@ -215,6 +222,10 @@
           "type": "string",
           "enum": ["horizontal", "vertical"]
         },
+        "straightCityNames": { "type": "boolean" },
+        "charterShowPhaseChart": { "type": "boolean" },
+        "charterShowTurnOrder": { "type": "boolean" },
+        "charterShowTreasury": { "type": "boolean" },
         "capitalization": {
           "type": "string",
           "description": "Full cap is the default and doesn't need to be specified.",

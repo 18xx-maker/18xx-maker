@@ -13,7 +13,7 @@
       "additionalProperties": { "$ref": "#/definitions/font" }
     },
     "dimension": {
-      "type": "integer",
+      "type": "number",
       "minimum": 1
     },
     "dimensions": {
@@ -144,6 +144,14 @@
         "dtgPadding": { "type": "number", "minimum": 0 },
         "border": { "type": "number", "minimum": 0 },
         "blackBand": { "type": "boolean" },
+        "shareCompanyNameFontSize": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "centerShareIconScale": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
         "pins": { "$ref": "#/definitions/pins" }
       },
       "required": [
@@ -155,6 +163,8 @@
         "bleed",
         "dtgPadding",
         "blackBand",
+        "shareCompanyNameFontSize",
+        "centerShareIconScale",
         "pins"
       ],
       "additionalProperties": false
@@ -187,6 +197,8 @@
           "type": "string",
           "enum": ["free", "3x1", "3x2", "3x1minors"]
         },
+        "width": { "type": "number", "exclusiveMinimum": 0 },
+        "height": { "type": "number", "exclusiveMinimum": 0 },
         "cutlines": { "type": "number", "minimum": 0 },
         "bleed": { "type": "number", "minimum": 0 },
         "border": { "type": "number", "minimum": 0 },
@@ -197,7 +209,15 @@
         "showTurnOrder": { "type": "boolean" },
         "pins": { "$ref": "#/definitions/pins" }
       },
-      "required": ["style", "halfWidth", "cutlines", "border", "blackBand"],
+      "required": [
+        "style",
+        "width",
+        "height",
+        "halfWidth",
+        "cutlines",
+        "border",
+        "blackBand"
+      ],
       "additionalProperties": false
     },
     "tokens": {
@@ -272,12 +292,23 @@
     },
     "maps": {
       "type": "object",
-      "required": ["market", "players", "roundTracker"],
+      "required": [
+        "market",
+        "players",
+        "roundTracker",
+        "title",
+        "extraTotalHeight"
+      ],
       "additionalProperties": false,
       "properties": {
         "market": { "type": "boolean" },
         "players": { "type": "boolean" },
-        "roundTracker": { "type": "boolean" }
+        "roundTracker": { "type": "boolean" },
+        "title": { "type": "boolean" },
+        "extraTotalHeight": {
+          "type": ["number", "null"],
+          "minimum": 0
+        }
       }
     },
     "plainMapCompanies": { "type": "boolean" },

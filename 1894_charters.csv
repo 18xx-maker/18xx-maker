@@ -1,0 +1,10 @@
+company_name;company_color_filename;company_poster_filename;company_token_image;token_1;token_2;token_3;token_4;token_5;token_price_1;token_price_2;token_price_3;token_price_4;token_price_5
+Chemins de fer de l'Ouest;colors/Ouest.png;France.11.Affiche-Ouest.Bains-de-mer.1892.Auteur-non-identifie.Coll_.Trainconsultant-Lamming.webp;logos/1894/Ouest.svg;token_image.png;token_image.png;token_image.png;token_image.png;token_image.png;Home;Home;100;100;100
+Chemins de fer du Nord;colors/Nord.png;Chemin-Nord.png;logos/1894/Nord.svg;token_image.png;token_image.png;token_image.png;token_image.png;;Home;Home;100;100;
+Chemin de fer d'Anvers à Gand;colors/AG.png;CheminGand.jpg;logos/1894/AG.svg;token_image.png;token_image.png;token_image.png;token_image.png;token_image.png;Home;40;100;100;100
+Chemin de fer d'Orléans à Rouen;colors/CFOR.png;CheminOrleans.jpg;logos/1894/CFOR.svg;token_image.png;token_image.png;token_image.png;token_image.png;token_image.png;Home;Home;100;100;100
+Chemins de fer de l'État belge;colors/Belge.png;CheminBelge_Arlon.jpeg;logos/1894/Belge.svg;token_image.png;token_image.png;token_image.png;;;Home;40;100;;
+Chemins de fer de Paris à Lyon et à la Méditerranée;colors/PLM.png;Cheimns_plm_poster.jpg;logos/1894/PLM.svg;token_image.png;token_image.png;token_image.png;token_image.png;token_image.png;Home;40;100;100;100
+Chemins de fer de l'Est;colors/Est.png;CheminsdEst.png;logos/1894/Est.svg;token_image.png;token_image.png;token_image.png;token_image.png;token_image.png;Home;40;100;100;100
+Late French;colors/LF.png;late_france_logo.svg;logos/1894/LF.svg;token_image.png;token_image.png;token_image.png;;;Home;40;100;;
+Late Belgian;colors/LB.png;Late_Belge_logo.svg;logos/1894/LB.svg;token_image.png;token_image.png;token_image.png;;;Home;40;100;;

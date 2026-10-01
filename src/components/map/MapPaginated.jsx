@@ -13,7 +13,13 @@ const MapPaginated = ({ game, config, variation }) => {
     navigate(`/games/${game.meta.slug}/`);
   }
 
-  let data = getMapData(game, coords, hexWidth, variation);
+  let data = getMapData(
+    game,
+    coords,
+    hexWidth,
+    variation,
+    config.maps.extraTotalHeight,
+  );
 
   return (
     <div className="map" data-testid={`game-${game.meta.slug}-map-paginated`}>

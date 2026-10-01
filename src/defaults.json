@@ -36,7 +36,9 @@
   "maps": {
     "players": true,
     "roundTracker": true,
-    "market": true
+    "market": true,
+    "title": true,
+    "extraTotalHeight": null
   },
   "plainMapCompanies": false,
   "straightCityNames": false,
@@ -48,6 +50,8 @@
   "charters": {
     "style": "color",
     "layout": "free",
+    "width": 725,
+    "height": 450,
     "cutlines": 25,
     "bleed": 12.5,
     "halfWidth": false,
@@ -74,6 +78,8 @@
     "dtgPadding": 0,
     "border": 0,
     "blackBand": false,
+    "shareCompanyNameFontSize": 0.14,
+    "centerShareIconScale": 1,
     "pins": {
       "innerRadius": 6.25,
       "outerRadius": 12.5,

@@ -16,6 +16,39 @@ const defaultConfig = configs["../defaults.json"];
 const userConfig = configs["../config.json"] || {};
 const initialConfig = mergeDeepRight(defaultConfig, userConfig);
 
+const normalizeNumericConfig = (config, defaults) => {
+  if (
+    (typeof defaults === "number" || defaults === null) &&
+    typeof config === "string" &&
+    config !== ""
+  ) {
+    const value = Number(config);
+    return Number.isFinite(value) ? value : config;
+  }
+
+  if (Array.isArray(config)) {
+    return config.map((value, index) =>
+      normalizeNumericConfig(value, defaults?.[index]),
+    );
+  }
+
+  if (
+    config &&
+    defaults &&
+    typeof config === "object" &&
+    typeof defaults === "object"
+  ) {
+    return Object.fromEntries(
+      Object.entries(config).map(([key, value]) => [
+        key,
+        normalizeNumericConfig(value, defaults[key]),
+      ]),
+    );
+  }
+
+  return config;
+};
+
 export const useConfig = () => {
   const dispatch = useDispatch();
   const game = useGame();
@@ -24,7 +57,10 @@ export const useConfig = () => {
 
   const searchParams = new URLSearchParams(location.search);
 
-  const storedConfig = useSelector((state) => state.config);
+  const storedConfig = normalizeNumericConfig(
+    useSelector((state) => state.config),
+    initialConfig,
+  );
   const preSearchConfig = mergeDeepRight(initialConfig, storedConfig);
 
   // Add Search config in
@@ -39,14 +75,20 @@ export const useConfig = () => {
 
   // Add Game config in
   const gameConfig = defaultTo({}, game && game.config);
-  const config = mergeDeepRight(preGameConfig, gameConfig);
+  const config = normalizeNumericConfig(
+    mergeDeepRight(preGameConfig, gameConfig),
+    initialConfig,
+  );
 
   const setConfig = useCallback(
     async (config) => {
-      const errors = await validateConfigSchema(config);
+      const normalizedConfig = normalizeNumericConfig(config, initialConfig);
+      const errors = await validateConfigSchema(normalizedConfig);
 
       if (!errors.length) {
-        return dispatch(createSetConfig(diff(initialConfig, config)));
+        return dispatch(
+          createSetConfig(diff(initialConfig, normalizedConfig)),
+        );
       }
     },
     [dispatch, validateConfigSchema],

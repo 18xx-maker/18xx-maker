@@ -201,7 +201,9 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
 }
 
 .share--left .share__hr {
-    left: calc(0.2025in + ${data.css.bleed});
+    left: calc(
+      0.2275in + ${data.css.bleed} + var(--share-band-offset, 0in)
+    );
 }
 
 .share--gmt .share__hr {

@@ -165,7 +165,7 @@ const Config = () => {
         <Input
           name="companySvgLogos"
           label="Company Logos"
-          description="This lets you choose to use SVG logos (when available) for companies instead of only colors and text. The different settings are explained on the [logos doc](/docs/logos) page"
+          description="This lets you choose to use SVG or raster logos (when available) for companies instead of only colors and text. The different settings are explained on the [logos doc](/docs/logos) page"
         />
         <Input
           name="overrideCompanies"
@@ -274,6 +274,17 @@ const Config = () => {
           name="plainMapCompanies"
           label="Plain Map Company Spaces"
           description="This sets all home/destination/token spots on maps to be empty white cities with black company text instead of colored or using logos."
+        />
+        <Input
+          name="maps.title"
+          label="Display Map Title"
+          description="Whether or not to show the game title, subtitle, and designer on maps."
+        />
+        <Input
+          name="maps.extraTotalHeight"
+          label="Extra Map Height"
+          dimension={true}
+          description="Overrides the extra height specified by the game. Leave blank to use the game setting, or enter 0 to remove it."
         />
         <Input
           name="maps.market"
@@ -407,6 +418,18 @@ const Config = () => {
           description="Free tries to fill your page with two charters per page (by default, half width charters will change this). 3x1 and 3x2 are both designs that fit common die layouts. Either die option overrides the page size as well as the width, height and cutlines option below."
         />
         <Input
+          name="charters.width"
+          label="Charter Width"
+          dimension={true}
+          description='Width of the printable charter body. Applies to the "free" layout.'
+        />
+        <Input
+          name="charters.height"
+          label="Charter Height"
+          dimension={true}
+          description='Height of the printable charter body. Applies to the "free" layout.'
+        />
+        <Input
           name="charters.halfWidth"
           label="Half Width Charters"
           description="This draws all charters (major and minor) as half width. They will take up half of the width of your page (minus cutlines)."
@@ -459,6 +482,16 @@ const Config = () => {
           name="cards.shareStyle"
           label="Share Style"
           description="This lets you choose between two styles for shares. One keeps the token in the center of the card, the other puts the tokens on the let (Simular to All Aboard Games and Deep Thought Games)."
+        />
+        <Input
+          name="cards.shareCompanyNameFontSize"
+          label="Share Company Name Font Size"
+          description="Font size in inches for company names shown on center-style share cards."
+        />
+        <Input
+          name="cards.centerShareIconScale"
+          label="Center Share Icon Scale"
+          description="Logo size multiplier for center-style share cards. 1 keeps the designed size; 1.25 makes it 25% larger."
         />
         <Input
           name="cards.layout"

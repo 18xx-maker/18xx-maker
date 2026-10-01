@@ -28,12 +28,20 @@ const Charter = ({
   fontStyle,
   fontWeight,
   halfWidth,
+  showPhaseChart: showPhaseChartOverride,
+  showTurnOrder: showTurnOrderOverride,
+  showTreasury: showTreasuryOverride,
 }) => {
   const { config } = useConfig();
   const charterStyle = config.charters.style;
-  const showPhaseChart = config.charters.showPhaseChart;
-  const showTurnOrder = config.charters.showTurnOrder;
+  const showPhaseChart =
+    showPhaseChartOverride ?? config.charters.showPhaseChart;
+  const showTurnOrder = showTurnOrderOverride ?? config.charters.showTurnOrder;
   const blackBand = config.charters.blackBand;
+  const portrait =
+    config.charters.layout === "free" &&
+    config.charters.height > config.charters.width &&
+    !halfWidth;
   fontFamily = multiDefaultTo("display", fontFamily);
   fontSize = multiDefaultTo(20, fontSize);
   fontWeight = multiDefaultTo("bold", fontWeight);
@@ -42,7 +50,8 @@ const Charter = ({
 
   // Hide section labels for things we don't want on a company
   const showTrains = company.trains !== false;
-  const showTreasury = company.treasury !== false;
+  const showTreasuryLabel = showTreasuryOverride ?? company.treasury !== false;
+  const showTrainPanel = showTrains && showPhaseChart;
 
   let tokenSpots = [];
   if (tokens) {
@@ -124,7 +133,7 @@ const Charter = ({
           className={`cutlines${minor ? " cutlines--minor" : ""}${halfWidth ? " cutlines--half" : ""}`}
         >
           <div
-            className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidth ? " charter--half" : ""}`}
+            className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidth ? " charter--half" : ""}${portrait ? " charter--portrait" : ""}`}
           >
             <div
               className="charter__bleed"
@@ -152,7 +161,7 @@ const Charter = ({
                 <div
                   style={{
                     color: t(c(charterStyle === "color" ? color : "white")),
-                    paddingRight: halfWidth
+                    paddingRight: halfWidth || portrait
                       ? null
                       : unitsToCss(12.5 + 65 * tokens.length),
                   }}
@@ -208,24 +217,24 @@ const Charter = ({
                     {showTurnOrder && <dl>{minor || turnNodes}</dl>}
                   </div>
                 )}
-                {halfWidth || (
+                {halfWidth || !showTrainPanel || (
                   <div className="charter__trains">
-                    {showTrains && "Trains"}
-                    {showPhaseChart && (
-                      <div className="charter__phase">
-                        <Phase
-                          phases={phases}
-                          trains={trains}
-                          minor={!!minor}
-                          company={company.abbrev}
-                        />
-                      </div>
-                    )}
+                    {"Trains"}
+                    <div className="charter__phase">
+                      <Phase
+                        phases={phases}
+                        trains={trains}
+                        minor={!!minor}
+                        company={company.abbrev}
+                      />
+                    </div>
                   </div>
                 )}
                 {halfWidth || (
-                  <div className="charter__treasury">
-                    {showTreasury && "Treasury"}
+                  <div
+                    className={`charter__treasury${showTrainPanel ? "" : " charter__treasury--full"}`}
+                  >
+                    {showTreasuryLabel && "Treasury"}
                     {company.capital && (
                       <div className="charter__capital">
                         <Currency value={company.capital} type="treasury" />

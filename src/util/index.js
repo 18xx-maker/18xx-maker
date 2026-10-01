@@ -217,6 +217,8 @@ export const getFontProps = (props, size, weight, family, style) => {
 export const getCharterData = (charters, paper) => {
   let {
     layout,
+    width: configuredWidth,
+    height: configuredHeight,
     halfWidth: useHalfWidth,
     smallerMinors,
     cutlines,
@@ -230,19 +232,20 @@ export const getCharterData = (charters, paper) => {
   let usableWidth = pageWidth - 2.0 * margins;
   let usableHeight = pageHeight - 2.0 * margins;
 
-  let totalWidth = usableWidth / (useHalfWidth ? 2 : 1);
-  let totalHalfWidth = usableWidth / 2;
-  let totalHeight = usableHeight / 2;
-  let totalMinorHeight = usableHeight / (smallerMinors ? 3 : 2);
+  let totalWidth = configuredWidth + 2.0 * cutlinesAndBleed;
+  let totalHalfWidth = totalWidth / 2;
+  let totalHeight = configuredHeight + 2.0 * cutlinesAndBleed;
+  let totalMinorHeight = smallerMinors
+    ? (totalHeight * 2) / 3
+    : totalHeight;
 
-  let perPage = useHalfWidth ? 4 : 2;
-  let minorsPerPage = smallerMinors
-    ? useHalfWidth
-      ? 6
-      : 3
-    : useHalfWidth
-      ? 4
-      : 2;
+  const effectiveWidth = useHalfWidth ? totalHalfWidth : totalWidth;
+  let perPage =
+    Math.max(1, Math.floor(usableWidth / effectiveWidth)) *
+    Math.max(1, Math.floor(usableHeight / totalHeight));
+  let minorsPerPage =
+    Math.max(1, Math.floor(usableWidth / effectiveWidth)) *
+    Math.max(1, Math.floor(usableHeight / totalMinorHeight));
 
   // Setup actual variables based on die choices
   switch (layout) {

@@ -44,6 +44,8 @@ const Input = ({ name, label, description, dimension }) => {
         valuePath,
         event.target.type === "checkbox"
           ? event.target.checked
+          : event.target.type === "number"
+            ? Number(event.target.value)
           : event.target.value,
         config,
       ),

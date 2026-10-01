@@ -37,6 +37,35 @@ describe("unitsToCss", () => {
   });
 });
 
+describe("getCharterData", () => {
+  it("preserves the default free-layout charter dimensions", () => {
+    const data = util.getCharterData(config.charters, config.paper);
+
+    expect(data).toMatchObject({
+      width: 725,
+      height: 450,
+      totalWidth: 800,
+      totalHeight: 525,
+      perPage: 2,
+    });
+  });
+
+  it("uses custom portrait dimensions and recalculates page capacity", () => {
+    const data = util.getCharterData(
+      { ...config.charters, width: 450, height: 725 },
+      config.paper,
+    );
+
+    expect(data).toMatchObject({
+      width: 450,
+      height: 725,
+      totalWidth: 525,
+      totalHeight: 800,
+      perPage: 1,
+    });
+  });
+});
+
 describe("equalPages", () => {
   it("handle < single pages", () => {
     expect(util.equalPages(90, 100)).toEqual([90]);

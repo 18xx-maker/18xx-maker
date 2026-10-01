@@ -308,7 +308,12 @@ const TileSheet = () => {
           key={`${hex.id}-${i}`}
         >
           <g transform={`rotate(${rotation})`}>
-            <Hex hex={hex} id={hex.id} clipPath="hexBleedClipPath" />
+            <Hex
+              hex={hex}
+              id={hex.id}
+              clipPath="hexBleedClipPath"
+              renderWidth={c.hexWidth}
+            />
           </g>
         </g>
       );

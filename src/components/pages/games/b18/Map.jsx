@@ -20,7 +20,13 @@ const B18Map = () => {
   const coords = config.coords;
 
   // Get map data
-  let data = getMapData(game, coords, 100, variation);
+  let data = getMapData(
+    game,
+    coords,
+    100,
+    variation,
+    config.maps.extraTotalHeight,
+  );
   let offset = 0;
 
   // B18 Type F maps

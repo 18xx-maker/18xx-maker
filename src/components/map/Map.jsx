@@ -19,8 +19,15 @@ const Map = ({ name, game, config, variation }) => {
   const hexWidth = config.tiles.mapWidth;
 
   let data = useMemo(
-    () => getMapData(game, coords, hexWidth, variation),
-    [game, coords, hexWidth, variation],
+    () =>
+      getMapData(
+        game,
+        coords,
+        hexWidth,
+        variation,
+        config.maps.extraTotalHeight,
+      ),
+    [game, coords, hexWidth, variation, config.maps.extraTotalHeight],
   );
 
   if (!data.map) {
@@ -41,6 +48,7 @@ const Map = ({ name, game, config, variation }) => {
           >
             <Hex
               hex={hex}
+              renderWidth={hexWidth}
               border={true}
               transparent={game.info.transparent}
               map={true}
@@ -54,7 +62,7 @@ const Map = ({ name, game, config, variation }) => {
     );
   }, data.hexes);
 
-  let showTitle = data.title !== false;
+  let showTitle = config.maps.title && data.title !== false;
 
   return (
     <>

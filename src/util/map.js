@@ -354,7 +354,13 @@ export const getMapHex = (game, hex, variation) => {
 
 const squashRatio = 87 / 86.6025;
 
-export const getMapData = (game, coords, hexWidth, variation) => {
+export const getMapData = (
+  game,
+  coords,
+  hexWidth,
+  variation,
+  configuredExtraTotalHeight,
+) => {
   variation = variation || 0;
 
   let scale = hexWidth / 150.0;
@@ -428,7 +434,7 @@ export const getMapData = (game, coords, hexWidth, variation) => {
   let totalHeight = getTotalHeight(
     maxY,
     hexWidth,
-    game.info.extraTotalHeight,
+    configuredExtraTotalHeight ?? game.info.extraTotalHeight,
     coordSpace,
   );
   let b18TotalHeight = totalHeight * squashRatio;

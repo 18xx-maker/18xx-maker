@@ -8,8 +8,9 @@
 .share--left .share__hr {
   height: 100%;
   position: absolute;
+  left: 0;
   bottom: 0;
-  width: 0.25in;
+  width: 0.2in;
   box-sizing: border-box;
 }
 
@@ -175,6 +176,43 @@
   height: 0.25in;
   line-height: 0.25in;
   font-size: 0.16in;
+}
+
+.share__company-name {
+  position: absolute;
+  left: 10%;
+  width: 80%;
+  font-size: 0.14in;
+  font-weight: bold;
+  line-height: 0.17in;
+  text-align: center;
+}
+
+.share--showcase .share__tokens {
+  top: 0;
+}
+
+.share--showcase .share__company-name {
+  line-height: 1.15;
+}
+
+.share--showcase .share__label {
+  align-items: center;
+  justify-content: flex-start;
+  top: 0.125in;
+  right: 0.125in;
+  bottom: auto;
+  width: 0.625in;
+}
+
+.share--showcase .share__label__text {
+  box-sizing: border-box;
+  height: auto;
+  min-height: 0.25in;
+  padding: 0.04in;
+  font-size: 0.08in;
+  line-height: 0.1in;
+  text-align: center;
 }
 
 .share--left .share__shares,

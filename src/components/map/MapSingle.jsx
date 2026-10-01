@@ -14,7 +14,13 @@ const MapSingle = ({ game, config, variation }) => {
   }
 
   // Get map data
-  let data = getMapData(game, coords, hexWidth, variation);
+  let data = getMapData(
+    game,
+    coords,
+    hexWidth,
+    variation,
+    config.maps.extraTotalHeight,
+  );
 
   return (
     <div className="map" data-testid={`game-${game.meta.slug}-map`}>

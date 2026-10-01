@@ -313,6 +313,12 @@ a {
   box-sizing: border-box;
 }
 
+.charter__treasury--full {
+  left: 0;
+  right: auto;
+  width: 100%;
+}
+
 .charter--carth .charter__treasury {
   height: calc(100% - 1.1875in);
 }
@@ -452,6 +458,24 @@ a {
   width: 0.5in;
   height: 0.7in;
   padding: 0 0 0 0.15in;
+}
+
+.charter--portrait.charter--color .charter__hr {
+  height: 2in;
+}
+
+.charter--portrait .charter__tokens {
+  top: 1.0625in;
+  right: auto;
+  left: 0;
+  width: 100%;
+  height: 0.9375in;
+  padding: 0.125in;
+}
+
+.charter--portrait .charter__trains,
+.charter--portrait .charter__treasury {
+  height: calc(100% - 2in);
 }
 
 .charter--half .charter__tokens {

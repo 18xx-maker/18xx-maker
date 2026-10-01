@@ -1,0 +1,3386 @@
+{
+  "info": {
+    "title": "1894",
+    "subtitle": "France and Belgium",
+    "designer": "Jan Kłos",
+    "background": "gray",
+    "orientation": "vertical",
+    "extraTotalHeight": 300,
+    "straightCityNames": true,
+    "charterShowPhaseChart": false,
+    "charterShowTurnOrder": false,
+    "charterShowTreasury": false,
+    "titleX": 20,
+    "titleY": 1200,
+    "currency": "# F",
+    "notes": "Prototype implementation; component data follows the current 18xx Ruby implementation."
+  },
+  "links": {
+    "rules": "https://github.com/Galatolol/1894/blob/master/1894_rules.pdf",
+    "license": "https://github.com/tobymao/18xx"
+  },
+  "prototype": true,
+  "wip": true,
+  "colors": {
+    "Ouest": "#4682b4",
+    "Nord": "#ff4040",
+    "AG": "#fcf75e",
+    "CFOR": "#9c661f",
+    "Belge": "#61b229",
+    "PLM": "#dda0dd",
+    "Est": "#ff9966",
+    "LF": "#ffc0cb",
+    "LB": "#c9c9c9",
+    "phaseD": "#7b4fa3",
+    "ferry": "#0000ff",
+    "blue": "#add8e6",
+    "province": "#777777"
+  },
+  "tokens": [
+    {
+      "label": "Round",
+      "quantity": 0,
+      "print": 1
+    },
+    {
+      "icon": "1894-ferry",
+      "color": "ferry",
+      "quantity": 4,
+      "iconWidth": 44
+    }
+  ],
+  "bank": "∞",
+  "players": [
+    {
+      "number": 3,
+      "certLimit": 18,
+      "capital": 570
+    },
+    {
+      "number": 4,
+      "certLimit": 14,
+      "capital": 480
+    }
+  ],
+  "tokenTypes": {
+    "ouest": ["Home", "Home", 100, 100, 100],
+    "nord": ["Home", "Home", 100, 100],
+    "ag": ["Home", 40, 100, 100, 100],
+    "cfor": ["Home", "Home", 100, 100, 100],
+    "belge": ["Home", 40, 100],
+    "plm": ["Home", 40, 100, 100, 100],
+    "est": ["Home", 40, 100, 100, 100],
+    "late": ["Home", 40, 100]
+  },
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2,
+        "bandCount": 2,
+        "tokenCount": 1,
+        "tokenScale": 2,
+        "hideShareCount": true,
+        "showCompanyName": true,
+        "hideCenterPercent": true,
+        "centerBandBottom": 0.3
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1,
+        "bandCount": 1,
+        "tokenCount": 1,
+        "tokenScale": 2,
+        "hideShareCount": true,
+        "showCompanyName": true,
+        "hideCenterPercent": true
+      }
+    ]
+  },
+  "floatPercent": 60,
+  "companies": [
+    {
+      "name": "Chemins de fer de l'Ouest",
+      "abbrev": "Ouest",
+      "logo": "1894/Ouest",
+      "simple_logo": "1894/Ouest.alt",
+      "color": "Ouest",
+      "tokens": "ouest"
+    },
+    {
+      "name": "Chemins de fer du Nord",
+      "abbrev": "Nord",
+      "logo": "1894/Nord",
+      "simple_logo": "1894/Nord.alt",
+      "color": "Nord",
+      "tokens": "nord"
+    },
+    {
+      "name": "Chemin de fer d'Anvers à Gand",
+      "abbrev": "AG",
+      "logo": "1894/AG",
+      "simple_logo": "1894/AG.alt",
+      "color": "AG",
+      "tokens": "ag"
+    },
+    {
+      "name": "Chemin de fer d'Orléans à Rouen",
+      "abbrev": "CFOR",
+      "logo": "1894/CFOR",
+      "simple_logo": "1894/CFOR.alt",
+      "color": "CFOR",
+      "tokens": "cfor"
+    },
+    {
+      "name": "Chemins de fer de l'État belge",
+      "abbrev": "Belge",
+      "logo": "1894/Belge",
+      "simple_logo": "1894/Belge.alt",
+      "color": "Belge",
+      "tokens": "belge"
+    },
+    {
+      "name": "Chemins de fer de Paris à Lyon et à la Méditerranée",
+      "abbrev": "PLM",
+      "logo": "1894/PLM",
+      "simple_logo": "1894/PLM.alt",
+      "color": "PLM",
+      "tokens": "plm"
+    },
+    {
+      "name": "Chemins de fer de l'Est",
+      "abbrev": "Est",
+      "logo": "1894/Est",
+      "simple_logo": "1894/Est.alt",
+      "color": "Est",
+      "tokens": "est"
+    },
+    {
+      "name": "Late French",
+      "abbrev": "LF",
+      "logo": "1894/LF",
+      "simple_logo": "1894/LF.alt",
+      "color": "LF",
+      "tokens": "late"
+    },
+    {
+      "name": "Late Belgian",
+      "abbrev": "LB",
+      "logo": "1894/LB",
+      "simple_logo": "1894/LB.alt",
+      "color": "LB",
+      "tokens": "late"
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 7,
+      "price": 80,
+      "color": "yellow",
+      "image": "2T",
+      "rust": "4"
+    },
+    {
+      "name": "3",
+      "quantity": 5,
+      "price": 120,
+      "color": "green",
+      "image": "3T",
+      "rust": "5+1",
+      "discount": {
+        "2": 40
+      }
+    },
+    {
+      "name": "4",
+      "quantity": 4,
+      "price": 300,
+      "color": "green",
+      "image": "4T",
+      "rust": "7",
+      "discount": {
+        "3": 60
+      }
+    },
+    {
+      "name": "5+1",
+      "quantity": 5,
+      "price": 400,
+      "color": "brown",
+      "description": "Counts towns as 1 stop; cities, offboards and towns as 5 stops. Late corporations become available.",
+      "rust": "D",
+      "discount": {
+        "4": 150
+      }
+    },
+    {
+      "name": "6",
+      "quantity": 2,
+      "price": 600,
+      "color": "red",
+      "description": "Closes private companies.",
+      "discount": {
+        "5+1": 200
+      }
+    },
+    {
+      "name": "7",
+      "quantity": 3,
+      "price": 700,
+      "color": "gray",
+      "discount": {
+        "6": 300
+      }
+    },
+    {
+      "name": "D",
+      "quantity": "∞",
+      "print": 6,
+      "price": 800,
+      "color": "phaseD",
+      "image": "Diesel",
+      "description": "Triggers the final operating round set.",
+      "discount": {
+        "6": 300,
+        "7": 350,
+        "5+1": 200
+      }
+    }
+  ],
+  "privates": [
+    {
+      "name": "Ligne de Reims à Charleville",
+      "sym": "LRC",
+      "price": 20,
+      "revenue": 5,
+      "description": "Once per game the owning corporation may pay 60 F to lay a yellow track. This is in addition to the corporation's regular track actions. Blocks I14 while owned by a player.",
+      "id": "LRC",
+      "hex": "I14",
+      "tile": "X1"
+    },
+    {
+      "name": "Antwerpen-Rotterdamsche Spoorwegmaatschappij",
+      "sym": "AR",
+      "price": 25,
+      "revenue": 5,
+      "description": "When owned by a corporation, the revenue is equal to 10 F."
+    },
+    {
+      "name": "Gare de Liège-Guillemins",
+      "sym": "GLG",
+      "price": 50,
+      "revenue": 10,
+      "description": "Owning corporation may lay a or upgrade a yellow tile in Liège (H17), even if not connected. If it does, it may then optionally place a token for free there. This counts as one of the corporation's tile builds and token laying (if token was placed). Blocks H17 while owned by a player.",
+      "id": "GLG",
+      "hex": "H17"
+    },
+    {
+      "name": "Station Antwerpen Centraal",
+      "sym": "SAC",
+      "price": 50,
+      "revenue": 10,
+      "description": "Owning corporation may lay or upgrade a yellow tile in Antwerpen (D17), even if not connected. If it does, it may then  optionally place a token for free there. This counts as one of the corporation's tile builds and token laying (if token was placed). Blocks D17 while owned by a player.",
+      "id": "SAC",
+      "hex": "D17"
+    },
+    {
+      "name": "Ligne de Saint-Quentin à Guise",
+      "sym": "SQG",
+      "price": 70,
+      "revenue": 0,
+      "description": "Revenue is equal to 70 F if Saint-Quentin (G10) is green, to 100 F if Saint-Quentin is brown and to 0 F otherwise. Closes in purple phase. May not be sold to corporation in red and gray phase.",
+      "id": "SQG",
+      "hex": "G10"
+    },
+    {
+      "name": "London shipping",
+      "sym": "LS",
+      "price": 90,
+      "revenue": 15,
+      "description": "Owning corporation pays 40 F for ferry marker. Owning corporation may place its cheapest available token for free in A12. The value of London (A10) is increased, for this corporation only, by the largest non-London, non-Luxembourg revenue on the route.",
+      "id": "LS",
+      "icon": "1894-ferry",
+      "iconColor": "black"
+    },
+    {
+      "name": "Nord minor shareholding",
+      "sym": "NMinorS",
+      "price": 140,
+      "revenue": 20,
+      "description": "Owning player immediately receives a 10% share of the Nord without further payment.",
+      "id": "NMinorS",
+      "company": "Nord"
+    },
+    {
+      "name": "PLM major shareholding",
+      "sym": "PLMMS",
+      "price": 180,
+      "revenue": 40,
+      "description": "Owning player immediately receives the President's certificate of the PLM without further payment. This private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the PLM. Closes when the PLM operates.",
+      "id": "PLMMS",
+      "company": "PLM"
+    },
+    {
+      "name": "Ouest major shareholding",
+      "sym": "OMMS",
+      "price": 180,
+      "revenue": 40,
+      "description": "Owning player immediately receives the President's certificate of the Ouest without further payment. This private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the Ouest. Closes when the Ouest operates.",
+      "id": "OMMS",
+      "company": "Ouest"
+    },
+    {
+      "name": "Nord major shareholding",
+      "sym": "NMS",
+      "price": 180,
+      "revenue": 40,
+      "description": "Owning player immediately receives the President's certificate of the Nord without further payment. This private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the Nord. Closes when the Nord operates.",
+      "id": "NMS",
+      "company": "Nord"
+    },
+    {
+      "name": "CFOR major shareholding",
+      "sym": "CMS",
+      "price": 180,
+      "revenue": 40,
+      "description": "Owning player immediately receives the President's certificate of the CFOR without further payment. This private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the CFOR. Closes when the CFOR operates.",
+      "id": "CMS",
+      "company": "CFOR"
+    },
+    {
+      "name": "Est major shareholding",
+      "sym": "EMS",
+      "price": 180,
+      "revenue": 40,
+      "description": "Owning player immediately receives the President's certificate of the Est without further payment. This private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the Est. Closes when the Est operates.",
+      "id": "EMS",
+      "company": "Est"
+    },
+    {
+      "name": "Belge major shareholding",
+      "sym": "BMS",
+      "price": 200,
+      "revenue": 60,
+      "description": "Owning player immediately receives the President's certificate of the Belge without further payment. This private company may not be sold to any corporation, and does not exchange hands if the owning player loses the Presidency of the Belge. Closes when the Belge operates.",
+      "id": "BMS",
+      "company": "Belge"
+    }
+  ],
+  "phases": [
+    {
+      "name": "Yellow",
+      "limit": 4,
+      "rounds": 1,
+      "tiles": "yellow"
+    },
+    {
+      "name": "Green",
+      "on": "3",
+      "limit": 4,
+      "rounds": 2,
+      "tiles": "green",
+      "buy_companies": true
+    },
+    {
+      "name": "Blue",
+      "on": "4",
+      "limit": 3,
+      "rounds": 2,
+      "tiles": "green",
+      "buy_companies": true,
+      "notes": "Yellow and green tiles are available."
+    },
+    {
+      "name": "Brown",
+      "on": "5+1",
+      "limit": 3,
+      "rounds": 3,
+      "tiles": "brown",
+      "buy_companies": true,
+      "notes": "Yellow, green and brown tiles are available.",
+      "events": {
+        "late_corporations_available": true
+      }
+    },
+    {
+      "name": "Red",
+      "on": "6",
+      "limit": 3,
+      "rounds": 3,
+      "tiles": "brown",
+      "notes": "Yellow, green and brown tiles are available.",
+      "events": {
+        "close_companies": true
+      }
+    },
+    {
+      "name": "Gray",
+      "on": "7",
+      "limit": 3,
+      "rounds": 3,
+      "tiles": "brown",
+      "notes": "Yellow, green and brown tiles are available."
+    },
+    {
+      "name": "Purple",
+      "on": "D",
+      "limit": 2,
+      "rounds": 3,
+      "tiles": "brown",
+      "notes": "Yellow, green and brown tiles are available; regular green cities cannot upgrade to brown.",
+      "events": {
+        "last_or_set_triggered": true
+      }
+    }
+  ],
+  "pools": [
+    {
+      "name": "Market Pool",
+      "notes": [
+        {
+          "color": "orange",
+          "note": "Corporation shares may be held above 60% and do not count toward the certificate limit."
+        },
+        {
+          "color": "brown",
+          "icon": "exclamation",
+          "note": "No more than 50% of a corporation's shares may be in the market."
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "OR3",
+      "color": "brown"
+    },
+    {
+      "name": "OR2",
+      "color": "green"
+    },
+    {
+      "name": "OR1",
+      "color": "yellow"
+    },
+    {
+      "name": "SR",
+      "color": "white"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": [
+        "Sell any number of shares",
+        "Buy one share",
+        "Sell any number of shares"
+      ],
+      "ordered": true
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Lay or upgrade track",
+        "Purchase a station",
+        "Run trains",
+        "Pay dividends or withhold revenue",
+        "Purchase trains"
+      ],
+      "ordered": true,
+      "optional": ["Purchase private companies"]
+    }
+  ],
+  "stock": {
+    "type": "2D",
+    "title": false,
+    "par": {
+      "values": [100,95, 80, 67],
+      "color": "red"
+    },
+    "movement": {
+      "up": ["Corporation sold out at end of stock round"],
+      "down": ["Every share sold"],
+      "left": ["Dividend 0 or withheld"],
+      "right": ["Dividend paid"]
+    },
+    "display": {
+      "legend": {
+        "reverse": true,
+        "verticalAlign": "bottom",
+        "x": 7,
+        "y": 11
+      }
+    },
+    "market": [
+      [
+        {
+          "value": 90,
+          "label": 90,
+          "arrow": "down"
+        },
+        99,
+        109,
+        115,
+        124,
+        132,
+        141,
+        151,
+        180,
+        215,
+        260,
+        310,
+        375,
+        {
+          "value": 450,
+          "label": 450,
+          "color": "blue"
+        }
+      ],
+      [
+        {
+          "value": 82,
+          "label": 82,
+          "arrow": "down"
+        },
+        {
+          "value": 95,
+          "label": 95,
+          "par": true
+        },
+        100,
+        106,
+        113,
+        121,
+        130,
+        139,
+        165,
+        200,
+        240,
+        285,
+        345,
+        {
+          "value": 415,
+          "label": 415,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 75,
+          "label": 75,
+          "arrow": "down"
+        },
+        82,
+        89,
+        95,
+        103,
+        111,
+        120,
+        130,
+        155,
+        185,
+        225,
+        270,
+        {
+          "value": 320,
+          "label": 320,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 69,
+          "label": 69,
+          "arrow": "down"
+        },
+        75,
+        81,
+        87,
+        93,
+        {
+          "value": 100,
+          "label": 100,
+          "par": true
+        },
+        108,
+        116,
+        140,
+        170,
+        200,
+        {
+          "value": 235,
+          "label": 235,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 64,
+          "label": 64,
+          "arrow": "down"
+        },
+        69,
+        74,
+        {
+          "value": 80,
+          "label": 80,
+          "par": true
+        },
+        85,
+        91,
+        97,
+        111,
+        130,
+        155,
+        {
+          "value": 185,
+          "label": 185,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 59,
+          "label": 59,
+          "color": "gray",
+          "arrow": "down"
+        },
+        64,
+        68,
+        71,
+        76,
+        81,
+        90,
+        101,
+        120,
+        {
+          "value": 140,
+          "label": 140,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 50,
+          "label": 50,
+          "color": "gray",
+          "arrow": "down"
+        },
+        {
+          "value": 56,
+          "label": 56,
+          "color": "gray"
+        },
+        62,
+        66,
+        70,
+        75,
+        83,
+        {
+          "value": 93,
+          "label": 93,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 40,
+          "label": 40,
+          "color": "gray",
+          "arrow": "down"
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "color": "gray"
+        },
+        {
+          "value": 55,
+          "label": 55,
+          "color": "gray"
+        },
+        60,
+        64,
+        {
+          "value": 67,
+          "label": 67,
+          "par": true
+        },
+        {
+          "value": 75,
+          "label": 75,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 30,
+          "label": 30,
+          "color": "gray",
+          "arrow": "down"
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "color": "gray"
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "color": "gray"
+        },
+        {
+          "value": 55,
+          "label": 55,
+          "color": "gray"
+        },
+        {
+          "value": 60,
+          "label": 60,
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 20,
+          "label": 20,
+          "color": "gray",
+          "arrow": "down"
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "color": "gray"
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "color": "gray"
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "color": "gray"
+        },
+        {
+          "value": 55,
+          "label": 55,
+          "color": "gray",
+          "arrow": "up"
+        }
+      ],
+      [
+        {
+          "value": 10,
+          "label": 10,
+          "color": "gray"
+        },
+        {
+          "value": 20,
+          "label": 20,
+          "color": "gray"
+        },
+        {
+          "value": 30,
+          "label": 30,
+          "color": "gray"
+        },
+        {
+          "value": 40,
+          "label": 40,
+          "color": "gray"
+        },
+        {
+          "value": 50,
+          "label": 50,
+          "color": "gray",
+          "arrow": "up"
+        }
+      ]
+    ],
+    "legend": [
+      {
+        "color": "red",
+        "description": "Par price"
+      },
+      {
+        "color": "gray",
+        "description": "Corporation closes on this cell"
+      },
+      {
+        "color": "blue",
+        "description": "Game ends when a share price reaches this cell"
+      }
+    ]
+  },
+  "tiles": {
+    "1": 1,
+    "7": 4,
+    "8": 15,
+    "9": 12,
+    "14": 4,
+    "15": 4,
+    "16": 1,
+    "17": 1,
+    "18": 1,
+    "19": 1,
+    "20": 1,
+    "23": 3,
+    "24": 3,
+    "25": 2,
+    "26": 2,
+    "27": 2,
+    "28": 1,
+    "29": 1,
+    "30": 1,
+    "31": 1,
+    "39": 1,
+    "40": 1,
+    "41": 1,
+    "42": 1,
+    "43": 1,
+    "44": 1,
+    "45": 1,
+    "46": 1,
+    "47": 1,
+    "56": 1,
+    "57": 10,
+    "70": 1,
+    "619": 4,
+    "624": 1,
+    "630": 1,
+    "631": 1,
+    "632": 1,
+    "633": 1,
+    "X1": {
+      "cities": [
+        {
+          "companies": ["PLM"],
+          "x": -43.3,
+          "y": 0
+        },
+        {
+          "x": 37.5,
+          "y": -21.65
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 A 43.9 43.9 30 0 0 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 A 43.9 43.9 30 0 1 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 L 37.5 -21.65"
+        }
+      ],
+      "labels": [
+        {
+          "label": "P",
+          "x": 1.6,
+          "y": -50.92
+        }
+      ],
+      "terrain": [
+        {
+          "type": "water",
+          "cost": 40
+        }
+      ],
+      "values": [
+        {
+          "value": 30,
+          "x": -7.32,
+          "y": -27.32
+        }
+      ],
+      "color": "yellow",
+      "quantity": 1
+    },
+    "X2": {
+      "cities": [
+        {
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 0 -110 L 0 -75.34 L 0 0"
+        }
+      ],
+      "labels": [
+        {
+          "label": "B",
+          "x": 28.14,
+          "y": 48.75
+        }
+      ],
+      "terrain": [
+        {
+          "type": "water",
+          "cost": 40
+        }
+      ],
+      "values": [
+        {
+          "value": 30,
+          "x": 45.41,
+          "y": -2.65
+        }
+      ],
+      "color": "yellow",
+      "quantity": 1
+    },
+    "X3": {
+      "cities": [
+        {
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 L 0 0"
+        }
+      ],
+      "labels": [
+        {
+          "label": "L",
+          "x": -28.14,
+          "y": -48.75
+        }
+      ],
+      "terrain": [
+        {
+          "type": "water",
+          "cost": 40
+        }
+      ],
+      "values": [
+        {
+          "value": 30,
+          "x": 45.41,
+          "y": -2.65
+        }
+      ],
+      "color": "yellow",
+      "quantity": 1
+    },
+    "X4": {
+      "cities": [
+        {
+          "x": -43.3,
+          "y": 0,
+          "companies": ["PLM"]
+        },
+        {
+          "x": 21.65,
+          "y": -37.5
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 A 43.9 43.9 30 0 0 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 A 43.9 43.9 30 0 1 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 0 -110 L 0 -75.34 A 43.9 43.9 30 0 0 21.65 -37.5"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 A 43.9 43.9 30 0 1 21.65 -37.5"
+        }
+      ],
+      "labels": [
+        {
+          "label": "P",
+          "x": -29.01,
+          "y": -50.25
+        }
+      ],
+      "terrain": [
+        {
+          "type": "water",
+          "cost": 60
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "x": 1.6,
+          "y": 3.23
+        }
+      ],
+      "color": "green",
+      "quantity": 1
+    },
+    "X5": {
+      "cities": [
+        {
+          "x": -43.3,
+          "y": 0,
+          "companies": ["PLM"]
+        },
+        {
+          "x": 43.3,
+          "y": 0
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 A 43.9 43.9 30 0 0 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 A 43.9 43.9 30 0 1 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 A 43.9 43.9 30 0 0 43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 55 L 65.25 37.67 A 43.9 43.9 30 0 1 43.3 0"
+        }
+      ],
+      "labels": [
+        {
+          "label": "P",
+          "x": 1.6,
+          "y": -50.92
+        }
+      ],
+      "terrain": [
+        {
+          "type": "water",
+          "cost": 60
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "x": -4.86,
+          "y": -23.59
+        }
+      ],
+      "color": "green",
+      "quantity": 1
+    },
+    "X6": {
+      "cities": [
+        {
+          "size": 2,
+          "x": 0,
+          "y": 0,
+          "rotation": 30
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 0 -110 L 0 -75.34 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 55 L 65.25 37.67 L 0 0"
+        }
+      ],
+      "labels": [
+        {
+          "label": "B",
+          "x": -29.01,
+          "y": -50.25
+        }
+      ],
+      "terrain": [
+        {
+          "type": "water",
+          "cost": 60
+        }
+      ],
+      "values": [
+        {
+          "value": 50,
+          "x": 41.55,
+          "y": -27.97
+        }
+      ],
+      "color": "green",
+      "quantity": 1
+    },
+    "X7": {
+      "cities": [
+        {
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 55 L 65.25 37.67 L 0 0"
+        }
+      ],
+      "labels": [
+        {
+          "label": "L",
+          "x": -28.14,
+          "y": -48.75
+        }
+      ],
+      "terrain": [
+        {
+          "type": "water",
+          "cost": 60
+        }
+      ],
+      "values": [
+        {
+          "value": 50,
+          "x": 45.41,
+          "y": -2.65
+        }
+      ],
+      "color": "green",
+      "quantity": 1
+    },
+    "X8": {
+      "cities": [
+        {
+          "size": 2,
+          "x": 0,
+          "y": 0,
+          "rotation": 30
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 55 L 65.25 37.67 L 0 0"
+        }
+      ],
+      "labels": [
+        {
+          "label": "L",
+          "x": -29.01,
+          "y": -50.25
+        }
+      ],
+      "terrain": [
+        {
+          "type": "water",
+          "cost": 60
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "x": 25.87,
+          "y": -42.8
+        }
+      ],
+      "color": "green",
+      "quantity": 1
+    },
+    "X9": {
+      "cities": [
+        {
+          "x": -43.3,
+          "y": 0,
+          "companies": ["PLM"]
+        },
+        {
+          "size": 2,
+          "x": 26.25,
+          "y": -15.15,
+          "rotation": 60
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 A 43.9 43.9 30 0 0 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 A 43.9 43.9 30 0 1 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 0 -110 L 0 -75.34 A 57.18 57.18 30 0 0 37.5 -21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 L 37.5 -21.65"
+        }
+      ],
+      "labels": [
+        {
+          "label": "P",
+          "x": -29.01,
+          "y": -50.25
+        }
+      ],
+      "values": [
+        {
+          "value": 80,
+          "x": 0,
+          "y": 43.3
+        }
+      ],
+      "color": "brown",
+      "quantity": 1
+    },
+    "X10": {
+      "cities": [
+        {
+          "x": -43.3,
+          "y": 0,
+          "companies": ["PLM"]
+        },
+        {
+          "size": 2,
+          "x": 26.25,
+          "y": -15.15,
+          "rotation": 60
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 A 43.9 43.9 30 0 0 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 A 43.9 43.9 30 0 1 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 L 37.5 -21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 55 L 65.25 37.67 A 57.18 57.18 30 0 1 37.5 -21.65"
+        }
+      ],
+      "labels": [
+        {
+          "label": "P",
+          "x": -29.01,
+          "y": -50.25
+        }
+      ],
+      "values": [
+        {
+          "value": 80,
+          "x": -25,
+          "y": 43.3
+        }
+      ],
+      "color": "brown",
+      "quantity": 1
+    },
+    "X11": {
+      "cities": [
+        {
+          "x": -43.3,
+          "y": 0,
+          "companies": ["PLM"]
+        },
+        {
+          "x": 21.65,
+          "y": -37.5
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 A 43.9 43.9 30 0 0 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 A 43.9 43.9 30 0 1 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 0 -110 L 0 -75.34 A 43.9 43.9 30 0 0 21.65 -37.5"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 A 43.9 43.9 30 0 1 21.65 -37.5"
+        }
+      ],
+      "labels": [
+        {
+          "label": "P",
+          "x": -29.01,
+          "y": -50.25
+        }
+      ],
+      "values": [
+        {
+          "value": 90,
+          "x": 20,
+          "y": 20
+        }
+      ],
+      "color": "brown",
+      "quantity": 1
+    },
+    "X12": {
+      "cities": [
+        {
+          "x": -43.3,
+          "y": 0,
+          "companies": ["PLM"]
+        },
+        {
+          "x": 43.3,
+          "y": 0
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 A 43.9 43.9 30 0 0 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 A 43.9 43.9 30 0 1 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 A 43.9 43.9 30 0 0 43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 55 L 65.25 37.67 A 43.9 43.9 30 0 1 43.3 0"
+        }
+      ],
+      "labels": [
+        {
+          "label": "P",
+          "x": 1.6,
+          "y": -50.92
+        }
+      ],
+      "values": [
+        {
+          "value": 90,
+          "x": -1.6,
+          "y": 50.92
+        }
+      ],
+      "color": "brown",
+      "quantity": 1
+    },
+    "X13": {
+      "cities": [
+        {
+          "size": 2,
+          "x": 0,
+          "y": 0,
+          "rotation": 30
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 0 -110 L 0 -75.34 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 55 L 65.25 37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 0 110 L 0 75.34 L 0 0"
+        }
+      ],
+      "labels": [
+        {
+          "label": "B",
+          "x": -32,
+          "y": 45
+        }
+      ],
+      "values": [
+        {
+          "value": 70,
+          "x": 25.87,
+          "y": -42.8
+        }
+      ],
+      "color": "brown",
+      "quantity": 1
+    },
+    "X14": {
+      "cities": [
+        {
+          "size": 2,
+          "x": 0,
+          "y": 0,
+          "rotation": 30
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 55 L 65.25 37.67 L 0 0"
+        }
+      ],
+      "labels": [
+        {
+          "label": "L",
+          "x": -68,
+          "y": 0
+        }
+      ],
+      "values": [
+        {
+          "value": 60,
+          "x": 25.87,
+          "y": -42.8
+        }
+      ],
+      "color": "brown",
+      "quantity": 1
+    },
+    "X15": {
+      "cities": [
+        {
+          "size": 3,
+          "x": 5,
+          "y": -8.66
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 0 -110 L 0 -75.34 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 55 L 65.25 37.67 L 0 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 0 110 L 0 75.34 L 0 0"
+        }
+      ],
+      "labels": [
+        {
+          "label": "L",
+          "x": -60,
+          "y": 0
+        }
+      ],
+      "values": [
+        {
+          "value": 50,
+          "x": -35,
+          "y": 50
+        }
+      ],
+      "color": "brown",
+      "quantity": 1
+    },
+    "X16": {
+      "cities": [
+        {
+          "x": 37.5,
+          "y": -21.65
+        },
+        {
+          "x": -37.5,
+          "y": -21.65
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 L 37.5 -21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 L 37.5 -21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 L -37.5 -21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 55 L 65.25 37.67 L -37.5 -21.65"
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "x": 24.74,
+          "y": 43.15
+        }
+      ],
+      "color": "brown",
+      "quantity": 2
+    },
+    "X17": {
+      "cities": [
+        {
+          "x": -37.5,
+          "y": -21.65
+        },
+        {
+          "x": 37.5,
+          "y": 21.65
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 L -37.5 -21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 A 144.19 144.19 30 0 1 -37.5 -21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 A 144.19 144.19 30 0 1 37.5 21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 55 L 65.25 37.67 L 37.5 21.65"
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "x": -2.38,
+          "y": -49.87
+        }
+      ],
+      "color": "brown",
+      "quantity": 2
+    },
+    "X18": {
+      "cities": [
+        {
+          "x": -43.3,
+          "y": 0
+        },
+        {
+          "x": 43.3,
+          "y": 0
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 A 43.9 43.9 30 0 0 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 A 43.9 43.9 30 0 1 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 A 43.9 43.9 30 0 0 43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 55 L 65.25 37.67 A 43.9 43.9 30 0 1 43.3 0"
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "x": -4.86,
+          "y": -23.59
+        }
+      ],
+      "color": "brown",
+      "quantity": 2
+    },
+    "X19": {
+      "cities": [
+        {
+          "x": 37.5,
+          "y": -21.65
+        },
+        {
+          "x": -37.5,
+          "y": 21.65
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 A 144.18 144.18 30 0 0 37.5 -21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 L 37.5 -21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 L -37.5 21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M 0 -110 L 0 -75.34 A 144.18 144.18 30 0 1 -37.5 21.65"
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "x": 44.3,
+          "y": 23.27
+        }
+      ],
+      "color": "brown",
+      "quantity": 2
+    },
+    "X20": {
+      "cities": [
+        {
+          "x": 37.5,
+          "y": -21.65
+        },
+        {
+          "x": -21.65,
+          "y": -37.5
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 L 37.5 -21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 L 37.5 -21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 A 43.9 43.9 30 0 0 -21.65 -37.5"
+        },
+        {
+          "type": "custom",
+          "path": "M 0 -110 L 0 -75.34 A 43.9 43.9 30 0 1 -21.65 -37.5"
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "x": 44.3,
+          "y": 23.27
+        }
+      ],
+      "color": "brown",
+      "quantity": 2
+    },
+    "X21": {
+      "cities": [
+        {
+          "x": -43.3,
+          "y": 0
+        },
+        {
+          "x": 21.65,
+          "y": -37.5
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 A 43.9 43.9 30 0 0 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M -95.26 -55 L -65.25 -37.67 A 43.9 43.9 30 0 1 -43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 0 -110 L 0 -75.34 A 43.9 43.9 30 0 0 21.65 -37.5"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 A 43.9 43.9 30 0 1 21.65 -37.5"
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "x": 1.6,
+          "y": 3.23
+        }
+      ],
+      "color": "brown",
+      "quantity": 2
+    },
+    "X22": {
+      "cities": [
+        {
+          "x": -37.5,
+          "y": 21.65
+        },
+        {
+          "x": 0,
+          "y": -43.3
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 L -37.5 21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 L -37.5 21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M 0 -110 L 0 -75.34 L 0 -43.3"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 55 L 65.25 37.67 A 144.18 144.18 30 0 1 0 -43.3"
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "x": -44.3,
+          "y": -23.27
+        }
+      ],
+      "color": "brown",
+      "quantity": 2
+    },
+    "X23": {
+      "cities": [
+        {
+          "x": -37.5,
+          "y": 21.65
+        },
+        {
+          "x": 43.3,
+          "y": 0
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 L -37.5 21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M 0 -110 L 0 -75.34 A 144.18 144.18 30 0 1 -37.5 21.65"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 A 43.9 43.9 30 0 0 43.3 0"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 55 L 65.25 37.67 A 43.9 43.9 30 0 1 43.3 0"
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "x": -44.3,
+          "y": -23.27
+        }
+      ],
+      "color": "brown",
+      "quantity": 2
+    },
+    "X24": {
+      "cities": [
+        {
+          "x": -27.5,
+          "y": 15.88
+        },
+        {
+          "x": 21.65,
+          "y": -37.5
+        }
+      ],
+      "track": [
+        {
+          "type": "custom",
+          "path": "M -95.26 55 L -65.25 37.67 L -27.5 15.88"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 55 L 65.25 37.67 A 144.18 144.18 30 0 0 -27.5 15.88"
+        },
+        {
+          "type": "custom",
+          "path": "M 0 -110 L 0 -75.34 A 43.9 43.9 30 0 0 21.65 -37.5"
+        },
+        {
+          "type": "custom",
+          "path": "M 95.26 -55 L 65.25 -37.67 A 43.9 43.9 30 0 1 21.65 -37.5"
+        }
+      ],
+      "values": [
+        {
+          "value": 40,
+          "x": -22,
+          "y": -32
+        }
+      ],
+      "color": "brown",
+      "quantity": 2
+    }
+  },
+  "map": {
+    "roundTracker": {
+      "type": "round",
+      "x": 1450,
+      "y": 1325
+    },
+    "players": {
+      "x": 1450,
+      "y": 1500
+    },
+    "hexes": [
+      {
+        "color": "plain",
+        "hexes": ["C4"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["C8"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["C10"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["D5"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["E18"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["F3"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["F9"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["F17"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["H5"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["H7"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["I6"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["I8"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["I12"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 40
+          }
+        ],
+        "hexes": ["B1"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 40
+          }
+        ],
+        "hexes": ["C2"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 40
+          }
+        ],
+        "hexes": ["E4"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 40
+          }
+        ],
+        "hexes": ["E8"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 40
+          }
+        ],
+        "hexes": ["F5"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 40
+          }
+        ],
+        "hexes": ["H11"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 60
+          }
+        ],
+        "hexes": ["B7"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 60
+          }
+        ],
+        "hexes": ["G8"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 60
+          }
+        ],
+        "hexes": ["I4"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Le Havre"
+            },
+            "companies": ["Ouest"]
+          }
+        ],
+        "hexes": ["B3"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Calais"
+            }
+          }
+        ],
+        "hexes": ["B9"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Rouen"
+            },
+            "companies": ["CFOR"]
+          }
+        ],
+        "hexes": ["D3"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Lens"
+            },
+            "companies": ["Nord"]
+          }
+        ],
+        "hexes": ["D9"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Gent"
+            },
+            "companies": ["AG"]
+          }
+        ],
+        "hexes": ["D15"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Antwerpen"
+            }
+          }
+        ],
+        "hexes": ["D17"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Évreux"
+            }
+          }
+        ],
+        "hexes": ["E2"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Amiens"
+            },
+            "companies": ["Ouest"]
+          }
+        ],
+        "hexes": ["E6"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Arras"
+            }
+          }
+        ],
+        "hexes": ["E10"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Mechelen"
+            },
+            "companies": ["Belge"]
+          }
+        ],
+        "hexes": ["E16"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Saint-Quentin"
+            }
+          }
+        ],
+        "hexes": ["G10"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Soissons"
+            }
+          }
+        ],
+        "hexes": ["H9"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Liège"
+            }
+          }
+        ],
+        "hexes": ["H17"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": 60,
+            "percent": 0.7
+          },
+          {
+            "angle": 240,
+            "percent": 0.7
+          }
+        ],
+        "names": [
+          {
+            "name": "Beauvais & Compiègne",
+            "y": 2
+          }
+        ],
+        "hexes": ["F7"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": 60,
+            "percent": 0.7
+          },
+          {
+            "angle": 240,
+            "percent": 0.7
+          }
+        ],
+        "names": [
+          {
+            "name": "Namur & Sint-Truiden",
+            "y": 2
+          }
+        ],
+        "hexes": ["G16"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Dunkerque"
+            }
+          }
+        ],
+        "borders": [
+          {
+            "side": 4,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          }
+        ],
+        "hexes": ["B11"]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 6,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          },
+          {
+            "side": 1,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          }
+        ],
+        "hexes": ["B13"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": 150,
+            "percent": 0.575
+          }
+        ],
+        "towns": [
+          {
+            "angle": 330,
+            "percent": 0.575,
+            "rotation": 330
+          }
+        ],
+        "names": [
+          {
+            "name": "Blangy-sur-Bresle",
+            "y": -4
+          },
+          {
+            "name": "& Abeville",
+            "y": 3
+          }
+        ],
+        "track": [
+          {
+            "type": "custom",
+            "side": 5,
+            "sides": [5],
+            "path": "M 0 85 L 0 43.1"
+          }
+        ],
+        "values": [
+          {
+            "value": 10,
+            "x": 52,
+            "y": 22.2
+          }
+        ],
+        "hexes": ["C6"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 40
+          }
+        ],
+        "borders": [
+          {
+            "side": 3,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          },
+          {
+            "side": 4,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          },
+          {
+            "side": 5,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          }
+        ],
+        "hexes": ["C12"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Brugge"
+            }
+          }
+        ],
+        "borders": [
+          {
+            "side": 1,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          }
+        ],
+        "hexes": ["C14"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": 330,
+            "percent": 0.575
+          }
+        ],
+        "towns": [
+          {
+            "angle": 150,
+            "percent": 0.575,
+            "rotation": 150
+          }
+        ],
+        "names": [
+          {
+            "name": "Pont-Remy",
+            "y": -4
+          },
+          {
+            "name": "& Doullens",
+            "y": 3
+          }
+        ],
+        "track": [
+          {
+            "type": "custom",
+            "side": 2,
+            "sides": [2],
+            "path": "M 0 85 L 0 43.1"
+          }
+        ],
+        "values": [
+          {
+            "value": 10,
+            "x": -52,
+            "y": -22.2
+          }
+        ],
+        "hexes": ["D7"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Lille"
+            }
+          }
+        ],
+        "labels": [
+          {
+            "label": "L"
+          }
+        ],
+        "borders": [
+          {
+            "side": 4,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          }
+        ],
+        "hexes": ["D11"]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 6,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          },
+          {
+            "side": 1,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          },
+          {
+            "side": 2,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          }
+        ],
+        "hexes": ["D13"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": 60,
+            "percent": 0.7
+          },
+          {
+            "angle": 240,
+            "percent": 0.7
+          }
+        ],
+        "names": [
+          {
+            "name": "Douai & Valenciennes",
+            "y": 2
+          }
+        ],
+        "borders": [
+          {
+            "side": 3,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          },
+          {
+            "side": 4,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          },
+          {
+            "side": 5,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          }
+        ],
+        "hexes": ["E12"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 60
+          }
+        ],
+        "borders": [
+          {
+            "side": 1,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          }
+        ],
+        "hexes": ["E14"]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 4,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          }
+        ],
+        "hexes": ["F11"]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 6,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          },
+          {
+            "side": 1,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          },
+          {
+            "side": 2,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          }
+        ],
+        "hexes": ["F13"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Bruxelles"
+            }
+          }
+        ],
+        "labels": [
+          {
+            "label": "B",
+            "x": -45,
+            "y": -35
+          }
+        ],
+        "hexes": ["F15"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "angle": 60,
+            "percent": 0.7,
+            "name": {
+              "name": "Paris",
+              "x": 30
+            },
+            "companies": ["PLM"]
+          },
+          {
+            "angle": 240,
+            "percent": 0.7
+          }
+        ],
+        "labels": [
+          {
+            "label": "P"
+          }
+        ],
+        "hexes": ["G6"]
+      },
+      {
+        "color": "plain",
+        "centerTowns": [
+          {
+            "angle": 60,
+            "percent": 0.7
+          },
+          {
+            "angle": 240,
+            "percent": 0.7
+          }
+        ],
+        "names": [
+          {
+            "name": "Caudry & Maubeuge",
+            "y": 2
+          }
+        ],
+        "borders": [
+          {
+            "side": 3,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          },
+          {
+            "side": 4,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          }
+        ],
+        "hexes": ["G12"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Charleroi"
+            },
+            "companies": ["Nord"]
+          }
+        ],
+        "borders": [
+          {
+            "side": 6,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          },
+          {
+            "side": 1,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          }
+        ],
+        "hexes": ["G14"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 40
+          }
+        ],
+        "borders": [
+          {
+            "side": 3,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          },
+          {
+            "side": 4,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          }
+        ],
+        "hexes": ["H13"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "water",
+            "cost": 60
+          }
+        ],
+        "borders": [
+          {
+            "side": 6,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          },
+          {
+            "side": 1,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          }
+        ],
+        "hexes": ["H15"]
+      },
+      {
+        "color": "plain",
+        "borders": [
+          {
+            "side": 3,
+            "color": "province",
+            "dashed": true,
+            "width": 4
+          }
+        ],
+        "hexes": ["I14"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "name": {
+              "name": "Versailles",
+              "reverse": true,
+              "x": -20
+            }
+          }
+        ],
+        "track": [
+          {
+            "type": "city",
+            "side": 2
+          },
+          {
+            "type": "city",
+            "side": 4
+          },
+          {
+            "type": "city",
+            "side": 5
+          }
+        ],
+        "values": [
+          {
+            "value": 20
+          }
+        ],
+        "hexes": ["G4"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "name": {
+              "name": "Reims",
+              "reverse": true
+            },
+            "companies": ["Est"]
+          }
+        ],
+        "track": [
+          {
+            "type": "city",
+            "side": 2
+          },
+          {
+            "type": "city",
+            "side": 3
+          },
+          {
+            "type": "city",
+            "side": 4
+          }
+        ],
+        "values": [
+          {
+            "value": 10,
+            "x": 42,
+            "y": 38
+          }
+        ],
+        "hexes": ["I10"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 5
+          },
+          {
+            "type": "gentle",
+            "side": 4
+          }
+        ],
+        "hexes": ["A2"]
+      },
+      {
+        "color": "gray",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Boulogne-sur-Mer"
+            }
+          }
+        ],
+        "track": [
+          {
+            "type": "city",
+            "side": 6
+          },
+          {
+            "type": "city",
+            "side": 4
+          },
+          {
+            "type": "sharp",
+            "side": 5
+          },
+          {
+            "type": "sharp",
+            "side": 4
+          }
+        ],
+        "values": [
+          {
+            "value": 20
+          }
+        ],
+        "hexes": ["A8"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "gentle",
+            "side": 5
+          },
+          {
+            "type": "sharp",
+            "side": 6
+          },
+          {
+            "type": "sharp",
+            "side": 5
+          }
+        ],
+        "hexes": ["B5"]
+      },
+      {
+        "color": "gray",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Oostende"
+            }
+          }
+        ],
+        "track": [
+          {
+            "type": "city",
+            "side": 6
+          },
+          {
+            "type": "city",
+            "side": 1
+          }
+        ],
+        "values": [
+          {
+            "value": 20
+          }
+        ],
+        "hexes": ["B15"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 6
+          },
+          {
+            "type": "sharp",
+            "side": 4
+          },
+          {
+            "type": "sharp",
+            "side": 5
+          }
+        ],
+        "hexes": ["C16"]
+      },
+      {
+        "color": "gray",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Elbeuf"
+            }
+          }
+        ],
+        "track": [
+          {
+            "type": "city",
+            "side": 4
+          },
+          {
+            "type": "city",
+            "side": 5
+          }
+        ],
+        "values": [
+          {
+            "value": 20
+          }
+        ],
+        "hexes": ["D1"]
+      },
+      {
+        "color": "gray",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Dreux",
+              "x": -26
+            }
+          }
+        ],
+        "track": [
+          {
+            "type": "city",
+            "side": 3
+          },
+          {
+            "type": "city",
+            "side": 5
+          },
+          {
+            "type": "sharp",
+            "side": 3
+          },
+          {
+            "type": "sharp",
+            "side": 4
+          }
+        ],
+        "values": [
+          {
+            "value": 20,
+            "x": -35,
+            "y": 35
+          }
+        ],
+        "hexes": ["F1"]
+      },
+      {
+        "color": "gray",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Houdan",
+              "reverse": true
+            }
+          }
+        ],
+        "track": [
+          {
+            "type": "city",
+            "side": 2
+          },
+          {
+            "type": "city",
+            "side": 3
+          }
+        ],
+        "values": [
+          {
+            "value": 20,
+            "x": 35,
+            "y": 35
+          }
+        ],
+        "hexes": ["G2"]
+      },
+      {
+        "color": "gray",
+        "cities": [{}],
+        "track": [
+          {
+            "type": "sharp",
+            "side": 6
+          },
+          {
+            "type": "sharp",
+            "side": 1
+          },
+          {
+            "type": "city",
+            "side": 6
+          },
+          {
+            "type": "city",
+            "side": 2
+          }
+        ],
+        "offBoardRevenue": {
+          "y": -55,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "30"
+            }
+          ],
+          "name": {
+            "name": "Hasselt",
+            "y": 90,
+            "color": "black",
+            "x": 18
+          },
+          "x": 12
+        },
+        "hexes": ["G18"]
+      },
+      {
+        "color": "gray",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Voves"
+            }
+          }
+        ],
+        "track": [
+          {
+            "type": "city",
+            "side": 4
+          },
+          {
+            "type": "city",
+            "side": 5
+          }
+        ],
+        "values": [
+          {
+            "value": 20
+          }
+        ],
+        "hexes": ["H1"]
+      },
+      {
+        "color": "gray",
+        "cities": [
+          {
+            "companies": ["CFOR"]
+          }
+        ],
+        "track": [
+          {
+            "type": "city",
+            "side": 1
+          },
+          {
+            "type": "city",
+            "side": 3
+          },
+          {
+            "type": "city",
+            "side": 4
+          }
+        ],
+        "offBoardRevenue": {
+          "y": 55,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "30"
+            }
+          ],
+          "name": {
+            "name": "Chartres",
+            "x": -24,
+            "y": -97,
+            "color": "black"
+          }
+        },
+        "hexes": ["H3"]
+      },
+      {
+        "color": "gray",
+        "centerTowns": [
+          {
+            "name": {
+              "name": "Arlon"
+            }
+          }
+        ],
+        "track": [
+          {
+            "type": "city",
+            "side": 1
+          },
+          {
+            "type": "city",
+            "side": 4
+          },
+          {
+            "type": "sharp",
+            "side": 1
+          },
+          {
+            "type": "sharp",
+            "side": 2
+          },
+          {
+            "type": "sharp",
+            "side": 3
+          }
+        ],
+        "values": [
+          {
+            "value": 20,
+            "x": 0,
+            "y": 45
+          }
+        ],
+        "hexes": ["I16"]
+      },
+      {
+        "color": "blue",
+        "cities": [{}],
+        "track": [
+          {
+            "type": "city",
+            "side": 6
+          },
+          {
+            "type": "city",
+            "side": 1
+          },
+          {
+            "type": "city",
+            "side": 5
+          }
+        ],
+        "offBoardRevenue": {
+          "y": -55,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "80"
+            }
+          ],
+          "name": {
+            "name": "London",
+            "y": 23,
+            "color": "black"
+          }
+        },
+        "hexes": ["A10"]
+      },
+      {
+        "color": "blue",
+        "cities": [
+          {
+            "name": {
+              "name": "London bonus",
+              "y": -10
+            }
+          }
+        ],
+        "icons": [
+          {
+            "type": "1894-ferry",
+            "noCircle": true,
+            "x": -45,
+            "y": 50
+          },
+          {
+            "type": "1894-ferry",
+            "noCircle": true,
+            "x": -15,
+            "y": 50
+          },
+          {
+            "type": "1894-ferry",
+            "noCircle": true,
+            "x": 15,
+            "y": 50
+          },
+          {
+            "type": "1894-ferry",
+            "noCircle": true,
+            "x": 45,
+            "y": 50
+          }
+        ],
+        "hexes": ["A12"]
+      },
+      {
+        "color": "red",
+        "offBoardRevenue": {
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "50"
+            }
+          ],
+          "name": {
+            "name": "Great Britain"
+          }
+        },
+        "track": [
+          {
+            "type": "offboard",
+            "side": 6
+          },
+          {
+            "type": "offboard",
+            "side": 1
+          }
+        ],
+        "icons": [
+          {
+            "type": "1894-plus_100_black",
+            "noCircle": true,
+            "x": 0,
+            "y": 40
+          }
+        ],
+        "hexes": ["A4"]
+      },
+      {
+        "color": "red",
+        "offBoardRevenue": {
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            }
+          ],
+          "name": {
+            "name": "Netherlands"
+          }
+        },
+        "track": [
+          {
+            "type": "offboard",
+            "side": 6
+          },
+          {
+            "type": "offboard",
+            "side": 1
+          }
+        ],
+        "icons": [
+          {
+            "type": "1894-plus_100",
+            "noCircle": true,
+            "x": 0,
+            "y": 40
+          }
+        ],
+        "hexes": ["C18"]
+      },
+      {
+        "color": "red",
+        "offBoardRevenue": {
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            }
+          ],
+          "name": {
+            "name": "Centre & Bourgogne"
+          }
+        },
+        "track": [
+          {
+            "type": "offboard",
+            "side": 2
+          },
+          {
+            "type": "offboard",
+            "side": 4
+          }
+        ],
+        "icons": [
+          {
+            "type": "1894-plus_100_black",
+            "noCircle": true,
+            "x": 0,
+            "y": 40
+          }
+        ],
+        "hexes": ["I2"]
+      },
+      {
+        "color": "red",
+        "offBoardRevenue": {
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "0"
+            }
+          ],
+          "hidden": true
+        },
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ],
+        "icons": [
+          {
+            "type": "1894-largest",
+            "noCircle": true,
+            "x": 18,
+            "y": 35
+          },
+          {
+            "type": "1894-plus_100_black",
+            "noCircle": true,
+            "x": -18,
+            "y": 35
+          }
+        ],
+        "names": [
+          {
+            "name": "Luxembourg"
+          }
+        ],
+        "hexes": ["I18"]
+      }
+    ]
+  }
+}

@@ -183,6 +183,9 @@ const Charters = () => {
             fontSize={company.fontSize || game.info.companyFontSize}
             fontWeight={company.fontWeight || game.info.companyFontWeight}
             fontStyle={company.fontStyle || game.info.companyFontStyle}
+            showPhaseChart={game.info.charterShowPhaseChart}
+            showTurnOrder={game.info.charterShowTurnOrder}
+            showTreasury={game.info.charterShowTreasury}
             halfWidth={charters.halfWidth}
           />
         ) : (
@@ -242,6 +245,9 @@ const Charters = () => {
                   fontSize={company.fontSize || game.info.companyFontSize}
                   fontWeight={company.fontWeight || game.info.companyFontWeight}
                   fontStyle={company.fontStyle || game.info.companyFontStyle}
+                  showPhaseChart={game.info.charterShowPhaseChart}
+                  showTurnOrder={game.info.charterShowTurnOrder}
+                  showTreasury={game.info.charterShowTreasury}
                   halfWidth={data.layout === "3x2"}
                 />
               ) : (
@@ -291,6 +297,9 @@ const Charters = () => {
                 fontSize={company.fontSize || game.info.companyFontSize}
                 fontWeight={company.fontWeight || game.info.companyFontWeight}
                 fontStyle={company.fontStyle || game.info.companyFontStyle}
+                showPhaseChart={game.info.charterShowPhaseChart}
+                showTurnOrder={game.info.charterShowTurnOrder}
+                showTreasury={game.info.charterShowTreasury}
                 halfWidth={data.layout !== "3x1"}
               />
             ),

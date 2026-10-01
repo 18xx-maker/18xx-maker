@@ -21,6 +21,7 @@ const LeftShare = ({
   shareStyle,
   company,
   tokenCount,
+  bandCount = 1,
   blackBand,
   variant,
   fontFamily,
@@ -89,16 +90,32 @@ const LeftShare = ({
               }}
             >
               <Color context="companies">
-                {(c) => (
-                  <div
-                    className="share__hr"
-                    style={{
-                      backgroundColor: c(bandColor),
-                      borderLeft,
-                      borderRight,
-                    }}
-                  />
-                )}
+                {(c) =>
+                  Array.from({ length: bandCount }, (_, index) => (
+                    <div
+                      key={index}
+                      className="share__hr"
+                      style={{
+                        backgroundColor: c(bandColor),
+                        borderLeft,
+                        borderRight,
+                        ...(shareStyle === "left" && {
+                          "--share-band-offset": `${
+                            (index - (bandCount - 1) / 2) * 0.3
+                          }in`,
+                        }),
+                        ...(shareStyle === "gmt" && {
+                          bottom: `calc(${(index * 100) / bandCount}% + ${
+                            (index * 0.025) / bandCount
+                          }in)`,
+                          height: `calc(${100 / bandCount}% - ${
+                            ((bandCount - 1) * 0.025) / bandCount
+                          }in)`,
+                        }),
+                      }}
+                    />
+                  ))
+                }
               </Color>
               <div className="card__body">
                 {name && (
@@ -171,26 +188,53 @@ const CenterShare = ({
   shares,
   percent,
   label,
+  name,
   subtext,
   company,
   tokenCount,
+  tokenScale = 1,
+  iconScale = 1,
+  hideShareCount = false,
+  showCompanyName = false,
+  hideCenterPercent = false,
+  companyNameFontSize = 0.14,
+  bandCount = 1,
+  centerBandBottom = 0.375,
   backgroundColor,
   labelColor,
   variant,
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
+  const tokenSize = 0.52 * tokenScale * iconScale;
+  const scaledToken = tokenScale * iconScale !== 1;
 
   let tokens = [];
   let sharesLeft = tokenCount || shares;
   while (sharesLeft > 0) {
     tokens.push(
-      <div key={sharesLeft} className="share__token">
+      <div
+        key={sharesLeft}
+        className="share__token"
+        style={{
+          ...(scaledToken && {
+            width: `${tokenSize}in`,
+            height: `${tokenSize}in`,
+          }),
+        }}
+      >
         <div
-          style={{ width: `${min(1.0, sharesLeft) * 100}%` }}
+          style={{
+            width: `${min(1.0, sharesLeft) * 100}%`,
+            ...(scaledToken && {
+              height: `${tokenSize}in`,
+              top: 0,
+              overflow: "visible",
+            }),
+          }}
           className="share__token__wrapper"
         >
           <svg
-            style={{ width: "0.52in", height: "0.52in" }}
+            style={{ width: `${tokenSize}in`, height: `${tokenSize}in` }}
             viewBox="-26 -26 52 52"
           >
             <CompanyToken company={company} />
@@ -203,7 +247,11 @@ const CenterShare = ({
 
   return (
     <div className="cutlines">
-      <div className="card share share--center">
+      <div
+        className={`card share share--center ${
+          scaledToken && showCompanyName ? "share--showcase" : ""
+        }`}
+      >
         <Color context="map">
           {(c) => (
             <div
@@ -213,12 +261,18 @@ const CenterShare = ({
               }}
             >
               <Color context="companies">
-                {(c) => (
-                  <div
-                    className="share__hr"
-                    style={{ backgroundColor: c(color) }}
-                  />
-                )}
+                {(c) =>
+                  Array.from({ length: bandCount }, (_, index) => (
+                    <div
+                      key={index}
+                      className="share__hr"
+                      style={{
+                        backgroundColor: c(color),
+                        bottom: `${centerBandBottom + index * 0.0875}in`,
+                      }}
+                    />
+                  ))
+                }
               </Color>
               <div className="card__body">
                 {subtext && (
@@ -226,17 +280,39 @@ const CenterShare = ({
                     <div>{subtext}</div>
                   </div>
                 )}
-                {shares && <div className="share__shares">{count}</div>}
+                {!hideShareCount && shares && (
+                  <div className="share__shares">{count}</div>
+                )}
                 {cost && <div className="share__shares">{cost}</div>}
-                {percent && <div className="share__percent">{percent}%</div>}
+                {!hideCenterPercent && percent && (
+                  <div className="share__percent">{percent}%</div>
+                )}
                 {revenue && (
                   <div className="share__percent">Revenue: {revenue}</div>
                 )}
-                <div className="share__tokens">
+                <div
+                  className="share__tokens"
+                  style={{
+                    ...(scaledToken && {
+                      height: `${tokenSize}in`,
+                    }),
+                  }}
+                >
                   <ColorContext.Provider value="companies">
                     {tokens}
                   </ColorContext.Provider>
                 </div>
+                {showCompanyName && name && (
+                  <div
+                    className="share__company-name"
+                    style={{
+                      top: `${tokenSize + 0.025}in`,
+                      fontSize: `${companyNameFontSize}in`,
+                    }}
+                  >
+                    {name}
+                  </div>
+                )}
                 {label && label.length > 0 && (
                   <div className="share__label">
                     <Color context="map">
@@ -284,7 +360,13 @@ const Share = (props) => {
       />
     );
   } else {
-    return <CenterShare {...props} />;
+    return (
+      <CenterShare
+        {...props}
+        companyNameFontSize={config.cards.shareCompanyNameFontSize}
+        iconScale={config.cards.centerShareIconScale}
+      />
+    );
   }
 };
 

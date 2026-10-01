@@ -35,16 +35,24 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
   const classes = useStyles();
   let [error, setError] = useState(false);
   let [units, setUnits] = useState("inches");
-  let [internalValue, setInternalValue] = useState(value / allUnits[units]);
+  let [internalValue, setInternalValue] = useState(
+    value == null ? "" : value / allUnits[units],
+  );
 
   const isError = error || errorValidation;
 
   useEffect(() => {
-    setInternalValue(value / allUnits[units]);
+    setInternalValue(value == null ? "" : value / allUnits[units]);
   }, [value, units]);
 
   let handler = (event) => {
     setInternalValue(event.target.value);
+
+    if (event.target.value === "") {
+      setError(false);
+      onChange(null);
+      return;
+    }
 
     let numberValue = Number(event.target.value);
     if (Number.isNaN(numberValue)) {
@@ -63,7 +71,9 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
 
   let unitsHandler = (event) => {
     setUnits(event.target.value);
-    setInternalValue(value / allUnits[event.target.value]);
+    setInternalValue(
+      value == null ? "" : value / allUnits[event.target.value],
+    );
   };
 
   return (

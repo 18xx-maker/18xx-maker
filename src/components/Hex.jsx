@@ -48,7 +48,16 @@ const makeBorder = (track) => (
   </Position>
 );
 
-const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
+const HexTile = ({
+  hex,
+  id,
+  clipPath,
+  border,
+  transparent,
+  map,
+  opacity,
+  renderWidth = 150,
+}) => {
   const rotation = useOrientation();
 
   if (hex === undefined || hex === null) {
@@ -106,23 +115,23 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
 
   let outsideCities = (
     <Position data={R.filter((c) => c.outside === true, hex.cities || [])}>
-      {(c) => <City bgColor={hex.color} {...c} />}
+      {(c) => <City bgColor={hex.color} renderWidth={renderWidth} {...c} />}
     </Position>
   );
   let cities = (
     <Position data={R.filter((c) => c.outside !== true, hex.cities || [])}>
-      {(c) => <City bgColor={hex.color} {...c} />}
+      {(c) => <City bgColor={hex.color} renderWidth={renderWidth} {...c} />}
     </Position>
   );
 
   let outsideCityBorders = (
     <Position data={R.filter((c) => c.outside === true, hex.cities || [])}>
-      {(c) => <City {...c} border={true} />}
+      {(c) => <City {...c} border={true} renderWidth={renderWidth} />}
     </Position>
   );
   let cityBorders = (
     <Position data={R.filter((c) => c.outside !== true, hex.cities || [])}>
-      {(c) => <City {...c} border={true} />}
+      {(c) => <City {...c} border={true} renderWidth={renderWidth} />}
     </Position>
   );
 
