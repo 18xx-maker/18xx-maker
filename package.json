@@ -43,6 +43,7 @@
     "svgo:icons": "svgo -f src/data/icons",
     "svgo:logos": "svgo -f src/data/logos",
     "test": "vitest",
+    "test:e2e": "playwright test",
     "test:run": "vitest run",
     "validate": "node ./bin/maker.js validate \"src/schemas/*.schema.json\" \"src/*.json\" \"src/data/**/*.json\"",
     "validate:schemas": "node ./bin/maker.js validate \"src/schemas/*.schema.json\""
@@ -136,6 +137,7 @@
       "!dist/sb${/*}",
       "!dist/site${/*}",
       "!docker${/*}",
+      "!e2e${/*}",
       "!electron${/*}",
       "!electron.vite.config.js",
       "!eslint.config.js",
@@ -144,6 +146,8 @@
       "!lefthook.yml",
       "!Makefile",
       "!out${/*}",
+      "!playwright-report${/*}",
+      "!playwright.config.cjs",
       "!pnpm-lock.yaml",
       "!public${/*}",
       "!release-please-config.json",
@@ -151,6 +155,7 @@
       "!src${/*}",
       "!stats.html",
       "!svgo.config.js",
+      "!test-results${/*}",
       "!tests${/*}",
       "!vite.config.js",
       "!vitest.config.js",
@@ -213,6 +218,7 @@
     "ramda": "^0.30.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@chromatic-com/storybook": "^3.2.2",
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",

@@ -10,7 +10,15 @@ import globals from "globals";
 export default [
   { files: ["**/*.{js,mjs,cjs,jsx}"] },
   {
-    ignores: ["!.storybook", "coverage/", "docker/", "dist/", "public/"],
+    ignores: [
+      "!.storybook",
+      "coverage/",
+      "docker/",
+      "dist/",
+      "playwright-report/",
+      "public/",
+      "test-results/",
+    ],
   },
   { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
   js.configs.recommended,

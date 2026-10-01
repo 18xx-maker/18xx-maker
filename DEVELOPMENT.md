@@ -106,6 +106,10 @@ pnpm test:run -u
 # CI=1 pnpm test:run to reproduce it locally
 CI=1 pnpm test:run
 
+# Run the end to end tests against the built site (see below)
+pnpm build
+pnpm test:e2e
+
 # Run all fixing linters
 pnpm fix
 
@@ -174,6 +178,67 @@ make clean/render
 The other make goals are all for [Docker
 development](https://github.com/18xx-maker/18xx-maker/blob/main/docker/README.md)
 
+## End To End Tests
+
+`e2e/*.spec.js` are [Playwright](https://playwright.dev) specs that drive the
+production build of the site in headless Chromium: opening bundled games,
+config persistence, loading a game from a file, the print button and an
+accessibility pass with axe. They run against `dist/site` served by
+`vite preview` on port 4318, so build first, and rebuild after changing any
+code (the specs never see the dev server):
+
+```shell
+# Install the browser (once, shared with the vitest browser tests)
+pnpm exec playwright install chromium --only-shell
+
+pnpm build
+pnpm test:e2e
+
+# Run one spec, or tests matching a name
+pnpm test:e2e e2e/load.spec.js
+pnpm test:e2e -g "persist"
+```
+
+To debug, run with `--ui` (watch mode, time travel, locator picker) or
+`--headed`, or step through with `PWDEBUG=1`. These need the full browser
+(`pnpm exec playwright install chromium`), not the `--only-shell` headless
+build used above and in CI. Failed tests in CI are retried
+once and keep a trace: download the `playwright-report` artifact from the
+failed run and open it with:
+
+```shell
+pnpm exec playwright show-report playwright-report
+pnpm exec playwright show-trace path/to/trace.zip
+```
+
+Notes:
+
+- The preview server listens on port 4318, or on `E2E_PORT` if set. A server
+  already listening there is not reused unless `E2E_REUSE_SERVER=1`, so a
+  leftover preview from another checkout is never tested by accident (the run
+  fails with the port in use instead).
+- Playwright 1.49 hangs loading ES modules on Node 24, so the config
+  (`playwright.config.cjs`) and the specs are CommonJS (`e2e/package.json`).
+  They can become ES modules after upgrading Playwright to 1.55 or newer.
+- Chromium has the file system access API, which opens a native file picker
+  that Playwright cannot drive. `e2e/load.spec.js` covers both flows: one test
+  removes `window.showOpenFilePicker` so the app uses the file input flow that
+  Firefox and Safari use (saved in the origin private file system), and the
+  other stubs `showOpenFilePicker` to return a handle to a real file in the
+  origin private file system, so the Chromium flow and its indexedDB handle
+  storage run for real.
+- `e2e/a11y.spec.js` fails on serious and critical axe violations. Existing
+  ones are listed per page, by rule and css selector, with reasons in its
+  `KNOWN_ISSUES`; fix them and delete the
+  entry (the spec fails if an entry no longer applies).
+- The vitest projects only include `src/` and `tests/`, so they never pick up
+  `e2e/`.
+
+An Electron smoke test (launch the built app with Playwright's `_electron`,
+open a game, check the window title) is not implemented yet. It would need
+`pnpm build:app` first, and covers what the web build cannot: the preload API
+(`window.api`), native file dialogs and the export button.
+
 ## File Layout
 
 At a high level the folder structure looks like:
@@ -189,6 +254,7 @@ At a high level the folder structure looks like:
 │   ├── sb            # The built esbuild for the storybook site
 │   └── renderer      # The built esbuild for the preload file
 ├── docker            # Stuff only related to docker builds
+├── e2e               # Playwright end to end specs for the built site
 ├── electron          # Electron related src files
 │   ├── assets        # Files that we need when building electorn
 │   ├── main          # The src for the electron main process
@@ -209,5 +275,5 @@ At a high level the folder structure looks like:
 │   ├── state         # Redux state store related files
 │   ├── styles        # All css files
 │   └── util          # Utility helpers
-└── tests             # Any e2e testing or test helper files
+└── tests             # Vitest integration tests and test helper files
 ```
