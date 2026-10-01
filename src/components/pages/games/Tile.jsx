@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router";
+import { Navigate, useParams } from "react-router";
 
 import Hex from "@/components/Hex";
 import Svg from "@/components/Svg";
@@ -8,14 +8,13 @@ import { useConfig, useGame } from "@/hooks";
 import { getTile } from "@/util";
 
 const TileSheet = () => {
-  const navigate = useNavigate();
   const { config } = useConfig();
   const game = useGame();
   const { id } = useParams();
   const { width: hexWidth } = config.tiles;
 
   if (!game.tiles) {
-    navigate(`/games/${game.meta.slug}/`);
+    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
   }
 
   let tile = getTile(tileDefs, game.tiles, id);

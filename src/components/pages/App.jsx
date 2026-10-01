@@ -196,7 +196,7 @@ const App = () => {
 
   return (
     <Container maxWidth="md">
-      <Paper elevation={5} className={classes.page}>
+      <Paper data-testid="app" elevation={5} className={classes.page}>
         <Typography variant="h4">{t("app.title")}</Typography>
         {data && (
           <Table size="small" className={classes.versions}>

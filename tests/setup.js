@@ -1,9 +1,46 @@
 import { configure } from "@testing-library/dom";
 import * as matchers from "@testing-library/jest-dom/matchers";
-import { expect } from "vitest";
+import { afterAll, afterEach, beforeAll, expect, vi } from "vitest";
+
+import { checkConsole } from "@tests/console.js";
 
 import "@tests/i18n";
 
 expect.extend(matchers);
 
-configure({ defaultHidden: true });
+// Big maps render slowly, especially with many test files running at once
+configure({ asyncUtilTimeout: 5000, defaultHidden: true });
+
+// React and library problems surface as console errors/warnings. Fail the
+// test that triggered them. Expected output is allowed per test with
+// allowConsole from @tests/console.js.
+const spies = [];
+
+const check = () => {
+  const messages = spies
+    .flatMap((spy) => spy.mock.calls)
+    .map((args) => args.join(" "));
+  spies.forEach((spy) => spy.mockClear());
+  const problem = checkConsole(messages);
+  if (problem) {
+    throw new Error(problem);
+  }
+};
+
+beforeAll(() => {
+  ["error", "warn"].forEach((level) =>
+    spies.push(vi.spyOn(console, level).mockImplementation(() => {})),
+  );
+});
+
+// Late calls (after the last test) fail the file instead of vanishing
+afterAll(() => {
+  try {
+    check();
+  } finally {
+    spies.forEach((spy) => spy.mockRestore());
+    spies.length = 0;
+  }
+});
+
+afterEach(check);

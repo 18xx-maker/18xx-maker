@@ -27,7 +27,9 @@ const Game = () => {
     }
   }, [dispatch, game, navigate, match]);
 
-  if (!game) {
+  // Wait for the game in the URL, a previously loaded game would otherwise
+  // render under the new URL
+  if (!game || game.meta.slug !== match.params.slug) {
     return null;
   }
 

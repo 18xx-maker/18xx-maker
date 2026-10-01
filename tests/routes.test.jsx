@@ -1,0 +1,39 @@
+import { screen } from "@testing-library/react";
+
+import { renderApp } from "@tests/helpers.jsx";
+import { matchedPattern, routePatterns } from "@tests/routes.js";
+import { docs, docsUrl, routes, visitedUrls } from "@tests/smoke.js";
+
+describe("route table", () => {
+  it("has a smoke test URL for every route", () => {
+    const visited = new Set(visitedUrls().map((url) => matchedPattern(url)));
+    expect([...visited].sort()).toEqual(routePatterns().sort());
+  });
+});
+
+describe("routes", () => {
+  it.for(routes)("%s renders its page", async ([route, testId]) => {
+    renderApp(route);
+    expect(await screen.findByTestId(testId)).toBeInTheDocument();
+  });
+
+  it("goes to the games list when a game does not exist", async () => {
+    renderApp("/games/NotAGame/map");
+    expect(await screen.findByTestId("games")).toBeInTheDocument();
+  });
+
+  it("has docs pages", () => {
+    expect(docs).toContain("index");
+  });
+
+  it.for(["index", ...docs.filter((doc) => doc !== "index")])(
+    "renders the %s docs page",
+    async (doc) => {
+      renderApp(docsUrl(doc));
+      const page = await screen.findByTestId(`docs-${doc}`);
+      expect(page).toBeInTheDocument();
+      // A missing markdown file would render an empty page
+      expect(page).toHaveTextContent(/\S/);
+    },
+  );
+});

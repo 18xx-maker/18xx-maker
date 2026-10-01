@@ -1,3 +1,3 @@
 import { gamePages } from "@tests/smoke.js";
 
-gamePages("single");
+gamePages("parts", 3, 4);

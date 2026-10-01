@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router";
+import { Navigate, useParams } from "react-router";
 
 import Charter from "@/components/Charter";
 import PageSetup from "@/components/PageSetup";
@@ -7,7 +7,6 @@ import { getCharterData } from "@/util";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
 
 const Charters = () => {
-  const navigate = useNavigate();
   const { config } = useConfig();
   const charters = config.charters;
   const paper = config.paper;
@@ -17,7 +16,7 @@ const Charters = () => {
   const { index } = useParams();
 
   if (!game.companies) {
-    navigate(`/games/${game.meta.slug}/`);
+    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
   }
 
   let gameCompanies = overrideCompanies(
