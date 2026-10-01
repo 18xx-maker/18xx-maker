@@ -8,6 +8,9 @@
   "repository": "github:18xx-maker/18xx-maker",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": ">=24"
+  },
   "main": "./dist/main/index.cjs",
   "bin": {
     "maker": "bin/maker.js"
