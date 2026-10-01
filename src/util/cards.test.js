@@ -55,11 +55,23 @@ describe("getCardData", () => {
   });
 
   it("should not reserve pin space for the free layout", () => {
-    const free = getCardData({ ...cards, layout: "free" }, paper);
+    // 175 total size: 1050 fits 6 but 1025 (with the 25 reserved) only 5
+    const size = {
+      ...cards,
+      width: 100,
+      height: 100,
+      cutlines: 25,
+      bleed: 12.5,
+    };
+    const pinned = getCardData(size, paper);
+    const free = getCardData({ ...size, layout: "free" }, paper);
 
-    expect(free.portrait.perColumn).toBe(4);
-    expect(free.landscape.perRow).toBe(3);
-    expect(free.landscape.perColumn).toBe(3);
+    expect(pinned.portrait.perColumn).toBe(5);
+    expect(pinned.landscape.perRow).toBe(5);
+    expect(free.portrait.perColumn).toBe(6);
+    expect(free.landscape.perRow).toBe(6);
+    expect(free.usableHeight).toBe(1050);
+    expect(pinned.usableHeight).toBe(1025);
   });
 
   it("should convert sizes to css inches", () => {

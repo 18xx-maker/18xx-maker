@@ -4,12 +4,11 @@ import { describe, expect, it } from "vitest";
 
 import preview from "../.storybook/preview.jsx";
 
-setProjectAnnotations({
-  ...preview,
-  initialGlobals: preview.initialGlobals,
-});
+setProjectAnnotations(preview);
 
-const files = import.meta.glob("../src/**/*.stories.js", { eager: true });
+const files = import.meta.glob("../src/**/*.stories.@(js|jsx|mjs|ts|tsx)", {
+  eager: true,
+});
 
 // Every story renders, so a story or the component it shows cannot rot
 describe.each(Object.entries(files))("%s", (file, module) => {
@@ -18,6 +17,11 @@ describe.each(Object.entries(files))("%s", (file, module) => {
   it.each(Object.entries(stories))("%s renders", async (name, Story) => {
     const { container } = render(<Story />);
 
-    expect(container).not.toBeEmptyDOMElement();
+    // Stories are wrapped in an svg, so check that something is inside it
+    /* eslint-disable testing-library/no-container, testing-library/no-node-access */
+    const svg = container.querySelector("svg");
+    expect(svg).not.toBeNull();
+    expect(svg.children.length).toBeGreaterThan(0);
+    /* eslint-enable testing-library/no-container, testing-library/no-node-access */
   });
 });

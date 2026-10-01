@@ -132,8 +132,9 @@ pnpm build:sb
 `tests/snapshots.test.jsx` renders every print page (map, market, par, revenue,
 tiles, tile manifest, tokens, cards, charters, background) for a few games and
 compares the markup to the committed files in `tests/__snapshots__/<game>/`.
-Generated ids are renumbered and long decimals are rounded to 3 places so the
-files are the same on every platform.
+Generated ids are renumbered, long decimals are rounded to 3 places, text
+measurements (`getBBox`) are stubbed to a fixed size, and the browser locale is
+fixed to `en-US`, so the files do not depend on the platform or installed fonts.
 
 If a snapshot test fails, the printed output changed. If that was intended (a
 tile or atom change, for example), check the diff and update the snapshots:
@@ -144,7 +145,9 @@ pnpm test:run -u
 
 Review the changed files in `tests/__snapshots__` before committing them. CI
 (`CI=true`) never writes snapshots, a missing or different snapshot fails the
-run. To lock down another game, add its slug to `tests/snapshots.test.jsx` and
+run. Vitest does not report snapshot files that no test writes anymore, so a
+test in `tests/snapshots.test.jsx` fails and lists them: delete those files. To
+lock down another game, add its slug to `tests/snapshots.test.jsx` and
 run `pnpm test:run -u`.
 
 ### Make

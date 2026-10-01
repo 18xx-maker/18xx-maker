@@ -8,7 +8,7 @@ export default {
     svg: true,
   },
   args: {
-    border: true,
+    border: false,
   },
 };
 
@@ -20,4 +20,8 @@ export const Large = {
 
 export const Wide = {
   args: { width: 30 },
+};
+
+export const Border = {
+  args: { border: true },
 };

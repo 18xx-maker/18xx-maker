@@ -21,7 +21,7 @@ export default {
   args: {
     type: "straight",
     side: 1,
-    border: true,
+    border: false,
   },
   argTypes: {
     type: {
@@ -54,4 +54,8 @@ export const NarrowGauge = {
 
 export const Dual = {
   args: { gauge: "dual" },
+};
+
+export const Border = {
+  args: { border: true },
 };

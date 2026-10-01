@@ -8,18 +8,18 @@ export default {
     svg: true,
   },
   args: {
-    border: true,
+    border: false,
   },
 };
 
 export const Standard = {};
 
-export const WithoutBorder = {
-  args: { border: false },
+export const Border = {
+  args: { border: true },
 };
 
 export const WideBorder = {
-  args: { borderWidth: 6 },
+  args: { border: true, borderWidth: 6 },
 };
 
 export const Named = {

@@ -373,16 +373,21 @@ describe("getMapData", () => {
       expect(flat.horizontal).toBe(true);
       expect(flat.maxX).toBe(util.maxMapY(flat.hexes));
       expect(flat.maxY).toBe(util.maxMapX(flat.hexes));
+    });
+
+    const pointy = util.getMapData(
+      { ...games["1889"], info: { ...games["1889"].info, orientation: "" } },
+      "outside",
+      150,
+    );
+
+    it("should swap the hex positions", () => {
+      expect(flat.hexX(2, 3)).toBe(pointy.hexY(2, 3));
+      expect(flat.hexY(2, 3)).toBe(pointy.hexX(2, 3));
       expect(flat.hexX(2, 3)).not.toBe(flat.hexY(2, 3));
     });
 
     it("should swap the print size", () => {
-      const pointy = util.getMapData(
-        { ...games["1889"], info: { ...games["1889"].info, orientation: "" } },
-        "outside",
-        150,
-      );
-
       expect(flat.totalWidth).toBe(pointy.totalHeight);
       expect(flat.totalHeight).toBe(pointy.totalWidth);
       expect(flat.printWidth).toBe(pointy.printHeight);
@@ -393,13 +398,20 @@ describe("getMapData", () => {
     const game = {
       info: {},
       map: [
-        { hexes: [{ hexes: ["A1", "A3"] }], borders: [{ id: 1 }, { id: 2 }] },
+        {
+          hexes: [{ hexes: ["A1", "A3"] }],
+          borders: [{ id: 1 }, { id: 2 }],
+          borderTexts: [{ text: "a" }],
+          lines: [{ id: "l1" }],
+        },
         {
           copy: 0,
           remove: ["A3"],
           removeBorders: [{ id: 1 }],
           hexes: [{ hexes: ["B2"] }],
           borders: [{ id: 3 }],
+          borderTexts: [{ text: "b" }],
+          lines: [{ id: "l2" }],
         },
       ],
     };
@@ -407,6 +419,9 @@ describe("getMapData", () => {
 
     expect(data.hexes.map((h) => h.hexes)).toEqual([["A1"], ["B2"]]);
     expect(data.borders).toEqual([{ id: 2 }, { id: 3 }]);
+    // The copied map comes first
+    expect(data.borderTexts).toEqual([{ text: "a" }, { text: "b" }]);
+    expect(data.lines).toEqual([{ id: "l1" }, { id: "l2" }]);
   });
 });
 

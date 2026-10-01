@@ -110,6 +110,37 @@ describe("getMarketData", () => {
     expect(data.totalHeight).toBeGreaterThan(85 + 50);
   });
 
+  it("should grow to fit a par chart displayed to the right", () => {
+    const stock = {
+      type: "2D",
+      market: [[1, 2]],
+      par: { values: [[1]] },
+      display: { par: { x: 20, y: 0 } },
+    };
+    const data = getMarketData(stock, config);
+    const par = getParData(stock, config);
+
+    // The par chart starts 20 cells (of 70) to the right
+    expect(data.totalWidth).toBe(par.totalWidth + 70 * 20);
+    expect(data.totalWidth).toBeGreaterThan(70 * 2 + 10);
+  });
+
+  it("should offset a par chart by half cells in a diagonal market", () => {
+    const stock = {
+      type: "1Diag",
+      market: [1, 2, 3, 4],
+      par: { values: [[1], [2], [3], [4], [5], [6], [7], [8]] },
+      display: { par: { x: 0, y: 2 } },
+    };
+    const data = getMarketData(stock, config);
+    const par = getParData(stock, config);
+
+    // A diagonal cell is 2 cells tall but the par chart rows are half that
+    expect(data.height).toBe(2 * 85);
+    expect(data.totalHeight).toBe(par.totalHeight + 85 * 2 + 50);
+    expect(data.totalHeight).toBeGreaterThan(2 * data.height + 50);
+  });
+
   it("should default unknown types to empty sizes", () => {
     const data = getMarketData({ market: [] }, config);
 

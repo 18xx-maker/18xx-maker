@@ -45,6 +45,9 @@ export default defineWorkspace([
         headless: true,
         name: "chromium",
         provider: "playwright",
+        providerOptions: { context: { locale: "en-US" } },
+        // A failure screenshot changes the browser zoom for later tests
+        screenshotFailures: false,
       },
       include: ["tests/**/*.test.jsx", "src/**/*.test.jsx"],
       name: "component",

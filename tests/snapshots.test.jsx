@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 
 import { findGame, parts } from "@tests/smoke.js";
 import { printMarkup } from "@tests/snapshot.js";
@@ -13,12 +13,32 @@ const pages = parts.filter(
   ({ id }) => id !== "info" && !id.includes("?paginated"),
 );
 
+// Text measurements depend on the installed fonts, so use a fixed size
+beforeAll(() => {
+  vi.spyOn(SVGGraphicsElement.prototype, "getBBox").mockReturnValue({
+    height: 22,
+    width: 110,
+    x: 0,
+    y: 0,
+  });
+});
+
+afterAll(() => {
+  vi.restoreAllMocks();
+});
+
+// Every snapshot file the tests below generate, relative to the snapshot
+// directory. The obsolete check compares this to the files on disk.
+const expected = [];
+
 describe.each(slugs)("%s snapshots", (slug) => {
   const game = findGame(slug);
 
   pages
     .filter((entry) => entry.has(game))
     .forEach((entry) => {
+      expected.push(`${slug}/${entry.id}.html`);
+
       it(`${entry.id} output is unchanged`, async () => {
         const html = await printMarkup(slug, entry.path(game), entry.suffix);
         await expect(html).toMatchFileSnapshot(
@@ -26,4 +46,21 @@ describe.each(slugs)("%s snapshots", (slug) => {
         );
       });
     });
+});
+
+// vitest never reports snapshot files that no test writes anymore (a removed
+// game or page), so check for them here
+describe("snapshot files", () => {
+  it("has no obsolete files", () => {
+    const files = import.meta.glob("./__snapshots__/**/*", {
+      eager: true,
+      query: "?raw",
+    });
+    const actual = Object.keys(files).map((file) =>
+      file.replace("./__snapshots__/", ""),
+    );
+
+    // The diff lists the extra files
+    expect(actual.sort()).toEqual([...expected].sort());
+  });
 });

@@ -93,6 +93,45 @@ describe("getTileSheetContext", () => {
     expect(c.getY(17)).toBeCloseTo(c.getY(0));
   });
 
+  // Absolute positions, derived by hand from the 800x1050 page at hexWidth 150
+  // (106.25 for the small die) so a changed margin or gap is caught
+  it("should place the small die at fixed positions", () => {
+    const c = getTileSheetContext("smallDie", paper, 150);
+
+    // width 122.688, extraX (800 - 5.5 * width - 6 * 20.73) / 2 = 0.4195
+    expect(c.getX(0)).toBeCloseTo(61.764, 2);
+    // height / 2 + 25 + 37.5
+    expect(c.getY(0)).toBeCloseTo(115.625, 2);
+    // Columns overlap by 9.94
+    expect(c.getX(9) - c.getX(0)).toBeCloseTo(c.width - 9.94, 5);
+    // Tile 59 is the 9th tile of column 7
+    expect(c.getX(59)).toBeCloseTo(738.246, 2);
+    expect(c.getY(59)).toBeCloseTo(965.625, 2);
+  });
+
+  it("should place the individual layout at fixed positions", () => {
+    const c = getTileSheetContext("individual", paper, 150);
+
+    // Bleed width 196.299 / 2 + (800 - 4 * 173.205 - 3 * 12.5) / 2
+    expect(c.getX(0)).toBeCloseTo(132.989, 2);
+    // 75 + (1050 - 6 * 150 - 5 * 12.5) / 2
+    expect(c.getY(0)).toBeCloseTo(118.75, 2);
+    expect(c.getX(23)).toBeCloseTo(690.104, 2);
+    expect(c.getY(23)).toBeCloseTo(931.25, 2);
+  });
+
+  it("should place the offset layout at fixed positions", () => {
+    const c = getTileSheetContext("offset", paper, 150);
+
+    // Bleed width 196.299 / 2 + (800 - 4 * 173.205 - 173.205 / 2 - 20) / 2
+    expect(c.getX(0)).toBeCloseTo(98.438, 2);
+    // Bleed height 170 / 2 + (1050 - 6 * 150 - 20) / 2
+    expect(c.getY(0)).toBeCloseTo(150, 2);
+    // Last tile is in an odd row, shifted half a tile
+    expect(c.getX(23)).toBeCloseTo(704.656, 2);
+    expect(c.getY(23)).toBeCloseTo(900, 2);
+  });
+
   it.each(layouts)(
     "should never place two tiles on top of each other (%s)",
     (layout) => {

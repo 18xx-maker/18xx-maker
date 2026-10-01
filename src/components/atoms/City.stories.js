@@ -9,7 +9,7 @@ export default {
   },
   args: {
     size: 1,
-    border: true,
+    border: false,
   },
   argTypes: {
     size: {
@@ -35,4 +35,8 @@ export const Quad = {
 
 export const Named = {
   args: { name: { name: "Albany" } },
+};
+
+export const Border = {
+  args: { border: true },
 };
