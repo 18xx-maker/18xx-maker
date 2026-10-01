@@ -200,7 +200,9 @@ pnpm test:e2e -g "persist"
 ```
 
 To debug, run with `--ui` (watch mode, time travel, locator picker) or
-`--headed`, or step through with `PWDEBUG=1`. Failed tests in CI are retried
+`--headed`, or step through with `PWDEBUG=1`. These need the full browser
+(`pnpm exec playwright install chromium`), not the `--only-shell` headless
+build used above and in CI. Failed tests in CI are retried
 once and keep a trace: download the `playwright-report` artifact from the
 failed run and open it with:
 
@@ -211,15 +213,23 @@ pnpm exec playwright show-trace path/to/trace.zip
 
 Notes:
 
+- The preview server listens on port 4318, or on `E2E_PORT` if set. A server
+  already listening there is not reused unless `E2E_REUSE_SERVER=1`, so a
+  leftover preview from another checkout is never tested by accident (the run
+  fails with the port in use instead).
 - Playwright 1.49 hangs loading ES modules on Node 24, so the config
   (`playwright.config.cjs`) and the specs are CommonJS (`e2e/package.json`).
   They can become ES modules after upgrading Playwright to 1.55 or newer.
 - Chromium has the file system access API, which opens a native file picker
-  that Playwright cannot drive. `e2e/load.spec.js` removes
-  `window.showOpenFilePicker` so the app uses the file input flow that
-  Firefox and Safari use (saved in the origin private file system).
+  that Playwright cannot drive. `e2e/load.spec.js` covers both flows: one test
+  removes `window.showOpenFilePicker` so the app uses the file input flow that
+  Firefox and Safari use (saved in the origin private file system), and the
+  other stubs `showOpenFilePicker` to return a handle to a real file in the
+  origin private file system, so the Chromium flow and its indexedDB handle
+  storage run for real.
 - `e2e/a11y.spec.js` fails on serious and critical axe violations. Existing
-  ones are listed with reasons in its `KNOWN_ISSUES`; fix them and delete the
+  ones are listed per page, by rule and css selector, with reasons in its
+  `KNOWN_ISSUES`; fix them and delete the
   entry (the spec fails if an entry no longer applies).
 - The vitest projects only include `src/` and `tests/`, so they never pick up
   `e2e/`.

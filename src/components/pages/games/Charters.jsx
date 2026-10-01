@@ -304,7 +304,12 @@ const Charters = () => {
   }
 
   return (
-    <div className="charters" data-testid={`game-${game.meta.slug}-charters`}>
+    <div
+      className="charters"
+      data-testid={`game-${game.meta.slug}-charters`}
+      data-layout={charters.layout}
+      data-per-page={data.perPage}
+    >
       <style>{css}</style>
       {pages}
       <PageSetup landscape={false} />

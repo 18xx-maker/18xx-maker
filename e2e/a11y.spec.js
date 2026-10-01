@@ -2,29 +2,105 @@ const AxeBuilder = require("@axe-core/playwright").default;
 const { expect, test } = require("@playwright/test");
 
 // Known accessibility problems that are not fixed yet, found by the first run
-// of this suite. Each entry is "<page name>:<axe rule id>" with the reason. A
-// listed rule is allowed on that page only, and the test fails when it stops
-// happening so the entry gets removed. Do not add to this list to make a
-// failure go away: fix the page, or record the violation here on purpose.
-const KNOWN_ISSUES = {
-  // ListItemButton with component={RouterLink} renders <a> directly inside
-  // <ul> in the game, docs and elements side navs (src/components/nav/*).
-  // Fix: wrap each in <ListItem disablePadding>
-  "game info:list": "side nav links are direct children of <ul>",
-  "docs:list": "side nav links are direct children of <ul>",
-  "config drawer:list": "side nav links are direct children of <ul>",
-  // The stock market column/diag/par number inputs have no accessible name
-  // (src/components/config)
-  "config drawer:label": "stock.column, stock.diag, stock.par inputs",
-  // Links in the config drawer's descriptions are only underlined by color
-  "config drawer:link-in-text-block": "inline links in config descriptions",
-  // A form control (FormControl with a Select) inside the side nav's
-  // ListItemButton in GameNav
-  "config drawer:nested-interactive": "controls inside a ListItemButton",
-  // The scrollable game area is not keyboard focusable while the drawer is
-  // open
-  "config drawer:scrollable-region-focusable": "scrollable page area",
+// of this suite. Keyed by page name, each entry is an axe rule plus the css
+// selectors of the nodes that violate it (see normalize() for how generated
+// class names are written). A violating node that is not listed fails the
+// test, and so does a listed node that no longer violates, so the entry gets
+// removed. Do not add to this list to make a failure go away: fix the page,
+// or record the violation here on purpose.
+const SIDE_NAV = ".MuiDrawer-paperAnchorDockedLeft>.css";
+
+// Same problems on every game page (game info, map and the config drawer)
+const GAME_NAV_NESTED = {
+  // A form control (FormControl with a Select) inside a ListItemButton in
+  // GameNav (src/components/nav)
+  rule: "nested-interactive",
+  targets: [
+    `${SIDE_NAV}:nth-child(4)>.css.MuiListItemButton-root[role="button"]`,
+  ],
+  reason: "controls inside a ListItemButton",
 };
+const GAME_VIEWPORT_SCROLL = {
+  // The scrollable game area (Viewport) is not keyboard focusable
+  rule: "scrollable-region-focusable",
+  targets: [".jss"],
+  reason: "scrollable game area",
+};
+
+// ListItemButton with component={RouterLink} renders <a> directly inside <ul>
+// in the game, docs and elements side navs (src/components/nav/*).
+// Fix: wrap each in <ListItem disablePadding>
+const SIDE_NAV_LIST = (targets) => ({
+  rule: "list",
+  targets,
+  reason: "side nav links are direct children of <ul>",
+});
+
+const KNOWN_ISSUES = {
+  "game info": [
+    SIDE_NAV_LIST([
+      `${SIDE_NAV}:nth-child(2)`,
+      `${SIDE_NAV}:nth-child(4)`,
+      // The page's own <List> in src/components/pages/games/Info.jsx
+      ".MuiPaper-elevation5>.css",
+    ]),
+  ],
+  "game map": [
+    SIDE_NAV_LIST([
+      `${SIDE_NAV}:nth-child(2)`,
+      `${SIDE_NAV}:nth-child(4)`,
+      `${SIDE_NAV}:nth-child(6)`,
+    ]),
+    GAME_NAV_NESTED,
+    GAME_VIEWPORT_SCROLL,
+  ],
+  docs: [
+    SIDE_NAV_LIST(
+      [2, 4, 6, 8].map(
+        (n) => `${SIDE_NAV}.MuiList-root.MuiList-padding:nth-child(${n})`,
+      ),
+    ),
+  ],
+  "config drawer": [
+    SIDE_NAV_LIST([
+      `${SIDE_NAV}:nth-child(2)`,
+      `${SIDE_NAV}:nth-child(4)`,
+      `${SIDE_NAV}:nth-child(6)`,
+    ]),
+    GAME_NAV_NESTED,
+    GAME_VIEWPORT_SCROLL,
+    {
+      // These number inputs have no accessible name (src/components/config)
+      rule: "label",
+      targets: [
+        "#stock\\.column",
+        "#stock\\.diag",
+        "#stock\\.par",
+        "#charters\\.border",
+        "#cards\\.border",
+      ],
+      reason: "config inputs without a label",
+    },
+    {
+      // Links in the config drawer's descriptions are only underlined by
+      // color
+      rule: "link-in-text-block",
+      targets: [
+        'a[href$="logos"]',
+        ".MuiTypography-caption.css.MuiTypography-gutterBottom:nth-child(11)>p>a",
+      ],
+      reason: "inline links in config descriptions",
+    },
+  ],
+};
+
+// Generated class names (emotion's css-<hash>, jss<number>) change between
+// builds, so they are reduced to ".css" and ".jss", and spaces around ">" are dropped
+const normalize = (target) =>
+  target
+    .replace(/\s*>\s*/g, ">")
+    .replace(/\.css-[a-z0-9]+/g, ".css")
+    .replace(/\.jss\d+/g, ".jss");
 
 const pages = [
   { name: "home", url: "/", ready: (page) => page.getByTestId("home") },
@@ -37,6 +113,11 @@ const pages = [
     name: "game info",
     url: "/games/1889",
     ready: (page) => page.getByTestId("game-1889"),
+  },
+  {
+    name: "game map",
+    url: "/games/18Test/map",
+    ready: (page) => page.getByTestId("game-18Test-map"),
   },
   {
     name: "config drawer",
@@ -56,30 +137,30 @@ for (const { name, url, ready } of pages) {
   }) => {
     await page.goto(url);
     await expect(ready(page)).toBeVisible();
-    // Let the drawer and page transitions finish
-    await page.waitForTimeout(500);
+    // Wait for the drawer and page transitions to finish
+    await page.evaluate(() =>
+      Promise.all(document.getAnimations().map((a) => a.finished)),
+    );
 
     const results = await new AxeBuilder({ page }).analyze();
-    const seen = results.violations
-      .filter((v) => ["serious", "critical"].includes(v.impact))
-      .filter((v) => {
-        const known = `${name}:${v.id}` in KNOWN_ISSUES;
-        return !known;
-      });
+    const known = KNOWN_ISSUES[name] || [];
+    const found = [];
+    for (const v of results.violations) {
+      if (!["serious", "critical"].includes(v.impact)) continue;
+      for (const node of v.nodes) {
+        found.push({ rule: v.id, target: normalize(node.target.join(" ")) });
+      }
+    }
 
-    expect(
-      seen.map((v) => ({
-        id: v.id,
-        impact: v.impact,
-        help: v.help,
-        nodes: v.nodes.slice(0, 3).map((n) => n.target.join(" ")),
-      })),
-    ).toEqual([]);
+    const isKnown = ({ rule, target }) =>
+      known.some((k) => k.rule === rule && k.targets.includes(target));
+    expect(found.filter((f) => !isKnown(f))).toEqual([]);
 
     // Known issues that no longer happen should be removed from the list
-    const ids = results.violations.map((v) => v.id);
-    const stale = Object.keys(KNOWN_ISSUES).filter(
-      (key) => key.startsWith(`${name}:`) && !ids.includes(key.split(":")[1]),
+    const stale = known.flatMap((k) =>
+      k.targets
+        .filter((t) => !found.some((f) => f.rule === k.rule && f.target === t))
+        .map((t) => `${k.rule}: ${t}`),
     );
     expect(stale).toEqual([]);
   });

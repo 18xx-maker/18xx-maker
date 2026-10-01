@@ -1,5 +1,22 @@
 const { expect, test } = require("@playwright/test");
 
+test("the app nav reaches the games list and the docs", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByTestId("home")).toBeVisible();
+
+  await page.getByRole("link", { name: "Load Games" }).click();
+  await expect(page).toHaveURL(/\/games\/$/);
+  await expect(page.getByTestId("games")).toBeVisible();
+
+  await page.getByRole("link", { name: "Help" }).click();
+  await expect(page).toHaveURL(/\/docs\//);
+  await expect(page.locator("[data-testid^='docs-']")).toBeVisible();
+
+  await page.getByRole("link", { name: "Home" }).click();
+  await expect(page).toHaveURL(/\/$/);
+  await expect(page.getByTestId("home")).toBeVisible();
+});
+
 test.describe("bundled games", () => {
   test("opens 18Test from the games list and walks through its pages", async ({
     page,

@@ -10,6 +10,15 @@ test("config changes persist across a reload and show on the page", async ({
   await layout.click();
   await page.getByRole("option", { name: "3x1", exact: true }).click();
   await expect(layout).toHaveText("3x1");
+  await expect(page.getByTestId("game-18Test-charters")).toHaveAttribute(
+    "data-layout",
+    "3x1",
+  );
+  // 3x1 puts three charters on a page, the default layout two
+  await expect(page.getByTestId("game-18Test-charters")).toHaveAttribute(
+    "data-per-page",
+    "3",
+  );
 
   // Only the difference from the defaults is stored
   await expect
@@ -22,12 +31,25 @@ test("config changes persist across a reload and show on the page", async ({
   await expect(
     page.getByRole("combobox", { name: /Charter Layout/ }),
   ).toHaveText("3x1");
+  await expect(page.getByTestId("game-18Test-charters")).toHaveAttribute(
+    "data-layout",
+    "3x1",
+  );
+  // 3x1 puts three charters on a page, the default layout two
+  await expect(page.getByTestId("game-18Test-charters")).toHaveAttribute(
+    "data-per-page",
+    "3",
+  );
 
   // And the drawer's reset clears it again
   await page.getByRole("button", { name: "Reset To Defaults" }).click();
   await expect
     .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("config"))))
     .toEqual({});
+  await expect(page.getByTestId("game-18Test-charters")).toHaveAttribute(
+    "data-per-page",
+    "2",
+  );
 });
 
 test("the config drawer opens and closes, reflected in the url", async ({
