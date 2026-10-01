@@ -63,7 +63,11 @@ const Tokens = () => {
 
   return (
     <ColorContext.Provider value="companies">
-      <div className="b18" style={{ width: `60px` }}>
+      <div
+        className="b18"
+        data-testid={`game-${game.meta.slug}-b18-tokens`}
+        style={{ width: `60px` }}
+      >
         <div className="tokens">
           {companyTokenNodes}
           {extraTokenNodes}

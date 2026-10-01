@@ -31,7 +31,7 @@ const B18Map = () => {
 
   return (
     <MapOrientation>
-      <div className="map">
+      <div className="map" data-testid={`game-${game.meta.slug}-b18-map`}>
         <Svg
           preserveAspectRatio="none"
           width={data.b18TotalWidth + offset}

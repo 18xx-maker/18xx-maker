@@ -131,6 +131,7 @@
       "!.*",
       "!bin${/*}",
       "!certificate.p12",
+      "!coverage${/*}",
       "!dist/app${/*}",
       "!dist/sb${/*}",
       "!dist/site${/*}",
@@ -152,7 +153,8 @@
       "!svgo.config.js",
       "!tests${/*}",
       "!vite.config.js",
-      "!vitest.config.js"
+      "!vitest.config.js",
+      "!vitest.workspace.js"
     ],
     "afterSign": "electron/notarize.js",
     "mac": {
@@ -236,8 +238,8 @@
     "@testing-library/user-event": "^14.5.2",
     "@vitejs/plugin-react-swc": "^3.7.1",
     "@vitest/browser": "^2.1.9",
-    "@vitest/coverage-v8": "^2.1.5",
-    "@vitest/ui": "^2.1.5",
+    "@vitest/coverage-v8": "^2.1.9",
+    "@vitest/ui": "^2.1.9",
     "browserslist": "^4.24.2",
     "browserslist-to-esbuild": "^2.1.1",
     "deep-object-diff": "^1.1.9",

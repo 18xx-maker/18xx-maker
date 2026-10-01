@@ -92,6 +92,22 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Dependencies
         run: pnpm install
+      - name: Playwright Version
+        id: playwright-version
+        shell: bash
+        run: echo "PLAYWRIGHT_VERSION=$(pnpm exec playwright --version | awk '{ print $2 }')" >> $GITHUB_OUTPUT
+      - name: Playwright Cache
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: browsers
+          key: ${{ matrix.os.slug }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
+      - name: Playwright Install
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: pnpm exec playwright install chromium --only-shell ${{ matrix.os.slug == 'linux' && '--with-deps' || '' }}
+      - name: Playwright Dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true' && matrix.os.slug == 'linux'
+        run: pnpm exec playwright install-deps chromium
       - name: Test
         run: pnpm test
       - name: Coverage
