@@ -14,6 +14,7 @@ pre-commit:
       glob: "*.json"
       exclude:
         - "package.json"
+        - "e2e/package.json"
         - "release-please-config.json"
         - ".release-please-manifest.json"
         - "public/*"

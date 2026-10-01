@@ -7,3 +7,7 @@ CHANGELOG.md
 
 # pnpm
 pnpm-lock.yaml
+
+# Playwright output
+playwright-report/
+test-results/
