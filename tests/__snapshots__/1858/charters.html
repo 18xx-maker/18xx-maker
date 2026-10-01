@@ -1,0 +1,3443 @@
+<div class="charters" data-testid="game-1858-charters">
+<style>
+.cutlines {
+    padding: 0.25in;
+    width: 8in;
+    height: 5.25in;
+}
+
+.cutlines--minor {
+    height: 3.5in;
+}
+
+.cutlines--half {
+    width: 4in;
+}
+
+.cutlines:after,
+.cutlines:before {
+    width: 0.25in;
+    height: 4.5in;
+    top: 0.375in;
+}
+
+.cutlines--minor:after,
+.cutlines--minor:before {
+    height: 2.75in;
+}
+
+.cutlines--half:after,
+.cutlines--half:before {
+    width: 3.25in;
+}
+
+.cutlines > div:after,
+.cutlines > div:before {
+    width: 7.25in;
+    height: 0.25in;
+    left: 0.125in;
+}
+
+.cutlines > div:after {
+    bottom: -0.25in;
+}
+
+.cutlines > div:before {
+    top: -0.25in;
+}
+
+.cutlines--half > div:before,
+.cutlines--half > div:after {
+    width: 3.25in;
+}
+
+.charter,
+.charter__bleed {
+    height: 4.75in;
+    width: 7.5in;
+}
+
+.charter--minor,
+.charter--minor .charter__bleed {
+    height: 3in;
+}
+
+.charter--half,
+.charter--half .charter__bleed {
+    width: 3.5in;
+}
+
+.charter__body {
+    border: 0px solid black;
+    margin: 0.125in;
+    width: 7.25in;
+    height: 4.5in;
+}
+
+.charter--minor .charter__body {
+    height: 2.75in;
+}
+
+.charter--half .charter__body {
+    width: 3.25in;
+}
+
+.charter--color .charter__hr {
+    height: calc(1.063in + 0.125in);
+}
+.charter--color.charter--minor .charter__hr {
+    height: calc(0.875in + 0.125in);
+}
+
+.charter--carth .charter__hr {
+    top: calc(1.125in + 0.125in);
+}
+
+.charter--carth.charter--minor .charter__hr,
+.charter--carth.charter--half .charter__hr {
+    top: calc(0.875in + 0.125in);
+}
+</style>
+<div class="cutlines">
+<div class="charter charter--color">
+<div class="charter__bleed" style="background-color: rgb(255, 255, 255);">
+<div class="charter__hr" style="background-color: rgb(33, 101, 174);">
+</div>
+<div class="charter__body">
+<div class="charter__name" style="color: rgb(255, 255, 255); padding-right: 2.075in;">
+<div style="font-family: display; font-size: 20pt; line-height: 22pt; font-weight: bold; font-style: normal;">Andalucian Railway</div>
+</div>
+<div class="charter__logo">
+<svg viewBox="-37.5 -37.5 75 75">
+<g transform="rotate(0)">
+<clipPath id="id-0">
+<circle cx="0" cy="0" r="37.5">
+</circle>
+</clipPath>
+<g clip-path="url(#id-0)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="37.5" fill="#2165ae" stroke="none">
+</circle>
+</g>
+<text font-family="display" font-size="26.25" text-anchor="middle" stroke-width="0.5" stroke="none" fill="rgb(255, 255, 255)" x="0" y="9.023">A</text>
+</g>
+<circle cx="0" cy="0" r="37.5" fill="none" stroke="white" stroke-width="1">
+</circle>
+</g>
+</svg>
+</div>
+<div class="charter__tokens">
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-1">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-1)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(255, 255, 255)" font-size="11" font-weight="normal" text-anchor="middle">Free</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-2">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-2)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(255, 255, 255)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-3">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-3)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(255, 255, 255)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+</div>
+<div class="charter__trains">Trains<div class="charter__phase">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Train</th>
+<th>Price</th>
+<th>#</th>
+<th>Limit</th>
+<th>Phased</th>
+<th>Rust</th>
+<th>Tiles</th>
+<th class="phase__notes">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2H</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>6</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(255, 230, 0);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>4H/2M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P200</li>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>5</li>
+<li>5</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Green Privates and narrow gauge available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6H/3M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">6H</li>
+<li style="background-color: rgb(89, 181, 120);">3M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P300</li>
+<li>P200</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>4</li>
+<li>4</li>
+</ul>
+</td>
+<td>2/3</td>
+<td>
+<ul>
+<li>2H</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Rust on 5th grey train</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5E/4M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">5E</li>
+<li style="background-color: rgb(191, 129, 86);">4M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P500</li>
+<li>P400</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>3</li>
+<li>3</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Privates close at end of OR</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6E/5M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">6E</li>
+<li style="background-color: rgb(191, 129, 86);">5M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P650</li>
+<li>P550</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>2</li>
+<li>2</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>4H</li>
+<li>2M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>7E/6M</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">7E</li>
+<li style="background-color: rgb(169, 175, 178);">6M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P800</li>
+<li>P700</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>6H</li>
+<li>3M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>5D available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5D</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">5D</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P1,100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="charter__treasury">Treasury<dl>
+<dt>Stock Round</dt>
+<dd>
+<ol>
+<li>
+<span>Sell any number of certificates</span>
+</li>
+<li>
+<span>Convert to 10-share</span>
+</li>
+<li>
+<span>Exchange private</span>
+</li>
+<li>
+<span>Buy one certificate</span>
+</li>
+<li>
+<span>Start a public company</span>
+</li>
+<li>
+<span>Auction private company</span>
+</li>
+</ol>
+</dd>
+<dt>Operating Round</dt>
+<dd>
+<ol>
+<li>
+<span>Lay Tile(s)</span>
+</li>
+<li>
+<span>Place Token</span>
+</li>
+<li>
+<span>Run Trains</span>
+</li>
+<li>
+<span>Revenue and Dividends</span>
+</li>
+<li>
+<span>Purchase Trains</span>
+</li>
+<li>
+<span>Issue Shares</span>
+</li>
+</ol>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cutlines">
+<div class="charter charter--color">
+<div class="charter__bleed" style="background-color: rgb(255, 255, 255);">
+<div class="charter__hr" style="background-color: rgb(44, 141, 205);">
+</div>
+<div class="charter__body">
+<div class="charter__name" style="color: rgb(17, 10, 12); padding-right: 2.075in;">
+<div style="font-family: display; font-size: 20pt; line-height: 22pt; font-weight: bold; font-style: normal;">Alamanza, Valencia &amp; Tarragona Railway</div>
+</div>
+<div class="charter__logo">
+<svg viewBox="-37.5 -37.5 75 75">
+<g transform="rotate(0)">
+<clipPath id="id-4">
+<circle cx="0" cy="0" r="37.5">
+</circle>
+</clipPath>
+<g clip-path="url(#id-4)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="37.5" fill="#2c8dcd" stroke="none">
+</circle>
+</g>
+<text font-family="display" font-size="26.25" text-anchor="middle" stroke-width="0.5" stroke="none" fill="rgb(17, 10, 12)" x="0" y="9.023">AVT</text>
+</g>
+<circle cx="0" cy="0" r="37.5" fill="none" stroke="white" stroke-width="1">
+</circle>
+</g>
+</svg>
+</div>
+<div class="charter__tokens">
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-5">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-5)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(17, 10, 12)" font-size="11" font-weight="normal" text-anchor="middle">Free</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-6">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-6)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(17, 10, 12)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-7">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-7)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(17, 10, 12)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+</div>
+<div class="charter__trains">Trains<div class="charter__phase">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Train</th>
+<th>Price</th>
+<th>#</th>
+<th>Limit</th>
+<th>Phased</th>
+<th>Rust</th>
+<th>Tiles</th>
+<th class="phase__notes">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2H</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>6</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(255, 230, 0);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>4H/2M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P200</li>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>5</li>
+<li>5</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Green Privates and narrow gauge available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6H/3M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">6H</li>
+<li style="background-color: rgb(89, 181, 120);">3M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P300</li>
+<li>P200</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>4</li>
+<li>4</li>
+</ul>
+</td>
+<td>2/3</td>
+<td>
+<ul>
+<li>2H</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Rust on 5th grey train</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5E/4M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">5E</li>
+<li style="background-color: rgb(191, 129, 86);">4M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P500</li>
+<li>P400</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>3</li>
+<li>3</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Privates close at end of OR</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6E/5M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">6E</li>
+<li style="background-color: rgb(191, 129, 86);">5M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P650</li>
+<li>P550</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>2</li>
+<li>2</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>4H</li>
+<li>2M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>7E/6M</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">7E</li>
+<li style="background-color: rgb(169, 175, 178);">6M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P800</li>
+<li>P700</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>6H</li>
+<li>3M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>5D available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5D</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">5D</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P1,100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="charter__treasury">Treasury<dl>
+<dt>Stock Round</dt>
+<dd>
+<ol>
+<li>
+<span>Sell any number of certificates</span>
+</li>
+<li>
+<span>Convert to 10-share</span>
+</li>
+<li>
+<span>Exchange private</span>
+</li>
+<li>
+<span>Buy one certificate</span>
+</li>
+<li>
+<span>Start a public company</span>
+</li>
+<li>
+<span>Auction private company</span>
+</li>
+</ol>
+</dd>
+<dt>Operating Round</dt>
+<dd>
+<ol>
+<li>
+<span>Lay Tile(s)</span>
+</li>
+<li>
+<span>Place Token</span>
+</li>
+<li>
+<span>Run Trains</span>
+</li>
+<li>
+<span>Revenue and Dividends</span>
+</li>
+<li>
+<span>Purchase Trains</span>
+</li>
+<li>
+<span>Issue Shares</span>
+</li>
+</ol>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cutlines">
+<div class="charter charter--color">
+<div class="charter__bleed" style="background-color: rgb(255, 255, 255);">
+<div class="charter__hr" style="background-color: rgb(254, 209, 25);">
+</div>
+<div class="charter__body">
+<div class="charter__name" style="color: rgb(17, 10, 12); padding-right: 2.075in;">
+<div style="font-family: display; font-size: 20pt; line-height: 22pt; font-weight: bold; font-style: normal;">Madrid, Zaragoza &amp; Alicante Railway</div>
+</div>
+<div class="charter__logo">
+<svg viewBox="-37.5 -37.5 75 75">
+<g transform="rotate(0)">
+<clipPath id="id-8">
+<circle cx="0" cy="0" r="37.5">
+</circle>
+</clipPath>
+<g clip-path="url(#id-8)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="37.5" fill="#fed119" stroke="none">
+</circle>
+</g>
+<text font-family="display" font-size="23.625" text-anchor="middle" stroke-width="0.5" stroke="none" fill="rgb(17, 10, 12)" x="0" y="8.121">MZA</text>
+</g>
+<circle cx="0" cy="0" r="37.5" fill="none" stroke="white" stroke-width="1">
+</circle>
+</g>
+</svg>
+</div>
+<div class="charter__tokens">
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-9">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-9)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(17, 10, 12)" font-size="11" font-weight="normal" text-anchor="middle">Free</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-10">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-10)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(17, 10, 12)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-11">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-11)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(17, 10, 12)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+</div>
+<div class="charter__trains">Trains<div class="charter__phase">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Train</th>
+<th>Price</th>
+<th>#</th>
+<th>Limit</th>
+<th>Phased</th>
+<th>Rust</th>
+<th>Tiles</th>
+<th class="phase__notes">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2H</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>6</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(255, 230, 0);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>4H/2M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P200</li>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>5</li>
+<li>5</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Green Privates and narrow gauge available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6H/3M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">6H</li>
+<li style="background-color: rgb(89, 181, 120);">3M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P300</li>
+<li>P200</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>4</li>
+<li>4</li>
+</ul>
+</td>
+<td>2/3</td>
+<td>
+<ul>
+<li>2H</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Rust on 5th grey train</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5E/4M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">5E</li>
+<li style="background-color: rgb(191, 129, 86);">4M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P500</li>
+<li>P400</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>3</li>
+<li>3</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Privates close at end of OR</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6E/5M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">6E</li>
+<li style="background-color: rgb(191, 129, 86);">5M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P650</li>
+<li>P550</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>2</li>
+<li>2</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>4H</li>
+<li>2M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>7E/6M</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">7E</li>
+<li style="background-color: rgb(169, 175, 178);">6M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P800</li>
+<li>P700</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>6H</li>
+<li>3M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>5D available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5D</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">5D</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P1,100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="charter__treasury">Treasury<dl>
+<dt>Stock Round</dt>
+<dd>
+<ol>
+<li>
+<span>Sell any number of certificates</span>
+</li>
+<li>
+<span>Convert to 10-share</span>
+</li>
+<li>
+<span>Exchange private</span>
+</li>
+<li>
+<span>Buy one certificate</span>
+</li>
+<li>
+<span>Start a public company</span>
+</li>
+<li>
+<span>Auction private company</span>
+</li>
+</ol>
+</dd>
+<dt>Operating Round</dt>
+<dd>
+<ol>
+<li>
+<span>Lay Tile(s)</span>
+</li>
+<li>
+<span>Place Token</span>
+</li>
+<li>
+<span>Run Trains</span>
+</li>
+<li>
+<span>Revenue and Dividends</span>
+</li>
+<li>
+<span>Purchase Trains</span>
+</li>
+<li>
+<span>Issue Shares</span>
+</li>
+</ol>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cutlines">
+<div class="charter charter--color">
+<div class="charter__bleed" style="background-color: rgb(255, 255, 255);">
+<div class="charter__hr" style="background-color: rgb(3, 0, 0);">
+</div>
+<div class="charter__body">
+<div class="charter__name" style="color: rgb(255, 255, 255); padding-right: 2.075in;">
+<div style="font-family: display; font-size: 20pt; line-height: 22pt; font-weight: bold; font-style: normal;">Northern Railway</div>
+</div>
+<div class="charter__logo">
+<svg viewBox="-37.5 -37.5 75 75">
+<g transform="rotate(0)">
+<clipPath id="id-12">
+<circle cx="0" cy="0" r="37.5">
+</circle>
+</clipPath>
+<g clip-path="url(#id-12)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="37.5" fill="#030000" stroke="none">
+</circle>
+</g>
+<text font-family="display" font-size="24.938" text-anchor="middle" stroke-width="0.5" stroke="none" fill="rgb(255, 255, 255)" x="0" y="8.572">N</text>
+</g>
+<circle cx="0" cy="0" r="37.5" fill="none" stroke="white" stroke-width="1">
+</circle>
+</g>
+</svg>
+</div>
+<div class="charter__tokens">
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-13">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-13)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(255, 255, 255)" font-size="11" font-weight="normal" text-anchor="middle">Free</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-14">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-14)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(255, 255, 255)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-15">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-15)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(255, 255, 255)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+</div>
+<div class="charter__trains">Trains<div class="charter__phase">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Train</th>
+<th>Price</th>
+<th>#</th>
+<th>Limit</th>
+<th>Phased</th>
+<th>Rust</th>
+<th>Tiles</th>
+<th class="phase__notes">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2H</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>6</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(255, 230, 0);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>4H/2M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P200</li>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>5</li>
+<li>5</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Green Privates and narrow gauge available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6H/3M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">6H</li>
+<li style="background-color: rgb(89, 181, 120);">3M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P300</li>
+<li>P200</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>4</li>
+<li>4</li>
+</ul>
+</td>
+<td>2/3</td>
+<td>
+<ul>
+<li>2H</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Rust on 5th grey train</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5E/4M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">5E</li>
+<li style="background-color: rgb(191, 129, 86);">4M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P500</li>
+<li>P400</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>3</li>
+<li>3</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Privates close at end of OR</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6E/5M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">6E</li>
+<li style="background-color: rgb(191, 129, 86);">5M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P650</li>
+<li>P550</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>2</li>
+<li>2</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>4H</li>
+<li>2M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>7E/6M</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">7E</li>
+<li style="background-color: rgb(169, 175, 178);">6M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P800</li>
+<li>P700</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>6H</li>
+<li>3M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>5D available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5D</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">5D</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P1,100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="charter__treasury">Treasury<dl>
+<dt>Stock Round</dt>
+<dd>
+<ol>
+<li>
+<span>Sell any number of certificates</span>
+</li>
+<li>
+<span>Convert to 10-share</span>
+</li>
+<li>
+<span>Exchange private</span>
+</li>
+<li>
+<span>Buy one certificate</span>
+</li>
+<li>
+<span>Start a public company</span>
+</li>
+<li>
+<span>Auction private company</span>
+</li>
+</ol>
+</dd>
+<dt>Operating Round</dt>
+<dd>
+<ol>
+<li>
+<span>Lay Tile(s)</span>
+</li>
+<li>
+<span>Place Token</span>
+</li>
+<li>
+<span>Run Trains</span>
+</li>
+<li>
+<span>Revenue and Dividends</span>
+</li>
+<li>
+<span>Purchase Trains</span>
+</li>
+<li>
+<span>Issue Shares</span>
+</li>
+</ol>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cutlines">
+<div class="charter charter--color">
+<div class="charter__bleed" style="background-color: rgb(255, 255, 255);">
+<div class="charter__hr" style="background-color: rgb(213, 15, 49);">
+</div>
+<div class="charter__body">
+<div class="charter__name" style="color: rgb(255, 255, 255); padding-right: 2.075in;">
+<div style="font-family: display; font-size: 20pt; line-height: 22pt; font-weight: bold; font-style: normal;">Royal Portuguese Railway</div>
+</div>
+<div class="charter__logo">
+<svg viewBox="-37.5 -37.5 75 75">
+<g transform="rotate(0)">
+<clipPath id="id-16">
+<circle cx="0" cy="0" r="37.5">
+</circle>
+</clipPath>
+<g clip-path="url(#id-16)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="37.5" fill="#d50f31" stroke="none">
+</circle>
+</g>
+<text font-family="display" font-size="26.25" text-anchor="middle" stroke-width="0.5" stroke="none" fill="rgb(255, 255, 255)" x="0" y="9.023">RP</text>
+</g>
+<circle cx="0" cy="0" r="37.5" fill="none" stroke="white" stroke-width="1">
+</circle>
+</g>
+</svg>
+</div>
+<div class="charter__tokens">
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-17">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-17)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(255, 255, 255)" font-size="11" font-weight="normal" text-anchor="middle">Free</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-18">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-18)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(255, 255, 255)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-19">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-19)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(255, 255, 255)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+</div>
+<div class="charter__trains">Trains<div class="charter__phase">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Train</th>
+<th>Price</th>
+<th>#</th>
+<th>Limit</th>
+<th>Phased</th>
+<th>Rust</th>
+<th>Tiles</th>
+<th class="phase__notes">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2H</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>6</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(255, 230, 0);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>4H/2M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P200</li>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>5</li>
+<li>5</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Green Privates and narrow gauge available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6H/3M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">6H</li>
+<li style="background-color: rgb(89, 181, 120);">3M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P300</li>
+<li>P200</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>4</li>
+<li>4</li>
+</ul>
+</td>
+<td>2/3</td>
+<td>
+<ul>
+<li>2H</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Rust on 5th grey train</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5E/4M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">5E</li>
+<li style="background-color: rgb(191, 129, 86);">4M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P500</li>
+<li>P400</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>3</li>
+<li>3</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Privates close at end of OR</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6E/5M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">6E</li>
+<li style="background-color: rgb(191, 129, 86);">5M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P650</li>
+<li>P550</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>2</li>
+<li>2</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>4H</li>
+<li>2M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>7E/6M</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">7E</li>
+<li style="background-color: rgb(169, 175, 178);">6M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P800</li>
+<li>P700</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>6H</li>
+<li>3M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>5D available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5D</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">5D</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P1,100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="charter__treasury">Treasury<dl>
+<dt>Stock Round</dt>
+<dd>
+<ol>
+<li>
+<span>Sell any number of certificates</span>
+</li>
+<li>
+<span>Convert to 10-share</span>
+</li>
+<li>
+<span>Exchange private</span>
+</li>
+<li>
+<span>Buy one certificate</span>
+</li>
+<li>
+<span>Start a public company</span>
+</li>
+<li>
+<span>Auction private company</span>
+</li>
+</ol>
+</dd>
+<dt>Operating Round</dt>
+<dd>
+<ol>
+<li>
+<span>Lay Tile(s)</span>
+</li>
+<li>
+<span>Place Token</span>
+</li>
+<li>
+<span>Run Trains</span>
+</li>
+<li>
+<span>Revenue and Dividends</span>
+</li>
+<li>
+<span>Purchase Trains</span>
+</li>
+<li>
+<span>Issue Shares</span>
+</li>
+</ol>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cutlines">
+<div class="charter charter--color">
+<div class="charter__bleed" style="background-color: rgb(255, 255, 255);">
+<div class="charter__hr" style="background-color: rgb(105, 74, 152);">
+</div>
+<div class="charter__body">
+<div class="charter__name" style="color: rgb(255, 255, 255); padding-right: 2.075in;">
+<div style="font-family: display; font-size: 20pt; line-height: 22pt; font-weight: bold; font-style: normal;">Tarragona, Barcelona &amp; France Railway</div>
+</div>
+<div class="charter__logo">
+<svg viewBox="-37.5 -37.5 75 75">
+<g transform="rotate(0)">
+<clipPath id="id-20">
+<circle cx="0" cy="0" r="37.5">
+</circle>
+</clipPath>
+<g clip-path="url(#id-20)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="37.5" fill="#694a98" stroke="none">
+</circle>
+</g>
+<text font-family="display" font-size="26.25" text-anchor="middle" stroke-width="0.5" stroke="none" fill="rgb(255, 255, 255)" x="0" y="9.023">TBF</text>
+</g>
+<circle cx="0" cy="0" r="37.5" fill="none" stroke="white" stroke-width="1">
+</circle>
+</g>
+</svg>
+</div>
+<div class="charter__tokens">
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-21">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-21)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(255, 255, 255)" font-size="11" font-weight="normal" text-anchor="middle">Free</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-22">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-22)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(255, 255, 255)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-23">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-23)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(255, 255, 255)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+</div>
+<div class="charter__trains">Trains<div class="charter__phase">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Train</th>
+<th>Price</th>
+<th>#</th>
+<th>Limit</th>
+<th>Phased</th>
+<th>Rust</th>
+<th>Tiles</th>
+<th class="phase__notes">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2H</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>6</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(255, 230, 0);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>4H/2M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P200</li>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>5</li>
+<li>5</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Green Privates and narrow gauge available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6H/3M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">6H</li>
+<li style="background-color: rgb(89, 181, 120);">3M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P300</li>
+<li>P200</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>4</li>
+<li>4</li>
+</ul>
+</td>
+<td>2/3</td>
+<td>
+<ul>
+<li>2H</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Rust on 5th grey train</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5E/4M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">5E</li>
+<li style="background-color: rgb(191, 129, 86);">4M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P500</li>
+<li>P400</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>3</li>
+<li>3</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Privates close at end of OR</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6E/5M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">6E</li>
+<li style="background-color: rgb(191, 129, 86);">5M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P650</li>
+<li>P550</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>2</li>
+<li>2</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>4H</li>
+<li>2M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>7E/6M</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">7E</li>
+<li style="background-color: rgb(169, 175, 178);">6M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P800</li>
+<li>P700</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>6H</li>
+<li>3M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>5D available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5D</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">5D</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P1,100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="charter__treasury">Treasury<dl>
+<dt>Stock Round</dt>
+<dd>
+<ol>
+<li>
+<span>Sell any number of certificates</span>
+</li>
+<li>
+<span>Convert to 10-share</span>
+</li>
+<li>
+<span>Exchange private</span>
+</li>
+<li>
+<span>Buy one certificate</span>
+</li>
+<li>
+<span>Start a public company</span>
+</li>
+<li>
+<span>Auction private company</span>
+</li>
+</ol>
+</dd>
+<dt>Operating Round</dt>
+<dd>
+<ol>
+<li>
+<span>Lay Tile(s)</span>
+</li>
+<li>
+<span>Place Token</span>
+</li>
+<li>
+<span>Run Trains</span>
+</li>
+<li>
+<span>Revenue and Dividends</span>
+</li>
+<li>
+<span>Purchase Trains</span>
+</li>
+<li>
+<span>Issue Shares</span>
+</li>
+</ol>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cutlines">
+<div class="charter charter--color">
+<div class="charter__bleed" style="background-color: rgb(255, 255, 255);">
+<div class="charter__hr" style="background-color: rgb(13, 135, 67);">
+</div>
+<div class="charter__body">
+<div class="charter__name" style="color: rgb(255, 255, 255); padding-right: 2.075in;">
+<div style="font-family: display; font-size: 20pt; line-height: 22pt; font-weight: bold; font-style: normal;">Western Railway</div>
+</div>
+<div class="charter__logo">
+<svg viewBox="-37.5 -37.5 75 75">
+<g transform="rotate(0)">
+<clipPath id="id-24">
+<circle cx="0" cy="0" r="37.5">
+</circle>
+</clipPath>
+<g clip-path="url(#id-24)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="37.5" fill="#0d8743" stroke="none">
+</circle>
+</g>
+<text font-family="display" font-size="22.313" text-anchor="middle" stroke-width="0.5" stroke="none" fill="rgb(255, 255, 255)" x="0" y="7.67">W</text>
+</g>
+<circle cx="0" cy="0" r="37.5" fill="none" stroke="white" stroke-width="1">
+</circle>
+</g>
+</svg>
+</div>
+<div class="charter__tokens">
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-25">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-25)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(255, 255, 255)" font-size="11" font-weight="normal" text-anchor="middle">Free</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-26">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-26)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(255, 255, 255)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-27">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-27)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(255, 255, 255)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+</div>
+<div class="charter__trains">Trains<div class="charter__phase">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Train</th>
+<th>Price</th>
+<th>#</th>
+<th>Limit</th>
+<th>Phased</th>
+<th>Rust</th>
+<th>Tiles</th>
+<th class="phase__notes">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2H</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>6</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(255, 230, 0);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>4H/2M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P200</li>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>5</li>
+<li>5</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Green Privates and narrow gauge available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6H/3M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">6H</li>
+<li style="background-color: rgb(89, 181, 120);">3M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P300</li>
+<li>P200</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>4</li>
+<li>4</li>
+</ul>
+</td>
+<td>2/3</td>
+<td>
+<ul>
+<li>2H</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Rust on 5th grey train</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5E/4M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">5E</li>
+<li style="background-color: rgb(191, 129, 86);">4M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P500</li>
+<li>P400</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>3</li>
+<li>3</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Privates close at end of OR</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6E/5M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">6E</li>
+<li style="background-color: rgb(191, 129, 86);">5M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P650</li>
+<li>P550</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>2</li>
+<li>2</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>4H</li>
+<li>2M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>7E/6M</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">7E</li>
+<li style="background-color: rgb(169, 175, 178);">6M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P800</li>
+<li>P700</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>6H</li>
+<li>3M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>5D available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5D</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">5D</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P1,100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="charter__treasury">Treasury<dl>
+<dt>Stock Round</dt>
+<dd>
+<ol>
+<li>
+<span>Sell any number of certificates</span>
+</li>
+<li>
+<span>Convert to 10-share</span>
+</li>
+<li>
+<span>Exchange private</span>
+</li>
+<li>
+<span>Buy one certificate</span>
+</li>
+<li>
+<span>Start a public company</span>
+</li>
+<li>
+<span>Auction private company</span>
+</li>
+</ol>
+</dd>
+<dt>Operating Round</dt>
+<dd>
+<ol>
+<li>
+<span>Lay Tile(s)</span>
+</li>
+<li>
+<span>Place Token</span>
+</li>
+<li>
+<span>Run Trains</span>
+</li>
+<li>
+<span>Revenue and Dividends</span>
+</li>
+<li>
+<span>Purchase Trains</span>
+</li>
+<li>
+<span>Issue Shares</span>
+</li>
+</ol>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cutlines">
+<div class="charter charter--color">
+<div class="charter__bleed" style="background-color: rgb(255, 255, 255);">
+<div class="charter__hr" style="background-color: rgb(232, 75, 28);">
+</div>
+<div class="charter__body">
+<div class="charter__name" style="color: rgb(17, 10, 12); padding-right: 2.075in;">
+<div style="font-family: display; font-size: 20pt; line-height: 22pt; font-weight: bold; font-style: normal;">Zaragoza, Pamplona &amp; Barcelona Railway</div>
+</div>
+<div class="charter__logo">
+<svg viewBox="-37.5 -37.5 75 75">
+<g transform="rotate(0)">
+<clipPath id="id-28">
+<circle cx="0" cy="0" r="37.5">
+</circle>
+</clipPath>
+<g clip-path="url(#id-28)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="37.5" fill="#e84b1c" stroke="none">
+</circle>
+</g>
+<text font-family="display" font-size="26.25" text-anchor="middle" stroke-width="0.5" stroke="none" fill="rgb(17, 10, 12)" x="0" y="9.023">ZPB</text>
+</g>
+<circle cx="0" cy="0" r="37.5" fill="none" stroke="white" stroke-width="1">
+</circle>
+</g>
+</svg>
+</div>
+<div class="charter__tokens">
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-29">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-29)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(17, 10, 12)" font-size="11" font-weight="normal" text-anchor="middle">Free</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-30">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-30)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(17, 10, 12)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+<svg>
+<g transform="translate(25 25)">
+<g transform="rotate(0)">
+<clipPath id="id-31">
+<circle cx="0" cy="0" r="25">
+</circle>
+</clipPath>
+<g clip-path="url(#id-31)">
+<g transform="rotate(0)">
+<circle cx="0" cy="0" r="25" fill="#fff" stroke="none">
+</circle>
+</g>
+</g>
+<circle cx="0" cy="0" r="25" fill="none" stroke="black" stroke-width="1">
+</circle>
+</g>
+<g transform="translate(0 39)">
+<text fill="rgb(17, 10, 12)" font-size="11" font-weight="normal" text-anchor="middle">40/province</text>
+</g>
+</g>
+</svg>
+</div>
+<div class="charter__trains">Trains<div class="charter__phase">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Train</th>
+<th>Price</th>
+<th>#</th>
+<th>Limit</th>
+<th>Phased</th>
+<th>Rust</th>
+<th>Tiles</th>
+<th class="phase__notes">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2H</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>6</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(255, 230, 0);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>4H/2M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P200</li>
+<li>P100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>5</li>
+<li>5</li>
+</ul>
+</td>
+<td>3/4</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Green Privates and narrow gauge available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6H/3M</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">6H</li>
+<li style="background-color: rgb(89, 181, 120);">3M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P300</li>
+<li>P200</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>4</li>
+<li>4</li>
+</ul>
+</td>
+<td>2/3</td>
+<td>
+<ul>
+<li>2H</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(89, 181, 120);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Rust on 5th grey train</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5E/4M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">5E</li>
+<li style="background-color: rgb(191, 129, 86);">4M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P500</li>
+<li>P400</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>3</li>
+<li>3</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>Privates close at end of OR</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>6E/5M</td>
+<td class="phase__list" style="background-color: rgb(191, 129, 86);">
+<ul>
+<li style="background-color: rgb(191, 129, 86);">6E</li>
+<li style="background-color: rgb(191, 129, 86);">5M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P650</li>
+<li>P550</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>2</li>
+<li>2</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>4H</li>
+<li>2M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 230, 0);">
+<ul>
+<li style="background-color: rgb(255, 230, 0);">2H</li>
+</ul>
+</td>
+<td style="background-color: rgb(191, 129, 86);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>7E/6M</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">7E</li>
+<li style="background-color: rgb(169, 175, 178);">6M</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P800</li>
+<li>P700</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+<li>6H</li>
+<li>3M</li>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(89, 181, 120);">
+<ul>
+<li style="background-color: rgb(89, 181, 120);">4H</li>
+<li style="background-color: rgb(89, 181, 120);">2M</li>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+<li>5D available</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>5D</td>
+<td class="phase__list" style="background-color: rgb(169, 175, 178);">
+<ul>
+<li style="background-color: rgb(169, 175, 178);">5D</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>P1,100</li>
+</ul>
+</td>
+<td>
+<ul>
+<li>∞</li>
+</ul>
+</td>
+<td>2</td>
+<td>
+<ul>
+</ul>
+</td>
+<td class="phase__list" style="background-color: rgb(255, 255, 255);">
+<ul>
+</ul>
+</td>
+<td style="background-color: rgb(169, 175, 178);">&nbsp;</td>
+<td class="phase__notes">
+<ul>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="charter__treasury">Treasury<dl>
+<dt>Stock Round</dt>
+<dd>
+<ol>
+<li>
+<span>Sell any number of certificates</span>
+</li>
+<li>
+<span>Convert to 10-share</span>
+</li>
+<li>
+<span>Exchange private</span>
+</li>
+<li>
+<span>Buy one certificate</span>
+</li>
+<li>
+<span>Start a public company</span>
+</li>
+<li>
+<span>Auction private company</span>
+</li>
+</ol>
+</dd>
+<dt>Operating Round</dt>
+<dd>
+<ol>
+<li>
+<span>Lay Tile(s)</span>
+</li>
+<li>
+<span>Place Token</span>
+</li>
+<li>
+<span>Run Trains</span>
+</li>
+<li>
+<span>Revenue and Dividends</span>
+</li>
+<li>
+<span>Purchase Trains</span>
+</li>
+<li>
+<span>Issue Shares</span>
+</li>
+</ol>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<style>@media print {
+    @page {
+        size: 8.5in 11in;
+        margin: 0.25in;
+    }
+}</style>
+</div>
