@@ -141,6 +141,18 @@ describe("getMarketData", () => {
     expect(data.totalHeight).toBeGreaterThan(2 * data.height + 50);
   });
 
+  it("should add extra total width and height independently", () => {
+    const { stock } = games["18Test"];
+    const base = getMarketData(stock, config);
+    const data = getMarketData(
+      { ...stock, display: { extraTotalWidth: 7, extraTotalHeight: 13 } },
+      config,
+    );
+
+    expect(data.totalWidth).toBe(base.totalWidth + 7);
+    expect(data.totalHeight).toBe(base.totalHeight + 13);
+  });
+
   it("should default unknown types to empty sizes", () => {
     const data = getMarketData({ market: [] }, config);
 

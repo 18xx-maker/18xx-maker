@@ -83,7 +83,7 @@ export const getMarketData = (stock, config) => {
       : 0;
   totalWidth +=
     stock.display && stock.display.extraTotalWidth
-      ? stock.display.extraTotalHeight
+      ? stock.display.extraTotalWidth
       : 0;
 
   return {
