@@ -26,7 +26,7 @@ module.exports = defineConfig({
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: {
-    command: `pnpm exec vite preview --port ${PORT} --strictPort`,
+    command: `pnpm exec vite preview --port ${PORT} --strictPort --no-open`,
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 30_000,
