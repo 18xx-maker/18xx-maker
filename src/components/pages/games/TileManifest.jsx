@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Navigate } from "react-router";
 
 import { addIndex, ascend, keys, map, sortWith } from "ramda";
 
@@ -23,11 +23,10 @@ const getCol = (tile) => {
 };
 
 const TileManifest = () => {
-  const navigate = useNavigate();
   const game = useGame();
 
   if (!game.tiles) {
-    navigate(`/games/${game.meta.slug}/`);
+    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
   }
 
   let ids = sortWith(

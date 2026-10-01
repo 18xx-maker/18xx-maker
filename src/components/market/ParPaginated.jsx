@@ -1,14 +1,12 @@
-import { useNavigate } from "react-router";
+import { Navigate } from "react-router";
 
 import Paginate from "@/components/Paginate";
 import Par from "@/components/market/Par";
 import { getParData } from "@/util/market";
 
 const ParPaginated = ({ config, game }) => {
-  const navigate = useNavigate();
-
   if (!game.stock || !game.stock.par || !game.stock.par.values) {
-    navigate(`/games/${game.meta.slug}/`);
+    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
   }
 
   let data = getParData(game.stock, config);

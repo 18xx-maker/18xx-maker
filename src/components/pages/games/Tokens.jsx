@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Navigate } from "react-router";
 
 import { addIndex, chain, is, map, splitEvery } from "ramda";
 
@@ -227,12 +227,11 @@ const TokenLayout = ({ companies, data, game }) => {
 };
 
 const Tokens = () => {
-  const navigate = useNavigate();
   const { config } = useConfig();
   const game = useGame();
 
   if (!game.companies && !game.tokens) {
-    navigate(`/games/${game.meta.slug}/`);
+    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
   }
 
   const { overrideCompanies: override, overrideSelect: selection } = config;

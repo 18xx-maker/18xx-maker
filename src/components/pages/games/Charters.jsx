@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Navigate } from "react-router";
 
 import {
   addIndex,
@@ -25,7 +25,6 @@ const isMinor = prop("minor");
 const isMajor = compose(not, prop("minor"));
 
 const Charters = () => {
-  const navigate = useNavigate();
   const { config } = useConfig();
   const charters = config.charters;
   const paper = config.paper;
@@ -34,7 +33,7 @@ const Charters = () => {
   const game = useGame();
 
   if (!game.companies) {
-    navigate(`/games/${game.meta.slug}/`);
+    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
   }
 
   let gameCompanies = overrideCompanies(

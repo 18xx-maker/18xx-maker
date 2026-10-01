@@ -1,14 +1,12 @@
-import { useNavigate } from "react-router";
+import { Navigate } from "react-router";
 
 import Paginate from "@/components/Paginate";
 import Market from "@/components/market/Market";
 import { getMarketData } from "@/util/market";
 
 const MarketPaginated = ({ config, game }) => {
-  const navigate = useNavigate();
-
   if (!game.stock || !game.stock.market) {
-    navigate(`/games/${game.meta.slug}/`);
+    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
   }
 
   let data = getMarketData(game.stock, config);

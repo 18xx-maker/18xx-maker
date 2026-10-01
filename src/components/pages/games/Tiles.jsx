@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Navigate } from "react-router";
 
 import { useConfig, useGame } from "@/hooks";
 
@@ -111,14 +111,13 @@ const pageTiles = (perPage, pages, tiles) => {
 };
 
 const TileSheet = () => {
-  const navigate = useNavigate();
   const { config } = useConfig();
   const game = useGame();
   const paper = config.paper;
   const { layout, width: hexWidth, gaps } = config.tiles;
 
   if (!game.tiles) {
-    navigate(`/games/${game.meta.slug}/`);
+    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
   }
 
   let c = getTileSheetContext(layout, paper, hexWidth);

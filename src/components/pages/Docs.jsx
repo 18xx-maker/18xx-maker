@@ -215,7 +215,11 @@ const Docs = () => {
 
   return (
     <Container maxWidth="md">
-      <Paper data-testid="docs" elevation={5} className={classes.page}>
+      <Paper
+        data-testid={`docs-${file}`}
+        elevation={5}
+        className={classes.page}
+      >
         <Markdown components={components}>{source}</Markdown>
       </Paper>
     </Container>
