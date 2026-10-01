@@ -78,7 +78,11 @@ const Tiles = () => {
 
   return (
     <ColorContext.Provider value="tile">
-      <div className="b18" style={{ width: `${totalWidth}px` }}>
+      <div
+        className="b18"
+        data-testid={`game-${game.meta.slug}-b18-tiles`}
+        style={{ width: `${totalWidth}px` }}
+      >
         <div className={`tiles ${color}`}>{tileNodes}</div>
       </div>
       <style>{`@media print {@page {size: ${totalWidth}px 900px;}}`}</style>

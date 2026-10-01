@@ -69,6 +69,9 @@ and start a development build of the site:
 # Install the dependencies
 pnpm install
 
+# Install the browser used by the tests (once)
+pnpm exec playwright install chromium --only-shell
+
 # Run the development site
 pnpm start
 ```
@@ -92,7 +95,8 @@ The following scripts are all run for you on relevant files as part of git
 commit hooks, and in CI. They are here if you want or need to run them manually:
 
 ```shell
-# Run the tests in watch mode
+# Run the tests in watch mode (requires the Playwright chromium install
+# from the setup steps above)
 pnpm test
 
 # Run all fixing linters
