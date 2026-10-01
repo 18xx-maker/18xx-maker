@@ -8,7 +8,7 @@ import games from "@/data/games";
 import { rootRoutes } from "@/routes";
 import { initialState, rootReducer } from "@/state";
 
-export const renderApp = (route = "/") => {
+export const renderApp = (route = "/", state = {}) => {
   const store = configureStore({
     reducer: rootReducer,
     // The dev checks warn when slow, which fails tests on busy machines
@@ -17,7 +17,7 @@ export const renderApp = (route = "/") => {
         immutableCheck: false,
         serializableCheck: false,
       }),
-    preloadedState: initialState,
+    preloadedState: { ...initialState, ...state },
   });
 
   const router = createMemoryRouter(rootRoutes, {
@@ -27,6 +27,7 @@ export const renderApp = (route = "/") => {
 
   return {
     router,
+    store,
     user: userEvent.setup(),
     ...render(
       <Provider store={store}>
