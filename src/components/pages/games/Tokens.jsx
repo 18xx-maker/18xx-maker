@@ -234,7 +234,7 @@ const Tokens = () => {
     return <Navigate to={`/games/${game.meta.slug}/`} replace />;
   }
 
-  const { overrideCompanies: override, overrideSelect: selection } = config;
+  const { overrideCompanies: override, overrideSelection: selection } = config;
   const companies = overrideCompanies(
     compileCompanies(game),
     override,

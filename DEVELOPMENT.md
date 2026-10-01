@@ -99,6 +99,9 @@ commit hooks, and in CI. They are here if you want or need to run them manually:
 # from the setup steps above)
 pnpm test
 
+# Run the tests once, and update the print output snapshots (see below)
+pnpm test:run -u
+
 # Run all fixing linters
 pnpm fix
 
@@ -122,6 +125,30 @@ pnpm build
 pnpm build:app
 pnpm build:sb
 ```
+
+### Print output snapshots
+
+18xx Maker's output is SVG that people print at physical sizes, so
+`tests/snapshots.test.jsx` renders every print page (map, market, par, revenue,
+tiles, tile manifest, tokens, cards, charters, background) for a few games and
+compares the markup to the committed files in `tests/__snapshots__/<game>/`.
+Generated ids are renumbered, long decimals are rounded to 3 places, text
+measurements (`getBBox`) are stubbed to a fixed size, and the browser locale is
+fixed to `en-US`, so the files do not depend on the platform or installed fonts.
+
+If a snapshot test fails, the printed output changed. If that was intended (a
+tile or atom change, for example), check the diff and update the snapshots:
+
+```shell
+pnpm test:run -u
+```
+
+Review the changed files in `tests/__snapshots__` before committing them. CI
+(`CI=true`) never writes snapshots, a missing or different snapshot fails the
+run. Vitest does not report snapshot files that no test writes anymore, so a
+test in `tests/snapshots.test.jsx` fails and lists them: delete those files. To
+lock down another game, add its slug to `tests/snapshots.test.jsx` and
+run `pnpm test:run -u`.
 
 ### Make
 
