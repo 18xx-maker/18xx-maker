@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { mapObjIndexed, mergeDeepRight } from "ramda";
+import { map, mergeDeepRight } from "ramda";
 
 import { games } from "@/data";
 import { ALERT_DEFAULT, alertReducer } from "@/state/alerts";
@@ -13,7 +13,7 @@ import { summariesReducer } from "@/state/summaries";
 import { updateReducer } from "@/state/update";
 import { getGameSummary } from "@/util/loading.js";
 
-const summaries = { bundled: mapObjIndexed(getGameSummary, games) };
+const summaries = { bundled: map((game) => getGameSummary(game), games) };
 
 export const initialState = {
   alert: ALERT_DEFAULT,

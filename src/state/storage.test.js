@@ -44,6 +44,16 @@ describe("storage", () => {
       expect(storage.initialState()).toEqual({ test: value });
     });
 
+    it("keeps earlier keys when a later one is corrupt", () => {
+      window.localStorage.clear();
+      window.localStorage.setItem("a", JSON.stringify({ ok: 1 }));
+      window.localStorage.setItem("b", "{not json");
+      vi.spyOn(console, "error").mockImplementation(() => {});
+      storage.init("a", "b");
+      expect(storage.initialState()).toEqual({ a: { ok: 1 } });
+      window.localStorage.clear();
+    });
+
     it("should log an error if local storage throws", () => {
       // Mock local storage to throw an error
       const localStorage = { getItem: vi.fn(window.localStorage.getItem) };

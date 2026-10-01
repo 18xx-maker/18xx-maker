@@ -69,7 +69,9 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
   return (
     <Box className={classes.configItem}>
       <FormControl variant="filled" error={isError}>
-        <InputLabel id={`${name}-label`}>{label}</InputLabel>
+        <InputLabel id={`${name}-label`} htmlFor={name}>
+          {label}
+        </InputLabel>
         <MUIInput
           id={name}
           name={name}

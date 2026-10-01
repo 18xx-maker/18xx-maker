@@ -1,4 +1,4 @@
-import { compose, curry, pick, prop } from "ramda";
+import { compose, pick, prop } from "ramda";
 
 export const BUNDLED = "bundled";
 export const ELECTRON = "electron";
@@ -15,7 +15,3 @@ export const getGameSummary = (game, extra = {}) => ({
 });
 
 export const loadFile = (file) => file.text().then(JSON.parse);
-
-export const loadSummary = curry((type, file) =>
-  loadFile(type, file).then(getGameSummary),
-);

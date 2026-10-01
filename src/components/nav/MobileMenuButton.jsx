@@ -21,6 +21,7 @@ const MobileMenuButton = ({ onClick }) => {
       className={classes.menuButton}
       sx={{ display: { md: "none", xs: "block" } }}
       onClick={onClick}
+      aria-label="menu"
       color="inherit"
       edge="start"
     >
