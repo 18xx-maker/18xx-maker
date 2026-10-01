@@ -17,13 +17,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: PNPM
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 9
       - name: Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           cache: "pnpm"
           node-version: 24
@@ -44,13 +44,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: PNPM
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 9
       - name: Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           cache: "pnpm"
           node-version: 24
@@ -80,13 +80,13 @@ jobs:
     runs-on: ${{ matrix.os.image }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: PNPM
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 9
       - name: Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           cache: "pnpm"
           node-version: ${{ matrix.node }}
@@ -98,7 +98,7 @@ jobs:
         run: echo "PLAYWRIGHT_VERSION=$(pnpm exec playwright --version | awk '{ print $2 }')" >> $GITHUB_OUTPUT
       - name: Playwright Cache
         id: playwright-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: browsers
           key: ${{ matrix.os.slug }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
@@ -120,13 +120,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: PNPM
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 9
       - name: Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           cache: "pnpm"
           node-version: 24
@@ -137,7 +137,7 @@ jobs:
         run: echo "PLAYWRIGHT_VERSION=$(pnpm exec playwright --version | awk '{ print $2 }')" >> $GITHUB_OUTPUT
       - name: Playwright Cache
         id: playwright-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: browsers
           key: linux-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
@@ -152,7 +152,7 @@ jobs:
       - name: End to End Tests
         run: pnpm test:e2e
       - name: Upload Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: playwright-report

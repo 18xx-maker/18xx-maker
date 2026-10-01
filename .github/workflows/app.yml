@@ -15,13 +15,13 @@ jobs:
       id-token: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: PNPM
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 9
       - name: Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           cache: "pnpm"
           node-version: 24
@@ -61,7 +61,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release upload ${{ github.ref_name }} $(echo "${{ steps.build.outputs.ARTIFACTS }}" | xargs)
       - name: Attest
-        uses: actions/attest-build-provenance@v1
+        uses: actions/attest-build-provenance@v4
         id: attest
         with:
           subject-path: ${{ steps.build.outputs.ARTIFACTS }}
