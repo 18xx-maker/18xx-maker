@@ -1,11 +1,19 @@
 import { screen, waitFor, within } from "@testing-library/react";
 
 import { games } from "@/data";
-import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import * as opfs from "@/util/opfs";
 
 import { renderApp } from "@tests/helpers.jsx";
+
+const caps = vi.hoisted(() => ({}));
+
+// Mutate this shared object per test: the app reads the mocked module, so
+// there is no second instance of the real capability singleton to diverge
+vi.mock("@/util/capability", async (importOriginal) => {
+  Object.assign(caps, (await importOriginal()).default);
+  return { default: caps };
+});
 
 vi.mock("@/util/idb", async (importOriginal) => ({
   ...(await importOriginal()),
@@ -21,8 +29,6 @@ vi.mock("@/util/opfs", async (importOriginal) => ({
   loadSummaries: vi.fn(),
   saveGameFile: vi.fn(),
 }));
-
-const original = { ...capability };
 
 const internalGame = {
   ...games["18Test"],
@@ -41,13 +47,9 @@ const summary = {
 beforeEach(() => {
   vi.clearAllMocks();
   // Browsers without the file system access api: the file input flow
-  Object.assign(capability, { electron: false, system: false, internal: true });
+  Object.assign(caps, { electron: false, system: false, internal: true });
   opfs.loadSummaries.mockResolvedValue({ "internal:abc": summary });
   idb.loadSummaries.mockResolvedValue({});
-});
-
-afterEach(() => {
-  Object.assign(capability, original);
 });
 
 describe("load games page", () => {
@@ -105,7 +107,7 @@ describe("load games page", () => {
   });
 
   it("uses the file picker when the file system access api exists", async () => {
-    capability.system = true;
+    caps.system = true;
     idb.openFilePicker.mockResolvedValue("system:xyz");
     idb.loadGame.mockResolvedValue({
       ...games["18Test"],
@@ -130,7 +132,9 @@ describe("load games page", () => {
     const row = await screen.findByRole("row", { name: /Saved Game/ });
 
     opfs.loadSummaries.mockResolvedValue({});
-    await user.click(within(row).getByTestId("DeleteIcon"));
+    await user.click(
+      within(row).getByRole("button", { name: "Delete Saved Game" }),
+    );
 
     expect(opfs.deleteGame).toHaveBeenCalledWith("abc");
     expect(
@@ -148,7 +152,9 @@ describe("load games page", () => {
     const { user } = renderApp("/games/");
     const row = await screen.findByRole("row", { name: /Saved Game/ });
 
-    await user.click(within(row).getByTestId("DeleteIcon"));
+    await user.click(
+      within(row).getByRole("button", { name: "Delete Saved Game" }),
+    );
 
     expect(await screen.findByText("locked")).toBeInTheDocument();
     expect(screen.getByText("Saved Game")).toBeInTheDocument();
@@ -158,7 +164,9 @@ describe("load games page", () => {
   it("does not offer deleting bundled games", async () => {
     renderApp("/games/");
     const row = await screen.findByRole("row", { name: /Shikoku 1889/ });
-    expect(within(row).queryByTestId("DeleteIcon")).not.toBeInTheDocument();
+    expect(
+      within(row).queryByRole("button", { name: /^Delete/ }),
+    ).not.toBeInTheDocument();
   });
 
   it("returns to the load page with an alert when a game cannot be loaded", async () => {

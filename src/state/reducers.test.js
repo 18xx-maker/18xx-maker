@@ -2,6 +2,7 @@
 
 import {
   CLEAR_ALERT,
+  DELETE_GAME,
   RESET_CONFIG,
   RESET_ERRORS,
   SET_ALERT,
@@ -45,68 +46,42 @@ const frozen = (value) => {
 };
 
 describe("action creators", () => {
-  it("have stable type strings", () => {
-    expect([
-      SET_ALERT,
-      CLEAR_ALERT,
-      SET_CONFIG,
-      RESET_CONFIG,
-      SET_ERRORS,
-      RESET_ERRORS,
-      SET_GAME,
-      SET_SUMMARIES,
-      SET_UPDATE,
-      SET_DOWNLOAD_PERCENT,
-    ]).toEqual([
-      "SET_ALERT",
-      "CLEAR_ALERT",
-      "SET_CONFIG",
-      "RESET_CONFIG",
-      "SET_ERRORS",
-      "RESET_ERRORS",
-      "SET_GAME",
-      "SET_SUMMARIES",
-      "SET_UPDATE",
-      "SET_DOWNLOAD_PERCENT",
-    ]);
-  });
-
   it("build the expected actions", () => {
     expect(createAlert("t", "m")).toEqual({
-      type: "SET_ALERT",
+      type: SET_ALERT,
       alert: { title: "t", message: "m", type: "info" },
     });
     expect(createAlert("t", "m", "error").alert.type).toBe("error");
     expect(createProgressAlert("t", "m", 5)).toEqual({
-      type: "SET_ALERT",
+      type: SET_ALERT,
       alert: { title: "t", message: "m", progress: 5 },
     });
-    expect(clearAlert()).toEqual({ type: "CLEAR_ALERT" });
+    expect(clearAlert()).toEqual({ type: CLEAR_ALERT });
     expect(createSetConfig({ a: 1 })).toEqual({
-      type: "SET_CONFIG",
+      type: SET_CONFIG,
       config: { a: 1 },
     });
-    expect(createResetConfig()).toEqual({ type: "RESET_CONFIG" });
+    expect(createResetConfig()).toEqual({ type: RESET_CONFIG });
     expect(createSetErrors({ a: 1 })).toEqual({
-      type: "SET_ERRORS",
+      type: SET_ERRORS,
       errors: { a: 1 },
     });
-    expect(createResetErrors()).toEqual({ type: "RESET_ERRORS" });
-    expect(createSetGame(1)).toEqual({ type: "SET_GAME", game: 1 });
+    expect(createResetErrors()).toEqual({ type: RESET_ERRORS });
+    expect(createSetGame(1)).toEqual({ type: SET_GAME, game: 1 });
     expect(createDeleteGame("system:abc")).toEqual({
-      type: "DELETE_GAME",
+      type: DELETE_GAME,
       meta: { id: "abc", slug: "system:abc", type: "system" },
     });
     expect(createSetSummaries({ a: 1 })).toEqual({
-      type: "SET_SUMMARIES",
+      type: SET_SUMMARIES,
       summaries: { a: 1 },
     });
     expect(createUpdate({ v: 1 })).toEqual({
-      type: "SET_UPDATE",
+      type: SET_UPDATE,
       update: { v: 1 },
     });
     expect(createDownloadPercent(50)).toEqual({
-      type: "SET_DOWNLOAD_PERCENT",
+      type: SET_DOWNLOAD_PERCENT,
       downloading: 50,
     });
   });
@@ -118,13 +93,25 @@ describe.each([
   ["alert", alertReducer, { open: false }],
   ["config", configReducer, {}],
   ["errors", errorsReducer, {}],
-  ["game", gameReducer, undefined],
-  ["loadedGame", loadedGameReducer, undefined],
   ["summaries", summariesReducer, {}],
-  ["update", updateReducer, undefined],
 ])("%s reducer", (_name, reducer, initial) => {
   it("has the initial state", () => {
     expect(reducer(undefined, unknown)).toEqual(initial);
+  });
+
+  it("returns the same reference for unknown actions", () => {
+    const state = frozen({ some: { state: 1 } });
+    expect(reducer(state, unknown)).toBe(state);
+  });
+});
+
+describe.each([
+  ["game", gameReducer],
+  ["loadedGame", loadedGameReducer],
+  ["update", updateReducer],
+])("%s reducer", (_name, reducer) => {
+  it("starts empty", () => {
+    expect(reducer(undefined, unknown)).toBeFalsy();
   });
 
   it("returns the same reference for unknown actions", () => {
@@ -193,13 +180,13 @@ describe("gameReducer", () => {
   });
 
   it("SET_GAME with no game clears", () => {
-    expect(gameReducer(game(), createSetGame(undefined))).toBeUndefined();
+    expect(gameReducer(game(), createSetGame(undefined))).toBeFalsy();
   });
 
   it("DELETE_GAME clears the matching game by id", () => {
     expect(
       gameReducer(frozen(game("a")), createDeleteGame("system:a")),
-    ).toBeUndefined();
+    ).toBeFalsy();
   });
 
   it("DELETE_GAME keeps a different game (same reference)", () => {
@@ -208,9 +195,7 @@ describe("gameReducer", () => {
   });
 
   it("DELETE_GAME with no game stays empty", () => {
-    expect(
-      gameReducer(undefined, createDeleteGame("system:b")),
-    ).toBeUndefined();
+    expect(gameReducer(undefined, createDeleteGame("system:b"))).toBeFalsy();
   });
 });
 
@@ -234,13 +219,13 @@ describe("loadedGameReducer", () => {
   });
 
   it("SET_GAME with no game clears", () => {
-    expect(loadedGameReducer({ id: "a" }, createSetGame(null))).toBeUndefined();
+    expect(loadedGameReducer({ id: "a" }, createSetGame(null))).toBeFalsy();
   });
 
   it("DELETE_GAME clears when ids match", () => {
     expect(
       loadedGameReducer({ id: "a" }, createDeleteGame("system:a")),
-    ).toBeUndefined();
+    ).toBeFalsy();
   });
 
   it("DELETE_GAME keeps the state otherwise", () => {
@@ -248,7 +233,7 @@ describe("loadedGameReducer", () => {
     expect(loadedGameReducer(state, createDeleteGame("system:b"))).toBe(state);
     expect(
       loadedGameReducer(undefined, createDeleteGame("system:b")),
-    ).toBeUndefined();
+    ).toBeFalsy();
   });
 });
 
@@ -275,6 +260,11 @@ describe("summariesReducer", () => {
       createSetSummaries({ internal: undefined, system: undefined }),
     );
     expect(result).toEqual({ internal: undefined, system: undefined });
+  });
+
+  it("SET_GAME with no game leaves the state alone", () => {
+    const state = frozen({ bundled: { b: 1 } });
+    expect(summariesReducer(state, createSetGame(undefined))).toBe(state);
   });
 
   it("SET_GAME adds a summary under meta.type/meta.slug", () => {

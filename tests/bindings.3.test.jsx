@@ -1,10 +1,18 @@
 import { screen, waitFor } from "@testing-library/react";
 
 import { games } from "@/data";
-import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 
 import { renderApp } from "@tests/helpers.jsx";
+
+const caps = vi.hoisted(() => ({}));
+
+// Mutate this shared object per test: the app reads the mocked module, so
+// there is no second instance of the real capability singleton to diverge
+vi.mock("@/util/capability", async (importOriginal) => {
+  Object.assign(caps, (await importOriginal()).default);
+  return { default: caps };
+});
 
 vi.mock("@/util/idb", async (importOriginal) => ({
   ...(await importOriginal()),
@@ -13,7 +21,6 @@ vi.mock("@/util/idb", async (importOriginal) => ({
   openFilePicker: vi.fn(),
 }));
 
-const original = { ...capability };
 const loadedGame = {
   title: "1889",
   id: "x",
@@ -23,11 +30,7 @@ const loadedGame = {
 
 beforeEach(() => {
   vi.clearAllMocks();
-  Object.assign(capability, { electron: false, system: false });
-});
-
-afterEach(() => {
-  Object.assign(capability, original);
+  Object.assign(caps, { electron: false, system: false });
 });
 
 describe("bindings", () => {
@@ -35,7 +38,9 @@ describe("bindings", () => {
     const { user, router } = renderApp("/games/18Test/map?config=true");
     await screen.findByRole("button", { name: "Close Config" });
 
-    const input = screen.getAllByDisplayValue("0.25")[0];
+    const input = screen.getByRole("checkbox", {
+      name: "Export all layout options",
+    });
     await user.click(input);
     await user.keyboard("h");
     expect(router.state.location.pathname).toBe("/games/18Test/map");
@@ -61,7 +66,7 @@ describe("bindings", () => {
   });
 
   it("g goes to the loaded game from state", async () => {
-    capability.system = true;
+    caps.system = true;
     idb.loadGame.mockResolvedValue({
       ...games["18Test"],
       meta: { id: "x", type: "system", slug: "system:x" },
@@ -74,15 +79,15 @@ describe("bindings", () => {
   });
 
   it("u does nothing outside of electron", async () => {
-    const { user, router } = renderApp("/");
-    await screen.findByTestId("home");
+    const { user, router } = renderApp("/elements");
+    await screen.findByTestId("atoms");
 
     await user.keyboard("u");
-    expect(router.state.location.pathname).toBe("/");
+    expect(router.state.location.pathname).toBe("/elements");
   });
 
   it("o opens the file picker and then the game", async () => {
-    capability.system = true;
+    caps.system = true;
     idb.openFilePicker.mockResolvedValue("system:xyz");
     idb.loadGame.mockResolvedValue({
       ...games["18Test"],
@@ -98,7 +103,7 @@ describe("bindings", () => {
   });
 
   it("o stays put when the picker is cancelled", async () => {
-    capability.system = true;
+    caps.system = true;
     idb.openFilePicker.mockResolvedValue(undefined);
     const { user, router } = renderApp("/");
     await screen.findByTestId("home");
@@ -109,7 +114,7 @@ describe("bindings", () => {
   });
 
   it("o alerts when the picker fails", async () => {
-    capability.system = true;
+    caps.system = true;
     idb.openFilePicker.mockRejectedValue(new Error("no permission"));
     const { user } = renderApp("/");
     await screen.findByTestId("home");

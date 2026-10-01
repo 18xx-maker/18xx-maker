@@ -1,6 +1,7 @@
 import { Link as RouterLink } from "react-router";
 
 import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
@@ -79,7 +80,15 @@ const GameRow = ({ game, onDelete }) => {
       <TableCell>{game.type}</TableCell>
       <TableCell>
         {onDelete && game.type !== "bundled" && (
-          <DeleteIcon onClick={() => onDelete(game.slug, game.title)} />
+          <IconButton
+            aria-label={`Delete ${game.title}`}
+            color="inherit"
+            size="small"
+            sx={{ p: 0 }}
+            onClick={() => onDelete(game.slug, game.title)}
+          >
+            <DeleteIcon />
+          </IconButton>
         )}
       </TableCell>
     </TableRow>

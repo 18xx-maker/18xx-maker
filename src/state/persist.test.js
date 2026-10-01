@@ -2,7 +2,12 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 
-import { createDeleteGame, createSetConfig, createSetGame } from "@/state";
+import {
+  createAlert,
+  createDeleteGame,
+  createSetConfig,
+  createSetGame,
+} from "@/state";
 
 // What gets persisted to localStorage (see state/store.js: storage.init):
 //
@@ -49,11 +54,15 @@ beforeEach(() => {
   window.localStorage.clear();
 });
 
+afterEach(() => {
+  vi.restoreAllMocks();
+});
+
 describe("loading persisted state", () => {
   it("uses defaults when nothing is stored", async () => {
     const { preloadedState } = await importStore();
     expect(preloadedState.config).toEqual({});
-    expect(preloadedState.loadedGame).toBeUndefined();
+    expect(preloadedState.loadedGame).toBeFalsy();
     expect(preloadedState.alert).toEqual({ open: false });
     expect(preloadedState.errors).toEqual({});
     expect(Object.keys(preloadedState.summaries)).toEqual(["bundled"]);
@@ -73,7 +82,7 @@ describe("loading persisted state", () => {
     expect(store.getState().config).toEqual(JSON.parse(PAYLOAD.config));
     expect(store.getState().loadedGame).toEqual(JSON.parse(PAYLOAD.loadedGame));
     // game itself is never persisted
-    expect(store.getState().game).toBeUndefined();
+    expect(store.getState().game).toBeFalsy();
   });
 
   it("ignores keys that are not persisted", async () => {
@@ -83,7 +92,7 @@ describe("loading persisted state", () => {
     const { preloadedState } = await importStore();
     expect(preloadedState.alert).toEqual({ open: false });
     expect(preloadedState.errors).toEqual({});
-    expect(preloadedState.game).toBeUndefined();
+    expect(preloadedState.game).toBeFalsy();
   });
 
   it("survives corrupt JSON and keeps the other key", async () => {
@@ -96,7 +105,25 @@ describe("loading persisted state", () => {
     expect(preloadedState.loadedGame.id).toBe(
       "123e4567-e89b-12d3-a456-426614174000",
     );
-    error.mockRestore();
+  });
+});
+
+describe("bundled summaries", () => {
+  it("are keyed by game id with the exact summary shape", async () => {
+    const { preloadedState } = await importStore();
+    const { games } = await import("@/data");
+    const bundled = preloadedState.summaries.bundled;
+
+    expect(Object.keys(bundled)).toEqual(Object.keys(games));
+    const id = Object.keys(games)[0];
+    const { title, subtitle, designer, publisher } = games[id].info;
+    expect(bundled[id]).toEqual({
+      title,
+      subtitle,
+      designer,
+      publisher,
+      ...games[id].meta,
+    });
   });
 });
 
@@ -121,7 +148,7 @@ describe("storage.listen", () => {
     expect(window.localStorage.length).toBe(1);
   });
 
-  it("writes loadedGame as a summary when a game is set, and removes it on delete", async () => {
+  it("writes loadedGame as a summary when a game is set", async () => {
     const store = await setup();
     const game = {
       info: { title: "T", subtitle: "S", designer: "D", publisher: "P" },
@@ -139,9 +166,25 @@ describe("storage.listen", () => {
     });
     expect(window.localStorage.getItem("game")).toBeNull();
     expect(window.localStorage.getItem("summaries")).toBeNull();
+  });
+
+  // storage.js removes the key only for `=== undefined`, which is what the
+  // slice reducers currently return when the game is deleted
+  it("removes the stored loadedGame when the game is deleted", async () => {
+    const store = await setup();
+    store.dispatch(
+      createSetGame({
+        info: { title: "T" },
+        meta: { id: "a", type: "system", slug: "system:a" },
+      }),
+    );
+    expect(window.localStorage.getItem("loadedGame")).not.toBeNull();
 
     store.dispatch(createDeleteGame("system:a"));
     expect(window.localStorage.getItem("loadedGame")).toBeNull();
+
+    const { preloadedState } = await importStore();
+    expect(preloadedState.loadedGame).toBeFalsy();
   });
 
   it("does not write when the persisted values did not change", async () => {
@@ -150,13 +193,11 @@ describe("storage.listen", () => {
     const setItem = vi.spyOn(Storage.prototype, "setItem");
     const removeItem = vi.spyOn(Storage.prototype, "removeItem");
 
-    store.dispatch({ type: "SET_ALERT", alert: { title: "x" } });
+    store.dispatch(createAlert("x", "y"));
     store.dispatch({ type: "@@unknown" });
 
     expect(setItem).not.toHaveBeenCalled();
     expect(removeItem).not.toHaveBeenCalled();
-    setItem.mockRestore();
-    removeItem.mockRestore();
   });
 
   it("writes synchronously on every change (no debounce)", async () => {

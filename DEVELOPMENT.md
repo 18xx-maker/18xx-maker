@@ -102,6 +102,10 @@ pnpm test
 # Run the tests once, and update the print output snapshots (see below)
 pnpm test:run -u
 
+# CI also enforces a 95% statement coverage floor on src/state; run
+# CI=1 pnpm test:run to reproduce it locally
+CI=1 pnpm test:run
+
 # Run all fixing linters
 pnpm fix
 

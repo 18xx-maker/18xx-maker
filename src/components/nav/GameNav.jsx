@@ -55,6 +55,7 @@ const GameSectionButton = ({ section, disabled }) => {
   return (
     <ListItemButton
       selected={selected}
+      aria-current={selected ? "page" : undefined}
       component={RouterLink}
       to={to}
       disabled={disabled}

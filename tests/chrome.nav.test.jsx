@@ -1,17 +1,21 @@
 import { act, screen, waitFor } from "@testing-library/react";
+import { page } from "@vitest/browser/context";
 
 import { clearAlert, createAlert } from "@/state";
 
 import { renderApp } from "@tests/helpers.jsx";
 
-// The component browser project runs at a phone sized viewport, so the side
+// The viewport is set to phone size below, so the side
 // nav is the temporary drawer opened by the hamburger button.
 // The suite includes hidden elements by default, but the permanent drawer is
 // display:none on a phone, so ask for what the user can actually see
 const visible = { hidden: false };
 
-// eslint-disable-next-line testing-library/no-node-access -- the icon button has no accessible name
-const hamburger = () => screen.getAllByTestId("MenuIcon")[0].closest("button");
+const hamburger = () => screen.getByRole("button", { name: "menu" });
+
+beforeEach(async () => {
+  await page.viewport(414, 896);
+});
 
 describe("side nav", () => {
   it("opens from the hamburger and navigates with the game nav links", async () => {
@@ -32,21 +36,28 @@ describe("side nav", () => {
     expect(await screen.findByTestId("game-18Test-tiles")).toBeInTheDocument();
   });
 
-  it("marks the current section as selected and disables missing ones", async () => {
-    const { user } = renderApp("/games/1888/");
-    expect(await screen.findByTestId("game-1888")).toBeInTheDocument();
+  it("marks the current section and disables missing ones", async () => {
+    const { user } = renderApp("/games/1888/cards");
+    expect(await screen.findByTestId("game-1888-cards")).toBeInTheDocument();
     await user.click(hamburger());
+
+    expect(
+      await screen.findByRole("link", { name: "Cards", ...visible }),
+    ).toHaveAttribute("aria-current", "page");
+    expect(
+      screen.getByRole("link", { name: "Revenue", ...visible }),
+    ).not.toHaveAttribute("aria-current");
 
     // 1888 has no map
     expect(
       await screen.findByRole("link", { name: "Map", ...visible }),
     ).toHaveAttribute("aria-disabled", "true");
     expect(
-      screen.getByRole("link", { name: "Cards", ...visible }),
+      screen.getByRole("link", { name: "Revenue", ...visible }),
     ).not.toHaveAttribute("aria-disabled", "true");
   });
 
-  it("shows the elements and docs menus", async () => {
+  it("navigates with the elements side menu", async () => {
     const { user, router } = renderApp("/elements");
     expect(await screen.findByTestId("atoms")).toBeInTheDocument();
 
@@ -60,13 +71,17 @@ describe("side nav", () => {
   it("has no hamburger on pages without a side menu", async () => {
     renderApp("/");
     expect(await screen.findByTestId("home")).toBeInTheDocument();
-    expect(screen.queryByTestId("MenuIcon")).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "menu" }),
+    ).not.toBeInTheDocument();
   });
 
   it("is hidden in print mode", async () => {
     renderApp("/games/18Test/map?print=true");
     expect(await screen.findByTestId("game-18Test-map")).toBeInTheDocument();
-    expect(screen.queryByTestId("MenuIcon")).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "menu" }),
+    ).not.toBeInTheDocument();
   });
 });
 

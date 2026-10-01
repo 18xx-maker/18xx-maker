@@ -18,7 +18,7 @@ export const loadSummaries = () => (dispatch) => {
     return window.api.loadSummaries().then(createSetSummaries).then(dispatch);
   }
 
-  Promise.all([
+  return Promise.all([
     capability.internal ? opfs.loadSummaries() : undefined,
     capability.system ? idb.loadSummaries() : undefined,
   ])
@@ -32,6 +32,10 @@ export const summariesReducer = (state = {}, action) => {
     case SET_SUMMARIES:
       return { ...state, ...action.summaries };
     case SET_GAME:
+      if (!action.game) {
+        return state;
+      }
+
       return assocPath(
         [action.game.meta.type, action.game.meta.slug],
         getGameSummary(action.game),

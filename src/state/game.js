@@ -126,7 +126,7 @@ export const deleteGame = (slug, title) => (dispatch) => {
       if (!capability.system) {
         return reject(
           new Error(
-            "Your browser doesn't support loading games from your file system",
+            "Your browser doesn't support deleting games from your file system",
           ),
         );
       }
@@ -138,7 +138,7 @@ export const deleteGame = (slug, title) => (dispatch) => {
       if (!capability.internal) {
         return reject(
           new Error(
-            "Your browser doesn't support loading games from the private internal file system",
+            "Your browser doesn't support deleting games from the private internal file system",
           ),
         );
       }
@@ -150,7 +150,7 @@ export const deleteGame = (slug, title) => (dispatch) => {
       if (!capability.electron) {
         return reject(
           new Error(
-            "Your browser doesn't support loading games from the file system",
+            "Your browser doesn't support deleting games from the file system",
           ),
         );
       }

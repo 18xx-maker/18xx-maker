@@ -42,7 +42,7 @@ const types = () => dispatch.mock.calls.map(([action]) => action);
 beforeEach(() => {
   dispatch = vi.fn();
   state = {};
-  vi.clearAllMocks();
+  vi.resetAllMocks();
   Object.assign(capability, {
     electron: false,
     internal: true,
@@ -168,17 +168,17 @@ describe("deleteGame", () => {
     ["bundled:1889", "Cannot delete bundled game: My Game", () => {}],
     [
       "system:abc",
-      "Your browser doesn't support loading games from your file system",
+      "Your browser doesn't support deleting games from your file system",
       () => (capability.system = false),
     ],
     [
       "internal:abc",
-      "Your browser doesn't support loading games from the private internal file system",
+      "Your browser doesn't support deleting games from the private internal file system",
       () => (capability.internal = false),
     ],
     [
       "electron:abc",
-      "Your browser doesn't support loading games from the file system",
+      "Your browser doesn't support deleting games from the file system",
       () => {},
     ],
     ["wat:abc", "Unknown game type wat", () => {}],
@@ -247,29 +247,35 @@ describe("refreshGame", () => {
 });
 
 describe("loadSummaries", () => {
-  // dispatch is a thunk-less mock, so resolve it via a flush
-  const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
-
   it("loads both internal and system summaries", async () => {
     opfs.loadSummaries.mockResolvedValue({ a: 1 });
     idb.loadSummaries.mockResolvedValue({ b: 2 });
 
-    loadSummaries()(dispatch);
-    await flush();
+    await loadSummaries()(dispatch);
     expect(types()).toEqual([
       createSetSummaries({ internal: { a: 1 }, system: { b: 2 } }),
     ]);
   });
 
-  it("skips unsupported storage", async () => {
+  it("skips unsupported system storage", async () => {
     capability.system = false;
     opfs.loadSummaries.mockResolvedValue({ a: 1 });
 
-    loadSummaries()(dispatch);
-    await flush();
+    await loadSummaries()(dispatch);
     expect(idb.loadSummaries).not.toHaveBeenCalled();
     expect(types()).toEqual([
       createSetSummaries({ internal: { a: 1 }, system: undefined }),
+    ]);
+  });
+
+  it("skips unsupported internal storage", async () => {
+    capability.internal = false;
+    idb.loadSummaries.mockResolvedValue({ b: 2 });
+
+    await loadSummaries()(dispatch);
+    expect(opfs.loadSummaries).not.toHaveBeenCalled();
+    expect(types()).toEqual([
+      createSetSummaries({ internal: undefined, system: { b: 2 } }),
     ]);
   });
 

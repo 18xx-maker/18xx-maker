@@ -81,7 +81,7 @@ describe("config drawer", () => {
     );
   });
 
-  it("applies the stored config to pages (selects on the drawer reflect it)", async () => {
+  it("changing a select updates the stored config and the drawer", async () => {
     const { user, store } = renderApp("/games/18Test/charters?config=true");
     await screen.findByRole("button", { name: "Close Config" });
 
@@ -100,8 +100,7 @@ describe("config drawer", () => {
     await screen.findByRole("button", { name: "Close Config" });
 
     // Default margin is 25 (a quarter inch), shown in inches
-    // The unit inputs have no accessible label, use the default (a quarter inch)
-    const input = screen.getAllByDisplayValue("0.25")[0];
+    const input = screen.getByRole("textbox", { name: "Margin Size" });
     expect(input).toHaveValue("0.25");
 
     await user.clear(input);
@@ -127,14 +126,17 @@ describe("config drawer", () => {
     expect(store.getState().config).toEqual({});
   });
 
-  it("search params override stored config", async () => {
+  it("search params override stored config without being stored", async () => {
     const { store } = renderApp(
-      "/games/18Test/charters?config.charters.layout=3x1",
+      "/games/18Test/charters?config=true&config.charters.layout=3x1",
+      { config: { charters: { layout: "free" } } },
     );
+    await screen.findByRole("button", { name: "Close Config" });
+
     expect(
-      await screen.findByTestId("game-18Test-charters"),
-    ).toBeInTheDocument();
+      screen.getByRole("combobox", { name: /Charter Layout/ }),
+    ).toHaveTextContent("3x1");
     // Search config is not written to state
-    expect(store.getState().config).toEqual({});
+    expect(store.getState().config).toEqual({ charters: { layout: "free" } });
   });
 });
