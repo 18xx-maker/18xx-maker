@@ -359,9 +359,12 @@ describe("Tooltip", () => {
     expect(tip).toHaveAttribute("data-chrome", "tooltip");
 
     // Left of the button, a dark box 14px away with the white text
+    // The popup is positioned (and scales in) after it mounts, so wait for it
     const box = within(tip).getByText("Print");
-    expect(box.getBoundingClientRect().right).toBeLessThanOrEqual(
-      fab.getBoundingClientRect().left - 13,
+    await waitFor(() =>
+      expect(box.getBoundingClientRect().right).toBeLessThanOrEqual(
+        fab.getBoundingClientRect().left - 13,
+      ),
     );
     expect(style(box).color).toBe("rgb(255, 255, 255)");
     expect(style(box).backgroundColor).toBe("rgba(97, 97, 97, 0.92)");
