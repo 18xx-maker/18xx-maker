@@ -17,7 +17,9 @@ to PDF documents or the individual component that you are on. Exporting this way
 _will_ respect any config options you have set in the app. The _Export options_
 entry opens a panel where you choose the formats (PDF, PNG and Board18), the
 documents, if every layout of a sheet is exported, if the paginated PDFs are
-included and the folder, then exports them all at once. Press _Cancel export_ in
+included and the folder, then exports them all at once. The panel starts with
+the options of the game's `exports` field if it has one (see [Export
+options](/docs/games/exports)), and what you change there wins. Press _Cancel export_ in
 the panel to stop an export that is running; the files that are done stay.
 
 If you choose to export a full game you are asked to pick a folder to put all of
@@ -57,6 +59,13 @@ to get a sheet for every layout, `--variation 1` for one map variation,
 `--config my-config.json` for a config file on top of `src/config.json`,
 `--out <folder>` for another folder than `render` and `--jobs 3` to capture
 three files at the same time. `pnpm maker help export` lists them all.
+
+Every one of these options can also be set in the game file, in its `exports`
+field (see [Export options](/docs/games/exports)). The game file has the
+defaults for that game, and what you give on the command line wins over it. For
+example, with `"exports": { "docs": ["map"], "paginated": true }` in the game,
+`pnpm maker export my-game.json` exports only the paginated and normal map, and
+`pnpm maker export my-game.json --docs cards` exports the cards instead.
 
 Remember that this will not use the options setup in the browser config page. In
 order to make your printed output identical to what you see in the browser, go

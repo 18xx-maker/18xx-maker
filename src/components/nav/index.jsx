@@ -15,6 +15,7 @@ import {
   Package,
   Scissors,
   ScrollText,
+  Settings2,
   Shield,
   SquareDashed,
   SwatchBook,
@@ -130,6 +131,11 @@ export const mainMenu = [
         icon: Move,
         label: "docs.games.positioning.title",
         to: "/docs/games/positioning",
+      },
+      {
+        icon: Settings2,
+        label: "docs.games.exports.title",
+        to: "/docs/games/exports",
       },
       { sep: true },
       {

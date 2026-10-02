@@ -117,6 +117,12 @@ pnpm test:e2e
 pnpm maker export 18Test --format pdf,png,b18
 node scripts/export-golden.mjs 18Test
 
+# Every export option (formats, docs, layouts, paginated, variation, png.dpi,
+# b18.version, b18.author) can also be set in a game file's `exports` field
+# (src/schemas/game.schema.json, src/docs/games/exports.en.md). A flag wins over
+# the game file and the game file over the defaults: resolveExportOptions in
+# src/export/options.js is the one place that decides, for the CLI and the app.
+
 # Run all fixing linters
 pnpm fix
 
@@ -244,6 +250,13 @@ Notes:
   resolution in the files.
 - The vitest projects only include `src/` and `tests/`, so they never pick up
   `e2e/`.
+
+The export options are resolved in `src/export/options.js` (plain JS, used by
+`maker export` and by `planExport` in `src/util/exportPlan.js`, which also gives
+the export options panel its starting values). A new option goes in the `exports`
+schema (with a description, and copy `src/schemas/game.schema.json` to
+`public/schemas/`), `cleanOptions`, the CLI flags (without a commander default,
+or the flag would always hide the game file), the panel, and the docs.
 
 `scripts/export-golden.mjs [game]` checks the shared capture
 (`src/export/capture.js`, Chrome DevTools Protocol commands) against Playwright's

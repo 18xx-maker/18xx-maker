@@ -50,14 +50,17 @@ all files into this directory. The app will open this directory on your file
 system when it's done. The single options ask you for a individual file to
 export to and will open the individual file that was exported when they finish.
 
+The _Export options_ entry of the menu opens a panel to choose the formats, the
+pages and the other options of a full export. A game file can set the starting
+values of the panel (and of `maker export`, and of the full game entries of the
+menu) in its `exports` field, see [Export options](/docs/games/exports).
+
 > [!NOTE]
 > Not all components support the "current component" PNG option
 
-> [!WARNING]
-> The PNG output is currently only set to the DPI of a browser screenshot on
-> your system. We would like to support higher DPI output. If you need high
-> resolution images the best solution (currently) is doing a custom export
-> process from PDF files.
+PNG images are made at 300 dpi by default, the resolution to print at. Choose a
+lower one (1 to 300) in the _Export options_ panel or with `png.dpi` in the
+game file's `exports`.
 
 ## Creating a new game
 

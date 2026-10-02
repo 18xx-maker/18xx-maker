@@ -37,7 +37,7 @@
     "singlePng": "Export this component as a png image",
     "options": "Export options",
     "optionsTitle": "Export {{title}}",
-    "optionsDescription": "Choose the files to export. Board18 boxes are always at one pixel for each unit.",
+    "optionsDescription": "Choose the files to export. The options start as the exports of the game file. Board18 boxes are always at one pixel for each unit.",
     "formats": "Formats",
     "format": {
       "pdf": "PDF documents",
@@ -144,6 +144,10 @@
       "positioning": {
         "title": "Auto Positioning",
         "description": "Easier map creation"
+      },
+      "exports": {
+        "title": "Export Options",
+        "description": "Set the export options in the game file"
       }
     },
     "pnp": {

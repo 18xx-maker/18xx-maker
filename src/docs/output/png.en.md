@@ -42,7 +42,10 @@ components export the full game as PNG images.
 
 Images are made at 300 dpi, the resolution to print at, and carry their
 resolution so they open at their real size. The _Export options_ panel lets you
-choose a lower resolution (1 to 300 dpi).
+choose a lower resolution (1 to 300 dpi). A game file can set the resolution
+(and the other export options) with `"exports": { "png": { "dpi": 150 } }`, see
+[Export options](/docs/games/exports): the panel starts with it and exporting
+one page uses it.
 
 ## Command Line
 
@@ -73,6 +76,13 @@ can lower the `--dpi`. A document that takes more than two minutes fails.
 # Only the cards and the map, at 150 dpi
 pnpm maker export 1889 --format png --docs cards,map --dpi 150
 ```
+
+The format, the pages and the resolution can be set in the game file instead,
+with `"exports": { "formats": ["png"], "docs": ["cards", "map"], "png": { "dpi":
+150 } }`. A flag wins over the game file, and the game file over the defaults,
+so `pnpm maker export my-game.json --dpi 300` exports that game at 300 dpi. A
+resolution over 300 is an error in the game file too (`pnpm validate` says so).
+See [Export options](/docs/games/exports) for all of them.
 
 Remember that this will not use the options setup in the browser config page,
 see [PDF output](/docs/output/pdf) for how to use your config.

@@ -37,6 +37,13 @@ The game and tiles schemas both reference
 [tiles.defs.json](https://18xx-maker.com/schemas/tiles.defs.json) which is shared and defines all of
 the json that can go into a map/tile hex.
 
+## Export options
+
+A game file can have an `exports` field with the default options for exporting
+the game (formats, pages, resolution, Board18 version and author). It is
+described in the game schema and in [Export options](/docs/games/exports), and
+a value that is not valid, like a resolution over 300 dpi, fails validation.
+
 ## Validation
 
 To validate all files you can run:
