@@ -1,0 +1,28 @@
+.root {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+@media (width >= 600px) {
+  .root {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+}
+
+@media (width >= 960px) {
+  .md {
+    max-width: 960px;
+  }
+}
+
+@media (width >= 1280px) {
+  .lg {
+    max-width: 1280px;
+  }
+}

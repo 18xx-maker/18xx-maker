@@ -1,0 +1,132 @@
+.root {
+  min-width: 64px;
+  border-radius: var(--radius);
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  transition:
+    background-color var(--duration-short) var(--ease-in-out),
+    box-shadow var(--duration-short) var(--ease-in-out),
+    border-color var(--duration-short) var(--ease-in-out),
+    color var(--duration-short) var(--ease-in-out);
+}
+
+.root:hover {
+  text-decoration: none;
+}
+
+/* Colors only set variables, the variants use them */
+.primary {
+  --c: var(--palette-primary-main);
+  --c-dark: var(--palette-primary-dark);
+  --c-contrast: var(--palette-primary-contrast);
+  --c-hover: color-mix(in srgb, var(--palette-primary-main) 4%, transparent);
+  --c-border: color-mix(in srgb, var(--palette-primary-main) 50%, transparent);
+}
+
+.secondary {
+  --c: var(--palette-secondary-main);
+  --c-dark: var(--palette-secondary-dark);
+  --c-contrast: var(--palette-secondary-contrast);
+  --c-hover: color-mix(in srgb, var(--palette-secondary-main) 4%, transparent);
+  --c-border: color-mix(
+    in srgb,
+    var(--palette-secondary-main) 50%,
+    transparent
+  );
+}
+
+.inherit {
+  --c: currentcolor;
+  --c-dark: var(--palette-grey-a100);
+  --c-contrast: currentcolor;
+  --c-hover: color-mix(in srgb, var(--palette-text-primary) 4%, transparent);
+  --c-border: currentcolor;
+}
+
+.text {
+  padding: 6px 8px;
+  color: var(--c);
+}
+
+.outlined {
+  border: 1px solid var(--c-border);
+  padding: 5px 15px;
+  color: var(--c);
+}
+
+.contained {
+  padding: 6px 16px;
+  background-color: var(--c);
+  box-shadow: var(--shadow-2);
+  color: var(--c-contrast);
+}
+
+.contained.inherit {
+  background-color: var(--palette-grey-300);
+}
+
+@media (hover: hover) {
+  .text:hover {
+    background-color: var(--c-hover);
+  }
+
+  .outlined:hover {
+    border-color: var(--c);
+    background-color: var(--c-hover);
+  }
+
+  .contained:hover {
+    background-color: var(--c-dark);
+    box-shadow: var(--shadow-4);
+  }
+}
+
+.contained:active {
+  box-shadow: var(--shadow-8);
+}
+
+/* Replaces MUI's focus ripple */
+.root:focus-visible {
+  outline: 2px solid var(--c-border);
+  outline-offset: 2px;
+}
+
+.contained:focus-visible {
+  box-shadow: var(--shadow-6);
+}
+
+.startIcon {
+  display: inherit;
+  margin-right: 8px;
+  margin-left: -4px;
+}
+
+.endIcon {
+  display: inherit;
+  margin-right: -4px;
+  margin-left: 8px;
+}
+
+.startIcon > :first-child,
+.endIcon > :first-child {
+  font-size: 20px;
+}
+
+.disabled {
+  color: var(--palette-action-disabled);
+  pointer-events: none;
+  cursor: default;
+}
+
+.outlined.disabled {
+  border-color: var(--palette-action-disabled-background);
+}
+
+.contained.disabled {
+  background-color: var(--palette-action-disabled-background);
+  box-shadow: none;
+}

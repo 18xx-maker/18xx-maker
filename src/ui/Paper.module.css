@@ -1,0 +1,29 @@
+.root {
+  background-color: var(--palette-background-paper);
+  color: var(--palette-text-primary);
+  transition: box-shadow var(--duration-standard) var(--ease-in-out);
+}
+
+.rounded {
+  border-radius: var(--radius);
+}
+
+.elevation0 {
+  box-shadow: none;
+}
+
+.elevation1 {
+  box-shadow: var(--shadow-1);
+}
+
+.elevation4 {
+  box-shadow: var(--shadow-4);
+}
+
+.elevation5 {
+  box-shadow: var(--shadow-5);
+}
+
+.elevation10 {
+  box-shadow: var(--shadow-10);
+}

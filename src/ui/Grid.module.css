@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  gap: var(--grid-gap, 0);
+  min-width: 0;
+}
+
+/* --grid-<breakpoint> is set inline. A breakpoint without a size inherits the
+   next smaller one, like Grid2 */
+.item {
+  --size: var(--grid-xs, 12);
+
+  box-sizing: border-box;
+  flex-grow: 0;
+  width: calc(
+    100% * var(--size) / 12 - (12 - var(--size)) * var(--grid-gap, 0px) / 12
+  );
+  min-width: 0;
+}
+
+@media (width >= 600px) {
+  .item {
+    --size: var(--grid-sm, var(--grid-xs, 12));
+  }
+}
+
+@media (width >= 960px) {
+  .item {
+    --size: var(--grid-md, var(--grid-sm, var(--grid-xs, 12)));
+  }
+}
+
+@media (width >= 1280px) {
+  .item {
+    --size: var(--grid-lg, var(--grid-md, var(--grid-sm, var(--grid-xs, 12))));
+  }
+}

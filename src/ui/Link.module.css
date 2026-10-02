@@ -1,0 +1,36 @@
+.color-primary {
+  color: var(--palette-primary-main);
+}
+
+.color-inherit {
+  color: inherit;
+}
+
+.underline-none {
+  text-decoration: none;
+}
+
+.underline-hover {
+  text-decoration: none;
+}
+
+.underline-hover:hover {
+  text-decoration: underline;
+}
+
+.underline-always {
+  text-decoration: underline;
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--palette-primary-main) 40%,
+    transparent
+  );
+}
+
+.color-inherit.underline-always {
+  text-decoration-color: currentcolor;
+}
+
+.underline-always:hover {
+  text-decoration-color: inherit;
+}

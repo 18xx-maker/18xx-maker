@@ -21,6 +21,27 @@
   /* theme.shape.borderRadius */
   --radius: 4px;
 
+  /* theme.typography.fontFamily */
+  --font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+
+  /* theme.shadows[n], only the elevations the chrome uses */
+  --shadow-1: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+    0 1px 3px 0 rgb(0 0 0 / 12%);
+  --shadow-2: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%),
+    0 1px 5px 0 rgb(0 0 0 / 12%);
+  --shadow-4: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%),
+    0 1px 10px 0 rgb(0 0 0 / 12%);
+  --shadow-5: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 5px 8px 0 rgb(0 0 0 / 14%),
+    0 1px 14px 0 rgb(0 0 0 / 12%);
+  --shadow-6: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%),
+    0 1px 18px 0 rgb(0 0 0 / 12%);
+  --shadow-8: 0 5px 5px -3px rgb(0 0 0 / 20%), 0 8px 10px 1px rgb(0 0 0 / 14%),
+    0 3px 14px 2px rgb(0 0 0 / 12%);
+  --shadow-10: 0 6px 6px -3px rgb(0 0 0 / 20%), 0 10px 14px 1px rgb(0 0 0 / 14%),
+    0 4px 18px 3px rgb(0 0 0 / 12%);
+  --shadow-12: 0 7px 8px -4px rgb(0 0 0 / 20%), 0 12px 17px 2px rgb(0 0 0 / 14%),
+    0 5px 22px 4px rgb(0 0 0 / 12%);
+
   /* theme.palette */
   --palette-primary-main: #5e35b1;
   --palette-primary-light: rgb(126 93 192);
@@ -68,6 +89,7 @@
   --palette-grey-700: #616161;
   --palette-grey-800: #424242;
   --palette-grey-900: #212121;
+  --palette-grey-a100: #f5f5f5;
 
   /* theme.zIndex (the code uses drawer + 1 and drawer + 2) */
   --z-mobile-stepper: 1000;

@@ -1,0 +1,99 @@
+.root {
+  margin: 0;
+}
+
+.h3 {
+  font-family: var(--font-family);
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1.167;
+  letter-spacing: 0;
+}
+
+.h4 {
+  font-family: var(--font-family);
+  font-size: 2.125rem;
+  font-weight: 400;
+  line-height: 1.235;
+  letter-spacing: 0.00735em;
+}
+
+.h5 {
+  font-family: var(--font-family);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.334;
+  letter-spacing: 0;
+}
+
+.h6 {
+  font-family: var(--font-family);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+}
+
+.subtitle1 {
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: 0.00938em;
+}
+
+.body1 {
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+}
+
+.body2 {
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+}
+
+.caption {
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.66;
+  letter-spacing: 0.03333em;
+}
+
+.inherit {
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+.textSecondary {
+  color: var(--palette-text-secondary);
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.displayBlock {
+  display: block;
+}
+
+.noWrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gutterBottom {
+  margin-bottom: 0.35em;
+}
+
+.paragraph {
+  margin-bottom: 16px;
+}

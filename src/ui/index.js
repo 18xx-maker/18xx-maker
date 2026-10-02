@@ -3,3 +3,32 @@
 export { breakpoints, down, up } from "./breakpoints";
 export { default as useMediaQuery } from "./useMediaQuery";
 export * from "./icons";
+export { default as AppBar } from "./AppBar";
+export { default as Avatar } from "./Avatar";
+export { default as AvatarGroup } from "./AvatarGroup";
+export { default as Box } from "./Box";
+export { default as Button } from "./Button";
+export { default as Container } from "./Container";
+export { default as Divider } from "./Divider";
+export { default as Fab } from "./Fab";
+export { default as Grid } from "./Grid";
+export { default as IconButton } from "./IconButton";
+export { default as Link } from "./Link";
+export { default as Paper } from "./Paper";
+export {
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "./List";
+export {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "./Table";
+export { default as Toolbar } from "./Toolbar";
+export { default as Typography } from "./Typography";

@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+/* The avatars are the group's children, whatever component renders them */
+.root > * {
+  box-sizing: content-box;
+  margin-left: -8px;
+  border: 2px solid var(--palette-background-default);
+}
+
+.root > :last-child {
+  margin-left: 0;
+}

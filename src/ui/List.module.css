@@ -1,0 +1,100 @@
+.list {
+  position: relative;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  text-decoration: none;
+}
+
+.itemPadding {
+  padding: 8px 16px;
+}
+
+.button {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+
+  /* A native button does not inherit these */
+  font: inherit;
+  letter-spacing: inherit;
+  padding: 8px 16px;
+  min-width: 0;
+  text-align: left;
+  transition: background-color var(--duration-shortest) var(--ease-in-out);
+}
+
+@media (hover: hover) {
+  .button:hover {
+    background-color: var(--palette-action-hover);
+    text-decoration: none;
+  }
+
+  .selected:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--palette-primary-main) 12%,
+      transparent
+    );
+  }
+}
+
+.selected {
+  background-color: color-mix(
+    in srgb,
+    var(--palette-primary-main) 8%,
+    transparent
+  );
+}
+
+/* Replaces MUI's focus ripple */
+.button:focus-visible {
+  background-color: var(--palette-action-focus);
+  outline: 2px solid var(--palette-primary-main);
+  outline-offset: -2px;
+}
+
+.selected:focus-visible {
+  background-color: color-mix(
+    in srgb,
+    var(--palette-primary-main) 20%,
+    transparent
+  );
+}
+
+.disabled {
+  opacity: 0.38;
+  pointer-events: none;
+  cursor: default;
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  min-width: 56px;
+  color: var(--palette-action-active);
+}
+
+.text {
+  flex: 1 1 auto;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  min-width: 0;
+}
+
+.multiline {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}

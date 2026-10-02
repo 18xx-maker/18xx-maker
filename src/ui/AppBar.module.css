@@ -1,0 +1,28 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: var(--palette-primary-main);
+  box-shadow: var(--shadow-4);
+  color: var(--palette-primary-contrast);
+  transition: box-shadow var(--duration-standard) var(--ease-in-out);
+}
+
+.sticky,
+.fixed {
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: auto;
+  z-index: var(--z-app-bar);
+}
+
+.fixed {
+  position: fixed;
+}
+
+.static {
+  position: static;
+}

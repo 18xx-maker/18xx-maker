@@ -1,0 +1,21 @@
+.root {
+  display: flex;
+  position: relative;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--palette-grey-400);
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  color: var(--palette-background-default);
+  font-family: var(--font-family);
+  font-size: 1.25rem;
+  line-height: 1;
+  user-select: none;
+}
+
+.square {
+  border-radius: 0;
+}
