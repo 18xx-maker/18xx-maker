@@ -39,8 +39,8 @@ jobs:
         run: pnpm --silent pretty
       - name: ESLint and Stylelint
         run: pnpm --silent lint
-      - name: No @mui/styles usage
-        run: pnpm --silent check:mui-styles
+      - name: No MUI or Emotion imports
+        run: pnpm --silent check:mui
       - name: 18xx Maker Validate
         run: pnpm --silent validate
         env:

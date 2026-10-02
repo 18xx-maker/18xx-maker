@@ -12,8 +12,8 @@ import zlib from "node:zlib";
 
 const dir = path.join(import.meta.dirname, "..", "dist", "site", "assets");
 
-const BASELINE = { app: 579_919, data: 4_000_616 };
-const BUDGET = { app: 640_000, data: 4_400_000 };
+const BASELINE = { app: 544_618, data: 4_000_614 };
+const BUDGET = { app: 600_000, data: 4_400_000 };
 
 if (!fs.existsSync(dir)) {
   console.error(`${dir} not found, run pnpm build first`);

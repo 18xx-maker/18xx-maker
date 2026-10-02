@@ -25,8 +25,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 Each file name matches the `@mui/icons-material` export it replaces
-(`svg/Train.svg` replaces `@mui/icons-material/Train`). To add one, copy the
-`<path>` data from that package into a new file shaped like the others
+(`svg/Train.svg` is `@mui/icons-material/Train`). To add one, copy the `<path>`
+data of the Material icon of that name (the filled variant, or the one the
+name says: `Outlined`, `Outline`) into a new file shaped like the others
 (`viewBox="0 0 24 24"`, `fill="currentColor"`, `width`/`height` of `1em`) and
 export it from `index.js` with `createIcon`.
 

@@ -51,13 +51,13 @@ Conventions:
 
 ## Upgrade notes
 
-- `@mui/styles` (legacy JSS `makeStyles`) is gone from `src` and the
-  dependencies (`pnpm check:mui-styles` keeps it out); it was unsupported
-  upstream on React 19, but a spike found React 19.3 runs on the current stack
-  in the component tests and e2e (not known broken). The peers
-  `@testing-library/react`, `react-redux`, `@reduxjs/toolkit` and
-  `react-confetti` need bumps first, and the snapshot id normaliser must accept
-  React 19 ids. Migrate off it before upgrading React (currently 18.3.1).
+- MUI and Emotion are gone from `src` and the dependencies (`pnpm check:mui`
+  keeps them out). The chrome is `src/ui`: CSS Modules, with Base UI for the
+  Select, Menu, Tooltip and Slider (see its README). React is still 18.3.1; a
+  spike found React 19.3 runs on the stack in the component tests and e2e (not
+  known broken). The peers `@testing-library/react`, `react-redux`,
+  `@reduxjs/toolkit` and `react-confetti` need bumps first, and the snapshot id
+  normaliser must accept React 19 ids.
 - Redux state uses hand-rolled `combineReducers`/`composeReducers`/`reducePath`
   (`src/state/helpers.js`). A move to `createSlice` must keep the root state
   contract test and persisted fixture passing.

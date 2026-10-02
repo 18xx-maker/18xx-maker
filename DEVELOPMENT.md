@@ -111,9 +111,9 @@ pnpm build
 pnpm test:e2e
 
 # Check the web build (after pnpm build) against the bundle size budget, and
-# that nothing imports the legacy @mui/styles
+# that nothing imports MUI or Emotion
 pnpm check:bundle
-pnpm check:mui-styles
+pnpm check:mui
 
 # Run all fixing linters
 pnpm fix
