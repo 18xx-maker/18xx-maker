@@ -99,12 +99,13 @@
   border-bottom-color: var(--palette-error-main);
 }
 
-/* The outlined variant has no label: a box with a border */
+/* The outlined variant has no label: a box with a border (the padding is
+   MUI's 16.5px 32px 16.5px 14px less the 1px border) */
 .outlined .trigger {
   border: 1px solid rgb(0 0 0 / 23%);
   border-radius: var(--radius);
   background-color: transparent;
-  padding: 16.5px 32px 16.5px 14px;
+  padding: 15.5px 31px 15.5px 13px;
 }
 
 @media (hover: hover) {

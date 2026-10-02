@@ -193,6 +193,13 @@ describe("Select", () => {
     rerender(<Themes variant="outlined" label={undefined} />);
     expect(screen.queryByText("Theme")).not.toBeInTheDocument();
     expect(style(screen.getByRole("combobox")).borderTopWidth).toBe("1px");
+    // MUI's outlined select is 56px high, its text, 32px of arrow room and
+    // 14px of padding on the sides, inside the border
+    expect(screen.getByRole("combobox").getBoundingClientRect().height).toBe(
+      56,
+    );
+    expect(style(screen.getByRole("combobox")).paddingRight).toBe("31px");
+    expect(style(screen.getByRole("combobox")).paddingLeft).toBe("13px");
   });
 });
 
