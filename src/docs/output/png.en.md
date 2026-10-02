@@ -37,8 +37,12 @@ following components:
 - Revenue
 - Tile Manifest
 
-Other components will silently fail to generate a image. If you need images for
-these components export the full game as PNG images.
+Other components fail with an error message. If you need images for these
+components export the full game as PNG images.
+
+Images are made at 300 dpi, the resolution to print at, and carry their
+resolution so they open at their real size. The _Export options_ panel lets you
+choose a lower resolution (1 to 300 dpi).
 
 ## Command Line
 

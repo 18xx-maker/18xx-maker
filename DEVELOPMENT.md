@@ -252,10 +252,13 @@ and PDFs must have the same page count and page sizes (and the same pages as
 images when `pdftoppm` is installed). Run it on Linux, where fonts and the
 Chromium build make pixels comparable.
 
-An Electron smoke test (launch the built app with Playwright's `_electron`,
-open a game, check the window title) is not implemented yet. It would need
-`pnpm build:app` first, and covers what the web build cannot: the preload API
-(`window.api`), native file dialogs and the export button.
+`e2e/electron.spec.js` launches the built app with Playwright's `_electron`
+(run `pnpm build:app` first) and exports 18Test from the export options panel,
+a single page as a pdf, and quits in the middle of an export. It opens real
+windows, so it only runs with `E2E_ELECTRON=1` (`E2E_ELECTRON=1 pnpm test:e2e
+e2e/electron.spec.js`; on Linux use `xvfb-run`). The native dialogs are replaced
+in the main process. The export windows load the built renderer
+(`dist/renderer`, `pnpm build:app`), also in `pnpm start:app`.
 
 ## File Layout
 

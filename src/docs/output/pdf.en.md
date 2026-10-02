@@ -14,7 +14,11 @@ click on the export button:
 
 This will expose a menu with export options. You can either export a full game
 to PDF documents or the individual component that you are on. Exporting this way
-_will_ respect any config options you have set in the app.
+_will_ respect any config options you have set in the app. The _Export options_
+entry opens a panel where you choose the formats (PDF, PNG and Board18), the
+documents, if every layout of a sheet is exported, if the paginated PDFs are
+included and the folder, then exports them all at once. Press _Cancel export_ in
+the panel to stop an export that is running; the files that are done stay.
 
 If you choose to export a full game you are asked to pick a folder to put all of
 the files. The files _do_ contain the game name in them, but it's suggested that
