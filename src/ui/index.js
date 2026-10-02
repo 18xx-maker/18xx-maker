@@ -8,9 +8,11 @@ export { default as Avatar } from "./Avatar";
 export { default as AvatarGroup } from "./AvatarGroup";
 export { default as Box } from "./Box";
 export { default as Button } from "./Button";
+export { default as Checkbox } from "./Checkbox";
 export { default as Container } from "./Container";
 export { default as Divider } from "./Divider";
 export { default as Fab } from "./Fab";
+export { FormControlLabel, FormGroup, FormLabel } from "./Form";
 export { default as Grid } from "./Grid";
 export { default as IconButton } from "./IconButton";
 export { default as Link } from "./Link";
@@ -30,5 +32,7 @@ export {
   TableHead,
   TableRow,
 } from "./Table";
+export { default as Switch } from "./Switch";
+export { default as TextField } from "./TextField";
 export { default as Toolbar } from "./Toolbar";
 export { default as Typography } from "./Typography";

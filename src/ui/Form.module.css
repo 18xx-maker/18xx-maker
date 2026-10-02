@@ -1,0 +1,29 @@
+.group {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.label {
+  position: relative;
+  padding: 0;
+  color: var(--palette-text-secondary);
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+}
+
+.controlLabel {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 16px;
+  margin-left: -11px;
+  vertical-align: middle;
+}
+
+/* A group lays its labels out as blocks */
+.group > .controlLabel {
+  display: flex;
+}

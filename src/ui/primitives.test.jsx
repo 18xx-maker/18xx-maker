@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import {
@@ -6,9 +6,13 @@ import {
   Avatar,
   AvatarGroup,
   Button,
+  Checkbox,
   Container,
   Divider,
   Fab,
+  FormControlLabel,
+  FormGroup,
+  FormLabel,
   Grid,
   IconButton,
   Link,
@@ -18,12 +22,14 @@ import {
   ListItemIcon,
   ListItemText,
   Paper,
+  Switch,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  TextField,
   Toolbar,
   Train,
   Typography,
@@ -256,5 +262,98 @@ describe("layout", () => {
     );
     expect(style(screen.getByTestId("paper")).boxShadow).not.toBe("none");
     expect(style(screen.getByTestId("avatar")).borderRadius).toBe("0px");
+  });
+});
+
+describe("form controls", () => {
+  it("toggle by clicking the label, with a name from the label", async () => {
+    const onChange = vi.fn();
+    renderChrome(
+      <FormGroup>
+        <FormControlLabel
+          label="Privates"
+          control={<Checkbox checked={false} onChange={onChange} />}
+        />
+        <FormControlLabel
+          label="Paginated"
+          control={<Switch checked onChange={onChange} />}
+        />
+      </FormGroup>,
+    );
+    const box = screen.getByRole("checkbox", { name: "Privates" });
+    expect(box).not.toBeChecked();
+    expect(screen.getByRole("checkbox", { name: "Paginated" })).toBeChecked();
+
+    await userEvent.click(screen.getByText("Privates"));
+    expect(onChange).toHaveBeenCalledOnce();
+  });
+
+  it("draw a checked checkbox in the primary color", () => {
+    renderChrome(
+      <>
+        <Checkbox checked onChange={() => {}} aria-label="on" />
+        <Checkbox checked={false} onChange={() => {}} aria-label="off" />
+      </>,
+    );
+    expect(
+      style(screen.getByRole("checkbox", { name: "on" })).backgroundColor,
+    ).toBe("rgb(94, 53, 177)");
+    expect(
+      style(screen.getByRole("checkbox", { name: "off" })).backgroundColor,
+    ).toBe("rgba(0, 0, 0, 0)");
+  });
+
+  it("names a group by its legend", () => {
+    renderChrome(
+      <fieldset>
+        <FormLabel component="legend">Show</FormLabel>
+        <FormGroup>
+          <FormControlLabel label="A" control={<Checkbox />} />
+        </FormGroup>
+      </fieldset>,
+    );
+    expect(screen.getByRole("group", { name: "Show" })).toBeVisible();
+  });
+});
+
+describe("TextField", () => {
+  it("is a native input named by its label, with the label id", () => {
+    renderChrome(
+      <TextField id="margin" label="Margin" value="1" onChange={() => {}} />,
+    );
+    expect(screen.getByRole("textbox", { name: "Margin" })).toHaveValue("1");
+    expect(screen.getByText("Margin")).toHaveAttribute("id", "margin-label");
+  });
+
+  it("floats the label when focused or filled", async () => {
+    renderChrome(
+      <>
+        <TextField id="a" label="Empty" defaultValue="" />
+        <TextField id="b" label="Full" defaultValue="x" />
+      </>,
+    );
+    const rest = style(screen.getByText("Empty")).transform;
+    expect(style(screen.getByText("Full")).transform).not.toBe(rest);
+    expect(rest).toBe("matrix(1, 0, 0, 1, 12, 16)");
+
+    await userEvent.click(screen.getByRole("textbox", { name: "Empty" }));
+    // The label moves with a transition
+    await waitFor(() =>
+      expect(style(screen.getByText("Empty")).transform).toBe(
+        style(screen.getByText("Full")).transform,
+      ),
+    );
+  });
+
+  it("marks an error with aria-invalid and the error color", () => {
+    renderChrome(
+      <>
+        <TextField id="a" label="Bad" error defaultValue="" />
+        <TextField id="b" label="Good" defaultValue="" />
+      </>,
+    );
+    expect(screen.getByRole("textbox", { name: "Bad" })).toBeInvalid();
+    expect(screen.getByRole("textbox", { name: "Good" })).toBeValid();
+    expect(style(screen.getByText("Bad")).color).toBe("rgb(211, 47, 47)");
   });
 });

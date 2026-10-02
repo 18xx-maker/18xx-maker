@@ -1,0 +1,66 @@
+.root {
+  display: inline-flex;
+  position: relative;
+  flex-shrink: 0;
+  z-index: 0;
+  box-sizing: border-box;
+  width: 58px;
+  height: 38px;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+/* The input covers the whole switch, invisible, and takes the clicks */
+.input {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.track {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  transition:
+    opacity var(--duration-shortest) var(--ease-in-out),
+    background-color var(--duration-shortest) var(--ease-in-out);
+  border-radius: 7px;
+  background-color: #000;
+  opacity: 0.38;
+  width: 34px;
+  height: 14px;
+}
+
+.thumb {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  transition:
+    left var(--duration-shortest) var(--ease-in-out),
+    transform var(--duration-shortest) var(--ease-in-out);
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: var(--shadow-1);
+  width: 20px;
+  height: 20px;
+}
+
+.input:checked ~ .track {
+  background-color: var(--palette-primary-main);
+  opacity: 0.5;
+}
+
+.input:checked ~ .thumb {
+  transform: translateX(20px);
+  background-color: var(--palette-primary-main);
+}
+
+.input:focus-visible ~ .thumb {
+  outline: 2px solid var(--palette-primary-main);
+  outline-offset: 2px;
+}
