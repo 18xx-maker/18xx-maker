@@ -133,8 +133,10 @@
     },
     "files": [
       "!.*",
+      "!AGENTS.md",
       "!bin${/*}",
       "!certificate.p12",
+      "!CLAUDE.md",
       "!coverage${/*}",
       "!dist/app${/*}",
       "!dist/sb${/*}",
