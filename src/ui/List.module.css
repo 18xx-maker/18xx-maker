@@ -55,6 +55,7 @@
 }
 
 :where(.selected) {
+  background-color: var(--palette-primary-main-8);
   background-color: color-mix(
     in srgb,
     var(--palette-primary-main) 8%,
@@ -69,6 +70,7 @@
   }
 
   :where(.selected:hover) {
+    background-color: var(--palette-primary-main-12);
     background-color: color-mix(
       in srgb,
       var(--palette-primary-main) 12%,
@@ -85,6 +87,7 @@
 }
 
 :where(.selected:focus-visible) {
+  background-color: var(--palette-primary-main-20);
   background-color: color-mix(
     in srgb,
     var(--palette-primary-main) 20%,

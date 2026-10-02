@@ -73,6 +73,7 @@
 }
 
 .selected {
+  background-color: var(--palette-primary-main-8);
   background-color: color-mix(
     in srgb,
     var(--palette-primary-main) 8%,
@@ -82,6 +83,7 @@
 
 @media (hover: hover) {
   .selected:hover {
+    background-color: var(--palette-primary-main-12);
     background-color: color-mix(
       in srgb,
       var(--palette-primary-main) 12%,
@@ -91,6 +93,7 @@
 }
 
 .selected[data-highlighted] {
+  background-color: var(--palette-primary-main-20);
   background-color: color-mix(
     in srgb,
     var(--palette-primary-main) 20%,

@@ -1,14 +1,19 @@
 /* The colors are MUI's standard alert: the severity's light shade, darkened
    60% for the text and lightened 90% for the background (color-mix in srgb is
-   the same arithmetic) */
+   the same arithmetic). --bg and --fg are the results, for browsers without
+   color-mix(). */
 :where(.root) {
   --main: var(--palette-success-main);
   --light: var(--palette-success-light);
+  --bg: #edf7ed;
+  --fg: #1e4620;
 
   display: flex;
   border-radius: var(--radius);
+  background-color: var(--bg);
   background-color: color-mix(in srgb, var(--light) 10%, white);
   padding: 6px 16px;
+  color: var(--fg);
   color: color-mix(in srgb, var(--light) 40%, black);
   font-family: var(--font-family);
   font-size: 0.875rem;
@@ -21,16 +26,22 @@
 :where(.info) {
   --main: var(--palette-info-main);
   --light: var(--palette-info-light);
+  --bg: #e5f6fd;
+  --fg: #014361;
 }
 
 :where(.warning) {
   --main: var(--palette-warning-main);
   --light: var(--palette-warning-light);
+  --bg: #fff4e5;
+  --fg: #663c00;
 }
 
 :where(.error) {
   --main: var(--palette-error-main);
   --light: var(--palette-error-light);
+  --bg: #fdeded;
+  --fg: #5f2120;
 }
 
 :where(.icon) {

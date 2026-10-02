@@ -43,6 +43,7 @@
 
 @media (hover: hover) {
   :where(.root:hover) {
+    background-color: var(--palette-action-active-4);
     background-color: color-mix(
       in srgb,
       var(--palette-action-active) 4%,
@@ -55,6 +56,7 @@
 :where(.root:focus-visible) {
   outline: 2px solid currentcolor;
   outline-offset: -2px;
+  background-color: var(--palette-action-focus);
   background-color: color-mix(in srgb, currentcolor 30%, transparent);
 }
 

@@ -1,31 +1,56 @@
 .root {
   display: inline-flex;
+  position: relative;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  transition: background-color var(--duration-shortest) var(--ease-in-out);
   border-radius: 50%;
   padding: 12px;
-  color: var(--palette-text-secondary);
   vertical-align: middle;
 }
 
-.root:has(:checked) {
+/* The state colors are on the input and the ring (a sibling that is the hit
+   area's hover tint and focus ring), picked by sibling selectors so they do not
+   need :has() */
+.input,
+.ring {
+  color: var(--palette-text-secondary);
+}
+
+.input:checked,
+.input:checked ~ .ring {
   color: var(--palette-primary-main);
 }
 
-.root:has(:disabled) {
+.input:disabled,
+.input:disabled ~ .ring {
   color: var(--palette-action-disabled);
 }
 
+.ring {
+  position: absolute;
+  inset: 0;
+  transition: background-color var(--duration-shortest) var(--ease-in-out);
+  border-radius: 50%;
+  pointer-events: none;
+
+  /* The hover tint where color-mix() is missing */
+  --tint: var(--palette-action-hover);
+}
+
+.input:checked ~ .ring {
+  --tint: var(--palette-primary-main-4);
+}
+
 @media (hover: hover) {
-  .root:hover {
+  .root:hover .ring {
+    background-color: var(--tint);
     background-color: color-mix(in srgb, currentcolor 4%, transparent);
   }
 }
 
-.root:has(:focus-visible) {
+.input:focus-visible ~ .ring {
   outline: 2px solid currentcolor;
   outline-offset: -2px;
 }
@@ -39,15 +64,50 @@
   cursor: pointer;
   width: 18px;
   height: 18px;
-  color: inherit;
 }
 
-/* The check mark of Material's CheckBox icon, white on the primary fill */
+/* The check mark of Material's CheckBox icon (the cut out tick), white on the
+   primary fill */
 .input:checked {
   background-color: currentcolor;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='3 3 18 18'%3E%3Cpath fill='%23fff' d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='3 3 18 18'%3E%3Cpath fill='%23fff' d='M10 17l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E");
 }
 
 .input:disabled {
   cursor: default;
+}
+
+/* Forced colors drop the fills: a checked box is a solid square set in the
+   border, an unchecked one is hollow */
+@media (forced-colors: active) {
+  .input {
+    border-color: ButtonText;
+  }
+
+  .input:checked {
+    forced-color-adjust: none;
+    box-shadow: inset 0 0 0 3px Canvas;
+    border-color: Highlight;
+    background-color: Highlight;
+    background-image: none;
+  }
+
+  .input:disabled,
+  .input:checked:disabled {
+    border-color: GrayText;
+  }
+
+  .input:checked:disabled {
+    background-color: GrayText;
+  }
+
+  .input:focus-visible ~ .ring {
+    outline-color: Highlight;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring {
+    transition: none;
+  }
 }

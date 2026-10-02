@@ -20,6 +20,7 @@
 
 .underline-always {
   text-decoration: underline;
+  text-decoration-color: var(--palette-primary-main-40);
   text-decoration-color: color-mix(
     in srgb,
     var(--palette-primary-main) 40%,

@@ -41,26 +41,22 @@
   --c: var(--palette-primary-main);
   --c-dark: var(--palette-primary-dark);
   --c-contrast: var(--palette-primary-contrast);
-  --c-hover: color-mix(in srgb, var(--palette-primary-main) 4%, transparent);
-  --c-border: color-mix(in srgb, var(--palette-primary-main) 50%, transparent);
+  --c-hover: var(--palette-primary-main-4);
+  --c-border: var(--palette-primary-main-50);
 }
 
 :where(.secondary) {
   --c: var(--palette-secondary-main);
   --c-dark: var(--palette-secondary-dark);
   --c-contrast: var(--palette-secondary-contrast);
-  --c-hover: color-mix(in srgb, var(--palette-secondary-main) 4%, transparent);
-  --c-border: color-mix(
-    in srgb,
-    var(--palette-secondary-main) 50%,
-    transparent
-  );
+  --c-hover: var(--palette-secondary-main-4);
+  --c-border: var(--palette-secondary-main-50);
 }
 
 :where(.inherit) {
   --c: currentcolor;
   --c-contrast: currentcolor;
-  --c-hover: color-mix(in srgb, var(--palette-text-primary) 4%, transparent);
+  --c-hover: var(--palette-text-primary-4);
   --c-border: currentcolor;
 }
 
@@ -110,6 +106,7 @@
 }
 
 :where(.text:focus-visible, .outlined:focus-visible) {
+  background-color: var(--palette-action-focus);
   background-color: color-mix(in srgb, currentcolor 30%, transparent);
 }
 

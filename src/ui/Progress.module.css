@@ -2,6 +2,7 @@
   display: block;
   position: relative;
   z-index: 0;
+  background-color: rgb(194 178 225);
   background-color: color-mix(in srgb, var(--palette-primary-main) 38%, white);
   height: 4px;
   overflow: hidden;

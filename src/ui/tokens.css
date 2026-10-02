@@ -47,6 +47,22 @@
   --palette-primary-light: rgb(126 93 192);
   --palette-primary-dark: rgb(65 37 123);
   --palette-primary-contrast: #fff;
+
+  /* Tints of the primary and secondary colors, for browsers without
+     color-mix() (the CSS that uses it declares these first). The number is
+     the percentage of opacity. */
+  --palette-primary-main-4: rgb(94 53 177 / 4%);
+  --palette-primary-main-8: rgb(94 53 177 / 8%);
+  --palette-primary-main-12: rgb(94 53 177 / 12%);
+  --palette-primary-main-16: rgb(94 53 177 / 16%);
+  --palette-primary-main-20: rgb(94 53 177 / 20%);
+  --palette-primary-main-38: rgb(94 53 177 / 38%);
+  --palette-primary-main-40: rgb(94 53 177 / 40%);
+  --palette-primary-main-50: rgb(94 53 177 / 50%);
+  --palette-secondary-main-4: rgb(255 167 38 / 4%);
+  --palette-secondary-main-50: rgb(255 167 38 / 50%);
+  --palette-text-primary-4: rgb(0 0 0 / 3.5%);
+  --palette-action-active-4: rgb(0 0 0 / 2.2%);
   --palette-secondary-main: #ffa726;
   --palette-secondary-light: rgb(255 184 81);
   --palette-secondary-dark: rgb(178 116 26);

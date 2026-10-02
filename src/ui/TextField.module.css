@@ -117,24 +117,22 @@
   letter-spacing: 0.00938em;
 }
 
-.root:has(.input:focus) .label,
-.root:has(.input:not(:placeholder-shown)) .label {
+.input:focus ~ .label,
+.input:not(:placeholder-shown) ~ .label {
   transform: translate(12px, 7px) scale(0.75);
   max-width: calc(133% - 24px);
 }
 
-.root:has(.input:focus) .label {
+.input:focus ~ .label {
   color: var(--palette-primary-main);
 }
 
-.root:has(.input[aria-invalid="true"]) .label {
+/* error, set on the root by TextField */
+.root[data-error] .label {
   color: var(--palette-error-main);
 }
 
-.root:has(.input[aria-invalid="true"]) .field::before {
-  border-bottom-color: var(--palette-error-main);
-}
-
-.root:has(.input[aria-invalid="true"]) .field::after {
+.root[data-error] .field::before,
+.root[data-error] .field::after {
   border-bottom-color: var(--palette-error-main);
 }

@@ -64,3 +64,49 @@
   outline: 2px solid var(--palette-primary-main);
   outline-offset: 2px;
 }
+
+/* Forced colors drop the fills and shadows: draw the track with a border and
+   the on state in Highlight, so on and off still differ */
+@media (forced-colors: active) {
+  .track,
+  .thumb {
+    forced-color-adjust: none;
+  }
+
+  .track {
+    box-sizing: border-box;
+    border: 1px solid ButtonText;
+    background-color: Canvas;
+    opacity: 1;
+  }
+
+  .thumb {
+    background-color: ButtonText;
+  }
+
+  .input:checked ~ .track {
+    border-color: Highlight;
+    background-color: Highlight;
+    opacity: 1;
+  }
+
+  .input:checked ~ .thumb {
+    background-color: HighlightText;
+  }
+
+  .input:disabled ~ .track {
+    border-color: GrayText;
+  }
+
+  .input:disabled ~ .thumb {
+    background-color: GrayText;
+  }
+
+  .input:checked:disabled ~ .track {
+    background-color: GrayText;
+  }
+
+  .input:focus-visible ~ .thumb {
+    outline-color: Highlight;
+  }
+}

@@ -303,6 +303,31 @@ describe("form controls", () => {
     ).toBe("rgba(0, 0, 0, 0)");
   });
 
+  it("colors the ring and shows a focus ring by sibling selectors", async () => {
+    const user = userEvent.setup();
+    renderChrome(
+      <>
+        <Checkbox checked onChange={() => {}} aria-label="on" />
+        <Checkbox checked={false} onChange={() => {}} aria-label="off" />
+        <Checkbox checked disabled onChange={() => {}} aria-label="gone" />
+      </>,
+    );
+    const ring = (name) =>
+      // eslint-disable-next-line testing-library/no-node-access
+      screen.getByRole("checkbox", { name }).nextElementSibling;
+    expect(style(ring("on")).color).toBe("rgb(94, 53, 177)");
+    expect(style(ring("off")).color).toBe("rgba(0, 0, 0, 0.6)");
+    expect(style(ring("gone")).color).toBe("rgba(0, 0, 0, 0.26)");
+    expect(style(screen.getByRole("checkbox", { name: "gone" })).color).toBe(
+      "rgba(0, 0, 0, 0.26)",
+    );
+
+    expect(style(ring("on")).outlineStyle).toBe("none");
+    await user.tab();
+    expect(screen.getByRole("checkbox", { name: "on" })).toHaveFocus();
+    expect(style(ring("on")).outlineStyle).toBe("solid");
+  });
+
   it("names a group by its legend", () => {
     renderChrome(
       <fieldset>
@@ -355,5 +380,6 @@ describe("TextField", () => {
     expect(screen.getByRole("textbox", { name: "Bad" })).toBeInvalid();
     expect(screen.getByRole("textbox", { name: "Good" })).toBeValid();
     expect(style(screen.getByText("Bad")).color).toBe("rgb(211, 47, 47)");
+    expect(style(screen.getByText("Good")).color).not.toBe("rgb(211, 47, 47)");
   });
 });

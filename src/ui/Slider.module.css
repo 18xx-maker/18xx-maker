@@ -26,6 +26,7 @@
   border-radius: 2px;
   width: 100%;
   height: 4px;
+  background-color: var(--palette-primary-main-38);
   background-color: color-mix(in srgb, currentcolor 38%, transparent);
 }
 
@@ -63,12 +64,14 @@
 
 @media (hover: hover) {
   :where(.thumb:hover) {
+    box-shadow: 0 0 0 8px var(--palette-primary-main-16);
     box-shadow: 0 0 0 8px color-mix(in srgb, currentcolor 16%, transparent);
   }
 }
 
 :where(.thumb[data-dragging]),
 :where(.thumb[data-focus-visible]) {
+  box-shadow: 0 0 0 14px var(--palette-primary-main-16);
   box-shadow: 0 0 0 14px color-mix(in srgb, currentcolor 16%, transparent);
 }
 
@@ -144,6 +147,55 @@
 /* Labels of the marks inside the selected range */
 :where(.markLabelActive) {
   color: var(--palette-text-primary);
+}
+
+/* Forced colors drop the fills and the box-shadow halos: the rail gets a
+   border, the track and the thumb are Highlight, and focus is an outline */
+@media (forced-colors: active) {
+  .track,
+  .indicator,
+  .thumb,
+  .mark,
+  .label {
+    forced-color-adjust: none;
+  }
+
+  .track {
+    box-sizing: border-box;
+    border: 1px solid ButtonText;
+    background-color: Canvas;
+  }
+
+  .indicator {
+    border-color: Highlight;
+    background-color: Highlight;
+  }
+
+  .thumb {
+    border: 2px solid ButtonText;
+    background-color: Highlight;
+  }
+
+  .thumb[data-dragging],
+  .thumb[data-focus-visible] {
+    outline: 2px solid Highlight;
+    outline-offset: 3px;
+    box-shadow: none;
+  }
+
+  .mark {
+    background-color: ButtonText;
+  }
+
+  .markActive {
+    background-color: HighlightText;
+  }
+
+  .label {
+    border: 1px solid CanvasText;
+    background-color: Canvas;
+    color: CanvasText;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
