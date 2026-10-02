@@ -125,11 +125,13 @@ const flagOptions = (opts) => {
     }
     user.layouts = opts.layouts;
   }
-  if (opts.paginated) user.paginated = true;
-  if (opts.variation !== undefined) {
+  if (opts.paginated !== undefined) user.paginated = !!opts.paginated;
+  if (opts.variation === "all") {
+    user.variation = null;
+  } else if (opts.variation !== undefined) {
     const variation = Number(opts.variation);
     if (!(Number.isInteger(variation) && variation >= 0)) {
-      throw new UsageError("--variation must be a whole number");
+      throw new UsageError("--variation must be a whole number or all");
     }
     user.variation = variation;
   }
@@ -146,7 +148,7 @@ const flagOptions = (opts) => {
 //   docs        "map,cards": only these pages
 //   layouts     "all": a sheet for every layout
 //   paginated   also the paginated pdfs
-//   variation   only this map variation
+//   variation   only this map variation, or all
 //   config      a config file
 //   dpi         of the pngs, 1 to 300
 //   out         the folder the folder of the game goes in

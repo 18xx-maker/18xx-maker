@@ -77,6 +77,15 @@ describe("resolveExportOptions", () => {
     ).toBe(false);
   });
 
+  it("lets the user choose every variation over the variation of the game", () => {
+    const options = resolveExportOptions({
+      game: { variation: 1 },
+      user: { variation: null },
+    });
+
+    expect("variation" in options).toBe(false);
+  });
+
   it("does not let a value that is not set hide the one below", () => {
     const options = resolveExportOptions({
       game: { png: { dpi: 100 }, b18: { version: "9", author: "Game" } },

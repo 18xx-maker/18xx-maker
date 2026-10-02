@@ -256,7 +256,11 @@ The export options are resolved in `src/export/options.js` (plain JS, used by
 the export options panel its starting values). A new option goes in the `exports`
 schema (with a description, and copy `src/schemas/game.schema.json` to
 `public/schemas/`), `cleanOptions`, the CLI flags (without a commander default,
-or the flag would always hide the game file), the panel, and the docs.
+or the flag would always hide the game file, and a boolean also a `--no-` flag
+so that the game file can be turned off), the panel (a control that starts from
+`exportDefaults`, and that can say "not set" over the game file, like every
+variation), and the docs. Every option has a test for all three: the game file
+sets it, a flag or a control overrides it.
 
 `scripts/export-golden.mjs [game]` checks the shared capture
 (`src/export/capture.js`, Chrome DevTools Protocol commands) against Playwright's

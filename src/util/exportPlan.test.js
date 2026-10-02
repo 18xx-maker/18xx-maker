@@ -218,6 +218,7 @@ describe("planExport with the exports of a game", () => {
       docs: ["map", "tiles"],
       layouts: "all",
       paginated: false,
+      variation: null,
       dpi: 120,
       b18: { version: "4", author: "Game" },
     });
@@ -267,5 +268,48 @@ describe("planSingle", () => {
         }),
       }),
     ]);
+  });
+});
+
+describe("the variation of an export", () => {
+  const varied = {
+    ...game,
+    map: [
+      { ...game.map, name: "North" },
+      { ...game.map, name: "South" },
+    ],
+  };
+  const maps = (request) => paths(request).filter((p) => p.includes("-map-"));
+
+  it("starts as the variation of the game file, every one without it", () => {
+    expect(exportDefaults(varied, layers()).variation).toBe(null);
+    expect(
+      exportDefaults({ ...varied, exports: { variation: 1 } }, layers())
+        .variation,
+    ).toBe(1);
+    // A variation the game does not have
+    expect(
+      exportDefaults({ ...varied, exports: { variation: 5 } }, layers())
+        .variation,
+    ).toBe(null);
+    expect(
+      exportDefaults({ ...game, exports: { variation: 1 } }, layers())
+        .variation,
+    ).toBe(null);
+  });
+
+  it("is the one of the game file, or the one that is chosen, or every one with null", () => {
+    const withFile = { ...varied, exports: { variation: 1 } };
+    const options = { formats: ["pdf"], docs: ["map"], paginated: false };
+
+    expect(maps(planExport(withFile, layers(), options))).toEqual([
+      "18test-map-1.pdf",
+    ]);
+    expect(
+      maps(planExport(withFile, layers(), { ...options, variation: 0 })),
+    ).toEqual(["18test-map-0.pdf"]);
+    expect(
+      maps(planExport(withFile, layers(), { ...options, variation: null })),
+    ).toEqual(["18test-map-0.pdf", "18test-map-1.pdf"]);
   });
 });

@@ -59,7 +59,8 @@ const appDefaults = (game) => ({
 // the game (see resolveExportOptions): the defaults of the app, the game's
 // `exports` and what the user chose. userOptions are
 //   { formats, docs, layouts, paginated, dpi, variation, b18: { version, author } }
-// with what is left out coming from the layers below.
+// with what is left out coming from the layers below. A variation of null is
+// every variation, also when the game's `exports` has one.
 const resolveOptions = (game, layers, userOptions = {}) => {
   const { dpi, ...user } = userOptions;
   return resolveExportOptions({
@@ -78,7 +79,9 @@ const resolveOptions = (game, layers, userOptions = {}) => {
 };
 
 // What the options panel starts with: the options of the export before the
-// user changes any. docs is every page of the game when `exports` has none.
+// user changes any. docs is every page of the game when `exports` has none,
+// variation is null for every variation (also when `exports` has one that
+// the game does not have).
 export const exportDefaults = (game, layers) => {
   const options = resolveOptions(game, layers);
   const pages = exportPages(game, layers);
@@ -87,6 +90,10 @@ export const exportDefaults = (game, layers) => {
     docs: options.docs ? pages.filter((p) => options.docs.includes(p)) : pages,
     layouts: options.layouts ?? (allLayouts(game, layers) ? "all" : "current"),
     paginated: options.paginated,
+    variation:
+      Array.isArray(game.map) && options.variation < game.map.length
+        ? options.variation
+        : null,
     dpi: options.png.dpi,
     b18: options.b18,
   };

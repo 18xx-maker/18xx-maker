@@ -4,6 +4,7 @@ import path from "node:path";
 
 import { chromium } from "playwright";
 
+import b18 from "#cli/b18";
 import exportCommand, {
   parseDpi,
   resolveGame,
@@ -592,6 +593,69 @@ describe("the exports of a game file", () => {
     expect(
       readPng(new Uint8Array(fs.readFileSync(boxed("18test-background.png")))),
     ).toMatchObject({ pixelsPerMeter: 5906 });
+  });
+
+  it("is not paginated with paginated false, also when the game has them", async () => {
+    const file = exporting({ docs: ["map"], paginated: true });
+
+    await exportCommand(file, {});
+    expect(boxedFiles()).toContain("18test-map-paginated.pdf");
+
+    fs.rmSync(boxed(), { recursive: true });
+    await exportCommand(file, { paginated: false });
+    expect(boxedFiles()).toEqual(["18test-map.pdf"]);
+  });
+
+  it("has the layout of the flag over every layout of the game", async () => {
+    const file = exporting({ docs: ["cards"], layouts: "all" });
+
+    await exportCommand(file, { layouts: "current" });
+
+    expect(boxedFiles()).toEqual([
+      `18test-cards-${defaultConfig.cards.layout}.pdf`,
+    ]);
+  });
+
+  it("has the map variation of the flag over the one of the game", async () => {
+    const base = JSON.parse(
+      fs.readFileSync(path.join(cwd, "src/data/games/18Test.json"), "utf-8"),
+    );
+    const file = gameFile("boxed.json", {
+      map: [base.map, base.map],
+      exports: { docs: ["map"], variation: 1 },
+    });
+
+    await exportCommand(file, { variation: "0" });
+
+    expect(boxedFiles()).toEqual(["18test-map-0.pdf"]);
+  });
+
+  it("exports every map variation with --variation all", async () => {
+    const base = JSON.parse(
+      fs.readFileSync(path.join(cwd, "src/data/games/18Test.json"), "utf-8"),
+    );
+    const file = gameFile("boxed.json", {
+      map: [base.map, base.map],
+      exports: { docs: ["map"], variation: 1 },
+    });
+
+    await exportCommand(file, { variation: "all" });
+
+    expect(boxedFiles()).toEqual(["18test-map-0.pdf", "18test-map-1.pdf"]);
+  });
+
+  it("has the box of the game for maker b18 without a version or author", async () => {
+    const file = exporting({
+      formats: ["pdf"],
+      b18: { version: "5.0", author: "The File" },
+    });
+
+    await b18(file, undefined, undefined, {});
+
+    const json = JSON.parse(
+      fs.readFileSync(boxed("board18-boxed-5.0/boxed-5.0.json"), "utf-8"),
+    );
+    expect(json).toMatchObject({ version: "5.0", author: "The File" });
   });
 
   it("has the box of the flags over the box of the game", async () => {

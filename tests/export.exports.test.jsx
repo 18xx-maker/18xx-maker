@@ -132,4 +132,50 @@ describe("export options of a game with exports", () => {
     expect(names.some((name) => name.endsWith(".pdf"))).toBe(false);
     expect(names.some((name) => name.includes("tiles"))).toBe(false);
   });
+
+  it("is overridden by the formats, documents, paginated and box of the panel", async () => {
+    const { user, panel } = await openOptions();
+    await user.click(
+      within(panel).getByRole("checkbox", { name: "PDF documents" }),
+    );
+    await user.click(
+      within(panel).getByRole("checkbox", { name: "PNG images" }),
+    );
+    await user.click(
+      within(panel).getByRole("checkbox", { name: "Board18 box" }),
+    );
+    await user.click(within(panel).getByRole("checkbox", { name: "Tokens" }));
+    await user.click(within(panel).getByRole("checkbox", { name: "Cards" }));
+    await user.click(
+      within(panel).getByRole("switch", { name: "Paginated pdfs" }),
+    );
+    await user.click(within(panel).getByRole("button", { name: /^Export$/ }));
+
+    await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
+    const request = api.export.mock.calls[0][0];
+    expect(request.b18).toBeUndefined();
+    const names = request.jobs.map(({ path }) => path);
+    expect(names.every((name) => name.endsWith(".pdf"))).toBe(true);
+    expect(names.some((name) => name.includes("tokens"))).toBe(true);
+    expect(names).toContain("18test-map.pdf");
+    expect(names).toContain("18test-map-paginated.pdf");
+    expect(names.some((name) => name.includes("cards"))).toBe(false);
+  });
+
+  it("is overridden by the version and author of the box in the panel", async () => {
+    const { user, panel } = await openOptions();
+    const version = within(panel).getByLabelText("Board18 version");
+    await user.clear(version);
+    await user.type(version, "4.0");
+    const author = within(panel).getByLabelText("Board18 author");
+    await user.clear(author);
+    await user.type(author, "Me");
+    await user.click(within(panel).getByRole("button", { name: /^Export$/ }));
+
+    await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
+    expect(api.export.mock.calls[0][0].b18.json).toMatchObject({
+      version: "4.0",
+      author: "Me",
+    });
+  });
 });

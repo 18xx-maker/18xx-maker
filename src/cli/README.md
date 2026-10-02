@@ -30,7 +30,7 @@ node ./bin/maker.js help
 | `compile`                                 | compile JSON files                            |
 | `validate <files...>`                     | validate any 18xx Maker JSON file or schema   |
 | `export [options] [game]`                 | create PDF, PNG and Board 18 files for a game |
-| `b18 [options] <game> <version> [author]` | alias of `export --format b18`                |
+| `b18 [options] <game> [version] [author]` | alias of `export --format b18`                |
 | `print [options] [game]`                  | alias of `export --format pdf --paginated`    |
 | `help [command]`                          | get help on any command                       |
 
@@ -63,7 +63,8 @@ pnpm maker export <game|path.json> --format pdf,png,b18
 | `--docs <pages>`          | only these pages: `map,tiles,cards`, also for their PNGs                     |
 | `--layouts <layouts>`     | `all`: a sheet for every layout of the cards, tiles and tokens, or `current` |
 | `--paginated`             | also the paginated PDFs (`print` always has them)                            |
-| `--variation <n>`         | only this map variation                                                      |
+| `--no-paginated`          | not the paginated PDFs, when the game file has them                          |
+| `--variation <n>`         | only this map variation, `all` for every one                                 |
 | `--config <file>`         | a config file on top of `src/config.json` (the settings to change)           |
 | `--dpi <dpi>`             | resolution of PNGs, 1 to 300 (the default and the highest)                   |
 | `-o, --out <folder>`      | the folder that holds the game folders, default `render`                     |
@@ -109,7 +110,13 @@ The value of an option, lowest to highest: the built in default, the `exports`
 of the game file, then your own choice: the flag, the `b18.author` of `maker
 config` and the `export.allLayouts` of the config you give with `--config` (for
 `layouts`). They are merged option by option, so `--dpi 300` does not drop the
-`formats` of the game. `print` and `b18` fix the format (pdf, Board 18) and
+`formats` of the game. A flag has no default of its own: a flag you leave out is
+the value of the game file. To go against the game file, give the flag with
+another value: `--no-paginated` for `"paginated": true`, `--layouts current` for
+`"layouts": "all"`, `--variation all` for a `variation`, `--format pdf` for
+other `formats`, `--docs` with the pages you want. `b18 <game>` without a
+version or author takes them from the game file, then the config. `print` and
+`b18` fix the format (pdf, Board 18) and
 `print` has the paginated PDFs, whatever the game says. An `exports` that does
 not pass the schema (a `png.dpi` over 300, an unknown format or page) is an
 error with exit code `2`. See the in-app page Export Options

@@ -65,7 +65,10 @@ field (see [Export options](/docs/games/exports)). The game file has the
 defaults for that game, and what you give on the command line wins over it. For
 example, with `"exports": { "docs": ["map"], "paginated": true }` in the game,
 `pnpm maker export my-game.json` exports only the paginated and normal map, and
-`pnpm maker export my-game.json --docs cards` exports the cards instead.
+`pnpm maker export my-game.json --docs cards` exports the cards instead, and
+`--no-paginated` leaves out the paginated pdfs the game file asks for. The
+_Export options_ panel has the same options as controls, starting with the game
+file's, and a button to go back to them.
 
 Remember that this will not use the options setup in the browser config page. In
 order to make your printed output identical to what you see in the browser, go

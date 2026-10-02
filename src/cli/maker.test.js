@@ -31,7 +31,20 @@ describe("exit codes", () => {
   });
 
   it("exits 2 for missing arguments", () => {
-    expect(maker("b18", "18Test").status).toBe(2);
+    expect(maker("b18").status).toBe(2);
+  });
+
+  // The version is the b18.version of the game file when it is left out
+  it("takes b18 without a version", () => {
+    const result = maker("b18", "18Missing");
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain("Game 18Missing not found");
+  });
+
+  it("has a flag to turn the paginated pdfs of a game off", () => {
+    const result = maker("export", "--help");
+    expect(result.stdout).toContain("--paginated");
+    expect(result.stdout).toContain("--no-paginated");
   });
 
   it("exits 2 for a game that does not exist", () => {

@@ -164,6 +164,32 @@ test.describe("maker export 18Test", () => {
     ]);
   });
 
+  test("has the exports of a game file, and a flag over them", () => {
+    const file = path.join(out, "boxed.json");
+    const game = JSON.parse(fs.readFileSync(fixture, "utf-8"));
+    fs.writeFileSync(
+      file,
+      JSON.stringify({
+        ...game,
+        exports: { docs: ["map"], paginated: true, png: { dpi: 50 } },
+      }),
+    );
+
+    let result = maker(out, file);
+    expect(result.status, result.stderr).toBe(0);
+    expect(fs.readdirSync(path.join(out, "boxed"))).toEqual([
+      "e2e-fixture-game-map-paginated.pdf",
+      "e2e-fixture-game-map.pdf",
+    ]);
+
+    fs.rmSync(path.join(out, "boxed"), { recursive: true });
+    result = maker(out, file, "--no-paginated");
+    expect(result.status, result.stderr).toBe(0);
+    expect(fs.readdirSync(path.join(out, "boxed"))).toEqual([
+      "e2e-fixture-game-map.pdf",
+    ]);
+  });
+
   test("rejects a resolution over 300 dpi", () => {
     const result = maker(out, "18Test", "--format", "png", "--dpi", "301");
 

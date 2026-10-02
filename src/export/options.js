@@ -42,7 +42,10 @@ export const cleanOptions = (layer) => {
   if (isList(given.docs, DOCS)) out.docs = [...new Set(given.docs)];
   if (LAYOUTS.includes(given.layouts)) out.layouts = given.layouts;
   if (typeof given.paginated === "boolean") out.paginated = given.paginated;
-  if (Number.isInteger(given.variation) && given.variation >= 0) {
+  // null is a choice of every variation, that wins over the variation of a
+  // game (resolveExportOptions turns it back into no variation)
+  if (given.variation === null) out.variation = null;
+  else if (Number.isInteger(given.variation) && given.variation >= 0) {
     out.variation = given.variation;
   }
 
@@ -65,15 +68,19 @@ const merge = (low, high) => ({
 
 // The options of an export:
 //   game      the `exports` field of the game file
-//   user      what the user chose, same shape
+//   user      what the user chose, same shape (a `variation` of null is
+//             every variation, also when the game has one)
 //   defaults  the defaults of the caller, on top of DEFAULTS (the app has
 //             paginated pdfs by default, maker export does not)
 // Returns every option: { formats, docs, layouts, paginated, variation,
 // png: { dpi }, b18: { version, author } }
-export const resolveExportOptions = ({ game, user, defaults } = {}) =>
-  [defaults, game, user]
+export const resolveExportOptions = ({ game, user, defaults } = {}) => {
+  const options = [defaults, game, user]
     .map(cleanOptions)
     .reduce(merge, merge(DEFAULTS, { png: {}, b18: {} }));
+  if (options.variation === null) delete options.variation;
+  return options;
+};
 
 // The layouts option a config of the user has: its export.allLayouts setting,
 // undefined when it has none. Pass only the user's own layers (user config,

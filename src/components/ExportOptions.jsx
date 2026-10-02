@@ -7,6 +7,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Sheet,
   SheetContent,
   SheetDescription,
@@ -39,6 +46,9 @@ const Field = ({ id, label, description, error, children }) => (
   </div>
 );
 
+// The value of the variation select that is every variation
+const ALL = "all";
+
 const toggle = (list, item, on) =>
   on ? [...list, item] : list.filter((value) => value !== item);
 
@@ -56,11 +66,28 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
   const [docs, setDocs] = useState(initial.docs);
   const [layoutsAll, setLayoutsAll] = useState(initial.layouts === "all");
   const [paginated, setPaginated] = useState(initial.paginated);
+  const [variation, setVariation] = useState(
+    initial.variation === null ? ALL : String(initial.variation),
+  );
   const [dpi, setDpi] = useState(String(initial.dpi));
   const [version, setVersion] = useState(initial.b18.version);
   const [author, setAuthor] = useState(initial.b18.author);
   const [out, setOut] = useState();
   const [running, setRunning] = useState(false);
+
+  const variations = Array.isArray(game.map) && game.map.length > 1;
+
+  // Back to what the game file says, what the options start as
+  const reset = () => {
+    setFormats(initial.formats);
+    setDocs(initial.docs);
+    setLayoutsAll(initial.layouts === "all");
+    setPaginated(initial.paginated);
+    setVariation(initial.variation === null ? ALL : String(initial.variation));
+    setDpi(String(initial.dpi));
+    setVersion(initial.b18.version);
+    setAuthor(initial.b18.author);
+  };
 
   const files = formats.some((format) => format !== "b18");
   const dpiValid = /^\d+$/.test(dpi) && dpi >= 1 && dpi <= MAX_DPI;
@@ -83,6 +110,7 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
           docs,
           layouts: layoutsAll ? "all" : "current",
           paginated,
+          variation: variation === ALL ? null : Number(variation),
           dpi: Number(dpiValid ? dpi : MAX_DPI),
           b18: { version, author },
         }),
@@ -181,6 +209,31 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
             </div>
           </fieldset>
 
+          {variations && (
+            <Field id="export-variation" label={t("export.variation")}>
+              <Select
+                value={variation}
+                disabled={running}
+                onValueChange={setVariation}
+              >
+                <SelectTrigger id="export-variation">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value={ALL}>
+                    {t("export.allVariations")}
+                  </SelectItem>
+                  {game.map.map((variant, i) => (
+                    <SelectItem key={i} value={String(i)}>
+                      {variant.name ||
+                        t("export.variationNumber", { n: i + 1 })}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </Field>
+          )}
+
           <Field
             id="export-dpi"
             label={t("export.dpi")}
@@ -256,6 +309,9 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
               {t("export.cancel")}
             </Button>
           )}
+          <Button variant="outline" disabled={running} onClick={reset}>
+            {t("export.reset")}
+          </Button>
           <Button
             disabled={
               running ||

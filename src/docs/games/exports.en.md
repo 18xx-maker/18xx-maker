@@ -24,16 +24,16 @@ Every option is optional, leave out what you do not want to set.
 
 ## Options
 
-| Option        | Flag            | Values                                                                                                                       | Default                                                                          |
-| ------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `formats`     | `--format`      | a list of `pdf`, `png` and `b18` (a Board18 box)                                                                             | `["pdf"]`                                                                        |
-| `docs`        | `--docs`        | a list of pages: `background`, `cards`, `charters`, `map`, `market`, `par`, `revenue`, `tile-manifest`, `tiles` and `tokens` | every page of the game                                                           |
-| `layouts`     | `--layouts`     | `all`: a file for every layout of the cards, tiles and tokens, `current`: only the layout of the config                      | the `export.allLayouts` setting of the config                                    |
-| `paginated`   | `--paginated`   | `true` or `false`: also export the paginated pdfs                                                                            | `false` for `maker export`, `true` in the app                                    |
-| `variation`   | `--variation`   | the number of a map variation, 0 is the first                                                                                | every variation                                                                  |
-| `png.dpi`     | `--dpi`         | a whole number from 1 to 300                                                                                                 | `300`, the size the images print at                                              |
-| `b18.version` | `--b18-version` | the version of the Board18 box                                                                                               | `1.0`                                                                            |
-| `b18.author`  | `--b18-author`  | the author of the Board18 box                                                                                                | `b18.author` of `maker config` or your name, the designer of the game in the app |
+| Option        | Flag                            | Values                                                                                                                       | Default                                                                          |
+| ------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `formats`     | `--format`                      | a list of `pdf`, `png` and `b18` (a Board18 box)                                                                             | `["pdf"]`                                                                        |
+| `docs`        | `--docs`                        | a list of pages: `background`, `cards`, `charters`, `map`, `market`, `par`, `revenue`, `tile-manifest`, `tiles` and `tokens` | every page of the game                                                           |
+| `layouts`     | `--layouts`                     | `all`: a file for every layout of the cards, tiles and tokens, `current`: only the layout of the config                      | the `export.allLayouts` setting of the config                                    |
+| `paginated`   | `--paginated`, `--no-paginated` | `true` or `false`: also export the paginated pdfs                                                                            | `false` for `maker export`, `true` in the app                                    |
+| `variation`   | `--variation`                   | the number of a map variation, 0 is the first (`--variation all` for every one)                                              | every variation                                                                  |
+| `png.dpi`     | `--dpi`                         | a whole number from 1 to 300                                                                                                 | `300`, the size the images print at                                              |
+| `b18.version` | `--b18-version`                 | the version of the Board18 box                                                                                               | `1.0`                                                                            |
+| `b18.author`  | `--b18-author`                  | the author of the Board18 box                                                                                                | `b18.author` of `maker config` or your name, the designer of the game in the app |
 
 `docs`, `layouts`, `paginated` and `variation` are for the pdf and png files
 (a Board18 box has its own images, but takes the `variation`). `png.dpi` is only
@@ -60,8 +60,30 @@ be changed before you export. The options are merged one by one: `--format pdf`
 does not make the game forget its `png.dpi`, and a `b18.version` in the game
 stays when you only give `--b18-author`.
 
+### Overriding a game file
+
+Every option has a flag and a control in the panel, and neither has a default of
+its own: what you do not set is what the game file says. To go against the game
+file:
+
+| Option        | Flag                                          | Control in the _Export options_ panel         |
+| ------------- | --------------------------------------------- | --------------------------------------------- |
+| `formats`     | `--format pdf,png`                            | the _Formats_ checkboxes                      |
+| `docs`        | `--docs map,cards` (list the pages you want)  | the _Documents_ checkboxes                    |
+| `layouts`     | `--layouts all` or `--layouts current`        | _Every layout of a sheet_                     |
+| `paginated`   | `--paginated` or `--no-paginated`             | _Paginated pdfs_                              |
+| `variation`   | `--variation 0` or `--variation all`          | _Map variation_ (a game with variations only) |
+| `png.dpi`     | `--dpi 96`                                    | _PNG resolution (dpi)_                        |
+| `b18.version` | `--b18-version 2.0` (`maker b18 <game> 2.0`)  | _Board18 version_                             |
+| `b18.author`  | `--b18-author Me` (`maker b18 <game> 2.0 Me`) | _Board18 author_                              |
+
+The panel starts with the game file's values, and _Reset to the game's options_
+brings them back after you changed them.
+
 `maker print` always exports pdf files with the paginated ones and `maker b18`
-always a Board18 box, whatever `formats` and `paginated` say.
+always a Board18 box, whatever `formats` and `paginated` say. `maker b18` takes
+the version and the author from the game file when you leave them out. Use
+`maker export` for the other options.
 
 ## Checking
 

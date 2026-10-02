@@ -80,7 +80,8 @@ pnpm maker export 1889 --format png --docs cards,map --dpi 150
 The format, the pages and the resolution can be set in the game file instead,
 with `"exports": { "formats": ["png"], "docs": ["cards", "map"], "png": { "dpi":
 150 } }`. A flag wins over the game file, and the game file over the defaults,
-so `pnpm maker export my-game.json --dpi 300` exports that game at 300 dpi. A
+so `pnpm maker export my-game.json --dpi 300` exports that game at 300 dpi (and
+the _PNG resolution_ of the panel starts at the game file's and can be changed). A
 resolution over 300 is an error in the game file too (`pnpm validate` says so).
 See [Export options](/docs/games/exports) for all of them.
 

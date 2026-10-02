@@ -72,7 +72,14 @@ program
     "all: a file for every layout of a sheet, or current",
   )
   .option("--paginated", "also export the paginated pdfs")
-  .option("--variation <n>", "only this map variation")
+  .option(
+    "--no-paginated",
+    "not the paginated pdfs, when the game file has them",
+  )
+  .option(
+    "--variation <n>",
+    "only this map variation, or all for every one (0 is the first)",
+  )
   .option("--config <file>", "a config file to export with")
   .option(
     "--dpi <dpi>",
@@ -92,7 +99,7 @@ program
   .option("-d, --debug", "start the express server and then quit")
   .addHelpText(
     "after",
-    "\nEvery option but --config, --out, --jobs, --all and --debug can also be set in the\n`exports` field of the game file. What you give here wins over the game file.",
+    '\nEvery option but --config, --out, --jobs, --all and --debug can also be set in the\n`exports` field of the game file, which is what they are when you do not give\nthem. What you give here wins over the game file: --no-paginated turns off\n"paginated": true, --layouts current "layouts": "all".',
   )
   .action((game, opts) => exportCommand(game, withAuthor(opts)));
 
@@ -100,7 +107,10 @@ program
   .command("b18")
   .description("create a Board 18 game box from a bundled game (maker export)")
   .argument("<game>", "the id of the game to create a Board 18 box for")
-  .argument("<version>", "the Board 18 version string for the game box")
+  .argument(
+    "[version]",
+    "the Board 18 version string for the game box (default: b18.version of the game file, or 1.0)",
+  )
   .argument(
     "[author]",
     "the author of this game box (default: b18.author of maker config, or your name)",
