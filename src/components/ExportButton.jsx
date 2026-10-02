@@ -111,7 +111,8 @@ const pngItems = (game, config) => {
     items["tile-manifest"] = `${filename}-tile-manifest.png`;
 
     forEach((id) => {
-      items[`tiles/${id}`] = `${filename}-tile-${id}.png`;
+      items[`tiles/${encodeURIComponent(id)}`] =
+        `${filename}-tile-${id.replace(/[^\w.-]+/g, "_")}.png`;
     }, keys(game.tiles));
   }
 
