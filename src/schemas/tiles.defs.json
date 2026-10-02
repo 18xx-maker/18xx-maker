@@ -1059,6 +1059,10 @@
         },
         "tile": { "type": "string" },
         "color": { "type": "string" },
+        "stripeRotation": {
+          "type": "number",
+          "description": "Override the rotation (in degrees) of the stripes for a striped color such as \"yellow/blue\"."
+        },
         "encoding": { "type": "string" },
         "group": {
           "type": "string",

@@ -1,7 +1,13 @@
 import Color from "@/components/Color";
 
 const stripeWidth = 28.8675;
-const Hex = ({ color, transparent, map, opacity }) => {
+const Hex = ({
+  color,
+  transparent,
+  map,
+  opacity,
+  stripeRotation: overrideStripeRotation,
+}) => {
   let points =
     "-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 49.07475,85 -49.07475,85";
 
@@ -29,6 +35,10 @@ const Hex = ({ color, transparent, map, opacity }) => {
               break;
             default:
               break;
+          }
+
+          if (overrideStripeRotation !== undefined) {
+            stripeRotation = overrideStripeRotation;
           }
         }
         let fill =
