@@ -44,13 +44,30 @@ export const pageItems = (page, count, boundaryCount = 1, siblingCount = 1) => {
 // MUI's Pagination, large and primary (the only look the app uses): previous
 // and next buttons around the page numbers, the current one has
 // aria-current="true" as MUI does. page is 1-based,
-// onChange(event, page) like MUI.
-const Pagination = ({ page = 1, count = 1, onChange, className, ...props }) => {
+// onChange(event, page) like MUI. labels names the nav, the buttons and the
+// pages (English by default): { nav, previous, next, page(n), goTo(n) }.
+const defaultLabels = {
+  nav: "pagination navigation",
+  previous: "Go to previous page",
+  next: "Go to next page",
+  page: (n) => `page ${n}`,
+  goTo: (n) => `Go to page ${n}`,
+};
+
+const Pagination = ({
+  page = 1,
+  count = 1,
+  onChange,
+  labels,
+  className,
+  ...props
+}) => {
+  const text = { ...defaultLabels, ...labels };
   const go = (event, value) => onChange?.(event, value);
 
   return (
     <nav
-      aria-label="pagination navigation"
+      aria-label={text.nav}
       className={className}
       data-chrome="pagination"
       {...props}
@@ -60,7 +77,7 @@ const Pagination = ({ page = 1, count = 1, onChange, className, ...props }) => {
           <button
             type="button"
             className={styles.item}
-            aria-label="Go to previous page"
+            aria-label={text.previous}
             disabled={page <= 1}
             onClick={(e) => go(e, page - 1)}
           >
@@ -73,9 +90,7 @@ const Pagination = ({ page = 1, count = 1, onChange, className, ...props }) => {
               <button
                 type="button"
                 className={cx(styles.item, item === page && styles.selected)}
-                aria-label={
-                  item === page ? `page ${item}` : `Go to page ${item}`
-                }
+                aria-label={item === page ? text.page(item) : text.goTo(item)}
                 aria-current={item === page ? "true" : undefined}
                 onClick={(e) => go(e, item)}
               >
@@ -90,7 +105,7 @@ const Pagination = ({ page = 1, count = 1, onChange, className, ...props }) => {
           <button
             type="button"
             className={styles.item}
-            aria-label="Go to next page"
+            aria-label={text.next}
             disabled={page >= count}
             onClick={(e) => go(e, page + 1)}
           >

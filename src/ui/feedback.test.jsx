@@ -256,6 +256,31 @@ describe("Pagination", () => {
   });
 });
 
+describe("Pagination labels", () => {
+  it("takes its accessible names from the labels prop", () => {
+    renderChrome(
+      <Pagination
+        page={2}
+        count={3}
+        labels={{
+          nav: "paginas",
+          previous: "anterior",
+          next: "siguiente",
+          page: (n) => `pagina ${n}`,
+          goTo: (n) => `ir a ${n}`,
+        }}
+      />,
+    );
+    const nav = screen.getByRole("navigation", { name: "paginas" });
+    expect(within(nav).getByRole("button", { name: "anterior" })).toBeVisible();
+    expect(
+      within(nav).getByRole("button", { name: "siguiente" }),
+    ).toBeVisible();
+    expect(within(nav).getByRole("button", { name: "pagina 2" })).toBeVisible();
+    expect(within(nav).getByRole("button", { name: "ir a 3" })).toBeVisible();
+  });
+});
+
 describe("Slider", () => {
   const Controlled = ({ onCommit }) => {
     const [value, setValue] = useState([0, 100]);

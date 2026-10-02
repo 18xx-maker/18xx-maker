@@ -88,7 +88,9 @@ const TileFilters = ({
               { value: revenues[1], label: revenues[1] },
             ]}
             getAriaLabel={(index) =>
-              index === 0 ? "Minimum revenue" : "Maximum revenue"
+              index === 0
+                ? t("elements.tiles.filter.minRevenue")
+                : t("elements.tiles.filter.maxRevenue")
             }
           />
         </div>

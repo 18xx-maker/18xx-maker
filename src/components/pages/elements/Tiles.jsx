@@ -145,6 +145,13 @@ const Tiles = () => {
           page={effectivePage}
           count={pageCount}
           onChange={(_, value) => setPage(value)}
+          labels={{
+            nav: t("elements.tiles.pagination.label"),
+            previous: t("elements.tiles.pagination.previous"),
+            next: t("elements.tiles.pagination.next"),
+            page: (n) => t("elements.tiles.pagination.page", { page: n }),
+            goTo: (n) => t("elements.tiles.pagination.goTo", { page: n }),
+          }}
         />
       </Container>
       <Grid container spacing={2}>

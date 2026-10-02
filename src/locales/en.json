@@ -136,7 +136,16 @@
         "town": "Town",
         "city": "City",
         "halt": "Halt",
-        "revenues": "Revenues"
+        "revenues": "Revenues",
+        "minRevenue": "Minimum revenue",
+        "maxRevenue": "Maximum revenue"
+      },
+      "pagination": {
+        "label": "pagination navigation",
+        "previous": "Go to previous page",
+        "next": "Go to next page",
+        "page": "page {{page}}",
+        "goTo": "Go to page {{page}}"
       }
     },
     "atoms": {
