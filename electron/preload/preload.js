@@ -1,12 +1,21 @@
 const { contextBridge, ipcRenderer, webUtils } = require("electron/renderer");
 
+// The window of an export capture is given the game and config it shows (see
+// util/renderInput), by the id of its export in its arguments
+const renderInputId = process.argv
+  .find((arg) => arg.startsWith("--render-input="))
+  ?.slice("--render-input=".length);
+
 const api = {
-  // PDF/PNG Exporting
-  exportPDF: (game, items) => ipcRenderer.send("exportPDF", game, items),
-  exportPNG: (game, items) => ipcRenderer.send("exportPNG", game, items),
-  exportB18: (request) => ipcRenderer.send("exportB18", request),
-  pdf: (path) => ipcRenderer.send("pdf", path),
-  png: (path) => ipcRenderer.send("png", path),
+  // Exporting pdf, png and Board18 files: one request, answered when the
+  // export is over. Progress and the result come as alerts.
+  export: (request) => ipcRenderer.invoke("export", request),
+  cancelExport: () => ipcRenderer.invoke("export:cancel"),
+  chooseExportFolder: () => ipcRenderer.invoke("export:folder"),
+  renderInput:
+    renderInputId === undefined
+      ? undefined
+      : ipcRenderer.sendSync("getRenderInput", renderInputId),
 
   saveGamePath: (file) =>
     ipcRenderer

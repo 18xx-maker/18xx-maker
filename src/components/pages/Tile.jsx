@@ -3,16 +3,29 @@ import { useLocation, useParams } from "react-router";
 import Svg from "@/components/Svg";
 import Tile from "@/components/Tile";
 
+import { useConfig, useGame } from "@/hooks";
 import capability from "@/util/capability";
+import { planSingle } from "@/util/exportPlan";
 
 const TilePage = () => {
   let params = useParams();
   let location = useLocation();
+  const game = useGame();
+  const { defaultConfig, userConfig, storedConfig } = useConfig();
   let id = params.id;
 
   let handler = () => {
     if (capability.electron) {
-      window.api.png(location.pathname + location.search);
+      window.api
+        .export(
+          planSingle(
+            game,
+            { defaultConfig, userConfig, storedConfig },
+            location,
+            "png",
+          ),
+        )
+        .catch(console.error);
     }
   };
 

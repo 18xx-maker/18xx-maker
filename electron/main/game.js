@@ -1,6 +1,5 @@
 import fs from "node:fs";
 
-import Promise from "bluebird";
 import { dialog } from "electron";
 import { v4 as uuidv4 } from "uuid";
 

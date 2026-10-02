@@ -8,6 +8,7 @@ import {
 import { page } from "vitest/browser";
 
 import { games } from "@/data";
+import { docPath } from "@/export/names.js";
 import { createUpdate } from "@/state";
 
 import { renderApp } from "@tests/helpers.jsx";
@@ -42,9 +43,14 @@ beforeEach(async () => {
     checkForUpdates: vi.fn(),
     deleteGame: vi.fn(),
     downloadUpdate: vi.fn(),
-    exportB18: vi.fn(),
-    exportPDF: vi.fn(),
-    exportPNG: vi.fn(),
+    cancelExport: vi.fn(),
+    chooseExportFolder: vi.fn(),
+    export: vi.fn().mockResolvedValue({
+      done: 1,
+      total: 1,
+      failed: [],
+      cancelled: false,
+    }),
     loadConfig: vi.fn().mockResolvedValue(config),
     loadPlatformAndVersions: vi.fn().mockReturnValue(config),
     loadSummaries: vi.fn().mockResolvedValue({}),
@@ -56,8 +62,6 @@ beforeEach(async () => {
     onRedirect: vi.fn(),
     onUpdate: vi.fn(),
     openGame: vi.fn(),
-    pdf: vi.fn(),
-    png: vi.fn(),
     saveGamePath: vi.fn(),
   });
 });
@@ -75,11 +79,17 @@ const drop = (dataTransfer) => {
   fireEvent(zone, event);
 };
 
-// The files the app asked the main process to export, as { page: file name }
-// with the page relative to the game, "map?variation=0"
-const exported = (items) =>
+// The last export the app asked the main process for
+const requested = () => api.export.mock.calls.at(-1)[0];
+
+// The files of a request, as { page: file name } with the page relative to the
+// game, "map?variation=0"
+const exported = ({ jobs }) =>
   Object.fromEntries(
-    items.map(({ route, name }) => [route.split("/").slice(3).join("/"), name]),
+    jobs.map(({ doc, path }) => [
+      docPath(doc).split("/").slice(3).join("/"),
+      path,
+    ]),
   );
 
 const openExport = async (user) => {
@@ -438,7 +448,20 @@ describe("export button", () => {
         name: "Export this component as a pdf document",
       }),
     );
-    expect(api.pdf).toHaveBeenCalledWith("/games/18Test/map?variation=0");
+    expect(requested()).toMatchObject({
+      id: "18Test",
+      single: true,
+      jobs: [
+        {
+          format: "pdf",
+          path: "18test-map.pdf",
+          doc: {
+            route: "/games/render:18Test/map",
+            query: { variation: "0" },
+          },
+        },
+      ],
+    });
 
     await openExport(user);
     await user.click(
@@ -446,7 +469,52 @@ describe("export button", () => {
         name: "Export this component as a png image",
       }),
     );
-    expect(api.png).toHaveBeenCalledWith("/games/18Test/map?variation=0");
+    expect(requested().jobs[0]).toMatchObject({
+      format: "png",
+      path: "18test-map.png",
+      doc: { capture: { selector: ".printElement" } },
+    });
+  });
+
+  it("alerts when the main process fails to export", async () => {
+    api.export.mockRejectedValueOnce(new Error("No windows"));
+    const { user, store } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await openExport(user);
+    await user.click(
+      await screen.findByRole("menuitem", {
+        name: "Export game as pdf documents",
+      }),
+    );
+
+    await waitFor(() =>
+      expect(store.getState().alert).toMatchObject({
+        title: "Export failed",
+        message: "No windows",
+        type: "error",
+      }),
+    );
+  });
+
+  it("sends the game and the layers of its config below the url, not the url", async () => {
+    const { user } = renderApp("/games/18Test/map?config.paper.width=111", {
+      config: { paper: { height: 222 } },
+    });
+    await screen.findByTestId("game-18Test-map");
+
+    await openExport(user);
+    await user.click(
+      await screen.findByRole("menuitem", {
+        name: "Export game as pdf documents",
+      }),
+    );
+
+    const { game, config, dpi } = requested();
+    expect(game.meta.slug).toBe("18Test");
+    expect(config).toMatchObject({ paper: { height: 222 } });
+    expect(config.paper.width).toBeUndefined();
+    expect(dpi).toBe(300);
   });
 
   it("exports every page of the game as pdfs", async () => {
@@ -460,10 +528,9 @@ describe("export button", () => {
       }),
     );
 
-    expect(api.exportPDF).toHaveBeenCalledTimes(1);
-    const [slug, list] = api.exportPDF.mock.calls[0];
-    expect(slug).toBe("18Test");
-    expect(exported(list)).toEqual({
+    expect(api.export).toHaveBeenCalledTimes(1);
+    expect(requested().single).toBeUndefined();
+    expect(exported(requested())).toEqual({
       background: "18test-background.pdf",
       revenue: "18test-revenue.pdf",
       "revenue?paginated=true": "18test-revenue-paginated.pdf",
@@ -494,7 +561,7 @@ describe("export button", () => {
       }),
     );
 
-    const items = exported(api.exportPDF.mock.calls[0][1]);
+    const items = exported(requested());
     expect(items).not.toHaveProperty("cards");
     expect(items).not.toHaveProperty("tokens");
     expect(items).not.toHaveProperty("tiles");
@@ -528,7 +595,7 @@ describe("export button", () => {
         name: "Export game as pdf documents",
       }),
     );
-    const pdfs = exported(api.exportPDF.mock.calls[0][1]);
+    const pdfs = exported(requested());
     expect(pdfs).toMatchObject({
       "map?variation=0": "18test-map-0.pdf",
       "map?paginated=true&variation=0": "18test-map-0-paginated.pdf",
@@ -537,6 +604,9 @@ describe("export button", () => {
     });
     expect(pdfs).not.toHaveProperty("map");
     expect(pdfs).not.toHaveProperty("map?variation=2");
+    // The windows that capture it show the game as the render page, by id
+    expect(requested().id).toBe("abc");
+    expect(requested().jobs[0].doc.route).toBe("/games/render:abc/background");
 
     await openExport(user);
     await user.click(
@@ -544,7 +614,7 @@ describe("export button", () => {
         name: "Export game as png images",
       }),
     );
-    const pngs = exported(api.exportPNG.mock.calls[0][1]);
+    const pngs = exported(requested());
     expect(pngs).toMatchObject({
       "map?variation=0": "18test-map-0.png",
       "map?variation=1": "18test-map-1.png",
@@ -563,9 +633,7 @@ describe("export button", () => {
         name: "Export game as pdf documents",
       }),
     );
-    expect(
-      Object.keys(exported(api.exportPDF.mock.calls[0][1])).sort(),
-    ).toEqual(
+    expect(Object.keys(exported(requested())).sort()).toEqual(
       // No cards either, the shared list checks the game has some
       [
         "background",
@@ -583,16 +651,14 @@ describe("export button", () => {
         name: "Export game as png images",
       }),
     );
-    const pngs = Object.keys(exported(api.exportPNG.mock.calls[0][1]));
+    const pngs = Object.keys(exported(requested()));
     expect(
       pngs
         .filter((k) => !k.startsWith("tiles/") && !k.startsWith("tokens/"))
         .sort(),
     ).toEqual(["background", "revenue", "tile-manifest"].sort());
     // Without companies the game tokens are numbered from one
-    expect(exported(api.exportPNG.mock.calls[0][1])["tokens/0"]).toBe(
-      "1888-token-1.png",
-    );
+    expect(exported(requested())["tokens/0"]).toBe("1888-token-1.png");
   });
 
   it("exports every component of the game as pngs", async () => {
@@ -606,10 +672,8 @@ describe("export button", () => {
       }),
     );
 
-    expect(api.exportPNG).toHaveBeenCalledTimes(1);
-    const [slug, list] = api.exportPNG.mock.calls[0];
-    const items = exported(list);
-    expect(slug).toBe("18Test");
+    expect(api.export).toHaveBeenCalledTimes(1);
+    const items = exported(requested());
     expect(items).toMatchObject({
       background: "18test-background.png",
       revenue: "18test-revenue.png",
@@ -652,23 +716,33 @@ describe("export button", () => {
       }),
     );
 
-    expect(api.exportB18).toHaveBeenCalledTimes(1);
-    const { names, json, images } = api.exportB18.mock.calls[0][0];
-    expect(names.zip).toBe("board18-18Test-1.0.zip");
-    expect(json).toMatchObject({ bname: "18Test", version: "1.0" });
-    expect(images.map(({ path }) => path)).toEqual(
+    expect(api.export).toHaveBeenCalledTimes(1);
+    const { b18, jobs } = requested();
+    // The names that are data, a function could not be sent
+    expect(b18.names).toEqual({
+      folder: "board18-18Test-1.0",
+      zip: "board18-18Test-1.0.zip",
+      json: "board18-18Test-1.0/18Test-1.0.json",
+    });
+    expect(b18.json).toMatchObject({ bname: "18Test", version: "1.0" });
+    expect(() => structuredClone(requested())).not.toThrow();
+    expect(jobs.map(({ path }) => path)).toEqual(
       expect.arrayContaining([
         "board18-18Test-1.0/18Test-1.0/Map.png",
         "board18-18Test-1.0/18Test-1.0/Market.png",
         "board18-18Test-1.0/18Test-1.0/Tokens.png",
       ]),
     );
-    expect(images.find(({ path }) => path.endsWith("/Map.png"))).toMatchObject({
-      route: "/games/18Test/b18/map?print=true",
-      transparent: false,
+    expect(jobs.every(({ format }) => format === "b18")).toBe(true);
+    expect(
+      jobs.find(({ path }) => path.endsWith("/Map.png")).doc,
+    ).toMatchObject({
+      route: "/games/render:18Test/b18/map",
+      query: { print: "true" },
+      capture: { transparent: false },
     });
     expect(
-      images.find(({ path }) => path.endsWith("/Tokens.png")),
-    ).toMatchObject({ width: 60, transparent: true });
+      jobs.find(({ path }) => path.endsWith("/Tokens.png")).doc.capture,
+    ).toMatchObject({ viewport: { w: 60 }, transparent: true });
   });
 });

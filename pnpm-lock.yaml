@@ -50,9 +50,6 @@ importers:
       archiver:
         specifier: ^8.0.0
         version: 8.0.0
-      bluebird:
-        specifier: ^3.7.2
-        version: 3.7.2
       chalk:
         specifier: ^6.0.1
         version: 6.0.1
@@ -165,6 +162,9 @@ importers:
       '@vitest/ui':
         specifier: ^5.0.3
         version: 5.0.3(vitest@5.0.3)
+      axe-core:
+        specifier: ^4.13.0
+        version: 4.13.0
       browserslist:
         specifier: ^4.29.3
         version: 4.29.3

@@ -1,6 +1,5 @@
 import os from "node:os";
 
-import Promise from "bluebird";
 import { app, ipcMain } from "electron";
 import updater from "electron-updater";
 
@@ -13,7 +12,7 @@ import {
   getConfig,
   getSummaries,
 } from "./config.js";
-import { exportB18, exportPDF, exportPNG, pdf, png } from "./export.js";
+import { registerExport } from "./export.js";
 import { TYPE, loadGame, openGame, saveGamePath } from "./game.js";
 import { setMenu } from "./menu.js";
 import { send } from "./util.js";
@@ -127,8 +126,4 @@ ipcMain.on("addRecent", (event, title, slug) => {
   setMenu();
 });
 
-ipcMain.on("exportPDF", (event, game, items) => exportPDF(game, items));
-ipcMain.on("exportPNG", (event, game, items) => exportPNG(game, items));
-ipcMain.on("exportB18", (event, request) => exportB18(request));
-ipcMain.on("pdf", (event, path) => pdf(path));
-ipcMain.on("png", (event, path) => png(path));
+registerExport();

@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useLocation, useMatch } from "react-router";
 
-import { Box, FileImage, FileText, Images } from "lucide-react";
+import { Box, FileImage, FileText, Images, Settings2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,16 +20,22 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
+import ExportOptions from "@/components/ExportOptions";
+
 import { useConfig, useGame } from "@/hooks";
+import { createAlert } from "@/state";
 import { trackEvent } from "@/util/analytics";
-import { planB18, planExport } from "@/util/exportPlan";
+import { planExport, planSingle } from "@/util/exportPlan";
 import { useBooleanParam } from "@/util/query";
 
 const ExportButton = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const location = useLocation();
   const game = useGame();
-  const { config } = useConfig();
+  const { defaultConfig, userConfig, storedConfig } = useConfig();
+  const layers = { defaultConfig, userConfig, storedConfig };
+  const [options, setOptions] = useState(false);
   const [print] = useBooleanParam("print");
 
   const match = useMatch("/games/:slug/*");
@@ -37,78 +45,84 @@ const ExportButton = () => {
     return null;
   }
 
-  const handleAllPdf = () => {
-    trackEvent("exportGame", location, { media: "pdf" });
-    window.api.exportPDF(game.meta.slug, planExport(game, config, "pdf"));
-  };
+  // The result, and progress, come as alerts from the main process
+  const exportFiles = (request) =>
+    window.api.export(request).catch((error) => {
+      dispatch(createAlert(t("export.failed"), error.message, "error"));
+    });
 
-  const handleAllPng = () => {
-    trackEvent("exportGame", location, { media: "png" });
-    window.api.exportPNG(game.meta.slug, planExport(game, config, "png"));
-  };
-
-  const handleB18 = () => {
-    trackEvent("exportGame", location, { media: "b18" });
-    window.api.exportB18(
-      planB18(game, config, {
-        version: "1.0",
-        author: game.info.designer || "18xx Maker",
+  const handleAll = (format) => {
+    trackEvent("exportGame", location, { media: format });
+    exportFiles(
+      planExport(game, layers, {
+        formats: [format],
+        b18: { version: "1.0", author: game.info.designer || "18xx Maker" },
       }),
     );
   };
 
-  const handleSinglePdf = () => {
-    trackEvent("exportComponent", location, { media: "pdf" });
-    window.api.pdf(location.pathname + location.search);
-  };
-
-  const handleSinglePng = () => {
-    trackEvent("exportComponent", location, { media: "png" });
-    window.api.png(location.pathname + location.search);
+  const handleSingle = (format) => {
+    trackEvent("exportComponent", location, { media: format });
+    exportFiles(planSingle(game, layers, location, format));
   };
 
   return (
-    <DropdownMenu>
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                aria-label="Export"
-                className="border rounded-sm p-2 w-8 h-8 m-0 print:hidden"
-              >
-                <Images className="size-6" />
-              </Button>
-            </DropdownMenuTrigger>
-          </TooltipTrigger>
-          <TooltipContent>Export</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onSelect={handleAllPdf}>
-          <FileText />
-          {t("export.allPdf")}
-        </DropdownMenuItem>
-        <DropdownMenuItem onSelect={handleAllPng}>
-          <FileImage />
-          {t("export.allPng")}
-        </DropdownMenuItem>
-        <DropdownMenuItem onSelect={handleB18}>
-          <Box />
-          {t("export.b18")}
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onSelect={handleSinglePdf}>
-          <FileText />
-          {t("export.singlePdf")}
-        </DropdownMenuItem>
-        <DropdownMenuItem onSelect={handleSinglePng}>
-          <FileImage />
-          {t("export.singlePng")}
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <>
+      <DropdownMenu>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="outline"
+                  aria-label="Export"
+                  className="border rounded-sm p-2 w-8 h-8 m-0 print:hidden"
+                >
+                  <Images className="size-6" />
+                </Button>
+              </DropdownMenuTrigger>
+            </TooltipTrigger>
+            <TooltipContent>Export</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem onSelect={() => handleAll("pdf")}>
+            <FileText />
+            {t("export.allPdf")}
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => handleAll("png")}>
+            <FileImage />
+            {t("export.allPng")}
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => handleAll("b18")}>
+            <Box />
+            {t("export.b18")}
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onSelect={() => setOptions(true)}>
+            <Settings2 />
+            {t("export.options")}
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onSelect={() => handleSingle("pdf")}>
+            <FileText />
+            {t("export.singlePdf")}
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => handleSingle("png")}>
+            <FileImage />
+            {t("export.singlePng")}
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      {options && (
+        <ExportOptions
+          game={game}
+          layers={layers}
+          open={options}
+          onOpenChange={setOptions}
+        />
+      )}
+    </>
   );
 };
 
