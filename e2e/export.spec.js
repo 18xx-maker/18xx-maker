@@ -47,6 +47,8 @@ test.afterEach(async () => {
 
 // The edges of the cards of the CLI, by name, to compare the app's with
 let cliCards;
+// The sizes of the images of the CLI, by name
+let cliSizes;
 
 // The most a channel of two lists of pixels differs by
 const farthest = (one, two) =>
@@ -63,6 +65,22 @@ const check = {
   },
   png: (dir, from) => {
     expect(png(path.join(dir, expected.png.file))).toEqual(expected.png.size);
+    // The background is painted whole: centered in the window, it moves when
+    // the device size is cut to it
+    expect(edgeAlpha(path.join(dir, expected.png.file))).toEqual(OPAQUE);
+    for (const [name, size] of Object.entries(expected.png.images)) {
+      expect(png(path.join(dir, name)), name).toMatchObject(size);
+    }
+
+    // The app's images are the size of the CLI's
+    const sizes = Object.fromEntries(
+      fs
+        .readdirSync(dir)
+        .filter((name) => name.endsWith(".png"))
+        .map((name) => [name, png(path.join(dir, name))]),
+    );
+    if (from === "cli") cliSizes = sizes;
+    if (from === "app" && cliSizes) expect(sizes).toEqual(cliSizes);
 
     // Every card has the same size, and an opaque edge: no pixel the card
     // only partly covers, dark on a dark background
@@ -129,7 +147,11 @@ const check = {
 };
 
 // The documents each format is exported with, the fewest that show it works
-const docs = { pdf: ["map"], png: ["background", "cards"], b18: ["map"] };
+const docs = {
+  pdf: ["map"],
+  png: ["background", "map", "market", "cards"],
+  b18: ["map"],
+};
 
 for (const format of ["pdf", "png", "b18"]) {
   test(`export › cli › ${format}`, () => {

@@ -139,14 +139,10 @@ const captureViewport = async (adapter, { viewport }, maxPixels) => {
   return screenshot(adapter);
 };
 
-// An element of the page at a resolution, with the resolution in the file.
-// The image is the device pixels the element covers whole (see devicePixels),
-// from a whole device pixel. Chromium makes a clip a whole number of CSS
-// pixels (so an image of 255 CSS pixels is 797 device pixels at 300 dpi, with
-// a last column that is 7/8 painted), so the clip is a little larger and the
-// image is cut to its size.
-const captureElement = async (adapter, { selector }, dpi, maxPixels) => {
-  const rect = await adapter.evaluate(`(() => {
+// Where an element of the page is, { x, y, width, height, ratio } in CSS
+// pixels (ratio is the devicePixelRatio), or null when there is none
+const measure = (adapter, selector) =>
+  adapter.evaluate(`(() => {
     const element = document.querySelector(${JSON.stringify(selector)});
     if (!element) return null;
     const { left, top, width, height } = element.getBoundingClientRect();
@@ -158,18 +154,35 @@ const captureElement = async (adapter, { selector }, dpi, maxPixels) => {
       ratio: devicePixelRatio,
     };
   })()`);
-  if (!rect) throw new Error(`The page has no ${selector}`);
+
+// An element of the page at a resolution, with the resolution in the file.
+// The image is the device pixels the element covers whole (see devicePixels),
+// from a whole device pixel. Chromium makes a clip a whole number of CSS
+// pixels (so an image of 255 CSS pixels is 797 device pixels at 300 dpi, with
+// a last column that is 7/8 painted), so the clip is a little larger and the
+// image is cut to its size.
+// The device size the element is captured at is the window cut to the
+// element, so the page is laid out again: an element centered in the window
+// (the background) moves, and is measured again where it is now. The ratio is
+// the one it was painted with before the capture.
+const captureElement = async (adapter, { selector }, dpi, maxPixels) => {
+  const before = await measure(adapter, selector);
+  if (!before) throw new Error(`The page has no ${selector}`);
 
   const scale = dpi / CSS_DPI;
-  const pixels = devicePixels(rect, scale, rect.ratio);
-  checkPixels(pixels.width, pixels.height, maxPixels);
+  const size = devicePixels(before, scale, before.ratio);
+  checkPixels(size.width, size.height, maxPixels);
 
   await adapter.send("Emulation.setDeviceMetricsOverride", {
-    width: Math.max(1, Math.ceil(rect.x + rect.width)),
-    height: Math.max(1, Math.ceil(rect.y + rect.height)),
+    width: Math.max(1, Math.ceil(before.x + before.width)),
+    height: Math.max(1, Math.ceil(before.y + before.height)),
     deviceScaleFactor: scale,
     mobile: false,
   });
+  const rect = await measure(adapter, selector);
+  const pixels = devicePixels(rect, scale, before.ratio);
+  checkPixels(pixels.width, pixels.height, maxPixels);
+
   const png = await screenshot(adapter, {
     x: pixels.left / scale,
     y: pixels.top / scale,

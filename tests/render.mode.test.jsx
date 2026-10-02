@@ -52,6 +52,22 @@ describe("render mode page", () => {
     expect(count()).toBe(ready);
   });
 
+  // The exports only switch to print media once the page is ready, and capture
+  // the element right away: the pan and zoom editor would be the window's size
+  it.each(["map", "market"])(
+    "shows the %s at its physical size, not in the editor",
+    async (page) => {
+      renderApp(`/games/render:18Test/${page}`);
+      await waitFor(() => expect(renderState()).toBe("ready"));
+
+      const root = await screen.findByTestId(`game-render:18Test-${page}`);
+      // eslint-disable-next-line testing-library/no-node-access
+      const svg = root.querySelector("svg");
+      expect(svg).toHaveAttribute("width", expect.stringMatching(/in$/));
+      expect(svg).toHaveAttribute("height", expect.stringMatching(/in$/));
+    },
+  );
+
   it("is empty when the page redirects because the game has no data", async () => {
     holder.input = {
       ...holder.input,

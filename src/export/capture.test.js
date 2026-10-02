@@ -45,9 +45,11 @@ const base64 = (bytes) => {
   return btoa(text);
 };
 
-// An adapter that records what it was sent
-const adapter = ({ rect, reads = [btoa("pdf")] } = {}) => {
+// An adapter that records what it was sent. The element is at rect, or at
+// moved once the device size is changed (the page is laid out again)
+const adapter = ({ rect, moved, reads = [btoa("pdf")] } = {}) => {
   let scale = 1;
+  let at = rect;
   const calls = [];
   return {
     calls,
@@ -61,17 +63,18 @@ const adapter = ({ rect, reads = [btoa("pdf")] } = {}) => {
       }
       if (method === "Emulation.setDeviceMetricsOverride") {
         scale = params.deviceScaleFactor;
+        if (moved) at = { ...moved, ratio: scale };
       }
       if (method === "Page.captureScreenshot") {
         return {
           data: params.clip
-            ? base64(shot(params.clip, scale, rect))
+            ? base64(shot(params.clip, scale, at))
             : btoa(String.fromCharCode(...PNG)),
         };
       }
       return {};
     },
-    evaluate: async () => rect,
+    evaluate: async () => at,
   };
 };
 
@@ -291,6 +294,24 @@ describe("png", () => {
     expect(y + 515 / 3.125).toBeLessThanOrEqual(169);
     // The clip is whole CSS pixels, enough for the image
     expect([width, height]).toEqual([254, 165]);
+  });
+
+  // The background is centered in the window, a device size of the window cut
+  // to it moves it left
+  it("captures the element where it is at the device size of the capture", async () => {
+    const a = adapter({
+      rect: { x: 128, y: 0, width: 240, height: 150, ratio: 1 },
+      moved: { x: 64, y: 0, width: 240, height: 150 },
+    });
+
+    const bytes = await capture(a, job());
+
+    expect(a.calls[2][1]).toMatchObject({ width: 368, height: 150 });
+    expect(a.calls[3][1].clip).toMatchObject({ x: 64, y: 0 });
+    const image = decodePng(bytes);
+    expect(image).toMatchObject({ width: 750, height: 468 });
+    // Every pixel is the element's
+    expect(image.pixels.every((value) => value === 255)).toBe(true);
   });
 
   it("does not lose a pixel to a float error", async () => {

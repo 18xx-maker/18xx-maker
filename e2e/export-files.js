@@ -90,6 +90,12 @@ export const expected = {
     file: "18test-background.png",
     // 8 by 10.5 inches at 300 dpi, with its resolution of 11811 pixels/meter
     size: { width: 2400, height: 3150, pixelsPerMeter: 11811 },
+    // The map and the market at their size in print, whatever the size of
+    // the window they are captured in
+    images: {
+      "18test-map.png": { width: 4350, height: 1206 },
+      "18test-market.png": { width: 4018, height: 2965 },
+    },
     // The cards, 2.657 by 1.732 inches (255.11 by 166.3 CSS pixels): the
     // device pixels the card is painted on whole, 255 by 166 CSS pixels
     cards: { count: 48, width: 796, height: 518 },

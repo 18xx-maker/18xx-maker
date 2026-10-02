@@ -3,15 +3,17 @@ import SvgEditor from "@/components/SvgEditor";
 
 import { usePrint } from "@/hooks";
 import { useBooleanParam } from "@/util/query";
+import { getRenderInput } from "@/util/renderInput";
 
-// The pan and zoom editor is only for the screen. Printing, and the exports
-// that load a page with ?print=true (they do not use the print media type),
-// get the svg at its physical size.
+// The pan and zoom editor is only for the screen. Printing, ?print=true and
+// render mode (the exports) get the svg at its physical size. The exports only
+// switch to the print media type once the page is ready, the editor would
+// still be the size of the window when the image is captured.
 const Editor = ({ width, height, className, ...pass }) => {
   const print = usePrint();
   const [printParam] = useBooleanParam("print");
 
-  if (print || printParam) {
+  if (print || printParam || getRenderInput()) {
     return (
       <Svg
         className={className}
