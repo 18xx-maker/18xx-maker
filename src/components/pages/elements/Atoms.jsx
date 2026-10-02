@@ -1,15 +1,12 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-
 import { addIndex, chain, find, map, propEq } from "ramda";
 
 import Hex from "@/components/Hex";
 import Svg from "@/components/Svg";
 import { SyntaxHighlighter, style } from "@/components/SyntaxHighlighter";
-import { Container, Grid, Paper, Typography } from "@/ui";
+import { Container, Grid, Paper, Select, Typography } from "@/ui";
 import { useStringParam } from "@/util/query";
 import pageStyles from "../page.module.css";
 import styles from "./Atoms.module.css";
@@ -979,12 +976,8 @@ const atoms = [
   },
 ];
 
-const groupItems = map(
-  (atom) => (
-    <MenuItem key={atom.group} value={atom.group}>
-      {atom.group}
-    </MenuItem>
-  ),
+const groupOptions = map(
+  (atom) => ({ value: atom.group, label: atom.group }),
   atoms,
 );
 
@@ -1040,9 +1033,12 @@ const Atoms = () => {
         </Typography>
       </Paper>
       <Container maxWidth="lg" className={pageStyles.selector}>
-        <Select value={group} onChange={(e) => setGroup(e.target.value)}>
-          {groupItems}
-        </Select>
+        <Select
+          variant="outlined"
+          value={group}
+          onChange={(e) => setGroup(e.target.value)}
+          options={groupOptions}
+        />
       </Container>
       <Grid container spacing={2}>
         {examples(hexes)}

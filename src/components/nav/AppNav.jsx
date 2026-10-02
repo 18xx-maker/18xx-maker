@@ -3,11 +3,6 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Link, useMatch } from "react-router";
 
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-
 import { prop } from "ramda";
 
 import MobileMenuButton from "@/components/nav/MobileMenuButton";
@@ -18,11 +13,15 @@ import {
   Button,
   Help as DocumentationIcon,
   Download as DownloadIcon,
+  DropdownMenu,
   Category as ElementsIcon,
   Train as GamesIcon,
   Home as HomeIcon,
+  ListItemIcon,
+  ListItemText,
   OpenInBrowser as LoadIcon,
   KeyboardArrowDown as MenuIcon,
+  MenuItem,
   Toolbar,
   Typography,
 } from "@/ui";
@@ -133,14 +132,11 @@ const MobileMenu = ({ anchor, onClose }) => {
   const game = useLoadedGame();
 
   return (
-    <Menu
+    <DropdownMenu
       id="appnav-menu"
       anchorEl={anchor}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
       onClose={onClose}
       open={open}
-      keepMounted
     >
       {update && update.available && (
         <MenuLink
@@ -184,7 +180,7 @@ const MobileMenu = ({ anchor, onClose }) => {
         text={t("nav.docs")}
         icon={<DocumentationIcon />}
       />
-    </Menu>
+    </DropdownMenu>
   );
 };
 

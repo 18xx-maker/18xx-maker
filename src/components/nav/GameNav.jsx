@@ -2,11 +2,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Link as RouterLink, useLocation, useMatch } from "react-router";
 
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-
 import { addIndex, is, map, omit } from "ramda";
 
 import File from "@/components/File";
@@ -30,6 +25,7 @@ import {
   MonetizationOn as PurchaseIcon,
   Refresh as RefreshIcon,
   Gavel as RulesIcon,
+  Select,
   Switch,
   Warning as WarningIcon,
 } from "@/ui";
@@ -243,27 +239,18 @@ const GameNav = () => {
             )}
             {hasVariation && (
               <ListItem>
-                <FormControl className={styles.input} variant="filled">
-                  <InputLabel id="variation-label">
-                    {t("game.map.variation")}
-                  </InputLabel>
-                  <Select
-                    labelId="variation-label"
-                    id="variation"
-                    name="variation"
-                    value={variation}
-                    onChange={handleVariation}
-                  >
-                    {addIndex(map)(
-                      (m, i) => (
-                        <MenuItem key={`variation-${i}`} value={i}>
-                          {m.name}
-                        </MenuItem>
-                      ),
-                      game.map,
-                    )}
-                  </Select>
-                </FormControl>
+                <Select
+                  id="variation"
+                  name="variation"
+                  label={t("game.map.variation")}
+                  className={styles.input}
+                  value={variation}
+                  onChange={handleVariation}
+                  options={addIndex(map)(
+                    (m, i) => ({ value: i, label: m.name }),
+                    game.map,
+                  )}
+                />
               </ListItem>
             )}
             {isCards && (

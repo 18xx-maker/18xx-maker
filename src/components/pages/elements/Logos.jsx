@@ -1,13 +1,10 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-
 import { ascend, compose, groupBy, keys, map, nth, sort, split } from "ramda";
 
 import { logos } from "@/data";
-import { Container, Grid, Paper, Typography } from "@/ui";
+import { Container, Grid, Paper, Select, Typography } from "@/ui";
 import { useStringParam } from "@/util/query";
 import pageStyles from "../page.module.css";
 
@@ -19,12 +16,8 @@ const groupNames = sort(
   keys(groups),
 );
 
-const groupItems = map(
-  (group) => (
-    <MenuItem key={group} value={group}>
-      {group}
-    </MenuItem>
-  ),
+const groupOptions = map(
+  (group) => ({ value: group, label: group }),
   groupNames,
 );
 
@@ -64,9 +57,12 @@ const Logos = () => {
         </Typography>
       </Paper>
       <Container maxWidth="lg" className={pageStyles.selector}>
-        <Select value={group} onChange={(e) => setGroup(e.target.value)}>
-          {groupItems}
-        </Select>
+        <Select
+          variant="outlined"
+          value={group}
+          onChange={(e) => setGroup(e.target.value)}
+          options={groupOptions}
+        />
       </Container>
       <Grid container spacing={2}>
         {logoNodes}

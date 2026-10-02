@@ -2,23 +2,23 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useMatch } from "react-router";
 
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import Slide from "@mui/material/Slide";
-import Tooltip from "@mui/material/Tooltip";
 
 import { assoc, flatten, forEach, is, keys, map, range } from "ramda";
 
 import { useConfig, useGame } from "@/hooks";
 import schema from "@/schemas/config.schema.json";
 import {
-  Divider,
+  DropdownMenu,
   Collections as ExportIcon,
   Fab,
+  ListItemIcon,
+  ListItemText,
+  MenuDivider,
+  MenuItem,
   PictureAsPdf as PdfIcon,
   PhotoLibrary as PngIcon,
+  Tooltip,
 } from "@/ui";
 import { maxPlayers, titleToFilename } from "@/util";
 import { trackEvent } from "@/util/analytics";
@@ -235,13 +235,7 @@ const ExportButton = () => {
   return (
     <>
       <Slide direction="left" in={true}>
-        <Tooltip
-          title="Export"
-          aria-label="export"
-          placement="left"
-          arrow
-          slotProps={{ popper: { "data-testid": "tooltip" } }}
-        >
+        <Tooltip title="Export" aria-label="export" placement="left" arrow>
           <Fab
             data-testid="export-fab"
             onClick={handleMenu}
@@ -252,14 +246,11 @@ const ExportButton = () => {
           </Fab>
         </Tooltip>
       </Slide>
-      <Menu
+      <DropdownMenu
         id="export-menu"
         anchorEl={menuAnchor}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
         onClose={handleMenuClose}
         open={Boolean(menuAnchor)}
-        keepMounted
       >
         <MenuItem onClick={handleAllPdf}>
           <ListItemIcon>
@@ -273,7 +264,7 @@ const ExportButton = () => {
           </ListItemIcon>
           <ListItemText primary={t("export.allPng")} />
         </MenuItem>
-        <Divider />
+        <MenuDivider />
         <MenuItem onClick={handleSinglePdf}>
           <ListItemIcon>
             <PdfIcon />
@@ -286,7 +277,7 @@ const ExportButton = () => {
           </ListItemIcon>
           <ListItemText primary={t("export.singlePng")} />
         </MenuItem>
-      </Menu>
+      </DropdownMenu>
     </>
   );
 };

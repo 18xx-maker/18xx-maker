@@ -66,16 +66,42 @@ number that is not one of them, or a unit other than px.
 
 ## Print rules (`src/styles/root.css`, `@media print`)
 
-That block hides the chrome with `[data-chrome="app-bar"]` and
-`[data-chrome="fab"]` (the `src/ui` AppBar and Fab), and still uses `.Mui*`
-selectors for what is not replaced yet: `.MuiDrawer-root`, `.MuiSnackbar-root`,
-`.MuiTooltip-popper`. It frees
+That block hides the chrome with `[data-chrome="app-bar"]`,
+`[data-chrome="fab"]` and `[data-chrome="tooltip"]` (the `src/ui` AppBar, Fab and
+Tooltip), and still uses `.Mui*` selectors for what is not replaced yet:
+`.MuiDrawer-root`, `.MuiSnackbar-root`. It frees
 the viewport with `[data-chrome="viewport"]` and the background page's wrapper
 with `[data-chrome="background"]`. Leave a `.Mui*` selector alone until the component it names
 is replaced. The PR that replaces one must, in the same PR, swap the selector
 for the component's `data-chrome` hook (or a CSS Module class) and keep
 `e2e/print.spec.js` green, which checks the `data-testid` hooks under
 `emulateMedia({ media: "print" })`.
+
+## Popups (Select, DropdownMenu, Tooltip)
+
+These are the components built on Base UI (`@base-ui/react`, pinned to an exact
+version). They portal to `<body>`, so they get the tokens from
+`data-chrome-root` and sit above the drawers (`--z-modal`, `--z-tooltip`).
+
+- `Select` replaces MUI's Select, MenuItem, InputLabel and FormControl. It is
+  not a native `<select>`: the popup has to look like the MUI menu paper, native
+  popups cannot be styled, and the app's tests and e2e specs drive it through the
+  `combobox`, `listbox` and `option` roles with a click. `options` is
+  `[{ value, label }]` and `onChange` gets `{ target: { name, value } }`. A
+  closed Base UI select keeps its hidden listbox in the DOM, so a query for
+  `listbox` finds it (pass `{ hidden: false }` to ask for the open one) and
+  "is it open" is `aria-expanded` on the combobox.
+- `DropdownMenu` (the name avoids the `Menu` hamburger icon) with `MenuItem`
+  (`component` makes it a link item) and `MenuDivider`. It is controlled with
+  `anchorEl`, `open` and `onClose`, like MUI's Menu.
+- `Tooltip` forwards its ref and extra props to its child, so a `Slide` around
+  it still moves the child. It does not name the child: pass `aria-label`.
+  The popup has `data-chrome="tooltip"` and `data-testid="tooltip"`.
+- Keyboard shortcuts (`useBindings`, on `document`) only ignore `input` and
+  `textarea` targets. An open Select or Menu handles printable keys itself
+  (typeahead) and stops them, so shortcuts do not fire while a popup holds the
+  focus. `tests/bindings.popups.test.jsx` pins that.
+- Use a literal `min-height: 48px` below 600px for items (MUI's touch height).
 
 ## Testing
 

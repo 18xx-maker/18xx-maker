@@ -1,16 +1,12 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import Slider from "@mui/material/Slider";
 
 import { map, uniq, values } from "ramda";
 
 import { tiles } from "@/data";
-import { Paper, TextField, Typography } from "@/ui";
+import { Paper, Select, TextField, Typography } from "@/ui";
 import styles from "./TileFilters.module.css";
 
 const colors = uniq(values(map((t) => t.color, tiles)));
@@ -45,28 +41,17 @@ const TileFilters = ({
         {t("elements.tiles.filter.title")}
       </Typography>
       <div className={styles.filter}>
-        <FormControl variant="filled">
-          <InputLabel id="filter-color-label">
-            {t("elements.tiles.filter.color")}
-          </InputLabel>
-          <Select
-            labelId="filter-color-label"
-            id="filter-color"
-            style={{ width: 150 }}
-            value={color}
-            onChange={handleColor}
-          >
-            <MenuItem value="all">{t("elements.tiles.filter.all")}</MenuItem>
-            {map(
-              (c) => (
-                <MenuItem key={c} value={c}>
-                  {c}
-                </MenuItem>
-              ),
-              colors,
-            )}
-          </Select>
-        </FormControl>
+        <Select
+          id="filter-color"
+          label={t("elements.tiles.filter.color")}
+          style={{ width: 150 }}
+          value={color}
+          onChange={handleColor}
+          options={[
+            { value: "all", label: t("elements.tiles.filter.all") },
+            ...map((c) => ({ value: c, label: c }), colors),
+          ]}
+        />
         <TextField
           id="filter-id"
           label={t("elements.tiles.filter.id")}
@@ -74,24 +59,20 @@ const TileFilters = ({
           value={id}
           onChange={handleId}
         />
-        <FormControl variant="filled">
-          <InputLabel id="filter-includes-label">
-            {t("elements.tiles.filter.includes")}
-          </InputLabel>
-          <Select
-            labelId="filter-includes-label"
-            id="filter-color"
-            style={{ width: 150 }}
-            value={includes}
-            onChange={handleIncludes}
-          >
-            <MenuItem value="all">{t("elements.tiles.filter.all")}</MenuItem>
-            <MenuItem value="none">{t("elements.tiles.filter.none")}</MenuItem>
-            <MenuItem value="town">{t("elements.tiles.filter.town")}</MenuItem>
-            <MenuItem value="city">{t("elements.tiles.filter.city")}</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl variant="standard">
+        <Select
+          id="filter-includes"
+          label={t("elements.tiles.filter.includes")}
+          style={{ width: 150 }}
+          value={includes}
+          onChange={handleIncludes}
+          options={[
+            { value: "all", label: t("elements.tiles.filter.all") },
+            { value: "none", label: t("elements.tiles.filter.none") },
+            { value: "town", label: t("elements.tiles.filter.town") },
+            { value: "city", label: t("elements.tiles.filter.city") },
+          ]}
+        />
+        <div className={styles.slider}>
           <Slider
             style={{ width: "200px" }}
             value={revenueSlider}
@@ -112,7 +93,7 @@ const TileFilters = ({
             aria-labelledby="range-slider"
             getAriaValueText={(r) => `Revenue from ${r[0]} to ${r[1]}`}
           />
-        </FormControl>
+        </div>
       </div>
     </Paper>
   );

@@ -1,10 +1,5 @@
 import { diff } from "deep-object-diff";
 
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-
 import {
   chain,
   complement,
@@ -25,7 +20,7 @@ import { companyThemes, mapThemes } from "@/data";
 import defaultConfig from "@/defaults.json";
 import { useConfig } from "@/hooks";
 import schema from "@/schemas/config.schema.json";
-import { Button, Divider, Typography } from "@/ui";
+import { Button, Divider, Select, Typography } from "@/ui";
 import styles from "./Config.module.css";
 
 export const getPath = split(".");
@@ -81,50 +76,36 @@ const Config = () => {
     <div>
       <div className={styles.configSection}>
         <Typography variant="h5">Colors and Companies</Typography>
-        <FormControl variant="filled" className={styles.configItem}>
-          <InputLabel id="theme-label">Theme</InputLabel>
-          <Select
-            id="theme"
-            name="theme"
-            labelId="theme-label"
-            value={config.theme}
-            onChange={setOption}
-          >
-            {map(
-              (theme) => (
-                <MenuItem key={theme} value={theme}>
-                  {mapThemes[theme].name}
-                </MenuItem>
-              ),
-              keys(mapThemes),
-            )}
-          </Select>
-        </FormControl>
+        <Select
+          id="theme"
+          name="theme"
+          label="Theme"
+          className={styles.configItem}
+          value={config.theme}
+          onChange={setOption}
+          options={map(
+            (theme) => ({ value: theme, label: mapThemes[theme].name }),
+            keys(mapThemes),
+          )}
+        />
         <ThemePreview />
         <Typography variant="caption" display="block" gutterBottom>
           The theme determines which colors are used for all of the elements on
           the maps and tiles.
         </Typography>
 
-        <FormControl variant="filled" className={styles.configItem}>
-          <InputLabel id="companies-theme-label">Companies Theme</InputLabel>
-          <Select
-            id="companies-theme"
-            name="companiesTheme"
-            labelId="companies-theme-label"
-            value={config.companiesTheme}
-            onChange={setOption}
-          >
-            {map(
-              (theme) => (
-                <MenuItem key={theme} value={theme}>
-                  {companyThemes[theme].name}
-                </MenuItem>
-              ),
-              keys(companyThemes),
-            )}
-          </Select>
-        </FormControl>
+        <Select
+          id="companies-theme"
+          name="companiesTheme"
+          label="Companies Theme"
+          className={styles.configItem}
+          value={config.companiesTheme}
+          onChange={setOption}
+          options={map(
+            (theme) => ({ value: theme, label: companyThemes[theme].name }),
+            keys(companyThemes),
+          )}
+        />
         <ThemePreview companies />
         <Typography variant="caption" display="block" gutterBottom>
           The company theme determines which colors are used for all of the

@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 
-import FormControl from "@mui/material/FormControl";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-
 import { keys, map } from "ramda";
 
-import { TextField } from "@/ui";
+import { Select, TextField } from "@/ui";
 import styles from "./UnitInput.module.css";
 
 const allUnits = {
@@ -60,24 +56,14 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
         value={internalValue}
         onChange={handler}
       />
-      <FormControl variant="filled">
-        <Select
-          id={`${name}-units`}
-          labelId={`${name}-label`}
-          className={styles.configUnits}
-          value={units}
-          onChange={unitsHandler}
-        >
-          {map(
-            (key) => (
-              <MenuItem key={key} value={key}>
-                {key}
-              </MenuItem>
-            ),
-            keys(allUnits),
-          )}
-        </Select>
-      </FormControl>
+      <Select
+        id={`${name}-units`}
+        labelId={`${name}-label`}
+        className={styles.configUnits}
+        value={units}
+        onChange={unitsHandler}
+        options={map((key) => ({ value: key, label: key }), keys(allUnits))}
+      />
     </div>
   );
 };

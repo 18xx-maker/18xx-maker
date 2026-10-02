@@ -17,3 +17,15 @@
 .filter > div {
   margin-right: calc(var(--space) * 2);
 }
+
+/* The slider's wrapper, the box MUI's standard FormControl was */
+.slider {
+  display: inline-flex;
+  position: relative;
+  flex-direction: column;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  min-width: 0;
+  vertical-align: top;
+}

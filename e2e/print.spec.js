@@ -40,7 +40,18 @@ test("there is no print button outside of a game, or in print mode", async ({
 // export-fab replaces print-fab in the electron app only, and side-nav-temporary
 // is already display:none at this width (the md breakpoint), so a check here
 // would pass for the wrong reason. Both are covered by the same print rules.
-const chrome = ["app-bar", "side-nav", "config-drawer", "print-fab", "tooltip"];
+//
+// A tooltip closes by itself the moment its button is hidden (the print rules
+// hide both), so it cannot stay open to be checked. The test copies the open
+// tooltip's markup (a static node that React cannot close) and checks the
+// copy, which has the same data-chrome hook the print rule matches on.
+const chrome = [
+  "app-bar",
+  "side-nav",
+  "config-drawer",
+  "print-fab",
+  "tooltip-copy",
+];
 
 test("print media hides the chrome and frees the viewport", async ({
   page,
@@ -51,7 +62,14 @@ test("print media hides the chrome and frees the viewport", async ({
   // Keyboard focus shows the tooltip (the open drawer covers the button)
   await page.keyboard.press("Tab");
   await page.getByTestId("print-fab").focus();
-  await expect(page.getByTestId("tooltip")).toBeVisible();
+  const tooltip = page.getByTestId("tooltip");
+  await expect(tooltip).toBeVisible();
+  await expect(tooltip).toHaveAttribute("data-chrome", "tooltip");
+  await tooltip.evaluate((el) => {
+    const copy = el.cloneNode(true);
+    copy.dataset.testid = "tooltip-copy";
+    document.body.appendChild(copy);
+  });
 
   const viewport = page.getByTestId("viewport");
   const margins = () =>

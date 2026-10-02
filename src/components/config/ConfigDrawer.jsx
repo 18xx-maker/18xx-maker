@@ -2,7 +2,6 @@ import { useLocation, useNavigate } from "react-router";
 
 import Drawer from "@mui/material/Drawer";
 import Slide from "@mui/material/Slide";
-import Tooltip from "@mui/material/Tooltip";
 
 import Config from "@/components/config/Config";
 import {
@@ -11,6 +10,7 @@ import {
   Settings as ConfigIcon,
   Fab,
   Toolbar,
+  Tooltip,
 } from "@/ui";
 import { useBooleanParam } from "@/util/query";
 import styles from "./ConfigDrawer.module.css";
@@ -40,13 +40,7 @@ const ConfigDrawer = () => {
   return (
     <>
       <Slide direction="left" in={true}>
-        <Tooltip
-          title="Config"
-          aria-label="config"
-          placement="left"
-          arrow
-          slotProps={{ popper: { "data-testid": "tooltip" } }}
-        >
+        <Tooltip title="Config" aria-label="config" placement="left" arrow>
           <Fab
             data-testid="config-fab"
             className={styles.configButton}

@@ -1,10 +1,9 @@
 import { useMatch } from "react-router";
 
 import Slide from "@mui/material/Slide";
-import Tooltip from "@mui/material/Tooltip";
 
 import { useGame } from "@/hooks";
-import { Fab, Print as PrintIcon } from "@/ui";
+import { Fab, Print as PrintIcon, Tooltip } from "@/ui";
 import { useBooleanParam } from "@/util/query";
 import styles from "./fab.module.css";
 
@@ -23,13 +22,7 @@ const PrintButton = () => {
 
   return (
     <Slide direction="left" in={true}>
-      <Tooltip
-        title="Print"
-        aria-label="print"
-        placement="left"
-        arrow
-        slotProps={{ popper: { "data-testid": "tooltip" } }}
-      >
+      <Tooltip title="Print" aria-label="print" placement="left" arrow>
         <Fab
           data-testid="print-fab"
           onClick={handler}
