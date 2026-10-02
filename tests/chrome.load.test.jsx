@@ -1,4 +1,4 @@
-import { screen, waitFor, within } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 
 import { games } from "@/data";
 import * as idb from "@/util/idb";
@@ -126,47 +126,90 @@ describe("load games page", () => {
     expect(idb.loadSummaries).toHaveBeenCalled();
   });
 
-  it("deletes a saved game and reloads the summaries", async () => {
-    opfs.deleteGame.mockResolvedValue();
-    const { user, store } = renderApp("/games/");
-    const row = await screen.findByRole("row", { name: /Saved Game/ });
-
-    opfs.loadSummaries.mockResolvedValue({});
-    await user.click(
-      within(row).getByRole("button", { name: "Delete Saved Game" }),
+  it("links each game to its info page and marks its type", async () => {
+    renderApp("/games/");
+    const saved = await screen.findByRole("link", { name: "Saved Game" });
+    expect(saved).toHaveAttribute("href", "/games/internal:abc");
+    expect(screen.getByRole("link", { name: "Shikoku 1889" })).toHaveAttribute(
+      "href",
+      "/games/1889",
     );
+    // Only the saved game is badged as loaded from the computer
+    expect(screen.getAllByText("Bundled").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("System")).toHaveLength(1);
+  });
+});
+
+describe("game info page", () => {
+  it("forgets a saved game and returns to the reloaded list", async () => {
+    opfs.loadGame.mockResolvedValue(internalGame);
+    opfs.deleteGame.mockResolvedValue();
+    const { user, router, store } = renderApp("/games/internal:abc");
+    await screen.findByTestId("game-internal:abc");
+
+    // Like the real store: a forgotten game can no longer be loaded
+    opfs.loadSummaries.mockResolvedValue({});
+    opfs.loadGame.mockRejectedValue(new Error("Game abc not found"));
+    await user.click(screen.getByRole("button", { name: "Forget" }));
 
     expect(opfs.deleteGame).toHaveBeenCalledWith("abc");
-    expect(
-      await screen.findByText("Internal game Saved Game deleted"),
-    ).toBeInTheDocument();
+    await screen.findByTestId("games");
+    expect(router.state.location.pathname).toMatch(/^\/games\/?$/);
     await waitFor(() =>
-      expect(screen.queryByText("Saved Game")).not.toBeInTheDocument(),
+      expect(store.getState().summaries.internal).toEqual({}),
     );
-    expect(opfs.loadSummaries).toHaveBeenCalledTimes(2);
-    expect(store.getState().summaries.internal).toEqual({});
+    expect(screen.queryByText("Saved Game")).not.toBeInTheDocument();
+    expect(store.getState().game).toBeUndefined();
+    expect(store.getState().loadedGame).toBeUndefined();
   });
 
-  it("keeps the game and alerts when deleting fails", async () => {
-    opfs.deleteGame.mockRejectedValue(new Error("locked"));
-    const { user } = renderApp("/games/");
-    const row = await screen.findByRole("row", { name: /Saved Game/ });
+  it("confirms the game was forgotten", async () => {
+    opfs.loadGame.mockResolvedValue(internalGame);
+    opfs.deleteGame.mockResolvedValue();
+    const { user } = renderApp("/games/internal:abc");
+    await screen.findByTestId("game-internal:abc");
 
-    await user.click(
-      within(row).getByRole("button", { name: "Delete Saved Game" }),
-    );
+    opfs.loadGame.mockRejectedValue(new Error("Game abc not found"));
+    await user.click(screen.getByRole("button", { name: "Forget" }));
+
+    await screen.findByTestId("games");
+    expect(screen.getByText("Game Forgotten")).toBeInTheDocument();
+    expect(
+      screen.getByText("Internal game 18Test forgotten"),
+    ).toBeInTheDocument();
+  });
+
+  it("keeps the game and alerts when forgetting fails", async () => {
+    opfs.loadGame.mockResolvedValue(internalGame);
+    opfs.deleteGame.mockRejectedValue(new Error("locked"));
+    const { user, router, store } = renderApp("/games/internal:abc");
+    await screen.findByTestId("game-internal:abc");
+
+    await user.click(screen.getByRole("button", { name: "Forget" }));
 
     expect(await screen.findByText("locked")).toBeInTheDocument();
-    expect(screen.getByText("Saved Game")).toBeInTheDocument();
-    expect(opfs.loadSummaries).toHaveBeenCalledTimes(1);
+    expect(router.state.location.pathname).toBe("/games/internal:abc");
+    expect(store.getState().game.meta.slug).toBe("internal:abc");
+    expect(screen.getByRole("button", { name: "Forget" })).toBeInTheDocument();
   });
 
-  it("does not offer deleting bundled games", async () => {
-    renderApp("/games/");
-    const row = await screen.findByRole("row", { name: /Shikoku 1889/ });
+  it("does not offer forgetting bundled games", async () => {
+    renderApp("/games/1889");
+    await screen.findByTestId("game-1889");
     expect(
-      within(row).queryByRole("button", { name: /^Delete/ }),
+      screen.queryByRole("button", { name: "Forget" }),
     ).not.toBeInTheDocument();
+  });
+
+  it("offers the game json as a download without its meta", async () => {
+    renderApp("/games/18Test");
+    const link = await screen.findByRole("link", {
+      name: "Download 18test.json",
+    });
+    expect(link).toHaveAttribute("download", "18test.json");
+    const json = await (await fetch(link.getAttribute("href"))).json();
+    expect(json.info.title).toBe("18Test");
+    expect(json.meta).toBeUndefined();
   });
 
   it("returns to the load page with an alert when a game cannot be loaded", async () => {

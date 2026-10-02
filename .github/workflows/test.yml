@@ -37,7 +37,7 @@ jobs:
         run: pnpm --silent commitlint -l
       - name: Prettier
         run: pnpm --silent pretty
-      - name: ESLint and Stylelint
+      - name: ESLint
         run: pnpm --silent lint
       - name: 18xx Maker Validate
         run: pnpm --silent validate
@@ -118,7 +118,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: blob-report-${{ matrix.shard }}
-          path: .vitest-reports/
+          path: .vitest/blob/
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 1
@@ -150,7 +150,7 @@ jobs:
       - name: Download Blob Reports
         uses: actions/download-artifact@v8
         with:
-          path: .vitest-reports
+          path: .vitest/blob
           pattern: blob-report-*
           merge-multiple: true
       - name: Merge Reports and Check Coverage

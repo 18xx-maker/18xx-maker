@@ -17,12 +17,12 @@ pnpm build && pnpm test:e2e   # Playwright against the built site (dist/site)
 pnpm validate          # schema check of every src/data/**/*.json
 ```
 
-Layout (projects are defined in `vitest.workspace.js`, not `vitest.config.js`):
+Layout (projects are defined in `test.projects` in `vitest.config.js`):
 
 - `unit` (node): `src/**/*.test.js`: logic in `src/util` and `src/state`.
 - `component` (real Chromium via `@vitest/browser` + Playwright):
   `tests/**/*.test.jsx` and `src/**/*.test.jsx`. jsdom is not used; it
-  disagrees with Node on `Request`/`AbortSignal`, which react-router 7 needs.
+  disagrees with Node on `Request`/`AbortSignal`, which react-router needs.
   Setup is `tests/setup.js`; render with `renderApp` from `tests/helpers.jsx`
   (real store + memory router built from `rootRoutes`).
 - `e2e/*.spec.js`: Playwright on `vite preview` of `dist/site` (port 4318).
@@ -51,9 +51,16 @@ Conventions:
 
 ## Upgrade notes
 
-- `@mui/styles` (legacy JSS `makeStyles`, 22 files in `src`) is not supported on
-  React 19. Migrate off it in its own PR before upgrading React (currently
-  18.3.1).
+- The UI is shadcn/Radix + Tailwind 4 (`src/components/ui`, theme tokens in
+  `src/styles/ui.css`); MUI is gone. Print pages (`#viewport-children`) must
+  not be touched by Tailwind's preflight: the legacy stylesheets are imported
+  into a `legacy` cascade layer and `root.css` undoes the reset for print
+  content. Verify real print output (PDF page counts, screenshots with print
+  media) after CSS changes, snapshots cannot see CSS.
+- Held back on purpose: `eslint`/`@eslint/js` 9 (eslint-plugin-react and
+  eslint-plugin-vitest do not allow 10), `vite` 7 (electron-vite 5 caps at 7),
+  `svgo` 3 (4 rewrites every data SVG), `playwright` pinned (the pinned
+  Chromium must be installed).
 - Redux state uses hand-rolled `combineReducers`/`composeReducers`/`reducePath`
   (`src/state/helpers.js`). A move to `createSlice` must keep the root state
   contract test and persisted fixture passing.
@@ -61,6 +68,6 @@ Conventions:
   localStorage; loaded games live in IndexedDB/OPFS (`src/util/idb.js`,
   `src/util/opfs.js`). Stored user data must survive every release.
 - The component tests fail on React `console.error` warnings, which is the
-  early warning for React 19 deprecations.
+  early warning for React deprecations.
 - Print pixel screenshots are only stable on one OS and Chromium build, so keep
   any such test Linux-only and pin the Chromium version.

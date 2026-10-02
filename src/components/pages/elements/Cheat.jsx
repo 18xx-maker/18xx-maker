@@ -1,16 +1,5 @@
 import { Link as RouterLink } from "react-router";
 
-import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-
 import { intersperse, keys, map, max, prop, reduce } from "ramda";
 
 import { games } from "@/data";
@@ -20,19 +9,19 @@ const Value = ({ game, field }) => {
     return game[field];
   } else {
     return (
-      <Table size="small">
-        <TableBody>
+      <table className="text-sm">
+        <tbody>
           {map(
             (p) => (
-              <TableRow key={p.number}>
-                <TableCell>{p.number}</TableCell>
-                <TableCell>{p[field]}</TableCell>
-              </TableRow>
+              <tr key={p.number}>
+                <td className="p-2">{p.number}</td>
+                <td className="p-2">{p[field]}</td>
+              </tr>
             ),
             game.players || [],
           )}
-        </TableBody>
-      </Table>
+        </tbody>
+      </table>
     );
   }
 };
@@ -49,69 +38,68 @@ const gameRows = map((key) => {
       map((name) => {
         let url = game.links[name];
         return (
-          <Link key={name} variant="caption" href={url} underline="hover">
+          <a key={name} className="text-xs hover:underline" href={url}>
             {name}
-          </Link>
+          </a>
         );
       }, keys(game.links)),
     );
   }
 
   return (
-    <TableRow key={key}>
-      <TableCell>{key}</TableCell>
-      <TableCell>
-        <Link
-          variant="h6"
-          component={RouterLink}
+    <tr key={key} className="border-b align-top">
+      <td className="p-2">{key}</td>
+      <td className="p-2">
+        <RouterLink
+          className="text-lg font-medium hover:underline"
           to={`/${key}`}
-          underline="hover"
         >
           {game.info.title}
-        </Link>
+        </RouterLink>
         {game.info.subtitle && (
-          <Typography variant="subtitle1">{game.info.subtitle}</Typography>
+          <div className="text-base">{game.info.subtitle}</div>
         )}
-        {links && <Typography>{links}</Typography>}
-      </TableCell>
-      <TableCell>{game.info.designer}</TableCell>
-      <TableCell>{players === 0 ? null : players}</TableCell>
-      <TableCell className="bank">
+        {links && <div>{links}</div>}
+      </td>
+      <td className="p-2">{game.info.designer}</td>
+      <td className="p-2">{players === 0 ? null : players}</td>
+      <td className="bank p-2">
         <Value game={game} field="bank" />
-      </TableCell>
-      <TableCell>
+      </td>
+      <td className="p-2">
         <Value game={game} field="capital" />
-      </TableCell>
-      <TableCell>
+      </td>
+      <td className="p-2">
         <Value game={game} field="certLimit" />
-      </TableCell>
-    </TableRow>
+      </td>
+    </tr>
   );
 }, keys(games));
 
 const Cheat = () => {
   return (
-    <Container>
-      <Typography component="h1" variant="h4" gutterBottom>
-        18xx Game Cheat Sheet
-      </Typography>
-      <TableContainer component={Paper}>
-        <Table aria-label="18xx game cheat sheet">
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Title</TableCell>
-              <TableCell>Designer</TableCell>
-              <TableCell>Players</TableCell>
-              <TableCell>Bank</TableCell>
-              <TableCell>Initial Capital</TableCell>
-              <TableCell>Cert Limit</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>{gameRows}</TableBody>
-        </Table>
-      </TableContainer>
-    </Container>
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-semibold mb-4">18xx Game Cheat Sheet</h1>
+      <div className="overflow-x-auto rounded-md border shadow-xs">
+        <table
+          aria-label="18xx game cheat sheet"
+          className="w-full text-sm text-left"
+        >
+          <thead>
+            <tr className="border-b font-medium">
+              <th className="p-2">ID</th>
+              <th className="p-2">Title</th>
+              <th className="p-2">Designer</th>
+              <th className="p-2">Players</th>
+              <th className="p-2">Bank</th>
+              <th className="p-2">Initial Capital</th>
+              <th className="p-2">Cert Limit</th>
+            </tr>
+          </thead>
+          <tbody>{gameRows}</tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 

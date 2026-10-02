@@ -10,6 +10,7 @@ import {
   SET_DOWNLOAD_PERCENT,
   SET_ERRORS,
   SET_GAME,
+  SET_SETTINGS,
   SET_SUMMARIES,
   SET_UPDATE,
   alertReducer,
@@ -24,11 +25,13 @@ import {
   createSetConfig,
   createSetErrors,
   createSetGame,
+  createSetSettings,
   createSetSummaries,
   createUpdate,
   errorsReducer,
   gameReducer,
   loadedGameReducer,
+  settingsReducer,
   summariesReducer,
   updateReducer,
 } from "@/state";
@@ -311,5 +314,24 @@ describe("updateReducer", () => {
     expect(updateReducer(undefined, createDownloadPercent(0))).toEqual({
       downloading: 0,
     });
+  });
+});
+
+describe("settingsReducer", () => {
+  it("defaults to no settings, which means the system theme", () => {
+    expect(settingsReducer(undefined, { type: "@@INIT" })).toEqual({});
+  });
+
+  it("replaces settings", () => {
+    const action = createSetSettings({ theme: "dark" });
+    expect(action).toEqual({ type: SET_SETTINGS, settings: { theme: "dark" } });
+    expect(settingsReducer(frozen({ theme: "light" }), action)).toEqual({
+      theme: "dark",
+    });
+  });
+
+  it("ignores other actions", () => {
+    const state = frozen({ theme: "light" });
+    expect(settingsReducer(state, clearAlert())).toBe(state);
   });
 });

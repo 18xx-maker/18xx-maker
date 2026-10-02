@@ -33,6 +33,7 @@ import Page from "@/components/Page";
 import PageSetup from "@/components/PageSetup";
 import Pins from "@/components/Pins";
 import Svg from "@/components/Svg";
+
 import ColorContext from "@/context/ColorContext";
 import { tiles as tileDefs } from "@/data";
 import { getTile, sortTiles } from "@/util";

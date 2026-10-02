@@ -1,32 +1,22 @@
-import { useEffect, useState } from "react";
+import clsx from "clsx";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router";
 
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
-import LinearProgress from "@mui/material/LinearProgress";
-import Snackbar from "@mui/material/Snackbar";
-import { deepPurple, orange } from "@mui/material/colors";
-import {
-  StyledEngineProvider,
-  ThemeProvider,
-  createTheme,
-} from "@mui/material/styles";
-
 import { compose } from "ramda";
 
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+
+import Alert from "@/components/Alert";
 import Analytics from "@/components/Analytics";
-import ExportButton from "@/components/ExportButton.jsx";
-import PrintButton from "@/components/PrintButton.jsx";
 import ScrollToTop from "@/components/ScrollToTop";
 import SetSvgColors from "@/components/SetSvgColors";
-import Viewport from "@/components/Viewport";
-import ConfigDrawer from "@/components/config/ConfigDrawer.jsx";
-import AppNav from "@/components/nav/AppNav";
-import SideNav from "@/components/nav/SideNav";
-import { useAlert, useBindings } from "@/hooks";
+import AppSidebar from "@/components/nav/AppSidebar";
+import Header from "@/components/nav/Header";
+
+import { ThemeProvider } from "@/context/ThemeProvider";
+import { useBindings, useEditor } from "@/hooks";
 import {
-  clearAlert,
   createAlert,
   createDownloadPercent,
   createProgressAlert,
@@ -38,31 +28,10 @@ import * as idb from "@/util/idb";
 import * as opfs from "@/util/opfs";
 import { useBooleanParam } from "@/util/query";
 
-const theme = createTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 960,
-      lg: 1280,
-      xl: 1920,
-    },
-  },
-  palette: {
-    primary: {
-      main: deepPurple[600],
-    },
-    secondary: {
-      main: orange[400],
-    },
-  },
-});
-
 const Root = () => {
   const [print] = useBooleanParam("print");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const alert = useAlert();
 
   const getEventFileHandle = (event) => {
     if (event.dataTransfer.items) {
@@ -85,7 +54,12 @@ const Root = () => {
   };
   const fileHandler = (event) => {
     if (!capability.electron && capability.system) {
-      return getEventFileHandle(event).then(idb.saveGameHandle);
+      // Anything that is not a file (dropped text, a link) has no handle
+      return Promise.resolve(getEventFileHandle(event)).then((handle) =>
+        handle
+          ? idb.saveGameHandle(handle)
+          : Promise.reject(new Error("Only files can be dropped here")),
+      );
     }
 
     const file = getEventFile(event);
@@ -99,7 +73,7 @@ const Root = () => {
     }
 
     return Promise.reject(
-      new Error("Your brower does not support dropping files"),
+      new Error("Your browser does not support dropping files"),
     );
   };
 
@@ -124,6 +98,7 @@ const Root = () => {
     ? `
 body {
   overflow: hidden;
+  background: transparent;
 }
 `
     : null;
@@ -151,98 +126,75 @@ body {
   }, [dispatch, navigate]);
 
   useBindings();
-
-  // Side panel state
-  const [sideNavOpen, setSideNavOpen] = useState(false);
-  const toggleSideNav = () => setSideNavOpen(!sideNavOpen);
-
-  const alertKey = alert.progress ? alert.name : alert.message;
+  const inEditor = useEditor();
 
   return (
-    <div id="dropzone" onDragOver={dragOverHandler} onDrop={dropHandler}>
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <ScrollToTop>
-            <AppNav toggleSideNav={toggleSideNav} />
-            <SideNav open={sideNavOpen} toggle={toggleSideNav} />
-            {capability.electron ? <ExportButton /> : <PrintButton />}
-            <ConfigDrawer />
-            <Viewport sideNavOpen={sideNavOpen}>
-              <Outlet />
-            </Viewport>
-            {print || (
-              <Snackbar
-                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                open={alert.open}
-                key={alertKey}
-                onClose={() => dispatch(clearAlert())}
-                disableWindowBlurListener={true}
-                autoHideDuration={alert.progress ? undefined : 4000}
+    <div
+      id="dropzone"
+      onDragOver={dragOverHandler}
+      onDrop={dropHandler}
+      className={clsx(capability.electron ? "electron" : "site")}
+    >
+      <ThemeProvider delayDuration={500}>
+        <ScrollToTop>
+          {inEditor ? (
+            <Outlet />
+          ) : (
+            <SidebarProvider>
+              <AppSidebar />
+              <SidebarInset className="w-full h-screen overflow-auto">
+                <Header />
+                <Outlet />
+              </SidebarInset>
+            </SidebarProvider>
+          )}
+          <svg
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ height: 0, width: 0, position: "absolute" }}
+          >
+            <defs>
+              <marker
+                id="arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="5"
+                markerHeight="5"
+                markerUnits="strokeWidth"
+                orient="auto-start-reverse"
               >
-                {alert.progress ? (
-                  <Alert severity={alert.progress === 100 ? "success" : "info"}>
-                    <AlertTitle>{alert.title}</AlertTitle>
-                    <LinearProgress
-                      variant="determinate"
-                      value={alert.progress}
-                    />
-                    {alert.message}
-                  </Alert>
-                ) : alert.type ? (
-                  <Alert severity={alert.type}>
-                    <AlertTitle>{alert.title}</AlertTitle>
-                    {alert.message}
-                  </Alert>
-                ) : null}
-              </Snackbar>
-            )}
-            <svg
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              style={{ height: 0, width: 0, position: "absolute" }}
-            >
-              <defs>
-                <marker
-                  id="arrow"
-                  viewBox="0 0 10 10"
-                  refX="8"
-                  refY="5"
-                  markerWidth="5"
-                  markerHeight="5"
-                  markerUnits="strokeWidth"
-                  orient="auto-start-reverse"
-                >
-                  <path
-                    d="M 0 0 L 8 4 L 8 6 L 0 10 z"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                  />
-                </marker>
-                <clipPath id="hexClipPath">
-                  <polygon points="-86.0252,0 -43.0126,-74.5 43.0126,-74.5 86.0252,0 43.0126,74.5 -43.0126,74.5" />
-                </clipPath>
-                <clipPath id="hexBleedClipPath">
-                  <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 49.07475,85 -49.07475,85" />
-                </clipPath>
-                <clipPath id="hexBleedClipPathOffset">
-                  <polygon points="-86.6025,0 -92.376,-9.999995337 -54.84825,-75 -43.30125,-75 -37.52775,-85 37.52775,-85 43.30125,-75 54.84825,-75 92.376,-9.999995337 86.6025,0 92.376,9.999995337 54.84825,75 43.30125,75 37.52775,85 -37.52775,85 -43.30125,75 -54.84825,75 -92.376,9.999995337" />
-                </clipPath>
-                <clipPath id="hexBleedClipPathDie">
-                  <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 54.84825,75 -54.84825,75" />
-                </clipPath>
-                <clipPath id="hexBleedClipPathDieTop">
-                  <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 54.84825,75 -54.84825,75" />
-                </clipPath>
-                <clipPath id="hexBleedClipPathDieBottom">
-                  <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 49.07475,85 -49.07475,85" />
-                </clipPath>
-              </defs>
-            </svg>
-            <SetSvgColors />
-          </ScrollToTop>
-          <style>{printCss}</style>
-        </ThemeProvider>
-      </StyledEngineProvider>
+                <path
+                  d="M 0 0 L 8 4 L 8 6 L 0 10 z"
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                />
+              </marker>
+              <clipPath id="hexClipPath">
+                <polygon points="-86.0252,0 -43.0126,-74.5 43.0126,-74.5 86.0252,0 43.0126,74.5 -43.0126,74.5" />
+              </clipPath>
+              <clipPath id="hexBleedClipPath">
+                <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 49.07475,85 -49.07475,85" />
+              </clipPath>
+              <clipPath id="hexBleedClipPathOffset">
+                <polygon points="-86.6025,0 -92.376,-9.999995337 -54.84825,-75 -43.30125,-75 -37.52775,-85 37.52775,-85 43.30125,-75 54.84825,-75 92.376,-9.999995337 86.6025,0 92.376,9.999995337 54.84825,75 43.30125,75 37.52775,85 -37.52775,85 -43.30125,75 -54.84825,75 -92.376,9.999995337" />
+              </clipPath>
+              <clipPath id="hexBleedClipPathDie">
+                <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 54.84825,75 -54.84825,75" />
+              </clipPath>
+              <clipPath id="hexBleedClipPathDieTop">
+                <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 54.84825,75 -54.84825,75" />
+              </clipPath>
+              <clipPath id="hexBleedClipPathDieBottom">
+                <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 49.07475,85 -49.07475,85" />
+              </clipPath>
+            </defs>
+          </svg>
+          <SetSvgColors />
+          <Alert />
+        </ScrollToTop>
+        <style>{printCss}</style>
+      </ThemeProvider>
       <Analytics />
     </div>
   );

@@ -3,6 +3,7 @@ import { useId } from "react";
 import { defaultTo } from "ramda";
 
 import Color from "@/components/Color";
+
 import CityRotateContext from "@/context/CityRotateContext";
 import RotateContext from "@/context/RotateContext";
 import { icons, logos } from "@/data";
@@ -84,6 +85,9 @@ const Token = ({
   tokenShape, // main token shape - square or anything else is circle
 }) => {
   const clipId = useId();
+
+  // Shapes that move the label from where it would be (labelY replaces it)
+  let labelShift = 0;
 
   // Set a default width (smaller for destination tokens)
   width = width || (destination ? 15 : 25);
@@ -723,7 +727,7 @@ const Token = ({
           let transY = scaling * -21.5;
           let wh = scaling * 50;
           let fillColor = kiteshield === true ? p("white") : c(kiteshield);
-          labelY -= scaling * 1.8;
+          labelShift -= scaling * 1.8;
           if ((reserved || inverse) && kiteshield) {
             textFill = c(kiteshield);
           } else {
@@ -787,7 +791,7 @@ const Token = ({
           let transY = scale * -25;
           let wh = scale * 50;
           let fillColor = star5 === true ? p("white") : c(star5);
-          labelY += scale * 3;
+          labelShift += scale * 3;
           if ((reserved || inverse) && star5) {
             textFill = "gray";
           } else {
@@ -803,7 +807,7 @@ const Token = ({
             >
               <path
                 d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
-                fill="red"
+                fill={fillColor}
                 stroke={outline || "black"}
                 strokeWidth={outlineWidth || 1}
               />
@@ -857,7 +861,7 @@ const Token = ({
             if (labelY) {
               y = labelY;
             } else {
-              y = (fSize * 11) / 32 + 12;
+              y = (fSize * 11) / 32 + 12 + labelShift;
               if (shield || shield3) {
                 fSize *= scaling;
                 y += scaling * 5;
@@ -923,6 +927,8 @@ const Token = ({
           }
           if (labelY) {
             y = labelY;
+          } else {
+            y += labelShift;
           }
           content.push(
             <text

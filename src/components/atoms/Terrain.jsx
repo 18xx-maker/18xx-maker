@@ -1,5 +1,6 @@
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
+
 import RotateContext from "@/context/RotateContext";
 import { icons } from "@/data";
 import { useGame } from "@/hooks";
@@ -19,7 +20,7 @@ const Terrain = ({
   fontSize = multiDefaultTo(15, fontSize, game.info.valueFontSize);
   fontFamily = multiDefaultTo("display", fontFamily, game.info.valueFontFamily);
 
-  let translate = 0;
+  let translate;
   let scale = 1;
 
   switch (type) {

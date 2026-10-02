@@ -1,21 +1,24 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useMatch } from "react-router";
 
-import ExportIcon from "@mui/icons-material/Collections";
-import PngIcon from "@mui/icons-material/PhotoLibrary";
-import PdfIcon from "@mui/icons-material/PictureAsPdf";
-import Divider from "@mui/material/Divider";
-import Fab from "@mui/material/Fab";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Slide from "@mui/material/Slide";
-import Tooltip from "@mui/material/Tooltip";
-import makeStyles from "@mui/styles/makeStyles";
-
 import { assoc, flatten, forEach, is, keys, map, range } from "ramda";
+
+import { FileImage, FileText, Images } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import { useConfig, useGame } from "@/hooks";
 import schema from "@/schemas/config.schema.json";
@@ -23,15 +26,6 @@ import { maxPlayers, titleToFilename } from "@/util";
 import { trackEvent } from "@/util/analytics";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
 import { useBooleanParam } from "@/util/query";
-
-const useStyles = makeStyles((theme) => ({
-  exportButton: {
-    zIndex: theme.zIndex.drawer + 1,
-    position: "fixed",
-    bottom: theme.spacing(14),
-    right: theme.spacing(4),
-  },
-}));
 
 const pngItems = (game, config) => {
   const filename = titleToFilename(game.info.title);
@@ -194,12 +188,10 @@ const pdfItems = (game, config) => {
 
 const ExportButton = () => {
   const { t } = useTranslation();
-  const classes = useStyles();
   const location = useLocation();
   const game = useGame();
   const { config } = useConfig();
   const [print] = useBooleanParam("print");
-  const [menuAnchor, setMenuAnchor] = useState(null);
 
   const match = useMatch("/games/:slug/*");
   const notOnGames = !match || match.params["*"] === "";
@@ -208,88 +200,64 @@ const ExportButton = () => {
     return null;
   }
 
-  const handleMenu = (event) => {
-    setMenuAnchor(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setMenuAnchor(null);
-  };
-
   const handleAllPdf = () => {
     trackEvent("exportGame", location, { media: "pdf" });
     window.api.exportPDF(game.meta.slug, pdfItems(game, config));
-    handleMenuClose();
   };
 
   const handleAllPng = () => {
     trackEvent("exportGame", location, { media: "png" });
     window.api.exportPNG(game.meta.slug, pngItems(game, config));
-    handleMenuClose();
   };
 
   const handleSinglePdf = () => {
     trackEvent("exportComponent", location, { media: "pdf" });
     window.api.pdf(location.pathname + location.search);
-    handleMenuClose();
   };
 
   const handleSinglePng = () => {
     trackEvent("exportComponent", location, { media: "png" });
     window.api.png(location.pathname + location.search);
-    handleMenuClose();
   };
 
   return (
-    <>
-      <Slide direction="left" in={true}>
-        <Tooltip title="Export" aria-label="export" placement="left" arrow>
-          <Fab
-            onClick={handleMenu}
-            position="sticky"
-            className={classes.exportButton}
-            color="primary"
-          >
-            <ExportIcon />
-          </Fab>
+    <DropdownMenu>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                aria-label="Export"
+                className="border rounded-sm p-2 w-8 h-8 m-0 print:hidden"
+              >
+                <Images className="size-6" />
+              </Button>
+            </DropdownMenuTrigger>
+          </TooltipTrigger>
+          <TooltipContent>Export</TooltipContent>
         </Tooltip>
-      </Slide>
-      <Menu
-        id="export-menu"
-        anchorEl={menuAnchor}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-        onClose={handleMenuClose}
-        open={Boolean(menuAnchor)}
-        keepMounted
-      >
-        <MenuItem onClick={handleAllPdf}>
-          <ListItemIcon>
-            <PdfIcon />
-          </ListItemIcon>
-          <ListItemText primary={t("export.allPdf")} />
-        </MenuItem>
-        <MenuItem onClick={handleAllPng}>
-          <ListItemIcon>
-            <PngIcon />
-          </ListItemIcon>
-          <ListItemText primary={t("export.allPng")} />
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={handleSinglePdf}>
-          <ListItemIcon>
-            <PdfIcon />
-          </ListItemIcon>
-          <ListItemText primary={t("export.singlePdf")} />
-        </MenuItem>
-        <MenuItem onClick={handleSinglePng}>
-          <ListItemIcon>
-            <PngIcon />
-          </ListItemIcon>
-          <ListItemText primary={t("export.singlePng")} />
-        </MenuItem>
-      </Menu>
-    </>
+      </TooltipProvider>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onSelect={handleAllPdf}>
+          <FileText />
+          {t("export.allPdf")}
+        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={handleAllPng}>
+          <FileImage />
+          {t("export.allPng")}
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onSelect={handleSinglePdf}>
+          <FileText />
+          {t("export.singlePdf")}
+        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={handleSinglePng}>
+          <FileImage />
+          {t("export.singlePng")}
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 

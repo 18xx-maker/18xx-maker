@@ -1,9 +1,6 @@
-import { ascend, identity, keys, path, sort } from "ramda";
-
 import Tunnel from "@/components/atoms/Tunnel";
-import { mapThemes } from "@/data";
 
-const colors = sort(ascend(identity), keys(path(["gmt", "colors"], mapThemes)));
+import { colorSelect } from "../../../.storybook/controls";
 
 export default {
   title: "Atoms/Tunnel",
@@ -14,22 +11,24 @@ export default {
   },
   args: {
     cost: 10,
+    width: 44,
+    fontSize: 11,
     opacity: 1.0,
     borderWidth: 2,
     dashed: false,
     reverse: false,
   },
   argTypes: {
-    borderWidth: {
-      control: { type: "number", min: 1 },
-    },
-    opacity: {
-      control: { type: "range", min: 0, max: 1, step: 0.05 },
-    },
-    color: {
-      control: { type: "select" },
-      options: colors,
-    },
+    cost: { control: "number" },
+    color: colorSelect(),
+    textColor: colorSelect(),
+    borderColor: colorSelect(),
+    width: { control: { type: "range", min: 20, max: 100, step: 2 } },
+    fontSize: { control: { type: "range", min: 6, max: 24, step: 1 } },
+    borderWidth: { control: { type: "range", min: 0, max: 8, step: 1 } },
+    opacity: { control: { type: "range", min: 0, max: 1, step: 0.05 } },
+    dashed: { control: "boolean" },
+    reverse: { control: "boolean" },
   },
 };
 

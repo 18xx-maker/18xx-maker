@@ -52,7 +52,8 @@ export const loadGame = async (id) => {
     const game = await loadFile(file);
     return assoc("meta", meta(id), game);
   } catch {
-    await deleteGame(id);
+    // The file may not exist at all, that must not hide the real error
+    await deleteGame(id).catch(() => {});
     throw new Error("File was not a valid 18xx-maker game");
   }
 };

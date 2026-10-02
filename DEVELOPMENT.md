@@ -72,7 +72,7 @@ pnpm install
 # Install the browser used by the tests (once)
 pnpm exec playwright install chromium --only-shell
 
-# Run the development site
+# Run the development site (http://localhost:3000, it does not open a browser)
 pnpm start
 ```
 
@@ -85,7 +85,9 @@ pnpm start
 These are the package.json scripts that you should know:
 
 ```shell
-# Start the development versions of the site, app, or storybook site:
+# Start the development versions of the site, app, or storybook site. The site
+# (http://localhost:3000) and storybook (http://localhost:6006) do not open a
+# browser, open the address yourself:
 pnpm start
 pnpm start:app
 pnpm start:sb
@@ -278,3 +280,21 @@ At a high level the folder structure looks like:
 │   └── util          # Utility helpers
 └── tests             # Vitest integration tests and test helper files
 ```
+
+## Storybook
+
+`pnpm start:sb` shows the print elements (atoms, hexes, tiles, tokens, map
+pieces, cards, market cells and print blocks) with a Controls panel for each
+story's props. The toolbar switches the map and company themes. Every story is
+rendered by `tests/stories.test.jsx`, so a new story must draw an svg.
+
+When adding a story next to a component (`Name.stories.js`):
+
+- `parameters: { svg: true }` draws it into a hex sized svg, or
+  `svg: { width, height, viewBox }` for another size. Omit it when the
+  component draws its own markup.
+- `parameters: { game: "18Test" }` loads a bundled game for components that
+  read the game.
+- Use `colorSelect()` from `.storybook/controls.js` for color props and real
+  `argTypes` (selects, ranges, booleans) so every prop can be changed.
+- Stories are `.js` files, so use `createElement` instead of JSX.

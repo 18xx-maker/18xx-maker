@@ -85,6 +85,21 @@ describe("loading persisted state", () => {
     expect(store.getState().game).toBeFalsy();
   });
 
+  it("loads a released payload that has no settings key", async () => {
+    Object.entries(PAYLOAD).forEach(([key, value]) =>
+      window.localStorage.setItem(key, value),
+    );
+    const { preloadedState, store } = await importStore();
+    expect(preloadedState.settings).toEqual({});
+    expect(store.getState().settings).toEqual({});
+  });
+
+  it("restores stored settings", async () => {
+    window.localStorage.setItem("settings", JSON.stringify({ theme: "dark" }));
+    const { preloadedState } = await importStore();
+    expect(preloadedState.settings).toEqual({ theme: "dark" });
+  });
+
   it("ignores keys that are not persisted", async () => {
     window.localStorage.setItem("alert", JSON.stringify({ open: true }));
     window.localStorage.setItem("errors", JSON.stringify({ a: "b" }));

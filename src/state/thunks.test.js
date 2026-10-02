@@ -148,7 +148,11 @@ describe("deleteGame", () => {
     expect(mod.deleteGame).toHaveBeenCalledWith("abc");
     expect(types()).toEqual([
       createDeleteGame(slug),
-      createAlert("Game Deleted", `${label} game My Game deleted`, "success"),
+      createAlert(
+        "Game Forgotten",
+        `${label} game My Game forgotten`,
+        "success",
+      ),
     ]);
   });
 
@@ -160,12 +164,16 @@ describe("deleteGame", () => {
     expect(window.api.deleteGame).toHaveBeenCalledWith("abc");
     expect(types()).toEqual([
       createDeleteGame("electron:abc"),
-      createAlert("Game Deleted", "Electron game My Game deleted", "success"),
+      createAlert(
+        "Game Forgotten",
+        "Electron game My Game forgotten",
+        "success",
+      ),
     ]);
   });
 
   it.each([
-    ["bundled:1889", "Cannot delete bundled game: My Game", () => {}],
+    ["bundled:1889", "Cannot forget bundled game: My Game", () => {}],
     [
       "system:abc",
       "Your browser doesn't support deleting games from your file system",

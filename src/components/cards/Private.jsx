@@ -1,4 +1,4 @@
-import { defaultTo, intersperse, is, map, max, min, reduce } from "ramda";
+import { addIndex, chain, defaultTo, is, map, max, min, reduce } from "ramda";
 
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
@@ -8,6 +8,7 @@ import Tile from "@/components/Tile";
 import Icon from "@/components/atoms/Icon";
 import GameCompanyToken from "@/components/tokens/GameCompanyToken";
 import Token from "@/components/tokens/Token";
+
 import ColorContext from "@/context/ColorContext";
 import { MapOrientation } from "@/context/OrientationContext";
 import { useConfig, useGame } from "@/hooks";
@@ -157,7 +158,8 @@ const Private = (props) => {
   );
   let revenueLineHeight = revenueFS + lineHeightAdd;
   revenueColor = multiDefaultTo("black", revenueColor, fontColor);
-  revenueBackgroundColor = ("white", revenueBackgroundColor);
+  // No default: the revenue box has always had no background of its own unless
+  // one is given, and cards in print would change if it got a white one
 
   // let bidFontSizeInch = defaultTo(0.14, nameFontSize / 72);
   let bidFS = defaultTo(13.44, bidFontSize / px2pt); // 0.14" == ??pt == 13.44px
@@ -212,9 +214,13 @@ const Private = (props) => {
 
   let revenueNode = null;
   if (is(Array, revenue)) {
-    revenueNode = intersperse(
-      <span key="span">/</span>,
-      map((r) => <Currency key={r} value={r} type="private" />, revenue),
+    // A separator between the values, each with its own key
+    revenueNode = addIndex(chain)(
+      (r, i) => [
+        ...(i > 0 ? [<span key={`separator-${i}`}>/</span>] : []),
+        <Currency key={`value-${i}`} value={r} type="private" />,
+      ],
+      revenue,
     );
   } else if (revenue !== null && revenue !== undefined) {
     revenueNode = <Currency value={revenue} type="private" />;

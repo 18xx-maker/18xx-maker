@@ -1,16 +1,11 @@
-@import url("fonts.css");
-@import url("root.css");
-
-/* Component css files */
-@import url("card.css");
-@import url("manifest.css");
-@import url("number.css");
-@import url("private.css");
-@import url("share.css");
-@import url("train.css");
-
-/* B18 Styles */
-@import url("b18.css");
-
-/* Markdown Alerts */
-@import url("markdown.css");
+@import "./ui.css";
+@import "./fonts.css";
+@import "./markdown.css";
+@import "./root.css";
+@import "./b18.css";
+@import "./manifest.css";
+@import "./card.css";
+@import "./private.css";
+@import "./share.css";
+@import "./train.css";
+@import "./number.css";

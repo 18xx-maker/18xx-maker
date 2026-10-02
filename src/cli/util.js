@@ -154,7 +154,7 @@ export const loadTiles = () =>
 export const startExpress = (port = 9000) => {
   const app = express();
   app.use(express.static(path.join(import.meta.dirname, "../../dist/site")));
-  app.get("/*", function (req, res) {
+  app.get("/{*path}", function (req, res) {
     res.sendFile(path.join(import.meta.dirname, "../../dist/site/index.html"));
   });
   return app.listen(port);

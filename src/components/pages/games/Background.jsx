@@ -1,21 +1,13 @@
 import { useEffect, useState } from "react";
 
-import Box from "@mui/material/Box";
-import makeStyles from "@mui/styles/makeStyles";
-
 import { flatten, times } from "ramda";
 
 import Color from "@/components/Color";
 import PageSetup from "@/components/PageSetup";
+
 import config from "@/defaults.json";
 import { useGame } from "@/hooks/game.js";
 import { printableHeight, printableWidth, unitsToCss } from "@/util";
-
-const useStyles = makeStyles(() => ({
-  backgroundBox: {
-    overflow: "auto",
-  },
-}));
 
 const radians = (degrees) => degrees * (Math.PI / 180);
 const sin = Math.sin(radians(30));
@@ -24,8 +16,6 @@ const rotatedWidth = (w, h) => Math.abs(w * cos + h * sin);
 const rotatedHeight = (w, h) => Math.abs(h * cos + w * sin);
 
 const Background = () => {
-  const classes = useStyles();
-
   let game = useGame();
   let paper = config.paper;
 
@@ -80,7 +70,7 @@ const Background = () => {
   return (
     <Color context="companies">
       {(c) => (
-        <Box className={classes.backgroundBox}>
+        <div className="overflow-auto">
           <div
             className="background printElement"
             data-testid={`game-${game.meta.slug}-background`}
@@ -110,7 +100,7 @@ const Background = () => {
             {/* <div className="text">{text}</div> */}
             <PageSetup landscape={false} />
           </div>
-        </Box>
+        </div>
       )}
     </Color>
   );

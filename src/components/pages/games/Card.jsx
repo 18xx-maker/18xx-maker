@@ -6,6 +6,7 @@ import Number from "@/components/cards/Number";
 import Private from "@/components/cards/Private";
 import Share from "@/components/cards/Share";
 import Train from "@/components/cards/Train";
+
 import { useConfig, useGame } from "@/hooks";
 import { getCardData } from "@/util/cards";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
@@ -15,7 +16,7 @@ const Card = () => {
   const game = useGame();
   const { type, index } = useParams();
 
-  let node = null;
+  let node;
   switch (type) {
     case "private":
       node = <Private players={game.players} {...game.privates[index]} />;

@@ -1,4 +1,5 @@
 import Color from "@/components/Color";
+
 import { useOrientation } from "@/context/OrientationContext";
 import { useConfig } from "@/hooks";
 
@@ -29,17 +30,19 @@ const Id = ({ id, displayID, extra, bgColor, noID }) => {
     return null;
   }
 
+  let label = displayID || id;
   if (config.tiles.colorblind) {
     const [background, stripe] = bgColor.split("/");
 
     if (stripe) {
-      id = `${symbol(background)}${symbol(stripe)}${id}`;
+      label = `${symbol(background)}${symbol(stripe)}${label}`;
     } else {
-      id = `${symbol(background)}${id}`;
+      label = `${symbol(background)}${label}`;
     }
   }
 
-  let fontSize = id && id.length > 4 ? "9" : id && id.length > 3 ? "10" : "12";
+  let fontSize =
+    label && label.length > 4 ? "9" : label && label.length > 3 ? "10" : "12";
   let extraFontSize =
     extra && extra.length > 4 ? "9" : extra && extra.length > 3 ? "10" : "12";
 
@@ -73,7 +76,7 @@ const Id = ({ id, displayID, extra, bgColor, noID }) => {
               x="0"
               y="0"
             >
-              {displayID || id}
+              {label}
             </text>
           </g>
           {extra && (

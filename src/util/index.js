@@ -166,8 +166,8 @@ export const equalPages = (total, page) => {
 };
 
 export const getTile = curry((tileDefs, tiles, id) => {
-  let tile = {};
-  let quantity = 1;
+  let tile;
+  let quantity;
 
   if (is(Object, tiles[id])) {
     quantity = tiles[id].print || tiles[id].quantity || 1;
@@ -196,6 +196,10 @@ export const getTile = curry((tileDefs, tiles, id) => {
   };
 });
 
+// Font props from the element's own props, then the arguments, then these
+// defaults. An argument that is null or undefined still replaces a default
+// (the text then has no value for it): print output depends on that, so it
+// must not change.
 export const getFontProps = (props, size, weight, family, style) => {
   return mergeAll([
     {

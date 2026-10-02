@@ -1,13 +1,11 @@
 import { Navigate } from "react-router";
 
 import Root from "@/components/Root";
-import DocsNav from "@/components/nav/DocsNav";
-import ElementsNav from "@/components/nav/ElementsNav";
-import GameNav from "@/components/nav/GameNav";
 import App from "@/components/pages/App";
 import Docs from "@/components/pages/Docs";
 import Elements from "@/components/pages/Elements";
 import Home from "@/components/pages/Home";
+import Settings from "@/components/pages/Settings";
 import Atoms from "@/components/pages/elements/Atoms";
 import Logos from "@/components/pages/elements/Logos";
 import AllTiles from "@/components/pages/elements/Tiles";
@@ -32,6 +30,7 @@ import B18Tiles from "@/components/pages/games/b18/Tiles";
 import B18Tokens from "@/components/pages/games/b18/Tokens";
 // Games Routes
 import LoadGames from "@/components/pages/load/LoadGames";
+
 import capability from "@/util/capability";
 
 export const rootRoutes = [
@@ -84,12 +83,7 @@ export const rootRoutes = [
         ],
       },
       { path: "docs/*", element: <Docs /> },
+      { path: "settings", element: <Settings /> },
     ],
   },
-];
-
-export const sideRoutes = [
-  { path: "games/*", element: <GameNav /> },
-  { path: "elements/*", element: <ElementsNav /> },
-  { path: "docs/*", element: <DocsNav /> },
 ];

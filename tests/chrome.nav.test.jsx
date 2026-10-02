@@ -1,37 +1,38 @@
-import { act, screen, waitFor } from "@testing-library/react";
-import { page } from "@vitest/browser/context";
+import { act, screen, waitFor, within } from "@testing-library/react";
+import { page } from "vitest/browser";
 
 import { clearAlert, createAlert } from "@/state";
 
 import { renderApp } from "@tests/helpers.jsx";
 
-// The viewport is set to phone size below, so the side
-// nav is the temporary drawer opened by the hamburger button.
-// The suite includes hidden elements by default, but the permanent drawer is
-// display:none on a phone, so ask for what the user can actually see
-const visible = { hidden: false };
-
-const hamburger = () => screen.getByRole("button", { name: "menu" });
+// The viewport is set to phone size below, so the app sidebar is a sheet
+// opened by the header's trigger. Game section pages have no sidebar: the
+// toolbar is their navigation.
+const trigger = () => screen.getByRole("button", { name: "Toggle Sidebar" });
+const sidebar = () => screen.findByRole("dialog", { name: "Sidebar" });
+const sections = () => screen.getByRole("combobox", { name: "Game Section" });
 
 beforeEach(async () => {
   await page.viewport(414, 896);
 });
 
-describe("side nav", () => {
-  it("opens from the hamburger and navigates with the game nav links", async () => {
+describe("game toolbar", () => {
+  it("navigates between sections with the section select", async () => {
     const { user, router } = renderApp("/games/18Test/map");
     expect(await screen.findByTestId("game-18Test-map")).toBeInTheDocument();
 
-    // Closed drawer content is hidden
-    expect(
-      screen.queryByRole("link", { name: "Tiles", ...visible }),
-    ).not.toBeInTheDocument();
+    await user.click(sections());
+    await user.click(await screen.findByRole("option", { name: /Tiles/ }));
 
-    await user.click(hamburger());
-    await user.click(
-      await screen.findByRole("link", { name: "Tiles", ...visible }),
-    );
+    expect(router.state.location.pathname).toBe("/games/18Test/tiles");
+    expect(await screen.findByTestId("game-18Test-tiles")).toBeInTheDocument();
+  });
 
+  it("jumps to a section with its number key", async () => {
+    const { user, router } = renderApp("/games/18Test/map");
+    expect(await screen.findByTestId("game-18Test-map")).toBeInTheDocument();
+
+    await user.keyboard("2");
     expect(router.state.location.pathname).toBe("/games/18Test/tiles");
     expect(await screen.findByTestId("game-18Test-tiles")).toBeInTheDocument();
   });
@@ -39,40 +40,41 @@ describe("side nav", () => {
   it("marks the current section and disables missing ones", async () => {
     const { user } = renderApp("/games/1888/cards");
     expect(await screen.findByTestId("game-1888-cards")).toBeInTheDocument();
-    await user.click(hamburger());
+    expect(sections()).toHaveTextContent("Cards");
 
+    await user.click(sections());
     expect(
-      await screen.findByRole("link", { name: "Cards", ...visible }),
-    ).toHaveAttribute("aria-current", "page");
-    expect(
-      screen.getByRole("link", { name: "Revenue", ...visible }),
-    ).not.toHaveAttribute("aria-current");
+      await screen.findByRole("option", { name: /Cards/ }),
+    ).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("option", { name: /Revenue/ })).not.toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
 
     // 1888 has no map
-    expect(
-      await screen.findByRole("link", { name: "Map", ...visible }),
-    ).toHaveAttribute("aria-disabled", "true");
-    expect(
-      screen.getByRole("link", { name: "Revenue", ...visible }),
-    ).not.toHaveAttribute("aria-disabled", "true");
-  });
-
-  it("navigates with the elements side menu", async () => {
-    const { user, router } = renderApp("/elements");
-    expect(await screen.findByTestId("atoms")).toBeInTheDocument();
-
-    await user.click(hamburger());
-    await user.click(
-      await screen.findByRole("link", { name: /Tiles/, ...visible }),
+    expect(screen.getByRole("option", { name: /Map/ })).toHaveAttribute(
+      "aria-disabled",
+      "true",
     );
-    expect(router.state.location.pathname).toBe("/elements/tiles");
+    expect(screen.getByRole("option", { name: /Revenue/ })).not.toHaveAttribute(
+      "aria-disabled",
+    );
   });
 
-  it("has no hamburger on pages without a side menu", async () => {
-    renderApp("/");
-    expect(await screen.findByTestId("home")).toBeInTheDocument();
+  it("goes back to the game info page", async () => {
+    const { user, router } = renderApp("/games/18Test/map");
+    expect(await screen.findByTestId("game-18Test-map")).toBeInTheDocument();
+
+    await user.click(screen.getByRole("link", { name: "Game Info" }));
+    expect(router.state.location.pathname).toBe("/games/18Test");
+    expect(await screen.findByTestId("game-18Test")).toBeInTheDocument();
+  });
+
+  it("replaces the sidebar on section pages", async () => {
+    renderApp("/games/18Test/map");
+    expect(await screen.findByTestId("game-18Test-map")).toBeInTheDocument();
     expect(
-      screen.queryByRole("button", { name: "menu" }),
+      screen.queryByRole("button", { name: "Toggle Sidebar" }),
     ).not.toBeInTheDocument();
   });
 
@@ -80,26 +82,57 @@ describe("side nav", () => {
     renderApp("/games/18Test/map?print=true");
     expect(await screen.findByTestId("game-18Test-map")).toBeInTheDocument();
     expect(
-      screen.queryByRole("button", { name: "menu" }),
+      screen.queryByRole("combobox", { name: "Game Section" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("link", { name: "Game Info" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "config" }),
     ).not.toBeInTheDocument();
   });
 });
 
-describe("app menu", () => {
-  it("navigates with the mobile menu", async () => {
+describe("app sidebar", () => {
+  it("opens from the header and navigates", async () => {
     const { user, router } = renderApp("/");
     expect(await screen.findByTestId("home")).toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: "Home" }));
-    await user.click(
-      await screen.findByRole("menuitem", { name: "Load Games" }),
-    );
-    expect(router.state.location.pathname).toBe("/games/");
-    expect(await screen.findByTestId("games")).toBeInTheDocument();
+    // Closed sheet content is not rendered
+    expect(
+      screen.queryByRole("link", { name: "Load Games" }),
+    ).not.toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: "Load Games" }));
-    await user.click(await screen.findByRole("menuitem", { name: "Elements" }));
-    expect(router.state.location.pathname).toBe("/elements/");
+    await user.click(trigger());
+    await user.click(
+      within(await sidebar()).getByRole("link", { name: "Load Games" }),
+    );
+    expect(router.state.location.pathname).toBe("/games");
+    expect(await screen.findByTestId("games")).toBeInTheDocument();
+    // Following a link closes the sheet
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+
+    await user.click(trigger());
+    await user.click(
+      within(await sidebar()).getByRole("link", { name: "Tiles" }),
+    );
+    expect(router.state.location.pathname).toBe("/elements/tiles");
+  });
+
+  it("marks the current page", async () => {
+    const { user } = renderApp("/elements/tiles");
+    await user.click(trigger());
+    const nav = await sidebar();
+
+    expect(within(nav).getByRole("link", { name: "Tiles" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    expect(
+      within(nav).getByRole("link", { name: "Atoms" }),
+    ).not.toHaveAttribute("aria-current");
   });
 
   it("links to the loaded game from the state", async () => {
@@ -113,20 +146,33 @@ describe("app menu", () => {
     });
     expect(await screen.findByTestId("home")).toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: "Home" }));
+    await user.click(trigger());
+    const nav = await sidebar();
+    expect(within(nav).getByRole("link", { name: "My Game" })).toHaveAttribute(
+      "href",
+      "/games/system:x",
+    );
     expect(
-      await screen.findByRole("menuitem", { name: "My Game" }),
+      within(nav).getByRole("link", { name: "Edit Game" }),
     ).toHaveAttribute("href", "/games/system:x/map");
     expect(router.state.location.pathname).toBe("/");
+  });
+
+  it("has no game links without a loaded game", async () => {
+    const { user } = renderApp("/");
+    await user.click(trigger());
+    expect(
+      within(await sidebar()).queryByRole("link", { name: "Edit Game" }),
+    ).not.toBeInTheDocument();
   });
 
   it("offers the update when one is available in the state", async () => {
     const { user } = renderApp("/", { update: { available: true } });
     expect(await screen.findByTestId("home")).toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: "Home" }));
+    await user.click(trigger());
     expect(
-      await screen.findByRole("menuitem", { name: "Update" }),
+      within(await sidebar()).getByRole("link", { name: "Update" }),
     ).toHaveAttribute("href", "/app");
   });
 });

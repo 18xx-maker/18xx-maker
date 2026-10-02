@@ -119,7 +119,7 @@ export const deleteGame = (slug, title) => (dispatch) => {
 
   return new Promise((resolve, reject) => {
     if (type === BUNDLED) {
-      return reject(new Error(`Cannot delete bundled game: ${title}`));
+      return reject(new Error(`Cannot forget bundled game: ${title}`));
     }
 
     if (type === idb.TYPE) {
@@ -165,8 +165,8 @@ export const deleteGame = (slug, title) => (dispatch) => {
       dispatch(createDeleteGame(slug));
       dispatch(
         createAlert(
-          "Game Deleted",
-          `${typeLabel} game ${title} deleted`,
+          "Game Forgotten",
+          `${typeLabel} game ${title} forgotten`,
           "success",
         ),
       );

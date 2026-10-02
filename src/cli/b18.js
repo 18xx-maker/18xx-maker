@@ -1,6 +1,6 @@
 import { createWriteStream, writeFileSync } from "node:fs";
 
-import archiver from "archiver";
+import { ZipArchive } from "archiver";
 import { chromium } from "playwright";
 
 import {
@@ -245,6 +245,7 @@ const command = async (bname, version, author, opts) => {
         waitUntil: "networkidle",
       },
     );
+    await page.emulateMedia({ media: "print" });
     await page.setViewportSize({ width, height });
     await page.screenshot({
       path: `render/${bname}/${folder}/${id}/${filename}.png`,
@@ -292,7 +293,7 @@ const command = async (bname, version, author, opts) => {
   // Output zip file
   console.log(`Creating ${bname}/${folder}.zip`);
   const output = createWriteStream(`render/${bname}/${folder}.zip`);
-  const archive = archiver("zip", {
+  const archive = new ZipArchive({
     zlib: { level: 9 },
   });
   archive.pipe(output);

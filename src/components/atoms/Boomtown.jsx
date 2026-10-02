@@ -1,5 +1,6 @@
 import Color from "@/components/Color";
 import Name from "@/components/atoms/Name";
+
 import { useConfig, useGame } from "@/hooks";
 import { multiDefaultTo } from "@/util";
 
@@ -106,7 +107,7 @@ const Boomtown = ({
     if (city) {
       // dashed true is default, so false is what to watch for
       strokeDashArray =
-        strokeDashArray || dashed === false ? "1 0" : `${scale * 4}`;
+        dashed === false ? "1 0" : strokeDashArray || `${scale * 4}`;
       return (
         <Color context="companies">
           {(c) => (
@@ -149,7 +150,7 @@ const Boomtown = ({
     } else {
       // dashed true is default, so false is what to watch for
       strokeDashArray =
-        strokeDashArray || dashed === false ? "1 0" : `${scale * 6}`;
+        dashed === false ? "1 0" : strokeDashArray || `${scale * 6}`;
       return (
         <Color context="companies">
           {(c) => (
@@ -210,7 +211,7 @@ const Boomtown = ({
     let nameNode = null;
 
     if (name) {
-      let path = null;
+      let path;
       let y = name.y || (name.reverse ? 7 : 0);
       if (straightCityNames || name.straight) {
         path = null;
@@ -230,7 +231,7 @@ const Boomtown = ({
     if (city) {
       // dashed true is default, so false is what to watch for
       strokeDashArray =
-        strokeDashArray || dashed === false ? "1 0" : `${scale * 4}`;
+        dashed === false ? "1 0" : strokeDashArray || `${scale * 4}`;
       return (
         <Color context="companies">
           {(c) => (
@@ -315,7 +316,7 @@ const Boomtown = ({
     } else {
       // dashed true is default, so false is what to watch for
       strokeDashArray =
-        strokeDashArray || dashed === false ? "1 0" : `${scale * 6}`;
+        dashed === false ? "1 0" : strokeDashArray || `${scale * 6}`;
       return (
         <Color context="companies">
           {(c) => (

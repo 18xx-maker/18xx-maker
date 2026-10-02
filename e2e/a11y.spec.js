@@ -8,91 +8,8 @@ import { expect, test } from "@playwright/test";
 // test, and so does a listed node that no longer violates, so the entry gets
 // removed. Do not add to this list to make a failure go away: fix the page,
 // or record the violation here on purpose.
-const SIDE_NAV = ".MuiDrawer-paperAnchorDockedLeft>.css";
 
-// Same problems on every game page (game info, map and the config drawer)
-const GAME_NAV_NESTED = {
-  // A form control (FormControl with a Select) inside a ListItemButton in
-  // GameNav (src/components/nav)
-  rule: "nested-interactive",
-  targets: [
-    `${SIDE_NAV}:nth-child(4)>.css.MuiListItemButton-root[role="button"]`,
-  ],
-  reason: "controls inside a ListItemButton",
-};
-const GAME_VIEWPORT_SCROLL = {
-  // The scrollable game area (Viewport) is not keyboard focusable
-  rule: "scrollable-region-focusable",
-  targets: [".jss"],
-  reason: "scrollable game area",
-};
-
-// ListItemButton with component={RouterLink} renders <a> directly inside <ul>
-// in the game, docs and elements side navs (src/components/nav/*).
-// Fix: wrap each in <ListItem disablePadding>
-const SIDE_NAV_LIST = (targets) => ({
-  rule: "list",
-  targets,
-  reason: "side nav links are direct children of <ul>",
-});
-
-const KNOWN_ISSUES = {
-  "game info": [
-    SIDE_NAV_LIST([
-      `${SIDE_NAV}:nth-child(2)`,
-      `${SIDE_NAV}:nth-child(4)`,
-      // The page's own <List> in src/components/pages/games/Info.jsx
-      ".MuiPaper-elevation5>.css",
-    ]),
-  ],
-  "game map": [
-    SIDE_NAV_LIST([
-      `${SIDE_NAV}:nth-child(2)`,
-      `${SIDE_NAV}:nth-child(4)`,
-      `${SIDE_NAV}:nth-child(6)`,
-    ]),
-    GAME_NAV_NESTED,
-    GAME_VIEWPORT_SCROLL,
-  ],
-  docs: [
-    SIDE_NAV_LIST(
-      [2, 4, 6, 8].map(
-        (n) => `${SIDE_NAV}.MuiList-root.MuiList-padding:nth-child(${n})`,
-      ),
-    ),
-  ],
-  "config drawer": [
-    SIDE_NAV_LIST([
-      `${SIDE_NAV}:nth-child(2)`,
-      `${SIDE_NAV}:nth-child(4)`,
-      `${SIDE_NAV}:nth-child(6)`,
-    ]),
-    GAME_NAV_NESTED,
-    GAME_VIEWPORT_SCROLL,
-    {
-      // These number inputs have no accessible name (src/components/config)
-      rule: "label",
-      targets: [
-        "#stock\\.column",
-        "#stock\\.diag",
-        "#stock\\.par",
-        "#charters\\.border",
-        "#cards\\.border",
-      ],
-      reason: "config inputs without a label",
-    },
-    {
-      // Links in the config drawer's descriptions are only underlined by
-      // color
-      rule: "link-in-text-block",
-      targets: [
-        'a[href$="logos"]',
-        ".MuiTypography-caption.css.MuiTypography-gutterBottom:nth-child(11)>p>a",
-      ],
-      reason: "inline links in config descriptions",
-    },
-  ],
-};
+const KNOWN_ISSUES = {};
 
 // Generated class names (emotion's css-<hash>, jss<number>) change between
 // builds, so they are reduced to ".css" and ".jss", and spaces around ">" are dropped
@@ -123,6 +40,11 @@ const pages = [
     name: "config drawer",
     url: "/games/18Test/map?config=true",
     ready: (page) => page.getByRole("button", { name: "Close Config" }),
+  },
+  {
+    name: "settings",
+    url: "/settings",
+    ready: (page) => page.getByTestId("settings"),
   },
   {
     name: "docs",

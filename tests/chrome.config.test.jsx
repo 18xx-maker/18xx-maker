@@ -7,6 +7,11 @@ const openDrawer = async (user) => {
   return screen.findByRole("button", { name: "Close Config" });
 };
 
+const chooseSection = async (user, name) => {
+  await user.click(screen.getByRole("combobox", { name: "Config Section" }));
+  await user.click(await screen.findByRole("option", { name }));
+};
+
 describe("config drawer", () => {
   it("opens and closes with the button, reflected in the url", async () => {
     const { user, router } = renderApp("/games/18Test/map");
@@ -17,6 +22,10 @@ describe("config drawer", () => {
 
     const close = await openDrawer(user);
     expect(router.state.location.search).toBe("?config=true");
+    expect(screen.getByRole("button", { name: "config" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
 
     await user.click(close);
     await waitFor(() =>
@@ -34,16 +43,90 @@ describe("config drawer", () => {
     ).toBeInTheDocument();
   });
 
+  // Print css alone is not enough: screen captures (the electron PNG export)
+  // use ?print=true with screen media
   it("does not render in print mode", async () => {
     renderApp("/games/18Test/map?print=true&config=true");
     expect(await screen.findByTestId("game-18Test-map")).toBeInTheDocument();
     expect(
       screen.queryByRole("button", { name: "config" }),
     ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Close Config" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("starts on the colors section and switches sections through the url", async () => {
+    const { user, router } = renderApp("/games/18Test/map?config=true");
+    const section = await screen.findByRole("combobox", {
+      name: "Config Section",
+    });
+    expect(section).toHaveTextContent("Colors and Companies");
+    expect(screen.getByRole("combobox", { name: "Theme" })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("checkbox", { name: "Export all layout options" }),
+    ).not.toBeInTheDocument();
+
+    await chooseSection(user, "Export");
+    expect(
+      await screen.findByRole("checkbox", {
+        name: "Export all layout options",
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("combobox", { name: "Theme" }),
+    ).not.toBeInTheDocument();
+    expect(section).toHaveTextContent("Export");
+    expect(
+      new URLSearchParams(router.state.location.search).get("section"),
+    ).toBe("export");
+  });
+
+  // Product bug: Config's onClose calls setSection("colors") then
+  // toggleConfig(), two navigates from separate URLSearchParams copies, so
+  // the second one puts section=export back. Remove .fails once fixed.
+  it("forgets the section when closed", async () => {
+    const { user, router } = renderApp(
+      "/games/18Test/map?config=true&section=export",
+    );
+    await user.click(
+      await screen.findByRole("button", { name: "Close Config" }),
+    );
+    await waitFor(() =>
+      expect(
+        screen.queryByRole("button", { name: "Close Config" }),
+      ).not.toBeInTheDocument(),
+    );
+    expect(router.state.location.search).toBe("");
+  });
+
+  it("opens on the section named in the url", async () => {
+    renderApp("/games/18Test/map?config=true&section=layout");
+    expect(
+      await screen.findByRole("combobox", { name: "Config Section" }),
+    ).toHaveTextContent("Layout");
+    expect(
+      screen.getByRole("textbox", { name: "Margin Size" }),
+    ).toBeInTheDocument();
+  });
+
+  it("offers reset only in the data section", async () => {
+    const { user } = renderApp("/games/18Test/map?config=true");
+    await screen.findByRole("button", { name: "Close Config" });
+    expect(
+      screen.queryByRole("button", { name: "Reset To Defaults" }),
+    ).not.toBeInTheDocument();
+
+    await chooseSection(user, "Data");
+    expect(
+      await screen.findByRole("button", { name: "Reset To Defaults" }),
+    ).toBeInTheDocument();
   });
 
   it("stores only the difference from the defaults when a checkbox changes", async () => {
-    const { user, store } = renderApp("/games/18Test/map?config=true");
+    const { user, store } = renderApp(
+      "/games/18Test/map?config=true&section=export",
+    );
     await screen.findByRole("button", { name: "Close Config" });
 
     const box = screen.getByRole("checkbox", {
@@ -69,34 +152,42 @@ describe("config drawer", () => {
     const { user, store } = renderApp("/games/18Test/map?config=true");
     await screen.findByRole("button", { name: "Close Config" });
 
-    await user.click(screen.getByRole("combobox", { name: /^Theme/ }));
+    const theme = screen.getByRole("combobox", { name: "Theme" });
+    const current = theme.textContent;
+    await user.click(theme);
     const listbox = await screen.findByRole("listbox");
-    const options = within(listbox).getAllByRole("option");
-    const other = options.find((o) => o.getAttribute("data-value") !== "gmt");
-    const value = other.getAttribute("data-value");
+    const other = within(listbox)
+      .getAllByRole("option")
+      .find((o) => o.textContent !== current);
+    const label = other.textContent;
     await user.click(other);
 
-    await waitFor(() =>
-      expect(store.getState().config).toEqual({ theme: value }),
-    );
+    await waitFor(() => expect(store.getState().config.theme).toBeDefined());
+    expect(store.getState().config.theme).not.toBe("gmt");
+    expect(Object.keys(store.getState().config)).toEqual(["theme"]);
+    expect(theme).toHaveTextContent(label);
   });
 
   it("changing a select updates the stored config and the drawer", async () => {
-    const { user, store } = renderApp("/games/18Test/charters?config=true");
+    const { user, store } = renderApp(
+      "/games/18Test/charters?config=true&section=charters",
+    );
     await screen.findByRole("button", { name: "Close Config" });
 
-    await user.click(screen.getByRole("combobox", { name: /Charter Layout/ }));
+    await user.click(screen.getByRole("combobox", { name: "Charter Layout" }));
     await user.click(await screen.findByRole("option", { name: "3x1" }));
     await waitFor(() =>
       expect(store.getState().config).toEqual({ charters: { layout: "3x1" } }),
     );
     expect(
-      screen.getByRole("combobox", { name: /Charter Layout/ }),
+      screen.getByRole("combobox", { name: "Charter Layout" }),
     ).toHaveTextContent("3x1");
   });
 
   it("converts dimension inputs from inches to the stored unit", async () => {
-    const { user, store } = renderApp("/games/18Test/map?config=true");
+    const { user, store } = renderApp(
+      "/games/18Test/map?config=true&section=layout",
+    );
     await screen.findByRole("button", { name: "Close Config" });
 
     // Default margin is 25 (a quarter inch), shown in inches
@@ -114,29 +205,44 @@ describe("config drawer", () => {
   });
 
   it("resets the stored config to the defaults", async () => {
-    const { user, store } = renderApp("/games/18Test/map?config=true");
-    await screen.findByRole("button", { name: "Close Config" });
+    const { user, store } = renderApp(
+      "/games/18Test/map?config=true&section=data",
+      { config: { export: { allLayouts: true }, margin: 100 } },
+    );
 
     await user.click(
-      screen.getByRole("checkbox", { name: "Export all layout options" }),
+      await screen.findByRole("button", { name: "Reset To Defaults" }),
     );
-    await waitFor(() => expect(store.getState().config).not.toEqual({}));
-
-    await user.click(screen.getByRole("button", { name: "Reset To Defaults" }));
-    expect(store.getState().config).toEqual({});
+    await waitFor(() => expect(store.getState().config).toEqual({}));
   });
 
   it("search params override stored config without being stored", async () => {
     const { store } = renderApp(
-      "/games/18Test/charters?config=true&config.charters.layout=3x1",
+      "/games/18Test/charters?config=true&section=charters&config.charters.layout=3x1",
       { config: { charters: { layout: "free" } } },
     );
     await screen.findByRole("button", { name: "Close Config" });
 
     expect(
-      screen.getByRole("combobox", { name: /Charter Layout/ }),
+      screen.getByRole("combobox", { name: "Charter Layout" }),
     ).toHaveTextContent("3x1");
     // Search config is not written to state
     expect(store.getState().config).toEqual({ charters: { layout: "free" } });
+  });
+});
+
+describe("number fields", () => {
+  it("keeps what is typed and only stores numbers", async () => {
+    const { user, store } = renderApp(
+      "/games/18Test/map?config=true&section=charters",
+    );
+    const field = await screen.findByRole("spinbutton", { name: /Border/ });
+
+    await user.clear(field);
+    await user.type(field, "1.5");
+    expect(field).toHaveValue(1.5);
+    await waitFor(() =>
+      expect(store.getState().config.charters?.border).toBe(1.5),
+    );
   });
 });

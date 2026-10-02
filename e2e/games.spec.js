@@ -5,11 +5,11 @@ test("the app nav reaches the games list and the docs", async ({ page }) => {
   await expect(page.getByTestId("home")).toBeVisible();
 
   await page.getByRole("link", { name: "Load Games" }).click();
-  await expect(page).toHaveURL(/\/games\/$/);
+  await expect(page).toHaveURL(/\/games\/?$/);
   await expect(page.getByTestId("games")).toBeVisible();
 
-  await page.getByRole("link", { name: "Help" }).click();
-  await expect(page).toHaveURL(/\/docs\//);
+  await page.getByRole("link", { name: "Using 18xx Maker" }).click();
+  await expect(page).toHaveURL(/\/docs\/?$/);
   await expect(page.locator("[data-testid^='docs-']")).toBeVisible();
 
   await page.getByRole("link", { name: "Home" }).click();
@@ -17,12 +17,29 @@ test("the app nav reaches the games list and the docs", async ({ page }) => {
   await expect(page.getByTestId("home")).toBeVisible();
 });
 
+// Game pages pick their section from the toolbar's select, whose options are
+// prefixed with their keyboard shortcut ("2:Tiles")
+const goToSection = async (page, label) => {
+  await page.getByRole("combobox", { name: "Game Section" }).click();
+  await page.getByRole("option", { name: new RegExp(`${label}$`) }).click();
+};
+
 test.describe("bundled games", () => {
   test("opens 18Test from the games list and walks through its pages", async ({
     page,
   }) => {
     await page.goto("/games/");
-    await page.getByRole("link", { name: "18Test", exact: true }).click();
+    await page
+      .getByTestId("games")
+      .getByRole("link", { name: "18Test", exact: true })
+      .click();
+    await expect(page).toHaveURL(/\/games\/18Test$/);
+    await expect(page.getByTestId("game-18Test")).toBeVisible();
+
+    await page
+      .getByTestId("game-18Test")
+      .getByRole("link", { name: "Edit Game" })
+      .click();
     await expect(page).toHaveURL(/\/games\/18Test\/map$/);
     await expect(page.getByTestId("game-18Test-map")).toBeVisible();
 
@@ -38,23 +55,35 @@ test.describe("bundled games", () => {
       ["Map", "map"],
     ];
     for (const [label, path] of sections) {
-      await page.getByRole("link", { name: label, exact: true }).click();
+      await goToSection(page, label);
       await expect(page).toHaveURL(new RegExp(`/games/18Test/${path}$`));
       await expect(page.getByTestId(`game-18Test-${path}`)).toBeVisible();
     }
+
+    // The toolbar's back link returns to the game info page
+    await page.getByRole("link", { name: "Game Info" }).click();
+    await expect(page).toHaveURL(/\/games\/18Test$/);
+    await expect(page.getByTestId("game-18Test")).toBeVisible();
   });
 
   test("opens a real game and its pages", async ({ page }) => {
     await page.goto("/games/");
-    await page.getByRole("link", { name: "Shikoku 1889" }).click();
+    await page
+      .getByTestId("games")
+      .getByRole("link", { name: "Shikoku 1889" })
+      .click();
+    await page
+      .getByTestId("game-1889")
+      .getByRole("link", { name: "Edit Game" })
+      .click();
     await expect(page).toHaveURL(/\/games\/1889\/map$/);
     await expect(page.getByTestId("game-1889-map")).toBeVisible();
 
-    await page.getByRole("link", { name: "Cards", exact: true }).click();
+    await goToSection(page, "Cards");
     await expect(page.getByTestId("game-1889-cards")).toBeVisible();
-    await page.getByRole("link", { name: "Market", exact: true }).click();
+    await goToSection(page, "Market");
     await expect(page.getByTestId("game-1889-market")).toBeVisible();
-    await page.getByRole("link", { name: "Tiles", exact: true }).click();
+    await goToSection(page, "Tiles");
     await expect(page).toHaveURL(/\/games\/1889\/tiles$/);
     await expect(page.getByTestId("game-1889-tiles")).toBeVisible();
   });
@@ -64,10 +93,10 @@ test.describe("bundled games", () => {
   }) => {
     await page.goto("/games/1889/revenue");
     await expect(page.getByTestId("game-1889-revenue")).toBeVisible();
-    // Current section is marked in the side nav
+    // Current section is shown in the toolbar
     await expect(
-      page.getByRole("link", { name: "Revenue", exact: true }),
-    ).toHaveAttribute("aria-current", "page");
+      page.getByRole("combobox", { name: "Game Section" }),
+    ).toHaveText("Revenue");
   });
 
   test("shows the game info page", async ({ page }) => {

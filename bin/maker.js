@@ -8,7 +8,7 @@ import compile from "#cli/compile-schemas";
 import config from "#cli/config";
 import print from "#cli/print";
 import validate from "#cli/validate";
-import version from "#util/version";
+import version from "#cli/version";
 
 const { username } = userInfo();
 

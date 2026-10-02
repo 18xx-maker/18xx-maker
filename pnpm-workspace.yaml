@@ -4,6 +4,14 @@ packages:
 allowBuilds:
   "@swc/core": true
   electron: true
+  electron-winstaller: false
   esbuild: true
   lefthook: true
   msw: true
+
+# eslint-plugin-react 7.37.5 is the latest release and works on eslint 10 when
+# settings.react.version is set (see eslint.config.js), its peer range just
+# has not been updated
+peerDependencyRules:
+  allowedVersions:
+    "eslint-plugin-react>eslint": "10"

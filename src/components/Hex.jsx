@@ -30,6 +30,7 @@ import Value from "@/components/atoms/Value";
 import Shape from "@/components/atoms/shapes/Shape";
 import GameMapCompanyToken from "@/components/tokens/GameMapCompanyToken";
 import Token from "@/components/tokens/Token";
+
 import ColorContext from "@/context/ColorContext";
 import HexContext from "@/context/HexContext";
 import { useOrientation } from "@/context/OrientationContext";
@@ -186,8 +187,8 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
   let terrainHexes = [...(hex.terrain || [])];
   if (hex.mountain) {
     if (R.is(Array, hex.mountain)) {
-      terrainHexes.concat(
-        R.map((m) => ({ ...m, type: "mountain" }), hex.mountain),
+      terrainHexes.push(
+        ...R.map((m) => ({ ...m, type: "mountain" }), hex.mountain),
       );
     } else {
       terrainHexes.push({ ...hex.mountain, type: "mountain" });

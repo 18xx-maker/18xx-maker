@@ -40,6 +40,7 @@ describe("root state contract", () => {
         },
         "config": {},
         "errors": {},
+        "settings": {},
         "summaries": {},
       }
     `);
@@ -106,6 +107,7 @@ describe("root state contract", () => {
           "title": "Game B",
           "type": "system",
         },
+        "settings": {},
         "summaries": {
           "bundled": {
             "bundled:1889": {
