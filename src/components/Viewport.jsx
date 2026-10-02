@@ -32,8 +32,12 @@ const Viewport = ({ sideNavOpen, children }) => {
   }
   let width = `calc(100% - ${marginLeft} - ${marginRight})`;
 
-  // tabIndex: the area scrolls, so the keyboard must be able to reach it.
-  // data-chrome is the hook for the print rules in styles/root.css
+  // tabIndex: the area scrolls (a wide map overflows it sideways), so the
+  // keyboard must be able to reach it, which is also what axe's
+  // scrollable-region-focusable asks for. It is not conditional on the area
+  // overflowing, because nothing reports a content overflow without watching
+  // every descendant. Browsers that make scrollers focusable themselves add the
+  // same stop. data-chrome is the hook for the print rules in styles/root.css
   return (
     <div
       data-testid="viewport"

@@ -28,6 +28,35 @@ test("the side nav drawer opens from the menu button and closes with Escape", as
   await expect(nav).toBeHidden();
 });
 
+test("the side nav drawer is a named modal dialog and gives back the focus without a ring after a click", async ({
+  page,
+}) => {
+  await page.goto("/games/18Test/map");
+  const button = page.getByRole("button", { name: "menu" });
+  await button.click();
+  const dialog = page.getByRole("dialog", { name: "Menu" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog).toHaveAttribute("aria-modal", "true");
+  expect(
+    await page.evaluate(
+      () => getComputedStyle(document.documentElement).overflow,
+    ),
+  ).toBe("hidden");
+
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await expect(button).toBeFocused();
+  // Opened with a pointer, so Escape does not leave a focus ring on the button
+  expect(await button.evaluate((el) => el.matches(":focus-visible"))).toBe(
+    false,
+  );
+  expect(
+    await page.evaluate(
+      () => getComputedStyle(document.documentElement).overflow,
+    ),
+  ).not.toBe("hidden");
+});
+
 test("the side nav drawer closes with a click on the backdrop, not on the panel", async ({
   page,
 }) => {

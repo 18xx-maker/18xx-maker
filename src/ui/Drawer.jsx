@@ -93,6 +93,10 @@ const Modal = ({
   useEffect(() => {
     if (open) {
       const before = document.activeElement;
+      // Focus goes back the way it was: a ring only if the opener had one (a
+      // tap that opened the drawer leaves none after Escape). Browsers
+      // without the focusVisible option ignore it and decide themselves.
+      const focusVisible = Boolean(before?.matches?.(":focus-visible"));
       const element = root.current;
       const paper = panel.current;
       const page = document.documentElement;
@@ -107,7 +111,7 @@ const Modal = ({
         // A click on the backdrop leaves the focus on body, not in the panel
         const active = document.activeElement;
         if (paper.contains(active) || active === document.body || !active) {
-          before?.focus?.({ preventScroll: true });
+          before?.focus?.({ preventScroll: true, focusVisible });
         }
         setLeaving(true);
         Promise.all(
