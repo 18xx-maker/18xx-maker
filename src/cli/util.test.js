@@ -10,6 +10,7 @@ import {
   compileCompanyShares,
   compileCompanyTokens,
   defaultConfig,
+  loadCompanyOverrides,
   loadGame,
   loadJSON,
   loadSchema,
@@ -184,6 +185,12 @@ describe("loading", () => {
     expect(() => loadGame("18Missing")).toThrow("Game 18Missing not found");
   });
 
+  it("loads the company override sets by name", () => {
+    const overrides = loadCompanyOverrides();
+    expect(overrides["1830"].companies[0]).toHaveProperty("name");
+    expect(Object.keys(overrides)).not.toContain("1830.json");
+  });
+
   it("loads schemas by filename", () => {
     expect(loadSchema("game.schema.json")).toHaveProperty("$id");
   });
@@ -245,9 +252,11 @@ describe("startExpress", () => {
   it("serves index.html for any unknown route so the app can route it", async () => {
     // Echo the path that would be sent, dist/site may not be built
     vi.spyOn(fs, "existsSync").mockReturnValue(true);
-    vi.spyOn(express.response, "sendFile").mockImplementation(function (file) {
-      this.send(file);
-    });
+    vi.spyOn(express.response, "sendFile").mockImplementation(
+      function (file, options) {
+        this.send(path.join(options.root, file));
+      },
+    );
 
     server = startExpress(0);
     await new Promise((resolve) => server.once("listening", resolve));

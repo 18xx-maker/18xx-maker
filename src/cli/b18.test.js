@@ -71,6 +71,7 @@ beforeEach(() => {
   mocks.archive.finalize.mockImplementation(() =>
     setTimeout(() => mocks.output.emit("close"), 10),
   );
+  mocks.page.screenshot.mockResolvedValue(Buffer.from("png"));
   tmp = fs.mkdtempSync(path.join(os.tmpdir(), "18xx-cli-b18-"));
   process.chdir(tmp);
   vi.spyOn(console, "log").mockImplementation(() => {});
@@ -156,14 +157,18 @@ describe("b18", () => {
 
     it("screenshots the map, market, tokens and each tile color", () => {
       const tileTrays = json.tray.filter((tray) => tray.type === "tile");
-      expect(screenshots.map((shot) => shot.path)).toEqual([
-        `${folder}/18Test-1.0/Map.png`,
-        `${folder}/18Test-1.0/Market.png`,
-        `${folder}/18Test-1.0/Tokens.png`,
-        ...tileTrays.map(
-          (tray) => `${folder}/${tray.imgLoc.replace("images/", "")}`,
-        ),
-      ]);
+      const images = [
+        "Map",
+        "Market",
+        "Tokens",
+        ...tileTrays.map((tray) => tray.imgLoc.match(/\/(\w+)\.png$/)[1]),
+      ];
+      expect(fs.readdirSync(`${folder}/18Test-1.0`).sort()).toEqual(
+        images.map((image) => `${image}.png`).sort(),
+      );
+      expect(fs.readFileSync(`${folder}/18Test-1.0/Map.png`, "utf-8")).toBe(
+        "png",
+      );
       expect(screenshots[0].url).toBe(
         "http://localhost:9000/games/18Test/b18/map?print=true",
       );
@@ -275,7 +280,9 @@ describe("b18", () => {
     await b18("18Test", "1.0", "Pat", {});
 
     expect(mocks.page.screenshot.mock.calls.length).toBeGreaterThan(3);
-    expect(error).toHaveBeenCalledWith("Failed Map.png: timeout");
+    expect(error).toHaveBeenCalledWith(
+      "Failed board18-18Test-1.0/18Test-1.0/Map.png: timeout",
+    );
     expect(process.exitCode).toBe(1);
     expect(mocks.archive.finalize).toHaveBeenCalledOnce();
     expect(mocks.browser.close).toHaveBeenCalledOnce();

@@ -32,6 +32,7 @@ export default defineConfig({
       exclude: [
         "src/**/*.stories.*",
         "src/**/storyFrames.*",
+        "src/**/__fixtures__/**",
         "src/i18n.js",
         "src/index.jsx",
         "src/render/util.js",

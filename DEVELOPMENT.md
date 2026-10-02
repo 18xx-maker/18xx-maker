@@ -270,6 +270,7 @@ At a high level the folder structure looks like:
 │   ├── data          # Data files that are built into the app (games, icons, logos, etc)
 │   ├── defaults.json # Default config file values
 │   ├── docs          # All help page markdowns
+│   ├── export        # What a game exports (documents, b18, names), used by the CLI
 │   ├── hooks         # React hooks
 │   ├── index.jsx     # React root of the project
 │   ├── locales       # Localization files

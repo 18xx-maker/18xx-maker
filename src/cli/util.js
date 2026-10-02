@@ -153,6 +153,20 @@ export const loadGame = (game) => {
   }
 };
 
+// The company override sets by name, like the app has them in src/data
+export const loadCompanyOverrides = () => {
+  const dir = path.join(import.meta.dirname, "../data/companies");
+  return Object.fromEntries(
+    fs
+      .readdirSync(dir)
+      .filter((name) => name.endsWith(".json"))
+      .map((name) => [
+        name.replace(/\.json$/, ""),
+        loadJSON(path.join(dir, name)),
+      ]),
+  );
+};
+
 export const loadSchema = (schema) =>
   loadJSON(path.join(import.meta.dirname, `../schemas/${schema}`));
 
@@ -172,7 +186,9 @@ export const startExpress = (port = 9000) => {
   const app = express();
   app.use(express.static(site));
   app.get("/{*path}", function (req, res) {
-    res.sendFile(path.join(site, "index.html"));
+    // With a root the folders above it are not checked for dots, a checkout
+    // inside a .folder (a git worktree under .claude) is not a 404
+    res.sendFile("index.html", { root: site });
   });
   return app.listen(port);
 };

@@ -17,6 +17,7 @@
   },
   "imports": {
     "#cli/*": "./src/cli/*.js",
+    "#export/*": "./src/export/*.js",
     "#util/*": "./src/util/*.js"
   },
   "scripts": {

@@ -18,36 +18,42 @@ vi.mock("playwright", () => ({
   chromium: { launch: vi.fn(() => mocks.browser) },
 }));
 
-vi.mock("#cli/util", async (importOriginal) => ({
-  ...(await importOriginal()),
-  customConfig: mocks.customConfig,
-  loadGame: vi.fn(),
-  startExpress: vi.fn(() => mocks.server),
-}));
+vi.mock("#cli/util", async (importOriginal) => {
+  const real = await importOriginal();
+  return {
+    ...real,
+    customConfig: mocks.customConfig,
+    loadGame: vi.fn(),
+    startExpress: vi.fn(() => mocks.server),
+  };
+});
+
+const { loadGame: realLoadGame } = await vi.importActual("#cli/util");
 
 const cwd = process.cwd();
 let tmp;
 let log;
 
-const fullGame = {
-  companies: [{}],
-  map: {},
-  stock: { par: { values: [100] } },
-  tiles: {},
-};
+// The real 18Test game, which has every kind of data, with some changes
+const game = (changes = {}) => ({ ...realLoadGame("18Test"), ...changes });
 
 const printed = async (...args) => {
   await print(...args);
-  return mocks.page.pdf.mock.calls.map(([options]) => options.path);
+  return fs
+    .readdirSync("render", { recursive: true })
+    .filter((file) => file.endsWith(".pdf"))
+    .sort();
 };
 
 const addGame = (name) => fs.writeFileSync(`src/data/games/${name}.json`, "");
 
 beforeEach(() => {
   vi.clearAllMocks();
+  loadGame.mockImplementation(() => game());
   for (const key of Object.keys(mocks.customConfig)) {
     delete mocks.customConfig[key];
   }
+  mocks.page.pdf.mockResolvedValue(Buffer.from("pdf"));
   tmp = fs.mkdtempSync(path.join(os.tmpdir(), "18xx-cli-print-"));
   process.chdir(tmp);
   fs.mkdirSync("src/data/games", { recursive: true });
@@ -62,98 +68,123 @@ afterEach(() => {
 });
 
 describe("print", () => {
-  it("prints every page of a full game to pdf", async () => {
+  it("prints every page of a full game to pdf, named after the title", async () => {
     addGame("18Full");
-    loadGame.mockReturnValue(fullGame);
 
     const files = await printed("18Full", {});
 
     const tiles = defaultConfig.tiles.layout;
     const cards = defaultConfig.cards.layout;
-    expect(files).toEqual([
-      "render/18Full/18Full-background.pdf",
-      `render/18Full/18Full-cards-${cards}.pdf`,
-      "render/18Full/18Full-charters.pdf",
-      "render/18Full/18Full-map.pdf",
-      "render/18Full/18Full-map-paginated.pdf",
-      "render/18Full/18Full-market.pdf",
-      "render/18Full/18Full-market-paginated.pdf",
-      "render/18Full/18Full-par.pdf",
-      "render/18Full/18Full-par-paginated.pdf",
-      "render/18Full/18Full-revenue.pdf",
-      "render/18Full/18Full-revenue-paginated.pdf",
-      "render/18Full/18Full-tile-manifest.pdf",
-      `render/18Full/18Full-tiles-${tiles}.pdf`,
-      "render/18Full/18Full-tokens.pdf",
-    ]);
+    expect(files).toEqual(
+      [
+        "18test-background.pdf",
+        `18test-cards-${cards}.pdf`,
+        "18test-charters.pdf",
+        "18test-map.pdf",
+        "18test-map-paginated.pdf",
+        "18test-market.pdf",
+        "18test-market-paginated.pdf",
+        "18test-par.pdf",
+        "18test-par-paginated.pdf",
+        "18test-revenue.pdf",
+        "18test-revenue-paginated.pdf",
+        "18test-tile-manifest.pdf",
+        `18test-tiles-${tiles}.pdf`,
+        "18test-tokens.pdf",
+      ]
+        .map((file) => `18Full/${file}`)
+        .sort(),
+    );
+    expect(mocks.page.goto.mock.calls.map(([url]) => url)).toContain(
+      "http://localhost:9000/games/18Full/map?paginated=true",
+    );
     expect(mocks.page.goto).toHaveBeenCalledWith(
       "http://localhost:9000/games/18Full/map?paginated=true",
       { waitUntil: "networkidle" },
     );
     expect(mocks.page.pdf).toHaveBeenCalledWith({
-      path: "render/18Full/18Full-background.pdf",
       scale: 1.0,
       preferCSSPageSize: true,
     });
-    expect(fs.statSync("render/18Full").isDirectory()).toBe(true);
+    expect(
+      fs.readFileSync("render/18Full/18test-background.pdf", "utf-8"),
+    ).toBe("pdf");
     expect(mocks.browser.close).toHaveBeenCalledOnce();
   });
 
   it("skips pages the game has no data for", async () => {
     addGame("18Empty");
-    loadGame.mockReturnValue({ stock: {} });
+    loadGame.mockReturnValue(
+      game({
+        companies: undefined,
+        map: undefined,
+        players: undefined,
+        privates: undefined,
+        stock: { type: "1D" },
+        tiles: undefined,
+        tokens: undefined,
+        trains: undefined,
+      }),
+    );
 
     const files = await printed("18Empty", {});
 
     expect(files).toEqual([
-      "render/18Empty/18Empty-background.pdf",
-      "render/18Empty/18Empty-market.pdf",
-      "render/18Empty/18Empty-market-paginated.pdf",
-      "render/18Empty/18Empty-revenue.pdf",
-      "render/18Empty/18Empty-revenue-paginated.pdf",
+      "18Empty/18test-background.pdf",
+      "18Empty/18test-revenue-paginated.pdf",
+      "18Empty/18test-revenue.pdf",
     ]);
   });
 
   it("prints cards when a game only has players", async () => {
     addGame("18Players");
-    loadGame.mockReturnValue({ players: [] });
+    loadGame.mockReturnValue(
+      game({
+        companies: undefined,
+        privates: undefined,
+        trains: undefined,
+      }),
+    );
 
     const files = await printed("18Players", {});
     expect(files).toContain(
-      `render/18Players/18Players-cards-${defaultConfig.cards.layout}.pdf`,
+      `18Players/18test-cards-${defaultConfig.cards.layout}.pdf`,
     );
   });
 
   it("uses the custom tile and card layouts", async () => {
     addGame("18Full");
-    loadGame.mockReturnValue(fullGame);
     mocks.customConfig.tiles = { layout: "custom-tiles" };
     mocks.customConfig.cards = { layout: "custom-cards" };
 
     const files = await printed("18Full", {});
-    expect(files).toContain("render/18Full/18Full-tiles-custom-tiles.pdf");
-    expect(files).toContain("render/18Full/18Full-cards-custom-cards.pdf");
+    expect(files).toContain("18Full/18test-tiles-custom-tiles.pdf");
+    expect(files).toContain("18Full/18test-cards-custom-cards.pdf");
+  });
+
+  it("uses the layouts of the game's own config", async () => {
+    addGame("18Full");
+    loadGame.mockReturnValue(game({ config: { cards: { layout: "dtgDie" } } }));
+
+    const files = await printed("18Full", {});
+    expect(files).toContain("18Full/18test-cards-dtgDie.pdf");
   });
 
   it("prints every game json file with --all", async () => {
     addGame("18A");
     addGame("18B");
     fs.writeFileSync("src/data/games/index.js", "");
-    loadGame.mockReturnValue({});
+    loadGame.mockReturnValue(game({ info: { title: "The Game" } }));
 
     const files = await printed(undefined, { all: true });
 
-    expect(loadGame.mock.calls.map(([game]) => game).sort()).toEqual([
+    expect(loadGame.mock.calls.map(([id]) => id).sort()).toEqual([
       "18A",
       "18B",
     ]);
-    expect(files.sort()).toEqual([
-      "render/18A/18A-background.pdf",
-      "render/18A/18A-revenue-paginated.pdf",
-      "render/18A/18A-revenue.pdf",
-      "render/18B/18B-background.pdf",
-      "render/18B/18B-revenue-paginated.pdf",
-      "render/18B/18B-revenue.pdf",
+    expect(files.filter((file) => file.includes("background"))).toEqual([
+      "18A/the-game-background.pdf",
+      "18B/the-game-background.pdf",
     ]);
     expect(log).toHaveBeenCalledWith(
       expect.stringMatching(/^Games: 18., 18.$/),
@@ -170,7 +201,6 @@ describe("print", () => {
 
   it("waits for the browser and closes it and the server", async () => {
     addGame("18Full");
-    loadGame.mockReturnValue(fullGame);
     let finished = false;
     mocks.browser.close.mockImplementationOnce(async () => {
       await new Promise((resolve) => setTimeout(resolve, 10));
@@ -186,7 +216,6 @@ describe("print", () => {
 
   it("closes the browser and server when the browser cannot start", async () => {
     addGame("18Full");
-    loadGame.mockReturnValue(fullGame);
     chromium.launch.mockRejectedValueOnce(new Error("no browser"));
 
     await expect(print("18Full", {})).rejects.toThrow("no browser");
@@ -195,19 +224,29 @@ describe("print", () => {
 
   it("keeps going and exits 1 when some documents fail", async () => {
     addGame("18Empty");
-    loadGame.mockReturnValue({});
+    loadGame.mockReturnValue(
+      game({
+        companies: undefined,
+        map: undefined,
+        stock: undefined,
+        tiles: undefined,
+        tokens: undefined,
+        trains: undefined,
+        privates: undefined,
+        players: undefined,
+      }),
+    );
     const error = vi.spyOn(console, "error").mockImplementation(() => {});
     mocks.page.pdf.mockRejectedValueOnce(new Error("timeout"));
 
     const files = await printed("18Empty", {});
 
-    // All three documents were tried
-    expect(files).toHaveLength(3);
+    // All three documents were tried, the first did not get written
+    expect(mocks.page.pdf).toHaveBeenCalledTimes(3);
+    expect(files).toHaveLength(2);
+    expect(error).toHaveBeenCalledWith("Failed 18test-background.pdf: timeout");
     expect(error).toHaveBeenCalledWith(
-      "Failed 18Empty-background.pdf: timeout",
-    );
-    expect(error).toHaveBeenCalledWith(
-      expect.stringMatching(/1 documents failed:\n18Empty-background.pdf/),
+      expect.stringMatching(/1 documents failed:\n18test-background.pdf/),
     );
     expect(process.exitCode).toBe(1);
     expect(mocks.browser.close).toHaveBeenCalledOnce();

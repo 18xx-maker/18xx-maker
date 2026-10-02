@@ -57,21 +57,26 @@ This will build the app, then output a bunch of files into the
 ```
 render
 └── 1889
-    ├── 1889-background.pdf
-    ├── 1889-cards-miniEuroDie.pdf
-    ├── 1889-charters.pdf
-    ├── 1889-map-paginated.pdf
-    ├── 1889-map.pdf
-    ├── 1889-market-paginated.pdf
-    ├── 1889-market.pdf
-    ├── 1889-par-paginated.pdf
-    ├── 1889-par.pdf
-    ├── 1889-revenue-paginated.pdf
-    ├── 1889-revenue.pdf
-    ├── 1889-tile-manifest.pdf
-    ├── 1889-tiles-die.pdf
-    └── 1889-tokens.pdf
+    ├── shikoku-1889-background.pdf
+    ├── shikoku-1889-cards-miniEuroDie.pdf
+    ├── shikoku-1889-charters.pdf
+    ├── shikoku-1889-map-paginated.pdf
+    ├── shikoku-1889-map.pdf
+    ├── shikoku-1889-market-paginated.pdf
+    ├── shikoku-1889-market.pdf
+    ├── shikoku-1889-par-paginated.pdf
+    ├── shikoku-1889-par.pdf
+    ├── shikoku-1889-revenue-paginated.pdf
+    ├── shikoku-1889-revenue.pdf
+    ├── shikoku-1889-tile-manifest.pdf
+    ├── shikoku-1889-tiles-die.pdf
+    └── shikoku-1889-tokens.pdf
 ```
+
+The files are named after the game's title (the same names the app uses), the
+folder after the game id you typed. The command exits with code 1 if some
+documents could not be printed (the others are still written) and with code 2
+if it was used wrong, a game does not exist or the site has not been built.
 
 If you want to build all games at once you can run:
 
