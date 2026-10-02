@@ -5,8 +5,8 @@ import * as icons from "@/ui/icons";
 import "../tokens.css";
 
 describe("icons", () => {
-  it("exports the 38 icons the app uses", () => {
-    expect(Object.keys(icons)).toHaveLength(38);
+  it("exports the 39 icons the app uses", () => {
+    expect(Object.keys(icons)).toHaveLength(39);
   });
 
   it.each(Object.entries(icons))(

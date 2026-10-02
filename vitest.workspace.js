@@ -38,6 +38,15 @@ export default defineWorkspace([
     // Integration tests run in a real browser (jsdom/Node disagree on
     // Request/AbortSignal, which react-router 7 needs)
     ...shared,
+    // Found by the first test that needs them otherwise, which makes Vite
+    // reload the test page in the middle of the run
+    optimizeDeps: {
+      include: [
+        "@base-ui/react/menu",
+        "@base-ui/react/select",
+        "@base-ui/react/tooltip",
+      ],
+    },
     test: {
       ...testShared,
       browser: {

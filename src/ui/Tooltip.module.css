@@ -1,0 +1,83 @@
+.positioner {
+  z-index: var(--z-tooltip);
+}
+
+.popup {
+  position: relative;
+  transform-origin: var(--transform-origin);
+  transition: opacity var(--duration-shorter) var(--ease-in-out);
+  border-radius: var(--radius);
+  background-color: rgb(97 97 97 / 92%);
+  padding: 4px 8px;
+  max-width: 300px;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  color: #fff;
+  font-family: var(--font-family);
+  font-size: 0.6875rem;
+  font-weight: 500;
+}
+
+.popup[data-starting-style],
+.popup[data-ending-style] {
+  opacity: 0;
+}
+
+/* The arrow: a square turned 45 degrees and clipped to the half that points at
+   the child, 1em across and 0.71em out of the box */
+.arrow {
+  position: absolute;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: rgb(97 97 97 / 90%);
+}
+
+.arrow::before {
+  content: "";
+  display: block;
+  margin: auto;
+  background-color: currentcolor;
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
+}
+
+.arrow[data-side="top"] {
+  bottom: -0.71em;
+  width: 1em;
+  height: 0.71em;
+}
+
+.arrow[data-side="top"]::before {
+  transform-origin: 100% 0;
+}
+
+.arrow[data-side="bottom"] {
+  top: -0.71em;
+  width: 1em;
+  height: 0.71em;
+}
+
+.arrow[data-side="bottom"]::before {
+  transform-origin: 0 100%;
+}
+
+.arrow[data-side="left"] {
+  right: -0.71em;
+  width: 0.71em;
+  height: 1em;
+}
+
+.arrow[data-side="left"]::before {
+  transform-origin: 0 0;
+}
+
+.arrow[data-side="right"] {
+  left: -0.71em;
+  width: 0.71em;
+  height: 1em;
+}
+
+.arrow[data-side="right"]::before {
+  transform-origin: 100% 100%;
+}

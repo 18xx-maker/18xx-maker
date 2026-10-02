@@ -1,4 +1,5 @@
 import createIcon from "./createIcon.jsx";
+import ArrowDropDownSvg from "./svg/ArrowDropDown.svg";
 import AutorenewSvg from "./svg/Autorenew.svg";
 import CategorySvg from "./svg/Category.svg";
 import CenterFocusStrongSvg from "./svg/CenterFocusStrong.svg";
@@ -38,6 +39,7 @@ import TrainSvg from "./svg/Train.svg";
 import ViewModuleSvg from "./svg/ViewModule.svg";
 import WarningSvg from "./svg/Warning.svg";
 
+export const ArrowDropDown = createIcon(ArrowDropDownSvg, "ArrowDropDown");
 export const Autorenew = createIcon(AutorenewSvg, "Autorenew");
 export const Category = createIcon(CategorySvg, "Category");
 export const CenterFocusStrong = createIcon(

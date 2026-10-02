@@ -101,7 +101,7 @@
 :where(.icon) {
   display: inline-flex;
   flex-shrink: 0;
-  min-width: 56px;
+  min-width: var(--list-item-icon-min-width, 56px);
   color: var(--palette-action-active);
 }
 

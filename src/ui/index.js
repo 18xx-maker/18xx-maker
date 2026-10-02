@@ -15,6 +15,7 @@ export { FormControlLabel, FormGroup, FormLabel } from "./Form";
 export { default as Grid } from "./Grid";
 export { default as IconButton } from "./IconButton";
 export { default as Link } from "./Link";
+export { DropdownMenu, MenuDivider, MenuItem } from "./Menu";
 export { default as Paper } from "./Paper";
 export {
   List,
@@ -31,7 +32,9 @@ export {
   TableHead,
   TableRow,
 } from "./Table";
+export { default as Select } from "./Select";
 export { default as Switch } from "./Switch";
 export { default as TextField } from "./TextField";
 export { default as Toolbar } from "./Toolbar";
+export { default as Tooltip } from "./Tooltip";
 export { default as Typography } from "./Typography";
