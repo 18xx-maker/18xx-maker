@@ -13,13 +13,14 @@ export const CSS_DPI = 96;
 export const MAX_DPI = 300;
 export const MAX_PIXELS = 200_000_000;
 
-// How many CSS pixels a rounded up element can be over its real size before it
-// is a pixel more: sizes like 240.0000001 are 240
+// How many CSS pixels a rounded down element can be under its real size before
+// it is a pixel less: sizes like 239.9999999 are 240
 const EPSILON = 1e-3;
 
 // Chromium refuses fractional sizes and truncates a clip, so sizes are rounded
-// up to whole CSS pixels
-const ceil = (size) => Math.max(1, Math.ceil(size - EPSILON));
+// down to whole CSS pixels: a clip that is rounded up reaches past the element
+// (a card is 332.598 CSS pixels high) and captures a white edge
+const floor = (size) => Math.max(1, Math.floor(size + EPSILON));
 
 const decode = (base64) =>
   Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
@@ -57,12 +58,12 @@ export const checkPixels = (width, height, maxPixels = MAX_PIXELS) => {
 };
 
 // The pixel size of an image of an element of a size in CSS pixels at a
-// resolution: the size is rounded up to whole CSS pixels first
+// resolution: the size is rounded down to whole CSS pixels first
 export const imageSize = ({ width, height }, dpi) => {
   const scale = dpi / CSS_DPI;
   return {
-    width: Math.round(ceil(width) * scale),
-    height: Math.round(ceil(height) * scale),
+    width: Math.round(floor(width) * scale),
+    height: Math.round(floor(height) * scale),
   };
 };
 
@@ -118,7 +119,7 @@ const captureElement = async (adapter, { selector }, dpi, maxPixels) => {
   })()`);
   if (!rect) throw new Error(`The page has no ${selector}`);
 
-  const css = { width: ceil(rect.width), height: ceil(rect.height) };
+  const css = { width: floor(rect.width), height: floor(rect.height) };
   const size = imageSize(rect, dpi);
   checkPixels(size.width, size.height, maxPixels);
 

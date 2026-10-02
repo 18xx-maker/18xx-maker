@@ -194,25 +194,28 @@ describe("png", () => {
     expect(scales).toEqual([1, 2]);
   });
 
-  it("rounds the size up to whole CSS pixels", async () => {
+  it("rounds the size down to whole CSS pixels, so the clip stays in the element", async () => {
     const a = adapter({
       rect: { x: 10.5, y: 3.25, width: 255.109375, height: 166.296875 },
     });
 
     await capture(a, job());
 
-    expect(a.calls[2][1]).toMatchObject({ width: 11 + 256, height: 4 + 167 });
+    expect(a.calls[2][1]).toMatchObject({ width: 11 + 255, height: 4 + 166 });
     expect(a.calls[3][1].clip).toEqual({
       x: 10.5,
       y: 3.25,
-      width: 256,
-      height: 167,
+      width: 255,
+      height: 166,
       scale: 1,
     });
+    const { x, y, width, height } = a.calls[3][1].clip;
+    expect(x + width).toBeLessThanOrEqual(10.5 + 255.109375);
+    expect(y + height).toBeLessThanOrEqual(3.25 + 166.296875);
   });
 
-  it("does not round up what is only off by a float error", async () => {
-    const a = adapter({ rect: { ...rect, width: 240.0000001 } });
+  it("does not round down what is only off by a float error", async () => {
+    const a = adapter({ rect: { ...rect, width: 239.9999999 } });
 
     await capture(a, job());
 
@@ -276,14 +279,14 @@ describe("png", () => {
 });
 
 describe("imageSize", () => {
-  it("is the size in CSS pixels times dpi over 96, rounded up before", () => {
+  it("is the size in CSS pixels times dpi over 96, rounded down before", () => {
     expect(imageSize({ width: 240, height: 150 }, 300)).toEqual({
       width: 750,
       height: 469,
     });
     expect(imageSize({ width: 255.1, height: 166.3 }, 300)).toEqual({
-      width: 800,
-      height: 522,
+      width: 797,
+      height: 519,
     });
     expect(imageSize({ width: 96, height: 192 }, 96)).toEqual({
       width: 96,
