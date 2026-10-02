@@ -252,9 +252,20 @@ Notes:
   on your branch, download the `chrome-baselines` artifact and commit its
   png files. Regenerate only for an intended visual change, and review the
   images in the pull request.
+- The screenshot spec only protects anything once baselines are committed:
+  until then every page is skipped (with a warning annotation). Commit them
+  before relying on it. CI runs the e2e job and the baseline workflow in the
+  same `mcr.microsoft.com/playwright:v<version>-noble` container; bump the tag
+  with `@playwright/test`.
+- The `End to End` job should be a required status check on `main` (branch
+  protection), since it carries the print CSS gate, the a11y spec and the
+  screenshots.
+- `A11Y_DUMP=1 pnpm test:e2e e2e/a11y.spec.js` prints the violation keys it
+  found per page, to fill `KNOWN_ISSUES` for a new page.
 - `pnpm check:bundle` (run by CI after the web build) fails if the gzip size
-  of the built js or css in `dist/site/assets` passes the budget in
-  `scripts/check-bundle-size.js`; the baseline it was set from is recorded there.
+  of the built js and css in `dist/site/assets` passes a budget in
+  `scripts/check-bundle-size.js` (one for the app, a looser one for the
+  `data-*` and `logos-*` chunks); the baseline it was set from is recorded there.
 - The vitest projects only include `src/` and `tests/`, so they never pick up
   `e2e/`.
 

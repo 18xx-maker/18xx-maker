@@ -51,9 +51,12 @@ Conventions:
 
 ## Upgrade notes
 
-- `@mui/styles` (legacy JSS `makeStyles`, 22 files in `src`) is not supported on
-  React 19. Migrate off it in its own PR before upgrading React (currently
-  18.3.1).
+- `@mui/styles` (legacy JSS `makeStyles`, 22 files in `src`) is unsupported
+  upstream on React 19, but a spike found React 19.3 runs on the current stack
+  in the component tests and e2e (not known broken). The peers
+  `@testing-library/react`, `react-redux`, `@reduxjs/toolkit` and
+  `react-confetti` need bumps first, and the snapshot id normaliser must accept
+  React 19 ids. Migrate off it before upgrading React (currently 18.3.1).
 - Redux state uses hand-rolled `combineReducers`/`composeReducers`/`reducePath`
   (`src/state/helpers.js`). A move to `createSlice` must keep the root state
   contract test and persisted fixture passing.

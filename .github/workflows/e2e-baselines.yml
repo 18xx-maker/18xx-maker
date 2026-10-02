@@ -6,7 +6,13 @@ name: Update Chrome Baselines
 jobs:
   baselines:
     name: Generate chrome screenshot baselines
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    # Must match the e2e job in test.yml and the @playwright/test version
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.0-noble
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
+      HOME: /root
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -21,8 +27,6 @@ jobs:
           node-version: 24
       - name: Dependencies
         run: pnpm install
-      - name: Playwright Install
-        run: pnpm exec playwright install chromium --only-shell --with-deps
       - name: Build Web
         run: pnpm build
       - name: Generate Baselines

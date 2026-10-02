@@ -36,6 +36,10 @@ test("there is no print button outside of a game, or in print mode", async ({
 // constraint. The print snapshots in tests/ cannot see this, because they only
 // compare the markup. Only data-testid hooks are used here so the check
 // survives a change of UI library.
+//
+// export-fab replaces print-fab in the electron app only, and side-nav-temporary
+// is already display:none at this width (the md breakpoint), so a check here
+// would pass for the wrong reason. Both are covered by the same print rules.
 const chrome = ["app-bar", "side-nav", "config-drawer", "print-fab", "tooltip"];
 
 test("print media hides the chrome and frees the viewport", async ({

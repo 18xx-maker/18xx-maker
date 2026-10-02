@@ -68,10 +68,18 @@ const pages = [
 for (const { name, url, ready } of pages) {
   test(`chrome looks the same: ${name}`, async ({ page }) => {
     const baseline = path.join(baselines, `${name}-chromium-linux.png`);
-    test.skip(
-      !fs.existsSync(baseline) && test.info().config.updateSnapshots !== "all",
-      `no baseline for ${name} yet (see the header of this file)`,
-    );
+    const missing =
+      !fs.existsSync(baseline) && test.info().config.updateSnapshots !== "all";
+    if (missing) {
+      test.info().annotations.push({
+        type: "warning",
+        description: `NO BASELINE for ${name}: this screenshot gate checks nothing`,
+      });
+      console.warn(
+        `WARNING: no chrome screenshot baseline for ${name}, skipped`,
+      );
+    }
+    test.skip(missing, `no baseline for ${name} yet (see the header)`);
 
     await page.goto(url);
     await expect(ready(page)).toBeVisible();
@@ -84,6 +92,8 @@ for (const { name, url, ready } of pages) {
       animations: "disabled",
       caret: "hide",
       maxDiffPixelRatio: 0.005,
+      // Ripples are time dependent
+      mask: [page.locator(".MuiTouchRipple-root")],
     });
   });
 }

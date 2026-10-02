@@ -235,7 +235,14 @@ jobs:
           test "${{ needs.desktop-shards.result }}" = "success"
   e2e:
     name: End to End
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    # Same OS and Chromium as the chrome screenshot baselines (keep the tag in
+    # sync with the @playwright/test version in package.json)
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.0-noble
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
+      HOME: /root
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -250,26 +257,6 @@ jobs:
           node-version: 24
       - name: Dependencies
         run: pnpm install
-      - name: Playwright Version
-        id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(pnpm exec playwright --version | awk '{ print $2 }')" >> $GITHUB_OUTPUT
-      - name: Playwright Cache
-        id: playwright-cache
-        uses: actions/cache@v6
-        with:
-          path: browsers
-          key: linux-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
-      - name: Playwright Install
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: pnpm exec playwright install chromium --only-shell --with-deps
-      - name: Playwright Dependencies
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: |
-          # Only run the slow apt install when the runner image lacks a library
-          shell=$(find browsers -type f \( -name chrome-headless-shell -o -name headless_shell \) | head -n 1)
-          if [ -z "$shell" ] || ldd "$shell" | grep -q "not found"; then
-            pnpm exec playwright install-deps chromium
-          fi
       - name: Build Web
         run: pnpm build
       - name: End to End Tests
