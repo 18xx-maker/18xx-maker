@@ -1,17 +1,22 @@
 <svg viewBox="0 0 90 60">
-  <path fill="#003580" d="M90 0H0v60z"/>
-  <path fill="#009543" d="M0 60h90V0z"/>
-  <path stroke="#fff" stroke-width="20" d="M0 60 90 0"/>
-  <path stroke="#d21034" stroke-width="15" d="M0 60 90 0"/>
-  <g fill="#ffce00" transform="translate(18 16.341)">
-    <g id="na-r4">
-      <path id="na-r" d="m0 10 1.553-4.204h-3.106z"/>
-      <use href="#na-r" transform="rotate(90)"/>
-      <use href="#na-r" transform="rotate(180)"/>
-      <use href="#na-r" transform="rotate(270)"/>
+  <clipPath id="na-clip">
+    <path d="M0 0h90v60H0z"/>
+  </clipPath>
+  <g clip-path="url(#na-clip)">
+    <path fill="#003580" d="M90 0H0v60z"/>
+    <path fill="#009543" d="M0 60h90V0z"/>
+    <path stroke="#fff" stroke-width="20" d="M0 60 90 0"/>
+    <path stroke="#d21034" stroke-width="15" d="M0 60 90 0"/>
+    <g fill="#ffce00" transform="translate(18 16.341)">
+      <g id="na-r4">
+        <path id="na-r" d="m0 10 1.553-4.204h-3.106z"/>
+        <use href="#na-r" transform="rotate(90)"/>
+        <use href="#na-r" transform="rotate(180)"/>
+        <use href="#na-r" transform="rotate(270)"/>
+      </g>
+      <use href="#na-r4" transform="rotate(30)"/>
+      <use href="#na-r4" transform="rotate(60)"/>
+      <circle stroke="#003580" r="5.5"/>
     </g>
-    <use href="#na-r4" transform="rotate(30)"/>
-    <use href="#na-r4" transform="rotate(60)"/>
-    <circle stroke="#003580" r="5.5"/>
   </g>
 </svg>
