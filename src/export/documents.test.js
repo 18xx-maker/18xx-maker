@@ -275,6 +275,20 @@ describe("sharing with the browser", () => {
     });
   });
 
+  it("names the sheets without their layout when asked to", () => {
+    const game = loadGame("18Test");
+    const config = loadGameConfig(game);
+    const plain = (config) =>
+      documents(game, config, { ...data, plainSheetNames: true })
+        .filter((doc) => doc.mode === "single" && doc.id.includes(":"))
+        .map((doc) => doc.basename);
+
+    expect(plain(config)).toEqual(["cards", "tiles", "tokens"]);
+    expect(plain({ ...config, export: { allLayouts: true } })).toContain(
+      "cards-free",
+    );
+  });
+
   it("runs in Node without the Vite alias", () => {
     const root = path.join(import.meta.dirname, "../..");
     const result = spawnSync(
