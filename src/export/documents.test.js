@@ -79,7 +79,7 @@ describe("documents", () => {
       capture: {
         selector: ".printElement",
         viewport: null,
-        transparent: false,
+        background: false,
       },
     });
     expect(byId(docs, "market").size.widthIn).toBeCloseTo(13.4);
@@ -90,12 +90,9 @@ describe("documents", () => {
       capture: {
         selector: ".printElement",
         viewport: null,
-        transparent: true,
+        background: false,
       },
     });
-    expect(byId(docs, "tokens/0").capture.transparent).toBe(true);
-    expect(byId(docs, "tokens/20").capture.transparent).toBe(true);
-    expect(byId(docs, "market").capture.transparent).toBe(false);
     expect(byId(docs, "tokens/0").size).toEqual({
       widthIn: 2.4,
       heightIn: 0.6,
@@ -107,6 +104,24 @@ describe("documents", () => {
     expect(byId(docs, "charters/0").size.heightIn).toBe(5.25);
     // A minor charter is shorter
     expect(byId(docs, "charters/14").size.heightIn).toBe(3.5);
+  });
+
+  it("only gives the background to the map, market, par, revenue and tile manifest", () => {
+    const pngs = docs.filter((doc) => doc.formats.includes("png"));
+    expect(
+      pngs.filter((doc) => doc.capture.background).map((doc) => doc.id),
+    ).toEqual(["map", "market", "par", "revenue", "tile-manifest"]);
+    // Cards, charters, tokens, tiles and the background page
+    for (const id of [
+      "background",
+      "cards/number/1",
+      "charters/0",
+      "tokens/0",
+      "tokens/20",
+      "tiles/1",
+    ]) {
+      expect(byId(docs, id).capture).toMatchObject({ background: false });
+    }
   });
 
   it("has no png for the sheets and paginated documents", () => {

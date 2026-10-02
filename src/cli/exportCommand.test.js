@@ -139,7 +139,7 @@ describe("export formats", () => {
     );
   });
 
-  it("has a transparent background, white with --background white", async () => {
+  it("has a white map, transparent with --background transparent, other images always transparent", async () => {
     const backgrounds = () =>
       mocks.fake.session.send.mock.calls
         .filter(([method, params]) => {
@@ -149,20 +149,25 @@ describe("export formats", () => {
         })
         .map(([, { color }]) => color.a);
 
-    await exportCommand("18Test", { format: "png", docs: "background,tiles" });
-    expect(backgrounds().length).toBeGreaterThan(1);
-    expect(backgrounds().every((a) => a === 0)).toBe(true);
+    const docs = "map,background,tokens,tiles";
+    for (const background of [undefined, "white"]) {
+      mocks.fake.session.send.mockClear();
+      await exportCommand("18Test", { format: "png", docs, background });
+      // Only the map is white, the background page, tokens and tiles stay
+      // transparent
+      const alphas = backgrounds();
+      expect(alphas.filter((a) => a === 1)).toHaveLength(1);
+      expect(alphas.filter((a) => a === 0).length).toBeGreaterThan(2);
+    }
 
     mocks.fake.session.send.mockClear();
     await exportCommand("18Test", {
       format: "png",
-      docs: "background,tiles",
-      background: "white",
+      docs,
+      background: "transparent",
     });
-    // Only the background is white, the tiles stay transparent
-    const alphas = backgrounds();
-    expect(alphas.filter((a) => a === 1)).toHaveLength(1);
-    expect(alphas.filter((a) => a === 0).length).toBeGreaterThan(1);
+    expect(backgrounds().length).toBeGreaterThan(3);
+    expect(backgrounds().every((a) => a === 0)).toBe(true);
   });
 
   it("makes a board 18 box with --format b18", async () => {

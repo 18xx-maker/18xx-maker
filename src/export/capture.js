@@ -198,16 +198,18 @@ const captureElement = async (adapter, { selector }, dpi, maxPixels) => {
 //   pdf  the page printed on the paper of its css
 //   png  the element of the document, at dpi (at most MAX_DPI)
 //   b18  a screenshot of a viewport the size of the image
-// The background of a png is transparent, or opaque white when background is
-// "white", except for the documents with capture.transparent (tokens and
-// tiles). A b18 image does not take the background: the map and the market
-// are always white, the tokens and tiles always transparent.
+// The background of a png of a document with capture.background (the map,
+// market, par, revenue and tile manifest) is opaque white, or transparent when
+// background is "transparent". Every other png (the background page, cards,
+// charters, tokens, tiles) is always transparent. A b18 image does not take
+// the background: the map and the market (capture.background) are always
+// white, the tokens and tiles always transparent.
 // The media is always print, and the page is left as it was found: the device
 // size and the background are reset.
 export const capture = async (
   adapter,
   { doc, format },
-  { dpi = MAX_DPI, maxPixels = MAX_PIXELS, background = "transparent" } = {},
+  { dpi = MAX_DPI, maxPixels = MAX_PIXELS, background = "white" } = {},
 ) => {
   if (!(dpi >= 1 && dpi <= MAX_DPI)) {
     throw new Error(`The resolution must be 1 to ${MAX_DPI} dpi`);
@@ -219,9 +221,9 @@ export const capture = async (
   try {
     // An image is transparent where the page paints nothing, or white: without
     // the override the page is white, or the color of its color-scheme (black
-    // in a dark theme). Tokens and tiles are always transparent.
+    // in a dark theme).
     const white =
-      !doc.capture.transparent && (format === "b18" || background === "white");
+      doc.capture.background && (format === "b18" || background === "white");
     await adapter.send("Emulation.setDefaultBackgroundColorOverride", {
       color: white
         ? { r: 255, g: 255, b: 255, a: 1 }

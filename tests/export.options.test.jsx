@@ -186,30 +186,35 @@ describe("export options", () => {
     expect(background).toBeEnabled();
   });
 
-  it("exports with a transparent background unless it is set to white", async () => {
+  it("exports with a white background unless it is set to transparent", async () => {
     const { user, panel } = await openOptions();
     await user.click(checkbox(panel, "PNG images"));
     const background = within(panel).getByRole("combobox", {
       name: "Image background",
     });
-    expect(background).toHaveTextContent("Transparent");
+    expect(background).toHaveTextContent("White");
+    expect(
+      screen.getByText(/white by default\. The other png images/),
+    ).toBeInTheDocument();
 
     await user.click(exportButton(panel));
     await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
-    expect(requested().background).toBe("transparent");
+    expect(requested().background).toBe("white");
   });
 
-  it("exports with a white background", async () => {
+  it("exports with a transparent background", async () => {
     const { user, panel } = await openOptions();
     await user.click(checkbox(panel, "PNG images"));
     await user.click(
       within(panel).getByRole("combobox", { name: "Image background" }),
     );
-    await user.click(await screen.findByRole("option", { name: "White" }));
+    await user.click(
+      await screen.findByRole("option", { name: "Transparent" }),
+    );
 
     await user.click(exportButton(panel));
     await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
-    expect(requested().background).toBe("white");
+    expect(requested().background).toBe("transparent");
   });
 
   it("stops at a resolution over 300 dpi", async () => {

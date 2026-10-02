@@ -739,10 +739,10 @@ describe("export button", () => {
     ).toMatchObject({
       route: "/games/render:18Test/b18/map",
       query: { print: "true" },
-      capture: { transparent: false },
+      capture: { background: true },
     });
     expect(
       jobs.find(({ path }) => path.endsWith("/Tokens.png")).doc.capture,
-    ).toMatchObject({ viewport: { w: 60 }, transparent: true });
+    ).toMatchObject({ viewport: { w: 60 }, background: false });
   });
 });

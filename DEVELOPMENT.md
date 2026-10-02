@@ -122,8 +122,9 @@ node scripts/export-golden.mjs 18Test
 # (src/schemas/game.schema.json, src/docs/games/exports.en.md). A flag wins over
 # the game file and the game file over the defaults: resolveExportOptions in
 # src/export/options.js is the one place that decides, for the CLI and the app.
-# background only changes PNGs: a Board 18 box always has a white Map and
-# Market and transparent Tokens and tiles.
+# background (white by default) only changes the map, market, par, revenue and
+# tile manifest PNGs, every other PNG is always transparent: a Board 18 box
+# always has a white Map and Market and transparent Tokens and tiles.
 
 # Run all fixing linters
 pnpm fix

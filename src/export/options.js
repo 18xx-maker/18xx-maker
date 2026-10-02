@@ -19,7 +19,7 @@ export const BACKGROUNDS = ["transparent", "white"];
 export const DEFAULTS = {
   formats: ["pdf"],
   paginated: false,
-  background: "transparent",
+  background: "white",
   png: { dpi: MAX_DPI },
   b18: { version: "1.0" },
 };

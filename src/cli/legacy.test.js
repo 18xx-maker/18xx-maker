@@ -91,7 +91,7 @@ describe("b18 box", () => {
             width: doc.capture.viewport.w,
             height: doc.capture.viewport.h,
           },
-          omitBackground: doc.capture.transparent,
+          omitBackground: !doc.capture.background,
         })),
       ).toEqual(old.shots);
     },

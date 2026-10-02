@@ -23,6 +23,17 @@ import { safeName } from "./names.js";
 // token itself is inside
 const TOKEN_SELECTOR = ".token .printElement";
 
+// The pages whose png takes the background option (white by default). The
+// png of every other page (the background, cards, charters, tokens, tiles) is
+// always transparent.
+export const BACKGROUND_PAGES = [
+  "map",
+  "market",
+  "par",
+  "revenue",
+  "tile-manifest",
+];
+
 const inches = (size) =>
   size && { widthIn: size.width / 100, heightIn: size.height / 100 };
 
@@ -47,9 +58,9 @@ const inches = (size) =>
 //   size      { widthIn, heightIn } of the element a png captures, or null
 //   paper     the paper of the config
 //   capture   how a png or b18 image is captured: the element to capture, the
-//             viewport (b18) and transparent, true when the background is
-//             always transparent (tokens and tiles), whatever the background
-//             option says
+//             viewport (b18) and background, true when the image takes the
+//             background option (BACKGROUND_PAGES), false when it is always
+//             transparent
 //   basename  the name of the file, without the game or the extension
 //   variation the map variation, for the map documents
 export const documents = (game, config, data) => {
@@ -75,10 +86,10 @@ export const documents = (game, config, data) => {
     });
   };
 
-  const element = (transparent = false, selector = ".printElement") => ({
+  const element = (background = false, selector = ".printElement") => ({
     selector,
     viewport: null,
-    transparent,
+    background,
   });
 
   // A document with pdf and png output, and its paginated version (pdf only)
@@ -92,7 +103,7 @@ export const documents = (game, config, data) => {
       query,
       formats: ["pdf", "png"],
       size: inches(size),
-      capture: element(),
+      capture: element(BACKGROUND_PAGES.includes(kind)),
       basename: `${kind}${suffix}`,
       variation,
     });
@@ -200,7 +211,7 @@ export const documents = (game, config, data) => {
       kind: "tile-manifest",
       route: "tile-manifest",
       formats: ["pdf", "png"],
-      capture: element(),
+      capture: element(true),
       basename: "tile-manifest",
     });
     sheet("tiles", config.tiles);
@@ -212,11 +223,11 @@ export const documents = (game, config, data) => {
   }
 
   // The elements of the sheets, a png each
-  const item = ({ transparent, selector, ...doc }) =>
+  const item = ({ selector, ...doc }) =>
     add({
       mode: "item",
       formats: ["png"],
-      capture: element(transparent, selector),
+      capture: element(false, selector),
       ...doc,
     });
 
@@ -280,7 +291,6 @@ export const documents = (game, config, data) => {
       size: inches(getTokenSize(config.tokens, true)),
       basename: `token-${i + 1}-${safeName(company.abbrev)}`,
       selector: TOKEN_SELECTOR,
-      transparent: true,
     }),
   );
   // "quantity" of 0 removes a token, like the token page does
@@ -294,7 +304,6 @@ export const documents = (game, config, data) => {
         size: inches(getTokenSize(config.tokens, false)),
         basename: `token-${i + 1 + companies.length}`,
         selector: TOKEN_SELECTOR,
-        transparent: true,
       }),
     );
 
@@ -307,7 +316,6 @@ export const documents = (game, config, data) => {
         route: `tiles/${encodeURIComponent(id)}`,
         size: inches(getTileSize(config.tiles.width)),
         basename: `tile-${id.replace(/[^\w.-]+/g, "_")}`,
-        transparent: true,
       });
     }
   }

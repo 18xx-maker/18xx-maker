@@ -35,7 +35,7 @@ describe("b18Spec", () => {
       formats: ["b18"],
       route: "/games/18Test/b18/map",
       query: { print: "true" },
-      capture: { selector: null, transparent: false },
+      capture: { selector: null, background: true },
     });
     expect(map.capture.viewport.w).toBeGreaterThan(100);
     expect(images.find((image) => image.kind === "b18-market").route).toBe(
@@ -43,17 +43,17 @@ describe("b18Spec", () => {
     );
   });
 
-  it("makes the tokens and tiles always transparent", () => {
+  it("puts the map and market on white, the tokens and tiles transparent", () => {
     const { images } = spec();
     expect(
       Object.fromEntries(
-        images.map((image) => [image.basename, image.capture.transparent]),
+        images.map((image) => [image.basename, image.capture.background]),
       ),
     ).toMatchObject({
-      Map: false,
-      Market: false,
-      Tokens: true,
-      Yellow: true,
+      Map: true,
+      Market: true,
+      Tokens: false,
+      Yellow: false,
     });
   });
 

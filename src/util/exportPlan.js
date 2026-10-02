@@ -2,7 +2,7 @@ import { mergeDeepRight, uniq } from "ramda";
 
 import { companies as companyOverrides, tiles } from "@/data";
 import { b18Spec } from "@/export/b18.js";
-import { documents } from "@/export/documents.js";
+import { BACKGROUND_PAGES, documents } from "@/export/documents.js";
 import { exportJobs, fileName, safeName } from "@/export/names.js";
 import { layoutsOfConfig, resolveExportOptions } from "@/export/options.js";
 import { renderSlug } from "@/export/render.js";
@@ -109,8 +109,9 @@ export const exportDefaults = (game, layers) => {
 //   layouts    "all" for a sheet of every layout, "current" for the one config
 //              has, as config says when left out
 //   paginated  also the paginated pdfs
-//   background "transparent" or "white", of the png images (tokens and tiles
-//              are always transparent, b18 images do not take it)
+//   background "white" or "transparent", of the png images of the map,
+//              market, par, revenue and tile manifest (the others are always
+//              transparent, b18 images do not take it)
 //   dpi        of the pngs, at most MAX_DPI
 //   variation  only this map variation
 //   b18        { version, author } of the Board 18 box
@@ -161,14 +162,19 @@ export const planExport = (game, layers, userOptions) => {
 
 // What the main process exports for the page the app shows: a pdf or png of
 // "/games/1889/map?variation=0" (location.pathname and location.search),
-// saved under a name the user chooses. A png is of the .printElement.
+// saved under a name the user chooses. A png is of the .printElement, and
+// takes the background on the pages of BACKGROUND_PAGES only.
 export const planSingle = (game, layers, { pathname, search }, format) => {
   const page = pathname.split("/").slice(3).join("/");
   const doc = {
     route: `/games/${renderSlug(game.meta.id)}/${page}`,
     query: Object.fromEntries(new URLSearchParams(search)),
     basename: safeName(page.replace(/\//g, "-")) || "game",
-    capture: { selector: ".printElement", viewport: null, transparent: false },
+    capture: {
+      selector: ".printElement",
+      viewport: null,
+      background: BACKGROUND_PAGES.includes(page),
+    },
   };
 
   return {

@@ -71,6 +71,8 @@ const check = {
     for (const [name, size] of Object.entries(expected.png.images)) {
       expect(png(path.join(dir, name)), name).toMatchObject(size);
     }
+    // The map is on white by default, in the app too
+    expect(edgeAlpha(path.join(dir, "18test-map.png"))).toEqual(OPAQUE);
 
     // The app's images are the size of the CLI's
     const sizes = Object.fromEntries(

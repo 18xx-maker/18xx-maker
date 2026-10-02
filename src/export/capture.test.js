@@ -126,9 +126,9 @@ const TRANSPARENT = [
 
 describe("b18", () => {
   // The map or the market, and the tokens or tiles
-  const job = (transparent = false) => ({
+  const job = (background = true) => ({
     format: "b18",
-    doc: doc({ viewport: { w: 60, h: 90 }, transparent }),
+    doc: doc({ viewport: { w: 60, h: 90 }, background }),
   });
 
   it("is a screenshot of a viewport of the size of the image", async () => {
@@ -164,7 +164,7 @@ describe("b18", () => {
       expect(map.calls).not.toContainEqual(TRANSPARENT);
 
       const tokens = adapter();
-      await capture(tokens, job(true), { background });
+      await capture(tokens, job(false), { background });
       expect(tokens.calls).toContainEqual(TRANSPARENT);
       expect(tokens.calls).not.toContainEqual(WHITE);
 
@@ -334,35 +334,46 @@ describe("png", () => {
     expect(readPng(two).width).toBe(314);
   });
 
-  it("is transparent by default, and resets the page after", async () => {
+  // The map, market, par, revenue and tile manifest
+  const withBackground = () => ({
+    format: "png",
+    doc: doc({ selector: ".printElement", background: true }),
+  });
+
+  it("is white by default for a document with the background, and resets the page after", async () => {
     const a = adapter({ rect });
 
-    await capture(a, job());
+    await capture(a, withBackground());
 
-    expect(a.calls).toContainEqual(TRANSPARENT);
+    expect(a.calls).toContainEqual(WHITE);
+    expect(a.calls).not.toContainEqual(TRANSPARENT);
     expect(a.names().slice(-2)).toEqual([
       "Emulation.clearDeviceMetricsOverride",
       "Emulation.setDefaultBackgroundColorOverride",
     ]);
   });
 
-  it("is white when asked, but not a transparent document", async () => {
-    const white = adapter({ rect });
-    await capture(white, job(), { background: "white" });
-    expect(white.calls).toContainEqual(WHITE);
+  it("is transparent when asked for a document with the background", async () => {
+    const a = adapter({ rect });
 
-    const tile = adapter({ rect });
-    await capture(
-      tile,
-      {
-        format: "png",
-        doc: doc({ selector: ".printElement", transparent: true }),
-      },
-      { background: "white" },
-    );
-    expect(tile.calls).toContainEqual(TRANSPARENT);
-    expect(tile.calls).not.toContainEqual(WHITE);
+    await capture(a, withBackground(), { background: "transparent" });
+
+    expect(a.calls).toContainEqual(TRANSPARENT);
+    expect(a.calls).not.toContainEqual(WHITE);
   });
+
+  // Cards, charters, tokens, tiles and the background page
+  it.each(["transparent", "white", undefined])(
+    "is always transparent for any other document (%s)",
+    async (background) => {
+      const a = adapter({ rect });
+
+      await capture(a, job(), { background });
+
+      expect(a.calls).toContainEqual(TRANSPARENT);
+      expect(a.calls).not.toContainEqual(WHITE);
+    },
+  );
 
   it("fails when the page has no such element", async () => {
     const a = adapter({ rect: null });

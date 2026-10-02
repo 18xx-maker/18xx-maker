@@ -171,7 +171,8 @@ test.describe("maker export 18Test", () => {
     });
   }
 
-  test("writes a card on white with no white edge", () => {
+  // Cards do not take the background: a number card is one color to its edge
+  test("writes a card with no white edge, even with --background white", () => {
     const result = maker(
       out,
       "18Test",
@@ -184,50 +185,59 @@ test.describe("maker export 18Test", () => {
     );
     expect(result.status, result.stderr).toBe(0);
 
-    // A number card is one color to its edge
     expect(
       edgeColors(path.join(out, "18Test/18test-card-number-1.png")),
     ).toEqual(["105,74,152,255"]);
   });
 
-  test("makes the background of every image transparent", async ({ page }) => {
+  // The alpha of the top left pixel of the map, a tile and a token
+  const corners = async (page, ...flags) => {
     const result = maker(
       out,
       "18Test",
       "--format",
       "png",
       "--docs",
-      "map,tiles",
+      "map,tiles,tokens",
+      ...flags,
     );
     expect(result.status, result.stderr).toBe(0);
 
     const dir = path.join(out, "18Test");
-    expect(await cornerAlpha(page, path.join(dir, "18test-tile-1.png"))).toBe(
-      0,
-    );
-    expect(await cornerAlpha(page, path.join(dir, "18test-map.png"))).toBe(0);
-  });
+    const token = fs
+      .readdirSync(dir)
+      .find((name) => name.startsWith("18test-token-"));
+    return {
+      map: await cornerAlpha(page, path.join(dir, "18test-map.png")),
+      tile: await cornerAlpha(page, path.join(dir, "18test-tile-1.png")),
+      token: await cornerAlpha(page, path.join(dir, token)),
+    };
+  };
 
-  test("makes the background white with --background white, not tiles", async ({
+  test("makes the map white by default, tiles and tokens transparent", async ({
     page,
   }) => {
-    const result = maker(
-      out,
-      "18Test",
-      "--format",
-      "png",
-      "--docs",
-      "map,tiles",
-      "--background",
-      "white",
-    );
-    expect(result.status, result.stderr).toBe(0);
+    expect(await corners(page)).toEqual({ map: 255, tile: 0, token: 0 });
+  });
 
-    const dir = path.join(out, "18Test");
-    expect(await cornerAlpha(page, path.join(dir, "18test-map.png"))).toBe(255);
-    expect(await cornerAlpha(page, path.join(dir, "18test-tile-1.png"))).toBe(
-      0,
-    );
+  test("keeps tiles and tokens transparent with --background white", async ({
+    page,
+  }) => {
+    expect(await corners(page, "--background", "white")).toEqual({
+      map: 255,
+      tile: 0,
+      token: 0,
+    });
+  });
+
+  test("makes the map transparent with --background transparent", async ({
+    page,
+  }) => {
+    expect(await corners(page, "--background", "transparent")).toEqual({
+      map: 0,
+      tile: 0,
+      token: 0,
+    });
   });
 
   // Board18 boxes do not take the background: the map and the market are

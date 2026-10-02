@@ -78,7 +78,7 @@ program
   )
   .option(
     "--background <background>",
-    "transparent or white: the background of the PNG images, not of a Board 18 box (default: transparent)",
+    "white or transparent: the background of the map, market, par, revenue and tile manifest PNGs, the other PNGs are always transparent, not of a Board 18 box (default: white)",
   )
   .option(
     "--variation <n>",

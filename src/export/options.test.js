@@ -15,7 +15,7 @@ describe("resolveExportOptions", () => {
     expect(resolveExportOptions()).toEqual({
       formats: ["pdf"],
       paginated: false,
-      background: "transparent",
+      background: "white",
       png: { dpi: 300 },
       b18: { version: "1.0" },
     });
@@ -30,7 +30,7 @@ describe("resolveExportOptions", () => {
     ).toEqual({
       formats: ["pdf"],
       paginated: true,
-      background: "transparent",
+      background: "white",
       png: { dpi: 300 },
       b18: { version: "1.0", author: "Me" },
     });
@@ -85,13 +85,13 @@ describe("resolveExportOptions", () => {
   it("lets the user choose the background over the game", () => {
     expect(
       resolveExportOptions({
-        game: { background: "white" },
-        user: { background: "transparent" },
+        game: { background: "transparent" },
+        user: { background: "white" },
       }).background,
-    ).toBe("transparent");
-    expect(
-      resolveExportOptions({ game: { background: "white" } }).background,
     ).toBe("white");
+    expect(
+      resolveExportOptions({ game: { background: "transparent" } }).background,
+    ).toBe("transparent");
   });
 
   it("lets the user choose every variation over the variation of the game", () => {
@@ -136,7 +136,7 @@ describe("resolveExportOptions", () => {
     expect(options).toEqual({
       formats: ["pdf"],
       paginated: false,
-      background: "transparent",
+      background: "white",
       png: { dpi: 300 },
       b18: { version: "1.0" },
     });

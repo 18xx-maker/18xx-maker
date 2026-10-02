@@ -240,13 +240,13 @@ describe("planExport with the exports of a game", () => {
   });
 
   it("plans the background of the game, and the one the user chooses", () => {
-    const withGame = { ...game, exports: { background: "white" } };
+    const withGame = { ...game, exports: { background: "transparent" } };
 
-    expect(planExport(game, layers(), {}).background).toBe("transparent");
-    expect(planExport(withGame, layers(), {}).background).toBe("white");
+    expect(planExport(game, layers(), {}).background).toBe("white");
+    expect(planExport(withGame, layers(), {}).background).toBe("transparent");
     expect(
-      planExport(withGame, layers(), { background: "transparent" }).background,
-    ).toBe("transparent");
+      planExport(withGame, layers(), { background: "white" }).background,
+    ).toBe("white");
     expect(
       planSingle(
         withGame,
@@ -254,7 +254,29 @@ describe("planExport with the exports of a game", () => {
         { pathname: "/games/18Test/map", search: "" },
         "png",
       ).background,
-    ).toBe("white");
+    ).toBe("transparent");
+  });
+
+  // Only the map, market, par, revenue and tile manifest take the background
+  it.each([
+    ["map", true],
+    ["market", true],
+    ["par", true],
+    ["revenue", true],
+    ["tile-manifest", true],
+    ["background", false],
+    ["cards/number/1", false],
+    ["charters/0", false],
+    ["tokens/0", false],
+    ["tiles/1", false],
+  ])("gives the background to a single png of %s: %s", (page, background) => {
+    const { jobs } = planSingle(
+      game,
+      layers(),
+      { pathname: `/games/18Test/${page}`, search: "" },
+      "png",
+    );
+    expect(jobs[0].doc.capture.background).toBe(background);
   });
 
   it("uses the dpi of the game for a single png", () => {

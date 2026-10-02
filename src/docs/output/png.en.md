@@ -74,9 +74,10 @@ Images are made for printing: 300 dpi is the default and the highest
 resolution, a lower one is set with `--dpi` (1 to 300, `--dpi 301` is
 refused). The resolution is written into the file, so a card that is 2.5 by 3.5
 inches opens at that size in an image viewer and prints at that size. Colors are
-sRGB, and the background is transparent, or white with `--background white`
-(tokens and tiles are always transparent, and the images of a Board18 box do
-not take it). An image of more than
+sRGB. The map, market, par, revenue and tile manifest are on white, or
+transparent with `--background transparent`; every other image (the background
+page, cards, charters, tokens and tiles) is always transparent, and the images
+of a Board18 box do not take it. An image of more than
 200 megapixels (a huge map at 300 dpi) is not made, the command says so and you
 can lower the `--dpi`. A document that takes more than two minutes fails.
 
