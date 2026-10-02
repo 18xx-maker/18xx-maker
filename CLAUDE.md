@@ -49,15 +49,11 @@ Conventions:
 - Lefthook's pre-commit test step excludes `tests/**`; run `pnpm test:run`
   yourself before pushing.
 
-## Upgrade notes
+## Stack notes
 
-- MUI and Emotion are gone from `src` and the dependencies (`pnpm check:mui`
-  keeps them out). The chrome is `src/ui`: CSS Modules, with Base UI for the
-  Select, Menu, Tooltip and Slider (see its README). React is still 18.3.1; a
-  spike found React 19.3 runs on the stack in the component tests and e2e (not
-  known broken). The peers `@testing-library/react`, `react-redux`,
-  `@reduxjs/toolkit` and `react-confetti` need bumps first, and the snapshot id
-  normaliser must accept React 19 ids.
+- React 19 (`^19.3.0`). There is no MUI or Emotion (`pnpm check:mui` keeps them
+  out). The chrome is `src/ui`: CSS Modules over design tokens, with Base UI for
+  the Select, Menu, Tooltip and Slider (see its README).
 - Redux state uses hand-rolled `combineReducers`/`composeReducers`/`reducePath`
   (`src/state/helpers.js`). A move to `createSlice` must keep the root state
   contract test and persisted fixture passing.
