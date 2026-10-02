@@ -4,9 +4,12 @@
  * orange[400] secondary, everything else the MUI v6 defaults), so the chrome
  * looks the same before and after a component moves off MUI.
  *
- * Scoped to [data-chrome-root] so the tokens never reach print pages or the
- * game SVGs. Root.jsx sets it on #dropzone; content portaled out of the app
- * (menus, tooltips) must set it on its own root. :where() keeps specificity 0.
+ * Scoped to [data-chrome-root], which Root.jsx sets on <body> (not #dropzone)
+ * so menus, tooltips and drawers portaled to body get the tokens too. Print
+ * pages render inside the app, so they inherit these properties; they stay
+ * unaffected because nothing in src/ui styles print elements and print CSS
+ * uses none of these names. Do not reuse them there. :where() keeps
+ * specificity 0.
  *
  * Breakpoints are listed for reference only: custom properties do not work in
  * media queries. CSS uses literal px (see README.md).

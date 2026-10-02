@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router";
 
@@ -155,6 +155,13 @@ body {
 
   useBindings();
 
+  // UI tokens (src/ui/tokens.css). On body, not #dropzone, so content that
+  // portals to body (menus, tooltips, drawers) gets them too.
+  useLayoutEffect(() => {
+    document.body.setAttribute("data-chrome-root", "");
+    return () => document.body.removeAttribute("data-chrome-root");
+  }, []);
+
   // Side panel state
   const [sideNavOpen, setSideNavOpen] = useState(false);
   const toggleSideNav = () => setSideNavOpen(!sideNavOpen);
@@ -162,12 +169,7 @@ body {
   const alertKey = alert.progress ? alert.name : alert.message;
 
   return (
-    <div
-      id="dropzone"
-      data-chrome-root
-      onDragOver={dragOverHandler}
-      onDrop={dropHandler}
-    >
+    <div id="dropzone" onDragOver={dragOverHandler} onDrop={dropHandler}>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <ScrollToTop>

@@ -23,6 +23,8 @@ pre-commit:
       priority: 40
     svgo:
       glob: "*.svg"
+      # Vendored verbatim from @mui/icons-material (see src/ui/icons/NOTICE.md)
+      exclude: "src/ui/icons/svg/*"
       run: pnpm exec svgo {staged_files}
       stage_fixed: true
       priority: 40

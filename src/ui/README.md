@@ -12,11 +12,18 @@ Print pages (tiles, maps, charts, cards) are not part of it and never use it.
   `box-sizing`. Base styles belong on a component's own class.
 - Specificity discipline: one class per rule, or `:where()` for defaults a
   consumer should override. No ids, no `!important`, no element qualifiers.
-- Tokens are CSS custom properties from `tokens.css`, scoped to
-  `[data-chrome-root]` (set on `#dropzone` in `Root.jsx`) so they cannot reach
-  print pages. Content portaled outside `#dropzone` (menus, tooltips,
-  drawers) must carry its own `data-chrome-root`. `theme.spacing(n)` is
-  `calc(var(--space) * n)`.
+- Tokens are CSS custom properties from `tokens.css`, declared on
+  `[data-chrome-root]`, which `Root.jsx` sets on `<body>` so that content MUI or
+  Base UI portals to body (menus, tooltips, drawers, dialogs) gets them too. A
+  portal into any other container must set `data-chrome-root` itself.
+  `theme.spacing(n)` is `calc(var(--space) * n)`.
+- Print pages render inside the app, so they inherit the custom properties.
+  They are unaffected because nothing in `src/ui` styles print elements and
+  print CSS uses none of the token names. Keep it that way.
+- There is no global reset, so every converted component sets its own
+  `box-sizing` (MUI components do, and the swap must not change layout).
+- Stylelint (`package.json`) bans `*`, `html`, `body`, `button`, `svg` and `img` as
+  the leading selector of a rule in `src/ui/**` (`.card svg` is fine).
 - Every replaced component gets a stable hook: a `data-testid` (the phase 0
   hooks such as `app-bar`, `side-nav`, `config-drawer`, `print-fab`, `tooltip`,
   `viewport`, `alert`) and, where CSS needs one, a `data-chrome="<name>"`
@@ -29,14 +36,19 @@ Print pages (tiles, maps, charts, cards) are not part of it and never use it.
 
 ## Breakpoints
 
-`@custom-media` is not usable here. `postcss-preset-env` (inline PostCSS config
-in `vite.config.js`) resolves it in the same file only, and every CSS Module
-is processed on its own, so `@custom-media --md` in `tokens.css` is left as
-`@media (--md)` in other files. Custom properties do not work in `@media`
-either. So CSS uses literal px values (600, 960, 1280, 1920 and the MUI
-`down()` step 599.95 etc.), and `breakpoints.js` exports the same numbers with
-MUI's `up()`/`down()` strings for `useMediaQuery`. `breakpoints.test.js` fails
-if any `@media` width in `src/ui` is not one of them.
+`@custom-media` is not used. `postcss-preset-env` (inline PostCSS config in
+`vite.config.js`) resolves it in the same file only, and every CSS Module is
+processed on its own, so `@custom-media --md` in `tokens.css` stays
+`@media (--md)` everywhere else. Sharing it would need
+`@csstools/postcss-global-data` (a new dependency). That would still only fix
+the build: the vitest projects in `vitest.workspace.js` define their own Vite
+config and do not inherit `css.postcss` from `vite.config.js`, so component
+tests serve the CSS untransformed (native nesting, no custom-media). Custom
+properties do not work in `@media` either. So CSS uses literal px values (600,
+960, 1280, 1920, and MUI's `down()` step such as 599.95), and `breakpoints.js`
+exports the same numbers with MUI's `up()`/`down()` strings for
+`useMediaQuery`. `breakpoints.test.js` fails if any `@media` in `src/ui` uses a
+number that is not one of them, or a unit other than px.
 
 ## Cascade order while MUI exists
 

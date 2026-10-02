@@ -1,6 +1,6 @@
 # Icon sources
 
-The SVG paths in `svg/` are copied from `@mui/icons-material` (Material Design
+The SVG files in `svg/` are copied verbatim (paths unmodified) from `@mui/icons-material` (Material Design
 icons by Google), distributed under the MIT license (the MUI package) and
 originally released under the Apache License 2.0 (Material Icons).
 
@@ -29,3 +29,6 @@ Each file name matches the `@mui/icons-material` export it replaces
 `<path>` data from that package into a new file shaped like the others
 (`viewBox="0 0 24 24"`, `fill="currentColor"`, `width`/`height` of `1em`) and
 export it from `index.js` with `createIcon`.
+
+The files are excluded from the svgo pre-commit hook (`lefthook.yml`) so they
+stay identical to the upstream paths.

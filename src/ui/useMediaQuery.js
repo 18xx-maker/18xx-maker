@@ -6,7 +6,9 @@ const supported = () =>
 // Subscribes to a media query (use up/down from "@/ui" to build one). The
 // server and non-matchMedia environments report defaultMatches, so the first
 // render never touches window.
-const useMediaQuery = (query, defaultMatches = false) => {
+const useMediaQuery = (rawQuery, defaultMatches = false) => {
+  // Like MUI, accept "@media (min-width:600px)" as well as the bare query
+  const query = rawQuery.replace(/^@media( ?)/m, "");
   const subscribe = useCallback(
     (notify) => {
       if (!supported()) {

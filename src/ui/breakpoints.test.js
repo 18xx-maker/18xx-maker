@@ -23,8 +23,23 @@ describe("breakpoints", () => {
   });
 });
 
-// CSS cannot share breakpoint values, so every @media width in src/ui must be
-// one of the breakpoints (or one MUI would produce from them)
+// CSS cannot share breakpoint values, so every number in an @media query in
+// src/ui must be one of the breakpoints (or one MUI builds from them), in px,
+// in any range form: min-width, width >= x, x <= width.
+const allowed = new Set(
+  Object.values(breakpoints).flatMap((v) => [v, v - 0.05]),
+);
+
+const badMediaNumbers = (css) =>
+  [...css.matchAll(/@media([^{]*)\{/g)]
+    .flatMap(([, prelude]) =>
+      [...prelude.matchAll(/(\d+(?:\.\d+)?)([a-z%]*)/g)].map(([, n, unit]) => ({
+        n: Number(n),
+        unit,
+      })),
+    )
+    .filter(({ n, unit }) => unit !== "px" || !allowed.has(n));
+
 describe("literal media queries in src/ui", () => {
   const dir = import.meta.dirname;
   const files = Object.fromEntries(
@@ -32,19 +47,24 @@ describe("literal media queries in src/ui", () => {
       .filter((f) => f.endsWith(".css"))
       .map((f) => [`./${f}`, readFileSync(path.join(dir, f), "utf8")]),
   );
-  const allowed = new Set(
-    Object.values(breakpoints).flatMap((v) => [v, v - 0.05]),
-  );
 
   it("finds the css files", () => {
     expect(Object.keys(files)).toContain("./tokens.css");
   });
 
   it.each(Object.entries(files))("%s only uses breakpoint widths", (_, css) => {
-    const widths = [
-      ...String(css).matchAll(/(?:[<>]=?|(?:min|max)-width:)\s*([\d.]+)px/g),
-    ];
-    widths.forEach(([, px]) => expect(allowed).toContain(Number(px)));
+    expect(badMediaNumbers(css)).toEqual([]);
+  });
+
+  it("catches bad queries in every range form", () => {
+    const bad = (q) => badMediaNumbers(`@media ${q} { a { top: 0 } }`);
+    expect(bad("(min-width: 600px)")).toEqual([]);
+    expect(bad("(width >= 959.95px)")).toEqual([]);
+    expect(bad("(960px <= width)")).toEqual([]);
+    expect(bad("(601px <= width)")).toHaveLength(1);
+    expect(bad("(width >= 40em)")).toHaveLength(1);
+    expect(bad("(max-width: 37.5rem)")).toHaveLength(1);
+    expect(bad("(min-width: 600)")).toHaveLength(1);
   });
 });
 

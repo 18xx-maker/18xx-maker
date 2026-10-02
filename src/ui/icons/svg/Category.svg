@@ -1,5 +1,1 @@
-<svg fill="currentColor" width="1em" height="1em" viewBox="0 0 24 24">
-  <path d="m12 2-5.5 9h11z"/>
-  <circle cx="17.5" cy="17.5" r="4.5"/>
-  <path d="M3 13.5h8v8H3z"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="m12 2-5.5 9h11z"></path><circle cx="17.5" cy="17.5" r="4.5"></circle><path d="M3 13.5h8v8H3z"></path></svg>

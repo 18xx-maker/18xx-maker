@@ -108,6 +108,18 @@
     "extends": [
       "stylelint-config-standard"
     ],
+    "overrides": [
+      {
+        "files": [
+          "src/ui/**/*.css"
+        ],
+        "rules": {
+          "selector-disallowed-list": [
+            "/^(\\*|html|body|button|svg|img)($|[\\s>+~.:#\\[])/"
+          ]
+        }
+      }
+    ],
     "ignoreFiles": [
       "coverage/**/*",
       "dist/**/*",
