@@ -223,6 +223,7 @@
     }
   },
   "dependencies": {
+    "@base-ui/react": "1.8.0",
     "archiver": "^7.0.1",
     "bluebird": "^3.7.2",
     "chalk": "^4.1.2",
