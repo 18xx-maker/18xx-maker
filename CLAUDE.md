@@ -71,3 +71,63 @@ Conventions:
   early warning for React deprecations.
 - Print pixel screenshots are only stable on one OS and Chromium build, so keep
   any such test Linux-only and pin the Chromium version.
+
+## Exporting (CLI and app)
+
+PNG, PDF and Board18 export share one code path in `src/export` (plain ES
+modules: no React, DOM, `fs` or Vite aliases, imported as `#export/*`). The
+CLI (`src/cli/export*.js`, Playwright) and the app (`electron/main`,
+`webContents.debugger`) only drive a browser page. Do not put planning, naming,
+sizing or packaging logic in either surface.
+
+- **Adding or changing an export option** touches all of these in one change:
+  the `exports` field in `src/schemas/game.schema.json` (copy it to
+  `public/schemas`, give it a description, keep `additionalProperties: false`),
+  `resolveExportOptions` in `src/export/options.js`, a CLI flag, a control in
+  `ExportOptions.jsx` (strings in `src/locales/en.json`), the docs
+  (`src/docs/games/exports.en.md`, `src/docs/output/*.en.md`,
+  `src/cli/README.md`, `DEVELOPMENT.md`) and tests.
+- **Precedence is built-in defaults, then the game file's `exports`, then the
+  user's choice** (CLI flag, user config, options panel). Never give a commander
+  option a default that hides the game file, and give every boolean a way to turn
+  it off (`--no-paginated`, `--variation all`).
+- **Render mode** (`getRenderInput()`, `window.__RENDER_INPUT__`) must never
+  write localStorage, add recents, send analytics or call app APIs. Games are
+  injected as `render:<id>`.
+- **Electron IPC:** validate the sender (main window and app URL) on every
+  export channel, honor an output folder only if the user chose it in the
+  dialog, and keep names inside the output folder (`insideFolder`). Capture
+  windows get only the minimal preload (`renderInput`), an in-memory partition,
+  and blocked navigation.
+- Electron's debugger has no `Page.printToPDF`; `src/export/window.js` answers
+  it with `webContents.printToPDF`. Hidden windows need
+  `backgroundThrottling: false`.
+- File names are the slugged title (`titleToFilename`); CLI output folders and
+  the b18 box keep the game id.
+
+### Verifying export changes
+
+- Print output stays the contract: snapshots must not change.
+- `node scripts/export-golden.mjs 18Test` compares raw CDP capture against
+  `setViewportSize`/`page.pdf` (b18 pixel-identical, PDF page counts and sizes).
+  Per-page PDF images need `pdftoppm` (Linux).
+- `e2e/cli.spec.js` runs the real CLI. The real-Electron smoke test is opt-in:
+  `pnpm build:app && E2E_ELECTRON=1 pnpm exec playwright test e2e/electron.spec.js`.
+  Run it after any change to `electron/`, the preload or render mode; compiling
+  is not enough (it caught bugs that unit tests with fake CDP targets missed).
+- Run the CLI from a checkout path with no dot folder for a baseline: express
+  `sendFile` 404s on absolute paths containing one (worktrees live in
+  `.claude/worktrees`), so use `root` as `startExpress` does.
+
+## Working in this repo
+
+- Large work: implement phase by phase with sub-agents, commit per phase, then
+  run independent correctness, security and test-gap reviews and fix their
+  confirmed findings before pushing. Each fix gets a test that fails without it.
+- Run `pnpm lint`, `pnpm validate`, `CI=1 pnpm test:run` and
+  `pnpm build && pnpm test:e2e` before pushing.
+- Commit messages and PR descriptions carry no AI attribution. PR descriptions
+  list behavior changes for release notes and what was not verified (other OSes,
+  packaged app, CI wiring).
+- If commit signing fails with a 1Password error, ask the user to unlock it; do
+  not disable signing.
