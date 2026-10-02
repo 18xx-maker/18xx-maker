@@ -200,6 +200,7 @@ const Token = ({
                 x={start}
                 y={start}
                 preserveAspectRatio="xMidYMid slice"
+                style={{ overflow: "hidden" }}
                 height={size}
                 width={size}
               />,
@@ -236,6 +237,7 @@ const Token = ({
                 x={start}
                 y={start}
                 preserveAspectRatio="xMidYMid slice"
+                style={{ overflow: "hidden" }}
                 height={size}
                 width={size}
               />,

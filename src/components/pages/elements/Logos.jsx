@@ -59,7 +59,11 @@ const Logos = () => {
             size={{ xs: 6, sm: 4, lg: 2 }}
             style={{ overflow: "hidden" }}
           >
-            <Component width="100%" height="100px" />
+            <Component
+              width="100%"
+              height="100px"
+              style={{ overflow: "hidden" }}
+            />
             <Typography variant="subtitle1" align="center">
               {logo}
             </Typography>
