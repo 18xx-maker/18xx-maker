@@ -1,5 +1,5 @@
-const AxeBuilder = require("@axe-core/playwright").default;
-const { expect, test } = require("@playwright/test");
+import AxeBuilder from "@axe-core/playwright";
+import { expect, test } from "@playwright/test";
 
 // Known accessibility problems that are not fixed yet, found by the first run
 // of this suite. Keyed by page name, each entry is an axe rule plus the css

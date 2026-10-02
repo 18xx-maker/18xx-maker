@@ -1,4 +1,4 @@
-const { expect, test } = require("@playwright/test");
+import { expect, test } from "@playwright/test";
 
 // The web build shows a print button (the electron app shows the export
 // button instead) that calls window.print()

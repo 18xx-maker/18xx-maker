@@ -1,4 +1,4 @@
-const { expect, test } = require("@playwright/test");
+import { expect, test } from "@playwright/test";
 
 test("the app nav reaches the games list and the docs", async ({ page }) => {
   await page.goto("/");

@@ -217,9 +217,6 @@ Notes:
   already listening there is not reused unless `E2E_REUSE_SERVER=1`, so a
   leftover preview from another checkout is never tested by accident (the run
   fails with the port in use instead).
-- Playwright 1.49 hangs loading ES modules on Node 24, so the config
-  (`playwright.config.cjs`) and the specs are CommonJS (`e2e/package.json`).
-  They can become ES modules after upgrading Playwright to 1.55 or newer.
 - Chromium has the file system access API, which opens a native file picker
   that Playwright cannot drive. `e2e/load.spec.js` covers both flows: one test
   removes `window.showOpenFilePicker` so the app uses the file input flow that
