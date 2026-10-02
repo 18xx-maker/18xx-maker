@@ -4,8 +4,8 @@ import Charter from "@/components/Charter";
 import PageSetup from "@/components/PageSetup";
 
 import { useConfig, useGame } from "@/hooks";
-import { getCharterData } from "@/util";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
+import { getSingleCharterData } from "@/util/sizes";
 
 const Charters = () => {
   const { config } = useConfig();
@@ -25,10 +25,7 @@ const Charters = () => {
     override,
     selection,
   );
-  charters["cutlines"] = 0;
-  charters["bleed"] = 0;
-  charters["border"] = 0;
-  let data = getCharterData(charters, paper);
+  let data = getSingleCharterData(charters, paper);
   let company = gameCompanies[index];
 
   let css = `

@@ -7,6 +7,7 @@ import ColorContext from "@/context/ColorContext";
 import { tiles as tileDefs } from "@/data";
 import { useConfig, useGame } from "@/hooks";
 import { getTile } from "@/util";
+import { getTileScale } from "@/util/sizes";
 
 const TileSheet = () => {
   const { config } = useConfig();
@@ -20,7 +21,7 @@ const TileSheet = () => {
 
   let tile = getTile(tileDefs, game.tiles, id);
 
-  let scale = hexWidth / 150;
+  let scale = getTileScale(hexWidth);
 
   return (
     <ColorContext.Provider value="tile">
