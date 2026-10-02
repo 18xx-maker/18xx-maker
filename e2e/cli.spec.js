@@ -27,6 +27,16 @@ const pages = (file) =>
       .matchAll(/\/Type\s*\/Page\b(?!s)/g),
   ].length;
 
+// The alpha of the top left pixel of a png, read by the browser
+const cornerAlpha = (page, file) =>
+  page.evaluate(async (base64) => {
+    const blob = await (await fetch(`data:image/png;base64,${base64}`)).blob();
+    const canvas = new OffscreenCanvas(1, 1);
+    const context = canvas.getContext("2d");
+    context.drawImage(await createImageBitmap(blob), 0, 0);
+    return context.getImageData(0, 0, 1, 1).data[3];
+  }, fs.readFileSync(file).toString("base64"));
+
 let out;
 
 test.beforeEach(() => {
@@ -98,6 +108,51 @@ test.describe("maker export 18Test", () => {
       height: 1575,
       pixelsPerMeter: 5906,
     });
+  });
+
+  test("writes a card at its size in inches", () => {
+    fs.writeFileSync(
+      path.join(out, "poker.json"),
+      JSON.stringify({ cards: { layout: "free", width: 250, height: 350 } }),
+    );
+    const result = maker(
+      out,
+      "18Test",
+      "--format",
+      "png",
+      "--docs",
+      "cards",
+      "--config",
+      "poker.json",
+    );
+    expect(result.status, result.stderr).toBe(0);
+
+    // 2.5 by 3.5 inches at 300 dpi
+    expect(png(path.join(out, "18Test/18test-card-train-1-2.png"))).toEqual({
+      width: 750,
+      height: 1050,
+      pixelsPerMeter: 11811,
+    });
+  });
+
+  test("makes tiles transparent and the background not", async ({ page }) => {
+    const result = maker(
+      out,
+      "18Test",
+      "--format",
+      "png",
+      "--docs",
+      "background,tiles",
+    );
+    expect(result.status, result.stderr).toBe(0);
+
+    const dir = path.join(out, "18Test");
+    expect(await cornerAlpha(page, path.join(dir, "18test-tile-1.png"))).toBe(
+      0,
+    );
+    expect(
+      await cornerAlpha(page, path.join(dir, "18test-background.png")),
+    ).toBe(255);
   });
 
   test("exports a game file", () => {

@@ -229,6 +229,34 @@ describe("export options", () => {
     ).toBeChecked();
   });
 
+  it("exports the current layout when every layout is turned off", async () => {
+    const { user, panel } = await openOptions(undefined, {
+      config: { export: { allLayouts: true } },
+    });
+    await user.click(
+      within(panel).getByRole("switch", { name: "Every layout of a sheet" }),
+    );
+    await user.click(exportButton(panel));
+
+    await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
+    const names = requested().jobs.map(({ path }) => path);
+    expect(names).toContain("18test-cards.pdf");
+    expect(names).not.toContain("18test-cards-free.pdf");
+  });
+
+  it("needs a Board18 version and author for a box", async () => {
+    const { user, panel } = await openOptions();
+    await user.click(checkbox(panel, "Board18 box"));
+
+    await user.clear(within(panel).getByLabelText("Board18 author"));
+    expect(exportButton(panel)).toBeDisabled();
+    await user.type(within(panel).getByLabelText("Board18 author"), "Me");
+    expect(exportButton(panel)).toBeEnabled();
+
+    await user.clear(within(panel).getByLabelText("Board18 version"));
+    expect(exportButton(panel)).toBeDisabled();
+  });
+
   it("shows the export in progress, and cancels it", async () => {
     let finish;
     api.export.mockReturnValue(new Promise((resolve) => (finish = resolve)));
