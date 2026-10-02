@@ -111,7 +111,7 @@ pnpm build
 pnpm test:e2e
 
 # Check the web build (after pnpm build) against the bundle size budget, and
-# that no new files import the legacy @mui/styles
+# that nothing imports the legacy @mui/styles
 pnpm check:bundle
 pnpm check:mui-styles
 

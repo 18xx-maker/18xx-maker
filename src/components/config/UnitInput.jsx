@@ -6,7 +6,7 @@ import Select from "@mui/material/Select";
 
 import { keys, map } from "ramda";
 
-import { Box, TextField } from "@/ui";
+import { TextField } from "@/ui";
 import styles from "./UnitInput.module.css";
 
 const allUnits = {
@@ -50,7 +50,7 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
   };
 
   return (
-    <Box className={styles.configItem}>
+    <div className={styles.configItem}>
       <TextField
         id={name}
         name={name}
@@ -78,7 +78,7 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
           )}
         </Select>
       </FormControl>
-    </Box>
+    </div>
   );
 };
 

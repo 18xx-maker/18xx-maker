@@ -1,10 +1,7 @@
-// The number of files importing @mui/styles (legacy JSS makeStyles, the React
-// 19 blocker) may only go down. When you migrate files, lower MAX to the new
-// count in the same PR.
+// Nothing may import @mui/styles (legacy JSS makeStyles, a React 19 blocker).
+// It is not a dependency any more, this keeps it from coming back.
 import fs from "node:fs";
 import path from "node:path";
-
-const MAX = 0;
 
 const root = path.join(import.meta.dirname, "..");
 const files = [];
@@ -25,13 +22,9 @@ const users = files.filter((file) =>
   ),
 );
 
-console.log(`${users.length} files import @mui/styles (max ${MAX})`);
-if (users.length > MAX) {
-  console.error("New @mui/styles usage is not allowed. Offending set:");
+if (users.length > 0) {
+  console.error("@mui/styles is not allowed. Imported by:");
   for (const file of users) console.error(`  ${path.relative(root, file)}`);
   process.exit(1);
 }
-if (users.length < MAX) {
-  console.error(`Lower MAX in scripts/check-mui-styles.js to ${users.length}`);
-  process.exit(1);
-}
+console.log("no files import @mui/styles");

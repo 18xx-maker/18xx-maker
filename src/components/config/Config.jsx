@@ -25,7 +25,7 @@ import { companyThemes, mapThemes } from "@/data";
 import defaultConfig from "@/defaults.json";
 import { useConfig } from "@/hooks";
 import schema from "@/schemas/config.schema.json";
-import { Box, Button, Divider, Typography } from "@/ui";
+import { Button, Divider, Typography } from "@/ui";
 import styles from "./Config.module.css";
 
 export const getPath = split(".");
@@ -78,8 +78,8 @@ const Config = () => {
     setConfig({ ...config, [event.target.name]: event.target.value });
 
   return (
-    <Box>
-      <Box className={styles.configSection}>
+    <div>
+      <div className={styles.configSection}>
         <Typography variant="h5">Colors and Companies</Typography>
         <FormControl variant="filled" className={styles.configItem}>
           <InputLabel id="theme-label">Theme</InputLabel>
@@ -141,22 +141,22 @@ const Config = () => {
           label="Override Companies"
           description="This lets you change the companies for a game to a set list that are defined in [the code](https://github.com/18xx-maker/18xx-maker/tree/master/src/data/companies)"
         />
-      </Box>
+      </div>
 
       <Divider />
 
-      <Box className={styles.configSection}>
+      <div className={styles.configSection}>
         <Typography variant="h5">Export</Typography>
         <Input
           name="export.allLayouts"
           label="Export all layout options"
           description="When exporting pdf components with multiple layout options, should we just export all of them?"
         />
-      </Box>
+      </div>
 
       <Divider />
 
-      <Box className={styles.configSection}>
+      <div className={styles.configSection}>
         <Typography variant="h5">Layout</Typography>
         <Input
           name="margin"
@@ -189,11 +189,11 @@ const Config = () => {
           For reference US Letter size would be 8.5in by 11in. A4 is 210mm by
           297mm.
         </Typography>
-      </Box>
+      </div>
 
       <Divider />
 
-      <Box className={styles.configSection}>
+      <div className={styles.configSection}>
         <Typography variant="h5">Tokens</Typography>
         <Input
           name="tokens.layout"
@@ -223,11 +223,11 @@ const Config = () => {
           label="Reverse Market Tokens"
           description="Whether to print token stickers for the reverse side of company market tokens. All will print a reverse token for all market tokens (normally 3 or 2 depending on the games settings)."
         />
-      </Box>
+      </div>
 
       <Divider />
 
-      <Box className={styles.configSection}>
+      <div className={styles.configSection}>
         <Typography variant="h5">Maps</Typography>
         <Input
           name="coords"
@@ -262,11 +262,11 @@ const Config = () => {
         {/* This option isn't working yet, will add later */}
         {/* <Checkbox name="plainMapDestinations" label="Plain Map Destination Spaces" */}
         {/*           description="This sets all destination spots on maps to be empty white cities with black company text:" /> */}
-      </Box>
+      </div>
 
       <Divider />
 
-      <Box className={styles.configSection}>
+      <div className={styles.configSection}>
         <Typography variant="h5">Tiles</Typography>
         <Input
           name="tiles.id"
@@ -301,11 +301,11 @@ const Config = () => {
           description="This says whether to separate different colors with spaces needed to prevent bleed crossover. Leave on unless you really know you want it."
         />
         <PinConfig prefix="tiles" />
-      </Box>
+      </div>
 
       <Divider />
 
-      <Box className={styles.configSection}>
+      <div className={styles.configSection}>
         <Typography variant="h5">Market</Typography>
         <Input
           name="stock.cell.width"
@@ -359,11 +359,11 @@ const Config = () => {
           label="Display Market Round Tracker"
           description="Whether or not to show the round tracker on markets. Requires the game file to specify the location."
         />
-      </Box>
+      </div>
 
       <Divider />
 
-      <Box className={styles.configSection}>
+      <div className={styles.configSection}>
         <Typography variant="h5">Charters</Typography>
         <Input
           name="charters.style"
@@ -418,11 +418,11 @@ const Config = () => {
           description='Whether or not to put a black border against the color section of the charter. Only relevent to "color" charters. Always put on white color charters.'
         />
         <PinConfig prefix="charters" />
-      </Box>
+      </div>
 
       <Divider />
 
-      <Box className={styles.configSection}>
+      <div className={styles.configSection}>
         <Typography variant="h5">Cards</Typography>
         <Input
           name="cards.shareStyle"
@@ -465,22 +465,22 @@ const Config = () => {
           description='Whether or not to put a black border against the color section of the share. Only relevent to "gmt" and "left" shares as well as trains. Always put on white color cards.'
         />
         <PinConfig prefix="cards" />
-      </Box>
+      </div>
 
       <Divider />
 
-      <Box className={styles.configSection}>
+      <div className={styles.configSection}>
         <Typography variant="h5">Privates</Typography>
         <Input
           name="privates.style"
           label="Private Style"
           description="Different styles of private cards. Small uses small icons while big uses bigger ones."
         />
-      </Box>
+      </div>
 
       <Divider />
 
-      <Box className={styles.configSection}>
+      <div className={styles.configSection}>
         <Typography variant="h5">Trains</Typography>
         <Input
           name="trains.style"
@@ -492,11 +492,11 @@ const Config = () => {
           label="Train Images"
           description="Whether or not to put some train images on the cards"
         />
-      </Box>
+      </div>
 
       <Divider />
 
-      <Box className={styles.configSection}>
+      <div className={styles.configSection}>
         <Typography variant="h5">Currency</Typography>
         <Typography variant="body1">
           This lets you turn on currency symbols for each item individually.
@@ -568,11 +568,11 @@ const Config = () => {
           label="Value"
           description="Values on maps and track tiles"
         />
-      </Box>
+      </div>
 
       <Divider />
 
-      <Box className={styles.configSection}>
+      <div className={styles.configSection}>
         <Typography variant="h5">Data</Typography>
         <Typography variant="body1">
           You can remove any custom settings and revert back to the defaults
@@ -596,8 +596,8 @@ const Config = () => {
         <File data={diff(defaultConfig, config)} filename="config.json">
           Download config.json
         </File>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 

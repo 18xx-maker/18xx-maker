@@ -31,7 +31,7 @@ const Fab = forwardRef(
         className,
       ),
     });
-    return <Component ref={ref} data-chrome="fab" {...base} {...props} />;
+    return <Component ref={ref} {...base} {...props} data-chrome="fab" />;
   },
 );
 Fab.displayName = "Fab";

@@ -1,7 +1,6 @@
 import { useLocation, useNavigate } from "react-router";
 
 import Drawer from "@mui/material/Drawer";
-import Fab from "@mui/material/Fab";
 import Slide from "@mui/material/Slide";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -10,6 +9,7 @@ import {
   Button,
   ChevronRight as ChevronRightIcon,
   Settings as ConfigIcon,
+  Fab,
   Toolbar,
 } from "@/ui";
 import { useBooleanParam } from "@/util/query";
@@ -49,7 +49,6 @@ const ConfigDrawer = () => {
         >
           <Fab
             data-testid="config-fab"
-            position="sticky"
             className={styles.configButton}
             color="secondary"
             onClick={toggleConfig}

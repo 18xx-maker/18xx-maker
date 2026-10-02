@@ -1,4 +1,4 @@
-.container {
+:where(.container) {
   display: flex;
   flex-flow: row wrap;
   box-sizing: border-box;
@@ -8,7 +8,7 @@
 
 /* --grid-<breakpoint> is set inline. A breakpoint without a size inherits the
    next smaller one, like Grid2 */
-.item {
+:where(.item) {
   --size: var(--grid-xs, 12);
 
   box-sizing: border-box;
@@ -20,19 +20,19 @@
 }
 
 @media (width >= 600px) {
-  .item {
+  :where(.item) {
     --size: var(--grid-sm, var(--grid-xs, 12));
   }
 }
 
 @media (width >= 960px) {
-  .item {
+  :where(.item) {
     --size: var(--grid-md, var(--grid-sm, var(--grid-xs, 12)));
   }
 }
 
 @media (width >= 1280px) {
-  .item {
+  :where(.item) {
     --size: var(--grid-lg, var(--grid-md, var(--grid-sm, var(--grid-xs, 12))));
   }
 }

@@ -1,6 +1,28 @@
-.root {
-  min-width: 64px;
+/* Starts with the reset of a clickable primitive (MUI ButtonBase-root, in :where()
+   so any class wins whatever order the CSS loads in), then the component. The
+   reset is repeated in Button, IconButton, Fab and List because composing it
+   from one file does not order the CSS reliably. */
+:where(.root) {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+  outline: 0;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  print-color-adjust: exact;
   border-radius: var(--radius);
+  min-width: 64px;
   font-family: var(--font-family);
   font-size: 0.875rem;
   font-weight: 500;
@@ -14,12 +36,8 @@
     color var(--duration-short) var(--ease-in-out);
 }
 
-.root:hover {
-  text-decoration: none;
-}
-
 /* Colors only set variables, the variants use them */
-.primary {
+:where(.primary) {
   --c: var(--palette-primary-main);
   --c-dark: var(--palette-primary-dark);
   --c-contrast: var(--palette-primary-contrast);
@@ -27,7 +45,7 @@
   --c-border: color-mix(in srgb, var(--palette-primary-main) 50%, transparent);
 }
 
-.secondary {
+:where(.secondary) {
   --c: var(--palette-secondary-main);
   --c-dark: var(--palette-secondary-dark);
   --c-contrast: var(--palette-secondary-contrast);
@@ -39,94 +57,95 @@
   );
 }
 
-.inherit {
+:where(.inherit) {
   --c: currentcolor;
-  --c-dark: var(--palette-grey-a100);
   --c-contrast: currentcolor;
   --c-hover: color-mix(in srgb, var(--palette-text-primary) 4%, transparent);
   --c-border: currentcolor;
 }
 
-.text {
+:where(.text) {
   padding: 6px 8px;
   color: var(--c);
 }
 
-.outlined {
+:where(.outlined) {
   border: 1px solid var(--c-border);
   padding: 5px 15px;
   color: var(--c);
 }
 
-.contained {
+:where(.contained) {
   padding: 6px 16px;
   background-color: var(--c);
   box-shadow: var(--shadow-2);
   color: var(--c-contrast);
 }
 
-.contained.inherit {
-  background-color: var(--palette-grey-300);
-}
-
 @media (hover: hover) {
-  .text:hover {
+  :where(.text:hover) {
     background-color: var(--c-hover);
   }
 
-  .outlined:hover {
+  :where(.outlined:hover) {
     border-color: var(--c);
     background-color: var(--c-hover);
   }
 
-  .contained:hover {
+  :where(.contained:hover) {
     background-color: var(--c-dark);
     box-shadow: var(--shadow-4);
   }
 }
 
-.contained:active {
+:where(.contained:active) {
   box-shadow: var(--shadow-8);
 }
 
-/* Replaces MUI's focus ripple */
-.root:focus-visible {
+/* Replaces MUI's focus ripple: a translucent fill (text and outlined) and an
+   outline, which keeps the contrast */
+:where(.root:focus-visible) {
   outline: 2px solid var(--c-border);
   outline-offset: 2px;
 }
 
-.contained:focus-visible {
+:where(.text:focus-visible, .outlined:focus-visible) {
+  background-color: color-mix(in srgb, currentcolor 30%, transparent);
+}
+
+:where(.contained:focus-visible) {
   box-shadow: var(--shadow-6);
 }
 
-.startIcon {
+:where(.startIcon) {
   display: inherit;
   margin-right: 8px;
   margin-left: -4px;
 }
 
-.endIcon {
+:where(.endIcon) {
   display: inherit;
   margin-right: -4px;
   margin-left: 8px;
 }
 
+/* Beats the icon's own size */
 .startIcon > :first-child,
 .endIcon > :first-child {
   font-size: 20px;
 }
 
-.disabled {
+:where(.disabled) {
   color: var(--palette-action-disabled);
   pointer-events: none;
   cursor: default;
 }
 
-.outlined.disabled {
+:where(.outlined.disabled) {
   border-color: var(--palette-action-disabled-background);
 }
 
-.contained.disabled {
+:where(.contained.disabled) {
   background-color: var(--palette-action-disabled-background);
   box-shadow: none;
 }

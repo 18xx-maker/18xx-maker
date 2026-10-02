@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useMatch } from "react-router";
 
-import Divider from "@mui/material/Divider";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Menu from "@mui/material/Menu";
@@ -15,6 +14,7 @@ import { assoc, flatten, forEach, is, keys, map, range } from "ramda";
 import { useConfig, useGame } from "@/hooks";
 import schema from "@/schemas/config.schema.json";
 import {
+  Divider,
   Collections as ExportIcon,
   Fab,
   PictureAsPdf as PdfIcon,

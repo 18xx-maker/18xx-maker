@@ -247,7 +247,6 @@
     "@ianvs/prettier-plugin-sort-imports": "^4.4.0",
     "@mui/icons-material": "^6.1.8",
     "@mui/material": "^6.1.8",
-    "@mui/styles": "^6.1.8",
     "@playwright/test": "1.62.0",
     "@reduxjs/toolkit": "^2.3.0",
     "@storybook/addon-essentials": "^8.4.5",

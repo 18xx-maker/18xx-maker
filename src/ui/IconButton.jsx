@@ -6,7 +6,7 @@ import cx from "./cx";
 
 // color: "default" (the action color) | "inherit"
 // size: "medium" (default) | "small"
-// edge: "start" | "end" | false
+// edge: "start" | false
 const IconButton = forwardRef(
   (
     {
@@ -31,7 +31,7 @@ const IconButton = forwardRef(
         styles.root,
         color === "inherit" && styles.inherit,
         size === "small" && styles.small,
-        edge && styles[`edge-${edge}`],
+        edge === "start" && styles["edge-start"],
         disabled && styles.disabled,
         className,
       ),

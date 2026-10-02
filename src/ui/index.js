@@ -6,7 +6,6 @@ export * from "./icons";
 export { default as AppBar } from "./AppBar";
 export { default as Avatar } from "./Avatar";
 export { default as AvatarGroup } from "./AvatarGroup";
-export { default as Box } from "./Box";
 export { default as Button } from "./Button";
 export { default as Checkbox } from "./Checkbox";
 export { default as Container } from "./Container";

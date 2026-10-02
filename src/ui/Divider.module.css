@@ -1,4 +1,4 @@
-.root {
+:where(.root) {
   flex-shrink: 0;
   margin: 0;
   border-width: 0 0 thin;

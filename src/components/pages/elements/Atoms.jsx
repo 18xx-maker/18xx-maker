@@ -9,7 +9,7 @@ import { addIndex, chain, find, map, propEq } from "ramda";
 import Hex from "@/components/Hex";
 import Svg from "@/components/Svg";
 import { SyntaxHighlighter, style } from "@/components/SyntaxHighlighter";
-import { Box, Container, Grid, Paper, Typography } from "@/ui";
+import { Container, Grid, Paper, Typography } from "@/ui";
 import { useStringParam } from "@/util/query";
 import pageStyles from "../page.module.css";
 import styles from "./Atoms.module.css";
@@ -1002,7 +1002,7 @@ const Atoms = () => {
             className={styles.atom}
             size={{ xs: 12, sm: 6, lg: 4 }}
           >
-            <Box className={styles.hex}>
+            <div className={styles.hex}>
               <Svg
                 width="175.205"
                 height="152"
@@ -1010,7 +1010,7 @@ const Atoms = () => {
               >
                 <Hex hex={h} id={`${id}`} border={true} bleed={true} />
               </Svg>
-            </Box>
+            </div>
             <SyntaxHighlighter
               style={style}
               customStyle={{ margin: "1em 0" }}

@@ -56,16 +56,17 @@ export const ListItemButton = forwardRef(
 ListItemButton.displayName = "ListItemButton";
 
 export const ListItemIcon = forwardRef(({ className, ...props }, ref) => (
-  <div ref={ref} className={cx(styles.icon, className)} {...props} />
+  <span ref={ref} className={cx(styles.icon, className)} {...props} />
 ));
 ListItemIcon.displayName = "ListItemIcon";
 
-// The text is primary, or the children when there is no primary
+// The text is primary, or the children when there is no primary. Spans all
+// the way down, so a ListItemButton that is a <button> holds phrasing content only.
 export const ListItemText = forwardRef(
   ({ primary, secondary, children, className, ...props }, ref) => {
     const text = primary ?? children;
     return (
-      <div
+      <span
         ref={ref}
         className={cx(
           styles.text,
@@ -80,11 +81,16 @@ export const ListItemText = forwardRef(
           </Typography>
         )}
         {secondary != null && (
-          <Typography variant="body2" color="textSecondary" display="block">
+          <Typography
+            component="span"
+            variant="body2"
+            color="textSecondary"
+            display="block"
+          >
             {secondary}
           </Typography>
         )}
-      </div>
+      </span>
     );
   },
 );

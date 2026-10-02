@@ -119,7 +119,24 @@ test("print media frees the background page's scroll box", async ({ page }) => {
   await page.goto("/games/18Test/background");
   const box = page.locator('[data-chrome="background"]');
   const overflow = () => box.evaluate((el) => getComputedStyle(el).overflowX);
+  const frame = () =>
+    box.evaluate((el) => {
+      const style = getComputedStyle(el);
+      return {
+        left: style.marginLeft,
+        right: style.marginRight,
+        fillsParent:
+          Math.abs(
+            el.getBoundingClientRect().width - el.parentElement.clientWidth,
+          ) < 1,
+      };
+    });
   expect(await overflow()).toBe("auto");
   await page.emulateMedia({ media: "print" });
   expect(await overflow()).toBe("visible");
+  expect(await frame()).toEqual({
+    left: "0px",
+    right: "0px",
+    fillsParent: true,
+  });
 });

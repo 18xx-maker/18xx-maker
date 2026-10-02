@@ -776,7 +776,6 @@ footer a:hover {
   [data-chrome="fab"],
   .MuiDrawer-root,
   .MuiSnackbar-root,
-  .MuiFab-root,
   .MuiTooltip-popper,
   .WIP {
     display: none !important;

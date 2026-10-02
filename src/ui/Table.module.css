@@ -1,35 +1,35 @@
-.table {
+:where(.table) {
   display: table;
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
 }
 
-.tableSticky {
+:where(.tableSticky) {
   border-collapse: separate;
 }
 
-.container {
+:where(.container) {
   width: 100%;
   overflow-x: auto;
 }
 
-.head {
+:where(.head) {
   display: table-header-group;
 }
 
-.body {
+:where(.body) {
   display: table-row-group;
 }
 
-.row {
+:where(.row) {
   display: table-row;
   outline: 0;
   color: inherit;
   vertical-align: middle;
 }
 
-.cell {
+:where(.cell) {
   display: table-cell;
   border-bottom: 1px solid rgb(224 224 224);
   padding: 16px;
@@ -43,35 +43,27 @@
   vertical-align: inherit;
 }
 
-.cellHead {
+:where(.cellHead) {
   font-weight: 500;
   line-height: 1.5rem;
 }
 
-.cellBody {
+:where(.cellBody) {
   font-weight: 400;
 }
 
-.cellSmall {
+:where(.cellSmall) {
   padding: 6px 16px;
 }
 
-.cellSticky {
+:where(.cellSticky) {
   position: sticky;
   top: 0;
   z-index: 2;
   background-color: var(--palette-background-default);
 }
 
-.align-left {
-  text-align: left;
-}
-
-.align-center {
-  text-align: center;
-}
-
-.align-right {
+:where(.align-right) {
   flex-direction: row-reverse;
   text-align: right;
 }

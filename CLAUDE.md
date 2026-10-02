@@ -51,7 +51,8 @@ Conventions:
 
 ## Upgrade notes
 
-- `@mui/styles` (legacy JSS `makeStyles`, 22 files in `src`) is unsupported
+- `@mui/styles` (legacy JSS `makeStyles`) is gone from `src` and the
+  dependencies (`pnpm check:mui-styles` keeps it out); it was unsupported
   upstream on React 19, but a spike found React 19.3 runs on the current stack
   in the component tests and e2e (not known broken). The peers
   `@testing-library/react`, `react-redux`, `@reduxjs/toolkit` and

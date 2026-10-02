@@ -60,8 +60,8 @@ number that is not one of them, or a unit other than px.
   App code imports `@/ui` before its own `*.module.css`, which keeps that
   order. A default a consumer must always be able to override is written in
   `:where()` (the `TextField` root is one).
-- No file imports `@mui/styles` any more (`scripts/check-mui-styles.js` pins
-  the count at 0), so the JSS rule that used to beat CSS Modules is gone.
+- No file imports `@mui/styles` any more (`scripts/check-mui-styles.js` fails
+  if one comes back), so the JSS rule that used to beat CSS Modules is gone.
 - `coexistence.test.jsx` pins the rest next to real MUI components.
 
 ## Print rules (`src/styles/root.css`, `@media print`)
@@ -69,7 +69,7 @@ number that is not one of them, or a unit other than px.
 That block hides the chrome with `[data-chrome="app-bar"]` and
 `[data-chrome="fab"]` (the `src/ui` AppBar and Fab), and still uses `.Mui*`
 selectors for what is not replaced yet: `.MuiDrawer-root`, `.MuiSnackbar-root`,
-`.MuiTooltip-popper` and `.MuiFab-root` (the config drawer's MUI Fab). It frees
+`.MuiTooltip-popper`. It frees
 the viewport with `[data-chrome="viewport"]` and the background page's wrapper
 with `[data-chrome="background"]`. Leave a `.Mui*` selector alone until the component it names
 is replaced. The PR that replaces one must, in the same PR, swap the selector

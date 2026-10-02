@@ -1,4 +1,4 @@
-.root {
+:where(.root) {
   display: flex;
   position: relative;
   align-items: center;
@@ -8,7 +8,7 @@
 }
 
 @media (width >= 600px) {
-  .root {
+  :where(.root) {
     padding-right: 24px;
     padding-left: 24px;
   }

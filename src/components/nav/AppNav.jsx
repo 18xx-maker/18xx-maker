@@ -15,7 +15,6 @@ import { useLoadedGame } from "@/hooks/game.js";
 import {
   AppBar,
   Settings as AppIcon,
-  Box,
   Button,
   Help as DocumentationIcon,
   Download as DownloadIcon,
@@ -36,7 +35,7 @@ const NavLink = ({ active, to, text, icon }) => {
       variant={active ? "outlined" : "text"}
       disabled={!!active}
       color={active ? "primary" : "inherit"}
-      className={active ? styles.activeButton : undefined}
+      className={active ? styles.activeButton : styles.link}
       startIcon={icon}
       component={Link}
       to={to}
@@ -258,19 +257,19 @@ const AppNav = ({ toggleSideNav }) => {
   };
 
   return (
-    <AppBar data-testid="app-bar" position="sticky" className={styles.appBar}>
+    <AppBar data-testid="app-bar" className={styles.appBar}>
       <Toolbar>
         <MobileMenuButton onClick={toggleSideNav} />
         <Typography className={styles.title} variant="h4" noWrap>
           {t("title")}
         </Typography>
-        <Box className={styles.mobile}>
+        <div className={styles.mobile}>
           <MobileButton onClick={handleMenu} />
           <MobileMenu anchor={menuAnchor} onClose={handleMenuClose} />
-        </Box>
-        <Box className={styles.desktop}>
+        </div>
+        <div className={styles.desktop}>
           <NavMenu />
-        </Box>
+        </div>
       </Toolbar>
     </AppBar>
   );

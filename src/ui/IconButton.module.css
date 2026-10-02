@@ -1,4 +1,24 @@
-.root {
+/* Starts with the reset of a clickable primitive (MUI ButtonBase-root, in :where()
+   so any class wins whatever order the CSS loads in), then the component. The
+   reset is repeated in Button, IconButton, Fab and List because composing it
+   from one file does not order the CSS reliably. */
+:where(.root) {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+  outline: 0;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  print-color-adjust: exact;
   flex: 0 0 auto;
   border-radius: 50%;
   padding: 8px;
@@ -8,33 +28,21 @@
   transition: background-color var(--duration-shortest) var(--ease-in-out);
 }
 
-.inherit {
+:where(.inherit) {
   color: inherit;
 }
 
-.small {
+:where(.small) {
   padding: 5px;
   font-size: 1.125rem;
 }
 
-.edge-start {
+:where(.edge-start) {
   margin-left: -12px;
 }
 
-.edge-end {
-  margin-right: -12px;
-}
-
-.small.edge-start {
-  margin-left: -3px;
-}
-
-.small.edge-end {
-  margin-right: -3px;
-}
-
 @media (hover: hover) {
-  .root:hover {
+  :where(.root:hover) {
     background-color: color-mix(
       in srgb,
       var(--palette-action-active) 4%,
@@ -43,13 +51,14 @@
   }
 }
 
-/* Replaces MUI's focus ripple */
-.root:focus-visible {
+/* Replaces MUI's focus ripple: a translucent fill and an outline */
+:where(.root:focus-visible) {
   outline: 2px solid currentcolor;
   outline-offset: -2px;
+  background-color: color-mix(in srgb, currentcolor 30%, transparent);
 }
 
-.disabled {
+:where(.disabled) {
   background-color: transparent;
   color: var(--palette-action-disabled);
   pointer-events: none;

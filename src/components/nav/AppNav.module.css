@@ -25,6 +25,11 @@
   }
 }
 
+/* Inactive links keep MUI's default button padding (the text variant has 8px) */
+.link {
+  padding: 6px 16px;
+}
+
 /* The current section. Two classes to beat Button's disabled color */
 .desktop .activeButton {
   background-color: var(--palette-background-default);

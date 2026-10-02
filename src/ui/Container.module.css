@@ -1,4 +1,4 @@
-.root {
+:where(.root) {
   box-sizing: border-box;
   display: block;
   width: 100%;
@@ -9,20 +9,20 @@
 }
 
 @media (width >= 600px) {
-  .root {
+  :where(.root) {
     padding-right: 24px;
     padding-left: 24px;
   }
 }
 
 @media (width >= 960px) {
-  .md {
+  :where(.md) {
     max-width: 960px;
   }
 }
 
 @media (width >= 1280px) {
-  .lg {
+  :where(.lg) {
     max-width: 1280px;
   }
 }

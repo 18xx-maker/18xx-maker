@@ -57,7 +57,7 @@ export const TableRow = forwardRef(({ className, ...props }, ref) => (
 ));
 TableRow.displayName = "TableRow";
 
-// align: "left" (default) | "center" | "right"
+// align: "right" (left by default)
 export const TableCell = forwardRef(({ align, className, ...props }, ref) => {
   const { size, stickyHeader } = useContext(TableContext);
   const section = useContext(SectionContext);

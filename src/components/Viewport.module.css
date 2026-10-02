@@ -5,3 +5,8 @@
   transition-duration: var(--duration-shorter);
   transition-property: width, margin-left, margin-right;
 }
+
+/* Focus ring of the keyboard stop that makes the scroll area reachable */
+.viewport:focus-visible {
+  outline-offset: -2px;
+}

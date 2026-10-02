@@ -10,7 +10,7 @@ import Slider from "@mui/material/Slider";
 import { map, uniq, values } from "ramda";
 
 import { tiles } from "@/data";
-import { Box, Paper, TextField, Typography } from "@/ui";
+import { Paper, TextField, Typography } from "@/ui";
 import styles from "./TileFilters.module.css";
 
 const colors = uniq(values(map((t) => t.color, tiles)));
@@ -44,7 +44,7 @@ const TileFilters = ({
       <Typography variant="h6" gutterBottom>
         {t("elements.tiles.filter.title")}
       </Typography>
-      <Box className={styles.filter}>
+      <div className={styles.filter}>
         <FormControl variant="filled">
           <InputLabel id="filter-color-label">
             {t("elements.tiles.filter.color")}
@@ -113,7 +113,7 @@ const TileFilters = ({
             getAriaValueText={(r) => `Revenue from ${r[0]} to ${r[1]}`}
           />
         </FormControl>
-      </Box>
+      </div>
     </Paper>
   );
 };

@@ -1,4 +1,4 @@
-.root {
+:where(.root) {
   display: flex;
   position: relative;
   flex-shrink: 0;
@@ -16,6 +16,6 @@
   user-select: none;
 }
 
-.square {
+:where(.square) {
   border-radius: 0;
 }

@@ -1,6 +1,3 @@
-import base from "./buttonBase.module.css";
-import cx from "./cx";
-
 // What the clickable primitives (Button, IconButton, Fab, ListItemButton) share:
 // the element to render and the attributes that go with it. Mirrors MUI's
 // ButtonBase: a native button by default, an <a> when there is an href, and
@@ -17,7 +14,7 @@ export const buttonProps = ({
   let Component = component;
   if (Component === "button" && (href || to)) Component = "a";
 
-  const props = { className: cx(base.root, className) };
+  const props = { className };
   if (Component === "button") {
     props.type = type === undefined ? "button" : type;
     props.disabled = disabled;

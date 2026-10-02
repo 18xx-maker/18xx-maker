@@ -6,7 +6,6 @@ import Color from "@/components/Color";
 import PageSetup from "@/components/PageSetup";
 import config from "@/defaults.json";
 import { useGame } from "@/hooks/game.js";
-import { Box } from "@/ui";
 import { printableHeight, printableWidth, unitsToCss } from "@/util";
 import styles from "./Background.module.css";
 
@@ -71,7 +70,7 @@ const Background = () => {
   return (
     <Color context="companies">
       {(c) => (
-        <Box data-chrome="background" className={styles.backgroundBox}>
+        <div data-chrome="background" className={styles.backgroundBox}>
           <div
             className="background printElement"
             data-testid={`game-${game.meta.slug}-background`}
@@ -101,7 +100,7 @@ const Background = () => {
             {/* <div className="text">{text}</div> */}
             <PageSetup landscape={false} />
           </div>
-        </Box>
+        </div>
       )}
     </Color>
   );
