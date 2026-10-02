@@ -2,6 +2,8 @@ import { screen, waitFor, within } from "@testing-library/react";
 import axe from "axe-core";
 import { page } from "vitest/browser";
 
+import { DOCS } from "@/export/select.js";
+
 import { renderApp } from "@tests/helpers.jsx";
 
 // The electron preload api, faked. It has to exist before the app modules are
@@ -86,6 +88,10 @@ describe("export options", () => {
       within(panel).getByRole("group", { name: "Documents" }),
     ).getAllByRole("checkbox");
     expect(documents.length).toBeGreaterThan(5);
+    // Only pages of the game, the Board18 images are part of the box
+    expect(documents.map((box) => box.id).sort()).toEqual(
+      DOCS.map((page) => `export-doc-${page}`).sort(),
+    );
     expect(
       documents.every((box) => box.getAttribute("aria-checked") === "true"),
     ).toBe(true);

@@ -1,7 +1,8 @@
 import { games } from "@/data";
 import defaultConfig from "@/defaults.json";
+import { DOCS } from "@/export/select.js";
 import { validateRequest } from "@/export/service.js";
-import { planExport, planSingle } from "@/util/exportPlan";
+import { exportPages, planExport, planSingle } from "@/util/exportPlan";
 
 // 18Test as the app has it loaded
 const game = {
@@ -61,6 +62,12 @@ describe("planExport", () => {
 
 // The renderer plans, the main process checks and runs: what is planned must be
 // a request the main process takes, and survive being sent over IPC
+describe("exportPages", () => {
+  it("only has pages that can be exported, not the Board18 images", () => {
+    expect(exportPages(game, layers()).sort()).toEqual([...DOCS].sort());
+  });
+});
+
 describe("planned requests", () => {
   it("are valid for every format", () => {
     const request = planExport(game, layers(), {

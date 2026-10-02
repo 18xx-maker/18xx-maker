@@ -6,7 +6,7 @@ import { MAX_DPI } from "@/export/capture.js";
 import { documents } from "@/export/documents.js";
 import { exportJobs, fileName, safeName } from "@/export/names.js";
 import { renderSlug } from "@/export/render.js";
-import { docPage, selectDocs } from "@/export/select.js";
+import { DOCS, docPage, selectDocs } from "@/export/select.js";
 import schema from "@/schemas/config.schema.json";
 import { resolveConfig } from "@/util/resolveConfig";
 
@@ -42,7 +42,7 @@ const baseConfig = ({ defaultConfig, userConfig, storedConfig }, game) =>
 export const exportPages = (game, layers) =>
   uniq(
     documents(game, baseConfig(layers, game), exportData(game)).map(docPage),
-  );
+  ).filter((page) => DOCS.includes(page));
 
 // If the config exports every layout of a sheet
 export const allLayouts = (game, layers) =>

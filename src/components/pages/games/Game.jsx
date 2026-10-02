@@ -7,9 +7,11 @@ import Viewport from "@/components/Viewport";
 import { useEditor, useGame } from "@/hooks";
 import { loadGame } from "@/state";
 import capability from "@/util/capability";
+import { getRenderInput } from "@/util/renderInput";
 
 const addRecent = (game) => {
-  if (game && capability.electron) {
+  // The capture windows of an export are not games the user opened
+  if (game && capability.electron && !getRenderInput()) {
     window.api.addRecent(game.info.title, game.meta.slug);
   }
   return game;
