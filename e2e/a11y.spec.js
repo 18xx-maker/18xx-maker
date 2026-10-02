@@ -10,8 +10,8 @@ import { expect, test } from "@playwright/test";
 // removed. Do not add to this list to make a failure go away: fix the page,
 // or record the violation here on purpose.
 //
-// Keys never use component library class names (.Mui*, css-<hash>, jss<n>) so
-// the list survives a change of UI library.
+// Keys never use generated class names, so the list survives a change of UI
+// library.
 
 const KNOWN_ISSUES = {
   "config drawer": [

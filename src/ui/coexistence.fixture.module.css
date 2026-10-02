@@ -1,4 +1,4 @@
-/* Fixture for coexistence.test.jsx only */
+/* Fixture for tokens.test.jsx and breakpoints.test.js only */
 .chip {
   padding: calc(var(--space) * 2);
   color: var(--palette-primary-main);
@@ -10,4 +10,8 @@
 
 :where(.whereRed) {
   color: rgb(255 0 0);
+}
+
+.blue {
+  color: rgb(0 0 255);
 }

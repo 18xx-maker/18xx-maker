@@ -92,8 +92,6 @@ for (const { name, url, ready } of pages) {
       animations: "disabled",
       caret: "hide",
       maxDiffPixelRatio: 0.005,
-      // Ripples are time dependent (MUI buttons and menu items still have them)
-      mask: [page.locator(".MuiTouchRipple-root")],
     });
   });
 }
