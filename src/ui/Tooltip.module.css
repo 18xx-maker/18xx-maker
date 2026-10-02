@@ -23,6 +23,12 @@
   opacity: 0;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .popup {
+    transition: none;
+  }
+}
+
 /* The arrow: a square turned 45 degrees and clipped to the half that points at
    the child, 1em across and 0.71em out of the box */
 .arrow {

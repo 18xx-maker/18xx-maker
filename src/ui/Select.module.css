@@ -279,3 +279,15 @@
     transparent
   );
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .filled .trigger::before,
+  .filled .trigger::after,
+  .icon,
+  .label,
+  .popup,
+  .item {
+    transition: none;
+  }
+}

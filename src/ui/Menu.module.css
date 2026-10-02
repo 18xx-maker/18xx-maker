@@ -105,3 +105,10 @@
   border-bottom: thin solid var(--palette-divider);
   height: 0;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .popup,
+  .item {
+    transition: none;
+  }
+}
