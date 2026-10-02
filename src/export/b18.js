@@ -31,7 +31,7 @@ const capitalize = compose(join(""), juxt([compose(toUpper, head), tail]));
 // The Board 18 images of a game. Each is captured from the page at one pixel
 // per unit (the viewport is the size of the image), in print media.
 export const b18Images = (game, config, data, { slug, variation = 0 } = {}) => {
-  const image = (kind, route, basename, width, height, transparent) => ({
+  const image = (kind, route, basename, width, height) => ({
     id: `b18/${basename}`,
     kind,
     route: `/games/${slug}/${route}`,
@@ -40,7 +40,7 @@ export const b18Images = (game, config, data, { slug, variation = 0 } = {}) => {
     formats: ["b18"],
     size: null,
     paper: null,
-    capture: { selector: null, viewport: { w: width, h: height }, transparent },
+    capture: { selector: null, viewport: { w: width, h: height } },
     basename,
   });
 
@@ -57,7 +57,6 @@ export const b18Images = (game, config, data, { slug, variation = 0 } = {}) => {
       "Map",
       width,
       Math.ceil(mapData.b18TotalHeight),
-      false,
     );
     // Only a map with variations needs to say which
     if (Array.isArray(game.map)) doc.query = { variation, print: "true" };
@@ -74,7 +73,6 @@ export const b18Images = (game, config, data, { slug, variation = 0 } = {}) => {
         "Market",
         Math.ceil((marketData.totalWidth + 50) * 0.96) + 1,
         Math.ceil((marketData.totalHeight + 50) * 0.96) + 1,
-        false,
       ),
     );
   }
@@ -89,7 +87,6 @@ export const b18Images = (game, config, data, { slug, variation = 0 } = {}) => {
       "Tokens",
       60,
       30 * ((game.companies || []).length + extras.length),
-      true,
     ),
   );
 
@@ -103,7 +100,6 @@ export const b18Images = (game, config, data, { slug, variation = 0 } = {}) => {
         capitalize(color.replace("/", "_")),
         counts[color] * 150,
         900,
-        true,
       ),
     );
   }

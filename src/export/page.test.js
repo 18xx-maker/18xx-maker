@@ -63,7 +63,7 @@ const job = (format = "pdf") => ({
   doc: {
     route: "/games/render:18Test/map",
     query: { variation: 1 },
-    capture: { selector: ".printElement", viewport: null, transparent: false },
+    capture: { selector: ".printElement", viewport: null },
   },
 });
 

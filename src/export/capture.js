@@ -157,11 +157,12 @@ export const capture = async (
   if (format === "pdf") return printToPdf(adapter);
 
   try {
-    if (doc.capture.transparent) {
-      await adapter.send("Emulation.setDefaultBackgroundColorOverride", {
-        color: { r: 0, g: 0, b: 0, a: 0 },
-      });
-    }
+    // Every image is transparent where the page paints nothing: without the
+    // override the page is white, or the color of its color-scheme (black in
+    // a dark theme)
+    await adapter.send("Emulation.setDefaultBackgroundColorOverride", {
+      color: { r: 0, g: 0, b: 0, a: 0 },
+    });
     return format === "png"
       ? await captureElement(adapter, doc.capture, dpi, maxPixels)
       : await captureViewport(adapter, doc.capture, maxPixels);

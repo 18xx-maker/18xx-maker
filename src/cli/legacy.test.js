@@ -91,9 +91,11 @@ describe("b18 box", () => {
             width: doc.capture.viewport.w,
             height: doc.capture.viewport.h,
           },
-          omitBackground: doc.capture.transparent,
+          omitBackground: true,
         })),
-      ).toEqual(old.shots);
+        // Every image is transparent now, the old cli kept the map and market
+        // opaque
+      ).toEqual(old.shots.map((shot) => ({ ...shot, omitBackground: true })));
     },
   );
 

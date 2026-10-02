@@ -76,7 +76,6 @@ const screenshots = () => {
         size,
         transparent,
       });
-      transparent = false;
     }
   }
   return found;
@@ -184,7 +183,7 @@ describe("b18", () => {
       expect(shots[0].url).toBe(
         "http://localhost:1234/games/render:18Test/b18/map?print=true",
       );
-      expect(shots[0].transparent).toBe(false);
+      expect(shots[0].transparent).toBe(true);
       // Tokens are 30 pixels for each company and extra token
       expect(shots[2].size).toEqual({
         width: 60,

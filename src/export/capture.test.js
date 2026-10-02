@@ -76,18 +76,22 @@ describe("pdf", () => {
 });
 
 describe("b18", () => {
-  const job = (transparent) => ({
+  const job = () => ({
     format: "b18",
-    doc: doc({ viewport: { w: 60, h: 90 }, transparent }),
+    doc: doc({ viewport: { w: 60, h: 90 } }),
   });
 
   it("is a screenshot of a viewport of the size of the image", async () => {
     const a = adapter();
 
-    expect(await capture(a, job(false))).toEqual(PNG);
+    expect(await capture(a, job())).toEqual(PNG);
 
     expect(a.calls).toEqual([
       ["Emulation.setEmulatedMedia", { media: "print" }],
+      [
+        "Emulation.setDefaultBackgroundColorOverride",
+        { color: { r: 0, g: 0, b: 0, a: 0 } },
+      ],
       [
         "Emulation.setDeviceMetricsOverride",
         { width: 60, height: 90, deviceScaleFactor: 1, mobile: false },
@@ -99,15 +103,15 @@ describe("b18", () => {
   });
 
   it("has no resolution in the file", async () => {
-    expect(readPng(await capture(adapter(), job(false)))).toMatchObject({
+    expect(readPng(await capture(adapter(), job()))).toMatchObject({
       pixelsPerMeter: null,
     });
   });
 
-  it("is transparent when asked, and the background is reset after", async () => {
+  it("is always transparent, and the background is reset after", async () => {
     const a = adapter();
 
-    await capture(a, job(true));
+    await capture(a, job());
 
     expect(a.calls).toContainEqual([
       "Emulation.setDefaultBackgroundColorOverride",
@@ -122,9 +126,9 @@ describe("b18", () => {
   it("is not dpi dependent", async () => {
     const a = adapter();
 
-    await capture(a, job(false), { dpi: 72 });
+    await capture(a, job(), { dpi: 72 });
 
-    expect(a.calls[1][1].deviceScaleFactor).toBe(1);
+    expect(a.calls[2][1].deviceScaleFactor).toBe(1);
   });
 
   it("refuses an image with too many pixels", async () => {
@@ -145,9 +149,9 @@ describe("b18", () => {
 });
 
 describe("png", () => {
-  const job = (transparent = false) => ({
+  const job = () => ({
     format: "png",
-    doc: doc({ selector: ".printElement", transparent }),
+    doc: doc({ selector: ".printElement" }),
   });
   const rect = { x: 0, y: 0, width: 240, height: 150 };
 
@@ -156,11 +160,11 @@ describe("png", () => {
 
     const bytes = await capture(a, job());
 
-    expect(a.calls[1]).toEqual([
+    expect(a.calls[2]).toEqual([
       "Emulation.setDeviceMetricsOverride",
       { width: 240, height: 150, deviceScaleFactor: 3.125, mobile: false },
     ]);
-    expect(a.calls[2]).toEqual([
+    expect(a.calls[3]).toEqual([
       "Page.captureScreenshot",
       {
         format: "png",
@@ -197,8 +201,8 @@ describe("png", () => {
 
     await capture(a, job());
 
-    expect(a.calls[1][1]).toMatchObject({ width: 11 + 256, height: 4 + 167 });
-    expect(a.calls[2][1].clip).toEqual({
+    expect(a.calls[2][1]).toMatchObject({ width: 11 + 256, height: 4 + 167 });
+    expect(a.calls[3][1].clip).toEqual({
       x: 10.5,
       y: 3.25,
       width: 256,
@@ -212,13 +216,13 @@ describe("png", () => {
 
     await capture(a, job());
 
-    expect(a.calls[2][1].clip.width).toBe(240);
+    expect(a.calls[3][1].clip.width).toBe(240);
   });
 
-  it("is transparent when asked, and resets the page after", async () => {
+  it("is always transparent, and resets the page after", async () => {
     const a = adapter({ rect });
 
-    await capture(a, job(true));
+    await capture(a, job());
 
     expect(a.calls).toContainEqual([
       "Emulation.setDefaultBackgroundColorOverride",

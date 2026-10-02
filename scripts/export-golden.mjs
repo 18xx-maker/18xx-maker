@@ -166,7 +166,7 @@ const native = async (page, { doc, format }) => {
     width: doc.capture.viewport.w,
     height: doc.capture.viewport.h,
   });
-  return page.screenshot({ omitBackground: doc.capture.transparent });
+  return page.screenshot({ omitBackground: true });
 };
 
 const record = (name, ok, detail) => {

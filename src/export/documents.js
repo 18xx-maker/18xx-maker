@@ -46,8 +46,9 @@ const inches = (size) =>
 //   formats   "pdf", "png", "b18"
 //   size      { widthIn, heightIn } of the element a png captures, or null
 //   paper     the paper of the config
-//   capture   how a png or b18 image is captured: the element to capture,
-//             the viewport (b18) and if the background is transparent
+//   capture   how a png or b18 image is captured: the element to capture and
+//             the viewport (b18). The background of an image is always
+//             transparent
 //   basename  the name of the file, without the game or the extension
 //   variation the map variation, for the map documents
 export const documents = (game, config, data) => {
@@ -73,10 +74,9 @@ export const documents = (game, config, data) => {
     });
   };
 
-  const element = (transparent = false, selector = ".printElement") => ({
+  const element = (selector = ".printElement") => ({
     selector,
     viewport: null,
-    transparent,
   });
 
   // A document with pdf and png output, and its paginated version (pdf only)
@@ -210,11 +210,11 @@ export const documents = (game, config, data) => {
   }
 
   // The elements of the sheets, a png each
-  const item = ({ transparent, selector, ...doc }) =>
+  const item = ({ selector, ...doc }) =>
     add({
       mode: "item",
       formats: ["png"],
-      capture: element(transparent, selector),
+      capture: element(selector),
       ...doc,
     });
 
@@ -278,7 +278,6 @@ export const documents = (game, config, data) => {
       size: inches(getTokenSize(config.tokens, true)),
       basename: `token-${i + 1}-${safeName(company.abbrev)}`,
       selector: TOKEN_SELECTOR,
-      transparent: true,
     }),
   );
   // "quantity" of 0 removes a token, like the token page does
@@ -292,7 +291,6 @@ export const documents = (game, config, data) => {
         size: inches(getTokenSize(config.tokens, false)),
         basename: `token-${i + 1 + companies.length}`,
         selector: TOKEN_SELECTOR,
-        transparent: true,
       }),
     );
 
@@ -305,7 +303,6 @@ export const documents = (game, config, data) => {
         route: `tiles/${encodeURIComponent(id)}`,
         size: inches(getTileSize(config.tiles.width)),
         basename: `tile-${id.replace(/[^\w.-]+/g, "_")}`,
-        transparent: true,
       });
     }
   }

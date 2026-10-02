@@ -135,14 +135,14 @@ test.describe("maker export 18Test", () => {
     });
   });
 
-  test("makes tiles transparent and the background not", async ({ page }) => {
+  test("makes the background of every image transparent", async ({ page }) => {
     const result = maker(
       out,
       "18Test",
       "--format",
       "png",
       "--docs",
-      "background,tiles",
+      "map,tiles",
     );
     expect(result.status, result.stderr).toBe(0);
 
@@ -150,9 +150,7 @@ test.describe("maker export 18Test", () => {
     expect(await cornerAlpha(page, path.join(dir, "18test-tile-1.png"))).toBe(
       0,
     );
-    expect(
-      await cornerAlpha(page, path.join(dir, "18test-background.png")),
-    ).toBe(255);
+    expect(await cornerAlpha(page, path.join(dir, "18test-map.png"))).toBe(0);
   });
 
   test("exports a game file", () => {
