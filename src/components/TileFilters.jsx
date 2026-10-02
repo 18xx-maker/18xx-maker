@@ -1,43 +1,20 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import Paper from "@mui/material/Paper";
 import Select from "@mui/material/Select";
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
 
 import { map, uniq, values } from "ramda";
 
 import { tiles } from "@/data";
+import { Box, Paper, Typography } from "@/ui";
+import styles from "./TileFilters.module.css";
 
 const colors = uniq(values(map((t) => t.color, tiles)));
-
-const useStyles = makeStyles((theme) => ({
-  page: {
-    overflow: "auto",
-    margin: theme.spacing(2, 0),
-    padding: theme.spacing(2, 2, 0, 2),
-
-    "& p": {
-      marginBottom: theme.spacing(2),
-    },
-  },
-  filter: {
-    display: "flex",
-    flexDirection: "row",
-    paddingBottom: theme.spacing(2),
-
-    "& > div": {
-      marginRight: theme.spacing(2),
-    },
-  },
-}));
 
 const TileFilters = ({
   color,
@@ -51,7 +28,6 @@ const TileFilters = ({
   revenues,
 }) => {
   const { t } = useTranslation();
-  const classes = useStyles();
 
   const [revenueSlider, setRevenueSlider] = useState(revenue);
 
@@ -65,11 +41,11 @@ const TileFilters = ({
   const handleRevenue = (_, values) => setRevenueSlider(values);
 
   return (
-    <Paper elevation={5} className={classes.page}>
+    <Paper elevation={5} className={styles.page}>
       <Typography variant="h6" gutterBottom>
         {t("elements.tiles.filter.title")}
       </Typography>
-      <Box className={classes.filter}>
+      <Box className={styles.filter}>
         <FormControl variant="filled">
           <InputLabel id="filter-color-label">
             {t("elements.tiles.filter.color")}

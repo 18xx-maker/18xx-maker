@@ -2,36 +2,29 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useMatch } from "react-router";
 
-import ExportIcon from "@mui/icons-material/Collections";
-import PngIcon from "@mui/icons-material/PhotoLibrary";
-import PdfIcon from "@mui/icons-material/PictureAsPdf";
 import Divider from "@mui/material/Divider";
-import Fab from "@mui/material/Fab";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Slide from "@mui/material/Slide";
 import Tooltip from "@mui/material/Tooltip";
-import makeStyles from "@mui/styles/makeStyles";
 
 import { assoc, flatten, forEach, is, keys, map, range } from "ramda";
 
 import { useConfig, useGame } from "@/hooks";
 import schema from "@/schemas/config.schema.json";
+import {
+  Collections as ExportIcon,
+  Fab,
+  PictureAsPdf as PdfIcon,
+  PhotoLibrary as PngIcon,
+} from "@/ui";
 import { maxPlayers, titleToFilename } from "@/util";
 import { trackEvent } from "@/util/analytics";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
 import { useBooleanParam } from "@/util/query";
-
-const useStyles = makeStyles((theme) => ({
-  exportButton: {
-    zIndex: theme.zIndex.drawer + 1,
-    position: "fixed",
-    bottom: theme.spacing(14),
-    right: theme.spacing(4),
-  },
-}));
+import styles from "./fab.module.css";
 
 const pngItems = (game, config) => {
   const filename = titleToFilename(game.info.title);
@@ -194,7 +187,6 @@ const pdfItems = (game, config) => {
 
 const ExportButton = () => {
   const { t } = useTranslation();
-  const classes = useStyles();
   const location = useLocation();
   const game = useGame();
   const { config } = useConfig();
@@ -253,8 +245,7 @@ const ExportButton = () => {
           <Fab
             data-testid="export-fab"
             onClick={handleMenu}
-            position="sticky"
-            className={classes.exportButton}
+            className={styles.floating}
             color="primary"
           >
             <ExportIcon />

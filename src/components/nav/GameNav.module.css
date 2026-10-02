@@ -1,0 +1,21 @@
+.input {
+  width: 200px;
+}
+
+/* Icon colors that were MUI's green[500], red[500], blue[500] and the theme
+   warning color */
+.purchase {
+  color: #4caf50;
+}
+
+.refresh {
+  color: #f44336;
+}
+
+.prototype {
+  color: #2196f3;
+}
+
+.warning {
+  color: var(--palette-warning-main);
+}

@@ -3,67 +3,40 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Link, useMatch } from "react-router";
 
-import ElementsIcon from "@mui/icons-material/Category";
-import DownloadIcon from "@mui/icons-material/Download";
-import DocumentationIcon from "@mui/icons-material/Help";
-import HomeIcon from "@mui/icons-material/Home";
-import MenuIcon from "@mui/icons-material/KeyboardArrowDown";
-import LoadIcon from "@mui/icons-material/OpenInBrowser";
-import AppIcon from "@mui/icons-material/Settings";
-import GamesIcon from "@mui/icons-material/Train";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
 
 import { prop } from "ramda";
 
 import MobileMenuButton from "@/components/nav/MobileMenuButton";
 import { useLoadedGame } from "@/hooks/game.js";
+import {
+  AppBar,
+  Settings as AppIcon,
+  Box,
+  Button,
+  Help as DocumentationIcon,
+  Download as DownloadIcon,
+  Category as ElementsIcon,
+  Train as GamesIcon,
+  Home as HomeIcon,
+  OpenInBrowser as LoadIcon,
+  KeyboardArrowDown as MenuIcon,
+  Toolbar,
+  Typography,
+} from "@/ui";
 import { useBooleanParam } from "@/util/query";
-
-const useStyles = makeStyles((theme) => ({
-  activeButton: {
-    backgroundColor: theme.palette.background.default,
-    "&.Mui-disabled": {
-      color: theme.palette.primary.main,
-    },
-    "&:hover": {
-      backgroundColor: theme.palette.background.default,
-    },
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  warningIcon: {
-    color: theme.palette.warning.main,
-  },
-  errorIcon: {
-    color: theme.palette.error.main,
-  },
-  menuIcon: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+import styles from "./AppNav.module.css";
 
 const NavLink = ({ active, to, text, icon }) => {
-  const classes = useStyles();
-
   return (
     <Button
-      variant={active ? "outlined" : null}
+      variant={active ? "outlined" : "text"}
       disabled={!!active}
       color={active ? "primary" : "inherit"}
-      className={active ? classes.activeButton : classes.menuButton}
+      className={active ? styles.activeButton : undefined}
       startIcon={icon}
       component={Link}
       to={to}
@@ -269,7 +242,6 @@ const MobileButton = ({ onClick }) => {
 
 const AppNav = ({ toggleSideNav }) => {
   const { t } = useTranslation();
-  const classes = useStyles();
   const [menuAnchor, setMenuAnchor] = useState(null);
   const [print] = useBooleanParam("print");
 
@@ -286,22 +258,17 @@ const AppNav = ({ toggleSideNav }) => {
   };
 
   return (
-    <AppBar
-      data-testid="app-bar"
-      position="sticky"
-      className={classes.appBar}
-      style={{ display: print && "none" }}
-    >
+    <AppBar data-testid="app-bar" position="sticky" className={styles.appBar}>
       <Toolbar>
         <MobileMenuButton onClick={toggleSideNav} />
-        <Typography className={classes.title} variant="h4" noWrap>
+        <Typography className={styles.title} variant="h4" noWrap>
           {t("title")}
         </Typography>
-        <Box sx={{ display: { md: "none", xs: "block" } }}>
+        <Box className={styles.mobile}>
           <MobileButton onClick={handleMenu} />
           <MobileMenu anchor={menuAnchor} onClose={handleMenuClose} />
         </Box>
-        <Box sx={{ display: { xs: "none", md: "block" } }}>
+        <Box className={styles.desktop}>
           <NavMenu />
         </Box>
       </Toolbar>

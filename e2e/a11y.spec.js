@@ -13,45 +13,19 @@ import { expect, test } from "@playwright/test";
 // Keys never use component library class names (.Mui*, css-<hash>, jss<n>) so
 // the list survives a change of UI library.
 
-// Same problems on every game page (game info, map and the config drawer)
-const GAME_NAV_NESTED = {
-  // A form control (FormControl with a Select) inside a ListItemButton in
-  // GameNav (src/components/nav)
-  rule: "nested-interactive",
-  targets: ["side-nav [role=button]:2"],
-  reason: "controls inside a ListItemButton",
-};
-const GAME_VIEWPORT_SCROLL = {
-  // The scrollable game area (Viewport) is not keyboard focusable
-  rule: "scrollable-region-focusable",
-  targets: ["viewport"],
-  reason: "scrollable game area",
-};
-
-// ListItemButton with component={RouterLink} renders <a> directly inside <ul>
-// in the game, docs and elements side navs (src/components/nav/*).
-// Fix: wrap each in <ListItem disablePadding>
-const SIDE_NAV_LIST = (targets) => ({
+// ListItemButton with component={RouterLink} used to render <a> directly inside
+// <ul> in the side navs. The src/ui List family wraps each in a <li>, so only
+// the page's own list below is left.
+const LIST_IN_PAGE = {
   rule: "list",
-  targets,
-  reason: "side nav links are direct children of <ul>",
-});
-
-const SIDE_NAV_LISTS = (n) =>
-  SIDE_NAV_LIST(Array.from({ length: n }, (_, i) => `side-nav ul:${i}`));
+  targets: ["game-1889 ul:0"],
+  // The page's own <List> in src/components/pages/games/Info.jsx
+  reason: "page links are direct children of <ul>",
+};
 
 const KNOWN_ISSUES = {
-  "game info": [
-    SIDE_NAV_LISTS(2),
-    // The page's own <List> in src/components/pages/games/Info.jsx
-    SIDE_NAV_LIST(["game-1889 ul:0"]),
-  ],
-  "game map": [SIDE_NAV_LISTS(3), GAME_NAV_NESTED, GAME_VIEWPORT_SCROLL],
-  docs: [SIDE_NAV_LISTS(4)],
+  "game info": [LIST_IN_PAGE],
   "config drawer": [
-    SIDE_NAV_LISTS(3),
-    GAME_NAV_NESTED,
-    GAME_VIEWPORT_SCROLL,
     {
       // These number inputs have no accessible name (src/components/config)
       rule: "label",

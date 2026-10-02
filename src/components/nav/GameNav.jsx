@@ -2,49 +2,42 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Link as RouterLink, useLocation, useMatch } from "react-router";
 
-import RulesIcon from "@mui/icons-material/Gavel";
-import LicenseIcon from "@mui/icons-material/Lock";
-import PurchaseIcon from "@mui/icons-material/MonetizationOn";
-import RefreshIcon from "@mui/icons-material/Refresh";
-import BGGIcon from "@mui/icons-material/Storage";
-import GameIcon from "@mui/icons-material/Train";
-import WarningIcon from "@mui/icons-material/Warning";
 import Checkbox from "@mui/material/Checkbox";
-import Divider from "@mui/material/Divider";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import FormLabel from "@mui/material/FormLabel";
 import InputLabel from "@mui/material/InputLabel";
-import Link from "@mui/material/Link";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Switch from "@mui/material/Switch";
-import { blue, green, red } from "@mui/material/colors";
-import makeStyles from "@mui/styles/makeStyles";
 
 import { addIndex, is, map, omit } from "ramda";
 
 import File from "@/components/File";
 import { useGame } from "@/hooks/game.js";
 import { refreshGame } from "@/state";
+import {
+  Storage as BGGIcon,
+  Divider,
+  Train as GameIcon,
+  Lock as LicenseIcon,
+  Link,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  MonetizationOn as PurchaseIcon,
+  Refresh as RefreshIcon,
+  Gavel as RulesIcon,
+  Warning as WarningIcon,
+} from "@/ui";
 import { titleToFilename } from "@/util";
 import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
 import { useBooleanParam, useIntParam } from "@/util/query.js";
-
-const useStyles = makeStyles((theme) => ({
-  input: {
-    width: 200,
-  },
-  warning: {
-    color: theme.palette.warning.main,
-  },
-}));
+import styles from "./GameNav.module.css";
 
 const GameSectionButton = ({ section, disabled }) => {
   const game = useGame();
@@ -53,20 +46,21 @@ const GameSectionButton = ({ section, disabled }) => {
   const selected = !!useMatch(to);
 
   return (
-    <ListItemButton
-      selected={selected}
-      aria-current={selected ? "page" : undefined}
-      component={RouterLink}
-      to={to}
-      disabled={disabled}
-    >
-      <ListItemText>{t(`game.nav.${section}`)}</ListItemText>
-    </ListItemButton>
+    <ListItem disablePadding>
+      <ListItemButton
+        selected={selected}
+        aria-current={selected ? "page" : undefined}
+        component={RouterLink}
+        to={to}
+        disabled={disabled}
+      >
+        <ListItemText>{t(`game.nav.${section}`)}</ListItemText>
+      </ListItemButton>
+    </ListItem>
   );
 };
 
 const GameNav = () => {
-  const classes = useStyles();
   const { t } = useTranslation();
   const location = useLocation();
   const game = useGame();
@@ -108,110 +102,125 @@ const GameNav = () => {
   return (
     <>
       <List>
-        <ListItemButton component={RouterLink} to={`/games/${game.meta.slug}/`}>
-          <ListItemIcon>
-            <GameIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={game.info.title}
-            secondary={`${t("game.by")} ${game.info.designer}`}
-          />
-        </ListItemButton>
-        {game.links && game.links.license && (
+        <ListItem disablePadding>
           <ListItemButton
-            component={Link}
-            color="inherit"
-            underline="none"
-            target="_blank"
-            href={game.links.license}
+            component={RouterLink}
+            to={`/games/${game.meta.slug}/`}
           >
             <ListItemIcon>
-              <LicenseIcon color="error" />
+              <GameIcon />
             </ListItemIcon>
             <ListItemText
-              primary={t("game.license.primary")}
-              secondary={t("game.license.secondary")}
+              primary={game.info.title}
+              secondary={`${t("game.by")} ${game.info.designer}`}
             />
           </ListItemButton>
+        </ListItem>
+        {game.links && game.links.license && (
+          <ListItem disablePadding>
+            <ListItemButton
+              component={Link}
+              color="inherit"
+              underline="none"
+              target="_blank"
+              href={game.links.license}
+            >
+              <ListItemIcon>
+                <LicenseIcon color="error" />
+              </ListItemIcon>
+              <ListItemText
+                primary={t("game.license.primary")}
+                secondary={t("game.license.secondary")}
+              />
+            </ListItemButton>
+          </ListItem>
         )}
         {game.links && game.links.purchase && (
-          <ListItemButton
-            component={Link}
-            color="inherit"
-            underline="none"
-            target="_blank"
-            href={game.links.purchase}
-          >
-            <ListItemIcon>
-              <PurchaseIcon style={{ color: green[500] }} />
-            </ListItemIcon>
-            <ListItemText
-              primary={t("game.purchase.primary")}
-              secondary={t("game.purchase.secondary")}
-            />
-          </ListItemButton>
+          <ListItem disablePadding>
+            <ListItemButton
+              component={Link}
+              color="inherit"
+              underline="none"
+              target="_blank"
+              href={game.links.purchase}
+            >
+              <ListItemIcon>
+                <PurchaseIcon className={styles.purchase} />
+              </ListItemIcon>
+              <ListItemText
+                primary={t("game.purchase.primary")}
+                secondary={t("game.purchase.secondary")}
+              />
+            </ListItemButton>
+          </ListItem>
         )}
         {game.links && game.links.bgg && (
-          <ListItemButton
-            component={Link}
-            color="inherit"
-            underline="none"
-            target="_blank"
-            href={game.links.bgg}
-          >
-            <ListItemIcon>
-              <BGGIcon />
-            </ListItemIcon>
-            <ListItemText>{t("game.bgg")}</ListItemText>
-          </ListItemButton>
+          <ListItem disablePadding>
+            <ListItemButton
+              component={Link}
+              color="inherit"
+              underline="none"
+              target="_blank"
+              href={game.links.bgg}
+            >
+              <ListItemIcon>
+                <BGGIcon />
+              </ListItemIcon>
+              <ListItemText>{t("game.bgg")}</ListItemText>
+            </ListItemButton>
+          </ListItem>
         )}
         {game.links && game.links.rules && (
-          <ListItemButton
-            component={Link}
-            color="inherit"
-            underline="none"
-            target="_blank"
-            href={game.links.rules}
-          >
-            <ListItemIcon>
-              <RulesIcon />
-            </ListItemIcon>
-            <ListItemText primary={t("game.rules")} />
-          </ListItemButton>
+          <ListItem disablePadding>
+            <ListItemButton
+              component={Link}
+              color="inherit"
+              underline="none"
+              target="_blank"
+              href={game.links.rules}
+            >
+              <ListItemIcon>
+                <RulesIcon />
+              </ListItemIcon>
+              <ListItemText primary={t("game.rules")} />
+            </ListItemButton>
+          </ListItem>
         )}
         <File data={downloadGame} filename={filename} list />
         {!capability.electron && game.meta.type === "system" && (
-          <ListItemButton onClick={refreshHandler}>
-            <ListItemIcon>
-              <RefreshIcon style={{ color: red[500] }} />
-            </ListItemIcon>
-            <ListItemText
-              primary={t("refresh.refresh")}
-              secondary={t("refresh.description")}
-            />
-          </ListItemButton>
+          <ListItem disablePadding>
+            <ListItemButton onClick={refreshHandler}>
+              <ListItemIcon>
+                <RefreshIcon className={styles.refresh} />
+              </ListItemIcon>
+              <ListItemText
+                primary={t("refresh.refresh")}
+                secondary={t("refresh.description")}
+              />
+            </ListItemButton>
+          </ListItem>
         )}
         {game.prototype && (
-          <ListItemButton>
+          <ListItem>
             <ListItemIcon>
-              <WarningIcon style={{ color: blue[500] }} />
+              <WarningIcon className={styles.prototype} />
             </ListItemIcon>
             <ListItemText
               primary={t("prototype.prototype")}
               secondary={t("prototype.description")}
             />
-          </ListItemButton>
+          </ListItem>
         )}
         {game.wip && (
-          <ListItemButton>
+          <ListItem>
             <ListItemIcon>
-              <WarningIcon className={classes.warning} />
+              <WarningIcon className={styles.warning} />
             </ListItemIcon>
             <ListItemText
               primary={t("wip.wip")}
               secondary={t("wip.description")}
             />
-          </ListItemButton>
+          </ListItem>
         )}
       </List>
       <Divider />
@@ -219,7 +228,7 @@ const GameNav = () => {
         <>
           <List>
             {needsPagination && (
-              <ListItemButton>
+              <ListItem>
                 <FormControlLabel
                   control={
                     <Switch
@@ -231,11 +240,11 @@ const GameNav = () => {
                   }
                   label={t("game.paginated")}
                 />
-              </ListItemButton>
+              </ListItem>
             )}
             {hasVariation && (
-              <ListItemButton>
-                <FormControl className={classes.input} variant="filled">
+              <ListItem>
+                <FormControl className={styles.input} variant="filled">
                   <InputLabel id="variation-label">
                     {t("game.map.variation")}
                   </InputLabel>
@@ -256,10 +265,10 @@ const GameNav = () => {
                     )}
                   </Select>
                 </FormControl>
-              </ListItemButton>
+              </ListItem>
             )}
             {isCards && (
-              <ListItemButton>
+              <ListItem>
                 <FormControl component="fieldset">
                   <FormLabel component="legend">{t("show")}</FormLabel>
                   <FormGroup>
@@ -309,7 +318,7 @@ const GameNav = () => {
                     />
                   </FormGroup>
                 </FormControl>
-              </ListItemButton>
+              </ListItem>
             )}
           </List>
           <Divider />

@@ -1,0 +1,7 @@
+/* The shift when the side nav or the config drawer opens */
+.viewport {
+  overflow: auto;
+  transition-timing-function: var(--ease-sharp);
+  transition-duration: var(--duration-shorter);
+  transition-property: width, margin-left, margin-right;
+}

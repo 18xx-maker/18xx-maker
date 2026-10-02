@@ -1,0 +1,11 @@
+/* Only below md, where the side nav is a drawer */
+.menuButton {
+  display: block;
+  margin-right: calc(var(--space) * 2);
+}
+
+@media (width >= 960px) {
+  .menuButton {
+    display: none;
+  }
+}

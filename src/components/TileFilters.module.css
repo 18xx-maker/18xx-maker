@@ -1,0 +1,19 @@
+.page {
+  margin: calc(var(--space) * 2) 0;
+  padding: calc(var(--space) * 2) calc(var(--space) * 2) 0;
+  overflow: auto;
+}
+
+.page p {
+  margin-bottom: calc(var(--space) * 2);
+}
+
+.filter {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: calc(var(--space) * 2);
+}
+
+.filter > div {
+  margin-right: calc(var(--space) * 2);
+}

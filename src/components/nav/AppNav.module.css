@@ -1,0 +1,32 @@
+.appBar {
+  z-index: calc(var(--z-drawer) + 1);
+}
+
+.title {
+  flex-grow: 1;
+}
+
+/* The app bar swaps between the menu button and the full nav at md */
+.mobile {
+  display: block;
+}
+
+.desktop {
+  display: none;
+}
+
+@media (width >= 960px) {
+  .mobile {
+    display: none;
+  }
+
+  .desktop {
+    display: block;
+  }
+}
+
+/* The current section. Two classes to beat Button's disabled color */
+.desktop .activeButton {
+  background-color: var(--palette-background-default);
+  color: var(--palette-primary-main);
+}

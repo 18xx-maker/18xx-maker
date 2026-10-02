@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 
-import DownloadIcon from "@mui/icons-material/GetApp";
-import Button from "@mui/material/Button";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-
+import {
+  Button,
+  GetApp as DownloadIcon,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@/ui";
 import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
 
@@ -37,17 +39,19 @@ const File = ({ data, mime, list, filename }) => {
   const eventHandler = () => trackEvent("download", location);
   if (list) {
     return (
-      <ListItemButton
-        onClick={eventHandler}
-        component="a"
-        download={filename}
-        href={dataURL}
-      >
-        <ListItemIcon>
-          <DownloadIcon color="primary" />
-        </ListItemIcon>
-        <ListItemText primary={t(verb)} secondary={filename} />
-      </ListItemButton>
+      <ListItem disablePadding>
+        <ListItemButton
+          onClick={eventHandler}
+          component="a"
+          download={filename}
+          href={dataURL}
+        >
+          <ListItemIcon>
+            <DownloadIcon color="primary" />
+          </ListItemIcon>
+          <ListItemText primary={t(verb)} secondary={filename} />
+        </ListItemButton>
+      </ListItem>
     );
   }
 

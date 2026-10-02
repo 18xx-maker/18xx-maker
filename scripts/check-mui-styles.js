@@ -4,7 +4,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const MAX = 22;
+const MAX = 14;
 
 const root = path.join(import.meta.dirname, "..");
 const files = [];

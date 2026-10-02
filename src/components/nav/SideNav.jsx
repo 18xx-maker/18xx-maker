@@ -1,22 +1,15 @@
 import { useRoutes } from "react-router";
 
 import Drawer from "@mui/material/Drawer";
-import Toolbar from "@mui/material/Toolbar";
-import makeStyles from "@mui/styles/makeStyles";
 
 import useSideMenu from "@/hooks/useSideMenu";
 import { sideRoutes } from "@/routes";
+import { Toolbar } from "@/ui";
 import { useBooleanParam } from "@/util/query";
-
-const useStyles = makeStyles(() => ({
-  sideNav: {
-    width: 300,
-  },
-}));
+import styles from "./SideNav.module.css";
 
 const SideNav = ({ open, toggle }) => {
   const needsSideMenu = useSideMenu();
-  const classes = useStyles();
   const [print] = useBooleanParam("print");
   const element = useRoutes(sideRoutes);
 
@@ -36,22 +29,22 @@ const SideNav = ({ open, toggle }) => {
       <Drawer
         data-testid="side-nav-temporary"
         variant="temporary"
-        sx={{ display: { md: "none", xs: "block" } }}
+        className={styles.temporary}
         open={open}
         onClose={toggle}
         anchor="left"
         style={{ zIndex: 1200 }}
         transitionDuration={200}
         ModalProps={{ keepMounted: true }}
-        PaperProps={{ className: classes.sideNav }}
+        PaperProps={{ className: styles.paper }}
       >
         {menu}
       </Drawer>
       <Drawer
         data-testid="side-nav"
         variant="permanent"
-        sx={{ display: { xs: "none", md: "block" } }}
-        PaperProps={{ className: classes.sideNav }}
+        className={styles.permanent}
+        PaperProps={{ className: styles.paper }}
       >
         {menu}
       </Drawer>

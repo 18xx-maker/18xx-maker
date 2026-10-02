@@ -772,7 +772,8 @@ footer a:hover {
   footer,
   .LegalNotes,
   .PrintNotes,
-  .MuiAppBar-root,
+  [data-chrome="app-bar"],
+  [data-chrome="fab"],
   .MuiDrawer-root,
   .MuiSnackbar-root,
   .MuiFab-root,
@@ -781,6 +782,7 @@ footer a:hover {
     display: none !important;
   }
 
+  [data-chrome="viewport"],
   .MuiBox-root {
     width: auto !important;
     margin-left: auto !important;

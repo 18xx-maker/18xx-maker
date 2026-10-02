@@ -56,7 +56,7 @@ number that is not one of them, or a unit other than px.
   are prepended to `<head>` and lose to any later stylesheet, including CSS
   Modules, at equal specificity.
 - `@mui/styles` (JSS `makeStyles`) injects its `<style>` tags last at runtime
-  and beats CSS Modules at equal specificity. 22 files use it today.
+  and beats CSS Modules at equal specificity. Some files still use it (`scripts/check-mui-styles.js` has the count).
 - So a converted component that shares an element with a `makeStyles` class
   loses ties. Convert the whole element, or keep specificity higher than a
   single class (nest under a parent class) when the JSS rule must be beaten.
@@ -66,14 +66,16 @@ number that is not one of them, or a unit other than px.
 
 ## Print rules (`src/styles/root.css`, `@media print`)
 
-That block hides the chrome with `.MuiAppBar-root`, `.MuiDrawer-root`,
-`.MuiSnackbar-root`, `.MuiFab-root`, `.MuiTooltip-popper` and frees the
-viewport with `.MuiBox-root`. Do not touch it until the component it names is
-replaced. The PR that replaces a component must, in the same PR, swap that
-selector for the component's `data-chrome` hook (or a CSS Module class) and
-keep `e2e/print.spec.js` green, which checks the `data-testid` hooks under
-`emulateMedia({ media: "print" })`. Remember `.MuiBox-root` also matches every
-other `Box`, so replacing `Viewport` needs a dedicated hook for the viewport.
+That block hides the chrome with `[data-chrome="app-bar"]` and
+`[data-chrome="fab"]` (the `src/ui` AppBar and Fab), and still uses `.Mui*`
+selectors for what is not replaced yet: `.MuiDrawer-root`, `.MuiSnackbar-root`,
+`.MuiTooltip-popper` and `.MuiFab-root` (the config drawer's MUI Fab). It frees
+the viewport with `[data-chrome="viewport"]`; `.MuiBox-root` stays for the MUI
+`Box` that is left. Leave a `.Mui*` selector alone until the component it names
+is replaced. The PR that replaces one must, in the same PR, swap the selector
+for the component's `data-chrome` hook (or a CSS Module class) and keep
+`e2e/print.spec.js` green, which checks the `data-testid` hooks under
+`emulateMedia({ media: "print" })`.
 
 ## Testing
 

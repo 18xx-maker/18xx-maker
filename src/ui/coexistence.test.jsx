@@ -69,11 +69,11 @@ describe("CSS Modules next to MUI", () => {
   });
 
   it("JSS makeStyles beats CSS Modules at equal specificity", () => {
-    // The real Viewport sets overflow: auto with makeStyles. The fixture sets
-    // overflow: hidden on the same element with one attribute selector, which
-    // has the same specificity as one class.
+    // The real home page sets margin: 16px 0 with makeStyles. The fixture sets
+    // margin: 0 on the same element with one attribute selector, which has the
+    // same specificity as one class.
     renderApp("/");
-    expect(style(screen.getByTestId("viewport")).overflow).toBe("auto");
+    expect(style(screen.getByTestId("home")).marginTop).toBe("16px");
   });
 
   it("a :where() rule loses to any other rule", () => {

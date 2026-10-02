@@ -1,26 +1,29 @@
 import { useTranslation } from "react-i18next";
 import { Link, useMatch } from "react-router";
 
-import OverridesIcon from "@mui/icons-material/Autorenew";
-import AutoPositioningIcon from "@mui/icons-material/CenterFocusStrong";
-import SchemasIcon from "@mui/icons-material/Check";
-import FilesIcon from "@mui/icons-material/FileOpen";
-import DieIcon from "@mui/icons-material/Filter";
-import HelpIcon from "@mui/icons-material/Help";
-import TranslationIcon from "@mui/icons-material/Language";
-import SharesIcon from "@mui/icons-material/Note";
-import B18Icon from "@mui/icons-material/PermMedia";
-import PngIcon from "@mui/icons-material/PhotoLibrary";
-import PdfIcon from "@mui/icons-material/PictureAsPdf";
-import LogosIcon from "@mui/icons-material/Security";
-import TokensIcon from "@mui/icons-material/Stars";
-import BordersIcon from "@mui/icons-material/Timeline";
-import TrainsIcon from "@mui/icons-material/Train";
-import Divider from "@mui/material/Divider";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import {
+  CenterFocusStrong as AutoPositioningIcon,
+  PermMedia as B18Icon,
+  Timeline as BordersIcon,
+  Filter as DieIcon,
+  Divider,
+  FileOpen as FilesIcon,
+  Help as HelpIcon,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Security as LogosIcon,
+  Autorenew as OverridesIcon,
+  PictureAsPdf as PdfIcon,
+  PhotoLibrary as PngIcon,
+  Check as SchemasIcon,
+  Note as SharesIcon,
+  Stars as TokensIcon,
+  Train as TrainsIcon,
+  Language as TranslationIcon,
+} from "@/ui";
 
 const DocsNav = () => {
   const { t } = useTranslation();
@@ -28,10 +31,16 @@ const DocsNav = () => {
   const Item = ({ path = "", name, desc, icon }) => {
     const selected = !!useMatch(`/docs/${path}`);
     return (
-      <ListItemButton component={Link} to={`/docs/${path}`} selected={selected}>
-        <ListItemIcon>{icon}</ListItemIcon>
-        <ListItemText primary={name} secondary={desc} />
-      </ListItemButton>
+      <ListItem disablePadding>
+        <ListItemButton
+          component={Link}
+          to={`/docs/${path}`}
+          selected={selected}
+        >
+          <ListItemIcon>{icon}</ListItemIcon>
+          <ListItemText primary={name} secondary={desc} />
+        </ListItemButton>
+      </ListItem>
     );
   };
 

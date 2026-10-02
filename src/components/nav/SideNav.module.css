@@ -1,0 +1,22 @@
+.paper {
+  width: 300px;
+}
+
+/* The drawer is temporary below md and permanent from md up */
+.temporary {
+  display: block;
+}
+
+.permanent {
+  display: none;
+}
+
+@media (width >= 960px) {
+  .temporary {
+    display: none;
+  }
+
+  .permanent {
+    display: block;
+  }
+}

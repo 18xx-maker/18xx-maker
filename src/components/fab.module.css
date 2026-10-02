@@ -1,0 +1,7 @@
+/* Where the print and export buttons float, above the drawers */
+.floating {
+  position: fixed;
+  right: calc(var(--space) * 4);
+  bottom: calc(var(--space) * 14);
+  z-index: calc(var(--z-drawer) + 1);
+}

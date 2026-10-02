@@ -1,25 +1,14 @@
 import { useMatch } from "react-router";
 
-import PrintIcon from "@mui/icons-material/Print";
-import Fab from "@mui/material/Fab";
 import Slide from "@mui/material/Slide";
 import Tooltip from "@mui/material/Tooltip";
-import makeStyles from "@mui/styles/makeStyles";
 
 import { useGame } from "@/hooks";
+import { Fab, Print as PrintIcon } from "@/ui";
 import { useBooleanParam } from "@/util/query";
-
-const useStyles = makeStyles((theme) => ({
-  printButton: {
-    zIndex: theme.zIndex.drawer + 1,
-    position: "fixed",
-    bottom: theme.spacing(14),
-    right: theme.spacing(4),
-  },
-}));
+import styles from "./fab.module.css";
 
 const PrintButton = () => {
-  const classes = useStyles();
   const match = useMatch("/games/*");
   const game = useGame();
   const [print] = useBooleanParam("print");
@@ -44,8 +33,7 @@ const PrintButton = () => {
         <Fab
           data-testid="print-fab"
           onClick={handler}
-          position="sticky"
-          className={classes.printButton}
+          className={styles.floating}
           color="primary"
         >
           <PrintIcon />
