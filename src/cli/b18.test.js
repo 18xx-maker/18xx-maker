@@ -213,7 +213,7 @@ describe("b18", () => {
       );
       expect(mocks.archive.finalize).toHaveBeenCalledOnce();
       expect(mocks.archive.pipe).toHaveBeenCalledWith(mocks.output);
-      expect(mocks.output.file).toBe(`${folder}.zip`);
+      expect(mocks.output.file.replaceAll("\\", "/")).toBe(`${folder}.zip`);
     });
   });
 
