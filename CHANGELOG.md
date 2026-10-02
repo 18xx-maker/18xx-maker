@@ -1,5 +1,40 @@
 # Changelog
 
+## [1.0.0-beta.122](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.121...v1.0.0-beta.122) (2026-10-02)
+
+
+### :tada: Features
+
+* add stripeRotation to override stripe rotation on hex backgrounds ([#727](https://github.com/18xx-maker/18xx-maker/issues/727)) ([cd09fef](https://github.com/18xx-maker/18xx-maker/commit/cd09fef7193d1106dfb57bbf5826fdd7bf21251a))
+
+
+### :bug: Bug Fixes
+
+* **electron:** reset invalid config instead of failing to start ([#728](https://github.com/18xx-maker/18xx-maker/issues/728)) ([efb2e21](https://github.com/18xx-maker/18xx-maker/commit/efb2e211fd09cf541b195c1b5f6faadb4511b9b7))
+* handle special characters in tile ids when exporting PNGs ([#726](https://github.com/18xx-maker/18xx-maker/issues/726)) ([bedfa0c](https://github.com/18xx-maker/18xx-maker/commit/bedfa0c81842655bac3f56f063996f70f705fcf6))
+* single tile png export uses the current route ([#729](https://github.com/18xx-maker/18xx-maker/issues/729)) ([8af124c](https://github.com/18xx-maker/18xx-maker/commit/8af124c17c94517dfc2ed087b73d1e445ec722d6))
+
+
+### :broom: Chores
+
+* node 24 baseline and latest github actions ([#721](https://github.com/18xx-maker/18xx-maker/issues/721)) ([a49ae6f](https://github.com/18xx-maker/18xx-maker/commit/a49ae6f769406fd61777c8290407bcc953cf14a4))
+* upgrade playwright to 1.62 and use es modules for e2e ([#723](https://github.com/18xx-maker/18xx-maker/issues/723)) ([a8e47c1](https://github.com/18xx-maker/18xx-maker/commit/a8e47c10ff2307c618ee5effdedb10a4db004660))
+
+
+### :book: Documentation
+
+* add CLAUDE.md and AGENTS.md with testing notes ([#725](https://github.com/18xx-maker/18xx-maker/issues/725)) ([6ead726](https://github.com/18xx-maker/18xx-maker/commit/6ead7262bb5686e602a2094836c73725976568b6))
+
+
+### :traffic_light: Tests
+
+* **e2e:** stop vite preview from opening a browser ([#720](https://github.com/18xx-maker/18xx-maker/issues/720)) ([841f36f](https://github.com/18xx-maker/18xx-maker/commit/841f36ff8d4c25e32f03ae2d602f4ca1897ac3e6))
+* end-to-end specs on the built site ([#719](https://github.com/18xx-maker/18xx-maker/issues/719)) ([f0197ce](https://github.com/18xx-maker/18xx-maker/commit/f0197ce3fc031637c05d6a2b7acbee84f62f7ea2))
+* pin the state layer and chrome behavior ([#718](https://github.com/18xx-maker/18xx-maker/issues/718)) ([2cf8f06](https://github.com/18xx-maker/18xx-maker/commit/2cf8f0683b610cf0ec01ae19d2115112fe47aa6c))
+* run integration tests in browser mode ([#713](https://github.com/18xx-maker/18xx-maker/issues/713)) ([b320d61](https://github.com/18xx-maker/18xx-maker/commit/b320d616328a0a2a1b5499566436ff0894d7a0e6))
+* smoke test every game and route ([#716](https://github.com/18xx-maker/18xx-maker/issues/716)) ([bc908f0](https://github.com/18xx-maker/18xx-maker/commit/bc908f0fbbd208d8b14553533009775a2f7a7217))
+* snapshot print output and add geometry tests ([#717](https://github.com/18xx-maker/18xx-maker/issues/717)) ([729ec4f](https://github.com/18xx-maker/18xx-maker/commit/729ec4f30988b189a6afb7d2e195ff52b6d78c86))
+
 ## [1.0.0-beta.121](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.120...v1.0.0-beta.121) (2026-06-10)
 
 
