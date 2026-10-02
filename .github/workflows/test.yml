@@ -119,6 +119,8 @@ jobs:
         with:
           name: blob-report-${{ matrix.shard }}
           path: .vitest-reports/
+          include-hidden-files: true
+          if-no-files-found: error
           retention-days: 1
   linux:
     name: Linux
