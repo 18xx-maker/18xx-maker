@@ -141,7 +141,7 @@ describe("Select", () => {
     await screen.findByRole("listbox", visible);
     await user.keyboard("{Escape}");
     await waitFor(() => closed(box));
-    expect(box).toHaveFocus();
+    await waitFor(() => expect(box).toHaveFocus());
     expect(onChange).not.toHaveBeenCalled();
 
     // Arrow down from the selected option, Enter chooses
