@@ -1,0 +1,112 @@
+/* The root of a permanent or persistent drawer takes no room, the panel is
+   fixed (MUI's docked drawer) */
+:where(.docked) {
+  flex: 0 0 auto;
+}
+
+/* The panel (MUI Drawer paper) */
+:where(.paper) {
+  display: flex;
+  position: fixed;
+  top: 0;
+  flex: 1 0 auto;
+  flex-direction: column;
+  z-index: var(--z-drawer);
+  outline: 0;
+  background-color: var(--palette-background-paper);
+  height: 100%;
+  overflow-y: auto;
+  color: var(--palette-text-primary);
+  -webkit-overflow-scrolling: touch;
+}
+
+:where(.left) {
+  left: 0;
+  border-right: 1px solid var(--palette-divider);
+}
+
+:where(.right) {
+  right: 0;
+  border-left: 1px solid var(--palette-divider);
+}
+
+/* Persistent: slides, and is not reachable while it is off screen */
+:where(.persistent) {
+  transform: translateX(100%);
+  visibility: hidden;
+  transition:
+    transform var(--duration-standard) var(--ease-sharp),
+    visibility 0s linear var(--duration-standard);
+}
+
+:where(.persistent.left) {
+  transform: translateX(-100%);
+}
+
+:where(.persistent[data-open="true"]) {
+  transform: none;
+  visibility: visible;
+  transition:
+    transform var(--duration-standard) var(--ease-out),
+    visibility 0s linear 0s;
+}
+
+/* Temporary: the root fills the screen, the backdrop dims it, the panel slides */
+.modal {
+  position: fixed;
+  inset: 0;
+  visibility: hidden;
+  z-index: var(--z-drawer);
+  transition: visibility 0s linear var(--duration-shorter);
+}
+
+.modal[data-open="true"] {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--duration-shorter) var(--ease-sharp);
+  background-color: rgb(0 0 0 / 50%);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.modal[data-open="true"] .backdrop {
+  opacity: 1;
+}
+
+.temporary {
+  z-index: 0;
+  box-shadow: var(--shadow-12);
+  border: 0;
+  width: 300px;
+  max-width: 100%;
+  transition: transform var(--duration-shorter) var(--ease-sharp);
+}
+
+.modal-left .temporary {
+  transform: translateX(-100%);
+}
+
+.modal-right .temporary {
+  right: 0;
+  left: auto;
+  transform: translateX(100%);
+}
+
+.modal[data-open="true"] .temporary {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .persistent,
+  .persistent[data-open="true"],
+  .modal,
+  .backdrop,
+  .temporary {
+    transition: none;
+  }
+}

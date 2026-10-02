@@ -1,0 +1,76 @@
+:where(.list) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* A page button: MUI's large text pagination item */
+:where(.item) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 3px;
+  border: 0;
+  border-radius: 20px;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0 10px;
+  min-width: 40px;
+  height: 40px;
+  color: var(--palette-text-primary);
+  font-family: var(--font-family);
+  font-size: 0.9375rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  text-align: center;
+  user-select: none;
+  box-sizing: border-box;
+  transition: background-color var(--duration-short) var(--ease-in-out);
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where(.item:focus-visible) {
+  background-color: var(--palette-action-focus);
+  outline: 0;
+}
+
+:where(.item:disabled) {
+  opacity: 0.38;
+  cursor: default;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  :where(.item:hover) {
+    background-color: var(--palette-action-hover);
+  }
+}
+
+:where(.selected) {
+  background-color: var(--palette-primary-main);
+  color: var(--palette-primary-contrast);
+}
+
+:where(.selected:focus-visible) {
+  background-color: var(--palette-primary-dark);
+}
+
+@media (hover: hover) {
+  :where(.selected:hover) {
+    background-color: var(--palette-primary-dark);
+  }
+}
+
+:where(.ellipsis) {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* MUI's large item icon. Two classes: it must beat the icon's own size */
+.item .icon {
+  margin: 0 -8px;
+  font-size: 1.375rem;
+}

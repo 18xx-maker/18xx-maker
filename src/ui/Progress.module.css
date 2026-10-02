@@ -1,0 +1,67 @@
+:where(.linear) {
+  display: block;
+  position: relative;
+  z-index: 0;
+  background-color: color-mix(in srgb, var(--palette-primary-main) 38%, white);
+  height: 4px;
+  overflow: hidden;
+  print-color-adjust: exact;
+}
+
+:where(.bar) {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  transition: transform 0.4s linear;
+  background-color: var(--palette-primary-main);
+  width: 100%;
+}
+
+:where(.circular) {
+  display: inline-block;
+  animation: rotate 1.4s linear infinite;
+  width: 40px;
+  height: 40px;
+  color: var(--palette-primary-main);
+}
+
+:where(.svg) {
+  display: block;
+}
+
+:where(.svg circle) {
+  animation: dash 1.4s ease-in-out infinite;
+  stroke: currentcolor;
+  stroke-dasharray: 80px, 200px;
+  stroke-dashoffset: 0;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1px, 200px;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -15px;
+  }
+
+  100% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -125px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.bar) {
+    transition: none;
+  }
+}

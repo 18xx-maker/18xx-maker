@@ -3,6 +3,7 @@
 export { breakpoints, down, up } from "./breakpoints";
 export { default as useMediaQuery } from "./useMediaQuery";
 export * from "./icons";
+export { default as Alert, AlertTitle } from "./Alert";
 export { default as AppBar } from "./AppBar";
 export { default as Avatar } from "./Avatar";
 export { default as AvatarGroup } from "./AvatarGroup";
@@ -10,13 +11,16 @@ export { default as Button } from "./Button";
 export { default as Checkbox } from "./Checkbox";
 export { default as Container } from "./Container";
 export { default as Divider } from "./Divider";
+export { default as Drawer } from "./Drawer";
 export { default as Fab } from "./Fab";
 export { FormControlLabel, FormGroup, FormLabel } from "./Form";
 export { default as Grid } from "./Grid";
 export { default as IconButton } from "./IconButton";
 export { default as Link } from "./Link";
 export { DropdownMenu, MenuDivider, MenuItem } from "./Menu";
+export { default as Pagination } from "./Pagination";
 export { default as Paper } from "./Paper";
+export { CircularProgress, LinearProgress } from "./Progress";
 export {
   List,
   ListItem,
@@ -33,6 +37,8 @@ export {
   TableRow,
 } from "./Table";
 export { default as Select } from "./Select";
+export { default as Slider } from "./Slider";
+export { default as Snackbar } from "./Snackbar";
 export { default as Switch } from "./Switch";
 export { default as TextField } from "./TextField";
 export { default as Toolbar } from "./Toolbar";

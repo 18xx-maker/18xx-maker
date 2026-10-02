@@ -38,6 +38,21 @@
     background-color var(--duration-short) var(--ease-in-out),
     box-shadow var(--duration-short) var(--ease-in-out),
     border-color var(--duration-short) var(--ease-in-out);
+  animation: slide-in var(--duration-entering-screen) var(--ease-out) backwards;
+}
+
+/* MUI's Slide from the right edge, which the app wrapped every Fab in. The
+   Fabs sit 32px from the edge (right: space * 4). */
+@keyframes slide-in {
+  from {
+    transform: translateX(calc(100% + var(--space) * 4));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.root) {
+    animation: none;
+  }
 }
 
 :where(.root:active) {

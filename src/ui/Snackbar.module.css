@@ -1,0 +1,40 @@
+:where(.root) {
+  display: flex;
+  position: fixed;
+  right: 8px;
+  bottom: 8px;
+  left: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: var(--z-snackbar);
+
+  /* The corner spans the screen on a phone: let clicks through around the alert */
+  pointer-events: none;
+}
+
+@media (width >= 600px) {
+  :where(.root) {
+    right: auto;
+    bottom: 24px;
+    left: 24px;
+  }
+}
+
+/* MUI's Grow, on entering only */
+.content {
+  pointer-events: auto;
+  animation: enter var(--duration-entering-screen) var(--ease-in-out) backwards;
+}
+
+@keyframes enter {
+  from {
+    transform: scale(0.75);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content {
+    animation: none;
+  }
+}

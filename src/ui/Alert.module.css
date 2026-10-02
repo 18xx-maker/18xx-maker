@@ -1,0 +1,57 @@
+/* The colors are MUI's standard alert: the severity's light shade, darkened
+   60% for the text and lightened 90% for the background (color-mix in srgb is
+   the same arithmetic) */
+:where(.root) {
+  --main: var(--palette-success-main);
+  --light: var(--palette-success-light);
+
+  display: flex;
+  border-radius: var(--radius);
+  background-color: color-mix(in srgb, var(--light) 10%, white);
+  padding: 6px 16px;
+  color: color-mix(in srgb, var(--light) 40%, black);
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  box-sizing: border-box;
+}
+
+:where(.info) {
+  --main: var(--palette-info-main);
+  --light: var(--palette-info-light);
+}
+
+:where(.warning) {
+  --main: var(--palette-warning-main);
+  --light: var(--palette-warning-light);
+}
+
+:where(.error) {
+  --main: var(--palette-error-main);
+  --light: var(--palette-error-light);
+}
+
+:where(.icon) {
+  display: flex;
+  opacity: 0.9;
+  margin-right: 12px;
+  padding: 7px 0;
+  color: var(--main);
+  font-size: 22px;
+}
+
+:where(.message) {
+  padding: 8px 0;
+  min-width: 0;
+  overflow: auto;
+}
+
+:where(.title) {
+  margin: -2px 0 0.35em;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+}
