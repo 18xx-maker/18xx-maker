@@ -1,10 +1,8 @@
 import { useRoutes } from "react-router";
 
-import Drawer from "@mui/material/Drawer";
-
 import useSideMenu from "@/hooks/useSideMenu";
 import { sideRoutes } from "@/routes";
-import { Toolbar } from "@/ui";
+import { Drawer, Toolbar, up, useMediaQuery } from "@/ui";
 import { useBooleanParam } from "@/util/query";
 import styles from "./SideNav.module.css";
 
@@ -12,6 +10,9 @@ const SideNav = ({ open, toggle }) => {
   const needsSideMenu = useSideMenu();
   const [print] = useBooleanParam("print");
   const element = useRoutes(sideRoutes);
+  // The temporary drawer is for narrow screens. Open it only there, so a modal
+  // never traps focus behind its own hidden (display: none) panel.
+  const isMedium = useMediaQuery(up("md"));
 
   if (print || !needsSideMenu) {
     return null;
@@ -30,13 +31,10 @@ const SideNav = ({ open, toggle }) => {
         data-testid="side-nav-temporary"
         variant="temporary"
         className={styles.temporary}
-        open={open}
+        open={open && !isMedium}
         onClose={toggle}
         anchor="left"
-        style={{ zIndex: 1200 }}
-        transitionDuration={200}
-        ModalProps={{ keepMounted: true }}
-        PaperProps={{ className: styles.paper }}
+        paperClassName={styles.paper}
       >
         {menu}
       </Drawer>
@@ -44,7 +42,7 @@ const SideNav = ({ open, toggle }) => {
         data-testid="side-nav"
         variant="permanent"
         className={styles.permanent}
-        PaperProps={{ className: styles.paper }}
+        paperClassName={styles.paper}
       >
         {menu}
       </Drawer>

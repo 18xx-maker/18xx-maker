@@ -1,8 +1,6 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import Pagination from "@mui/material/Pagination";
-
 import {
   filter,
   is,
@@ -19,7 +17,7 @@ import Svg from "@/components/Svg";
 import Tile from "@/components/Tile";
 import TileFilters from "@/components/TileFilters";
 import { tiles } from "@/data";
-import { Container, Grid, Paper, Typography } from "@/ui";
+import { Container, Grid, Pagination, Paper, Typography } from "@/ui";
 import { useIntParam, useRangeParam, useStringParam } from "@/util/query";
 import pageStyles from "../page.module.css";
 import styles from "./Tiles.module.css";
@@ -144,8 +142,6 @@ const Tiles = () => {
       />
       <Container maxWidth="lg" className={styles.pagination}>
         <Pagination
-          size="large"
-          color="primary"
           page={effectivePage}
           count={pageCount}
           onChange={(_, value) => setPage(value)}

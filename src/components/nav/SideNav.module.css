@@ -2,11 +2,8 @@
   width: 300px;
 }
 
-/* The drawer is temporary below md and permanent from md up */
-.temporary {
-  display: block;
-}
-
+/* The drawer is temporary below md and permanent from md up. The temporary one
+   is a <dialog>, which the browser hides while closed: only hide it at md up */
 .permanent {
   display: none;
 }

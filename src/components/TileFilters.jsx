@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import Slider from "@mui/material/Slider";
-
 import { map, uniq, values } from "ramda";
 
 import { tiles } from "@/data";
-import { Paper, Select, TextField, Typography } from "@/ui";
+import { Paper, Select, Slider, TextField, Typography } from "@/ui";
 import styles from "./TileFilters.module.css";
 
 const colors = uniq(values(map((t) => t.color, tiles)));
@@ -29,11 +27,11 @@ const TileFilters = ({
   const handleColor = (e) => setColor(e.target.value);
   const handleId = (e) => setId(e.target.value);
   const handleIncludes = (e) => setIncludes(e.target.value);
-  const handleRevenueCommit = (_, values) => {
+  const handleRevenueCommit = (values) => {
     setRevenueSlider(values);
     setRevenue(values);
   };
-  const handleRevenue = (_, values) => setRevenueSlider(values);
+  const handleRevenue = (values) => setRevenueSlider(values);
 
   return (
     <Paper elevation={5} className={styles.page}>
@@ -89,9 +87,9 @@ const TileFilters = ({
               { value: 100, label: "100" },
               { value: revenues[1], label: revenues[1] },
             ]}
-            valueLabelDisplay="auto"
-            aria-labelledby="range-slider"
-            getAriaValueText={(r) => `Revenue from ${r[0]} to ${r[1]}`}
+            getAriaLabel={(index) =>
+              index === 0 ? "Minimum revenue" : "Maximum revenue"
+            }
           />
         </div>
       </div>

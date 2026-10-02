@@ -2,9 +2,6 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
-import CircularProgress from "@mui/material/CircularProgress";
-import LinearProgress from "@mui/material/LinearProgress";
-
 import { prop } from "ramda";
 
 import { SyntaxHighlighter, style } from "@/components/SyntaxHighlighter";
@@ -13,8 +10,10 @@ import { createDownloadPercent } from "@/state";
 import {
   Button,
   Replay as CheckIcon,
+  CircularProgress,
   Container,
   Download as DownloadIcon,
+  LinearProgress,
   Paper,
   Table,
   TableBody,
@@ -77,7 +76,7 @@ const Update = () => {
   }
 
   if (update.downloading !== undefined) {
-    return <LinearProgress variant="determinate" value={update.downloading} />;
+    return <LinearProgress value={update.downloading} />;
   }
 
   if (!update.available && update.dev) {

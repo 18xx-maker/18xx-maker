@@ -1,13 +1,11 @@
 import { useLocation, useNavigate } from "react-router";
 
-import Drawer from "@mui/material/Drawer";
-import Slide from "@mui/material/Slide";
-
 import Config from "@/components/config/Config";
 import {
   Button,
   ChevronRight as ChevronRightIcon,
   Settings as ConfigIcon,
+  Drawer,
   Fab,
   Toolbar,
   Tooltip,
@@ -39,25 +37,22 @@ const ConfigDrawer = () => {
 
   return (
     <>
-      <Slide direction="left" in={true}>
-        <Tooltip title="Config" aria-label="config" placement="left" arrow>
-          <Fab
-            data-testid="config-fab"
-            className={styles.configButton}
-            color="secondary"
-            onClick={toggleConfig}
-          >
-            <ConfigIcon />
-          </Fab>
-        </Tooltip>
-      </Slide>
+      <Tooltip title="Config" aria-label="config" placement="left" arrow>
+        <Fab
+          data-testid="config-fab"
+          className={styles.configButton}
+          color="secondary"
+          onClick={toggleConfig}
+        >
+          <ConfigIcon />
+        </Fab>
+      </Tooltip>
       <Drawer
         data-testid="config-drawer"
         variant="persistent"
         anchor="right"
         open={visible}
-        transitionDuration={300}
-        PaperProps={{ className: styles.configDrawer }}
+        paperClassName={styles.configDrawer}
       >
         <Toolbar className={styles.configToolbar}>
           <Button startIcon={<ChevronRightIcon />} onClick={toggleConfig}>

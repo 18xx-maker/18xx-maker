@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useMatch } from "react-router";
 
-import Slide from "@mui/material/Slide";
-
 import { assoc, flatten, forEach, is, keys, map, range } from "ramda";
 
 import { useConfig, useGame } from "@/hooks";
@@ -234,18 +232,16 @@ const ExportButton = () => {
 
   return (
     <>
-      <Slide direction="left" in={true}>
-        <Tooltip title="Export" aria-label="export" placement="left" arrow>
-          <Fab
-            data-testid="export-fab"
-            onClick={handleMenu}
-            className={styles.floating}
-            color="primary"
-          >
-            <ExportIcon />
-          </Fab>
-        </Tooltip>
-      </Slide>
+      <Tooltip title="Export" aria-label="export" placement="left" arrow>
+        <Fab
+          data-testid="export-fab"
+          onClick={handleMenu}
+          className={styles.floating}
+          color="primary"
+        >
+          <ExportIcon />
+        </Fab>
+      </Tooltip>
       <DropdownMenu
         id="export-menu"
         anchorEl={menuAnchor}

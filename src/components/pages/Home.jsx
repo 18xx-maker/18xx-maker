@@ -1,10 +1,8 @@
 import { Trans, useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router";
 
-import Alert from "@mui/material/Alert";
-
 import gtgLogo from "@/data/publishers/gtg.png";
-import { Container, Link, Paper, Typography } from "@/ui";
+import { Alert, Container, Link, Paper, Typography } from "@/ui";
 import capability from "@/util/capability";
 import styles from "./Home.module.css";
 

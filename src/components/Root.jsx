@@ -2,17 +2,6 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router";
 
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
-import LinearProgress from "@mui/material/LinearProgress";
-import Snackbar from "@mui/material/Snackbar";
-import { deepPurple, orange } from "@mui/material/colors";
-import {
-  StyledEngineProvider,
-  ThemeProvider,
-  createTheme,
-} from "@mui/material/styles";
-
 import { compose } from "ramda";
 
 import Analytics from "@/components/Analytics";
@@ -33,6 +22,7 @@ import {
   createSetGame,
   createUpdate,
 } from "@/state";
+import { Alert, AlertTitle, LinearProgress, Snackbar } from "@/ui";
 
 import "@/ui/tokens.css";
 
@@ -40,26 +30,6 @@ import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import * as opfs from "@/util/opfs";
 import { useBooleanParam } from "@/util/query";
-
-const theme = createTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 960,
-      lg: 1280,
-      xl: 1920,
-    },
-  },
-  palette: {
-    primary: {
-      main: deepPurple[600],
-    },
-    secondary: {
-      main: orange[400],
-    },
-  },
-});
 
 const Root = () => {
   const [print] = useBooleanParam("print");
@@ -170,90 +140,84 @@ body {
 
   return (
     <div id="dropzone" onDragOver={dragOverHandler} onDrop={dropHandler}>
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <ScrollToTop>
-            <AppNav toggleSideNav={toggleSideNav} />
-            <SideNav open={sideNavOpen} toggle={toggleSideNav} />
-            {capability.electron ? <ExportButton /> : <PrintButton />}
-            <ConfigDrawer />
-            <Viewport sideNavOpen={sideNavOpen}>
-              <Outlet />
-            </Viewport>
-            {print || (
-              <Snackbar
-                data-testid="alert"
-                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                open={alert.open}
-                key={alertKey}
-                onClose={() => dispatch(clearAlert())}
-                disableWindowBlurListener={true}
-                autoHideDuration={alert.progress ? undefined : 4000}
-              >
-                {alert.progress ? (
-                  <Alert severity={alert.progress === 100 ? "success" : "info"}>
-                    <AlertTitle>{alert.title}</AlertTitle>
-                    <LinearProgress
-                      variant="determinate"
-                      value={alert.progress}
-                    />
-                    {alert.message}
-                  </Alert>
-                ) : alert.type ? (
-                  <Alert severity={alert.type}>
-                    <AlertTitle>{alert.title}</AlertTitle>
-                    {alert.message}
-                  </Alert>
-                ) : null}
-              </Snackbar>
-            )}
-            <svg
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              style={{ height: 0, width: 0, position: "absolute" }}
+      <ScrollToTop>
+        <AppNav toggleSideNav={toggleSideNav} />
+        <SideNav open={sideNavOpen} toggle={toggleSideNav} />
+        {capability.electron ? <ExportButton /> : <PrintButton />}
+        <ConfigDrawer />
+        <Viewport sideNavOpen={sideNavOpen}>
+          <Outlet />
+        </Viewport>
+        {print || (
+          <Snackbar
+            data-testid="alert"
+            open={alert.open}
+            key={alertKey}
+            onClose={() => dispatch(clearAlert())}
+            autoHideDuration={alert.progress ? undefined : 4000}
+          >
+            {alert.progress ? (
+              <Alert severity={alert.progress === 100 ? "success" : "info"}>
+                <AlertTitle>{alert.title}</AlertTitle>
+                <LinearProgress
+                  value={alert.progress}
+                  aria-label={alert.title}
+                />
+                {alert.message}
+              </Alert>
+            ) : alert.type ? (
+              <Alert severity={alert.type}>
+                <AlertTitle>{alert.title}</AlertTitle>
+                {alert.message}
+              </Alert>
+            ) : null}
+          </Snackbar>
+        )}
+        <svg
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ height: 0, width: 0, position: "absolute" }}
+        >
+          <defs>
+            <marker
+              id="arrow"
+              viewBox="0 0 10 10"
+              refX="8"
+              refY="5"
+              markerWidth="5"
+              markerHeight="5"
+              markerUnits="strokeWidth"
+              orient="auto-start-reverse"
             >
-              <defs>
-                <marker
-                  id="arrow"
-                  viewBox="0 0 10 10"
-                  refX="8"
-                  refY="5"
-                  markerWidth="5"
-                  markerHeight="5"
-                  markerUnits="strokeWidth"
-                  orient="auto-start-reverse"
-                >
-                  <path
-                    d="M 0 0 L 8 4 L 8 6 L 0 10 z"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                  />
-                </marker>
-                <clipPath id="hexClipPath">
-                  <polygon points="-86.0252,0 -43.0126,-74.5 43.0126,-74.5 86.0252,0 43.0126,74.5 -43.0126,74.5" />
-                </clipPath>
-                <clipPath id="hexBleedClipPath">
-                  <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 49.07475,85 -49.07475,85" />
-                </clipPath>
-                <clipPath id="hexBleedClipPathOffset">
-                  <polygon points="-86.6025,0 -92.376,-9.999995337 -54.84825,-75 -43.30125,-75 -37.52775,-85 37.52775,-85 43.30125,-75 54.84825,-75 92.376,-9.999995337 86.6025,0 92.376,9.999995337 54.84825,75 43.30125,75 37.52775,85 -37.52775,85 -43.30125,75 -54.84825,75 -92.376,9.999995337" />
-                </clipPath>
-                <clipPath id="hexBleedClipPathDie">
-                  <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 54.84825,75 -54.84825,75" />
-                </clipPath>
-                <clipPath id="hexBleedClipPathDieTop">
-                  <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 54.84825,75 -54.84825,75" />
-                </clipPath>
-                <clipPath id="hexBleedClipPathDieBottom">
-                  <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 49.07475,85 -49.07475,85" />
-                </clipPath>
-              </defs>
-            </svg>
-            <SetSvgColors />
-          </ScrollToTop>
-          <style>{printCss}</style>
-        </ThemeProvider>
-      </StyledEngineProvider>
+              <path
+                d="M 0 0 L 8 4 L 8 6 L 0 10 z"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+              />
+            </marker>
+            <clipPath id="hexClipPath">
+              <polygon points="-86.0252,0 -43.0126,-74.5 43.0126,-74.5 86.0252,0 43.0126,74.5 -43.0126,74.5" />
+            </clipPath>
+            <clipPath id="hexBleedClipPath">
+              <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 49.07475,85 -49.07475,85" />
+            </clipPath>
+            <clipPath id="hexBleedClipPathOffset">
+              <polygon points="-86.6025,0 -92.376,-9.999995337 -54.84825,-75 -43.30125,-75 -37.52775,-85 37.52775,-85 43.30125,-75 54.84825,-75 92.376,-9.999995337 86.6025,0 92.376,9.999995337 54.84825,75 43.30125,75 37.52775,85 -37.52775,85 -43.30125,75 -54.84825,75 -92.376,9.999995337" />
+            </clipPath>
+            <clipPath id="hexBleedClipPathDie">
+              <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 54.84825,75 -54.84825,75" />
+            </clipPath>
+            <clipPath id="hexBleedClipPathDieTop">
+              <polygon points="-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 54.84825,75 -54.84825,75" />
+            </clipPath>
+            <clipPath id="hexBleedClipPathDieBottom">
+              <polygon points="-98.1495,0 -54.84825,-75 54.84825,-75 98.1495,0 49.07475,85 -49.07475,85" />
+            </clipPath>
+          </defs>
+        </svg>
+        <SetSvgColors />
+      </ScrollToTop>
+      <style>{printCss}</style>
       <Analytics />
     </div>
   );

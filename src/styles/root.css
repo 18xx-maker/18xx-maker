@@ -774,8 +774,8 @@ footer a:hover {
   .PrintNotes,
   [data-chrome="app-bar"],
   [data-chrome="fab"],
-  .MuiDrawer-root,
-  .MuiSnackbar-root,
+  [data-chrome="drawer"],
+  [data-chrome="snackbar"],
   [data-chrome="tooltip"],
   .WIP {
     display: none !important;

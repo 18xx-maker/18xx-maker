@@ -106,3 +106,73 @@ test("bundled games cannot be deleted", async ({ page }) => {
   await expect(row).toBeVisible();
   await expect(row.getByRole("button", { name: /^Delete/ })).toHaveCount(0);
 });
+
+// Dropping a game file anywhere in the app loads it (#dropzone), also while a
+// drawer is open: the config drawer is a panel next to the page, the side nav
+// on a narrow screen is a modal <dialog> whose backdrop covers the page. The
+// drop is dispatched at the element under the given point, which is what the
+// browser does with a real drop, so an overlay that swallowed it would fail.
+const dropAt = (page, { x, y }) =>
+  page.evaluate(
+    async ({ x, y, text }) => {
+      const target = document.elementFromPoint(x, y);
+      const data = new DataTransfer();
+      data.items.add(new File([text], "dropped.json"));
+      const fire = (type) => {
+        const event = new DragEvent(type, {
+          bubbles: true,
+          cancelable: true,
+          dataTransfer: data,
+        });
+        target.dispatchEvent(event);
+        return event;
+      };
+      const over = fire("dragover");
+      fire("drop");
+      return {
+        where: target.closest("[data-testid]")?.dataset.testid,
+        overPrevented: over.defaultPrevented,
+      };
+    },
+    { x, y, text: fs.readFileSync(fixture, "utf8") },
+  );
+
+for (const { name, size, open, covered } of [
+  {
+    name: "the config drawer",
+    size: { width: 1280, height: 800 },
+    open: async (page) => {
+      await page.goto("/games/18Test/map?config=true");
+      await expect(
+        page.getByRole("button", { name: "Close Config" }),
+      ).toBeVisible();
+    },
+    covered: "config-drawer",
+  },
+  {
+    name: "the side nav backdrop",
+    size: { width: 500, height: 800 },
+    open: async (page) => {
+      await page.goto("/games/18Test/map");
+      await page.getByRole("button", { name: "menu" }).click();
+      await expect(page.getByTestId("side-nav-temporary")).toBeVisible();
+    },
+    covered: "side-nav-temporary",
+  },
+]) {
+  test(`loads a dropped game file while ${name} is open`, async ({ page }) => {
+    await page.addInitScript(() => {
+      delete window.showOpenFilePicker;
+    });
+    await page.setViewportSize(size);
+    await open(page);
+
+    // The right edge is the drawer (config) or the backdrop (side nav, whose
+    // panel is 300px wide)
+    const result = await dropAt(page, { x: size.width - 20, y: 400 });
+    expect(result).toEqual({ where: covered, overPrevented: true });
+
+    await expect(page).toHaveURL(/\/games\/internal:[^/]+\/map$/);
+    await expect(page.getByText("Game Loaded")).toBeVisible();
+  });
+}
