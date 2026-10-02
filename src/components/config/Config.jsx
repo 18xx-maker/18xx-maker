@@ -1,14 +1,9 @@
 import { diff } from "deep-object-diff";
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
 
 import {
   chain,
@@ -30,6 +25,8 @@ import { companyThemes, mapThemes } from "@/data";
 import defaultConfig from "@/defaults.json";
 import { useConfig } from "@/hooks";
 import schema from "@/schemas/config.schema.json";
+import { Box, Button, Divider, Typography } from "@/ui";
+import styles from "./Config.module.css";
 
 export const getPath = split(".");
 export const getSchemaPath = compose(
@@ -38,33 +35,6 @@ export const getSchemaPath = compose(
   split("."),
 );
 export const getSchema = (name) => path(getSchemaPath(name), schema);
-
-const useStyles = makeStyles((theme) => ({
-  configSection: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    padding: theme.spacing(3),
-    overflow: "visible",
-
-    "& p": {
-      margin: "0",
-    },
-    "& > p": {
-      margin: "1em 0",
-    },
-    "& pre + a": {
-      margin: "1em 0 0 0",
-    },
-    "& pre": {
-      margin: "0 !important",
-    },
-  },
-  configItem: {
-    minWidth: 200,
-    margin: theme.spacing(3, 0, 0, 0),
-  },
-}));
 
 const PinConfig = ({ prefix }) => (
   <>
@@ -102,7 +72,6 @@ const PinConfig = ({ prefix }) => (
 );
 
 const Config = () => {
-  const classes = useStyles();
   const { config, setConfig, resetConfig } = useConfig();
 
   let setOption = (event) =>
@@ -110,9 +79,9 @@ const Config = () => {
 
   return (
     <Box>
-      <Box className={classes.configSection}>
+      <Box className={styles.configSection}>
         <Typography variant="h5">Colors and Companies</Typography>
-        <FormControl variant="filled" className={classes.configItem}>
+        <FormControl variant="filled" className={styles.configItem}>
           <InputLabel id="theme-label">Theme</InputLabel>
           <Select
             id="theme"
@@ -137,7 +106,7 @@ const Config = () => {
           the maps and tiles.
         </Typography>
 
-        <FormControl variant="filled" className={classes.configItem}>
+        <FormControl variant="filled" className={styles.configItem}>
           <InputLabel id="companies-theme-label">Companies Theme</InputLabel>
           <Select
             id="companies-theme"
@@ -176,7 +145,7 @@ const Config = () => {
 
       <Divider />
 
-      <Box className={classes.configSection}>
+      <Box className={styles.configSection}>
         <Typography variant="h5">Export</Typography>
         <Input
           name="export.allLayouts"
@@ -187,7 +156,7 @@ const Config = () => {
 
       <Divider />
 
-      <Box className={classes.configSection}>
+      <Box className={styles.configSection}>
         <Typography variant="h5">Layout</Typography>
         <Input
           name="margin"
@@ -224,7 +193,7 @@ const Config = () => {
 
       <Divider />
 
-      <Box className={classes.configSection}>
+      <Box className={styles.configSection}>
         <Typography variant="h5">Tokens</Typography>
         <Input
           name="tokens.layout"
@@ -258,7 +227,7 @@ const Config = () => {
 
       <Divider />
 
-      <Box className={classes.configSection}>
+      <Box className={styles.configSection}>
         <Typography variant="h5">Maps</Typography>
         <Input
           name="coords"
@@ -297,7 +266,7 @@ const Config = () => {
 
       <Divider />
 
-      <Box className={classes.configSection}>
+      <Box className={styles.configSection}>
         <Typography variant="h5">Tiles</Typography>
         <Input
           name="tiles.id"
@@ -336,7 +305,7 @@ const Config = () => {
 
       <Divider />
 
-      <Box className={classes.configSection}>
+      <Box className={styles.configSection}>
         <Typography variant="h5">Market</Typography>
         <Input
           name="stock.cell.width"
@@ -394,7 +363,7 @@ const Config = () => {
 
       <Divider />
 
-      <Box className={classes.configSection}>
+      <Box className={styles.configSection}>
         <Typography variant="h5">Charters</Typography>
         <Input
           name="charters.style"
@@ -453,7 +422,7 @@ const Config = () => {
 
       <Divider />
 
-      <Box className={classes.configSection}>
+      <Box className={styles.configSection}>
         <Typography variant="h5">Cards</Typography>
         <Input
           name="cards.shareStyle"
@@ -500,7 +469,7 @@ const Config = () => {
 
       <Divider />
 
-      <Box className={classes.configSection}>
+      <Box className={styles.configSection}>
         <Typography variant="h5">Privates</Typography>
         <Input
           name="privates.style"
@@ -511,7 +480,7 @@ const Config = () => {
 
       <Divider />
 
-      <Box className={classes.configSection}>
+      <Box className={styles.configSection}>
         <Typography variant="h5">Trains</Typography>
         <Input
           name="trains.style"
@@ -527,7 +496,7 @@ const Config = () => {
 
       <Divider />
 
-      <Box className={classes.configSection}>
+      <Box className={styles.configSection}>
         <Typography variant="h5">Currency</Typography>
         <Typography variant="body1">
           This lets you turn on currency symbols for each item individually.
@@ -603,7 +572,7 @@ const Config = () => {
 
       <Divider />
 
-      <Box className={classes.configSection}>
+      <Box className={styles.configSection}>
         <Typography variant="h5">Data</Typography>
         <Typography variant="body1">
           You can remove any custom settings and revert back to the defaults

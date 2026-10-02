@@ -54,15 +54,15 @@ number that is not one of them, or a unit other than px.
 
 - `Root.jsx` uses `StyledEngineProvider injectFirst`, so MUI's emotion styles
   are prepended to `<head>` and lose to any later stylesheet, including CSS
-  Modules, at equal specificity.
-- `@mui/styles` (JSS `makeStyles`) injects its `<style>` tags last at runtime
-  and beats CSS Modules at equal specificity. Some files still use it (`scripts/check-mui-styles.js` has the count).
-- So a converted component that shares an element with a `makeStyles` class
-  loses ties. Convert the whole element, or keep specificity higher than a
-  single class (nest under a parent class) when the JSS rule must be beaten.
-  Defaults written with `:where()` lose to everything, which is intended.
-- `coexistence.test.jsx` pins all of the above next to real MUI components.
-  Once `@mui/styles` is gone nothing in this section applies.
+  Modules, at equal specificity. So a CSS Module class beats the emotion styles
+  of the MUI component it is put on, and a `src/ui` primitive that sets a
+  property loses to a consumer's class only if the consumer's CSS loads later.
+  App code imports `@/ui` before its own `*.module.css`, which keeps that
+  order. A default a consumer must always be able to override is written in
+  `:where()` (the `TextField` root is one).
+- No file imports `@mui/styles` any more (`scripts/check-mui-styles.js` pins
+  the count at 0), so the JSS rule that used to beat CSS Modules is gone.
+- `coexistence.test.jsx` pins the rest next to real MUI components.
 
 ## Print rules (`src/styles/root.css`, `@media print`)
 
@@ -70,8 +70,8 @@ That block hides the chrome with `[data-chrome="app-bar"]` and
 `[data-chrome="fab"]` (the `src/ui` AppBar and Fab), and still uses `.Mui*`
 selectors for what is not replaced yet: `.MuiDrawer-root`, `.MuiSnackbar-root`,
 `.MuiTooltip-popper` and `.MuiFab-root` (the config drawer's MUI Fab). It frees
-the viewport with `[data-chrome="viewport"]`; `.MuiBox-root` stays for the MUI
-`Box` that is left. Leave a `.Mui*` selector alone until the component it names
+the viewport with `[data-chrome="viewport"]` and the background page's wrapper
+with `[data-chrome="background"]`. Leave a `.Mui*` selector alone until the component it names
 is replaced. The PR that replaces one must, in the same PR, swap the selector
 for the component's `data-chrome` hook (or a CSS Module class) and keep
 `e2e/print.spec.js` green, which checks the `data-testid` hooks under

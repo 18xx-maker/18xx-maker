@@ -1,0 +1,9 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.tile {
+  display: flex;
+  justify-content: center;
+}

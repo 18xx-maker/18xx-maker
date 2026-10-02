@@ -19,3 +19,15 @@
 .warning {
   color: var(--palette-warning-main);
 }
+
+/* A group of checkboxes with a legend */
+.fieldset {
+  display: inline-flex;
+  position: relative;
+  flex-direction: column;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  min-width: 0;
+  vertical-align: top;
+}

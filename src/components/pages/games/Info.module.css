@@ -1,0 +1,19 @@
+.page {
+  margin: calc(var(--space) * 4) 0;
+  padding: calc(var(--space) * 2) calc(var(--space) * 2) 0;
+  overflow: auto;
+}
+
+/* Icon colors that were MUI's green[500] and blue[500] and the theme warning
+   color */
+.purchase {
+  color: #4caf50;
+}
+
+.prototype {
+  color: #2196f3;
+}
+
+.warning {
+  color: var(--palette-warning-main);
+}

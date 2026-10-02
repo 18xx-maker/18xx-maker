@@ -2,50 +2,17 @@ import { Trans, useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router";
 
 import Alert from "@mui/material/Alert";
-import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
 
 import gtgLogo from "@/data/publishers/gtg.png";
+import { Container, Link, Paper, Typography } from "@/ui";
 import capability from "@/util/capability";
-
-const useStyles = makeStyles((theme) => ({
-  page: {
-    margin: theme.spacing(2, 0),
-    padding: theme.spacing(2),
-
-    "& h5": {
-      padding: theme.spacing(1, 0, 0.5, 0),
-    },
-
-    "& ul": {
-      margin: theme.spacing(0, 0, 2, 0),
-    },
-
-    "& p": {
-      padding: theme.spacing(0, 0, 2, 0),
-      "&:last-child": {
-        padding: 0,
-      },
-    },
-
-    "& a": {
-      textDecoration: "underline",
-    },
-  },
-  Alert: {
-    margin: theme.spacing(0, 0, 2, 0),
-  },
-}));
+import styles from "./Home.module.css";
 
 const Home = () => {
-  const classes = useStyles();
   const { t } = useTranslation();
   return (
     <Container maxWidth="md">
-      <Paper data-testid="home" elevation={5} className={classes.page}>
+      <Paper data-testid="home" elevation={5} className={styles.page}>
         <Typography variant="body1">{t("about")}</Typography>
         {capability.electron || (
           <>
@@ -213,7 +180,7 @@ const Home = () => {
             }}
           />
         </Typography>
-        <Alert severity="warning" className={classes.Alert}>
+        <Alert severity="warning" className={styles.alert}>
           <strong>{t("important")}: </strong>
           {t("piracy")}
         </Alert>

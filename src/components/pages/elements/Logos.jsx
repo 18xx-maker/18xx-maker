@@ -1,30 +1,15 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid2";
 import MenuItem from "@mui/material/MenuItem";
-import Paper from "@mui/material/Paper";
 import Select from "@mui/material/Select";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
 
 import { ascend, compose, groupBy, keys, map, nth, sort, split } from "ramda";
 
 import { logos } from "@/data";
+import { Container, Grid, Paper, Typography } from "@/ui";
 import { useStringParam } from "@/util/query";
-
-const useStyles = makeStyles((theme) => ({
-  page: {
-    overflow: "auto",
-    margin: theme.spacing(2, 0),
-    padding: theme.spacing(2, 2, 0, 2),
-
-    "& p": {
-      marginBottom: theme.spacing(2),
-    },
-  },
-}));
+import pageStyles from "../page.module.css";
 
 const groupFor = compose(nth(0), split("/"));
 const nameFor = compose(nth(1), split("/"));
@@ -45,7 +30,6 @@ const groupItems = map(
 
 const Logos = () => {
   const { t } = useTranslation();
-  const classes = useStyles();
   const [group, setGroup] = useStringParam("group", groupNames[0]);
 
   const logoNodes = useMemo(
@@ -71,7 +55,7 @@ const Logos = () => {
 
   return (
     <Container maxWidth="lg">
-      <Paper data-testid="logos" elevation={5} className={classes.page}>
+      <Paper data-testid="logos" elevation={5} className={pageStyles.page}>
         <Typography variant="h4" gutterBottom>
           {t("elements.logos.title")}
         </Typography>
@@ -79,9 +63,7 @@ const Logos = () => {
           {t("elements.logos.page.description")}
         </Typography>
       </Paper>
-      <Container
-        sx={{ paddingBottom: 2, display: "flex", justifyContent: "center" }}
-      >
+      <Container maxWidth="lg" className={pageStyles.selector}>
         <Select value={group} onChange={(e) => setGroup(e.target.value)}>
           {groupItems}
         </Select>

@@ -1,12 +1,14 @@
 import { Link as RouterLink } from "react-router";
 
-import DeleteIcon from "@mui/icons-material/Delete";
-import IconButton from "@mui/material/IconButton";
-import Link from "@mui/material/Link";
-import TableCell from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
-
 import { publishers } from "@/data";
+import {
+  Delete as DeleteIcon,
+  IconButton,
+  Link,
+  TableCell,
+  TableRow,
+} from "@/ui";
+import styles from "./GameRow.module.css";
 
 const GameRow = ({ game, onDelete }) => {
   let linkNode = null;
@@ -84,7 +86,7 @@ const GameRow = ({ game, onDelete }) => {
             aria-label={`Delete ${game.title}`}
             color="inherit"
             size="small"
-            sx={{ p: 0 }}
+            className={styles.delete}
             onClick={() => onDelete(game.slug, game.title)}
           >
             <DeleteIcon />

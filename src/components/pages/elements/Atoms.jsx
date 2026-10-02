@@ -1,21 +1,18 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid2";
 import MenuItem from "@mui/material/MenuItem";
-import Paper from "@mui/material/Paper";
 import Select from "@mui/material/Select";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
 
 import { addIndex, chain, find, map, propEq } from "ramda";
 
 import Hex from "@/components/Hex";
 import Svg from "@/components/Svg";
 import { SyntaxHighlighter, style } from "@/components/SyntaxHighlighter";
+import { Box, Container, Grid, Paper, Typography } from "@/ui";
 import { useStringParam } from "@/util/query";
+import pageStyles from "../page.module.css";
+import styles from "./Atoms.module.css";
 
 const atoms = [
   {
@@ -982,35 +979,6 @@ const atoms = [
   },
 ];
 
-const useStyles = makeStyles((theme) => ({
-  hex: {
-    display: "flex",
-    justifyContent: "center",
-  },
-
-  atom: {
-    padding: theme.spacing(2, 2, 0, 2),
-
-    "& pre": {
-      overflow: "auto",
-      maxHeight: 300,
-      padding: theme.spacing(1),
-      backgroundColor: theme.palette.grey[300],
-      borderRadius: theme.shape.borderRadius,
-    },
-  },
-
-  page: {
-    overflow: "auto",
-    margin: theme.spacing(2, 0),
-    padding: theme.spacing(2, 2, 0, 2),
-
-    "& p": {
-      marginBottom: theme.spacing(2),
-    },
-  },
-}));
-
 const groupItems = map(
   (atom) => (
     <MenuItem key={atom.group} value={atom.group}>
@@ -1022,7 +990,6 @@ const groupItems = map(
 
 const Atoms = () => {
   const { t } = useTranslation();
-  const classes = useStyles();
 
   const [group, setGroup] = useStringParam("group", atoms[0].group);
 
@@ -1032,10 +999,10 @@ const Atoms = () => {
         return (
           <Grid
             key={`example-${id}`}
-            className={classes.atom}
+            className={styles.atom}
             size={{ xs: 12, sm: 6, lg: 4 }}
           >
-            <Box className={classes.hex}>
+            <Box className={styles.hex}>
               <Svg
                 width="175.205"
                 height="152"
@@ -1054,7 +1021,7 @@ const Atoms = () => {
           </Grid>
         );
       }),
-    [classes],
+    [],
   );
 
   const hexes = useMemo(
@@ -1064,7 +1031,7 @@ const Atoms = () => {
 
   return (
     <Container maxWidth="lg">
-      <Paper data-testid="atoms" elevation={5} className={classes.page}>
+      <Paper data-testid="atoms" elevation={5} className={pageStyles.page}>
         <Typography variant="h4" gutterBottom>
           {t("elements.atoms.title")}
         </Typography>
@@ -1072,9 +1039,7 @@ const Atoms = () => {
           {t("elements.atoms.page.description")}
         </Typography>
       </Paper>
-      <Container
-        sx={{ paddingBottom: 2, display: "flex", justifyContent: "center" }}
-      >
+      <Container maxWidth="lg" className={pageStyles.selector}>
         <Select value={group} onChange={(e) => setGroup(e.target.value)}>
           {groupItems}
         </Select>

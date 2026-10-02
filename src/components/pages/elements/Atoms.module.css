@@ -1,0 +1,16 @@
+.hex {
+  display: flex;
+  justify-content: center;
+}
+
+.atom {
+  padding: calc(var(--space) * 2) calc(var(--space) * 2) 0;
+}
+
+.atom pre {
+  border-radius: var(--radius);
+  background-color: var(--palette-grey-300);
+  padding: var(--space);
+  max-height: 300px;
+  overflow: auto;
+}

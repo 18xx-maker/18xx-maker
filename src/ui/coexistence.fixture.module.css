@@ -11,10 +11,3 @@
 :where(.whereRed) {
   color: rgb(255 0 0);
 }
-
-/* Same specificity as one class: compared with the JSS rule on the home page
-   (Home.jsx). Point this at another makeStyles element when Home moves off
-   makeStyles. */
-[data-testid="home"] {
-  margin: 0;
-}

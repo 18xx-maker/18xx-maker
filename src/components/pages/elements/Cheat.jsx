@@ -1,19 +1,20 @@
 import { Link as RouterLink } from "react-router";
 
-import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-
 import { intersperse, keys, map, max, prop, reduce } from "ramda";
 
 import { games } from "@/data";
+import {
+  Container,
+  Link,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@/ui";
 
 const Value = ({ game, field }) => {
   if (game[field]) {
@@ -91,7 +92,7 @@ const gameRows = map((key) => {
 
 const Cheat = () => {
   return (
-    <Container>
+    <Container maxWidth="lg">
       <Typography component="h1" variant="h4" gutterBottom>
         18xx Game Cheat Sheet
       </Typography>

@@ -2,15 +2,10 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Link as RouterLink, useLocation, useMatch } from "react-router";
 
-import Checkbox from "@mui/material/Checkbox";
 import FormControl from "@mui/material/FormControl";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
-import FormLabel from "@mui/material/FormLabel";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import Switch from "@mui/material/Switch";
 
 import { addIndex, is, map, omit } from "ramda";
 
@@ -19,7 +14,11 @@ import { useGame } from "@/hooks/game.js";
 import { refreshGame } from "@/state";
 import {
   Storage as BGGIcon,
+  Checkbox,
   Divider,
+  FormControlLabel,
+  FormGroup,
+  FormLabel,
   Train as GameIcon,
   Lock as LicenseIcon,
   Link,
@@ -31,6 +30,7 @@ import {
   MonetizationOn as PurchaseIcon,
   Refresh as RefreshIcon,
   Gavel as RulesIcon,
+  Switch,
   Warning as WarningIcon,
 } from "@/ui";
 import { titleToFilename } from "@/util";
@@ -234,7 +234,6 @@ const GameNav = () => {
                     <Switch
                       checked={paginated}
                       onChange={togglePagination}
-                      color="primary"
                       name="pagination"
                     />
                   }
@@ -269,7 +268,7 @@ const GameNav = () => {
             )}
             {isCards && (
               <ListItem>
-                <FormControl component="fieldset">
+                <fieldset className={styles.fieldset}>
                   <FormLabel component="legend">{t("show")}</FormLabel>
                   <FormGroup>
                     <FormControlLabel
@@ -277,7 +276,6 @@ const GameNav = () => {
                         <Checkbox
                           checked={!hidePrivates}
                           onChange={togglePrivates}
-                          color="primary"
                           name="showPrivates"
                         />
                       }
@@ -288,7 +286,6 @@ const GameNav = () => {
                         <Checkbox
                           checked={!hideShares}
                           onChange={toggleShares}
-                          color="primary"
                           name="showShares"
                         />
                       }
@@ -299,7 +296,6 @@ const GameNav = () => {
                         <Checkbox
                           checked={!hideTrains}
                           onChange={toggleTrains}
-                          color="primary"
                           name="showTrains"
                         />
                       }
@@ -310,14 +306,13 @@ const GameNav = () => {
                         <Checkbox
                           checked={!hideNumbers}
                           onChange={toggleNumbers}
-                          color="primary"
                           name="showNumbers"
                         />
                       }
                       label={t("game.cards.numbers")}
                     />
                   </FormGroup>
-                </FormControl>
+                </fieldset>
               </ListItem>
             )}
           </List>

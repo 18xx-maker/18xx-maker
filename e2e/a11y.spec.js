@@ -13,31 +13,8 @@ import { expect, test } from "@playwright/test";
 // Keys never use component library class names (.Mui*, css-<hash>, jss<n>) so
 // the list survives a change of UI library.
 
-// ListItemButton with component={RouterLink} used to render <a> directly inside
-// <ul> in the side navs. The src/ui List family wraps each in a <li>, so only
-// the page's own list below is left.
-const LIST_IN_PAGE = {
-  rule: "list",
-  targets: ["game-1889 ul:0"],
-  // The page's own <List> in src/components/pages/games/Info.jsx
-  reason: "page links are direct children of <ul>",
-};
-
 const KNOWN_ISSUES = {
-  "game info": [LIST_IN_PAGE],
   "config drawer": [
-    {
-      // These number inputs have no accessible name (src/components/config)
-      rule: "label",
-      targets: [
-        "#stock.column",
-        "#stock.diag",
-        "#stock.par",
-        "#charters.border",
-        "#cards.border",
-      ],
-      reason: "config inputs without a label",
-    },
     {
       // Links in the config drawer's descriptions are only underlined by
       // color

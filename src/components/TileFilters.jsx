@@ -6,12 +6,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Slider from "@mui/material/Slider";
-import TextField from "@mui/material/TextField";
 
 import { map, uniq, values } from "ramda";
 
 import { tiles } from "@/data";
-import { Box, Paper, Typography } from "@/ui";
+import { Box, Paper, TextField, Typography } from "@/ui";
 import styles from "./TileFilters.module.css";
 
 const colors = uniq(values(map((t) => t.color, tiles)));
@@ -74,7 +73,6 @@ const TileFilters = ({
           style={{ width: 150 }}
           value={id}
           onChange={handleId}
-          variant="filled"
         />
         <FormControl variant="filled">
           <InputLabel id="filter-includes-label">

@@ -1,0 +1,9 @@
+/* A config row: a control with a label, 24px below the previous one */
+.configItem {
+  display: inline-flex;
+  position: relative;
+  flex-direction: column;
+  margin: calc(var(--space) * 3) 0 0;
+  min-width: 200px;
+  vertical-align: top;
+}

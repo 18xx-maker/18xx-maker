@@ -1,0 +1,28 @@
+.page {
+  margin: calc(var(--space) * 2) 0;
+  padding: calc(var(--space) * 2);
+}
+
+.page h5 {
+  padding: var(--space) 0 calc(var(--space) * 0.5);
+}
+
+.page ul {
+  margin: 0 0 calc(var(--space) * 2);
+}
+
+.page p {
+  padding: 0 0 calc(var(--space) * 2);
+}
+
+.page p:last-child {
+  padding: 0;
+}
+
+.page a {
+  text-decoration: underline;
+}
+
+.alert {
+  margin: 0 0 calc(var(--space) * 2);
+}

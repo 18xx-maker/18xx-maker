@@ -1,39 +1,27 @@
 import { useTranslation } from "react-i18next";
 
-import RulesIcon from "@mui/icons-material/Gavel";
-import LicenseIcon from "@mui/icons-material/Lock";
-import PurchaseIcon from "@mui/icons-material/MonetizationOn";
-import PlayersIcon from "@mui/icons-material/People";
-import BGGIcon from "@mui/icons-material/Storage";
-import WarningIcon from "@mui/icons-material/Warning";
-import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import { blue, green } from "@mui/material/colors";
-import makeStyles from "@mui/styles/makeStyles";
-
 import { useGame } from "@/hooks/game.js";
-
-const useStyles = makeStyles((theme) => ({
-  page: {
-    overflow: "auto",
-    margin: theme.spacing(4, 0),
-    padding: theme.spacing(2, 2, 0, 2),
-  },
-  warning: {
-    color: theme.palette.warning.main,
-  },
-}));
+import {
+  Storage as BGGIcon,
+  Container,
+  Lock as LicenseIcon,
+  Link,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Paper,
+  People as PlayersIcon,
+  MonetizationOn as PurchaseIcon,
+  Gavel as RulesIcon,
+  Typography,
+  Warning as WarningIcon,
+} from "@/ui";
+import styles from "./Info.module.css";
 
 const Info = () => {
   const game = useGame();
-  const classes = useStyles();
   const { t } = useTranslation();
 
   return (
@@ -41,7 +29,7 @@ const Info = () => {
       <Paper
         data-testid={`game-${game.meta.slug}`}
         elevation={5}
-        className={classes.page}
+        className={styles.page}
       >
         <Typography variant="h3">{game.info.title}</Typography>
         {game.info.subtitle && (
@@ -63,71 +51,79 @@ const Info = () => {
             </ListItem>
           )}
           {game.links && game.links.license && (
-            <ListItemButton
-              component={Link}
-              color="inherit"
-              underline="none"
-              target="_blank"
-              href={game.links.license}
-            >
-              <ListItemIcon>
-                <LicenseIcon color="error" />
-              </ListItemIcon>
-              <ListItemText
-                primary={t("game.license.primary")}
-                secondary={t("game.license.secondary")}
-              />
-            </ListItemButton>
+            <ListItem disablePadding>
+              <ListItemButton
+                component={Link}
+                color="inherit"
+                underline="none"
+                target="_blank"
+                href={game.links.license}
+              >
+                <ListItemIcon>
+                  <LicenseIcon color="error" />
+                </ListItemIcon>
+                <ListItemText
+                  primary={t("game.license.primary")}
+                  secondary={t("game.license.secondary")}
+                />
+              </ListItemButton>
+            </ListItem>
           )}
           {game.links && game.links.purchase && (
-            <ListItemButton
-              component={Link}
-              color="inherit"
-              underline="none"
-              target="_blank"
-              href={game.links.purchase}
-            >
-              <ListItemIcon>
-                <PurchaseIcon style={{ color: green[500] }} />
-              </ListItemIcon>
-              <ListItemText
-                primary={t("game.purchase.primary")}
-                secondary={t("game.purchase.secondary")}
-              />
-            </ListItemButton>
+            <ListItem disablePadding>
+              <ListItemButton
+                component={Link}
+                color="inherit"
+                underline="none"
+                target="_blank"
+                href={game.links.purchase}
+              >
+                <ListItemIcon>
+                  <PurchaseIcon className={styles.purchase} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={t("game.purchase.primary")}
+                  secondary={t("game.purchase.secondary")}
+                />
+              </ListItemButton>
+            </ListItem>
           )}
           {game.links && game.links.bgg && (
-            <ListItemButton
-              component={Link}
-              color="inherit"
-              underline="none"
-              target="_blank"
-              href={game.links.bgg}
-            >
-              <ListItemIcon>
-                <BGGIcon />
-              </ListItemIcon>
-              <ListItemText>{t("game.bgg")}</ListItemText>
-            </ListItemButton>
+            <ListItem disablePadding>
+              <ListItemButton
+                component={Link}
+                color="inherit"
+                underline="none"
+                target="_blank"
+                href={game.links.bgg}
+              >
+                <ListItemIcon>
+                  <BGGIcon />
+                </ListItemIcon>
+                <ListItemText>{t("game.bgg")}</ListItemText>
+              </ListItemButton>
+            </ListItem>
           )}
           {game.links && game.links.rules && (
-            <ListItemButton
-              component={Link}
-              color="inherit"
-              underline="none"
-              target="_blank"
-              href={game.links.rules}
-            >
-              <ListItemIcon>
-                <RulesIcon />
-              </ListItemIcon>
-              <ListItemText primary={t("game.rules")} />
-            </ListItemButton>
+            <ListItem disablePadding>
+              <ListItemButton
+                component={Link}
+                color="inherit"
+                underline="none"
+                target="_blank"
+                href={game.links.rules}
+              >
+                <ListItemIcon>
+                  <RulesIcon />
+                </ListItemIcon>
+                <ListItemText primary={t("game.rules")} />
+              </ListItemButton>
+            </ListItem>
           )}
           {game.prototype && (
             <ListItem>
               <ListItemIcon>
-                <WarningIcon style={{ color: blue[500] }} />
+                <WarningIcon className={styles.prototype} />
               </ListItemIcon>
               <ListItemText
                 primary={t("prototype.prototype")}
@@ -138,7 +134,7 @@ const Info = () => {
           {game.wip && (
             <ListItem>
               <ListItemIcon>
-                <WarningIcon className={classes.warning} />
+                <WarningIcon className={styles.warning} />
               </ListItemIcon>
               <ListItemText
                 primary={t("wip.wip")}

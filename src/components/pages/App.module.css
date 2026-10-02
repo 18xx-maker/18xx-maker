@@ -1,0 +1,64 @@
+.versions {
+  width: inherit;
+}
+
+.versions svg,
+.versions img {
+  display: block;
+}
+
+.versions td {
+  padding: calc(var(--space) * 0.5);
+}
+
+.versions td:first-child {
+  padding-left: calc(var(--space) * 2);
+}
+
+.versions th {
+  font-weight: bold;
+}
+
+.page {
+  margin: calc(var(--space) * 2) 0;
+  padding: calc(var(--space) * 2);
+}
+
+.page h4,
+.page h5 {
+  padding: 0 0 calc(var(--space) * 2);
+}
+
+.page p {
+  padding: 0 0 calc(var(--space) * 2);
+}
+
+.page p:last-child {
+  padding: 0;
+}
+
+.page code {
+  border-radius: var(--radius);
+  background: rgb(245 242 240);
+  padding: calc(var(--space) * 0.4) calc(var(--space) * 0.8)
+    calc(var(--space) * 0.3);
+  color: black;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-size: 1em;
+  font-weight: bold;
+  text-shadow: white 0 1px;
+  white-space: pre;
+}
+
+.page p:has(+ pre) {
+  padding: 0;
+}
+
+.page pre {
+  margin-bottom: 0 !important;
+  padding: 0 0 calc(var(--space) * 2);
+}
+
+.page pre:last-child {
+  padding: 0;
+}

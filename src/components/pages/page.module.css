@@ -1,0 +1,17 @@
+/* The intro card at the top of the elements, load and docs pages */
+.page {
+  margin: calc(var(--space) * 2) 0;
+  padding: calc(var(--space) * 2) calc(var(--space) * 2) 0;
+  overflow: auto;
+}
+
+.page p {
+  margin-bottom: calc(var(--space) * 2);
+}
+
+/* A row with one control (a Select) in the middle */
+.selector {
+  display: flex;
+  justify-content: center;
+  padding-bottom: calc(var(--space) * 2);
+}

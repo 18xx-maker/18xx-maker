@@ -1,26 +1,13 @@
 import tinycolor from "tinycolor2";
 
-import Avatar from "@mui/material/Avatar";
-import AvatarGroup from "@mui/material/AvatarGroup";
-import makeStyles from "@mui/styles/makeStyles";
-
 import { filter, is, keys, map, sortBy, uniqBy } from "ramda";
 
 import Color from "@/components/Color";
 import ColorContext from "@/context/ColorContext";
 import { companyThemes, mapThemes } from "@/data";
 import { useConfig } from "@/hooks";
-
-const useStyles = makeStyles((theme) => ({
-  themeGroup: {
-    margin: theme.spacing(1, 0, 0, 0),
-    flexWrap: "wrap",
-  },
-  themeSquare: {
-    height: theme.spacing(3),
-    width: theme.spacing(3),
-  },
-}));
+import { Avatar, AvatarGroup } from "@/ui";
+import styles from "./ThemePreview.module.css";
 
 const ThemePreview = ({ companies }) => {
   const { config } = useConfig();
@@ -38,10 +25,8 @@ const ThemePreview = ({ companies }) => {
     ),
   );
 
-  const classes = useStyles();
-
   return (
-    <AvatarGroup className={classes.themeGroup}>
+    <AvatarGroup className={styles.themeGroup}>
       <ColorContext.Provider value={companies ? "companies" : undefined}>
         <Color>
           {(c) =>
@@ -50,7 +35,7 @@ const ThemePreview = ({ companies }) => {
                 <Avatar
                   key={color}
                   variant="square"
-                  className={classes.themeSquare}
+                  className={styles.themeSquare}
                   style={{ backgroundColor: c(color) }}
                 >
                   &nbsp;

@@ -3,44 +3,32 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
-import OpenIcon from "@mui/icons-material/FileOpen";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
-
 import { chain, compose, map, prop, sortBy, values } from "ramda";
 
 import GameRow from "@/components/pages/load/GameRow";
 import { createAlert, deleteGame, loadSummaries } from "@/state";
+import {
+  Button,
+  Container,
+  FileOpen as OpenIcon,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@/ui";
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import * as opfs from "@/util/opfs";
-
-const useStyles = makeStyles((theme) => ({
-  page: {
-    overflow: "auto",
-    margin: theme.spacing(2, 0),
-    padding: theme.spacing(2, 2, 0, 2),
-
-    "& p": {
-      marginBottom: theme.spacing(2),
-    },
-  },
-}));
+import pageStyles from "../page.module.css";
 
 const sortSummaries = compose(sortBy(prop("title")), chain(values), values);
 
 const LoadGames = () => {
   const { t } = useTranslation();
-  const classes = useStyles();
   const dispatch = useDispatch();
   const summaries = useSelector((state) => state.summaries);
   const navigate = useNavigate();
@@ -86,7 +74,7 @@ const LoadGames = () => {
 
   return (
     <Container maxWidth="md">
-      <Paper data-testid="games" className={classes.page} elevation={10}>
+      <Paper data-testid="games" className={pageStyles.page} elevation={10}>
         <Typography variant="h3">{t("games.title")}</Typography>
         <Typography variant="body1">{t("games.description")}</Typography>
         {(capability.electron || capability.system) && (

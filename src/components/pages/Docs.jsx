@@ -1,92 +1,25 @@
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink, useLocation } from "react-router";
 
-import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
-
 import { dissoc, isEmpty, startsWith } from "ramda";
 
 import Markdown from "@/components/Markdown";
 import { SyntaxHighlighter, style } from "@/components/SyntaxHighlighter";
+import {
+  Container,
+  Link,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@/ui";
 import capability from "@/util/capability";
+import styles from "./Docs.module.css";
 
 const removeNode = dissoc("node");
-
-const useStyles = makeStyles((theme) => ({
-  page: {
-    overflow: "auto",
-    margin: theme.spacing(2, 0),
-    padding: theme.spacing(2, 2, 0, 2),
-
-    "& p": {
-      marginBottom: theme.spacing(2),
-    },
-
-    "& p a": {
-      textDecoration: "underline",
-    },
-    "& p a:visited": {
-      color: theme.palette.primary.main,
-    },
-
-    "& code": {
-      padding: theme.spacing(0.4, 0.8, 0.3, 0.8),
-
-      borderRadius: theme.shape.borderRadius,
-      whiteSpace: "pre",
-      background: "rgb(245, 242, 240)",
-      textShadow: "white 0px 1px",
-      fontFamily: "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
-      color: "black",
-      fontSize: "1em",
-      fontWeight: "bold",
-    },
-
-    "& pre": {
-      whiteSpace: "pre",
-
-      "& div": {
-        borderRadius: theme.shape.borderRadius,
-      },
-
-      "& code": {
-        padding: 0,
-      },
-
-      "& > code": {
-        display: "block",
-        margin: "0.5em 0px",
-        overflow: "auto",
-        padding: "1em",
-        textAlign: "left",
-        wordSpacing: "normal",
-        wordBreak: "normal",
-        overflowWrap: "normal",
-        lineHeight: 1.5,
-        tabSize: 4,
-        hyphens: "none",
-      },
-    },
-
-    "& table": {
-      marginBottom: theme.spacing(3),
-      "& th": {
-        fontWeight: "bold",
-      },
-      "& td, & th": {
-        textAlign: "left",
-      },
-    },
-  },
-}));
 
 const Heading = (props) => {
   switch (props.level) {
@@ -204,7 +137,6 @@ const mds = import.meta.glob("../../docs/**/*.md", {
 
 const Docs = () => {
   const { i18n } = useTranslation();
-  const classes = useStyles();
   const location = useLocation();
 
   const language = i18n.languages[0];
@@ -215,11 +147,7 @@ const Docs = () => {
 
   return (
     <Container maxWidth="md">
-      <Paper
-        data-testid={`docs-${file}`}
-        elevation={5}
-        className={classes.page}
-      >
+      <Paper data-testid={`docs-${file}`} elevation={5} className={styles.page}>
         <Markdown components={components}>{source}</Markdown>
       </Paper>
     </Container>

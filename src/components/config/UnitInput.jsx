@@ -1,29 +1,13 @@
 import { useEffect, useState } from "react";
 
-import Box from "@mui/material/Box";
-import MUIInput from "@mui/material/FilledInput";
 import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import makeStyles from "@mui/styles/makeStyles";
 
 import { keys, map } from "ramda";
 
-const useStyles = makeStyles((theme) => ({
-  configItem: {
-    minWidth: 300,
-    margin: theme.spacing(3, 0, 0, 0),
-    flexDirection: "row",
-  },
-  configInput: {
-    width: 200,
-  },
-  configUnits: {
-    width: 100,
-    marginLeft: theme.spacing(1),
-  },
-}));
+import { Box, TextField } from "@/ui";
+import styles from "./UnitInput.module.css";
 
 const allUnits = {
   inches: 100.0,
@@ -32,7 +16,6 @@ const allUnits = {
 
 // Component to help input units
 const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
-  const classes = useStyles();
   let [error, setError] = useState(false);
   let [units, setUnits] = useState("inches");
   let [internalValue, setInternalValue] = useState(value / allUnits[units]);
@@ -67,26 +50,21 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
   };
 
   return (
-    <Box className={classes.configItem}>
-      <FormControl variant="filled" error={isError}>
-        <InputLabel id={`${name}-label`} htmlFor={name}>
-          {label}
-        </InputLabel>
-        <MUIInput
-          id={name}
-          name={name}
-          className={classes.configInput}
-          variant="filled"
-          inputProps={{ type: "input" }}
-          value={internalValue}
-          onChange={handler}
-        />
-      </FormControl>
+    <Box className={styles.configItem}>
+      <TextField
+        id={name}
+        name={name}
+        label={label}
+        className={styles.configInput}
+        error={isError}
+        value={internalValue}
+        onChange={handler}
+      />
       <FormControl variant="filled">
         <Select
           id={`${name}-units`}
           labelId={`${name}-label`}
-          className={classes.configUnits}
+          className={styles.configUnits}
           value={units}
           onChange={unitsHandler}
         >

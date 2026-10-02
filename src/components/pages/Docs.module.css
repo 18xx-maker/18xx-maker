@@ -1,0 +1,69 @@
+.page {
+  margin: calc(var(--space) * 2) 0;
+  padding: calc(var(--space) * 2) calc(var(--space) * 2) 0;
+  overflow: auto;
+}
+
+.page p {
+  margin-bottom: calc(var(--space) * 2);
+}
+
+.page p a {
+  text-decoration: underline;
+}
+
+.page p a:visited {
+  color: var(--palette-primary-main);
+}
+
+.page code {
+  border-radius: var(--radius);
+  background: rgb(245 242 240);
+  padding: calc(var(--space) * 0.4) calc(var(--space) * 0.8)
+    calc(var(--space) * 0.3);
+  color: black;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-size: 1em;
+  font-weight: bold;
+  text-shadow: white 0 1px;
+  white-space: pre;
+}
+
+.page pre {
+  white-space: pre;
+}
+
+.page pre div {
+  border-radius: var(--radius);
+}
+
+.page pre code {
+  padding: 0;
+}
+
+.page pre > code {
+  display: block;
+  margin: 0.5em 0;
+  padding: 1em;
+  overflow: auto;
+  hyphens: none;
+  line-height: 1.5;
+  tab-size: 4;
+  text-align: left;
+  word-break: normal;
+  word-spacing: normal;
+  overflow-wrap: normal;
+}
+
+.page table {
+  margin-bottom: calc(var(--space) * 3);
+}
+
+.page table th {
+  font-weight: bold;
+}
+
+.page table td,
+.page table th {
+  text-align: left;
+}

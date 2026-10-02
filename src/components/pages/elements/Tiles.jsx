@@ -1,12 +1,7 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid2";
 import Pagination from "@mui/material/Pagination";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
 
 import {
   filter,
@@ -24,7 +19,10 @@ import Svg from "@/components/Svg";
 import Tile from "@/components/Tile";
 import TileFilters from "@/components/TileFilters";
 import { tiles } from "@/data";
+import { Container, Grid, Paper, Typography } from "@/ui";
 import { useIntParam, useRangeParam, useStringParam } from "@/util/query";
+import pageStyles from "../page.module.css";
+import styles from "./Tiles.module.css";
 
 const PER_PAGE = 50;
 const revenues = reduce(
@@ -51,30 +49,8 @@ const revenues = reduce(
   values(tiles),
 );
 
-const useStyles = makeStyles((theme) => ({
-  page: {
-    overflow: "auto",
-    margin: theme.spacing(2, 0),
-    padding: theme.spacing(2, 2, 0, 2),
-
-    "& p": {
-      marginBottom: theme.spacing(2),
-    },
-  },
-  filter: {
-    display: "flex",
-    flexDirection: "row",
-    paddingBottom: theme.spacing(2),
-
-    "& > div": {
-      marginRight: theme.spacing(2),
-    },
-  },
-}));
-
 const Tiles = () => {
   const { t } = useTranslation();
-  const classes = useStyles();
 
   const [page, setPage] = useIntParam("page", 1);
   const [color, setColor] = useStringParam("color", "all");
@@ -145,7 +121,7 @@ const Tiles = () => {
 
   return (
     <Container maxWidth="lg">
-      <Paper data-testid="tiles" elevation={5} className={classes.page}>
+      <Paper data-testid="tiles" elevation={5} className={pageStyles.page}>
         <Typography variant="h4" gutterBottom>
           {t("elements.tiles.title")}
         </Typography>
@@ -166,7 +142,7 @@ const Tiles = () => {
           revenues,
         }}
       />
-      <Container sx={{ display: "flex", justifyContent: "center" }}>
+      <Container maxWidth="lg" className={styles.pagination}>
         <Pagination
           size="large"
           color="primary"
@@ -181,7 +157,7 @@ const Tiles = () => {
             <Grid
               key={t.id}
               size={{ xs: 6, sm: 4, md: 4, lg: 3 }}
-              sx={{ display: "flex", justifyContent: "center" }}
+              className={styles.tile}
             >
               <Svg
                 width="200"

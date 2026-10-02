@@ -1,0 +1,14 @@
+.configItem {
+  flex-direction: row;
+  margin: calc(var(--space) * 3) 0 0;
+  min-width: 300px;
+}
+
+.configInput {
+  width: 200px;
+}
+
+.configUnits {
+  margin-left: var(--space);
+  width: 100px;
+}

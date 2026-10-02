@@ -9,8 +9,6 @@ import {
   createTheme,
 } from "@mui/material/styles";
 
-import { renderApp } from "@tests/helpers";
-
 import "./tokens.css";
 
 import styles from "./coexistence.fixture.module.css";
@@ -66,14 +64,6 @@ describe("CSS Modules next to MUI", () => {
       </Box>,
     );
     expect(style(screen.getByTestId("box")).color).toBe("rgb(255, 0, 0)");
-  });
-
-  it("JSS makeStyles beats CSS Modules at equal specificity", () => {
-    // The real home page sets margin: 16px 0 with makeStyles. The fixture sets
-    // margin: 0 on the same element with one attribute selector, which has the
-    // same specificity as one class.
-    renderApp("/");
-    expect(style(screen.getByTestId("home")).marginTop).toBe("16px");
   });
 
   it("a :where() rule loses to any other rule", () => {

@@ -1,0 +1,30 @@
+.configButton {
+  position: fixed;
+  right: calc(var(--space) * 4);
+  bottom: calc(var(--space) * 4);
+  z-index: calc(var(--z-drawer) + 1);
+}
+
+.configDrawer {
+  z-index: calc(var(--z-drawer) + 2);
+}
+
+@media (width >= 600px) {
+  .configDrawer {
+    width: 50vw;
+  }
+}
+
+@media (width >= 1280px) {
+  .configDrawer {
+    width: 35vw;
+  }
+}
+
+.configToolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  border-bottom: 1px solid var(--palette-divider);
+  background-color: var(--palette-background-default);
+}

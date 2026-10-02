@@ -1,0 +1,29 @@
+.configSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: calc(var(--space) * 3);
+  overflow: visible;
+}
+
+.configSection p {
+  margin: 0;
+}
+
+.configSection > p {
+  margin: 1em 0;
+}
+
+.configSection pre + a {
+  margin: 1em 0 0;
+}
+
+/* The highlighter sets its own margin on the pre */
+.configSection pre {
+  margin: 0 !important;
+}
+
+.configItem {
+  margin: calc(var(--space) * 3) 0 0;
+  min-width: 200px;
+}

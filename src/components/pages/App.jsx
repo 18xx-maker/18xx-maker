@@ -2,89 +2,28 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
-import DownloadIcon from "@mui/icons-material/Download";
-import CheckIcon from "@mui/icons-material/Replay";
-import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
-import Container from "@mui/material/Container";
 import LinearProgress from "@mui/material/LinearProgress";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
 
 import { prop } from "ramda";
 
 import { SyntaxHighlighter, style } from "@/components/SyntaxHighlighter";
 import { logos } from "@/data";
 import { createDownloadPercent } from "@/state";
-
-const useStyles = makeStyles((theme) => ({
-  versions: {
-    width: "inherit",
-    "& svg, & img": {
-      display: "block",
-    },
-    "& td": {
-      padding: theme.spacing(0.5),
-
-      "&:first-child": {
-        paddingLeft: theme.spacing(2),
-      },
-    },
-    "& th": {
-      fontWeight: "bold",
-    },
-  },
-  page: {
-    margin: theme.spacing(2, 0),
-    padding: theme.spacing(2),
-
-    "& h4": {
-      padding: theme.spacing(0, 0, 2, 0),
-    },
-
-    "& h5": {
-      padding: theme.spacing(0, 0, 2, 0),
-    },
-
-    "& p": {
-      padding: theme.spacing(0, 0, 2, 0),
-      "&:last-child": {
-        padding: 0,
-      },
-    },
-
-    "& code": {
-      padding: theme.spacing(0.4, 0.8, 0.3, 0.8),
-
-      borderRadius: theme.shape.borderRadius,
-      whiteSpace: "pre",
-      background: "rgb(245, 242, 240)",
-      textShadow: "white 0px 1px",
-      fontFamily: "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
-      color: "black",
-      fontSize: "1em",
-      fontWeight: "bold",
-    },
-
-    "& p:has(+ pre)": {
-      padding: 0,
-    },
-
-    "& pre": {
-      padding: theme.spacing(0, 0, 2, 0),
-      marginBottom: "0 !important",
-      "&:last-child": {
-        padding: 0,
-      },
-    },
-  },
-}));
+import {
+  Button,
+  Replay as CheckIcon,
+  Container,
+  Download as DownloadIcon,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@/ui";
+import styles from "./App.module.css";
 
 const ChromeIcon = () => {
   const Component = logos["webdev/chrome"];
@@ -185,7 +124,6 @@ const Update = () => {
 };
 
 const App = () => {
-  const classes = useStyles();
   const { t } = useTranslation();
 
   const [data, setData] = useState();
@@ -196,10 +134,10 @@ const App = () => {
 
   return (
     <Container maxWidth="md">
-      <Paper data-testid="app" elevation={5} className={classes.page}>
+      <Paper data-testid="app" elevation={5} className={styles.page}>
         <Typography variant="h4">{t("app.title")}</Typography>
         {data && (
-          <Table size="small" className={classes.versions}>
+          <Table size="small" className={styles.versions}>
             <TableHead>
               <TableRow>
                 <TableCell colSpan="2">{t("app.versions")}</TableCell>
@@ -234,12 +172,12 @@ const App = () => {
           </Table>
         )}
       </Paper>
-      <Paper elevation={5} className={classes.page}>
+      <Paper elevation={5} className={styles.page}>
         <Typography variant="h4">{t("app.updates.title")}</Typography>
         <Update />
       </Paper>
       {data && (
-        <Paper elevation={5} className={classes.page}>
+        <Paper elevation={5} className={styles.page}>
           <Typography variant="body1">{t("app.config.what")}</Typography>
           <Typography variant="body1">
             {t("app.config.file")} <code>{data.path}</code>

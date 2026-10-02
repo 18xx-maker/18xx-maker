@@ -113,3 +113,13 @@ test("print media hides the alert snackbar", async ({ page }) => {
       .evaluate((el) => getComputedStyle(el).display),
   ).toBe("none");
 });
+
+// The background page wraps its page in a box that scrolls on screen
+test("print media frees the background page's scroll box", async ({ page }) => {
+  await page.goto("/games/18Test/background");
+  const box = page.locator('[data-chrome="background"]');
+  const overflow = () => box.evaluate((el) => getComputedStyle(el).overflowX);
+  expect(await overflow()).toBe("auto");
+  await page.emulateMedia({ media: "print" });
+  expect(await overflow()).toBe("visible");
+});
