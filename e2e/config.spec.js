@@ -1,4 +1,4 @@
-const { expect, test } = require("@playwright/test");
+import { expect, test } from "@playwright/test";
 
 test("config changes persist across a reload and show on the page", async ({
   page,

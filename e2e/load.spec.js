@@ -1,9 +1,9 @@
-const fs = require("node:fs");
-const path = require("node:path");
+import fs from "node:fs";
+import path from "node:path";
 
-const { expect, test } = require("@playwright/test");
+import { expect, test } from "@playwright/test";
 
-const fixture = path.join(__dirname, "fixtures", "e2e-game.json");
+const fixture = path.join(import.meta.dirname, "fixtures", "e2e-game.json");
 
 // Firefox and Safari flow: no file system access api, so the app uses an
 // <input type="file"> and saves the game in the origin private file system.

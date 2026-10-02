@@ -1,14 +1,10 @@
-const { defineConfig, devices } = require("@playwright/test");
+import { defineConfig, devices } from "@playwright/test";
 
 // End to end tests run against the production build in dist/site, served by
 // `vite preview`. Run `pnpm build` first (see DEVELOPMENT.md).
-//
-// This config and the specs are CommonJS (see e2e/package.json): Playwright
-// 1.49 hangs forever loading ES modules on Node 24. Once Playwright is
-// upgraded to 1.55 or newer these can become regular ES modules.
 const PORT = 4318;
 
-module.exports = defineConfig({
+export default defineConfig({
   testDir: "./e2e",
   testMatch: "*.spec.js",
   outputDir: "./test-results",
