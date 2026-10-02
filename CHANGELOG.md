@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.123](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.122...v1.0.0-beta.123) (2026-10-02)
+
+
+### :octocat: Continuous Integration
+
+* speed up the test workflow ([#732](https://github.com/18xx-maker/18xx-maker/issues/732)) ([3bfcba9](https://github.com/18xx-maker/18xx-maker/commit/3bfcba94d4d61183782497d60e2cb97caf6c603e))
+
 ## [1.0.0-beta.122](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.121...v1.0.0-beta.122) (2026-10-02)
 
 
