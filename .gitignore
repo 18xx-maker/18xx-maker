@@ -9,6 +9,7 @@
 # testing
 /junit.xml
 /coverage
+/.vitest-reports
 
 # renders
 /render
