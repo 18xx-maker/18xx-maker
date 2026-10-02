@@ -3,7 +3,7 @@ import { useCallback, useSyncExternalStore } from "react";
 const supported = () =>
   typeof window !== "undefined" && typeof window.matchMedia === "function";
 
-// Subscribes to a media query (use up/down from "@/ui" to build one). The
+// Subscribes to a media query (build one with up from "@/ui"). The
 // server and non-matchMedia environments report defaultMatches, so the first
 // render never touches window.
 const useMediaQuery = (rawQuery, defaultMatches = false) => {

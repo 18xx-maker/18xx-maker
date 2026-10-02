@@ -71,7 +71,9 @@ Tooltip). It frees the viewport with `[data-chrome="viewport"]` and the
 background page's wrapper with `[data-chrome="background"]`. A new piece of
 chrome gets a `data-chrome` hook and a line there, and `e2e/print.spec.js`
 (which checks the `data-testid` hooks under `emulateMedia({ media: "print" })`)
-gets its test id.
+gets its test id. A tooltip closes the moment its button is hidden, so that spec
+checks a static clone of the open tooltip's markup (`tooltip-copy`), which has
+the same `data-chrome` hook, instead of the live one.
 
 ## Drawer, Snackbar and friends
 
@@ -96,12 +98,16 @@ gets its test id.
   alert restarts the timer.
 - `LinearProgress` and `CircularProgress` are `role="progressbar"` elements.
   `Pagination` is own markup (`aria-current` on the page, same pages as MUI's
-  `usePagination`). `Slider` is Base UI's range slider.
+  `usePagination`), and its `labels` prop names the nav and the buttons (English
+  by default, the Tiles page passes the locale's). `Slider` is a range slider on
+  Base UI's Slider: `value` is an array with one number per thumb, `marks` outside
+  `min`..`max` are dropped, and the keyboard focus ring is a `data-focus-visible`
+  attribute (no `:has()`).
 
 ## Popups (Select, DropdownMenu, Tooltip)
 
-These are the components built on Base UI (`@base-ui/react`, pinned to an exact
-version; the `Slider` is the other one). They portal to `<body>`, so they get the tokens from
+These are built on Base UI (`@base-ui/react`, pinned to an exact version, as is
+the `Slider`). They portal to `<body>`, so they get the tokens from
 `data-chrome-root` and sit above the drawers (`--z-modal`, `--z-tooltip`).
 
 - `Select` replaces MUI's Select, MenuItem, InputLabel and FormControl. It is
