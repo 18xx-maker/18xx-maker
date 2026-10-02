@@ -1,18 +1,19 @@
 import fs from "node:fs";
 import { join } from "node:path";
 
+import { ZipArchive } from "archiver";
 import Promise from "bluebird";
 import { dialog, shell } from "electron";
 
 import { send } from "./util.js";
 import { captureWindow, getMainWindow, startBaseUrl } from "./window.js";
 
-const getPath = (game, item) => {
-  if (item.includes("?")) {
-    return `/games/${game}/${item}&print=true`;
-  } else {
-    return `/games/${game}/${item}?print=true`;
+// The page of a route in the app, for capturing
+const getPath = (route) => {
+  if (route.includes("print=")) {
+    return route;
   }
+  return `${route}${route.includes("?") ? "&" : "?"}print=true`;
 };
 
 const selectDirectory = (title = "Select directory") => {
@@ -52,12 +53,7 @@ const createPDF = (path, filePath) => {
       }, 1000);
     });
 
-    if (path.includes("?")) {
-      path = `${path}&print=true`;
-    } else {
-      path = `${path}?print=true`;
-    }
-    win.loadURL(`${startBaseUrl}#${path}`);
+    win.loadURL(`${startBaseUrl}#${getPath(path)}`);
   });
 };
 
@@ -135,27 +131,21 @@ const createScreenshot = (path, filePath) => {
       }, 1000);
     });
 
-    if (path.includes("?")) {
-      path = `${path}&print=true`;
-    } else {
-      path = `${path}?print=true`;
-    }
-    win.loadURL(`${startBaseUrl}#${path}`);
+    win.loadURL(`${startBaseUrl}#${getPath(path)}`);
   });
 };
 
+// items is the list of files to export, [{ route, name }]
 export const exportPDF = (game, items) => {
   return selectDirectory().then((directory) => {
     if (directory) {
-      let keys = Object.keys(items);
-      let total = keys.length;
+      let total = items.length;
       let current = 0;
       return Promise.map(
-        keys,
-        (item) => {
-          let basename = items[item];
+        items,
+        ({ route, name: basename }) => {
           let filename = join(directory, basename);
-          return createPDF(getPath(game, item), filename).then((exported) => {
+          return createPDF(route, filename).then((exported) => {
             if (exported) {
               current = current + 1;
               let percent = Math.floor((current / total) * 100);
@@ -187,28 +177,24 @@ export const exportPDF = (game, items) => {
 export const exportPNG = (game, items) => {
   return selectDirectory().then((directory) => {
     if (directory) {
-      let keys = Object.keys(items);
-      let total = keys.length;
+      let total = items.length;
       let current = 0;
       return Promise.map(
-        keys,
-        (item) => {
-          let basename = items[item];
+        items,
+        ({ route, name: basename }) => {
           let filename = join(directory, basename);
-          return createScreenshot(getPath(game, item), filename).then(
-            (exported) => {
-              if (exported) {
-                current = current + 1;
-                let percent = Math.floor((current / total) * 100);
-                send(
-                  "progress",
-                  "Game Exporting",
-                  `${current}/${total} - ${basename}`,
-                  percent,
-                );
-              }
-            },
-          );
+          return createScreenshot(route, filename).then((exported) => {
+            if (exported) {
+              current = current + 1;
+              let percent = Math.floor((current / total) * 100);
+              send(
+                "progress",
+                "Game Exporting",
+                `${current}/${total} - ${basename}`,
+                percent,
+              );
+            }
+          });
         },
         { concurrency: 8 },
       )
@@ -247,4 +233,89 @@ export const png = (path) => {
         send("alert", "PNG Created", filePath, "success");
       });
     });
+};
+
+// Goes to path in the app, and saves a PNG to filePath of exactly width x
+// height pixels, one pixel for each unit of the page
+const createB18Image = (path, filePath, { width, height, transparent }) => {
+  return new Promise((resolve, reject) => {
+    let win = captureWindow({ transparent });
+
+    win.webContents.on("did-stop-loading", () => {
+      setTimeout(() => {
+        win.setContentSize(width, height, false);
+        win.webContents
+          .capturePage({ x: 0, y: 0, width, height }, { stayHidden: true })
+          .then((image) => {
+            // Displays with a scale factor capture more pixels
+            const size = image.getSize();
+            if (size.width !== width || size.height !== height) {
+              image = image.resize({ width, height, quality: "best" });
+            }
+            fs.writeFileSync(filePath, image.toPNG());
+            resolve(filePath);
+          })
+          .catch(reject)
+          .finally(() => win.close());
+      }, 1000);
+    });
+
+    win.loadURL(`${startBaseUrl}#${getPath(path)}`);
+  });
+};
+
+// Writes the zip of a folder
+const zip = (directory, folder, file) =>
+  new Promise((resolve, reject) => {
+    const output = fs.createWriteStream(file);
+    const archive = new ZipArchive({ zlib: { level: 9 } });
+    output.on("close", resolve);
+    output.on("error", reject);
+    archive.on("error", reject);
+    archive.pipe(output);
+    archive.directory(join(directory, folder), folder);
+    archive.finalize();
+  });
+
+// request is the Board 18 box of a game, see planB18 in util/exportPlan
+export const exportB18 = ({ names, json, images }) => {
+  return selectDirectory().then((directory) => {
+    if (directory) {
+      let total = images.length;
+      let current = 0;
+      fs.mkdirSync(join(directory, names.folder, names.name), {
+        recursive: true,
+      });
+      fs.writeFileSync(
+        join(directory, names.json),
+        JSON.stringify(json, null, 2),
+      );
+
+      return Promise.map(
+        images,
+        ({ route, path, ...size }) =>
+          createB18Image(route, join(directory, path), size).then(() => {
+            current = current + 1;
+            send(
+              "progress",
+              "Game Exporting",
+              `${current}/${total} - ${path}`,
+              Math.floor((current / total) * 100),
+            );
+          }),
+        { concurrency: 4 },
+      )
+        .then(() => zip(directory, names.folder, join(directory, names.zip)))
+        .then(() =>
+          send(
+            "alert",
+            "Game Exported",
+            `Exported ${json.bname} to ${directory} as a Board18 box`,
+            "success",
+          ),
+        )
+        .then(() => shell.openPath(directory))
+        .catch(console.error.bind(console));
+    }
+  });
 };

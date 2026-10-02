@@ -4,6 +4,7 @@ const api = {
   // PDF/PNG Exporting
   exportPDF: (game, items) => ipcRenderer.send("exportPDF", game, items),
   exportPNG: (game, items) => ipcRenderer.send("exportPNG", game, items),
+  exportB18: (request) => ipcRenderer.send("exportB18", request),
   pdf: (path) => ipcRenderer.send("pdf", path),
   png: (path) => ipcRenderer.send("png", path),
 

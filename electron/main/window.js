@@ -58,8 +58,10 @@ export const createWindow = () => {
   return mainWindow;
 };
 
-export const captureWindow = () => {
+// A hidden window to capture a page. A transparent window has no frame.
+export const captureWindow = ({ transparent = false } = {}) => {
   return new BrowserWindow({
+    ...(transparent && { transparent, frame: false }),
     x: 0,
     y: 0,
     enableLargerThanScreen: true,

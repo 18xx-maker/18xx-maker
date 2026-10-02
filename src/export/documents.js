@@ -30,10 +30,12 @@ const inches = (size) =>
 // plain data:
 //   game    the game
 //   config  the resolved config (see util/resolveConfig)
-//   data    { slug, tiles, companyOverrides, layouts }: the slug the game has
-//           on the site (its id), the compiled tile definitions, the company
-//           override sets (src/data/companies) and the layouts a config can
-//           choose from ({ cards, tokens, tiles })
+//   data    { slug, tiles, companyOverrides, layouts, plainSheetNames }: the
+//           slug the game has on the site (its id), the compiled tile
+//           definitions, the company override sets (src/data/companies), the
+//           layouts a config can choose from ({ cards, tokens, tiles }) and if
+//           a sheet is named without its layout unless all layouts are
+//           exported ("cards", not "cards-single"), like the app does
 //
 // Each document is
 //   id        unique in the list
@@ -105,7 +107,8 @@ export const documents = (game, config, data) => {
 
   // Pages that print more than one element are sheets (pdf only), with a
   // document for each layout when asked for
-  // Tokens have no layout in their name unless there are several
+  // Tokens have no layout in their name unless there are several, and neither
+  // do the other sheets with plainSheetNames
   const sheet = (kind, layoutConfig) => {
     const all = config.export && config.export.allLayouts;
     for (const layout of all ? data.layouts[kind] : [layoutConfig.layout]) {
@@ -114,7 +117,10 @@ export const documents = (game, config, data) => {
         kind,
         route: kind,
         query: all ? { [`config.${kind}.layout`]: layout } : {},
-        basename: kind === "tokens" && !all ? kind : `${kind}-${layout}`,
+        basename:
+          !all && (kind === "tokens" || data.plainSheetNames)
+            ? kind
+            : `${kind}-${layout}`,
       });
     }
   };

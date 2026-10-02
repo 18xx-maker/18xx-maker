@@ -42,6 +42,7 @@ beforeEach(async () => {
     checkForUpdates: vi.fn(),
     deleteGame: vi.fn(),
     downloadUpdate: vi.fn(),
+    exportB18: vi.fn(),
     exportPDF: vi.fn(),
     exportPNG: vi.fn(),
     loadConfig: vi.fn().mockResolvedValue(config),
@@ -73,6 +74,13 @@ const drop = (dataTransfer) => {
   Object.defineProperty(event, "dataTransfer", { value: dataTransfer });
   fireEvent(zone, event);
 };
+
+// The files the app asked the main process to export, as { page: file name }
+// with the page relative to the game, "map?variation=0"
+const exported = (items) =>
+  Object.fromEntries(
+    items.map(({ route, name }) => [route.split("/").slice(3).join("/"), name]),
+  );
 
 const openExport = async (user) => {
   await user.click(await screen.findByRole("button", { name: "Export" }));
@@ -453,9 +461,9 @@ describe("export button", () => {
     );
 
     expect(api.exportPDF).toHaveBeenCalledTimes(1);
-    const [slug, items] = api.exportPDF.mock.calls[0];
+    const [slug, list] = api.exportPDF.mock.calls[0];
     expect(slug).toBe("18Test");
-    expect(items).toEqual({
+    expect(exported(list)).toEqual({
       background: "18test-background.pdf",
       revenue: "18test-revenue.pdf",
       "revenue?paginated=true": "18test-revenue-paginated.pdf",
@@ -486,7 +494,7 @@ describe("export button", () => {
       }),
     );
 
-    const items = api.exportPDF.mock.calls[0][1];
+    const items = exported(api.exportPDF.mock.calls[0][1]);
     expect(items).not.toHaveProperty("cards");
     expect(items).not.toHaveProperty("tokens");
     expect(items).not.toHaveProperty("tiles");
@@ -520,7 +528,7 @@ describe("export button", () => {
         name: "Export game as pdf documents",
       }),
     );
-    const pdfs = api.exportPDF.mock.calls[0][1];
+    const pdfs = exported(api.exportPDF.mock.calls[0][1]);
     expect(pdfs).toMatchObject({
       "map?variation=0": "18test-map-0.pdf",
       "map?paginated=true&variation=0": "18test-map-0-paginated.pdf",
@@ -536,7 +544,7 @@ describe("export button", () => {
         name: "Export game as png images",
       }),
     );
-    const pngs = api.exportPNG.mock.calls[0][1];
+    const pngs = exported(api.exportPNG.mock.calls[0][1]);
     expect(pngs).toMatchObject({
       "map?variation=0": "18test-map-0.png",
       "map?variation=1": "18test-map-1.png",
@@ -555,10 +563,12 @@ describe("export button", () => {
         name: "Export game as pdf documents",
       }),
     );
-    expect(Object.keys(api.exportPDF.mock.calls[0][1]).sort()).toEqual(
+    expect(
+      Object.keys(exported(api.exportPDF.mock.calls[0][1])).sort(),
+    ).toEqual(
+      // No cards either, the shared list checks the game has some
       [
         "background",
-        "cards",
         "revenue",
         "revenue?paginated=true",
         "tile-manifest",
@@ -573,14 +583,16 @@ describe("export button", () => {
         name: "Export game as png images",
       }),
     );
-    const pngs = Object.keys(api.exportPNG.mock.calls[0][1]);
+    const pngs = Object.keys(exported(api.exportPNG.mock.calls[0][1]));
     expect(
       pngs
         .filter((k) => !k.startsWith("tiles/") && !k.startsWith("tokens/"))
         .sort(),
     ).toEqual(["background", "revenue", "tile-manifest"].sort());
     // Without companies the game tokens are numbered from one
-    expect(api.exportPNG.mock.calls[0][1]["tokens/0"]).toBe("1888-token-1.png");
+    expect(exported(api.exportPNG.mock.calls[0][1])["tokens/0"]).toBe(
+      "1888-token-1.png",
+    );
   });
 
   it("exports every component of the game as pngs", async () => {
@@ -595,7 +607,8 @@ describe("export button", () => {
     );
 
     expect(api.exportPNG).toHaveBeenCalledTimes(1);
-    const [slug, items] = api.exportPNG.mock.calls[0];
+    const [slug, list] = api.exportPNG.mock.calls[0];
+    const items = exported(list);
     expect(slug).toBe("18Test");
     expect(items).toMatchObject({
       background: "18test-background.png",
@@ -626,5 +639,36 @@ describe("export button", () => {
     expect(items["cards/share/0"]).toMatch(/^18test-card-share-1-\w+\.png$/);
     expect(items["charters/0"]).toMatch(/^18test-charter-1-\w+\.png$/);
     expect(items["tokens/0"]).toMatch(/^18test-token-1-\w+\.png$/);
+  });
+
+  it("exports the Board18 box of the game", async () => {
+    const { user } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await openExport(user);
+    await user.click(
+      await screen.findByRole("menuitem", {
+        name: "Export game as a Board18 box",
+      }),
+    );
+
+    expect(api.exportB18).toHaveBeenCalledTimes(1);
+    const { names, json, images } = api.exportB18.mock.calls[0][0];
+    expect(names.zip).toBe("board18-18Test-1.0.zip");
+    expect(json).toMatchObject({ bname: "18Test", version: "1.0" });
+    expect(images.map(({ path }) => path)).toEqual(
+      expect.arrayContaining([
+        "board18-18Test-1.0/18Test-1.0/Map.png",
+        "board18-18Test-1.0/18Test-1.0/Market.png",
+        "board18-18Test-1.0/18Test-1.0/Tokens.png",
+      ]),
+    );
+    expect(images.find(({ path }) => path.endsWith("/Map.png"))).toMatchObject({
+      route: "/games/18Test/b18/map?print=true",
+      transparent: false,
+    });
+    expect(
+      images.find(({ path }) => path.endsWith("/Tokens.png")),
+    ).toMatchObject({ width: 60, transparent: true });
   });
 });

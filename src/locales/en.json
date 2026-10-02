@@ -32,6 +32,7 @@
   "export": {
     "allPdf": "Export game as pdf documents",
     "allPng": "Export game as png images",
+    "b18": "Export game as a Board18 box",
     "singlePdf": "Export this component as a pdf document",
     "singlePng": "Export this component as a png image"
   },
