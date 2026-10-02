@@ -127,8 +127,8 @@ const cleanConfig = apply(compose, [
   convertToUUID,
 ]);
 
-export const loadConfig = () => {
-  config = pick(
+const readConfig = () =>
+  pick(
     CONFIG_KEYS,
     mergeDeepRight(
       DEFAULT_CONFIG,
@@ -137,7 +137,23 @@ export const loadConfig = () => {
         : {},
     ),
   );
-  return updateConfig(cleanConfig);
+
+export const loadConfig = () => {
+  try {
+    config = readConfig();
+    return updateConfig(cleanConfig);
+  } catch (e) {
+    // The config file is unreadable or in a state we can't clean. Back it up
+    // and start over rather than leaving the app unusable.
+    console.error("Resetting invalid config:", e);
+    try {
+      fs.copyFileSync(CONFIG_FILE, `${CONFIG_FILE}.bak`);
+    } catch (backupError) {
+      console.error("Unable to back up invalid config:", backupError);
+    }
+    config = null;
+    return updateConfig(() => DEFAULT_CONFIG);
+  }
 };
 
 export const getConfig = () => config || loadConfig();
