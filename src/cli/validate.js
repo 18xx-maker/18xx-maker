@@ -94,8 +94,8 @@ const compiledSchema = (id) => {
   return compiled[id];
 };
 
-let validate = (json, file) => {
-  const id = determineSchema(json);
+let validate = (json, file, schemaId) => {
+  const id = schemaId || determineSchema(json);
 
   const { errors: validationErrors } = compiledSchema(id).validate(json);
 
@@ -107,7 +107,7 @@ let validate = (json, file) => {
   };
 };
 
-validate.file = (file) => {
+validate.file = (file, schemaId) => {
   if (!fs.existsSync(file)) {
     return {
       valid: false,
@@ -130,8 +130,11 @@ validate.file = (file) => {
     };
   }
 
-  return validate(json, file);
+  return validate(json, file, schemaId);
 };
+
+// Validates a file against the game schema, even if it does not look like one
+export const validateGameFile = (file) => validate.file(file, gameSchema.$id);
 
 const getShortSchemaName = (id) => {
   let draft = id.match(/json-schema\.org/);

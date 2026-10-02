@@ -39,4 +39,33 @@ describe("exit codes", () => {
     expect(result.status).toBe(2);
     expect(result.stderr).toContain("Game 18Missing not found");
   });
+
+  it("exits 2 for a resolution over 300 dpi", () => {
+    const result = maker("export", "18Test", "--format", "png", "--dpi", "301");
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain(
+      "--dpi 301 is too high, the highest resolution is 300",
+    );
+  });
+
+  it("exits 2 without a game", () => {
+    const result = maker("export");
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain("Name a game");
+  });
+
+  it("exits 2 for a game file that is not valid", () => {
+    const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "18xx-cli-maker-"));
+    fs.writeFileSync(path.join(cwd, "bad.json"), '{"info": {"title": 5}}');
+    try {
+      const result = spawnSync(process.execPath, [bin, "export", "bad.json"], {
+        cwd,
+        encoding: "utf-8",
+      });
+      expect(result.status).toBe(2);
+      expect(result.stderr).toContain("bad.json is not a valid game");
+    } finally {
+      fs.rmSync(cwd, { recursive: true, force: true });
+    }
+  });
 });

@@ -3,6 +3,8 @@ import path from "node:path";
 
 import { chromium } from "playwright";
 
+import { mergeDeepRight } from "ramda";
+
 import {
   customConfig,
   defaultConfig,
@@ -11,12 +13,11 @@ import {
   loadTiles,
   startExpress,
 } from "#cli/util";
+import { capture, withTimeout } from "#export/capture";
 import { docPath } from "#export/names";
 import { runExport } from "#export/run";
 import { resolveConfig } from "#util/resolveConfig";
 import { compileTiles } from "#util/tiles";
-
-export const BASE_URL = "http://localhost:9000";
 
 // Everything the export list needs that the app gets from the bundler
 export const loadExportData = () => {
@@ -34,11 +35,12 @@ export const loadExportData = () => {
   };
 };
 
-// The config of a game: the defaults, src/config.json and the game's own
-export const loadGameConfig = (game) =>
+// The config of a game: the defaults, src/config.json, the config of the user
+// (--config) and the game's own
+export const loadGameConfig = (game, user = {}) =>
   resolveConfig({
     defaults: defaultConfig,
-    user: customConfig,
+    user: mergeDeepRight(customConfig, user),
     gameConfig: game.config,
   }).config;
 
@@ -56,45 +58,98 @@ export const createFileSink = (root) => ({
   },
 });
 
-// Captures a file from the site with a Playwright page: a pdf is printed, a
-// b18 image is a screenshot of a viewport with the size of the image
-export const capturePage = (page) => async (job) => {
-  const { doc, format } = job;
-  console.log(`Printing ${job.path}`);
-  await page.goto(`${BASE_URL}${docPath(doc)}`, { waitUntil: "networkidle" });
-
-  if (format === "pdf") {
-    return page.pdf({ scale: 1.0, preferCSSPageSize: true });
-  }
-
-  const { viewport, transparent } = doc.capture;
-  await page.emulateMedia({ media: "print" });
-  await page.setViewportSize({ width: viewport.w, height: viewport.h });
-  return page.screenshot({ omitBackground: transparent });
-};
+// A document that takes longer than this to capture fails, in milliseconds
+export const TIMEOUT = 120_000;
 
 // Serves the built site and opens a browser while the callback runs, and
-// always closes both
+// always closes both. The site is on a free port. The browser has the color
+// profile of sRGB, so screenshots look the same on every computer.
 export const withBrowser = async (callback) => {
-  const server = startExpress();
+  const server = startExpress(0);
   let browser;
   try {
     browser = await chromium.launch({
-      args: ["--force-color-profile srgb"],
+      args: ["--force-color-profile=srgb"],
     });
-    return await callback(await browser.newPage());
+    return await callback({
+      browser,
+      baseUrl: `http://localhost:${server.address().port}`,
+    });
   } finally {
     await browser?.close();
     server.close();
   }
 };
 
+// A page of a browser that has the game and config of render mode, and the
+// Playwright adapter of the shared capture: the commands of the Chrome
+// DevTools Protocol go through the page's own session
+const openPage = async (browser, input) => {
+  const page = await browser.newPage();
+  await page.addInitScript((given) => {
+    window.__RENDER_INPUT__ = given;
+  }, input);
+  const session = await page.context().newCDPSession(page);
+  return {
+    page,
+    send: (method, params) => session.send(method, params),
+    evaluate: (expression) => page.evaluate(expression),
+  };
+};
+
+// Captures the jobs of a game with pages of a browser, one for each job that
+// runs at the same time. input is { id, game, config } for the page (render
+// mode). A page that fails or takes too long is closed, the next job gets a
+// new one, so a document can not break the ones after it.
+export const createCapture = ({
+  browser,
+  baseUrl,
+  input,
+  dpi,
+  maxPixels,
+  timeout = TIMEOUT,
+}) => {
+  const idle = [];
+
+  const run = async (slot, job) => {
+    const { page } = slot;
+    await page.goto(`${baseUrl}${docPath(job.doc)}`, {
+      waitUntil: "networkidle",
+    });
+    await page.waitForFunction(() => document.body.dataset.renderState);
+    if (
+      (await page.evaluate(() => document.body.dataset.renderState)) !== "ready"
+    ) {
+      throw new Error(`${docPath(job.doc)} has nothing to show for this game`);
+    }
+    return capture(slot, job, { dpi, maxPixels });
+  };
+
+  return async (job) => {
+    console.log(`Exporting ${job.path}`);
+    const slot = idle.pop() || (await openPage(browser, input));
+    try {
+      const bytes = await withTimeout(
+        run(slot, job),
+        timeout,
+        `Timed out after ${timeout / 1000} seconds`,
+      );
+      idle.push(slot);
+      return bytes;
+    } catch (error) {
+      await slot.page.close().catch(() => {});
+      throw error;
+    }
+  };
+};
+
 // Runs the jobs of one game in a browser, writing into a folder. Returns the
 // files that failed.
-export const exportGame = async ({ page, jobs, out }) => {
+export const exportGame = async ({ capture, jobs, out, concurrency }) => {
   const { failed } = await runExport({
     jobs,
-    capture: capturePage(page),
+    capture,
+    concurrency,
     sink: createFileSink(out),
     onProgress: ({ type, name, error }) => {
       if (type === "fail") console.error(`Failed ${name}: ${error.message}`);

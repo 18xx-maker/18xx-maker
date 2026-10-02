@@ -6,6 +6,7 @@ import { CommanderError, program } from "commander";
 import b18 from "#cli/b18";
 import compile from "#cli/compile-schemas";
 import config from "#cli/config";
+import exportCommand from "#cli/exportCommand";
 import print from "#cli/print";
 import { UsageError } from "#cli/util";
 import validate from "#cli/validate";
@@ -53,8 +54,39 @@ program
   .action(validate);
 
 program
+  .command("export")
+  .description("export PDF, PNG and Board 18 files of a game")
+  .argument("[game]", "the id of a bundled game or the path of a game file")
+  .option(
+    "-f, --format <formats>",
+    "pdf, png and b18, separated by commas",
+    "pdf",
+  )
+  .option("--docs <pages>", "only these pages: map,tiles,cards,...")
+  .option("--layouts <layouts>", "all: a file for every layout of a sheet")
+  .option("--paginated", "also export the paginated pdfs")
+  .option("--variation <n>", "only this map variation")
+  .option("--config <file>", "a config file to export with")
+  .option("--dpi <dpi>", "the resolution of the PNG files, 1 to 300", "300")
+  .option("-o, --out <folder>", "the folder for the game folders", "render")
+  .option("-j, --jobs <n>", "how many files to capture at the same time", "1")
+  .option("-a, --all", "export all bundled games")
+  .option(
+    "--b18-version <version>",
+    "the Board 18 version of the game box",
+    "1.0",
+  )
+  .option(
+    "--b18-author <author>",
+    "the author of the Board 18 game box",
+    config.get("b18.author") || username,
+  )
+  .option("-d, --debug", "start the express server and then quit")
+  .action(exportCommand);
+
+program
   .command("b18")
-  .description("create a Board 18 game box from a bundled 18xx Maker game")
+  .description("create a Board 18 game box from a bundled game (maker export)")
   .argument("<game>", "the id of the game to create a Board 18 box for")
   .argument("<version>", "the Board 18 version string for the game box")
   .argument(
@@ -67,7 +99,9 @@ program
 
 program
   .command("print")
-  .description("print the PDF assets for a bundled 18xx Maker game")
+  .description(
+    "print the PDF assets for a bundled 18xx Maker game (maker export)",
+  )
   .argument("[game]", "the id of the game to print", "1889")
   .option("-a, --all", "print all games")
   .option("-d, --debug", "start the express server and then quit")

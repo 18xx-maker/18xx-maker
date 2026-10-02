@@ -7,11 +7,9 @@ import { chromium } from "playwright";
 import print from "#cli/print";
 import { UsageError, defaultConfig, loadGame, startExpress } from "#cli/util";
 
-const mocks = vi.hoisted(() => {
-  const page = { goto: vi.fn(), pdf: vi.fn() };
-  const browser = { newPage: vi.fn(() => page), close: vi.fn() };
-  const server = { close: vi.fn() };
-  return { page, browser, server, customConfig: {} };
+const mocks = await vi.hoisted(async () => {
+  const { createFakeBrowser } = await import("./__fixtures__/browser.js");
+  return { ...createFakeBrowser(), customConfig: {} };
 });
 
 vi.mock("playwright", () => ({
@@ -53,7 +51,6 @@ beforeEach(() => {
   for (const key of Object.keys(mocks.customConfig)) {
     delete mocks.customConfig[key];
   }
-  mocks.page.pdf.mockResolvedValue(Buffer.from("pdf"));
   tmp = fs.mkdtempSync(path.join(os.tmpdir(), "18xx-cli-print-"));
   process.chdir(tmp);
   fs.mkdirSync("src/data/games", { recursive: true });
@@ -95,17 +92,21 @@ describe("print", () => {
         .map((file) => `18Full/${file}`)
         .sort(),
     );
-    expect(mocks.page.goto.mock.calls.map(([url]) => url)).toContain(
-      "http://localhost:9000/games/18Full/map?paginated=true",
-    );
     expect(mocks.page.goto).toHaveBeenCalledWith(
-      "http://localhost:9000/games/18Full/map?paginated=true",
+      "http://localhost:1234/games/render:18Full/map?paginated=true",
       { waitUntil: "networkidle" },
     );
-    expect(mocks.page.pdf).toHaveBeenCalledWith({
-      scale: 1.0,
+    expect(mocks.session.send).toHaveBeenCalledWith("Page.printToPDF", {
       preferCSSPageSize: true,
+      printBackground: true,
+      displayHeaderFooter: false,
+      scale: 1,
+      transferMode: "ReturnAsStream",
     });
+    expect(mocks.session.send).toHaveBeenCalledWith(
+      "Emulation.setEmulatedMedia",
+      { media: "print" },
+    );
     expect(
       fs.readFileSync("render/18Full/18test-background.pdf", "utf-8"),
     ).toBe("pdf");
@@ -192,6 +193,10 @@ describe("print", () => {
   });
 
   it("throws a usage error when the game does not exist", async () => {
+    loadGame.mockImplementationOnce(() => {
+      throw new UsageError("Game 18Missing not found");
+    });
+
     await expect(print("18Missing", {})).rejects.toThrow(
       new UsageError("Game 18Missing not found"),
     );
@@ -237,12 +242,16 @@ describe("print", () => {
       }),
     );
     const error = vi.spyOn(console, "error").mockImplementation(() => {});
-    mocks.page.pdf.mockRejectedValueOnce(new Error("timeout"));
+    mocks.session.failOnce("Page.printToPDF", new Error("timeout"));
 
     const files = await printed("18Empty", {});
 
     // All three documents were tried, the first did not get written
-    expect(mocks.page.pdf).toHaveBeenCalledTimes(3);
+    expect(
+      mocks.session.send.mock.calls.filter(
+        ([method]) => method === "Page.printToPDF",
+      ),
+    ).toHaveLength(3);
     expect(files).toHaveLength(2);
     expect(error).toHaveBeenCalledWith("Failed 18test-background.pdf: timeout");
     expect(error).toHaveBeenCalledWith(

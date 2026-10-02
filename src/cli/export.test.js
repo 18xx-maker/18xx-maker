@@ -2,18 +2,25 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
+import { chromium } from "playwright";
+
 import {
-  capturePage,
+  createCapture,
   createFileSink,
   exportGame,
   loadExportData,
   loadGameConfig,
   reportFailures,
+  withBrowser,
 } from "#cli/export";
+import * as util from "#cli/util";
+import { createFakeBrowser } from "./__fixtures__/browser.js";
 
 let tmp;
+let fake;
 
 beforeEach(() => {
+  fake = createFakeBrowser();
   tmp = fs.mkdtempSync(path.join(os.tmpdir(), "18xx-cli-export-"));
 });
 
@@ -37,6 +44,16 @@ describe("loadExportData", () => {
 });
 
 describe("loadGameConfig", () => {
+  it("has the config of the user in between", () => {
+    const config = loadGameConfig(
+      { config: { paper: { width: 3 } } },
+      { paper: { width: 2, height: 4 }, cards: { layout: "dtgDie" } },
+    );
+
+    expect(config.paper).toMatchObject({ width: 3, height: 4 });
+    expect(config.cards.layout).toBe("dtgDie");
+  });
+
   it("has the defaults and the config of the game", () => {
     expect(loadGameConfig({}).paper).toBeDefined();
     expect(
@@ -68,51 +85,155 @@ describe("createFileSink", () => {
   });
 });
 
-describe("capturePage", () => {
-  const page = () => ({
-    goto: vi.fn(),
-    pdf: vi.fn(async () => "pdf bytes"),
-    emulateMedia: vi.fn(),
-    setViewportSize: vi.fn(),
-    screenshot: vi.fn(async () => "png bytes"),
+describe("withBrowser", () => {
+  it("serves the site on a free port and always closes", async () => {
+    vi.spyOn(chromium, "launch").mockResolvedValue(fake.browser);
+    vi.spyOn(util, "startExpress").mockReturnValue(fake.server);
+
+    const result = await withBrowser(async ({ browser, baseUrl }) => {
+      expect(browser).toBe(fake.browser);
+      return baseUrl;
+    });
+
+    expect(result).toBe("http://localhost:1234");
+    expect(util.startExpress).toHaveBeenCalledWith(0);
+    expect(chromium.launch).toHaveBeenCalledWith({
+      args: ["--force-color-profile=srgb"],
+    });
+    expect(fake.browser.close).toHaveBeenCalledOnce();
+    expect(fake.server.close).toHaveBeenCalledOnce();
   });
+
+  it("closes when the callback throws", async () => {
+    vi.spyOn(chromium, "launch").mockResolvedValue(fake.browser);
+    vi.spyOn(util, "startExpress").mockReturnValue(fake.server);
+
+    await expect(
+      withBrowser(async () => {
+        throw new Error("nope");
+      }),
+    ).rejects.toThrow("nope");
+    expect(fake.browser.close).toHaveBeenCalledOnce();
+    expect(fake.server.close).toHaveBeenCalledOnce();
+  });
+});
+
+describe("createCapture", () => {
+  const input = { id: "x", game: { info: {} }, config: {} };
+  const job = (format, doc = {}) => ({
+    format,
+    path: `x.${format}`,
+    doc: {
+      route: "/games/render:x/map",
+      query: { paginated: "true" },
+      capture: { selector: ".printElement", viewport: { w: 5, h: 6 } },
+      ...doc,
+    },
+  });
+  const make = (options) =>
+    createCapture({
+      browser: fake.browser,
+      baseUrl: "http://localhost:1234",
+      input,
+      ...options,
+    });
 
   beforeEach(() => {
     vi.spyOn(console, "log").mockImplementation(() => {});
   });
 
-  it("prints a pdf", async () => {
-    const p = page();
-    const job = {
-      format: "pdf",
-      path: "x.pdf",
-      doc: { route: "/games/18Test/map", query: { paginated: "true" } },
-    };
+  it("gives the page the game and prints when it is ready", async () => {
+    const bytes = await make()(job("pdf"));
 
-    expect(await capturePage(p)(job)).toBe("pdf bytes");
-    expect(p.goto).toHaveBeenCalledWith(
-      "http://localhost:9000/games/18Test/map?paginated=true",
+    expect(new TextDecoder().decode(bytes)).toBe("pdf");
+    expect(fake.page.addInitScript).toHaveBeenCalledWith(
+      expect.any(Function),
+      input,
+    );
+    expect(fake.page.goto).toHaveBeenCalledWith(
+      "http://localhost:1234/games/render:x/map?paginated=true",
       { waitUntil: "networkidle" },
     );
-    expect(p.pdf).toHaveBeenCalledWith({ scale: 1.0, preferCSSPageSize: true });
+    expect(fake.page.waitForFunction).toHaveBeenCalledOnce();
   });
 
-  it("screenshots a b18 image in a viewport of its size", async () => {
-    const p = page();
-    const job = {
-      format: "b18",
-      path: "Tokens.png",
-      doc: {
-        route: "/games/18Test/b18/tokens",
-        query: { print: "true" },
-        capture: { viewport: { w: 60, h: 90 }, transparent: true },
-      },
-    };
+  it("sets window.__RENDER_INPUT__ in the page", async () => {
+    await make()(job("pdf"));
 
-    expect(await capturePage(p)(job)).toBe("png bytes");
-    expect(p.emulateMedia).toHaveBeenCalledWith({ media: "print" });
-    expect(p.setViewportSize).toHaveBeenCalledWith({ width: 60, height: 90 });
-    expect(p.screenshot).toHaveBeenCalledWith({ omitBackground: true });
+    const [script, given] = fake.page.addInitScript.mock.calls[0];
+    const window = {};
+    vi.stubGlobal("window", window);
+    script(given);
+    vi.unstubAllGlobals();
+    expect(window.__RENDER_INPUT__).toBe(input);
+  });
+
+  it("captures a png at the dpi", async () => {
+    await make({ dpi: 150 })(job("png"));
+
+    expect(fake.session.send).toHaveBeenCalledWith(
+      "Emulation.setDeviceMetricsOverride",
+      expect.objectContaining({ deviceScaleFactor: 150 / 96 }),
+    );
+  });
+
+  it("fails when the page has nothing to show", async () => {
+    fake.page.evaluate.mockResolvedValueOnce("empty");
+
+    await expect(make()(job("pdf"))).rejects.toThrow(
+      "/games/render:x/map?paginated=true has nothing to show",
+    );
+    expect(fake.page.close).toHaveBeenCalledOnce();
+  });
+
+  it("reuses a page that did not fail", async () => {
+    const capture = make();
+
+    await capture(job("pdf"));
+    await capture(job("pdf"));
+
+    expect(fake.browser.newPage).toHaveBeenCalledOnce();
+    expect(fake.page.close).not.toHaveBeenCalled();
+  });
+
+  it("closes a page that failed, the next job gets a new one", async () => {
+    const capture = make();
+    fake.session.failOnce("Page.printToPDF", new Error("crashed"));
+
+    await expect(capture(job("pdf"))).rejects.toThrow("crashed");
+    await capture(job("pdf"));
+
+    expect(fake.page.close).toHaveBeenCalledOnce();
+    expect(fake.browser.newPage).toHaveBeenCalledTimes(2);
+  });
+
+  it("fails a document that takes too long", async () => {
+    fake.page.goto.mockImplementationOnce(() => new Promise(() => {}));
+
+    await expect(make({ timeout: 20 })(job("pdf"))).rejects.toThrow(
+      "Timed out after 0.02 seconds",
+    );
+    expect(fake.page.close).toHaveBeenCalledOnce();
+  });
+
+  it("fails an image over the pixel limit", async () => {
+    await expect(make({ maxPixels: 10 })(job("b18"))).rejects.toThrow(
+      "5 x 6 pixels is 0 megapixels",
+    );
+  });
+
+  it("opens a page for each job that runs at the same time", async () => {
+    const capture = make();
+    const pages = [];
+    fake.browser.newPage.mockImplementation(async () => {
+      const page = { ...fake.page };
+      pages.push(page);
+      return page;
+    });
+
+    await Promise.all([capture(job("pdf")), capture(job("pdf"))]);
+
+    expect(pages).toHaveLength(2);
   });
 });
 
@@ -120,26 +241,35 @@ describe("exportGame", () => {
   it("writes the files and returns the paths that failed", async () => {
     vi.spyOn(console, "log").mockImplementation(() => {});
     const error = vi.spyOn(console, "error").mockImplementation(() => {});
-    const page = {
-      goto: vi.fn(),
-      pdf: vi
-        .fn()
-        .mockResolvedValueOnce("one")
-        .mockRejectedValueOnce(new Error("timeout"))
-        .mockResolvedValueOnce("three"),
-    };
-    const doc = { route: "/games/x/map", query: {} };
-    const jobs = ["a.pdf", "b.pdf", "c.pdf"].map((p) => ({
-      format: "pdf",
-      path: p,
-      doc,
-    }));
+    const capture = vi
+      .fn()
+      .mockResolvedValueOnce("one")
+      .mockRejectedValueOnce(new Error("timeout"))
+      .mockResolvedValueOnce("three");
+    const jobs = ["a.pdf", "b.pdf", "c.pdf"].map((p) => ({ path: p }));
 
-    const failed = await exportGame({ page, jobs, out: tmp });
+    const failed = await exportGame({ capture, jobs, out: tmp });
 
     expect(failed).toEqual(["b.pdf"]);
     expect(fs.readdirSync(tmp).sort()).toEqual(["a.pdf", "c.pdf"]);
     expect(error).toHaveBeenCalledWith("Failed b.pdf: timeout");
+  });
+
+  it("captures as many files at the same time as asked for", async () => {
+    let running = 0;
+    let most = 0;
+    const capture = async () => {
+      most = Math.max(most, ++running);
+      await new Promise((resolve) => setTimeout(resolve, 5));
+      running--;
+      return "x";
+    };
+    const jobs = ["a", "b", "c", "d"].map((p) => ({ path: `${p}.pdf` }));
+
+    await exportGame({ capture, jobs, out: tmp, concurrency: 2 });
+
+    expect(most).toBe(2);
+    expect(fs.readdirSync(tmp)).toHaveLength(4);
   });
 });
 

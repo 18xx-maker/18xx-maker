@@ -7,17 +7,12 @@ import { chromium } from "playwright";
 
 import b18 from "#cli/b18";
 import { defaultConfig, loadGame, startExpress } from "#cli/util";
+import { PNG } from "./__fixtures__/browser.js";
 
 const mocks = await vi.hoisted(async () => {
   const { EventEmitter } = await import("node:events");
-  const page = {
-    goto: vi.fn(),
-    emulateMedia: vi.fn(),
-    setViewportSize: vi.fn(),
-    screenshot: vi.fn(),
-  };
-  const browser = { newPage: vi.fn(() => page), close: vi.fn() };
-  const server = { close: vi.fn() };
+  const { createFakeBrowser } = await import("./__fixtures__/browser.js");
+  const { page, session, browser, server } = createFakeBrowser();
   const archive = Object.assign(new EventEmitter(), {
     pipe: vi.fn(),
     directory: vi.fn(),
@@ -25,7 +20,7 @@ const mocks = await vi.hoisted(async () => {
   });
   // Like the real zip, the output stream only closes after it was finalized
   const output = Object.assign(new EventEmitter(), { file: "" });
-  return { page, browser, server, archive, output };
+  return { page, session, browser, server, archive, output };
 });
 
 vi.mock("playwright", () => ({
@@ -64,6 +59,29 @@ const cwd = process.cwd();
 const folder = "render/18Test/board18-18Test-1.0";
 let tmp;
 
+// The images that were captured: the size of the viewport and if the
+// background was transparent
+const screenshots = () => {
+  const found = [];
+  let size;
+  let transparent = false;
+  for (const [method, params] of mocks.session.send.mock.calls) {
+    if (method === "Emulation.setDeviceMetricsOverride") size = params;
+    if (method === "Emulation.setDefaultBackgroundColorOverride") {
+      transparent = !!params;
+    }
+    if (method === "Page.captureScreenshot") {
+      found.push({
+        url: mocks.page.goto.mock.calls[found.length][0],
+        size,
+        transparent,
+      });
+      transparent = false;
+    }
+  }
+  return found;
+};
+
 beforeEach(() => {
   vi.clearAllMocks();
   mocks.archive.removeAllListeners();
@@ -71,7 +89,6 @@ beforeEach(() => {
   mocks.archive.finalize.mockImplementation(() =>
     setTimeout(() => mocks.output.emit("close"), 10),
   );
-  mocks.page.screenshot.mockResolvedValue(Buffer.from("png"));
   tmp = fs.mkdtempSync(path.join(os.tmpdir(), "18xx-cli-b18-"));
   process.chdir(tmp);
   vi.spyOn(console, "log").mockImplementation(() => {});
@@ -87,16 +104,10 @@ afterEach(() => {
 describe("b18", () => {
   describe("18Test box", () => {
     let json;
-    let screenshots;
 
     beforeEach(async () => {
       await b18("18Test", "1.0", "Pat", {});
       json = JSON.parse(fs.readFileSync(`${folder}/18Test-1.0.json`, "utf-8"));
-      screenshots = mocks.page.screenshot.mock.calls.map(([options], i) => ({
-        url: mocks.page.goto.mock.calls[i][0],
-        size: mocks.page.setViewportSize.mock.calls[i][0],
-        ...options,
-      }));
     });
 
     it("writes the box metadata", () => {
@@ -166,21 +177,30 @@ describe("b18", () => {
       expect(fs.readdirSync(`${folder}/18Test-1.0`).sort()).toEqual(
         images.map((image) => `${image}.png`).sort(),
       );
-      expect(fs.readFileSync(`${folder}/18Test-1.0/Map.png`, "utf-8")).toBe(
-        "png",
+      expect(fs.readFileSync(`${folder}/18Test-1.0/Map.png`)).toEqual(
+        Buffer.from(PNG),
       );
-      expect(screenshots[0].url).toBe(
-        "http://localhost:9000/games/18Test/b18/map?print=true",
+      const shots = screenshots();
+      expect(shots[0].url).toBe(
+        "http://localhost:1234/games/render:18Test/b18/map?print=true",
       );
-      expect(screenshots[0].omitBackground).toBe(false);
+      expect(shots[0].transparent).toBe(false);
       // Tokens are 30 pixels for each company and extra token
-      expect(screenshots[2].size).toEqual({ width: 60, height: 30 * 36 });
-      expect(screenshots[2].omitBackground).toBe(true);
-      expect(screenshots[3].url).toBe(
-        `http://localhost:9000/games/18Test/b18/tiles/${tileTrays[0].tName.split(" ")[0].toLowerCase()}?print=true`,
+      expect(shots[2].size).toEqual({
+        width: 60,
+        height: 30 * 36,
+        deviceScaleFactor: 1,
+        mobile: false,
+      });
+      expect(shots[2].transparent).toBe(true);
+      expect(shots[3].url).toBe(
+        `http://localhost:1234/games/render:18Test/b18/tiles/${tileTrays[0].tName.split(" ")[0].toLowerCase()}?print=true`,
       );
-      expect(screenshots[3].size.height).toBe(900);
-      expect(mocks.page.emulateMedia).toHaveBeenCalledWith({ media: "print" });
+      expect(shots[3].size.height).toBe(900);
+      expect(mocks.session.send).toHaveBeenCalledWith(
+        "Emulation.setEmulatedMedia",
+        { media: "print" },
+      );
     });
 
     it("closes the browser and server and zips the box", () => {
@@ -237,7 +257,7 @@ describe("b18", () => {
       { dups: 3, flip: true },
       { dups: 1, flip: true },
     ]);
-    expect(mocks.page.setViewportSize).toHaveBeenCalledWith({
+    expect(screenshots()[2].size).toMatchObject({
       width: 60,
       height: 30 * 23,
     });
@@ -275,11 +295,11 @@ describe("b18", () => {
 
   it("keeps going and exits 1 when some images fail", async () => {
     const error = vi.spyOn(console, "error").mockImplementation(() => {});
-    mocks.page.screenshot.mockRejectedValueOnce(new Error("timeout"));
+    mocks.session.failOnce("Page.captureScreenshot", new Error("timeout"));
 
     await b18("18Test", "1.0", "Pat", {});
 
-    expect(mocks.page.screenshot.mock.calls.length).toBeGreaterThan(3);
+    expect(screenshots().length).toBeGreaterThan(3);
     expect(error).toHaveBeenCalledWith(
       "Failed board18-18Test-1.0/18Test-1.0/Map.png: timeout",
     );
