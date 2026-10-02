@@ -6,7 +6,7 @@ const Hex = ({
   transparent,
   map,
   opacity,
-  stripeRotation: override,
+  stripeRotation: overrideStripeRotation,
 }) => {
   let points =
     "-98.1495,0 -49.07475,-85 49.07475,-85 98.1495,0 49.07475,85 -49.07475,85";
@@ -37,8 +37,8 @@ const Hex = ({
               break;
           }
 
-          if (override !== undefined) {
-            stripeRotation = override;
+          if (overrideStripeRotation !== undefined) {
+            stripeRotation = overrideStripeRotation;
           }
         }
         let fill =
