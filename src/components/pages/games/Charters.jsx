@@ -55,7 +55,10 @@ const Charters = () => {
     padding = data.perPage - leftOver;
   }
 
-  let companies = concat(majors, concat(repeat(null, padding), minors));
+  // Full width charters in the free layout are a row each, so a spacer would
+  // only be a blank charter. Half width ones pair up and the spacer ends the row.
+  let freePadding = charters.halfWidth ? padding : 0;
+  let companies = concat(majors, concat(repeat(null, freePadding), minors));
 
   let css = `
 .cutlines {

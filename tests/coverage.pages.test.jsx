@@ -324,6 +324,12 @@ describe("charters page", () => {
     expect(one(spacer, ".charter")).toHaveClass("charter--half");
   });
 
+  it("adds no blank charter to full width free layouts", async () => {
+    // An odd number of majors used to leave a blank charter before the minors
+    const { root } = await mountElement(<Charters />, { game });
+    expect(spacers(root)).toHaveLength(0);
+  });
+
   it("pads die layouts with spacers", async () => {
     const { root } = await mountElement(<Charters />, {
       game: { ...game, companies: game.companies.slice(0, 2) },
