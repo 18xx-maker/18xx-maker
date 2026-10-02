@@ -1,12 +1,5 @@
-import {
-  createWriteStream,
-  existsSync,
-  readFileSync,
-  readdirSync,
-} from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
-
-import { ZipArchive } from "archiver";
 
 import { mergeDeepRight } from "ramda";
 
@@ -31,29 +24,12 @@ import { MAX_DPI } from "#export/capture";
 import { documents } from "#export/documents";
 import { exportJobs } from "#export/names";
 import { renderGame, renderSlug } from "#export/render";
+import { DOCS, selectDocs } from "#export/select";
+import { writeZip } from "#export/zip";
+
+export { DOCS, selectDocs };
 
 export const FORMATS = ["pdf", "png", "b18"];
-
-// The pages --docs can ask for. The elements of a sheet (a card, a token) are
-// part of the sheet's name.
-export const DOCS = [
-  "background",
-  "cards",
-  "charters",
-  "map",
-  "market",
-  "par",
-  "revenue",
-  "tile-manifest",
-  "tiles",
-  "tokens",
-];
-const SHEET = {
-  card: "cards",
-  charter: "charters",
-  token: "tokens",
-  tile: "tiles",
-};
 
 const list = (value, valid, what) => {
   const items = String(value)
@@ -132,29 +108,6 @@ export const loadConfigFile = (file) => {
   }
   return config;
 };
-
-// The documents of a game that the options ask for, for pdf and png
-export const selectDocs = (docs, { docs: names, paginated, variation }) =>
-  docs.filter(
-    (doc) =>
-      (!names || names.includes(SHEET[doc.kind] || doc.kind)) &&
-      (paginated || doc.mode !== "paginated") &&
-      (variation === undefined ||
-        doc.variation === undefined ||
-        doc.variation === variation),
-  );
-
-const writeZip = (out, spec) =>
-  new Promise((resolve, reject) => {
-    const output = createWriteStream(`${out}/${spec.names.zip}`);
-    const archive = new ZipArchive({ zlib: { level: 9 } });
-    output.on("close", resolve);
-    output.on("error", reject);
-    archive.on("error", reject);
-    archive.pipe(output);
-    archive.directory(`${out}/${spec.names.folder}`, spec.names.folder);
-    archive.finalize();
-  });
 
 // maker export: pdf, png and Board 18 files of a game
 //   format      "pdf,png,b18"
@@ -296,7 +249,7 @@ const command = async (game, opts = {}) => {
         failed.push(...(await run(exportJobs(gameDef, spec.images, ["b18"]))));
 
         console.log(`Creating ${id}/${spec.names.zip}`);
-        await writeZip(out, spec);
+        await writeZip(out, spec.names);
       }
     }
   });

@@ -1,6 +1,3 @@
-import fs from "node:fs";
-import path from "node:path";
-
 import { chromium } from "playwright";
 
 import { mergeDeepRight } from "ramda";
@@ -16,8 +13,11 @@ import {
 import { capture, withTimeout } from "#export/capture";
 import { docPath } from "#export/names";
 import { runExport } from "#export/run";
+import { createFileSink } from "#export/sink";
 import { resolveConfig } from "#util/resolveConfig";
 import { compileTiles } from "#util/tiles";
+
+export { createFileSink };
 
 // Everything the export list needs that the app gets from the bundler
 export const loadExportData = () => {
@@ -43,20 +43,6 @@ export const loadGameConfig = (game, user = {}) =>
     user: mergeDeepRight(customConfig, user),
     gameConfig: game.config,
   }).config;
-
-// A sink that writes files in a folder. A path that leaves the folder is an
-// error.
-export const createFileSink = (root) => ({
-  write: (relPath, bytes) => {
-    const file = path.resolve(root, relPath);
-    const relative = path.relative(root, file);
-    if (relative.startsWith("..") || path.isAbsolute(relative)) {
-      throw new Error(`${relPath} is outside of ${root}`);
-    }
-    fs.mkdirSync(path.dirname(file), { recursive: true });
-    fs.writeFileSync(file, bytes);
-  },
-});
 
 // A document that takes longer than this to capture fails, in milliseconds
 export const TIMEOUT = 120_000;
