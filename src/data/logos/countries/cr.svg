@@ -1,4 +1,4 @@
-<svg width="1000" height="600">
+<svg viewBox="0 0 1000 600">
   <linearGradient id="cr-a">
     <stop offset="0" stop-color="#fbd55f"/>
     <stop offset="1" stop-color="#cb8e32"/>
