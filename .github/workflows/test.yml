@@ -279,3 +279,83 @@ jobs:
             playwright-report/
             test-results/
           retention-days: 7
+  # The six real export paths, {CLI, app} x {pdf, png, b18}, on the built site
+  # and the built app with no mocks. To require them, require the three
+  # "Export Linux", "Export Mac" and "Export Windows" checks.
+  export:
+    name: Export ${{ matrix.os.name }}
+    runs-on: ${{ matrix.os.image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - name: Linux
+            slug: linux
+            image: ubuntu-latest
+          - name: Mac
+            slug: mac
+            image: macos-latest
+          - name: Windows
+            slug: windows
+            image: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: PNPM
+        uses: pnpm/action-setup@v6
+        with:
+          version: 9
+      - name: Node
+        uses: actions/setup-node@v7
+        with:
+          cache: "pnpm"
+          node-version: 24
+      - name: Dependencies
+        run: pnpm install
+      - name: Playwright Version
+        id: playwright-version
+        shell: bash
+        run: echo "PLAYWRIGHT_VERSION=$(pnpm exec playwright --version | awk '{ print $2 }')" >> $GITHUB_OUTPUT
+      - name: Playwright Cache
+        id: playwright-cache
+        uses: actions/cache@v6
+        with:
+          path: browsers
+          key: ${{ matrix.os.slug }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
+      - name: Playwright Install
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: pnpm exec playwright install chromium --only-shell ${{ matrix.os.slug == 'linux' && '--with-deps' || '' }}
+      - name: Playwright Dependencies
+        if: matrix.os.slug == 'linux' && steps.playwright-cache.outputs.cache-hit == 'true'
+        run: |
+          shell=$(find browsers -type f \( -name chrome-headless-shell -o -name headless_shell \) | head -n 1)
+          if [ -z "$shell" ] || ldd "$shell" | grep -q "not found"; then
+            pnpm exec playwright install-deps chromium
+          fi
+      - name: Build Web
+        run: pnpm build
+      - name: Build App
+        run: pnpm build:app
+      # Electron needs a display on Linux, and the libraries of its windows
+      - name: Electron Dependencies
+        if: matrix.os.slug == 'linux'
+        run: sudo apt-get install -y xvfb libgbm1 libnss3 libasound2t64 libgtk-3-0t64
+      - name: Export Tests
+        if: matrix.os.slug != 'linux'
+        run: pnpm test:export
+        env:
+          E2E_ELECTRON: 1
+      - name: Export Tests
+        if: matrix.os.slug == 'linux'
+        run: xvfb-run --auto-servernum pnpm test:export
+        env:
+          E2E_ELECTRON: 1
+      - name: Upload Report
+        uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: export-report-${{ matrix.os.slug }}
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7

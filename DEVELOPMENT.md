@@ -269,13 +269,41 @@ and PDFs must have the same page count and page sizes (and the same pages as
 images when `pdftoppm` is installed). Run it on Linux, where fonts and the
 Chromium build make pixels comparable.
 
-`e2e/electron.spec.js` launches the built app with Playwright's `_electron`
-(run `pnpm build:app` first) and exports 18Test from the export options panel,
-a single page as a pdf, and quits in the middle of an export. It opens real
-windows, so it only runs with `E2E_ELECTRON=1` (`E2E_ELECTRON=1 pnpm test:e2e
-e2e/electron.spec.js`; on Linux use `xvfb-run`). The native dialogs are replaced
-in the main process. The export windows load the built renderer
-(`dist/renderer`, `pnpm build:app`), also in `pnpm start:app`.
+### Export tests on every OS
+
+Plan: the six real export paths, {CLI, app} x {pdf, png, b18}, run with no
+mocks on Linux, macOS and Windows in the "Export" job of CI (checks "Export
+Linux", "Export Mac", "Export Windows", the ones to require). Each job builds
+the site and the app (`pnpm build`, `pnpm build:app`), then runs
+`pnpm test:export` (`playwright.export.config.js`, no preview server, one
+worker): `e2e/export.spec.js`, `e2e/cli.spec.js` and `e2e/electron.spec.js`.
+Linux runs it under `xvfb-run`, and the app gets `--no-sandbox` only when `CI`
+is set (the runner has no setuid `chrome-sandbox`). The job is separate from
+the vitest jobs, so it is not part of the coverage merge.
+
+`e2e/export.spec.js` has the six paths as `export › cli › pdf`, `export › cli
+› png`, `export › cli › b18`, and the same three for `app`. Each exports 18Test
+and reads the real files: the `18test-map.pdf` has 1 page, the
+`18test-background.png` is 2400 x 3150 pixels with a pHYs of 11811
+pixels/meter, and the Board18 zip has its folder at the top, forward slash
+names, and `Map`, `Market`, `Tokens` and `Yellow` images of fixed sizes
+(`e2e/export-files.js`). The sizes come from the game (units and inches), not
+from font metrics, so no tolerance is needed and every OS asserts the same.
+The app is launched with `_electron.launch` on `dist/main` with a temp
+`--user-data-dir`, and its native dialogs are replaced in the main process.
+
+`e2e/electron.spec.js` exports 18Test from the app's options panel, saves a
+single page as a pdf, and quits in the middle of an export. It opens real
+windows, so it only runs with `E2E_ELECTRON=1`; on Linux use `xvfb-run` (and
+`CI=1` to get `--no-sandbox` if Chromium's sandbox is not set up):
+
+```shell
+pnpm build && pnpm build:app
+E2E_ELECTRON=1 pnpm test:export
+```
+
+The export windows load the built renderer (`dist/renderer`, `pnpm build:app`),
+also in `pnpm start:app`.
 
 ## File Layout
 

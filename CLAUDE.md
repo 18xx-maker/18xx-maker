@@ -111,9 +111,12 @@ sizing or packaging logic in either surface.
 - `node scripts/export-golden.mjs 18Test` compares raw CDP capture against
   `setViewportSize`/`page.pdf` (b18 pixel-identical, PDF page counts and sizes).
   Per-page PDF images need `pdftoppm` (Linux).
-- `e2e/cli.spec.js` runs the real CLI. The real-Electron smoke test is opt-in:
-  `pnpm build:app && E2E_ELECTRON=1 pnpm exec playwright test e2e/electron.spec.js`.
-  Run it after any change to `electron/`, the preload or render mode; compiling
+- The six real export paths, {CLI, app} x {pdf, png, b18}, are
+  `e2e/export.spec.js` (`export › cli › pdf` ... `export › app › b18`), run
+  with `e2e/cli.spec.js` and `e2e/electron.spec.js` by `pnpm test:export`. CI
+  runs them on Linux, macOS and Windows (the "Export" job, no mocks). Locally:
+  `pnpm build && pnpm build:app && E2E_ELECTRON=1 pnpm test:export`. Run after
+  any change to `electron/`, the preload, render mode or export code; compiling
   is not enough (it caught bugs that unit tests with fake CDP targets missed).
 - Run the CLI from a checkout path with no dot folder for a baseline: express
   `sendFile` 404s on absolute paths containing one (worktrees live in

@@ -25,7 +25,12 @@ const pages = (file) =>
 
 const launch = () =>
   electron.launch({
-    args: [main, ...(process.platform === "linux" ? ["--no-sandbox"] : [])],
+    args: [
+      main,
+      ...(process.platform === "linux" && process.env.CI
+        ? ["--no-sandbox"]
+        : []),
+    ],
   });
 
 // The main window, on a page of the app
