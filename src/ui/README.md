@@ -88,8 +88,10 @@ gets its test id.
 - `Fab` slides in from the right edge when it mounts (the old `Slide`), a CSS
   animation. Everything that moves respects `prefers-reduced-motion`.
 - `Snackbar` + `Alert` replace MUI's. `Snackbar` is a bottom left corner with an
-  auto-hide timer (hovering pauses it); there is no exit transition. `Alert`
-  is `role="alert"` for warnings and errors, `role="status"` otherwise.
+  auto-hide timer (hovering pauses it) and Escape to dismiss; there is no exit
+  transition. `Alert` is `role="alert"` for every severity: it mounts already
+  filled, and a `role="status"` region that arrives with its text is not
+  announced.
   `Root.jsx` drives them from the redux alert state, keyed by the alert so a new
   alert restarts the timer.
 - `LinearProgress` and `CircularProgress` are `role="progressbar"` elements.

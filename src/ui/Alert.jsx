@@ -17,19 +17,12 @@ const icons = {
 };
 
 // MUI's standard Alert. severity: "success" | "info" | "warning" | "error".
-// An error or warning interrupts a screen reader (role="alert"), the others
-// wait their turn (role="status"). Pass role to choose.
+// role="alert" whatever the severity, as MUI's: an Alert is mounted already
+// filled (inside a Snackbar), and a role="status" region that arrives with its
+// content is not announced. Pass role to choose.
 const Alert = forwardRef(
   (
-    {
-      severity = "success",
-      role = severity === "error" || severity === "warning"
-        ? "alert"
-        : "status",
-      className,
-      children,
-      ...props
-    },
+    { severity = "success", role = "alert", className, children, ...props },
     ref,
   ) => {
     const Icon = icons[severity];

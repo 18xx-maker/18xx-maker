@@ -5,7 +5,8 @@ import cx from "./cx";
 
 // MUI's Snackbar anchored bottom left: a fixed corner that holds one message
 // (children) while open. After autoHideDuration ms (unset: never) it calls
-// onClose; hovering it pauses the timer. A new message is a new element, so
+// onClose; hovering it pauses the timer, and Escape calls onClose (so a message
+// without autoHideDuration can be dismissed). A new message is a new element, so
 // give it a key to restart the timer. There is no exit transition, it unmounts.
 const Snackbar = ({
   open,
@@ -37,6 +38,19 @@ const Snackbar = ({
     }
     return pause;
   }, [open, autoHideDuration]);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        close.current?.(event);
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   if (!open) {
     return null;

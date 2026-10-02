@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./Drawer.module.css";
 import cx from "./cx";
 
-// MUI's Drawer, in three variants. Native <dialog> and CSS transitions, no
+// MUI's Drawer, in three variants. Plain elements and CSS transitions, no
 // library: nothing here needs more than the platform gives.
 //
 // - "permanent": always there, fixed to the left edge.
@@ -11,8 +11,10 @@ import cx from "./cx";
 //   no focus trap, Escape does nothing). Closed, it is visibility:hidden, so
 //   its content is out of the tab order and the accessibility tree.
 // - "temporary": a modal panel over a dimmed backdrop (a click on it calls
-//   onClose). Focus moves into the panel, Tab stays in it, Escape calls
-//   onClose, and focus goes back to where it was when it closes. It is not a
+//   onClose). The panel is role="dialog" aria-modal, named by aria-label.
+//   Focus moves into it, Tab stays in it, the page behind does not scroll,
+//   Escape calls onClose, and focus goes back to where it was when it closes.
+//   It is not a
 //   native <dialog>: showModal() puts it in the top layer, above the app bar,
 //   which has to stay on top of the backdrop (z-index drawer + 1). It is
 //   rendered in place, not portaled, so drops on the backdrop still bubble to
@@ -78,6 +80,7 @@ const Modal = ({
   className,
   paperClassName,
   children,
+  "aria-label": label,
   ...props
 }) => {
   const root = useRef(null);
@@ -85,18 +88,25 @@ const Modal = ({
   const [leaving, setLeaving] = useState(false);
 
   // Focus goes into the panel when it opens and back to where it was when it
-  // closes. The content is kept until the leaving transitions are done.
+  // closes, and the page behind does not scroll meanwhile. The content is
+  // kept until the leaving transitions are done.
   useEffect(() => {
     if (open) {
       const before = document.activeElement;
       const element = root.current;
       const paper = panel.current;
+      const page = document.documentElement;
+      const overflow = page.style.overflow;
+      page.style.overflow = "hidden";
       paper.focus({ preventScroll: true });
       return () => {
+        page.style.overflow = overflow;
         if (!element.isConnected) {
           return;
         }
-        if (paper.contains(document.activeElement)) {
+        // A click on the backdrop leaves the focus on body, not in the panel
+        const active = document.activeElement;
+        if (paper.contains(active) || active === document.body || !active) {
           before?.focus?.({ preventScroll: true });
         }
         setLeaving(true);
@@ -141,6 +151,9 @@ const Modal = ({
       <div className={styles.backdrop} onClick={onClose} aria-hidden="true" />
       <div
         ref={panel}
+        role="dialog"
+        aria-modal="true"
+        aria-label={label}
         tabIndex={-1}
         className={cx(styles.paper, styles.temporary, paperClassName)}
       >

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useRoutes } from "react-router";
 
 import useSideMenu from "@/hooks/useSideMenu";
@@ -7,6 +8,7 @@ import { useBooleanParam } from "@/util/query";
 import styles from "./SideNav.module.css";
 
 const SideNav = ({ open, toggle }) => {
+  const { t } = useTranslation();
   const needsSideMenu = useSideMenu();
   const [print] = useBooleanParam("print");
   const element = useRoutes(sideRoutes);
@@ -30,6 +32,7 @@ const SideNav = ({ open, toggle }) => {
       <Drawer
         data-testid="side-nav-temporary"
         variant="temporary"
+        aria-label={t("nav.menu")}
         className={styles.temporary}
         open={open && !isMedium}
         onClose={toggle}

@@ -84,6 +84,7 @@
   border: 0;
   width: 300px;
   max-width: 100%;
+  overscroll-behavior: contain;
   transition: transform var(--duration-shorter) var(--ease-sharp);
 }
 

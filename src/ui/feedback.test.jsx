@@ -44,7 +44,7 @@ describe("Alert", () => {
     expect(style(alert).paddingTop).toBe("6px");
   });
 
-  it("interrupts a screen reader only for warnings and errors", () => {
+  it("is role=alert whatever the severity, unless told otherwise", () => {
     renderChrome(
       <>
         <Alert severity="success">a</Alert>
@@ -56,8 +56,7 @@ describe("Alert", () => {
         </Alert>
       </>,
     );
-    expect(screen.getAllByRole("status")).toHaveLength(2);
-    expect(screen.getAllByRole("alert")).toHaveLength(2);
+    expect(screen.getAllByRole("alert")).toHaveLength(4);
     expect(screen.getByRole("note")).toHaveTextContent("e");
   });
 });
@@ -96,6 +95,30 @@ describe("Snackbar", () => {
       </div>,
     );
     act(() => vi.advanceTimersByTime(60000));
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it("closes on Escape while open, with or without a timer", () => {
+    const onClose = vi.fn();
+    const { rerender } = renderChrome(
+      <Snackbar open onClose={onClose}>
+        <Alert>hi</Alert>
+      </Snackbar>,
+    );
+    fireEvent.keyDown(document.body, { key: "Enter" });
+    expect(onClose).not.toHaveBeenCalled();
+    fireEvent.keyDown(document.body, { key: "Escape" });
+    expect(onClose).toHaveBeenCalledTimes(1);
+
+    onClose.mockClear();
+    rerender(
+      <div data-chrome-root>
+        <Snackbar open={false} onClose={onClose}>
+          <Alert>hi</Alert>
+        </Snackbar>
+      </div>,
+    );
+    fireEvent.keyDown(document.body, { key: "Escape" });
     expect(onClose).not.toHaveBeenCalled();
   });
 
@@ -367,6 +390,32 @@ describe("Drawer", () => {
     // eslint-disable-next-line testing-library/no-node-access
     await user.click(drawer.firstChild);
     await waitFor(() => expect(style(drawer).visibility).toBe("hidden"));
+    // The click left the focus on body, it still goes back to the opener
+    expect(opener).toHaveFocus();
+  });
+
+  it("temporary: a named modal dialog that locks the page scroll", async () => {
+    const user = userEvent.setup();
+    const page = document.documentElement;
+    page.style.overflow = "scroll";
+    const { unmount } = renderChrome(
+      <Drawer variant="temporary" open aria-label="Menu">
+        <a href="#one">one</a>
+      </Drawer>,
+    );
+    const dialog = screen.getByRole("dialog", { name: "Menu" });
+    expect(dialog).toHaveAttribute("aria-modal", "true");
+    expect(style(dialog).overscrollBehaviorY).toBe("contain");
+    expect(style(page).overflow).toBe("hidden");
+    unmount();
+    expect(style(page).overflow).toBe("scroll");
+
+    // closing it restores the scroll too
+    renderChrome(<Nav variant="temporary" initial />);
+    expect(style(page).overflow).toBe("hidden");
+    await user.keyboard("{Escape}");
+    expect(style(page).overflow).toBe("scroll");
+    page.style.overflow = "";
   });
 
   it("temporary: a click on the panel keeps it open, Tab stays inside", async () => {
