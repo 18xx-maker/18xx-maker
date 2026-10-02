@@ -40,6 +40,12 @@ describe("exit codes", () => {
     expect(result.stderr).toContain("Game 18Missing not found");
   });
 
+  // print has a default game, which must not count as a game given with --all
+  it("does not take the default game of print for a game with --all", () => {
+    const result = maker("print", "--all");
+    expect(result.stderr).not.toContain("not both");
+  });
+
   it("exits 2 for a resolution over 300 dpi", () => {
     const result = maker("export", "18Test", "--format", "png", "--dpi", "301");
     expect(result.status).toBe(2);

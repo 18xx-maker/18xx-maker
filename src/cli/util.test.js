@@ -271,6 +271,15 @@ describe("startExpress", () => {
     );
   });
 
+  it("only listens on this machine", async () => {
+    vi.spyOn(fs, "existsSync").mockReturnValue(true);
+
+    server = startExpress(0);
+    await new Promise((resolve) => server.once("listening", resolve));
+
+    expect(server.address().address).toBe("127.0.0.1");
+  });
+
   it("is a usage error when the site is not built", () => {
     vi.spyOn(fs, "existsSync").mockReturnValue(false);
 

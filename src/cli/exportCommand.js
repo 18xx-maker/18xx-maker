@@ -191,8 +191,10 @@ const command = async (game, opts = {}) => {
   await withBrowser(async ({ browser, baseUrl }) => {
     for (const { id, game: gameDef } of resolved) {
       let config = loadGameConfig(gameDef, user);
-      if (opts.layouts === "all") {
-        config = mergeDeepRight(config, { export: { allLayouts: true } });
+      if (opts.layouts) {
+        config = mergeDeepRight(config, {
+          export: { allLayouts: opts.layouts === "all" },
+        });
       }
       const exportData = { ...data, slug: renderSlug(id) };
       const out = path.join(root, id);

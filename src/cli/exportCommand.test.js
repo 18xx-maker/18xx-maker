@@ -9,7 +9,7 @@ import exportCommand, {
   resolveGame,
   selectDocs,
 } from "#cli/exportCommand";
-import { UsageError, loadGame, startExpress } from "#cli/util";
+import { UsageError, defaultConfig, loadGame, startExpress } from "#cli/util";
 import { readPng } from "#export/png";
 import { createFakeBrowser } from "./__fixtures__/browser.js";
 
@@ -230,6 +230,22 @@ describe("export options", () => {
     expect(urls().some((url) => url.includes("config.cards.layout="))).toBe(
       true,
     );
+  });
+
+  it("--layouts current exports the one layout, also when the config has every layout", async () => {
+    fs.writeFileSync(
+      "config.json",
+      JSON.stringify({ export: { allLayouts: true } }),
+    );
+
+    await exportCommand("18Test", {
+      docs: "cards",
+      layouts: "current",
+      config: "config.json",
+    });
+
+    // One sheet, of the layout the config has
+    expect(files()).toEqual([`18test-cards-${defaultConfig.cards.layout}.pdf`]);
   });
 
   it("--config changes the config of the export and of the page", async () => {

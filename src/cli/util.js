@@ -190,5 +190,6 @@ export const startExpress = (port = 9000) => {
     // inside a .folder (a git worktree under .claude) is not a 404
     res.sendFile("index.html", { root: site });
   });
-  return app.listen(port);
+  // Only this machine can reach the site
+  return app.listen(port, "127.0.0.1");
 };
