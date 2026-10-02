@@ -1,0 +1,18 @@
+/* Fixture for coexistence.test.jsx only */
+.chip {
+  padding: calc(var(--space) * 2);
+  color: var(--palette-primary-main);
+}
+
+.red {
+  color: rgb(255 0 0);
+}
+
+:where(.whereRed) {
+  color: rgb(255 0 0);
+}
+
+/* Same specificity as one class: compared with the JSS rule on the viewport */
+[data-testid="viewport"] {
+  overflow: hidden;
+}

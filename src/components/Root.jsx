@@ -33,6 +33,9 @@ import {
   createSetGame,
   createUpdate,
 } from "@/state";
+
+import "@/ui/tokens.css";
+
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import * as opfs from "@/util/opfs";
@@ -159,7 +162,12 @@ body {
   const alertKey = alert.progress ? alert.name : alert.message;
 
   return (
-    <div id="dropzone" onDragOver={dragOverHandler} onDrop={dropHandler}>
+    <div
+      id="dropzone"
+      data-chrome-root
+      onDragOver={dragOverHandler}
+      onDrop={dropHandler}
+    >
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <ScrollToTop>

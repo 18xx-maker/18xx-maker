@@ -1,0 +1,84 @@
+import createIcon from "./createIcon.jsx";
+import AutorenewSvg from "./svg/Autorenew.svg";
+import CategorySvg from "./svg/Category.svg";
+import CenterFocusStrongSvg from "./svg/CenterFocusStrong.svg";
+import CheckSvg from "./svg/Check.svg";
+import ChevronRightSvg from "./svg/ChevronRight.svg";
+import CollectionsSvg from "./svg/Collections.svg";
+import DeleteSvg from "./svg/Delete.svg";
+import DownloadSvg from "./svg/Download.svg";
+import FileOpenSvg from "./svg/FileOpen.svg";
+import FilterSvg from "./svg/Filter.svg";
+import GavelSvg from "./svg/Gavel.svg";
+import GetAppSvg from "./svg/GetApp.svg";
+import HelpSvg from "./svg/Help.svg";
+import HomeSvg from "./svg/Home.svg";
+import KeyboardArrowDownSvg from "./svg/KeyboardArrowDown.svg";
+import LanguageSvg from "./svg/Language.svg";
+import ListAltSvg from "./svg/ListAlt.svg";
+import LockSvg from "./svg/Lock.svg";
+import MapSvg from "./svg/Map.svg";
+import MenuSvg from "./svg/Menu.svg";
+import MonetizationOnSvg from "./svg/MonetizationOn.svg";
+import NoteSvg from "./svg/Note.svg";
+import OpenInBrowserSvg from "./svg/OpenInBrowser.svg";
+import PeopleSvg from "./svg/People.svg";
+import PermMediaSvg from "./svg/PermMedia.svg";
+import PhotoLibrarySvg from "./svg/PhotoLibrary.svg";
+import PictureAsPdfSvg from "./svg/PictureAsPdf.svg";
+import PrintSvg from "./svg/Print.svg";
+import RefreshSvg from "./svg/Refresh.svg";
+import ReplaySvg from "./svg/Replay.svg";
+import SecuritySvg from "./svg/Security.svg";
+import SettingsSvg from "./svg/Settings.svg";
+import StarsSvg from "./svg/Stars.svg";
+import StorageSvg from "./svg/Storage.svg";
+import TimelineSvg from "./svg/Timeline.svg";
+import TrainSvg from "./svg/Train.svg";
+import ViewModuleSvg from "./svg/ViewModule.svg";
+import WarningSvg from "./svg/Warning.svg";
+
+export const Autorenew = createIcon(AutorenewSvg, "Autorenew");
+export const Category = createIcon(CategorySvg, "Category");
+export const CenterFocusStrong = createIcon(
+  CenterFocusStrongSvg,
+  "CenterFocusStrong",
+);
+export const Check = createIcon(CheckSvg, "Check");
+export const ChevronRight = createIcon(ChevronRightSvg, "ChevronRight");
+export const Collections = createIcon(CollectionsSvg, "Collections");
+export const Delete = createIcon(DeleteSvg, "Delete");
+export const Download = createIcon(DownloadSvg, "Download");
+export const FileOpen = createIcon(FileOpenSvg, "FileOpen");
+export const Filter = createIcon(FilterSvg, "Filter");
+export const Gavel = createIcon(GavelSvg, "Gavel");
+export const GetApp = createIcon(GetAppSvg, "GetApp");
+export const Help = createIcon(HelpSvg, "Help");
+export const Home = createIcon(HomeSvg, "Home");
+export const KeyboardArrowDown = createIcon(
+  KeyboardArrowDownSvg,
+  "KeyboardArrowDown",
+);
+export const Language = createIcon(LanguageSvg, "Language");
+export const ListAlt = createIcon(ListAltSvg, "ListAlt");
+export const Lock = createIcon(LockSvg, "Lock");
+export const Map = createIcon(MapSvg, "Map");
+export const Menu = createIcon(MenuSvg, "Menu");
+export const MonetizationOn = createIcon(MonetizationOnSvg, "MonetizationOn");
+export const Note = createIcon(NoteSvg, "Note");
+export const OpenInBrowser = createIcon(OpenInBrowserSvg, "OpenInBrowser");
+export const People = createIcon(PeopleSvg, "People");
+export const PermMedia = createIcon(PermMediaSvg, "PermMedia");
+export const PhotoLibrary = createIcon(PhotoLibrarySvg, "PhotoLibrary");
+export const PictureAsPdf = createIcon(PictureAsPdfSvg, "PictureAsPdf");
+export const Print = createIcon(PrintSvg, "Print");
+export const Refresh = createIcon(RefreshSvg, "Refresh");
+export const Replay = createIcon(ReplaySvg, "Replay");
+export const Security = createIcon(SecuritySvg, "Security");
+export const Settings = createIcon(SettingsSvg, "Settings");
+export const Stars = createIcon(StarsSvg, "Stars");
+export const Storage = createIcon(StorageSvg, "Storage");
+export const Timeline = createIcon(TimelineSvg, "Timeline");
+export const Train = createIcon(TrainSvg, "Train");
+export const ViewModule = createIcon(ViewModuleSvg, "ViewModule");
+export const Warning = createIcon(WarningSvg, "Warning");

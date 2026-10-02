@@ -309,6 +309,7 @@ At a high level the folder structure looks like:
 │   ├── schemas       # JSON schemas for all 18xx Maker data files
 │   ├── state         # Redux state store related files
 │   ├── styles        # All css files
+│   ├── ui            # Chrome UI layer: tokens, icons, hooks (src/ui/README.md)
 │   └── util          # Utility helpers
 └── tests             # Vitest integration tests and test helper files
 ```

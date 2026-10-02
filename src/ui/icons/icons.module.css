@@ -1,0 +1,8 @@
+/* Mirrors MUI SvgIcon-root. Single class so any consumer class can override. */
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
