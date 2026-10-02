@@ -112,10 +112,20 @@ describe("pdf", () => {
   });
 });
 
+const WHITE = [
+  "Emulation.setDefaultBackgroundColorOverride",
+  { color: { r: 255, g: 255, b: 255, a: 1 } },
+];
+const TRANSPARENT = [
+  "Emulation.setDefaultBackgroundColorOverride",
+  { color: { r: 0, g: 0, b: 0, a: 0 } },
+];
+
 describe("b18", () => {
-  const job = () => ({
+  // The map or the market, and the tokens or tiles
+  const job = (transparent = false) => ({
     format: "b18",
-    doc: doc({ viewport: { w: 60, h: 90 } }),
+    doc: doc({ viewport: { w: 60, h: 90 }, transparent }),
   });
 
   it("is a screenshot of a viewport of the size of the image", async () => {
@@ -125,10 +135,7 @@ describe("b18", () => {
 
     expect(a.calls).toEqual([
       ["Emulation.setEmulatedMedia", { media: "print" }],
-      [
-        "Emulation.setDefaultBackgroundColorOverride",
-        { color: { r: 0, g: 0, b: 0, a: 0 } },
-      ],
+      WHITE,
       [
         "Emulation.setDeviceMetricsOverride",
         { width: 60, height: 90, deviceScaleFactor: 1, mobile: false },
@@ -145,47 +152,26 @@ describe("b18", () => {
     });
   });
 
-  it("is always transparent, and the background is reset after", async () => {
-    const a = adapter();
+  it.each(["transparent", "white", undefined])(
+    "does not take the background (%s): a map is white, tokens transparent",
+    async (background) => {
+      const map = adapter();
+      await capture(map, job(), { background });
+      expect(map.calls).toContainEqual(WHITE);
+      expect(map.calls).not.toContainEqual(TRANSPARENT);
 
-    await capture(a, job());
+      const tokens = adapter();
+      await capture(tokens, job(true), { background });
+      expect(tokens.calls).toContainEqual(TRANSPARENT);
+      expect(tokens.calls).not.toContainEqual(WHITE);
 
-    expect(a.calls).toContainEqual([
-      "Emulation.setDefaultBackgroundColorOverride",
-      { color: { r: 0, g: 0, b: 0, a: 0 } },
-    ]);
-    expect(a.calls.at(-1)).toEqual([
-      "Emulation.setDefaultBackgroundColorOverride",
-      undefined,
-    ]);
-  });
-
-  it("is white when asked, but not a transparent document", async () => {
-    const white = adapter();
-    await capture(white, job(), { background: "white" });
-    expect(white.calls).toContainEqual([
-      "Emulation.setDefaultBackgroundColorOverride",
-      { color: { r: 255, g: 255, b: 255, a: 1 } },
-    ]);
-
-    const kept = adapter();
-    await capture(
-      kept,
-      {
-        format: "b18",
-        doc: doc({ viewport: { w: 60, h: 90 }, transparent: true }),
-      },
-      { background: "white" },
-    );
-    expect(kept.calls).toContainEqual([
-      "Emulation.setDefaultBackgroundColorOverride",
-      { color: { r: 0, g: 0, b: 0, a: 0 } },
-    ]);
-    expect(kept.calls).not.toContainEqual([
-      "Emulation.setDefaultBackgroundColorOverride",
-      { color: { r: 255, g: 255, b: 255, a: 1 } },
-    ]);
-  });
+      // The background is reset after
+      expect(tokens.calls.at(-1)).toEqual([
+        "Emulation.setDefaultBackgroundColorOverride",
+        undefined,
+      ]);
+    },
+  );
 
   it("is not dpi dependent", async () => {
     const a = adapter();
@@ -327,19 +313,34 @@ describe("png", () => {
     expect(readPng(two).width).toBe(314);
   });
 
-  it("is always transparent, and resets the page after", async () => {
+  it("is transparent by default, and resets the page after", async () => {
     const a = adapter({ rect });
 
     await capture(a, job());
 
-    expect(a.calls).toContainEqual([
-      "Emulation.setDefaultBackgroundColorOverride",
-      { color: { r: 0, g: 0, b: 0, a: 0 } },
-    ]);
+    expect(a.calls).toContainEqual(TRANSPARENT);
     expect(a.names().slice(-2)).toEqual([
       "Emulation.clearDeviceMetricsOverride",
       "Emulation.setDefaultBackgroundColorOverride",
     ]);
+  });
+
+  it("is white when asked, but not a transparent document", async () => {
+    const white = adapter({ rect });
+    await capture(white, job(), { background: "white" });
+    expect(white.calls).toContainEqual(WHITE);
+
+    const tile = adapter({ rect });
+    await capture(
+      tile,
+      {
+        format: "png",
+        doc: doc({ selector: ".printElement", transparent: true }),
+      },
+      { background: "white" },
+    );
+    expect(tile.calls).toContainEqual(TRANSPARENT);
+    expect(tile.calls).not.toContainEqual(WHITE);
   });
 
   it("fails when the page has no such element", async () => {

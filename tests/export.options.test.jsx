@@ -172,6 +172,20 @@ describe("export options", () => {
     expect(requested().out).toBeUndefined();
   });
 
+  it("only takes a background for png images, not a Board18 box", async () => {
+    const { user, panel } = await openOptions();
+    const background = within(panel).getByRole("combobox", {
+      name: "Image background",
+    });
+    expect(background).toBeDisabled();
+
+    await user.click(checkbox(panel, "Board18 box"));
+    expect(background).toBeDisabled();
+
+    await user.click(checkbox(panel, "PNG images"));
+    expect(background).toBeEnabled();
+  });
+
   it("exports with a transparent background unless it is set to white", async () => {
     const { user, panel } = await openOptions();
     await user.click(checkbox(panel, "PNG images"));

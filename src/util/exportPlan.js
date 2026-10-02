@@ -109,8 +109,8 @@ export const exportDefaults = (game, layers) => {
 //   layouts    "all" for a sheet of every layout, "current" for the one config
 //              has, as config says when left out
 //   paginated  also the paginated pdfs
-//   background "transparent" or "white", of the png and b18 images (tokens and
-//              tiles are always transparent)
+//   background "transparent" or "white", of the png images (tokens and tiles
+//              are always transparent, b18 images do not take it)
 //   dpi        of the pngs, at most MAX_DPI
 //   variation  only this map variation
 //   b18        { version, author } of the Board 18 box

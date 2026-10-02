@@ -64,7 +64,7 @@ pnpm maker export <game|path.json> --format pdf,png,b18
 | `--layouts <layouts>`     | `all`: a sheet for every layout of the cards, tiles and tokens, or `current`                                           |
 | `--paginated`             | also the paginated PDFs (`print` always has them)                                                                      |
 | `--no-paginated`          | not the paginated PDFs, when the game file has them                                                                    |
-| `--background <bg>`       | `transparent` (default) or `white`: the background of PNG and Board 18 images; tokens and tiles are always transparent |
+| `--background <bg>`       | `transparent` (default) or `white`: the background of PNGs (not of Board 18 images); tokens and tiles stay transparent |
 | `--variation <n>`         | only this map variation, `all` for every one                                                                           |
 | `--config <file>`         | a config file on top of `src/config.json` (the settings to change)                                                     |
 | `--dpi <dpi>`             | resolution of PNGs, 1 to 300 (the default and the highest)                                                             |

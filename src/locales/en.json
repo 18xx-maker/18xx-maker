@@ -49,7 +49,7 @@
     "allLayouts": "Every layout of a sheet",
     "paginated": "Paginated pdfs",
     "background": "Image background",
-    "backgroundDescription": "Of the png images and the Board18 images. Tokens and tiles are always transparent.",
+    "backgroundDescription": "Of the png images. Tokens and tiles are always transparent. Board18 maps and markets are always white, their tokens and tiles transparent.",
     "transparent": "Transparent",
     "white": "White",
     "variation": "Map variation",

@@ -5,8 +5,9 @@ import path from "node:path";
 
 import { expect, test } from "@playwright/test";
 
+import { decodePng } from "../src/export/__fixtures__/png.js";
 import { readPng } from "../src/export/png.js";
-import { OPAQUE, edgeAlpha, edgeColors } from "./export-files.js";
+import { OPAQUE, edgeAlpha, edgeColors, unzip } from "./export-files.js";
 
 // maker export against the built site (dist/site), for 18Test, in a browser of
 // its own. The sizes and page counts are the golden values of 18Test.
@@ -228,6 +229,34 @@ test.describe("maker export 18Test", () => {
       0,
     );
   });
+
+  // Board18 boxes do not take the background: the map and the market are
+  // always white, the tokens and tiles always transparent
+  for (const background of ["transparent", "white"]) {
+    test(`writes a Board 18 box the same with --background ${background}`, () => {
+      const result = maker(
+        out,
+        "18Test",
+        "--format",
+        "b18",
+        "--background",
+        background,
+      );
+      expect(result.status, result.stderr).toBe(0);
+
+      const files = unzip(path.join(out, "18Test/board18-18Test-1.0.zip"));
+      const corner = (name) => {
+        const { channels, pixels } = decodePng(
+          files[`board18-18Test-1.0/18Test-1.0/${name}`],
+        );
+        return [...pixels.subarray(0, 3), channels === 4 ? pixels[3] : 255];
+      };
+      expect(corner("Map.png")).toEqual([255, 255, 255, 255]);
+      expect(corner("Market.png")).toEqual([255, 255, 255, 255]);
+      expect(corner("Tokens.png")[3]).toBe(0);
+      expect(corner("Yellow.png")[3]).toBe(0);
+    });
+  }
 
   test("refuses another background", () => {
     const result = maker(out, "18Test", "--background", "black");

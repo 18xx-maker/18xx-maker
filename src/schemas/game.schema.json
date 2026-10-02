@@ -523,7 +523,7 @@
         },
         "background": {
           "type": "string",
-          "description": "The background of the png images and the images of a Board18 box, like --background. transparent or white; tokens and tiles are always transparent. pdf files are not affected. Defaults to transparent.",
+          "description": "The background of the png images, like --background. transparent or white; tokens and tiles are always transparent. Board18 boxes and pdf files are not affected: the map and market of a Board18 box are always white, its tokens and tiles transparent. Defaults to transparent.",
           "enum": ["transparent", "white"]
         },
         "variation": {

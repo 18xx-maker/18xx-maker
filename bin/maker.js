@@ -78,7 +78,7 @@ program
   )
   .option(
     "--background <background>",
-    "transparent or white: the background of the PNG and Board 18 images (default: transparent)",
+    "transparent or white: the background of the PNG images, not of a Board 18 box (default: transparent)",
   )
   .option(
     "--variation <n>",

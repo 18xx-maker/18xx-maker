@@ -183,7 +183,12 @@ describe("b18", () => {
       expect(shots[0].url).toBe(
         "http://localhost:1234/games/render:18Test/b18/map?print=true",
       );
-      expect(shots[0].transparent).toBe(true);
+      // The map and the market are white, the tokens and tiles transparent
+      expect(shots.map(({ transparent }) => transparent)).toEqual([
+        false,
+        false,
+        ...shots.slice(2).map(() => true),
+      ]);
       // Tokens are 30 pixels for each company and extra token
       expect(shots[2].size).toEqual({
         width: 60,

@@ -269,7 +269,7 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
           >
             <Select
               value={background}
-              disabled={running || !formats.some((f) => f !== "pdf")}
+              disabled={running || !formats.includes("png")}
               onValueChange={setBackground}
             >
               <SelectTrigger
