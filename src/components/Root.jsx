@@ -108,7 +108,8 @@ body {
     : null;
 
   useEffect(() => {
-    if (capability.electron) {
+    // A capture window of an export only has the game it shows
+    if (capability.electron && !render) {
       const onGame = (game) => {
         dispatch(createSetGame(game));
         dispatch(
@@ -127,7 +128,7 @@ body {
         window.api.off();
       };
     }
-  }, [dispatch, navigate]);
+  }, [dispatch, navigate, render]);
 
   useBindings();
   const inEditor = useEditor();

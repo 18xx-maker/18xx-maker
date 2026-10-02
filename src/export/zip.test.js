@@ -51,6 +51,24 @@ describe("writeZip", () => {
     ]);
   });
 
+  it("does not write a zip or read a folder outside of the output folder", async () => {
+    const out = path.join(tmp, "out");
+    fs.mkdirSync(out);
+    const names = b18Names("18Test", "1.0");
+
+    await expect(
+      writeZip(out, { ...names, zip: "../evil.zip" }),
+    ).rejects.toThrow("is outside of");
+    await expect(
+      writeZip(out, { ...names, folder: "../../etc" }),
+    ).rejects.toThrow("is outside of");
+    await expect(
+      writeZip(out, { ...names, zip: path.join(tmp, "abs.zip") }),
+    ).rejects.toThrow("is outside of");
+    expect(fs.existsSync(path.join(tmp, "evil.zip"))).toBe(false);
+    expect(fs.existsSync(path.join(tmp, "abs.zip"))).toBe(false);
+  });
+
   it("fails when the zip can not be written", async () => {
     const names = b18Names("18Test", "1.0");
     fs.mkdirSync(path.join(tmp, names.folder));

@@ -4,12 +4,13 @@ import { basename, dirname, join } from "node:path";
 
 import { app, dialog, ipcMain, shell } from "electron";
 
+import { createExportIpc, fromMainWindow } from "#export/ipc";
 import { createPool } from "#export/pool";
 import { createExportService } from "#export/service";
 import { createFileSink } from "#export/sink";
 import { writeZip } from "#export/zip";
 import { exportOf, openCaptureWindow } from "./capture.js";
-import { getMainWindow } from "./window.js";
+import { getMainWindow, startBaseUrl } from "./window.js";
 
 // How many capture windows are open at once, and how many files a window
 // captures before it is replaced
@@ -90,11 +91,15 @@ const channel = (sender) => {
 export const cancelExports = () => service.cancelAll();
 
 export const registerExport = () => {
-  ipcMain.handle("export", (event, request) =>
-    service.run(event.sender.id, request, channel(event.sender)),
-  );
-  ipcMain.handle("export:cancel", (event) => service.cancel(event.sender.id));
-  ipcMain.handle("export:folder", () => dialogs.chooseFolder());
+  const ipc = createExportIpc({
+    isMain: (event) => fromMainWindow(event, getMainWindow(), startBaseUrl),
+    service,
+    chooseFolder: () => dialogs.chooseFolder(),
+    channel,
+  });
+  ipcMain.handle("export", (event, request) => ipc.export(event, request));
+  ipcMain.handle("export:cancel", (event) => ipc.cancel(event));
+  ipcMain.handle("export:folder", (event) => ipc.folder(event));
 
   // Only a capture window gets the input of its own export
   ipcMain.on("getRenderInput", (event, id) => {

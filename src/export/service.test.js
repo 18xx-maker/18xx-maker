@@ -2,6 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
+import { b18Names } from "#export/names";
 import { createPool } from "#export/pool";
 import { createExportService, validateRequest } from "#export/service";
 import { createFileSink } from "#export/sink";
@@ -388,5 +389,25 @@ describe("validateRequest", () => {
     expect.hasAssertions();
     bad({ single: true }, "one file expected");
     bad({ b18: { names: {} } }, "no Board 18 box");
+  });
+
+  it("only takes plain relative names for the Board 18 box", () => {
+    expect.hasAssertions();
+    const names = b18Names("18Test", "1.0");
+    const box = (changes, json = { bname: "x" }) => ({
+      b18: { names: { ...names, ...changes }, json },
+    });
+
+    expect(() => validateRequest(request(box({})))).not.toThrow();
+    bad(box({ zip: "../evil.zip" }), "no Board 18 box");
+    bad(box({ zip: "/tmp/evil.zip" }), "no Board 18 box");
+    bad(box({ zip: "C:\\evil.zip" }), "no Board 18 box");
+    bad(box({ folder: "a/../../b" }), "no Board 18 box");
+    bad(box({ folder: "..\\b" }), "no Board 18 box");
+    bad(box({ json: "/etc/passwd" }), "no Board 18 box");
+    bad(box({ json: "x/../../y.json" }), "no Board 18 box");
+    bad(box({ json: 5 }), "no Board 18 box");
+    bad(box({}, "text"), "no Board 18 box");
+    bad(box({}, ["x"]), "no Board 18 box");
   });
 });

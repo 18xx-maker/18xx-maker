@@ -28,6 +28,14 @@ import { runExport } from "./run.js";
 
 const FORMATS = ["pdf", "png", "b18"];
 
+// A name in the output folder: relative, and not going up from it
+const plainName = (name) =>
+  typeof name === "string" &&
+  name !== "" &&
+  !name.includes("\0") &&
+  !/^([\\/]|[a-zA-Z]:)/.test(name) &&
+  !name.split(/[\\/]/).includes("..");
+
 const invalid = (message) => new Error(`Invalid export: ${message}`);
 
 export const validateRequest = (request) => {
@@ -52,8 +60,18 @@ export const validateRequest = (request) => {
       throw invalid("a file is not valid");
     }
   }
-  if (b18 && (typeof b18.names?.zip !== "string" || !b18.json)) {
-    throw invalid("no Board 18 box");
+  if (b18) {
+    const { names, json } = b18;
+    if (
+      !json ||
+      typeof json !== "object" ||
+      Array.isArray(json) ||
+      !plainName(names?.zip) ||
+      !plainName(names?.folder) ||
+      !plainName(names?.json)
+    ) {
+      throw invalid("no Board 18 box");
+    }
   }
 };
 

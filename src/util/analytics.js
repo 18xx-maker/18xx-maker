@@ -1,6 +1,7 @@
 import { init, track } from "@plausible-analytics/tracker";
 
 import capability from "@/util/capability";
+import { getRenderInput } from "@/util/renderInput";
 
 // Set this to true to console log all analytic sends in dev mode
 const DEVLOG = false;
@@ -59,8 +60,10 @@ export const gatherPageviewData = (location) => {
   };
 };
 
-const system = capability.electron ? window.api.loadPlatformAndVersions() : {};
-const props = capability.electron
+// The capture window of an export has none of the app's calls
+const app = capability.electron && !getRenderInput();
+const system = app ? window.api.loadPlatformAndVersions() : {};
+const props = app
   ? {
       interface: source,
       appVersion: system.versions.app,

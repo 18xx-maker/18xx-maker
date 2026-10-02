@@ -5,6 +5,8 @@ import updater from "electron-updater";
 
 import { objOf } from "ramda";
 
+import { createAddRecent } from "#export/ipc";
+import { exportOf } from "./capture.js";
 import {
   CONFIG_FILE,
   addRecent,
@@ -121,9 +123,13 @@ ipcMain.handle("loadGame", (event, id) => {
 
 ipcMain.handle("openGame", openGame);
 
-ipcMain.on("addRecent", (event, title, slug) => {
-  addRecent(title, slug);
-  setMenu();
-});
+ipcMain.on(
+  "addRecent",
+  createAddRecent({
+    isCapture: (sender) => exportOf(sender) !== undefined,
+    addRecent,
+    afterAdd: () => setMenu(),
+  }),
+);
 
 registerExport();
