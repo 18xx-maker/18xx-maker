@@ -112,6 +112,11 @@ CI=1 pnpm test:run
 pnpm build
 pnpm test:e2e
 
+# Export a game from the built site (see src/cli/README.md), and compare
+# Playwright's own capture with the shared capture on Linux (see below)
+pnpm maker export 18Test --format pdf,png,b18
+node scripts/export-golden.mjs 18Test
+
 # Run all fixing linters
 pnpm fix
 
@@ -234,8 +239,18 @@ Notes:
   ones are listed per page, by rule and css selector, with reasons in its
   `KNOWN_ISSUES`; fix them and delete the
   entry (the spec fails if an entry no longer applies).
+- `e2e/cli.spec.js` runs `maker export` on 18Test against the built site (it
+  serves it on a free port of its own) and checks page counts, PNG sizes and the
+  resolution in the files.
 - The vitest projects only include `src/` and `tests/`, so they never pick up
   `e2e/`.
+
+`scripts/export-golden.mjs [game]` checks the shared capture
+(`src/export/capture.js`, Chrome DevTools Protocol commands) against Playwright's
+own calls on the built site: Board 18 images must be identical pixel for pixel
+and PDFs must have the same page count and page sizes (and the same pages as
+images when `pdftoppm` is installed). Run it on Linux, where fonts and the
+Chromium build make pixels comparable.
 
 An Electron smoke test (launch the built app with Playwright's `_electron`,
 open a game, check the window title) is not implemented yet. It would need
@@ -257,12 +272,13 @@ At a high level the folder structure looks like:
 │   ├── sb            # The built esbuild for the storybook site
 │   └── renderer      # The built esbuild for the preload file
 ├── docker            # Stuff only related to docker builds
-├── e2e               # Playwright end to end specs for the built site
+├── e2e               # Playwright end to end specs for the built site (and maker export)
 ├── electron          # Electron related src files
 │   ├── assets        # Files that we need when building electorn
 │   ├── main          # The src for the electron main process
 │   └── preload       # The preload file injected into the render process
 ├── public            # Files that are just served statically
+├── scripts           # Maintenance scripts (export-golden.mjs)
 ├── src
 │   ├── cli           # CLI related files
 │   ├── components    # React Components

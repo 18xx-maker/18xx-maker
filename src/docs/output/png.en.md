@@ -1,9 +1,5 @@
 # PNG Output
 
-> [!WARNING]
-> Currently there is no ability to generate PNG images on the command line
-> without running the app.
-
 On the 18xx Maker application you can browse to any game component and then
 click on the export button:
 
@@ -43,3 +39,36 @@ following components:
 
 Other components will silently fail to generate a image. If you need images for
 these components export the full game as PNG images.
+
+## Command Line
+
+> [!IMPORTANT]
+> This workflow requires you to have the source code for the app and have
+> followed the instructions for [local
+> development](https://github.com/18xx-maker/18xx-maker/blob/main/DEVELOPMENT.md).
+
+You can output an image for every tile, card, charter, token and the single
+pages (background, map, market, par, revenue and tile manifest) by running:
+
+```bash
+pnpm build && pnpm maker export <game> --format png
+```
+
+where `<game>` is the id of a bundled game or the path to a game file. The files
+are written to `render/<game>`, named after the game's title.
+
+Images are made for printing: 300 dpi is the default and the highest
+resolution, a lower one is set with `--dpi` (1 to 300, `--dpi 301` is
+refused). The resolution is written into the file, so a card that is 2.5 by 3.5
+inches opens at that size in an image viewer and prints at that size. Colors are
+sRGB, and tokens and tiles have a transparent background. An image of more than
+200 megapixels (a huge map at 300 dpi) is not made, the command says so and you
+can lower the `--dpi`. A document that takes more than two minutes fails.
+
+```bash
+# Only the cards and the map, at 150 dpi
+pnpm maker export 1889 --format png --docs cards,map --dpi 150
+```
+
+Remember that this will not use the options setup in the browser config page,
+see [PDF output](/docs/output/pdf) for how to use your config.

@@ -36,15 +36,23 @@ will open the resulting PDF.
 You can output straight to PDF files by running:
 
 ```bash
-pnpm build && pnpm maker print <game>
+pnpm build && pnpm maker export <game> --format pdf --paginated
 ```
 
-where `<game>` is which game to build. Game defaults to `1889`. For example,
-here is me printing 1889 explicitly:
+where `<game>` is the id of a bundled game, or the path to a game file (it is
+checked against the game schema first, and the folder is named after the file).
+For example, here is me printing 1889:
 
 ```bash
-pnpm build && pnpm maker print 1889
+pnpm build && pnpm maker export 1889 --format pdf --paginated
 ```
+
+`pnpm maker print 1889` is the same thing (the game defaults to `1889`). Other
+useful options are `--docs map,cards` to only export some pages, `--layouts all`
+to get a sheet for every layout, `--variation 1` for one map variation,
+`--config my-config.json` for a config file on top of `src/config.json`,
+`--out <folder>` for another folder than `render` and `--jobs 3` to capture
+three files at the same time. `pnpm maker help export` lists them all.
 
 Remember that this will not use the options setup in the browser config page. In
 order to make your printed output identical to what you see in the browser, go
@@ -74,12 +82,13 @@ render
 ```
 
 The files are named after the game's title (the same names the app uses), the
-folder after the game id you typed. The command exits with code 1 if some
+folder after the game id you typed. PDFs are printed with their backgrounds,
+like the app does. The command exits with code 1 if some
 documents could not be printed (the others are still written) and with code 2
 if it was used wrong, a game does not exist or the site has not been built.
 
 If you want to build all games at once you can run:
 
 ```bash
-pnpm build && pnpm maker print --all
+pnpm build && pnpm maker export --all --format pdf --paginated
 ```
