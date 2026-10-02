@@ -1,4 +1,4 @@
-import { withResolution } from "./png.js";
+import { cropPng, withResolution } from "./png.js";
 
 // Captures a document from a page of the site with Chrome DevTools Protocol
 // commands, the same ones in every browser adapter (Playwright in the CLI).
@@ -13,14 +13,46 @@ export const CSS_DPI = 96;
 export const MAX_DPI = 300;
 export const MAX_PIXELS = 200_000_000;
 
-// How many CSS pixels a rounded down element can be under its real size before
-// it is a pixel less: sizes like 239.9999999 are 240
+// How far an edge can be off a whole pixel and still be on it, in pixels: an
+// edge at 796.9999999 is at 797
 const EPSILON = 1e-3;
 
-// Chromium refuses fractional sizes and truncates a clip, so sizes are rounded
-// down to whole CSS pixels: a clip that is rounded up reaches past the element
-// (a card is 332.598 CSS pixels high) and captures a white edge
-const floor = (size) => Math.max(1, Math.floor(size + EPSILON));
+// The whole pixels from start to end on a grid of ratio pixels a CSS pixel
+// (and 0, not -0)
+const inside = (start, end, ratio) => [
+  Math.ceil(start * ratio - EPSILON) || 0,
+  Math.floor(end * ratio + EPSILON),
+];
+
+// The device pixels of an image at a scale that an element of the page
+// ({ x, y, width, height } in CSS pixels) covers whole: { left, top, width,
+// height }.
+// Chromium paints a box on the pixel grid of the page (ratio, its
+// devicePixelRatio before the capture: 1 in the CLI and the offscreen windows
+// of the app) and only then scales it by the emulated device scale of the
+// capture (dpi / 96). A card of 255.109 CSS pixels is painted 255 wide, to
+// 796.875 device pixels at 300 dpi, and the pixel it partly covers is
+// antialiased: partly transparent (dark on a dark background), or blended
+// into white. The image only has the pixels inside both the element and the
+// box it is painted in, so it has no such edge.
+const devicePixels = ({ x = 0, y = 0, width, height }, scale, ratio = 1) => {
+  const pixels = (start, end) => {
+    const [first, last] = inside(start, end, ratio);
+    return inside(
+      Math.max(start, first / ratio),
+      Math.min(end, last / ratio),
+      scale,
+    );
+  };
+  const [left, right] = pixels(x, x + width);
+  const [top, bottom] = pixels(y, y + height);
+  return {
+    left,
+    top,
+    width: Math.max(1, right - left),
+    height: Math.max(1, bottom - top),
+  };
+};
 
 const decode = (base64) =>
   Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
@@ -57,14 +89,12 @@ export const checkPixels = (width, height, maxPixels = MAX_PIXELS) => {
   }
 };
 
-// The pixel size of an image of an element of a size in CSS pixels at a
-// resolution: the size is rounded down to whole CSS pixels first
-export const imageSize = ({ width, height }, dpi) => {
-  const scale = dpi / CSS_DPI;
-  return {
-    width: Math.round(floor(width) * scale),
-    height: Math.round(floor(height) * scale),
-  };
+// The pixel size of an image of an element of a page ({ x, y, width, height }
+// in CSS pixels) at a resolution, on a screen of ratio device pixels a CSS
+// pixel: the device pixels the element covers whole (see devicePixels)
+export const imageSize = (rect, dpi, ratio = 1) => {
+  const { width, height } = devicePixels(rect, dpi / CSS_DPI, ratio);
+  return { width, height };
 };
 
 const printToPdf = async ({ send }) => {
@@ -109,33 +139,45 @@ const captureViewport = async (adapter, { viewport }, maxPixels) => {
   return screenshot(adapter);
 };
 
-// An element of the page at a resolution, with the resolution in the file
+// An element of the page at a resolution, with the resolution in the file.
+// The image is the device pixels the element covers whole (see devicePixels),
+// from a whole device pixel. Chromium makes a clip a whole number of CSS
+// pixels (so an image of 255 CSS pixels is 797 device pixels at 300 dpi, with
+// a last column that is 7/8 painted), so the clip is a little larger and the
+// image is cut to its size.
 const captureElement = async (adapter, { selector }, dpi, maxPixels) => {
   const rect = await adapter.evaluate(`(() => {
     const element = document.querySelector(${JSON.stringify(selector)});
     if (!element) return null;
     const { left, top, width, height } = element.getBoundingClientRect();
-    return { x: left + scrollX, y: top + scrollY, width, height };
+    return {
+      x: left + scrollX,
+      y: top + scrollY,
+      width,
+      height,
+      ratio: devicePixelRatio,
+    };
   })()`);
   if (!rect) throw new Error(`The page has no ${selector}`);
 
-  const css = { width: floor(rect.width), height: floor(rect.height) };
-  const size = imageSize(rect, dpi);
-  checkPixels(size.width, size.height, maxPixels);
+  const scale = dpi / CSS_DPI;
+  const pixels = devicePixels(rect, scale, rect.ratio);
+  checkPixels(pixels.width, pixels.height, maxPixels);
 
   await adapter.send("Emulation.setDeviceMetricsOverride", {
-    width: Math.ceil(rect.x) + css.width,
-    height: Math.ceil(rect.y) + css.height,
-    deviceScaleFactor: dpi / CSS_DPI,
+    width: Math.max(1, Math.ceil(rect.x + rect.width)),
+    height: Math.max(1, Math.ceil(rect.y + rect.height)),
+    deviceScaleFactor: scale,
     mobile: false,
   });
   const png = await screenshot(adapter, {
-    x: rect.x,
-    y: rect.y,
-    ...css,
+    x: pixels.left / scale,
+    y: pixels.top / scale,
+    width: Math.ceil(pixels.width / scale),
+    height: Math.ceil(pixels.height / scale),
     scale: 1,
   });
-  return withResolution(png, dpi);
+  return withResolution(await cropPng(png, pixels.width, pixels.height), dpi);
 };
 
 // Captures a file of an export list ({ doc, format }, see exportJobs) from the

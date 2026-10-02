@@ -1,3 +1,4 @@
+import { decodePng, encodePng } from "./__fixtures__/png.js";
 import {
   CSS_DPI,
   MAX_DPI,
@@ -16,8 +17,37 @@ const PNG = Uint8Array.from(
   (c) => c.charCodeAt(0),
 );
 
+// A screenshot of a clip like Chromium's: a whole number of CSS pixels at the
+// scale of the device, rounded. The element is painted on whole CSS pixels;
+// a pixel it covers whole is 255, one it partly covers 128 and the others 0.
+// Only the header for an image too big to make.
+const shot = (clip, scale, rect) => {
+  const width = Math.round(Math.floor(clip.width) * scale);
+  const height = Math.round(Math.floor(clip.height) * scale);
+  const edge = (start, size) => Math.floor(start + size + 1e-3);
+  const right = (edge(rect.x, rect.width) - clip.x) * scale;
+  const bottom = (edge(rect.y, rect.height) - clip.y) * scale;
+  const covered = (x, end) =>
+    x + 1 <= end + 1e-6 ? 255 : x < end - 1e-6 ? 128 : 0;
+  return encodePng(
+    { width, height },
+    width * height <= 1e6
+      ? (x, y) => Math.min(covered(x, right), covered(y, bottom))
+      : null,
+  );
+};
+
+const base64 = (bytes) => {
+  let text = "";
+  for (let i = 0; i < bytes.length; i += 0x8000) {
+    text += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  }
+  return btoa(text);
+};
+
 // An adapter that records what it was sent
 const adapter = ({ rect, reads = [btoa("pdf")] } = {}) => {
+  let scale = 1;
   const calls = [];
   return {
     calls,
@@ -29,8 +59,15 @@ const adapter = ({ rect, reads = [btoa("pdf")] } = {}) => {
         const data = reads.shift();
         return { data, base64Encoded: true, eof: reads.length === 0 };
       }
+      if (method === "Emulation.setDeviceMetricsOverride") {
+        scale = params.deviceScaleFactor;
+      }
       if (method === "Page.captureScreenshot") {
-        return { data: btoa(String.fromCharCode(...PNG)) };
+        return {
+          data: params.clip
+            ? base64(shot(params.clip, scale, rect))
+            : btoa(String.fromCharCode(...PNG)),
+        };
       }
       return {};
     },
@@ -181,6 +218,8 @@ describe("png", () => {
     doc: doc({ selector: ".printElement" }),
   });
   const rect = { x: 0, y: 0, width: 240, height: 150 };
+  // A card of 18Test, measured by Chromium
+  const card = { x: 0, y: 0, width: 255.109375, height: 166.296875 };
 
   it("captures the element at 300 dpi by default", async () => {
     const a = adapter({ rect });
@@ -200,7 +239,12 @@ describe("png", () => {
         clip: { x: 0, y: 0, width: 240, height: 150, scale: 1 },
       },
     ]);
-    expect(readPng(bytes).pixelsPerMeter).toBe(11811);
+    // 150 CSS pixels are 468.75 device pixels, the half covered one is cut
+    expect(readPng(bytes)).toEqual({
+      width: 750,
+      height: 468,
+      pixelsPerMeter: 11811,
+    });
   });
 
   it("writes the resolution it was captured at", async () => {
@@ -221,32 +265,66 @@ describe("png", () => {
     expect(scales).toEqual([1, 2]);
   });
 
-  it("rounds the size down to whole CSS pixels, so the clip stays in the element", async () => {
+  // Chromium paints the card 255 by 166 CSS pixels and captures a clip of
+  // 255 by 166 CSS pixels as 797 by 519 device pixels: the last column is
+  // 7/8 painted and the last row 3/4, an edge that is partly transparent
+  it.each([
+    [300, 796, 518],
+    [150, 398, 259],
+    [96, 255, 166],
+  ])(
+    "has only the pixels a card covers whole at %i dpi",
+    async (dpi, width, height) => {
+      const a = adapter({ rect: card });
+
+      const bytes = await capture(a, job(), { dpi });
+
+      const image = decodePng(bytes);
+      expect(image).toMatchObject({ width, height });
+      // Every pixel is painted whole: the edge past it is cut off
+      expect(image.pixels.every((value) => value === 255)).toBe(true);
+    },
+  );
+
+  it("starts at a whole device pixel inside the element", async () => {
     const a = adapter({
       rect: { x: 10.5, y: 3.25, width: 255.109375, height: 166.296875 },
     });
 
-    await capture(a, job());
+    const bytes = await capture(a, job());
 
-    expect(a.calls[2][1]).toMatchObject({ width: 11 + 255, height: 4 + 166 });
-    expect(a.calls[3][1].clip).toEqual({
-      x: 10.5,
-      y: 3.25,
-      width: 255,
-      height: 166,
-      scale: 1,
-    });
+    expect(a.calls[2][1]).toMatchObject({ width: 266, height: 170 });
     const { x, y, width, height } = a.calls[3][1].clip;
-    expect(x + width).toBeLessThanOrEqual(10.5 + 255.109375);
-    expect(y + height).toBeLessThanOrEqual(3.25 + 166.296875);
+    // Painted from 11 to 265 and from 4 to 169 CSS pixels
+    expect(x * 3.125).toBeCloseTo(35, 9);
+    expect(y * 3.125).toBeCloseTo(13, 9);
+    expect(x).toBeGreaterThanOrEqual(11);
+    expect(y).toBeGreaterThanOrEqual(4);
+    expect(readPng(bytes)).toMatchObject({ width: 793, height: 515 });
+    expect(x + 793 / 3.125).toBeLessThanOrEqual(265);
+    expect(y + 515 / 3.125).toBeLessThanOrEqual(169);
+    // The clip is whole CSS pixels, enough for the image
+    expect([width, height]).toEqual([254, 165]);
   });
 
-  it("does not round down what is only off by a float error", async () => {
-    const a = adapter({ rect: { ...rect, width: 239.9999999 } });
+  it("does not lose a pixel to a float error", async () => {
+    const bytes = await capture(
+      adapter({ rect: { ...rect, width: 239.9999999 } }),
+      job(),
+    );
 
-    await capture(a, job());
+    expect(readPng(bytes).width).toBe(750);
+  });
 
-    expect(a.calls[3][1].clip.width).toBe(240);
+  it("is painted on the pixel grid of the page", async () => {
+    // At a devicePixelRatio of 2, 100.75 CSS pixels are painted 100.5 wide
+    const wide = { ...rect, width: 100.75 };
+
+    const one = await capture(adapter({ rect: wide }), job());
+    const two = await capture(adapter({ rect: { ...wide, ratio: 2 } }), job());
+
+    expect(readPng(one).width).toBe(312);
+    expect(readPng(two).width).toBe(314);
   });
 
   it("is always transparent, and resets the page after", async () => {
@@ -306,20 +384,31 @@ describe("png", () => {
 });
 
 describe("imageSize", () => {
-  it("is the size in CSS pixels times dpi over 96, rounded down before", () => {
+  it("is the device pixels the element covers whole at dpi over 96", () => {
     expect(imageSize({ width: 240, height: 150 }, 300)).toEqual({
       width: 750,
-      height: 469,
+      height: 468,
     });
-    expect(imageSize({ width: 255.1, height: 166.3 }, 300)).toEqual({
-      width: 797,
-      height: 519,
+    expect(imageSize({ width: 255.109375, height: 166.296875 }, 300)).toEqual({
+      width: 796,
+      height: 518,
     });
     expect(imageSize({ width: 96, height: 192 }, 96)).toEqual({
       width: 96,
       height: 192,
     });
     expect(CSS_DPI).toBe(96);
+  });
+
+  it("is painted on the grid of the ratio of the page", () => {
+    expect(imageSize({ width: 100.75, height: 10 }, 96, 2)).toEqual({
+      width: 100,
+      height: 10,
+    });
+    expect(imageSize({ width: 100.75, height: 10 }, 192, 2)).toEqual({
+      width: 201,
+      height: 20,
+    });
   });
 });
 

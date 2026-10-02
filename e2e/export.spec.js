@@ -6,7 +6,15 @@ import path from "node:path";
 import { _electron as electron, expect, test } from "@playwright/test";
 
 import { readPng } from "../src/export/png.js";
-import { expected, pages, png, unzip } from "./export-files.js";
+import {
+  OPAQUE,
+  edgeAlpha,
+  edges,
+  expected,
+  pages,
+  png,
+  unzip,
+} from "./export-files.js";
 
 // The six real export paths, {CLI, app} x {pdf, png, b18}, each exporting the
 // same small fixed set of 18Test (see export-files.js) and checking the real
@@ -37,13 +45,54 @@ test.afterEach(async () => {
   fs.rmSync(out, { recursive: true, force: true });
 });
 
+// The edges of the cards of the CLI, by name, to compare the app's with
+let cliCards;
+
+// The most a channel of two lists of pixels differs by
+const farthest = (one, two) =>
+  Math.max(
+    ...one.flatMap((pixel, i) =>
+      pixel.map((value, k) => Math.abs(value - two[i][k])),
+    ),
+  );
+
 // Every path leaves the same files in a folder, so the checks are shared
 const check = {
   pdf: (dir) => {
     expect(pages(path.join(dir, expected.pdf.file))).toBe(expected.pdf.pages);
   },
-  png: (dir) => {
+  png: (dir, from) => {
     expect(png(path.join(dir, expected.png.file))).toEqual(expected.png.size);
+
+    // Every card has the same size, and an opaque edge: no pixel the card
+    // only partly covers, dark on a dark background
+    const { count, width, height } = expected.png.cards;
+    const cards = fs
+      .readdirSync(dir)
+      .filter((name) => name.startsWith("18test-card-"));
+    expect(cards).toHaveLength(count);
+    for (const name of cards) {
+      expect(png(path.join(dir, name)), name).toMatchObject({ width, height });
+      expect(edgeAlpha(path.join(dir, name)), name).toEqual(OPAQUE);
+    }
+
+    // The app paints the cards like the CLI, whatever the screen: on a retina
+    // screen a window paints them on its grid of half pixels. Only the
+    // antialiasing of the two browsers may differ.
+    const found = Object.fromEntries(
+      cards.map((name) => [name, edges(path.join(dir, name))]),
+    );
+    if (from === "cli") cliCards = found;
+    if (from === "app" && cliCards) {
+      for (const name of cards) {
+        for (const side of ["top", "bottom", "left", "right"]) {
+          expect(
+            farthest(found[name][side], cliCards[name][side]),
+            `${name} ${side}`,
+          ).toBeLessThanOrEqual(2);
+        }
+      }
+    }
   },
   b18: (dir) => {
     const { zip, folder, images } = expected.b18;
@@ -80,7 +129,7 @@ const check = {
 };
 
 // The documents each format is exported with, the fewest that show it works
-const docs = { pdf: "map", png: "background", b18: "map" };
+const docs = { pdf: ["map"], png: ["background", "cards"], b18: ["map"] };
 
 for (const format of ["pdf", "png", "b18"]) {
   test(`export › cli › ${format}`, () => {
@@ -93,14 +142,14 @@ for (const format of ["pdf", "png", "b18"]) {
         "--format",
         format,
         "--docs",
-        docs[format],
+        docs[format].join(","),
         "--out",
         out,
       ],
       { cwd: out, encoding: "utf-8" },
     );
     expect(result.status, result.stderr).toBe(0);
-    check[format](path.join(out, "18Test"));
+    check[format](path.join(out, "18Test"), "cli");
   });
 }
 
@@ -154,7 +203,7 @@ for (const format of ["pdf", "png", "b18"]) {
       const text = await box.evaluate((el) => el.nextElementSibling.innerText);
       // Board18 boxes have their own images, the documents are off
       if (await box.isEnabled()) {
-        await box.setChecked(text.toLowerCase() === docs[format]);
+        await box.setChecked(docs[format].includes(text.toLowerCase()));
       }
     }
 
@@ -165,6 +214,6 @@ for (const format of ["pdf", "png", "b18"]) {
       timeout: 150_000,
     });
 
-    check[format](dir);
+    check[format](dir, "app");
   });
 }

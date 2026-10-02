@@ -1,6 +1,7 @@
 import { crc32 } from "node:zlib";
 
-import { pixelsPerMeter, readPng, withResolution } from "./png.js";
+import { decodePng, encodePng } from "./__fixtures__/png.js";
+import { cropPng, pixelsPerMeter, readPng, withResolution } from "./png.js";
 
 const chunk = (type, data) => {
   const out = new Uint8Array(12 + data.length);
@@ -103,5 +104,65 @@ describe("withResolution", () => {
 describe("readPng", () => {
   it("has no resolution without a pHYs chunk", () => {
     expect(readPng(png()).pixelsPerMeter).toBeNull();
+  });
+});
+
+describe("cropPng", () => {
+  // A different value for every pixel and channel, filtered with every filter
+  const value = (x, y, k = 0) => x * 7 + y * 13 + k * 31;
+
+  it("keeps the top left pixels, as they were", async () => {
+    const bytes = encodePng({ width: 9, height: 7 }, value);
+
+    const image = decodePng(await cropPng(bytes, 5, 4));
+
+    expect(image).toMatchObject({ width: 5, height: 4 });
+    expect(Array.from(image.pixels)).toEqual(
+      Array.from(
+        { length: 20 },
+        (_, i) => value(i % 5, Math.floor(i / 5)) & 255,
+      ),
+    );
+  });
+
+  it("cuts rgba pixels", async () => {
+    const bytes = encodePng({ width: 6, height: 6 }, value, { channels: 4 });
+
+    const image = decodePng(await cropPng(bytes, 5, 6));
+
+    expect(image).toMatchObject({ width: 5, height: 6, channels: 4 });
+    expect(image.pixels[(5 * 5 + 4) * 4 + 3]).toBe(value(4, 5, 3) & 255);
+    expect(readPng(await cropPng(bytes, 5, 6))).toEqual({
+      width: 5,
+      height: 6,
+      pixelsPerMeter: null,
+    });
+  });
+
+  it("keeps the other chunks", async () => {
+    const bytes = withResolution(
+      encodePng({ width: 4, height: 4 }, value),
+      300,
+    );
+
+    const cut = await cropPng(bytes, 3, 3);
+
+    expect(types(cut)).toEqual(["IHDR", "pHYs", "tEXt", "IDAT", "IEND"]);
+    expect(readPng(cut).pixelsPerMeter).toBe(11811);
+  });
+
+  it("is the same png when it has the size", async () => {
+    const bytes = encodePng({ width: 4, height: 4 }, value);
+
+    expect(await cropPng(bytes, 4, 4)).toBe(bytes);
+  });
+
+  it("does not make a png larger", async () => {
+    const bytes = encodePng({ width: 4, height: 4 }, value);
+
+    await expect(cropPng(bytes, 5, 4)).rejects.toThrow(
+      "A 4 x 4 PNG can not be cut to 5 x 4",
+    );
+    await expect(cropPng(bytes, 0, 4)).rejects.toThrow("can not be cut");
   });
 });

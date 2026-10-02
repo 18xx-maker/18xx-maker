@@ -1,11 +1,53 @@
 import fs from "node:fs";
 import zlib from "node:zlib";
 
+import { decodePng } from "../src/export/__fixtures__/png.js";
 import { readPng } from "../src/export/png.js";
 
 // Helpers to read the real files of an export, the same on every OS
 
 export const png = (file) => readPng(new Uint8Array(fs.readFileSync(file)));
+
+// The pixels ([r, g, b, a]) on each edge of a png: { top, bottom, left,
+// right }, from the top left
+export const edges = (file) => {
+  const { width, height, channels, pixels } = decodePng(fs.readFileSync(file));
+  const pixel = (x, y) => {
+    const at = (y * width + x) * channels;
+    if (channels === 1) return [pixels[at], pixels[at], pixels[at], 255];
+    return [
+      ...pixels.subarray(at, at + 3),
+      channels === 4 ? pixels[at + 3] : 255,
+    ];
+  };
+  const line = (count, at) => Array.from({ length: count }, (_, i) => at(i));
+  return {
+    top: line(width, (x) => pixel(x, 0)),
+    bottom: line(width, (x) => pixel(x, height - 1)),
+    left: line(height, (y) => pixel(0, y)),
+    right: line(height, (y) => pixel(width - 1, y)),
+  };
+};
+
+// The lowest alpha on each edge of a png, 255 when every pixel is opaque
+export const edgeAlpha = (file) =>
+  Object.fromEntries(
+    Object.entries(edges(file)).map(([side, line]) => [
+      side,
+      Math.min(...line.map(([, , , alpha]) => alpha)),
+    ]),
+  );
+
+// The colors ("r,g,b,a") of the pixels on the edges of a png
+export const edgeColors = (file) => [
+  ...new Set(
+    Object.values(edges(file)).flatMap((line) =>
+      line.map((pixel) => pixel.join(",")),
+    ),
+  ),
+];
+
+export const OPAQUE = { top: 255, bottom: 255, left: 255, right: 255 };
 
 export const pages = (file) =>
   [
@@ -48,6 +90,9 @@ export const expected = {
     file: "18test-background.png",
     // 8 by 10.5 inches at 300 dpi, with its resolution of 11811 pixels/meter
     size: { width: 2400, height: 3150, pixelsPerMeter: 11811 },
+    // The cards, 2.657 by 1.732 inches (255.11 by 166.3 CSS pixels): the
+    // device pixels the card is painted on whole, 255 by 166 CSS pixels
+    cards: { count: 48, width: 796, height: 518 },
   },
   b18: {
     zip: "board18-18Test-1.0.zip",

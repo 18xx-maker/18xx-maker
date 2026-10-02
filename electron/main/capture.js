@@ -30,6 +30,11 @@ export const openCaptureWindow = async (inputId) => {
       additionalArguments: [`${RENDER_INPUT_ARG}${inputId}`],
       // Hidden windows would stop painting, and the capture waits for it
       backgroundThrottling: false,
+      // Painted off the screen, at one device pixel a CSS pixel like the
+      // headless browser of the CLI, whatever the screen: a window on a retina
+      // screen paints the page on its grid of half pixels before the capture
+      // scales it to the dpi, so its images would not be the CLI's
+      offscreen: true,
       nodeIntegration: false,
       partition: `export-${inputId}-${windows++}`,
       preload: join(import.meta.dirname, "../preload/preload.cjs"),

@@ -1,5 +1,7 @@
 import { vi } from "vitest";
 
+import { encodePng } from "../../export/__fixtures__/png.js";
+
 // A fake Playwright browser for the tests of the commands: the pages answer
 // like a page of the site in render mode that is ready, and the DevTools
 // session answers like Chromium. What was sent to it is in session.send.
@@ -12,21 +14,39 @@ export const PNG = Uint8Array.from(
   (c) => c.charCodeAt(0),
 );
 
-const answers = {
-  "Page.printToPDF": () => ({ stream: "stream" }),
-  "IO.read": () => ({ data: btoa("pdf"), base64Encoded: true, eof: true }),
-  "Page.captureScreenshot": () => ({
-    data: btoa(String.fromCharCode(...PNG)),
-  }),
-};
+// A screenshot of a clip is whole CSS pixels at the emulated device scale
+const screenshot = (clip, scale) =>
+  clip
+    ? Buffer.from(
+        encodePng(
+          {
+            width: Math.round(Math.floor(clip.width) * scale),
+            height: Math.round(Math.floor(clip.height) * scale),
+          },
+          () => 255,
+        ),
+      ).toString("base64")
+    : btoa(String.fromCharCode(...PNG));
 
 export const createFakeBrowser = () => {
+  let scale = 1;
+  const answers = {
+    "Page.printToPDF": () => ({ stream: "stream" }),
+    "IO.read": () => ({ data: btoa("pdf"), base64Encoded: true, eof: true }),
+    "Emulation.setDeviceMetricsOverride": (params) => {
+      scale = params.deviceScaleFactor;
+      return {};
+    },
+    "Page.captureScreenshot": (params) => ({
+      data: screenshot(params.clip, scale),
+    }),
+  };
   const failures = [];
   const session = {
-    send: vi.fn(async (method) => {
+    send: vi.fn(async (method, params) => {
       const at = failures.findIndex((failure) => failure.method === method);
       if (at >= 0) throw failures.splice(at, 1)[0].error;
-      return (answers[method] || (() => ({})))();
+      return (answers[method] || (() => ({})))(params);
     }),
     // The next command of this name fails
     failOnce: (method, error) => failures.push({ method, error }),

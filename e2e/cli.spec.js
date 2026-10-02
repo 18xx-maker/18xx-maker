@@ -6,6 +6,7 @@ import path from "node:path";
 import { expect, test } from "@playwright/test";
 
 import { readPng } from "../src/export/png.js";
+import { OPAQUE, edgeAlpha, edgeColors } from "./export-files.js";
 
 // maker export against the built site (dist/site), for 18Test, in a browser of
 // its own. The sizes and page counts are the golden values of 18Test.
@@ -133,6 +134,59 @@ test.describe("maker export 18Test", () => {
       height: 1050,
       pixelsPerMeter: 11811,
     });
+  });
+
+  // A card is 255.11 by 166.3 CSS pixels, painted 255 by 166: an image of a
+  // pixel more has an edge the card only partly covers, partly transparent
+  for (const [dpi, width, height] of [
+    [96, 255, 166],
+    [300, 796, 518],
+  ]) {
+    test(`writes cards with an opaque edge at ${dpi} dpi`, () => {
+      const result = maker(
+        out,
+        "18Test",
+        "--format",
+        "png",
+        "--docs",
+        "cards",
+        "--dpi",
+        String(dpi),
+      );
+      expect(result.status, result.stderr).toBe(0);
+
+      const dir = path.join(out, "18Test");
+      const cards = fs
+        .readdirSync(dir)
+        .filter((name) => name.startsWith("18test-card-"));
+      expect(cards).toHaveLength(48);
+      for (const name of cards) {
+        expect(png(path.join(dir, name)), name).toMatchObject({
+          width,
+          height,
+        });
+        expect(edgeAlpha(path.join(dir, name)), name).toEqual(OPAQUE);
+      }
+    });
+  }
+
+  test("writes a card on white with no white edge", () => {
+    const result = maker(
+      out,
+      "18Test",
+      "--format",
+      "png",
+      "--docs",
+      "cards",
+      "--background",
+      "white",
+    );
+    expect(result.status, result.stderr).toBe(0);
+
+    // A number card is one color to its edge
+    expect(
+      edgeColors(path.join(out, "18Test/18test-card-number-1.png")),
+    ).toEqual(["105,74,152,255"]);
   });
 
   test("makes the background of every image transparent", async ({ page }) => {

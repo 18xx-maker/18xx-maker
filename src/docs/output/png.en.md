@@ -47,6 +47,12 @@ choose a lower resolution (1 to 300 dpi). A game file can set the resolution
 [Export options](/docs/games/exports): the panel starts with it and exporting
 one page uses it.
 
+An image only has the pixels its component covers whole, so it can be a pixel
+smaller than its size in inches times the resolution (a card of 2.657 by 1.732
+inches is 796 by 518 pixels at 300 dpi), but it never has an edge that is
+partly transparent or blended with the background. The app and the command line
+make the same images.
+
 ## Command Line
 
 > [!IMPORTANT]

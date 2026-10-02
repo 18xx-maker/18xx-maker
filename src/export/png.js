@@ -78,3 +78,88 @@ export const withResolution = (bytes, dpi) => {
   }
   return out;
 };
+
+const concat = (parts) => {
+  const out = new Uint8Array(parts.reduce((sum, part) => sum + part.length, 0));
+  let at = 0;
+  for (const part of parts) {
+    out.set(part, at);
+    at += part.length;
+  }
+  return out;
+};
+
+// The bytes of a stream of compression ("deflate", the zlib format of PNG
+// image data) of bytes
+const transform = (bytes, stream) =>
+  new Response(new Blob([bytes]).stream().pipeThrough(stream))
+    .arrayBuffer()
+    .then((buffer) => new Uint8Array(buffer));
+
+const chunk = (type, data) => {
+  const out = new Uint8Array(12 + data.length);
+  const view = new DataView(out.buffer);
+  view.setUint32(0, data.length);
+  out.set(new TextEncoder().encode(type), 4);
+  out.set(data, 8);
+  view.setUint32(8 + data.length, crc32(out.subarray(4, 8 + data.length)));
+  return out;
+};
+
+// Bytes of a pixel of an 8 bit png by its color type: gray, rgb, palette,
+// gray and alpha, rgba
+const BYTES_PER_PIXEL = { 0: 1, 2: 3, 3: 1, 4: 2, 6: 4 };
+
+// The top left width by height pixels of a png (8 bits, not interlaced, what
+// Chromium writes). Every row keeps its filter: a filtered byte depends only
+// on the bytes left of it and above it, so cutting off rows at the bottom and
+// pixels at the right of each row leaves the others as they were. The other
+// chunks are kept.
+export const cropPng = async (bytes, width, height) => {
+  const size = readPng(bytes);
+  if (width === size.width && height === size.height) return bytes;
+  if (width > size.width || height > size.height || width < 1 || height < 1) {
+    throw new Error(
+      `A ${size.width} x ${size.height} PNG can not be cut to ` +
+        `${width} x ${height}`,
+    );
+  }
+
+  const header = bytes.slice(16, 29);
+  const [depth, colorType, , , interlace] = header.subarray(8);
+  const pixel = BYTES_PER_PIXEL[colorType];
+  if (depth !== 8 || interlace !== 0 || !pixel) {
+    throw new Error("Only an 8 bit PNG that is not interlaced can be cut");
+  }
+
+  const found = chunks(bytes);
+  const data = await transform(
+    concat(
+      found
+        .filter(({ type }) => type === "IDAT")
+        .map(({ start, end }) => bytes.subarray(start + 8, end - 4)),
+    ),
+    new DecompressionStream("deflate"),
+  );
+  const stride = 1 + size.width * pixel;
+  const rows = Array.from({ length: height }, (_, y) =>
+    data.subarray(y * stride, y * stride + 1 + width * pixel),
+  );
+  const image = await transform(concat(rows), new CompressionStream("deflate"));
+
+  const view = new DataView(header.buffer);
+  view.setUint32(0, width);
+  view.setUint32(4, height);
+
+  const parts = [bytes.subarray(0, 8)];
+  let written = false;
+  for (const { type, start, end } of found) {
+    if (type === "IHDR") parts.push(chunk("IHDR", header));
+    else if (type !== "IDAT") parts.push(bytes.subarray(start, end));
+    else if (!written) {
+      parts.push(chunk("IDAT", image));
+      written = true;
+    }
+  }
+  return concat(parts);
+};

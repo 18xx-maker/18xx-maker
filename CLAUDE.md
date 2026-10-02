@@ -101,7 +101,14 @@ sizing or packaging logic in either surface.
   and blocked navigation.
 - Electron's debugger has no `Page.printToPDF`; `src/export/window.js` answers
   it with `webContents.printToPDF`. Hidden windows need
-  `backgroundThrottling: false`.
+  `backgroundThrottling: false`. Capture windows are `offscreen` (a device
+  pixel ratio of 1 like the headless CLI): a window on a retina screen paints
+  on its own pixel grid, and its PNGs differ from the CLI's.
+- A PNG is the device pixels its element covers whole (`devicePixels` in
+  `src/export/capture.js`): Chromium paints boxes on the page's pixel grid and
+  then scales by the emulated device scale, so a card of 255.11 CSS pixels is
+  painted to 796.875 device pixels at 300 dpi. A clip is whole CSS pixels, so
+  the screenshot is cut to size with `cropPng`.
 - File names are the slugged title (`titleToFilename`); CLI output folders and
   the b18 box keep the game id.
 
