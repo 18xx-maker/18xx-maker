@@ -29,10 +29,14 @@
   background-color: color-mix(in srgb, currentcolor 38%, transparent);
 }
 
+/* 4px and a 1px border, 6px in all (MUI's track on its content-box root) */
 :where(.indicator) {
-  border-radius: 2px;
+  top: -1px;
+  border: 1px solid currentcolor;
+  border-radius: 3px;
   background-color: currentcolor;
   height: 4px;
+  box-sizing: content-box;
 }
 
 :where(.thumb) {
@@ -64,7 +68,7 @@
 }
 
 :where(.thumb[data-dragging]),
-:where(.thumb:has(:focus-visible)) {
+:where(.thumb[data-focus-visible]) {
   box-shadow: 0 0 0 14px color-mix(in srgb, currentcolor 16%, transparent);
 }
 
@@ -76,9 +80,10 @@
   background-color: var(--palette-grey-600);
   padding: 0.25rem 0.75rem;
   color: #fff;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
   transform: scale(0);
   transform-origin: bottom center;
   transition: transform var(--duration-shortest) var(--ease-in-out);
@@ -103,7 +108,7 @@
 }
 
 :where(.thumb[data-dragging] .label),
-:where(.thumb:has(:focus-visible) .label) {
+:where(.thumb[data-focus-visible] .label) {
   transform: scale(1);
 }
 
@@ -120,8 +125,7 @@
 }
 
 :where(.markActive) {
-  background-color: #fff;
-  opacity: 0.8;
+  background-color: rgb(255 255 255 / 80%);
 }
 
 :where(.markLabel) {

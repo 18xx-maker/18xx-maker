@@ -21,6 +21,8 @@ import {
 } from "@/ui";
 import { pageItems } from "./Pagination";
 
+import { allowConsole } from "@tests/console.js";
+
 import "./tokens.css";
 
 const renderChrome = (ui) => render(<div data-chrome-root>{ui}</div>);
@@ -300,6 +302,78 @@ describe("Slider", () => {
     renderChrome(<Controlled />);
     expect(screen.getByText("none")).toBeInTheDocument();
     expect(screen.getByText("half")).toBeInTheDocument();
+  });
+
+  it("keeps duplicate-value marks and drops the ones outside min..max", () => {
+    renderChrome(
+      <div style={{ width: 200 }}>
+        <Slider
+          value={[20, 60]}
+          min={10}
+          max={100}
+          marks={[
+            { value: 0, label: "below" },
+            { value: 20, label: "a" },
+            { value: 20, label: "b" },
+            { value: 150, label: "above" },
+            { value: 100, label: "end" },
+          ]}
+        />
+      </div>,
+    );
+    expect(screen.getByText("a")).toBeInTheDocument();
+    expect(screen.getByText("b")).toBeInTheDocument();
+    expect(screen.getByText("end")).toBeInTheDocument();
+    expect(screen.queryByText("below")).not.toBeInTheDocument();
+    expect(screen.queryByText("above")).not.toBeInTheDocument();
+    // 20 is the first thumb's value, so inside the selected range
+    expect(style(screen.getByText("a")).color).toBe(
+      style(screen.getByText("b")).color,
+    );
+  });
+
+  it("places marks at the start when min equals max", () => {
+    allowConsole(/must be greater than `min`/);
+    renderChrome(
+      <div style={{ width: 200 }}>
+        <Slider
+          value={[5, 5]}
+          min={5}
+          max={5}
+          marks={[{ value: 5, label: "only" }]}
+        />
+      </div>,
+    );
+    // eslint-disable-next-line testing-library/no-node-access
+    const mark = screen.getByText("only").parentElement;
+    expect(style(mark).left).toBe("0px");
+  });
+
+  it("draws the track 6px thick, the active mark translucent, not faded", () => {
+    renderChrome(<Controlled />);
+    // eslint-disable-next-line testing-library/no-node-access
+    const mark = screen.getByText("none").parentElement;
+    expect(style(mark).backgroundColor).toBe("rgba(255, 255, 255, 0.8)");
+    expect(style(mark).opacity).toBe("1");
+    // The indicator is the first child of the track, which holds the thumbs
+    // eslint-disable-next-line testing-library/no-node-access
+    const thumb = screen.getByRole("slider", { name: "Minimum" }).parentElement;
+    // eslint-disable-next-line testing-library/no-node-access
+    const indicator = thumb.parentElement.firstElementChild;
+    expect(indicator.getBoundingClientRect().height).toBe(6);
+  });
+
+  it("shows the keyboard focus ring only after keyboard focus", async () => {
+    const user = userEvent.setup();
+    renderChrome(<Controlled />);
+    const min = screen.getByRole("slider", { name: "Minimum" });
+    await user.tab();
+    expect(min).toHaveFocus();
+    // eslint-disable-next-line testing-library/no-node-access
+    const thumb = min.parentElement;
+    expect(thumb).toHaveAttribute("data-focus-visible", "true");
+    await user.tab();
+    expect(thumb).not.toHaveAttribute("data-focus-visible");
   });
 });
 
