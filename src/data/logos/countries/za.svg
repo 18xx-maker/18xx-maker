@@ -1,17 +1,17 @@
 <svg viewBox="0 0 9 6">
-  <clipPath id="Z">
-    <path id="X" d="m0 0 4.5 3L0 6"/>
+  <clipPath id="za-Z">
+    <path id="za-X" d="m0 0 4.5 3L0 6"/>
   </clipPath>
-  <clipPath id="A">
+  <clipPath id="za-A">
     <path d="M0 0h9v6H0z"/>
   </clipPath>
-  <g clip-path="url(#A)">
+  <g clip-path="url(#za-A)">
     <path fill="#002395" d="M0 0v6h9V0z"/>
     <path fill="#de3831" d="M0 0v3h9V0z"/>
     <g stroke="#fff" stroke-width="2">
-      <path id="W" d="m0 0 4.5 3L0 6m4.5-3H9"/>
-      <use stroke="#ffb612" clip-path="url(#Z)" href="#X"/>
+      <path id="za-W" d="m0 0 4.5 3L0 6m4.5-3H9"/>
+      <use stroke="#ffb612" clip-path="url(#za-Z)" href="#za-X"/>
     </g>
-    <use fill="none" stroke="#007a4d" stroke-width="1.2" href="#W"/>
+    <use fill="none" stroke="#007a4d" stroke-width="1.2" href="#za-W"/>
   </g>
 </svg>

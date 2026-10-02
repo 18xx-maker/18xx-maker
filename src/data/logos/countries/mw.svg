@@ -3,20 +3,20 @@
   <g fill="#CE1126">
     <circle r="64.5"/>
     <path d="M-225-14h450V86h-450z"/>
-    <g id="r16">
-      <g id="r8">
-        <g id="r4">
-          <g id="r2">
-            <path id="r" d="M0-102c-2.2 0-3 3.3-3 6.5 0 8 1 12 3 23.5 2.04-11.5 3-15.6 3-23.5 0-3.3-1-6.5-3-6.5"/>
-            <use href="#r" transform="rotate(5)"/>
+    <g id="mw-r16">
+      <g id="mw-r8">
+        <g id="mw-r4">
+          <g id="mw-r2">
+            <path id="mw-r" d="M0-102c-2.2 0-3 3.3-3 6.5 0 8 1 12 3 23.5 2.04-11.5 3-15.6 3-23.5 0-3.3-1-6.5-3-6.5"/>
+            <use href="#mw-r" transform="rotate(5)"/>
           </g>
-          <use href="#r2" transform="rotate(10)"/>
+          <use href="#mw-r2" transform="rotate(10)"/>
         </g>
-        <use href="#r4" transform="rotate(20)"/>
+        <use href="#mw-r4" transform="rotate(20)"/>
       </g>
-      <use href="#r8" transform="rotate(40)"/>
+      <use href="#mw-r8" transform="rotate(40)"/>
     </g>
-    <use href="#r16" transform="rotate(-80)"/>
+    <use href="#mw-r16" transform="rotate(-80)"/>
   </g>
   <path d="M-225-21.5h450v7.5h-450z"/>
   <path fill="#339E35" d="M-225 86h450v100h-450z"/>

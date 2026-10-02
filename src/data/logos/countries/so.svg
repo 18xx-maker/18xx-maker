@@ -1,13 +1,13 @@
 <svg viewBox="0 0 81 54">
   <path fill="#4189DD" d="M0 0h81v54H0z"/>
   <g transform="matrix(13 0 0 13 40.5 27)">
-    <g id="t">
-      <path id="w" fill="#FFF" d="M0 0v1h.5z" transform="rotate(18 3.157 -.5)"/>
-      <use href="#w" transform="scale(-1 1)"/>
+    <g id="so-t">
+      <path id="so-w" fill="#FFF" d="M0 0v1h.5z" transform="rotate(18 3.157 -.5)"/>
+      <use href="#so-w" transform="scale(-1 1)"/>
     </g>
-    <use href="#t" transform="rotate(72)"/>
-    <use href="#t" transform="rotate(-72)"/>
-    <use href="#t" transform="rotate(144)"/>
-    <use href="#t" transform="rotate(-144)"/>
+    <use href="#so-t" transform="rotate(72)"/>
+    <use href="#so-t" transform="rotate(-72)"/>
+    <use href="#so-t" transform="rotate(144)"/>
+    <use href="#so-t" transform="rotate(-144)"/>
   </g>
 </svg>

@@ -2,19 +2,19 @@
   <path fill="#fff" d="M-27-14h54v36h-54z"/>
   <path fill="#dc171d" d="M-6-14H6v36H-6z"/>
   <path fill="#012a87" d="M-27-2h54v12h-54z"/>
-  <g id="star" fill="#fff" transform="scale(1.5)">
-    <g id="cone">
-      <path id="triangle" d="M0 0v1h.5z" transform="rotate(18 3.157 -.5)"/>
-      <use href="#triangle" transform="scale(-1 1)"/>
+  <g id="an-star" fill="#fff" transform="scale(1.5)">
+    <g id="an-cone">
+      <path id="an-triangle" d="M0 0v1h.5z" transform="rotate(18 3.157 -.5)"/>
+      <use href="#an-triangle" transform="scale(-1 1)"/>
     </g>
-    <use href="#cone" transform="rotate(72)"/>
-    <use href="#cone" transform="rotate(-72)"/>
-    <use href="#cone" transform="rotate(144)"/>
-    <use href="#cone" transform="rotate(-144)"/>
+    <use href="#an-cone" transform="rotate(72)"/>
+    <use href="#an-cone" transform="rotate(-72)"/>
+    <use href="#an-cone" transform="rotate(144)"/>
+    <use href="#an-cone" transform="rotate(-144)"/>
   </g>
-  <g id="2stars">
-    <use href="#star" transform="translate(8 3.314)"/>
-    <use href="#star" transform="translate(3.314 8)"/>
+  <g id="an-2stars">
+    <use href="#an-star" transform="translate(8 3.314)"/>
+    <use href="#an-star" transform="translate(3.314 8)"/>
   </g>
-  <use href="#2stars" transform="scale(-1 1)"/>
+  <use href="#an-2stars" transform="scale(-1 1)"/>
 </svg>

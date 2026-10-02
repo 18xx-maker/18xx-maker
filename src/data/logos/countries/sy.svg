@@ -2,16 +2,16 @@
   <path d="M0 0h180v120H0z"/>
   <path fill="#fff" d="M0 0h180v80H0z"/>
   <path fill="#ce1126" d="M0 0h180v40H0z"/>
-  <g id="s" fill="#007a3d">
-    <g id="f">
-      <g id="t">
-        <path id="o" d="M54 47v13h8" transform="rotate(18 54 47)"/>
-        <use x="-108" href="#o" transform="scale(-1 1)"/>
+  <g id="sy-s" fill="#007a3d">
+    <g id="sy-f">
+      <g id="sy-t">
+        <path id="sy-o" d="M54 47v13h8" transform="rotate(18 54 47)"/>
+        <use x="-108" href="#sy-o" transform="scale(-1 1)"/>
       </g>
-      <use href="#t" transform="rotate(72 54 60)"/>
+      <use href="#sy-t" transform="rotate(72 54 60)"/>
     </g>
-    <use href="#t" transform="rotate(-72 54 60)"/>
-    <use href="#f" transform="rotate(144 54 60)"/>
+    <use href="#sy-t" transform="rotate(-72 54 60)"/>
+    <use href="#sy-f" transform="rotate(144 54 60)"/>
   </g>
-  <use x="72" href="#s"/>
+  <use x="72" href="#sy-s"/>
 </svg>

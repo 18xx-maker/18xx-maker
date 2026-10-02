@@ -2,15 +2,15 @@
   <path fill="#12ad2b" d="M0 0h2800v1400H0z"/>
   <path fill="#ffce00" d="M0 400h2800v600H0z"/>
   <path fill="#d21034" d="M0 0v1400l700-700"/>
-  <g id="star" fill="#000" transform="translate(1400 700)">
-    <g id="c">
-      <path id="t" d="M0-200V0h100" transform="rotate(18 0 -200)"/>
-      <use href="#t" transform="scale(-1 1)"/>
+  <g id="st-star" fill="#000" transform="translate(1400 700)">
+    <g id="st-c">
+      <path id="st-t" d="M0-200V0h100" transform="rotate(18 0 -200)"/>
+      <use href="#st-t" transform="scale(-1 1)"/>
     </g>
-    <use href="#c" transform="rotate(72)"/>
-    <use href="#c" transform="rotate(144)"/>
-    <use href="#c" transform="rotate(216)"/>
-    <use href="#c" transform="rotate(288)"/>
+    <use href="#st-c" transform="rotate(72)"/>
+    <use href="#st-c" transform="rotate(144)"/>
+    <use href="#st-c" transform="rotate(216)"/>
+    <use href="#st-c" transform="rotate(288)"/>
   </g>
-  <use x="700" href="#star"/>
+  <use x="700" href="#st-star"/>
 </svg>

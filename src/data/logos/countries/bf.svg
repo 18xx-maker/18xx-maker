@@ -2,13 +2,13 @@
   <path fill="#009e49" d="M0 0h900v600H0z"/>
   <path fill="#ef2b2d" d="M0 0h900v300H0z"/>
   <g fill="#fcd116" transform="translate(450 300)">
-    <g id="countries-bf-c">
-      <path id="countries-bf-t" d="M0-100V0h50" transform="rotate(18 0 -100)"/>
-      <use href="#countries-bf-t" transform="scale(-1 1)"/>
+    <g id="bf-countries-bf-c">
+      <path id="bf-countries-bf-t" d="M0-100V0h50" transform="rotate(18 0 -100)"/>
+      <use href="#bf-countries-bf-t" transform="scale(-1 1)"/>
     </g>
-    <use href="#countries-bf-c" transform="rotate(72)"/>
-    <use href="#countries-bf-c" transform="rotate(144)"/>
-    <use href="#countries-bf-c" transform="rotate(216)"/>
-    <use href="#countries-bf-c" transform="rotate(288)"/>
+    <use href="#bf-countries-bf-c" transform="rotate(72)"/>
+    <use href="#bf-countries-bf-c" transform="rotate(144)"/>
+    <use href="#bf-countries-bf-c" transform="rotate(216)"/>
+    <use href="#bf-countries-bf-c" transform="rotate(288)"/>
   </g>
 </svg>

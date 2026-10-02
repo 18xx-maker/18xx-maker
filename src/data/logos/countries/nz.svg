@@ -1,37 +1,37 @@
 <svg viewBox="0 0 1200 600">
   <defs>
-    <clipPath id="Canton">
+    <clipPath id="nz-Canton">
       <path d="M0 0h600v300H0z"/>
     </clipPath>
-    <clipPath id="Diagonals">
+    <clipPath id="nz-Diagonals">
       <path d="m0 0 300 150H0zm300 0h300L300 150zm0 150h300v150zm0 0v150H0z"/>
     </clipPath>
-    <g id="Pentagram">
-      <g id="Arm">
+    <g id="nz-Pentagram">
+      <g id="nz-Arm">
         <path d="M0-.325v.5l1-.5z"/>
         <path d="m.19.263-.293-.405L1-.325z"/>
       </g>
-      <use href="#Arm" transform="scale(-1 1)"/>
-      <use href="#Arm" transform="rotate(72 0 0)"/>
-      <use href="#Arm" transform="rotate(-72 0 0)"/>
-      <use href="#Arm" transform="scale(-1 1)rotate(72)"/>
+      <use href="#nz-Arm" transform="scale(-1 1)"/>
+      <use href="#nz-Arm" transform="rotate(72 0 0)"/>
+      <use href="#nz-Arm" transform="rotate(-72 0 0)"/>
+      <use href="#nz-Arm" transform="scale(-1 1)rotate(72)"/>
     </g>
   </defs>
   <path fill="#00247d" d="M0 0h1200v600H0z"/>
-  <path stroke="#fff" stroke-width="60" d="m0 0 600 300M0 300 600 0" clip-path="url(#Canton)"/>
-  <path stroke="#cc142b" stroke-width="40" d="m0 0 600 300M0 300 600 0" clip-path="url(#Diagonals)"/>
-  <path stroke="#fff" stroke-width="100" d="M300 0v300M0 150h600" clip-path="url(#Canton)"/>
-  <path stroke="#cc142b" stroke-width="60" d="M300 0v300M0 150h600" clip-path="url(#Canton)"/>
-  <use fill="#fff" href="#Pentagram" transform="translate(900 120)scale(45.4)"/>
-  <use fill="#cc142b" href="#Pentagram" transform="matrix(30 0 0 30 900 120)"/>
+  <path stroke="#fff" stroke-width="60" d="m0 0 600 300M0 300 600 0" clip-path="url(#nz-Canton)"/>
+  <path stroke="#cc142b" stroke-width="40" d="m0 0 600 300M0 300 600 0" clip-path="url(#nz-Diagonals)"/>
+  <path stroke="#fff" stroke-width="100" d="M300 0v300M0 150h600" clip-path="url(#nz-Canton)"/>
+  <path stroke="#cc142b" stroke-width="60" d="M300 0v300M0 150h600" clip-path="url(#nz-Canton)"/>
+  <use fill="#fff" href="#nz-Pentagram" transform="translate(900 120)scale(45.4)"/>
+  <use fill="#cc142b" href="#nz-Pentagram" transform="matrix(30 0 0 30 900 120)"/>
   <g transform="rotate(82 900 240)">
-    <use fill="#fff" href="#Pentagram" transform="rotate(-82 519.022 -457.666)scale(40.4)"/>
-    <use fill="#cc142b" href="#Pentagram" transform="rotate(-82 519.022 -457.666)scale(25)"/>
+    <use fill="#fff" href="#nz-Pentagram" transform="rotate(-82 519.022 -457.666)scale(40.4)"/>
+    <use fill="#cc142b" href="#nz-Pentagram" transform="rotate(-82 519.022 -457.666)scale(25)"/>
   </g>
   <g transform="rotate(82 900 240)">
-    <use fill="#fff" href="#Pentagram" transform="rotate(-82 668.57 -327.666)scale(45.4)"/>
-    <use fill="#cc142b" href="#Pentagram" transform="rotate(-82 668.57 -327.666)scale(30)"/>
+    <use fill="#fff" href="#nz-Pentagram" transform="rotate(-82 668.57 -327.666)scale(45.4)"/>
+    <use fill="#cc142b" href="#nz-Pentagram" transform="rotate(-82 668.57 -327.666)scale(30)"/>
   </g>
-  <use fill="#fff" href="#Pentagram" transform="translate(900 480)scale(50.4)"/>
-  <use fill="#cc142b" href="#Pentagram" transform="matrix(35 0 0 35 900 480)"/>
+  <use fill="#fff" href="#nz-Pentagram" transform="translate(900 480)scale(50.4)"/>
+  <use fill="#cc142b" href="#nz-Pentagram" transform="matrix(35 0 0 35 900 480)"/>
 </svg>

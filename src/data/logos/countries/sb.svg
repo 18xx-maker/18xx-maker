@@ -3,21 +3,21 @@
   <path fill="#215b33" d="M0 400h800V0z"/>
   <path stroke="#fcd116" stroke-width="36" d="M0 400 800 0"/>
   <g transform="translate(140 120)">
-    <g id="s" fill="#fff">
-      <g id="f">
-        <g id="t">
-          <path id="o" d="M0-40V0h20z" transform="rotate(18 0 -40)"/>
-          <use href="#o" transform="scale(-1 1)"/>
+    <g id="sb-s" fill="#fff">
+      <g id="sb-f">
+        <g id="sb-t">
+          <path id="sb-o" d="M0-40V0h20z" transform="rotate(18 0 -40)"/>
+          <use href="#sb-o" transform="scale(-1 1)"/>
         </g>
-        <use href="#t" transform="rotate(72)"/>
+        <use href="#sb-t" transform="rotate(72)"/>
       </g>
-      <use href="#t" transform="rotate(-72)"/>
-      <use href="#f" transform="rotate(144)"/>
+      <use href="#sb-t" transform="rotate(-72)"/>
+      <use href="#sb-f" transform="rotate(144)"/>
     </g>
-    <g id="s2" transform="rotate(40.6)">
-      <use id="s1" x="-104" href="#s" transform="rotate(-40.6 -104 0)"/>
-      <use x="208" href="#s1"/>
+    <g id="sb-s2" transform="rotate(40.6)">
+      <use id="sb-s1" x="-104" href="#sb-s" transform="rotate(-40.6 -104 0)"/>
+      <use x="208" href="#sb-s1"/>
     </g>
-    <use href="#s2" transform="scale(-1 1)"/>
+    <use href="#sb-s2" transform="scale(-1 1)"/>
   </g>
 </svg>

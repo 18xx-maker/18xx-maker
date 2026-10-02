@@ -4,13 +4,13 @@
   <path fill="#ED1C27" d="M0 7h72v22H0z"/>
   <circle fill="#fff" cx="24" cy="18" r="8"/>
   <g fill="#ED1C27" transform="translate(24 18)scale(7.75)">
-    <g id="cone">
-      <path id="triangle" d="M0 0v1h.5z" transform="rotate(18 3.157 -.5)"/>
-      <use href="#triangle" transform="scale(-1 1)"/>
+    <g id="kp-cone">
+      <path id="kp-triangle" d="M0 0v1h.5z" transform="rotate(18 3.157 -.5)"/>
+      <use href="#kp-triangle" transform="scale(-1 1)"/>
     </g>
-    <use href="#cone" transform="rotate(72)"/>
-    <use href="#cone" transform="rotate(-72)"/>
-    <use href="#cone" transform="rotate(144)"/>
-    <use href="#cone" transform="rotate(-144)"/>
+    <use href="#kp-cone" transform="rotate(72)"/>
+    <use href="#kp-cone" transform="rotate(-72)"/>
+    <use href="#kp-cone" transform="rotate(144)"/>
+    <use href="#kp-cone" transform="rotate(-144)"/>
   </g>
 </svg>

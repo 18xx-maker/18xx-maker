@@ -3,14 +3,14 @@
   <path fill="#ffc726" d="M-3-6V6L9 0z"/>
   <path d="M-3-6V6l8-6z"/>
   <g transform="rotate(-26.565)">
-    <g id="f">
-      <g id="t">
-        <path id="o" fill="#fff" d="M0-2.1V0h1z" transform="rotate(18 0 -2.1)"/>
-        <use href="#o" transform="scale(-1 1)"/>
+    <g id="tl-f">
+      <g id="tl-t">
+        <path id="tl-o" fill="#fff" d="M0-2.1V0h1z" transform="rotate(18 0 -2.1)"/>
+        <use href="#tl-o" transform="scale(-1 1)"/>
       </g>
-      <use href="#t" transform="rotate(72)"/>
+      <use href="#tl-t" transform="rotate(72)"/>
     </g>
-    <use href="#t" transform="rotate(-72)"/>
-    <use href="#f" transform="rotate(144)"/>
+    <use href="#tl-t" transform="rotate(-72)"/>
+    <use href="#tl-f" transform="rotate(144)"/>
   </g>
 </svg>

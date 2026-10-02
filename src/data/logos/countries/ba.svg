@@ -1,11 +1,11 @@
 <svg viewBox="0 0 16 8">
   <path fill="#002395" d="M0 0h16v8H0z"/>
   <path fill="#fecb00" d="M4.24 0h8v8z"/>
-  <g id="countries-ba-g">
-    <path id="countries-ba-s" fill="#fff" d="M2.353.525 2.8-.85 3.247.525l-1.17-.85h1.446z"/>
-    <use x="1" y="1" href="#countries-ba-s"/>
-    <use x="2" y="2" href="#countries-ba-s"/>
+  <g id="ba-countries-ba-g">
+    <path id="ba-countries-ba-s" fill="#fff" d="M2.353.525 2.8-.85 3.247.525l-1.17-.85h1.446z"/>
+    <use x="1" y="1" href="#ba-countries-ba-s"/>
+    <use x="2" y="2" href="#ba-countries-ba-s"/>
   </g>
-  <use x="3" y="3" href="#countries-ba-g"/>
-  <use x="6" y="6" href="#countries-ba-g"/>
+  <use x="3" y="3" href="#ba-countries-ba-g"/>
+  <use x="6" y="6" href="#ba-countries-ba-g"/>
 </svg>

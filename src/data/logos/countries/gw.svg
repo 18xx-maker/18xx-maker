@@ -2,12 +2,12 @@
   <path fill="#ce1126" d="M-2-3h4v6h-4z"/>
   <path fill="#fcd116" d="M2-3h8v3H2z"/>
   <path fill="#009e49" d="M2 0h8v3H2z"/>
-  <g id="c">
-    <path id="t" fill="#000" d="M0-1v1h.5" transform="rotate(18 0 -1)"/>
-    <use href="#t" transform="scale(-1 1)"/>
+  <g id="gw-c">
+    <path id="gw-t" fill="#000" d="M0-1v1h.5" transform="rotate(18 0 -1)"/>
+    <use href="#gw-t" transform="scale(-1 1)"/>
   </g>
-  <use href="#c" transform="rotate(72)"/>
-  <use href="#c" transform="rotate(144)"/>
-  <use href="#c" transform="rotate(216)"/>
-  <use href="#c" transform="rotate(288)"/>
+  <use href="#gw-c" transform="rotate(72)"/>
+  <use href="#gw-c" transform="rotate(144)"/>
+  <use href="#gw-c" transform="rotate(216)"/>
+  <use href="#gw-c" transform="rotate(288)"/>
 </svg>
