@@ -74,8 +74,15 @@ const ConfigDrawer = () => {
   return (
     <>
       <Slide direction="left" in={true}>
-        <Tooltip title="Config" aria-label="config" placement="left" arrow>
+        <Tooltip
+          title="Config"
+          aria-label="config"
+          placement="left"
+          arrow
+          slotProps={{ popper: { "data-testid": "tooltip" } }}
+        >
           <Fab
+            data-testid="config-fab"
             position="sticky"
             className={classes.configButton}
             color="secondary"
@@ -86,6 +93,7 @@ const ConfigDrawer = () => {
         </Tooltip>
       </Slide>
       <Drawer
+        data-testid="config-drawer"
         variant="persistent"
         anchor="right"
         open={visible}

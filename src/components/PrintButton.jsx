@@ -34,8 +34,15 @@ const PrintButton = () => {
 
   return (
     <Slide direction="left" in={true}>
-      <Tooltip title="Print" aria-label="print" placement="left" arrow>
+      <Tooltip
+        title="Print"
+        aria-label="print"
+        placement="left"
+        arrow
+        slotProps={{ popper: { "data-testid": "tooltip" } }}
+      >
         <Fab
+          data-testid="print-fab"
           onClick={handler}
           position="sticky"
           className={classes.printButton}

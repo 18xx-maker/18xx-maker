@@ -243,8 +243,15 @@ const ExportButton = () => {
   return (
     <>
       <Slide direction="left" in={true}>
-        <Tooltip title="Export" aria-label="export" placement="left" arrow>
+        <Tooltip
+          title="Export"
+          aria-label="export"
+          placement="left"
+          arrow
+          slotProps={{ popper: { "data-testid": "tooltip" } }}
+        >
           <Fab
+            data-testid="export-fab"
             onClick={handleMenu}
             position="sticky"
             className={classes.exportButton}

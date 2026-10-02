@@ -110,6 +110,11 @@ CI=1 pnpm test:run
 pnpm build
 pnpm test:e2e
 
+# Check the web build (after pnpm build) against the bundle size budget, and
+# that no new files import the legacy @mui/styles
+pnpm check:bundle
+pnpm check:mui-styles
+
 # Run all fixing linters
 pnpm fix
 
@@ -229,9 +234,27 @@ Notes:
   origin private file system, so the Chromium flow and its indexedDB handle
   storage run for real.
 - `e2e/a11y.spec.js` fails on serious and critical axe violations. Existing
-  ones are listed per page, by rule and css selector, with reasons in its
+  ones are listed per page, by rule and a stable key (closest `data-testid`
+  plus tag or role and index, or `#id`), with reasons in its
   `KNOWN_ISSUES`; fix them and delete the
   entry (the spec fails if an entry no longer applies).
+- `e2e/print.spec.js` also gates the `@media print` rules in
+  `src/styles/root.css`: with `emulateMedia({ media: "print" })` the app bar,
+  drawers, print button, tooltips and snackbar must be hidden and the game
+  viewport must lose its margins. It selects by `data-testid` (`app-bar`,
+  `side-nav`, `config-drawer`, `print-fab`, `tooltip`, `alert`, `viewport`), not
+  by UI library classes.
+- `e2e/chrome-screenshots.spec.js` compares screenshots of the app chrome. It
+  only runs on Linux and skips pages that have no committed baseline in
+  `e2e/chrome-screenshots.spec.js-snapshots/`. Never commit baselines made on
+  macOS or Windows. Generate them on the CI runner: run the "Update Chrome
+  Baselines" workflow (`.github/workflows/e2e-baselines.yml`, manual dispatch)
+  on your branch, download the `chrome-baselines` artifact and commit its
+  png files. Regenerate only for an intended visual change, and review the
+  images in the pull request.
+- `pnpm check:bundle` (run by CI after the web build) fails if the gzip size
+  of the built js or css in `dist/site/assets` passes the budget in
+  `scripts/check-bundle-size.js`; the baseline it was set from is recorded there.
 - The vitest projects only include `src/` and `tests/`, so they never pick up
   `e2e/`.
 

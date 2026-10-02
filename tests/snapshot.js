@@ -4,7 +4,7 @@ import { renderApp } from "@tests/helpers.jsx";
 
 // React generates ids like ":r1f:" with a counter shared by every render in
 // the browser page, so they depend on test order. Number them by first use.
-const reactId = /:r[0-9a-z]+:/g;
+const reactId = /(:r[0-9a-z]+:|_r_[0-9a-z]+_)/g;
 
 // Floats can differ in the last digits between platforms and are not
 // visible at print resolution, 3 decimals is well below a pixel

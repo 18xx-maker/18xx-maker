@@ -172,6 +172,7 @@ body {
             </Viewport>
             {print || (
               <Snackbar
+                data-testid="alert"
                 anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                 open={alert.open}
                 key={alertKey}

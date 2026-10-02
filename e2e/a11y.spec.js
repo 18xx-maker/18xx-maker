@@ -2,28 +2,29 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 // Known accessibility problems that are not fixed yet, found by the first run
-// of this suite. Keyed by page name, each entry is an axe rule plus the css
-// selectors of the nodes that violate it (see normalize() for how generated
-// class names are written). A violating node that is not listed fails the
-// test, and so does a listed node that no longer violates, so the entry gets
+// of this suite. Keyed by page name, each entry is an axe rule plus stable keys
+// for the nodes that violate it (see keyOf() for how a node is named: the
+// closest data-testid, then the tag (or role) and its index inside it, or "#id" for
+// elements with an id). A violating node that is not listed fails the test,
+// and so does a listed node that no longer violates, so the entry gets
 // removed. Do not add to this list to make a failure go away: fix the page,
 // or record the violation here on purpose.
-const SIDE_NAV = ".MuiDrawer-paperAnchorDockedLeft>.css";
+//
+// Keys never use component library class names (.Mui*, css-<hash>, jss<n>) so
+// the list survives a change of UI library.
 
 // Same problems on every game page (game info, map and the config drawer)
 const GAME_NAV_NESTED = {
   // A form control (FormControl with a Select) inside a ListItemButton in
   // GameNav (src/components/nav)
   rule: "nested-interactive",
-  targets: [
-    `${SIDE_NAV}:nth-child(4)>.css.MuiListItemButton-root[role="button"]`,
-  ],
+  targets: ["side-nav [role=button]:2"],
   reason: "controls inside a ListItemButton",
 };
 const GAME_VIEWPORT_SCROLL = {
   // The scrollable game area (Viewport) is not keyboard focusable
   rule: "scrollable-region-focusable",
-  targets: [".jss"],
+  targets: ["viewport"],
   reason: "scrollable game area",
 };
 
@@ -36,48 +37,30 @@ const SIDE_NAV_LIST = (targets) => ({
   reason: "side nav links are direct children of <ul>",
 });
 
+const SIDE_NAV_LISTS = (n) =>
+  SIDE_NAV_LIST(Array.from({ length: n }, (_, i) => `side-nav ul:${i}`));
+
 const KNOWN_ISSUES = {
   "game info": [
-    SIDE_NAV_LIST([
-      `${SIDE_NAV}:nth-child(2)`,
-      `${SIDE_NAV}:nth-child(4)`,
-      // The page's own <List> in src/components/pages/games/Info.jsx
-      ".MuiPaper-elevation5>.css",
-    ]),
+    SIDE_NAV_LISTS(2),
+    // The page's own <List> in src/components/pages/games/Info.jsx
+    SIDE_NAV_LIST(["game-1889 ul:0"]),
   ],
-  "game map": [
-    SIDE_NAV_LIST([
-      `${SIDE_NAV}:nth-child(2)`,
-      `${SIDE_NAV}:nth-child(4)`,
-      `${SIDE_NAV}:nth-child(6)`,
-    ]),
-    GAME_NAV_NESTED,
-    GAME_VIEWPORT_SCROLL,
-  ],
-  docs: [
-    SIDE_NAV_LIST(
-      [2, 4, 6, 8].map(
-        (n) => `${SIDE_NAV}.MuiList-root.MuiList-padding:nth-child(${n})`,
-      ),
-    ),
-  ],
+  "game map": [SIDE_NAV_LISTS(3), GAME_NAV_NESTED, GAME_VIEWPORT_SCROLL],
+  docs: [SIDE_NAV_LISTS(4)],
   "config drawer": [
-    SIDE_NAV_LIST([
-      `${SIDE_NAV}:nth-child(2)`,
-      `${SIDE_NAV}:nth-child(4)`,
-      `${SIDE_NAV}:nth-child(6)`,
-    ]),
+    SIDE_NAV_LISTS(3),
     GAME_NAV_NESTED,
     GAME_VIEWPORT_SCROLL,
     {
       // These number inputs have no accessible name (src/components/config)
       rule: "label",
       targets: [
-        "#stock\\.column",
-        "#stock\\.diag",
-        "#stock\\.par",
-        "#charters\\.border",
-        "#cards\\.border",
+        "#stock.column",
+        "#stock.diag",
+        "#stock.par",
+        "#charters.border",
+        "#cards.border",
       ],
       reason: "config inputs without a label",
     },
@@ -85,22 +68,29 @@ const KNOWN_ISSUES = {
       // Links in the config drawer's descriptions are only underlined by
       // color
       rule: "link-in-text-block",
-      targets: [
-        'a[href$="logos"]',
-        ".MuiTypography-caption.css.MuiTypography-gutterBottom:nth-child(11)>p>a",
-      ],
+      targets: ["config-drawer a:0", "config-drawer a:1"],
       reason: "inline links in config descriptions",
     },
   ],
 };
 
-// Generated class names (emotion's css-<hash>, jss<number>) change between
-// builds, so they are reduced to ".css" and ".jss", and spaces around ">" are dropped
-const normalize = (target) =>
-  target
-    .replace(/\s*>\s*/g, ">")
-    .replace(/\.css-[a-z0-9]+/g, ".css")
-    .replace(/\.jss\d+/g, ".jss");
+// Generated class names change between builds and libraries, so nodes are
+// named by their closest data-testid ancestor (or self), plus the tag (or role)
+// and its index among the same tags inside that ancestor. Elements with an id
+// are named "#id".
+const keyOf = (selector) => {
+  const el = document.querySelector(selector);
+  if (!el) return `unresolved ${selector}`;
+  if (el.id) return `#${el.id}`;
+  const host = el.closest("[data-testid]");
+  if (!host) return `no-testid ${selector}`;
+  const name = host.dataset.testid;
+  if (host === el) return name;
+  const role = el.getAttribute("role");
+  const tag = role ? `[role=${role}]` : el.localName;
+  const index = [...host.querySelectorAll(tag)].indexOf(el);
+  return `${name} ${tag}:${index}`;
+};
 
 const pages = [
   { name: "home", url: "/", ready: (page) => page.getByTestId("home") },
@@ -148,9 +138,16 @@ for (const { name, url, ready } of pages) {
     for (const v of results.violations) {
       if (!["serious", "critical"].includes(v.impact)) continue;
       for (const node of v.nodes) {
-        found.push({ rule: v.id, target: normalize(node.target.join(" ")) });
+        const selector = node.target.join(" ");
+        found.push({
+          rule: v.id,
+          target: await page.evaluate(
+            `(${keyOf})(${JSON.stringify(selector)})`,
+          ),
+        });
       }
     }
+    if (process.env.A11Y_DUMP) console.log(name, JSON.stringify(found));
 
     const isKnown = ({ rule, target }) =>
       known.some((k) => k.rule === rule && k.targets.includes(target));

@@ -48,6 +48,7 @@ const Viewport = ({ sideNavOpen, children }) => {
 
   return (
     <Box
+      data-testid="viewport"
       className={classes.viewport}
       style={{ width, marginLeft, marginRight }}
     >

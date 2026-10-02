@@ -34,6 +34,7 @@ const SideNav = ({ open, toggle }) => {
   return (
     <>
       <Drawer
+        data-testid="side-nav-temporary"
         variant="temporary"
         sx={{ display: { md: "none", xs: "block" } }}
         open={open}
@@ -47,6 +48,7 @@ const SideNav = ({ open, toggle }) => {
         {menu}
       </Drawer>
       <Drawer
+        data-testid="side-nav"
         variant="permanent"
         sx={{ display: { xs: "none", md: "block" } }}
         PaperProps={{ className: classes.sideNav }}

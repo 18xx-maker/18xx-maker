@@ -25,6 +25,8 @@
     "build:app": "electron-vite build",
     "build:sb": "storybook build -o dist/sb",
     "bundle": "vite-bundle-visualizer",
+    "check:bundle": "node scripts/check-bundle-size.js",
+    "check:mui-styles": "node scripts/check-mui-styles.js",
     "fix": "run-s pretty:fix lint:fix",
     "lint": "run-s lint:js lint:css",
     "lint:css": "stylelint \"**/*.css\"",

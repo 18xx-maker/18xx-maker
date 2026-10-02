@@ -287,6 +287,7 @@ const AppNav = ({ toggleSideNav }) => {
 
   return (
     <AppBar
+      data-testid="app-bar"
       position="sticky"
       className={classes.appBar}
       style={{ display: print && "none" }}

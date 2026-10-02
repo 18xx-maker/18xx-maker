@@ -39,6 +39,8 @@ jobs:
         run: pnpm --silent pretty
       - name: ESLint and Stylelint
         run: pnpm --silent lint
+      - name: No new @mui/styles usage
+        run: pnpm --silent check:mui-styles
       - name: 18xx Maker Validate
         run: pnpm --silent validate
         env:
@@ -62,6 +64,8 @@ jobs:
         run: pnpm install
       - name: Build Web
         run: pnpm build
+      - name: Bundle Size Budget
+        run: pnpm check:bundle
       - name: Build App
         run: pnpm build:app
       - name: Build Storybook
