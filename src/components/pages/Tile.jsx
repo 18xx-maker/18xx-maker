@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 
 import Svg from "@/components/Svg";
 import Tile from "@/components/Tile";
@@ -6,11 +6,12 @@ import capability from "@/util/capability";
 
 const TilePage = () => {
   let params = useParams();
+  let location = useLocation();
   let id = params.id;
 
   let handler = () => {
     if (capability.electron) {
-      window.api.png(`/tile/${id}`);
+      window.api.png(location.pathname + location.search);
     }
   };
 
