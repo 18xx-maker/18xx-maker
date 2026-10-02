@@ -33,6 +33,7 @@ const atoms = [
       { color: "grey" },
       { color: "orange", divides: [{ side: 2 }] },
       { color: "yellow/green" },
+      { color: "yellow/green", stripeRotation: 0 },
       { color: "green/brown" },
       { color: "brown/gray" },
       { color: "red/yellow" },

@@ -285,6 +285,7 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
           >
             <Hex
               color={hex.color || "plain"}
+              stripeRotation={hex.stripeRotation}
               transparent={transparent}
               map={map}
               opacity={opacity}
