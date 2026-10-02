@@ -120,6 +120,10 @@ pnpm validate
 pnpm svgo
 ```
 
+In CI the Linux tests run in three shards whose reports are merged (the coverage
+floor is checked on the merged result). Mac and Windows run only the unit tests
+on pull requests, and the full suite on `main` and in the merge queue.
+
 There are the commands to preview and build the production versions of the site,
 app and storybook site:
 

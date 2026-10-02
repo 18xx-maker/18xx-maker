@@ -15,16 +15,18 @@ export default defineConfig({
       ],
       include: ["src/**"],
       // Floors only apply in CI, a filtered local run covers only part of the
-      // code and would fail them
-      thresholds: process.env.CI
-        ? {
-            // The state layer is pinned by src/state/*.test.js
-            "src/state/**": { statements: 95 },
-          }
-        : undefined,
+      // code and would fail them. A CI shard sees only part of the code too,
+      // so the floors are checked when the shards' reports are merged.
+      thresholds:
+        process.env.CI && !process.env.VITEST_SHARD
+          ? {
+              // The state layer is pinned by src/state/*.test.js
+              "src/state/**": { statements: 95 },
+            }
+          : undefined,
       reporter: process.env.CI ? "clover" : ["text-summary", "html"],
     },
-    outputFile: "./junit.xml",
+    outputFile: { junit: "./junit.xml" },
     reporters: process.env.CI ? ["junit", "default"] : "default",
   },
 });

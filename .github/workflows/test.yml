@@ -11,6 +11,10 @@ on:
     types:
       - checks_requested
 name: Test
+# A new push to a pull request supersedes its running checks
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   lint:
     name: Lint
@@ -62,22 +66,15 @@ jobs:
         run: pnpm build:app
       - name: Build Storybook
         run: pnpm build:sb
-  test:
+  # The required checks are the Linux, Mac and Windows jobs further down, which
+  # collect the results of these sharded jobs.
+  linux-shards:
+    name: Linux Shard ${{ matrix.shard }}
+    runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        node: [24]
-        os:
-          - name: Linux
-            slug: linux
-            image: ubuntu-latest
-          - name: Mac
-            slug: mac
-            image: macos-latest
-          - name: Windows
-            slug: windows
-            image: windows-latest
-    name: ${{ matrix.os.name }}
-    runs-on: ${{ matrix.os.image }}
+        shard: [1, 2, 3]
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -89,32 +86,147 @@ jobs:
         uses: actions/setup-node@v7
         with:
           cache: "pnpm"
-          node-version: ${{ matrix.node }}
+          node-version: 24
       - name: Dependencies
         run: pnpm install
       - name: Playwright Version
         id: playwright-version
-        shell: bash
         run: echo "PLAYWRIGHT_VERSION=$(pnpm exec playwright --version | awk '{ print $2 }')" >> $GITHUB_OUTPUT
       - name: Playwright Cache
         id: playwright-cache
         uses: actions/cache@v6
         with:
           path: browsers
-          key: ${{ matrix.os.slug }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
+          key: linux-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
       - name: Playwright Install
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: pnpm exec playwright install chromium --only-shell ${{ matrix.os.slug == 'linux' && '--with-deps' || '' }}
+        run: pnpm exec playwright install chromium --only-shell --with-deps
       - name: Playwright Dependencies
-        if: steps.playwright-cache.outputs.cache-hit == 'true' && matrix.os.slug == 'linux'
-        run: pnpm exec playwright install-deps chromium
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: |
+          # Only run the slow apt install when the runner image lacks a library
+          shell=$(find browsers -type f \( -name chrome-headless-shell -o -name headless_shell \) | head -n 1)
+          if [ -z "$shell" ] || ldd "$shell" | grep -q "not found"; then
+            pnpm exec playwright install-deps chromium
+          fi
+      # Coverage is recorded in the blob and the floors are checked after merging
       - name: Test
-        run: pnpm test
+        run: pnpm exec vitest run --shard=${{ matrix.shard }}/3 --reporter=default --reporter=blob
+        env:
+          VITEST_SHARD: 1
+      - name: Upload Blob Report
+        uses: actions/upload-artifact@v7
+        with:
+          name: blob-report-${{ matrix.shard }}
+          path: .vitest-reports/
+          retention-days: 1
+  linux:
+    name: Linux
+    needs: linux-shards
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Shards
+        run: |
+          if [ "${{ needs.linux-shards.result }}" != "success" ]; then
+            echo "Test shards: ${{ needs.linux-shards.result }}"
+            exit 1
+          fi
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: PNPM
+        uses: pnpm/action-setup@v6
+        with:
+          version: 9
+      - name: Node
+        uses: actions/setup-node@v7
+        with:
+          cache: "pnpm"
+          node-version: 24
+      - name: Dependencies
+        run: pnpm install
+      - name: Download Blob Reports
+        uses: actions/download-artifact@v8
+        with:
+          path: .vitest-reports
+          pattern: blob-report-*
+          merge-multiple: true
+      - name: Merge Reports and Check Coverage
+        run: pnpm exec vitest run --merge-reports
       - name: Coverage
         uses: coverallsapp/github-action@v2
-        if: matrix.os.slug == 'linux'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+  # Pull requests only run the unit tests on Mac and Windows, the full suite
+  # runs on main and in the merge queue
+  desktop-shards:
+    name: ${{ matrix.os.name }} Shard ${{ matrix.shard }}
+    runs-on: ${{ matrix.os.image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - name: Mac
+            slug: mac
+            image: macos-latest
+          - name: Windows
+            slug: windows
+            image: windows-latest
+        shard: ${{ fromJSON(github.event_name == 'pull_request' && '[1]' || '[1, 2]') }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: PNPM
+        uses: pnpm/action-setup@v6
+        with:
+          version: 9
+      - name: Node
+        uses: actions/setup-node@v7
+        with:
+          cache: "pnpm"
+          node-version: 24
+      - name: Dependencies
+        run: pnpm install
+      - name: Playwright Version
+        if: github.event_name != 'pull_request'
+        id: playwright-version
+        shell: bash
+        run: echo "PLAYWRIGHT_VERSION=$(pnpm exec playwright --version | awk '{ print $2 }')" >> $GITHUB_OUTPUT
+      - name: Playwright Cache
+        if: github.event_name != 'pull_request'
+        id: playwright-cache
+        uses: actions/cache@v6
+        with:
+          path: browsers
+          key: ${{ matrix.os.slug }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
+      - name: Playwright Install
+        if: github.event_name != 'pull_request' && steps.playwright-cache.outputs.cache-hit != 'true'
+        run: pnpm exec playwright install chromium --only-shell
+      - name: Unit Tests
+        if: github.event_name == 'pull_request'
+        run: pnpm exec vitest run --project unit --coverage.enabled=false
+      - name: Test
+        if: github.event_name != 'pull_request'
+        run: pnpm exec vitest run --shard=${{ matrix.shard }}/2 --coverage.enabled=false
+  mac:
+    name: Mac
+    needs: desktop-shards
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Shards
+        run: |
+          # Mac and Windows shards share one result, the failed shard job names the system
+          test "${{ needs.desktop-shards.result }}" = "success"
+  windows:
+    name: Windows
+    needs: desktop-shards
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Shards
+        run: |
+          test "${{ needs.desktop-shards.result }}" = "success"
   e2e:
     name: End to End
     runs-on: ubuntu-latest
@@ -146,7 +258,12 @@ jobs:
         run: pnpm exec playwright install chromium --only-shell --with-deps
       - name: Playwright Dependencies
         if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: pnpm exec playwright install-deps chromium
+        run: |
+          # Only run the slow apt install when the runner image lacks a library
+          shell=$(find browsers -type f \( -name chrome-headless-shell -o -name headless_shell \) | head -n 1)
+          if [ -z "$shell" ] || ldd "$shell" | grep -q "not found"; then
+            pnpm exec playwright install-deps chromium
+          fi
       - name: Build Web
         run: pnpm build
       - name: End to End Tests
