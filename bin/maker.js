@@ -1,18 +1,21 @@
 #!/usr/bin/env node
 import { userInfo } from "node:os";
 
-import { program } from "commander";
+import { CommanderError, program } from "commander";
 
 import b18 from "#cli/b18";
 import compile from "#cli/compile-schemas";
 import config from "#cli/config";
 import print from "#cli/print";
+import { UsageError } from "#cli/util";
 import validate from "#cli/validate";
 import version from "#cli/version";
 
 const { username } = userInfo();
 
 program.version(version);
+// Throw instead of exiting so every failure gets an exit code below
+program.exitOverride();
 const configCommand = program
   .command("config")
   .description("set or inspect 18xx Maker CLI options");
@@ -70,5 +73,19 @@ program
   .option("-d, --debug", "start the express server and then quit")
   .action(print);
 
-// Parse the arguments and away we go!
-program.parse();
+// Parse the arguments and away we go! Exit codes: 0 ok, 1 some documents
+// failed (the commands set process.exitCode), 2 usage error or site not built
+try {
+  await program.parseAsync();
+} catch (err) {
+  if (err instanceof CommanderError) {
+    // Commander already printed the message
+    process.exitCode = err.exitCode === 0 ? 0 : 2;
+  } else if (err instanceof UsageError) {
+    console.error(err.message);
+    process.exitCode = 2;
+  } else {
+    console.error(err);
+    process.exitCode = 1;
+  }
+}

@@ -5,6 +5,10 @@ import express from "express";
 
 import { is, map } from "ramda";
 
+// A mistake in how the command was used (unknown game, site not built). The
+// CLI exits with code 2 for these.
+export class UsageError extends Error {}
+
 export const compileCompanyTokens = (game, companies) => {
   return map((company) => {
     if (
@@ -138,8 +142,16 @@ if (fs.existsSync(path.join(import.meta.dirname, "../config.json"))) {
 
 export const loadJSON = (file) => JSON.parse(fs.readFileSync(file));
 
-export const loadGame = (game) =>
-  loadJSON(path.join(import.meta.dirname, `../data/games/${game}.json`));
+export const loadGame = (game) => {
+  try {
+    return loadJSON(
+      path.join(import.meta.dirname, `../data/games/${game}.json`),
+    );
+  } catch (err) {
+    if (err.code === "ENOENT") throw new UsageError(`Game ${game} not found`);
+    throw err;
+  }
+};
 
 export const loadSchema = (schema) =>
   loadJSON(path.join(import.meta.dirname, `../schemas/${schema}`));
@@ -152,10 +164,15 @@ export const loadTiles = () =>
   );
 
 export const startExpress = (port = 9000) => {
+  const site = path.join(import.meta.dirname, "../../dist/site");
+  if (!fs.existsSync(path.join(site, "index.html"))) {
+    throw new UsageError("The site is not built, run pnpm build first");
+  }
+
   const app = express();
-  app.use(express.static(path.join(import.meta.dirname, "../../dist/site")));
+  app.use(express.static(site));
   app.get("/{*path}", function (req, res) {
-    res.sendFile(path.join(import.meta.dirname, "../../dist/site/index.html"));
+    res.sendFile(path.join(site, "index.html"));
   });
   return app.listen(port);
 };

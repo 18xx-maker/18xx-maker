@@ -5,6 +5,7 @@ import path from "node:path";
 import express from "express";
 
 import {
+  UsageError,
   compileCompanies,
   compileCompanyShares,
   compileCompanyTokens,
@@ -178,6 +179,11 @@ describe("loading", () => {
     expect(loadGame("18Test").info.title).toBe("18Test");
   });
 
+  it("throws a usage error for a game that does not exist", () => {
+    expect(() => loadGame("18Missing")).toThrow(UsageError);
+    expect(() => loadGame("18Missing")).toThrow("Game 18Missing not found");
+  });
+
   it("loads schemas by filename", () => {
     expect(loadSchema("game.schema.json")).toHaveProperty("$id");
   });
@@ -238,6 +244,7 @@ describe("startExpress", () => {
 
   it("serves index.html for any unknown route so the app can route it", async () => {
     // Echo the path that would be sent, dist/site may not be built
+    vi.spyOn(fs, "existsSync").mockReturnValue(true);
     vi.spyOn(express.response, "sendFile").mockImplementation(function (file) {
       this.send(file);
     });
@@ -253,5 +260,12 @@ describe("startExpress", () => {
     expect(await response.text()).toBe(
       path.join(import.meta.dirname, "../../dist/site/index.html"),
     );
+  });
+
+  it("is a usage error when the site is not built", () => {
+    vi.spyOn(fs, "existsSync").mockReturnValue(false);
+
+    expect(() => startExpress(0)).toThrow(UsageError);
+    expect(() => startExpress(0)).toThrow("run pnpm build first");
   });
 });

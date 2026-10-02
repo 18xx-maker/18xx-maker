@@ -5,7 +5,7 @@ import path from "node:path";
 import { chromium } from "playwright";
 
 import print from "#cli/print";
-import { defaultConfig, loadGame, startExpress } from "#cli/util";
+import { UsageError, defaultConfig, loadGame, startExpress } from "#cli/util";
 
 const mocks = vi.hoisted(() => {
   const page = { goto: vi.fn(), pdf: vi.fn() };
@@ -36,10 +36,8 @@ const fullGame = {
   tiles: {},
 };
 
-// print does not wait for the browser, so wait for it to finish
 const printed = async (...args) => {
   await print(...args);
-  await vi.waitFor(() => expect(mocks.server.close).toHaveBeenCalled());
   return mocks.page.pdf.mock.calls.map(([options]) => options.path);
 };
 
@@ -58,6 +56,7 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.restoreAllMocks();
+  process.exitCode = undefined;
   process.chdir(cwd);
   fs.rmSync(tmp, { recursive: true, force: true });
 });
@@ -161,15 +160,57 @@ describe("print", () => {
     );
   });
 
-  it("exits when the game does not exist", async () => {
-    const error = vi.spyOn(console, "error").mockImplementation(() => {});
-    vi.spyOn(process, "exit").mockImplementation((code) => {
-      throw new Error(`exit ${code}`);
+  it("throws a usage error when the game does not exist", async () => {
+    await expect(print("18Missing", {})).rejects.toThrow(
+      new UsageError("Game 18Missing not found"),
+    );
+    expect(chromium.launch).not.toHaveBeenCalled();
+    expect(startExpress).not.toHaveBeenCalled();
+  });
+
+  it("waits for the browser and closes it and the server", async () => {
+    addGame("18Full");
+    loadGame.mockReturnValue(fullGame);
+    let finished = false;
+    mocks.browser.close.mockImplementationOnce(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 10));
+      finished = true;
     });
 
-    await expect(print("18Missing", {})).rejects.toThrow("exit 1");
-    expect(error).toHaveBeenCalledWith("Game 18Missing not found");
-    expect(chromium.launch).not.toHaveBeenCalled();
+    await print("18Full", {});
+
+    expect(finished).toBe(true);
+    expect(mocks.server.close).toHaveBeenCalledOnce();
+    expect(process.exitCode).toBeUndefined();
+  });
+
+  it("closes the browser and server when the browser cannot start", async () => {
+    addGame("18Full");
+    loadGame.mockReturnValue(fullGame);
+    chromium.launch.mockRejectedValueOnce(new Error("no browser"));
+
+    await expect(print("18Full", {})).rejects.toThrow("no browser");
+    expect(mocks.server.close).toHaveBeenCalledOnce();
+  });
+
+  it("keeps going and exits 1 when some documents fail", async () => {
+    addGame("18Empty");
+    loadGame.mockReturnValue({});
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    mocks.page.pdf.mockRejectedValueOnce(new Error("timeout"));
+
+    const files = await printed("18Empty", {});
+
+    // All three documents were tried
+    expect(files).toHaveLength(3);
+    expect(error).toHaveBeenCalledWith(
+      "Failed 18Empty-background.pdf: timeout",
+    );
+    expect(error).toHaveBeenCalledWith(
+      expect.stringMatching(/1 documents failed:\n18Empty-background.pdf/),
+    );
+    expect(process.exitCode).toBe(1);
+    expect(mocks.browser.close).toHaveBeenCalledOnce();
   });
 
   it("only starts the server in debug mode", async () => {

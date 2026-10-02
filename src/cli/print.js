@@ -7,6 +7,7 @@ import { chromium } from "playwright";
 import { compose, filter, map } from "ramda";
 
 import {
+  UsageError,
   customConfig as config,
   defaultConfig as defaults,
   loadGame,
@@ -18,9 +19,8 @@ const command = async (game, opts) => {
   // Setup folders
   setup();
 
-  const server = startExpress();
-
   if (opts.debug) {
+    startExpress();
     console.log("Debug Mode");
     console.log("Starting the express server on http://localhost:9000");
     console.log("\nCtrl-C when done");
@@ -38,15 +38,17 @@ const command = async (game, opts) => {
   } else {
     // Check if the game exists
     if (!existsSync(`./src/data/games/${games[0]}.json`)) {
-      console.error(`Game ${games[0]} not found`);
-      process.exit(1);
+      throw new UsageError(`Game ${games[0]} not found`);
     }
   }
   console.log(`Games: ${games.join(", ")}`);
 
   // Start processing
-  (async () => {
-    const browser = await chromium.launch({
+  const server = startExpress();
+  const failed = [];
+  let browser;
+  try {
+    browser = await chromium.launch({
       args: ["--force-color-profile srgb"],
     });
 
@@ -158,21 +160,30 @@ const command = async (game, opts) => {
         }
 
         console.log(`Printing ${filename}`);
-        await page.goto(`http://localhost:9000/games/${game}/${item}`, {
-          waitUntil: "networkidle",
-        });
-        await page.pdf({
-          path: `render/${game}/${filename}`,
-          scale: 1.0,
-          preferCSSPageSize: true,
-        });
+        try {
+          await page.goto(`http://localhost:9000/games/${game}/${item}`, {
+            waitUntil: "networkidle",
+          });
+          await page.pdf({
+            path: `render/${game}/${filename}`,
+            scale: 1.0,
+            preferCSSPageSize: true,
+          });
+        } catch (err) {
+          console.error(`Failed ${filename}: ${err.message}`);
+          failed.push(filename);
+        }
       }
     }
+  } finally {
+    await browser?.close();
+    server.close();
+  }
 
-    await browser.close();
-
-    await server.close();
-  })();
+  if (failed.length > 0) {
+    console.error(`\n${failed.length} documents failed:\n${failed.join("\n")}`);
+    process.exitCode = 1;
+  }
 };
 
 export default command;

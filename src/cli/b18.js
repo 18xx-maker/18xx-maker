@@ -54,9 +54,8 @@ const sortTiles = sortWith([ascend(colorSort)]);
 const command = async (bname, version, author, opts) => {
   setup();
 
-  const server = startExpress();
-
   if (opts.debug) {
+    startExpress();
     console.log("Debug Mode");
     console.log("Starting the express server on http://localhost:9000");
     console.log("\nCtrl-C when done");
@@ -227,77 +226,97 @@ const command = async (bname, version, author, opts) => {
   );
 
   // Open browser and create takeScreenshot function
-  const browser = await chromium.launch({
-    args: ["--force-color-profile srgb"],
-  });
-  const page = await browser.newPage();
-  const takeScreenshot = async (
-    urlPath,
-    width,
-    height,
-    filename,
-    omitBackground = false,
-  ) => {
-    console.log(`Printing ${bname}/${folder}/${id}/${filename}.png`);
-    await page.goto(
-      `http://localhost:9000/games/${bname}/${urlPath}?print=true`,
-      {
-        waitUntil: "networkidle",
-      },
-    );
-    await page.emulateMedia({ media: "print" });
-    await page.setViewportSize({ width, height });
-    await page.screenshot({
-      path: `render/${bname}/${folder}/${id}/${filename}.png`,
-      omitBackground,
+  const server = startExpress();
+  const failed = [];
+  let browser;
+  try {
+    browser = await chromium.launch({
+      args: ["--force-color-profile srgb"],
     });
-  };
-
-  // Map
-  let mapWidth =
-    Math.ceil(mapData.b18TotalWidth) +
-    (mapData.horizontal && mapData.a1Valid === false ? 87 : 0);
-  let mapHeight = Math.ceil(mapData.b18TotalHeight);
-  await takeScreenshot("b18/map", mapWidth, mapHeight, "Map");
-
-  // Market
-  let marketData = getMarketData(game.stock, config);
-  let marketWidth = Math.ceil((marketData.totalWidth + 50) * 0.96) + 1;
-  let marketHeight = Math.ceil((marketData.totalHeight + 50) * 0.96) + 1;
-  await takeScreenshot("market", marketWidth, marketHeight, "Market");
-
-  // Tokens
-  await takeScreenshot("b18/tokens", 60, tokenHeight, "Tokens", true);
-
-  // Tiles
-  for (let j = 0; j < colors.length; j++) {
-    let color = colors[j];
-    let color_filename = color.replace("/", "_");
-
-    let width = counts[color] * 150;
-    let height = 900;
-
-    await takeScreenshot(
-      `b18/tiles/${color}`,
+    const page = await browser.newPage();
+    const takeScreenshot = async (
+      urlPath,
       width,
       height,
-      capitalize(color_filename),
-      true,
-    );
+      filename,
+      omitBackground = false,
+    ) => {
+      console.log(`Printing ${bname}/${folder}/${id}/${filename}.png`);
+      try {
+        await page.goto(
+          `http://localhost:9000/games/${bname}/${urlPath}?print=true`,
+          {
+            waitUntil: "networkidle",
+          },
+        );
+        await page.emulateMedia({ media: "print" });
+        await page.setViewportSize({ width, height });
+        await page.screenshot({
+          path: `render/${bname}/${folder}/${id}/${filename}.png`,
+          omitBackground,
+        });
+      } catch (err) {
+        console.error(`Failed ${filename}.png: ${err.message}`);
+        failed.push(`${filename}.png`);
+      }
+    };
+
+    // Map
+    let mapWidth =
+      Math.ceil(mapData.b18TotalWidth) +
+      (mapData.horizontal && mapData.a1Valid === false ? 87 : 0);
+    let mapHeight = Math.ceil(mapData.b18TotalHeight);
+    await takeScreenshot("b18/map", mapWidth, mapHeight, "Map");
+
+    // Market
+    let marketData = getMarketData(game.stock, config);
+    let marketWidth = Math.ceil((marketData.totalWidth + 50) * 0.96) + 1;
+    let marketHeight = Math.ceil((marketData.totalHeight + 50) * 0.96) + 1;
+    await takeScreenshot("market", marketWidth, marketHeight, "Market");
+
+    // Tokens
+    await takeScreenshot("b18/tokens", 60, tokenHeight, "Tokens", true);
+
+    // Tiles
+    for (let j = 0; j < colors.length; j++) {
+      let color = colors[j];
+      let color_filename = color.replace("/", "_");
+
+      let width = counts[color] * 150;
+      let height = 900;
+
+      await takeScreenshot(
+        `b18/tiles/${color}`,
+        width,
+        height,
+        capitalize(color_filename),
+        true,
+      );
+    }
+  } finally {
+    // Close out our services
+    await browser?.close();
+    server.close();
   }
 
-  // Close out our services
-  await browser.close();
-  await server.close();
-
-  // Output zip file
+  // Output zip file, and wait for it to be written
   console.log(`Creating ${bname}/${folder}.zip`);
   const output = createWriteStream(`render/${bname}/${folder}.zip`);
   const archive = new ZipArchive({
     zlib: { level: 9 },
   });
-  archive.pipe(output);
-  archive.directory(`render/${bname}/${folder}`, `${folder}`);
-  archive.finalize();
+  await new Promise((resolve, reject) => {
+    output.on("close", resolve);
+    output.on("error", reject);
+    archive.on("error", reject);
+    archive.pipe(output);
+    archive.directory(`render/${bname}/${folder}`, `${folder}`);
+    archive.finalize();
+  });
+
+  if (failed.length > 0) {
+    console.error(`\n${failed.length} documents failed:\n${failed.join("\n")}`);
+    process.exitCode = 1;
+  }
 };
 export default command;

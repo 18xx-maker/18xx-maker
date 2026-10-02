@@ -8,7 +8,8 @@ import { chromium } from "playwright";
 import b18 from "#cli/b18";
 import { defaultConfig, loadGame, startExpress } from "#cli/util";
 
-const mocks = vi.hoisted(() => {
+const mocks = await vi.hoisted(async () => {
+  const { EventEmitter } = await import("node:events");
   const page = {
     goto: vi.fn(),
     emulateMedia: vi.fn(),
@@ -17,12 +18,14 @@ const mocks = vi.hoisted(() => {
   };
   const browser = { newPage: vi.fn(() => page), close: vi.fn() };
   const server = { close: vi.fn() };
-  const archive = {
+  const archive = Object.assign(new EventEmitter(), {
     pipe: vi.fn(),
     directory: vi.fn(),
     finalize: vi.fn(),
-  };
-  return { page, browser, server, archive };
+  });
+  // Like the real zip, the output stream only closes after it was finalized
+  const output = Object.assign(new EventEmitter(), { file: "" });
+  return { page, browser, server, archive, output };
 });
 
 vi.mock("playwright", () => ({
@@ -40,7 +43,10 @@ vi.mock("node:fs", async (importOriginal) => {
   const real = await importOriginal();
   const mocked = {
     ...real.default,
-    createWriteStream: vi.fn((file) => ({ file })),
+    createWriteStream: vi.fn((file) => {
+      mocks.output.file = file;
+      return mocks.output;
+    }),
   };
   return { ...mocked, default: mocked };
 });
@@ -60,6 +66,11 @@ let tmp;
 
 beforeEach(() => {
   vi.clearAllMocks();
+  mocks.archive.removeAllListeners();
+  mocks.output.removeAllListeners();
+  mocks.archive.finalize.mockImplementation(() =>
+    setTimeout(() => mocks.output.emit("close"), 10),
+  );
   tmp = fs.mkdtempSync(path.join(os.tmpdir(), "18xx-cli-b18-"));
   process.chdir(tmp);
   vi.spyOn(console, "log").mockImplementation(() => {});
@@ -67,6 +78,7 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.restoreAllMocks();
+  process.exitCode = undefined;
   process.chdir(cwd);
   fs.rmSync(tmp, { recursive: true, force: true });
 });
@@ -175,9 +187,8 @@ describe("b18", () => {
         "board18-18Test-1.0",
       );
       expect(mocks.archive.finalize).toHaveBeenCalledOnce();
-      expect(mocks.archive.pipe).toHaveBeenCalledWith({
-        file: `${folder}.zip`,
-      });
+      expect(mocks.archive.pipe).toHaveBeenCalledWith(mocks.output);
+      expect(mocks.output.file).toBe(`${folder}.zip`);
     });
   });
 
@@ -225,6 +236,56 @@ describe("b18", () => {
       width: 60,
       height: 30 * 23,
     });
+  });
+
+  it("waits for the zip file to be written", async () => {
+    let closed = false;
+    mocks.archive.finalize.mockImplementation(() =>
+      setTimeout(() => {
+        closed = true;
+        mocks.output.emit("close");
+      }, 20),
+    );
+
+    await b18("18Test", "1.0", "Pat", {});
+
+    expect(closed).toBe(true);
+  });
+
+  it("fails when the zip cannot be written", async () => {
+    mocks.archive.finalize.mockImplementation(() =>
+      setTimeout(() => mocks.output.emit("error", new Error("disk full")), 1),
+    );
+
+    await expect(b18("18Test", "1.0", "Pat", {})).rejects.toThrow("disk full");
+  });
+
+  it("closes the browser and server when a step throws", async () => {
+    chromium.launch.mockRejectedValueOnce(new Error("no browser"));
+
+    await expect(b18("18Test", "1.0", "Pat", {})).rejects.toThrow("no browser");
+    expect(mocks.server.close).toHaveBeenCalledOnce();
+    expect(mocks.archive.finalize).not.toHaveBeenCalled();
+  });
+
+  it("keeps going and exits 1 when some images fail", async () => {
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    mocks.page.screenshot.mockRejectedValueOnce(new Error("timeout"));
+
+    await b18("18Test", "1.0", "Pat", {});
+
+    expect(mocks.page.screenshot.mock.calls.length).toBeGreaterThan(3);
+    expect(error).toHaveBeenCalledWith("Failed Map.png: timeout");
+    expect(process.exitCode).toBe(1);
+    expect(mocks.archive.finalize).toHaveBeenCalledOnce();
+    expect(mocks.browser.close).toHaveBeenCalledOnce();
+  });
+
+  it("throws a usage error for a game that does not exist", async () => {
+    await expect(b18("18Missing", "1.0", "Pat", {})).rejects.toThrow(
+      "Game 18Missing not found",
+    );
+    expect(startExpress).not.toHaveBeenCalled();
   });
 
   it("only starts the server in debug mode", async () => {

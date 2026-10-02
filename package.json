@@ -20,7 +20,7 @@
     "#util/*": "./src/util/*.js"
   },
   "scripts": {
-    "b18": "node --disable-warning=ExperimentalWarning ./bin/b18.js",
+    "b18": "node bin/maker.js b18",
     "build": "vite build",
     "build:app": "electron-vite build",
     "build:sb": "storybook build -o dist/sb",
@@ -34,7 +34,7 @@
     "pretty:fix": "prettier --write .",
     "preview": "vite preview",
     "preview:app": "electron-vite preview",
-    "print": "node --disable-warning=ExperimentalWarning ./bin/print.js",
+    "print": "node bin/maker.js print",
     "start": "vite",
     "start:app": "electron-vite dev",
     "start:sb": "storybook dev -p 6006 --no-open",
