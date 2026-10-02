@@ -1,28 +1,28 @@
 <svg viewBox="0 0 180 120">
   <defs>
-    <g id="s" transform="translate(0 -36)">
-      <g id="f">
-        <g id="t">
-          <path id="o" fill="#fff" d="M0-5v5h3z" transform="rotate(18 0 -5)"/>
-          <use href="#o" transform="scale(-1 1)"/>
+    <g id="ve-s" transform="translate(0 -36)">
+      <g id="ve-f">
+        <g id="ve-t">
+          <path id="ve-o" fill="#fff" d="M0-5v5h3z" transform="rotate(18 0 -5)"/>
+          <use href="#ve-o" transform="scale(-1 1)"/>
         </g>
-        <use href="#t" transform="rotate(72)"/>
+        <use href="#ve-t" transform="rotate(72)"/>
       </g>
-      <use href="#t" transform="rotate(-72)"/>
-      <use href="#f" transform="rotate(144)"/>
+      <use href="#ve-t" transform="rotate(-72)"/>
+      <use href="#ve-f" transform="rotate(144)"/>
     </g>
   </defs>
   <path fill="#cf142b" d="M0 0h180v120H0z"/>
   <path fill="#00247d" d="M0 0h180v80H0z"/>
   <path fill="#fc0" d="M0 0h180v40H0z"/>
   <g transform="translate(90 84)">
-    <g id="s4">
-      <g id="s2">
-        <use href="#s" transform="rotate(10)"/>
-        <use href="#s" transform="rotate(30)"/>
+    <g id="ve-s4">
+      <g id="ve-s2">
+        <use href="#ve-s" transform="rotate(10)"/>
+        <use href="#ve-s" transform="rotate(30)"/>
       </g>
-      <use href="#s2" transform="rotate(40)"/>
+      <use href="#ve-s2" transform="rotate(40)"/>
     </g>
-    <use href="#s4" transform="rotate(-80)"/>
+    <use href="#ve-s4" transform="rotate(-80)"/>
   </g>
 </svg>

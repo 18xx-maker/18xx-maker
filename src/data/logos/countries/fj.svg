@@ -1,10 +1,10 @@
 <svg viewBox="0 0 1200 600">
-  <clipPath id="a">
+  <clipPath id="fj-a">
     <path d="M0 0v150h700v150H600zm0 300v100h300V0h300z"/>
   </clipPath>
   <path fill="#002868" d="M0 0h1200v600H0z"/>
   <path stroke="#fff" stroke-width="60" d="m0 0 600 300M0 300 600 0"/>
-  <path stroke="#ce1126" stroke-width="40" d="m0 0 600 300M0 300 600 0" clip-path="url(#a)"/>
+  <path stroke="#ce1126" stroke-width="40" d="m0 0 600 300M0 300 600 0" clip-path="url(#fj-a)"/>
   <path stroke="#fff" stroke-width="100" d="M300 0v400M0 150h700"/>
   <path stroke="#ce1126" stroke-width="60" d="M300 0v400M0 150h700"/>
   <path fill="#68bfe5" d="M0 300h600V0h600v600H0z"/>

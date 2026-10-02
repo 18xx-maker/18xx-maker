@@ -6,25 +6,25 @@
   <circle fill="#fff" cx="70" cy="40" r="30"/>
   <circle fill="#0099b5" cx="80" cy="40" r="30"/>
   <g fill="#fff" transform="translate(136 64)">
-    <g id="s3">
-      <g id="s">
-        <g id="f">
-          <g id="t">
-            <path id="o" d="M0-6v6h3" transform="rotate(18 0 -6)"/>
-            <use href="#o" transform="scale(-1 1)"/>
+    <g id="uz-s3">
+      <g id="uz-s">
+        <g id="uz-f">
+          <g id="uz-t">
+            <path id="uz-o" d="M0-6v6h3" transform="rotate(18 0 -6)"/>
+            <use href="#uz-o" transform="scale(-1 1)"/>
           </g>
-          <use href="#t" transform="rotate(72)"/>
+          <use href="#uz-t" transform="rotate(72)"/>
         </g>
-        <use href="#t" transform="rotate(-72)"/>
-        <use href="#f" transform="rotate(144)"/>
+        <use href="#uz-t" transform="rotate(-72)"/>
+        <use href="#uz-f" transform="rotate(144)"/>
       </g>
-      <use y="-24" href="#s"/>
-      <use y="-48" href="#s"/>
+      <use y="-24" href="#uz-s"/>
+      <use y="-48" href="#uz-s"/>
     </g>
-    <use x="24" href="#s3"/>
-    <use x="48" href="#s3"/>
-    <use x="-48" href="#s"/>
-    <use x="-24" href="#s"/>
-    <use x="-24" y="-24" href="#s"/>
+    <use x="24" href="#uz-s3"/>
+    <use x="48" href="#uz-s3"/>
+    <use x="-48" href="#uz-s"/>
+    <use x="-24" href="#uz-s"/>
+    <use x="-24" y="-24" href="#uz-s"/>
   </g>
 </svg>

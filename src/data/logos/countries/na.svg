@@ -4,14 +4,14 @@
   <path stroke="#fff" stroke-width="20" d="M0 60 90 0"/>
   <path stroke="#d21034" stroke-width="15" d="M0 60 90 0"/>
   <g fill="#ffce00" transform="translate(18 16.341)">
-    <g id="r4">
-      <path id="r" d="m0 10 1.553-4.204h-3.106z"/>
-      <use href="#r" transform="rotate(90)"/>
-      <use href="#r" transform="rotate(180)"/>
-      <use href="#r" transform="rotate(270)"/>
+    <g id="na-r4">
+      <path id="na-r" d="m0 10 1.553-4.204h-3.106z"/>
+      <use href="#na-r" transform="rotate(90)"/>
+      <use href="#na-r" transform="rotate(180)"/>
+      <use href="#na-r" transform="rotate(270)"/>
     </g>
-    <use href="#r4" transform="rotate(30)"/>
-    <use href="#r4" transform="rotate(60)"/>
+    <use href="#na-r4" transform="rotate(30)"/>
+    <use href="#na-r4" transform="rotate(60)"/>
     <circle stroke="#003580" r="5.5"/>
   </g>
 </svg>

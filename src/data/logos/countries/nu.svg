@@ -1,11 +1,11 @@
 <svg viewBox="0 0 120 60">
-  <clipPath id="t">
+  <clipPath id="nu-t">
     <path d="M0 0v15h70v15H60zm0 30v10h30V0h30z"/>
   </clipPath>
   <path fill="#002868" d="M0 0h120v60H0z"/>
   <g stroke="#cf142b" stroke-width="6">
     <path stroke="#fff" d="m0 0 60 30m0-30L0 30"/>
-    <path stroke-width="4" d="m0 0 60 30m0-30L0 30" clip-path="url(#t)"/>
+    <path stroke-width="4" d="m0 0 60 30m0-30L0 30" clip-path="url(#nu-t)"/>
     <path stroke="#fff" stroke-width="10" d="M30 0v40M0 15h70"/>
     <path d="M30 0v40M0 15h70"/>
   </g>
@@ -13,11 +13,11 @@
   <g transform="translate(30 15)">
     <g transform="scale(5.1039)">
       <circle fill="#002868" r="1"/>
-      <path id="s" fill="#fcd116" d="m0-513674 301930 929245-790463-574305h977066l-790463 574305" transform="scale(0)"/>
+      <path id="nu-s" fill="#fcd116" d="m0-513674 301930 929245-790463-574305h977066l-790463 574305" transform="scale(0)"/>
     </g>
-    <use href="#s" transform="matrix(3 0 0 3 -17.5 .29)"/>
-    <use href="#s" transform="matrix(3 0 0 3 17.5 .29)"/>
-    <use href="#s" transform="matrix(3 0 0 3 0 10.29)"/>
-    <use href="#s" transform="matrix(3 0 0 3 0 -9.71)"/>
+    <use href="#nu-s" transform="matrix(3 0 0 3 -17.5 .29)"/>
+    <use href="#nu-s" transform="matrix(3 0 0 3 17.5 .29)"/>
+    <use href="#nu-s" transform="matrix(3 0 0 3 0 10.29)"/>
+    <use href="#nu-s" transform="matrix(3 0 0 3 0 -9.71)"/>
   </g>
 </svg>

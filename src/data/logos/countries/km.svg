@@ -6,8 +6,8 @@
   <path fill="#3D8E33" d="m0 300 250-150L0 0z"/>
   <circle fill="#FFF" cx="85" cy="150" r="67.5"/>
   <circle fill="#3D8E33" cx="115" cy="150" r="67.5"/>
-  <path id="star" fill="#FFF" d="m100.01 89.2 7.36 22.588-19.258-13.949h23.776L92.63 111.788z"/>
-  <use y="32.208" href="#star"/>
-  <use y="64.417" href="#star"/>
-  <use y="96.625" href="#star"/>
+  <path id="km-star" fill="#FFF" d="m100.01 89.2 7.36 22.588-19.258-13.949h23.776L92.63 111.788z"/>
+  <use y="32.208" href="#km-star"/>
+  <use y="64.417" href="#km-star"/>
+  <use y="96.625" href="#km-star"/>
 </svg>

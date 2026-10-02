@@ -1,31 +1,31 @@
 <svg viewBox="-17.582 -4.664 71.571 87.246">
-  <use stroke="#003893" stroke-width="5.165" href="#b"/>
-  <path id="b" fill="#DC143C" d="M-15 37.574h60L-15 0v80h60l-60-60z"/>
+  <use stroke="#003893" stroke-width="5.165" href="#np-b"/>
+  <path id="np-b" fill="#DC143C" d="M-15 37.574h60L-15 0v80h60l-60-60z"/>
   <g fill="#fff">
     <path d="M-11.95 23.483a12.84 12.84 0 0 0 23.9 0 11.95 11.95 0 0 1-23.9 0"/>
     <g transform="translate(0 29.045)scale(5.56106)">
       <circle r="1"/>
-      <g id="jags6">
-        <g id="jags3">
-          <path id="jag" d="M.195-.98 0-1.39l-.195.408" transform="rotate(11.25)"/>
-          <use href="#jag" transform="rotate(22.5)"/>
-          <use href="#jag" transform="rotate(45)"/>
+      <g id="np-jags6">
+        <g id="np-jags3">
+          <path id="np-jag" d="M.195-.98 0-1.39l-.195.408" transform="rotate(11.25)"/>
+          <use href="#np-jag" transform="rotate(22.5)"/>
+          <use href="#np-jag" transform="rotate(45)"/>
         </g>
-        <use href="#jags3" transform="rotate(67.5)"/>
+        <use href="#np-jags3" transform="rotate(67.5)"/>
       </g>
-      <use href="#jags6" transform="scale(-1 1)"/>
+      <use href="#np-jags6" transform="scale(-1 1)"/>
     </g>
     <g transform="translate(0 58.787)scale(8.1434)">
       <circle r="1"/>
-      <g id="rays4">
-        <g id="rays2">
-          <path id="ray" d="M.259.966 0 1.576l-.259-.61"/>
-          <use href="#ray" transform="rotate(180)"/>
+      <g id="np-rays4">
+        <g id="np-rays2">
+          <path id="np-ray" d="M.259.966 0 1.576l-.259-.61"/>
+          <use href="#np-ray" transform="rotate(180)"/>
         </g>
-        <use href="#rays2" transform="rotate(90)"/>
+        <use href="#np-rays2" transform="rotate(90)"/>
       </g>
-      <use href="#rays4" transform="rotate(30)"/>
-      <use href="#rays4" transform="rotate(60)"/>
+      <use href="#np-rays4" transform="rotate(30)"/>
+      <use href="#np-rays4" transform="rotate(60)"/>
     </g>
   </g>
 </svg>

@@ -3,13 +3,13 @@
   <path fill="#fdef42" d="M300 0h300v600H300z"/>
   <path fill="#e31b23" d="M600 0h300v600H600z"/>
   <g fill="#00853f" transform="translate(450 300)">
-    <g id="c">
-      <path id="t" d="M0-100V0h50z" transform="rotate(18 0 -100)"/>
-      <use href="#t" transform="scale(-1 1)"/>
+    <g id="sn-c">
+      <path id="sn-t" d="M0-100V0h50z" transform="rotate(18 0 -100)"/>
+      <use href="#sn-t" transform="scale(-1 1)"/>
     </g>
-    <use href="#c" transform="rotate(72)"/>
-    <use href="#c" transform="rotate(144)"/>
-    <use href="#c" transform="rotate(216)"/>
-    <use href="#c" transform="rotate(288)"/>
+    <use href="#sn-c" transform="rotate(72)"/>
+    <use href="#sn-c" transform="rotate(144)"/>
+    <use href="#sn-c" transform="rotate(216)"/>
+    <use href="#sn-c" transform="rotate(288)"/>
   </g>
 </svg>

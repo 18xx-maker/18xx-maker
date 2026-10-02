@@ -3,23 +3,23 @@
   <path stroke="#fff" stroke-width="300" d="M0 450h7410m0 600H0m0 600h7410m0 600H0m0 600h7410m0 600H0"/>
   <path fill="#3c3b6e" d="M0 0h2964v2100H0z"/>
   <g fill="#fff">
-    <g id="s18">
-      <g id="s9">
-        <g id="s5">
-          <g id="s4">
-            <path id="s" d="m247 90 70.534 217.082-184.66-134.164h228.253L176.466 307.082z"/>
-            <use y="420" href="#s"/>
-            <use y="840" href="#s"/>
-            <use y="1260" href="#s"/>
+    <g id="um-s18">
+      <g id="um-s9">
+        <g id="um-s5">
+          <g id="um-s4">
+            <path id="um-s" d="m247 90 70.534 217.082-184.66-134.164h228.253L176.466 307.082z"/>
+            <use y="420" href="#um-s"/>
+            <use y="840" href="#um-s"/>
+            <use y="1260" href="#um-s"/>
           </g>
-          <use y="1680" href="#s"/>
+          <use y="1680" href="#um-s"/>
         </g>
-        <use x="247" y="210" href="#s4"/>
+        <use x="247" y="210" href="#um-s4"/>
       </g>
-      <use x="494" href="#s9"/>
+      <use x="494" href="#um-s9"/>
     </g>
-    <use x="988" href="#s18"/>
-    <use x="1976" href="#s9"/>
-    <use x="2470" href="#s5"/>
+    <use x="988" href="#um-s18"/>
+    <use x="1976" href="#um-s9"/>
+    <use x="2470" href="#um-s5"/>
   </g>
 </svg>
