@@ -1,0 +1,151 @@
+// @vitest-environment jsdom
+
+import { createSetConfig, createSetGame, createSetSettings } from "@/state";
+
+// Render mode (util/renderInput) keeps the state in memory: it must not read
+// the app's stored state or write to it.
+const STORED = {
+  config: JSON.stringify({ theme: "cmk" }),
+  loadedGame: JSON.stringify({ id: "x", type: "system", slug: "system:x" }),
+  settings: JSON.stringify({ theme: "dark" }),
+};
+
+const game = { info: { title: "T" }, meta: { id: "old", type: "bundled" } };
+
+const importState = async (input) => {
+  vi.resetModules();
+  window.__RENDER_INPUT__ = input;
+  return import("@/state");
+};
+
+beforeEach(() => {
+  window.localStorage.clear();
+  Object.entries(STORED).forEach(([key, value]) =>
+    window.localStorage.setItem(key, value),
+  );
+});
+
+afterEach(() => {
+  delete window.__RENDER_INPUT__;
+  vi.restoreAllMocks();
+});
+
+describe("render mode state", () => {
+  const input = { id: "18Test", game, config: { paper: { width: 111 } } };
+
+  it("starts without the stored state", async () => {
+    const { store, preloadedState } = await importState(input);
+
+    expect(preloadedState.config).toEqual({});
+    expect(store.getState().config).toEqual({});
+    expect(store.getState().settings).toEqual({});
+    expect(store.getState().loadedGame).toBeFalsy();
+  });
+
+  it("writes nothing to local storage", async () => {
+    const setItem = vi.spyOn(Storage.prototype, "setItem");
+    const removeItem = vi.spyOn(Storage.prototype, "removeItem");
+    const { store, createDeleteGame } = await importState(input);
+
+    store.dispatch(createSetConfig({ theme: "gmt" }));
+    store.dispatch(createSetSettings({ theme: "light" }));
+    store.dispatch(createSetGame(game));
+    store.dispatch(createDeleteGame("render:18Test"));
+
+    expect(setItem).not.toHaveBeenCalled();
+    expect(removeItem).not.toHaveBeenCalled();
+    expect(store.getState().config).toEqual({ theme: "gmt" });
+    for (const [key, value] of Object.entries(STORED)) {
+      expect(window.localStorage.getItem(key)).toBe(value);
+    }
+  });
+
+  it("does not read local storage", async () => {
+    const getItem = vi.spyOn(Storage.prototype, "getItem");
+    await importState(input);
+
+    expect(getItem).not.toHaveBeenCalled();
+  });
+
+  it("can create a render store next to the app store", async () => {
+    const { createStore } = await importState(undefined);
+    const setItem = vi.spyOn(Storage.prototype, "setItem");
+
+    const store = createStore({ render: true });
+    store.dispatch(createSetConfig({ theme: "gmt" }));
+
+    expect(store.getState().config).toEqual({ theme: "gmt" });
+    expect(setItem).not.toHaveBeenCalled();
+  });
+
+  it("keeps the persisted behavior without render input", async () => {
+    const { store } = await importState(undefined);
+    expect(store.getState().config).toEqual({ theme: "cmk" });
+
+    store.dispatch(createSetConfig({ theme: "gmt" }));
+    expect(window.localStorage.getItem("config")).toBe('{"theme":"gmt"}');
+  });
+});
+
+describe("render input", () => {
+  it("gives the game a render meta, whatever it had", async () => {
+    const { store, loadGame } = await importState({
+      game,
+      config: {},
+    });
+    const loaded = await loadGame("render:old")(store.dispatch);
+
+    // The id of the game's meta is the default id
+    expect(loaded.meta).toEqual({
+      id: "old",
+      type: "render",
+      slug: "render:old",
+    });
+    expect(store.getState().game.meta.slug).toBe("render:old");
+  });
+
+  it("loads the given game without looking for it", async () => {
+    const { store, loadGame } = await importState({
+      id: "abc",
+      game,
+      config: {},
+    });
+
+    await loadGame("render:abc")(store.dispatch);
+    expect(store.getState().game.info.title).toBe("T");
+    expect(store.getState().game.meta.slug).toBe("render:abc");
+  });
+
+  it("does not load any other game", async () => {
+    const { store, loadGame } = await importState({
+      id: "abc",
+      game,
+      config: {},
+    });
+
+    await expect(loadGame("render:other")(store.dispatch)).rejects.toThrow(
+      "Unknown game type render",
+    );
+    await expect(loadGame("1889")(store.dispatch)).resolves.toMatchObject({
+      meta: { id: "1889" },
+    });
+  });
+
+  it("reads the input from the Electron preload", async () => {
+    vi.resetModules();
+    window.api = { renderInput: { id: "e", game, config: {} } };
+    try {
+      const { getRenderInput } = await import("@/util/renderInput");
+      expect(getRenderInput().game.meta.slug).toBe("render:e");
+      expect(getRenderInput()).toBe(getRenderInput());
+    } finally {
+      delete window.api;
+    }
+  });
+
+  it("is off without input", async () => {
+    vi.resetModules();
+    const { getRenderInput } = await import("@/util/renderInput");
+    expect(getRenderInput()).toBeUndefined();
+  });
+});

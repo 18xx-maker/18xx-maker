@@ -5,6 +5,7 @@ import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import { BUNDLED, ELECTRON, getGameSummary } from "@/util/loading.js";
 import * as opfs from "@/util/opfs";
+import { getRenderInput } from "@/util/renderInput";
 
 export const SET_GAME = "SET_GAME";
 export const DELETE_GAME = "DELETE_GAME";
@@ -50,7 +51,14 @@ export const refreshGame = () => (dispatch, getState) => {
 export const loadGame = (slug) => (dispatch) => {
   const { type, id } = parseSlug(slug);
 
+  const render = getRenderInput();
+
   return new Promise((resolve, reject) => {
+    // The game of render mode is the one that was given, never loaded
+    if (render && slug === render.game.meta.slug) {
+      return resolve(render.game);
+    }
+
     if (type === BUNDLED) {
       if (!games[id]) {
         return reject(new Error(`Bundled game ${id} not found`));

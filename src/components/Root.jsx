@@ -9,6 +9,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 import Alert from "@/components/Alert";
 import Analytics from "@/components/Analytics";
+import RenderState from "@/components/RenderState";
 import ScrollToTop from "@/components/ScrollToTop";
 import SetSvgColors from "@/components/SetSvgColors";
 import AppSidebar from "@/components/nav/AppSidebar";
@@ -27,8 +28,11 @@ import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import * as opfs from "@/util/opfs";
 import { useBooleanParam } from "@/util/query";
+import { getRenderInput } from "@/util/renderInput";
 
 const Root = () => {
+  // Render mode has no chrome, only the page
+  const render = !!getRenderInput();
   const [print] = useBooleanParam("print");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -137,7 +141,7 @@ body {
     >
       <ThemeProvider delayDuration={500}>
         <ScrollToTop>
-          {inEditor ? (
+          {inEditor || render ? (
             <Outlet />
           ) : (
             <SidebarProvider>
@@ -191,11 +195,11 @@ body {
             </defs>
           </svg>
           <SetSvgColors />
-          <Alert />
+          {render ? <RenderState /> : <Alert />}
         </ScrollToTop>
         <style>{printCss}</style>
       </ThemeProvider>
-      <Analytics />
+      {!render && <Analytics />}
     </div>
   );
 };

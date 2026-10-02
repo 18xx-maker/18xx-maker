@@ -7,6 +7,7 @@ import { mergeDeepRight } from "ramda";
 
 import { useGame, useValidation } from "@/hooks";
 import { createResetConfig, createSetConfig } from "@/state";
+import { getRenderInput } from "@/util/renderInput";
 import { resolveConfig } from "@/util/resolveConfig";
 
 const configs = import.meta.glob("../*.json", {
@@ -15,7 +16,12 @@ const configs = import.meta.glob("../*.json", {
 });
 const defaultConfig = configs["../defaults.json"];
 const userConfig = configs["../config.json"] || {};
-const initialConfig = mergeDeepRight(defaultConfig, userConfig);
+const renderInput = getRenderInput();
+// In render mode the page is given the layers below the URL parameters, they
+// replace the config.json built into the page
+const initialConfig = renderInput
+  ? mergeDeepRight(defaultConfig, renderInput.config)
+  : mergeDeepRight(defaultConfig, userConfig);
 
 export const useConfig = () => {
   const dispatch = useDispatch();
