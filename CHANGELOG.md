@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.0-beta.124](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.123...v1.0.0-beta.124) (2026-10-02)
+
+
+### :bug: Bug Fixes
+
+* clip country flags to their box ([#737](https://github.com/18xx-maker/18xx-maker/issues/737)) ([077839e](https://github.com/18xx-maker/18xx-maker/commit/077839e7e07cb4fe739d922f8be9a64ea9f8bd6a))
+* prefix country flag svg ids with country code ([#735](https://github.com/18xx-maker/18xx-maker/issues/735)) ([90571f0](https://github.com/18xx-maker/18xx-maker/commit/90571f0c27036581f893cfbbd3bbd2797c1c3450))
+
 ## [1.0.0-beta.123](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.122...v1.0.0-beta.123) (2026-10-02)
 
 
