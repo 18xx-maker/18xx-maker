@@ -40,6 +40,7 @@ const printed = async (...args) => {
   return fs
     .readdirSync("render", { recursive: true })
     .filter((file) => file.endsWith(".pdf"))
+    .map((file) => file.replaceAll("\\", "/"))
     .sort();
 };
 

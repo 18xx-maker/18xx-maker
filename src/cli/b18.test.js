@@ -208,7 +208,7 @@ describe("b18", () => {
       expect(mocks.server.close).toHaveBeenCalledOnce();
       expect(ZipArchive).toHaveBeenCalledWith({ zlib: { level: 9 } });
       expect(mocks.archive.directory).toHaveBeenCalledWith(
-        folder,
+        expect.toSatisfy((dir) => dir.replaceAll("\\", "/") === folder),
         "board18-18Test-1.0",
       );
       expect(mocks.archive.finalize).toHaveBeenCalledOnce();
