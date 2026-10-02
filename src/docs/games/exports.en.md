@@ -30,6 +30,7 @@ Every option is optional, leave out what you do not want to set.
 | `docs`        | `--docs`                        | a list of pages: `background`, `cards`, `charters`, `map`, `market`, `par`, `revenue`, `tile-manifest`, `tiles` and `tokens` | every page of the game                                                           |
 | `layouts`     | `--layouts`                     | `all`: a file for every layout of the cards, tiles and tokens, `current`: only the layout of the config                      | the `export.allLayouts` setting of the config                                    |
 | `paginated`   | `--paginated`, `--no-paginated` | `true` or `false`: also export the paginated pdfs                                                                            | `false` for `maker export`, `true` in the app                                    |
+| `background`  | `--background`                  | `transparent` or `white`: the background of the png and Board18 images, tokens and tiles are always transparent              | `transparent`                                                                    |
 | `variation`   | `--variation`                   | the number of a map variation, 0 is the first (`--variation all` for every one)                                              | every variation                                                                  |
 | `png.dpi`     | `--dpi`                         | a whole number from 1 to 300                                                                                                 | `300`, the size the images print at                                              |
 | `b18.version` | `--b18-version`                 | the version of the Board18 box                                                                                               | `1.0`                                                                            |
@@ -72,6 +73,7 @@ file:
 | `docs`        | `--docs map,cards` (list the pages you want)  | the _Documents_ checkboxes                    |
 | `layouts`     | `--layouts all` or `--layouts current`        | _Every layout of a sheet_                     |
 | `paginated`   | `--paginated` or `--no-paginated`             | _Paginated pdfs_                              |
+| `background`  | `--background white`                          | _Image background_                            |
 | `variation`   | `--variation 0` or `--variation all`          | _Map variation_ (a game with variations only) |
 | `png.dpi`     | `--dpi 96`                                    | _PNG resolution (dpi)_                        |
 | `b18.version` | `--b18-version 2.0` (`maker b18 <game> 2.0`)  | _Board18 version_                             |

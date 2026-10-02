@@ -93,6 +93,7 @@ export const createCapture = ({
   input,
   dpi,
   maxPixels,
+  background,
   timeout = TIMEOUT,
 }) => {
   const idle = [];
@@ -108,7 +109,7 @@ export const createCapture = ({
     ) {
       throw new Error(`${docPath(job.doc)} has nothing to show for this game`);
     }
-    return capture(slot, job, { dpi, maxPixels });
+    return capture(slot, job, { dpi, maxPixels, background });
   };
 
   return async (job) => {

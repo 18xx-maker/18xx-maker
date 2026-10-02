@@ -11,6 +11,7 @@ import { DOCS } from "./select.js";
 
 export const FORMATS = ["pdf", "png", "b18"];
 export const LAYOUTS = ["all", "current"];
+export const BACKGROUNDS = ["transparent", "white"];
 
 // What an export does when nothing says otherwise. Not set: docs (every
 // page), layouts (the export.allLayouts setting of the config), variation
@@ -18,6 +19,7 @@ export const LAYOUTS = ["all", "current"];
 export const DEFAULTS = {
   formats: ["pdf"],
   paginated: false,
+  background: "transparent",
   png: { dpi: MAX_DPI },
   b18: { version: "1.0" },
 };
@@ -29,7 +31,7 @@ const isList = (value, valid) =>
 const isText = (value) => typeof value === "string" && value.length > 0;
 
 // The valid options of a layer, in the shape of the `exports` field:
-//   { formats, docs, layouts, paginated, variation,
+//   { formats, docs, layouts, paginated, background, variation,
 //     png: { dpi }, b18: { version, author } }
 // What is left out, undefined or not valid is not in the result. The schema
 // of the game rejects invalid options of a game file; a game that the app
@@ -42,6 +44,9 @@ export const cleanOptions = (layer) => {
   if (isList(given.docs, DOCS)) out.docs = [...new Set(given.docs)];
   if (LAYOUTS.includes(given.layouts)) out.layouts = given.layouts;
   if (typeof given.paginated === "boolean") out.paginated = given.paginated;
+  if (BACKGROUNDS.includes(given.background)) {
+    out.background = given.background;
+  }
   // null is a choice of every variation, that wins over the variation of a
   // game (resolveExportOptions turns it back into no variation)
   if (given.variation === null) out.variation = null;
@@ -72,7 +77,8 @@ const merge = (low, high) => ({
 //             every variation, also when the game has one)
 //   defaults  the defaults of the caller, on top of DEFAULTS (the app has
 //             paginated pdfs by default, maker export does not)
-// Returns every option: { formats, docs, layouts, paginated, variation,
+// Returns every option: { formats, docs, layouts, paginated, background,
+// variation,
 // png: { dpi }, b18: { version, author } }
 export const resolveExportOptions = ({ game, user, defaults } = {}) => {
   const options = [defaults, game, user]

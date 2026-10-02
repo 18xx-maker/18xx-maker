@@ -372,6 +372,14 @@ describe("validateRequest", () => {
     bad({ jobs: "x" }, "no files");
   });
 
+  it("takes a background of transparent or white", () => {
+    expect(() => validateRequest(request())).not.toThrow();
+    expect(() =>
+      validateRequest(request({ background: "white" })),
+    ).not.toThrow();
+    bad({ background: "black" }, "transparent or white");
+  });
+
   it("refuses a resolution over the highest", () => {
     bad({ dpi: 301 }, "1 to 300 dpi");
     bad({ dpi: 0 }, "1 to 300 dpi");

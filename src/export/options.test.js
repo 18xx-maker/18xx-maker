@@ -15,6 +15,7 @@ describe("resolveExportOptions", () => {
     expect(resolveExportOptions()).toEqual({
       formats: ["pdf"],
       paginated: false,
+      background: "transparent",
       png: { dpi: 300 },
       b18: { version: "1.0" },
     });
@@ -29,6 +30,7 @@ describe("resolveExportOptions", () => {
     ).toEqual({
       formats: ["pdf"],
       paginated: true,
+      background: "transparent",
       png: { dpi: 300 },
       b18: { version: "1.0", author: "Me" },
     });
@@ -40,6 +42,7 @@ describe("resolveExportOptions", () => {
       docs: ["map"],
       layouts: "all",
       paginated: true,
+      background: "white",
       variation: 1,
       png: { dpi: 150 },
       b18: { version: "2.0", author: "Game" },
@@ -53,6 +56,7 @@ describe("resolveExportOptions", () => {
         user: {
           formats: ["pdf"],
           layouts: "current",
+          background: "transparent",
           png: { dpi: 72 },
           b18: { author: "User" },
         },
@@ -62,6 +66,7 @@ describe("resolveExportOptions", () => {
       docs: ["map"],
       layouts: "current",
       paginated: true,
+      background: "transparent",
       variation: 1,
       png: { dpi: 72 },
       b18: { version: "2.0", author: "User" },
@@ -75,6 +80,18 @@ describe("resolveExportOptions", () => {
         user: { paginated: false },
       }).paginated,
     ).toBe(false);
+  });
+
+  it("lets the user choose the background over the game", () => {
+    expect(
+      resolveExportOptions({
+        game: { background: "white" },
+        user: { background: "transparent" },
+      }).background,
+    ).toBe("transparent");
+    expect(
+      resolveExportOptions({ game: { background: "white" } }).background,
+    ).toBe("white");
   });
 
   it("lets the user choose every variation over the variation of the game", () => {
@@ -109,6 +126,7 @@ describe("resolveExportOptions", () => {
         docs: ["nothing"],
         layouts: "some",
         paginated: "yes",
+        background: "black",
         variation: -1,
         png: { dpi: 301 },
         b18: { version: "", author: 4 },
@@ -118,6 +136,7 @@ describe("resolveExportOptions", () => {
     expect(options).toEqual({
       formats: ["pdf"],
       paginated: false,
+      background: "transparent",
       png: { dpi: 300 },
       b18: { version: "1.0" },
     });

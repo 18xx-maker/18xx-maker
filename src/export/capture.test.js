@@ -123,6 +123,33 @@ describe("b18", () => {
     ]);
   });
 
+  it("is white when asked, but not a transparent document", async () => {
+    const white = adapter();
+    await capture(white, job(), { background: "white" });
+    expect(white.calls).toContainEqual([
+      "Emulation.setDefaultBackgroundColorOverride",
+      { color: { r: 255, g: 255, b: 255, a: 1 } },
+    ]);
+
+    const kept = adapter();
+    await capture(
+      kept,
+      {
+        format: "b18",
+        doc: doc({ viewport: { w: 60, h: 90 }, transparent: true }),
+      },
+      { background: "white" },
+    );
+    expect(kept.calls).toContainEqual([
+      "Emulation.setDefaultBackgroundColorOverride",
+      { color: { r: 0, g: 0, b: 0, a: 0 } },
+    ]);
+    expect(kept.calls).not.toContainEqual([
+      "Emulation.setDefaultBackgroundColorOverride",
+      { color: { r: 255, g: 255, b: 255, a: 1 } },
+    ]);
+  });
+
   it("is not dpi dependent", async () => {
     const a = adapter();
 

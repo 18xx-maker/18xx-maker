@@ -24,6 +24,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 
 import { MAX_DPI } from "@/export/capture.js";
+import { BACKGROUNDS } from "@/export/options.js";
 import { createAlert } from "@/state";
 import { exportDefaults, exportPages, planExport } from "@/util/exportPlan";
 
@@ -70,6 +71,7 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
     initial.variation === null ? ALL : String(initial.variation),
   );
   const [dpi, setDpi] = useState(String(initial.dpi));
+  const [background, setBackground] = useState(initial.background);
   const [version, setVersion] = useState(initial.b18.version);
   const [author, setAuthor] = useState(initial.b18.author);
   const [out, setOut] = useState();
@@ -85,6 +87,7 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
     setPaginated(initial.paginated);
     setVariation(initial.variation === null ? ALL : String(initial.variation));
     setDpi(String(initial.dpi));
+    setBackground(initial.background);
     setVersion(initial.b18.version);
     setAuthor(initial.b18.author);
   };
@@ -112,6 +115,7 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
           paginated,
           variation: variation === ALL ? null : Number(variation),
           dpi: Number(dpiValid ? dpi : MAX_DPI),
+          background,
           b18: { version, author },
         }),
         out,
@@ -256,6 +260,32 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
               }
               onChange={(event) => setDpi(event.target.value)}
             />
+          </Field>
+
+          <Field
+            id="export-background"
+            label={t("export.background")}
+            description={t("export.backgroundDescription")}
+          >
+            <Select
+              value={background}
+              disabled={running || !formats.some((f) => f !== "pdf")}
+              onValueChange={setBackground}
+            >
+              <SelectTrigger
+                id="export-background"
+                aria-describedby="export-background-description"
+              >
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {BACKGROUNDS.map((value) => (
+                  <SelectItem key={value} value={value}>
+                    {t(`export.${value}`)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </Field>
 
           {formats.includes("b18") && (

@@ -153,6 +153,36 @@ test.describe("maker export 18Test", () => {
     expect(await cornerAlpha(page, path.join(dir, "18test-map.png"))).toBe(0);
   });
 
+  test("makes the background white with --background white, not tiles", async ({
+    page,
+  }) => {
+    const result = maker(
+      out,
+      "18Test",
+      "--format",
+      "png",
+      "--docs",
+      "map,tiles",
+      "--background",
+      "white",
+    );
+    expect(result.status, result.stderr).toBe(0);
+
+    const dir = path.join(out, "18Test");
+    expect(await cornerAlpha(page, path.join(dir, "18test-map.png"))).toBe(255);
+    expect(await cornerAlpha(page, path.join(dir, "18test-tile-1.png"))).toBe(
+      0,
+    );
+  });
+
+  test("refuses another background", () => {
+    const result = maker(out, "18Test", "--background", "black");
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain(
+      "--background must be transparent or white",
+    );
+  });
+
   test("exports a game file", () => {
     const result = maker(out, fixture, "--format", "png", "--docs", "map");
     expect(result.status, result.stderr).toBe(0);

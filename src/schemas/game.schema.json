@@ -521,6 +521,11 @@
           "type": "boolean",
           "description": "Also export the paginated pdfs, like --paginated. Defaults to false for maker export and true in the app."
         },
+        "background": {
+          "type": "string",
+          "description": "The background of the png images and the images of a Board18 box, like --background. transparent or white; tokens and tiles are always transparent. pdf files are not affected. Defaults to transparent.",
+          "enum": ["transparent", "white"]
+        },
         "variation": {
           "type": "integer",
           "description": "Only export this map variation (0 is the first), like --variation. All variations when left out.",

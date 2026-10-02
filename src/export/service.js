@@ -1,4 +1,5 @@
 import { MAX_DPI } from "./capture.js";
+import { BACKGROUNDS } from "./options.js";
 import { createPageCapture } from "./page.js";
 import { runExport } from "./run.js";
 
@@ -17,7 +18,7 @@ import { runExport } from "./run.js";
 // pageOptions dpi limits and timeouts for createPageCapture
 //
 // A request is what the renderer plans (see util/exportPlan):
-//   { id, game, config, jobs, dpi, single?, out?, b18?: { names, json } }
+//   { id, game, config, jobs, dpi, background?, single?, out?, b18?: { names, json } }
 // where jobs is [{ doc, format, path }] (see exportJobs), config is the layers
 // below the game's own, and out is a folder chosen before (otherwise a dialog
 // asks, for a file when single).
@@ -40,7 +41,7 @@ const invalid = (message) => new Error(`Invalid export: ${message}`);
 
 export const validateRequest = (request) => {
   if (!request || typeof request !== "object") throw invalid("no request");
-  const { game, jobs, dpi = MAX_DPI, single, b18 } = request;
+  const { game, jobs, dpi = MAX_DPI, background, single, b18 } = request;
   if (!game || typeof game !== "object") throw invalid("no game");
   if (typeof request.id !== "string" || request.id === "") {
     throw invalid("no game id");
@@ -49,6 +50,9 @@ export const validateRequest = (request) => {
   if (single && jobs.length !== 1) throw invalid("one file expected");
   if (!(dpi >= 1 && dpi <= MAX_DPI)) {
     throw invalid(`the resolution must be 1 to ${MAX_DPI} dpi`);
+  }
+  if (background !== undefined && !BACKGROUNDS.includes(background)) {
+    throw invalid("the background must be transparent or white");
   }
   for (const job of jobs) {
     if (
@@ -117,7 +121,7 @@ export const createExportService = ({
 
     try {
       const where = await destination(request);
-      const { dpi = MAX_DPI, b18 } = request;
+      const { dpi = MAX_DPI, background, b18 } = request;
       if (!where || signal.aborted) {
         return { done: 0, total: 0, failed: [], cancelled: true };
       }
@@ -149,7 +153,12 @@ export const createExportService = ({
         ),
       );
       stopped.catch(() => {});
-      const page = createPageCapture({ pool, dpi, ...pageOptions });
+      const page = createPageCapture({
+        pool,
+        dpi,
+        background,
+        ...pageOptions,
+      });
 
       let result;
       try {

@@ -77,6 +77,10 @@ program
     "not the paginated pdfs, when the game file has them",
   )
   .option(
+    "--background <background>",
+    "transparent or white: the background of the PNG and Board 18 images (default: transparent)",
+  )
+  .option(
     "--variation <n>",
     "only this map variation, or all for every one (0 is the first)",
   )

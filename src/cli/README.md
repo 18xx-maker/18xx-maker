@@ -57,22 +57,23 @@ pnpm maker help b18
 pnpm maker export <game|path.json> --format pdf,png,b18
 ```
 
-| Option                    | Use                                                                          |
-| ------------------------- | ---------------------------------------------------------------------------- |
-| `-f, --format <formats>`  | `pdf`, `png` and `b18` separated by commas, default `pdf`                    |
-| `--docs <pages>`          | only these pages: `map,tiles,cards`, also for their PNGs                     |
-| `--layouts <layouts>`     | `all`: a sheet for every layout of the cards, tiles and tokens, or `current` |
-| `--paginated`             | also the paginated PDFs (`print` always has them)                            |
-| `--no-paginated`          | not the paginated PDFs, when the game file has them                          |
-| `--variation <n>`         | only this map variation, `all` for every one                                 |
-| `--config <file>`         | a config file on top of `src/config.json` (the settings to change)           |
-| `--dpi <dpi>`             | resolution of PNGs, 1 to 300 (the default and the highest)                   |
-| `-o, --out <folder>`      | the folder that holds the game folders, default `render`                     |
-| `-j, --jobs <n>`          | files captured at the same time, default 1                                   |
-| `-a, --all`               | every bundled game                                                           |
-| `--b18-version <version>` | the Board 18 version of the box, default `1.0`                               |
-| `--b18-author <author>`   | the Board 18 author, default `b18.author` of `maker config`                  |
-| `-d, --debug`             | serve the site on port 9000 and wait, to look at pages                       |
+| Option                    | Use                                                                                                                    |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `-f, --format <formats>`  | `pdf`, `png` and `b18` separated by commas, default `pdf`                                                              |
+| `--docs <pages>`          | only these pages: `map,tiles,cards`, also for their PNGs                                                               |
+| `--layouts <layouts>`     | `all`: a sheet for every layout of the cards, tiles and tokens, or `current`                                           |
+| `--paginated`             | also the paginated PDFs (`print` always has them)                                                                      |
+| `--no-paginated`          | not the paginated PDFs, when the game file has them                                                                    |
+| `--background <bg>`       | `transparent` (default) or `white`: the background of PNG and Board 18 images; tokens and tiles are always transparent |
+| `--variation <n>`         | only this map variation, `all` for every one                                                                           |
+| `--config <file>`         | a config file on top of `src/config.json` (the settings to change)                                                     |
+| `--dpi <dpi>`             | resolution of PNGs, 1 to 300 (the default and the highest)                                                             |
+| `-o, --out <folder>`      | the folder that holds the game folders, default `render`                                                               |
+| `-j, --jobs <n>`          | files captured at the same time, default 1                                                                             |
+| `-a, --all`               | every bundled game                                                                                                     |
+| `--b18-version <version>` | the Board 18 version of the box, default `1.0`                                                                         |
+| `--b18-author <author>`   | the Board 18 author, default `b18.author` of `maker config`                                                            |
+| `-d, --debug`             | serve the site on port 9000 and wait, to look at pages                                                                 |
 
 ### Options in the game file
 
@@ -101,6 +102,7 @@ field. The game schema checks it (`pnpm validate`, `maker validate`, and
 | `docs`        | `--docs`        | a list of pages (`map`, `tiles`, `cards`, ...) |
 | `layouts`     | `--layouts`     | `all` or `current`                             |
 | `paginated`   | `--paginated`   | `true` or `false`                              |
+| `background`  | `--background`  | `transparent` or `white`                       |
 | `variation`   | `--variation`   | a map variation, 0 or more                     |
 | `png.dpi`     | `--dpi`         | a whole number from 1 to 300                   |
 | `b18.version` | `--b18-version` | the Board 18 version                           |

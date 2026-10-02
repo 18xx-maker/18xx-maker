@@ -172,6 +172,32 @@ describe("export options", () => {
     expect(requested().out).toBeUndefined();
   });
 
+  it("exports with a transparent background unless it is set to white", async () => {
+    const { user, panel } = await openOptions();
+    await user.click(checkbox(panel, "PNG images"));
+    const background = within(panel).getByRole("combobox", {
+      name: "Image background",
+    });
+    expect(background).toHaveTextContent("Transparent");
+
+    await user.click(exportButton(panel));
+    await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
+    expect(requested().background).toBe("transparent");
+  });
+
+  it("exports with a white background", async () => {
+    const { user, panel } = await openOptions();
+    await user.click(checkbox(panel, "PNG images"));
+    await user.click(
+      within(panel).getByRole("combobox", { name: "Image background" }),
+    );
+    await user.click(await screen.findByRole("option", { name: "White" }));
+
+    await user.click(exportButton(panel));
+    await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
+    expect(requested().background).toBe("white");
+  });
+
   it("stops at a resolution over 300 dpi", async () => {
     const { user, panel } = await openOptions();
     await user.click(checkbox(panel, "PNG images"));

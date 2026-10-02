@@ -143,12 +143,15 @@ const captureElement = async (adapter, { selector }, dpi, maxPixels) => {
 //   pdf  the page printed on the paper of its css
 //   png  the element of the document, at dpi (at most MAX_DPI)
 //   b18  a screenshot of a viewport the size of the image
+// The background of an image is transparent, or opaque white when background
+// is "white", except for the documents with capture.transparent (tokens and
+// tiles).
 // The media is always print, and the page is left as it was found: the device
 // size and the background are reset.
 export const capture = async (
   adapter,
   { doc, format },
-  { dpi = MAX_DPI, maxPixels = MAX_PIXELS } = {},
+  { dpi = MAX_DPI, maxPixels = MAX_PIXELS, background = "transparent" } = {},
 ) => {
   if (!(dpi >= 1 && dpi <= MAX_DPI)) {
     throw new Error(`The resolution must be 1 to ${MAX_DPI} dpi`);
@@ -158,11 +161,14 @@ export const capture = async (
   if (format === "pdf") return printToPdf(adapter);
 
   try {
-    // Every image is transparent where the page paints nothing: without the
-    // override the page is white, or the color of its color-scheme (black in
-    // a dark theme)
+    // An image is transparent where the page paints nothing, or white: without
+    // the override the page is white, or the color of its color-scheme (black
+    // in a dark theme). Tokens and tiles are always transparent.
+    const white = background === "white" && !doc.capture.transparent;
     await adapter.send("Emulation.setDefaultBackgroundColorOverride", {
-      color: { r: 0, g: 0, b: 0, a: 0 },
+      color: white
+        ? { r: 255, g: 255, b: 255, a: 1 }
+        : { r: 0, g: 0, b: 0, a: 0 },
     });
     return format === "png"
       ? await captureElement(adapter, doc.capture, dpi, maxPixels)

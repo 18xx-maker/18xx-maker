@@ -58,7 +58,8 @@ const appDefaults = (game) => ({
 // The options of an export of the game, in the order of the `exports` field of
 // the game (see resolveExportOptions): the defaults of the app, the game's
 // `exports` and what the user chose. userOptions are
-//   { formats, docs, layouts, paginated, dpi, variation, b18: { version, author } }
+//   { formats, docs, layouts, paginated, background, dpi, variation,
+//     b18: { version, author } }
 // with what is left out coming from the layers below. A variation of null is
 // every variation, also when the game's `exports` has one.
 const resolveOptions = (game, layers, userOptions = {}) => {
@@ -90,6 +91,7 @@ export const exportDefaults = (game, layers) => {
     docs: options.docs ? pages.filter((p) => options.docs.includes(p)) : pages,
     layouts: options.layouts ?? (allLayouts(game, layers) ? "all" : "current"),
     paginated: options.paginated,
+    background: options.background,
     variation:
       Array.isArray(game.map) && options.variation < game.map.length
         ? options.variation
@@ -100,13 +102,15 @@ export const exportDefaults = (game, layers) => {
 };
 
 // What the main process exports for a game:
-//   { id, game, config, jobs, dpi, title, b18 }
+//   { id, game, config, jobs, dpi, background, title, b18 }
 // see createExportService. The options are
 //   formats    "pdf", "png", "b18"
 //   docs       the pages to export (exportPages), all when left out
 //   layouts    "all" for a sheet of every layout, "current" for the one config
 //              has, as config says when left out
 //   paginated  also the paginated pdfs
+//   background "transparent" or "white", of the png and b18 images (tokens and
+//              tiles are always transparent)
 //   dpi        of the pngs, at most MAX_DPI
 //   variation  only this map variation
 //   b18        { version, author } of the Board 18 box
@@ -150,6 +154,7 @@ export const planExport = (game, layers, userOptions) => {
     config: mergeDeepRight(layers.userConfig, layers.storedConfig),
     jobs,
     dpi: options.png.dpi,
+    background: options.background,
     b18: box,
   };
 };
@@ -171,7 +176,9 @@ export const planSingle = (game, layers, { pathname, search }, format) => {
     game,
     config: mergeDeepRight(layers.userConfig, layers.storedConfig),
     jobs: [{ doc, format, path: fileName(game, doc, format) }],
-    dpi: resolveOptions(game, layers).png.dpi,
+    ...(({ png, background }) => ({ dpi: png.dpi, background }))(
+      resolveOptions(game, layers),
+    ),
     single: true,
   };
 };

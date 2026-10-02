@@ -207,6 +207,7 @@ describe("planExport with the exports of a game", () => {
         docs: ["map", "tiles"],
         layouts: "all",
         paginated: false,
+        background: "white",
         png: { dpi: 120 },
         b18: { version: "4", author: "Game" },
       }),
@@ -218,6 +219,7 @@ describe("planExport with the exports of a game", () => {
       docs: ["map", "tiles"],
       layouts: "all",
       paginated: false,
+      background: "white",
       variation: null,
       dpi: 120,
       b18: { version: "4", author: "Game" },
@@ -235,6 +237,24 @@ describe("planExport with the exports of a game", () => {
       b18: { version: "1.0", author: expect.any(String) },
     });
     expect(defaults.docs).toEqual(exportPages(game, layers()));
+  });
+
+  it("plans the background of the game, and the one the user chooses", () => {
+    const withGame = { ...game, exports: { background: "white" } };
+
+    expect(planExport(game, layers(), {}).background).toBe("transparent");
+    expect(planExport(withGame, layers(), {}).background).toBe("white");
+    expect(
+      planExport(withGame, layers(), { background: "transparent" }).background,
+    ).toBe("transparent");
+    expect(
+      planSingle(
+        withGame,
+        layers(),
+        { pathname: "/games/18Test/map", search: "" },
+        "png",
+      ).background,
+    ).toBe("white");
   });
 
   it("uses the dpi of the game for a single png", () => {

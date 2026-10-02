@@ -68,7 +68,7 @@ const screenshots = () => {
   for (const [method, params] of mocks.session.send.mock.calls) {
     if (method === "Emulation.setDeviceMetricsOverride") size = params;
     if (method === "Emulation.setDefaultBackgroundColorOverride") {
-      transparent = !!params;
+      transparent = params?.color?.a === 0;
     }
     if (method === "Page.captureScreenshot") {
       found.push({

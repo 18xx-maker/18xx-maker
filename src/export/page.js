@@ -29,6 +29,7 @@ export const createPageCapture = ({
   pool,
   dpi = MAX_DPI,
   maxPixels = MAX_PIXELS,
+  background,
   timeout = TIMEOUT,
   pollMs = 25,
 }) => {
@@ -38,7 +39,7 @@ export const createPageCapture = ({
     if ((await renderState(slot, stopped, pollMs)) !== "ready") {
       throw new Error(`${path} has nothing to show for this game`);
     }
-    return capture(slot, job, { dpi, maxPixels });
+    return capture(slot, job, { dpi, maxPixels, background });
   };
 
   return async (job) => {

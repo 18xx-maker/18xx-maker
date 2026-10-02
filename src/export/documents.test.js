@@ -76,15 +76,26 @@ describe("documents", () => {
     expect(byId(docs, "background")).toMatchObject({
       formats: ["pdf", "png"],
       size: { widthIn: 8, heightIn: 10.5 },
-      capture: { selector: ".printElement", viewport: null },
+      capture: {
+        selector: ".printElement",
+        viewport: null,
+        transparent: false,
+      },
     });
     expect(byId(docs, "market").size.widthIn).toBeCloseTo(13.4);
     expect(byId(docs, "tiles/1")).toMatchObject({
       mode: "item",
       formats: ["png"],
       size: { widthIn: 2, heightIn: 2 },
-      capture: { selector: ".printElement", viewport: null },
+      capture: {
+        selector: ".printElement",
+        viewport: null,
+        transparent: true,
+      },
     });
+    expect(byId(docs, "tokens/0").capture.transparent).toBe(true);
+    expect(byId(docs, "tokens/20").capture.transparent).toBe(true);
+    expect(byId(docs, "market").capture.transparent).toBe(false);
     expect(byId(docs, "tokens/0").size).toEqual({
       widthIn: 2.4,
       heightIn: 0.6,

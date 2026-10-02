@@ -24,7 +24,11 @@ import { b18Spec } from "#export/b18";
 import { MAX_DPI } from "#export/capture";
 import { documents } from "#export/documents";
 import { exportJobs } from "#export/names";
-import { layoutsOfConfig, resolveExportOptions } from "#export/options";
+import {
+  BACKGROUNDS,
+  layoutsOfConfig,
+  resolveExportOptions,
+} from "#export/options";
 import { renderGame, renderSlug } from "#export/render";
 import { DOCS, selectDocs } from "#export/select";
 import { writeZip } from "#export/zip";
@@ -124,6 +128,12 @@ const flagOptions = (opts) => {
       throw new UsageError(`--layouts must be all or current`);
     }
     user.layouts = opts.layouts;
+  }
+  if (opts.background !== undefined) {
+    if (!BACKGROUNDS.includes(opts.background)) {
+      throw new UsageError("--background must be transparent or white");
+    }
+    user.background = opts.background;
   }
   if (opts.paginated !== undefined) user.paginated = !!opts.paginated;
   if (opts.variation === "all") {
@@ -235,6 +245,7 @@ const command = async (game, opts = {}) => {
             browser,
             baseUrl,
             dpi: options.png.dpi,
+            background: options.background,
             // The page is given the game and the config of the layers below
             // the game's own, like the sizes are planned with
             input: {
