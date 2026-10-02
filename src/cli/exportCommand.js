@@ -1,4 +1,5 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { userInfo } from "node:os";
 import path from "node:path";
 
 import { mergeDeepRight } from "ramda";
@@ -23,6 +24,7 @@ import { b18Spec } from "#export/b18";
 import { MAX_DPI } from "#export/capture";
 import { documents } from "#export/documents";
 import { exportJobs } from "#export/names";
+import { layoutsOfConfig, resolveExportOptions } from "#export/options";
 import { renderGame, renderSlug } from "#export/render";
 import { DOCS, selectDocs } from "#export/select";
 import { writeZip } from "#export/zip";
@@ -46,7 +48,7 @@ const list = (value, valid, what) => {
 };
 
 // The resolution of --dpi: 1 to 300
-export const parseDpi = (value = MAX_DPI) => {
+export const parseDpi = (value) => {
   const dpi = Number(value);
   if (!Number.isInteger(dpi) || dpi < 1) {
     throw new UsageError(`--dpi must be a whole number from 1 to ${MAX_DPI}`);
@@ -109,8 +111,38 @@ export const loadConfigFile = (file) => {
   return config;
 };
 
-// maker export: pdf, png and Board 18 files of a game
-//   format      "pdf,png,b18"
+// What the flags of maker export set, as the options of the `exports` field
+// of a game (see resolveExportOptions). A flag that was not given is not set,
+// so it does not hide the `exports` of the game.
+const flagOptions = (opts) => {
+  const user = {};
+  if (opts.format !== undefined)
+    user.formats = list(opts.format, FORMATS, "format");
+  if (opts.docs !== undefined) user.docs = list(opts.docs, DOCS, "page");
+  if (opts.layouts !== undefined) {
+    if (!["all", "current"].includes(opts.layouts)) {
+      throw new UsageError(`--layouts must be all or current`);
+    }
+    user.layouts = opts.layouts;
+  }
+  if (opts.paginated) user.paginated = true;
+  if (opts.variation !== undefined) {
+    const variation = Number(opts.variation);
+    if (!(Number.isInteger(variation) && variation >= 0)) {
+      throw new UsageError("--variation must be a whole number");
+    }
+    user.variation = variation;
+  }
+  if (opts.dpi !== undefined) user.png = { dpi: parseDpi(opts.dpi) };
+  if (opts.b18Version || opts.b18Author) {
+    user.b18 = { version: opts.b18Version, author: opts.b18Author };
+  }
+  return user;
+};
+
+// maker export: pdf, png and Board 18 files of a game. Every option can also
+// be set in the game file (its `exports` field), what is given here wins.
+//   format      "pdf,png,b18", pdf
 //   docs        "map,cards": only these pages
 //   layouts     "all": a sheet for every layout
 //   paginated   also the paginated pdfs
@@ -120,27 +152,11 @@ export const loadConfigFile = (file) => {
 //   out         the folder the folder of the game goes in
 //   jobs        how many files are captured at the same time
 //   all         every bundled game
-//   b18Version, b18Author
+//   b18Version, b18Author  1.0, the author of the user's config or their name
 //   debug       serve the site and wait
 const command = async (game, opts = {}) => {
-  const formats = list(opts.format || "pdf", FORMATS, "format");
-  const docs = opts.docs && list(opts.docs, DOCS, "page");
-  if (
-    opts.layouts !== undefined &&
-    !["all", "current"].includes(opts.layouts)
-  ) {
-    throw new UsageError(`--layouts must be all or current`);
-  }
-  const dpi = parseDpi(opts.dpi);
+  const user = flagOptions(opts);
   const jobs = parseCount(opts.jobs, "--jobs", 1);
-  const variation =
-    opts.variation === undefined ? undefined : Number(opts.variation);
-  if (
-    variation !== undefined &&
-    !(Number.isInteger(variation) && variation >= 0)
-  ) {
-    throw new UsageError("--variation must be a whole number");
-  }
 
   if (opts.debug) {
     setup();
@@ -168,7 +184,7 @@ const command = async (game, opts = {}) => {
   }
   console.log(`Games: ${names.join(", ")}`);
 
-  const user = opts.config ? loadConfigFile(opts.config) : {};
+  const userConfig = opts.config ? loadConfigFile(opts.config) : {};
   const data = loadExportData();
   const failed = [];
   const root = opts.out || "render";
@@ -178,22 +194,35 @@ const command = async (game, opts = {}) => {
   const resolved = [];
   for (const name of names) {
     const found = await resolveGame(name);
+    // The flags on top of the `exports` of the game
+    const options = resolveExportOptions({
+      defaults: { b18: { author: userInfo().username } },
+      game: found.game.exports,
+      // The config of the user is between the game and the flags
+      user: {
+        layouts: layoutsOfConfig(mergeDeepRight(customConfig, userConfig)),
+        ...user,
+      },
+    });
     if (
-      variation !== undefined &&
+      options.variation !== undefined &&
       Array.isArray(found.game.map) &&
-      variation >= found.game.map.length
+      options.variation >= found.game.map.length
     ) {
-      throw new UsageError(`${found.id} has no map variation ${variation}`);
+      throw new UsageError(
+        `${found.id} has no map variation ${options.variation}`,
+      );
     }
-    resolved.push(found);
+    resolved.push({ ...found, options });
   }
 
   await withBrowser(async ({ browser, baseUrl }) => {
-    for (const { id, game: gameDef } of resolved) {
-      let config = loadGameConfig(gameDef, user);
-      if (opts.layouts) {
+    for (const { id, game: gameDef, options } of resolved) {
+      const { formats, docs, paginated, variation } = options;
+      let config = loadGameConfig(gameDef, userConfig);
+      if (options.layouts) {
         config = mergeDeepRight(config, {
-          export: { allLayouts: opts.layouts === "all" },
+          export: { allLayouts: options.layouts === "all" },
         });
       }
       const exportData = { ...data, slug: renderSlug(id) };
@@ -203,13 +232,13 @@ const command = async (game, opts = {}) => {
           capture: createCapture({
             browser,
             baseUrl,
-            dpi,
+            dpi: options.png.dpi,
             // The page is given the game and the config of the layers below
             // the game's own, like the sizes are planned with
             input: {
               id,
               game: renderGame(gameDef, id),
-              config: mergeDeepRight(customConfig, user),
+              config: mergeDeepRight(customConfig, userConfig),
             },
           }),
           jobs: list,
@@ -225,7 +254,7 @@ const command = async (game, opts = {}) => {
               gameDef,
               selectDocs(documents(gameDef, config, exportData), {
                 docs,
-                paginated: opts.paginated,
+                paginated,
                 variation,
               }),
               files,
@@ -238,8 +267,8 @@ const command = async (game, opts = {}) => {
         const spec = b18Spec(gameDef, config, exportData, {
           id,
           slug: renderSlug(id),
-          version: opts.b18Version || "1.0",
-          author: opts.b18Author,
+          version: options.b18.version,
+          author: options.b18.author,
           variation,
         });
 

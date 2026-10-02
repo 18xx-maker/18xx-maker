@@ -450,8 +450,7 @@ describe("export usage errors", () => {
 });
 
 describe("parseDpi", () => {
-  it("is 300 by default and takes 1 to 300", () => {
-    expect(parseDpi()).toBe(300);
+  it("takes 1 to 300", () => {
     expect(parseDpi("1")).toBe(1);
     expect(parseDpi("300")).toBe(300);
     expect(parseDpi(150)).toBe(150);
@@ -505,5 +504,139 @@ describe("game files", () => {
     expect(await resolveGame("18Test")).toMatchObject({ id: "18Test" });
     expect(loadGame).toHaveBeenCalledWith("18Test");
     expect(await resolveGame(gameFile("x.json"))).toMatchObject({ id: "x" });
+  });
+});
+
+describe("the exports of a game file", () => {
+  const exporting = (exports, name = "boxed.json") =>
+    gameFile(name, { exports });
+  const boxed = (...parts) => path.join(tmp, "render", "boxed", ...parts);
+  const boxedFiles = (dir = boxed()) =>
+    fs.existsSync(dir) ? fs.readdirSync(dir).sort() : [];
+
+  it("sets every option of the export", async () => {
+    const file = exporting({
+      formats: ["png", "b18"],
+      docs: ["background"],
+      png: { dpi: 96 },
+      b18: { version: "5.0", author: "The File" },
+    });
+
+    await exportCommand(file, {});
+
+    expect(boxedFiles()).toEqual([
+      "18test-background.png",
+      "board18-boxed-5.0",
+      "board18-boxed-5.0.zip",
+    ]);
+    expect(
+      readPng(new Uint8Array(fs.readFileSync(boxed("18test-background.png")))),
+    ).toMatchObject({ pixelsPerMeter: 3780 });
+    const json = JSON.parse(
+      fs.readFileSync(boxed("board18-boxed-5.0/boxed-5.0.json"), "utf-8"),
+    );
+    expect(json).toMatchObject({ version: "5.0", author: "The File" });
+  });
+
+  it("sets the paginated pdfs and every layout", async () => {
+    const file = exporting({
+      docs: ["map", "cards"],
+      paginated: true,
+      layouts: "all",
+    });
+
+    await exportCommand(file, {});
+
+    expect(boxedFiles()).toEqual(
+      expect.arrayContaining([
+        "18test-map-paginated.pdf",
+        "18test-cards-free.pdf",
+      ]),
+    );
+  });
+
+  it("sets the map variation", async () => {
+    const base = JSON.parse(
+      fs.readFileSync(path.join(cwd, "src/data/games/18Test.json"), "utf-8"),
+    );
+    const file = gameFile("boxed.json", {
+      map: [base.map, base.map],
+      exports: { docs: ["map"], variation: 1 },
+    });
+
+    await exportCommand(file, {});
+    expect(boxedFiles()).toEqual(["18test-map-1.pdf"]);
+
+    fs.writeFileSync(
+      file,
+      JSON.stringify({ ...base, map: [base.map], exports: { variation: 1 } }),
+    );
+    await expect(exportCommand(file, {})).rejects.toThrow(
+      "boxed has no map variation 1",
+    );
+  });
+
+  it("is overridden by the flags", async () => {
+    const file = exporting({
+      formats: ["png"],
+      docs: ["map", "tokens"],
+      png: { dpi: 96 },
+    });
+
+    await exportCommand(file, { format: "pdf", docs: "map" });
+    expect(boxedFiles()).toEqual(["18test-map.pdf"]);
+
+    fs.rmSync(boxed(), { recursive: true });
+    await exportCommand(file, { docs: "background", dpi: "150" });
+    expect(boxedFiles()).toEqual(["18test-background.png"]);
+    expect(
+      readPng(new Uint8Array(fs.readFileSync(boxed("18test-background.png")))),
+    ).toMatchObject({ pixelsPerMeter: 5906 });
+  });
+
+  it("has the box of the flags over the box of the game", async () => {
+    const file = exporting({
+      formats: ["b18"],
+      b18: { version: "5.0", author: "The File" },
+    });
+
+    await exportCommand(file, { b18Version: "6.0", b18Author: "Flag" });
+
+    const json = JSON.parse(
+      fs.readFileSync(boxed("board18-boxed-6.0/boxed-6.0.json"), "utf-8"),
+    );
+    expect(json).toMatchObject({ version: "6.0", author: "Flag" });
+  });
+
+  it("is overridden by the config of the user", async () => {
+    const file = exporting({ docs: ["cards"], layouts: "all" });
+    fs.writeFileSync(
+      "config.json",
+      JSON.stringify({ export: { allLayouts: false } }),
+    );
+
+    await exportCommand(file, { config: "config.json" });
+
+    expect(boxedFiles()).toEqual([
+      `18test-cards-${defaultConfig.cards.layout}.pdf`,
+    ]);
+  });
+
+  it("is not valid with a resolution over 300 dpi", async () => {
+    const file = exporting({ png: { dpi: 301 } });
+
+    await expect(exportCommand(file, {})).rejects.toThrow(
+      /boxed.json is not a valid game:\n#\/exports\/png\/dpi .*should be .300. at maximum/,
+    );
+    expect(chromium.launch).not.toHaveBeenCalled();
+  });
+
+  it("is not valid with an option it does not have", async () => {
+    await expect(
+      exportCommand(exporting({ formats: ["gif"] }), {}),
+    ).rejects.toThrow(/#\/exports\/formats\/0/);
+    await expect(
+      exportCommand(exporting({ pdf: { size: "A4" } }), {}),
+    ).rejects.toThrow(/#\/exports/);
   });
 });

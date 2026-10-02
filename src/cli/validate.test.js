@@ -141,4 +141,59 @@ describe("validate", () => {
     expect(code).toBe(0);
     expect(lines).toEqual([""]);
   });
+
+  describe("the exports of a game", () => {
+    const withExports = (exports) =>
+      writeTmp(
+        "game.json",
+        JSON.stringify({ info: { title: "Game" }, exports }),
+      );
+
+    it("accepts every option", () => {
+      const { code } = run(
+        withExports({
+          formats: ["pdf", "png", "b18"],
+          docs: ["map", "tile-manifest"],
+          layouts: "current",
+          paginated: true,
+          variation: 0,
+          png: { dpi: 300 },
+          b18: { version: "2.0", author: "Me" },
+        }),
+      );
+      expect(code).toBe(0);
+    });
+
+    it("accepts a game without them, and with none set", () => {
+      expect(run(withExports({})).code).toBe(0);
+    });
+
+    it.each([
+      [
+        { png: { dpi: 301 } },
+        "#/exports/png/dpi",
+        /is 301, but should be 300 at maximum/,
+      ],
+      [
+        { png: { dpi: 0 } },
+        "#/exports/png/dpi",
+        /is 0, but should be 1 at minimum/,
+      ],
+      [{ png: { dpi: 1.5 } }, "#/exports/png/dpi", /integer/i],
+      [{ formats: ["gif"] }, "#/exports/formats/0", /one of/i],
+      [{ formats: [] }, "#/exports/formats", /at least 1/i],
+      [{ docs: ["nothing"] }, "#/exports/docs/0", /one of/i],
+      [{ layouts: "some" }, "#/exports/layouts", /one of/i],
+      [{ paginated: "yes" }, "#/exports/paginated", /boolean/i],
+      [{ variation: -1 }, "#/exports/variation", /should be 0 at minimum/],
+      [{ b18: { version: "" } }, "#/exports/b18/version", /length/i],
+      [{ b18: { color: "red" } }, "#/exports/b18", /color/i],
+      [{ pdf: {} }, "#/exports", /pdf/i],
+    ])("rejects %j", (exports, pointer, message) => {
+      const { code, lines } = run(withExports(exports));
+      expect(code).toBe(1);
+      const line = lines.find((l) => l.startsWith(pointer));
+      expect(line).toMatch(message);
+    });
+  });
 });

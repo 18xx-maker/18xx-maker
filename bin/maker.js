@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import { userInfo } from "node:os";
-
 import { CommanderError, program } from "commander";
 
 import b18 from "#cli/b18";
@@ -11,8 +9,6 @@ import print from "#cli/print";
 import { UsageError } from "#cli/util";
 import validate from "#cli/validate";
 import version from "#cli/version";
-
-const { username } = userInfo();
 
 program.version(version);
 // Throw instead of exiting so every failure gets an exit code below
@@ -53,36 +49,52 @@ program
   .arguments("<files...>")
   .action(validate);
 
+// The options of export are also the `exports` field of a game file, which a
+// flag overrides: they have no default here, see resolveExportOptions. The
+// author of a box comes from the config of the CLI before it falls back to the
+// name of the user.
+const withAuthor = (opts) => ({
+  ...opts,
+  b18Author: opts.b18Author || config.get("b18.author"),
+});
+
 program
   .command("export")
   .description("export PDF, PNG and Board 18 files of a game")
   .argument("[game]", "the id of a bundled game or the path of a game file")
   .option(
     "-f, --format <formats>",
-    "pdf, png and b18, separated by commas",
-    "pdf",
+    "pdf, png and b18, separated by commas (default: pdf)",
   )
   .option("--docs <pages>", "only these pages: map,tiles,cards,...")
-  .option("--layouts <layouts>", "all: a file for every layout of a sheet")
+  .option(
+    "--layouts <layouts>",
+    "all: a file for every layout of a sheet, or current",
+  )
   .option("--paginated", "also export the paginated pdfs")
   .option("--variation <n>", "only this map variation")
   .option("--config <file>", "a config file to export with")
-  .option("--dpi <dpi>", "the resolution of the PNG files, 1 to 300", "300")
+  .option(
+    "--dpi <dpi>",
+    "the resolution of the PNG files, 1 to 300 (default: 300)",
+  )
   .option("-o, --out <folder>", "the folder for the game folders", "render")
   .option("-j, --jobs <n>", "how many files to capture at the same time", "1")
   .option("-a, --all", "export all bundled games")
   .option(
     "--b18-version <version>",
-    "the Board 18 version of the game box",
-    "1.0",
+    "the Board 18 version of the game box (default: 1.0)",
   )
   .option(
     "--b18-author <author>",
-    "the author of the Board 18 game box",
-    config.get("b18.author") || username,
+    "the author of the Board 18 game box (default: b18.author of maker config, or your name)",
   )
   .option("-d, --debug", "start the express server and then quit")
-  .action(exportCommand);
+  .addHelpText(
+    "after",
+    "\nEvery option but --config, --out, --jobs, --all and --debug can also be set in the\n`exports` field of the game file. What you give here wins over the game file.",
+  )
+  .action((game, opts) => exportCommand(game, withAuthor(opts)));
 
 program
   .command("b18")
@@ -91,11 +103,12 @@ program
   .argument("<version>", "the Board 18 version string for the game box")
   .argument(
     "[author]",
-    "the author of this game box",
-    config.get("b18.author") || username,
+    "the author of this game box (default: b18.author of maker config, or your name)",
   )
   .option("-d, --debug", "start the express server and then quit")
-  .action(b18);
+  .action((game, version, author, opts) =>
+    b18(game, version, author || config.get("b18.author"), opts),
+  );
 
 program
   .command("print")

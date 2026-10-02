@@ -2,9 +2,9 @@ import { mergeDeepRight, uniq } from "ramda";
 
 import { companies as companyOverrides, tiles } from "@/data";
 import { b18Spec } from "@/export/b18.js";
-import { MAX_DPI } from "@/export/capture.js";
 import { documents } from "@/export/documents.js";
 import { exportJobs, fileName, safeName } from "@/export/names.js";
+import { layoutsOfConfig, resolveExportOptions } from "@/export/options.js";
 import { renderSlug } from "@/export/render.js";
 import { DOCS, docPage, selectDocs } from "@/export/select.js";
 import schema from "@/schemas/config.schema.json";
@@ -48,6 +48,50 @@ export const exportPages = (game, layers) =>
 export const allLayouts = (game, layers) =>
   !!baseConfig(layers, game).export?.allLayouts;
 
+// What the app exports when nothing else says: it has the paginated pdfs, and
+// the designer of the game is the author of a Board18 box
+const appDefaults = (game) => ({
+  paginated: true,
+  b18: { author: game.info.designer || "18xx Maker" },
+});
+
+// The options of an export of the game, in the order of the `exports` field of
+// the game (see resolveExportOptions): the defaults of the app, the game's
+// `exports` and what the user chose. userOptions are
+//   { formats, docs, layouts, paginated, dpi, variation, b18: { version, author } }
+// with what is left out coming from the layers below.
+const resolveOptions = (game, layers, userOptions = {}) => {
+  const { dpi, ...user } = userOptions;
+  return resolveExportOptions({
+    defaults: appDefaults(game),
+    game: game.exports,
+    user: {
+      ...user,
+      layouts:
+        user.layouts ??
+        layoutsOfConfig(
+          mergeDeepRight(layers.userConfig || {}, layers.storedConfig || {}),
+        ),
+      png: { dpi },
+    },
+  });
+};
+
+// What the options panel starts with: the options of the export before the
+// user changes any. docs is every page of the game when `exports` has none.
+export const exportDefaults = (game, layers) => {
+  const options = resolveOptions(game, layers);
+  const pages = exportPages(game, layers);
+  return {
+    formats: options.formats,
+    docs: options.docs ? pages.filter((p) => options.docs.includes(p)) : pages,
+    layouts: options.layouts ?? (allLayouts(game, layers) ? "all" : "current"),
+    paginated: options.paginated,
+    dpi: options.png.dpi,
+    b18: options.b18,
+  };
+};
+
 // What the main process exports for a game:
 //   { id, game, config, jobs, dpi, title, b18 }
 // see createExportService. The options are
@@ -55,32 +99,26 @@ export const allLayouts = (game, layers) =>
 //   docs       the pages to export (exportPages), all when left out
 //   layouts    "all" for a sheet of every layout, "current" for the one config
 //              has, as config says when left out
-//   paginated  also the paginated pdfs, true when left out
+//   paginated  also the paginated pdfs
 //   dpi        of the pngs, at most MAX_DPI
+//   variation  only this map variation
 //   b18        { version, author } of the Board 18 box
-export const planExport = (
-  game,
-  layers,
-  {
-    formats,
-    docs,
-    layouts: layoutChoice,
-    paginated = true,
-    dpi = MAX_DPI,
-    b18,
-  },
-) => {
+// What is left out is the `exports` of the game, or the default of the app
+// (resolveExportOptions).
+export const planExport = (game, layers, userOptions) => {
+  const options = resolveOptions(game, layers, userOptions);
+  const { formats, docs, paginated, variation } = options;
   let config = baseConfig(layers, game);
-  if (layoutChoice) {
+  if (options.layouts) {
     config = mergeDeepRight(config, {
-      export: { allLayouts: layoutChoice === "all" },
+      export: { allLayouts: options.layouts === "all" },
     });
   }
   const data = exportData(game);
   const files = formats.filter((format) => format !== "b18");
   const jobs = exportJobs(
     game,
-    selectDocs(documents(game, config, data), { docs, paginated }),
+    selectDocs(documents(game, config, data), { docs, paginated, variation }),
     files,
   );
 
@@ -89,8 +127,9 @@ export const planExport = (
     const spec = b18Spec(game, config, data, {
       id: game.meta.id,
       slug: data.slug,
-      version: b18.version,
-      author: b18.author,
+      version: options.b18.version,
+      author: options.b18.author,
+      variation,
     });
     jobs.push(...exportJobs(game, spec.images, ["b18"]));
     // Only the names that are data, the others are functions
@@ -103,7 +142,7 @@ export const planExport = (
     game,
     config: mergeDeepRight(layers.userConfig, layers.storedConfig),
     jobs,
-    dpi,
+    dpi: options.png.dpi,
     b18: box,
   };
 };
@@ -125,7 +164,7 @@ export const planSingle = (game, layers, { pathname, search }, format) => {
     game,
     config: mergeDeepRight(layers.userConfig, layers.storedConfig),
     jobs: [{ doc, format, path: fileName(game, doc, format) }],
-    dpi: MAX_DPI,
+    dpi: resolveOptions(game, layers).png.dpi,
     single: true,
   };
 };

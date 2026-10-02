@@ -18,7 +18,7 @@ import { Switch } from "@/components/ui/switch";
 
 import { MAX_DPI } from "@/export/capture.js";
 import { createAlert } from "@/state";
-import { allLayouts, exportPages, planExport } from "@/util/exportPlan";
+import { exportDefaults, exportPages, planExport } from "@/util/exportPlan";
 
 const FORMATS = ["pdf", "png", "b18"];
 
@@ -50,13 +50,15 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
   const dispatch = useDispatch();
   const pages = exportPages(game, layers);
 
-  const [formats, setFormats] = useState(["pdf"]);
-  const [docs, setDocs] = useState(pages);
-  const [layoutsAll, setLayoutsAll] = useState(allLayouts(game, layers));
-  const [paginated, setPaginated] = useState(true);
-  const [dpi, setDpi] = useState(String(MAX_DPI));
-  const [version, setVersion] = useState("1.0");
-  const [author, setAuthor] = useState(game.info.designer || "18xx Maker");
+  // The options start as the game's `exports` and the defaults say
+  const [initial] = useState(() => exportDefaults(game, layers));
+  const [formats, setFormats] = useState(initial.formats);
+  const [docs, setDocs] = useState(initial.docs);
+  const [layoutsAll, setLayoutsAll] = useState(initial.layouts === "all");
+  const [paginated, setPaginated] = useState(initial.paginated);
+  const [dpi, setDpi] = useState(String(initial.dpi));
+  const [version, setVersion] = useState(initial.b18.version);
+  const [author, setAuthor] = useState(initial.b18.author);
   const [out, setOut] = useState();
   const [running, setRunning] = useState(false);
 

@@ -2,7 +2,12 @@ import { games } from "@/data";
 import defaultConfig from "@/defaults.json";
 import { DOCS } from "@/export/select.js";
 import { validateRequest } from "@/export/service.js";
-import { exportPages, planExport, planSingle } from "@/util/exportPlan";
+import {
+  exportDefaults,
+  exportPages,
+  planExport,
+  planSingle,
+} from "@/util/exportPlan";
 
 // 18Test as the app has it loaded
 const game = {
@@ -92,6 +97,154 @@ describe("planned requests", () => {
 
     expect(() => validateRequest(request)).not.toThrow();
     expect(structuredClone(request)).toEqual(request);
+  });
+});
+
+describe("planExport with the exports of a game", () => {
+  const exporting = (exports) => ({ ...game, exports });
+  const formatsOf = (request) => [
+    ...new Set(request.jobs.map(({ format }) => format)),
+  ];
+
+  it("takes the options of the game over the defaults of the app", () => {
+    const request = planExport(
+      exporting({
+        formats: ["png", "b18"],
+        docs: ["map"],
+        png: { dpi: 100 },
+        b18: { version: "7", author: "Game" },
+      }),
+      layers(),
+      {},
+    );
+
+    expect(formatsOf(request).sort()).toEqual(["b18", "png"]);
+    expect(request.dpi).toBe(100);
+    expect(request.b18.json).toMatchObject({ version: "7", author: "Game" });
+    expect(paths(request)).toContain("18test-map.png");
+    expect(paths(request).some((path) => path.includes("card"))).toBe(false);
+  });
+
+  it("takes what the user chose over the game", () => {
+    const request = planExport(
+      exporting({ formats: ["png"], docs: ["map"], png: { dpi: 100 } }),
+      layers(),
+      { formats: ["pdf"], docs: ["tokens"], dpi: 50, paginated: false },
+    );
+
+    expect(formatsOf(request)).toEqual(["pdf"]);
+    expect(request.dpi).toBe(50);
+    expect(paths(request)).toEqual(["18test-tokens.pdf"]);
+  });
+
+  it("has the paginated pdfs unless the game or the user says no", () => {
+    const options = { formats: ["pdf"], docs: ["map"] };
+    const has = (request) =>
+      paths(request).includes("18test-map-paginated.pdf");
+
+    expect(has(planExport(game, layers(), options))).toBe(true);
+    expect(
+      has(planExport(exporting({ paginated: false }), layers(), options)),
+    ).toBe(false);
+    expect(
+      has(
+        planExport(exporting({ paginated: false }), layers(), {
+          ...options,
+          paginated: true,
+        }),
+      ),
+    ).toBe(true);
+  });
+
+  it("layers: the config of the user over the game, a choice over both", () => {
+    const options = { formats: ["pdf"], docs: ["cards"] };
+    const every = (request) => paths(request).includes("18test-cards-free.pdf");
+
+    expect(
+      every(planExport(exporting({ layouts: "all" }), layers(), options)),
+    ).toBe(true);
+    expect(
+      every(
+        planExport(
+          exporting({ layouts: "all" }),
+          layers({ export: { allLayouts: false } }),
+          options,
+        ),
+      ),
+    ).toBe(false);
+    expect(
+      every(
+        planExport(
+          exporting({ layouts: "current" }),
+          layers({ export: { allLayouts: false } }),
+          { ...options, layouts: "all" },
+        ),
+      ),
+    ).toBe(true);
+  });
+
+  it("exports only a variation of the game", () => {
+    const variations = {
+      ...game,
+      map: [game.map, game.map],
+      exports: { variation: 1, formats: ["pdf"], docs: ["map"] },
+    };
+
+    const request = planExport(variations, layers(), {});
+
+    expect(paths(request).length).toBeGreaterThan(0);
+    expect(
+      request.jobs.every(
+        ({ doc }) => doc.variation === undefined || doc.variation === 1,
+      ),
+    ).toBe(true);
+  });
+
+  it("starts the options panel with them", () => {
+    const defaults = exportDefaults(
+      exporting({
+        formats: ["b18"],
+        docs: ["map", "tiles"],
+        layouts: "all",
+        paginated: false,
+        png: { dpi: 120 },
+        b18: { version: "4", author: "Game" },
+      }),
+      layers(),
+    );
+
+    expect(defaults).toEqual({
+      formats: ["b18"],
+      docs: ["map", "tiles"],
+      layouts: "all",
+      paginated: false,
+      dpi: 120,
+      b18: { version: "4", author: "Game" },
+    });
+  });
+
+  it("starts the options panel with the defaults of the app without them", () => {
+    const defaults = exportDefaults(game, layers());
+
+    expect(defaults).toMatchObject({
+      formats: ["pdf"],
+      layouts: "current",
+      paginated: true,
+      dpi: 300,
+      b18: { version: "1.0", author: expect.any(String) },
+    });
+    expect(defaults.docs).toEqual(exportPages(game, layers()));
+  });
+
+  it("uses the dpi of the game for a single png", () => {
+    const request = planSingle(
+      exporting({ png: { dpi: 120 } }),
+      layers(),
+      { pathname: "/games/18Test/map", search: "" },
+      "png",
+    );
+
+    expect(request.dpi).toBe(120);
   });
 });
 

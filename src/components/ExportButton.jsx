@@ -53,12 +53,7 @@ const ExportButton = () => {
 
   const handleAll = (format) => {
     trackEvent("exportGame", location, { media: format });
-    exportFiles(
-      planExport(game, layers, {
-        formats: [format],
-        b18: { version: "1.0", author: game.info.designer || "18xx Maker" },
-      }),
-    );
+    exportFiles(planExport(game, layers, { formats: [format] }));
   };
 
   const handleSingle = (format) => {
