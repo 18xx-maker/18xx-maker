@@ -43,13 +43,11 @@ a button in the lower right of every game page with these entries:
 - Export game as png images
 - Export game as a Board18 box
 - Export options
-- Export this component as a pdf document
-- Export this component as a png image
 
 The full game entries ask you to pick a folder on your file system and will
 write all files into it. The app opens the folder when it's done. The Board18
-entry puts a zip file and the files in it in the folder. The _component_ entries
-ask for a single file name and open the file when they finish.
+entry puts a zip file and the files in it in the folder. To export one page,
+use _Export options_ and choose the documents you want.
 
 A progress alert is shown while an export runs. A full export started from the
 _Export options_ panel can be cancelled there; files that were already written
@@ -89,10 +87,6 @@ that resolution, so a card opens at its real size (2.5 by 3.5 inches) in an imag
 editor or print program. Choose a lower one in the panel or with `png.dpi` in the
 game file's `exports`. Images of a Board18 box are always one pixel for each
 unit, whatever the resolution.
-
-> [!NOTE]
-> Not all components support the "current component" PNG option. Use a full
-> game export to get an image of every tile, card, token and charter.
 
 ## Creating a new game
 

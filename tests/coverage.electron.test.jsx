@@ -438,44 +438,6 @@ describe("export button", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("exports the current component as a pdf and png", async () => {
-    const { user } = renderApp("/games/18Test/map?variation=0");
-    await screen.findByTestId("game-18Test-map");
-
-    await openExport(user);
-    await user.click(
-      await screen.findByRole("menuitem", {
-        name: "Export this component as a pdf document",
-      }),
-    );
-    expect(requested()).toMatchObject({
-      id: "18Test",
-      single: true,
-      jobs: [
-        {
-          format: "pdf",
-          path: "18test-map.pdf",
-          doc: {
-            route: "/games/render:18Test/map",
-            query: { variation: "0" },
-          },
-        },
-      ],
-    });
-
-    await openExport(user);
-    await user.click(
-      await screen.findByRole("menuitem", {
-        name: "Export this component as a png image",
-      }),
-    );
-    expect(requested().jobs[0]).toMatchObject({
-      format: "png",
-      path: "18test-map.png",
-      doc: { capture: { selector: ".printElement" } },
-    });
-  });
-
   it("alerts when the main process fails to export", async () => {
     api.export.mockRejectedValueOnce(new Error("No windows"));
     const { user, store } = renderApp("/games/18Test/map");

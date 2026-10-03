@@ -117,32 +117,6 @@ test.describe("the app exports 18Test", () => {
     expect(fs.existsSync(`${box}.zip`)).toBe(true);
   });
 
-  test("saves the page as a pdf under the chosen name", async () => {
-    app = await launch();
-    const file = path.join(out, "chosen.pdf");
-    await app.evaluate(({ dialog, shell }, saved) => {
-      dialog.showSaveDialog = async () => ({
-        canceled: false,
-        filePath: saved,
-      });
-      shell.showItemInFolder = () => {};
-    }, file);
-
-    const window = await show(app, "#/games/18Test/map");
-    await window.getByRole("button", { name: "Export" }).click();
-    await window
-      .getByRole("menuitem", {
-        name: "Export this component as a pdf document",
-      })
-      .click();
-
-    await expect
-      .poll(() => fs.existsSync(file), { timeout: 60_000 })
-      .toBe(true);
-    expect(pages(file)).toBe(1);
-    expect(fs.readdirSync(out)).toEqual(["chosen.pdf"]);
-  });
-
   test("quits in the middle of an export without leaving windows behind", async () => {
     app = await launch();
     await app.evaluate(({ dialog, shell }, folder) => {
