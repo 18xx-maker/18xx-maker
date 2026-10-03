@@ -96,7 +96,7 @@ test.describe("bundled games", () => {
     // Current section is shown in the toolbar
     await expect(
       page.getByRole("combobox", { name: "Game Section" }),
-    ).toHaveText("9:Revenue");
+    ).toHaveText("8:Revenue");
   });
 
   test("shows the game info page", async ({ page }) => {
