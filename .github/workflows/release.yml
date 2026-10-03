@@ -31,3 +31,8 @@ jobs:
         run: |
           gh release upload ${{ steps.release.outputs.tag_name }} ./README.md ./LICENSE
           gh release edit ${{ steps.release.outputs.tag_name }} -t "18xx Maker ${{ steps.release.outputs.tag_name }}"
+      - name: Deploy sites
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          curl -fsS -X POST -d '{}' "${{ secrets.NETLIFY_SITE_HOOK }}"
+          curl -fsS -X POST -d '{}' "${{ secrets.NETLIFY_STORYBOOK_HOOK }}"
