@@ -93,8 +93,8 @@ export const expected = {
     // The map and the market at their size in print, whatever the size of
     // the window they are captured in
     images: {
-      "18test-map.png": { width: 4350, height: 1206 },
-      "18test-market.png": { width: 4018, height: 2965 },
+      "18test-map.png": { width: 4500, height: 1356 },
+      "18test-market.png": { width: 4168, height: 3115 },
     },
     // The cards, 2.657 by 1.732 inches (255.11 by 166.3 CSS pixels): the
     // device pixels the card is painted on whole, 255 by 166 CSS pixels

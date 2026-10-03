@@ -74,7 +74,7 @@ test.describe("maker export 18Test", () => {
       height: 3150,
       pixelsPerMeter: 11811,
     });
-    expect(png(path.join(dir, "18test-map.png")).width).toBe(4350);
+    expect(png(path.join(dir, "18test-map.png")).width).toBe(4500);
 
     // Board 18 images are one pixel for each unit, without a resolution
     const box = path.join(dir, "board18-18Test-1.0");

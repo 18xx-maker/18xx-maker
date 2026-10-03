@@ -13,6 +13,10 @@ export const CSS_DPI = 96;
 export const MAX_DPI = 300;
 export const MAX_PIXELS = 200_000_000;
 
+// The border around an image of a document with capture.background (the map,
+// market, par, revenue and tile manifest), in CSS pixels: a quarter inch
+export const MARGIN = 24;
+
 // How far an edge can be off a whole pixel and still be on it, in pixels: an
 // edge at 796.9999999 is at 797
 const EPSILON = 1e-3;
@@ -173,6 +177,21 @@ const hideScrollbars = (adapter, hidden) =>
     }
   })()`);
 
+// Room around the document of the page, or none: padding of the box the
+// pages are drawn in, so the element has a border of the background in the
+// image. Whole CSS pixels leave the element on the pixel grid it had.
+const PADDING = "export-capture-padding";
+const padPage = (adapter, margin) =>
+  adapter.evaluate(`(() => {
+    document.getElementById(${JSON.stringify(PADDING)})?.remove();
+    if (${margin}) {
+      const style = document.createElement("style");
+      style.id = ${JSON.stringify(PADDING)};
+      style.textContent = "#viewport-children { padding: ${margin}px !important; }";
+      document.head.append(style);
+    }
+  })()`);
+
 // An element of the page at a resolution, with the resolution in the file.
 // The image is the device pixels the element covers whole (see devicePixels),
 // from a whole device pixel. Chromium makes a clip a whole number of CSS
@@ -183,22 +202,39 @@ const hideScrollbars = (adapter, hidden) =>
 // element, so the page is laid out again: an element centered in the window
 // (the background) moves, and is measured again where it is now. The ratio is
 // the one it was painted with before the capture.
-const captureElement = async (adapter, { selector }, dpi, maxPixels) => {
+const captureElement = async (
+  adapter,
+  { selector },
+  dpi,
+  maxPixels,
+  margin = 0,
+) => {
+  if (margin) await padPage(adapter, margin);
   const before = await measure(adapter, selector);
   if (!before) throw new Error(`The page has no ${selector}`);
 
   const scale = dpi / CSS_DPI;
+  const border = Math.round(margin * scale);
   const size = devicePixels(before, scale, before.ratio);
-  checkPixels(size.width, size.height, maxPixels);
+  checkPixels(size.width + 2 * border, size.height + 2 * border, maxPixels);
 
   await adapter.send("Emulation.setDeviceMetricsOverride", {
-    width: Math.max(1, Math.ceil(before.x + before.width)),
-    height: Math.max(1, Math.ceil(before.y + before.height)),
+    width: Math.max(1, Math.ceil(before.x + before.width + margin)),
+    height: Math.max(1, Math.ceil(before.y + before.height + margin)),
     deviceScaleFactor: scale,
     mobile: false,
   });
   const rect = await measure(adapter, selector);
-  const pixels = devicePixels(rect, scale, before.ratio);
+  const inner = devicePixels(rect, scale, before.ratio);
+  // The border never reaches past the top or left of the page
+  const left = Math.min(border, inner.left);
+  const top = Math.min(border, inner.top);
+  const pixels = {
+    left: inner.left - left,
+    top: inner.top - top,
+    width: inner.width + left + border,
+    height: inner.height + top + border,
+  };
   checkPixels(pixels.width, pixels.height, maxPixels);
 
   const png = await screenshot(adapter, {
@@ -222,7 +258,8 @@ const captureElement = async (adapter, { selector }, dpi, maxPixels) => {
 // charters, tokens, tiles) is always transparent. A b18 image does not take
 // the background: the map and the market (capture.background) are always
 // white, the tokens and tiles always transparent.
-// The media is always print, an image is captured without scrollbars, and the
+// A png of those documents has a border of MARGIN CSS pixels of the background
+// around the element. The media is always print, an image is captured without scrollbars, and the
 // page is left as it was found: the device size, the background and the
 // scrollbars are reset.
 export const capture = async (
@@ -237,6 +274,7 @@ export const capture = async (
   await adapter.send("Emulation.setEmulatedMedia", { media: "print" });
   if (format === "pdf") return printToPdf(adapter);
 
+  const margin = format === "png" && doc.capture.background ? MARGIN : 0;
   try {
     // An image is transparent where the page paints nothing, or white: without
     // the override the page is white, or the color of its color-scheme (black
@@ -250,11 +288,12 @@ export const capture = async (
     });
     await hideScrollbars(adapter, true);
     return format === "png"
-      ? await captureElement(adapter, doc.capture, dpi, maxPixels)
+      ? await captureElement(adapter, doc.capture, dpi, maxPixels, margin)
       : await captureViewport(adapter, doc.capture, maxPixels);
   } finally {
     await adapter.send("Emulation.clearDeviceMetricsOverride");
     await adapter.send("Emulation.setDefaultBackgroundColorOverride");
     await hideScrollbars(adapter, false);
+    if (margin) await padPage(adapter, 0);
   }
 };

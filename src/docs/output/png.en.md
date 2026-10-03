@@ -14,6 +14,10 @@ This will expose a menu with export options. You can either export a full game
 to PNG images. Exporting this way
 _will_ respect any config options you have set in the app.
 
+The map, market, par, revenue and tile manifest images have a border of a
+quarter inch around them (in the image background); every other image is cut to
+exactly the size of the component.
+
 If you choose to export a full game you are asked to pick a folder to put all of
 the files. The files _do_ contain the game name in them, but it's suggested that
 you create a folder specifically for this game to help with your own

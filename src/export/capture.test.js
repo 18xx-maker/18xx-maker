@@ -376,6 +376,31 @@ describe("png", () => {
     ]);
   });
 
+  it("has a border of the background around the element, and takes it off after", async () => {
+    // The page is padded, so the element is 24 CSS pixels in
+    const padded = { x: 24, y: 24, width: 240, height: 150 };
+    const a = adapter({ rect: padded });
+
+    const bytes = await capture(a, withBackground(), { dpi: 96 });
+
+    expect(a.evaluated.some((e) => e.includes("padding: 24px"))).toBe(true);
+    expect(a.evaluated.at(-1)).toContain("if (0)");
+    expect(a.calls).toContainEqual([
+      "Emulation.setDeviceMetricsOverride",
+      { width: 288, height: 198, deviceScaleFactor: 1, mobile: false },
+    ]);
+    expect(readPng(bytes)).toMatchObject({ width: 288, height: 198 });
+  });
+
+  it("has no border on a document without the background", async () => {
+    const a = adapter({ rect });
+
+    const bytes = await capture(a, job(), { dpi: 96 });
+
+    expect(a.evaluated.some((e) => e.includes("padding"))).toBe(false);
+    expect(readPng(bytes)).toMatchObject({ width: 240, height: 150 });
+  });
+
   it("is transparent when asked for a document with the background", async () => {
     const a = adapter({ rect });
 
