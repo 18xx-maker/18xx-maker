@@ -1,5 +1,36 @@
 # Changelog
 
+## [1.0.0-beta.126](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.125...v1.0.0-beta.126) (2026-10-03)
+
+
+### :tada: Features
+
+* **ui:** add [ and ] keys to cycle docs pages, game sections and config sections ([#771](https://github.com/18xx-maker/18xx-maker/issues/771)) ([d3b5c85](https://github.com/18xx-maker/18xx-maker/commit/d3b5c85cb895f6ce32ce910a6c6493a3baa2be15))
+* **ui:** pan and zoom the tokens sheet and keep the editor background filled ([#774](https://github.com/18xx-maker/18xx-maker/issues/774)) ([8ff6542](https://github.com/18xx-maker/18xx-maker/commit/8ff6542281032e2acad66db18d5c0853f1c9a1cb))
+
+
+### :bug: Bug Fixes
+
+* **electron:** build the windows app for x64 ([#780](https://github.com/18xx-maker/18xx-maker/issues/780)) ([1f44ab3](https://github.com/18xx-maker/18xx-maker/commit/1f44ab325faf6a5405750808b2a47e7065746147))
+* **ui:** keep card cut lines visible above the viewport background ([#776](https://github.com/18xx-maker/18xx-maker/issues/776)) ([e95acb3](https://github.com/18xx-maker/18xx-maker/commit/e95acb33d48ae7428fda14a3e1e20bfe3f00f709))
+* **ui:** style the app info page for both themes and load the sidebar logo in electron ([#775](https://github.com/18xx-maker/18xx-maker/issues/775)) ([ef720c5](https://github.com/18xx-maker/18xx-maker/commit/ef720c5ce00fa703425423e0ba6676d0e083115e))
+
+
+### :book: Documentation
+
+* fix cropped tokens screenshot ([#777](https://github.com/18xx-maker/18xx-maker/issues/777)) ([4b67571](https://github.com/18xx-maker/18xx-maker/commit/4b67571cad3c8e1ff4794919fca3360685203caa))
+
+
+### :traffic_light: Tests
+
+* **e2e:** isolate the app user data in the electron spec ([#779](https://github.com/18xx-maker/18xx-maker/issues/779)) ([498f77d](https://github.com/18xx-maker/18xx-maker/commit/498f77d07693f9c42e12a801abb349a059c1dcfb))
+
+
+### :octocat: Continuous Integration
+
+* order test jobs by cost so cheap failures stop expensive jobs ([#778](https://github.com/18xx-maker/18xx-maker/issues/778)) ([2390b49](https://github.com/18xx-maker/18xx-maker/commit/2390b49aa35997f4fa8375aa1c3cb150eb39388a))
+* **release:** publish netlify deploys after their auto build finishes ([#772](https://github.com/18xx-maker/18xx-maker/issues/772)) ([60614f7](https://github.com/18xx-maker/18xx-maker/commit/60614f7bef02791c19ed013185c7a6b529e90646))
+
 ## [1.0.0-beta.125](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.124...v1.0.0-beta.125) (2026-10-03)
 
 
