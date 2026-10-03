@@ -155,6 +155,24 @@ const measure = (adapter, selector) =>
     };
   })()`);
 
+// Hides the scrollbars of the page, or shows them again. The headless browser
+// of the CLI has none, but a window of the app has scrollbars that take room
+// on Linux, Windows and a Mac set to always show them: the page was laid out
+// 15 pixels narrower, the background centered in it on half a pixel, and its
+// image 4 pixels narrower than the CLI's at 300 dpi.
+// Emulation.setScrollbarsHidden does not give their room back, a style does.
+const SCROLLBARS = "export-capture-scrollbars";
+const hideScrollbars = (adapter, hidden) =>
+  adapter.evaluate(`(() => {
+    document.getElementById(${JSON.stringify(SCROLLBARS)})?.remove();
+    if (${hidden}) {
+      const style = document.createElement("style");
+      style.id = ${JSON.stringify(SCROLLBARS)};
+      style.textContent = "* { scrollbar-width: none !important; }";
+      document.head.append(style);
+    }
+  })()`);
+
 // An element of the page at a resolution, with the resolution in the file.
 // The image is the device pixels the element covers whole (see devicePixels),
 // from a whole device pixel. Chromium makes a clip a whole number of CSS
@@ -204,8 +222,9 @@ const captureElement = async (adapter, { selector }, dpi, maxPixels) => {
 // charters, tokens, tiles) is always transparent. A b18 image does not take
 // the background: the map and the market (capture.background) are always
 // white, the tokens and tiles always transparent.
-// The media is always print, and the page is left as it was found: the device
-// size and the background are reset.
+// The media is always print, an image is captured without scrollbars, and the
+// page is left as it was found: the device size, the background and the
+// scrollbars are reset.
 export const capture = async (
   adapter,
   { doc, format },
@@ -229,11 +248,13 @@ export const capture = async (
         ? { r: 255, g: 255, b: 255, a: 1 }
         : { r: 0, g: 0, b: 0, a: 0 },
     });
+    await hideScrollbars(adapter, true);
     return format === "png"
       ? await captureElement(adapter, doc.capture, dpi, maxPixels)
       : await captureViewport(adapter, doc.capture, maxPixels);
   } finally {
     await adapter.send("Emulation.clearDeviceMetricsOverride");
     await adapter.send("Emulation.setDefaultBackgroundColorOverride");
+    await hideScrollbars(adapter, false);
   }
 };

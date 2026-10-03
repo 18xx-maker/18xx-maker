@@ -182,6 +182,11 @@ const launch = () =>
     args: [
       main,
       `--user-data-dir=${path.join(out, "user-data")}`,
+      // Scrollbars that take room, like Linux and Windows, also on a Mac set
+      // to show them when scrolling (only for this app, from its arguments)
+      ...(process.platform === "darwin"
+        ? ["-AppleShowScrollBars", "Always"]
+        : []),
       // The CI Linux runner has no setuid chrome-sandbox for Electron. Only
       // there, and only when CI says so, never in a real run
       ...(process.platform === "linux" && process.env.CI

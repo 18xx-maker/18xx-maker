@@ -51,8 +51,10 @@ const adapter = ({ rect, moved, reads = [btoa("pdf")] } = {}) => {
   let scale = 1;
   let at = rect;
   const calls = [];
+  const evaluated = [];
   return {
     calls,
+    evaluated,
     names: () => calls.map(([method]) => method),
     send: async (method, params) => {
       calls.push([method, params]);
@@ -74,7 +76,10 @@ const adapter = ({ rect, moved, reads = [btoa("pdf")] } = {}) => {
       }
       return {};
     },
-    evaluate: async () => at,
+    evaluate: async (expression) => {
+      evaluated.push(expression);
+      return at;
+    },
   };
 };
 
@@ -312,6 +317,24 @@ describe("png", () => {
     expect(image).toMatchObject({ width: 750, height: 468 });
     // Every pixel is the element's
     expect(image.pixels.every((value) => value === 255)).toBe(true);
+  });
+
+  // A window of the app on Linux or Windows has scrollbars that take room, the
+  // headless browser of the CLI has none: the background was laid out 15
+  // pixels narrower, on half a pixel, and its image 4 pixels narrower
+  it("measures and captures the element without scrollbars, and shows them after", async () => {
+    const a = adapter({ rect });
+
+    await capture(a, job());
+
+    const hides = (expression) =>
+      expression.includes("scrollbar-width: none") &&
+      expression.includes("if (true)");
+    const measures = (expression) =>
+      expression.includes("getBoundingClientRect");
+    expect(hides(a.evaluated[0])).toBe(true);
+    expect(a.evaluated.slice(1, -1).every(measures)).toBe(true);
+    expect(a.evaluated.at(-1)).toContain("if (false)");
   });
 
   it("does not lose a pixel to a float error", async () => {
