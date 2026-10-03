@@ -14,6 +14,7 @@ export default [
   {
     ignores: [
       "!.storybook",
+      "browsers/",
       "coverage/",
       "docker/",
       "dist/",

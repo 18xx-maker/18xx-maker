@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { matchPath, useLocation, useMatch, useNavigate } from "react-router";
 
@@ -36,17 +36,43 @@ export const useBindings = () => {
     selectGameForSlug(state, loadedGame?.slug),
   );
   const viewingGame = useMatch("/games/:slug/:section/*");
+  const location = useLocation();
+  const [shortcuts, setShortcuts] = useState(false);
   const [print] = useBooleanParam("print");
   const [, toggleConfig] = useBooleanParam("config");
-  const { pathname } = useLocation();
+  const { pathname } = location;
 
   const handleKeyDown = useCallback(
     (event) => {
       if (isControlTarget(event)) return;
       if (event.altKey || event.ctrlKey || event.metaKey) return;
 
-      // Keys for the game edit page, which a Radix layer closing on escape
-      // has already claimed with preventDefault
+      // The shortcuts dialog closes itself on escape, other keys are for it
+      if (shortcuts) {
+        if (event.key === "?") setShortcuts(false);
+        return;
+      }
+
+      // Escape steps back one level: config panel, edit page, game page,
+      // home. A Radix layer closing on escape has already claimed the event
+      // with preventDefault.
+      if (event.key === "Escape") {
+        if (event.defaultPrevented) return;
+
+        const params = new URLSearchParams(location.search);
+        if (viewingGame && params.has("config")) {
+          params.delete("section");
+          params.delete("config");
+          navigate({ search: params.toString() });
+        } else if (viewingGame) {
+          navigate(`/games/${viewingGame.params.slug}`);
+        } else if (pathname !== "/") {
+          navigate("/");
+        }
+        return;
+      }
+
+      // Keys for the game edit page
       if (viewingGame) {
         // The toolbar keys, which the print page of an export does not have
         if (!print) {
@@ -63,10 +89,7 @@ export const useBindings = () => {
           }
         }
 
-        if (
-          event.key === "e" ||
-          (event.key === "Escape" && !event.defaultPrevented)
-        ) {
+        if (event.key === "e") {
           navigate(`/games/${viewingGame.params.slug}`);
           return;
         }
@@ -92,6 +115,9 @@ export const useBindings = () => {
           break;
         case "c":
           if (!viewingGame) navigate("/elements/logos");
+          break;
+        case "d":
+          navigate("/docs");
           break;
         case "g":
           if (loadedGame) navigate(`/games/${loadedGame.slug}`);
@@ -140,11 +166,22 @@ export const useBindings = () => {
           }
           break;
         case "?":
-          navigate("/docs");
+          setShortcuts(true);
           break;
       }
     },
-    [game, loadedGame, viewingGame, print, toggleConfig, dispatch, navigate],
+    [
+      game,
+      loadedGame,
+      viewingGame,
+      shortcuts,
+      location,
+      pathname,
+      print,
+      toggleConfig,
+      dispatch,
+      navigate,
+    ],
   );
 
   // The flags only live while an export button can show them. A load that
@@ -168,4 +205,6 @@ export const useBindings = () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [handleKeyDown]);
+
+  return [shortcuts, setShortcuts];
 };
