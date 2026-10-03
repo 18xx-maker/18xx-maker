@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { getI18n, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router";
 
@@ -35,13 +35,12 @@ import { useBooleanParam } from "@/util/query";
 import { getRenderInput } from "@/util/renderInput";
 
 const Root = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   // Render mode has no chrome, only the page
   const render = !!getRenderInput();
   const [print] = useBooleanParam("print");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { i18n } = useTranslation();
   const language = useSelector(selectLanguage);
 
   // The language setting overrides the system one; without it follow the
@@ -127,8 +126,10 @@ body {
         dispatch(createSetGame(game));
         dispatch(
           createAlert(
-            t("alerts.gameLoaded"),
-            t("alerts.gameLoadedMessage", { title: game.info.title }),
+            getI18n().t("alerts.gameLoaded"),
+            getI18n().t("alerts.gameLoadedMessage", {
+              title: game.info.title,
+            }),
             "success",
           ),
         );
@@ -145,7 +146,7 @@ body {
         window.api.off();
       };
     }
-  }, [dispatch, navigate, render, t]);
+  }, [dispatch, navigate, render]);
 
   const [shortcuts, setShortcuts] = useBindings();
   const inEditor = useEditor();
