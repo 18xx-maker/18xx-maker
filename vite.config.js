@@ -12,6 +12,16 @@ const manualChunks = (id) => {
     return "ramda";
   }
 
+  // Only loaded on demand (json-schema-library by the config validation and
+  // the highlighter by code blocks), leave them in their own async chunks
+  if (
+    /node_modules\/(\.pnpm\/[^/]+\/node_modules\/)?(json-schema-library|@hyperjump|@sagold|uri-js|valid-url|fast-copy|fast-deep-equal|react-syntax-highlighter|refractor|prismjs|lowlight|highlight\.js|highlightjs-vue)\//.test(
+      id,
+    )
+  ) {
+    return;
+  }
+
   // All other vendor packages
   if (id.includes("node_modules")) {
     return "vendor";

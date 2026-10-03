@@ -2,49 +2,24 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-import { ZipArchive } from "archiver";
 import { chromium } from "playwright";
 
 import b18 from "#cli/b18";
 import { defaultConfig, loadGame, startExpress } from "#cli/util";
+import { writeZip } from "#export/zip";
 import { PNG } from "./__fixtures__/browser.js";
 
 const mocks = await vi.hoisted(async () => {
-  const { EventEmitter } = await import("node:events");
   const { createFakeBrowser } = await import("./__fixtures__/browser.js");
   const { page, session, browser, server } = createFakeBrowser();
-  const archive = Object.assign(new EventEmitter(), {
-    pipe: vi.fn(),
-    directory: vi.fn(),
-    finalize: vi.fn(),
-  });
-  // Like the real zip, the output stream only closes after it was finalized
-  const output = Object.assign(new EventEmitter(), { file: "" });
-  return { page, session, browser, server, archive, output };
+  return { page, session, browser, server };
 });
 
 vi.mock("playwright", () => ({
   chromium: { launch: vi.fn(() => mocks.browser) },
 }));
 
-vi.mock("archiver", () => ({
-  ZipArchive: vi.fn(function () {
-    return mocks.archive;
-  }),
-}));
-
-// Don't open the zip file, the stream would outlive the temp folder
-vi.mock("node:fs", async (importOriginal) => {
-  const real = await importOriginal();
-  const mocked = {
-    ...real.default,
-    createWriteStream: vi.fn((file) => {
-      mocks.output.file = file;
-      return mocks.output;
-    }),
-  };
-  return { ...mocked, default: mocked };
-});
+vi.mock("#export/zip", () => ({ writeZip: vi.fn(() => Promise.resolve()) }));
 
 vi.mock("#cli/util", async (importOriginal) => {
   const real = await importOriginal();
@@ -83,11 +58,7 @@ const screenshots = () => {
 
 beforeEach(() => {
   vi.clearAllMocks();
-  mocks.archive.removeAllListeners();
-  mocks.output.removeAllListeners();
-  mocks.archive.finalize.mockImplementation(() =>
-    setTimeout(() => mocks.output.emit("close"), 10),
-  );
+  writeZip.mockImplementation(() => Promise.resolve());
   tmp = fs.mkdtempSync(path.join(os.tmpdir(), "18xx-cli-b18-"));
   process.chdir(tmp);
   vi.spyOn(console, "log").mockImplementation(() => {});
@@ -210,14 +181,13 @@ describe("b18", () => {
     it("closes the browser and server and zips the box", () => {
       expect(mocks.browser.close).toHaveBeenCalledOnce();
       expect(mocks.server.close).toHaveBeenCalledOnce();
-      expect(ZipArchive).toHaveBeenCalledWith({ zlib: { level: 9 } });
-      expect(mocks.archive.directory).toHaveBeenCalledWith(
-        expect.toSatisfy((dir) => dir.replaceAll("\\", "/") === folder),
-        "board18-18Test-1.0",
-      );
-      expect(mocks.archive.finalize).toHaveBeenCalledOnce();
-      expect(mocks.archive.pipe).toHaveBeenCalledWith(mocks.output);
-      expect(mocks.output.file.replaceAll("\\", "/")).toBe(`${folder}.zip`);
+      expect(writeZip).toHaveBeenCalledOnce();
+      const [out, names] = writeZip.mock.calls[0];
+      expect(out.replaceAll("\\", "/")).toBe("render/18Test");
+      expect(names).toMatchObject({
+        folder: "board18-18Test-1.0",
+        zip: "board18-18Test-1.0.zip",
+      });
     });
   });
 
@@ -269,11 +239,14 @@ describe("b18", () => {
 
   it("waits for the zip file to be written", async () => {
     let closed = false;
-    mocks.archive.finalize.mockImplementation(() =>
-      setTimeout(() => {
-        closed = true;
-        mocks.output.emit("close");
-      }, 20),
+    writeZip.mockImplementation(
+      () =>
+        new Promise((resolve) =>
+          setTimeout(() => {
+            closed = true;
+            resolve();
+          }, 20),
+        ),
     );
 
     await b18("18Test", "1.0", "Pat", {});
@@ -282,9 +255,7 @@ describe("b18", () => {
   });
 
   it("fails when the zip cannot be written", async () => {
-    mocks.archive.finalize.mockImplementation(() =>
-      setTimeout(() => mocks.output.emit("error", new Error("disk full")), 1),
-    );
+    writeZip.mockRejectedValue(new Error("disk full"));
 
     await expect(b18("18Test", "1.0", "Pat", {})).rejects.toThrow("disk full");
   });
@@ -294,7 +265,7 @@ describe("b18", () => {
 
     await expect(b18("18Test", "1.0", "Pat", {})).rejects.toThrow("no browser");
     expect(mocks.server.close).toHaveBeenCalledOnce();
-    expect(mocks.archive.finalize).not.toHaveBeenCalled();
+    expect(writeZip).not.toHaveBeenCalled();
   });
 
   it("keeps going and exits 1 when some images fail", async () => {
@@ -308,7 +279,7 @@ describe("b18", () => {
       "Failed board18-18Test-1.0/18Test-1.0/Map.png: timeout",
     );
     expect(process.exitCode).toBe(1);
-    expect(mocks.archive.finalize).toHaveBeenCalledOnce();
+    expect(writeZip).toHaveBeenCalledOnce();
     expect(mocks.browser.close).toHaveBeenCalledOnce();
   });
 

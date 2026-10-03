@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 
 import { renderApp } from "@tests/helpers.jsx";
 
@@ -37,8 +37,11 @@ describe("unit inputs", () => {
     expect(input).toHaveValue("");
     expect(store.getState().config).toEqual({});
 
-    // Typing a value stores it again
+    // Typing a value stores it again, once the input's debounce fires
     await user.type(input, "1");
-    expect(store.getState().config).toEqual({ margin: 100 });
+    await waitFor(
+      () => expect(store.getState().config).toEqual({ margin: 100 }),
+      { timeout: 3000 },
+    );
   });
 });

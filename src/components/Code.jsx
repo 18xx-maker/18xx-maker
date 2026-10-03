@@ -1,31 +1,35 @@
-import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import bash from "react-syntax-highlighter/dist/esm/languages/prism/bash";
-import javascript from "react-syntax-highlighter/dist/esm/languages/prism/javascript";
-import json from "react-syntax-highlighter/dist/esm/languages/prism/json";
-import markdown from "react-syntax-highlighter/dist/esm/languages/prism/markdown";
-import light from "react-syntax-highlighter/dist/esm/styles/prism/coldark-cold";
-import dark from "react-syntax-highlighter/dist/esm/styles/prism/coldark-dark";
-import prism from "react-syntax-highlighter/dist/esm/styles/prism/prism";
+import { useEffect, useState } from "react";
 
-import { useTheme } from "@/context/ThemeProvider";
+// The highlighter and its languages are a separate chunk, plain text shows
+// until it loads
+let Highlighted;
+export const preloadCode = () =>
+  import("@/components/CodeHighlighted").then((module) => {
+    Highlighted = module.default;
+    return Highlighted;
+  });
 
-SyntaxHighlighter.registerLanguage("javascript", javascript);
-SyntaxHighlighter.registerLanguage("json", json);
-SyntaxHighlighter.registerLanguage("markdown", markdown);
-SyntaxHighlighter.registerLanguage("bash", bash);
+const Code = ({ children, ...props }) => {
+  const [Component, setComponent] = useState(() => Highlighted);
 
-export { SyntaxHighlighter, prism as style };
+  useEffect(() => {
+    if (!Component) {
+      let current = true;
+      preloadCode().then((loaded) => {
+        if (current) setComponent(() => loaded);
+      });
+      return () => {
+        current = false;
+      };
+    }
+  }, [Component]);
 
-const Code = (props) => {
-  const theme = useTheme();
-  const style = theme === "light" ? light : dark;
-
-  return (
-    <SyntaxHighlighter
-      customStyle={{ margin: "auto" }}
-      style={style}
-      {...props}
-    />
+  return Component ? (
+    <Component {...props}>{children}</Component>
+  ) : (
+    <pre>
+      <code>{children}</code>
+    </pre>
   );
 };
 

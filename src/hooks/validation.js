@@ -1,4 +1,3 @@
-import { compileSchema, draft07 } from "json-schema-library";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,7 +7,12 @@ import configSchemaJSON from "@/schemas/config.schema.json";
 import { createSetErrors } from "@/state";
 import { getValidationPath } from "@/util/input";
 
-const configSchema = compileSchema(configSchemaJSON, { drafts: [draft07] });
+// json-schema-library loads in its own chunk without holding up the first
+// render, and is long loaded by the time a config is edited
+const configSchema = import("json-schema-library").then(
+  ({ compileSchema, draft07 }) =>
+    compileSchema(configSchemaJSON, { drafts: [draft07] }),
+);
 
 export const useValidation = () => {
   const dispatch = useDispatch();
@@ -24,7 +28,7 @@ export const useValidation = () => {
         dispatch(createSetErrors(errorPointerAsKey));
       };
 
-      const { errors } = configSchema.validate(config);
+      const { errors } = (await configSchema).validate(config);
 
       setValidationErrors(errors);
 
