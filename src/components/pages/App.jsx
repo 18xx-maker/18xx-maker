@@ -114,7 +114,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="p-4" data-testid="app">
+    <div className="mx-auto max-w-200 p-4" data-testid="app">
       <h1 className="text-4xl font-extrabold">{t("app.title")}</h1>
       {data && (
         <div className="p-4 border rounded-xl my-4">
@@ -122,7 +122,7 @@ const App = () => {
           <div className="flex flex-row gap-4 mt-4">
             <PlatformIcon
               platform={data.platform}
-              className="fill-white stroke-white"
+              className="fill-foreground stroke-foreground"
             />
             {data.versions.system}
           </div>
@@ -148,7 +148,10 @@ const App = () => {
         <div className="border rounded-xl overflow-hidden">
           <p className="p-4">{t("app.config.what")}</p>
           <p className="px-4 pb-4">
-            {t("app.config.file")} <code>{data.path}</code>
+            {t("app.config.file")}{" "}
+            <code className="rounded-md border bg-accent px-1.5 py-0.5 font-mono text-sm">
+              {data.path}
+            </code>
           </p>
           <Code language="json">{JSON.stringify(data.config, null, 2)}</Code>
         </div>
