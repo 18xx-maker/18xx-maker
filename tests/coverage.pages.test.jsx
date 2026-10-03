@@ -166,7 +166,7 @@ describe("tile manifest", () => {
 
 describe("tokens page", () => {
   it("lays out tokens on the gsp sheet", async () => {
-    renderApp("/games/18Test/tokens?config.tokens.layout=gsp");
+    renderApp("/games/18Test/tokens?print=true&config.tokens.layout=gsp");
     const [page] = await screen.findAllByTestId("game-18Test-tokens");
     const positions = attr(page, "svg > g", "transform");
     // 12 per row, 64 apart, centered on the 8in wide usable page
@@ -180,7 +180,7 @@ describe("tokens page", () => {
   it("prints reversed market tokens per company as configured", async () => {
     const count = async (reverse) => {
       const { unmount } = renderApp(
-        `/games/18Test/tokens?config.tokens.reverseMarketTokens=${reverse}`,
+        `/games/18Test/tokens?print=true&config.tokens.reverseMarketTokens=${reverse}`,
       );
       const pages = await screen.findAllByTestId("game-18Test-tokens");
       const tokens = pages.flatMap((page) => all(page, "svg > g")).length;
@@ -191,6 +191,24 @@ describe("tokens page", () => {
     // 18Test companies have one market token each, so "one" is all of them
     expect(await count("one")).toBe(none + games["18Test"].companies.length);
     expect(await count("all")).toBe(none + games["18Test"].companies.length);
+  });
+
+  it("stacks the pages of the sheet in the pan and zoom editor", async () => {
+    const count = async (path, selector) => {
+      const { unmount } = renderApp(path);
+      const pages = await screen.findAllByTestId("game-18Test-tokens");
+      const tokens = pages.flatMap((page) => all(page, selector)).length;
+      unmount();
+      return tokens;
+    };
+    const printed = await count(
+      "/games/18Test/tokens?print=true",
+      ":scope > svg > g",
+    );
+    expect(printed).toBeGreaterThan(0);
+    expect(await count("/games/18Test/tokens", "#editor > svg > g > g")).toBe(
+      printed,
+    );
   });
 });
 
