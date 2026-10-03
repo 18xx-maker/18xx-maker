@@ -138,4 +138,8 @@ available:
 | `r` | Refresh the current game from the file system | Web only. Only on supported browsers. |
 | `t` | Navigate to the Tiles page                    |                                       |
 | `u` | Navigate to the App Info page                 | App only.                             |
+| `x` | Open the export menu                          | App only. Goes to the loaded game.    |
 | `?` | Navigate to the Help page                     |                                       |
+
+With the export menu open: `p` exports PDFs, `n` exports PNGs, `b` exports a
+Board18 file and `o` opens the export options.
