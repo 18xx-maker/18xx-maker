@@ -7,15 +7,12 @@ import configSchemaJSON from "@/schemas/config.schema.json";
 import { createSetErrors } from "@/state";
 import { getValidationPath } from "@/util/input";
 
-// json-schema-library is only needed once a config is validated
-let configSchema;
-const getConfigSchema = async () => {
-  if (!configSchema) {
-    const { compileSchema, draft07 } = await import("json-schema-library");
-    configSchema = compileSchema(configSchemaJSON, { drafts: [draft07] });
-  }
-  return configSchema;
-};
+// json-schema-library loads in its own chunk without holding up the first
+// render, and is long loaded by the time a config is edited
+const configSchema = import("json-schema-library").then(
+  ({ compileSchema, draft07 }) =>
+    compileSchema(configSchemaJSON, { drafts: [draft07] }),
+);
 
 export const useValidation = () => {
   const dispatch = useDispatch();
@@ -31,7 +28,7 @@ export const useValidation = () => {
         dispatch(createSetErrors(errorPointerAsKey));
       };
 
-      const { errors } = (await getConfigSchema()).validate(config);
+      const { errors } = (await configSchema).validate(config);
 
       setValidationErrors(errors);
 
