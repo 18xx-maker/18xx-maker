@@ -117,7 +117,7 @@ pnpm test:e2e
 pnpm maker export 18Test --format pdf,png,b18
 node scripts/export-golden.mjs 18Test
 
-# Every export option (formats, docs, layouts, paginated, background, variation, png.dpi,
+# Every export option (formats, docs, layouts, background, variation, png.dpi,
 # b18.version, b18.author) can also be set in a game file's `exports` field
 # (src/schemas/game.schema.json, src/docs/games/exports.en.md). A flag wins over
 # the game file and the game file over the defaults: resolveExportOptions in

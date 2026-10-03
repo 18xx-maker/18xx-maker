@@ -517,10 +517,6 @@
           "description": "all exports a file for every layout of the cards, tiles and tokens, current only the layout of the config, like --layouts. When left out the export.allLayouts setting of the config decides.",
           "enum": ["all", "current"]
         },
-        "paginated": {
-          "type": "boolean",
-          "description": "Also export the paginated pdfs, like --paginated. Defaults to false for maker export and true in the app."
-        },
         "background": {
           "type": "string",
           "description": "The background of the map, market, par, revenue and tile manifest png images, like --background: white or transparent. Every other png image (the background page, cards, charters, tokens and tiles) is always transparent. Board18 boxes and pdf files are not affected: the map and market of a Board18 box are always white, its tokens and tiles transparent. Defaults to white.",

@@ -48,7 +48,6 @@
     "documents": "Documents",
     "documentsDescription": "Only for pdf and png files.",
     "allLayouts": "Every layout of a sheet",
-    "paginated": "Paginated pdfs",
     "background": "Image background",
     "backgroundDescription": "Of the map, market, par, revenue and tile manifest png images, white by default. The other png images (background, cards, charters, tokens and tiles) are always transparent. Board18 maps and markets are always white, their tokens and tiles transparent.",
     "transparent": "Transparent",

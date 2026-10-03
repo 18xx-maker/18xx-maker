@@ -41,10 +41,9 @@ describe("exit codes", () => {
     expect(result.stderr).toContain("Game 18Missing not found");
   });
 
-  it("has a flag to turn the paginated pdfs of a game off", () => {
-    const result = maker("export", "--help");
-    expect(result.stdout).toContain("--paginated");
-    expect(result.stdout).toContain("--no-paginated");
+  // Paginated pdfs are always there when a page does not fit on one sheet
+  it("has no flag for the paginated pdfs", () => {
+    expect(maker("export", "--help").stdout).not.toContain("paginated");
   });
 
   it("exits 2 for a game that does not exist", () => {

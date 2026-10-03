@@ -33,7 +33,6 @@ vi.mock("@/data", async (importOriginal) => {
           formats: ["png", "b18"],
           docs: ["map", "cards"],
           layouts: "all",
-          paginated: false,
           png: { dpi: 150 },
           b18: { version: "3.0", author: "The Designer" },
         },
@@ -95,9 +94,6 @@ describe("export options of a game with exports", () => {
     expect(
       within(panel).getByRole("switch", { name: "Every layout of a sheet" }),
     ).toBeChecked();
-    expect(
-      within(panel).getByRole("switch", { name: "Paginated pdfs" }),
-    ).not.toBeChecked();
     expect(within(panel).getByLabelText("PNG resolution (dpi)")).toHaveValue(
       150,
     );
@@ -133,7 +129,7 @@ describe("export options of a game with exports", () => {
     expect(names.some((name) => name.includes("tiles"))).toBe(false);
   });
 
-  it("is overridden by the formats, documents, paginated and box of the panel", async () => {
+  it("is overridden by the formats, documents and box of the panel", async () => {
     const { user, panel } = await openOptions();
     await user.click(
       within(panel).getByRole("checkbox", { name: "PDF documents" }),
@@ -146,9 +142,6 @@ describe("export options of a game with exports", () => {
     );
     await user.click(within(panel).getByRole("checkbox", { name: "Tokens" }));
     await user.click(within(panel).getByRole("checkbox", { name: "Cards" }));
-    await user.click(
-      within(panel).getByRole("switch", { name: "Paginated pdfs" }),
-    );
     await user.click(within(panel).getByRole("button", { name: /^Export$/ }));
 
     await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));

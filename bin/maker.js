@@ -71,11 +71,6 @@ program
     "--layouts <layouts>",
     "all: a file for every layout of a sheet, or current",
   )
-  .option("--paginated", "also export the paginated pdfs")
-  .option(
-    "--no-paginated",
-    "not the paginated pdfs, when the game file has them",
-  )
   .option(
     "--background <background>",
     "white or transparent: the background of the map, market, par, revenue and tile manifest PNGs, the other PNGs are always transparent, not of a Board 18 box (default: white)",
@@ -103,7 +98,7 @@ program
   .option("-d, --debug", "start the express server and then quit")
   .addHelpText(
     "after",
-    '\nEvery option but --config, --out, --jobs, --all and --debug can also be set in the\n`exports` field of the game file, which is what they are when you do not give\nthem. What you give here wins over the game file: --no-paginated turns off\n"paginated": true, --layouts current "layouts": "all".',
+    '\nEvery option but --config, --out, --jobs, --all and --debug can also be set in the\n`exports` field of the game file, which is what they are when you do not give\nthem. What you give here wins over the game file: --layouts current turns off\n"layouts": "all".',
   )
   .action((game, opts) => exportCommand(game, withAuthor(opts)));
 

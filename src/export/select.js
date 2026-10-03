@@ -26,11 +26,10 @@ const SHEET = {
 export const docPage = (doc) => SHEET[doc.kind] || doc.kind;
 
 // The documents of a game that the options ask for, for pdf and png
-export const selectDocs = (docs, { docs: names, paginated, variation }) =>
+export const selectDocs = (docs, { docs: names, variation }) =>
   docs.filter(
     (doc) =>
       (!names || names.includes(docPage(doc))) &&
-      (paginated || doc.mode !== "paginated") &&
       (variation === undefined ||
         doc.variation === undefined ||
         doc.variation === variation),

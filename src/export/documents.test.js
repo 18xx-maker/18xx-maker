@@ -36,7 +36,6 @@ describe("documents", () => {
       "market",
       "market-paginated",
       "par",
-      "par-paginated",
       "revenue",
       "revenue-paginated",
       "tile-manifest",
@@ -258,6 +257,35 @@ describe("layouts", () => {
     expect(docs.filter((doc) => doc.kind === "tiles")).toHaveLength(
       data.layouts.tiles.length,
     );
+  });
+});
+
+describe("paginated documents", () => {
+  const game = loadGame("18Test");
+  const paginated = (paper) =>
+    ids(
+      documents(game, { ...loadGameConfig(game), paper }, data).filter(
+        (doc) => doc.mode === "paginated",
+      ),
+    );
+
+  it("has no paginated document for what fits on one page", () => {
+    // The par of 18Test fits on a letter page, the others do not
+    expect(paginated(loadGameConfig(game).paper)).toEqual([
+      "map/paginated",
+      "market/paginated",
+      "revenue/paginated",
+    ]);
+    expect(paginated({ width: 5000, height: 5000, margins: 25 })).toEqual([]);
+  });
+
+  it("has a paginated document for what does not fit on one page", () => {
+    expect(paginated({ width: 300, height: 300, margins: 25 })).toEqual([
+      "map/paginated",
+      "market/paginated",
+      "par/paginated",
+      "revenue/paginated",
+    ]);
   });
 });
 

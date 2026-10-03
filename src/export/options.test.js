@@ -14,7 +14,6 @@ describe("resolveExportOptions", () => {
   it("has the built in defaults without any layer", () => {
     expect(resolveExportOptions()).toEqual({
       formats: ["pdf"],
-      paginated: false,
       background: "white",
       png: { dpi: 300 },
       b18: { version: "1.0" },
@@ -25,12 +24,11 @@ describe("resolveExportOptions", () => {
   it("puts the defaults of the caller on the built in ones", () => {
     expect(
       resolveExportOptions({
-        defaults: { paginated: true, b18: { author: "Me" } },
+        defaults: { background: "transparent", b18: { author: "Me" } },
       }),
     ).toEqual({
       formats: ["pdf"],
-      paginated: true,
-      background: "white",
+      background: "transparent",
       png: { dpi: 300 },
       b18: { version: "1.0", author: "Me" },
     });
@@ -41,7 +39,6 @@ describe("resolveExportOptions", () => {
       formats: ["png", "b18"],
       docs: ["map"],
       layouts: "all",
-      paginated: true,
       background: "white",
       variation: 1,
       png: { dpi: 150 },
@@ -51,7 +48,7 @@ describe("resolveExportOptions", () => {
     expect(resolveExportOptions({ game })).toEqual(game);
     expect(
       resolveExportOptions({
-        defaults: { paginated: false, b18: { author: "Default" } },
+        defaults: { b18: { author: "Default" } },
         game,
         user: {
           formats: ["pdf"],
@@ -65,21 +62,11 @@ describe("resolveExportOptions", () => {
       formats: ["pdf"],
       docs: ["map"],
       layouts: "current",
-      paginated: true,
       background: "transparent",
       variation: 1,
       png: { dpi: 72 },
       b18: { version: "2.0", author: "User" },
     });
-  });
-
-  it("lets the user turn off what the game turns on", () => {
-    expect(
-      resolveExportOptions({
-        game: { paginated: true },
-        user: { paginated: false },
-      }).paginated,
-    ).toBe(false);
   });
 
   it("lets the user choose the background over the game", () => {
@@ -125,7 +112,6 @@ describe("resolveExportOptions", () => {
         formats: ["gif"],
         docs: ["nothing"],
         layouts: "some",
-        paginated: "yes",
         background: "black",
         variation: -1,
         png: { dpi: 301 },
@@ -135,7 +121,6 @@ describe("resolveExportOptions", () => {
 
     expect(options).toEqual({
       formats: ["pdf"],
-      paginated: false,
       background: "white",
       png: { dpi: 300 },
       b18: { version: "1.0" },
@@ -150,6 +135,7 @@ describe("cleanOptions", () => {
         formats: ["pdf", "pdf", "png"],
         docs: ["map", "cards"],
         extra: true,
+        paginated: true,
         png: { dpi: 1, other: 1 },
       }),
     ).toEqual({

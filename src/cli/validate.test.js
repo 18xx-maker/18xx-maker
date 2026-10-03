@@ -155,7 +155,6 @@ describe("validate", () => {
           formats: ["pdf", "png", "b18"],
           docs: ["map", "tile-manifest"],
           layouts: "current",
-          paginated: true,
           variation: 0,
           png: { dpi: 300 },
           b18: { version: "2.0", author: "Me" },
@@ -184,11 +183,11 @@ describe("validate", () => {
       [{ formats: [] }, "#/exports/formats", /at least 1/i],
       [{ docs: ["nothing"] }, "#/exports/docs/0", /one of/i],
       [{ layouts: "some" }, "#/exports/layouts", /one of/i],
-      [{ paginated: "yes" }, "#/exports/paginated", /boolean/i],
       [{ variation: -1 }, "#/exports/variation", /should be 0 at minimum/],
       [{ b18: { version: "" } }, "#/exports/b18/version", /length/i],
       [{ b18: { color: "red" } }, "#/exports/b18", /color/i],
       [{ pdf: {} }, "#/exports", /pdf/i],
+      [{ paginated: true }, "#/exports", /paginated/i],
     ])("rejects %j", (exports, pointer, message) => {
       const { code, lines } = run(withExports(exports));
       expect(code).toBe(1);
