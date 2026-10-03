@@ -59,6 +59,20 @@ describe("config selector", () => {
     });
   });
 
+  it("keeps a bounded number of results for distinct searches", () => {
+    const state = { config: {} };
+    const g = game("system:x", {});
+    const first = select(state, "?config.d=0", g);
+    expect(select(state, "?config.d=0", g)).toBe(first);
+
+    for (let i = 1; i <= 25; i++) select(state, `?config.d=${i}`, g);
+
+    // Evicted: equal, but computed again
+    const again = select(state, "?config.d=0", g);
+    expect(again).not.toBe(first);
+    expect(again).toEqual(first);
+  });
+
   it("returns the identical object for identical inputs", () => {
     const state = { config: { c: "stored" }, game: null };
     const g = game("system:x", { e: "game" });
@@ -118,6 +132,12 @@ describe("game selectors", () => {
 });
 
 describe("settings selectors", () => {
+  it("ignore a language that is not a language code", () => {
+    for (const language of [1, {}, "", null, true]) {
+      expect(selectLanguage({ settings: { language } })).toBeUndefined();
+    }
+  });
+
   it("are undefined for stored settings that predate them", () => {
     const state = { settings: {} };
     expect(selectTheme(state)).toBeUndefined();

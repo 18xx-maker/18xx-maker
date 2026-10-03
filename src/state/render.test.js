@@ -70,11 +70,15 @@ describe("render mode state", () => {
 
   it("detects the language without local storage", async () => {
     window.localStorage.setItem("i18nextLng", "de");
+    const input = { id: "18Test", game, config: {} };
+    vi.resetModules();
+    window.__RENDER_INPUT__ = input;
     const setItem = vi.spyOn(Storage.prototype, "setItem");
     const getItem = vi.spyOn(Storage.prototype, "getItem");
     const { default: i18n } = await import("@/locales/i18n");
     await i18n.changeLanguage("fr");
 
+    expect(i18n.language).toBe("fr");
     expect(setItem).not.toHaveBeenCalled();
     expect(getItem).not.toHaveBeenCalled();
     expect(window.localStorage.getItem("i18nextLng")).toBe("de");
@@ -98,12 +102,12 @@ describe("render mode state", () => {
     expect(setItem).not.toHaveBeenCalled();
   });
 
-  it("never caches the language, but reads the one cached by older releases", async () => {
+  it("never reads or caches the language in local storage", async () => {
     window.localStorage.setItem("i18nextLng", "de");
     const { default: i18n } = await importState(undefined).then(
       () => import("@/locales/i18n"),
     );
-    expect(i18n.language).toBe("de");
+    expect(i18n.language).not.toBe("de");
 
     const setItem = vi.spyOn(Storage.prototype, "setItem");
     await i18n.changeLanguage("fr");
@@ -117,6 +121,27 @@ describe("render mode state", () => {
     );
     expect(i18n.language).toBe("es");
   });
+
+  it("prefers the language setting to a legacy cached language", async () => {
+    window.localStorage.setItem("i18nextLng", "de");
+    window.localStorage.setItem("settings", JSON.stringify({ language: "es" }));
+    const { default: i18n } = await importState(undefined).then(
+      () => import("@/locales/i18n"),
+    );
+    expect(i18n.language).toBe("es");
+  });
+
+  it.for([1, {}, ""])(
+    "still loads when the stored language is %j",
+    async (language) => {
+      window.localStorage.setItem("settings", JSON.stringify({ language }));
+      const { default: i18n } = await importState(undefined).then(
+        () => import("@/locales/i18n"),
+      );
+      expect(typeof i18n.language).toBe("string");
+      expect(i18n.language).toBeTruthy();
+    },
+  );
 
   it("keeps the persisted behavior without render input", async () => {
     const { store } = await importState(undefined);

@@ -1,5 +1,7 @@
 import { screen } from "@testing-library/react";
 
+import { games } from "@/data";
+
 import { renderApp } from "@tests/helpers.jsx";
 
 const entries = (router) => router.state.historyAction;
@@ -45,7 +47,41 @@ describe("one keymap", () => {
 
     const field = await screen.findByRole("textbox", { name: "Margin Size" });
     await user.click(field);
+    const text = field.value;
     await user.keyboard("2c");
+    expect(field).toHaveValue(`${text}2c`);
+    expect(router.state.location.pathname).toBe("/games/18Test/map");
+    expect(router.state.location.search).toBe("?config=true&section=layout");
+  });
+
+  it.for(["2", "c", "e"])("ctrl and meta with %s are ignored", async (key) => {
+    const { user, router } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.keyboard(`{Control>}${key}{/Control}`);
+    await user.keyboard(`{Meta>}${key}{/Meta}`);
+    expect(router.state.location.pathname).toBe("/games/18Test/map");
+    expect(router.state.location.search).toBe("");
+  });
+
+  it("e goes to the map when the redux game is another game", async () => {
+    const other = {
+      ...games["18Test"],
+      map: undefined,
+      meta: { ...games["18Test"].meta, slug: "other" },
+    };
+    const { user, router } = renderApp("/", {
+      game: other,
+      loadedGame: {
+        title: "18Test",
+        id: "18Test",
+        type: "app",
+        slug: "18Test",
+      },
+    });
+    await screen.findByTestId("home");
+
+    await user.keyboard("e");
     expect(router.state.location.pathname).toBe("/games/18Test/map");
   });
 

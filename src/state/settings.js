@@ -25,7 +25,14 @@ export const settingsReducer = (state = {}, action) => {
     case SET_SIDEBAR_OPEN:
       return { ...state, sidebarOpen: action.open };
     case SET_LANGUAGE:
-      return { ...state, language: action.language };
+      // Only a language code is stored: anything else clears the setting
+      return {
+        ...state,
+        language:
+          typeof action.language === "string" && action.language
+            ? action.language
+            : undefined,
+      };
     default:
       return state;
   }

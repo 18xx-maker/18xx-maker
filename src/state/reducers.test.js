@@ -374,6 +374,15 @@ describe("settingsReducer", () => {
     });
   });
 
+  it("clears the language for anything but a language code", () => {
+    const state = frozen({ theme: "dark", language: "de" });
+    for (const language of [undefined, 1, {}, ""]) {
+      expect(
+        settingsReducer(state, createSetLanguage(language)).language,
+      ).toBeUndefined();
+    }
+  });
+
   it("ignores other actions", () => {
     const state = frozen({ theme: "light" });
     expect(settingsReducer(state, clearAlert())).toBe(state);
