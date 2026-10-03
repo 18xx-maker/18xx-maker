@@ -40,7 +40,7 @@ describe("game keys", () => {
     const { user, router } = renderApp("/games/18Test");
     await screen.findByTestId("game-18Test");
 
-    await user.keyboard("2");
+    await user.keyboard("4");
     expect(router.state.location.pathname).toBe("/games/18Test/tiles");
   });
 
@@ -59,9 +59,10 @@ describe("game keys", () => {
 
 describe("section keys", () => {
   it.for([
-    ["8", "par"],
-    ["9", "revenue"],
-    ["0", "tile-manifest"],
+    ["7", "par"],
+    ["8", "revenue"],
+    ["9", "tile-manifest"],
+    ["0", "background"],
   ])("%s goes to %s", async ([key, section]) => {
     const { user, router } = renderApp("/games/18Test/map");
     await screen.findByTestId("game-18Test-map");
@@ -92,7 +93,7 @@ describe("e key", () => {
     await screen.findByTestId("home");
 
     await user.keyboard("e");
-    expect(router.state.location.pathname).toBe("/games/t/tiles");
+    expect(router.state.location.pathname).toBe("/games/t/market");
   });
 });
 

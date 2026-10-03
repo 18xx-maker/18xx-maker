@@ -12,7 +12,7 @@ describe("one keymap", () => {
     await screen.findByTestId("game-18Test-map");
     const push = vi.spyOn(router, "navigate");
 
-    await user.keyboard("2");
+    await user.keyboard("4");
     expect(push).toHaveBeenCalledTimes(1);
     expect(router.state.location.pathname).toBe("/games/18Test/tiles");
     expect(entries(router)).toBe("PUSH");

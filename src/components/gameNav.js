@@ -9,8 +9,9 @@ export const gameNav = [
   },
   {
     key: "2",
-    section: "tiles",
-    disabled: (game) => !game.tiles,
+    section: "market",
+    pagination: true,
+    disabled: (game) => !game.stock?.market,
   },
   {
     key: "3",
@@ -19,31 +20,38 @@ export const gameNav = [
   },
   {
     key: "4",
-    section: "cards",
+    section: "tiles",
+    disabled: (game) => !game.tiles,
   },
   {
     key: "5",
+    section: "cards",
+  },
+  {
+    key: "6",
     section: "charters",
     disabled: (game) => !game.companies,
   },
   {
-    key: "6",
-    section: "market",
-    pagination: true,
-    disabled: (game) => !game.stock?.market,
-  },
-  {
     key: "7",
-    section: "background",
-  },
-  {
-    key: "8",
     section: "par",
     pagination: true,
     disabled: (game) => !game.stock?.par?.values,
   },
-  { key: "9", section: "revenue", pagination: true },
-  { key: "0", section: "tile-manifest", disabled: (game) => !game.tiles },
+  {
+    key: "8",
+    section: "revenue",
+    pagination: true,
+  },
+  {
+    key: "9",
+    section: "tile-manifest",
+    disabled: (game) => !game.tiles,
+  },
+  {
+    key: "0",
+    section: "background",
+  },
 ];
 
 // The first section a game has the data for, the best place to start editing
