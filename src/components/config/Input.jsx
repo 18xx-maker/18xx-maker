@@ -90,7 +90,7 @@ const Input = ({
       : options;
 
     inputNode = (
-      <div className="">
+      <div className="flex flex-col gap-2">
         <Label htmlFor={name} className="text-lg">
           {label}
         </Label>
@@ -143,7 +143,7 @@ const Input = ({
         errorValidation={error}
       />
     ) : (
-      <div className="">
+      <div className="flex flex-col gap-2">
         <Label htmlFor={name} className="text-lg">
           {label}
         </Label>
@@ -159,9 +159,9 @@ const Input = ({
   }
 
   return (
-    <div className="mt-8">
+    <div className="flex flex-col gap-1">
       {inputNode}
-      <div className="text-sm mb-4 mt-1 text-muted-foreground">
+      <div className="text-sm text-muted-foreground">
         <ReactMarkdown>{description}</ReactMarkdown>
       </div>
     </div>

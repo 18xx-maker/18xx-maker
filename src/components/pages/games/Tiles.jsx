@@ -14,7 +14,6 @@ import {
   drop,
   filter,
   groupBy,
-  includes,
   is,
   keys,
   map,
@@ -37,8 +36,8 @@ import Svg from "@/components/Svg";
 import ColorContext from "@/context/ColorContext";
 import { tiles as tileDefs } from "@/data";
 import { getTile, sortTiles } from "@/util";
-import { getTileSheetContext } from "@/util/tilesheet";
-import { sidesFromTile } from "@/util/track";
+import { getTileSheetContext, reorderForBleed } from "@/util/tilesheet";
+import { alignSides, sidesFromTile } from "@/util/track";
 
 const gatherIds = (tiles) => {
   return compose(
@@ -59,8 +58,6 @@ const gatherIds = (tiles) => {
 
 const gatherTiles = (tiles) =>
   compose(sortTiles, map(getTile(tileDefs, tiles)), gatherIds)(tiles);
-
-const rotate = (sides) => map((s) => (s % 6) + 1, sides);
 
 const tileAboveSmall = (page, i) => {
   let offset = i % 60;
@@ -204,6 +201,20 @@ const TileSheet = () => {
 
   let pagedTiles = pageTiles(c.perPage, [], separatedTiles);
 
+  if (layout === "die" || layout === "smallDie") {
+    const groupOf = new Map();
+    keys(groupedByColor).forEach((key) =>
+      groupedByColor[key].forEach((tile) => groupOf.set(tile, key)),
+    );
+    pagedTiles = pagedTiles.map((page) =>
+      reorderForBleed(
+        page,
+        (tile) => groupOf.get(tile),
+        layout === "die" ? tileAbove : tileAboveSmall,
+      ),
+    );
+  }
+
   let pageNodes = addIndex(map)((page, pageIndex) => {
     let sides = [];
     let tileNodes = addIndex(map)((hex, i) => {
@@ -257,36 +268,9 @@ const TileSheet = () => {
           (layout === "die" || layout === "smallDie") &&
           pastSides.length > 0
         ) {
-          if (includes(1, pastSides)) {
-            // Track above us has track on the bottom, if we have track on the
-            // top do nothing
-
-            if (includes(1, currentSides) && includes(4, currentSides)) {
-              // Nothing
-            } else if (includes(2, currentSides) && includes(5, currentSides)) {
-              rotation = 120;
-              currentSides = rotate(rotate(currentSides));
-            } else if (includes(3, currentSides) && includes(6, currentSides)) {
-              rotation = 60;
-              currentSides = rotate(currentSides);
-            } else {
-              while (!includes(4, currentSides)) {
-                rotation += 60;
-                currentSides = rotate(currentSides);
-                if (rotation >= 360) {
-                  break;
-                }
-              }
-            }
-          } else {
-            while (includes(4, currentSides)) {
-              rotation += 60;
-              currentSides = rotate(currentSides);
-              if (rotation >= 360) {
-                break;
-              }
-            }
-          }
+          const aligned = alignSides(pastSides, currentSides);
+          rotation = aligned.rotation;
+          currentSides = aligned.sides;
         }
 
         sides.push(clone(currentSides));

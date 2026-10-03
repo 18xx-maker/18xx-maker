@@ -27,7 +27,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
 
 import Code from "@/components/Code";
 import File from "@/components/File";
@@ -64,72 +63,77 @@ const Config = () => {
   };
 
   return (
-    <div className="print:hidden z-50 absolute top-0 left-0 md:left-auto md:max-w-md md:bottom-0 md:overflow-scroll md:border right-0 min-h-screen bg-background p-4 overscroll-contain overscroll-none">
-      <h1 className="text-4xl font-bold">{t("config.title")}</h1>
-      <Button
-        variant="outline"
-        size="icon"
-        className="absolute top-4 right-4"
-        aria-label="Close Config"
-        onClick={onClose}
-      >
-        <X />
-      </Button>
-      <Separator orientation="horizontal" className="my-4" />
-      <Select value={section} onValueChange={setSection}>
-        <SelectTrigger className="text-xl p-2" aria-label="Config Section">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {map((item) => {
-              return (
-                <SelectItem key={item.section} value={item.section}>
-                  {t(`config.${item.section}.title`)}
-                </SelectItem>
-              );
-            }, sections)}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-      <div className="flex flex-row flex-wrap gap-4">
-        <Items section={section} items={items} />
-        {section === "data" && [
-          <p key="reset-p" className="my-4">
-            You can remove any custom settings and revert back to the defaults
-            with this button.
-          </p>,
-          <Button
-            key="reset-button"
-            variant="outline"
-            onClick={resetConfig}
-            className="mb-4"
+    <div className="print:hidden z-50 fixed inset-0 md:left-auto md:w-1/3 md:min-w-96 flex flex-col bg-background md:border-l shadow-lg">
+      <div className="flex flex-row items-center justify-between gap-4 p-4 border-b">
+        <h1 className="text-3xl font-bold">{t("config.title")}</h1>
+        <Button
+          variant="outline"
+          size="icon"
+          aria-label="Close Config"
+          onClick={onClose}
+        >
+          <X />
+        </Button>
+      </div>
+      <div className="flex-1 overflow-y-auto overscroll-contain p-4 flex flex-col gap-6">
+        <Select value={section} onValueChange={setSection}>
+          <SelectTrigger
+            className="text-xl p-2 w-full"
+            aria-label="Config Section"
           >
-            Reset To Defaults
-          </Button>,
-          <p key="local-p" className="mb-4">
-            These values are saved on this browser in local storage.
-          </p>,
-          <h3 key="json-header" className="text-xl mb-2">
-            JSON
-          </h3>,
-          <p key="file-p" className="mb-4">
-            You can copy and paste this json value into the file in
-            src/config.json if you want to apply these settings to command line
-            or local servers.
-          </p>,
-          <Code key="config-diff" language="json" className="w-full">
-            {JSON.stringify(diff(defaultConfig, config), null, 2)}
-          </Code>,
-          <File
-            key="config-file"
-            data={diff(defaultConfig, config)}
-            filename="config.json"
-            className="my-5"
-          >
-            Download config.json
-          </File>,
-        ]}
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {map((item) => {
+                return (
+                  <SelectItem key={item.section} value={item.section}>
+                    {t(`config.${item.section}.title`)}
+                  </SelectItem>
+                );
+              }, sections)}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+        <div className="flex flex-col gap-6">
+          <Items section={section} items={items} />
+          {section === "data" && [
+            <p key="reset-p" className="my-4">
+              You can remove any custom settings and revert back to the defaults
+              with this button.
+            </p>,
+            <Button
+              key="reset-button"
+              variant="outline"
+              onClick={resetConfig}
+              className="self-start"
+            >
+              Reset To Defaults
+            </Button>,
+            <p key="local-p" className="mb-4">
+              These values are saved on this browser in local storage.
+            </p>,
+            <h3 key="json-header" className="text-xl mb-2">
+              JSON
+            </h3>,
+            <p key="file-p" className="mb-4">
+              You can copy and paste this json value into the file in
+              src/config.json if you want to apply these settings to command
+              line or local servers.
+            </p>,
+            <Code key="config-diff" language="json" className="w-full">
+              {JSON.stringify(diff(defaultConfig, config), null, 2)}
+            </Code>,
+            <File
+              key="config-file"
+              data={diff(defaultConfig, config)}
+              filename="config.json"
+              className="my-5"
+            >
+              Download config.json
+            </File>,
+          ]}
+        </div>
       </div>
     </div>
   );

@@ -74,5 +74,5 @@ need advice or help.
 
 I've been asked about donation buttons; if you find this software useful to you
 and would like to donate money towards its development you can do so via
-[paypal](https://paypal.me/kelsin), [square cash](https://cash.me/$kelsin), or
+[paypal](https://paypal.me/kelsin) or
 [venmo](https://account.venmo.com/u/kelsin13).
