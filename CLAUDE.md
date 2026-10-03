@@ -190,6 +190,11 @@ Images in `src/docs` live in `public/images`.
   theme. Capture them from the real app (Playwright, 2x) and keep the app's own
   transparent-square background across the whole image, including under the
   labels; do not pad with a flat color.
+- Keep screenshots clean: equal margins on the left, right and bottom (check
+  the pixels), whole objects only, and no slivers of neighboring objects at the
+  edges (hide them in the capture rather than cropping through them). Generate
+  the image from `scripts/docs-images.mjs`, labels included, so it can be
+  reproduced.
 
 ## Commit messages
 
