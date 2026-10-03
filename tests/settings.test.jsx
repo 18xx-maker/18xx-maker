@@ -88,3 +88,43 @@ describe("settings page", () => {
     await expectTheme("dark");
   });
 });
+
+describe("language setting", () => {
+  const detect = (language) =>
+    vi.spyOn(navigator, "languages", "get").mockReturnValue([language]);
+
+  it("shows the detected language, system by default", async () => {
+    detect("en-US");
+    renderApp("/settings", { settings: {} });
+    expect(
+      await screen.findByRole("combobox", { name: "Language" }),
+    ).toHaveTextContent("System");
+    expect(screen.getByTestId("detected")).toHaveTextContent(
+      "Detected language: American English",
+    );
+  });
+
+  it("says when the detected language has no translations", async () => {
+    detect("de-DE");
+    renderApp("/settings", { settings: {} });
+    expect(await screen.findByTestId("detected")).toHaveTextContent(
+      "German (Germany) (not available, using English)",
+    );
+  });
+
+  it("stores an override and system removes it again", async () => {
+    detect("de-DE");
+    const { user, store } = renderApp("/settings", { settings: {} });
+    const select = await screen.findByRole("combobox", { name: "Language" });
+
+    await user.click(select);
+    await user.click(await screen.findByRole("option", { name: "English" }));
+    expect(store.getState().settings).toEqual({ language: "en" });
+    expect(select).toHaveTextContent("English");
+
+    await user.click(select);
+    await user.click(await screen.findByRole("option", { name: "System" }));
+    expect(store.getState().settings).toEqual({});
+    expect(select).toHaveTextContent("System");
+  });
+});

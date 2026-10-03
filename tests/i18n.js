@@ -5,6 +5,7 @@ import en from "@/locales/en.json";
 
 i18n.use(initReactI18next).init({
   lng: "en",
+  fallbackLng: "en",
   load: "languageOnly",
 
   interpolation: {

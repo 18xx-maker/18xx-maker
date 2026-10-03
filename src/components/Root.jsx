@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router";
 
 import { compose } from "ramda";
@@ -17,6 +18,7 @@ import Header from "@/components/nav/Header";
 
 import { ThemeProvider } from "@/context/ThemeProvider";
 import { useBindings, useEditor } from "@/hooks";
+import { detectedLanguage } from "@/locales/language";
 import {
   createAlert,
   createDownloadPercent,
@@ -24,6 +26,7 @@ import {
   createSetGame,
   createUpdate,
 } from "@/state";
+import { selectLanguage } from "@/state/selectors";
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import * as opfs from "@/util/opfs";
@@ -36,6 +39,14 @@ const Root = () => {
   const [print] = useBooleanParam("print");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { i18n } = useTranslation();
+  const language = useSelector(selectLanguage);
+
+  // The language setting overrides the system one; without it follow the
+  // system
+  useEffect(() => {
+    i18n.changeLanguage(language ?? detectedLanguage());
+  }, [i18n, language]);
 
   const getEventFileHandle = (event) => {
     if (event.dataTransfer.items) {

@@ -85,6 +85,12 @@
       "system": "System",
       "light": "Light",
       "dark": "Dark"
+    },
+    "language": {
+      "title": "Language",
+      "system": "System",
+      "detected": "Detected language: {{language}}",
+      "unavailable": "Detected language: {{language}} (not available, using {{fallback}})"
     }
   },
   "app": {
