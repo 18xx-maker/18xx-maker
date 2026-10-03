@@ -34,7 +34,7 @@ const images = [
     file: "tokens-example.png",
     route: "/games/18Test/tokens?print=true",
     selector: "[data-testid=game-18Test-tokens]",
-    clip: { x: 316, y: 6, width: 300, height: 100 },
+    clip: { x: 316, y: 6, width: 307, height: 108 },
     // the labels are drawn over the page, x is the center of each token
     labels: [
       { text: "Market", x: 354 },
@@ -101,11 +101,15 @@ try {
     await page.evaluate(() => document.fonts.ready);
     if (labels)
       await page.evaluate((labels) => {
-        // the next row of tokens overlaps the bottom of this one
+        // the next row of tokens overlaps the bottom of this one, and tokens
+        // past the fifth would show as a sliver at the right edge
         for (const token of document.querySelectorAll(
           "[data-testid=game-18Test-tokens] g:has(> circle)",
         ))
-          if (token.getBoundingClientRect().y > 90)
+          if (
+            token.getBoundingClientRect().y > 90 ||
+            token.getBoundingClientRect().x > 616
+          )
             token.style.visibility = "hidden";
         for (const { text, x } of labels) {
           const label = document.createElement("div");
