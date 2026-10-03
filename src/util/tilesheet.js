@@ -1,4 +1,5 @@
 import { HEX_RATIO } from "./map.js";
+import { alignSides, sidesFromTile } from "./track.js";
 
 export const getTileSheetContext = (layout, paper, hexWidth) => {
   let c = { layout, paper, hexWidth };
@@ -170,4 +171,43 @@ export const getTileSheetContext = (layout, paper, hexWidth) => {
   }
 
   return c;
+};
+
+// Die layouts print each column of tiles with bleed running into the next tile,
+// so track must meet track. Rotation alone can't always do it (a tile with
+// track on one side can't follow one with none), so when a tile can't line up
+// with the one above it, swap in a later tile from the same group that can.
+// `above(page, i)` returns the tile printed directly above position i, if any.
+export const reorderForBleed = (page, groupOf, above) => {
+  const result = [...page];
+  const placed = [];
+
+  for (let i = 0; i < result.length; i++) {
+    if (result[i] === null) {
+      placed.push([]);
+      continue;
+    }
+
+    if (above(result, i)) {
+      const fits = (tile) =>
+        alignSides(placed[i - 1], sidesFromTile(tile)).matches;
+
+      if (!fits(result[i])) {
+        const j = result.findIndex(
+          (tile, k) =>
+            k > i && tile && groupOf(tile) === groupOf(result[i]) && fits(tile),
+        );
+        if (j > -1) {
+          [result[i], result[j]] = [result[j], result[i]];
+        }
+      }
+    }
+
+    // Same rotation the page applies when it renders the tile
+    const sides = sidesFromTile(result[i]);
+    const past = placed[i - 1] || [];
+    placed.push(past.length > 0 ? alignSides(past, sides).sides : sides);
+  }
+
+  return result;
 };
