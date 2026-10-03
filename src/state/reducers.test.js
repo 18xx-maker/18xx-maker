@@ -294,6 +294,24 @@ describe("summariesReducer", () => {
     expect(Object.keys(second.system)).toEqual(["system:a"]);
     expect(second.system["system:a"].title).toBe("Y");
   });
+
+  it("DELETE_GAME removes only that summary", () => {
+    const state = frozen({
+      bundled: { b: 1 },
+      system: { "system:a": { id: "a" }, "system:b": { id: "b" } },
+    });
+    const result = summariesReducer(state, createDeleteGame("system:a"));
+    expect(result.system).toEqual({ "system:b": { id: "b" } });
+    expect(result.bundled).toBe(state.bundled);
+  });
+
+  it("DELETE_GAME for an unknown summary leaves the state equal", () => {
+    const state = frozen({ system: { "system:a": { id: "a" } } });
+    expect(summariesReducer(state, createDeleteGame("system:z"))).toEqual(
+      state,
+    );
+    expect(summariesReducer({}, createDeleteGame("internal:z"))).toEqual({});
+  });
 });
 
 describe("updateReducer", () => {
