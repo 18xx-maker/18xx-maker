@@ -1,4 +1,5 @@
 import { init, track } from "@plausible-analytics/tracker";
+import i18n from "i18next";
 
 import capability from "@/util/capability";
 import { getRenderInput } from "@/util/renderInput";
@@ -72,9 +73,19 @@ const props = app
     }
   : { interface: source };
 
+// The language setting (or the detected language) changes at runtime, so it is
+// read when sending. Only the language part is sent (en, not en-US).
+const languageProps = () => {
+  const language = i18n.language?.split("-")[0];
+  return language ? { language } : {};
+};
+
 export const trackEvent = (eventName, location, eventOptions = {}) => {
   const { url } = gatherPageviewData(location);
-  const options = { props: { ...props, ...eventOptions }, url };
+  const options = {
+    props: { ...props, ...languageProps(), ...eventOptions },
+    url,
+  };
   if (!prod || window.location.hostname === "localhost") {
     if (DEVLOG) {
       console.log("trackEvent", eventName, options);
@@ -89,7 +100,7 @@ export const trackEvent = (eventName, location, eventOptions = {}) => {
 
 export const trackPageview = (location) => {
   const { url } = gatherPageviewData(location);
-  const options = { props, url };
+  const options = { props: { ...props, ...languageProps() }, url };
 
   if (!prod || window.location.hostname === "localhost") {
     if (DEVLOG) {
