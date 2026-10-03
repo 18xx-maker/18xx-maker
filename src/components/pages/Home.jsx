@@ -4,14 +4,15 @@ import Markdown from "@/components/Markdown";
 
 const Home = () => {
   const { i18n } = useTranslation();
-  const language = i18n.languages[0];
 
   const homes = import.meta.glob("../../pages/home.*.md", {
     eager: true,
     import: "default",
     query: "?raw",
   });
-  const home = homes[`../../pages/home.${language}.md`];
+  const home = i18n.languages
+    .map((language) => homes[`../../pages/home.${language}.md`])
+    .find((md) => md !== undefined);
 
   return (
     <div data-testid="home">
