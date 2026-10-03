@@ -181,7 +181,13 @@ describe("game info page", () => {
 
   it("keeps the game and alerts when forgetting fails", async () => {
     opfs.loadGame.mockResolvedValue(internalGame);
-    opfs.deleteGame.mockRejectedValue(new Error("locked"));
+    // Fails after the page was left for the list, like a real file system
+    opfs.deleteGame.mockImplementation(
+      () =>
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("locked")), 50),
+        ),
+    );
     const { user, router, store } = renderApp("/games/internal:abc");
     await screen.findByTestId("game-internal:abc");
 
@@ -190,7 +196,10 @@ describe("game info page", () => {
     expect(await screen.findByText("locked")).toBeInTheDocument();
     expect(router.state.location.pathname).toBe("/games/internal:abc");
     expect(store.getState().game.meta.slug).toBe("internal:abc");
-    expect(screen.getByRole("button", { name: "Forget" })).toBeInTheDocument();
+    // The router is back before React renders the page again
+    expect(
+      await screen.findByRole("button", { name: "Forget" }),
+    ).toBeInTheDocument();
   });
 
   it("does not offer forgetting bundled games", async () => {
