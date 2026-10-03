@@ -153,7 +153,9 @@ sizing or packaging logic in either surface.
 
 release-please builds releases and the changelog from commit subjects, so every
 commit (and every PR title, since PRs are squash-merged) must follow strict
-[Conventional Commits](https://www.conventionalcommits.org):
+[Conventional Commits](https://www.conventionalcommits.org). A PR title is held
+to the same rules as a commit message (same types, scope, `!` and lowercase
+imperative description):
 
 ```text
 <type>(<optional scope>): <lowercase imperative description>
