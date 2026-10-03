@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useMatch, useNavigate } from "react-router";
 
 import { useLoadedGame } from "@/hooks/game";
 import { createAlert, refreshGame } from "@/state";
@@ -12,6 +12,7 @@ export const useBindings = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loadedGame = useLoadedGame();
+  const viewingGame = useMatch("/games/:slug/:section/*");
 
   const handleKeyDown = useCallback(
     (event) => {
@@ -58,12 +59,20 @@ export const useBindings = () => {
             navigate("/app");
           }
           break;
+        case "x":
+          // The export button opens its own menu when a game is showing
+          if (capability.electron && loadedGame && !viewingGame) {
+            navigate(`/games/${loadedGame.slug}/map`, {
+              state: { exportMenu: true },
+            });
+          }
+          break;
         case "?":
           navigate("/docs");
           break;
       }
     },
-    [loadedGame, dispatch, navigate],
+    [loadedGame, viewingGame, dispatch, navigate],
   );
 
   useEffect(() => {

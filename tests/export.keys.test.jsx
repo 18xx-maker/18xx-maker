@@ -1,0 +1,114 @@
+import { screen, waitFor } from "@testing-library/react";
+import { page } from "vitest/browser";
+
+import { renderApp } from "@tests/helpers.jsx";
+
+const api = vi.hoisted(() => {
+  window.api = {
+    loadPlatformAndVersions: () => ({ platform: "darwin", versions: {} }),
+  };
+  return window.api;
+});
+
+const caps = vi.hoisted(() => ({}));
+
+vi.mock("@/util/capability", async (importOriginal) => {
+  Object.assign(caps, (await importOriginal()).default, { electron: true });
+  return { default: caps };
+});
+
+beforeEach(async () => {
+  await page.viewport(1280, 900);
+  Object.assign(api, {
+    addRecent: vi.fn(),
+    checkForUpdates: vi.fn(),
+    chooseExportFolder: vi.fn(),
+    export: vi.fn().mockResolvedValue({ done: 1, total: 1, failed: [] }),
+    loadConfig: vi.fn().mockResolvedValue({ config: {}, versions: {} }),
+    loadSummaries: vi.fn().mockResolvedValue({}),
+    off: vi.fn(),
+    onAlert: vi.fn(),
+    onDownloadProgress: vi.fn(),
+    onGame: vi.fn(),
+    onProgress: vi.fn(),
+    onRedirect: vi.fn(),
+    onUpdate: vi.fn(),
+  });
+});
+
+// What the request is made of: "b18" for the box, else the file extensions
+const formatsOf = () => {
+  const request = api.export.mock.calls[0][0];
+  if (request.b18) return ["b18"];
+  return [...new Set(request.jobs.map(({ path }) => path.split(".").pop()))];
+};
+
+describe("export keys", () => {
+  it("x opens the export menu of the game showing", async () => {
+    const { user } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.keyboard("x");
+    expect(
+      await screen.findByRole("menuitem", { name: "Export options" }),
+    ).toBeInTheDocument();
+  });
+
+  it("x goes to the loaded game and opens the menu", async () => {
+    const { user, router } = renderApp("/", {
+      loadedGame: {
+        title: "18Test",
+        id: "18Test",
+        type: "app",
+        slug: "18Test",
+      },
+    });
+    await screen.findByTestId("home");
+
+    await user.keyboard("x");
+    await screen.findByRole("menuitem", { name: "Export options" });
+    expect(router.state.location.pathname).toBe("/games/18Test/map");
+  });
+
+  it("x does nothing without a loaded game", async () => {
+    const { user, router } = renderApp("/");
+    await screen.findByTestId("home");
+
+    await user.keyboard("x");
+    expect(router.state.location.pathname).toBe("/");
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+  });
+
+  it.for([
+    ["p", "pdf"],
+    ["n", "png"],
+    ["b", "b18"],
+  ])("%s in the menu exports %s", async ([key, format]) => {
+    const { user } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.keyboard("x");
+    await screen.findByRole("menu");
+    await user.keyboard(key);
+
+    await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
+    expect(formatsOf()).toEqual([format]);
+    await waitFor(() =>
+      expect(screen.queryByRole("menu")).not.toBeInTheDocument(),
+    );
+  });
+
+  it("o in the menu opens the export options", async () => {
+    const { user, router } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.keyboard("x");
+    await screen.findByRole("menu");
+    await user.keyboard("o");
+
+    await screen.findByRole("dialog", { name: "Export 18Test" });
+    expect(api.export).not.toHaveBeenCalled();
+    expect(api.chooseExportFolder).not.toHaveBeenCalled();
+    expect(router.state.location.pathname).toBe("/games/18Test/map");
+  });
+});
