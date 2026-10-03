@@ -392,6 +392,29 @@ describe("png", () => {
     expect(readPng(bytes)).toMatchObject({ width: 288, height: 198 });
   });
 
+  it("paints the border white and waits for a painted frame before the shot", async () => {
+    const a = adapter({ rect: { x: 24, y: 24, width: 240, height: 150 } });
+
+    await capture(a, withBackground(), { dpi: 96 });
+
+    const pads = a.evaluated.filter((e) => e.includes("padding: 24px"));
+    expect(pads).toHaveLength(1);
+    expect(pads[0]).toContain("(true ?");
+    expect(a.evaluated.some((e) => e.includes("requestAnimationFrame"))).toBe(
+      true,
+    );
+  });
+
+  it("leaves the border to the transparent background when asked for it", async () => {
+    const a = adapter({ rect: { x: 24, y: 24, width: 240, height: 150 } });
+
+    await capture(a, withBackground(), { dpi: 96, background: "transparent" });
+
+    const pads = a.evaluated.filter((e) => e.includes("padding: 24px"));
+    expect(pads).toHaveLength(1);
+    expect(pads[0]).toContain("(false ?");
+  });
+
   it("has no border on a document without the background", async () => {
     const a = adapter({ rect });
 
