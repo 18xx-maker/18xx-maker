@@ -23,23 +23,29 @@ const pages = (file) =>
       .matchAll(/\/Type\s*\/Page\b(?!s)/g),
   ].length;
 
+// Every app gets its own user data, so the route it restores and the recents it
+// lists are never those of an earlier run (or of the app of whoever runs this)
 const launch = () =>
   electron.launch({
     args: [
       main,
+      `--user-data-dir=${path.join(out, "user-data")}`,
       ...(process.platform === "linux" && process.env.CI
         ? ["--no-sandbox"]
         : []),
     ],
   });
 
-// The main window, on a page of the app
+// The main window, on a page of the app. The window exists before its page is
+// loaded: a hash set earlier is lost when the load of the app replaces it.
 const show = async (app, hash) => {
   const window = await app.firstWindow();
+  await window.waitForLoadState("load");
   await window.setViewportSize({ width: 1280, height: 900 });
   await window.evaluate((to) => {
     window.location.hash = to;
   }, hash);
+  await expect(window).toHaveURL((url) => url.hash === hash);
   return window;
 };
 
@@ -56,7 +62,7 @@ test.afterEach(async () => {
 });
 
 test.describe("the app exports 18Test", () => {
-  // One app at a time, they all share its config file
+  // One app at a time, they open real windows
   test.describe.configure({ mode: "serial" });
 
   test.setTimeout(180_000);
