@@ -66,11 +66,11 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
   const unitClassName = clsx(className, "w-24");
 
   return (
-    <div className="">
-      <Label className="w-min text-lg" htmlFor={name}>
+    <div className="flex flex-col gap-2">
+      <Label className="text-lg" htmlFor={name}>
         {label}
       </Label>
-      <div className="flex flex-row gap-2 my-1 justify-start items-center">
+      <div className="flex flex-row gap-2 justify-start items-center">
         <Input
           id={name}
           name={name}
