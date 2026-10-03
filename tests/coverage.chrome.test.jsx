@@ -246,7 +246,7 @@ describe("unit inputs", () => {
     expect(Number(input.value)).toBeCloseTo(6.35);
 
     await user.clear(input);
-    await user.type(input, "25.4");
+    await user.type(input, "25.4{Enter}");
 
     // 25.4mm is an inch, 100 units
     await waitFor(
@@ -266,7 +266,7 @@ describe("unit inputs", () => {
     expect(store.getState().config.margin).toBeUndefined();
 
     await user.tripleClick(input);
-    await user.keyboard("2");
+    await user.keyboard("2{Enter}");
 
     expect(input).not.toHaveClass("border-error");
     await waitFor(() => expect(store.getState().config.margin).toBe(200));

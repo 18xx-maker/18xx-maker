@@ -9,7 +9,7 @@ import Share from "@/components/cards/Share";
 import Train from "@/components/cards/Train";
 
 import { useConfig, useGame } from "@/hooks";
-import { fillArray, maxPlayers } from "@/util";
+import { fillArray, maxPlayers, unitsToCss } from "@/util";
 import { getCardData } from "@/util/cards";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
 
@@ -146,6 +146,13 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
         style={{
           width: data.css.printableWidth,
           height: data.css.printableHeight,
+          ...(data.layout.perPage === 1
+            ? {
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "safe center",
+              }
+            : {}),
         }}
       >
         {cardNodes}
@@ -184,7 +191,15 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
     top: -${data.css.cutlines};
 }
 
-.card,
+${
+  cardConfig.padding === 12.5
+    ? ""
+    : `.card {
+    --card-padding: ${unitsToCss(cardConfig.padding)};
+}
+
+`
+}.card,
 .card__bleed {
     height: ${data.css.bleedHeight};
     width: ${data.css.bleedWidth};
@@ -197,7 +212,16 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
     height: ${data.css.height};
 }
 
-.share__hr {
+${
+  privates.some((p) => p.revenueBackgroundColor)
+    ? `.private__revenue--background::before {
+    right: -${data.css.bleed};
+    bottom: -${data.css.bleed};
+}
+
+`
+    : ""
+}.share__hr {
     bottom: calc(0.375in + ${data.css.bleed});
 }
 
@@ -217,7 +241,7 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
   if (config.privates.style === "big") {
     css += `
 .private__description {
-  padding: 0 35% 0 0.125in;
+  padding: 0 35% 0 var(--card-padding);
 }
 
 .private__players {
@@ -231,7 +255,7 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
   position: absolute;
   top: 0;
   right: 0;
-  padding: 0.4in 0.125in 1em 0.5em;
+  padding: 0.4in var(--card-padding) 1em 0.5em;
   width: 25%;
   height: 45%;
   float: none;
