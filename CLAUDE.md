@@ -17,6 +17,26 @@ pnpm build && pnpm test:e2e   # Playwright against the built site (dist/site)
 pnpm validate          # schema check of every src/data/**/*.json
 ```
 
+### Full test run (what CI runs)
+
+Run in this order before pushing; every step must pass:
+
+```shell
+pnpm install
+pnpm exec playwright install chromium --only-shell   # once
+pnpm pretty                                          # prettier check (pretty:fix to fix)
+pnpm lint
+pnpm validate
+CI=1 pnpm test:run                                   # unit + component, coverage floor, no snapshot writes
+pnpm build && pnpm test:e2e                          # Playwright on dist/site
+pnpm build:app && pnpm build:sb                      # Electron and Storybook must compile
+```
+
+Also run `E2E_ELECTRON=1 pnpm test:export` (after `pnpm build && pnpm build:app`)
+when touching `electron/`, the preload, render mode or `src/export`. CI runs
+the vitest suite in 3 shards on Linux (reports merged for the coverage check);
+macOS and Windows run only the unit project on PRs.
+
 Layout (projects are defined in `test.projects` in `vitest.config.js`):
 
 - `unit` (node): `src/**/*.test.js`: logic in `src/util` and `src/state`.
