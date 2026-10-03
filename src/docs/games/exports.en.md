@@ -122,3 +122,18 @@ Everything a game can be exported as, with a sheet for every layout:
 ```json
 "exports": { "formats": ["pdf", "png", "b18"], "layouts": "all", "paginated": true }
 ```
+
+A transparent map and market, at a lower resolution:
+
+```json
+"exports": { "formats": ["png"], "docs": ["map", "market"], "background": "transparent", "png": { "dpi": 150 } }
+```
+
+Flags beat the game file. With `"png": { "dpi": 150 }` in the game file:
+
+```bash
+pnpm maker export my-game.json --format png            # 150 dpi
+pnpm maker export my-game.json --format png --dpi 300  # 300 dpi
+pnpm maker export my-game.json --no-paginated          # even if the game says paginated: true
+pnpm maker export 1889 --format pdf --config my-config.json
+```

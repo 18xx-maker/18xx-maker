@@ -111,6 +111,10 @@
       "title": "Files",
       "description": "How 18xx Maker uses files"
     },
+    "faq": {
+      "title": "Questions & Answers",
+      "description": "Common questions"
+    },
     "translation": {
       "title": "Translation",
       "description": "Help translate 18xx Maker"
@@ -130,6 +134,10 @@
       }
     },
     "games": {
+      "firstGame": {
+        "title": "Your First Game",
+        "description": "A tour of a game file"
+      },
       "schemas": {
         "title": "JSON Schemas",
         "description": "Validation of game files"

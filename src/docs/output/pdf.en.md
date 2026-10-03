@@ -5,15 +5,15 @@
 On the 18xx Maker application you can browse to any game component and then
 click on the export button:
 
-![export button](/images/export-button.png)
+![The export button in the toolbar](/images/export-button.png)
 
 > [!NOTE]
 > If you are using 18xx Maker in a web browser please note that this button
 > doesn't exist and instead shows a print icon. It only opens your browser's
 > print menu.
 
-This will expose a menu with export options. You can either export a full game
-to PDF documents. Exporting this way
+This will expose a menu with export options: export the full game as PDF
+documents, as PNG images or as a Board18 box. Exporting this way
 _will_ respect any config options you have set in the app. The _Export options_
 entry opens a panel where you choose the formats (PDF, PNG and Board18), the
 documents, if every layout of a sheet is exported, if the paginated PDFs are
@@ -52,7 +52,7 @@ pnpm build && pnpm maker export 1889 --format pdf --paginated
 `pnpm maker print 1889` is the same thing (the game defaults to `1889`). Other
 useful options are `--docs map,cards` to only export some pages, `--layouts all`
 to get a sheet for every layout, `--variation 1` for one map variation,
-`--config my-config.json` for a config file on top of `src/config.json`,
+`--config my-config.json` for your config file,
 `--out <folder>` for another folder than `render` and `--jobs 3` to capture
 three files at the same time. `pnpm maker help export` lists them all.
 
@@ -67,9 +67,15 @@ _Export options_ panel has the same options as controls, starting with the game
 file's, and a button to go back to them.
 
 Remember that this will not use the options setup in the browser config page. In
-order to make your printed output identical to what you see in the browser, go
-to the [config](/config) page and copy the json found at the bottom into
-`src/config.json` replacing anything previously there.
+order to make your printed output identical to what you see in the browser, open
+the [config](?config=true) panel and use "Download config.json" (or copy the json
+found at the bottom) into a file, then pass it with `--config`:
+
+```bash
+pnpm maker export 1889 --format pdf --config my-config.json
+```
+
+A config in `src/config.json` is used too, with `--config` on top of it.
 
 This will build the app, then output a bunch of files into the
 `render/1889` folder:

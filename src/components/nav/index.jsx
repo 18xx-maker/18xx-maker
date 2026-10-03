@@ -1,8 +1,10 @@
 import {
   Atom,
   Building2,
+  CircleHelp,
   Coins,
   Cylinder,
+  FilePlus,
   FileStack,
   FolderOpen,
   Globe,
@@ -76,6 +78,11 @@ export const mainMenu = [
         to: "/docs/files",
       },
       {
+        icon: CircleHelp,
+        label: "docs.faq.title",
+        to: "/docs/faq",
+      },
+      {
         icon: Globe,
         label: "docs.translation.title",
         to: "/docs/translation",
@@ -105,6 +112,11 @@ export const mainMenu = [
   {
     label: "nav.docsGames",
     items: [
+      {
+        icon: FilePlus,
+        label: "docs.games.firstGame.title",
+        to: "/docs/games/first-game",
+      },
       {
         icon: SwatchBook,
         label: "docs.games.schemas.title",

@@ -5,6 +5,9 @@ you up and creating game prototypes in no time. This page talks about two common
 use cases. For more information please explore the other docs available from the
 site menu on the left.
 
+New to this? Follow the [first game tutorial](/docs/games/first-game), and see
+the [FAQ](/docs/faq) for common questions.
+
 > [!TIP]
 > These docs are about using 18xx Maker. If you are interested in hacking on the
 > code or running the code locally please refer to
@@ -19,8 +22,9 @@ will print with all current config settings and options.
 
 For example, if you want to print a paginated map for [Shikoku
 1889](/games/1889), you should browse to the [map page](/games/1889/map), and
-then select the [Paginate](/games/1889/map?paginated=true) open in the left hand
-game menu. Then you can select "Print" from your browsers menu.
+then turn on the Paginate switch in the toolbar at the top left (or open the
+[paginated map](/games/1889/map?paginated=true) directly). Then you can select
+"Print" from your browser's menu.
 
 The game will print without any UI elements from the page. You can use your
 systems ability to print directly to a PDF file as well. The defaults for the
@@ -37,7 +41,12 @@ by your operating system (with bad results).
 ### Exporting from the 18xx Maker app
 
 When using the [app](https://github.com/18xx-maker/18xx-maker/releases) there is
-a button in the lower right of every game page with these entries:
+a button in the toolbar at the top left of every game page (the one next to the
+Paginate switch):
+
+![The toolbar of a game page with the export button](/images/export-button.png)
+
+Its menu has these entries:
 
 - Export game as pdf documents
 - Export game as png images
@@ -77,8 +86,8 @@ to the game's options_ to go back. The same options are flags of `maker export`
 on the command line.
 
 Exports use the same config as the page you see (including a game's own
-config and your saved layout settings). Files are named after
-the game's title.
+config and your saved layout settings), but always render in the light theme,
+whatever theme the app is using. Files are named after the game's title.
 
 #### PNG images
 
@@ -102,9 +111,12 @@ Once you have a game file you can drag it into the browser window (or hit the
 `o` key from anywhere on the site) to load this game file into your
 browser. Depending on your browser we either copy the game into the browser, or
 use it directly from your file system. On the web you'll either need to load the
-game again when you make changes or select "Refresh" from the left game menu
+game again when you make changes or select "Refresh" from the toolbar
 when you make changes. If you are using the 18xx Maker app the app will reload
 every time you edit the JSON file for you.
+
+To check a game file for mistakes before loading it, run `pnpm maker validate
+my-game.json` (see [Files](/docs/files)).
 
 Learning what is available in the JSON file is a tricky process. Please make use
 of the [elements](/elements) page to see most things that can be done on a tile

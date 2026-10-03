@@ -29,7 +29,7 @@ Icons (when on a tile with a single city of centerTown) are moved to:
 }
 ```
 
-If there is also a terrain cost than the terrain is shifted left to:
+If there is also a terrain cost then the terrain is shifted left to:
 
 ```json
 {
@@ -80,7 +80,7 @@ Terrain costs (when on a tile with a single city or centerTown) are moved to:
 }
 ```
 
-If there is also an icon than the terrain is shifted right to:
+If there is also an icon then the terrain is shifted right to:
 
 ```json
 {

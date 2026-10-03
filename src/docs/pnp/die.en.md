@@ -12,12 +12,12 @@ trying out the machine for the first time on test paper.
 In order to use it you need the machine itself and then cutting dies. I ended up
 order two custom dies for myself:
 
-- [CST25449](https://imgur.com/cH9WNHP) - Acryllic Hexes Die (4 x 6 per sheet)
-- [CST25450](https://imgur.com/S0ozCYE) - Acryllic Mini Euro Cards Die (9 per sheet)
+- [CST25449](https://imgur.com/cH9WNHP) - Acrylic Hexes Die (4 x 6 per sheet)
+- [CST25450](https://imgur.com/S0ozCYE) - Acrylic Mini Euro Cards Die (9 per sheet)
 
 Those two die numbers can be used to order the same items that I got from their
-custom die department. Acryllic dies mean that the cutting blades are embedded
-in Acryllic instead of wood which allows you to see through the die to the
+custom die department. Acrylic dies mean that the cutting blades are embedded
+in Acrylic instead of wood which allows you to see through the die to the
 material you are cutting (You can see this in my album linked above).
 
 ## Printing
@@ -26,7 +26,11 @@ material you are cutting (You can see this in my album linked above).
 
 In order to print tiles from this app that match the die cutter listed above
 make sure to select "die" as the tile layout either in the [settings](?config=true) or set the
-`tile.layout` property to `die` in `config.json`.
+`tiles.layout` property to `die` in your config:
+
+```json
+{ "tiles": { "layout": "die" }, "cards": { "layout": "miniEuroDie" } }
+```
 
 When this property is set, the page size for tiles is hardcoded to be 8.5" by
 11".

@@ -7,7 +7,7 @@ the only format supported.
 
 ## Company Logo Options
 
-There are four settings for the "Company Logos" option on the [config](/config)
+There are four settings for the "Company Logos" option on the [config](?config=true)
 page:
 
 - `none` - This is the default setting. This doesn't use SVG's and renders
@@ -56,14 +56,14 @@ relevant `color-stroke-main` as well (for example: `color-stroke-purple`).
 
 Name the logo based on the company abbreviation you want it to be for and drop
 it in the
-[/src/data/logos](https://github.com/18xx-maker/18xx-maker/tree/master/src/data/logos)
+[/src/data/logos](https://github.com/18xx-maker/18xx-maker/tree/main/src/data/logos)
 folder. Once this is done you should **make sure you have a backup** and run:
 
 ```bash
 pnpm svgo
 ```
 
-This will optimize the SVG and remove anything unnessecary from it. This is
+This will optimize the SVG and remove anything unnecessary from it. This is
 required to make sure the react app can load it. After you run this please check
 your SVG and make sure it still looks right. If it doesn't or you have issues
 please [let me know](mailto:kelsin@valefor.com).

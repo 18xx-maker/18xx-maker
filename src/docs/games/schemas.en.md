@@ -22,14 +22,14 @@ directory of the source repository.
 
 - [companies](https://18xx-maker.com/schemas/companies.schema.json) defines the companies files for
   overriding companies
-- [publishers](https://18xx-maker.com/schemas/publishers.schemas.json) defines the publishers file
+- [publishers](https://18xx-maker.com/schemas/publishers.schema.json) defines the publishers file
 - [game](https://18xx-maker.com/schemas/game.schema.json) defines a game file - _this is currently a
   work in progress and isn't complete_
 - [tiles](https://18xx-maker.com/schemas/tiles.schema.json) defines a tiles file and what the hex definitions in game files look like
 - [config](https://18xx-maker.com/schemas/config.schema.json) - defines the `defaults.json` format to
   manage the [config
-  file](https://github.com/18xx-maker/18xx-maker/blob/master/src/defaults.json)
-  for 18xx Maker and it's other tools.
+  file](https://github.com/18xx-maker/18xx-maker/blob/main/src/defaults.json)
+  for 18xx Maker and its other tools.
 - [theme](https://18xx-maker.com/schemas/theme.schema.json) - Schema to define a color theme file
   (maps or companies)
 
@@ -53,4 +53,8 @@ pnpm validate
 ```
 
 in the root folder of your code checkout. This will validate all relevant json
-files including the schemas themselves.
+files including the schemas themselves. To validate your own game file:
+
+```bash
+pnpm maker validate my-game.json
+```

@@ -1,7 +1,7 @@
 # Tokens
 
 18xx Maker has a lot of custom abilities that you can set on the [config
-page](?config) for tokens. This page should help explain them.
+page](?config=true) for tokens. This page should help explain them.
 
 ## Definitions
 
@@ -17,18 +17,33 @@ many tokens to print for companies.
 
 `marketTokens` defines how many market tokens to print and defaults to 3. So in
 a standard game with a par chart you don't need to define this field. You can
-also define this field on a companies definition to override it's value only for
+also define this field on a companies definition to override its value only for
 that company.
+
+```json
+{
+  "info": { "title": "My Game", "marketTokens": 2, "extraStationTokens": 1 },
+  "companies": [
+    {
+      "name": "Blue Railroad",
+      "abbrev": "BLU",
+      "color": "blue",
+      "marketTokens": 4
+    }
+  ]
+}
+```
 
 `extraStationTokens` defines how many station tokens to print for each company
 in addition to any defined on the company itself. You can also define this field
-on a company to override it's value only for that company.
+on a company to override its value only for that company.
 
 ## Tool Config Options
 
-You can set the size of each type of token in the tool. We default to 0.5 inches
-for market tokens and 0.375 inches for station tokens. Hole punches for these
-sizes are relativly easy to find and the resulting stickers fit nicely on the
+You can set the size of each type of token in the tool. Sizes are in hundredths of
+an inch. We default to 50 (0.5 inches) for market tokens and 37.5 (0.375
+inches) for station tokens. Hole punches for these
+sizes are relatively easy to find and the resulting stickers fit nicely on the
 15mm and 12mm tokens from [Rails on Boards](https://www.railsonboards.com/).
 
 If you set the token layout to GSP than it sets the sizes to all 0.5 inches and
@@ -43,6 +58,19 @@ Please remember that tokens on the token sheet all have a little bit of bleed on
 them to prevent cutting errors. When putting tokens on maps they are exact, but
 they will print with circles larger than what you set in the tool on the token
 sheet. This is expected behavior.
+
+```json
+{
+  "tokens": {
+    "layout": "free",
+    "marketTokenSize": 50,
+    "stationTokenSize": 37.5,
+    "reverseMarketTokens": "all"
+  }
+}
+```
+
+![Tokens laid out on a sheet](/images/tokens-example.png)
 
 ## PnP Advice
 
