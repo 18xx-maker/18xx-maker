@@ -103,7 +103,7 @@ test.describe("the app exports 18Test", () => {
       height: 3150,
       pixelsPerMeter: 11811,
     });
-    expect(png(path.join(out, "18test-map.png")).width).toBe(4350);
+    expect(png(path.join(out, "18test-map.png")).width).toBe(4500);
 
     const box = path.join(out, "board18-18Test-1.0");
     expect(png(path.join(box, "18Test-1.0/Tokens.png"))).toEqual({
