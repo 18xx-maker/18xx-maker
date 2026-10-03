@@ -12,6 +12,7 @@ import Analytics from "@/components/Analytics";
 import RenderState from "@/components/RenderState";
 import ScrollToTop from "@/components/ScrollToTop";
 import SetSvgColors from "@/components/SetSvgColors";
+import { ShortcutsDialog } from "@/components/Shortcuts";
 import AppSidebar from "@/components/nav/AppSidebar";
 import Header from "@/components/nav/Header";
 
@@ -130,7 +131,7 @@ body {
     }
   }, [dispatch, navigate, render]);
 
-  useBindings();
+  const [shortcuts, setShortcuts] = useBindings();
   const inEditor = useEditor();
 
   return (
@@ -196,7 +197,14 @@ body {
             </defs>
           </svg>
           <SetSvgColors />
-          {render ? <RenderState /> : <Alert />}
+          {render ? (
+            <RenderState />
+          ) : (
+            <>
+              <Alert />
+              <ShortcutsDialog open={shortcuts} onOpenChange={setShortcuts} />
+            </>
+          )}
         </ScrollToTop>
         <style>{printCss}</style>
       </ThemeProvider>

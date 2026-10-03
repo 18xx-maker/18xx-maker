@@ -10,6 +10,7 @@ import { remarkAlert } from "remark-github-blockquote-alert";
 import { dissoc, startsWith } from "ramda";
 
 import Code from "@/components/Code";
+import Shortcuts from "@/components/Shortcuts";
 
 import { cn } from "@/lib/utils";
 import capability from "@/util/capability";
@@ -129,10 +130,16 @@ const components = {
     "td",
     "border px-4 py-2 text-left [[align=center]]:text-center [[align=right]]:text-right",
   ),
-  pre: md("pre", ""),
+  pre: (props) =>
+    props.children?.props?.className === "language-keybindings"
+      ? props.children
+      : createElement("pre", clean(props)),
   code: (props) => {
     const { children, className, ...rest } = props;
     const match = /language-(\w+)/.exec(className || "");
+
+    // The keybindings come from the same list as the ? dialog
+    if (match?.[1] === "keybindings") return <Shortcuts />;
 
     if (match) {
       return (

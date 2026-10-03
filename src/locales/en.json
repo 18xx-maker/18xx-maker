@@ -648,5 +648,74 @@
     "data": {
       "title": "Data"
     }
+  },
+  "shortcuts": {
+    "title": "Keyboard shortcuts",
+    "description": "Keys that work anywhere in 18xx Maker",
+    "key": "Key",
+    "use": "Use",
+    "notes": "Notes",
+    "exportMenu": "With the export menu open: p exports PDFs, n exports PNGs, b exports a Board18 file and o opens the export options.",
+    "keys": {
+      "escape": {
+        "use": "Go back: close the config panel, then leave the edit page for the game page, then go home",
+        "notes": "Does nothing on the home page"
+      },
+      "docs": {
+        "use": "Navigate to the documentation (Using 18xx Maker)"
+      },
+      "help": {
+        "use": "Show these keyboard shortcuts"
+      },
+      "home": {
+        "use": "Navigate to the Home page"
+      },
+      "load": {
+        "use": "Navigate to the Load Game page"
+      },
+      "open": {
+        "use": "Open a new game file from your system"
+      },
+      "refresh": {
+        "use": "Refresh the current game from the file system",
+        "notes": "Web only. Only on supported browsers."
+      },
+      "atoms": {
+        "use": "Navigate to the Atoms page",
+        "notes": "Not on a game edit page"
+      },
+      "tiles": {
+        "use": "Navigate to the Tiles page",
+        "notes": "Not on a game edit page"
+      },
+      "logos": {
+        "use": "Navigate to the Logos page",
+        "notes": "Not on a game edit page. Toggles config when editing"
+      },
+      "game": {
+        "use": "Navigate to the Game page",
+        "notes": "Only if you have a game loaded"
+      },
+      "edit": {
+        "use": "Edit the loaded game at its first section",
+        "notes": "On a game edit page, goes back to the game page"
+      },
+      "section": {
+        "use": "Edit the loaded game at the map or a section",
+        "notes": "Only if you have a game loaded"
+      },
+      "view": {
+        "use": "Reset the view of the map or market editor",
+        "notes": "Only on the map and market edit pages"
+      },
+      "export": {
+        "use": "Open the export menu",
+        "notes": "App only. Goes to the loaded game."
+      },
+      "app": {
+        "use": "Navigate to the App Info page",
+        "notes": "App only."
+      }
+    }
   }
 }

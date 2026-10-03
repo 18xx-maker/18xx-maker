@@ -1,6 +1,6 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useMatch, useNavigate } from "react-router";
+import { useLocation, useMatch, useNavigate } from "react-router";
 
 import { find, prop, propEq } from "ramda";
 
@@ -18,19 +18,42 @@ export const useBindings = () => {
   const loadedGame = useLoadedGame();
   const game = useSelector(prop("game"));
   const viewingGame = useMatch("/games/:slug/:section/*");
+  const location = useLocation();
+  const [shortcuts, setShortcuts] = useState(false);
 
   const handleKeyDown = useCallback(
     (event) => {
       if (isControlTarget(event)) return;
       if (event.altKey || event.ctrlKey || event.metaKey) return;
 
-      // Keys for the game edit page, which a Radix layer closing on escape
-      // has already claimed with preventDefault
+      // The shortcuts dialog closes itself on escape, other keys are for it
+      if (shortcuts) {
+        if (event.key === "?") setShortcuts(false);
+        return;
+      }
+
+      // Escape steps back one level: config panel, edit page, game page,
+      // home. A Radix layer closing on escape has already claimed the event
+      // with preventDefault.
+      if (event.key === "Escape") {
+        if (event.defaultPrevented) return;
+
+        const params = new URLSearchParams(location.search);
+        if (viewingGame && params.has("config")) {
+          params.delete("section");
+          params.delete("config");
+          navigate({ search: params.toString() });
+        } else if (viewingGame) {
+          navigate(`/games/${viewingGame.params.slug}`);
+        } else if (location.pathname !== "/") {
+          navigate("/");
+        }
+        return;
+      }
+
+      // Keys for the game edit page
       if (viewingGame) {
-        if (
-          event.key === "e" ||
-          (event.key === "Escape" && !event.defaultPrevented)
-        ) {
+        if (event.key === "e") {
           navigate(`/games/${viewingGame.params.slug}`);
           return;
         }
@@ -57,6 +80,9 @@ export const useBindings = () => {
           break;
         case "c":
           if (!viewingGame) navigate("/elements/logos");
+          break;
+        case "d":
+          navigate("/docs");
           break;
         case "g":
           if (loadedGame) navigate(`/games/${loadedGame.slug}`);
@@ -100,11 +126,11 @@ export const useBindings = () => {
           }
           break;
         case "?":
-          navigate("/docs");
+          setShortcuts(true);
           break;
       }
     },
-    [game, loadedGame, viewingGame, dispatch, navigate],
+    [game, loadedGame, viewingGame, shortcuts, location, dispatch, navigate],
   );
 
   useEffect(() => {
@@ -115,4 +141,6 @@ export const useBindings = () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [handleKeyDown]);
+
+  return [shortcuts, setShortcuts];
 };
