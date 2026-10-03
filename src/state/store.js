@@ -8,10 +8,12 @@ import { configReducer } from "@/state/config";
 import { errorsReducer } from "@/state/errors";
 import { gameReducer, loadedGameReducer } from "@/state/game";
 import { combineReducers } from "@/state/helpers";
+import { settingsReducer } from "@/state/settings";
 import storage from "@/state/storage";
 import { summariesReducer } from "@/state/summaries";
 import { updateReducer } from "@/state/update";
 import { getGameSummary } from "@/util/loading.js";
+import { getRenderInput } from "@/util/renderInput";
 
 const summaries = { bundled: map((game) => getGameSummary(game), games) };
 
@@ -19,30 +21,51 @@ export const initialState = {
   alert: ALERT_DEFAULT,
   summaries,
   config: {},
+  settings: {},
   errors: {},
 };
-
-// Pick which top level fields we want to keep in local storage
-storage.init("config", "loadedGame");
-
-export const preloadedState = mergeDeepRight(
-  initialState,
-  storage.initialState(),
-);
 
 export const rootReducer = combineReducers({
   alert: alertReducer,
   loadedGame: loadedGameReducer,
   update: updateReducer,
   summaries: summariesReducer,
+  settings: settingsReducer,
   config: configReducer,
   game: gameReducer,
   errors: errorsReducer,
 });
 
-export const store = configureStore({
-  reducer: rootReducer,
-  preloadedState,
-});
+// Pick which top level fields we want to keep in local storage. Render mode
+// (see util/renderInput) keeps everything in memory: it neither reads nor
+// writes local storage, which belongs to the app.
+const createPreloadedState = (render) => {
+  if (render) {
+    return initialState;
+  }
 
-storage.listen(store);
+  storage.init("config", "loadedGame", "settings");
+  return mergeDeepRight(initialState, storage.initialState());
+};
+
+export const createStore = ({
+  render = false,
+  preloadedState = createPreloadedState(render),
+} = {}) => {
+  const store = configureStore({
+    reducer: rootReducer,
+    preloadedState,
+  });
+
+  if (!render) {
+    storage.listen(store);
+  }
+
+  return store;
+};
+
+const renderMode = !!getRenderInput();
+
+export const preloadedState = createPreloadedState(renderMode);
+
+export const store = createStore({ render: renderMode, preloadedState });

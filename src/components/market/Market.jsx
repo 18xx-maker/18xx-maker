@@ -6,13 +6,14 @@ import Cell from "@/components/market/Cell";
 import Ledges from "@/components/market/Ledges";
 import MarketRoundTracker from "@/components/market/MarketRoundTracker";
 import Par from "@/components/market/Par";
+
 import { multiDefaultTo } from "@/util";
 import { getParData } from "@/util/market";
 
 const Market = ({ data, game, config, title, displayTitle }) => {
-  let cells = [];
-  let market = [];
-  let bottomMarket = [];
+  let cells;
+  let market;
+  let bottomMarket;
 
   const pass = { game, config, data };
 

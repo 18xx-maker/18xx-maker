@@ -5,6 +5,7 @@ import { map } from "ramda";
 import Page from "@/components/Page";
 import PageSetup from "@/components/PageSetup";
 import Svg from "@/components/Svg";
+
 import { addPaginationData, unitsToCss } from "@/util";
 
 const Paginate = ({ component, data, config, game, children }) => {

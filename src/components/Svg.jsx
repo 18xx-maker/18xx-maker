@@ -1,15 +1,21 @@
+import { forwardRef } from "react";
+
 import Color from "@/components/Color";
 
-const Svg = ({
-  className,
-  width,
-  height,
-  viewBox,
-  style,
-  defs,
-  children,
-  preserveAspectRatio,
-}) => {
+const Svg = (
+  {
+    className,
+    width,
+    height,
+    viewBox,
+    style,
+    defs,
+    children,
+    preserveAspectRatio,
+    ...pass
+  },
+  ref,
+) => {
   const namespaces = {
     xmlns: "http://www.w3.org/2000/svg",
     "xmlns:xhtml": "http://www.w3.org/1999/xhtml",
@@ -19,6 +25,7 @@ const Svg = ({
     <Color>
       {() => (
         <svg
+          ref={ref}
           version="1.1"
           preserveAspectRatio={preserveAspectRatio}
           width={width}
@@ -27,6 +34,7 @@ const Svg = ({
           style={style}
           className={className}
           {...namespaces}
+          {...pass}
         >
           <defs>{defs}</defs>
           {children}
@@ -36,4 +44,4 @@ const Svg = ({
   );
 };
 
-export default Svg;
+export default forwardRef(Svg);

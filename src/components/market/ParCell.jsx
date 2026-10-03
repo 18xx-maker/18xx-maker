@@ -65,7 +65,7 @@ const ParCell = ({ cell, data }) => {
                 fontFamily="display"
                 fontStyle="bold"
                 fontSize="15"
-                textAnchor={rotated ? "end" : "state"}
+                textAnchor={rotated ? "end" : "start"}
                 textDecoration={cell.underline ? "underline" : null}
                 dominantBaseline="hanging"
                 x={rotated ? -5 : 5}

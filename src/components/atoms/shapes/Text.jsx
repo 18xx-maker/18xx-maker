@@ -1,6 +1,7 @@
 import { defaultTo } from "ramda";
 
 import Color from "@/components/Color";
+
 import RotateContext from "@/context/RotateContext";
 import { getFontProps } from "@/util";
 

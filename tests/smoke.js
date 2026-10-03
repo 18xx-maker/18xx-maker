@@ -138,6 +138,7 @@ export const routes = [
   ["/elements/logos", "logos"],
   ["/games", "games"],
   ["/app", "home"],
+  ["/settings", "settings"],
 ];
 
 export const docs = Object.keys(

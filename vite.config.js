@@ -1,9 +1,8 @@
 import path from "node:path";
 
+import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react-swc";
 import browserslistToEsbuild from "browserslist-to-esbuild";
-import postcssNesting from "postcss-nesting";
-import postcssPresetEnv from "postcss-preset-env";
 import { defineConfig } from "vite";
 import { svgPlugin as svg } from "vite-plugin-fast-react-svg";
 
@@ -42,22 +41,17 @@ export default defineConfig({
       },
     },
   },
-  css: {
-    postcss: {
-      plugins: [postcssNesting(), postcssPresetEnv({ env: "production" })],
-    },
-  },
   json: {
     stringify: true,
   },
-  plugins: [react(), svg()],
+  plugins: [react(), svg(), tailwindcss()],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),
     },
   },
   server: {
-    open: true,
+    open: false,
     port: 3000,
   },
 });

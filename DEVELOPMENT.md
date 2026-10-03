@@ -72,7 +72,7 @@ pnpm install
 # Install the browser used by the tests (once)
 pnpm exec playwright install chromium --only-shell
 
-# Run the development site
+# Run the development site (http://localhost:3000, it does not open a browser)
 pnpm start
 ```
 
@@ -85,7 +85,9 @@ pnpm start
 These are the package.json scripts that you should know:
 
 ```shell
-# Start the development versions of the site, app, or storybook site:
+# Start the development versions of the site, app, or storybook site. The site
+# (http://localhost:3000) and storybook (http://localhost:6006) do not open a
+# browser, open the address yourself:
 pnpm start
 pnpm start:app
 pnpm start:sb
@@ -109,6 +111,20 @@ CI=1 pnpm test:run
 # Run the end to end tests against the built site (see below)
 pnpm build
 pnpm test:e2e
+
+# Export a game from the built site (see src/cli/README.md), and compare
+# Playwright's own capture with the shared capture on Linux (see below)
+pnpm maker export 18Test --format pdf,png,b18
+node scripts/export-golden.mjs 18Test
+
+# Every export option (formats, docs, layouts, paginated, background, variation, png.dpi,
+# b18.version, b18.author) can also be set in a game file's `exports` field
+# (src/schemas/game.schema.json, src/docs/games/exports.en.md). A flag wins over
+# the game file and the game file over the defaults: resolveExportOptions in
+# src/export/options.js is the one place that decides, for the CLI and the app.
+# background (white by default) only changes the map, market, par, revenue and
+# tile manifest PNGs, every other PNG is always transparent: a Board 18 box
+# always has a white Map and Market and transparent Tokens and tiles.
 
 # Run all fixing linters
 pnpm fix
@@ -232,13 +248,65 @@ Notes:
   ones are listed per page, by rule and css selector, with reasons in its
   `KNOWN_ISSUES`; fix them and delete the
   entry (the spec fails if an entry no longer applies).
+- `e2e/cli.spec.js` runs `maker export` on 18Test against the built site (it
+  serves it on a free port of its own) and checks page counts, PNG sizes and the
+  resolution in the files.
 - The vitest projects only include `src/` and `tests/`, so they never pick up
   `e2e/`.
 
-An Electron smoke test (launch the built app with Playwright's `_electron`,
-open a game, check the window title) is not implemented yet. It would need
-`pnpm build:app` first, and covers what the web build cannot: the preload API
-(`window.api`), native file dialogs and the export button.
+The export options are resolved in `src/export/options.js` (plain JS, used by
+`maker export` and by `planExport` in `src/util/exportPlan.js`, which also gives
+the export options panel its starting values). A new option goes in the `exports`
+schema (with a description, and copy `src/schemas/game.schema.json` to
+`public/schemas/`), `cleanOptions`, the CLI flags (without a commander default,
+or the flag would always hide the game file, and a boolean also a `--no-` flag
+so that the game file can be turned off), the panel (a control that starts from
+`exportDefaults`, and that can say "not set" over the game file, like every
+variation), and the docs. Every option has a test for all three: the game file
+sets it, a flag or a control overrides it.
+
+`scripts/export-golden.mjs [game]` checks the shared capture
+(`src/export/capture.js`, Chrome DevTools Protocol commands) against Playwright's
+own calls on the built site: Board 18 images must be identical pixel for pixel
+and PDFs must have the same page count and page sizes (and the same pages as
+images when `pdftoppm` is installed). Run it on Linux, where fonts and the
+Chromium build make pixels comparable.
+
+### Export tests on every OS
+
+Plan: the six real export paths, {CLI, app} x {pdf, png, b18}, run with no
+mocks on Linux, macOS and Windows in the "Export" job of CI (checks "Export
+Linux", "Export Mac", "Export Windows", the ones to require). Each job builds
+the site and the app (`pnpm build`, `pnpm build:app`), then runs
+`pnpm test:export` (`playwright.export.config.js`, no preview server, one
+worker): `e2e/export.spec.js`, `e2e/cli.spec.js` and `e2e/electron.spec.js`.
+Linux runs it under `xvfb-run`, and the app gets `--no-sandbox` only when `CI`
+is set (the runner has no setuid `chrome-sandbox`). The job is separate from
+the vitest jobs, so it is not part of the coverage merge.
+
+`e2e/export.spec.js` has the six paths as `export › cli › pdf`, `export › cli
+› png`, `export › cli › b18`, and the same three for `app`. Each exports 18Test
+and reads the real files: the `18test-map.pdf` has 1 page, the
+`18test-background.png` is 2400 x 3150 pixels with a pHYs of 11811
+pixels/meter, and the Board18 zip has its folder at the top, forward slash
+names, and `Map`, `Market`, `Tokens` and `Yellow` images of fixed sizes
+(`e2e/export-files.js`). The sizes come from the game (units and inches), not
+from font metrics, so no tolerance is needed and every OS asserts the same.
+The app is launched with `_electron.launch` on `dist/main` with a temp
+`--user-data-dir`, and its native dialogs are replaced in the main process.
+
+`e2e/electron.spec.js` exports 18Test from the app's options panel, saves a
+single page as a pdf, and quits in the middle of an export. It opens real
+windows, so it only runs with `E2E_ELECTRON=1`; on Linux use `xvfb-run` (and
+`CI=1` to get `--no-sandbox` if Chromium's sandbox is not set up):
+
+```shell
+pnpm build && pnpm build:app
+E2E_ELECTRON=1 pnpm test:export
+```
+
+The export windows load the built renderer (`dist/renderer`, `pnpm build:app`),
+also in `pnpm start:app`.
 
 ## File Layout
 
@@ -255,12 +323,13 @@ At a high level the folder structure looks like:
 │   ├── sb            # The built esbuild for the storybook site
 │   └── renderer      # The built esbuild for the preload file
 ├── docker            # Stuff only related to docker builds
-├── e2e               # Playwright end to end specs for the built site
+├── e2e               # Playwright end to end specs for the built site (and maker export)
 ├── electron          # Electron related src files
 │   ├── assets        # Files that we need when building electorn
 │   ├── main          # The src for the electron main process
 │   └── preload       # The preload file injected into the render process
 ├── public            # Files that are just served statically
+├── scripts           # Maintenance scripts (export-golden.mjs)
 ├── src
 │   ├── cli           # CLI related files
 │   ├── components    # React Components
@@ -268,6 +337,7 @@ At a high level the folder structure looks like:
 │   ├── data          # Data files that are built into the app (games, icons, logos, etc)
 │   ├── defaults.json # Default config file values
 │   ├── docs          # All help page markdowns
+│   ├── export        # What a game exports (documents, b18, names), used by the CLI
 │   ├── hooks         # React hooks
 │   ├── index.jsx     # React root of the project
 │   ├── locales       # Localization files
@@ -278,3 +348,21 @@ At a high level the folder structure looks like:
 │   └── util          # Utility helpers
 └── tests             # Vitest integration tests and test helper files
 ```
+
+## Storybook
+
+`pnpm start:sb` shows the print elements (atoms, hexes, tiles, tokens, map
+pieces, cards, market cells and print blocks) with a Controls panel for each
+story's props. The toolbar switches the map and company themes. Every story is
+rendered by `tests/stories.test.jsx`, so a new story must draw an svg.
+
+When adding a story next to a component (`Name.stories.js`):
+
+- `parameters: { svg: true }` draws it into a hex sized svg, or
+  `svg: { width, height, viewBox }` for another size. Omit it when the
+  component draws its own markup.
+- `parameters: { game: "18Test" }` loads a bundled game for components that
+  read the game.
+- Use `colorSelect()` from `.storybook/controls.js` for color props and real
+  `argTypes` (selects, ranges, booleans) so every prop can be changed.
+- Stories are `.js` files, so use `createElement` instead of JSX.

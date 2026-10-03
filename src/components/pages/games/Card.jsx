@@ -1,21 +1,22 @@
 import { useParams } from "react-router";
 
-import { assoc, clone, flatten, map } from "ramda";
+import { assoc, flatten, map } from "ramda";
 
 import Number from "@/components/cards/Number";
 import Private from "@/components/cards/Private";
 import Share from "@/components/cards/Share";
 import Train from "@/components/cards/Train";
+
 import { useConfig, useGame } from "@/hooks";
-import { getCardData } from "@/util/cards";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
+import { getSingleCardData } from "@/util/sizes";
 
 const Card = () => {
   const { config } = useConfig();
   const game = useGame();
   const { type, index } = useParams();
 
-  let node = null;
+  let node;
   switch (type) {
     case "private":
       node = <Private players={game.players} {...game.privates[index]} />;
@@ -58,30 +59,7 @@ const Card = () => {
       break;
   }
 
-  let cardConfig = clone(config.cards);
-  let paperConfig = clone(config.paper);
-
-  cardConfig.cutlines = 0;
-  cardConfig.bleed = 0;
-  cardConfig.border = 0;
-
-  switch (config.cards.layout) {
-    case "miniEuroDie":
-      cardConfig.width = 265.748;
-      cardConfig.height = 173.228;
-
-      break;
-    case "dtgDie":
-      cardConfig.width = 250;
-      cardConfig.height = 150;
-
-      break;
-    default:
-      // No overrides for "free" layout
-      break;
-  }
-
-  let data = getCardData(cardConfig, paperConfig);
+  let data = getSingleCardData(config.cards, config.paper);
 
   let css = `
 .cutlines {

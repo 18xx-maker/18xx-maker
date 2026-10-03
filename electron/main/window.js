@@ -4,6 +4,7 @@ import { BrowserWindow, shell } from "electron";
 
 import { nth, split } from "ramda";
 
+import { navigationGuard, windowOpenHandler } from "#export/ipc";
 import { getLastRoute, setLastRoute } from "./config.js";
 import { isDev } from "./dev.js";
 import { setMenu } from "./menu.js";
@@ -43,14 +44,14 @@ export const createWindow = () => {
     mainWindow.maximize();
     mainWindow.show();
   });
-  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
-    if (url.startsWith("http")) {
-      shell.openExternal(url);
-      return { action: "deny" };
-    }
-
-    return { action: "allow" };
-  });
+  mainWindow.webContents.setWindowOpenHandler(
+    windowOpenHandler((url) => shell.openExternal(url)),
+  );
+  // The window only shows the app
+  mainWindow.webContents.on(
+    "will-navigate",
+    navigationGuard(startBaseUrl, (url) => shell.openExternal(url)),
+  );
   mainWindow.loadURL(startUrl);
 
   setMenu(mainWindow);
@@ -58,8 +59,10 @@ export const createWindow = () => {
   return mainWindow;
 };
 
-export const captureWindow = () => {
+// A hidden window to capture a page. A transparent window has no frame.
+export const captureWindow = ({ transparent = false } = {}) => {
   return new BrowserWindow({
+    ...(transparent && { transparent, frame: false }),
     x: 0,
     y: 0,
     enableLargerThanScreen: true,

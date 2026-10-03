@@ -6,6 +6,7 @@ import { useLoadedGame } from "@/hooks/game";
 import { createAlert, refreshGame } from "@/state";
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
+import { isControlTarget } from "@/util/keys";
 
 export const useBindings = () => {
   const dispatch = useDispatch();
@@ -14,8 +15,7 @@ export const useBindings = () => {
 
   const handleKeyDown = useCallback(
     (event) => {
-      const tag = event.target.tagName;
-      if (tag === "TEXTAREA" || tag === "INPUT") return;
+      if (isControlTarget(event)) return;
       if (event.altKey || event.ctrlKey || event.metaKey) return;
 
       switch (event.key) {
@@ -38,12 +38,12 @@ export const useBindings = () => {
           if (capability.electron) {
             window.api
               .openGame()
-              .then((slug) => slug && navigate(`/games/${slug}/map`))
+              .then((slug) => slug && navigate(`/games/${slug}`))
               .catch((e) => dispatch(createAlert(e.name, e.message, "error")));
           } else if (capability.system) {
             idb
               .openFilePicker()
-              .then((slug) => slug && navigate(`/games/${slug}/map`))
+              .then((slug) => slug && navigate(`/games/${slug}`))
               .catch((e) => dispatch(createAlert(e.name, e.message, "error")));
           }
           break;

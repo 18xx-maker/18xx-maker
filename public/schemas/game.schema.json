@@ -479,7 +479,92 @@
       }
     },
     "wip": { "type": "boolean" },
-    "prototype": { "type": "boolean" }
+    "prototype": { "type": "boolean" },
+    "exports": {
+      "type": "object",
+      "description": "The options of an export (maker export, and the export options of the app) for this game. They are the defaults of the game: the flags of maker export, the user's config and the choices made in the export options panel come on top of them.",
+      "properties": {
+        "formats": {
+          "type": "array",
+          "description": "The files to export, like --format. pdf, png and b18 (a Board18 box). Defaults to pdf.",
+          "items": { "type": "string", "enum": ["pdf", "png", "b18"] },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "docs": {
+          "type": "array",
+          "description": "Only export these pages, like --docs. All pages when left out. Only for pdf and png files.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "background",
+              "cards",
+              "charters",
+              "map",
+              "market",
+              "par",
+              "revenue",
+              "tile-manifest",
+              "tiles",
+              "tokens"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "layouts": {
+          "type": "string",
+          "description": "all exports a file for every layout of the cards, tiles and tokens, current only the layout of the config, like --layouts. When left out the export.allLayouts setting of the config decides.",
+          "enum": ["all", "current"]
+        },
+        "paginated": {
+          "type": "boolean",
+          "description": "Also export the paginated pdfs, like --paginated. Defaults to false for maker export and true in the app."
+        },
+        "background": {
+          "type": "string",
+          "description": "The background of the map, market, par, revenue and tile manifest png images, like --background: white or transparent. Every other png image (the background page, cards, charters, tokens and tiles) is always transparent. Board18 boxes and pdf files are not affected: the map and market of a Board18 box are always white, its tokens and tiles transparent. Defaults to white.",
+          "enum": ["white", "transparent"],
+          "default": "white"
+        },
+        "variation": {
+          "type": "integer",
+          "description": "Only export this map variation (0 is the first), like --variation. All variations when left out.",
+          "minimum": 0
+        },
+        "png": {
+          "type": "object",
+          "description": "Options of the png images.",
+          "properties": {
+            "dpi": {
+              "type": "integer",
+              "description": "The resolution of the images in dots per inch, like --dpi. 300 is the size they print at and the highest resolution. Defaults to 300.",
+              "minimum": 1,
+              "maximum": 300
+            }
+          },
+          "additionalProperties": false
+        },
+        "b18": {
+          "type": "object",
+          "description": "Options of the Board18 box.",
+          "properties": {
+            "version": {
+              "type": "string",
+              "description": "The version of the box, like --b18-version. Defaults to 1.0.",
+              "minLength": 1
+            },
+            "author": {
+              "type": "string",
+              "description": "The author of the box, like --b18-author. Defaults to the b18.author setting of maker config, the designer of the game in the app, or the name of the user.",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
   },
   "additionalProperties": false,
   "required": ["info"]

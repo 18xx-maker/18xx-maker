@@ -2,6 +2,7 @@ import { defaultTo, find, is, map } from "ramda";
 
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
+
 import { trainImages } from "@/data";
 import { useConfig } from "@/hooks";
 
@@ -85,7 +86,7 @@ const Train = ({ train, trains }) => {
     }, trains);
 
     notes.push(
-      <Color key="obsolete">
+      <Color key="phased">
         {(c, t) => (
           <span
             className="train__info"

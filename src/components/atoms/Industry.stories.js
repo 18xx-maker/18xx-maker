@@ -11,6 +11,14 @@ export default {
     top: "Ore",
     bottom: "Coal",
   },
+  argTypes: {
+    top: { control: "text" },
+    bottom: { control: "text" },
+  },
 };
 
 export const Standard = {};
+
+export const Short = {
+  args: { top: "3", bottom: "Oil" },
+};

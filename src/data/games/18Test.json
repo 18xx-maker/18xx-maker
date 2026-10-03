@@ -1,4 +1,8 @@
 {
+  "exports": {
+    "png": { "dpi": 300 },
+    "b18": { "version": "1.0" }
+  },
   "info": {
     "title": "18Test",
     "subtitle": "18xx-Maker Test File",

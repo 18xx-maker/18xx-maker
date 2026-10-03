@@ -37,27 +37,62 @@ by your operating system (with bad results).
 ### Exporting from the 18xx Maker app
 
 When using the [app](https://github.com/18xx-maker/18xx-maker/releases) there is
-a button in the lower right of every game page that has four options for
-exporting:
+a button in the lower right of every game page with these entries:
 
-- Export the full game as PDF files
-- Export the full game as individual component PNG files
-- Export the current component as a PDF file
-- Export the current component as a PNG file
+- Export game as pdf documents
+- Export game as png images
+- Export game as a Board18 box
+- Export options
+- Export this component as a pdf document
+- Export this component as a png image
 
-The full game options ask you to pick a folder on your file system and will dump
-all files into this directory. The app will open this directory on your file
-system when it's done. The single options ask you for a individual file to
-export to and will open the individual file that was exported when they finish.
+The full game entries ask you to pick a folder on your file system and will
+write all files into it. The app opens the folder when it's done. The Board18
+entry puts a zip file and the files in it in the folder. The _component_ entries
+ask for a single file name and open the file when they finish.
+
+A progress alert is shown while an export runs. A full export started from the
+_Export options_ panel can be cancelled there; files that were already written
+stay. If a document can't be exported the others are still written and the alert
+shows the first error.
+
+#### Export options
+
+The _Export options_ entry opens a panel to choose exactly what a full export
+makes:
+
+- **Formats:** PDF documents, PNG images and a Board18 box, in any combination.
+- **Documents:** which pages to export (map, tiles, cards, tokens, ...), for PDF
+  and PNG files.
+- **Every layout of a sheet:** a file for each layout of the cards, tiles and
+  tokens, instead of only the layout of your config.
+- **Paginated pdfs:** also export the paginated pdf of the map, market and so on.
+- **Map variation:** one variation or every variation, for games with more than
+  one map.
+- **PNG resolution:** from 1 to 300 dpi. 300 is the default and the maximum.
+- **Board18 version and author:** for the Board18 box.
+
+The panel starts from the `exports` field of the game file (see [Export
+options](/docs/games/exports)), so a game you share can export the way its
+author intended. Change anything in the panel for just this export, or use _Reset
+to the game's options_ to go back. The same options are flags of `maker export`
+on the command line.
+
+Exports use the same config as the page you see (including a game's own
+config and your saved layout settings). Files are named after
+the game's title.
+
+#### PNG images
+
+PNG images are made at 300 dpi by default, the resolution to print at, and carry
+that resolution, so a card opens at its real size (2.5 by 3.5 inches) in an image
+editor or print program. Choose a lower one in the panel or with `png.dpi` in the
+game file's `exports`. Images of a Board18 box are always one pixel for each
+unit, whatever the resolution.
 
 > [!NOTE]
-> Not all components support the "current component" PNG option
-
-> [!WARNING]
-> The PNG output is currently only set to the DPI of a browser screenshot on
-> your system. We would like to support higher DPI output. If you need high
-> resolution images the best solution (currently) is doing a custom export
-> process from PDF files.
+> Not all components support the "current component" PNG option. Use a full
+> game export to get an image of every tile, card, token and charter.
 
 ## Creating a new game
 

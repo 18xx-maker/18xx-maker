@@ -1,18 +1,30 @@
-import Plausible from "plausible-tracker";
+import { init, track } from "@plausible-analytics/tracker";
 
 import capability from "@/util/capability";
+import { getRenderInput } from "@/util/renderInput";
 
 // Set this to true to console log all analytic sends in dev mode
 const DEVLOG = false;
 
-const initOptions = {
-  domain: "18xx-maker.com",
-  apiHost: "https://analytics.18xx-maker.com",
-  // We need this to allow plausible to accept our events in the app
-  trackLocalhost: true,
-};
+let initialized = false;
 
-const plausible = Plausible(initOptions);
+// Only set the tracker up when something is really going to be sent
+const ensureInit = () => {
+  if (initialized) return;
+  initialized = true;
+
+  init({
+    domain: "18xx-maker.com",
+    endpoint: "https://analytics.18xx-maker.com/api/event",
+    // Pageviews are sent by hand with the masked game urls
+    autoCapturePageviews: false,
+    // We need this to allow plausible to accept our events in the app
+    captureOnLocalhost: true,
+    logging: false,
+    // The old tracker never sent a referrer, so neither do we
+    transformRequest: (payload) => ({ ...payload, r: null }),
+  });
+};
 
 const source = capability.electron ? "app" : "site";
 const prod = import.meta.env.PROD;
@@ -48,8 +60,10 @@ export const gatherPageviewData = (location) => {
   };
 };
 
-const system = capability.electron ? window.api.loadPlatformAndVersions() : {};
-const props = capability.electron
+// The capture window of an export has none of the app's calls
+const app = capability.electron && !getRenderInput();
+const system = app ? window.api.loadPlatformAndVersions() : {};
+const props = app
   ? {
       interface: source,
       appVersion: system.versions.app,
@@ -59,30 +73,32 @@ const props = capability.electron
   : { interface: source };
 
 export const trackEvent = (eventName, location, eventOptions = {}) => {
-  const eventData = gatherPageviewData(location);
-  const options = { props: { ...props, ...eventOptions } };
+  const { url } = gatherPageviewData(location);
+  const options = { props: { ...props, ...eventOptions }, url };
   if (!prod || window.location.hostname === "localhost") {
     if (DEVLOG) {
-      console.log("trackEvent", eventName, options, eventData);
+      console.log("trackEvent", eventName, options);
     }
 
     return;
   }
 
-  plausible.trackEvent(eventName, options, eventData);
+  ensureInit();
+  track(eventName, options);
 };
 
 export const trackPageview = (location) => {
-  const eventData = gatherPageviewData(location);
-  const options = { props };
+  const { url } = gatherPageviewData(location);
+  const options = { props, url };
 
   if (!prod || window.location.hostname === "localhost") {
     if (DEVLOG) {
-      console.log("trackPageview", eventData, options);
+      console.log("trackPageview", options);
     }
 
     return;
   }
 
-  plausible.trackPageview(eventData, options);
+  ensureInit();
+  track("pageview", options);
 };

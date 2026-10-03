@@ -3,6 +3,7 @@ import { is } from "ramda";
 import Color from "@/components/Color";
 import Name from "@/components/atoms/Name";
 import GameMapCompanyToken from "@/components/tokens/GameMapCompanyToken";
+
 import CityRotateContext from "@/context/CityRotateContext";
 import ColorContext from "@/context/ColorContext";
 import { icons as iconComponents } from "@/data";
@@ -114,7 +115,7 @@ const City = ({
   let nameNode = null;
 
   if (name) {
-    let path = null;
+    let path;
     let y = name.y || (name.reverse ? 7 : 0);
     if (straightCityNames || name.straight) {
       path = null;

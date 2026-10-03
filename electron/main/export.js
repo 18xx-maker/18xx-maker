@@ -1,250 +1,118 @@
-import fs from "node:fs";
-import { join } from "node:path";
+import { randomUUID } from "node:crypto";
+import os from "node:os";
+import { basename, dirname, join } from "node:path";
 
-import Promise from "bluebird";
-import { dialog, shell } from "electron";
+import { app, dialog, ipcMain, shell } from "electron";
 
-import { send } from "./util.js";
-import { captureWindow, getMainWindow, startBaseUrl } from "./window.js";
+import { createExportIpc, fromMainWindow } from "#export/ipc";
+import { createPool } from "#export/pool";
+import { createExportService } from "#export/service";
+import { createFileSink } from "#export/sink";
+import { writeZip } from "#export/zip";
+import { exportOf, openCaptureWindow } from "./capture.js";
+import { getMainWindow, startBaseUrl } from "./window.js";
 
-const getPath = (game, item) => {
-  if (item.includes("?")) {
-    return `/games/${game}/${item}&print=true`;
-  } else {
-    return `/games/${game}/${item}?print=true`;
-  }
-};
+// How many capture windows are open at once, and how many files a window
+// captures before it is replaced
+const WINDOWS = Math.max(1, Math.min(3, os.cpus().length - 1));
+const RECYCLE_AFTER = 25;
 
-const selectDirectory = (title = "Select directory") => {
-  return dialog
-    .showOpenDialog(getMainWindow(), {
-      title,
-      properties: ["openDirectory", "createDirectory"],
-    })
-    .then(({ canceled, filePaths }) => {
-      if (canceled) {
-        return undefined;
-      } else {
-        return filePaths[0];
-      }
-    });
-};
+// The game and config of every export that is running, for its capture
+// windows to ask for (see the preload)
+const inputs = new Map();
 
-// Goes to path in the app, and saves a PDF to filePath
-const createPDF = (path, filePath) => {
-  return new Promise((resolve) => {
-    let win = captureWindow();
-
-    win.webContents.on("did-stop-loading", () => {
-      setTimeout(() => {
-        win.webContents
-          .printToPDF({
-            printBackground: true,
-            displayHeaderFooter: false,
-            scale: 1,
-            preferCSSPageSize: true,
-          })
-          .then((buffer) => {
-            fs.writeFileSync(filePath, buffer);
-            win.close();
-            resolve(filePath);
-          });
-      }, 1000);
-    });
-
-    if (path.includes("?")) {
-      path = `${path}&print=true`;
-    } else {
-      path = `${path}?print=true`;
-    }
-    win.loadURL(`${startBaseUrl}#${path}`);
+const openPool = (input) => {
+  const id = randomUUID();
+  inputs.set(id, input);
+  const pool = createPool({
+    open: () => openCaptureWindow(id),
+    size: WINDOWS,
+    recycleAfter: RECYCLE_AFTER,
   });
+
+  return {
+    ...pool,
+    close: async () => {
+      await pool.close();
+      inputs.delete(id);
+    },
+  };
 };
 
-export const pdf = (path) => {
-  dialog
-    .showSaveDialog(getMainWindow(), {
-      title: "Save PDF",
-      filters: [
-        {
-          name: "PDF Document",
-          extensions: ["pdf"],
-        },
-      ],
-    })
-    .then(({ filePath, canceled }) => {
-      if (canceled) {
-        return false;
-      }
+const dialogs = {
+  saveFile: async ({ title, name, format }) => {
+    const { filePath, canceled } = await dialog.showSaveDialog(
+      getMainWindow(),
+      {
+        title,
+        defaultPath: name,
+        filters: [
+          format === "pdf"
+            ? { name: "PDF Document", extensions: ["pdf"] }
+            : { name: "PNG Image", extensions: ["png"] },
+        ],
+      },
+    );
+    return canceled || !filePath
+      ? undefined
+      : { out: dirname(filePath), name: basename(filePath) };
+  },
 
-      createPDF(path, filePath).then((filePath) => {
-        shell.openPath(filePath);
-        send("alert", "PDF Created", filePath, "success");
-      });
-    });
+  chooseFolder: async (title = "Select directory") => {
+    const { canceled, filePaths } = await dialog.showOpenDialog(
+      getMainWindow(),
+      { title, properties: ["openDirectory", "createDirectory"] },
+    );
+    return canceled ? undefined : filePaths[0];
+  },
 };
 
-// Goes to path in the app, and saves a PNG to filePath of width x height
-const createScreenshot = (path, filePath) => {
-  return new Promise((resolve) => {
-    let win = captureWindow();
+const service = createExportService({
+  dialogs,
+  openPool,
+  createSink: createFileSink,
+  zip: writeZip,
+  show: (out, relPath) => shell.showItemInFolder(join(out, relPath)),
+  concurrency: WINDOWS,
+});
 
-    win.webContents.on("will-redirect", () => {
-      win.close();
-      resolve();
-    });
+// Progress and results go to the window that asked for the export
+const channel = (sender) => {
+  const send = (...args) => {
+    if (!sender.isDestroyed()) sender.send(...args);
+  };
+  return {
+    progress: (title, message, percent) =>
+      send("progress", title, message, percent),
+    alert: (title, message, type) => send("alert", title, message, type),
+  };
+};
 
-    win.webContents.on("did-stop-loading", () => {
-      setTimeout(() => {
-        win.webContents
-          .executeJavaScript(
-            'document.getElementsByClassName("printElement")[0].getBoundingClientRect().toJSON()',
-          )
-          .then(({ width, height }) => {
-            win.setContentSize(Math.floor(width), Math.floor(height), false);
-            return win.webContents
-              .capturePage(
-                {
-                  x: 0,
-                  y: 0,
-                  width: Math.floor(width),
-                  height: Math.floor(height),
-                },
-                {
-                  stayHidden: true,
-                },
-              )
-              .then((image) => {
-                let buffer = image.toPNG();
-                fs.writeFileSync(filePath, buffer);
-                win.close();
-                resolve(filePath);
-              });
-          })
-          .catch(() => {
-            // Game doesn't include this item
-            win.close();
-            send(
-              "alert",
-              "Error",
-              "This page doesn't support single PNG export",
-              "error",
-            );
-            resolve();
-          });
-      }, 1000);
-    });
+export const cancelExports = () => service.cancelAll();
 
-    if (path.includes("?")) {
-      path = `${path}&print=true`;
-    } else {
-      path = `${path}?print=true`;
-    }
-    win.loadURL(`${startBaseUrl}#${path}`);
+export const registerExport = () => {
+  const ipc = createExportIpc({
+    isMain: (event) => fromMainWindow(event, getMainWindow(), startBaseUrl),
+    service,
+    chooseFolder: () => dialogs.chooseFolder(),
+    channel,
   });
-};
+  ipcMain.handle("export", (event, request) => ipc.export(event, request));
+  ipcMain.handle("export:cancel", (event) => ipc.cancel(event));
+  ipcMain.handle("export:folder", (event) => ipc.folder(event));
 
-export const exportPDF = (game, items) => {
-  return selectDirectory().then((directory) => {
-    if (directory) {
-      let keys = Object.keys(items);
-      let total = keys.length;
-      let current = 0;
-      return Promise.map(
-        keys,
-        (item) => {
-          let basename = items[item];
-          let filename = join(directory, basename);
-          return createPDF(getPath(game, item), filename).then((exported) => {
-            if (exported) {
-              current = current + 1;
-              let percent = Math.floor((current / total) * 100);
-              send(
-                "progress",
-                "Game Exporting",
-                `${current}/${total} - ${basename}`,
-                percent,
-              );
-            }
-          });
-        },
-        { concurrency: 4 },
-      )
-        .then(() =>
-          send(
-            "alert",
-            "Game Exported",
-            `Exported ${game} to ${directory} as pdf files`,
-            "success",
-          ),
-        )
-        .then(() => shell.openPath(directory))
-        .catch(console.error.bind(console));
-    }
+  // Only a capture window gets the input of its own export
+  ipcMain.on("getRenderInput", (event, id) => {
+    event.returnValue =
+      exportOf(event.sender) === id ? (inputs.get(id) ?? null) : null;
   });
-};
 
-export const exportPNG = (game, items) => {
-  return selectDirectory().then((directory) => {
-    if (directory) {
-      let keys = Object.keys(items);
-      let total = keys.length;
-      let current = 0;
-      return Promise.map(
-        keys,
-        (item) => {
-          let basename = items[item];
-          let filename = join(directory, basename);
-          return createScreenshot(getPath(game, item), filename).then(
-            (exported) => {
-              if (exported) {
-                current = current + 1;
-                let percent = Math.floor((current / total) * 100);
-                send(
-                  "progress",
-                  "Game Exporting",
-                  `${current}/${total} - ${basename}`,
-                  percent,
-                );
-              }
-            },
-          );
-        },
-        { concurrency: 8 },
-      )
-        .then(() =>
-          send(
-            "alert",
-            "Game Exported",
-            `Exported ${game} to ${directory} as png files`,
-            "success",
-          ),
-        )
-        .then(() => shell.openPath(directory))
-        .catch(console.error.bind(console));
-    }
-  });
-};
-
-export const png = (path) => {
-  dialog
-    .showSaveDialog(getMainWindow(), {
-      title: "Save Screenshot",
-      filters: [
-        {
-          name: "PNG Image",
-          extensions: ["png"],
-        },
-      ],
-    })
-    .then(({ filePath, canceled }) => {
-      if (canceled) {
-        return false;
-      }
-
-      createScreenshot(path, filePath).then((filePath) => {
-        shell.openPath(filePath);
-        send("alert", "PNG Created", filePath, "success");
-      });
-    });
+  // The windows of an export must not keep the app alive when its window is
+  // closed (the app quits when the last window closes on Windows and Linux)
+  app.on("before-quit", cancelExports);
+  app.on("browser-window-created", (_event, window) =>
+    window.on("close", () => {
+      if (window === getMainWindow()) cancelExports();
+    }),
+  );
 };

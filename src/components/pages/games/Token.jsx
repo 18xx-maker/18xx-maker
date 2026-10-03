@@ -1,24 +1,22 @@
 import { useParams } from "react-router";
 
-import { addIndex, compose, concat, is, map, max, propEq, reject } from "ramda";
+import { addIndex, compose, concat, is, map, propEq, reject } from "ramda";
 
 import Svg from "@/components/Svg";
 import CompanyToken from "@/components/tokens/CompanyToken";
 import Token from "@/components/tokens/Token";
+
 import ColorContext from "@/context/ColorContext";
 import { useConfig, useGame } from "@/hooks";
 import { compileCompanies, overrideCompanies } from "@/util/companies.js";
+import { getTokenGrid } from "@/util/sizes";
 
 const TokenSingle = () => {
   const { config } = useConfig();
   const game = useGame();
   const { index } = useParams();
 
-  let grid =
-    max(
-      max(config.tokens.marketTokenSize, config.tokens.stationTokenSize),
-      config.tokens.generalTokenSize,
-    ) + 10;
+  let grid = getTokenGrid(config.tokens);
   let gridCss = `${grid / 100.0}in`;
 
   let marketViewBox = `-${config.tokens.marketTokenSize / 2} -${config.tokens.marketTokenSize / 2} ${config.tokens.marketTokenSize} ${config.tokens.marketTokenSize}`;

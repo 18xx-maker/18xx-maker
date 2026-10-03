@@ -1,3 +1,10 @@
+/*
+ * The rules below that are wrapped in the legacy layer are the ones that would
+ * otherwise beat the Tailwind utilities used by the app chrome. Everything
+ * else is unlayered, like the runtime <style> blocks of the print pages, so
+ * print pages are resolved by specificity exactly as they always were.
+ */
+
 html {
   background: transparent;
   margin: 0; /* this affects the margin on the html before sending to printer */
@@ -11,11 +18,25 @@ body {
   margin: 0;
   padding: 0;
   -webkit-print-color-adjust: exact;
-  font-family: display;
-  font-weight: bold;
   height: -moz-available;
   height: -webkit-fill-available;
   height: stretch;
+}
+
+@layer legacy {
+  body h1,
+  body h2,
+  body h3,
+  body h4,
+  body h5,
+  body h6 {
+    font-family: display;
+  }
+}
+
+#viewport-children {
+  font-family: display;
+  font-weight: bold;
 }
 
 #root,
@@ -25,8 +46,10 @@ body {
   height: stretch;
 }
 
-p {
-  font-weight: normal;
+@layer legacy {
+  p {
+    font-weight: normal;
+  }
 }
 
 .tokens {
@@ -60,8 +83,10 @@ p {
   opacity: 0.2;
 }
 
-svg {
-  overflow: visible;
+@layer legacy {
+  svg {
+    overflow: visible;
+  }
 }
 
 .map {
@@ -118,8 +143,10 @@ svg {
   margin: 0;
 }
 
-a {
-  text-decoration: none;
+@layer legacy {
+  a {
+    text-decoration: none;
+  }
 }
 
 .charters {
@@ -452,6 +479,8 @@ a {
   width: 0.5in;
   height: 0.7in;
   padding: 0 0 0 0.15in;
+  display: inline;
+  box-sizing: content-box;
 }
 
 .charter--half .charter__tokens {
@@ -709,85 +738,7 @@ footer a:hover {
   font-weight: normal;
 }
 
-.PrintNotes {
-  background-color: #ddd;
-  border-bottom: 2px solid #bbb;
-  font-family: sans-serif;
-  font-weight: normal;
-}
-
-.WIP > div,
-.LegalNotes > div,
-.PrintNotes > div {
-  width: 800px;
-  margin: 0 auto;
-  padding: 0 0 2px;
-}
-
-.PrintNotes h3 {
-  display: inline-block;
-  font-size: 0.8em;
-}
-
-.PrintNotes .select,
-.PrintNotes > div > h3 {
-  display: inline-block;
-  margin-right: 2em;
-}
-
-.PrintNotes label {
-  display: inline-block;
-  margin-right: 1em;
-}
-
-.WIP p,
-.LegalNotes p,
-.PrintNotes p {
-  margin: 0.5em 0 0.4em;
-  display: inline-block;
-}
-
-.PrintNotes b {
-  font-weight: bold;
-}
-
-.PrintNotes ul {
-  padding: 0;
-  list-style: none;
-  text-align: left;
-  margin-top: 8px;
-  margin-bottom: 0;
-}
-
-.PrintNotes li a {
-  color: black;
-}
-
-.PrintNotes li a.active {
-  font-weight: bold;
-}
-
 @media print {
-  nav,
-  footer,
-  .LegalNotes,
-  .PrintNotes,
-  .MuiAppBar-root,
-  .MuiDrawer-root,
-  .MuiSnackbar-root,
-  .MuiFab-root,
-  .MuiTooltip-popper,
-  .WIP {
-    display: none !important;
-  }
-
-  .MuiBox-root {
-    width: auto !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    overflow: visible !important;
-  }
-
   .map {
     padding: 0;
   }
@@ -830,4 +781,39 @@ footer a:hover {
 
 .tiles label {
   display: block;
+}
+
+/*
+ * Print pages are laid out with the browser defaults, undo the Tailwind
+ * preflight reset for everything rendered inside them (:where keeps the
+ * specificity at zero so the rules above still win)
+ */
+:where(#viewport-children) *,
+:where(#viewport-children) ::before,
+:where(#viewport-children) ::after {
+  box-sizing: content-box;
+  border-style: none;
+  border-color: currentcolor;
+}
+
+:where(#viewport-children) table {
+  box-sizing: border-box;
+}
+
+#viewport-children {
+  line-height: normal;
+  color: #000;
+}
+
+:where(#viewport-children) svg {
+  display: inline;
+  vertical-align: baseline;
+}
+
+/* Printing never has a background of its own, the theme must not leak in */
+@media print {
+  html,
+  body {
+    background: transparent;
+  }
 }

@@ -1,23 +1,26 @@
 import { screen } from "@testing-library/react";
+import { page } from "vitest/browser";
 
 import { renderApp } from "@tests/helpers.jsx";
+
+// Desktop width: the sidebar is always rendered
+beforeEach(async () => {
+  await page.viewport(1280, 800);
+});
 
 describe("the app", () => {
   it("can navigate to and display 1871", async () => {
     const { user } = renderApp();
 
-    const loadGamesLink = screen.getByRole("link", { name: "Load Games" });
-    expect(loadGamesLink).toBeInTheDocument();
-    await user.click(loadGamesLink);
+    await user.click(screen.getByRole("link", { name: "Load Games" }));
 
-    const gameLink = screen.getByRole("link", {
+    const gameLink = await screen.findByRole("link", {
       name: "The Old Prince 1871",
     });
-    expect(gameLink).toBeInTheDocument();
     await user.click(gameLink);
 
     expect(
-      screen.getByRole("link", { name: /by Lucas Boyd/i }),
+      await screen.findByRole("heading", { name: /by Lucas Boyd/i }),
     ).toBeInTheDocument();
   });
 });

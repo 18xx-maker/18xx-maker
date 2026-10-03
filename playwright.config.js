@@ -7,6 +7,8 @@ const PORT = 4318;
 export default defineConfig({
   testDir: "./e2e",
   testMatch: "*.spec.js",
+  // The real export paths run in their own job, with playwright.export.config.js
+  testIgnore: "export.spec.js",
   outputDir: "./test-results",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,

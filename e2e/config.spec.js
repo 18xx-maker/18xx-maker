@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test("config changes persist across a reload and show on the page", async ({
   page,
 }) => {
-  await page.goto("/games/18Test/charters?config=true");
+  await page.goto("/games/18Test/charters?config=true&section=charters");
   await expect(page.getByTestId("game-18Test-charters")).toBeVisible();
 
   const layout = page.getByRole("combobox", { name: /Charter Layout/ });
@@ -26,7 +26,7 @@ test("config changes persist across a reload and show on the page", async ({
     .toEqual({ charters: { layout: "3x1" } });
 
   // A fresh load with no config in the url still uses the stored config
-  await page.goto("/games/18Test/charters?config=true");
+  await page.goto("/games/18Test/charters?config=true&section=charters");
   await expect(page.getByTestId("game-18Test-charters")).toBeVisible();
   await expect(
     page.getByRole("combobox", { name: /Charter Layout/ }),
@@ -41,7 +41,9 @@ test("config changes persist across a reload and show on the page", async ({
     "3",
   );
 
-  // And the drawer's reset clears it again
+  // And the reset in the drawer's data section clears it again
+  await page.getByRole("combobox", { name: "Config Section" }).click();
+  await page.getByRole("option", { name: "Data" }).click();
   await page.getByRole("button", { name: "Reset To Defaults" }).click();
   await expect
     .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("config"))))

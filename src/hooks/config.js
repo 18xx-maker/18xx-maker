@@ -3,10 +3,12 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 
-import { assocPath, defaultTo, mergeDeepRight } from "ramda";
+import { mergeDeepRight } from "ramda";
 
 import { useGame, useValidation } from "@/hooks";
 import { createResetConfig, createSetConfig } from "@/state";
+import { getRenderInput } from "@/util/renderInput";
+import { resolveConfig } from "@/util/resolveConfig";
 
 const configs = import.meta.glob("../*.json", {
   eager: true,
@@ -14,7 +16,12 @@ const configs = import.meta.glob("../*.json", {
 });
 const defaultConfig = configs["../defaults.json"];
 const userConfig = configs["../config.json"] || {};
-const initialConfig = mergeDeepRight(defaultConfig, userConfig);
+const renderInput = getRenderInput();
+// In render mode the page is given the layers below the URL parameters, they
+// replace the config.json built into the page
+const initialConfig = renderInput
+  ? mergeDeepRight(defaultConfig, renderInput.config)
+  : mergeDeepRight(defaultConfig, userConfig);
 
 export const useConfig = () => {
   const dispatch = useDispatch();
@@ -22,24 +29,13 @@ export const useConfig = () => {
   const location = useLocation();
   const { validateConfigSchema } = useValidation();
 
-  const searchParams = new URLSearchParams(location.search);
-
   const storedConfig = useSelector((state) => state.config);
-  const preSearchConfig = mergeDeepRight(initialConfig, storedConfig);
-
-  // Add Search config in
-  let searchConfig = {};
-  for (let [key, value] of searchParams.entries()) {
-    let [head, ...path] = key.split(".");
-    if (head === "config" && path.length > 0) {
-      searchConfig = assocPath(path, value, searchConfig);
-    }
-  }
-  const preGameConfig = mergeDeepRight(preSearchConfig, searchConfig);
-
-  // Add Game config in
-  const gameConfig = defaultTo({}, game && game.config);
-  const config = mergeDeepRight(preGameConfig, gameConfig);
+  const { config, searchConfig, gameConfig } = resolveConfig({
+    defaults: initialConfig,
+    stored: storedConfig,
+    search: location.search,
+    gameConfig: game && game.config,
+  });
 
   const setConfig = useCallback(
     async (config) => {

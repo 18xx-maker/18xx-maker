@@ -1,5 +1,6 @@
 import RevenuePaginated from "@/components/market/RevenuePaginated";
 import RevenueSingle from "@/components/market/RevenueSingle";
+
 import { useConfig, useGame } from "@/hooks";
 import { useBooleanParam } from "@/util/query";
 

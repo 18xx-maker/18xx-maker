@@ -1,11 +1,12 @@
 import os from "node:os";
 
-import Promise from "bluebird";
 import { app, ipcMain } from "electron";
 import updater from "electron-updater";
 
 import { objOf } from "ramda";
 
+import { createAddRecent } from "#export/ipc";
+import { exportOf } from "./capture.js";
 import {
   CONFIG_FILE,
   addRecent,
@@ -13,7 +14,7 @@ import {
   getConfig,
   getSummaries,
 } from "./config.js";
-import { exportPDF, exportPNG, pdf, png } from "./export.js";
+import { registerExport } from "./export.js";
 import { TYPE, loadGame, openGame, saveGamePath } from "./game.js";
 import { setMenu } from "./menu.js";
 import { send } from "./util.js";
@@ -122,12 +123,13 @@ ipcMain.handle("loadGame", (event, id) => {
 
 ipcMain.handle("openGame", openGame);
 
-ipcMain.on("addRecent", (event, title, slug) => {
-  addRecent(title, slug);
-  setMenu();
-});
+ipcMain.on(
+  "addRecent",
+  createAddRecent({
+    isCapture: (sender) => exportOf(sender) !== undefined,
+    addRecent,
+    afterAdd: () => setMenu(),
+  }),
+);
 
-ipcMain.on("exportPDF", (event, game, items) => exportPDF(game, items));
-ipcMain.on("exportPNG", (event, game, items) => exportPNG(game, items));
-ipcMain.on("pdf", (event, path) => pdf(path));
-ipcMain.on("png", (event, path) => png(path));
+registerExport();

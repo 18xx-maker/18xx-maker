@@ -17,6 +17,7 @@ import Charter from "@/components/Charter";
 import PageSetup from "@/components/PageSetup";
 import Pins from "@/components/Pins";
 import Svg from "@/components/Svg";
+
 import { useConfig, useGame } from "@/hooks";
 import { getCharterData } from "@/util";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
@@ -54,7 +55,10 @@ const Charters = () => {
     padding = data.perPage - leftOver;
   }
 
-  let companies = concat(majors, concat(repeat(null, padding), minors));
+  // Full width charters in the free layout are a row each, so a spacer would
+  // only be a blank charter. Half width ones pair up and the spacer ends the row.
+  let freePadding = charters.halfWidth ? padding : 0;
+  let companies = concat(majors, concat(repeat(null, freePadding), minors));
 
   let css = `
 .cutlines {
@@ -156,7 +160,7 @@ const Charters = () => {
 }
 `;
 
-  let pages = null;
+  let pages;
   if (data.layout === "free") {
     // No pages, easy
     pages = addIndex(chain)(

@@ -35,13 +35,23 @@ beforeEach(() => {
 
 describe("bindings", () => {
   it("ignores keys typed in inputs", async () => {
-    const { user, router } = renderApp("/games/18Test/map?config=true");
+    const { user, router } = renderApp(
+      "/games/18Test/map?config=true&section=layout",
+    );
     await screen.findByRole("button", { name: "Close Config" });
 
-    const input = screen.getByRole("checkbox", {
-      name: "Export all layout options",
-    });
-    await user.click(input);
+    // "h" goes home and "2" is the tiles section, unless typed into a field
+    await user.type(screen.getAllByRole("textbox")[0], "h2");
+    expect(router.state.location.pathname).toBe("/games/18Test/map");
+  });
+
+  it("ignores keys typed on a select or switch", async () => {
+    const { user, router } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    screen.getByRole("combobox", { name: "Game Section" }).focus();
+    await user.keyboard("h");
+    screen.getByRole("switch", { name: "Paginate" }).focus();
     await user.keyboard("h");
     expect(router.state.location.pathname).toBe("/games/18Test/map");
   });
@@ -86,7 +96,7 @@ describe("bindings", () => {
     expect(router.state.location.pathname).toBe("/elements");
   });
 
-  it("o opens the file picker and then the game", async () => {
+  it("o opens the file picker and then the game info", async () => {
     caps.system = true;
     idb.openFilePicker.mockResolvedValue("system:xyz");
     idb.loadGame.mockResolvedValue({
@@ -98,8 +108,9 @@ describe("bindings", () => {
 
     await user.keyboard("o");
     await waitFor(() =>
-      expect(router.state.location.pathname).toBe("/games/system:xyz/map"),
+      expect(router.state.location.pathname).toBe("/games/system:xyz"),
     );
+    expect(await screen.findByTestId("game-system:xyz")).toBeInTheDocument();
   });
 
   it("o stays put when the picker is cancelled", async () => {

@@ -4,7 +4,7 @@ import util from "node:util";
 
 import chalk from "chalk";
 import { globSync } from "glob";
-import jsl from "json-schema-library";
+import { compileSchema, draft07 } from "json-schema-library";
 
 import {
   addIndex,
@@ -19,8 +19,6 @@ import {
 
 import { loadJSON, loadSchema } from "#cli/util";
 
-const { Draft07 } = jsl;
-
 // Load Defs
 const tileDefs = loadSchema("tiles.defs.json");
 
@@ -32,9 +30,6 @@ const gameSchema = loadSchema("game.schema.json");
 const publishersSchema = loadSchema("publishers.schema.json");
 const themeSchema = loadSchema("theme.schema.json");
 const tilesSchema = loadSchema("tiles.schema.json");
-
-const jsonSchema = new Draft07();
-jsonSchema.addRemoteSchema(tileDefs["$id"], tileDefs);
 
 const schemas = {};
 forEach(
@@ -87,11 +82,22 @@ const determineSchema = (json) => {
   return tilesSchema.$id;
 };
 
-let validate = (json, file) => {
-  const id = determineSchema(json);
+// Compile each schema once, they all share the tile definitions
+const compiled = {};
+const compiledSchema = (id) => {
+  if (!compiled[id]) {
+    compiled[id] = compileSchema(schemas[id], {
+      drafts: [draft07],
+      remotes: [tileDefs],
+    });
+  }
+  return compiled[id];
+};
 
-  jsonSchema.setSchema(schemas[id]);
-  const validationErrors = jsonSchema.validate(json);
+let validate = (json, file, schemaId) => {
+  const id = schemaId || determineSchema(json);
+
+  const { errors: validationErrors } = compiledSchema(id).validate(json);
 
   return {
     valid: validationErrors.length === 0,
@@ -101,7 +107,7 @@ let validate = (json, file) => {
   };
 };
 
-validate.file = (file) => {
+validate.file = (file, schemaId) => {
   if (!fs.existsSync(file)) {
     return {
       valid: false,
@@ -124,8 +130,11 @@ validate.file = (file) => {
     };
   }
 
-  return validate(json, file);
+  return validate(json, file, schemaId);
 };
+
+// Validates a file against the game schema, even if it does not look like one
+export const validateGameFile = (file) => validate.file(file, gameSchema.$id);
 
 const getShortSchemaName = (id) => {
   let draft = id.match(/json-schema\.org/);

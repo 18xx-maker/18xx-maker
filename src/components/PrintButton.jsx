@@ -1,25 +1,19 @@
 import { useMatch } from "react-router";
 
-import PrintIcon from "@mui/icons-material/Print";
-import Fab from "@mui/material/Fab";
-import Slide from "@mui/material/Slide";
-import Tooltip from "@mui/material/Tooltip";
-import makeStyles from "@mui/styles/makeStyles";
+import { Printer } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import { useGame } from "@/hooks";
 import { useBooleanParam } from "@/util/query";
 
-const useStyles = makeStyles((theme) => ({
-  printButton: {
-    zIndex: theme.zIndex.drawer + 1,
-    position: "fixed",
-    bottom: theme.spacing(14),
-    right: theme.spacing(4),
-  },
-}));
-
 const PrintButton = () => {
-  const classes = useStyles();
   const match = useMatch("/games/*");
   const game = useGame();
   const [print] = useBooleanParam("print");
@@ -33,18 +27,21 @@ const PrintButton = () => {
   };
 
   return (
-    <Slide direction="left" in={true}>
-      <Tooltip title="Print" aria-label="print" placement="left" arrow>
-        <Fab
-          onClick={handler}
-          position="sticky"
-          className={classes.printButton}
-          color="primary"
-        >
-          <PrintIcon />
-        </Fab>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="outline"
+            aria-label="print"
+            className="border rounded-sm p-2 w-8 h-8 m-0 print:hidden"
+            onClick={handler}
+          >
+            <Printer className="size-6" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>Print</TooltipContent>
       </Tooltip>
-    </Slide>
+    </TooltipProvider>
   );
 };
 
