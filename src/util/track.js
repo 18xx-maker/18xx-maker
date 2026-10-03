@@ -43,3 +43,45 @@ export const sidesFromTile = compose(
   propOr([], "track"),
   defaultTo([]),
 );
+
+const rotateSides = (sides) => sides.map((s) => (s % 6) + 1);
+
+// Rotate a tile so its track lines up with the tile above it (die cuts print
+// track bleeding onto the neighbor): if the tile above has track on its bottom
+// (side 1) we need track on our top (side 4), otherwise none. `matches` is
+// false when no rotation can do it.
+export const alignSides = (pastSides, currentSides) => {
+  let rotation = 0;
+  let sides = currentSides;
+  const has = (side) => sides.includes(side);
+
+  if (pastSides.includes(1)) {
+    if (has(1) && has(4)) {
+      // Nothing
+    } else if (has(2) && has(5)) {
+      rotation = 120;
+      sides = rotateSides(rotateSides(sides));
+    } else if (has(3) && has(6)) {
+      rotation = 60;
+      sides = rotateSides(sides);
+    } else {
+      while (!has(4)) {
+        rotation += 60;
+        sides = rotateSides(sides);
+        if (rotation >= 360) {
+          break;
+        }
+      }
+    }
+    return { rotation, sides, matches: has(4) };
+  }
+
+  while (has(4)) {
+    rotation += 60;
+    sides = rotateSides(sides);
+    if (rotation >= 360) {
+      break;
+    }
+  }
+  return { rotation, sides, matches: !has(4) };
+};
