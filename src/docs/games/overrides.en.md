@@ -19,9 +19,13 @@ overrides files, they will be left in their default state.
 ## Examples
 
 You can check out the lists of currently [defined
-overrides](https://github.com/18xx-maker/18xx-maker/tree/master/src/data/companies). To
-create new ones just create the json and then add it to the `index.js` in that
-folder.
+overrides](https://github.com/18xx-maker/18xx-maker/tree/main/src/data/companies). To
+create new ones just create the json in that folder, it is picked up
+automatically (`src/data/index.js` globs `companies/*.json`). The
+`overrideCompanies` option in the config schema is a closed list though, so also
+add the new name to the `overrideCompanies` enum in
+`src/schemas/config.schema.json` (and `public/schemas`) or the config will not
+validate.
 
 Here is an example of the 1832 Atlanda map hex with the Ruby and Python
 overrides from the languages list:

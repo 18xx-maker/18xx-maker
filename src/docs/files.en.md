@@ -9,8 +9,11 @@ it can be confusing. This page should help sort out what is happening.
 page. Some examples are [Shikoku 1889](/games/1889/map) and [The Old Prince
 1871](/games/TheOldPrince1871/map). These games are always listed on the [Load
 Games](/games) page. You can download the json to see how the games are built
-using the "Download" (on the web) or "Save" (in the app) button on the game
-menu.
+using the "Download" (on the web) or "Save" (in the app) button on the game's
+info page.
+
+To check a game file for mistakes, run `pnpm maker validate my-game.json` (it
+checks the file against the game schema, see [JSON schemas](/docs/games/schemas)).
 
 ## Using the 18xx Maker app
 
@@ -23,10 +26,10 @@ ways:
 1. Click on the "Open File" button from the [Load Games](/games) page.
 1. Drag a valid JSON file into the app window
 
-In all cases the app will save the location of this file in it's memory and then
+In all cases the app will save the location of this file in its memory and then
 display the game. You will now see this file listed on the [Load Games](/games)
 page. The trash icon on this page **WILL NOT** delete the file, but it will
-delete the app's memory of that file and it will dissapear from the page.
+delete the app's memory of that file and it will disappear from the page.
 
 If you move the file on your computer and try to load it by clicking on the
 entry on the [Load Games](/games) page, the app will let you know that it
@@ -51,10 +54,10 @@ You can load a file from your computer in a few ways:
 1. Click on the "Open File" button from the [Load Games](/games) page.
 1. Drag a valid JSON file into the browser window
 
-In all cases the browser will save the location of this file in it's memory and
+In all cases the browser will save the location of this file in its memory and
 then display the game. You will now see this file listed on the [Load
 Games](/games) page. The trash icon on this page **WILL NOT** delete the file,
-but it will delete the browser's memory of that file and it will dissapear from
+but it will delete the browser's memory of that file and it will disappear from
 the page.
 
 When you come back to the web page in the future your browser might ask you for
@@ -67,12 +70,12 @@ entry on the [Load Games](/games) page, the web page will let you know that it
 couldn't find the game and remove the entry from the page.
 
 The browser can not watch a file for changes. When you load a file in this way a
-new option to "Refresh" the file will appear in the game menu. Clicking this
+new option to "Refresh" the file will appear in the toolbar. Clicking this
 should refresh the webpage with any changes made locally to the file. You can
 also refresh by hitting the "r" key anywhere in the app while a game is loaded
 from your file system.
 
-### Non-Suporting Browsers
+### Non-Supporting Browsers
 
 Even if your browser doesn't support the File System API we will try to use the
 [Origin Private File

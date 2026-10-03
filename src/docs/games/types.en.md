@@ -14,12 +14,56 @@ as part of each company.
 
 Special behavior exists for the names `default` and `minor`. If you define a
 token or share type named `minor` and have companies with `"minor": true`
-defined, than xxMaker will use those definitions for any minor that doesn't have
-it's own share or tokens definition. If you define a token or share type named
-`default` than xxMaker will use those definitions for any company that was
-included in the `minor` definitions, and that didn't define it's own definitions
+defined, then xxMaker will use those definitions for any minor that doesn't have
+its own share or tokens definition. If you define a token or share type named
+`default` then xxMaker will use those definitions for any company that was
+included in the `minor` definitions, and that didn't define its own definitions
 for shares or tokens.
 
 ## Examples
 
-Please look at how it's defined in 1830.
+A game with a `minor` and a `default` type, and three companies. The first is a
+minor, the second has no definitions of its own, and the third picks the
+`default` types by name:
+
+```json
+{
+  "tokenTypes": {
+    "minor": ["Home"],
+    "default": ["Home", 40, 100]
+  },
+  "shareTypes": {
+    "minor": [{ "quantity": 2, "percent": 50, "shares": 1 }],
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      { "quantity": 8, "percent": 10, "shares": 1 }
+    ]
+  },
+  "companies": [
+    {
+      "name": "Black Railroad",
+      "abbrev": "BLRR",
+      "color": "black",
+      "minor": true
+    },
+    { "name": "Blue Railroad", "abbrev": "BLU", "color": "blue" },
+    {
+      "name": "Red Railroad",
+      "abbrev": "RED",
+      "color": "red",
+      "tokens": "default",
+      "shares": "default"
+    }
+  ]
+}
+```
+
+Types can have any name, and companies refer to them with a string, for example
+`"tokenTypes": { "default": ["Free", 40], "one": ["Free"] }` with
+`{ "abbrev": "KU", "tokens": "one" }`. The 1889 and 1867 files in
+`src/data/games` use these.

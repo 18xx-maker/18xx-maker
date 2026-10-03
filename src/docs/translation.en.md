@@ -13,7 +13,7 @@ request with this content translated to another language.
 
 The documentation pages (including this one) exist as
 [markdown](https://www.markdownguide.org/) files [in the
-repository](https://github.com/18xx-maker/18xx-maker/tree/master/src/docs). The
+repository](https://github.com/18xx-maker/18xx-maker/tree/main/src/docs). The
 file names are in the format `<slug>.<language>.md`. The `en` language files
 should be considered the source of truth. To add any other languages please
 submit a pull request with other language files added.

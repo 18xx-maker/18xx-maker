@@ -16,16 +16,16 @@ needed for programs like [18xx.games](https://www.18xx.games/).
   companies.
 - **company** A string that is the company abbreviation to show that this phase
   should only be shown on that companies charter.
-- **train** If the phase name matches the relevant train name than this field
+- **train** If the phase name matches the relevant train name then this field
   isn't needed. This field can either be a single string of the relevant train,
-  or an array of all trains that are available for this phase. Check out 1844
-  and 1846 for examples of these.
-- **rounds** How many ORs are played for each set in this phase. Usefull for
+  or an array of all trains that are available for this phase. Games on
+  [18xx.games](https://18xx.games) like 1844 and 1846 use these.
+- **rounds** How many ORs are played for each set in this phase. Useful for
   games like 1830 in which the number of rounds change per phase.
 - **on** What train triggers this phase to start, when that train is bought this
   phase starts. This can be a single train name, or an array of train names. It
   can also be a single (or array) of objects where each object has an `on` field
-  (train name) and an `index` field specifing which train triggers this phase.
+  (train name) and an `index` field specifying which train triggers this phase.
 - **notes** A string or array of strings of notes for this phase. Some notes
   will be added from other fields, this is for custom ones.
 - **buy_companies** A boolean that says if privates can be bought in during this
@@ -52,7 +52,7 @@ needed for programs like [18xx.games](https://www.18xx.games/).
   random information for play.
 - **available** If this train becomes available when another train is sold you
   can list that train here as a string. A good example is D trains in 1830
-  become avaialble when the 6 is bought.
+  become available when the 6 is bought.
 - **variant** If this train is only used on a variant you can list it here.
 - **rust** The name of the train that rusts this one. Can be an array of names.
   Can also be a single object (or array of objects) where each object as a `on`
@@ -62,11 +62,61 @@ needed for programs like [18xx.games](https://www.18xx.games/).
   instead of rusted.
 - **obsolete** Identical to `rust` but specifies that this train is now obsolete
   instead of rusted.
-- **permanent** Set to false if this train is not permenent. Not needed if any
+- **permanent** Set to false if this train is not permanent. Not needed if any
   of `rust`, `obsolete` or `phased` is set.
 - **players** A number of players that this train is used for _(Might be moving
   to min/max players like on privates soon)_.
 
 ## Examples
 
-Please look at the 18Test file to see examples of most of these fields.
+Please look at the 18Test file to see examples of most of these fields. The
+following is a **synthetic** example (it validates, but it is not taken from a
+bundled game) that shows `on`, `index`, `rust`, `events`, `notes`, `print`,
+`discount` and `available`:
+
+```json
+{
+  "phases": [
+    { "name": "2", "limit": 4, "rounds": 1, "tiles": "yellow" },
+    {
+      "name": "3",
+      "limit": 4,
+      "rounds": 2,
+      "tiles": "green",
+      "on": "3",
+      "buy_companies": true,
+      "notes": "Privates may be bought"
+    },
+    {
+      "name": "5",
+      "limit": 2,
+      "rounds": 3,
+      "tiles": "brown",
+      "on": { "on": "5", "index": 2 },
+      "events": { "close_companies": true }
+    },
+    { "name": "D", "limit": 2, "tiles": "brown", "on": ["6", "D"] }
+  ],
+  "trains": [
+    { "name": "2", "quantity": 6, "price": 80, "color": "yellow", "rust": "4" },
+    { "name": "3", "quantity": 5, "price": 180, "color": "green", "rust": "6" },
+    {
+      "name": "5",
+      "quantity": 3,
+      "price": 450,
+      "color": "brown",
+      "rust": { "on": "D", "index": 2 }
+    },
+    {
+      "name": "D",
+      "quantity": "∞",
+      "print": 2,
+      "price": 1000,
+      "color": "brown",
+      "discount": { "4": 300, "5": 300, "6": 300 },
+      "available": "6",
+      "description": "Buy at a discount by trading in a 4, 5 or 6"
+    }
+  ]
+}
+```

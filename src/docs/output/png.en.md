@@ -10,8 +10,8 @@ click on the export button:
 > doesn't exist and instead shows a print icon. It only opens your browser's
 > print menu.
 
-This will expose a menu with export options. You can either export a full game
-to PNG images. Exporting this way
+This will expose a menu with export options: export the full game as PDF
+documents, as PNG images or as a Board18 box. Exporting this way
 _will_ respect any config options you have set in the app.
 
 The map, market, par, revenue and tile manifest images have a border of a
@@ -29,7 +29,7 @@ charter and token. The images that are directly tied to a company will have the
 companies abbrev in them and all images will be indexed with a increasing digit
 (to protect for games that have two companies with the same abbrev).
 
-Images are made at 300 dpi, the resolution to print at, and carry their
+Images are always rendered in the light theme. They are made at 300 dpi, the resolution to print at, and carry their
 resolution so they open at their real size. The _Export options_ panel lets you
 choose a lower resolution (1 to 300 dpi). A game file can set the resolution
 (and the other export options) with `"exports": { "png": { "dpi": 150 } }`, see

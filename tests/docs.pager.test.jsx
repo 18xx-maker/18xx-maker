@@ -14,7 +14,7 @@ describe("docs previous and next", () => {
     expect(previous).toHaveTextContent("Using 18xx Maker");
     expect(within(nav).getByRole("link", { name: /Next/ })).toHaveAttribute(
       "href",
-      "/docs/translation",
+      "/docs/faq",
     );
   });
 
