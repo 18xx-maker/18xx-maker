@@ -1041,7 +1041,7 @@ const Atoms = () => {
       </p>
       <div className="bg-muted flex flex-rows place-items-center rounded-xl border px-4 py-2 my-4">
         <Label htmlFor="atom-group" className="mr-2">
-          Category:
+          {t("elements.atoms.category")}
         </Label>
         <div className="w-min">
           <Select id="atom-group" defaultValue={group} onValueChange={setGroup}>

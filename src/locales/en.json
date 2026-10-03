@@ -76,7 +76,8 @@
     "run": "Export",
     "running": "Exporting",
     "cancel": "Cancel export",
-    "failed": "Export failed"
+    "failed": "Export failed",
+    "label": "Export"
   },
   "settings": {
     "title": "Settings",
@@ -223,14 +224,16 @@
       "description": "Basic atoms for maps and tiles",
       "page": {
         "description": "This page shows examples of all items that you can display on either map hexes or tiles. Use these examples to help prototype your game!"
-      }
+      },
+      "category": "Category:"
     },
     "logos": {
       "title": "Company Logos",
       "description": "Included train company logos",
       "page": {
         "description": "Here are all of the SVG logos bundled with 18xx Maker."
-      }
+      },
+      "set": "Logo Set:"
     },
     "cheat": {
       "title": "Cheat Sheet",
@@ -292,7 +295,11 @@
       "secondary": "Where to buy this game"
     },
     "rules": "Rules",
-    "unload": "Unload Game"
+    "unload": "Unload Game",
+    "print": {
+      "label": "print",
+      "tooltip": "Print"
+    }
   },
   "started": {
     "title": "Getting Started",
@@ -686,8 +693,56 @@
       }
     },
     "data": {
-      "title": "Data"
+      "title": "Data",
+      "resetDescription": "You can remove any custom settings and revert back to the defaults with this button.",
+      "reset": "Reset To Defaults",
+      "local": "These values are saved on this browser in local storage.",
+      "json": "JSON",
+      "file": "You can copy and paste this json value into the file in src/config.json if you want to apply these settings to command line or local servers."
+    },
+    "toggle": "config",
+    "close": "Close Config",
+    "sectionLabel": "Config Section",
+    "pins": {
+      "innerRadius": {
+        "label": "Pins Inner Radius",
+        "description": "How big should the inner radius of the pin markers be."
+      },
+      "outerRadius": {
+        "label": "Pins Outer Radius",
+        "description": "How big should the outer radius of the pin markers be."
+      },
+      "x1": {
+        "label": "Pins X1 Location",
+        "description": "How far from the edge of the paper should the first pin be placed."
+      },
+      "x2": {
+        "label": "Pins X2 Location",
+        "description": "How far from the edge of the paper should the second pin be placed."
+      },
+      "y": {
+        "label": "Pin Y Location",
+        "description": "How far from the edge of the paper should both pins be placed."
+      }
     }
+  },
+  "alerts": {
+    "error": "Error",
+    "gameLoaded": "Game Loaded",
+    "gameLoadedMessage": "{{title}} loaded",
+    "dropNotFile": "Only files can be dropped here",
+    "dropUnsupported": "Your browser does not support dropping files"
+  },
+  "ui": {
+    "close": "Close",
+    "sidebar": "Sidebar",
+    "toggleSidebar": "Toggle Sidebar",
+    "pagination": "pagination",
+    "previous": "Previous",
+    "previousPage": "Go to previous page",
+    "next": "Next",
+    "nextPage": "Go to next page",
+    "morePages": "More pages"
   },
   "shortcuts": {
     "title": "Keyboard shortcuts",

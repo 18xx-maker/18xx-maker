@@ -69,7 +69,7 @@ const Config = () => {
         <Button
           variant="outline"
           size="icon"
-          aria-label="Close Config"
+          aria-label={t("config.close")}
           onClick={onClose}
         >
           <X />
@@ -79,7 +79,7 @@ const Config = () => {
         <Select value={section} onValueChange={setSection}>
           <SelectTrigger
             className="text-xl p-2 w-full"
-            aria-label="Config Section"
+            aria-label={t("config.sectionLabel")}
           >
             <SelectValue />
           </SelectTrigger>
@@ -99,8 +99,7 @@ const Config = () => {
           <Items section={section} items={items} />
           {section === "data" && [
             <p key="reset-p" className="my-4">
-              You can remove any custom settings and revert back to the defaults
-              with this button.
+              {t("config.data.resetDescription")}
             </p>,
             <Button
               key="reset-button"
@@ -108,18 +107,16 @@ const Config = () => {
               onClick={resetConfig}
               className="self-start"
             >
-              Reset To Defaults
+              {t("config.data.reset")}
             </Button>,
             <p key="local-p" className="mb-4">
-              These values are saved on this browser in local storage.
+              {t("config.data.local")}
             </p>,
             <h3 key="json-header" className="text-xl mb-2">
-              JSON
+              {t("config.data.json")}
             </h3>,
             <p key="file-p" className="mb-4">
-              You can copy and paste this json value into the file in
-              src/config.json if you want to apply these settings to command
-              line or local servers.
+              {t("config.data.file")}
             </p>,
             <Code key="config-diff" language="json" className="w-full">
               {JSON.stringify(diff(defaultConfig, config), null, 2)}
@@ -129,9 +126,7 @@ const Config = () => {
               data={diff(defaultConfig, config)}
               filename="config.json"
               className="my-5"
-            >
-              Download config.json
-            </File>,
+            />,
           ]}
         </div>
       </div>

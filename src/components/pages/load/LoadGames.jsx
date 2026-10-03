@@ -53,7 +53,9 @@ const LoadGames = () => {
       return opfs
         .saveGameFile(event.target.files[0])
         .then((slug) => slug && navigate(`/games/${slug}/map`))
-        .catch((e) => dispatch(createAlert("Error", e.message, "error")));
+        .catch((e) =>
+          dispatch(createAlert(t("alerts.error"), e.message, "error")),
+        );
     }
   };
 

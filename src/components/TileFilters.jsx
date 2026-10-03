@@ -54,7 +54,7 @@ const TileFilters = ({
           </SelectTrigger>
           <SelectContent>
             <SelectItem key="all" value="all">
-              All
+              {t("elements.tiles.filter.all")}
             </SelectItem>
             {map(
               (c) => (

@@ -154,6 +154,27 @@ sizing or packaging logic in either surface.
   `sendFile` 404s on absolute paths containing one (worktrees live in
   `.claude/worktrees`), so use `root` as `startExpress` does.
 
+## Translations
+
+UI strings live in `src/locales/<lang>.json` (`en` is the source) and the docs
+are `src/docs/**/<slug>.<lang>.md` plus `src/pages/home.<lang>.md`. German (`de`)
+and Simplified Chinese (`zh`) are AI-generated and kept in step with English.
+
+- **Any change to a doc page or `home.en.md` must update `.de.md` and `.zh.md`
+  in the same change** (new page: add all three plus its `docs.*` title and
+  description keys in every locale; removed page: delete all three). Re-translate
+  only what changed, keep the structure identical, leave code blocks untouched,
+  and fix `#anchor` links to match the translated headings.
+- **Any new or changed UI string goes in `en.json`, `de.json` and `zh.json`**
+  with the same keys and `{{vars}}`/`<tags>` (`src/locales/locales.test.js`
+  enforces it). Never hardcode user-visible text in the app chrome; print output
+  is not translated.
+- Reuse the terminology already in `de.json`/`zh.json` (tile, token, charter,
+  par, ...) so docs match the UI. Write new docs in the repo's neutral voice;
+  German uses informal "du".
+- The translation notice in `translation.<lang>.md` must keep saying these are
+  machine translations and that fixes are welcome.
+
 ## Docs screenshots
 
 Images in `src/docs` live in `public/images`.

@@ -1,0 +1,816 @@
+{
+  "title": "18xx Maker",
+  "about": "18xx Maker 可以读取以 JSON 编写的 18xx 游戏定义,将其显示出来,并渲染成可供打印的内容。本站最初是为个人自制(Print and Play)项目而设计的,但随着时间推移,它的用途已经转向新游戏的原型设计。",
+  "important": "重要",
+  "note": "注意",
+  "piracy": "请勿使用本应用打印您没有授权的游戏。请支持 18xx 的设计师、开发者和出版商。",
+  "download": "下载",
+  "save": "保存",
+  "show": "显示",
+  "nav": {
+    "menu": "菜单",
+    "app": "应用",
+    "update": "更新",
+    "home": "首页",
+    "load": "加载游戏",
+    "elements": "元素",
+    "docsStart": "快速入门",
+    "docsOutput": "输出",
+    "docsGames": "游戏文件",
+    "docsPnp": "打印自制",
+    "edit": "编辑游戏"
+  },
+  "routeError": {
+    "title": "出错了",
+    "description": "此页面无法绘制。最常见的原因是已保存的设置互相冲突,例如卡牌比页面还大。",
+    "config": "您已保存的设置",
+    "download": "下载设置",
+    "reset": "将设置恢复为默认值"
+  },
+  "refresh": {
+    "refresh": "刷新",
+    "description": "重新加载此文件的最新版本"
+  },
+  "prototype": {
+    "prototype": "原型",
+    "description": "这款游戏仍在开发中"
+  },
+  "wip": {
+    "wip": "制作中",
+    "description": "这款游戏可能不完整或不准确"
+  },
+  "export": {
+    "allPdf": "将游戏导出为 PDF 文档",
+    "allPng": "将游戏导出为 PNG 图片",
+    "b18": "将游戏导出为 Board18 游戏盒",
+    "options": "导出选项",
+    "optionsTitle": "导出 {{title}}",
+    "optionsDescription": "选择要导出的文件。这些选项默认取自游戏文件中的导出设置,点击“重置”可恢复。Board18 游戏盒始终每个单位使用一个像素。",
+    "formats": "格式",
+    "format": {
+      "pdf": "PDF 文档",
+      "png": "PNG 图片",
+      "b18": "Board18 游戏盒"
+    },
+    "documents": "文档",
+    "documentsDescription": "仅适用于 PDF 和 PNG 文件。",
+    "allLayouts": "页面的每一种布局",
+    "background": "图片背景",
+    "backgroundDescription": "适用于地图、股市、发行价、收益和地块清单的 PNG 图片,默认为白色。其他 PNG 图片(背景、卡牌、公司执照、标记和地块)始终是透明的。Board18 的地图和股市始终为白色,其标记和地块为透明。",
+    "transparent": "透明",
+    "white": "白色",
+    "variation": "地图变体",
+    "allVariations": "所有变体",
+    "variationNumber": "变体 {{n}}",
+    "reset": "重置为游戏的选项",
+    "dpi": "PNG 分辨率(dpi)",
+    "dpiDescription": "范围为 1 到 {{max}}。300 是打印时的实际尺寸。",
+    "dpiError": "请输入 1 到 {{max}} 之间的整数",
+    "b18Version": "Board18 版本",
+    "b18Author": "Board18 作者",
+    "destination": "保存位置",
+    "destinationAsk": "导出时会询问保存文件夹",
+    "chooseFolder": "选择文件夹",
+    "noFormat": "请至少选择一种格式",
+    "noDocuments": "请至少选择一个文档",
+    "run": "导出",
+    "running": "正在导出",
+    "cancel": "取消导出",
+    "failed": "导出失败",
+    "label": "导出"
+  },
+  "settings": {
+    "title": "设置",
+    "theme": {
+      "title": "主题",
+      "system": "跟随系统",
+      "light": "浅色",
+      "dark": "深色"
+    },
+    "language": {
+      "title": "语言",
+      "system": "跟随系统",
+      "detected": "检测到的语言:{{language}}",
+      "unavailable": "检测到的语言:{{language}}(不可用,使用 {{fallback}})"
+    }
+  },
+  "app": {
+    "title": "应用信息",
+    "versions": "当前版本",
+    "config": {
+      "what": "应用会把运行所需的信息保存在您本地电脑上的配置文件中。该文件记录了您用本应用编辑过的本地文件、最近编辑的文件列表,以及您最后使用的页面,以便下次启动时返回该页面。",
+      "file": "您的配置文件位于:"
+    },
+    "updates": {
+      "title": "更新",
+      "error": "未找到更新,最新版本未知。",
+      "dev": "开发模式下已禁用更新。",
+      "latest": "未找到更新,{{version}} 已是最新版本!",
+      "available": "{{version}} 可用!",
+      "check": "检查更新",
+      "update": "下载并安装更新"
+    }
+  },
+  "docs": {
+    "toc": "本页内容",
+    "pager": "页面",
+    "previous": "上一页",
+    "next": "下一页",
+    "help": {
+      "title": "使用 18xx Maker",
+      "description": "快速入门"
+    },
+    "files": {
+      "title": "文件",
+      "description": "18xx Maker 如何使用文件"
+    },
+    "faq": {
+      "title": "常见问题",
+      "description": "常见问题解答"
+    },
+    "translation": {
+      "title": "翻译",
+      "description": "帮助翻译 18xx Maker"
+    },
+    "output": {
+      "pdf": {
+        "title": "PDF 输出",
+        "description": "生成 PDF 文档"
+      },
+      "png": {
+        "title": "PNG 输出",
+        "description": "生成 PNG 图片"
+      },
+      "b18": {
+        "title": "Board18 输出",
+        "description": "生成 Board18 游戏盒"
+      }
+    },
+    "games": {
+      "firstGame": {
+        "title": "您的第一款游戏",
+        "description": "游戏文件导览"
+      },
+      "schemas": {
+        "title": "JSON 模式",
+        "description": "游戏文件的校验"
+      },
+      "borders": {
+        "title": "地图边界与线条",
+        "description": "绘制地图边界和线条"
+      },
+      "types": {
+        "title": "股票与标记类型",
+        "description": "轻松描述股票和标记"
+      },
+      "trains": {
+        "title": "阶段与火车",
+        "description": "如何描述游戏阶段"
+      },
+      "logos": {
+        "title": "标志",
+        "description": "铁路公司标志"
+      },
+      "overrides": {
+        "title": "公司替换",
+        "description": "替换公司!"
+      },
+      "themes": {
+        "title": "配色主题",
+        "description": "地图、公司和游戏的颜色"
+      },
+      "positioning": {
+        "title": "自动定位",
+        "description": "更轻松地制作地图"
+      },
+      "exports": {
+        "title": "导出选项",
+        "description": "在游戏文件中设置导出选项"
+      }
+    },
+    "pnp": {
+      "tokens": {
+        "title": "标记",
+        "description": "关于标记输出的信息"
+      },
+      "die": {
+        "title": "模切刀模",
+        "description": "关于 Ellison 模切机的信息"
+      }
+    }
+  },
+  "elements": {
+    "tiles": {
+      "title": "地块",
+      "description": "所有游戏中的 18xx 地块",
+      "page": {
+        "description": "此页面展示了 18xx Maker 所知的所有通用地块。"
+      },
+      "filter": {
+        "title": "地块筛选",
+        "all": "全部",
+        "none": "无",
+        "color": "颜色",
+        "id": "地块编号",
+        "includes": "包含",
+        "town": "小镇",
+        "city": "城市",
+        "halt": "停靠点",
+        "revenues": "收益"
+      }
+    },
+    "atoms": {
+      "title": "基础元素",
+      "description": "地图和地块的基础元素",
+      "page": {
+        "description": "此页面展示了可以显示在地图六边格或地块上的所有元素示例。用这些示例来帮助您制作游戏原型吧!"
+      },
+      "category": "类别:"
+    },
+    "logos": {
+      "title": "公司标志",
+      "description": "内置的铁路公司标志",
+      "page": {
+        "description": "这里是 18xx Maker 内置的所有 SVG 标志。"
+      },
+      "set": "标志集:"
+    },
+    "cheat": {
+      "title": "速查表",
+      "description": "来自内置 18xx 游戏的数据"
+    }
+  },
+  "games": {
+    "title": "游戏",
+    "description": "这些是您已加载到 18xx Maker 中的游戏"
+  },
+  "game": {
+    "info": "游戏信息",
+    "sections": "游戏部分",
+    "type": {
+      "bundled": {
+        "label": "内置",
+        "description": "这款游戏随 18xx Maker 一同提供"
+      },
+      "system": {
+        "label": "本地",
+        "description": "这款游戏是从您的电脑加载的",
+        "forget": "移除"
+      }
+    },
+    "nav": {
+      "background": "背景",
+      "cards": "卡牌",
+      "charters": "公司执照",
+      "map": "地图",
+      "market": "股市",
+      "par": "发行价",
+      "revenue": "收益",
+      "tile-manifest": "地块清单",
+      "tiles": "地块",
+      "tokens": "标记"
+    },
+    "bgg": "BoardGameGeek",
+    "by": "作者:",
+    "cards": {
+      "privates": "私有公司",
+      "shares": "股票",
+      "trains": "火车",
+      "numbers": "数字牌"
+    },
+    "license": {
+      "primary": "授权信息",
+      "secondary": "打印前请阅读"
+    },
+    "load": "加载游戏",
+    "loadDescription": "打开另一款游戏",
+    "map": {
+      "variation": "地图变体"
+    },
+    "open": "打开文件",
+    "paginated": "分页",
+    "players": "玩家",
+    "purchase": {
+      "primary": "购买",
+      "secondary": "在哪里购买这款游戏"
+    },
+    "rules": "规则",
+    "unload": "卸载游戏",
+    "print": {
+      "label": "打印",
+      "tooltip": "打印"
+    }
+  },
+  "started": {
+    "title": "快速入门",
+    "description": "如果您想直接开始打印现有游戏或创建新游戏,请查看我们的<started>快速入门</started>页面,尽快上手。"
+  },
+  "discord": {
+    "title": "Discord",
+    "description": "我们有一个 <discord>18xx-Maker 的 Discord 服务器</discord>。开发讨论和技术支持请使用它!"
+  },
+  "gtg": {
+    "title": "与 Grand Trunk Games 的合作",
+    "description": "<gtg>Grand Trunk Games</gtg> 是一家出色的出版商,也是自制(Print and Play)的有力支持者。他们决定将旗下所有游戏作为官方自制提供方放到 18xx Maker 上!如果条件允许,我们强烈建议您购买他们制作精良的 1861/67、Shikoku 1889 以及即将推出的 The Old Prince 1871,以支持这家出版商!"
+  },
+  "credits": {
+    "title": "致谢",
+    "description": "代码在 <github>GitHub</github> 上<code>公开可用</code>。我们使用 GitHub Actions、Releases 和 Packages 来完成持续集成、应用托管和 Docker 镜像托管。我们使用 <netlify>Netlify</netlify> 来构建和提供<site>网站</site>及 <sb>Storybook</sb>。"
+  },
+  "license": {
+    "title": "许可证",
+    "description": "本项目的代码采用 <license>MIT 许可证</license>,但其中包含的游戏不在此许可范围内。这些游戏是在获得出版商和/或设计师许可的情况下呈现的,并非由 18xx Maker 授权。",
+    "permission": "本仓库中包含的所有游戏均已获得出版商和/或设计师的许可。您可以为个人使用制作自制副本。请感谢他们对自制(Print and Play)的支持!如需咨询某款游戏的授权,请联系出版商和/或设计师。"
+  },
+  "analytics": {
+    "title": "统计分析",
+    "description": "18xx Maker 使用自行托管的 <plausible>Plausible</plausible> 来收集一些统计数据。我们不会收集任何个人数据,也不会收集您使用和编辑了哪些游戏或文件。唯一目的是了解用户如何访问 18xx Maker 以及哪些功能被使用,以便我们把精力放在更有价值的地方。"
+  },
+  "donations": {
+    "title": "捐赠",
+    "description": "有人问过我是否设置捐赠按钮;如果您觉得这个软件对您有用,并愿意为它的开发捐款,可以通过 <paypal>Paypal</paypal>、<cash>Square Cash</cash> 或 <venmo>Venmo</venmo> 进行。"
+  },
+  "config": {
+    "title": "配置",
+    "colors": {
+      "title": "颜色与公司",
+      "theme": {
+        "label": "主题",
+        "description": "主题决定地图和地块上所有元素使用的颜色。"
+      },
+      "companiesTheme": {
+        "label": "公司主题",
+        "description": "公司主题决定地图和地块上所有元素使用的颜色。"
+      },
+      "companySvgLogos": {
+        "label": "公司标志",
+        "description": "您可以选择为公司使用 SVG 标志(如有),而不是仅使用颜色和文字。各项设置的说明请见[标志](/docs/games/logos)文档页面。"
+      },
+      "overrideCompanies": {
+        "label": "替换公司",
+        "description": "这可以把游戏中的公司替换为[代码中](https://github.com/18xx-maker/18xx-maker/tree/master/src/data/companies)定义的一组固定公司。"
+      }
+    },
+    "export": {
+      "title": "导出",
+      "allLayouts": {
+        "label": "导出所有布局选项",
+        "description": "导出带有多种布局选项的 PDF 组件时,是否直接全部导出?"
+      }
+    },
+    "layout": {
+      "title": "布局",
+      "paperSize": "仅供参考:美国 Letter 尺寸为 8.5 英寸 × 11 英寸。A4 为 210 毫米 × 297 毫米。",
+      "margin": {
+        "label": "边距大小",
+        "description": "打印内容四周留出的边距大小。"
+      },
+      "paperWidth": {
+        "label": "纸张宽度"
+      },
+      "paperHeight": {
+        "label": "纸张高度"
+      },
+      "paperMargins": {
+        "label": "纸张边距"
+      }
+    },
+    "tokens": {
+      "title": "标记",
+      "layout": {
+        "label": "标记布局",
+        "description": "您可以在打印标记时选择不同的布局。GSP 与 GarageSalePup 的 AWE 标签纸一致,并会覆盖下面的数值。"
+      },
+      "marketTokenSize": {
+        "label": "股市标记大小",
+        "description": "股市标记的大小。默认为 0.5 英寸。12 毫米和 10 毫米是适合 Rails on Boards 标记的尺寸。"
+      },
+      "stationTokenSize": {
+        "label": "车站标记大小",
+        "description": "车站标记的大小。默认为 0.5 英寸。12 毫米和 10 毫米是适合 Rails on Boards 标记的尺寸。"
+      },
+      "generalTokenSize": {
+        "label": "通用标记大小",
+        "description": "游戏中指定的标记的大小。默认为 0.5 英寸。12 毫米和 10 毫米是适合 Rails on Boards 标记的尺寸。"
+      },
+      "reverseMarketTokens": {
+        "label": "股市标记背面",
+        "description": "是否为公司股市标记的背面打印标记贴纸。“All”会为所有股市标记打印背面(通常是 3 个或 2 个,取决于游戏设置)。"
+      }
+    },
+    "maps": {
+      "title": "地图",
+      "coords": {
+        "label": "坐标类型",
+        "description": "您可以选择坐标在地图上的显示位置(或不显示)。"
+      },
+      "straightCityNames": {
+        "label": "城市名称取直",
+        "description": "城市名称以直线绘制,而不是沿城市弯曲。本工具附带的游戏都不是按这种方式绘制的,因此可能出现布局问题。"
+      },
+      "plainMapCompanies": {
+        "label": "地图上的简化公司格",
+        "description": "把地图上所有起点/终点/标记位置都设为空白的白色城市,并使用黑色公司文字,而不是彩色或标志。"
+      },
+      "plainMapDestinations": {
+        "label": "地图上的简化终点格",
+        "description": "把地图上所有终点位置都设为空白的白色城市,并使用黑色公司文字。"
+      },
+      "market": {
+        "label": "在地图上显示股市",
+        "description": "是否在地图上显示股市。需要游戏文件指定位置。"
+      },
+      "players": {
+        "label": "在地图上显示玩家表",
+        "description": "是否在地图上显示玩家信息表,其中包括银行和证书上限信息。需要游戏文件指定位置。"
+      },
+      "roundTracker": {
+        "label": "在地图上显示回合记录",
+        "description": "是否在地图上显示回合记录。需要游戏文件指定位置。"
+      },
+      "margin": {
+        "label": "边距大小",
+        "description": "打印内容四周留出的边距大小。"
+      },
+      "cutlines": {
+        "label": "分页裁切线大小",
+        "description": "设为 0 可禁用裁切线。"
+      },
+      "cutlinesOffset": {
+        "label": "分页裁切线偏移",
+        "description": "如果您的裁切辅助工具与实际裁切位置略有偏差,可以在此调整偏移量。否则请保持为 0。"
+      },
+      "bleed": {
+        "label": "分页出血大小",
+        "description": "设为 0 可禁用出血。对于分页的内容,这决定了地图页之间重叠多少,以减少裁切误差。"
+      },
+      "pagination": "**分页:**裁切线是裁切标记(设为 0 可禁用),偏移用于补偿略有偏差的裁切辅助工具,边距是打印内容四周的空白,出血是相邻页面重叠的部分,用于减少裁切误差。"
+    },
+    "tiles": {
+      "title": "地块",
+      "id": {
+        "label": "地块编号位置",
+        "description": "决定地块编号显示在哪里。"
+      },
+      "colorblind": {
+        "label": "色盲友好编号",
+        "description": "在地块的编号区域添加一个对色盲友好的形状,用来表示地块颜色。"
+      },
+      "layout": {
+        "label": "地块页布局",
+        "description": "决定地块在地块页上的排列方式。“Offset”是尽量减少裁切次数的样式。“Individual”让每个地块彼此分开,“die”则是为 Deep Thought Games 使用的定制模切刀模设计的。任一刀模选项都会覆盖页面大小和下面的地块大小选项。"
+      },
+      "width": {
+        "label": "地块宽度",
+        "description": "决定地块的默认大小,即对边之间的距离。1.5 英寸是标准的 18xx 尺寸。1.0625 英寸是小尺寸(1822 / 18OE)。GMT 使用 1.75 英寸。"
+      },
+      "mapWidth": {
+        "label": "地图格宽度",
+        "description": "决定地图六边格的默认大小。如果您希望地图画得比地块更大,可以使用此项。根据您裁切地块的方式,这可能会有很大帮助。"
+      },
+      "gaps": {
+        "label": "地块间隙",
+        "description": "决定是否用间隙分隔不同颜色,以防止出血时颜色互相串到对方。除非您确实知道自己不需要,否则请保持开启。"
+      }
+    },
+    "stock": {
+      "title": "股市",
+      "cellWidth": {
+        "label": "格子宽度",
+        "description": "决定股市中一个格子的默认宽度。"
+      },
+      "cellHeight": {
+        "label": "格子高度",
+        "description": "决定股市中一个格子的默认高度。"
+      },
+      "value": {
+        "label": "数值位置",
+        "description": "决定格子的数值绘制在顶部还是底部。"
+      },
+      "arrows": {
+        "label": "箭头位置",
+        "description": "决定格子中的箭头位于顶部、中间还是底部。"
+      },
+      "column": {
+        "label": "列高度",
+        "description": "决定一列 1D 股市的高度由多少个格子组成。默认为 4。允许使用小数。"
+      },
+      "diag": {
+        "label": "斜线高度",
+        "description": "决定一个 1Diag 股市格的高度由多少个格子组成。默认为 2。允许使用小数。"
+      },
+      "par": {
+        "label": "发行价宽度",
+        "description": "决定一个发行价股市格的宽度由多少个格子组成。默认为 4。允许使用小数。"
+      },
+      "displayLegend": {
+        "label": "显示股市图例",
+        "description": "是否在股市上显示图例。2D 股市的图例需要游戏文件指定位置。"
+      },
+      "displayPar": {
+        "label": "显示股市发行价表",
+        "description": "是否在股市上显示发行价表。需要游戏文件指定位置。"
+      },
+      "displayRoundTracker": {
+        "label": "显示股市回合记录",
+        "description": "是否在股市上显示回合记录。需要游戏文件指定位置。"
+      },
+      "margin": {
+        "label": "边距大小",
+        "description": "打印内容四周留出的边距大小。"
+      },
+      "cutlines": {
+        "label": "分页裁切线大小",
+        "description": "设为 0 可禁用裁切线。"
+      },
+      "cutlinesOffset": {
+        "label": "分页裁切线偏移",
+        "description": "如果您的裁切辅助工具与实际裁切位置略有偏差,可以在此调整偏移量。否则请保持为 0。"
+      },
+      "bleed": {
+        "label": "分页出血大小",
+        "description": "设为 0 可禁用出血。对于分页的内容,这决定了地图页之间重叠多少,以减少裁切误差。"
+      },
+      "pagination": "**分页:**裁切线是裁切标记(设为 0 可禁用),偏移用于补偿略有偏差的裁切辅助工具,边距是打印内容四周的空白,出血是相邻页面重叠的部分,用于减少裁切误差。"
+    },
+    "charters": {
+      "title": "公司执照",
+      "style": {
+        "label": "公司执照样式",
+        "description": "可在两种公司执照样式之间选择。一种类似 Carth 的风格,另一种在顶部包含更多颜色。"
+      },
+      "layout": {
+        "label": "公司执照布局",
+        "description": "“Free”会尽量让每页排两张公司执照(半宽公司执照会改变这一点)。3x1 和 3x2 都是适配常见刀模的设计。任一刀模选项都会覆盖页面大小,以及下面的宽度、高度和裁切线选项。"
+      },
+      "halfWidth": {
+        "label": "半宽公司执照",
+        "description": "将所有公司执照(大公司和小公司)绘制为半宽。它们将占据页面宽度的一半(减去裁切线)。"
+      },
+      "smallerMinors": {
+        "label": "更小的小公司",
+        "description": "将小公司的执照绘制得更小(高度方面)。"
+      },
+      "cutlines": {
+        "label": "公司执照裁切线大小",
+        "description": "设为 0 可禁用裁切线,让公司执照紧挨在一起。"
+      },
+      "bleed": {
+        "label": "公司执照出血大小",
+        "description": "设为 0 可禁用出血,或设为某个数值,打印时将使用该大小的边距作为出血。"
+      },
+      "border": {
+        "label": "公司执照边框大小",
+        "description": "设为 0 可禁用边框,或设为某个数值,在公司执照四周绘制该像素宽度的边框。"
+      },
+      "showPhaseChart": {
+        "label": "显示阶段表",
+        "description": "是否在公司执照上显示阶段表。"
+      },
+      "showTurnOrder": {
+        "label": "显示行动顺序",
+        "description": "是否在公司执照上显示阶段表。"
+      },
+      "blackBand": {
+        "label": "公司执照黑边",
+        "description": "是否在公司执照的彩色区域旁加上黑色边框。仅适用于“color”公司执照。白色公司执照始终带有黑边。"
+      }
+    },
+    "cards": {
+      "title": "卡牌",
+      "shareStyle": {
+        "label": "股票样式",
+        "description": "可在两种股票样式之间选择。一种把标记放在卡牌中央,另一种把标记放在左侧(类似 All Aboard Games 和 Deep Thought Games)。"
+      },
+      "layout": {
+        "label": "卡牌布局",
+        "description": "“Free”让卡牌自由排布,并使用下面的其他选项。“Mini euro”适用于我自制的、可裁切迷你欧式尺寸卡牌的刀模,“dtgDie”使用 Deep Thought Games 的标准素材刀模。任一刀模选项都会覆盖页面大小,以及下面的宽度、高度和裁切线选项。"
+      },
+      "width": {
+        "label": "卡牌宽度"
+      },
+      "height": {
+        "label": "卡牌高度"
+      },
+      "cutlines": {
+        "label": "卡牌裁切线大小",
+        "description": "设为 0 可禁用裁切线,让卡牌紧挨在一起。"
+      },
+      "bleed": {
+        "label": "卡牌出血大小",
+        "description": "设为 0 可禁用出血,或设为某个数值,打印时将使用该大小的边距作为出血。"
+      },
+      "dtgPadding": {
+        "label": "DTG 刀模内边距大小",
+        "description": "设为 0 可禁用内边距,或设为某个数值,在 DTG 刀模布局下打印时,每张卡牌将使用该大小的边距作为内边距。"
+      },
+      "padding": {
+        "label": "卡牌内边距",
+        "description": "卡牌上的文字和图标与卡牌边缘保持多远的距离。调小它可以让内容适应小卡牌。"
+      },
+      "border": {
+        "label": "卡牌边框大小",
+        "description": "设为 0 可禁用边框,或设为某个数值,在卡牌四周绘制该像素宽度的边框。"
+      },
+      "blackBand": {
+        "label": "卡牌黑边",
+        "description": "是否在股票的彩色区域旁加上黑色边框。仅适用于“gmt”和“left”样式的股票以及火车。白色卡牌始终带有黑边。"
+      },
+      "sizes": "**宽度、高度、裁切线、出血、内边距和 DTG 内边距**使用您选择的单位。裁切线是每张卡牌四周的裁切标记,出血是卡牌颜色超出裁切边缘的距离,内边距让文字和图标远离卡牌边缘,DTG 内边距仅适用于 DTG 刀模布局。修改会在您离开输入框或按下回车键时生效。"
+    },
+    "privates": {
+      "title": "私有公司",
+      "style": {
+        "label": "私有公司样式",
+        "description": "私有公司卡牌的不同样式。“Small”使用小图标,“big”使用大图标。"
+      }
+    },
+    "trains": {
+      "title": "火车",
+      "style": {
+        "label": "火车样式",
+        "description": "火车卡牌的不同样式。“Color”使用宽的彩色条带,而数字样式则用彩色数字表示火车名称。"
+      },
+      "images": {
+        "label": "火车图片",
+        "description": "是否在卡牌上放置一些火车图片。"
+      }
+    },
+    "currency": {
+      "title": "货币",
+      "description": "您可以为每一项单独开启货币符号。仅当游戏文件中的数值是数字而不是字符串时才有效。",
+      "bank": {
+        "label": "银行",
+        "description": "收益页上的银行总额"
+      },
+      "border": {
+        "label": "边界",
+        "description": "写在地图边界上的费用"
+      },
+      "capital": {
+        "label": "资本",
+        "description": "收益页上的玩家资本列表"
+      },
+      "market": {
+        "label": "股市",
+        "description": "股市格子"
+      },
+      "offboard": {
+        "label": "场外",
+        "description": "地图上场外区域的数值"
+      },
+      "par": {
+        "label": "发行价",
+        "description": "股市发行价格子"
+      },
+      "private": {
+        "label": "私有公司",
+        "description": "卡牌上私有公司的费用和收益"
+      },
+      "revenue": {
+        "label": "收益",
+        "description": "收益记录格子"
+      },
+      "terrain": {
+        "label": "地形",
+        "description": "地图和轨道地块上的地形费用"
+      },
+      "token": {
+        "label": "标记",
+        "description": "公司执照上的标记费用"
+      },
+      "train": {
+        "label": "火车",
+        "description": "卡牌和公司执照上的火车费用"
+      },
+      "treasury": {
+        "label": "公司资金",
+        "description": "公司执照上的公司初始资金"
+      },
+      "value": {
+        "label": "数值",
+        "description": "地图和轨道地块上的数值"
+      }
+    },
+    "data": {
+      "title": "数据",
+      "resetDescription": "你可以用这个按钮移除所有自定义设置并恢复为默认值。",
+      "reset": "重置为默认值",
+      "local": "这些值保存在此浏览器的本地存储中。",
+      "json": "JSON",
+      "file": "如果想把这些设置应用到命令行或本地服务器,可以复制这个 JSON 值并粘贴到 src/config.json 文件中。"
+    },
+    "toggle": "配置",
+    "close": "关闭配置",
+    "sectionLabel": "配置部分",
+    "pins": {
+      "innerRadius": {
+        "label": "定位销内半径",
+        "description": "定位销标记的内半径应该多大。"
+      },
+      "outerRadius": {
+        "label": "定位销外半径",
+        "description": "定位销标记的外半径应该多大。"
+      },
+      "x1": {
+        "label": "定位销 X1 位置",
+        "description": "第一个定位销应放在距纸张边缘多远的位置。"
+      },
+      "x2": {
+        "label": "定位销 X2 位置",
+        "description": "第二个定位销应放在距纸张边缘多远的位置。"
+      },
+      "y": {
+        "label": "定位销 Y 位置",
+        "description": "两个定位销应放在距纸张边缘多远的位置。"
+      }
+    }
+  },
+  "alerts": {
+    "error": "错误",
+    "gameLoaded": "游戏已加载",
+    "gameLoadedMessage": "已加载 {{title}}",
+    "dropNotFile": "这里只能拖放文件",
+    "dropUnsupported": "你的浏览器不支持拖放文件"
+  },
+  "ui": {
+    "close": "关闭",
+    "sidebar": "侧边栏",
+    "toggleSidebar": "切换侧边栏",
+    "pagination": "分页导航",
+    "previous": "上一页",
+    "previousPage": "转到上一页",
+    "next": "下一页",
+    "nextPage": "转到下一页",
+    "morePages": "更多页面"
+  },
+  "shortcuts": {
+    "title": "快捷键",
+    "description": "在 18xx Maker 中任何地方都可使用的按键",
+    "key": "按键",
+    "use": "用途",
+    "notes": "备注",
+    "exportMenu": "打开导出菜单后:p 导出 PDF,n 导出 PNG,b 导出 Board18 文件,o 打开导出选项。",
+    "keys": {
+      "escape": {
+        "use": "返回:先关闭配置面板,再从编辑页面返回游戏页面,最后回到首页",
+        "notes": "在首页上无效"
+      },
+      "docs": {
+        "use": "前往文档(使用 18xx Maker)"
+      },
+      "help": {
+        "use": "显示这些快捷键"
+      },
+      "home": {
+        "use": "前往首页"
+      },
+      "load": {
+        "use": "前往加载游戏页面"
+      },
+      "open": {
+        "use": "从您的系统打开新的游戏文件"
+      },
+      "refresh": {
+        "use": "从文件系统刷新当前游戏",
+        "notes": "仅限网站。仅限受支持的浏览器。"
+      },
+      "atoms": {
+        "use": "前往基础元素页面",
+        "notes": "不适用于游戏编辑页面"
+      },
+      "tiles": {
+        "use": "前往地块页面",
+        "notes": "不适用于游戏编辑页面"
+      },
+      "logos": {
+        "use": "前往标志页面",
+        "notes": "不适用于游戏编辑页面。编辑时切换配置"
+      },
+      "game": {
+        "use": "前往游戏页面",
+        "notes": "仅在已加载游戏时可用"
+      },
+      "edit": {
+        "use": "在第一个部分编辑已加载的游戏",
+        "notes": "在游戏编辑页面上,返回游戏页面"
+      },
+      "section": {
+        "use": "在地图或某个部分编辑已加载的游戏",
+        "notes": "仅在已加载游戏时可用"
+      },
+      "view": {
+        "use": "重置地图或股市编辑器的视图",
+        "notes": "仅在地图和股市编辑页面可用"
+      },
+      "export": {
+        "use": "打开导出菜单",
+        "notes": "仅限应用。会前往已加载的游戏。"
+      },
+      "app": {
+        "use": "前往应用信息页面",
+        "notes": "仅限应用。"
+      }
+    }
+  }
+}

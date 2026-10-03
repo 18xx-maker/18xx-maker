@@ -4,14 +4,14 @@ import i18n from "@/locales/i18n";
 
 import { renderApp } from "@tests/helpers.jsx";
 
-// Only English docs exist, so a browser in another language (de-DE) must
-// fall back to them instead of rendering a blank page.
+// Docs exist in English, German and Chinese, so a browser in another language
+// (fr-FR) must fall back to English instead of rendering a blank page.
 describe("docs in a language without translations", () => {
   afterEach(() => act(() => i18n.changeLanguage("en")));
 
   it("falls back to English for docs and home", async () => {
-    await i18n.changeLanguage("de-DE");
-    expect(i18n.languages[0]).toBe("de");
+    await i18n.changeLanguage("fr-FR");
+    expect(i18n.languages[0]).toBe("fr");
 
     renderApp("/docs");
     expect(await screen.findByTestId("docs-index")).not.toBeEmptyDOMElement();
@@ -19,7 +19,7 @@ describe("docs in a language without translations", () => {
   });
 
   it("falls back to English for the home page", async () => {
-    await i18n.changeLanguage("de-DE");
+    await i18n.changeLanguage("fr-FR");
     renderApp("/");
     const home = await screen.findByTestId("home");
     expect(home.textContent.trim()).not.toBe("");

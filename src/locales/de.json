@@ -1,0 +1,816 @@
+{
+  "title": "18xx Maker",
+  "about": "18xx Maker liest 18xx-Spieldefinitionen im JSON-Format, zeigt sie an und bereitet sie für den Druck auf. Ursprünglich war diese Seite für persönliche Print-and-Play-Projekte gedacht, mit der Zeit hat sich der Zweck jedoch hin zum Prototyping neuer Spiele verschoben.",
+  "important": "Wichtig",
+  "note": "Hinweis",
+  "piracy": "Verwende diese App nicht, um Spiele zu drucken, für die du keine Lizenz besitzt. Bitte unterstütze unsere 18xx-Designer, -Entwickler und -Verlage.",
+  "download": "Herunterladen",
+  "save": "Speichern",
+  "show": "Anzeigen",
+  "nav": {
+    "menu": "Menü",
+    "app": "App",
+    "update": "Aktualisieren",
+    "home": "Startseite",
+    "load": "Spiele laden",
+    "elements": "Elemente",
+    "docsStart": "Erste Schritte",
+    "docsOutput": "Ausgabe",
+    "docsGames": "Spieldateien",
+    "docsPnp": "Print and Play",
+    "edit": "Spiel bearbeiten"
+  },
+  "routeError": {
+    "title": "Etwas ist schiefgelaufen",
+    "description": "Diese Seite konnte nicht dargestellt werden. Meist liegt das an gespeicherten Einstellungen, die nicht zusammenpassen, zum Beispiel eine Karte, die größer ist als die Seite.",
+    "config": "Deine gespeicherten Einstellungen",
+    "download": "Einstellungen herunterladen",
+    "reset": "Einstellungen auf Standard zurücksetzen"
+  },
+  "refresh": {
+    "refresh": "Neu laden",
+    "description": "Die neueste Version dieser Datei laden"
+  },
+  "prototype": {
+    "prototype": "Prototyp",
+    "description": "Dieses Spiel befindet sich noch in der Entwicklung"
+  },
+  "wip": {
+    "wip": "In Arbeit",
+    "description": "Dieses Spiel ist möglicherweise unvollständig oder fehlerhaft"
+  },
+  "export": {
+    "allPdf": "Spiel als PDF-Dokumente exportieren",
+    "allPng": "Spiel als PNG-Bilder exportieren",
+    "b18": "Spiel als Board18-Box exportieren",
+    "options": "Exportoptionen",
+    "optionsTitle": "{{title}} exportieren",
+    "optionsDescription": "Wähle die Dateien aus, die exportiert werden sollen. Die Optionen starten mit den Exporteinstellungen der Spieldatei, und „Zurücksetzen“ stellt sie wieder her. Board18-Boxen verwenden immer einen Pixel pro Einheit.",
+    "formats": "Formate",
+    "format": {
+      "pdf": "PDF-Dokumente",
+      "png": "PNG-Bilder",
+      "b18": "Board18-Box"
+    },
+    "documents": "Dokumente",
+    "documentsDescription": "Nur für PDF- und PNG-Dateien.",
+    "allLayouts": "Jedes Layout eines Bogens",
+    "background": "Bildhintergrund",
+    "backgroundDescription": "Für die PNG-Bilder von Karte, Aktienmarkt, Par-Tabelle, Einnahmentabelle und Plättchenübersicht, standardmäßig weiß. Die übrigen PNG-Bilder (Hintergrund, Karten, Gesellschaftskarten, Token und Plättchen) sind immer transparent. Board18-Karten und -Aktienmärkte sind immer weiß, ihre Token und Plättchen transparent.",
+    "transparent": "Transparent",
+    "white": "Weiß",
+    "variation": "Kartenvariante",
+    "allVariations": "Alle Varianten",
+    "variationNumber": "Variante {{n}}",
+    "reset": "Auf die Optionen des Spiels zurücksetzen",
+    "dpi": "PNG-Auflösung (dpi)",
+    "dpiDescription": "Von 1 bis {{max}}. Mit 300 werden sie in Originalgröße gedruckt.",
+    "dpiError": "Gib eine ganze Zahl von 1 bis {{max}} ein",
+    "b18Version": "Board18-Version",
+    "b18Author": "Board18-Autor",
+    "destination": "Ziel",
+    "destinationAsk": "Beim Export wird nach einem Ordner gefragt",
+    "chooseFolder": "Ordner auswählen",
+    "noFormat": "Wähle mindestens ein Format aus",
+    "noDocuments": "Wähle mindestens ein Dokument aus",
+    "run": "Exportieren",
+    "running": "Exportiere",
+    "cancel": "Export abbrechen",
+    "failed": "Export fehlgeschlagen",
+    "label": "Exportieren"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "theme": {
+      "title": "Design",
+      "system": "System",
+      "light": "Hell",
+      "dark": "Dunkel"
+    },
+    "language": {
+      "title": "Sprache",
+      "system": "System",
+      "detected": "Erkannte Sprache: {{language}}",
+      "unavailable": "Erkannte Sprache: {{language}} (nicht verfügbar, verwende {{fallback}})"
+    }
+  },
+  "app": {
+    "title": "App-Informationen",
+    "versions": "Aktuelle Versionen",
+    "config": {
+      "what": "Die App speichert die Informationen, die sie zum Funktionieren braucht, in einer Konfigurationsdatei auf deinem Computer. Diese Datei enthält Informationen zu lokalen Dateien, die du mit der App bearbeitet hast, die Liste der zuletzt bearbeiteten Dateien sowie die zuletzt besuchte Seite, damit wir beim nächsten Start dorthin zurückkehren können.",
+      "file": "Deine Konfigurationsdatei befindet sich hier:"
+    },
+    "updates": {
+      "title": "Updates",
+      "error": "Keine Updates gefunden. Die neueste Version ist unbekannt.",
+      "dev": "Updates sind im Entwicklungsmodus deaktiviert.",
+      "latest": "Keine Updates gefunden. {{version}} ist die neueste Version!",
+      "available": "{{version}} ist verfügbar!",
+      "check": "Nach Updates suchen",
+      "update": "Update herunterladen und installieren"
+    }
+  },
+  "docs": {
+    "toc": "Auf dieser Seite",
+    "pager": "Seiten",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "help": {
+      "title": "18xx Maker verwenden",
+      "description": "Erste Schritte"
+    },
+    "files": {
+      "title": "Dateien",
+      "description": "Wie 18xx Maker Dateien verwendet"
+    },
+    "faq": {
+      "title": "Fragen & Antworten",
+      "description": "Häufige Fragen"
+    },
+    "translation": {
+      "title": "Übersetzung",
+      "description": "Hilf mit, 18xx Maker zu übersetzen"
+    },
+    "output": {
+      "pdf": {
+        "title": "PDF-Ausgabe",
+        "description": "PDF-Dokumente erzeugen"
+      },
+      "png": {
+        "title": "PNG-Ausgabe",
+        "description": "PNG-Bilder erzeugen"
+      },
+      "b18": {
+        "title": "Board18-Ausgabe",
+        "description": "Board18-Spielboxen erzeugen"
+      }
+    },
+    "games": {
+      "firstGame": {
+        "title": "Dein erstes Spiel",
+        "description": "Ein Rundgang durch eine Spieldatei"
+      },
+      "schemas": {
+        "title": "JSON-Schemas",
+        "description": "Validierung von Spieldateien"
+      },
+      "borders": {
+        "title": "Kartenränder & Linien",
+        "description": "Kartenränder und Linien zeichnen"
+      },
+      "types": {
+        "title": "Aktien- & Tokentypen",
+        "description": "Aktien und Token einfach beschreiben"
+      },
+      "trains": {
+        "title": "Phasen und Züge",
+        "description": "Wie man Spielphasen beschreibt"
+      },
+      "logos": {
+        "title": "Logos",
+        "description": "Logos der Eisenbahngesellschaften"
+      },
+      "overrides": {
+        "title": "Gesellschaften austauschen",
+        "description": "Gesellschaften tauschen!"
+      },
+      "themes": {
+        "title": "Farbschemata",
+        "description": "Farben für Karte, Gesellschaften und Spiel"
+      },
+      "positioning": {
+        "title": "Automatische Positionierung",
+        "description": "Einfacher Kartenbau"
+      },
+      "exports": {
+        "title": "Exportoptionen",
+        "description": "Exportoptionen in der Spieldatei festlegen"
+      }
+    },
+    "pnp": {
+      "tokens": {
+        "title": "Token",
+        "description": "Informationen zur Token-Ausgabe"
+      },
+      "die": {
+        "title": "Stanzform",
+        "description": "Informationen zur Ellison-Stanze"
+      }
+    }
+  },
+  "elements": {
+    "tiles": {
+      "title": "Plättchen",
+      "description": "18xx-Plättchen aus allen Spielen",
+      "page": {
+        "description": "Diese Seite zeigt alle allgemeinen Plättchen, die 18xx Maker kennt."
+      },
+      "filter": {
+        "title": "Plättchenfilter",
+        "all": "Alle",
+        "none": "Keine",
+        "color": "Farbe",
+        "id": "Plättchen-ID",
+        "includes": "Enthält",
+        "town": "Dorf",
+        "city": "Stadt",
+        "halt": "Haltepunkt",
+        "revenues": "Einnahmen"
+      }
+    },
+    "atoms": {
+      "title": "Atome",
+      "description": "Grundelemente für Karten und Plättchen",
+      "page": {
+        "description": "Diese Seite zeigt Beispiele für alle Elemente, die du auf Kartenfeldern oder Plättchen darstellen kannst. Nutze die Beispiele, um dein Spiel zu prototypisieren!"
+      },
+      "category": "Kategorie:"
+    },
+    "logos": {
+      "title": "Gesellschaftslogos",
+      "description": "Enthaltene Logos der Eisenbahngesellschaften",
+      "page": {
+        "description": "Hier sind alle SVG-Logos, die mit 18xx Maker mitgeliefert werden."
+      },
+      "set": "Logo-Set:"
+    },
+    "cheat": {
+      "title": "Spickzettel",
+      "description": "Daten aus den enthaltenen 18xx-Spielen"
+    }
+  },
+  "games": {
+    "title": "Spiele",
+    "description": "Dies sind die Spiele, die du in 18xx Maker geladen hast"
+  },
+  "game": {
+    "info": "Spielinformationen",
+    "sections": "Spielbereich",
+    "type": {
+      "bundled": {
+        "label": "Mitgeliefert",
+        "description": "Dieses Spiel wird mit 18xx Maker mitgeliefert"
+      },
+      "system": {
+        "label": "System",
+        "description": "Dieses Spiel wurde von deinem Computer geladen",
+        "forget": "Entfernen"
+      }
+    },
+    "nav": {
+      "background": "Hintergrund",
+      "cards": "Karten",
+      "charters": "Gesellschaftskarten",
+      "map": "Karte",
+      "market": "Aktienmarkt",
+      "par": "Par",
+      "revenue": "Einnahmen",
+      "tile-manifest": "Plättchenübersicht",
+      "tiles": "Plättchen",
+      "tokens": "Token"
+    },
+    "bgg": "BoardGameGeek",
+    "by": "von",
+    "cards": {
+      "privates": "Privatgesellschaften",
+      "shares": "Aktien",
+      "trains": "Züge",
+      "numbers": "Zahlenkarten"
+    },
+    "license": {
+      "primary": "Lizenzinformationen",
+      "secondary": "Bitte vor dem Drucken lesen"
+    },
+    "load": "Spiel laden",
+    "loadDescription": "Ein anderes Spiel öffnen",
+    "map": {
+      "variation": "Kartenvariante"
+    },
+    "open": "Datei öffnen",
+    "paginated": "Auf Seiten aufteilen",
+    "players": "Spieler",
+    "purchase": {
+      "primary": "Kaufen",
+      "secondary": "Wo man dieses Spiel kaufen kann"
+    },
+    "rules": "Regeln",
+    "unload": "Spiel entladen",
+    "print": {
+      "label": "Drucken",
+      "tooltip": "Drucken"
+    }
+  },
+  "started": {
+    "title": "Erste Schritte",
+    "description": "Wenn du direkt loslegen möchtest, um ein bestehendes Spiel zu drucken oder ein neues zu erstellen, schau dir unsere Seite <started>Erste Schritte</started> an, um schnell loszulegen."
+  },
+  "discord": {
+    "title": "Discord",
+    "description": "Wir haben einen <discord>Discord-Server für 18xx-Maker</discord>. Bitte nutze ihn für Entwicklungsgespräche und Support!"
+  },
+  "gtg": {
+    "title": "Partnerschaft mit Grand Trunk Games",
+    "description": "<gtg>Grand Trunk Games</gtg> ist ein großartiger Verlag und ein großer Unterstützer von Print and Play. Sie haben beschlossen, alle ihre Spiele als offizieller Print-and-Play-Anbieter auf 18xx Maker bereitzustellen! Wenn du kannst, empfehlen wir dir sehr, diesen Verlag durch den Kauf seiner hervorragenden Ausgaben von 1861/67, Shikoku 1889 und dem kommenden The Old Prince 1871 zu unterstützen!"
+  },
+  "credits": {
+    "title": "Danksagung",
+    "description": "Der Code ist auf <github>GitHub</github> <code>verfügbar</code>. Wir nutzen GitHub Actions, Releases und Packages für CI, das Hosting der App und das Hosting von Docker-Images. Wir verwenden <netlify>Netlify</netlify>, um die <site>Website</site> und das <sb>Storybook</sb> zu bauen und auszuliefern."
+  },
+  "license": {
+    "title": "Lizenz",
+    "description": "Der Code dieses Projekts steht unter der <license>MIT-Lizenz</license>, die darin enthaltenen Spiele sind davon jedoch nicht abgedeckt. Die Spiele werden ohne Lizenz von 18xx Maker und mit Erlaubnis der Verlage und/oder Designer präsentiert.",
+    "permission": "Alle in diesem Repository enthaltenen Spiele sind mit Erlaubnis des Verlags und/oder Designers enthalten. Du kannst Print-and-Play-Kopien für den eigenen privaten Gebrauch anfertigen. Bitte bedanke dich bei ihnen für ihre Unterstützung von Print and Play! Wenn du dich nach der Lizenz eines Spiels erkundigen möchtest, wende dich an den Verlag und/oder Designer."
+  },
+  "analytics": {
+    "title": "Analysen",
+    "description": "18xx Maker verwendet eine selbst gehostete Version von <plausible>Plausible</plausible>, um einige Statistiken zu erheben. Es werden keine personenbezogenen Daten erhoben, und es wird nicht erfasst, welche Spiele oder Dateien du verwendest und bearbeitest. Der einzige Zweck ist zu wissen, wie Nutzer auf 18xx Maker zugreifen und welche Funktionen genutzt werden, damit wir unsere Arbeit besser ausrichten können."
+  },
+  "donations": {
+    "title": "Spenden",
+    "description": "Ich wurde nach Spenden-Buttons gefragt; wenn du diese Software nützlich findest und Geld für ihre Entwicklung spenden möchtest, kannst du das über <paypal>Paypal</paypal>, <cash>Square Cash</cash> oder <venmo>Venmo</venmo> tun."
+  },
+  "config": {
+    "title": "Konfiguration",
+    "colors": {
+      "title": "Farben und Gesellschaften",
+      "theme": {
+        "label": "Farbschema",
+        "description": "Das Farbschema legt fest, welche Farben für alle Elemente auf Karten und Plättchen verwendet werden."
+      },
+      "companiesTheme": {
+        "label": "Gesellschaften-Farbschema",
+        "description": "Das Gesellschaften-Farbschema legt fest, welche Farben für alle Elemente auf Karten und Plättchen verwendet werden."
+      },
+      "companySvgLogos": {
+        "label": "Gesellschaftslogos",
+        "description": "Hier kannst du wählen, ob für Gesellschaften (sofern verfügbar) SVG-Logos statt nur Farben und Text verwendet werden. Die einzelnen Einstellungen sind auf der Seite [Logos](/docs/games/logos) erklärt."
+      },
+      "overrideCompanies": {
+        "label": "Gesellschaften ersetzen",
+        "description": "Hier kannst du die Gesellschaften eines Spiels durch eine feste Liste ersetzen, die [im Code](https://github.com/18xx-maker/18xx-maker/tree/master/src/data/companies) definiert ist."
+      }
+    },
+    "export": {
+      "title": "Export",
+      "allLayouts": {
+        "label": "Alle Layoutoptionen exportieren",
+        "description": "Sollen beim Export von PDF-Komponenten mit mehreren Layoutoptionen einfach alle exportiert werden?"
+      }
+    },
+    "layout": {
+      "title": "Layout",
+      "paperSize": "Zur Orientierung: US Letter misst 8,5 × 11 Zoll. A4 misst 210 × 297 mm.",
+      "margin": {
+        "label": "Randgröße",
+        "description": "Wie groß der Rand um das gedruckte Element ist."
+      },
+      "paperWidth": {
+        "label": "Papierbreite"
+      },
+      "paperHeight": {
+        "label": "Papierhöhe"
+      },
+      "paperMargins": {
+        "label": "Papierränder"
+      }
+    },
+    "tokens": {
+      "title": "Token",
+      "layout": {
+        "label": "Token-Layout",
+        "description": "Hier kannst du zwischen verschiedenen Layouts für den Token-Druck wählen. GSP entspricht den AWE-Etikettenbögen von GarageSalePup und überschreibt die Werte unten."
+      },
+      "marketTokenSize": {
+        "label": "Größe der Marktmarker",
+        "description": "Größe der Marker auf dem Aktienmarkt. Standard sind 0,5 Zoll. 12 mm und 10 mm sind gute Größen für die Token von Rails on Boards."
+      },
+      "stationTokenSize": {
+        "label": "Größe der Bahnhofstoken",
+        "description": "Größe der Bahnhofstoken. Standard sind 0,5 Zoll. 12 mm und 10 mm sind gute Größen für die Token von Rails on Boards."
+      },
+      "generalTokenSize": {
+        "label": "Größe allgemeiner Token",
+        "description": "Größe der im Spiel festgelegten Token. Standard sind 0,5 Zoll. 12 mm und 10 mm sind gute Größen für die Token von Rails on Boards."
+      },
+      "reverseMarketTokens": {
+        "label": "Rückseiten der Marktmarker",
+        "description": "Ob Token-Aufkleber für die Rückseite der Marktmarker der Gesellschaften gedruckt werden. „All“ druckt eine Rückseite für alle Marktmarker (normalerweise 3 oder 2, je nach Spieleinstellungen)."
+      }
+    },
+    "maps": {
+      "title": "Karten",
+      "coords": {
+        "label": "Koordinatentyp",
+        "description": "Hier legst du fest, wo die Koordinaten auf der Karte erscheinen (falls überhaupt)."
+      },
+      "straightCityNames": {
+        "label": "Gerade Städtenamen",
+        "description": "Städtenamen gerade statt gebogen entlang der Stadt zeichnen. Keines der mit diesem Werkzeug gelieferten Spiele ist dafür gedacht, so gezeichnet zu werden, daher können Layoutprobleme auftreten."
+      },
+      "plainMapCompanies": {
+        "label": "Schlichte Gesellschaftsfelder auf der Karte",
+        "description": "Setzt alle Heimat-, Ziel- und Tokenfelder auf Karten als leere weiße Städte mit schwarzem Gesellschaftstext, statt farbig oder mit Logos."
+      },
+      "plainMapDestinations": {
+        "label": "Schlichte Zielfelder auf der Karte",
+        "description": "Setzt alle Zielfelder auf Karten als leere weiße Städte mit schwarzem Gesellschaftstext."
+      },
+      "market": {
+        "label": "Aktienmarkt auf der Karte anzeigen",
+        "description": "Ob der Aktienmarkt auf der Karte angezeigt wird. Die Spieldatei muss dafür die Position angeben."
+      },
+      "players": {
+        "label": "Spielertabelle auf der Karte anzeigen",
+        "description": "Ob die Tabelle mit den Spielerinformationen auf Karten angezeigt wird. Sie enthält Informationen zur Bank und zum Zertifikatslimit. Die Spieldatei muss dafür die Position angeben."
+      },
+      "roundTracker": {
+        "label": "Rundenanzeige auf der Karte anzeigen",
+        "description": "Ob die Rundenanzeige auf Karten angezeigt wird. Die Spieldatei muss dafür die Position angeben."
+      },
+      "margin": {
+        "label": "Randgröße",
+        "description": "Wie groß der Rand um das gedruckte Element ist."
+      },
+      "cutlines": {
+        "label": "Größe der Schnittlinien bei der Seitenaufteilung",
+        "description": "Auf 0 setzen, um die Schnittlinien zu deaktivieren."
+      },
+      "cutlinesOffset": {
+        "label": "Versatz der Schnittlinien bei der Seitenaufteilung",
+        "description": "Wenn deine Schneidehilfe etwas von der tatsächlichen Schnittstelle abweicht, kannst du hier einen Versatz einstellen. Andernfalls bei 0 belassen."
+      },
+      "bleed": {
+        "label": "Beschnittgröße bei der Seitenaufteilung",
+        "description": "Auf 0 setzen, um den Beschnitt zu deaktivieren. Bei aufgeteilten Elementen legt dies fest, wie stark sich Kartenseiten überlappen, um Schneidefehler auszugleichen."
+      },
+      "pagination": "**Seitenaufteilung:** Schnittlinien sind die Schnittmarken (auf 0 setzen zum Deaktivieren), der Versatz gleicht eine leicht abweichende Schneidehilfe aus, der Rand ist der Platz um das gedruckte Element und der Beschnitt gibt an, wie stark sich benachbarte Seiten überlappen, um Schneidefehler auszugleichen."
+    },
+    "tiles": {
+      "title": "Plättchen",
+      "id": {
+        "label": "Position der Plättchen-ID",
+        "description": "Legt fest, wo die Plättchen-ID dargestellt wird."
+      },
+      "colorblind": {
+        "label": "Farbenblindheitsfreundliche IDs",
+        "description": "Fügt dem ID-Bereich des Plättchens eine für Farbenblinde geeignete Form hinzu, die die Plättchenfarbe anzeigt."
+      },
+      "layout": {
+        "label": "Layout des Plättchenbogens",
+        "description": "Legt fest, wie die Plättchen auf dem Plättchenbogen angeordnet werden. „Offset“ ist der Stil, der möglichst wenige Schnitte braucht. „Individual“ trennt jedes Plättchen von den anderen, und „die“ ist für die speziellen Stanzformen gedacht, die Deep Thought Games verwendet. Beide Stanzoptionen überschreiben die Seitengröße und die Plättchengröße unten."
+      },
+      "width": {
+        "label": "Plättchenbreite",
+        "description": "Legt die Standardgröße der Plättchen fest, gemessen von Kante zu gegenüberliegender Kante. 1,5 Zoll ist die übliche 18xx-Größe. 1,0625 Zoll ist klein (1822 / 18OE). GMT verwendet 1,75 Zoll."
+      },
+      "mapWidth": {
+        "label": "Breite der Kartenfelder",
+        "description": "Legt die Standardgröße der Kartenfelder fest. Damit kannst du deine Karten größer zeichnen als deine Plättchen. Je nachdem, wie du deine Plättchen ausschneidest, kann das sehr helfen."
+      },
+      "gaps": {
+        "label": "Plättchenabstände",
+        "description": "Legt fest, ob verschiedene Farben durch Abstände getrennt werden, um ein Überlaufen der Farben beim Beschnitt zu verhindern. Eingeschaltet lassen, außer du weißt genau, dass du es nicht willst."
+      }
+    },
+    "stock": {
+      "title": "Aktienmarkt",
+      "cellWidth": {
+        "label": "Zellenbreite",
+        "description": "Legt die Standardbreite einer Zelle des Aktienmarkts fest."
+      },
+      "cellHeight": {
+        "label": "Zellenhöhe",
+        "description": "Legt die Standardhöhe einer Zelle des Aktienmarkts fest."
+      },
+      "value": {
+        "label": "Position des Werts",
+        "description": "Legt fest, ob der Wert einer Zelle oben oder unten steht."
+      },
+      "arrows": {
+        "label": "Position der Pfeile",
+        "description": "Legt fest, ob die Pfeile in einer Zelle oben, in der Mitte oder unten stehen."
+      },
+      "column": {
+        "label": "Spaltenhöhe",
+        "description": "Legt fest, aus wie vielen Zellen die Höhe einer 1D-Marktspalte besteht. Standard ist 4. Dezimalzahlen sind erlaubt."
+      },
+      "diag": {
+        "label": "Diagonalenhöhe",
+        "description": "Legt fest, aus wie vielen Zellen die Höhe einer 1Diag-Marktzelle besteht. Standard ist 2. Dezimalzahlen sind erlaubt."
+      },
+      "par": {
+        "label": "Par-Breite",
+        "description": "Legt fest, aus wie vielen Zellen die Breite einer Par-Marktzelle besteht. Standard ist 4. Dezimalzahlen sind erlaubt."
+      },
+      "displayLegend": {
+        "label": "Legende des Aktienmarkts anzeigen",
+        "description": "Ob die Legende auf Aktienmärkten angezeigt wird. Für 2D-Märkte muss die Spieldatei die Position der Legende angeben."
+      },
+      "displayPar": {
+        "label": "Par-Tabelle des Aktienmarkts anzeigen",
+        "description": "Ob die Par-Tabelle auf Aktienmärkten angezeigt wird. Die Spieldatei muss dafür die Position angeben."
+      },
+      "displayRoundTracker": {
+        "label": "Rundenanzeige des Aktienmarkts anzeigen",
+        "description": "Ob die Rundenanzeige auf Aktienmärkten angezeigt wird. Die Spieldatei muss dafür die Position angeben."
+      },
+      "margin": {
+        "label": "Randgröße",
+        "description": "Wie groß der Rand um das gedruckte Element ist."
+      },
+      "cutlines": {
+        "label": "Größe der Schnittlinien bei der Seitenaufteilung",
+        "description": "Auf 0 setzen, um die Schnittlinien zu deaktivieren."
+      },
+      "cutlinesOffset": {
+        "label": "Versatz der Schnittlinien bei der Seitenaufteilung",
+        "description": "Wenn deine Schneidehilfe etwas von der tatsächlichen Schnittstelle abweicht, kannst du hier einen Versatz einstellen. Andernfalls bei 0 belassen."
+      },
+      "bleed": {
+        "label": "Beschnittgröße bei der Seitenaufteilung",
+        "description": "Auf 0 setzen, um den Beschnitt zu deaktivieren. Bei aufgeteilten Elementen legt dies fest, wie stark sich Kartenseiten überlappen, um Schneidefehler auszugleichen."
+      },
+      "pagination": "**Seitenaufteilung:** Schnittlinien sind die Schnittmarken (auf 0 setzen zum Deaktivieren), der Versatz gleicht eine leicht abweichende Schneidehilfe aus, der Rand ist der Platz um das gedruckte Element und der Beschnitt gibt an, wie stark sich benachbarte Seiten überlappen, um Schneidefehler auszugleichen."
+    },
+    "charters": {
+      "title": "Gesellschaftskarten",
+      "style": {
+        "label": "Stil der Gesellschaftskarten",
+        "description": "Hier kannst du zwischen zwei Stilen für Gesellschaftskarten wählen. Einer ähnelt dem Stil von Carth, der andere enthält oben mehr Farbe."
+      },
+      "layout": {
+        "label": "Layout der Gesellschaftskarten",
+        "description": "„Free“ versucht, die Seite mit zwei Gesellschaftskarten pro Seite zu füllen (Karten halber Breite ändern dies). 3x1 und 3x2 sind beides Layouts, die zu gängigen Stanzformen passen. Beide Stanzoptionen überschreiben die Seitengröße sowie die Optionen für Breite, Höhe und Schnittlinien unten."
+      },
+      "halfWidth": {
+        "label": "Gesellschaftskarten halber Breite",
+        "description": "Zeichnet alle Gesellschaftskarten (große und kleine) in halber Breite. Sie nehmen die Hälfte der Seitenbreite ein (abzüglich Schnittlinien)."
+      },
+      "smallerMinors": {
+        "label": "Kleinere Minors",
+        "description": "Zeichnet kleine Gesellschaftskarten (Minors) in geringerer Höhe."
+      },
+      "cutlines": {
+        "label": "Schnittliniengröße der Gesellschaftskarten",
+        "description": "Auf 0 setzen, um die Schnittlinien zu deaktivieren und die Gesellschaftskarten direkt aneinander zu legen."
+      },
+      "bleed": {
+        "label": "Beschnitt der Gesellschaftskarten",
+        "description": "Auf 0 setzen, um den Beschnitt zu deaktivieren, oder einen Wert angeben, dessen Rand beim Drucken als Beschnitt verwendet wird."
+      },
+      "border": {
+        "label": "Rahmenbreite der Gesellschaftskarten",
+        "description": "Auf 0 setzen, um den Rahmen zu deaktivieren, oder einen Wert angeben, um einen Rahmen in dieser Pixelbreite um die Gesellschaftskarte zu zeichnen."
+      },
+      "showPhaseChart": {
+        "label": "Phasentabelle anzeigen",
+        "description": "Ob die Phasentabelle auf den Gesellschaftskarten angezeigt wird."
+      },
+      "showTurnOrder": {
+        "label": "Zugreihenfolge anzeigen",
+        "description": "Ob die Phasentabelle auf den Gesellschaftskarten angezeigt wird."
+      },
+      "blackBand": {
+        "label": "Schwarzer Streifen der Gesellschaftskarten",
+        "description": "Ob ein schwarzer Rand an den farbigen Bereich der Gesellschaftskarte gesetzt wird. Nur für „color“-Gesellschaftskarten relevant. Bei weißen Gesellschaftskarten immer aktiv."
+      }
+    },
+    "cards": {
+      "title": "Karten",
+      "shareStyle": {
+        "label": "Aktienstil",
+        "description": "Hier kannst du zwischen zwei Stilen für Aktien wählen. Bei einem bleibt der Token in der Mitte der Karte, beim anderen steht er links (ähnlich wie bei All Aboard Games und Deep Thought Games)."
+      },
+      "layout": {
+        "label": "Kartenlayout",
+        "description": "„Free“ lässt die Karten frei fließen und verwendet die weiteren Optionen unten. „Mini euro“ ist für meine eigene Stanze, die Karten im Mini-Euro-Format schneidet, und „dtgDie“ nutzt die Standard-Stanze von Deep Thought Games. Beide Stanzoptionen überschreiben die Seitengröße sowie die Optionen für Breite, Höhe und Schnittlinien unten."
+      },
+      "width": {
+        "label": "Kartenbreite"
+      },
+      "height": {
+        "label": "Kartenhöhe"
+      },
+      "cutlines": {
+        "label": "Schnittliniengröße der Karten",
+        "description": "Auf 0 setzen, um die Schnittlinien zu deaktivieren und die Karten direkt aneinander zu legen."
+      },
+      "bleed": {
+        "label": "Kartenbeschnitt",
+        "description": "Auf 0 setzen, um den Beschnitt zu deaktivieren, oder einen Wert angeben, dessen Rand beim Drucken als Beschnitt verwendet wird."
+      },
+      "dtgPadding": {
+        "label": "Innenabstand der DTG-Stanze",
+        "description": "Auf 0 setzen, um den Innenabstand zu deaktivieren, oder einen Wert angeben, der beim Drucken im DTG-Stanzlayout als Innenabstand pro Karte verwendet wird."
+      },
+      "padding": {
+        "label": "Karten-Innenabstand",
+        "description": "Wie weit Text und Symbole auf einer Karte vom Rand entfernt bleiben. Verringere den Wert, damit der Inhalt auf kleine Karten passt."
+      },
+      "border": {
+        "label": "Kartenrahmen",
+        "description": "Auf 0 setzen, um den Rahmen zu deaktivieren, oder einen Wert angeben, um einen Rahmen in dieser Pixelbreite um die Karte zu zeichnen."
+      },
+      "blackBand": {
+        "label": "Schwarzer Streifen der Karten",
+        "description": "Ob ein schwarzer Rand an den farbigen Bereich der Aktie gesetzt wird. Nur für „gmt“- und „left“-Aktien sowie für Züge relevant. Bei weißen Karten immer aktiv."
+      },
+      "sizes": "**Breite, Höhe, Schnittlinien, Beschnitt, Innenabstand und DTG-Innenabstand** sind in der von dir gewählten Einheit angegeben. Schnittlinien sind die Schnittmarken um jede Karte, der Beschnitt gibt an, wie weit die Kartenfarbe über die Schnittkante hinausreicht, der Innenabstand hält Text und Symbole vom Kartenrand fern, und der DTG-Innenabstand gilt nur für das DTG-Stanzlayout. Änderungen werden übernommen, wenn du das Feld verlässt oder die Eingabetaste drückst."
+    },
+    "privates": {
+      "title": "Privatgesellschaften",
+      "style": {
+        "label": "Stil der Privatgesellschaften",
+        "description": "Verschiedene Stile für Karten von Privatgesellschaften. „Small“ verwendet kleine Symbole, „big“ größere."
+      }
+    },
+    "trains": {
+      "title": "Züge",
+      "style": {
+        "label": "Zugstil",
+        "description": "Verschiedene Stile für Zugkarten. „Color“ verwendet einen breiten Farbstreifen, der Zahlenstil dagegen eine farbige Zahl als Zugnamen."
+      },
+      "images": {
+        "label": "Zugbilder",
+        "description": "Ob auf den Karten Zugbilder angezeigt werden."
+      }
+    },
+    "currency": {
+      "title": "Währung",
+      "description": "Hier kannst du Währungssymbole für jedes Element einzeln einschalten. Funktioniert nur, wenn die Spieldatei Werte als Zahlen und nicht als Zeichenketten angibt.",
+      "bank": {
+        "label": "Bank",
+        "description": "Bankgesamtbetrag auf der Einnahmenseite"
+      },
+      "border": {
+        "label": "Rand",
+        "description": "Kosten an den Kartenrändern"
+      },
+      "capital": {
+        "label": "Kapital",
+        "description": "Kapitalliste der Spieler auf der Einnahmenseite"
+      },
+      "market": {
+        "label": "Aktienmarkt",
+        "description": "Zellen des Aktienmarkts"
+      },
+      "offboard": {
+        "label": "Außerhalb der Karte",
+        "description": "Werte der Außenfelder auf Karten"
+      },
+      "par": {
+        "label": "Par",
+        "description": "Par-Felder des Aktienmarkts"
+      },
+      "private": {
+        "label": "Privatgesellschaft",
+        "description": "Kosten und Einnahmen von Privatgesellschaften auf Karten"
+      },
+      "revenue": {
+        "label": "Einnahmen",
+        "description": "Zellen der Einnahmenleiste"
+      },
+      "terrain": {
+        "label": "Gelände",
+        "description": "Geländekosten auf Karten und Streckenplättchen"
+      },
+      "token": {
+        "label": "Token",
+        "description": "Tokenkosten auf Gesellschaftskarten"
+      },
+      "train": {
+        "label": "Zug",
+        "description": "Zugkosten auf Karten und Gesellschaftskarten"
+      },
+      "treasury": {
+        "label": "Kasse",
+        "description": "Startkapital der Gesellschaften auf Gesellschaftskarten"
+      },
+      "value": {
+        "label": "Wert",
+        "description": "Werte auf Karten und Streckenplättchen"
+      }
+    },
+    "data": {
+      "title": "Daten",
+      "resetDescription": "Mit dieser Schaltfläche kannst du alle eigenen Einstellungen entfernen und zu den Standardwerten zurückkehren.",
+      "reset": "Auf Standardwerte zurücksetzen",
+      "local": "Diese Werte werden in diesem Browser im lokalen Speicher gespeichert.",
+      "json": "JSON",
+      "file": "Du kannst diesen JSON-Wert kopieren und in die Datei src/config.json einfügen, wenn du diese Einstellungen auf die Kommandozeile oder lokale Server anwenden möchtest."
+    },
+    "toggle": "Konfiguration",
+    "close": "Konfiguration schließen",
+    "sectionLabel": "Konfigurationsbereich",
+    "pins": {
+      "innerRadius": {
+        "label": "Innenradius der Pins",
+        "description": "Wie groß der Innenradius der Pin-Markierungen sein soll."
+      },
+      "outerRadius": {
+        "label": "Außenradius der Pins",
+        "description": "Wie groß der Außenradius der Pin-Markierungen sein soll."
+      },
+      "x1": {
+        "label": "Position Pin X1",
+        "description": "Wie weit der erste Pin vom Papierrand entfernt platziert werden soll."
+      },
+      "x2": {
+        "label": "Position Pin X2",
+        "description": "Wie weit der zweite Pin vom Papierrand entfernt platziert werden soll."
+      },
+      "y": {
+        "label": "Position Pin Y",
+        "description": "Wie weit beide Pins vom Papierrand entfernt platziert werden sollen."
+      }
+    }
+  },
+  "alerts": {
+    "error": "Fehler",
+    "gameLoaded": "Spiel geladen",
+    "gameLoadedMessage": "{{title}} geladen",
+    "dropNotFile": "Hier können nur Dateien abgelegt werden",
+    "dropUnsupported": "Dein Browser unterstützt das Ablegen von Dateien nicht"
+  },
+  "ui": {
+    "close": "Schließen",
+    "sidebar": "Seitenleiste",
+    "toggleSidebar": "Seitenleiste umschalten",
+    "pagination": "Seitennavigation",
+    "previous": "Zurück",
+    "previousPage": "Zur vorherigen Seite",
+    "next": "Weiter",
+    "nextPage": "Zur nächsten Seite",
+    "morePages": "Weitere Seiten"
+  },
+  "shortcuts": {
+    "title": "Tastenkürzel",
+    "description": "Tasten, die überall in 18xx Maker funktionieren",
+    "key": "Taste",
+    "use": "Verwendung",
+    "notes": "Hinweise",
+    "exportMenu": "Bei geöffnetem Exportmenü: p exportiert PDFs, n exportiert PNGs, b exportiert eine Board18-Datei und o öffnet die Exportoptionen.",
+    "keys": {
+      "escape": {
+        "use": "Zurück: schließt zuerst das Konfigurationspanel, verlässt dann die Bearbeitungsseite und wechselt zur Spielseite, dann zur Startseite",
+        "notes": "Tut auf der Startseite nichts"
+      },
+      "docs": {
+        "use": "Zur Dokumentation wechseln (18xx Maker verwenden)"
+      },
+      "help": {
+        "use": "Diese Tastenkürzel anzeigen"
+      },
+      "home": {
+        "use": "Zur Startseite wechseln"
+      },
+      "load": {
+        "use": "Zur Seite „Spiele laden“ wechseln"
+      },
+      "open": {
+        "use": "Eine neue Spieldatei von deinem System öffnen"
+      },
+      "refresh": {
+        "use": "Das aktuelle Spiel aus dem Dateisystem neu laden",
+        "notes": "Nur im Web. Nur in unterstützten Browsern."
+      },
+      "atoms": {
+        "use": "Zur Atome-Seite wechseln",
+        "notes": "Nicht auf der Bearbeitungsseite eines Spiels"
+      },
+      "tiles": {
+        "use": "Zur Plättchen-Seite wechseln",
+        "notes": "Nicht auf der Bearbeitungsseite eines Spiels"
+      },
+      "logos": {
+        "use": "Zur Logos-Seite wechseln",
+        "notes": "Nicht auf der Bearbeitungsseite eines Spiels. Schaltet beim Bearbeiten die Konfiguration um"
+      },
+      "game": {
+        "use": "Zur Spielseite wechseln",
+        "notes": "Nur wenn ein Spiel geladen ist"
+      },
+      "edit": {
+        "use": "Das geladene Spiel im ersten Abschnitt bearbeiten",
+        "notes": "Auf der Bearbeitungsseite zurück zur Spielseite"
+      },
+      "section": {
+        "use": "Das geladene Spiel an der Karte oder einem Abschnitt bearbeiten",
+        "notes": "Nur wenn ein Spiel geladen ist"
+      },
+      "view": {
+        "use": "Die Ansicht des Karten- oder Aktienmarkt-Editors zurücksetzen",
+        "notes": "Nur auf den Bearbeitungsseiten von Karte und Aktienmarkt"
+      },
+      "export": {
+        "use": "Das Exportmenü öffnen",
+        "notes": "Nur in der App. Wechselt zum geladenen Spiel."
+      },
+      "app": {
+        "use": "Zur Seite „App-Informationen“ wechseln",
+        "notes": "Nur in der App."
+      }
+    }
+  }
+}

@@ -70,7 +70,7 @@ const Logos = () => {
       </p>
       <div className="bg-muted flex flex-rows place-items-center rounded-xl border px-4 py-2 my-4">
         <Label htmlFor="logo-set" className="mr-2">
-          Logo Set:
+          {t("elements.logos.set")}
         </Label>
         <div className="w-min">
           <Select id="logo-set" defaultValue={group} onValueChange={setGroup}>
