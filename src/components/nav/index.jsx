@@ -63,7 +63,7 @@ export const mainMenu = [
     ],
   },
   {
-    label: "nav.docs",
+    label: "nav.docsStart",
     items: [
       {
         icon: Info,
@@ -80,7 +80,11 @@ export const mainMenu = [
         label: "docs.translation.title",
         to: "/docs/translation",
       },
-      { sep: true },
+    ],
+  },
+  {
+    label: "nav.docsOutput",
+    items: [
       {
         icon: ScrollText,
         label: "docs.output.pdf.title",
@@ -96,7 +100,11 @@ export const mainMenu = [
         label: "docs.output.b18.title",
         to: "/docs/output/b18",
       },
-      { sep: true },
+    ],
+  },
+  {
+    label: "nav.docsGames",
+    items: [
       {
         icon: SwatchBook,
         label: "docs.games.schemas.title",
@@ -137,7 +145,11 @@ export const mainMenu = [
         label: "docs.games.exports.title",
         to: "/docs/games/exports",
       },
-      { sep: true },
+    ],
+  },
+  {
+    label: "nav.docsPnp",
+    items: [
       {
         icon: Cylinder,
         label: "docs.pnp.tokens.title",

@@ -14,7 +14,10 @@
     "home": "Home",
     "load": "Load Games",
     "elements": "Elements",
-    "docs": "Help",
+    "docsStart": "Getting started",
+    "docsOutput": "Output",
+    "docsGames": "Game files",
+    "docsPnp": "Print and play",
     "edit": "Edit Game"
   },
   "refresh": {
