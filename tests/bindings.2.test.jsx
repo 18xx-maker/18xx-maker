@@ -167,3 +167,53 @@ describe("esc and d", () => {
     expect(router.state.location.pathname).toBe("/");
   });
 });
+
+describe("cycle keys", () => {
+  it("[ and ] cycle the sections on the edit page", async () => {
+    const { user, router } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.keyboard("]");
+    await waitFor(() =>
+      expect(router.state.location.pathname).not.toBe("/games/18Test/map"),
+    );
+    const next = router.state.location.pathname;
+
+    await user.keyboard("[[");
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/games/18Test/map"),
+    );
+    expect(next).toMatch(/^\/games\/18Test\/\w/);
+  });
+
+  it("[ and ] cycle the config sections while the panel is open", async () => {
+    const { user, router } = renderApp("/games/18Test/map?config=true");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.keyboard("]");
+    await waitFor(() =>
+      expect(router.state.location.search).toContain("section="),
+    );
+    expect(router.state.location.pathname).toBe("/games/18Test/map");
+
+    await user.keyboard("[[");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe("?config=true"),
+    );
+  });
+
+  it("[ and ] go to the previous and next docs page", async () => {
+    const { user, router } = renderApp("/docs");
+
+    await user.keyboard("[[");
+    expect(router.state.location.pathname).toBe("/docs");
+
+    await user.keyboard("]");
+    await waitFor(() =>
+      expect(router.state.location.pathname).not.toBe("/docs"),
+    );
+
+    await user.keyboard("[[");
+    await waitFor(() => expect(router.state.location.pathname).toBe("/docs"));
+  });
+});

@@ -799,6 +799,10 @@
         "use": "Edit the loaded game at the map or a section",
         "notes": "Only if you have a game loaded"
       },
+      "cycle": {
+        "use": "Previous and next: docs page, game section or config section",
+        "notes": "On a docs page it stops at the first and last page. On the edit page it cycles the game sections, or the config sections while the panel is open"
+      },
       "view": {
         "use": "Reset the view of the map or market editor",
         "notes": "Only on the map and market edit pages"
