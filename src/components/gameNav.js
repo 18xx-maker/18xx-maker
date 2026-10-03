@@ -37,12 +37,13 @@ export const gameNav = [
     section: "background",
   },
   {
+    key: "8",
     section: "par",
     pagination: true,
     disabled: (game) => !game.stock?.par?.values,
   },
-  { section: "revenue", pagination: true },
-  { section: "tile-manifest", disabled: (game) => !game.tiles },
+  { key: "9", section: "revenue", pagination: true },
+  { key: "0", section: "tile-manifest", disabled: (game) => !game.tiles },
 ];
 
 // The first section a game has the data for, the best place to start editing

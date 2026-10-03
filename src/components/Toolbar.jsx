@@ -61,13 +61,18 @@ const Toolbar = () => {
       if (isControlTarget(event)) return;
       if (event.altKey || event.ctrlKey || event.metaKey) return;
 
+      if (event.key === "c") {
+        toggleConfig();
+        return;
+      }
+
       const item = find(propEq(event.key, "key"), gameNav);
 
       if (item) {
         navigate(`/games/${slug}/${item.section}`);
       }
     },
-    [slug, navigate],
+    [slug, navigate, toggleConfig],
   );
 
   useEffect(() => {

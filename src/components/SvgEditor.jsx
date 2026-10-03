@@ -88,7 +88,7 @@ const SvgEditor = ({ width, height, children }) => {
       if (isControlTarget(e)) return;
       if (e.altKey || e.ctrlKey || e.metaKey) return;
 
-      if (e.key === "0") {
+      if (e.key === "v") {
         setViewbox(initial);
       }
     };
