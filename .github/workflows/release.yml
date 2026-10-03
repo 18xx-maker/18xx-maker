@@ -31,8 +31,45 @@ jobs:
         run: |
           gh release upload ${{ steps.release.outputs.tag_name }} ./README.md ./LICENSE
           gh release edit ${{ steps.release.outputs.tag_name }} -t "18xx Maker ${{ steps.release.outputs.tag_name }}"
-      - name: Deploy sites
+      - name: Publish sites
         if: ${{ steps.release.outputs.release_created }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          COMMIT: ${{ github.sha }}
         run: |
-          curl -fsS -X POST -d '{}' "${{ secrets.NETLIFY_SITE_HOOK }}"
-          curl -fsS -X POST -d '{}' "${{ secrets.NETLIFY_STORYBOOK_HOOK }}"
+          # Auto publishing is off on both Netlify sites. Netlify still builds
+          # every push to main, so wait for the build of this commit and then
+          # publish (restore) it.
+          publish() {
+            site="$1"
+            api="https://api.netlify.com/api/v1"
+            for _ in $(seq 1 90); do
+              deploy=$(curl -fsS -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+                "$api/sites/$site/deploys?per_page=50" |
+                jq -c --arg c "$COMMIT" \
+                  '[.[] | select(.commit_ref == $c and .context == "production")] | first // empty')
+              state=$(jq -r '.state // "missing"' <<<"$deploy")
+              echo "$site: $state"
+              case "$state" in
+                ready)
+                  id=$(jq -r .id <<<"$deploy")
+                  curl -fsS -X POST -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+                    "$api/sites/$site/deploys/$id/restore" >/dev/null
+                  echo "$site: published $id"
+                  return 0
+                  ;;
+                error | rejected)
+                  echo "$site: deploy $state" >&2
+                  return 1
+                  ;;
+              esac
+              sleep 20
+            done
+            echo "$site: timed out waiting for deploy" >&2
+            return 1
+          }
+          publish "${{ secrets.NETLIFY_SITE_ID }}" &
+          publish "${{ secrets.NETLIFY_STORYBOOK_SITE_ID }}" &
+          status=0
+          for job in $(jobs -p); do wait "$job" || status=1; done
+          exit $status
