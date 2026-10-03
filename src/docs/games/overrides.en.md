@@ -30,4 +30,4 @@ validate.
 Here is an example of the 1832 Atlanda map hex with the Ruby and Python
 overrides from the languages list:
 
-![ruby and python in Atlanta](/images/ruby-and-python-in-atlanta.png)
+![The Atlanta hex of 1832 with a Ruby logo on one city and a Python logo on the other](/images/ruby-and-python-in-atlanta.png "Atlanta in 1832 with the Ruby and Python overrides.")

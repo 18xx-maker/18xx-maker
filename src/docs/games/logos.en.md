@@ -22,10 +22,10 @@ page:
 
 Here are some examples, `none`, `original`, `match`, and finally `main`:
 
-![none](/images/company-none.png)
-![original](/images/company-original.png)
-![match](/images/company-match.png)
-![main](/images/company-main.png)
+![A purple company token with the text KO on it](/images/company-none.png "none")
+![The company logo on a white circle](/images/company-original.png "original")
+![The company logo recolored with the theme colors](/images/company-match.png "match")
+![The company logo recolored with the theme colors and the company color](/images/company-main.png "main")
 
 ## Creating the SVG files
 
