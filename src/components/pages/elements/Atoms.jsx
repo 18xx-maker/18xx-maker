@@ -68,6 +68,7 @@ const atoms = [
       { values: [{ value: 1024 }] },
       { values: [{ value: "60/60" }] },
       { values: [{ value: "Longer" }] },
+      { values: [{ value: "Lumber: 10", shape: "square", width: 80 }] },
     ],
   },
   {

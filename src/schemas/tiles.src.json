@@ -511,7 +511,22 @@
               }
             ]
           },
-          "outerBorderColor": { "type": "string" }
+          "outerBorderColor": { "type": "string" },
+          "shape": {
+            "type": "string",
+            "enum": ["circle", "square", "none"],
+            "description": "Shape of the value background."
+          },
+          "width": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Fixed width of the value box, instead of sizing it to the text."
+          },
+          "height": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Fixed height of the value box."
+          }
         },
         "additionalProperties": false,
         "required": ["value"]
