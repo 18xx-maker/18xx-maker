@@ -1,6 +1,12 @@
 // @vitest-environment jsdom
 
-import { createSetConfig, createSetGame, createSetSettings } from "@/state";
+import {
+  createSetConfig,
+  createSetGame,
+  createSetLanguage,
+  createSetSettings,
+  createSetSidebarOpen,
+} from "@/state";
 
 // Render mode (util/renderInput) keeps the state in memory: it must not read
 // the app's stored state or write to it.
@@ -49,6 +55,8 @@ describe("render mode state", () => {
 
     store.dispatch(createSetConfig({ theme: "gmt" }));
     store.dispatch(createSetSettings({ theme: "light" }));
+    store.dispatch(createSetSidebarOpen(false));
+    store.dispatch(createSetLanguage("de"));
     store.dispatch(createSetGame(game));
     store.dispatch(createDeleteGame("render:18Test"));
 
@@ -58,6 +66,18 @@ describe("render mode state", () => {
     for (const [key, value] of Object.entries(STORED)) {
       expect(window.localStorage.getItem(key)).toBe(value);
     }
+  });
+
+  it("detects the language without local storage", async () => {
+    window.localStorage.setItem("i18nextLng", "de");
+    const setItem = vi.spyOn(Storage.prototype, "setItem");
+    const getItem = vi.spyOn(Storage.prototype, "getItem");
+    const { default: i18n } = await import("@/locales/i18n");
+    await i18n.changeLanguage("fr");
+
+    expect(setItem).not.toHaveBeenCalled();
+    expect(getItem).not.toHaveBeenCalled();
+    expect(window.localStorage.getItem("i18nextLng")).toBe("de");
   });
 
   it("does not read local storage", async () => {
@@ -76,6 +96,26 @@ describe("render mode state", () => {
 
     expect(store.getState().config).toEqual({ theme: "gmt" });
     expect(setItem).not.toHaveBeenCalled();
+  });
+
+  it("never caches the language, but reads the one cached by older releases", async () => {
+    window.localStorage.setItem("i18nextLng", "de");
+    const { default: i18n } = await importState(undefined).then(
+      () => import("@/locales/i18n"),
+    );
+    expect(i18n.language).toBe("de");
+
+    const setItem = vi.spyOn(Storage.prototype, "setItem");
+    await i18n.changeLanguage("fr");
+    expect(setItem).not.toHaveBeenCalled();
+  });
+
+  it("starts in the stored language", async () => {
+    window.localStorage.setItem("settings", JSON.stringify({ language: "es" }));
+    const { default: i18n } = await importState(undefined).then(
+      () => import("@/locales/i18n"),
+    );
+    expect(i18n.language).toBe("es");
   });
 
   it("keeps the persisted behavior without render input", async () => {

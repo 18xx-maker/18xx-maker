@@ -6,3 +6,4 @@ export * from "@/hooks/validation";
 export * from "@/hooks/use-editor";
 export * from "@/hooks/use-print";
 export * from "@/hooks/use-settings";
+export * from "@/hooks/use-language";

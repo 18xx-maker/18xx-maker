@@ -89,9 +89,9 @@ Conventions:
 - Redux state uses hand-rolled `combineReducers`/`composeReducers`/`reducePath`
   (`src/state/helpers.js`). A move to `createSlice` must keep the root state
   contract test and persisted fixture passing.
-- Persisted data: `src/state/storage.js` mirrors `config` and `loadedGame` to
-  localStorage; loaded games live in IndexedDB/OPFS (`src/util/idb.js`,
-  `src/util/opfs.js`). Stored user data must survive every release.
+- Persisted data: `src/state/storage.js` mirrors `config`, `loadedGame` and
+  `settings` (theme, sidebarOpen, language; all optional) to localStorage; loaded games
+  live in IndexedDB/OPFS (`src/util/idb.js`, `src/util/opfs.js`). Stored user data must survive every release.
 - The component tests fail on React `console.error` warnings, which is the
   early warning for React deprecations.
 - Print pixel screenshots are only stable on one OS and Chromium build, so keep
