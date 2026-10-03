@@ -78,7 +78,11 @@ const AppSidebar = (props) => {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <div>
-                <img src="/logo.png" alt="" className="size-8" />
+                <img
+                  src={`${import.meta.env.BASE_URL}logo.png`}
+                  alt=""
+                  className="size-8"
+                />
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-semibold">18xx Maker</span>
                   <span className="">
