@@ -33,7 +33,12 @@ pnpm build:app && pnpm build:sb                      # Electron and Storybook mu
 ```
 
 Also run `E2E_ELECTRON=1 pnpm test:export` (after `pnpm build && pnpm build:app`)
-when touching `electron/`, the preload, render mode or `src/export`. CI runs
+when touching `electron/`, the preload, render mode or `src/export`. This is
+required before pushing, not optional: unit tests do not catch a changed export
+(a PNG border changed image sizes that `e2e/export-files.js`, `e2e/cli.spec.js`
+and `e2e/electron.spec.js` assert, and only CI noticed). An export change that
+alters file sizes or contents updates those expected values in the same
+commit. In the PR description, list which of these suites you ran. CI runs
 the vitest suite in 3 shards on Linux (reports merged for the coverage check);
 macOS and Windows run only the unit project on PRs.
 
