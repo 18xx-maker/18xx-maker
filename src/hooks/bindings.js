@@ -2,12 +2,13 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMatch, useNavigate } from "react-router";
 
-import { find, prop, propEq } from "ramda";
+import { find, propEq } from "ramda";
 
 import { firstSection, gameNav } from "@/components/gameNav";
 
 import { useLoadedGame } from "@/hooks/game";
 import { createAlert, refreshGame } from "@/state";
+import { selectGameForSlug } from "@/state/selectors";
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import { isControlTarget } from "@/util/keys";
@@ -16,7 +17,9 @@ export const useBindings = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loadedGame = useLoadedGame();
-  const game = useSelector(prop("game"));
+  const game = useSelector((state) =>
+    selectGameForSlug(state, loadedGame?.slug),
+  );
   const viewingGame = useMatch("/games/:slug/:section/*");
 
   const handleKeyDown = useCallback(
@@ -36,8 +39,7 @@ export const useBindings = () => {
         }
       } else if (loadedGame) {
         // The game state is only the loaded game when the slugs agree
-        const first =
-          game?.meta.slug === loadedGame.slug ? firstSection(game) : "map";
+        const first = game ? firstSection(game) : "map";
         const section =
           event.key === "e"
             ? first
