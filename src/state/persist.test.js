@@ -194,6 +194,15 @@ describe("storage.listen", () => {
     expect(window.localStorage.length).toBe(1);
   });
 
+  it("does not persist the transient ui state", async () => {
+    const { createSetExportMenuOpen } = await import("@/state/ui");
+    const store = await setup();
+    store.dispatch(createSetExportMenuOpen(true));
+
+    expect(window.localStorage.getItem("ui")).toBeNull();
+    expect(Object.keys(window.localStorage)).toEqual(["config"]);
+  });
+
   it("writes loadedGame as a summary when a game is set", async () => {
     const store = await setup();
     const game = {

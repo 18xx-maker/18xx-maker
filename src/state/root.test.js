@@ -42,6 +42,10 @@ describe("root state contract", () => {
         "errors": {},
         "settings": {},
         "summaries": {},
+        "ui": {
+          "exportMenuOpen": false,
+          "exportSheetOpen": false,
+        },
       }
     `);
   });
@@ -126,6 +130,10 @@ describe("root state contract", () => {
               "type": "system",
             },
           },
+        },
+        "ui": {
+          "exportMenuOpen": false,
+          "exportSheetOpen": false,
         },
         "update": {
           "downloading": 42,

@@ -9,6 +9,8 @@ import {
   SET_CONFIG,
   SET_DOWNLOAD_PERCENT,
   SET_ERRORS,
+  SET_EXPORT_MENU_OPEN,
+  SET_EXPORT_SHEET_OPEN,
   SET_GAME,
   SET_LANGUAGE,
   SET_SETTINGS,
@@ -26,6 +28,8 @@ import {
   createResetErrors,
   createSetConfig,
   createSetErrors,
+  createSetExportMenuOpen,
+  createSetExportSheetOpen,
   createSetGame,
   createSetLanguage,
   createSetSettings,
@@ -37,6 +41,7 @@ import {
   loadedGameReducer,
   settingsReducer,
   summariesReducer,
+  uiReducer,
   updateReducer,
 } from "@/state";
 
@@ -372,5 +377,33 @@ describe("settingsReducer", () => {
   it("ignores other actions", () => {
     const state = frozen({ theme: "light" });
     expect(settingsReducer(state, clearAlert())).toBe(state);
+  });
+});
+
+describe("uiReducer", () => {
+  it("starts with the export menu and sheet closed", () => {
+    expect(uiReducer(undefined, { type: "@@INIT" })).toEqual({
+      exportMenuOpen: false,
+      exportSheetOpen: false,
+    });
+  });
+
+  it("opens and closes the export menu and sheet independently", () => {
+    const menu = createSetExportMenuOpen(true);
+    const sheet = createSetExportSheetOpen(true);
+    expect(menu).toEqual({ type: SET_EXPORT_MENU_OPEN, open: true });
+    expect(sheet).toEqual({ type: SET_EXPORT_SHEET_OPEN, open: true });
+
+    const open = [menu, sheet].reduce(uiReducer, undefined);
+    expect(open).toEqual({ exportMenuOpen: true, exportSheetOpen: true });
+    expect(uiReducer(frozen(open), createSetExportMenuOpen(false))).toEqual({
+      exportMenuOpen: false,
+      exportSheetOpen: true,
+    });
+  });
+
+  it("ignores other actions", () => {
+    const state = frozen({ exportMenuOpen: true, exportSheetOpen: false });
+    expect(uiReducer(state, clearAlert())).toBe(state);
   });
 });

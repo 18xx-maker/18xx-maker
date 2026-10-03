@@ -14,6 +14,9 @@ export const selectTheme = (state) => state.settings?.theme;
 export const selectSidebarOpen = (state) => state.settings?.sidebarOpen;
 export const selectLanguage = (state) => state.settings?.language;
 
+export const selectExportMenuOpen = (state) => !!state.ui?.exportMenuOpen;
+export const selectExportSheetOpen = (state) => !!state.ui?.exportSheetOpen;
+
 // The redux game, whatever the route
 export const selectGameState = (state) => state.game;
 
