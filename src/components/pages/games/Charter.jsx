@@ -5,6 +5,7 @@ import PageSetup from "@/components/PageSetup";
 
 import { useConfig, useGame } from "@/hooks";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
+import { charterHalfWidth } from "@/util/companyTrains";
 import { getSingleCharterData } from "@/util/sizes";
 
 const Charters = () => {
@@ -148,6 +149,7 @@ const Charters = () => {
         turns={game.turns}
         trains={game.trains}
         minor={!!company.minor}
+        halfWidth={charterHalfWidth(charters, !!company.minor)}
         company={company}
         variant={company.variant}
         fontFamily={company.fontFamily || game.info.companyFontFamily}

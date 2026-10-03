@@ -162,6 +162,19 @@ describe("documents", () => {
     ).toHaveLength(7);
   });
 
+  it("leaves the trains of half width charters to the cards", () => {
+    const config = {
+      charters: { ...loadGameConfig(loadGame("18Test")).charters },
+    };
+    const trains = (layout) =>
+      ids(
+        list({}, { ...config, charters: { ...config.charters, layout } }),
+      ).filter((id) => id.startsWith("cards/train/"));
+    // 3x1 charters print their own trains, 3x2 charters have no room for them
+    expect(trains("3x1")).toHaveLength(4);
+    expect(trains("3x2")).toHaveLength(7);
+  });
+
   it("captures a token inside of the wrapper the page has for it", () => {
     expect(byId(docs, "tokens/0").capture.selector).toBe(
       ".token .printElement",

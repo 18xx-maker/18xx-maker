@@ -195,4 +195,43 @@ describe("validate", () => {
       expect(line).toMatch(message);
     });
   });
+
+  describe("the trains of a game and its companies", () => {
+    const withTrains = (trains, companyTrains) =>
+      writeTmp(
+        "game.json",
+        JSON.stringify({
+          info: { title: "Game" },
+          trains,
+          companies: [{ name: "A", abbrev: "A", trains: companyTrains }],
+        }),
+      );
+    const gameTrains = [{ name: "2", color: "white", price: 100, quantity: 2 }];
+
+    it.each([
+      ["a name", ["2"]],
+      ["a reference", [{ name: "2", quantity: 2 }]],
+      ["a full train", [{ name: "S", color: "yellow", price: 50 }]],
+      [
+        "a full train with a quantity",
+        [{ name: "S", color: "red", quantity: 2 }],
+      ],
+      ["false", false],
+    ])("accepts company trains as %s", (_, companyTrains) => {
+      expect(run(withTrains(gameTrains, companyTrains)).code).toBe(0);
+    });
+
+    it.each([
+      ["true", gameTrains, true],
+      ["an infinite quantity", gameTrains, [{ name: "2", quantity: "∞" }]],
+      ["a full train without a color", gameTrains, [{ name: "S", price: 50 }]],
+      [
+        "a game train without a quantity",
+        [{ name: "2", color: "white", price: 100 }],
+        ["2"],
+      ],
+    ])("rejects %s", (_, trains, companyTrains) => {
+      expect(run(withTrains(trains, companyTrains)).code).toBe(1);
+    });
+  });
 });
