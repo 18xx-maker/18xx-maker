@@ -23,6 +23,7 @@ const shortcuts = [
   { id: "game", keys: ["g"] },
   { id: "edit", keys: ["e"] },
   { id: "section", keys: ["m", "1–9", "0"] },
+  { id: "cycle", keys: ["[", "]"] },
   { id: "view", keys: ["v"] },
   { id: "export", keys: ["x"] },
   { id: "app", keys: ["u"] },

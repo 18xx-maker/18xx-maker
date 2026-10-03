@@ -4,7 +4,9 @@ import { matchPath, useLocation, useMatch, useNavigate } from "react-router";
 
 import { find, propEq } from "ramda";
 
+import { sections as configSections } from "@/components/config";
 import { firstSection, gameNav } from "@/components/gameNav";
+import { docsPages } from "@/components/nav";
 
 import { useLoadedGame } from "@/hooks/game";
 import {
@@ -22,6 +24,14 @@ import { useBooleanParam } from "@/util/query";
 // Whether the toolbar, and so the export button, can show for a section
 const hasExportButton = (section) =>
   section !== "b18" && !!find(propEq(section, "section"), gameNav);
+
+// The item before ("[") or after ("]") the current one, wrapping around. With
+// no current item it starts at the first or last.
+const cycle = (list, index, key) => {
+  const step = key === "]" ? 1 : -1;
+  if (index < 0) return list[step > 0 ? 0 : list.length - 1];
+  return list[(index + step + list.length) % list.length];
+};
 
 // The one place that handles keys for the whole app. It listens on the
 // document and runs for every page. Keys of the open export menu are handled
@@ -72,8 +82,58 @@ export const useBindings = () => {
         return;
       }
 
+      // [ and ] go to the previous and next docs page, as the links at the
+      // bottom of a docs page do. They stop at the first and last page.
+      if (event.key === "[" || event.key === "]") {
+        const path = pathname.replace(/(?<=.)\/$/, "");
+        const index = docsPages.findIndex(({ to }) => to === path);
+        const step = event.key === "]" ? 1 : -1;
+
+        if (index >= 0) {
+          if (docsPages[index + step]) navigate(docsPages[index + step].to);
+          return;
+        }
+      }
+
       // Keys for the game edit page
       if (viewingGame) {
+        // [ and ] cycle the config sections while the panel is open, else the
+        // sections of the game. The sections without data for the game are
+        // skipped.
+        if (!print && (event.key === "[" || event.key === "]")) {
+          const params = new URLSearchParams(location.search);
+
+          if (params.has("config")) {
+            const current = decodeURIComponent(
+              params.get("section") || "colors",
+            );
+            const next = cycle(
+              configSections,
+              configSections.findIndex(({ section }) => section === current),
+              event.key,
+            );
+            if (next.section === "colors") params.delete("section");
+            else params.set("section", encodeURIComponent(next.section));
+            navigate({ search: params.toString() });
+          } else {
+            const items = game
+              ? gameNav.filter((item) => !item.disabled?.(game))
+              : gameNav;
+            const next = cycle(
+              items,
+              items.findIndex(
+                ({ section }) => section === viewingGame.params.section,
+              ),
+              event.key,
+            );
+            navigate({
+              pathname: `/games/${viewingGame.params.slug}/${next.section}`,
+              search: location.search,
+            });
+          }
+          return;
+        }
+
         // The toolbar keys, which the print page of an export does not have
         if (!print) {
           const item = find(propEq(event.key, "key"), gameNav);

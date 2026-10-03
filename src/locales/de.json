@@ -799,6 +799,10 @@
         "use": "Das geladene Spiel an der Karte oder einem Abschnitt bearbeiten",
         "notes": "Nur wenn ein Spiel geladen ist"
       },
+      "cycle": {
+        "use": "Zurück und weiter: Doku-Seite, Spielabschnitt oder Konfigurationsabschnitt",
+        "notes": "Auf einer Doku-Seite endet es bei der ersten und letzten Seite. Auf der Bearbeitungsseite wechselt es durch die Spielabschnitte, oder durch die Konfigurationsabschnitte, solange das Panel offen ist"
+      },
       "view": {
         "use": "Die Ansicht des Karten- oder Aktienmarkt-Editors zurücksetzen",
         "notes": "Nur auf den Bearbeitungsseiten von Karte und Aktienmarkt"
