@@ -197,17 +197,23 @@ describe("alert", () => {
 });
 
 describe("desktop sidebar", () => {
-  it("collapses and expands with ctrl+b, remembering it in a cookie", async () => {
-    const { user } = renderApp("/");
+  it("collapses and expands with ctrl+b, remembering it in the settings", async () => {
+    const { user, store } = renderApp("/");
     expect(desktopSidebar()).toHaveAttribute("data-state", "expanded");
 
     await user.keyboard("{Control>}b{/Control}");
     expect(desktopSidebar()).toHaveAttribute("data-state", "collapsed");
-    expect(document.cookie).toContain("sidebar:state=false");
+    expect(store.getState().settings.sidebarOpen).toBe(false);
+    expect(document.cookie).not.toContain("sidebar");
 
     await user.keyboard("{Meta>}b{/Meta}");
     expect(desktopSidebar()).toHaveAttribute("data-state", "expanded");
-    expect(document.cookie).toContain("sidebar:state=true");
+    expect(store.getState().settings.sidebarOpen).toBe(true);
+  });
+
+  it("starts collapsed when the settings say so", () => {
+    renderApp("/", { settings: { sidebarOpen: false } });
+    expect(desktopSidebar()).toHaveAttribute("data-state", "collapsed");
   });
 
   it("becomes a sheet when the window narrows", async () => {
@@ -246,7 +252,7 @@ describe("unit inputs", () => {
     expect(Number(input.value)).toBeCloseTo(6.35);
 
     await user.clear(input);
-    await user.type(input, "25.4");
+    await user.type(input, "25.4{Enter}");
 
     // 25.4mm is an inch, 100 units
     await waitFor(
@@ -266,7 +272,7 @@ describe("unit inputs", () => {
     expect(store.getState().config.margin).toBeUndefined();
 
     await user.tripleClick(input);
-    await user.keyboard("2");
+    await user.keyboard("2{Enter}");
 
     expect(input).not.toHaveClass("border-error");
     await waitFor(() => expect(store.getState().config.margin).toBe(200));
@@ -429,7 +435,7 @@ describe("markdown", () => {
     renderApp("/docs/output/png");
 
     expect(
-      await screen.findByRole("img", { name: "export button" }),
-    ).toHaveAttribute("src", "/images/export-button.png");
+      (await screen.findAllByRole("img", { name: /export button/i }))[0],
+    ).toHaveAttribute("src", "/images/export-button-light.png");
   });
 });

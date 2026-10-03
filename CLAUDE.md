@@ -89,9 +89,9 @@ Conventions:
 - Redux state uses hand-rolled `combineReducers`/`composeReducers`/`reducePath`
   (`src/state/helpers.js`). A move to `createSlice` must keep the root state
   contract test and persisted fixture passing.
-- Persisted data: `src/state/storage.js` mirrors `config` and `loadedGame` to
-  localStorage; loaded games live in IndexedDB/OPFS (`src/util/idb.js`,
-  `src/util/opfs.js`). Stored user data must survive every release.
+- Persisted data: `src/state/storage.js` mirrors `config`, `loadedGame` and
+  `settings` (theme, sidebarOpen, language; all optional) to localStorage; loaded games
+  live in IndexedDB/OPFS (`src/util/idb.js`, `src/util/opfs.js`). Stored user data must survive every release.
 - The component tests fail on React `console.error` warnings, which is the
   early warning for React deprecations.
 - Print pixel screenshots are only stable on one OS and Chromium build, so keep
@@ -153,6 +153,22 @@ sizing or packaging logic in either surface.
 - Run the CLI from a checkout path with no dot folder for a baseline: express
   `sendFile` 404s on absolute paths containing one (worktrees live in
   `.claude/worktrees`), so use `root` as `startExpress` does.
+
+## Docs screenshots
+
+Images in `src/docs` live in `public/images`.
+
+- Every image has descriptive alt text and a caption: `![alt](/images/x.png "caption")`.
+  A titled image renders as a rounded, bordered figure (`DocImage` in
+  `src/components/Markdown.jsx`); never put the caption in the alt text.
+- Annotate where it clarifies (circle the control, label parts with arrows,
+  one label per thing, nothing overlapping). Crop to whole objects, never cut
+  tokens or hexes at the edge.
+- UI screenshots come in a theme pair, `<name>-light.png` and
+  `<name>-dark.png`; reference the `-light.png` and the renderer swaps by
+  theme. Capture them from the real app (Playwright, 2x) and keep the app's own
+  transparent-square background across the whole image, including under the
+  labels; do not pad with a flat color.
 
 ## Commit messages
 

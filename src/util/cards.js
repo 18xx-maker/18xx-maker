@@ -1,5 +1,9 @@
 import { unitsToCss } from "./index.js";
 
+// Sizes are floats, so a row that fills the page exactly can come out a hair
+// short (0.3 / 0.1 is 2.9999999999999996)
+const fit = (space, size) => Math.floor(space / size + 1e-9);
+
 export const getCardData = (cards, paper) => {
   let { layout, width, height, cutlines, bleed, border } = cards;
   let { margins, width: pageWidth, height: pageHeight } = paper;
@@ -22,14 +26,14 @@ export const getCardData = (cards, paper) => {
 
   // Calculate how many in portait
   let portrait = {
-    perRow: Math.floor(usableWidth / totalWidth),
-    perColumn: Math.floor(usableHeight / totalHeight),
+    perRow: fit(usableWidth, totalWidth),
+    perColumn: fit(usableHeight, totalHeight),
   };
   portrait.perPage = portrait.perRow * portrait.perColumn;
 
   let landscape = {
-    perRow: Math.floor(usableHeight / totalWidth),
-    perColumn: Math.floor(usableWidth / totalHeight),
+    perRow: fit(usableHeight, totalWidth),
+    perColumn: fit(usableWidth, totalHeight),
   };
   landscape.perPage = landscape.perRow * landscape.perColumn;
 
@@ -42,6 +46,11 @@ export const getCardData = (cards, paper) => {
     perColumn: usePortrait ? portrait.perColumn : landscape.perColumn,
     landscape: !usePortrait,
   };
+
+  // A card that is too big for the page still gets a page of its own
+  if (cardLayout.perPage < 1) {
+    cardLayout = { perPage: 1, perRow: 1, perColumn: 1, landscape: false };
+  }
 
   // Return all data and some
   return {

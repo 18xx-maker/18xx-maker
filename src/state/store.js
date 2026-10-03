@@ -11,6 +11,7 @@ import { combineReducers } from "@/state/helpers";
 import { settingsReducer } from "@/state/settings";
 import storage from "@/state/storage";
 import { summariesReducer } from "@/state/summaries";
+import { UI_DEFAULT, uiReducer } from "@/state/ui";
 import { updateReducer } from "@/state/update";
 import { getGameSummary } from "@/util/loading.js";
 import { getRenderInput } from "@/util/renderInput";
@@ -23,6 +24,7 @@ export const initialState = {
   config: {},
   settings: {},
   errors: {},
+  ui: UI_DEFAULT,
 };
 
 export const rootReducer = combineReducers({
@@ -34,6 +36,7 @@ export const rootReducer = combineReducers({
   config: configReducer,
   game: gameReducer,
   errors: errorsReducer,
+  ui: uiReducer,
 });
 
 // Pick which top level fields we want to keep in local storage. Render mode

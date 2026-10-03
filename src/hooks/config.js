@@ -7,8 +7,8 @@ import { mergeDeepRight } from "ramda";
 
 import { useGame, useValidation } from "@/hooks";
 import { createResetConfig, createSetConfig } from "@/state";
+import { createConfigSelector } from "@/state/selectors";
 import { getRenderInput } from "@/util/renderInput";
-import { resolveConfig } from "@/util/resolveConfig";
 
 const configs = import.meta.glob("../*.json", {
   eager: true,
@@ -23,6 +23,8 @@ const initialConfig = renderInput
   ? mergeDeepRight(defaultConfig, renderInput.config)
   : mergeDeepRight(defaultConfig, userConfig);
 
+const selectConfig = createConfigSelector(initialConfig);
+
 export const useConfig = () => {
   const dispatch = useDispatch();
   const game = useGame();
@@ -30,12 +32,9 @@ export const useConfig = () => {
   const { validateConfigSchema } = useValidation();
 
   const storedConfig = useSelector((state) => state.config);
-  const { config, searchConfig, gameConfig } = resolveConfig({
-    defaults: initialConfig,
-    stored: storedConfig,
-    search: location.search,
-    gameConfig: game && game.config,
-  });
+  const { config, searchConfig, gameConfig } = useSelector((state) =>
+    selectConfig(state, location.search, game),
+  );
 
   const setConfig = useCallback(
     async (config) => {

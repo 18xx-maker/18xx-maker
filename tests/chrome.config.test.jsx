@@ -195,9 +195,9 @@ describe("config drawer", () => {
     expect(input).toHaveValue("0.25");
 
     await user.clear(input);
-    await user.type(input, "1");
+    await user.type(input, "1{Enter}");
 
-    // Debounced by the input, 1 inch is 100 units
+    // 1 inch is 100 units
     await waitFor(() =>
       expect(store.getState().config).toEqual({ margin: 100 }),
     );
@@ -241,6 +241,8 @@ describe("number fields", () => {
     await user.clear(field);
     await user.type(field, "1.5");
     expect(field).toHaveValue(1.5);
+    expect(store.getState().config.charters?.border).toBeUndefined();
+    await user.tab();
     await waitFor(() =>
       expect(store.getState().config.charters?.border).toBe(1.5),
     );

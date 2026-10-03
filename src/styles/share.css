@@ -27,7 +27,7 @@
   top: 0;
   right: 0;
   width: 100%;
-  padding: 0.125in 0.125in 0;
+  padding: var(--card-padding) var(--card-padding) 0;
   line-height: 0.2in;
   font-size: 0.16in;
   text-align: center;
@@ -42,7 +42,7 @@
   top: 0;
   right: 0;
   width: 100%;
-  padding: 0.0625in 0.125in 0;
+  padding: calc(var(--card-padding) / 2) var(--card-padding) 0;
   line-height: 0.2in;
   text-align: center;
   font-size: 0.12in;
@@ -132,6 +132,7 @@
   padding: 0 0.1in;
   border-radius: 0.06in;
   display: inline-block;
+  white-space: nowrap;
 }
 
 .share--gmt .share__label {
@@ -140,7 +141,7 @@
   width: calc(100% - 0.67in);
   margin-left: 0.67in;
   height: 0.5in;
-  padding: 0.125in;
+  padding: var(--card-padding);
 }
 
 .share--left .share__label {
@@ -149,14 +150,14 @@
   width: calc(100% - 0.67in);
   margin-left: 0.67in;
   height: 0.5in;
-  padding: 0.125in;
+  padding: var(--card-padding);
 }
 
 .share__percent {
   position: absolute;
   bottom: 0;
   right: 0;
-  padding: 0.0625in 0.125in;
+  padding: calc(var(--card-padding) / 2) var(--card-padding);
   height: 0.25in;
   line-height: 0.25in;
   font-size: 0.16in;
@@ -164,14 +165,14 @@
 
 .share--gmt .share__percent,
 .share--left .share__percent {
-  padding: 0.0625in 0.125in;
+  padding: calc(var(--card-padding) / 2) var(--card-padding);
 }
 
 .share__shares {
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 0.0625in 0.125in;
+  padding: calc(var(--card-padding) / 2) var(--card-padding);
   height: 0.25in;
   line-height: 0.25in;
   font-size: 0.16in;
@@ -180,7 +181,7 @@
 .share--left .share__shares,
 .share--gmt .share__shares {
   margin-left: 0.67in;
-  padding: 0.0625in 0.125in;
+  padding: calc(var(--card-padding) / 2) var(--card-padding);
 }
 
 .share__variant {
@@ -189,7 +190,7 @@
   right: 0;
   height: 0.125in;
   line-height: 1;
-  padding-right: 0.125in;
+  padding-right: var(--card-padding);
   font-weight: normal;
   font-size: 0.5em;
   font-style: italic;

@@ -1,6 +1,6 @@
-import { assocPath, zipObj } from "ramda";
+import { assocPath, dissocPath, zipObj } from "ramda";
 
-import { SET_GAME } from "@/state/game";
+import { DELETE_GAME, SET_GAME } from "@/state/game";
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import { getGameSummary } from "@/util/loading.js";
@@ -41,6 +41,8 @@ export const summariesReducer = (state = {}, action) => {
         getGameSummary(action.game),
         state,
       );
+    case DELETE_GAME:
+      return dissocPath([action.meta.type, action.meta.slug], state);
     default:
       return state;
   }

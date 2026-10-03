@@ -9,8 +9,12 @@ import {
   SET_CONFIG,
   SET_DOWNLOAD_PERCENT,
   SET_ERRORS,
+  SET_EXPORT_MENU_OPEN,
+  SET_EXPORT_SHEET_OPEN,
   SET_GAME,
+  SET_LANGUAGE,
   SET_SETTINGS,
+  SET_SIDEBAR_OPEN,
   SET_SUMMARIES,
   SET_UPDATE,
   alertReducer,
@@ -24,8 +28,12 @@ import {
   createResetErrors,
   createSetConfig,
   createSetErrors,
+  createSetExportMenuOpen,
+  createSetExportSheetOpen,
   createSetGame,
+  createSetLanguage,
   createSetSettings,
+  createSetSidebarOpen,
   createSetSummaries,
   createUpdate,
   errorsReducer,
@@ -33,6 +41,7 @@ import {
   loadedGameReducer,
   settingsReducer,
   summariesReducer,
+  uiReducer,
   updateReducer,
 } from "@/state";
 
@@ -294,6 +303,24 @@ describe("summariesReducer", () => {
     expect(Object.keys(second.system)).toEqual(["system:a"]);
     expect(second.system["system:a"].title).toBe("Y");
   });
+
+  it("DELETE_GAME removes only that summary", () => {
+    const state = frozen({
+      bundled: { b: 1 },
+      system: { "system:a": { id: "a" }, "system:b": { id: "b" } },
+    });
+    const result = summariesReducer(state, createDeleteGame("system:a"));
+    expect(result.system).toEqual({ "system:b": { id: "b" } });
+    expect(result.bundled).toBe(state.bundled);
+  });
+
+  it("DELETE_GAME for an unknown summary leaves the state equal", () => {
+    const state = frozen({ system: { "system:a": { id: "a" } } });
+    expect(summariesReducer(state, createDeleteGame("system:z"))).toEqual(
+      state,
+    );
+    expect(summariesReducer({}, createDeleteGame("internal:z"))).toEqual({});
+  });
 });
 
 describe("updateReducer", () => {
@@ -330,8 +357,62 @@ describe("settingsReducer", () => {
     });
   });
 
+  it("sets the sidebar and the language next to other settings", () => {
+    const open = createSetSidebarOpen(false);
+    expect(open).toEqual({ type: SET_SIDEBAR_OPEN, open: false });
+    const language = createSetLanguage("de");
+    expect(language).toEqual({ type: SET_LANGUAGE, language: "de" });
+
+    const state = [open, language].reduce(
+      settingsReducer,
+      frozen({ theme: "dark" }),
+    );
+    expect(state).toEqual({
+      theme: "dark",
+      sidebarOpen: false,
+      language: "de",
+    });
+  });
+
+  it("clears the language for anything but a language code", () => {
+    const state = frozen({ theme: "dark", language: "de" });
+    for (const language of [undefined, 1, {}, ""]) {
+      expect(
+        settingsReducer(state, createSetLanguage(language)).language,
+      ).toBeUndefined();
+    }
+  });
+
   it("ignores other actions", () => {
     const state = frozen({ theme: "light" });
     expect(settingsReducer(state, clearAlert())).toBe(state);
+  });
+});
+
+describe("uiReducer", () => {
+  it("starts with the export menu and sheet closed", () => {
+    expect(uiReducer(undefined, { type: "@@INIT" })).toEqual({
+      exportMenuOpen: false,
+      exportSheetOpen: false,
+    });
+  });
+
+  it("opens and closes the export menu and sheet independently", () => {
+    const menu = createSetExportMenuOpen(true);
+    const sheet = createSetExportSheetOpen(true);
+    expect(menu).toEqual({ type: SET_EXPORT_MENU_OPEN, open: true });
+    expect(sheet).toEqual({ type: SET_EXPORT_SHEET_OPEN, open: true });
+
+    const open = [menu, sheet].reduce(uiReducer, undefined);
+    expect(open).toEqual({ exportMenuOpen: true, exportSheetOpen: true });
+    expect(uiReducer(frozen(open), createSetExportMenuOpen(false))).toEqual({
+      exportMenuOpen: false,
+      exportSheetOpen: true,
+    });
+  });
+
+  it("ignores other actions", () => {
+    const state = frozen({ exportMenuOpen: true, exportSheetOpen: false });
+    expect(uiReducer(state, clearAlert())).toBe(state);
   });
 });

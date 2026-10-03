@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useMatch, useNavigate } from "react-router";
 
 import Viewport from "@/components/Viewport";
 
-import { useEditor, useGame } from "@/hooks";
+import { useEditor } from "@/hooks";
 import { loadGame } from "@/state";
+import { selectGameForSlug } from "@/state/selectors";
 import capability from "@/util/capability";
 import { getRenderInput } from "@/util/renderInput";
 
@@ -18,14 +19,16 @@ const addRecent = (game) => {
 };
 
 const Game = () => {
-  const game = useGame();
   const match = useMatch("/games/:slug/*");
+  const game = useSelector((state) =>
+    selectGameForSlug(state, match.params.slug),
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const inEditor = useEditor();
 
   useEffect(() => {
-    if (!game || match.params.slug !== game.meta.slug) {
+    if (!game) {
       dispatch(loadGame(match.params.slug))
         .then(addRecent)
         .catch(() => navigate("/games/"));
@@ -34,7 +37,7 @@ const Game = () => {
 
   // Wait for the game in the URL, a previously loaded game would otherwise
   // render under the new URL
-  if (!game || game.meta.slug !== match.params.slug) {
+  if (!game) {
     return null;
   }
 

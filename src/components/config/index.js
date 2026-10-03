@@ -55,26 +55,7 @@ export const sections = [
       {
         group: [
           {
-            name: "cutlines",
-            root: true,
-            dimension: true,
-          },
-          {
-            name: "cutlinesOffset",
-            root: true,
-            dimension: true,
-          },
-        ],
-      },
-      {
-        group: [
-          {
             name: "margin",
-            root: true,
-            dimension: true,
-          },
-          {
-            name: "bleed",
             root: true,
             dimension: true,
           },
@@ -152,6 +133,26 @@ export const sections = [
       {
         name: "plainMapCompanies",
         root: true,
+      },
+      {
+        group: [
+          { name: "cutlines", root: true, dimension: true, description: false },
+          {
+            name: "cutlinesOffset",
+            root: true,
+            dimension: true,
+            description: false,
+          },
+        ],
+      },
+      {
+        group: [
+          { name: "margin", root: true, dimension: true, description: false },
+          { name: "bleed", root: true, dimension: true, description: false },
+        ],
+      },
+      {
+        note: "pagination",
       },
       {
         name: "market",
@@ -241,6 +242,26 @@ export const sections = [
         name: "par",
       },
       {
+        group: [
+          { name: "cutlines", root: true, dimension: true, description: false },
+          {
+            name: "cutlinesOffset",
+            root: true,
+            dimension: true,
+            description: false,
+          },
+        ],
+      },
+      {
+        group: [
+          { name: "margin", root: true, dimension: true, description: false },
+          { name: "bleed", root: true, dimension: true, description: false },
+        ],
+      },
+      {
+        note: "pagination",
+      },
+      {
         name: "displayLegend",
         path: "stock.display.legend",
       },
@@ -317,40 +338,27 @@ export const sections = [
       },
       {
         group: [
-          {
-            name: "width",
-            dimension: true,
-            description: false,
-          },
-          {
-            name: "height",
-            dimension: true,
-            description: false,
-          },
+          { name: "width", dimension: true, description: false },
+          { name: "height", dimension: true, description: false },
         ],
       },
       {
         group: [
-          {
-            name: "cutlines",
-            dimension: true,
-          },
-          {
-            name: "bleed",
-            dimension: true,
-          },
+          { name: "cutlines", dimension: true, description: false },
+          { name: "bleed", dimension: true, description: false },
         ],
       },
       {
         group: [
-          {
-            name: "dtgPadding",
-            dimension: true,
-          },
-          {
-            name: "border",
-          },
+          { name: "padding", dimension: true, description: false },
+          { name: "dtgPadding", dimension: true, description: false },
         ],
+      },
+      {
+        note: "sizes",
+      },
+      {
+        name: "border",
       },
       {
         name: "blackBand",

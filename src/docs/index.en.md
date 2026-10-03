@@ -44,7 +44,7 @@ When using the [app](https://github.com/18xx-maker/18xx-maker/releases) there is
 a button in the toolbar at the top left of every game page (the one next to the
 Paginate switch):
 
-![The toolbar of a game page with the export button](/images/export-button.png)
+![Toolbar of a game page with the back, config, page, export and paginate controls labeled](/images/export-button-light.png "The toolbar at the top left of every game page in the app. The export button is circled.")
 
 Its menu has these entries:
 

@@ -100,6 +100,37 @@ describe("loading persisted state", () => {
     expect(preloadedState.settings).toEqual({ theme: "dark" });
   });
 
+  it("loads settings stored before sidebarOpen and language existed", async () => {
+    window.localStorage.setItem("settings", JSON.stringify({ theme: "dark" }));
+    const { store } = await importStore();
+    const { settingsReducer, createSetSidebarOpen } =
+      await import("@/state/settings");
+
+    expect(store.getState().settings).toEqual({ theme: "dark" });
+    // New keys are optional and land next to the old ones
+    expect(
+      settingsReducer(store.getState().settings, createSetSidebarOpen(false)),
+    ).toEqual({ theme: "dark", sidebarOpen: false });
+  });
+
+  it("restores and persists the new settings", async () => {
+    window.localStorage.setItem(
+      "settings",
+      JSON.stringify({ sidebarOpen: false, language: "de" }),
+    );
+    const { store, createSetSidebarOpen } = await importStore();
+    expect(store.getState().settings).toEqual({
+      sidebarOpen: false,
+      language: "de",
+    });
+
+    store.dispatch(createSetSidebarOpen(true));
+    expect(JSON.parse(window.localStorage.getItem("settings"))).toEqual({
+      sidebarOpen: true,
+      language: "de",
+    });
+  });
+
   it("ignores keys that are not persisted", async () => {
     window.localStorage.setItem("alert", JSON.stringify({ open: true }));
     window.localStorage.setItem("errors", JSON.stringify({ a: "b" }));
@@ -161,6 +192,15 @@ describe("storage.listen", () => {
     expect(window.localStorage.getItem("config")).toBe('{"theme":"cmk"}');
     expect(window.localStorage.getItem("loadedGame")).toBeNull();
     expect(window.localStorage.length).toBe(1);
+  });
+
+  it("does not persist the transient ui state", async () => {
+    const { createSetExportMenuOpen } = await import("@/state/ui");
+    const store = await setup();
+    store.dispatch(createSetExportMenuOpen(true));
+
+    expect(window.localStorage.getItem("ui")).toBeNull();
+    expect(Object.keys(window.localStorage)).toEqual(["config"]);
   });
 
   it("writes loadedGame as a summary when a game is set", async () => {

@@ -42,6 +42,10 @@ describe("root state contract", () => {
         "errors": {},
         "settings": {},
         "summaries": {},
+        "ui": {
+          "exportMenuOpen": false,
+          "exportSheetOpen": false,
+        },
       }
     `);
   });
@@ -116,15 +120,6 @@ describe("root state contract", () => {
             },
           },
           "system": {
-            "system:a": {
-              "designer": "d",
-              "id": "a",
-              "publisher": "p",
-              "slug": "system:a",
-              "subtitle": "s",
-              "title": "Game A",
-              "type": "system",
-            },
             "system:b": {
               "designer": "d",
               "id": "b",
@@ -136,6 +131,10 @@ describe("root state contract", () => {
             },
           },
         },
+        "ui": {
+          "exportMenuOpen": false,
+          "exportSheetOpen": false,
+        },
         "update": {
           "downloading": 42,
           "version": "2.0.0",
@@ -144,14 +143,14 @@ describe("root state contract", () => {
     `);
   });
 
-  it("deleting the loaded game clears game and loadedGame but keeps summaries", () => {
+  it("deleting the loaded game clears game, loadedGame and its summary", () => {
     const state = [
       createSetGame(game("a", "Game A")),
       createDeleteGame("system:a"),
     ].reduce(rootReducer, undefined);
     expect(state.game).toBeFalsy();
     expect(state.loadedGame).toBeFalsy();
-    expect(Object.keys(state.summaries.system)).toEqual(["system:a"]);
+    expect(Object.keys(state.summaries.system)).toEqual([]);
   });
 
   it("resets config and errors", () => {

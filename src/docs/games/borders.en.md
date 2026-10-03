@@ -27,7 +27,7 @@ mixed in a single border:
 
 Here are two of the rivers from the 1867 map (the full map has more):
 
-![Borders drawn on a map](/images/borders-example.png)
+![Two blue river borders drawn along the edges of beige map hexes](/images/borders-example.png "Borders follow hex edges and corners instead of belonging to a single hex.")
 
 ```json
 {

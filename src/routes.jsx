@@ -1,6 +1,7 @@
 import { Navigate } from "react-router";
 
 import Root from "@/components/Root";
+import RouteError from "@/components/RouteError";
 import App from "@/components/pages/App";
 import Docs from "@/components/pages/Docs";
 import Elements from "@/components/pages/Elements";
@@ -37,6 +38,7 @@ export const rootRoutes = [
   {
     path: "*",
     element: <Root />,
+    errorElement: <RouteError />,
     children: [
       { index: true, element: <Home /> },
       {
