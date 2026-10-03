@@ -149,6 +149,30 @@ sizing or packaging logic in either surface.
   `sendFile` 404s on absolute paths containing one (worktrees live in
   `.claude/worktrees`), so use `root` as `startExpress` does.
 
+## Commit messages
+
+release-please builds releases and the changelog from commit subjects, so every
+commit (and every PR title, since PRs are squash-merged) must follow strict
+[Conventional Commits](https://www.conventionalcommits.org):
+
+```text
+<type>(<optional scope>): <lowercase imperative description>
+```
+
+- `<type>` must be one of the `changelog-sections` types in
+  `release-please-config.json`: `feat`, `fix`, `perf`, `revert`, `chore`,
+  `docs`, `style`, `refactor`, `test`, `build`, `ci`. No other types.
+- Scope is optional and short, e.g. `ui`, `electron`, `cli`, `export`.
+- Breaking changes use `!` after the type/scope (`feat(export)!: ...`) and a
+  `BREAKING CHANGE:` footer.
+- Pick the type by what ships: `feat` (new user-visible capability) and `fix`
+  (bug fix) drive version bumps; use `chore`/`refactor`/`test`/`docs`/`ci`/
+  `build` for everything else. Check `release-please-config.json` if the list
+  above may be stale.
+- `chore(release): v<version>` is reserved for release-please PRs.
+- Subject only needs the `(#123)` PR suffix that GitHub adds on merge; do not
+  add it yourself.
+
 ## Working in this repo
 
 - Large work: implement phase by phase with sub-agents, commit per phase, then
