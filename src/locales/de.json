@@ -698,7 +698,11 @@
       "reset": "Auf Standardwerte zurücksetzen",
       "local": "Diese Werte werden in diesem Browser im lokalen Speicher gespeichert.",
       "json": "JSON",
-      "file": "Du kannst diesen JSON-Wert kopieren und in die Datei src/config.json einfügen, wenn du diese Einstellungen auf die Kommandozeile oder lokale Server anwenden möchtest."
+      "file": "Du kannst diesen JSON-Wert kopieren und in die Datei src/config.json einfügen, wenn du diese Einstellungen auf die Kommandozeile oder lokale Server anwenden möchtest.",
+      "importTitle": "Importieren",
+      "importDescription": "Füge hier den Inhalt einer config.json-Datei ein oder lege die Datei irgendwo auf der Seite ab. Die importierten Einstellungen ersetzen deine aktuellen eigenen Einstellungen.",
+      "importPlaceholder": "config.json hier einfügen",
+      "importButton": "Konfiguration importieren"
     },
     "toggle": "Konfiguration",
     "close": "Konfiguration schließen",
@@ -731,7 +735,12 @@
     "gameLoaded": "Spiel geladen",
     "gameLoadedMessage": "{{title}} geladen",
     "dropNotFile": "Hier können nur Dateien abgelegt werden",
-    "dropUnsupported": "Dein Browser unterstützt das Ablegen von Dateien nicht"
+    "dropUnsupported": "Dein Browser unterstützt das Ablegen von Dateien nicht",
+    "configInvalid": "Ungültige Konfiguration",
+    "configInvalidJson": "Ungültiges JSON",
+    "configInvalidJsonMessage": "Der Text ist kein gültiges JSON",
+    "configImported": "Konfiguration importiert",
+    "configImportedMessage": "Deine Einstellungen wurden durch die importierte Konfiguration ersetzt"
   },
   "ui": {
     "close": "Schließen",

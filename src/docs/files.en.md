@@ -92,3 +92,12 @@ the file from your computer, but will make the browser forget about this game.
 
 The only way to refresh the file from the data on your computer is to open it
 again using one of the methods above.
+
+## Importing a config.json
+
+Settings you changed in the [config panel](?config=true) can be saved as a
+`config.json` from the Data section. To apply such a file somewhere else, drag
+it onto the app or website, or paste its contents into the Import box in the
+Data section. The imported settings replace your current custom settings. A
+dropped json file is treated as a config when it only contains config settings,
+otherwise it is loaded as a game.

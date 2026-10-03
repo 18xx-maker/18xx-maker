@@ -18,6 +18,12 @@ export const useValidation = () => {
   const dispatch = useDispatch();
   const validationErrors = useSelector((state) => state.errors);
 
+  // Errors for a config without touching the stored errors
+  const checkConfigSchema = useCallback(
+    async (config) => (await configSchema).validate(config).errors,
+    [],
+  );
+
   const validateConfigSchema = useCallback(
     async (config) => {
       const setValidationErrors = (errors) => {
@@ -28,13 +34,13 @@ export const useValidation = () => {
         dispatch(createSetErrors(errorPointerAsKey));
       };
 
-      const { errors } = (await configSchema).validate(config);
+      const errors = await checkConfigSchema(config);
 
       setValidationErrors(errors);
 
       return errors;
     },
-    [dispatch],
+    [dispatch, checkConfigSchema],
   );
 
   const isValidByInputName = useCallback(
@@ -46,6 +52,7 @@ export const useValidation = () => {
   );
 
   return {
+    checkConfigSchema,
     isValidByInputName,
     validateConfigSchema,
   };

@@ -60,6 +60,27 @@ const drop = (dataTransfer) => {
   fireEvent(zone, event);
 };
 
+describe("dropping a config file", () => {
+  it("applies the settings without leaving the page", async () => {
+    const { router, store } = renderApp("/docs");
+    const transfer = new DataTransfer();
+    transfer.items.add(
+      new File(['{"margin": 100}'], "config.json", {
+        type: "application/json",
+      }),
+    );
+
+    drop(transfer);
+
+    await waitFor(() =>
+      expect(store.getState().config).toEqual({ margin: 100 }),
+    );
+    expect(router.state.location.pathname).toBe("/docs");
+    expect(opfs.saveGameFile).not.toHaveBeenCalled();
+    expect(idb.saveGameHandle).not.toHaveBeenCalled();
+  });
+});
+
 describe("dropping a game file", () => {
   it("accepts drags over the app so files can be dropped", () => {
     renderApp("/");

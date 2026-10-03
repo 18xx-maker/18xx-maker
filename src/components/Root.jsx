@@ -18,7 +18,7 @@ import AppSidebar from "@/components/nav/AppSidebar";
 import Header from "@/components/nav/Header";
 
 import { ThemeProvider } from "@/context/ThemeProvider";
-import { useBindings, useEditor } from "@/hooks";
+import { useBindings, useConfig, useEditor } from "@/hooks";
 import { detectedLanguage } from "@/locales/language";
 import {
   createAlert,
@@ -29,6 +29,7 @@ import {
 } from "@/state";
 import { selectLanguage } from "@/state/selectors";
 import capability from "@/util/capability";
+import { sniffConfigFile } from "@/util/config";
 import * as idb from "@/util/idb";
 import * as opfs from "@/util/opfs";
 import { useBooleanParam } from "@/util/query";
@@ -42,6 +43,7 @@ const Root = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const language = useSelector(selectLanguage);
+  const { importConfig } = useConfig();
 
   // The language setting overrides the system one; without it follow the
   // system
@@ -68,17 +70,33 @@ const Root = () => {
   const dragOverHandler = (event) => {
     event.preventDefault();
   };
-  const fileHandler = (event) => {
-    if (!capability.electron && capability.system) {
+  // Everything read from the event happens before any await: a drop's items
+  // are gone once the handler returns
+  const captureDrop = (event) => {
+    let file;
+    try {
+      file = getEventFile(event);
+    } catch {
+      // Not a file, handled below
+    }
+
+    return {
+      file,
+      handle:
+        !capability.electron && capability.system
+          ? Promise.resolve(getEventFileHandle(event))
+          : undefined,
+    };
+  };
+  const fileHandler = ({ file, handle }) => {
+    if (handle) {
       // Anything that is not a file (dropped text, a link) has no handle
-      return Promise.resolve(getEventFileHandle(event)).then((handle) =>
-        handle
-          ? idb.saveGameHandle(handle)
+      return handle.then((h) =>
+        h
+          ? idb.saveGameHandle(h)
           : Promise.reject(new Error(t("alerts.dropNotFile"))),
       );
     }
-
-    const file = getEventFile(event);
 
     if (capability.electron) {
       return window.api.saveGamePath(file);
@@ -103,8 +121,15 @@ const Root = () => {
       return;
     }
 
-    return fileHandler(event)
-      .then((slug) => navigate(`/games/${slug}/map`))
+    const dropped = captureDrop(event);
+
+    // A config.json applies its settings, anything else is a game
+    return sniffConfigFile(dropped.file)
+      .then((imported) =>
+        imported
+          ? importConfig(imported)
+          : fileHandler(dropped).then((slug) => navigate(`/games/${slug}/map`)),
+      )
       .catch((e) =>
         dispatch(createAlert(t("alerts.error"), e.message, "error")),
       );
