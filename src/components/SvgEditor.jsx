@@ -11,7 +11,7 @@ const SvgEditor = ({ width, height, children }) => {
   );
 
   const svg = useRef(null);
-  const pointer = useRef({ x: 0, y: 0 });
+  const pointer = useRef(null);
   const viewport = useRef({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -23,15 +23,37 @@ const SvgEditor = ({ width, height, children }) => {
   useEffect(() => {
     const el = svg.current;
 
+    // Only the pointer that started a drag may pan. Without this a move that
+    // never saw its pointerdown (a press that started outside the svg, a second
+    // finger, a cancelled drag) is measured from a stale position and the view
+    // jumps. Capturing the pointer keeps the moves and the release coming to us.
     const onDown = (e) => {
-      pointer.current = { x: e.x, y: e.y };
+      if (pointer.current || e.button !== 0) return;
+      pointer.current = { id: e.pointerId, x: e.x, y: e.y };
+      try {
+        el.setPointerCapture(e.pointerId);
+      } catch {
+        // No active pointer to capture (synthetic events), panning still works
+      }
+    };
+    const onUp = (e) => {
+      if (pointer.current?.id !== e.pointerId) return;
+      pointer.current = null;
+      if (el.hasPointerCapture(e.pointerId)) {
+        el.releasePointerCapture(e.pointerId);
+      }
     };
     const onMove = (e) => {
-      if (e.buttons !== 1) return;
+      if (pointer.current?.id !== e.pointerId) return;
+      // A release we never saw ends the drag
+      if (e.buttons !== 1) {
+        pointer.current = null;
+        return;
+      }
 
       const deltaX = e.x - pointer.current.x;
       const deltaY = e.y - pointer.current.y;
-      pointer.current = { x: e.x, y: e.y };
+      pointer.current = { id: e.pointerId, x: e.x, y: e.y };
 
       setViewbox((box) => ({
         ...box,
@@ -75,6 +97,8 @@ const SvgEditor = ({ width, height, children }) => {
     document.addEventListener("keydown", onKeyDown);
     el.addEventListener("pointerdown", onDown);
     el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerup", onUp);
+    el.addEventListener("pointercancel", onUp);
     el.addEventListener("wheel", onWheel, { passive: false });
 
     return () => {
@@ -82,6 +106,8 @@ const SvgEditor = ({ width, height, children }) => {
       document.removeEventListener("keydown", onKeyDown);
       el.removeEventListener("pointerdown", onDown);
       el.removeEventListener("pointermove", onMove);
+      el.removeEventListener("pointerup", onUp);
+      el.removeEventListener("pointercancel", onUp);
       el.removeEventListener("wheel", onWheel);
     };
   }, [initial]);
