@@ -11,6 +11,7 @@ import { dissoc, startsWith } from "ramda";
 
 import Code from "@/components/Code";
 
+import { cn } from "@/lib/utils";
 import capability from "@/util/capability";
 import rehypeHeadingIds from "@/util/headingIds";
 
@@ -157,10 +158,7 @@ const components = {
 const Markdown = ({ className, ...pass }) => {
   return (
     <div
-      className={clsx(
-        "p-4 max-w-prose bg-background text-foreground",
-        className,
-      )}
+      className={cn("p-4 max-w-prose bg-background text-foreground", className)}
     >
       <ReactMarkdown
         components={components}

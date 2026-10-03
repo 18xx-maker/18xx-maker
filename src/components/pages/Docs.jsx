@@ -33,7 +33,11 @@ const Docs = () => {
 
   return (
     <div data-testid={`docs-${file}`}>
-      <Markdown>{source}</Markdown>
+      {/* Wider than the default so tables and code have room, text stays at
+          65 characters */}
+      <Markdown className="mx-auto max-w-200 [&_p]:max-w-[65ch] [&_ul]:max-w-[65ch]">
+        {source}
+      </Markdown>
     </div>
   );
 };
