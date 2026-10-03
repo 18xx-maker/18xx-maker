@@ -181,16 +181,28 @@ const hideScrollbars = (adapter, hidden) =>
 // pages are drawn in, so the element has a border of the background in the
 // image. Whole CSS pixels leave the element on the pixel grid it had.
 const PADDING = "export-capture-padding";
-const padPage = (adapter, margin) =>
+// The border is also painted white when asked to: the default background
+// override alone left it transparent on some Linux runners.
+const padPage = (adapter, margin, white = false) =>
   adapter.evaluate(`(() => {
     document.getElementById(${JSON.stringify(PADDING)})?.remove();
     if (${margin}) {
       const style = document.createElement("style");
       style.id = ${JSON.stringify(PADDING)};
-      style.textContent = "#viewport-children { padding: ${margin}px !important; }";
+      style.textContent = "#viewport-children { padding: ${margin}px !important; }" +
+        (${white} ? " html, body, #viewport-children { background: white !important; }" : "");
       document.head.append(style);
     }
   })()`);
+
+// Resolves once the page has painted a frame (or after 250 ms), so a
+// screenshot is not taken from a frame older than the last style or device
+// size change
+const painted = (adapter) =>
+  adapter.evaluate(`new Promise((resolve) => {
+    setTimeout(resolve, 250);
+    requestAnimationFrame(() => requestAnimationFrame(resolve));
+  })`);
 
 // An element of the page at a resolution, with the resolution in the file.
 // The image is the device pixels the element covers whole (see devicePixels),
@@ -208,8 +220,9 @@ const captureElement = async (
   dpi,
   maxPixels,
   margin = 0,
+  white = false,
 ) => {
-  if (margin) await padPage(adapter, margin);
+  if (margin) await padPage(adapter, margin, white);
   const before = await measure(adapter, selector);
   if (!before) throw new Error(`The page has no ${selector}`);
 
@@ -224,6 +237,7 @@ const captureElement = async (
     deviceScaleFactor: scale,
     mobile: false,
   });
+  if (margin) await painted(adapter);
   const rect = await measure(adapter, selector);
   const inner = devicePixels(rect, scale, before.ratio);
   // The border never reaches past the top or left of the page
@@ -288,7 +302,14 @@ export const capture = async (
     });
     await hideScrollbars(adapter, true);
     return format === "png"
-      ? await captureElement(adapter, doc.capture, dpi, maxPixels, margin)
+      ? await captureElement(
+          adapter,
+          doc.capture,
+          dpi,
+          maxPixels,
+          margin,
+          white,
+        )
       : await captureViewport(adapter, doc.capture, maxPixels);
   } finally {
     await adapter.send("Emulation.clearDeviceMetricsOverride");
