@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router";
 
@@ -31,6 +32,7 @@ import { useBooleanParam } from "@/util/query";
 import { getRenderInput } from "@/util/renderInput";
 
 const Root = () => {
+  const { t } = useTranslation();
   // Render mode has no chrome, only the page
   const render = !!getRenderInput();
   const [print] = useBooleanParam("print");
@@ -62,7 +64,7 @@ const Root = () => {
       return Promise.resolve(getEventFileHandle(event)).then((handle) =>
         handle
           ? idb.saveGameHandle(handle)
-          : Promise.reject(new Error("Only files can be dropped here")),
+          : Promise.reject(new Error(t("alerts.dropNotFile"))),
       );
     }
 
@@ -76,9 +78,7 @@ const Root = () => {
       return opfs.saveGameFile(file);
     }
 
-    return Promise.reject(
-      new Error("Your browser does not support dropping files"),
-    );
+    return Promise.reject(new Error(t("alerts.dropUnsupported")));
   };
 
   const dropHandler = (event) => {
@@ -95,7 +95,9 @@ const Root = () => {
 
     return fileHandler(event)
       .then((slug) => navigate(`/games/${slug}/map`))
-      .catch((e) => dispatch(createAlert("Error", e.message, "error")));
+      .catch((e) =>
+        dispatch(createAlert(t("alerts.error"), e.message, "error")),
+      );
   };
 
   const printCss = print
@@ -113,7 +115,11 @@ body {
       const onGame = (game) => {
         dispatch(createSetGame(game));
         dispatch(
-          createAlert("Game Loaded", `${game.info.title} loaded`, "success"),
+          createAlert(
+            t("alerts.gameLoaded"),
+            t("alerts.gameLoadedMessage", { title: game.info.title }),
+            "success",
+          ),
         );
       };
 
@@ -128,7 +134,7 @@ body {
         window.api.off();
       };
     }
-  }, [dispatch, navigate, render]);
+  }, [dispatch, navigate, render, t]);
 
   useBindings();
   const inEditor = useEditor();

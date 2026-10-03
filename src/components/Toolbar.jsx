@@ -76,7 +76,7 @@ const Toolbar = () => {
       <Toggle
         onPressedChange={toggleConfig}
         pressed={config}
-        aria-label="config"
+        aria-label={t("config.toggle")}
         variant="outline"
         className="rounded-sm p-2 w-8 h-8 m-0"
       >
@@ -169,7 +169,7 @@ const Toolbar = () => {
       )}
       {item.pagination && (
         <div className="ml-2 flex flex-row gap-2 justify-start items-center">
-          <Label htmlFor="paginate-switch">Paginate</Label>
+          <Label htmlFor="paginate-switch">{t("game.paginated")}</Label>
           <Switch
             id="paginate-switch"
             checked={paginated}

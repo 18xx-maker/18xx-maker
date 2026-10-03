@@ -113,14 +113,14 @@ const ExportButton = () => {
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="outline"
-                  aria-label="Export"
+                  aria-label={t("export.label")}
                   className="border rounded-sm p-2 w-8 h-8 m-0 print:hidden"
                 >
                   <Images className="size-6" />
                 </Button>
               </DropdownMenuTrigger>
             </TooltipTrigger>
-            <TooltipContent>Export</TooltipContent>
+            <TooltipContent>{t("export.label")}</TooltipContent>
           </Tooltip>
         </TooltipProvider>
         <DropdownMenuContent align="end" onKeyDown={handleMenuKeyDown}>

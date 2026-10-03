@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useMatch } from "react-router";
 
 import { Printer } from "lucide-react";
@@ -14,6 +15,7 @@ import { useGame } from "@/hooks";
 import { useBooleanParam } from "@/util/query";
 
 const PrintButton = () => {
+  const { t } = useTranslation();
   const match = useMatch("/games/*");
   const game = useGame();
   const [print] = useBooleanParam("print");
@@ -32,14 +34,14 @@ const PrintButton = () => {
         <TooltipTrigger asChild>
           <Button
             variant="outline"
-            aria-label="print"
+            aria-label={t("game.print.label")}
             className="border rounded-sm p-2 w-8 h-8 m-0 print:hidden"
             onClick={handler}
           >
             <Printer className="size-6" />
           </Button>
         </TooltipTrigger>
-        <TooltipContent>Print</TooltipContent>
+        <TooltipContent>{t("game.print.tooltip")}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );
