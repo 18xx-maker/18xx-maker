@@ -27,6 +27,12 @@ const check = () => {
   }
 };
 
+// Code loads its highlighter on demand, which would finish outside of act
+beforeAll(async () => {
+  const { preloadCode } = await import("@/components/Code");
+  await preloadCode();
+});
+
 beforeAll(() => {
   ["error", "warn"].forEach((level) =>
     spies.push(vi.spyOn(console, level).mockImplementation(() => {})),
