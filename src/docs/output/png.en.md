@@ -11,7 +11,7 @@ click on the export button:
 > print menu.
 
 This will expose a menu with export options. You can either export a full game
-to PNG images or the individual component that you are on. Exporting this way
+to PNG images. Exporting this way
 _will_ respect any config options you have set in the app.
 
 If you choose to export a full game you are asked to pick a folder to put all of
@@ -25,27 +25,11 @@ charter and token. The images that are directly tied to a company will have the
 companies abbrev in them and all images will be indexed with a increasing digit
 (to protect for games that have two companies with the same abbrev).
 
-If you choose to export the current component the app will ask you to select a
-full filename for the resulting PDF file. When the export is complete the app
-will open the resulting PDF. Printing individual PNG's only works on the
-following components:
-
-- Background
-- Map
-- Market
-- Par
-- Revenue
-- Tile Manifest
-
-Other components fail with an error message. If you need images for these
-components export the full game as PNG images.
-
 Images are made at 300 dpi, the resolution to print at, and carry their
 resolution so they open at their real size. The _Export options_ panel lets you
 choose a lower resolution (1 to 300 dpi). A game file can set the resolution
 (and the other export options) with `"exports": { "png": { "dpi": 150 } }`, see
-[Export options](/docs/games/exports): the panel starts with it and exporting
-one page uses it.
+[Export options](/docs/games/exports): the panel starts with it.
 
 An image only has the pixels its component covers whole, so it can be a pixel
 smaller than its size in inches times the resolution (a card of 2.657 by 1.732

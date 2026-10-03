@@ -33,8 +33,6 @@
     "allPdf": "Export game as pdf documents",
     "allPng": "Export game as png images",
     "b18": "Export game as a Board18 box",
-    "singlePdf": "Export this component as a pdf document",
-    "singlePng": "Export this component as a png image",
     "options": "Export options",
     "optionsTitle": "Export {{title}}",
     "optionsDescription": "Choose the files to export. The options start as the exports of the game file, and Reset brings them back. Board18 boxes are always at one pixel for each unit.",

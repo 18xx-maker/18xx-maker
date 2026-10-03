@@ -25,7 +25,7 @@ import ExportOptions from "@/components/ExportOptions";
 import { useConfig, useGame } from "@/hooks";
 import { createAlert } from "@/state";
 import { trackEvent } from "@/util/analytics";
-import { planExport, planSingle } from "@/util/exportPlan";
+import { planExport } from "@/util/exportPlan";
 import { useBooleanParam } from "@/util/query";
 
 const ExportButton = () => {
@@ -54,11 +54,6 @@ const ExportButton = () => {
   const handleAll = (format) => {
     trackEvent("exportGame", location, { media: format });
     exportFiles(planExport(game, layers, { formats: [format] }));
-  };
-
-  const handleSingle = (format) => {
-    trackEvent("exportComponent", location, { media: format });
-    exportFiles(planSingle(game, layers, location, format));
   };
 
   return (
@@ -97,15 +92,6 @@ const ExportButton = () => {
           <DropdownMenuItem onSelect={() => setOptions(true)}>
             <Settings2 />
             {t("export.options")}
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onSelect={() => handleSingle("pdf")}>
-            <FileText />
-            {t("export.singlePdf")}
-          </DropdownMenuItem>
-          <DropdownMenuItem onSelect={() => handleSingle("png")}>
-            <FileImage />
-            {t("export.singlePng")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
