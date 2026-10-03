@@ -12,7 +12,7 @@ const Viewport = ({ children }) => {
     <div
       id="viewport"
       className={clsx(
-        !print && "editor-checkered",
+        !print && "editor-checkered min-h-screen",
         "print:bg-none select-none overscroll-none",
       )}
     >
