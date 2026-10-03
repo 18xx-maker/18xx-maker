@@ -14,7 +14,10 @@
     "home": "Home",
     "load": "Load Games",
     "elements": "Elements",
-    "docs": "Help",
+    "docsStart": "Getting started",
+    "docsOutput": "Output",
+    "docsGames": "Game files",
+    "docsPnp": "Print and play",
     "edit": "Edit Game"
   },
   "refresh": {
@@ -96,6 +99,10 @@
     }
   },
   "docs": {
+    "toc": "On this page",
+    "pager": "Pages",
+    "previous": "Previous",
+    "next": "Next",
     "help": {
       "title": "Using 18xx Maker",
       "description": "Getting Started"
