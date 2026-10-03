@@ -80,13 +80,15 @@ const Root = () => {
       // Not a file, handled below
     }
 
-    return {
-      file,
-      handle:
-        !capability.electron && capability.system
-          ? Promise.resolve(getEventFileHandle(event))
-          : undefined,
-    };
+    const handle =
+      !capability.electron && capability.system
+        ? Promise.resolve(getEventFileHandle(event))
+        : undefined;
+    // A config drop never consumes the handle, do not leave a rejection
+    // unhandled
+    handle?.catch(() => undefined);
+
+    return { file, handle };
   };
   const fileHandler = ({ file, handle }) => {
     if (handle) {

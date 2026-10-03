@@ -53,7 +53,7 @@ export const useConfig = () => {
   // result. Resolves true when imported, nothing is stored on schema errors.
   const importConfig = useCallback(
     async (imported) => {
-      const full = mergeDeepRight(defaultConfig, imported);
+      const full = mergeDeepRight(initialConfig, imported);
       const errors = await checkConfigSchema(full);
 
       if (errors.length) {
