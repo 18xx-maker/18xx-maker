@@ -25,7 +25,7 @@ mixed in a single border:
 
 ## Example
 
-Here are some of the rivers from 1867:
+Here are two of the rivers from the 1867 map (the full map has more):
 
 ![Borders drawn on a map](/images/borders-example.png)
 
@@ -35,7 +35,7 @@ Here are some of the rivers from 1867:
     "borders": [
       {
         "color": "water",
-        "coords": ["F8p3", "F8p4"]
+        "coords": ["C13p2", "C13p3"]
       },
       {
         "color": "water",

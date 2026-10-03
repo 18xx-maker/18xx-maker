@@ -26,9 +26,9 @@ const images = [
   },
   {
     file: "borders-example.png",
-    route: "/games/18Test/map?print=true",
-    selector: "[data-testid=game-18Test-map]",
-    clip: { x: 765, y: 35, width: 595, height: 320 },
+    route: "/games/1867/map?print=true",
+    selector: "[data-testid=game-1867-map]",
+    clip: { x: 280, y: 670, width: 360, height: 330 },
   },
   {
     file: "tokens-example.png",
