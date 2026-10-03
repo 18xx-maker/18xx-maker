@@ -67,7 +67,7 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <Label className="w-min text-lg" htmlFor={name}>
+      <Label className="text-lg" htmlFor={name}>
         {label}
       </Label>
       <div className="flex flex-row gap-2 justify-start items-center">
