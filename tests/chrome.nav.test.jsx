@@ -32,7 +32,7 @@ describe("game toolbar", () => {
     const { user, router } = renderApp("/games/18Test/map");
     expect(await screen.findByTestId("game-18Test-map")).toBeInTheDocument();
 
-    await user.keyboard("2");
+    await user.keyboard("4");
     expect(router.state.location.pathname).toBe("/games/18Test/tiles");
     expect(await screen.findByTestId("game-18Test-tiles")).toBeInTheDocument();
   });
