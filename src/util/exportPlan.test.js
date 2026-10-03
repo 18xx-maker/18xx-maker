@@ -129,7 +129,7 @@ describe("planExport with the exports of a game", () => {
     const request = planExport(
       exporting({ formats: ["png"], docs: ["map"], png: { dpi: 100 } }),
       layers(),
-      { formats: ["pdf"], docs: ["tokens"], dpi: 50, paginated: false },
+      { formats: ["pdf"], docs: ["tokens"], dpi: 50 },
     );
 
     expect(formatsOf(request)).toEqual(["pdf"]);
@@ -137,23 +137,22 @@ describe("planExport with the exports of a game", () => {
     expect(paths(request)).toEqual(["18test-tokens.pdf"]);
   });
 
-  it("has the paginated pdfs unless the game or the user says no", () => {
+  it("has the paginated pdf of a page that does not fit on the paper", () => {
     const options = { formats: ["pdf"], docs: ["map"] };
-    const has = (request) =>
-      paths(request).includes("18test-map-paginated.pdf");
 
-    expect(has(planExport(game, layers(), options))).toBe(true);
+    expect(paths(planExport(game, layers(), options))).toEqual([
+      "18test-map.pdf",
+      "18test-map-paginated.pdf",
+    ]);
     expect(
-      has(planExport(exporting({ paginated: false }), layers(), options)),
-    ).toBe(false);
-    expect(
-      has(
-        planExport(exporting({ paginated: false }), layers(), {
-          ...options,
-          paginated: true,
-        }),
+      paths(
+        planExport(
+          game,
+          layers({ paper: { width: 5000, height: 5000, margins: 25 } }),
+          options,
+        ),
       ),
-    ).toBe(true);
+    ).toEqual(["18test-map.pdf"]);
   });
 
   it("layers: the config of the user over the game, a choice over both", () => {
@@ -206,7 +205,6 @@ describe("planExport with the exports of a game", () => {
         formats: ["b18"],
         docs: ["map", "tiles"],
         layouts: "all",
-        paginated: false,
         background: "white",
         png: { dpi: 120 },
         b18: { version: "4", author: "Game" },
@@ -218,7 +216,6 @@ describe("planExport with the exports of a game", () => {
       formats: ["b18"],
       docs: ["map", "tiles"],
       layouts: "all",
-      paginated: false,
       background: "white",
       variation: null,
       dpi: 120,
@@ -232,7 +229,6 @@ describe("planExport with the exports of a game", () => {
     expect(defaults).toMatchObject({
       formats: ["pdf"],
       layouts: "current",
-      paginated: true,
       dpi: 300,
       b18: { version: "1.0", author: expect.any(String) },
     });
@@ -321,7 +317,10 @@ describe("the variation of an export", () => {
       { ...game.map, name: "South" },
     ],
   };
-  const maps = (request) => paths(request).filter((p) => p.includes("-map-"));
+  const maps = (request) =>
+    paths(request).filter(
+      (p) => p.includes("-map-") && !p.includes("paginated"),
+    );
 
   it("starts as the variation of the game file, every one without it", () => {
     expect(exportDefaults(varied, layers()).variation).toBe(null);
@@ -342,7 +341,7 @@ describe("the variation of an export", () => {
 
   it("is the one of the game file, or the one that is chosen, or every one with null", () => {
     const withFile = { ...varied, exports: { variation: 1 } };
-    const options = { formats: ["pdf"], docs: ["map"], paginated: false };
+    const options = { formats: ["pdf"], docs: ["map"] };
 
     expect(maps(planExport(withFile, layers(), options))).toEqual([
       "18test-map-1.pdf",

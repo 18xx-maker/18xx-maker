@@ -18,7 +18,6 @@ export const BACKGROUNDS = ["transparent", "white"];
 // (every one) and the author of a Board18 box (it depends on who exports).
 export const DEFAULTS = {
   formats: ["pdf"],
-  paginated: false,
   background: "white",
   png: { dpi: MAX_DPI },
   b18: { version: "1.0" },
@@ -31,7 +30,7 @@ const isList = (value, valid) =>
 const isText = (value) => typeof value === "string" && value.length > 0;
 
 // The valid options of a layer, in the shape of the `exports` field:
-//   { formats, docs, layouts, paginated, background, variation,
+//   { formats, docs, layouts, background, variation,
 //     png: { dpi }, b18: { version, author } }
 // What is left out, undefined or not valid is not in the result. The schema
 // of the game rejects invalid options of a game file; a game that the app
@@ -43,7 +42,6 @@ export const cleanOptions = (layer) => {
   if (isList(given.formats, FORMATS)) out.formats = [...new Set(given.formats)];
   if (isList(given.docs, DOCS)) out.docs = [...new Set(given.docs)];
   if (LAYOUTS.includes(given.layouts)) out.layouts = given.layouts;
-  if (typeof given.paginated === "boolean") out.paginated = given.paginated;
   if (BACKGROUNDS.includes(given.background)) {
     out.background = given.background;
   }
@@ -75,9 +73,8 @@ const merge = (low, high) => ({
 //   game      the `exports` field of the game file
 //   user      what the user chose, same shape (a `variation` of null is
 //             every variation, also when the game has one)
-//   defaults  the defaults of the caller, on top of DEFAULTS (the app has
-//             paginated pdfs by default, maker export does not)
-// Returns every option: { formats, docs, layouts, paginated, background,
+//   defaults  the defaults of the caller, on top of DEFAULTS
+// Returns every option: { formats, docs, layouts, background,
 // variation,
 // png: { dpi }, b18: { version, author } }
 export const resolveExportOptions = ({ game, user, defaults } = {}) => {

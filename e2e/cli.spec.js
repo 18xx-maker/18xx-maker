@@ -60,7 +60,6 @@ test.describe("maker export 18Test", () => {
       "pdf,png,b18",
       "--docs",
       "background,map",
-      "--paginated",
     );
     expect(result.status, result.stderr).toBe(0);
 
@@ -292,7 +291,7 @@ test.describe("maker export 18Test", () => {
       file,
       JSON.stringify({
         ...game,
-        exports: { docs: ["map"], paginated: true, png: { dpi: 50 } },
+        exports: { docs: ["map"], png: { dpi: 50 } },
       }),
     );
 
@@ -304,10 +303,10 @@ test.describe("maker export 18Test", () => {
     ]);
 
     fs.rmSync(path.join(out, "boxed"), { recursive: true });
-    result = maker(out, file, "--no-paginated");
+    result = maker(out, file, "--docs", "background");
     expect(result.status, result.stderr).toBe(0);
     expect(fs.readdirSync(path.join(out, "boxed"))).toEqual([
-      "e2e-fixture-game-map.pdf",
+      "e2e-fixture-game-background.pdf",
     ]);
   });
 

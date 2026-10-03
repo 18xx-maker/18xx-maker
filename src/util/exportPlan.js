@@ -48,17 +48,16 @@ export const exportPages = (game, layers) =>
 export const allLayouts = (game, layers) =>
   !!baseConfig(layers, game).export?.allLayouts;
 
-// What the app exports when nothing else says: it has the paginated pdfs, and
-// the designer of the game is the author of a Board18 box
+// What the app exports when nothing else says: the designer of the game is
+// the author of a Board18 box
 const appDefaults = (game) => ({
-  paginated: true,
   b18: { author: game.info.designer || "18xx Maker" },
 });
 
 // The options of an export of the game, in the order of the `exports` field of
 // the game (see resolveExportOptions): the defaults of the app, the game's
 // `exports` and what the user chose. userOptions are
-//   { formats, docs, layouts, paginated, background, dpi, variation,
+//   { formats, docs, layouts, background, dpi, variation,
 //     b18: { version, author } }
 // with what is left out coming from the layers below. A variation of null is
 // every variation, also when the game's `exports` has one.
@@ -90,7 +89,6 @@ export const exportDefaults = (game, layers) => {
     formats: options.formats,
     docs: options.docs ? pages.filter((p) => options.docs.includes(p)) : pages,
     layouts: options.layouts ?? (allLayouts(game, layers) ? "all" : "current"),
-    paginated: options.paginated,
     background: options.background,
     variation:
       Array.isArray(game.map) && options.variation < game.map.length
@@ -108,7 +106,6 @@ export const exportDefaults = (game, layers) => {
 //   docs       the pages to export (exportPages), all when left out
 //   layouts    "all" for a sheet of every layout, "current" for the one config
 //              has, as config says when left out
-//   paginated  also the paginated pdfs
 //   background "white" or "transparent", of the png images of the map,
 //              market, par, revenue and tile manifest (the others are always
 //              transparent, b18 images do not take it)
@@ -119,7 +116,7 @@ export const exportDefaults = (game, layers) => {
 // (resolveExportOptions).
 export const planExport = (game, layers, userOptions) => {
   const options = resolveOptions(game, layers, userOptions);
-  const { formats, docs, paginated, variation } = options;
+  const { formats, docs, variation } = options;
   let config = baseConfig(layers, game);
   if (options.layouts) {
     config = mergeDeepRight(config, {
@@ -130,7 +127,7 @@ export const planExport = (game, layers, userOptions) => {
   const files = formats.filter((format) => format !== "b18");
   const jobs = exportJobs(
     game,
-    selectDocs(documents(game, config, data), { docs, paginated, variation }),
+    selectDocs(documents(game, config, data), { docs, variation }),
     files,
   );
 

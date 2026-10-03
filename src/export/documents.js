@@ -2,6 +2,7 @@ import { flatten, map, range } from "ramda";
 
 import { applyCompanyOverrides } from "../util/companyOverrides.js";
 import {
+  addPaginationData,
   compileCompanies,
   maxPlayers,
   printableHeight,
@@ -92,7 +93,8 @@ export const documents = (game, config, data) => {
     background,
   });
 
-  // A document with pdf and png output, and its paginated version (pdf only)
+  // A document with pdf and png output, and its paginated version (pdf only),
+  // which is only there when the document does not fit on one page
   const paged = (kind, size, variation) => {
     const suffix = variation === undefined ? "" : `-${variation}`;
     const query = variation === undefined ? {} : { variation };
@@ -107,6 +109,11 @@ export const documents = (game, config, data) => {
       basename: `${kind}${suffix}`,
       variation,
     });
+    const { pages } = addPaginationData(
+      { totalWidth: size.width, totalHeight: size.height },
+      config,
+    );
+    if (pages <= 1) return;
     add({
       id: `${kind}${suffix}/paginated`,
       kind,

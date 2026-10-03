@@ -73,7 +73,6 @@ makes:
   and PNG files.
 - **Every layout of a sheet:** a file for each layout of the cards, tiles and
   tokens, instead of only the layout of your config.
-- **Paginated pdfs:** also export the paginated pdf of the map, market and so on.
 - **Map variation:** one variation or every variation, for games with more than
   one map.
 - **PNG resolution:** from 1 to 300 dpi. 300 is the default and the maximum.

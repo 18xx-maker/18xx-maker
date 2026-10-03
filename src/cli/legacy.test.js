@@ -51,7 +51,22 @@ describe("print file names", () => {
       .map((name) => name.replace(`${id}-`, `${prefix(id)}-`))
       .concat((added[id] || []).map((doc) => `${prefix(id)}-${doc}.pdf`))
       .sort();
-    expect(names).toEqual(expected);
+    // A paginated pdf is only there now when its page does not fit on one
+    // sheet of paper, print used to have one for every page that has it
+    const paginated = (name) => name.includes("-paginated.");
+    expect(names.filter((name) => !paginated(name))).toEqual(
+      expected.filter((name) => !paginated(name)),
+    );
+    expect(expected).toEqual(expect.arrayContaining(names.filter(paginated)));
+  });
+
+  // The map of 1889 is larger than the paper
+  it("still has the paginated map of 1889", () => {
+    const { game, config, data } = setup("1889");
+    const names = exportJobs(game, documents(game, config, data), ["pdf"]).map(
+      (job) => job.path,
+    );
+    expect(names.some((name) => name.includes("-map-paginated."))).toBe(true);
   });
 
   it("names the seven bundled games whose title is not their id", () => {

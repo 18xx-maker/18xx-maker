@@ -50,7 +50,6 @@ beforeEach(async () => {
     formats: ["pdf", "png", "b18"],
     docs: ["map"],
     variation: 1,
-    paginated: true,
   };
   Object.assign(api, {
     addRecent: vi.fn(),
@@ -162,7 +161,6 @@ describe("reset to the options of the game", () => {
       formats: ["png", "b18"],
       docs: ["map"],
       layouts: "all",
-      paginated: false,
       variation: 1,
       png: { dpi: 150 },
       b18: { version: "3.0", author: "The Designer" },

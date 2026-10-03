@@ -76,24 +76,21 @@ afterEach(() => {
 });
 
 describe("export formats", () => {
-  it("is a pdf of every page by default, without the paginated ones", async () => {
+  it("is a pdf of every page by default, paginated when it needs pages", async () => {
     await exportCommand("18Test", {});
 
     expect(files()).toEqual(
       expect.arrayContaining([
         "18test-map.pdf",
+        "18test-map-paginated.pdf",
         "18test-market.pdf",
         "18test-tokens.pdf",
       ]),
     );
     expect(files().every((name) => name.endsWith(".pdf"))).toBe(true);
-    expect(files().some((name) => name.includes("paginated"))).toBe(false);
-  });
-
-  it("has the paginated pdfs with --paginated", async () => {
-    await exportCommand("18Test", { paginated: true });
-
-    expect(files()).toContain("18test-map-paginated.pdf");
+    // The par of 18Test fits on one page
+    expect(files()).toContain("18test-par.pdf");
+    expect(files()).not.toContain("18test-par-paginated.pdf");
   });
 
   it("exports a png for each element with --format png", async () => {
@@ -206,6 +203,7 @@ describe("export formats", () => {
     await exportCommand("18Test", { format: "pdf,png,b18", docs: "map" });
 
     expect(files()).toEqual([
+      "18test-map-paginated.pdf",
       "18test-map.pdf",
       "18test-map.png",
       "board18-18Test-1.0",
@@ -216,7 +214,10 @@ describe("export formats", () => {
   it("goes to the page of the game that is given to the browser", async () => {
     await exportCommand("18Test", { docs: "map" });
 
-    expect(urls()).toEqual(["http://localhost:1234/games/render:18Test/map"]);
+    expect(urls()).toEqual([
+      "http://localhost:1234/games/render:18Test/map",
+      "http://localhost:1234/games/render:18Test/map?paginated=true",
+    ]);
     const [, input] = mocks.fake.page.addInitScript.mock.calls[0];
     expect(input.id).toBe("18Test");
     expect(input.game.info.title).toBe("18Test");
@@ -227,6 +228,7 @@ describe("export formats", () => {
     await exportCommand("18Test", { docs: "map", out: "elsewhere/here" });
 
     expect(files(path.join(tmp, "elsewhere/here/18Test"))).toEqual([
+      "18test-map-paginated.pdf",
       "18test-map.pdf",
     ]);
   });
@@ -234,9 +236,9 @@ describe("export formats", () => {
   it("exits 1 and still writes the rest when documents fail", async () => {
     mocks.fake.session.failOnce("Page.printToPDF", new Error("crashed"));
 
-    await exportCommand("18Test", { docs: "map,market" });
+    await exportCommand("18Test", { docs: "map,par" });
 
-    expect(files()).toEqual(["18test-market.pdf"]);
+    expect(files()).toEqual(["18test-map-paginated.pdf", "18test-par.pdf"]);
     expect(process.exitCode).toBe(1);
   });
 });
@@ -315,7 +317,8 @@ describe("export options", () => {
       jobs: "3",
     });
 
-    expect(files()).toHaveLength(4);
+    // The par fits on one page, it has no paginated pdf
+    expect(files()).toHaveLength(7);
     expect(mocks.fake.browser.newPage.mock.calls.length).toBeGreaterThan(1);
     expect(mocks.fake.browser.newPage.mock.calls.length).toBeLessThanOrEqual(3);
   });
@@ -337,9 +340,8 @@ describe("selectDocs", () => {
     { kind: "tile-manifest", mode: "single" },
   ];
 
-  it("has everything but the paginated documents", () => {
-    expect(selectDocs(docs, {})).toHaveLength(5);
-    expect(selectDocs(docs, { paginated: true })).toHaveLength(6);
+  it("has every document, also the paginated ones", () => {
+    expect(selectDocs(docs, {})).toEqual(docs);
   });
 
   it("selects by page, with the elements of a sheet in its name", () => {
@@ -348,11 +350,12 @@ describe("selectDocs", () => {
   });
 
   it("selects a map variation, the other documents are not hit", () => {
-    expect(
-      selectDocs(docs, { variation: 1, paginated: true }).map(
-        (doc) => doc.kind,
-      ),
-    ).toEqual(["map", "card", "cards", "tile-manifest"]);
+    expect(selectDocs(docs, { variation: 1 }).map((doc) => doc.kind)).toEqual([
+      "map",
+      "card",
+      "cards",
+      "tile-manifest",
+    ]);
   });
 });
 
@@ -367,7 +370,12 @@ describe("export of a map with variations", () => {
 
     await exportCommand("18Test", { docs: "map" });
 
-    expect(files()).toEqual(["18test-map-0.pdf", "18test-map-1.pdf"]);
+    expect(files()).toEqual([
+      "18test-map-0-paginated.pdf",
+      "18test-map-0.pdf",
+      "18test-map-1-paginated.pdf",
+      "18test-map-1.pdf",
+    ]);
   });
 
   it("--variation only has one", async () => {
@@ -375,7 +383,7 @@ describe("export of a map with variations", () => {
 
     await exportCommand("18Test", { docs: "map", variation: "1" });
 
-    expect(files()).toEqual(["18test-map-1.pdf"]);
+    expect(files()).toEqual(["18test-map-1-paginated.pdf", "18test-map-1.pdf"]);
   });
 
   it("--variation must be there", async () => {
@@ -504,8 +512,11 @@ describe("game files", () => {
 
     await exportCommand(file, { docs: "map" });
 
-    expect(files(path.join(tmp, "render/my-game"))).toEqual(["mine-map.pdf"]);
-    expect(urls()).toEqual(["http://localhost:1234/games/render:my-game/map"]);
+    expect(files(path.join(tmp, "render/my-game"))).toEqual([
+      "mine-map-paginated.pdf",
+      "mine-map.pdf",
+    ]);
+    expect(urls()[0]).toBe("http://localhost:1234/games/render:my-game/map");
     const [, input] = mocks.fake.page.addInitScript.mock.calls[0];
     expect(input.id).toBe("my-game");
   });
@@ -517,6 +528,7 @@ describe("game files", () => {
     await exportCommand("games/some-game.json", { docs: "map" });
 
     expect(files(path.join(tmp, "render/some-game"))).toEqual([
+      "18test-map-paginated.pdf",
       "18test-map.pdf",
     ]);
   });
@@ -579,12 +591,8 @@ describe("the exports of a game file", () => {
     expect(json).toMatchObject({ version: "5.0", author: "The File" });
   });
 
-  it("sets the paginated pdfs and every layout", async () => {
-    const file = exporting({
-      docs: ["map", "cards"],
-      paginated: true,
-      layouts: "all",
-    });
+  it("sets every layout", async () => {
+    const file = exporting({ docs: ["map", "cards"], layouts: "all" });
 
     await exportCommand(file, {});
 
@@ -606,7 +614,10 @@ describe("the exports of a game file", () => {
     });
 
     await exportCommand(file, {});
-    expect(boxedFiles()).toEqual(["18test-map-1.pdf"]);
+    expect(boxedFiles()).toEqual([
+      "18test-map-1-paginated.pdf",
+      "18test-map-1.pdf",
+    ]);
 
     fs.writeFileSync(
       file,
@@ -625,7 +636,10 @@ describe("the exports of a game file", () => {
     });
 
     await exportCommand(file, { format: "pdf", docs: "map" });
-    expect(boxedFiles()).toEqual(["18test-map.pdf"]);
+    expect(boxedFiles()).toEqual([
+      "18test-map-paginated.pdf",
+      "18test-map.pdf",
+    ]);
 
     fs.rmSync(boxed(), { recursive: true });
     await exportCommand(file, { docs: "background", dpi: "150" });
@@ -633,17 +647,6 @@ describe("the exports of a game file", () => {
     expect(
       readPng(new Uint8Array(fs.readFileSync(boxed("18test-background.png")))),
     ).toMatchObject({ pixelsPerMeter: 5906 });
-  });
-
-  it("is not paginated with paginated false, also when the game has them", async () => {
-    const file = exporting({ docs: ["map"], paginated: true });
-
-    await exportCommand(file, {});
-    expect(boxedFiles()).toContain("18test-map-paginated.pdf");
-
-    fs.rmSync(boxed(), { recursive: true });
-    await exportCommand(file, { paginated: false });
-    expect(boxedFiles()).toEqual(["18test-map.pdf"]);
   });
 
   it("has the layout of the flag over every layout of the game", async () => {
@@ -667,7 +670,10 @@ describe("the exports of a game file", () => {
 
     await exportCommand(file, { variation: "0" });
 
-    expect(boxedFiles()).toEqual(["18test-map-0.pdf"]);
+    expect(boxedFiles()).toEqual([
+      "18test-map-0-paginated.pdf",
+      "18test-map-0.pdf",
+    ]);
   });
 
   it("exports every map variation with --variation all", async () => {
@@ -681,7 +687,12 @@ describe("the exports of a game file", () => {
 
     await exportCommand(file, { variation: "all" });
 
-    expect(boxedFiles()).toEqual(["18test-map-0.pdf", "18test-map-1.pdf"]);
+    expect(boxedFiles()).toEqual([
+      "18test-map-0-paginated.pdf",
+      "18test-map-0.pdf",
+      "18test-map-1-paginated.pdf",
+      "18test-map-1.pdf",
+    ]);
   });
 
   it("has the box of the game for maker b18 without a version or author", async () => {

@@ -519,7 +519,7 @@
         },
         "paginated": {
           "type": "boolean",
-          "description": "Also export the paginated pdfs, like --paginated. Defaults to false for maker export and true in the app."
+          "description": "Deprecated and ignored. The paginated pdfs of the map, market, par and revenue are always exported when the page does not fit on one page of the paper."
         },
         "background": {
           "type": "string",

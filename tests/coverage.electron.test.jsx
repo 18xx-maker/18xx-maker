@@ -504,7 +504,6 @@ describe("export button", () => {
       market: "18test-market.pdf",
       "market?paginated=true": "18test-market-paginated.pdf",
       par: "18test-par.pdf",
-      "par?paginated=true": "18test-par-paginated.pdf",
       "tile-manifest": "18test-tile-manifest.pdf",
       tiles: "18test-tiles.pdf",
     });

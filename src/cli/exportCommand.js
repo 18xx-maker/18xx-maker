@@ -135,7 +135,6 @@ const flagOptions = (opts) => {
     }
     user.background = opts.background;
   }
-  if (opts.paginated !== undefined) user.paginated = !!opts.paginated;
   if (opts.variation === "all") {
     user.variation = null;
   } else if (opts.variation !== undefined) {
@@ -157,7 +156,6 @@ const flagOptions = (opts) => {
 //   format      "pdf,png,b18", pdf
 //   docs        "map,cards": only these pages
 //   layouts     "all": a sheet for every layout
-//   paginated   also the paginated pdfs
 //   variation   only this map variation, or all
 //   config      a config file
 //   dpi         of the pngs, 1 to 300
@@ -230,7 +228,7 @@ const command = async (game, opts = {}) => {
 
   await withBrowser(async ({ browser, baseUrl }) => {
     for (const { id, game: gameDef, options } of resolved) {
-      const { formats, docs, paginated, variation } = options;
+      const { formats, docs, variation } = options;
       let config = loadGameConfig(gameDef, userConfig);
       if (options.layouts) {
         config = mergeDeepRight(config, {
@@ -267,7 +265,6 @@ const command = async (game, opts = {}) => {
               gameDef,
               selectDocs(documents(gameDef, config, exportData), {
                 docs,
-                paginated,
                 variation,
               }),
               files,

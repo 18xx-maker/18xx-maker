@@ -66,7 +66,6 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
   const [formats, setFormats] = useState(initial.formats);
   const [docs, setDocs] = useState(initial.docs);
   const [layoutsAll, setLayoutsAll] = useState(initial.layouts === "all");
-  const [paginated, setPaginated] = useState(initial.paginated);
   const [variation, setVariation] = useState(
     initial.variation === null ? ALL : String(initial.variation),
   );
@@ -84,7 +83,6 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
     setFormats(initial.formats);
     setDocs(initial.docs);
     setLayoutsAll(initial.layouts === "all");
-    setPaginated(initial.paginated);
     setVariation(initial.variation === null ? ALL : String(initial.variation));
     setDpi(String(initial.dpi));
     setBackground(initial.background);
@@ -112,7 +110,6 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
           formats,
           docs,
           layouts: layoutsAll ? "all" : "current",
-          paginated,
           variation: variation === ALL ? null : Number(variation),
           dpi: Number(dpiValid ? dpi : MAX_DPI),
           background,
@@ -201,15 +198,6 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
                 onCheckedChange={setLayoutsAll}
               />
               <Label htmlFor="export-layouts">{t("export.allLayouts")}</Label>
-            </div>
-            <div className="flex items-center gap-2">
-              <Switch
-                id="export-paginated"
-                checked={paginated}
-                disabled={running || !formats.includes("pdf")}
-                onCheckedChange={setPaginated}
-              />
-              <Label htmlFor="export-paginated">{t("export.paginated")}</Label>
             </div>
           </fieldset>
 

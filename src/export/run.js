@@ -1,7 +1,7 @@
 // Runs an export: captures every file of a list and hands it to a sink. This
 // does not know about browsers or file systems, both are passed in.
 //
-// ExportRequest  { game, config, data, formats[], docs?, layouts?, paginated?,
+// ExportRequest  { game, config, data, formats[], docs?, layouts?,
 //                  variation?, scale, b18?: { version, author }, out }
 // ProgressEvent  { type: "start" | "doc" | "fail" | "done", done, total,
 //                  name, error? }

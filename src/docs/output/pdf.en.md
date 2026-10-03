@@ -16,8 +16,7 @@ This will expose a menu with export options: export the full game as PDF
 documents, as PNG images or as a Board18 box. Exporting this way
 _will_ respect any config options you have set in the app. The _Export options_
 entry opens a panel where you choose the formats (PDF, PNG and Board18), the
-documents, if every layout of a sheet is exported, if the paginated PDFs are
-included and the folder, then exports them all at once. The panel starts with
+documents, if every layout of a sheet is exported and the folder, then exports them all at once. The panel starts with
 the options of the game's `exports` field if it has one (see [Export
 options](/docs/games/exports)), and what you change there wins. Press _Cancel export_ in
 the panel to stop an export that is running; the files that are done stay.
@@ -38,7 +37,7 @@ folder.
 You can output straight to PDF files by running:
 
 ```bash
-pnpm build && pnpm maker export <game> --format pdf --paginated
+pnpm build && pnpm maker export <game> --format pdf
 ```
 
 where `<game>` is the id of a bundled game, or the path to a game file (it is
@@ -46,8 +45,11 @@ checked against the game schema first, and the folder is named after the file).
 For example, here is me printing 1889:
 
 ```bash
-pnpm build && pnpm maker export 1889 --format pdf --paginated
+pnpm build && pnpm maker export 1889 --format pdf
 ```
+
+The map, market, par and revenue pdfs also come as a paginated pdf (`-paginated`)
+when they do not fit on one page of your paper.
 
 `pnpm maker print 1889` is the same thing (the game defaults to `1889`). Other
 useful options are `--docs map,cards` to only export some pages, `--layouts all`
@@ -59,10 +61,9 @@ three files at the same time. `pnpm maker help export` lists them all.
 Every one of these options can also be set in the game file, in its `exports`
 field (see [Export options](/docs/games/exports)). The game file has the
 defaults for that game, and what you give on the command line wins over it. For
-example, with `"exports": { "docs": ["map"], "paginated": true }` in the game,
-`pnpm maker export my-game.json` exports only the paginated and normal map, and
-`pnpm maker export my-game.json --docs cards` exports the cards instead, and
-`--no-paginated` leaves out the paginated pdfs the game file asks for. The
+example, with `"exports": { "docs": ["map"] }` in the game,
+`pnpm maker export my-game.json` exports only the map, and
+`pnpm maker export my-game.json --docs cards` exports the cards instead. The
 _Export options_ panel has the same options as controls, starting with the game
 file's, and a button to go back to them.
 
@@ -90,7 +91,6 @@ render
     ├── shikoku-1889-map.pdf
     ├── shikoku-1889-market-paginated.pdf
     ├── shikoku-1889-market.pdf
-    ├── shikoku-1889-par-paginated.pdf
     ├── shikoku-1889-par.pdf
     ├── shikoku-1889-revenue-paginated.pdf
     ├── shikoku-1889-revenue.pdf
@@ -108,5 +108,5 @@ if it was used wrong, a game does not exist or the site has not been built.
 If you want to build all games at once you can run:
 
 ```bash
-pnpm build && pnpm maker export --all --format pdf --paginated
+pnpm build && pnpm maker export --all --format pdf
 ```

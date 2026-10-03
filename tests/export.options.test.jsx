@@ -119,9 +119,6 @@ describe("export options", () => {
     expect(author).toHaveValue("Christopher Giroir");
     await user.clear(author);
     await user.type(author, "Me");
-    await user.click(
-      within(panel).getByRole("switch", { name: "Paginated pdfs" }),
-    );
     await user.click(checkbox(panel, "Cards"));
     await user.click(
       within(panel).getByRole("button", { name: "Choose folder" }),
@@ -130,6 +127,10 @@ describe("export options", () => {
       await within(panel).findByText("/home/me/boxes"),
     ).toBeInTheDocument();
 
+    // Paginated pdfs are not an option
+    expect(
+      within(panel).queryByRole("switch", { name: "Paginated pdfs" }),
+    ).not.toBeInTheDocument();
     await user.click(exportButton(panel));
 
     await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
@@ -148,8 +149,9 @@ describe("export options", () => {
     const names = request.jobs.map(({ path }) => path);
     expect(names).toContain("18test-map.pdf");
     expect(names).toContain("18test-map.png");
-    // No paginated pdfs and no cards
-    expect(names.some((name) => name.includes("paginated"))).toBe(false);
+    // A paginated pdf of what does not fit on one page, and no cards
+    expect(names).toContain("18test-map-paginated.pdf");
+    expect(names).not.toContain("18test-par-paginated.pdf");
     expect(names.some((name) => name.includes("card"))).toBe(false);
     // The panel closes when the export is over
     await waitFor(() =>

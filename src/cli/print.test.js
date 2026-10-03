@@ -83,7 +83,6 @@ describe("print", () => {
         "18test-market.pdf",
         "18test-market-paginated.pdf",
         "18test-par.pdf",
-        "18test-par-paginated.pdf",
         "18test-revenue.pdf",
         "18test-revenue-paginated.pdf",
         "18test-tile-manifest.pdf",
