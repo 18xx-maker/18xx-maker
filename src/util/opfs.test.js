@@ -93,6 +93,39 @@ describe("internal games in OPFS", () => {
     });
   });
 
+  it("writes through a worker when createWritable is unavailable", async () => {
+    const original = storage.root.getDirectoryHandle;
+    storage.root.getDirectoryHandle = async (...args) => {
+      const dir = await original(...args);
+      const getFileHandle = dir.getFileHandle;
+      dir.getFileHandle = async (...a) => {
+        const handle = await getFileHandle(...a);
+        delete handle.createWritable;
+        return handle;
+      };
+      return dir;
+    };
+    const posted = [];
+    class FakeWorker {
+      postMessage(data) {
+        posted.push(data);
+        queueMicrotask(() => this.onmessage({ data: null }));
+      }
+      terminate() {}
+    }
+    vi.stubGlobal("Worker", FakeWorker);
+    URL.createObjectURL = vi.fn(() => "blob:x");
+    URL.revokeObjectURL = vi.fn();
+
+    const slug = await saveGameFile(JSON.stringify(game));
+
+    expect(posted).toHaveLength(1);
+    expect(posted[0].filename).toBe(`${slug.split(":")[1]}.json`);
+    expect(new TextDecoder().decode(posted[0].buffer)).toBe(
+      JSON.stringify(game),
+    );
+  });
+
   it("lists summaries of saved games by slug", async () => {
     const slug = await saveGameFile(JSON.stringify(game));
     const id = slug.split(":")[1];
