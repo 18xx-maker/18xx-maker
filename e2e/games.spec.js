@@ -18,7 +18,7 @@ test("the app nav reaches the games list and the docs", async ({ page }) => {
 });
 
 // Game pages pick their section from the toolbar's select, whose options are
-// prefixed with their keyboard shortcut ("2:Tiles")
+// prefixed with their keyboard shortcut ("4:Tiles")
 const goToSection = async (page, label) => {
   await page.getByRole("combobox", { name: "Game Section" }).click();
   await page.getByRole("option", { name: new RegExp(`${label}$`) }).click();
