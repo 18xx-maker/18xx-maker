@@ -33,9 +33,10 @@ export const getSingleCardData = (cards, paper) => {
 export const getSingleCharterData = (charters, paper) =>
   getCharterData({ ...charters, cutlines: 0, bleed: 0, border: 0 }, paper);
 
-// The size of the full width charter, minor charters can be shorter
-export const getCharterSize = (data, minor) => ({
-  width: data.totalWidth,
+// The size of the charter: full width unless it is drawn at half width (see
+// charterHalfWidth), minor charters can be shorter
+export const getCharterSize = (data, minor, halfWidth = false) => ({
+  width: halfWidth ? data.totalHalfWidth : data.totalWidth,
   height: minor ? data.totalMinorHeight : data.totalHeight,
 });
 

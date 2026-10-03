@@ -21,6 +21,7 @@ import Svg from "@/components/Svg";
 import { useConfig, useGame } from "@/hooks";
 import { getCharterData } from "@/util";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
+import { charterHalfWidth } from "@/util/companyTrains";
 
 const isMinor = prop("minor");
 const isMajor = compose(not, prop("minor"));
@@ -186,7 +187,7 @@ const Charters = () => {
             fontSize={company.fontSize || game.info.companyFontSize}
             fontWeight={company.fontWeight || game.info.companyFontWeight}
             fontStyle={company.fontStyle || game.info.companyFontStyle}
-            halfWidth={charters.halfWidth}
+            halfWidth={charterHalfWidth(charters, !!company.minor)}
           />
         ) : (
           <div
@@ -245,7 +246,7 @@ const Charters = () => {
                   fontSize={company.fontSize || game.info.companyFontSize}
                   fontWeight={company.fontWeight || game.info.companyFontWeight}
                   fontStyle={company.fontStyle || game.info.companyFontStyle}
-                  halfWidth={data.layout === "3x2"}
+                  halfWidth={charterHalfWidth(charters, !!company.minor)}
                 />
               ) : (
                 <div
@@ -294,7 +295,7 @@ const Charters = () => {
                 fontSize={company.fontSize || game.info.companyFontSize}
                 fontWeight={company.fontWeight || game.info.companyFontWeight}
                 fontStyle={company.fontStyle || game.info.companyFontStyle}
-                halfWidth={data.layout !== "3x1"}
+                halfWidth={charterHalfWidth(charters, !!company.minor)}
               />
             ),
             minorCompanies,

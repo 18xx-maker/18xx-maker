@@ -140,7 +140,7 @@ Gesellschaft auf. Jeder Eintrag ist eines von:
 - eine Referenz mit Anzahl (`{ "name": "4", "quantity": 2 }`), mehrere Kopien
   eines Zugs des Spiels,
 - ein vollständiger Zug (die Felder oben) mit optionalem `quantity` (Standard
-  1). Verwende `print` statt dessen, wenn die Anzahl "∞" ist.
+  1). Verwende `print` stattdessen, wenn die Anzahl "∞" ist.
 
 Namen, die das Spiel nicht kennt, werden übersprungen. Das sind zusätzliche
 Kopien zu `quantity` in den `trains` des Spiels, und sie ändern die

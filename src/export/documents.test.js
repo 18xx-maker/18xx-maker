@@ -105,6 +105,21 @@ describe("documents", () => {
     expect(byId(docs, "charters/14").size.heightIn).toBe(3.5);
   });
 
+  it("sizes the minor charters of 3x1minors at half width", () => {
+    const docs = list(
+      {},
+      {
+        charters: {
+          ...loadGameConfig(loadGame("18Test")).charters,
+          layout: "3x1minors",
+        },
+      },
+    );
+    const major = byId(docs, "charters/0").size;
+    const minor = byId(docs, "charters/14").size;
+    expect(minor.widthIn).toBeCloseTo(major.widthIn / 2, 5);
+  });
+
   it("only gives the background to the map, market, par, revenue and tile manifest", () => {
     const pngs = docs.filter((doc) => doc.formats.includes("png"));
     expect(

@@ -1,7 +1,7 @@
 import { flatten, map, range } from "ramda";
 
 import { applyCompanyOverrides } from "../util/companyOverrides.js";
-import { cardCompanyTrains } from "../util/companyTrains.js";
+import { cardCompanyTrains, charterHalfWidth } from "../util/companyTrains.js";
 import {
   addPaginationData,
   compileCompanies,
@@ -289,7 +289,13 @@ export const documents = (game, config, data) => {
       id: `charters/${i}`,
       kind: "charter",
       route: `charters/${i}`,
-      size: inches(getCharterSize(charterData, !!company.minor)),
+      size: inches(
+        getCharterSize(
+          charterData,
+          !!company.minor,
+          charterHalfWidth(config.charters, !!company.minor),
+        ),
+      ),
       basename: `charter-${i + 1}-${safeName(company.abbrev)}`,
     }),
   );

@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useLayoutEffect, useRef } from "react";
 
 import { addIndex, chain, map } from "ramda";
 
@@ -14,6 +14,8 @@ import { useConfig } from "@/hooks";
 import { multiDefaultTo, unitsToCss } from "@/util";
 import { companyTrains } from "@/util/companyTrains";
 import { getSingleCardData } from "@/util/sizes";
+
+const MIN_CARD_SCALE = 0.2;
 
 const Charter = ({
   name,
@@ -52,6 +54,25 @@ const Charter = ({
   const cardData = ownTrains.length
     ? getSingleCardData(config.cards, config.paper)
     : null;
+
+  // The cards share the trains box with the phase chart. Shrink them until
+  // they fit above it, so they never print over the chart.
+  const cardsRef = useRef(null);
+  useLayoutEffect(() => {
+    const cards = cardsRef.current;
+    if (!cards) return;
+    cards.style.removeProperty("--train-card-scale");
+    let scale = parseFloat(
+      getComputedStyle(cards).getPropertyValue("--train-card-scale"),
+    );
+    while (
+      cards.scrollHeight > cards.clientHeight + 0.5 &&
+      scale > MIN_CARD_SCALE
+    ) {
+      scale = Math.max(MIN_CARD_SCALE, scale - 0.025);
+      cards.style.setProperty("--train-card-scale", scale);
+    }
+  });
 
   // Hide section labels for things we don't want on a company
   const showTrains = company.trains !== false;
@@ -226,6 +247,7 @@ const Charter = ({
                     {showTrains && "Trains"}
                     {cardData && (
                       <div
+                        ref={cardsRef}
                         className={[
                           "charter__traincards",
                           config.charters.trainCardBorder &&
