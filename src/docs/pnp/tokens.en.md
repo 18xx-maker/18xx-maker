@@ -70,7 +70,7 @@ sheet. This is expected behavior.
 }
 ```
 
-![Tokens laid out on a sheet](/images/tokens-example.png)
+![Sheet of round company tokens: large market tokens with their reverse sides, and smaller station tokens](/images/tokens-example.png "Each company gets a market token, its reverse side and station tokens.")
 
 ## PnP Advice
 

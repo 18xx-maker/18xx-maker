@@ -47,7 +47,7 @@ In der [App](https://github.com/18xx-maker/18xx-maker/releases) gibt es auf
 jeder Spielseite oben links in der Werkzeugleiste eine Schaltfläche (neben dem
 Schalter „Auf Seiten aufteilen“):
 
-![Die Werkzeugleiste einer Spielseite mit der Export-Schaltfläche](/images/export-button.png)
+![Werkzeugleiste einer Spielseite mit beschrifteten Elementen: Zurück, Konfiguration, Seite, Export und Seitenaufteilung](/images/export-button-light.png "Die Werkzeugleiste oben links auf jeder Spielseite in der App. Der Export-Button ist eingekreist.")
 
 Ihr Menü enthält diese Einträge:
 
@@ -135,25 +135,8 @@ Moment eine Frage im [Discord](https://discord.gg/gcYvAjYYfw).
 ## Tastenkürzel
 
 Wenn du 18xx Maker über die Website oder die App verwendest, stehen diese
-Tastenkürzel zur Verfügung:
+Tastenkürzel zur Verfügung (drücke irgendwo `?`, um sie in einem Popup zu sehen):
 
-| Taste                 | Verwendung                                                      | Hinweise                                                                                    |
-| --------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `a`                   | Zur Atoms-Seite wechseln                                        | Nicht auf der Bearbeitungsseite eines Spiels                                                |
-| `c`                   | Zur Logos-Seite wechseln                                        | Nicht auf der Bearbeitungsseite eines Spiels. Schaltet beim Bearbeiten die Einstellungen um |
-| `e`                   | Das geladene Spiel im ersten Abschnitt bearbeiten               | Auf der Bearbeitungsseite zurück zur Spielseite                                             |
-| `m`, `1` bis `9`, `0` | Das geladene Spiel an der Karte oder einem Abschnitt bearbeiten | Nur wenn ein Spiel geladen ist                                                              |
-| `Esc`                 | Zurück zur Spielseite                                           | Nur auf der Bearbeitungsseite eines Spiels                                                  |
-| `g`                   | Zur Spielseite wechseln                                         | Nur wenn ein Spiel geladen ist                                                              |
-| `h`                   | Zur Startseite wechseln                                         |                                                                                             |
-| `l`                   | Zur Seite „Spiele laden“ wechseln                               |                                                                                             |
-| `o`                   | Eine neue Spieldatei von deinem System öffnen                   |                                                                                             |
-| `r`                   | Das aktuelle Spiel aus dem Dateisystem neu laden                | Nur im Web. Nur in unterstützten Browsern.                                                  |
-| `t`                   | Zur Plättchen-Seite wechseln                                    | Nicht auf der Bearbeitungsseite eines Spiels                                                |
-| `u`                   | Zur Seite „App-Informationen“ wechseln                          | Nur in der App.                                                                             |
-| `v`                   | Die Ansicht des Karten- oder Aktienmarkt-Editors zurücksetzen   | Nur auf den Bearbeitungsseiten von Karte und Aktienmarkt                                    |
-| `x`                   | Das Exportmenü öffnen                                           | Nur in der App. Wechselt zum geladenen Spiel.                                               |
-| `?`                   | Zur Hilfeseite wechseln                                         |                                                                                             |
+```keybindings
 
-Bei geöffnetem Exportmenü: `p` exportiert PDFs, `n` exportiert PNGs, `b`
-exportiert eine Board18-Datei und `o` öffnet die Exportoptionen.
+```

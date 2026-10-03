@@ -175,6 +175,22 @@ and Simplified Chinese (`zh`) are AI-generated and kept in step with English.
 - The translation notice in `translation.<lang>.md` must keep saying these are
   machine translations and that fixes are welcome.
 
+## Docs screenshots
+
+Images in `src/docs` live in `public/images`.
+
+- Every image has descriptive alt text and a caption: `![alt](/images/x.png "caption")`.
+  A titled image renders as a rounded, bordered figure (`DocImage` in
+  `src/components/Markdown.jsx`); never put the caption in the alt text.
+- Annotate where it clarifies (circle the control, label parts with arrows,
+  one label per thing, nothing overlapping). Crop to whole objects, never cut
+  tokens or hexes at the edge.
+- UI screenshots come in a theme pair, `<name>-light.png` and
+  `<name>-dark.png`; reference the `-light.png` and the renderer swaps by
+  theme. Capture them from the real app (Playwright, 2x) and keep the app's own
+  transparent-square background across the whole image, including under the
+  labels; do not pad with a flat color.
+
 ## Commit messages
 
 release-please builds releases and the changelog from commit subjects, so every

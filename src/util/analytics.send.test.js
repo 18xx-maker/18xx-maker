@@ -72,4 +72,22 @@ describe("sending analytics in production", () => {
       url: "https://18xx-maker.com/games/slug/map?config=true",
     });
   });
+
+  it("sends the language part of the current language with pageviews and events", async () => {
+    const analytics = await importAnalytics();
+    const { default: i18n } = await import("i18next");
+    await i18n.init({ lng: "fr-CA", resources: {} });
+
+    analytics.trackPageview({ pathname: "/games", search: "" });
+    analytics.trackEvent("refresh", { pathname: "/games", search: "" });
+
+    expect(track).toHaveBeenNthCalledWith(1, "pageview", {
+      props: { interface: "site", language: "fr" },
+      url: "https://18xx-maker.com/games",
+    });
+    expect(track).toHaveBeenNthCalledWith(2, "refresh", {
+      props: { interface: "site", language: "fr" },
+      url: "https://18xx-maker.com/games",
+    });
+  });
 });

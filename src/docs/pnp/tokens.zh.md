@@ -49,7 +49,7 @@
 }
 ```
 
-![Tokens laid out on a sheet](/images/tokens-example.png)
+![圆形公司标记的页面:大的股市标记及其背面,以及较小的车站标记](/images/tokens-example.png "每家公司都有一个股市标记、它的背面和车站标记。")
 
 ## 自制建议
 

@@ -86,6 +86,12 @@
       "system": "System",
       "light": "Hell",
       "dark": "Dunkel"
+    },
+    "language": {
+      "title": "Sprache",
+      "system": "System",
+      "detected": "Erkannte Sprache: {{language}}",
+      "unavailable": "Erkannte Sprache: {{language}} (nicht verfügbar, verwende {{fallback}})"
     }
   },
   "app": {
@@ -737,5 +743,74 @@
     "next": "Weiter",
     "nextPage": "Zur nächsten Seite",
     "morePages": "Weitere Seiten"
+  },
+  "shortcuts": {
+    "title": "Tastenkürzel",
+    "description": "Tasten, die überall in 18xx Maker funktionieren",
+    "key": "Taste",
+    "use": "Verwendung",
+    "notes": "Hinweise",
+    "exportMenu": "Bei geöffnetem Exportmenü: p exportiert PDFs, n exportiert PNGs, b exportiert eine Board18-Datei und o öffnet die Exportoptionen.",
+    "keys": {
+      "escape": {
+        "use": "Zurück: schließt zuerst das Konfigurationspanel, verlässt dann die Bearbeitungsseite und wechselt zur Spielseite, dann zur Startseite",
+        "notes": "Tut auf der Startseite nichts"
+      },
+      "docs": {
+        "use": "Zur Dokumentation wechseln (18xx Maker verwenden)"
+      },
+      "help": {
+        "use": "Diese Tastenkürzel anzeigen"
+      },
+      "home": {
+        "use": "Zur Startseite wechseln"
+      },
+      "load": {
+        "use": "Zur Seite „Spiele laden“ wechseln"
+      },
+      "open": {
+        "use": "Eine neue Spieldatei von deinem System öffnen"
+      },
+      "refresh": {
+        "use": "Das aktuelle Spiel aus dem Dateisystem neu laden",
+        "notes": "Nur im Web. Nur in unterstützten Browsern."
+      },
+      "atoms": {
+        "use": "Zur Atome-Seite wechseln",
+        "notes": "Nicht auf der Bearbeitungsseite eines Spiels"
+      },
+      "tiles": {
+        "use": "Zur Plättchen-Seite wechseln",
+        "notes": "Nicht auf der Bearbeitungsseite eines Spiels"
+      },
+      "logos": {
+        "use": "Zur Logos-Seite wechseln",
+        "notes": "Nicht auf der Bearbeitungsseite eines Spiels. Schaltet beim Bearbeiten die Konfiguration um"
+      },
+      "game": {
+        "use": "Zur Spielseite wechseln",
+        "notes": "Nur wenn ein Spiel geladen ist"
+      },
+      "edit": {
+        "use": "Das geladene Spiel im ersten Abschnitt bearbeiten",
+        "notes": "Auf der Bearbeitungsseite zurück zur Spielseite"
+      },
+      "section": {
+        "use": "Das geladene Spiel an der Karte oder einem Abschnitt bearbeiten",
+        "notes": "Nur wenn ein Spiel geladen ist"
+      },
+      "view": {
+        "use": "Die Ansicht des Karten- oder Aktienmarkt-Editors zurücksetzen",
+        "notes": "Nur auf den Bearbeitungsseiten von Karte und Aktienmarkt"
+      },
+      "export": {
+        "use": "Das Exportmenü öffnen",
+        "notes": "Nur in der App. Wechselt zum geladenen Spiel."
+      },
+      "app": {
+        "use": "Zur Seite „App-Informationen“ wechseln",
+        "notes": "Nur in der App."
+      }
+    }
   }
 }

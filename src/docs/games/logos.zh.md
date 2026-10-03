@@ -14,10 +14,10 @@
 
 下面是一些示例,依次为 `none`、`original`、`match` 和 `main`:
 
-![none](/images/company-none.png)
-![original](/images/company-original.png)
-![match](/images/company-match.png)
-![main](/images/company-main.png)
+![带有文字 KO 的紫色公司标记](/images/company-none.png "none")
+![白色圆形上的公司标志](/images/company-original.png "original")
+![使用主题颜色重新着色的公司标志](/images/company-match.png "match")
+![使用主题颜色和公司颜色重新着色的公司标志](/images/company-main.png "main")
 
 ## 创建 SVG 文件
 

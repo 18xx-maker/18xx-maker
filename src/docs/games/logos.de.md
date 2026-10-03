@@ -24,10 +24,10 @@ vier Einstellungen:
 
 Hier ein paar Beispiele: `none`, `original`, `match` und zuletzt `main`:
 
-![none](/images/company-none.png)
-![original](/images/company-original.png)
-![match](/images/company-match.png)
-![main](/images/company-main.png)
+![Ein violetter Gesellschaftstoken mit dem Text KO](/images/company-none.png "none")
+![Das Gesellschaftslogo auf einem weißen Kreis](/images/company-original.png "original")
+![Das Gesellschaftslogo in den Farben des Farbschemas](/images/company-match.png "match")
+![Das Gesellschaftslogo in den Farben des Farbschemas und der Gesellschaftsfarbe](/images/company-main.png "main")
 
 ## SVG-Dateien erstellen
 

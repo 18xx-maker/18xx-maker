@@ -10,6 +10,7 @@ import { remarkAlert } from "remark-github-blockquote-alert";
 import { dissoc, startsWith } from "ramda";
 
 import Code from "@/components/Code";
+import Shortcuts from "@/components/Shortcuts";
 
 import { cn } from "@/lib/utils";
 import capability from "@/util/capability";
@@ -17,28 +18,60 @@ import rehypeHeadingIds from "@/util/headingIds";
 
 const clean = dissoc("node");
 
-const ElectronImage = (props) => {
-  // Images sit inline and left aligned (Tailwind would make them blocks). A
-  // page can float them with its own className (see Home).
-  const className = "inline max-w-full";
-  if (capability.electron) {
-    return (
-      <img
-        alt={props.title || props.src}
-        {...clean(props)}
-        src={`.${props.src}`}
-        className={className}
-      />
-    );
-  }
-
-  return (
+// Images sit inline and left aligned (Tailwind would make them blocks). A page
+// can float them with its own className (see Home). An image with a title
+// becomes a figure: the title is its caption and the alt text stays the alt.
+// A screenshot of the UI named `<name>-light.png` has a `<name>-dark.png`
+// twin, and the one matching the current theme is shown.
+const DocImage = (props) => {
+  const { title, alt, src, ...rest } = clean(props);
+  const path = (file) => (capability.electron ? `.${file}` : file);
+  const image = (file, extra) => (
     <img
-      className={className}
-      alt={props.title || props.src}
-      {...clean(props)}
+      alt={alt}
+      {...rest}
+      src={path(file)}
+      className={cn(
+        "max-w-full",
+        title ? "rounded-lg border bg-white" : "inline",
+        extra,
+      )}
     />
   );
+  const themed = src.endsWith("-light.png");
+  const img = themed ? (
+    <>
+      {image(src, "dark:hidden")}
+      {image(src.replace(/-light\.png$/, "-dark.png"), "hidden dark:inline")}
+    </>
+  ) : (
+    image(src)
+  );
+
+  if (!title) return img;
+
+  return (
+    <figure className="m-0 inline-block max-w-full align-top">
+      {img}
+      <figcaption className="mt-2 max-w-prose text-sm text-muted-foreground">
+        {title}
+      </figcaption>
+    </figure>
+  );
+};
+
+// A figure is not allowed inside a paragraph
+const Paragraph = ({ node, ...props }) => {
+  const figure = node?.children?.some(
+    (child) => child.tagName === "img" && child.properties?.title,
+  );
+  return createElement(figure ? "div" : "p", {
+    ...clean(props),
+    className: clsx(
+      "leading-7 not-first:mt-6",
+      figure && "flex flex-wrap items-start gap-4",
+    ),
+  });
 };
 
 const LocalLink = (props) => {
@@ -115,10 +148,10 @@ const components = {
     "scroll-m-20 text-md font-semibold tracking-tight not-first:mt-6",
   ),
   div: md("div", "leading-7 not-first:mt-6"),
-  p: md("p", "leading-7 not-first:mt-6"),
+  p: Paragraph,
   ul: md("ul", "my-6 ml-6 list-disc [&>li]:mt-2"),
   a: LocalLink,
-  img: ElectronImage,
+  img: DocImage,
   table: md("table", "w-full"),
   tr: md("tr", "m-0 border-t p-0 even:bg-muted"),
   th: md(
@@ -129,10 +162,16 @@ const components = {
     "td",
     "border px-4 py-2 text-left [[align=center]]:text-center [[align=right]]:text-right",
   ),
-  pre: md("pre", ""),
+  pre: (props) =>
+    props.children?.props?.className === "language-keybindings"
+      ? props.children
+      : createElement("pre", clean(props)),
   code: (props) => {
     const { children, className, ...rest } = props;
     const match = /language-(\w+)/.exec(className || "");
+
+    // The keybindings come from the same list as the ? dialog
+    if (match?.[1] === "keybindings") return <Shortcuts />;
 
     if (match) {
       return (

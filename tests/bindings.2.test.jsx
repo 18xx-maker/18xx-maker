@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/react";
+import { screen, waitFor, within } from "@testing-library/react";
 
 import { games } from "@/data";
 
@@ -93,5 +93,77 @@ describe("e key", () => {
 
     await user.keyboard("e");
     expect(router.state.location.pathname).toBe("/games/t/tiles");
+  });
+});
+
+describe("shortcuts dialog", () => {
+  it("? opens it from anywhere, ? or esc closes it and other keys wait", async () => {
+    const { user, router } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.keyboard("?");
+    const dialog = await screen.findByRole("dialog");
+    expect(within(dialog).getByText("Keyboard shortcuts")).toBeInTheDocument();
+    expect(
+      within(dialog).getByText("Navigate to the Home page"),
+    ).toBeInTheDocument();
+
+    await user.keyboard("h");
+    expect(router.state.location.pathname).toBe("/games/18Test/map");
+
+    await user.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+    expect(router.state.location.pathname).toBe("/games/18Test/map");
+
+    await user.keyboard("??");
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+  });
+
+  it("is the same list the docs show", async () => {
+    renderApp("/docs");
+    const docs = await screen.findByTestId("docs-index");
+    expect(
+      within(docs).getByText("Navigate to the Home page"),
+    ).toBeInTheDocument();
+  });
+});
+
+describe("esc and d", () => {
+  it("d goes to the first docs page", async () => {
+    const { user, router } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.keyboard("d");
+    expect(router.state.location.pathname).toBe("/docs");
+  });
+
+  it("a run of esc closes config, leaves the editor, then goes home", async () => {
+    const { user, router } = renderApp("/games/18Test/map?config=true");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.keyboard("{Escape}");
+    expect(router.state.location.pathname).toBe("/games/18Test/map");
+    expect(router.state.location.search).toBe("");
+
+    await user.keyboard("{Escape}");
+    expect(router.state.location.pathname).toBe("/games/18Test");
+
+    await user.keyboard("{Escape}");
+    expect(router.state.location.pathname).toBe("/");
+
+    await user.keyboard("{Escape}");
+    expect(router.state.location.pathname).toBe("/");
+  });
+
+  it("esc goes home from other pages", async () => {
+    const { user, router } = renderApp("/elements/tiles");
+    await screen.findByTestId("tiles");
+
+    await user.keyboard("{Escape}");
+    expect(router.state.location.pathname).toBe("/");
   });
 });

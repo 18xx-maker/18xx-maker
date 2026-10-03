@@ -44,7 +44,7 @@ When using the [app](https://github.com/18xx-maker/18xx-maker/releases) there is
 a button in the toolbar at the top left of every game page (the one next to the
 Paginate switch):
 
-![The toolbar of a game page with the export button](/images/export-button.png)
+![Toolbar of a game page with the back, config, page, export and paginate controls labeled](/images/export-button-light.png "The toolbar at the top left of every game page in the app. The export button is circled.")
 
 Its menu has these entries:
 
@@ -125,25 +125,8 @@ or map hex. The second best resource right now is asking in the
 ## Keybindings
 
 When using 18xx Maker from the website or the app the following keybindings are
-available:
+available (press `?` anywhere to see them in a popup):
 
-| Key                  | Use                                           | Notes                                                |
-| -------------------- | --------------------------------------------- | ---------------------------------------------------- |
-| `a`                  | Navigate to the Atoms page                    | Not on a game edit page                              |
-| `c`                  | Navigate to the Logos page                    | Not on a game edit page. Toggles config when editing |
-| `e`                  | Edit the loaded game at its first section     | On a game edit page, goes back to the game page      |
-| `m`, `1` to `9`, `0` | Edit the loaded game at the map or a section  | Only if you have a game loaded                       |
-| `Esc`                | Go back to the game page                      | Only on a game edit page                             |
-| `g`                  | Navigate to the Game page                     | Only if you have a game loaded                       |
-| `h`                  | Navigate to the Home page                     |                                                      |
-| `l`                  | Navigate to the Load Game page                |                                                      |
-| `o`                  | Open a new game file from your system         |                                                      |
-| `r`                  | Refresh the current game from the file system | Web only. Only on supported browsers.                |
-| `t`                  | Navigate to the Tiles page                    | Not on a game edit page                              |
-| `u`                  | Navigate to the App Info page                 | App only.                                            |
-| `v`                  | Reset the view of the map or market editor    | Only on the map and market edit pages                |
-| `x`                  | Open the export menu                          | App only. Goes to the loaded game.                   |
-| `?`                  | Navigate to the Help page                     |                                                      |
+```keybindings
 
-With the export menu open: `p` exports PDFs, `n` exports PNGs, `b` exports a
-Board18 file and `o` opens the export options.
+```

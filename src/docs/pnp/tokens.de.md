@@ -76,7 +76,7 @@ eingestellt hast. Das ist beabsichtigt.
 }
 ```
 
-![Token auf einem Bogen angeordnet](/images/tokens-example.png)
+![Bogen mit runden Gesellschaftstokens: große Marktmarker mit ihren Rückseiten und kleinere Bahnhofstoken](/images/tokens-example.png "Jede Gesellschaft bekommt einen Marktmarker, dessen Rückseite und Bahnhofstoken.")
 
 ## Tipps für Print and Play
 

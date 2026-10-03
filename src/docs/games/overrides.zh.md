@@ -14,4 +14,4 @@
 
 下面是 1832 亚特兰大(Atlanta)地图六边格使用语言列表中 Ruby 和 Python 替换后的示例:
 
-![ruby and python in Atlanta](/images/ruby-and-python-in-atlanta.png)
+![1832 的亚特兰大六边格,一座城市上是 Ruby 标志,另一座城市上是 Python 标志](/images/ruby-and-python-in-atlanta.png "使用 Ruby 和 Python 替换后的 1832 亚特兰大。")

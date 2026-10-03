@@ -29,7 +29,7 @@ in einem einzigen Rand gemischt werden:
 Hier sind zwei der Flüsse aus der Karte von 1867 (die vollständige Karte hat
 mehr):
 
-![Borders drawn on a map](/images/borders-example.png)
+![Zwei blaue Flussgrenzen entlang der Kanten beiger Kartenfelder](/images/borders-example.png "Grenzen folgen den Kanten und Ecken von Kartenfeldern, statt zu einem einzelnen Feld zu gehören.")
 
 ```json
 {

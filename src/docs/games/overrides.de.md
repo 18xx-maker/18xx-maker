@@ -31,4 +31,4 @@ hinzu, sonst wird die Konfiguration nicht validiert.
 Hier ein Beispiel für das Kartenfeld Atlanta der 1832-Karte mit den
 Ersetzungen Ruby und Python aus der Liste der Programmiersprachen:
 
-![ruby and python in Atlanta](/images/ruby-and-python-in-atlanta.png)
+![Das Kartenfeld Atlanta aus 1832 mit einem Ruby-Logo auf der einen und einem Python-Logo auf der anderen Stadt](/images/ruby-and-python-in-atlanta.png "Atlanta in 1832 mit den Ruby- und Python-Ersetzungen.")

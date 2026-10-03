@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router";
 
 import { compose } from "ramda";
@@ -13,11 +13,13 @@ import Analytics from "@/components/Analytics";
 import RenderState from "@/components/RenderState";
 import ScrollToTop from "@/components/ScrollToTop";
 import SetSvgColors from "@/components/SetSvgColors";
+import { ShortcutsDialog } from "@/components/Shortcuts";
 import AppSidebar from "@/components/nav/AppSidebar";
 import Header from "@/components/nav/Header";
 
 import { ThemeProvider } from "@/context/ThemeProvider";
 import { useBindings, useEditor } from "@/hooks";
+import { detectedLanguage } from "@/locales/language";
 import {
   createAlert,
   createDownloadPercent,
@@ -25,6 +27,7 @@ import {
   createSetGame,
   createUpdate,
 } from "@/state";
+import { selectLanguage } from "@/state/selectors";
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import * as opfs from "@/util/opfs";
@@ -38,6 +41,14 @@ const Root = () => {
   const [print] = useBooleanParam("print");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { i18n } = useTranslation();
+  const language = useSelector(selectLanguage);
+
+  // The language setting overrides the system one; without it follow the
+  // system
+  useEffect(() => {
+    i18n.changeLanguage(language ?? detectedLanguage());
+  }, [i18n, language]);
 
   const getEventFileHandle = (event) => {
     if (event.dataTransfer.items) {
@@ -136,7 +147,7 @@ body {
     }
   }, [dispatch, navigate, render, t]);
 
-  useBindings();
+  const [shortcuts, setShortcuts] = useBindings();
   const inEditor = useEditor();
 
   return (
@@ -202,7 +213,14 @@ body {
             </defs>
           </svg>
           <SetSvgColors />
-          {render ? <RenderState /> : <Alert />}
+          {render ? (
+            <RenderState />
+          ) : (
+            <>
+              <Alert />
+              <ShortcutsDialog open={shortcuts} onOpenChange={setShortcuts} />
+            </>
+          )}
         </ScrollToTop>
         <style>{printCss}</style>
       </ThemeProvider>
