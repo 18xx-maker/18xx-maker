@@ -30,30 +30,37 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
     setInternalValue(value / allUnits[units]);
   }, [value, units]);
 
+  // Typing only edits the text. The value is applied on blur or Enter, so a
+  // half typed number (or an empty field) never reaches the config
   let handler = (event) => {
-    setInternalValue(event.target.value);
+    const text = event.target.value;
+    setInternalValue(text);
 
-    // An empty field is not a 0, wait until something is typed
-    if (event.target.value.trim() === "") {
-      if (error) {
-        setError(false);
-      }
+    const failed = text.trim() !== "" && Number.isNaN(Number(text));
+    if (failed !== error) {
+      setError(failed);
+    }
+  };
+
+  let commit = () => {
+    const text = `${internalValue}`;
+    if (text.trim() === "" || Number.isNaN(Number(text))) {
+      // Nothing usable was typed, go back to the current value
+      setInternalValue(value / allUnits[units]);
+      setError(false);
       return;
     }
 
-    let numberValue = Number(event.target.value);
-    if (Number.isNaN(numberValue)) {
-      if (!error) {
-        setError(true);
-      }
-      return;
-    } else {
-      if (error) {
-        setError(false);
-      }
+    const numberValue = Number(text) * allUnits[units];
+    if (numberValue !== value) {
+      onChange(numberValue);
     }
+  };
 
-    onChange(numberValue * allUnits[units]);
+  let keyHandler = (event) => {
+    if (event.key === "Enter") {
+      commit();
+    }
   };
 
   let unitsHandler = (newValue) => {
@@ -76,6 +83,8 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
           name={name}
           value={internalValue}
           onChange={handler}
+          onBlur={commit}
+          onKeyDown={keyHandler}
           className={numberClassName}
         />
         <Select onValueChange={unitsHandler} value={units}>

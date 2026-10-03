@@ -21,6 +21,7 @@
 }
 
 .card {
+  --card-padding: 0.125in;
   page-break-inside: avoid;
   font-family: display;
   box-sizing: border-box;

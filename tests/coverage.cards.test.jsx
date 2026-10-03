@@ -282,6 +282,33 @@ describe("Private", () => {
     );
   });
 
+  it("shares the description width between several icons", async () => {
+    const { root } = await mountElement(
+      <Private {...base} icon="meat" token={{ label: "T" }} />,
+    );
+    expect(
+      one(root, ".private__description").style.getPropertyValue(
+        "--private-icons",
+      ),
+    ).toBe("2");
+  });
+
+  it("leaves a single icon at full size", async () => {
+    const { root } = await mountElement(<Private {...base} icon="meat" />);
+    expect(
+      one(root, ".private__description").style.getPropertyValue(
+        "--private-icons",
+      ),
+    ).toBe("");
+  });
+
+  it("marks a revenue box with a background so it can bleed", async () => {
+    const { root } = await mountElement(
+      <Private {...base} revenue={40} revenueBackgroundColor="green" />,
+    );
+    expect(one(root, ".private__revenue--background")).not.toBeNull();
+  });
+
   it("shows a single player count", async () => {
     const { root } = await mountElement(
       <Private {...base} minPlayers={4} maxPlayers={4} />,
@@ -311,6 +338,41 @@ describe("Cards page", () => {
     expect(css).toContain("height: 1.4in");
   });
 
+  it("sets the card padding only when it is changed", async () => {
+    renderApp("/games/18Test/cards?config.cards.layout=free");
+    let page = await screen.findByTestId("game-18Test-cards");
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(page.querySelector("style")).not.toHaveTextContent("--card-padding");
+  });
+
+  it("applies the card padding config", async () => {
+    renderApp("/games/18Test/cards?config.cards.padding=0");
+    const page = await screen.findByTestId("game-18Test-cards");
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(page.querySelector("style")).toHaveTextContent(
+      "--card-padding: 0in",
+    );
+  });
+
+  it("centers a card that has a page to itself", async () => {
+    renderApp(
+      "/games/18Test/cards?config.cards.layout=free&config.cards.width=700&config.cards.height=900&config.cards.cutlines=0&config.cards.bleed=0",
+    );
+    const page = await screen.findByTestId("game-18Test-cards");
+    // eslint-disable-next-line testing-library/no-node-access
+    const cards = page.querySelector(".cards");
+    expect(cards).toHaveStyle({ display: "flex", alignItems: "center" });
+  });
+
+  it("does not crash when a card is too big for the page", async () => {
+    renderApp(
+      "/games/18Test/cards?config.cards.layout=free&config.cards.width=5000&config.cards.height=5000",
+    );
+    const page = await screen.findByTestId("game-18Test-cards");
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(page.querySelector(".card")).not.toBeNull();
+  });
+
   it("adds big private styles when configured", async () => {
     renderApp(
       "/games/18Test/cards?config.privates.style=big&config.cards.layout=free",
@@ -319,7 +381,7 @@ describe("Cards page", () => {
     // eslint-disable-next-line testing-library/no-node-access
     const css = page.querySelector("style").textContent;
     expect(css).toContain(
-      ".private__description {\n  padding: 0 35% 0 0.125in;",
+      ".private__description {\n  padding: 0 35% 0 var(--card-padding);",
     );
     // Free layout has no pins
     // eslint-disable-next-line testing-library/no-node-access

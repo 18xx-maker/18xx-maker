@@ -20,6 +20,13 @@
     "docsPnp": "Print and play",
     "edit": "Edit Game"
   },
+  "routeError": {
+    "title": "Something went wrong",
+    "description": "This page could not be drawn. This is most often caused by saved settings that do not fit together, such as a card that is larger than the page.",
+    "config": "Your saved settings",
+    "download": "Download settings",
+    "reset": "Reset settings to defaults"
+  },
   "refresh": {
     "refresh": "Refresh",
     "description": "Reload the latest version of this file"
@@ -345,18 +352,6 @@
         "label": "Margin Size",
         "description": "How much of a margin exists around the printed item."
       },
-      "cutlines": {
-        "label": "Pagination Cutlines Size",
-        "description": "Set to 0 to disable any cutlines."
-      },
-      "cutlinesOffset": {
-        "label": "Pagination Cutlines Offset",
-        "description": "If your method of cutting has a guide that is slightly off from where it cuts, you can adjust an offset here. Leave at 0 otherwise."
-      },
-      "bleed": {
-        "label": "Pagination Bleed Size",
-        "description": "Set to 0 to disable any bleed. For paginated items this detemines how much map pages overlap to help with cutting errors."
-      },
       "paperWidth": {
         "label": "Paper Width"
       },
@@ -419,7 +414,24 @@
       "roundTracker": {
         "label": "Display Map Round Tracker",
         "description": "Whether or not to show the round tracker on maps. Requires the game file to specify the location."
-      }
+      },
+      "margin": {
+        "label": "Margin Size",
+        "description": "How much of a margin exists around the printed item."
+      },
+      "cutlines": {
+        "label": "Pagination Cutlines Size",
+        "description": "Set to 0 to disable any cutlines."
+      },
+      "cutlinesOffset": {
+        "label": "Pagination Cutlines Offset",
+        "description": "If your method of cutting has a guide that is slightly off from where it cuts, you can adjust an offset here. Leave at 0 otherwise."
+      },
+      "bleed": {
+        "label": "Pagination Bleed Size",
+        "description": "Set to 0 to disable any bleed. For paginated items this detemines how much map pages overlap to help with cutting errors."
+      },
+      "pagination": "**Pagination:** cutlines are the cut marks (set to 0 to disable), the offset adjusts for a cutting guide that is slightly off, margin is the space around the printed item and bleed is how much neighboring pages overlap to help with cutting errors."
     },
     "tiles": {
       "title": "Tiles",
@@ -489,7 +501,24 @@
       "displayRoundTracker": {
         "label": "Display Market Round Tracker",
         "description": "Whether or not to show the round tracker on markets. Requires the game file to specify the location."
-      }
+      },
+      "margin": {
+        "label": "Margin Size",
+        "description": "How much of a margin exists around the printed item."
+      },
+      "cutlines": {
+        "label": "Pagination Cutlines Size",
+        "description": "Set to 0 to disable any cutlines."
+      },
+      "cutlinesOffset": {
+        "label": "Pagination Cutlines Offset",
+        "description": "If your method of cutting has a guide that is slightly off from where it cuts, you can adjust an offset here. Leave at 0 otherwise."
+      },
+      "bleed": {
+        "label": "Pagination Bleed Size",
+        "description": "Set to 0 to disable any bleed. For paginated items this detemines how much map pages overlap to help with cutting errors."
+      },
+      "pagination": "**Pagination:** cutlines are the cut marks (set to 0 to disable), the offset adjusts for a cutting guide that is slightly off, margin is the space around the printed item and bleed is how much neighboring pages overlap to help with cutting errors."
     },
     "charters": {
       "title": "Charters",
@@ -562,6 +591,10 @@
         "label": "DTG Die Padding Size",
         "description": "Set to 0 to disable any padding, or set to a value to have a margin of this amount used as the padding amount per card for printing on the DTG die layout."
       },
+      "padding": {
+        "label": "Card Padding",
+        "description": "How far text and icons on a card are kept from its edges. Lower it to fit content on small cards."
+      },
       "border": {
         "label": "Card Border Size",
         "description": "Set to 0 to disable any border, or set to a value to have a border of that many pixels drawn around the card."
@@ -569,7 +602,8 @@
       "blackBand": {
         "label": "Card Black Band",
         "description": "Whether or not to put a black border against the color section of the share. Only relevent to \"gmt\" and \"left\" shares as well as trains. Always put on white color cards."
-      }
+      },
+      "sizes": "**Width, height, cutlines, bleed, padding and DTG padding** are in the units you choose. Cutlines are the cut marks drawn around each card, bleed is how far the card color extends past the cut edge, padding keeps text and icons away from the card edge, and DTG padding only applies to the DTG die layout. Edits apply when you leave a field or press Enter."
     },
     "privates": {
       "title": "Privates",

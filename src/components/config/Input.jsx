@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import debounce from "lodash.debounce";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
@@ -22,7 +21,7 @@ import { useConfig, useValidation } from "@/hooks";
 import { getPath, getSchema } from "@/util/input";
 
 // Keeps what is typed as text (so "1." and "-" can be typed) and only passes
-// on numbers
+// on a number when the field is left or Enter is pressed
 const NumberInput = ({ value, onChange, ...pass }) => {
   const [text, setText] = useState(`${value}`);
 
@@ -30,12 +29,14 @@ const NumberInput = ({ value, onChange, ...pass }) => {
     setText((text) => (Number(text) === value ? text : `${value}`));
   }, [value]);
 
-  const handler = (event) => {
-    setText(event.target.value);
-
-    const number = Number(event.target.value);
-    if (event.target.value.trim() !== "" && Number.isFinite(number)) {
-      onChange(number);
+  const commit = () => {
+    const number = Number(text);
+    if (text.trim() !== "" && Number.isFinite(number)) {
+      if (number !== value) {
+        onChange(number);
+      }
+    } else {
+      setText(`${value}`);
     }
   };
 
@@ -44,7 +45,9 @@ const NumberInput = ({ value, onChange, ...pass }) => {
       type="number"
       step="any"
       value={text}
-      onChange={handler}
+      onChange={(event) => setText(event.target.value)}
+      onBlur={commit}
+      onKeyDown={(event) => event.key === "Enter" && commit()}
       {...pass}
     />
   );
@@ -66,11 +69,6 @@ const Input = ({
   const className = clsx({ "border-error": error });
 
   let valuePath = getPath(name);
-  let rawUpdateDebounced = debounce(
-    (value) => setConfig(assocPath(valuePath, value, config)),
-    800,
-    { leading: true },
-  );
   let update = (value) => {
     setConfig(assocPath(valuePath, value, config));
   };
@@ -139,7 +137,7 @@ const Input = ({
         name={name}
         value={value}
         label={label}
-        onChange={rawUpdateDebounced}
+        onChange={update}
         errorValidation={error}
       />
     ) : (
@@ -151,7 +149,7 @@ const Input = ({
           id={name}
           name={name}
           value={value}
-          onChange={rawUpdateDebounced}
+          onChange={update}
           className={numberClasses}
         />
       </div>

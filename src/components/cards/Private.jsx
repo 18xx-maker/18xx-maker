@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 import { addIndex, chain, defaultTo, is, map, max, min, reduce } from "ramda";
 
 import Color from "@/components/Color";
@@ -272,6 +274,9 @@ const Private = (props) => {
     );
   }
 
+  // Small style icons share a row, so each one gets its part of the width
+  const iconCount = [hexNode, company, token, icon].filter(Boolean).length;
+
   const icons = (
     <>
       {hexNode}
@@ -374,6 +379,9 @@ const Private = (props) => {
                       color: c(descColor),
                       lineHeight: `${descLineHeight}px`,
                       ...descFont,
+                      ...(style === "small" && iconCount > 1
+                        ? { "--private-icons": iconCount }
+                        : {}),
                     }}
                   >
                     {style === "small" && icons}
@@ -423,7 +431,9 @@ const Private = (props) => {
                   )}
                   {revenueNode && (
                     <div
-                      className="private__revenue"
+                      className={clsx("private__revenue", {
+                        "private__revenue--background": revenueBackgroundColor,
+                      })}
                       style={{
                         color: c(revenueColor),
                         background: c(revenueBackgroundColor),

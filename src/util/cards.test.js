@@ -82,4 +82,33 @@ describe("getCardData", () => {
     expect(data.css.width).toBe("2.65748in");
     expect(data.css.totalWidth).toBe(`${data.totalWidth / 100}in`);
   });
+
+  it("should fit cards that fill the page up to floating point error", () => {
+    // 0.3 / 0.1 is 2.9999999999999996
+    const data = getCardData(
+      {
+        ...cards,
+        layout: "free",
+        width: 0.1,
+        height: 0.1,
+        cutlines: 0,
+        bleed: 0,
+      },
+      { width: 0.3, height: 0.3, margins: 0 },
+    );
+
+    expect(data.portrait.perRow).toBe(3);
+    expect(data.portrait.perColumn).toBe(3);
+  });
+
+  it("should still place one card per page when none fit", () => {
+    const data = getCardData(
+      { ...cards, layout: "free", width: 2000, height: 100, bleed: 0 },
+      paper,
+    );
+
+    expect(data.layout.perPage).toBe(1);
+    expect(data.layout.perRow).toBe(1);
+    expect(data.layout.perColumn).toBe(1);
+  });
 });

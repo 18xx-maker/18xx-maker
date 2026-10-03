@@ -72,6 +72,7 @@
     "cutlines": 25,
     "bleed": 12.5,
     "dtgPadding": 0,
+    "padding": 12.5,
     "border": 0,
     "blackBand": false,
     "pins": {
