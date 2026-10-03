@@ -1,6 +1,10 @@
 import { useCallback, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useMatch, useNavigate } from "react-router";
+
+import { find, prop, propEq } from "ramda";
+
+import { firstSection, gameNav } from "@/components/gameNav";
 
 import { useLoadedGame } from "@/hooks/game";
 import { createAlert, refreshGame } from "@/state";
@@ -12,6 +16,7 @@ export const useBindings = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loadedGame = useLoadedGame();
+  const game = useSelector(prop("game"));
   const viewingGame = useMatch("/games/:slug/:section/*");
 
   const handleKeyDown = useCallback(
@@ -19,15 +24,42 @@ export const useBindings = () => {
       if (isControlTarget(event)) return;
       if (event.altKey || event.ctrlKey || event.metaKey) return;
 
+      // Keys for the game edit page, which a Radix layer closing on escape
+      // has already claimed with preventDefault
+      if (viewingGame) {
+        if (
+          event.key === "e" ||
+          (event.key === "Escape" && !event.defaultPrevented)
+        ) {
+          navigate(`/games/${viewingGame.params.slug}`);
+          return;
+        }
+      } else if (loadedGame) {
+        // The game state is only the loaded game when the slugs agree
+        const first =
+          game?.meta.slug === loadedGame.slug ? firstSection(game) : "map";
+        const section =
+          event.key === "e"
+            ? first
+            : event.key === "m"
+              ? "map"
+              : find(propEq(event.key, "key"), gameNav)?.section;
+
+        if (section) {
+          navigate(`/games/${loadedGame.slug}/${section}`);
+          return;
+        }
+      }
+
       switch (event.key) {
-        case "c":
-          navigate("/elements/logos");
+        case "a":
+          if (!viewingGame) navigate("/elements");
           break;
-        case "e":
-          navigate("/elements");
+        case "c":
+          if (!viewingGame) navigate("/elements/logos");
           break;
         case "g":
-          if (loadedGame) navigate(`/games/${loadedGame.slug}/map`);
+          if (loadedGame) navigate(`/games/${loadedGame.slug}`);
           break;
         case "h":
           navigate("/");
@@ -52,7 +84,7 @@ export const useBindings = () => {
           dispatch(refreshGame());
           break;
         case "t":
-          navigate("/elements/tiles");
+          if (!viewingGame) navigate("/elements/tiles");
           break;
         case "u":
           if (capability.electron) {
@@ -72,7 +104,7 @@ export const useBindings = () => {
           break;
       }
     },
-    [loadedGame, viewingGame, dispatch, navigate],
+    [game, loadedGame, viewingGame, dispatch, navigate],
   );
 
   useEffect(() => {

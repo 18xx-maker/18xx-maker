@@ -105,16 +105,16 @@ describe("svg editor", () => {
     expect(y).toBeCloseTo(-0.05 * height);
   });
 
-  it("resets the view with 0, but not with a modifier", async () => {
+  it("resets the view with v, but not with a modifier", async () => {
     const { user, width, height } = await open();
     fireEvent.wheel(editorSvg(), { deltaY: -400 });
     const zoomed = viewBox();
     expect(zoomed[2]).toBeCloseTo(0.5 * width);
 
-    await user.keyboard("{Control>}0{/Control}");
+    await user.keyboard("{Control>}v{/Control}");
     expect(viewBox()).toEqual(zoomed);
 
-    await user.keyboard("0");
+    await user.keyboard("v");
     expect(viewBox()).toEqual([0, 0, width, height]);
   });
 

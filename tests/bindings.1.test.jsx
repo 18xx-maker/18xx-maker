@@ -6,7 +6,7 @@ describe("bindings", () => {
   it.for([
     ["?", "docs-index"],
     ["l", "games"],
-    ["e", "atoms"],
+    ["a", "atoms"],
     ["c", "logos"],
     ["t", "tiles"],
   ])("pressing %s brings you to %s", async ([key, id]) => {

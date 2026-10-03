@@ -85,7 +85,7 @@ describe("bindings", () => {
     await screen.findByTestId("home");
 
     await user.keyboard("g");
-    expect(router.state.location.pathname).toBe("/games/system:x/map");
+    expect(router.state.location.pathname).toBe("/games/system:x");
   });
 
   it("u does nothing outside of electron", async () => {
