@@ -15,10 +15,14 @@ const bin = path.resolve(import.meta.dirname, "../bin/maker.js");
 const fixture = path.resolve(import.meta.dirname, "fixtures/e2e-game.json");
 
 const maker = (out, ...args) =>
-  spawnSync(process.execPath, [bin, "export", ...args, "--out", out], {
-    cwd: out,
-    encoding: "utf-8",
-  });
+  spawnSync(
+    process.execPath,
+    [bin, "export", ...args, "--jobs", "2", "--out", out],
+    {
+      cwd: out,
+      encoding: "utf-8",
+    },
+  );
 
 const png = (file) => readPng(new Uint8Array(fs.readFileSync(file)));
 const pages = (file) =>
@@ -142,6 +146,8 @@ test.describe("maker export 18Test", () => {
     [96, 255, 166],
     [300, 796, 518],
   ]) {
+    // Cards do not take the background: a number card is one color to its
+    // edge, even with --background white (passed at 96 dpi only)
     test(`writes cards with an opaque edge at ${dpi} dpi`, () => {
       const result = maker(
         out,
@@ -152,6 +158,7 @@ test.describe("maker export 18Test", () => {
         "cards",
         "--dpi",
         String(dpi),
+        ...(dpi === 96 ? ["--background", "white"] : []),
       );
       expect(result.status, result.stderr).toBe(0);
 
@@ -167,27 +174,13 @@ test.describe("maker export 18Test", () => {
         });
         expect(edgeAlpha(path.join(dir, name)), name).toEqual(OPAQUE);
       }
+      if (dpi === 96) {
+        expect(edgeColors(path.join(dir, "18test-card-number-1.png"))).toEqual([
+          "105,74,152,255",
+        ]);
+      }
     });
   }
-
-  // Cards do not take the background: a number card is one color to its edge
-  test("writes a card with no white edge, even with --background white", () => {
-    const result = maker(
-      out,
-      "18Test",
-      "--format",
-      "png",
-      "--docs",
-      "cards",
-      "--background",
-      "white",
-    );
-    expect(result.status, result.stderr).toBe(0);
-
-    expect(
-      edgeColors(path.join(out, "18Test/18test-card-number-1.png")),
-    ).toEqual(["105,74,152,255"]);
-  });
 
   // The alpha of the top left pixel of the map, a tile and a token
   const corners = async (page, ...flags) => {
