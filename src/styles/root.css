@@ -803,6 +803,8 @@ footer a:hover {
 #viewport-children {
   line-height: normal;
   color: #000;
+  /* The cut lines are z-index: -1, keep them above the viewport background */
+  isolation: isolate;
 }
 
 :where(#viewport-children) svg {
