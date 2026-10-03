@@ -1,32 +1,19 @@
-import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import bash from "react-syntax-highlighter/dist/esm/languages/prism/bash";
-import javascript from "react-syntax-highlighter/dist/esm/languages/prism/javascript";
-import json from "react-syntax-highlighter/dist/esm/languages/prism/json";
-import markdown from "react-syntax-highlighter/dist/esm/languages/prism/markdown";
-import light from "react-syntax-highlighter/dist/esm/styles/prism/coldark-cold";
-import dark from "react-syntax-highlighter/dist/esm/styles/prism/coldark-dark";
-import prism from "react-syntax-highlighter/dist/esm/styles/prism/prism";
+import { Suspense, lazy } from "react";
 
-import { useTheme } from "@/context/ThemeProvider";
+// The highlighter and its languages are a separate chunk, plain text shows
+// until it loads
+const CodeHighlighted = lazy(() => import("@/components/CodeHighlighted"));
 
-SyntaxHighlighter.registerLanguage("javascript", javascript);
-SyntaxHighlighter.registerLanguage("json", json);
-SyntaxHighlighter.registerLanguage("markdown", markdown);
-SyntaxHighlighter.registerLanguage("bash", bash);
-
-export { SyntaxHighlighter, prism as style };
-
-const Code = (props) => {
-  const theme = useTheme();
-  const style = theme === "light" ? light : dark;
-
-  return (
-    <SyntaxHighlighter
-      customStyle={{ margin: "auto" }}
-      style={style}
-      {...props}
-    />
-  );
-};
+const Code = ({ children, ...props }) => (
+  <Suspense
+    fallback={
+      <pre>
+        <code>{children}</code>
+      </pre>
+    }
+  >
+    <CodeHighlighted {...props}>{children}</CodeHighlighted>
+  </Suspense>
+);
 
 export default Code;

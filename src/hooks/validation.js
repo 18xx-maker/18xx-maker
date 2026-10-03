@@ -1,4 +1,3 @@
-import { compileSchema, draft07 } from "json-schema-library";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,7 +7,15 @@ import configSchemaJSON from "@/schemas/config.schema.json";
 import { createSetErrors } from "@/state";
 import { getValidationPath } from "@/util/input";
 
-const configSchema = compileSchema(configSchemaJSON, { drafts: [draft07] });
+// json-schema-library is only needed once a config is validated
+let configSchema;
+const getConfigSchema = async () => {
+  if (!configSchema) {
+    const { compileSchema, draft07 } = await import("json-schema-library");
+    configSchema = compileSchema(configSchemaJSON, { drafts: [draft07] });
+  }
+  return configSchema;
+};
 
 export const useValidation = () => {
   const dispatch = useDispatch();
@@ -24,7 +31,7 @@ export const useValidation = () => {
         dispatch(createSetErrors(errorPointerAsKey));
       };
 
-      const { errors } = configSchema.validate(config);
+      const { errors } = (await getConfigSchema()).validate(config);
 
       setValidationErrors(errors);
 

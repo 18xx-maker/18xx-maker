@@ -249,8 +249,9 @@ describe("unit inputs", () => {
     await user.type(input, "25.4");
 
     // 25.4mm is an inch, 100 units
-    await waitFor(() =>
-      expect(store.getState().config.margin).toBeCloseTo(100),
+    await waitFor(
+      () => expect(store.getState().config.margin).toBeCloseTo(100),
+      { timeout: 3000 },
     );
   });
 
@@ -401,15 +402,17 @@ describe("markdown", () => {
     }
   });
 
-  it("highlights fenced code and styles inline code", () => {
+  it("highlights fenced code and styles inline code", async () => {
     renderMarkdown('Use `pnpm`\n\n```json\n{ "a": 1 }\n```\n');
 
     expect(screen.getByText("pnpm")).toHaveClass("bg-accent");
-    // The highlighter splits the code into tokens
+    // The highlighter is loaded on demand and splits the code into tokens
+    expect(
+      await screen.findByText('"a"', {}, { timeout: 10_000 }),
+    ).not.toHaveClass("bg-accent");
     // eslint-disable-next-line testing-library/no-node-access
     const block = document.querySelector("code.language-json");
     expect(block).toHaveTextContent('{ "a": 1 }');
-    expect(screen.getByText('"a"')).not.toHaveClass("bg-accent");
   });
 
   it("hides site only containers in electron", () => {

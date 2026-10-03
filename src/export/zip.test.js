@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import zlib from "node:zlib";
 
 import { b18Names } from "#export/names";
 import { writeZip } from "#export/zip";
@@ -49,6 +50,34 @@ describe("writeZip", () => {
       "board18-18Test-1.0/18Test-1.0/Map.png",
       "board18-18Test-1.0/18Test-1.0/Red.png",
     ]);
+  });
+
+  it("stores each file deflated, with its crc, so that unzip reads it back", async () => {
+    const names = b18Names("18Test", "1.0");
+    const file = path.join(tmp, names.json);
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    const content = '{"name":"ünïcode"}'.repeat(100);
+    fs.writeFileSync(file, content);
+
+    await writeZip(tmp, names);
+
+    const zip = fs.readFileSync(path.join(tmp, names.zip));
+    const at = zip.readUInt32LE(
+      zip.lastIndexOf(Buffer.from([0x50, 0x4b, 0x05, 0x06])) + 16,
+    );
+    // The first entry is the folder, find the json by its local header
+    const local = zip.indexOf(Buffer.from(`${names.json}`)) - 30;
+    expect(zip.readUInt32LE(local)).toBe(0x04034b50);
+    const size = zip.readUInt32LE(local + 18);
+    const nameLength = zip.readUInt16LE(local + 26);
+    const data = zip.subarray(
+      local + 30 + nameLength,
+      local + 30 + nameLength + size,
+    );
+    const inflated = zlib.inflateRawSync(data);
+    expect(inflated.toString("utf-8")).toBe(content);
+    expect(zip.readUInt32LE(local + 14)).toBe(zlib.crc32(inflated));
+    expect(at).toBeGreaterThan(local);
   });
 
   it("does not write a zip or read a folder outside of the output folder", async () => {

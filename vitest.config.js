@@ -71,6 +71,20 @@ export default defineConfig({
         // Integration tests run in a real browser (jsdom/Node disagree on
         // Request/AbortSignal, which react-router needs)
         ...shared,
+        // Imported on demand by the app, pre-bundle them so that Vite does
+        // not find them mid test and reload the page
+        optimizeDeps: {
+          include: [
+            "json-schema-library",
+            "react-syntax-highlighter",
+            "react-syntax-highlighter/dist/esm/languages/prism/bash",
+            "react-syntax-highlighter/dist/esm/languages/prism/javascript",
+            "react-syntax-highlighter/dist/esm/languages/prism/json",
+            "react-syntax-highlighter/dist/esm/languages/prism/markdown",
+            "react-syntax-highlighter/dist/esm/styles/prism/coldark-cold",
+            "react-syntax-highlighter/dist/esm/styles/prism/coldark-dark",
+          ],
+        },
         test: {
           ...testShared,
           browser: {
