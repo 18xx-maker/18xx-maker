@@ -167,6 +167,8 @@ for (const format of ["pdf", "png", "b18"]) {
         format,
         "--docs",
         docs[format].join(","),
+        "--jobs",
+        "2",
         "--out",
         out,
       ],
