@@ -148,4 +148,7 @@ Names the game does not have are skipped. These are extra copies on top of
 By default the trains print as small train cards on the charter. The
 **Train Cards** option of the charter config (`charters.trainCards`) set to
 `cards` prints them on the train card sheet instead. Charters without room for
-them (half width) always use the train card sheet.
+them (half width) always use the train card sheet. The trains on a charter have
+a black border and rounded corners like cards; the **Train Card Border**
+(`charters.trainCardBorder`) and **Train Card Rounded Corners**
+(`charters.trainCardRound`) options turn either off.

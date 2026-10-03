@@ -575,6 +575,14 @@
         "label": "Train Cards",
         "description": "Where the trains a company owns print: on the charter (charter) or on the train cards (cards). Charters without room for them (half width) always use the train cards."
       },
+      "trainCardBorder": {
+        "label": "Train Card Border",
+        "description": "Whether or not to draw a black border around the trains printed on a charter."
+      },
+      "trainCardRound": {
+        "label": "Train Card Rounded Corners",
+        "description": "Whether or not to round the corners of the trains printed on a charter, like a card."
+      },
       "blackBand": {
         "label": "Charter Black Band",
         "description": "Whether or not to put a black border against the color section of the charter. Only relevent to \"color\" charters. Always put on white color charters."

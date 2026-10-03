@@ -831,8 +831,15 @@ footer a:hover {
 .charter__traincard {
   position: relative;
   overflow: hidden;
-  outline: 1px solid #999;
+}
+
+.charter__traincards--border .charter__traincard {
+  outline: 1px solid #000;
   outline-offset: -1px;
+}
+
+.charter__traincards--round .charter__traincard {
+  border-radius: 0.0625in;
 }
 
 .charter__traincard > div {

@@ -113,4 +113,4 @@
 ```
 
 默认情况下，这些火车作为小火车卡打印在公司执照上。将公司执照配置中的**火车卡**选项
-（`charters.trainCards`）设为 `cards`，则改为打印在火车卡页上。没有空间的执照（半宽）始终使用火车卡页。
+（`charters.trainCards`）设为 `cards`，则改为打印在火车卡页上。没有空间的执照（半宽）始终使用火车卡页。公司执照上的火车默认带黑色边框和卡片式圆角；可用**火车卡边框**（`charters.trainCardBorder`）和**火车卡圆角**（`charters.trainCardRound`）选项分别关闭。

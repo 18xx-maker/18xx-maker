@@ -159,4 +159,7 @@ Standardmäßig werden die Züge als kleine Zugkarten auf der Gesellschaftskarte
 gedruckt. Die Option **Zugkarten** der Gesellschaftskarten-Konfiguration
 (`charters.trainCards`) mit dem Wert `cards` druckt sie stattdessen auf dem
 Zugkartenbogen. Gesellschaftskarten ohne Platz dafür (halbe Breite) verwenden
-immer den Zugkartenbogen.
+immer den Zugkartenbogen. Die Züge auf einer Gesellschaftskarte haben einen
+schwarzen Rahmen und runde Ecken wie Karten; die Optionen **Zugkarten-Rahmen**
+(`charters.trainCardBorder`) und **Zugkarten mit runden Ecken**
+(`charters.trainCardRound`) schalten beides ab.

@@ -253,6 +253,27 @@ describe("Charter", () => {
     expect(all(root, ".cutlines")).toHaveLength(1);
   });
 
+  it("has a black border and rounded corners unless turned off", async () => {
+    const withTrains = { ...company, trains: ["2"] };
+    const on = await mountElement(<Charter {...props} company={withTrains} />);
+    const box = one(on.root, ".charter__traincards");
+    expect(box).toHaveClass("charter__traincards--border");
+    expect(box).toHaveClass("charter__traincards--round");
+    expect(
+      getComputedStyle(one(on.root, ".charter__traincard")).outlineColor,
+    ).toBe("rgb(0, 0, 0)");
+    const off = await mountElement(
+      <Charter {...props} company={withTrains} />,
+      {
+        search:
+          "?config.charters.trainCardBorder=&config.charters.trainCardRound=",
+      },
+    );
+    const plain = one(off.root, ".charter__traincards");
+    expect(plain).not.toHaveClass("charter__traincards--border");
+    expect(plain).not.toHaveClass("charter__traincards--round");
+  });
+
   it("leaves the trains of a company to the cards when set to", async () => {
     const withTrains = { ...company, trains: ["2"] };
     const { root } = await mountElement(

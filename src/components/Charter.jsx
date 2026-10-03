@@ -226,7 +226,15 @@ const Charter = ({
                     {showTrains && "Trains"}
                     {cardData && (
                       <div
-                        className="charter__traincards"
+                        className={[
+                          "charter__traincards",
+                          config.charters.trainCardBorder &&
+                            "charter__traincards--border",
+                          config.charters.trainCardRound &&
+                            "charter__traincards--round",
+                        ]
+                          .filter(Boolean)
+                          .join(" ")}
                         data-testid="charter-train-cards"
                       >
                         <style>{`

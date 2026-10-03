@@ -319,6 +319,12 @@ export const sections = [
         name: "trainCards",
       },
       {
+        name: "trainCardBorder",
+      },
+      {
+        name: "trainCardRound",
+      },
+      {
         name: "blackBand",
       },
       {
