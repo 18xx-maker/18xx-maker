@@ -1,6 +1,7 @@
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { PanelLeft } from "lucide-react";
 
@@ -18,9 +19,9 @@ import {
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import { selectSidebarOpen } from "@/state/selectors";
+import { createSetSidebarOpen } from "@/state/settings";
 
-const SIDEBAR_COOKIE_NAME = "sidebar:state";
-const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 const SIDEBAR_WIDTH = "16rem";
 const SIDEBAR_WIDTH_MOBILE = "18rem";
 const SIDEBAR_WIDTH_ICON = "3rem";
@@ -53,23 +54,22 @@ const SidebarProvider = React.forwardRef(
     const isMobile = useIsMobile();
     const [openMobile, setOpenMobile] = React.useState(false);
 
-    // This is the internal state of the sidebar.
-    // We use openProp and setOpenProp for control from outside the component.
-    const [_open, _setOpen] = React.useState(defaultOpen);
-    const open = openProp ?? _open;
+    // The open state is a persisted setting (settings.sidebarOpen). Without a
+    // stored value it is defaultOpen. openProp and setOpenProp still allow
+    // control from outside the component.
+    const dispatch = useDispatch();
+    const stored = useSelector(selectSidebarOpen);
+    const open = openProp ?? stored ?? defaultOpen;
     const setOpen = React.useCallback(
       (value) => {
         const openState = typeof value === "function" ? value(open) : value;
         if (setOpenProp) {
           setOpenProp(openState);
         } else {
-          _setOpen(openState);
+          dispatch(createSetSidebarOpen(openState));
         }
-
-        // This sets the cookie to keep the sidebar state.
-        document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
       },
-      [setOpenProp, open],
+      [setOpenProp, open, dispatch],
     );
 
     // Helper to toggle the sidebar.

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { useLocation, useMatch, useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useMatch } from "react-router";
 
 import { Box, FileImage, FileText, Images, Settings2 } from "lucide-react";
 
@@ -23,23 +23,28 @@ import {
 import ExportOptions from "@/components/ExportOptions";
 
 import { useConfig, useGame } from "@/hooks";
-import { createAlert } from "@/state";
+import {
+  createAlert,
+  createSetExportMenuOpen,
+  createSetExportSheetOpen,
+} from "@/state";
+import { selectExportMenuOpen, selectExportSheetOpen } from "@/state/selectors";
 import { trackEvent } from "@/util/analytics";
 import { planExport } from "@/util/exportPlan";
-import { isControlTarget } from "@/util/keys";
 import { useBooleanParam } from "@/util/query";
 
 const ExportButton = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
   const game = useGame();
   const { defaultConfig, userConfig, storedConfig } = useConfig();
   const layers = { defaultConfig, userConfig, storedConfig };
-  const [options, setOptions] = useState(false);
-  // The "x" binding navigates here with this state when no game was showing
-  const [menu, setMenu] = useState(!!location.state?.exportMenu);
+  // The "x" key binding (hooks/bindings) opens the menu through the store
+  const menu = useSelector(selectExportMenuOpen);
+  const options = useSelector(selectExportSheetOpen);
+  const setMenu = (open) => dispatch(createSetExportMenuOpen(open));
+  const setOptions = (open) => dispatch(createSetExportSheetOpen(open));
   const [print] = useBooleanParam("print");
 
   const match = useMatch("/games/:slug/*");
@@ -47,24 +52,22 @@ const ExportButton = () => {
 
   const hidden = notOnGames || print || !game;
 
+  // Leaving the game page closes the menu and sheet, otherwise the next game
+  // page would open with them. Strict mode runs a cleanup right after the
+  // first mount, so only a button that is still gone after it resets.
+  const mounted = useRef(false);
   useEffect(() => {
-    if (location.state?.exportMenu) {
-      navigate(location, { replace: true, state: null });
-    }
-  }, [location, navigate]);
-
-  useEffect(() => {
-    if (hidden) return;
-
-    const onKeyDown = (event) => {
-      if (isControlTarget(event)) return;
-      if (event.altKey || event.ctrlKey || event.metaKey) return;
-      if (event.key === "x") setMenu(true);
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+      queueMicrotask(() => {
+        if (!mounted.current) {
+          dispatch(createSetExportMenuOpen(false));
+          dispatch(createSetExportSheetOpen(false));
+        }
+      });
     };
-
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [hidden]);
+  }, [dispatch]);
 
   if (hidden) {
     return null;

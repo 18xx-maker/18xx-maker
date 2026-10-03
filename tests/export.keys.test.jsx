@@ -1,5 +1,7 @@
-import { screen, waitFor } from "@testing-library/react";
+import { act, screen, waitFor } from "@testing-library/react";
 import { page } from "vitest/browser";
+
+import { createSetExportSheetOpen } from "@/state";
 
 import { renderApp } from "@tests/helpers.jsx";
 
@@ -68,6 +70,116 @@ describe("export keys", () => {
     await user.keyboard("x");
     await screen.findByRole("menuitem", { name: "Export options" });
     expect(router.state.location.pathname).toBe("/games/18Test/map");
+  });
+
+  it("x does nothing on the b18 pages, which have no export button", async () => {
+    const { user, store } = renderApp("/games/18Test/b18");
+    await screen.findByRole("heading", { level: 1 }).catch(() => null);
+
+    await user.keyboard("x");
+    expect(store.getState().ui.exportMenuOpen).toBe(false);
+  });
+
+  it("the menu is closed after leaving the game page", async () => {
+    const { user, store } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.keyboard("x");
+    await screen.findByRole("menu");
+    await user.keyboard("h");
+    await screen.findByTestId("home");
+    await waitFor(() =>
+      expect(store.getState().ui).toEqual({
+        exportMenuOpen: false,
+        exportSheetOpen: false,
+      }),
+    );
+  });
+
+  it("x from another page keeps the menu open in strict mode", async () => {
+    const { user, router } = renderApp(
+      "/",
+      {
+        loadedGame: {
+          title: "18Test",
+          id: "18Test",
+          type: "app",
+          slug: "18Test",
+        },
+      },
+      { strict: true },
+    );
+    await screen.findByTestId("home");
+
+    await user.keyboard("x");
+    await screen.findByRole("menuitem", { name: "Export options" });
+    expect(router.state.location.pathname).toBe("/games/18Test/map");
+  });
+
+  it("the options sheet is closed after leaving the game page", async () => {
+    const { user, store } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.keyboard("x");
+    await screen.findByRole("menu");
+    await user.keyboard("o");
+    await screen.findByRole("dialog", { name: "Export 18Test" });
+    expect(store.getState().ui.exportSheetOpen).toBe(true);
+
+    await user.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(store.getState().ui.exportSheetOpen).toBe(false),
+    );
+    act(() => store.dispatch(createSetExportSheetOpen(true)));
+    await user.keyboard("h");
+    await screen.findByTestId("home");
+    await waitFor(() =>
+      expect(store.getState().ui.exportSheetOpen).toBe(false),
+    );
+  });
+
+  it("x does nothing on the print page", async () => {
+    const { user, store } = renderApp("/games/18Test/map?print=true");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.keyboard("x");
+    expect(store.getState().ui).toEqual({
+      exportMenuOpen: false,
+      exportSheetOpen: false,
+    });
+  });
+
+  it("x does nothing on a section that does not exist", async () => {
+    const { user, store } = renderApp("/games/18Test/nonsense");
+    await screen.findByTestId("game-18Test-nonsense").catch(() => null);
+
+    await user.keyboard("x");
+    expect(store.getState().ui.exportMenuOpen).toBe(false);
+  });
+
+  it("the flags do not outlive a game that fails to load", async () => {
+    const { user, router, store } = renderApp("/", {
+      loadedGame: {
+        title: "Gone",
+        id: "gone",
+        type: "bogus",
+        slug: "bogus:gone",
+      },
+    });
+    await screen.findByTestId("home");
+
+    await user.keyboard("x");
+    await waitFor(() => expect(router.state.location.pathname).toBe("/games/"));
+    await waitFor(() =>
+      expect(store.getState().ui).toEqual({
+        exportMenuOpen: false,
+        exportSheetOpen: false,
+      }),
+    );
+
+    await act(() => router.navigate("/games/18Test/map"));
+    await screen.findByTestId("game-18Test-map");
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
   });
 
   it("x does nothing without a loaded game", async () => {
