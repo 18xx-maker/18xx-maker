@@ -429,7 +429,7 @@ describe("markdown", () => {
     renderApp("/docs/output/png");
 
     expect(
-      await screen.findByRole("img", { name: /export button/i }),
-    ).toHaveAttribute("src", "/images/export-button.png");
+      (await screen.findAllByRole("img", { name: /export button/i }))[0],
+    ).toHaveAttribute("src", "/images/export-button-light.png");
   });
 });

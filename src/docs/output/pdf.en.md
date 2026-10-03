@@ -5,14 +5,14 @@
 On the 18xx Maker application you can browse to any game component and then
 click on the export button:
 
-![Toolbar of a game page with the export button circled](/images/export-button.png "The export button in the app's toolbar.")
+![Toolbar of a game page with the export button circled](/images/export-button-light.png "The export button in the app's toolbar.")
 
 > [!NOTE]
 > If you are using 18xx Maker in a web browser please note that this button
 > doesn't exist and instead shows a print icon. It only opens your browser's
 > print menu.
 
-![Toolbar of a game page in a web browser with the print button circled](/images/print-button.png "In a web browser the same spot shows the print button.")
+![Toolbar of a game page in a web browser with the print button circled](/images/print-button-light.png "In a web browser the same spot shows the print button.")
 
 This will expose a menu with export options: export the full game as PDF
 documents, as PNG images or as a Board18 box. Exporting this way

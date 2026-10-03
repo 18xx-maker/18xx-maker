@@ -20,6 +20,18 @@ describe("markdown images", () => {
     expect(image.closest("p")).toBeNull();
   });
 
+  it("swap UI screenshots with their dark twin by theme", async () => {
+    renderApp("/docs/output/png");
+    const pair = await screen.findAllByRole("img", { name: /export button/i });
+
+    expect(pair).toHaveLength(2);
+    expect(pair[0]).toHaveAttribute("src", "/images/export-button-light.png");
+    expect(pair[0]).toHaveClass("dark:hidden");
+    expect(pair[1]).toHaveAttribute("src", "/images/export-button-dark.png");
+    expect(pair[1]).toHaveClass("hidden", "dark:inline");
+    expect(pair[1]).toHaveAttribute("alt", pair[0].getAttribute("alt"));
+  });
+
   it("are floated right on the home page", async () => {
     renderApp("/");
     const page = await screen.findByTestId("home");

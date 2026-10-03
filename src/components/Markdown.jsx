@@ -20,18 +20,31 @@ const clean = dissoc("node");
 // Images sit inline and left aligned (Tailwind would make them blocks). A page
 // can float them with its own className (see Home). An image with a title
 // becomes a figure: the title is its caption and the alt text stays the alt.
+// A screenshot of the UI named `<name>-light.png` has a `<name>-dark.png`
+// twin, and the one matching the current theme is shown.
 const DocImage = (props) => {
   const { title, alt, src, ...rest } = clean(props);
-  const img = (
+  const path = (file) => (capability.electron ? `.${file}` : file);
+  const image = (file, extra) => (
     <img
       alt={alt}
       {...rest}
-      src={capability.electron ? `.${src}` : src}
+      src={path(file)}
       className={cn(
         "max-w-full",
         title ? "rounded-lg border bg-white" : "inline",
+        extra,
       )}
     />
+  );
+  const themed = src.endsWith("-light.png");
+  const img = themed ? (
+    <>
+      {image(src, "dark:hidden")}
+      {image(src.replace(/-light\.png$/, "-dark.png"), "hidden dark:inline")}
+    </>
+  ) : (
+    image(src)
   );
 
   if (!title) return img;
