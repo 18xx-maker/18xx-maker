@@ -4,6 +4,7 @@ import { useLocation } from "react-router";
 
 import { isEmpty } from "ramda";
 
+import DocsPager from "@/components/DocsPager";
 import DocsToc from "@/components/DocsToc";
 import Markdown from "@/components/Markdown";
 
@@ -60,6 +61,9 @@ const Docs = () => {
         <Markdown className="mx-auto max-w-200 [&_p]:max-w-[65ch] [&_ul]:max-w-[65ch]">
           {source}
         </Markdown>
+        <div className="mx-auto max-w-200 px-4 pb-4">
+          <DocsPager />
+        </div>
       </div>
       {headings.length > 1 && <DocsToc headings={headings} />}
     </div>

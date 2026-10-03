@@ -100,6 +100,9 @@
   },
   "docs": {
     "toc": "On this page",
+    "pager": "Pages",
+    "previous": "Previous",
+    "next": "Next",
     "help": {
       "title": "Using 18xx Maker",
       "description": "Getting Started"

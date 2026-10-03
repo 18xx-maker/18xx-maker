@@ -163,3 +163,8 @@ export const mainMenu = [
     ],
   },
 ];
+
+// The docs pages in the order of the sidebar, for the previous and next links
+export const docsPages = mainMenu
+  .flatMap((group) => group.items)
+  .filter((item) => item.to?.startsWith("/docs"));
