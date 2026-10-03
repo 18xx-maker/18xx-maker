@@ -58,14 +58,55 @@ export const loadGame = async (id) => {
   }
 };
 
+// Safari has no FileSystemFileHandle.createWritable on the main thread, only
+// createSyncAccessHandle inside a worker.
+const writeInWorker = (filename, buffer) =>
+  new Promise((resolve, reject) => {
+    const source = `
+      onmessage = async ({ data: { filename, buffer } }) => {
+        try {
+          const root = await navigator.storage.getDirectory();
+          const dir = await root.getDirectoryHandle("games", { create: true });
+          const handle = await dir.getFileHandle(filename, { create: true });
+          const access = await handle.createSyncAccessHandle();
+          access.truncate(0);
+          access.write(new Uint8Array(buffer), { at: 0 });
+          access.flush();
+          access.close();
+          postMessage(null);
+        } catch (e) {
+          postMessage(String(e));
+        }
+      };
+    `;
+    const url = URL.createObjectURL(
+      new Blob([source], { type: "text/javascript" }),
+    );
+    const worker = new Worker(url);
+    const done = (fn) => (arg) => {
+      worker.terminate();
+      URL.revokeObjectURL(url);
+      fn(arg);
+    };
+    worker.onmessage = done((event) =>
+      event.data === null ? resolve() : reject(new Error(event.data)),
+    );
+    worker.onerror = done((event) => reject(new Error(event.message)));
+    worker.postMessage({ filename, buffer }, [buffer]);
+  });
+
 export const saveGameFile = async (file) => {
   const id = uuidv4();
   const filename = `${id}.json`;
   const dir = await getGamesDirectory();
   const handle = await dir.getFileHandle(filename, { create: true });
-  const writable = await handle.createWritable();
-  await writable.write(file);
-  await writable.close();
+  if (typeof handle.createWritable === "function") {
+    const writable = await handle.createWritable();
+    await writable.write(file);
+    await writable.close();
+  } else {
+    await writeInWorker(filename, await new Blob([file]).arrayBuffer());
+  }
 
   return slug(id);
 };
