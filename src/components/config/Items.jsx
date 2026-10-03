@@ -13,7 +13,10 @@ const Items = ({ section, items }) => {
   return addIndex(chain)((item, index) => {
     if (item.group) {
       return (
-        <div key={`${section}-group-${index}`} className="flex flex-row gap-4">
+        <div
+          key={`${section}-group-${index}`}
+          className="flex flex-row flex-wrap gap-6 *:flex-1 *:min-w-40"
+        >
           <Items section={section} items={item.group} />
         </div>
       );
@@ -27,7 +30,7 @@ const Items = ({ section, items }) => {
       return [
         <div
           key={`${section}.${item.note}`}
-          className="text-sm mb-4 mt-1 text-muted-foreground"
+          className="text-sm text-muted-foreground"
         >
           <ReactMarkdown>{t(`config.${section}.${item.note}`)}</ReactMarkdown>
         </div>,

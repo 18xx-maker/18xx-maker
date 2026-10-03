@@ -25,7 +25,7 @@ const ThemePreview = ({ companies }) => {
   );
 
   return (
-    <div className="h-8 -mt-3 p-0 border rounded-lg overflow-hidden flex flex-row-reverse flex-auto flex-nowrap gap-0 justify-between items-center">
+    <div className="h-8 p-0 border rounded-lg overflow-hidden flex flex-row-reverse flex-auto flex-nowrap gap-0 justify-between items-center">
       <ColorContext.Provider value={companies ? "companies" : undefined}>
         <Color>
           {(c) =>
