@@ -2,6 +2,7 @@ import { Navigate } from "react-router";
 
 import { addIndex, chain, is, map, splitEvery } from "ramda";
 
+import Editor, { useEditing } from "@/components/Editor";
 import PageSetup from "@/components/PageSetup";
 import Svg from "@/components/Svg";
 import CompanyToken from "@/components/tokens/CompanyToken";
@@ -95,7 +96,12 @@ const getTokenData = (game, tokens, paper) => {
   };
 };
 
+// The space between the pages of the sheet in the editor
+const PAGE_GAP = 20;
+
 const TokenLayout = ({ companies, data, game }) => {
+  const editing = useEditing();
+
   let companyTokens = chain((company) => {
     let numberMarketTokens = data.marketTokens;
     if (is(Number, company.marketTokens)) {
@@ -197,6 +203,37 @@ const TokenLayout = ({ companies, data, game }) => {
   );
 
   let pageNodes = splitEvery(data.perPage, nodes);
+
+  // On screen the pages are stacked in one svg to pan and zoom around
+  if (editing) {
+    const pageHeight = data.usableHeight + PAGE_GAP;
+    return (
+      <div
+        className="tokens"
+        data-testid={`game-${game.meta.slug}-tokens`}
+        style={{ margin: 0 }}
+      >
+        <ColorContext.Provider value="companies">
+          <Editor
+            width={data.usableWidth}
+            height={pageNodes.length * pageHeight - PAGE_GAP}
+          >
+            {addIndex(map)(
+              (page, i) => (
+                <g
+                  key={`tokens-page-${i}`}
+                  transform={`translate(0 ${i * pageHeight})`}
+                >
+                  {page}
+                </g>
+              ),
+              pageNodes,
+            )}
+          </Editor>
+        </ColorContext.Provider>
+      </div>
+    );
+  }
 
   return addIndex(map)(
     (nodes, i) => (

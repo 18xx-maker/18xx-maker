@@ -9,11 +9,14 @@ import { getRenderInput } from "@/util/renderInput";
 // render mode (the exports) get the svg at its physical size. The exports only
 // switch to the print media type once the page is ready, the editor would
 // still be the size of the window when the image is captured.
-const Editor = ({ width, height, className, ...pass }) => {
+export const useEditing = () => {
   const print = usePrint();
   const [printParam] = useBooleanParam("print");
+  return !(print || printParam || getRenderInput());
+};
 
-  if (print || printParam || getRenderInput()) {
+const Editor = ({ width, height, className, ...pass }) => {
+  if (!useEditing()) {
     return (
       <Svg
         className={className}
