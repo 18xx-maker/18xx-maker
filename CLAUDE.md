@@ -154,6 +154,58 @@ sizing or packaging logic in either surface.
   `sendFile` 404s on absolute paths containing one (worktrees live in
   `.claude/worktrees`), so use `root` as `startExpress` does.
 
+## JSON schemas
+
+Schemas live in `src/schemas/` (draft-07, validated with `json-schema-library`
+by `src/cli/validate.js`). `tiles.defs.json` is **generated**; never edit it.
+
+- **Hand-edited:** `companies`, `config`, `game`, `publishers`, `theme`,
+  `tiles` (`*.schema.json`), `fields.schema.json` (shared field definitions:
+  `position`, `font`, `text`, `svg`, `revenue`) and `tiles.src.json` (the tile
+  definitions, `$id` `.../tiles.defs.json`).
+- **Generated:** `src/schemas/tiles.defs.json` = `tiles.src.json` plus the
+  `fields.schema.json` properties merged into the tile elements listed in the
+  `elements` map in `src/cli/compile-schemas.js` (`pnpm maker compile`,
+  or `make`). `game.schema.json` and `tiles.schema.json` reference it via
+  `tiles.defs.json#/definitions/hex`.
+- **Published copies:** `make` copies every `src/schemas/{companies,config,game,
+publishers,theme,tiles}.schema.json` and `tiles.defs.json` to
+  `public/schemas/` (what `$schema` URLs and editors use). Both the generated
+  file and the `public/schemas` copies are committed; the pre-commit hook runs
+  `make && pnpm validate:schemas` and restages them.
+- `validate.js` registers each schema by `$id`; a new schema file must be
+  added to `schemas` in `validate.js`, `determineSchema` (how a data file is
+  matched to it) and the `schemas` list in the `Makefile`.
+
+Adding to a schema:
+
+1. Edit the source: `game.schema.json` etc. directly; a field on a tile element
+   in `tiles.src.json`; a property shared by tile elements in
+   `fields.schema.json` (and add the element path to `elements` in
+   `compile-schemas.js` if it is a new element type). Keep
+   `additionalProperties: false` and give every property a `description`.
+2. Run `make` (compiles `tiles.defs.json`, copies to `public/schemas`). Do not
+   hand-edit or skip the copy: `compile-schemas.test.js` fails if
+   `tiles.defs.json` differs from a fresh compile.
+3. Run `pnpm prettier --write src/schemas public/schemas` if `make` output
+   needs formatting (`pnpm pretty` checks it).
+4. Add or extend a fixture/test: positive and negative cases in
+   `src/cli/validate.test.js` (e.g. the `exports of a game` block), and use
+   the new field in `src/data/games/18Test.json` or another data file when it
+   affects rendering.
+5. Verify:
+
+```shell
+make                                    # compile + copy
+pnpm validate:schemas                   # the schemas are valid draft-07
+pnpm validate                           # every src/data/**/*.json still validates
+pnpm exec vitest run --project unit src/cli   # compile-schemas + validate tests
+git status public/schemas src/schemas   # generated files show up in the diff
+```
+
+Runtime consumers of a schema change (UI forms, docs, export options) are
+listed under "Exporting" and "Translations" when the field is user facing.
+
 ## Translations
 
 UI strings live in `src/locales/<lang>.json` (`en` is the source) and the docs
