@@ -18,11 +18,13 @@ const Docs = () => {
   const { i18n } = useTranslation();
   const location = useLocation();
 
-  const language = i18n.languages[0];
-
   const pathname = location.pathname.replace(/\/docs\/?/, "");
   const file = isEmpty(pathname) ? "index" : pathname;
-  const source = mds[`../../docs/${file}.${language}.md`];
+  // i18n.languages is the detected language then the fallbacks (["de", "en"]),
+  // and only English docs exist, so use the first one with a file.
+  const source = i18n.languages
+    .map((language) => mds[`../../docs/${file}.${language}.md`])
+    .find((md) => md !== undefined);
 
   const article = useRef(null);
   const [headings, setHeadings] = useState([]);
