@@ -1,5 +1,63 @@
 # Changelog
 
+## [1.0.0-beta.125](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.124...v1.0.0-beta.125) (2026-10-03)
+
+
+### :tada: Features
+
+* **analytics:** send the language with plausible events ([#769](https://github.com/18xx-maker/18xx-maker/issues/769)) ([f4405a1](https://github.com/18xx-maker/18xx-maker/commit/f4405a193ec8df95b4c3f5e1787ce12fa7f4b8ed))
+* **export:** add a border around map, market, par, revenue and tile manifest PNGs ([#743](https://github.com/18xx-maker/18xx-maker/issues/743)) ([9672b50](https://github.com/18xx-maker/18xx-maker/commit/9672b50aa6117a779fc860327f24e910ec297f95))
+* **i18n:** add german and chinese translations ([#770](https://github.com/18xx-maker/18xx-maker/issues/770)) ([08c21ea](https://github.com/18xx-maker/18xx-maker/commit/08c21ea3315bfd617f9c86b98d288ea8fdc6eafb))
+* **ui:** add a keyboard shortcuts dialog, d for docs and esc to go home ([#768](https://github.com/18xx-maker/18xx-maker/issues/768)) ([16d2446](https://github.com/18xx-maker/18xx-maker/commit/16d2446a1203afb826ecc5e886e76fb54078a3df))
+* **ui:** add export keybindings to the app ([#756](https://github.com/18xx-maker/18xx-maker/issues/756)) ([3345b65](https://github.com/18xx-maker/18xx-maker/commit/3345b659dc7c26ccdb6e5ea20ae819cdde464b98))
+* **ui:** add language override to settings ([#767](https://github.com/18xx-maker/18xx-maker/issues/767)) ([3d92dce](https://github.com/18xx-maker/18xx-maker/commit/3d92dce98b1468463e1b2c5d70396689c3024de5))
+* **ui:** rework keybindings around the game page and edit page ([#760](https://github.com/18xx-maker/18xx-maker/issues/760)) ([b9e4e8d](https://github.com/18xx-maker/18xx-maker/commit/b9e4e8dd90a61ba2f0279f13ff4796f3409ae494))
+* **ui:** shadcn UI (rebased [#664](https://github.com/18xx-maker/18xx-maker/issues/664)), React 19, Tailwind 4 and dependency updates ([#734](https://github.com/18xx-maker/18xx-maker/issues/734)) ([0052c1b](https://github.com/18xx-maker/18xx-maker/commit/0052c1b64f0b961f29ff9511cdfe9df0129bd339))
+
+
+### :bug: Bug Fixes
+
+* **export:** always export paginated files when a page does not fit ([#745](https://github.com/18xx-maker/18xx-maker/issues/745)) ([716a285](https://github.com/18xx-maker/18xx-maker/commit/716a285b556f2658b8725cc3546c71bf720a6d3a))
+* **export:** paint the png border white and wait for a frame before the shot ([#762](https://github.com/18xx-maker/18xx-maker/issues/762)) ([0f8f61d](https://github.com/18xx-maker/18xx-maker/commit/0f8f61da6c0ecb743f69019f0a565c3980c7f092))
+* **print:** reorder die-cut tiles so bleed track lines up ([#758](https://github.com/18xx-maker/18xx-maker/issues/758)) ([81e9c24](https://github.com/18xx-maker/18xx-maker/commit/81e9c24b734f1c9b601dce0facabcdf86a4c977e))
+* save games in safari where createWritable is missing ([#754](https://github.com/18xx-maker/18xx-maker/issues/754)) ([e8f9805](https://github.com/18xx-maker/18xx-maker/commit/e8f98050f58d06df4d4ae854a7a2470e10b4f107))
+* stop map editor view jumping on fast clicks ([#748](https://github.com/18xx-maker/18xx-maker/issues/748)) ([f2d74ed](https://github.com/18xx-maker/18xx-maker/commit/f2d74edafce2b0fc7f0d11d7ca5fba7df87edc86))
+* **ui:** fall back to english docs and home for other browser languages ([#753](https://github.com/18xx-maker/18xx-maker/issues/753)) ([a16fae9](https://github.com/18xx-maker/18xx-maker/commit/a16fae90cb8e327d6e83f4a11fab38eab2a1c58b)), closes [#700](https://github.com/18xx-maker/18xx-maker/issues/700)
+* **ui:** keep config panel fixed on screen and tidy its layout ([#757](https://github.com/18xx-maker/18xx-maker/issues/757)) ([77553bb](https://github.com/18xx-maker/18xx-maker/commit/77553bbdb4fc17cd0c32fffc07a639448a609e63))
+* **ui:** make cards tolerate small sizes and one card per page ([#766](https://github.com/18xx-maker/18xx-maker/issues/766)) ([e1231f8](https://github.com/18xx-maker/18xx-maker/commit/e1231f8a02b6bc61ae56f047a7c327e870baab48))
+
+
+### :racing_car: Performance Improvements
+
+* trim dependencies from the app package and the web bundle ([a6f1a60](https://github.com/18xx-maker/18xx-maker/commit/a6f1a609b284386451fb79cc8aa7972a81483e0e))
+
+
+### :book: Documentation
+
+* add conventional commit rules to CLAUDE.md ([#744](https://github.com/18xx-maker/18xx-maker/issues/744)) ([f43def4](https://github.com/18xx-maker/18xx-maker/commit/f43def4e365db340ecad51abc9331ee651eaf081))
+* caption, annotate and describe doc screenshots ([#763](https://github.com/18xx-maker/18xx-maker/issues/763)) ([59e4b13](https://github.com/18xx-maker/18xx-maker/commit/59e4b1327ba435e60fd981e2aaacc1e51d60d317))
+* document the full test run in CLAUDE.md ([#741](https://github.com/18xx-maker/18xx-maker/issues/741)) ([069d009](https://github.com/18xx-maker/18xx-maker/commit/069d009778ddd004264b87ce505a71f6d05e0aeb))
+* remove square cash donation link from readme ([#759](https://github.com/18xx-maker/18xx-maker/issues/759)) ([2c768af](https://github.com/18xx-maker/18xx-maker/commit/2c768af8c248ad1f6f3a0ab02af86edf46187648))
+* require PR titles to follow commit message rules ([#752](https://github.com/18xx-maker/18xx-maker/issues/752)) ([fe4c83a](https://github.com/18xx-maker/18xx-maker/commit/fe4c83ad254414e41c301db61afb52bed736a9a4))
+* **site:** add color themes page for map, company and game colors ([#755](https://github.com/18xx-maker/18xx-maker/issues/755)) ([19d7804](https://github.com/18xx-maker/18xx-maker/commit/19d78041093b8fb0d5b74e4d83b91ef73cedfae3))
+* **site:** fix stale docs, add examples, images, first-game guide and faq ([#750](https://github.com/18xx-maker/18xx-maker/issues/750)) ([12f9f1a](https://github.com/18xx-maker/18xx-maker/commit/12f9f1a8298c07e6d2adb5f9aa9d157705b0f102))
+
+
+### :hammer_and_wrench: Code Refactoring
+
+* **state:** consolidate shared app state into redux ([#765](https://github.com/18xx-maker/18xx-maker/issues/765)) ([9939a5b](https://github.com/18xx-maker/18xx-maker/commit/9939a5b648daa96196f69baf7495dccbd6a0bd18))
+
+
+### :package: Build System
+
+* **deps:** bump the npm_and_yarn group across 1 directory with 4 updates ([#751](https://github.com/18xx-maker/18xx-maker/issues/751)) ([ff4d146](https://github.com/18xx-maker/18xx-maker/commit/ff4d146e8f19838f7e3851b41d4d8dde7ad3ad8d))
+
+
+### :octocat: Continuous Integration
+
+* deploy netlify sites from release workflow ([#747](https://github.com/18xx-maker/18xx-maker/issues/747)) ([6eae7be](https://github.com/18xx-maker/18xx-maker/commit/6eae7be2c6116e14c905011ed682e4c254e0d0ac))
+* fail PRs whose body would add stray release notes ([#761](https://github.com/18xx-maker/18xx-maker/issues/761)) ([55c8092](https://github.com/18xx-maker/18xx-maker/commit/55c80924c2cafbebb921f33faa72616b2d2eb245))
+
 ## [1.0.0-beta.124](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.123...v1.0.0-beta.124) (2026-10-02)
 
 
