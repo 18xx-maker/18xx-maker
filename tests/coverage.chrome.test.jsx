@@ -197,17 +197,23 @@ describe("alert", () => {
 });
 
 describe("desktop sidebar", () => {
-  it("collapses and expands with ctrl+b, remembering it in a cookie", async () => {
-    const { user } = renderApp("/");
+  it("collapses and expands with ctrl+b, remembering it in the settings", async () => {
+    const { user, store } = renderApp("/");
     expect(desktopSidebar()).toHaveAttribute("data-state", "expanded");
 
     await user.keyboard("{Control>}b{/Control}");
     expect(desktopSidebar()).toHaveAttribute("data-state", "collapsed");
-    expect(document.cookie).toContain("sidebar:state=false");
+    expect(store.getState().settings.sidebarOpen).toBe(false);
+    expect(document.cookie).not.toContain("sidebar");
 
     await user.keyboard("{Meta>}b{/Meta}");
     expect(desktopSidebar()).toHaveAttribute("data-state", "expanded");
-    expect(document.cookie).toContain("sidebar:state=true");
+    expect(store.getState().settings.sidebarOpen).toBe(true);
+  });
+
+  it("starts collapsed when the settings say so", () => {
+    renderApp("/", { settings: { sidebarOpen: false } });
+    expect(desktopSidebar()).toHaveAttribute("data-state", "collapsed");
   });
 
   it("becomes a sheet when the window narrows", async () => {

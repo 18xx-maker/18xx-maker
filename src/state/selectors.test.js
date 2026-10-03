@@ -4,7 +4,10 @@ import {
   selectGame,
   selectGameForSlug,
   selectGameState,
+  selectLanguage,
+  selectSidebarOpen,
   selectStoredConfig,
+  selectTheme,
 } from "@/state/selectors";
 
 const game = (slug, config) => ({ meta: { slug }, config });
@@ -111,5 +114,23 @@ describe("game selectors", () => {
     expect(selectGameForSlug(state, "system:other")).toBeUndefined();
     expect(selectGameForSlug(state, undefined)).toBeUndefined();
     expect(selectGameForSlug({ game: null }, "system:loaded")).toBeUndefined();
+  });
+});
+
+describe("settings selectors", () => {
+  it("are undefined for stored settings that predate them", () => {
+    const state = { settings: {} };
+    expect(selectTheme(state)).toBeUndefined();
+    expect(selectSidebarOpen(state)).toBeUndefined();
+    expect(selectLanguage(state)).toBeUndefined();
+  });
+
+  it("read the stored settings", () => {
+    const state = {
+      settings: { theme: "dark", sidebarOpen: false, language: "de" },
+    };
+    expect(selectTheme(state)).toBe("dark");
+    expect(selectSidebarOpen(state)).toBe(false);
+    expect(selectLanguage(state)).toBe("de");
   });
 });

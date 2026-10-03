@@ -10,7 +10,9 @@ import {
   SET_DOWNLOAD_PERCENT,
   SET_ERRORS,
   SET_GAME,
+  SET_LANGUAGE,
   SET_SETTINGS,
+  SET_SIDEBAR_OPEN,
   SET_SUMMARIES,
   SET_UPDATE,
   alertReducer,
@@ -25,7 +27,9 @@ import {
   createSetConfig,
   createSetErrors,
   createSetGame,
+  createSetLanguage,
   createSetSettings,
+  createSetSidebarOpen,
   createSetSummaries,
   createUpdate,
   errorsReducer,
@@ -345,6 +349,23 @@ describe("settingsReducer", () => {
     expect(action).toEqual({ type: SET_SETTINGS, settings: { theme: "dark" } });
     expect(settingsReducer(frozen({ theme: "light" }), action)).toEqual({
       theme: "dark",
+    });
+  });
+
+  it("sets the sidebar and the language next to other settings", () => {
+    const open = createSetSidebarOpen(false);
+    expect(open).toEqual({ type: SET_SIDEBAR_OPEN, open: false });
+    const language = createSetLanguage("de");
+    expect(language).toEqual({ type: SET_LANGUAGE, language: "de" });
+
+    const state = [open, language].reduce(
+      settingsReducer,
+      frozen({ theme: "dark" }),
+    );
+    expect(state).toEqual({
+      theme: "dark",
+      sidebarOpen: false,
+      language: "de",
     });
   });
 

@@ -8,6 +8,12 @@ import { resolveConfig } from "@/util/resolveConfig";
 
 export const selectStoredConfig = (state) => state.config;
 
+// Settings are all optional: no theme means the system one, no sidebarOpen
+// means open and no language means the detected one
+export const selectTheme = (state) => state.settings?.theme;
+export const selectSidebarOpen = (state) => state.settings?.sidebarOpen;
+export const selectLanguage = (state) => state.settings?.language;
+
 // The redux game, whatever the route
 export const selectGameState = (state) => state.game;
 
