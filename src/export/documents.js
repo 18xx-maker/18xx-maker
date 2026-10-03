@@ -1,6 +1,7 @@
 import { flatten, map, range } from "ramda";
 
 import { applyCompanyOverrides } from "../util/companyOverrides.js";
+import { cardCompanyTrains } from "../util/companyTrains.js";
 import {
   addPaginationData,
   compileCompanies,
@@ -255,14 +256,6 @@ export const documents = (game, config, data) => {
   (game.privates || []).forEach((_, i) =>
     card("private", i, `card-private-${i + 1}`),
   );
-  (game.trains || []).forEach((train, i) =>
-    card(
-      "train",
-      i,
-      `card-train-${i + 1}-${safeName(String(train.name).replace(" ", "_"))}`,
-    ),
-  );
-
   const companies =
     applyCompanyOverrides(
       data.companyOverrides,
@@ -270,6 +263,18 @@ export const documents = (game, config, data) => {
       config.overrideCompanies,
       config.overrideSelection,
     ) || [];
+  // Trains owned by companies come after the game's trains
+  [
+    ...(game.trains || []),
+    ...cardCompanyTrains(companies, config.charters, game.trains),
+  ].forEach((train, i) =>
+    card(
+      "train",
+      i,
+      `card-train-${i + 1}-${safeName(String(train.name).replace(" ", "_"))}`,
+    ),
+  );
+
   const shares = flatten(
     map((c) => map((s) => ({ ...s, company: c }), c.shares || []), companies),
   );

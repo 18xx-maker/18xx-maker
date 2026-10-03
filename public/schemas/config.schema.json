@@ -196,6 +196,7 @@
         "blackBand": { "type": "boolean" },
         "showPhaseChart": { "type": "boolean" },
         "showTurnOrder": { "type": "boolean" },
+        "trainCards": { "type": "string", "enum": ["charter", "cards"] },
         "pins": { "$ref": "#/definitions/pins" }
       },
       "required": ["style", "halfWidth", "cutlines", "border", "blackBand"],

@@ -571,6 +571,10 @@
         "label": "显示行动顺序",
         "description": "是否在公司执照上显示阶段表。"
       },
+      "trainCards": {
+        "label": "列车卡",
+        "description": "公司拥有的列车打印在哪里：公司执照上（charter）或列车卡上（cards）。没有空间的执照（半宽）始终使用列车卡。"
+      },
       "blackBand": {
         "label": "公司执照黑边",
         "description": "是否在公司执照的彩色区域旁加上黑色边框。仅适用于“color”公司执照。白色公司执照始终带有黑边。"

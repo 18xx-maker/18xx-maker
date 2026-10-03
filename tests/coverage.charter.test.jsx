@@ -234,6 +234,38 @@ describe("Charter", () => {
     ).toHaveLength(2);
   });
 
+  it("draws the trains of a company as cards", async () => {
+    const own = { name: "S", color: "red", price: 50 };
+    const withTrains = {
+      ...company,
+      trains: [{ name: "2", quantity: 2 }, own],
+    };
+    const { root } = await mountElement(
+      <Charter {...props} company={withTrains} />,
+    );
+    expect(
+      all(root, ".charter__trains .charter__traincard .train"),
+    ).toHaveLength(3);
+    expect(
+      all(root, ".charter__traincard .train__name").map((n) => n.textContent),
+    ).toEqual(["2", "2", "S"]);
+    // They are inside the charter, not on a cutlines of their own
+    expect(all(root, ".cutlines")).toHaveLength(1);
+  });
+
+  it("leaves the trains of a company to the cards when set to", async () => {
+    const withTrains = { ...company, trains: ["2"] };
+    const { root } = await mountElement(
+      <Charter {...props} company={withTrains} />,
+      { search: "?config.charters.trainCards=cards" },
+    );
+    expect(one(root, ".charter__traincards")).toBeNull();
+    const half = await mountElement(
+      <Charter {...props} company={withTrains} halfWidth />,
+    );
+    expect(one(half.root, ".charter__traincards")).toBeNull();
+  });
+
   it("drops turn order on minors and hidden sections", async () => {
     const { root } = await mountElement(
       <Charter

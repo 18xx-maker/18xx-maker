@@ -120,3 +120,32 @@ bundled game) that shows `on`, `index`, `rust`, `events`, `notes`, `print`,
   ]
 }
 ```
+
+## Company Trains
+
+A company can own trains that are not part of the game's train supply, like
+a starting train. List them in the company's `trains` field. Each entry is one
+of:
+
+- a train name (`"4"`), one copy of that train of the game,
+- a reference with a quantity (`{ "name": "4", "quantity": 2 }`), several copies
+  of a train of the game,
+- a full train (the fields above), with an optional `quantity` (default 1).
+  Use `print` instead when the quantity is "∞".
+
+Names the game does not have are skipped. These are extra copies on top of
+`quantity` in the game's `trains`, and they never change the phase chart. Set
+`trains` to `false` to hide the "Trains" label on the charter.
+
+```json
+{
+  "name": "Awa Railroad",
+  "abbrev": "AR",
+  "trains": ["2", { "name": "3", "quantity": 2 }]
+}
+```
+
+By default the trains print as small train cards on the charter. The
+**Train Cards** option of the charter config (`charters.trainCards`) set to
+`cards` prints them on the train card sheet instead. Charters without room for
+them (half width) always use the train card sheet.

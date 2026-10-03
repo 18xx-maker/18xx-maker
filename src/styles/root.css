@@ -819,3 +819,23 @@ footer a:hover {
     background: transparent;
   }
 }
+
+.charter__traincards {
+  --train-card-scale: 0.5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.0625in;
+  margin-top: 0.0625in;
+}
+
+.charter__traincard {
+  position: relative;
+  overflow: hidden;
+  outline: 1px solid #999;
+  outline-offset: -1px;
+}
+
+.charter__traincard > div {
+  transform: scale(var(--train-card-scale));
+  transform-origin: top left;
+}

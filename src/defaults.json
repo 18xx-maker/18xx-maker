@@ -56,6 +56,7 @@
     "blackBand": false,
     "showPhaseChart": true,
     "showTurnOrder": true,
+    "trainCards": "charter",
     "pins": {
       "innerRadius": 6.25,
       "outerRadius": 12.5,

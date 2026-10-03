@@ -19,7 +19,7 @@ const ordinal = (num) => {
   }
 };
 
-const Train = ({ train, trains }) => {
+const Train = ({ train, trains, bare }) => {
   const { config } = useConfig();
 
   let {
@@ -225,7 +225,7 @@ const Train = ({ train, trains }) => {
   }
 
   return (
-    <div className="cutlines">
+    <div className={bare ? undefined : "cutlines"}>
       <Color>
         {(c, t) => (
           <div

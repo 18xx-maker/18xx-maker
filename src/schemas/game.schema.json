@@ -148,6 +148,54 @@
         }
       ]
     },
+    "train": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "price": {
+          "oneOf": [{ "type": "number", "minimum": 0 }, { "type": "string" }]
+        },
+        "color": { "type": "string" },
+        "image": {
+          "type": "string"
+        },
+        "phase": { "type": "boolean" },
+        "quantity": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "string", "enum": ["∞"] }
+          ]
+        },
+        "quantity_label": { "type": "string" },
+        "print": { "type": "integer", "minimum": 0 },
+        "discount": { "type": "object" },
+        "description": { "type": "string" },
+        "available": { "type": "string" },
+        "variant": { "type": "string" },
+        "rust": { "$ref": "#/definitions/trainEvent" },
+        "phased": { "$ref": "#/definitions/trainEvent" },
+        "obsolete": { "$ref": "#/definitions/trainEvent" },
+        "permanent": { "type": "boolean" },
+        "players": { "type": "integer" }
+      },
+      "required": ["name", "color"],
+      "additionalProperties": false
+    },
+    "companyTrain": {
+      "anyOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "quantity": { "type": "integer", "minimum": 1 }
+          },
+          "required": ["name"],
+          "additionalProperties": false
+        },
+        { "$ref": "#/definitions/train" }
+      ]
+    },
     "trainEvent": {
       "oneOf": [
         { "$ref": "#/definitions/trainItem" },
@@ -280,6 +328,16 @@
           },
           "tokens": {
             "oneOf": [{ "$ref": "#/definitions/tokens" }, { "type": "string" }]
+          },
+          "trains": {
+            "description": "false hides the trains label on the charter. Otherwise the trains the company owns: the name of a game train, { name, quantity } for several copies of a game train, or a full train (quantity defaults to 1). They print on the charter, or as train cards when the charters trainCards config is cards.",
+            "oneOf": [
+              { "const": false },
+              {
+                "type": "array",
+                "items": { "$ref": "#/definitions/companyTrain" }
+              }
+            ]
           }
         }
       }
@@ -434,37 +492,10 @@
     "trains": {
       "type": "array",
       "items": {
-        "type": "object",
-        "properties": {
-          "name": { "type": "string" },
-          "price": {
-            "oneOf": [{ "type": "number", "minimum": 0 }, { "type": "string" }]
-          },
-          "color": { "type": "string" },
-          "image": {
-            "type": "string"
-          },
-          "phase": { "type": "boolean" },
-          "quantity": {
-            "oneOf": [
-              { "type": "integer", "minimum": 1 },
-              { "type": "string", "enum": ["∞"] }
-            ]
-          },
-          "quantity_label": { "type": "string" },
-          "print": { "type": "integer", "minimum": 0 },
-          "discount": { "type": "object" },
-          "description": { "type": "string" },
-          "available": { "type": "string" },
-          "variant": { "type": "string" },
-          "rust": { "$ref": "#/definitions/trainEvent" },
-          "phased": { "$ref": "#/definitions/trainEvent" },
-          "obsolete": { "$ref": "#/definitions/trainEvent" },
-          "permanent": { "type": "boolean" },
-          "players": { "type": "integer" }
-        },
-        "required": ["name", "quantity", "color"],
-        "additionalProperties": false
+        "allOf": [
+          { "$ref": "#/definitions/train" },
+          { "required": ["quantity"] }
+        ]
       }
     },
     "upgrades": {

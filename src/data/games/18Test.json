@@ -106,6 +106,10 @@
       "name": "Black Railroad",
       "abbrev": "BLRR",
       "color": "black",
+      "trains": [
+        { "name": "2", "quantity": 2 },
+        { "name": "S", "color": "yellow", "price": 50, "quantity": 1 }
+      ],
       "shares": [
         {
           "quantity": 1,

@@ -147,6 +147,21 @@ describe("documents", () => {
     expect(byId(docs, "tiles/26|T2").basename).toBe("tile-26_T2");
   });
 
+  it("has the trains of companies last among the train cards", () => {
+    const trains = (config) =>
+      ids(list({}, config)).filter((id) => id.startsWith("cards/train/"));
+    // The fixture's black railroad has two trains to print on the charter
+    expect(trains()).toHaveLength(4);
+    expect(
+      trains({
+        charters: {
+          ...loadGameConfig(loadGame("18Test")).charters,
+          trainCards: "cards",
+        },
+      }),
+    ).toHaveLength(7);
+  });
+
   it("captures a token inside of the wrapper the page has for it", () => {
     expect(byId(docs, "tokens/0").capture.selector).toBe(
       ".token .printElement",

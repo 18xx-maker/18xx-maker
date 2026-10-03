@@ -316,6 +316,9 @@ export const sections = [
         name: "showTurnOrder",
       },
       {
+        name: "trainCards",
+      },
+      {
         name: "blackBand",
       },
       {

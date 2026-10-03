@@ -571,6 +571,10 @@
         "label": "Zugreihenfolge anzeigen",
         "description": "Ob die Phasentabelle auf den Gesellschaftskarten angezeigt wird."
       },
+      "trainCards": {
+        "label": "Zugkarten",
+        "description": "Wo die Züge einer Gesellschaft gedruckt werden: auf der Gesellschaftskarte (charter) oder auf den Zugkarten (cards). Gesellschaftskarten ohne Platz dafür (halbe Breite) verwenden immer die Zugkarten."
+      },
       "blackBand": {
         "label": "Schwarzer Streifen der Gesellschaftskarten",
         "description": "Ob ein schwarzer Rand an den farbigen Bereich der Gesellschaftskarte gesetzt wird. Nur für „color“-Gesellschaftskarten relevant. Bei weißen Gesellschaftskarten immer aktiv."

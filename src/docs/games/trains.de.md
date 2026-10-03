@@ -129,3 +129,34 @@ mitgelieferten Spiel) und zeigt `on`, `index`, `rust`, `events`, `notes`,
   ]
 }
 ```
+
+## Gesellschaftszüge
+
+Eine Gesellschaft kann Züge besitzen, die nicht zum Zugvorrat des Spiels
+gehören, zum Beispiel einen Starterzug. Liste sie im Feld `trains` der
+Gesellschaft auf. Jeder Eintrag ist eines von:
+
+- ein Zugname (`"4"`), eine Kopie dieses Zugs des Spiels,
+- eine Referenz mit Anzahl (`{ "name": "4", "quantity": 2 }`), mehrere Kopien
+  eines Zugs des Spiels,
+- ein vollständiger Zug (die Felder oben) mit optionalem `quantity` (Standard
+  1). Verwende `print` statt dessen, wenn die Anzahl "∞" ist.
+
+Namen, die das Spiel nicht kennt, werden übersprungen. Das sind zusätzliche
+Kopien zu `quantity` in den `trains` des Spiels, und sie ändern die
+Phasentabelle nie. Setze `trains` auf `false`, um die Beschriftung "Trains" auf
+der Gesellschaftskarte auszublenden.
+
+```json
+{
+  "name": "Awa Railroad",
+  "abbrev": "AR",
+  "trains": ["2", { "name": "3", "quantity": 2 }]
+}
+```
+
+Standardmäßig werden die Züge als kleine Zugkarten auf der Gesellschaftskarte
+gedruckt. Die Option **Zugkarten** der Gesellschaftskarten-Konfiguration
+(`charters.trainCards`) mit dem Wert `cards` druckt sie stattdessen auf dem
+Zugkartenbogen. Gesellschaftskarten ohne Platz dafür (halbe Breite) verwenden
+immer den Zugkartenbogen.

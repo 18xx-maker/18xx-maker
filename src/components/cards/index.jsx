@@ -12,6 +12,7 @@ import { useConfig, useGame } from "@/hooks";
 import { fillArray, maxPlayers, unitsToCss } from "@/util";
 import { getCardData } from "@/util/cards";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
+import { cardCompanyTrains } from "@/util/companyTrains";
 
 const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
   const { config } = useConfig();
@@ -28,6 +29,15 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
     (t) => t.print || t.quantity,
     !hideTrains ? game.trains || [] : [],
   );
+  // Trains owned by companies that print on cards instead of the charter
+  let ownTrains = !hideTrains
+    ? cardCompanyTrains(
+        overrideCompanies(compileCompanies(game), override, selection),
+        config.charters,
+        game.trains,
+      )
+    : [];
+  trains = [...trains, ...ownTrains];
   let numbers = hideNumbers ? [] : range(1, maxPlayers(game.players || []) + 1);
 
   let privateNodes = addIndex(map)(
@@ -67,7 +77,7 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
     (train, index) => (
       <Train
         train={train}
-        trains={game.trains}
+        trains={[...(game.trains || []), ...ownTrains]}
         key={`train-${train.name}-${index}`}
       />
     ),

@@ -571,6 +571,10 @@
         "label": "Show Turn Order",
         "description": "Whether or not to show the phase chart on charters."
       },
+      "trainCards": {
+        "label": "Train Cards",
+        "description": "Where the trains a company owns print: on the charter (charter) or on the train cards (cards). Charters without room for them (half width) always use the train cards."
+      },
       "blackBand": {
         "label": "Charter Black Band",
         "description": "Whether or not to put a black border against the color section of the charter. Only relevent to \"color\" charters. Always put on white color charters."
