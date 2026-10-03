@@ -96,6 +96,7 @@
     }
   },
   "docs": {
+    "toc": "On this page",
     "help": {
       "title": "Using 18xx Maker",
       "description": "Getting Started"

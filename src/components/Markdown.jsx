@@ -75,6 +75,7 @@ const heading = (element, className) => {
       id && (
         <Link
           to={{ hash: id }}
+          data-anchor
           aria-label={`#${id}`}
           className="absolute -left-6 text-muted-foreground no-underline opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
         >

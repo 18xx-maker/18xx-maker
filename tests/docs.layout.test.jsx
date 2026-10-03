@@ -9,9 +9,9 @@ describe("docs layout", () => {
     renderApp("/docs/games/exports");
     const docs = await screen.findByTestId("docs-games/exports");
     // eslint-disable-next-line testing-library/no-node-access
-    const article = docs.firstElementChild;
+    const article = docs.querySelector(".max-w-200");
 
-    expect(article).toHaveClass("mx-auto", "max-w-200");
+    expect(article).toHaveClass("mx-auto");
     expect(article).not.toHaveClass("max-w-prose");
   });
 
