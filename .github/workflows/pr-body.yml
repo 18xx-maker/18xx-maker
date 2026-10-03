@@ -1,8 +1,10 @@
+# Pushes are checked by the Release notes safe job of test.yml, this re-checks
+# after the PR description is edited
 name: PR body
 
 on:
   pull_request:
-    types: [opened, edited, synchronize, reopened]
+    types: [edited]
 
 permissions:
   contents: read

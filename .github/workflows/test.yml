@@ -15,7 +15,31 @@ name: Test
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+# Jobs are ordered by cost: each tier only starts when the cheaper one before
+# it passed, so a quick failure stops the expensive jobs from running at all.
+#   1. Lint and PR body (cheap Linux jobs, no browser)
+#   2. Build and Linux shards (Linux, builds and the full vitest suite)
+#   3. End to End and Export Linux (Linux, build and drive Playwright/Electron)
+#   4. Mac and Windows: test shards and Export (10x and 2x minute multipliers)
 jobs:
+  # Edits of the PR body are checked by pr-body.yml, this runs it on every push
+  pr-body:
+    name: Release notes safe
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v7
+      - name: Node
+        if: github.event_name == 'pull_request'
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Check PR body
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: node scripts/check-pr-body.mjs
   lint:
     name: Lint
     runs-on: ubuntu-latest
@@ -45,6 +69,7 @@ jobs:
           FORCE_COLOR: 3
   build:
     name: Build
+    needs: [lint, pr-body]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -70,6 +95,7 @@ jobs:
   # collect the results of these sharded jobs.
   linux-shards:
     name: Linux Shard ${{ matrix.shard }}
+    needs: [lint, pr-body]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -163,6 +189,7 @@ jobs:
   # runs on main and in the merge queue
   desktop-shards:
     name: ${{ matrix.os.name }} Shard ${{ matrix.shard }}
+    needs: [e2e, export-linux]
     runs-on: ${{ matrix.os.image }}
     strategy:
       fail-fast: false
@@ -231,6 +258,7 @@ jobs:
           test "${{ needs.desktop-shards.result }}" = "success"
   e2e:
     name: End to End
+    needs: [build, linux-shards]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -282,16 +310,74 @@ jobs:
   # The six real export paths, {CLI, app} x {pdf, png, b18}, on the built site
   # and the built app with no mocks. To require them, require the three
   # "Export Linux", "Export Mac" and "Export Windows" checks.
-  export:
+  # The six real export paths, {CLI, app} x {pdf, png, b18}, on the built site
+  # and the built app with no mocks. To require them, require the three
+  # "Export Linux", "Export Mac" and "Export Windows" checks.
+  export-linux:
+    name: Export Linux
+    needs: [build, linux-shards]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: PNPM
+        uses: pnpm/action-setup@v6
+        with:
+          version: 9
+      - name: Node
+        uses: actions/setup-node@v7
+        with:
+          cache: "pnpm"
+          node-version: 24
+      - name: Dependencies
+        run: pnpm install
+      - name: Playwright Version
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(pnpm exec playwright --version | awk '{ print $2 }')" >> $GITHUB_OUTPUT
+      - name: Playwright Cache
+        id: playwright-cache
+        uses: actions/cache@v6
+        with:
+          path: browsers
+          key: linux-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
+      - name: Playwright Install
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: pnpm exec playwright install chromium --only-shell --with-deps
+      - name: Playwright Dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: |
+          shell=$(find browsers -type f \( -name chrome-headless-shell -o -name headless_shell \) | head -n 1)
+          if [ -z "$shell" ] || ldd "$shell" | grep -q "not found"; then
+            pnpm exec playwright install-deps chromium
+          fi
+      - name: Build Web
+        run: pnpm build
+      - name: Build App
+        run: pnpm build:app
+      # Electron needs a display on Linux, and the libraries of its windows
+      - name: Electron Dependencies
+        run: sudo apt-get install -y xvfb libgbm1 libnss3 libasound2t64 libgtk-3-0t64
+      - name: Export Tests
+        run: xvfb-run --auto-servernum pnpm test:export
+        env:
+          E2E_ELECTRON: 1
+      - name: Upload Report
+        uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: export-report-linux
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+  export-desktop:
     name: Export ${{ matrix.os.name }}
+    needs: [e2e, export-linux]
     runs-on: ${{ matrix.os.image }}
     strategy:
       fail-fast: false
       matrix:
         os:
-          - name: Linux
-            slug: linux
-            image: ubuntu-latest
           - name: Mac
             slug: mac
             image: macos-latest
@@ -324,30 +410,13 @@ jobs:
           key: ${{ matrix.os.slug }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
       - name: Playwright Install
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: pnpm exec playwright install chromium --only-shell ${{ matrix.os.slug == 'linux' && '--with-deps' || '' }}
-      - name: Playwright Dependencies
-        if: matrix.os.slug == 'linux' && steps.playwright-cache.outputs.cache-hit == 'true'
-        run: |
-          shell=$(find browsers -type f \( -name chrome-headless-shell -o -name headless_shell \) | head -n 1)
-          if [ -z "$shell" ] || ldd "$shell" | grep -q "not found"; then
-            pnpm exec playwright install-deps chromium
-          fi
+        run: pnpm exec playwright install chromium --only-shell
       - name: Build Web
         run: pnpm build
       - name: Build App
         run: pnpm build:app
-      # Electron needs a display on Linux, and the libraries of its windows
-      - name: Electron Dependencies
-        if: matrix.os.slug == 'linux'
-        run: sudo apt-get install -y xvfb libgbm1 libnss3 libasound2t64 libgtk-3-0t64
       - name: Export Tests
-        if: matrix.os.slug != 'linux'
         run: pnpm test:export
-        env:
-          E2E_ELECTRON: 1
-      - name: Export Tests
-        if: matrix.os.slug == 'linux'
-        run: xvfb-run --auto-servernum pnpm test:export
         env:
           E2E_ELECTRON: 1
       - name: Upload Report
