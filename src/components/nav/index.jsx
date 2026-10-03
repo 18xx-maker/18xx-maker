@@ -15,6 +15,7 @@ import {
   Layers,
   Move,
   Package,
+  Palette,
   Scissors,
   ScrollText,
   Settings2,
@@ -121,6 +122,11 @@ export const mainMenu = [
         icon: SwatchBook,
         label: "docs.games.schemas.title",
         to: "/docs/games/schemas",
+      },
+      {
+        icon: Palette,
+        label: "docs.games.themes.title",
+        to: "/docs/games/themes",
       },
       {
         icon: SquareDashed,

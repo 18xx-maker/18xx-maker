@@ -161,6 +161,10 @@
         "title": "Company Overrides",
         "description": "Swap companies!"
       },
+      "themes": {
+        "title": "Color Themes",
+        "description": "Map, company and game colors"
+      },
       "positioning": {
         "title": "Auto Positioning",
         "description": "Easier map creation"
