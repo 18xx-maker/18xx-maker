@@ -7,6 +7,8 @@ import {
 } from "react";
 import { useSelector } from "react-redux";
 
+import { getRenderInput } from "@/util/renderInput";
+
 const ThemeProviderContext = createContext({ theme: "light" });
 
 export const ThemeProvider = ({ children, ...props }) => {
@@ -20,7 +22,9 @@ export const ThemeProvider = ({ children, ...props }) => {
 
     const media = window.matchMedia("(prefers-color-scheme: dark)");
 
-    let style = settings.theme;
+    // An export is never themed: the system theme of the machine must not
+    // paint the images dark
+    let style = getRenderInput() ? "light" : settings.theme;
 
     // If there is no setting, that means use the system one
     if (!style) {
