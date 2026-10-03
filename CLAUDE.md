@@ -176,6 +176,11 @@ imperative description):
   (bug fix) drive version bumps; use `chore`/`refactor`/`test`/`docs`/`ci`/
   `build` for everything else. Check `release-please-config.json` if the list
   above may be stale.
+- release-please also reads every line of the squash commit body (the PR
+  description) and turns a line that starts with `type: text` into an extra
+  changelog entry, and GitHub wraps long lines. Never write `build:app`,
+  `test:run`, `fix: ...` and the like in prose or code spans; put commands in a
+  fenced code block. The `PR body` workflow fails a PR that does this.
 - `chore(release): v<version>` is reserved for release-please PRs.
 - Subject only needs the `(#123)` PR suffix that GitHub adds on merge; do not
   add it yourself.
