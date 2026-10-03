@@ -7,12 +7,18 @@ import { find, propEq } from "ramda";
 import { firstSection, gameNav } from "@/components/gameNav";
 
 import { useLoadedGame } from "@/hooks/game";
-import { createAlert, refreshGame } from "@/state";
+import { createAlert, createSetExportMenuOpen, refreshGame } from "@/state";
 import { selectGameForSlug } from "@/state/selectors";
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import { isControlTarget } from "@/util/keys";
+import { useBooleanParam } from "@/util/query";
 
+// The one place that handles keys for the whole app. It listens on the
+// document and runs for every page. Keys of the open export menu are handled
+// by the menu itself, a Radix menu stops them before they get here. The
+// sidebar toggle (ctrl/cmd + b, ui/sidebar) and the view reset ("v",
+// SvgEditor) stay with the component that owns their state.
 export const useBindings = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,6 +27,8 @@ export const useBindings = () => {
     selectGameForSlug(state, loadedGame?.slug),
   );
   const viewingGame = useMatch("/games/:slug/:section/*");
+  const [print] = useBooleanParam("print");
+  const [, toggleConfig] = useBooleanParam("config");
 
   const handleKeyDown = useCallback(
     (event) => {
@@ -30,6 +38,21 @@ export const useBindings = () => {
       // Keys for the game edit page, which a Radix layer closing on escape
       // has already claimed with preventDefault
       if (viewingGame) {
+        // The toolbar keys, which the print page of an export does not have
+        if (!print) {
+          const item = find(propEq(event.key, "key"), gameNav);
+
+          if (event.key === "c") {
+            toggleConfig();
+            return;
+          }
+
+          if (item) {
+            navigate(`/games/${viewingGame.params.slug}/${item.section}`);
+            return;
+          }
+        }
+
         if (
           event.key === "e" ||
           (event.key === "Escape" && !event.defaultPrevented)
@@ -94,11 +117,16 @@ export const useBindings = () => {
           }
           break;
         case "x":
-          // The export button opens its own menu when a game is showing
-          if (capability.electron && loadedGame && !viewingGame) {
-            navigate(`/games/${loadedGame.slug}/map`, {
-              state: { exportMenu: true },
-            });
+          if (!capability.electron) break;
+
+          if (viewingGame) {
+            // The b18 pages and the print page have no export button
+            if (!print && viewingGame.params.section !== "b18") {
+              dispatch(createSetExportMenuOpen(true));
+            }
+          } else if (loadedGame) {
+            navigate(`/games/${loadedGame.slug}/map`);
+            dispatch(createSetExportMenuOpen(true));
           }
           break;
         case "?":
@@ -106,7 +134,7 @@ export const useBindings = () => {
           break;
       }
     },
-    [game, loadedGame, viewingGame, dispatch, navigate],
+    [game, loadedGame, viewingGame, print, toggleConfig, dispatch, navigate],
   );
 
   useEffect(() => {

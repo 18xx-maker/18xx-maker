@@ -70,6 +70,30 @@ describe("export keys", () => {
     expect(router.state.location.pathname).toBe("/games/18Test/map");
   });
 
+  it("x does nothing on the b18 pages, which have no export button", async () => {
+    const { user, store } = renderApp("/games/18Test/b18");
+    await screen.findByRole("heading", { level: 1 }).catch(() => null);
+
+    await user.keyboard("x");
+    expect(store.getState().ui.exportMenuOpen).toBe(false);
+  });
+
+  it("the menu is closed after leaving the game page", async () => {
+    const { user, store } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.keyboard("x");
+    await screen.findByRole("menu");
+    await user.keyboard("h");
+    await screen.findByTestId("home");
+    await waitFor(() =>
+      expect(store.getState().ui).toEqual({
+        exportMenuOpen: false,
+        exportSheetOpen: false,
+      }),
+    );
+  });
+
   it("x does nothing without a loaded game", async () => {
     const { user, router } = renderApp("/");
     await screen.findByTestId("home");

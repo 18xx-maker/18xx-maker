@@ -1,4 +1,3 @@
-import { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Link, useMatch, useNavigate } from "react-router";
@@ -34,7 +33,6 @@ import { useGame } from "@/hooks";
 import { refreshGame } from "@/state";
 import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
-import { isControlTarget } from "@/util/keys";
 import { useBooleanParam, useIntParam } from "@/util/query";
 
 const Toolbar = () => {
@@ -55,34 +53,6 @@ const Toolbar = () => {
 
   const match = useMatch("/games/:slug/:section/*");
   const item = find(propEq(match.params.section, "section"), gameNav);
-
-  const handleKeyDown = useCallback(
-    (event) => {
-      if (isControlTarget(event)) return;
-      if (event.altKey || event.ctrlKey || event.metaKey) return;
-
-      if (event.key === "c") {
-        toggleConfig();
-        return;
-      }
-
-      const item = find(propEq(event.key, "key"), gameNav);
-
-      if (item) {
-        navigate(`/games/${slug}/${item.section}`);
-      }
-    },
-    [slug, navigate, toggleConfig],
-  );
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-
-    // Cleanup the event listener on unmount
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [handleKeyDown]);
 
   // b18 pages are for the box maker and an unknown section has nothing to show
   if (!item || match.params.section === "b18") {
