@@ -187,7 +187,7 @@ describe("validate", () => {
       [{ b18: { version: "" } }, "#/exports/b18/version", /length/i],
       [{ b18: { color: "red" } }, "#/exports/b18", /color/i],
       [{ pdf: {} }, "#/exports", /pdf/i],
-      [{ paginated: true }, "#/exports", /paginated/i],
+      [{ paginated: "yes" }, "#/exports/paginated", /boolean/i],
     ])("rejects %j", (exports, pointer, message) => {
       const { code, lines } = run(withExports(exports));
       expect(code).toBe(1);

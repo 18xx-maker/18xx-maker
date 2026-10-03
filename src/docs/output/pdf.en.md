@@ -85,7 +85,6 @@ render
     ├── shikoku-1889-map.pdf
     ├── shikoku-1889-market-paginated.pdf
     ├── shikoku-1889-market.pdf
-    ├── shikoku-1889-par-paginated.pdf
     ├── shikoku-1889-par.pdf
     ├── shikoku-1889-revenue-paginated.pdf
     ├── shikoku-1889-revenue.pdf

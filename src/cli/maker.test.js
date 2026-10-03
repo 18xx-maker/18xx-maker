@@ -44,6 +44,9 @@ describe("exit codes", () => {
   // Paginated pdfs are always there when a page does not fit on one sheet
   it("has no flag for the paginated pdfs", () => {
     expect(maker("export", "--help").stdout).not.toContain("paginated");
+    const result = maker("export", "18Test", "--paginated");
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain("unknown option '--paginated'");
   });
 
   it("exits 2 for a game that does not exist", () => {

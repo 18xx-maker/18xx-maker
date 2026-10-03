@@ -60,6 +60,15 @@ describe("print file names", () => {
     expect(expected).toEqual(expect.arrayContaining(names.filter(paginated)));
   });
 
+  // The map of 1889 is larger than the paper
+  it("still has the paginated map of 1889", () => {
+    const { game, config, data } = setup("1889");
+    const names = exportJobs(game, documents(game, config, data), ["pdf"]).map(
+      (job) => job.path,
+    );
+    expect(names.some((name) => name.includes("-map-paginated."))).toBe(true);
+  });
+
   it("names the seven bundled games whose title is not their id", () => {
     const renamed = [...games]
       .sort()

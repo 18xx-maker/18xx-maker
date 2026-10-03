@@ -115,7 +115,7 @@ sizing or packaging logic in either surface.
 - **Precedence is built-in defaults, then the game file's `exports`, then the
   user's choice** (CLI flag, user config, options panel). Never give a commander
   option a default that hides the game file, and give every boolean a way to turn
-  it off (`--no-paginated`, `--variation all`).
+  it off (`--layouts current`, `--variation all`).
 - **Render mode** (`getRenderInput()`, `window.__RENDER_INPUT__`) must never
   write localStorage, add recents, send analytics or call app APIs. Games are
   injected as `render:<id>`.

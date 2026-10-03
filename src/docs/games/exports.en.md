@@ -86,7 +86,7 @@ the version and the author from the game file when you leave them out. Use
 
 The pdf of the map, market, par and revenue also has a paginated version, but
 only when the page does not fit on one page of your paper. There is no option
-for it.
+for it, and a `paginated` option left in a game file is ignored.
 
 ## Checking
 
