@@ -12,6 +12,7 @@ import { dissoc, startsWith } from "ramda";
 import Code from "@/components/Code";
 
 import capability from "@/util/capability";
+import rehypeHeadingIds from "@/util/headingIds";
 
 const clean = dissoc("node");
 
@@ -62,28 +63,52 @@ const md = (element, className) => {
   return comp;
 };
 
+// A heading has an id (see rehypeHeadingIds) and a # link that shows on hover
+// or keyboard focus and points at it.
+const heading = (element, className) => {
+  const comp = (props) => {
+    const { children, id, ...rest } = clean(props);
+    return createElement(
+      element,
+      { ...rest, id, className: clsx(className, "group relative") },
+      id && (
+        <Link
+          to={{ hash: id }}
+          aria-label={`#${id}`}
+          className="absolute -left-6 text-muted-foreground no-underline opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
+        >
+          #
+        </Link>
+      ),
+      children,
+    );
+  };
+  comp.displayName = element;
+  return comp;
+};
+
 const components = {
-  h1: md(
+  h1: heading(
     "h1",
     "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl not-first:mt-6",
   ),
-  h2: md(
+  h2: heading(
     "h2",
     "scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 not-first:mt-6",
   ),
-  h3: md(
+  h3: heading(
     "h3",
     "scroll-m-20 text-2xl font-semibold tracking-tight not-first:mt-6",
   ),
-  h4: md(
+  h4: heading(
     "h4",
     "scroll-m-20 text-xl font-semibold tracking-tight not-first:mt-6",
   ),
-  h5: md(
+  h5: heading(
     "h5",
     "scroll-m-20 text-lg font-semibold tracking-tight not-first:mt-6",
   ),
-  h6: md(
+  h6: heading(
     "h6",
     "scroll-m-20 text-md font-semibold tracking-tight not-first:mt-6",
   ),
@@ -139,6 +164,7 @@ const Markdown = ({ className, ...pass }) => {
     >
       <ReactMarkdown
         components={components}
+        rehypePlugins={[rehypeHeadingIds]}
         remarkPlugins={[
           [
             remarkFlexibleContainers,
