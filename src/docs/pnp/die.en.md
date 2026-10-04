@@ -51,6 +51,14 @@ overrides a lot of other options. This includes `cards.sizes`, the optional
 width and height of each type of card (`private`, `share`, `train` and
 `number`): the die layouts ignore it and use one size for every card.
 
+### Pins on free layouts
+
+The die layouts always draw the pin markers used to line up the die. To draw
+them on free layouts too, set `cards.showPins` or `tiles.showPins` to `true`.
+Free layouts do not reserve any space for the pins, so with the default
+positions they can overlap content near the page edge. Move them with
+`cards.pins` and `tiles.pins` or adjust your margins.
+
 ## Ordering
 
 In order to order custom dies I would contact Ellison via their [web

@@ -173,6 +173,10 @@
           },
           "additionalProperties": false
         },
+        "showPins": {
+          "type": "boolean",
+          "description": "Draw the pin markers on free layouts too. Fixed layouts (die layouts) always draw them. Free layouts reserve no space for pins, so adjust the pins positions or margins to keep them clear of content."
+        },
         "pins": { "$ref": "#/definitions/pins" }
       },
       "required": [
@@ -280,6 +284,10 @@
         "cutBorder": {
           "type": "boolean",
           "description": "Draw a thin black outline at the exact cut size around every tile on the tile sheet, so tiles can be cut out by hand."
+        },
+        "showPins": {
+          "type": "boolean",
+          "description": "Draw the pin markers on free layouts too. Fixed layouts (die layouts) always draw them. Free layouts reserve no space for pins, so adjust the pins positions or margins to keep them clear of content."
         },
         "pins": { "$ref": "#/definitions/pins" }
       },

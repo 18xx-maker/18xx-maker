@@ -204,6 +204,9 @@ export const sections = [
         name: "cutBorder",
       },
       {
+        name: "showPins",
+      },
+      {
         pins: true,
       },
     ],
@@ -464,6 +467,9 @@ export const sections = [
       },
       {
         name: "blackBand",
+      },
+      {
+        name: "showPins",
       },
       {
         pins: true,

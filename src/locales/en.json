@@ -506,6 +506,10 @@
       "cutBorder": {
         "label": "Tile Cut Borders",
         "description": "This draws a thin black outline at the exact cut size around every tile on the tile sheet, to help when cutting tiles out by hand."
+      },
+      "showPins": {
+        "label": "Show Pins on Free Layout",
+        "description": "Draws the pin markers on free layouts too. Fixed die layouts always draw them. Free layouts reserve no space for pins, so move the pins or adjust margins to keep them clear of content."
       }
     },
     "stock": {
@@ -666,6 +670,10 @@
       "blackBand": {
         "label": "Card Black Band",
         "description": "Whether or not to put a black border against the color section of the share. Only relevent to \"gmt\" and \"left\" shares as well as trains. Always put on white color cards."
+      },
+      "showPins": {
+        "label": "Show Pins on Free Layout",
+        "description": "Draws the pin markers on free layouts too. Fixed die layouts always draw them. Free layouts reserve no space for pins, so move the pins or adjust margins to keep them clear of content."
       },
       "sizes": "**Width, height, cutlines, bleed, padding and DTG padding** are in the units you choose. Cutlines are the cut marks drawn around each card, bleed is how far the card color extends past the cut edge, padding keeps text and icons away from the card edge, and DTG padding only applies to the DTG die layout. Edits apply when you leave a field or press Enter.",
       "typeSizes": {

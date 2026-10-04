@@ -349,7 +349,7 @@ const TileSheet = () => {
     }
 
     let pins =
-      layout === "die" || layout === "smallDie" ? (
+      layout === "die" || layout === "smallDie" || config.tiles.showPins ? (
         <Pins config={config.tiles.pins} />
       ) : null;
 

@@ -80,6 +80,7 @@
     "padding": 12.5,
     "border": 0,
     "blackBand": false,
+    "showPins": false,
     "pins": {
       "innerRadius": 6.25,
       "outerRadius": 12.5,
@@ -111,6 +112,7 @@
     "mapWidth": 150,
     "gaps": true,
     "cutBorder": false,
+    "showPins": false,
     "pins": {
       "innerRadius": 6.25,
       "outerRadius": 12.5,
