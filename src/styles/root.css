@@ -840,9 +840,14 @@ footer a:hover {
   overflow: hidden;
 }
 
-.charter__traincards--border .charter__traincard {
-  outline: 1px solid #000;
-  outline-offset: -1px;
+.charter__traincards--border .charter__traincard::after {
+  /* An outline would be painted under the scaled card, so draw it on top */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid #000;
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .charter__traincards--round .charter__traincard {

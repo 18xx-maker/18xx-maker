@@ -260,7 +260,8 @@ describe("Charter", () => {
     expect(box).toHaveClass("charter__traincards--border");
     expect(box).toHaveClass("charter__traincards--round");
     expect(
-      getComputedStyle(one(on.root, ".charter__traincard")).outlineColor,
+      getComputedStyle(one(on.root, ".charter__traincard"), "::after")
+        .borderTopColor,
     ).toBe("rgb(0, 0, 0)");
     const off = await mountElement(
       <Charter {...props} company={withTrains} />,
