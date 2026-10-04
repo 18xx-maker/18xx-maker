@@ -168,11 +168,11 @@ const Token = ({
           } else if (text2.length > 3) {
             f2 *= 0.94;
           }
-          const spacing = fSize * 0.45 + f2 * 0.6;
+          const spacing = fSize * 0.55 + f2 * 0.6;
           if (!labelY) {
-            // Nudge the whole block up a little: less top padding with the
-            // second line below, more bottom padding with it above.
-            y += (above ? 1 : -1) * spacing * 0.5 - fSize * 0.08;
+            // Center the two lines as a block (by cap height, about 0.7 of
+            // the font size) where the single label was centered.
+            y += above ? spacing / 2 + 0.35 * (f2 - fSize) : -spacing / 2;
           }
           const y2 = y + (above ? -1 : 1) * spacing;
           const fill = label2Color ? c(label2Color) : textFill;
