@@ -514,6 +514,8 @@ body {
 /* Tokens in their own row under the name (company.tokensBelow). The row shares
    the header with the name, so the tokens shrink to fit its width. */
 .charter__name--tokens-below {
+  justify-content: flex-start;
+  padding-top: 0.125in;
   padding-bottom: 0.4in;
 }
 
@@ -522,7 +524,7 @@ body {
 }
 
 .charter__tokens--below {
-  top: 0.6625in;
+  top: 0.5625in;
   left: 0;
   right: auto;
   width: 100%;
@@ -533,7 +535,7 @@ body {
 }
 
 .charter--minor .charter__tokens--below {
-  top: 0.525in;
+  top: 0.4625in;
   height: 0.35in;
   padding-top: 0;
 }
