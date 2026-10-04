@@ -48,6 +48,10 @@ needed for programs like [18xx.games](https://www.18xx.games/).
 - **print** This is the number of this train to print. Overrides the `quantity`
   field for printing. Required when quantity is set to "∞".
 - **discount** An object of train names to discount amount.
+- **upgrade** The cost of this train when bought as an upgrade. Shown with an
+  arrow under the price.
+- **tradeIn** The value of this train when traded in. Shown in parentheses under
+  the price.
 - **description** A description string printed on the train card. Useful for
   random information for play.
 - **available** If this train becomes available when another train is sold you

@@ -29,7 +29,8 @@ const Train = ({ train, trains, bare }) => {
     price,
     priceFontSize,
     priceFontFamily,
-    tradeInPrice,
+    tradeIn,
+    upgrade,
     color,
     description,
     players,
@@ -283,9 +284,14 @@ const Train = ({ train, trains, bare }) => {
                   }}
                 >
                   <Currency value={price} type="train" />
-                  {tradeInPrice && (
+                  {upgrade != null && (
+                    <div className="train__upgrade_price">
+                      &rarr; <Currency value={upgrade} type="train" />
+                    </div>
+                  )}
+                  {tradeIn != null && (
                     <div className="train__trade_in_price">
-                      (<Currency value={tradeInPrice} type="train" />)
+                      (<Currency value={tradeIn} type="train" />)
                     </div>
                   )}
                 </div>

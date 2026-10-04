@@ -169,6 +169,14 @@
         "quantity_label": { "type": "string" },
         "print": { "type": "integer", "minimum": 0 },
         "discount": { "type": "object" },
+        "upgrade": {
+          "description": "Cost of this train when bought as an upgrade, shown under the price",
+          "oneOf": [{ "type": "number", "minimum": 0 }, { "type": "string" }]
+        },
+        "tradeIn": {
+          "description": "Value of this train when traded in, shown in parentheses under the price",
+          "oneOf": [{ "type": "number", "minimum": 0 }, { "type": "string" }]
+        },
         "description": { "type": "string" },
         "available": { "type": "string" },
         "variant": { "type": "string" },

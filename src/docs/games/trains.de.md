@@ -55,6 +55,10 @@ unterstützen, die Programme wie [18xx.games](https://www.18xx.games/) brauchen.
 - **print** Die Anzahl dieses Zuges, die gedruckt wird. Überschreibt das Feld
   `quantity` für den Druck. Erforderlich, wenn `quantity` auf „∞“ gesetzt ist.
 - **discount** Ein Objekt, das Zugnamen einem Rabattbetrag zuordnet.
+- **upgrade** Die Kosten dieses Zuges, wenn er als Upgrade gekauft wird. Wird mit
+  einem Pfeil unter dem Preis angezeigt.
+- **tradeIn** Der Wert dieses Zuges beim Eintauschen. Wird in Klammern unter dem
+  Preis angezeigt.
 - **description** Eine Beschreibung, die auf die Zugkarte gedruckt wird. Nützlich
   für beliebige Informationen zum Spiel.
 - **available** Wenn dieser Zug verfügbar wird, sobald ein anderer Zug verkauft

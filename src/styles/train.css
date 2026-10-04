@@ -180,6 +180,7 @@
   font-family: sans-serif;
 }
 
+.train__upgrade_price,
 .train__trade_in_price {
   font-size: 0.6em;
   padding-top: 0.2em;

@@ -174,7 +174,7 @@ describe("Train", () => {
       players: "3-4",
       description: "Diesel",
       variant: "Variant",
-      tradeInPrice: 300,
+      tradeIn: 300,
       price: 1100,
     });
     const note = one(root, ".train__info");
@@ -185,6 +185,18 @@ describe("Train", () => {
     expect(body.getByText("Diesel")).toBeInTheDocument();
     expect(body.getByText("Variant")).toBeInTheDocument();
     expect(one(root, ".train__trade_in_price")).toHaveTextContent("($300)");
+  });
+
+  it("shows upgrade and zero trade-in values under the price", async () => {
+    const { root } = await renderTrain({
+      name: "D",
+      color: "brown",
+      price: 1100,
+      upgrade: "$800",
+      tradeIn: 0,
+    });
+    expect(one(root, ".train__upgrade_price")).toHaveTextContent("800");
+    expect(one(root, ".train__trade_in_price")).toHaveTextContent("($0)");
   });
 
   it("leaves non permanent trains without notes", async () => {
