@@ -180,7 +180,11 @@
   font-family: sans-serif;
 }
 
-.train__trade_in_price {
+.train__sub_prices {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4em;
   font-size: 0.6em;
   padding-top: 0.2em;
+  white-space: nowrap;
 }

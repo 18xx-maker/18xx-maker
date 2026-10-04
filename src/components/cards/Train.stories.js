@@ -36,7 +36,8 @@ export default {
     trains: { control: "object" },
     name: { control: "text" },
     price: { control: { type: "number", min: 0, step: 10 } },
-    tradeInPrice: { control: { type: "number", min: 0, step: 10 } },
+    tradeIn: { control: { type: "number", min: 0, step: 10 } },
+    upgrade: { control: { type: "number", min: 0, step: 10 } },
     color,
     backgroundColor: color,
     permanentColor: color,
@@ -73,7 +74,7 @@ export const TradeIn = {
     name: "D",
     price: 1100,
     color: "brown",
-    tradeInPrice: 800,
+    tradeIn: 800,
     description: "Cost ¥800 when trading in a 4T, 5T or 6T",
   },
 };

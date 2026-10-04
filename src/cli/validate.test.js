@@ -278,6 +278,24 @@ describe("validate", () => {
       expect(run(withTrains(gameTrains, companyTrains)).code).toBe(0);
     });
 
+    it("accepts upgrade and tradeIn on a train", () => {
+      const trains = [
+        {
+          name: "D",
+          color: "brown",
+          quantity: 1,
+          upgrade: 800,
+          tradeIn: "$300",
+        },
+      ];
+      expect(run(withTrains(trains, false)).code).toBe(0);
+    });
+
+    it("rejects a negative upgrade", () => {
+      const trains = [{ name: "D", color: "brown", quantity: 1, upgrade: -1 }];
+      expect(run(withTrains(trains, false)).code).toBe(1);
+    });
+
     it.each([
       ["true", gameTrains, true],
       ["an infinite quantity", gameTrains, [{ name: "2", quantity: "∞" }]],
